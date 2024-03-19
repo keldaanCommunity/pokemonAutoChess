@@ -379,7 +379,7 @@ export class MegaAltaria extends Pokemon {
 export class Scyther extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING])
   rarity = Rarity.UNIQUE
-  stars = 2
+  stars = 3
   evolution = Pkm.SCIZOR
   evolutionRule = new ItemEvolutionRule([Item.METAL_COAT])
   hp = 190
@@ -396,7 +396,7 @@ export class Scyther extends Pokemon {
 export class Scizor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING, Synergy.STEEL])
   rarity = Rarity.UNIQUE
-  stars = 3
+  stars = 4
   hp = 240
   atk = 29
   def = 7
@@ -2355,7 +2355,7 @@ export class Snover extends Pokemon {
   atk = 12
   def = 6
   speDef = 6
-  maxPP = 100
+  maxPP = 120
   range = 1
   skill = Ability.SHEER_COLD
   attackSprite = AttackSprite.ICE_MELEE
@@ -2370,7 +2370,7 @@ export class Abomasnow extends Pokemon {
   atk = 24
   def = 8
   speDef = 8
-  maxPP = 100
+  maxPP = 120
   range = 1
   skill = Ability.SHEER_COLD
   attackSprite = AttackSprite.ICE_MELEE
@@ -2384,7 +2384,7 @@ export class MegaAbomasnow extends Pokemon {
   atk = 35
   def = 10
   speDef = 10
-  maxPP = 100
+  maxPP = 120
   range = 1
   skill = Ability.SHEER_COLD
   attackSprite = AttackSprite.ICE_MELEE

@@ -1173,7 +1173,7 @@
     "TRIPLE_KICK": "Oferece [60,SP] SPECIAL para até 3 inimigos adjacentes",
     "MAWASHI_GERI": "Inflige [60,SP] SPECIAL. Dano dobrado se o atacante tiver um ATK melhor que o alvo",
     "FORECAST": "Dá [10,SP] SHIELD ao seu time, além de bônus adicional dependendo do clima:\n Sol: também dá [3,SP] ATK\n Chuva: também dá [10,SP] PP\n Snow: também dá [2,SP] DEF / SPE_DEF",
-    "X_SCISSOR": "Negócios [20,40,80,SP] TRUE duas vezes",
+    "X_SCISSOR": "Negócios [10,20,40,80,SP] TRUE duas vezes",
     "PLASMA_FIST": "Inflige [120,SP] SPECIAL com 25% de roubo de vida",
     "SPECTRAL_THIEF": "Desaparece e reaparece distribuindo [50,SP] SPECIAL, roubando todo o boost estatístico do alvo",
     "GEOMANCY": "Ganhe [15,SP] ATK, [5,SP] SPE_DEF e 20% ATK_SPEED",
