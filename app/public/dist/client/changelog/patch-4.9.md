@@ -57,6 +57,7 @@
 - Buff Fairy: now charm melee attacker when receiving a critical hit
 - Buff Flying 4: Protect duration ~~1.5~~ 2 seconds
 - Buff Flying 8: Flying pokémon now perform skydive attacks, causing Paralysis for 2 seconds on takeoff, and 200% PHYSICAL ATK on landing on their target
+- Adapted Ghost: Stat reduction: ~~30%~~ 50%, status duration: ~~8~~ 5 seconds
 
 # Changes to Items
 
