@@ -1,6 +1,8 @@
 import fs from "fs"
 import { Pokemon } from "../app/models/colyseus-models/pokemon"
+import { Ability } from "../app/types/enum/Ability"
 import { Rarity } from "../app/types/enum/Game"
+import { Passive } from "../app/types/enum/Passive"
 import { precomputedPokemons } from "./precomputed-pokemons"
 
 console.time("precompute-rarity")
@@ -10,9 +12,14 @@ const data = Object.fromEntries<Pokemon[]>(rarities.map((r) => [r, []])) as {
   [r in Rarity]: Pokemon[]
 }
 
-precomputedPokemons.forEach((pokemon) => {
-  data[pokemon.rarity].push(pokemon)
-})
+precomputedPokemons
+  .filter(
+    (pokemon) =>
+      pokemon.skill !== Ability.DEFAULT || pokemon.passive !== Passive.NONE
+  )
+  .forEach((pokemon) => {
+    data[pokemon.rarity].push(pokemon)
+  })
 
 for (const r in data) {
   data[r] = data[r].sort(indexSort).map((p) => p.name)

@@ -370,7 +370,7 @@ export default class GameScene extends Scene {
               this.room?.state.specialGameRule
             )
           ) {
-            this.sellZone.showForPokemon(gameObject.name as Pkm)
+            this.sellZone.showForPokemon(this.pokemonDragged)
           }
         } else if (gameObject instanceof ItemContainer) {
           this.itemDragged = gameObject

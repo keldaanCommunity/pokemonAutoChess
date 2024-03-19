@@ -59,7 +59,10 @@
 - Buff Fairy: now charm melee attacker when receiving a critical hit
 - Buff Flying 4: Protect duration ~~1.5~~ 2 seconds
 - Buff Flying 8: Flying pokémon now perform skydive attacks, causing Paralysis for 2 seconds on takeoff, and 200% PHYSICAL ATK on landing on their target
+- Change Baby 5: no more limits of eggs on bench
+- Change Baby 7: Baby bring golden eggs that can be sold for 10 gold. Regular eggs are sold for 2 gold as usual.
 - Adapted Ghost: Stat reduction: ~~30%~~ 50%, status duration: ~~8~~ 5 seconds
+
 - Buff Human: ~~10/25/50~~ 15/30/60% of damage done as heal
 
 # Changes to Items

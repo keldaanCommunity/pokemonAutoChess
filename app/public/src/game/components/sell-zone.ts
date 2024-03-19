@@ -2,8 +2,8 @@ import { t } from "i18next"
 import { GameObjects } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { Pkm } from "../../../../types/enum/Pokemon"
-import { getGameContainer } from "../../pages/game"
 import { transformCoordinate } from "../../pages/utils/utils"
+import PokemonSprite from "./pokemon"
 
 export class SellZone extends GameObjects.Container {
   rectangle: Phaser.GameObjects.Rectangle
@@ -46,8 +46,8 @@ export class SellZone extends GameObjects.Container {
     this.scene.add.existing(this)
   }
 
-  showForPokemon(pkm: Pkm) {
-    const price = PokemonFactory.getSellPrice(pkm, getGameContainer().player)
+  showForPokemon(pkm: PokemonSprite) {
+    const price = PokemonFactory.getSellPrice(pkm.name as Pkm, pkm.shiny)
     this.text.setText(
       `${t("drop_here_to_sell")} ${t("for_price_gold", { price })}`
     )

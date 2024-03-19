@@ -2363,8 +2363,7 @@ export const AnimationConfig: {
   [Pkm.EGG]: {
     attack: AnimationType.Attack,
     ability: AnimationType.LostBalance,
-    emote: AnimationType.LostBalance,
-    shinyUnavailable: true
+    emote: AnimationType.LostBalance
   },
   [Pkm.DITTO]: {
     attack: AnimationType.Attack,

@@ -134,7 +134,7 @@ export class HiddenPowerEStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    const egg = PokemonFactory.createRandomEgg()
+    const egg = PokemonFactory.createRandomEgg(false)
     const player = unown.player
     if (player) {
       const x = getFirstAvailablePositionInBench(player.board)
