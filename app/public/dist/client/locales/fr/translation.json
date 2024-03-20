@@ -1773,6 +1773,7 @@
     "PROTEAN3": "Le pokémon acquiert le type des 3 synergies les plus élevées de l'équipe",
     "CASTFORM": "$t(pkm.CASTFORM) change sa forme et la météo en SUN, RAIN ou SNOW en fonction de votre synergie dominante entre FIRE WATER ICE",
     "PHIONE": "Phione cherche un Oeuf Océan",
+    "SCYTHER": "$t(pkm.SCYTHER) cherche une METAL_COAT",
     "PRIMAL": "La légende raconte qu'on pourrait libérer les pouvoirs primordiaux de ces pokémons légendaires",
     "WONDER_GUARD": "Réduit les dégâts reçus et les soins reçus à 1",
     "ELECTRIC_TERRAIN": "Donne ELECTRIC_FIELD à vos Pokémons ELECTRIC, augmentant leurs dégâts de 20%",
@@ -1853,7 +1854,12 @@
     "METEOR": "$t(pkm.MINIOR) alterne entre sa forme Météore et ses formes Noyau. La forme Météore octroie [4,SP]% ATK_SPEED par attaque.\nLes attaques en forme Noyau infligent des effets supplémentaires à la cible et aux ennemis adjacents:\nRouge: inflige 150% PHYSICAL\nBleu: inflige 100% SPECIAL\nOrange: inflige 50% TRUE\nVert: les dégats d'attaque soignent les alliés adjacents",
     "MIMIKYU": "Sous les 50% de HP, Mimiqui bascule en forme cassée, gagnant 30% ATK_SPEED et PROTECT pendant 2 secondes",
     "MIMIKYU_BUSTED": "Son cou est cassé. Mimiqui n'oubliera jamais la personne qui a endommagé son costume.",
-    "HUNGER_SWITCH": "$t(pkm.MORPEKO) alterne entre sa forme rassasiée et affamée.\nLes attaques en forme rassasiée infligent PARALYSIS pendant 2 secondes.\nLes attaques en forme affamée infligent WOUND pendant 4 secondes."
+    "HUNGER_SWITCH": "$t(pkm.MORPEKO) alterne entre sa forme rassasiée et affamée.\nLes attaques en forme rassasiée infligent PARALYSIS pendant 2 secondes.\nLes attaques en forme affamée infligent WOUND pendant 4 secondes.",
+    "WATER_BUBBLE": "Le pokémon est immunisé contre BURN",
+    "LYCANROC": "$t(pkm.LYCANROC) se transforme en forme nocturne pendant la NIGHT et en forme diurne au SUN",
+    "COSMOG": "$t(pkm.COSMOG) se nourrit de l'énergie des étoiles. Gagne 10 HP max permanents chaque fois que vous faites évoluer une unité. Évolue après dix fois.",
+    "COSMOEM": "$t(pkm.COSMOEM) se nourrit de l'énergie des étoiles. Gagne 10 HP max permanents chaque fois que vous faites évoluer une unité. Évolue après dix fois en $t(pkm.SOLGALEO) s'il est placé dans la lumière, ou en $t(pkm.LUNALA) sinon.",
+    "SOUL_HEART": "À chaque KO infligé, gagne 10 AP et 10 PP"
   },
   "stat": {
     "ATK": "Attaque",
