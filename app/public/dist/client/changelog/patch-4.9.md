@@ -62,7 +62,6 @@
 - Change Baby 5: no more limits of eggs on bench
 - Change Baby 7: Baby bring golden eggs that can be sold for 10 gold. Regular eggs are sold for 2 gold as usual.
 - Adapted Ghost: Stat reduction: ~~30%~~ 50%, status duration: ~~8~~ 5 seconds
-
 - Buff Human: ~~10/25/50~~ 15/30/60% of damage done as heal
 
 # Changes to Items

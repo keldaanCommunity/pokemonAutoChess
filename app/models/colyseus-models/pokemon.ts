@@ -12287,7 +12287,7 @@ export class Cosmog extends Pokemon {
 export class Cosmoem extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.LIGHT])
   rarity = Rarity.UNIQUE
-  evolution = Pkm.COSMOEM
+  evolution = Pkm.LUNALA
   stars = 2
   evolutionRule = new ConditionBasedEvolutionRule(
     (pokemon) => pokemon.hp >= 300,
