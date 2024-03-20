@@ -6053,7 +6053,8 @@ export const AnimationConfig: {
   [Pkm.LUNALA]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.MAGEARNA]: {
     attack: AnimationType.Shoot,
