@@ -1039,7 +1039,22 @@
     "PATRAT": "Ratentif",
     "WATCHOG": "Miradar",
     "SPINARAK": "Mimigal",
-    "ARIADOS": "Migalos"
+    "ARIADOS": "Migalos",
+    "DEWPIDER": "Araqua",
+    "ARAQUANID": "Tarenbulle",
+    "ROCKRUFF": "Rocabot",
+    "LYCANROC_DUSK": "Lougaroc",
+    "LYCANROC_DAY": "Lougaroc (Jour)",
+    "LYCANROC_NIGHT": "Lougaroc (Nuit)",
+    "DRUDDIGON": "Drakkarmin",
+    "COSMOG": "Cosmog",
+    "COSMOEM": "Cosmovum",
+    "SOLGALEO": "Solgaleo",
+    "LUNALA": "Lunala",
+    "MAGEARNA": "Magearna",
+    "IMPIDIMP": "Grimalin",
+    "MORGREM": "Fourbelin",
+    "GRIMMSNARL": "Angoliath"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
