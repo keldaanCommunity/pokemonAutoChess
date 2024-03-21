@@ -2,7 +2,7 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import WikiAbility from "./wiki-ability"
-import WikiContent from "./wiki-content"
+import WikiPokemons from "./wiki-pokemons"
 import WikiFaq from "./wiki-faq"
 import WikiItemsCheatSheet from "./wiki-items-cheat-sheet"
 import WikiStatistic from "./wiki-statistic"
@@ -45,7 +45,7 @@ export default function Wiki({ inGame = false }: { inGame: boolean }) {
             </>
           )}
           <TabPanel key="pokemon">
-            <WikiContent />
+            <WikiPokemons />
           </TabPanel>
           <TabPanel key="items">
             <WikiItemsCheatSheet />
