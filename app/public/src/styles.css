@@ -646,7 +646,7 @@ p:last-child {
   outline: none;
   color: white;
   text-shadow: 2px 2px 2px #00000040;
-  font-size: 140%;
+  font-size: min(140%, 1vw);
 }
 
 .react-tabs__tab--selected {
