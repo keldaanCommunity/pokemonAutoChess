@@ -9108,7 +9108,7 @@ export class UnownB extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 30
+  maxPP = 60
   range = 9
   skill = Ability.HIDDEN_POWER_B
   passive = Passive.UNOWN
