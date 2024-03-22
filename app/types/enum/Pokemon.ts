@@ -5753,8 +5753,7 @@ export const AnimationConfig: {
   [Pkm.TOXEL]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot,
-    shinyUnavailable: true
+    emote: AnimationType.Shoot
   },
   [Pkm.TOXTRICITY]: {
     attack: AnimationType.Attack,
@@ -5775,8 +5774,7 @@ export const AnimationConfig: {
   [Pkm.CYCLIZAR]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Charge,
-    shinyUnavailable: true
+    emote: AnimationType.Charge
   },
   [Pkm.PAWNIARD]: {
     attack: AnimationType.Strike,
