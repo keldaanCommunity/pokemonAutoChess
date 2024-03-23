@@ -1654,18 +1654,18 @@
     "SHIELD": "Schild"
   },
   "stat_description": {
-    "ATK": "Bei jedem Basisangriff verursachter Schaden",
+    "ATK": "Bei jedem Basisangriff verursachter Schaden. Basis Angriffe fügen Standardmäßig PHYSICAL zu.",
     "ATK_SPEED": "Anzahl der Angriffe pro Sekunde. Maximal 2,5.",
     "CRIT_CHANCE": "Kritische Treffer verursachen 2x mehr Schaden. Fähigkeiten können standardmäßig keinen kritischen Treffer erzielen.",
-    "CRIT_DAMAGE": "Multiplikator für zusätzlichen Schaden durch kritische Treffer",
-    "DEF": "Reduziert den PHYSIKALISCHEN Empfang",
-    "SPE_DEF": "Reduziert den erhaltenen SPECIAL",
-    "HP": "Gesundheitspunkte",
-    "RANGE": "1-Bereich-Pokémon sind Nahkampf-Pokémon",
+    "CRIT_DAMAGE": "Multiplikator für zusätzlichen Schaden durch kritische Treffer.",
+    "DEF": "Reduzierten den erlittenen PHYSICAL.",
+    "SPE_DEF": "Reduziert den erlittenen SPECIAL.",
+    "HP": "Ein Pokémon ist besiegt wenn es keine Kraftpunkte mehr hat.",
+    "RANGE": "Pokémon mit einer Angriffsreichweite von 1 sind Nahkämpfer.",
     "PP": "Angriffspunkte",
-    "MAX_PP": "Erforderliche Manamenge, um die Fähigkeit zu wirken. Pokémon erhalten Angriffspunkte mit der Zeit (10 pro Sekunde), beim Angriff (5 pro Angriff) und beim Erleiden von Schaden (10 % des eingehenden Schadens).",
-    "AP": "Erhöhen Sie SPECIAL- und Fähigkeitseffekte auf verschiedene Weise.",
-    "SHIELD": "Temporäre Gesundheitspunkte können nicht geheilt werden."
+    "MAX_PP": "Erforderliche Menge an PP, um die Fähigkeit einzusetzen. Pokémon erhalten PP mit der Zeit (10 pro Sekunde), beim Angriff (5 pro Angriff) und beim Erleiden von Schaden (10 % des eingehenden Schadens).",
+    "AP": "Verstärkt den SPECIAL und Fähigkeitseffekte auf verschiedene Weise.",
+    "SHIELD": "Temporäre Kraftpunkte, können nicht geheilt werden."
   },
   "status": {
     "BURN": "Verbrennung",
