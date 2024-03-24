@@ -3,6 +3,7 @@ import { GameObjects } from "phaser"
 import Player from "../../../../models/colyseus-models/player"
 import { isOnBench } from "../../../../models/colyseus-models/pokemon"
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
+import { getPokemonData } from "../../../../models/precomputed"
 import GameState from "../../../../rooms/states/game-state"
 import { IPokemon, Transfer } from "../../../../types"
 import { SynergyTriggers } from "../../../../types/Config"
@@ -470,6 +471,13 @@ export default class BoardManager {
 
         case "action":
           this.animationManager.animatePokemon(pokemonUI, value, false)
+          break
+
+        case "hp":
+          const baseHP = getPokemonData(pokemon.name).hp
+          const sizeBuff = (pokemon.hp - baseHP) / baseHP
+          pokemonUI.sprite.setScale(2 + sizeBuff)
+          pokemonUI.hp = value
           break
 
         default:

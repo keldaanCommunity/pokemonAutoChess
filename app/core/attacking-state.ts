@@ -48,21 +48,19 @@ export default class AttackingState extends PokemonState {
         )
       ) {
         // if target is no longer alive or at range, retargeting
-        targetCoordinate = this.getNearestTargetAtRangeCoordinates(
-          pokemon,
-          board
-        )
-        if (targetCoordinate) {
-          target = board.getValue(targetCoordinate.x, targetCoordinate.y)
+        const newTarget = this.getNearestTargetAtRange(pokemon, board)
+        if (newTarget) {
+          target = newTarget
+          targetCoordinate = {
+            x: newTarget.positionX,
+            y: newTarget.positionY
+          }
         }
       }
 
       // no target at range, changing to moving state
       if (!target || !targetCoordinate || pokemon.status.charm) {
-        const targetAtSight = this.getNearestTargetAtSightCoordinates(
-          pokemon,
-          board
-        )
+        const targetAtSight = this.getNearestTargetAtSight(pokemon, board)
         if (targetAtSight) {
           pokemon.toMovingState()
         }
@@ -169,7 +167,7 @@ export default class AttackingState extends PokemonState {
       } else if (pokemon.effects.has(Effect.CORKSCREW_CRASH)) {
         trueDamagePart += 1.0
       } else if (pokemon.effects.has(Effect.MAX_MELTDOWN)) {
-        trueDamagePart += 1.5
+        trueDamagePart += 1.4
       }
       if (pokemon.items.has(Item.RED_ORB) && target) {
         trueDamagePart += 0.25
@@ -199,7 +197,7 @@ export default class AttackingState extends PokemonState {
         damage = 0
         target.count.dodgeCount += 1
       }
-      if (target.status.protect) {
+      if (target.status.protect || target.status.skydiving) {
         isAttackSuccessful = false
         damage = 0
       }

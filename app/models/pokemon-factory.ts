@@ -85,8 +85,10 @@ export default class PokemonFactory {
     }
   }
 
-  static createRandomEgg(): Egg {
-    const egg = PokemonFactory.createPokemonFromName(Pkm.EGG)
+  static createRandomEgg(shiny: boolean): Egg {
+    const egg = PokemonFactory.createPokemonFromName(Pkm.EGG, {
+      selectedShiny: shiny
+    })
     egg.action = PokemonActionState.SLEEP
     egg.evolution = pickRandomIn(HatchList)
     return egg as Egg
@@ -117,12 +119,12 @@ export default class PokemonFactory {
     }
   }
 
-  static getSellPrice(name: Pkm, player?: Player): number {
+  static getSellPrice(name: Pkm, shiny: boolean): number {
     const pokemonData = getPokemonData(name)
     const duo = Object.entries(PkmDuos).find(([key, duo]) => duo.includes(name))
 
     if (name === Pkm.EGG) {
-      return player && player.effects.has(Effect.GOLDEN_EGGS) ? 10 : 2
+      return shiny ? 10 : 2
     } else if (name == Pkm.DITTO) {
       return 5
     } else if (name === Pkm.MAGIKARP) {

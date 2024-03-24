@@ -13,7 +13,7 @@ import {
   IDragDropMessage,
   Transfer
 } from "../../../../types"
-import { Dungeon, DungeonPMDO } from "../../../../types/Config"
+import { DungeonMusic, DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { GamePhaseState } from "../../../../types/enum/Game"
 import { Item, ItemRecipe } from "../../../../types/enum/Item"
 import { Pkm } from "../../../../types/enum/Pokemon"
@@ -61,7 +61,7 @@ export default class GameScene extends Scene {
   started: boolean
   spectate: boolean
   dungeon: DungeonPMDO | undefined
-  dungeonMusic: Dungeon | undefined
+  dungeonMusic: DungeonMusic | undefined
 
   constructor() {
     super({
@@ -81,7 +81,7 @@ export default class GameScene extends Scene {
     this.uid = firebase.auth().currentUser?.uid
     this.started = false
     this.dungeon = data.room.state.mapName as DungeonPMDO
-    this.dungeonMusic = data.room.state.mapMusic as Dungeon
+    this.dungeonMusic = data.room.state.mapMusic as DungeonMusic
   }
 
   preload() {
@@ -162,10 +162,7 @@ export default class GameScene extends Scene {
       this.weatherManager = new WeatherManager(this)
       this.unownManager = new UnownManager(this)
       playSound(SOUNDS.CAROUSEL_UNLOCK) // playing a preloaded sound for players who tabbed out during loading
-      playMusic(
-        this,
-        this.dungeonMusic ? this.dungeonMusic : Dungeon.AMP_PLAINS
-      )
+      playMusic(this, this.dungeonMusic || DungeonMusic.RANDOM_DUNGEON_1)
       ;(this.sys as any).animatedTiles.init(this.map)
       clearTitleNotificationIcon()
     }
@@ -316,7 +313,7 @@ export default class GameScene extends Scene {
           }
         })
       }
-      if (this.board) {
+      if (this.board && !pointer.rightButtonDown()) {
         this.board.closeTooltips()
       }
     })
@@ -373,7 +370,7 @@ export default class GameScene extends Scene {
               this.room?.state.specialGameRule
             )
           ) {
-            this.sellZone.showForPokemon(gameObject.name as Pkm)
+            this.sellZone.showForPokemon(this.pokemonDragged)
           }
         } else if (gameObject instanceof ItemContainer) {
           this.itemDragged = gameObject

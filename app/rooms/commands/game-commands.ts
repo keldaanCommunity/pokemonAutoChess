@@ -6,8 +6,7 @@ import { nanoid } from "nanoid"
 import {
   CountEvolutionRule,
   HatchEvolutionRule,
-  MoneyEvolutionRule,
-  TurnEvolutionRule
+  ConditionBasedEvolutionRule
 } from "../../core/evolution-rules"
 import { selectMatchups } from "../../core/matchmaking"
 import { canSell } from "../../core/pokemon-entity"
@@ -522,7 +521,7 @@ export class OnSellDropCommand extends Command<
 
       if (pokemon) {
         this.state.shop.releasePokemon(pokemon.name)
-        player.money += PokemonFactory.getSellPrice(pokemon.name, player)
+        player.money += PokemonFactory.getSellPrice(pokemon.name, pokemon.shiny)
         pokemon.items.forEach((it) => {
           player.items.push(it)
         })
@@ -1190,7 +1189,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             player.effects.has(Effect.GOLDEN_EGGS))
         ) {
           eggChance = 1
-          nbMaxEggs = player.effects.has(Effect.GOLDEN_EGGS) ? 8 : 2
+          nbMaxEggs = 8
         }
         if (
           player.getLastBattleResult() == BattleResult.DEFEAT &&
@@ -1217,7 +1216,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           getFreeSpaceOnBench(player.board) > 0 &&
           nbOfEggs < nbMaxEggs
         ) {
-          const egg = PokemonFactory.createRandomEgg()
+          const eggShiny = player.effects.has(Effect.GOLDEN_EGGS)
+          const egg = PokemonFactory.createRandomEgg(eggShiny)
           const x = getFirstAvailablePositionInBench(player.board)
           egg.positionX = x !== undefined ? x : -1
           egg.positionY = 0
@@ -1242,14 +1242,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                 this.state.stageLevel
               )
             }
-            if (pokemon.evolutionRule instanceof TurnEvolutionRule) {
-              pokemon.evolutionRule.tryEvolve(
-                pokemon,
-                player,
-                this.state.stageLevel
-              )
-            }
-            if (pokemon.evolutionRule instanceof MoneyEvolutionRule) {
+            if (pokemon.evolutionRule instanceof ConditionBasedEvolutionRule) {
               pokemon.evolutionRule.tryEvolve(
                 pokemon,
                 player,

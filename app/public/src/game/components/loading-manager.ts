@@ -3,6 +3,7 @@ import { GameObjects } from "phaser"
 import AnimatedTiles from "phaser-animated-tiles-phaser3.5/dist/AnimatedTiles.min.js"
 import indexList from "../../../src/assets/pokemons/indexList.json"
 import atlas from "../../assets/atlas.json"
+import { preloadMusic } from "../../pages/utils/audio"
 import { getPortraitSrc } from "../../utils"
 import GameScene from "../scenes/game-scene"
 
@@ -46,9 +47,9 @@ export default class LoadingManager {
     })
 
     if (scene instanceof GameScene && scene.tilemap) {
-      scene.load.audio("music_" + scene.dungeonMusic, [
-        `https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChessMusic/main/music/${scene.dungeonMusic}.mp3`
-      ])
+      if (scene.dungeonMusic) {
+        preloadMusic(scene, scene.dungeonMusic)
+      }
       scene.tilemap.tilesets.forEach((t) => {
         scene.load.image(
           t.name,

@@ -101,6 +101,18 @@ export function MainSidebar(props: MainSidebarProps) {
         </div>
 
         <NavLink
+          svg="meta"
+          onClick={() =>
+            window.open(
+              "https://github.com/keldaanCommunity/pokemonAutoChess/blob/master/policy.md",
+              "_blank"
+            )
+          }
+        >
+          {t("policy")}
+        </NavLink>
+
+        <NavLink
           location="news"
           svg="newspaper"
           handleClick={(newModal) => {
@@ -221,17 +233,6 @@ export function MainSidebar(props: MainSidebarProps) {
         </NavLink>
 
         <div className="spacer"></div>
-
-        {!collapsed && page !== "game" && (
-          <div className="additional-links">
-            <a
-              href="https://github.com/keldaanCommunity/pokemonAutoChess/blob/master/policy.md"
-              target="_blank"
-            >
-              {t("policy")}
-            </a>
-          </div>
-        )}
 
         {page !== "game" && (
           <NavLink

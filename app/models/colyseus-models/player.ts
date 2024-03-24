@@ -14,20 +14,20 @@ import { Pkm, PkmDuos, PkmProposition } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
+import { removeInArray } from "../../utils/array"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { Effects } from "../effects"
 import { IPokemonConfig } from "../mongo-models/user-metadata"
 import PokemonFactory from "../pokemon-factory"
+import { getPokemonData } from "../precomputed"
 import ExperienceManager from "./experience-manager"
 import HistoryItem from "./history-item"
-import { isOnBench, Pokemon } from "./pokemon"
+import { Pokemon, isOnBench } from "./pokemon"
 import PokemonCollection from "./pokemon-collection"
 import PokemonConfig from "./pokemon-config"
 import Synergies, { computeSynergies } from "./synergies"
-import { getPokemonData } from "../precomputed"
-import { removeInArray } from "../../utils/array"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
@@ -254,7 +254,7 @@ export default class Player extends Schema implements IPlayer {
         previousNbArtifItems
       )
       lostArtificialItems.forEach((item) => {
-        removeInArray(this.items, item)
+        removeInArray<Item>(this.items, item)
       })
       this.board.forEach((pokemon) => {
         lostArtificialItems.forEach((item) => {

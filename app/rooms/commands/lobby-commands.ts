@@ -605,15 +605,6 @@ export class BuyEmotionCommand extends Command<
 
             if (uPokemonConfig) {
               if (
-                uPokemonConfig.shinyEmotions.length >=
-                  Object.keys(Emotion).length &&
-                uPokemonConfig.emotions.length >= Object.keys(Emotion).length &&
-                !u.titles.includes(Title.DUCHESS)
-              ) {
-                u.titles.push(Title.DUCHESS)
-              }
-
-              if (
                 !u.titles.includes(Title.ARCHEOLOGIST) &&
                 Unowns.every((name) => {
                   const index = PkmIndex[name]
@@ -634,7 +625,16 @@ export class BuyEmotionCommand extends Command<
                 uPokemonConfig.emotions.push(emotion)
               }
 
-              uPokemonConfig.dust -= cost
+              if (
+                uPokemonConfig.shinyEmotions.length >=
+                  Object.keys(Emotion).length &&
+                uPokemonConfig.emotions.length >= Object.keys(Emotion).length &&
+                !u.titles.includes(Title.DUCHESS)
+              ) {
+                u.titles.push(Title.DUCHESS)
+              }
+
+              uPokemonConfig.dust = pokemonConfig.dust
               uPokemonConfig.selectedEmotion = emotion
               uPokemonConfig.selectedShiny = shiny
               u.save()

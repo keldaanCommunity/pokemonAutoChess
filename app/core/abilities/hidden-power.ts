@@ -134,7 +134,7 @@ export class HiddenPowerEStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    const egg = PokemonFactory.createRandomEgg()
+    const egg = PokemonFactory.createRandomEgg(false)
     const player = unown.player
     if (player) {
       const x = getFirstAvailablePositionInBench(player.board)
@@ -158,7 +158,7 @@ export class HiddenPowerFStrategy extends HiddenPowerStrategy {
   ) {
     super.process(unown, state, board, target, crit)
     const fishingLevel = 3
-    const nbFishes = 2
+    const nbFishes = 3
     const player = unown.player
 
     if (player) {
@@ -495,7 +495,7 @@ export class HiddenPowerSStrategy extends HiddenPowerStrategy {
     super.process(unown, state, board, target, crit)
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && unown.team != enemy.team) {
-        enemy.status.triggerFreeze(4000, enemy)
+        enemy.status.triggerFreeze(2000, enemy)
       }
     })
   }

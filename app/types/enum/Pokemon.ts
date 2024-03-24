@@ -732,7 +732,15 @@ export enum Pkm {
   LYCANROC_DAY = "LYCANROC_DAY",
   LYCANROC_DUSK = "LYCANROC_DUSK",
   LYCANROC_NIGHT = "LYCANROC_NIGHT",
-  DRUDDIGON = "DRUDDIGON"
+  DRUDDIGON = "DRUDDIGON",
+  COSMOG = "COSMOG",
+  COSMOEM = "COSMOEM",
+  SOLGALEO = "SOLGALEO",
+  LUNALA = "LUNALA",
+  MAGEARNA = "MAGEARNA",
+  IMPIDIMP = "IMPIDIMP",
+  MORGREM = "MORGREM",
+  GRIMMSNARL = "GRIMMSNARL"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1276,11 +1284,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MELMETAL]: "0809",
   [Pkm.HOOPA]: "0720",
   [Pkm.HOOPA_UNBOUND]: "0720-0001",
-
   [Pkm.ZERAORA]: "0807",
   [Pkm.XERNEAS]: "0716",
   [Pkm.YVELTAL]: "0717",
-
   [Pkm.MARSHADOW]: "0802",
   [Pkm.HOOTHOOT]: "0163",
   [Pkm.NOCTOWL]: "0164",
@@ -1469,7 +1475,15 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.LYCANROC_DAY]: "0745",
   [Pkm.LYCANROC_DUSK]: "0745-0002",
   [Pkm.LYCANROC_NIGHT]: "0745-0001",
-  [Pkm.DRUDDIGON]: "0621"
+  [Pkm.DRUDDIGON]: "0621",
+  [Pkm.COSMOG]: "0789",
+  [Pkm.COSMOEM]: "0790",
+  [Pkm.SOLGALEO]: "0791",
+  [Pkm.LUNALA]: "0792",
+  [Pkm.MAGEARNA]: "0801",
+  [Pkm.IMPIDIMP]: "0859",
+  [Pkm.MORGREM]: "0860",
+  [Pkm.GRIMMSNARL]: "0861"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2204,7 +2218,15 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.LYCANROC_DAY]: Pkm.ROCKRUFF,
   [Pkm.LYCANROC_DUSK]: Pkm.ROCKRUFF,
   [Pkm.LYCANROC_NIGHT]: Pkm.ROCKRUFF,
-  [Pkm.DRUDDIGON]: Pkm.DRUDDIGON
+  [Pkm.DRUDDIGON]: Pkm.DRUDDIGON,
+  [Pkm.COSMOG]: Pkm.COSMOG,
+  [Pkm.COSMOEM]: Pkm.COSMOG,
+  [Pkm.SOLGALEO]: Pkm.COSMOG,
+  [Pkm.LUNALA]: Pkm.COSMOG,
+  [Pkm.MAGEARNA]: Pkm.MAGEARNA,
+  [Pkm.IMPIDIMP]: Pkm.IMPIDIMP,
+  [Pkm.MORGREM]: Pkm.IMPIDIMP,
+  [Pkm.GRIMMSNARL]: Pkm.IMPIDIMP
 }
 
 export enum PkmDuo {
@@ -2341,8 +2363,7 @@ export const AnimationConfig: {
   [Pkm.EGG]: {
     attack: AnimationType.Attack,
     ability: AnimationType.LostBalance,
-    emote: AnimationType.LostBalance,
-    shinyUnavailable: true
+    emote: AnimationType.LostBalance
   },
   [Pkm.DITTO]: {
     attack: AnimationType.Attack,
@@ -3680,7 +3701,8 @@ export const AnimationConfig: {
   [Pkm.KROOKODILE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.SOLOSIS]: {
     attack: AnimationType.Attack,
@@ -5731,8 +5753,7 @@ export const AnimationConfig: {
   [Pkm.TOXEL]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot,
-    shinyUnavailable: true
+    emote: AnimationType.Shoot
   },
   [Pkm.TOXTRICITY]: {
     attack: AnimationType.Attack,
@@ -5753,8 +5774,7 @@ export const AnimationConfig: {
   [Pkm.CYCLIZAR]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Charge,
-    shinyUnavailable: true
+    emote: AnimationType.Charge
   },
   [Pkm.PAWNIARD]: {
     attack: AnimationType.Strike,
@@ -6012,5 +6032,46 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.RearUp,
     emote: AnimationType.Shoot
+  },
+  [Pkm.COSMOG]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Rotate
+  },
+  [Pkm.COSMOEM]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Rotate
+  },
+  [Pkm.SOLGALEO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Hop,
+    emote: AnimationType.Attack
+  },
+  [Pkm.LUNALA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
+  },
+  [Pkm.MAGEARNA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.IMPIDIMP]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.MORGREM]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.GRIMMSNARL]: {
+    attack: AnimationType.Punch,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Charge
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "pokemon-auto-chess",
-  "version": "4.8.0",
+  "version": "4.9.0",
   "description": "",
   "keywords": [],
   "license": "BSD-3-Clause",
@@ -94,7 +94,7 @@
     "react-router-dom": "^6.21.3",
     "react-tabs": "^6.0.2",
     "react-toastify": "^10.0.3",
-    "react-tooltip": "^5.21.5",
+    "react-tooltip": "5.21.5",
     "unique-names-generator": "^4.7.1"
   },
   "devDependencies": {

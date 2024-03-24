@@ -129,7 +129,7 @@ export default class PokemonState {
 
     if (pokemon.life == 0) {
       death = true
-    } else if (pokemon.status.protect) {
+    } else if (pokemon.status.protect || pokemon.status.skydiving) {
       death = false
       takenDamage = 0
     } else {
@@ -548,15 +548,15 @@ export default class PokemonState {
 
   onExit(pokemon: PokemonEntity) {}
 
-  /* NOTE: getNearestTargetAtRangeCoordinates require another algorithm that getNearestTargetCoordinate
+  /* NOTE: getNearestTargetAtRange require another algorithm that getNearestTargetCoordinate
   because it used Chebyshev distance instead of Manhattan distance
   more info here: https://discord.com/channels/737230355039387749/1183398539456413706 */
-  getNearestTargetAtRangeCoordinates(
+  getNearestTargetAtRange(
     pokemon: PokemonEntity,
     board: Board
-  ): { x: number; y: number } | undefined {
+  ): PokemonEntity | undefined {
     let distance = 999
-    let candidatesCoordinates: { x: number; y: number }[] = []
+    let candidates: PokemonEntity[] = []
     for (
       let x = min(0)(pokemon.positionX - pokemon.range);
       x <= max(board.columns - 1)(pokemon.positionX + pokemon.range);
@@ -581,29 +581,26 @@ export default class PokemonState {
           )
           if (candidateDistance < distance) {
             distance = candidateDistance
-            candidatesCoordinates = [{ x, y }]
+            candidates = [value]
           } else if (candidateDistance == distance) {
-            candidatesCoordinates.push({ x, y })
+            candidates.push(value)
           }
         }
       }
     }
-    if (candidatesCoordinates.length > 0) {
-      return pickRandomIn(candidatesCoordinates)
+    if (candidates.length > 0) {
+      return pickRandomIn(candidates)
     } else {
       return undefined
     }
   }
 
-  getNearestTargetAtSightCoordinates(
+  getNearestTargetAtSight(
     pokemon: PokemonEntity,
     board: Board
-  ): { x: number; y: number } | undefined {
+  ): PokemonEntity | undefined {
     let distance = 999
-    let candidatesCoordinates: { x: number; y: number }[] = new Array<{
-      x: number
-      y: number
-    }>()
+    let candidates: PokemonEntity[] = []
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (
@@ -619,14 +616,14 @@ export default class PokemonState {
         )
         if (candidateDistance < distance) {
           distance = candidateDistance
-          candidatesCoordinates = [{ x, y }]
+          candidates = [value]
         } else if (candidateDistance == distance) {
-          candidatesCoordinates.push({ x, y })
+          candidates.push(value)
         }
       }
     })
-    if (candidatesCoordinates.length > 0) {
-      return pickRandomIn(candidatesCoordinates)
+    if (candidates.length > 0) {
+      return pickRandomIn(candidates)
     } else {
       return undefined
     }
@@ -692,9 +689,12 @@ export default class PokemonState {
   getFarthestTargetCoordinateAvailablePlace(
     pokemon: PokemonEntity,
     board: Board
-  ): { x: number; y: number } | undefined {
+  ):
+    | { x: number; y: number; distance: number; target: PokemonEntity }
+    | undefined {
     const candidateCells = new Array<{
       distance: number
+      target: PokemonEntity
       x: number
       y: number
     }>()
@@ -717,7 +717,8 @@ export default class PokemonState {
                 pokemon.positionY,
                 cell.x,
                 cell.y
-              )
+              ),
+              target: value
             }))
         )
       }

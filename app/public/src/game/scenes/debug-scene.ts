@@ -1,13 +1,14 @@
 import { DesignTiled } from "../../../../core/design"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { AnimationType } from "../../../../types/Animation"
-import { DungeonPMDO } from "../../../../types/Config"
+import { DungeonDetails, DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { Orientation } from "../../../../types/enum/Game"
 import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
 import { Status } from "../../../../types/enum/Status"
 import { logger } from "../../../../utils/logger"
 import { max } from "../../../../utils/number"
 import { OrientationVector } from "../../../../utils/orientation"
+import { playMusic, preloadMusic } from "../../pages/utils/audio"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
 import { displayAbility } from "../components/abilities-animations"
@@ -26,6 +27,7 @@ export class DebugScene extends Phaser.Scene {
   uid = "debug"
   tilemap: DesignTiled | undefined
   map: Phaser.Tilemaps.Tilemap | undefined
+  music: Phaser.Sound.WebAudioSound
   attackAnimInterval: ReturnType<typeof setInterval> | undefined
 
   constructor(
@@ -59,7 +61,8 @@ export class DebugScene extends Phaser.Scene {
     pkm: Pkm,
     orientation: Orientation,
     animationType: string,
-    status: Status | ""
+    status: Status | "",
+    shiny: boolean
   ) {
     if (this.pokemon) {
       this.pokemon.destroy()
@@ -73,7 +76,7 @@ export class DebugScene extends Phaser.Scene {
       this,
       px,
       py,
-      PokemonFactory.createPokemonFromName(pkm),
+      PokemonFactory.createPokemonFromName(pkm, { selectedShiny: shiny }),
       "debug",
       false,
       false
@@ -126,6 +129,7 @@ export class DebugScene extends Phaser.Scene {
             )
           })
           this.load.tilemapTiledJSON("map", tilemap)
+          preloadMusic(this, DungeonDetails[mapName].music)
           this.load.once("complete", resolve)
           this.load.start()
         })
@@ -139,9 +143,10 @@ export class DebugScene extends Phaser.Scene {
             layer.name,
             mapName + "/" + layer.name
           )!
-          map.createLayer(layer.name, tileset, 0, 0)!.setScale(2, 2)
+          map.createLayer(layer.name, tileset, 0, 0)?.setScale(2, 2)
         })
         ;(this.sys as any).animatedTiles.init(map)
+        playMusic(this, DungeonDetails[mapName].music)
         console.log("finished")
       })
   }
