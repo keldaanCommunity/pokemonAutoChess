@@ -7195,7 +7195,6 @@ export class TransformStrategy extends AbilityStrategy {
       pokemon.speDef = target.speDef
       pokemon.attackType = target.attackType
       pokemon.ap = target.ap
-      pokemon.hp = target.hp
       pokemon.maxPP = target.maxPP
       pokemon.atkSpeed = target.atkSpeed
       pokemon.critChance = target.critChance
