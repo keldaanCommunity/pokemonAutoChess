@@ -1,8 +1,7 @@
 import { DesignTiled } from "../../../../core/design"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { AnimationType } from "../../../../types/Animation"
-import { MusicByDungeon } from "../../../../types/Config"
-import { DungeonPMDO } from "../../../../types/enum/Dungeon"
+import { DungeonDetails, DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { Orientation } from "../../../../types/enum/Game"
 import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
 import { Status } from "../../../../types/enum/Status"
@@ -130,7 +129,7 @@ export class DebugScene extends Phaser.Scene {
             )
           })
           this.load.tilemapTiledJSON("map", tilemap)
-          preloadMusic(this, MusicByDungeon[mapName])
+          preloadMusic(this, DungeonDetails[mapName].music)
           this.load.once("complete", resolve)
           this.load.start()
         })
@@ -147,7 +146,7 @@ export class DebugScene extends Phaser.Scene {
           map.createLayer(layer.name, tileset, 0, 0)?.setScale(2, 2)
         })
         ;(this.sys as any).animatedTiles.init(map)
-        playMusic(this, MusicByDungeon[mapName])
+        playMusic(this, DungeonDetails[mapName].music)
         console.log("finished")
       })
   }

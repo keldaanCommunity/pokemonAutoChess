@@ -17,15 +17,18 @@ import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
   EloRank,
-  MusicByDungeon,
   StageDuration
 } from "../../types/Config"
-import { DungeonPMDO, DungeonMusic } from "../../types/enum/Dungeon"
-import { GamePhaseState, GameMode } from "../../types/enum/Game"
+import {
+  DungeonDetails,
+  DungeonMusic,
+  DungeonPMDO
+} from "../../types/enum/Dungeon"
+import { GameMode, GamePhaseState } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { PkmProposition } from "../../types/enum/Pokemon"
-import { Weather } from "../../types/enum/Weather"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
+import { Weather } from "../../types/enum/Weather"
 import { pickRandomIn, randomBetween } from "../../utils/random"
 
 export default class GameState extends Schema {
@@ -84,7 +87,7 @@ export default class GameState extends Schema {
     this.gameMode = gameMode
     this.minRank = minRank
     this.mapName = this.id
-    this.mapMusic = MusicByDungeon[this.id]
+    this.mapMusic = DungeonDetails[this.id].music
     this.weather = Weather.NEUTRAL
     this.tilemap = initTilemap(this.id)
     if (gameMode === GameMode.SCRIBBLE) {

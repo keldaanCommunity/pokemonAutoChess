@@ -2453,6 +2453,7 @@
   "status_label": "STATUS",
   "statistics_label": "STATISTICS",
   "synergies_label": "SYNERGIES",
+  "dungeon_label": "DUNGEONS",
   "items_label": "ITEMS",
   "pokemons_label": "POKEMONS",
   "pokemon_auto_chess": "Pokemon Auto Chess",
@@ -2727,5 +2728,16 @@
     "NINE_LIVES": "You are eliminated after losing 9 rounds",
     "CROWDED": "+3 units max on board",
     "KECLEONS_SHOP": "Item carousels are replaced by Kecleon's shop, that propose 6 items for 10 GOLD each"
+  },
+  "region_pokemon": {
+    "KANTO" : "Kanto",
+    "JOHTO" : "Johto",
+    "HOENN" : "Hoenn",
+    "SINNOH" : "Sinnoh",
+    "UNYS" : "Unys",
+    "KALOS" : "Kalos",
+    "ALOLA" : "Alola",
+    "GALAR" : "Galar",
+    "PALDEA" : "Paldea"
   }
 }
