@@ -2047,6 +2047,7 @@
   "spectate": "Zuschauen",
   "join": "Beitreten",
   "just_for_fun": "Nur zum Spaß",
+  "smeargle_scribble": "Farbeagle´s Gekritzel",
   "password_protected": "Private Lobby (passwortgeschützt)",
   "private": "Privatgelände",
   "available_rooms": "Verfügbare Räume",
@@ -2268,5 +2269,10 @@
     "ULTRABALL": "Hyperball",
     "MASTERBALL": "Meisterball"
   },
-  "game_full": "Raum ist voll"
+  "game_full": "Raum ist voll",
+  "scribble_description": {
+    "NINE_LIVES": "Nach 9 Niederlagen bist du eliminiert",
+    "CROWDED": "+3 max. Pokémon auf dem Feld",
+    "KECLEONS_SHOP": "Item Karusselle werden, durch Kecleon´s Shop, ersetzt, die 6 Items für je 10 GOLD anbieten"
+  }
 }
