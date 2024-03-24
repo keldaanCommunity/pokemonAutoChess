@@ -48,21 +48,19 @@ export default class AttackingState extends PokemonState {
         )
       ) {
         // if target is no longer alive or at range, retargeting
-        targetCoordinate = this.getNearestTargetAtRangeCoordinates(
-          pokemon,
-          board
-        )
-        if (targetCoordinate) {
-          target = board.getValue(targetCoordinate.x, targetCoordinate.y)
+        const newTarget = this.getNearestTargetAtRange(pokemon, board)
+        if (newTarget) {
+          target = newTarget
+          targetCoordinate = {
+            x: newTarget.positionX,
+            y: newTarget.positionY
+          }
         }
       }
 
       // no target at range, changing to moving state
       if (!target || !targetCoordinate || pokemon.status.charm) {
-        const targetAtSight = this.getNearestTargetAtSightCoordinates(
-          pokemon,
-          board
-        )
+        const targetAtSight = this.getNearestTargetAtSight(pokemon, board)
         if (targetAtSight) {
           pokemon.toMovingState()
         }
