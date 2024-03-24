@@ -164,6 +164,20 @@
     "HEAL_ORDER": "Uzdrawiający rozkaz",
     "SHELL_TRAP": "Skorupia pułapka",
     "DIG": "Kopanie",
-    "FIRE_SPIN": "Ognisty obrót"
+    "FIRE_SPIN": "Ognisty obrót",
+    "SEARING_SHOT": "Piekący Strzał",
+    "SPLASH": "Pluśnięcie",
+    "PECK": "Dziobanie",
+    "COUNTER": "Kontra",
+    "COSMIC_POWER": "Kosmiczna Moc",
+    "ENTANGLING_THREAD": "Splątana nić",
+    "STICKY_WEB": "Lepka sieć",
+    "SILVER_WIND": "Srebrny Wiatr",
+    "POISON_POWDER": "Zatruty proszek",
+    "ICY_WIND": "Lodowaty wiatr",
+    "GIGATON_HAMMER": "Gigatonowy Młot",
+    "ACROBATICS": "Akrobatyka",
+    "ABSORB": "Absorbcja",
+    "ROLLOUT": "Rolowanie"
   }
 }
