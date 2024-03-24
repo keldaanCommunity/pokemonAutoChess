@@ -1796,24 +1796,21 @@ export class AccelerockStrategy extends AbilityStrategy {
 
     if (farthestCoordinate) {
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
-      const targetCoordinates = state.getNearestTargetAtRangeCoordinates(
+      const target = state.getNearestTargetAtRange(
         pokemon,
         board
       )
-      if (targetCoordinates) {
-        pokemon.targetX = targetCoordinates.x
-        pokemon.targetY = targetCoordinates.y
-        const target = board.getValue(targetCoordinates.x, targetCoordinates.y)
-        if (target) {
-          target.handleSpecialDamage(
-            pokemon.atk,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit,
-            true
-          )
-        }
+      if (target) {
+        pokemon.targetX = target.positionX
+        pokemon.targetY = target.positionY
+        target.handleSpecialDamage(
+          pokemon.atk,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit,
+          true
+        )
       }
     }
 
