@@ -5359,16 +5359,19 @@ export class Mawile extends Pokemon {
   }) {
     const mawile = entity as PokemonEntity
     const board = simulation.board
-    const targetAtSight = mawile.state.getNearestTargetAtSight(mawile, board)
-    if (targetAtSight) {
-      AbilityStrategies[Ability.ATTRACT].process(
-        mawile,
-        mawile.state,
-        board,
-        targetAtSight,
-        false
-      )
-    }
+
+    setTimeout(() => {
+      const targetAtSight = mawile.state.getNearestTargetAtSight(mawile, board)
+      if (targetAtSight) {
+        AbilityStrategies[Ability.ATTRACT].process(
+          mawile,
+          mawile.state,
+          board,
+          targetAtSight,
+          false
+        )
+      }
+    }, 0)
   }
 }
 
