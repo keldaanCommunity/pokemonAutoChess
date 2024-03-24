@@ -294,7 +294,6 @@
     "BLEAKWIND_STORM": "Polarorkan",
     "SPRINGTIDE_STORM": "Frühlingsorkan",
     "AURA_WHEEL": "Aura-Rad",
-    "AURA_WHEEL_HANGRY": "Aura-Rad",
     "LICK": "Schlecker",
     "FURY_SWIPES": "Kratzfurie",
     "TICKLE": "Spaßkanone",
@@ -303,7 +302,8 @@
     "SPACIAL_REND": "Raumschlag",
     "MULTI_ATTACK": "Multi-Angriff",
     "ACCELEROCK": "Turbofelsen",
-    "PETAL_BLIZZARD": "Blütenwirbel"
+    "PETAL_BLIZZARD": "Blütenwirbel",
+    "AURA_WHEEL_HANGRY": "Aura-Rad"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",

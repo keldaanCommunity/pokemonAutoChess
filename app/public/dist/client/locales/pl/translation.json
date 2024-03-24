@@ -1,0 +1,47 @@
+{
+  "rarity": {
+    "COMMON": "Zwykły",
+    "UNCOMMON": "Niezwykły",
+    "RARE": "Rzadki",
+    "EPIC": "Epicki",
+    "ULTRA": "Ultra",
+    "UNIQUE": "Unikalny",
+    "LEGENDARY": "Legendarny",
+    "MYTHICAL": "Mityczny",
+    "HATCH": "Wykluty",
+    "SPECIAL": "Specjalny"
+  },
+  "damage": {
+    "SPECIAL": "Specjalne obrażenia",
+    "PHYSICAL": "Fizyczne obrażenia",
+    "TRUE": "Prawdziwe obrażenia"
+  },
+  "ability": {
+    "SOFT_BOILED": "Ugotowany na miękko",
+    "EARTHQUAKE": "Trzęsienie ziemi",
+    "SONG_OF_DESIRE": "Piosenka pragnienia",
+    "CONFUSING_MIND": "Mylący umysł",
+    "KNOWLEDGE_THIEF": "Złodziej wiedzy",
+    "KING_SHIELD": "Tarcza Króla",
+    "EXPLOSION": "Eksplozja",
+    "NIGHTMARE": "Koszmar",
+    "CLANGOROUS_SOUL": "Taniec duszy",
+    "BONEMERANG": "Kościany bumerang",
+    "GROWL": "warczenie",
+    "RELIC_SONG": "Piosenka Reliktowa",
+    "DISARMING_VOICE": "Rozbrajający głos",
+    "FAIRY_WIND": "Baśniowy Wiatr",
+    "HIGH_JUMP_KICK": "kopnięcie z wysokiego wyskoku",
+    "GRASS_WHISTLE": "Gwizdek trawy",
+    "TRI_ATTACK": "Potrójny Atak",
+    "ECHO": "Echo",
+    "PETAL_DANCE": "Taniec płatków",
+    "HYPER_VOICE": "Hiper Głos",
+    "SHADOW_CLONE": "Klon Cienia",
+    "VOLT_SWITCH": "zmiana napięcia",
+    "NUZZLE": "nużnienicie",
+    "LIQUIDATION": "Likwidacja",
+    "BURN": "Oparzenie",
+    "POISON": "Zatruće"
+  }
+}
