@@ -3905,6 +3905,10 @@ export class StunSporeStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = [5, 10, 20][pokemon.stars - 1] ?? 20
+
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.status.triggerParalysis(5000, target)
+
     board
       .getAdjacentCells(target.positionX, target.positionY)
       .forEach((cell) => {
