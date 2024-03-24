@@ -2270,6 +2270,15 @@
     "MASTERBALL": "Meisterball"
   },
   "game_full": "Raum ist voll",
+  "scribble": {
+    "EVERYONE_IS_HERE": "Alle sind sind hier !",
+    "UNIQUE_STARTER": "Unique Starter",
+    "DITTO_PARTY": "Ditto Party",
+    "GOTTA_CATCH_EM_ALL": "Schnapp´sie dir alle !",
+    "BUYER_FEVER": "Kaufrausch",
+    "SIX_PACK": "Sechserpack",
+    "KECLEONS_SHOP": "Kecleon's Shop"
+  },
   "scribble_description": {
     "NINE_LIVES": "Nach 9 Niederlagen bist du eliminiert",
     "CROWDED": "+3 max. Pokémon auf dem Feld",
