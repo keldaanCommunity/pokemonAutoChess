@@ -1734,7 +1734,7 @@
     "ROCKY_HELMET": "+12 DEF. Negates critical bonus damage from incoming critical hits.",
     "AGUAV_BERRY": "Consumed once below 50% HP, restore to max HP and get CONFUSION for 3 seconds",
     "APICOT_BERRY": "Consumed once below 50% HP, heal 20 HP and gain 20 SPE_DEF",
-    "ASPEAR_BERRY": "Consumed once below 50% HP or after being FREEZE, heal 20 HP and and give +15% ATK_SPEED and immunity to FREEZE for the rest of the fight",
+    "ASPEAR_BERRY": "Consumed once below 50% HP or after being FREEZE, heal 20 HP and give +15% ATK_SPEED and immunity to FREEZE for the rest of the fight",
     "BABIRI_BERRY": "Consumed once below 50% HP or after receiving a critical hit, heal 20 HP and gain PROTECT for 2 seconds",
     "CHERI_BERRY": "Consumed once below 50% HP or after being PARALYSIS, heal 20 HP and give +10 ATK and immunity to PARALYSIS for the rest of the fight",
     "CHESTO_BERRY": "Consumed once below 50% HP or after being SLEEP, heal 20 HP and give +15% AP and immunity to SLEEP for the rest of the fight",
