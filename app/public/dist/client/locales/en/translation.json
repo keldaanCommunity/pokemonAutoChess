@@ -2730,14 +2730,14 @@
     "KECLEONS_SHOP": "Item carousels are replaced by Kecleon's shop, that propose 6 items for 10 GOLD each"
   },
   "region_pokemon": {
-    "KANTO" : "Kanto",
-    "JOHTO" : "Johto",
-    "HOENN" : "Hoenn",
-    "SINNOH" : "Sinnoh",
-    "UNYS" : "Unys",
-    "KALOS" : "Kalos",
-    "ALOLA" : "Alola",
-    "GALAR" : "Galar",
-    "PALDEA" : "Paldea"
+    "KANTO": "Kanto",
+    "JOHTO": "Johto",
+    "HOENN": "Hoenn",
+    "SINNOH": "Sinnoh",
+    "UNYS": "Unys",
+    "KALOS": "Kalos",
+    "ALOLA": "Alola",
+    "GALAR": "Galar",
+    "PALDEA": "Paldea"
   }
 }
