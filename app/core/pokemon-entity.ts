@@ -666,7 +666,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       target.status.triggerParalysis(4000, target)
     }
 
-    if (this.items.has(Item.INCENSE) && chance(1 / 10)) {
+    if (target.items.has(Item.INCENSE) && chance(1 / 10)) {
       this.status.triggerCharm(2000, target, this)
     }
 
