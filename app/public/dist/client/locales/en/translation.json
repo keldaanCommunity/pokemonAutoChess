@@ -2278,6 +2278,7 @@
   "open_boosters_hint": "Open boosters to unlock new avatars and complete your collection !",
   "open_booster": "Open a Booster",
   "lobby": "Lobby",
+  "chat": "Chat",
   "edit": "Edit",
   "delete": "Delete",
   "load_bot_with_url": "Load bot with URL",
@@ -2730,14 +2731,14 @@
     "KECLEONS_SHOP": "Item carousels are replaced by Kecleon's shop, that propose 6 items for 10 GOLD each"
   },
   "region_pokemon": {
-    "KANTO" : "Kanto",
-    "JOHTO" : "Johto",
-    "HOENN" : "Hoenn",
-    "SINNOH" : "Sinnoh",
-    "UNYS" : "Unys",
-    "KALOS" : "Kalos",
-    "ALOLA" : "Alola",
-    "GALAR" : "Galar",
-    "PALDEA" : "Paldea"
+    "KANTO": "Kanto",
+    "JOHTO": "Johto",
+    "HOENN": "Hoenn",
+    "SINNOH": "Sinnoh",
+    "UNYS": "Unys",
+    "KALOS": "Kalos",
+    "ALOLA": "Alola",
+    "GALAR": "Galar",
+    "PALDEA": "Paldea"
   }
 }

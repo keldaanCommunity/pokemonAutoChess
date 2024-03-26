@@ -21,3 +21,9 @@
 #play-panel .actions .bubbly {
   min-width: 8em;
 }
+
+@media (max-width: 640px) {
+  #play-panel .actions {
+    flex-direction: row;
+  }
+}

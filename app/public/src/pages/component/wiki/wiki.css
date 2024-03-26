@@ -106,16 +106,22 @@
   padding: 0;
 }
 
-#wiki-pokemons-all tr {
+#wiki-page .wiki-tutorials iframe {
+  width: 560px;
+  height: 315px;
+  max-width: 100%;
+}
+
+#wiki-pokemons-all section {
   border-top: 4px solid currentColor;
 }
 
-#wiki-types-all tr {
+#wiki-types-all section {
   border-top: 4px solid #40404080;
 }
 
-#wiki-pokemons-all td:nth-child(2),
-#wiki-types-all td:nth-child(2) {
+#wiki-pokemons-all section ul,
+#wiki-types-all section ul {
   display: flex;
   flex-wrap: wrap;
 }
@@ -251,4 +257,16 @@
 #wiki-items tr:nth-child(odd),
 #wiki-items td:nth-child(n + 2) {
   background-color: #54596b;
+}
+
+@media (width <= 960px) {
+  #wiki-items {
+    display: block;
+  }
+
+  #wiki-items img.item {
+    width: 24px;
+    height: 24px;
+    margin: 4px;
+  }
 }

@@ -1865,19 +1865,6 @@ input[type="checkbox"] {
   flex-grow: 5;
 }
 
-@media screen and (max-width: 768px) {
-  .nes-field.is-inline {
-    display: block;
-  }
-  .nes-field.is-inline > label {
-    margin-bottom: 0.5rem;
-    text-align: left;
-  }
-  .nes-field.is-inline .nes-input {
-    max-width: 100%;
-  }
-}
-
 .nes-radio {
   margin-right: 20px;
   -webkit-appearance: none;

@@ -25,7 +25,6 @@
 .profile .search-bar {
   grid-area: search;
   margin: 0.5em 0;
-
   position: relative;
 }
 
@@ -61,10 +60,6 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-}
-
-.profile-actions .react-tabs__tab-list {
-  margin-bottom: 0;
 }
 
 .profile-actions .react-tabs__tab-panel {
@@ -120,4 +115,20 @@
   line-height: 1em;
   font-size: 0.75em;
   color: #ccc;
+}
+
+@media (width <= 1280px) {
+  .profile.nes-container {
+    display: block;
+    overflow-y: auto;
+    padding: 0 0.5em;
+  }
+
+  .profile .game-history-list {
+    margin-left: 0;
+  }
+
+  .game-history .date {
+    justify-self: end;
+  }
 }

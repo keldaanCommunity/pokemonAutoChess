@@ -1,9 +1,9 @@
 .booster-card {
   position: absolute;
-  top: 5em;
+  top: 5%;
   transition: all 1s ease-out;
   transform: translateX(-50%);
-  height: 25%;
+  height: 40%;
   aspect-ratio: 2/3;
   animation: 1s ease-in-out distribute;
   animation-fill-mode: forwards;
@@ -11,23 +11,23 @@
 }
 
 .booster-card:nth-child(5n + 1) {
-  left: 20%;
+  left: 10%;
 }
 .booster-card:nth-child(5n + 2) {
-  left: 35%;
+  left: 30%;
 }
 .booster-card:nth-child(5n + 3) {
   left: 50%;
 }
 .booster-card:nth-child(5n + 4) {
-  left: 65%;
+  left: 70%;
 }
 .booster-card:nth-child(5n + 5) {
-  left: 80%;
+  left: 90%;
 }
 
 .booster-card:nth-child(n + 6) {
-  top: calc(5em + 30%);
+  top: 55%;
 }
 
 .booster-card .back,
@@ -73,6 +73,7 @@
 .booster-card.flipped {
   animation: 500ms ease-in-out flipCard;
   animation-fill-mode: forwards;
+  z-index: 2;
 }
 
 .booster-card.flipped .front {

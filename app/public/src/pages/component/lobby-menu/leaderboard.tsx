@@ -12,7 +12,7 @@ export default function Leaderboard(props: {
 }) {
   return (
     <div>
-      <div style={{ display: "flex", flexFlow: "column", gap: "10px" }}>
+      <div style={{ display: "flex", flexFlow: "column", gap: "0.5em" }}>
         {props.infos.map(
           (i: ILeaderboardInfo | ILeaderboardBotInfo, index: number) => (
             <LeaderboardItem
