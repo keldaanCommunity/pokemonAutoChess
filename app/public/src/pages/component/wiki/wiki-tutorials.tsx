@@ -8,8 +8,6 @@ export default function WikiTutorials() {
       <ul>
         <li className="nes-container">
           <iframe
-            width="560"
-            height="315"
             src="https://www.youtube.com/embed/Uq-r48kV0t0"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -19,8 +17,6 @@ export default function WikiTutorials() {
         </li>
         <li className="nes-container">
           <iframe
-            width="560"
-            height="315"
             src="https://www.youtube.com/embed/E_vvXdHosXg"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -30,8 +26,6 @@ export default function WikiTutorials() {
         </li>
         <li className="nes-container">
           <iframe
-            width="560"
-            height="315"
             src="https://www.youtube.com/embed/LCU5oSyZagw"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -41,8 +35,6 @@ export default function WikiTutorials() {
         </li>
         <li className="nes-container">
           <iframe
-            width="560"
-            height="315"
             src="https://www.youtube.com/embed/UjV2TkGYIuM"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

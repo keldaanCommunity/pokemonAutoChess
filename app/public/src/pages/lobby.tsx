@@ -62,6 +62,7 @@ import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import { logger } from "../../../utils/logger"
 import { localStore, LocalStoreKeys } from "./utils/store"
 import "./lobby.css"
+import { cc } from "./utils/jsx"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
@@ -147,17 +148,61 @@ export default function Lobby() {
 }
 
 function MainLobby({ toPreparation, setToPreparation }) {
+  const [activeSection, setActive] = useState<string>("leaderboard")
+  const { t } = useTranslation()
   return (
     <div className="main-lobby">
-      <TabMenu />
-      <RoomMenu
-        toPreparation={toPreparation}
-        setToPreparation={setToPreparation}
-      />
-      <div className="news-chat">
+      <nav className="main-lobby-nav">
+        <ul>
+          <li
+            onClick={() => setActive("leaderboard")}
+            className={cc({ active: activeSection === "leaderboard" })}
+          >
+            <img width={32} height={32} src={`assets/ui/leaderboard.svg`} />
+            {t("leaderboard")}
+          </li>
+          <li
+            onClick={() => setActive("rooms")}
+            className={cc({ active: activeSection === "rooms" })}
+          >
+            <img width={32} height={32} src={`assets/ui/room.svg`} />
+            {t("rooms")}
+          </li>
+          <li
+            onClick={() => setActive("online")}
+            className={cc({ active: activeSection === "online" })}
+          >
+            <img width={32} height={32} src={`assets/ui/players.svg`} />
+            {t("online")}
+          </li>
+          <li
+            onClick={() => setActive("chat")}
+            className={cc({ active: activeSection === "chat" })}
+          >
+            <img width={32} height={32} src={`assets/ui/chat.svg`} />
+            {t("chat")}
+          </li>
+        </ul>
+      </nav>
+      <section
+        className={cc("leaderboard", {
+          active: activeSection === "leaderboard"
+        })}
+      >
+        <TabMenu />
+      </section>
+      <section className={cc("rooms", { active: activeSection === "rooms" })}>
+        <RoomMenu
+          toPreparation={toPreparation}
+          setToPreparation={setToPreparation}
+        />
+      </section>
+      <section className={cc("online", { active: activeSection === "online" })}>
         <CurrentUsers />
+      </section>
+      <section className={cc("chat", { active: activeSection === "chat" })}>
         <Chat source="lobby" />
-      </div>
+      </section>
     </div>
   )
 }

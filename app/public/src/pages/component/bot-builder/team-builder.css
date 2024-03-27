@@ -29,10 +29,6 @@
   position: relative;
 }
 
-#team-editor table {
-  border-top: 4px dotted red;
-}
-
 #team-editor td {
   width: 84px;
   height: 84px;
@@ -109,6 +105,11 @@
   overflow-y: auto;
 }
 
+#pokemon-picker .selected,
+#item-picker .selected {
+  outline: 4px solid #109fff;
+}
+
 #pokemon-picker img.pokemon {
   width: 40px;
   height: 40px;
@@ -120,7 +121,7 @@
   padding: 0;
   text-align: center;
   vertical-align: bottom;
-  min-width: 1ch;
+  min-width: max(1ch, 40px);
   line-height: 40px;
 }
 
@@ -150,4 +151,44 @@
 
 #bot-info p {
   margin: 0;
+}
+
+@media (width <= 640px) {
+  #team-builder {
+    grid-template-areas: "synergies" "board" "selected" "pokemons" "items";
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content;
+    grid-auto-rows: min-content;
+    min-width: auto;
+    gap: 5px;
+    height: 75vh;
+    overflow-y: auto;
+  }
+
+  .basic-modal-body > #team-builder {
+    width: 95vw;
+  }
+
+  #team-editor td {
+    width: 44px;
+    height: 44px;
+    border-width: 2px;
+  }
+
+  #team-editor td img {
+    width: 40px;
+    height: 40px;
+  }
+
+  #pokemon-picker {
+    padding: 2px;
+  }
+
+  #rarity-grid {
+    grid-template: auto / auto;
+  }
+
+  #bot-info {
+    position: static;
+  }
 }

@@ -34,8 +34,13 @@
   flex: 1;
 }
 
+.preparation-menu-users .pokemon-portrait {
+  margin: 2px;
+}
+
 .preparation-menu .actions {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 0.5em;
@@ -57,4 +62,10 @@
 
 .preparation-menu .my-select {
   font-size: 140%;
+}
+
+@media (width <= 640px) {
+  .preparation-menu-users {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }

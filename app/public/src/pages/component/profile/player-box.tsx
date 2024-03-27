@@ -97,6 +97,7 @@ export default function PlayerBox(props: { user: ILobbyUser }) {
         <p>
           {favoritePokemons.map((name) => (
             <img
+              key={name}
               src={getAvatarSrc(PkmIndex[name] + "/Normal")}
               className="pokemon-portrait"
             />

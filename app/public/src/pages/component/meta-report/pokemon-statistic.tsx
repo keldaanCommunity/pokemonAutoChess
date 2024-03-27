@@ -84,7 +84,7 @@ export default function PokemonStatistic(props: {
     return <p>{t("no_data_available")}</p>
   }
   return (
-    <div style={{ height: "calc(90vh - 8em)", overflowY: "scroll" }}>
+    <article>
       {familiesArray.map(([pkm, family], i) => (
         <div key={pkm} className="nes-container pokemon-family-stat">
           <span className="rank">{i + 1}</span>
@@ -133,7 +133,7 @@ export default function PokemonStatistic(props: {
                 key={pokemon.name}
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "40px 6ch 12ch 12ch 1fr"
+                  gridTemplateColumns: "40px 6ch 12ch 12ch 256px"
                 }}
               >
                 <img
@@ -168,7 +168,7 @@ export default function PokemonStatistic(props: {
           </ul>
         </div>
       ))}
-    </div>
+    </article>
   )
 }
 

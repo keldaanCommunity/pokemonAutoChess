@@ -7,6 +7,7 @@ import {
 import { Rarity } from "../../../../../types/enum/Game"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import PokemonStatistic from "./pokemon-statistic"
+import "./pokemon-report.css"
 
 export function PokemonReport() {
   const [pokemonRankingBy, setPokemonRanking] = useState<string>("count")
