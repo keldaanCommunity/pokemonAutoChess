@@ -27,7 +27,7 @@ export function throttle<T extends (...args: any) => any>(
   let lastResult: ReturnType<T>
 
   return function (this: any): ReturnType<T> {
-    const args = arguments
+    const args = [...arguments]
     const context = this
 
     if (!inThrottle) {
