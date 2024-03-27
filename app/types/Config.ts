@@ -309,7 +309,8 @@ export const HatchList = new Array<Pkm>(
   Pkm.FROAKIE,
   Pkm.TEPIG,
   Pkm.STARLY,
-  Pkm.AXEW
+  Pkm.AXEW,
+  Pkm.TYMPOLE
 )
 
 export const NB_UNIQUE_PROPOSITIONS = 6
