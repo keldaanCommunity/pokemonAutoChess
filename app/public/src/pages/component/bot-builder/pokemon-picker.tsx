@@ -21,6 +21,7 @@ import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
 
 export default function PokemonPicker(props: {
+  selected: PkmWithConfig | Item
   selectEntity: React.Dispatch<React.SetStateAction<PkmWithConfig | Item>>
 }) {
   const tabs = [...Object.keys(PRECOMPUTED_POKEMONS_PER_TYPE), "none"]
@@ -47,6 +48,7 @@ export default function PokemonPicker(props: {
         return (
           <TabPanel key={"pokemons-tab-" + i}>
             <PokemonPickerTab
+              selected={props.selected}
               selectEntity={props.selectEntity}
               pokemons={pokemons}
             />
@@ -59,6 +61,7 @@ export default function PokemonPicker(props: {
 
 function PokemonPickerTab(props: {
   pokemons: IPokemonData[]
+  selected: PkmWithConfig | Item
   selectEntity: React.Dispatch<React.SetStateAction<PkmWithConfig | Item>>
 }) {
   const { t } = useTranslation()
@@ -103,7 +106,8 @@ function PokemonPickerTab(props: {
               {(pokemonsPerRarity[rarity] ?? []).map((p) => (
                 <div
                   className={cc("pokemon-portrait", {
-                    additional: p.additional
+                    additional: p.additional,
+                    selected: p.name === props.selected["name"]
                   })}
                   onClick={() => {
                     props.selectEntity({

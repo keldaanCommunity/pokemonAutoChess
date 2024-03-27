@@ -23,6 +23,8 @@
 #wiki-page .synergies-tabs li[role="tab"] {
   padding: 4px 6px;
   line-height: 40px;
+  min-width: 48px;
+  text-align: center;
 }
 
 #wiki-page > .nes-container {
@@ -268,5 +270,9 @@
     width: 24px;
     height: 24px;
     margin: 4px;
+  }
+
+  #wiki-page .synergies-tabs li[role="tab"] {
+    padding: 4px;
   }
 }

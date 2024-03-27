@@ -180,8 +180,8 @@ export default function TeamBuilder(props: {
         handleDrop={handleDrop}
       />
       <SelectedEntity entity={selection} onChange={updateSelectedPokemon} />
-      <ItemPicker selectEntity={setSelection} />
-      <PokemonPicker selectEntity={setSelection} />
+      <ItemPicker selectEntity={setSelection} selected={selection} />
+      <PokemonPicker selectEntity={setSelection} selected={selection} />
       {props.bot && props.onChangeAvatar && (
         <BotAvatar
           bot={props.bot}
