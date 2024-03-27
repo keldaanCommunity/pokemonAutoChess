@@ -297,20 +297,6 @@ export const LegendaryShop = new Array<PkmProposition>(
   Pkm.MAGEARNA
 )
 
-export const HatchList = new Array<Pkm>(
-  Pkm.GOTHITA,
-  Pkm.DREEPY,
-  Pkm.SNIVY,
-  Pkm.SCORBUNNY,
-  Pkm.POPPLIO,
-  Pkm.ALOLAN_GEODUDE,
-  Pkm.ROWLET,
-  Pkm.FROAKIE,
-  Pkm.TEPIG,
-  Pkm.STARLY,
-  Pkm.AXEW
-)
-
 export const NB_UNIQUE_PROPOSITIONS = 6
 export const SHOP_SIZE = 6
 
