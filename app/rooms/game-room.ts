@@ -19,8 +19,8 @@ import UserMetadata, {
 } from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
 import {
-  getPokemonData,
-  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY
+  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY,
+  getPokemonData
 } from "../models/precomputed"
 import { getAvatarString } from "../public/src/utils"
 import {
@@ -45,20 +45,20 @@ import {
   RequiredStageLevelForXpElligibility,
   UniqueShop
 } from "../types/Config"
+import { DungeonPMDO } from "../types/enum/Dungeon"
 import { GameMode, Rarity } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
-import { DungeonPMDO } from "../types/enum/Dungeon"
 import { Pkm, PkmDuos, PkmProposition } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { removeInArray } from "../utils/array"
-import { logger } from "../utils/logger"
-import { shuffleArray } from "../utils/random"
-import { keys, values } from "../utils/schemas"
 import {
   getFirstAvailablePositionInBench,
   getFreeSpaceOnBench
 } from "../utils/board"
+import { logger } from "../utils/logger"
+import { shuffleArray } from "../utils/random"
+import { keys, values } from "../utils/schemas"
 import {
   OnDragDropCombineCommand,
   OnDragDropCommand,
@@ -690,13 +690,13 @@ export default class GameRoom extends Room<GameState> {
                 humans.map((p) => this.transformToSimplePlayer(p))
               )
               if (elo) {
-                if (elo > 1100) {
+                if (elo >= 1100) {
                   player.titles.add(Title.GYM_TRAINER)
                 }
-                if (elo > 1200) {
+                if (elo >= 1200) {
                   player.titles.add(Title.GYM_CHALLENGER)
                 }
-                if (elo > 1400) {
+                if (elo >= 1400) {
                   player.titles.add(Title.GYM_LEADER)
                 }
                 usr.elo = elo
