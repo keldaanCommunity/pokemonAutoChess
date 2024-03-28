@@ -830,6 +830,7 @@ export class Tympole extends Pokemon {
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.PALPITOAD
+  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 80
   atk = 7
   def = 3
@@ -837,6 +838,7 @@ export class Tympole extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.SLUDGE_WAVE
+  passive = Passive.HATCH
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -849,6 +851,7 @@ export class Palpitoad extends Pokemon {
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.SEISMITOAD
+  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 130
   atk = 17
   def = 4
@@ -856,6 +859,7 @@ export class Palpitoad extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.SLUDGE_WAVE
+  passive = Passive.HATCH
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -1906,6 +1910,7 @@ export class Axew extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.OUTRAGE
+  passive = Passive.HATCH
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -1922,6 +1927,7 @@ export class Fraxure extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.OUTRAGE
+  passive = Passive.HATCH
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
