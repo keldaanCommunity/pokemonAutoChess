@@ -1032,13 +1032,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
         if (distance <= 1) {
           // melee range
-          splashTarget.handleSpecialDamage({
+          splashTarget.handleSpecialDamage(
             damage,
             board,
-            attackType: AttackType.SPECIAL,
-            attacker: pokemon,
-            crit: false
-          })
+            AttackType.SPECIAL,
+            pokemon,
+            false
+          )
         }
 
         if (isCritReceived || distance > 1) {

@@ -44,7 +44,9 @@ function getRegularsTier1(pokemons: Pkm[]) {
   })
 }
 
-const CommonShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.COMMON)
+const CommonShop = getRegularsTier1(
+  PRECOMPUTED_POKEMONS_PER_RARITY.COMMON
+).concat(Pkm.DEOXYS)
 const UncommonShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.UNCOMMON)
 const RareShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.RARE)
 const EpicShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.EPIC)

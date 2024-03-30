@@ -311,7 +311,10 @@
     "MOONGEIST_BEAM": "Moongeist Beam",
     "FLEUR_CANNON": "Fleur Cannon",
     "SPIRIT_BREAK": "Spirit Break",
-    "SHEER_COLD": "Sheer Cold"
+    "SHEER_COLD": "Sheer Cold",
+    "EXTREME_SPEED": "Extreme Speed",
+    "ZAP_CANNON": "Zap Cannon",
+    "PSYCHO_BOOST": "Psycho Boost"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -569,6 +572,9 @@
     "JIRACHI": "Jirachi",
     "ARCEUS": "Arceus",
     "DEOXYS": "Deoxys",
+    "DEOXYS_DEFENSE": "Deoxys Defense",
+    "DEOXYS_ATTACK": "Deoxys Attack",
+    "DEOXYS_SPEED": "Deoxys Speed",
     "SHAYMIN": "Shaymin",
     "CRESSELIA": "Cresselia",
     "HEATRAN": "Heatran",
@@ -1349,9 +1355,12 @@
     "PETAL_BLIZZARD": "Deals [30,SP] SPECIAL to surounding enemies and gain 10 AP",
     "SUNSTEEL_STRIKE": "Jumps and lands in the middle of the enemy team with the power of a meteor, inflicting [100,SP] SPECIAL to adjacent enemies and BURN for 3 seconds",
     "MOONGEIST_BEAM": "Deals [100,SP] SPECIAL to all enemy Pokémon in a straight line and make them PARALYSIS for 3 seconds",
-    "FLEUR_CANNON": "Sends a devastating laser beam that inflicts [120,SP] SPECIAL on all enemies in the beam. Reduces the AP of the caster by 20.",
+    "FLEUR_CANNON": "Sends a devastating laser beam that inflicts [120,SP] SPECIAL on all enemies in the beam. Reduces the AP of the caster by 20",
     "SPIRIT_BREAK": "Deals [20,40,80,SP] SPECIAL and lowers the target's AP by [20,SP]",
-    "SHEER_COLD": "A blast of absolute-zero cold that has [30,SP]% chance to execute the target. The more HP the user has relative to the target, the greater the chance. Always execute FREEZE enemies, but never execute ICE targets."
+    "SHEER_COLD": "A blast of absolute-zero cold that has [30,SP]% chance to execute the target. The more HP the user has relative to the target, the greater the chance. Always execute FREEZE enemies, but never execute ICE targets.",
+    "EXTREME_SPEED": "Dash towards the furthest enemy, inflicting [80,SP] PHYSICAL along the way",
+    "ZAP_CANNON": "The caster fires an electric blast like a cannon to inflict [25,50,100,SP] SPECIAL and cause PARALYSIS and ARMOR_REDUCTION for [1,2,4] s",
+    "PSYCHO_BOOST": "Cut a slash horizontally around the target, dealing [140,SP] SPECIAL to all ennemies hit. Reduce the caster AP by 20 for each Pokémon hit."
   },
   "effect": {
     "INGRAIN": "Ingrain",

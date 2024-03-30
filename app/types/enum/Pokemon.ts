@@ -256,6 +256,9 @@ export enum Pkm {
   JIRACHI = "JIRACHI",
   ARCEUS = "ARCEUS",
   DEOXYS = "DEOXYS",
+  DEOXYS_DEFENSE = "DEOXYS_DEFENSE",
+  DEOXYS_ATTACK = "DEOXYS_ATTACK",
+  DEOXYS_SPEED = "DEOXYS_SPEED",
   SHAYMIN = "SHAYMIN",
   CRESSELIA = "CRESSELIA",
   HEATRAN = "HEATRAN",
@@ -1002,7 +1005,6 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.VICTINI]: "0494",
   [Pkm.JIRACHI]: "0385",
   [Pkm.ARCEUS]: "0493",
-  [Pkm.DEOXYS]: "0386",
   [Pkm.SHAYMIN]: "0492",
   [Pkm.CRESSELIA]: "0488",
   [Pkm.HEATRAN]: "0485",
@@ -1483,7 +1485,11 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MAGEARNA]: "0801",
   [Pkm.IMPIDIMP]: "0859",
   [Pkm.MORGREM]: "0860",
-  [Pkm.GRIMMSNARL]: "0861"
+  [Pkm.GRIMMSNARL]: "0861",
+  [Pkm.DEOXYS]: "0386",
+  [Pkm.DEOXYS_DEFENSE]: "0386-0002",
+  [Pkm.DEOXYS_ATTACK]: "0386-0001",
+  [Pkm.DEOXYS_SPEED]: "0386-0003"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1716,7 +1722,6 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.VICTINI]: Pkm.VICTINI,
   [Pkm.JIRACHI]: Pkm.JIRACHI,
   [Pkm.ARCEUS]: Pkm.ARCEUS,
-  [Pkm.DEOXYS]: Pkm.DEOXYS,
   [Pkm.SHAYMIN]: Pkm.SHAYMIN,
   [Pkm.CRESSELIA]: Pkm.CRESSELIA,
   [Pkm.HEATRAN]: Pkm.HEATRAN,
@@ -2226,7 +2231,11 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MAGEARNA]: Pkm.MAGEARNA,
   [Pkm.IMPIDIMP]: Pkm.IMPIDIMP,
   [Pkm.MORGREM]: Pkm.IMPIDIMP,
-  [Pkm.GRIMMSNARL]: Pkm.IMPIDIMP
+  [Pkm.GRIMMSNARL]: Pkm.IMPIDIMP,
+  [Pkm.DEOXYS]: Pkm.DEOXYS,
+  [Pkm.DEOXYS_DEFENSE]: Pkm.DEOXYS,
+  [Pkm.DEOXYS_ATTACK]: Pkm.DEOXYS,
+  [Pkm.DEOXYS_SPEED]: Pkm.DEOXYS
 }
 
 export enum PkmDuo {
@@ -3473,8 +3482,7 @@ export const AnimationConfig: {
   [Pkm.VANILLUXE]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Charge,
-    emote: AnimationType.Rotate,
-    shinyUnavailable: true
+    emote: AnimationType.Rotate
   },
   [Pkm.GLACEON]: {
     attack: AnimationType.Shoot,
@@ -3619,11 +3627,6 @@ export const AnimationConfig: {
   [Pkm.ARCEUS]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Pose,
-    emote: AnimationType.Shoot
-  },
-  [Pkm.DEOXYS]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Emit,
     emote: AnimationType.Shoot
   },
   [Pkm.SHAYMIN]: {
@@ -4014,8 +4017,7 @@ export const AnimationConfig: {
   [Pkm.SEISMITOAD]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot,
-    shinyUnavailable: true
+    emote: AnimationType.Shoot
   },
   [Pkm.SEWADDLE]: {
     attack: AnimationType.Attack,
@@ -5999,14 +6001,12 @@ export const AnimationConfig: {
   [Pkm.DEWPIDER]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot,
-    shinyUnavailable: true
+    emote: AnimationType.Shoot
   },
   [Pkm.ARAQUANID]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot,
-    shinyUnavailable: true
+    emote: AnimationType.Shoot
   },
   [Pkm.ROCKRUFF]: {
     attack: AnimationType.Attack,
@@ -6072,6 +6072,26 @@ export const AnimationConfig: {
   [Pkm.GRIMMSNARL]: {
     attack: AnimationType.Punch,
     ability: AnimationType.Charge,
+    emote: AnimationType.Charge
+  },
+  [Pkm.DEOXYS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Emit
+  },
+  [Pkm.DEOXYS_DEFENSE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Withdraw,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.DEOXYS_ATTACK]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge
+  },
+  [Pkm.DEOXYS_SPEED]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.SpAttack,
     emote: AnimationType.Charge
   }
 }

@@ -122,6 +122,11 @@ export function displayAbility(
         )
       break
 
+    case Ability.EXTREME_SPEED:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
     case Ability.LEECH_SEED:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
@@ -639,6 +644,22 @@ export function displayAbility(
       break
     }
 
+    case Ability.ZAP_CANNON: {
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(3)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        yoyo: false,
+        duration: 1000,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.SPARKLING_ARIA: {
       const specialProjectile = addAbilitySprite(skill, coordinates).setScale(3)
       scene.tweens.add({
@@ -836,6 +857,10 @@ export function displayAbility(
 
     case Ability.APPLE_ACID:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
+    case Ability.PSYCHO_BOOST:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
     case Ability.MANTIS_BLADES:

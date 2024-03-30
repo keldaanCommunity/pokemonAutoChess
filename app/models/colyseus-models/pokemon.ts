@@ -5732,14 +5732,68 @@ export class Deoxys extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 220
+  hp = 240
   atk = 30
   def = 5
   speDef = 5
   maxPP = 100
   range = 1
+  skill = Ability.PSYCHO_BOOST
+  attackSprite = AttackSprite.PSYCHIC_MELEE
+}
+
+export class DeoxysDefense extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.HUMAN,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 240
+  atk = 20
+  def = 8
+  speDef = 8
+  maxPP = 100
+  range = 1
   skill = Ability.PROTECT
   attackSprite = AttackSprite.PSYCHIC_MELEE
+}
+
+export class DeoxysAttack extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.HUMAN,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 240
+  atk = 38
+  def = 2
+  speDef = 2
+  maxPP = 50
+  range = 100
+  skill = Ability.ZAP_CANNON
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
+
+export class DeoxysSpeed extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.HUMAN,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 240
+  atk = 30
+  def = 3
+  speDef = 3
+  maxPP = 50
+  range = 2
+  skill = Ability.EXTREME_SPEED
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Shaymin extends Pokemon {
@@ -12680,7 +12734,6 @@ export const PokemonClasses: Record<
   [Pkm.VICTINI]: Victini,
   [Pkm.JIRACHI]: Jirachi,
   [Pkm.ARCEUS]: Arceus,
-  [Pkm.DEOXYS]: Deoxys,
   [Pkm.SHAYMIN]: Shaymin,
   [Pkm.SHAYMIN_SKY]: ShayminSky,
   [Pkm.CRESSELIA]: Cresselia,
@@ -13166,5 +13219,9 @@ export const PokemonClasses: Record<
   [Pkm.MAGEARNA]: Magearna,
   [Pkm.IMPIDIMP]: Impidimp,
   [Pkm.MORGREM]: Morgrem,
-  [Pkm.GRIMMSNARL]: Grimmsnarl
+  [Pkm.GRIMMSNARL]: Grimmsnarl,
+  [Pkm.DEOXYS]: Deoxys,
+  [Pkm.DEOXYS_DEFENSE]: DeoxysDefense,
+  [Pkm.DEOXYS_ATTACK]: DeoxysAttack,
+  [Pkm.DEOXYS_SPEED]: DeoxysSpeed
 }

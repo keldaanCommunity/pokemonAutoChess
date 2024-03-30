@@ -1,7 +1,6 @@
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
-import { transformAttackCoordinate } from "../public/src/pages/utils/utils"
 import { EvolutionTime } from "../types/Config"
 import { PokemonActionState } from "../types/enum/Game"
 import { BasicItems, Item } from "../types/enum/Item"
