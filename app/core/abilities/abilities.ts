@@ -7883,6 +7883,8 @@ export class PsychoBoostStrategy extends AbilityStrategy {
             crit,
             true
           )
+
+          pokemon.addAbilityPower(-20, false)
         }
       }
     )

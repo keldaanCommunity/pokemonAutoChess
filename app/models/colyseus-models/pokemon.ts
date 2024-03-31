@@ -2753,7 +2753,7 @@ export class Magnemite extends Pokemon {
   speDef = 1
   maxPP = 100
   range = 2
-  skill = Ability.TORMENT
+  skill = Ability.ZAP_CANNON
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -2768,7 +2768,7 @@ export class Magneton extends Pokemon {
   speDef = 1
   maxPP = 100
   range = 2
-  skill = Ability.TORMENT
+  skill = Ability.ZAP_CANNON
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -2782,7 +2782,7 @@ export class Magnezone extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 2
-  skill = Ability.TORMENT
+  skill = Ability.ZAP_CANNON
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -5740,6 +5740,10 @@ export class Deoxys extends Pokemon {
   range = 1
   skill = Ability.PSYCHO_BOOST
   attackSprite = AttackSprite.PSYCHIC_MELEE
+  passive = Passive.ALIEN_DNA
+  onAcquired(player: Player) {
+    player.items.push(Item.METEORITE)
+  }
 }
 
 export class DeoxysDefense extends Pokemon {
@@ -5758,6 +5762,10 @@ export class DeoxysDefense extends Pokemon {
   range = 1
   skill = Ability.PROTECT
   attackSprite = AttackSprite.PSYCHIC_MELEE
+  passive = Passive.ALIEN_DNA
+  onAcquired(player: Player) {
+    player.items.push(Item.METEORITE)
+  }
 }
 
 export class DeoxysAttack extends Pokemon {
@@ -5772,10 +5780,14 @@ export class DeoxysAttack extends Pokemon {
   atk = 38
   def = 2
   speDef = 2
-  maxPP = 50
-  range = 100
+  maxPP = 90
+  range = 3
   skill = Ability.ZAP_CANNON
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  passive = Passive.ALIEN_DNA
+  onAcquired(player: Player) {
+    player.items.push(Item.METEORITE)
+  }
 }
 
 export class DeoxysSpeed extends Pokemon {
@@ -5794,6 +5806,10 @@ export class DeoxysSpeed extends Pokemon {
   range = 2
   skill = Ability.EXTREME_SPEED
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  passive = Passive.ALIEN_DNA
+  onAcquired(player: Player) {
+    player.items.push(Item.METEORITE)
+  }
 }
 
 export class Shaymin extends Pokemon {

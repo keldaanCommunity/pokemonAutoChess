@@ -5,7 +5,7 @@ import EloEngine from "elo-rank"
 import admin from "firebase-admin"
 import { components } from "../api-v1/openapi"
 import { computeElo } from "../core/elo"
-import { CountEvolutionRule, DeoxysEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
+import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
 import { MiniGame } from "../core/matter/mini-game"
 import { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
@@ -848,14 +848,7 @@ export default class GameRoom extends Room<GameState> {
     const player = this.state.players.get(playerId)
     if (!player) return false
 
-    if(pokemon.evolutionRule && pokemon.evolutionRule instanceof DeoxysEvolutionRule){
-      pokemon.evolutionRule.tryEvolve(
-        pokemon,
-        player,
-        this.state.stageLevel
-      )
-    }
-    else if (
+    if (
       pokemon.evolutionRule &&
       pokemon.evolutionRule instanceof ItemEvolutionRule
     ) {
@@ -942,6 +935,7 @@ export default class GameRoom extends Room<GameState> {
         pokemon.positionX = freeCellX
         pokemon.positionY = 0
         player.board.set(pokemon.id, pokemon)
+        pokemon.onAcquired(player)
       }
     })
 

@@ -1684,7 +1684,8 @@
     "HARD_STONE": "Hard Stone",
     "BIG_NUGGET": "Big Nugget",
     "INCENSE": "Incense",
-    "EXP_SHARE": "Exp. Share"
+    "EXP_SHARE": "Exp. Share",
+    "METEORITE": "Meteorite"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -1773,7 +1774,8 @@
     "HARD_STONE": "Gives ROCK synergy",
     "BIG_NUGGET": "Gives GROUND synergy. If the holder is alive after 15 seconds and gets 5 stacks of GROUND, gain 3 GOLD.",
     "INCENSE": "Gives FLORA synergy. Every attack received has a 10% chance to make the attacker CHARM for 2 seconds.",
-    "EXP_SHARE": "Get the best ATK, DEF and SPE_DEF values of adjacent allies in the same row"
+    "EXP_SHARE": "Get the best ATK, DEF and SPE_DEF values of adjacent allies in the same row",
+    "METEORITE": "A meteorite that you got at Mt. Chimney. It continues to give off a faint glow and is slightly warm to the touch"
   },
   "passive_description": {
     "NONE": "No passive",
@@ -1868,7 +1870,8 @@
     "LYCANROC": "$t(pkm.LYCANROC_DUSK) turns into night form during NIGHT and day form during SUN",
     "COSMOG": "$t(pkm.COSMOG) is feeding with the energy of the stars. Gain 10 permanent max HP every time you evolve a unit. Evolve after 10 times.",
     "COSMOEM": "$t(pkm.COSMOEM) is feeding with the energy of the stars. Gain 10 permanent max HP every time you evolve a unit. Evolve after 10 times into $t(pkm.SOLGALEO) if in the light spot, or $t(pkm.LUNALA) instead.",
-    "SOUL_HEART": "Every time the caster gets a KO, gain 10 AP and 10 PP"
+    "SOUL_HEART": "Every time the caster gets a KO, gain 10 AP and 10 PP",
+    "ALIEN_DNA": "$t(pkm.DEOXYS) reacts to METEORITE by changing shape"
   },
   "stat": {
     "ATK": "Attack",

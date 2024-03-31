@@ -402,6 +402,22 @@ export class OnDragDropItemCommand extends Command<
 
     const pokemon = player.getPokemonAt(x, y)
 
+    if (item === Item.METEORITE) {
+      if (pokemon?.passive === Passive.ALIEN_DNA) {
+        if (pokemon.name === Pkm.DEOXYS) {
+          player.transformPokemon(pokemon, Pkm.DEOXYS_ATTACK)
+        } else if (pokemon.name === Pkm.DEOXYS_ATTACK) {
+          player.transformPokemon(pokemon, Pkm.DEOXYS_DEFENSE)
+        } else if (pokemon.name === Pkm.DEOXYS_DEFENSE) {
+          player.transformPokemon(pokemon, Pkm.DEOXYS_SPEED)
+        } else if (pokemon.name === Pkm.DEOXYS_SPEED) {
+          player.transformPokemon(pokemon, Pkm.DEOXYS)
+        }
+      }
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
+
     if (pokemon === undefined || !pokemon.canHoldItems) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
