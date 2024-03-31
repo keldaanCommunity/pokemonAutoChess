@@ -935,6 +935,7 @@ export default class GameRoom extends Room<GameState> {
         pokemon.positionX = freeCellX
         pokemon.positionY = 0
         player.board.set(pokemon.id, pokemon)
+        pokemon.onAcquired(player)
       }
     })
 

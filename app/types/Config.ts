@@ -294,7 +294,8 @@ export const LegendaryShop = new Array<PkmProposition>(
   Pkm.THUNDURUS,
   Pkm.LANDORUS,
   Pkm.ENAMORUS,
-  Pkm.MAGEARNA
+  Pkm.MAGEARNA,
+  Pkm.DEOXYS
 )
 
 export const NB_UNIQUE_PROPOSITIONS = 6
@@ -630,7 +631,8 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
     [Stat.SPE_DEF]: 5
   },
   [Item.INCENSE]: { [Stat.SPE_DEF]: 5 },
-  [Item.EXP_SHARE]: {}
+  [Item.EXP_SHARE]: {},
+  [Item.METEORITE]: {}
 }
 
 export type TilesetExchangeFile = {

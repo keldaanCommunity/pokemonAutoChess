@@ -311,7 +311,10 @@
     "MOONGEIST_BEAM": "Moongeist Beam",
     "FLEUR_CANNON": "Fleur Cannon",
     "SPIRIT_BREAK": "Spirit Break",
-    "SHEER_COLD": "Sheer Cold"
+    "SHEER_COLD": "Sheer Cold",
+    "EXTREME_SPEED": "Extreme Speed",
+    "ZAP_CANNON": "Zap Cannon",
+    "PSYCHO_BOOST": "Psycho Boost"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -569,6 +572,9 @@
     "JIRACHI": "Jirachi",
     "ARCEUS": "Arceus",
     "DEOXYS": "Deoxys",
+    "DEOXYS_DEFENSE": "Deoxys Defense",
+    "DEOXYS_ATTACK": "Deoxys Attack",
+    "DEOXYS_SPEED": "Deoxys Speed",
     "SHAYMIN": "Shaymin",
     "CRESSELIA": "Cresselia",
     "HEATRAN": "Heatran",
@@ -1349,9 +1355,12 @@
     "PETAL_BLIZZARD": "Deals [30,SP] SPECIAL to surounding enemies and gain 10 AP",
     "SUNSTEEL_STRIKE": "Jumps and lands in the middle of the enemy team with the power of a meteor, inflicting [100,SP] SPECIAL to adjacent enemies and BURN for 3 seconds",
     "MOONGEIST_BEAM": "Deals [100,SP] SPECIAL to all enemy Pokémon in a straight line and make them PARALYSIS for 3 seconds",
-    "FLEUR_CANNON": "Sends a devastating laser beam that inflicts [120,SP] SPECIAL on all enemies in the beam. Reduces the AP of the caster by 20.",
+    "FLEUR_CANNON": "Sends a devastating laser beam that inflicts [120,SP] SPECIAL on all enemies in the beam. Reduces the AP of the caster by 20",
     "SPIRIT_BREAK": "Deals [20,40,80,SP] SPECIAL and lowers the target's AP by [20,SP]",
-    "SHEER_COLD": "A blast of absolute-zero cold that has [30,SP]% chance to execute the target. The more HP the user has relative to the target, the greater the chance. Always execute FREEZE enemies, but never execute ICE targets."
+    "SHEER_COLD": "A blast of absolute-zero cold that has [30,SP]% chance to execute the target. The more HP the user has relative to the target, the greater the chance. Always execute FREEZE enemies, but never execute ICE targets.",
+    "EXTREME_SPEED": "Dash towards the furthest enemy, inflicting [80,SP] PHYSICAL along the way",
+    "ZAP_CANNON": "The caster fires an electric blast like a cannon to inflict [25,50,100,SP] SPECIAL and cause PARALYSIS and ARMOR_REDUCTION for [1,2,4] s",
+    "PSYCHO_BOOST": "Cut a slash horizontally around the target, dealing [140,SP] SPECIAL to all ennemies hit. Reduce the caster AP by 20 for each Pokémon hit."
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1675,7 +1684,8 @@
     "HARD_STONE": "Hard Stone",
     "BIG_NUGGET": "Big Nugget",
     "INCENSE": "Incense",
-    "EXP_SHARE": "Exp. Share"
+    "EXP_SHARE": "Exp. Share",
+    "METEORITE": "Meteorite"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -1764,7 +1774,8 @@
     "HARD_STONE": "Gives ROCK synergy",
     "BIG_NUGGET": "Gives GROUND synergy. If the holder is alive after 15 seconds and gets 5 stacks of GROUND, gain 3 GOLD.",
     "INCENSE": "Gives FLORA synergy. Every attack received has a 10% chance to make the attacker CHARM for 2 seconds.",
-    "EXP_SHARE": "Get the best ATK, DEF and SPE_DEF values of adjacent allies in the same row"
+    "EXP_SHARE": "Get the best ATK, DEF and SPE_DEF values of adjacent allies in the same row",
+    "METEORITE": "A meteorite that you got at Mt. Chimney. It continues to give off a faint glow and is slightly warm to the touch"
   },
   "passive_description": {
     "NONE": "No passive",
@@ -1859,7 +1870,8 @@
     "LYCANROC": "$t(pkm.LYCANROC_DUSK) turns into night form during NIGHT and day form during SUN",
     "COSMOG": "$t(pkm.COSMOG) is feeding with the energy of the stars. Gain 10 permanent max HP every time you evolve a unit. Evolve after 10 times.",
     "COSMOEM": "$t(pkm.COSMOEM) is feeding with the energy of the stars. Gain 10 permanent max HP every time you evolve a unit. Evolve after 10 times into $t(pkm.SOLGALEO) if in the light spot, or $t(pkm.LUNALA) instead.",
-    "SOUL_HEART": "Every time the caster gets a KO, gain 10 AP and 10 PP"
+    "SOUL_HEART": "Every time the caster gets a KO, gain 10 AP and 10 PP",
+    "ALIEN_DNA": "$t(pkm.DEOXYS) reacts to METEORITE by changing shape"
   },
   "stat": {
     "ATK": "Attack",

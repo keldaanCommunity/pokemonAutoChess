@@ -1,18 +1,19 @@
 import { Command } from "@colyseus/command"
-import { MapSchema, ArraySchema } from "@colyseus/schema"
+import { ArraySchema, MapSchema } from "@colyseus/schema"
 import { Client, updateLobby } from "colyseus"
 import { nanoid } from "nanoid"
 
 import {
+  ConditionBasedEvolutionRule,
   CountEvolutionRule,
-  HatchEvolutionRule,
-  ConditionBasedEvolutionRule
+  HatchEvolutionRule
 } from "../../core/evolution-rules"
 import { selectMatchups } from "../../core/matchmaking"
 import { canSell } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import Player from "../../models/colyseus-models/player"
+import { isOnBench } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { getAvatarString } from "../../public/src/utils"
@@ -54,22 +55,21 @@ import {
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
+import { removeInArray } from "../../utils/array"
+import {
+  getFirstAvailablePositionInBench,
+  getFirstAvailablePositionOnBoard,
+  getFreeSpaceOnBench,
+  getMaxTeamSize,
+  isPositionEmpty
+} from "../../utils/board"
+import { repeat } from "../../utils/function"
 import { logger } from "../../utils/logger"
 import { max } from "../../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { getWeather } from "../../utils/weather"
-import {
-  isPositionEmpty,
-  getFirstAvailablePositionInBench,
-  getFirstAvailablePositionOnBoard,
-  getFreeSpaceOnBench,
-  getMaxTeamSize
-} from "../../utils/board"
 import GameRoom from "../game-room"
-import { isOnBench } from "../../models/colyseus-models/pokemon"
-import { repeat } from "../../utils/function"
-import { removeInArray } from "../../utils/array"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -152,7 +152,7 @@ export class OnRemoveFromShopCommand extends Command<
       return
 
     const name = player.shop[index]
-    let cost = PokemonFactory.getBuyPrice(name)
+    const cost = PokemonFactory.getBuyPrice(name)
     if (player.money >= cost) {
       player.shop = player.shop.with(index, Pkm.DEFAULT) as ArraySchema<Pkm> // waiting for https://github.com/colyseus/schema/pull/165
       this.state.shop.releasePokemon(name)
@@ -401,6 +401,22 @@ export class OnDragDropItemCommand extends Command<
     const y = parseInt(detail.y)
 
     const pokemon = player.getPokemonAt(x, y)
+
+    if (item === Item.METEORITE) {
+      if (pokemon?.passive === Passive.ALIEN_DNA) {
+        if (pokemon.name === Pkm.DEOXYS) {
+          player.transformPokemon(pokemon, Pkm.DEOXYS_ATTACK)
+        } else if (pokemon.name === Pkm.DEOXYS_ATTACK) {
+          player.transformPokemon(pokemon, Pkm.DEOXYS_DEFENSE)
+        } else if (pokemon.name === Pkm.DEOXYS_DEFENSE) {
+          player.transformPokemon(pokemon, Pkm.DEOXYS_SPEED)
+        } else if (pokemon.name === Pkm.DEOXYS_SPEED) {
+          player.transformPokemon(pokemon, Pkm.DEOXYS)
+        }
+      }
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
 
     if (pokemon === undefined || !pokemon.canHoldItems) {
       client.send(Transfer.DRAG_DROP_FAILED, message)

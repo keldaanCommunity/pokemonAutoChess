@@ -14,9 +14,9 @@ import { logger } from "../utils/logger"
 import { pickRandomIn } from "../utils/random"
 import { Egg, Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
 import {
-  getPokemonData,
   PRECOMPUTED_POKEMONS_PER_RARITY,
-  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY
+  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY,
+  getPokemonData
 } from "./precomputed"
 import { PVEStage } from "./pve-stages"
 
@@ -77,6 +77,7 @@ export default class PokemonFactory {
       config && config.selectedEmotion ? config.selectedEmotion : Emotion.NORMAL
     if (name in PokemonClasses) {
       const PokemonClass = PokemonClasses[name]
+
       return new PokemonClass(shiny, emotion)
     } else {
       logger.warn(`No pokemon with name "${name}" found, return MissingNo`)
