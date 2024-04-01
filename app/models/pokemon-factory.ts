@@ -1,7 +1,6 @@
 import { MapSchema } from "@colyseus/schema"
 import { Emotion, IPlayer } from "../types"
-import { HatchList, RarityCost } from "../types/Config"
-import { Effect } from "../types/enum/Effect"
+import { RarityCost } from "../types/Config"
 import { PokemonActionState, Rarity } from "../types/enum/Game"
 import {
   Pkm,
@@ -13,11 +12,11 @@ import {
 import { Synergy } from "../types/enum/Synergy"
 import { logger } from "../utils/logger"
 import { pickRandomIn } from "../utils/random"
-import Player from "./colyseus-models/player"
 import { Egg, Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
 import {
-  getPokemonData,
-  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY
+  PRECOMPUTED_POKEMONS_PER_RARITY,
+  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY,
+  getPokemonData
 } from "./precomputed"
 import { PVEStage } from "./pve-stages"
 
@@ -78,6 +77,7 @@ export default class PokemonFactory {
       config && config.selectedEmotion ? config.selectedEmotion : Emotion.NORMAL
     if (name in PokemonClasses) {
       const PokemonClass = PokemonClasses[name]
+
       return new PokemonClass(shiny, emotion)
     } else {
       logger.warn(`No pokemon with name "${name}" found, return MissingNo`)
@@ -86,11 +86,14 @@ export default class PokemonFactory {
   }
 
   static createRandomEgg(shiny: boolean): Egg {
+    const hatchList = PRECOMPUTED_POKEMONS_PER_RARITY.HATCH.filter(
+      (p) => getPokemonData(p).stars === 1
+    )
     const egg = PokemonFactory.createPokemonFromName(Pkm.EGG, {
       selectedShiny: shiny
     })
     egg.action = PokemonActionState.SLEEP
-    egg.evolution = pickRandomIn(HatchList)
+    egg.evolution = pickRandomIn(hatchList)
     return egg as Egg
   }
 

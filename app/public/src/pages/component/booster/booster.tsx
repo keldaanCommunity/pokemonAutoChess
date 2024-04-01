@@ -44,10 +44,6 @@ export default function Booster() {
         </div>
 
         <div className="actions">
-          <p>
-            <span>{numberOfBooster}</span>
-            <img src="/assets/ui/booster.png" alt="booster" />
-          </p>
           <button
             onClick={() => {
               if (numberOfBooster > 0) {
@@ -60,6 +56,8 @@ export default function Booster() {
           >
             {t("open_booster")}
           </button>
+          <span className="booster-count">{numberOfBooster}</span>
+          <img src="/assets/ui/booster.png" alt="booster" />
         </div>
       </div>
     </div>

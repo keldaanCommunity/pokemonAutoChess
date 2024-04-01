@@ -71,3 +71,13 @@
 .game-history .synergies > li > span {
   line-height: 80%;
 }
+
+@media (width <= 640px) {
+  .game-history.nes-container {
+    grid-template-areas:
+      "top elo date"
+      "syn syn syn"
+      "team team team";
+    grid-template-columns: 5ch 7ch 1fr;
+  }
+}

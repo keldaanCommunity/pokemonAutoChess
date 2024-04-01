@@ -9,6 +9,7 @@
 
 #bot-builder header {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
   justify-content: space-between;
   gap: 1em;
@@ -16,9 +17,11 @@
 
 #bot-builder .step-info {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   width: 1440px;
+  max-width: 100%;
   margin: 0 auto;
 }
 

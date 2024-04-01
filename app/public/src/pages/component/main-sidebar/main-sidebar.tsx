@@ -61,25 +61,16 @@ export function MainSidebar(props: MainSidebarProps) {
 
     const ref = sidebarRef.current
 
-    const enableSidebar = () => {
-      if (collapsed) {
-        setCollapsed(false)
-      }
-    }
+    const extendSidebar = () => setCollapsed(false)
+    const collapseSidebar = () => setCollapsed(true)
 
-    const disableSidebar = () => {
-      if (!collapsed) {
-        setCollapsed(true)
-      }
-    }
-
-    ref.addEventListener("mouseenter", enableSidebar)
-    ref.addEventListener("mouseleave", disableSidebar)
+    ref.addEventListener("mouseenter", extendSidebar)
+    ref.addEventListener("mouseleave", collapseSidebar)
 
     return () => {
       if (ref) {
-        ref.removeEventListener("mouseenter", enableSidebar)
-        ref.removeEventListener("mouseleave", disableSidebar)
+        ref.removeEventListener("mouseenter", extendSidebar)
+        ref.removeEventListener("mouseleave", collapseSidebar)
       }
     }
   }, [collapsed])
@@ -92,7 +83,7 @@ export function MainSidebar(props: MainSidebarProps) {
       ref={sidebarRef}
     >
       <Menu>
-        <div className="sidebar-logo">
+        <div className="sidebar-logo" onClick={() => setCollapsed(!collapsed)}>
           <img src={`assets/ui/colyseus-icon.png`} />
           <div>
             <h1>Pokemon Auto Chess</h1>

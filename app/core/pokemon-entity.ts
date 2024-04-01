@@ -666,7 +666,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       target.status.triggerParalysis(4000, target)
     }
 
-    if (this.items.has(Item.INCENSE) && chance(1 / 10)) {
+    if (target.items.has(Item.INCENSE) && chance(1 / 10)) {
       this.status.triggerCharm(2000, target, this)
     }
 
@@ -1032,13 +1032,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
         if (distance <= 1) {
           // melee range
-          splashTarget.handleDamage({
+          splashTarget.handleSpecialDamage(
             damage,
             board,
-            attackType: AttackType.SPECIAL,
-            attacker: pokemon,
-            shouldTargetGainMana: false
-          })
+            AttackType.SPECIAL,
+            pokemon,
+            false
+          )
         }
 
         if (isCritReceived || distance > 1) {

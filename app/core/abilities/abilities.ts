@@ -1796,10 +1796,7 @@ export class AccelerockStrategy extends AbilityStrategy {
 
     if (farthestCoordinate) {
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
-      const target = state.getNearestTargetAtRange(
-        pokemon,
-        board
-      )
+      const target = state.getNearestTargetAtRange(pokemon, board)
       if (target) {
         pokemon.targetX = target.positionX
         pokemon.targetY = target.positionY
@@ -7794,6 +7791,106 @@ export class SheerColdStrategy extends AbilityStrategy {
   }
 }
 
+export class ZapCannonStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 3 ? 100 : pokemon.stars === 2 ? 50 : 25
+    const duration =
+      pokemon.stars === 3 ? 4000 : pokemon.stars === 2 ? 2000 : 1000
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
+    target.status.triggerArmorReduction(duration)
+    target.status.triggerParalysis(duration, target)
+  }
+}
+
+export class ExtremeSpeedStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 80
+    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
+      pokemon,
+      board
+    )
+    if (farthestCoordinate) {
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team != pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.PHYSICAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
+    }
+  }
+}
+
+export class PsychoBoostStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const damage = 140
+    ;[target.positionX - 1, target.positionX, target.positionX + 1].forEach(
+      (positionX) => {
+        const tg = board.getValue(positionX, target.positionY)
+        if (tg && tg.team !== pokemon.team) {
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: Ability.PSYCHO_BOOST,
+            positionX: tg.positionX,
+            positionY: tg.positionY
+          })
+
+          tg.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit,
+            true
+          )
+
+          pokemon.addAbilityPower(-20, false)
+        }
+      }
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -8092,5 +8189,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FLEUR_CANNON]: new FleurCannonStrategy(),
   [Ability.DOOM_DESIRE]: new DoomDesireStrategy(),
   [Ability.SPIRIT_BREAK]: new SpiritBreakStrategy(),
-  [Ability.SHEER_COLD]: new SheerColdStrategy()
+  [Ability.SHEER_COLD]: new SheerColdStrategy(),
+  [Ability.PSYCHO_BOOST]: new PsychoBoostStrategy(),
+  [Ability.ZAP_CANNON]: new ZapCannonStrategy(),
+  [Ability.EXTREME_SPEED]: new ExtremeSpeedStrategy()
 }

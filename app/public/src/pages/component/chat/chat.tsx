@@ -15,7 +15,7 @@ export default function Chat(props: { source: string }) {
 
   return (
     <div className="nes-container user-chat custom-bg">
-      <h1>{user?.anonymous ? t("chat_disabled_anonymous") : "Chat"}</h1>
+      <h1>{user?.anonymous ? t("chat_disabled_anonymous") : t("chat")}</h1>
       <ChatHistory source={props.source} />
       <form
         onSubmit={(e) => {

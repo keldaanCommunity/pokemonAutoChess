@@ -1,0 +1,31 @@
+#meta-report-compo {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#meta-report-compo article {
+  overflow-y: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+#meta-report-compo-list {
+  overflow-y: scroll;
+  width: 50%;
+}
+
+@media (width <= 1280px) {
+  #meta-report-compo article {
+    display: block;
+  }
+
+  #meta-report-compo svg {
+    display: none;
+  }
+
+  #meta-report-compo-list {
+    width: 100%;
+  }
+}

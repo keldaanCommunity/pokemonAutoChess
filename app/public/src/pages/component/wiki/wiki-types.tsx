@@ -160,43 +160,42 @@ export function WikiAllTypes() {
   }, {})
 
   const [hoveredPokemon, setHoveredPokemon] = useState<Pkm>()
+  const { t } = useTranslation()
 
   return (
     <>
-      <table id="wiki-types-all">
-        <tbody>
-          {(Object.values(Synergy) as Synergy[]).map((type) => {
-            return (
-              <tr key={type}>
-                <td>
-                  <SynergyIcon type={type} />
-                </td>
-                <td>
-                  {(pokemonsPerType[type] ?? []).map((p) => {
-                    return (
-                      <div
-                        key={p.name}
-                        className={cc("pokemon-portrait", {
-                          additional: p.additional
-                        })}
-                        onMouseOver={() => {
-                          setHoveredPokemon(p.name)
-                        }}
-                        data-tooltip-id="pokemon-detail"
-                      >
-                        <img
-                          src={getPortraitSrc(p.index)}
-                          data-tooltip-id={`pokemon-detail-${p.index}`}
-                        />
-                      </div>
-                    )
-                  })}
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+      <div id="wiki-types-all">
+        {(Object.values(Synergy) as Synergy[]).map((type) => {
+          return (
+            <section key={type}>
+              <h2>
+                <SynergyIcon type={type} /> {t(`synergy.${type}`)}
+              </h2>
+              <ul>
+                {(pokemonsPerType[type] ?? []).map((p) => {
+                  return (
+                    <li
+                      key={p.name}
+                      className={cc("pokemon-portrait", {
+                        additional: p.additional
+                      })}
+                      onMouseOver={() => {
+                        setHoveredPokemon(p.name)
+                      }}
+                      data-tooltip-id="pokemon-detail"
+                    >
+                      <img
+                        src={getPortraitSrc(p.index)}
+                        data-tooltip-id={`pokemon-detail-${p.index}`}
+                      />
+                    </li>
+                  )
+                })}
+              </ul>
+            </section>
+          )
+        })}
+      </div>
       {hoveredPokemon &&
         ReactDOM.createPortal(
           <Tooltip

@@ -1,0 +1,20 @@
+.elo.badge {
+  display: flex;
+  align-items: center;
+  flex: 0 0 calc(48px + 3em);
+  gap: 5px;
+  padding: 0;
+  font-size: 1em;
+}
+
+.badge img {
+  width: 40px;
+  height: 40px;
+}
+
+@media (max-width: 640px) {
+  .badge img {
+    width: 25px;
+    height: 25px;
+  }
+}

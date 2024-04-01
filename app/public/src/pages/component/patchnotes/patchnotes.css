@@ -55,3 +55,9 @@
   list-style: none;
   padding: 0;
 }
+
+@media (max-width: 640px) {
+  .patchnotes .content {
+    padding: 0;
+  }
+}

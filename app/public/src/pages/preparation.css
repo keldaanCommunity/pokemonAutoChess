@@ -1,6 +1,7 @@
 .preparation-page {
   display: flex;
   height: 100%;
+  overflow-y: auto;
 }
 
 .preparation-page main {
@@ -47,8 +48,11 @@
   .preparation-page .preparation-menu,
   .preparation-page .user-chat {
     min-height: initial;
-    height: calc(50vh - 4em);
     overflow: auto;
     margin-bottom: 1em;
+  }
+
+  .preparation-page .user-chat {
+    padding-bottom: 60px;
   }
 }

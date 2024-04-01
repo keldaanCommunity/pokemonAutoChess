@@ -68,9 +68,9 @@ ul.titles > li.selected p {
 
 .search-suggestions {
   display: flex;
+  padding: 0;
   gap: 10px;
   flex-wrap: wrap;
-  margin-top: 10px;
   justify-content: space-around;
 }
 

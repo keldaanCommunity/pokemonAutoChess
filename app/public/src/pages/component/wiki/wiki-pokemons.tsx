@@ -142,35 +142,33 @@ export function WikiAllPokemons() {
 
   return (
     <>
-      <table id="wiki-pokemons-all">
-        <tbody>
-          {(Object.values(Rarity) as Rarity[]).map((rarity) => {
-            return (
-              <tr key={rarity} style={{ color: RarityColor[rarity] }}>
-                <td>{t(`rarity.${rarity}`)}</td>
-                <td>
-                  {(pokemonsPerRarity[rarity] ?? []).map((p) => {
-                    return (
-                      <div
-                        key={p.name}
-                        className={cc("pokemon-portrait", {
-                          additional: p.additional
-                        })}
-                        onMouseOver={() => {
-                          setHoveredPokemon(p.name)
-                        }}
-                        data-tooltip-id="pokemon-detail"
-                      >
-                        <img src={getPortraitSrc(p.index)} />
-                      </div>
-                    )
-                  })}
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+      <div id="wiki-pokemons-all">
+        {(Object.values(Rarity) as Rarity[]).map((rarity) => {
+          return (
+            <section key={rarity} style={{ color: RarityColor[rarity] }}>
+              <h2>{t(`rarity.${rarity}`)}</h2>
+              <ul>
+                {(pokemonsPerRarity[rarity] ?? []).map((p) => {
+                  return (
+                    <li
+                      key={p.name}
+                      className={cc("pokemon-portrait", {
+                        additional: p.additional
+                      })}
+                      onMouseOver={() => {
+                        setHoveredPokemon(p.name)
+                      }}
+                      data-tooltip-id="pokemon-detail"
+                    >
+                      <img src={getPortraitSrc(p.index)} />
+                    </li>
+                  )
+                })}
+              </ul>
+            </section>
+          )
+        })}
+      </div>
       {hoveredPokemon &&
         ReactDOM.createPortal(
           <Tooltip

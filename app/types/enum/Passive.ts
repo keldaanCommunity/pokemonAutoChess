@@ -91,5 +91,6 @@ export enum Passive {
   COSMOG = "COSMOG",
   COSMOEM = "COSMOEM",
   SCYTHER = "SCYTHER",
-  SOUL_HEART = "SOUL_HEART"
+  SOUL_HEART = "SOUL_HEART",
+  ALIEN_DNA = "ALIEN_DNA"
 }
