@@ -588,11 +588,9 @@ export default class Simulation extends Schema implements ISimulation {
       const teamEffects =
         team === this.blueTeam ? this.blueEffects : this.redEffects
       const opponentTeam = team === this.blueTeam ? this.redTeam : this.blueTeam
-      const opponentsCursable = shuffleArray(
-        [...opponentTeam.values()].filter(
-          (enemy) => !enemy.status.runeProtect
-        ) as PokemonEntity[]
-      )
+      const opponentsCursable = shuffleArray([
+        ...opponentTeam.values()
+      ]) as PokemonEntity[]
 
       if (
         teamEffects.has(Effect.BAD_DREAMS) ||
@@ -603,10 +601,7 @@ export default class Simulation extends Schema implements ISimulation {
         let enemyWithHighestHP: PokemonEntity | undefined = undefined
         let highestHP = 0
         opponentsCursable.forEach((enemy) => {
-          if (
-            enemy.hp + enemy.shield > highestHP &&
-            !enemy.status.runeProtect
-          ) {
+          if (enemy.hp + enemy.shield > highestHP) {
             highestHP = enemy.hp + enemy.shield
             enemyWithHighestHP = enemy as PokemonEntity
           }
@@ -631,7 +626,7 @@ export default class Simulation extends Schema implements ISimulation {
         let enemyWithHighestATK: PokemonEntity | undefined = undefined
         let highestATK = 0
         opponentsCursable.forEach((enemy) => {
-          if (enemy.atk > highestATK && !enemy.status.runeProtect) {
+          if (enemy.atk > highestATK) {
             highestATK = enemy.atk
             enemyWithHighestATK = enemy as PokemonEntity
           }
@@ -649,7 +644,7 @@ export default class Simulation extends Schema implements ISimulation {
         let enemyWithHighestAP: PokemonEntity | undefined = undefined
         let highestAP = 0
         opponentsCursable.forEach((enemy) => {
-          if (enemy.ap >= highestAP && !enemy.status.runeProtect) {
+          if (enemy.ap >= highestAP) {
             highestAP = enemy.ap
             enemyWithHighestAP = enemy as PokemonEntity
           }

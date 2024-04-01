@@ -11,6 +11,8 @@
 
 # Changes to Synergies
 
+- Ghost curses no longer ignore opponents with Rune protect effects
+
 # Changes to Items
 
 - New Item: Meteorite ?! A meteorite that you got at Mt. Chimney. It continues to give off a faint glow and is slightly warm to the touch
