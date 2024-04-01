@@ -1930,7 +1930,7 @@
     "SILENCE": "Prevents casting abilities and gaining PP",
     "POISONNED": "Deals 5% of max HP per stack as TRUE every second. Can stack up to 3 times by default.",
     "FREEZE": "Prevents moving, dodging or attacking",
-    "PROTECT": "Protects from any source of damage, but prevents PP gain",
+    "PROTECT": "Protects from any source of damage, but prevents healing and PP gain",
     "SLEEP": "Prevents moving, dodging or attacking. Receiving attacks reduces the duration of the effect.",
     "CONFUSION": "Force to change target all the time and sometimes deal damage to itself",
     "WOUND": "Prevents healing from any source",

@@ -117,6 +117,14 @@ export const networkSlice = createSlice({
         state.preparation.send(Transfer.NEW_MESSAGE, action.payload)
       }
     },
+    removeMessage: (state, action: PayloadAction<{ id: string }>) => {
+      if (state.lobby) {
+        state.lobby.send(Transfer.REMOVE_MESSAGE, action.payload)
+      }
+      if (state.preparation) {
+        state.preparation.send(Transfer.REMOVE_MESSAGE, action.payload)
+      }
+    },
     searchName: (state, action: PayloadAction<string>) => {
       state.lobby?.send(Transfer.SEARCH, { name: action.payload })
     },
@@ -226,9 +234,6 @@ export const networkSlice = createSlice({
     },
     setTitle: (state, action: PayloadAction<string>) => {
       state.lobby?.send(Transfer.SET_TITLE, action.payload)
-    },
-    removeMessage: (state, action: PayloadAction<{ id: string }>) => {
-      state.lobby?.send(Transfer.REMOVE_MESSAGE, action.payload)
     },
     giveBooster: (
       state,

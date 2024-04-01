@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { GameUser, IGameUser } from "../../../models/colyseus-models/game-user"
+import Message from "../../../models/colyseus-models/message"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import { IChatV2 } from "../../../types"
 import { DungeonPMDO } from "../../../types/enum/Dungeon"
@@ -43,8 +44,13 @@ export const preparationSlice = createSlice({
       const u: GameUser = JSON.parse(JSON.stringify(action.payload))
       state.user = u
     },
-    pushMessage: (state, action: PayloadAction<IChatV2>) => {
+    pushMessage: (state, action: PayloadAction<Message>) => {
       state.messages.push(structuredClone(action.payload))
+    },
+    removeMessage: (state, action: PayloadAction<Message>) => {
+      state.messages = state.messages.filter(
+        (m) => m.payload !== action.payload.payload
+      )
     },
     addUser: (state, action: PayloadAction<IGameUser>) => {
       const u: IGameUser = JSON.parse(JSON.stringify(action.payload))
@@ -100,6 +106,7 @@ export const {
   setName,
   setBotsList,
   pushMessage,
+  removeMessage,
   addUser,
   changeUser,
   removeUser,
