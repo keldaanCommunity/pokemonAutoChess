@@ -21,4 +21,6 @@
 
 # Bugfix
 
+- Fix Meteor Mash ability targeting
+
 # Misc
