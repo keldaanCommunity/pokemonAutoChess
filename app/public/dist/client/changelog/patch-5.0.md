@@ -30,3 +30,5 @@
 - Fix Meteor Mash ability targeting
 
 # Misc
+
+- New title: Stargazer - Get Solgaleo or Lunala

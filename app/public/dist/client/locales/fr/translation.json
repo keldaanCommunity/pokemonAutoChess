@@ -2060,7 +2060,8 @@
     "VANQUISHER": "Vainqueur",
     "OUTSIDER": "Outsider",
     "WILD": "Sauvage",
-    "GLUTTON": "Goinfre"
+    "GLUTTON": "Goinfre",
+    "STARGAZER": "Astronome"
   },
   "title_description": {
     "NOVICE": "Jouez votre première partie",
@@ -2124,7 +2125,8 @@
     "CHOSEN_ONE": "Niveau max de synergie Lumière atteint lors d'une partie",
     "VANQUISHER": "Remporter un match classé",
     "OUTSIDER": "Remporter un match classé à 8 joueurs en étant le joueur au plus bas ELO",
-    "GLUTTON": "Monter un Ronflex à plus de 750 PV de base"
+    "GLUTTON": "Monter un Ronflex à plus de 750 PV de base",
+    "STARGAZER": "Obtenez Solgaleo ou Lunala"
   },
   "weather": {
     "NEUTRAL": "Temps calme",

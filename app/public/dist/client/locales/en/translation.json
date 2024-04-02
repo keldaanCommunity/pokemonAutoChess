@@ -2081,7 +2081,8 @@
     "VANQUISHER": "Vanquisher",
     "OUTSIDER": "Outsider",
     "WILD": "Wild",
-    "GLUTTON": "Glutton"
+    "GLUTTON": "Glutton",
+    "STARGAZER": "Stargazer"
   },
   "title_description": {
     "NOVICE": "Play your first game",
@@ -2145,7 +2146,8 @@
     "CHOSEN_ONE": "Max Synergy With Light type in a game",
     "VANQUISHER": "Win a Ranked match",
     "OUTSIDER": "Win a Ranked match with 8 players while having the lowest ELO of all",
-    "GLUTTON": "Get a Snorlax with more than 750 base HP"
+    "GLUTTON": "Get a Snorlax with more than 750 base HP",
+    "STARGAZER": "Get Solgaleo or Lunala"
   },
   "weather": {
     "NEUTRAL": "Calm weather",
