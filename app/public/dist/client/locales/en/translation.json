@@ -315,7 +315,8 @@
     "EXTREME_SPEED": "Extreme Speed",
     "ZAP_CANNON": "Zap Cannon",
     "PSYCHO_BOOST": "Psycho Boost",
-    "ICE_HAMMER": "Ice Hammer"
+    "ICE_HAMMER": "Ice Hammer",
+    "POLLEN_PUFF": "Pollen Puff"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1063,7 +1064,9 @@
     "MORGREM": "Morgrem",
     "GRIMMSNARL": "Grimmsnarl",
     "CRABRAWLER": "Crabrawler",
-    "CRABOMINABLE": "Crabominable"
+    "CRABOMINABLE": "Crabominable",
+    "CUTIEFLY": "Cutiefly",
+    "RIBOMBEE": "Ribombee"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1364,7 +1367,8 @@
     "EXTREME_SPEED": "Dash towards the furthest enemy, inflicting [80,SP] PHYSICAL along the way",
     "ZAP_CANNON": "The caster fires an electric blast like a cannon to inflict [25,50,100,SP] SPECIAL and cause PARALYSIS and ARMOR_REDUCTION for [1,2,4] s",
     "PSYCHO_BOOST": "Cut a slash horizontally around the target, dealing [140,SP] SPECIAL to all ennemies hit. Reduce the caster AP by 20 for each Pokémon hit",
-    "ICE_HAMMER": "Deals [50,100] SPECIAL to the target, causing it to FREEZE for 3s. PARALYSIS the caster for 3s."
+    "ICE_HAMMER": "Deals [50,100] SPECIAL to the target, causing it to FREEZE for 3s. PARALYSIS the caster for 3s",
+    "POLLEN_PUFF": "Give the lowest health ally a pollen puff that restores [20,40,80] HP"
   },
   "effect": {
     "INGRAIN": "Ingrain",
