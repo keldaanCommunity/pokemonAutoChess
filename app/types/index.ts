@@ -657,7 +657,8 @@ export enum Title {
   CHOSEN_ONE = "CHOSEN_ONE",
   VANQUISHER = "VANQUISHER",
   OUTSIDER = "OUTSIDER",
-  GLUTTON = "GLUTTON"
+  GLUTTON = "GLUTTON",
+  STARGAZER = "STARGAZER"
 }
 
 export interface IBoardEvent {

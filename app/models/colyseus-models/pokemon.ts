@@ -12482,6 +12482,9 @@ export class Solgaleo extends Pokemon {
   range = 1
   skill = Ability.SUNSTEEL_STRIKE
   attackSprite = AttackSprite.STEEL_MELEE
+  onAcquired(player: Player) {
+    player.titles.add(Title.STARGAZER)
+  }
 }
 
 export class Lunala extends Pokemon {
@@ -12500,6 +12503,9 @@ export class Lunala extends Pokemon {
   range = 4
   skill = Ability.MOONGEIST_BEAM
   attackSprite = AttackSprite.STEEL_MELEE
+  onAcquired(player: Player) {
+    player.titles.add(Title.STARGAZER)
+  }
 }
 
 export class Magearna extends Pokemon {
