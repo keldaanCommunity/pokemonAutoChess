@@ -638,6 +638,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     specialDamage: number
     trueDamage: number
   }) {
+    if (this.passive === Passive.BERRY_EATER) {
+      for (const item of target.items.values()) {
+        Berries.includes(item) && this.eatBerry(item, target)
+      }
+    }
+
     if (this.name === Pkm.MORPEKO) {
       target.status.triggerParalysis(2000, this)
     }
@@ -1319,7 +1325,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     // does not trigger postEffects (iron defense, normal shield, rune protect, focus band, delta orb, flame orb...)
   }
 
-  eatBerry(berry: Item) {
+  eatBerry(berry: Item, stealedFrom?: PokemonEntity) {
     switch (berry) {
       case Item.AGUAV_BERRY:
         this.handleHeal(min(20)(this.hp - this.life), this, 0)
@@ -1416,8 +1422,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         break
     }
 
-    this.items.delete(berry)
-    this.refToBoardPokemon.items.delete(berry)
+    if (stealedFrom) {
+      stealedFrom.items.delete(berry)
+      stealedFrom.refToBoardPokemon.items.delete(berry)
+    } else {
+      this.items.delete(berry)
+      this.refToBoardPokemon.items.delete(berry)
+    }
+
     if (this.passive === Passive.GLUTTON) {
       this.refToBoardPokemon.hp += 20
       if (this.refToBoardPokemon.hp > 750) {

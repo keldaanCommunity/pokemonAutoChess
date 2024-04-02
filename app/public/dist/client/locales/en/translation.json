@@ -314,7 +314,8 @@
     "SHEER_COLD": "Sheer Cold",
     "EXTREME_SPEED": "Extreme Speed",
     "ZAP_CANNON": "Zap Cannon",
-    "PSYCHO_BOOST": "Psycho Boost"
+    "PSYCHO_BOOST": "Psycho Boost",
+    "ICE_HAMMER": "Ice Hammer"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1060,7 +1061,9 @@
     "MAGEARNA": "Magearna",
     "IMPIDIMP": "Impidimp",
     "MORGREM": "Morgrem",
-    "GRIMMSNARL": "Grimmsnarl"
+    "GRIMMSNARL": "Grimmsnarl",
+    "CRABRAWLER": "Crabrawler",
+    "CRABOMINABLE": "Crabominable"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1360,7 +1363,8 @@
     "SHEER_COLD": "A blast of absolute-zero cold that has [30,SP]% chance to execute the target. The more HP the user has relative to the target, the greater the chance. Always execute FREEZE enemies, but never execute ICE targets.",
     "EXTREME_SPEED": "Dash towards the furthest enemy, inflicting [80,SP] PHYSICAL along the way",
     "ZAP_CANNON": "The caster fires an electric blast like a cannon to inflict [25,50,100,SP] SPECIAL and cause PARALYSIS and ARMOR_REDUCTION for [1,2,4] s",
-    "PSYCHO_BOOST": "Cut a slash horizontally around the target, dealing [140,SP] SPECIAL to all ennemies hit. Reduce the caster AP by 20 for each Pokémon hit."
+    "PSYCHO_BOOST": "Cut a slash horizontally around the target, dealing [140,SP] SPECIAL to all ennemies hit. Reduce the caster AP by 20 for each Pokémon hit",
+    "ICE_HAMMER": "Deals [50,100] SPECIAL to the target, causing it to FREEZE for 3s. PARALYSIS the caster for 3s."
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1871,7 +1875,8 @@
     "COSMOG": "$t(pkm.COSMOG) is feeding with the energy of the stars. Gain 10 permanent max HP every time you evolve a unit. Evolve after 10 times.",
     "COSMOEM": "$t(pkm.COSMOEM) is feeding with the energy of the stars. Gain 10 permanent max HP every time you evolve a unit. Evolve after 10 times into $t(pkm.SOLGALEO) if in the light spot, or $t(pkm.LUNALA) instead.",
     "SOUL_HEART": "Every time the caster gets a KO, gain 10 AP and 10 PP",
-    "ALIEN_DNA": "$t(pkm.DEOXYS) reacts to METEORITE by changing shape"
+    "ALIEN_DNA": "$t(pkm.DEOXYS) reacts to METEORITE by changing shape",
+    "BERRY_EATER": "When the Pokémon attacks a target, he steals all its berries and eats them"
   },
   "stat": {
     "ATK": "Attack",
