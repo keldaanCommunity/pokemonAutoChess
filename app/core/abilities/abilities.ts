@@ -7802,6 +7802,29 @@ export class ZapCannonStrategy extends AbilityStrategy {
   }
 }
 
+export class IceHammerStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 2 ? 100 :  50
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
+    target.status.triggerFreeze(3000, target)
+    pokemon.status.triggerParalysis(3000, pokemon)
+  }
+}
+
 export class ExtremeSpeedStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -8178,5 +8201,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SHEER_COLD]: new SheerColdStrategy(),
   [Ability.PSYCHO_BOOST]: new PsychoBoostStrategy(),
   [Ability.ZAP_CANNON]: new ZapCannonStrategy(),
-  [Ability.EXTREME_SPEED]: new ExtremeSpeedStrategy()
+  [Ability.EXTREME_SPEED]: new ExtremeSpeedStrategy(),
+  [Ability.ICE_HAMMER]: new IceHammerStrategy()
 }

@@ -863,6 +863,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
+    case Ability.ICE_HAMMER:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
     case Ability.MANTIS_BLADES:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break

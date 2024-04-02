@@ -332,6 +332,39 @@ export class Lucario extends Pokemon {
   additional = true
 }
 
+export class Crabrawler extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FIGHTING])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.CRABOMINABLE
+  hp = 110
+  atk = 11
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.ICE_HAMMER
+  attackSprite = AttackSprite.FIGHTING_MELEE
+  additional = true
+  passive = Passive.BERRY_EATER
+}
+
+export class Crabominable extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FIGHTING])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 220
+  atk = 22
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.ICE_HAMMER
+  attackSprite = AttackSprite.FIGHTING_MELEE
+  additional = true
+  passive = Passive.BERRY_EATER
+}
+
 export class Swablu extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.SOUND])
   rarity = Rarity.ULTRA
@@ -13239,5 +13272,7 @@ export const PokemonClasses: Record<
   [Pkm.DEOXYS]: Deoxys,
   [Pkm.DEOXYS_DEFENSE]: DeoxysDefense,
   [Pkm.DEOXYS_ATTACK]: DeoxysAttack,
-  [Pkm.DEOXYS_SPEED]: DeoxysSpeed
+  [Pkm.DEOXYS_SPEED]: DeoxysSpeed,
+  [Pkm.CRABRAWLER]: Crabrawler,
+  [Pkm.CRABOMINABLE]: Crabominable
 }

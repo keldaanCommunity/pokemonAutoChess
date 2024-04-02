@@ -743,7 +743,9 @@ export enum Pkm {
   MAGEARNA = "MAGEARNA",
   IMPIDIMP = "IMPIDIMP",
   MORGREM = "MORGREM",
-  GRIMMSNARL = "GRIMMSNARL"
+  GRIMMSNARL = "GRIMMSNARL",
+  CRABRAWLER = "CRABRAWLER",
+  CRABOMINABLE = "CRABOMINABLE"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1489,7 +1491,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.DEOXYS]: "0386",
   [Pkm.DEOXYS_DEFENSE]: "0386-0002",
   [Pkm.DEOXYS_ATTACK]: "0386-0001",
-  [Pkm.DEOXYS_SPEED]: "0386-0003"
+  [Pkm.DEOXYS_SPEED]: "0386-0003",
+  [Pkm.CRABRAWLER]: "0739",
+  [Pkm.CRABOMINABLE]: "0740"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2235,7 +2239,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.DEOXYS]: Pkm.DEOXYS,
   [Pkm.DEOXYS_DEFENSE]: Pkm.DEOXYS,
   [Pkm.DEOXYS_ATTACK]: Pkm.DEOXYS,
-  [Pkm.DEOXYS_SPEED]: Pkm.DEOXYS
+  [Pkm.DEOXYS_SPEED]: Pkm.DEOXYS,
+  [Pkm.CRABRAWLER]: Pkm.CRABRAWLER,
+  [Pkm.CRABOMINABLE]: Pkm.CRABRAWLER
 }
 
 export enum PkmDuo {
@@ -6092,6 +6098,16 @@ export const AnimationConfig: {
   [Pkm.DEOXYS_SPEED]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge
+  },
+  [Pkm.CRABRAWLER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.CRABOMINABLE]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Charge
   }
 }

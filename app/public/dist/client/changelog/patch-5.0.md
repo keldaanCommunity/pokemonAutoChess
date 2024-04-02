@@ -1,6 +1,8 @@
 # New Pokemons:
 
 - New Deoxys forms: Deoxys, Deoxys Attack, Deoxys Defense and Deoxys Speed
+- Crabrawler
+- Crabominable
 
 # Changes to Pokemon & Abilities
 
