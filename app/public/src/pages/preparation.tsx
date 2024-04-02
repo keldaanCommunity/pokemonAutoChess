@@ -18,6 +18,7 @@ import {
   changeUser,
   leavePreparation,
   pushMessage,
+  removeMessage,
   removeUser,
   setBotsList,
   setGameStarted,
@@ -169,8 +170,12 @@ export default function Preparation() {
           playSound(SOUNDS.LEAVE_ROOM)
         }
       })
-      r.onMessage(Transfer.MESSAGES, (message) => {
-        dispatch(pushMessage(message))
+
+      r.state.messages.onAdd((m) => {
+        dispatch(pushMessage(m))
+      })
+      r.state.messages.onRemove((m) => {
+        dispatch(removeMessage(m))
       })
 
       r.onMessage(Transfer.KICK, async () => {
