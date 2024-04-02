@@ -13,3 +13,11 @@
 .tournament-form label {
   display: block;
 }
+
+.tournament-item.nes-container {
+  background-color: #54596b;
+}
+
+.tournament-item .remove-btn {
+  float: right;
+}

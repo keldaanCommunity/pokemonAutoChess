@@ -220,7 +220,7 @@ export const lobbySlice = createSlice({
     },
     removeTournament: (state, action: PayloadAction<ITournament>) => {
       state.tournaments = state.tournaments.filter(
-        (tournament) => tournament.name !== action.payload.name
+        (tournament) => tournament.id !== action.payload.id
       )
     }
   }

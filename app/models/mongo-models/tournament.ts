@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose"
 
 export interface ITournament {
+  id: string
   name: string
   startDate: string
 }
@@ -14,4 +15,6 @@ const tournamentSchema = new Schema({
   }
 })
 
-export default model<ITournament>("Tournament", tournamentSchema)
+export const Tournament = model<ITournament>("Tournament", tournamentSchema)
+
+export default Tournament
