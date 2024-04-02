@@ -7811,7 +7811,7 @@ export class IceHammerStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 2 ? 100 :  50
+    const damage = pokemon.stars === 2 ? 100 : 50
     target.handleSpecialDamage(
       damage,
       board,
@@ -7897,6 +7897,39 @@ export class PsychoBoostStrategy extends AbilityStrategy {
         }
       }
     )
+  }
+}
+
+export class PollenPuffStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const lowestHealthAlly = (
+      board.cells.filter(
+        (cell) => cell && cell.team === pokemon.team
+      ) as PokemonEntity[]
+    ).sort((a, b) => a.life  - b.life)[0]
+
+    if (lowestHealthAlly) {
+      lowestHealthAlly.handleHeal(
+        pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30,
+        pokemon,
+        1
+      )
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: Ability.POLLEN_PUFF,
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: lowestHealthAlly.positionX,
+        targetY: lowestHealthAlly.positionY
+      })
+    }
   }
 }
 
@@ -8202,5 +8235,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PSYCHO_BOOST]: new PsychoBoostStrategy(),
   [Ability.ZAP_CANNON]: new ZapCannonStrategy(),
   [Ability.EXTREME_SPEED]: new ExtremeSpeedStrategy(),
-  [Ability.ICE_HAMMER]: new IceHammerStrategy()
+  [Ability.ICE_HAMMER]: new IceHammerStrategy(),
+  [Ability.POLLEN_PUFF]: new PollenPuffStrategy()
 }

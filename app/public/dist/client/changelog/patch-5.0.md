@@ -3,6 +3,8 @@
 - New Deoxys forms: Deoxys, Deoxys Attack, Deoxys Defense and Deoxys Speed
 - Crabrawler
 - Crabominable
+- Cutiefly
+- Ribombee
 
 # Changes to Pokemon & Abilities
 

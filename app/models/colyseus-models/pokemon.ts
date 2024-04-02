@@ -373,6 +373,37 @@ export class Crabominable extends Pokemon {
   passive = Passive.BERRY_EATER
 }
 
+export class Cutiefly extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FAIRY, Synergy.FLORA])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.RIBOMBEE
+  hp = 75
+  atk = 6
+  def = 1
+  speDef = 1
+  maxPP = 40
+  range = 2
+  skill = Ability.POLLEN_PUFF
+  attackSprite = AttackSprite.FAIRY_RANGE
+  additional = true
+}
+
+export class Ribombee extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FAIRY, Synergy.FLORA])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 170
+  atk = 12
+  def = 2
+  speDef = 2
+  maxPP = 40
+  range = 2
+  skill = Ability.POLLEN_PUFF
+  attackSprite = AttackSprite.FAIRY_RANGE
+  additional = true
+}
+
 export class Swablu extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.SOUND])
   rarity = Rarity.ULTRA
@@ -13282,5 +13313,7 @@ export const PokemonClasses: Record<
   [Pkm.DEOXYS_ATTACK]: DeoxysAttack,
   [Pkm.DEOXYS_SPEED]: DeoxysSpeed,
   [Pkm.CRABRAWLER]: Crabrawler,
-  [Pkm.CRABOMINABLE]: Crabominable
+  [Pkm.CRABOMINABLE]: Crabominable,
+  [Pkm.CUTIEFLY]: Cutiefly,
+  [Pkm.RIBOMBEE]: Ribombee
 }

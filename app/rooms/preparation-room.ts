@@ -1,7 +1,6 @@
 import { Dispatcher } from "@colyseus/command"
 import { Client, Room, updateLobby } from "colyseus"
 import admin from "firebase-admin"
-import { nanoid } from "nanoid"
 import { components } from "../api-v1/openapi"
 import { GameUser } from "../models/colyseus-models/game-user"
 import BannedUser from "../models/mongo-models/banned-user"
@@ -12,7 +11,6 @@ import { EloRank, MAX_PLAYERS_PER_GAME } from "../types/Config"
 import { DungeonPMDO } from "../types/enum/Dungeon"
 import { BotDifficulty, GameMode } from "../types/enum/Game"
 import { logger } from "../utils/logger"
-import { cleanProfanity } from "../utils/profanity-filter"
 import { values } from "../utils/schemas"
 import {
   OnAddBotCommand,
@@ -22,7 +20,6 @@ import {
   OnKickPlayerCommand,
   OnLeaveCommand,
   OnListBotsCommand,
-  OnMessageCommand,
   OnNewMessageCommand,
   OnRemoveBotCommand,
   OnRoomNameCommand,
