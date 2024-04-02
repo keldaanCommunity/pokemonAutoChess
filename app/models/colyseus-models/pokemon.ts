@@ -333,7 +333,11 @@ export class Lucario extends Pokemon {
 }
 
 export class Crabrawler extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FIGHTING])
+  types = new SetSchema<Synergy>([
+    Synergy.ICE,
+    Synergy.FIGHTING,
+    Synergy.MONSTER
+  ])
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.CRABOMINABLE
@@ -350,7 +354,11 @@ export class Crabrawler extends Pokemon {
 }
 
 export class Crabominable extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FIGHTING])
+  types = new SetSchema<Synergy>([
+    Synergy.ICE,
+    Synergy.FIGHTING,
+    Synergy.MONSTER
+  ])
   rarity = Rarity.RARE
   stars = 2
   hp = 220
