@@ -5677,7 +5677,7 @@ export class Mewtwo extends Pokemon {
   speDef = 5
   maxPP = 110
   range = 3
-  skill = Ability.DYNAMAX_CANNON
+  skill = Ability.PSYSTRIKE
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 

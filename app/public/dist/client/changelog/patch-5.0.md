@@ -11,7 +11,8 @@
 - Unown B (BURN): PP ~~30~~ 60
 - Unown F (FISH): fish ~~2~~ 3 pokemons
 - Unown S (STOP): freeze duration ~~4~~ 2 seconds
-- New ability for Magnemite : Zap Cannon (The caster fires an electric blast like a cannon to inflict [25,50,100,SP] SPECIAL and cause PARALYSIS and ARMOR_REDUCTION for [1,2,4] s)
+- New ability for Magnemite: Zap Cannon
+- New ability for Mewtwo: Psystrike
 
 # Changes to Synergies
 

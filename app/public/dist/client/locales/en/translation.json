@@ -316,7 +316,8 @@
     "ZAP_CANNON": "Zap Cannon",
     "PSYCHO_BOOST": "Psycho Boost",
     "ICE_HAMMER": "Ice Hammer",
-    "POLLEN_PUFF": "Pollen Puff"
+    "POLLEN_PUFF": "Pollen Puff",
+    "PSYSTRIKE": "Psystrike"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1368,7 +1369,7 @@
     "ZAP_CANNON": "The caster fires an electric blast like a cannon to inflict [25,50,100,SP] SPECIAL and cause PARALYSIS and ARMOR_REDUCTION for [1,2,4] s",
     "PSYCHO_BOOST": "Cut a slash horizontally around the target, dealing [140,SP] SPECIAL to all ennemies hit. Reduce the caster AP by 20 for each Pokémon hit",
     "ICE_HAMMER": "Deals [50,100] SPECIAL to the target, causing it to FREEZE for 3s. PARALYSIS the caster for 3s",
-    "POLLEN_PUFF": "Give the lowest health ally a pollen puff that restores [20,40,80] HP"
+    "PSYSTRIKE": "The caster materializes a strange psychic wave towards the furthest enemy, inflicting [100,SP] PHYSICAL damage and teleporting everything in its path."
   },
   "effect": {
     "INGRAIN": "Ingrain",
