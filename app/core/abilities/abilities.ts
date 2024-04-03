@@ -7913,7 +7913,7 @@ export class PollenPuffStrategy extends AbilityStrategy {
       board.cells.filter(
         (cell) => cell && cell.team === pokemon.team
       ) as PokemonEntity[]
-    ).sort((a, b) => a.life  - b.life)[0]
+    ).sort((a, b) => a.life - b.life)[0]
 
     if (lowestHealthAlly) {
       lowestHealthAlly.handleHeal(
@@ -7928,6 +7928,57 @@ export class PollenPuffStrategy extends AbilityStrategy {
         positionY: pokemon.positionY,
         targetX: lowestHealthAlly.positionX,
         targetY: lowestHealthAlly.positionY
+      })
+    }
+  }
+}
+
+export class PsystrikeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const furthestTarget = state.getFarthestTarget(pokemon, board)
+    if (furthestTarget) {
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: Ability.PSYSTRIKE,
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: furthestTarget.positionX,
+        targetY: furthestTarget.positionY
+      })
+
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        furthestTarget.positionX,
+        furthestTarget.positionY
+      )
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team != pokemon.team) {
+          cell.value.handleSpecialDamage(
+            100,
+            board,
+            AttackType.PHYSICAL,
+            pokemon,
+            crit
+          )
+
+          const teleportationCell = board.getTeleportationCell(
+            cell.value.positionX,
+            cell.value.positionY
+          )
+          if (teleportationCell) {
+            cell.value.moveTo(teleportationCell.x, teleportationCell.y, board)
+          } else {
+            logger.error("unable to teleport pokemon", cell.value)
+          }
+        }
       })
     }
   }
@@ -8236,5 +8287,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ZAP_CANNON]: new ZapCannonStrategy(),
   [Ability.EXTREME_SPEED]: new ExtremeSpeedStrategy(),
   [Ability.ICE_HAMMER]: new IceHammerStrategy(),
-  [Ability.POLLEN_PUFF]: new PollenPuffStrategy()
+  [Ability.POLLEN_PUFF]: new PollenPuffStrategy(),
+  [Ability.PSYSTRIKE]: new PsystrikeStrategy()
 }
