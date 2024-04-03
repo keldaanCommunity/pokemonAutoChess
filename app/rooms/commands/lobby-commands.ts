@@ -10,9 +10,7 @@ import { TournamentPlayerSchema } from "../../models/colyseus-models/tournament"
 import BannedUser from "../../models/mongo-models/banned-user"
 import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
 import DetailledStatistic from "../../models/mongo-models/detailled-statistic-v2"
-import Tournament, {
-  ITournamentPlayer
-} from "../../models/mongo-models/tournament"
+import { Tournament } from "../../models/mongo-models/tournament"
 import UserMetadata, {
   IPokemonConfig
 } from "../../models/mongo-models/user-metadata"
@@ -41,6 +39,7 @@ import {
 import { GameMode, Rarity } from "../../types/enum/Game"
 import { Language } from "../../types/enum/Language"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
+import { ITournamentPlayer } from "../../types/interfaces/Tournament"
 import { sum } from "../../utils/array"
 import { logger } from "../../utils/logger"
 import { cleanProfanity } from "../../utils/profanity-filter"

@@ -22,3 +22,30 @@
   max-height: 320px;
   overflow-y: auto;
 }
+
+.tournament-item .player-box {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tournament-item .player-box span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tournament-item .player-ranks {
+  display: block;
+}
+
+.tournament-item p {
+  flex: 1;
+}
+
+.tournament-item .player-rank {
+  line-height: 40px;
+  min-width: 2ch;
+  text-align: center;
+}

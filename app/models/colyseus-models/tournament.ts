@@ -1,5 +1,9 @@
 import { Schema, MapSchema, type } from "@colyseus/schema"
-import { ITournament, ITournamentPlayer } from "../mongo-models/tournament"
+import {
+  ITournament,
+  ITournamentBracket,
+  ITournamentPlayer
+} from "../../types/interfaces/Tournament"
 
 export class TournamentPlayerSchema
   extends Schema
@@ -30,20 +34,35 @@ export class TournamentPlayerSchema
   }
 }
 
+export class TournamentBracketSchema
+  extends Schema
+  implements ITournamentBracket
+{
+  @type("string") name: string
+  @type({ array: "string" }) playersId: string[]
+
+  constructor(name: string, playersId: string[]) {
+    super()
+    this.name = name
+    this.playersId = playersId
+  }
+}
+
 export class TournamentSchema extends Schema implements ITournament {
   @type("string") id: string
   @type("string") name: string
   @type("string") startDate: string
   @type({ map: TournamentPlayerSchema }) players =
     new MapSchema<TournamentPlayerSchema>()
-  @type({ array: "string" }) currentMatches: string[]
+  @type({ map: TournamentBracketSchema }) brackets =
+    new MapSchema<TournamentBracketSchema>()
 
   constructor(
     id: string,
     name: string,
     startDate: string,
     players: Map<string, ITournamentPlayer>,
-    currentMatches: string[]
+    brackets: Map<string, ITournamentBracket>
   ) {
     super()
     this.id = id
@@ -66,6 +85,13 @@ export class TournamentSchema extends Schema implements ITournament {
       })
     }
 
-    this.currentMatches = currentMatches
+    if (brackets && brackets.size) {
+      brackets.forEach((b, gameId) => {
+        this.brackets.set(
+          gameId,
+          new TournamentBracketSchema(b.name, b.playersId)
+        )
+      })
+    }
   }
 }

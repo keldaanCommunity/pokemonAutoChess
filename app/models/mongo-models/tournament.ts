@@ -1,13 +1,5 @@
 import { Schema, model } from "mongoose"
-
-export interface ITournamentPlayer {
-  name: string
-  avatar: string
-  elo: number
-  score: number
-  ranks: number[]
-  eliminated: boolean
-}
+import { ITournament } from "../../types/interfaces/Tournament"
 
 const tournamentPlayerSchema = new Schema({
   name: String,
@@ -18,20 +10,16 @@ const tournamentPlayerSchema = new Schema({
   eliminated: Boolean
 })
 
-export interface ITournament {
-  id: string
-  name: string
-  startDate: string
-  players: Map<string, ITournamentPlayer>
-  currentMatches: string[]
-}
-
 const tournamentSchema = new Schema({
   name: String,
   startDate: String,
   players: {
     type: Map,
     of: tournamentPlayerSchema
+  },
+  brackets: {
+    type: Map,
+    of: [String]
   }
 })
 
