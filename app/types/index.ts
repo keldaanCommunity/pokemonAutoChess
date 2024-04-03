@@ -43,8 +43,8 @@ export const CDN_PORTRAIT_URL =
 export const CDN_URL =
   "https://raw.githubusercontent.com/keldaanCommunity/SpriteCollab/master"
 
-export const USERNAME_REGEXP =
-  /^(?=.{4,20}$)(?:[\u0021-\uFFFF]+(?:(?:\.|-|_)[\u0021-\uFFFF])*)+$/
+// eslint-disable-next-line no-useless-escape
+export const USERNAME_REGEXP = /^[a-zA-Z0-9\._\-]{2,20}[^.-]$/
 
 export type NonFunctionPropNames<T> = {
   // eslint-disable-next-line @typescript-eslint/ban-types

@@ -380,8 +380,8 @@ export class OpenBoosterCommand extends Command<
 
 function pickRandomPokemonBooster(guarantedUnique: boolean): PkmWithConfig {
   let pkm = Pkm.MAGIKARP,
-    shiny = chance(0.03),
     emotion = Emotion.NORMAL
+  const shiny = chance(0.03)
   const rarities = Object.keys(Rarity) as Rarity[]
   const seed = Math.random() * sum(Object.values(BoosterRarityProbability))
   let threshold = 0
