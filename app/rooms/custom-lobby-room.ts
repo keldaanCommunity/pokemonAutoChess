@@ -571,7 +571,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
             new TournamentSchema(
               tournament.id,
               tournament.name,
-              tournament.startDate
+              tournament.startDate,
+              tournament.registrations
             )
           )
         })

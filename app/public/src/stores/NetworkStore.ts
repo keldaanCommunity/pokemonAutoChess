@@ -230,6 +230,15 @@ export const networkSlice = createSlice({
     removeMessage: (state, action: PayloadAction<{ id: string }>) => {
       state.lobby?.send(Transfer.REMOVE_MESSAGE, action.payload)
     },
+    removeTournament: (state, action: PayloadAction<{ id: string }>) => {
+      state.lobby?.send(Transfer.REMOVE_TOURNAMENT, action.payload)
+    },
+    participateInTournament: (
+      state,
+      action: PayloadAction<{ id: string; participate: boolean }>
+    ) => {
+      state.lobby?.send(Transfer.PARTICIPATE_TOURNAMENT, action.payload)
+    },
     giveBooster: (
       state,
       action: PayloadAction<{ uid: string; numberOfBoosters: number }>
@@ -294,6 +303,8 @@ export const {
   giveTitle,
   giveRole,
   removeMessage,
+  removeTournament,
+  participateInTournament,
   giveBooster,
   toggleAnimation,
   openBooster,

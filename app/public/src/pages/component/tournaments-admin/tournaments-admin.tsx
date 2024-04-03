@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
-import { TournamentItem } from "./tournament-item"
-import { useAppSelector } from "../../../hooks"
-import { createTournament } from "../../../stores/NetworkStore"
+import { useAppDispatch, useAppSelector } from "../../../hooks"
+import {
+  createTournament,
+  removeTournament
+} from "../../../stores/NetworkStore"
+import { ITournament } from "../../../../../models/mongo-models/tournament"
+import { Role } from "../../../../../types"
+import { formatDate } from "../../utils/date"
 import "./tournament-admin.css"
 
 export function TournamentsAdmin() {
@@ -74,6 +79,34 @@ export function TournamentsAdmin() {
           </button>
         </form>
       </div>
+    </div>
+  )
+}
+
+export function TournamentItem(props: { tournament: ITournament }) {
+  const dispatch = useAppDispatch()
+  const { t } = useTranslation()
+  const user = useAppSelector((state) => state.lobby.user)
+  const role = user?.role
+
+  return (
+    <div className="nes-container tournament-item">
+      {role && (role === Role.MODERATOR || role === Role.ADMIN) && (
+        <button
+          className="remove-btn bubbly red"
+          onClick={() => {
+            if (
+              confirm("Cancel tournament ? All registrations will be deleted.")
+            ) {
+              dispatch(removeTournament({ id: props.tournament.id! }))
+            }
+          }}
+        >
+          <p style={{ fontSize: "0.5em", margin: "0px" }}>X</p>
+        </button>
+      )}
+      <p className="name">{props.tournament.name}</p>
+      <p className="date">{formatDate(new Date(props.tournament.startDate))}</p>
     </div>
   )
 }

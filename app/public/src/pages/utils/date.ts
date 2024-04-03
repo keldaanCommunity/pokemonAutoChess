@@ -1,7 +1,7 @@
 import i18n from "../../i18n"
 
-export function formatDate(n: number) {
-  const date = new Date(n)
+export function formatDate(date: number | Date) {
+  if (typeof date === "number") date = new Date(date)
   try {
     return new Intl.DateTimeFormat(i18n.language, {
       dateStyle: "short",

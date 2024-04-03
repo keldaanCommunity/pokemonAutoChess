@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
+import { ITournament } from "../../../../../models/mongo-models/tournament"
 import GameState from "../../../../../rooms/states/game-state"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import {
@@ -24,6 +25,7 @@ import GameRoomItem from "./game-room-item"
 import RoomItem from "./room-item"
 import "./room-menu.css"
 import { SpecialGameCountdown } from "./special-game-countdown"
+import TournamentItem from "./tournament-item"
 
 export default function RoomMenu(props: {
   toPreparation: boolean
@@ -36,6 +38,9 @@ export default function RoomMenu(props: {
   )
   const gameRooms: RoomAvailable[] = useAppSelector(
     (state) => state.lobby.gameRooms
+  )
+  const tournaments: ITournament[] = useAppSelector(
+    (state) => state.lobby.tournaments
   )
   const client: Client = useAppSelector((state) => state.network.client)
   const lobby: Room<ICustomLobbyState> | undefined = useAppSelector(
@@ -167,6 +172,7 @@ export default function RoomMenu(props: {
         <Tab>
           {t("in_game")} ({gameRooms.length})
         </Tab>
+        {tournaments.length > 0 && <Tab>{t("tournament")}</Tab>}
       </TabList>
 
       <TabPanel>
@@ -205,6 +211,15 @@ export default function RoomMenu(props: {
                 room={r}
                 onJoin={(spectate) => joinGame(r, spectate)}
               />
+            </li>
+          ))}
+        </ul>
+      </TabPanel>
+      <TabPanel>
+        <ul className="hidden-scrollable">
+          {tournaments.map((t) => (
+            <li key={t.id}>
+              <TournamentItem tournament={t} />
             </li>
           ))}
         </ul>
