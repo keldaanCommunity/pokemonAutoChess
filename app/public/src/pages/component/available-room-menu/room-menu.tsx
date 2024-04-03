@@ -215,15 +215,17 @@ export default function RoomMenu(props: {
           ))}
         </ul>
       </TabPanel>
-      <TabPanel>
-        <ul className="hidden-scrollable">
-          {tournaments.map((t) => (
-            <li key={t.id}>
-              <TournamentItem tournament={t} />
-            </li>
-          ))}
-        </ul>
-      </TabPanel>
+      {tournaments.length > 0 && (
+        <TabPanel>
+          <ul className="hidden-scrollable">
+            {tournaments.map((t) => (
+              <li key={t.id}>
+                <TournamentItem tournament={t} />
+              </li>
+            ))}
+          </ul>
+        </TabPanel>
+      )}
     </Tabs>
   )
 }

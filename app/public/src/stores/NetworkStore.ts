@@ -235,7 +235,7 @@ export const networkSlice = createSlice({
     },
     participateInTournament: (
       state,
-      action: PayloadAction<{ id: string; participate: boolean }>
+      action: PayloadAction<{ tournamentId: string; participate: boolean }>
     ) => {
       state.lobby?.send(Transfer.PARTICIPATE_TOURNAMENT, action.payload)
     },

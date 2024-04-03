@@ -21,8 +21,8 @@ import { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonCollection from "../models/colyseus-models/pokemon-collection"
 import Status from "../models/colyseus-models/status"
 import Synergies from "../models/colyseus-models/synergies"
+import { TournamentSchema } from "../models/colyseus-models/tournament"
 import { Effects } from "../models/effects"
-import { ITournament } from "../models/mongo-models/tournament"
 import GameRoom from "../rooms/game-room"
 import { Ability } from "./enum/Ability"
 import { Effect } from "./enum/Effect"
@@ -284,7 +284,7 @@ export interface ICustomLobbyState extends Schema {
   levelLeaderboard: ILeaderboardInfo[]
   nextSpecialGameDate: string
   nextSpecialGameMode: GameMode | ""
-  tournaments: ArraySchema<ITournament>
+  tournaments: ArraySchema<TournamentSchema>
 }
 
 export interface IGameState extends Schema {

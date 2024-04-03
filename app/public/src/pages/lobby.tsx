@@ -5,6 +5,10 @@ import { useTranslation } from "react-i18next"
 import { Navigate } from "react-router-dom"
 import { Modal } from "react-bootstrap"
 import LobbyUser from "../../../models/colyseus-models/lobby-user"
+import {
+  TournamentPlayerSchema,
+  TournamentSchema
+} from "../../../models/colyseus-models/tournament"
 import PokemonConfig from "../../../models/colyseus-models/pokemon-config"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import {
@@ -21,8 +25,11 @@ import {
   addPokemonConfig,
   addRoom,
   addTournament,
+  addTournamentPlayer,
   addUser,
   changePokemonConfig,
+  changeTournament,
+  changeTournamentPlayer,
   changeUser,
   leaveLobby,
   pushBotLog,
@@ -30,6 +37,7 @@ import {
   removeMessage,
   removeRoom,
   removeTournament,
+  removeTournamentPlayer,
   removeUser,
   setBoosterContent,
   setBotData,
@@ -195,7 +203,59 @@ export async function joinLobbyRoom(
 
           room.state.tournaments.onAdd((tournament) => {
             dispatch(addTournament(tournament))
+            const fields: NonFunctionPropNames<TournamentSchema>[] = [
+              "id",
+              "name",
+              "currentMatches",
+              "startDate"
+            ]
+
+            fields.forEach((field) => {
+              tournament.listen(field, (value) => {
+                dispatch(
+                  changeTournament({
+                    tournamentId: tournament.id,
+                    field: field,
+                    value: value
+                  })
+                )
+              })
+            })
+
+            tournament.players.onAdd((player, userId) => {
+              console.log("onAdd tournament players")
+              dispatch(
+                addTournamentPlayer({
+                  tournamendId: tournament.id,
+                  userId,
+                  player
+                })
+              )
+              const fields: NonFunctionPropNames<TournamentPlayerSchema>[] = [
+                "eliminated"
+              ]
+              fields.forEach((field) => {
+                player.listen(field, (value) => {
+                  dispatch(
+                    changeTournamentPlayer({
+                      tournamentId: tournament.id,
+                      playerId: userId,
+                      field: field,
+                      value: value
+                    })
+                  )
+                })
+              })
+            })
+
+            tournament.players.onRemove((player, userId) => {
+              console.log("onRemove tournament players")
+              dispatch(
+                removeTournamentPlayer({ tournamendId: tournament.id, userId })
+              )
+            })
           })
+
           room.state.tournaments.onRemove((tournament) => {
             dispatch(removeTournament(tournament))
           })

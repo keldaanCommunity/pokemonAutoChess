@@ -16,7 +16,7 @@ import {
   ILeaderboardInfo
 } from "../models/colyseus-models/leaderboard-info"
 import Message from "../models/colyseus-models/message"
-import TournamentSchema from "../models/colyseus-models/tournament"
+import { TournamentSchema } from "../models/colyseus-models/tournament"
 import BannedUser from "../models/mongo-models/banned-user"
 import { BotV2, IBot } from "../models/mongo-models/bot-v2"
 import ChatV2 from "../models/mongo-models/chat-v2"
@@ -58,7 +58,8 @@ import {
   UnbanUserCommand,
   createBotList,
   RemoveTournamentCommand,
-  OnCreateTournamentCommand
+  OnCreateTournamentCommand,
+  ParticipateInTournamentCommand
 } from "./commands/lobby-commands"
 import LobbyState from "./states/lobby-state"
 
@@ -250,6 +251,17 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         this.dispatcher.dispatch(new RemoveTournamentCommand(), {
           client,
           tournamentId: message.id
+        })
+      }
+    )
+
+    this.onMessage(
+      Transfer.PARTICIPATE_TOURNAMENT,
+      (client, message: { tournamentId: string; participate: boolean }) => {
+        this.dispatcher.dispatch(new ParticipateInTournamentCommand(), {
+          client,
+          tournamentId: message.tournamentId,
+          participate: message.participate
         })
       }
     )
@@ -572,7 +584,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
               tournament.id,
               tournament.name,
               tournament.startDate,
-              tournament.registrations
+              tournament.players,
+              tournament.currentMatches
             )
           )
         })

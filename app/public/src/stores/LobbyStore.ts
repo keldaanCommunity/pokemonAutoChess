@@ -9,15 +9,17 @@ import LobbyUser, {
 } from "../../../models/colyseus-models/lobby-user"
 import Message from "../../../models/colyseus-models/message"
 import { IBot, IStep } from "../../../models/mongo-models/bot-v2"
-import { ITournament } from "../../../models/mongo-models/tournament"
+import {
+  ITournament,
+  ITournamentPlayer
+} from "../../../models/mongo-models/tournament"
 import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
 import {
   IChatV2,
   IGameMetadata,
   IPreparationMetadata,
   ISuggestionUser,
-  PkmWithConfig,
-  Transfer
+  PkmWithConfig
 } from "../../../types"
 import { GameMode } from "../../../types/enum/Game"
 import { Language } from "../../../types/enum/Language"
@@ -222,6 +224,65 @@ export const lobbySlice = createSlice({
       state.tournaments = state.tournaments.filter(
         (tournament) => tournament.id !== action.payload.id
       )
+    },
+    changeTournament: (
+      state,
+      action: PayloadAction<{ tournamentId: string; field: string; value: any }>
+    ) => {
+      console.log("changeTournament", action.payload)
+      const tournament = state.tournaments.find(
+        (t) => t.id == action.payload.tournamentId
+      )
+      if (tournament) {
+        tournament[action.payload.field] = action.payload.value
+      }
+    },
+    addTournamentPlayer: (
+      state,
+      action: PayloadAction<{
+        tournamendId: string
+        userId: string
+        player: ITournamentPlayer
+      }>
+    ) => {
+      const tournament = state.tournaments.find(
+        (t) => t.id == action.payload.tournamendId
+      )
+      if (tournament) {
+        tournament.players.set(action.payload.userId, action.payload.player)
+        state.tournaments = [...state.tournaments] // TOFIX: force reactivity through immutability
+      }
+    },
+    removeTournamentPlayer: (
+      state,
+      action: PayloadAction<{ tournamendId: string; userId: string }>
+    ) => {
+      const tournament = state.tournaments.find(
+        (t) => t.id == action.payload.tournamendId
+      )
+      if (tournament) {
+        tournament.players.delete(action.payload.userId)
+        state.tournaments = [...state.tournaments] // TOFIX: force reactivity through immutability
+      }
+    },
+    changeTournamentPlayer: (
+      state,
+      action: PayloadAction<{
+        tournamentId: string
+        playerId: string
+        field: string
+        value: any
+      }>
+    ) => {
+      console.log("changeTournamentPlayer", action.payload)
+      const tournament = state.tournaments.find(
+        (t) => t.id == action.payload.tournamentId
+      )
+      if (tournament && tournament.players.has(action.payload.playerId)) {
+        const player = tournament.players.get(action.payload.playerId)!
+        player[action.payload.field] = action.payload.value
+        state.tournaments = [...state.tournaments] // TOFIX: force reactivity through immutability
+      }
     }
   }
 })
@@ -253,7 +314,11 @@ export const {
   setNextSpecialGameDate,
   setNextSpecialGameMode,
   addTournament,
-  removeTournament
+  removeTournament,
+  changeTournament,
+  addTournamentPlayer,
+  removeTournamentPlayer,
+  changeTournamentPlayer
 } = lobbySlice.actions
 
 export default lobbySlice.reducer

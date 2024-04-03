@@ -1,14 +1,18 @@
 import { Command } from "@colyseus/command"
 import { ArraySchema } from "@colyseus/schema"
-import { Client, logger, matchMaker, RoomListingData } from "colyseus"
+import { Client, matchMaker, RoomListingData } from "colyseus"
 import { EmbedBuilder } from "discord.js"
 import { nanoid } from "nanoid"
 import { GameRecord } from "../../models/colyseus-models/game-record"
 import LobbyUser from "../../models/colyseus-models/lobby-user"
 import PokemonConfig from "../../models/colyseus-models/pokemon-config"
+import { TournamentPlayerSchema } from "../../models/colyseus-models/tournament"
 import BannedUser from "../../models/mongo-models/banned-user"
 import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
 import DetailledStatistic from "../../models/mongo-models/detailled-statistic-v2"
+import Tournament, {
+  ITournamentPlayer
+} from "../../models/mongo-models/tournament"
 import UserMetadata, {
   IPokemonConfig
 } from "../../models/mongo-models/user-metadata"
@@ -38,6 +42,7 @@ import { GameMode, Rarity } from "../../types/enum/Game"
 import { Language } from "../../types/enum/Language"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { sum } from "../../utils/array"
+import { logger } from "../../utils/logger"
 import { cleanProfanity } from "../../utils/profanity-filter"
 import { chance, pickRandomIn } from "../../utils/random"
 import CustomLobbyRoom from "../custom-lobby-room"
@@ -301,46 +306,6 @@ export class RemoveMessageCommand extends Command<
         (user.role === Role.ADMIN || user.role === Role.MODERATOR)
       ) {
         this.state.removeMessage(messageId)
-      }
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-}
-
-export class OnCreateTournamentCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client; name: string; startDate: string }
-> {
-  execute({
-    client,
-    name,
-    startDate
-  }: {
-    client: Client
-    name: string
-    startDate: string
-  }) {
-    try {
-      const user = this.state.users.get(client.auth.uid)
-      if (user && user.role && user.role === Role.ADMIN) {
-        this.state.createTournament(name, startDate)
-      }
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-}
-
-export class RemoveTournamentCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client; tournamentId: string }
-> {
-  execute({ client, tournamentId }: { client: Client; tournamentId: string }) {
-    try {
-      const user = this.state.users.get(client.auth.uid)
-      if (user && user.role && user.role === Role.ADMIN) {
-        this.state.removeTournament(tournamentId)
       }
     } catch (error) {
       logger.error(error)
@@ -1167,6 +1132,111 @@ export class MakeServerAnnouncementCommand extends Command<
       const u = this.state.users.get(client.auth.uid)
       if (u && u.role && u.role === Role.ADMIN) {
         this.room.presence.publish("server-announcement", message)
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
+
+export class OnCreateTournamentCommand extends Command<
+  CustomLobbyRoom,
+  { client: Client; name: string; startDate: string }
+> {
+  execute({
+    client,
+    name,
+    startDate
+  }: {
+    client: Client
+    name: string
+    startDate: string
+  }) {
+    try {
+      const user = this.state.users.get(client.auth.uid)
+      if (user && user.role && user.role === Role.ADMIN) {
+        this.state.createTournament(name, startDate)
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
+
+export class RemoveTournamentCommand extends Command<
+  CustomLobbyRoom,
+  { client: Client; tournamentId: string }
+> {
+  execute({ client, tournamentId }: { client: Client; tournamentId: string }) {
+    try {
+      const user = this.state.users.get(client.auth.uid)
+      if (user && user.role && user.role === Role.ADMIN) {
+        this.state.removeTournament(tournamentId)
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
+
+export class ParticipateInTournamentCommand extends Command<
+  CustomLobbyRoom,
+  { client: Client; tournamentId: string; participate: boolean }
+> {
+  async execute({
+    client,
+    tournamentId,
+    participate
+  }: {
+    client: Client
+    tournamentId: string
+    participate: boolean
+  }) {
+    try {
+      const u = this.state.users.get(client.auth.uid)
+      if (client.auth.uid && u) {
+        const user = await UserMetadata.findOne({ uid: client.auth.uid })
+        const tournament = await Tournament.findById(tournamentId)
+        if (user && tournament) {
+          if (participate) {
+            logger.debug(
+              `${user.uid} participates in tournament ${tournamentId}`
+            )
+            const tournamentPlayer: ITournamentPlayer = {
+              name: user.displayName,
+              avatar: user.avatar,
+              elo: user.elo,
+              score: 0,
+              ranks: [],
+              eliminated: false
+            }
+
+            tournament.players.set(user.uid, tournamentPlayer)
+            this.state.tournaments
+              .find((t) => t.id === tournamentId)
+              ?.players?.set(
+                user.uid,
+                new TournamentPlayerSchema(
+                  tournamentPlayer.name,
+                  tournamentPlayer.avatar,
+                  tournamentPlayer.elo,
+                  tournamentPlayer.score,
+                  tournamentPlayer.ranks,
+                  tournamentPlayer.eliminated
+                )
+              )
+          } else {
+            logger.debug(
+              `${user.uid} no longer participates in tournament ${tournamentId}`
+            )
+            tournament.players.delete(user.uid)
+            this.state.tournaments
+              .find((t) => t.id === tournamentId)
+              ?.players?.delete(user.uid)
+          }
+
+          tournament.save()
+        }
       }
     } catch (error) {
       logger.error(error)

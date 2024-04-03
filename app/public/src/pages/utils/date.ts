@@ -1,11 +1,15 @@
 import i18n from "../../i18n"
 
-export function formatDate(date: number | Date) {
+export function formatDate(
+  date: number | Date,
+  params: Intl.DateTimeFormatOptions = {}
+) {
   if (typeof date === "number") date = new Date(date)
   try {
     return new Intl.DateTimeFormat(i18n.language, {
       dateStyle: "short",
-      timeStyle: "short"
+      timeStyle: "short",
+      ...params
     }).format(date)
   } catch (err) {
     return "Invalid Date"

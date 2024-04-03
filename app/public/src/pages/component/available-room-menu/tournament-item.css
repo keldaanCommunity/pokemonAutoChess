@@ -1,5 +1,5 @@
-.tournament-item {
-  background: #54596b;
+.tournament-item.nes-container {
+  background: #61738a;
   border-radius: 12px;
   border: solid;
   border-color: black;
@@ -12,4 +12,13 @@
 .tournament-item .actions {
   display: flex;
   justify-content: end;
+}
+
+.tournament-item .remove-btn {
+  float: right;
+}
+
+.tournament-item .participants ul {
+  max-height: 320px;
+  overflow-y: auto;
 }
