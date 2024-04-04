@@ -13,7 +13,6 @@ export class TournamentPlayerSchema
   @type("string") name: string
   @type("string") avatar: string
   @type("number") elo: number
-  @type("number") score: number
   @type(["number"]) ranks = new ArraySchema<number>()
   @type("boolean") eliminated: boolean
 
@@ -21,7 +20,6 @@ export class TournamentPlayerSchema
     name: string,
     avatar: string,
     elo: number,
-    score: number = 0,
     ranks: number[] = [],
     eliminated: boolean = false
   ) {
@@ -29,7 +27,6 @@ export class TournamentPlayerSchema
     this.name = name
     this.avatar = avatar
     this.elo = elo
-    this.score = score
     resetArraySchema(this.ranks, ranks)
     this.eliminated = eliminated
   }
@@ -78,7 +75,6 @@ export class TournamentSchema extends Schema implements ITournament {
             p.name,
             p.avatar,
             p.elo,
-            p.score,
             p.ranks,
             p.eliminated
           )

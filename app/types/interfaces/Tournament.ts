@@ -10,7 +10,6 @@ export interface ITournamentPlayer {
   name: string
   avatar: string
   elo: number
-  score: number
   ranks: number[]
   eliminated: boolean
 }

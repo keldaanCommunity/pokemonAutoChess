@@ -13,6 +13,7 @@ import {
   TournamentPlayerSchema,
   TournamentSchema
 } from "../../../../../models/colyseus-models/tournament"
+import { average } from "../../../../../utils/number"
 
 export default function TournamentItem(props: {
   tournament: TournamentSchema
@@ -89,7 +90,7 @@ export default function TournamentItem(props: {
       <Tabs>
         <TabList>
           {tournamentStarted && <Tab>{t("brackets")}</Tab>}
-          {tournamentStarted && <Tab>{t("score")}</Tab>}
+          {tournamentStarted && <Tab>{t("ranking")}</Tab>}
           {registrationsOpen && (
             <Tab>
               {t("participants")} ({players.length})
@@ -121,10 +122,13 @@ export default function TournamentItem(props: {
           </TabPanel>
         )}
         {tournamentStarted && (
-          <TabPanel className="score">
+          <TabPanel className="ranking">
             <ul>
               {[...players]
-                .sort((a, b) => b.score - a.score)
+                .sort(
+                  (a, b) =>
+                    average(...values(a.ranks)) - average(...values(b.ranks))
+                )
                 .map((p, i) => (
                   <TournamentPlayer
                     key={"player" + i}
@@ -169,12 +173,9 @@ export function TournamentPlayer(props: {
       />
       <p>
         <span className="player-name">{props.player.name}</span>
-        {props.showScore && (
-          <span className="player-ranks">{props.player.ranks.join(", ")}</span>
-        )}
       </p>
       {props.showScore ? (
-        <span className="player-score">{props.player.score}</span>
+        <span className="player-ranks">{props.player.ranks.join(", ")}</span>
       ) : (
         <EloBadge elo={props.player.elo} />
       )}

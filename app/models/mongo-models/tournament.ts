@@ -5,7 +5,6 @@ const tournamentPlayerSchema = new Schema({
   name: String,
   avatar: String,
   elo: Number,
-  score: Number,
   ranks: [Number],
   eliminated: Boolean
 })
