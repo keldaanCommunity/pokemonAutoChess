@@ -633,6 +633,19 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
                 true
               )
             )
+
+            const ONE_HOUR = 60 * 60 * 1000
+            if (Date.now() < startDate.getTime() + ONE_HOUR) {
+              new CronJob(
+                new Date(startDate.getTime() + ONE_HOUR),
+                () =>
+                  this.state.addAnnouncement(
+                    `${tournament.name} is starting in one hour. Tournament registration is now open in the Tournament tab.`
+                  ),
+                null,
+                true
+              )
+            }
           }
         })
       }
