@@ -7,13 +7,14 @@ import { participateInTournament } from "../../../stores/NetworkStore"
 import { getAvatarSrc } from "../../../utils"
 import { EloBadge } from "../profile/elo-badge"
 import { getTournamentStage } from "../../../../../core/tournament-logic"
-import { values } from "../../../../../utils/schemas"
+import { entries, values } from "../../../../../utils/schemas"
 import {
   TournamentPlayerSchema,
   TournamentSchema
 } from "../../../../../models/colyseus-models/tournament"
 import { average } from "../../../../../utils/number"
 import "./tournament-item.css"
+import { cc } from "../../utils/jsx"
 
 export default function TournamentItem(props: {
   tournament: TournamentSchema
@@ -111,17 +112,15 @@ export default function TournamentItem(props: {
               <div className="bracket" key={bracket.name}>
                 <p>{bracket.name}</p>
                 <ul>
-                  {values(bracket.playersId)
-                    .map((id) => props.tournament.players.get(id)!)
-                    .filter((p) => p != null)
-                    .map((p, i) => (
-                      <TournamentPlayer
-                        key={"player" + i}
-                        player={p}
-                        rank={i + 1}
-                        showScore={false}
-                      />
-                    ))}
+                  {values(bracket.playersId).map((id, i) => (
+                    <TournamentPlayer
+                      key={"player" + i}
+                      playerId={id}
+                      player={props.tournament.players.get(id)!}
+                      rank={i + 1}
+                      showScore={false}
+                    />
+                  ))}
                 </ul>
               </div>
             ))}
@@ -130,15 +129,16 @@ export default function TournamentItem(props: {
         {(tournamentStarted || tournamentFinished) && (
           <TabPanel className="ranking">
             <ul>
-              {[...players]
+              {entries(props.tournament.players)
                 .sort(
-                  (a, b) =>
+                  ([idA, a], [idB, b]) =>
                     average(...values(a.ranks)) - average(...values(b.ranks))
                 )
-                .map((p, i) => (
+                .map(([id, player], i) => (
                   <TournamentPlayer
                     key={"player" + i}
-                    player={p}
+                    playerId={id}
+                    player={player}
                     rank={i + 1}
                     showScore={true}
                   />
@@ -149,10 +149,11 @@ export default function TournamentItem(props: {
         {registrationsOpen && (
           <TabPanel className="participants">
             <ul>
-              {players.map((p, i) => (
+              {entries(props.tournament.players).map(([id, player], i) => (
                 <TournamentPlayer
                   key={"player" + i}
-                  player={p}
+                  playerId={id}
+                  player={player}
                   rank={i + 1}
                   showScore={false}
                 />
@@ -166,12 +167,19 @@ export default function TournamentItem(props: {
 }
 
 export function TournamentPlayer(props: {
+  playerId: string
   player: TournamentPlayerSchema
   rank: number
   showScore: boolean
 }) {
+  const uid: string = useAppSelector((state) => state.network.uid)
   return (
-    <li className="player-box">
+    <li
+      className={cc("player-box", {
+        myself: props.playerId === uid,
+        eliminated: props.showScore && props.player.eliminated
+      })}
+    >
       {props.showScore && <span className="player-rank">{props.rank}</span>}
       <img
         src={getAvatarSrc(props.player.avatar)}

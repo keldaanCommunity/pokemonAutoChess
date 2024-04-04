@@ -23,6 +23,20 @@
   gap: 0.5em;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 0.5em;
+}
+
+.tournament-item .player-box.eliminated {
+  background-color: #61738a;
+  color: #ccc;
+}
+
+.tournament-item .player-box.eliminated img {
+  filter: grayscale(1);
+}
+
+.tournament-item .player-box.myself {
+  background-color: #1195ec;
 }
 
 .tournament-item .player-box span {
