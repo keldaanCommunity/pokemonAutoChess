@@ -3,7 +3,11 @@ import { ArraySchema } from "@colyseus/schema"
 import { Client, matchMaker, RoomListingData } from "colyseus"
 import { EmbedBuilder } from "discord.js"
 import { nanoid } from "nanoid"
-import { getRemainingPlayers, makeBrackets } from "../../core/tournament-logic"
+import {
+  getRemainingPlayers,
+  getTournamentStage,
+  makeBrackets
+} from "../../core/tournament-logic"
 import { GameRecord } from "../../models/colyseus-models/game-record"
 import LobbyUser from "../../models/colyseus-models/lobby-user"
 import PokemonConfig from "../../models/colyseus-models/pokemon-config"
@@ -1277,6 +1281,10 @@ export class CreateTournamentLobbiesCommand extends Command<
       if (!tournament)
         return logger.error(`Tournament not found: ${tournamentId}`)
 
+      this.state.addAnnouncement(
+        `${tournament.name} ${getTournamentStage(tournament)} are starting !`
+      )
+
       const brackets = makeBrackets(tournament)
       tournament.brackets.clear()
       await Promise.all(
@@ -1416,8 +1424,6 @@ export class EndTournamentCommand extends Command<
           }
         }
       }
-
-
     } catch (error) {
       logger.error(error)
     }
