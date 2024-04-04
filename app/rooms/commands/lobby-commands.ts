@@ -26,6 +26,7 @@ import { getAvatarSrc, getPortraitSrc } from "../../public/src/utils"
 import {
   CDN_PORTRAIT_URL,
   Emotion,
+  IPlayer,
   ISuggestionUser,
   PkmWithConfig,
   Role,
@@ -43,12 +44,11 @@ import {
 import { GameMode, Rarity } from "../../types/enum/Game"
 import { Language } from "../../types/enum/Language"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
-import { ITournamentPlayer } from "../../types/interfaces/Tournament"
 import { sum } from "../../utils/array"
 import { logger } from "../../utils/logger"
 import { cleanProfanity } from "../../utils/profanity-filter"
 import { chance, pickRandomIn } from "../../utils/random"
-import { convertSchemaToRawObject } from "../../utils/schemas"
+import { convertSchemaToRawObject, values } from "../../utils/schemas"
 import CustomLobbyRoom from "../custom-lobby-room"
 
 export class OnJoinCommand extends Command<
@@ -1242,6 +1242,7 @@ export class NextTournamentStageCommand extends Command<
 > {
   async execute({ tournamentId }: { tournamentId: string }) {
     try {
+      console.log("NextTournamentStageCommand")
       const tournament = this.state.tournaments.find(
         (t) => t.id === tournamentId
       )
@@ -1250,9 +1251,31 @@ export class NextTournamentStageCommand extends Command<
 
       const remainingPlayers = getRemainingPlayers(tournament)
       if (remainingPlayers.length <= 8) {
-        // finals ended, elect tournament winner
+        // finals ended
         return [new EndTournamentCommand().setPayload({ tournamentId })]
+      } else {
+        return [
+          new CreateTournamentLobbiesCommand().setPayload({ tournamentId })
+        ]
       }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
+
+export class CreateTournamentLobbiesCommand extends Command<
+  CustomLobbyRoom,
+  { tournamentId: string }
+> {
+  async execute({ tournamentId }: { tournamentId: string }) {
+    try {
+      console.log("CreateTournamentLobbiesCommand")
+      const tournament = this.state.tournaments.find(
+        (t) => t.id === tournamentId
+      )
+      if (!tournament)
+        return logger.error(`Tournament not found: ${tournamentId}`)
 
       const brackets = makeBrackets(tournament)
       tournament.brackets.clear()
@@ -1283,6 +1306,73 @@ export class NextTournamentStageCommand extends Command<
       const tournamentDb = await Tournament.findById(tournamentId)
       if (tournamentDb) {
         tournamentDb.brackets = convertSchemaToRawObject(tournament.brackets)
+        await tournamentDb.save()
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
+
+export class EndTournamentMatchCommand extends Command<
+  CustomLobbyRoom,
+  {
+    tournamentId: string
+    roomId: string
+    players: { id: string; rank: number }[]
+  }
+> {
+  async execute({
+    tournamentId,
+    roomId,
+    players
+  }: {
+    tournamentId: string
+    roomId: string
+    players: IPlayer[]
+  }) {
+    console.log("EndTournamentMatchCommand")
+    try {
+      const tournament = this.state.tournaments.find(
+        (t) => t.id === tournamentId
+      )
+      if (!tournament)
+        return logger.error(`Tournament not found: ${tournamentId}`)
+
+      const bracket = tournament.brackets.get(roomId)
+      if (!bracket)
+        return logger.error(`Tournament bracket not found: ${roomId}`)
+
+      bracket.finished = true
+
+      players.forEach((p) => {
+        const player = tournament.players.get(p.id)
+        if (player) {
+          player.ranks.push(p.rank)
+          if (p.rank > 4) {
+            // eliminate players whose rank is > 4
+            player.eliminated = true
+          }
+        }
+      })
+
+      bracket.playersId.forEach((playerId) => {
+        const player = tournament.players.get(playerId)
+        if (player && players.every((p) => p.id !== playerId)) {
+          // eliminate players who did not attend their bracker
+          player.eliminated = true
+        }
+      })
+
+      if (values(tournament.brackets).every((b) => b.finished)) {
+        return [new NextTournamentStageCommand().setPayload({ tournamentId })]
+      }
+
+      //save brackets to db
+      const tournamentDb = await Tournament.findById(tournamentId)
+      if (tournamentDb) {
+        tournamentDb.players = convertSchemaToRawObject(tournament.players)
+        tournamentDb.brackets = convertSchemaToRawObject(tournament.brackets)
         tournamentDb.save()
       }
     } catch (error) {
@@ -1296,12 +1386,40 @@ export class EndTournamentCommand extends Command<
   { tournamentId: string }
 > {
   async execute({ tournamentId }: { tournamentId: string }) {
-    const tournament = await Tournament.findById(tournamentId)
-    if (!tournament)
-      return logger.error(`Tournament not found: ${tournamentId}`)
+    try {
+      console.log("EndTournamentCommand")
+      const tournament = this.state.tournaments.find(
+        (t) => t.id === tournamentId
+      )
+      if (!tournament)
+        return logger.error(`Tournament not found: ${tournamentId}`)
 
-    const players = getRemainingPlayers(tournament)
-    const winner = players.find((p) => p.ranks.at(-1) === 1)
-    this.room.presence.publish("tournament-winner", winner)
+      tournament.brackets.clear()
+
+      const players = getRemainingPlayers(tournament)
+      const winner = players.find((p) => p.ranks[p.ranks.length - 1] === 1)
+      if (winner) {
+        this.room.presence.publish("tournament-winner", winner)
+        tournament.finished = true
+
+        const mongoUser = await UserMetadata.findOne({ uid: winner.id })
+        if (
+          mongoUser &&
+          mongoUser.titles &&
+          !mongoUser.titles.includes(Title.CHAMPION)
+        ) {
+          mongoUser.titles.push(Title.CHAMPION)
+          await mongoUser.save()
+          const user = this.state.users.get(winner.id)
+          if (user) {
+            user.titles.push(Title.CHAMPION)
+          }
+        }
+      }
+
+
+    } catch (error) {
+      logger.error(error)
+    }
   }
 }

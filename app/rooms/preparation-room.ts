@@ -108,6 +108,19 @@ export default class PreparationRoom extends Room<PreparationState> {
     if (options.autoStartDelayInSeconds) {
       this.clock.setTimeout(() => {
         if (this.state.users.size < 2) {
+          // automatically remove lobbies with zero or one players
+          if (this.metadata?.tournamentId && this.state.users.size === 1) {
+            // automatically give rank 1 if solo in a tournament lobby
+            this.presence.publish("tournament-match-end", {
+              tournamentId: this.metadata?.tournamentId,
+              roomId: this.roomId,
+              players: values(this.state.users).map((p) => ({
+                id: p.id,
+                rank: 1
+              }))
+            })
+          }
+
           this.broadcast(Transfer.KICK)
           this.disconnect()
         } else {

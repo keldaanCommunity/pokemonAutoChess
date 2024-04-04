@@ -4,6 +4,7 @@ export interface ITournament {
   startDate: string
   players: Map<string, ITournamentPlayer>
   brackets: Map<string, ITournamentBracket>
+  finished: boolean
 }
 
 export interface ITournamentPlayer {
@@ -17,4 +18,5 @@ export interface ITournamentPlayer {
 export interface ITournamentBracket {
   name: string
   playersId: string[]
+  finished: boolean
 }

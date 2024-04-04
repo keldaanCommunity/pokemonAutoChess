@@ -598,6 +598,7 @@ export interface IGameMetadata {
   playerIds: string[]
   stageLevel: number
   type: "game"
+  tournamentId: string | null
 }
 
 export interface ISuggestionUser {

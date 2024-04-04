@@ -6,10 +6,9 @@ import {
   createTournament,
   removeTournament
 } from "../../../stores/NetworkStore"
-import { Role } from "../../../../../types"
 import { formatDate } from "../../utils/date"
-import "./tournament-admin.css"
 import { ITournament } from "../../../../../types/interfaces/Tournament"
+import "./tournament-admin.css"
 
 export function TournamentsAdmin() {
   const { t } = useTranslation()
@@ -86,25 +85,21 @@ export function TournamentsAdmin() {
 export function TournamentItem(props: { tournament: ITournament }) {
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
-  const user = useAppSelector((state) => state.lobby.user)
-  const role = user?.role
 
   return (
     <div className="nes-container tournament-item">
-      {role && (role === Role.MODERATOR || role === Role.ADMIN) && (
-        <button
-          className="remove-btn bubbly red"
-          onClick={() => {
-            if (
-              confirm("Cancel tournament ? All registrations will be deleted.")
-            ) {
-              dispatch(removeTournament({ id: props.tournament.id! }))
-            }
-          }}
-        >
-          <p style={{ fontSize: "0.5em", margin: "0px" }}>X</p>
-        </button>
-      )}
+      <button
+        className="remove-btn bubbly red"
+        onClick={() => {
+          if (
+            confirm("Cancel tournament ? All registrations will be deleted.")
+          ) {
+            dispatch(removeTournament({ id: props.tournament.id! }))
+          }
+        }}
+      >
+        {t("cancel")}
+      </button>
       <p className="name">{props.tournament.name}</p>
       <p className="date">{formatDate(new Date(props.tournament.startDate))}</p>
     </div>

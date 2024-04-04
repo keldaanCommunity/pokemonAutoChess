@@ -221,6 +221,7 @@ export class OnGameStartRequestCommand extends Command<
             noElo: this.state.noElo,
             selectedMap: this.state.selectedMap,
             gameMode: this.state.gameMode,
+            tournamentId: this.room.metadata?.tournamentId,
             minRank: this.state.minRank,
             whenReady: (game) => {
               this.room.setGameStarted(true)

@@ -38,10 +38,12 @@ export class TournamentBracketSchema
 {
   @type("string") name: string
   @type(["string"]) playersId = new ArraySchema<string>()
+  @type("boolean") finished: boolean
 
-  constructor(name: string, playersId: string[]) {
+  constructor(name: string, playersId: string[], finished: boolean = false) {
     super()
     this.name = name
+    this.finished = finished
     resetArraySchema(this.playersId, playersId)
   }
 }
@@ -54,18 +56,21 @@ export class TournamentSchema extends Schema implements ITournament {
     new MapSchema<TournamentPlayerSchema>()
   @type({ map: TournamentBracketSchema }) brackets =
     new MapSchema<TournamentBracketSchema>()
+  @type("boolean") finished: boolean
 
   constructor(
     id: string,
     name: string,
     startDate: string,
     players: Map<string, ITournamentPlayer>,
-    brackets: Map<string, ITournamentBracket>
+    brackets: Map<string, ITournamentBracket>,
+    finished: boolean = false
   ) {
     super()
     this.id = id
     this.name = name
     this.startDate = startDate
+    this.finished = finished
 
     if (players && players.size) {
       players.forEach((p, key) => {
@@ -86,7 +91,7 @@ export class TournamentSchema extends Schema implements ITournament {
       brackets.forEach((b, gameId) => {
         this.brackets.set(
           gameId,
-          new TournamentBracketSchema(b.name, b.playersId)
+          new TournamentBracketSchema(b.name, b.playersId, b.finished)
         )
       })
     }

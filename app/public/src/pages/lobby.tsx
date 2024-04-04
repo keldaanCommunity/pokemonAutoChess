@@ -269,7 +269,8 @@ export async function joinLobbyRoom(
               )
 
               const fields: NonFunctionPropNames<TournamentBracketSchema>[] = [
-                "name"
+                "name",
+                "finished"
               ]
               fields.forEach((field) => {
                 bracket.listen(field, (value) => {

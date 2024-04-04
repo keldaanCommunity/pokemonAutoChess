@@ -19,6 +19,7 @@ export function getRemainingPlayers(
 }
 
 export function getTournamentStage(tournament: ITournament): string {
+  if(tournament.finished) return "Finished"
   const remainingPlayers = getRemainingPlayers(tournament)
   if (remainingPlayers.length <= 8) return "FINALS"
   if (remainingPlayers.length <= 16) return "Semi-Finals"
@@ -53,7 +54,8 @@ export function makeBrackets(tournament: ITournament): ITournamentBracket[] {
   for (let i = 0; i < nbBrackets; i++) {
     const bracket: ITournamentBracket = {
       name: `${getTournamentStage(tournament)} #${i + 1}`,
-      playersId: []
+      playersId: [],
+      finished: false
     }
     brackets.push(bracket)
   }

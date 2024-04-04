@@ -61,7 +61,8 @@ import {
   RemoveTournamentCommand,
   OnCreateTournamentCommand,
   ParticipateInTournamentCommand,
-  NextTournamentStageCommand
+  NextTournamentStageCommand,
+  EndTournamentMatchCommand
 } from "./commands/lobby-commands"
 import LobbyState from "./states/lobby-state"
 
@@ -434,6 +435,25 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     })
 
     this.presence.subscribe(
+      "tournament-match-end",
+      ({
+        tournamentId,
+        roomId,
+        players
+      }: {
+        tournamentId: string
+        roomId: string
+        players: { id: string; rank: number }[]
+      }) => {
+        this.dispatcher.dispatch(new EndTournamentMatchCommand(), {
+          tournamentId,
+          roomId,
+          players
+        })
+      }
+    )
+
+    this.presence.subscribe(
       "special-game-full",
       (params: {
         gameMode: GameMode
@@ -593,7 +613,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
               tournament.name,
               tournament.startDate,
               tournament.players,
-              tournament.brackets
+              tournament.brackets,
+              tournament.finished
             )
           )
 

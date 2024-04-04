@@ -11,7 +11,8 @@ const tournamentPlayerSchema = new Schema({
 
 const tournamentBracketSchema = new Schema({
   name: String,
-  playersId: [String]
+  playersId: [String],
+  finished: Boolean
 })
 
 const tournamentSchema = new Schema({
@@ -24,7 +25,8 @@ const tournamentSchema = new Schema({
   brackets: {
     type: Map,
     of: tournamentBracketSchema
-  }
+  },
+  finished: Boolean
 })
 
 export const Tournament = model<ITournament>("Tournament", tournamentSchema)

@@ -102,6 +102,7 @@ export default class GameRoom extends Room<GameState> {
     selectedMap: DungeonPMDO | "random"
     gameMode: GameMode
     minRank: EloRank | null
+    tournamentId: string | null
     whenReady: (room: GameRoom) => void
   }) {
     logger.trace("create game room")
@@ -112,7 +113,8 @@ export default class GameRoom extends Room<GameState> {
         (id) => options.users.get(id)!.isBot === false
       ),
       stageLevel: 0,
-      type: "game"
+      type: "game",
+      tournamentId: options.tournamentId
     })
     // logger.debug(options);
     this.setState(
@@ -741,6 +743,15 @@ export default class GameRoom extends Room<GameState> {
           }
         }
       }
+
+      if(this.state.gameMode === GameMode.TOURNAMENT){
+        this.presence.publish("tournament-match-end", {
+          tournamentId: this.metadata?.tournamentId,
+          roomId: this.roomId,
+          players: humans
+        })
+      }
+
       this.dispatcher.stop()
     } catch (error) {
       logger.error(error)

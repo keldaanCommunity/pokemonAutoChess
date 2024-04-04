@@ -84,7 +84,7 @@ export default class LobbyState extends Schema {
   createTournament(name: string, startDate: string) {
     const id = nanoid()
     tournament
-      .create({ id, name, startDate, currentMatches: [], players: new Map() })
+      .create({ id, name, startDate, brackets: new Map(), players: new Map() })
       .then((t) => {
         logger.debug(`created tournament id ${t.id}`)
         this.tournaments.push(
@@ -93,7 +93,8 @@ export default class LobbyState extends Schema {
             t.name,
             t.startDate,
             t.players,
-            t.currentMatches
+            t.brackets,
+            false
           )
         )
       })

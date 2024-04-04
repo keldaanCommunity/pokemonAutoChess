@@ -7,13 +7,13 @@ import { participateInTournament } from "../../../stores/NetworkStore"
 import { getAvatarSrc } from "../../../utils"
 import { EloBadge } from "../profile/elo-badge"
 import { getTournamentStage } from "../../../../../core/tournament-logic"
-import "./tournament-item.css"
 import { values } from "../../../../../utils/schemas"
 import {
   TournamentPlayerSchema,
   TournamentSchema
 } from "../../../../../models/colyseus-models/tournament"
 import { average } from "../../../../../utils/number"
+import "./tournament-item.css"
 
 export default function TournamentItem(props: {
   tournament: TournamentSchema
@@ -25,7 +25,8 @@ export default function TournamentItem(props: {
   const REGISTRATION_TIME = 60 * 60 * 1000 // 1 hour
   const startTime = new Date(props.tournament.startDate).getTime()
   const registrationsOpen = Date.now() > startTime - REGISTRATION_TIME
-  const tournamentStarted = Date.now() > startTime
+  const tournamentFinished = props.tournament.finished
+  const tournamentStarted = Date.now() > startTime && !tournamentFinished
   const players = values(props.tournament.players)
   const brackets = values(props.tournament.brackets)
   const remainingPlayers = players.filter((p) => !p.eliminated)
@@ -33,7 +34,11 @@ export default function TournamentItem(props: {
   return (
     <div className="tournament-item nes-container">
       <span className="tournament-name">{props.tournament.name}</span>
-      {tournamentStarted ? (
+      {tournamentFinished ? (
+        <div>
+          {t("stage")}: {getTournamentStage(props.tournament)}
+        </div>
+      ) : tournamentStarted ? (
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <span>
             {t("stage")}: {getTournamentStage(props.tournament)}
@@ -50,7 +55,7 @@ export default function TournamentItem(props: {
           })}
         </p>
       )}
-      {!tournamentStarted && (
+      {!tournamentStarted && !tournamentFinished && (
         <div className="actions">
           {participating ? (
             <button
@@ -90,7 +95,9 @@ export default function TournamentItem(props: {
       <Tabs>
         <TabList>
           {tournamentStarted && <Tab>{t("brackets")}</Tab>}
-          {tournamentStarted && <Tab>{t("ranking")}</Tab>}
+          {(tournamentStarted || tournamentFinished) && (
+            <Tab>{t("ranking")}</Tab>
+          )}
           {registrationsOpen && (
             <Tab>
               {t("participants")} ({players.length})
@@ -100,7 +107,6 @@ export default function TournamentItem(props: {
         {!registrationsOpen && <p>{t("registrations_open_info")}</p>}
         {tournamentStarted && (
           <TabPanel className="brackets">
-            <p>Brackets</p>
             {brackets.map((bracket) => (
               <div className="bracket" key={bracket.name}>
                 <p>{bracket.name}</p>
@@ -121,7 +127,7 @@ export default function TournamentItem(props: {
             ))}
           </TabPanel>
         )}
-        {tournamentStarted && (
+        {(tournamentStarted || tournamentFinished) && (
           <TabPanel className="ranking">
             <ul>
               {[...players]
@@ -175,7 +181,9 @@ export function TournamentPlayer(props: {
         <span className="player-name">{props.player.name}</span>
       </p>
       {props.showScore ? (
-        <span className="player-ranks">{props.player.ranks.join(", ")}</span>
+        <span className="player-ranks">
+          {props.player.ranks.length > 0 ? props.player.ranks.join(", ") : "-"}
+        </span>
       ) : (
         <EloBadge elo={props.player.elo} />
       )}
