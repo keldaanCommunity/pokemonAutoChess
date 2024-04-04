@@ -15,6 +15,7 @@ import {
 import { average } from "../../../../../utils/number"
 import "./tournament-item.css"
 import { cc } from "../../utils/jsx"
+import { TOURNAMENT_REGISTRATION_TIME } from "../../../../../types/Config"
 
 export default function TournamentItem(props: {
   tournament: TournamentSchema
@@ -23,11 +24,11 @@ export default function TournamentItem(props: {
   const dispatch = useAppDispatch()
   const uid: string = useAppSelector((state) => state.network.uid)
   const participating = props.tournament.players.has(uid)
-  const REGISTRATION_TIME = 60 * 60 * 1000 // 1 hour
   const startTime = new Date(props.tournament.startDate).getTime()
-  const registrationsOpen = Date.now() > startTime - REGISTRATION_TIME
   const tournamentFinished = props.tournament.finished
   const tournamentStarted = Date.now() > startTime && !tournamentFinished
+  const registrationsOpen =
+    Date.now() > startTime - TOURNAMENT_REGISTRATION_TIME && !tournamentStarted
   const players = values(props.tournament.players)
   const brackets = values(props.tournament.brackets)
   const remainingPlayers = players.filter((p) => !p.eliminated)

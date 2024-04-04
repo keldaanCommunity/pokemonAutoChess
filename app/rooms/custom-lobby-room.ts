@@ -26,7 +26,9 @@ import { Emotion, IPlayer, Role, Title, Transfer } from "../types"
 import {
   EloRank,
   RANKED_LOBBY_CRON,
-  SCRIBBLE_LOBBY_CRON
+  SCRIBBLE_LOBBY_CRON,
+  TOURNAMENT_CLEANUP_DELAY,
+  TOURNAMENT_REGISTRATION_TIME
 } from "../types/Config"
 import { GameMode } from "../types/enum/Game"
 import { Language } from "../types/enum/Language"
@@ -607,6 +609,13 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       if (tournaments) {
         this.state.tournaments.clear()
         tournaments.forEach((tournament) => {
+          const startDate = new Date(tournament.startDate)
+
+          if(tournament.finished && Date.now() > startDate.getTime() + TOURNAMENT_CLEANUP_DELAY){
+            Tournament.findByIdAndDelete(tournament.id)
+            return;
+          }
+
           this.state.tournaments.push(
             new TournamentSchema(
               tournament.id,
@@ -617,8 +626,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
               tournament.finished
             )
           )
-
-          const startDate = new Date(tournament.startDate)
+          
           if (
             startDate.getTime() > Date.now() &&
             this.tournamentCronJobs.has(tournament.id) === false
@@ -634,10 +642,9 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
               )
             )
 
-            const ONE_HOUR = 60 * 60 * 1000
-            if (Date.now() < startDate.getTime() + ONE_HOUR) {
+            if (Date.now() < startDate.getTime() + TOURNAMENT_REGISTRATION_TIME) {
               new CronJob(
-                new Date(startDate.getTime() + ONE_HOUR),
+                new Date(startDate.getTime() + TOURNAMENT_REGISTRATION_TIME),
                 () =>
                   this.state.addAnnouncement(
                     `${tournament.name} is starting in one hour. Tournament registration is now open in the Tournament tab.`

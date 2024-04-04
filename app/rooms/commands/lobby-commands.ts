@@ -1376,7 +1376,7 @@ export class EndTournamentMatchCommand extends Command<
         return [new NextTournamentStageCommand().setPayload({ tournamentId })]
       }
 
-      //save brackets to db
+      //save brackets and player ranks to db
       const tournamentDb = await Tournament.findById(tournamentId)
       if (tournamentDb) {
         tournamentDb.players = convertSchemaToRawObject(tournament.players)
