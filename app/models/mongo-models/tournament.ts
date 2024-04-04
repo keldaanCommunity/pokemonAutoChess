@@ -10,6 +10,11 @@ const tournamentPlayerSchema = new Schema({
   eliminated: Boolean
 })
 
+const tournamentBracketSchema = new Schema({
+  name: String,
+  playersId: [String]
+})
+
 const tournamentSchema = new Schema({
   name: String,
   startDate: String,
@@ -19,7 +24,7 @@ const tournamentSchema = new Schema({
   },
   brackets: {
     type: Map,
-    of: [String]
+    of: tournamentBracketSchema
   }
 })
 

@@ -1,9 +1,10 @@
-import { Schema, MapSchema, type } from "@colyseus/schema"
+import { Schema, MapSchema, ArraySchema, type } from "@colyseus/schema"
 import {
   ITournament,
   ITournamentBracket,
   ITournamentPlayer
 } from "../../types/interfaces/Tournament"
+import { resetArraySchema } from "../../utils/schemas"
 
 export class TournamentPlayerSchema
   extends Schema
@@ -13,23 +14,23 @@ export class TournamentPlayerSchema
   @type("string") avatar: string
   @type("number") elo: number
   @type("number") score: number
-  @type({ array: "number" }) ranks: number[]
+  @type(["number"]) ranks = new ArraySchema<number>()
   @type("boolean") eliminated: boolean
 
   constructor(
     name: string,
     avatar: string,
     elo: number,
-    score: number,
-    ranks: number[],
-    eliminated: boolean
+    score: number = 0,
+    ranks: number[] = [],
+    eliminated: boolean = false
   ) {
     super()
     this.name = name
     this.avatar = avatar
     this.elo = elo
     this.score = score
-    this.ranks = ranks
+    resetArraySchema(this.ranks, ranks)
     this.eliminated = eliminated
   }
 }
@@ -39,12 +40,12 @@ export class TournamentBracketSchema
   implements ITournamentBracket
 {
   @type("string") name: string
-  @type({ array: "string" }) playersId: string[]
+  @type(["string"]) playersId = new ArraySchema<string>()
 
   constructor(name: string, playersId: string[]) {
     super()
     this.name = name
-    this.playersId = playersId
+    resetArraySchema(this.playersId, playersId)
   }
 }
 

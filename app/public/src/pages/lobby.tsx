@@ -6,6 +6,7 @@ import { Navigate } from "react-router-dom"
 import { Modal } from "react-bootstrap"
 import LobbyUser from "../../../models/colyseus-models/lobby-user"
 import {
+  TournamentBracketSchema,
   TournamentPlayerSchema,
   TournamentSchema
 } from "../../../models/colyseus-models/tournament"
@@ -25,10 +26,12 @@ import {
   addPokemonConfig,
   addRoom,
   addTournament,
+  addTournamentBracket,
   addTournamentPlayer,
   addUser,
   changePokemonConfig,
   changeTournament,
+  changeTournamentBracket,
   changeTournamentPlayer,
   changeUser,
   leaveLobby,
@@ -37,6 +40,7 @@ import {
   removeMessage,
   removeRoom,
   removeTournament,
+  removeTournamentBracket,
   removeTournamentPlayer,
   removeUser,
   setBoosterContent,
@@ -206,7 +210,6 @@ export async function joinLobbyRoom(
             const fields: NonFunctionPropNames<TournamentSchema>[] = [
               "id",
               "name",
-              "currentMatches",
               "startDate"
             ]
 
@@ -223,7 +226,7 @@ export async function joinLobbyRoom(
             })
 
             tournament.players.onAdd((player, userId) => {
-              console.log("onAdd tournament players")
+              //console.log("onAdd tournament players")
               dispatch(
                 addTournamentPlayer({
                   tournamendId: tournament.id,
@@ -249,9 +252,54 @@ export async function joinLobbyRoom(
             })
 
             tournament.players.onRemove((player, userId) => {
-              console.log("onRemove tournament players")
+              //console.log("onRemove tournament players")
               dispatch(
                 removeTournamentPlayer({ tournamendId: tournament.id, userId })
+              )
+            })
+
+            tournament.brackets.onAdd((bracket, roomId) => {
+              //console.log("onAdd tournament bracket")
+              dispatch(
+                addTournamentBracket({
+                  tournamendId: tournament.id,
+                  roomId,
+                  bracket
+                })
+              )
+
+              const fields: NonFunctionPropNames<TournamentBracketSchema>[] = [
+                "name"
+              ]
+              fields.forEach((field) => {
+                bracket.listen(field, (value) => {
+                  dispatch(
+                    changeTournamentBracket({
+                      tournamentId: tournament.id,
+                      roomId,
+                      field,
+                      value
+                    })
+                  )
+                })
+              })
+
+              bracket.playersId.onChange(() => {
+                dispatch(
+                  changeTournamentBracket({
+                    tournamentId: tournament.id,
+                    roomId,
+                    field: "playersId",
+                    value: bracket.playersId
+                  })
+                )
+              })
+            })
+
+            tournament.brackets.onRemove((bracket, roomId) => {
+              //console.log("onRemove tournament bracket")
+              dispatch(
+                removeTournamentBracket({ tournamendId: tournament.id, roomId })
               )
             })
           })

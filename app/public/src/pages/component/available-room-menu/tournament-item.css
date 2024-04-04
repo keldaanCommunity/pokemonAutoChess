@@ -18,11 +18,6 @@
   float: right;
 }
 
-.tournament-item .participants ul {
-  max-height: 320px;
-  overflow-y: auto;
-}
-
 .tournament-item .player-box {
   display: flex;
   gap: 0.5em;
@@ -41,6 +36,7 @@
 }
 
 .tournament-item p {
+  margin: 0.5em 0;
   flex: 1;
 }
 

@@ -597,11 +597,19 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
             )
           )
 
-          if (this.tournamentCronJobs.has(tournament.id) === false) {
+          const startDate = new Date(tournament.startDate)
+          if (
+            startDate.getTime() > Date.now() &&
+            this.tournamentCronJobs.has(tournament.id) === false
+          ) {
+            console.log("init tournament cron", new Date(tournament.startDate))
             this.tournamentCronJobs.set(
               tournament.id,
-              new CronJob(new Date(tournament.startDate), () =>
-                this.startTournament(tournament)
+              new CronJob(
+                startDate,
+                () => this.startTournament(tournament),
+                null,
+                true
               )
             )
           }
@@ -613,6 +621,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
   }
 
   startTournament(tournament: ITournament) {
+    console.log("startTournament")
     this.dispatcher.dispatch(new NextTournamentStageCommand(), {
       tournamentId: tournament.id
     })

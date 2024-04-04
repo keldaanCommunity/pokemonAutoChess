@@ -6,10 +6,10 @@ import {
   createTournament,
   removeTournament
 } from "../../../stores/NetworkStore"
-import { ITournament } from "../../../../../models/mongo-models/tournament"
 import { Role } from "../../../../../types"
 import { formatDate } from "../../utils/date"
 import "./tournament-admin.css"
+import { ITournament } from "../../../../../types/interfaces/Tournament"
 
 export function TournamentsAdmin() {
   const { t } = useTranslation()
@@ -40,7 +40,7 @@ export function TournamentsAdmin() {
         {tournaments && (
           <ul>
             {tournaments.map((tournament) => (
-              <li key={tournament.startDate}>
+              <li key={tournament.id}>
                 <TournamentItem tournament={tournament} />
               </li>
             ))}

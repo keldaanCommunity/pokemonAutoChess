@@ -7,7 +7,10 @@ import { getRemainingPlayers, makeBrackets } from "../../core/tournament-logic"
 import { GameRecord } from "../../models/colyseus-models/game-record"
 import LobbyUser from "../../models/colyseus-models/lobby-user"
 import PokemonConfig from "../../models/colyseus-models/pokemon-config"
-import { TournamentPlayerSchema } from "../../models/colyseus-models/tournament"
+import {
+  TournamentBracketSchema,
+  TournamentPlayerSchema
+} from "../../models/colyseus-models/tournament"
 import BannedUser from "../../models/mongo-models/banned-user"
 import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
 import DetailledStatistic from "../../models/mongo-models/detailled-statistic-v2"
@@ -45,6 +48,7 @@ import { sum } from "../../utils/array"
 import { logger } from "../../utils/logger"
 import { cleanProfanity } from "../../utils/profanity-filter"
 import { chance, pickRandomIn } from "../../utils/random"
+import { convertSchemaToRawObject } from "../../utils/schemas"
 import CustomLobbyRoom from "../custom-lobby-room"
 
 export class OnJoinCommand extends Command<
@@ -1193,50 +1197,38 @@ export class ParticipateInTournamentCommand extends Command<
     participate: boolean
   }) {
     try {
-      const u = this.state.users.get(client.auth.uid)
-      if (client.auth.uid && u) {
-        const user = await UserMetadata.findOne({ uid: client.auth.uid })
-        const tournament = await Tournament.findById(tournamentId)
-        if (user && tournament) {
-          if (participate) {
-            logger.debug(
-              `${user.uid} participates in tournament ${tournamentId}`
-            )
-            const tournamentPlayer: ITournamentPlayer = {
-              name: user.displayName,
-              avatar: user.avatar,
-              elo: user.elo,
-              score: 0,
-              ranks: [],
-              eliminated: false
-            }
+      if (!client.auth.uid || this.state.users.has(client.auth.uid) === false)
+        return
+      const tournament = this.state.tournaments.find(
+        (t) => t.id === tournamentId
+      )
 
-            tournament.players.set(user.uid, tournamentPlayer)
-            this.state.tournaments
-              .find((t) => t.id === tournamentId)
-              ?.players?.set(
-                user.uid,
-                new TournamentPlayerSchema(
-                  tournamentPlayer.name,
-                  tournamentPlayer.avatar,
-                  tournamentPlayer.elo,
-                  tournamentPlayer.score,
-                  tournamentPlayer.ranks,
-                  tournamentPlayer.eliminated
-                )
-              )
-          } else {
-            logger.debug(
-              `${user.uid} no longer participates in tournament ${tournamentId}`
-            )
-            tournament.players.delete(user.uid)
-            this.state.tournaments
-              .find((t) => t.id === tournamentId)
-              ?.players?.delete(user.uid)
-          }
+      if (!tournament)
+        return logger.error(`Tournament not found: ${tournamentId}`)
 
-          tournament.save()
-        }
+      const user = await UserMetadata.findOne({ uid: client.auth.uid })
+      if (!user) return
+
+      if (participate) {
+        logger.debug(`${user.uid} participates in tournament ${tournamentId}`)
+        const tournamentPlayer = new TournamentPlayerSchema(
+          user.displayName,
+          user.avatar,
+          user.elo
+        )
+
+        tournament.players.set(user.uid, tournamentPlayer)
+      } else {
+        logger.debug(
+          `${user.uid} no longer participates in tournament ${tournamentId}`
+        )
+        tournament.players.delete(user.uid)
+      }
+
+      const mongoTournament = await Tournament.findById(tournamentId)
+      if (mongoTournament) {
+        mongoTournament.players = convertSchemaToRawObject(tournament.players)
+        mongoTournament.save()
       }
     } catch (error) {
       logger.error(error)
@@ -1249,8 +1241,13 @@ export class NextTournamentStageCommand extends Command<
   { tournamentId: string }
 > {
   async execute({ tournamentId }: { tournamentId: string }) {
-    const tournament = await Tournament.findById(tournamentId)
-    if (tournament) {
+    try {
+      const tournament = this.state.tournaments.find(
+        (t) => t.id === tournamentId
+      )
+      if (!tournament)
+        return logger.error(`Tournament not found: ${tournamentId}`)
+
       const remainingPlayers = getRemainingPlayers(tournament)
       if (remainingPlayers.length <= 8) {
         // finals ended, elect tournament winner
@@ -1258,6 +1255,7 @@ export class NextTournamentStageCommand extends Command<
       }
 
       const brackets = makeBrackets(tournament)
+      tournament.brackets.clear()
       await Promise.all(
         brackets.map((bracket) => {
           logger.info(`Creating tournament game ${bracket.name}`)
@@ -1273,12 +1271,22 @@ export class NextTournamentStageCommand extends Command<
               tournamentId
             })
             .then((room) => {
-              tournament.brackets.set(room.roomId, bracket)
+              tournament.brackets.set(
+                room.roomId,
+                new TournamentBracketSchema(bracket.name, bracket.playersId)
+              )
             })
         })
       )
 
-      tournament.save()
+      //save brackets to db
+      const tournamentDb = await Tournament.findById(tournamentId)
+      if (tournamentDb) {
+        tournamentDb.brackets = convertSchemaToRawObject(tournament.brackets)
+        tournamentDb.save()
+      }
+    } catch (error) {
+      logger.error(error)
     }
   }
 }
@@ -1289,10 +1297,11 @@ export class EndTournamentCommand extends Command<
 > {
   async execute({ tournamentId }: { tournamentId: string }) {
     const tournament = await Tournament.findById(tournamentId)
-    if (tournament) {
-      const players = getRemainingPlayers(tournament)
-      const winner = players.find((p) => p.ranks.at(-1) === 1)
-      this.room.presence.publish("tournament-winner", winner)
-    }
+    if (!tournament)
+      return logger.error(`Tournament not found: ${tournamentId}`)
+
+    const players = getRemainingPlayers(tournament)
+    const winner = players.find((p) => p.ranks.at(-1) === 1)
+    this.room.presence.publish("tournament-winner", winner)
   }
 }

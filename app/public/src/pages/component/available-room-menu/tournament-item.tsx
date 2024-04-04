@@ -1,18 +1,22 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import {
-  ITournament,
-  ITournamentPlayer
-} from "../../../../../types/interfaces/Tournament"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { formatDate } from "../../utils/date"
 import { participateInTournament } from "../../../stores/NetworkStore"
 import { getAvatarSrc } from "../../../utils"
 import { EloBadge } from "../profile/elo-badge"
+import { getTournamentStage } from "../../../../../core/tournament-logic"
 import "./tournament-item.css"
+import { values } from "../../../../../utils/schemas"
+import {
+  TournamentPlayerSchema,
+  TournamentSchema
+} from "../../../../../models/colyseus-models/tournament"
 
-export default function TournamentItem(props: { tournament: ITournament }) {
+export default function TournamentItem(props: {
+  tournament: TournamentSchema
+}) {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const uid: string = useAppSelector((state) => state.network.uid)
@@ -21,19 +25,22 @@ export default function TournamentItem(props: { tournament: ITournament }) {
   const startTime = new Date(props.tournament.startDate).getTime()
   const registrationsOpen = Date.now() > startTime - REGISTRATION_TIME
   const tournamentStarted = Date.now() > startTime
-  const players = [...props.tournament.players.values()]
-  const brackets = [...props.tournament.brackets.values()]
+  const players = values(props.tournament.players)
+  const brackets = values(props.tournament.brackets)
   const remainingPlayers = players.filter((p) => !p.eliminated)
 
   return (
     <div className="tournament-item nes-container">
       <span className="tournament-name">{props.tournament.name}</span>
       {tournamentStarted ? (
-        <p>
-          {t("stage")}: Quarter finals
-          <br />
-          {t("players_remaining")}: {remainingPlayers.length}
-        </p>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <span>
+            {t("stage")}: {getTournamentStage(props.tournament)}
+          </span>
+          <span>
+            {t("players_remaining")}: {remainingPlayers.length}
+          </span>
+        </div>
       ) : (
         <p>
           {t("starts_at")}{" "}
@@ -94,21 +101,22 @@ export default function TournamentItem(props: { tournament: ITournament }) {
           <TabPanel className="brackets">
             <p>Brackets</p>
             {brackets.map((bracket) => (
-              <>
+              <div className="bracket" key={bracket.name}>
                 <p>{bracket.name}</p>
                 <ul>
-                  {bracket.playersId
+                  {values(bracket.playersId)
                     .map((id) => props.tournament.players.get(id)!)
                     .filter((p) => p != null)
                     .map((p, i) => (
                       <TournamentPlayer
+                        key={"player" + i}
                         player={p}
                         rank={i + 1}
                         showScore={false}
                       />
                     ))}
                 </ul>
-              </>
+              </div>
             ))}
           </TabPanel>
         )}
@@ -118,7 +126,12 @@ export default function TournamentItem(props: { tournament: ITournament }) {
               {[...players]
                 .sort((a, b) => b.score - a.score)
                 .map((p, i) => (
-                  <TournamentPlayer player={p} rank={i + 1} showScore={true} />
+                  <TournamentPlayer
+                    key={"player" + i}
+                    player={p}
+                    rank={i + 1}
+                    showScore={true}
+                  />
                 ))}
             </ul>
           </TabPanel>
@@ -127,7 +140,12 @@ export default function TournamentItem(props: { tournament: ITournament }) {
           <TabPanel className="participants">
             <ul>
               {players.map((p, i) => (
-                <TournamentPlayer player={p} rank={i + 1} showScore={false} />
+                <TournamentPlayer
+                  key={"player" + i}
+                  player={p}
+                  rank={i + 1}
+                  showScore={false}
+                />
               ))}
             </ul>
           </TabPanel>
@@ -138,7 +156,7 @@ export default function TournamentItem(props: { tournament: ITournament }) {
 }
 
 export function TournamentPlayer(props: {
-  player: ITournamentPlayer
+  player: TournamentPlayerSchema
   rank: number
   showScore: boolean
 }) {

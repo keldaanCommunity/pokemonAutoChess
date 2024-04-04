@@ -48,23 +48,26 @@ export function makeBrackets(tournament: ITournament): ITournamentBracket[] {
   }
 
   let nbBrackets = Math.ceil(remainingPlayers.length / idealNbPerBracket)
-  let nbPerBracket = Math.ceil(remainingPlayers.length / nbBrackets)
   const brackets: ITournamentBracket[] = []
+
   for (let i = 0; i < nbBrackets; i++) {
-    const playersId: string[] = []
-    while (playersId.length < nbPerBracket && remainingPlayers.length > 0) {
-      /* Seeding: The number one ranked plays the lowest ranked, the number two ranked plays the second lowest ranked and so on.*/
-      if (remainingPlayers.length > 0)
-        playersId.push(remainingPlayers.shift()!.id)
-      if (remainingPlayers.length > nbBrackets - i)
-        // try to balance number of players between brackets
-        playersId.push(remainingPlayers.pop()!.id)
-    }
     const bracket: ITournamentBracket = {
       name: `${getTournamentStage(tournament)} #${i + 1}`,
-      playersId
+      playersId: []
     }
     brackets.push(bracket)
+  }
+
+  let b = 0
+  while (remainingPlayers.length > 0) {
+    const bracket = brackets[b]
+    /* Seeding: The number one ranked plays the lowest ranked, the number two ranked plays the second lowest ranked and so on.*/
+    if (remainingPlayers.length > 0)
+      bracket.playersId.push(remainingPlayers.shift()!.id)
+    if (remainingPlayers.length > nbBrackets - b)
+      // try to balance number of players between brackets
+      bracket.playersId.push(remainingPlayers.pop()!.id)
+    b = (b + 1) % nbBrackets
   }
 
   return brackets
