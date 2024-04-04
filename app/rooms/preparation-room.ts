@@ -78,6 +78,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     noElo?: boolean
     autoStartDelayInSeconds?: number
     whitelist?: string[]
+    tournamentId?: string
   }) {
     // logger.debug(options);
     //logger.info(`create ${options.roomName}`)
@@ -91,7 +92,8 @@ export default class PreparationRoom extends Room<PreparationState> {
       minRank: options.minRank ?? null,
       noElo: options.noElo ?? false,
       gameMode: options.gameMode,
-      whitelist: options.whitelist ?? null
+      whitelist: options.whitelist ?? null,
+      tournamentId: options.tournamentId ?? null
     })
     this.maxClients = 8
     // if (options.ownerId) {

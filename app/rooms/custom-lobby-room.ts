@@ -30,6 +30,7 @@ import {
 } from "../types/Config"
 import { GameMode } from "../types/enum/Game"
 import { Language } from "../types/enum/Language"
+import { ITournament } from "../types/interfaces/Tournament"
 import { logger } from "../utils/logger"
 import {
   AddBotCommand,
@@ -59,7 +60,8 @@ import {
   createBotList,
   RemoveTournamentCommand,
   OnCreateTournamentCommand,
-  ParticipateInTournamentCommand
+  ParticipateInTournamentCommand,
+  NextTournamentStageCommand
 } from "./commands/lobby-commands"
 import LobbyState from "./states/lobby-state"
 
@@ -74,6 +76,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
   unsubscribeLobby: (() => void) | undefined
   rooms: RoomListingData<any>[] | undefined
   dispatcher: Dispatcher<this>
+  tournamentCronJobs: Map<string, CronJob>
 
   constructor() {
     super()
@@ -106,6 +109,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     this.leaderboard = new Array<ILeaderboardInfo>()
     this.botLeaderboard = new Array<ILeaderboardBotInfo>()
     this.levelLeaderboard = new Array<ILeaderboardInfo>()
+    this.tournamentCronJobs = new Map<string, CronJob>()
   }
 
   async onCreate(): Promise<void> {
@@ -425,6 +429,10 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       this.state.addAnnouncement(`${player.name} won the ranked match !`)
     })
 
+    this.presence.subscribe("tournament-winner", (player: IPlayer) => {
+      this.state.addAnnouncement(`${player.name} won the tournament !`)
+    })
+
     this.presence.subscribe(
       "special-game-full",
       (params: {
@@ -585,14 +593,29 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
               tournament.name,
               tournament.startDate,
               tournament.players,
-              tournament.currentMatches
+              tournament.brackets
             )
           )
+
+          if (this.tournamentCronJobs.has(tournament.id) === false) {
+            this.tournamentCronJobs.set(
+              tournament.id,
+              new CronJob(new Date(tournament.startDate), () =>
+                this.startTournament(tournament)
+              )
+            )
+          }
         })
       }
     } catch (error) {
       logger.error(error)
     }
+  }
+
+  startTournament(tournament: ITournament) {
+    this.dispatcher.dispatch(new NextTournamentStageCommand(), {
+      tournamentId: tournament.id
+    })
   }
 
   initCronJobs() {

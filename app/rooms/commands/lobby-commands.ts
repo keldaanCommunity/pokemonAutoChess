@@ -3,6 +3,7 @@ import { ArraySchema } from "@colyseus/schema"
 import { Client, matchMaker, RoomListingData } from "colyseus"
 import { EmbedBuilder } from "discord.js"
 import { nanoid } from "nanoid"
+import { getRemainingPlayers, makeBrackets } from "../../core/tournament-logic"
 import { GameRecord } from "../../models/colyseus-models/game-record"
 import LobbyUser from "../../models/colyseus-models/lobby-user"
 import PokemonConfig from "../../models/colyseus-models/pokemon-config"
@@ -1239,6 +1240,59 @@ export class ParticipateInTournamentCommand extends Command<
       }
     } catch (error) {
       logger.error(error)
+    }
+  }
+}
+
+export class NextTournamentStageCommand extends Command<
+  CustomLobbyRoom,
+  { tournamentId: string }
+> {
+  async execute({ tournamentId }: { tournamentId: string }) {
+    const tournament = await Tournament.findById(tournamentId)
+    if (tournament) {
+      const remainingPlayers = getRemainingPlayers(tournament)
+      if (remainingPlayers.length <= 8) {
+        // finals ended, elect tournament winner
+        return [new EndTournamentCommand().setPayload({ tournamentId })]
+      }
+
+      const brackets = makeBrackets(tournament)
+      await Promise.all(
+        brackets.map((bracket) => {
+          logger.info(`Creating tournament game ${bracket.name}`)
+
+          return matchMaker
+            .createRoom("preparation", {
+              gameMode: GameMode.TOURNAMENT,
+              noElo: true,
+              ownerId: null,
+              roomName: bracket.name,
+              autoStartDelayInSeconds: 15 * 60,
+              whitelist: bracket.playersId,
+              tournamentId
+            })
+            .then((room) => {
+              tournament.brackets.set(room.roomId, bracket)
+            })
+        })
+      )
+
+      tournament.save()
+    }
+  }
+}
+
+export class EndTournamentCommand extends Command<
+  CustomLobbyRoom,
+  { tournamentId: string }
+> {
+  async execute({ tournamentId }: { tournamentId: string }) {
+    const tournament = await Tournament.findById(tournamentId)
+    if (tournament) {
+      const players = getRemainingPlayers(tournament)
+      const winner = players.find((p) => p.ranks.at(-1) === 1)
+      this.room.presence.publish("tournament-winner", winner)
     }
   }
 }

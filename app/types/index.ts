@@ -589,6 +589,7 @@ export interface IPreparationMetadata {
   minRank: string | null
   gameMode: GameMode
   whitelist: string[] | null
+  tournamentId: string | null
 }
 
 export interface IGameMetadata {
