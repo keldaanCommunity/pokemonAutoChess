@@ -590,6 +590,7 @@ export interface IPreparationMetadata {
   gameMode: GameMode
   whitelist: string[] | null
   tournamentId: string | null
+  bracketId: string | null
 }
 
 export interface IGameMetadata {
@@ -599,6 +600,7 @@ export interface IGameMetadata {
   stageLevel: number
   type: "game"
   tournamentId: string | null
+  bracketId: string | null
 }
 
 export interface ISuggestionUser {

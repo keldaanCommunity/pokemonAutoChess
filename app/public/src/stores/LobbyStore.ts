@@ -260,7 +260,7 @@ export const lobbySlice = createSlice({
       const tournament = state.tournaments.find(
         (t) => t.id == action.payload.tournamendId
       )
-      if (tournament) {
+      if (tournament && tournament.players.has(action.payload.userId)) {
         tournament.players.delete(action.payload.userId)
         state.tournaments = [...state.tournaments] // TOFIX: force reactivity through immutability
       }

@@ -440,16 +440,16 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       "tournament-match-end",
       ({
         tournamentId,
-        roomId,
+        bracketId,
         players
       }: {
         tournamentId: string
-        roomId: string
+        bracketId: string
         players: { id: string; rank: number }[]
       }) => {
         this.dispatcher.dispatch(new EndTournamentMatchCommand(), {
           tournamentId,
-          roomId,
+          bracketId,
           players
         })
       }
@@ -635,7 +635,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
             startDate.getTime() > Date.now() &&
             this.tournamentCronJobs.has(tournament.id) === false
           ) {
-            console.log(
+            logger.debug(
               "Start tournament cron job for",
               new Date(tournament.startDate)
             )
@@ -651,10 +651,14 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
             if (
               Date.now() <
-              startDate.getTime() + TOURNAMENT_REGISTRATION_TIME
+              startDate.getTime() - TOURNAMENT_REGISTRATION_TIME
             ) {
+              logger.debug(
+                "Start tournament registrations opening cron job for",
+                new Date(startDate.getTime() - TOURNAMENT_REGISTRATION_TIME)
+              )
               new CronJob(
-                new Date(startDate.getTime() + TOURNAMENT_REGISTRATION_TIME),
+                new Date(startDate.getTime() - TOURNAMENT_REGISTRATION_TIME),
                 () =>
                   this.state.addAnnouncement(
                     `${tournament.name} is starting in one hour. Tournament registration is now open in the Tournament tab.`

@@ -1290,23 +1290,22 @@ export class CreateTournamentLobbiesCommand extends Command<
       await Promise.all(
         brackets.map((bracket) => {
           logger.info(`Creating tournament game ${bracket.name}`)
+          const bracketId = nanoid()
+          tournament.brackets.set(
+            bracketId,
+            new TournamentBracketSchema(bracket.name, bracket.playersId)
+          )
 
-          return matchMaker
-            .createRoom("preparation", {
-              gameMode: GameMode.TOURNAMENT,
-              noElo: true,
-              ownerId: null,
-              roomName: bracket.name,
-              autoStartDelayInSeconds: 15 * 60,
-              whitelist: bracket.playersId,
-              tournamentId
-            })
-            .then((room) => {
-              tournament.brackets.set(
-                room.roomId,
-                new TournamentBracketSchema(bracket.name, bracket.playersId)
-              )
-            })
+          return matchMaker.createRoom("preparation", {
+            gameMode: GameMode.TOURNAMENT,
+            noElo: true,
+            ownerId: null,
+            roomName: bracket.name,
+            autoStartDelayInSeconds: 15 * 60,
+            whitelist: bracket.playersId,
+            tournamentId,
+            bracketId
+          })
         })
       )
 
@@ -1326,17 +1325,17 @@ export class EndTournamentMatchCommand extends Command<
   CustomLobbyRoom,
   {
     tournamentId: string
-    roomId: string
+    bracketId: string
     players: { id: string; rank: number }[]
   }
 > {
   async execute({
     tournamentId,
-    roomId,
+    bracketId,
     players
   }: {
     tournamentId: string
-    roomId: string
+    bracketId: string
     players: IPlayer[]
   }) {
     logger.debug("EndTournamentMatchCommand")
@@ -1347,9 +1346,9 @@ export class EndTournamentMatchCommand extends Command<
       if (!tournament)
         return logger.error(`Tournament not found: ${tournamentId}`)
 
-      const bracket = tournament.brackets.get(roomId)
+      const bracket = tournament.brackets.get(bracketId)
       if (!bracket)
-        return logger.error(`Tournament bracket not found: ${roomId}`)
+        return logger.error(`Tournament bracket not found: ${bracketId}`)
 
       bracket.finished = true
 
@@ -1367,7 +1366,7 @@ export class EndTournamentMatchCommand extends Command<
       bracket.playersId.forEach((playerId) => {
         const player = tournament.players.get(playerId)
         if (player && players.every((p) => p.id !== playerId)) {
-          // eliminate players who did not attend their bracker
+          // eliminate players who did not attend their bracket
           player.eliminated = true
         }
       })

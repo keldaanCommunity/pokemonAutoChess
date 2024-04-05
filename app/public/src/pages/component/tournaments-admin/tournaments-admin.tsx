@@ -91,14 +91,12 @@ export function TournamentItem(props: { tournament: ITournament }) {
       <button
         className="remove-btn bubbly red"
         onClick={() => {
-          if (
-            confirm("Cancel tournament ? All registrations will be deleted.")
-          ) {
+          if (confirm("Delete tournament and all registrations ?")) {
             dispatch(removeTournament({ id: props.tournament.id! }))
           }
         }}
       >
-        {t("cancel")}
+        {t("delete")}
       </button>
       <p className="name">{props.tournament.name}</p>
       <p className="date">{formatDate(new Date(props.tournament.startDate))}</p>
