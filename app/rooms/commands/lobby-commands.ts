@@ -1246,7 +1246,7 @@ export class NextTournamentStageCommand extends Command<
 > {
   async execute({ tournamentId }: { tournamentId: string }) {
     try {
-      console.log("NextTournamentStageCommand")
+      logger.debug("NextTournamentStageCommand")
       const tournament = this.state.tournaments.find(
         (t) => t.id === tournamentId
       )
@@ -1274,7 +1274,7 @@ export class CreateTournamentLobbiesCommand extends Command<
 > {
   async execute({ tournamentId }: { tournamentId: string }) {
     try {
-      console.log("CreateTournamentLobbiesCommand")
+      logger.debug("CreateTournamentLobbiesCommand")
       const tournament = this.state.tournaments.find(
         (t) => t.id === tournamentId
       )
@@ -1339,7 +1339,7 @@ export class EndTournamentMatchCommand extends Command<
     roomId: string
     players: IPlayer[]
   }) {
-    console.log("EndTournamentMatchCommand")
+    logger.debug("EndTournamentMatchCommand")
     try {
       const tournament = this.state.tournaments.find(
         (t) => t.id === tournamentId
@@ -1395,7 +1395,7 @@ export class EndTournamentCommand extends Command<
 > {
   async execute({ tournamentId }: { tournamentId: string }) {
     try {
-      console.log("EndTournamentCommand")
+      logger.debug("EndTournamentCommand")
       const tournament = this.state.tournaments.find(
         (t) => t.id === tournamentId
       )

@@ -230,7 +230,6 @@ export const lobbySlice = createSlice({
       state,
       action: PayloadAction<{ tournamentId: string; field: string; value: any }>
     ) => {
-      console.log("changeTournament", action.payload)
       const tournament = state.tournaments.find(
         (t) => t.id == action.payload.tournamentId
       )
@@ -275,7 +274,6 @@ export const lobbySlice = createSlice({
         value: any
       }>
     ) => {
-      //console.log("changeTournamentPlayer", action.payload)
       const tournament = state.tournaments.find(
         (t) => t.id == action.payload.tournamentId
       )
@@ -323,7 +321,6 @@ export const lobbySlice = createSlice({
         value: any
       }>
     ) => {
-      //console.log("changeTournamentBracket", action.payload)
       const tournament = state.tournaments.find(
         (t) => t.id == action.payload.tournamentId
       )

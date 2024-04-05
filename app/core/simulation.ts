@@ -665,7 +665,6 @@ export default class Simulation extends Schema implements ISimulation {
         const strongestEnemy = getStrongestUnit(opponentsCursable)
         if (strongestEnemy) {
           strongestEnemy.status.triggerCurse(8000)
-          console.log(`${strongestEnemy.name} is cursed`)
         }
       }
     })

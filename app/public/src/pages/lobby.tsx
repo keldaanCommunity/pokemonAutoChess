@@ -226,7 +226,6 @@ export async function joinLobbyRoom(
             })
 
             tournament.players.onAdd((player, userId) => {
-              //console.log("onAdd tournament players")
               dispatch(
                 addTournamentPlayer({
                   tournamendId: tournament.id,
@@ -252,14 +251,12 @@ export async function joinLobbyRoom(
             })
 
             tournament.players.onRemove((player, userId) => {
-              //console.log("onRemove tournament players")
               dispatch(
                 removeTournamentPlayer({ tournamendId: tournament.id, userId })
               )
             })
 
             tournament.brackets.onAdd((bracket, roomId) => {
-              //console.log("onAdd tournament bracket")
               dispatch(
                 addTournamentBracket({
                   tournamendId: tournament.id,
@@ -298,7 +295,6 @@ export async function joinLobbyRoom(
             })
 
             tournament.brackets.onRemove((bracket, roomId) => {
-              //console.log("onRemove tournament bracket")
               dispatch(
                 removeTournamentBracket({ tournamendId: tournament.id, roomId })
               )

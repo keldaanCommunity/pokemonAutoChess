@@ -611,9 +611,12 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         tournaments.forEach((tournament) => {
           const startDate = new Date(tournament.startDate)
 
-          if(tournament.finished && Date.now() > startDate.getTime() + TOURNAMENT_CLEANUP_DELAY){
+          if (
+            tournament.finished &&
+            Date.now() > startDate.getTime() + TOURNAMENT_CLEANUP_DELAY
+          ) {
             Tournament.findByIdAndDelete(tournament.id)
-            return;
+            return
           }
 
           this.state.tournaments.push(
@@ -626,12 +629,15 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
               tournament.finished
             )
           )
-          
+
           if (
             startDate.getTime() > Date.now() &&
             this.tournamentCronJobs.has(tournament.id) === false
           ) {
-            console.log("init tournament cron", new Date(tournament.startDate))
+            console.log(
+              "Start tournament cron job for",
+              new Date(tournament.startDate)
+            )
             this.tournamentCronJobs.set(
               tournament.id,
               new CronJob(
@@ -642,7 +648,10 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
               )
             )
 
-            if (Date.now() < startDate.getTime() + TOURNAMENT_REGISTRATION_TIME) {
+            if (
+              Date.now() <
+              startDate.getTime() + TOURNAMENT_REGISTRATION_TIME
+            ) {
               new CronJob(
                 new Date(startDate.getTime() + TOURNAMENT_REGISTRATION_TIME),
                 () =>
@@ -662,14 +671,14 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
   }
 
   startTournament(tournament: ITournament) {
-    console.log("startTournament")
+    logger.info(`Start tournament ${tournament.name}`)
     this.dispatcher.dispatch(new NextTournamentStageCommand(), {
       tournamentId: tournament.id
     })
   }
 
   initCronJobs() {
-    logger.debug("initCronJobs")
+    logger.debug("init cron jobs")
     const leaderboardRefreshJob = CronJob.from({
       cronTime: "0 0/10 * * * *", // every 10 minutes
       timeZone: "Europe/Paris",
