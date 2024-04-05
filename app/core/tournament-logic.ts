@@ -19,7 +19,7 @@ export function getRemainingPlayers(
 }
 
 export function getTournamentStage(tournament: ITournament): string {
-  if(tournament.finished) return "Finished"
+  if (tournament.finished) return "Finished"
   const remainingPlayers = getRemainingPlayers(tournament)
   if (remainingPlayers.length <= 8) return "FINALS"
   if (remainingPlayers.length <= 16) return "Semi-Finals"
@@ -66,7 +66,7 @@ export function makeBrackets(tournament: ITournament): ITournamentBracket[] {
     /* Seeding: The number one ranked plays the lowest ranked, the number two ranked plays the second lowest ranked and so on.*/
     if (remainingPlayers.length > 0)
       bracket.playersId.push(remainingPlayers.shift()!.id)
-    if (remainingPlayers.length > nbBrackets - b)
+    if (remainingPlayers.length > nbBrackets - b - 1)
       // try to balance number of players between brackets
       bracket.playersId.push(remainingPlayers.pop()!.id)
     b = (b + 1) % nbBrackets

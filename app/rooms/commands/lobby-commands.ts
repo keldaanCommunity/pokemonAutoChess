@@ -1310,10 +1310,10 @@ export class CreateTournamentLobbiesCommand extends Command<
       )
 
       //save brackets to db
-      const tournamentDb = await Tournament.findById(tournamentId)
-      if (tournamentDb) {
-        tournamentDb.brackets = convertSchemaToRawObject(tournament.brackets)
-        await tournamentDb.save()
+      const mongoTournament = await Tournament.findById(tournamentId)
+      if (mongoTournament) {
+        mongoTournament.brackets = convertSchemaToRawObject(tournament.brackets)
+        await mongoTournament.save()
       }
     } catch (error) {
       logger.error(error)
@@ -1372,15 +1372,17 @@ export class EndTournamentMatchCommand extends Command<
       })
 
       if (values(tournament.brackets).every((b) => b.finished)) {
-        return [new NextTournamentStageCommand().setPayload({ tournamentId })]
-      }
+        //save brackets and player ranks to db before moving to next stage
+        const mongoTournament = await Tournament.findById(tournamentId)
+        if (mongoTournament) {
+          mongoTournament.players = convertSchemaToRawObject(tournament.players)
+          mongoTournament.brackets = convertSchemaToRawObject(
+            tournament.brackets
+          )
+          mongoTournament.save()
+        }
 
-      //save brackets and player ranks to db
-      const tournamentDb = await Tournament.findById(tournamentId)
-      if (tournamentDb) {
-        tournamentDb.players = convertSchemaToRawObject(tournament.players)
-        tournamentDb.brackets = convertSchemaToRawObject(tournament.brackets)
-        tournamentDb.save()
+        return [new NextTournamentStageCommand().setPayload({ tournamentId })]
       }
     } catch (error) {
       logger.error(error)
@@ -1408,6 +1410,15 @@ export class EndTournamentCommand extends Command<
       if (winner) {
         this.room.presence.publish("tournament-winner", winner)
         tournament.finished = true
+
+        const mongoTournament = await Tournament.findById(tournamentId)
+        if (mongoTournament) {
+          mongoTournament.finished = true
+          mongoTournament.brackets = convertSchemaToRawObject(
+            tournament.brackets
+          )
+          mongoTournament.save()
+        }
 
         const mongoUser = await UserMetadata.findOne({ uid: winner.id })
         if (

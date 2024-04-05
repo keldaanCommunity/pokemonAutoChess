@@ -37,14 +37,10 @@ export default function TournamentItem(props: {
     <div className="tournament-item nes-container">
       <span className="tournament-name">{props.tournament.name}</span>
       {tournamentFinished ? (
-        <div>
-          {t("stage")}: {getTournamentStage(props.tournament)}
-        </div>
+        <div>{getTournamentStage(props.tournament)}</div>
       ) : tournamentStarted ? (
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <span>
-            {t("stage")}: {getTournamentStage(props.tournament)}
-          </span>
+          <span>{getTournamentStage(props.tournament)}</span>
           <span>
             {t("players_remaining")}: {remainingPlayers.length}
           </span>
@@ -131,9 +127,10 @@ export default function TournamentItem(props: {
           <TabPanel className="ranking">
             <ul>
               {entries(props.tournament.players)
-                .sort(
-                  ([idA, a], [idB, b]) =>
-                    average(...values(a.ranks)) - average(...values(b.ranks))
+                .sort(([idA, a], [idB, b]) =>
+                  a.ranks.length !== b.ranks.length
+                    ? b.ranks.length - a.ranks.length
+                    : average(...values(a.ranks)) - average(...values(b.ranks))
                 )
                 .map(([id, player], i) => (
                   <TournamentPlayer
