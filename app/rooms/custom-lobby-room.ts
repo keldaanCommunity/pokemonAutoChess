@@ -608,14 +608,15 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       const tournaments = await Tournament.find()
       if (tournaments) {
         this.state.tournaments.clear()
-        tournaments.forEach((tournament) => {
+        tournaments.forEach(async (tournament) => {
           const startDate = new Date(tournament.startDate)
 
           if (
             tournament.finished &&
             Date.now() > startDate.getTime() + TOURNAMENT_CLEANUP_DELAY
           ) {
-            Tournament.findByIdAndDelete(tournament.id)
+            logger.debug(`Deleted old tournament ${tournament.name}`)
+            await Tournament.findByIdAndDelete(tournament.id)
             return
           }
 
