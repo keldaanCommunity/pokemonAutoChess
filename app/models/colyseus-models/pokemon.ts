@@ -4834,6 +4834,21 @@ export class Heracross extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class Zangoose extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.FACADE
+  passive = Passive.TOXIC_BOOST
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
 export class Registeel extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.HUMAN])
   rarity = Rarity.UNIQUE
@@ -13321,5 +13336,6 @@ export const PokemonClasses: Record<
   [Pkm.CRABRAWLER]: Crabrawler,
   [Pkm.CRABOMINABLE]: Crabominable,
   [Pkm.CUTIEFLY]: Cutiefly,
-  [Pkm.RIBOMBEE]: Ribombee
+  [Pkm.RIBOMBEE]: Ribombee,
+  [Pkm.ZANGOOSE]: Zangoose
 }

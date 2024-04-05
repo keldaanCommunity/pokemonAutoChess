@@ -317,7 +317,8 @@
     "PSYCHO_BOOST": "Psycho Boost",
     "ICE_HAMMER": "Ice Hammer",
     "POLLEN_PUFF": "Pollen Puff",
-    "PSYSTRIKE": "Psystrike"
+    "PSYSTRIKE": "Psystrike",
+    "FACADE": "Facade"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1067,7 +1068,8 @@
     "CRABRAWLER": "Crabrawler",
     "CRABOMINABLE": "Crabominable",
     "CUTIEFLY": "Cutiefly",
-    "RIBOMBEE": "Ribombee"
+    "RIBOMBEE": "Ribombee",
+    "ZANGOOSE": "Zangoose"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1213,7 +1215,7 @@
     "OVERHEAT": "Deals [30,SP] SPECIAL to all enemies. +30% damage if target is BURN",
     "HYPNOSIS": "Put SLEEP 1 enemy in the back lines for [2,3.5,6,SP=0.5] seconds",
     "MIMIC": "Copies the ability of the current target",
-    "HEX": "Deals [20,40,80,SP] SPECIAL to the target. Doubles damage if target is BURN, CONFUSION, FREEZE, PARALYSIS, POISONNED, SILENCE, SLEEP or WOUND",
+    "HEX": "Deals [20,40,80,SP] SPECIAL to the target. Doubles damage if target is BURN, CONFUSION, FREEZE, PARALYSIS, POISONNED, SILENCE, SLEEP, FLINCH, CHARM, ARMOR_REDUCTION or WOUND",
     "GROWTH": "Increase body size and ATK by [10,SP]. Grows twice as fast if weather is SUN",
     "HEAL_ORDER": "Deals [25,45,65,SP] SPECIAL to adjacent enemies and heal [25,45,65,SP] to adjacent allies",
     "SHELL_TRAP": "After the next PHYSICAL received, the trap explodes and deal [100,SP] SPECIAL to adjacent enemies",
@@ -1370,7 +1372,8 @@
     "PSYCHO_BOOST": "Cut a slash horizontally around the target, dealing [140,SP] SPECIAL to all ennemies hit. Reduce the caster AP by 20 for each Pokémon hit",
     "ICE_HAMMER": "Deals [50,100] SPECIAL to the target, causing it to FREEZE for 3s. PARALYSIS the caster for 3s",
     "POLLEN_PUFF":"Give the lowest HP ally a pollen puff that restores [20,40,80,SP] HP",
-    "PSYSTRIKE": "The caster materializes a strange psychic wave towards the furthest enemy, inflicting [100,SP] PHYSICAL damage and teleporting everything in its path."
+    "PSYSTRIKE": "The caster materializes a strange psychic wave towards the furthest enemy, inflicting [100,SP] PHYSICAL damage and teleporting everything in its path",
+    "FACADE": "Deals [20,40,80,SP] SPECIAL. Doubles damage if the pokémon is BURN, CONFUSION, FREEZE, PARALYSIS, POISONNED, SILENCE, SLEEP, FLINCH, CHARM, ARMOR_REDUCTION or WOUND"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1882,7 +1885,8 @@
     "COSMOEM": "$t(pkm.COSMOEM) is feeding with the energy of the stars. Gain 10 permanent max HP every time you evolve a unit. Evolve after 10 times into $t(pkm.SOLGALEO) if in the light spot, or $t(pkm.LUNALA) instead.",
     "SOUL_HEART": "Every time the caster gets a KO, gain 10 AP and 10 PP",
     "ALIEN_DNA": "$t(pkm.DEOXYS) reacts to METEORITE by changing shape",
-    "BERRY_EATER": "When the Pokémon attacks a target, he steals all its berries and eats them"
+    "BERRY_EATER": "When the Pokémon attacks a target, he steals all its berries and eats them",
+    "TOXIC_BOOST": "The pokémon gains 10 ATK as long as it is POISONNED"
   },
   "stat": {
     "ATK": "Attack",

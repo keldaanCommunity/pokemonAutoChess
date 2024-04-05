@@ -42,6 +42,7 @@ export default class Status extends Schema implements IStatus {
   deltaOrbStacks = 0
   clearWing = false
   guts = false
+  toxicBoost = false
   burnOrigin: PokemonEntity | undefined = undefined
   poisonOrigin: PokemonEntity | undefined = undefined
   silenceOrigin: PokemonEntity | undefined = undefined
@@ -92,6 +93,23 @@ export default class Status extends Schema implements IStatus {
     this.armorReductionCooldown = 0
     this.curseCooldown = 0
     this.curse = false
+  }
+
+  hasNegativeStatus() {
+    return (
+      this.burn ||
+      this.silence ||
+      this.poisonStacks > 0 ||
+      this.freeze ||
+      this.sleep ||
+      this.confusion ||
+      this.wound ||
+      this.paralysis ||
+      this.charm ||
+      this.flinch ||
+      this.armorReduction ||
+      this.curse
+    )
   }
 
   updateAllStatus(dt: number, pokemon: PokemonEntity, board: Board) {
@@ -477,6 +495,11 @@ export default class Status extends Schema implements IStatus {
         pkm.addAttack(5, false)
       }
 
+      if (pkm.passive === Passive.TOXIC_BOOST && !this.toxicBoost) {
+        this.toxicBoost = true
+        pkm.addAttack(10, false)
+      }
+
       if (pkm.items.has(Item.PECHA_BERRY)) {
         pkm.eatBerry(Item.PECHA_BERRY)
       }
@@ -525,6 +548,10 @@ export default class Status extends Schema implements IStatus {
       if (pkm.passive === Passive.GUTS && !this.burn) {
         this.guts = false
         pkm.addAttack(-5, false)
+      }
+      if (pkm.passive === Passive.TOXIC_BOOST) {
+        this.toxicBoost = false
+        pkm.addAttack(-10, false)
       }
     } else {
       this.poisonCooldown = this.poisonCooldown - dt

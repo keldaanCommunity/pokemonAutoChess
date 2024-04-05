@@ -747,7 +747,8 @@ export enum Pkm {
   CRABRAWLER = "CRABRAWLER",
   CRABOMINABLE = "CRABOMINABLE",
   CUTIEFLY = "CUTIEFLY",
-  RIBOMBEE = "RIBOMBEE"
+  RIBOMBEE = "RIBOMBEE",
+  ZANGOOSE = "ZANGOOSE"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1497,7 +1498,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.CRABRAWLER]: "0739",
   [Pkm.CRABOMINABLE]: "0740",
   [Pkm.CUTIEFLY]: "0742",
-  [Pkm.RIBOMBEE]: "0743"
+  [Pkm.RIBOMBEE]: "0743",
+  [Pkm.ZANGOOSE]: "0335"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2247,7 +2249,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.CRABRAWLER]: Pkm.CRABRAWLER,
   [Pkm.CRABOMINABLE]: Pkm.CRABRAWLER,
   [Pkm.CUTIEFLY]: Pkm.CUTIEFLY,
-  [Pkm.RIBOMBEE]: Pkm.CUTIEFLY
+  [Pkm.RIBOMBEE]: Pkm.CUTIEFLY,
+  [Pkm.ZANGOOSE]: Pkm.ZANGOOSE
 }
 
 export enum PkmDuo {
@@ -6123,6 +6126,11 @@ export const AnimationConfig: {
   },
   [Pkm.RIBOMBEE]: {
     attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.ZANGOOSE]: {
+    attack: AnimationType.MultiScratch,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
   }
