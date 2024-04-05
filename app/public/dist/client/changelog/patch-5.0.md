@@ -5,6 +5,7 @@
 - Crabominable
 - Cutiefly
 - Ribombee
+- Zangoose
 
 # Changes to Pokemon & Abilities
 

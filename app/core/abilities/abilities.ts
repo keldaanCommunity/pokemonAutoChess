@@ -4595,16 +4595,7 @@ export class HexStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     let damage = pokemon.stars === 3 ? 80 : pokemon.stars === 2 ? 40 : 20
-    if (
-      target.status.burn ||
-      target.status.confusion ||
-      target.status.freeze ||
-      target.status.paralysis ||
-      target.status.poisonStacks > 0 ||
-      target.status.silence ||
-      target.status.sleep ||
-      target.status.wound
-    ) {
+    if (target.status.hasNegativeStatus()) {
       damage = damage * 2
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
@@ -7825,6 +7816,31 @@ export class IceHammerStrategy extends AbilityStrategy {
   }
 }
 
+export class FacadeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damage = pokemon.stars === 3 ? 80 : pokemon.stars === 2 ? 40 : 20
+
+    if (pokemon.status.hasNegativeStatus()) {
+      damage *= 2
+    }
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
+  }
+}
+
 export class ExtremeSpeedStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -8288,5 +8304,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.EXTREME_SPEED]: new ExtremeSpeedStrategy(),
   [Ability.ICE_HAMMER]: new IceHammerStrategy(),
   [Ability.POLLEN_PUFF]: new PollenPuffStrategy(),
-  [Ability.PSYSTRIKE]: new PsystrikeStrategy()
+  [Ability.PSYSTRIKE]: new PsystrikeStrategy(),
+  [Ability.FACADE]: new FacadeStrategy()
 }
