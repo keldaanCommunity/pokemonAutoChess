@@ -404,6 +404,37 @@ export class Ribombee extends Pokemon {
   additional = true
 }
 
+export class Nickit extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIELD, Synergy.DARK])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.THIEVUL
+  hp = 75
+  atk = 8
+  def = 1
+  speDef = 1
+  maxPP = 50
+  range = 2
+  skill = Ability.THIEF
+  attackSprite = AttackSprite.NORMAL_MELEE
+  additional = true
+}
+
+export class Thievul extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIELD, Synergy.DARK])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 170
+  atk = 19
+  def = 2
+  speDef = 2
+  maxPP = 50
+  range = 2
+  skill = Ability.THIEF
+  attackSprite = AttackSprite.NORMAL_MELEE
+  additional = true
+}
+
 export class Swablu extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.SOUND])
   rarity = Rarity.ULTRA
@@ -13337,5 +13368,7 @@ export const PokemonClasses: Record<
   [Pkm.CRABOMINABLE]: Crabominable,
   [Pkm.CUTIEFLY]: Cutiefly,
   [Pkm.RIBOMBEE]: Ribombee,
-  [Pkm.ZANGOOSE]: Zangoose
+  [Pkm.ZANGOOSE]: Zangoose,
+  [Pkm.NICKIT]: Nickit,
+  [Pkm.THIEVUL]: Thievul
 }
