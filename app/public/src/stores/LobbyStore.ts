@@ -237,33 +237,8 @@ export const lobbySlice = createSlice({
         tournament[action.payload.field] = action.payload.value
       }
     },
-    addTournamentPlayer: (
-      state,
-      action: PayloadAction<{
-        tournamendId: string
-        userId: string
-        player: TournamentPlayerSchema
-      }>
-    ) => {
-      const tournament = state.tournaments.find(
-        (t) => t.id == action.payload.tournamendId
-      )
-      if (tournament) {
-        tournament.players.set(action.payload.userId, action.payload.player)
-        state.tournaments = [...state.tournaments] // TOFIX: force reactivity through immutability
-      }
-    },
-    removeTournamentPlayer: (
-      state,
-      action: PayloadAction<{ tournamendId: string; userId: string }>
-    ) => {
-      const tournament = state.tournaments.find(
-        (t) => t.id == action.payload.tournamendId
-      )
-      if (tournament && tournament.players.has(action.payload.userId)) {
-        tournament.players.delete(action.payload.userId)
-        state.tournaments = [...state.tournaments] // TOFIX: force reactivity through immutability
-      }
+    updateTournament: (state) => {
+      state.tournaments = [...state.tournaments] // TOFIX: force reactivity through immutability
     },
     changeTournamentPlayer: (
       state,
@@ -362,8 +337,7 @@ export const {
   addTournament,
   removeTournament,
   changeTournament,
-  addTournamentPlayer,
-  removeTournamentPlayer,
+  updateTournament,
   changeTournamentPlayer,
   addTournamentBracket,
   removeTournamentBracket,

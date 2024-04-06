@@ -27,7 +27,6 @@ import {
   addRoom,
   addTournament,
   addTournamentBracket,
-  addTournamentPlayer,
   addUser,
   changePokemonConfig,
   changeTournament,
@@ -41,7 +40,6 @@ import {
   removeRoom,
   removeTournament,
   removeTournamentBracket,
-  removeTournamentPlayer,
   removeUser,
   setBoosterContent,
   setBotData,
@@ -55,7 +53,8 @@ import {
   setPastebinUrl,
   setSearchedUser,
   setSuggestions,
-  setUser
+  setUser,
+  updateTournament
 } from "../stores/LobbyStore"
 import {
   joinLobby,
@@ -226,13 +225,7 @@ export async function joinLobbyRoom(
             })
 
             tournament.players.onAdd((player, userId) => {
-              dispatch(
-                addTournamentPlayer({
-                  tournamendId: tournament.id,
-                  userId,
-                  player
-                })
-              )
+              dispatch(updateTournament()) // TOFIX: force redux reactivity
               const fields: NonFunctionPropNames<TournamentPlayerSchema>[] = [
                 "eliminated"
               ]
@@ -251,9 +244,7 @@ export async function joinLobbyRoom(
             })
 
             tournament.players.onRemove((player, userId) => {
-              dispatch(
-                removeTournamentPlayer({ tournamendId: tournament.id, userId })
-              )
+              dispatch(updateTournament()) // TOFIX: force redux reactivity
             })
 
             tournament.brackets.onAdd((bracket, roomId) => {

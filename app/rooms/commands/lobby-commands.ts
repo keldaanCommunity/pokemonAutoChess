@@ -1222,7 +1222,7 @@ export class ParticipateInTournamentCommand extends Command<
         )
 
         tournament.players.set(user.uid, tournamentPlayer)
-      } else {
+      } else if(tournament.players.has(user.uid)){
         logger.debug(
           `${user.uid} no longer participates in tournament ${tournamentId}`
         )
