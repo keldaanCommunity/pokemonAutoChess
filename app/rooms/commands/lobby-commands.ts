@@ -1214,7 +1214,7 @@ export class ParticipateInTournamentCommand extends Command<
       if (!user) return
 
       if (participate) {
-        logger.debug(`${user.uid} participates in tournament ${tournamentId}`)
+        //logger.debug(`${user.uid} participates in tournament ${tournamentId}`)
         const tournamentPlayer = new TournamentPlayerSchema(
           user.displayName,
           user.avatar,
@@ -1222,10 +1222,10 @@ export class ParticipateInTournamentCommand extends Command<
         )
 
         tournament.players.set(user.uid, tournamentPlayer)
-      } else if(tournament.players.has(user.uid)){
-        logger.debug(
+      } else if (tournament.players.has(user.uid)) {
+        /*logger.debug(
           `${user.uid} no longer participates in tournament ${tournamentId}`
-        )
+        )*/
         tournament.players.delete(user.uid)
       }
 
@@ -1246,7 +1246,7 @@ export class NextTournamentStageCommand extends Command<
 > {
   async execute({ tournamentId }: { tournamentId: string }) {
     try {
-      logger.debug("NextTournamentStageCommand")
+      logger.debug(`Tournament ${tournamentId} is moving to next stage`)
       const tournament = this.state.tournaments.find(
         (t) => t.id === tournamentId
       )
@@ -1277,7 +1277,7 @@ export class CreateTournamentLobbiesCommand extends Command<
 > {
   async execute({ tournamentId }: { tournamentId: string }) {
     try {
-      logger.debug("CreateTournamentLobbiesCommand")
+      logger.debug(`Creating tournament lobbies for tournament ${tournamentId}`)
       const tournament = this.state.tournaments.find(
         (t) => t.id === tournamentId
       )
@@ -1341,7 +1341,7 @@ export class EndTournamentMatchCommand extends Command<
     bracketId: string
     players: IPlayer[]
   }) {
-    logger.debug("EndTournamentMatchCommand")
+    logger.debug(`Tournament ${tournamentId} bracket ${bracketId} has ended`)
     try {
       const tournament = this.state.tournaments.find(
         (t) => t.id === tournamentId
@@ -1399,7 +1399,7 @@ export class EndTournamentCommand extends Command<
 > {
   async execute({ tournamentId }: { tournamentId: string }) {
     try {
-      logger.debug("EndTournamentCommand")
+      logger.debug(`Tournament ${tournamentId} is finished`)
       const tournament = this.state.tournaments.find(
         (t) => t.id === tournamentId
       )
