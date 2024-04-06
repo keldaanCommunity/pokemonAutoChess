@@ -456,14 +456,16 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     )
 
     this.presence.subscribe(
-      "special-game-full",
+      "lobby-full",
       (params: {
         gameMode: GameMode
         minRank: EloRank | null
         noElo?: boolean
       }) => {
         // open another special lobby when the previous one is full
-        this.dispatcher.dispatch(new OpenSpecialGameCommand(), params)
+        if(params.gameMode === GameMode.RANKED || params.gameMode === GameMode.SCRIBBLE){
+          this.dispatcher.dispatch(new OpenSpecialGameCommand(), params)
+        }
       }
     )
 

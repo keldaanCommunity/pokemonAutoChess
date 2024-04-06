@@ -130,7 +130,7 @@ export class OnJoinCommand extends Command<
         this.clock.setTimeout(() => {
           this.room.dispatcher.dispatch(new OnGameStartRequestCommand())
           // open another one
-          this.room.presence.publish("special-game-full", {
+          this.room.presence.publish("lobby-full", {
             gameMode: this.state.gameMode,
             minRank: this.state.minRank,
             noElo: this.state.noElo
