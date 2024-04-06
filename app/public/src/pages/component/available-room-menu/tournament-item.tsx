@@ -33,6 +33,15 @@ export default function TournamentItem(props: {
   const brackets = values(props.tournament.brackets)
   const remainingPlayers = players.filter((p) => !p.eliminated)
 
+  const sortedPlayers = entries(props.tournament.players).sort(
+    ([idA, a], [idB, b]) => {
+      if (a.eliminated !== b.eliminated) return a.eliminated ? +1 : -1
+      if (a.ranks.length !== b.ranks.length)
+        return b.ranks.length - a.ranks.length
+      return average(...values(a.ranks)) - average(...values(b.ranks))
+    }
+  )
+
   return (
     <div className="tournament-item nes-container">
       <span className="tournament-name">{props.tournament.name}</span>
@@ -96,13 +105,15 @@ export default function TournamentItem(props: {
           {(tournamentStarted || tournamentFinished) && (
             <Tab>{t("ranking")}</Tab>
           )}
-          {registrationsOpen && (
+          {(registrationsOpen || tournamentStarted) && (
             <Tab>
               {t("participants")} ({players.length})
             </Tab>
           )}
         </TabList>
-        {!registrationsOpen && <p>{t("registrations_open_info")}</p>}
+        {!registrationsOpen && !tournamentStarted && (
+          <p>{t("registrations_open_info")}</p>
+        )}
         {tournamentStarted && (
           <TabPanel className="brackets">
             {brackets.map((bracket) => (
@@ -126,25 +137,19 @@ export default function TournamentItem(props: {
         {(tournamentStarted || tournamentFinished) && (
           <TabPanel className="ranking">
             <ul>
-              {entries(props.tournament.players)
-                .sort(([idA, a], [idB, b]) =>
-                  a.ranks.length !== b.ranks.length
-                    ? b.ranks.length - a.ranks.length
-                    : average(...values(a.ranks)) - average(...values(b.ranks))
-                )
-                .map(([id, player], i) => (
-                  <TournamentPlayer
-                    key={"player" + i}
-                    playerId={id}
-                    player={player}
-                    rank={i + 1}
-                    showScore={true}
-                  />
-                ))}
+              {sortedPlayers.map(([id, player], i) => (
+                <TournamentPlayer
+                  key={"player" + i}
+                  playerId={id}
+                  player={player}
+                  rank={i + 1}
+                  showScore={true}
+                />
+              ))}
             </ul>
           </TabPanel>
         )}
-        {registrationsOpen && (
+        {(registrationsOpen || tournamentStarted) && (
           <TabPanel className="participants">
             <ul>
               {entries(props.tournament.players).map(([id, player], i) => (

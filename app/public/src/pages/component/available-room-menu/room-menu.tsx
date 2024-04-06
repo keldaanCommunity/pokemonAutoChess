@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
+import { TournamentSchema } from "../../../../../models/colyseus-models/tournament"
 import GameState from "../../../../../rooms/states/game-state"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import {
@@ -15,7 +16,6 @@ import {
 } from "../../../../../types"
 import { MAX_PLAYERS_PER_GAME } from "../../../../../types/Config"
 import { GameMode } from "../../../../../types/enum/Game"
-import { ITournament } from "../../../../../types/interfaces/Tournament"
 import { throttle } from "../../../../../utils/function"
 import { logger } from "../../../../../utils/logger"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
@@ -23,9 +23,9 @@ import { leaveLobby } from "../../../stores/LobbyStore"
 import { LocalStoreKeys, localStore } from "../../utils/store"
 import GameRoomItem from "./game-room-item"
 import RoomItem from "./room-item"
-import "./room-menu.css"
 import { SpecialGameCountdown } from "./special-game-countdown"
 import TournamentItem from "./tournament-item"
+import "./room-menu.css"
 
 export default function RoomMenu(props: {
   toPreparation: boolean
@@ -39,7 +39,7 @@ export default function RoomMenu(props: {
   const gameRooms: RoomAvailable[] = useAppSelector(
     (state) => state.lobby.gameRooms
   )
-  const tournaments: ITournament[] = useAppSelector(
+  const tournaments: TournamentSchema[] = useAppSelector(
     (state) => state.lobby.tournaments
   )
   const client: Client = useAppSelector((state) => state.network.client)
@@ -54,6 +54,14 @@ export default function RoomMenu(props: {
     user.anonymous &&
     Date.now() - new Date(user.creationTime).getTime() < 10 * 60 * 1000
   const [isJoining, setJoining] = useState<boolean>(false)
+
+  const sortedTournaments = [...tournaments].sort((a, b) =>
+    a.finished !== b.finished
+      ? a.finished
+        ? +1
+        : -1
+      : new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+  )
 
   const navigate = useNavigate()
 
@@ -218,7 +226,7 @@ export default function RoomMenu(props: {
       {tournaments.length > 0 && (
         <TabPanel>
           <ul className="hidden-scrollable">
-            {tournaments.map((t) => (
+            {sortedTournaments.map((t) => (
               <li key={t.id}>
                 <TournamentItem tournament={t} />
               </li>

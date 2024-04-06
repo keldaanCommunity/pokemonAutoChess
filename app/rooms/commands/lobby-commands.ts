@@ -1254,7 +1254,10 @@ export class NextTournamentStageCommand extends Command<
         return logger.error(`Tournament not found: ${tournamentId}`)
 
       const remainingPlayers = getRemainingPlayers(tournament)
-      if (remainingPlayers.length <= 8) {
+      if (
+        remainingPlayers.length <= 4 &&
+        remainingPlayers.some((p) => p.ranks.length > 0)
+      ) {
         // finals ended
         return [new EndTournamentCommand().setPayload({ tournamentId })]
       } else {
@@ -1403,23 +1406,10 @@ export class EndTournamentCommand extends Command<
       if (!tournament)
         return logger.error(`Tournament not found: ${tournamentId}`)
 
-      tournament.brackets.clear()
-
       const players = getRemainingPlayers(tournament)
       const winner = players.find((p) => p.ranks[p.ranks.length - 1] === 1)
       if (winner) {
         this.room.presence.publish("tournament-winner", winner)
-        tournament.finished = true
-
-        const mongoTournament = await Tournament.findById(tournamentId)
-        if (mongoTournament) {
-          mongoTournament.finished = true
-          mongoTournament.brackets = convertSchemaToRawObject(
-            tournament.brackets
-          )
-          mongoTournament.save()
-        }
-
         const mongoUser = await UserMetadata.findOne({ uid: winner.id })
         if (
           mongoUser &&
@@ -1433,6 +1423,16 @@ export class EndTournamentCommand extends Command<
             user.titles.push(Title.CHAMPION)
           }
         }
+      }
+
+      tournament.brackets.clear()
+      tournament.finished = true
+
+      const mongoTournament = await Tournament.findById(tournamentId)
+      if (mongoTournament) {
+        mongoTournament.finished = true
+        mongoTournament.brackets = convertSchemaToRawObject(tournament.brackets)
+        await mongoTournament.save()
       }
     } catch (error) {
       logger.error(error)
