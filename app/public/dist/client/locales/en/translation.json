@@ -1069,7 +1069,9 @@
     "CRABOMINABLE": "Crabominable",
     "CUTIEFLY": "Cutiefly",
     "RIBOMBEE": "Ribombee",
-    "ZANGOOSE": "Zangoose"
+    "ZANGOOSE": "Zangoose",
+    "NICKIT": "Nickit",
+    "THIEVUL": "Thievul"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",

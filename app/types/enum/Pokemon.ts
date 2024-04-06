@@ -748,7 +748,9 @@ export enum Pkm {
   CRABOMINABLE = "CRABOMINABLE",
   CUTIEFLY = "CUTIEFLY",
   RIBOMBEE = "RIBOMBEE",
-  ZANGOOSE = "ZANGOOSE"
+  ZANGOOSE = "ZANGOOSE",
+  NICKIT = "NICKIT",
+  THIEVUL = "THIEVUL"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1499,7 +1501,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.CRABOMINABLE]: "0740",
   [Pkm.CUTIEFLY]: "0742",
   [Pkm.RIBOMBEE]: "0743",
-  [Pkm.ZANGOOSE]: "0335"
+  [Pkm.ZANGOOSE]: "0335",
+  [Pkm.NICKIT]: "0827",
+  [Pkm.THIEVUL]: "0828"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2250,7 +2254,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.CRABOMINABLE]: Pkm.CRABRAWLER,
   [Pkm.CUTIEFLY]: Pkm.CUTIEFLY,
   [Pkm.RIBOMBEE]: Pkm.CUTIEFLY,
-  [Pkm.ZANGOOSE]: Pkm.ZANGOOSE
+  [Pkm.ZANGOOSE]: Pkm.ZANGOOSE,
+  [Pkm.NICKIT]: Pkm.NICKIT,
+  [Pkm.THIEVUL]: Pkm.NICKIT
 }
 
 export enum PkmDuo {
@@ -6131,6 +6137,16 @@ export const AnimationConfig: {
   },
   [Pkm.ZANGOOSE]: {
     attack: AnimationType.MultiScratch,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.NICKIT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.THIEVUL]: {
+    attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
   }

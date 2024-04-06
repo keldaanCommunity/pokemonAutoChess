@@ -6,6 +6,8 @@
 - Cutiefly
 - Ribombee
 - Zangoose
+- Nickit
+- Thievul
 
 # Changes to Pokemon & Abilities
 
