@@ -12,6 +12,7 @@ import { IChatV2, Role, Transfer } from "../../types"
 import { EloRankThreshold, MAX_PLAYERS_PER_GAME } from "../../types/Config"
 import { BotDifficulty, GameMode } from "../../types/enum/Game"
 import { logger } from "../../utils/logger"
+import { max } from "../../utils/number"
 import { pickRandomIn } from "../../utils/random"
 import { entries, values } from "../../utils/schemas"
 import PreparationRoom from "../preparation-room"
@@ -113,9 +114,13 @@ export class OnJoinCommand extends Command<
         }
       }
 
+      const nbExpectedPlayers = this.room.metadata?.whitelist
+        ? max(MAX_PLAYERS_PER_GAME)(this.room.metadata?.whitelist.length)
+        : MAX_PLAYERS_PER_GAME
+
       if (
         this.state.gameMode !== GameMode.NORMAL &&
-        this.state.users.size === MAX_PLAYERS_PER_GAME
+        this.state.users.size === nbExpectedPlayers
       ) {
         // auto start when special lobby is full and all ready
         this.room.broadcast(Transfer.MESSAGES, {
