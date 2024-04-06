@@ -52,8 +52,12 @@ export function makeBrackets(tournament: ITournament): ITournamentBracket[] {
   const brackets: ITournamentBracket[] = []
 
   for (let i = 0; i < nbBrackets; i++) {
+    let bracketName = getTournamentStage(tournament)
+    if (nbBrackets > 1) {
+      bracketName += ` #${i + 1}`
+    }
     const bracket: ITournamentBracket = {
-      name: `${getTournamentStage(tournament)} #${i + 1}`,
+      name: bracketName,
       playersId: [],
       finished: false
     }
