@@ -15,7 +15,7 @@ export default function GameDpsHeal(props: {
       />
       <div className="game-dps-progress-wrapper">
         <p>{props.dpsHeal.heal + props.dpsHeal.shield}</p>
-        <ProgressBar className="nes-progress is-primary">
+        <ProgressBar className="my-progress is-primary">
           <ProgressBar
             style={{ backgroundColor: "#92cc41" }}
             max={props.maxHeal}

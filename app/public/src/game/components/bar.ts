@@ -25,7 +25,7 @@ export default class Bar extends GameObjects.DOMElement {
     this.dom.style.width = `${width}px`
     this.dom.style.height = `${height - 2}px`
     this.wrap.style.margin = "0px"
-    this.wrap.style.border = "2px solid black"
+    this.wrap.style.border = "var(--border-thin)"
     this.wrap.style.borderRadius = "5px"
     this.progress = document.createElement("div")
     this.progress.className = "progress-bar"

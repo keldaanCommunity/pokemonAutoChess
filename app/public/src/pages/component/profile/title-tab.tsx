@@ -43,11 +43,11 @@ export function TitleTab() {
             <li
               key={k.name}
               style={{
-                background: `linear-gradient(to right, #61738a 0% ${
+                background: `linear-gradient(to right, var(--color-bg-primary) 0% ${
                   k.rarity * 100
-                }%, #54596b ${k.rarity * 100}% 100%)`
+                }%, var(--color-bg-secondary) ${k.rarity * 100}% 100%)`
               }}
-              className={cc("clickable", {
+              className={cc("clickable", "my-box", {
                 unlocked: user.titles.includes(k.name),
                 selected: user.title === k.name
               })}

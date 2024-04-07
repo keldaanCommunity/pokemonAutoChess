@@ -33,7 +33,7 @@ export default function PokemonPicker(props: {
   )
 
   return (
-    <Tabs className="nes-container" id="pokemon-picker">
+    <Tabs className="my-box" id="pokemon-picker">
       <TabList>
         {tabs.map((t) => {
           return (

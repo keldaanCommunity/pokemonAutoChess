@@ -93,11 +93,11 @@ export default function SynergyDetailComponent(props: {
                   : "#e8e8e8",
               backgroundColor:
                 levelReached === SynergyTriggers[props.type][i]
-                  ? "#54596b"
+                  ? "var(--color-bg-secondary)"
                   : "rgba(84, 89, 107,0)",
               border:
                 levelReached === SynergyTriggers[props.type][i]
-                  ? "4px solid black"
+                  ? "var(--border-thick)"
                   : "none",
               borderRadius: "12px",
               padding: "5px"

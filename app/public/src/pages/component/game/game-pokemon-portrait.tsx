@@ -25,7 +25,7 @@ export default function GamePokemonPortrait(props: {
   onMouseLeave?: React.MouseEventHandler<HTMLDivElement>
 }) {
   if (!props.pokemon) {
-    return <div className="game-pokemon-portrait nes-container empty" />
+    return <div className="game-pokemon-portrait my-box empty" />
   } else {
     const pokemon = useMemo(
       () =>
@@ -116,7 +116,7 @@ export default function GamePokemonPortrait(props: {
 
     return (
       <div
-        className={`nes-container game-pokemon-portrait ${
+        className={`my-box clickable game-pokemon-portrait ${
           shouldShimmer ? "shimmer" : ""
         }`}
         style={{

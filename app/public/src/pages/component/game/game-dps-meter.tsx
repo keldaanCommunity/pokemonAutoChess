@@ -50,14 +50,14 @@ export default function GameDpsMeter() {
     <>
       <div
         id="game-dps-icon"
-        className="nes-container clickable"
+        className="my-container clickable"
         title={`${isOpen ? "Hide" : "Show"} battle stats`}
         onClick={toggleOpen}
       >
         <img src="/assets/ui/dpsmeter.svg" />
       </div>
       <div
-        className="nes-container hidden-scrollable game-dps-meter"
+        className="my-container hidden-scrollable game-dps-meter"
         hidden={!isOpen}
       >
         <header>

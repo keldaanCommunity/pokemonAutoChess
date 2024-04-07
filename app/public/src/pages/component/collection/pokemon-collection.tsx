@@ -23,7 +23,7 @@ export default function PokemonCollection() {
 
   return (
     <div id="pokemon-collection">
-      <header className="nes-container">
+      <header className="my-container">
         <PokemonTypeahead
           value={selectedPokemon ?? ""}
           onChange={(pkm) => {
@@ -36,7 +36,6 @@ export default function PokemonCollection() {
         <select
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
-          className="my-select"
         >
           <option value={"all"}>{t("show_all")}</option>
           <option value={"locked"}>{t("show_locked")}</option>
@@ -47,7 +46,6 @@ export default function PokemonCollection() {
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value)}
-          className="my-select"
         >
           <option value={"index"}>{t("sort_by_index")}</option>
           <option value={"shards"}>{t("sort_by_shards")}</option>
@@ -60,7 +58,7 @@ export default function PokemonCollection() {
           isDark
         />
       </header>
-      <div className="nes-container">
+      <div className="my-container">
         <Tabs>
           <TabList className="pokemon-collection-tabs">
             <Tab key="title-all">{t("ALL")}</Tab>

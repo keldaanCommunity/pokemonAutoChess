@@ -17,7 +17,7 @@ export default function Wiki({ inGame = false }: { inGame: boolean }) {
   const { t } = useTranslation()
   return (
     <div id="wiki-page">
-      <div className="nes-container">
+      <div className="my-container">
         <Tabs>
           <TabList>
             {!inGame && (

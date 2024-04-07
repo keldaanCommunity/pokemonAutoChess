@@ -15,7 +15,7 @@ export default function SelectedEntity(props: {
   const { t } = useTranslation()
   if (Object.keys(Item).includes(props.entity as Item)) {
     return (
-      <div id="selected-entity" className="nes-container">
+      <div id="selected-entity" className="my-box">
         <ItemDetailTooltip item={props.entity as Item} />
       </div>
     )
@@ -29,7 +29,7 @@ export default function SelectedEntity(props: {
     )
 
     return (
-      <div id="selected-entity" className="nes-container">
+      <div id="selected-entity" className="my-box">
         <fieldset>
           <Checkbox
             checked={Boolean(detailledPkm.shiny)}

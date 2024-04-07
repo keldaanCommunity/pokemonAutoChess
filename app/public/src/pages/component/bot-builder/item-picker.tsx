@@ -36,7 +36,7 @@ export default function ItemPicker(props: {
   ]
 
   return (
-    <Tabs className="nes-container" id="item-picker">
+    <Tabs className="my-box" id="item-picker">
       <TabList>
         {tabs.map((t) => (
           <Tab key={t.key}>{t.label}</Tab>

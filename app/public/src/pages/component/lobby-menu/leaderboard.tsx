@@ -11,19 +11,17 @@ export default function Leaderboard(props: {
   noElo: boolean | undefined
 }) {
   return (
-    <div>
-      <div style={{ display: "flex", flexFlow: "column", gap: "0.5em" }}>
-        {props.infos.map(
-          (i: ILeaderboardInfo | ILeaderboardBotInfo, index: number) => (
-            <LeaderboardItem
-              key={index}
-              item={i}
-              isBot={props.isBot}
-              noElo={props.noElo}
-            />
-          )
-        )}
-      </div>
+    <div style={{ display: "flex", flexFlow: "column", gap: "4px" }}>
+      {props.infos.map(
+        (i: ILeaderboardInfo | ILeaderboardBotInfo, index: number) => (
+          <LeaderboardItem
+            key={index}
+            item={i}
+            isBot={props.isBot}
+            noElo={props.noElo}
+          />
+        )
+      )}
     </div>
   )
 }

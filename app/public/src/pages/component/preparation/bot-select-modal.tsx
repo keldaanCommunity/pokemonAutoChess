@@ -36,13 +36,12 @@ export function BotSelectModal(props: { bots: IBot[] }) {
     )
 
   return (
-    <dialog open id="bot-select-modal" className="nes-container">
+    <dialog open id="bot-select-modal" className="my-container">
       <header>
         <h2>{t("select_bots_for_this_game")}</h2>
         <div className="spacer"></div>
         <input
           type="search"
-          className="my-input"
           style={{ maxWidth: "20ch" }}
           placeholder="Search by name"
           value={queryBot}
@@ -68,12 +67,9 @@ export function BotSelectModal(props: { bots: IBot[] }) {
       <ul>
         {botsListSorted.map((bot) => (
           <li
-            className={cc(
-              "nes-container",
-              "player-box",
-              "preparation-menu-user",
-              { selected: botsSelection.has(bot) }
-            )}
+            className={cc("player", "my-box", "preparation-menu-user", {
+              selected: botsSelection.has(bot)
+            })}
             onClick={() => {
               if (botsSelection.has(bot)) {
                 botsSelection.delete(bot)

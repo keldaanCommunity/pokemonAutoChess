@@ -11,6 +11,7 @@
   border-radius: 12px 12px 0 0;
   padding: 1px 5px 3px 5px;
   overflow: hidden;
+  font-size: 1.5rem;
 }
 
 #game-stage-info p {
@@ -59,6 +60,7 @@
 
 #game-stage-info .player-information .player-title {
   margin: 0;
+  color: var(--color-fg-gold);
 }
 
 #game-stage-info .player-information .player-name {
@@ -75,7 +77,7 @@
 
 .game-stage-path .stage-path {
   position: relative;
-  background-color: #54596b;
+  background-color: var(--color-bg-secondary);
   border-radius: 8px;
   border: 4px solid transparent;
 }

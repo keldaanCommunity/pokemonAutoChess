@@ -14,11 +14,11 @@ import "./game-shop.css"
 export default function GameShop() {
   return (
     <>
-      <div className="game-shop nes-container">
+      <div className="game-shop my-container">
         <GameMoneyInfo />
         <GameLifeInfo />
         <GameTeamInfo />
-        <div className="nes-container game-shop-actions">
+        <div className="game-shop-actions">
           <GameRarityPercentage />
           <GameLock />
           <GameRefresh />

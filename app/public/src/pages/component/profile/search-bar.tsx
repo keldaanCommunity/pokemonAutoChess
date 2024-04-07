@@ -10,10 +10,9 @@ export function SearchBar({ onChange }) {
   const { t } = useTranslation()
 
   return (
-    <InputGroup className="search-bar nes-field is-inline">
+    <InputGroup className="search-bar">
       <Form.Control
         type="text"
-        className="my-input"
         placeholder={t("search_player")}
         value={searchQuery}
         onChange={(e) => {

@@ -18,7 +18,7 @@ export function AvatarTab() {
     <div>
       <h3>{t("change_avatar")}</h3>
       <PokemonTypeahead value={selectedPkm} onChange={setSelectedPkm} />
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", margin: "0.5em 0" }}>
         {pokemonCollection.length === 0 && <p>{t("play_more_games_hint")}</p>}
         {["normal", "shiny"].flatMap((type) =>
           pokemonCollection

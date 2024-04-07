@@ -9,7 +9,7 @@ import "./synergies.css"
 export default function Synergies(props: { synergies: [string, number][] }) {
   const { t } = useTranslation()
   return (
-    <div className="synergies-container nes-container">
+    <div className="synergies-container my-container">
       <h5 className="synergies-header">{t("synergies")}</h5>
       {Object.keys(Synergy)
         .sort((a, b) => {

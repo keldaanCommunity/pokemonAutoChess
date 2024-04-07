@@ -25,14 +25,14 @@ export default function SynergyComponent(props: {
         justifyContent: "space-around",
         backgroundColor:
           props.value >= SynergyTriggers[props.type][0]
-            ? "#54596b"
+            ? "var(--color-bg-secondary)"
             : "rgba(84, 89, 107,0)",
         margin: "5px",
         borderRadius: "12px",
         padding: "5px",
         border:
           props.value >= SynergyTriggers[props.type][0]
-            ? "4px solid black"
+            ? "var(--border-thin)"
             : "none",
         cursor: "var(--cursor-hover)"
       }}

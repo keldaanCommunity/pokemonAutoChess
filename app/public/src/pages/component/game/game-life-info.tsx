@@ -8,7 +8,7 @@ export function GameLifeInfo() {
   const { t } = useTranslation()
   const life = useAppSelector((state) => state.game.currentPlayerLife)
   return (
-    <div id="game-life-info" className="nes-container life information">
+    <div id="game-life-info" className="my-container life information">
       <div data-tooltip-id="detail-life">
         <Tooltip id="detail-life" className="custom-theme-tooltip" place="top">
           <p className="help">{t("lose_game_hint")}</p>

@@ -22,7 +22,7 @@ export function GadgetsTab() {
         {gadgets.map((g) => (
           <li
             key={g.name}
-            className={cc("gadget", "nes-container", {
+            className={cc("gadget", "my-container", {
               locked: g.levelRequired > level
             })}
           >

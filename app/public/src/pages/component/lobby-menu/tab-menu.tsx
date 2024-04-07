@@ -17,7 +17,7 @@ export default function TabMenu() {
 
   return (
     <Tabs
-      className="nes-container user-menu custom-bg hidden-scrollable"
+      className="my-container user-menu custom-bg hidden-scrollable"
       selectedIndex={tabIndex}
       onSelect={(i: number) => {
         dispatch(setTabIndex(i))

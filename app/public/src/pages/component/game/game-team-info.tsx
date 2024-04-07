@@ -16,7 +16,7 @@ export function GameTeamInfo() {
   const maxTeamSize = getMaxTeamSize(experienceManager.level, specialGameRule)
 
   return (
-    <div id="game-team-info" className="nes-container team-size information">
+    <div id="game-team-info" className="my-container team-size information">
       <div data-tooltip-id="detail-team-size">
         <Tooltip
           id="detail-team-size"

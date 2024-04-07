@@ -14,7 +14,7 @@ export default function KeybindInfo() {
   }
 
   return (
-    <div className="nes-container keybind-container">
+    <div className="my-container keybind-container">
       <h2>{t("key_bindings")}</h2>
       <table className="keybind-table">
         <thead>

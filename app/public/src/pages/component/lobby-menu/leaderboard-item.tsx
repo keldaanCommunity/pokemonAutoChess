@@ -18,7 +18,7 @@ export default function LeaderboardItem(props: {
   const dispatch = useAppDispatch()
   return (
     <div
-      className="player-box clickable"
+      className="player my-box clickable"
       style={{
         display: "flex",
         justifyContent: "space-between",
@@ -45,14 +45,16 @@ export default function LeaderboardItem(props: {
           padding: "0 0.5em"
         }}
       >
-        {props.isBot ? t(`pkm.${props.item.name}`) : props.item.name}
+        {props.isBot ? (
+          <>
+            {t(`pkm.${props.item.name}`)} {t("by")} @
+            {(props.item as ILeaderboardBotInfo).author}
+          </>
+        ) : (
+          props.item.name
+        )}
       </span>
-      {props.isBot && (
-        <span>
-          {t("by")} @{(props.item as ILeaderboardBotInfo).author}
-        </span>
-      )}
-      <div>
+      <div style={{ width: "8ch", textAlign: "end" }}>
         {props.noElo ? props.item.value : <EloBadge elo={props.item.value} />}
       </div>
     </div>
