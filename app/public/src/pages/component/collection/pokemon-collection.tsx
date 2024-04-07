@@ -7,9 +7,9 @@ import { Checkbox } from "../checkbox/checkbox"
 import SynergyIcon from "../icons/synergy-icon"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import PokemonCarousel from "./pokemon-carousel"
-import "./pokemon-collection.css"
 import PokemonEmotionsModal from "./pokemon-emotions-modal"
 import UnownPanel from "./unown-panel"
+import "./pokemon-collection.css"
 
 export default function PokemonCollection() {
   const { t } = useTranslation()
@@ -33,20 +33,14 @@ export default function PokemonCollection() {
           }}
         />
 
-        <select
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        >
+        <select value={filter} onChange={(e) => setFilter(e.target.value)}>
           <option value={"all"}>{t("show_all")}</option>
           <option value={"locked"}>{t("show_locked")}</option>
           <option value={"unlockable"}>{t("show_unlockable")}</option>
           <option value={"unlocked"}>{t("show_unlocked")}</option>
         </select>
 
-        <select
-          value={sort}
-          onChange={(e) => setSort(e.target.value)}
-        >
+        <select value={sort} onChange={(e) => setSort(e.target.value)}>
           <option value={"index"}>{t("sort_by_index")}</option>
           <option value={"shards"}>{t("sort_by_shards")}</option>
         </select>
