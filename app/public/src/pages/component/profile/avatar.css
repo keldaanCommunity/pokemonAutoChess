@@ -38,6 +38,10 @@
   font-size: 1rem;
 }
 
+.player-title {
+  color: var(--color-fg-gold);
+}
+
 .avatar .elo {
   margin-right: 8px;
 }

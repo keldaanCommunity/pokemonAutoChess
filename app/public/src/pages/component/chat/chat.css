@@ -88,7 +88,7 @@
 }
 
 .chat-message-author {
-  color: #ffc107;
+  color: var(--color-fg-gold);
 }
 
 .chat-message-time {

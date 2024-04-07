@@ -1,3 +1,4 @@
+@import "./anims.css";
 @import "./buttons.css";
 @import "./colors.css";
 @import "./container.css";
@@ -14,7 +15,7 @@
   --sidebar-width: 60px;
   --border-thick: 4px solid black;
   --border-thin: 2px solid black;
-  --shadow-clickable: #2d334b 2px 2px 0px
+  --shadow-clickable: #2d334b 2px 2px 0px;
 }
 
 body {
@@ -39,16 +40,6 @@ a {
   height: 100vh;
 }
 
-.invisibleButton {
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
-}
-
 .custom-theme-tooltip {
   padding: 5px !important;
   opacity: 1 !important;
@@ -66,10 +57,6 @@ a {
   background-size: cover;
   background-position-y: bottom;
   background-attachment: fixed;
-}
-
-select {
-  cursor: var(--cursor-hover);
 }
 
 p:last-child {
@@ -182,28 +169,6 @@ p:last-child {
   box-shadow: 0 -1px 2px rgb(0 0 0 / 50%);
 }
 
-.toast-new-pokemon {
-  right: 76px !important;
-}
-
-.toast-new-pokemon img {
-  width: 40px;
-  height: 40px;
-  image-rendering: pixelated;
-}
-
-.toast-emote {
-  right: 85px !important;
-  border: none !important;
-  background-color: transparent !important;
-}
-
-.toast-emote img {
-  width: 80px;
-  height: 80px;
-  image-rendering: pixelated;
-}
-
 .modal-dialog.is-large {
   max-width: 80vw;
 }
@@ -218,26 +183,6 @@ p:last-child {
   border-color: black;
   border-width: 4px;
   background-color: #4f5160;
-}
-
-.player-title {
-  color: #ffc107;
-}
-
-.my-tab {
-  cursor: var(--cursor-hover);
-  background-color: rgba(255, 255, 255, 0.3);
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  outline: none;
-  color: white;
-  font-size: 140%;
-}
-
-.anonymous {
-  min-height: 40px;
-  background-color: #18f299;
-  box-shadow: inset -6px -6px 0px 0px #0e9b61 !important;
 }
 
 .clickable {
@@ -263,56 +208,13 @@ p:last-child {
     font-size: 14px;
   }
 
-  #root .my-container,
-  .player-box,
-  .my-input,
-  .bubbly {
+  #root .my-container {
     border-width: 2px;
   }
 
   .bubbly {
     padding: 0.5em 1em;
   }
-}
-
-/*========================
-       ANIMS
-  ======================== */
-@keyframes shimmer {
-  0% {
-    background-position: 0 0;
-  }
-
-  50% {
-    background-position: 100% 100%;
-  }
-
-  100% {
-    background-position: 100% 100%;
-  }
-}
-
-.shimmer::after {
-  content: "";
-  pointer-events: none;
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  animation: shimmer 2s infinite;
-  background: linear-gradient(
-    135deg,
-    transparent 0%,
-    #ffffff20 25%,
-    #ffffe080 50%,
-    #ffffff20 75%,
-    transparent 100%
-  );
-  background-size: 400% 400%;
-  background-repeat: no-repeat;
-  cursor: var(--cursor-hover);
 }
 
 .pokemon-portrait {

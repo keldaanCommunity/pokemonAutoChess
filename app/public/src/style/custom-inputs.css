@@ -115,6 +115,7 @@ select {
   background: none;
   background-color: var(--color-bg-secondary);
   color: white;
+  cursor: var(--cursor-hover);
 }
 
 select.is-light {

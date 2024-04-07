@@ -60,6 +60,7 @@
 
 #game-stage-info .player-information .player-title {
   margin: 0;
+  color: var(--color-fg-gold);
 }
 
 #game-stage-info .player-information .player-name {

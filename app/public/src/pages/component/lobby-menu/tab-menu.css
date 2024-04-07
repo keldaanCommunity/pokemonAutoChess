@@ -57,7 +57,7 @@ ul.titles > li.selected {
 }
 
 ul.titles > li.selected span {
-  color: #ffc107;
+  color: var(--color-fg-gold);
 }
 
 ul.titles > li.selected p {
