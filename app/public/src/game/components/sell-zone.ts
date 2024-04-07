@@ -3,14 +3,16 @@ import { GameObjects } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { transformCoordinate } from "../../pages/utils/utils"
+import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
 
 export class SellZone extends GameObjects.Container {
+  scene: GameScene
   rectangle: Phaser.GameObjects.Rectangle
   zone: Phaser.GameObjects.Zone
   text: Phaser.GameObjects.Text
 
-  constructor(scene: Phaser.Scene) {
+  constructor(scene: GameScene) {
     const sellZoneCoord = transformCoordinate(4, 5.5)
     super(scene, sellZoneCoord[0] - 48, sellZoneCoord[1] + 24)
 
@@ -47,7 +49,12 @@ export class SellZone extends GameObjects.Container {
   }
 
   showForPokemon(pkm: PokemonSprite) {
-    const price = PokemonFactory.getSellPrice(pkm.name as Pkm, pkm.shiny)
+    const specialGameRule = this.scene.room?.state.specialGameRule
+    const price = PokemonFactory.getSellPrice(
+      pkm.name as Pkm,
+      pkm.shiny,
+      specialGameRule
+    )
     this.text.setText(
       `${t("drop_here_to_sell")} ${t("for_price_gold", { price })}`
     )

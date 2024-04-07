@@ -1373,7 +1373,7 @@
     "ZAP_CANNON": "The caster fires an electric blast like a cannon to inflict [25,50,100,SP] SPECIAL and cause PARALYSIS and ARMOR_REDUCTION for [1,2,4] s",
     "PSYCHO_BOOST": "Cut a slash horizontally around the target, dealing [140,SP] SPECIAL to all ennemies hit. Reduce the caster AP by 20 for each Pokémon hit",
     "ICE_HAMMER": "Deals [50,100] SPECIAL to the target, causing it to FREEZE for 3s. PARALYSIS the caster for 3s",
-    "POLLEN_PUFF":"Give the lowest HP ally a pollen puff that restores [20,40,80,SP] HP",
+    "POLLEN_PUFF": "Give the lowest HP ally a pollen puff that restores [20,40,80,SP] HP",
     "PSYSTRIKE": "The caster materializes a strange psychic wave towards the furthest enemy, inflicting [100,SP] PHYSICAL damage and teleporting everything in its path",
     "FACADE": "Deals [20,40,80,SP] SPECIAL. Doubles damage if the pokémon is BURN, CONFUSION, FREEZE, PARALYSIS, POISONNED, SILENCE, SLEEP, FLINCH, CHARM, ARMOR_REDUCTION or WOUND"
   },
@@ -2744,7 +2744,8 @@
     "SIX_PACK": "Six Pack",
     "NINE_LIVES": "Nine Lives",
     "CROWDED": "Crowded Board",
-    "KECLEONS_SHOP": "Kecleon's Shop"
+    "KECLEONS_SHOP": "Kecleon's Shop",
+    "FREE_MARKET": "Free Market"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "All the additional picks are available immediately",
@@ -2752,14 +2753,15 @@
     "OMELETTE_COOK": "Get a Pokemon Egg after stage 1, 2 and 3",
     "SYNERGY_WHEEL": "Carousels now only propose Synergy stones",
     "DITTO_PARTY": "Start with 5 Ditto on your bench. Dittos cannot be found in the shop and cannot be sold.",
-    "RARE_IS_EXPENSIVE": "Buying XP now costs 8 instead of 4",
+    "RARE_IS_EXPENSIVE": "Buying XP now costs 8 instead of 4. Units are bought and sold for 1 gold less.",
     "GOTTA_CATCH_EM_ALL": "Some pokemons can be catched before each PvE round",
     "BUYER_FEVER": "Evolutions in shop are free",
     "TECHNOLOGIC": "Choose between 3 artifacts at stage 3 and 15",
     "SIX_PACK": "You can put 6 units max on your board, no matter your level",
     "NINE_LIVES": "You are eliminated after losing 9 rounds",
     "CROWDED": "+3 units max on board",
-    "KECLEONS_SHOP": "Item carousels are replaced by Kecleon's shop, that propose 6 items for 10 GOLD each"
+    "KECLEONS_SHOP": "Item carousels are replaced by Kecleon's shop, that propose 6 items for 10 GOLD each",
+    "FREE_MARKET": "Pokemons are bought and sold for 0 GOLD"
   },
   "region_pokemon": {
     "KANTO": "Kanto",

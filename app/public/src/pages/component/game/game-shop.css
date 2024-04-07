@@ -15,7 +15,7 @@
   grid-template: 1fr 1fr / 3vw 1fr;
   padding: 5px;
   gap: 5px;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .game-rarity-percentage.my-box {
