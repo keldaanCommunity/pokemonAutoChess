@@ -1425,6 +1425,23 @@ export class EndTournamentCommand extends Command<
         }
       }
 
+      const top4 = players.filter((p) => p.ranks[p.ranks.length - 1] <= 4)
+      for (let player of top4) {
+        const mongoUser = await UserMetadata.findOne({ uid: player.id })
+        if (
+          mongoUser &&
+          mongoUser.titles &&
+          !mongoUser.titles.includes(Title.ELITE_FOUR_MEMBER)
+        ) {
+          mongoUser.titles.push(Title.ELITE_FOUR_MEMBER)
+          await mongoUser.save()
+          const user = this.state.users.get(player.id)
+          if (user) {
+            user.titles.push(Title.ELITE_FOUR_MEMBER)
+          }
+        }
+      }
+
       tournament.brackets.clear()
       tournament.finished = true
 
