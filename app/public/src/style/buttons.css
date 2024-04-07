@@ -1,0 +1,124 @@
+.bubbly {
+  padding: 0.25em 0.5em;
+  display: inline-block;
+  text-align: center;
+  border-radius: 12px;
+  font-size: 140%;
+  border: var(--border-thin);
+  text-shadow: 2px 2px 2px #00000040;
+  box-shadow: var(--shadow-clickable);
+}
+
+.bubbly:not([disabled]):hover {
+  background: #e7e7e7;
+  cursor: var(--cursor-hover);
+}
+
+.bubbly:not([disabled]):active {
+  background: #cfcfcf;
+  box-shadow: inset 6px 6px 0px 0px #e7e7e7, var(--shadow-clickable);
+}
+
+.bubbly.green {
+  box-shadow: inset -6px -6px 0px 0px #65a013, var(--shadow-clickable);
+  background: #92cc41;
+  color: white;
+}
+
+.bubbly.green:not([disabled]):hover {
+  background: #76c442;
+}
+
+.bubbly.green:not([disabled]):active {
+  background: #92cc41;
+  box-shadow: inset 6px 6px 0px 0px #65a013, var(--shadow-clickable);
+}
+
+.bubbly.orange {
+  background: #f7d51d;
+  box-shadow: inset -6px -6px 0px 0px #c9ae17, var(--shadow-clickable);
+  color: black;
+}
+
+.bubbly.orange:not([disabled]):hover {
+  background: #e7c819;
+}
+
+.bubbly.orange:not([disabled]):active {
+  background: #f7d51d;
+  box-shadow: inset 6px 6px 0px 0px #c9ae17, var(--shadow-clickable);
+}
+
+.bubbly.red {
+  background: #e76e55;
+  box-shadow: inset -6px -6px 0px 0px #8c2022, var(--shadow-clickable);
+  color: white;
+}
+
+.bubbly.red:not([disabled]):hover {
+  background: #c25c48;
+}
+
+.bubbly.red:not([disabled]):active {
+  background: #761c1e;
+  box-shadow: inset 6px 6px 0px 0px #8c2022, var(--shadow-clickable);
+}
+
+.bubbly.blue {
+  background: #109fff;
+  box-shadow: inset -6px -6px 0px 0px #006bb3, var(--shadow-clickable);
+  color: white;
+}
+
+.bubbly.blue:not([disabled]):hover {
+  background: var(--color-bg-accent);
+}
+
+.bubbly.blue:not([disabled]):active {
+  background: #109fff;
+  box-shadow: inset 6px 6px 0px 0px #108de0, var(--shadow-clickable);
+}
+
+.bubbly.pink {
+  background: #ee2097;
+  color: white;
+  box-shadow: inset -6px -6px 0px 0px #902c74, var(--shadow-clickable);
+}
+
+.bubbly.pink:not([disabled]):hover {
+  background: #eb55ac;
+}
+
+.bubbly.pink:not([disabled]):active {
+  background: #ee2097;
+  box-shadow: inset 6px 6px 0px 0px #902c74;
+}
+
+.bubbly.discord {
+  background: #444ebe;
+  color: white;
+  box-shadow: inset -6px -6px 0px 0px #2d347e, var(--shadow-clickable);
+}
+.bubbly.discord:not([disabled]):hover {
+  background: #4a54bf;
+}
+
+.bubbly.discord:not([disabled]):active {
+  background: #444ebe;
+  box-shadow: inset 6px 6px 0px 0px #2d347e, var(--shadow-clickable);
+}
+
+.bubbly[disabled] {
+  background: #d3d3d3;
+  box-shadow: inset -6px -6px 0px 0px #adafbc;
+  color: #757575;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.bubbly > img:first-child {
+  height: 1.4em;
+  display: inline-block;
+  vertical-align: text-top;
+  margin-right: 0.25em;
+}

@@ -49,7 +49,7 @@ export default function GameRarityPercentage() {
         <p className="help">{t("increase_level_hint")}</p>
       </Tooltip>
       <div
-        className="nes-container game-rarity-percentage"
+        className="my-box game-rarity-percentage"
         data-tooltip-id="detail-game-rarity-percentage"
       >
         {RarityTiers.map((rarity, index) => {

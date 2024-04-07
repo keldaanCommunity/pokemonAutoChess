@@ -42,7 +42,6 @@ export function CompositionReport() {
         <select
           value={rankingBy}
           onChange={(e) => setRanking(e.target.value)}
-          className="my-select"
         >
           <option value="count">
             {t("rank")} {t("by_poularity")}

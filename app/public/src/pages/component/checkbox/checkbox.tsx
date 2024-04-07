@@ -32,12 +32,12 @@ export function Checkbox({
     <label className="checkbox-container" title={title}>
       <input
         type="checkbox"
-        className={cc("nes-checkbox", { "is-dark": isDark })}
+        className={cc("my-checkbox", { "is-dark": isDark })}
         checked={checked}
         onChange={handleChange}
         readOnly={readOnly}
       />
-      <span>{label}</span>
+      <span style={{ color: isDark ? "white" : "black" }}>{label}</span>
     </label>
   )
 }

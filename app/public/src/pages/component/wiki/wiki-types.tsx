@@ -24,7 +24,7 @@ import ReactDOM from "react-dom"
 export default function WikiTypes() {
   const { t } = useTranslation()
   return (
-    <Tabs className="synergies-tabs">
+    <Tabs className="wiki-types">
       <TabList>
         {(Object.keys(Synergy) as Synergy[]).map((type) => {
           return (

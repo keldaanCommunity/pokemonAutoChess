@@ -40,7 +40,6 @@ export function PokemonReport() {
         <select
           value={pokemonRankingBy}
           onChange={(e) => setPokemonRanking(e.target.value)}
-          className="my-select"
         >
           <option value="count">
             {t("rank")} {t("by_popularity")}
@@ -57,7 +56,6 @@ export function PokemonReport() {
           onChange={(e) => {
             setSynergy(e.target.value as any)
           }}
-          className="my-select"
         >
           <option value={"all"}>
             {t("ALL")} {t("synergies")}
@@ -71,7 +69,6 @@ export function PokemonReport() {
         <select
           value={rarity}
           onChange={(e) => setRarity(e.target.value as any)}
-          className="my-select"
         >
           <option value={"all"}>
             {t("rarity_label")}: {t("ALL")}

@@ -48,7 +48,7 @@ export default function TeamComp(props: { team: IMeta; rank: number }) {
     : new Array<Pkm>()
 
   return (
-    <div className="team-comp nes-container" id={props.team.cluster_id}>
+    <div className="team-comp my-box" id={props.team.cluster_id}>
       <span className="rank">{props.rank}</span>
       <div style={{ display: "flex", width: "fit-content" }}>
         {sortedTypes.slice(0, 3).map((type) => (

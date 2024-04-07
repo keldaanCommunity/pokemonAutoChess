@@ -27,7 +27,7 @@ export function MapSelectModal(props: {
       show={props.show}
       handleClose={() => props.handleClose()}
       body={
-        <ul id="map-select-modal" className="nes-container">
+        <ul id="map-select-modal" className="my-container">
           <li onClick={() => selectMap("random")}>
             <img src="/assets/maps/random.png" alt="random" />
             <span>{t("map.random")}</span>

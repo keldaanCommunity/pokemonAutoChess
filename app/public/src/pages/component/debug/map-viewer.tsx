@@ -44,7 +44,7 @@ export default function MapViewerContainer() {
         },
         disableContextMenu: true,
         scene: [debugScene.current],
-        backgroundColor: "#61738a",
+        backgroundColor: "var(--color-bg-primary)",
         plugins: {
           global: [
             {

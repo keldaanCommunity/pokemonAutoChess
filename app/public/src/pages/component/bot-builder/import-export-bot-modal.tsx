@@ -76,7 +76,6 @@ export default function ImportExportBotModal(props: {
           <p>{t("export_hint")}</p>
           <textarea
             rows={10}
-            className="nes-textarea"
             defaultValue={textArea}
             onChange={(e) => handleTextAreaChange(e.target.value)}
           ></textarea>
@@ -107,7 +106,7 @@ export default function ImportExportBotModal(props: {
         </Modal.Header>
         <Modal.Body>
           <p>{t("get_started_bot")}</p>
-          <div className="nes-field is-inline" style={{ marginBottom: "1em" }}>
+          <div style={{ display: "flex", marginBottom: "1em" }}>
             <label htmlFor="bot_select">{t("existing_bot")}</label>
             <select
               id="bot_select"
@@ -133,7 +132,6 @@ export default function ImportExportBotModal(props: {
             rows={10}
             value={textArea}
             onChange={(e) => handleTextAreaChange(e.target.value)}
-            className="nes-textarea"
           ></textarea>
           {jsonError && <p className="error">{jsonError}</p>}
         </Modal.Body>

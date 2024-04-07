@@ -25,7 +25,7 @@ export default function WikiAbility() {
           .sort((a, b) => t(`ability.${a}`).localeCompare(t(`ability.${b}`)))
           .map((ability) => {
             return (
-              <li key={ability} className="nes-container">
+              <li key={ability} className="my-box">
                 <div>
                   <h2>{t(`ability.${ability}`)}</h2>
                   <p>

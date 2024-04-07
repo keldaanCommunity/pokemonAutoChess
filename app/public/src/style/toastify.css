@@ -1,0 +1,13 @@
+.Toastify__toast-container {
+  width: auto !important;
+  --toastify-z-index: 1040;
+  pointer-events: none; /* allow to click through to select a player */
+}
+
+.Toastify__toast {
+  border-radius: 12px !important;
+  padding: 0px !important;
+  margin: 0px !important;
+  border: var(--border-thin);
+  background-color: var(--color-bg-primary) !important;
+}

@@ -76,12 +76,7 @@ export function MainSidebar(props: MainSidebarProps) {
   }, [collapsed])
 
   return (
-    <Sidebar
-      collapsed={collapsed}
-      backgroundColor="#61738a"
-      className="sidebar"
-      ref={sidebarRef}
-    >
+    <Sidebar collapsed={collapsed} className="sidebar" ref={sidebarRef}>
       <Menu>
         <div className="sidebar-logo" onClick={() => setCollapsed(!collapsed)}>
           <img src={`assets/ui/colyseus-icon.png`} />

@@ -23,7 +23,7 @@ export default function PatchNotes() {
   ]
 
   return (
-    <div className="nes-container patchnotes">
+    <div className="my-container patchnotes">
       <h1>{t("patch_notes")}</h1>
       <div className="content">
         <ul>

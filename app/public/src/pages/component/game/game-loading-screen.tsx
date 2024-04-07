@@ -38,7 +38,7 @@ export default function GameLoadingScreen(props: { connectError: string }) {
       </ul>
       <div className="loading-bar">
         <progress
-          className="nes-progress"
+          className="my-progress"
           value={progress}
           max="100"
         ></progress>

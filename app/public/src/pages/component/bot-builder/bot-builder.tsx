@@ -219,7 +219,7 @@ export default function BotBuilder() {
         </button>
         <DiscordButton channel="bot-creation" />
       </header>
-      <div className="step-info nes-container">
+      <div className="step-info my-container">
         <div className="step-control">
           <button onClick={prevStep} disabled={currentStage <= 0}>
             <img src="assets/ui/arrow-left.svg" alt="←" />

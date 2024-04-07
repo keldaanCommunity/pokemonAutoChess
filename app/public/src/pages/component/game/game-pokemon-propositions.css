@@ -11,8 +11,8 @@
   pointer-events: initial;
 }
 
-.game-pokemons-proposition > .nes-container > h2,
-.game-pokemons-proposition > .nes-container > p {
+.game-pokemons-proposition > .my-container > h2,
+.game-pokemons-proposition > .my-container > p {
   color: white;
   text-align: center;
 }
@@ -30,14 +30,14 @@
   margin: 1em;
 }
 
-.game-pokemons-proposition-list > .nes-container {
-  background-color: #54596b;
+.game-pokemons-proposition-list > .my-box {
+  background-color: var(--color-bg-secondary);
   max-width: 210px;
 }
 
-.game-pokemons-proposition-list > .nes-container:hover {
+.game-pokemons-proposition-list > .my-box:hover {
   cursor: var(--cursor-hover);
-  background-color: #1195ec;
+  background-color: var(--color-bg-accent);
 }
 
 .game-pokemons-proposition-list .game-pokemon-portrait {

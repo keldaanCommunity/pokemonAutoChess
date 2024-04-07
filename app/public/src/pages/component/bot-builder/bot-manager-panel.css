@@ -28,5 +28,5 @@
 }
 
 #bot-manager-panel tr:nth-child(even) {
-  background-color: #54596b;
+  background-color: var(--color-bg-secondary);
 }

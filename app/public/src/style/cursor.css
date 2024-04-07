@@ -1,0 +1,19 @@
+:root {
+  --cursor-primary: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABFklEQVRYR9WXURLDIAhE6/0PbSdOtUpcd1Gnpv1KGpTHBpCE1/cXq+vrMph7dGvXZTtpfW10DCA5jrH1H0Jhs5E0hnZdCR+vb5S8Nn8mQCeS9BdSalYJqMBjAGzq59xAESN7VFVUgV8AZB/dZBR7QTFDCqGquvUBVVoEtgIwpQRzmANSFHgWQKExHdIrPeuMvQNDarXe6nC/AutgV3JW+6bgqQLeV8FekRtgV+ToDKEKnACYKsfZjjkam7a0ZpYTytwmgainpC3HvwBocgKOxqRjehoR9DFKNFYtOwCGYCszobeCbl26N6yyQ6g8X/Wex/rBPsNEV6qAMaJPMynIHQCoSqS9JSMmwef51LflTgCRszU7DvAGiV6mHWfsaVUAAAAASUVORK5CYII=),
+    auto;
+  --cursor-hover: url("assets/ui/cursor-hover.png") 14 0, pointer;
+  --cursor-grab: url("assets/ui/cursor-grab.png") 14 8, grab;
+  --cursor-grabbing: url("assets/ui/cursor-grabbing.png") 14 8, grabbing;
+}
+
+html {
+  cursor: var(--cursor-primary);
+}
+
+body.grab {
+  cursor: var(--cursor-grab);
+}
+
+body.grab.grabbing {
+  cursor: var(--cursor-grabbing);
+}

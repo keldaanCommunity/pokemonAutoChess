@@ -48,7 +48,7 @@ export default function PokemonCollectionItem(props: {
 
   return (
     <div
-      className={cc("nes-container", "pokemon-collection-item", {
+      className={cc("my-box", "clickable", "pokemon-collection-item", {
         unlocked: isUnlocked,
         unlockable: canUnlock,
         shimmer: canUnlock

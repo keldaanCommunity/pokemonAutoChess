@@ -59,7 +59,7 @@
   background: #e76e55;
   color: white;
   padding: 1em;
-  border: 4px solid black;
+  border: var(--border-thick);
   border-radius: 12px;
   text-align: center;
   grid-column: 1 / 3;

@@ -23,7 +23,7 @@
 }
 
 .game-player .CircularProgressbar-trail {
-  stroke: #2d334b;
+  stroke: var(--color-shadow);
 }
 
 .game-player.spectated {

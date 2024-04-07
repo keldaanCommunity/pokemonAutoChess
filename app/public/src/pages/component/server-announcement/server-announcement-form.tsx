@@ -14,11 +14,10 @@ export function ServerAnnouncementForm() {
   }
 
   return (
-    <div className="nes-container server-announcement">
+    <div className="my-container server-announcement">
       <h1>Make a Server Announcement</h1>
       <div className="content">
         <textarea
-          className="nes-textarea"
           cols={50}
           rows={5}
           placeholder={t("type_here")}
@@ -26,14 +25,19 @@ export function ServerAnnouncementForm() {
           value={postContent}
           onChange={(e) => setPostContent(e.target.value)}
         ></textarea>
-        <button
-          onClick={() => {
-            submitAnnouncement()
-          }}
-          className="bubbly blue"
+        <div
+          className="actions"
+          style={{ display: "flex", justifyContent: "end" }}
         >
-          Submit
-        </button>
+          <button
+            onClick={() => {
+              submitAnnouncement()
+            }}
+            className="bubbly green"
+          >
+            Submit
+          </button>
+        </div>
       </div>
     </div>
   )

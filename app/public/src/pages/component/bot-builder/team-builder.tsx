@@ -172,7 +172,7 @@ export default function TeamBuilder(props: {
   }
 
   return (
-    <div id="team-builder" className="nes-container">
+    <div id="team-builder" className="my-container">
       <Synergies synergies={synergies} />
       <TeamEditor
         board={board}
