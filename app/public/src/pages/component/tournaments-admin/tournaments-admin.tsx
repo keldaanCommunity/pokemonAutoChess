@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   createTournament,
+  createTournamentLobbies,
   removeTournament
 } from "../../../stores/NetworkStore"
 import { formatDate } from "../../utils/date"
@@ -97,6 +98,20 @@ export function TournamentItem(props: { tournament: ITournament }) {
         }}
       >
         {t("delete")}
+      </button>
+      <button
+        className="bubbly orange"
+        onClick={() => {
+          if (
+            confirm(
+              "Remake tournament lobbies ? Previous lobbies won't be deleted so do this only after a server reboot if lobbies have been lost"
+            )
+          ) {
+            dispatch(createTournamentLobbies({ id: props.tournament.id! }))
+          }
+        }}
+      >
+        Remake lobbies
       </button>
       <p className="name">{props.tournament.name}</p>
       <p className="date">{formatDate(new Date(props.tournament.startDate))}</p>

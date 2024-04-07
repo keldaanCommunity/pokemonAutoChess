@@ -64,7 +64,8 @@ import {
   OnCreateTournamentCommand,
   ParticipateInTournamentCommand,
   NextTournamentStageCommand,
-  EndTournamentMatchCommand
+  EndTournamentMatchCommand,
+  CreateTournamentLobbiesCommand
 } from "./commands/lobby-commands"
 import LobbyState from "./states/lobby-state"
 
@@ -256,6 +257,16 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       Transfer.REMOVE_TOURNAMENT,
       (client, message: { id: string }) => {
         this.dispatcher.dispatch(new RemoveTournamentCommand(), {
+          client,
+          tournamentId: message.id
+        })
+      }
+    )
+
+    this.onMessage(
+      Transfer.REMAKE_TOURNAMENT_LOBBIES,
+      (client, message: { id: string }) => {
+        this.dispatcher.dispatch(new CreateTournamentLobbiesCommand(), {
           client,
           tournamentId: message.id
         })

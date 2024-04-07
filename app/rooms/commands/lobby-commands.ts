@@ -1273,10 +1273,23 @@ export class NextTournamentStageCommand extends Command<
 
 export class CreateTournamentLobbiesCommand extends Command<
   CustomLobbyRoom,
-  { tournamentId: string }
+  { client?: Client; tournamentId: string }
 > {
-  async execute({ tournamentId }: { tournamentId: string }) {
+  async execute({
+    tournamentId,
+    client
+  }: {
+    tournamentId: string
+    client?: Client
+  }) {
     try {
+      if (client) {
+        const user = this.state.users.get(client.auth.uid)
+        if (!user || !user.role || user.role !== Role.ADMIN) {
+          return
+        }
+      }
+
       logger.debug(`Creating tournament lobbies for tournament ${tournamentId}`)
       const tournament = this.state.tournaments.find(
         (t) => t.id === tournamentId
