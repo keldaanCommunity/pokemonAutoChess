@@ -32,12 +32,17 @@ export default function TournamentItem(props: {
   const players = values(props.tournament.players)
   const brackets = values(props.tournament.brackets)
   const remainingPlayers = players.filter((p) => !p.eliminated)
+  const nbStages = Math.max(...players.map((p) => p.ranks.length))
 
   const sortedPlayers = entries(props.tournament.players).sort(
     ([idA, a], [idB, b]) => {
       if (a.eliminated !== b.eliminated) return a.eliminated ? +1 : -1
       if (a.ranks.length !== b.ranks.length)
         return b.ranks.length - a.ranks.length
+      if (tournamentFinished && a.ranks.length === nbStages) {
+        // sort finalists by last rank
+        return a.ranks[a.ranks.length - 1] - b.ranks[b.ranks.length - 1]
+      }
       return average(...values(a.ranks)) - average(...values(b.ranks))
     }
   )
