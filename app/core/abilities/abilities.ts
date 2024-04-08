@@ -8008,7 +8008,7 @@ export class DreamEaterStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
     const damage = pokemon.stars === 1 ? 45 : 90
     const duration = pokemon.stars === 1 ? 2500 : 5000
 
@@ -8017,6 +8017,12 @@ export class DreamEaterStrategy extends AbilityStrategy {
     )
 
     if (sleepingTarget) {
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: Ability.DREAM_EATER,
+        targetX: sleepingTarget.positionX,
+        targetY: sleepingTarget.positionY
+      })
       const coord = state.getAvailablePlaceCoordinatesInRange(
         sleepingTarget,
         board,
@@ -8036,6 +8042,12 @@ export class DreamEaterStrategy extends AbilityStrategy {
       pokemon.handleHeal(takenDamage, pokemon, 1)
     } else {
       target.status.triggerSleep(duration, target)
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: Ability.DREAM_EATER,
+        targetX: target.positionX,
+        targetY: target.positionY
+      })
     }
   }
 }
