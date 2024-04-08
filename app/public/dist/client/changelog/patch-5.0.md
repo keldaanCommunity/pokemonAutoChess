@@ -16,6 +16,7 @@
 - Unown S (STOP): freeze duration ~~4~~ 2 seconds
 - New ability for Magnemite: Zap Cannon
 - New ability for Mewtwo: Psystrike
+- New ability for Treecko: Leaf Blade
 
 # Changes to Synergies
 
