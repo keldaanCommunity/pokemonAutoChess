@@ -8,6 +8,8 @@
 - Zangoose
 - Nickit
 - Thievul
+- Drowzee
+- Hypno
 
 # Changes to Pokemon & Abilities
 

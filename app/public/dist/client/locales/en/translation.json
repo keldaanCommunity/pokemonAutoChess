@@ -318,7 +318,8 @@
     "ICE_HAMMER": "Ice Hammer",
     "POLLEN_PUFF": "Pollen Puff",
     "PSYSTRIKE": "Psystrike",
-    "FACADE": "Facade"
+    "FACADE": "Facade",
+    "DREAM_EATER": "Dream Eater"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1071,7 +1072,9 @@
     "RIBOMBEE": "Ribombee",
     "ZANGOOSE": "Zangoose",
     "NICKIT": "Nickit",
-    "THIEVUL": "Thievul"
+    "THIEVUL": "Thievul",
+    "DROWZEE": "Drowzee",
+    "HYPNO": "Hypno"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1375,7 +1378,8 @@
     "ICE_HAMMER": "Deals [50,100] SPECIAL to the target, causing it to FREEZE for 3s. PARALYSIS the caster for 3s",
     "POLLEN_PUFF": "Give the lowest HP ally a pollen puff that restores [20,40,80,SP] HP",
     "PSYSTRIKE": "The caster materializes a strange psychic wave towards the furthest enemy, inflicting [100,SP] PHYSICAL damage and teleporting everything in its path",
-    "FACADE": "Deals [20,40,80,SP] SPECIAL. Doubles damage if the pokémon is BURN, CONFUSION, FREEZE, PARALYSIS, POISONNED, SILENCE, SLEEP, FLINCH, CHARM, ARMOR_REDUCTION or WOUND"
+    "FACADE": "Deals [20,40,80,SP] SPECIAL. Doubles damage if the pokémon is BURN, CONFUSION, FREEZE, PARALYSIS, POISONNED, SILENCE, SLEEP, FLINCH, CHARM, ARMOR_REDUCTION or WOUND",
+    "DREAM_EATER": "If an enemy is SLEEP, jump next to it, deals [45,90,SP] SPECIAL and restores the same amount of HP. Otherwise, puts the target SLEEP for [2.5,5] s"
   },
   "effect": {
     "INGRAIN": "Ingrain",
