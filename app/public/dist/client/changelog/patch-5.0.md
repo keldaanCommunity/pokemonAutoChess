@@ -36,3 +36,5 @@
 # Misc
 
 - New title: Stargazer - Get Solgaleo or Lunala
+- Changed Scribble "Rare is Expensive": Buying XP now costs 8 instead of 4. Units are bought and sold for 1 gold less.
+- New Scribble rule: Free Market
