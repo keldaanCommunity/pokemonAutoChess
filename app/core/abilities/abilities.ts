@@ -7512,16 +7512,13 @@ export class SpacialRendStrategy extends AbilityStrategy {
     for (let x = 0; x < BOARD_WIDTH; x++) {
       const targetHit = board.getValue(x, y)
       if (targetHit && targetHit.team !== pokemon.team) {
-        targetHit.cooldown = 700
-        setTimeout(() => {
-          targetHit.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
-        }, 700)
+        targetHit.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
       }
     }
   }
