@@ -19,6 +19,7 @@
 - New ability for Magnemite: Zap Cannon
 - New ability for Mewtwo: Psystrike
 - New ability for Treecko: Leaf Blade
+- Improve targeting of Spacial Rend (Palkia)
 
 # Changes to Synergies
 
