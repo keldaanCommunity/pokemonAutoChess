@@ -166,76 +166,86 @@ export class OnGameStartRequestCommand extends Command<
         }
       })
 
+      if (this.state.users.size < 2) {
+        this.state.addMessage({
+          authorId: "Server",
+          payload: `Add bots or wait for more players to join your room.`,
+          avatar: "0079/Sigh"
+        })
+        return
+      }
+
       if (!allUsersReady && this.state.gameMode === GameMode.NORMAL) {
         this.state.addMessage({
           authorId: "Server",
           payload: `Not all players are ready.`,
           avatar: "0079/Sigh"
         })
-      } else {
-        let freeMemory = os.freemem()
-        let totalMemory = os.totalmem()
-        /*logger.info(
+        return
+      }
+
+      let freeMemory = os.freemem()
+      let totalMemory = os.totalmem()
+      /*logger.info(
           `Memory freemem/totalmem: ${(
             (100 * freeMemory) /
             totalMemory
           ).toFixed(2)} % free (${totalMemory - freeMemory} / ${totalMemory})`
         )*/
-        freeMemory = memoryUsage().heapUsed
-        totalMemory = memoryUsage().heapTotal
-        /*logger.info(
+      freeMemory = memoryUsage().heapUsed
+      totalMemory = memoryUsage().heapTotal
+      /*logger.info(
           `Memory heapUsed/heapTotal: ${(
             (100 * freeMemory) /
             totalMemory
           ).toFixed(2)} % free (${totalMemory - freeMemory} / ${totalMemory})`
         )*/
-        if (freeMemory < 0.1 * totalMemory) {
-          // if less than 10% free memory available, prevents starting another game to avoid out of memory crash
-          this.state.addMessage({
-            author: "Server",
-            authorId: "server",
-            payload: `Too many players are currently playing and the server is running out of memory. Try again in a few minutes, and avoid playing with bots. Sorry for the inconvenience.`,
-            avatar: "0025/Pain"
-          })
-        } else if (
-          freeMemory < 0.2 * totalMemory &&
-          nbHumanPlayers < MAX_PLAYERS_PER_GAME
-        ) {
-          // if less than 20% free memory available, prevents starting a game with bots
-          this.state.addMessage({
-            author: "Server",
-            authorId: "server",
-            payload: `Too many players are currently playing and the server is running out of memory. To save resources, only lobbys with ${MAX_PLAYERS_PER_GAME} human players are enabled. Sorry for the inconvenience.`,
-            avatar: "0025/Pain"
-          })
-        } else if (freeMemory < 0.4 * totalMemory && nbHumanPlayers === 1) {
-          // if less than 40% free memory available, prevents starting a game solo
-          this.state.addMessage({
-            author: "Server",
-            authorId: "server",
-            payload: `Too many players are currently playing and the server is running out of memory. To save resources, solo games have been disabled. Please wait for more players to join the lobby before starting the game. Sorry for the inconvenience.`,
-            avatar: "0025/Pain"
-          })
-        } else {
-          this.state.gameStarted = true
-          matchMaker.createRoom("game", {
-            users: this.state.users,
-            name: this.state.name,
-            preparationId: this.room.roomId,
-            noElo: this.state.noElo,
-            selectedMap: this.state.selectedMap,
-            gameMode: this.state.gameMode,
-            tournamentId: this.room.metadata?.tournamentId,
-            bracketId: this.room.metadata?.bracketId,
-            minRank: this.state.minRank,
-            whenReady: (game) => {
-              this.room.setGameStarted(true)
-              //logger.debug("game start", game.roomId)
-              this.room.broadcast(Transfer.GAME_START, game.roomId)
-              setTimeout(() => this.room.disconnect(), 30000) // TRYFIX: ranked lobbies prep rooms not being removed
-            }
-          })
-        }
+      if (freeMemory < 0.1 * totalMemory) {
+        // if less than 10% free memory available, prevents starting another game to avoid out of memory crash
+        this.state.addMessage({
+          author: "Server",
+          authorId: "server",
+          payload: `Too many players are currently playing and the server is running out of memory. Try again in a few minutes, and avoid playing with bots. Sorry for the inconvenience.`,
+          avatar: "0025/Pain"
+        })
+      } else if (
+        freeMemory < 0.2 * totalMemory &&
+        nbHumanPlayers < MAX_PLAYERS_PER_GAME
+      ) {
+        // if less than 20% free memory available, prevents starting a game with bots
+        this.state.addMessage({
+          author: "Server",
+          authorId: "server",
+          payload: `Too many players are currently playing and the server is running out of memory. To save resources, only lobbys with ${MAX_PLAYERS_PER_GAME} human players are enabled. Sorry for the inconvenience.`,
+          avatar: "0025/Pain"
+        })
+      } else if (freeMemory < 0.4 * totalMemory && nbHumanPlayers === 1) {
+        // if less than 40% free memory available, prevents starting a game solo
+        this.state.addMessage({
+          author: "Server",
+          authorId: "server",
+          payload: `Too many players are currently playing and the server is running out of memory. To save resources, solo games have been disabled. Please wait for more players to join the lobby before starting the game. Sorry for the inconvenience.`,
+          avatar: "0025/Pain"
+        })
+      } else {
+        this.state.gameStarted = true
+        matchMaker.createRoom("game", {
+          users: this.state.users,
+          name: this.state.name,
+          preparationId: this.room.roomId,
+          noElo: this.state.noElo,
+          selectedMap: this.state.selectedMap,
+          gameMode: this.state.gameMode,
+          tournamentId: this.room.metadata?.tournamentId,
+          bracketId: this.room.metadata?.bracketId,
+          minRank: this.state.minRank,
+          whenReady: (game) => {
+            this.room.setGameStarted(true)
+            //logger.debug("game start", game.roomId)
+            this.room.broadcast(Transfer.GAME_START, game.roomId)
+            setTimeout(() => this.room.disconnect(), 30000) // TRYFIX: ranked lobbies prep rooms not being removed
+          }
+        })
       }
     } catch (error) {
       logger.error(error)
