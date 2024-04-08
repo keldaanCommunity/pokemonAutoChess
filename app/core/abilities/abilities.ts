@@ -8000,6 +8000,58 @@ export class PsystrikeStrategy extends AbilityStrategy {
   }
 }
 
+export class DreamEaterStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const damage = pokemon.stars === 1 ? 45 : 90
+    const duration = pokemon.stars === 1 ? 2500 : 5000
+
+    const sleepingTarget = board.find(
+      (x, y, entity) => entity.status.sleep && entity.team !== pokemon.team
+    )
+
+    if (sleepingTarget) {
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: Ability.DREAM_EATER,
+        targetX: sleepingTarget.positionX,
+        targetY: sleepingTarget.positionY
+      })
+      const coord = state.getAvailablePlaceCoordinatesInRange(
+        sleepingTarget,
+        board,
+        1
+      )
+      if (coord) {
+        pokemon.moveTo(coord.x, coord.y, board)
+      }
+      const { takenDamage } = sleepingTarget.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit,
+        true
+      )
+      pokemon.handleHeal(takenDamage, pokemon, 1)
+    } else {
+      target.status.triggerSleep(duration, target)
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: Ability.DREAM_EATER,
+        targetX: target.positionX,
+        targetY: target.positionY
+      })
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -8305,5 +8357,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ICE_HAMMER]: new IceHammerStrategy(),
   [Ability.POLLEN_PUFF]: new PollenPuffStrategy(),
   [Ability.PSYSTRIKE]: new PsystrikeStrategy(),
-  [Ability.FACADE]: new FacadeStrategy()
+  [Ability.FACADE]: new FacadeStrategy(),
+  [Ability.DREAM_EATER]: new DreamEaterStrategy()
 }

@@ -864,6 +864,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.DREAM_EATER:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
     case Ability.VINE_WHIP:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(3)
       break
