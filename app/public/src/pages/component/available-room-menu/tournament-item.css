@@ -1,0 +1,61 @@
+.tournament-item.nes-container {
+  background: #61738a;
+  border-radius: 12px;
+  border: solid;
+  border-color: black;
+  padding: 0.5em;
+  color: white;
+  box-shadow: #2d334b 4px 4px 0px;
+  margin-bottom: 0.5em;
+}
+
+.tournament-item .actions {
+  display: flex;
+  justify-content: end;
+}
+
+.tournament-item .remove-btn {
+  float: right;
+}
+
+.tournament-item .player-box {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5em;
+}
+
+.tournament-item .player-box.eliminated {
+  background-color: #61738a;
+  color: #ccc;
+}
+
+.tournament-item .player-box.eliminated img {
+  filter: grayscale(1);
+}
+
+.tournament-item .player-box.myself {
+  background-color: #1195ec;
+}
+
+.tournament-item .player-box span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tournament-item .player-ranks {
+  display: block;
+}
+
+.tournament-item p {
+  margin: 0.5em 0;
+  flex: 1;
+}
+
+.tournament-item .player-rank {
+  line-height: 40px;
+  min-width: 2ch;
+  text-align: center;
+}

@@ -1,7 +1,6 @@
 import { Dispatcher } from "@colyseus/command"
 import { MapSchema } from "@colyseus/schema"
 import { Client, Room } from "colyseus"
-import EloEngine from "elo-rank"
 import admin from "firebase-admin"
 import { components } from "../api-v1/openapi"
 import { computeElo } from "../core/elo"
@@ -78,7 +77,6 @@ import GameState from "./states/game-state"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
-  eloEngine: EloEngine
   additionalUncommonPool: Array<Pkm>
   additionalRarePool: Array<Pkm>
   additionalEpicPool: Array<Pkm>
@@ -86,7 +84,6 @@ export default class GameRoom extends Room<GameState> {
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
-    this.eloEngine = new EloEngine()
     this.additionalUncommonPool = new Array<Pkm>()
     this.additionalRarePool = new Array<Pkm>()
     this.additionalEpicPool = new Array<Pkm>()
@@ -102,6 +99,8 @@ export default class GameRoom extends Room<GameState> {
     selectedMap: DungeonPMDO | "random"
     gameMode: GameMode
     minRank: EloRank | null
+    tournamentId: string | null,
+    bracketId: string | null,
     whenReady: (room: GameRoom) => void
   }) {
     logger.trace("create game room")
@@ -112,7 +111,9 @@ export default class GameRoom extends Room<GameState> {
         (id) => options.users.get(id)!.isBot === false
       ),
       stageLevel: 0,
-      type: "game"
+      type: "game",
+      tournamentId: options.tournamentId,
+      bracketId: options.bracketId
     })
     // logger.debug(options);
     this.setState(
@@ -741,6 +742,15 @@ export default class GameRoom extends Room<GameState> {
           }
         }
       }
+
+      if(this.state.gameMode === GameMode.TOURNAMENT){
+        this.presence.publish("tournament-match-end", {
+          tournamentId: this.metadata?.tournamentId,
+          bracketId: this.metadata?.bracketId,
+          players: humans
+        })
+      }
+
       this.dispatcher.stop()
     } catch (error) {
       logger.error(error)

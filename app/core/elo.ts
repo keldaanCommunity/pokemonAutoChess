@@ -1,7 +1,7 @@
-import EloRank from "elo-rank"
 import { ISimplePlayer } from "../types"
 import { logger } from "../utils/logger"
 import { average, min } from "../utils/number"
+import { EloEngine } from "./elo-engine"
 
 export function computeElo(
   player: ISimplePlayer,
@@ -9,7 +9,7 @@ export function computeElo(
   previousElo: number,
   players: ISimplePlayer[]
 ) {
-  const eloEngine = new EloRank()
+  const eloEngine = new EloEngine()
   const eloGains = new Array<number>()
   //logger.debug("computing elo for", player.name, "rank", rank, "elo", previousElo)
   players.forEach((plyr) => {

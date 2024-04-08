@@ -3522,7 +3522,7 @@ export class Treecko extends Pokemon {
   speDef = 3
   maxPP = 100
   range = 1
-  skill = Ability.THIEF
+  skill = Ability.LEAF_BLADE
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -3537,7 +3537,7 @@ export class Grovyle extends Pokemon {
   speDef = 3
   maxPP = 100
   range = 1
-  skill = Ability.THIEF
+  skill = Ability.LEAF_BLADE
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -3551,7 +3551,7 @@ export class Sceptile extends Pokemon {
   speDef = 5
   maxPP = 100
   range = 1
-  skill = Ability.THIEF
+  skill = Ability.LEAF_BLADE
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -12617,6 +12617,45 @@ export class Grimmsnarl extends Pokemon {
   attackSprite = AttackSprite.DARK_MELEE
 }
 
+export class Drowzee extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.HUMAN,
+    Synergy.PSYCHIC,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.HYPNO
+  hp = 100
+  atk = 7
+  def = 2
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.DREAM_EATER
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+  additional = true
+}
+
+export class Hypno extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.HUMAN,
+    Synergy.PSYCHIC,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 250
+  atk = 14
+  def = 4
+  speDef = 6
+  maxPP = 100
+  range = 2
+  skill = Ability.DREAM_EATER
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -13370,5 +13409,7 @@ export const PokemonClasses: Record<
   [Pkm.RIBOMBEE]: Ribombee,
   [Pkm.ZANGOOSE]: Zangoose,
   [Pkm.NICKIT]: Nickit,
-  [Pkm.THIEVUL]: Thievul
+  [Pkm.THIEVUL]: Thievul,
+  [Pkm.DROWZEE]: Drowzee,
+  [Pkm.HYPNO]: Hypno
 }

@@ -104,8 +104,9 @@ export default function GamePokemonPortrait(props: {
       pokemonInPortrait.index
     )
 
-    let cost = PokemonFactory.getBuyPrice(pokemon.name)
     const specialGameRule = getGameScene()?.room?.state.specialGameRule
+    let cost = PokemonFactory.getBuyPrice(pokemon.name, specialGameRule)
+    
     if (
       willEvolve &&
       pokemonEvolution &&

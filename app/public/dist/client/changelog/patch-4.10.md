@@ -8,6 +8,8 @@
 - Zangoose
 - Nickit
 - Thievul
+- Drowzee
+- Hypno
 
 # Changes to Pokemon & Abilities
 
@@ -16,6 +18,7 @@
 - Unown S (STOP): freeze duration ~~4~~ 2 seconds
 - New ability for Magnemite: Zap Cannon
 - New ability for Mewtwo: Psystrike
+- New ability for Treecko: Leaf Blade
 - Improve targeting of Spacial Rend (Palkia)
 
 # Changes to Synergies
@@ -37,3 +40,5 @@
 # Misc
 
 - New title: Stargazer - Get Solgaleo or Lunala
+- Changed Scribble "Rare is Expensive": Buying XP now costs 8 instead of 4. Units are bought and sold for 1 gold less.
+- New Scribble rule: Free Market

@@ -678,3 +678,6 @@ export const RANKED_LOBBY_CRON = "0 0 2-22/4 * * *" // every four hours from 2h 
 
 export const DUST_PER_BOOSTER = 50
 export const DUST_PER_SHINY = 250
+
+export const TOURNAMENT_REGISTRATION_TIME = 60 * 60 * 1000 // 1 hour
+export const TOURNAMENT_CLEANUP_DELAY = 24 * 60 * 60 * 1000 // 1 day
