@@ -58,7 +58,6 @@
     "d3": "^7.8.5",
     "discord.js": "^14.14.1",
     "dotenv": "^16.3.2",
-    "elo-rank": "^1.0.4",
     "express": "^4.18.2",
     "express-basic-auth": "^1.2.0",
     "express-openapi": "^12.1.3",
