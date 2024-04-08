@@ -3522,7 +3522,7 @@ export class Treecko extends Pokemon {
   speDef = 3
   maxPP = 100
   range = 1
-  skill = Ability.THIEF
+  skill = Ability.LEAF_BLADE
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -3537,7 +3537,7 @@ export class Grovyle extends Pokemon {
   speDef = 3
   maxPP = 100
   range = 1
-  skill = Ability.THIEF
+  skill = Ability.LEAF_BLADE
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -3551,7 +3551,7 @@ export class Sceptile extends Pokemon {
   speDef = 5
   maxPP = 100
   range = 1
-  skill = Ability.THIEF
+  skill = Ability.LEAF_BLADE
   attackSprite = AttackSprite.GRASS_MELEE
 }
 

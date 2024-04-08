@@ -1,5 +1,5 @@
 import { Command } from "@colyseus/command"
-import { ArraySchema, MapSchema } from "@colyseus/schema"
+import { MapSchema } from "@colyseus/schema"
 import { Client, updateLobby } from "colyseus"
 import { nanoid } from "nanoid"
 
