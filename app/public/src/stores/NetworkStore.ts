@@ -235,6 +235,18 @@ export const networkSlice = createSlice({
     setTitle: (state, action: PayloadAction<string>) => {
       state.lobby?.send(Transfer.SET_TITLE, action.payload)
     },
+    removeTournament: (state, action: PayloadAction<{ id: string }>) => {
+      state.lobby?.send(Transfer.REMOVE_TOURNAMENT, action.payload)
+    },
+    createTournamentLobbies: (state, action: PayloadAction<{ id: string }>) => {
+      state.lobby?.send(Transfer.REMAKE_TOURNAMENT_LOBBIES, action.payload)
+    },
+    participateInTournament: (
+      state,
+      action: PayloadAction<{ tournamentId: string; participate: boolean }>
+    ) => {
+      state.lobby?.send(Transfer.PARTICIPATE_TOURNAMENT, action.payload)
+    },
     giveBooster: (
       state,
       action: PayloadAction<{ uid: string; numberOfBoosters: number }>
@@ -279,6 +291,9 @@ export const networkSlice = createSlice({
       action: PayloadAction<{ message: string }>
     ) => {
       state.lobby?.send(Transfer.SERVER_ANNOUNCEMENT, action.payload)
+    },
+    createTournament: (state, action: PayloadAction<{ name: string, startDate: string }>) => {
+      state.lobby?.send(Transfer.NEW_TOURNAMENT, action.payload)
     }
   }
 })
@@ -296,6 +311,9 @@ export const {
   giveTitle,
   giveRole,
   removeMessage,
+  removeTournament,
+  createTournamentLobbies,
+  participateInTournament,
   giveBooster,
   toggleAnimation,
   openBooster,
@@ -335,7 +353,8 @@ export const {
   setTitle,
   kick,
   deleteRoom,
-  makeServerAnnouncement
+  makeServerAnnouncement,
+  createTournament
 } = networkSlice.actions
 
 export default networkSlice.reducer

@@ -58,8 +58,10 @@
   cursor: var(--cursor-hover);
 }
 
-.pokemon-portrait {
-  align-self: start;
+.chat-message-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .chat-user {

@@ -378,7 +378,6 @@ export class MiniGame {
       const synergiesTriggerLevels: [Synergy, number][] = Array.from(
         player.synergies
       ).map(([type, value]) => {
-        // console.log(type, value)
         const lastTrigger = SynergyTriggers[type]
           .filter((n) => n <= value)
           .at(-1)
