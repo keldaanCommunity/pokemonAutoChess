@@ -21,8 +21,8 @@ import { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonCollection from "../models/colyseus-models/pokemon-collection"
 import Status from "../models/colyseus-models/status"
 import Synergies from "../models/colyseus-models/synergies"
+import { TournamentSchema } from "../models/colyseus-models/tournament"
 import { Effects } from "../models/effects"
-import { ITournament } from "../models/mongo-models/tournament"
 import GameRoom from "../rooms/game-room"
 import { Ability } from "./enum/Ability"
 import { Effect } from "./enum/Effect"
@@ -123,6 +123,8 @@ export enum Transfer {
   REMOVE_MESSAGE = "REMOVE_MESSAGE",
   NEW_TOURNAMENT = "NEW_TOURNAMENT",
   REMOVE_TOURNAMENT = "REMOVE_TOURNAMENT",
+  REMAKE_TOURNAMENT_LOBBIES = "REMAKE_TOURNAMENT_LOBBIES",
+  PARTICIPATE_TOURNAMENT = "PARTICIPATE_TOURNAMENT",
   GIVE_BOOSTER = "GIVE_BOOSTER",
   SET_ROLE = "SET_ROLE",
   GIVE_TITLE = "GIVE_TITLE",
@@ -283,7 +285,7 @@ export interface ICustomLobbyState extends Schema {
   levelLeaderboard: ILeaderboardInfo[]
   nextSpecialGameDate: string
   nextSpecialGameMode: GameMode | ""
-  tournaments: ArraySchema<ITournament>
+  tournaments: ArraySchema<TournamentSchema>
 }
 
 export interface IGameState extends Schema {
@@ -588,6 +590,8 @@ export interface IPreparationMetadata {
   minRank: string | null
   gameMode: GameMode
   whitelist: string[] | null
+  tournamentId: string | null
+  bracketId: string | null
 }
 
 export interface IGameMetadata {
@@ -596,6 +600,8 @@ export interface IGameMetadata {
   playerIds: string[]
   stageLevel: number
   type: "game"
+  tournamentId: string | null
+  bracketId: string | null
 }
 
 export interface ISuggestionUser {

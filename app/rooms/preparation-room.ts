@@ -78,6 +78,8 @@ export default class PreparationRoom extends Room<PreparationState> {
     noElo?: boolean
     autoStartDelayInSeconds?: number
     whitelist?: string[]
+    tournamentId?: string,
+    bracketId?: string
   }) {
     // logger.debug(options);
     //logger.info(`create ${options.roomName}`)
@@ -91,7 +93,9 @@ export default class PreparationRoom extends Room<PreparationState> {
       minRank: options.minRank ?? null,
       noElo: options.noElo ?? false,
       gameMode: options.gameMode,
-      whitelist: options.whitelist ?? null
+      whitelist: options.whitelist ?? null,
+      tournamentId: options.tournamentId ?? null,
+      bracketId: options.bracketId ?? null
     })
     this.maxClients = 8
     // if (options.ownerId) {
@@ -106,6 +110,19 @@ export default class PreparationRoom extends Room<PreparationState> {
     if (options.autoStartDelayInSeconds) {
       this.clock.setTimeout(() => {
         if (this.state.users.size < 2) {
+          // automatically remove lobbies with zero or one players
+          if (this.metadata?.tournamentId) {
+            // automatically give rank 1 if solo in a tournament lobby
+            this.presence.publish("tournament-match-end", {
+              tournamentId: this.metadata?.tournamentId,
+              bracketId: this.metadata?.bracketId,
+              players: values(this.state.users).map((p) => ({
+                id: p.id,
+                rank: 1
+              }))
+            })
+          }
+
           this.broadcast(Transfer.KICK)
           this.disconnect()
         } else {

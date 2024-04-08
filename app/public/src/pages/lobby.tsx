@@ -5,6 +5,11 @@ import { useTranslation } from "react-i18next"
 import { Navigate } from "react-router-dom"
 import { Modal } from "react-bootstrap"
 import LobbyUser from "../../../models/colyseus-models/lobby-user"
+import {
+  TournamentBracketSchema,
+  TournamentPlayerSchema,
+  TournamentSchema
+} from "../../../models/colyseus-models/tournament"
 import PokemonConfig from "../../../models/colyseus-models/pokemon-config"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import {
@@ -21,8 +26,12 @@ import {
   addPokemonConfig,
   addRoom,
   addTournament,
+  addTournamentBracket,
   addUser,
   changePokemonConfig,
+  changeTournament,
+  changeTournamentBracket,
+  changeTournamentPlayer,
   changeUser,
   leaveLobby,
   pushBotLog,
@@ -30,6 +39,7 @@ import {
   removeMessage,
   removeRoom,
   removeTournament,
+  removeTournamentBracket,
   removeUser,
   setBoosterContent,
   setBotData,
@@ -43,7 +53,8 @@ import {
   setPastebinUrl,
   setSearchedUser,
   setSuggestions,
-  setUser
+  setUser,
+  updateTournament
 } from "../stores/LobbyStore"
 import {
   joinLobby,
@@ -195,7 +206,92 @@ export async function joinLobbyRoom(
 
           room.state.tournaments.onAdd((tournament) => {
             dispatch(addTournament(tournament))
+            const fields: NonFunctionPropNames<TournamentSchema>[] = [
+              "id",
+              "name",
+              "startDate"
+            ]
+
+            fields.forEach((field) => {
+              tournament.listen(field, (value) => {
+                dispatch(
+                  changeTournament({
+                    tournamentId: tournament.id,
+                    field: field,
+                    value: value
+                  })
+                )
+              })
+            })
+
+            tournament.players.onAdd((player, userId) => {
+              dispatch(updateTournament()) // TOFIX: force redux reactivity
+              const fields: NonFunctionPropNames<TournamentPlayerSchema>[] = [
+                "eliminated"
+              ]
+              fields.forEach((field) => {
+                player.listen(field, (value) => {
+                  dispatch(
+                    changeTournamentPlayer({
+                      tournamentId: tournament.id,
+                      playerId: userId,
+                      field: field,
+                      value: value
+                    })
+                  )
+                })
+              })
+            })
+
+            tournament.players.onRemove((player, userId) => {
+              dispatch(updateTournament()) // TOFIX: force redux reactivity
+            })
+
+            tournament.brackets.onAdd((bracket, roomId) => {
+              dispatch(
+                addTournamentBracket({
+                  tournamendId: tournament.id,
+                  roomId,
+                  bracket
+                })
+              )
+
+              const fields: NonFunctionPropNames<TournamentBracketSchema>[] = [
+                "name",
+                "finished"
+              ]
+              fields.forEach((field) => {
+                bracket.listen(field, (value) => {
+                  dispatch(
+                    changeTournamentBracket({
+                      tournamentId: tournament.id,
+                      roomId,
+                      field,
+                      value
+                    })
+                  )
+                })
+              })
+
+              bracket.playersId.onChange(() => {
+                dispatch(
+                  changeTournamentBracket({
+                    tournamentId: tournament.id,
+                    roomId,
+                    field: "playersId",
+                    value: bracket.playersId
+                  })
+                )
+              })
+            })
+
+            tournament.brackets.onRemove((bracket, roomId) => {
+              dispatch(
+                removeTournamentBracket({ tournamendId: tournament.id, roomId })
+              )
+            })
           })
+
           room.state.tournaments.onRemove((tournament) => {
             dispatch(removeTournament(tournament))
           })

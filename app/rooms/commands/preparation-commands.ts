@@ -12,6 +12,7 @@ import { IChatV2, Role, Transfer } from "../../types"
 import { EloRankThreshold, MAX_PLAYERS_PER_GAME } from "../../types/Config"
 import { BotDifficulty, GameMode } from "../../types/enum/Game"
 import { logger } from "../../utils/logger"
+import { max } from "../../utils/number"
 import { pickRandomIn } from "../../utils/random"
 import { entries, values } from "../../utils/schemas"
 import PreparationRoom from "../preparation-room"
@@ -113,9 +114,13 @@ export class OnJoinCommand extends Command<
         }
       }
 
+      const nbExpectedPlayers = this.room.metadata?.whitelist
+        ? max(MAX_PLAYERS_PER_GAME)(this.room.metadata?.whitelist.length)
+        : MAX_PLAYERS_PER_GAME
+
       if (
         this.state.gameMode !== GameMode.NORMAL &&
-        this.state.users.size === MAX_PLAYERS_PER_GAME
+        this.state.users.size === nbExpectedPlayers
       ) {
         // auto start when special lobby is full and all ready
         this.room.broadcast(Transfer.MESSAGES, {
@@ -125,7 +130,7 @@ export class OnJoinCommand extends Command<
         this.clock.setTimeout(() => {
           this.room.dispatcher.dispatch(new OnGameStartRequestCommand())
           // open another one
-          this.room.presence.publish("special-game-full", {
+          this.room.presence.publish("lobby-full", {
             gameMode: this.state.gameMode,
             minRank: this.state.minRank,
             noElo: this.state.noElo
@@ -221,6 +226,8 @@ export class OnGameStartRequestCommand extends Command<
             noElo: this.state.noElo,
             selectedMap: this.state.selectedMap,
             gameMode: this.state.gameMode,
+            tournamentId: this.room.metadata?.tournamentId,
+            bracketId: this.room.metadata?.bracketId,
             minRank: this.state.minRank,
             whenReady: (game) => {
               this.room.setGameStarted(true)

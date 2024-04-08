@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
-import { TournamentItem } from "./tournament-item"
-import { useAppSelector } from "../../../hooks"
-import { createTournament } from "../../../stores/NetworkStore"
+import { useAppDispatch, useAppSelector } from "../../../hooks"
+import {
+  createTournament,
+  createTournamentLobbies,
+  removeTournament
+} from "../../../stores/NetworkStore"
+import { formatDate } from "../../utils/date"
+import { ITournament } from "../../../../../types/interfaces/Tournament"
 import "./tournament-admin.css"
 
 export function TournamentsAdmin() {
@@ -35,7 +40,7 @@ export function TournamentsAdmin() {
         {tournaments && (
           <ul>
             {tournaments.map((tournament) => (
-              <li key={tournament.startDate}>
+              <li key={tournament.id}>
                 <TournamentItem tournament={tournament} />
               </li>
             ))}
@@ -74,6 +79,42 @@ export function TournamentsAdmin() {
           </button>
         </form>
       </div>
+    </div>
+  )
+}
+
+export function TournamentItem(props: { tournament: ITournament }) {
+  const dispatch = useAppDispatch()
+  const { t } = useTranslation()
+
+  return (
+    <div className="nes-container tournament-item">
+      <button
+        className="remove-btn bubbly red"
+        onClick={() => {
+          if (confirm("Delete tournament and all registrations ?")) {
+            dispatch(removeTournament({ id: props.tournament.id! }))
+          }
+        }}
+      >
+        {t("delete")}
+      </button>
+      <button
+        className="bubbly orange"
+        onClick={() => {
+          if (
+            confirm(
+              "Remake tournament lobbies ? Previous lobbies won't be deleted so do this only after a server reboot if lobbies have been lost"
+            )
+          ) {
+            dispatch(createTournamentLobbies({ id: props.tournament.id! }))
+          }
+        }}
+      >
+        Remake lobbies
+      </button>
+      <p className="name">{props.tournament.name}</p>
+      <p className="date">{formatDate(new Date(props.tournament.startDate))}</p>
     </div>
   )
 }

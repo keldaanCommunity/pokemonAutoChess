@@ -121,7 +121,6 @@ export function MainSidebar(props: MainSidebarProps) {
           </NavLink>
         )}
 
-        {/** TODO Enable these once we populate preparation room pokemonCollection */}
         {page === "main_lobby" && profileLevel >= GADGETS.BAG.levelRequired && (
           <NavLink
             location="collection"

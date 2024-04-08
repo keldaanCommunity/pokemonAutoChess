@@ -2,7 +2,6 @@ import { User } from "@firebase/auth-types"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { Client, Room } from "colyseus.js"
 import { IBot } from "../../../models/mongo-models/bot-v2"
-import { ITournament } from "../../../models/mongo-models/tournament"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import AfterGameState from "../../../rooms/states/after-game-state"
 import GameState from "../../../rooms/states/game-state"
@@ -230,6 +229,18 @@ export const networkSlice = createSlice({
     removeMessage: (state, action: PayloadAction<{ id: string }>) => {
       state.lobby?.send(Transfer.REMOVE_MESSAGE, action.payload)
     },
+    removeTournament: (state, action: PayloadAction<{ id: string }>) => {
+      state.lobby?.send(Transfer.REMOVE_TOURNAMENT, action.payload)
+    },
+    createTournamentLobbies: (state, action: PayloadAction<{ id: string }>) => {
+      state.lobby?.send(Transfer.REMAKE_TOURNAMENT_LOBBIES, action.payload)
+    },
+    participateInTournament: (
+      state,
+      action: PayloadAction<{ tournamentId: string; participate: boolean }>
+    ) => {
+      state.lobby?.send(Transfer.PARTICIPATE_TOURNAMENT, action.payload)
+    },
     giveBooster: (
       state,
       action: PayloadAction<{ uid: string; numberOfBoosters: number }>
@@ -275,7 +286,7 @@ export const networkSlice = createSlice({
     ) => {
       state.lobby?.send(Transfer.SERVER_ANNOUNCEMENT, action.payload)
     },
-    createTournament: (state, action: PayloadAction<ITournament>) => {
+    createTournament: (state, action: PayloadAction<{ name: string, startDate: string }>) => {
       state.lobby?.send(Transfer.NEW_TOURNAMENT, action.payload)
     }
   }
@@ -294,6 +305,9 @@ export const {
   giveTitle,
   giveRole,
   removeMessage,
+  removeTournament,
+  createTournamentLobbies,
+  participateInTournament,
   giveBooster,
   toggleAnimation,
   openBooster,
