@@ -8,8 +8,8 @@ import { Synergy } from "../../../../../types/enum/Synergy"
 import { useAppSelector } from "../../../hooks"
 import SynergyIcon from "../icons/synergy-icon"
 import { Avatar } from "../profile/avatar"
-import "./after-menu.css"
 import Team from "./team"
+import "./after-menu.css"
 
 export default function AfterMenu() {
   const { t } = useTranslation()
