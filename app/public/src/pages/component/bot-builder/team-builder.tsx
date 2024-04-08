@@ -172,7 +172,7 @@ export default function TeamBuilder(props: {
   }
 
   return (
-    <div id="team-builder" className="nes-container">
+    <div id="team-builder" className="my-container">
       <Synergies synergies={synergies} />
       <TeamEditor
         board={board}
@@ -180,8 +180,8 @@ export default function TeamBuilder(props: {
         handleDrop={handleDrop}
       />
       <SelectedEntity entity={selection} onChange={updateSelectedPokemon} />
-      <ItemPicker selectEntity={setSelection} />
-      <PokemonPicker selectEntity={setSelection} />
+      <ItemPicker selectEntity={setSelection} selected={selection} />
+      <PokemonPicker selectEntity={setSelection} selected={selection} />
       {props.bot && props.onChangeAvatar && (
         <BotAvatar
           bot={props.bot}

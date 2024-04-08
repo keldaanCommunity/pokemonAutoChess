@@ -1,19 +1,19 @@
 import { Command } from "@colyseus/command"
-import { MapSchema, ArraySchema } from "@colyseus/schema"
+import { MapSchema } from "@colyseus/schema"
 import { Client, updateLobby } from "colyseus"
 import { nanoid } from "nanoid"
 
 import {
+  ConditionBasedEvolutionRule,
   CountEvolutionRule,
-  HatchEvolutionRule,
-  MoneyEvolutionRule,
-  TurnEvolutionRule
+  HatchEvolutionRule
 } from "../../core/evolution-rules"
 import { selectMatchups } from "../../core/matchmaking"
 import { canSell } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import Player from "../../models/colyseus-models/player"
+import { isOnBench } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { getAvatarString } from "../../public/src/utils"
@@ -55,21 +55,21 @@ import {
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
+import { removeInArray } from "../../utils/array"
+import {
+  getFirstAvailablePositionInBench,
+  getFirstAvailablePositionOnBoard,
+  getFreeSpaceOnBench,
+  getMaxTeamSize,
+  isPositionEmpty
+} from "../../utils/board"
+import { repeat } from "../../utils/function"
 import { logger } from "../../utils/logger"
 import { max } from "../../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { getWeather } from "../../utils/weather"
-import {
-  isPositionEmpty,
-  getFirstAvailablePositionInBench,
-  getFirstAvailablePositionOnBoard,
-  getFreeSpaceOnBench,
-  getMaxTeamSize
-} from "../../utils/board"
 import GameRoom from "../game-room"
-import { isOnBench } from "../../models/colyseus-models/pokemon"
-import { repeat } from "../../utils/function"
 
 export class OnShopCommand extends Command<
   GameRoom,
@@ -96,7 +96,7 @@ export class OnShopCommand extends Command<
       pokemon.evolutionRule instanceof CountEvolutionRule &&
       pokemon.evolutionRule.canEvolveIfBuyingOne(pokemon, player)
 
-    let cost = PokemonFactory.getBuyPrice(name)
+    let cost = PokemonFactory.getBuyPrice(name, this.state.specialGameRule)
     const freeSpaceOnBench = getFreeSpaceOnBench(player.board)
     const hasSpaceOnBench = freeSpaceOnBench > 0 || isEvolution
 
@@ -126,7 +126,7 @@ export class OnShopCommand extends Command<
       // reset shop after picking in a unown shop
       this.state.shop.assignShop(player, true, this.state)
     } else {
-      player.shop[index] = Pkm.DEFAULT
+      player.shop = player.shop.with(index, Pkm.DEFAULT)
     }
 
     this.room.checkEvolutionsAfterPokemonAcquired(playerId)
@@ -152,9 +152,9 @@ export class OnRemoveFromShopCommand extends Command<
       return
 
     const name = player.shop[index]
-    let cost = PokemonFactory.getBuyPrice(name)
+    const cost = PokemonFactory.getBuyPrice(name, this.state.specialGameRule)
     if (player.money >= cost) {
-      player.shop = player.shop.with(index, Pkm.DEFAULT) as ArraySchema<Pkm> // waiting for https://github.com/colyseus/schema/pull/165
+      player.shop = player.shop.with(index, Pkm.DEFAULT)
       this.state.shop.releasePokemon(name)
     }
   }
@@ -231,8 +231,8 @@ export class OnDragDropCommand extends Command<
               PokemonFactory.getPokemonBaseEvolution(pokemonToClone.name),
               player
             )
-            pokemon.items.forEach((it) => {
-              player.items.add(it)
+            pokemon.items.forEach((item) => {
+              player.items.push(item)
             })
             player.board.delete(detail.id)
             const position = getFirstAvailablePositionInBench(player.board)
@@ -253,6 +253,7 @@ export class OnDragDropCommand extends Command<
           // Drag and drop pokemons through bench has no limitation
           if (dropOnBench && dropFromBench) {
             this.room.swap(player, pokemon, x, y)
+            pokemon.onChangePosition(x, y, player)
             success = true
           } else if (this.state.phase == GamePhaseState.PICK) {
             // On pick, allow to drop on / from board
@@ -268,6 +269,7 @@ export class OnDragDropCommand extends Command<
             if (dropOnBench) {
               // From board to bench is always allowed (bench to bench is already handled)
               this.room.swap(player, pokemon, x, y)
+              pokemon.onChangePosition(x, y, player)
               success = true
             } else if (
               pokemon.canBePlaced &&
@@ -290,7 +292,6 @@ export class OnDragDropCommand extends Command<
       }
 
       player.updateSynergies()
-      player.effects.update(player.synergies, player.board)
       player.boardSize = this.room.getTeamSize(player.board)
     }
     if (commands.length > 0) {
@@ -322,7 +323,7 @@ export class OnDragDropCombineCommand extends Command<
       const itemB = detail.itemB
 
       //verify player has both items
-      if (!player.items.has(itemA) || !player.items.has(itemB)) {
+      if (!player.items.includes(itemA) || !player.items.includes(itemB)) {
         client.send(Transfer.DRAG_DROP_FAILED, message)
         return
       }
@@ -360,13 +361,12 @@ export class OnDragDropCombineCommand extends Command<
         client.send(Transfer.DRAG_DROP_FAILED, message)
         return
       } else {
-        player.items.add(result)
-        player.items.delete(itemA)
-        player.items.delete(itemB)
+        player.items.push(result)
+        removeInArray(player.items, itemA)
+        removeInArray(player.items, itemB)
       }
 
       player.updateSynergies()
-      player.effects.update(player.synergies, player.board)
     }
   }
 }
@@ -392,7 +392,7 @@ export class OnDragDropItemCommand extends Command<
 
     const item = detail.id
 
-    if (!player.items.has(item) && !detail.bypass) {
+    if (!player.items.includes(item) && !detail.bypass) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
     }
@@ -401,6 +401,22 @@ export class OnDragDropItemCommand extends Command<
     const y = parseInt(detail.y)
 
     const pokemon = player.getPokemonAt(x, y)
+
+    if (item === Item.METEORITE) {
+      if (pokemon?.passive === Passive.ALIEN_DNA) {
+        if (pokemon.name === Pkm.DEOXYS) {
+          player.transformPokemon(pokemon, Pkm.DEOXYS_ATTACK)
+        } else if (pokemon.name === Pkm.DEOXYS_ATTACK) {
+          player.transformPokemon(pokemon, Pkm.DEOXYS_DEFENSE)
+        } else if (pokemon.name === Pkm.DEOXYS_DEFENSE) {
+          player.transformPokemon(pokemon, Pkm.DEOXYS_SPEED)
+        } else if (pokemon.name === Pkm.DEOXYS_SPEED) {
+          player.transformPokemon(pokemon, Pkm.DEOXYS)
+        }
+      }
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
 
     if (pokemon === undefined || !pokemon.canHoldItems) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
@@ -448,11 +464,11 @@ export class OnDragDropItemCommand extends Command<
           }
 
           pokemon.items.delete(itemToCombine)
-          player.items.delete(item)
+          removeInArray(player.items, item)
 
           if (pokemon.items.has(itemCombined)) {
             // pokemon already has the combined item so the second one pops off and go to player inventory
-            player.items.add(itemCombined)
+            player.items.push(itemCombined)
           } else {
             const detail: IDragDropItemMessage = {
               id: itemCombined,
@@ -470,7 +486,7 @@ export class OnDragDropItemCommand extends Command<
         }
       } else {
         pokemon.items.add(item)
-        player.items.delete(item)
+        removeInArray(player.items, item)
       }
     } else {
       if (pokemon.items.has(item)) {
@@ -478,14 +494,14 @@ export class OnDragDropItemCommand extends Command<
         return
       } else {
         pokemon.items.add(item)
-        player.items.delete(item)
+        removeInArray(player.items, item)
       }
     }
 
     this.room.checkEvolutionsAfterItemAcquired(playerId, pokemon)
 
     player.updateSynergies()
-    player.effects.update(player.synergies, player.board)
+
     if (commands.length > 0) {
       return commands
     }
@@ -521,15 +537,18 @@ export class OnSellDropCommand extends Command<
 
       if (pokemon) {
         this.state.shop.releasePokemon(pokemon.name)
-        player.money += PokemonFactory.getSellPrice(pokemon.name, player)
+        player.money += PokemonFactory.getSellPrice(
+          pokemon.name,
+          pokemon.shiny,
+          this.state.specialGameRule
+        )
         pokemon.items.forEach((it) => {
-          player.items.add(it)
+          player.items.push(it)
         })
 
         player.board.delete(pokemonId)
 
         player.updateSynergies()
-        player.effects.update(player.synergies, player.board)
         player.boardSize = this.room.getTeamSize(player.board)
       }
     }
@@ -594,7 +613,7 @@ export class OnPickBerryCommand extends Command<
     const player = this.state.players.get(id)
     if (player && player.berryTreeStage >= 3) {
       player.berryTreeStage = 0
-      player.items.add(player.berry)
+      player.items.push(player.berry)
       player.berry = pickRandomIn(Berries)
     }
   }
@@ -1177,7 +1196,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             if (pveStage.chooseOnlyOne) {
               player.itemsProposition.push(reward)
             } else {
-              player.items.add(reward)
+              player.items.push(reward)
             }
           }
         }
@@ -1190,7 +1209,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             player.effects.has(Effect.GOLDEN_EGGS))
         ) {
           eggChance = 1
-          nbMaxEggs = player.effects.has(Effect.GOLDEN_EGGS) ? 8 : 2
+          nbMaxEggs = 8
         }
         if (
           player.getLastBattleResult() == BattleResult.DEFEAT &&
@@ -1217,7 +1236,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           getFreeSpaceOnBench(player.board) > 0 &&
           nbOfEggs < nbMaxEggs
         ) {
-          const egg = PokemonFactory.createRandomEgg()
+          const eggShiny = player.effects.has(Effect.GOLDEN_EGGS)
+          const egg = PokemonFactory.createRandomEgg(eggShiny)
           const x = getFirstAvailablePositionInBench(player.board)
           egg.positionX = x !== undefined ? x : -1
           egg.positionY = 0
@@ -1242,14 +1262,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                 this.state.stageLevel
               )
             }
-            if (pokemon.evolutionRule instanceof TurnEvolutionRule) {
-              pokemon.evolutionRule.tryEvolve(
-                pokemon,
-                player,
-                this.state.stageLevel
-              )
-            }
-            if (pokemon.evolutionRule instanceof MoneyEvolutionRule) {
+            if (pokemon.evolutionRule instanceof ConditionBasedEvolutionRule) {
               pokemon.evolutionRule.tryEvolve(
                 pokemon,
                 player,
@@ -1262,7 +1275,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             player.board.delete(key)
             player.board.delete(pokemon.id)
             player.updateSynergies()
-            player.effects.update(player.synergies, player.board)
             if (!player.shopLocked) {
               this.state.shop.assignShop(player, false, this.state) // refresh unown shop in case player lost psychic 6
             }
@@ -1270,7 +1282,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         })
         // Refreshes effects (like tapu Terrains)
         player.updateSynergies()
-        player.effects.update(player.synergies, player.board)
       }
     })
 

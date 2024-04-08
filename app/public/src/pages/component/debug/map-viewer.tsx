@@ -1,7 +1,7 @@
 import Phaser from "phaser"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import React, { useCallback, useEffect, useRef, useState } from "react"
-import { DungeonPMDO } from "../../../../../types/Config"
+import { DungeonPMDO } from "../../../../../types/enum/Dungeon"
 import { DebugScene } from "../../../game/scenes/debug-scene"
 import "./debug-scene.css"
 
@@ -44,7 +44,7 @@ export default function MapViewerContainer() {
         },
         disableContextMenu: true,
         scene: [debugScene.current],
-        backgroundColor: "#61738a",
+        backgroundColor: "var(--color-bg-primary)",
         plugins: {
           global: [
             {

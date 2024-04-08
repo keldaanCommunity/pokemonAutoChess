@@ -2,7 +2,7 @@
   display: flex;
   flex-flow: column;
   color: #fff;
-  background-color: #61738a;
+  background-color: var(--color-bg-primary);
   font-size: 1em;
   overflow-y: auto;
 }
@@ -13,10 +13,11 @@
   top: 9%;
   max-height: 73%;
   padding: 0;
+  background-color: var(--color-bg-primary);
 }
 
 .synergies-header {
-  padding: 10px;
+  padding: 0.5em;
   text-align: center;
-  font-size: 1.3vw;
+  font-size: 1.2rem;
 }

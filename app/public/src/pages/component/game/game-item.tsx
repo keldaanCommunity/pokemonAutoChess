@@ -19,7 +19,7 @@ export default function GameItem(props: { item: Item }) {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   return (
-    <div className="nes-container" style={style}>
+    <div className="my-container" style={style}>
       <img
         style={{ width: "96px", height: "96px", imageRendering: "pixelated" }}
         src={"assets/item/" + props.item + ".png"}

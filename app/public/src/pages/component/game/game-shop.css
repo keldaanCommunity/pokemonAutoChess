@@ -1,9 +1,8 @@
-.game-shop.nes-container {
+.game-shop.my-container {
   position: absolute;
   left: 8vw;
   right: 8vw;
   bottom: 5px;
-  background: #54596b;
   display: flex;
   justify-content: space-between;
   gap: 5px;
@@ -16,17 +15,17 @@
   grid-template: 1fr 1fr / 3vw 1fr;
   padding: 5px;
   gap: 5px;
-  background: #61738a;
-  align-items: center;
+  align-items: flex-start;
 }
 
-.game-rarity-percentage {
+.game-rarity-percentage.my-box {
   grid-column: 1/3;
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
-  padding: 0 !important;
+  padding: 0;
   border-radius: 8px;
+  color: black;
 }
 
 .game-rarity-percentage > div {
@@ -126,13 +125,13 @@
   grid-template: 1fr 1fr / 3vw 1fr;
   padding: 5px;
   gap: 5px;
-  background: #61738a;
   align-items: center;
   text-align: center;
 }
 
 .game-experience > span {
   color: white;
+  font-size: 2rem;
 }
 
 .buy-xp-button.bubbly {
@@ -161,16 +160,16 @@
   place-content: center;
 }
 
-.game-experience .progress-bar > .nes-progress {
+.game-experience .progress-bar > .my-progress {
   overflow: hidden;
   height: 100%;
+  background-color: var(--color-bg-primary);
 }
 
 #game-money-info {
   position: absolute;
   bottom: 100%;
   left: 7vw;
-  width: 5vw;
   background-image: url("assets/ui/money-bg.png");
   background-size: 70px 40px;
 }
@@ -179,7 +178,6 @@
   position: absolute;
   bottom: 100%;
   left: 1vw;
-  width: 5vw;
   background-image: url("assets/ui/heart-bg.png");
   background-size: 48px 38px;
 }
@@ -188,7 +186,6 @@
   position: absolute;
   bottom: 100%;
   right: 1vw;
-  width: 5vw;
   background-image: url("assets/ui/pokeball-bg.png");
   background-size: 70px 40px;
 }
@@ -212,22 +209,21 @@
 }
 
 .game-shop .information {
-  padding: 0.001px !important;
+  padding: 0.001px 0.001px 0.001px 36px;
   display: flex;
   justify-content: end;
-  height: 2em;
   color: white;
   border-radius: 12px 12px 0 0;
+  font-size: 1.5rem;
 }
 
 .game-shop .information > div {
-  background: #61738a;
+  background: var(--color-bg-primary);
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   border-radius: 0 7px 0 0;
   height: 100%;
-  width: 3.2vw;
   padding: 0 0.5em;
 }
 

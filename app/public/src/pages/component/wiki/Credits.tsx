@@ -32,7 +32,6 @@ export default function Credits(props: {
     }
     return (
       <a
-        className="nes-text is-primary"
         style={{ marginRight: "0.5em" }}
         key={id}
         href={contact}

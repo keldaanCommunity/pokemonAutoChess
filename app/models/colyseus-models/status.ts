@@ -36,11 +36,13 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") light = false
   @type("boolean") curse = false
   @type("boolean") enraged = false
+  @type("boolean") skydiving = false
   magmaStorm = false
   soulDew = false
   deltaOrbStacks = 0
   clearWing = false
   guts = false
+  toxicBoost = false
   burnOrigin: PokemonEntity | undefined = undefined
   poisonOrigin: PokemonEntity | undefined = undefined
   silenceOrigin: PokemonEntity | undefined = undefined
@@ -93,9 +95,30 @@ export default class Status extends Schema implements IStatus {
     this.curse = false
   }
 
+  hasNegativeStatus() {
+    return (
+      this.burn ||
+      this.silence ||
+      this.poisonStacks > 0 ||
+      this.freeze ||
+      this.sleep ||
+      this.confusion ||
+      this.wound ||
+      this.paralysis ||
+      this.charm ||
+      this.flinch ||
+      this.armorReduction ||
+      this.curse
+    )
+  }
+
   updateAllStatus(dt: number, pokemon: PokemonEntity, board: Board) {
     if (pokemon.effects.has(Effect.POISON_GAS) && this.poisonStacks === 0) {
       this.triggerPoison(1500, pokemon, undefined)
+    }
+
+    if (pokemon.effects.has(Effect.STICKY_WEB) && !this.paralysis) {
+      this.triggerParalysis(2000, pokemon)
     }
 
     if (
@@ -358,7 +381,11 @@ export default class Status extends Schema implements IStatus {
     pkm: PokemonEntity,
     origin: PokemonEntity | undefined
   ) {
-    if (!pkm.effects.has(Effect.IMMUNITY_BURN) && !this.runeProtect) {
+    if (
+      !pkm.effects.has(Effect.IMMUNITY_BURN) &&
+      !this.runeProtect &&
+      pkm.passive !== Passive.WATER_BUBBLE
+    ) {
       this.burn = true
       if (timer > this.burnCooldown) {
         this.burnCooldown = timer
@@ -468,6 +495,11 @@ export default class Status extends Schema implements IStatus {
         pkm.addAttack(5, false)
       }
 
+      if (pkm.passive === Passive.TOXIC_BOOST && !this.toxicBoost) {
+        this.toxicBoost = true
+        pkm.addAttack(10, false)
+      }
+
       if (pkm.items.has(Item.PECHA_BERRY)) {
         pkm.eatBerry(Item.PECHA_BERRY)
       }
@@ -516,6 +548,10 @@ export default class Status extends Schema implements IStatus {
       if (pkm.passive === Passive.GUTS && !this.burn) {
         this.guts = false
         pkm.addAttack(-5, false)
+      }
+      if (pkm.passive === Passive.TOXIC_BOOST) {
+        this.toxicBoost = false
+        pkm.addAttack(-10, false)
       }
     } else {
       this.poisonCooldown = this.poisonCooldown - dt

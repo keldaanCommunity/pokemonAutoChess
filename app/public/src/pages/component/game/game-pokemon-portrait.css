@@ -26,6 +26,7 @@
   line-height: 1.2vw;
   display: flex;
   align-items: center;
+  color: black;
 }
 
 .game-pokemon-portrait-cost > span {

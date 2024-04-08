@@ -1,4 +1,4 @@
-import { DungeonPMDO } from "../app/types/Config"
+import { DungeonPMDO } from "../app/types/enum/Dungeon"
 import Design from "../app/core/design"
 import { writeFileSync } from "fs-extra"
 

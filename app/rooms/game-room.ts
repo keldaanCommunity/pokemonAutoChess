@@ -1,7 +1,6 @@
 import { Dispatcher } from "@colyseus/command"
 import { MapSchema } from "@colyseus/schema"
 import { Client, Room } from "colyseus"
-import EloEngine from "elo-rank"
 import admin from "firebase-admin"
 import { components } from "../api-v1/openapi"
 import { computeElo } from "../core/elo"
@@ -19,8 +18,8 @@ import UserMetadata, {
 } from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
 import {
-  getPokemonData,
-  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY
+  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY,
+  getPokemonData
 } from "../models/precomputed"
 import { getAvatarString } from "../public/src/utils"
 import {
@@ -38,7 +37,6 @@ import {
 } from "../types"
 import {
   AdditionalPicksStages,
-  DungeonPMDO,
   EloRank,
   ExpPlace,
   LegendaryShop,
@@ -46,19 +44,20 @@ import {
   RequiredStageLevelForXpElligibility,
   UniqueShop
 } from "../types/Config"
+import { DungeonPMDO } from "../types/enum/Dungeon"
 import { GameMode, Rarity } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Pkm, PkmDuos, PkmProposition } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { removeInArray } from "../utils/array"
-import { logger } from "../utils/logger"
-import { shuffleArray } from "../utils/random"
-import { keys, values } from "../utils/schemas"
 import {
   getFirstAvailablePositionInBench,
   getFreeSpaceOnBench
 } from "../utils/board"
+import { logger } from "../utils/logger"
+import { shuffleArray } from "../utils/random"
+import { keys, values } from "../utils/schemas"
 import {
   OnDragDropCombineCommand,
   OnDragDropCommand,
@@ -78,7 +77,6 @@ import GameState from "./states/game-state"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
-  eloEngine: EloEngine
   additionalUncommonPool: Array<Pkm>
   additionalRarePool: Array<Pkm>
   additionalEpicPool: Array<Pkm>
@@ -86,7 +84,6 @@ export default class GameRoom extends Room<GameState> {
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
-    this.eloEngine = new EloEngine()
     this.additionalUncommonPool = new Array<Pkm>()
     this.additionalRarePool = new Array<Pkm>()
     this.additionalEpicPool = new Array<Pkm>()
@@ -694,13 +691,13 @@ export default class GameRoom extends Room<GameState> {
                 humans.map((p) => this.transformToSimplePlayer(p))
               )
               if (elo) {
-                if (elo > 1100) {
+                if (elo >= 1100) {
                   player.titles.add(Title.GYM_TRAINER)
                 }
-                if (elo > 1200) {
+                if (elo >= 1200) {
                   player.titles.add(Title.GYM_CHALLENGER)
                 }
-                if (elo > 1400) {
+                if (elo >= 1400) {
                   player.titles.add(Title.GYM_LEADER)
                 }
                 usr.elo = elo
@@ -937,7 +934,7 @@ export default class GameRoom extends Room<GameState> {
         player.itemsProposition.length > 0 &&
         player.itemsProposition[selectedIndex] != null
       ) {
-        player.items.add(player.itemsProposition[selectedIndex])
+        player.items.push(player.itemsProposition[selectedIndex])
         player.itemsProposition.clear()
       }
     }
@@ -948,6 +945,7 @@ export default class GameRoom extends Room<GameState> {
         pokemon.positionX = freeCellX
         pokemon.positionY = 0
         player.board.set(pokemon.id, pokemon)
+        pokemon.onAcquired(player)
       }
     })
 
@@ -957,7 +955,7 @@ export default class GameRoom extends Room<GameState> {
   pickItemProposition(playerId: string, item: Item) {
     const player = this.state.players.get(playerId)
     if (player && player.itemsProposition.includes(item)) {
-      player.items.add(item)
+      player.items.push(item)
       player.itemsProposition.clear()
     }
   }

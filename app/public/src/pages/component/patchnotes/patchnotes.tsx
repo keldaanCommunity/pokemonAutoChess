@@ -1,12 +1,13 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import "./patchnotes.css"
 import { Poster } from "./poster"
+import "./patchnotes.css"
 
 export default function PatchNotes() {
   const { t } = useTranslation()
 
   const PATCHES = [
+    "4.9",
     "4.8",
     "4.7",
     "4.6",
@@ -22,7 +23,7 @@ export default function PatchNotes() {
   ]
 
   return (
-    <div className="nes-container patchnotes">
+    <div className="my-container patchnotes">
       <h1>{t("patch_notes")}</h1>
       <div className="content">
         <ul>

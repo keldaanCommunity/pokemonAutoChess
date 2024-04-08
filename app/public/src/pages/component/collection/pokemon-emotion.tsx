@@ -21,7 +21,7 @@ export default function PokemonEmotion(props: {
 
   return (
     <div
-      className={cc("nes-container", "pokemon-emotion", {
+      className={cc("my-box", "clickable", "pokemon-emotion", {
         unlocked: !!props.unlocked,
         unlockable: canUnlock,
         shimmer: canUnlock

@@ -2,7 +2,6 @@
   min-width: 200px;
   max-width: 400px;
   color: white;
-  font-size: 1vw;
   display: grid;
   grid-template-columns: 50px 1fr;
   grid-template-areas:
@@ -88,7 +87,6 @@
   height: 20px;
 }
 
-.react-tooltip.item-detail-tooltip {
-  padding: 5px;
-  font-size: 1vw;
+#detail-item {
+  font-size: 1rem;
 }

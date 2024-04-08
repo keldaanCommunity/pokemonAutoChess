@@ -30,7 +30,7 @@ export default function AfterMenu() {
 
   return (
     <div className="after-menu">
-      <div className="nes-container is-centered">
+      <div className="my-container is-centered">
         {playerRank && (
           <>
             <div className="player-rank">

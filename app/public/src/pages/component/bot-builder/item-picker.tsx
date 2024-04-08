@@ -12,8 +12,10 @@ import {
   Item
 } from "../../../../../types/enum/Item"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
+import { cc } from "../../utils/jsx"
 
 export default function ItemPicker(props: {
+  selected: PkmWithConfig | Item
   selectEntity: React.Dispatch<React.SetStateAction<PkmWithConfig | Item>>
 }) {
   const [itemHovered, setItemHovered] = useState<Item>()
@@ -34,7 +36,7 @@ export default function ItemPicker(props: {
   ]
 
   return (
-    <Tabs className="nes-container" id="item-picker">
+    <Tabs className="my-box" id="item-picker">
       <TabList>
         {tabs.map((t) => (
           <Tab key={t.key}>{t.label}</Tab>
@@ -46,7 +48,7 @@ export default function ItemPicker(props: {
             <img
               key={item}
               src={"assets/item/" + Item[item] + ".png"}
-              className="item"
+              className={cc("item", { selected: item === props.selected })}
               data-tooltip-id="detail-item"
               onMouseOver={() => setItemHovered(item)}
               onClick={() => props.selectEntity(item)}

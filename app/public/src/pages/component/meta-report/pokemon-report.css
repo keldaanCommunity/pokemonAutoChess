@@ -1,0 +1,9 @@
+#pokemon-report {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#pokemon-report article {
+  overflow-y: auto;
+}

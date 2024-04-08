@@ -21,10 +21,7 @@ export default class MovingState extends PokemonState {
     super.update(pokemon, dt, board, weather, player)
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = 500 / getMoveSpeed(pokemon, weather)
-      const targetAtRange = this.getNearestTargetAtRangeCoordinates(
-        pokemon,
-        board
-      )
+      const targetAtRange = this.getNearestTargetAtRange(pokemon, board)
       if (pokemon.status.charm) {
         if (
           pokemon.status.charmOrigin &&
@@ -43,16 +40,20 @@ export default class MovingState extends PokemonState {
       } else if (targetAtRange) {
         pokemon.toAttackingState()
       } else {
-        const targetAtSight = this.getNearestTargetAtSightCoordinates(
-          pokemon,
-          board
-        )
+        const targetAtSight = this.getNearestTargetAtSight(pokemon, board)
         if (targetAtSight) {
-          this.move(pokemon, board, targetAtSight)
+          this.move(pokemon, board, {
+            x: targetAtSight.positionX,
+            y: targetAtSight.positionY
+          })
         }
       }
     } else {
       pokemon.cooldown = Math.max(0, pokemon.cooldown - dt)
+      if (pokemon.status.skydiving && pokemon.cooldown <= 0) {
+        pokemon.status.skydiving = false
+        pokemon.cooldown = 500 // adding a cooldown again just for moving from landing cell to final cell after skydiving
+      }
     }
   }
 

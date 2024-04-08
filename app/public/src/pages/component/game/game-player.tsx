@@ -40,7 +40,7 @@ export default function GamePlayer(props: {
       data-tooltip-id={"detail-" + props.player.id}
     >
       <CircularProgressbarWithChildren value={props.player.life} />
-      <div className="nes-container life-text">{props.player.life}</div>
+      <div className="my-container life-text">{props.player.life}</div>
       <Tooltip
         id={"detail-" + props.player.id}
         className="custom-theme-tooltip"

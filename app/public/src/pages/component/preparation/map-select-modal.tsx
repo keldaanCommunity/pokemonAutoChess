@@ -1,6 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { DungeonPMDO } from "../../../../../types/Config"
+import { DungeonPMDO } from "../../../../../types/enum/Dungeon"
 import { useAppDispatch } from "../../../hooks"
 import { selectTilemap } from "../../../stores/NetworkStore"
 import { BasicModal } from "../modal/modal"
@@ -14,9 +14,9 @@ export function MapSelectModal(props: {
   const { t } = useTranslation()
   const maps = Object.keys(DungeonPMDO).sort((a, b) =>
     (t("map." + a) as string).localeCompare(t("map." + b))
-  )
+  ) as DungeonPMDO[]
 
-  function selectMap(map: string) {
+  function selectMap(map: DungeonPMDO | "random") {
     dispatch(selectTilemap(map))
     props.handleClose()
   }
@@ -27,7 +27,7 @@ export function MapSelectModal(props: {
       show={props.show}
       handleClose={() => props.handleClose()}
       body={
-        <ul id="map-select-modal" className="nes-container">
+        <ul id="map-select-modal" className="my-container">
           <li onClick={() => selectMap("random")}>
             <img src="/assets/maps/random.png" alt="random" />
             <span>{t("map.random")}</span>

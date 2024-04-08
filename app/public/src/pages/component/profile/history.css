@@ -13,18 +13,19 @@
   overflow-y: auto;
 }
 
-.game-history.nes-container {
+.game-history.my-box {
   display: grid;
   align-items: center;
   gap: 0 0.5em;
   grid-template-areas:
     "top elo syn team"
     "date date syn team";
-  grid-template-columns: 5ch 7ch 10ch 1fr;
-  background-color: #54596b;
+  grid-template-columns: 5ch 7ch 120px 1fr;
+  background-color: var(--color-bg-secondary);
   margin: 0 0 0.5em 0;
   padding: 0.25em;
   justify-items: center;
+  border: var(--border-thin);
 }
 
 .game-history .player-team-pokemons {
@@ -59,7 +60,6 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  gap: 0.5em;
 }
 
 .game-history .synergies > li {
@@ -70,4 +70,14 @@
 
 .game-history .synergies > li > span {
   line-height: 80%;
+}
+
+@media (width <= 640px) {
+  .game-history.my-box {
+    grid-template-areas:
+      "top elo date"
+      "syn syn syn"
+      "team team team";
+    grid-template-columns: 5ch 7ch 1fr;
+  }
 }

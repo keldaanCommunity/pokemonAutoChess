@@ -10,7 +10,7 @@ export class PokemonSpecialDetail extends GameObjects.DOMElement {
     super(scene, 0, 0)
 
     this.dom = document.createElement("div")
-    this.dom.className = "nes-container game-pokemon-dialog"
+    this.dom.className = "my-container game-pokemon-dialog"
     this.setElement(this.dom)
     const root = ReactDOM.createRoot(this.dom)
     root.render(

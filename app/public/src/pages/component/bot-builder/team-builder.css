@@ -29,17 +29,13 @@
   position: relative;
 }
 
-#team-editor table {
-  border-top: 4px dotted red;
-}
-
 #team-editor td {
   width: 84px;
   height: 84px;
   cursor: var(--cursor-hover);
   padding: 0;
-  background-color: #54596b;
-  border: 4px solid black;
+  background-color: var(--color-bg-secondary);
+  border: var(--border-thick);
   position: relative;
   background-clip: padding-box;
 }
@@ -67,13 +63,14 @@
   width: 26px;
   object-fit: contain;
   border-radius: 50%;
-  border: 2px solid black;
-  background-color: #54596b;
+  border: var(--border-thin);
+  background-color: var(--color-bg-secondary);
 }
 
 #selected-entity {
   grid-area: selected;
   align-self: start;
+  background-color: var(--color-bg-primary);
 }
 
 #selected-entity fieldset {
@@ -109,6 +106,11 @@
   overflow-y: auto;
 }
 
+#pokemon-picker .selected,
+#item-picker .selected {
+  outline: 4px solid #109fff;
+}
+
 #pokemon-picker img.pokemon {
   width: 40px;
   height: 40px;
@@ -120,8 +122,9 @@
   padding: 0;
   text-align: center;
   vertical-align: bottom;
-  min-width: 1ch;
+  min-width: max(1ch, 40px);
   line-height: 40px;
+  margin: 0 1px;
 }
 
 #pokemon-picker .react-tabs__tab img {
@@ -144,10 +147,50 @@
 #bot-info .bot-avatar {
   width: 80px;
   height: 80px;
-  border: 4px solid black;
+  border: var(--border-thick);
   border-radius: 8px;
 }
 
 #bot-info p {
   margin: 0;
+}
+
+@media (width <= 640px) {
+  #team-builder {
+    grid-template-areas: "synergies" "board" "selected" "pokemons" "items";
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content;
+    grid-auto-rows: min-content;
+    min-width: auto;
+    gap: 5px;
+    height: 75vh;
+    overflow-y: auto;
+  }
+
+  .basic-modal-body > #team-builder {
+    width: 95vw;
+  }
+
+  #team-editor td {
+    width: 44px;
+    height: 44px;
+    border-width: 2px;
+  }
+
+  #team-editor td img {
+    width: 40px;
+    height: 40px;
+  }
+
+  #pokemon-picker {
+    padding: 2px;
+  }
+
+  #rarity-grid {
+    grid-template: auto / auto;
+  }
+
+  #bot-info {
+    position: static;
+  }
 }

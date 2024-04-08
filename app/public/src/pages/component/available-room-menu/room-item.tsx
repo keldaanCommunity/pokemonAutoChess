@@ -42,7 +42,7 @@ export default function RoomItem(props: {
   }
 
   return (
-    <div className="room-item">
+    <div className="room-item my-box">
       <span className="room-name">{props.room.metadata?.name}</span>
       {props.room.metadata?.password && (
         <img

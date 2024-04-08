@@ -3,6 +3,7 @@ import Phaser, { GameObjects } from "phaser"
 import MoveTo from "phaser3-rex-plugins/plugins/moveto"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import PokemonFactory from "../../../../models/pokemon-factory"
+import { getPokemonData } from "../../../../models/precomputed"
 import {
   AttackSprite,
   AttackSpriteScale,
@@ -185,7 +186,9 @@ export default class PokemonSprite extends DraggableObject {
     )
     this.sprite.setDepth(3)
     //this.sprite.setOrigin(0,0);
-    this.sprite.setScale(2, 2)
+    const baseHP = getPokemonData(pokemon.name).hp
+    const sizeBuff = (pokemon.hp - baseHP) / baseHP
+    this.sprite.setScale(2 + sizeBuff)
     this.sprite.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       this.animationLocked = false
       const g = <GameScene>scene
@@ -310,7 +313,7 @@ export default class PokemonSprite extends DraggableObject {
       this.scene,
       0,
       0,
-      this.name,
+      this.name as Pkm,
       this.rarity,
       this.life || this.hp,
       this.atk,
@@ -790,6 +793,31 @@ export default class PokemonSprite extends DraggableObject {
       this.remove(this.protect, true)
       this.protect = undefined
     }
+  }
+
+  skydiveUp() {
+    // animation where pokemon is flying up out of the screen for a screen dive animation. Should take <= 500 milliseconds
+    this.moveManager.setSpeed(800)
+    this.moveManager.moveTo(this.x, -100)
+  }
+
+  skydiveDown() {
+    // animation after a skydiving attack where pokemon moves from its target cell to its final reserved adjacent cell
+    const landingCoordinates = transformAttackCoordinate(
+      this.targetX ?? this.positionX,
+      this.targetY ?? this.positionY,
+      this.flip
+    )
+    const finalCoordinates = transformAttackCoordinate(
+      this.positionX,
+      this.positionY,
+      this.flip
+    )
+
+    this.x = landingCoordinates[0]
+    this.y = landingCoordinates[1]
+    this.moveManager.setSpeed(3)
+    this.moveManager.moveTo(finalCoordinates[0], finalCoordinates[1])
   }
 
   addResurection() {

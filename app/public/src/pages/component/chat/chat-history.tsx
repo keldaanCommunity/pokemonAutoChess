@@ -15,7 +15,14 @@ export default function ChatHistory(props: { source: string }) {
   const domRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (messages.length > 0 && domRef && domRef.current) {
+    if (
+      messages.length > 0 &&
+      domRef &&
+      domRef.current &&
+      (domRef.current.scrollTop === 0 ||
+        domRef.current.scrollTop + domRef.current.clientHeight >=
+          domRef.current.scrollHeight - 200) // autoscroll only if not already scrolled up by a 200px margin
+    ) {
       domRef.current.scrollTop = domRef.current.scrollHeight
     }
   }, [messages.length])
@@ -60,12 +67,12 @@ export default function ChatHistory(props: { source: string }) {
     <div className="chat-history" ref={domRef}>
       {Object.entries(dateSeparatedChat).map(([date, chatMessages]) => {
         return (
-          <div key={date}>
+          <React.Fragment key={date}>
             <div className="date">{date}</div>
             {chatMessages.map((message, index) => {
               return <ChatMessage key={index} message={message} />
             })}
-          </div>
+          </React.Fragment>
         )
       })}
     </div>

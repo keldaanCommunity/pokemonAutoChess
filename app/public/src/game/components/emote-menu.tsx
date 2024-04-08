@@ -80,7 +80,7 @@ export default class EmoteMenu extends GameObjects.DOMElement {
       (p) => p.id === state.game.currentPlayerId
     )
     this.dom = document.createElement("div")
-    this.dom.className = "nes-container emote-menu"
+    this.dom.className = "my-container emote-menu"
     this.setElement(this.dom)
     const root = ReactDOM.createRoot(this.dom)
     if (player) {

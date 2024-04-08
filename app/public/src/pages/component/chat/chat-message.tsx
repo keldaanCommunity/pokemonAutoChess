@@ -14,32 +14,32 @@ export default function ChatMessage(props: { message: IChatV2 }) {
   const time = new Date(props.message.time).toLocaleTimeString(undefined, {
     timeStyle: "short"
   })
+  const isServerMessage = props.message.authorId === "server"
 
   return (
-    <div className="chat">
-      <div className="chat-message-container">
-        {props.message.author && (
+    <div className="chat-message-container">
+      {props.message.author && (
+        <div
+          className={cc("chat-user", {
+            "same-user": props.message.authorId === user?.id,
+            "server-message": isServerMessage
+          })}
+        >
+          <img
+            src={getAvatarSrc(props.message.avatar)}
+            className="pokemon-portrait"
+          />
           <div
-            className={cc("chat-user", {
-              "same-user": props.message.authorId === user?.id,
-              "server-message": props.message.authorId === "server"
-            })}
+            className="author-and-time"
+            title="open profile"
+            onClick={() => dispatch(searchById(props.message.authorId))}
           >
-            <img
-              src={getAvatarSrc(props.message.avatar)}
-              className="pokemon-portrait"
-            />
-            <div
-              className="author-and-time"
-              title="open profile"
-              onClick={() => dispatch(searchById(props.message.authorId))}
-            >
-              <span className="chat-message-author">
-                {props.message.author}
-              </span>
-              <span className="chat-message-time">{time}</span>
-            </div>
-            {role && (role === Role.MODERATOR || role === Role.ADMIN) && (
+            <span className="chat-message-author">{props.message.author}</span>
+            <span className="chat-message-time">{time}</span>
+          </div>
+          {role &&
+            (role === Role.MODERATOR || role === Role.ADMIN) &&
+            !isServerMessage && (
               <button
                 className="remove-chat bubbly red"
                 onClick={() =>
@@ -50,13 +50,12 @@ export default function ChatMessage(props: { message: IChatV2 }) {
                   )
                 }
               >
-                <p style={{ fontSize: "0.5em", margin: "0px" }}>X</p>
+                <p style={{ fontSize: "0.5em", margin: "0" }}>X</p>
               </button>
             )}
-          </div>
-        )}
-        <p className="chat-message">{props.message.payload}</p>
-      </div>
+        </div>
+      )}
+      <p className="chat-message">{props.message.payload}</p>
     </div>
   )
 }

@@ -13,6 +13,7 @@ import {
   Title,
   Transfer
 } from "../../../types"
+import { DungeonPMDO } from "../../../types/enum/Dungeon"
 import { BotDifficulty } from "../../../types/enum/Game"
 import { Item } from "../../../types/enum/Item"
 import { Language } from "../../../types/enum/Language"
@@ -116,6 +117,14 @@ export const networkSlice = createSlice({
         state.preparation.send(Transfer.NEW_MESSAGE, action.payload)
       }
     },
+    removeMessage: (state, action: PayloadAction<{ id: string }>) => {
+      if (state.lobby) {
+        state.lobby.send(Transfer.REMOVE_MESSAGE, action.payload)
+      }
+      if (state.preparation) {
+        state.preparation.send(Transfer.REMOVE_MESSAGE, action.payload)
+      }
+    },
     searchName: (state, action: PayloadAction<string>) => {
       state.lobby?.send(Transfer.SEARCH, { name: action.payload })
     },
@@ -167,7 +176,7 @@ export const networkSlice = createSlice({
     requestTilemap: (state) => {
       state.game?.send(Transfer.REQUEST_TILEMAP)
     },
-    selectTilemap: (state, action: PayloadAction<string>) => {
+    selectTilemap: (state, action: PayloadAction<DungeonPMDO | "random">) => {
       state.preparation?.send(Transfer.SELECT_TILEMAP, action.payload)
     },
     refreshClick: (state) => {
@@ -225,9 +234,6 @@ export const networkSlice = createSlice({
     },
     setTitle: (state, action: PayloadAction<string>) => {
       state.lobby?.send(Transfer.SET_TITLE, action.payload)
-    },
-    removeMessage: (state, action: PayloadAction<{ id: string }>) => {
-      state.lobby?.send(Transfer.REMOVE_MESSAGE, action.payload)
     },
     removeTournament: (state, action: PayloadAction<{ id: string }>) => {
       state.lobby?.send(Transfer.REMOVE_TOURNAMENT, action.payload)

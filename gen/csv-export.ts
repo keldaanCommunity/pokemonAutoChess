@@ -66,7 +66,7 @@ Object.values(Pkm)
   .sort((a, b) => PkmIndex[a].localeCompare(PkmIndex[b]))
   .forEach((pkm) => {
     const pokemon = PokemonFactory.createPokemonFromName(pkm)
-    if (pokemon.skill != Ability.DEFAULT && pokemon.rarity !== Rarity.SPECIAL) {
+    if (pokemon.skill != Ability.DEFAULT) {
       const family = Object.keys(PkmFamily).filter(
         (p) => PkmFamily[p] === PkmFamily[pkm]
       )

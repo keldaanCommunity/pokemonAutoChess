@@ -1,0 +1,37 @@
+/* scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #4f5160 transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #4f5160;
+  border-radius: 4px;
+  border: 1px solid #000000;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hidden-scrollable::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hidden-scrollable {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}

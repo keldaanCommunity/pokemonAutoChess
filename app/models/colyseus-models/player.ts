@@ -1,11 +1,5 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
-import {
-  ArraySchema,
-  CollectionSchema,
-  MapSchema,
-  Schema,
-  type
-} from "@colyseus/schema"
+import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
 import GameState from "../../rooms/states/game-state"
 import { IPlayer, Role, Title } from "../../types"
 import { SynergyTriggers, UniqueShop } from "../../types/Config"
@@ -20,19 +14,20 @@ import { Pkm, PkmDuos, PkmProposition } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
+import { removeInArray } from "../../utils/array"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { Effects } from "../effects"
 import { IPokemonConfig } from "../mongo-models/user-metadata"
 import PokemonFactory from "../pokemon-factory"
+import { getPokemonData } from "../precomputed"
 import ExperienceManager from "./experience-manager"
 import HistoryItem from "./history-item"
-import { isOnBench, Pokemon } from "./pokemon"
+import { Pokemon, isOnBench } from "./pokemon"
 import PokemonCollection from "./pokemon-collection"
 import PokemonConfig from "./pokemon-config"
 import Synergies, { computeSynergies } from "./synergies"
-import { getPokemonData } from "../precomputed"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
@@ -54,7 +49,7 @@ export default class Player extends Schema implements IPlayer {
   @type("string") opponentAvatar: string = ""
   @type("string") opponentTitle: string = ""
   @type("uint8") boardSize: number = 0
-  @type({ collection: "string" }) items = new CollectionSchema<Item>()
+  @type(["string"]) items = new ArraySchema<Item>()
   @type("uint8") rank: number
   @type("uint16") elo: number
   @type("boolean") alive = true
@@ -200,7 +195,6 @@ export default class Player extends Schema implements IPlayer {
     this.board.delete(pokemon.id)
     this.board.set(newPokemon.id, newPokemon)
     this.updateSynergies()
-    this.effects.update(this.synergies, this.board)
     return newPokemon
   }
 
@@ -230,6 +224,8 @@ export default class Player extends Schema implements IPlayer {
     )
 
     if (lightChanged) this.onLightChange()
+
+    this.effects.update(this.synergies, this.board)
   }
 
   updateArtificialItems(updatedSynergies: Map<Synergy, number>): boolean {
@@ -249,7 +245,7 @@ export default class Player extends Schema implements IPlayer {
         newNbArtifItems
       )
       gainedArtificialItems.forEach((item) => {
-        this.items.add(item)
+        this.items.push(item)
       })
     } else if (newNbArtifItems < previousNbArtifItems) {
       // some artificial items are lost
@@ -258,7 +254,7 @@ export default class Player extends Schema implements IPlayer {
         previousNbArtifItems
       )
       lostArtificialItems.forEach((item) => {
-        this.items.delete(item)
+        removeInArray<Item>(this.items, item)
       })
       this.board.forEach((pokemon) => {
         lostArtificialItems.forEach((item) => {

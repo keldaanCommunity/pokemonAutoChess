@@ -87,7 +87,8 @@ export enum Item {
   HARD_STONE = "HARD_STONE",
   BIG_NUGGET = "BIG_NUGGET",
   INCENSE = "INCENSE",
-  EXP_SHARE = "EXP_SHARE"
+  EXP_SHARE = "EXP_SHARE",
+  METEORITE = "METEORITE"
 }
 
 export const AllItems: Item[] = Object.values(Item)

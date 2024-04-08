@@ -4,7 +4,7 @@
   padding: 1vw;
 }
 
-#boosters-page > .nes-container {
+#boosters-page > .my-container {
   position: relative;
   height: 90vh;
   overflow: hidden;
@@ -23,16 +23,19 @@
 #boosters-page .actions {
   text-align: center;
   position: relative;
-  bottom: 5%;
+  bottom: 1em;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+#boosters-page .actions .booster-count {
+  font-size: 200%;
 }
 
 #boosters-page .actions button {
   margin: auto;
-}
-
-#boosters-page .actions p {
-  font-size: 200%;
-  color: white;
 }
 
 #boosters-page .actions img {
@@ -46,4 +49,6 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 40px;
+  position: relative;
+  width: 100%;
 }

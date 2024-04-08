@@ -39,7 +39,6 @@
 }
 
 .chat button {
-  padding: 0.25em;
   align-self: start;
 }
 
@@ -47,14 +46,13 @@
   line-height: 1.2em;
 }
 
-.chat {
+.chat-message-container {
   display: flex;
-  gap: 8px;
+  flex-direction: column;
   margin: 0.25em 0;
   border-radius: 8px;
   font-size: 1.25rem;
-  border: solid;
-  border-color: black;
+  border: var(--border-thin);
   background: rgba(97, 115, 138, 0.815);
   color: white;
   cursor: var(--cursor-hover);
@@ -66,17 +64,13 @@
   flex-direction: column;
 }
 
-.chat-message-container .pokemon-portrait {
-  align-self: start;
-}
-
 .chat-user {
   display: flex;
   gap: 8px;
   padding: 6px;
-  background-color: #54596b;
-  border-bottom: 2px solid black;
-  border-radius: 4px;
+  background-color: var(--color-bg-secondary);
+  border-bottom: var(--border-thin);
+  border-radius: 4px 4px 0 0;
 }
 
 .chat-message {
@@ -96,7 +90,7 @@
 }
 
 .chat-message-author {
-  color: #ffc107;
+  color: var(--color-fg-gold);
 }
 
 .chat-message-time {
@@ -112,5 +106,5 @@
 }
 
 .server-message {
-  background-color: #1195ec;
+  background-color: var(--color-bg-accent);
 }

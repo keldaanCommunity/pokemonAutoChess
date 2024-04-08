@@ -50,6 +50,7 @@ export default function GameOptionsModal(props: {
               <label>
                 {t("language")}:&nbsp;
                 <select
+                  className="is-light"
                   value={language}
                   onChange={(e) => {
                     dispatch(selectLanguage(e.target.value as Language))
@@ -123,10 +124,10 @@ export default function GameOptionsModal(props: {
             onToggle={(checked) => {
               changePreference("disableAnimatedTilemap", checked)
               const gameScene = getGameScene()
-              if (checked) {
-                ;(gameScene?.sys as any).animatedTiles.pause()
-              } else {
-                ;(gameScene?.sys as any).animatedTiles.resume()
+              if (gameScene) {
+                const animatedTiles = (gameScene?.sys as any).animatedTiles
+                if (checked) animatedTiles.pause()
+                else animatedTiles.resume()
               }
             }}
             label={t("disable_animated_tilemap")}

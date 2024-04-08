@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from "react"
 import { IMeta, fetchMeta } from "../../../../../models/mongo-models/meta"
 import { MetaChart } from "./meta-chart"
 import TeamComp from "./team-comp"
+import "./composition-report.css"
 
 export function CompositionReport() {
   const [loading, setLoading] = useState<boolean>(true)
@@ -41,7 +42,6 @@ export function CompositionReport() {
         <select
           value={rankingBy}
           onChange={(e) => setRanking(e.target.value)}
-          className="my-select"
         >
           <option value="count">
             {t("rank")} {t("by_poularity")}
@@ -55,14 +55,7 @@ export function CompositionReport() {
         </select>
       </header>
 
-      <div
-        style={{
-          height: "calc(90vh - 8em)",
-          display: "flex",
-          justifyContent: "space-between",
-          gap: "1em"
-        }}
-      >
+      <article>
         {sortedMeta.length === 0 && (
           <p>{loading ? t("loading") : t("no_data_available")}</p>
         )}
@@ -72,12 +65,12 @@ export function CompositionReport() {
             setSelectedComposition={setSelectedComposition}
           />
         )}
-        <div style={{ width: "50%", overflowY: "scroll" }}>
+        <div id="meta-report-compo-list">
           {sortedMeta.map((team, i) => {
             return <TeamComp team={team} rank={i + 1} key={team.cluster_id} />
           })}
         </div>
-      </div>
+      </article>
     </div>
   )
 }

@@ -53,7 +53,7 @@ function BotsList() {
   }
 
   return (
-    <main id="bots-list" className="nes-container">
+    <main id="bots-list" className="my-container">
       {bots.length === 0 ? (
         <p>Loading...</p>
       ) : (
@@ -139,7 +139,7 @@ function BotLoader() {
         justifyContent: "space-between",
         alignItems: "center"
       }}
-      className="nes-container"
+      className="my-container"
     >
       <h3>{t("load_bot_with_url")}</h3>
       <input

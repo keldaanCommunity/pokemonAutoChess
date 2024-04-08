@@ -1,16 +1,26 @@
 .auth-page {
   display: grid;
   grid-template-areas:
+    "header logo"
     "main logo"
     "media media";
   grid-template-columns: 6fr 4fr;
-  grid-template-rows: 1fr 6rem;
+  grid-template-rows: 1fr 1fr 6rem;
   height: 100vh;
   padding: 5vmin;
+  overflow-y: auto;
+}
+
+.auth-page header {
+  grid-area: header;
 }
 
 .auth-page main {
   grid-area: main;
+}
+
+.auth-page header,
+.auth-page main {
   display: flex;
   flex-flow: column;
   margin-top: 5vh;
@@ -18,7 +28,7 @@
   justify-content: space-between;
 }
 
-.auth-page main > h1 {
+.auth-page h1 {
   font-size: 5vw;
   color: white;
   text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
@@ -32,6 +42,7 @@
 .auth-page .media {
   grid-area: media;
   display: flex;
+  flex-wrap: wrap;
   gap: 1em;
   align-items: center;
   justify-content: end;
@@ -40,12 +51,15 @@
   text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
 }
 
+.auth-page .media p:last-child {
+  flex: 1;
+}
+
 .mobile-warning {
   background: #e76e55;
   color: white;
-  margin: 1em 0;
   padding: 1em;
-  border: 4px solid black;
+  border: var(--border-thick);
   border-radius: 12px;
   text-align: center;
   grid-column: 1 / 3;
@@ -53,8 +67,33 @@
   text-shadow: 2px 2px 2px #00000080;
 }
 
-.nintendo {
+.disclaimer {
   color: white;
   text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
   font-size: 1.5em;
+}
+
+@media (width <= 640px) {
+  .auth-page {
+    display: block;
+  }
+
+  .auth-page h1 {
+    font-size: 2em;
+  }
+
+  .auth-page .logo {
+    width: 80px;
+    height: 80px;
+    float: right;
+  }
+
+  .auth-page header,
+  .auth-page main {
+    margin: 0;
+  }
+
+  .welcome-text {
+    line-height: 1.25;
+  }
 }

@@ -1,6 +1,6 @@
 import fs from "fs"
 import { IPokemonData } from "../app/types/interfaces/PokemonData"
-import { Pkm } from "../app/types/enum/Pokemon"
+import { Pkm, PkmFamily } from "../app/types/enum/Pokemon"
 import { Synergy } from "../app/types/enum/Synergy"
 import { mapToObj } from "../app/utils/map"
 import { values } from "../app/utils/schemas"
@@ -17,9 +17,15 @@ precomputedPokemons.forEach((pokemon) => {
     stars: pokemon.stars,
     rarity: pokemon.rarity,
     additional: pokemon.additional,
+    hp: pokemon.hp,
     range: pokemon.range,
     types: values(pokemon.types) as Synergy[],
-    evolution: pokemon.evolution === Pkm.DEFAULT ? null : pokemon.evolution
+    evolution: pokemon.evolution === Pkm.DEFAULT ? null : pokemon.evolution,
+    stages: Math.max(
+      ...precomputedPokemons
+        .filter((p) => PkmFamily[p.name] === PkmFamily[pokemon.name])
+        .map((p) => p.stars)
+    )
   })
 })
 

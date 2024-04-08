@@ -1,10 +1,4 @@
-import {
-  ArraySchema,
-  CollectionSchema,
-  MapSchema,
-  Schema,
-  SetSchema
-} from "@colyseus/schema"
+import { ArraySchema, MapSchema, Schema, SetSchema } from "@colyseus/schema"
 import Board from "../core/board"
 import Dps from "../core/dps"
 import DpsHeal from "../core/dps-heal"
@@ -50,8 +44,8 @@ export const CDN_PORTRAIT_URL =
 export const CDN_URL =
   "https://raw.githubusercontent.com/keldaanCommunity/SpriteCollab/master"
 
-export const USERNAME_REGEXP =
-  /^(?=.{4,20}$)(?:[\u0021-\uFFFF]+(?:(?:\.|-|_)[\u0021-\uFFFF])*)+$/
+// eslint-disable-next-line no-useless-escape
+export const USERNAME_REGEXP = /^(\p{Letter}|[0-9]|\.|-|_){3,24}$/u
 
 export type NonFunctionPropNames<T> = {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -113,7 +107,6 @@ export enum Transfer {
   BOOSTER_CONTENT = "BOOSTER_CONTENT",
   PASTEBIN_URL = "PASTEBIN_URL",
   USER = "USER",
-  MESSAGES = "MESSAGES",
   DRAG_DROP_FAILED = "DRAG_DROP_FAILED",
   TOGGLE_ANIMATION = "TOGGLE_ANIMATION",
   BROADCAST_INFO = "BROADCAST_INFO",
@@ -366,7 +359,7 @@ export interface IPlayer {
   opponentAvatar: string
   opponentTitle: string
   boardSize: number
-  items: CollectionSchema<Item>
+  items: ArraySchema<Item>
   rank: number
   elo: number
   alive: boolean
@@ -562,6 +555,7 @@ export interface ICount {
   fairyCritCount: number
   attackCount: number
   growGroundCount: number
+  fightingBlockCount: number
   dodgeCount: number
   powerLensCount: number
   staticCount: number
@@ -577,7 +571,6 @@ export interface ICount {
   futureSightCount: number
   healOrderCount: number
   attackOrderCount: number
-  monsterExecutionCount: number
   magmarizerCount: number
 }
 
@@ -674,7 +667,8 @@ export enum Title {
   CHOSEN_ONE = "CHOSEN_ONE",
   VANQUISHER = "VANQUISHER",
   OUTSIDER = "OUTSIDER",
-  GLUTTON = "GLUTTON"
+  GLUTTON = "GLUTTON",
+  STARGAZER = "STARGAZER"
 }
 
 export interface IBoardEvent {

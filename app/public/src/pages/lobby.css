@@ -10,23 +10,14 @@
   width: 100%;
 }
 
-.lobby nav {
+.lobby section {
   height: 100%;
-}
-
-.lobby nav a:hover {
-  text-decoration: none;
-}
-
-.lobby nav .bubbly {
-  position: relative;
-  padding: 0.25em 0.5em;
+  width: 25%;
 }
 
 .lobby .user-menu {
   grid-area: user;
   height: 100%;
-  width: 25%;
   display: flex;
   flex-direction: column;
 }
@@ -37,15 +28,12 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-}
-
-.lobby .user-menu .react-tabs__tab-panel--selected {
-  overflow-y: auto;
+  padding-left: 0;
+  padding-right: 2px;
 }
 
 .lobby .room-menu {
   height: 100%;
-  width: 25%;
 }
 
 .main-lobby ul.react-tabs__tab-list {
@@ -99,13 +87,49 @@
   width: 50%;
 }
 
-@media (max-width: 1400px) {
+.main-lobby-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0px;
+  right: 0;
+  height: 60px;
+  z-index: 2;
+  background: var(--color-bg-primary);
+}
+
+.main-lobby-nav ul {
+  display: flex;
+  padding-left: 64px;
+  border-top: var(--border-thin);
+}
+
+.main-lobby-nav li {
+  color: white;
+  flex: 1;
+  list-style: none;
+  display: grid;
+  place-content: center;
+  height: 60px;
+  border-left: var(--border-thin);
+}
+
+.main-lobby-nav li.active {
+  background-color: var(--color-bg-secondary);
+}
+
+.main-lobby-nav li img {
+  display: block;
+  margin: 0 auto;
+}
+
+@media (width <= 1400px) {
   .main-lobby .news-chat {
     flex-direction: column;
   }
 }
 
-@media (max-width: 640px) {
+@media (width <= 960px) {
   .lobby nav {
     flex-wrap: wrap;
   }
@@ -114,7 +138,7 @@
     font-size: 4vw;
   }
 
-  .lobby > .nes-container {
+  .lobby > .my-container {
     margin-top: 1em;
     max-height: 80vh;
   }
@@ -124,12 +148,29 @@
   }
 
   .main-lobby {
-    flex-direction: column;
-    overflow-y: scroll;
+    display: block;
+    overflow-y: auto;
   }
 
-  .main-lobby.main-lobby > div {
-    width: 100%;
-    min-height: 300px;
+  #root .main-lobby section {
+    width: auto;
+    height: calc(100vh - 68px);
+    margin: 4px;
+  }
+
+  .main-lobby section:not(.active) {
+    display: none;
+  }
+
+  .lobby .user-menu {
+    width: auto;
+  }
+
+  .main-lobby-nav {
+    display: block;
+  }
+
+  .custom-bg {
+    background-position-x: center;
   }
 }

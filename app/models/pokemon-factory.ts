@@ -1,7 +1,6 @@
 import { MapSchema } from "@colyseus/schema"
 import { Emotion, IPlayer } from "../types"
-import { HatchList, RarityCost } from "../types/Config"
-import { Effect } from "../types/enum/Effect"
+import { RarityCost } from "../types/Config"
 import { PokemonActionState, Rarity } from "../types/enum/Game"
 import {
   Pkm,
@@ -10,14 +9,16 @@ import {
   PkmIndex,
   Unowns
 } from "../types/enum/Pokemon"
+import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { logger } from "../utils/logger"
+import { min } from "../utils/number"
 import { pickRandomIn } from "../utils/random"
-import Player from "./colyseus-models/player"
 import { Egg, Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
 import {
-  getPokemonData,
-  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY
+  PRECOMPUTED_POKEMONS_PER_RARITY,
+  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY,
+  getPokemonData
 } from "./precomputed"
 import { PVEStage } from "./pve-stages"
 
@@ -78,6 +79,7 @@ export default class PokemonFactory {
       config && config.selectedEmotion ? config.selectedEmotion : Emotion.NORMAL
     if (name in PokemonClasses) {
       const PokemonClass = PokemonClasses[name]
+
       return new PokemonClass(shiny, emotion)
     } else {
       logger.warn(`No pokemon with name "${name}" found, return MissingNo`)
@@ -85,10 +87,15 @@ export default class PokemonFactory {
     }
   }
 
-  static createRandomEgg(): Egg {
-    const egg = PokemonFactory.createPokemonFromName(Pkm.EGG)
+  static createRandomEgg(shiny: boolean): Egg {
+    const hatchList = PRECOMPUTED_POKEMONS_PER_RARITY.HATCH.filter(
+      (p) => getPokemonData(p).stars === 1
+    )
+    const egg = PokemonFactory.createPokemonFromName(Pkm.EGG, {
+      selectedShiny: shiny
+    })
     egg.action = PokemonActionState.SLEEP
-    egg.evolution = pickRandomIn(HatchList)
+    egg.evolution = pickRandomIn(hatchList)
     return egg as Egg
   }
 
@@ -117,45 +124,78 @@ export default class PokemonFactory {
     }
   }
 
-  static getSellPrice(name: Pkm, player?: Player): number {
+  static getSellPrice(
+    name: Pkm,
+    shiny: boolean,
+    specialGameRule?: SpecialGameRule | null
+  ): number {
+    if (specialGameRule === SpecialGameRule.FREE_MARKET && name !== Pkm.EGG)
+      return 0
+
     const pokemonData = getPokemonData(name)
     const duo = Object.entries(PkmDuos).find(([key, duo]) => duo.includes(name))
 
+    let price = 1
+
     if (name === Pkm.EGG) {
-      return player && player.effects.has(Effect.GOLDEN_EGGS) ? 10 : 2
+      price = shiny ? 10 : 2
     } else if (name == Pkm.DITTO) {
-      return 5
+      price = 5
     } else if (name === Pkm.MAGIKARP) {
-      return 0
+      price = 0
     } else if (name === Pkm.FEEBAS) {
-      return 1
+      price = 1
     } else if (name === Pkm.GYARADOS || name === Pkm.MILOTIC) {
-      return 10
+      price = 10
     } else if (Unowns.includes(name)) {
-      return 1
+      price = 1
     } else if (pokemonData.rarity === Rarity.HATCH) {
-      return [3, 4, 5][pokemonData.stars - 1] ?? 5
+      price = [3, 4, 5][pokemonData.stars - 1] ?? 5
     } else if (pokemonData.rarity === Rarity.UNIQUE) {
-      return duo ? 8 : 15
+      price = duo ? 8 : 15
     } else if (pokemonData.rarity === Rarity.LEGENDARY) {
-      return duo ? 10 : 20
+      price = duo ? 10 : 20
     } else if (PokemonFactory.getPokemonBaseEvolution(name) == Pkm.EEVEE) {
-      return RarityCost[pokemonData.rarity]
+      price = RarityCost[pokemonData.rarity]
     } else if (duo) {
-      return Math.ceil((RarityCost[pokemonData.rarity] * pokemonData.stars) / 2)
+      price = Math.ceil(
+        (RarityCost[pokemonData.rarity] * pokemonData.stars) / 2
+      )
     } else {
-      return RarityCost[pokemonData.rarity] * pokemonData.stars
+      price = RarityCost[pokemonData.rarity] * pokemonData.stars
     }
+
+    if (
+      specialGameRule === SpecialGameRule.RARE_IS_EXPENSIVE &&
+      name !== Pkm.EGG
+    ) {
+      price = min(0)(price - 1)
+    }
+
+    return price
   }
 
-  static getBuyPrice(name: Pkm): number {
+  static getBuyPrice(
+    name: Pkm,
+    specialGameRule?: SpecialGameRule | null
+  ): number {
+    if (specialGameRule === SpecialGameRule.FREE_MARKET) return 0
+
+    let price = 1
+
     if (name === Pkm.DITTO) {
-      return 5
+      price = 5
     } else if (Unowns.includes(name)) {
-      return 1
+      price = 1
     } else {
-      return RarityCost[getPokemonData(name).rarity]
+      price = RarityCost[getPokemonData(name).rarity]
     }
+
+    if (specialGameRule === SpecialGameRule.RARE_IS_EXPENSIVE) {
+      price = min(0)(price - 1)
+    }
+
+    return price
   }
 }
 

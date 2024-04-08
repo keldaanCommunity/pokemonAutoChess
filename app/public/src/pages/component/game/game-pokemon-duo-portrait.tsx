@@ -28,7 +28,7 @@ export default function GamePokemonDuoPortrait(props: {
 
   return (
     <div
-      className={`nes-container game-pokemon-portrait game-pokemon-portrait-duo`}
+      className={`my-container game-pokemon-portrait game-pokemon-portrait-duo`}
       style={{
         backgroundColor: rarityColor,
         borderColor: rarityColor

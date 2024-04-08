@@ -38,7 +38,7 @@ export function displayAbility(
       "abilities",
       skill + `/000.png`
     )
-    abilityFx.setDepth(7).play(skill)
+    abilityFx.setOrigin(0.5, 0.5).setDepth(7).play(skill)
     if (destroyOnComplete) {
       abilityFx.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
         abilityFx.destroy()
@@ -73,6 +73,7 @@ export function displayAbility(
       break
 
     case Ability.DYNAMAX_CANNON:
+    case Ability.MOONGEIST_BEAM:
       addAbilitySprite(skill, coordinates, true)
         .setScale(2)
         .setOrigin(0.5, 0)
@@ -119,6 +120,11 @@ export function displayAbility(
           ) -
             Math.PI / 2
         )
+      break
+
+    case Ability.EXTREME_SPEED:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
     case Ability.LEECH_SEED:
@@ -296,7 +302,7 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(3, 3)
       break
 
-    case Ability.RKS_SYSTEM:
+    case Ability.MULTI_ATTACK:
       addAbilitySprite(skill, coordinates, true).setScale(4)
       break
 
@@ -517,6 +523,28 @@ export function displayAbility(
       break
     }
 
+    case Ability.FLEUR_CANNON: {
+      const [dx, dy] = OrientationVector[orientation]
+      const finalCoordinates = transformAttackCoordinate(
+        positionX + dx * 8,
+        positionY + dy * 8,
+        flip
+      )
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: finalCoordinates[0],
+        y: finalCoordinates[1],
+        ease: "linear",
+        yoyo: false,
+        duration: 2000,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.SANDSEAR_STORM:
     case Ability.WILDBOLT_STORM:
     case Ability.BLEAKWIND_STORM:
@@ -616,6 +644,22 @@ export function displayAbility(
       break
     }
 
+    case Ability.ZAP_CANNON: {
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(3)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        yoyo: false,
+        duration: 1000,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.SPARKLING_ARIA: {
       const specialProjectile = addAbilitySprite(skill, coordinates).setScale(3)
       scene.tweens.add({
@@ -642,7 +686,23 @@ export function displayAbility(
         x: coordinatesTarget[0],
         y: coordinatesTarget[1],
         ease: "linear",
-        duration: 1000,
+        duration: 500,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
+    case Ability.SUNSTEEL_STRIKE: {
+      const startCoords = transformAttackCoordinate(targetX, 9, false)
+      const specialProjectile = addAbilitySprite(skill, startCoords)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 500,
         onComplete: () => {
           specialProjectile.destroy()
         }
@@ -745,6 +805,42 @@ export function displayAbility(
       break
     }
 
+    case Ability.POLLEN_PUFF: {
+      const specialProjectile = addAbilitySprite(
+        Ability.HEAL_ORDER,
+        coordinates
+      ).setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 1000,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
+    case Ability.PSYSTRIKE: {
+      const specialProjectile = addAbilitySprite(
+        Ability.PSYSTRIKE,
+        coordinates
+      ).setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 1000,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.EGGSPLOSION: {
       const specialProjectile = addAbilitySprite(skill, coordinates).setScale(3)
       scene.tweens.add({
@@ -765,6 +861,10 @@ export function displayAbility(
       break
 
     case Ability.AIR_SLASH:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
+    case Ability.DREAM_EATER:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
@@ -796,6 +896,22 @@ export function displayAbility(
       break
 
     case Ability.APPLE_ACID:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
+    case Ability.PSYCHO_BOOST:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
+    case Ability.FACADE:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
+    case Ability.ICE_HAMMER:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
+    case Ability.MANTIS_BLADES:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
@@ -1183,6 +1299,21 @@ export function displayAbility(
       break
     }
 
+    case Ability.SLUDGE_WAVE: {
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(1)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        duration: 800,
+        scale: 2,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.WHIRLPOOL: {
       for (let i = 0; i < 4; i++) {
         const whirlpool = addAbilitySprite(skill, coordinates)
@@ -1470,7 +1601,7 @@ export function displayAbility(
       break
     }
 
-    case Ability.STICKY_WEB: {
+    case Ability.ENTANGLING_THREAD: {
       const specialProjectile = addAbilitySprite("STRING_SHOT", coordinates)
         .setScale(0.25)
         .setTint(0x80a080)
@@ -1747,25 +1878,12 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.SPIRIT_BREAK:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
     case Ability.AURA_WHEEL: {
       const specialProjectile = addAbilitySprite(skill, coordinates).setScale(1)
-      scene.tweens.add({
-        targets: specialProjectile,
-        x: coordinatesTarget[0],
-        y: coordinatesTarget[1],
-        duration: 500,
-        onComplete: () => {
-          specialProjectile.destroy()
-        }
-      })
-      break
-    }
-
-    case Ability.AURA_WHEEL_HANGRY: {
-      const specialProjectile = addAbilitySprite(
-        Ability.AURA_WHEEL,
-        coordinates
-      ).setScale(1)
       scene.tweens.add({
         targets: specialProjectile,
         x: coordinatesTarget[0],
@@ -1782,12 +1900,20 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
+    case Ability.PETAL_BLIZZARD:
+      addAbilitySprite(skill, coordinates, true).setScale(3)
+      break
+
     case Ability.NIGHTMARE:
       addAbilitySprite(skill, coordinates, true).setOrigin(0.5, 1).setScale(2)
       break
 
     case Ability.AROMATHERAPY:
       addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
+    case Ability.SHEER_COLD:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
     case "FIELD_DEATH":
@@ -1800,6 +1926,10 @@ export function displayAbility(
 
     case "GROUND_GROW":
       addAbilitySprite(skill, coordinates, true).setScale(1.5)
+      break
+
+    case "FIGHTING_KNOCKBACK":
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
     case "FAIRY_CRIT":
@@ -1839,6 +1969,31 @@ export function displayAbility(
         .setOrigin(0.5, -0.4)
         .setDepth(0)
         .setScale(2)
+      break
+
+    case "FLYING_TAKEOFF":
+      addAbilitySprite("FLYING_TAKEOFF", coordinates, true)
+        .setDepth(0)
+        .setScale(2)
+      break
+
+    case "FLYING_SKYDIVE":
+      {
+        const startCoords = transformAttackCoordinate(targetX, 9, false)
+        const specialProjectile = addAbilitySprite(skill, startCoords).setScale(
+          1
+        )
+        scene.tweens.add({
+          targets: specialProjectile,
+          x: coordinatesTarget[0],
+          y: coordinatesTarget[1],
+          ease: "linear",
+          duration: 500,
+          onComplete: () => {
+            specialProjectile.destroy()
+          }
+        })
+      }
       break
 
     default:

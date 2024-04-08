@@ -4,8 +4,8 @@
 }
 
 .basic-modal-header {
-  border: 4px solid black;
-  background-color: #54596b;
+  border: var(--border-thick);
+  background-color: var(--color-bg-secondary);
   color: white;
 }
 
@@ -19,4 +19,10 @@
 .hide-bg {
   background: none;
   border: none;
+}
+
+@media (width <= 640px) {
+  .basic-modal {
+    width: 95vw;
+  }
 }

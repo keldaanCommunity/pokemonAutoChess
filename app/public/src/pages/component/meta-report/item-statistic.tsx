@@ -10,7 +10,7 @@ export default function ItemStatistic(props: {
 }) {
   const { t } = useTranslation()
   return (
-    <div className="item-stat nes-container">
+    <div className="item-stat my-box">
       <span className="rank">{props.rank}</span>
       <img
         src={"assets/item/" + props.item.name + ".png"}
@@ -27,7 +27,7 @@ export default function ItemStatistic(props: {
       <span>
         <label>{t("count")}:</label> {props.item.count}
       </span>
-      <div style={{ display: "flex", gap: "0.5em" }}>
+      <div style={{ display: "flex", gap: "0.5em", alignContent: "center" }}>
         <label>{t("popular_holders")}:</label>
         {props.item.pokemons.map((pokemon) => (
           <img

@@ -15,7 +15,7 @@ import { loadPreferences } from "./preferences"
 import store from "./stores/index"
 
 import "./i18n"
-import "./styles.css"
+import "./style/index.css"
 
 loadPreferences()
 const container = document.getElementById("root")

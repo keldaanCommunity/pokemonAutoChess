@@ -2,6 +2,7 @@ import { t } from "i18next"
 import { GameObjects } from "phaser"
 import React from "react"
 import ReactDOM from "react-dom/client"
+import { getPokemonData } from "../../../../models/precomputed"
 import { Emotion } from "../../../../types"
 import { RarityColor } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
@@ -34,7 +35,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     scene: Phaser.Scene,
     x: number,
     y: number,
-    name: string,
+    name: Pkm,
     rarity: Rarity,
     hp: number,
     atk: number,
@@ -58,7 +59,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     super(scene, x, y)
 
     this.dom = document.createElement("div")
-    this.dom.className = "nes-container"
+    this.dom.className = "my-container"
     const wrap = document.createElement("div")
     wrap.className = "game-pokemon-detail"
 
@@ -88,6 +89,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
 
     this.ap = document.createElement("p")
     this.ap.textContent = ap.toString()
+    this.ap.classList.toggle("negative", ap < 0)
 
     this.pp = document.createElement("p")
     this.pp.innerHTML = pp.toString()
@@ -125,6 +127,12 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     for (let i = 0; i < stars; i++) {
       const img = document.createElement("img")
       img.src = "assets/ui/star.svg"
+      img.setAttribute("height", "16")
+      pokemonStars.appendChild(img)
+    }
+    for (let i = stars; i < getPokemonData(name).stages; i++) {
+      const img = document.createElement("img")
+      img.src = "assets/ui/star_empty.svg"
       img.setAttribute("height", "16")
       pokemonStars.appendChild(img)
     }
@@ -193,6 +201,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
 
   updateValue(el: HTMLElement, previousValue: number, value: number) {
     el.textContent = value.toString()
+    el.classList.toggle("negative", value < 0)
   }
 
   updateAbilityDescription(skill: Ability, abilityTier: number, ap: number) {

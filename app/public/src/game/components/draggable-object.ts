@@ -28,7 +28,6 @@ export default class DraggableObject extends GameObjects.Container {
           _y: number,
           event: Phaser.Types.Input.EventData
         ) => {
-          event.stopPropagation()
           this.onPointerDown(pointer)
         }
       )

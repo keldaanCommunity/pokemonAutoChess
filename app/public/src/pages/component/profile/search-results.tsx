@@ -14,7 +14,7 @@ export default function SearchResults() {
       <ul className="search-suggestions">
         {suggestions.map((suggestion) => (
           <li
-            className="player-box clickable"
+            className="player my-box clickable"
             key={suggestion.id}
             onClick={(e) => {
               dispatch(searchById(suggestion.id))

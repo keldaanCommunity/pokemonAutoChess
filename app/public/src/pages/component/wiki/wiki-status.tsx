@@ -30,7 +30,7 @@ export default function WikiStatus() {
   return (
     <ul className="wiki-status">
       {statusList.map((status) => (
-        <li key={status} className="nes-container">
+        <li key={status} className="my-box">
           <img src={`assets/status/demo/${status}.gif`} alt={status} />
           <h2>{addIconsToDescription(status)}</h2>
           <p className="description">

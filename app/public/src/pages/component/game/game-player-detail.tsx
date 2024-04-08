@@ -39,10 +39,10 @@ export default function GamePlayerDetail(props: {
         <span>
           {t("lvl")} {props.level}
         </span>
-        <div className="nes-container">
+        <div className="my-container">
           <Life value={props.life} />
         </div>
-        <div className="nes-container">
+        <div className="my-container">
           <Money value={props.money} />
         </div>
       </div>

@@ -129,7 +129,7 @@ export default class PokemonState {
 
     if (pokemon.life == 0) {
       death = true
-    } else if (pokemon.status.protect) {
+    } else if (pokemon.status.protect || pokemon.status.skydiving) {
       death = false
       takenDamage = 0
     } else {
@@ -191,15 +191,19 @@ export default class PokemonState {
       if (
         attackType !== AttackType.TRUE &&
         (pokemon.effects.has(Effect.GUTS) ||
+          pokemon.effects.has(Effect.STURDY) ||
           pokemon.effects.has(Effect.DEFIANT) ||
           pokemon.effects.has(Effect.JUSTIFIED))
       ) {
         const damageBlocked = pokemon.effects.has(Effect.JUSTIFIED)
-          ? 10
+          ? 15
           : pokemon.effects.has(Effect.DEFIANT)
+          ? 10
+          : pokemon.effects.has(Effect.STURDY)
           ? 7
           : 4
         reducedDamage = reducedDamage - damageBlocked
+        pokemon.count.fightingBlockCount++
       }
 
       reducedDamage = min(1)(reducedDamage) // should deal 1 damage at least
@@ -544,15 +548,15 @@ export default class PokemonState {
 
   onExit(pokemon: PokemonEntity) {}
 
-  /* NOTE: getNearestTargetAtRangeCoordinates require another algorithm that getNearestTargetCoordinate
+  /* NOTE: getNearestTargetAtRange require another algorithm that getNearestTargetCoordinate
   because it used Chebyshev distance instead of Manhattan distance
   more info here: https://discord.com/channels/737230355039387749/1183398539456413706 */
-  getNearestTargetAtRangeCoordinates(
+  getNearestTargetAtRange(
     pokemon: PokemonEntity,
     board: Board
-  ): { x: number; y: number } | undefined {
+  ): PokemonEntity | undefined {
     let distance = 999
-    let candidatesCoordinates: { x: number; y: number }[] = []
+    let candidates: PokemonEntity[] = []
     for (
       let x = min(0)(pokemon.positionX - pokemon.range);
       x <= max(board.columns - 1)(pokemon.positionX + pokemon.range);
@@ -577,29 +581,26 @@ export default class PokemonState {
           )
           if (candidateDistance < distance) {
             distance = candidateDistance
-            candidatesCoordinates = [{ x, y }]
+            candidates = [value]
           } else if (candidateDistance == distance) {
-            candidatesCoordinates.push({ x, y })
+            candidates.push(value)
           }
         }
       }
     }
-    if (candidatesCoordinates.length > 0) {
-      return pickRandomIn(candidatesCoordinates)
+    if (candidates.length > 0) {
+      return pickRandomIn(candidates)
     } else {
       return undefined
     }
   }
 
-  getNearestTargetAtSightCoordinates(
+  getNearestTargetAtSight(
     pokemon: PokemonEntity,
     board: Board
-  ): { x: number; y: number } | undefined {
+  ): PokemonEntity | undefined {
     let distance = 999
-    let candidatesCoordinates: { x: number; y: number }[] = new Array<{
-      x: number
-      y: number
-    }>()
+    let candidates: PokemonEntity[] = []
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (
@@ -615,14 +616,14 @@ export default class PokemonState {
         )
         if (candidateDistance < distance) {
           distance = candidateDistance
-          candidatesCoordinates = [{ x, y }]
+          candidates = [value]
         } else if (candidateDistance == distance) {
-          candidatesCoordinates.push({ x, y })
+          candidates.push(value)
         }
       }
     })
-    if (candidatesCoordinates.length > 0) {
-      return pickRandomIn(candidatesCoordinates)
+    if (candidates.length > 0) {
+      return pickRandomIn(candidates)
     } else {
       return undefined
     }
@@ -688,9 +689,12 @@ export default class PokemonState {
   getFarthestTargetCoordinateAvailablePlace(
     pokemon: PokemonEntity,
     board: Board
-  ): { x: number; y: number } | undefined {
+  ):
+    | { x: number; y: number; distance: number; target: PokemonEntity }
+    | undefined {
     const candidateCells = new Array<{
       distance: number
+      target: PokemonEntity
       x: number
       y: number
     }>()
@@ -713,13 +717,40 @@ export default class PokemonState {
                 pokemon.positionY,
                 cell.x,
                 cell.y
-              )
+              ),
+              target: value
             }))
         )
       }
     })
 
     candidateCells.sort((a, b) => b.distance - a.distance)
+    return candidateCells[0]
+  }
+
+  getAvailablePlaceCoordinatesInRange(
+    pokemon: PokemonEntity,
+    board: Board,
+    range: number
+  ): { x: number; y: number } | undefined {
+    const candidateCells = new Array<{
+      distance: number
+      x: number
+      y: number
+    }>()
+
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
+      const distance = distanceM(pokemon.positionX, pokemon.positionY, x, y)
+      if (value === undefined && distance >= range) {
+        candidateCells.push({
+          x,
+          y,
+          distance
+        })
+      }
+    })
+
+    candidateCells.sort((a, b) => a.distance - b.distance)
     return candidateCells[0]
   }
 

@@ -7,6 +7,7 @@ import {
 import { Rarity } from "../../../../../types/enum/Game"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import PokemonStatistic from "./pokemon-statistic"
+import "./pokemon-report.css"
 
 export function PokemonReport() {
   const [pokemonRankingBy, setPokemonRanking] = useState<string>("count")
@@ -39,7 +40,6 @@ export function PokemonReport() {
         <select
           value={pokemonRankingBy}
           onChange={(e) => setPokemonRanking(e.target.value)}
-          className="my-select"
         >
           <option value="count">
             {t("rank")} {t("by_popularity")}
@@ -56,7 +56,6 @@ export function PokemonReport() {
           onChange={(e) => {
             setSynergy(e.target.value as any)
           }}
-          className="my-select"
         >
           <option value={"all"}>
             {t("ALL")} {t("synergies")}
@@ -70,7 +69,6 @@ export function PokemonReport() {
         <select
           value={rarity}
           onChange={(e) => setRarity(e.target.value as any)}
-          className="my-select"
         >
           <option value={"all"}>
             {t("rarity_label")}: {t("ALL")}

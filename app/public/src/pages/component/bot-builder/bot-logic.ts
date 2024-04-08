@@ -61,6 +61,7 @@ export const POWER_SCORE_BY_CATEGORY = {
   "ULTRA T1": 3,
   "ULTRA 3S T2": 6,
   "ULTRA 3S T3": 10,
+  "UNIQUE T1": 2,
   "UNIQUE T2": 3,
   "UNIQUE T3": 4,
   "UNIQUE T4": 5,

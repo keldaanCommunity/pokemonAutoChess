@@ -1,3 +1,4 @@
+import { DungeonMusic } from "../../../../types/enum/Dungeon"
 import GameScene from "../../game/scenes/game-scene"
 import { preferences } from "../../preferences"
 
@@ -30,6 +31,14 @@ export function preloadSounds() {
   )
 }
 
+export function preloadMusic(scene: Phaser.Scene, dungeonMusic: DungeonMusic) {
+  scene.load.audio("music_" + dungeonMusic, [
+    `https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChessMusic/main/ogg/${encodeURIComponent(
+      dungeonMusic
+    )}.ogg`
+  ])
+}
+
 function setupSounds() {
   document.body.addEventListener("mouseover", (e) => {
     if (e.target instanceof HTMLButtonElement) {
@@ -53,7 +62,9 @@ export function playSound(key: Soundkey) {
   }
 }
 
-export function playMusic(scene: GameScene, name: string) {
+type SceneWithMusic = Phaser.Scene & { music?: Phaser.Sound.WebAudioSound }
+
+export function playMusic(scene: SceneWithMusic, name: string) {
   if (scene == null) return
   if (scene.music) scene.music.destroy()
   scene.music = scene.sound.add("music_" + name, {

@@ -14,8 +14,8 @@ export default function Chat(props: { source: string }) {
   const user = useAppSelector((state) => state[props.source].user)
 
   return (
-    <div className="nes-container user-chat custom-bg">
-      <h1>{user?.anonymous ? t("chat_disabled_anonymous") : "Chat"}</h1>
+    <div className="my-container user-chat custom-bg">
+      <h1>{user?.anonymous ? t("chat_disabled_anonymous") : t("chat")}</h1>
       <ChatHistory source={props.source} />
       <form
         onSubmit={(e) => {
@@ -40,7 +40,6 @@ export default function Chat(props: { source: string }) {
           }}
           value={currentText}
           maxLength={MAX_MESSAGE_LENGTH}
-          className="my-input"
         />
         <button
           className="bubbly blue"

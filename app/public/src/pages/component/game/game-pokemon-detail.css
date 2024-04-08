@@ -90,6 +90,10 @@
   vertical-align: middle;
 }
 
+.game-pokemon-detail-stats .negative {
+  color: red;
+}
+
 .game-pokemon-detail-ult {
   grid-area: ult;
 }

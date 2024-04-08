@@ -19,6 +19,7 @@ export const PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY =
       uniquePokemons: Pkm[]
       legendaryPokemons: Pkm[]
       additionalPokemons: Pkm[]
+      specialPokemons: Pkm[]
     }
   }
 
@@ -54,12 +55,14 @@ export function getPokemonData(name: Pkm): IPokemonData {
     name: Pkm.DEFAULT,
     index: PkmIndex[Pkm.DEFAULT],
     additional: false,
+    hp: 10,
     range: 1,
     rarity: Rarity.SPECIAL,
     stars: 1,
     skill: Ability.DEFAULT,
     passive: Passive.NONE,
     types: [],
-    evolution: null
+    evolution: null,
+    stages: 1
   }
 }
