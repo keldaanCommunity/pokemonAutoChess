@@ -131,8 +131,7 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
             )}
             {array.map((v, j) => {
               const separator = j < array.length - 1 ? "/" : ""
-              const value =
-                ap > 0 ? Math.round(Number(v) * (1 + (scale * ap) / 100)) : v
+              const value = Math.round(Number(v) * (1 + (scale * ap) / 100))
               const active =
                 tier === undefined ||
                 array.length === 1 ||
