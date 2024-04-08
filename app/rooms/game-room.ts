@@ -1,7 +1,6 @@
 import { Dispatcher } from "@colyseus/command"
 import { MapSchema } from "@colyseus/schema"
 import { Client, Room } from "colyseus"
-import EloEngine from "elo-rank"
 import admin from "firebase-admin"
 import { components } from "../api-v1/openapi"
 import { computeElo } from "../core/elo"
@@ -78,7 +77,6 @@ import GameState from "./states/game-state"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
-  eloEngine: EloEngine
   additionalUncommonPool: Array<Pkm>
   additionalRarePool: Array<Pkm>
   additionalEpicPool: Array<Pkm>
@@ -86,7 +84,6 @@ export default class GameRoom extends Room<GameState> {
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
-    this.eloEngine = new EloEngine()
     this.additionalUncommonPool = new Array<Pkm>()
     this.additionalRarePool = new Array<Pkm>()
     this.additionalEpicPool = new Array<Pkm>()
