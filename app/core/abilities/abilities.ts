@@ -7507,21 +7507,20 @@ export class SpacialRendStrategy extends AbilityStrategy {
         enemies[n - 1 - i]!.positionY
       )
     }
-    setTimeout(() => {
-      const y = clamp(target.positionY, 2, BOARD_HEIGHT - 2)
-      for (let x = 0; x < BOARD_WIDTH; x++) {
-        const targetHit = board.getValue(x, y)
-        if (targetHit && targetHit.team !== pokemon.team) {
-          targetHit.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
-        }
+
+    const y = clamp(target.positionY, 2, BOARD_HEIGHT - 2)
+    for (let x = 0; x < BOARD_WIDTH; x++) {
+      const targetHit = board.getValue(x, y)
+      if (targetHit && targetHit.team !== pokemon.team) {
+        targetHit.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
       }
-    }, 700)
+    }
   }
 }
 
