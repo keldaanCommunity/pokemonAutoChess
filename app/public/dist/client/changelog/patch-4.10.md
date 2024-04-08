@@ -16,6 +16,7 @@
 - Unown S (STOP): freeze duration ~~4~~ 2 seconds
 - New ability for Magnemite: Zap Cannon
 - New ability for Mewtwo: Psystrike
+- Improve targeting of Spacial Rend (Palkia)
 
 # Changes to Synergies
 
