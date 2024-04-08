@@ -321,7 +321,7 @@ export default function PreparationMenu() {
                   green: allUsersReady,
                   orange: !allUsersReady
                 })}
-                onClick={ownerId == uid ? startGame : undefined}
+                onClick={startGame}
                 data-tooltip-id={"start-game"}
               >
                 {t("start_game")}

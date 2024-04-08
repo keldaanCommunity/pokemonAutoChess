@@ -16,18 +16,23 @@ import {
   ILeaderboardInfo
 } from "../models/colyseus-models/leaderboard-info"
 import Message from "../models/colyseus-models/message"
+import { TournamentSchema } from "../models/colyseus-models/tournament"
 import BannedUser from "../models/mongo-models/banned-user"
 import { BotV2, IBot } from "../models/mongo-models/bot-v2"
 import ChatV2 from "../models/mongo-models/chat-v2"
+import Tournament from "../models/mongo-models/tournament"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { Emotion, IPlayer, Role, Title, Transfer } from "../types"
 import {
   EloRank,
   RANKED_LOBBY_CRON,
-  SCRIBBLE_LOBBY_CRON
+  SCRIBBLE_LOBBY_CRON,
+  TOURNAMENT_CLEANUP_DELAY,
+  TOURNAMENT_REGISTRATION_TIME
 } from "../types/Config"
 import { GameMode } from "../types/enum/Game"
 import { Language } from "../types/enum/Language"
+import { ITournament } from "../types/interfaces/Tournament"
 import { logger } from "../utils/logger"
 import {
   AddBotCommand,
@@ -54,7 +59,13 @@ import {
   RemoveMessageCommand,
   SelectLanguageCommand,
   UnbanUserCommand,
-  createBotList
+  createBotList,
+  RemoveTournamentCommand,
+  OnCreateTournamentCommand,
+  ParticipateInTournamentCommand,
+  NextTournamentStageCommand,
+  EndTournamentMatchCommand,
+  CreateTournamentLobbiesCommand
 } from "./commands/lobby-commands"
 import LobbyState from "./states/lobby-state"
 
@@ -69,6 +80,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
   unsubscribeLobby: (() => void) | undefined
   rooms: RoomListingData<any>[] | undefined
   dispatcher: Dispatcher<this>
+  tournamentCronJobs: Map<string, CronJob>
 
   constructor() {
     super()
@@ -101,6 +113,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     this.leaderboard = new Array<ILeaderboardInfo>()
     this.botLeaderboard = new Array<ILeaderboardBotInfo>()
     this.levelLeaderboard = new Array<ILeaderboardInfo>()
+    this.tournamentCronJobs = new Map<string, CronJob>()
   }
 
   async onCreate(): Promise<void> {
@@ -225,6 +238,48 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         this.dispatcher.dispatch(new RemoveMessageCommand(), {
           client,
           messageId: message.id
+        })
+      }
+    )
+
+    this.onMessage(
+      Transfer.NEW_TOURNAMENT,
+      (client, message: { name: string; startDate: string }) => {
+        this.dispatcher.dispatch(new OnCreateTournamentCommand(), {
+          client,
+          name: message.name,
+          startDate: message.startDate
+        })
+      }
+    )
+
+    this.onMessage(
+      Transfer.REMOVE_TOURNAMENT,
+      (client, message: { id: string }) => {
+        this.dispatcher.dispatch(new RemoveTournamentCommand(), {
+          client,
+          tournamentId: message.id
+        })
+      }
+    )
+
+    this.onMessage(
+      Transfer.REMAKE_TOURNAMENT_LOBBIES,
+      (client, message: { id: string }) => {
+        this.dispatcher.dispatch(new CreateTournamentLobbiesCommand(), {
+          client,
+          tournamentId: message.id
+        })
+      }
+    )
+
+    this.onMessage(
+      Transfer.PARTICIPATE_TOURNAMENT,
+      (client, message: { tournamentId: string; participate: boolean }) => {
+        this.dispatcher.dispatch(new ParticipateInTournamentCommand(), {
+          client,
+          tournamentId: message.tournamentId,
+          participate: message.participate
         })
       }
     )
@@ -388,15 +443,40 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       this.state.addAnnouncement(`${player.name} won the ranked match !`)
     })
 
+    this.presence.subscribe("tournament-winner", (player: IPlayer) => {
+      this.state.addAnnouncement(`${player.name} won the tournament !`)
+    })
+
     this.presence.subscribe(
-      "special-game-full",
+      "tournament-match-end",
+      ({
+        tournamentId,
+        bracketId,
+        players
+      }: {
+        tournamentId: string
+        bracketId: string
+        players: { id: string; rank: number }[]
+      }) => {
+        this.dispatcher.dispatch(new EndTournamentMatchCommand(), {
+          tournamentId,
+          bracketId,
+          players
+        })
+      }
+    )
+
+    this.presence.subscribe(
+      "lobby-full",
       (params: {
         gameMode: GameMode
         minRank: EloRank | null
         noElo?: boolean
       }) => {
         // open another special lobby when the previous one is full
-        this.dispatcher.dispatch(new OpenSpecialGameCommand(), params)
+        if(params.gameMode === GameMode.RANKED || params.gameMode === GameMode.SCRIBBLE){
+          this.dispatcher.dispatch(new OpenSpecialGameCommand(), params)
+        }
       }
     )
 
@@ -407,6 +487,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     this.initCronJobs()
     this.fetchChat()
     this.fetchLeaderboards()
+    this.fetchTournaments()
   }
 
   async onAuth(client: Client, options: any, request: any) {
@@ -535,12 +616,98 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     }
   }
 
+  async fetchTournaments() {
+    try {
+      const tournaments = await Tournament.find()
+      if (tournaments) {
+        this.state.tournaments.clear()
+        tournaments.forEach(async (tournament) => {
+          const startDate = new Date(tournament.startDate)
+
+          if (
+            tournament.finished &&
+            Date.now() > startDate.getTime() + TOURNAMENT_CLEANUP_DELAY
+          ) {
+            logger.debug(`Deleted old tournament ${tournament.name}`)
+            await Tournament.findByIdAndDelete(tournament.id)
+            return
+          }
+
+          this.state.tournaments.push(
+            new TournamentSchema(
+              tournament.id,
+              tournament.name,
+              tournament.startDate,
+              tournament.players,
+              tournament.brackets,
+              tournament.finished
+            )
+          )
+
+          if (
+            startDate.getTime() > Date.now() &&
+            this.tournamentCronJobs.has(tournament.id) === false
+          ) {
+            logger.debug(
+              "Start tournament cron job for",
+              new Date(tournament.startDate)
+            )
+            this.tournamentCronJobs.set(
+              tournament.id,
+              new CronJob(
+                startDate,
+                () => this.startTournament(tournament),
+                null,
+                true
+              )
+            )
+
+            if (
+              Date.now() <
+              startDate.getTime() - TOURNAMENT_REGISTRATION_TIME
+            ) {
+              logger.debug(
+                "Start tournament registrations opening cron job for",
+                new Date(startDate.getTime() - TOURNAMENT_REGISTRATION_TIME)
+              )
+              new CronJob(
+                new Date(startDate.getTime() - TOURNAMENT_REGISTRATION_TIME),
+                () =>
+                  this.state.addAnnouncement(
+                    `${tournament.name} is starting in one hour. Tournament registration is now open in the Tournament tab.`
+                  ),
+                null,
+                true
+              )
+            }
+          }
+        })
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+
+  startTournament(tournament: ITournament) {
+    logger.info(`Start tournament ${tournament.name}`)
+    this.dispatcher.dispatch(new NextTournamentStageCommand(), {
+      tournamentId: tournament.id
+    })
+  }
+
   initCronJobs() {
-    logger.debug("initCronJobs")
+    logger.debug("init cron jobs")
     const leaderboardRefreshJob = CronJob.from({
       cronTime: "0 0/10 * * * *", // every 10 minutes
       timeZone: "Europe/Paris",
       onTick: () => this.fetchLeaderboards(),
+      start: true
+    })
+
+    const tournamentRefreshJob = CronJob.from({
+      cronTime: "0 0 0/1 * * *", // every hour
+      timeZone: "Europe/Paris",
+      onTick: () => this.fetchTournaments(),
       start: true
     })
 
