@@ -44,6 +44,10 @@ aside.sidebar {
   color: transparent;
 }
 
+.sidebar.ps-collapsed .ps-sidebar-container {
+  overflow: hidden !important;
+}
+
 .menu-item {
   width: 100%;
 }
@@ -141,8 +145,21 @@ aside.sidebar {
 }
 
 @media (max-width: 960px) {
-  .ps-sidebar-root {
+  .ps-sidebar-root,
+  #root #game-wrapper .ps-sidebar-root {
+    left: 0;
     bottom: 0;
+    top: auto;
+  }
+
+  #root #game-wrapper,
+  #root main {
+    left: 0;
+    width: 100vw;
+  }
+
+  #root #game {
+    width: 100vw;
   }
 
   .ps-sidebar-root.ps-collapsed {

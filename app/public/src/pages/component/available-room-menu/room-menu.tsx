@@ -183,7 +183,7 @@ export default function RoomMenu(props: {
         {tournaments.length > 0 && <Tab>{t("tournament")}</Tab>}
       </TabList>
 
-      <TabPanel>
+      <TabPanel className={"tab-available-rooms"}>
         {user ? (
           <>
             <SpecialGameCountdown />
@@ -211,7 +211,7 @@ export default function RoomMenu(props: {
           <p className="subtitle">{t("loading")}</p>
         )}
       </TabPanel>
-      <TabPanel>
+      <TabPanel className={"tab-ingame-rooms"}>
         <ul className="hidden-scrollable">
           {gameRooms.map((r) => (
             <li key={r.roomId}>
@@ -224,7 +224,7 @@ export default function RoomMenu(props: {
         </ul>
       </TabPanel>
       {tournaments.length > 0 && (
-        <TabPanel>
+        <TabPanel className={"tab-tournament"}>
           <ul className="hidden-scrollable">
             {sortedTournaments.map((t) => (
               <li key={t.id}>

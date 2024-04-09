@@ -15,15 +15,19 @@ export default function GameShop() {
   return (
     <>
       <div className="game-shop my-container">
-        <GameMoneyInfo />
-        <GameLifeInfo />
-        <GameTeamInfo />
+        <div id="game-shop-info">
+          <GameMoneyInfo />
+          <GameLifeInfo />
+          <div className="spacer"></div>
+          <GameAdditionalPokemons />
+          <div className="spacer"></div>
+          <GameTeamInfo />
+        </div>
         <div className="game-shop-actions">
           <GameRarityPercentage />
           <GameLock />
           <GameRefresh />
         </div>
-        <GameAdditionalPokemons />
         <GameStore />
         <GameExperience />
       </div>

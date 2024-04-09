@@ -48,6 +48,10 @@
   height: 100%;
 }
 
+.game-pokemon-portrait-types img {
+  display: block;
+}
+
 .game-pokemon-portrait-evolution {
   position: absolute;
   top: 4px;

@@ -32,7 +32,7 @@ export function TournamentsAdmin() {
   }
 
   return (
-    <div className="nes-container tournaments-admin">
+    <div className="my-container tournaments-admin">
       <h1>Tournaments</h1>
       <div className="content">
         {isLoading && <p>Loading...</p>}
@@ -47,7 +47,7 @@ export function TournamentsAdmin() {
           </ul>
         )}
       </div>
-      <div className="content nes-container">
+      <div className="content my-box">
         <h2>Create a new tournament</h2>
         <form className="tournament-form" onSubmit={createNewTournament}>
           <label>
@@ -88,7 +88,7 @@ export function TournamentItem(props: { tournament: ITournament }) {
   const { t } = useTranslation()
 
   return (
-    <div className="nes-container tournament-item">
+    <div className="my-box tournament-item">
       <button
         className="remove-btn bubbly red"
         onClick={() => {

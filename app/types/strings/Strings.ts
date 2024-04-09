@@ -9,5 +9,5 @@ export function getRankLabel(rank: number) {
     case 3:
       return t("third_place")
   }
-  return `${rank} ${t("th_place")}`
+  return `${rank}${t("th_place")}`
 }

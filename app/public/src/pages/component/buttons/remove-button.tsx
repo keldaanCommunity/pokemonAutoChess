@@ -11,6 +11,7 @@ export function RemoveButton(props: {
       onClick={props.onClick}
       style={{
         padding: 0,
+        fontSize: "1em",
         height: "2em",
         width: "2em"
       }}

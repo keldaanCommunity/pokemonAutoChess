@@ -136,8 +136,9 @@ export default function GameStageInfo() {
             <img src={`/assets/icons/weather/${weather.toLowerCase()}.svg`} />
           </div>
         )}
+
+        <TimerBar />
       </div>
-      <TimerBar />
     </>
   )
 }

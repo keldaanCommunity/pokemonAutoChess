@@ -31,8 +31,8 @@
 }
 
 .game-pokemons-proposition-list > .my-box {
-  background-color: var(--color-bg-secondary);
-  max-width: 210px;
+  padding: 5px;
+  max-width: calc(7.5vw + 18px);
 }
 
 .game-pokemons-proposition-list > .my-box:hover {

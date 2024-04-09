@@ -22,7 +22,7 @@ export function GameAdditionalPokemons() {
 
   if (specialGameRule === SpecialGameRule.EVERYONE_IS_HERE) {
     return (
-      <div className="my-box game-additional-pokemons">
+      <div className="my-box game-additional-pokemons information">
         <p>{t("scribble.EVERYONE_IS_HERE")}</p>
       </div>
     )
@@ -39,7 +39,7 @@ export function GameAdditionalPokemons() {
           <p className="help">{t("additional_pokemon_hint")}</p>
         </Tooltip>
         <div
-          className="my-box game-additional-pokemons"
+          className="my-box game-additional-pokemons information"
           data-tooltip-id="detail-additional-pokemons"
         >
           {additionalPokemons.map((p, index) => {
