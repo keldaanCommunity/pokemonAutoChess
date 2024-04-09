@@ -547,6 +547,7 @@ class GameContainer {
     positionY: number
     targetX?: number
     targetY?: number
+    delay?: number
   }) {
     this.gameScene?.battle?.displayAbility(
       message.id,
@@ -555,7 +556,8 @@ class GameContainer {
       message.positionX,
       message.positionY,
       message.targetX,
-      message.targetY
+      message.targetY,
+      message.delay
     )
   }
 

@@ -10,6 +10,8 @@
 - Thievul
 - Drowzee
 - Hypno
+- Wattrel
+- Kilowattrel
 
 # Changes to Pokemon & Abilities
 
@@ -36,6 +38,7 @@
 # Bugfix
 
 - Fix Meteor Mash ability targeting
+- Ability descriptions now show properly scaled values when AP is negative
 
 # Misc
 

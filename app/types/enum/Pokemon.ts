@@ -752,7 +752,9 @@ export enum Pkm {
   NICKIT = "NICKIT",
   THIEVUL = "THIEVUL",
   DROWZEE = "DROWZEE",
-  HYPNO = "HYPNO"
+  HYPNO = "HYPNO",
+  WATTREL = "WATTREL",
+  KILOWATTREL = "KILOWATTREL"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1507,7 +1509,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.NICKIT]: "0827",
   [Pkm.THIEVUL]: "0828",
   [Pkm.DROWZEE]: "0096",
-  [Pkm.HYPNO]: "0097"
+  [Pkm.HYPNO]: "0097",
+  [Pkm.WATTREL]: "0940",
+  [Pkm.KILOWATTREL]: "0941"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2262,7 +2266,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.NICKIT]: Pkm.NICKIT,
   [Pkm.THIEVUL]: Pkm.NICKIT,
   [Pkm.DROWZEE]: Pkm.DROWZEE,
-  [Pkm.HYPNO]: Pkm.DROWZEE
+  [Pkm.HYPNO]: Pkm.DROWZEE,
+  [Pkm.WATTREL]: Pkm.WATTREL,
+  [Pkm.KILOWATTREL]: Pkm.WATTREL
 }
 
 export enum PkmDuo {
@@ -6165,5 +6171,17 @@ export const AnimationConfig: {
     attack: AnimationType.Shoot,
     ability: AnimationType.SpAttack,
     emote: AnimationType.Charge
+  },
+  [Pkm.WATTREL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.FlapAround,
+    shinyUnavailable: true
+  },
+  [Pkm.KILOWATTREL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.FlapAround,
+    shinyUnavailable: true
   }
 }
