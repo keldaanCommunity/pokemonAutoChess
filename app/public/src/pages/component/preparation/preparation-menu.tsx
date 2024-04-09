@@ -70,7 +70,7 @@ export default function PreparationMenu() {
 
   const isReady = users.find((user) => user.id === uid)?.ready
   const nbUsersReady = users.filter((user) => user.ready).length
-  const allUsersReady = users.every((user) => user.ready)
+  const allUsersReady = users.every((user) => user.ready) && nbUsersReady > 1
 
   const isAdmin = user?.role === Role.ADMIN
 
