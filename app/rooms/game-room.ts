@@ -556,7 +556,7 @@ export default class GameRoom extends Room<GameState> {
 
   async onDispose() {
     const numberOfPlayersAlive = values(this.state.players).filter(
-      (p) => p.alive
+      (p) => p.alive && !p.isBot
     ).length
     if (numberOfPlayersAlive > 1) {
       logger.warn(
