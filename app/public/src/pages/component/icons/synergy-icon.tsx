@@ -12,8 +12,8 @@ export default function SynergyIcon(props: { type: Synergy; size?: string }) {
       title={t("synergy." + props.type)}
       className="synergy-icon"
       style={{
-        width: props.size ?? "40px",
-        height: props.size ?? "40px"
+        width: props.size,
+        height: props.size
       }}
     />
   )

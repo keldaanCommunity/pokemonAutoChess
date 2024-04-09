@@ -265,14 +265,12 @@ class GameContainer {
     const screenHeight = window.innerHeight
     const screenRatio = screenWidth / screenHeight
     const WIDTH = 42 * 48
-    const MIN_HEIGHT = 1100
+    const MIN_HEIGHT = 1008
     const MAX_HEIGHT = 32 * 48
     const height = clamp(WIDTH / screenRatio, MIN_HEIGHT, MAX_HEIGHT)
-    console.log({ WIDTH, height })
 
     if (this.game && this.game.scale.height !== height) {
       this.game.scale.setGameSize(WIDTH, height)
-      this.gameScene?.cameras.main?.centerOnX(32 * 48)
     }
   }
 

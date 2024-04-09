@@ -11,6 +11,11 @@
   cursor: var(--cursor-hover);
 }
 
+.game-pokemon-portrait .synergy-icon {
+  width: 1.4vw;
+  height: 1.4vw;
+}
+
 .game-pokemon-portrait.empty {
   border-color: transparent;
 }
