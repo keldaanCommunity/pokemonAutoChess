@@ -319,7 +319,8 @@
     "POLLEN_PUFF": "Pollen Puff",
     "PSYSTRIKE": "Psystrike",
     "FACADE": "Facade",
-    "DREAM_EATER": "Dream Eater"
+    "DREAM_EATER": "Dream Eater",
+    "SPARK": "Spark"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1074,7 +1075,9 @@
     "NICKIT": "Nickit",
     "THIEVUL": "Thievul",
     "DROWZEE": "Drowzee",
-    "HYPNO": "Hypno"
+    "HYPNO": "Hypno",
+    "WATTREL": "Wattrel",
+    "KILOWATTREL": "Kilowattrel"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1379,7 +1382,8 @@
     "POLLEN_PUFF": "Give the lowest HP ally a pollen puff that restores [20,40,80,SP] HP",
     "PSYSTRIKE": "The caster materializes a strange psychic wave towards the furthest enemy, inflicting [100,SP] PHYSICAL damage and teleporting everything in its path",
     "FACADE": "Deals [20,40,80,SP] SPECIAL. Doubles damage if the pokémon is BURN, CONFUSION, FREEZE, PARALYSIS, POISONNED, SILENCE, SLEEP, FLINCH, CHARM, ARMOR_REDUCTION or WOUND",
-    "DREAM_EATER": "If an enemy is SLEEP, jump next to it, deals [45,90,SP] SPECIAL and restores the same amount of HP. Otherwise, puts the target SLEEP for [2.5,5] s"
+    "DREAM_EATER": "If an enemy is SLEEP, jump next to it, deals [45,90,SP] SPECIAL and restores the same amount of HP. Otherwise, puts the target SLEEP for [2.5,5] s",
+    "SPARK": "The pokémon fires a spark charged with electricity at the target, inflicting [40,80,SP] SPECIAL. The spark can bounce up to 4 times between adjacent enemies. Each rebound halves the SPECIAL"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1869,6 +1873,7 @@
     "FAMILY": "The pokémon grows with time (turn 15 and turn 20)",
     "SAND_STREAM": "The pokémon count as 3 for SANDSTORM",
     "DRIZZLE": "The pokémon count as 3 for RAIN",
+    "WIND_POWER": "The pokémon count as 3 for STORM",
     "HARVEST": "At the start of each fight, add a random berry to pokemon items. If full, berry is added to player items instead.",
     "COCONUT": "Exeggutor is looking for a LEAF_STONE",
     "GLUTTON": "Permanently gains 20 max HP every time it eats a berry",

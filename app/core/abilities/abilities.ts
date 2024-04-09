@@ -8051,6 +8051,71 @@ export class DreamEaterStrategy extends AbilityStrategy {
   }
 }
 
+export class SparkStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    let damage = pokemon.stars === 1 ? 40 : 80
+
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
+
+    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+      id: pokemon.simulation.id,
+      skill: Ability.SPARK,
+      targetX: target.positionX,
+      targetY: target.positionY,
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY
+    })
+
+    let previousTarget = target
+
+    let n = 0
+    while (n <= 4) {
+      const bounceTarget = board
+        .getAdjacentCells(target.positionX, target.positionY)
+        .filter((cell) => cell.value && cell.value.team === target.team)
+        .map((c) => c.value)[0]
+      if (bounceTarget) {
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.SPARK,
+          targetX: bounceTarget.positionX,
+          targetY: bounceTarget.positionY,
+          positionX: previousTarget.positionX,
+          positionY: previousTarget.positionY,
+          delay: n
+        })
+        bounceTarget.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit,
+          true
+        )
+        previousTarget = bounceTarget
+        damage /= 2
+        n++
+      } else {
+        n = 999
+      }
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -8357,5 +8422,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.POLLEN_PUFF]: new PollenPuffStrategy(),
   [Ability.PSYSTRIKE]: new PsystrikeStrategy(),
   [Ability.FACADE]: new FacadeStrategy(),
-  [Ability.DREAM_EATER]: new DreamEaterStrategy()
+  [Ability.DREAM_EATER]: new DreamEaterStrategy(),
+  [Ability.SPARK]: new SparkStrategy()
 }

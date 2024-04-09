@@ -10,6 +10,8 @@
 - Thievul
 - Drowzee
 - Hypno
+- Wattrel
+- Kilowattrel
 
 # Changes to Pokemon & Abilities
 
