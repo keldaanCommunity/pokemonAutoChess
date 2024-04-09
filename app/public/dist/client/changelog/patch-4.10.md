@@ -36,6 +36,7 @@
 # Bugfix
 
 - Fix Meteor Mash ability targeting
+- Ability descriptions now show properly scaled values when AP is negative
 
 # Misc
 
