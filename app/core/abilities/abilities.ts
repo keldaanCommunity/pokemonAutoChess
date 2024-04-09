@@ -8083,7 +8083,7 @@ export class SparkStrategy extends AbilityStrategy {
     let previousTarget = target
 
     let n = 0
-    while (damage >= 2) {
+    while (n <= 4) {
       const bounceTarget = board
         .getAdjacentCells(target.positionX, target.positionY)
         .filter((cell) => cell.value && cell.value.team === target.team)
@@ -8110,7 +8110,7 @@ export class SparkStrategy extends AbilityStrategy {
         damage /= 2
         n++
       } else {
-        damage = 0
+        n = 999
       }
     }
   }
