@@ -12656,6 +12656,39 @@ export class Hypno extends Pokemon {
   additional = true
 }
 
+export class Wattrel extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ELECTRIC])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.KILOWATTREL
+  hp = 90
+  atk = 9
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 2
+  skill = Ability.SPARK
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+  additional = true
+  passive = Passive.WIND_POWER
+}
+
+export class Kilowattrel extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ELECTRIC])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 190
+  atk = 19
+  def = 4
+  speDef = 4
+  maxPP = 80
+  range = 2
+  skill = Ability.SPARK
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+  additional = true
+  passive = Passive.WIND_POWER
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -13411,5 +13444,7 @@ export const PokemonClasses: Record<
   [Pkm.NICKIT]: Nickit,
   [Pkm.THIEVUL]: Thievul,
   [Pkm.DROWZEE]: Drowzee,
-  [Pkm.HYPNO]: Hypno
+  [Pkm.HYPNO]: Hypno,
+  [Pkm.WATTREL]: Wattrel,
+  [Pkm.KILOWATTREL]: Kilowattrel
 }

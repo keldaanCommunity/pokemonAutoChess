@@ -22,7 +22,8 @@ export function displayAbility(
   positionY: number,
   targetX: number,
   targetY: number,
-  flip: boolean
+  flip: boolean,
+  delay?: number
 ) {
   const coordinates = transformAttackCoordinate(positionX, positionY, flip)
   const coordinatesTarget = transformAttackCoordinate(targetX, targetY, flip)
@@ -849,6 +850,22 @@ export function displayAbility(
         y: coordinatesTarget[1],
         ease: "linear",
         duration: 1000,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
+    case Ability.SPARK: {
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 300,
+        delay: (delay || 0) * 300,
         onComplete: () => {
           specialProjectile.destroy()
         }
