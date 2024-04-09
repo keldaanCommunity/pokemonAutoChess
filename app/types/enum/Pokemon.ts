@@ -6175,11 +6175,13 @@ export const AnimationConfig: {
   [Pkm.WATTREL]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.FlapAround
+    emote: AnimationType.FlapAround,
+    shinyUnavailable: true
   },
   [Pkm.KILOWATTREL]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.FlapAround
+    emote: AnimationType.FlapAround,
+    shinyUnavailable: true
   }
 }
