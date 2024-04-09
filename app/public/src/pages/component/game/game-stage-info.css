@@ -10,7 +10,7 @@
   max-width: 100vw;
   color: white;
   border-radius: 12px 12px 0 0;
-  padding: 1px 5px 1px 5px;
+  padding: 1px 0.5em;
   font-size: 1em;
   gap: 0.5em;
 }

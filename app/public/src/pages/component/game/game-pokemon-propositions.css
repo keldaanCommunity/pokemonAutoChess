@@ -32,7 +32,6 @@
 
 .game-pokemons-proposition-list > .my-box {
   padding: 5px;
-  max-width: calc(7.5vw + 18px);
 }
 
 .game-pokemons-proposition-list > .my-box:hover {

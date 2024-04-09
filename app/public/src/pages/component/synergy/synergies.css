@@ -19,7 +19,6 @@
 .synergies-header {
   padding: 0.5em;
   text-align: center;
-  font-size: 1.2rem;
 }
 
 @media (aspect-ratio < 4/3), (width <= 1366px) {

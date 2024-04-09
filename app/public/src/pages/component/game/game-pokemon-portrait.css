@@ -35,7 +35,7 @@
 }
 
 .game-pokemon-portrait-cost > span {
-  font-size: 1.2vw;
+  font-size: 1.2em;
   text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
     1px 1px 0 #fff;
   margin: 0 2px 0 0;
