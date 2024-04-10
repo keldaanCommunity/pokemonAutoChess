@@ -1005,11 +1005,11 @@ export class PsychUpStrategy extends AbilityStrategy {
       duration = 8000
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerSilence(duration, pokemon)
+    target.status.triggerSilence(duration, target, pokemon)
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     cells.forEach((cell) => {
       if (cell && cell.value && cell.value.team !== pokemon.team) {
-        cell.value.status.triggerSilence(duration, pokemon)
+        cell.value.status.triggerSilence(duration, cell.value, pokemon)
       }
     })
   }
@@ -1380,7 +1380,7 @@ export class GrowlStrategy extends AbilityStrategy {
     duration = Math.round(duration * (1 + pokemon.ap / 100))
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
-        tg.status.triggerFlinch(duration)
+        tg.status.triggerFlinch(duration, tg, this)
       }
     })
   }
@@ -1924,7 +1924,7 @@ export class RockSmashStrategy extends AbilityStrategy {
     }
 
     target.handleSpecialDamage(d, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerSilence(s, pokemon)
+    target.status.triggerSilence(s, target, pokemon)
   }
 }
 
@@ -2084,7 +2084,7 @@ export class NightmareStrategy extends AbilityStrategy {
             true
           )
         }
-        enemy.status.triggerSilence(duration, pokemon)
+        enemy.status.triggerSilence(duration, enemy, pokemon)
       }
     })
   }
@@ -2286,7 +2286,7 @@ export class ConfusionStrategy extends AbilityStrategy {
         crit
       )
     } else {
-      target.status.triggerSilence(timer, target)
+      target.status.triggerSilence(timer, target, pokemon)
       target.status.triggerConfusion(timer, target)
     }
   }
@@ -3139,7 +3139,7 @@ export class BiteStrategy extends AbilityStrategy {
       crit
     )
     pokemon.handleHeal(Math.ceil(0.3 * takenDamage), pokemon, 1)
-    if (takenDamage > 0) pokemon.status.triggerFlinch(5000)
+    if (takenDamage > 0) pokemon.status.triggerFlinch(5000, pokemon, this)
   }
 }
 
@@ -4949,7 +4949,7 @@ export class GigatonHammerStrategy extends AbilityStrategy {
     if (pokemon.stars === 3) {
       damage = 400
     }
-    pokemon.status.triggerSilence(6000, pokemon)
+    pokemon.status.triggerSilence(6000, pokemon, pokemon)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -6438,6 +6438,7 @@ export class SandTombStrategy extends AbilityStrategy {
     )
     target.status.triggerSilence(
       pokemon.stars === 3 ? 8000 : pokemon.stars === 2 ? 5000 : 3000,
+      target,
       pokemon
     )
     target.handleSpecialDamage(
@@ -6616,7 +6617,7 @@ export class AirSlashStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = pokemon.stars === 3 ? 100 : pokemon.stars === 2 ? 50 : 25
-    target.status.triggerFlinch(7000)
+    target.status.triggerFlinch(7000, target, this)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -6701,7 +6702,7 @@ export class VineWhipStrategy extends AbilityStrategy {
       .concat(target)
       .forEach((v) => {
         if (v) {
-          v.status.triggerFlinch(3000)
+          v.status.triggerFlinch(3000, v, this)
         }
       })
     target.handleSpecialDamage(100, board, AttackType.SPECIAL, pokemon, crit)
@@ -6785,7 +6786,7 @@ export class MagicPowderStrategy extends AbilityStrategy {
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
-          cell.value.status.triggerSilence(silenceDuration, pokemon)
+          cell.value.status.triggerSilence(silenceDuration, cell.value, pokemon)
         }
       })
   }
@@ -7079,7 +7080,7 @@ export class AuraSphereStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        targetInLine.status.triggerSilence(3000, pokemon)
+        targetInLine.status.triggerSilence(3000, targetInLine, pokemon)
       }
     })
   }

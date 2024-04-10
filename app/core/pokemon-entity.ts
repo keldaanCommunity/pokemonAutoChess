@@ -723,7 +723,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         flinchChance = 0.5
       }
       if (chance(flinchChance)) {
-        target.status.triggerFlinch(3000)
+        target.status.triggerFlinch(3000, target, this)
       }
     }
 
@@ -743,7 +743,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.hasSynergyEffect(Synergy.GHOST)) {
       if (chance(0.25)) {
-        target.status.triggerSilence(2000, this)
+        target.status.triggerSilence(2000, target, this)
       }
     }
 

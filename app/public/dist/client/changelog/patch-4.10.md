@@ -25,6 +25,7 @@
 
 # Changes to Synergies
 
+- Aquatic rework: Aquatic pokemons now reduce the duration of status afflictions for all your team
 - Ghost curses no longer ignore opponents with Rune protect effects
 
 # Changes to Items
