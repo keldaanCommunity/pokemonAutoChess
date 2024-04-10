@@ -19,7 +19,7 @@ module.exports = {
       production : {  
         "user" : "deploy",  
         "host" : ["45.76.130.174"],  
-        "ref"  : "origin/main",  
+        "ref"  : "origin/master",  
         "repo" : "git@github.com:keldaanCommunity/pokemonAutoChess.git",  
         "path" : "/home/deploy",  
         "post-deploy" : "npm install && npm run build && npm run colyseus-post-deploy"  
