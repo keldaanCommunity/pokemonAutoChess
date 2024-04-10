@@ -1,11 +1,16 @@
 import dotenv from "dotenv"
 import { connect } from "mongoose"
-import { BotV2 } from "../app/models/mongo-models/bot-v2"
 import BotMonitor from "../app/models/mongo-models/bot-monitoring"
+import { BotV2 } from "../app/models/mongo-models/bot-v2"
 import { logger } from "../app/utils/logger"
 
 async function main() {
-  dotenv.config()
+  dotenv.config({
+    path:
+      process.env.NODE_ENV === "production"
+        ? ".env.production"
+        : ".env.development"
+  })
   logger.info("connection to db...")
   if (process.env.MONGO_URI) {
     const connection = await connect(process.env.MONGO_URI)

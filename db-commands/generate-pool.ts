@@ -85,7 +85,12 @@ const tournamentUsers: { displayName: string; elo: number; level: number }[] =
   []
 
 async function main() {
-  dotenv.config()
+  dotenv.config({
+    path:
+      process.env.NODE_ENV === "production"
+        ? ".env.production"
+        : ".env.development"
+  })
 
   try {
     logger.info("connect to db ...")
