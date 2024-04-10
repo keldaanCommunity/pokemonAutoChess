@@ -23,6 +23,7 @@
 - New ability for Treecko: Leaf Blade
 - Improve targeting of Spacial Rend (Palkia)
 - Changed Lock-on ability (Genesect): no longer inflict Armor Reduction, 100→200% additional true damage
+- Buff Zorua and Hisuan Zorua lines: PP 100 → 85
 
 # Changes to Synergies
 

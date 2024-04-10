@@ -9794,7 +9794,7 @@ export class Zorua extends Pokemon {
   atk = 8
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 85
   range = 1
   skill = Ability.ILLUSION
   additional = true
@@ -9809,7 +9809,7 @@ export class Zoroark extends Pokemon {
   atk = 18
   def = 4
   speDef = 4
-  maxPP = 100
+  maxPP = 85
   range = 1
   skill = Ability.ILLUSION
   additional = true
@@ -9825,7 +9825,7 @@ export class HisuiZorua extends Pokemon {
   atk = 8
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 85
   range = 1
   skill = Ability.ILLUSION
   additional = true
@@ -9840,7 +9840,7 @@ export class HisuiZoroark extends Pokemon {
   atk = 18
   def = 4
   speDef = 4
-  maxPP = 100
+  maxPP = 85
   range = 1
   skill = Ability.ILLUSION
   additional = true
