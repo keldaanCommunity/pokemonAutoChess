@@ -11,7 +11,7 @@ module.exports = {
         watch       : false,
         time        : true,
         wait_ready  : true,
-        env: {
+        env_production: {
             NODE_ENV: "production"
         }
     }],  
