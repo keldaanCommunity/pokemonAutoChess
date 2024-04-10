@@ -11,6 +11,10 @@
     "combinations combinations";
 }
 
+.item-detail-tooltip.my-container {
+  padding: 5px;
+}
+
 .game-item-detail-icon {
   width: 40px;
   height: 40px;

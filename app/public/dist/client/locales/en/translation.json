@@ -2026,7 +2026,7 @@
     "FLORA": "When the first FLORA pokemon is dead, a flower will rise from its grave...",
     "ROCK": "ROCK pokemons gain DEF and better resist to critical damage",
     "GHOST": "GHOST pokemons have 25% chance to SILENCE on hit and apply various curses on opponents at the start of the fight",
-    "FAIRY": "FAIRY pokemons, upon dealing or receiving a critical hit, unleash a shock on contact and make attackers and distant targets CHARM for 2 seconds",
+    "FAIRY": "FAIRY pokemons, upon dealing or receiving a critical hit, unleash a shock on melee contact and make their targets CHARM for 2 seconds on eye contact",
     "ICE": "ICE pokemons have a chance to FREEZE the enemy for 2 seconds after a hit and give SPE_DEF to the whole team",
     "FOSSIL": "On their first KO, FOSSIL pokemons come back to life with increased ATK",
     "SOUND": "SOUND pokemons emit a cry when they use their abilities, waking up allies asleep and giving them bonus stats",
