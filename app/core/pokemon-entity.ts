@@ -991,6 +991,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.status.sleepCooldown -= 500
     }
 
+    // Reduce charm duration
+    if (this.status.charmCooldown > 0 && attacker === this.status.charmOrigin) {
+      this.status.charmCooldown -= 500
+    }
+
     // Other passives
     if (this.passive === Passive.MIMIKYU && this.life / this.hp < 0.5) {
       this.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
@@ -1036,6 +1041,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         pokemon.count.fairyCritCount++
         pokemon.fairySplashCooldown = 1
 
+        const hasEyeContact =
+          pokemon.targetX === target.positionX &&
+          pokemon.targetY === target.positionY &&
+          target.targetX === pokemon.positionX &&
+          target.targetY === pokemon.positionY
+
         if (distance <= 1) {
           // melee range
           splashTarget.handleSpecialDamage(
@@ -1047,8 +1058,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           )
         }
 
-        if (isCritReceived || distance > 1) {
-          // charm attackers and distant targets
+        if (hasEyeContact) {
           splashTarget.status.triggerCharm(2000, splashTarget, pokemon)
         }
       }

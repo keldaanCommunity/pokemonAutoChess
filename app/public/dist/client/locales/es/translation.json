@@ -1818,7 +1818,7 @@
     "FLORA": "Cuando el primer pokemon FLORA muera, una flor se levantará de su tumba...",
     "ROCK": "Los Pokémon ROCK ganan DEF y resisten mejor el daño crítico.",
     "GHOST": "Los pokémon GHOST tienen un 25% de probabilidad de SILENCE al golpear y aplicar varias maldiciones a los rivales al inicio del combate.",
-    "FAIRY": "Los pokémon de FAIRY, al asestar o recibir un golpe crítico, desatan una descarga que inflige SPECIAL al contacto y CHARM durante 2 segundos a atacantes y objetivos lejanos.",
+    "FAIRY": "Los pokémon FAIRY, al asestar o recibir un golpe crítico, desatan una descarga al entrar en contacto cuerpo a cuerpo y hacen que sus objetivos se CHARM durante 2 segundos al entrar en contacto visual.",
     "ICE": "Los pokémon ICE tienen la posibilidad de FREEZE al enemigo durante 2 segundos tras un golpe y dar SPE_DEF a todo el equipo.",
     "FOSSIL": "En su primer KO, los Pokémon FOSSIL vuelven a la vida con un mayor ATK",
     "SOUND": "Los Pokémon SOUND emiten un grito cuando usan sus habilidades, lo que despierta a los aliados dormidos y les otorga estadísticas adicionales.",
