@@ -498,6 +498,15 @@ export default class PokemonState {
 
     if (pokemon.manaCooldown <= 0) {
       pokemon.addPP(10)
+      if (pokemon.effects.has(Effect.RAIN_DANCE)) {
+        pokemon.addPP(4)
+      }
+      if (pokemon.effects.has(Effect.DRIZZLE)) {
+        pokemon.addPP(7)
+      }
+      if (pokemon.effects.has(Effect.PRIMORDIAL_SEA)) {
+        pokemon.addPP(10)
+      }
       if (pokemon.simulation.weather === Weather.RAIN) {
         pokemon.addPP(3)
       }
