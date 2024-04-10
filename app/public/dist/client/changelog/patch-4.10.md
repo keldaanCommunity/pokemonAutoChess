@@ -22,6 +22,17 @@
 - New ability for Mewtwo: Psystrike
 - New ability for Treecko: Leaf Blade
 - Improve targeting of Spacial Rend (Palkia)
+- New ability for Kabuto: Protect
+- New ability for Kabutops: Slashing Claw
+- Totodile line: PP 90 → 100
+- Wailmer line: PP 110 → 120
+- Relicanth: PP 70 → 100, Def 6 → 7
+- Lapras: PP 100 → 110
+- Changed Forecast (Castform ability) Rain: also gives ~~10~~ 5 PP
+- Kyogre: PP 100 → 120
+- Suicune: PP 100 → 130
+- Anorith line: PP 100 → 80
+- Spheal line: PP 100 → 90
 
 # Changes to Synergies
 

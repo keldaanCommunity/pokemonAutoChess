@@ -1983,25 +1983,12 @@ export class HealBlockStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
 
-    let timer = 0
-    switch (pokemon.stars) {
-      case 1:
-        timer = 5000
-        break
-      case 2:
-        timer = 10000
-        break
-      case 3:
-        timer = 15000
-        break
-      default:
-        break
-    }
+    const duration = [5000,10000,15000][pokemon.stars-1] ?? 15000
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.status.triggerWound(timer, cell.value, pokemon)
+        cell.value.status.triggerWound(duration, cell.value, pokemon)
       }
     })
   }
@@ -2211,7 +2198,7 @@ export class ProtectStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const duration = Math.round(5000 * (1 + pokemon.ap / 200))
+    const duration = Math.round(([1000,3000,5000][pokemon.stars - 1] ?? 5000)* (1 + pokemon.ap / 200))
     pokemon.status.triggerProtect(duration)
   }
 }
@@ -4438,7 +4425,7 @@ export class ForecastStrategy extends AbilityStrategy {
           p.addAttack(3, true)
         }
         if (pokemon.name === Pkm.CASTFORM_RAIN) {
-          p.addPP(Math.round(10 * (1 + pokemon.ap / 100)))
+          p.addPP(Math.round(5 * (1 + pokemon.ap / 100)))
         }
         if (pokemon.name === Pkm.CASTFORM_HAIL) {
           p.addDefense(2, true)
