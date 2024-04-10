@@ -46,6 +46,7 @@
     "@colyseus/monitor": "^0.15.2",
     "@colyseus/redis-driver": "^0.15.5",
     "@colyseus/redis-presence": "^0.15.4",
+    "@colyseus/tools": "^0.15.36",
     "@colyseus/ws-transport": "^0.15.0",
     "@reduxjs/toolkit": "^2.2.1",
     "@types/bootstrap": "^5.2.10",

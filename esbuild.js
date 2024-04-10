@@ -2,7 +2,7 @@ const fs = require("fs")
 const { context } = require("esbuild")
 const dotenv = require("dotenv")
 
-dotenv.config()
+dotenv.config({path: process.env.NODE_ENV === "production" ? ".env.production": ".env.development"})
 
 const isDev = process.argv[2] === "--dev"
 const isProdBuild = process.argv[2] === "--build"
