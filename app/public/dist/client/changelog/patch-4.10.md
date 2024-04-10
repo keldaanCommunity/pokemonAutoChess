@@ -37,6 +37,7 @@
 # Changes to Synergies
 
 - Aquatic rework: Aquatic pokemons now reduce the duration of status afflictions for all your team
+- Water rework: Water pokemons now generate more PP and have 20% chance to dodge basic attacks at all levels
 - Ghost curses no longer ignore opponents with Rune protect effects
 
 # Changes to Items
