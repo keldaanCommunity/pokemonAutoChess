@@ -1061,7 +1061,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.RAZOR_FANG)) {
-      target.status.triggerArmorReduction(4000)
+      target.status.triggerArmorReduction(4000, target)
     }
 
     if (target.items.has(Item.BABIRI_BERRY)) {

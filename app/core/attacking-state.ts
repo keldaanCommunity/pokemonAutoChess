@@ -174,7 +174,7 @@ export default class AttackingState extends PokemonState {
       }
       if (pokemon.effects.has(Effect.LOCK_ON) && target) {
         trueDamagePart += 1.0 + pokemon.ap / 100
-        target.status.triggerArmorReduction(3000)
+        target.status.triggerArmorReduction(3000, target)
         pokemon.effects.delete(Effect.LOCK_ON)
       }
 
