@@ -13,6 +13,4 @@ import { listen } from "@colyseus/tools"
 // Import Colyseus config
 import app from "./app.config"
 
-// Create and listen on 9000 (or PORT environment variable.)
-const port = Number(process.env.PORT) || 9000
-listen(app, port)
+listen(app, Number(process.env.PORT || 9000))

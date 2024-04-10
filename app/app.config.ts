@@ -1,5 +1,6 @@
 import { monitor } from "@colyseus/monitor"
 import config from "@colyseus/tools"
+import { RedisDriver, RedisPresence } from "colyseus"
 import compression from "compression"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
@@ -34,7 +35,16 @@ const clientSrc = __dirname.includes("server")
  * Import your Room files
  */
 
+const serverOptions = {}
+
+if (process.env.NODE_APP_INSTANCE) {
+  serverOptions["presence"] = new RedisPresence()
+  serverOptions["driver"] = new RedisDriver()
+  serverOptions["publicAddress"] = "https://45-76-130-174.colyseus.dev/"
+}
+
 export default config({
+  options: serverOptions,
   initializeGameServer: (gameServer) => {
     /**
      * Define your room handlers:

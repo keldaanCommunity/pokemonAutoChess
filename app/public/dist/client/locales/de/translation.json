@@ -1839,7 +1839,7 @@
     "FLORA": "Wenn das erste FLORA Pokémon tot ist, erhebt sich eine Blume aus seinem Grab ...",
     "ROCK": "ROCK Pokémon erhalten DEF und widerstehen kritischem Schaden besser",
     "GHOST": "GHOST Pokémon haben eine 25% Chance, bei einem Treffer SILENCE auszulösen und verschiedene Flüche auf Gegner zu Beginn des Kampfes anzuwenden.",
-    "FAIRY": "FAIRY Pokémon entfesseln einen Schock, wenn sie einen kritischen Treffer verursachen oder erhalten, der bei Kontakt SPECIAL und bei Angreifern und entfernten Zielen 2 Sekunden lang CHARM auslöst",
+    "FAIRY": "FAIRY Pokémon, die einen kritischen Treffer erzielen oder erhalten, lösen bei Nahkampfkontakt einen Schock aus und lassen ihr Ziel bei Augenkontakt 2 Sekunden lang CHARM",
     "ICE": "ICE Pokemon haben die Chance, den Gegner nach einem Treffer für 2 Sekunden zu FREEZE und dem gesamten Team SPE_DEF zu geben",
     "FOSSIL": "Bei ihrem ersten KO erwachen FOSSIL Pokémon mit erhöhter ATK wieder zum Leben",
     "SOUND": "SOUND Pokémon stoßen einen Schrei aus, wenn sie ihre Fähigkeiten einsetzen, wecken damit schlafende Verbündete und verleihen ihnen Bonuswerte",

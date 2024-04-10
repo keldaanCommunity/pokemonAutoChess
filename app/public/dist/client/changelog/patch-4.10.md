@@ -39,6 +39,7 @@
 - Aquatic rework: Aquatic pokemons now reduce the duration of status afflictions for all your team
 - Water rework: Water pokemons now generate more PP and have 20% chance to dodge basic attacks at all levels
 - Ghost curses no longer ignore opponents with Rune protect effects
+- Fairy splash now can only inflict Charm if eye contact = the charm victim and origin are targeting each other
 
 # Changes to Items
 
@@ -46,10 +47,13 @@
 
 # Gameplay
 
+- Charm duration is now reduced by 500 milliseconds everytime the unit takes damage from the charm origin
+
 # UI
 
 # Bugfix
 
+- Fix interaction between fairy splashes and power lens, magic bounce and pokemonomicon
 - Fix Meteor Mash ability targeting
 - Ability descriptions now show properly scaled values when AP is negative
 - Ditto on Shedinja now gives a copy of Nincada
