@@ -12,7 +12,6 @@ module.exports = {
         time        : true,
         wait_ready  : true,
         env: {
-            DEBUG: "colyseus:errors",
             NODE_ENV: "production"
         }
     }],  
@@ -23,7 +22,7 @@ module.exports = {
         "ref"  : "origin/main",  
         "repo" : "https://github.com/keldaanCommunity/pokemonAutoChess.git",  
         "path" : "/home/deploy",  
-        "post-deploy" : "npm install && npm run build && npx colyseus-post-deploy"  
+        "post-deploy" : "npm install && npm run build && npm run colyseus-post-deploy"  
       }  
     }  
 }
