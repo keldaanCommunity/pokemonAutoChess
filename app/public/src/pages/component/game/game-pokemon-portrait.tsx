@@ -106,7 +106,7 @@ export default function GamePokemonPortrait(props: {
 
     const specialGameRule = getGameScene()?.room?.state.specialGameRule
     let cost = PokemonFactory.getBuyPrice(pokemon.name, specialGameRule)
-    
+
     if (
       willEvolve &&
       pokemonEvolution &&
@@ -172,7 +172,7 @@ export default function GamePokemonPortrait(props: {
           {Array.from(pokemon.types.values()).map((type) => {
             return (
               <li key={type}>
-                <SynergyIcon type={type} size="1.4vw" />
+                <SynergyIcon type={type} />
               </li>
             )
           })}

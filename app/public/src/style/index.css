@@ -197,6 +197,18 @@ p:last-child {
        MEDIA QUERIES
   ======================== */
 
+@media (width >= 2500px) {
+  body {
+    font-size: 24px;
+  }
+}
+
+@media (2000px <= width <= 2500px) {
+  body {
+    font-size: 20px;
+  }
+}
+
 @media (width <= 1024px) {
   body {
     font-size: 16px;

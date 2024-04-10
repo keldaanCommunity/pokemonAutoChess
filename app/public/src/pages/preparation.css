@@ -8,7 +8,9 @@
   display: flex;
   justify-content: center;
   gap: 1em;
-  width: 100%;
+  position: relative;
+  left: 60px;
+  width: calc(100vw - var(--sidebar-width));
   align-items: center;
 }
 

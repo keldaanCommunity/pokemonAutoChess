@@ -1,17 +1,18 @@
 #game-stage-info {
   position: absolute;
   top: 0.5%;
-  left: 30%;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   justify-content: space-between;
   align-items: center;
   min-width: 40%;
-  height: 5%;
+  max-width: 100vw;
   color: white;
   border-radius: 12px 12px 0 0;
-  padding: 1px 5px 3px 5px;
-  overflow: hidden;
-  font-size: 1.5rem;
+  padding: 1px 0.5em;
+  font-size: 1em;
+  gap: 0.5em;
 }
 
 #game-stage-info p {
@@ -21,7 +22,6 @@
 }
 
 #game-stage-info .stage-information {
-  width: 4vw;
   text-align: center;
 }
 

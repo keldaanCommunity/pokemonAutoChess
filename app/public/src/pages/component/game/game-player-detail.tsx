@@ -39,12 +39,12 @@ export default function GamePlayerDetail(props: {
         <span>
           {t("lvl")} {props.level}
         </span>
-        <div className="my-container">
+        <span>
           <Life value={props.life} />
-        </div>
-        <div className="my-container">
+        </span>
+        <span>
           <Money value={props.money} />
-        </div>
+        </span>
       </div>
       <div style={{ display: "flex", justifyContent: "start" }}>
         {props.history.slice(-5).map((record, i) => {

@@ -3,7 +3,7 @@ input[type="search"] {
   border-radius: 12px;
   width: 100%;
   border: var(--border-thin);
-  min-height: 3em;
+  min-height: 2em;
   padding-left: 1em;
 }
 

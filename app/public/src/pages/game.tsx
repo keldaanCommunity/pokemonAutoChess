@@ -704,7 +704,7 @@ export default function Game() {
   }
 
   return (
-    <div id="game-wrapper">
+    <main id="game-wrapper">
       {loaded ? (
         <>
           <MainSidebar page="game" leave={leave} leaveLabel={t("leave_game")} />
@@ -728,6 +728,6 @@ export default function Game() {
         <GameLoadingScreen connectError={connectError} />
       )}
       <div id="game" ref={container}></div>
-    </div>
+    </main>
   )
 }

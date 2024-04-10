@@ -48,7 +48,7 @@ export default function TournamentItem(props: {
   )
 
   return (
-    <div className="tournament-item nes-container">
+    <div className="tournament-item my-box">
       <span className="tournament-name">{props.tournament.name}</span>
       {tournamentFinished ? (
         <div>{getTournamentStage(props.tournament)}</div>

@@ -7,6 +7,7 @@
   bottom: 0;
   right: 0;
   background: black;
+  text-align: center;
 }
 
 .game-loading-screen li {
@@ -15,7 +16,8 @@
 
 .game-loading-screen .loading-bar {
   position: absolute;
-  top: 20vw;
+  top: 50%;
+  transform: translateY(-50%);
   left: 20vw;
   right: 20vw;
   color: white;
@@ -42,5 +44,4 @@
   bottom: 1rem;
   color: white;
   font-size: 1rem;
-  text-align: center;
 }
