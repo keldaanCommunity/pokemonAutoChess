@@ -39,7 +39,8 @@
     "start-pm2": "npm run build && npm run pm2",
     "postinstall": "cd edit/assetpack && npm install",
     "assetpack": "cd edit/assetpack && npm run assetpack",
-    "precompute": "cd gen && ts-node precompute-all.ts"
+    "precompute": "cd gen && ts-node precompute-all.ts",
+    "colyseus-post-deploy":"npx colyseus-post-deploy"
   },
   "dependencies": {
     "@colyseus/command": "^0.2.1",
