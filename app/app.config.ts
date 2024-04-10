@@ -1,11 +1,14 @@
 import { monitor } from "@colyseus/monitor"
 import config from "@colyseus/tools"
+import { WebSocketTransport } from "@colyseus/ws-transport"
+import { RedisDriver, RedisPresence, Server, ServerOptions } from "colyseus"
 import compression from "compression"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
 import rateLimit from "express-rate-limit"
 import admin from "firebase-admin"
+import http from "http"
 import { connect } from "mongoose"
 import path from "path"
 import { initTilemap } from "./core/design"
@@ -43,6 +46,21 @@ export default config({
     gameServer.define("lobby", CustomLobbyRoom)
     gameServer.define("preparation", PreparationRoom).enableRealtimeListing()
     gameServer.define("game", GameRoom).enableRealtimeListing()
+
+    const app = express()
+    const httpServer = http.createServer(app)
+
+    const properties: ServerOptions = {
+      transport: new WebSocketTransport({
+        server: httpServer
+      })
+    }
+    if (process.env.NODE_APP_INSTANCE) {
+      properties.publicAddress = "https://45-76-130-174.colyseus.dev/"
+      properties.presence = new RedisPresence()
+      properties.driver = new RedisDriver()
+    }
+    gameServer = new Server(properties)
   },
 
   initializeExpress: (app) => {
