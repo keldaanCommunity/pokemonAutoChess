@@ -1119,7 +1119,7 @@
     "FIRE_TRICK": "Realiza [20,40,80,SP] de SPECIAL y teletransporta al objetivo a una esquina del mapa",
     "FLAME_CHARGE": "Corre hacia la retaguardia enemiga y reparte [30,60,120,SP] de SPECIAL",
     "LEECH_SEED": "Deja POISONNED al objetivo durante [3,6,12] segundos y recupera [20,40,80,SP] HP",
-    "LOCK_ON": "Fija el objetivo. El siguiente ataque no puede fallar, inflige [100,SP]% de TRUE y aplica ARMOR_REDUCTION durante 3 segundos.",
+    "LOCK_ON": "Fija el objetivo. El siguiente ataque no puede fallar y inflige [200,SP]% de TRUE",
     "PSYCH_UP": "Inflige [10,20,40,SP] de SPECIAL y deja SILENCE al objetivo y a sus enemigos adyacentes",
     "RAZOR_WIND": "Realiza [20,40,80,SP] de SPECIAL al objetivo y deja a él y a los enemigos a su alrededor PARALYSIS",
     "TWISTING_NETHER": "Inflige [80,SP] de SPECIAL a todos los enemigos adyacentes al objetivo en un radio de 2 celdas, y luego los teletransporta aleatoriamente por el campo de batalla",

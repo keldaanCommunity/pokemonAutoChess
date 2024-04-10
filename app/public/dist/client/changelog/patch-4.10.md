@@ -22,6 +22,7 @@
 - New ability for Mewtwo: Psystrike
 - New ability for Treecko: Leaf Blade
 - Improve targeting of Spacial Rend (Palkia)
+- Changed Lock-on ability (Genesect): no longer inflict Armor Reduction, 100→200% additional true damage
 
 # Changes to Synergies
 

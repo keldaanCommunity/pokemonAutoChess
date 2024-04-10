@@ -1145,7 +1145,7 @@
     "FIRE_TRICK": "Verursacht [20,40,80,SP] SPECIAL und teleportiert das Ziel in eine Ecke der Karte",
     "FLAME_CHARGE": "Stürme in die gegnerische Hinterlinie und verursache [30,60,120,SP] SPECIAL",
     "LEECH_SEED": "Vergiftet das Ziel für [3,6,12] Sekunden und heilt es um [20,40,80,SP] HP",
-    "LOCK_ON": "Erfassen Sie das Ziel. Der nächste Angriff kann nicht verfehlen, verursacht [100,SP]% TRUE und wendet 3 Sekunden lang ARMOR_REDUCTION an",
+    "LOCK_ON": "Erfassen Sie das Ziel. Der nächste Angriff kann nicht verfehlen, verursacht [200,SP]% TRUE",
     "PSYCH_UP": "Verteile [10,20,40,SP] SPECIAL und bringe das Ziel und seine angrenzenden Feinde zum Schweigen",
     "RAZOR_WIND": "Fügt dem Ziel [20,40,80,SP] SPECIAL zu und lässt umliegende Feinde paralysieren",
     "TWISTING_NETHER": "Verursacht [80,SP] SPEZIAL an allen Gegnern in der Nähe des Ziels in einem Radius von 2 Zellen und teleportiert sie dann zufällig über das Schlachtfeld",
