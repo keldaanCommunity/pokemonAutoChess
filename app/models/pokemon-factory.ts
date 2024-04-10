@@ -62,6 +62,8 @@ export default class PokemonFactory {
       case Pkm.SYLVEON:
       case Pkm.GLACEON:
         return Pkm.EEVEE
+      case Pkm.SHEDINJA:
+        return Pkm.NINCADA
       default:
         return PkmFamily[name]
     }

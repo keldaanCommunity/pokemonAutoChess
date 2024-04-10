@@ -39,6 +39,7 @@
 
 - Fix Meteor Mash ability targeting
 - Ability descriptions now show properly scaled values when AP is negative
+- Ditto on Shedinja now gives a copy of Nincada
 
 # Misc
 
