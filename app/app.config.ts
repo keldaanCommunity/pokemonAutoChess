@@ -1,6 +1,5 @@
 import { monitor } from "@colyseus/monitor"
 import config from "@colyseus/tools"
-import { WebSocketTransport } from "@colyseus/ws-transport"
 import { RedisDriver, RedisPresence } from "colyseus"
 import compression from "compression"
 import cors from "cors"
@@ -41,20 +40,9 @@ const serverOptions = {}
 if (process.env.NODE_APP_INSTANCE) {
   serverOptions["presence"] = new RedisPresence()
   serverOptions["driver"] = new RedisDriver()
-  serverOptions["publicAddress"] = "https://45-76-130-174.colyseus.dev/"
 }
 
 export default config({
-  initializeTransport: (opts) => {
-    if (process.env.NODE_APP_INSTANCE) {
-      return new WebSocketTransport({
-        ...opts,
-        host: "45-76-130-174"
-      })
-    } else {
-      return new WebSocketTransport({ ...opts, host: "localhost" })
-    }
-  },
   options: serverOptions,
   initializeGameServer: (gameServer) => {
     /**
