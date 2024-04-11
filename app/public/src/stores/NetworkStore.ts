@@ -30,6 +30,7 @@ export interface INetwork {
   profile: IUserMetadata | undefined
 }
 
+console.log(window.location)
 const endpoint = `${window.location.protocol.replace("http", "ws")}//${
   window.location.host
 }`
@@ -292,7 +293,10 @@ export const networkSlice = createSlice({
     ) => {
       state.lobby?.send(Transfer.SERVER_ANNOUNCEMENT, action.payload)
     },
-    createTournament: (state, action: PayloadAction<{ name: string, startDate: string }>) => {
+    createTournament: (
+      state,
+      action: PayloadAction<{ name: string; startDate: string }>
+    ) => {
       state.lobby?.send(Transfer.NEW_TOURNAMENT, action.payload)
     }
   }

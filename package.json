@@ -31,7 +31,7 @@
     "build-client": "node esbuild.js --build",
     "build-server": "tsc",
     "build": "npm run assetpack && npm run build-client && npm run build-server",
-    "start": "node --optimize_for_size --max_old_space_size=800 ./app/public/dist/server/app/index.js",
+    "start": "node ./app/public/dist/server/app/index.js",
     "add-bot": "node ./app/public/dist/server/db-commands/populate-bot.js",
     "monitor-bot": "node ./app/public/dist/server/scheduled/monitor-bot.js",
     "translate": "npx @inlang/cli machine translate -f",
