@@ -30,10 +30,10 @@ export interface INetwork {
   profile: IUserMetadata | undefined
 }
 
-console.log(window.location)
 const endpoint = `${window.location.protocol.replace("http", "ws")}//${
   window.location.host
 }`
+console.log(endpoint)
 
 const initalState: INetwork = {
   client: new Client(endpoint),
