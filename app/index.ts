@@ -13,4 +13,8 @@ import { listen } from "@colyseus/tools"
 // Import Colyseus config
 import app from "./app.config"
 
-listen(app, Number(process.env.PORT || 9000))
+if (process.env.NODE_APP_INSTANCE) {
+  listen(app)
+} else {
+  listen(app, 9000)
+}
