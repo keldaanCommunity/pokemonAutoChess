@@ -7,6 +7,8 @@ dotenv.config()
 const isDev = process.argv[2] === "--dev"
 const isProdBuild = process.argv[2] === "--build"
 
+console.log(process.env)
+
 context({
   entryPoints: ["./app/public/src/index.tsx"],
   outfile: "app/public/dist/client/index.js",
