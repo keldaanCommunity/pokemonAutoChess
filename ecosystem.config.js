@@ -4,8 +4,7 @@ const os = require("os");
 module.exports = {
     apps: [{
         name        : "colyseus",
-        cwd         : "./app/public/dist/server/app",
-        script      : "index.js", // your entrypoint file
+        script      : "./app/public/dist/server/app/index.js", // your entrypoint file
         instances   : os.cpus().length,
         exec_mode   : "fork",         // IMPORTANT: do not use cluster mode.
         watch       : false,
