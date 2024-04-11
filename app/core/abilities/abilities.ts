@@ -1983,7 +1983,7 @@ export class HealBlockStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
 
-    const duration = [5000,10000,15000][pokemon.stars-1] ?? 15000
+    const duration = [5000, 10000, 15000][pokemon.stars - 1] ?? 15000
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
     cells.forEach((cell) => {
@@ -2198,7 +2198,9 @@ export class ProtectStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const duration = Math.round(([1000,3000,5000][pokemon.stars - 1] ?? 5000)* (1 + pokemon.ap / 200))
+    const duration = Math.round(
+      ([1000, 3000, 5000][pokemon.stars - 1] ?? 5000) * (1 + pokemon.ap / 200)
+    )
     pokemon.status.triggerProtect(duration)
   }
 }
@@ -7336,6 +7338,7 @@ export class AuraWheelStrategy extends AbilityStrategy {
       pokemon.name = Pkm.MORPEKO
       pokemon.index = PkmIndex[Pkm.MORPEKO]
     }
+    pokemon.addAttackSpeed(10, true)
 
     target.handleSpecialDamage(
       60,

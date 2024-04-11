@@ -644,14 +644,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    if (this.name === Pkm.MORPEKO) {
-      target.status.triggerParalysis(2000, this)
-    }
-
-    if (this.name === Pkm.MORPEKO_HANGRY) {
-      target.status.triggerWound(4000, target, this)
-    }
-
     if (this.name === Pkm.MINIOR) {
       this.addAttackSpeed(4, true)
     }
