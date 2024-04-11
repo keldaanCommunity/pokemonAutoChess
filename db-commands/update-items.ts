@@ -5,12 +5,7 @@ import { Item } from "../app/types/enum/Item"
 import { logger } from "../app/utils/logger"
 
 async function main() {
-  dotenv.config({
-    path:
-      process.env.NODE_ENV === "production"
-        ? ".env.production"
-        : ".env.development"
-  })
+  dotenv.config()
 
   try {
     logger.info("connect to db ...")

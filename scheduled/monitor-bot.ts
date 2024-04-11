@@ -5,12 +5,7 @@ import { BotV2 } from "../app/models/mongo-models/bot-v2"
 import { logger } from "../app/utils/logger"
 
 async function main() {
-  dotenv.config({
-    path:
-      process.env.NODE_ENV === "production"
-        ? ".env.production"
-        : ".env.development"
-  })
+  dotenv.config()
   logger.info("connection to db...")
   if (process.env.MONGO_URI) {
     const connection = await connect(process.env.MONGO_URI)

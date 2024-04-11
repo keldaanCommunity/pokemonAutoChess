@@ -7,12 +7,7 @@ import { logger } from "../app/utils/logger"
 const args = process.argv.slice(2)
 
 async function main() {
-  dotenv.config({
-    path:
-      process.env.NODE_ENV === "production"
-        ? ".env.production"
-        : ".env.development"
-  })
+  dotenv.config()
 
   const pastebin = new PastebinAPI({
     api_dev_key: process.env.PASTEBIN_API_DEV_KEY!,

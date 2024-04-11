@@ -8,12 +8,7 @@ import { Pkm } from "../../app/types/enum/Pokemon"
 import { logger } from "../../app/utils/logger"
 
 async function main() {
-  dotenv.config({
-    path:
-      process.env.NODE_ENV === "production"
-        ? ".env.production"
-        : ".env.development"
-  })
+  dotenv.config()
 
   await removePokemonFromGame("MEGA_LUCARIO", "0448-0001", "LUCARIO", "0448")
 }
