@@ -226,8 +226,8 @@ export const networkSlice = createSlice({
     openBooster: (state) => {
       state.lobby?.send(Transfer.OPEN_BOOSTER)
     },
-    toggleAnimation: (state, action: PayloadAction<string | undefined>) => {
-      state.game?.send(Transfer.TOGGLE_ANIMATION, action.payload)
+    showEmote: (state, action: PayloadAction<string | undefined>) => {
+      state.game?.send(Transfer.SHOW_EMOTE, action.payload)
     },
     searchById: (state, action: PayloadAction<string>) => {
       state.lobby?.send(Transfer.SEARCH_BY_ID, action.payload)
@@ -292,7 +292,10 @@ export const networkSlice = createSlice({
     ) => {
       state.lobby?.send(Transfer.SERVER_ANNOUNCEMENT, action.payload)
     },
-    createTournament: (state, action: PayloadAction<{ name: string, startDate: string }>) => {
+    createTournament: (
+      state,
+      action: PayloadAction<{ name: string; startDate: string }>
+    ) => {
       state.lobby?.send(Transfer.NEW_TOURNAMENT, action.payload)
     }
   }
@@ -315,7 +318,7 @@ export const {
   createTournamentLobbies,
   participateInTournament,
   giveBooster,
-  toggleAnimation,
+  showEmote,
   openBooster,
   changeSelectedEmotion,
   buyEmotion,
