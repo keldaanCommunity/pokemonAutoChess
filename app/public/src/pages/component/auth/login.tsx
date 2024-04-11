@@ -40,6 +40,8 @@ export default function Login() {
 
   // Initialize Firebase
   if (!firebase.apps.length) {
+    console.log(process.env)
+    console.log(FIREBASE_CONFIG)
     firebase.initializeApp(FIREBASE_CONFIG)
   }
 
