@@ -49,10 +49,10 @@ export default config({
     if (process.env.NODE_APP_INSTANCE) {
       return new WebSocketTransport({
         ...opts,
-        host: "wss://45-76-130-174.colyseus.dev"
+        host: "45-76-130-174"
       })
     } else {
-      return new WebSocketTransport({ ...opts })
+      return new WebSocketTransport({ ...opts, host: "localhost" })
     }
   },
   options: serverOptions,
