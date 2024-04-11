@@ -4652,7 +4652,7 @@ export class Pinsir extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 190
-  atk = 25
+  atk = 21
   def = 3
   speDef = 3
   maxPP = 85
@@ -10821,7 +10821,7 @@ export class Spinda extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 250
-  atk = 25
+  atk = 20
   def = 5
   speDef = 5
   maxPP = 100
