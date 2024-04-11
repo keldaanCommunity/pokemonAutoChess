@@ -462,6 +462,10 @@ export default class Simulation extends Schema implements ISimulation {
     } else if (pokemon.team === Team.RED_TEAM) {
       this.applyEffects(pokemon, pokemon.types, this.redEffects)
     }
+
+    if (pokemon.types.has(Synergy.WATER)) {
+      pokemon.addDodgeChance(0.2)
+    }
   }
 
   applyWeatherEffects(pokemon: PokemonEntity) {
@@ -756,21 +760,18 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.RAIN_DANCE:
           if (types.has(Synergy.WATER)) {
-            pokemon.addDodgeChance(0.3)
             pokemon.effects.add(Effect.RAIN_DANCE)
           }
           break
 
         case Effect.DRIZZLE:
           if (types.has(Synergy.WATER)) {
-            pokemon.addDodgeChance(0.45)
             pokemon.effects.add(Effect.DRIZZLE)
           }
           break
 
         case Effect.PRIMORDIAL_SEA:
           if (types.has(Synergy.WATER)) {
-            pokemon.addDodgeChance(0.6)
             pokemon.effects.add(Effect.PRIMORDIAL_SEA)
           }
           break
