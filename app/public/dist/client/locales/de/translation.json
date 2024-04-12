@@ -149,6 +149,7 @@
     "MAWASHI_GERI": "Fegekick",
     "FORECAST": "Vorhersage",
     "X_SCISSOR": "Kreuzschere",
+    "MANTIS_BLADES": "Mantisklingen",
     "PLASMA_FIST": "Plasmafäuste",
     "SPECTRAL_THIEF": "Diebesschatten",
     "GEOMANCY": "Geokontrolle",
@@ -311,6 +312,9 @@
     "FLEUR_CANNON": "Kanonenbouquet",
     "SPIRIT_BREAK": "Seelenbruch",
     "SHEER_COLD": "Eiseskälte",
+    "EXTREME_SPEED": "Turbotempo",
+    "ZAP_CANNON": "Blitzkanone",
+    "PSYCHO_BOOST": "Psyschub",
     "AURA_WHEEL_HANGRY": "Aura-Rad"
   },
   "pkm": {
@@ -569,6 +573,9 @@
     "JIRACHI": "Jirachi",
     "ARCEUS": "Arceus",
     "DEOXYS": "Deoxys",
+    "DEOXYS_DEFENSE": "Deoxys (Verteidigungsform)",
+    "DEOXYS_ATTACK": "Deoxys (Angriffsform)",
+    "DEOXYS_SPEED": "Deoxys (Initiativeform)",
     "SHAYMIN": "Shaymin",
     "CRESSELIA": "Cresselia",
     "HEATRAN": "Heatran",
@@ -1261,6 +1268,7 @@
     "WHIRLPOOL": "Erfassen Sie den am weitesten entfernten Feind und entfesseln Sie einen Hagel von 4 Strudeln auf ihn. Jeder Angriff fügt dem ersten getroffenen Gegner [125,SP]% ATK PHYSICAL zu",
     "SMOKE_SCREEN": "Kanalisiert den Untergrund und erscheint wieder in der Mitte des gegnerischen Teams, was allen benachbarten Einheiten 2 Sekunden lang [10,20,40,SP] SPECIAL, BURN und ARMOR_REDUCTION zufügt",
     "PRESENT": "Verursacht entweder [80,SP], [150,SP], [300,SP] SPECIAL oder heilt 80 HP des Ziels",
+    "AERIAL_ACE": "Fügt [25,50,100,SP] TRUE zu.",
     "ASSIST": "Kopiert und benutzt die Fähigkeit von einem Zufälligen verbündeten Pokémon",
     "AURASPHERE": "Verströmt eine Aura und projiziert Energie in einer Linie, die jedem getroffenen Gegner 3 Sekunden lang [25,50,SP] SPECIAL und SILENCE zufügt"
   },
