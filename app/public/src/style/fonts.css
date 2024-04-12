@@ -1,0 +1,9 @@
+@font-face {
+  font-family: brandonGrotesque;
+  src: url("assets/ui/brandon-grotesque-black.otf") format("opentype");
+}
+
+body {
+  font-family: brandonGrotesque !important;
+  font-size: 18px;
+}

@@ -1,7 +1,7 @@
 .pokemon-collection-item {
   cursor: var(--cursor-hover);
   padding: 5px;
-  background-color: #54596b;
+  background-color: var(--color-bg-secondary);
 }
 
 .pokemon-collection-item > img {

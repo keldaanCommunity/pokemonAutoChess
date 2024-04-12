@@ -9,7 +9,7 @@ import { Money } from "../icons/money"
 export function GameMoneyInfo() {
   const money = useAppSelector((state) => state.game.currentPlayerMoney)
   return (
-    <div id="game-money-info" className="nes-container money information">
+    <div id="game-money-info" className="my-container money information">
       <div data-tooltip-id="detail-money">
         <Tooltip id="detail-money" className="custom-theme-tooltip" place="top">
           <GameMoneyDetail />

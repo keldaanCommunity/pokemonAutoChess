@@ -20,19 +20,19 @@
   margin: -6px -12px;
 }
 
-#wiki-page .synergies-tabs li[role="tab"] {
+#wiki-page .wiki-types li[role="tab"] {
   padding: 4px 6px;
   line-height: 40px;
   min-width: 48px;
   text-align: center;
 }
 
-#wiki-page > .nes-container {
+#wiki-page > .my-container {
   color: white;
-  background-color: #54596b;
+  background-color: var(--color-bg-secondary);
 }
 
-#wiki-page > .nes-container > .react-tabs > .react-tabs__tab-panel {
+#wiki-page > .my-container > .react-tabs > .react-tabs__tab-panel {
   height: 75vh;
   padding-bottom: 40px;
   overflow-y: auto;
@@ -43,7 +43,6 @@
 }
 
 #wiki-page .pokemon-portrait {
-  display: inline-block;
   margin: 2px;
 }
 
@@ -60,12 +59,15 @@
   line-height: 1.2em;
 }
 
+#wiki-page .wiki-faq h4 {
+  color: var(--color-fg-green);
+}
+
 #wiki-page .wiki-status,
 #wiki-page .wiki-stat {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
-  gap: 1em;
-  padding: 0;
+  gap: 0.5em;
 }
 
 #wiki-page .wiki-status li {
@@ -92,26 +94,35 @@
   white-space: initial;
 }
 
+#wiki-page .wiki-stat .my-box,
+#wiki-page .wiki-status .my-box {
+  background-color: var(--color-bg-primary);
+}
+
 #wiki-page .wiki-stat p:first-of-type {
   font-size: 120%;
   margin: 0.25em 0;
 }
 
-#wiki-page .wiki-tutorials {
-  padding: 1em;
-}
-
 #wiki-page .wiki-tutorials ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 1em;
+  gap: 0.5em;
   padding: 0;
+}
+
+#wiki-page .wiki-tutorials .my-box {
+  background-color: var(--color-bg-primary);
 }
 
 #wiki-page .wiki-tutorials iframe {
   width: 560px;
   height: 315px;
   max-width: 100%;
+}
+
+#wiki-page .wiki-types .pokemon-portrait {
+  display: inline-block;
 }
 
 #wiki-pokemons-all section {
@@ -131,87 +142,91 @@
 #wiki-weather > ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
+  gap: 0.5em;
 }
 
-#wiki-weather .nes-container {
+#wiki-weather .my-box {
   padding: 0.5em;
-  margin: 0.5em;
+  background-color: var(--color-bg-primary);
 }
 
-#wiki-ability .nes-container {
-  padding: 0.5em;
-  margin: 0.5em;
+#wiki-weather > ul > .my-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+#wiki-ability .my-box {
+  background-color: var(--color-bg-primary);
+  padding: 0.5em 1em;
 }
 
 #wiki-ability > ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
-}
-#wiki-weather > ul > .nes-container {
-  padding: 0.5em 1em 0;
-  display: flex;
-  flex-direction: column;
   gap: 0.5em;
 }
 
-#wiki-ability > ul > .nes-container {
-  padding: 0.5em 1em 0;
+#wiki-ability > ul > .my-box {
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
+  gap: 5px;
 }
 
-#wiki-dungeon .nes-container {
+#wiki-dungeon .my-box {
   padding: 0.5em;
-  margin: 0.5em;
+  background-color: var(--color-bg-primary);
 }
 
 #wiki-dungeon > ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
+  gap: 0.5em;
 }
 
-#wiki-dungeon > ul > .nes-container {
+#wiki-dungeon > ul > .my-box {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
 }
 
-#wiki-dungeon > ul > .nes-container > img {
+#wiki-dungeon > ul > .my-box > img {
   border: 1px solid #000000;
   border-radius: 4px;
   box-shadow: 2px 2px 0 #00000060;
   image-rendering: pixelated;
+  height: 250px;
+  object-fit: cover;
 }
 
-#wiki-weather .nes-container header {
+#wiki-weather .my-box header {
   display: flex;
   align-items: center;
   gap: 0.5em;
 }
 
-#wiki-weather .nes-container h2 {
+#wiki-weather .my-box h2 {
   flex: 1;
   margin: 0;
 }
 
-#wiki-weather .nes-container header .weather-icon {
+#wiki-weather .my-box header .weather-icon {
   height: 40px;
 }
 
-#wiki-weather .nes-container p {
+#wiki-weather .my-box p {
   margin: 0;
   white-space: pre-line;
 }
 
-#wiki-weather .nes-container ul {
+#wiki-weather .my-box ul {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5em;
   padding: 0;
 }
 
-#wiki-ability .nes-container ul {
+#wiki-ability .my-box ul {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5em;
@@ -253,12 +268,12 @@
 
 #wiki-items th,
 #wiki-items td:first-child {
-  background-color: #61738a;
+  background-color: var(--color-bg-primary);
 }
 
 #wiki-items tr:nth-child(odd),
 #wiki-items td:nth-child(n + 2) {
-  background-color: #54596b;
+  background-color: var(--color-bg-secondary);
 }
 
 @media (width <= 960px) {
@@ -272,7 +287,7 @@
     margin: 4px;
   }
 
-  #wiki-page .synergies-tabs li[role="tab"] {
+  #wiki-page .wiki-types li[role="tab"] {
     padding: 4px;
   }
 }

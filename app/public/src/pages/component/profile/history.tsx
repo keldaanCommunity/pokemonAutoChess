@@ -25,7 +25,7 @@ export default function History(props: { history: IGameRecord[] }) {
         )}
         {props.history &&
           props.history.map((r) => (
-            <div key={r.time} className="nes-container game-history">
+            <div key={r.time} className="my-box game-history">
               <span className="top">
                 {t("top")} {r.rank}
               </span>

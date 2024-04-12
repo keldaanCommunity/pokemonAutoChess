@@ -1,10 +1,12 @@
 import { t } from "i18next"
 import {
+  Emotion,
   IFloatingItem,
   IPokemonAvatar,
   IPortal,
   ISynergySymbol
 } from "../../../../types"
+import { PokemonActionState } from "../../../../types/enum/Game"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { logger } from "../../../../utils/logger"
@@ -16,13 +18,12 @@ import {
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import { FloatingItem } from "./floating-item"
-import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
 import { Portal, SynergySymbol } from "./portal"
 
 export default class MinigameManager {
-  pokemons: Map<string, PokemonSprite>
+  pokemons: Map<string, PokemonAvatar>
   items: Map<string, FloatingItem>
   portals: Map<string, Portal>
   symbols: Map<string, SynergySymbol>
@@ -39,7 +40,7 @@ export default class MinigameManager {
     avatars: Map<string, IPokemonAvatar>,
     items: Map<string, IFloatingItem>
   ) {
-    this.pokemons = new Map<string, PokemonSprite>()
+    this.pokemons = new Map<string, PokemonAvatar>()
     this.items = new Map<string, FloatingItem>()
     this.portals = new Map<string, Portal>()
     this.symbols = new Map<string, SynergySymbol>()
@@ -355,6 +356,19 @@ export default class MinigameManager {
         t("kecleon_dialog.text"),
         t("kecleon_dialog.title")
       )
+    }
+  }
+
+  showEmote(id: string, emote: Emotion) {
+    const pokemonAvatar = this.pokemons.get(id)
+    if (pokemonAvatar) {
+      pokemonAvatar.action = PokemonActionState.EMOTE
+      this.animationManager.animatePokemon(
+        pokemonAvatar,
+        PokemonActionState.EMOTE,
+        false
+      )
+      pokemonAvatar.drawSpeechBubble(emote, false)
     }
   }
 }

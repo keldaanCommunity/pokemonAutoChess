@@ -12,7 +12,7 @@ export function WikiDungeon() {
           .sort((a, b) => t(`map.${a}`).localeCompare(t(`map.${b}`)))
           .map((dungeon) => {
             return (
-              <li key={dungeon} className="nes-container">
+              <li key={dungeon} className="my-box">
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
@@ -27,7 +27,13 @@ export function WikiDungeon() {
                   {t(`region_pokemon.${DungeonDetails[dungeon].region}`)}
                 </span>
                 <img
-                  src={`/assets/tilesets/${dungeon}/tileset_0.png`}
+                  src={`/assets/maps/${dungeon}-preview.png`}
+                  onMouseOver={(e) => {
+                    e.target.src = `/assets/tilesets/${dungeon}/tileset_0.png`
+                  }}
+                  onMouseOut={(e) => {
+                    e.target.src = `/assets/maps/${dungeon}-preview.png`
+                  }}
                   alt={dungeon}
                 />
               </li>

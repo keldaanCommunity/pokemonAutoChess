@@ -33,6 +33,7 @@ export interface INetwork {
 const endpoint = `${window.location.protocol.replace("http", "ws")}//${
   window.location.host
 }`
+console.log(endpoint)
 
 const initalState: INetwork = {
   client: new Client(endpoint),
@@ -115,6 +116,14 @@ export const networkSlice = createSlice({
       }
       if (state.preparation) {
         state.preparation.send(Transfer.NEW_MESSAGE, action.payload)
+      }
+    },
+    removeMessage: (state, action: PayloadAction<{ id: string }>) => {
+      if (state.lobby) {
+        state.lobby.send(Transfer.REMOVE_MESSAGE, action.payload)
+      }
+      if (state.preparation) {
+        state.preparation.send(Transfer.REMOVE_MESSAGE, action.payload)
       }
     },
     searchName: (state, action: PayloadAction<string>) => {
@@ -218,8 +227,8 @@ export const networkSlice = createSlice({
     openBooster: (state) => {
       state.lobby?.send(Transfer.OPEN_BOOSTER)
     },
-    toggleAnimation: (state, action: PayloadAction<string | undefined>) => {
-      state.game?.send(Transfer.TOGGLE_ANIMATION, action.payload)
+    showEmote: (state, action: PayloadAction<string | undefined>) => {
+      state.game?.send(Transfer.SHOW_EMOTE, action.payload)
     },
     searchById: (state, action: PayloadAction<string>) => {
       state.lobby?.send(Transfer.SEARCH_BY_ID, action.payload)
@@ -227,8 +236,17 @@ export const networkSlice = createSlice({
     setTitle: (state, action: PayloadAction<string>) => {
       state.lobby?.send(Transfer.SET_TITLE, action.payload)
     },
-    removeMessage: (state, action: PayloadAction<{ id: string }>) => {
-      state.lobby?.send(Transfer.REMOVE_MESSAGE, action.payload)
+    removeTournament: (state, action: PayloadAction<{ id: string }>) => {
+      state.lobby?.send(Transfer.REMOVE_TOURNAMENT, action.payload)
+    },
+    createTournamentLobbies: (state, action: PayloadAction<{ id: string }>) => {
+      state.lobby?.send(Transfer.REMAKE_TOURNAMENT_LOBBIES, action.payload)
+    },
+    participateInTournament: (
+      state,
+      action: PayloadAction<{ tournamentId: string; participate: boolean }>
+    ) => {
+      state.lobby?.send(Transfer.PARTICIPATE_TOURNAMENT, action.payload)
     },
     giveBooster: (
       state,
@@ -274,6 +292,12 @@ export const networkSlice = createSlice({
       action: PayloadAction<{ message: string }>
     ) => {
       state.lobby?.send(Transfer.SERVER_ANNOUNCEMENT, action.payload)
+    },
+    createTournament: (
+      state,
+      action: PayloadAction<{ name: string; startDate: string }>
+    ) => {
+      state.lobby?.send(Transfer.NEW_TOURNAMENT, action.payload)
     }
   }
 })
@@ -291,8 +315,11 @@ export const {
   giveTitle,
   giveRole,
   removeMessage,
+  removeTournament,
+  createTournamentLobbies,
+  participateInTournament,
   giveBooster,
-  toggleAnimation,
+  showEmote,
   openBooster,
   changeSelectedEmotion,
   buyEmotion,
@@ -330,7 +357,8 @@ export const {
   setTitle,
   kick,
   deleteRoom,
-  makeServerAnnouncement
+  makeServerAnnouncement,
+  createTournament
 } = networkSlice.actions
 
 export default networkSlice.reducer

@@ -18,7 +18,7 @@ export default function GameExperience() {
   const levelUpCost = getLevelUpCost(specialGameRule)
 
   return (
-    <div className="nes-container game-experience">
+    <div className="game-experience">
       <span>
         {t("lvl")} {experienceManager.level}
       </span>
@@ -33,7 +33,7 @@ export default function GameExperience() {
       </button>
       <div className="progress-bar">
         <progress
-          className="nes-progress"
+          className="my-progress"
           value={isLevelMax ? 0 : experienceManager.experience}
           max={experienceManager.expNeeded}
         ></progress>

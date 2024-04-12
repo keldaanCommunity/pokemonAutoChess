@@ -45,7 +45,7 @@ export default function Profile() {
   }, [dispatch])
 
   return (
-    <div className="nes-container profile">
+    <div className="my-container profile">
       <div className="profile-box">
         <h1>{t("profile")}</h1>
         {profile && <PlayerBox user={profile} />}

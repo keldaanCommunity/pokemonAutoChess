@@ -42,7 +42,7 @@ export default function WikiPokemonDetail(props: { pokemon: Pkm }) {
 
   return (
     <div className="wiki-pokemon-detail">
-      <div className="game-pokemon-detail-tooltip">
+      <div className="game-pokemon-detail-tooltip my-box">
         <GamePokemonDetail pokemon={pokemon} />
       </div>
       <dl>

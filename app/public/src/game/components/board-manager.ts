@@ -510,7 +510,7 @@ export default class BoardManager {
     return benchSize
   }
 
-  toggleAnimation(playerId: string, emote?: string) {
+  showEmote(playerId: string, emote?: string) {
     const player =
       this.playerAvatar.playerId === playerId
         ? this.playerAvatar

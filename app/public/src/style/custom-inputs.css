@@ -1,0 +1,285 @@
+input[type="text"],
+input[type="search"] {
+  border-radius: 12px;
+  width: 100%;
+  border: var(--border-thin);
+  min-height: 2em;
+  padding-left: 1em;
+}
+
+input[type="range"] {
+  height: 38px;
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 10px 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 16px;
+  cursor: var(--cursor-hover);
+  box-shadow: 0px 0px 0px #000000;
+  background: #ffffff;
+  border-radius: 0px;
+  border: 2px solid #000000;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 2px solid #000000;
+  height: 30px;
+  width: 20px;
+  border-radius: 0px;
+  background: #000000;
+  cursor: var(--cursor-hover);
+  -webkit-appearance: none;
+  margin-top: -10px;
+}
+
+input[type="range"]:focus::-webkit-slider-runnable-track {
+  background: #ffffff;
+}
+
+input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 16px;
+  cursor: var(--cursor-hover);
+  box-shadow: 0px 0px 0px #000000;
+  background: #ffffff;
+  border-radius: 0px;
+  border: 2px solid #000000;
+}
+
+input[type="range"]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 2px solid #000000;
+  height: 30px;
+  width: 20px;
+  border-radius: 0px;
+  background: #000000;
+  cursor: var(--cursor-hover);
+}
+
+input[type="range"]::-ms-track {
+  width: 100%;
+  height: 16px;
+  cursor: var(--cursor-hover);
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+input[type="range"]::-ms-fill-lower {
+  background: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px #000000;
+}
+
+input[type="range"]::-ms-fill-upper {
+  background: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px #000000;
+}
+
+input[type="range"]::-ms-thumb {
+  margin-top: 1px;
+  box-shadow: 0px 0px 0px #000000;
+  border: 2px solid #000000;
+  height: 30px;
+  width: 20px;
+  border-radius: 0px;
+  background: #000000;
+  cursor: var(--cursor-hover), pointer;
+}
+
+input[type="range"]:focus::-ms-fill-lower {
+  background: #ffffff;
+}
+
+input[type="range"]:focus::-ms-fill-upper {
+  background: #ffffff;
+}
+
+select {
+  border-radius: 12px;
+  border: var(--border-thin);
+  padding: 8px 36px 8px 16px;
+  background: none;
+  background-color: var(--color-bg-secondary);
+  color: white;
+  cursor: var(--cursor-hover);
+}
+
+select.is-light {
+  background-color: white;
+  color: black;
+}
+
+textarea {
+  overflow: auto;
+  resize: vertical;
+  border: var(--border-thick);
+  width: 100%;
+}
+
+input[type="checkbox"] {
+  margin-left: 28px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%);
+}
+
+input[type="checkbox"] + span {
+  position: relative;
+  cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC)
+      14 0,
+    pointer;
+}
+
+input[type="checkbox"] + span::before,
+input[type="checkbox"]:checked + span::before {
+  position: absolute;
+  top: -3px;
+  left: -28px;
+  content: "";
+}
+
+input[type="checkbox"] + span::before {
+  /* stylelint-disable-line no-descending-specificity */
+  width: 2px;
+  height: 2px;
+  color: #212529;
+  box-shadow: 2px 2px, 4px 2px, 6px 2px, 8px 2px, 10px 2px, 12px 2px, 14px 2px,
+    16px 2px, 2px 4px, 16px 4px, 2px 6px, 16px 6px, 2px 8px, 16px 8px, 2px 10px,
+    16px 10px, 2px 12px, 16px 12px, 2px 14px, 16px 14px, 2px 16px, 4px 16px,
+    6px 16px, 8px 16px, 10px 16px, 12px 16px, 14px 16px, 16px 16px;
+}
+
+input[type="checkbox"]:focus + span::before {
+  /* stylelint-disable-line no-descending-specificity */
+  width: 2px;
+  height: 2px;
+  color: #adafbc;
+  box-shadow: 2px 2px, 4px 2px, 6px 2px, 8px 2px, 10px 2px, 12px 2px, 14px 2px,
+    16px 2px, 2px 4px, 16px 4px, 2px 6px, 16px 6px, 2px 8px, 16px 8px, 2px 10px,
+    16px 10px, 2px 12px, 16px 12px, 2px 14px, 16px 14px, 2px 16px, 4px 16px,
+    6px 16px, 8px 16px, 10px 16px, 12px 16px, 14px 16px, 16px 16px;
+}
+
+input[type="checkbox"]:checked + span::before {
+  width: 2px;
+  height: 2px;
+  color: #212529;
+  box-shadow: 2px 2px, 4px 2px, 6px 2px, 8px 2px, 10px 2px, 12px 2px, 14px 2px,
+    18px 2px, 20px 2px, 2px 4px, 16px 4px, 18px 4px, 20px 4px, 2px 6px, 14px 6px,
+    16px 6px, 2px 8px, 4px 8px, 12px 8px, 14px 8px, 2px 10px, 4px 10px, 6px 10px,
+    10px 10px, 12px 10px, 16px 10px, 2px 12px, 6px 12px, 8px 12px, 10px 12px,
+    16px 12px, 2px 14px, 8px 14px, 16px 14px, 2px 16px, 4px 16px, 6px 16px,
+    8px 16px, 10px 16px, 12px 16px, 14px 16px, 16px 16px;
+}
+
+input[type="checkbox"]:checked:focus + span::before {
+  width: 2px;
+  height: 2px;
+  color: #adafbc;
+  box-shadow: 2px 2px, 4px 2px, 6px 2px, 8px 2px, 10px 2px, 12px 2px, 14px 2px,
+    18px 2px #212529, 20px 2px #212529, 2px 4px, 16px 4px #212529,
+    18px 4px #212529, 20px 4px #212529, 2px 6px #212529, 14px 6px #212529,
+    16px 6px #212529, 2px 8px #212529, 4px 8px #212529, 12px 8px #212529,
+    14px 8px #212529, 2px 10px, 4px 10px #212529, 6px 10px #212529,
+    10px 10px #212529, 12px 10px #212529, 16px 10px, 2px 12px, 6px 12px #212529,
+    8px 12px #212529, 10px 12px #212529, 16px 12px, 2px 14px, 8px 14px #212529,
+    16px 14px, 2px 16px, 4px 16px, 6px 16px, 8px 16px, 10px 16px, 12px 16px,
+    14px 16px, 16px 16px;
+}
+
+input[type="checkbox"].is-dark + span {
+  color: #fff;
+}
+
+input[type="checkbox"].is-dark + span::before {
+  /* stylelint-disable-line no-descending-specificity */
+  color: #fff;
+}
+
+input[type="checkbox"].is-dark:checked + span::before {
+  width: 2px;
+  height: 2px;
+  color: #adafbc;
+  box-shadow: 2px 2px, 4px 2px, 6px 2px, 8px 2px, 10px 2px, 12px 2px, 14px 2px,
+    18px 2px #fff, 20px 2px #fff, 2px 4px, 16px 4px #fff, 18px 4px #fff,
+    20px 4px #fff, 2px 6px #fff, 14px 6px #fff, 16px 6px #fff, 2px 8px #fff,
+    4px 8px #fff, 12px 8px #fff, 14px 8px #fff, 2px 10px, 4px 10px #fff,
+    6px 10px #fff, 10px 10px #fff, 12px 10px #fff, 16px 10px, 2px 12px,
+    6px 12px #fff, 8px 12px #fff, 10px 12px #fff, 16px 12px, 2px 14px,
+    8px 14px #fff, 16px 14px, 2px 16px, 4px 16px, 6px 16px, 8px 16px, 10px 16px,
+    12px 16px, 14px 16px, 16px 16px;
+  color: #fff;
+}
+
+input[type="checkbox"].is-dark:checked:focus + span::before {
+  width: 2px;
+  height: 2px;
+  color: #adafbc;
+  box-shadow: 2px 2px, 4px 2px, 6px 2px, 8px 2px, 10px 2px, 12px 2px, 14px 2px,
+    18px 2px #fff, 20px 2px #fff, 2px 4px, 16px 4px #fff, 18px 4px #fff,
+    20px 4px #fff, 2px 6px #fff, 14px 6px #fff, 16px 6px #fff, 2px 8px #fff,
+    4px 8px #fff, 12px 8px #fff, 14px 8px #fff, 2px 10px, 4px 10px #fff,
+    6px 10px #fff, 10px 10px #fff, 12px 10px #fff, 16px 10px, 2px 12px,
+    6px 12px #fff, 8px 12px #fff, 10px 12px #fff, 16px 12px, 2px 14px,
+    8px 14px #fff, 16px 14px, 2px 16px, 4px 16px, 6px 16px, 8px 16px, 10px 16px,
+    12px 16px, 14px 16px, 16px 16px;
+  color: #fff;
+}
+
+/* Progress bar */
+.my-progress {
+  border-image-slice: none;
+  border-image-width: none;
+  border-image-repeat: none;
+  border-image-source: none;
+  border-image-outset: none;
+  border-radius: 12px;
+  border: var(--border-thin);
+  width: 100%;
+  height: 48px;
+  margin: 4px;
+  background-color: var(--color-bg-secondary);
+  color: white;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.my-progress::-webkit-progress-bar {
+  background-color: var(--color-bg-secondary);
+}
+
+.my-progress::-webkit-progress-value {
+  background-color: var(--color-bg-accent);
+}
+
+.my-progress::-moz-progress-bar {
+  background-color: var(--color-bg-secondary);
+}
+
+.my-progress::-ms-fill {
+  background-color: var(--color-bg-secondary);
+  border: none;
+}

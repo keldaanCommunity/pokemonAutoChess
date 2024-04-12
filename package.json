@@ -1,12 +1,12 @@
 {
   "name": "pokemon-auto-chess",
-  "version": "4.9.0",
+  "version": "4.10.0",
   "description": "",
   "keywords": [],
   "license": "BSD-3-Clause",
   "engines": {
-    "node": "20.11.0",
-    "npm": "10.2.5"
+    "node": "20.12.0",
+    "npm": "10.5.0"
   },
   "homepage": "https://github.com/keldaanCommunity/pokemonAutoChess#readme",
   "repository": {
@@ -31,21 +31,21 @@
     "build-client": "node esbuild.js --build",
     "build-server": "tsc",
     "build": "npm run assetpack && npm run build-client && npm run build-server",
-    "start": "node --optimize_for_size --max_old_space_size=800 ./app/public/dist/server/app/index.js",
+    "start": "node ./app/public/dist/server/app/index.js",
     "add-bot": "node ./app/public/dist/server/db-commands/populate-bot.js",
     "monitor-bot": "node ./app/public/dist/server/scheduled/monitor-bot.js",
     "translate": "npx @inlang/cli machine translate -f",
-    "pm2": "pm2 start ecosystem.config.js",
-    "start-pm2": "npm run build && npm run pm2",
     "postinstall": "cd edit/assetpack && npm install",
     "assetpack": "cd edit/assetpack && npm run assetpack",
-    "precompute": "cd gen && ts-node precompute-all.ts"
+    "precompute": "cd gen && ts-node precompute-all.ts",
+    "colyseus-post-deploy":"npx colyseus-post-deploy"
   },
   "dependencies": {
     "@colyseus/command": "^0.2.1",
     "@colyseus/monitor": "^0.15.2",
     "@colyseus/redis-driver": "^0.15.5",
     "@colyseus/redis-presence": "^0.15.4",
+    "@colyseus/tools": "^0.15.36",
     "@colyseus/ws-transport": "^0.15.0",
     "@reduxjs/toolkit": "^2.2.1",
     "@types/bootstrap": "^5.2.10",
@@ -58,7 +58,6 @@
     "d3": "^7.8.5",
     "discord.js": "^14.14.1",
     "dotenv": "^16.3.2",
-    "elo-rank": "^1.0.4",
     "express": "^4.18.2",
     "express-basic-auth": "^1.2.0",
     "express-openapi": "^12.1.3",
@@ -117,6 +116,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "npm-run-all": "^4.1.5",
     "openapi-typescript": "^6.7.4",
+    "pm2": "^5.3.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.3"
   }

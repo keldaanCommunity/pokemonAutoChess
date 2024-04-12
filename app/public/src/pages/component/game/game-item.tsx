@@ -8,6 +8,7 @@ import { addIconsToDescription } from "../../utils/descriptions"
 
 const style: CSS.Properties = {
   width: "320px",
+  maxWidth: "20vw",
   display: "flex",
   flexFlow: "column",
   alignItems: "center",
@@ -19,9 +20,9 @@ export default function GameItem(props: { item: Item }) {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   return (
-    <div className="nes-container" style={style}>
+    <div className="my-container" style={style}>
       <img
-        style={{ width: "96px", height: "96px", imageRendering: "pixelated" }}
+        style={{ width: "4rem", height: "4rem", imageRendering: "pixelated" }}
         src={"assets/item/" + props.item + ".png"}
       ></img>
       <h3>{t(`item.${props.item}`)}</h3>

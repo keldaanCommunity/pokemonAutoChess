@@ -52,7 +52,6 @@ export function ItemReport() {
           onChange={(e) => {
             setItemRanking(e.target.value)
           }}
-          className="my-select"
         >
           <option value="count">
             {t("rank")} {t("by_popularity")}

@@ -11,6 +11,11 @@
   cursor: var(--cursor-hover);
 }
 
+.game-pokemon-portrait .synergy-icon {
+  width: 1.4vw;
+  height: 1.4vw;
+}
+
 .game-pokemon-portrait.empty {
   border-color: transparent;
 }
@@ -26,10 +31,11 @@
   line-height: 1.2vw;
   display: flex;
   align-items: center;
+  color: black;
 }
 
 .game-pokemon-portrait-cost > span {
-  font-size: 1.2vw;
+  font-size: 1.2em;
   text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
     1px 1px 0 #fff;
   margin: 0 2px 0 0;
@@ -45,6 +51,10 @@
   top: 0;
   right: 0;
   height: 100%;
+}
+
+.game-pokemon-portrait-types img {
+  display: block;
 }
 
 .game-pokemon-portrait-evolution {

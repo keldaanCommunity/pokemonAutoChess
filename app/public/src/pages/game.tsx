@@ -303,19 +303,15 @@ export default function Game() {
       room.onMessage(Transfer.REQUEST_TILEMAP, (tilemap) => {
         gameContainer.setTilemap(tilemap)
       })
-      room.onMessage(Transfer.TOGGLE_ANIMATION, (message) => {
+      room.onMessage(Transfer.SHOW_EMOTE, (message) => {
         const g = getGameScene()
         if (g && g.minigameManager.pokemons.size > 0) {
-          // early return here to prevent toggling animation twice
-          return g.minigameManager.changePokemon(
-            message,
-            "action",
-            PokemonActionState.EMOTE
-          )
+          // early return here to prevent showing animation twice
+          return g.minigameManager.showEmote(message.id, message?.emote)
         }
 
         if (g && g.board) {
-          g.board.toggleAnimation(message.id, message?.emote)
+          g.board.showEmote(message.id, message?.emote)
         }
       })
 
@@ -704,7 +700,7 @@ export default function Game() {
   }
 
   return (
-    <div id="game-wrapper">
+    <main id="game-wrapper">
       {loaded ? (
         <>
           <MainSidebar page="game" leave={leave} leaveLabel={t("leave_game")} />
@@ -728,6 +724,6 @@ export default function Game() {
         <GameLoadingScreen connectError={connectError} />
       )}
       <div id="game" ref={container}></div>
-    </div>
+    </main>
   )
 }

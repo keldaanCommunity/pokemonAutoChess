@@ -102,7 +102,7 @@ export default class ItemDetail extends GameObjects.DOMElement {
   constructor(scene: Phaser.Scene, x: number, y: number, name: Item) {
     super(scene, x, y)
     this.dom = document.createElement("div")
-    this.dom.className = "nes-container"
+    this.dom.className = "my-container item-detail-tooltip"
     this.setElement(this.dom)
     const root = ReactDOM.createRoot(this.dom)
     root.render(<ItemDetailTooltip item={name} />)

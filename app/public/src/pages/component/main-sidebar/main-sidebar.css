@@ -2,6 +2,7 @@ aside.sidebar {
   position: absolute;
   height: 100%;
   z-index: 100;
+  background-color: var(--color-bg-primary);
 }
 
 .sidebar-logo {
@@ -9,7 +10,7 @@ aside.sidebar {
   align-items: center;
   color: white;
   width: 100%;
-  background-color: #61738a;
+  background-color: var(--color-bg-primary);
 }
 
 .sidebar-logo img {
@@ -43,6 +44,10 @@ aside.sidebar {
   color: transparent;
 }
 
+.sidebar.ps-collapsed .ps-sidebar-container {
+  overflow: hidden !important;
+}
+
 .menu-item {
   width: 100%;
 }
@@ -60,6 +65,7 @@ aside.sidebar {
 
 .ps-menu-root {
   height: 100%;
+  background-color: var(--color-bg-primary);
 }
 
 .ps-menu-root ul {
@@ -99,7 +105,7 @@ aside.sidebar {
 }
 
 .menu-item a.ps-menu-button {
-  background: #54596b;
+  background: var(--color-bg-secondary);
   border-bottom: 3px solid #00000060;
 }
 
@@ -110,7 +116,7 @@ aside.sidebar {
 }
 
 .menu-item a.ps-menu-button:hover {
-  background: #1195ec;
+  background: var(--color-bg-accent);
 }
 
 .menu-item.red a.ps-menu-button:hover {
@@ -133,14 +139,27 @@ aside.sidebar {
 }
 
 #root .ps-sidebar-root {
-  border-right: 4px solid black;
+  border-right: var(--border-thick);
   border-radius: 0 12px 12px 0;
   overflow: auto;
 }
 
 @media (max-width: 960px) {
-  .ps-sidebar-root {
+  .ps-sidebar-root,
+  #root #game-wrapper .ps-sidebar-root {
+    left: 0;
     bottom: 0;
+    top: auto;
+  }
+
+  #root #game-wrapper,
+  #root main {
+    left: 0;
+    width: 100vw;
+  }
+
+  #root #game {
+    width: 100vw;
   }
 
   .ps-sidebar-root.ps-collapsed {

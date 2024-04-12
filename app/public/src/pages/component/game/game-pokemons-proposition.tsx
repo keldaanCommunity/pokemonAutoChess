@@ -33,7 +33,7 @@ export default function GamePokemonsPropositions() {
     return (
       <div className="game-pokemons-proposition">
         <div
-          className="nes-container"
+          className="my-container"
           style={{ visibility: visible ? "visible" : "hidden" }}
         >
           {AdditionalPicksStages.includes(stageLevel) && (
@@ -45,7 +45,7 @@ export default function GamePokemonsPropositions() {
               return (
                 <div
                   key={index}
-                  className="nes-container active"
+                  className="my-box active clickable"
                   onClick={() => dispatch(pokemonPropositionClick(proposition))}
                 >
                   {proposition in PkmDuos ? (
@@ -67,7 +67,7 @@ export default function GamePokemonsPropositions() {
                     <div className="additional-pick-item ">
                       <span
                         style={{
-                          fontSize: "48px",
+                          fontSize: "2rem",
                           verticalAlign: "middle"
                         }}
                       >
@@ -75,8 +75,8 @@ export default function GamePokemonsPropositions() {
                       </span>
                       <img
                         style={{
-                          width: "48px",
-                          height: "48px",
+                          width: "2rem",
+                          height: "2rem",
                           imageRendering: "pixelated",
                           verticalAlign: "middle"
                         }}

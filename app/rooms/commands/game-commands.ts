@@ -1,5 +1,5 @@
 import { Command } from "@colyseus/command"
-import { ArraySchema, MapSchema } from "@colyseus/schema"
+import { MapSchema } from "@colyseus/schema"
 import { Client, updateLobby } from "colyseus"
 import { nanoid } from "nanoid"
 
@@ -96,7 +96,7 @@ export class OnShopCommand extends Command<
       pokemon.evolutionRule instanceof CountEvolutionRule &&
       pokemon.evolutionRule.canEvolveIfBuyingOne(pokemon, player)
 
-    let cost = PokemonFactory.getBuyPrice(name)
+    let cost = PokemonFactory.getBuyPrice(name, this.state.specialGameRule)
     const freeSpaceOnBench = getFreeSpaceOnBench(player.board)
     const hasSpaceOnBench = freeSpaceOnBench > 0 || isEvolution
 
@@ -126,7 +126,7 @@ export class OnShopCommand extends Command<
       // reset shop after picking in a unown shop
       this.state.shop.assignShop(player, true, this.state)
     } else {
-      player.shop[index] = Pkm.DEFAULT
+      player.shop = player.shop.with(index, Pkm.DEFAULT)
     }
 
     this.room.checkEvolutionsAfterPokemonAcquired(playerId)
@@ -152,9 +152,9 @@ export class OnRemoveFromShopCommand extends Command<
       return
 
     const name = player.shop[index]
-    const cost = PokemonFactory.getBuyPrice(name)
+    const cost = PokemonFactory.getBuyPrice(name, this.state.specialGameRule)
     if (player.money >= cost) {
-      player.shop = player.shop.with(index, Pkm.DEFAULT) as ArraySchema<Pkm> // waiting for https://github.com/colyseus/schema/pull/165
+      player.shop = player.shop.with(index, Pkm.DEFAULT)
       this.state.shop.releasePokemon(name)
     }
   }
@@ -537,7 +537,11 @@ export class OnSellDropCommand extends Command<
 
       if (pokemon) {
         this.state.shop.releasePokemon(pokemon.name)
-        player.money += PokemonFactory.getSellPrice(pokemon.name, pokemon.shiny)
+        player.money += PokemonFactory.getSellPrice(
+          pokemon.name,
+          pokemon.shiny,
+          this.state.specialGameRule
+        )
         pokemon.items.forEach((it) => {
           player.items.push(it)
         })

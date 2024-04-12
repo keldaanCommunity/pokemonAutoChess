@@ -743,7 +743,18 @@ export enum Pkm {
   MAGEARNA = "MAGEARNA",
   IMPIDIMP = "IMPIDIMP",
   MORGREM = "MORGREM",
-  GRIMMSNARL = "GRIMMSNARL"
+  GRIMMSNARL = "GRIMMSNARL",
+  CRABRAWLER = "CRABRAWLER",
+  CRABOMINABLE = "CRABOMINABLE",
+  CUTIEFLY = "CUTIEFLY",
+  RIBOMBEE = "RIBOMBEE",
+  ZANGOOSE = "ZANGOOSE",
+  NICKIT = "NICKIT",
+  THIEVUL = "THIEVUL",
+  DROWZEE = "DROWZEE",
+  HYPNO = "HYPNO",
+  WATTREL = "WATTREL",
+  KILOWATTREL = "KILOWATTREL"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1489,7 +1500,18 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.DEOXYS]: "0386",
   [Pkm.DEOXYS_DEFENSE]: "0386-0002",
   [Pkm.DEOXYS_ATTACK]: "0386-0001",
-  [Pkm.DEOXYS_SPEED]: "0386-0003"
+  [Pkm.DEOXYS_SPEED]: "0386-0003",
+  [Pkm.CRABRAWLER]: "0739",
+  [Pkm.CRABOMINABLE]: "0740",
+  [Pkm.CUTIEFLY]: "0742",
+  [Pkm.RIBOMBEE]: "0743",
+  [Pkm.ZANGOOSE]: "0335",
+  [Pkm.NICKIT]: "0827",
+  [Pkm.THIEVUL]: "0828",
+  [Pkm.DROWZEE]: "0096",
+  [Pkm.HYPNO]: "0097",
+  [Pkm.WATTREL]: "0940",
+  [Pkm.KILOWATTREL]: "0941"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2235,7 +2257,18 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.DEOXYS]: Pkm.DEOXYS,
   [Pkm.DEOXYS_DEFENSE]: Pkm.DEOXYS,
   [Pkm.DEOXYS_ATTACK]: Pkm.DEOXYS,
-  [Pkm.DEOXYS_SPEED]: Pkm.DEOXYS
+  [Pkm.DEOXYS_SPEED]: Pkm.DEOXYS,
+  [Pkm.CRABRAWLER]: Pkm.CRABRAWLER,
+  [Pkm.CRABOMINABLE]: Pkm.CRABRAWLER,
+  [Pkm.CUTIEFLY]: Pkm.CUTIEFLY,
+  [Pkm.RIBOMBEE]: Pkm.CUTIEFLY,
+  [Pkm.ZANGOOSE]: Pkm.ZANGOOSE,
+  [Pkm.NICKIT]: Pkm.NICKIT,
+  [Pkm.THIEVUL]: Pkm.NICKIT,
+  [Pkm.DROWZEE]: Pkm.DROWZEE,
+  [Pkm.HYPNO]: Pkm.DROWZEE,
+  [Pkm.WATTREL]: Pkm.WATTREL,
+  [Pkm.KILOWATTREL]: Pkm.WATTREL
 }
 
 export enum PkmDuo {
@@ -6093,5 +6126,62 @@ export const AnimationConfig: {
     attack: AnimationType.Shoot,
     ability: AnimationType.SpAttack,
     emote: AnimationType.Charge
+  },
+  [Pkm.CRABRAWLER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.CRABOMINABLE]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.CUTIEFLY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.RIBOMBEE]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.ZANGOOSE]: {
+    attack: AnimationType.MultiScratch,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.NICKIT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.THIEVUL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.DROWZEE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.HYPNO]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge
+  },
+  [Pkm.WATTREL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.FlapAround,
+    shinyUnavailable: true
+  },
+  [Pkm.KILOWATTREL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.FlapAround,
+    shinyUnavailable: true
   }
 }

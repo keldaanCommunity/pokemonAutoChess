@@ -46,7 +46,8 @@ export default function PokemonCarousel(props: {
         const pokemonData = getPokemonData(pkm)
         if (
           pkm !== Pkm.DEFAULT &&
-          pokemonData.skill !== Ability.DEFAULT &&
+          (pokemonData.skill !== Ability.DEFAULT ||
+            pokemonData.passive !== Passive.NONE) &&
           pokemonData.passive !== Passive.UNOWN &&
           (props.type === "all" ||
             pokemonData.types.includes(Synergy[props.type]))

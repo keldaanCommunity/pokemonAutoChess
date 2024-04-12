@@ -36,7 +36,7 @@ export default function PlayerBox(props: { user: ILobbyUser }) {
     .map(([k, v]) => k)
 
   return (
-    <div className="player-box">
+    <div className="player my-box">
       <div
         style={{
           display: "flex",

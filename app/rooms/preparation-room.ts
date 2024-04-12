@@ -1,7 +1,6 @@
 import { Dispatcher } from "@colyseus/command"
 import { Client, Room, updateLobby } from "colyseus"
 import admin from "firebase-admin"
-import { nanoid } from "nanoid"
 import { components } from "../api-v1/openapi"
 import { GameUser } from "../models/colyseus-models/game-user"
 import BannedUser from "../models/mongo-models/banned-user"
@@ -12,7 +11,6 @@ import { EloRank, MAX_PLAYERS_PER_GAME } from "../types/Config"
 import { DungeonPMDO } from "../types/enum/Dungeon"
 import { BotDifficulty, GameMode } from "../types/enum/Game"
 import { logger } from "../utils/logger"
-import { cleanProfanity } from "../utils/profanity-filter"
 import { values } from "../utils/schemas"
 import {
   OnAddBotCommand,
@@ -22,12 +20,13 @@ import {
   OnKickPlayerCommand,
   OnLeaveCommand,
   OnListBotsCommand,
-  OnMessageCommand,
+  OnNewMessageCommand,
   OnRemoveBotCommand,
   OnRoomNameCommand,
   OnRoomPasswordCommand,
   OnToggleEloCommand,
-  OnToggleReadyCommand
+  OnToggleReadyCommand,
+  RemoveMessageCommand
 } from "./commands/preparation-commands"
 import PreparationState from "./states/preparation-state"
 
@@ -79,6 +78,8 @@ export default class PreparationRoom extends Room<PreparationState> {
     noElo?: boolean
     autoStartDelayInSeconds?: number
     whitelist?: string[]
+    tournamentId?: string,
+    bracketId?: string
   }) {
     // logger.debug(options);
     //logger.info(`create ${options.roomName}`)
@@ -92,7 +93,9 @@ export default class PreparationRoom extends Room<PreparationState> {
       minRank: options.minRank ?? null,
       noElo: options.noElo ?? false,
       gameMode: options.gameMode,
-      whitelist: options.whitelist ?? null
+      whitelist: options.whitelist ?? null,
+      tournamentId: options.tournamentId ?? null,
+      bracketId: options.bracketId ?? null
     })
     this.maxClients = 8
     // if (options.ownerId) {
@@ -107,6 +110,19 @@ export default class PreparationRoom extends Room<PreparationState> {
     if (options.autoStartDelayInSeconds) {
       this.clock.setTimeout(() => {
         if (this.state.users.size < 2) {
+          // automatically remove lobbies with zero or one players
+          if (this.metadata?.tournamentId) {
+            // automatically give rank 1 if solo in a tournament lobby
+            this.presence.publish("tournament-match-end", {
+              tournamentId: this.metadata?.tournamentId,
+              bracketId: this.metadata?.bracketId,
+              players: values(this.state.users).map((p) => ({
+                id: p.id,
+                rank: 1
+              }))
+            })
+          }
+
           this.broadcast(Transfer.KICK)
           this.disconnect()
         } else {
@@ -117,11 +133,11 @@ export default class PreparationRoom extends Room<PreparationState> {
       this.clock.setTimeout(() => {
         for (let t = 0; t < 10; t++) {
           this.clock.setTimeout(() => {
-            this.broadcast(Transfer.MESSAGES, {
+            this.state.addMessage({
               author: "Server",
+              authorId: "server",
               payload: `Game is starting in ${10 - t}`,
-              avatar: "0070/Normal",
-              time: Date.now()
+              avatar: "0070/Normal"
             })
           }, t * 1000)
         }
@@ -130,13 +146,13 @@ export default class PreparationRoom extends Room<PreparationState> {
       this.clock.setTimeout(() => {
         for (let t = 0; t < 9; t++) {
           this.clock.setTimeout(() => {
-            this.broadcast(Transfer.MESSAGES, {
+            this.state.addMessage({
               author: "Server",
+              authorId: "server",
               payload: `Game will start automatically in ${10 - t} minute${
                 t !== 9 ? "s" : ""
               }`,
-              avatar: "0340/Special1",
-              time: Date.now()
+              avatar: "0340/Special1"
             })
           }, t * 60 * 1000)
         }
@@ -216,31 +232,21 @@ export default class PreparationRoom extends Room<PreparationState> {
         logger.error(error)
       }
     })
-    this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
-      try {
-        if (client.auth) {
-          const user = this.state.users.get(client.auth.uid)
-          const MAX_MESSAGE_LENGTH = 250
-          message = cleanProfanity(message.substring(0, MAX_MESSAGE_LENGTH))
 
-          if (user && !user.anonymous && message != "") {
-            this.dispatcher.dispatch(new OnMessageCommand(), {
-              client: client,
-              message: {
-                author: user.name,
-                authorId: user.id,
-                avatar: user.avatar,
-                payload: message,
-                time: Date.now(),
-                id: nanoid()
-              }
-            })
-          }
-        }
-      } catch (error) {
-        logger.error(error)
-      }
+    this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
+      this.dispatcher.dispatch(new OnNewMessageCommand(), { client, message })
     })
+
+    this.onMessage(
+      Transfer.REMOVE_MESSAGE,
+      (client, message: { id: string }) => {
+        this.dispatcher.dispatch(new RemoveMessageCommand(), {
+          client,
+          messageId: message.id
+        })
+      }
+    )
+
     this.onMessage(
       Transfer.ADD_BOT,
       (client: Client, botType: IBot | BotDifficulty) => {
@@ -283,11 +289,11 @@ export default class PreparationRoom extends Room<PreparationState> {
     })
 
     this.presence.subscribe("server-announcement", (message: string) => {
-      this.broadcast(Transfer.MESSAGES, {
+      this.state.addMessage({
         author: "Server Announcement",
+        authorId: "server",
         payload: message,
-        avatar: "0294/Joyous",
-        time: Date.now()
+        avatar: "0294/Joyous"
       })
     })
   }

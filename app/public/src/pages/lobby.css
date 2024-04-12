@@ -28,10 +28,8 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-}
-
-.lobby .user-menu .react-tabs__tab-panel--selected {
-  overflow-y: auto;
+  padding-left: 0;
+  padding-right: 2px;
 }
 
 .lobby .room-menu {
@@ -97,13 +95,13 @@
   right: 0;
   height: 60px;
   z-index: 2;
-  background: #61738a;
+  background: var(--color-bg-primary);
 }
 
 .main-lobby-nav ul {
   display: flex;
   padding-left: 64px;
-  border-top: 2px solid black;
+  border-top: var(--border-thin);
 }
 
 .main-lobby-nav li {
@@ -113,11 +111,11 @@
   display: grid;
   place-content: center;
   height: 60px;
-  border-left: 2px solid black;
+  border-left: var(--border-thin);
 }
 
 .main-lobby-nav li.active {
-  background-color: #54596b;
+  background-color: var(--color-bg-secondary);
 }
 
 .main-lobby-nav li img {
@@ -140,7 +138,7 @@
     font-size: 4vw;
   }
 
-  .lobby > .nes-container {
+  .lobby > .my-container {
     margin-top: 1em;
     max-height: 80vh;
   }

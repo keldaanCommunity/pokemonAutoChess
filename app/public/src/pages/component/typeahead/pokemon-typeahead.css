@@ -4,8 +4,9 @@
   font-size: 1em;
   border-radius: 12px;
   width: 100%;
-  border: 4px solid black;
+  border: var(--border-thin);
   padding: 0 0.75rem;
+  min-height: 2em;
 }
 
 .pokemon-typeahead .form-control::placeholder {

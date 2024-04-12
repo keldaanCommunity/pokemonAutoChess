@@ -5,37 +5,40 @@ import "./keybind-info.css"
 
 export default function KeybindInfo() {
   const { t } = useTranslation()
-  const ALL_KEYBINDS = {
-    E: t("key_desc_sell"),
-    F: t("key_desc_buy_xp"),
-    D: t("key_desc_refresh"),
-    A: t("key_desc_avatar_anim"),
-    S: t("key_desc_avatar_emotes")
-  }
-
   return (
-    <div className="nes-container keybind-container">
+    <div className="my-container keybind-container">
       <h2>{t("key_bindings")}</h2>
-      <table className="keybind-table">
-        <thead>
-          <tr className="keybind-table-header">
-            <th>{t("key")}</th>
-            <th>{t("action")}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.entries(ALL_KEYBINDS).map(([key, description]) => {
-            return (
-              <tr key={key}>
-                <td>
-                  <kbd>{key}</kbd>
-                </td>
-                <td>{description}</td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+      <dl>
+        <dt>
+          <kbd>E</kbd>
+        </dt>
+        <dd>{t("key_desc_sell")}</dd>
+
+        <dt>
+          <kbd>F</kbd>
+        </dt>
+        <dd>{t("key_desc_buy_xp")}</dd>
+
+        <dt>
+          <kbd>D</kbd>
+        </dt>
+        <dd>{t("key_desc_refresh")}</dd>
+
+        <dt>
+          <kbd>A</kbd>
+        </dt>
+        <dd>{t("key_desc_avatar_anim")}</dd>
+
+        <dt>
+          <kbd>Ctrl</kbd>
+        </dt>
+        <dd>{t("key_desc_avatar_emotes")}</dd>
+
+        <dt>
+          <kbd>Ctrl</kbd>+<kbd>1</kbd>..<kbd>9</kbd>
+        </dt>
+        <dd>{t("key_desc_avatar_show_emote")} 1..9</dd>
+      </dl>
     </div>
   )
 }

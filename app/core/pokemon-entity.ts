@@ -638,12 +638,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     specialDamage: number
     trueDamage: number
   }) {
-    if (this.name === Pkm.MORPEKO) {
-      target.status.triggerParalysis(2000, this)
-    }
-
-    if (this.name === Pkm.MORPEKO_HANGRY) {
-      target.status.triggerWound(4000, target, this)
+    if (this.passive === Passive.BERRY_EATER) {
+      for (const item of target.items.values()) {
+        Berries.includes(item) && this.eatBerry(item, target)
+      }
     }
 
     if (this.name === Pkm.MINIOR) {
@@ -717,7 +715,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         flinchChance = 0.5
       }
       if (chance(flinchChance)) {
-        target.status.triggerFlinch(3000)
+        target.status.triggerFlinch(3000, target, this)
       }
     }
 
@@ -737,7 +735,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.hasSynergyEffect(Synergy.GHOST)) {
       if (chance(0.25)) {
-        target.status.triggerSilence(2000, this)
+        target.status.triggerSilence(2000, target, this)
       }
     }
 
@@ -985,6 +983,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.status.sleepCooldown -= 500
     }
 
+    // Reduce charm duration
+    if (this.status.charmCooldown > 0 && attacker === this.status.charmOrigin) {
+      this.status.charmCooldown -= 500
+    }
+
     // Other passives
     if (this.passive === Passive.MIMIKYU && this.life / this.hp < 0.5) {
       this.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
@@ -1030,6 +1033,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         pokemon.count.fairyCritCount++
         pokemon.fairySplashCooldown = 1
 
+        const hasEyeContact =
+          pokemon.targetX === target.positionX &&
+          pokemon.targetY === target.positionY &&
+          target.targetX === pokemon.positionX &&
+          target.targetY === pokemon.positionY
+
         if (distance <= 1) {
           // melee range
           splashTarget.handleSpecialDamage(
@@ -1041,8 +1050,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           )
         }
 
-        if (isCritReceived || distance > 1) {
-          // charm attackers and distant targets
+        if (hasEyeContact) {
           splashTarget.status.triggerCharm(2000, splashTarget, pokemon)
         }
       }
@@ -1055,7 +1063,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.RAZOR_FANG)) {
-      target.status.triggerArmorReduction(4000)
+      target.status.triggerArmorReduction(4000, target)
     }
 
     if (target.items.has(Item.BABIRI_BERRY)) {
@@ -1319,7 +1327,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     // does not trigger postEffects (iron defense, normal shield, rune protect, focus band, delta orb, flame orb...)
   }
 
-  eatBerry(berry: Item) {
+  eatBerry(berry: Item, stealedFrom?: PokemonEntity) {
     switch (berry) {
       case Item.AGUAV_BERRY:
         this.handleHeal(min(20)(this.hp - this.life), this, 0)
@@ -1416,8 +1424,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         break
     }
 
-    this.items.delete(berry)
-    this.refToBoardPokemon.items.delete(berry)
+    if (stealedFrom) {
+      stealedFrom.items.delete(berry)
+      stealedFrom.refToBoardPokemon.items.delete(berry)
+    } else {
+      this.items.delete(berry)
+      this.refToBoardPokemon.items.delete(berry)
+    }
+
     if (this.passive === Passive.GLUTTON) {
       this.refToBoardPokemon.hp += 20
       if (this.refToBoardPokemon.hp > 750) {

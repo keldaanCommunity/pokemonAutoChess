@@ -26,20 +26,20 @@ export default function WikiWeather() {
   const { t } = useTranslation()
   return (
     <div id="wiki-weather">
-      <div className="nes-container">
+      <div className="my-box" style={{ marginBottom: "0.5em" }}>
         <p>{t("weather_dominant_hint")}</p>
         <p>{t("weather_dominant_hint2")}</p>
       </div>
       <ul>
         {Object.values(Weather).map((weather: Weather) => (
-          <li key={weather} className="nes-container">
+          <li key={weather} className="my-box">
             <header>
               <img
                 className="weather-icon"
                 src={`/assets/icons/weather/${weather.toLowerCase()}.svg`}
               />
               <h2>{t(`weather.${weather}`)}</h2>
-              <span>
+              <span style={{ fontSize: "1.5em" }}>
                 {WeatherThreshold[weather]}
                 <SynergyIcon type={SynergyAssociatedToWeather.get(weather)!} />
               </span>

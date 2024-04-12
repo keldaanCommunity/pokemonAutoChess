@@ -70,7 +70,7 @@ export default function PreparationMenu() {
 
   const isReady = users.find((user) => user.id === uid)?.ready
   const nbUsersReady = users.filter((user) => user.ready).length
-  const allUsersReady = users.every((user) => user.ready)
+  const allUsersReady = users.every((user) => user.ready) && nbUsersReady > 1
 
   const isAdmin = user?.role === Role.ADMIN
 
@@ -169,7 +169,7 @@ export default function PreparationMenu() {
   )
 
   return (
-    <div className="preparation-menu nes-container is-centered custom-bg">
+    <div className="preparation-menu my-container is-centered custom-bg">
       <header>
         <h1>
           {name}: {users.length}/8
@@ -234,7 +234,6 @@ export default function PreparationMenu() {
                   <input
                     maxLength={30}
                     type="text"
-                    className="my-input"
                     placeholder={name}
                     style={{ flex: 1 }}
                     onChange={(e) => {
@@ -271,7 +270,6 @@ export default function PreparationMenu() {
                 </button>
 
                 <select
-                  className="my-select"
                   defaultValue={botDifficulty}
                   onChange={(e) => {
                     setBotDifficulty(parseInt(e.target.value))
@@ -323,7 +321,7 @@ export default function PreparationMenu() {
                   green: allUsersReady,
                   orange: !allUsersReady
                 })}
-                onClick={ownerId == uid ? startGame : undefined}
+                onClick={startGame}
                 data-tooltip-id={"start-game"}
               >
                 {t("start_game")}

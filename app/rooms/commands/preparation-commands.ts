@@ -12,6 +12,8 @@ import { IChatV2, Role, Transfer } from "../../types"
 import { EloRankThreshold, MAX_PLAYERS_PER_GAME } from "../../types/Config"
 import { BotDifficulty, GameMode } from "../../types/enum/Game"
 import { logger } from "../../utils/logger"
+import { max } from "../../utils/number"
+import { cleanProfanity } from "../../utils/profanity-filter"
 import { pickRandomIn } from "../../utils/random"
 import { entries, values } from "../../utils/schemas"
 import PreparationRoom from "../preparation-room"
@@ -39,11 +41,10 @@ export class OnJoinCommand extends Command<
       }
       if (this.state.users.has(auth.uid)) {
         const user = this.state.users.get(auth.uid)!
-        this.room.broadcast(Transfer.MESSAGES, {
-          author: "Server",
+        this.state.addMessage({
+          authorId: "server",
           payload: `${user.name} joined.`,
-          avatar: user.avatar,
-          time: Date.now()
+          avatar: user.avatar
         })
       } else {
         const u = await UserMetadata.findOne({ uid: auth.uid })
@@ -86,11 +87,10 @@ export class OnJoinCommand extends Command<
             // logger.debug(user.displayName);
             this.state.ownerName = u.displayName
           }
-          this.room.broadcast(Transfer.MESSAGES, {
-            author: "Server",
+          this.state.addMessage({
+            authorId: "server",
             payload: `${u.displayName} joined.`,
-            avatar: u.avatar,
-            time: Date.now()
+            avatar: u.avatar
           })
         }
       }
@@ -101,9 +101,10 @@ export class OnJoinCommand extends Command<
         const entryToDelete = users.find(([key, user]) => user.isBot)
         if (entryToDelete) {
           const [key, bot] = entryToDelete
-          this.room.broadcast(Transfer.MESSAGES, {
-            payload: `Bot ${bot.name} removed to make room for new player.`,
-            time: Date.now()
+          this.room.state.addMessage({
+            authorId: "server",
+            avatar: bot.avatar,
+            payload: `Bot ${bot.name} removed to make room for new player.`
           })
           this.state.users.delete(key)
         } else {
@@ -113,19 +114,23 @@ export class OnJoinCommand extends Command<
         }
       }
 
+      const nbExpectedPlayers = this.room.metadata?.whitelist
+        ? max(MAX_PLAYERS_PER_GAME)(this.room.metadata?.whitelist.length)
+        : MAX_PLAYERS_PER_GAME
+
       if (
         this.state.gameMode !== GameMode.NORMAL &&
-        this.state.users.size === MAX_PLAYERS_PER_GAME
+        this.state.users.size === nbExpectedPlayers
       ) {
         // auto start when special lobby is full and all ready
-        this.room.broadcast(Transfer.MESSAGES, {
-          payload: `Lobby is full, starting match...`,
-          time: Date.now()
+        this.room.state.addMessage({
+          authorId: "server",
+          payload: `Lobby is full, starting match...`
         })
         this.clock.setTimeout(() => {
           this.room.dispatcher.dispatch(new OnGameStartRequestCommand())
           // open another one
-          this.room.presence.publish("special-game-full", {
+          this.room.presence.publish("lobby-full", {
             gameMode: this.state.gameMode,
             minRank: this.state.minRank,
             noElo: this.state.noElo
@@ -161,75 +166,86 @@ export class OnGameStartRequestCommand extends Command<
         }
       })
 
-      if (!allUsersReady && this.state.gameMode === GameMode.NORMAL) {
-        client?.send(Transfer.MESSAGES, {
-          author: "Server",
-          payload: `Not all players are ready.`,
-          avatar: "0079/Sigh",
-          time: Date.now()
+      if (this.state.users.size < 2) {
+        this.state.addMessage({
+          authorId: "Server",
+          payload: `Add bots or wait for more players to join your room.`,
+          avatar: "0079/Sigh"
         })
-      } else {
-        let freeMemory = os.freemem()
-        let totalMemory = os.totalmem()
-        /*logger.info(
+        return
+      }
+
+      if (!allUsersReady && this.state.gameMode === GameMode.NORMAL) {
+        this.state.addMessage({
+          authorId: "Server",
+          payload: `Not all players are ready.`,
+          avatar: "0079/Sigh"
+        })
+        return
+      }
+
+      let freeMemory = os.freemem()
+      let totalMemory = os.totalmem()
+      /*logger.info(
           `Memory freemem/totalmem: ${(
             (100 * freeMemory) /
             totalMemory
           ).toFixed(2)} % free (${totalMemory - freeMemory} / ${totalMemory})`
         )*/
-        freeMemory = memoryUsage().heapUsed
-        totalMemory = memoryUsage().heapTotal
-        /*logger.info(
+      freeMemory = memoryUsage().heapUsed
+      totalMemory = memoryUsage().heapTotal
+      /*logger.info(
           `Memory heapUsed/heapTotal: ${(
             (100 * freeMemory) /
             totalMemory
           ).toFixed(2)} % free (${totalMemory - freeMemory} / ${totalMemory})`
         )*/
-        if (freeMemory < 0.1 * totalMemory) {
-          // if less than 10% free memory available, prevents starting another game to avoid out of memory crash
-          this.room.broadcast(Transfer.MESSAGES, {
-            author: "Server",
-            payload: `Too many players are currently playing and the server is running out of memory. Try again in a few minutes, and avoid playing with bots. Sorry for the inconvenience.`,
-            avatar: "0025/Pain",
-            time: Date.now()
-          })
-        } else if (
-          freeMemory < 0.2 * totalMemory &&
-          nbHumanPlayers < MAX_PLAYERS_PER_GAME
-        ) {
-          // if less than 20% free memory available, prevents starting a game with bots
-          this.room.broadcast(Transfer.MESSAGES, {
-            author: "Server",
-            payload: `Too many players are currently playing and the server is running out of memory. To save resources, only lobbys with ${MAX_PLAYERS_PER_GAME} human players are enabled. Sorry for the inconvenience.`,
-            avatar: "0025/Pain",
-            time: Date.now()
-          })
-        } else if (freeMemory < 0.4 * totalMemory && nbHumanPlayers === 1) {
-          // if less than 40% free memory available, prevents starting a game solo
-          this.room.broadcast(Transfer.MESSAGES, {
-            author: "Server",
-            payload: `Too many players are currently playing and the server is running out of memory. To save resources, solo games have been disabled. Please wait for more players to join the lobby before starting the game. Sorry for the inconvenience.`,
-            avatar: "0025/Pain",
-            time: Date.now()
-          })
-        } else {
-          this.state.gameStarted = true
-          matchMaker.createRoom("game", {
-            users: this.state.users,
-            name: this.state.name,
-            preparationId: this.room.roomId,
-            noElo: this.state.noElo,
-            selectedMap: this.state.selectedMap,
-            gameMode: this.state.gameMode,
-            minRank: this.state.minRank,
-            whenReady: (game) => {
-              this.room.setGameStarted(true)
-              //logger.debug("game start", game.roomId)
-              this.room.broadcast(Transfer.GAME_START, game.roomId)
-              setTimeout(() => this.room.disconnect(), 30000) // TRYFIX: ranked lobbies prep rooms not being removed
-            }
-          })
-        }
+      if (freeMemory < 0.1 * totalMemory) {
+        // if less than 10% free memory available, prevents starting another game to avoid out of memory crash
+        this.state.addMessage({
+          author: "Server",
+          authorId: "server",
+          payload: `Too many players are currently playing and the server is running out of memory. Try again in a few minutes, and avoid playing with bots. Sorry for the inconvenience.`,
+          avatar: "0025/Pain"
+        })
+      } else if (
+        freeMemory < 0.2 * totalMemory &&
+        nbHumanPlayers < MAX_PLAYERS_PER_GAME
+      ) {
+        // if less than 20% free memory available, prevents starting a game with bots
+        this.state.addMessage({
+          author: "Server",
+          authorId: "server",
+          payload: `Too many players are currently playing and the server is running out of memory. To save resources, only lobbys with ${MAX_PLAYERS_PER_GAME} human players are enabled. Sorry for the inconvenience.`,
+          avatar: "0025/Pain"
+        })
+      } else if (freeMemory < 0.4 * totalMemory && nbHumanPlayers === 1) {
+        // if less than 40% free memory available, prevents starting a game solo
+        this.state.addMessage({
+          author: "Server",
+          authorId: "server",
+          payload: `Too many players are currently playing and the server is running out of memory. To save resources, solo games have been disabled. Please wait for more players to join the lobby before starting the game. Sorry for the inconvenience.`,
+          avatar: "0025/Pain"
+        })
+      } else {
+        this.state.gameStarted = true
+        matchMaker.createRoom("game", {
+          users: this.state.users,
+          name: this.state.name,
+          preparationId: this.room.roomId,
+          noElo: this.state.noElo,
+          selectedMap: this.state.selectedMap,
+          gameMode: this.state.gameMode,
+          tournamentId: this.room.metadata?.tournamentId,
+          bracketId: this.room.metadata?.bracketId,
+          minRank: this.state.minRank,
+          whenReady: (game) => {
+            this.room.setGameStarted(true)
+            //logger.debug("game start", game.roomId)
+            this.room.broadcast(Transfer.GAME_START, game.roomId)
+            setTimeout(() => this.room.disconnect(), 30000) // TRYFIX: ranked lobbies prep rooms not being removed
+          }
+        })
       }
     } catch (error) {
       logger.error(error)
@@ -237,16 +253,44 @@ export class OnGameStartRequestCommand extends Command<
   }
 }
 
-export class OnMessageCommand extends Command<
+export class OnNewMessageCommand extends Command<
   PreparationRoom,
-  {
-    client: Client
-    message: IChatV2
-  }
+  { client: Client; message: string }
 > {
-  execute({ client, message }) {
+  execute({ client, message }: { client: Client; message: string }) {
     try {
-      this.room.broadcast(Transfer.MESSAGES, { ...message, time: Date.now() })
+      const MAX_MESSAGE_LENGTH = 250
+      message = cleanProfanity(message.substring(0, MAX_MESSAGE_LENGTH))
+
+      const user = this.state.users.get(client.auth.uid)
+      if (user && !user.anonymous && message != "") {
+        this.state.addMessage({
+          author: user.name,
+          authorId: user.id,
+          avatar: user.avatar,
+          payload: message
+        })
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
+
+export class RemoveMessageCommand extends Command<
+  PreparationRoom,
+  { client: Client; messageId: string }
+> {
+  execute({ client, messageId }: { client: Client; messageId: string }) {
+    try {
+      const user = this.state.users.get(client.auth.uid)
+      if (
+        user &&
+        user.role &&
+        (user.role === Role.ADMIN || user.role === Role.MODERATOR)
+      ) {
+        this.state.removeMessage(messageId)
+      }
     } catch (error) {
       logger.error(error)
     }
@@ -312,13 +356,14 @@ export class OnToggleEloCommand extends Command<
       ) {
         this.state.noElo = noElo
         this.room.toggleElo(noElo)
-        this.room.broadcast(Transfer.MESSAGES, {
+        const leader = this.state.users.get(client.auth.uid)
+        this.room.state.addMessage({
           author: "Server",
+          authorId: "server",
           payload: `Room leader ${
             noElo ? "disabled" : "enabled"
           } ELO gain for this game.`,
-          avatar: this.state.users.get(client.auth.uid)?.avatar,
-          time: Date.now()
+          avatar: leader?.avatar
         })
       }
     } catch (error) {
@@ -345,21 +390,21 @@ export class OnKickPlayerCommand extends Command<
           if (cli.auth?.uid === userId && this.state.users.has(userId)) {
             const user = this.state.users.get(userId)!
             if (user.role === Role.BASIC) {
-              this.room.broadcast(Transfer.MESSAGES, {
+              this.room.state.addMessage({
                 author: "Server",
+                authorId: "server",
                 payload: `${user.name} was kicked out of the room`,
-                avatar: this.state.users.get(client.auth.uid)?.avatar,
-                time: Date.now()
+                avatar: this.state.users.get(client.auth.uid)?.avatar
               })
               this.state.users.delete(userId)
               cli.send(Transfer.KICK)
               cli.leave()
             } else {
-              this.room.broadcast(Transfer.MESSAGES, {
+              this.room.state.addMessage({
                 author: "Server",
+                authorId: "server",
                 payload: `${this.state.ownerName} tried to kick a moderator (${user.name}).`,
-                avatar: "0068/Normal",
-                time: Date.now()
+                avatar: "0068/Normal"
               })
             }
           }
@@ -409,11 +454,10 @@ export class OnLeaveCommand extends Command<
       if (client.auth?.uid) {
         const user = this.state.users.get(client.auth?.uid)
         if (user) {
-          this.room.broadcast(Transfer.MESSAGES, {
-            author: "Server",
+          this.room.state.addMessage({
+            authorId: "server",
             payload: `${user.name} left.`,
-            avatar: user.avatar,
-            time: Date.now()
+            avatar: user.avatar
           })
           this.state.users.delete(client.auth.uid)
 
@@ -424,11 +468,10 @@ export class OnLeaveCommand extends Command<
             if (newOwner) {
               this.state.ownerId = newOwner.id
               this.state.ownerName = newOwner.name
-              this.room.broadcast(Transfer.MESSAGES, {
-                author: "Server",
+              this.room.state.addMessage({
+                authorId: "server",
                 payload: `The new room leader is ${newOwner.name}`,
-                avatar: newOwner.avatar,
-                time: Date.now()
+                avatar: newOwner.avatar
               })
             }
           }
@@ -519,9 +562,9 @@ type OnAddBotPayload = {
 export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
   async execute(data: OnAddBotPayload) {
     if (this.state.users.size >= MAX_PLAYERS_PER_GAME) {
-      this.room.broadcast(Transfer.MESSAGES, {
-        payload: "Room is full",
-        time: Date.now()
+      this.room.state.addMessage({
+        authorId: "server",
+        payload: "Room is full"
       })
       return
     }
@@ -566,9 +609,9 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
       ])
 
       if (bots.length <= 0) {
-        this.room.broadcast(Transfer.MESSAGES, {
-          payload: "Error: No bots found",
-          time: Date.now()
+        this.room.state.addMessage({
+          authorId: "server",
+          payload: "Error: No bots found"
         })
         return
       }
@@ -579,9 +622,9 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
     if (bot) {
       // we checked again the lobby size because of the async request ahead
       if (this.state.users.size >= MAX_PLAYERS_PER_GAME) {
-        this.room.broadcast(Transfer.MESSAGES, {
-          payload: "Room is full",
-          time: Date.now()
+        this.room.state.addMessage({
+          authorId: "server",
+          payload: "Room is full"
         })
         return
       }
@@ -601,9 +644,9 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
         )
       )
 
-      this.room.broadcast(Transfer.MESSAGES, {
-        payload: `Bot ${bot.name} added.`,
-        time: Date.now()
+      this.room.state.addMessage({
+        authorId: "server",
+        payload: `Bot ${bot.name} added.`
       })
     }
   }
@@ -620,9 +663,9 @@ export class OnRemoveBotCommand extends Command<
     try {
       const name = this.state.users.get(target)?.name
       if (name && this.state.users.delete(target)) {
-        this.room.broadcast(Transfer.MESSAGES, {
-          payload: `Bot ${name} removed.`,
-          time: Date.now()
+        this.room.state.addMessage({
+          authorId: "server",
+          payload: `Bot ${name} removed.`
         })
       }
     } catch (error) {
@@ -655,9 +698,9 @@ export class OnListBotsCommand extends Command<PreparationRoom> {
 
       if (bots) {
         if (bots.length <= 0) {
-          this.room.broadcast(Transfer.MESSAGES, {
-            payload: `Error: No bots found !`,
-            time: Date.now()
+          this.room.state.addMessage({
+            authorId: "server",
+            payload: `Error: No bots found !`
           })
         }
         this.room.clients.forEach((client) => {

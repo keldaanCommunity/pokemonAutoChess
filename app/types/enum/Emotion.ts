@@ -20,3 +20,15 @@ export enum Emotion {
   SPECIAL2 = "Special2",
   SPECIAL3 = "Special3"
 }
+
+export const AvatarEmotions: Emotion[] = [
+  Emotion.HAPPY,
+  Emotion.JOYOUS,
+  Emotion.DETERMINED,
+  Emotion.PAIN,
+  Emotion.ANGRY,
+  Emotion.CRYING,
+  Emotion.SURPRISED,
+  Emotion.STUNNED,
+  Emotion.DIZZY
+]

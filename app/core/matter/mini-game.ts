@@ -353,6 +353,7 @@ export class MiniGame {
 
     if (specialGameRule === SpecialGameRule.SYNERGY_WHEEL) {
       itemsSet = SynergyStones
+      maxCopiesPerItem = 4
     }
 
     if (specialGameRule === SpecialGameRule.KECLEONS_SHOP) {
@@ -362,11 +363,14 @@ export class MiniGame {
     }
 
     for (let j = 0; j < nbItemsToPick; j++) {
-      let item, count
+      let item,
+        count,
+        tries = 0
       do {
         item = pickRandomIn(itemsSet)
         count = items.filter((i) => i === item).length
-      } while (count >= maxCopiesPerItem)
+        tries++
+      } while (count >= maxCopiesPerItem && tries < 10)
       items.push(item)
     }
     return items
@@ -378,7 +382,6 @@ export class MiniGame {
       const synergiesTriggerLevels: [Synergy, number][] = Array.from(
         player.synergies
       ).map(([type, value]) => {
-        // console.log(type, value)
         const lastTrigger = SynergyTriggers[type]
           .filter((n) => n <= value)
           .at(-1)

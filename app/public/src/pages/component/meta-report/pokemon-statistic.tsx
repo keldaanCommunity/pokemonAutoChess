@@ -86,7 +86,7 @@ export default function PokemonStatistic(props: {
   return (
     <article>
       {familiesArray.map(([pkm, family], i) => (
-        <div key={pkm} className="nes-container pokemon-family-stat">
+        <div key={pkm} className="my-box pokemon-family-stat">
           <span className="rank">{i + 1}</span>
 
           <ul

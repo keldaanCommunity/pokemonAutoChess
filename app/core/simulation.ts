@@ -462,6 +462,10 @@ export default class Simulation extends Schema implements ISimulation {
     } else if (pokemon.team === Team.RED_TEAM) {
       this.applyEffects(pokemon, pokemon.types, this.redEffects)
     }
+
+    if (pokemon.types.has(Synergy.WATER)) {
+      pokemon.addDodgeChance(0.2)
+    }
   }
 
   applyWeatherEffects(pokemon: PokemonEntity) {
@@ -588,11 +592,9 @@ export default class Simulation extends Schema implements ISimulation {
       const teamEffects =
         team === this.blueTeam ? this.blueEffects : this.redEffects
       const opponentTeam = team === this.blueTeam ? this.redTeam : this.blueTeam
-      const opponentsCursable = shuffleArray(
-        [...opponentTeam.values()].filter(
-          (enemy) => !enemy.status.runeProtect
-        ) as PokemonEntity[]
-      )
+      const opponentsCursable = shuffleArray([
+        ...opponentTeam.values()
+      ]) as PokemonEntity[]
 
       if (
         teamEffects.has(Effect.BAD_DREAMS) ||
@@ -603,10 +605,7 @@ export default class Simulation extends Schema implements ISimulation {
         let enemyWithHighestHP: PokemonEntity | undefined = undefined
         let highestHP = 0
         opponentsCursable.forEach((enemy) => {
-          if (
-            enemy.hp + enemy.shield > highestHP &&
-            !enemy.status.runeProtect
-          ) {
+          if (enemy.hp + enemy.shield > highestHP) {
             highestHP = enemy.hp + enemy.shield
             enemyWithHighestHP = enemy as PokemonEntity
           }
@@ -619,7 +618,11 @@ export default class Simulation extends Schema implements ISimulation {
             enemyWithHighestHP,
             false
           )
-          enemyWithHighestHP.status.triggerFlinch(5000)
+          enemyWithHighestHP.status.triggerFlinch(
+            5000,
+            enemyWithHighestHP,
+            undefined
+          )
         }
       }
 
@@ -631,7 +634,7 @@ export default class Simulation extends Schema implements ISimulation {
         let enemyWithHighestATK: PokemonEntity | undefined = undefined
         let highestATK = 0
         opponentsCursable.forEach((enemy) => {
-          if (enemy.atk > highestATK && !enemy.status.runeProtect) {
+          if (enemy.atk > highestATK) {
             highestATK = enemy.atk
             enemyWithHighestATK = enemy as PokemonEntity
           }
@@ -649,7 +652,7 @@ export default class Simulation extends Schema implements ISimulation {
         let enemyWithHighestAP: PokemonEntity | undefined = undefined
         let highestAP = 0
         opponentsCursable.forEach((enemy) => {
-          if (enemy.ap >= highestAP && !enemy.status.runeProtect) {
+          if (enemy.ap >= highestAP) {
             highestAP = enemy.ap
             enemyWithHighestAP = enemy as PokemonEntity
           }
@@ -657,7 +660,11 @@ export default class Simulation extends Schema implements ISimulation {
         if (enemyWithHighestAP) {
           enemyWithHighestAP = enemyWithHighestAP as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
           enemyWithHighestAP.addAbilityPower(-50)
-          enemyWithHighestAP.status.triggerSilence(5000, undefined)
+          enemyWithHighestAP.status.triggerSilence(
+            5000,
+            enemyWithHighestAP,
+            undefined
+          )
         }
       }
 
@@ -665,7 +672,6 @@ export default class Simulation extends Schema implements ISimulation {
         const strongestEnemy = getStrongestUnit(opponentsCursable)
         if (strongestEnemy) {
           strongestEnemy.status.triggerCurse(5000)
-          console.log(`${strongestEnemy.name} is cursed`)
         }
       }
     })
@@ -754,21 +760,18 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.RAIN_DANCE:
           if (types.has(Synergy.WATER)) {
-            pokemon.addDodgeChance(0.3)
             pokemon.effects.add(Effect.RAIN_DANCE)
           }
           break
 
         case Effect.DRIZZLE:
           if (types.has(Synergy.WATER)) {
-            pokemon.addDodgeChance(0.45)
             pokemon.effects.add(Effect.DRIZZLE)
           }
           break
 
         case Effect.PRIMORDIAL_SEA:
           if (types.has(Synergy.WATER)) {
-            pokemon.addDodgeChance(0.6)
             pokemon.effects.add(Effect.PRIMORDIAL_SEA)
           }
           break
@@ -925,21 +928,9 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.SWIFT_SWIM:
-          if (types.has(Synergy.AQUATIC)) {
-            pokemon.effects.add(Effect.SWIFT_SWIM)
-          }
-          break
-
         case Effect.HYDRATION:
-          if (types.has(Synergy.AQUATIC)) {
-            pokemon.effects.add(Effect.HYDRATION)
-          }
-          break
-
         case Effect.WATER_VEIL:
-          if (types.has(Synergy.AQUATIC)) {
-            pokemon.effects.add(Effect.WATER_VEIL)
-          }
+          pokemon.effects.add(effect)
           break
 
         case Effect.ODD_FLOWER:

@@ -17,7 +17,7 @@ export function Avatar(props: {
   const { t } = useTranslation()
 
   return (
-    <div className="avatar player-box">
+    <div className="avatar player my-box">
       <img className="pokemon-portrait" src={getAvatarSrc(props.avatar)} />
       <div className="player-portrait">
         <span className="player-title-role">

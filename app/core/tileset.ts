@@ -49,9 +49,7 @@ export type FrameTiled = {
   tileid: number
 }
 
-const src = process.env.NODE_APP_INSTANCE
-  ? "../../client/assets/tilesets"
-  : "app/public/dist/client/assets/tilesets"
+const src = "app/public/dist/client/assets/tilesets"
 
 export default class Tileset {
   id: DungeonPMDO

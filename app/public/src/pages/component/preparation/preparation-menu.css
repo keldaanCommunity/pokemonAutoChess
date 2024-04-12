@@ -18,6 +18,7 @@
   color: white;
   margin-bottom: 0.5em;
   text-shadow: 2px 2px 2px black;
+  text-align: center;
 }
 
 .preparation-menu header img {
@@ -60,7 +61,7 @@
   text-align: left;
 }
 
-.preparation-menu .my-select {
+.preparation-menu select {
   font-size: 140%;
 }
 

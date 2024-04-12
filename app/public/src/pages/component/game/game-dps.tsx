@@ -13,7 +13,7 @@ export default function GameDps(props: { maxDamage: number; dps: IDps }) {
             props.dps.specialDamage +
             props.dps.trueDamage}
         </p>
-        <ProgressBar className="nes-progress is-primary">
+        <ProgressBar className="my-progress is-primary">
           <ProgressBar
             style={{ backgroundColor: "#e76e55" }}
             max={props.maxDamage}

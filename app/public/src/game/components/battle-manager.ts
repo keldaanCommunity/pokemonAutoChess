@@ -982,7 +982,8 @@ export default class BattleManager {
     positionX: number,
     positionY: number,
     targetX?: number,
-    targetY?: number
+    targetY?: number,
+    delay?: number
   ) {
     if (this.simulation?.id === id && skill) {
       displayAbility(
@@ -994,7 +995,8 @@ export default class BattleManager {
         positionY,
         targetX ?? -1,
         targetY ?? -1,
-        this.flip
+        this.flip,
+        delay ?? -1
       )
     }
   }

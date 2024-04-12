@@ -22,7 +22,8 @@ export function displayAbility(
   positionY: number,
   targetX: number,
   targetY: number,
-  flip: boolean
+  flip: boolean,
+  delay?: number
 ) {
   const coordinates = transformAttackCoordinate(positionX, positionY, flip)
   const coordinatesTarget = transformAttackCoordinate(targetX, targetY, flip)
@@ -805,6 +806,42 @@ export function displayAbility(
       break
     }
 
+    case Ability.POLLEN_PUFF: {
+      const specialProjectile = addAbilitySprite(
+        Ability.HEAL_ORDER,
+        coordinates
+      ).setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 1000,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
+    case Ability.PSYSTRIKE: {
+      const specialProjectile = addAbilitySprite(
+        Ability.PSYSTRIKE,
+        coordinates
+      ).setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 1000,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.EGGSPLOSION: {
       const specialProjectile = addAbilitySprite(skill, coordinates).setScale(3)
       scene.tweens.add({
@@ -820,11 +857,31 @@ export function displayAbility(
       break
     }
 
+    case Ability.SPARK: {
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 300,
+        delay: (delay || 0) * 300,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.PAYDAY:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
     case Ability.AIR_SLASH:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
+    case Ability.DREAM_EATER:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
@@ -861,6 +918,14 @@ export function displayAbility(
 
     case Ability.PSYCHO_BOOST:
       addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
+    case Ability.FACADE:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
+    case Ability.ICE_HAMMER:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
     case Ability.MANTIS_BLADES:

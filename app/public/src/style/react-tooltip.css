@@ -1,0 +1,18 @@
+.react-tooltip {
+  font-size: 1rem;
+  max-width: 95vw;
+}
+
+.react-tooltip output {
+  color: white;
+}
+
+.react-tooltip .help {
+  font-size: 80%;
+  font-style: italic;
+  color: #d0d0d0;
+}
+
+.react-tooltip p:last-of-type {
+  margin-bottom: 0;
+}

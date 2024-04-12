@@ -1,0 +1,39 @@
+
+.firebaseui-idp-button {
+    border: solid !important;
+    padding: 5px 30px !important;
+    border-radius: 12px !important;
+    border-color: black !important;
+    border-width: 4px !important;
+    font-family: brandonGrotesque !important;
+    max-width: 360px !important;
+    cursor: var(--cursor-hover) !important;
+  }
+  
+  .firebaseui-idp-text {
+    font-size: 150% !important;
+  }
+  
+  .firebaseui-container {
+    margin-left: 0px !important;
+  }
+  
+  .firebaseui-card-content {
+    padding: 0px !important;
+  }
+  
+  .firebaseui-idp-google {
+    box-shadow: inset -6px -6px 0px 0px #adafbc !important;
+  }
+  
+  .firebaseui-idp-password {
+    box-shadow: inset -6px -6px 0px 0px #a33329 !important;
+  }
+  
+  .firebaseui-idp-facebook {
+    box-shadow: inset -6px -6px 0px 0px #293e6b !important;
+  }
+  
+  .firebaseui-idp-twitter {
+    box-shadow: inset -6px -6px 0px 0px #4181b3 !important;
+  }

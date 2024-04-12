@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
+import { TournamentSchema } from "../../../../../models/colyseus-models/tournament"
 import GameState from "../../../../../rooms/states/game-state"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import {
@@ -22,8 +23,9 @@ import { leaveLobby } from "../../../stores/LobbyStore"
 import { LocalStoreKeys, localStore } from "../../utils/store"
 import GameRoomItem from "./game-room-item"
 import RoomItem from "./room-item"
-import "./room-menu.css"
 import { SpecialGameCountdown } from "./special-game-countdown"
+import TournamentItem from "./tournament-item"
+import "./room-menu.css"
 
 export default function RoomMenu(props: {
   toPreparation: boolean
@@ -37,6 +39,9 @@ export default function RoomMenu(props: {
   const gameRooms: RoomAvailable[] = useAppSelector(
     (state) => state.lobby.gameRooms
   )
+  const tournaments: TournamentSchema[] = useAppSelector(
+    (state) => state.lobby.tournaments
+  )
   const client: Client = useAppSelector((state) => state.network.client)
   const lobby: Room<ICustomLobbyState> | undefined = useAppSelector(
     (state) => state.network.lobby
@@ -49,6 +54,14 @@ export default function RoomMenu(props: {
     user.anonymous &&
     Date.now() - new Date(user.creationTime).getTime() < 10 * 60 * 1000
   const [isJoining, setJoining] = useState<boolean>(false)
+
+  const sortedTournaments = [...tournaments].sort((a, b) =>
+    a.finished !== b.finished
+      ? a.finished
+        ? +1
+        : -1
+      : new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+  )
 
   const navigate = useNavigate()
 
@@ -160,16 +173,17 @@ export default function RoomMenu(props: {
   1000)
 
   return (
-    <Tabs className="nes-container room-menu custom-bg">
+    <Tabs className="my-container room-menu custom-bg">
       <h1>{t("rooms")}</h1>
       <TabList>
         <Tab>{t("available_rooms")}</Tab>
         <Tab>
           {t("in_game")} ({gameRooms.length})
         </Tab>
+        {tournaments.length > 0 && <Tab>{t("tournament")}</Tab>}
       </TabList>
 
-      <TabPanel>
+      <TabPanel className={"tab-available-rooms"}>
         {user ? (
           <>
             <SpecialGameCountdown />
@@ -197,7 +211,7 @@ export default function RoomMenu(props: {
           <p className="subtitle">{t("loading")}</p>
         )}
       </TabPanel>
-      <TabPanel>
+      <TabPanel className={"tab-ingame-rooms"}>
         <ul className="hidden-scrollable">
           {gameRooms.map((r) => (
             <li key={r.roomId}>
@@ -209,6 +223,17 @@ export default function RoomMenu(props: {
           ))}
         </ul>
       </TabPanel>
+      {tournaments.length > 0 && (
+        <TabPanel className={"tab-tournament"}>
+          <ul className="hidden-scrollable">
+            {sortedTournaments.map((t) => (
+              <li key={t.id}>
+                <TournamentItem tournament={t} />
+              </li>
+            ))}
+          </ul>
+        </TabPanel>
+      )}
     </Tabs>
   )
 }

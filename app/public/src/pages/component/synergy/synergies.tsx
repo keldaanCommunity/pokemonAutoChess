@@ -9,8 +9,8 @@ import "./synergies.css"
 export default function Synergies(props: { synergies: [string, number][] }) {
   const { t } = useTranslation()
   return (
-    <div className="synergies-container nes-container">
-      <h5 className="synergies-header">{t("synergies")}</h5>
+    <div className="synergies-container my-container">
+      <h2 className="synergies-header">{t("synergies")}</h2>
       {Object.keys(Synergy)
         .sort((a, b) => {
           const fa = props.synergies.find((e) => e[0] == a)

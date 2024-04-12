@@ -50,7 +50,7 @@ export default function GameStageInfo() {
 
   return (
     <>
-      <div id="game-stage-info" className="nes-container">
+      <div id="game-stage-info" className="my-container">
         <div className="stage-information" data-tooltip-id="detail-stage">
           {ReactDOM.createPortal(
             <Tooltip
@@ -136,8 +136,9 @@ export default function GameStageInfo() {
             <img src={`/assets/icons/weather/${weather.toLowerCase()}.svg`} />
           </div>
         )}
+
+        <TimerBar />
       </div>
-      <TimerBar />
     </>
   )
 }
