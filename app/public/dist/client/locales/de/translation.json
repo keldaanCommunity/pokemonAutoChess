@@ -315,6 +315,12 @@
     "EXTREME_SPEED": "Turbotempo",
     "ZAP_CANNON": "Blitzkanone",
     "PSYCHO_BOOST": "Psyschub",
+    "ICE_HAMMER": "Eishammer",
+    "POLLEN_PUFF": "Pollenknödel",
+    "PSYSTRIKE": "Psychostoß",
+    "FACADE": "Fassade",
+    "DREAM_EATER": "Traumfresser",
+    "SPARK": "Funkensprung",
     "AURA_WHEEL_HANGRY": "Aura-Rad"
   },
   "pkm": {
@@ -1061,7 +1067,18 @@
     "MAGEARNA": "Magearna",
     "IMPIDIMP": "Bähmon",
     "MORGREM": "Pelzebub",
-    "GRIMMSNARL": "Olangaar"
+    "GRIMMSNARL": "Olangaar",
+    "CRABRAWLER": "Krabbox",
+    "CRABOMINABLE": "Krawell",
+    "CUTIEFLY": "Wommel",
+    "RIBOMBEE": "Bandelby",
+    "ZANGOOSE": "Sengo",
+    "NICKIT": "Kleptifux",
+    "THIEVUL": "Gaunux",
+    "DROWZEE": "Traumato",
+    "HYPNO": "Hypno",
+    "WATTREL": "Voltrel",
+    "KILOWATTREL": "Voltrean"
   },
   "ability_description": {
     "SOFT_BOILED": "Heilt alle Statuseffekte und gewährt jedem Verbündeten [20,40,80,SP] SHIELD",
@@ -1270,7 +1287,9 @@
     "PRESENT": "Verursacht entweder [80,SP], [150,SP], [300,SP] SPECIAL oder heilt 80 HP des Ziels",
     "AERIAL_ACE": "Fügt [25,50,100,SP] TRUE zu.",
     "ASSIST": "Kopiert und benutzt die Fähigkeit von einem Zufälligen verbündeten Pokémon",
-    "AURASPHERE": "Verströmt eine Aura und projiziert Energie in einer Linie, die jedem getroffenen Gegner 3 Sekunden lang [25,50,SP] SPECIAL und SILENCE zufügt"
+    "AURASPHERE": "Verströmt eine Aura und projiziert Energie in einer Linie, die jedem getroffenen Gegner 3 Sekunden lang [25,50,SP] SPECIAL und SILENCE zufügt",
+    "SHIELDS_DOWN": "Meteno wechselt in einer zufällige Kernform.",
+    "SHIELDS_UP": "Meteno wechselt in die Meteorform."
   },
   "effect": {
     "INGRAIN": "Verwurzler",
@@ -1379,8 +1398,10 @@
     "NIGHT": "Nacht",
     "HYDRATATION": "Hydratation",
     "COOL_BREEZE": "Kühle Brise",
+    "SHINING_RAY": "Glänzender Strahl",
     "LIGHT_PULSE": "Lichtimpuls",
     "ETERNAL_LIGHT": "Ewiges Licht",
+    "MAX_ILLUMINATION": "Finale Erleuchtung",
     "QUICK_FEET": "Rasanz",
     "RUN_AWAY": "Angsthase",
     "HUSTLE": "Übereifer",
@@ -1581,7 +1602,8 @@
     "HARD_STONE": "Granitstein",
     "BIG_NUGGET": "Riesennugget",
     "INCENSE": "Rosenrauch",
-    "EXP_SHARE": "EP-Teiler"
+    "EXP_SHARE": "EP-Teiler",
+    "METEORITE": "Meteorit"
   },
   "item_description": {
     "FOSSIL_STONE": "Ein Fossil eines Pokémon, das in prähistorischen Zeiten lebte",
@@ -1703,6 +1725,7 @@
     "SHARED_VISION": "Gemeinsame Sicht: Alle Pokémon mit gemeinsamer Sicht greifen dasselbe Ziel an, wenn sie sich in Reichweite befinden",
     "WATER_SPRING": "Immer wenn ein Feind seine Fähigkeit nutzt, erhältst du 5 PP",
     "MAGIKARP": "8 Magikarp entwickeln sich in Gyarados",
+    "FEEBAS": "6 Barschwa entwickeln sich zu einem Milotic",
     "GIRATINA": "Giratina wechselt abhängig von ihrer Position auf dem Spielbrett zwischen ihrer veränderten Form und ihrer Ursprungsform",
     "UNOWN": "Unown können keine Gegenstände halten und verschwinden nach einem Kampf oder nachdem sie ihre Fähigkeit gewirkt haben",
     "GLIGAR": "Gligar sucht nach einem RAZOR_FANG. Wenn das Pokémon POISONNED ist, erhält es HP, anstatt Schaden zu erleiden.",
@@ -1913,7 +1936,10 @@
     "ARCHEOLOGIST": "Archäologe",
     "ALCHEMIST": "Alchimist",
     "DENTIST": "Zahnarzt",
-    "FISHERMAN": "Fischer"
+    "FISHERMAN": "Fischer",
+    "CHOSEN_ONE": "Auserwählter",
+    "OUTSIDER": "Außenseiter",
+    "GLUTTON": "Vielfraß"
   },
   "title_description": {
     "NOVICE": "Spielen Sie Ihr erstes Spiel",
@@ -1973,7 +1999,8 @@
     "SHINY_SEEKER": "Besitze über 30 glänzende Pokémon-Avatare",
     "ARCHEOLOGIST": "Entschlüsseln Sie die geheime Botschaft der Unowns",
     "DENTIST": "Besitze den wütenden Arbok",
-    "FISHERMAN": "Holen Sie sich einen Gyarados"
+    "FISHERMAN": "Holen Sie sich einen Gyarados",
+    "VANQUISHER": "Gewinne ein Rangmatch"
   },
   "weather": {
     "NEUTRAL": "Ruhiges Wetter",
@@ -2104,6 +2131,8 @@
   "stage": "Bühne",
   "spectate": "Zuschauen",
   "join": "Beitreten",
+  "reconnect": "Erneut verbinden",
+  "participate": "Teilnehmen",
   "just_for_fun": "Nur zum Spaß",
   "smeargle_scribble": "Farbeagle´s Gekritzel",
   "password_protected": "Private Lobby (passwortgeschützt)",
@@ -2161,6 +2190,8 @@
   "show_locked": "Gesperrt anzeigen",
   "show_unlockable": "Freischaltbar anzeigen",
   "show_unlocked": "Entsperrt anzeigen",
+  "sort_by_index": "Sortieren nach Index",
+  "sort_by_shards": "Nach Menge sortieren",
   "normal_emotions": "Normale Emotionen",
   "shiny_emotions": "Shiny Emotionen",
   "buy_booster_500": "Kaufen Sie einen neuen Booster für 500",
@@ -2311,8 +2342,11 @@
   "loading_complete": "Der Ladevorgang ist abgeschlossen, ich warte auf andere Spieler ...",
   "select_pokemon": "Wähle ein Pokémon aus",
   "search_player": "Nach Spielernamen suchen...",
+  "team_builder": "Teamplaner",
+  "titles_unlocked": "Titel freigeschaltet",
   "game-reconnect-modal-title": "Stellen Sie die Verbindung zum Spiel wieder her",
   "game-reconnect-modal-body": "Sie haben ein laufendes Spiel verlassen. Möchten Sie die Verbindung zu Ihrem vorherigen Spiel wiederherstellen?",
+  "toggle_locked": "Gesperrte Titel anzeigen",
   "map": {
     "AmpPlains": "Ampere-Ebene",
     "AppleWoods": "Apfelwald",
