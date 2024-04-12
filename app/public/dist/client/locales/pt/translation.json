@@ -1628,7 +1628,7 @@
     "CASTFORM": "Castform muda sua forma e o clima para SUN, RAIN ou SNOW, dependendo da sua sinergia dominante entre FIRE WATER ICE",
     "PHIONE": "Phione está procurando por um Aqua Egg",
     "PRIMAL": "Diz a lenda que você poderia liberar os antigos poderes desses pokémons",
-    "WONDER_GUARD": "Reduza o dano recebido e a cura recebida para 1",
+    "WONDER_GUARD": "Bloqueia 20 danos",
     "ELECTRIC_TERRAIN": "Dê ELECTRIC_FIELD ao seu Pokémon ELECTRIC, aumentando seu dano em 20%",
     "GRASSY_TERRAIN": "Dê GRASS_FIELD ao seu Pokémon GRASS, aumentando seu dano em 20%",
     "MISTY_TERRAIN": "Dê FAIRY_FIELD ao seu Pokémon FAIRY, aumentando seu dano em 20%",

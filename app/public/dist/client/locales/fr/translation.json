@@ -1775,7 +1775,7 @@
     "PHIONE": "Phione cherche un Oeuf Océan",
     "SCYTHER": "$t(pkm.SCYTHER) cherche une METAL_COAT",
     "PRIMAL": "La légende raconte qu'on pourrait libérer les pouvoirs primordiaux de ces pokémons légendaires",
-    "WONDER_GUARD": "Réduit les dégâts reçus et les soins reçus à 1",
+    "WONDER_GUARD": "Bloque 20 dégâts à chaque coup reçu",
     "ELECTRIC_TERRAIN": "Donne ELECTRIC_FIELD à vos Pokémons ELECTRIC, augmentant leurs dégâts de 20%",
     "GRASSY_TERRAIN": "Donne GRASS_FIELD à vos Pokémons GRASS, augmentant leurs dégâts de 20%",
     "MISTY_TERRAIN": "Donne FAIRY_FIELD à vos Pokémons FAIRY, augmentant leurs dégâts de 20%",

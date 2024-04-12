@@ -1809,7 +1809,7 @@
     "PHIONE": "Phione is looking for an AQUA_EGG",
     "SCYTHER": "$t(pkm.SCYTHER) is looking for a METAL_COAT",
     "PRIMAL": "Legend has it that you could unleash the ancient powers of these pokemons",
-    "WONDER_GUARD": "Reduce received damage and received healing to 1",
+    "WONDER_GUARD": "Blocks 20 damage on every hit received",
     "ELECTRIC_TERRAIN": "Give ELECTRIC_FIELD to your ELECTRIC Pokemon, boosting their damage by 20%",
     "GRASSY_TERRAIN": "Give GRASS_FIELD to your GRASS Pokemon, boosting their damage by 20%",
     "MISTY_TERRAIN": "Give FAIRY_FIELD to your FAIRY Pokemon, boosting their damage by 20%",
