@@ -99,8 +99,8 @@ export default class GameRoom extends Room<GameState> {
     selectedMap: DungeonPMDO | "random"
     gameMode: GameMode
     minRank: EloRank | null
-    tournamentId: string | null,
-    bracketId: string | null,
+    tournamentId: string | null
+    bracketId: string | null
     whenReady: (room: GameRoom) => void
   }) {
     logger.trace("create game room")
@@ -389,17 +389,14 @@ export default class GameRoom extends Room<GameState> {
       }
     })
 
-    this.onMessage(
-      Transfer.TOGGLE_ANIMATION,
-      (client: Client, message?: string) => {
-        if (client.auth) {
-          this.broadcast(Transfer.TOGGLE_ANIMATION, {
-            id: client.auth.uid,
-            emote: message
-          })
-        }
+    this.onMessage(Transfer.SHOW_EMOTE, (client: Client, message?: string) => {
+      if (client.auth) {
+        this.broadcast(Transfer.SHOW_EMOTE, {
+          id: client.auth.uid,
+          emote: message
+        })
       }
-    )
+    })
 
     this.onMessage(Transfer.UNOWN_WANDERING, async (client, unownIndex) => {
       try {
@@ -743,7 +740,7 @@ export default class GameRoom extends Room<GameState> {
         }
       }
 
-      if(this.state.gameMode === GameMode.TOURNAMENT){
+      if (this.state.gameMode === GameMode.TOURNAMENT) {
         this.presence.publish("tournament-match-end", {
           tournamentId: this.metadata?.tournamentId,
           bracketId: this.metadata?.bracketId,
