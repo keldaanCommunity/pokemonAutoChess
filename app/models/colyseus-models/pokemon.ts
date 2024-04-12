@@ -6913,7 +6913,7 @@ export class Shedinja extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.GHOST])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 10
+  hp = 100
   atk = 18
   def = 0
   speDef = 0
