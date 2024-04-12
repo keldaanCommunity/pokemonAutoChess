@@ -98,7 +98,7 @@ export function soundBoost(pokemon: PokemonEntity, board: Board) {
       pokemon.positionY,
       chimecho.positionX,
       chimecho.positionY
-    ) === 1
+    ) <= 2
   board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
     if (ally && pokemon.team === ally.team) {
       ally.status.sleep = false

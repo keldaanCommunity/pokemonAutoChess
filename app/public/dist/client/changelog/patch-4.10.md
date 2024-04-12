@@ -33,6 +33,10 @@
 - Suicune: PP 100 → 130
 - Anorith line: PP 100 → 80
 - Spheal line: PP 100 → 90
+- Revert Spinda buff from 4.6
+- Buff Chimecho: now resonates to sounds from allies in 2-cell radius
+- Nerf Pinsir: Attack 25 → 21
+- Changed Aura Wheel (Morpeko): now gives +10% attack speed
 
 # Changes to Synergies
 
