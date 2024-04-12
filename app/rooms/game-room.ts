@@ -355,10 +355,6 @@ export default class GameRoom extends Room<GameState> {
       }
     })
 
-    this.onMessage(Transfer.REQUEST_TILEMAP, (client, message) => {
-      client.send(Transfer.REQUEST_TILEMAP, this.state.tilemap)
-    })
-
     this.onMessage(Transfer.REFRESH, (client, message) => {
       if (!this.state.gameFinished && client.auth) {
         try {

@@ -91,7 +91,6 @@ export enum Transfer {
   REMOVE_BOT = "REMOVE_BOT",
   TOGGLE_READY = "TOGGLE_READY",
   TOGGLE_NO_ELO = "TOGGLE_NO_ELO",
-  REQUEST_TILEMAP = "REQUEST_TILEMAP",
   SELECT_TILEMAP = "SELECT_TILEMAP",
   REFRESH = "REFRESH",
   LOCK = "LOCK",
@@ -151,7 +150,8 @@ export enum Transfer {
   SELECT_LANGUAGE = "SELECT_LANGUAGE",
   USER_PROFILE = "USER_PROFILE",
   PICK_BERRY = "PICK_BERRY",
-  SERVER_ANNOUNCEMENT = "SERVER_ANNOUNCEMENT"
+  SERVER_ANNOUNCEMENT = "SERVER_ANNOUNCEMENT",
+  PRELOAD_MAPS = "PRELOAD_MAPS"
 }
 
 export enum AttackSprite {
@@ -287,7 +287,6 @@ export interface IGameState extends Schema {
   phase: string
   players: MapSchema<IPlayer>
   stageLevel: number
-  mapName: string
 }
 
 export interface ISimplePlayer {

@@ -39,6 +39,9 @@ import { Synergy } from "../../types/enum/Synergy"
 import GameState from "../../rooms/states/game-state"
 import { keys, values } from "../../utils/schemas"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
+import GameRoom from "../../rooms/game-room"
+import { Transfer } from "../../types"
+import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -190,7 +193,7 @@ export class MiniGame {
     this.symbols = symbols
   }
 
-  initialize(state: GameState) {
+  initialize(state: GameState, room: GameRoom) {
     const { players, stageLevel, specialGameRule } = state
     this.alivePlayers = new Array<Player>()
     players.forEach((p) => {
@@ -255,6 +258,10 @@ export class MiniGame {
 
     if (PortalCarouselStages.includes(stageLevel)) {
       this.initializePortalCarousel()
+      room.broadcast(
+        Transfer.PRELOAD_MAPS,
+        values(this.portals!).map((p) => p.map)
+      )
     } else if (ItemCarouselStages.includes(stageLevel)) {
       this.initializeItemsCarousel(stageLevel, specialGameRule)
     }
@@ -295,6 +302,28 @@ export class MiniGame {
     }
 
     this.pickRandomSynergySymbols()
+
+    // assign a map to each portal
+    const maps = new Set(Object.values(DungeonPMDO))
+    this.portals?.forEach((portal) => {
+      const symbols = this.getSymbolsByPortalId(portal.id)
+      const portalSynergies = symbols.map((s) => s.synergy)
+      let nbMaxInCommon = 0,
+        candidateMaps: DungeonPMDO[] = []
+      maps.forEach((map) => {
+        const synergies = DungeonDetails[map].synergies
+        const inCommon = synergies.filter((s) => portalSynergies.includes(s))
+        if (inCommon.length > nbMaxInCommon) {
+          nbMaxInCommon = inCommon.length
+          candidateMaps = [map]
+        } else if (inCommon.length === nbMaxInCommon) {
+          candidateMaps.push(map)
+        }
+      })
+
+      portal.map = pickRandomIn(candidateMaps)
+      maps.delete(portal.map) // a map can't be taken twice
+    })
   }
 
   update(dt: number) {
@@ -319,9 +348,7 @@ export class MiniGame {
         portal.x = body.position.x
         portal.y = body.position.y
         const t = this.engine.timing.timestamp * SYMBOL_ROTATION_SPEED
-        const symbols = values(this.symbols!).filter(
-          (symbol) => symbol.portalId === portal.id
-        )
+        const symbols = this.getSymbolsByPortalId(portal.id)
         symbols.forEach((symbol) => {
           symbol.x =
             portal.x +
@@ -442,6 +469,12 @@ export class MiniGame {
     })
   }
 
+  getSymbolsByPortalId(portalId: string): SynergySymbol[] {
+    return [...(this.symbols?.values() ?? [])].filter(
+      (symbol) => symbol.portalId === portalId
+    )
+  }
+
   applyVector(id: string, x: number, y: number) {
     const avatar = this.avatars?.get(id)
     if (avatar && avatar.timer <= 0) {
@@ -518,9 +551,12 @@ export class MiniGame {
       }
 
       if (avatar.portalId && player) {
-        const symbols = [...(this.symbols?.values() ?? [])].filter(
-          (symbol) => symbol.portalId === avatar.portalId
-        )
+        const portal = this.portals?.get(avatar.portalId)
+        if (portal) {
+          player.map = portal.map
+        }
+
+        const symbols = this.getSymbolsByPortalId(avatar.portalId)
         if (state.stageLevel === PortalCarouselStages[0]) {
           state.shop.assignUniquePropositions(
             player,

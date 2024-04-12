@@ -28,7 +28,7 @@
   justify-content: space-between;
 }
 
-.auth-page h1 {
+.auth-page header > h1 {
   font-size: 5vw;
   color: white;
   text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
@@ -78,7 +78,7 @@
     display: block;
   }
 
-  .auth-page h1 {
+  .auth-page header > h1 {
     font-size: 2em;
   }
 

@@ -21,6 +21,7 @@ export default class ItemsContainer extends GameObjects.Container {
 
     this.pokemonId = pokemonId
     this.playerId = playerId
+    this.setDepth(2)
     scene.add.existing(this)
     this.render(inventory)
   }

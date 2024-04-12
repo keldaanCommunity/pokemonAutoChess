@@ -13,6 +13,7 @@ export class Portal extends GameObjects.Container {
     this.sprite.anims.play("portal")
     this.sprite.setScale(2)
     this.add(this.sprite)
+    this.setDepth(2)
     this.scene.add.existing(this)
   }
 }
@@ -33,6 +34,7 @@ export class SynergySymbol
   ) {
     super(scene, x, y, "types", synergy + ".png")
     this.id = id
+    this.setDepth(2)
     this.scene.add.existing(this)
   }
 }

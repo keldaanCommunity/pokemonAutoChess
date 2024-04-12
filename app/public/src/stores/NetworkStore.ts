@@ -174,9 +174,6 @@ export const networkSlice = createSlice({
     toggleEloRoom: (state, action: PayloadAction<boolean>) => {
       state.preparation?.send(Transfer.TOGGLE_NO_ELO, action.payload)
     },
-    requestTilemap: (state) => {
-      state.game?.send(Transfer.REQUEST_TILEMAP)
-    },
     selectTilemap: (state, action: PayloadAction<DungeonPMDO | "random">) => {
       state.preparation?.send(Transfer.SELECT_TILEMAP, action.payload)
     },
@@ -346,7 +343,6 @@ export const {
   listBots,
   toggleReady,
   toggleEloRoom,
-  requestTilemap,
   selectTilemap,
   itemClick,
   shopClick,

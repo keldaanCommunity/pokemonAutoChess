@@ -22,7 +22,6 @@ import {
   Transfer
 } from "../../../types"
 import { RequiredStageLevelForXpElligibility } from "../../../types/Config"
-import { PokemonActionState } from "../../../types/enum/Game"
 import { Pkm } from "../../../types/enum/Pokemon"
 import { getRankLabel } from "../../../types/strings/Strings"
 import { logger } from "../../../utils/logger"
@@ -58,7 +57,6 @@ import {
   setItemsProposition,
   setLife,
   setLoadingProgress,
-  setMapName,
   setMoney,
   setNoELO,
   setOpponentAvatar,
@@ -79,12 +77,7 @@ import {
   setSynergies,
   setWeather
 } from "../stores/GameStore"
-import {
-  joinGame,
-  logIn,
-  requestTilemap,
-  setProfile
-} from "../stores/NetworkStore"
+import { joinGame, logIn, setProfile } from "../stores/NetworkStore"
 import GameDpsMeter from "./component/game/game-dps-meter"
 import GameItemsProposition from "./component/game/game-items-proposition"
 import GameLoadingScreen from "./component/game/game-loading-screen"
@@ -98,6 +91,8 @@ import GameToasts from "./component/game/game-toasts"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import { FIREBASE_CONFIG } from "./utils/utils"
+import { DungeonDetails } from "../../../types/enum/Dungeon"
+import { playMusic } from "./utils/audio"
 
 let gameContainer: GameContainer
 
@@ -271,7 +266,6 @@ export default function Game() {
     ) {
       logger.debug("initializing game")
       initialized.current = true
-      dispatch(requestTilemap())
 
       gameContainer = new GameContainer(container.current, uid, room)
 
@@ -300,8 +294,18 @@ export default function Game() {
         setModalInfo(message.info)
         setModalVisible(true)
       })
-      room.onMessage(Transfer.REQUEST_TILEMAP, (tilemap) => {
-        gameContainer.setTilemap(tilemap)
+      room.onMessage(Transfer.PRELOAD_MAPS, async (maps) => {
+        logger.info("preloading maps", maps)
+        const gameScene = getGameScene()
+        if (gameScene) {
+          gameScene.load.reset()
+          await gameScene.preloadMaps(maps)
+          gameScene.load.once("complete", () => {
+            const gc = getGameContainer()
+            gc && gc.player && gameScene.setMap(gc.player.map)
+          })
+          gameScene.load.start()
+        }
       })
       room.onMessage(Transfer.SHOW_EMOTE, (message) => {
         const g = getGameScene()
@@ -414,10 +418,6 @@ export default function Game() {
 
       room.state.listen("stageLevel", (value) => {
         dispatch(setStageLevel(value))
-      })
-
-      room.state.listen("mapName", (value) => {
-        dispatch(setMapName(value))
       })
 
       room.state.listen("noElo", (value) => {
@@ -626,6 +626,15 @@ export default function Game() {
         })
         player.listen("loadingProgress", (value) => {
           dispatch(setLoadingProgress({ id: player.id, value: value }))
+        })
+        player.listen("map", (newMap) => {
+          if (player.id === uid) {
+            const gameScene = getGameScene()
+            if (gameScene) {
+              gameScene.setMap(newMap)
+              playMusic(gameScene, DungeonDetails[newMap].music)
+            }
+          }
         })
 
         const fields: NonFunctionPropNames<IPlayer>[] = [

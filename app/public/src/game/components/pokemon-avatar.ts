@@ -48,6 +48,7 @@ export default class PokemonAvatar extends PokemonSprite {
       this.drawLifebar()
     }
     this.registerKeys()
+    this.setDepth(2)
     this.sendEmote = throttle(this.sendEmote, 1000).bind(this)
   }
 

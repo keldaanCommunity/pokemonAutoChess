@@ -52,7 +52,6 @@ class GameContainer {
   game: Phaser.Game | undefined
   player: Player | undefined
   simulation: Simulation | undefined
-  tilemap: DesignTiled | undefined
   uid: string
   spectate: boolean
   constructor(div: HTMLDivElement, uid: string, room: Room<GameState>) {
@@ -254,7 +253,6 @@ class GameContainer {
     this.game = new Phaser.Game(config)
     this.game.scene.start("gameScene", {
       room: this.room,
-      tilemap: this.tilemap,
       spectate: this.spectate
     })
     this.game.scale.on("resize", this.resize, this)
@@ -355,23 +353,10 @@ class GameContainer {
     this.room.onError((err) => logger.error("room error", err))
   }
 
-  setTilemap(tilemap) {
-    this.tilemap = tilemap
-    if (this.player || (this.spectate && this.room.state.players.size > 0)) {
-      // logger.debug('setTilemap', this.player, this.tilemap);
-      this.initializeGame()
-    }
-  }
-
   initializePlayer(player: Player) {
     //logger.debug("initializePlayer", player, player.id)
-    if (this.uid == player.id) {
+    if (this.uid == player.id || (this.spectate && !this.player)) {
       this.setPlayer(player)
-      if (this.tilemap) {
-        // logger.debug('initializePlayer', this.player, this.tilemap);
-        this.initializeGame()
-      }
-    } else if (this.spectate && this.tilemap) {
       this.initializeGame()
     }
 
@@ -460,7 +445,7 @@ class GameContainer {
   initializeSpectactor(uid: string) {
     if (this.uid === uid) {
       this.spectate = true
-      if (this.tilemap && this.room.state.players.size > 0) {
+      if (this.room.state.players.size > 0) {
         this.initializeGame()
       }
     }

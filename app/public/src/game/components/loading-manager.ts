@@ -1,6 +1,8 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
 import AnimatedTiles from "phaser-animated-tiles-phaser3.5/dist/AnimatedTiles.min.js"
+import { DungeonDetails } from "../../../../types/enum/Dungeon"
+import { values } from "../../../../utils/schemas"
 import indexList from "../../../src/assets/pokemons/indexList.json"
 import atlas from "../../assets/atlas.json"
 import { preloadMusic } from "../../pages/utils/audio"
@@ -29,7 +31,7 @@ export default class LoadingManager {
     this.preload()
   }
 
-  preload() {
+  async preload() {
     const scene = this.scene
     scene.load.scenePlugin(
       "animatedTiles",
@@ -46,18 +48,11 @@ export default class LoadingManager {
       )
     })
 
-    if (scene instanceof GameScene && scene.tilemap) {
-      if (scene.dungeonMusic) {
-        preloadMusic(scene, scene.dungeonMusic)
-      }
-      scene.tilemap.tilesets.forEach((t) => {
-        scene.load.image(
-          t.name,
-          "/assets/tilesets/" + scene.dungeon + "/" + t.image
-        )
-      })
-
-      scene.load.tilemapTiledJSON("map", scene.tilemap)
+    if (scene instanceof GameScene) {
+      const players = values(scene.room?.state.players!)
+      const player = players.find((p) => p.id === scene.uid)
+      await scene.preloadMaps(players.map((p) => p.map))
+      if (player) preloadMusic(scene, DungeonDetails[player.map].music)
     }
     scene.load.image("rain", "/assets/ui/rain.png")
     scene.load.image("sand", "/assets/ui/sand.png")
