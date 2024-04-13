@@ -26,6 +26,8 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - New ability for Mewtwo: Psystrike
 - New ability for Treecko: Leaf Blade
 - Improve targeting of Spacial Rend (Palkia)
+- Changed Lock-on ability (Genesect): no longer inflict Armor Reduction, 100→200% additional true damage
+- Buff Zorua and Hisuan Zorua lines: PP 100 → 85
 - New ability for Kabuto: Protect
 - New ability for Kabutops: Slashing Claw
 - Totodile line: PP 90 → 100

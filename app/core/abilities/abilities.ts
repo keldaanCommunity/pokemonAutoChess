@@ -5562,20 +5562,20 @@ export class AnchorShotStrategy extends AbilityStrategy {
       pokemon.positionX,
       pokemon.positionY
     )
-    const potentials = shuffleArray(
+    const emptyCellsAround = shuffleArray(
       adjacentCells
         .filter((v) => v.value === undefined)
         .map((v) => ({ x: v.x, y: v.y }))
     )
-    if (potentials.length > 0) {
-      const potential = potentials[0]
+    if (emptyCellsAround.length > 0) {
+      const destination = emptyCellsAround[0]
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
         id: pokemon.simulation.id,
         skill: Ability.ANCHOR_SHOT,
         targetX: farthestTarget.positionX,
         targetY: farthestTarget.positionY
       })
-      farthestTarget.moveTo(potential.x, potential.y, board)
+      farthestTarget.moveTo(destination.x, destination.y, board)
       farthestTarget.handleSpecialDamage(
         damage,
         board,
@@ -5583,6 +5583,7 @@ export class AnchorShotStrategy extends AbilityStrategy {
         pokemon,
         crit
       )
+      farthestTarget.cooldown = min(500)(farthestTarget.cooldown)
     }
   }
 }
