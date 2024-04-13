@@ -1,9 +1,8 @@
-import { compressPng, compressJpg } from "@assetpack/plugin-compress"
-import { audio } from "@assetpack/plugin-ffmpeg"
-import { json } from "@assetpack/plugin-json"
-import { texturePacker } from "./plugin-texturepacker-fork/dist/es/index.js"
 import { path } from "@assetpack/core"
+import { compressJpg, compressPng } from "@assetpack/plugin-compress"
+import { json } from "@assetpack/plugin-json"
 import fs from "fs-extra"
+import { texturePacker } from "./plugin-texturepacker-fork/dist/es/index.js"
 
 export default {
   entry: "../../app/public/src/assets",
@@ -11,29 +10,29 @@ export default {
   plugins: {
     compressPng: compressPng(),
     compressJpg: compressJpg(),
-    audio: audio({
-      inputs: [".mp3", ".ogg", ".wav"],
-      outputs: [
-        {
-          formats: [".mp3"],
-          recompress: false,
-          options: {
-            audioBitrate: 96,
-            audioChannels: 1,
-            audioFrequency: 48000
-          }
-        },
-        {
-          formats: [".ogg"],
-          recompress: false,
-          options: {
-            audioBitrate: 96,
-            audioChannels: 1,
-            audioFrequency: 48000
-          }
-        }
-      ]
-    }),
+    // audio: audio({
+    //   inputs: [".mp3", ".ogg", ".wav"],
+    //   outputs: [
+    //     {
+    //       formats: [".mp3"],
+    //       recompress: false,
+    //       options: {
+    //         audioBitrate: 96,
+    //         audioChannels: 1,
+    //         audioFrequency: 48000
+    //       }
+    //     },
+    //     {
+    //       formats: [".ogg"],
+    //       recompress: false,
+    //       options: {
+    //         audioBitrate: 96,
+    //         audioChannels: 1,
+    //         audioFrequency: 48000
+    //       }
+    //     }
+    //   ]
+    // }),
     json: json(),
     texturePacker: texturePacker({
       texturePacker: {
