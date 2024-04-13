@@ -19,6 +19,7 @@ import { TournamentSchema } from "../models/colyseus-models/tournament"
 import { Effects } from "../models/effects"
 import GameRoom from "../rooms/game-room"
 import { Ability } from "./enum/Ability"
+import { DungeonPMDO } from "./enum/Dungeon"
 import { Effect } from "./enum/Effect"
 import { Emotion } from "./enum/Emotion"
 import {
@@ -372,6 +373,7 @@ export interface IPlayer {
   loadingProgress: number
   effects: Effects
   isBot: boolean
+  map: DungeonPMDO
 }
 
 export interface IPokemon {

@@ -18,8 +18,9 @@ import { getAvatarSrc, getPortraitSrc } from "../../../utils"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import SynergyIcon from "../icons/synergy-icon"
-import "./game-stage-info.css"
 import TimerBar from "./game-timer-bar"
+import "./game-stage-info.css"
+import { DungeonDetails } from "../../../../../types/enum/Dungeon"
 
 export default function GameStageInfo() {
   const { t } = useTranslation()
@@ -28,6 +29,11 @@ export default function GameStageInfo() {
   const title = useAppSelector((state) => state.game.currentPlayerTitle)
   const avatar = useAppSelector((state) => state.game.currentPlayerAvatar)
   const weather = useAppSelector((state) => state.game.weather)
+
+  const currentPlayer = useAppSelector((state) =>
+    state.game.players.find((p) => p.id === state.game.currentPlayerId)
+  )
+  const map = currentPlayer?.map
 
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
   const isPVE = stageLevel in PVEStages
@@ -113,6 +119,28 @@ export default function GameStageInfo() {
           )}
         </div>
 
+        {map && (
+          <div className="map-information" data-tooltip-id="detail-map">
+            {ReactDOM.createPortal(
+              <Tooltip
+                id="detail-map"
+                className="custom-theme-tooltip"
+                place="bottom"
+              >
+                <span style={{ verticalAlign: "middle" }}>
+                  {DungeonDetails[map].synergies.map((synergy) => (
+                    <SynergyIcon type={synergy} />
+                  ))}
+                  {t(`map.${map}`)}
+                </span>
+                <p>{addIconsToDescription(t(`map_description.${map}`))}</p>
+              </Tooltip>,
+              document.body
+            )}
+            <img src={`/assets/ui/world.svg`} />
+          </div>
+        )}
+
         {opponentName != "" && (
           <div className="weather-information" data-tooltip-id="detail-weather">
             {ReactDOM.createPortal(
@@ -121,7 +149,7 @@ export default function GameStageInfo() {
                 className="custom-theme-tooltip"
                 place="bottom"
               >
-                <span>
+                <span style={{ verticalAlign: "middle" }}>
                   <SynergyIcon
                     type={SynergyAssociatedToWeather.get(weather)!}
                   />

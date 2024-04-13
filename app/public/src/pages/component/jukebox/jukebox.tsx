@@ -77,6 +77,7 @@ export default function Jukebox(props: {
         <select
           value={music}
           onChange={(e) => changeMusic(e.target.value as DungeonMusic)}
+          className="is-light"
         >
           {MUSICS.map((m) => (
             <option key={m} value={m}>
