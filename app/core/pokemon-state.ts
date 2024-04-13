@@ -46,10 +46,6 @@ export default class PokemonState {
         heal *= 0.5
       }
 
-      if (pokemon.passive === Passive.WONDER_GUARD) {
-        heal = 1
-      }
-
       heal = Math.round(heal)
       const healTaken = Math.min(pokemon.hp - pokemon.life, heal)
 
@@ -206,6 +202,11 @@ export default class PokemonState {
         pokemon.count.fightingBlockCount++
       }
 
+      if(pokemon.passive === Passive.WONDER_GUARD){
+        const damageBlocked = 20
+        reducedDamage = reducedDamage - damageBlocked
+      }
+
       reducedDamage = min(1)(reducedDamage) // should deal 1 damage at least
 
       if (isNaN(reducedDamage)) {
@@ -235,10 +236,6 @@ export default class PokemonState {
         takenDamage += damageOnShield
         pokemon.shield = pokemon.shield - damageOnShield
         residualDamage = min(0)(reducedDamage - damageOnShield)
-      }
-
-      if (pokemon.passive == Passive.WONDER_GUARD) {
-        residualDamage = max(1)(residualDamage)
       }
 
       takenDamage += Math.min(residualDamage, pokemon.life)
@@ -498,6 +495,15 @@ export default class PokemonState {
 
     if (pokemon.manaCooldown <= 0) {
       pokemon.addPP(10)
+      if (pokemon.effects.has(Effect.RAIN_DANCE)) {
+        pokemon.addPP(4)
+      }
+      if (pokemon.effects.has(Effect.DRIZZLE)) {
+        pokemon.addPP(7)
+      }
+      if (pokemon.effects.has(Effect.PRIMORDIAL_SEA)) {
+        pokemon.addPP(10)
+      }
       if (pokemon.simulation.weather === Weather.RAIN) {
         pokemon.addPP(3)
       }

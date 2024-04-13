@@ -59,7 +59,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     super(scene, x, y)
 
     this.dom = document.createElement("div")
-    this.dom.className = "my-container"
+    this.dom.className = "my-container game-pokemon-detail-tooltip"
     const wrap = document.createElement("div")
     wrap.className = "game-pokemon-detail"
 

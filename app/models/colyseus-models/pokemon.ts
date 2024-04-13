@@ -3117,7 +3117,7 @@ export class Spheal extends Pokemon {
   atk = 6
   def = 3
   speDef = 2
-  maxPP = 100
+  maxPP = 90
   range = 1
   skill = Ability.ICICLE_CRASH
   attackSprite = AttackSprite.ICE_MELEE
@@ -3132,7 +3132,7 @@ export class Sealeo extends Pokemon {
   atk = 12
   def = 3
   speDef = 2
-  maxPP = 100
+  maxPP = 90
   range = 1
   skill = Ability.ICICLE_CRASH
   attackSprite = AttackSprite.ICE_MELEE
@@ -3146,7 +3146,7 @@ export class Walrein extends Pokemon {
   atk = 24
   def = 3
   speDef = 3
-  maxPP = 100
+  maxPP = 90
   range = 1
   skill = Ability.ICICLE_CRASH
   attackSprite = AttackSprite.ICE_MELEE
@@ -3874,7 +3874,7 @@ export class Totodile extends Pokemon {
   atk = 7
   def = 2
   speDef = 2
-  maxPP = 90
+  maxPP = 100
   range = 1
   skill = Ability.WATERFALL
   attackSprite = AttackSprite.WATER_MELEE
@@ -3893,7 +3893,7 @@ export class Croconaw extends Pokemon {
   atk = 15
   def = 3
   speDef = 3
-  maxPP = 90
+  maxPP = 100
   range = 1
   skill = Ability.WATERFALL
   attackSprite = AttackSprite.WATER_MELEE
@@ -3911,7 +3911,7 @@ export class Feraligatr extends Pokemon {
   atk = 28
   def = 5
   speDef = 5
-  maxPP = 90
+  maxPP = 100
   range = 1
   skill = Ability.WATERFALL
   attackSprite = AttackSprite.WATER_MELEE
@@ -4652,7 +4652,7 @@ export class Pinsir extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 190
-  atk = 25
+  atk = 21
   def = 3
   speDef = 3
   maxPP = 85
@@ -4726,7 +4726,7 @@ export class Suicune extends Pokemon {
   atk = 30
   def = 5
   speDef = 5
-  maxPP = 100
+  maxPP = 130
   range = 1
   skill = Ability.AQUA_JET
   attackSprite = AttackSprite.WATER_MELEE
@@ -5616,7 +5616,7 @@ export class Lapras extends Pokemon {
   atk = 12
   def = 5
   speDef = 6
-  maxPP = 100
+  maxPP = 110
   range = 1
   skill = Ability.DIVE
   attackSprite = AttackSprite.WATER_MELEE
@@ -6261,7 +6261,7 @@ export class Anorith extends Pokemon {
   atk = 6
   def = 2
   speDef = 1
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.ROCK_SMASH
   additional = true
@@ -6276,7 +6276,7 @@ export class Armaldo extends Pokemon {
   atk = 15
   def = 3
   speDef = 2
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.ROCK_SMASH
   additional = true
@@ -6521,9 +6521,9 @@ export class Kabuto extends Pokemon {
   atk = 8
   def = 3
   speDef = 3
-  maxPP = 90
+  maxPP = 80
   range = 1
-  skill = Ability.HEAL_BLOCK
+  skill = Ability.PROTECT
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
@@ -6536,9 +6536,9 @@ export class Kabutops extends Pokemon {
   atk = 22
   def = 4
   speDef = 4
-  maxPP = 90
+  maxPP = 80
   range = 1
-  skill = Ability.HEAL_BLOCK
+  skill = Ability.SLASHING_CLAW
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
@@ -6654,9 +6654,9 @@ export class Relicanth extends Pokemon {
   stars = 3
   hp = 220
   atk = 13
-  def = 6
+  def = 7
   speDef = 3
-  maxPP = 70
+  maxPP = 100
   range = 1
   skill = Ability.ROCK_TOMB
   attackSprite = AttackSprite.WATER_MELEE
@@ -6913,7 +6913,7 @@ export class Shedinja extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.GHOST])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 10
+  hp = 100
   atk = 18
   def = 0
   speDef = 0
@@ -8797,7 +8797,7 @@ export class Wailmer extends Pokemon {
   atk = 6
   def = 2
   speDef = 2
-  maxPP = 110
+  maxPP = 120
   range = 1
   skill = Ability.DIVE
   additional = true
@@ -8812,7 +8812,7 @@ export class Wailord extends Pokemon {
   atk = 11
   def = 3
   speDef = 3
-  maxPP = 110
+  maxPP = 120
   range = 1
   skill = Ability.DIVE
   additional = true
@@ -10821,7 +10821,7 @@ export class Spinda extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 250
-  atk = 25
+  atk = 20
   def = 5
   speDef = 5
   maxPP = 100

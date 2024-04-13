@@ -3,16 +3,25 @@ const os = require("os");
 
 module.exports = {
     apps: [{
-        port        : 9000,
         name        : "colyseus",
-        cwd         : "./app/public/dist/server/app",
-        script      : "index.js", // your entrypoint file
+        script      : "./app/public/dist/server/app/index.js", // your entrypoint file
         instances   : os.cpus().length,
         exec_mode   : "fork",         // IMPORTANT: do not use cluster mode.
-        watch       : true,
-        env: {
-            DEBUG: "colyseus:errors",
+        watch       : false,
+        time        : true,
+        wait_ready  : true,
+        env_production: {
             NODE_ENV: "production"
         }
-    }]
+    }],  
+    deploy : {  
+      production : {  
+        "user" : "deploy",  
+        "host" : ["45.76.130.174"],  
+        "ref"  : "origin/master",  
+        "repo" : "git@github.com:keldaanCommunity/pokemonAutoChess.git",  
+        "path" : "/home/deploy",  
+        "post-deploy" : "npm install && npm run build && npm run colyseus-post-deploy"  
+      }  
+    }  
 }

@@ -1,7 +1,8 @@
 node_modules/
 .vscode/
 *.env
-*.env.development
+.env.development
+.env.production
 app/public/dist/server/**/*.js
 app/public/dist/server/**/*.js.map
 app/public/dist/**/*.d.ts

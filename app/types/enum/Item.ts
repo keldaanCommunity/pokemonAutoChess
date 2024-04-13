@@ -94,7 +94,7 @@ export enum Item {
 export const AllItems: Item[] = Object.values(Item)
 
 // should be excluded from carousels
-export const SpecialItems: Item[] = [Item.COMFEY]
+export const SpecialItems: Item[] = [Item.COMFEY, Item.METEORITE]
 
 export const BasicItems: Item[] = [
   Item.FOSSIL_STONE,

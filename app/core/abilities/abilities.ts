@@ -1005,11 +1005,11 @@ export class PsychUpStrategy extends AbilityStrategy {
       duration = 8000
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerSilence(duration, pokemon)
+    target.status.triggerSilence(duration, target, pokemon)
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     cells.forEach((cell) => {
       if (cell && cell.value && cell.value.team !== pokemon.team) {
-        cell.value.status.triggerSilence(duration, pokemon)
+        cell.value.status.triggerSilence(duration, cell.value, pokemon)
       }
     })
   }
@@ -1380,7 +1380,7 @@ export class GrowlStrategy extends AbilityStrategy {
     duration = Math.round(duration * (1 + pokemon.ap / 100))
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
-        tg.status.triggerFlinch(duration)
+        tg.status.triggerFlinch(duration, tg, pokemon)
       }
     })
   }
@@ -1924,7 +1924,7 @@ export class RockSmashStrategy extends AbilityStrategy {
     }
 
     target.handleSpecialDamage(d, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerSilence(s, pokemon)
+    target.status.triggerSilence(s, target, pokemon)
   }
 }
 
@@ -1983,25 +1983,12 @@ export class HealBlockStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
 
-    let timer = 0
-    switch (pokemon.stars) {
-      case 1:
-        timer = 5000
-        break
-      case 2:
-        timer = 10000
-        break
-      case 3:
-        timer = 15000
-        break
-      default:
-        break
-    }
+    const duration = [5000, 10000, 15000][pokemon.stars - 1] ?? 15000
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.status.triggerWound(timer, cell.value, pokemon)
+        cell.value.status.triggerWound(duration, cell.value, pokemon)
       }
     })
   }
@@ -2084,7 +2071,7 @@ export class NightmareStrategy extends AbilityStrategy {
             true
           )
         }
-        enemy.status.triggerSilence(duration, pokemon)
+        enemy.status.triggerSilence(duration, enemy, pokemon)
       }
     })
   }
@@ -2211,7 +2198,9 @@ export class ProtectStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const duration = Math.round(5000 * (1 + pokemon.ap / 200))
+    const duration = Math.round(
+      ([1000, 3000, 5000][pokemon.stars - 1] ?? 5000) * (1 + pokemon.ap / 200)
+    )
     pokemon.status.triggerProtect(duration)
   }
 }
@@ -2286,7 +2275,7 @@ export class ConfusionStrategy extends AbilityStrategy {
         crit
       )
     } else {
-      target.status.triggerSilence(timer, target)
+      target.status.triggerSilence(timer, target, pokemon)
       target.status.triggerConfusion(timer, target)
     }
   }
@@ -3105,7 +3094,7 @@ export class SmokeScreenStrategy extends AbilityStrategy {
             crit
           )
           cell.value.status.triggerBurn(duration, cell.value, pokemon)
-          cell.value.status.triggerArmorReduction(duration)
+          cell.value.status.triggerArmorReduction(duration, cell.value)
           pokemon.simulation.room.broadcast(Transfer.ABILITY, {
             id: pokemon.simulation.id,
             skill: pokemon.skill,
@@ -3139,7 +3128,7 @@ export class BiteStrategy extends AbilityStrategy {
       crit
     )
     pokemon.handleHeal(Math.ceil(0.3 * takenDamage), pokemon, 1)
-    if (takenDamage > 0) pokemon.status.triggerFlinch(5000)
+    if (takenDamage > 0) target.status.triggerFlinch(5000, target, pokemon)
   }
 }
 
@@ -4116,7 +4105,7 @@ export class FakeTearsStrategy extends AbilityStrategy {
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
-        value.status.triggerArmorReduction(3000)
+        value.status.triggerArmorReduction(3000, value)
         pokemon.simulation.room.broadcast(Transfer.ABILITY, {
           id: pokemon.simulation.id,
           skill: pokemon.skill,
@@ -4438,7 +4427,7 @@ export class ForecastStrategy extends AbilityStrategy {
           p.addAttack(3, true)
         }
         if (pokemon.name === Pkm.CASTFORM_RAIN) {
-          p.addPP(Math.round(10 * (1 + pokemon.ap / 100)))
+          p.addPP(Math.round(5 * (1 + pokemon.ap / 100)))
         }
         if (pokemon.name === Pkm.CASTFORM_HAIL) {
           p.addDefense(2, true)
@@ -4949,7 +4938,7 @@ export class GigatonHammerStrategy extends AbilityStrategy {
     if (pokemon.stars === 3) {
       damage = 400
     }
-    pokemon.status.triggerSilence(6000, pokemon)
+    pokemon.status.triggerSilence(6000, pokemon, pokemon)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -6108,7 +6097,7 @@ export class MagicalLeafStrategy extends AbilityStrategy {
     )
     cells.forEach((cell) => {
       if (cell.value && cell.value.team != pokemon.team) {
-        cell.value.status.triggerArmorReduction(3000)
+        cell.value.status.triggerArmorReduction(3000, cell.value)
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -6439,6 +6428,7 @@ export class SandTombStrategy extends AbilityStrategy {
     )
     target.status.triggerSilence(
       pokemon.stars === 3 ? 8000 : pokemon.stars === 2 ? 5000 : 3000,
+      target,
       pokemon
     )
     target.handleSpecialDamage(
@@ -6617,7 +6607,7 @@ export class AirSlashStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = pokemon.stars === 3 ? 100 : pokemon.stars === 2 ? 50 : 25
-    target.status.triggerFlinch(7000)
+    target.status.triggerFlinch(7000, target, pokemon)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -6659,7 +6649,7 @@ export class EggsplosionStrategy extends AbilityStrategy {
       .concat(target)
       .forEach((v) => {
         if (v) {
-          v.status.triggerArmorReduction(4000)
+          v.status.triggerArmorReduction(4000, v)
         }
       })
   }
@@ -6702,7 +6692,7 @@ export class VineWhipStrategy extends AbilityStrategy {
       .concat(target)
       .forEach((v) => {
         if (v) {
-          v.status.triggerFlinch(3000)
+          v.status.triggerFlinch(3000, v, pokemon)
         }
       })
     target.handleSpecialDamage(100, board, AttackType.SPECIAL, pokemon, crit)
@@ -6786,7 +6776,7 @@ export class MagicPowderStrategy extends AbilityStrategy {
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
-          cell.value.status.triggerSilence(silenceDuration, pokemon)
+          cell.value.status.triggerSilence(silenceDuration, cell.value, pokemon)
         }
       })
   }
@@ -7080,7 +7070,7 @@ export class AuraSphereStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        targetInLine.status.triggerSilence(3000, pokemon)
+        targetInLine.status.triggerSilence(3000, targetInLine, pokemon)
       }
     })
   }
@@ -7349,6 +7339,7 @@ export class AuraWheelStrategy extends AbilityStrategy {
       pokemon.name = Pkm.MORPEKO
       pokemon.index = PkmIndex[Pkm.MORPEKO]
     }
+    pokemon.addAttackSpeed(10, true)
 
     target.handleSpecialDamage(
       60,
@@ -7788,7 +7779,7 @@ export class ZapCannonStrategy extends AbilityStrategy {
       crit,
       true
     )
-    target.status.triggerArmorReduction(duration)
+    target.status.triggerArmorReduction(duration, target)
     target.status.triggerParalysis(duration, target)
   }
 }

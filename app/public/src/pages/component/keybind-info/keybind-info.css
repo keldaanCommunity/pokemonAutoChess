@@ -3,27 +3,19 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  font-size: 1.5rem;
-  width: 400px;
-  padding: 1.5rem 2rem;
-  color: white;
 }
 
-.keybind-table {
-  width: 100%;
+.keybind-container dl {
+  display: grid;
+  grid-template-columns: max-content auto;
+  gap: 0.5em;
 }
 
-.keybind-table-header {
-  border-bottom: 4px solid #4f5160;
+.keybind-container dt {
+  grid-column-start: 1;
+  text-align: right;
 }
 
-.keybind-table th:first-child,
-.keybind-table td:first-child {
-  text-align: center;
-  border-right: 4px solid #4f5160;
-}
-
-.keybind-table th:last-child,
-.keybind-table td:last-child {
-  padding-left: 12px;
+.keybind-container dd {
+  grid-column-start: 2;
 }

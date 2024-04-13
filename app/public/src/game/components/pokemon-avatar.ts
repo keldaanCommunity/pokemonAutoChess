@@ -1,15 +1,16 @@
 import { GameObjects } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
-import { IPokemonAvatar } from "../../../../types"
+import { AvatarEmotions, Emotion, IPokemonAvatar } from "../../../../types"
 import { GamePhaseState } from "../../../../types/enum/Game"
 import { playSound, SOUNDS } from "../../pages/utils/audio"
 import store from "../../stores"
-import { toggleAnimation } from "../../stores/NetworkStore"
-import { getAvatarSrc } from "../../utils"
+import { showEmote } from "../../stores/NetworkStore"
+import { getAvatarSrc, getAvatarString } from "../../utils"
 import GameScene from "../scenes/game-scene"
 import EmoteMenu from "./emote-menu"
 import LifeBar from "./life-bar"
 import PokemonSprite from "./pokemon"
+import { throttle } from "../../../../utils/function"
 
 export default class PokemonAvatar extends PokemonSprite {
   circleHitbox: GameObjects.Ellipse | undefined
@@ -47,6 +48,7 @@ export default class PokemonAvatar extends PokemonSprite {
       this.drawLifebar()
     }
     this.registerKeys()
+    this.sendEmote = throttle(this.sendEmote, 1000).bind(this)
   }
 
   registerKeys() {
@@ -55,16 +57,51 @@ export default class PokemonAvatar extends PokemonSprite {
         this.playAnimation()
       }
     })
-    this.scene.input.keyboard!.on("keydown-S", () => {
-      const scene = this.scene as GameScene
-      if (
-        this.isCurrentPlayerAvatar &&
-        this.scene &&
-        scene.room?.state.phase !== GamePhaseState.MINIGAME &&
-        this.scene.game
-      ) {
-        this.toggleEmoteMenu()
+    this.scene.input.keyboard!.on("keydown-CTRL", () => {
+      if (this.isCurrentPlayerAvatar && this.scene?.game) {
+        this.showEmoteMenu()
       }
+    })
+
+    this.scene.input.keyboard!.on("keyup-CTRL", () => {
+      this.hideEmoteMenu()
+    })
+
+    const NUM_KEYS = [
+      "ONE",
+      "TWO",
+      "THREE",
+      "FOUR",
+      "FIVE",
+      "SIX",
+      "SEVEN",
+      "EIGHT",
+      "NINE"
+    ]
+    NUM_KEYS.forEach((keycode, i) => {
+      const onKeydown = (event) => {
+        console.log("onkeydown", event, {
+          cpa: this.isCurrentPlayerAvatar,
+          sg: this.scene?.game,
+          ctrl: event.ctrlKey
+        })
+        if (this.isCurrentPlayerAvatar && this.scene?.game && event.ctrlKey) {
+          this.sendEmote(AvatarEmotions[i])
+        }
+      }
+      this.scene.input.keyboard!.on("keydown-" + keycode, onKeydown)
+      this.scene.input.keyboard!.on("keydown-NUMPAD_" + keycode, onKeydown)
+    })
+
+    // do not forget to clean up parent listeners after destroy
+    this.sprite.once("destroy", () => {
+      this.scene.input.keyboard!.off("keydown-A")
+      this.scene.input.keyboard!.off("keydown-CTRL")
+      this.scene.input.keyboard!.off("keyup-CTRL")
+      NUM_KEYS.forEach((keycode) => {
+        this.scene.input.keyboard!.off("keydown-" + keycode)
+        this.scene.input.keyboard!.off("keydown-NUMPAD_" + keycode)
+      })
     })
   }
 
@@ -146,19 +183,49 @@ export default class PokemonAvatar extends PokemonSprite {
     this.add(this.lifebar)
   }
 
-  toggleEmoteMenu() {
+  showEmoteMenu() {
+    if (this.isCurrentPlayerAvatar && !this.emoteMenu) {
+      this.emoteMenu = new EmoteMenu(
+        this.scene,
+        this.index,
+        this.shiny,
+        this.sendEmote
+      )
+      this.add(this.emoteMenu)
+    }
+  }
+
+  hideEmoteMenu() {
     if (this.emoteMenu) {
       this.emoteMenu.destroy()
       this.emoteMenu = null
-    } else if (this.isCurrentPlayerAvatar) {
-      this.emoteMenu = new EmoteMenu(this.scene, this.index, this.shiny)
-      this.add(this.emoteMenu)
+    }
+  }
+
+  toggleEmoteMenu() {
+    if (this.emoteMenu) this.hideEmoteMenu()
+    else this.showEmoteMenu()
+  }
+
+  sendEmote(emotion: Emotion) {
+    const state = store.getState()
+    const player = state.game.players.find(
+      (p) => p.id === state.game.currentPlayerId
+    )
+    const pokemonCollection = player?.pokemonCollection
+    const pConfig = pokemonCollection?.[this.index]
+    const unlocked = pConfig && pConfig.emotions.includes(emotion)
+    if (unlocked) {
+      store.dispatch(
+        showEmote(getAvatarString(this.index, this.shiny, emotion))
+      )
+      this.hideEmoteMenu()
     }
   }
 
   playAnimation() {
     try {
-      store.dispatch(toggleAnimation())
+      store.dispatch(showEmote())
     } catch (err) {
       console.error("could not play animation", err)
     }

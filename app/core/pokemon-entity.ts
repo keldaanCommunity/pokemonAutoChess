@@ -644,14 +644,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    if (this.name === Pkm.MORPEKO) {
-      target.status.triggerParalysis(2000, this)
-    }
-
-    if (this.name === Pkm.MORPEKO_HANGRY) {
-      target.status.triggerWound(4000, target, this)
-    }
-
     if (this.name === Pkm.MINIOR) {
       this.addAttackSpeed(4, true)
     }
@@ -723,7 +715,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         flinchChance = 0.5
       }
       if (chance(flinchChance)) {
-        target.status.triggerFlinch(3000)
+        target.status.triggerFlinch(3000, target, this)
       }
     }
 
@@ -743,7 +735,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.hasSynergyEffect(Synergy.GHOST)) {
       if (chance(0.25)) {
-        target.status.triggerSilence(2000, this)
+        target.status.triggerSilence(2000, target, this)
       }
     }
 
@@ -991,6 +983,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.status.sleepCooldown -= 500
     }
 
+    // Reduce charm duration
+    if (this.status.charmCooldown > 0 && attacker === this.status.charmOrigin) {
+      this.status.charmCooldown -= 500
+    }
+
     // Other passives
     if (this.passive === Passive.MIMIKYU && this.life / this.hp < 0.5) {
       this.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
@@ -1036,6 +1033,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         pokemon.count.fairyCritCount++
         pokemon.fairySplashCooldown = 1
 
+        const hasEyeContact =
+          pokemon.targetX === target.positionX &&
+          pokemon.targetY === target.positionY &&
+          target.targetX === pokemon.positionX &&
+          target.targetY === pokemon.positionY
+
         if (distance <= 1) {
           // melee range
           splashTarget.handleSpecialDamage(
@@ -1047,8 +1050,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           )
         }
 
-        if (isCritReceived || distance > 1) {
-          // charm attackers and distant targets
+        if (hasEyeContact) {
           splashTarget.status.triggerCharm(2000, splashTarget, pokemon)
         }
       }
@@ -1061,7 +1063,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.RAZOR_FANG)) {
-      target.status.triggerArmorReduction(4000)
+      target.status.triggerArmorReduction(4000, target)
     }
 
     if (target.items.has(Item.BABIRI_BERRY)) {

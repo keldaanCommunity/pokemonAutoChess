@@ -3,6 +3,7 @@ import { Effect } from "../types/enum/Effect"
 import { AttackType, PokemonActionState } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
+import { Pkm } from "../types/enum/Pokemon"
 import { Weather } from "../types/enum/Weather"
 import { distanceC } from "../utils/distance"
 import { max, min } from "../utils/number"
@@ -99,6 +100,14 @@ export default class AttackingState extends PokemonState {
             pokemon.count.tripleAttackCount++
             this.attack(pokemon, board, targetCoordinate)
             this.attack(pokemon, board, targetCoordinate)
+            
+            if (pokemon.name === Pkm.MORPEKO) {
+              target.status.triggerParalysis(2000, pokemon)
+            }
+
+            if (pokemon.name === Pkm.MORPEKO_HANGRY) {
+              target.status.triggerWound(4000, target, pokemon)
+            }
           }
         }
       }

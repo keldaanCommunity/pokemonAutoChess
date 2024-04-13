@@ -462,6 +462,10 @@ export default class Simulation extends Schema implements ISimulation {
     } else if (pokemon.team === Team.RED_TEAM) {
       this.applyEffects(pokemon, pokemon.types, this.redEffects)
     }
+
+    if (pokemon.types.has(Synergy.WATER)) {
+      pokemon.addDodgeChance(0.2)
+    }
   }
 
   applyWeatherEffects(pokemon: PokemonEntity) {
@@ -614,7 +618,11 @@ export default class Simulation extends Schema implements ISimulation {
             enemyWithHighestHP,
             false
           )
-          enemyWithHighestHP.status.triggerFlinch(5000)
+          enemyWithHighestHP.status.triggerFlinch(
+            5000,
+            enemyWithHighestHP,
+            undefined
+          )
         }
       }
 
@@ -652,7 +660,11 @@ export default class Simulation extends Schema implements ISimulation {
         if (enemyWithHighestAP) {
           enemyWithHighestAP = enemyWithHighestAP as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
           enemyWithHighestAP.addAbilityPower(-50)
-          enemyWithHighestAP.status.triggerSilence(5000, undefined)
+          enemyWithHighestAP.status.triggerSilence(
+            5000,
+            enemyWithHighestAP,
+            undefined
+          )
         }
       }
 
@@ -748,21 +760,18 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.RAIN_DANCE:
           if (types.has(Synergy.WATER)) {
-            pokemon.addDodgeChance(0.3)
             pokemon.effects.add(Effect.RAIN_DANCE)
           }
           break
 
         case Effect.DRIZZLE:
           if (types.has(Synergy.WATER)) {
-            pokemon.addDodgeChance(0.45)
             pokemon.effects.add(Effect.DRIZZLE)
           }
           break
 
         case Effect.PRIMORDIAL_SEA:
           if (types.has(Synergy.WATER)) {
-            pokemon.addDodgeChance(0.6)
             pokemon.effects.add(Effect.PRIMORDIAL_SEA)
           }
           break
@@ -919,21 +928,9 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.SWIFT_SWIM:
-          if (types.has(Synergy.AQUATIC)) {
-            pokemon.effects.add(Effect.SWIFT_SWIM)
-          }
-          break
-
         case Effect.HYDRATION:
-          if (types.has(Synergy.AQUATIC)) {
-            pokemon.effects.add(Effect.HYDRATION)
-          }
-          break
-
         case Effect.WATER_VEIL:
-          if (types.has(Synergy.AQUATIC)) {
-            pokemon.effects.add(Effect.WATER_VEIL)
-          }
+          pokemon.effects.add(effect)
           break
 
         case Effect.ODD_FLOWER:
