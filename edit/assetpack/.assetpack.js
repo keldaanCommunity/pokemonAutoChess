@@ -119,6 +119,13 @@ function texturePackAtlas() {
         "../../app/public/dist/client/sw.js",
         sw.replace(/CACHE v[\d\.]+/, `CACHE v${newVersion}`)
       )
+
+      // Copy items individual sprites as we need them unpacked as well
+      fs.cpSync(
+        "../../app/public/src/assets/item{tps}",
+        "../../app/public/dist/client/assets/item",
+        { recursive: true }
+      )
     }
   }
 }

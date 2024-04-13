@@ -5,7 +5,7 @@ import WikiAbility from "./wiki-ability"
 import WikiPokemons from "./wiki-pokemons"
 import { WikiDungeon } from "./wiki-dungeon"
 import WikiFaq from "./wiki-faq"
-import WikiItemsCheatSheet from "./wiki-items-cheat-sheet"
+import WikiItems from "./wiki-items"
 import WikiStatistic from "./wiki-statistic"
 import WikiStatus from "./wiki-status"
 import WikiTutorials from "./wiki-tutorials"
@@ -53,7 +53,7 @@ export default function Wiki({ inGame = false }: { inGame: boolean }) {
             <WikiAbility />
           </TabPanel>
           <TabPanel key="items">
-            <WikiItemsCheatSheet />
+            <WikiItems />
           </TabPanel>
           <TabPanel key="types">
             <WikiTypes />

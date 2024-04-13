@@ -7,11 +7,12 @@ import {
   BasicItems,
   Berries,
   Item,
-  ItemRecipe
+  ItemRecipe,
+  SpecialItems
 } from "../../../../../types/enum/Item"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 
-export default function WikiItemsCheatSheet() {
+export default function WikiItems() {
   const [itemHovered, setItemHovered] = useState<Item>()
   const { t } = useTranslation()
   return (
@@ -112,6 +113,20 @@ export default function WikiItemsCheatSheet() {
         <h2>{t("artificial_items")}</h2>
         <ul className="artificial">
           {ArtificialItems.map((i) => (
+            <li
+              key={i}
+              data-tooltip-id="detail-item"
+              onMouseOver={() => setItemHovered(i)}
+            >
+              <img src={"assets/item/" + i + ".png"} className="item"></img>
+            </li>
+          ))}
+        </ul>
+      </article>
+      <article>
+        <h2>{t("special_items")}</h2>
+        <ul className="special">
+          {SpecialItems.map((i) => (
             <li
               key={i}
               data-tooltip-id="detail-item"

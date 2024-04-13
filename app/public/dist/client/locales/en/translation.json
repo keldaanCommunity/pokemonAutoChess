@@ -1708,7 +1708,8 @@
     "BIG_NUGGET": "Big Nugget",
     "INCENSE": "Incense",
     "EXP_SHARE": "Exp. Share",
-    "METEORITE": "Meteorite"
+    "METEORITE": "Meteorite",
+    "BERRY_JUICE": "Berry Juice"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -1798,7 +1799,8 @@
     "BIG_NUGGET": "Gives GROUND synergy. If the holder is alive after 15 seconds and gets 5 stacks of GROUND, gain 3 GOLD.",
     "INCENSE": "Gives FLORA synergy. Every attack received has a 10% chance to make the attacker CHARM for 2 seconds.",
     "EXP_SHARE": "Get the best ATK, DEF and SPE_DEF values of adjacent allies in the same row",
-    "METEORITE": "A meteorite that you got at Mt. Chimney. It continues to give off a faint glow and is slightly warm to the touch"
+    "METEORITE": "A meteorite that seems to interact with Deoxys. It continues to give off a faint glow and is slightly warm to the touch.",
+    "BERRY_JUICE": "Consumed once below 50% HP, restore to max HP"
   },
   "passive_description": {
     "NONE": "No passive",
@@ -1897,7 +1899,8 @@
     "SOUL_HEART": "Every time the caster gets a KO, gain 10 AP and 10 PP",
     "ALIEN_DNA": "$t(pkm.DEOXYS) reacts to METEORITE by changing shape",
     "BERRY_EATER": "When the Pokémon attacks a target, he steals all its berries and eats them",
-    "TOXIC_BOOST": "The pokémon gains 10 ATK as long as it is POISONNED"
+    "TOXIC_BOOST": "The pokémon gains 10 ATK as long as it is POISONNED",
+    "SHUCKLE": "Turn consummed berries into BERRY_JUICE"
   },
   "stat": {
     "ATK": "Attack",
@@ -2464,6 +2467,7 @@
   "craftable_items": "Craftable",
   "berries": "Berries",
   "artificial_items": "Artificial",
+  "special_items": "Special Items",
   "item_recipes": "Item Recipes",
   "news": "News",
   "patch_notes": "Patch Notes",

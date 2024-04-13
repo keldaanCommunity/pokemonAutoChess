@@ -41,7 +41,7 @@ export default class ItemContainer extends DraggableObject {
       this.circle.setFrame(playerId === currentPlayerUid ? 0 : 2)
     }
     this.add(this.circle)
-    this.sprite = new GameObjects.Image(scene, 0, 0, "item", item).setScale(
+    this.sprite = new GameObjects.Image(scene, 0, 0, "item", item+".png").setScale(
       pokemonId === null ? 0.5 : 0.25
     )
 

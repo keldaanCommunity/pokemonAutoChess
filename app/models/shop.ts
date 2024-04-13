@@ -50,6 +50,8 @@ const RareShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.RARE)
 const EpicShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.EPIC)
 const UltraShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.ULTRA)
 
+CommonShop.push(Pkm.SHUCKLE) //TEMP
+
 export default class Shop {
   commonPool: Map<Pkm, number> = new Map<Pkm, number>()
   uncommonPool: Map<Pkm, number> = new Map<Pkm, number>()

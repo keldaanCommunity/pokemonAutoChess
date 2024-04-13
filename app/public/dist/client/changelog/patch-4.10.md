@@ -42,6 +42,7 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Nerf Pinsir: Attack 25 → 21
 - Changed Aura Wheel (Morpeko): now gives +10% attack speed
 - Changed Wonderguard passive of Shedinja: now blocks 20 damage on every hit received. HP 10 → 100
+- New passive for Shuckle: consummed berries turn into berry juice
 
 # Changes to Synergies
 
