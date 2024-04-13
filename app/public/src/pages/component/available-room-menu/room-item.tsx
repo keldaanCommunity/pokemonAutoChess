@@ -64,8 +64,8 @@ export default function RoomItem(props: {
       {props.room.metadata?.noElo &&
         props.room.metadata?.gameMode === GameMode.NORMAL && (
           <img
-            alt={t("just_for_fun")}
-            title={t("just_for_fun")}
+            alt={t("no_elo")}
+            title={t("no_elo")}
             className="noelo icon"
             src="/assets/ui/noelo.png"
             style={{ borderRadius: "50%" }}

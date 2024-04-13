@@ -2,7 +2,6 @@ import { Room } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { GADGETS } from "../../../../../core/gadgets"
 import { IGameUser } from "../../../../../models/colyseus-models/game-user"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import PreparationState from "../../../../../rooms/states/preparation-state"
@@ -22,9 +21,7 @@ import {
   toggleReady
 } from "../../../stores/NetworkStore"
 import { cc } from "../../utils/jsx"
-import { Checkbox } from "../checkbox/checkbox"
 import { BotSelectModal } from "./bot-select-modal"
-import { MapSelectModal } from "./map-select-modal"
 import PreparationMenuUser from "./preparation-menu-user"
 import "./preparation-menu.css"
 
@@ -53,17 +50,8 @@ export default function PreparationMenu() {
   const room: Room<PreparationState> | undefined = useAppSelector(
     (state) => state.network.preparation
   )
-  const selectedMap: string = useAppSelector(
-    (state) => state.preparation.selectedMap
-  )
 
   const gameMode = useAppSelector((state) => state.preparation.gameMode)
-
-  const [modal, setModal] = useState<string>()
-
-  const profile = useAppSelector((state) => state.network.profile)
-  const profileLevel = profile?.level ?? 0
-
   const [botDifficulty, setBotDifficulty] = useState<BotDifficulty>(
     BotDifficulty.MEDIUM
   )
@@ -73,6 +61,7 @@ export default function PreparationMenu() {
   const allUsersReady = users.every((user) => user.ready) && nbUsersReady > 1
 
   const isAdmin = user?.role === Role.ADMIN
+  const isModerator = user?.role === Role.MODERATOR
 
   useEffect(() => {
     if (allUsersReady) {
@@ -114,17 +103,16 @@ export default function PreparationMenu() {
     }
   }, 1000)
 
-  const deleteRoomButton =
-    user?.role && [Role.ADMIN, Role.MODERATOR].includes(user.role) ? (
-      <button
-        className="bubbly red"
-        onClick={() => {
-          dispatch(deleteRoom())
-        }}
-      >
-        {t("delete_room")}
-      </button>
-    ) : null
+  const deleteRoomButton = (isModerator || isAdmin) && (
+    <button
+      className="bubbly red"
+      onClick={() => {
+        dispatch(deleteRoom())
+      }}
+    >
+      {t("delete_room")}
+    </button>
+  )
 
   const headerMessage = (
     <>
@@ -146,13 +134,13 @@ export default function PreparationMenu() {
       {noElo === true ? (
         <p>
           <img
-            alt={t("just_for_fun")}
-            title={t("just_for_fun_hint")}
+            alt={t("no_elo")}
+            title={t("no_elo_hint")}
             className="noelo-icon"
             src="/assets/ui/noelo.png"
             style={{ borderRadius: "50%" }}
           />
-          {t("just_for_fun_hint")}
+          {t("no_elo_hint")}
         </p>
       ) : isElligibleForELO ? (
         <p>
@@ -162,10 +150,123 @@ export default function PreparationMenu() {
         </p>
       ) : users.length > 1 ? (
         <p>{t("not_elligible_elo_hint")}</p>
-      ) : (
-        <p>{t("add_bot_or_wait_hint")}</p>
-      )}
+      ) : null}
+
+      {users.length === 1 && <p>{t("add_bot_or_wait_hint")}</p>}
     </>
+  )
+
+  const roomPrivateButton = gameMode === GameMode.NORMAL &&
+    (isOwner || isAdmin) && (
+      <button
+        className="bubbly blue"
+        onClick={makePrivate}
+        title={
+          password ? t("make_room_public_hint") : t("make_room_private_hint")
+        }
+      >
+        {password ? t("make_room_public") : t("make_room_private")}
+      </button>
+    )
+
+  const roomEloButton = gameMode === GameMode.NORMAL &&
+    (isOwner || isAdmin) && (
+      <button
+        className="bubbly blue"
+        onClick={toggleElo}
+        title={noElo ? t("enable_elo_hint") : t("disable_elo_hint")}
+      >
+        {noElo ? t("enable_elo") : t("disable_elo")}
+      </button>
+    )
+
+  const roomNameInput = (isOwner || isModerator || isAdmin) &&
+    user &&
+    !user.anonymous && (
+      <div className="my-input-group">
+        <input
+          maxLength={30}
+          type="text"
+          placeholder={name}
+          style={{ flex: 1 }}
+          onChange={(e) => {
+            setInputValue(e.target.value)
+          }}
+          className="with-button"
+        />
+        <button
+          className="bubbly blue"
+          onClick={() => dispatch(changeRoomName(inputValue))}
+        >
+          {t("change_room_name")}
+        </button>
+      </div>
+    )
+
+  const botControls = (isOwner || isAdmin) && (
+    <div className="my-input-group">
+      <button
+        className="bubbly blue"
+        onClick={() => {
+          if (botDifficulty === BotDifficulty.CUSTOM) {
+            dispatch(listBots())
+          } else {
+            dispatch(addBot(botDifficulty))
+          }
+        }}
+      >
+        {t("add_bot")}
+      </button>
+
+      <select
+        defaultValue={botDifficulty}
+        onChange={(e) => {
+          setBotDifficulty(parseInt(e.target.value))
+        }}
+      >
+        <option value={BotDifficulty.EASY}>{t("easy_bot")}</option>
+        <option value={BotDifficulty.MEDIUM}>{t("normal_bot")}</option>
+        <option value={BotDifficulty.HARD}>{t("hard_bot")}</option>
+        <option value={BotDifficulty.EXTREME}>{t("extreme_bot")}</option>
+        <option value={BotDifficulty.CUSTOM}>{t("custom_bot")}</option>
+      </select>
+    </div>
+  )
+
+  const roomInfo = (
+    <p className="room-info">
+      {t("room_leader")}: {ownerName}{" "}
+      {password && (
+        <>
+          {" - "}
+          {t("room_password")}: {password}
+        </>
+      )}
+    </p>
+  )
+
+  const readyButton = (
+    <button
+      className={cc("bubbly", "ready-button", isReady ? "green" : "orange")}
+      onClick={() => {
+        dispatch(toggleReady())
+      }}
+    >
+      {t("ready")} {isReady ? "✔" : "?"}
+    </button>
+  )
+
+  const startGameButton = (isOwner || isAdmin) && (
+    <button
+      className={cc("bubbly", {
+        green: allUsersReady,
+        orange: !allUsersReady
+      })}
+      onClick={startGame}
+      data-tooltip-id={"start-game"}
+    >
+      {t("start_game")}
+    </button>
   )
 
   return (
@@ -190,156 +291,27 @@ export default function PreparationMenu() {
         })}
       </div>
 
-      {(gameMode === GameMode.NORMAL || isAdmin) && (
-        <>
-          {isOwner && (
-            <div className="actions">
-              <Checkbox
-                checked={password != null}
-                onToggle={makePrivate}
-                label={`${t("private_game")} ${
-                  password ? "Password: " + password : ""
-                }`}
-                isDark
-                title="Add a password to this room"
-              />
-              <Checkbox
-                checked={noElo}
-                onToggle={toggleElo}
-                label={t("just_for_fun")}
-                isDark
-                title="No ELO gain or loss for this game"
-              />
-              <div className="spacer"></div>
-              <div className="gadgets">
-                {profileLevel >= GADGETS.MAP.levelRequired && (
-                  <div
-                    onClick={() => {
-                      setModal("maps")
-                    }}
-                  >
-                    <span>{t("map." + selectedMap)}</span>
-                    <img width={48} height={48} src="assets/ui/map.svg" />
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-          {(isOwner ||
-            (user?.role &&
-              [Role.ADMIN, Role.MODERATOR].includes(user.role))) && (
-            <div className="actions">
-              {user && !user.anonymous && (
-                <>
-                  <input
-                    maxLength={30}
-                    type="text"
-                    placeholder={name}
-                    style={{ flex: 1 }}
-                    onChange={(e) => {
-                      setInputValue(e.target.value)
-                    }}
-                  />
-                  <button
-                    style={{ marginLeft: "10px" }}
-                    className="bubbly blue"
-                    onClick={() => dispatch(changeRoomName(inputValue))}
-                  >
-                    {t("change_room_name")}
-                  </button>
-                  {deleteRoomButton}
-                </>
-              )}
-            </div>
-          )}
+      <div className="actions">
+        {botControls}
+        <div className="spacer"></div>
+        {deleteRoomButton}
+      </div>
 
-          <div className="actions">
-            {isOwner || isAdmin ? (
-              <>
-                <button
-                  className="bubbly blue"
-                  onClick={() => {
-                    if (botDifficulty === BotDifficulty.CUSTOM) {
-                      dispatch(listBots())
-                    } else {
-                      dispatch(addBot(botDifficulty))
-                    }
-                  }}
-                >
-                  {t("add_bot")}
-                </button>
+      <div className="actions">
+        {roomNameInput}
+        <div className="spacer"></div>
+        {roomPrivateButton}
+        {roomEloButton}
+      </div>
 
-                <select
-                  defaultValue={botDifficulty}
-                  onChange={(e) => {
-                    setBotDifficulty(parseInt(e.target.value))
-                  }}
-                >
-                  <option value={BotDifficulty.EASY}>{t("easy_bot")}</option>
-                  <option value={BotDifficulty.MEDIUM}>
-                    {t("normal_bot")}
-                  </option>
-                  <option value={BotDifficulty.HARD}>{t("hard_bot")}</option>
-                  <option value={BotDifficulty.EXTREME}>
-                    {t("extreme_bot")}
-                  </option>
-                  <option value={BotDifficulty.CUSTOM}>
-                    {t("custom_bot")}
-                  </option>
-                </select>
-              </>
-            ) : (
-              <p className="room-leader">
-                {t("room_leader")}: {ownerName}{" "}
-                {password && (
-                  <>
-                    <br />
-                    {t("room_password")}: {password}
-                  </>
-                )}
-              </p>
-            )}
+      <div className="actions">
+        {roomInfo}
+        <div className="spacer" />
+        {readyButton}
+        {startGameButton}
+      </div>
 
-            <div className="spacer" />
-
-            <button
-              className={cc(
-                "bubbly",
-                "ready-button",
-                isReady ? "green" : "orange"
-              )}
-              onClick={() => {
-                dispatch(toggleReady())
-              }}
-            >
-              {t("ready")} {isReady ? "✔" : "?"}
-            </button>
-
-            {(isOwner || isAdmin) && (
-              <button
-                className={cc("bubbly", {
-                  green: allUsersReady,
-                  orange: !allUsersReady
-                })}
-                onClick={startGame}
-                data-tooltip-id={"start-game"}
-              >
-                {t("start_game")}
-              </button>
-            )}
-          </div>
-
-          {isOwner && botsList != null && <BotSelectModal bots={botsList} />}
-          {isOwner && (
-            <MapSelectModal
-              show={modal === "maps"}
-              handleClose={() => {
-                setModal(undefined)
-              }}
-            />
-          )}
-        </>
-      )}
+      {isOwner && botsList != null && <BotSelectModal bots={botsList} />}
     </div>
   )
 }

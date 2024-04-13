@@ -76,6 +76,7 @@
   right: 6vw;
   top: 0.5%;
   padding: 5px;
+  background-color: var(--color-bg-primary);
 }
 
 #root #game-dps-icon:hover {

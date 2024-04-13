@@ -96,7 +96,6 @@ export default class GameRoom extends Room<GameState> {
     preparationId: string
     name: string
     noElo: boolean
-    selectedMap: DungeonPMDO | "random"
     gameMode: GameMode
     minRank: EloRank | null
     tournamentId: string | null
@@ -121,7 +120,6 @@ export default class GameRoom extends Room<GameState> {
         options.preparationId,
         options.name,
         options.noElo,
-        options.selectedMap,
         options.gameMode,
         options.minRank
       )
@@ -353,10 +351,6 @@ export default class GameRoom extends Room<GameState> {
           logger.error("sell drop error", pokemonId)
         }
       }
-    })
-
-    this.onMessage(Transfer.REQUEST_TILEMAP, (client, message) => {
-      client.send(Transfer.REQUEST_TILEMAP, this.state.tilemap)
     })
 
     this.onMessage(Transfer.REFRESH, (client, message) => {

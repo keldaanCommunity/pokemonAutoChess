@@ -22,7 +22,6 @@ interface GameStateStore {
   players: IPlayer[]
   simulations: ISimulation[]
   stageLevel: number
-  mapName: string
   noElo: boolean
   currentPlayerId: string
   currentSimulationId: string
@@ -64,7 +63,6 @@ const initialState: GameStateStore = {
   players: new Array<IPlayer>(),
   simulations: new Array<ISimulation>(),
   stageLevel: 0,
-  mapName: "",
   weather: Weather.NEUTRAL,
   noElo: false,
   currentPlayerId: "",
@@ -114,9 +112,6 @@ export const gameSlice = createSlice({
     },
     setStageLevel: (state, action: PayloadAction<number>) => {
       state.stageLevel = action.payload
-    },
-    setMapName: (state, action: PayloadAction<string>) => {
-      state.mapName = action.payload
     },
     setNoELO: (state, action: PayloadAction<boolean>) => {
       state.noElo = action.payload
@@ -531,7 +526,6 @@ export const {
   setAfterGameId,
   setPhase,
   setStageLevel,
-  setMapName,
   setWeather,
   setNoELO,
   addPlayer,

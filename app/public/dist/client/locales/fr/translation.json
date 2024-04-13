@@ -2259,7 +2259,7 @@
   "spectate": "Regarder",
   "join": "Rejoindre",
   "reconnect": "Reconnexion",
-  "just_for_fun": "Juste pour le fun",
+  "no_elo": "Juste pour le fun",
   "minimum_rank": "Rang minimum",
   "smeargle_scribble": "Gribouilles de Queulorior",
   "smeargle_scribble_hint": "Queulorior gribouille une nouvelle règle aléatoire appliquée pendant toute la partie",
@@ -2417,7 +2417,7 @@
   "kick_user": "Expulser l'utilisateur",
   "enter_password": "Entrez un mot de passe pour le salon",
   "delete_room": "Supprimer le salon",
-  "just_for_fun_hint": "Ce jeu est juste pour le plaisir, pas de gain/perte d'ELO !",
+  "no_elo_hint": "Ce jeu est juste pour le plaisir, pas de gain/perte d'ELO !",
   "elligible_elo_hint": "✔ Ce jeu est éligible au gain/perte ELO.",
   "average_elo": "ELO moyen",
   "GLHF": "GL HF",
@@ -2521,12 +2521,9 @@
     "bot_builder": "Constructeur de Bot",
     "bot_builder_desc": "Créez vos propres bots et publiez-les pour avoir une chance d'être inclus dans le jeu",
     "jukebox": "Jukebox",
-    "jukebox_desc": "Choisissez votre musique en jeu",
-    "map": "Carte",
-    "map_desc": "Choisissez l'arène de combat en tant que chef de salle"
+    "jukebox_desc": "Choisissez votre musique en jeu"
   },
   "level_required": "Niveau requis",
-  "select_map": "Choisir l'arène de combat pour cette partie",
   "map": {
     "random": "Zone aléatoire",
     "AmpPlains": "Plaines Elek",

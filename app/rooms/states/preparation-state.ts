@@ -3,7 +3,6 @@ import { nanoid } from "nanoid"
 import { GameUser } from "../../models/colyseus-models/game-user"
 import Message from "../../models/colyseus-models/message"
 import { EloRank } from "../../types/Config"
-import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { GameMode } from "../../types/enum/Game"
 
 export interface IPreparationState {
@@ -13,7 +12,6 @@ export interface IPreparationState {
   ownerId: string
   ownerName: string
   name: string
-  selectedMap: DungeonPMDO | "random"
   minRank: EloRank | null
   gameMode: GameMode
 }
@@ -29,7 +27,6 @@ export default class PreparationState
   @type("string") ownerName: string
   @type("string") name: string
   @type("string") password: string | null
-  @type("string") selectedMap: DungeonPMDO | "random"
   @type("string") minRank: EloRank | null
   @type("string") gameMode: GameMode = GameMode.NORMAL
   @type("boolean") noElo: boolean
@@ -48,7 +45,6 @@ export default class PreparationState
     this.ownerName = ""
     this.password = null
     this.noElo = params.noElo ?? false
-    this.selectedMap = "random"
     this.minRank = params.minRank ?? null
     this.gameMode = params.gameMode
   }

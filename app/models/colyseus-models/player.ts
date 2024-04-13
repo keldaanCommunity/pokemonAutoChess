@@ -3,6 +3,7 @@ import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
 import GameState from "../../rooms/states/game-state"
 import { IPlayer, Role, Title } from "../../types"
 import { SynergyTriggers, UniqueShop } from "../../types/Config"
+import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { BattleResult } from "../../types/enum/Game"
 import {
   ArtificialItems,
@@ -63,6 +64,7 @@ export default class Player extends Schema implements IPlayer {
   @type("float32") loadingProgress: number = 0
   @type("string") berry: Item = pickRandomIn(Berries)
   @type("uint8") berryTreeStage: number = 1
+  @type("string") map: DungeonPMDO
   @type({ set: "string" }) effects: Effects = new Effects()
   isBot: boolean
   opponents: Map<string, number> = new Map<string, number>()
@@ -97,6 +99,7 @@ export default class Player extends Schema implements IPlayer {
     this.pokemonCollection = new PokemonCollection(pokemonCollection)
     this.lightX = state.lightX
     this.lightY = state.lightY
+    this.map = pickRandomIn(DungeonPMDO)
     if (isBot) {
       this.loadingProgress = 100
       this.lightX = 3

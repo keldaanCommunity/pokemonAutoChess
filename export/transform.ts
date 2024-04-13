@@ -9,7 +9,6 @@ import {
   DTEF_TILESET_WIDTH,
   DTEF_WIDTH,
   DtefTileset,
-  DungeonPMDO,
   Mask,
   MaskCoordinate,
   MaskDefinition,
@@ -17,6 +16,7 @@ import {
   TilesetExchangeFile
 } from "../app/types/Config"
 import { AnimationTiled, FrameTiled, TilesetTiled } from "../app/core/tileset"
+import { DungeonPMDO } from "../app/types/enum/Dungeon"
 
 const PMDO_EXPORT_DIRECTORY = "C:/Users/arnau/Desktop/RawAsset/TileDtef"
 let gid = 1

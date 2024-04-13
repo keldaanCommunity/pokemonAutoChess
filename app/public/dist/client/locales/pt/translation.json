@@ -2073,7 +2073,7 @@
   "spectate": "Olhar",
   "join": "Juntar",
   "reconnect": "Reconectar",
-  "just_for_fun": "Apenas por diversão",
+  "no_elo": "Apenas por diversão",
   "minimum_rank": "Rank mínimo",
   "smeargle_scribble": "Garabato do Smeargle",
   "smeargle_scribble_hint": "Smeargle deixa um garabato com uma norma aleatória que será aplicada para o resto do jogo",
@@ -2231,7 +2231,7 @@
   "kick_user": "Expulsar usuário",
   "enter_password": "Digite uma senha para a sala",
   "delete_room": "Excluir quarto",
-  "just_for_fun_hint": "Este jogo é apenas para diversão, sem ganho/perda ELO!",
+  "no_elo_hint": "Este jogo é apenas para diversão, sem ganho/perda ELO!",
   "elligible_elo_hint": "✔ Este jogo é elegível para ganho/perda ELO.",
   "average_elo": "ELO médio",
   "GLHF": "GLHF",
@@ -2332,12 +2332,9 @@
     "bot_builder": "Construtor de Bots",
     "bot_builder_desc": "Críe seu próprio bot e envíe aos desenvolvidores para ser optado a ser incluidos no jogo",
     "jukebox": "Caixa de Música",
-    "jukebox_desc": "Selecione a música a ser tocada de fundo durante o jogo",
-    "map": "Mapa",
-    "map_desc": "Selecione o mapa antes do jogo como Líder da Sala"
+    "jukebox_desc": "Selecione a música a ser tocada de fundo durante o jogo"
   },
   "level_required": "Nível necessário",
-  "select_map": "Seleciona o mapa para este jogo",
   "map": {
     "random": "Mapa aleatório",
     "ConcealedRuins": "Ruinas Escondidas",

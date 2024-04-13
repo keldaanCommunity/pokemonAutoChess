@@ -1,6 +1,7 @@
 import { Schema, type } from "@colyseus/schema"
 import { nanoid } from "nanoid"
 import { IPortal, ISynergySymbol } from "../../types"
+import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { Synergy } from "../../types/enum/Synergy"
 
 export class Portal extends Schema implements IPortal {
@@ -8,6 +9,7 @@ export class Portal extends Schema implements IPortal {
   @type("number") x: number
   @type("number") y: number
   @type("string") avatarId: string = ""
+  @type("string") map: DungeonPMDO = DungeonPMDO.TinyWoods
   index: number
 
   constructor(x: number, y: number, index: number) {
