@@ -96,7 +96,6 @@ export default class GameRoom extends Room<GameState> {
     preparationId: string
     name: string
     noElo: boolean
-    selectedMap: DungeonPMDO | "random"
     gameMode: GameMode
     minRank: EloRank | null
     tournamentId: string | null
@@ -121,7 +120,6 @@ export default class GameRoom extends Room<GameState> {
         options.preparationId,
         options.name,
         options.noElo,
-        options.selectedMap,
         options.gameMode,
         options.minRank
       )

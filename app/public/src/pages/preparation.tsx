@@ -28,7 +28,6 @@ import {
   setOwnerId,
   setOwnerName,
   setPassword,
-  setSelectedMap,
   setUser
 } from "../stores/PreparationStore"
 import Chat from "./component/chat/chat"
@@ -123,10 +122,6 @@ export default function Preparation() {
 
       r.state.listen("noElo", (value, previousValue) => {
         dispatch(setNoELO(value))
-      })
-
-      r.state.listen("selectedMap", (value, previousValue) => {
-        dispatch(setSelectedMap(value))
       })
 
       r.state.listen("gameMode", (value, previousValue) => {

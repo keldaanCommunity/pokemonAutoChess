@@ -137,7 +137,7 @@ export default function GameStageInfo() {
               </Tooltip>,
               document.body
             )}
-            <img src={`/assets/ui/world.svg`} />
+            <img src={`/assets/ui/map.svg`} />
           </div>
         )}
 

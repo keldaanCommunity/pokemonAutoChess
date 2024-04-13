@@ -65,7 +65,6 @@ export default class GameState extends Schema {
     preparationId: string,
     name: string,
     noElo: boolean,
-    selectedMap: DungeonPMDO | "random",
     gameMode: GameMode,
     minRank: EloRank | null
   ) {
@@ -77,8 +76,6 @@ export default class GameState extends Schema {
     this.gameMode = gameMode
     this.minRank = minRank
     this.weather = Weather.NEUTRAL
-
-    //TODO: change map gadget to make use of selectedMap
     
     if (gameMode === GameMode.SCRIBBLE) {
       this.specialGameRule = pickRandomIn(Object.values(SpecialGameRule))

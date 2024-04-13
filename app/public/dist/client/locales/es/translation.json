@@ -2075,7 +2075,7 @@
   "stage": "Escenario",
   "spectate": "Espectador",
   "join": "Unirse",
-  "just_for_fun": "Solo por diversión",
+  "no_elo": "Solo por diversión",
   "password_protected": "Vestíbulo privado (protegido con contraseña)",
   "private": "Privado",
   "available_rooms": "Cuartos disponibles",
@@ -2223,7 +2223,7 @@
   "kick_user": "Expulsar al usuario",
   "enter_password": "Introduce una contraseña para la habitación.",
   "delete_room": "Eliminar sala",
-  "just_for_fun_hint": "¡Este juego es solo por diversión, sin ganancia/pérdida de ELO!",
+  "no_elo_hint": "¡Este juego es solo por diversión, sin ganancia/pérdida de ELO!",
   "elligible_elo_hint": "✔ Este juego es elegible para ganancia/pérdida de ELO.",
   "average_elo": "ELO medio",
   "GLHF": "GLHF",
@@ -2304,7 +2304,6 @@
     "map": "Mapa"
   },
   "level_required": "Nivel exigido",
-  "select_map": "Selecciona el mapa para esta partida",
   "map": {
     "random": "Mapa aleatorio"
   }

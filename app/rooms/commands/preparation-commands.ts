@@ -234,7 +234,6 @@ export class OnGameStartRequestCommand extends Command<
           name: this.state.name,
           preparationId: this.room.roomId,
           noElo: this.state.noElo,
-          selectedMap: this.state.selectedMap,
           gameMode: this.state.gameMode,
           tournamentId: this.room.metadata?.tournamentId,
           bracketId: this.room.metadata?.bracketId,
