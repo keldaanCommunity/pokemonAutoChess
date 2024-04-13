@@ -1351,7 +1351,7 @@
     "CASTFORM": "Castform は、FIRE WATER ICE 間の支配的な相乗効果に応じて、その形状と天気を太陽、雨、または雪に変化させます。",
     "PHIONE": "フィオネはアクアエッグを探しています",
     "PRIMAL": "伝説によれば、これらのポケモンの古代の力を解き放つことができるということです。",
-    "WONDER_GUARD": "受けるダメージと受ける回復量を1にする",
+    "WONDER_GUARD": "20ダメージをブロック",
     "ELECTRIC_TERRAIN": "でんきポケモンにELECTRIC_FIELDを与え、ダメージが20%増加する",
     "GRASSY_TERRAIN": "自分の草ポケモンにGRASS_FIELDを与え、ダメージが20%増加する",
     "MISTY_TERRAIN": "フェアリーポケモンにFAIRY_FIELDを与えるとダメージが20%アップする",
