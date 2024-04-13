@@ -50,4 +50,5 @@
 
 .game-pokemons-proposition .additional-pick-item p {
   font-size: 80%;
+  max-width: 240px;
 }

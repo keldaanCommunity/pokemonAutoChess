@@ -96,7 +96,12 @@ export default class BoardManager {
       if (this.pveChest) {
         this.pveChest.anims.play("open_chest")
         this.player.pveRewards.forEach((item, i) => {
-          const itemSprite = this.scene.add.sprite(1512, 122, "item", item)
+          const itemSprite = this.scene.add.sprite(
+            1512,
+            122,
+            "item",
+            item + ".png"
+          )
           itemSprite.setScale(0.5)
           const shinyEffect = this.scene.add.sprite(1512, 122, "shine")
           shinyEffect.setScale(2)

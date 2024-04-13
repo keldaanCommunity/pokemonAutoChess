@@ -42,7 +42,7 @@ export function ItemDetailTooltip({
       <img className="game-item-detail-icon" src={`assets/item/${item}.png`} />
       <p className="game-item-detail-name">{t(`item.${item}`)}</p>
       <div className="game-item-detail-stats">
-        {Object.entries(ItemStats[item]).map(([stat, value]) => (
+        {Object.entries(ItemStats[item] ?? {}).map(([stat, value]) => (
           <div key={stat}>
             <img
               src={`assets/icons/${stat}.png`}
