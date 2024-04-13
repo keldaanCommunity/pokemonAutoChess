@@ -81,11 +81,6 @@ export default class PokemonAvatar extends PokemonSprite {
     ]
     NUM_KEYS.forEach((keycode, i) => {
       const onKeydown = (event) => {
-        console.log("onkeydown", event, {
-          cpa: this.isCurrentPlayerAvatar,
-          sg: this.scene?.game,
-          ctrl: event.ctrlKey
-        })
         if (this.isCurrentPlayerAvatar && this.scene?.game && event.ctrlKey) {
           this.sendEmote(AvatarEmotions[i])
         }
