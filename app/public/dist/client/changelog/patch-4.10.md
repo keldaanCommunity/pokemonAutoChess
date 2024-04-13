@@ -1,3 +1,7 @@
+# Map transitions
+
+Each player now starts on a different map. Portals now makes you travel to new locations: each map has its own special rule that adds a little twist to your game
+
 # New Pokemons:
 
 - New Deoxys forms: Deoxys, Deoxys Attack, Deoxys Defense and Deoxys Speed
