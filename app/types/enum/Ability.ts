@@ -303,5 +303,6 @@ export enum Ability {
   PSYSTRIKE = "PSYSTRIKE",
   FACADE = "FACADE",
   DREAM_EATER = "DREAM_EATER",
-  SPARK = "SPARK"
+  SPARK = "SPARK",
+  CRUNCH = "CRUNCH"
 }

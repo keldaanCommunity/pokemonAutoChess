@@ -320,7 +320,8 @@
     "PSYSTRIKE": "Psystrike",
     "FACADE": "Facade",
     "DREAM_EATER": "Dream Eater",
-    "SPARK": "Spark"
+    "SPARK": "Spark",
+    "CRUNCH": "Crunch"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1383,7 +1384,8 @@
     "PSYSTRIKE": "The caster materializes a strange psychic wave towards the furthest enemy, inflicting [100,SP] PHYSICAL damage and teleporting everything in its path",
     "FACADE": "Deals [20,40,80,SP] SPECIAL. Doubles damage if the pokémon is BURN, CONFUSION, FREEZE, PARALYSIS, POISONNED, SILENCE, SLEEP, FLINCH, CHARM, ARMOR_REDUCTION or WOUND",
     "DREAM_EATER": "If an enemy is SLEEP, jump next to it, deals [45,90,SP] SPECIAL and restores the same amount of HP. Otherwise, puts the target SLEEP for [2.5,5] s",
-    "SPARK": "The pokémon fires a spark charged with electricity at the target, inflicting [40,80,SP] SPECIAL. The spark can bounce up to 4 times between adjacent enemies. Each rebound halves the SPECIAL"
+    "SPARK": "The pokémon fires a spark charged with electricity at the target, inflicting [40,80,SP] SPECIAL. The spark can bounce up to 4 times between adjacent enemies. Each rebound halves the SPECIAL",
+    "CRUNCH": "Deal [150,SP] SPECIAL. If it kills the target, heal for 50% of target's max HP."
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1900,7 +1902,8 @@
     "ALIEN_DNA": "$t(pkm.DEOXYS) reacts to METEORITE by changing shape",
     "BERRY_EATER": "When the Pokémon attacks a target, he steals all its berries and eats them",
     "TOXIC_BOOST": "The pokémon gains 10 ATK as long as it is POISONNED",
-    "SHUCKLE": "Turn consummed berries into BERRY_JUICE"
+    "SHUCKLE": "Turn consummed berries into BERRY_JUICE",
+    "GUZZLORD": "Guzzlord is too heavy and can't jump"
   },
   "stat": {
     "ATK": "Attack",
@@ -2511,15 +2514,15 @@
   "ALL": "ALL",
   "weather_dominant_hint": "The dominant type of pokemons on the board during a battle can influence the weather. The weather has various effects on all of your team's and opponent's pokemons.",
   "weather_dominant_hint2": "It will require a certain number of pokemons of this type on the board to change the weather. Some powerful pokemons also have the ability to change weather by their own.",
-  "how_to_play": "HOW TO PLAY ?",
-  "abilities_label": "ABILITIES",
-  "weather_label": "WEATHER",
-  "status_label": "STATUS",
-  "statistics_label": "STATISTICS",
-  "synergies_label": "SYNERGIES",
-  "dungeon_label": "DUNGEONS",
-  "items_label": "ITEMS",
-  "pokemons_label": "POKEMONS",
+  "how_to_play": "How to play ?",
+  "abilities_label": "Abilities",
+  "weather_label": "Weather",
+  "status_label": "Status",
+  "statistics_label": "Statistics",
+  "synergies_label": "Synergies",
+  "dungeon_label": "Regions",
+  "items_label": "Items",
+  "pokemons_label": "Pokémons",
   "pokemon_auto_chess": "Pokemon Auto Chess",
   "help": "Help",
   "index": "Index",

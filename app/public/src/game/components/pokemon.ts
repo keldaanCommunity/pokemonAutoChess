@@ -206,10 +206,10 @@ export default class PokemonSprite extends DraggableObject {
       playerId
     )
     this.shadow = new GameObjects.Sprite(scene, 0, 5, textureIndex)
-    //this.shadow.setOrigin(0,0);
     this.shadow.setScale(2, 2)
-    scene.add.existing(this.shadow)
     this.add(this.shadow)
+    this.add(this.sprite)
+
     if (instanceofPokemonEntity(pokemon)) {
       if (p.status.light) {
         this.addLight()
@@ -227,7 +227,6 @@ export default class PokemonSprite extends DraggableObject {
         this.addFairyField()
       }
     }
-    scene.add.existing(this.sprite)
     this.add(this.itemsContainer)
 
     if (instanceofPokemonEntity(pokemon)) {
@@ -235,7 +234,7 @@ export default class PokemonSprite extends DraggableObject {
       this.setPowerBar(p, scene)
       //this.setEffects(p, scene);
     }
-    this.add(this.sprite)
+
     this.draggable = playerId === scene.uid && !inBattle
     if (instanceofPokemonEntity(pokemon)) {
       const p = <IPokemonEntity>pokemon

@@ -45,6 +45,8 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Changed Aura Wheel (Morpeko): now gives +10% attack speed
 - Changed Wonderguard passive of Shedinja: now blocks 20 damage on every hit received. HP 10 → 100
 - New passive for Shuckle: consummed berries turn into berry juice
+- Nerf Spinarak line: HP: 70/160 → 60/150, Attack: 7/17 → 6/14
+- Reworked Guzzlord: added Monster synergy, changed range to 1, new ability: Crunch ; HP: 250→300
 
 # Changes to Synergies
 
