@@ -55,14 +55,15 @@ export function getPokemonData(name: Pkm): IPokemonData {
     name: Pkm.DEFAULT,
     index: PkmIndex[Pkm.DEFAULT],
     additional: false,
+    regional: false,
     hp: 10,
     range: 1,
     rarity: Rarity.SPECIAL,
     stars: 1,
+    stages: 1,
     skill: Ability.DEFAULT,
     passive: Passive.NONE,
     types: [],
     evolution: null,
-    stages: 1
   }
 }

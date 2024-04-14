@@ -2,10 +2,9 @@ import { createObjectCsvWriter } from "csv-writer"
 import { Pkm, PkmDuos, PkmFamily, PkmIndex } from "../app/types/enum/Pokemon"
 import PokemonFactory from "../app/models/pokemon-factory"
 import { Ability } from "../app/types/enum/Ability"
-import { Rarity } from "../app/types/enum/Game"
 import { logger } from "../app/utils/logger"
-import { values } from "../app/utils/schemas"
 import { Synergy } from "../app/types/enum/Synergy"
+import { getPokemonData } from "../app/models/precomputed"
 
 const csvWriter = createObjectCsvWriter({
   path: "../app/models/precomputed/pokemons-data.csv",
@@ -31,7 +30,9 @@ const csvWriter = createObjectCsvWriter({
     { id: "familyType2", title: "Family Type 2" },
     { id: "familyType3", title: "Family Type 3" },
     { id: "familyType4", title: "Family Type 4" },
-    { id: "duo", title: "Duo" }
+    { id: "duo", title: "Duo" },
+    { id: "regional", title: "Regional" },
+    { id: "stages", title: "Nb stages" }
   ]
 })
 
@@ -40,7 +41,9 @@ interface PokemonData {
   name: string
   category: string
   tier: number
+  stages: number
   additional: boolean
+  regional: boolean
   type1: string
   type2: string
   type3: string
@@ -66,11 +69,12 @@ Object.values(Pkm)
   .sort((a, b) => PkmIndex[a].localeCompare(PkmIndex[b]))
   .forEach((pkm) => {
     const pokemon = PokemonFactory.createPokemonFromName(pkm)
+    const pokemonData = getPokemonData(pkm)
     if (pokemon.skill != Ability.DEFAULT) {
       const family = Object.keys(PkmFamily).filter(
         (p) => PkmFamily[p] === PkmFamily[pkm]
       )
-      const types: Synergy[] = values(pokemon.types)
+      const types: Synergy[] = pokemonData.types
       const familyTypes = [
         ...new Set(
           family.flatMap((p) => [
@@ -85,7 +89,9 @@ Object.values(Pkm)
         name: pkm,
         category: pokemon.rarity,
         tier: pokemon.stars,
-        additional: pokemon.additional,
+        stages: Math.max(...family.map((p) => getPokemonData(p as Pkm).stars)),
+        additional: pokemonData.additional,
+        regional: pokemonData.regional,
         duo: Object.values(PkmDuos).some((duo) => duo.includes(pkm)),
         type1: types[0] ?? "",
         type2: types[1] ?? "",
