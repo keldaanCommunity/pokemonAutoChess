@@ -19,7 +19,10 @@ export function WikiDungeon() {
                   <h3>{t(`map.${dungeon}`)}</h3>
                   <div style={{ display: "flex", gap: "5px" }}>
                     {DungeonDetails[dungeon].synergies.map((synergy) => (
-                      <SynergyIcon type={synergy} />
+                      <SynergyIcon
+                        type={synergy}
+                        key={"map_synergy_" + synergy}
+                      />
                     ))}
                   </div>
                 </div>

@@ -129,7 +129,7 @@ export default function GameStageInfo() {
               >
                 <span style={{ verticalAlign: "middle" }}>
                   {DungeonDetails[map].synergies.map((synergy) => (
-                    <SynergyIcon type={synergy} />
+                    <SynergyIcon type={synergy} key={"map_type_" + synergy} />
                   ))}
                   {t(`map.${map}`)}
                 </span>

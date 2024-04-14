@@ -4039,7 +4039,7 @@ export const AnimationConfig: {
   [Pkm.TYMPOLE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shake
+    emote: AnimationType.Shoot
   },
   [Pkm.PALPITOAD]: {
     attack: AnimationType.Attack,
