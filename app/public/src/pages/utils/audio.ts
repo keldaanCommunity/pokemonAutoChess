@@ -1,5 +1,4 @@
 import { DungeonMusic } from "../../../../types/enum/Dungeon"
-import GameScene from "../../game/scenes/game-scene"
 import { preferences } from "../../preferences"
 
 export const SOUNDS = {
@@ -33,9 +32,7 @@ export function preloadSounds() {
 
 export function preloadMusic(scene: Phaser.Scene, dungeonMusic: DungeonMusic) {
   scene.load.audio("music_" + dungeonMusic, [
-    `https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChessMusic/main/ogg/${encodeURIComponent(
-      dungeonMusic
-    )}.ogg`
+    `assets/musics/ogg/${dungeonMusic}.ogg`
   ])
 }
 
