@@ -719,20 +719,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    if (this.hasSynergyEffect(Synergy.AQUATIC)) {
-      const burnManaChance = this.effects.has(Effect.SWIFT_SWIM)
-        ? 0.35
-        : this.effects.has(Effect.HYDRATION)
-        ? 0.45
-        : 0.55
-      const manaDrain = 20
-      if (chance(burnManaChance)) {
-        target.addPP(-manaDrain)
-        target.count.manaBurnCount++
-        this.addPP(manaDrain)
-      }
-    }
-
     if (this.hasSynergyEffect(Synergy.GHOST)) {
       if (chance(0.25)) {
         target.status.triggerSilence(2000, target, this)
