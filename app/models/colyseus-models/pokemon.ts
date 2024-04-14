@@ -76,6 +76,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("string") action: PokemonActionState = PokemonActionState.IDLE
   evolutionRule: EvolutionRule = new CountEvolutionRule(3)
   additional = false
+  regional = false
 
   constructor(shiny: boolean, emotion: Emotion) {
     super()
@@ -6837,17 +6838,22 @@ export class Regidrago extends Pokemon {
   attackSprite = AttackSprite.FIRE_RANGE
 }
 export class Guzzlord extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.DARK])
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.DARK,
+    Synergy.MONSTER
+  ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 250
+  hp = 300
   atk = 22
   def = 3
   speDef = 3
-  maxPP = 120
-  range = 3
-  skill = Ability.TWISTING_NETHER
-  attackSprite = AttackSprite.DARK_RANGE
+  maxPP = 100
+  range = 1
+  skill = Ability.CRUNCH
+  passive = Passive.GUZZLORD
+  attackSprite = AttackSprite.DARK_MELEE
 }
 export class Eternatus extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -12332,8 +12338,8 @@ export class Spinarak extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.ARIADOS
-  hp = 70
-  atk = 7
+  hp = 60
+  atk = 6
   def = 1
   speDef = 1
   maxPP = 70
@@ -12346,8 +12352,8 @@ export class Ariados extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.BUG, Synergy.POISON])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 160
-  atk = 17
+  hp = 150
+  atk = 14
   def = 2
   speDef = 2
   maxPP = 70

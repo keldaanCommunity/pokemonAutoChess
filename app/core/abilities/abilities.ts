@@ -8108,6 +8108,23 @@ export class SparkStrategy extends AbilityStrategy {
   }
 }
 
+export class CrunchStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const { death } = target.handleSpecialDamage(150, board, AttackType.SPECIAL, pokemon, crit, true)
+    if(death){
+      pokemon.handleHeal(Math.ceil(0.5 * target.hp), pokemon, 0)
+    }
+  }
+}
+
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -8415,5 +8432,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PSYSTRIKE]: new PsystrikeStrategy(),
   [Ability.FACADE]: new FacadeStrategy(),
   [Ability.DREAM_EATER]: new DreamEaterStrategy(),
-  [Ability.SPARK]: new SparkStrategy()
+  [Ability.SPARK]: new SparkStrategy(),
+  [Ability.CRUNCH]: new CrunchStrategy()
 }
