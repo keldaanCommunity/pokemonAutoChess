@@ -321,7 +321,8 @@
     "FACADE": "Facade",
     "DREAM_EATER": "Dream Eater",
     "SPARK": "Spark",
-    "CRUNCH": "Crunch"
+    "CRUNCH": "Crunch",
+    "CROSS_POISON": "Cross Poison"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1170,7 +1171,7 @@
     "FLAME_CHARGE": "Dash into the enemy team's backline, dealing [30,60,120,SP] SPECIAL to all enemy Pokémon hit",
     "LEECH_SEED": "POISONNED the target for [3,6,12] seconds and heal the user's HP by [20,40,80,SP]",
     "LOCK_ON": "Lock on the target. The next attack cannot miss and deal [200,SP]% additional TRUE.",
-    "PSYCH_UP": "Deal [10,20,40,SP] SPECIAL to the target, then SILENCE them and all adjacent enemy Pokémon for [2,4,8]",
+    "PSYCH_UP": "Deal [10,20,40,SP] SPECIAL to the target, then SILENCE them and all adjacent enemy Pokémon for [2,4,8] seconds",
     "RAZOR_WIND": "Deal [20,40,80,SP] SPECIAL to the target, then make it and all adjacent enemies PARALYSIS for 7 seconds",
     "TWISTING_NETHER": "Deals [80,SP] SPECIAL to all enemies adjacent to the target in a 2-cell radius, then teleport them randomly across the battlefield",
     "WONDER_GUARD": "Deal [30,60,120,SP] SPECIAL to all adjacent enemy Pokémon and make them PARALYSIS for 3 seconds",
@@ -1385,7 +1386,8 @@
     "FACADE": "Deals [20,40,80,SP] SPECIAL. Doubles damage if the pokémon is BURN, CONFUSION, FREEZE, PARALYSIS, POISONNED, SILENCE, SLEEP, FLINCH, CHARM, ARMOR_REDUCTION or WOUND",
     "DREAM_EATER": "If an enemy is SLEEP, jump next to it, deals [45,90,SP] SPECIAL and restores the same amount of HP. Otherwise, puts the target SLEEP for [2.5,5] s",
     "SPARK": "The pokémon fires a spark charged with electricity at the target, inflicting [40,80,SP] SPECIAL. The spark can bounce up to 4 times between adjacent enemies. Each rebound halves the SPECIAL",
-    "CRUNCH": "Deal [150,SP] SPECIAL. If it kills the target, heal for 50% of target's max HP."
+    "CRUNCH": "Deal [150,SP] SPECIAL. If it kills the target, heal for 50% of target's max HP.",
+    "CROSS_POISON": "Deal [30,60,120,SP] to target and enemies adjacent to it, and POISONNED them for 3 seconds"
   },
   "effect": {
     "INGRAIN": "Ingrain",
