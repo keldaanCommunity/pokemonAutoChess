@@ -12,8 +12,10 @@ import { listen } from "@colyseus/tools"
 
 // Import Colyseus config
 import app from "./app.config"
+import { initializeMetrics } from "./metrics"
 
 if (process.env.NODE_APP_INSTANCE) {
+  initializeMetrics()
   listen(app)
 } else {
   listen(app, 9000)
