@@ -112,7 +112,7 @@ export class Pokemon extends Schema implements IPokemon {
       ![Pkm.DITTO, Pkm.EGG].includes(this.name)
     )
   }
-  
+
   // called after manually changing position of the pokemon on board
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChangePosition(x: number, y: number, player: Player) {}
@@ -2345,9 +2345,9 @@ export class Lairon extends Pokemon {
   stars = 2
   evolution = Pkm.AGGRON
   hp = 100
-  atk = 8
+  atk = 9
   def = 4
-  speDef = 4
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.STOMP
@@ -2359,9 +2359,9 @@ export class Aggron extends Pokemon {
   rarity = Rarity.COMMON
   stars = 3
   hp = 170
-  atk = 16
+  atk = 19
   def = 6
-  speDef = 6
+  speDef = 5
   maxPP = 100
   range = 1
   skill = Ability.STOMP
@@ -6229,7 +6229,7 @@ export class Mankey extends Pokemon {
   stars = 1
   evolution = Pkm.PRIMEAPE
   hp = 120
-  atk = 10
+  atk = 8
   def = 3
   speDef = 2
   maxPP = 90
@@ -6243,9 +6243,9 @@ export class Primeape extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 240
-  atk = 26
+  atk = 21
   def = 6
-  speDef = 4
+  speDef = 2
   maxPP = 90
   range = 1
   skill = Ability.THRASH
@@ -6361,7 +6361,7 @@ export class Gligar extends Pokemon {
   atk = 16
   def = 3
   speDef = 3
-  maxPP = 90
+  maxPP = 100
   range = 1
   skill = Ability.POISON_JAB
   passive = Passive.GLIGAR
@@ -6380,7 +6380,7 @@ export class Gliscor extends Pokemon {
   atk = 18
   def = 4
   speDef = 4
-  maxPP = 90
+  maxPP = 100
   range = 1
   skill = Ability.POISON_JAB
   passive = Passive.POISON_HEAL
@@ -10277,10 +10277,10 @@ export class Tepig extends Pokemon {
   stars = 1
   evolution = Pkm.PIGNITE
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
-  hp = 80
-  atk = 8
-  def = 3
-  speDef = 3
+  hp = 70
+  atk = 7
+  def = 2
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.IRON_TAIL
@@ -10295,9 +10295,9 @@ export class Pignite extends Pokemon {
   evolution = Pkm.EMBOAR
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 140
-  atk = 14
-  def = 5
-  speDef = 5
+  atk = 12
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.IRON_TAIL
@@ -10309,10 +10309,10 @@ export class Emboar extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIRE, Synergy.FIGHTING])
   rarity = Rarity.HATCH
   stars = 3
-  hp = 220
-  atk = 24
-  def = 7
-  speDef = 7
+  hp = 210
+  atk = 20
+  def = 6
+  speDef = 6
   maxPP = 100
   range = 1
   skill = Ability.IRON_TAIL
