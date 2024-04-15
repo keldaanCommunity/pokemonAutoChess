@@ -6361,7 +6361,7 @@ export class Gligar extends Pokemon {
   atk = 16
   def = 3
   speDef = 3
-  maxPP = 90
+  maxPP = 100
   range = 1
   skill = Ability.POISON_JAB
   passive = Passive.GLIGAR
@@ -6380,7 +6380,7 @@ export class Gliscor extends Pokemon {
   atk = 18
   def = 4
   speDef = 4
-  maxPP = 90
+  maxPP = 100
   range = 1
   skill = Ability.POISON_JAB
   passive = Passive.POISON_HEAL
