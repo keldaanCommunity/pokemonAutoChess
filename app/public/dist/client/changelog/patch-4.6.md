@@ -48,7 +48,6 @@
 - Nerf Axew line Attack ~~12/24/36~~ 10/20/30
 - Buff Charge (Zapdos): ~~20~~ 30% Attack and Attack Speed
 - Buff Stealth rocks (Regirock): increase range to 2
-- Nerf Gligar line: PP 90 → 100
 
 # Changes to Synergies
 
