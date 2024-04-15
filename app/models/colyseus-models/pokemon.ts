@@ -7924,7 +7924,7 @@ export class Croagunk extends Pokemon {
   speDef = 2
   maxPP = 85
   range = 1
-  skill = Ability.GUILLOTINE
+  skill = Ability.CROSS_POISON
   additional = true
   attackSprite = AttackSprite.POISON_MELEE
 }
@@ -7943,7 +7943,7 @@ export class Toxicroak extends Pokemon {
   speDef = 4
   maxPP = 85
   range = 1
-  skill = Ability.GUILLOTINE
+  skill = Ability.CROSS_POISON
   additional = true
   attackSprite = AttackSprite.POISON_MELEE
 }

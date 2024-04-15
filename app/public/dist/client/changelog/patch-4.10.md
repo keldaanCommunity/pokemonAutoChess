@@ -47,6 +47,7 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - New passive for Shuckle: consummed berries turn into berry juice
 - Nerf Spinarak line: HP: 70/160 → 60/150, Attack: 7/17 → 6/14
 - Reworked Guzzlord: added Monster synergy, changed range to 1, new ability: Crunch ; HP: 250→300
+- New ability for Croagunk line: Cross poison
 
 # Changes to Synergies
 
