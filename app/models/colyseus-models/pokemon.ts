@@ -77,6 +77,7 @@ export class Pokemon extends Schema implements IPokemon {
   evolutionRule: EvolutionRule = new CountEvolutionRule(3)
   additional = false
   regional = false
+  canHoldItems = true
 
   constructor(shiny: boolean, emotion: Emotion) {
     super()
@@ -111,11 +112,7 @@ export class Pokemon extends Schema implements IPokemon {
       ![Pkm.DITTO, Pkm.EGG].includes(this.name)
     )
   }
-
-  get canHoldItems(): boolean {
-    return ![Pkm.DITTO, Pkm.EGG, Pkm.COMFEY, ...Unowns].includes(this.name)
-  }
-
+  
   // called after manually changing position of the pokemon on board
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChangePosition(x: number, y: number, player: Player) {}
@@ -178,6 +175,7 @@ export class Ditto extends Pokemon {
   skill = Ability.TRANSFORM
   passive = Passive.DITTO
   attackSprite = AttackSprite.NORMAL_MELEE
+  canHoldItems = false
 }
 
 export class Substitute extends Pokemon {
@@ -208,6 +206,7 @@ export class Egg extends Pokemon {
   passive = Passive.EGG
   attackSprite = AttackSprite.NORMAL_MELEE
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EGG_HATCH)
+  canHoldItems = false
 }
 
 export class Electrike extends Pokemon {
@@ -9306,6 +9305,7 @@ export class UnownA extends Pokemon {
   skill = Ability.HIDDEN_POWER_A
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 export class UnownB extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -9320,6 +9320,7 @@ export class UnownB extends Pokemon {
   skill = Ability.HIDDEN_POWER_B
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownC extends Pokemon {
@@ -9335,6 +9336,7 @@ export class UnownC extends Pokemon {
   skill = Ability.HIDDEN_POWER_C
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownD extends Pokemon {
@@ -9350,6 +9352,7 @@ export class UnownD extends Pokemon {
   skill = Ability.HIDDEN_POWER_D
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownE extends Pokemon {
@@ -9365,6 +9368,7 @@ export class UnownE extends Pokemon {
   skill = Ability.HIDDEN_POWER_E
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownF extends Pokemon {
@@ -9380,6 +9384,7 @@ export class UnownF extends Pokemon {
   skill = Ability.HIDDEN_POWER_F
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownG extends Pokemon {
@@ -9395,6 +9400,7 @@ export class UnownG extends Pokemon {
   skill = Ability.HIDDEN_POWER_G
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownH extends Pokemon {
@@ -9410,6 +9416,7 @@ export class UnownH extends Pokemon {
   skill = Ability.HIDDEN_POWER_H
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownI extends Pokemon {
@@ -9425,6 +9432,7 @@ export class UnownI extends Pokemon {
   skill = Ability.HIDDEN_POWER_I
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownJ extends Pokemon {
@@ -9440,6 +9448,7 @@ export class UnownJ extends Pokemon {
   skill = Ability.HIDDEN_POWER_J
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownK extends Pokemon {
@@ -9455,6 +9464,7 @@ export class UnownK extends Pokemon {
   skill = Ability.HIDDEN_POWER_K
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownL extends Pokemon {
@@ -9470,6 +9480,7 @@ export class UnownL extends Pokemon {
   skill = Ability.HIDDEN_POWER_L
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownM extends Pokemon {
@@ -9485,6 +9496,7 @@ export class UnownM extends Pokemon {
   skill = Ability.HIDDEN_POWER_M
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownN extends Pokemon {
@@ -9500,6 +9512,7 @@ export class UnownN extends Pokemon {
   skill = Ability.HIDDEN_POWER_N
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownO extends Pokemon {
@@ -9515,6 +9528,7 @@ export class UnownO extends Pokemon {
   skill = Ability.HIDDEN_POWER_O
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownP extends Pokemon {
@@ -9530,6 +9544,7 @@ export class UnownP extends Pokemon {
   skill = Ability.HIDDEN_POWER_P
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownQ extends Pokemon {
@@ -9545,6 +9560,7 @@ export class UnownQ extends Pokemon {
   skill = Ability.HIDDEN_POWER_Q
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownR extends Pokemon {
@@ -9560,6 +9576,7 @@ export class UnownR extends Pokemon {
   skill = Ability.HIDDEN_POWER_R
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownS extends Pokemon {
@@ -9575,6 +9592,7 @@ export class UnownS extends Pokemon {
   skill = Ability.HIDDEN_POWER_S
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownT extends Pokemon {
@@ -9590,6 +9608,7 @@ export class UnownT extends Pokemon {
   skill = Ability.HIDDEN_POWER_T
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownU extends Pokemon {
@@ -9605,6 +9624,7 @@ export class UnownU extends Pokemon {
   skill = Ability.HIDDEN_POWER_U
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownV extends Pokemon {
@@ -9620,6 +9640,7 @@ export class UnownV extends Pokemon {
   skill = Ability.HIDDEN_POWER_V
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownW extends Pokemon {
@@ -9635,6 +9656,7 @@ export class UnownW extends Pokemon {
   skill = Ability.HIDDEN_POWER_W
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownX extends Pokemon {
@@ -9650,6 +9672,7 @@ export class UnownX extends Pokemon {
   skill = Ability.HIDDEN_POWER_X
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownY extends Pokemon {
@@ -9665,6 +9688,7 @@ export class UnownY extends Pokemon {
   skill = Ability.HIDDEN_POWER_Y
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownZ extends Pokemon {
@@ -9680,6 +9704,7 @@ export class UnownZ extends Pokemon {
   skill = Ability.HIDDEN_POWER_Z
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownQuestion extends Pokemon {
@@ -11761,7 +11786,7 @@ export class Comfey extends Pokemon {
   skill = Ability.FLORAL_HEALING
   passive = Passive.COMFEY
   attackSprite = AttackSprite.FAIRY_RANGE
-
+  canHoldItems = false
   afterSimulationStart({
     simulation,
     team,

@@ -79,3 +79,4 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Changed Scribble "Rare is Expensive": Buying XP now costs 8 instead of 4. Units are bought and sold for 1 gold less.
 - New Scribble rule: Free Market
 - New keybiding for emotes: maintain Ctrl to show emote menu, Ctrl+1..9 to trigger emote 1..9
+- When moving a Ditto from board over a unit on bench, it now swaps units instead of cloning the unit
