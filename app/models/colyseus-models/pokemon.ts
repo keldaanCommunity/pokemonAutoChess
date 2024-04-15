@@ -112,7 +112,7 @@ export class Pokemon extends Schema implements IPokemon {
       ![Pkm.DITTO, Pkm.EGG].includes(this.name)
     )
   }
-  
+
   // called after manually changing position of the pokemon on board
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChangePosition(x: number, y: number, player: Player) {}
@@ -2345,9 +2345,9 @@ export class Lairon extends Pokemon {
   stars = 2
   evolution = Pkm.AGGRON
   hp = 100
-  atk = 8
+  atk = 9
   def = 4
-  speDef = 4
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.STOMP
@@ -2359,9 +2359,9 @@ export class Aggron extends Pokemon {
   rarity = Rarity.COMMON
   stars = 3
   hp = 170
-  atk = 16
+  atk = 19
   def = 6
-  speDef = 6
+  speDef = 5
   maxPP = 100
   range = 1
   skill = Ability.STOMP
