@@ -1285,8 +1285,10 @@
     "WHIRLPOOL": "Erfassen Sie den am weitesten entfernten Feind und entfesseln Sie einen Hagel von 4 Strudeln auf ihn. Jeder Angriff fügt dem ersten getroffenen Gegner [125,SP]% ATK PHYSICAL zu",
     "SMOKE_SCREEN": "Kanalisiert den Untergrund und erscheint wieder in der Mitte des gegnerischen Teams, was allen benachbarten Einheiten 2 Sekunden lang [10,20,40,SP] SPECIAL, BURN und ARMOR_REDUCTION zufügt",
     "PRESENT": "Verursacht entweder [80,SP], [150,SP], [300,SP] SPECIAL oder heilt 80 HP des Ziels",
+    "ATTRACT": "CHARM [1,2,3] zufällige Pokémon für [1,SP] Sekunden",
     "AERIAL_ACE": "Fügt [25,50,100,SP] TRUE zu.",
     "ASSIST": "Kopiert und benutzt die Fähigkeit von einem Zufälligen verbündeten Pokémon",
+    "SCREECH": "Reduziert die DEF aller angrenzenden Gegner um [1,2,4,SP]",
     "AURASPHERE": "Verströmt eine Aura und projiziert Energie in einer Linie, die jedem getroffenen Gegner 3 Sekunden lang [25,50,SP] SPECIAL und SILENCE zufügt",
     "SHIELDS_DOWN": "Meteno wechselt in einer zufällige Kernform.",
     "SHIELDS_UP": "Meteno wechselt in die Meteorform."
@@ -1514,7 +1516,11 @@
     "WINDY": "+10 % Ausweichchance (+20 % beim FLIEGEN)",
     "NIGHT": "+20 % CRIT_CHANCE\n+30 % SLEEP-Dauer",
     "HYDRATATION": "Die GRASS Synergie heilt unter dem RAIN 5 zusätzliche HP pro Sekunde",
-    "SHINING_RAY": "Erhöht"
+    "SHINING_RAY": "Erhöht",
+    "QUICK_FEET": "+30% ATK und Bewegungstempo, WILD Pokémon können jetzt auch während PvP-Runden im Shop auftauchen",
+    "RUN_AWAY": "+50% ATK und Bewegungstempo, und 10% Chance auf WILD Pokémon im Shop",
+    "HUSTLE": "+80% ATK und Bewegungstempo, und 15% Chance auf WILD Pokémon im Shop",
+    "BERSERK": "+120% ATK und Bewegungstempo, und 20% Chance auf WILD Pokémon im Shop. RAGE 5 Sekunden früher"
   },
   "item": {
     "FOSSIL_STONE": "Fossil",
@@ -1732,6 +1738,8 @@
     "POISON_HEAL": "Wenn das Pokémon POISONNED ist, erhält es HP, anstatt Schaden zu erleiden",
     "GRIM_NEIGH": "Wenn das Pokémon einen Feind niederschlägt, gibt es ein furchteinflößendes Wiehern von sich, das seine AP um 30 erhöht",
     "SHAYMIN": "Shaymin ist auf der Suche nach einer GRACIDEA_FLOWER",
+    "GUTS": "Das Pokémon erhält 5 ATK, solange es BURN ist oder POISONNED hat",
+    "PORYGON": "Porygon2 sucht nach einem UPGRADE",
     "SPECIAL_ATTACK": "Standard Angriffe verursachen SPECIAL und skalieren mit AP",
     "NINCADA": "Erhalte, nach der Entwicklung, auch ein Ninjatom, wenn du einen Freien Platz auf der Bank hast",
     "FAMILY": "Dieses Pokémon wächst mit der Zeit (Zug 15 & Zug 20)",
@@ -2131,8 +2139,8 @@
   "stage": "Bühne",
   "spectate": "Zuschauen",
   "join": "Beitreten",
-  "no_elo": "Nur zum Spaß",
   "reconnect": "Erneut verbinden",
+  "no_elo": "Nur zum Spaß",
   "participate": "Teilnehmen",
   "smeargle_scribble": "Farbeagle´s Gekritzel",
   "password_protected": "Private Lobby (passwortgeschützt)",

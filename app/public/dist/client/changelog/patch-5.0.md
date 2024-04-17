@@ -40,6 +40,7 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Anorith line: PP 100 → 80
 - Spheal line: PP 100 → 90
 - Revert Spinda buff from 4.6
+- Revert Mankey/Primeapp buff from 4.6
 - Buff Chimecho: now resonates to sounds from allies in 2-cell radius
 - Nerf Pinsir: Attack 25 → 21
 - Changed Aura Wheel (Morpeko): now gives +10% attack speed
@@ -48,6 +49,9 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Nerf Spinarak line: HP: 70/160 → 60/150, Attack: 7/17 → 6/14
 - Reworked Guzzlord: added Monster synergy, changed range to 1, new ability: Crunch ; HP: 250→300
 - New ability for Croagunk line: Cross poison
+- Nerfed Tepig line: HP 80/140/220→70/140/210, Attack: 8/14/24→7/12/20, Def/Spedef: 3/5/7→2/4/6
+- Changed Aron line: Attack 4/8/16 → 4/9/19, Spedef: 2/4/6→2/3/5
+- Nerf Gligar line: PP 90 → 100
 
 # Changes to Synergies
 
