@@ -30,7 +30,8 @@
     "lint": "npx eslint app/",
     "build-client": "node esbuild.js --build",
     "build-server": "tsc",
-    "build": "npm run assetpack && npm run build-client && npm run build-server",
+    "download-music": "rimraf -rf ./app/public/dist/client/assets/musics && git clone https://github.com/keldaanCommunity/pokemonAutoChessMusic ./app/public/dist/client/assets/musics",
+    "build": "npm run assetpack && npm run build-client && npm run build-server && npm run download-music",
     "start": "node ./app/public/dist/server/app/index.js",
     "add-bot": "node ./app/public/dist/server/db-commands/populate-bot.js",
     "monitor-bot": "node ./app/public/dist/server/scheduled/monitor-bot.js",
@@ -38,7 +39,7 @@
     "postinstall": "cd edit/assetpack && npm install",
     "assetpack": "cd edit/assetpack && npm run assetpack",
     "precompute": "cd gen && ts-node precompute-all.ts",
-    "colyseus-post-deploy":"npx colyseus-post-deploy"
+    "colyseus-post-deploy": "npx colyseus-post-deploy"
   },
   "dependencies": {
     "@colyseus/command": "^0.2.1",
@@ -82,6 +83,8 @@
     "phaser": "^3.80.0",
     "phaser-animated-tiles-phaser3.5": "^2.0.5",
     "phaser3-rex-plugins": "^1.60.9",
+    "pm2-prom-module-client": "^1.0.3",
+    "prom-client": "^15.1.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.0",
     "react-bootstrap-typeahead": "^6.3.2",
@@ -94,6 +97,7 @@
     "react-tabs": "^6.0.2",
     "react-toastify": "^10.0.3",
     "react-tooltip": "5.21.5",
+    "rimraf": "^5.0.5",
     "unique-names-generator": "^4.7.1"
   },
   "devDependencies": {

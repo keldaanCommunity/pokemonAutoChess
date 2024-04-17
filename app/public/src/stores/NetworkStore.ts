@@ -13,11 +13,11 @@ import {
   Title,
   Transfer
 } from "../../../types"
-import { DungeonPMDO } from "../../../types/enum/Dungeon"
 import { BotDifficulty } from "../../../types/enum/Game"
 import { Item } from "../../../types/enum/Item"
 import { Language } from "../../../types/enum/Language"
 import { PkmProposition } from "../../../types/enum/Pokemon"
+import { logger } from "../../../utils/logger"
 
 export interface INetwork {
   client: Client
@@ -33,7 +33,7 @@ export interface INetwork {
 const endpoint = `${window.location.protocol.replace("http", "ws")}//${
   window.location.host
 }`
-console.log(endpoint)
+logger.info(endpoint)
 
 const initalState: INetwork = {
   client: new Client(endpoint),
@@ -173,12 +173,6 @@ export const networkSlice = createSlice({
     },
     toggleEloRoom: (state, action: PayloadAction<boolean>) => {
       state.preparation?.send(Transfer.TOGGLE_NO_ELO, action.payload)
-    },
-    requestTilemap: (state) => {
-      state.game?.send(Transfer.REQUEST_TILEMAP)
-    },
-    selectTilemap: (state, action: PayloadAction<DungeonPMDO | "random">) => {
-      state.preparation?.send(Transfer.SELECT_TILEMAP, action.payload)
     },
     refreshClick: (state) => {
       state.game?.send(Transfer.REFRESH)
@@ -346,8 +340,6 @@ export const {
   listBots,
   toggleReady,
   toggleEloRoom,
-  requestTilemap,
-  selectTilemap,
   itemClick,
   shopClick,
   levelClick,

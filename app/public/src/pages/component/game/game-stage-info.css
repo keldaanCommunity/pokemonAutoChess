@@ -117,12 +117,14 @@
   width: 1.5em;
 }
 
-#game-stage-info .weather-information > img {
+#game-stage-info .weather-information > img,
+#game-stage-info .map-information > img {
   width: 1.5em;
   height: 1.5em;
 }
 
-#detail-weather p {
+#detail-weather p,
+#detail-map p {
   white-space: pre-line;
   margin: 0 0.25em;
 }

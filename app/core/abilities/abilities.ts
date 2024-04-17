@@ -87,10 +87,11 @@ export class BlueFlareStrategy extends AbilityStrategy {
     }
     damage += multiplier * 20
 
-    const cells = board.getAdjacentCells(target.positionX, target.positionY)
-
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-
+    const cells = board.getAdjacentCells(
+      target.positionX,
+      target.positionY,
+      true
+    )
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
@@ -123,10 +124,11 @@ export class FusionBoltStrategy extends AbilityStrategy {
     }
     damage += multiplier * 40
 
-    const cells = board.getAdjacentCells(target.positionX, target.positionY)
-
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-
+    const cells = board.getAdjacentCells(
+      target.positionX,
+      target.positionY,
+      true
+    )
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
@@ -549,10 +551,11 @@ export class PsychicStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = pokemon.stars === 3 ? 180 : pokemon.stars === 2 ? 90 : 45
 
-    const cells = board.getAdjacentCells(target.positionX, target.positionY)
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.addPP(-15)
-    target.count.manaBurnCount++
+    const cells = board.getAdjacentCells(
+      target.positionX,
+      target.positionY,
+      true
+    )
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
@@ -1005,8 +1008,11 @@ export class PsychUpStrategy extends AbilityStrategy {
       duration = 8000
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerSilence(duration, target, pokemon)
-    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+    const cells = board.getAdjacentCells(
+      target.positionX,
+      target.positionY,
+      true
+    )
     cells.forEach((cell) => {
       if (cell && cell.value && cell.value.team !== pokemon.team) {
         cell.value.status.triggerSilence(duration, cell.value, pokemon)
@@ -1026,8 +1032,11 @@ export class RazorWindStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = pokemon.stars === 3 ? 80 : pokemon.stars === 2 ? 40 : 20
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerParalysis(7000, target)
-    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+    const cells = board.getAdjacentCells(
+      target.positionX,
+      target.positionY,
+      true
+    )
     cells.forEach((cell) => {
       if (cell && cell.value && cell.value.team !== pokemon.team) {
         cell.value.status.triggerParalysis(7000, cell.value)
@@ -1235,12 +1244,11 @@ export class ClangorousSoulStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const buff = [1, 2, 4][pokemon.stars - 1] ?? 1
 
-    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-
-    pokemon.addAttack(buff, true)
-    pokemon.addDefense(buff, true)
-    pokemon.addSpecialDefense(buff, true)
-
+    const cells = board.getAdjacentCells(
+      pokemon.positionX,
+      pokemon.positionY,
+      true
+    )
     cells.forEach((cell) => {
       if (cell.value && pokemon.team == cell.value.team) {
         cell.value.addAttack(buff, true)
@@ -3339,20 +3347,19 @@ export class IcicleCrashStrategy extends AbilityStrategy {
       damage = 80
     }
 
-    const cells = board.getAdjacentCells(target.positionX, target.positionY)
-
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    cells.forEach((cell) => {
-      if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-      }
-    })
+    board
+      .getAdjacentCells(target.positionX, target.positionY, true)
+      .forEach((cell) => {
+        if (cell.value && pokemon.team != cell.value.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
   }
 }
 
@@ -3368,10 +3375,7 @@ export class SteamEruptionStrategy extends AbilityStrategy {
     const damage = 80
     const burnDuration = 3000
 
-    const cells = board.getAdjacentCells(target.positionX, target.positionY)
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerBurn(burnDuration, target, pokemon)
-
+    const cells = board.getAdjacentCells(target.positionX, target.positionY, true)
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.handleSpecialDamage(
@@ -3412,9 +3416,7 @@ export class RootStrategy extends AbilityStrategy {
         break
     }
 
-    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-    pokemon.handleHeal(heal, pokemon, 1)
-
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
     cells.forEach((cell) => {
       if (cell.value && pokemon.team == cell.value.team) {
         cell.value.handleHeal(heal, pokemon, 1)
@@ -3617,9 +3619,7 @@ export class EntanglingThreadStrategy extends AbilityStrategy {
         break
     }
 
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerParalysis(4000, target)
-    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
     cells.forEach((cell) => {
       if (cell.value && pokemon.team !== cell.value.team) {
         cell.value.status.triggerParalysis(4000, target)
@@ -3888,12 +3888,8 @@ export class StunSporeStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = [5, 10, 20][pokemon.stars - 1] ?? 20
-
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerParalysis(5000, target)
-
     board
-      .getAdjacentCells(target.positionX, target.positionY)
+      .getAdjacentCells(target.positionX, target.positionY, true)
       .forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
           cell.value.handleSpecialDamage(
@@ -3921,8 +3917,7 @@ export class MeteorMashStrategy extends AbilityStrategy {
     const damage = [30, 50, 70][pokemon.stars - 1] ?? 70
     pokemon.addAttack(5, true)
 
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    const cells = board.getAdjacentCells(pokemon.targetX, pokemon.targetY)
+    const cells = board.getAdjacentCells(pokemon.targetX, pokemon.targetY, true)
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.handleSpecialDamage(
@@ -4705,9 +4700,7 @@ export class FireSpinStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
-    const cells = board.getAdjacentCells(target.positionX, target.positionY)
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerBurn(3000, target, pokemon)
+    const cells = board.getAdjacentCells(target.positionX, target.positionY, true)
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.handleSpecialDamage(
@@ -4983,9 +4976,8 @@ export class AbsorbStrategy extends AbilityStrategy {
       damage = 120
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    pokemon.handleHeal(damage * 0.1, pokemon, 1)
 
-    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
     cells.forEach((cell) => {
       if (cell.value && cell.value.team === pokemon.team) {
         cell.value.handleHeal(damage * 0.1, pokemon, 1)
@@ -5562,20 +5554,20 @@ export class AnchorShotStrategy extends AbilityStrategy {
       pokemon.positionX,
       pokemon.positionY
     )
-    const potentials = shuffleArray(
+    const emptyCellsAround = shuffleArray(
       adjacentCells
         .filter((v) => v.value === undefined)
         .map((v) => ({ x: v.x, y: v.y }))
     )
-    if (potentials.length > 0) {
-      const potential = potentials[0]
+    if (emptyCellsAround.length > 0) {
+      const destination = emptyCellsAround[0]
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
         id: pokemon.simulation.id,
         skill: Ability.ANCHOR_SHOT,
         targetX: farthestTarget.positionX,
         targetY: farthestTarget.positionY
       })
-      farthestTarget.moveTo(potential.x, potential.y, board)
+      farthestTarget.moveTo(destination.x, destination.y, board)
       farthestTarget.handleSpecialDamage(
         damage,
         board,
@@ -5583,6 +5575,7 @@ export class AnchorShotStrategy extends AbilityStrategy {
         pokemon,
         crit
       )
+      farthestTarget.cooldown = min(500)(farthestTarget.cooldown)
     }
   }
 }
@@ -6393,11 +6386,9 @@ export class ScreechStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
     const debuff = pokemon.stars === 3 ? -4 : pokemon.stars === 2 ? -2 : -1
-    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-
-    target.addDefense(debuff, true)
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.addDefense(debuff, true)
@@ -8107,6 +8098,56 @@ export class SparkStrategy extends AbilityStrategy {
   }
 }
 
+export class CrunchStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const { death } = target.handleSpecialDamage(
+      150,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
+    if (death) {
+      pokemon.handleHeal(Math.ceil(0.5 * target.hp), pokemon, 0)
+    }
+  }
+}
+
+export class CrossPoisonStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [30,60,120][pokemon.stars - 1] ?? 120
+    board.getAdjacentCells(target.positionX, target.positionY, true)
+    .forEach(cell => {
+      if(cell.value && cell.value.team !== pokemon.team){
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit,
+          true
+        )
+        cell.value.status.triggerPoison(2000, cell.value, pokemon)
+      }
+    })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -8414,5 +8455,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PSYSTRIKE]: new PsystrikeStrategy(),
   [Ability.FACADE]: new FacadeStrategy(),
   [Ability.DREAM_EATER]: new DreamEaterStrategy(),
-  [Ability.SPARK]: new SparkStrategy()
+  [Ability.SPARK]: new SparkStrategy(),
+  [Ability.CRUNCH]: new CrunchStrategy(),
+  [Ability.CROSS_POISON]: new CrossPoisonStrategy()
 }

@@ -113,16 +113,14 @@ export class DebugScene extends Phaser.Scene {
   updateMap(mapName: DungeonPMDO): Promise<void> {
     if (this.map) this.map.destroy()
 
-    console.log("updateMap", mapName)
     return fetch(`/tilemap/${mapName}`)
       .then((res) => res.json())
       .then((tilemap: DesignTiled) => {
-        console.log("tilemap loaded", tilemap)
         this.tilemap = tilemap
         return new Promise((resolve) => {
           this.load.reset()
           tilemap.tilesets.forEach((t) => {
-            console.log(`loading tileset ${t.image}`)
+            logger.debug(`loading tileset ${t.image}`)
             this.load.image(
               mapName + "/" + t.name,
               "/assets/tilesets/" + mapName + "/" + t.image
@@ -135,7 +133,6 @@ export class DebugScene extends Phaser.Scene {
         })
       })
       .then(() => {
-        console.log("making map")
         const map = this.make.tilemap({ key: "map" })
         this.map = map
         this.tilemap!.layers.forEach((layer) => {
@@ -147,7 +144,6 @@ export class DebugScene extends Phaser.Scene {
         })
         ;(this.sys as any).animatedTiles.init(map)
         playMusic(this, DungeonDetails[mapName].music)
-        console.log("finished")
       })
   }
 

@@ -1119,7 +1119,7 @@
     "FIRE_TRICK": "Realiza [20,40,80,SP] de SPECIAL y teletransporta al objetivo a una esquina del mapa",
     "FLAME_CHARGE": "Corre hacia la retaguardia enemiga y reparte [30,60,120,SP] de SPECIAL",
     "LEECH_SEED": "Deja POISONNED al objetivo durante [3,6,12] segundos y recupera [20,40,80,SP] HP",
-    "LOCK_ON": "Fija el objetivo. El siguiente ataque no puede fallar, inflige [100,SP]% de TRUE y aplica ARMOR_REDUCTION durante 3 segundos.",
+    "LOCK_ON": "Fija el objetivo. El siguiente ataque no puede fallar y inflige [200,SP]% de TRUE",
     "PSYCH_UP": "Inflige [10,20,40,SP] de SPECIAL y deja SILENCE al objetivo y a sus enemigos adyacentes",
     "RAZOR_WIND": "Realiza [20,40,80,SP] de SPECIAL al objetivo y deja a él y a los enemigos a su alrededor PARALYSIS",
     "TWISTING_NETHER": "Inflige [80,SP] de SPECIAL a todos los enemigos adyacentes al objetivo en un radio de 2 celdas, y luego los teletransporta aleatoriamente por el campo de batalla",
@@ -1660,7 +1660,7 @@
     "CASTFORM": "Castform cambia su forma y el clima a SUN, RAIN o SNOW dependiendo de su sinergia dominante entre FIRE WATER ICE",
     "PHIONE": "Phione está buscando un huevo de agua",
     "PRIMAL": "Cuenta la leyenda que podrías desatar los antiguos poderes de estos pokemons.",
-    "WONDER_GUARD": "Reduce el daño recibido y la curación recibida a 1",
+    "WONDER_GUARD": "Bloquea 20 de daño",
     "ELECTRIC_TERRAIN": "Otorga ELECTRIC_FIELD a tus Pokémon ELECTRIC, aumentando su daño en un 20%",
     "GRASSY_TERRAIN": "Otorga GRASS_FIELD a tus Pokémon GRASS, aumentando su daño en un 20%",
     "MISTY_TERRAIN": "Otorga FAIRY_FIELD a tus FAIRY Pokemon, aumentando su daño en un 20%",
@@ -2075,7 +2075,7 @@
   "stage": "Escenario",
   "spectate": "Espectador",
   "join": "Unirse",
-  "just_for_fun": "Solo por diversión",
+  "no_elo": "Solo por diversión",
   "password_protected": "Vestíbulo privado (protegido con contraseña)",
   "private": "Privado",
   "available_rooms": "Cuartos disponibles",
@@ -2223,7 +2223,7 @@
   "kick_user": "Expulsar al usuario",
   "enter_password": "Introduce una contraseña para la habitación.",
   "delete_room": "Eliminar sala",
-  "just_for_fun_hint": "¡Este juego es solo por diversión, sin ganancia/pérdida de ELO!",
+  "no_elo_hint": "¡Este juego es solo por diversión, sin ganancia/pérdida de ELO!",
   "elligible_elo_hint": "✔ Este juego es elegible para ganancia/pérdida de ELO.",
   "average_elo": "ELO medio",
   "GLHF": "GLHF",
@@ -2304,7 +2304,6 @@
     "map": "Mapa"
   },
   "level_required": "Nivel exigido",
-  "select_map": "Selecciona el mapa para esta partida",
   "map": {
     "random": "Mapa aleatorio"
   }

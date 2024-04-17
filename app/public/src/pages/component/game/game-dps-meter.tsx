@@ -50,7 +50,7 @@ export default function GameDpsMeter() {
     <>
       <div
         id="game-dps-icon"
-        className="my-container clickable"
+        className="my-box clickable"
         title={`${isOpen ? "Hide" : "Show"} battle stats`}
         onClick={toggleOpen}
       >

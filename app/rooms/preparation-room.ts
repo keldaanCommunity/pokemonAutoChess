@@ -204,19 +204,6 @@ export default class PreparationRoom extends Room<PreparationState> {
       }
     })
 
-    this.onMessage(
-      Transfer.SELECT_TILEMAP,
-      (client, message: DungeonPMDO | "random") => {
-        try {
-          if (client.auth?.uid === this.state.ownerId) {
-            this.state.selectedMap = message
-          }
-        } catch (error) {
-          logger.error(error)
-        }
-      }
-    )
-
     this.onMessage(Transfer.GAME_START_REQUEST, (client) => {
       try {
         this.dispatcher.dispatch(new OnGameStartRequestCommand(), { client })

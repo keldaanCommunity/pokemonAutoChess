@@ -151,11 +151,11 @@ export default class Board {
     }
   }
 
-  getAdjacentCells(cellX: number, cellY: number) {
+  getAdjacentCells(cellX: number, cellY: number, includesCenter = false) {
     const cells = new Array<Cell>()
     for (let y = cellY - 1; y < cellY + 2; y++) {
       for (let x = cellX - 1; x < cellX + 2; x++) {
-        if (x == cellX && y == cellY) continue
+        if (x == cellX && y == cellY && !includesCenter) continue
         if (y >= 0 && y < this.rows && x >= 0 && x < this.columns) {
           cells.push({ x, y, value: this.cells[this.columns * y + x] })
         }

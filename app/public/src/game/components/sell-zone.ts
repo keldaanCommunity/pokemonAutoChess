@@ -45,6 +45,7 @@ export class SellZone extends GameObjects.Container {
     this.add(this.text)
 
     this.setVisible(false)
+    this.setDepth(2)
     this.scene.add.existing(this)
   }
 

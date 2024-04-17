@@ -11,15 +11,15 @@ export class FloatingItem extends GameObjects.Container {
     id: string,
     x: number,
     y: number,
-    name: Item
+    item: Item
   ) {
     super(scene, x, y)
-    this.name = name
+    this.name = item
     this.id = id
     this.circle = new GameObjects.Ellipse(scene, 0, 0, 40, 40, 0x61738a, 1)
     this.circle.setStrokeStyle(1, 0xffffff, 0.7)
     this.add(this.circle)
-    this.sprite = new GameObjects.Image(scene, 0, 0, "item", this.name)
+    this.sprite = new GameObjects.Image(scene, 0, 0, "item", this.name+".png")
     this.sprite.setScale(0.32)
     this.add(this.sprite)
     this.scene.add.existing(this)

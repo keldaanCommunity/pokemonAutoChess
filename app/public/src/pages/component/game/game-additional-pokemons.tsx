@@ -66,6 +66,7 @@ export function GameAdditionalPokemons() {
             return (
               <div
                 className={`my-box clickable game-pokemon-portrait`}
+                key={"game-additional-pokemons-" + index}
                 style={{
                   backgroundColor: rarityColor,
                   borderColor: rarityColor,

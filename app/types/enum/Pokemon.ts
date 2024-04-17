@@ -4039,7 +4039,7 @@ export const AnimationConfig: {
   [Pkm.TYMPOLE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shake
+    emote: AnimationType.Shoot
   },
   [Pkm.PALPITOAD]: {
     attack: AnimationType.Attack,
@@ -4228,8 +4228,8 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.GUZZLORD]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Charge,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.ETERNATUS]: {

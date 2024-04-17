@@ -1,9 +1,9 @@
-import { compressPng, compressJpg } from "@assetpack/plugin-compress"
+import { path } from "@assetpack/core"
+import { compressJpg, compressPng } from "@assetpack/plugin-compress"
 import { audio } from "@assetpack/plugin-ffmpeg"
 import { json } from "@assetpack/plugin-json"
-import { texturePacker } from "./plugin-texturepacker-fork/dist/es/index.js"
-import { path } from "@assetpack/core"
 import fs from "fs-extra"
+import { texturePacker } from "./plugin-texturepacker-fork/dist/es/index.js"
 
 export default {
   entry: "../../app/public/src/assets",
@@ -27,9 +27,9 @@ export default {
           formats: [".ogg"],
           recompress: false,
           options: {
-            audioBitrate: 96,
+            audioBitrate: 32,
             audioChannels: 1,
-            audioFrequency: 48000
+            audioFrequency: 22050,
           }
         }
       ]
@@ -118,6 +118,13 @@ function texturePackAtlas() {
       fs.writeFileSync(
         "../../app/public/dist/client/sw.js",
         sw.replace(/CACHE v[\d\.]+/, `CACHE v${newVersion}`)
+      )
+
+      // Copy items individual sprites as we need them unpacked as well
+      fs.cpSync(
+        "../../app/public/src/assets/item{tps}",
+        "../../app/public/dist/client/assets/item",
+        { recursive: true }
       )
     }
   }

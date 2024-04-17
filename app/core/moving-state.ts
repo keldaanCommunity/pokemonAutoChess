@@ -66,7 +66,7 @@ export default class MovingState extends PokemonState {
 
     let x: number | undefined = undefined
     let y: number | undefined = undefined
-    if (pokemon.types.has(Synergy.DARK) && pokemon.baseRange === 1) {
+    if (pokemon.types.has(Synergy.DARK) && pokemon.baseRange === 1 && pokemon.passive !== Passive.GUZZLORD) {
       // dark jump
       const farthestCoordinate = this.getFarthestTargetCoordinateAvailablePlace(
         pokemon,

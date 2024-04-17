@@ -40,18 +40,10 @@ const JUKEBOX: Gadget = {
   levelRequired: 30
 }
 
-const MAP: Gadget = {
-  name: "gadget.map",
-  description: "gadget.map_desc",
-  icon: "map",
-  levelRequired: 50
-}
-
 export const GADGETS = {
   TRAINER_CARD,
   BAG,
   TEAM_PLANNER,
   BOT_BUILDER,
-  JUKEBOX,
-  MAP
+  JUKEBOX
 } as const

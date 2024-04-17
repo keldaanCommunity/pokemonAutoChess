@@ -48,6 +48,7 @@ export default class PokemonAvatar extends PokemonSprite {
       this.drawLifebar()
     }
     this.registerKeys()
+    this.setDepth(2)
     this.sendEmote = throttle(this.sendEmote, 1000).bind(this)
   }
 
@@ -80,11 +81,6 @@ export default class PokemonAvatar extends PokemonSprite {
     ]
     NUM_KEYS.forEach((keycode, i) => {
       const onKeydown = (event) => {
-        console.log("onkeydown", event, {
-          cpa: this.isCurrentPlayerAvatar,
-          sg: this.scene?.game,
-          ctrl: event.ctrlKey
-        })
         if (this.isCurrentPlayerAvatar && this.scene?.game && event.ctrlKey) {
           this.sendEmote(AvatarEmotions[i])
         }

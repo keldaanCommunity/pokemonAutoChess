@@ -220,8 +220,12 @@ export class OnDragDropCommand extends Command<
       if (pokemon) {
         const x = parseInt(detail.x)
         const y = parseInt(detail.y)
+        const dropOnBench = y == 0
+        const dropFromBench = isOnBench(pokemon)
+
         if (
           pokemon.name === Pkm.DITTO &&
+          dropFromBench &&
           !isPositionEmpty(x, y, player.board)
         ) {
           const pokemonToClone = this.room.getPokemonByPosition(player, x, y)
@@ -247,39 +251,36 @@ export class OnDragDropCommand extends Command<
             this.room.swap(player, pokemon, x, y)
             success = true
           }
-        } else {
-          const dropOnBench = y == 0
-          const dropFromBench = isOnBench(pokemon)
+        } else if (dropOnBench && dropFromBench) {
           // Drag and drop pokemons through bench has no limitation
-          if (dropOnBench && dropFromBench) {
+
+          this.room.swap(player, pokemon, x, y)
+          pokemon.onChangePosition(x, y, player)
+          success = true
+        } else if (this.state.phase == GamePhaseState.PICK) {
+          // On pick, allow to drop on / from board
+          const teamSize = this.room.getTeamSize(player.board)
+          const isBoardFull =
+            teamSize >=
+            getMaxTeamSize(
+              player.experienceManager.level,
+              this.room.state.specialGameRule
+            )
+          const dropToEmptyPlace = isPositionEmpty(x, y, player.board)
+
+          if (dropOnBench) {
+            // From board to bench is always allowed (bench to bench is already handled)
             this.room.swap(player, pokemon, x, y)
             pokemon.onChangePosition(x, y, player)
             success = true
-          } else if (this.state.phase == GamePhaseState.PICK) {
-            // On pick, allow to drop on / from board
-            const teamSize = this.room.getTeamSize(player.board)
-            const isBoardFull =
-              teamSize >=
-              getMaxTeamSize(
-                player.experienceManager.level,
-                this.room.state.specialGameRule
-              )
-            const dropToEmptyPlace = isPositionEmpty(x, y, player.board)
-
-            if (dropOnBench) {
-              // From board to bench is always allowed (bench to bench is already handled)
-              this.room.swap(player, pokemon, x, y)
-              pokemon.onChangePosition(x, y, player)
-              success = true
-            } else if (
-              pokemon.canBePlaced &&
-              !(dropFromBench && dropToEmptyPlace && isBoardFull)
-            ) {
-              // Prevents a pokemon to go on the board only if it's adding a pokemon from the bench on a full board
-              this.room.swap(player, pokemon, x, y)
-              pokemon.onChangePosition(x, y, player)
-              success = true
-            }
+          } else if (
+            pokemon.canBePlaced &&
+            !(dropFromBench && dropToEmptyPlace && isBoardFull)
+          ) {
+            // Prevents a pokemon to go on the board only if it's adding a pokemon from the bench on a full board
+            this.room.swap(player, pokemon, x, y)
+            pokemon.onChangePosition(x, y, player)
+            success = true
           }
         }
       }
@@ -1302,7 +1303,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       minigamePhaseDuration += nbPlayersAlive * 2000
     }
     this.state.time = minigamePhaseDuration
-    this.room.miniGame.initialize(this.state)
+    this.room.miniGame.initialize(this.state, this.room)
   }
 
   initializeFightingPhase() {

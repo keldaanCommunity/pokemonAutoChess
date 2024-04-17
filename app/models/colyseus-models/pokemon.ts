@@ -76,6 +76,8 @@ export class Pokemon extends Schema implements IPokemon {
   @type("string") action: PokemonActionState = PokemonActionState.IDLE
   evolutionRule: EvolutionRule = new CountEvolutionRule(3)
   additional = false
+  regional = false
+  canHoldItems = true
 
   constructor(shiny: boolean, emotion: Emotion) {
     super()
@@ -109,10 +111,6 @@ export class Pokemon extends Schema implements IPokemon {
       this.rarity !== Rarity.HATCH &&
       ![Pkm.DITTO, Pkm.EGG].includes(this.name)
     )
-  }
-
-  get canHoldItems(): boolean {
-    return ![Pkm.DITTO, Pkm.EGG, Pkm.COMFEY, ...Unowns].includes(this.name)
   }
 
   // called after manually changing position of the pokemon on board
@@ -177,6 +175,7 @@ export class Ditto extends Pokemon {
   skill = Ability.TRANSFORM
   passive = Passive.DITTO
   attackSprite = AttackSprite.NORMAL_MELEE
+  canHoldItems = false
 }
 
 export class Substitute extends Pokemon {
@@ -207,6 +206,7 @@ export class Egg extends Pokemon {
   passive = Passive.EGG
   attackSprite = AttackSprite.NORMAL_MELEE
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EGG_HATCH)
+  canHoldItems = false
 }
 
 export class Electrike extends Pokemon {
@@ -2345,9 +2345,9 @@ export class Lairon extends Pokemon {
   stars = 2
   evolution = Pkm.AGGRON
   hp = 100
-  atk = 8
+  atk = 9
   def = 4
-  speDef = 4
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.STOMP
@@ -2359,9 +2359,9 @@ export class Aggron extends Pokemon {
   rarity = Rarity.COMMON
   stars = 3
   hp = 170
-  atk = 16
+  atk = 19
   def = 6
-  speDef = 6
+  speDef = 5
   maxPP = 100
   range = 1
   skill = Ability.STOMP
@@ -6229,7 +6229,7 @@ export class Mankey extends Pokemon {
   stars = 1
   evolution = Pkm.PRIMEAPE
   hp = 120
-  atk = 10
+  atk = 8
   def = 3
   speDef = 2
   maxPP = 90
@@ -6243,9 +6243,9 @@ export class Primeape extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 240
-  atk = 26
+  atk = 21
   def = 6
-  speDef = 4
+  speDef = 2
   maxPP = 90
   range = 1
   skill = Ability.THRASH
@@ -6361,7 +6361,7 @@ export class Gligar extends Pokemon {
   atk = 16
   def = 3
   speDef = 3
-  maxPP = 90
+  maxPP = 100
   range = 1
   skill = Ability.POISON_JAB
   passive = Passive.GLIGAR
@@ -6380,7 +6380,7 @@ export class Gliscor extends Pokemon {
   atk = 18
   def = 4
   speDef = 4
-  maxPP = 90
+  maxPP = 100
   range = 1
   skill = Ability.POISON_JAB
   passive = Passive.POISON_HEAL
@@ -6837,17 +6837,22 @@ export class Regidrago extends Pokemon {
   attackSprite = AttackSprite.FIRE_RANGE
 }
 export class Guzzlord extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.DARK])
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.DARK,
+    Synergy.MONSTER
+  ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 250
+  hp = 300
   atk = 22
   def = 3
   speDef = 3
-  maxPP = 120
-  range = 3
-  skill = Ability.TWISTING_NETHER
-  attackSprite = AttackSprite.DARK_RANGE
+  maxPP = 100
+  range = 1
+  skill = Ability.CRUNCH
+  passive = Passive.GUZZLORD
+  attackSprite = AttackSprite.DARK_MELEE
 }
 export class Eternatus extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -6913,7 +6918,7 @@ export class Shedinja extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.GHOST])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 10
+  hp = 100
   atk = 18
   def = 0
   speDef = 0
@@ -7919,7 +7924,7 @@ export class Croagunk extends Pokemon {
   speDef = 2
   maxPP = 85
   range = 1
-  skill = Ability.GUILLOTINE
+  skill = Ability.CROSS_POISON
   additional = true
   attackSprite = AttackSprite.POISON_MELEE
 }
@@ -7938,7 +7943,7 @@ export class Toxicroak extends Pokemon {
   speDef = 4
   maxPP = 85
   range = 1
-  skill = Ability.GUILLOTINE
+  skill = Ability.CROSS_POISON
   additional = true
   attackSprite = AttackSprite.POISON_MELEE
 }
@@ -9300,6 +9305,7 @@ export class UnownA extends Pokemon {
   skill = Ability.HIDDEN_POWER_A
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 export class UnownB extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -9314,6 +9320,7 @@ export class UnownB extends Pokemon {
   skill = Ability.HIDDEN_POWER_B
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownC extends Pokemon {
@@ -9329,6 +9336,7 @@ export class UnownC extends Pokemon {
   skill = Ability.HIDDEN_POWER_C
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownD extends Pokemon {
@@ -9344,6 +9352,7 @@ export class UnownD extends Pokemon {
   skill = Ability.HIDDEN_POWER_D
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownE extends Pokemon {
@@ -9359,6 +9368,7 @@ export class UnownE extends Pokemon {
   skill = Ability.HIDDEN_POWER_E
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownF extends Pokemon {
@@ -9374,6 +9384,7 @@ export class UnownF extends Pokemon {
   skill = Ability.HIDDEN_POWER_F
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownG extends Pokemon {
@@ -9389,6 +9400,7 @@ export class UnownG extends Pokemon {
   skill = Ability.HIDDEN_POWER_G
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownH extends Pokemon {
@@ -9404,6 +9416,7 @@ export class UnownH extends Pokemon {
   skill = Ability.HIDDEN_POWER_H
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownI extends Pokemon {
@@ -9419,6 +9432,7 @@ export class UnownI extends Pokemon {
   skill = Ability.HIDDEN_POWER_I
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownJ extends Pokemon {
@@ -9434,6 +9448,7 @@ export class UnownJ extends Pokemon {
   skill = Ability.HIDDEN_POWER_J
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownK extends Pokemon {
@@ -9449,6 +9464,7 @@ export class UnownK extends Pokemon {
   skill = Ability.HIDDEN_POWER_K
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownL extends Pokemon {
@@ -9464,6 +9480,7 @@ export class UnownL extends Pokemon {
   skill = Ability.HIDDEN_POWER_L
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownM extends Pokemon {
@@ -9479,6 +9496,7 @@ export class UnownM extends Pokemon {
   skill = Ability.HIDDEN_POWER_M
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownN extends Pokemon {
@@ -9494,6 +9512,7 @@ export class UnownN extends Pokemon {
   skill = Ability.HIDDEN_POWER_N
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownO extends Pokemon {
@@ -9509,6 +9528,7 @@ export class UnownO extends Pokemon {
   skill = Ability.HIDDEN_POWER_O
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownP extends Pokemon {
@@ -9524,6 +9544,7 @@ export class UnownP extends Pokemon {
   skill = Ability.HIDDEN_POWER_P
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownQ extends Pokemon {
@@ -9539,6 +9560,7 @@ export class UnownQ extends Pokemon {
   skill = Ability.HIDDEN_POWER_Q
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownR extends Pokemon {
@@ -9554,6 +9576,7 @@ export class UnownR extends Pokemon {
   skill = Ability.HIDDEN_POWER_R
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownS extends Pokemon {
@@ -9569,6 +9592,7 @@ export class UnownS extends Pokemon {
   skill = Ability.HIDDEN_POWER_S
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownT extends Pokemon {
@@ -9584,6 +9608,7 @@ export class UnownT extends Pokemon {
   skill = Ability.HIDDEN_POWER_T
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownU extends Pokemon {
@@ -9599,6 +9624,7 @@ export class UnownU extends Pokemon {
   skill = Ability.HIDDEN_POWER_U
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownV extends Pokemon {
@@ -9614,6 +9640,7 @@ export class UnownV extends Pokemon {
   skill = Ability.HIDDEN_POWER_V
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownW extends Pokemon {
@@ -9629,6 +9656,7 @@ export class UnownW extends Pokemon {
   skill = Ability.HIDDEN_POWER_W
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownX extends Pokemon {
@@ -9644,6 +9672,7 @@ export class UnownX extends Pokemon {
   skill = Ability.HIDDEN_POWER_X
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownY extends Pokemon {
@@ -9659,6 +9688,7 @@ export class UnownY extends Pokemon {
   skill = Ability.HIDDEN_POWER_Y
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownZ extends Pokemon {
@@ -9674,6 +9704,7 @@ export class UnownZ extends Pokemon {
   skill = Ability.HIDDEN_POWER_Z
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownQuestion extends Pokemon {
@@ -9794,7 +9825,7 @@ export class Zorua extends Pokemon {
   atk = 8
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 85
   range = 1
   skill = Ability.ILLUSION
   additional = true
@@ -9809,7 +9840,7 @@ export class Zoroark extends Pokemon {
   atk = 18
   def = 4
   speDef = 4
-  maxPP = 100
+  maxPP = 85
   range = 1
   skill = Ability.ILLUSION
   additional = true
@@ -9825,7 +9856,7 @@ export class HisuiZorua extends Pokemon {
   atk = 8
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 85
   range = 1
   skill = Ability.ILLUSION
   additional = true
@@ -9840,7 +9871,7 @@ export class HisuiZoroark extends Pokemon {
   atk = 18
   def = 4
   speDef = 4
-  maxPP = 100
+  maxPP = 85
   range = 1
   skill = Ability.ILLUSION
   additional = true
@@ -10236,6 +10267,7 @@ export class Shuckle extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SHELL_TRAP
+  passive = Passive.SHUCKLE
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -10245,10 +10277,10 @@ export class Tepig extends Pokemon {
   stars = 1
   evolution = Pkm.PIGNITE
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
-  hp = 80
-  atk = 8
-  def = 3
-  speDef = 3
+  hp = 70
+  atk = 7
+  def = 2
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.IRON_TAIL
@@ -10263,9 +10295,9 @@ export class Pignite extends Pokemon {
   evolution = Pkm.EMBOAR
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 140
-  atk = 14
-  def = 5
-  speDef = 5
+  atk = 12
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.IRON_TAIL
@@ -10277,10 +10309,10 @@ export class Emboar extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIRE, Synergy.FIGHTING])
   rarity = Rarity.HATCH
   stars = 3
-  hp = 220
-  atk = 24
-  def = 7
-  speDef = 7
+  hp = 210
+  atk = 20
+  def = 6
+  speDef = 6
   maxPP = 100
   range = 1
   skill = Ability.IRON_TAIL
@@ -11754,7 +11786,7 @@ export class Comfey extends Pokemon {
   skill = Ability.FLORAL_HEALING
   passive = Passive.COMFEY
   attackSprite = AttackSprite.FAIRY_RANGE
-
+  canHoldItems = false
   afterSimulationStart({
     simulation,
     team,
@@ -12331,8 +12363,8 @@ export class Spinarak extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.ARIADOS
-  hp = 70
-  atk = 7
+  hp = 60
+  atk = 6
   def = 1
   speDef = 1
   maxPP = 70
@@ -12345,8 +12377,8 @@ export class Ariados extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.BUG, Synergy.POISON])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 160
-  atk = 17
+  hp = 150
+  atk = 14
   def = 2
   speDef = 2
   maxPP = 70

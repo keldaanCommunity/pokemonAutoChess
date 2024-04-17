@@ -433,6 +433,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.CRUNCH:
+      addAbilitySprite(Ability.BITE, coordinatesTarget, true).setScale(3)
+      break
+
     case Ability.DRAGON_TAIL:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
@@ -1912,6 +1916,10 @@ export function displayAbility(
       })
       break
     }
+
+    case Ability.CROSS_POISON:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(3)
+      break
 
     case Ability.PETAL_DANCE:
       addAbilitySprite(skill, coordinates, true).setScale(2)

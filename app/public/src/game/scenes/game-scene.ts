@@ -13,13 +13,24 @@ import {
   IDragDropMessage,
   Transfer
 } from "../../../../types"
-import { DungeonMusic, DungeonPMDO } from "../../../../types/enum/Dungeon"
+import {
+  DungeonDetails,
+  DungeonMusic,
+  DungeonPMDO
+} from "../../../../types/enum/Dungeon"
 import { GamePhaseState } from "../../../../types/enum/Game"
 import { Item, ItemRecipe } from "../../../../types/enum/Item"
 import { Pkm } from "../../../../types/enum/Pokemon"
+import { logger } from "../../../../utils/logger"
+import { values } from "../../../../utils/schemas"
 import { clearTitleNotificationIcon } from "../../../../utils/window"
 import { getGameContainer } from "../../pages/game"
-import { SOUNDS, playMusic, playSound } from "../../pages/utils/audio"
+import {
+  SOUNDS,
+  playMusic,
+  playSound,
+  preloadMusic
+} from "../../pages/utils/audio"
 import { transformCoordinate } from "../../pages/utils/utils"
 import { preferences } from "../../preferences"
 import AnimationManager from "../animation-manager"
@@ -35,7 +46,7 @@ import UnownManager from "../components/unown-manager"
 import WeatherManager from "../components/weather-manager"
 
 export default class GameScene extends Scene {
-  tilemap: DesignTiled | undefined
+  tilemaps: Map<DungeonPMDO, DesignTiled>
   room: Room<GameState> | undefined
   uid: string | undefined
   map: Phaser.Tilemaps.Tilemap | undefined
@@ -60,8 +71,6 @@ export default class GameScene extends Scene {
   loadingManager: LoadingManager
   started: boolean
   spectate: boolean
-  dungeon: DungeonPMDO | undefined
-  dungeonMusic: DungeonMusic | undefined
 
   constructor() {
     super({
@@ -70,18 +79,12 @@ export default class GameScene extends Scene {
     })
   }
 
-  init(data: {
-    room: Room<GameState>
-    tilemap: DesignTiled
-    spectate: boolean
-  }) {
-    this.tilemap = data.tilemap
+  init(data: { room: Room<GameState>; spectate: boolean }) {
+    this.tilemaps = new Map()
     this.room = data.room
     this.spectate = data.spectate
     this.uid = firebase.auth().currentUser?.uid
     this.started = false
-    this.dungeon = data.room.state.mapName as DungeonPMDO
-    this.dungeonMusic = data.room.state.mapMusic as DungeonMusic
   }
 
   preload() {
@@ -104,20 +107,16 @@ export default class GameScene extends Scene {
   }
 
   startGame() {
-    if (this.uid && this.tilemap && this.room) {
+    if (this.uid && this.room) {
       this.registerKeys()
-
       this.input.dragDistanceThreshold = 1
-      this.map = this.make.tilemap({ key: "map" })
-      this.tilemap.layers.forEach((layer) => {
-        const tileset = this.map!.addTilesetImage(layer.name, layer.name)!
-        this.map?.createLayer(layer.name, tileset, 0, 0)!.setScale(2, 2)
-      })
-      ;(this.sys as any).animatedTiles.init(this.map)
 
-      if (preferences.disableAnimatedTilemap) {
-        ;(this.sys as any).animatedTiles.pause()
-      }
+      const playerUids = values(this.room.state.players).map((p) => p.id)
+      const player = this.room.state.players.get(
+        this.spectate ? playerUids[0] : this.uid
+      ) as Player
+
+      this.setMap(player.map)
       this.initializeDragAndDrop()
       this.battleGroup = this.add.group()
       this.animationManager = new AnimationManager(this)
@@ -128,13 +127,6 @@ export default class GameScene extends Scene {
         this.room.state.avatars,
         this.room.state.floatingItems
       )
-
-      const playerUids: string[] = []
-      this.room.state.players.forEach((p) => playerUids.push(p.id))
-
-      const player = this.room.state.players.get(
-        this.spectate ? playerUids[0] : this.uid
-      ) as Player
 
       this.itemsContainer = new ItemsContainer(
         this,
@@ -162,7 +154,10 @@ export default class GameScene extends Scene {
       this.weatherManager = new WeatherManager(this)
       this.unownManager = new UnownManager(this)
       playSound(SOUNDS.CAROUSEL_UNLOCK) // playing a preloaded sound for players who tabbed out during loading
-      playMusic(this, this.dungeonMusic || DungeonMusic.RANDOM_DUNGEON_1)
+      playMusic(
+        this,
+        DungeonDetails[player.map].music ?? DungeonMusic.RANDOM_DUNGEON_1
+      )
       ;(this.sys as any).animatedTiles.init(this.map)
       clearTitleNotificationIcon()
     }
@@ -200,6 +195,7 @@ export default class GameScene extends Scene {
   }
 
   setPlayer(player: Player) {
+    this.setMap(player.map)
     this.battle?.setPlayer(player)
     this.board?.setPlayer(player)
     this.itemsContainer?.setPlayer(player)
@@ -244,6 +240,49 @@ export default class GameScene extends Scene {
     }
   }
 
+  preloadMaps(mapNames: DungeonPMDO[]) {
+    return Promise.all(
+      mapNames.map((mapName: DungeonPMDO) =>
+        fetch(`/tilemap/${mapName}`)
+          .then((res) => res.json())
+          .then((tilemap: DesignTiled) => {
+            this.tilemaps.set(mapName, tilemap)
+            tilemap.tilesets.forEach((t) => {
+              logger.debug(`loading tileset ${mapName + "/" + t.name}`)
+              this.load.image(
+                mapName + "/" + t.name,
+                "/assets/tilesets/" + mapName + "/" + t.image
+              )
+            })
+            this.load.tilemapTiledJSON("map_" + mapName, tilemap)
+            preloadMusic(this, DungeonDetails[mapName].music)
+          })
+      )
+    )
+  }
+
+  async setMap(mapName: DungeonPMDO) {
+    const map = this.make.tilemap({ key: "map_" + mapName })
+    if (this.map) this.map.destroy()
+    this.map = map
+    const tilemap = this.tilemaps.get(mapName)
+    if (!tilemap) return logger.error(`Tilemap not loaded for map ${mapName}`)
+    tilemap.layers.forEach((layer) => {
+      const tileset = map.addTilesetImage(
+        layer.name,
+        mapName + "/" + layer.name
+      )!
+      map.createLayer(layer.name, tileset, 0, 0)?.setScale(2, 2)
+    })
+    const sys = this.sys as any
+    if (sys.animatedTiles) {
+      sys.animatedTiles.init(map)
+      if (preferences.disableAnimatedTilemap) {
+        sys.animatedTiles.pause()
+      }
+    }
+  }
+
   resetDragState() {
     if (this.pokemonDragged) {
       this.input.emit(
@@ -279,6 +318,7 @@ export default class GameScene extends Scene {
           .image(zone.x, zone.y, "cell", 0)
           .setVisible(false)
           .setData({ x, y })
+          .setDepth(2)
         zone.setData({ x, y, sprite: spotSprite })
         this.dropSpots.push(spotSprite)
       }

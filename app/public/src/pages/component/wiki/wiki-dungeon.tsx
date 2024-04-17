@@ -19,20 +19,24 @@ export function WikiDungeon() {
                   <h3>{t(`map.${dungeon}`)}</h3>
                   <div style={{ display: "flex", gap: "5px" }}>
                     {DungeonDetails[dungeon].synergies.map((synergy) => (
-                      <SynergyIcon type={synergy} />
+                      <SynergyIcon
+                        type={synergy}
+                        key={"map_synergy_" + synergy}
+                      />
                     ))}
                   </div>
                 </div>
-                <span>
-                  {t(`region_pokemon.${DungeonDetails[dungeon].region}`)}
-                </span>
                 <img
                   src={`/assets/maps/${dungeon}-preview.png`}
                   onMouseOver={(e) => {
-                    e.target.src = `/assets/tilesets/${dungeon}/tileset_0.png`
+                    ;(
+                      e.target as HTMLImageElement
+                    ).src = `/assets/tilesets/${dungeon}/tileset_0.png`
                   }}
                   onMouseOut={(e) => {
-                    e.target.src = `/assets/maps/${dungeon}-preview.png`
+                    ;(
+                      e.target as HTMLImageElement
+                    ).src = `/assets/maps/${dungeon}-preview.png`
                   }}
                   alt={dungeon}
                 />

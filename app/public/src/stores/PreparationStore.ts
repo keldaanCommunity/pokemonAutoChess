@@ -15,7 +15,6 @@ interface IUserPreparationState {
   name: string
   password: string | null
   noElo: boolean
-  selectedMap: DungeonPMDO | "random"
   user: GameUser | undefined
   botsList: IBot[] | null
   gameMode: GameMode
@@ -31,7 +30,6 @@ const initialState: IUserPreparationState = {
   user: undefined,
   password: null,
   noElo: false,
-  selectedMap: "random",
   botsList: null,
   gameMode: GameMode.NORMAL
 }
@@ -91,9 +89,6 @@ export const preparationSlice = createSlice({
     setGameMode: (state, action: PayloadAction<GameMode>) => {
       state.gameMode = action.payload
     },
-    setSelectedMap: (state, action: PayloadAction<DungeonPMDO | "random">) => {
-      state.selectedMap = action.payload
-    },
     leavePreparation: () => initialState,
     setBotsList: (state, action: PayloadAction<IBot[] | null>) => {
       state.botsList = action.payload
@@ -116,7 +111,6 @@ export const {
   setPassword,
   setNoELO,
   setGameMode,
-  setSelectedMap,
   leavePreparation
 } = preparationSlice.actions
 

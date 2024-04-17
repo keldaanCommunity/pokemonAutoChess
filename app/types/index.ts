@@ -19,6 +19,7 @@ import { TournamentSchema } from "../models/colyseus-models/tournament"
 import { Effects } from "../models/effects"
 import GameRoom from "../rooms/game-room"
 import { Ability } from "./enum/Ability"
+import { DungeonPMDO } from "./enum/Dungeon"
 import { Effect } from "./enum/Effect"
 import { Emotion } from "./enum/Emotion"
 import {
@@ -91,8 +92,6 @@ export enum Transfer {
   REMOVE_BOT = "REMOVE_BOT",
   TOGGLE_READY = "TOGGLE_READY",
   TOGGLE_NO_ELO = "TOGGLE_NO_ELO",
-  REQUEST_TILEMAP = "REQUEST_TILEMAP",
-  SELECT_TILEMAP = "SELECT_TILEMAP",
   REFRESH = "REFRESH",
   LOCK = "LOCK",
   LEVEL_UP = "LEVEL_UP",
@@ -151,7 +150,8 @@ export enum Transfer {
   SELECT_LANGUAGE = "SELECT_LANGUAGE",
   USER_PROFILE = "USER_PROFILE",
   PICK_BERRY = "PICK_BERRY",
-  SERVER_ANNOUNCEMENT = "SERVER_ANNOUNCEMENT"
+  SERVER_ANNOUNCEMENT = "SERVER_ANNOUNCEMENT",
+  PRELOAD_MAPS = "PRELOAD_MAPS"
 }
 
 export enum AttackSprite {
@@ -287,7 +287,6 @@ export interface IGameState extends Schema {
   phase: string
   players: MapSchema<IPlayer>
   stageLevel: number
-  mapName: string
 }
 
 export interface ISimplePlayer {
@@ -373,6 +372,7 @@ export interface IPlayer {
   loadingProgress: number
   effects: Effects
   isBot: boolean
+  map: DungeonPMDO
 }
 
 export interface IPokemon {
@@ -401,6 +401,7 @@ export interface IPokemon {
   shiny: boolean
   emotion: Emotion
   additional: boolean
+  regional: boolean
   action: PokemonActionState
   canBePlaced: boolean
   canBeCloned: boolean

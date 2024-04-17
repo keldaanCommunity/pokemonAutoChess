@@ -88,13 +88,18 @@ export enum Item {
   BIG_NUGGET = "BIG_NUGGET",
   INCENSE = "INCENSE",
   EXP_SHARE = "EXP_SHARE",
-  METEORITE = "METEORITE"
+  METEORITE = "METEORITE",
+  BERRY_JUICE = "BERRY_JUICE"
 }
 
 export const AllItems: Item[] = Object.values(Item)
 
 // should be excluded from carousels
-export const SpecialItems: Item[] = [Item.COMFEY, Item.METEORITE]
+export const SpecialItems: Item[] = [
+  Item.COMFEY,
+  Item.METEORITE,
+  Item.BERRY_JUICE
+]
 
 export const BasicItems: Item[] = [
   Item.FOSSIL_STONE,

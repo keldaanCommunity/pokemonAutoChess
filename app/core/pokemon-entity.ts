@@ -719,20 +719,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    if (this.hasSynergyEffect(Synergy.AQUATIC)) {
-      const burnManaChance = this.effects.has(Effect.SWIFT_SWIM)
-        ? 0.35
-        : this.effects.has(Effect.HYDRATION)
-        ? 0.45
-        : 0.55
-      const manaDrain = 20
-      if (chance(burnManaChance)) {
-        target.addPP(-manaDrain)
-        target.count.manaBurnCount++
-        this.addPP(manaDrain)
-      }
-    }
-
     if (this.hasSynergyEffect(Synergy.GHOST)) {
       if (chance(0.25)) {
         target.status.triggerSilence(2000, target, this)
@@ -973,7 +959,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     // Berries trigger
-    const berry = values(this.items).find((item) => Berries.includes(item))
+    const berry = values(this.items).find(
+      (item) => Berries.includes(item) || item === Item.BERRY_JUICE
+    )
     if (berry && this.life > 0 && this.life < 0.5 * this.hp) {
       this.eatBerry(berry)
     }
@@ -1330,7 +1318,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   eatBerry(berry: Item, stealedFrom?: PokemonEntity) {
     switch (berry) {
       case Item.AGUAV_BERRY:
-        this.handleHeal(min(20)(this.hp - this.life), this, 0)
+        this.handleHeal(this.hp - this.life, this, 0)
         this.status.triggerConfusion(3000, this)
         break
       case Item.APICOT_BERRY:
@@ -1422,6 +1410,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.effects.add(Effect.BUFF_HEAL_RECEIVED)
         this.handleHeal(20, this, 0)
         break
+      case Item.BERRY_JUICE:
+        this.handleHeal(this.hp - this.life, this, 0)
+        break
     }
 
     if (stealedFrom) {
@@ -1437,6 +1428,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (this.refToBoardPokemon.hp > 750) {
         this.player?.titles.add(Title.GLUTTON)
       }
+    }
+
+    if (
+      this.passive === Passive.SHUCKLE &&
+      Berries.includes(berry) &&
+      this.player
+    ) {
+      this.player.items.push(Item.BERRY_JUICE)
     }
   }
 }
