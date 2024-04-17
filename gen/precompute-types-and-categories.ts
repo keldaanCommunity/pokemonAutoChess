@@ -17,6 +17,7 @@ const data: Partial<
       uniquePokemons: Pkm[]
       legendaryPokemons: Pkm[]
       additionalPokemons: Pkm[]
+      regionalPokemons: Pkm[]
       specialPokemons: Pkm[]
     }
   >
@@ -35,6 +36,7 @@ precomputedPokemons
           uniquePokemons: [],
           legendaryPokemons: [],
           additionalPokemons: [],
+          regionalPokemons: [],
           specialPokemons: []
         }
       }
@@ -48,6 +50,10 @@ precomputedPokemons
       } else if (pokemon.additional) {
         if (!data[type]!.additionalPokemons.includes(PkmFamily[pokemon.name])) {
           data[type]!.additionalPokemons.push(pokemon.name)
+        }
+      } else if (pokemon.regional) {
+        if (!data[type]!.regionalPokemons.includes(PkmFamily[pokemon.name])) {
+          data[type]!.regionalPokemons.push(pokemon.name)
         }
       } else if (!data[type]!.pokemons.includes(PkmFamily[pokemon.name])) {
         data[type]!.pokemons.push(pokemon.name)

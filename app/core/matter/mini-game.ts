@@ -37,11 +37,12 @@ import {
 } from "../../types/Config"
 import { Synergy } from "../../types/enum/Synergy"
 import GameState from "../../rooms/states/game-state"
-import { keys, values } from "../../utils/schemas"
+import { keys, resetArraySchema, values } from "../../utils/schemas"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import GameRoom from "../../rooms/game-room"
 import { Transfer } from "../../types"
 import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
+import { getPokemonData } from "../../models/precomputed"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -517,7 +518,8 @@ export class MiniGame {
     }
   }
 
-  stop(state: GameState) {
+  stop(room: GameRoom) {
+    const state: GameState = room.state
     const players: MapSchema<Player> = state.players
     this.bodies.forEach((body, key) => {
       Composite.remove(this.engine.world, body)
@@ -557,20 +559,34 @@ export class MiniGame {
         }
 
         const symbols = this.getSymbolsByPortalId(avatar.portalId)
-        if (state.stageLevel === PortalCarouselStages[0]) {
+        if (PortalCarouselStages.includes(state.stageLevel)) {
+          const portalSynergies = symbols.map((s) => s.synergy)
+          const propositions =
+            state.stageLevel === PortalCarouselStages[0]
+              ? UniqueShop
+              : LegendaryShop
           state.shop.assignUniquePropositions(
             player,
-            UniqueShop,
-            symbols.map((s) => s.synergy)
+            propositions,
+            portalSynergies
           )
-        }
-
-        if (state.stageLevel === PortalCarouselStages[1]) {
-          state.shop.assignUniquePropositions(
-            player,
-            LegendaryShop,
-            symbols.map((s) => s.synergy)
-          )
+          //logger.debug("Adding to regional pool synergies ", portalSynergies)
+          room.regionalPool.forEach((p) => {
+            if (
+              portalSynergies.some((s) => getPokemonData(p).types.includes(s))
+            ) {
+              state.shop.addRegionalPokemon(p, player)
+            }
+          })
+          resetArraySchema(player.regionalPokemons, [
+            ...new Set([
+              ...player.commonRegionalPool,
+              ...player.uncommonRegionalPool,
+              ...player.rareRegionalPool,
+              ...player.epicRegionalPool,
+              ...player.ultraRegionalPool
+            ])
+          ])
         }
       }
 

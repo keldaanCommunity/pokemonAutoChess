@@ -373,6 +373,12 @@ export interface IPlayer {
   effects: Effects
   isBot: boolean
   map: DungeonPMDO
+  regionalPokemons: ArraySchema<Pkm>
+  commonRegionalPool: Pkm[]
+  uncommonRegionalPool: Pkm[]
+  rareRegionalPool: Pkm[]
+  epicRegionalPool: Pkm[]
+  ultraRegionalPool: Pkm[]
 }
 
 export interface IPokemon {

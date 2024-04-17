@@ -76,7 +76,7 @@ export default function WikiPokemons() {
 
 export function WikiPokemon(props: {
   rarity: Rarity
-  selected: Pkm
+  selected: Pkm | ""
   onSelect: (pkm: Pkm) => any
 }) {
   const pokemons = useMemo(
@@ -93,7 +93,9 @@ export function WikiPokemon(props: {
 
   return (
     <Tabs
-      selectedIndex={pokemons.indexOf(props.selected)}
+      selectedIndex={
+        props.selected ? pokemons.indexOf(props.selected) : undefined
+      }
       onSelect={(index) => props.onSelect(pokemons[index])}
     >
       <TabList>
@@ -133,6 +135,7 @@ export function WikiAllPokemons() {
   const pokemonsPerRarity = groupBy(pokemons, (p) => p.rarity)
   for (const rarity in pokemonsPerRarity) {
     pokemonsPerRarity[rarity].sort((a: IPokemonData, b: IPokemonData) => {
+      if (a.regional !== b.regional) return +a.regional - +b.regional
       if (a.additional !== b.additional) return +a.additional - +b.additional
       return a.index < b.index ? -1 : 1
     })
@@ -153,7 +156,8 @@ export function WikiAllPokemons() {
                     <li
                       key={p.name}
                       className={cc("pokemon-portrait", {
-                        additional: p.additional
+                        additional: p.additional,
+                        regional: p.regional
                       })}
                       onMouseOver={() => {
                         setHoveredPokemon(p.name)

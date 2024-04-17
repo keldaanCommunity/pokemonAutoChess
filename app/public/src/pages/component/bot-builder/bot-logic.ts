@@ -111,7 +111,7 @@ export function getCategory(pkm: Pkm): string {
       false &&
     p.stars > 1
   ) {
-    category += p.additional ? " 2S" : " 3S"
+    category += p.stages === 2 ? " 2S" : " 3S"
   }
   category += ` T${p.stars}`
   if (Object.values(PkmDuos).some((duo) => duo.includes(pkm))) {

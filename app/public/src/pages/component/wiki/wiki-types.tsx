@@ -70,6 +70,7 @@ export function WikiType(props: { type: Synergy }) {
   const pokemonsPerRarity = groupBy(pokemons, (p) => p.rarity)
   for (const rarity in pokemonsPerRarity) {
     pokemonsPerRarity[rarity].sort((a: IPokemonData, b: IPokemonData) => {
+      if (a.regional !== b.regional) return +a.regional - +b.regional
       if (a.additional !== b.additional) return +a.additional - +b.additional
       return a.index < b.index ? -1 : 1
     })
@@ -110,7 +111,8 @@ export function WikiType(props: { type: Synergy }) {
                       <div
                         key={p.name}
                         className={cc("pokemon-portrait", {
-                          additional: p.additional
+                          additional: p.additional,
+                          regional: p.regional
                         })}
                       >
                         <img
@@ -177,7 +179,8 @@ export function WikiAllTypes() {
                     <li
                       key={p.name}
                       className={cc("pokemon-portrait", {
-                        additional: p.additional
+                        additional: p.additional,
+                        regional: p.regional
                       })}
                       onMouseOver={() => {
                         setHoveredPokemon(p.name)

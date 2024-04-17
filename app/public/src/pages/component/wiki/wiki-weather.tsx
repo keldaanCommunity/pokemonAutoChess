@@ -53,7 +53,8 @@ export default function WikiWeather() {
                   <div
                     key={p.name}
                     className={cc("pokemon-portrait", {
-                      additional: p.additional
+                      additional: p.additional,
+                      regional: p.regional
                     })}
                     data-tooltip-id={`pokemon-detail-${p.index}`}
                   >

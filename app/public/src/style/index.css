@@ -249,3 +249,16 @@ p:last-child {
   image-rendering: pixelated;
   filter: invert(1);
 }
+
+.pokemon-portrait.regional::after {
+  content: "R";
+  position: absolute;
+  top: -2px;
+  right: 0px;
+  height: 12px;
+  width: 12px;
+  font-size: 14px;
+  color: black;
+  text-shadow: 1px 1px 1px white, -1px 1px 1px white, 1px -1px 1px white,
+    -1px -1px 1px white;
+}

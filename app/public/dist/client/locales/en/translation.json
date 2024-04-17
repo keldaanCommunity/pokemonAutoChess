@@ -11,6 +11,11 @@
     "HATCH": "Hatch",
     "SPECIAL": "Special"
   },
+  "pool": {
+    "regular": "Regular",
+    "additional": "Additional",
+    "regional": "Regional"
+  },
   "damage": {
     "SPECIAL": "special damage",
     "PHYSICAL": "physical damage",
@@ -2391,6 +2396,7 @@
   "buy_booster_500": "Buy a new booster for 500 ",
   "close": "Close",
   "additional_pokemon_hint": "Each player picked additional Pokemon to be available in all players shop for this game.",
+  "regional_pokemon_hint": "After travelling to a new region, you will encounter new regional species of Pokemon.",
   "damage_label": "Damage",
   "heal": "Heal",
   "lvl": "Lvl",
@@ -2418,6 +2424,7 @@
   "show": "Show",
   "encounter_rates": "Encouter rates",
   "rarity_label": "Rarity",
+  "pool_label": "Pool",
   "tier": "Tier",
   "rate": "Rate",
   "increase_level_hint": "Increase your level to raise your chances to get higher tier Pokémon.",
@@ -2426,6 +2433,7 @@
   "pve_stages": "PVE Stages",
   "carousel_stages": "Carousel Stages",
   "additional_picks": "Additional picks",
+  "regional_pokemons": "Regional pokemons",
   "unique_picks": "Unique picks",
   "stages": "Stages",
   "and": " and ",
