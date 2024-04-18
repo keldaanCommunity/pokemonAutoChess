@@ -234,7 +234,7 @@
   justify-content: end;
   color: white;
   border-radius: 12px 12px 0 0;
-  font-size: 1.5rem;
+  font-size: 1.25em;
 }
 
 .game-shop .information > div {
@@ -252,7 +252,7 @@
   height: 1em;
 }
 
-@media (aspect-ratio < 4/3), (width <= 1366px) {
+@media (aspect-ratio < 4/3), (width <= 1280px) {
   .game-shop.my-container {
     flex-wrap: wrap;
   }
