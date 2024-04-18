@@ -184,11 +184,9 @@ export default class PokemonSprite extends DraggableObject {
       textureIndex,
       `${PokemonTint.NORMAL}/${PokemonActionState.IDLE}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`
     )
-    this.sprite.setDepth(3)
-    //this.sprite.setOrigin(0,0);
     const baseHP = getPokemonData(pokemon.name).hp
     const sizeBuff = (pokemon.hp - baseHP) / baseHP
-    this.sprite.setScale(2 + sizeBuff)
+    this.sprite.setScale(2 + sizeBuff).setDepth(3)
     this.sprite.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       this.animationLocked = false
       const g = <GameScene>scene
@@ -206,7 +204,7 @@ export default class PokemonSprite extends DraggableObject {
       playerId
     )
     this.shadow = new GameObjects.Sprite(scene, 0, 5, textureIndex)
-    this.shadow.setScale(2, 2)
+    this.shadow.setScale(2, 2).setDepth(2)
     this.add(this.shadow)
     this.add(this.sprite)
 
@@ -891,10 +889,10 @@ export default class PokemonSprite extends DraggableObject {
   addLight() {
     this.light = this.scene.add
       .sprite(0, 0, "abilities", "LIGHT_CELL/000.png")
-      .setDepth(0)
       .setScale(1.5, 1.5)
     this.light.anims.play("LIGHT_CELL")
     this.add(this.light)
+    this.sendToBack(this.light)
   }
 
   addElectricField() {

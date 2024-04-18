@@ -209,7 +209,7 @@ export default class BoardManager {
         "abilities",
         "LIGHT_CELL/000.png"
       )
-      this.lightCell.setDepth(1)
+      this.lightCell.setDepth(2)
       this.lightCell.setScale(2, 2)
       this.lightCell.anims.play("LIGHT_CELL")
     }
