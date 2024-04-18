@@ -537,6 +537,7 @@ export class Bounsweet extends Pokemon {
   range = 1
   skill = Ability.HIGH_JUMP_KICK
   attackSprite = AttackSprite.FIGHTING_MELEE
+  regional = true
 }
 
 export class Steenee extends Pokemon {
@@ -552,6 +553,7 @@ export class Steenee extends Pokemon {
   range = 1
   skill = Ability.HIGH_JUMP_KICK
   attackSprite = AttackSprite.FIGHTING_MELEE
+  regional = true
 }
 
 export class Tsareena extends Pokemon {
@@ -566,6 +568,7 @@ export class Tsareena extends Pokemon {
   range = 1
   skill = Ability.HIGH_JUMP_KICK
   attackSprite = AttackSprite.FIGHTING_MELEE
+  regional = true
 }
 
 export class Buneary extends Pokemon {
@@ -1145,6 +1148,7 @@ export class Slakoth extends Pokemon {
   range = 1
   skill = Ability.SLACK_OFF
   attackSprite = AttackSprite.NORMAL_MELEE
+  regional = true
 }
 
 export class Vigoroth extends Pokemon {
@@ -1160,6 +1164,7 @@ export class Vigoroth extends Pokemon {
   range = 1
   skill = Ability.SLACK_OFF
   attackSprite = AttackSprite.NORMAL_MELEE
+  regional = true
 }
 
 export class Slaking extends Pokemon {
@@ -1174,6 +1179,7 @@ export class Slaking extends Pokemon {
   range = 1
   skill = Ability.SLACK_OFF
   attackSprite = AttackSprite.NORMAL_MELEE
+  regional = true
 }
 
 export class Honedge extends Pokemon {
@@ -2177,6 +2183,7 @@ export class Lotad extends Pokemon {
   range = 3
   skill = Ability.TORMENT
   attackSprite = AttackSprite.GRASS_RANGE
+  regional = true
 }
 
 export class Lombre extends Pokemon {
@@ -2196,6 +2203,7 @@ export class Lombre extends Pokemon {
   range = 3
   skill = Ability.TORMENT
   attackSprite = AttackSprite.GRASS_RANGE
+  regional = true
 }
 
 export class Ludicolo extends Pokemon {
@@ -2214,6 +2222,7 @@ export class Ludicolo extends Pokemon {
   range = 3
   skill = Ability.TORMENT
   attackSprite = AttackSprite.GRASS_RANGE
+  regional = true
 }
 
 export class Togepi extends Pokemon {
@@ -11253,6 +11262,7 @@ export class Doduo extends Pokemon {
   range = 1
   skill = Ability.AGILITY
   attackSprite = AttackSprite.NORMAL_MELEE
+  regional = true
 }
 
 export class Dodrio extends Pokemon {
@@ -11267,6 +11277,7 @@ export class Dodrio extends Pokemon {
   range = 1
   skill = Ability.AGILITY
   attackSprite = AttackSprite.NORMAL_MELEE
+  regional = true
 }
 
 export class Kricketot extends Pokemon {
