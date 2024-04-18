@@ -162,7 +162,7 @@ export default class Shop {
       entityNumber = Math.ceil(entityNumber / 2)
     }
 
-    let pool = regional
+    const pool = regional
       ? this.getRegionalPool(rarity, player)
       : this.getPool(rarity)
     if (pool) {

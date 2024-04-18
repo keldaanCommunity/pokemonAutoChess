@@ -155,7 +155,7 @@ export class OnRemoveFromShopCommand extends Command<
     const cost = PokemonFactory.getBuyPrice(name, this.state.specialGameRule)
     if (player.money >= cost) {
       player.shop = player.shop.with(index, Pkm.DEFAULT)
-      this.state.shop.releasePokemon(name)
+      this.state.shop.releasePokemon(name, player)
     }
   }
 }
@@ -537,7 +537,7 @@ export class OnSellDropCommand extends Command<
       }
 
       if (pokemon) {
-        this.state.shop.releasePokemon(pokemon.name)
+        this.state.shop.releasePokemon(pokemon.name, player)
         player.money += PokemonFactory.getSellPrice(
           pokemon.name,
           pokemon.shiny,
@@ -1016,10 +1016,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (player.life <= 0 && player.alive) {
         if (!player.isBot) {
           player.shop.forEach((pkm) => {
-            this.state.shop.releasePokemon(pkm)
+            this.state.shop.releasePokemon(pkm, player)
           })
           player.board.forEach((pokemon) => {
-            this.state.shop.releasePokemon(pokemon.name)
+            this.state.shop.releasePokemon(pokemon.name, player)
           })
         }
         player.life = 0
