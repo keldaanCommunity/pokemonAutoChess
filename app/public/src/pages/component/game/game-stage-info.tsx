@@ -133,7 +133,7 @@ export default function GameStageInfo() {
                   ))}
                   {t(`map.${map}`)}
                 </span>
-                <p>{addIconsToDescription(t(`map_description.${map}`))}</p>
+                {/*<p>{addIconsToDescription(t(`map_description.${map}`))}</p>*/}
               </Tooltip>,
               document.body
             )}

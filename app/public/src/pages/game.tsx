@@ -642,7 +642,8 @@ export default function Game() {
           "history",
           "life",
           "rank",
-          "regionalPokemons"
+          "regionalPokemons",
+          "map"
         ]
 
         fields.forEach((field) => {
