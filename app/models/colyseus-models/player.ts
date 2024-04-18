@@ -66,6 +66,12 @@ export default class Player extends Schema implements IPlayer {
   @type("uint8") berryTreeStage: number = 1
   @type("string") map: DungeonPMDO
   @type({ set: "string" }) effects: Effects = new Effects()
+  @type(["string"]) regionalPokemons = new ArraySchema<Pkm>()
+  commonRegionalPool: Pkm[] = new Array<Pkm>()
+  uncommonRegionalPool: Pkm[] = new Array<Pkm>()
+  rareRegionalPool: Pkm[] = new Array<Pkm>()
+  epicRegionalPool: Pkm[] = new Array<Pkm>()
+  ultraRegionalPool: Pkm[] = new Array<Pkm>()
   isBot: boolean
   opponents: Map<string, number> = new Map<string, number>()
   titles: Set<Title> = new Set<Title>()

@@ -641,7 +641,8 @@ export default function Game() {
           "money",
           "history",
           "life",
-          "rank"
+          "rank",
+          "regionalPokemons"
         ]
 
         fields.forEach((field) => {

@@ -1,6 +1,6 @@
-# Map transitions
+# Different maps for each player and regional pokemons
 
-Each player now starts on a different map. Portals now makes you travel to new locations: each map has its own special rule that adds a little twist to your game
+Each player now starts on a different map. Portals now makes you travel to new locations. After travelling to a new region, you will encounter new regional species of Pokemon.
 
 # New Pokemons:
 

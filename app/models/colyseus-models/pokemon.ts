@@ -8743,7 +8743,7 @@ export class AlolanVulpix extends Pokemon {
   maxPP = 85
   range = 2
   skill = Ability.AURORA_VEIL
-  additional = true
+  regional = true
   attackSprite = AttackSprite.ICE_RANGE
 }
 
@@ -8758,7 +8758,7 @@ export class AlolanNinetales extends Pokemon {
   maxPP = 85
   range = 2
   skill = Ability.AURORA_VEIL
-  additional = true
+  regional = true
   attackSprite = AttackSprite.ICE_RANGE
 }
 
@@ -9859,7 +9859,7 @@ export class HisuiZorua extends Pokemon {
   maxPP = 85
   range = 1
   skill = Ability.ILLUSION
-  additional = true
+  regional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -9874,7 +9874,7 @@ export class HisuiZoroark extends Pokemon {
   maxPP = 85
   range = 1
   skill = Ability.ILLUSION
-  additional = true
+  regional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -9921,7 +9921,7 @@ export class AlolanGrimer extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SLUDGE
-  additional = true
+  regional = true
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -9936,7 +9936,7 @@ export class AlolanMuk extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SLUDGE
-  additional = true
+  regional = true
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -11452,7 +11452,7 @@ export class HisuianQwilfish extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BARB_BARRAGE
-  additional = true
+  regional = true
   attackSprite = AttackSprite.POISON_MELEE
 }
 
@@ -11471,7 +11471,7 @@ export class Overqwil extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BARB_BARRAGE
-  additional = true
+  regional = true
   attackSprite = AttackSprite.POISON_MELEE
 }
 

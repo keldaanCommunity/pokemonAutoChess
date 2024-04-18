@@ -1,12 +1,15 @@
 import React from "react"
-import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
+import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
 import { getPokemonData } from "../../../../../models/precomputed"
-import { PkmIndex } from "../../../../../types/enum/Pokemon"
+import { RarityColor } from "../../../../../types/Config"
+import { Pkm } from "../../../../../types/enum/Pokemon"
+import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
-import { GamePokemonDetail } from "./game-pokemon-detail"
+import { getGameScene } from "../../game"
+import SynergyIcon from "../icons/synergy-icon"
 
 export function GameRegionalPokemonsIcon() {
   return (
@@ -30,51 +33,65 @@ export function GameRegionalPokemonsIcon() {
 
 export function GameRegionalPokemons() {
   const { t } = useTranslation()
-  const additionalPokemons = useAppSelector(
-    (state) => state.game.additionalPokemons
+  const currentPlayer = useAppSelector((state) =>
+    state.game.players.find((p) => p.id === state.game.currentPlayerId)
   )
+  const specialGameRule = getGameScene()?.room?.state.specialGameRule
+  const regionalPokemons: Pkm[] = currentPlayer?.regionalPokemons ?? []
   const pokemonCollection = useAppSelector(
     (state) => state.game.pokemonCollection
   )
 
-  if (!additionalPokemons || additionalPokemons.length === 0) {
+  if (specialGameRule === SpecialGameRule.EVERYONE_IS_HERE) {
     return (
-      <div className="my-box game-regional-pokemons">
-        <p>{t("regional_pokemon_hint")}</p>
+      <div className="game-additional-pokemons">
+        <p>{t("scribble.EVERYONE_IS_HERE")}</p>
+      </div>
+    )
+  } else if (!regionalPokemons || regionalPokemons.length === 0) {
+    return (
+      <div className="game-regional-pokemons">
+        <p className="help">{t("regional_pokemon_hint")}</p>
       </div>
     )
   } else {
     return (
-      <div className="my-box game-regional-pokemons">
-        {additionalPokemons.map((p, index) => {
-          const pokemon = getPokemonData(p)
-          return (
-            <React.Fragment key={"additional-pokemon-tooltip-" + index}>
-              {ReactDOM.createPortal(
-                <Tooltip
-                  id={"additional-pokemon-" + p}
-                  className="custom-theme-tooltip game-pokemon-detail-tooltip"
-                  place="top"
-                  data-tooltip-offset={{ top: index < 4 ? 60 : 130 }}
-                >
-                  <GamePokemonDetail
-                    pokemon={pokemon.name}
-                    emotion={
-                      pokemonCollection.get(pokemon.index)?.selectedEmotion
-                    }
-                    shiny={pokemonCollection.get(pokemon.index)?.selectedShiny}
-                  />
-                </Tooltip>,
-                document.body
-              )}
-              <img
-                src={getPortraitSrc(PkmIndex[p])}
-                className={pokemon.rarity.toLowerCase()}
-                data-tooltip-id={"additional-pokemon-" + p}
-              />
-            </React.Fragment>
-          )
-        })}
+      <div className="game-regional-pokemons">
+        <h2>{t("regional_pokemons")}</h2>
+        <div className="grid">
+          {regionalPokemons.map((p, index) => {
+            const pokemon = getPokemonData(p)
+            const rarityColor = RarityColor[pokemon.rarity]
+            const pokemonConfig: IPokemonConfig | undefined =
+              pokemonCollection.get(pokemon.index)
+
+            return (
+              <div
+                className={`my-box clickable game-pokemon-portrait`}
+                key={"game-regional-pokemons-" + index}
+                style={{
+                  backgroundColor: rarityColor,
+                  borderColor: rarityColor,
+                  backgroundImage: `url("${getPortraitSrc(
+                    pokemon.index,
+                    pokemonConfig?.selectedShiny,
+                    pokemonConfig?.selectedEmotion
+                  )}")`
+                }}
+              >
+                <ul className="game-pokemon-portrait-types">
+                  {Array.from(pokemon.types.values()).map((type) => {
+                    return (
+                      <li key={type}>
+                        <SynergyIcon type={type} />
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
+            )
+          })}
+        </div>
       </div>
     )
   }

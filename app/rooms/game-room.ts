@@ -17,10 +17,8 @@ import UserMetadata, {
   IPokemonConfig
 } from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
-import {
-  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY,
-  getPokemonData
-} from "../models/precomputed"
+import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed"
+import { getAdditionalsTier1, getRegionalsTier1 } from "../models/shop"
 import { getAvatarString } from "../public/src/utils"
 import {
   Emotion,
@@ -80,6 +78,7 @@ export default class GameRoom extends Room<GameState> {
   additionalUncommonPool: Array<Pkm>
   additionalRarePool: Array<Pkm>
   additionalEpicPool: Array<Pkm>
+  regionalPool: Array<Pkm>
   miniGame: MiniGame
   constructor() {
     super()
@@ -87,6 +86,7 @@ export default class GameRoom extends Room<GameState> {
     this.additionalUncommonPool = new Array<Pkm>()
     this.additionalRarePool = new Array<Pkm>()
     this.additionalEpicPool = new Array<Pkm>()
+    this.regionalPool = new Array<Pkm>()
     this.miniGame = new MiniGame()
   }
 
@@ -130,32 +130,17 @@ export default class GameRoom extends Room<GameState> {
       this.state.portals,
       this.state.symbols
     )
-    Object.keys(PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY).forEach((type) => {
-      PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
-        type
-      ].additionalPokemons.forEach((p) => {
-        const { stars, rarity } = getPokemonData(p)
-        if (
-          (rarity === Rarity.UNCOMMON || rarity === Rarity.COMMON) && // TEMP: we should move all common add picks to uncommon rarity
-          !this.additionalUncommonPool.includes(p) &&
-          stars === 1
-        ) {
-          this.additionalUncommonPool.push(p)
-        } else if (
-          rarity === Rarity.RARE &&
-          !this.additionalRarePool.includes(p) &&
-          stars === 1
-        ) {
-          this.additionalRarePool.push(p)
-        } else if (
-          rarity === Rarity.EPIC &&
-          !this.additionalEpicPool.includes(p) &&
-          stars === 1
-        ) {
-          this.additionalEpicPool.push(p)
-        }
-      })
-    })
+
+    this.additionalUncommonPool = getAdditionalsTier1(
+      PRECOMPUTED_POKEMONS_PER_RARITY.UNCOMMON
+    )
+    this.additionalRarePool = getAdditionalsTier1(
+      PRECOMPUTED_POKEMONS_PER_RARITY.RARE
+    )
+    this.additionalEpicPool = getAdditionalsTier1(
+      PRECOMPUTED_POKEMONS_PER_RARITY.EPIC
+    )
+
     shuffleArray(this.additionalUncommonPool)
     shuffleArray(this.additionalRarePool)
     shuffleArray(this.additionalEpicPool)
@@ -171,6 +156,8 @@ export default class GameRoom extends Room<GameState> {
         this.state.shop.addAdditionalPokemon(p)
       )
     }
+
+    this.regionalPool = getRegionalsTier1(Object.values(Pkm))
 
     await Promise.all(
       keys(options.users).map(async (id) => {
@@ -211,6 +198,14 @@ export default class GameRoom extends Room<GameState> {
 
             this.state.players.set(user.uid, player)
             this.state.shop.assignShop(player, false, this.state)
+
+            if (
+              this.state.specialGameRule === SpecialGameRule.EVERYONE_IS_HERE
+            ) {
+              this.regionalPool.forEach((p) =>
+                this.state.shop.addRegionalPokemon(p, player)
+              )
+            }
           }
         }
       })

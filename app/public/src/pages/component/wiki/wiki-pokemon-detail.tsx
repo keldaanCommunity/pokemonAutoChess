@@ -54,6 +54,8 @@ export default function WikiPokemonDetail(props: { pokemon: Pkm }) {
         <dd style={{ color: RarityColor[pokemonData.rarity] }}>
           {t(`rarity.${pokemonData.rarity}`)}
         </dd>
+        <dt>{t("pool_label")}</dt>
+        <dd>{t(`pool.${pokemonData.regional ? 'regional' : pokemonData.additional ? 'additional' : 'regular'}`)}</dd>
         <dt style={{ verticalAlign: "middle" }}>{t("tier")}</dt>
         <dd>
           {Array.from({ length: pokemonData.stars }, (_, i) => (

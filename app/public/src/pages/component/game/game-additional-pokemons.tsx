@@ -49,7 +49,7 @@ export function GameAdditionalPokemons() {
   } else if (!additionalPokemons || additionalPokemons.length === 0) {
     return (
       <div className="game-additional-pokemons">
-        <p>{t("additional_pokemon_hint")}</p>
+        <p className="help">{t("additional_pokemon_hint")}</p>
       </div>
     )
   } else {

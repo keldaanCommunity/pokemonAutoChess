@@ -40,7 +40,8 @@ export default function WikiAbility() {
                         <li key={p.name}>
                           <div
                             className={cc("pokemon-portrait", {
-                              additional: p.additional
+                              additional: p.additional,
+                              regional: p.regional
                             })}
                             data-tooltip-id="pokemon-detail"
                             onMouseOver={() => {

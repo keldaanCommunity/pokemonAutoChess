@@ -142,7 +142,8 @@ function PokemonPortrait(props: { p: IPokemonData }) {
   return (
     <div
       className={cc("pokemon-portrait", {
-        additional: props.p.additional
+        additional: props.p.additional,
+        regional: props.p.regional
       })}
       key={props.p.name}
     >

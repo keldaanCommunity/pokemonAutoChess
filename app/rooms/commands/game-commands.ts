@@ -699,7 +699,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   execute() {
     this.state.updatePhaseNeeded = false
     if (this.state.phase == GamePhaseState.MINIGAME) {
-      this.room.miniGame.stop(this.state)
+      this.room.miniGame.stop(this.room)
       this.initializePickingPhase()
     } else if (this.state.phase == GamePhaseState.PICK) {
       this.stopPickingPhase()
