@@ -17,8 +17,8 @@ export default function GameShop() {
     <>
       <div className="game-shop my-container">
         <div id="game-shop-info">
-          <GameMoneyInfo />
           <GameLifeInfo />
+          <GameMoneyInfo />
           <div className="spacer"></div>
           <GameTeamInfo />
         </div>
