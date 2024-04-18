@@ -7666,6 +7666,37 @@ export class Arcanine extends Pokemon {
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
+export class HisuiGrowlithe extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.ROCK, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.HISUI_ARCANINE
+  hp = 75
+  atk = 5
+  def = 3
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.DOUBLE_EDGE
+  attackSprite = AttackSprite.FIRE_MELEE
+  regional = true
+}
+
+export class HisuiArcanine extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.ROCK, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 140
+  atk = 12
+  def = 6
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.DOUBLE_EDGE
+  attackSprite = AttackSprite.FIRE_MELEE
+  regional = true
+}
+
 export class Smoochum extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.PSYCHIC, Synergy.BABY])
   rarity = Rarity.UNCOMMON
@@ -12895,6 +12926,8 @@ export const PokemonClasses: Record<
   [Pkm.SNORLAX]: Snorlax,
   [Pkm.GROWLITHE]: Growlithe,
   [Pkm.ARCANINE]: Arcanine,
+  [Pkm.HISUI_GROWLITHE]: HisuiGrowlithe,
+  [Pkm.HISUI_ARCANINE]: HisuiArcanine,
   [Pkm.ONIX]: Onix,
   [Pkm.STEELIX]: Steelix,
   [Pkm.MEGA_STEELIX]: MegaSteelix,
