@@ -159,6 +159,8 @@ export enum Pkm {
   SNORLAX = "SNORLAX",
   GROWLITHE = "GROWLITHE",
   ARCANINE = "ARCANINE",
+  HISUI_GROWLITHE = "HISUI_GROWLITHE",
+  HISUI_ARCANINE = "HISUI_ARCANINE",
   ONIX = "ONIX",
   STEELIX = "STEELIX",
   MEGA_STEELIX = "MEGA_STEELIX",
@@ -919,6 +921,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SNORLAX]: "0143",
   [Pkm.GROWLITHE]: "0058",
   [Pkm.ARCANINE]: "0059",
+  [Pkm.HISUI_GROWLITHE]: "0058-0001",
+  [Pkm.HISUI_ARCANINE]: "0059-0001",
   [Pkm.ONIX]: "0095",
   [Pkm.STEELIX]: "0208",
   [Pkm.MEGA_STEELIX]: "0208-0001",
@@ -1673,6 +1677,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SNORLAX]: Pkm.MUNCHLAX,
   [Pkm.GROWLITHE]: Pkm.GROWLITHE,
   [Pkm.ARCANINE]: Pkm.GROWLITHE,
+  [Pkm.HISUI_GROWLITHE]: Pkm.HISUI_GROWLITHE,
+  [Pkm.HISUI_ARCANINE]: Pkm.HISUI_GROWLITHE,
   [Pkm.ONIX]: Pkm.ONIX,
   [Pkm.STEELIX]: Pkm.ONIX,
   [Pkm.MEGA_STEELIX]: Pkm.ONIX,
@@ -3181,6 +3187,16 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Rumble
+  },
+  [Pkm.HISUI_GROWLITHE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.HISUI_ARCANINE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.QuickStrike,
+    emote: AnimationType.Shoot
   },
   [Pkm.ONIX]: {
     attack: AnimationType.Shoot,

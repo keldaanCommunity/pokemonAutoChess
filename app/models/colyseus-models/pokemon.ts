@@ -537,6 +537,7 @@ export class Bounsweet extends Pokemon {
   range = 1
   skill = Ability.HIGH_JUMP_KICK
   attackSprite = AttackSprite.FIGHTING_MELEE
+  regional = true
 }
 
 export class Steenee extends Pokemon {
@@ -552,6 +553,7 @@ export class Steenee extends Pokemon {
   range = 1
   skill = Ability.HIGH_JUMP_KICK
   attackSprite = AttackSprite.FIGHTING_MELEE
+  regional = true
 }
 
 export class Tsareena extends Pokemon {
@@ -566,6 +568,7 @@ export class Tsareena extends Pokemon {
   range = 1
   skill = Ability.HIGH_JUMP_KICK
   attackSprite = AttackSprite.FIGHTING_MELEE
+  regional = true
 }
 
 export class Buneary extends Pokemon {
@@ -1145,6 +1148,7 @@ export class Slakoth extends Pokemon {
   range = 1
   skill = Ability.SLACK_OFF
   attackSprite = AttackSprite.NORMAL_MELEE
+  regional = true
 }
 
 export class Vigoroth extends Pokemon {
@@ -1160,6 +1164,7 @@ export class Vigoroth extends Pokemon {
   range = 1
   skill = Ability.SLACK_OFF
   attackSprite = AttackSprite.NORMAL_MELEE
+  regional = true
 }
 
 export class Slaking extends Pokemon {
@@ -1174,6 +1179,7 @@ export class Slaking extends Pokemon {
   range = 1
   skill = Ability.SLACK_OFF
   attackSprite = AttackSprite.NORMAL_MELEE
+  regional = true
 }
 
 export class Honedge extends Pokemon {
@@ -2177,6 +2183,7 @@ export class Lotad extends Pokemon {
   range = 3
   skill = Ability.TORMENT
   attackSprite = AttackSprite.GRASS_RANGE
+  regional = true
 }
 
 export class Lombre extends Pokemon {
@@ -2196,6 +2203,7 @@ export class Lombre extends Pokemon {
   range = 3
   skill = Ability.TORMENT
   attackSprite = AttackSprite.GRASS_RANGE
+  regional = true
 }
 
 export class Ludicolo extends Pokemon {
@@ -2214,6 +2222,7 @@ export class Ludicolo extends Pokemon {
   range = 3
   skill = Ability.TORMENT
   attackSprite = AttackSprite.GRASS_RANGE
+  regional = true
 }
 
 export class Togepi extends Pokemon {
@@ -7657,6 +7666,37 @@ export class Arcanine extends Pokemon {
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
+export class HisuiGrowlithe extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.ROCK, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.HISUI_ARCANINE
+  hp = 75
+  atk = 5
+  def = 3
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.DOUBLE_EDGE
+  attackSprite = AttackSprite.FIRE_MELEE
+  regional = true
+}
+
+export class HisuiArcanine extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.ROCK, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 140
+  atk = 12
+  def = 6
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.DOUBLE_EDGE
+  attackSprite = AttackSprite.FIRE_MELEE
+  regional = true
+}
+
 export class Smoochum extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.PSYCHIC, Synergy.BABY])
   rarity = Rarity.UNCOMMON
@@ -11253,6 +11293,7 @@ export class Doduo extends Pokemon {
   range = 1
   skill = Ability.AGILITY
   attackSprite = AttackSprite.NORMAL_MELEE
+  regional = true
 }
 
 export class Dodrio extends Pokemon {
@@ -11267,6 +11308,7 @@ export class Dodrio extends Pokemon {
   range = 1
   skill = Ability.AGILITY
   attackSprite = AttackSprite.NORMAL_MELEE
+  regional = true
 }
 
 export class Kricketot extends Pokemon {
@@ -12884,6 +12926,8 @@ export const PokemonClasses: Record<
   [Pkm.SNORLAX]: Snorlax,
   [Pkm.GROWLITHE]: Growlithe,
   [Pkm.ARCANINE]: Arcanine,
+  [Pkm.HISUI_GROWLITHE]: HisuiGrowlithe,
+  [Pkm.HISUI_ARCANINE]: HisuiArcanine,
   [Pkm.ONIX]: Onix,
   [Pkm.STEELIX]: Steelix,
   [Pkm.MEGA_STEELIX]: MegaSteelix,

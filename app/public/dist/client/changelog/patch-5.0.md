@@ -16,9 +16,12 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Hypno
 - Wattrel
 - Kilowattrel
+- Hisui Growlithe
+- Hisui Arcanine
 
 # Changes to Pokemon & Abilities
 
+- These pokemons lines have been moved to regional pool: Alolan Vulpix, Hisui Zorua, Alolan Grimer, Hisuian Qwilfish, Doduo, Slakoth, Lotad, Bounsweet
 - Unown B (BURN): PP ~~30~~ 60
 - Unown F (FISH): fish ~~2~~ 3 pokemons
 - Unown S (STOP): freeze duration ~~4~~ 2 seconds
