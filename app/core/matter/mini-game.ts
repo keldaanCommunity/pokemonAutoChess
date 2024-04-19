@@ -48,6 +48,7 @@ import {
 } from "../../models/precomputed"
 import { isInRegion } from "../../models/pokemon-factory"
 import { deduplicateArray } from "../../utils/array"
+import { PkmFamily } from "../../types/enum/Pokemon"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -579,7 +580,9 @@ export class MiniGame {
 
         resetArraySchema(
           player.regionalPokemons,
-          deduplicateArray(player.regionalPokemons.concat(newRegionalPokemons))
+          player.regionalPokemons
+            .concat(newRegionalPokemons)
+            .filter((p, index, array) => array.indexOf(PkmFamily[p]) === index) // dedup same family
         )
 
         const symbols = this.getSymbolsByPortalId(avatar.portalId)

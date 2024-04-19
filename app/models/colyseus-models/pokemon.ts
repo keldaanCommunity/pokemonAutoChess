@@ -2124,6 +2124,14 @@ export class Goomy extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.SLIGOO
+  evolutionRule = new CountEvolutionRule(
+    3,
+    (pokemon: Pokemon, player: Player) => {
+      if (player.regionalPokemons.includes(Pkm.HISUI_SLIGGOO))
+        return Pkm.HISUI_SLIGGOO
+      else return Pkm.SLIGOO
+    }
+  )
   hp = 90
   atk = 6
   def = 4
@@ -2169,6 +2177,45 @@ export class Goodra extends Pokemon {
   range = 1
   skill = Ability.LIQUIDATION
   attackSprite = AttackSprite.DRAGON_MELEE
+}
+
+export class HisuiSliggoo extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.STEEL,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.GOODRA
+  hp = 160
+  atk = 12
+  def = 7
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.SHELTER
+  attackSprite = AttackSprite.STEEL_MELEE
+  regional = true
+}
+
+export class HisuiGoodra extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.STEEL,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.EPIC
+  stars = 3
+  hp = 300
+  atk = 26
+  def = 10
+  speDef = 6
+  maxPP = 80
+  range = 1
+  skill = Ability.SHELTER
+  attackSprite = AttackSprite.STEEL_MELEE
+  regional = true
 }
 
 export class Lotad extends Pokemon {
@@ -2702,7 +2749,7 @@ export class Pikachu extends Pokemon {
 export class Raichu extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FAIRY])
   rarity = Rarity.COMMON
-  stars = 3  
+  stars = 3
   hp = 220
   atk = 18
   def = 5
@@ -3614,7 +3661,7 @@ export class Quilava extends Pokemon {
 }
 
 export class Typhlosion extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])  
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
   rarity = Rarity.UNCOMMON
   stars = 3
   hp = 230
@@ -13228,6 +13275,8 @@ export const PokemonClasses: Record<
   [Pkm.GOOMY]: Goomy,
   [Pkm.SLIGOO]: Sligoo,
   [Pkm.GOODRA]: Goodra,
+  [Pkm.HISUI_SLIGGOO]: HisuiSliggoo,
+  [Pkm.HISUI_GOODRA]: HisuiGoodra,
   [Pkm.MEW]: Mew,
   [Pkm.BOUNSWEET]: Bounsweet,
   [Pkm.STEENEE]: Steenee,

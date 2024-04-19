@@ -5669,6 +5669,37 @@ export class SmogStrategy extends AbilityStrategy {
   }
 }
 
+export class ShelterStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const defGain = [3, 6, 12][pokemon.stars - 1] ?? 12
+    pokemon.addDefense(defGain, true)
+    const cells = board.getCellsInFront(pokemon, target)
+    cells.forEach((cell) => {
+      const index = cell.y * board.columns + cell.x
+      if (board.effects[index] !== Effect.GAS) {
+        board.effects[index] = Effect.GAS
+        pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+          simulationId: pokemon.simulation.id,
+          type: BoardEvent.GAS,
+          x: cell.x,
+          y: cell.y
+        })
+      }
+
+      if (cell.value) {
+        cell.value.effects.add(Effect.GAS)
+      }
+    })
+  }
+}
+
 export class MagnetRiseStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -8512,5 +8543,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DREAM_EATER]: new DreamEaterStrategy(),
   [Ability.SPARK]: new SparkStrategy(),
   [Ability.CRUNCH]: new CrunchStrategy(),
-  [Ability.CROSS_POISON]: new CrossPoisonStrategy()
+  [Ability.CROSS_POISON]: new CrossPoisonStrategy(),
+  [Ability.SHELTER]: new ShelterStrategy()
 }

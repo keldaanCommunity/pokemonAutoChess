@@ -443,6 +443,8 @@ export enum Pkm {
   GOOMY = "GOOMY",
   SLIGOO = "SLIGOO",
   GOODRA = "GOODRA",
+  HISUI_SLIGGOO = "HISUI_SLIGGOO",
+  HISUI_GOODRA = "HISUI_GOODRA",
   MEW = "MEW",
   BOUNSWEET = "BOUNSWEET",
   STEENEE = "STEENEE",
@@ -1202,6 +1204,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GOOMY]: "0704",
   [Pkm.SLIGOO]: "0705",
   [Pkm.GOODRA]: "0706",
+  [Pkm.HISUI_SLIGGOO]: "0705-0001",
+  [Pkm.HISUI_GOODRA]: "0706-0001",
   [Pkm.MEW]: "0151",
   [Pkm.BOUNSWEET]: "0761",
   [Pkm.STEENEE]: "0762",
@@ -1957,6 +1961,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GOOMY]: Pkm.GOOMY,
   [Pkm.SLIGOO]: Pkm.GOOMY,
   [Pkm.GOODRA]: Pkm.GOOMY,
+  [Pkm.HISUI_SLIGGOO]: Pkm.GOOMY,
+  [Pkm.HISUI_GOODRA]: Pkm.GOOMY,
   [Pkm.MEW]: Pkm.MEW,
   [Pkm.BOUNSWEET]: Pkm.BOUNSWEET,
   [Pkm.STEENEE]: Pkm.BOUNSWEET,
@@ -4589,6 +4595,16 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.GOODRA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.HISUI_SLIGGOO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.HISUI_GOODRA]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot

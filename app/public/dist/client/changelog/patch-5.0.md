@@ -16,8 +16,10 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Hypno
 - Wattrel
 - Kilowattrel
-- Hisui Growlithe
-- Hisui Arcanine
+- Hisuian Growlithe
+- Hisuian Arcanine
+- Hisuian Sliggoo
+- Hisuian Goodra
 
 # Changes to Pokemon & Abilities
 
