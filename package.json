@@ -97,7 +97,6 @@
     "react-tabs": "^6.0.2",
     "react-toastify": "^10.0.3",
     "react-tooltip": "5.21.5",
-    "rimraf": "^5.0.5",
     "unique-names-generator": "^4.7.1"
   },
   "devDependencies": {
@@ -121,6 +120,7 @@
     "npm-run-all": "^4.1.5",
     "openapi-typescript": "^6.7.4",
     "pm2": "^5.3.1",
+    "rimraf": "^5.0.5",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.3"
   }

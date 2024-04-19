@@ -47,6 +47,11 @@ export const PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX =
     [pkm: (typeof PkmIndex)[Pkm]]: number[]
   }
 
+export const PRECOMPUTED_REGIONAL_MONS: Pkm[] = Object.values(Pkm).filter(p => {
+  const { regional, skill, passive } = getPokemonData(p)
+  return regional && skill !== Ability.DEFAULT && passive !== Passive.NONE
+})
+
 export function getPokemonData(name: Pkm): IPokemonData {
   if (name in PRECOMPUTED_POKEMONS_DATA)
     return { name, index: PkmIndex[name], ...PRECOMPUTED_POKEMONS_DATA[name]! }

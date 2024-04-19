@@ -1961,6 +1961,14 @@ export class Cubone extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.MAROWAK
+  evolutionRule = new CountEvolutionRule(
+    3,
+    (pokemon: Pokemon, player: Player) => {
+      if (player.regionalPokemons.includes(Pkm.ALOLAN_MAROWAK))
+        return Pkm.ALOLAN_MAROWAK
+      else return Pkm.MAROWAK
+    }
+  )
   hp = 110
   atk = 10
   def = 4
@@ -1968,7 +1976,6 @@ export class Cubone extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.BONEMERANG
-  passive = Passive.CUBONE
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
@@ -1977,8 +1984,6 @@ export class Marowak extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.GHOST])
   rarity = Rarity.EPIC
   stars = 2
-  evolution = Pkm.ALOLAN_MAROWAK
-  evolutionRule = new ItemEvolutionRule([Item.FIRE_STONE])
   hp = 250
   atk = 20
   def = 6
@@ -1986,7 +1991,6 @@ export class Marowak extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.BONEMERANG
-  passive = Passive.CUBONE
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
@@ -2003,6 +2007,7 @@ export class AlolanMarowak extends Pokemon {
   range = 1
   skill = Ability.BONEMERANG
   additional = true
+  regional = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
@@ -2676,6 +2681,14 @@ export class Pikachu extends Pokemon {
   rarity = Rarity.COMMON
   stars = 2
   evolution = Pkm.RAICHU
+  evolutionRule = new CountEvolutionRule(
+    3,
+    (pokemon: Pokemon, player: Player) => {
+      if (player.regionalPokemons.includes(Pkm.ALOLAN_RAICHU))
+        return Pkm.ALOLAN_RAICHU
+      else return Pkm.RAICHU
+    }
+  )
   hp = 120
   atk = 9
   def = 3
@@ -2689,9 +2702,7 @@ export class Pikachu extends Pokemon {
 export class Raichu extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FAIRY])
   rarity = Rarity.COMMON
-  stars = 3
-  evolution = Pkm.ALOLAN_RAICHU
-  evolutionRule = new ItemEvolutionRule([Item.DAWN_STONE])
+  stars = 3  
   hp = 220
   atk = 18
   def = 5
@@ -2699,7 +2710,6 @@ export class Raichu extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.NUZZLE
-  passive = Passive.RAICHU
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -2720,6 +2730,7 @@ export class AlolanRaichu extends Pokemon {
   skill = Ability.NUZZLE
   passive = Passive.SURGE_SURFER
   attackSprite = AttackSprite.ELECTRIC_MELEE
+  regional = true
 }
 
 export class Bulbasaur extends Pokemon {
@@ -3584,6 +3595,14 @@ export class Quilava extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.TYPHLOSION
+  evolutionRule = new CountEvolutionRule(
+    3,
+    (pokemon: Pokemon, player: Player) => {
+      if (player.regionalPokemons.includes(Pkm.HISUIAN_TYPHLOSION))
+        return Pkm.HISUIAN_TYPHLOSION
+      else return Pkm.TYPHLOSION
+    }
+  )
   hp = 120
   atk = 13
   def = 2
@@ -3595,9 +3614,7 @@ export class Quilava extends Pokemon {
 }
 
 export class Typhlosion extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
-  evolution = Pkm.HISUIAN_TYPHLOSION
-  evolutionRule = new ItemEvolutionRule([Item.REAPER_CLOTH])
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])  
   rarity = Rarity.UNCOMMON
   stars = 3
   hp = 230
@@ -3608,7 +3625,6 @@ export class Typhlosion extends Pokemon {
   range = 2
   skill = Ability.WHEEL_OF_FIRE
   attackSprite = AttackSprite.FIRE_RANGE
-  passive = Passive.TYPHLOSION
 }
 
 export class HisuianTyphlosion extends Pokemon {
@@ -3624,6 +3640,7 @@ export class HisuianTyphlosion extends Pokemon {
   skill = Ability.INFERNAL_PARADE
   attackSprite = AttackSprite.FIRE_RANGE
   passive = Passive.HISUIAN_TYPHLOSION
+  regional = true
 }
 
 export class Slowpoke extends Pokemon {
@@ -10802,6 +10819,14 @@ export class Exeggcute extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.EXEGGUTOR
+  evolutionRule = new CountEvolutionRule(
+    3,
+    (pokemon: Pokemon, player: Player) => {
+      if (player.regionalPokemons.includes(Pkm.ALOLAN_EXEGGUTOR))
+        return Pkm.ALOLAN_EXEGGUTOR
+      else return Pkm.EXEGGUTOR
+    }
+  )
   hp = 110
   atk = 8
   def = 3
@@ -10809,7 +10834,6 @@ export class Exeggcute extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.EGGSPLOSION
-  passive = Passive.COCONUT
   additional = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
@@ -10818,8 +10842,6 @@ export class Exeggutor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.PSYCHIC])
   rarity = Rarity.EPIC
   stars = 2
-  evolution = Pkm.ALOLAN_EXEGGUTOR
-  evolutionRule = new ItemEvolutionRule([Item.LEAF_STONE])
   hp = 300
   atk = 20
   def = 4
@@ -10827,7 +10849,6 @@ export class Exeggutor extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.EGGSPLOSION
-  passive = Passive.COCONUT
   additional = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
@@ -10848,6 +10869,7 @@ export class AlolanExeggutor extends Pokemon {
   range = 1
   skill = Ability.EGGSPLOSION
   additional = true
+  regional = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
