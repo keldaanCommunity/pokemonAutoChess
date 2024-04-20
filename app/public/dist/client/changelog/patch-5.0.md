@@ -61,6 +61,9 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Nerfed Tepig line: HP 80/140/220→70/140/210, Attack: 8/14/24→7/12/20, Def/Spedef: 3/5/7→2/4/6
 - Changed Aron line: Attack 4/8/16 → 4/9/19, Spedef: 2/4/6→2/3/5
 - Nerf Gligar line: PP 90 → 100
+- New ability for Shinx line: Thunder Fang
+- New ability for Growlithe line: Fire Fang
+- New ability for Spheal line: Ice Fang
 
 # Changes to Synergies
 

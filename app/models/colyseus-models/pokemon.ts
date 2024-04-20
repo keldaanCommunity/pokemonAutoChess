@@ -1923,7 +1923,7 @@ export class Shinx extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.DISCHARGE
+  skill = Ability.THUNDER_FANG
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -1938,7 +1938,7 @@ export class Luxio extends Pokemon {
   speDef = 5
   maxPP = 100
   range = 1
-  skill = Ability.DISCHARGE
+  skill = Ability.THUNDER_FANG
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -1952,7 +1952,7 @@ export class Luxray extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.DISCHARGE
+  skill = Ability.THUNDER_FANG
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -3186,7 +3186,7 @@ export class Spheal extends Pokemon {
   speDef = 2
   maxPP = 90
   range = 1
-  skill = Ability.ICICLE_CRASH
+  skill = Ability.ICE_FANG
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -3201,7 +3201,7 @@ export class Sealeo extends Pokemon {
   speDef = 2
   maxPP = 90
   range = 1
-  skill = Ability.ICICLE_CRASH
+  skill = Ability.ICE_FANG
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -3215,7 +3215,7 @@ export class Walrein extends Pokemon {
   speDef = 3
   maxPP = 90
   range = 1
-  skill = Ability.ICICLE_CRASH
+  skill = Ability.ICE_FANG
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -7710,7 +7710,7 @@ export class Growlithe extends Pokemon {
   speDef = 2
   maxPP = 80
   range = 1
-  skill = Ability.GROWL
+  skill = Ability.FIRE_FANG
   additional = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
@@ -7725,7 +7725,7 @@ export class Arcanine extends Pokemon {
   speDef = 5
   maxPP = 80
   range = 1
-  skill = Ability.GROWL
+  skill = Ability.FIRE_FANG
   additional = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
