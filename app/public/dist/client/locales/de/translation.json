@@ -1746,7 +1746,6 @@
     "SAND_STREAM": "Dieses Pokémon zählt als 3 für SANDSTORM",
     "DRIZZLE": "Dieses Pokémon zählt als 3 für RAIN",
     "HARVEST": "Zu Begin jedes Kampfes erhält das Pokémon eine Beere. Trägt das Pokémon bereits 3 Items, wird die Beere dem Spieler Inventar hinzugefügt",
-    "COCONUT": "Kokowei sucht nach einem LEAF_STONE",
     "GLUTTON": "Jedes Mal, wenn es eine Beere isst, erhält es dauerhaft 20 max. HP",
     "COMFEY": "Comfey kann keine Gegenstände tragen. Zu Beginn des Kampfes trägt der nächste Verbündete, mit einem freien Itemplatz, Curelei und erhält alle seine Statuswerte. Curelei setzt seine Fähigkeit gleichzeitig mit seinem Träger. Wenn der Träger besiegt wird, kämpft Curelei alleine weiter",
     "TYPHLOSION": "Typhlosion sucht nach einem REAPER_CLOTH",

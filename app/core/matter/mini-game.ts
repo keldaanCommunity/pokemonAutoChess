@@ -42,7 +42,13 @@ import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import GameRoom from "../../rooms/game-room"
 import { Transfer } from "../../types"
 import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
-import { getPokemonData } from "../../models/precomputed"
+import {
+  getPokemonData,
+  PRECOMPUTED_REGIONAL_MONS
+} from "../../models/precomputed"
+import { isInRegion } from "../../models/pokemon-factory"
+import { deduplicateArray } from "../../utils/array"
+import { PkmFamily } from "../../types/enum/Pokemon"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -552,42 +558,44 @@ export class MiniGame {
         }
       }
 
-      if (avatar.portalId && player) {
-        const portal = this.portals?.get(avatar.portalId)
-        if (portal) {
-          player.map = portal.map
-        }
+      if (
+        avatar.portalId &&
+        this.portals?.has(avatar.portalId) &&
+        player &&
+        PortalCarouselStages.includes(state.stageLevel)
+      ) {
+        const portal = this.portals.get(avatar.portalId)!
+
+        player.map = portal.map
+        const mapSynergies = DungeonDetails[portal.map]?.synergies
+        //logger.debug("Adding to regional pool synergies ", mapSynergies)
+        const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
+          isInRegion(p, mapSynergies)
+        )
+        newRegionalPokemons.forEach((p) => {
+          if (getPokemonData(p).stars === 1) {
+            state.shop.addRegionalPokemon(p, player)
+          }
+        })
+
+        resetArraySchema(
+          player.regionalPokemons,
+          player.regionalPokemons
+            .concat(newRegionalPokemons)
+            .filter((p, index, array) => array.indexOf(PkmFamily[p]) === index) // dedup same family
+        )
 
         const symbols = this.getSymbolsByPortalId(avatar.portalId)
-        if (PortalCarouselStages.includes(state.stageLevel)) {
-          const portalSynergies = symbols.map((s) => s.synergy)
-          const propositions =
-            state.stageLevel === PortalCarouselStages[0]
-              ? UniqueShop
-              : LegendaryShop
-          state.shop.assignUniquePropositions(
-            player,
-            propositions,
-            portalSynergies
-          )
-          //logger.debug("Adding to regional pool synergies ", portalSynergies)
-          room.regionalPool.forEach((p) => {
-            if (
-              portalSynergies.some((s) => getPokemonData(p).types.includes(s))
-            ) {
-              state.shop.addRegionalPokemon(p, player)
-            }
-          })
-          resetArraySchema(player.regionalPokemons, [
-            ...new Set([
-              ...player.commonRegionalPool,
-              ...player.uncommonRegionalPool,
-              ...player.rareRegionalPool,
-              ...player.epicRegionalPool,
-              ...player.ultraRegionalPool
-            ])
-          ])
-        }
+        const portalSynergies = symbols.map((s) => s.synergy)
+        const propositions =
+          state.stageLevel === PortalCarouselStages[0]
+            ? UniqueShop
+            : LegendaryShop
+        state.shop.assignUniquePropositions(
+          player,
+          propositions,
+          portalSynergies
+        )
       }
 
       this.avatars!.delete(avatar.id)

@@ -55,17 +55,6 @@ export function getAdditionalsTier1(pokemons: Pkm[]) {
   })
 }
 
-export function getRegionalsTier1(pokemons: Pkm[]) {
-  return pokemons.filter((p) => {
-    const pokemonData = getPokemonData(p)
-    return (
-      pokemonData.stars === 1 &&
-      pokemonData.skill !== Ability.DEFAULT &&
-      pokemonData.regional
-    )
-  })
-}
-
 const CommonShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.COMMON)
 const UncommonShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.UNCOMMON)
 const RareShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.RARE)

@@ -17,8 +17,8 @@ import UserMetadata, {
   IPokemonConfig
 } from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
-import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed"
-import { getAdditionalsTier1, getRegionalsTier1 } from "../models/shop"
+import { getPokemonData, PRECOMPUTED_POKEMONS_PER_RARITY, PRECOMPUTED_REGIONAL_MONS } from "../models/precomputed"
+import { getAdditionalsTier1 } from "../models/shop"
 import { getAvatarString } from "../public/src/utils"
 import {
   Emotion,
@@ -42,7 +42,6 @@ import {
   RequiredStageLevelForXpElligibility,
   UniqueShop
 } from "../types/Config"
-import { DungeonPMDO } from "../types/enum/Dungeon"
 import { GameMode, Rarity } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Pkm, PkmDuos, PkmProposition } from "../types/enum/Pokemon"
@@ -78,7 +77,6 @@ export default class GameRoom extends Room<GameState> {
   additionalUncommonPool: Array<Pkm>
   additionalRarePool: Array<Pkm>
   additionalEpicPool: Array<Pkm>
-  regionalPool: Array<Pkm>
   miniGame: MiniGame
   constructor() {
     super()
@@ -86,7 +84,6 @@ export default class GameRoom extends Room<GameState> {
     this.additionalUncommonPool = new Array<Pkm>()
     this.additionalRarePool = new Array<Pkm>()
     this.additionalEpicPool = new Array<Pkm>()
-    this.regionalPool = new Array<Pkm>()
     this.miniGame = new MiniGame()
   }
 
@@ -157,8 +154,6 @@ export default class GameRoom extends Room<GameState> {
       )
     }
 
-    this.regionalPool = getRegionalsTier1(Object.values(Pkm))
-
     await Promise.all(
       keys(options.users).map(async (id) => {
         const user = options.users[id]
@@ -202,9 +197,11 @@ export default class GameRoom extends Room<GameState> {
             if (
               this.state.specialGameRule === SpecialGameRule.EVERYONE_IS_HERE
             ) {
-              this.regionalPool.forEach((p) =>
-                this.state.shop.addRegionalPokemon(p, player)
-              )
+              PRECOMPUTED_REGIONAL_MONS.forEach((p) => {
+                if(getPokemonData(p).stars === 1){
+                  this.state.shop.addRegionalPokemon(p, player)
+                }
+              })
             }
           }
         }

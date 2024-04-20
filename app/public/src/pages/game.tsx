@@ -635,6 +635,7 @@ export default function Game() {
               playMusic(gameScene, DungeonDetails[newMap].music)
             }
           }
+          dispatch(changePlayer({ id: player.id, field: "map", value: newMap }))
         })
 
         const fields: NonFunctionPropNames<IPlayer>[] = [
@@ -642,8 +643,7 @@ export default function Game() {
           "history",
           "life",
           "rank",
-          "regionalPokemons",
-          "map"
+          "regionalPokemons"
         ]
 
         fields.forEach((field) => {

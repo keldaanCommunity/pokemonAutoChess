@@ -204,3 +204,14 @@ export default class PokemonFactory {
 export function isAdditionalPick(pkm: Pkm): boolean {
   return getPokemonData(pkm).additional
 }
+
+export function isInRegion(pkm: Pkm, regionSynergies: Synergy[]) {
+  if (pkm === Pkm.ALOLAN_MAROWAK) return regionSynergies.includes(Synergy.FIRE)
+  if (pkm === Pkm.ALOLAN_RAICHU)
+    return regionSynergies.includes(Synergy.PSYCHIC)
+  if (pkm === Pkm.ALOLAN_EXEGGUTOR)
+    return regionSynergies.includes(Synergy.DRAGON)
+  if (pkm === Pkm.HISUIAN_TYPHLOSION)
+    return regionSynergies.includes(Synergy.GHOST)
+  return regionSynergies.some((s) => getPokemonData(pkm).types.includes(s))
+}
