@@ -9122,10 +9122,9 @@ export class Cinderace extends Pokemon {
 
 export class AlolanGeodude extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ROCK])
-  rarity = Rarity.HATCH
+  rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.ALOLAN_GRAVELER
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 100
   atk = 5
   def = 5
@@ -9133,16 +9132,15 @@ export class AlolanGeodude extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DISCHARGE
-  passive = Passive.HATCH
   attackSprite = AttackSprite.ROCK_MELEE
+  regional = true
 }
 
 export class AlolanGraveler extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ROCK])
-  rarity = Rarity.HATCH
+  rarity = Rarity.RARE
   stars = 2
   evolution = Pkm.ALOLAN_GOLEM
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 180
   atk = 10
   def = 7
@@ -9150,22 +9148,23 @@ export class AlolanGraveler extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DISCHARGE
-  passive = Passive.HATCH
   attackSprite = AttackSprite.ROCK_MELEE
+  regional = true
 }
 
 export class AlolanGolem extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ROCK])
-  rarity = Rarity.HATCH
+  rarity = Rarity.RARE
   stars = 3
   hp = 250
   atk = 20
-  def = 10
+  def = 12
   speDef = 7
   maxPP = 100
   range = 1
   skill = Ability.DISCHARGE
   attackSprite = AttackSprite.ROCK_MELEE
+  regional = true
 }
 
 export class Popplio extends Pokemon {
