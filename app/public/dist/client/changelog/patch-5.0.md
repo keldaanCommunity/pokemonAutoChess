@@ -62,6 +62,7 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Changed Aron line: Attack 4/8/16 → 4/9/19, Spedef: 2/4/6→2/3/5
 - Nerf Gligar line: PP 90 → 100
 - Buff Stun Spore: ~~5/10/20~~ 10/20/40 damage
+- Buff Pineco line: Def ~~3/5~~ 5/7
 
 # Changes to Synergies
 

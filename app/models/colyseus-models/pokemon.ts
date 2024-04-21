@@ -9372,7 +9372,7 @@ export class Pineco extends Pokemon {
   evolution = Pkm.FORRETRESS
   hp = 75
   atk = 5
-  def = 3
+  def = 5
   speDef = 3
   maxPP = 120
   range = 1
@@ -9386,8 +9386,8 @@ export class Forretress extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 200
-  atk = 5
-  def = 5
+  atk = 8
+  def = 7
   speDef = 3
   maxPP = 120
   range = 1
