@@ -1923,7 +1923,7 @@ export class Shinx extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.DISCHARGE
+  skill = Ability.THUNDER_FANG
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -1938,7 +1938,7 @@ export class Luxio extends Pokemon {
   speDef = 5
   maxPP = 100
   range = 1
-  skill = Ability.DISCHARGE
+  skill = Ability.THUNDER_FANG
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -1952,7 +1952,7 @@ export class Luxray extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.DISCHARGE
+  skill = Ability.THUNDER_FANG
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -3186,7 +3186,7 @@ export class Spheal extends Pokemon {
   speDef = 2
   maxPP = 90
   range = 1
-  skill = Ability.ICICLE_CRASH
+  skill = Ability.ICE_FANG
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -3201,7 +3201,7 @@ export class Sealeo extends Pokemon {
   speDef = 2
   maxPP = 90
   range = 1
-  skill = Ability.ICICLE_CRASH
+  skill = Ability.ICE_FANG
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -3215,7 +3215,7 @@ export class Walrein extends Pokemon {
   speDef = 3
   maxPP = 90
   range = 1
-  skill = Ability.ICICLE_CRASH
+  skill = Ability.ICE_FANG
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -7710,7 +7710,7 @@ export class Growlithe extends Pokemon {
   speDef = 2
   maxPP = 80
   range = 1
-  skill = Ability.GROWL
+  skill = Ability.FIRE_FANG
   additional = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
@@ -7725,7 +7725,7 @@ export class Arcanine extends Pokemon {
   speDef = 5
   maxPP = 80
   range = 1
-  skill = Ability.GROWL
+  skill = Ability.FIRE_FANG
   additional = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
@@ -9122,10 +9122,9 @@ export class Cinderace extends Pokemon {
 
 export class AlolanGeodude extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ROCK])
-  rarity = Rarity.HATCH
+  rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.ALOLAN_GRAVELER
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 100
   atk = 5
   def = 5
@@ -9133,16 +9132,15 @@ export class AlolanGeodude extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DISCHARGE
-  passive = Passive.HATCH
   attackSprite = AttackSprite.ROCK_MELEE
+  regional = true
 }
 
 export class AlolanGraveler extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ROCK])
-  rarity = Rarity.HATCH
+  rarity = Rarity.RARE
   stars = 2
   evolution = Pkm.ALOLAN_GOLEM
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 180
   atk = 10
   def = 7
@@ -9150,22 +9148,23 @@ export class AlolanGraveler extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DISCHARGE
-  passive = Passive.HATCH
   attackSprite = AttackSprite.ROCK_MELEE
+  regional = true
 }
 
 export class AlolanGolem extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ROCK])
-  rarity = Rarity.HATCH
+  rarity = Rarity.RARE
   stars = 3
   hp = 250
   atk = 20
-  def = 10
+  def = 12
   speDef = 7
   maxPP = 100
   range = 1
   skill = Ability.DISCHARGE
   attackSprite = AttackSprite.ROCK_MELEE
+  regional = true
 }
 
 export class Popplio extends Pokemon {
