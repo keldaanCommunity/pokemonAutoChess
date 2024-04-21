@@ -1348,7 +1348,7 @@
     "ACCELEROCK": "Saute à côté de l'ennemi le plus lointain et l'attaque immédiatement, infligeant [100,SP]% de l'ATK en SPECIAL. Dans la foulée, perd jusqu'à [5,SP] DEF et gagne 5% ATK_SPEED pour chaque point de DEF perdu.",
     "PETAL_BLIZZARD": "Inflige [30,SP] aux ennemis adjacents et gagne 10 de AP",
     "SUNSTEEL_STRIKE": "S'envole et atterrit au milieu de l'équipe ennemie avec la puissance d'un météore, infligeant [100,SP] SPECIAL aux ennemis adjacents et BURN pendant 3 secondes",
-    "MOONGEIST_BEAM": "Inflige [100,SP] SPECIAL à tous les ennemis dans une ligne droite, et les rend PARALYSIS pendant 3 secondes",
+    "MOONGEIST_BEAM": "Inflige [100,SP] SPECIAL à tous les ennemis dans une ligne droite, et les rend PARALYSIS pendant 3 secondes. Les alliés dans le rayon gagnent [100,SP] SHIELD",
     "FLEUR_CANNON": "Un rayon laser dévastateur inflige [120,SP] SPECIAL à tous les ennemis sur son chemin. Réduit l'AP du lanceur de 20 après chaque tir.",
     "SPIRIT_BREAK": "Inflige [20,40,80,SP] SPECIAL et réduit la AP de la cible de 20",
     "SHEER_COLD": "Une vague de froid glacial frappe la cible avec [30,SP]% de chance de la mettre K.O. en un coup. Plus l'attaquant a de HP comparé à sa cible, plus les chances augmentent. Éxécute toujours les cibles FREEZE, mais jamais les cibles ICE."

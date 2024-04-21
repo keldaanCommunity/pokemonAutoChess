@@ -7733,6 +7733,8 @@ export class MoongeistBeamStrategy extends AbilityStrategy {
             crit
           )
           targetInLine.status.triggerParalysis(3000, targetInLine)
+        } else {
+          targetInLine.addShield(100, pokemon, true)
         }
       }
     })
