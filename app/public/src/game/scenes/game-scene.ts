@@ -262,11 +262,13 @@ export default class GameScene extends Scene {
   }
 
   async setMap(mapName: DungeonPMDO) {
+    const tilemap = this.tilemaps.get(mapName)
+    if (!tilemap)
+      return logger.error(`Tilemap not yet loaded for map ${mapName}`)
+
     const map = this.make.tilemap({ key: "map_" + mapName })
     if (this.map) this.map.destroy()
     this.map = map
-    const tilemap = this.tilemaps.get(mapName)
-    if (!tilemap) return logger.error(`Tilemap not loaded for map ${mapName}`)
     tilemap.layers.forEach((layer) => {
       const tileset = map.addTilesetImage(
         layer.name,
