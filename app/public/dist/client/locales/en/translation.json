@@ -332,7 +332,8 @@
     "DOUBLE_EDGE": "Double Edge",
     "FIRE_FANG": "Fire Fang",
     "ICE_FANG": "Ice Fang",
-    "THUNDER_FANG": "Thunder Fang"
+    "THUNDER_FANG": "Thunder Fang",
+    "TAIL_WHIP": "Tail Whip"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -506,6 +507,8 @@
     "MAGIKARP": "Magikarp",
     "RATTATA": "Rattata",
     "RATICATE": "Raticate",
+    "ALOLAN_RATTATA": "Alolan Rattata",
+    "ALOLAN_RATICATE": "Alolan Raticate",
     "SPEAROW": "Spearow",
     "FEAROW": "Fearow",
     "GYARADOS": "Gyarados",
@@ -1406,7 +1409,8 @@
     "DOUBLE_EDGE": "Deal [55,110,220,SP] PHYSICAL to target. The user hurts itself for [20,40,60] PHYSICAL",
     "FIRE_FANG": "Deal [30,60,120,SP] SPECIAL and inflicts BURN for 2 seconds",
     "ICE_FANG": "Deal [30,60,120,SP] SPECIAL and inflicts FREEZE for 1 second",
-    "THUNDER_FANG": "Deal [30,60,120,SP] SPECIAL and inflicts PARALYSIS for 3 seconds"
+    "THUNDER_FANG": "Deal [30,60,120,SP] SPECIAL and inflicts PARALYSIS for 3 seconds",
+    "TAIL_WHIP": "Reduce target's DEF by [30,SP] %"
   },
   "effect": {
     "INGRAIN": "Ingrain",

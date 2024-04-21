@@ -4527,6 +4527,37 @@ export class Raticate extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class AlolanRattata extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.RATICATE
+  hp = 70
+  atk = 7
+  def = 2
+  speDef = 1
+  maxPP = 90
+  range = 1
+  skill = Ability.TAIL_WHIP
+  attackSprite = AttackSprite.DARK_MELEE
+  regional = true
+}
+
+export class AlolanRaticate extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 140
+  atk = 13
+  def = 3
+  speDef = 2
+  maxPP = 90
+  range = 1
+  skill = Ability.TAIL_WHIP
+  attackSprite = AttackSprite.DARK_MELEE
+  regional = true
+}
+
 export class Spearow extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FLYING])
   rarity = Rarity.COMMON
@@ -13006,7 +13037,9 @@ export const PokemonClasses: Record<
   [Pkm.LUCARIO]: Lucario,
   [Pkm.MAGIKARP]: Magikarp,
   [Pkm.RATTATA]: Rattata,
+  [Pkm.ALOLAN_RATTATA]: AlolanRattata,
   [Pkm.RATICATE]: Raticate,
+  [Pkm.ALOLAN_RATICATE]: AlolanRaticate,
   [Pkm.SPEAROW]: Spearow,
   [Pkm.FEAROW]: Fearow,
   [Pkm.GYARADOS]: Gyarados,

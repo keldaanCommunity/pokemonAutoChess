@@ -171,7 +171,9 @@ export enum Pkm {
   LUCARIO = "LUCARIO",
   MAGIKARP = "MAGIKARP",
   RATTATA = "RATTATA",
+  ALOLAN_RATTATA = "ALOLAN_RATTATA",
   RATICATE = "RATICATE",
+  ALOLAN_RATICATE = "ALOLAN_RATICATE",
   SPEAROW = "SPEAROW",
   FEAROW = "FEAROW",
   GYARADOS = "GYARADOS",
@@ -935,7 +937,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.LUCARIO]: "0448",
   [Pkm.MAGIKARP]: "0129",
   [Pkm.RATTATA]: "0019",
+  [Pkm.ALOLAN_RATTATA]: "0019-0001",
   [Pkm.RATICATE]: "0020",
+  [Pkm.ALOLAN_RATICATE]: "0020-0001",
   [Pkm.SPEAROW]: "0021",
   [Pkm.FEAROW]: "0022",
   [Pkm.GYARADOS]: "0130",
@@ -1779,7 +1783,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MAGIKARP]: Pkm.MAGIKARP,
   [Pkm.GYARADOS]: Pkm.MAGIKARP,
   [Pkm.RATTATA]: Pkm.RATTATA,
+  [Pkm.ALOLAN_RATTATA]: Pkm.ALOLAN_RATTATA,
   [Pkm.RATICATE]: Pkm.RATTATA,
+  [Pkm.ALOLAN_RATICATE]: Pkm.ALOLAN_RATTATA,
   [Pkm.LUGIA]: Pkm.LUGIA,
   [Pkm.CARVANHA]: Pkm.CARVANHA,
   [Pkm.SWABLU]: Pkm.SWABLU,
@@ -3254,9 +3260,19 @@ export const AnimationConfig: {
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot
   },
+  [Pkm.ALOLAN_RATTATA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.TailWhip,
+    emote: AnimationType.Shoot
+  },
   [Pkm.RATICATE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.ALOLAN_RATICATE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.TailWhip,
     emote: AnimationType.Shoot
   },
   [Pkm.SPEAROW]: {

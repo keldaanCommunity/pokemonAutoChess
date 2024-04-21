@@ -20,6 +20,8 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Hisuian Arcanine
 - Hisuian Sliggoo
 - Hisuian Goodra
+- Alolan Rattata
+- Alolan Ratticate
 
 # Changes to Pokemon & Abilities
 
