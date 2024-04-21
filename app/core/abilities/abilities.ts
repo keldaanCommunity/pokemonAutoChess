@@ -3928,7 +3928,7 @@ export class StunSporeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [5, 10, 20][pokemon.stars - 1] ?? 20
+    const damage = [10, 20, 40][pokemon.stars - 1] ?? 20
     board
       .getAdjacentCells(target.positionX, target.positionY, true)
       .forEach((cell) => {
