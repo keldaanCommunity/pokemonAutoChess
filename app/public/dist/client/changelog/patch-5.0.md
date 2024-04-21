@@ -69,6 +69,7 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Changed TriAttack (Porygon line): damage ~~30/50/70~~ 25/50/100
 - Huge buffs to Sewaddle line: HP ~~130/180/250~~ 140/280/400, Attack: ~~14/24/34~~ 14/24/44, Def ~~3/4/5~~ 6/10/8, SpeDef ~~3/4/5~~ 4/6/6
 - Buffed Moongeist Beam (Lunala): Allies in the beam now gain 100 shield
+- Small buff to Psychic (Solosis line): ~~45/90/180~~ 50/100/200 damage
 
 # Changes to Synergies
 

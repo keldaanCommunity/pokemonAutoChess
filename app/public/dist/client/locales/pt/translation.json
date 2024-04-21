@@ -1152,7 +1152,7 @@
     "STEAM_ERUPTION": "Inflige [80,SP] SPECIAL ao alvo e a todos os inimigos adjacentes e BURN-OS por 3 segundos",
     "APPLE_ACID": "Distribui [15,30,60,SP] SPECIAL aos alvos à frente e reduz a sua DEF e SPE_DEF em [5,SP] pontos",
     "SACRED_SWORD": "Distribui [100,SP] TRUE ao alvo",
-    "PSYCHIC": "Oferece [45,90,180,SP] SPECIAL e queima 15 de PP para o alvo e inimigos adjacentes",
+    "PSYCHIC": "Oferece [50,100,200,SP] SPECIAL e queima 15 de PP para o alvo e inimigos adjacentes",
     "DIVE": "Mergulha na água e reaparece no meio do time inimigo, causando [15,30,60,SP] SPECIAL e FREEZE todas as unidades adjacentes por 1,5 segundo",
     "SPIKE_ARMOR": "Por [3,5,10] segundos, alvos que atacam corpo a corpo este Pokémon recebem WOUND e recebem SPECIAL igual a [100,SP]% da DEF atual",
     "FUTURE_SIGHT": "Oferece [15,30,60,SP] SPECIAL a 5 inimigos",

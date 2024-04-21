@@ -549,8 +549,7 @@ export class PsychicStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 3 ? 180 : pokemon.stars === 2 ? 90 : 45
-
+    const damage = [50,100,200][pokemon.stars - 1] ?? 200
     const cells = board.getAdjacentCells(
       target.positionX,
       target.positionY,
