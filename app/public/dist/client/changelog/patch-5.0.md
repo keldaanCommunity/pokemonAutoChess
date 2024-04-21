@@ -63,6 +63,7 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Nerf Gligar line: PP 90 → 100
 - Buff Stun Spore: ~~5/10/20~~ 10/20/40 damage
 - Buff Pineco line: Def ~~3/5~~ 5/7
+- Nerf Scizor: HP 240→190, Attack 29 → 25, SpeDef 7 → 5
 
 # Changes to Synergies
 

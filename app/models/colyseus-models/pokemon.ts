@@ -500,10 +500,10 @@ export class Scizor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING, Synergy.STEEL])
   rarity = Rarity.UNIQUE
   stars = 4
-  hp = 240
-  atk = 29
+  hp = 190
+  atk = 25
   def = 7
-  speDef = 7
+  speDef = 5
   maxPP = 80
   range = 1
   skill = Ability.X_SCISSOR
