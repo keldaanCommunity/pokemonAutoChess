@@ -255,7 +255,6 @@ export default class GameScene extends Scene {
               )
             })
             this.load.tilemapTiledJSON("map_" + mapName, tilemap)
-            preloadMusic(this, DungeonDetails[mapName].music)
           })
       )
     )
