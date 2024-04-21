@@ -8234,6 +8234,72 @@ export class CrossPoisonStrategy extends AbilityStrategy {
   }
 }
 
+export class FireFangStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
+    target.status.triggerBurn(2000, target, pokemon)
+  }
+}
+
+export class IceFangStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
+    target.status.triggerFreeze(1000, target)
+  }
+}
+
+export class ThunderFangStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
+    target.status.triggerParalysis(3000, target)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -8545,5 +8611,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SPARK]: new SparkStrategy(),
   [Ability.CRUNCH]: new CrunchStrategy(),
   [Ability.CROSS_POISON]: new CrossPoisonStrategy(),
-  [Ability.SHELTER]: new ShelterStrategy()
+  [Ability.SHELTER]: new ShelterStrategy(),
+  [Ability.FIRE_FANG]: new FireFangStrategy(),
+  [Ability.ICE_FANG]: new IceFangStrategy(),
+  [Ability.THUNDER_FANG]: new ThunderFangStrategy()
 }

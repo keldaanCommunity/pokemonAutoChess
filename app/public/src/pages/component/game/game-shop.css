@@ -193,6 +193,7 @@
   display: flex;
   gap: 1em;
   padding: 0 1em;
+  pointer-events: none;
 }
 
 #game-money-info {
@@ -235,6 +236,7 @@
   color: white;
   border-radius: 12px 12px 0 0;
   font-size: 1.25em;
+  pointer-events: initial;
 }
 
 .game-shop .information > div {

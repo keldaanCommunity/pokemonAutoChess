@@ -2876,17 +2876,17 @@ export const AnimationConfig: {
   },
   [Pkm.SPHEAL]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.RearUp,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.SEALEO]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.RearUp,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.WALREIN]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.RearUp,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.ARON]: {
@@ -2980,19 +2980,19 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.SHINX]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Pose
   },
   [Pkm.LUXIO]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Pose
   },
   [Pkm.LUXRAY]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shake
   },
   [Pkm.POLIWAG]: {
     attack: AnimationType.Shoot,

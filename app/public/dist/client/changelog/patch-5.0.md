@@ -23,7 +23,7 @@ Each player now starts on a different map. Portals now makes you travel to new l
 
 # Changes to Pokemon & Abilities
 
-- These pokemons lines have been moved to regional pool: Alolan Vulpix, Hisui Zorua, Alolan Grimer, Hisuian Qwilfish, Impidimp, Doduo, Slakoth, Lotad, Bounsweet
+- These pokemons lines have been moved to regional pool: Alolan Vulpix, Hisui Zorua, Alolan Grimer, Hisuian Qwilfish, Alolan Geodude, Impidimp, Doduo, Slakoth, Lotad, Bounsweet
 - Alolan Raichu: remove item based evolution, replace Raichu evolution in regions with Psychic synergy
 - Alolan Marowak: remove item based evolution, replace Marowak evolution in regions with Fire synergy
 - Alolan Exeggutor: remove item based evolution, replace Exeggutor evolution in regions with Dragon synergy
@@ -70,6 +70,9 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Huge buffs to Sewaddle line: HP ~~130/180/250~~ 140/280/400, Attack: ~~14/24/34~~ 14/24/44, Def ~~3/4/5~~ 6/10/8, SpeDef ~~3/4/5~~ 4/6/6
 - Buffed Moongeist Beam (Lunala): Allies in the beam now gain 100 shield
 - Small buff to Psychic (Solosis line): ~~45/90/180~~ 50/100/200 damage
+- New ability for Shinx line: Thunder Fang
+- New ability for Growlithe line: Fire Fang
+- New ability for Spheal line: Ice Fang
 
 # Changes to Synergies
 
