@@ -510,7 +510,9 @@ export enum Pkm {
   TAPU_FINI = "TAPU_FINI",
   TAPU_BULU = "TAPU_BULU",
   DIGLETT = "DIGLETT",
+  ALOLAN_DIGLETT = "ALOLAN_DIGLETT",
   DUGTRIO = "DUGTRIO",
+  ALOLAN_DUGTRIO = "ALOLAN_DUGTRIO",
   ROWLET = "ROWLET",
   DARTIX = "DARTIX",
   DECIDUEYE = "DECIDUEYE",
@@ -1271,7 +1273,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.TAPU_FINI]: "0788",
   [Pkm.TAPU_BULU]: "0787",
   [Pkm.DIGLETT]: "0050",
+  [Pkm.ALOLAN_DIGLETT]: "0050-0001",
   [Pkm.DUGTRIO]: "0051",
+  [Pkm.ALOLAN_DUGTRIO]: "0051-0001",
   [Pkm.ROWLET]: "0722",
   [Pkm.DARTIX]: "0723",
   [Pkm.DECIDUEYE]: "0724",
@@ -2032,7 +2036,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TAPU_FINI]: Pkm.TAPU_FINI,
   [Pkm.TAPU_BULU]: Pkm.TAPU_BULU,
   [Pkm.DIGLETT]: Pkm.DIGLETT,
+  [Pkm.ALOLAN_DIGLETT]: Pkm.ALOLAN_DIGLETT,
   [Pkm.DUGTRIO]: Pkm.DIGLETT,
+  [Pkm.ALOLAN_DUGTRIO]: Pkm.ALOLAN_DIGLETT,
   [Pkm.ROWLET]: Pkm.ROWLET,
   [Pkm.DARTIX]: Pkm.ROWLET,
   [Pkm.DECIDUEYE]: Pkm.ROWLET,
@@ -4941,10 +4947,20 @@ export const AnimationConfig: {
     ability: AnimationType.DigIn,
     emote: AnimationType.Special0
   },
+  [Pkm.ALOLAN_DIGLETT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.DigIn,
+    emote: AnimationType.Special0
+  },
   [Pkm.DUGTRIO]: {
     attack: AnimationType.Attack,
     ability: AnimationType.DigIn,
     emote: AnimationType.Special0
+  },
+  [Pkm.ALOLAN_DUGTRIO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Walk,
+    emote: AnimationType.Hop
   },
   [Pkm.ROWLET]: {
     attack: AnimationType.Attack,

@@ -4531,7 +4531,7 @@ export class AlolanRattata extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
   rarity = Rarity.UNCOMMON
   stars = 1
-  evolution = Pkm.RATICATE
+  evolution = Pkm.ALOLAN_RATICATE
   hp = 70
   atk = 7
   def = 2
@@ -9902,6 +9902,39 @@ export class Dugtrio extends Pokemon {
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
+export class AlolanDiglett extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.STEEL])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.ALOLAN_DUGTRIO
+  hp = 70
+  atk = 8
+  def = 2
+  speDef = 1
+  maxPP = 50
+  range = 1
+  skill = Ability.DIG
+  additional = true
+  attackSprite = AttackSprite.ROCK_MELEE
+  regional = true
+}
+
+export class AlolanDugtrio extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.STEEL])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 150
+  atk = 18
+  def = 3
+  speDef = 2
+  maxPP = 50
+  range = 1
+  skill = Ability.DIG
+  additional = true
+  attackSprite = AttackSprite.ROCK_MELEE
+  regional = true
+}
+
 export class Rowlet extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLYING, Synergy.GHOST])
   rarity = Rarity.HATCH
@@ -13373,7 +13406,9 @@ export const PokemonClasses: Record<
   [Pkm.TAPU_FINI]: TapuFini,
   [Pkm.TAPU_BULU]: TapuBulu,
   [Pkm.DIGLETT]: Diglett,
+  [Pkm.ALOLAN_DIGLETT]: AlolanDiglett,
   [Pkm.DUGTRIO]: Dugtrio,
+  [Pkm.ALOLAN_DUGTRIO]: AlolanDugtrio,
   [Pkm.ROWLET]: Rowlet,
   [Pkm.DARTIX]: Dartix,
   [Pkm.DECIDUEYE]: Decidueye,
