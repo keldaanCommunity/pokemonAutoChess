@@ -1540,7 +1540,7 @@ export class TriAttackStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [30, 50, 70][pokemon.stars - 1] ?? 70
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     const effect = randomBetween(1, 3)
     switch (effect) {

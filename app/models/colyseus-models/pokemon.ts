@@ -1568,10 +1568,10 @@ export class Porygon2 extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.PORYGON_Z
-  hp = 200
-  atk = 22
+  hp = 185
+  atk = 16
   evolutionRule = new ItemEvolutionRule([Item.UPGRADE])
-  def = 1
+  def = 3
   speDef = 3
   maxPP = 90
   range = 2
@@ -1589,9 +1589,9 @@ export class PorygonZ extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 3
-  hp = 200
+  hp = 300
   atk = 33
-  def = 1
+  def = 5
   speDef = 5
   maxPP = 90
   range = 2
