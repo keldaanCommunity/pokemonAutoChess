@@ -1589,7 +1589,7 @@ export class PorygonZ extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 3
-  hp = 300
+  hp = 200
   atk = 33
   def = 5
   speDef = 5

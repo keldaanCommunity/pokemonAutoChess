@@ -65,7 +65,7 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Buff Pineco line: Def ~~3/5~~ 5/7
 - Nerf Scizor: HP 240→190, Attack 29 → 25, SpeDef 7 → 5
 - Nerf Porygon 2: HP 200 → 185, Attack: 22 → 16, Def: 1 → 3
-- Buff Porygon Z: HP: 200 → 300, Def: 1 → 5
+- Buff Porygon Z: Def: 1 → 5
 - Changed TriAttack (Porygon line): damage ~~30/50/70~~ 25/50/100
 - Huge buffs to Sewaddle line: HP ~~130/180/250~~ 140/280/400, Attack: ~~14/24/34~~ 14/24/44, Def ~~3/4/5~~ 6/10/8, SpeDef ~~3/4/5~~ 4/6/6
 - Buffed Moongeist Beam (Lunala): Allies in the beam now gain 100 shield
