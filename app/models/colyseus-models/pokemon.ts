@@ -12718,46 +12718,49 @@ export class Magearna extends Pokemon {
 
 export class Impidimp extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FAIRY, Synergy.HUMAN])
-  rarity = Rarity.COMMON
+  rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.MORGREM
   hp = 60
   atk = 6
   def = 1
-  speDef = 1
-  maxPP = 70
-  range = 1
-  skill = Ability.SPIRIT_BREAK
-  attackSprite = AttackSprite.DARK_MELEE
-}
-
-export class Morgrem extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FAIRY, Synergy.HUMAN])
-  rarity = Rarity.COMMON
-  stars = 2
-  evolution = Pkm.GRIMMSNARL
-  hp = 110
-  atk = 11
-  def = 2
   speDef = 2
   maxPP = 70
   range = 1
   skill = Ability.SPIRIT_BREAK
   attackSprite = AttackSprite.DARK_MELEE
+  regional = true
 }
 
-export class Grimmsnarl extends Pokemon {
+export class Morgrem extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FAIRY, Synergy.HUMAN])
-  rarity = Rarity.COMMON
-  stars = 3
-  hp = 200
-  atk = 20
-  def = 3
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.GRIMMSNARL
+  hp = 110
+  atk = 11
+  def = 2
   speDef = 3
   maxPP = 70
   range = 1
   skill = Ability.SPIRIT_BREAK
   attackSprite = AttackSprite.DARK_MELEE
+  regional = true
+}
+
+export class Grimmsnarl extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FAIRY, Synergy.HUMAN])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 3
+  speDef = 4
+  maxPP = 70
+  range = 1
+  skill = Ability.SPIRIT_BREAK
+  attackSprite = AttackSprite.DARK_MELEE
+  regional = true
 }
 
 export class Drowzee extends Pokemon {
