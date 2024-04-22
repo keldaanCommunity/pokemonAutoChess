@@ -38,7 +38,7 @@ import {
   SynergyItems
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
+import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { sum } from "../../utils/array"
@@ -4707,6 +4707,20 @@ export class Zeraora extends Pokemon {
   range = 1
   skill = Ability.PLASMA_FIST
   attackSprite = AttackSprite.ELECTRIC_MELEE
+}
+
+export class Stantler extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.PSYCHIC, Synergy.FIELD])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.PSYSHIELD_BASH
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Miltank extends Pokemon {
@@ -13663,5 +13677,6 @@ export const PokemonClasses: Record<
   [Pkm.DROWZEE]: Drowzee,
   [Pkm.HYPNO]: Hypno,
   [Pkm.WATTREL]: Wattrel,
-  [Pkm.KILOWATTREL]: Kilowattrel
+  [Pkm.KILOWATTREL]: Kilowattrel,
+  [Pkm.STANTLER]: Stantler
 }
