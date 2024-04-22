@@ -1,6 +1,5 @@
 import { monitor } from "@colyseus/monitor"
 import config from "@colyseus/tools"
-import { RedisDriver, RedisPresence } from "colyseus"
 import compression from "compression"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
@@ -37,10 +36,10 @@ const clientSrc = __dirname.includes("server")
 
 const serverOptions = {}
 
-if (process.env.NODE_APP_INSTANCE) {
-  serverOptions["presence"] = new RedisPresence()
-  serverOptions["driver"] = new RedisDriver()
-}
+// if (process.env.NODE_APP_INSTANCE) {
+//   serverOptions["presence"] = new RedisPresence()
+//   serverOptions["driver"] = new RedisDriver()
+// }
 
 export default config({
   options: serverOptions,

@@ -12,7 +12,7 @@ export default {
     compressPng: compressPng(),
     compressJpg: compressJpg(),
     audio: audio({
-      inputs: [".mp3", ".ogg", ".wav"],
+      inputs: [".mp3", ".wav", ".ogg"],
       outputs: [
         {
           formats: [".mp3"],
@@ -21,17 +21,15 @@ export default {
             audioBitrate: 96,
             audioChannels: 1,
             audioFrequency: 48000
-          }
-        },
-        {
-          formats: [".ogg"],
+          },
+          formats: ['.ogg'],
           recompress: false,
           options: {
-            audioBitrate: 32,
-            audioChannels: 1,
-            audioFrequency: 22050,
+              audioBitrate: 32,
+              audioChannels: 1,
+              audioFrequency: 22050,
           }
-        }
+        },
       ]
     }),
     json: json(),
