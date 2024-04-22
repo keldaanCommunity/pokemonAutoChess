@@ -73,7 +73,7 @@ export default config({
     // set up rate limiter: maximum of five requests per minute
     const limiter = rateLimit({
       windowMs: 15 * 60 * 1000, // 15 minutes
-      max: 500, // Allow 500 requests per minute
+      max: 5000, // Allow 500 requests per minute
       message: "Too many requests, please try again later.",
       statusCode: 429, // HTTP status code for rate limit exceeded
       headers: true // Include custom headers
