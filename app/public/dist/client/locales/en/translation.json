@@ -333,7 +333,8 @@
     "FIRE_FANG": "Fire Fang",
     "ICE_FANG": "Ice Fang",
     "THUNDER_FANG": "Thunder Fang",
-    "TAIL_WHIP": "Tail Whip"
+    "TAIL_WHIP": "Tail Whip",
+    "PSYSHIELD_BASH": "Psyshield Bash"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1098,7 +1099,8 @@
     "DROWZEE": "Drowzee",
     "HYPNO": "Hypno",
     "WATTREL": "Wattrel",
-    "KILOWATTREL": "Kilowattrel"
+    "KILOWATTREL": "Kilowattrel",
+    "STANTLER": "Stantler"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1412,7 +1414,8 @@
     "FIRE_FANG": "Deal [30,60,120,SP] SPECIAL and inflicts BURN for 2 seconds",
     "ICE_FANG": "Deal [30,60,120,SP] SPECIAL and inflicts FREEZE for 1 second",
     "THUNDER_FANG": "Deal [30,60,120,SP] SPECIAL and inflicts PARALYSIS for 3 seconds",
-    "TAIL_WHIP": "Reduce target's DEF by [30,SP] %"
+    "TAIL_WHIP": "Reduce target's DEF by [30,SP] %",
+    "PSYSHIELD_BASH": "Dash into the ennemy backlane, dealing [60,SP] special damage and PROTECT the caster for 1s"
   },
   "effect": {
     "INGRAIN": "Ingrain",
