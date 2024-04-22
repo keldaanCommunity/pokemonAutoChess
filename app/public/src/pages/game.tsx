@@ -92,7 +92,7 @@ import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import { FIREBASE_CONFIG } from "./utils/utils"
 import { DungeonDetails } from "../../../types/enum/Dungeon"
-import { playMusic } from "./utils/audio"
+import { playMusic, preloadMusic } from "./utils/audio"
 
 let gameContainer: GameContainer
 
@@ -632,7 +632,17 @@ export default function Game() {
             const gameScene = getGameScene()
             if (gameScene) {
               gameScene.setMap(newMap)
-              playMusic(gameScene, DungeonDetails[newMap].music)
+              const alreadyLoading = gameScene.load.isLoading()
+              if (!alreadyLoading) {
+                gameScene.load.reset()
+              }
+              preloadMusic(gameScene, DungeonDetails[newMap].music)
+              gameScene.load.once("complete", () =>
+                playMusic(gameScene, DungeonDetails[newMap].music)
+              )
+              if (!alreadyLoading) {
+                gameScene.load.start()
+              }
             }
           }
           dispatch(changePlayer({ id: player.id, field: "map", value: newMap }))

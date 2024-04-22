@@ -29,13 +29,18 @@ export default function Jukebox(props: {
     if (gameScene) {
       gameScene.music?.destroy()
       setLoading(true)
-      gameScene.load.reset()
+      let alreadyLoading = gameScene.load.isLoading()
+      if (!alreadyLoading) {
+        gameScene.load.reset()
+      }
       preloadMusic(gameScene, name)
       gameScene.load.once("complete", () => {
         playMusic(gameScene, name)
         setLoading(false)
       })
-      gameScene.load.start()
+      if (!alreadyLoading) {
+        gameScene.load.start()
+      }
     }
   }
 

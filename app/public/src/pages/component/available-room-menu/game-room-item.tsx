@@ -15,7 +15,7 @@ export default function GameRoomItem(props: {
   const spectate = !props.room.metadata?.playerIds.includes(myUid)
 
   return (
-    <div className="room-item">
+    <div className="room-item my-box">
       <span className="room-name">{props.room.metadata?.name}</span>
       <span>
         {props.room.metadata?.playerIds.length} {t("player")}

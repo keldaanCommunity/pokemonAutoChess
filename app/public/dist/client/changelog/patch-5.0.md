@@ -20,6 +20,10 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Hisuian Arcanine
 - Hisuian Sliggoo
 - Hisuian Goodra
+- Alolan Rattata
+- Alolan Ratticate
+- Alolan Diglett
+- Alolan Dugtrio
 
 # Changes to Pokemon & Abilities
 
@@ -42,9 +46,9 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Totodile line: PP 90 → 100
 - Wailmer line: PP 110 → 120
 - Relicanth: PP 70 → 100, Def 6 → 7
-- Lapras: PP 100 → 110
+- Lapras: PP 100 → 120
 - Changed Forecast (Castform ability) Rain: also gives ~~10~~ 5 PP
-- Kyogre: PP 100 → 120
+- Kyogre and Primal Kyogre: PP 100 → 130
 - Suicune: PP 100 → 130
 - Anorith line: PP 100 → 80
 - Spheal line: PP 100 → 90

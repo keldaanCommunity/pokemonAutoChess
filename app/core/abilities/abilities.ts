@@ -8300,6 +8300,20 @@ export class ThunderFangStrategy extends AbilityStrategy {
   }
 }
 
+export class TailWhipStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const defLoss = target.def * 0.3 * (1+ pokemon.ap / 100)
+    target.addDefense(-1 * defLoss)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -8614,5 +8628,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SHELTER]: new ShelterStrategy(),
   [Ability.FIRE_FANG]: new FireFangStrategy(),
   [Ability.ICE_FANG]: new IceFangStrategy(),
-  [Ability.THUNDER_FANG]: new ThunderFangStrategy()
+  [Ability.THUNDER_FANG]: new ThunderFangStrategy(),
+  [Ability.TAIL_WHIP]: new TailWhipStrategy()
 }

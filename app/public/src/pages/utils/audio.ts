@@ -62,7 +62,7 @@ export function playSound(key: Soundkey) {
 type SceneWithMusic = Phaser.Scene & { music?: Phaser.Sound.WebAudioSound }
 
 export function playMusic(scene: SceneWithMusic, name: string) {
-  if (scene == null) return
+  if (scene == null || scene.music?.key === "music_"+name) return
   if (scene.music) scene.music.destroy()
   scene.music = scene.sound.add("music_" + name, {
     loop: true

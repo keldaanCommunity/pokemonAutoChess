@@ -4527,6 +4527,37 @@ export class Raticate extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class AlolanRattata extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.ALOLAN_RATICATE
+  hp = 70
+  atk = 7
+  def = 2
+  speDef = 1
+  maxPP = 90
+  range = 1
+  skill = Ability.TAIL_WHIP
+  attackSprite = AttackSprite.DARK_MELEE
+  regional = true
+}
+
+export class AlolanRaticate extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 140
+  atk = 13
+  def = 3
+  speDef = 2
+  maxPP = 90
+  range = 1
+  skill = Ability.TAIL_WHIP
+  attackSprite = AttackSprite.DARK_MELEE
+  regional = true
+}
+
 export class Spearow extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FLYING])
   rarity = Rarity.COMMON
@@ -4995,7 +5026,7 @@ export class Kyogre extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 100
+  maxPP = 130
   range = 3
   skill = Ability.ORIGIN_PULSE
   passive = Passive.PRIMAL
@@ -5689,7 +5720,7 @@ export class Lapras extends Pokemon {
   atk = 12
   def = 5
   speDef = 6
-  maxPP = 110
+  maxPP = 120
   range = 1
   skill = Ability.DIVE
   attackSprite = AttackSprite.WATER_MELEE
@@ -6122,7 +6153,7 @@ export class PrimalKyogre extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 100
+  maxPP = 130
   range = 3
   skill = Ability.ORIGIN_PULSE
   passive = Passive.RAIN
@@ -9871,6 +9902,39 @@ export class Dugtrio extends Pokemon {
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
+export class AlolanDiglett extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.STEEL])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.ALOLAN_DUGTRIO
+  hp = 70
+  atk = 8
+  def = 2
+  speDef = 1
+  maxPP = 50
+  range = 1
+  skill = Ability.DIG
+  additional = true
+  attackSprite = AttackSprite.ROCK_MELEE
+  regional = true
+}
+
+export class AlolanDugtrio extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.STEEL])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 150
+  atk = 18
+  def = 3
+  speDef = 2
+  maxPP = 50
+  range = 1
+  skill = Ability.DIG
+  additional = true
+  attackSprite = AttackSprite.ROCK_MELEE
+  regional = true
+}
+
 export class Rowlet extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLYING, Synergy.GHOST])
   rarity = Rarity.HATCH
@@ -13009,7 +13073,9 @@ export const PokemonClasses: Record<
   [Pkm.LUCARIO]: Lucario,
   [Pkm.MAGIKARP]: Magikarp,
   [Pkm.RATTATA]: Rattata,
+  [Pkm.ALOLAN_RATTATA]: AlolanRattata,
   [Pkm.RATICATE]: Raticate,
+  [Pkm.ALOLAN_RATICATE]: AlolanRaticate,
   [Pkm.SPEAROW]: Spearow,
   [Pkm.FEAROW]: Fearow,
   [Pkm.GYARADOS]: Gyarados,
@@ -13343,7 +13409,9 @@ export const PokemonClasses: Record<
   [Pkm.TAPU_FINI]: TapuFini,
   [Pkm.TAPU_BULU]: TapuBulu,
   [Pkm.DIGLETT]: Diglett,
+  [Pkm.ALOLAN_DIGLETT]: AlolanDiglett,
   [Pkm.DUGTRIO]: Dugtrio,
+  [Pkm.ALOLAN_DUGTRIO]: AlolanDugtrio,
   [Pkm.ROWLET]: Rowlet,
   [Pkm.DARTIX]: Dartix,
   [Pkm.DECIDUEYE]: Decidueye,

@@ -93,9 +93,7 @@ export function WikiPokemon(props: {
 
   return (
     <Tabs
-      selectedIndex={
-        props.selected ? pokemons.indexOf(props.selected) : undefined
-      }
+      selectedIndex={props.selected ? pokemons.indexOf(props.selected) : -1}
       onSelect={(index) => props.onSelect(pokemons[index])}
     >
       <TabList>
