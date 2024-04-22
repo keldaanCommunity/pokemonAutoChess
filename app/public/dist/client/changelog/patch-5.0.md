@@ -27,7 +27,7 @@ Each player now starts on a different map. Portals now makes you travel to new l
 
 # Changes to Pokemon & Abilities
 
-- These pokemons lines have been moved to regional pool: Alolan Vulpix, Hisui Zorua, Alolan Grimer, Hisuian Qwilfish, Alolan Geodude, Doduo, Slakoth, Lotad, Bounsweet
+- These pokemons lines have been moved to regional pool: Alolan Vulpix, Hisui Zorua, Alolan Grimer, Hisuian Qwilfish, Alolan Geodude, Impidimp, Doduo, Slakoth, Lotad, Bounsweet
 - Alolan Raichu: remove item based evolution, replace Raichu evolution in regions with Psychic synergy
 - Alolan Marowak: remove item based evolution, replace Marowak evolution in regions with Fire synergy
 - Alolan Exeggutor: remove item based evolution, replace Exeggutor evolution in regions with Dragon synergy
@@ -65,6 +65,15 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Nerfed Tepig line: HP 80/140/220→70/140/210, Attack: 8/14/24→7/12/20, Def/Spedef: 3/5/7→2/4/6
 - Changed Aron line: Attack 4/8/16 → 4/9/19, Spedef: 2/4/6→2/3/5
 - Nerf Gligar line: PP 90 → 100
+- Buff Stun Spore: ~~5/10/20~~ 10/20/40 damage
+- Buff Pineco line: Def ~~3/5~~ 5/7
+- Nerf Scizor: HP 240→190, Attack 29 → 25, SpeDef 7 → 5
+- Nerf Porygon 2: HP 200 → 185, Attack: 22 → 16, Def: 1 → 3
+- Buff Porygon Z: Def: 1 → 5
+- Changed TriAttack (Porygon line): damage ~~30/50/70~~ 25/50/100
+- Huge buffs to Sewaddle line: HP ~~130/180/250~~ 140/280/400, Attack: ~~14/24/34~~ 14/24/44, Def ~~3/4/5~~ 6/10/8, SpeDef ~~3/4/5~~ 4/6/6
+- Buffed Moongeist Beam (Lunala): Allies in the beam now gain 100 shield
+- Small buff to Psychic (Solosis line): ~~45/90/180~~ 50/100/200 damage
 - New ability for Shinx line: Thunder Fang
 - New ability for Growlithe line: Fire Fang
 - New ability for Spheal line: Ice Fang

@@ -549,8 +549,7 @@ export class PsychicStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 3 ? 180 : pokemon.stars === 2 ? 90 : 45
-
+    const damage = [50,100,200][pokemon.stars - 1] ?? 200
     const cells = board.getAdjacentCells(
       target.positionX,
       target.positionY,
@@ -1540,7 +1539,7 @@ export class TriAttackStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [30, 50, 70][pokemon.stars - 1] ?? 70
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     const effect = randomBetween(1, 3)
     switch (effect) {
@@ -3928,7 +3927,7 @@ export class StunSporeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [5, 10, 20][pokemon.stars - 1] ?? 20
+    const damage = [10, 20, 40][pokemon.stars - 1] ?? 20
     board
       .getAdjacentCells(target.positionX, target.positionY, true)
       .forEach((cell) => {
@@ -7733,6 +7732,8 @@ export class MoongeistBeamStrategy extends AbilityStrategy {
             crit
           )
           targetInLine.status.triggerParalysis(3000, targetInLine)
+        } else {
+          targetInLine.addShield(100, pokemon, true)
         }
       }
     })

@@ -500,10 +500,10 @@ export class Scizor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING, Synergy.STEEL])
   rarity = Rarity.UNIQUE
   stars = 4
-  hp = 240
-  atk = 29
+  hp = 190
+  atk = 25
   def = 7
-  speDef = 7
+  speDef = 5
   maxPP = 80
   range = 1
   skill = Ability.X_SCISSOR
@@ -1568,10 +1568,10 @@ export class Porygon2 extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.PORYGON_Z
-  hp = 200
-  atk = 22
+  hp = 185
+  atk = 16
   evolutionRule = new ItemEvolutionRule([Item.UPGRADE])
-  def = 1
+  def = 3
   speDef = 3
   maxPP = 90
   range = 2
@@ -1591,7 +1591,7 @@ export class PorygonZ extends Pokemon {
   stars = 3
   hp = 200
   atk = 33
-  def = 1
+  def = 5
   speDef = 5
   maxPP = 90
   range = 2
@@ -1605,10 +1605,10 @@ export class Sewaddle extends Pokemon {
   rarity = Rarity.ULTRA
   stars = 1
   evolution = Pkm.SWADLOON
-  hp = 130
+  hp = 140
   atk = 14
-  def = 3
-  speDef = 3
+  def = 6
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.MANTIS_BLADES
@@ -1620,10 +1620,10 @@ export class Swadloon extends Pokemon {
   rarity = Rarity.ULTRA
   stars = 2
   evolution = Pkm.LEAVANNY
-  hp = 180
+  hp = 280
   atk = 24
-  def = 4
-  speDef = 4
+  def = 10
+  speDef = 6
   maxPP = 100
   range = 1
   skill = Ability.MANTIS_BLADES
@@ -1634,10 +1634,10 @@ export class Leavanny extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG])
   rarity = Rarity.ULTRA
   stars = 3
-  hp = 250
-  atk = 34
-  def = 5
-  speDef = 5
+  hp = 400
+  atk = 44
+  def = 8
+  speDef = 6
   maxPP = 100
   range = 1
   skill = Ability.MANTIS_BLADES
@@ -9402,7 +9402,7 @@ export class Pineco extends Pokemon {
   evolution = Pkm.FORRETRESS
   hp = 75
   atk = 5
-  def = 3
+  def = 5
   speDef = 3
   maxPP = 120
   range = 1
@@ -9416,8 +9416,8 @@ export class Forretress extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 200
-  atk = 5
-  def = 5
+  atk = 8
+  def = 7
   speDef = 3
   maxPP = 120
   range = 1
@@ -12781,46 +12781,49 @@ export class Magearna extends Pokemon {
 
 export class Impidimp extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FAIRY, Synergy.HUMAN])
-  rarity = Rarity.COMMON
+  rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.MORGREM
   hp = 60
   atk = 6
   def = 1
-  speDef = 1
-  maxPP = 70
-  range = 1
-  skill = Ability.SPIRIT_BREAK
-  attackSprite = AttackSprite.DARK_MELEE
-}
-
-export class Morgrem extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FAIRY, Synergy.HUMAN])
-  rarity = Rarity.COMMON
-  stars = 2
-  evolution = Pkm.GRIMMSNARL
-  hp = 110
-  atk = 11
-  def = 2
   speDef = 2
   maxPP = 70
   range = 1
   skill = Ability.SPIRIT_BREAK
   attackSprite = AttackSprite.DARK_MELEE
+  regional = true
 }
 
-export class Grimmsnarl extends Pokemon {
+export class Morgrem extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FAIRY, Synergy.HUMAN])
-  rarity = Rarity.COMMON
-  stars = 3
-  hp = 200
-  atk = 20
-  def = 3
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.GRIMMSNARL
+  hp = 110
+  atk = 11
+  def = 2
   speDef = 3
   maxPP = 70
   range = 1
   skill = Ability.SPIRIT_BREAK
   attackSprite = AttackSprite.DARK_MELEE
+  regional = true
+}
+
+export class Grimmsnarl extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FAIRY, Synergy.HUMAN])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 3
+  speDef = 4
+  maxPP = 70
+  range = 1
+  skill = Ability.SPIRIT_BREAK
+  attackSprite = AttackSprite.DARK_MELEE
+  regional = true
 }
 
 export class Drowzee extends Pokemon {
