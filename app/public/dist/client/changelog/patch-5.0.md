@@ -25,6 +25,8 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Alolan Diglett
 - Alolan Dugtrio
 - Stantler
+- Paldean Wooper
+- Clodsire
 
 # Changes to Pokemon & Abilities
 
