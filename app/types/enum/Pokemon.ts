@@ -171,7 +171,9 @@ export enum Pkm {
   LUCARIO = "LUCARIO",
   MAGIKARP = "MAGIKARP",
   RATTATA = "RATTATA",
+  ALOLAN_RATTATA = "ALOLAN_RATTATA",
   RATICATE = "RATICATE",
+  ALOLAN_RATICATE = "ALOLAN_RATICATE",
   SPEAROW = "SPEAROW",
   FEAROW = "FEAROW",
   GYARADOS = "GYARADOS",
@@ -508,7 +510,9 @@ export enum Pkm {
   TAPU_FINI = "TAPU_FINI",
   TAPU_BULU = "TAPU_BULU",
   DIGLETT = "DIGLETT",
+  ALOLAN_DIGLETT = "ALOLAN_DIGLETT",
   DUGTRIO = "DUGTRIO",
+  ALOLAN_DUGTRIO = "ALOLAN_DUGTRIO",
   ROWLET = "ROWLET",
   DARTIX = "DARTIX",
   DECIDUEYE = "DECIDUEYE",
@@ -935,7 +939,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.LUCARIO]: "0448",
   [Pkm.MAGIKARP]: "0129",
   [Pkm.RATTATA]: "0019",
+  [Pkm.ALOLAN_RATTATA]: "0019-0001",
   [Pkm.RATICATE]: "0020",
+  [Pkm.ALOLAN_RATICATE]: "0020-0001",
   [Pkm.SPEAROW]: "0021",
   [Pkm.FEAROW]: "0022",
   [Pkm.GYARADOS]: "0130",
@@ -1267,7 +1273,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.TAPU_FINI]: "0788",
   [Pkm.TAPU_BULU]: "0787",
   [Pkm.DIGLETT]: "0050",
+  [Pkm.ALOLAN_DIGLETT]: "0050-0001",
   [Pkm.DUGTRIO]: "0051",
+  [Pkm.ALOLAN_DUGTRIO]: "0051-0001",
   [Pkm.ROWLET]: "0722",
   [Pkm.DARTIX]: "0723",
   [Pkm.DECIDUEYE]: "0724",
@@ -1779,7 +1787,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MAGIKARP]: Pkm.MAGIKARP,
   [Pkm.GYARADOS]: Pkm.MAGIKARP,
   [Pkm.RATTATA]: Pkm.RATTATA,
+  [Pkm.ALOLAN_RATTATA]: Pkm.ALOLAN_RATTATA,
   [Pkm.RATICATE]: Pkm.RATTATA,
+  [Pkm.ALOLAN_RATICATE]: Pkm.ALOLAN_RATTATA,
   [Pkm.LUGIA]: Pkm.LUGIA,
   [Pkm.CARVANHA]: Pkm.CARVANHA,
   [Pkm.SWABLU]: Pkm.SWABLU,
@@ -2026,7 +2036,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TAPU_FINI]: Pkm.TAPU_FINI,
   [Pkm.TAPU_BULU]: Pkm.TAPU_BULU,
   [Pkm.DIGLETT]: Pkm.DIGLETT,
+  [Pkm.ALOLAN_DIGLETT]: Pkm.ALOLAN_DIGLETT,
   [Pkm.DUGTRIO]: Pkm.DIGLETT,
+  [Pkm.ALOLAN_DUGTRIO]: Pkm.ALOLAN_DIGLETT,
   [Pkm.ROWLET]: Pkm.ROWLET,
   [Pkm.DARTIX]: Pkm.ROWLET,
   [Pkm.DECIDUEYE]: Pkm.ROWLET,
@@ -3254,9 +3266,19 @@ export const AnimationConfig: {
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot
   },
+  [Pkm.ALOLAN_RATTATA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.TailWhip,
+    emote: AnimationType.Shoot
+  },
   [Pkm.RATICATE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.ALOLAN_RATICATE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.TailWhip,
     emote: AnimationType.Shoot
   },
   [Pkm.SPEAROW]: {
@@ -4925,10 +4947,20 @@ export const AnimationConfig: {
     ability: AnimationType.DigIn,
     emote: AnimationType.Special0
   },
+  [Pkm.ALOLAN_DIGLETT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.DigIn,
+    emote: AnimationType.Special0
+  },
   [Pkm.DUGTRIO]: {
     attack: AnimationType.Attack,
     ability: AnimationType.DigIn,
     emote: AnimationType.Special0
+  },
+  [Pkm.ALOLAN_DUGTRIO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Walk,
+    emote: AnimationType.Hop
   },
   [Pkm.ROWLET]: {
     attack: AnimationType.Attack,
