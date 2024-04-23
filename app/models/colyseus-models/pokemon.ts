@@ -9929,7 +9929,6 @@ export class AlolanDiglett extends Pokemon {
   maxPP = 50
   range = 1
   skill = Ability.DIG
-  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
   regional = true
 }
@@ -9945,7 +9944,6 @@ export class AlolanDugtrio extends Pokemon {
   maxPP = 50
   range = 1
   skill = Ability.DIG
-  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
   regional = true
 }
@@ -13039,6 +13037,45 @@ export class Mothim extends Pokemon {
   stages = 3
 }
 
+export class PaldeaWooper extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.GROUND,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.RARE
+  evolution = Pkm.CLODSIRE
+  stars = 1
+  hp = 80
+  atk = 5
+  def = 3
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.RECOVER
+  attackSprite = AttackSprite.POISON_MELEE
+  regional = true
+}
+
+export class Clodsire extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.GROUND,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 230
+  atk = 10
+  def = 5
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.RECOVER
+  attackSprite = AttackSprite.POISON_MELEE
+  regional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (shiny: boolean, emotion: Emotion) => Pokemon
@@ -13812,5 +13849,7 @@ export const PokemonClasses: Record<
   [Pkm.WORMADAM_PLANT]: WormadamPlant,
   [Pkm.WORMADAM_SANDY]: WormadamSandy,
   [Pkm.WORMADAM_TRASH]: WormadamTrash,
-  [Pkm.MOTHIM]: Mothim
+  [Pkm.MOTHIM]: Mothim,
+  [Pkm.PALDEA_WOOPER]: PaldeaWooper,
+  [Pkm.CLODSIRE]: Clodsire
 }

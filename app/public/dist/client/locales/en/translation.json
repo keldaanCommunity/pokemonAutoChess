@@ -1108,7 +1108,9 @@
     "WORMADAM_PLANT": "Wormadam (Plant)",
     "WORMADAM_SANDY": "Wormadam (Sandy)",
     "WORMADAM_TRASH": "Wormadam (Trash)",
-    "MOTHIM": "Mothim"
+    "MOTHIM": "Mothim",
+    "PALDEA_WOOPER": "Paldean Wooper",
+    "CLODSIRE": "Clodsire"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
