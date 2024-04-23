@@ -25,6 +25,9 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Alolan Diglett
 - Alolan Dugtrio
 - Stantler
+- Burmy (Plant, Sandy and Trash forms)
+- Wormadam (Plant, Sandy and Trash forms)
+- Mothim
 
 # Changes to Pokemon & Abilities
 
