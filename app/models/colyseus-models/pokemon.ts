@@ -78,6 +78,7 @@ export class Pokemon extends Schema implements IPokemon {
   additional = false
   regional = false
   canHoldItems = true
+  stages?: number
 
   constructor(shiny: boolean, emotion: Emotion) {
     super()
@@ -12910,6 +12911,132 @@ export class Kilowattrel extends Pokemon {
   passive = Passive.WIND_POWER
 }
 
+export class BurmyPlant extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.GRASS])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.WORMADAM_PLANT
+  hp = 70
+  atk = 7
+  def = 3
+  speDef = 5
+  maxPP = 100
+  range = 2
+  skill = Ability.QUIVER_DANCE
+  attackSprite = AttackSprite.GRASS_RANGE
+  passive = Passive.ENVIRONMENTAL_ADAPTATION
+  regional = true
+  stages = 3
+}
+
+export class BurmySandy extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.GROUND])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.WORMADAM_SANDY
+  hp = 70
+  atk = 7
+  def = 3
+  speDef = 5
+  maxPP = 100
+  range = 2
+  skill = Ability.QUIVER_DANCE
+  attackSprite = AttackSprite.ROCK_RANGE
+  passive = Passive.ENVIRONMENTAL_ADAPTATION
+  regional = true
+  stages = 3
+}
+
+export class BurmyTrash extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ARTIFICIAL])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.WORMADAM_TRASH
+  hp = 70
+  atk = 7
+  def = 3
+  speDef = 5
+  maxPP = 100
+  range = 2
+  skill = Ability.QUIVER_DANCE
+  attackSprite = AttackSprite.POISON_RANGE
+  passive = Passive.ENVIRONMENTAL_ADAPTATION
+  regional = true
+  stages = 3
+}
+
+export class WormadamPlant extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.GRASS])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.MOTHIM
+  hp = 200
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 2
+  skill = Ability.QUIVER_DANCE
+  attackSprite = AttackSprite.GRASS_RANGE
+  passive = Passive.ENVIRONMENTAL_ADAPTATION
+  regional = true
+  stages = 3
+}
+
+export class WormadamSandy extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.GROUND])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.MOTHIM
+  hp = 200
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 2
+  skill = Ability.QUIVER_DANCE
+  attackSprite = AttackSprite.ROCK_RANGE
+  passive = Passive.ENVIRONMENTAL_ADAPTATION
+  regional = true
+  stages = 3
+}
+
+export class WormadamTrash extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ARTIFICIAL])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.MOTHIM
+  hp = 200
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 2
+  skill = Ability.QUIVER_DANCE
+  attackSprite = AttackSprite.POISON_RANGE
+  passive = Passive.ENVIRONMENTAL_ADAPTATION
+  regional = true
+  stages = 3
+}
+
+export class Mothim extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING])
+  rarity = Rarity.RARE
+  stars = 3
+  evolution = Pkm.MOTHIM
+  hp = 200
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 60
+  range = 2
+  skill = Ability.QUIVER_DANCE
+  attackSprite = AttackSprite.POISON_RANGE
+  passive = Passive.MOTHIM
+  regional = true
+  stages = 3
+}
+
 export class PaldeaWooper extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.POISON,
@@ -13716,6 +13843,13 @@ export const PokemonClasses: Record<
   [Pkm.WATTREL]: Wattrel,
   [Pkm.KILOWATTREL]: Kilowattrel,
   [Pkm.STANTLER]: Stantler,
+  [Pkm.BURMY_PLANT]: BurmyPlant,
+  [Pkm.BURMY_SANDY]: BurmySandy,
+  [Pkm.BURMY_TRASH]: BurmyTrash,
+  [Pkm.WORMADAM_PLANT]: WormadamPlant,
+  [Pkm.WORMADAM_SANDY]: WormadamSandy,
+  [Pkm.WORMADAM_TRASH]: WormadamTrash,
+  [Pkm.MOTHIM]: Mothim,
   [Pkm.PALDEA_WOOPER]: PaldeaWooper,
   [Pkm.CLODSIRE]: Clodsire
 }

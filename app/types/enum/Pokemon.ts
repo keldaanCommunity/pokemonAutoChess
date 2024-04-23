@@ -764,6 +764,13 @@ export enum Pkm {
   WATTREL = "WATTREL",
   KILOWATTREL = "KILOWATTREL",
   STANTLER = "STANTLER",
+  BURMY_PLANT = "BURMY_PLANT",
+  BURMY_SANDY = "BURMY_SANDY",
+  BURMY_TRASH = "BURMY_TRASH",
+  WORMADAM_PLANT = "WORMADAM_PLANT",
+  WORMADAM_SANDY = "WORMADAM_SANDY",
+  WORMADAM_TRASH = "WORMADAM_TRASH",
+  MOTHIM = "MOTHIM",
   PALDEA_WOOPER = "PALDEA_WOOPER",
   CLODSIRE = "CLODSIRE"
 }
@@ -1532,6 +1539,13 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.WATTREL]: "0940",
   [Pkm.KILOWATTREL]: "0941",
   [Pkm.STANTLER]: "0234",
+  [Pkm.BURMY_PLANT]: "0412",
+  [Pkm.BURMY_SANDY]: "0412-0001",
+  [Pkm.BURMY_TRASH]: "0412-0002",
+  [Pkm.WORMADAM_PLANT]: "0413",
+  [Pkm.WORMADAM_SANDY]: "0413-0001",
+  [Pkm.WORMADAM_TRASH]: "0413-0002",
+  [Pkm.MOTHIM]: "0414",
   [Pkm.PALDEA_WOOPER]: "0194-0002",
   [Pkm.CLODSIRE]: "0980"
 }
@@ -2300,6 +2314,13 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.WATTREL]: Pkm.WATTREL,
   [Pkm.KILOWATTREL]: Pkm.WATTREL,
   [Pkm.STANTLER]: Pkm.STANTLER,
+  [Pkm.BURMY_PLANT]: Pkm.BURMY_PLANT,
+  [Pkm.BURMY_SANDY]: Pkm.BURMY_SANDY,
+  [Pkm.BURMY_TRASH]: Pkm.BURMY_TRASH,
+  [Pkm.WORMADAM_PLANT]: Pkm.BURMY_PLANT,
+  [Pkm.WORMADAM_SANDY]: Pkm.BURMY_SANDY,
+  [Pkm.WORMADAM_TRASH]: Pkm.BURMY_TRASH,
+  [Pkm.MOTHIM]: Pkm.BURMY_PLANT, // NOTE: converging evolution
   [Pkm.PALDEA_WOOPER]: Pkm.PALDEA_WOOPER,
   [Pkm.CLODSIRE]: Pkm.PALDEA_WOOPER
 }
@@ -6261,6 +6282,41 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
+  },
+  [Pkm.BURMY_PLANT]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Attack
+  },
+  [Pkm.BURMY_SANDY]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Attack
+  },
+  [Pkm.BURMY_TRASH]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Attack
+  },
+  [Pkm.WORMADAM_PLANT]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shake
+  },
+  [Pkm.WORMADAM_SANDY]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shake
+  },
+  [Pkm.WORMADAM_TRASH]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shake
+  },
+  [Pkm.MOTHIM]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Hover
   },
   [Pkm.PALDEA_WOOPER]: {
     attack: AnimationType.Attack,
