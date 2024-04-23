@@ -763,7 +763,9 @@ export enum Pkm {
   HYPNO = "HYPNO",
   WATTREL = "WATTREL",
   KILOWATTREL = "KILOWATTREL",
-  STANTLER = "STANTLER"
+  STANTLER = "STANTLER",
+  PALDEA_WOOPER = "PALDEA_WOOPER",
+  CLODSIRE = "CLODSIRE"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1529,7 +1531,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.HYPNO]: "0097",
   [Pkm.WATTREL]: "0940",
   [Pkm.KILOWATTREL]: "0941",
-  [Pkm.STANTLER]: "0234"
+  [Pkm.STANTLER]: "0234",
+  [Pkm.PALDEA_WOOPER]: "0194-0002",
+  [Pkm.CLODSIRE]: "0980"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2295,7 +2299,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.HYPNO]: Pkm.DROWZEE,
   [Pkm.WATTREL]: Pkm.WATTREL,
   [Pkm.KILOWATTREL]: Pkm.WATTREL,
-  [Pkm.STANTLER]: Pkm.STANTLER
+  [Pkm.STANTLER]: Pkm.STANTLER,
+  [Pkm.PALDEA_WOOPER]: Pkm.PALDEA_WOOPER,
+  [Pkm.CLODSIRE]: Pkm.PALDEA_WOOPER
 }
 
 export enum PkmDuo {
@@ -6255,5 +6261,15 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
+  },
+  [Pkm.PALDEA_WOOPER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Pose
+  },
+  [Pkm.CLODSIRE]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   }
 }
