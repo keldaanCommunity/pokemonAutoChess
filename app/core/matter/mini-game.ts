@@ -61,6 +61,7 @@ export class MiniGame {
   items: MapSchema<FloatingItem> | undefined
   portals: MapSchema<Portal> | undefined
   symbols: MapSchema<SynergySymbol> | undefined
+  symbolsByPortal: Map<string, SynergySymbol[]> = new Map()
   bodies: Map<string, Body>
   alivePlayers: Player[]
   engine: Engine
@@ -308,28 +309,6 @@ export class MiniGame {
     }
 
     this.pickRandomSynergySymbols()
-
-    // assign a map to each portal
-    const maps = new Set(Object.values(DungeonPMDO))
-    this.portals?.forEach((portal) => {
-      const symbols = this.getSymbolsByPortalId(portal.id)
-      const portalSynergies = symbols.map((s) => s.synergy)
-      let nbMaxInCommon = 0,
-        candidateMaps: DungeonPMDO[] = []
-      maps.forEach((map) => {
-        const synergies = DungeonDetails[map].synergies
-        const inCommon = synergies.filter((s) => portalSynergies.includes(s))
-        if (inCommon.length > nbMaxInCommon) {
-          nbMaxInCommon = inCommon.length
-          candidateMaps = [map]
-        } else if (inCommon.length === nbMaxInCommon) {
-          candidateMaps.push(map)
-        }
-      })
-
-      portal.map = pickRandomIn(candidateMaps)
-      maps.delete(portal.map) // a map can't be taken twice
-    })
   }
 
   update(dt: number) {
@@ -354,7 +333,7 @@ export class MiniGame {
         portal.x = body.position.x
         portal.y = body.position.y
         const t = this.engine.timing.timestamp * SYMBOL_ROTATION_SPEED
-        const symbols = this.getSymbolsByPortalId(portal.id)
+        const symbols = this.symbolsByPortal.get(portal.id) ?? []
         symbols.forEach((symbol) => {
           symbol.x =
             portal.x +
@@ -467,18 +446,41 @@ export class MiniGame {
     // randomly distribute symbols accross portals
     const portalIds = shuffleArray(keys(this.portals!))
     const symbols = shuffleArray(values(this.symbols!))
+    this.symbolsByPortal = new Map()
+
     symbols.forEach((symbol, i) => {
+      const portalId = portalIds[i % portalIds.length]
+      this.symbolsByPortal.set(portalId, [
+        ...(this.symbolsByPortal.get(portalId) ?? []),
+        symbol
+      ])
       setTimeout(() => {
         symbol.index = Math.floor(i / portalIds.length)
-        symbol.portalId = portalIds[i % portalIds.length]
+        symbol.portalId = portalId
       }, 1500 + 1500 * (i / symbols.length))
     })
-  }
 
-  getSymbolsByPortalId(portalId: string): SynergySymbol[] {
-    return [...(this.symbols?.values() ?? [])].filter(
-      (symbol) => symbol.portalId === portalId
-    )
+    // assign a map to each portal
+    const maps = new Set(Object.values(DungeonPMDO))
+    this.portals?.forEach((portal) => {
+      const symbols = this.symbolsByPortal.get(portal.id)
+      const portalSynergies = (symbols ?? []).map((s) => s.synergy)
+      let nbMaxInCommon = 0,
+        candidateMaps: DungeonPMDO[] = []
+      maps.forEach((map) => {
+        const synergies = DungeonDetails[map].synergies
+        const inCommon = synergies.filter((s) => portalSynergies.includes(s))
+        if (inCommon.length > nbMaxInCommon) {
+          nbMaxInCommon = inCommon.length
+          candidateMaps = [map]
+        } else if (inCommon.length === nbMaxInCommon) {
+          candidateMaps.push(map)
+        }
+      })
+
+      portal.map = pickRandomIn(candidateMaps)
+      maps.delete(portal.map) // a map can't be taken twice
+    })
   }
 
   applyVector(id: string, x: number, y: number) {
@@ -584,7 +586,7 @@ export class MiniGame {
             .filter((p, index, array) => array.indexOf(PkmFamily[p]) === index) // dedup same family
         )
 
-        const symbols = this.getSymbolsByPortalId(avatar.portalId)
+        const symbols = this.symbolsByPortal.get(avatar.portalId) ?? []
         const portalSynergies = symbols.map((s) => s.synergy)
         const propositions =
           state.stageLevel === PortalCarouselStages[0]
