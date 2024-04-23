@@ -213,5 +213,10 @@ export function isInRegion(pkm: Pkm, regionSynergies: Synergy[]) {
     return regionSynergies.includes(Synergy.DRAGON)
   if (pkm === Pkm.HISUIAN_TYPHLOSION)
     return regionSynergies.includes(Synergy.GHOST)
+  if (pkm === Pkm.BURMY_PLANT) return regionSynergies.includes(Synergy.GRASS)
+  if (pkm === Pkm.BURMY_SANDY) return regionSynergies.includes(Synergy.GROUND)
+  if (pkm === Pkm.BURMY_TRASH)
+    return regionSynergies.includes(Synergy.ARTIFICIAL)
+
   return regionSynergies.some((s) => getPokemonData(pkm).types.includes(s))
 }

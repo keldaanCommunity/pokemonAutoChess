@@ -47,7 +47,6 @@ import {
   PRECOMPUTED_REGIONAL_MONS
 } from "../../models/precomputed"
 import { isInRegion } from "../../models/pokemon-factory"
-import { deduplicateArray } from "../../utils/array"
 import { PkmFamily } from "../../types/enum/Pokemon"
 
 const PLAYER_VELOCITY = 2

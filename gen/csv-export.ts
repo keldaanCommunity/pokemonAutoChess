@@ -89,7 +89,7 @@ Object.values(Pkm)
         name: pkm,
         category: pokemon.rarity,
         tier: pokemon.stars,
-        stages: Math.max(...family.map((p) => getPokemonData(p as Pkm).stars)),
+        stages: pokemon.stages ?? Math.max(...family.map((p) => getPokemonData(p as Pkm).stars)),
         additional: pokemonData.additional,
         regional: pokemonData.regional,
         duo: Object.values(PkmDuos).some((duo) => duo.includes(pkm)),

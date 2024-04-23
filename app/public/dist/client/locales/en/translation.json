@@ -334,7 +334,8 @@
     "ICE_FANG": "Ice Fang",
     "THUNDER_FANG": "Thunder Fang",
     "TAIL_WHIP": "Tail Whip",
-    "PSYSHIELD_BASH": "Psyshield Bash"
+    "PSYSHIELD_BASH": "Psyshield Bash",
+    "QUIVER_DANCE": "Quiver Dance"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1100,7 +1101,14 @@
     "HYPNO": "Hypno",
     "WATTREL": "Wattrel",
     "KILOWATTREL": "Kilowattrel",
-    "STANTLER": "Stantler"
+    "STANTLER": "Stantler",
+    "BURMY_PLANT": "Burmy (Plant)",
+    "BURMY_SANDY": "Burmy (Sandy)",
+    "BURMY_TRASH": "Burmy (Trash)",
+    "WORMADAM_PLANT": "Wormadam (Plant)",
+    "WORMADAM_SANDY": "Wormadam (Sandy)",
+    "WORMADAM_TRASH": "Wormadam (Trash)",
+    "MOTHIM": "Mothim"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1415,7 +1423,8 @@
     "ICE_FANG": "Deal [30,60,120,SP] SPECIAL and inflicts FREEZE for 1 second",
     "THUNDER_FANG": "Deal [30,60,120,SP] SPECIAL and inflicts PARALYSIS for 3 seconds",
     "TAIL_WHIP": "Reduce target's DEF by [30,SP] %",
-    "PSYSHIELD_BASH": "Dash into the ennemy backlane, dealing [60,SP] special damage and PROTECT the caster for 1s"
+    "PSYSHIELD_BASH": "Dash into the ennemy backlane, dealing [60,SP] special damage and PROTECT the caster for 1s",
+    "QUIVER_DANCE": "Gain [5,SP] ATK, [5,SP] SPE_DEF, [20,SP]% ATK_SPEED and 20% AP"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1929,7 +1938,9 @@
     "BERRY_EATER": "When the Pokémon attacks a target, he steals all its berries and eats them",
     "TOXIC_BOOST": "The pokémon gains 10 ATK as long as it is POISONNED",
     "SHUCKLE": "Turn consummed berries into BERRY_JUICE",
-    "GUZZLORD": "Guzzlord is too heavy and can't jump"
+    "GUZZLORD": "Guzzlord is too heavy and can't jump",
+    "ENVIRONMENTAL_ADAPTATION": "This pokemon adapted its synergies to its region",
+    "MOTHIM": "Mothim gets the synergies of all your regional Burmy forms"
   },
   "stat": {
     "ATK": "Attack",

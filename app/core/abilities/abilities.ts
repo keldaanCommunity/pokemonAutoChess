@@ -6298,6 +6298,22 @@ export class StruggleBugStrategy extends AbilityStrategy {
   }
 }
 
+export class QuiverDanceStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    pokemon.addAttack(5, true)
+    pokemon.addSpecialDefense(5, true)
+    pokemon.addAttackSpeed(20, true)
+    pokemon.addAbilityPower(20)
+  }
+}
+
 export class TailGlowStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -8687,5 +8703,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ICE_FANG]: new IceFangStrategy(),
   [Ability.THUNDER_FANG]: new ThunderFangStrategy(),
   [Ability.TAIL_WHIP]: new TailWhipStrategy(),
-  [Ability.PSYSHIELD_BASH]: new PsyshieldBashStrategy()
+  [Ability.PSYSHIELD_BASH]: new PsyshieldBashStrategy(),
+  [Ability.QUIVER_DANCE]: new QuiverDanceStrategy()
 }

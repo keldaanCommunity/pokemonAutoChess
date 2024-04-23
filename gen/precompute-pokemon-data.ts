@@ -22,7 +22,7 @@ precomputedPokemons.forEach((pokemon) => {
     range: pokemon.range,
     types: values(pokemon.types) as Synergy[],
     evolution: pokemon.evolution === Pkm.DEFAULT ? null : pokemon.evolution,
-    stages: Math.max(
+    stages: pokemon.stages ?? Math.max(
       ...precomputedPokemons
         .filter((p) => PkmFamily[p.name] === PkmFamily[pokemon.name])
         .map((p) => p.stars)
