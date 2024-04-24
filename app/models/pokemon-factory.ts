@@ -1,6 +1,7 @@
 import { MapSchema } from "@colyseus/schema"
 import { Emotion, IPlayer } from "../types"
 import { RarityCost } from "../types/Config"
+import { DungeonDetails, DungeonPMDO } from "../types/enum/Dungeon"
 import { PokemonActionState, Rarity } from "../types/enum/Game"
 import {
   Pkm,
@@ -205,7 +206,8 @@ export function isAdditionalPick(pkm: Pkm): boolean {
   return getPokemonData(pkm).additional
 }
 
-export function isInRegion(pkm: Pkm, regionSynergies: Synergy[]) {
+export function isInRegion(pkm: Pkm, map: DungeonPMDO) {
+  const regionSynergies = DungeonDetails[map]?.synergies
   if (pkm === Pkm.ALOLAN_MAROWAK) return regionSynergies.includes(Synergy.FIRE)
   if (pkm === Pkm.ALOLAN_RAICHU)
     return regionSynergies.includes(Synergy.PSYCHIC)
@@ -217,6 +219,11 @@ export function isInRegion(pkm: Pkm, regionSynergies: Synergy[]) {
   if (pkm === Pkm.BURMY_SANDY) return regionSynergies.includes(Synergy.GROUND)
   if (pkm === Pkm.BURMY_TRASH)
     return regionSynergies.includes(Synergy.ARTIFICIAL)
+
+  /* Nidoran male and female are split in different regions */
+  const index = Object.values(DungeonPMDO).indexOf(map)
+  if(pkm === Pkm.NIDORANM) return index % 2 === 0
+  if(pkm === Pkm.NIDORANF) return index % 2 === 1
 
   return regionSynergies.some((s) => getPokemonData(pkm).types.includes(s))
 }

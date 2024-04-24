@@ -568,10 +568,8 @@ export class MiniGame {
         const portal = this.portals.get(avatar.portalId)!
 
         player.map = portal.map
-        const mapSynergies = DungeonDetails[portal.map]?.synergies
-        //logger.debug("Adding to regional pool synergies ", mapSynergies)
         const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
-          isInRegion(p, mapSynergies)
+          isInRegion(p, portal.map)
         )
         newRegionalPokemons.forEach((p) => {
           if (getPokemonData(p).stars === 1) {

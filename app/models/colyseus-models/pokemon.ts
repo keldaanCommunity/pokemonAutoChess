@@ -3237,6 +3237,7 @@ export class NidoranF extends Pokemon {
   range = 1
   skill = Ability.VENOSHOCK
   attackSprite = AttackSprite.POISON_MELEE
+  regional = true
 }
 
 export class Nidorina extends Pokemon {
@@ -3256,6 +3257,7 @@ export class Nidorina extends Pokemon {
   range = 1
   skill = Ability.VENOSHOCK
   attackSprite = AttackSprite.POISON_MELEE
+  regional = true
 }
 
 export class Nidoqueen extends Pokemon {
@@ -3274,6 +3276,7 @@ export class Nidoqueen extends Pokemon {
   range = 1
   skill = Ability.VENOSHOCK
   attackSprite = AttackSprite.POISON_MELEE
+  regional = true
 }
 
 export class NidoranM extends Pokemon {
@@ -3293,6 +3296,7 @@ export class NidoranM extends Pokemon {
   range = 1
   skill = Ability.POISON
   attackSprite = AttackSprite.POISON_MELEE
+  regional = true
 }
 
 export class Nidorino extends Pokemon {
@@ -3312,6 +3316,7 @@ export class Nidorino extends Pokemon {
   range = 1
   skill = Ability.POISON
   attackSprite = AttackSprite.POISON_MELEE
+  regional = true
 }
 
 export class Nidoking extends Pokemon {
@@ -3330,6 +3335,7 @@ export class Nidoking extends Pokemon {
   range = 1
   skill = Ability.POISON
   attackSprite = AttackSprite.POISON_MELEE
+  regional = true
 }
 
 export class Machop extends Pokemon {
