@@ -538,7 +538,6 @@ export class Bounsweet extends Pokemon {
   range = 1
   skill = Ability.HIGH_JUMP_KICK
   attackSprite = AttackSprite.FIGHTING_MELEE
-  regional = true
 }
 
 export class Steenee extends Pokemon {
@@ -554,7 +553,6 @@ export class Steenee extends Pokemon {
   range = 1
   skill = Ability.HIGH_JUMP_KICK
   attackSprite = AttackSprite.FIGHTING_MELEE
-  regional = true
 }
 
 export class Tsareena extends Pokemon {
@@ -569,7 +567,6 @@ export class Tsareena extends Pokemon {
   range = 1
   skill = Ability.HIGH_JUMP_KICK
   attackSprite = AttackSprite.FIGHTING_MELEE
-  regional = true
 }
 
 export class Buneary extends Pokemon {
@@ -1356,6 +1353,7 @@ export class JangmoO extends Pokemon {
   range = 1
   skill = Ability.CLANGOROUS_SOUL
   attackSprite = AttackSprite.DRAGON_MELEE
+  regional = true
 }
 
 export class HakamoO extends Pokemon {
@@ -1375,6 +1373,7 @@ export class HakamoO extends Pokemon {
   range = 1
   skill = Ability.CLANGOROUS_SOUL
   attackSprite = AttackSprite.DRAGON_MELEE
+  regional = true
 }
 
 export class KommoO extends Pokemon {
@@ -1393,6 +1392,7 @@ export class KommoO extends Pokemon {
   range = 1
   skill = Ability.CLANGOROUS_SOUL
   attackSprite = AttackSprite.DRAGON_MELEE
+  regional = true
 }
 
 export class Gastly extends Pokemon {
@@ -11348,7 +11348,7 @@ export class Cherrubi extends Pokemon {
   maxPP = 65
   range = 3
   skill = Ability.NATURAL_GIFT
-  additional = true
+  regional = true
   attackSprite = AttackSprite.GRASS_RANGE
 }
 
@@ -11364,7 +11364,7 @@ export class Cherrim extends Pokemon {
   range = 3
   skill = Ability.NATURAL_GIFT
   passive = Passive.BLOSSOM
-  additional = true
+  regional = true
   attackSprite = AttackSprite.GRASS_RANGE
   onChangePosition(x: number, y: number, player: Player) {
     const hasLight =
@@ -11388,7 +11388,7 @@ export class CherrimSunlight extends Pokemon {
   range = 3
   skill = Ability.NATURAL_GIFT
   passive = Passive.BLOSSOM
-  additional = true
+  regional = true
   attackSprite = AttackSprite.GRASS_RANGE
   onChangePosition(x: number, y: number, player: Player) {
     const hasLight =
