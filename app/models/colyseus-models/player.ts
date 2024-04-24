@@ -4,25 +4,30 @@ import GameState from "../../rooms/states/game-state"
 import { IPlayer, Role, Title } from "../../types"
 import { SynergyTriggers, UniqueShop } from "../../types/Config"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
-import { BattleResult } from "../../types/enum/Game"
+import { BattleResult, Rarity } from "../../types/enum/Game"
 import {
   ArtificialItems,
   Berries,
   Item,
   SynergyGivenByItem
 } from "../../types/enum/Item"
-import { Pkm, PkmDuos, PkmProposition } from "../../types/enum/Pokemon"
+import {
+  Pkm,
+  PkmDuos,
+  PkmFamily,
+  PkmProposition
+} from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { removeInArray } from "../../utils/array"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { pickNRandomIn, pickRandomIn } from "../../utils/random"
-import { values } from "../../utils/schemas"
+import { resetArraySchema, values } from "../../utils/schemas"
 import { Effects } from "../effects"
 import { IPokemonConfig } from "../mongo-models/user-metadata"
-import PokemonFactory from "../pokemon-factory"
-import { getPokemonData } from "../precomputed"
+import PokemonFactory, { isInRegion } from "../pokemon-factory"
+import { getPokemonData, PRECOMPUTED_REGIONAL_MONS } from "../precomputed"
 import ExperienceManager from "./experience-manager"
 import HistoryItem from "./history-item"
 import { Pokemon, isOnBench } from "./pokemon"
@@ -106,6 +111,22 @@ export default class Player extends Schema implements IPlayer {
     this.lightX = state.lightX
     this.lightY = state.lightY
     this.map = pickRandomIn(DungeonPMDO)
+    const initialRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter(
+      (p) =>
+        isInRegion(p, this.map) && getPokemonData(p).rarity === Rarity.UNCOMMON
+    )
+    resetArraySchema(
+      this.regionalPokemons,
+      initialRegionalPokemons.filter(
+        (p, index, array) => array.indexOf(PkmFamily[p]) === index // dedup same family
+      )
+    )
+    initialRegionalPokemons.forEach((p) => {
+      if (getPokemonData(p).stars === 1) {
+        state.shop.addRegionalPokemon(p, this)
+      }
+    })
+
     if (isBot) {
       this.loadingProgress = 100
       this.lightX = 3

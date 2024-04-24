@@ -13,7 +13,7 @@ import {
 } from "matter-js"
 import Player from "../../models/colyseus-models/player"
 import { getOrientation } from "../../public/src/pages/utils/utils"
-import { PokemonActionState } from "../../types/enum/Game"
+import { PokemonActionState, Rarity } from "../../types/enum/Game"
 import {
   BasicItems,
   CraftableItems,
@@ -568,10 +568,8 @@ export class MiniGame {
         const portal = this.portals.get(avatar.portalId)!
 
         player.map = portal.map
-        const mapSynergies = DungeonDetails[portal.map]?.synergies
-        //logger.debug("Adding to regional pool synergies ", mapSynergies)
         const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
-          isInRegion(p, mapSynergies)
+          isInRegion(p, portal.map) && getPokemonData(p).rarity === (state.stageLevel === PortalCarouselStages[0] ? Rarity.RARE : Rarity.EPIC)
         )
         newRegionalPokemons.forEach((p) => {
           if (getPokemonData(p).stars === 1) {

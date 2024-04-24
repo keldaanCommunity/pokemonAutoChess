@@ -13,6 +13,6 @@
   color: #d0d0d0;
 }
 
-.react-tooltip p:last-of-type {
+.react-tooltip p:last-child {
   margin-bottom: 0;
 }
