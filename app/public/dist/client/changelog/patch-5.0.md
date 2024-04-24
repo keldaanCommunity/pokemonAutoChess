@@ -86,6 +86,7 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - New ability for Shinx line: Thunder Fang
 - New ability for Growlithe line: Fire Fang
 - New ability for Spheal line: Ice Fang
+- Carvanha: moves to Rare, new ability: Bite
 
 # Changes to Synergies
 
