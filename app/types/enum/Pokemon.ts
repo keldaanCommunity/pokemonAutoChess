@@ -3267,8 +3267,9 @@ export const AnimationConfig: {
   },
   [Pkm.MEGA_STEELIX]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.SCYTHER]: {
     attack: AnimationType.Attack,
