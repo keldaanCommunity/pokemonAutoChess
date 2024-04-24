@@ -56,6 +56,7 @@ export function GameAdditionalPokemons() {
     return (
       <div className="game-additional-pokemons">
         <h2>{t("additional_picks")}</h2>
+        <p className="help">{t("additional_pokemon_hint")}</p>
         <div className="grid">
           {additionalPokemons.map((p, index) => {
             const pokemon = getPokemonData(p)

@@ -13,7 +13,7 @@ import {
 } from "matter-js"
 import Player from "../../models/colyseus-models/player"
 import { getOrientation } from "../../public/src/pages/utils/utils"
-import { PokemonActionState } from "../../types/enum/Game"
+import { PokemonActionState, Rarity } from "../../types/enum/Game"
 import {
   BasicItems,
   CraftableItems,
@@ -569,7 +569,7 @@ export class MiniGame {
 
         player.map = portal.map
         const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
-          isInRegion(p, portal.map)
+          isInRegion(p, portal.map) && getPokemonData(p).rarity === (state.stageLevel === PortalCarouselStages[0] ? Rarity.RARE : Rarity.EPIC)
         )
         newRegionalPokemons.forEach((p) => {
           if (getPokemonData(p).stars === 1) {

@@ -58,6 +58,7 @@ export function GameRegionalPokemons() {
     return (
       <div className="game-regional-pokemons">
         <h2>{t("regional_pokemons")}</h2>
+        <p className="help">{t("regional_pokemon_hint")}</p>
         <div className="grid">
           {regionalPokemons.map((p, index) => {
             const pokemon = getPokemonData(p)
