@@ -1089,6 +1089,50 @@ export class Gardevoir extends Pokemon {
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
+export class Fuecoco extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.SOUND, Synergy.GHOST])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.CROCALOR
+  hp = 110
+  atk = 5
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 2
+  skill = Ability.TORCH_SONG
+  attackSprite = AttackSprite.FIRE_RANGE
+}
+
+export class Crocalor extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.SOUND, Synergy.GHOST])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.SKELEDIRGE
+  hp = 170
+  atk = 13
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 2
+  skill = Ability.TORCH_SONG
+  attackSprite = AttackSprite.FIRE_RANGE
+}
+
+export class Skeledirge extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.SOUND, Synergy.GHOST])
+  rarity = Rarity.EPIC
+  stars = 3
+  hp = 350
+  atk = 24
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 2
+  skill = Ability.TORCH_SONG
+  attackSprite = AttackSprite.FIRE_RANGE
+}
+
 export class Budew extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.BABY])
   rarity = Rarity.EPIC
@@ -13857,5 +13901,8 @@ export const PokemonClasses: Record<
   [Pkm.WORMADAM_TRASH]: WormadamTrash,
   [Pkm.MOTHIM]: Mothim,
   [Pkm.PALDEA_WOOPER]: PaldeaWooper,
-  [Pkm.CLODSIRE]: Clodsire
+  [Pkm.CLODSIRE]: Clodsire,
+  [Pkm.FUECOCO]: Fuecoco,
+  [Pkm.CROCALOR]: Crocalor,
+  [Pkm.SKELEDIRGE]: Skeledirge
 }

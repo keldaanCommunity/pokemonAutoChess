@@ -335,7 +335,8 @@
     "THUNDER_FANG": "Thunder Fang",
     "TAIL_WHIP": "Tail Whip",
     "PSYSHIELD_BASH": "Psyshield Bash",
-    "QUIVER_DANCE": "Quiver Dance"
+    "QUIVER_DANCE": "Quiver Dance",
+    "TORCH_SONG": "Torch Song"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1110,7 +1111,10 @@
     "WORMADAM_TRASH": "Wormadam (Trash)",
     "MOTHIM": "Mothim",
     "PALDEA_WOOPER": "Paldean Wooper",
-    "CLODSIRE": "Clodsire"
+    "CLODSIRE": "Clodsire",
+    "FUECOCO": "Fuecoco",
+    "CROCALOR": "Crocalor",
+    "SKELEDIRGE": "Skeledirge"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1426,7 +1430,8 @@
     "THUNDER_FANG": "Deal [30,60,120,SP] SPECIAL and inflicts PARALYSIS for 3 seconds",
     "TAIL_WHIP": "Reduce target's DEF by [30,SP] %",
     "PSYSHIELD_BASH": "Dash into the ennemy backlane, dealing [60,SP] special damage and PROTECT the caster for 1s",
-    "QUIVER_DANCE": "Gain [5,SP] ATK, [5,SP] SPE_DEF, [20,SP]% ATK_SPEED and 20% AP"
+    "QUIVER_DANCE": "Gain [5,SP] ATK, [5,SP] SPE_DEF, [20,SP]% ATK_SPEED and 20% AP",
+    "TORCH_SONG": "The caster blows out [1,2,3] raging flames to the [1,2,3] strongest opponents. Each flame scorchs the target and adjacent units for [10,20,30,SP] SPECIAL . Gains 10 AP for each unit BURN, CURSE or SILENCE"
   },
   "effect": {
     "INGRAIN": "Ingrain",

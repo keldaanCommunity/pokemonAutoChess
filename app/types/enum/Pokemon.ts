@@ -772,7 +772,10 @@ export enum Pkm {
   WORMADAM_TRASH = "WORMADAM_TRASH",
   MOTHIM = "MOTHIM",
   PALDEA_WOOPER = "PALDEA_WOOPER",
-  CLODSIRE = "CLODSIRE"
+  CLODSIRE = "CLODSIRE",
+  FUECOCO = "FUECOCO",
+  CROCALOR = "CROCALOR",
+  SKELEDIRGE = "SKELEDIRGE"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1547,7 +1550,10 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.WORMADAM_TRASH]: "0413-0002",
   [Pkm.MOTHIM]: "0414",
   [Pkm.PALDEA_WOOPER]: "0194-0002",
-  [Pkm.CLODSIRE]: "0980"
+  [Pkm.CLODSIRE]: "0980",
+  [Pkm.FUECOCO]: "0909",
+  [Pkm.CROCALOR]: "0910",
+  [Pkm.SKELEDIRGE]: "0911"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2322,7 +2328,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.WORMADAM_TRASH]: Pkm.BURMY_TRASH,
   [Pkm.MOTHIM]: Pkm.BURMY_PLANT, // NOTE: converging evolution
   [Pkm.PALDEA_WOOPER]: Pkm.PALDEA_WOOPER,
-  [Pkm.CLODSIRE]: Pkm.PALDEA_WOOPER
+  [Pkm.CLODSIRE]: Pkm.PALDEA_WOOPER,
+  [Pkm.FUECOCO]: Pkm.FUECOCO,
+  [Pkm.CROCALOR]: Pkm.FUECOCO,
+  [Pkm.SKELEDIRGE]: Pkm.FUECOCO
 }
 
 export enum PkmDuo {
@@ -6327,5 +6336,22 @@ export const AnimationConfig: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot
+  },
+  [Pkm.FUECOCO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp
+  },
+  [Pkm.CROCALOR]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp,
+    shinyUnavailable: true
+  },
+  [Pkm.SKELEDIRGE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp,
+    shinyUnavailable: true
   }
 }
