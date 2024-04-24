@@ -8387,6 +8387,70 @@ export class PsyshieldBashStrategy extends AbilityStrategy {
   }
 }
 
+export class TorchSongStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const damage = pokemon.stars === 3 ? 30 : pokemon.stars === 2 ? 20 : 10
+    const count = pokemon.stars
+    const apBoost = 10
+
+    const scorchedEnnemiesId = new Set<string>()
+
+    const enemies = board.cells.filter(
+      (p) => p && p.team !== pokemon.team
+    ) as PokemonEntity[]
+    const enemiesHit = enemies
+      .sort((a, b) => b.items.size - a.items.size)
+      .slice(0, count) as PokemonEntity[]
+
+    enemiesHit.forEach((enemy) => {
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: "TORCH_SONG_CAST",
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: enemy.positionX,
+        targetY: enemy.positionY
+      })
+      const cells = board
+        .getAdjacentCells(enemy.positionX, enemy.positionY, true)
+        .concat({ x: enemy.positionX, y: enemy.positionY, value: enemy })
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team !== pokemon.team) {
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: Ability.TORCH_SONG,
+            positionX: cell.value.positionX,
+            positionY: cell.value.positionY
+          })
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          if (
+            cell.value.status.burn ||
+            cell.value.status.curse ||
+            cell.value.status.silence
+          ) {
+            scorchedEnnemiesId.add(cell.value.id)
+          }
+        }
+      })
+    })
+
+    pokemon.addAbilityPower(scorchedEnnemiesId.size * apBoost, false)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -8704,5 +8768,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.THUNDER_FANG]: new ThunderFangStrategy(),
   [Ability.TAIL_WHIP]: new TailWhipStrategy(),
   [Ability.PSYSHIELD_BASH]: new PsyshieldBashStrategy(),
-  [Ability.QUIVER_DANCE]: new QuiverDanceStrategy()
+  [Ability.QUIVER_DANCE]: new QuiverDanceStrategy(),
+  [Ability.TORCH_SONG]: new TorchSongStrategy()
 }

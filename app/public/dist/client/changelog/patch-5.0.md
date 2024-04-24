@@ -30,6 +30,9 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Mothim
 - Paldean Wooper
 - Clodsire
+- Fuecoco
+- Crocalor
+- Skeledirge
 
 # Changes to Pokemon & Abilities
 
