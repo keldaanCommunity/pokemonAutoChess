@@ -2691,8 +2691,8 @@
   "not_whitelisted": "Cette partie est réservée à une liste blanche de joueurs",
   "ranked_match": "Match Classé",
   "kecleon_dialog": {
-    "title": "Bienvenue au magasin Kecleon !",
-    "text": "C'est 10 GOLD pièce !",
+    "welcome": "Bienvenue au magasin Kecleon !",
+    "tell_price": "C'est 10 GOLD pièce !",
     "thank_you": "MERCI !"
   },
   "scribble": {
