@@ -10,7 +10,7 @@ export function randomBetween(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-export function pickRandomIn<T>(list: T[] | Record<any, T>): T {
+export function pickRandomIn<T>(list: T[] | Record<string, T>): T {
   if (!Array.isArray(list)) return pickRandomIn(Object.values(list))
   return list[Math.floor(Math.random() * list.length)]
 }
@@ -29,7 +29,7 @@ export function pickNRandomIn<T>(array: T[], number: number): T[] {
  * Randomize array element order in-place.
  * Using Durstenfeld shuffle algorithm.
  */
-export function shuffleArray<T extends Array<any>>(array: T): T {
+export function shuffleArray<T extends Array<unknown>>(array: T): T {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
     const temp = array[i]

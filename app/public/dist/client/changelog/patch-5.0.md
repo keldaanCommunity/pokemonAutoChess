@@ -87,6 +87,8 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - New ability for Growlithe line: Fire Fang
 - New ability for Spheal line: Ice Fang
 - Carvanha: moves to Rare, new ability: Bite
+- Kecleon now has 1% chance to appear on unique propositions at stage 10
+- Arceus now has 1% chance to appear on legendary propositions at stage 20
 
 # Changes to Synergies
 
