@@ -114,7 +114,7 @@ You might want to have full access right on your local version. To do so, you ca
 
 # Extensions
 
-With VS Code, use Prettier, Eslint, Inlang.
+With VS Code, use Biome for formatting and linting and Inlang for translations management.
 
 # Development
 
