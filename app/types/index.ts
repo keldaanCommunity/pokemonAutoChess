@@ -263,7 +263,6 @@ export interface IDragDropItemMessage {
   x: number
   y: number
   id: Item
-  bypass?: boolean
 }
 
 export interface IDragDropCombineMessage {

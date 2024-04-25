@@ -379,7 +379,6 @@ export class OnDragDropItemCommand extends Command<
   }
 > {
   execute({ client, detail }) {
-    const commands = new Array<Command>()
     const playerId = client.auth.uid
     const message = {
       updateBoard: true,
@@ -391,15 +390,12 @@ export class OnDragDropItemCommand extends Command<
     message.updateBoard = false
     message.updateItems = true
 
-    const item = detail.id
+    const { x, y, id: item } = detail
 
-    if (!player.items.includes(item) && !detail.bypass) {
+    if (!player.items.includes(item)) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
     }
-
-    const x = parseInt(detail.x)
-    const y = parseInt(detail.y)
 
     const pokemon = player.getPokemonAt(x, y)
 
@@ -423,11 +419,16 @@ export class OnDragDropItemCommand extends Command<
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
     }
+
+    const isBasicItem = BasicItems.includes(item)
+    const existingBasicItemToCombine = values(pokemon.items).find((i) =>
+      BasicItems.includes(i)
+    )
+
     // check if full items and nothing to combine
     if (
       pokemon.items.size >= 3 &&
-      (BasicItems.includes(item) === false ||
-        values(pokemon.items).some((i) => BasicItems.includes(i)) === false)
+      (!isBasicItem || !existingBasicItemToCombine)
     ) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
@@ -442,70 +443,52 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
-    if (BasicItems.includes(item)) {
-      const itemToCombine = values(pokemon.items).find((i) =>
-        BasicItems.includes(i)
+    if (!isBasicItem && pokemon.items.has(item)) {
+      // prevent adding twitce the same completed item
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
+
+    if (isBasicItem && existingBasicItemToCombine) {
+      const recipe = Object.entries(ItemRecipe).find(
+        ([_result, recipe]) =>
+          (recipe[0] === existingBasicItemToCombine && recipe[1] === item) ||
+          (recipe[0] === item && recipe[1] === existingBasicItemToCombine)
       )
-      if (itemToCombine) {
-        const recipe = Object.entries(ItemRecipe).find(
-          ([result, recipe]) =>
-            (recipe[0] == itemToCombine && recipe[1] == item) ||
-            (recipe[0] == item && recipe[1] == itemToCombine)
-        )
-        if (recipe) {
-          const itemCombined = recipe[0] as Item
 
-          if (
-            itemCombined in SynergyGivenByItem &&
-            pokemon.types.has(SynergyGivenByItem[itemCombined])
-          ) {
-            // prevent combining into a synergy stone on a pokemon that already has this synergy
-            client.send(Transfer.DRAG_DROP_FAILED, message)
-            return
-          }
-
-          pokemon.items.delete(itemToCombine)
-          removeInArray(player.items, item)
-
-          if (pokemon.items.has(itemCombined)) {
-            // pokemon already has the combined item so the second one pops off and go to player inventory
-            player.items.push(itemCombined)
-          } else {
-            const detail: IDragDropItemMessage = {
-              id: itemCombined,
-              x: pokemon.positionX,
-              y: pokemon.positionY,
-              bypass: true
-            }
-            commands.push(
-              new OnDragDropItemCommand().setPayload({
-                client: client,
-                detail: detail
-              })
-            )
-          }
-        }
-      } else {
-        pokemon.items.add(item)
-        removeInArray(player.items, item)
-      }
-    } else {
-      if (pokemon.items.has(item)) {
+      if (!recipe) {
         client.send(Transfer.DRAG_DROP_FAILED, message)
         return
-      } else {
-        pokemon.items.add(item)
-        removeInArray(player.items, item)
       }
+
+      const itemCombined = recipe[0] as Item
+
+      if (
+        itemCombined in SynergyGivenByItem &&
+        pokemon.types.has(SynergyGivenByItem[itemCombined])
+      ) {
+        // prevent combining into a synergy stone on a pokemon that already has this synergy
+        client.send(Transfer.DRAG_DROP_FAILED, message)
+        return
+      }
+
+      pokemon.items.delete(existingBasicItemToCombine)
+      removeInArray(player.items, item)
+
+      if (pokemon.items.has(itemCombined)) {
+        // pokemon already has the combined item so the second one pops off and go to player inventory
+        player.items.push(itemCombined)
+      } else {
+        pokemon.items.add(itemCombined)
+      }
+    } else {
+      pokemon.items.add(item)
+      removeInArray(player.items, item)
     }
 
     this.room.checkEvolutionsAfterItemAcquired(playerId, pokemon)
 
     player.updateSynergies()
-
-    if (commands.length > 0) {
-      return commands
-    }
   }
 }
 
@@ -1050,8 +1033,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         this.state.stageLevel === AdditionalPicksStages[0]
           ? this.room.additionalUncommonPool
           : this.state.stageLevel === AdditionalPicksStages[1]
-          ? this.room.additionalRarePool
-          : this.room.additionalEpicPool
+            ? this.room.additionalRarePool
+            : this.room.additionalEpicPool
       let remainingAddPicks = 8
       this.state.players.forEach((player: Player) => {
         if (!player.isBot) {
@@ -1090,8 +1073,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         const fishingLevel = player.effects.has(Effect.PRIMORDIAL_SEA)
           ? 3
           : player.effects.has(Effect.DRIZZLE)
-          ? 2
-          : 1
+            ? 2
+            : 1
         const pkm = this.state.shop.fishPokemon(player, fishingLevel)
         const fish = PokemonFactory.createPokemonFromName(pkm, player)
         const x = getFirstAvailablePositionInBench(player.board)
@@ -1410,9 +1393,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
         const UNOWN_ENCOUNTER_CHANCE = 0.037
         if (chance(UNOWN_ENCOUNTER_CHANCE)) {
-          setTimeout(() => {
-            client.send(Transfer.UNOWN_WANDERING)
-          }, Math.round((5 + 15 * Math.random()) * 1000))
+          setTimeout(
+            () => {
+              client.send(Transfer.UNOWN_WANDERING)
+            },
+            Math.round((5 + 15 * Math.random()) * 1000)
+          )
         }
 
         if (
@@ -1421,12 +1407,15 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         ) {
           const nbPokemonsToSpawn = Math.ceil(this.state.stageLevel / 2)
           for (let i = 0; i < nbPokemonsToSpawn; i++) {
-            setTimeout(() => {
-              client.send(
-                Transfer.POKEMON_WANDERING,
-                this.state.shop.pickPokemon(player, this.state)
-              )
-            }, 4000 + i * 400)
+            setTimeout(
+              () => {
+                client.send(
+                  Transfer.POKEMON_WANDERING,
+                  this.state.shop.pickPokemon(player, this.state)
+                )
+              },
+              4000 + i * 400
+            )
           }
         }
       }

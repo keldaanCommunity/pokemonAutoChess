@@ -129,7 +129,7 @@ export default class Shop {
   }
 
   addRegionalPokemon(pkm: Pkm, player: Player) {
-    console.log("adding regional pokemon", pkm)
+    //logger.debug("adding regional pokemon", pkm)
     const { rarity, stages } = getPokemonData(pkm)
     const pool = this.getRegionalPool(rarity, player)
     const entityNumber = getPoolSize(rarity, stages)
@@ -282,14 +282,14 @@ export default class Shop {
     const wildChance = player.effects.has(Effect.QUICK_FEET)
       ? 0.05
       : player.effects.has(Effect.RUN_AWAY)
-      ? 0.1
-      : player.effects.has(Effect.HUSTLE)
-      ? 0.15
-      : player.effects.has(Effect.BERSERK)
-      ? 0.2
-      : isPVE
-      ? 0.05
-      : 0
+        ? 0.1
+        : player.effects.has(Effect.HUSTLE)
+          ? 0.15
+          : player.effects.has(Effect.BERSERK)
+            ? 0.2
+            : isPVE
+              ? 0.05
+              : 0
 
     const finals = new Set(
       values(player.board)
