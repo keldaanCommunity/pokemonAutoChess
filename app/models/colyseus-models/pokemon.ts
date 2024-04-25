@@ -10203,31 +10203,31 @@ export class Arbok extends Pokemon {
 
 export class Carvanha extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.DARK])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.SHARPEDO
-  hp = 75
-  atk = 10
+  hp = 85
+  atk = 12
   def = 1
   speDef = 2
-  maxPP = 40
+  maxPP = 100
   range = 1
-  skill = Ability.AGILITY
+  skill = Ability.BITE
   additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Sharpedo extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.DARK])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.RARE
   stars = 2
-  hp = 150
-  atk = 21
+  hp = 170
+  atk = 24
   def = 2
   speDef = 3
-  maxPP = 40
+  maxPP = 100
   range = 1
-  skill = Ability.AGILITY
+  skill = Ability.BITE
   additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
