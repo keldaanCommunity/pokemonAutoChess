@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
-import GameState from "../../rooms/states/game-state"
-import { IPlayer, Role, Title } from "../../types"
+import type GameState from "../../rooms/states/game-state"
+import type { IPlayer, Role, Title } from "../../types"
 import { SynergyTriggers, UniqueShop } from "../../types/Config"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { BattleResult, Rarity } from "../../types/enum/Game"
@@ -15,7 +14,7 @@ import {
   Pkm,
   PkmDuos,
   PkmFamily,
-  PkmProposition
+  type PkmProposition
 } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
@@ -25,7 +24,7 @@ import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { Effects } from "../effects"
-import { IPokemonConfig } from "../mongo-models/user-metadata"
+import type { IPokemonConfig } from "../mongo-models/user-metadata"
 import PokemonFactory, { isInRegion } from "../pokemon-factory"
 import { getPokemonData, PRECOMPUTED_REGIONAL_MONS } from "../precomputed"
 import ExperienceManager from "./experience-manager"

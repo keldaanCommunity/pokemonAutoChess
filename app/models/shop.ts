@@ -132,7 +132,7 @@ export default class Shop {
   }
 
   addRegionalPokemon(pkm: Pkm, player: Player) {
-    console.log("adding regional pokemon", pkm)
+    //logger.debug("adding regional pokemon", pkm)
     const { rarity, stages } = getPokemonData(pkm)
     const pool = this.getRegionalPool(rarity, player)
     const entityNumber = getPoolSize(rarity, stages)

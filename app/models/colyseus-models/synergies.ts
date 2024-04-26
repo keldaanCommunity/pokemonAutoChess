@@ -45,7 +45,6 @@ export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
         if (!dragonDoubleTypes.has(family))
           dragonDoubleTypes.set(family, new Set())
         dragonDoubleTypes.get(family)!.add(values(pkm.types)[1])
-        console.log("types", values(pkm.types))
       }
     }
   })
