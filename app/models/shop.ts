@@ -2,10 +2,13 @@ import GameState from "../rooms/states/game-state"
 import {
   DITTO_RATE,
   FishRarityProbability,
+  LegendaryShop,
   NB_UNIQUE_PROPOSITIONS,
   PoolSize,
+  PortalCarouselStages,
   RarityProbabilityPerLevel,
-  SHOP_SIZE
+  SHOP_SIZE,
+  UniqueShop
 } from "../types/Config"
 import { Ability } from "../types/enum/Ability"
 import { Effect } from "../types/enum/Effect"
@@ -144,7 +147,7 @@ export default class Shop {
     const { stars, rarity, regional } = getPokemonData(pkm)
     const family = PkmFamily[pkm]
     let entityNumber = stars >= 3 ? 9 : stars === 2 ? 3 : 1
-    const duo = Object.entries(PkmDuos).find(([key, duo]) => duo.includes(pkm))
+    const duo = Object.entries(PkmDuos).find(([_key, duo]) => duo.includes(pkm))
     if (duo) {
       // duos increase the number in pool by one if selling both
       // but it is negligible and cannot be abused
@@ -192,10 +195,13 @@ export default class Shop {
 
   assignUniquePropositions(
     player: Player,
-    list: PkmProposition[],
+    stageLevel: number,
     synergies: Synergy[]
   ) {
-    const propositions = [...list]
+    const propositions =
+      stageLevel === PortalCarouselStages[0]
+        ? [...UniqueShop]
+        : [...LegendaryShop]
 
     // ensure we have at least one synergy per proposition
     if (synergies.length > NB_UNIQUE_PROPOSITIONS) {
@@ -212,9 +218,24 @@ export default class Shop {
         const pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
         return getPokemonData(pkm).types.includes(synergy)
       })
-      const selectedProposition = pickRandomIn(
+      let selectedProposition = pickRandomIn(
         candidates.length > 0 ? candidates : propositions
       )
+      if (
+        stageLevel === PortalCarouselStages[0] &&
+        player.pokemonsProposition.includes(Pkm.KECLEON) === false &&
+        chance(1 / 100)
+      ) {
+        selectedProposition = Pkm.KECLEON
+      }
+      if (
+        stageLevel === PortalCarouselStages[1] &&
+        player.pokemonsProposition.includes(Pkm.ARCEUS) === false &&
+        chance(1 / 100)
+      ) {
+        selectedProposition = Pkm.ARCEUS
+      }
+
       removeInArray(propositions, selectedProposition)
       player.pokemonsProposition.push(selectedProposition)
     }
@@ -282,14 +303,14 @@ export default class Shop {
     const wildChance = player.effects.has(Effect.QUICK_FEET)
       ? 0.05
       : player.effects.has(Effect.RUN_AWAY)
-      ? 0.1
-      : player.effects.has(Effect.HUSTLE)
-      ? 0.15
-      : player.effects.has(Effect.BERSERK)
-      ? 0.2
-      : isPVE
-      ? 0.05
-      : 0
+        ? 0.1
+        : player.effects.has(Effect.HUSTLE)
+          ? 0.15
+          : player.effects.has(Effect.BERSERK)
+            ? 0.2
+            : isPVE
+              ? 0.05
+              : 0
 
     const finals = new Set(
       values(player.board)

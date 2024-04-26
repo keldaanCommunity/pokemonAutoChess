@@ -88,7 +88,7 @@ export class MiniGame {
       this.engine.world,
       Bodies.rectangle(0, 610, 2000, 40, { isStatic: true, restitution: 1 })
     )
-    Events.on(this.engine, "beforeUpdate", (event) => {
+    Events.on(this.engine, "beforeUpdate", () => {
       this.items?.forEach((item) => {
         if (item.avatarId === "") {
           const itemBody = this.bodies.get(item.id)
@@ -439,7 +439,7 @@ export class MiniGame {
           .filter(
             ([type, level]) => level === 0 && player.synergies.get(type)! > 0
           )
-          .map(([type, level]) => type)
+          .map(([type, _level]) => type)
         candidatesSymbols.push(
           ...pickNRandomIn(incompleteSynergies, 4 - candidatesSymbols.length)
         )
@@ -565,7 +565,7 @@ export class MiniGame {
       ) {
         // give a random item if none was taken
         const remainingItems = [...this.items.entries()].filter(
-          ([itemId, item]) => item.avatarId == ""
+          ([_itemId, item]) => item.avatarId == ""
         )
         if (remainingItems.length > 0) {
           avatar.itemId = pickRandomIn(remainingItems)[0]
@@ -613,14 +613,10 @@ export class MiniGame {
         )
 
         const symbols = this.symbolsByPortal.get(avatar.portalId) ?? []
-        const portalSynergies = symbols.map((s) => s.synergy)
-        const propositions =
-          state.stageLevel === PortalCarouselStages[0]
-            ? UniqueShop
-            : LegendaryShop
+        const portalSynergies = symbols.map((s) => s.synergy)      
         state.shop.assignUniquePropositions(
           player,
-          propositions,
+          state.stageLevel,
           portalSynergies
         )
       }
