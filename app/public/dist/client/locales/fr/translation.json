@@ -11,6 +11,11 @@
     "HATCH": "Éclos",
     "SPECIAL": "Spécial"
   },
+  "pool": {
+    "regular": "Régulier",
+    "additional": "Additionnel",
+    "regional": "Régional"
+  },
   "damage": {
     "SPECIAL": "dégâts spéciaux",
     "PHYSICAL": "dégâts physiques",
@@ -135,6 +140,7 @@
     "MISTY_SURGE": "Créa-Brume",
     "SKY_ATTACK": "Piqué",
     "ILLUSION": "Illusion",
+    "SHELTER": "Mur Fumigène",
     "SMOG": "Purédpois",
     "SLUDGE": "Détritus",
     "SLUDGE_WAVE": "Cradovague",
@@ -311,7 +317,26 @@
     "MOONGEIST_BEAM": "Rayon Spectral",
     "FLEUR_CANNON": "Canon Fleur",
     "SPIRIT_BREAK": "Choc Émotionnel",
-    "SHEER_COLD": "Glaciation"
+    "SHEER_COLD": "Glaciation",
+    "EXTREME_SPEED": "Vitesse Extrême",
+    "ZAP_CANNON": "Élecanon",
+    "PSYCHO_BOOST": "Psycho-Boost",
+    "ICE_HAMMER": "Marteau de Glace",
+    "POLLEN_PUFF": "Boule Pollen",
+    "PSYSTRIKE": "Frappe Psy",
+    "FACADE": "Façade",
+    "DREAM_EATER": "Dévorêve",
+    "SPARK": "Étincelle",
+    "CRUNCH": "Mâchouille",
+    "CROSS_POISON": "Poison Croix",
+    "DOUBLE_EDGE": "Damoclès",
+    "FIRE_FANG": "Crocs Feu",
+    "ICE_FANG": "Crocs Givre",
+    "THUNDER_FANG": "Crocs Éclair",
+    "TAIL_WHIP": "Mimi-Queue",
+    "PSYSHIELD_BASH": "Sprint Bouclier",
+    "QUIVER_DANCE": "Papillodanse",
+    "TORCH_SONG": "Chant Flamboyant"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
