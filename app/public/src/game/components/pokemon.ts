@@ -1,15 +1,15 @@
 import { SetSchema } from "@colyseus/schema"
 import Phaser, { GameObjects } from "phaser"
-import MoveTo from "phaser3-rex-plugins/plugins/moveto"
-import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
+import type MoveTo from "phaser3-rex-plugins/plugins/moveto"
+import type MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../models/precomputed"
 import {
-  AttackSprite,
+  type AttackSprite,
   AttackSpriteScale,
-  Emotion,
-  IPokemon,
-  IPokemonEntity,
+  type Emotion,
+  type IPokemon,
+  type IPokemonEntity,
   instanceofPokemonEntity
 } from "../../../../types"
 import {
@@ -18,30 +18,30 @@ import {
 } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import {
-  AttackType,
+  type AttackType,
   Orientation,
   PokemonActionState,
   PokemonTint,
-  Rarity,
+  type Rarity,
   SpriteType,
-  Team
+  type Team
 } from "../../../../types/enum/Game"
-import { Passive } from "../../../../types/enum/Passive"
+import type { Passive } from "../../../../types/enum/Passive"
 import { Pkm } from "../../../../types/enum/Pokemon"
-import { Synergy } from "../../../../types/enum/Synergy"
+import type { Synergy } from "../../../../types/enum/Synergy"
 import { clamp, min } from "../../../../utils/number"
 import { coinflip } from "../../../../utils/random"
 import { values } from "../../../../utils/schemas"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
 import { preferences } from "../../preferences"
-import { DebugScene } from "../scenes/debug-scene"
-import GameScene from "../scenes/game-scene"
+import type { DebugScene } from "../scenes/debug-scene"
+import type GameScene from "../scenes/game-scene"
 import { displayAbility } from "./abilities-animations"
 import DraggableObject from "./draggable-object"
 import ItemsContainer from "./items-container"
 import Lifebar from "./life-bar"
 import PokemonDetail from "./pokemon-detail"
-import { PokemonSpecialDetail } from "./pokemon-special-detail"
+import type { PokemonSpecialDetail } from "./pokemon-special-detail"
 import PowerBar from "./power-bar"
 
 export default class PokemonSprite extends DraggableObject {
@@ -301,7 +301,7 @@ export default class PokemonSprite extends DraggableObject {
 
   openDetail() {
     const s = <GameScene>this.scene
-    if (s.lastPokemonDetail && s.lastPokemonDetail != this) {
+    if (s.lastPokemonDetail && s.lastPokemonDetail !== this) {
       s.lastPokemonDetail.closeDetail()
       s.lastPokemonDetail = null
     }
@@ -420,8 +420,8 @@ export default class PokemonSprite extends DraggableObject {
       } else if (
         this.targetX &&
         this.targetY &&
-        this.targetX != -1 &&
-        this.targetY != -1
+        this.targetX !== -1 &&
+        this.targetY !== -1
       ) {
         const coordinatesTarget = transformAttackCoordinate(
           this.targetX,
@@ -898,7 +898,7 @@ export default class PokemonSprite extends DraggableObject {
   addElectricField() {
     if (!this.electricField) {
       this.electricField = this.scene.add
-        .sprite(0, 10, "status", `ELECTRIC_FIELD/000.png`)
+        .sprite(0, 10, "status", "ELECTRIC_FIELD/000.png")
         .setDepth(0)
         .setScale(1.5)
       this.electricField.anims.play("ELECTRIC_FIELD")
@@ -916,7 +916,7 @@ export default class PokemonSprite extends DraggableObject {
   addGrassField() {
     if (!this.grassField) {
       this.grassField = this.scene.add
-        .sprite(0, 10, "abilities", `GRASSY_FIELD/000.png`)
+        .sprite(0, 10, "abilities", "GRASSY_FIELD/000.png")
         .setDepth(0)
         .setScale(2)
       this.scene.add.existing(this.grassField)
@@ -935,7 +935,7 @@ export default class PokemonSprite extends DraggableObject {
   addFairyField() {
     if (!this.fairyField) {
       this.fairyField = this.scene.add
-        .sprite(0, 10, "status", `FAIRY_FIELD/000.png`)
+        .sprite(0, 10, "status", "FAIRY_FIELD/000.png")
         .setDepth(0)
         .setScale(1)
       this.fairyField.anims.play("FAIRY_FIELD")
@@ -953,7 +953,7 @@ export default class PokemonSprite extends DraggableObject {
   addPsychicField() {
     if (!this.psychicField) {
       this.psychicField = this.scene.add
-        .sprite(0, 10, "status", `PSYCHIC_FIELD/000.png`)
+        .sprite(0, 10, "status", "PSYCHIC_FIELD/000.png")
         .setDepth(0)
         .setScale(1)
       this.psychicField.anims.play("PSYCHIC_FIELD")
@@ -978,7 +978,7 @@ export function addWanderingPokemon(
   pkm: Pkm,
   onClick: (
     pokemon: PokemonSprite,
-    pointer: any,
+    pointer: Phaser.Input.Pointer,
     tween: Phaser.Tweens.Tween
   ) => void
 ) {
@@ -1024,7 +1024,7 @@ export function addWanderingPokemon(
 
   pokemon.draggable = false
   pokemon.sprite.setInteractive()
-  pokemon.sprite.on("pointerdown", (pointer) => {
+  pokemon.sprite.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
     onClick(pokemon, pointer, tween)
   })
 }

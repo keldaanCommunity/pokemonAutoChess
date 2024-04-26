@@ -3377,14 +3377,14 @@ export const AnimationConfig: {
     emote: AnimationType.SpAttack
   },
   [Pkm.RAIKOU]: {
-    attack: AnimationType.Shock,
-    ability: AnimationType.Roar,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Attack,
+    ability: AnimationType.QuickStrike,
+    emote: AnimationType.Roar
   },
   [Pkm.ENTEI]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Roar,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
+    emote: AnimationType.SpAttack
   },
   [Pkm.REGICE]: {
     attack: AnimationType.Shoot,
