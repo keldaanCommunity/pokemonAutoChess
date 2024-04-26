@@ -89,6 +89,7 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Carvanha: moves to Rare, new ability: Bite
 - Kecleon now has 1% chance to appear on unique propositions at stage 10
 - Arceus now has 1% chance to appear on legendary propositions at stage 20
+- Meditite line is now Epic additional pick. Removed Mega-Medicham.
 
 # Changes to Synergies
 
