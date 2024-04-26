@@ -2380,9 +2380,9 @@
   "not_whitelisted": "Este jogo está limitado a uma lista determinada de jogadores",
   "ranked_match": "Jogo Rankeado",
   "kecleon_dialog": {
-    "thank_you": "OBRIGADO !",
-    "title": "Bem-vindo à loja de Kecleon !",
-    "text": "10 GOLD para cada !"
+    "welcome": "Bem-vindo à loja de Kecleon !",
+    "tell_price": "10 GOLD para cada !",
+    "thank_you": "OBRIGADO !"
   },
   "scribble": {
     "EVERYONE_IS_HERE": "Todos estão presentes !",
