@@ -114,49 +114,37 @@ export class Pokemon extends Schema implements IPokemon {
     )
   }
 
-  // called after manually changing position of the pokemon on board
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onChangePosition(x: number, y: number, player: Player) {}
+  onChangePosition(x: number, y: number, player: Player) {
+    // called after manually changing position of the pokemon on board
+  }
 
-  // called after buying or picking the mon
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onAcquired(player: Player) {}
+  onAcquired(player: Player) {
+    // called after buying or picking the mon
+  }
 
-  // called after evolving
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onEvolve({
-    pokemonEvolved,
-    pokemonsBeforeEvolution,
-    player
-  }: {
+  onEvolve(params: {
     pokemonEvolved: Pokemon
     pokemonsBeforeEvolution: Pokemon[]
     player: Player
-  }) {}
+  }) {
+    // called after evolving
+  }
 
-  // called at simulation start before entities are generated
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  beforeSimulationStart({
-    weather,
-    player
-  }: {
+  beforeSimulationStart(params: {
     weather: Weather
     player: Player
-  }) {}
+  }) {
+    // called at simulation start before entities are generated
+  }
 
-  // called at simulation start after entities are generated
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  afterSimulationStart({
-    player,
-    simulation,
-    team,
-    entity
-  }: {
+  afterSimulationStart(params: {
     player: IPlayer
     simulation: Simulation
     team: MapSchema<IPokemonEntity>
     entity: IPokemonEntity
-  }) {}
+  }) {
+    // called at simulation start after entities are generated
+  }
 }
 
 export function isOnBench(pokemon: Pokemon): boolean {
@@ -707,17 +695,19 @@ export class Meditite extends Pokemon {
     Synergy.HUMAN,
     Synergy.FIGHTING
   ])
-  rarity = Rarity.ULTRA
+  rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.MEDICHAM
-  hp = 120
-  atk = 10
-  def = 5
-  speDef = 5
+  hp = 80
+  atk = 9
+  def = 4
+  speDef = 4
   maxPP = 60
   range = 2
   skill = Ability.CONFUSION
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  additional = true
+  stages = 2
 }
 
 export class Medicham extends Pokemon {
@@ -726,17 +716,18 @@ export class Medicham extends Pokemon {
     Synergy.HUMAN,
     Synergy.FIGHTING
   ])
-  rarity = Rarity.ULTRA
+  rarity = Rarity.EPIC
   stars = 2
-  evolution = Pkm.MEGA_MEDICHAM
-  hp = 200
-  atk = 20
+  hp = 160
+  atk = 17
   def = 6
   speDef = 6
   maxPP = 60
   range = 2
   skill = Ability.CONFUSION
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  additional = true
+  stages = 2
 }
 
 export class MegaMedicham extends Pokemon {
@@ -745,7 +736,7 @@ export class MegaMedicham extends Pokemon {
     Synergy.HUMAN,
     Synergy.FIGHTING
   ])
-  rarity = Rarity.ULTRA
+  rarity = Rarity.EPIC
   stars = 3
   hp = 300
   atk = 35
@@ -753,7 +744,7 @@ export class MegaMedicham extends Pokemon {
   speDef = 7
   maxPP = 60
   range = 2
-  skill = Ability.CONFUSION
+  skill = Ability.DEFAULT
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -12477,6 +12468,7 @@ export class Teddiursa extends Pokemon {
   range = 1
   skill = Ability.FURY_SWIPES
   attackSprite = AttackSprite.NORMAL_MELEE
+  stages = 2 // while waiting for Ursaluna
 }
 
 export class Ursaring extends Pokemon {
@@ -12492,6 +12484,7 @@ export class Ursaring extends Pokemon {
   range = 1
   skill = Ability.FURY_SWIPES
   attackSprite = AttackSprite.NORMAL_MELEE
+  stages = 2 // while waiting for Ursaluna
 }
 
 export class Ursaluna extends Pokemon {
@@ -12906,7 +12899,7 @@ export class Drowzee extends Pokemon {
   range = 2
   skill = Ability.DREAM_EATER
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  additional = true
+  regional = true
 }
 
 export class Hypno extends Pokemon {
@@ -12925,7 +12918,7 @@ export class Hypno extends Pokemon {
   range = 2
   skill = Ability.DREAM_EATER
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  additional = true
+  regional = true
 }
 
 export class Wattrel extends Pokemon {
@@ -13128,7 +13121,10 @@ export class Clodsire extends Pokemon {
 
 export const PokemonClasses: Record<
   Pkm,
-  new (shiny: boolean, emotion: Emotion) => Pokemon
+  new (
+    shiny: boolean,
+    emotion: Emotion
+  ) => Pokemon
 > = {
   [Pkm.DEFAULT]: Pokemon,
   [Pkm.DITTO]: Ditto,
