@@ -12187,7 +12187,7 @@ export class Corsola extends Pokemon {
   evolutionRule = new ConditionBasedEvolutionRule(
     (pokemon, player, stageLevel) => stageLevel >= 99 // natural death
   )
-  additional = true
+  regional = true
 }
 
 export class GalarCorsola extends Pokemon {
@@ -12203,7 +12203,7 @@ export class GalarCorsola extends Pokemon {
   range = 1
   skill = Ability.CURSE
   attackSprite = AttackSprite.WATER_MELEE
-  additional = true
+  regional = true
 }
 
 export class Cursola extends Pokemon {
@@ -12218,7 +12218,7 @@ export class Cursola extends Pokemon {
   range = 1
   skill = Ability.CURSE
   attackSprite = AttackSprite.WATER_MELEE
-  additional = true
+  regional = true
 }
 
 export class Smeargle extends Pokemon {
