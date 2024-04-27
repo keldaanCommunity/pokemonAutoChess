@@ -2504,16 +2504,5 @@
     "NINE_LIVES": "Nach 9 Niederlagen bist du eliminiert",
     "CROWDED": "+3 max. Pokémon auf dem Feld",
     "KECLEONS_SHOP": "Item Karusselle werden, durch Kecleon´s Shop, ersetzt, die 6 Items für je 10 GOLD anbieten"
-  },
-  "region_pokemon": {
-    "KANTO": "Kanto",
-    "JOHTO": "Johto",
-    "HOENN": "Hoenn",
-    "SINNOH": "Sinnoh",
-    "UNYS": "Einall",
-    "KALOS": "Kalos",
-    "ALOLA": "Alola",
-    "GALAR": "Galar",
-    "PALDEA": "Paldea"
   }
 }

@@ -2842,16 +2842,5 @@
     "CROWDED": "+3 units max on board",
     "KECLEONS_SHOP": "Item carousels are replaced by Kecleon's shop, that propose 6 items for 10 GOLD each",
     "FREE_MARKET": "Pokemons are bought and sold for 0 GOLD"
-  },
-  "region_pokemon": {
-    "KANTO": "Kanto",
-    "JOHTO": "Johto",
-    "HOENN": "Hoenn",
-    "SINNOH": "Sinnoh",
-    "UNYS": "Unys",
-    "KALOS": "Kalos",
-    "ALOLA": "Alola",
-    "GALAR": "Galar",
-    "PALDEA": "Paldea"
   }
 }
