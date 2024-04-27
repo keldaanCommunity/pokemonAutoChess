@@ -6267,7 +6267,7 @@ export class Vileplume extends Pokemon {
   stars = 3
   evolution = Pkm.BELLOSSOM
   hp = 260
-  atk = 20
+  atk = 24
   def = 4
   speDef = 4
   maxPP = 80
