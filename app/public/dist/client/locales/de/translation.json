@@ -1748,10 +1748,10 @@
     "HARVEST": "Zu Begin jedes Kampfes erhält das Pokémon eine Beere. Trägt das Pokémon bereits 3 Items, wird die Beere dem Spieler Inventar hinzugefügt",
     "GLUTTON": "Jedes Mal, wenn es eine Beere isst, erhält es dauerhaft 20 max. HP",
     "COMFEY": "Comfey kann keine Gegenstände tragen. Zu Beginn des Kampfes trägt der nächste Verbündete, mit einem freien Itemplatz, Curelei und erhält alle seine Statuswerte. Curelei setzt seine Fähigkeit gleichzeitig mit seinem Träger. Wenn der Träger besiegt wird, kämpft Curelei alleine weiter",
-    "TYPHLOSION": "Typhlosion sucht nach einem REAPER_CLOTH",
     "HISUIAN_TYPHLOSION": "Dieses Pokémon beginnt den Kampf mit einem zufälligen Item, wenn es keines hält",
     "WATER_BUBBLE": "Das Pokémon ist Immun gegen BURN",
-    "LYCANROC": "Wolwerock wechselt in die Nachtform während NACHT und in die Tagform während SUN."
+    "LYCANROC": "Wolwerock wechselt in die Nachtform während NACHT und in die Tagform während SUN.",
+    "TYPHLOSION": "Typhlosion sucht nach einem REAPER_CLOTH"
   },
   "stat": {
     "ATK": "Angriff",
@@ -2139,8 +2139,8 @@
   "spectate": "Zuschauen",
   "join": "Beitreten",
   "reconnect": "Erneut verbinden",
-  "no_elo": "Nur zum Spaß",
   "participate": "Teilnehmen",
+  "no_elo": "Nur zum Spaß",
   "smeargle_scribble": "Farbeagle´s Gekritzel",
   "password_protected": "Private Lobby (passwortgeschützt)",
   "private": "Privatgelände",
@@ -2504,16 +2504,5 @@
     "NINE_LIVES": "Nach 9 Niederlagen bist du eliminiert",
     "CROWDED": "+3 max. Pokémon auf dem Feld",
     "KECLEONS_SHOP": "Item Karusselle werden, durch Kecleon´s Shop, ersetzt, die 6 Items für je 10 GOLD anbieten"
-  },
-  "region_pokemon": {
-    "KANTO": "Kanto",
-    "JOHTO": "Johto",
-    "HOENN": "Hoenn",
-    "SINNOH": "Sinnoh",
-    "UNYS": "Einall",
-    "KALOS": "Kalos",
-    "ALOLA": "Alola",
-    "GALAR": "Galar",
-    "PALDEA": "Paldea"
   }
 }
