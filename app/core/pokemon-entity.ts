@@ -919,7 +919,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             setTimeout(() => {
               if (destination.target?.hp > 0) {
                 destination.target.handleSpecialDamage(
-                  2 * this.atk,
+                  1.5 * this.atk,
                   board,
                   AttackType.PHYSICAL,
                   this,

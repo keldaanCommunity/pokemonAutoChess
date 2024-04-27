@@ -1180,7 +1180,7 @@
     "TAILWIND": "HP20%以下になると飛び去る",
     "FEATHER_DANCE": "飛び去った後2秒間のPROTECTを取得",
     "MAX_AIRSTREAM": "HP50%以下とHP20%以下で2回飛び去る",
-    "MAX_GUARD": "離陸時に隣接する敵に2秒間PARALYSISを引き起こし、ターゲットに着地するとPHYSICAL ATKが200%になる",
+    "MAX_GUARD": "離陸時に隣接する敵に2秒間PARALYSISを引き起こし、ターゲットに着地するとPHYSICAL ATKが150%になる",
     "ODD_FLOWER": "オディッシュを召喚する",
     "GLOOM_FLOWER": "サモン・グルーム",
     "VILE_FLOWER": "バイレプルームを召喚する",

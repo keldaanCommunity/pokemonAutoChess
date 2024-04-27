@@ -1607,7 +1607,7 @@
     "TAILWIND": "S'envole une fois sous les 20% de HP",
     "FEATHER_DANCE": "Gagne PROTECT pendant 2 secondes après s'être envolé",
     "MAX_AIRSTREAM": "S'envole deux fois sous les 50% de HP puis 20% de HP",
-    "MAX_GUARD": "Effectue désormais des attaques en piqué, provoquant PARALYSIS pendant 2 secondes aux ennemis proches au décollage, et 200% d'ATK en PHYSICAL à l'atterrissage sur la cible",
+    "MAX_GUARD": "Effectue désormais des attaques en piqué, provoquant PARALYSIS pendant 2 secondes aux ennemis proches au décollage, et 150% d'ATK en PHYSICAL à l'atterrissage sur la cible",
     "ODD_FLOWER": "Invoque Mystherbe",
     "GLOOM_FLOWER": "Invoque Ortide",
     "VILE_FLOWER": "Invoque Rafflésia",

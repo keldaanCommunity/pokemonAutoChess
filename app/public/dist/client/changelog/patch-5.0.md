@@ -96,6 +96,7 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Water rework: Water pokemons now generate more PP and have 20% chance to dodge basic attacks at all levels
 - Ghost curses no longer ignore opponents with Rune protect effects
 - Fairy splash now can only inflict Charm if eye contact = the charm victim and origin are targeting each other
+- Nerf Flying 8: skydive damage ~~200%~~ 150%
 
 # Changes to Items
 
@@ -106,6 +107,10 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Charm duration is now reduced by 500 milliseconds everytime the unit takes damage from the charm origin
 
 # UI
+
+- Global UI overhaul
+- Improvements to responsive design and lobby/game UI on smaller screens
+- Added special items section to Items wiki
 
 # Bugfix
 

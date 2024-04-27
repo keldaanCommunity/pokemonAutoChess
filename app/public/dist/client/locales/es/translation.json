@@ -1463,7 +1463,7 @@
     "TAILWIND": "Vuela una vez por debajo del 20% de HP",
     "FEATHER_DANCE": "Obtenga PROTECT durante 2 segundos después de volar",
     "MAX_AIRSTREAM": "Vuela dos veces cuando estés por debajo del 50 % de HP y del 20 % de HP",
-    "MAX_GUARD": "Ahora realiza ataques en paracaídas, que causan PARALYSIS durante 2 segundos a los enemigos adyacentes al despegar, y un 200% de ATK PHYSICAL al aterrizar sobre su objetivo",
+    "MAX_GUARD": "Ahora realiza ataques en paracaídas, que causan PARALYSIS durante 2 segundos a los enemigos adyacentes al despegar, y un 150% de ATK PHYSICAL al aterrizar sobre su objetivo",
     "ODD_FLOWER": "Invocar un Oddish",
     "GLOOM_FLOWER": "Invocar un Gloom",
     "VILE_FLOWER": "Invocar un Vileplume",

@@ -1425,7 +1425,7 @@
     "TAILWIND": "Voe para longe uma vez com menos de 20% HP",
     "FEATHER_DANCE": "Obtenha PROTECT por 2 segundos depois de voar para longe",
     "MAX_AIRSTREAM": "Voe para longe duas vezes quando estiver com menos de 50% de HP e 20% de HP",
-    "MAX_GUARD": "Agora realiza ataques de skydive, causando PARALYSIS por 2 segundos em inimigos adjacentes na decolagem, e 200% PHYSICAL ATK ao aterrissar no alvo",
+    "MAX_GUARD": "Agora realiza ataques de skydive, causando PARALYSIS por 2 segundos em inimigos adjacentes na decolagem, e 150% PHYSICAL ATK ao aterrissar no alvo",
     "ODD_FLOWER": "Convocar Oddish",
     "GLOOM_FLOWER": "Convocar a Melancolia",
     "VILE_FLOWER": "Invocar Vileplume",
