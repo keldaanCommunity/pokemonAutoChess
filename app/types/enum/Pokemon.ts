@@ -775,7 +775,9 @@ export enum Pkm {
   CLODSIRE = "CLODSIRE",
   FUECOCO = "FUECOCO",
   CROCALOR = "CROCALOR",
-  SKELEDIRGE = "SKELEDIRGE"
+  SKELEDIRGE = "SKELEDIRGE",
+  TANGELA = "TANGELA",
+  TANGROWTH = "TANGROWTH"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1553,7 +1555,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.CLODSIRE]: "0980",
   [Pkm.FUECOCO]: "0909",
   [Pkm.CROCALOR]: "0910",
-  [Pkm.SKELEDIRGE]: "0911"
+  [Pkm.SKELEDIRGE]: "0911",
+  [Pkm.TANGELA]: "0114",
+  [Pkm.TANGROWTH]: "0465"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2331,7 +2335,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.CLODSIRE]: Pkm.PALDEA_WOOPER,
   [Pkm.FUECOCO]: Pkm.FUECOCO,
   [Pkm.CROCALOR]: Pkm.FUECOCO,
-  [Pkm.SKELEDIRGE]: Pkm.FUECOCO
+  [Pkm.SKELEDIRGE]: Pkm.FUECOCO,
+  [Pkm.TANGELA]: Pkm.TANGELA,
+  [Pkm.TANGROWTH]: Pkm.TANGELA
 }
 
 export enum PkmDuo {
@@ -6354,5 +6360,15 @@ export const AnimationConfig: {
     ability: AnimationType.Shoot,
     emote: AnimationType.RearUp,
     shinyUnavailable: true
+  },
+  [Pkm.TANGELA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shake
+  },
+  [Pkm.TANGROWTH]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Emit
   }
 }
