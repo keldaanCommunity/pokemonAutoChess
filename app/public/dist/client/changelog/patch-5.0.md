@@ -90,6 +90,8 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Arceus now has 1% chance to appear on legendary propositions at stage 20
 - Meditite line is now Epic additional pick. Removed Mega-Medicham.
 - Buff Vileplume: Attack 20 → 24
+- Buff Starly line: Attack ~~8/16/24~~ 9/18/28
+- Buff Servine: Attack 11 → 13
 
 # Changes to Synergies
 
