@@ -96,6 +96,7 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Aquatic rework: Aquatic pokemons now reduce the duration of status afflictions for all your team
 - Water rework: Water pokemons now generate more PP and have 20% chance to dodge basic attacks at all levels
 - Ghost curses no longer ignore opponents with Rune protect effects
+- Buff Ghost: status durations ~~5/5/5/5~~ 7/7/7/3 seocnds
 - Fairy splash now can only inflict Charm if eye contact = the charm victim and origin are targeting each other
 - Nerf Flying 8: skydive damage ~~200%~~ 150%
 
