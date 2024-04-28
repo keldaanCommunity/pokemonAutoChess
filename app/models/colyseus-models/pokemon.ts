@@ -6267,7 +6267,7 @@ export class Vileplume extends Pokemon {
   stars = 3
   evolution = Pkm.BELLOSSOM
   hp = 260
-  atk = 20
+  atk = 24
   def = 4
   speDef = 4
   maxPP = 80
@@ -9087,7 +9087,7 @@ export class Servine extends Pokemon {
   evolution = Pkm.SERPERIOR
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 160
-  atk = 11
+  atk = 13
   def = 1
   speDef = 1
   maxPP = 70
@@ -9118,7 +9118,7 @@ export class Starly extends Pokemon {
   evolution = Pkm.STARAVIA
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 75
-  atk = 8
+  atk = 9
   def = 3
   speDef = 3
   maxPP = 80
@@ -9135,7 +9135,7 @@ export class Staravia extends Pokemon {
   evolution = Pkm.STARAPTOR
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 130
-  atk = 16
+  atk = 18
   def = 5
   speDef = 5
   maxPP = 80
@@ -9150,7 +9150,7 @@ export class Staraptor extends Pokemon {
   rarity = Rarity.HATCH
   stars = 3
   hp = 200
-  atk = 24
+  atk = 28
   def = 7
   speDef = 7
   maxPP = 80
@@ -13129,6 +13129,45 @@ export class Clodsire extends Pokemon {
   regional = true
 }
 
+export class Tangela extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.MONSTER,
+    Synergy.FOSSIL
+  ])
+  rarity = Rarity.UNCOMMON
+  evolution = Pkm.TANGROWTH
+  stars = 1
+  hp = 100
+  atk = 3
+  def = 4
+  speDef = 2
+  maxPP = 120
+  range = 1
+  skill = Ability.POWER_WHIP
+  attackSprite = AttackSprite.GRASS_MELEE
+  regional = true
+}
+
+export class Tangrowth extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.MONSTER,
+    Synergy.FOSSIL
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 190
+  atk = 13
+  def = 6
+  speDef = 2
+  maxPP = 120
+  range = 1
+  skill = Ability.POWER_WHIP
+  attackSprite = AttackSprite.GRASS_MELEE
+  regional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -13910,5 +13949,7 @@ export const PokemonClasses: Record<
   [Pkm.CLODSIRE]: Clodsire,
   [Pkm.FUECOCO]: Fuecoco,
   [Pkm.CROCALOR]: Crocalor,
-  [Pkm.SKELEDIRGE]: Skeledirge
+  [Pkm.SKELEDIRGE]: Skeledirge,
+  [Pkm.TANGELA]: Tangela,
+  [Pkm.TANGROWTH]: Tangrowth
 }

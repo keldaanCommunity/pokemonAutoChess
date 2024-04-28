@@ -33,6 +33,8 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Fuecoco
 - Crocalor
 - Skeledirge
+- Tangela
+- Tangrowth
 
 # Changes to Pokemon & Abilities
 
@@ -89,13 +91,18 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Kecleon now has 1% chance to appear on unique propositions at stage 10
 - Arceus now has 1% chance to appear on legendary propositions at stage 20
 - Meditite line is now Epic additional pick. Removed Mega-Medicham.
+- Buff Vileplume: Attack 20 → 24
+- Buff Starly line: Attack ~~8/16/24~~ 9/18/28
+- Buff Servine: Attack 11 → 13
 
 # Changes to Synergies
 
 - Aquatic rework: Aquatic pokemons now reduce the duration of status afflictions for all your team
 - Water rework: Water pokemons now generate more PP and have 20% chance to dodge basic attacks at all levels
 - Ghost curses no longer ignore opponents with Rune protect effects
+- Buff Ghost: status durations ~~5/5/5/5~~ 7/7/7/3 seconds
 - Fairy splash now can only inflict Charm if eye contact = the charm victim and origin are targeting each other
+- Nerf Flying 8: skydive damage ~~200%~~ 150%
 
 # Changes to Items
 
@@ -106,6 +113,10 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Charm duration is now reduced by 500 milliseconds everytime the unit takes damage from the charm origin
 
 # UI
+
+- Global UI overhaul
+- Improvements to responsive design and lobby/game UI on smaller screens
+- Added special items section to Items wiki
 
 # Bugfix
 

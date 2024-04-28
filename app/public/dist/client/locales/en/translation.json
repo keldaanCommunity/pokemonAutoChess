@@ -336,7 +336,8 @@
     "TAIL_WHIP": "Tail Whip",
     "PSYSHIELD_BASH": "Psyshield Bash",
     "QUIVER_DANCE": "Quiver Dance",
-    "TORCH_SONG": "Torch Song"
+    "TORCH_SONG": "Torch Song",
+    "POWER_WHIP": "Power Whip"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1114,7 +1115,9 @@
     "CLODSIRE": "Clodsire",
     "FUECOCO": "Fuecoco",
     "CROCALOR": "Crocalor",
-    "SKELEDIRGE": "Skeledirge"
+    "SKELEDIRGE": "Skeledirge",
+    "TANGELA": "Tangela",
+    "TANGROWTH": "Tangrowth"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1431,7 +1434,8 @@
     "TAIL_WHIP": "Reduce target's DEF by [30,SP] %",
     "PSYSHIELD_BASH": "Dash into the ennemy backlane, dealing [60,SP] SPECIAL to all enemies in the way and PROTECT the caster for 1 second",
     "QUIVER_DANCE": "Gain [5,SP] ATK, [5,SP] SPE_DEF, [20,SP]% ATK_SPEED and 20% AP",
-    "TORCH_SONG": "Blows out raging flames to the [1,2,3] strongest opponents. Each flame scorchs the target and adjacent units for [10,20,30,SP] SPECIAL. Gains 10 AP for each unit hit having the status BURN, CURSE or SILENCE."
+    "TORCH_SONG": "Blows out raging flames to the [1,2,3] strongest opponents. Each flame scorchs the target and adjacent units for [10,20,30,SP] SPECIAL. Gains 10 AP for each unit hit having the status BURN, CURSE or SILENCE.",
+    "POWER_WHIP": "Lock on to the farthest enemy and unleash a giant vine towards it, dealing [30,60,SP] SPECIAL to any enemies hit."
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1607,7 +1611,7 @@
     "TAILWIND": "Fly away once under 20% HP",
     "FEATHER_DANCE": "Get PROTECT for 2 seconds after flying away",
     "MAX_AIRSTREAM": "Fly away twice when under 50% HP and 20% HP",
-    "MAX_GUARD": "Now perform skydive attacks, causing PARALYSIS for 2 seconds on adjacent enemies on takeoff, and 200% PHYSICAL ATK on landing on their target",
+    "MAX_GUARD": "Now perform skydive attacks, causing PARALYSIS for 2 seconds on adjacent enemies on takeoff, and 150% PHYSICAL ATK on landing on their target",
     "ODD_FLOWER": "Summon Oddish",
     "GLOOM_FLOWER": "Summon Gloom",
     "VILE_FLOWER": "Summon Vileplume",
@@ -1619,10 +1623,10 @@
     "STEEL_SPIKE": "Deal 66% of ATK as TRUE",
     "CORKSCREW_CRASH": "Deal 100% of ATK as TRUE",
     "MAX_MELTDOWN": "Deal 140% of ATK as TRUE",
-    "BAD_DREAMS": "The enemy with the highest HP + SHIELD lose 50% of it and is FLINCH for 5 seconds",
-    "PHANTOM_FORCE": "Also, the enemy with the highest ATK lose 50% of it and is PARALYSIS for 5 seconds",
-    "SHADOW_TAG": "Also, the enemy with the highest AP lose 50% of it and is SILENCE for 5 seconds",
-    "CURSE": "Also, the strongest enemy is CURSE and will be KO after 5 seconds",
+    "BAD_DREAMS": "The enemy with the highest HP + SHIELD lose 50% of it and is FLINCH for 7 seconds",
+    "PHANTOM_FORCE": "Also, the enemy with the highest ATK lose 50% of it and is PARALYSIS for 7 seconds",
+    "SHADOW_TAG": "Also, the enemy with the highest AP lose 50% of it and is SILENCE for 7 seconds",
+    "CURSE": "Also, the strongest enemy is CURSE and will be KO after 3 seconds",
     "AROMATIC_MIST": "Shocks deal 15 SPECIAL",
     "FAIRY_WIND": "Shocks deal 30 SPECIAL",
     "STRANGE_STEAM": "Shocks deal 50 SPECIAL",

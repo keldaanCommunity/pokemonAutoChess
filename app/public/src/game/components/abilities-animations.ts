@@ -133,7 +133,15 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
-    case Ability.LEECH_SEED:
+    case Ability.POWER_WHIP:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+  
+    case "POWER_WHIP/hit":
+      addAbilitySprite("POWER_WHIP/hit", coordinates, true).setScale(3)
+      break
+    
+      case Ability.LEECH_SEED:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 

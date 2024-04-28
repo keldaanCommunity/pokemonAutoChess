@@ -619,7 +619,7 @@ export default class Simulation extends Schema implements ISimulation {
             false
           )
           enemyWithHighestHP.status.triggerFlinch(
-            5000,
+            7000,
             enemyWithHighestHP,
             undefined
           )
@@ -644,7 +644,7 @@ export default class Simulation extends Schema implements ISimulation {
           enemyWithHighestATK.addAttack(
             Math.round(-0.5 * enemyWithHighestATK.atk)
           )
-          enemyWithHighestATK.status.triggerParalysis(5000, enemyWithHighestATK)
+          enemyWithHighestATK.status.triggerParalysis(7000, enemyWithHighestATK)
         }
       }
 
@@ -661,7 +661,7 @@ export default class Simulation extends Schema implements ISimulation {
           enemyWithHighestAP = enemyWithHighestAP as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
           enemyWithHighestAP.addAbilityPower(-50)
           enemyWithHighestAP.status.triggerSilence(
-            5000,
+            7000,
             enemyWithHighestAP,
             undefined
           )
@@ -671,7 +671,7 @@ export default class Simulation extends Schema implements ISimulation {
       if (teamEffects.has(Effect.CURSE)) {
         const strongestEnemy = getStrongestUnit(opponentsCursable)
         if (strongestEnemy) {
-          strongestEnemy.status.triggerCurse(5000)
+          strongestEnemy.status.triggerCurse(3000)
         }
       }
     })
