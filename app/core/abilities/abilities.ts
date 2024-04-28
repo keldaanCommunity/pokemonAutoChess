@@ -8469,8 +8469,6 @@ export class PowerWhipStrategy extends AbilityStrategy {
         skill: Ability.POWER_WHIP,
         positionX: pokemon.positionX,
         positionY: pokemon.positionY,
-        targetX: furthestTarget.positionX,
-        targetY: furthestTarget.positionY
       })
 
       const cells = board.getCellsBetween(
@@ -8481,11 +8479,16 @@ export class PowerWhipStrategy extends AbilityStrategy {
       )
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
-          cell.value.count.powerWhipCount++
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: "POWER_WHIP/hit",
+            positionX: cell.value.positionX,
+            positionY: cell.value.positionY
+          })
           cell.value.handleSpecialDamage(
             damage,
             board,
-            AttackType.PHYSICAL,
+            AttackType.SPECIAL,
             pokemon,
             crit
           )
