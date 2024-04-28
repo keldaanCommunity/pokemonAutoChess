@@ -5871,6 +5871,7 @@ export class TeeterDanceStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    pokemon.addAttackSpeed(20, true)
     board.cells
       .filter((v) => v !== undefined)
       .forEach((v) => v && v.status.triggerConfusion(3000, v))

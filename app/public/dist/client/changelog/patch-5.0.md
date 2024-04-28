@@ -94,6 +94,8 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Buff Vileplume: Attack 20 → 24
 - Buff Starly line: Attack ~~8/16/24~~ 9/18/28
 - Buff Servine: Attack 11 → 13
+- Added AP scaling to Tether Dance (Spinda): user gain *20%* attack speed
+
 
 # Changes to Synergies
 

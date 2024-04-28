@@ -1339,7 +1339,7 @@
     "AERIAL_ACE": "Deals [25,50,100,SP] TRUE",
     "PARABOLIC_CHARGE": "Heal [25,50] HP and deals [25,50,100,SP] SPECIAL damage to the target. Excess HP is converted into SPECIAL",
     "SUPER_FANG": "Deals [30,60,90,SP] SPECIAL. Double damage on GRASS pokémon",
-    "TEETER_DANCE": "All other Pokémon are CONFUSION for 3 seconds, allies and enemies alike",
+    "TEETER_DANCE": "Gain [20,SP]% ATK_SPEED. All other Pokémon are CONFUSION for 3 seconds, allies and enemies alike.",
     "CLOSE_COMBAT": "Deals [130,SP] SPECIAL and reduce the caster DEF and SPE_DEF by 2",
     "AQUA_RING": "Dives into the middle of the allied team, creating an aquatic ring that clears negative status and heals [20,30,50,SP] HP",
     "POISON_GAS": "A cloud of stinky gas is thrown in the face of all adjacent enemies, inflicting [15,30,60,SP] SPECIAL and POISONNED for 3 seconds",
