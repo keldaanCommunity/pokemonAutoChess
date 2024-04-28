@@ -32,4 +32,4 @@ Cosmog may look weak, but with the power of the stars, it can evolve to Solgaleo
 
 Flying at max level now perform skydive attacks, fighting mons destroy the shield of their enemies, babies can now bring shiny eggs, and more surprises for other synergies.
 
-Check out the full changelog on Discord !
+Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1220728342529966100) !

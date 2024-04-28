@@ -7,6 +7,7 @@ export default function PatchNotes() {
   const { t } = useTranslation()
 
   const PATCHES = [
+    "5.0",
     "4.9",
     "4.8",
     "4.7",
