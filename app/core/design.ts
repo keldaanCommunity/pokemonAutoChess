@@ -46,7 +46,7 @@ export default class Design {
   terrain: TerrainType[][] = []
   bitmask: Mask[][] = []
   layers: TileMapping[][] = []
-  width = 42
+  width = 50
   height = 32
   frequency: number
   persistance: number
