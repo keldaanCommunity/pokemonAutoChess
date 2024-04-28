@@ -13129,6 +13129,45 @@ export class Clodsire extends Pokemon {
   regional = true
 }
 
+export class Tangela extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.MONSTER,
+    Synergy.FOSSIL
+  ])
+  rarity = Rarity.UNCOMMON
+  evolution = Pkm.TANGROWTH
+  stars = 1
+  hp = 100
+  atk = 3
+  def = 4
+  speDef = 2
+  maxPP = 120
+  range = 1
+  skill = Ability.POWER_WHIP
+  attackSprite = AttackSprite.GRASS_MELEE
+  regional = true
+}
+
+export class Tangrowth extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.MONSTER,
+    Synergy.FOSSIL
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 190
+  atk = 13
+  def = 6
+  speDef = 2
+  maxPP = 120
+  range = 1
+  skill = Ability.POWER_WHIP
+  attackSprite = AttackSprite.GRASS_MELEE
+  regional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -13910,5 +13949,7 @@ export const PokemonClasses: Record<
   [Pkm.CLODSIRE]: Clodsire,
   [Pkm.FUECOCO]: Fuecoco,
   [Pkm.CROCALOR]: Crocalor,
-  [Pkm.SKELEDIRGE]: Skeledirge
+  [Pkm.SKELEDIRGE]: Skeledirge,
+  [Pkm.TANGELA]: Tangela,
+  [Pkm.TANGROWTH]: Tangrowth
 }

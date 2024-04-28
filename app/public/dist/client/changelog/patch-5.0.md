@@ -33,6 +33,8 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Fuecoco
 - Crocalor
 - Skeledirge
+- Tangela
+- Tangrowth
 
 # Changes to Pokemon & Abilities
 

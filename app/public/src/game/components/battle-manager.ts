@@ -541,6 +541,20 @@ export default class BattleManager {
                 this.flip
               )
             }
+          } else if (field == "powerWhipCount") {
+            if (value != 0) {
+              displayAbility(
+                this.scene,
+                [],
+                "POWER_WHIP/hit",
+                pkm.orientation,
+                pkm.positionX,
+                pkm.positionY,
+                pkm.targetX ?? -1,
+                pkm.targetY ?? -1,
+                this.flip
+              )
+            }
           } else if (field == "moneyCount") {
             if (value > 0) {
               this.moneyAnimation(pkm.x, pkm.y, value - previousValue)

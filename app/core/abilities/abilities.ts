@@ -8451,6 +8451,53 @@ export class TorchSongStrategy extends AbilityStrategy {
   }
 }
 
+export class PowerWhipStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const damage = [30, 60][pokemon.stars - 1] ?? 60
+
+    const furthestTarget = state.getFarthestTarget(pokemon, board)
+    if (furthestTarget) {
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: Ability.POWER_WHIP,
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+      })
+
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        furthestTarget.positionX,
+        furthestTarget.positionY
+      )
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team != pokemon.team) {
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: "POWER_WHIP/hit",
+            positionX: cell.value.positionX,
+            positionY: cell.value.positionY
+          })
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -8769,5 +8816,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.TAIL_WHIP]: new TailWhipStrategy(),
   [Ability.PSYSHIELD_BASH]: new PsyshieldBashStrategy(),
   [Ability.QUIVER_DANCE]: new QuiverDanceStrategy(),
-  [Ability.TORCH_SONG]: new TorchSongStrategy()
+  [Ability.TORCH_SONG]: new TorchSongStrategy(),
+  [Ability.POWER_WHIP]: new PowerWhipStrategy()
 }

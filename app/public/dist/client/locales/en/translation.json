@@ -336,7 +336,8 @@
     "TAIL_WHIP": "Tail Whip",
     "PSYSHIELD_BASH": "Psyshield Bash",
     "QUIVER_DANCE": "Quiver Dance",
-    "TORCH_SONG": "Torch Song"
+    "TORCH_SONG": "Torch Song",
+    "POWER_WHIP": "Power Whip"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1114,7 +1115,9 @@
     "CLODSIRE": "Clodsire",
     "FUECOCO": "Fuecoco",
     "CROCALOR": "Crocalor",
-    "SKELEDIRGE": "Skeledirge"
+    "SKELEDIRGE": "Skeledirge",
+    "TANGELA": "Tangela",
+    "TANGROWTH": "Tangrowth"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1431,7 +1434,8 @@
     "TAIL_WHIP": "Reduce target's DEF by [30,SP] %",
     "PSYSHIELD_BASH": "Dash into the ennemy backlane, dealing [60,SP] SPECIAL to all enemies in the way and PROTECT the caster for 1 second",
     "QUIVER_DANCE": "Gain [5,SP] ATK, [5,SP] SPE_DEF, [20,SP]% ATK_SPEED and 20% AP",
-    "TORCH_SONG": "Blows out raging flames to the [1,2,3] strongest opponents. Each flame scorchs the target and adjacent units for [10,20,30,SP] SPECIAL. Gains 10 AP for each unit hit having the status BURN, CURSE or SILENCE."
+    "TORCH_SONG": "Blows out raging flames to the [1,2,3] strongest opponents. Each flame scorchs the target and adjacent units for [10,20,30,SP] SPECIAL. Gains 10 AP for each unit hit having the status BURN, CURSE or SILENCE.",
+    "POWER_WHIP": "Lock on to the farthest enemy and unleash a giant vine towards it, dealing [30,60,SP] SPECIAL to any enemies hit."
   },
   "effect": {
     "INGRAIN": "Ingrain",
