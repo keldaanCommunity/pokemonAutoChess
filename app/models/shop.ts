@@ -370,6 +370,7 @@ export default class Shop {
       threshold += rarityProbability[r]
       if (rarity_seed < threshold) {
         rarity = r as Rarity
+        break
       }
     }
 
