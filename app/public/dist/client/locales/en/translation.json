@@ -1332,7 +1332,7 @@
     "PRESENT": "Either deals [80,SP], [150,SP], [300,SP] SPECIAL, or heal 80 HP of the target",
     "LEAF_BLADE": "Next attack is a guaranteed critical hit dealing [100,SP]% of ATK as TRUE",
     "ANCHOR_SHOT": "Grab the farthest pokémon and deals [20,40,80,SP] SPECIAL",
-    "MAGNET_RISE": "Grants PROTECT to [2,4,6] adjacent ally pokémon for 2 seconds",
+    "MAGNET_RISE": "Grants PROTECT for 2 seconds and [10,SP]% dodge chance to user and [2,4,6] adjacent ally pokémon",
     "ATTRACT": "Make [1,2,3] pokémon chosen randomly CHARM for [1,SP] seconds",
     "WATER_PULSE": "Deals [75,150,SP] SPECIAL to the target and adjacent ennemis and make them CONFUSION for 2 seconds",
     "PLAY_ROUGH": "Deals [30,60,120,SP] SPECIAL to the target and make it CHARM for 2.5 seconds",

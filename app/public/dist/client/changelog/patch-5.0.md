@@ -98,6 +98,7 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Added AP scaling to Beat up (Houndour): Summon 1/2/3 Houndour with *100%* HP
 - Added AP scaling to Heal Block (Cacnea): deal *20/40/80* special damage to adjacent enemies and wound them for 5 seconds
 - Added AP scaling to Helping Hand (Sentret): Give 30/60/100 SHIELD to the 2 nearest allies and double the damage of the next ability
+- Added AP scaling to Magnet Rise (Nosepass): grants *10%* dodge chance to user and 2/4/6 adjacent allies
 
 # Changes to Synergies
 

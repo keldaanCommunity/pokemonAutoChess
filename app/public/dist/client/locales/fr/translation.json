@@ -1329,7 +1329,7 @@
     "PRESENT": "Peut soit infliger [80,SP], [150,SP], [300,SP] SPECIAL à la cible, soit la soigner de 80 HP",
     "LEAF_BLADE": "La prochaine attaque est un critique garanti infligeant [100,SP]% ATK",
     "ANCHOR_SHOT": "Attrape le pokémon adverse le plus lointain et lui inflige [20,40,80,SP] SPECIAL",
-    "MAGNET_RISE": "Donne PROTECT à [2,4,6] pokémons alliés adjacents pendant 2 secondes",
+    "MAGNET_RISE": "Donne PROTECT pendant 2 secondes et [10,SP]% de chances d'esquive au lanceur et à [2,4,6] pokémons alliés adjacents",
     "ATTRACT": "Rend CHARM [1,2,3] pokémons adverses choisis au hasard pendant [1,SP] secondes",
     "WATER_PULSE": "Inflige [75,150,SP] SPECIAL à la cible et aux ennemis adjacents et les rend CONFUSION pendant 2 secondes",
     "PLAY_ROUGH": "Inflige [30,60,120,SP] SPECIAL à la cible et la rend CHARM pendant 2.5 secondes",

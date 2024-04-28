@@ -5720,27 +5720,25 @@ export class MagnetRiseStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const cells = board
+    const nbAlliesBuffed = [2, 4, 6][pokemon.stars - 1] ?? 6
+    const alliesBuffed = (board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
-      .filter((cell) => cell.value && cell.value.team === pokemon.team)
-      .sort((a, b) => a.value!.life - b.value!.life)
+      .map(cell => cell.value)
+      .filter((mon) => mon && mon.team === pokemon.team) as PokemonEntity[])
+      .sort((a, b) => a.life - b.life)
+      .slice(0, nbAlliesBuffed) 
 
-    for (
-      let i = 0;
-      i < (pokemon.stars === 3 ? 6 : pokemon.stars === 2 ? 4 : 2);
-      i++
-    ) {
-      const cell = cells.shift()
-      if (cell && cell.value) {
-        cell.value.status.triggerProtect(2000)
-        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-          id: cell.value.simulation.id,
-          skill: Ability.MAGNET_RISE,
-          positionX: cell.value.positionX,
-          positionY: cell.value.positionY
-        })
-      }
-    }
+    alliesBuffed.push(pokemon)
+    alliesBuffed.forEach(ally => {
+      ally.status.triggerProtect(2000)
+      ally.addDodgeChance(0.1, true)
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: ally.simulation.id,
+        skill: Ability.MAGNET_RISE,
+        positionX: ally.positionX,
+        positionY: ally.positionY
+      })
+    })
   }
 }
 
