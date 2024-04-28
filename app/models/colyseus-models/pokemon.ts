@@ -6267,7 +6267,7 @@ export class Vileplume extends Pokemon {
   stars = 3
   evolution = Pkm.BELLOSSOM
   hp = 260
-  atk = 20
+  atk = 24
   def = 4
   speDef = 4
   maxPP = 80
@@ -9087,7 +9087,7 @@ export class Servine extends Pokemon {
   evolution = Pkm.SERPERIOR
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 160
-  atk = 11
+  atk = 13
   def = 1
   speDef = 1
   maxPP = 70
@@ -9118,7 +9118,7 @@ export class Starly extends Pokemon {
   evolution = Pkm.STARAVIA
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 75
-  atk = 8
+  atk = 9
   def = 3
   speDef = 3
   maxPP = 80
@@ -9135,7 +9135,7 @@ export class Staravia extends Pokemon {
   evolution = Pkm.STARAPTOR
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 130
-  atk = 16
+  atk = 18
   def = 5
   speDef = 5
   maxPP = 80
@@ -9150,7 +9150,7 @@ export class Staraptor extends Pokemon {
   rarity = Rarity.HATCH
   stars = 3
   hp = 200
-  atk = 24
+  atk = 28
   def = 7
   speDef = 7
   maxPP = 80
