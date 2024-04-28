@@ -12187,7 +12187,7 @@ export class Corsola extends Pokemon {
   evolutionRule = new ConditionBasedEvolutionRule(
     (pokemon, player, stageLevel) => stageLevel >= 99 // natural death
   )
-  additional = true
+  regional = true
 }
 
 export class GalarCorsola extends Pokemon {
@@ -12203,7 +12203,7 @@ export class GalarCorsola extends Pokemon {
   range = 1
   skill = Ability.CURSE
   attackSprite = AttackSprite.WATER_MELEE
-  additional = true
+  regional = true
 }
 
 export class Cursola extends Pokemon {
@@ -12218,7 +12218,7 @@ export class Cursola extends Pokemon {
   range = 1
   skill = Ability.CURSE
   attackSprite = AttackSprite.WATER_MELEE
-  additional = true
+  regional = true
 }
 
 export class Smeargle extends Pokemon {
@@ -13066,7 +13066,6 @@ export class Mothim extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING])
   rarity = Rarity.RARE
   stars = 3
-  evolution = Pkm.MOTHIM
   hp = 200
   atk = 20
   def = 3
@@ -13078,6 +13077,17 @@ export class Mothim extends Pokemon {
   passive = Passive.MOTHIM
   regional = true
   stages = 3
+  onAcquired(player: Player) {
+    if (player.regionalPokemons.includes(Pkm.BURMY_PLANT)) {
+      this.types.add(Synergy.GRASS)
+    }
+    if (player.regionalPokemons.includes(Pkm.BURMY_SANDY)) {
+      this.types.add(Synergy.GROUND)
+    }
+    if (player.regionalPokemons.includes(Pkm.BURMY_TRASH)) {
+      this.types.add(Synergy.ARTIFICIAL)
+    }
+  }
 }
 
 export class PaldeaWooper extends Pokemon {
