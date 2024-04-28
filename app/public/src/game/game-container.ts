@@ -4,7 +4,6 @@ import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin.js"
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin.js"
 import React from "react"
 import { toast } from "react-toastify"
-import { DesignTiled } from "../../../core/design"
 import { PokemonEntity } from "../../../core/pokemon-entity"
 import Simulation from "../../../core/simulation"
 import Count from "../../../models/colyseus-models/count"
@@ -38,7 +37,7 @@ import {
 import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
 import { logger } from "../../../utils/logger"
-import { clamp } from "../../../utils/number"
+import { clamp, max } from "../../../utils/number"
 import { getPath, transformCoordinate } from "../pages/utils/utils"
 import store from "../stores"
 import { changePlayer } from "../stores/GameStore"
@@ -262,13 +261,17 @@ class GameContainer {
     const screenWidth = window.innerWidth - 60
     const screenHeight = window.innerHeight
     const screenRatio = screenWidth / screenHeight
-    const WIDTH = 42 * 48
+    const IDEAL_WIDTH = 42 * 48
     const MIN_HEIGHT = 1050
     const MAX_HEIGHT = 32 * 48
-    const height = clamp(WIDTH / screenRatio, MIN_HEIGHT, MAX_HEIGHT)
+    const height = clamp(IDEAL_WIDTH / screenRatio, MIN_HEIGHT, MAX_HEIGHT)
+    const width = max(50 * 48)(height * screenRatio)
 
-    if (this.game && this.game.scale.height !== height) {
-      this.game.scale.setGameSize(WIDTH, height)
+    if (
+      this.game &&
+      (this.game.scale.height !== height || this.game.scale.width !== width)
+    ) {
+      this.game.scale.setGameSize(width, height)
     }
   }
 
