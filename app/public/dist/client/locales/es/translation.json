@@ -1231,7 +1231,7 @@
     "HIDDEN_POWER_EM": "Invoca 4 Unown aleatorios en cada esquina del tablero",
     "POISON_JAB": "Inflige [30,60,90,120,SP] de SPECIAL, cambia de lugar con el objetivo y deja POISONNED tanto al objetivo como al lanzador durante 4 s.",
     "SHELL_SMASH": "Causa [15,30,SP] de SPECIAL a los enemigos adyacentes; gana 2 ATK, 20% AP y 20% ATK_SPEED, y pierde 1 DEF, 1 SPE_DEF",
-    "HELPING_HAND": "Duplica el daño de la siguiente habilidad lanzada por los [2,4,6] aliados más cercanos",
+    "HELPING_HAND": "Da [30,60,100,SP] SHIELD a los 2 aliados más cercanos y dobla el daño de la siguiente habilidad",
     "ASTRAL_BARRAGE": "Envía [3,SP=2] pequeños fantasmas a Pokémon enemigos aleatorios. Cada uno de ellos Causa 20 de SPECIAL",
     "WATERFALL": "Obtiene [30,60,120,SP] SHIELD, limpia cualquier estado negativo y limpia la casilla",
     "PYRO_BALL": "El usuario ataca encendiendo una pequeña piedra y lanzándola como una bola de fuego al objetivo más lejano, causando [10,20,40,SP] de SPECIAL y dejando BURN durante 2 s todo lo que encuentre en su camino.",

@@ -1008,7 +1008,7 @@
     "HIDDEN_POWER_EM": "Genera 4 Unown casuali in ogni angolo del tabellone",
     "POISON_JAB": "Infligge [30,60,90,120,SP] SPECIAL, scambia di posto con il bersaglio e POISONNED sia il bersaglio che l'incantatore per 4 secondi",
     "SHELL_SMASH": "Infligge [15, 30,SP] SPECIAL ai nemici adiacenti; guadagni 2 ATK, 20% AP e 20% ATK_SPEED e perdi 1 DEF, 1 SPE_DEF",
-    "HELPING_HAND": "Raddoppia il danno del prossimo incantesimo lanciato dagli alleati [2,4,6] più vicini",
+    "HELPING_HAND": "Dona [30,60,100,SP] SHIELD ai 2 alleati più vicini e raddoppia i danni della prossima abilità.",
     "ASTRAL_BARRAGE": "Invia [3, SP=2] piccoli fantasmi a Pokémon avversari casuali. Ognuno di loro distribuisce 20 SPECIAL",
     "WATERFALL": "SHIELD stesso per [30,60,120,SP], cancella lo stato negativo e l'effetto della cella sul tabellone",
     "PYRO_BALL": "L'utilizzatore attacca accendendo una piccola pietra e lanciandola come una palla infuocata contro il bersaglio più lontano, infliggendo [10,20,40,SP] SPECIAL e BRUCIA per 2 secondi tutto ciò che incontra sulla sua strada",

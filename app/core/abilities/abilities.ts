@@ -5434,7 +5434,8 @@ export class HelpingHandStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const buffs = pokemon.stars === 3 ? 6 : pokemon.stars === 2 ? 4 : 2
+    const nbAlliesBuffed = 2
+    const shield = [30, 60, 100][pokemon.stars - 1] ?? 100
     const allies = new Array<{ pkm: PokemonEntity; distance: number }>()
     board.forEach((x, y, cell) => {
       if (cell && cell.team === pokemon.team && pokemon.id !== cell.id) {
@@ -5450,10 +5451,11 @@ export class HelpingHandStrategy extends AbilityStrategy {
       }
     })
     allies.sort((a, b) => a.distance - b.distance)
-    for (let i = 0; i < buffs; i++) {
+    for (let i = 0; i < nbAlliesBuffed; i++) {
       const ally = allies[i]?.pkm
       if (ally) {
         ally.status.doubleDamage = true
+        ally.addShield(shield, pokemon, true)
         ally.simulation.room.broadcast(Transfer.ABILITY, {
           id: pokemon.simulation.id,
           skill: Ability.HELPING_HAND,
