@@ -908,7 +908,7 @@
     "PSYCHIC_SURGE": "Aumenta i AP di tutti i Pokémon PSYCHIC del [5,SP]%, tranne il lanciatore",
     "MIND_BLOWN": "Infligge il [50,SP]% dei HP attuali target come SPECIAL",
     "PAYDAY": "Offerte [30,60,120,SP] SPECIAL. Se il bersaglio è KO, il giocatore riceve [1,2,3] monete d'oro",
-    "BEAT_UP": "Evoca [1,2,3] Houndour (nessun oggetto)",
+    "BEAT_UP": "Evoca [1,2,3] Houndour ([100,SP]% HP, nessun oggetto)",
     "BLUE_FLARE": "Infligge [50,SP] SPECIAL + 20 per fase di sinergia di fuoco",
     "FUSION_BOLT": "Infligge [50,SP] SPECIAL + 40 per fase di sinergia elettrica",
     "AURORA_VEIL": "Tutti gli alleati ricevono [5,10,15,SP] SHIELD e RUNE_PROTECT per 0.5 secondi",

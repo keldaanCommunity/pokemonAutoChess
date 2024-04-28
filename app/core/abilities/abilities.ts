@@ -161,13 +161,15 @@ export class BeatUpStrategy extends AbilityStrategy {
         pokemon,
         pokemon.team
       )
-      pokemon.simulation.addPokemon(
+      const entity = pokemon.simulation.addPokemon(
         houndour,
         coord.x,
         coord.y,
         pokemon.team,
         true
       )
+      entity.hp = Math.round(entity.hp * (1 + pokemon.ap / 100))
+      entity.life = Math.round(entity.hp * (1 + pokemon.ap / 100))
     }
   }
 }
@@ -6913,10 +6915,10 @@ export class SlashStrategy extends AbilityStrategy {
     const increasedCrit = crit
       ? crit
       : pokemon.stars === 3
-      ? chance(0.9)
-      : pokemon.stars === 2
-      ? chance(0.6)
-      : chance(0.3)
+        ? chance(0.9)
+        : pokemon.stars === 2
+          ? chance(0.6)
+          : chance(0.3)
     target.handleSpecialDamage(
       damage,
       board,
@@ -8469,7 +8471,7 @@ export class PowerWhipStrategy extends AbilityStrategy {
         id: pokemon.simulation.id,
         skill: Ability.POWER_WHIP,
         positionX: pokemon.positionX,
-        positionY: pokemon.positionY,
+        positionY: pokemon.positionY
       })
 
       const cells = board.getCellsBetween(

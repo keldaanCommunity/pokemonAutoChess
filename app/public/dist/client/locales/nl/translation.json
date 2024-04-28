@@ -907,7 +907,7 @@
     "PSYCHIC_SURGE": "Verhoog AP van alle PSYCHIC Pokemons met [5,SP]%, behalve de caster",
     "MIND_BLOWN": "Biedt [50,SP] % van de beoogde huidige HP aan als SPECIAL",
     "PAYDAY": "Aanbiedingen [30,60,120,SP] SPECIAL. Als het doelwit KO is, ontvangt de speler [1,2,3] goud",
-    "BEAT_UP": "Roep [1,2,3] Houndour op (geen items)",
+    "BEAT_UP": "Roep [1,2,3] Houndour op ([100,SP]% HP, geen items)",
     "BLUE_FLARE": "Veroorzaakt [50,SP] SPECIAL + 20 per fase van vuursynergie",
     "FUSION_BOLT": "Zorgt voor [50,SP] SPECIAL + 40 per fase elektrische synergie",
     "AURORA_VEIL": "Alle bondgenoten ontvangen [5,10,15,SP] SHIELD en RUNE_PROTECT gedurende 0.5 seconden",
