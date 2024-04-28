@@ -1815,7 +1815,7 @@
     "AQUATIC": "Los pokemon AQUATIC reducen la duración de las aflicciones de estado de todo tu equipo",
     "BUG": "Al comienzo del combate, se clonan tus Pokémon BUG más fuertes.",
     "FLYING": "Los Pokémon FLYING se van volando cuando caen por debajo de una cierta cantidad de HP.",
-    "FLORA": "Cuando el primer pokemon FLORA muera, una flor se levantará de su tumba...",
+    "FLORA": "Cuando el primer pokémon FLORA es KO, florece una flor. Recibe un objeto aleatorio de cada aliado FLORA KO.",
     "ROCK": "Los Pokémon ROCK ganan DEF y resisten mejor el daño crítico.",
     "GHOST": "Los pokémon GHOST tienen un 25% de probabilidad de SILENCE al golpear y aplicar varias maldiciones a los rivales al inicio del combate.",
     "FAIRY": "Los pokémon FAIRY, al asestar o recibir un golpe crítico, desatan una descarga al entrar en contacto cuerpo a cuerpo y hacen que sus objetivos se CHARM durante 2 segundos al entrar en contacto visual.",

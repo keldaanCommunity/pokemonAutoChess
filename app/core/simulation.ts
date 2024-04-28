@@ -47,8 +47,6 @@ export default class Simulation extends Schema implements ISimulation {
   board: Board = new Board(BOARD_HEIGHT, BOARD_WIDTH)
   finished = false
   flowerSpawn: boolean[] = [false, false]
-  flowerSpawnItemCount: number[] = [0 , 0]
-  flowerSpawnName: Pkm[] = [Pkm.ODDISH,Pkm.ODDISH]
   stageLevel = 0
   bluePlayer: Player | undefined
   redPlayer: Player | undefined
