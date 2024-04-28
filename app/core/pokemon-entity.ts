@@ -1144,36 +1144,47 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
               target.team,
               true
             )
-          } else if (target.effects.has(Effect.GLOOM_FLOWER)) {
+          } else {
+            if (target.effects.has(Effect.GLOOM_FLOWER)) {
+              target.simulation.flowerSpawnName[target.team] = Pkm.GLOOM
+            } else if (target.effects.has(Effect.VILE_FLOWER)) {
+              target.simulation.flowerSpawnName[target.team] = Pkm.VILEPLUME
+            } else {
+              target.simulation.flowerSpawnName[target.team] = Pkm.BELLOSSOM
+            }
+
+            const floraSpawn = PokemonFactory.createPokemonFromName(target.simulation.flowerSpawnName[target.team], target.player)
+
+            const randomItemIndex = Math.floor(Math.random() * target.items.size)
+            target.items.forEach((item, index) => {
+              if (index == randomItemIndex) {
+                floraSpawn.items.add(item)
+              }
+            })
+
+            target.simulation.flowerSpawnItemCount[target.team] += 1
+
             target.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(Pkm.GLOOM, target.player),
-              spawnSpot.x,
-              spawnSpot.y,
-              target.team,
-              true
+                floraSpawn,
+                spawnSpot.x,
+                spawnSpot.y,
+                target.team,
+                true
             )
-          } else if (target.effects.has(Effect.VILE_FLOWER)) {
-            target.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(
-                Pkm.VILEPLUME,
-                target.player
-              ),
-              spawnSpot.x,
-              spawnSpot.y,
-              target.team,
-              true
-            )
-          } else if (target.effects.has(Effect.SUN_FLOWER)) {
-            target.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(
-                Pkm.BELLOSSOM,
-                target.player
-              ),
-              spawnSpot.x,
-              spawnSpot.y,
-              target.team,
-              true
-            )
+          }
+        }
+      } else {
+        if (target.simulation.flowerSpawnItemCount[target.team]<3){
+          const floraSpawn = board.getPokemonOnBoard(target.simulation.flowerSpawnName[target.team], target.team)
+          if (floraSpawn) {
+            const randomItemIndex = Math.floor(Math.random() * target.items.size)
+            target.items.forEach((item, index) => {
+              if (index == randomItemIndex) {
+                floraSpawn.items.add(item)
+                floraSpawn.simulation.applyItemEffect(floraSpawn, item)
+              }
+            })
+            target.simulation.flowerSpawnItemCount[target.team] += 1
           }
         }
       }

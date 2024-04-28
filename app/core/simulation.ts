@@ -27,6 +27,7 @@ import Board from "./board"
 import Dps from "./dps"
 import DpsHeal from "./dps-heal"
 import { PokemonEntity, getStrongestUnit, getUnitScore } from "./pokemon-entity"
+import { Pkm } from "../types/enum/Pokemon"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -46,6 +47,8 @@ export default class Simulation extends Schema implements ISimulation {
   board: Board = new Board(BOARD_HEIGHT, BOARD_WIDTH)
   finished = false
   flowerSpawn: boolean[] = [false, false]
+  flowerSpawnItemCount: number[] = [0 , 0]
+  flowerSpawnName: Pkm[] = [Pkm.ODDISH,Pkm.ODDISH]
   stageLevel = 0
   bluePlayer: Player | undefined
   redPlayer: Player | undefined
