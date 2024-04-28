@@ -340,8 +340,6 @@ export default class Board {
     return getStrongestUnit(candidates)
   }
 
-  }
-
   getPokemonOnBoard(name: Pkm, team?: number): PokemonEntity | undefined {
     const candidates = this.cells.filter(
         (cell) => cell && (cell.team === team || team === undefined)
@@ -356,4 +354,5 @@ export default class Board {
 
     return searchedPokemon
   }
-}
+
+  }
