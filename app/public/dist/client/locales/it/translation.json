@@ -883,7 +883,7 @@
     "STUN_SPORE": "Causa [10,20,40,SP] SPECIAL e infligge PARALYSIS per 5 secondi ai nemici adiacenti",
     "METEOR_MASH": "Area di effetto attorno al bersaglio che infligge [30,50,70,SP] SPECIAL. Aumenta l'ATK dei pokemon di [5,SP].",
     "HURRICANE": "Attacco ad area che infligge [25,50,100,SP] SPECIAL in una linea dietro il bersaglio e provoca PARALYSIS per 4 secondi",
-    "HEAL_BLOCK": "Applica WOUND a tutti i nemici adiacenti per [5,10,15] secondi",
+    "HEAL_BLOCK": "Infligge [20,40,80,SP] SPECIAL e applica WOUND a tutti i nemici adiacenti per 5 secondi",
     "ROAR_OF_TIME": "Dai RESURECTION e [20,SP]% ATK_SPEED al tuo alleato più forte (la maggior parte degli oggetti > la maggior parte delle stelle > il più raro)",
     "ROCK_TOMB": "Attacco a bersaglio singolo che infligge [30,60,120,SP] SPECIAL e riduce l'ATK_SPEED bersaglio del [10,20,40]%",
     "ROCK_SMASH": "Attacco a bersaglio singolo che infligge [20,40,80,SP] bersaglio SPECIAL e SILENCE per [3,6,9] secondi",

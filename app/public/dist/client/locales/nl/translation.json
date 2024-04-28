@@ -882,7 +882,7 @@
     "STUN_SPORE": "Breng [10,20,40,SP] SPECIAL uit en geeft PARALYSIS gedurende 5 seconden aan aangrenzende vijanden",
     "METEOR_MASH": "Breng [30,50,70,SP] SPECIAL toe in een gebied rond het doelwit. Verbeter de gebruiker's ATK met [5,SP]",
     "HURRICANE": "Breng [25,50,100,SP] SPECIAL toe aan alle vijandelijke Pokémon achter het doelwit en pas de PARALYSIS status op ze toe voor 4 seconden",
-    "HEAL_BLOCK": "Pas de WOUND status toe op alle aangrenzende vijandelijke Pokémon gedurende [5,10,15] seconden",
+    "HEAL_BLOCK": "Breng [20,40,80,SP] SPECIAL en pas de WOUND status toe op alle aangrenzende vijandelijke Pokémon gedurende 5 seconden",
     "ROAR_OF_TIME": "Geef RESURECTION en [20,SP]% ATK_SPEED aan je sterkste bondgenoot (de meeste items > de meeste sterren > meest zeldzaam)",
     "ROCK_TOMB": "Breng [30,60,120,SP] SPECIAL toe aan het doelwit en verlaag hun ATK_SPEED met [10,20,40]%",
     "ROCK_SMASH": "Breng [20,40,80,SP] SPECIAL toe aan het doelwit en pas de SILENCE status toe voor [3,6,9] seconden",

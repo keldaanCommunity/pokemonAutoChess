@@ -2021,12 +2021,20 @@ export class HealBlockStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
 
-    const duration = [5000, 10000, 15000][pokemon.stars - 1] ?? 15000
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.status.triggerWound(duration, cell.value, pokemon)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit,
+          true
+        )
+        cell.value.status.triggerWound(5000, cell.value, pokemon)
       }
     })
   }
