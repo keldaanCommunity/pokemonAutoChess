@@ -29,8 +29,6 @@ import {
 import { clamp, min } from "../../utils/number"
 import {
   ItemCarouselStages,
-  UniqueShop,
-  LegendaryShop,
   PortalCarouselStages,
   SynergyTriggers,
   KECLEON_SHOP_COST
@@ -139,9 +137,7 @@ export class MiniGame {
           const item = this.items.get(itemBody.label)
 
           if (avatar?.itemId === "" && item?.avatarId === "") {
-            if (
-              room.state.specialGameRule === SpecialGameRule.KECLEONS_SHOP
-            ) {
+            if (room.state.specialGameRule === SpecialGameRule.KECLEONS_SHOP) {
               const player = room.state.players.get(avatar.id)
               const client = room.clients.find(
                 (cli) => cli.auth.uid === avatar.id
@@ -476,10 +472,13 @@ export class MiniGame {
         ...(this.symbolsByPortal.get(portalId) ?? []),
         symbol
       ])
-      setTimeout(() => {
-        symbol.index = Math.floor(i / portalIds.length)
-        symbol.portalId = portalId
-      }, 1500 + 1500 * (i / symbols.length))
+      setTimeout(
+        () => {
+          symbol.index = Math.floor(i / portalIds.length)
+          symbol.portalId = portalId
+        },
+        1500 + 1500 * (i / symbols.length)
+      )
     })
 
     // assign a map to each portal
@@ -596,8 +595,13 @@ export class MiniGame {
         const portal = this.portals.get(avatar.portalId)!
 
         player.map = portal.map
-        const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
-          isInRegion(p, portal.map) && getPokemonData(p).rarity === (state.stageLevel === PortalCarouselStages[0] ? Rarity.RARE : Rarity.EPIC)
+        const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter(
+          (p) =>
+            isInRegion(p, portal.map) &&
+            getPokemonData(p).rarity ===
+              (state.stageLevel === PortalCarouselStages[0]
+                ? Rarity.RARE
+                : Rarity.EPIC)
         )
         newRegionalPokemons.forEach((p) => {
           if (getPokemonData(p).stars === 1) {
@@ -613,7 +617,7 @@ export class MiniGame {
         )
 
         const symbols = this.symbolsByPortal.get(avatar.portalId) ?? []
-        const portalSynergies = symbols.map((s) => s.synergy)      
+        const portalSynergies = symbols.map((s) => s.synergy)
         state.shop.assignUniquePropositions(
           player,
           state.stageLevel,
