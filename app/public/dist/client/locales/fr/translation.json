@@ -1344,7 +1344,7 @@
     "FISSURE": "Ouvre [2,3,4] failles dans le sol. Chaque faille inflige [25,50,75,SP] SPECIAL",
     "ASSURANCE": "Inflige [25,50,100,SP] SPECIAL. Double dégâts si le lanceur a moins de 50% de ses HP.",
     "BRAVE_BIRD": "S'envole au loin en emportant sa cible avec lui et lui infligeant [30,60,90,SP] SPECIAL",
-    "MAGICAL_LEAF": "Disperse des feuilles magiques qui poursuivent la cible la plus éloignée, infligeant [10,20,40,SP] et ARMOR_REDUCTION pendant 3 secondes à tout ce qui se trouve sur son passage",
+    "MAGICAL_LEAF": "Disperse des feuilles magiques qui poursuivent la cible la plus éloignée, infligeant [10,20,40,SP] SPECIAL et ARMOR_REDUCTION pendant 3 secondes à tout ce qui se trouve sur son passage",
     "STEALTH_ROCKS": "Lance des pierres pointues dans un rayon de 2 cases devant le lanceur, infligeant [50,SP] SPECIAL. Les pierres restent sur le terrain et infligent 10 PHYSICAL par seconde et WOUND aux adversaires qui marchent dessus, s'il ne sont ni ROCK ni FLYING.",
     "TAIL_GLOW": "Inflige [30,SP] SPECIAL aux ennemis adjacents et augmente la AP du lanceur de 50%",
     "STRUGGLE_BUG": "Inflige [30,SP] SPECIAL aux ennemis adjacents et réduit leur AP de 50%",
