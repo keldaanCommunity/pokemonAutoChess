@@ -133,3 +133,4 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - New Scribble rule: Free Market
 - New keybiding for emotes: maintain Ctrl to show emote menu, Ctrl+1..9 to trigger emote 1..9
 - When moving a Ditto from board over a unit on bench, it now swaps units instead of cloning the unit
+- Shiny Mewtwo on round 15 now gives an item component in addition to the artifact

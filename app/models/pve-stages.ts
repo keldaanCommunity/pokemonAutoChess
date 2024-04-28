@@ -85,6 +85,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     getRewards(shiny: boolean, player: Player) {
       if (shiny) {
         return [
+          pickRandomIn(NonSpecialItemComponents),
           pickRandomIn(
             ArtificialItems.filter(
               (item) => player.artificialItems.includes(item) === false
