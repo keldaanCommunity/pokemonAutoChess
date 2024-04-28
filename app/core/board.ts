@@ -7,7 +7,6 @@ import { logger } from "../utils/logger"
 import { OrientationArray, OrientationVector } from "../utils/orientation"
 import { pickRandomIn } from "../utils/random"
 import { PokemonEntity, getStrongestUnit } from "./pokemon-entity"
-import { Pkm } from "../types/enum/Pokemon"
 
 export type Cell = {
   x: number
