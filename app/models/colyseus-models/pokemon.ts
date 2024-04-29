@@ -610,7 +610,7 @@ export class Onix extends Pokemon {
   atk = 9
   def = 10
   speDef = 5
-  maxPP = 70
+  maxPP = 100
   range = 1
   skill = Ability.SPIKE_ARMOR
   attackSprite = AttackSprite.ROCK_MELEE
@@ -625,7 +625,7 @@ export class Steelix extends Pokemon {
   atk = 14
   def = 20
   speDef = 5
-  maxPP = 70
+  maxPP = 100
   range = 1
   skill = Ability.SPIKE_ARMOR
   attackSprite = AttackSprite.ROCK_MELEE
@@ -639,7 +639,7 @@ export class MegaSteelix extends Pokemon {
   atk = 20
   def = 30
   speDef = 15
-  maxPP = 70
+  maxPP = 100
   range = 1
   skill = Ability.SPIKE_ARMOR
   attackSprite = AttackSprite.ROCK_MELEE
@@ -12382,10 +12382,10 @@ export class Dewpider extends Pokemon {
   stars = 1
   evolution = Pkm.ARAQUANID
   hp = 60
-  atk = 6
+  atk = 7
   def = 2
   speDef = 1
-  maxPP = 90
+  maxPP = 100
   range = 1
   skill = Ability.STICKY_WEB
   attackSprite = AttackSprite.BUG_MELEE
@@ -12397,11 +12397,11 @@ export class Araquanid extends Pokemon {
   additional = true
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 130
-  atk = 13
-  def = 3
+  hp = 150
+  atk = 16
+  def = 4
   speDef = 2
-  maxPP = 90
+  maxPP = 100
   range = 1
   skill = Ability.STICKY_WEB
   attackSprite = AttackSprite.BUG_MELEE
