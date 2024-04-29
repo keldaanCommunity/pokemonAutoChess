@@ -1436,7 +1436,7 @@
     "STEEL_SURGE": "Lidar com 33% do ATK como TRUE",
     "STEEL_SPIKE": "Lidar com 66% do ATK como TRUE",
     "CORKSCREW_CRASH": "Lidar com 100% do ATK como TRUE",
-    "MAX_MELTDOWN": "Lidar com 140% do ATK como TRUE",
+    "MAX_MELTDOWN": "Lidar com 130% do ATK como TRUE",
     "BAD_DREAMS": "A unidade adversária com o maior HP + SHIELD perde 50% dele e é FLINCH durante 7 segundos",
     "PHANTOM_FORCE": "Além disso, a unidade adversária com o maior ATK perde 50% dele e é PARALYSIS durante 7 segundos",
     "SHADOW_TAG": "Além disso, a unidade adversária com o maior AP perde 50% dele e é SILENCE durante 7 segundos",
