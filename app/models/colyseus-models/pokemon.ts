@@ -3439,8 +3439,8 @@ export class Prinplup extends Pokemon {
   evolution = Pkm.EMPOLEON
   hp = 130
   atk = 9
-  def = 3
-  speDef = 3
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.IRON_TAIL
@@ -3453,8 +3453,8 @@ export class Empoleon extends Pokemon {
   stars = 3
   hp = 240
   atk = 20
-  def = 3
-  speDef = 3
+  def = 5
+  speDef = 5
   maxPP = 100
   range = 1
   skill = Ability.IRON_TAIL

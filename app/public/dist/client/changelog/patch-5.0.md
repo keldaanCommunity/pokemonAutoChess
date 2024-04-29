@@ -75,6 +75,7 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - New ability for Croagunk line: Cross poison
 - Nerfed Tepig line: HP 80/140/220→70/140/210, Attack: 8/14/24→7/12/20, Def/Spedef: 3/5/7→2/4/6
 - Changed Aron line: Attack 4/8/16 → 4/9/19, Spedef: 2/4/6→2/3/5
+- Buffed Piplup line: Def & SpeDef: 3/3/3 → 3/4/5
 - Nerf Gligar line: PP 90 → 100
 - Buff Stun Spore: ~~5/10/20~~ 10/20/40 damage
 - Buff Pineco line: Def ~~3/5~~ 5/7
