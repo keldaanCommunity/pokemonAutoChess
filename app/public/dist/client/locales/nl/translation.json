@@ -1503,7 +1503,7 @@
     "AQUATIC": "AQUATIC pokemons verkorten de duur van statusaandoeningen voor je hele team",
     "BUG": "Aan het begin van het gevecht worden je sterkste BUG Pokémon gekloond",
     "FLYING": "FLYING pokemons vliegen weg als ze onder een bepaalde hoeveelheid HP vallen",
-    "FLORA": "Als de eerste FLORA pokemon dood is, zal er een bloem uit zijn graf opstaan...",
+    "FLORA": "Als de eerste FLORA pokemon KO is, bloeit er een bloem. Het ontvangt een willekeurig item van elke FLORA bondgenoot KO.",
     "ROCK": "ROCK pokemons krijgen DEF en zijn beter bestand tegen kritieke schade",
     "GHOST": "GHOST pokemons heeft 25% kans om te SILENCE bij een treffer en spreekt aan het begin van het gevecht verschillende vervloekingen uit over de tegenstander.",
     "FAIRY": "FAIRY-pokemons geven bij het uitdelen of ontvangen van een kritieke treffer een schok bij mêleecontact en maken hun doelwit 2 seconden lang CHARM bij oogcontact.",

@@ -40,7 +40,7 @@ import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
 import { distanceC } from "../utils/distance"
 import { clamp, max, min, roundTo2Digits } from "../utils/number"
-import { chance } from "../utils/random"
+import { chance, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import AttackingState from "./attacking-state"
 import Board from "./board"
@@ -1136,46 +1136,40 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           board
         )
         if (spawnSpot) {
-          if (target.effects.has(Effect.ODD_FLOWER)) {
-            target.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(Pkm.ODDISH, target.player),
-              spawnSpot.x,
-              spawnSpot.y,
-              target.team,
-              true
-            )
-          } else if (target.effects.has(Effect.GLOOM_FLOWER)) {
-            target.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(Pkm.GLOOM, target.player),
-              spawnSpot.x,
-              spawnSpot.y,
-              target.team,
-              true
-            )
+          let flowerSpawnName = Pkm.ODDISH
+          if (target.effects.has(Effect.GLOOM_FLOWER)) {
+            flowerSpawnName = Pkm.GLOOM
           } else if (target.effects.has(Effect.VILE_FLOWER)) {
-            target.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(
-                Pkm.VILEPLUME,
-                target.player
-              ),
-              spawnSpot.x,
-              spawnSpot.y,
-              target.team,
-              true
-            )
-          } else if (target.effects.has(Effect.SUN_FLOWER)) {
-            target.simulation.addPokemon(
-              PokemonFactory.createPokemonFromName(
-                Pkm.BELLOSSOM,
-                target.player
-              ),
-              spawnSpot.x,
-              spawnSpot.y,
-              target.team,
-              true
-            )
+            flowerSpawnName = Pkm.VILEPLUME
+          } else {
+            flowerSpawnName = Pkm.BELLOSSOM
           }
+
+          target.simulation.addPokemon(
+            PokemonFactory.createPokemonFromName(
+              flowerSpawnName,
+              target.player
+            ),
+            spawnSpot.x,
+            spawnSpot.y,
+            target.team,
+            true
+          )
         }
+      }
+
+      const floraSpawn = board.cells.find(
+        (entity) =>
+          entity &&
+          entity.team === target.team &&
+          [Pkm.ODDISH, Pkm.GLOOM, Pkm.VILEPLUME, Pkm.BELLOSSOM].includes(
+            entity.name
+          )
+      )
+      const randomItem = pickRandomIn(values(target.items))
+      if (floraSpawn && randomItem && floraSpawn.items.size < 3) {
+        floraSpawn.items.add(randomItem)
+        floraSpawn.simulation.applyItemEffect(floraSpawn, randomItem)
       }
     }
 

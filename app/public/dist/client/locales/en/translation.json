@@ -2077,7 +2077,7 @@
     "AQUATIC": "AQUATIC pokemons reduce the duration of status afflictions for all your team",
     "BUG": "At the start of the combat, your strongest BUG pokemons are cloned",
     "FLYING": "FLYING pokemons fly away when they fell under a certain amount of HP",
-    "FLORA": "When the first FLORA pokemon is dead, a flower will rise from its grave...",
+    "FLORA": "When the first FLORA pokemon is KO, a flower blossoms. It receives one random item from each FLORA ally KO.",
     "ROCK": "ROCK pokemons gain DEF and better resist to critical damage",
     "GHOST": "GHOST pokemons have 25% chance to SILENCE on hit and apply various curses on opponents at the start of the fight",
     "FAIRY": "FAIRY pokemons, upon dealing or receiving a critical hit, unleash a shock on melee contact and make their targets CHARM for 2 seconds on eye contact",

@@ -110,7 +110,6 @@ export default class Simulation extends Schema implements ISimulation {
         }
       })
     }
-
     ;[
       {
         team: blueTeam,
@@ -218,40 +217,40 @@ export default class Simulation extends Schema implements ISimulation {
     return playerId === this.bluePlayer?.id
       ? this.blueEffects
       : playerId === this.redPlayer?.id
-      ? this.redEffects
-      : undefined
+        ? this.redEffects
+        : undefined
   }
 
   getDpsMeter(playerId: string) {
     return playerId === this.bluePlayer?.id
       ? this.blueDpsMeter
       : playerId === this.redPlayer?.id
-      ? this.redDpsMeter
-      : undefined
+        ? this.redDpsMeter
+        : undefined
   }
 
   getHealDpsMeter(playerId: string) {
     return playerId === this.bluePlayer?.id
       ? this.blueHealDpsMeter
       : playerId === this.redPlayer?.id
-      ? this.redHealDpsMeter
-      : undefined
+        ? this.redHealDpsMeter
+        : undefined
   }
 
   getTeam(playerId: string) {
     return playerId === this.bluePlayer?.id
       ? this.blueTeam
       : playerId === this.redPlayer?.id
-      ? this.redTeam
-      : undefined
+        ? this.redTeam
+        : undefined
   }
 
   getOpponentTeam(playerId: string) {
     return playerId === this.bluePlayer?.id
       ? this.redTeam
       : playerId === this.redPlayer?.id
-      ? this.blueTeam
-      : undefined
+        ? this.blueTeam
+        : undefined
   }
 
   addPokemon(

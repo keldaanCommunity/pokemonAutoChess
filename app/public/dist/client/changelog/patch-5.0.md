@@ -103,6 +103,7 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Buff Ghost: status durations ~~5/5/5/5~~ 7/7/7/3 seconds
 - Fairy splash now can only inflict Charm if eye contact = the charm victim and origin are targeting each other
 - Nerf Flying 8: skydive damage ~~200%~~ 150%
+- Buff Flora: Oddish, Gloom, Vileplume and Bellossom are now able to receive items from KO Flora Pokémon
 
 # Changes to Items
 
