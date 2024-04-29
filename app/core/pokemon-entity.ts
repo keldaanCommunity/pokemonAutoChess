@@ -369,8 +369,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.life = max(this.hp)(this.life + value)
   }
 
-  addDodgeChance(value: number) {
-    this.dodge = max(0.9)(this.dodge + value)
+  addDodgeChance(value: number, apBoost = false) {
+    const boost = apBoost ? (value * this.ap) / 100 : 0
+    this.dodge = max(0.9)(this.dodge + boost)
   }
 
   addAbilityPower(value: number, apBoost = false) {

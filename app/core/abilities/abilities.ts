@@ -161,13 +161,15 @@ export class BeatUpStrategy extends AbilityStrategy {
         pokemon,
         pokemon.team
       )
-      pokemon.simulation.addPokemon(
+      const entity = pokemon.simulation.addPokemon(
         houndour,
         coord.x,
         coord.y,
         pokemon.team,
         true
       )
+      entity.hp = Math.round(entity.hp * (1 + pokemon.ap / 100))
+      entity.life = Math.round(entity.hp * (1 + pokemon.ap / 100))
     }
   }
 }
@@ -2019,12 +2021,20 @@ export class HealBlockStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
 
-    const duration = [5000, 10000, 15000][pokemon.stars - 1] ?? 15000
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.status.triggerWound(duration, cell.value, pokemon)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit,
+          true
+        )
+        cell.value.status.triggerWound(5000, cell.value, pokemon)
       }
     })
   }
@@ -5424,7 +5434,8 @@ export class HelpingHandStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const buffs = pokemon.stars === 3 ? 6 : pokemon.stars === 2 ? 4 : 2
+    const nbAlliesBuffed = 2
+    const shield = [30, 60, 100][pokemon.stars - 1] ?? 100
     const allies = new Array<{ pkm: PokemonEntity; distance: number }>()
     board.forEach((x, y, cell) => {
       if (cell && cell.team === pokemon.team && pokemon.id !== cell.id) {
@@ -5440,10 +5451,11 @@ export class HelpingHandStrategy extends AbilityStrategy {
       }
     })
     allies.sort((a, b) => a.distance - b.distance)
-    for (let i = 0; i < buffs; i++) {
+    for (let i = 0; i < nbAlliesBuffed; i++) {
       const ally = allies[i]?.pkm
       if (ally) {
         ally.status.doubleDamage = true
+        ally.addShield(shield, pokemon, true)
         ally.simulation.room.broadcast(Transfer.ABILITY, {
           id: pokemon.simulation.id,
           skill: Ability.HELPING_HAND,
@@ -5708,27 +5720,25 @@ export class MagnetRiseStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const cells = board
+    const nbAlliesBuffed = [2, 4, 6][pokemon.stars - 1] ?? 6
+    const alliesBuffed = (board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
-      .filter((cell) => cell.value && cell.value.team === pokemon.team)
-      .sort((a, b) => a.value!.life - b.value!.life)
+      .map(cell => cell.value)
+      .filter((mon) => mon && mon.team === pokemon.team) as PokemonEntity[])
+      .sort((a, b) => a.life - b.life)
+      .slice(0, nbAlliesBuffed) 
 
-    for (
-      let i = 0;
-      i < (pokemon.stars === 3 ? 6 : pokemon.stars === 2 ? 4 : 2);
-      i++
-    ) {
-      const cell = cells.shift()
-      if (cell && cell.value) {
-        cell.value.status.triggerProtect(2000)
-        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-          id: cell.value.simulation.id,
-          skill: Ability.MAGNET_RISE,
-          positionX: cell.value.positionX,
-          positionY: cell.value.positionY
-        })
-      }
-    }
+    alliesBuffed.push(pokemon)
+    alliesBuffed.forEach(ally => {
+      ally.status.triggerProtect(2000)
+      ally.addDodgeChance(0.1, true)
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: ally.simulation.id,
+        skill: Ability.MAGNET_RISE,
+        positionX: ally.positionX,
+        positionY: ally.positionY
+      })
+    })
   }
 }
 
@@ -5871,6 +5881,7 @@ export class TeeterDanceStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    pokemon.addAttackSpeed(20, true)
     board.cells
       .filter((v) => v !== undefined)
       .forEach((v) => v && v.status.triggerConfusion(3000, v))
@@ -6912,10 +6923,10 @@ export class SlashStrategy extends AbilityStrategy {
     const increasedCrit = crit
       ? crit
       : pokemon.stars === 3
-      ? chance(0.9)
-      : pokemon.stars === 2
-      ? chance(0.6)
-      : chance(0.3)
+        ? chance(0.9)
+        : pokemon.stars === 2
+          ? chance(0.6)
+          : chance(0.3)
     target.handleSpecialDamage(
       damage,
       board,
@@ -8468,7 +8479,7 @@ export class PowerWhipStrategy extends AbilityStrategy {
         id: pokemon.simulation.id,
         skill: Ability.POWER_WHIP,
         positionX: pokemon.positionX,
-        positionY: pokemon.positionY,
+        positionY: pokemon.positionY
       })
 
       const cells = board.getCellsBetween(
