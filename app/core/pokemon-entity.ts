@@ -1225,15 +1225,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }, 16) // delay to next tick, targeting 60 ticks per second
     }
 
-    if (this.passive === Passive.CORSOLA) {
+    if (this.passive === Passive.CORSOLA && this.player) {
       const galarCorsola = this.refToBoardPokemon.evolutionRule.evolve(
         this.refToBoardPokemon as Pokemon,
-        this.player!,
+        this.player,
         this.simulation.stageLevel
       )
       galarCorsola.evolutionRule.tryEvolve(
         galarCorsola,
-        this.player!,
+        this.player,
         this.simulation.stageLevel
       )
     }
