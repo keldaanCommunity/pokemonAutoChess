@@ -615,7 +615,9 @@ export class MiniGame {
             .concat(newRegionalPokemons)
             .filter((p, index, array) => array.indexOf(PkmFamily[p]) === index) // dedup same family
         )
+      }
 
+      if (player) {
         const symbols = this.symbolsByPortal.get(avatar.portalId) ?? []
         const portalSynergies = symbols.map((s) => s.synergy)
         state.shop.assignUniquePropositions(
