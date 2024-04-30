@@ -28,16 +28,6 @@ export function WikiDungeon() {
                 </div>
                 <img
                   src={`/assets/maps/${dungeon}-preview.png`}
-                  onMouseOver={(e) => {
-                    ;(
-                      e.target as HTMLImageElement
-                    ).src = `/assets/tilesets/${dungeon}/tileset_0.png`
-                  }}
-                  onMouseOut={(e) => {
-                    ;(
-                      e.target as HTMLImageElement
-                    ).src = `/assets/maps/${dungeon}-preview.png`
-                  }}
                   alt={dungeon}
                 />
               </li>
