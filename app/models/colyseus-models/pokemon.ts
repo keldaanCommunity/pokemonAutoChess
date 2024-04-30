@@ -5148,7 +5148,7 @@ export class Eevee extends Pokemon {
       Item.DAWN_STONE,
       Item.ICE_STONE
     ],
-    (pokemon: Pokemon, player: Player, item?: Item) => {
+    (pokemon, player, item) => {
       switch (item) {
         case Item.WATER_STONE:
           return Pkm.VAPOREON
@@ -5401,7 +5401,7 @@ function updateCastform(pokemon: Pokemon, weather: Weather, player: Player) {
   }
 
   if (pokemon.name === weatherForm) return
-  if(!player) return
+  if (!player) return
 
   const newPokemon = PokemonFactory.createPokemonFromName(weatherForm, player)
   pokemon.items.forEach((item) => {
@@ -8387,7 +8387,8 @@ export class Granbull extends Pokemon {
 const rksSystemEvolutionRule = (itemToExclude: Item | null) =>
   new ItemEvolutionRule(
     SynergyItems.filter((i) => i !== itemToExclude),
-    (pokemon: Pokemon, player: Player, item?: Item) => {
+    (pokemon, player, item_) => {
+      const item = item_ as Item | undefined
       switch (item) {
         case Item.OLD_AMBER:
           return Pkm.SILVALLY_FOSSIL
@@ -10331,7 +10332,8 @@ export class Tyrogue extends Pokemon {
   passive = Passive.TYROGUE
   attackSprite = AttackSprite.FIGHTING_MELEE
 
-  evolutionRule = new ItemEvolutionRule(AllItems, (pokemon, player, item) => {
+  evolutionRule = new ItemEvolutionRule(AllItems, (pokemon, player, item_) => {
+    const item = item_ as Item
     if (
       item === Item.CHARCOAL ||
       item === Item.MAGNET ||
