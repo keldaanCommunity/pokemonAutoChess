@@ -28,6 +28,7 @@ import { clamp } from "../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
+import PokemonFactory from "./pokemon-factory"
 import { PRECOMPUTED_POKEMONS_PER_RARITY, getPokemonData } from "./precomputed"
 import { PVEStages } from "./pve-stages"
 
@@ -145,7 +146,7 @@ export default class Shop {
 
   releasePokemon(pkm: Pkm, player: Player) {
     const { stars, rarity, regional } = getPokemonData(pkm)
-    const family = PkmFamily[pkm]
+    const baseEvolution = PokemonFactory.getPokemonBaseEvolution(pkm)
     let entityNumber = stars >= 3 ? 9 : stars === 2 ? 3 : 1
     const duo = Object.entries(PkmDuos).find(([_key, duo]) => duo.includes(pkm))
     if (duo) {
@@ -159,7 +160,7 @@ export default class Shop {
       : this.getPool(rarity)
     if (pool) {
       for (let n = 0; n < entityNumber; n++) {
-        pool.push(family)
+        pool.push(baseEvolution)
       }
     }
   }
