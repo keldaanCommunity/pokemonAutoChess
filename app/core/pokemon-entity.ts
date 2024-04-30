@@ -1142,7 +1142,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             flowerSpawnName = Pkm.GLOOM
           } else if (target.effects.has(Effect.VILE_FLOWER)) {
             flowerSpawnName = Pkm.VILEPLUME
-          } else {
+          } else if (target.effects.has(Effect.SUN_FLOWER)) {
             flowerSpawnName = Pkm.BELLOSSOM
           }
 
