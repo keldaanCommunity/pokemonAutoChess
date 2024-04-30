@@ -586,38 +586,35 @@ export class MiniGame {
         }
       }
 
-      if (
-        avatar.portalId &&
-        this.portals?.has(avatar.portalId) &&
-        player &&
-        PortalCarouselStages.includes(state.stageLevel)
-      ) {
-        const portal = this.portals.get(avatar.portalId)!
+      if (player && PortalCarouselStages.includes(state.stageLevel)) {
+        if (avatar.portalId && this.portals?.has(avatar.portalId)) {
+          const portal = this.portals.get(avatar.portalId)!
 
-        player.map = portal.map
-        const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter(
-          (p) =>
-            isInRegion(p, portal.map) &&
-            getPokemonData(p).rarity ===
-              (state.stageLevel === PortalCarouselStages[0]
-                ? Rarity.RARE
-                : Rarity.EPIC)
-        )
-        newRegionalPokemons.forEach((p) => {
-          if (getPokemonData(p).stars === 1) {
-            state.shop.addRegionalPokemon(p, player)
-          }
-        })
+          player.map = portal.map
+          const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter(
+            (p) =>
+              isInRegion(p, portal.map) &&
+              getPokemonData(p).rarity ===
+                (state.stageLevel === PortalCarouselStages[0]
+                  ? Rarity.RARE
+                  : Rarity.EPIC)
+          )
+          newRegionalPokemons.forEach((p) => {
+            if (getPokemonData(p).stars === 1) {
+              state.shop.addRegionalPokemon(p, player)
+            }
+          })
 
-        resetArraySchema(
-          player.regionalPokemons,
-          player.regionalPokemons
-            .concat(newRegionalPokemons)
-            .filter((p, index, array) => array.indexOf(PkmFamily[p]) === index) // dedup same family
-        )
-      }
+          resetArraySchema(
+            player.regionalPokemons,
+            player.regionalPokemons
+              .concat(newRegionalPokemons)
+              .filter(
+                (p, index, array) => array.indexOf(PkmFamily[p]) === index
+              ) // dedup same family
+          )
+        }
 
-      if (player) {
         const symbols = this.symbolsByPortal.get(avatar.portalId) ?? []
         const portalSynergies = symbols.map((s) => s.synergy)
         state.shop.assignUniquePropositions(
