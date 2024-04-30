@@ -5401,6 +5401,7 @@ function updateCastform(pokemon: Pokemon, weather: Weather, player: Player) {
   }
 
   if (pokemon.name === weatherForm) return
+  if(!player) return
 
   const newPokemon = PokemonFactory.createPokemonFromName(weatherForm, player)
   pokemon.items.forEach((item) => {
@@ -5427,7 +5428,10 @@ export class Castform extends Pokemon {
   passive = Passive.CASTFORM
   attackSprite = AttackSprite.PSYCHIC_RANGE
 
-  beforeSimulationStart({ weather, player }) {
+  beforeSimulationStart({
+    weather,
+    player
+  }: { weather: Weather; player: Player }) {
     updateCastform(this, weather, player)
   }
 }
@@ -5450,7 +5454,10 @@ export class CastformSun extends Pokemon {
   passive = Passive.CASTFORM
   attackSprite = AttackSprite.DRAGON_RANGE
 
-  beforeSimulationStart({ weather, player }) {
+  beforeSimulationStart({
+    weather,
+    player
+  }: { weather: Weather; player: Player }) {
     updateCastform(this, weather, player)
   }
 }
@@ -5473,7 +5480,10 @@ export class CastformRain extends Pokemon {
   passive = Passive.CASTFORM
   attackSprite = AttackSprite.WATER_RANGE
 
-  beforeSimulationStart({ weather, player }) {
+  beforeSimulationStart({
+    weather,
+    player
+  }: { weather: Weather; player: Player }) {
     updateCastform(this, weather, player)
   }
 }
@@ -5496,7 +5506,10 @@ export class CastformHail extends Pokemon {
   passive = Passive.CASTFORM
   attackSprite = AttackSprite.ICE_RANGE
 
-  beforeSimulationStart({ weather, player }) {
+  beforeSimulationStart({
+    weather,
+    player
+  }: { weather: Weather; player: Player }) {
     updateCastform(this, weather, player)
   }
 }

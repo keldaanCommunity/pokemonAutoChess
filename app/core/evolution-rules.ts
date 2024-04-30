@@ -12,7 +12,7 @@ import { values } from "../utils/schemas"
 type DivergentEvolution = (
   pokemon: Pokemon,
   player: Player,
-  ...aditionalArgs: any[]
+  ...aditionalArgs: unknown[]
 ) => Pkm
 
 export abstract class EvolutionRule {
@@ -169,7 +169,7 @@ export class ItemEvolutionRule extends EvolutionRule {
 
   constructor(
     itemsTriggeringEvolution: Item[],
-    divergentEvolution?: (pokemon: Pokemon, player: Player, item: Item) => Pkm
+    divergentEvolution?: DivergentEvolution
   ) {
     super(divergentEvolution)
     this.itemsTriggeringEvolution = itemsTriggeringEvolution
