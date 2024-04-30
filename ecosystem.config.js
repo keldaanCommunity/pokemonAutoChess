@@ -12,7 +12,8 @@ module.exports = {
         wait_ready  : true,
         env_production: {
             NODE_ENV: "production"
-        }
+        },
+        interpreter: "node@20.12.2"
     }],  
     deploy : {  
       production : {  

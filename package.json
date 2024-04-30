@@ -5,7 +5,7 @@
   "keywords": [],
   "license": "BSD-3-Clause",
   "engines": {
-    "node": "20.12.0",
+    "node": "20.12.2",
     "npm": "10.5.0"
   },
   "homepage": "https://github.com/keldaanCommunity/pokemonAutoChess#readme",
@@ -39,7 +39,8 @@
     "postinstall": "npm run download-music && cd edit/assetpack && npm install",
     "assetpack": "cd edit/assetpack && npm run assetpack",
     "precompute": "cd gen && ts-node precompute-all.ts",
-    "colyseus-post-deploy": "npx colyseus-post-deploy"
+    "colyseus-post-deploy": "npx colyseus-post-deploy",
+    "deploy-live": "pm2 deploy production update"
   },
   "dependencies": {
     "@colyseus/command": "^0.2.1",
