@@ -75,6 +75,8 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - New ability for Croagunk line: Cross poison
 - Nerfed Tepig line: HP 80/140/220→70/140/210, Attack: 8/14/24→7/12/20, Def/Spedef: 3/5/7→2/4/6
 - Changed Aron line: Attack 4/8/16 → 4/9/19, Spedef: 2/4/6→2/3/5
+- Buffed Piplup line: Def & SpeDef: 3/3/3 → 3/4/5
+- Nerf Onix line: PP 70 → 100
 - Nerf Gligar line: PP 90 → 100
 - Buff Stun Spore: ~~5/10/20~~ 10/20/40 damage
 - Buff Pineco line: Def ~~3/5~~ 5/7
@@ -94,6 +96,7 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Buff Vileplume: Attack 20 → 24
 - Buff Starly line: Attack ~~8/16/24~~ 9/18/28
 - Buff Servine: Attack 11 → 13
+- Buff Dewpider line: HP: 60/130 → 70/150, Attack: 6/13→7/16, Def: 2/3 → 2/4, PP: 90 → 100
 - Added AP scaling to Tether Dance (Spinda): user gain *20%* attack speed
 - Added AP scaling to Beat up (Houndour): Summon 1/2/3 Houndour with *100%* HP
 - Added AP scaling to Heal Block (Cacnea): deal *20/40/80* special damage to adjacent enemies and wound them for 5 seconds
@@ -108,6 +111,7 @@ Each player now starts on a different map. Portals now makes you travel to new l
 - Buff Ghost: status durations ~~5/5/5/5~~ 7/7/7/3 seconds
 - Fairy splash now can only inflict Charm if eye contact = the charm victim and origin are targeting each other
 - Nerf Flying 8: skydive damage ~~200%~~ 150%
+- Nerf Steel 8: ~~140%~~ 130% true damage
 - Buff Flora: Oddish, Gloom, Vileplume and Bellossom are now able to receive items from KO Flora Pokémon
 
 # Changes to Items
