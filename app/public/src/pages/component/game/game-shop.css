@@ -187,7 +187,6 @@
 .game-experience .progress-bar > .my-progress {
   overflow: hidden;
   height: 100%;
-  background-color: var(--color-bg-primary);
 }
 
 #game-shop-info {

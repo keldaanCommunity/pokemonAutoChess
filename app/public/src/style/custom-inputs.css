@@ -276,7 +276,7 @@ input[type="checkbox"].is-dark:checked:focus + span::before {
 }
 
 .my-progress::-moz-progress-bar {
-  background-color: var(--color-bg-secondary);
+  background-color: var(--color-bg-accent);
 }
 
 .my-progress::-ms-fill {
