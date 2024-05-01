@@ -2042,7 +2042,6 @@ export class AlolanMarowak extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.BONEMERANG
-  additional = true
   regional = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
