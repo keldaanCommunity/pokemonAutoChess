@@ -112,7 +112,7 @@ export default class Player extends Schema implements IPlayer {
     this.map = pickRandomIn(DungeonPMDO)
     const initialRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter(
       (p) =>
-        isInRegion(p, this.map) && getPokemonData(p).rarity === Rarity.UNCOMMON
+        isInRegion(p, this.map, state) && getPokemonData(p).rarity === Rarity.UNCOMMON
     )
     resetArraySchema(
       this.regionalPokemons,
@@ -289,7 +289,7 @@ export default class Player extends Schema implements IPlayer {
         lostArtificialItems.forEach((item) => {
           if (pokemon.items.has(item)) {
             pokemon.items.delete(item)
-            if (SynergyGivenByItem.hasOwnProperty(item)) {
+            if (item in SynergyGivenByItem) {
               const type = SynergyGivenByItem[item]
               const nativeTypes = getPokemonData(pokemon.name).types
               if (nativeTypes.includes(type) === false) {

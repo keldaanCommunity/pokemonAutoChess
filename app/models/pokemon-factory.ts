@@ -1,4 +1,5 @@
 import { MapSchema } from "@colyseus/schema"
+import GameState from "../rooms/states/game-state"
 import { Emotion, IPlayer } from "../types"
 import { RarityCost } from "../types/Config"
 import { DungeonDetails, DungeonPMDO } from "../types/enum/Dungeon"
@@ -206,15 +207,26 @@ export function isAdditionalPick(pkm: Pkm): boolean {
   return getPokemonData(pkm).additional
 }
 
-export function isInRegion(pkm: Pkm, map: DungeonPMDO) {
+export function isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
   const regionSynergies = DungeonDetails[map]?.synergies
-  if (pkm === Pkm.ALOLAN_MAROWAK) return regionSynergies.includes(Synergy.FIRE)
+  if (pkm === Pkm.ALOLAN_MAROWAK)
+    return (
+      state.additionalPokemons.includes(Pkm.CUBONE) &&
+      regionSynergies.includes(Synergy.FIRE)
+    )
+
   if (pkm === Pkm.ALOLAN_RAICHU)
     return regionSynergies.includes(Synergy.PSYCHIC)
+
   if (pkm === Pkm.ALOLAN_EXEGGUTOR)
-    return regionSynergies.includes(Synergy.DRAGON)
+    return (
+      state.additionalPokemons.includes(Pkm.EXEGGCUTE) &&
+      regionSynergies.includes(Synergy.DRAGON)
+    )
+
   if (pkm === Pkm.HISUIAN_TYPHLOSION)
     return regionSynergies.includes(Synergy.GHOST)
+
   if (pkm === Pkm.BURMY_PLANT) return regionSynergies.includes(Synergy.GRASS)
   if (pkm === Pkm.BURMY_SANDY) return regionSynergies.includes(Synergy.GROUND)
   if (pkm === Pkm.BURMY_TRASH)
@@ -222,8 +234,8 @@ export function isInRegion(pkm: Pkm, map: DungeonPMDO) {
 
   /* Nidoran male and female are split in different regions */
   const index = Object.values(DungeonPMDO).indexOf(map)
-  if(pkm === Pkm.NIDORANM) return index % 2 === 0
-  if(pkm === Pkm.NIDORANF) return index % 2 === 1
+  if (pkm === Pkm.NIDORANM) return index % 2 === 0
+  if (pkm === Pkm.NIDORANF) return index % 2 === 1
 
   return regionSynergies.some((s) => getPokemonData(pkm).types.includes(s))
 }
