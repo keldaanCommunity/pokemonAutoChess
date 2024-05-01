@@ -112,7 +112,8 @@ export default class Player extends Schema implements IPlayer {
     this.map = pickRandomIn(DungeonPMDO)
     const initialRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter(
       (p) =>
-        isInRegion(p, this.map, state) && getPokemonData(p).rarity === Rarity.UNCOMMON
+        isInRegion(p, this.map, state) &&
+        [Rarity.COMMON, Rarity.UNCOMMON].includes(getPokemonData(p).rarity)
     )
     resetArraySchema(
       this.regionalPokemons,
