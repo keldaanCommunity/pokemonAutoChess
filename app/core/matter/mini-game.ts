@@ -593,7 +593,7 @@ export class MiniGame {
           player.map = portal.map
           const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter(
             (p) =>
-              isInRegion(p, portal.map) &&
+              isInRegion(p, portal.map, state) &&
               getPokemonData(p).rarity ===
                 (state.stageLevel === PortalCarouselStages[0]
                   ? Rarity.RARE

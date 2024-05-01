@@ -11046,7 +11046,6 @@ export class AlolanExeggutor extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.EGGSPLOSION
-  additional = true
   regional = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
