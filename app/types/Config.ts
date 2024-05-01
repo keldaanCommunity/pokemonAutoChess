@@ -297,8 +297,7 @@ export const LegendaryShop = new Array<PkmProposition>(
   Pkm.THUNDURUS,
   Pkm.LANDORUS,
   Pkm.ENAMORUS,
-  Pkm.MAGEARNA,
-  Pkm.DEOXYS
+  Pkm.MAGEARNA
 )
 
 export const NB_UNIQUE_PROPOSITIONS = 6
