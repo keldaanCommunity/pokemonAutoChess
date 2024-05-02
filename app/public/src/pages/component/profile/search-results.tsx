@@ -24,7 +24,7 @@ export default function SearchResults() {
               src={getAvatarSrc(suggestion.avatar)}
               className="pokemon-portrait"
             />
-            <p>{suggestion.name}</p>
+            <span>{suggestion.name}</span>
           </li>
         ))}
       </ul>
