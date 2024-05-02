@@ -303,14 +303,15 @@ export class OnRoomNameCommand extends Command<
     message: string
   }
 > {
-  execute({ client, message }) {
+  execute({ client, message: roomName }) {
+    roomName = cleanProfanity(roomName)
     try {
       if (
         client.auth?.uid == this.state.ownerId &&
-        this.state.name != message
+        this.state.name != roomName
       ) {
-        this.room.setName(message)
-        this.state.name = message
+        this.room.setName(roomName)
+        this.state.name = roomName
       }
     } catch (error) {
       logger.error(error)
