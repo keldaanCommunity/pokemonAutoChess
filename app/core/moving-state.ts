@@ -21,7 +21,10 @@ export default class MovingState extends PokemonState {
     super.update(pokemon, dt, board, weather, player)
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = 500 / getMoveSpeed(pokemon, weather)
-      const targetAtRange = this.getNearestTargetAtRange(pokemon, board)
+      const targetAtRange = this.getNearestTargetAtRangeCoordinates(
+        pokemon,
+        board
+      )
       if (pokemon.status.charm) {
         if (
           pokemon.status.charmOrigin &&
@@ -40,12 +43,12 @@ export default class MovingState extends PokemonState {
       } else if (targetAtRange) {
         pokemon.toAttackingState()
       } else {
-        const targetAtSight = this.getNearestTargetAtSight(pokemon, board)
+        const targetAtSight = this.getNearestTargetAtSightCoordinates(
+          pokemon,
+          board
+        )
         if (targetAtSight) {
-          this.move(pokemon, board, {
-            x: targetAtSight.positionX,
-            y: targetAtSight.positionY
-          })
+          this.move(pokemon, board, targetAtSight)
         }
       }
     } else {

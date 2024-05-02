@@ -554,15 +554,15 @@ export default class PokemonState {
 
   onExit(pokemon: PokemonEntity) {}
 
-  /* NOTE: getNearestTargetAtRange require another algorithm that getNearestTargetCoordinate
+  /* NOTE: getNearestTargetAtRangeCoordinates require another algorithm that getNearestTargetCoordinate
   because it used Chebyshev distance instead of Manhattan distance
   more info here: https://discord.com/channels/737230355039387749/1183398539456413706 */
-  getNearestTargetAtRange(
+  getNearestTargetAtRangeCoordinates(
     pokemon: PokemonEntity,
     board: Board
-  ): PokemonEntity | undefined {
+  ): { x: number; y: number } | undefined {
     let distance = 999
-    let candidates: PokemonEntity[] = []
+    let candidatesCoordinates: { x: number; y: number }[] = []
     for (
       let x = min(0)(pokemon.positionX - pokemon.range);
       x <= max(board.columns - 1)(pokemon.positionX + pokemon.range);
@@ -587,26 +587,29 @@ export default class PokemonState {
           )
           if (candidateDistance < distance) {
             distance = candidateDistance
-            candidates = [value]
+            candidatesCoordinates = [{ x, y }]
           } else if (candidateDistance == distance) {
-            candidates.push(value)
+            candidatesCoordinates.push({ x, y })
           }
         }
       }
     }
-    if (candidates.length > 0) {
-      return pickRandomIn(candidates)
+    if (candidatesCoordinates.length > 0) {
+      return pickRandomIn(candidatesCoordinates)
     } else {
       return undefined
     }
   }
 
-  getNearestTargetAtSight(
+  getNearestTargetAtSightCoordinates(
     pokemon: PokemonEntity,
     board: Board
-  ): PokemonEntity | undefined {
+  ): { x: number; y: number } | undefined {
     let distance = 999
-    let candidates: PokemonEntity[] = []
+    let candidatesCoordinates: { x: number; y: number }[] = new Array<{
+      x: number
+      y: number
+    }>()
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (
@@ -622,14 +625,14 @@ export default class PokemonState {
         )
         if (candidateDistance < distance) {
           distance = candidateDistance
-          candidates = [value]
+          candidatesCoordinates = [{ x, y }]
         } else if (candidateDistance == distance) {
-          candidates.push(value)
+          candidatesCoordinates.push({ x, y })
         }
       }
     })
-    if (candidates.length > 0) {
-      return pickRandomIn(candidates)
+    if (candidatesCoordinates.length > 0) {
+      return pickRandomIn(candidatesCoordinates)
     } else {
       return undefined
     }
