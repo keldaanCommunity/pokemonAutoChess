@@ -29,7 +29,7 @@ export default function WikiPokemons() {
     if (selectedPkm) {
       setTabIndex(tabs.indexOf(getPokemonData(selectedPkm).rarity))
     }
-  }, [selectedPkm])
+  }, [selectedPkm, tabs])
 
   return (
     <Tabs
@@ -77,7 +77,7 @@ export default function WikiPokemons() {
 export function WikiPokemon(props: {
   rarity: Rarity
   selected: Pkm | ""
-  onSelect: (pkm: Pkm) => any
+  onSelect: (pkm: Pkm) => void
 }) {
   const pokemons = useMemo(
     () =>
