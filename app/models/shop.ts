@@ -144,6 +144,24 @@ export default class Shop {
     }
   }
 
+  resetRegionalPool(player: Player) {
+    player.commonRegionalPool = player.commonRegionalPool.filter(
+      (p) => getPokemonData(p).regional === false
+    )
+    player.uncommonRegionalPool = player.uncommonRegionalPool.filter(
+      (p) => getPokemonData(p).regional === false
+    )
+    player.rareRegionalPool = player.rareRegionalPool.filter(
+      (p) => getPokemonData(p).regional === false
+    )
+    player.epicRegionalPool = player.epicRegionalPool.filter(
+      (p) => getPokemonData(p).regional === false
+    )
+    player.ultraRegionalPool = player.ultraRegionalPool.filter(
+      (p) => getPokemonData(p).regional === false
+    )
+  }
+
   releasePokemon(pkm: Pkm, player: Player) {
     const { stars, rarity, regional } = getPokemonData(pkm)
     const baseEvolution = PokemonFactory.getPokemonBaseEvolution(pkm)

@@ -2247,6 +2247,10 @@ export class HisuiSliggoo extends Pokemon {
   skill = Ability.SHELTER
   attackSprite = AttackSprite.STEEL_MELEE
   regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.STEEL)
+  }
 }
 
 export class HisuiGoodra extends Pokemon {
@@ -2266,6 +2270,10 @@ export class HisuiGoodra extends Pokemon {
   skill = Ability.SHELTER
   attackSprite = AttackSprite.STEEL_MELEE
   regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.STEEL)
+  }
 }
 
 export class Lotad extends Pokemon {
@@ -7858,7 +7866,7 @@ export class Growlithe extends Pokemon {
   isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
-      regionSynergies.includes(Synergy.FIRE) &&
+      regionSynergies.includes(Synergy.FIELD) &&
       !regionSynergies.includes(Synergy.ROCK)
     )
   }
@@ -7904,7 +7912,7 @@ export class HisuiGrowlithe extends Pokemon {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
       regionSynergies.includes(Synergy.ROCK) &&
-      !regionSynergies.includes(Synergy.FIRE)
+      !regionSynergies.includes(Synergy.FIELD)
     )
   }
 }
