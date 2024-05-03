@@ -5727,15 +5727,17 @@ export class MagnetRiseStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit, true)
     const nbAlliesBuffed = [2, 4, 6][pokemon.stars - 1] ?? 6
-    const alliesBuffed = (board
-      .getAdjacentCells(pokemon.positionX, pokemon.positionY)
-      .map(cell => cell.value)
-      .filter((mon) => mon && mon.team === pokemon.team) as PokemonEntity[])
+    const alliesBuffed = (
+      board
+        .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+        .map((cell) => cell.value)
+        .filter((mon) => mon && mon.team === pokemon.team) as PokemonEntity[]
+    )
       .sort((a, b) => a.life - b.life)
-      .slice(0, nbAlliesBuffed) 
+      .slice(0, nbAlliesBuffed)
 
     alliesBuffed.push(pokemon)
-    alliesBuffed.forEach(ally => {
+    alliesBuffed.forEach((ally) => {
       ally.status.triggerProtect(2000)
       ally.addDodgeChance(0.1, true)
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
@@ -8515,6 +8517,32 @@ export class PowerWhipStrategy extends AbilityStrategy {
   }
 }
 
+export class DarkHarvestStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const duration =
+      pokemon.stars === 3 ? 6500 : pokemon.stars === 2 ? 4500 : 2500
+
+    const mostSurroundedCoordinate =
+      state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
+
+    if (mostSurroundedCoordinate) {
+      pokemon.moveTo(
+        mostSurroundedCoordinate.x,
+        mostSurroundedCoordinate.y,
+        board
+      )
+      pokemon.status.triggerDarkHarvest(duration)
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -8834,5 +8862,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PSYSHIELD_BASH]: new PsyshieldBashStrategy(),
   [Ability.QUIVER_DANCE]: new QuiverDanceStrategy(),
   [Ability.TORCH_SONG]: new TorchSongStrategy(),
-  [Ability.POWER_WHIP]: new PowerWhipStrategy()
+  [Ability.POWER_WHIP]: new PowerWhipStrategy(),
+  [Ability.DARK_HARVEST]: new DarkHarvestStrategy()
 }

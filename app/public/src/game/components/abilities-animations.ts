@@ -1,3 +1,4 @@
+import { Geom } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { Ability } from "../../../../types/enum/Ability"
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
@@ -136,12 +137,12 @@ export function displayAbility(
     case Ability.POWER_WHIP:
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
-  
+
     case "POWER_WHIP/hit":
       addAbilitySprite("POWER_WHIP/hit", coordinates, true).setScale(3)
       break
-    
-      case Ability.LEECH_SEED:
+
+    case Ability.LEECH_SEED:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
@@ -1984,6 +1985,45 @@ export function displayAbility(
 
     case Ability.SHEER_COLD:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
+    case Ability.DARK_HARVEST:
+      {
+        const darkHarvestGroup = scene.add.group()
+        const [x, y] = transformAttackCoordinate(positionX, positionY, flip)
+
+        for (let i = 0; i < 5; i++) {
+          const darkHarvestSprite = scene.add
+            .sprite(0, 0, "abilities", `${Ability.DARK_HARVEST}/000.png`)
+            .setScale(2)
+          darkHarvestSprite.anims.play({
+            key: Ability.DARK_HARVEST,
+            frameRate: 8
+          })
+          darkHarvestGroup.add(darkHarvestSprite)
+        }
+
+        const circle = new Geom.Circle(x, y, 48)
+        Phaser.Actions.PlaceOnCircle(darkHarvestGroup.getChildren(), circle)
+
+        scene.tweens.add({
+          targets: circle,
+          radius: 96,
+          ease: Phaser.Math.Easing.Quartic.Out,
+          duration: 1000,
+          onUpdate: function (tween) {
+            Phaser.Actions.RotateAroundDistance(
+              darkHarvestGroup.getChildren(),
+              { x, y },
+              0.08,
+              circle.radius
+            )
+          },
+          onComplete: function () {
+            darkHarvestGroup.destroy(true, true)
+          }
+        })
+      }
       break
 
     case "FIELD_DEATH":

@@ -1738,13 +1738,14 @@ export class Deino extends Pokemon {
   stars = 1
   evolution = Pkm.ZWEILOUS
   hp = 80
-  atk = 5
-  def = 1
-  speDef = 1
-  maxPP = 100
+  atk = 6
+  def = 2
+  speDef = 2
+  maxPP = 50
   range = 2
-  skill = Ability.DEFAULT
-  attackSprite = AttackSprite.FIRE_RANGE
+  skill = Ability.DARK_HARVEST
+  attackSprite = AttackSprite.DARK_RANGE
+  regional = true
 }
 
 export class Zweilous extends Pokemon {
@@ -1752,28 +1753,30 @@ export class Zweilous extends Pokemon {
   rarity = Rarity.RARE
   stars = 2
   evolution = Pkm.HYDREIGON
-  hp = 120
-  atk = 9
-  def = 1
-  speDef = 1
+  hp = 130
+  atk = 12
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 2
-  skill = Ability.DEFAULT
-  attackSprite = AttackSprite.FIRE_RANGE
+  skill = Ability.DARK_HARVEST
+  attackSprite = AttackSprite.DARK_RANGE
+  regional = true
 }
 
 export class Hydreigon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.DRAGON])
   rarity = Rarity.RARE
   stars = 3
-  hp = 220
-  atk = 18
-  def = 1
-  speDef = 1
+  hp = 230
+  atk = 22
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 2
-  skill = Ability.DEFAULT
-  attackSprite = AttackSprite.FIRE_RANGE
+  skill = Ability.DARK_HARVEST
+  attackSprite = AttackSprite.DARK_RANGE
+  regional = true
 }
 
 export class Poliwag extends Pokemon {

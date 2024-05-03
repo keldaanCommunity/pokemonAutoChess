@@ -541,20 +541,6 @@ export default class BattleManager {
                 this.flip
               )
             }
-          } else if (field == "powerWhipCount") {
-            if (value != 0) {
-              displayAbility(
-                this.scene,
-                [],
-                "POWER_WHIP/hit",
-                pkm.orientation,
-                pkm.positionX,
-                pkm.positionY,
-                pkm.targetX ?? -1,
-                pkm.targetY ?? -1,
-                this.flip
-              )
-            }
           } else if (field == "moneyCount") {
             if (value > 0) {
               this.moneyAnimation(pkm.x, pkm.y, value - previousValue)
@@ -1161,8 +1147,8 @@ export default class BattleManager {
         type === AttackType.PHYSICAL
           ? "#e76e55"
           : type === AttackType.SPECIAL
-          ? "#209cee"
-          : "#f7d51d"
+            ? "#209cee"
+            : "#f7d51d"
       this.displayTween(color, coordinates, index, damage)
       this.displayHit(coordinates[0], coordinates[1])
     }
@@ -1198,12 +1184,12 @@ export default class BattleManager {
       amount < 10
         ? "20px"
         : amount < 20
-        ? "25px"
-        : amount < 30
-        ? "30px"
-        : amount < 50
-        ? "35px"
-        : "40px"
+          ? "25px"
+          : amount < 30
+            ? "30px"
+            : amount < 50
+              ? "35px"
+              : "40px"
     const textStyle = {
       fontSize: fontSize,
       fontFamily: "Verdana",
