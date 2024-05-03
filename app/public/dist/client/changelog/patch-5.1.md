@@ -10,6 +10,8 @@
 - Grimer is now regional and can be found in maps with Monster synergy. Alolan Grimer and Grimer cannot be found in the same region.
 - All Burmy/Wormadam forms are now considered of the same family
 - Cutiefly is now in regional pool
+- Slowpoke is now Water/Psychic
+- Corphish is now Aquatic/Dark
 
 # Changes to Synergies
 
