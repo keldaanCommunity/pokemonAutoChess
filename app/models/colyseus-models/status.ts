@@ -420,7 +420,8 @@ export default class Status extends Schema implements IStatus {
             shouldTargetGainMana: true
           })
 
-          pkm.handleHeal(Math.round(darkHarvestDamage * 0.2), pkm, 1)
+          const factor = pkm.stars === 3 ? 0.4 : pkm.stars === 2 ? 0.3 : 0.2
+          pkm.handleHeal(Math.round(darkHarvestDamage * factor), pkm, 1)
           this.darkHarvestDamageCooldown = 1000
         }
       })

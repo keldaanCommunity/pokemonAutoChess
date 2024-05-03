@@ -8526,8 +8526,6 @@ export class DarkHarvestStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const duration =
-      pokemon.stars === 3 ? 6500 : pokemon.stars === 2 ? 4500 : 2500
 
     const mostSurroundedCoordinate =
       state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
@@ -8538,7 +8536,8 @@ export class DarkHarvestStrategy extends AbilityStrategy {
         mostSurroundedCoordinate.y,
         board
       )
-      pokemon.status.triggerDarkHarvest(duration)
+      pokemon.status.triggerDarkHarvest(3200)
+      pokemon.status.triggerSilence(3000, pokemon, pokemon)
     }
   }
 }
