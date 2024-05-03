@@ -25,11 +25,11 @@ import { pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { Effects } from "../effects"
 import type { IPokemonConfig } from "../mongo-models/user-metadata"
-import PokemonFactory, { isInRegion } from "../pokemon-factory"
+import PokemonFactory from "../pokemon-factory"
 import { getPokemonData, PRECOMPUTED_REGIONAL_MONS } from "../precomputed"
 import ExperienceManager from "./experience-manager"
 import HistoryItem from "./history-item"
-import { Pokemon, isOnBench } from "./pokemon"
+import { Pokemon, isOnBench, PokemonClasses } from "./pokemon"
 import PokemonCollection from "./pokemon-collection"
 import PokemonConfig from "./pokemon-config"
 import Synergies, { computeSynergies } from "./synergies"
@@ -112,7 +112,7 @@ export default class Player extends Schema implements IPlayer {
     this.map = pickRandomIn(DungeonPMDO)
     const initialRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter(
       (p) =>
-        isInRegion(p, this.map, state) &&
+        PokemonClasses[p].prototype.isInRegion(p, this.map, state) &&
         [Rarity.COMMON, Rarity.UNCOMMON].includes(getPokemonData(p).rarity)
     )
     resetArraySchema(

@@ -430,7 +430,7 @@ export const DungeonDetails: { [key in DungeonPMDO]: DungeonPMDODetail } = {
     music: DungeonMusic.FAR_AMP_PLAINS
   },
   [DungeonPMDO.FinalMaze2]: {
-    synergies: [Synergy.BABY, Synergy.FLORA, Synergy.BUG],
+    synergies: [Synergy.NORMAL, Synergy.FLORA, Synergy.BUG],
     music: DungeonMusic.FRIEND_AREA_CAVES
   },
   [DungeonPMDO.FoggyForest]: {
@@ -466,7 +466,7 @@ export const DungeonDetails: { [key in DungeonPMDO]: DungeonPMDODetail } = {
     music: DungeonMusic.GREAT_CANYON
   },
   [DungeonPMDO.HiddenHighland]: {
-    synergies: [Synergy.FLORA, Synergy.BABY, Synergy.BUG],
+    synergies: [Synergy.FLORA, Synergy.GRASS, Synergy.BUG],
     music: DungeonMusic.HIDDEN_HIGHLAND
   },
   [DungeonPMDO.HiddenLand]: {

@@ -2325,11 +2325,11 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.KILOWATTREL]: Pkm.WATTREL,
   [Pkm.STANTLER]: Pkm.STANTLER,
   [Pkm.BURMY_PLANT]: Pkm.BURMY_PLANT,
-  [Pkm.BURMY_SANDY]: Pkm.BURMY_SANDY,
-  [Pkm.BURMY_TRASH]: Pkm.BURMY_TRASH,
+  [Pkm.BURMY_SANDY]: Pkm.BURMY_PLANT, // NOTE: all forms share the same line
+  [Pkm.BURMY_TRASH]: Pkm.BURMY_PLANT, // NOTE: all forms share the same line
   [Pkm.WORMADAM_PLANT]: Pkm.BURMY_PLANT,
-  [Pkm.WORMADAM_SANDY]: Pkm.BURMY_SANDY,
-  [Pkm.WORMADAM_TRASH]: Pkm.BURMY_TRASH,
+  [Pkm.WORMADAM_SANDY]: Pkm.BURMY_PLANT, // NOTE: all forms share the same line
+  [Pkm.WORMADAM_TRASH]: Pkm.BURMY_PLANT, // NOTE: all forms share the same line
   [Pkm.MOTHIM]: Pkm.BURMY_PLANT, // NOTE: converging evolution
   [Pkm.PALDEA_WOOPER]: Pkm.PALDEA_WOOPER,
   [Pkm.CLODSIRE]: Pkm.PALDEA_WOOPER,

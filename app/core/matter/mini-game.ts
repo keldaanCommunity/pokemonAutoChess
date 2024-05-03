@@ -44,8 +44,8 @@ import {
   getPokemonData,
   PRECOMPUTED_REGIONAL_MONS
 } from "../../models/precomputed"
-import { isInRegion } from "../../models/pokemon-factory"
 import { PkmFamily } from "../../types/enum/Pokemon"
+import { PokemonClasses } from "../../models/colyseus-models/pokemon"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -593,7 +593,7 @@ export class MiniGame {
           player.map = portal.map
           const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter(
             (p) =>
-              isInRegion(p, portal.map, state) &&
+              PokemonClasses[p].prototype.isInRegion(p, portal.map, state) &&
               getPokemonData(p).rarity ===
                 (state.stageLevel === PortalCarouselStages[0]
                   ? Rarity.RARE
