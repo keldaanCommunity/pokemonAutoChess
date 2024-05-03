@@ -5,6 +5,7 @@ export interface IPreferencesState {
   sfxVolume: number
   showDpsMeter: boolean
   showDetailsOnHover: boolean
+  showDamageNumbers: boolean
   disableAnimatedTilemap: boolean
 }
 
@@ -13,6 +14,7 @@ const defaultPreferences: IPreferencesState = {
   sfxVolume: 30,
   showDpsMeter: false,
   showDetailsOnHover: false,
+  showDamageNumbers: true,
   disableAnimatedTilemap: false
 }
 

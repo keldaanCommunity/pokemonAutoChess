@@ -2452,6 +2452,7 @@
   "music_volume": "Volume de la musique",
   "sfx_volume": "Volume SFX",
   "show_details_on_hover": "Afficher les détails au survol au lieu du clic droit",
+  "show_damage_numbers": "Afficher les nombres de dégâts des coups",
   "disable_animated_tilemap": "Désactiver les animations en arrière-plan",
   "save": "Sauvegarder",
   "passive": "Passif",

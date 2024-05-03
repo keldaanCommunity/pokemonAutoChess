@@ -478,12 +478,13 @@ export default class BoardManager {
           this.animationManager.animatePokemon(pokemonUI, value, false)
           break
 
-        case "hp":
+        case "hp": {
           const baseHP = getPokemonData(pokemon.name).hp
           const sizeBuff = (pokemon.hp - baseHP) / baseHP
           pokemonUI.sprite.setScale(2 + sizeBuff)
           pokemonUI.hp = value
           break
+        }
 
         default:
           pokemonUI[field] = value
@@ -520,8 +521,8 @@ export default class BoardManager {
       this.playerAvatar.playerId === playerId
         ? this.playerAvatar
         : this.opponentAvatar?.playerId === playerId
-        ? this.opponentAvatar
-        : undefined
+          ? this.opponentAvatar
+          : undefined
     if (player) {
       this.animationManager.play(player, AnimationConfig[player.name].emote)
 

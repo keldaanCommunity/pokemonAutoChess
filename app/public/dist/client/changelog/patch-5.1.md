@@ -18,6 +18,7 @@
 # Gameplay
 
 # UI
+- Add an option to disable damage numbers
 
 # Bugfix
 

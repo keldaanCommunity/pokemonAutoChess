@@ -39,6 +39,7 @@ import { Weather } from "../../../types/enum/Weather"
 import { logger } from "../../../utils/logger"
 import { clamp, max } from "../../../utils/number"
 import { getPath, transformCoordinate } from "../pages/utils/utils"
+import { preferences } from "../preferences"
 import store from "../stores"
 import { changePlayer } from "../stores/GameStore"
 import { getPortraitSrc } from "../utils"
@@ -517,14 +518,16 @@ class GameContainer {
     index: string
     amount: number
   }) {
-    this.gameScene?.battle?.displayDamage(
-      message.x,
-      message.y,
-      message.amount,
-      message.type,
-      message.index,
-      message.id
-    )
+    if (preferences.showDamageNumbers) {
+      this.gameScene?.battle?.displayDamage(
+        message.x,
+        message.y,
+        message.amount,
+        message.type,
+        message.index,
+        message.id
+      )
+    }
   }
 
   handleDisplayAbility(message: {
@@ -569,7 +572,10 @@ class GameContainer {
     }
   }
 
-  handleDragDropFailed(message: any) {
+  handleDragDropFailed(message: {
+    updateBoard: boolean
+    updateItems: boolean
+  }) {
     const gameScene = this.gameScene
     if (gameScene?.lastDragDropPokemon && message.updateBoard) {
       const tg = gameScene.lastDragDropPokemon

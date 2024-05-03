@@ -49,8 +49,7 @@ export const CDN_URL =
 export const USERNAME_REGEXP = /^(\p{Letter}|[0-9]|\.|-|_){3,24}$/u
 
 export type NonFunctionPropNames<T> = {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  [K in keyof T]: T[K] extends Function ? never : K
+  [K in keyof T]: T[K] extends (...rest: unknown[]) => unknown ? never : K
 }[keyof T]
 
 export type PkmWithConfig = { name: Pkm; shiny?: boolean; emotion?: Emotion }

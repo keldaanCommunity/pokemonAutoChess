@@ -479,7 +479,7 @@ export default class GameRoom extends Room<GameState> {
     })
   }
 
-  async onAuth(client: Client, options: any, request: any) {
+  async onAuth(client: Client, options, request) {
     try {
       super.onAuth(client, options, request)
       const token = await admin.auth().verifyIdToken(options.idToken)
@@ -500,7 +500,7 @@ export default class GameRoom extends Room<GameState> {
     }
   }
 
-  onJoin(client: Client, options: any, auth: any) {
+  onJoin(client: Client, options, auth) {
     this.dispatcher.dispatch(new OnJoinCommand(), { client, options, auth })
   }
 
