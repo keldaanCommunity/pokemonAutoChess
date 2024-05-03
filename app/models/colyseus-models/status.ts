@@ -78,6 +78,9 @@ export default class Status extends Schema implements IStatus {
   drySkinCooldown = 1000
   curseCooldown = 0
   enrageDelay = 35000
+  darkHarvest = false
+  darkHarvestCooldown = 0
+  darkHarvestDamageCooldown = 0
 
   clearNegativeStatus() {
     this.burnCooldown = 0
@@ -175,6 +178,10 @@ export default class Status extends Schema implements IStatus {
 
     if (this.soulDew) {
       this.updateSoulDew(dt, pokemon)
+    }
+
+    if (this.darkHarvest) {
+      this.updateDarkHarvest(dt, pokemon, board)
     }
 
     if (this.paralysis) {
@@ -381,6 +388,51 @@ export default class Status extends Schema implements IStatus {
       }
     } else {
       this.soulDewCooldown -= dt
+    }
+  }
+
+  triggerDarkHarvest(duration: number) {
+    this.darkHarvest = true
+    if (duration > this.darkHarvestCooldown) {
+      this.darkHarvestCooldown = duration
+      this.darkHarvestDamageCooldown = 0
+    }
+  }
+
+  updateDarkHarvest(dt: number, pkm: PokemonEntity, board: Board) {
+    if (this.darkHarvestDamageCooldown - dt <= 0) {
+      pkm.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pkm.simulation.id,
+        skill: Ability.DARK_HARVEST,
+        positionX: pkm.positionX,
+        positionY: pkm.positionY
+      })
+      board.getAdjacentCells(pkm.positionX, pkm.positionY).forEach((cell) => {
+        if (cell?.value && cell.value.team !== pkm.team) {
+          const darkHarvestDamage =
+            pkm.stars === 3 ? 40 : pkm.stars === 2 ? 20 : 10
+
+          cell.value.handleDamage({
+            damage: darkHarvestDamage,
+            board,
+            attackType: AttackType.SPECIAL,
+            attacker: pkm,
+            shouldTargetGainMana: true
+          })
+
+          const factor = pkm.stars === 3 ? 0.4 : pkm.stars === 2 ? 0.3 : 0.2
+          pkm.handleHeal(Math.round(darkHarvestDamage * factor), pkm, 1)
+          this.darkHarvestDamageCooldown = 1000
+        }
+      })
+    } else {
+      this.darkHarvestDamageCooldown -= dt
+    }
+
+    if (this.darkHarvestCooldown - dt <= 0) {
+      this.darkHarvest = false
+    } else {
+      this.darkHarvestCooldown -= dt
     }
   }
 

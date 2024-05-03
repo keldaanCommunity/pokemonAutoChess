@@ -5,12 +5,12 @@ import type MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../models/precomputed"
 import {
-  type AttackSprite,
   AttackSpriteScale,
+  instanceofPokemonEntity,
+  type AttackSprite,
   type Emotion,
   type IPokemon,
-  type IPokemonEntity,
-  instanceofPokemonEntity
+  type IPokemonEntity
 } from "../../../../types"
 import {
   DEFAULT_CRIT_CHANCE,
@@ -18,12 +18,12 @@ import {
 } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import {
-  type AttackType,
   Orientation,
   PokemonActionState,
   PokemonTint,
-  type Rarity,
   SpriteType,
+  type AttackType,
+  type Rarity,
   type Team
 } from "../../../../types/enum/Game"
 import type { Passive } from "../../../../types/enum/Passive"

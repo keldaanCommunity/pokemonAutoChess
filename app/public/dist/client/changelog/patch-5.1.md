@@ -1,5 +1,9 @@
 # New Pokemons:
 
+ - Deino
+ - Zweilous
+ - Hydreigon
+
 # Changes to Pokemon & Abilities
 
 - Growlithe is now regional and can be found in maps with Fire synergy. Hisuian Growlithe and Growlithe cannot be found in the same region.
