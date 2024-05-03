@@ -673,13 +673,13 @@ export class BuyBoosterCommand extends Command<
       if (pokemonConfig) {
         const BOOSTER_COST = 500
         if (pokemonConfig.dust >= BOOSTER_COST) {
-          pokemonConfig.dust -= BOOSTER_COST
-          user.booster += 1
           const u = await UserMetadata.findOne({ uid: client.auth.uid })
           const pkmConfig = u?.pokemonCollection.get(index)
-          if (u && pkmConfig) {
-            pkmConfig.dust = pokemonConfig.dust
-            u.booster = user.booster
+          if (u && pkmConfig && pkmConfig.dust >= BOOSTER_COST) {
+            pkmConfig.dust -= BOOSTER_COST
+            pokemonConfig.dust = pkmConfig.dust
+            u.booster += 1
+            user.booster = u.booster
             u.save()
           }
         }
