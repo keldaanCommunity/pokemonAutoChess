@@ -1440,7 +1440,7 @@ export class EndTournamentCommand extends Command<
       }
 
       const top4 = players.filter((p) => p.ranks[p.ranks.length - 1] <= 4)
-      for (let player of top4) {
+      for (const player of top4) {
         const mongoUser = await UserMetadata.findOne({ uid: player.id })
         if (
           mongoUser &&

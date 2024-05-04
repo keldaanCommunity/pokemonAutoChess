@@ -763,6 +763,10 @@ export default class Status extends Schema implements IStatus {
       if (pkm.items.has(Item.PERSIM_BERRY)) {
         pkm.eatBerry(Item.PERSIM_BERRY)
       }
+
+      if (pkm.passive === Passive.PSYDUCK) {
+        pkm.addAbilityPower(100, false)
+      }
     }
   }
 

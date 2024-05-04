@@ -338,7 +338,8 @@
     "QUIVER_DANCE": "Quiver Dance",
     "TORCH_SONG": "Torch Song",
     "POWER_WHIP": "Power Whip",
-    "DARK_HARVEST": "Dark Harvest"
+    "DARK_HARVEST": "Dark Harvest",
+    "PSYSHOCK": "Psyshock"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1118,7 +1119,9 @@
     "CROCALOR": "Crocalor",
     "SKELEDIRGE": "Skeledirge",
     "TANGELA": "Tangela",
-    "TANGROWTH": "Tangrowth"
+    "TANGROWTH": "Tangrowth",
+    "PSYDUCK": "Psyduck",
+    "GOLDUCK": "Golduck"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1437,7 +1440,8 @@
     "QUIVER_DANCE": "Gain [5,SP] ATK, [5,SP] SPE_DEF, [20,SP]% ATK_SPEED and 20% AP",
     "TORCH_SONG": "Blows out raging flames to the [1,2,3] strongest opponents. Each flame scorchs the target and adjacent units for [10,20,30,SP] SPECIAL. Gains 10 AP for each unit hit having the status BURN, CURSE or SILENCE",
     "POWER_WHIP": "Lock on to the farthest enemy and unleash a giant vine towards it, dealing [30,60,SP] SPECIAL to any enemies hit",
-    "DARK_HARVEST": "The pokémon teleports into the largest group of enemies. For the next 3 seconds, the pokémon suffers SILENCE and drains the HP of adjacent enemies, inflicting [10,20,40,SP] SPECIAL per second and healing HP for [20,30,40,SP]% of the SPECIAL inflicted"
+    "DARK_HARVEST": "The pokémon teleports into the largest group of enemies. For the next 3 seconds, the pokémon suffers SILENCE and drains the HP of adjacent enemies, inflicting [10,20,40,SP] SPECIAL per second and healing HP for [20,30,40,SP]% of the SPECIAL inflicted",
+    "PSYSHOCK": "Burn [30,60,100,SP] PP from target and gain it as SHIELD. If the target has not enough PP, the remainder is dealt as SPECIAL"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1915,7 +1919,6 @@
     "STENCH": "Leaves behind a stinking cloud that POISONNED any unit that breathes it",
     "AQUA_VEIL": "Give RUNE_PROTECT under RAIN",
     "PORYGON": "Porygon2 is looking for an UPGRADE",
-    "SLOWBRO": "Slowbro is looking for a KINGS_ROCK",
     "MOXIE": "Every time an enemy pokémon dies, it gains ATK equal to its stars",
     "BELLSPROUT": "Weepinbell is looking for berries",
     "CLEFAIRY": "Clefairy is looking for a POKE_DOLL",
@@ -1953,7 +1956,8 @@
     "SHUCKLE": "Turn consummed berries into BERRY_JUICE",
     "GUZZLORD": "Guzzlord is too heavy and can't jump",
     "ENVIRONMENTAL_ADAPTATION": "This pokemon adapted its synergies to its region",
-    "MOTHIM": "Mothim gets the synergies of all your regional Burmy forms"
+    "MOTHIM": "Mothim gets the synergies of all your regional Burmy forms",
+    "PSYDUCK": "When CONFUSION, gain 100% AP"
   },
   "stat": {
     "ATK": "Attack",
