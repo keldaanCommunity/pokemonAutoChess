@@ -1317,7 +1317,7 @@ export class CreateTournamentLobbiesCommand extends Command<
           noElo: true,
           ownerId: null,
           roomName: bracket.name,
-          autoStartDelayInSeconds: 15 * 60,
+          autoStartDelayInSeconds: 10 * 60,
           whitelist: bracket.playersId,
           tournamentId,
           bracketId
