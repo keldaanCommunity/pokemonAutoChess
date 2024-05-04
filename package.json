@@ -58,7 +58,7 @@
     "cors": "^2.8.5",
     "cron": "^3.1.6",
     "d3": "^7.8.5",
-    "discord.js": "^14.14.1",
+    "discord.js": "^14.15.1",
     "dotenv": "^16.3.2",
     "express": "^4.18.2",
     "express-basic-auth": "^1.2.0",
