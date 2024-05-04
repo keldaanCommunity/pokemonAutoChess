@@ -219,6 +219,10 @@ export const lobbySlice = createSlice({
       state.nextSpecialGameMode = action.payload as GameMode
     },
     addTournament: (state, action: PayloadAction<TournamentSchema>) => {
+      // remove previous potential duplicate
+      state.tournaments = state.tournaments.filter(
+        (tournament) => tournament.id !== action.payload.id
+      )
       state.tournaments.push(action.payload)
     },
     removeTournament: (state, action: PayloadAction<TournamentSchema>) => {
