@@ -3793,7 +3793,7 @@ export class HisuianTyphlosion extends Pokemon {
 }
 
 export class Slowpoke extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.PSYCHIC])
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.PSYCHIC])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.SLOWBRO
@@ -3810,7 +3810,7 @@ export class Slowpoke extends Pokemon {
 }
 
 export class Slowbro extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.PSYCHIC])
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.PSYCHIC])
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.SLOWKING
@@ -3828,7 +3828,7 @@ export class Slowbro extends Pokemon {
 }
 
 export class Slowking extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.PSYCHIC])
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.PSYCHIC])
   rarity = Rarity.UNCOMMON
   stars = 3
   hp = 260
@@ -7704,7 +7704,7 @@ export class Parasect extends Pokemon {
 }
 
 export class Corphish extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.DARK])
+  types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.DARK])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.CRAWDAUNT
@@ -7720,7 +7720,7 @@ export class Corphish extends Pokemon {
 }
 
 export class Crawdaunt extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.DARK])
+  types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.DARK])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 160
