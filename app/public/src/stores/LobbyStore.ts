@@ -267,7 +267,7 @@ export const lobbySlice = createSlice({
       state,
       action: PayloadAction<{
         tournamendId: string
-        roomId: string
+        bracketId: string
         bracket: TournamentBracketSchema
       }>
     ) => {
@@ -275,19 +275,19 @@ export const lobbySlice = createSlice({
         (t) => t.id == action.payload.tournamendId
       )
       if (tournament) {
-        tournament.brackets.set(action.payload.roomId, action.payload.bracket)
+        tournament.brackets.set(action.payload.bracketId, action.payload.bracket)
         state.tournaments = [...state.tournaments] // TOFIX: force reactivity through immutability
       }
     },
     removeTournamentBracket: (
       state,
-      action: PayloadAction<{ tournamendId: string; roomId: string }>
+      action: PayloadAction<{ tournamendId: string; bracketId: string }>
     ) => {
       const tournament = state.tournaments.find(
         (t) => t.id == action.payload.tournamendId
       )
       if (tournament) {
-        tournament.brackets.delete(action.payload.roomId)
+        tournament.brackets.delete(action.payload.bracketId)
         state.tournaments = [...state.tournaments] // TOFIX: force reactivity through immutability
       }
     },
@@ -295,7 +295,7 @@ export const lobbySlice = createSlice({
       state,
       action: PayloadAction<{
         tournamentId: string
-        roomId: string
+        bracketId: string
         field: string
         value: any
       }>
@@ -303,8 +303,8 @@ export const lobbySlice = createSlice({
       const tournament = state.tournaments.find(
         (t) => t.id == action.payload.tournamentId
       )
-      if (tournament && tournament.brackets.has(action.payload.roomId)) {
-        const player = tournament.brackets.get(action.payload.roomId)!
+      if (tournament && tournament.brackets.has(action.payload.bracketId)) {
+        const player = tournament.brackets.get(action.payload.bracketId)!
         player[action.payload.field] = action.payload.value
         state.tournaments = [...state.tournaments] // TOFIX: force reactivity through immutability
       }
