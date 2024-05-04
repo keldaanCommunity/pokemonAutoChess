@@ -10,15 +10,6 @@
   margin-top: 1em;
 }
 
-.room-menu .tab-available-rooms.react-tabs__tab-panel--selected,
-.room-menu .tab-ingame-rooms.react-tabs__tab-panel--selected {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  padding: 0 2px 0 0;
-}
-
 .room-menu .tab-tournament.react-tabs__tab-panel--selected {
   padding: 0.5em 0;
 }
