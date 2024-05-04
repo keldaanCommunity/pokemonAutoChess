@@ -1304,9 +1304,9 @@ export class CreateTournamentLobbiesCommand extends Command<
 
       const brackets = makeBrackets(tournament)
       tournament.brackets.clear()
-      for(const bracket of brackets){
-        logger.info(`Creating tournament game ${bracket.name}`)
+      for (const bracket of brackets) {
         const bracketId = nanoid()
+        logger.info(`Creating tournament game ${bracket.name} id: ${bracketId}`)
         tournament.brackets.set(
           bracketId,
           new TournamentBracketSchema(bracket.name, bracket.playersId)
