@@ -591,14 +591,11 @@ export class MiniGame {
           const portal = this.portals.get(avatar.portalId)!
 
           player.map = portal.map
-          const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter(
-            (p) =>
-              PokemonClasses[p].prototype.isInRegion(p, portal.map, state) &&
-              getPokemonData(p).rarity ===
-                (state.stageLevel === PortalCarouselStages[0]
-                  ? Rarity.RARE
-                  : Rarity.EPIC)
+          const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
+            PokemonClasses[p].prototype.isInRegion(p, portal.map, state)
           )
+
+          state.shop.resetRegionalPool(player)
           newRegionalPokemons.forEach((p) => {
             if (getPokemonData(p).stars === 1) {
               state.shop.addRegionalPokemon(p, player)
@@ -607,11 +604,9 @@ export class MiniGame {
 
           resetArraySchema(
             player.regionalPokemons,
-            player.regionalPokemons
-              .concat(newRegionalPokemons)
-              .filter(
-                (p, index, array) => array.indexOf(PkmFamily[p]) === index
-              ) // dedup same family
+            newRegionalPokemons.filter(
+              (p, index, array) => array.indexOf(PkmFamily[p]) === index // dedup same family
+            )
           )
         }
 

@@ -45,11 +45,9 @@ export const CDN_PORTRAIT_URL =
 export const CDN_URL =
   "https://raw.githubusercontent.com/keldaanCommunity/SpriteCollab/master"
 
-// eslint-disable-next-line no-useless-escape
 export const USERNAME_REGEXP = /^(\p{Letter}|[0-9]|\.|-|_){3,24}$/u
 
 export type NonFunctionPropNames<T> = {
-  // eslint-disable-next-line @typescript-eslint/ban-types
   [K in keyof T]: T[K] extends Function ? never : K
 }[keyof T]
 
