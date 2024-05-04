@@ -25,7 +25,7 @@ export function getTournamentStage(tournament: ITournament): string {
   if (remainingPlayers.length <= 16) return "Semi-Finals"
   if (remainingPlayers.length <= 32) return "Quarter-Finals"
   else {
-    let n = Math.floor(Math.log(remainingPlayers.length) / Math.log(2))
+    const n = Math.floor(Math.log(remainingPlayers.length) / Math.log(2))
     return `Round of ${Math.pow(2, n)}`
   }
 }
@@ -35,20 +35,21 @@ export function makeBrackets(tournament: ITournament): ITournamentBracket[] {
   remainingPlayers.sort((a, b) => b.elo - a.elo)
 
   // find the ideal number of brackets depending on the number of remaining players
-  let minDelta = 1
+  let minDelta = 8
   let idealNbPerBracket = 8
-  for (let nbPerBracket = 4; nbPerBracket <= 8; nbPerBracket++) {
+  for (let nbPerBracket = 5; nbPerBracket <= 8; nbPerBracket++) {
     let delta = Math.abs(
       Math.round(remainingPlayers.length / nbPerBracket) -
         remainingPlayers.length / nbPerBracket
     )
+    delta += 8 - nbPerBracket // favorizing 8 player lobbies
     if (delta <= minDelta) {
       minDelta = delta
       idealNbPerBracket = nbPerBracket
     }
   }
 
-  let nbBrackets = Math.ceil(remainingPlayers.length / idealNbPerBracket)
+  const nbBrackets = Math.ceil(remainingPlayers.length / idealNbPerBracket)
   const brackets: ITournamentBracket[] = []
 
   for (let i = 0; i < nbBrackets; i++) {
