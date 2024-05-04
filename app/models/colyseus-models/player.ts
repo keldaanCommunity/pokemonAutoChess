@@ -110,10 +110,8 @@ export default class Player extends Schema implements IPlayer {
     this.lightX = state.lightX
     this.lightY = state.lightY
     this.map = pickRandomIn(DungeonPMDO)
-    const initialRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter(
-      (p) =>
-        PokemonClasses[p].prototype.isInRegion(p, this.map, state) &&
-        [Rarity.COMMON, Rarity.UNCOMMON].includes(getPokemonData(p).rarity)
+    const initialRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
+      PokemonClasses[p].prototype.isInRegion(p, this.map, state)
     )
     resetArraySchema(
       this.regionalPokemons,

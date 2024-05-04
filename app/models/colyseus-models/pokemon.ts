@@ -2250,6 +2250,10 @@ export class HisuiSliggoo extends Pokemon {
   skill = Ability.SHELTER
   attackSprite = AttackSprite.STEEL_MELEE
   regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.STEEL)
+  }
 }
 
 export class HisuiGoodra extends Pokemon {
@@ -2269,6 +2273,10 @@ export class HisuiGoodra extends Pokemon {
   skill = Ability.SHELTER
   attackSprite = AttackSprite.STEEL_MELEE
   regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.STEEL)
+  }
 }
 
 export class Lotad extends Pokemon {
@@ -3785,7 +3793,7 @@ export class HisuianTyphlosion extends Pokemon {
 }
 
 export class Slowpoke extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.PSYCHIC])
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.PSYCHIC])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.SLOWBRO
@@ -3802,7 +3810,7 @@ export class Slowpoke extends Pokemon {
 }
 
 export class Slowbro extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.PSYCHIC])
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.PSYCHIC])
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.SLOWKING
@@ -3820,7 +3828,7 @@ export class Slowbro extends Pokemon {
 }
 
 export class Slowking extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.PSYCHIC])
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.PSYCHIC])
   rarity = Rarity.UNCOMMON
   stars = 3
   hp = 260
@@ -7696,7 +7704,7 @@ export class Parasect extends Pokemon {
 }
 
 export class Corphish extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.DARK])
+  types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.DARK])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.CRAWDAUNT
@@ -7712,7 +7720,7 @@ export class Corphish extends Pokemon {
 }
 
 export class Crawdaunt extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.DARK])
+  types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.DARK])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 160
@@ -7861,7 +7869,7 @@ export class Growlithe extends Pokemon {
   isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
-      regionSynergies.includes(Synergy.FIRE) &&
+      regionSynergies.includes(Synergy.FIELD) &&
       !regionSynergies.includes(Synergy.ROCK)
     )
   }
@@ -7907,7 +7915,7 @@ export class HisuiGrowlithe extends Pokemon {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
       regionSynergies.includes(Synergy.ROCK) &&
-      !regionSynergies.includes(Synergy.FIRE)
+      !regionSynergies.includes(Synergy.FIELD)
     )
   }
 }
