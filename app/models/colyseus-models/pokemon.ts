@@ -3534,6 +3534,11 @@ export class Chimchar extends Pokemon {
   range = 1
   skill = Ability.TORMENT
   attackSprite = AttackSprite.FIRE_MELEE
+  regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.HUMAN)
+  }
 }
 
 export class Monferno extends Pokemon {
@@ -3553,6 +3558,7 @@ export class Monferno extends Pokemon {
   range = 1
   skill = Ability.TORMENT
   attackSprite = AttackSprite.FIRE_MELEE
+  regional = true
 }
 
 export class Infernape extends Pokemon {
@@ -3571,6 +3577,7 @@ export class Infernape extends Pokemon {
   range = 1
   skill = Ability.TORMENT
   attackSprite = AttackSprite.FIRE_MELEE
+  regional = true
 }
 
 export class Mudkip extends Pokemon {
@@ -3804,9 +3811,8 @@ export class Slowpoke extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SOAK
-  passive = Passive.SLOWBRO
-  additional = true
   attackSprite = AttackSprite.WATER_MELEE
+  regional = true
 }
 
 export class Slowbro extends Pokemon {
@@ -3814,7 +3820,6 @@ export class Slowbro extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.SLOWKING
-  evolutionRule = new ItemEvolutionRule([Item.KINGS_ROCK])
   hp = 180
   atk = 13
   def = 5
@@ -3822,9 +3827,8 @@ export class Slowbro extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SOAK
-  passive = Passive.SLOWBRO
-  additional = true
   attackSprite = AttackSprite.WATER_MELEE
+  regional = true
 }
 
 export class Slowking extends Pokemon {
@@ -3838,8 +3842,41 @@ export class Slowking extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SOAK
-  additional = true
   attackSprite = AttackSprite.WATER_MELEE
+  regional = true
+}
+
+export class Psyduck extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.PSYCHIC])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.GOLDUCK
+  hp = 75
+  atk = 7
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.PSYSHOCK
+  passive = Passive.PSYDUCK
+  additional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Golduck extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.PSYCHIC])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 170
+  atk = 15
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.PSYSHOCK
+  passive = Passive.PSYDUCK
+  additional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
 }
 
 export class Squirtle extends Pokemon {
@@ -14107,5 +14144,7 @@ export const PokemonClasses: Record<
   [Pkm.CROCALOR]: Crocalor,
   [Pkm.SKELEDIRGE]: Skeledirge,
   [Pkm.TANGELA]: Tangela,
-  [Pkm.TANGROWTH]: Tangrowth
+  [Pkm.TANGROWTH]: Tangrowth,
+  [Pkm.PSYDUCK]: Psyduck,
+  [Pkm.GOLDUCK]: Golduck
 }

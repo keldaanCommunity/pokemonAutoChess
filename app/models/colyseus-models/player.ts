@@ -3,7 +3,7 @@ import type GameState from "../../rooms/states/game-state"
 import type { IPlayer, Role, Title } from "../../types"
 import { SynergyTriggers, UniqueShop } from "../../types/Config"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
-import { BattleResult, Rarity } from "../../types/enum/Game"
+import { BattleResult } from "../../types/enum/Game"
 import {
   ArtificialItems,
   Berries,

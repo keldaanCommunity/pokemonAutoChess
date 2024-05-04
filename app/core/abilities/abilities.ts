@@ -8542,6 +8542,37 @@ export class DarkHarvestStrategy extends AbilityStrategy {
   }
 }
 
+export class PsyShockStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+
+    const ppBurn = Math.round(
+      ([30, 60, 100][pokemon.stars - 1] ?? 100) * (1 + pokemon.ap / 100)
+    )
+    const ppStolen = min(ppBurn)(target.pp)
+    const extraPP = ppBurn - ppStolen
+
+    target.addPP(-ppStolen)
+    pokemon.addShield(ppBurn, pokemon, true)
+    if (extraPP > 0) {
+      target.handleSpecialDamage(
+        extraPP,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit,
+        true
+      )
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -8862,5 +8893,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.QUIVER_DANCE]: new QuiverDanceStrategy(),
   [Ability.TORCH_SONG]: new TorchSongStrategy(),
   [Ability.POWER_WHIP]: new PowerWhipStrategy(),
-  [Ability.DARK_HARVEST]: new DarkHarvestStrategy()
+  [Ability.DARK_HARVEST]: new DarkHarvestStrategy(),
+  [Ability.PSYSHOCK]: new PsyShockStrategy()
 }

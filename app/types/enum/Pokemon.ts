@@ -777,7 +777,9 @@ export enum Pkm {
   CROCALOR = "CROCALOR",
   SKELEDIRGE = "SKELEDIRGE",
   TANGELA = "TANGELA",
-  TANGROWTH = "TANGROWTH"
+  TANGROWTH = "TANGROWTH",
+  PSYDUCK = "PSYDUCK",
+  GOLDUCK = "GOLDUCK"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1557,7 +1559,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.CROCALOR]: "0910",
   [Pkm.SKELEDIRGE]: "0911",
   [Pkm.TANGELA]: "0114",
-  [Pkm.TANGROWTH]: "0465"
+  [Pkm.TANGROWTH]: "0465",
+  [Pkm.PSYDUCK]: "0054",
+  [Pkm.GOLDUCK]: "0055"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2337,7 +2341,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.CROCALOR]: Pkm.FUECOCO,
   [Pkm.SKELEDIRGE]: Pkm.FUECOCO,
   [Pkm.TANGELA]: Pkm.TANGELA,
-  [Pkm.TANGROWTH]: Pkm.TANGELA
+  [Pkm.TANGROWTH]: Pkm.TANGELA,
+  [Pkm.PSYDUCK]: Pkm.PSYDUCK,
+  [Pkm.GOLDUCK]: Pkm.PSYDUCK
 }
 
 export enum PkmDuo {
@@ -6370,5 +6376,15 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Emit
+  },
+  [Pkm.PSYDUCK]: {
+    attack: AnimationType.MultiScratch,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.GOLDUCK]: {
+    attack: AnimationType.MultiScratch,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   }
 }
