@@ -30,7 +30,7 @@ import {
   SynergyTriggers
 } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
-import { DungeonPMDO, DungeonDetails } from "../../types/enum/Dungeon"
+import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
 import { AttackType, PokemonActionState, Rarity } from "../../types/enum/Game"
 import {
   AllItems,
@@ -2457,7 +2457,7 @@ export class Aron extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 1
-  skill = Ability.STOMP
+  skill = Ability.GROUND_SLAM
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -2472,7 +2472,7 @@ export class Lairon extends Pokemon {
   speDef = 3
   maxPP = 100
   range = 1
-  skill = Ability.STOMP
+  skill = Ability.GROUND_SLAM
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -2486,7 +2486,7 @@ export class Aggron extends Pokemon {
   speDef = 5
   maxPP = 100
   range = 1
-  skill = Ability.STOMP
+  skill = Ability.GROUND_SLAM
   attackSprite = AttackSprite.ROCK_MELEE
 }
 

@@ -8573,6 +8573,33 @@ export class PsyShockStrategy extends AbilityStrategy {
   }
 }
 
+export class GroundSlamStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
+    pokemon.addShield(damage, pokemon, true)
+    board
+      .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
+      .forEach((cell) => {
+        if (cell.value && pokemon.team != cell.value.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -8894,5 +8921,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.TORCH_SONG]: new TorchSongStrategy(),
   [Ability.POWER_WHIP]: new PowerWhipStrategy(),
   [Ability.DARK_HARVEST]: new DarkHarvestStrategy(),
-  [Ability.PSYSHOCK]: new PsyShockStrategy()
+  [Ability.PSYSHOCK]: new PsyShockStrategy(),
+  [Ability.GROUND_SLAM]: new GroundSlamStrategy()
 }
