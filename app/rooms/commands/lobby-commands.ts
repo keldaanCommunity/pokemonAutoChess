@@ -1304,27 +1304,25 @@ export class CreateTournamentLobbiesCommand extends Command<
 
       const brackets = makeBrackets(tournament)
       tournament.brackets.clear()
-      await Promise.all(
-        brackets.map((bracket) => {
-          logger.info(`Creating tournament game ${bracket.name}`)
-          const bracketId = nanoid()
-          tournament.brackets.set(
-            bracketId,
-            new TournamentBracketSchema(bracket.name, bracket.playersId)
-          )
+      for (const bracket of brackets) {
+        const bracketId = nanoid()
+        logger.info(`Creating tournament game ${bracket.name} id: ${bracketId}`)
+        tournament.brackets.set(
+          bracketId,
+          new TournamentBracketSchema(bracket.name, bracket.playersId)
+        )
 
-          return matchMaker.createRoom("preparation", {
-            gameMode: GameMode.TOURNAMENT,
-            noElo: true,
-            ownerId: null,
-            roomName: bracket.name,
-            autoStartDelayInSeconds: 15 * 60,
-            whitelist: bracket.playersId,
-            tournamentId,
-            bracketId
-          })
+        await matchMaker.createRoom("preparation", {
+          gameMode: GameMode.TOURNAMENT,
+          noElo: true,
+          ownerId: null,
+          roomName: bracket.name,
+          autoStartDelayInSeconds: 10 * 60,
+          whitelist: bracket.playersId,
+          tournamentId,
+          bracketId
         })
-      )
+      }
 
       //save brackets to db
       const mongoTournament = await Tournament.findById(tournamentId)

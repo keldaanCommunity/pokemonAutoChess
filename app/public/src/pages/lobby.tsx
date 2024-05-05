@@ -292,11 +292,11 @@ export async function joinLobbyRoom(
               dispatch(updateTournament()) // TOFIX: force redux reactivity
             })
 
-            tournament.brackets.onAdd((bracket, roomId) => {
+            tournament.brackets.onAdd((bracket, bracketId) => {
               dispatch(
                 addTournamentBracket({
                   tournamendId: tournament.id,
-                  roomId,
+                  bracketId,
                   bracket
                 })
               )
@@ -310,7 +310,7 @@ export async function joinLobbyRoom(
                   dispatch(
                     changeTournamentBracket({
                       tournamentId: tournament.id,
-                      roomId,
+                      bracketId,
                       field,
                       value
                     })
@@ -322,7 +322,7 @@ export async function joinLobbyRoom(
                 dispatch(
                   changeTournamentBracket({
                     tournamentId: tournament.id,
-                    roomId,
+                    bracketId,
                     field: "playersId",
                     value: bracket.playersId
                   })
@@ -330,9 +330,9 @@ export async function joinLobbyRoom(
               })
             })
 
-            tournament.brackets.onRemove((bracket, roomId) => {
+            tournament.brackets.onRemove((bracket, bracketId) => {
               dispatch(
-                removeTournamentBracket({ tournamendId: tournament.id, roomId })
+                removeTournamentBracket({ tournamendId: tournament.id, bracketId })
               )
             })
           })

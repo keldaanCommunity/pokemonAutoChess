@@ -88,9 +88,9 @@ export class TournamentSchema extends Schema implements ITournament {
     }
 
     if (brackets && brackets.size) {
-      brackets.forEach((b, gameId) => {
+      brackets.forEach((b, bracketId) => {
         this.brackets.set(
-          gameId,
+          bracketId,
           new TournamentBracketSchema(b.name, b.playersId, b.finished)
         )
       })
