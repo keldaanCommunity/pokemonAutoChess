@@ -1413,7 +1413,7 @@
     "FLEUR_CANNON": "Un rayon laser dévastateur inflige [120,SP] SPECIAL à tous les ennemis sur son chemin. Réduit l'AP du lanceur de 20 après chaque tir.",
     "SPIRIT_BREAK": "Inflige [20,40,80,SP] SPECIAL et réduit la AP de la cible de 20",
     "SHEER_COLD": "Une vague de froid glacial frappe la cible avec [30,SP]% de chance de la mettre K.O. en un coup. Plus l'attaquant a de HP comparé à sa cible, plus les chances augmentent. Éxécute toujours les cibles FREEZE, mais jamais les cibles ICE.",
-    "EXTREME_SPEED": "Fonce vers l'ennemi le plus lointain, infligeant [80,SP] PHYSICAL à tous les ennemis sur le chemin",
+    "EXTREME_SPEED": "Fonce vers l'ennemi le plus lointain, infligeant [40,SP] PHYSICAL à tous les ennemis sur le chemin",
     "ZAP_CANNON": "Lance une décharge électrique avec la force d'un canon pour infliger [25,50,100,SP] SPECIAL, PARALYSIS et ARMOR_REDUCTION pendant [1,2,4] secondes",
     "PSYCHO_BOOST": "Tranche horizontalement autour de la cible avec la force de l'esprit, infligeant [140,SP] SPECIAL à tous les ennemis touchés. Réduit la AP du lanceur de 20 pour chaque Pokémon touché.",
     "ICE_HAMMER": "Inflige [50,100,SP] SPECIAL à la cible et FREEZE pendant 3 secondes. Le lanceur subit PARALYSIS pendant 3 secondes.",

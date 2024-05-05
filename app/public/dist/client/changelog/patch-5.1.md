@@ -12,6 +12,8 @@
 - Cutiefly is now in regional pool
 - Slowpoke is now Water/Psychic
 - Corphish is now Aquatic/Dark
+- Buff Lunala PP ~~120~~ 100
+- Nerf Extreme Speed (Deoxys): ~~80~~ 40 damage
 
 # Changes to Synergies
 
