@@ -11,6 +11,11 @@
     "HATCH": "Eclosionado",
     "SPECIAL": "Especial"
   },
+  "pool": {
+    "regular": "Regular",
+    "additional": "Adicional",
+    "regional": "Regional"
+  },
   "damage": {
     "SPECIAL": "Daño especial",
     "PHYSICAL": "Daño físico",
@@ -276,6 +281,7 @@
     "FISHIOUS_REND": "Branquibocado",
     "RECOVER": "Recuperación",
     "CURSE": "Maldición",
+    "DOOM_DESIRE": "Deseo Oculto",
     "TIME_TRAVEL": "Viaje Temporal",
     "POLTERGEIST": "Poltergeist",
     "GOLD_RUSH": "Giga Monedas",
@@ -291,11 +297,25 @@
     "KOWTOW_CLEAVE": "Genufendiente",
     "SHIELDS_DOWN": "Escudo Limitado",
     "SHIELDS_UP": "Escudo Ilimitado",
+    "AURA_WHEEL": "Rueda Aural",
     "LICK": "Lametón",
     "FURY_SWIPES": "Cortes Furia",
     "TICKLE": "Cosquillas",
     "AROMATHERAPY": "Aromaterapia",
-    "DETECT": "Detección"
+    "DETECT": "Detección",
+    "SPACIAL_REND": "Corte Vacío",
+    "MULTI_ATTACK": "Multiataque",
+    "ACCELEROCK": "Roca Veloz",
+    "PETAL_BLIZZARD": "Tormenta Floral",
+    "SUNSTEEL_STRIKE": "Meteoimpacto",
+    "MOONGEIST_BEAM": "Rayo Umbrío",
+    "FLEUR_CANNON": "Cañón Floral",
+    "SPIRIT_BREAK": "Choque Anímico",
+    "SHEER_COLD": "Frío Polar",
+    "EXTREME_SPEED": "Velocidad Extrema",
+    "ZAP_CANNON": "Electrocañón",
+    "PSYCHO_BOOST": "Psicoataque",
+    "ICE_HAMMER": "Martillo Hielo"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
