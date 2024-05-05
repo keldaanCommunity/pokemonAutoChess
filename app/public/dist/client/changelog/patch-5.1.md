@@ -15,7 +15,7 @@
 - All Burmy/Wormadam forms are now considered of the same family
 - Cutiefly is now in regional pool
 - Corphish is now Aquatic/Dark
-
+- New ability for Aron Ground Slam: The pokémon slams the ground, dealing [10, 20, 40] SPECIAL and granting himself [10,20,40] SHIELD
 
 # Changes to Synergies
 
