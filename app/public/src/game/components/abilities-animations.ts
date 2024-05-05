@@ -938,6 +938,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
+    case Ability.GROUND_SLAM:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
     case Ability.FACADE:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
@@ -1965,6 +1969,10 @@ export function displayAbility(
 
     case Ability.CROSS_POISON:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(3)
+      break
+
+    case Ability.PSYSHOCK:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
     case Ability.PETAL_DANCE:

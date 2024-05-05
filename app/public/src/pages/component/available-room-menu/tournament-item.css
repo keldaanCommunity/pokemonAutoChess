@@ -16,6 +16,7 @@
   border: var(--border-thin);
   background-color: var(--color-bg-primary);
   overflow: hidden;
+  margin-bottom: 0.25em;
 }
 
 .tournament-item .player-box.eliminated {

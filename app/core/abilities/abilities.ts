@@ -8542,6 +8542,64 @@ export class DarkHarvestStrategy extends AbilityStrategy {
   }
 }
 
+export class PsyShockStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+
+    const ppBurn = Math.round(
+      ([30, 60, 100][pokemon.stars - 1] ?? 100) * (1 + pokemon.ap / 100)
+    )
+    const ppStolen = min(ppBurn)(target.pp)
+    const extraPP = ppBurn - ppStolen
+
+    target.addPP(-ppStolen)
+    pokemon.addShield(ppBurn, pokemon, true)
+    if (extraPP > 0) {
+      target.handleSpecialDamage(
+        extraPP,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit,
+        true
+      )
+    }
+  }
+}
+
+export class GroundSlamStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
+    pokemon.addShield(damage, pokemon, true)
+    board
+      .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
+      .forEach((cell) => {
+        if (cell.value && pokemon.team != cell.value.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -8862,5 +8920,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.QUIVER_DANCE]: new QuiverDanceStrategy(),
   [Ability.TORCH_SONG]: new TorchSongStrategy(),
   [Ability.POWER_WHIP]: new PowerWhipStrategy(),
-  [Ability.DARK_HARVEST]: new DarkHarvestStrategy()
+  [Ability.DARK_HARVEST]: new DarkHarvestStrategy(),
+  [Ability.PSYSHOCK]: new PsyShockStrategy(),
+  [Ability.GROUND_SLAM]: new GroundSlamStrategy()
 }

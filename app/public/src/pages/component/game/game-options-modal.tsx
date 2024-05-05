@@ -26,7 +26,7 @@ export default function GameOptionsModal(props: {
   const dispatch = useAppDispatch()
   const language = i18n.language
 
-  function changePreference(key: keyof IPreferencesState, value: any) {
+  function changePreference(key: keyof IPreferencesState, value: string | number | boolean) {
     setPreferences({ ...preferences, [key]: value })
     savePreferences({ [key]: value })
 
@@ -120,11 +120,21 @@ export default function GameOptionsModal(props: {
         </p>
         <p>
           <Checkbox
+            checked={preferences.showDamageNumbers}
+            onToggle={(checked) =>
+              changePreference("showDamageNumbers", checked)
+            }
+            label={t("show_damage_numbers")}
+          />
+        </p>
+        <p>
+          <Checkbox
             checked={preferences.disableAnimatedTilemap}
             onToggle={(checked) => {
               changePreference("disableAnimatedTilemap", checked)
               const gameScene = getGameScene()
               if (gameScene) {
+                // biome-ignore lint/suspicious/noExplicitAny: no types for animatedTiles plugin
                 const animatedTiles = (gameScene?.sys as any).animatedTiles
                 if (checked) animatedTiles.pause()
                 else animatedTiles.resume()

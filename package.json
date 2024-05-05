@@ -58,7 +58,7 @@
     "cors": "^2.8.5",
     "cron": "^3.1.6",
     "d3": "^7.8.5",
-    "discord.js": "^14.14.1",
+    "discord.js": "^14.15.1",
     "dotenv": "^16.3.2",
     "express": "^4.18.2",
     "express-basic-auth": "^1.2.0",
@@ -103,7 +103,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.23.8",
     "@babel/preset-react": "^7.23.3",
-    "@biomejs/biome": "1.7.1",
+    "@biomejs/biome": "^1.7.1",
     "@types/cors": "^2.8.17",
     "@types/d3": "^7.4.3",
     "@types/elo-rank": "^1.0.3",
