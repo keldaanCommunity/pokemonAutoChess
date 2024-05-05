@@ -168,8 +168,8 @@ export class BeatUpStrategy extends AbilityStrategy {
         pokemon.team,
         true
       )
-      entity.hp = Math.round(entity.hp * (1 + pokemon.ap / 100))
-      entity.life = Math.round(entity.hp * (1 + pokemon.ap / 100))
+      entity.hp = Math.round(houndour.hp * (1 + pokemon.ap / 100))
+      entity.life = Math.round(houndour.hp * (1 + pokemon.ap / 100))
     }
   }
 }
