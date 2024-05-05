@@ -12931,7 +12931,7 @@ export class Lunala extends Pokemon {
   atk = 25
   def = 8
   speDef = 8
-  maxPP = 120
+  maxPP = 100
   range = 4
   skill = Ability.MOONGEIST_BEAM
   attackSprite = AttackSprite.STEEL_MELEE
