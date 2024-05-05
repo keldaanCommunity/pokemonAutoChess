@@ -16,6 +16,11 @@
 # Changes to Synergies
 
 # Changes to Items
+- Buff Incense: ~~10~~ 15% chance to charm on attack received
+- Buff Macho Brace: ~~-25~~ -15% attack speed
+- Buff Electirizer: ~~+40~~ +50% attack speed, paralysis duration ~~4~~ 2 seconds
+- Nerf Magmarizer: Attack ~~8~~ 5, burn duration ~~4~~ 2 seconds
+- Nerf Metal Coat: remove damage reduction
 
 # Gameplay
 
