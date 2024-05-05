@@ -1,7 +1,7 @@
 {
   "rarity": {
     "COMMON": "Común",
-    "UNCOMMON": "Poco común",
+    "UNCOMMON": "Poco Común",
     "RARE": "Raro",
     "EPIC": "Épico",
     "ULTRA": "Ultra",
@@ -1749,7 +1749,11 @@
     "POKE_DOLL": "Reduce todo el daño entrante en un 30%",
     "RED_ORB": "+10 ATK. El 25% del daño de ataque se trata como TRUE",
     "MAX_REVIVE": "Otorga RESURECTION, impidiendo que el usuario sea eliminado por primera vez y restaurando al máximo HP",
-    "ROCKY_HELMET": "+12 DEF. Niega el daño adicional crítico de los golpes críticos recibidos."
+    "ROCKY_HELMET": "+12 DEF. Niega el daño adicional crítico de los golpes críticos recibidos.",
+    "TOXIC_ORB": "El portador gana el tipo POISON. Sufre POISONNED durante toda la pelea pero aumenta su ATK en un 100%",
+    "METAL_COAT": "El portador gana el tipo STEEL.",
+    "SWIFT_WING": "El portador gana el tipo FLYING. Gana un 10% de probabilidad de esquivar ataques.",
+    "HARD_STONE": "El portador gana el tipo ROCK."
   },
   "passive_description": {
     "NONE": "sin pasivo",
