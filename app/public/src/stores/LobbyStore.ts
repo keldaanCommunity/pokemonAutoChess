@@ -175,9 +175,6 @@ export const lobbySlice = createSlice({
         if (roomIndex !== -1) {
           rooms[roomIndex] = action.payload
         } else {
-          if (metadata.type === "preparation") {
-            playSound(SOUNDS.NEW_ROOM)
-          }
           rooms.push(action.payload)
         }
       }

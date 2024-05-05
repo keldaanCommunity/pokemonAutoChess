@@ -15,7 +15,6 @@ export const SOUNDS = {
   FINISH8: "finish8.ogg",
   JOIN_ROOM: "joinroom.ogg",
   LEAVE_ROOM: "leaveroom.ogg",
-  NEW_ROOM: "newroom.ogg",
   SET_READY: "setready.ogg",
   START_GAME: "startgame.ogg"
 } as const
