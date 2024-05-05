@@ -656,16 +656,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.items.has(Item.MAGMARIZER)) {
       this.addAttack(1)
-      target.status.triggerBurn(4000, target, this)
+      target.status.triggerBurn(2000, target, this)
       this.count.magmarizerCount++
     }
 
     if (this.items.has(Item.ELECTIRIZER)) {
-      this.status.triggerParalysis(4000, this)
-      target.status.triggerParalysis(4000, target)
+      this.status.triggerParalysis(2000, this)
+      target.status.triggerParalysis(2000, target)
     }
 
-    if (target.items.has(Item.INCENSE) && chance(1 / 10)) {
+    if (target.items.has(Item.INCENSE) && chance(15 / 100)) {
       this.status.triggerCharm(2000, target, this)
     }
 
