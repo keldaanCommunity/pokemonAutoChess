@@ -779,7 +779,9 @@ export enum Pkm {
   TANGELA = "TANGELA",
   TANGROWTH = "TANGROWTH",
   PSYDUCK = "PSYDUCK",
-  GOLDUCK = "GOLDUCK"
+  GOLDUCK = "GOLDUCK",
+  PHANPY = "PHANPY",
+  DONPHAN = "DONPHAN"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1561,7 +1563,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.TANGELA]: "0114",
   [Pkm.TANGROWTH]: "0465",
   [Pkm.PSYDUCK]: "0054",
-  [Pkm.GOLDUCK]: "0055"
+  [Pkm.GOLDUCK]: "0055",
+  [Pkm.PHANPY]: "0231",
+  [Pkm.DONPHAN]: "0232"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2343,7 +2347,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TANGELA]: Pkm.TANGELA,
   [Pkm.TANGROWTH]: Pkm.TANGELA,
   [Pkm.PSYDUCK]: Pkm.PSYDUCK,
-  [Pkm.GOLDUCK]: Pkm.PSYDUCK
+  [Pkm.GOLDUCK]: Pkm.PSYDUCK,
+  [Pkm.PHANPY]: Pkm.PHANPY,
+  [Pkm.DONPHAN]: Pkm.PHANPY
 }
 
 export enum PkmDuo {
@@ -6386,5 +6392,15 @@ export const AnimationConfig: {
     attack: AnimationType.MultiScratch,
     ability: AnimationType.Attack,
     emote: AnimationType.Shoot
+  },
+  [Pkm.PHANPY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.TumbleBack,
+    emote: AnimationType.Eat
+  },
+  [Pkm.DONPHAN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.TumbleBack,
+    emote: AnimationType.Idle
   }
 }
