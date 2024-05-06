@@ -184,23 +184,32 @@ export class OnGameStartRequestCommand extends Command<
         return
       }
 
-      let freeMemory = os.freemem()
+      /*let freeMemory = os.freemem()
       let totalMemory = os.totalmem()
-      /*logger.info(
+      logger.info(
           `Memory freemem/totalmem: ${(
             (100 * freeMemory) /
             totalMemory
           ).toFixed(2)} % free (${totalMemory - freeMemory} / ${totalMemory})`
         )*/
-      freeMemory = memoryUsage().heapUsed
-      totalMemory = memoryUsage().heapTotal
+      const freeMemory = memoryUsage().heapUsed
+      const totalMemory = memoryUsage().heapTotal
       /*logger.info(
           `Memory heapUsed/heapTotal: ${(
             (100 * freeMemory) /
             totalMemory
           ).toFixed(2)} % free (${totalMemory - freeMemory} / ${totalMemory})`
         )*/
-      if (freeMemory < 0.1 * totalMemory) {
+
+      if (nbHumanPlayers < 4) {
+        //TEMP
+        this.state.addMessage({
+          author: "Server",
+          authorId: "server",
+          payload: `Due to the influx of a large number of players, lobbies with fewer than 4 players are temporarily disabled. Sorry for the inconvenience.`,
+          avatar: "0025/Pain"
+        })
+      } else if (freeMemory < 0.1 * totalMemory) {
         // if less than 10% free memory available, prevents starting another game to avoid out of memory crash
         this.state.addMessage({
           author: "Server",
