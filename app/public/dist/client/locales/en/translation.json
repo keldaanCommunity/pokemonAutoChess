@@ -1226,7 +1226,7 @@
     "BLUE_FLARE": "Inflicts [50,SP] SPECIAL + 20 per stage of FIRE synergy to the target and adjacent enemies",
     "FUSION_BOLT": "Inflicts [50,SP] SPECIAL + 40 per stage of ELECTRIC synergy to the target and adjacent enemies",
     "AURORA_VEIL": "All allies receive [5,10,15,SP] SHIELD and RUNE_PROTECT for 0.5 seconds",
-    "AQUA_JET": "Dash into the enemy backline, dealing [30,60,120,SP] SPECIAL",
+    "AQUA_JET": "Dash into the enemy backline, dealing [30,60,120,SP] SPECIAL to all enemy hit",
     "JUDGEMENT": "Inflicts [10,SP] special damage to the target, multiplied by the sum of Arceus synergy levels",
     "CHATTER": "Deal [20,SP] SPECIAL to all enemies. Every enemy has 50% chance to be CONFUSION for 1 second",
     "STEAM_ERUPTION": "Deals [80,SP] SPECIAL to the target and all adjacent enemies, and BURN them for 3 seconds",
