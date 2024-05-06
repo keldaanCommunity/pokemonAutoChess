@@ -4968,10 +4968,21 @@ export class IcyWindStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
-    const debuff = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.addAttackSpeed(-debuff)
+    const damage = [30,60,120][pokemon.stars - 1] ?? 120
+    const attackSpeedDebuff = [10,20,40][pokemon.stars - 1] ?? 40
+
+    effectInLine(board, pokemon, target, (targetInLine) => {
+      if (targetInLine != null && targetInLine.team !== pokemon.team) {
+        targetInLine.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        targetInLine.addAttackSpeed(-attackSpeedDebuff)
+      }
+    })
   }
 }
 
