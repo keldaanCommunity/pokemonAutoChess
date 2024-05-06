@@ -59,6 +59,10 @@ export default config({
      * Read more: https://expressjs.com/en/starter/basic-routing.html
      */
 
+    if (process.env.NODE_APP_INSTANCE) {
+      app.set("trust proxy", 1)
+    }
+
     // compress all responses
     app.use(compression())
 
@@ -79,8 +83,10 @@ export default config({
       headers: true // Include custom headers
     })
 
-    // Apply the rate limiting middleware to all requests
+    // Apply the rate limiting middleware to all requests*
     app.use(limiter)
+
+    app.get("/ip", (request, response) => response.send(request.ip))
 
     app.get("/", (req, res) => {
       res.sendFile(viewsSrc)
