@@ -200,7 +200,10 @@ export class OnGameStartRequestCommand extends Command<
             totalMemory
           ).toFixed(2)} % free (${totalMemory - freeMemory} / ${totalMemory})`
         )*/
-      if (freeMemory < 0.1 * totalMemory) {
+
+      const [loadAverage1Min, loadAverage5Min, loadAverage15Min] = os.loadavg()
+
+      if (freeMemory < 0.1 * totalMemory || loadAverage1Min > 0.9) {
         // if less than 10% free memory available, prevents starting another game to avoid out of memory crash
         this.state.addMessage({
           author: "Server",
@@ -209,7 +212,7 @@ export class OnGameStartRequestCommand extends Command<
           avatar: "0025/Pain"
         })
       } else if (
-        freeMemory < 0.2 * totalMemory &&
+        (freeMemory < 0.2 * totalMemory || loadAverage1Min > 0.8) &&
         nbHumanPlayers < MAX_PLAYERS_PER_GAME
       ) {
         // if less than 20% free memory available, prevents starting a game with bots
@@ -219,7 +222,10 @@ export class OnGameStartRequestCommand extends Command<
           payload: `Too many players are currently playing and the server is running out of memory. To save resources, only lobbys with ${MAX_PLAYERS_PER_GAME} human players are enabled. Sorry for the inconvenience.`,
           avatar: "0025/Pain"
         })
-      } else if (freeMemory < 0.4 * totalMemory && nbHumanPlayers === 1) {
+      } else if (
+        (freeMemory < 0.4 * totalMemory || loadAverage1Min > 0.6) &&
+        nbHumanPlayers === 1
+      ) {
         // if less than 40% free memory available, prevents starting a game solo
         this.state.addMessage({
           author: "Server",
