@@ -201,7 +201,8 @@ export class OnGameStartRequestCommand extends Command<
           ).toFixed(2)} % free (${totalMemory - freeMemory} / ${totalMemory})`
         )*/
 
-      if(nbHumanPlayers < 4){
+      if (nbHumanPlayers < 4) {
+        //TEMP
         this.state.addMessage({
           author: "Server",
           authorId: "server",
