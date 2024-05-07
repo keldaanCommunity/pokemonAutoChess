@@ -963,7 +963,7 @@
     "ENTANGLING_THREAD": "ターゲットと隣接する敵に4秒間[10,20,40,SP]SPECIALと麻痺を与える",
     "SILVER_WIND": "敵の後衛にダッシュし、進路上のすべての敵に[30,60,120,SP]のSPECIALを与える。その後、ATK 1、DEF 1、SPE_DEF 1、AP 10%、ATK_SPEED 10% を獲得します。",
     "POISON_POWDER": "敵の後衛にダッシュし、[30,60,120,SP]を与え、パス上のすべての敵に5秒間 POISONNED を適用します",
-    "ICY_WIND": "[30,60,120,SP]SPECIALを与え、目標ATK_SPEEDを[10,20,40]%減少させます",
+    "ICY_WIND": "直線上の全ての対象に[30,60,120,SP]の特殊ダメージを与え、ATK_SPEEDを[10,20,40]%減少させる。",
     "GIGATON_HAMMER": "ディール[100,200,400,SP] SPECIALだが6秒間自身を沈黙させる",
     "ACROBATICS": "お得 [20,40,80,SP] SPECIAL。キャスターがアイテムを持っていない場合、ダメージは2倍になります。",
     "ABSORB": "隣接する味方に[30,60,120,SP]SPECIALを与え、[3,6,12,SP]回復",

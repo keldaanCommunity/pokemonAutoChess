@@ -1268,7 +1268,7 @@
     "ENTANGLING_THREAD": "Inflige [10,20,40,SP] de SPECIAL y deja PARALYSIS al objetivo y a los enemigos adyacentes durante 4 segundos",
     "SILVER_WIND": "Corre hacia la retaguardia enemiga y causa [30,60,120,SP] de SPECIAL a todos los enemigos en el camino. Luego gana 1 ATK, 1 DEF, 1 SPE_DEF, 10% AP y 10% ATK_SPEED",
     "POISON_POWDER": "Corre hacia la retaguardia enemiga, inflige [30,60,120,SP] y aplica POISONNED durante 5 segundos a todos los enemigos en el camino",
-    "ICY_WIND": "Inflige [30,60,120,SP] de SPECIAL y reduce el objetivo ATK_SPEED en un [10,20,40]%",
+    "ICY_WIND": "Inflige [30,60,120,SP] SPECIAL a todos los objetivos de una línea y reduce su ATK_SPEED un [10,20,40]%.",
     "GIGATON_HAMMER": "Causa [100,200,400,SP] de SPECIAL pero deja SILENCE al atacante durante 6 segundos",
     "ACROBATICS": "Inflige [20,40,80,SP] de SPECIAL. Causa el doble de daño si el atacante no tiene elementos equipados.",
     "ABSORB": "Inflige [30,60,120,SP] de SPECIAL y cura [3,6,12,SP] a los aliados adyacentes",

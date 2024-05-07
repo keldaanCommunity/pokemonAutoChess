@@ -21,6 +21,7 @@
 - Nerf Wormadam: HP 200 → 150, Attack 20 → 13, SpeDef 3 → 5, PP 80 → 100
 - Nerf Mothim: PP 60 → 80
 - New ability for Aron Ground Slam: The pokémon slams the ground, dealing [10, 20, 40] SPECIAL and granting himself [10,20,40] SHIELD
+- Changed Icy wind (Snorunt): is now an effect in line
 
 # Changes to Synergies
 
