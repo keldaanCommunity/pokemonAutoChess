@@ -4968,8 +4968,8 @@ export class IcyWindStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [30,60,120][pokemon.stars - 1] ?? 120
-    const attackSpeedDebuff = [10,20,40][pokemon.stars - 1] ?? 40
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+    const attackSpeedDebuff = [10, 20, 40][pokemon.stars - 1] ?? 40
 
     effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine != null && targetInLine.team !== pokemon.team) {
@@ -5145,7 +5145,7 @@ export class EruptionStrategy extends AbilityStrategy {
     for (let i = 0; i < numberOfProjectiles; i++) {
       const x = randomBetween(0, BOARD_WIDTH - 1)
       const y = randomBetween(0, BOARD_HEIGHT - 1)
-      const value = board.getValue(y, x)
+      const value = board.getValue(x, y)
       if (value && value.team !== pokemon.team) {
         value.handleSpecialDamage(
           damage,
@@ -5167,6 +5167,59 @@ export class EruptionStrategy extends AbilityStrategy {
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     target.status.triggerBurn(5000, target, pokemon)
+  }
+}
+
+export class HailStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 50
+    const numberOfProjectiles = [10, 20, 30][pokemon.stars - 1] ?? 30
+
+    for (let i = 0; i < numberOfProjectiles; i++) {
+      const x = randomBetween(0, BOARD_WIDTH - 1)
+      const y =
+        target.positionY >= 3
+          ? randomBetween(3, BOARD_HEIGHT - 1)
+          : randomBetween(0, 3)
+      const enemyHit = board.getValue(x, y)
+      if (enemyHit && enemyHit.team !== pokemon.team) {
+        enemyHit.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        enemyHit.effects.add(Effect.HAIL)
+        enemyHit.status.triggerFreeze(1000, enemyHit)
+      }
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: "HAIL_PROJECTILE",
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: x,
+        targetY: y
+      })
+
+      const index = y * board.columns + x
+      if (board.effects[index] !== Effect.HAIL) {
+        board.effects[index] = Effect.HAIL
+        pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+          simulationId: pokemon.simulation.id,
+          type: BoardEvent.HAIL,
+          x,
+          y
+        })
+      }
+    }
   }
 }
 
@@ -8933,5 +8986,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.POWER_WHIP]: new PowerWhipStrategy(),
   [Ability.DARK_HARVEST]: new DarkHarvestStrategy(),
   [Ability.PSYSHOCK]: new PsyShockStrategy(),
-  [Ability.GROUND_SLAM]: new GroundSlamStrategy()
+  [Ability.GROUND_SLAM]: new GroundSlamStrategy(),
+  [Ability.HAIL]: new HailStrategy()
 }
