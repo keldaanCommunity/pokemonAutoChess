@@ -1301,10 +1301,10 @@ export class CreateTournamentLobbiesCommand extends Command<
       this.state.addAnnouncement(
         `${tournament.name} ${getTournamentStage(tournament)} are starting !`
       )
-      
+
       const brackets = makeBrackets(tournament)
       tournament.brackets = new MapSchema<TournamentBracketSchema>()
-      
+
       for (const bracket of brackets) {
         const bracketId = nanoid()
         logger.info(`Creating tournament game ${bracket.name} id: ${bracketId}`)
