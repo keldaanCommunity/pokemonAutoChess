@@ -4668,12 +4668,12 @@ export class Raticate extends Pokemon {
 
 export class AlolanRattata extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.COMMON
   stars = 1
   evolution = Pkm.ALOLAN_RATICATE
-  hp = 70
-  atk = 7
-  def = 2
+  hp = 60
+  atk = 4
+  def = 1
   speDef = 1
   maxPP = 90
   range = 1
@@ -4688,11 +4688,11 @@ export class AlolanRattata extends Pokemon {
 
 export class AlolanRaticate extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.COMMON
   stars = 2
-  hp = 140
-  atk = 13
-  def = 3
+  hp = 120
+  atk = 10
+  def = 2
   speDef = 2
   maxPP = 90
   range = 1
@@ -9351,13 +9351,13 @@ export class Cinderace extends Pokemon {
 
 export class AlolanGeodude extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ROCK])
-  rarity = Rarity.RARE
+  rarity = Rarity.COMMON
   stars = 1
   evolution = Pkm.ALOLAN_GRAVELER
-  hp = 100
-  atk = 5
-  def = 5
-  speDef = 3
+  hp = 70
+  atk = 4
+  def = 2
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.DISCHARGE
@@ -9371,13 +9371,13 @@ export class AlolanGeodude extends Pokemon {
 
 export class AlolanGraveler extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ROCK])
-  rarity = Rarity.RARE
+  rarity = Rarity.COMMON
   stars = 2
   evolution = Pkm.ALOLAN_GOLEM
-  hp = 180
-  atk = 10
-  def = 7
-  speDef = 5
+  hp = 120
+  atk = 9
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.DISCHARGE
@@ -9391,12 +9391,12 @@ export class AlolanGraveler extends Pokemon {
 
 export class AlolanGolem extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ROCK])
-  rarity = Rarity.RARE
+  rarity = Rarity.COMMON
   stars = 3
-  hp = 250
-  atk = 20
-  def = 12
-  speDef = 7
+  hp = 200
+  atk = 16
+  def = 6
+  speDef = 6
   maxPP = 100
   range = 1
   skill = Ability.DISCHARGE
