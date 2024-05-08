@@ -258,13 +258,20 @@ export function displayAbility(
 
     case Ability.ICY_WIND: {
       const specialProjectile = addAbilitySprite(skill, coordinates).setScale(1)
+      const [dx, dy] = OrientationVector[orientation]
+      const finalCoordinates = transformAttackCoordinate(
+        positionX + dx * 8,
+        positionY + dy * 8,
+        flip
+      )
+
       scene.tweens.add({
         targets: specialProjectile,
-        x: coordinatesTarget[0],
-        y: coordinatesTarget[1],
+        x: finalCoordinates[0],
+        y: finalCoordinates[1],
         ease: "linear",
         yoyo: false,
-        duration: 1000,
+        duration: 2000,
         onComplete: () => {
           specialProjectile.destroy()
         }

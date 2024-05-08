@@ -1233,7 +1233,7 @@
     "ENTANGLING_THREAD": "Verursacht [10,20,40,SP] SPECIAL und PARALYSIS das Ziel und benachbarte Feinde für 4 Sekunden",
     "SILVER_WIND": "Stürme in die gegnerische Hinterlinie und füge jedem Feind auf dem Weg [30,60,120,SP] SPECIAL zu. Dann erhältst du 1 ATK, 1 DEF, 1 SPE_DEF, 10 % AP und 10 % ATK_SPEED",
     "POISON_POWDER": "Stürme in die gegnerische Hinterlinie, verursache [30,60,120,SP] und verursache 5 Sekunden lang POISONNED auf jeden Feind auf dem Weg",
-    "ICY_WIND": "Verursacht [30,60,120,SP] SPECIAL und verringert die Ziel-ATK_SPEED um [10,20,40] %",
+    "ICY_WIND": "Verursacht [30,60,120,SP] SPECIAL an allen Zielen in einer Reihe und verringert deren ATK_SPEED um [10,20,40]%.",
     "GIGATON_HAMMER": "Verursacht [100.200.400,SP] SPECIAL, bringt sich aber selbst für 6 Sekunden zum Schweigen",
     "ACROBATICS": "Angebote [20,40,80,SP] SPECIAL. Doppelter Schaden, wenn der Zauberer keine Gegenstände hat.",
     "ABSORB": "Fügt benachbarten Verbündeten [30,60,120,SP] SPECIAL zu und heilt [3,6,12,SP].",
