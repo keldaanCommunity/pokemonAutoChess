@@ -1,5 +1,5 @@
 import { Command } from "@colyseus/command"
-import { ArraySchema } from "@colyseus/schema"
+import { ArraySchema, MapSchema } from "@colyseus/schema"
 import { Client, matchMaker, RoomListingData } from "colyseus"
 import { EmbedBuilder } from "discord.js"
 import { nanoid } from "nanoid"
@@ -1301,9 +1301,10 @@ export class CreateTournamentLobbiesCommand extends Command<
       this.state.addAnnouncement(
         `${tournament.name} ${getTournamentStage(tournament)} are starting !`
       )
-
+      
       const brackets = makeBrackets(tournament)
-      tournament.brackets.clear()
+      tournament.brackets = new MapSchema<TournamentBracketSchema>()
+      
       for (const bracket of brackets) {
         const bracketId = nanoid()
         logger.info(`Creating tournament game ${bracket.name} id: ${bracketId}`)
