@@ -4968,8 +4968,8 @@ export class IcyWindStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [30,60,120][pokemon.stars - 1] ?? 120
-    const attackSpeedDebuff = [10,20,40][pokemon.stars - 1] ?? 40
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+    const attackSpeedDebuff = [10, 20, 40][pokemon.stars - 1] ?? 40
 
     effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine != null && targetInLine.team !== pokemon.team) {
@@ -8570,7 +8570,7 @@ export class PsyShockStrategy extends AbilityStrategy {
     const extraPP = ppBurn - ppStolen
 
     target.addPP(-ppStolen)
-    pokemon.addShield(ppBurn, pokemon, true)
+    pokemon.addShield(ppBurn, pokemon, false) // ap boost already applied
     if (extraPP > 0) {
       target.handleSpecialDamage(
         extraPP,
