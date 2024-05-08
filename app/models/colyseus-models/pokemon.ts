@@ -4680,6 +4680,10 @@ export class AlolanRattata extends Pokemon {
   skill = Ability.TAIL_WHIP
   attackSprite = AttackSprite.DARK_MELEE
   regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.DARK)
+  }
 }
 
 export class AlolanRaticate extends Pokemon {
@@ -4695,6 +4699,10 @@ export class AlolanRaticate extends Pokemon {
   skill = Ability.TAIL_WHIP
   attackSprite = AttackSprite.DARK_MELEE
   regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.DARK)
+  }
 }
 
 export class Spearow extends Pokemon {
@@ -7902,14 +7910,7 @@ export class Growlithe extends Pokemon {
   range = 1
   skill = Ability.FIRE_FANG
   attackSprite = AttackSprite.FIRE_MELEE
-  regional = true
-  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
-    const regionSynergies = DungeonDetails[map]?.synergies
-    return (
-      regionSynergies.includes(Synergy.FIELD) &&
-      !regionSynergies.includes(Synergy.ROCK)
-    )
-  }
+  additional = true
 }
 
 export class Arcanine extends Pokemon {
@@ -7924,14 +7925,7 @@ export class Arcanine extends Pokemon {
   range = 1
   skill = Ability.FIRE_FANG
   attackSprite = AttackSprite.FIRE_MELEE
-  regional = true
-  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
-    const regionSynergies = DungeonDetails[map]?.synergies
-    return (
-      regionSynergies.includes(Synergy.FIRE) &&
-      !regionSynergies.includes(Synergy.ROCK)
-    )
-  }
+  additional = true
 }
 
 export class HisuiGrowlithe extends Pokemon {
@@ -7951,8 +7945,8 @@ export class HisuiGrowlithe extends Pokemon {
   isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
-      regionSynergies.includes(Synergy.ROCK) &&
-      !regionSynergies.includes(Synergy.FIELD)
+      (!state || state.additionalPokemons.includes(Pkm.GROWLITHE)) &&
+      regionSynergies.includes(Synergy.ROCK)
     )
   }
 }
@@ -7973,8 +7967,8 @@ export class HisuiArcanine extends Pokemon {
   isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
-      regionSynergies.includes(Synergy.ROCK) &&
-      !regionSynergies.includes(Synergy.FIRE)
+      (!state || state.additionalPokemons.includes(Pkm.GROWLITHE)) &&
+      regionSynergies.includes(Synergy.ROCK)
     )
   }
 }
@@ -9035,8 +9029,8 @@ export class Vulpix extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.FIRE_SPIN
-  additional = true
   attackSprite = AttackSprite.FIRE_RANGE
+  additional = true
 }
 
 export class Ninetales extends Pokemon {
@@ -9050,8 +9044,8 @@ export class Ninetales extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.FIRE_SPIN
-  additional = true
   attackSprite = AttackSprite.FIRE_RANGE
+  additional = true
 }
 
 export class AlolanVulpix extends Pokemon {
@@ -9068,6 +9062,14 @@ export class AlolanVulpix extends Pokemon {
   skill = Ability.AURORA_VEIL
   regional = true
   attackSprite = AttackSprite.ICE_RANGE
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      (!state || state.additionalPokemons.includes(Pkm.VULPIX)) &&
+      (regionSynergies.includes(Synergy.ICE) ||
+        regionSynergies.includes(Synergy.FAIRY))
+    )
+  }
 }
 
 export class AlolanNinetales extends Pokemon {
@@ -9083,6 +9085,14 @@ export class AlolanNinetales extends Pokemon {
   skill = Ability.AURORA_VEIL
   regional = true
   attackSprite = AttackSprite.ICE_RANGE
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      (!state || state.additionalPokemons.includes(Pkm.VULPIX)) &&
+      (regionSynergies.includes(Synergy.ICE) ||
+        regionSynergies.includes(Synergy.FAIRY))
+    )
+  }
 }
 
 export class Snom extends Pokemon {
@@ -9353,6 +9363,10 @@ export class AlolanGeodude extends Pokemon {
   skill = Ability.DISCHARGE
   attackSprite = AttackSprite.ROCK_MELEE
   regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.ELECTRIC)
+  }
 }
 
 export class AlolanGraveler extends Pokemon {
@@ -9369,6 +9383,10 @@ export class AlolanGraveler extends Pokemon {
   skill = Ability.DISCHARGE
   attackSprite = AttackSprite.ROCK_MELEE
   regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.ELECTRIC)
+  }
 }
 
 export class AlolanGolem extends Pokemon {
@@ -9384,6 +9402,10 @@ export class AlolanGolem extends Pokemon {
   skill = Ability.DISCHARGE
   attackSprite = AttackSprite.ROCK_MELEE
   regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.ELECTRIC)
+  }
 }
 
 export class Popplio extends Pokemon {
@@ -10071,8 +10093,8 @@ export class Diglett extends Pokemon {
   maxPP = 50
   range = 1
   skill = Ability.DIG
-  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
+  additional = true
 }
 
 export class Dugtrio extends Pokemon {
@@ -10086,8 +10108,8 @@ export class Dugtrio extends Pokemon {
   maxPP = 50
   range = 1
   skill = Ability.DIG
-  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
+  additional = true
 }
 
 export class AlolanDiglett extends Pokemon {
@@ -10104,6 +10126,13 @@ export class AlolanDiglett extends Pokemon {
   skill = Ability.DIG
   attackSprite = AttackSprite.ROCK_MELEE
   regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      (!state || state.additionalPokemons.includes(Pkm.DIGLETT)) &&
+      regionSynergies.includes(Synergy.STEEL)
+    )
+  }
 }
 
 export class AlolanDugtrio extends Pokemon {
@@ -10119,6 +10148,13 @@ export class AlolanDugtrio extends Pokemon {
   skill = Ability.DIG
   attackSprite = AttackSprite.ROCK_MELEE
   regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      (!state || state.additionalPokemons.includes(Pkm.DIGLETT)) &&
+      regionSynergies.includes(Synergy.STEEL)
+    )
+  }
 }
 
 export class Rowlet extends Pokemon {
@@ -10212,8 +10248,16 @@ export class HisuiZorua extends Pokemon {
   maxPP = 85
   range = 1
   skill = Ability.ILLUSION
-  regional = true
   attackSprite = AttackSprite.NORMAL_MELEE
+  regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      (!state || state.additionalPokemons.includes(Pkm.ZORUA)) &&
+      (regionSynergies.includes(Synergy.NORMAL) ||
+        regionSynergies.includes(Synergy.GHOST))
+    )
+  }
 }
 
 export class HisuiZoroark extends Pokemon {
@@ -10227,8 +10271,16 @@ export class HisuiZoroark extends Pokemon {
   maxPP = 85
   range = 1
   skill = Ability.ILLUSION
-  regional = true
   attackSprite = AttackSprite.NORMAL_MELEE
+  regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      (!state || state.additionalPokemons.includes(Pkm.ZORUA)) &&
+      (regionSynergies.includes(Synergy.NORMAL) ||
+        regionSynergies.includes(Synergy.GHOST))
+    )
+  }
 }
 
 export class Grimer extends Pokemon {
@@ -10244,11 +10296,7 @@ export class Grimer extends Pokemon {
   range = 1
   skill = Ability.SLUDGE
   attackSprite = AttackSprite.POISON_MELEE
-  regional = true
-  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
-    const regionSynergies = DungeonDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.MONSTER)
-  }
+  additional = true
 }
 
 export class Muk extends Pokemon {
@@ -10263,11 +10311,7 @@ export class Muk extends Pokemon {
   range = 1
   skill = Ability.SLUDGE
   attackSprite = AttackSprite.POISON_MELEE
-  regional = true
-  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
-    const regionSynergies = DungeonDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.MONSTER)
-  }
+  additional = true
 }
 
 export class AlolanGrimer extends Pokemon {
@@ -10287,8 +10331,8 @@ export class AlolanGrimer extends Pokemon {
   isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
-      regionSynergies.includes(Synergy.DARK) &&
-      !regionSynergies.includes(Synergy.MONSTER)
+      (!state || state.additionalPokemons.includes(Pkm.GRIMER)) &&
+      regionSynergies.includes(Synergy.DARK)
     )
   }
 }
@@ -10309,8 +10353,8 @@ export class AlolanMuk extends Pokemon {
   isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
-      regionSynergies.includes(Synergy.DARK) &&
-      !regionSynergies.includes(Synergy.MONSTER)
+      (!state || state.additionalPokemons.includes(Pkm.GRIMER)) &&
+      regionSynergies.includes(Synergy.DARK)
     )
   }
 }
@@ -13155,7 +13199,10 @@ export class BurmySandy extends Pokemon {
   regional = true
   isInRegion(pkm: Pkm, map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.GROUND)
+    return (
+      regionSynergies.includes(Synergy.GROUND) &&
+      !regionSynergies.includes(Synergy.GRASS)
+    )
   }
 }
 
@@ -13177,7 +13224,10 @@ export class BurmyTrash extends Pokemon {
   regional = true
   isInRegion(pkm: Pkm, map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.ARTIFICIAL)
+    return (
+      regionSynergies.includes(Synergy.ARTIFICIAL) &&
+      !regionSynergies.includes(Synergy.GRASS)
+    )
   }
 }
 
@@ -13221,7 +13271,10 @@ export class WormadamSandy extends Pokemon {
   regional = true
   isInRegion(pkm: Pkm, map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.GROUND)
+    return (
+      regionSynergies.includes(Synergy.GROUND) &&
+      !regionSynergies.includes(Synergy.GRASS)
+    )
   }
 }
 
@@ -13243,7 +13296,10 @@ export class WormadamTrash extends Pokemon {
   regional = true
   isInRegion(pkm: Pkm, map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.ARTIFICIAL)
+    return (
+      regionSynergies.includes(Synergy.ARTIFICIAL) &&
+      !regionSynergies.includes(Synergy.GRASS)
+    )
   }
 }
 
