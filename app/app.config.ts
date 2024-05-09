@@ -1,10 +1,10 @@
 import { monitor } from "@colyseus/monitor"
 import config from "@colyseus/tools"
-import compression from "compression"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
 import rateLimit from "express-rate-limit"
+import expressStaticGzip from "express-static-gzip"
 import admin from "firebase-admin"
 import { connect } from "mongoose"
 import path from "path"
@@ -59,16 +59,12 @@ export default config({
      * Read more: https://expressjs.com/en/starter/basic-routing.html
      */
 
-    // compress all responses
-    app.use(compression())
-
     app.use(((err, req, res, next) => {
       res.status(err.status).json(err)
     }) as ErrorRequestHandler)
 
     app.use(cors())
     app.use(express.json())
-    app.use(express.static(clientSrc))
 
     // set up rate limiter: maximum of five requests per minute
     const limiter = rateLimit({
@@ -193,6 +189,8 @@ export default config({
      * Read more: https://docs.colyseus.io/tools/monitor/#restrict-access-to-the-panel-using-a-password
      */
     app.use("/colyseus", monitor())
+
+    app.use("/", expressStaticGzip(clientSrc, { enableBrotli: true }))
   },
 
   beforeListen: () => {

@@ -6,9 +6,11 @@
     "@assetpack/plugin-compress": "^0.8.0",
     "@assetpack/plugin-ffmpeg": "^0.8.0",
     "@assetpack/plugin-json": "^0.8.0",
-    "@assetpack/plugin-texture-packer": "^0.8.0"
+    "@assetpack/plugin-texture-packer": "^0.8.0",
+    "brotli-cli": "^2.1.0"
   },
   "scripts": {
-    "assetpack": "assetpack -c .assetpack.js"
+    "assetpack": "assetpack -c .assetpack.js",
+    "compress": "brotli-cli compress --glob ../../app/public/dist/client/**/*.{json,js,css}"
   }
 }

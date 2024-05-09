@@ -13,6 +13,7 @@ app/public/dist/client/index.css.map
 app/public/dist/index.js
 app/public/dist/client/assets
 app/public/src/assets/musics
+app/public/dist/**/*.br
 *.code-workspace
 /app/public/dist/assets/tiles/newBackground.tmx
 /app/public/dist/assets/tiles/sleepBackground.json
