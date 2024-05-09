@@ -25,6 +25,7 @@
 - Revert PP nerfs for Water units from patch 5.0
 
 # Changes to Synergies
+- Buff Water: dodge 20 → 30%
 
 # Changes to Items
 - Buff Incense: ~~10~~ 15% chance to charm on attack received
