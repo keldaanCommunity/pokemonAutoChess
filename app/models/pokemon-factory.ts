@@ -1,8 +1,6 @@
 import { MapSchema } from "@colyseus/schema"
-import GameState from "../rooms/states/game-state"
 import { Emotion, IPlayer } from "../types"
 import { RarityCost } from "../types/Config"
-import { DungeonDetails, DungeonPMDO } from "../types/enum/Dungeon"
 import { PokemonActionState, Rarity } from "../types/enum/Game"
 import {
   Pkm,
@@ -12,16 +10,11 @@ import {
   Unowns
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
-import { Synergy } from "../types/enum/Synergy"
 import { logger } from "../utils/logger"
 import { min } from "../utils/number"
 import { pickRandomIn } from "../utils/random"
 import { Egg, Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
-import {
-  PRECOMPUTED_POKEMONS_PER_RARITY,
-  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY,
-  getPokemonData
-} from "./precomputed"
+import { PRECOMPUTED_POKEMONS_PER_RARITY, getPokemonData } from "./precomputed"
 import { PVEStage } from "./pve-stages"
 
 export default class PokemonFactory {
@@ -109,31 +102,6 @@ export default class PokemonFactory {
     return egg as Egg
   }
 
-  static getRandomFossil(board: MapSchema<Pokemon>) {
-    const currentFossils = new Array<Pkm>()
-    board.forEach((p) => {
-      if (p.types.has(Synergy.FOSSIL)) {
-        currentFossils.push(PkmFamily[p.name])
-      }
-    })
-    const possibleFossils = (
-      PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[Synergy.FOSSIL]
-        .pokemons as Pkm[]
-    ).filter((p) => {
-      const pokemon = PokemonFactory.createPokemonFromName(p)
-      return (
-        currentFossils.includes(p) === false &&
-        [Rarity.UNIQUE, Rarity.LEGENDARY].includes(pokemon.rarity) === false
-      )
-    })
-
-    if (possibleFossils.length > 0) {
-      return pickRandomIn(possibleFossils)
-    } else {
-      return Pkm.CARBINK
-    }
-  }
-
   static getSellPrice(
     name: Pkm,
     shiny: boolean,
@@ -207,8 +175,4 @@ export default class PokemonFactory {
 
     return price
   }
-}
-
-export function isAdditionalPick(pkm: Pkm): boolean {
-  return getPokemonData(pkm).additional
 }
