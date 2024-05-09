@@ -1406,7 +1406,7 @@
     "FURY_SWIPES": "El enemigo es cortado con guadañas o garras, lo que provoca ataques seguidos de [2,SP] a [5,SP]  PHYSICAL",
     "TICKLE": "Reduce el ATK y DEF de los enemigos más cercanos [1,2] en [3,SP]",
     "AROMATHERAPY": "Elimina las alteraciones de estado negativas y cura [20,40,80,SP] HP de los aliados adyacentes",
-    "DETECT": "PROTECT a los aliados adyacentes durante [0.5,SP] segundos multiplicados por el número de enemigos adyacentes"
+    "DETECT": "PROTECT a los aliados adyacentes durante [0.5,SP] segundos multiplicados por el número de enemigos adyacentes",
     "GOLD_RUSH": "Hace [20,SP] + tu cantidad de GOLD como SPECIAL, luego gana 2 GOLD",
     "AURASPHERE": "Exuda un aura y proyecta energía en una línea, infligiendo [25,50,SP] SPECIAL y SILENCE a cada rival golpeado durante 3 segundos.",
     "MULTI_ATTACK": "Inflige [10,SP] SPECIAL a los enemigos que lo rodeen, multiplicado por el nivel de sinergia de la actual forma de $t(pkm.SILVALLY)",
