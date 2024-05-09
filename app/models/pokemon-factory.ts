@@ -1,17 +1,8 @@
 import { MapSchema } from "@colyseus/schema"
 import { Emotion, IPlayer } from "../types"
-import { RarityCost } from "../types/Config"
-import { PokemonActionState, Rarity } from "../types/enum/Game"
-import {
-  Pkm,
-  PkmDuos,
-  PkmFamily,
-  PkmIndex,
-  Unowns
-} from "../types/enum/Pokemon"
-import { SpecialGameRule } from "../types/enum/SpecialGameRule"
+import { PokemonActionState } from "../types/enum/Game"
+import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
 import { logger } from "../utils/logger"
-import { min } from "../utils/number"
 import { pickRandomIn } from "../utils/random"
 import { Egg, Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
 import { PRECOMPUTED_POKEMONS_PER_RARITY, getPokemonData } from "./precomputed"
@@ -100,79 +91,5 @@ export default class PokemonFactory {
     egg.action = PokemonActionState.SLEEP
     egg.evolution = pickRandomIn(hatchList)
     return egg as Egg
-  }
-
-  static getSellPrice(
-    name: Pkm,
-    shiny: boolean,
-    specialGameRule?: SpecialGameRule | null
-  ): number {
-    if (specialGameRule === SpecialGameRule.FREE_MARKET && name !== Pkm.EGG)
-      return 0
-
-    const pokemonData = getPokemonData(name)
-    const duo = Object.entries(PkmDuos).find(([key, duo]) => duo.includes(name))
-
-    let price = 1
-
-    if (name === Pkm.EGG) {
-      price = shiny ? 10 : 2
-    } else if (name == Pkm.DITTO) {
-      price = 5
-    } else if (name === Pkm.MAGIKARP) {
-      price = 0
-    } else if (name === Pkm.FEEBAS) {
-      price = 1
-    } else if (name === Pkm.GYARADOS || name === Pkm.MILOTIC) {
-      price = 10
-    } else if (Unowns.includes(name)) {
-      price = 1
-    } else if (pokemonData.rarity === Rarity.HATCH) {
-      price = [3, 4, 5][pokemonData.stars - 1] ?? 5
-    } else if (pokemonData.rarity === Rarity.UNIQUE) {
-      price = duo ? 8 : 15
-    } else if (pokemonData.rarity === Rarity.LEGENDARY) {
-      price = duo ? 10 : 20
-    } else if (PokemonFactory.getPokemonBaseEvolution(name) == Pkm.EEVEE) {
-      price = RarityCost[pokemonData.rarity]
-    } else if (duo) {
-      price = Math.ceil(
-        (RarityCost[pokemonData.rarity] * pokemonData.stars) / 2
-      )
-    } else {
-      price = RarityCost[pokemonData.rarity] * pokemonData.stars
-    }
-
-    if (
-      specialGameRule === SpecialGameRule.RARE_IS_EXPENSIVE &&
-      name !== Pkm.EGG
-    ) {
-      price = min(0)(price - 1)
-    }
-
-    return price
-  }
-
-  static getBuyPrice(
-    name: Pkm,
-    specialGameRule?: SpecialGameRule | null
-  ): number {
-    if (specialGameRule === SpecialGameRule.FREE_MARKET) return 0
-
-    let price = 1
-
-    if (name === Pkm.DITTO) {
-      price = 5
-    } else if (Unowns.includes(name)) {
-      price = 1
-    } else {
-      price = RarityCost[getPokemonData(name).rarity]
-    }
-
-    if (specialGameRule === SpecialGameRule.RARE_IS_EXPENSIVE) {
-      price = min(0)(price - 1)
-    }
-
-    return price
   }
 }
