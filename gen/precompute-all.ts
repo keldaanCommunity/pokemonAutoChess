@@ -1,4 +1,3 @@
-import "./precompute-ability"
 import "./precompute-credits"
 import "./precompute-emotions"
 import "./precompute-pokemon-data"

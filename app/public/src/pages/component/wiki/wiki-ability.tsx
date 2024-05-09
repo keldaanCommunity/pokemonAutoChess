@@ -2,10 +2,8 @@ import React, { useState } from "react"
 import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import {
-  getPokemonData,
-  PRECOMPUTED_POKEMONS_PER_ABILITY
-} from "../../../../../models/precomputed"
+import { getPokemonData } from "../../../../../models/precomputed"
+import { PRECOMPUTED_POKEMONS_PER_ABILITY } from "../../../../../models/precomputed/precomputed-ability"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
