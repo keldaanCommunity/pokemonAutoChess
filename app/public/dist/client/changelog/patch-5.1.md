@@ -23,11 +23,14 @@
 - New ability for Aron Ground Slam: The pokémon slams the ground, dealing [10, 20, 40] SPECIAL and granting himself [10,20,40] SHIELD
 - Changed Icy wind (Snorunt): is now an effect in line
 - Revert PP nerfs for Water units from patch 5.0
+- Changed Dive (Lapras, Wailmer): now also gain 50 shield
 
 # Changes to Synergies
+
 - Buff Water: dodge 20 → 30%
 
 # Changes to Items
+
 - Buff Incense: ~~10~~ 15% chance to charm on attack received
 - Buff Macho Brace: ~~-25~~ -15% attack speed
 - Buff Electirizer: ~~+40~~ +50% attack speed, paralysis duration ~~4~~ 2 seconds

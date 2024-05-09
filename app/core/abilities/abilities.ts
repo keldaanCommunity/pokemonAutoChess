@@ -3078,6 +3078,8 @@ export class DiveStrategy extends AbilityStrategy {
     const mostSurroundedCoordinate =
       state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
 
+    pokemon.addShield(50, pokemon, true)
+
     if (mostSurroundedCoordinate) {
       pokemon.moveTo(
         mostSurroundedCoordinate.x,

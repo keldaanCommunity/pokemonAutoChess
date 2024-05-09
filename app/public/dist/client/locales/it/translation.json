@@ -919,7 +919,7 @@
     "APPLE_ACID": "Infligge [15,30,60,SP] SPECIAL ai bersagli di fronte e abbassa la loro DEF e SPE_DEF di [5,SP] punti",
     "SACRED_SWORD": "Distribuisce [100,SP] TRUE al bersaglio",
     "PSYCHIC": "Infligge [50,100,200,SP] SPECIAL e fa bruciare 15 PP al bersaglio e ai nemici adiacenti",
-    "DIVE": "Si tuffa sott'acqua e riappare nel mezzo della squadra nemica, infliggendo [15,30,60,SP] SPECIAL e FREEZE tutte le unità adiacenti per 1,5 secondi",
+    "DIVE": "Si tuffa sott'acqua ottieni [50,SP] SHIELD e riappare nel mezzo della squadra nemica, infliggendo [15,30,60,SP] SPECIAL e FREEZE tutte le unità adiacenti per 1,5 secondi",
     "SPIKE_ARMOR": "Per [3,5,10] secondi, i bersagli che attaccano in mischia questo Pokémon ricevono WOUND e ricevono SPECIAL pari al [100,SP]% della DEF attuale",
     "FUTURE_SIGHT": "Infligge [15,30,60,SP] SPECIAL a 5 nemici",
     "FAKE_TEARS": "Infligge [3,6,9,SP] SPECIAL all'intera squadra nemica e attiva ARMOR_REDUCTION per 3 secondi",
