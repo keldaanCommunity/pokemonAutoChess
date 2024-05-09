@@ -13,9 +13,9 @@ import {
   TournamentSchema
 } from "../../../../../models/colyseus-models/tournament"
 import { average } from "../../../../../utils/number"
-import "./tournament-item.css"
 import { cc } from "../../utils/jsx"
 import { TOURNAMENT_REGISTRATION_TIME } from "../../../../../types/Config"
+import "./tournament-item.css"
 
 export default function TournamentItem(props: {
   tournament: TournamentSchema
