@@ -12,6 +12,8 @@
 - Grimer is now regional and can be found in maps with Monster synergy. Alolan Grimer and Grimer cannot be found in the same region.
 - Slowpoke is now Water/Psychic and regional in maps with Water or Psychic synergy. Removed item-based evolution for Slowking.
 - Chimchar is now regional in maps with Human synergy
+- Alolan Graveler is moved to Common
+- Alolan Rattata is moved to Common
 - All Burmy/Wormadam forms are now considered of the same family
 - Cutiefly is now in regional pool
 - Corphish is now Aquatic/Dark
@@ -35,6 +37,7 @@
 # Gameplay
 
 - Regional pokemons are no longer restricted by rarity and stage level, but are removed from the pool after traveling to a new region
+- When a regional pokemon is a variant of another family (ie. Alolan Graveler vs Graveler), it will replace the original family in your shops
 
 # UI
 - Add an option to disable damage numbers
