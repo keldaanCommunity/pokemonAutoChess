@@ -22,6 +22,7 @@
 - Nerf Mothim: PP 60 → 80
 - New ability for Aron Ground Slam: The pokémon slams the ground, dealing [10, 20, 40] SPECIAL and granting himself [10,20,40] SHIELD
 - Changed Icy wind (Snorunt): is now an effect in line
+- Revert PP nerfs for Water units from patch 5.0
 
 # Changes to Synergies
 

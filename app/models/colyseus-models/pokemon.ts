@@ -4086,7 +4086,7 @@ export class Totodile extends Pokemon {
   atk = 7
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 90
   range = 1
   skill = Ability.WATERFALL
   attackSprite = AttackSprite.WATER_MELEE
@@ -4105,7 +4105,7 @@ export class Croconaw extends Pokemon {
   atk = 15
   def = 3
   speDef = 3
-  maxPP = 100
+  maxPP = 90
   range = 1
   skill = Ability.WATERFALL
   attackSprite = AttackSprite.WATER_MELEE
@@ -4123,7 +4123,7 @@ export class Feraligatr extends Pokemon {
   atk = 28
   def = 5
   speDef = 5
-  maxPP = 100
+  maxPP = 90
   range = 1
   skill = Ability.WATERFALL
   attackSprite = AttackSprite.WATER_MELEE
@@ -5179,7 +5179,7 @@ export class Kyogre extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 130
+  maxPP = 120
   range = 3
   skill = Ability.ORIGIN_PULSE
   passive = Passive.PRIMAL
@@ -5879,7 +5879,7 @@ export class Lapras extends Pokemon {
   atk = 12
   def = 5
   speDef = 6
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.DIVE
   attackSprite = AttackSprite.WATER_MELEE
@@ -6312,7 +6312,7 @@ export class PrimalKyogre extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 130
+  maxPP = 120
   range = 3
   skill = Ability.ORIGIN_PULSE
   passive = Passive.RAIN
@@ -6919,7 +6919,7 @@ export class Relicanth extends Pokemon {
   atk = 13
   def = 7
   speDef = 3
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.ROCK_TOMB
   attackSprite = AttackSprite.WATER_MELEE
@@ -9125,7 +9125,7 @@ export class Wailmer extends Pokemon {
   atk = 6
   def = 2
   speDef = 2
-  maxPP = 120
+  maxPP = 110
   range = 1
   skill = Ability.DIVE
   additional = true
@@ -9140,7 +9140,7 @@ export class Wailord extends Pokemon {
   atk = 11
   def = 3
   speDef = 3
-  maxPP = 120
+  maxPP = 110
   range = 1
   skill = Ability.DIVE
   additional = true
