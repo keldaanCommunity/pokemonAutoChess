@@ -1274,15 +1274,15 @@ export class LiquidationStrategy extends AbilityStrategy {
     switch (pokemon.stars) {
       case 1:
         damage = 20
-        reduce = 1
+        reduce = 2
         break
       case 2:
         damage = 40
-        reduce = 2
+        reduce = 4
         break
       case 3:
         damage = 80
-        reduce = 4
+        reduce = 8
         break
       default:
         break
@@ -4970,8 +4970,8 @@ export class IcyWindStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [30,60,120][pokemon.stars - 1] ?? 120
-    const attackSpeedDebuff = [10,20,40][pokemon.stars - 1] ?? 40
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+    const attackSpeedDebuff = [10, 20, 40][pokemon.stars - 1] ?? 40
 
     effectInLine(board, pokemon, target, (targetInLine) => {
       if (targetInLine != null && targetInLine.team !== pokemon.team) {

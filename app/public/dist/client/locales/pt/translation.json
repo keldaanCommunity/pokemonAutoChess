@@ -1069,7 +1069,7 @@
     "HYPER_VOICE": "Inflige [30,60,150,SP] SPECIAL a todos os Pokémon inimigos na linha do alvo e deixe-os CONFUSION por [1,2,3] segundos",
     "SHADOW_CLONE": "Cria um clone com [50,SP]% do HP máximo e dá-lhe um dos teus objectos detidos",
     "VOLT_SWITCH": "Corra para a retaguarda inimiga, causando [30,60,120,SP] SPECIAL",
-    "LIQUIDATION": "Inflige [20,40,80,SP] SPECIAL e remove [1,2,4] DEF do alvo",
+    "LIQUIDATION": "Inflige [20,40,80,SP] SPECIAL e remove [2,4,8] DEF do alvo",
     "BURN": "QUEIME todo o time inimigo por [5,10,20] segundos",
     "POISON": "Aplique POISONNED em [1,2,3] oponentes mais próximos por [3,6,9,SP=0,5] segundos",
     "SLEEP": "Faça com que [1,2,3] Pokémon inimigos na linha de fundo SLEEP por [2,SP] segundos",

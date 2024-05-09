@@ -1146,7 +1146,7 @@
     "SHADOW_CLONE": "Crea un clon con el [50,SP]% de tus HP máximos y dale uno de tus objetos.",
     "VOLT_SWITCH": "Corre hacia la retaguardia enemiga y reparte [30,60,120,SP] de SPECIAL",
     "NUZZLE": "Avanza hacia el enemigo mas lejano, inflingiendo [30,60,120,SP] de SPECIAL y manteniéndolo PARALYSIS por [3,4,5] segundos",
-    "LIQUIDATION": "Hace [20,40,80,SP] de SPECIAL y elimina [1,2,4] DEF del objetivo",
+    "LIQUIDATION": "Hace [20,40,80,SP] de SPECIAL y elimina [2,4,8] DEF del objetivo",
     "BURN": "Deja BURN a todo el equipo enemigo durante [5,10,20] segundos",
     "POISON": "Deja POISONNED a [1,2,3] oponentes más cercanos durante [3,6,9,SP=0.5] segundos",
     "SLEEP": "Haz que [1,2,3] Pokémon enemigos en la linea trasera queden SLEEP durante [2,SP] segundos",

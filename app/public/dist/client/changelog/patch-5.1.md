@@ -24,6 +24,7 @@
 - Changed Icy wind (Snorunt): is now an effect in line
 - Revert PP nerfs for Water units from patch 5.0
 - Changed Dive (Lapras, Wailmer): now also gain 50 shield
+- Buff Liquidation: defense reduction ~~1/2/4~~ 2/4/8
 
 # Changes to Synergies
 
