@@ -692,6 +692,7 @@ export default class GameRoom extends Room<GameState> {
                 name: dbrecord.name,
                 pokemons: dbrecord.pokemons,
                 rank: dbrecord.rank,
+                nbplayers: humans.length + bots.length,
                 avatar: dbrecord.avatar,
                 playerId: dbrecord.id,
                 elo: elo

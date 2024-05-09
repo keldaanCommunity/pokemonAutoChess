@@ -1,14 +1,13 @@
 import { Command } from "@colyseus/command"
 import { Client, matchMaker } from "colyseus"
 import { FilterQuery } from "mongoose"
-import os from "node:os"
 import { memoryUsage } from "node:process"
 import { GameUser, IGameUser } from "../../models/colyseus-models/game-user"
 import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
 import UserMetadata, {
   IUserMetadata
 } from "../../models/mongo-models/user-metadata"
-import { IChatV2, Role, Transfer } from "../../types"
+import { Role, Transfer } from "../../types"
 import { EloRankThreshold, MAX_PLAYERS_PER_GAME } from "../../types/Config"
 import { BotDifficulty, GameMode } from "../../types/enum/Game"
 import { logger } from "../../utils/logger"
@@ -201,15 +200,7 @@ export class OnGameStartRequestCommand extends Command<
           ).toFixed(2)} % free (${totalMemory - freeMemory} / ${totalMemory})`
         )*/
 
-      if (nbHumanPlayers < 4) {
-        //TEMP
-        this.state.addMessage({
-          author: "Server",
-          authorId: "server",
-          payload: `Due to the influx of a large number of players, lobbies with fewer than 4 players are temporarily disabled. Sorry for the inconvenience.`,
-          avatar: "0025/Pain"
-        })
-      } else if (freeMemory < 0.1 * totalMemory) {
+      if (freeMemory < 0.1 * totalMemory) {
         // if less than 10% free memory available, prevents starting another game to avoid out of memory crash
         this.state.addMessage({
           author: "Server",

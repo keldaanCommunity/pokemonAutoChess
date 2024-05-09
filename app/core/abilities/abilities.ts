@@ -8623,7 +8623,7 @@ export class PsyShockStrategy extends AbilityStrategy {
     const extraPP = ppBurn - ppStolen
 
     target.addPP(-ppStolen)
-    pokemon.addShield(ppBurn, pokemon, true)
+    pokemon.addShield(ppBurn, pokemon, false) // ap boost already applied
     if (extraPP > 0) {
       target.handleSpecialDamage(
         extraPP,

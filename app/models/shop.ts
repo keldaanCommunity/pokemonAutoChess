@@ -18,7 +18,8 @@ import {
   PkmDuos,
   PkmFamily,
   PkmProposition,
-  getUnownsPoolPerStage
+  getUnownsPoolPerStage,
+  PkmRegionalVariants
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
@@ -280,6 +281,10 @@ export default class Shop {
 
     if (candidates.length > 0) {
       pkm = pickRandomIn(candidates)
+      if(PkmRegionalVariants[pkm]){
+        const regionalVariants = PkmRegionalVariants[pkm]!.filter(p => player.regionalPokemons.includes(p))
+        if(regionalVariants.length > 0) pkm = pickRandomIn(regionalVariants)
+      }
     } else if (specificTypeWanted === Synergy.WATER) {
       return Pkm.MAGIKARP // if no more water in pool, return magikarp
     } else if (specificTypeWanted) {

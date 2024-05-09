@@ -14,6 +14,7 @@ import {
   Pkm,
   PkmDuos,
   PkmFamily,
+  PkmRegionalVariants,
   type PkmProposition
 } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
@@ -110,20 +111,7 @@ export default class Player extends Schema implements IPlayer {
     this.lightX = state.lightX
     this.lightY = state.lightY
     this.map = pickRandomIn(DungeonPMDO)
-    const initialRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
-      PokemonClasses[p].prototype.isInRegion(p, this.map, state)
-    )
-    resetArraySchema(
-      this.regionalPokemons,
-      initialRegionalPokemons.filter(
-        (p, index, array) => array.indexOf(PkmFamily[p]) === index // dedup same family
-      )
-    )
-    initialRegionalPokemons.forEach((p) => {
-      if (getPokemonData(p).stars === 1) {
-        state.shop.addRegionalPokemon(p, this)
-      }
-    })
+    this.updateRegionalPool(state)
 
     if (isBot) {
       this.loadingProgress = 100
@@ -304,6 +292,29 @@ export default class Player extends Schema implements IPlayer {
     }
 
     return needsRecomputingSynergiesAgain
+  }
+
+  updateRegionalPool(state: GameState) {
+    const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
+      PokemonClasses[p].prototype.isInRegion(p, this.map, state)
+    )
+
+    state.shop.resetRegionalPool(this)
+    newRegionalPokemons.forEach((p) => {
+      const isVariant = Object.values(PkmRegionalVariants).some((variants) =>
+        variants.includes(p)
+      )
+      if (getPokemonData(p).stars === 1 && !isVariant) {
+        state.shop.addRegionalPokemon(p, this)
+      }
+    })
+
+    resetArraySchema(
+      this.regionalPokemons,
+      newRegionalPokemons.filter(
+        (p, index, array) => array.indexOf(PkmFamily[p]) === index // dedup same family
+      )
+    )
   }
 
   onLightChange() {

@@ -35,17 +35,11 @@ import {
 } from "../../types/Config"
 import { Synergy } from "../../types/enum/Synergy"
 import GameState from "../../rooms/states/game-state"
-import { keys, resetArraySchema, values } from "../../utils/schemas"
+import { keys, values } from "../../utils/schemas"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import GameRoom from "../../rooms/game-room"
 import { Transfer } from "../../types"
 import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
-import {
-  getPokemonData,
-  PRECOMPUTED_REGIONAL_MONS
-} from "../../models/precomputed"
-import { PkmFamily } from "../../types/enum/Pokemon"
-import { PokemonClasses } from "../../models/colyseus-models/pokemon"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -589,25 +583,8 @@ export class MiniGame {
       if (player && PortalCarouselStages.includes(state.stageLevel)) {
         if (avatar.portalId && this.portals?.has(avatar.portalId)) {
           const portal = this.portals.get(avatar.portalId)!
-
           player.map = portal.map
-          const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
-            PokemonClasses[p].prototype.isInRegion(p, portal.map, state)
-          )
-
-          state.shop.resetRegionalPool(player)
-          newRegionalPokemons.forEach((p) => {
-            if (getPokemonData(p).stars === 1) {
-              state.shop.addRegionalPokemon(p, player)
-            }
-          })
-
-          resetArraySchema(
-            player.regionalPokemons,
-            newRegionalPokemons.filter(
-              (p, index, array) => array.indexOf(PkmFamily[p]) === index // dedup same family
-            )
-          )
+          player.updateRegionalPool(state)
         }
 
         const symbols = this.symbolsByPortal.get(avatar.portalId) ?? []
