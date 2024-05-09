@@ -43,8 +43,11 @@
 - Regional pokemons are no longer restricted by rarity and stage level, but are removed from the pool after traveling to a new region
 
 # UI
+
 - Add an option to disable damage numbers
 
 # Bugfix
+
+- Fix burn and poison damage sometimes applying too soon after the second time the status is applied
 
 # Misc
