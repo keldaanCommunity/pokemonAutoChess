@@ -1294,7 +1294,7 @@ export class Oshawott extends Pokemon {
   speDef = 4
   maxPP = 120
   range = 1
-  skill = Ability.CRABHAMMER
+  skill = Ability.AQUA_TAIL
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -1313,7 +1313,7 @@ export class Dewott extends Pokemon {
   speDef = 6
   maxPP = 120
   range = 1
-  skill = Ability.CRABHAMMER
+  skill = Ability.AQUA_TAIL
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -1331,7 +1331,7 @@ export class Samurott extends Pokemon {
   speDef = 8
   maxPP = 120
   range = 1
-  skill = Ability.CRABHAMMER
+  skill = Ability.AQUA_TAIL
   attackSprite = AttackSprite.WATER_MELEE
 }
 

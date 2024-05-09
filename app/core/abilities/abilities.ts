@@ -3352,6 +3352,22 @@ export class DragonTailStrategy extends AbilityStrategy {
   }
 }
 
+export class AquaTailStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [30, 60, 100][pokemon.stars - 1] ?? 100
+    const shield = [30, 60, 100][pokemon.stars - 1] ?? 100
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    pokemon.addShield(shield, pokemon, true)
+  }
+}
+
 export class DragonBreathStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -8935,5 +8951,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.POWER_WHIP]: new PowerWhipStrategy(),
   [Ability.DARK_HARVEST]: new DarkHarvestStrategy(),
   [Ability.PSYSHOCK]: new PsyShockStrategy(),
-  [Ability.GROUND_SLAM]: new GroundSlamStrategy()
+  [Ability.GROUND_SLAM]: new GroundSlamStrategy(),
+  [Ability.AQUA_TAIL]: new AquaTailStrategy()
 }

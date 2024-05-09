@@ -25,6 +25,7 @@
 - Revert PP nerfs for Water units from patch 5.0
 - Changed Dive (Lapras, Wailmer): now also gain 50 shield
 - Buff Liquidation: defense reduction ~~1/2/4~~ 2/4/8
+- New ability for Oshawott line: Aqua tail: Deal 30/60/100 special damage to the target and gain 30/60/100 shield
 
 # Changes to Synergies
 

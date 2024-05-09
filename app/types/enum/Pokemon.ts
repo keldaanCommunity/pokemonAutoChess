@@ -4719,13 +4719,13 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.OSHAWOTT]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Pose
   },
   [Pkm.DEWOTT]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hop,
+    ability: AnimationType.Swing,
     emote: AnimationType.Shoot
   },
   [Pkm.SAMUROTT]: {
