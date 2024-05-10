@@ -22,12 +22,13 @@
 - Nerf Burmy: Spedef 5 → 3
 - Nerf Wormadam: HP 200 → 150, Attack 20 → 13, SpeDef 3 → 5, PP 80 → 100
 - Nerf Mothim: PP 60 → 80
-- New ability for Aron Ground Slam: The pokémon slams the ground, dealing [10, 20, 40] SPECIAL and granting himself [10,20,40] SHIELD
+- New ability for Aron Ground Slam: The pokémon slams the ground, dealing 10/20/40 special damage and granting himself 10/20/40 Shield
 - Changed Icy wind (Snorunt): is now an effect in line
 - Revert PP nerfs for Water units from patch 5.0
 - Changed Dive (Lapras, Wailmer): now also gain 50 shield
 - Buff Liquidation: defense reduction ~~1/2/4~~ 2/4/8
 - New ability for Oshawott line: Aqua tail: Deal 30/60/100 special damage to the target and gain 30/60/100 shield
+- New ability for Amaura Hail: A hailstorm hits 10/20/30 random cells on the board, dealing 50 special damage. Hailstones stay on the ground, dealing 10 special damage and freezing opponents that walk on it for 1 second, if not Ice.
 
 # Changes to Synergies
 
