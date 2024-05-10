@@ -1,26 +1,13 @@
-import JSON_PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY from "./pokemons-per-type-and-category.json"
-import JSON_PRECOMPUTED_POKEMONS_PER_TYPE from "./pokemons-per-type.json"
 import JSON_PRECOMPUTED_POKEMONS_PER_RARITY from "./pokemons-per-rarity.json"
 import JSON_PRECOMPUTED_POKEMONS_DATA from "./pokemons-data.json"
 import JSON_PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX from "./emotions-per-pokemon-index.json"
 
-import { Synergy } from "../../types/enum/Synergy"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Rarity } from "../../types/enum/Game"
 import { Ability } from "../../types/enum/Ability"
 import { IPokemonData } from "../../types/interfaces/PokemonData"
 import { Passive } from "../../types/enum/Passive"
 
-export const PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY =
-  JSON_PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY as {
-    [key in Synergy]: {
-      pokemons: Pkm[]
-      uniquePokemons: Pkm[]
-      legendaryPokemons: Pkm[]
-      additionalPokemons: Pkm[]
-      specialPokemons: Pkm[]
-    }
-  }
 
 
 export const PRECOMPUTED_POKEMONS_PER_RARITY =

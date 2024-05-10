@@ -1,11 +1,10 @@
-import fs from "fs"
-import { RarityCost } from "../app/types/Config"
-import { Ability } from "../app/types/enum/Ability"
-import { Rarity } from "../app/types/enum/Game"
-import { Passive } from "../app/types/enum/Passive"
-import { Pkm, PkmFamily } from "../app/types/enum/Pokemon"
-import { Synergy } from "../app/types/enum/Synergy"
-import { precomputedPokemons } from "./precomputed-pokemons"
+import { RarityCost } from "../../types/Config"
+import { Ability } from "../../types/enum/Ability"
+import { Rarity } from "../../types/enum/Game"
+import { Passive } from "../../types/enum/Passive"
+import { Pkm, PkmFamily } from "../../types/enum/Pokemon"
+import { Synergy } from "../../types/enum/Synergy"
+import { precomputedPokemons } from "../../../gen/precomputed-pokemons"
 
 console.time("precompute-types-and-categories")
 
@@ -62,11 +61,16 @@ Object.keys(data).forEach((type) => {
   data[type].additionalPokemons.sort(sortByRarity)
 })
 
-//logger.debug(data)
+export const PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY = data as {
+  [key in Synergy]: {
+    pokemons: Pkm[]
+    uniquePokemons: Pkm[]
+    legendaryPokemons: Pkm[]
+    additionalPokemons: Pkm[]
+    specialPokemons: Pkm[]
+  }
+}
 
-fs.writeFileSync(
-  "../app/models/precomputed/pokemons-per-type-and-category.json",
-  JSON.stringify(data)
-)
+//logger.debug(data)
 
 console.timeEnd("precompute-types-and-categories")

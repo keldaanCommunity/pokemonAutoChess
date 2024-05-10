@@ -1,9 +1,7 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import {
-  getPokemonData,
-  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY
-} from "../../../../../models/precomputed"
+import { getPokemonData } from "../../../../../models/precomputed"
+import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../../../../models/precomputed/precomputed-types-and-categories"
 import {
   RarityColor,
   RarityCost,
@@ -27,7 +25,7 @@ export default function SynergyDetailComponent(props: {
   const additionalPokemons = useAppSelector(
     (state) => state.game.additionalPokemons
   )
-  if (SynergyTriggers.hasOwnProperty(props.type) === false) return null
+  if (Object.hasOwn(SynergyTriggers, props.type) === false) return null
   const levelReached = SynergyTriggers[props.type]
     .filter((n) => n <= props.value)
     .at(-1)

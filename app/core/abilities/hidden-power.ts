@@ -1,8 +1,6 @@
 import PokemonFactory from "../../models/pokemon-factory"
-import {
-  getPokemonData,
-  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY
-} from "../../models/precomputed"
+import { getPokemonData } from "../../models/precomputed"
+import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../models/precomputed/precomputed-types-and-categories"
 import { Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, PokemonActionState, Rarity } from "../../types/enum/Game"
