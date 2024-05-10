@@ -3,10 +3,8 @@ import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import SynergyIcon from "../icons/synergy-icon"
 import { Tooltip } from "react-tooltip"
-import {
-  getPokemonData,
-  PRECOMPUTED_POKEMONS_PER_TYPE
-} from "../../../../../models/precomputed"
+import { getPokemonData } from "../../../../../models/precomputed"
+import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
 import { RarityColor, SynergyTriggers } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Rarity } from "../../../../../types/enum/Game"
