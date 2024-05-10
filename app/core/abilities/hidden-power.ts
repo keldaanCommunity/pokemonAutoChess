@@ -1,5 +1,5 @@
 import PokemonFactory from "../../models/pokemon-factory"
-import { getPokemonData } from "../../models/precomputed"
+import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../models/precomputed/precomputed-types-and-categories"
 import { Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"

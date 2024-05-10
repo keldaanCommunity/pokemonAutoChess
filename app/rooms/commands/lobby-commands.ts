@@ -22,10 +22,7 @@ import { Tournament } from "../../models/mongo-models/tournament"
 import UserMetadata, {
   IPokemonConfig
 } from "../../models/mongo-models/user-metadata"
-import {
-  PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX,
-  
-} from "../../models/precomputed"
+import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../models/precomputed/precomputed-emotions"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
 import { getAvatarSrc, getPortraitSrc } from "../../public/src/utils"
 import {

@@ -3,7 +3,7 @@ import { Pkm } from "../types/enum/Pokemon"
 import { pickRandomIn } from "../utils/random"
 import { Egg } from "./colyseus-models/pokemon"
 import PokemonFactory from "./pokemon-factory"
-import { getPokemonData } from "./precomputed"
+import { getPokemonData } from "./precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed/precomputed-rarity"
 
 export function createRandomEgg(shiny: boolean): Egg {

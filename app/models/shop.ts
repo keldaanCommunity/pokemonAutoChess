@@ -32,7 +32,7 @@ import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
 import PokemonFactory from "./pokemon-factory"
-import { getPokemonData } from "./precomputed"
+import { getPokemonData } from "./precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed/precomputed-rarity"
 import { PVEStages } from "./pve-stages"
 
@@ -97,9 +97,7 @@ export function getSellPrice(
   } else if (PokemonFactory.getPokemonBaseEvolution(name) == Pkm.EEVEE) {
     price = RarityCost[pokemonData.rarity]
   } else if (duo) {
-    price = Math.ceil(
-      (RarityCost[pokemonData.rarity] * pokemonData.stars) / 2
-    )
+    price = Math.ceil((RarityCost[pokemonData.rarity] * pokemonData.stars) / 2)
   } else {
     price = RarityCost[pokemonData.rarity] * pokemonData.stars
   }
@@ -358,9 +356,11 @@ export default class Shop {
 
     if (candidates.length > 0) {
       pkm = pickRandomIn(candidates)
-      if(PkmRegionalVariants[pkm]){
-        const regionalVariants = PkmRegionalVariants[pkm]!.filter(p => player.regionalPokemons.includes(p))
-        if(regionalVariants.length > 0) pkm = pickRandomIn(regionalVariants)
+      if (PkmRegionalVariants[pkm]) {
+        const regionalVariants = PkmRegionalVariants[pkm]!.filter((p) =>
+          player.regionalPokemons.includes(p)
+        )
+        if (regionalVariants.length > 0) pkm = pickRandomIn(regionalVariants)
       }
     } else if (specificTypeWanted === Synergy.WATER) {
       return Pkm.MAGIKARP // if no more water in pool, return magikarp

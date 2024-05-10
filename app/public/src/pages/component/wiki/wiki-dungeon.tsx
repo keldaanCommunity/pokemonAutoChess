@@ -1,7 +1,7 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { PokemonClasses } from "../../../../../models/colyseus-models/pokemon"
-import { PRECOMPUTED_REGIONAL_MONS } from "../../../../../models/precomputed"
+import { PRECOMPUTED_REGIONAL_MONS } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { DungeonDetails, DungeonPMDO } from "../../../../../types/enum/Dungeon"
 import { PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"

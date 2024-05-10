@@ -20,7 +20,7 @@ import PokemonFactory from "../models/pokemon-factory"
 import {
   getPokemonData,
   PRECOMPUTED_REGIONAL_MONS
-} from "../models/precomputed"
+} from "../models/precomputed/precomputed-emotions"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getAdditionalsTier1 } from "../models/shop"
 import { getAvatarString } from "../public/src/utils"

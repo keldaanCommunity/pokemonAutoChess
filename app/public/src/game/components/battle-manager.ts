@@ -5,7 +5,7 @@ import Simulation from "../../../../core/simulation"
 import Count from "../../../../models/colyseus-models/count"
 import Player from "../../../../models/colyseus-models/player"
 import Status from "../../../../models/colyseus-models/status"
-import { getPokemonData } from "../../../../models/precomputed"
+import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import {
   IBoardEvent,
   IPokemonEntity,

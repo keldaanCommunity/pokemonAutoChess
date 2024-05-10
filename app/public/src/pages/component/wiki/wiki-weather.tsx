@@ -1,7 +1,7 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { getPokemonData } from "../../../../../models/precomputed"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { WeatherThreshold } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Pkm } from "../../../../../types/enum/Pokemon"
