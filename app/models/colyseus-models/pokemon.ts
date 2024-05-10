@@ -3,7 +3,6 @@
 
 import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
 import { nanoid } from "nanoid"
-import { AbilityStrategies } from "../../core/abilities/abilities"
 import {
   ConditionBasedEvolutionRule,
   CountEvolutionRule,
@@ -11,7 +10,6 @@ import {
   HatchEvolutionRule,
   ItemEvolutionRule
 } from "../../core/evolution-rules"
-import { PokemonEntity } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
 import GameState from "../../rooms/states/game-state"
 import {
@@ -5749,25 +5747,8 @@ export class Mawile extends Pokemon {
   speDef = 6
   maxPP = 80
   range = 1
-  skill = Ability.BITE
-  passive = Passive.MAWILE
+  skill = Ability.PLAY_ROUGH
   attackSprite = AttackSprite.FIGHTING_MELEE
-  afterSimulationStart({
-    entity,
-    simulation
-  }: {
-    entity: IPokemonEntity
-    simulation: Simulation
-  }) {
-    const mawile = entity as PokemonEntity
-    AbilityStrategies[Ability.ATTRACT].process(
-      mawile,
-      mawile.state,
-      simulation.board,
-      mawile,
-      false
-    )
-  }
 }
 
 export class Phione extends Pokemon {

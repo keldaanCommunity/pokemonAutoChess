@@ -24,6 +24,7 @@
 - Nerf Mothim: PP 60 → 80
 - New ability for Aron Ground Slam: The pokémon slams the ground, dealing [10, 20, 40] SPECIAL and granting himself [10,20,40] SHIELD
 - Changed Icy wind (Snorunt): is now an effect in line
+- Changed Mawile: new ability Play rough - Removed passive
 
 # Changes to Synergies
 
