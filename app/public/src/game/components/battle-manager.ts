@@ -1112,6 +1112,26 @@ export default class BattleManager {
         delay: (8 - coordinates[1]) * 100
       })
     }
+
+    if (event.type === BoardEvent.HAIL) {
+      const sprite = this.scene.add.sprite(
+        coordinates[0],
+        coordinates[1],
+        "abilities",
+        `${Effect.HAIL}/000.png`
+      )
+      sprite.setDepth(7).setScale(1).setAlpha(0)
+      sprite.anims.play(Effect.HAIL)
+      this.boardEventSprites[index] = sprite
+      this.group.add(sprite)
+
+      this.scene.tweens.add({
+        targets: sprite,
+        alpha: 1,
+        duration: 200,
+        delay: 800
+      })
+    }
   }
 
   displayHit(x: number, y: number) {
