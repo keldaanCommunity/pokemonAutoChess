@@ -1837,7 +1837,7 @@
     "ORAN_BERRY": "Se consume al estar por debajo del 50% HP, Cura 20 HP y gana 80 SHIELD",
     "PECHA_BERRY": "Se consume al estar por debajo del 50% HP o después de ser POISONNED, Cura 50HP y otorga inmunidad a POISONNED por el resto de la pelea",
     "PERSIM_BERRY": "Se consume al estar por debajo del 50% HP o después de obtener CONFUSION, Cura 20 HP, otorga 10 SPE_DEF e inmunidad a CONFUSION por el resto de la pelea",
-    "PETAYA_BERRY": "Se consume al estar por debajo del 50% HP Cura 20 HP y gana 80% AP",
+    "PETAYA_BERRY": "Se consume al estar por debajo del 50% HP, Cura 20 HP y gana 80% AP",
     "RAWST_BERRY": "Se consume al estar por debajo del 50% HP o después de recibir BURN, Cura 20 HP otorga 10 DEF e inmunidad a BURN por el resto de la pelea",
     "ROWAP_BERRY": "Se consume al estar por debajo del 50% HP, Cura 20 HP y lanza $t(ability.MAGIC_BOUNCE) durante 10 segundos.",
     "SALAC_BERRY": "Se consume al estar por debajo del 50% HP, Cura 20 HP y gana 50% ATK_SPEED",
