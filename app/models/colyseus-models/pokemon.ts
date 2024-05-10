@@ -6412,7 +6412,7 @@ export class Amaura extends Pokemon {
   speDef = 3
   maxPP = 100
   range = 1
-  skill = Ability.ICICLE_CRASH
+  skill = Ability.HAIL
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
@@ -6427,7 +6427,7 @@ export class Aurorus extends Pokemon {
   speDef = 5
   maxPP = 100
   range = 1
-  skill = Ability.ICICLE_CRASH
+  skill = Ability.HAIL
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
