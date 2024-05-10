@@ -24,8 +24,9 @@ import UserMetadata, {
 } from "../../models/mongo-models/user-metadata"
 import {
   PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX,
-  PRECOMPUTED_POKEMONS_PER_RARITY
+  
 } from "../../models/precomputed"
+import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
 import { getAvatarSrc, getPortraitSrc } from "../../public/src/utils"
 import {
   CDN_PORTRAIT_URL,

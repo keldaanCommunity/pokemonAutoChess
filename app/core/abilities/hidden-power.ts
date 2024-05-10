@@ -14,6 +14,7 @@ import PokemonState from "../pokemon-state"
 import { AbilityStrategies } from "./abilities"
 import { AbilityStrategy } from "./ability-strategy"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
+import { createRandomEgg } from "../../models/egg-factory"
 
 export class HiddenPowerStrategy extends AbilityStrategy {
   copyable = false
@@ -132,7 +133,7 @@ export class HiddenPowerEStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    const egg = PokemonFactory.createRandomEgg(false)
+    const egg = createRandomEgg(false)
     const player = unown.player
     if (player) {
       const x = getFirstAvailablePositionInBench(player.board)

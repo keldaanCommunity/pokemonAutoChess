@@ -17,7 +17,11 @@ import UserMetadata, {
   IPokemonConfig
 } from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
-import { getPokemonData, PRECOMPUTED_POKEMONS_PER_RARITY, PRECOMPUTED_REGIONAL_MONS } from "../models/precomputed"
+import {
+  getPokemonData,
+  PRECOMPUTED_REGIONAL_MONS
+} from "../models/precomputed"
+import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getAdditionalsTier1 } from "../models/shop"
 import { getAvatarString } from "../public/src/utils"
 import {
@@ -198,7 +202,7 @@ export default class GameRoom extends Room<GameState> {
               this.state.specialGameRule === SpecialGameRule.EVERYONE_IS_HERE
             ) {
               PRECOMPUTED_REGIONAL_MONS.forEach((p) => {
-                if(getPokemonData(p).stars === 1){
+                if (getPokemonData(p).stars === 1) {
                   this.state.shop.addRegionalPokemon(p, player)
                 }
               })
@@ -208,10 +212,13 @@ export default class GameRoom extends Room<GameState> {
       })
     )
 
-    setTimeout(() => {
-      this.broadcast(Transfer.LOADING_COMPLETE)
-      this.startGame()
-    }, 5 * 60 * 1000) // maximum 5 minutes of loading game, game will start no matter what after that
+    setTimeout(
+      () => {
+        this.broadcast(Transfer.LOADING_COMPLETE)
+        this.startGame()
+      },
+      5 * 60 * 1000
+    ) // maximum 5 minutes of loading game, game will start no matter what after that
 
     this.onMessage(Transfer.ITEM, (client, item: Item) => {
       if (!this.state.gameFinished && client.auth) {

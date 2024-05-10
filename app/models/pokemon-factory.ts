@@ -1,11 +1,8 @@
 import { MapSchema } from "@colyseus/schema"
 import { Emotion, IPlayer } from "../types"
-import { PokemonActionState } from "../types/enum/Game"
 import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
 import { logger } from "../utils/logger"
-import { pickRandomIn } from "../utils/random"
-import { Egg, Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
-import { PRECOMPUTED_POKEMONS_PER_RARITY, getPokemonData } from "./precomputed"
+import { Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
 import { PVEStage } from "./pve-stages"
 
 export default class PokemonFactory {
@@ -79,17 +76,5 @@ export default class PokemonFactory {
       logger.warn(`No pokemon with name "${name}" found, return MissingNo`)
       return new Pokemon(shiny, emotion)
     }
-  }
-
-  static createRandomEgg(shiny: boolean): Egg {
-    const hatchList = PRECOMPUTED_POKEMONS_PER_RARITY.HATCH.filter(
-      (p) => getPokemonData(p).stars === 1
-    )
-    const egg = PokemonFactory.createPokemonFromName(Pkm.EGG, {
-      selectedShiny: shiny
-    })
-    egg.action = PokemonActionState.SLEEP
-    egg.evolution = pickRandomIn(hatchList)
-    return egg as Egg
   }
 }

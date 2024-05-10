@@ -1,4 +1,3 @@
-import JSON_PRECOMPUTED_POKEMONS_PER_RARITY from "./pokemons-per-rarity.json"
 import JSON_PRECOMPUTED_POKEMONS_DATA from "./pokemons-data.json"
 import JSON_PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX from "./emotions-per-pokemon-index.json"
 
@@ -7,13 +6,6 @@ import { Rarity } from "../../types/enum/Game"
 import { Ability } from "../../types/enum/Ability"
 import { IPokemonData } from "../../types/interfaces/PokemonData"
 import { Passive } from "../../types/enum/Passive"
-
-
-
-export const PRECOMPUTED_POKEMONS_PER_RARITY =
-  JSON_PRECOMPUTED_POKEMONS_PER_RARITY as {
-    [key in Rarity]: Pkm[]
-  }
 
 export const PRECOMPUTED_POKEMONS_DATA = JSON_PRECOMPUTED_POKEMONS_DATA as {
   [pkm in Pkm]?: Omit<IPokemonData, "name" | "index">

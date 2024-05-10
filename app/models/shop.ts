@@ -32,7 +32,8 @@ import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
 import PokemonFactory from "./pokemon-factory"
-import { PRECOMPUTED_POKEMONS_PER_RARITY, getPokemonData } from "./precomputed"
+import { getPokemonData } from "./precomputed"
+import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed/precomputed-rarity"
 import { PVEStages } from "./pve-stages"
 
 export function getPoolSize(rarity: Rarity, maxStars: number): number {
