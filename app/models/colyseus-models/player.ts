@@ -30,7 +30,7 @@ import PokemonFactory from "../pokemon-factory"
 import {
   getPokemonData,
   PRECOMPUTED_REGIONAL_MONS
-} from "../precomputed/precomputed-emotions"
+} from "../precomputed/precomputed-pokemon-data"
 import ExperienceManager from "./experience-manager"
 import HistoryItem from "./history-item"
 import { Pokemon, isOnBench, PokemonClasses } from "./pokemon"
