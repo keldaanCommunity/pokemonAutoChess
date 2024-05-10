@@ -2041,6 +2041,35 @@ export function displayAbility(
       }
       break
 
+    case "HAIL_PROJECTILE": {
+      const specialProjectile = addAbilitySprite(skill, [
+        coordinatesTarget[0] + 60,
+        coordinatesTarget[1] - 240
+      ]).setScale(1)
+      const randomDelay = randomBetween(0, 300)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        duration: 800,
+        delay: randomDelay,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+
+      setTimeout(
+        () =>
+          addAbilitySprite(
+            Ability.SHEER_COLD,
+            coordinatesTarget,
+            true
+          ).setScale(1),
+        800 + randomDelay
+      )
+      break
+    }
+
     case "FIELD_DEATH":
       addAbilitySprite("FIELD_DEATH", coordinates, true).setScale(2)
       break
