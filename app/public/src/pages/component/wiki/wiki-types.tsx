@@ -153,7 +153,7 @@ export function WikiAllTypes() {
 
   const pokemonsPerType = pokemons.reduce((perType, p) => {
     p.types.forEach((type) => {
-      if (Object.hasOwn(perType, type) === false) perType[type] = []
+      if (Object.prototype.hasOwnProperty.call(perType, type) === false) perType[type] = []
       perType[type].push(p)
     })
     return perType
