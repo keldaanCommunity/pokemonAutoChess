@@ -45,6 +45,7 @@
 
 # UI
 - Add an option to disable damage numbers
+- Add a button to quickly change avatar from collection screen,
 
 # Bugfix
 
