@@ -48,7 +48,7 @@ import { Weather } from "../../types/enum/Weather"
 import PokemonFactory from "../../models/pokemon-factory"
 import { createRandomEgg } from "../../models/egg-factory"
 import Board, { Cell } from "../board"
-import { PokemonEntity } from "../pokemon-entity"
+import { getMoveSpeed, PokemonEntity } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 
 import { getFirstAvailablePositionInBench } from "../../utils/board"
@@ -1275,15 +1275,15 @@ export class LiquidationStrategy extends AbilityStrategy {
     switch (pokemon.stars) {
       case 1:
         damage = 20
-        reduce = 1
+        reduce = 2
         break
       case 2:
         damage = 40
-        reduce = 2
+        reduce = 4
         break
       case 3:
         damage = 80
-        reduce = 4
+        reduce = 8
         break
       default:
         break
@@ -3079,6 +3079,8 @@ export class DiveStrategy extends AbilityStrategy {
     const mostSurroundedCoordinate =
       state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
 
+    pokemon.addShield(50, pokemon, true)
+
     if (mostSurroundedCoordinate) {
       pokemon.moveTo(
         mostSurroundedCoordinate.x,
@@ -3348,6 +3350,22 @@ export class DragonTailStrategy extends AbilityStrategy {
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     pokemon.addDefense(buff, true)
     pokemon.addSpecialDefense(buff, true)
+  }
+}
+
+export class AquaTailStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [30, 60, 100][pokemon.stars - 1] ?? 100
+    const shield = [30, 60, 100][pokemon.stars - 1] ?? 100
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    pokemon.addShield(shield, pokemon, true)
   }
 }
 
@@ -8685,6 +8703,54 @@ export class RapidSpinStrategy extends AbilityStrategy {
   }
 }
 
+export class BounceStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const nbBounces = Math.round(
+      [1, 2, 3][pokemon.stars - 1] * (1 + pokemon.ap / 100)
+    )
+    for (let i = 0; i < nbBounces; i++) {
+      setTimeout(() => {
+        const destination = state.getFarthestTargetCoordinateAvailablePlace(
+          pokemon,
+          board
+        )
+        if (destination && pokemon.hp > 0) {
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: Ability.BOUNCE,
+            positionX: pokemon.positionX,
+            positionY: pokemon.positionY
+          })
+          pokemon.moveTo(destination.x, destination.y, board)
+          const adjacentCells = board.getAdjacentCells(
+            destination.x,
+            destination.y
+          )
+          adjacentCells.forEach((cell) => {
+            if (cell.value && cell.value.team !== pokemon.team) {
+              const damage = 10
+              cell.value.handleSpecialDamage(
+                damage,
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                crit
+              )
+            }
+          })
+        }
+      }, i * 400)
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -9008,6 +9074,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DARK_HARVEST]: new DarkHarvestStrategy(),
   [Ability.PSYSHOCK]: new PsyShockStrategy(),
   [Ability.GROUND_SLAM]: new GroundSlamStrategy(),
+  [Ability.AQUA_TAIL]: new AquaTailStrategy(),
   [Ability.HAIL]: new HailStrategy(),
-  [Ability.RAPID_SPIN]: new RapidSpinStrategy()
+  [Ability.RAPID_SPIN]: new RapidSpinStrategy(),
+  [Ability.BOUNCE]: new BounceStrategy()
 }

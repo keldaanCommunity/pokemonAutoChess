@@ -1,5 +1,3 @@
 import "./precompute-credits"
 import "./precompute-emotions"
-import "./precompute-pokemon-data"
-import "../app/models/precomputed/precomputed-rarity"
 import "./csv-export"

@@ -1291,7 +1291,7 @@ export class Oshawott extends Pokemon {
   speDef = 4
   maxPP = 120
   range = 1
-  skill = Ability.CRABHAMMER
+  skill = Ability.AQUA_TAIL
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -1310,7 +1310,7 @@ export class Dewott extends Pokemon {
   speDef = 6
   maxPP = 120
   range = 1
-  skill = Ability.CRABHAMMER
+  skill = Ability.AQUA_TAIL
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -1328,7 +1328,7 @@ export class Samurott extends Pokemon {
   speDef = 8
   maxPP = 120
   range = 1
-  skill = Ability.CRABHAMMER
+  skill = Ability.AQUA_TAIL
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -4083,7 +4083,7 @@ export class Totodile extends Pokemon {
   atk = 7
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 90
   range = 1
   skill = Ability.WATERFALL
   attackSprite = AttackSprite.WATER_MELEE
@@ -4102,7 +4102,7 @@ export class Croconaw extends Pokemon {
   atk = 15
   def = 3
   speDef = 3
-  maxPP = 100
+  maxPP = 90
   range = 1
   skill = Ability.WATERFALL
   attackSprite = AttackSprite.WATER_MELEE
@@ -4120,7 +4120,7 @@ export class Feraligatr extends Pokemon {
   atk = 28
   def = 5
   speDef = 5
-  maxPP = 100
+  maxPP = 90
   range = 1
   skill = Ability.WATERFALL
   attackSprite = AttackSprite.WATER_MELEE
@@ -5184,7 +5184,7 @@ export class Kyogre extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 130
+  maxPP = 120
   range = 3
   skill = Ability.ORIGIN_PULSE
   passive = Passive.PRIMAL
@@ -5867,7 +5867,7 @@ export class Lapras extends Pokemon {
   atk = 12
   def = 5
   speDef = 6
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.DIVE
   attackSprite = AttackSprite.WATER_MELEE
@@ -6300,7 +6300,7 @@ export class PrimalKyogre extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 130
+  maxPP = 120
   range = 3
   skill = Ability.ORIGIN_PULSE
   passive = Passive.RAIN
@@ -6907,7 +6907,7 @@ export class Relicanth extends Pokemon {
   atk = 13
   def = 7
   speDef = 3
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.ROCK_TOMB
   attackSprite = AttackSprite.WATER_MELEE
@@ -9115,7 +9115,7 @@ export class Wailmer extends Pokemon {
   atk = 6
   def = 2
   speDef = 2
-  maxPP = 120
+  maxPP = 110
   range = 1
   skill = Ability.DIVE
   additional = true
@@ -9130,7 +9130,7 @@ export class Wailord extends Pokemon {
   atk = 11
   def = 3
   speDef = 3
-  maxPP = 120
+  maxPP = 110
   range = 1
   skill = Ability.DIVE
   additional = true
@@ -13398,11 +13398,7 @@ export class Tangrowth extends Pokemon {
 }
 
 export class Phanpy extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.GROUND,
-    Synergy.WILD,
-    Synergy.BABY
-  ])
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.WILD, Synergy.BABY])
   rarity = Rarity.RARE
   evolution = Pkm.DONPHAN
   stars = 1
@@ -13417,10 +13413,7 @@ export class Phanpy extends Pokemon {
 }
 
 export class Donphan extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.GROUND,
-    Synergy.WILD
-  ])
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.WILD])
   rarity = Rarity.RARE
   stars = 2
   hp = 180
@@ -13431,6 +13424,37 @@ export class Donphan extends Pokemon {
   range = 1
   skill = Ability.RAPID_SPIN
   attackSprite = AttackSprite.ROCK_MELEE
+}
+
+export class Spoink extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FIELD])
+  rarity = Rarity.RARE
+  evolution = Pkm.GRUMPIG
+  stars = 1
+  hp = 100
+  atk = 5
+  def = 4
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.BOUNCE
+  attackSprite = AttackSprite.PSYCHIC_MELEE
+  regional = true
+}
+
+export class Grumpig extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FIELD])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 240
+  atk = 10
+  def = 6
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.BOUNCE
+  attackSprite = AttackSprite.PSYCHIC_MELEE
+  regional = true
 }
 
 export const PokemonClasses: Record<
@@ -14220,5 +14244,7 @@ export const PokemonClasses: Record<
   [Pkm.PSYDUCK]: Psyduck,
   [Pkm.GOLDUCK]: Golduck,
   [Pkm.PHANPY]: Phanpy,
-  [Pkm.DONPHAN]: Donphan
+  [Pkm.DONPHAN]: Donphan,
+  [Pkm.SPOINK]: Spoink,
+  [Pkm.GRUMPIG]: Grumpig
 }
