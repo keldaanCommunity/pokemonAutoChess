@@ -82,6 +82,7 @@ export default class PokemonAvatar extends PokemonSprite {
     NUM_KEYS.forEach((keycode, i) => {
       const onKeydown = (event) => {
         if (this.isCurrentPlayerAvatar && this.scene?.game && event.ctrlKey) {
+          event.preventDefault()
           this.sendEmote(AvatarEmotions[i])
         }
       }
@@ -210,7 +211,8 @@ export default class PokemonAvatar extends PokemonSprite {
     )
     const pokemonCollection = player?.pokemonCollection
     const pConfig = pokemonCollection?.[this.index]
-    const unlocked = pConfig && pConfig.emotions.includes(emotion)
+    const emotions = this.shiny ? pConfig.shinyEmotions : pConfig.emotions
+    const unlocked = pConfig && emotions.includes(emotion)
     if (unlocked) {
       store.dispatch(
         showEmote(getAvatarString(this.index, this.shiny, emotion))

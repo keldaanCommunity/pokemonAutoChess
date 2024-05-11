@@ -48,5 +48,7 @@
 - Add a button to quickly change avatar from collection screen,
 
 # Bugfix
+- Fixed emote keyboard shortcut changing tab
+- Fixed emote menu when player uses a shiny avatar
 
 # Misc
