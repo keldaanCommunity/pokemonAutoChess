@@ -1,6 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../../app/models/precomputed"
+import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed/precomputed-emotions"
 import { Emotion, PkmWithConfig } from "../../../../../types"
 import { Item } from "../../../../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"

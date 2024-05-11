@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useCallback, useMemo } from "react"
-import { getPokemonData } from "../../../../../models/precomputed"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Passive } from "../../../../../types/enum/Passive"
 import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"

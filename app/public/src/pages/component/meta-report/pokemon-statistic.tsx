@@ -1,11 +1,9 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-statistic"
-import {
-  PRECOMPUTED_POKEMONS_PER_RARITY,
-  PRECOMPUTED_POKEMONS_PER_TYPE,
-  getPokemonData
-} from "../../../../../models/precomputed"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
+import {PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
+import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
 import { Rarity } from "../../../../../types/enum/Game"
 import {
   Pkm,

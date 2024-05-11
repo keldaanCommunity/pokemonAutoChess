@@ -5,10 +5,8 @@ import { RarityColor } from "../../../../../types/Config"
 import { Rarity } from "../../../../../types/enum/Game"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
-import {
-  PRECOMPUTED_POKEMONS_PER_RARITY,
-  getPokemonData
-} from "../../../../../models/precomputed"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
+import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
 import { getPortraitSrc } from "../../../utils"
 import WikiPokemonDetail from "./wiki-pokemon-detail"
 import { t } from "i18next"

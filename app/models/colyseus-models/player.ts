@@ -27,7 +27,10 @@ import { resetArraySchema, values } from "../../utils/schemas"
 import { Effects } from "../effects"
 import type { IPokemonConfig } from "../mongo-models/user-metadata"
 import PokemonFactory from "../pokemon-factory"
-import { getPokemonData, PRECOMPUTED_REGIONAL_MONS } from "../precomputed"
+import {
+  getPokemonData,
+  PRECOMPUTED_REGIONAL_MONS
+} from "../precomputed/precomputed-pokemon-data"
 import ExperienceManager from "./experience-manager"
 import HistoryItem from "./history-item"
 import { Pokemon, isOnBench, PokemonClasses } from "./pokemon"

@@ -28,6 +28,7 @@
 - Changed Dive (Lapras, Wailmer): now also gain 50 shield
 - Buff Liquidation: defense reduction ~~1/2/4~~ 2/4/8
 - New ability for Oshawott line: Aqua tail: Deal 30/60/100 special damage to the target and gain 30/60/100 shield
+- Changed Mawile: new ability Play rough - Removed passive
 - New ability for Amaura Hail: A hailstorm hits 10/20/30 random cells on the board, dealing 50 special damage. Hailstones stay on the ground, dealing 10 special damage and freezing opponents that walk on it for 1 second, if not Ice.
 
 # Changes to Synergies

@@ -46,6 +46,7 @@ import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 
 import PokemonFactory from "../../models/pokemon-factory"
+import { createRandomEgg } from "../../models/egg-factory"
 import Board, { Cell } from "../board"
 import { PokemonEntity } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
@@ -6820,7 +6821,7 @@ export class EggsplosionStrategy extends AbilityStrategy {
       crit
     )
     if (kill.death && Math.random() < 0.3) {
-      const egg = PokemonFactory.createRandomEgg(false)
+      const egg = createRandomEgg(false)
       const player = pokemon.player
       if (player) {
         const x = getFirstAvailablePositionInBench(player.board)
