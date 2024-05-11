@@ -579,7 +579,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
     [Stat.CRIT_CHANCE]: 10,
     [Stat.CRIT_DAMAGE]: 1
   },
-  [Item.LEFTOVERS]: { [Stat.ATK_SPEED]: 10, [Stat.SHIELD]: 15 },
+  [Item.GRACIDEA_FLOWER]: { [Stat.ATK_SPEED]: 10, [Stat.SHIELD]: 15 },
   [Item.CHOICE_SCARF]: { [Stat.ATK_SPEED]: 10, [Stat.SPE_DEF]: 2 },
   [Item.FIRE_GEM]: { [Stat.ATK_SPEED]: 10, [Stat.ATK]: 3 },
   [Item.DEFENSIVE_RIBBON]: { [Stat.ATK_SPEED]: 10, [Stat.DEF]: 2 },
@@ -590,7 +590,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.FLUFFY_TAIL]: { [Stat.CRIT_CHANCE]: 10, [Stat.DEF]: 2 },
   [Item.KINGS_ROCK]: { [Stat.SHIELD]: 150 },
   [Item.SHINY_CHARM]: { [Stat.SHIELD]: 15, [Stat.SPE_DEF]: 2 },
-  [Item.GRACIDEA_FLOWER]: { [Stat.SHIELD]: 15, [Stat.ATK]: 3 },
+  [Item.SOOTHE_BELL]: { [Stat.SHIELD]: 15, [Stat.ATK]: 3 },
   [Item.FLAME_ORB]: { [Stat.SHIELD]: 15, [Stat.DEF]: 2 },
   [Item.ASSAULT_VEST]: { [Stat.SPE_DEF]: 20 },
   [Item.AMULET_COIN]: { [Stat.SPE_DEF]: 2, [Stat.ATK]: 3 },

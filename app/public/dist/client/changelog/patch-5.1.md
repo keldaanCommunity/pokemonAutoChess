@@ -32,6 +32,9 @@
 # Changes to Synergies
 
 # Changes to Items
+- Removed Leftovers
+- Changed recipe for Gracidea Flower: magnet + seed
+- New item: Soothe Bell (charcoal + seed): the holder attack gives 25% of damage dealt as Shield to the ally closest to the target
 - Buff Incense: ~~10~~ 15% chance to charm on attack received
 - Buff Macho Brace: ~~-25~~ -15% attack speed
 - Buff Electirizer: ~~+40~~ +50% attack speed, paralysis duration ~~4~~ 2 seconds
