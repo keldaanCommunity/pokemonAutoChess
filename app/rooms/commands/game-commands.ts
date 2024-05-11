@@ -14,8 +14,10 @@ import Simulation from "../../core/simulation"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import Player from "../../models/colyseus-models/player"
 import { isOnBench } from "../../models/colyseus-models/pokemon"
+import { createRandomEgg } from "../../models/egg-factory"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
+import { getBuyPrice, getSellPrice } from "../../models/shop"
 import { getAvatarString } from "../../public/src/utils"
 import {
   IClient,
@@ -96,7 +98,7 @@ export class OnShopCommand extends Command<
       pokemon.evolutionRule instanceof CountEvolutionRule &&
       pokemon.evolutionRule.canEvolveIfBuyingOne(pokemon, player)
 
-    let cost = PokemonFactory.getBuyPrice(name, this.state.specialGameRule)
+    let cost = getBuyPrice(name, this.state.specialGameRule)
     const freeSpaceOnBench = getFreeSpaceOnBench(player.board)
     const hasSpaceOnBench = freeSpaceOnBench > 0 || isEvolution
 
@@ -152,7 +154,7 @@ export class OnRemoveFromShopCommand extends Command<
       return
 
     const name = player.shop[index]
-    const cost = PokemonFactory.getBuyPrice(name, this.state.specialGameRule)
+    const cost = getBuyPrice(name, this.state.specialGameRule)
     if (player.money >= cost) {
       player.shop = player.shop.with(index, Pkm.DEFAULT)
       this.state.shop.releasePokemon(name, player)
@@ -521,7 +523,7 @@ export class OnSellDropCommand extends Command<
 
       if (pokemon) {
         this.state.shop.releasePokemon(pokemon.name, player)
-        player.money += PokemonFactory.getSellPrice(
+        player.money += getSellPrice(
           pokemon.name,
           pokemon.shiny,
           this.state.specialGameRule
@@ -1221,7 +1223,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           nbOfEggs < nbMaxEggs
         ) {
           const eggShiny = player.effects.has(Effect.GOLDEN_EGGS)
-          const egg = PokemonFactory.createRandomEgg(eggShiny)
+          const egg = createRandomEgg(eggShiny)
           const x = getFirstAvailablePositionInBench(player.board)
           egg.positionX = x !== undefined ? x : -1
           egg.positionY = 0

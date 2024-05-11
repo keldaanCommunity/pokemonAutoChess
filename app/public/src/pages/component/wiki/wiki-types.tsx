@@ -3,10 +3,8 @@ import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import SynergyIcon from "../icons/synergy-icon"
 import { Tooltip } from "react-tooltip"
-import {
-  getPokemonData,
-  PRECOMPUTED_POKEMONS_PER_TYPE
-} from "../../../../../models/precomputed"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
+import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
 import { RarityColor, SynergyTriggers } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Rarity } from "../../../../../types/enum/Game"
@@ -155,7 +153,7 @@ export function WikiAllTypes() {
 
   const pokemonsPerType = pokemons.reduce((perType, p) => {
     p.types.forEach((type) => {
-      if (perType.hasOwnProperty(type) === false) perType[type] = []
+      if (Object.prototype.hasOwnProperty.call(perType, type) === false) perType[type] = []
       perType[type].push(p)
     })
     return perType

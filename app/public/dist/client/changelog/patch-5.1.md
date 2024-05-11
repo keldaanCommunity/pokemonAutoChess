@@ -24,6 +24,7 @@
 - Nerf Mothim: PP 60 → 80
 - New ability for Aron Ground Slam: The pokémon slams the ground, dealing 10/20/40 special damage and granting himself 10/20/40 Shield
 - Changed Icy wind (Snorunt): is now an effect in line
+- Changed Mawile: new ability Play rough - Removed passive
 - New ability for Amaura Hail: A hailstorm hits 10/20/30 random cells on the board, dealing 50 special damage. Hailstones stay on the ground, dealing 10 special damage and freezing opponents that walk on it for 1 second, if not Ice.
 
 # Changes to Synergies

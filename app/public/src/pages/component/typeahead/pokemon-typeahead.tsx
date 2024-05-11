@@ -5,7 +5,7 @@ import { TypeaheadProps } from "./types"
 
 import { useTranslation } from "react-i18next"
 import { Pkm } from "../../../../../types/enum/Pokemon"
-import { getPokemonData } from "../../../../../models/precomputed"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../../../../../types/enum/Ability"
 import "./pokemon-typeahead.css"
 import { Passive } from "../../../../../types/enum/Passive"

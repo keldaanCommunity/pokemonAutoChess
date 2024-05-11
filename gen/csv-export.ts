@@ -4,7 +4,7 @@ import PokemonFactory from "../app/models/pokemon-factory"
 import { Ability } from "../app/types/enum/Ability"
 import { logger } from "../app/utils/logger"
 import { Synergy } from "../app/types/enum/Synergy"
-import { getPokemonData } from "../app/models/precomputed"
+import { getPokemonData } from "../app/models/precomputed/precomputed-pokemon-data"
 
 const csvWriter = createObjectCsvWriter({
   path: "../app/models/precomputed/pokemons-data.csv",
@@ -89,7 +89,9 @@ Object.values(Pkm)
         name: pkm,
         category: pokemon.rarity,
         tier: pokemon.stars,
-        stages: pokemon.stages ?? Math.max(...family.map((p) => getPokemonData(p as Pkm).stars)),
+        stages:
+          pokemon.stages ??
+          Math.max(...family.map((p) => getPokemonData(p as Pkm).stars)),
         additional: pokemonData.additional,
         regional: pokemonData.regional,
         duo: Object.values(PkmDuos).some((duo) => duo.includes(pkm)),

@@ -5,6 +5,7 @@ import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import Status from "../models/colyseus-models/status"
 import PokemonFactory from "../models/pokemon-factory"
+import { getSellPrice } from "../models/shop"
 import {
   AttackSprite,
   Emotion,
@@ -1458,7 +1459,7 @@ export function getUnitScore(pokemon: PokemonEntity | IPokemon) {
   let score = 0
   score += 100 * pokemon.items.size
   score += 10 * pokemon.stars
-  score += PokemonFactory.getSellPrice(pokemon.name, pokemon.shiny)
+  score += getSellPrice(pokemon.name, pokemon.shiny)
   return score
 }
 

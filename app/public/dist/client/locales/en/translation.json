@@ -1940,7 +1940,6 @@
     "COMFEY": "Comfey cannot hold items. At the start of the fight, the nearest ally with a free item slot wears Comfey and gains all its stats. Comfey casts its ability at the same time than its holder. When its holder is KO, Comfey fights on its own.",
     "HISUIAN_TYPHLOSION": "The pokémon inflicts 20% extra damage on a BURN or SILENCE target",
     "PICKUP": "The pokémon will start with a random item if it's not holding anything",
-    "MAWILE": "Mawile fools the foes with its docile-looking face. Cast $t(ability.ATTRACT) at the start of the fight.",
     "CORSOLA": "$t(pkm.CORSOLA) evolves into $t(pkm.GALAR_CORSOLA) after being KO once",
     "CELEBI": "The player regains 1 HP every time $t(pkm.CELEBI) casts $t(ability.TIME_TRAVEL).",
     "GIMMIGHOUL": "$t(pkm.GIMMIGHOUL) is looking for 99 GOLD",

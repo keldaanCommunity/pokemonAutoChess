@@ -1,7 +1,7 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
-import { getPokemonData } from "../../../../../models/precomputed"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Role } from "../../../../../types"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { useAppSelector } from "../../../hooks"
