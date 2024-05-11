@@ -2078,6 +2078,10 @@ export function displayAbility(
       )
       break
     }
+    
+    case Ability.RAPID_SPIN:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(1.5)
+      break
 
     case "FIELD_DEATH":
       addAbilitySprite("FIELD_DEATH", coordinates, true).setScale(2)

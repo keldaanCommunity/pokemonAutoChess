@@ -320,5 +320,6 @@ export enum Ability {
   PSYSHOCK = "PSYSHOCK",
   GROUND_SLAM = "GROUND_SLAM",
   AQUA_TAIL = "AQUA_TAIL",
-  HAIL = "HAIL"
+  HAIL = "HAIL",
+  RAPID_SPIN = "RAPID_SPIN"
 }

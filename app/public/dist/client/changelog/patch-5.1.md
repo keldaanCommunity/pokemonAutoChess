@@ -5,6 +5,8 @@
  - Hydreigon
  - Psyduck
  - Golduck
+ - Phanpy
+ - Donphan
 
 # Changes to Pokemon & Abilities
 

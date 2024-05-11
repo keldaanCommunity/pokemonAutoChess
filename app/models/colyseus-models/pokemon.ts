@@ -13397,6 +13397,42 @@ export class Tangrowth extends Pokemon {
   regional = true
 }
 
+export class Phanpy extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GROUND,
+    Synergy.WILD,
+    Synergy.BABY
+  ])
+  rarity = Rarity.RARE
+  evolution = Pkm.DONPHAN
+  stars = 1
+  hp = 80
+  atk = 5
+  def = 4
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.RAPID_SPIN
+  attackSprite = AttackSprite.ROCK_MELEE
+}
+
+export class Donphan extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GROUND,
+    Synergy.WILD
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 180
+  atk = 10
+  def = 6
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.RAPID_SPIN
+  attackSprite = AttackSprite.ROCK_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -14182,5 +14218,7 @@ export const PokemonClasses: Record<
   [Pkm.TANGELA]: Tangela,
   [Pkm.TANGROWTH]: Tangrowth,
   [Pkm.PSYDUCK]: Psyduck,
-  [Pkm.GOLDUCK]: Golduck
+  [Pkm.GOLDUCK]: Golduck,
+  [Pkm.PHANPY]: Phanpy,
+  [Pkm.DONPHAN]: Donphan
 }

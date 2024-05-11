@@ -8683,6 +8683,26 @@ export class GroundSlamStrategy extends AbilityStrategy {
   }
 }
 
+export class RapidSpinStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 2 ? 50 : 20
+    const statBuff = pokemon.stars === 2 ? 0.3 : 0.2
+    const buffAmount = Math.round(statBuff * pokemon.atk)
+
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+
+    pokemon.addDefense(buffAmount)
+    pokemon.addSpecialDefense(buffAmount)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -9008,4 +9028,5 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.GROUND_SLAM]: new GroundSlamStrategy(),
   [Ability.AQUA_TAIL]: new AquaTailStrategy(),
   [Ability.HAIL]: new HailStrategy()
+  [Ability.RAPID_SPIN]: new RapidSpinStrategy()
 }
