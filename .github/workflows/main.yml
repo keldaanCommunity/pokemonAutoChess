@@ -2,7 +2,7 @@ name: Build and Deploy on pokemon Auto Chess Assets
 on:
   push:
     branches:
-      - master
+      - prod
 
 jobs:
   build:
