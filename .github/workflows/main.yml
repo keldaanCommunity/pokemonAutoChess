@@ -22,11 +22,15 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Copy
-        uses: andstor/copycat-action@v3
+      - name: Copy dist folder to another repository
+        uses: crykn/copy_folder_to_another_repo_action@v1.0.6
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PERSONAL_TOKEN }}
         with:
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
-          src_path: app/public/dist/client/assets
-          dst_path: assets
-          dst_owner: keldaanCommunity
-          dst_repo_name: pokemonAutoChessAssets 
+          source_folder: 'app/public/dist/client/assets'
+          destination_repo: 'keldaanCommunity/pokemonAutoChessAssets'
+          destination_folder: 'assets'
+          user_email: 'keldaan.ag@gmail.com'
+          user_name: 'keldaan'
+          commit_msg: 'Update assets'
+          destination_branch: 'main'
