@@ -1275,15 +1275,15 @@ export class LiquidationStrategy extends AbilityStrategy {
     switch (pokemon.stars) {
       case 1:
         damage = 20
-        reduce = 1
+        reduce = 2
         break
       case 2:
         damage = 40
-        reduce = 2
+        reduce = 4
         break
       case 3:
         damage = 80
-        reduce = 4
+        reduce = 8
         break
       default:
         break
@@ -3079,6 +3079,8 @@ export class DiveStrategy extends AbilityStrategy {
     const mostSurroundedCoordinate =
       state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
 
+    pokemon.addShield(50, pokemon, true)
+
     if (mostSurroundedCoordinate) {
       pokemon.moveTo(
         mostSurroundedCoordinate.x,
@@ -3348,6 +3350,22 @@ export class DragonTailStrategy extends AbilityStrategy {
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     pokemon.addDefense(buff, true)
     pokemon.addSpecialDefense(buff, true)
+  }
+}
+
+export class AquaTailStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [30, 60, 100][pokemon.stars - 1] ?? 100
+    const shield = [30, 60, 100][pokemon.stars - 1] ?? 100
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    pokemon.addShield(shield, pokemon, true)
   }
 }
 
@@ -9056,6 +9074,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DARK_HARVEST]: new DarkHarvestStrategy(),
   [Ability.PSYSHOCK]: new PsyShockStrategy(),
   [Ability.GROUND_SLAM]: new GroundSlamStrategy(),
+  [Ability.AQUA_TAIL]: new AquaTailStrategy(),
   [Ability.HAIL]: new HailStrategy(),
   [Ability.RAPID_SPIN]: new RapidSpinStrategy(),
   [Ability.BOUNCE]: new BounceStrategy()

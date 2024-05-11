@@ -1,5 +1,6 @@
 import { Geom } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
+import { AttackSprite } from "../../../../types"
 import { Ability } from "../../../../types/enum/Ability"
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
 import { distanceE } from "../../../../utils/distance"
@@ -2041,6 +2042,14 @@ export function displayAbility(
       }
       break
 
+    case Ability.AQUA_TAIL:
+      addAbilitySprite(
+        AttackSprite.WATER_MELEE,
+        coordinatesTarget,
+        true
+      ).setScale(2)
+      break
+      
     case "HAIL_PROJECTILE": {
       const specialProjectile = addAbilitySprite(skill, [
         coordinatesTarget[0] + 60,

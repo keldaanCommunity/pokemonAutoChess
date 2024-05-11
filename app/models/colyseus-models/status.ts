@@ -527,7 +527,7 @@ export default class Status extends Schema implements IStatus {
   healBurn(pkm: PokemonEntity) {
     this.burn = false
     this.burnOrigin = undefined
-    this.burnDamageCooldown = 0
+    this.burnDamageCooldown = 1000
     if (pkm.passive === Passive.GUTS && this.poisonStacks === 0) {
       this.guts = false
       pkm.addAttack(-5, false)
@@ -651,6 +651,7 @@ export default class Status extends Schema implements IStatus {
     if (this.poisonCooldown - dt <= 0) {
       this.poisonStacks = 0
       this.poisonOrigin = undefined
+      this.poisonDamageCooldown = 1000
       if (pkm.passive === Passive.GUTS && !this.burn) {
         this.guts = false
         pkm.addAttack(-5, false)

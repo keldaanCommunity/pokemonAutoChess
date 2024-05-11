@@ -28,12 +28,19 @@
 - Nerf Mothim: PP 60 → 80
 - New ability for Aron Ground Slam: The pokémon slams the ground, dealing 10/20/40 special damage and granting himself 10/20/40 Shield
 - Changed Icy wind (Snorunt): is now an effect in line
+- Revert PP nerfs for Water units from patch 5.0
+- Changed Dive (Lapras, Wailmer): now also gain 50 shield
+- Buff Liquidation: defense reduction ~~1/2/4~~ 2/4/8
+- New ability for Oshawott line: Aqua tail: Deal 30/60/100 special damage to the target and gain 30/60/100 shield
 - Changed Mawile: new ability Play rough - Removed passive
 - New ability for Amaura Hail: A hailstorm hits 10/20/30 random cells on the board, dealing 50 special damage. Hailstones stay on the ground, dealing 10 special damage and freezing opponents that walk on it for 1 second, if not Ice.
 
 # Changes to Synergies
 
+- Buff Water: dodge 20 → 30%
+
 # Changes to Items
+
 - Buff Incense: ~~10~~ 15% chance to charm on attack received
 - Buff Macho Brace: ~~-25~~ -15% attack speed
 - Buff Electirizer: ~~+40~~ +50% attack speed, paralysis duration ~~4~~ 2 seconds
@@ -46,11 +53,14 @@
 - When a regional pokemon is a variant of another family (ie. Alolan Graveler vs Graveler), it will replace the original family in your shops
 
 # UI
+
 - Add an option to disable damage numbers
 - Add a button to quickly change avatar from collection screen,
 
 # Bugfix
 - Fixed emote keyboard shortcut changing tab
 - Fixed emote menu when player uses a shiny avatar
+
+- Fix burn and poison damage sometimes applying too soon after the second time the status is applied
 
 # Misc
