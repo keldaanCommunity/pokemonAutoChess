@@ -341,7 +341,8 @@
     "DARK_HARVEST": "Dark Harvest",
     "PSYSHOCK": "Psyshock",
     "GROUND_SLAM": "Ground Slam",
-    "HAIL": "Hail"
+    "HAIL": "Hail",
+    "RAPID_SPIN": "Rapid Spin"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1123,7 +1124,9 @@
     "TANGELA": "Tangela",
     "TANGROWTH": "Tangrowth",
     "PSYDUCK": "Psyduck",
-    "GOLDUCK": "Golduck"
+    "GOLDUCK": "Golduck",
+    "PHANPY": "Phanpy",
+    "DONPHAN": "Donphan"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1445,7 +1448,8 @@
     "POWER_WHIP": "Lock on to the farthest enemy and unleash a giant vine towards it, dealing [30,60,SP] SPECIAL to any enemies hit",
     "DARK_HARVEST": "The pokémon teleports into the largest group of enemies. For the next 3 seconds, the pokémon suffers SILENCE and drains the HP of adjacent enemies, inflicting [10,20,40,SP] SPECIAL per second and healing HP for [20,30,40,SP]% of the SPECIAL inflicted",
     "PSYSHOCK": "Burn [30,60,100,SP] PP from target and gain it as SHIELD. If the target has not enough PP, the remainder is dealt as SPECIAL",
-    "GROUND_SLAM": "The pokémon slams the ground, dealing [10,20,40,SP] SPECIAL and granting himself [10,20,40] SHIELD"
+    "GROUND_SLAM": "The pokémon slams the ground, dealing [10,20,40,SP] SPECIAL and granting himself [10,20,40] SHIELD",
+    "RAPID_SPIN": "This pokémon deals [20,50] SPECIAL then gains [20,30,SP]% of ATK as DEF and SPE_DEF"
   },
   "effect": {
     "INGRAIN": "Ingrain",
