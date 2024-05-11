@@ -2069,9 +2069,13 @@ export function displayAbility(
       )
       break
     }
-    
+
     case Ability.RAPID_SPIN:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(1.5)
+      break
+
+    case Ability.BOUNCE:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
     case "FIELD_DEATH":

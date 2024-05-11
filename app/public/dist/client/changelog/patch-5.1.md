@@ -7,6 +7,8 @@
  - Golduck
  - Phanpy
  - Donphan
+ - Spoink
+ - Grumpig
 
 # Changes to Pokemon & Abilities
 
