@@ -9075,7 +9075,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PSYSHOCK]: new PsyShockStrategy(),
   [Ability.GROUND_SLAM]: new GroundSlamStrategy(),
   [Ability.AQUA_TAIL]: new AquaTailStrategy(),
-  [Ability.HAIL]: new HailStrategy()
+  [Ability.HAIL]: new HailStrategy(),
   [Ability.RAPID_SPIN]: new RapidSpinStrategy(),
   [Ability.BOUNCE]: new BounceStrategy()
 }
