@@ -1,0 +1,32 @@
+name: Build and Deploy on pokemon Auto Chess Assets
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Copy
+        uses: andstor/copycat-action@v3
+        with:
+          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          src_path: app/public/dist/client/assets
+          dst_path: assets
+          dst_owner: keldaanCommunity
+          dst_repo_name: pokemonAutoChessAssets 
