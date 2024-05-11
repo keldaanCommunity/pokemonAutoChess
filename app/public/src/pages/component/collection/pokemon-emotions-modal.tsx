@@ -8,9 +8,10 @@ import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   buyBooster,
   buyEmotion,
+  changeAvatar,
   changeSelectedEmotion
 } from "../../../stores/NetworkStore"
-import { getPortraitSrc } from "../../../utils"
+import { getAvatarSrc, getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
 import PokemonEmotion from "./pokemon-emotion"
 import "./pokemon-emotions-modal.css"
@@ -24,6 +25,7 @@ export default function PokemonEmotionsModal(props: {
   const pokemonCollection = useAppSelector(
     (state) => state.lobby.pokemonCollection
   )
+  const user = useAppSelector((state) => state.lobby.user)
 
   const index = PkmIndex[props.pokemon]
 
@@ -77,7 +79,7 @@ export default function PokemonEmotionsModal(props: {
           <h1>{t(`pkm.${props.pokemon}`)}</h1>
           <div className="spacer" />
           <p className="dust">
-            {pConfig.dust} <img src={getPortraitSrc(index)} alt="dust" />
+            {pConfig.dust} {t("shards")} <img src={getPortraitSrc(index)} className="dust" alt="dust" />
           </p>
         </Modal.Title>
       </Modal.Header>
@@ -92,12 +94,13 @@ export default function PokemonEmotionsModal(props: {
                   index={index}
                   shiny={false}
                   unlocked={pConfig && pConfig.emotions.includes(e)}
+                  selected={pConfig.selectedEmotion === e && !pConfig.selectedShiny}
                   path={index.replace("-", "/")}
                   emotion={e}
                   dust={pConfig.dust}
                   onClick={() =>
                     handlePokemonEmotionClick(
-                      Boolean(pConfig && pConfig.emotions.includes(e)),
+                      pConfig && pConfig.emotions.includes(e),
                       { index: index, emotion: e, shiny: false }
                     )
                   }
@@ -116,12 +119,13 @@ export default function PokemonEmotionsModal(props: {
                   index={index}
                   shiny={true}
                   unlocked={pConfig && pConfig.shinyEmotions.includes(e)}
+                  selected={pConfig.selectedEmotion === e && pConfig.selectedShiny}
                   path={`${index.replace("-", "/")}/0000/0001`}
                   emotion={e}
                   dust={pConfig.dust}
                   onClick={() =>
                     handlePokemonEmotionClick(
-                      Boolean(pConfig && pConfig.shinyEmotions.includes(e)),
+                      pConfig && pConfig.shinyEmotions.includes(e),
                       { index: index, emotion: e, shiny: true }
                     )
                   }
@@ -132,13 +136,29 @@ export default function PokemonEmotionsModal(props: {
         </section>
       </Modal.Body>
       <Modal.Footer>
-        <button
+      <button
           className="bubbly blue"
+          disabled={(pConfig.emotions.length === 0 && pConfig.shinyEmotions.length === 0) || 
+            (user && getAvatarSrc(user?.avatar) === getPortraitSrc(index,pConfig.selectedShiny, pConfig.selectedEmotion))}
+          onClick={() => dispatch(
+            changeAvatar({
+              index,
+              emotion: pConfig.selectedEmotion,
+              shiny: pConfig.selectedShiny
+            })
+          )}
+        >
+          {t("choose_as_avatar")}&nbsp;
+          <img src={getPortraitSrc(index,pConfig.selectedShiny, pConfig.selectedEmotion)} alt="avatar" />
+        </button>
+
+        <button
+          className="bubbly orange"
           disabled={pConfig.dust < 500}
           onClick={() => dispatch(buyBooster({ index }))}
         >
           {t("buy_booster_500")}
-          <img src={getPortraitSrc(index)} alt="dust" />
+          <img src={getPortraitSrc(index)} className="dust" alt="dust" />
         </button>
         <div className="spacer"></div>
         <button className="bubbly red" onClick={props.onHide}>

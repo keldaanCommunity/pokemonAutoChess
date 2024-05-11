@@ -34,11 +34,15 @@
   font-size: 120%;
 }
 
-.pokemon-emotions-modal .modal-title .dust img {
+.pokemon-emotions-modal .modal-title img  {
   width: 40px;
   height: 40px;
   margin: 0 0.5em;
   image-rendering: pixelated;
+}
+
+.pokemon-emotions-modal img.dust {
+  border-radius: 50%;
 }
 
 .pokemon-emotions-modal .modal-body {

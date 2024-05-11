@@ -10,6 +10,7 @@ export default function PokemonEmotion(props: {
   index: string
   shiny: boolean
   unlocked: boolean | undefined
+  selected: boolean | undefined
   path: string
   emotion: Emotion
   dust: number
@@ -24,6 +25,7 @@ export default function PokemonEmotion(props: {
       className={cc("my-box", "clickable", "pokemon-emotion", {
         unlocked: !!props.unlocked,
         unlockable: canUnlock,
+        selected: !!props.selected,
         shimmer: canUnlock
       })}
       onClick={props.onClick}

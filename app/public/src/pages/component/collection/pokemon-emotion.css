@@ -1,4 +1,4 @@
-.pokemon-emotion.my-container {
+.pokemon-emotion.my-box {
   display: flex;
   flex-flow: column;
   cursor: var(--cursor-hover);
@@ -25,6 +25,10 @@
 }
 .pokemon-emotion.unlockable:not(.unlocked):hover {
   filter: grayscale(0) contrast(0.8);
+}
+
+.pokemon-emotion.selected.my-box {
+  background-color: var(--color-bg-accent);
 }
 
 .pokemon-emotion > p {
