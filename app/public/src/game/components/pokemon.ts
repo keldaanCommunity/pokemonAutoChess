@@ -3,7 +3,7 @@ import Phaser, { GameObjects } from "phaser"
 import type MoveTo from "phaser3-rex-plugins/plugins/moveto"
 import type MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import PokemonFactory from "../../../../models/pokemon-factory"
-import { getPokemonData } from "../../../../models/precomputed"
+import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import {
   AttackSpriteScale,
   instanceofPokemonEntity,

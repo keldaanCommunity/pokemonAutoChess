@@ -1,9 +1,9 @@
-import fs from "fs"
-import { Pokemon } from "../app/models/colyseus-models/pokemon"
-import { Ability } from "../app/types/enum/Ability"
-import { Rarity } from "../app/types/enum/Game"
-import { Passive } from "../app/types/enum/Passive"
-import { precomputedPokemons } from "./precomputed-pokemons"
+import { Pokemon } from "../colyseus-models/pokemon"
+import { Ability } from "../../types/enum/Ability"
+import { Rarity } from "../../types/enum/Game"
+import { Passive } from "../../types/enum/Passive"
+import { precomputedPokemons } from "../../../gen/precomputed-pokemons"
+import { Pkm } from "../../types/enum/Pokemon"
 
 console.time("precompute-rarity")
 
@@ -21,16 +21,17 @@ precomputedPokemons
     data[pokemon.rarity].push(pokemon)
   })
 
-for (const r in data) {
-  data[r] = data[r].sort(indexSort).map((p) => p.name)
-}
-
 //logger.debug(data)
 
-fs.writeFileSync(
-  "../app/models/precomputed/pokemons-per-rarity.json",
-  JSON.stringify(data)
-)
+export const PRECOMPUTED_POKEMONS_PER_RARITY = {} as {
+  [key in Rarity]: Pkm[]
+}
+
+for (const r in data) {
+  PRECOMPUTED_POKEMONS_PER_RARITY[r] = data[r]
+    .sort(indexSort)
+    .map((p) => p.name)
+}
 
 console.timeEnd("precompute-rarity")
 

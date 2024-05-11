@@ -6,6 +6,7 @@ import {
   NB_UNIQUE_PROPOSITIONS,
   PoolSize,
   PortalCarouselStages,
+  RarityCost,
   RarityProbabilityPerLevel,
   SHOP_SIZE,
   UniqueShop
@@ -19,18 +20,20 @@ import {
   PkmFamily,
   PkmProposition,
   getUnownsPoolPerStage,
-  PkmRegionalVariants
+  PkmRegionalVariants,
+  Unowns
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { removeInArray } from "../utils/array"
 import { logger } from "../utils/logger"
-import { clamp } from "../utils/number"
+import { clamp, min } from "../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
 import PokemonFactory from "./pokemon-factory"
-import { PRECOMPUTED_POKEMONS_PER_RARITY, getPokemonData } from "./precomputed"
+import { getPokemonData } from "./precomputed/precomputed-pokemon-data"
+import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed/precomputed-rarity"
 import { PVEStages } from "./pve-stages"
 
 export function getPoolSize(rarity: Rarity, maxStars: number): number {
@@ -58,6 +61,78 @@ export function getAdditionalsTier1(pokemons: Pkm[]) {
       pokemonData.additional
     )
   })
+}
+
+export function getSellPrice(
+  name: Pkm,
+  shiny: boolean,
+  specialGameRule?: SpecialGameRule | null
+): number {
+  if (specialGameRule === SpecialGameRule.FREE_MARKET && name !== Pkm.EGG)
+    return 0
+
+  const pokemonData = getPokemonData(name)
+  const duo = Object.entries(PkmDuos).find(([key, duo]) => duo.includes(name))
+
+  let price = 1
+
+  if (name === Pkm.EGG) {
+    price = shiny ? 10 : 2
+  } else if (name == Pkm.DITTO) {
+    price = 5
+  } else if (name === Pkm.MAGIKARP) {
+    price = 0
+  } else if (name === Pkm.FEEBAS) {
+    price = 1
+  } else if (name === Pkm.GYARADOS || name === Pkm.MILOTIC) {
+    price = 10
+  } else if (Unowns.includes(name)) {
+    price = 1
+  } else if (pokemonData.rarity === Rarity.HATCH) {
+    price = [3, 4, 5][pokemonData.stars - 1] ?? 5
+  } else if (pokemonData.rarity === Rarity.UNIQUE) {
+    price = duo ? 8 : 15
+  } else if (pokemonData.rarity === Rarity.LEGENDARY) {
+    price = duo ? 10 : 20
+  } else if (PokemonFactory.getPokemonBaseEvolution(name) == Pkm.EEVEE) {
+    price = RarityCost[pokemonData.rarity]
+  } else if (duo) {
+    price = Math.ceil((RarityCost[pokemonData.rarity] * pokemonData.stars) / 2)
+  } else {
+    price = RarityCost[pokemonData.rarity] * pokemonData.stars
+  }
+
+  if (
+    specialGameRule === SpecialGameRule.RARE_IS_EXPENSIVE &&
+    name !== Pkm.EGG
+  ) {
+    price = min(0)(price - 1)
+  }
+
+  return price
+}
+
+export function getBuyPrice(
+  name: Pkm,
+  specialGameRule?: SpecialGameRule | null
+): number {
+  if (specialGameRule === SpecialGameRule.FREE_MARKET) return 0
+
+  let price = 1
+
+  if (name === Pkm.DITTO) {
+    price = 5
+  } else if (Unowns.includes(name)) {
+    price = 1
+  } else {
+    price = RarityCost[getPokemonData(name).rarity]
+  }
+
+  if (specialGameRule === SpecialGameRule.RARE_IS_EXPENSIVE) {
+    price = min(0)(price - 1)
+  }
+
+  return price
 }
 
 const CommonShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.COMMON)
@@ -281,9 +356,11 @@ export default class Shop {
 
     if (candidates.length > 0) {
       pkm = pickRandomIn(candidates)
-      if(PkmRegionalVariants[pkm]){
-        const regionalVariants = PkmRegionalVariants[pkm]!.filter(p => player.regionalPokemons.includes(p))
-        if(regionalVariants.length > 0) pkm = pickRandomIn(regionalVariants)
+      if (PkmRegionalVariants[pkm]) {
+        const regionalVariants = PkmRegionalVariants[pkm]!.filter((p) =>
+          player.regionalPokemons.includes(p)
+        )
+        if (regionalVariants.length > 0) pkm = pickRandomIn(regionalVariants)
       }
     } else if (specificTypeWanted === Synergy.WATER) {
       return Pkm.MAGIKARP // if no more water in pool, return magikarp

@@ -1,7 +1,7 @@
 import React, { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import PokemonFactory from "../../../../../models/pokemon-factory"
-import { getPokemonData } from "../../../../../models/precomputed"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { RarityColor } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Stat } from "../../../../../types/enum/Game"

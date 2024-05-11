@@ -3,7 +3,6 @@
 
 import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
 import { nanoid } from "nanoid"
-import { AbilityStrategies } from "../../core/abilities/abilities"
 import {
   ConditionBasedEvolutionRule,
   CountEvolutionRule,
@@ -11,7 +10,6 @@ import {
   HatchEvolutionRule,
   ItemEvolutionRule
 } from "../../core/evolution-rules"
-import { PokemonEntity } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
 import GameState from "../../rooms/states/game-state"
 import {
@@ -49,7 +47,6 @@ import { distanceM } from "../../utils/distance"
 import { coinflip, pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import PokemonFactory from "../pokemon-factory"
-import { getPokemonData } from "../precomputed"
 import Player from "./player"
 
 export class Pokemon extends Schema implements IPokemon {
@@ -83,7 +80,7 @@ export class Pokemon extends Schema implements IPokemon {
   canHoldItems = true
   stages?: number
 
-  constructor(shiny: boolean, emotion: Emotion) {
+  constructor(shiny = false, emotion = Emotion.NORMAL) {
     super()
     const name = Object.entries(PokemonClasses).find(
       ([name, pokemonClass]) => pokemonClass === this.constructor
@@ -151,7 +148,7 @@ export class Pokemon extends Schema implements IPokemon {
 
   isInRegion(pkm: Pkm, map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
-    return regionSynergies.some((s) => getPokemonData(pkm).types.includes(s))
+    return regionSynergies.some((s) => new PokemonClasses[pkm]().types.has(s))
   }
 }
 
@@ -5749,25 +5746,8 @@ export class Mawile extends Pokemon {
   speDef = 6
   maxPP = 80
   range = 1
-  skill = Ability.BITE
-  passive = Passive.MAWILE
+  skill = Ability.PLAY_ROUGH
   attackSprite = AttackSprite.FIGHTING_MELEE
-  afterSimulationStart({
-    entity,
-    simulation
-  }: {
-    entity: IPokemonEntity
-    simulation: Simulation
-  }) {
-    const mawile = entity as PokemonEntity
-    AbilityStrategies[Ability.ATTRACT].process(
-      mawile,
-      mawile.state,
-      simulation.board,
-      mawile,
-      false
-    )
-  }
 }
 
 export class Phione extends Pokemon {
@@ -13417,11 +13397,47 @@ export class Tangrowth extends Pokemon {
   regional = true
 }
 
+export class Phanpy extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GROUND,
+    Synergy.WILD,
+    Synergy.BABY
+  ])
+  rarity = Rarity.RARE
+  evolution = Pkm.DONPHAN
+  stars = 1
+  hp = 80
+  atk = 5
+  def = 4
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.RAPID_SPIN
+  attackSprite = AttackSprite.ROCK_MELEE
+}
+
+export class Donphan extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GROUND,
+    Synergy.WILD
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 180
+  atk = 10
+  def = 6
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.RAPID_SPIN
+  attackSprite = AttackSprite.ROCK_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
-    shiny: boolean,
-    emotion: Emotion
+    shiny?: boolean,
+    emotion?: Emotion
   ) => Pokemon
 > = {
   [Pkm.DEFAULT]: Pokemon,
@@ -14202,5 +14218,7 @@ export const PokemonClasses: Record<
   [Pkm.TANGELA]: Tangela,
   [Pkm.TANGROWTH]: Tangrowth,
   [Pkm.PSYDUCK]: Psyduck,
-  [Pkm.GOLDUCK]: Golduck
+  [Pkm.GOLDUCK]: Golduck,
+  [Pkm.PHANPY]: Phanpy,
+  [Pkm.DONPHAN]: Donphan
 }

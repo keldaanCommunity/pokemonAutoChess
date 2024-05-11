@@ -3,7 +3,7 @@ import {
   IDetailledPokemon,
   IStep
 } from "../../../../../models/mongo-models/bot-v2"
-import { getPokemonData } from "../../../../../models/precomputed"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import {
   AdditionalPicksStages,
   PortalCarouselStages

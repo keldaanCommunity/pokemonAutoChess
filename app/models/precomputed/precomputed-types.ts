@@ -1,9 +1,9 @@
-import fs from "fs"
-import { Pokemon } from "../app/models/colyseus-models/pokemon"
-import { Ability } from "../app/types/enum/Ability"
-import { Passive } from "../app/types/enum/Passive"
-import { Synergy } from "../app/types/enum/Synergy"
-import { precomputedPokemons } from "./precomputed-pokemons"
+import { Pokemon } from "../colyseus-models/pokemon"
+import { Ability } from "../../types/enum/Ability"
+import { Passive } from "../../types/enum/Passive"
+import { Synergy } from "../../types/enum/Synergy"
+import { precomputedPokemons } from "../../../gen/precomputed-pokemons"
+import { Pkm } from "../../types/enum/Pokemon"
 
 console.time("precompute-types")
 
@@ -23,14 +23,15 @@ precomputedPokemons
     })
   })
 
-for (const s in dataAll) {
-  dataAll[s] = dataAll[s].sort(indexSort).map((p) => p.name)
+export const PRECOMPUTED_POKEMONS_PER_TYPE = {} as {
+  [key in Synergy]: Pkm[]
 }
 
-fs.writeFileSync(
-  "../app/models/precomputed/pokemons-per-type.json",
-  JSON.stringify(dataAll)
-)
+for (const s in dataAll) {
+  PRECOMPUTED_POKEMONS_PER_TYPE[s] = dataAll[s]
+    .sort(indexSort)
+    .map((p) => p.name)
+}
 
 function indexSort(a: Pokemon, b: Pokemon) {
   const aIndex = parseFloat(a.index.replace("-", "."))

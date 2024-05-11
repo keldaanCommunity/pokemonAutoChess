@@ -4,7 +4,8 @@ import { CountEvolutionRule } from "../../../../../core/evolution-rules"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
 import PokemonFactory from "../../../../../models/pokemon-factory"
-import { getPokemonData } from "../../../../../models/precomputed"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
+import { getBuyPrice } from "../../../../../models/shop"
 import { RarityColor } from "../../../../../types/Config"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
@@ -105,7 +106,7 @@ export default function GamePokemonPortrait(props: {
     )
 
     const specialGameRule = getGameScene()?.room?.state.specialGameRule
-    let cost = PokemonFactory.getBuyPrice(pokemon.name, specialGameRule)
+    let cost = getBuyPrice(pokemon.name, specialGameRule)
 
     if (
       willEvolve &&
