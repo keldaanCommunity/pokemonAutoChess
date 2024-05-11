@@ -33,7 +33,8 @@ export function EmoteMenuComponent(props: {
   ) : (
     <ul>
       {emotions.map((emotion, i) => {
-        const unlocked = pConfig && pConfig.emotions.includes(emotion)
+        const emotions = props.shiny ? pConfig.shinyEmotions : pConfig.emotions
+        const unlocked = pConfig && emotions.includes(emotion)
         return (
           <li key={emotion}>
             <img

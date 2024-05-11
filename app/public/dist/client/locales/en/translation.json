@@ -343,7 +343,8 @@
     "PSYSHOCK": "Psyshock",
     "GROUND_SLAM": "Ground Slam",
     "HAIL": "Hail",
-    "RAPID_SPIN": "Rapid Spin"
+    "RAPID_SPIN": "Rapid Spin",
+    "BOUNCE": "Bounce"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1127,7 +1128,9 @@
     "PSYDUCK": "Psyduck",
     "GOLDUCK": "Golduck",
     "PHANPY": "Phanpy",
-    "DONPHAN": "Donphan"
+    "DONPHAN": "Donphan",
+    "SPOINK": "Spoink",
+    "GRUMPIG": "Grumpig"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1451,7 +1454,8 @@
     "DARK_HARVEST": "The pokémon teleports into the largest group of enemies. For the next 3 seconds, the pokémon suffers SILENCE and drains the HP of adjacent enemies, inflicting [10,20,40,SP] SPECIAL per second and healing HP for [20,30,40,SP]% of the SPECIAL inflicted",
     "PSYSHOCK": "Burn [30,60,100,SP] PP from target and gain it as SHIELD. If the target has not enough PP, the remainder is dealt as SPECIAL",
     "GROUND_SLAM": "The pokémon slams the ground, dealing [10,20,40,SP] SPECIAL and granting himself [10,20,40] SHIELD",
-    "RAPID_SPIN": "This pokémon deals [20,50] SPECIAL then gains [20,30,SP]% of ATK as DEF and SPE_DEF"
+    "RAPID_SPIN": "This pokémon deals [20,50] SPECIAL then gains [20,30,SP]% of ATK as DEF and SPE_DEF",
+    "BOUNCE": "Bounce up to [1,2,3,SP] times to the farthest target, dealing [10,SP] SPECIAL to all adjacent enemies"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2449,7 +2453,8 @@
   "sort_by_shards": "Sort by shards",
   "normal_emotions": "Normal Emotions",
   "shiny_emotions": "Shiny Emotions",
-  "buy_booster_500": "Buy a new booster for 500 ",
+  "buy_booster_500": "Buy a new booster for 500 shards ",
+  "choose_as_avatar": "Choose as player avatar",
   "close": "Close",
   "additional_pokemon_hint": "Each player picked additional Pokemon to be available in all players shop for this game.",
   "regional_pokemon_hint": "After travelling to a new region, you will encounter new regional species of Pokemon.",

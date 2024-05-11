@@ -48,7 +48,7 @@ import { Weather } from "../../types/enum/Weather"
 import PokemonFactory from "../../models/pokemon-factory"
 import { createRandomEgg } from "../../models/egg-factory"
 import Board, { Cell } from "../board"
-import { PokemonEntity } from "../pokemon-entity"
+import { getMoveSpeed, PokemonEntity } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 
 import { getFirstAvailablePositionInBench } from "../../utils/board"
@@ -8703,6 +8703,54 @@ export class RapidSpinStrategy extends AbilityStrategy {
   }
 }
 
+export class BounceStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const nbBounces = Math.round(
+      [1, 2, 3][pokemon.stars - 1] * (1 + pokemon.ap / 100)
+    )
+    for (let i = 0; i < nbBounces; i++) {
+      setTimeout(() => {
+        const destination = state.getFarthestTargetCoordinateAvailablePlace(
+          pokemon,
+          board
+        )
+        if (destination && pokemon.hp > 0) {
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: Ability.BOUNCE,
+            positionX: pokemon.positionX,
+            positionY: pokemon.positionY
+          })
+          pokemon.moveTo(destination.x, destination.y, board)
+          const adjacentCells = board.getAdjacentCells(
+            destination.x,
+            destination.y
+          )
+          adjacentCells.forEach((cell) => {
+            if (cell.value && cell.value.team !== pokemon.team) {
+              const damage = 10
+              cell.value.handleSpecialDamage(
+                damage,
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                crit
+              )
+            }
+          })
+        }
+      }, i * 400)
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -9028,5 +9076,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.GROUND_SLAM]: new GroundSlamStrategy(),
   [Ability.AQUA_TAIL]: new AquaTailStrategy(),
   [Ability.HAIL]: new HailStrategy()
-  [Ability.RAPID_SPIN]: new RapidSpinStrategy()
+  [Ability.RAPID_SPIN]: new RapidSpinStrategy(),
+  [Ability.BOUNCE]: new BounceStrategy()
 }

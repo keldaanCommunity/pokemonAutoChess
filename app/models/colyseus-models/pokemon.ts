@@ -13398,11 +13398,7 @@ export class Tangrowth extends Pokemon {
 }
 
 export class Phanpy extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.GROUND,
-    Synergy.WILD,
-    Synergy.BABY
-  ])
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.WILD, Synergy.BABY])
   rarity = Rarity.RARE
   evolution = Pkm.DONPHAN
   stars = 1
@@ -13417,10 +13413,7 @@ export class Phanpy extends Pokemon {
 }
 
 export class Donphan extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.GROUND,
-    Synergy.WILD
-  ])
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.WILD])
   rarity = Rarity.RARE
   stars = 2
   hp = 180
@@ -13431,6 +13424,37 @@ export class Donphan extends Pokemon {
   range = 1
   skill = Ability.RAPID_SPIN
   attackSprite = AttackSprite.ROCK_MELEE
+}
+
+export class Spoink extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FIELD])
+  rarity = Rarity.RARE
+  evolution = Pkm.GRUMPIG
+  stars = 1
+  hp = 100
+  atk = 5
+  def = 4
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.BOUNCE
+  attackSprite = AttackSprite.PSYCHIC_MELEE
+  regional = true
+}
+
+export class Grumpig extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FIELD])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 240
+  atk = 10
+  def = 6
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.BOUNCE
+  attackSprite = AttackSprite.PSYCHIC_MELEE
+  regional = true
 }
 
 export const PokemonClasses: Record<
@@ -14220,5 +14244,7 @@ export const PokemonClasses: Record<
   [Pkm.PSYDUCK]: Psyduck,
   [Pkm.GOLDUCK]: Golduck,
   [Pkm.PHANPY]: Phanpy,
-  [Pkm.DONPHAN]: Donphan
+  [Pkm.DONPHAN]: Donphan,
+  [Pkm.SPOINK]: Spoink,
+  [Pkm.GRUMPIG]: Grumpig
 }

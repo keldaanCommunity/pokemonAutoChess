@@ -7,6 +7,8 @@
  - Golduck
  - Phanpy
  - Donphan
+ - Spoink
+ - Grumpig
 
 # Changes to Pokemon & Abilities
 
@@ -53,8 +55,11 @@
 # UI
 
 - Add an option to disable damage numbers
+- Add a button to quickly change avatar from collection screen,
 
 # Bugfix
+- Fixed emote keyboard shortcut changing tab
+- Fixed emote menu when player uses a shiny avatar
 
 - Fix burn and poison damage sometimes applying too soon after the second time the status is applied
 
