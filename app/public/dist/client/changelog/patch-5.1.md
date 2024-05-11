@@ -47,5 +47,7 @@
 - Add an option to disable damage numbers
 
 # Bugfix
+- Fixed emote keyboard shortcut changing tab
+- Fixed emote menu when player uses a shiny avatar
 
 # Misc
