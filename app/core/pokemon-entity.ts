@@ -580,14 +580,28 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       })
     }
 
-    if (this.items.has(Item.LEFTOVERS)) {
-      const neighbours = [-1, 0, 1]
-      neighbours.forEach((offset) => {
-        const value = board.getValue(this.positionX + offset, this.positionY)
-        if (value && value.team === this.team) {
-          value.handleHeal(value.hp * 0.05, this, 0)
+    if (this.items.has(Item.SOOTHE_BELL)) {
+      let closestAlly: PokemonEntity | null = null
+      let minDistance = 16
+      board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+        if (ally && ally !== this && this.team === ally.team) {
+          const distanceToTarget = distanceC(
+            ally.positionX,
+            ally.positionY,
+            this.targetX,
+            this.targetY
+          )
+          if (distanceToTarget < minDistance) {
+            closestAlly = ally
+            minDistance = distanceToTarget
+          }
         }
       })
+
+      if (closestAlly != null) {
+        const shield = Math.round(totalDamage * 0.25)
+        ;(closestAlly as PokemonEntity).addShield(shield, this, false)
+      }
     }
 
     if (this.items.has(Item.MANA_SCARF)) {
