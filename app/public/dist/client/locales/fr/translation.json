@@ -1446,8 +1446,8 @@
     "PRIMORDIAL_SEA": "Mer primordiale",
     "STAMINA": "Endurance",
     "STRENGTH": "Force",
+    "ENDURE": "Tenacité",
     "PURE_POWER": "Puissance pure",
-    "ROCK_SMASH": "Fracas de roche",
     "RISING_VOLTAGE": "Haute Tension",
     "OVERDRIVE": "Survolté",
     "GUTS": "Ardeur",
@@ -1554,7 +1554,7 @@
   "effect_description": {
     "STAMINA": "Gagne 15 SHIELD",
     "STRENGTH": "Gagne 25 SHIELD",
-    "ROCK_SMASH": "Gagne 35 SHIELD",
+    "ENDURE": "Gagne 35 SHIELD",
     "PURE_POWER": "Gagne 50 SHIELD",
     "INGRAIN": "Restaure 8 HP toutes les 2 secondes. Une baie peut être cueillie tous les 3 tours.",
     "GROWTH": "Restaure 15 HP toutes les 2 secondes. Une baie peut être cueillie tous les 2 tours.",
@@ -1663,10 +1663,10 @@
     "LIGHT_PULSE": "Donne également +10 PP par seconde",
     "ETERNAL_LIGHT": "Augmente également la DEF et SPE_DEF de 50% et donne RUNE_PROTECT pendant 10 secondes",
     "MAX_ILLUMINATION": "Donne également 100 SHIELD et RESURECTION",
-    "QUICK_FEET": "+30% ATK et vitesse de déplacement, les pokémons WILD sont trouvables à tous les stages",
-    "RUN_AWAY": "+50% ATK et vitesse de déplacement, 10% de chance de trouver des pokémons WILD",
-    "HUSTLE": "+80% ATK et vitesse de déplacement, 15% de chance de trouver des pokémons WILD",
-    "BERSERK": "+120% ATK et vitesse de déplacement, 20% de chance de trouver des pokémons WILD. Vos pokémons sont RAGE 5 secondes en avance."
+    "QUICK_FEET": "+30% ATK et vitesse de déplacement",
+    "RUN_AWAY": "+50% ATK et vitesse de déplacement",
+    "HUSTLE": "+80% ATK et vitesse de déplacement,",
+    "BERSERK": "+120% ATK et vitesse de déplacement. Vos pokémons deviennent RAGE 5 secondes plus tôt."
   },
   "item": {
     "FOSSIL_STONE": "Fossile Dome",
@@ -2081,7 +2081,7 @@
     "ARTIFICIAL": "Les pokémons ARTIFICIAL donnent des objets uniques et gagnent de l'ATK, de la AP et du SHIELD lorsqu'ils portent des objets.",
     "BABY": "Les pokémons BABY peuvent vous apporter des œufs Pokémon pour vous réconforter après une défaite",
     "LIGHT": "La lumière révèle un projecteur sur le champ de bataille. L’unité sous les projecteurs au début du combat bénéficie de bonus uniques.",
-    "WILD": "Les pokémons WILD gagnent en ATK et vitesse de déplacement, peuvent WOUND leur cible avec leurs attaques, et attirent d'autres pokémons WILD."
+    "WILD": "Les pokémons WILD gagnent en ATK et vitesse de déplacement, et ont 25% de chance d'infliger WOUND. Pour chaque STAR de vos pokémons WILD sur le plateau, obtenez +1% de chance de trouver des pokémons WILD dans le magasin + 5% de chance durant les rounds PvE."
   },
   "title": {
     "NOVICE": "Novice",

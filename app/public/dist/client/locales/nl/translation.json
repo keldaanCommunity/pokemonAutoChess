@@ -1030,7 +1030,7 @@
     "STAMINA": "Weerstand",
     "STRENGTH": "Kracht",
     "PURE_POWER": "Pure kracht",
-    "ROCK_SMASH": "Rock smash",
+    "ENDURE": "Endure",
     "RISING_VOLTAGE": "Stijgende spanning",
     "OVERDRIVE": "Overdrijven",
     "GUTS": "Ingewanden",
@@ -1126,7 +1126,7 @@
   "effect_description": {
     "STAMINA": "Ontvang 15 SHIELD",
     "STRENGTH": "Ontvang 25 SHIELD",
-    "ROCK_SMASH": "Verdien 35 SHIELD",
+    "ENDURE": "Verdien 35 SHIELD",
     "PURE_POWER": "Ontvang 50 SHIELD",
     "INGRAIN": "Herstel 8 HP elke 2 seconden. Verkrijg elke 3 gevechten een willekeurige bes.",
     "GROWTH": "Herstel 15 HP elke 2 seconden. Verkrijg elke 2 gevechten een willekeurige bes.",

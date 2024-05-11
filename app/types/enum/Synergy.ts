@@ -36,7 +36,7 @@ export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
   [Synergy.NORMAL]: [
     Effect.STAMINA,
     Effect.STRENGTH,
-    Effect.ROCK_SMASH,
+    Effect.ENDURE,
     Effect.PURE_POWER
   ],
   [Synergy.GRASS]: [Effect.INGRAIN, Effect.GROWTH, Effect.SPORE],

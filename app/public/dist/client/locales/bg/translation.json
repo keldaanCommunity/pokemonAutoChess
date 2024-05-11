@@ -1047,7 +1047,7 @@
     "STAMINA": "Издръжливост",
     "STRENGTH": "Сила",
     "PURE_POWER": "Чиста сила",
-    "ROCK_SMASH": "Rock Smash",
+    "ENDURE": "Endure",
     "RISING_VOLTAGE": "Нарастващо напрежение",
     "OVERDRIVE": "Овърдрайв",
     "GUTS": "Черва",
@@ -1143,7 +1143,7 @@
   "effect_description": {
     "STAMINA": "Печелете 15 SHIELD",
     "STRENGTH": "Спечелете 25 SHIELD",
-    "ROCK_SMASH": "Печелете 35 SHIELD",
+    "ENDURE": "Печелете 35 SHIELD",
     "PURE_POWER": "Печелете 50 SHIELD",
     "INGRAIN": "Възстановете 4 HP в секунда. Вземете произволно зрънце на всеки 3 битки.",
     "GROWTH": "Възстановете 8 HP в секунда. Вземете произволно зрънце на всеки 2 битки.",

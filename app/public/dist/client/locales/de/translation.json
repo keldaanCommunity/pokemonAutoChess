@@ -1306,8 +1306,8 @@
     "PRIMORDIAL_SEA": "Urmeer",
     "STAMINA": "Zähigkeit",
     "STRENGTH": "Stärke",
-    "PURE_POWER": "Mentalkraft",
-    "ROCK_SMASH": "Zertrümerer",
+    "ENDURE": "Endure",
+    "PURE_POWER": "Mentalkraft",    
     "RISING_VOLTAGE": "Hochspannung",
     "OVERDRIVE": "Overdrive",
     "GUTS": "Adrenalin",
@@ -1412,7 +1412,7 @@
   "effect_description": {
     "STAMINA": "Erhalte 15 SHIELD",
     "STRENGTH": "Erhalte 25 SHIELD",
-    "ROCK_SMASH": "Erhalte 35 SHIELD",
+    "ENDURE": "Erhalte 35 SHIELD",
     "PURE_POWER": "Erhalte 50 SHIELD",
     "INGRAIN": "Stellt alle 2 Sekunden 8 HP wieder her. Erhalte alle 3 Kämpfe eine zufällige Beere",
     "GROWTH": "Stellt alle 2 Sekunden 15 HP wieder her. Erhalte alle 2 Kämpfe eine zufällige Beere",
@@ -1517,7 +1517,7 @@
     "NIGHT": "+20 % CRIT_CHANCE\n+30 % SLEEP-Dauer",
     "HYDRATATION": "Die GRASS Synergie heilt unter dem RAIN 5 zusätzliche HP pro Sekunde",
     "SHINING_RAY": "Erhöht",
-    "QUICK_FEET": "+30% ATK und Bewegungstempo, WILD Pokémon können jetzt auch während PvP-Runden im Shop auftauchen",
+    "QUICK_FEET": "+30% ATK und Bewegungstempo",
     "RUN_AWAY": "+50% ATK und Bewegungstempo, und 10% Chance auf WILD Pokémon im Shop",
     "HUSTLE": "+80% ATK und Bewegungstempo, und 15% Chance auf WILD Pokémon im Shop",
     "BERSERK": "+120% ATK und Bewegungstempo, und 20% Chance auf WILD Pokémon im Shop. RAGE 5 Sekunden früher"

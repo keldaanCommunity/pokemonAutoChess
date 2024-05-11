@@ -502,7 +502,7 @@ export default class Simulation extends Schema implements ISimulation {
         if (pokemon.effects.has(Effect.STRENGTH)) {
           shieldBonus += 25
         }
-        if (pokemon.effects.has(Effect.ROCK_SMASH)) {
+        if (pokemon.effects.has(Effect.ENDURE)) {
           shieldBonus += 35
         }
         if (pokemon.effects.has(Effect.PURE_POWER)) {
@@ -787,9 +787,9 @@ export default class Simulation extends Schema implements ISimulation {
           }
           break
 
-        case Effect.ROCK_SMASH:
+        case Effect.ENDURE:
           if (types.has(Synergy.NORMAL)) {
-            pokemon.effects.add(Effect.ROCK_SMASH)
+            pokemon.effects.add(Effect.ENDURE)
           }
           break
 

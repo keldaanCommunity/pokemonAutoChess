@@ -1264,8 +1264,8 @@
     "PRIMORDIAL_SEA": "mar primordial",
     "STAMINA": "Energia",
     "STRENGTH": "Força",
+    "ENDURE": "Endure",
     "PURE_POWER": "Puro poder",
-    "ROCK_SMASH": "Quebra de rock",
     "RISING_VOLTAGE": "Tensão crescente",
     "OVERDRIVE": "Overdrive",
     "GUTS": "Estômago",
@@ -1372,7 +1372,7 @@
   "effect_description": {
     "STAMINA": "Ganhe 15 SHIELD",
     "STRENGTH": "Ganhe 25 SHIELD",
-    "ROCK_SMASH": "Ganhe 35 SHIELD",
+    "ENDURE": "Ganhe 35 SHIELD",
     "PURE_POWER": "Ganhe 50 SHIELD",
     "INGRAIN": "Restaure 8 HP a cada 2 segundos. Obtenha uma fruta aleatória a cada 3 lutas.",
     "GROWTH": "Restaure 15 HP a cada 2 segundos. Obtenha uma fruta aleatória a cada 2 lutas.",
