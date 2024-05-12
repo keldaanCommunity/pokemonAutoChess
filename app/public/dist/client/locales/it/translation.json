@@ -1031,7 +1031,7 @@
     "STAMINA": "Resistenza",
     "STRENGTH": "Forza",
     "PURE_POWER": "Puro Potere",
-    "ROCK_SMASH": "Spaccaroccia",
+    "ENDURE": "Endure",
     "RISING_VOLTAGE": "Tensione crescente",
     "OVERDRIVE": "Overdrive",
     "GUTS": "Intestini",
@@ -1127,7 +1127,7 @@
   "effect_description": {
     "STAMINA": "Ottieni 15 SHIELD",
     "STRENGTH": "Ottieni 25 SHIELD",
-    "ROCK_SMASH": "Ottieni 35 SHIELD",
+    "ENDURE": "Ottieni 35 SHIELD",
     "PURE_POWER": "Ottieni 50 SHIELD",
     "INGRAIN": "Ripristina 8 HP ogni 2 secondi. Ottieni una bacca casuale ogni 3 combattimenti",
     "GROWTH": "Ripristina 15 HP ogni 2 secondi. Ottieni una bacca casuale ogni 2 combattimenti",

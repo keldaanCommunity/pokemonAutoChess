@@ -88,6 +88,7 @@ export default class Player extends Schema implements IPlayer {
   lightX: number
   lightY: number
   canRegainLife: boolean = true
+  wildChance: number = 0
 
   constructor(
     id: string,
@@ -245,6 +246,10 @@ export default class Player extends Schema implements IPlayer {
     if (lightChanged) this.onLightChange()
 
     this.effects.update(this.synergies, this.board)
+    this.wildChance =
+      pokemons
+        .filter((p) => p.types.has(Synergy.WILD))
+        .reduce((total, p) => total + p.stars, 0) / 100
   }
 
   updateArtificialItems(updatedSynergies: Map<Synergy, number>): boolean {

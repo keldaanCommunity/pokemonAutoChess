@@ -401,17 +401,7 @@ export default class Shop {
     }
 
     const isPVE = state.stageLevel in PVEStages
-    const wildChance = player.effects.has(Effect.QUICK_FEET)
-      ? 0.05
-      : player.effects.has(Effect.RUN_AWAY)
-        ? 0.1
-        : player.effects.has(Effect.HUSTLE)
-          ? 0.15
-          : player.effects.has(Effect.BERSERK)
-            ? 0.2
-            : isPVE
-              ? 0.05
-              : 0
+    const wildChance = player.wildChance + (isPVE ? 0.05 : 0)
 
     const finals = new Set(
       values(player.board)

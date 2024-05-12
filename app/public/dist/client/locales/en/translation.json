@@ -1470,8 +1470,8 @@
     "PRIMORDIAL_SEA": "Primordial Sea",
     "STAMINA": "Stamina",
     "STRENGTH": "Strength",
+    "ENDURE": "Endure",
     "PURE_POWER": "Pure Power",
-    "ROCK_SMASH": "Rock Smash",
     "RISING_VOLTAGE": "Rising Voltage",
     "OVERDRIVE": "Overdrive",
     "GUTS": "Guts",
@@ -1578,7 +1578,7 @@
   "effect_description": {
     "STAMINA": "Gain 15 SHIELD",
     "STRENGTH": "Gain 25 SHIELD",
-    "ROCK_SMASH": "Gain 35 SHIELD",
+    "ENDURE": "Gain 35 SHIELD",
     "PURE_POWER": "Gain 50 SHIELD",
     "INGRAIN": "Restore 8 HP every 2 seconds. A berry can be picked every 3 stages.",
     "GROWTH": "Restore 15 HP every 2 seconds. A berry can be picked every 2 stages.",
@@ -1687,10 +1687,10 @@
     "LIGHT_PULSE": "Also give +10 PP per second",
     "ETERNAL_LIGHT": "Also increase DEF and SPE_DEF by 50% and give RUNE_PROTECT for 10 seconds",
     "MAX_ILLUMINATION": "Also give 100 SHIELD and RESURECTION",
-    "QUICK_FEET": "+30% ATK and move speed, WILD pokemons can now also be found during PvP rounds",
-    "RUN_AWAY": "+50% ATK and move speed, 10% chance to find WILD pokemons",
-    "HUSTLE": "+80% ATK and move speed, 15% chance to find WILD pokemons",
-    "BERSERK": "+120% ATK and move speed, 20% chance to find WILD pokemons. RAGE 5 seconds sooner"
+    "QUICK_FEET": "+30% ATK and move speed",
+    "RUN_AWAY": "+50% ATK and move speed",
+    "HUSTLE": "+80% ATK and move speed",
+    "BERSERK": "+120% ATK and move speed, RAGE 5 seconds sooner"
   },
   "item": {
     "FOSSIL_STONE": "Fossil Stone",
@@ -2106,7 +2106,7 @@
     "ARTIFICIAL": "ARTIFICIAL pokemons give unique items and gain ATK, AP and SHIELD when holding items",
     "BABY": "BABY can bring you Pokemon Eggs to comfort you after a defeat",
     "LIGHT": "LIGHT reveal a spotlight on the battlefield. The unit standing in the spotlight at the start of combat gains unique bonuses.",
-    "WILD": "WILD pokemons get increased ATK, move faster, can WOUND their target after an attack, and attract more WILD pokemons."
+    "WILD": "WILD pokemons get increased ATK, move faster, and have 25% chance to WOUND their target. For each WILD pokémon STAR on board, get +1% chance to find WILD in your shops + 5% chance during PvE rounds."
   },
   "title": {
     "NOVICE": "Novice",
