@@ -8656,7 +8656,7 @@ export class PsyShockStrategy extends AbilityStrategy {
   }
 }
 
-export class GroundSlamStrategy extends AbilityStrategy {
+export class HeavySlamStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -8665,7 +8665,10 @@ export class GroundSlamStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
+    let damage = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
+    if (pokemon.hp > target.hp) {
+      damage = Math.round(damage * (1 + (pokemon.hp - target.hp) / target.hp))
+    }
     pokemon.addShield(damage, pokemon, true)
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
@@ -9073,7 +9076,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.POWER_WHIP]: new PowerWhipStrategy(),
   [Ability.DARK_HARVEST]: new DarkHarvestStrategy(),
   [Ability.PSYSHOCK]: new PsyShockStrategy(),
-  [Ability.GROUND_SLAM]: new GroundSlamStrategy(),
+  [Ability.HEAVY_SLAM]: new HeavySlamStrategy(),
   [Ability.AQUA_TAIL]: new AquaTailStrategy(),
   [Ability.HAIL]: new HailStrategy(),
   [Ability.RAPID_SPIN]: new RapidSpinStrategy(),
