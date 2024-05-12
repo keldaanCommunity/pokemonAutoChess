@@ -75,6 +75,7 @@
     "CHARGE": "Chargeur",
     "DISCHARGE": "Coup d'Jus",
     "BITE": "Morsure",
+    "AQUA_TAIL": "Hydro-Queue",
     "DRAGON_TAIL": "Draco-Queue",
     "DRAGON_BREATH": "Draco-Souffle",
     "ICICLE_CRASH": "Chute Glace",
@@ -336,7 +337,14 @@
     "TAIL_WHIP": "Mimi-Queue",
     "PSYSHIELD_BASH": "Sprint Bouclier",
     "QUIVER_DANCE": "Papillodanse",
-    "TORCH_SONG": "Chant Flamboyant"
+    "TORCH_SONG": "Chant Flamboyant",
+    "POWER_WHIP": "Mégafouet",
+    "DARK_HARVEST": "Sombre Récolte",
+    "PSYSHOCK": "Choc Psy",
+    "GROUND_SLAM": "Tacle Lourd",
+    "HAIL": "Grêle",
+    "RAPID_SPIN": "Tour Rapide",
+    "BOUNCE": "Rebond"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1114,7 +1122,15 @@
     "CLODSIRE": "Terraiste",
     "FUECOCO": "Chochodile",
     "CROCALOR": "Crocogril",
-    "SKELEDIRGE": "Flâmigator"
+    "SKELEDIRGE": "Flâmigator",
+    "TANGELA": "Saquedeneu",
+    "TANGROWTH": "Bouldeneu",
+    "PSYDUCK": "Psykokwak",
+    "GOLDUCK": "Akwakwak",
+    "PHANPY": "Phanpy",
+    "DONPHAN": "Donphan",
+    "SPOINK": "Spoink",
+    "GRUMPIG": "Groret"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
@@ -1170,6 +1186,7 @@
     "CHARGE": "Augmente l'ATK et la ATK_SPEED de tous les pokémons alliés ELECTRIC de [25,SP] %",
     "DISCHARGE": "Décharge électrique infligeant [25,50,75,SP] SPECIAL aux ennemis proches ainsi que PARALYSIS pendant 5 secondes",
     "BITE": "Inflige [40,80,120,SP] dégâts SPECIAL à la cible et soigne 30 % des dégâts. La cible a FLINCH pendant 5 secondes",
+    "AQUA_TAIL": "Inflige [30,60,100,SP] SPECIAL à la cible et gagne [30,60,100,SP] SHIELD",
     "DRAGON_TAIL": "Attaque à cible unique qui inflige [30,60,100,SP] SPECIAL et améliore la DEF et SPE_DEF de [1,2,3,SP]",
     "DRAGON_BREATH": "Attaque à zone d'effet qui inflige [25,50,100,SP] TRUE en ligne derrière la cible",
     "ICICLE_CRASH": "Attaque à zone d'effet qui inflige [20,40,80,SP] SPECIAL autour de la cible",
@@ -1285,6 +1302,7 @@
     "MAGMA_STORM": "La cible est piégée dans un maelström de feu qui inflige [80,SP] SPECIAL avant de se déplacer vers une cible adjacente",
     "SLASHING_CLAW": "Inflige [15,30,60,SP] à la cible et la WOUND pendant 5 secondes. Si la cible a déjà WOUND, inflige 30 % de bonus SPECIAL",
     "ERUPTION": "Tire [20,30,40] projectiles en l'air. Chaque projectile inflige [30,60,120,SP] SPECIAL et BURN pendant 5 secondes",
+    "HAIL": "Une tempête de grêle frappe [10,20,30] cases aléatoires du plateau, infligeant [50,SP] SPECIAL. Les grêlons restent sur le terrain, infligeant 10 SPECIAL et FREEZE pendant 1 seconde aux adversaires qui marchent dessus, s'ils ne sont pas de type ICE.",
     "LUSTER_PURGE": "Lance une boule de lumière en ligne droite qui inflige [25,SP] SPECIAL deux fois et réduit deux fois la SPE_DEF de tous les ennemis touchés de 1",
     "MIST_BALL": "Lance une bulle de brume en ligne droite qui inflige [25,SP] SPECIAL deux fois et réduit deux fois l'AP de tous les ennemis touchés de 10 %",
     "MUD_BUBBLE": "Soigne le lanceur de [10,20,40,SP] HP",
@@ -1431,7 +1449,13 @@
     "TAIL_WHIP": "Réduit la DEF de la cible de [30,SP] %",
     "PSYSHIELD_BASH": "Saute vers la ligne arrière adverse, infligeant [60,SP] SPECIAL à tous les ennemis sur le chemin",
     "QUIVER_DANCE": "Gagne [5,SP] ATK, [5,SP] SPE_DEF, [20,SP]% ATK_SPEED et 20% AP",
-    "TORCH_SONG": "Souffle des flammes furieuses sur les [1,2,3] adversaires les plus forts. Chaque flamme brûle la cible et les unités adjacentes pour [10,20,30,SP] SPECIAL. Gagne 10 AP pour chaque unité touchée ayant le statut BURN, CURSE ou SILENCE."
+    "TORCH_SONG": "Souffle des flammes furieuses sur les [1,2,3] adversaires les plus forts. Chaque flamme brûle la cible et les unités adjacentes pour [10,20,30,SP] SPECIAL. Gagne 10 AP pour chaque unité touchée ayant le statut BURN, CURSE ou SILENCE.",
+    "POWER_WHIP": "S'agrippe à l'unité adverse la plus lointaine en projetant une liane gigantesque, infligeant [30,60,SP] SPECIAL à tous les ennemis touchés",
+    "DARK_HARVEST": "Se téléporte près du plus gros groupe d'adversaires. Pendant les 3 prochaines secondes, le lanceur subit SILENCE et draine les HP des adversaires adjacents, infligeant [10,20,40,SP] SPECIAL per seconde et se soignant à hauteur de [20,30,40,SP]% des SPECIAL infligés",
+    "PSYSHOCK": "Consume [30,60,100,SP] PP de la cible et les récupère en SHIELD. Si la cible n'a pas assez de PP, le reste est infligé en SPECIAL.",
+    "GROUND_SLAM": "Le lanceur se jette sur l'ennemi de tout son poids, infligeant [10,20,40,SP] SPECIAL et gagnant [10,20,40] SHIELD",
+    "RAPID_SPIN": "Inflige [20,50,SP] SPECIAL et gagne [20,30,SP]% de son ATK en DEF et SPE_DEF",
+    "BOUNCE": "Rebondit [1,2,3,SP] fois jusqu'à la cible la plus lointaine, infligeant [10,SP] SPECIAL à tous les adversaires adjacents à chaque rebond"
   },
   "effect": {
     "INGRAIN": "Enraciné",
@@ -1945,7 +1969,8 @@
     "SHUCKLE": "Transforme les baies consommées en BERRY_JUICE",
     "GUZZLORD": "$t(pkm.GUZZLORD) est trop lourd et ne peut pas sauter en ligne arrière",
     "ENVIRONMENTAL_ADAPTATION": "Ce Pokémon adapte ses synergies à sa région",
-    "MOTHIM": "$t(pkm.MOTHIM) prend les synergies de toutes les formes régionales de $t(pkm.BURMY) rencontrées par le joueur."
+    "MOTHIM": "$t(pkm.MOTHIM) prend les synergies de toutes les formes régionales de $t(pkm.BURMY) rencontrées par le joueur.",
+    "PSYDUCK": "Lorsque ce pokémon est CONFUSION, il gagne 100% AP"
   },
   "stat": {
     "ATK": "Attaque",
@@ -2429,6 +2454,7 @@
   "normal_emotions": "Emotes normales",
   "shiny_emotions": "Emotes shiny",
   "buy_booster_500": "Achetez un nouveau booster pour 500",
+  "choose_as_avatar": "Choisir comme avatar de joueur",
   "close": "Fermer",
   "additional_pokemon_hint": "Chaque joueur choisit des Pokémon supplémentaires qui seront disponibles dans la boutique de tous les joueurs pour ce jeu.",
   "regional_pokemon_hint": "Après avoir voyagé vers une nouvelle région, vous rencontrerez de nouvelles espèces régionales de Pokémons.",

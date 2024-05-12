@@ -320,8 +320,7 @@
     "PSYSTRIKE": "Psychostoß",
     "FACADE": "Fassade",
     "DREAM_EATER": "Traumfresser",
-    "SPARK": "Funkensprung",
-    "AURA_WHEEL_HANGRY": "Aura-Rad"
+    "SPARK": "Funkensprung"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1307,7 +1306,7 @@
     "STAMINA": "Zähigkeit",
     "STRENGTH": "Stärke",
     "ENDURE": "Endure",
-    "PURE_POWER": "Mentalkraft",    
+    "PURE_POWER": "Mentalkraft",
     "RISING_VOLTAGE": "Hochspannung",
     "OVERDRIVE": "Overdrive",
     "GUTS": "Adrenalin",
@@ -1748,8 +1747,7 @@
     "COMFEY": "Comfey kann keine Gegenstände tragen. Zu Beginn des Kampfes trägt der nächste Verbündete, mit einem freien Itemplatz, Curelei und erhält alle seine Statuswerte. Curelei setzt seine Fähigkeit gleichzeitig mit seinem Träger. Wenn der Träger besiegt wird, kämpft Curelei alleine weiter",
     "HISUIAN_TYPHLOSION": "Dieses Pokémon beginnt den Kampf mit einem zufälligen Item, wenn es keines hält",
     "WATER_BUBBLE": "Das Pokémon ist Immun gegen BURN",
-    "LYCANROC": "Wolwerock wechselt in die Nachtform während NACHT und in die Tagform während SUN.",
-    "TYPHLOSION": "Typhlosion sucht nach einem REAPER_CLOTH"
+    "LYCANROC": "Wolwerock wechselt in die Nachtform während NACHT und in die Tagform während SUN."
   },
   "stat": {
     "ATK": "Angriff",
