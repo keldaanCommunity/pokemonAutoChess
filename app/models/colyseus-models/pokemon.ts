@@ -3298,11 +3298,6 @@ export class NidoranF extends Pokemon {
   range = 1
   skill = Ability.VENOSHOCK
   attackSprite = AttackSprite.POISON_MELEE
-  regional = true
-  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
-    const index = Object.values(DungeonPMDO).indexOf(map)
-    return index % 2 === 1
-  }
 }
 
 export class Nidorina extends Pokemon {
@@ -3322,11 +3317,6 @@ export class Nidorina extends Pokemon {
   range = 1
   skill = Ability.VENOSHOCK
   attackSprite = AttackSprite.POISON_MELEE
-  regional = true
-  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
-    const index = Object.values(DungeonPMDO).indexOf(map)
-    return index % 2 === 1
-  }
 }
 
 export class Nidoqueen extends Pokemon {
@@ -3345,11 +3335,6 @@ export class Nidoqueen extends Pokemon {
   range = 1
   skill = Ability.VENOSHOCK
   attackSprite = AttackSprite.POISON_MELEE
-  regional = true
-  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
-    const index = Object.values(DungeonPMDO).indexOf(map)
-    return index % 2 === 1
-  }
 }
 
 export class NidoranM extends Pokemon {
@@ -3370,11 +3355,6 @@ export class NidoranM extends Pokemon {
   skill = Ability.POISON
   attackSprite = AttackSprite.POISON_MELEE
   regional = true
-  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
-    /* Nidoran male and female are split in different regions */
-    const index = Object.values(DungeonPMDO).indexOf(map)
-    return index % 2 === 0
-  }
 }
 
 export class Nidorino extends Pokemon {
@@ -3395,11 +3375,6 @@ export class Nidorino extends Pokemon {
   skill = Ability.POISON
   attackSprite = AttackSprite.POISON_MELEE
   regional = true
-  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
-    /* Nidoran male and female are split in different regions */
-    const index = Object.values(DungeonPMDO).indexOf(map)
-    return index % 2 === 0
-  }
 }
 
 export class Nidoking extends Pokemon {
@@ -3419,11 +3394,6 @@ export class Nidoking extends Pokemon {
   skill = Ability.POISON
   attackSprite = AttackSprite.POISON_MELEE
   regional = true
-  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
-    /* Nidoran male and female are split in different regions */
-    const index = Object.values(DungeonPMDO).indexOf(map)
-    return index % 2 === 0
-  }
 }
 
 export class Machop extends Pokemon {
@@ -3556,6 +3526,10 @@ export class Monferno extends Pokemon {
   skill = Ability.TORMENT
   attackSprite = AttackSprite.FIRE_MELEE
   regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.HUMAN)
+  }
 }
 
 export class Infernape extends Pokemon {
@@ -3575,6 +3549,10 @@ export class Infernape extends Pokemon {
   skill = Ability.TORMENT
   attackSprite = AttackSprite.FIRE_MELEE
   regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.HUMAN)
+  }
 }
 
 export class Mudkip extends Pokemon {
@@ -13398,11 +13376,7 @@ export class Tangrowth extends Pokemon {
 }
 
 export class Phanpy extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.GROUND,
-    Synergy.WILD,
-    Synergy.BABY
-  ])
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.WILD, Synergy.BABY])
   rarity = Rarity.RARE
   evolution = Pkm.DONPHAN
   stars = 1
@@ -13417,10 +13391,7 @@ export class Phanpy extends Pokemon {
 }
 
 export class Donphan extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.GROUND,
-    Synergy.WILD
-  ])
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.WILD])
   rarity = Rarity.RARE
   stars = 2
   hp = 180
