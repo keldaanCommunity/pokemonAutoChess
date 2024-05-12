@@ -2365,7 +2365,8 @@ export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
   [Pkm.GEODUDE]: [Pkm.ALOLAN_GEODUDE],
   [Pkm.DIGLETT]: [Pkm.ALOLAN_DIGLETT],
   [Pkm.ZORUA]: [Pkm.HISUI_ZORUA],
-  [Pkm.GRIMER]: [Pkm.ALOLAN_GRIMER]
+  [Pkm.GRIMER]: [Pkm.ALOLAN_GRIMER],
+  [Pkm.NIDORANF]: [Pkm.NIDORANM]
 }
 
 export enum PkmDuo {
