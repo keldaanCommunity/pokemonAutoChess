@@ -1418,39 +1418,42 @@ export class EndTournamentCommand extends Command<
         return logger.error(`Tournament not found: ${tournamentId}`)
 
       const players = getRemainingPlayers(tournament)
-      const winner = players.find((p) => p.ranks[p.ranks.length - 1] === 1)
+      const winner = players.find((p) => p.ranks.at(-1) === 1)
       if (winner) {
         this.room.presence.publish("tournament-winner", winner)
-        const mongoUser = await UserMetadata.findOne({ uid: winner.id })
-        if (
-          mongoUser &&
-          mongoUser.titles &&
-          !mongoUser.titles.includes(Title.CHAMPION)
-        ) {
-          mongoUser.titles.push(Title.CHAMPION)
-          await mongoUser.save()
-          const user = this.state.users.get(winner.id)
-          if (user) {
-            user.titles.push(Title.CHAMPION)
-          }
-        }
       }
 
-      const top4 = players.filter((p) => p.ranks[p.ranks.length - 1] <= 4)
-      for (const player of top4) {
+      for (const player of players) {
         const mongoUser = await UserMetadata.findOne({ uid: player.id })
-        if (
-          mongoUser &&
-          mongoUser.titles &&
-          !mongoUser.titles.includes(Title.ELITE_FOUR_MEMBER)
-        ) {
-          mongoUser.titles.push(Title.ELITE_FOUR_MEMBER)
-          await mongoUser.save()
-          const user = this.state.users.get(player.id)
-          if (user) {
+        const user = this.state.users.get(player.id)
+        const rank = player.ranks.at(-1) ?? 1
+
+        if (mongoUser == null || user == null) continue
+
+        mongoUser.booster += 3 // 3 boosters for top 8
+        if (mongoUser.titles.includes(Title.ACE_TRAINER) === false) {
+          mongoUser.titles.push(Title.ACE_TRAINER)
+          user.titles.push(Title.ACE_TRAINER)
+        }
+
+        if (rank <= 4) {
+          mongoUser.booster += 3 // 6 boosters for top 4
+          if (mongoUser.titles.includes(Title.ELITE_FOUR_MEMBER) === false) {
+            mongoUser.titles.push(Title.ELITE_FOUR_MEMBER)
             user.titles.push(Title.ELITE_FOUR_MEMBER)
           }
         }
+
+        if (rank === 1) {
+          mongoUser.booster += 4 // 10 boosters for top 1
+          if (mongoUser.titles.includes(Title.CHAMPION) === false) {
+            mongoUser.titles.push(Title.CHAMPION)
+            user.titles.push(Title.CHAMPION)
+          }
+        }
+
+        user.booster = mongoUser.booster
+        await mongoUser.save()
       }
 
       tournament.brackets.clear()
