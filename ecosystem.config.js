@@ -17,8 +17,8 @@ module.exports = {
     }],  
     deploy : {  
       production : {  
-        "user" : "deploy",  
-        "host" : ["45.76.130.174"],  
+        "user" : "root",  
+        "host" : ["146.190.113.96"],  
         "ref"  : "origin/prod",  
         "repo" : "git@github.com:keldaanCommunity/pokemonAutoChess.git",  
         "path" : "/home/deploy",  
