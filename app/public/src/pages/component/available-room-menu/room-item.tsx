@@ -43,7 +43,7 @@ export default function RoomItem(props: {
 
   return (
     <div className="room-item my-box">
-      <span className="room-name">{props.room.metadata?.name}</span>
+      <span className="room-name" title={"Owner: "+props.room.metadata?.ownerName}>{props.room.metadata?.name}</span>
       {props.room.metadata?.password && (
         <img
           alt={t("private")}

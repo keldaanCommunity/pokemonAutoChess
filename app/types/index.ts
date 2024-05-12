@@ -581,6 +581,7 @@ export interface ICount {
 
 export interface IPreparationMetadata {
   name: string
+  ownerName: string
   password: string | null
   noElo: boolean
   type: "preparation"
@@ -594,6 +595,7 @@ export interface IPreparationMetadata {
 
 export interface IGameMetadata {
   name: string
+  ownerName: string
   gameMode: GameMode
   playerIds: string[]
   stageLevel: number

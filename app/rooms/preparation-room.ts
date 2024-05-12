@@ -8,7 +8,6 @@ import { IBot } from "../models/mongo-models/bot-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { IPreparationMetadata, Transfer } from "../types"
 import { EloRank, MAX_PLAYERS_PER_GAME } from "../types/Config"
-import { DungeonPMDO } from "../types/enum/Dungeon"
 import { BotDifficulty, GameMode } from "../types/enum/Game"
 import { logger } from "../utils/logger"
 import { values } from "../utils/schemas"
@@ -32,13 +31,11 @@ import PreparationState from "./states/preparation-state"
 
 export default class PreparationRoom extends Room<PreparationState> {
   dispatcher: Dispatcher<this>
-  elos: Map<any, any>
 
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
     this.maxClients = MAX_PLAYERS_PER_GAME
-    this.elos = new Map()
   }
 
   async setName(name: string) {
@@ -78,7 +75,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     noElo?: boolean
     autoStartDelayInSeconds?: number
     whitelist?: string[]
-    tournamentId?: string,
+    tournamentId?: string
     bracketId?: string
   }) {
     // logger.debug(options);
@@ -90,6 +87,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     // logger.debug(defaultRoomName);
     this.setState(new PreparationState(options))
     this.setMetadata(<IPreparationMetadata>{
+      ownerName: options.ownerId,
       minRank: options.minRank ?? null,
       noElo: options.noElo ?? false,
       gameMode: options.gameMode,
@@ -130,33 +128,42 @@ export default class PreparationRoom extends Room<PreparationState> {
         }
       }, options.autoStartDelayInSeconds * 1000)
 
-      this.clock.setTimeout(() => {
-        for (let t = 0; t < 10; t++) {
-          this.clock.setTimeout(() => {
-            this.state.addMessage({
-              author: "Server",
-              authorId: "server",
-              payload: `Game is starting in ${10 - t}`,
-              avatar: "0070/Normal"
-            })
-          }, t * 1000)
-        }
-      }, (options.autoStartDelayInSeconds - 10) * 1000)
+      this.clock.setTimeout(
+        () => {
+          for (let t = 0; t < 10; t++) {
+            this.clock.setTimeout(() => {
+              this.state.addMessage({
+                author: "Server",
+                authorId: "server",
+                payload: `Game is starting in ${10 - t}`,
+                avatar: "0070/Normal"
+              })
+            }, t * 1000)
+          }
+        },
+        (options.autoStartDelayInSeconds - 10) * 1000
+      )
 
-      this.clock.setTimeout(() => {
-        for (let t = 0; t < 9; t++) {
-          this.clock.setTimeout(() => {
-            this.state.addMessage({
-              author: "Server",
-              authorId: "server",
-              payload: `Game will start automatically in ${10 - t} minute${
-                t !== 9 ? "s" : ""
-              }`,
-              avatar: "0340/Special1"
-            })
-          }, t * 60 * 1000)
-        }
-      }, (options.autoStartDelayInSeconds - 10 * 60) * 1000)
+      this.clock.setTimeout(
+        () => {
+          for (let t = 0; t < 9; t++) {
+            this.clock.setTimeout(
+              () => {
+                this.state.addMessage({
+                  author: "Server",
+                  authorId: "server",
+                  payload: `Game will start automatically in ${10 - t} minute${
+                    t !== 9 ? "s" : ""
+                  }`,
+                  avatar: "0340/Special1"
+                })
+              },
+              t * 60 * 1000
+            )
+          }
+        },
+        (options.autoStartDelayInSeconds - 10 * 60) * 1000
+      )
     }
 
     this.setName(options.roomName)
