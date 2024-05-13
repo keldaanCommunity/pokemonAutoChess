@@ -85,6 +85,9 @@ export class OnJoinCommand extends Command<
           if (u.uid == this.state.ownerId) {
             // logger.debug(user.displayName);
             this.state.ownerName = u.displayName
+            this.room.setMetadata({
+              ownerName: this.state.ownerName
+            })
           }
           this.state.addMessage({
             authorId: "server",
@@ -232,6 +235,7 @@ export class OnGameStartRequestCommand extends Command<
         matchMaker.createRoom("game", {
           users: this.state.users,
           name: this.state.name,
+          ownerName: this.state.ownerName,
           preparationId: this.room.roomId,
           noElo: this.state.noElo,
           gameMode: this.state.gameMode,
@@ -468,6 +472,12 @@ export class OnLeaveCommand extends Command<
             if (newOwner) {
               this.state.ownerId = newOwner.id
               this.state.ownerName = newOwner.name
+              this.room.setMetadata({ ownerName: this.state.ownerName })
+              this.room.setName(
+                `${newOwner.name}'${
+                  newOwner.name.endsWith("s") ? "" : "s"
+                } room`
+              )
               this.room.state.addMessage({
                 authorId: "server",
                 payload: `The new room leader is ${newOwner.name}`,

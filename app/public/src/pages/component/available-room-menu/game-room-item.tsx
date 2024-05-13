@@ -12,14 +12,16 @@ export default function GameRoomItem(props: {
 }) {
   const { t } = useTranslation()
   const myUid = useAppSelector((state) => state.network.uid)
-  const spectate = !props.room.metadata?.playerIds.includes(myUid)
+  const playerIds = props.room.metadata?.playerIds ?? []
+  const spectate = playerIds.includes(myUid) === false
+  
 
   return (
     <div className="room-item my-box">
-      <span className="room-name">{props.room.metadata?.name}</span>
+      <span className="room-name" title={"Owner: "+props.room.metadata?.ownerName}>{props.room.metadata?.name}</span>
       <span>
-        {props.room.metadata?.playerIds.length} {t("player")}
-        {props.room.metadata?.playerIds.length !== 1 ? "s" : ""}, {t("stage")}{" "}
+        {playerIds.length} {t("player")}
+        {playerIds.length !== 1 ? "s" : ""}, {t("stage")}{" "}
         {props.room.metadata?.stageLevel}
       </span>
       <button

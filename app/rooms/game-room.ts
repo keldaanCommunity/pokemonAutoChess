@@ -97,6 +97,7 @@ export default class GameRoom extends Room<GameState> {
     users: MapSchema<IGameUser>
     preparationId: string
     name: string
+    ownerName: string
     noElo: boolean
     gameMode: GameMode
     minRank: EloRank | null
@@ -107,6 +108,7 @@ export default class GameRoom extends Room<GameState> {
     logger.trace("create game room")
     this.setMetadata(<IGameMetadata>{
       name: options.name,
+      ownerName: options.ownerName,
       gameMode: options.gameMode,
       playerIds: keys(options.users).filter(
         (id) => options.users.get(id)!.isBot === false
