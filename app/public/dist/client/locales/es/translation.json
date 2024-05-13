@@ -1955,7 +1955,7 @@
     "COSMOG": "$t(pkm.COSMOG) se alimenta de la energía de las estrellas. Gana 10 HP máximo permanente cada vez que evolucionas una unidad. Evoluciona después de 10 veces.",
     "COSMOEM": "$t(pkm.COSMOEM) se alimenta de la energía de las estrellas. Gana 10 HP máximo permanente cada vez que evolucionas una unidad. Evoluciona después de 10 veces a $t(pkm.SOlgaleo) si estás en el punto de luz, o a $t(pkm.LUNALA) en su lugar.",
     "SOUL_HEART": "Cada vez que el lanzador consigue un KO, gana 10 AP y 10 PP.",
-    "ALIEN_DNA": "$t(pkm.DEOXYS) reacciona al METEORITO cambiando de forma",
+    "ALIEN_DNA": "$t(pkm.DEOXYS) reacciona al METEORITE cambiando de forma",
     "BERRY_EATER": "Cuando el Pokémon ataca a un objetivo, le roba todas sus bayas y se las come.",
     "TOXIC_BOOST": "El pokémon gana 10 ATK mientras esté POISONNED",
     "SHUCKLE": "Convierte las bayas consumidas en BERRY_JUICE",
