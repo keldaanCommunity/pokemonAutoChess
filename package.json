@@ -40,7 +40,8 @@
     "assetpack": "cd edit/assetpack && npm run assetpack",
     "precompute": "cd gen && ts-node precompute-all.ts",
     "colyseus-post-deploy": "npx colyseus-post-deploy",
-    "deploy-live": "pm2 deploy production update"
+    "update-live": "pm2 deploy production update",
+    "setup-live": "pm2 deploy production setup"
   },
   "dependencies": {
     "@colyseus/command": "^0.2.1",
