@@ -67,7 +67,7 @@ export default class Simulation extends Schema implements ISimulation {
     this.bluePlayer = bluePlayer
     this.redPlayer = redPlayer
     this.bluePlayerId = bluePlayer.id
-    this.redPlayerId = redPlayer?.id ? redPlayer?.id : ""
+    this.redPlayerId = redPlayer?.id ?? "pve"
     this.stageLevel = stageLevel
     this.weather = weather
 
@@ -1228,20 +1228,7 @@ export default class Simulation extends Schema implements ISimulation {
 
   update(dt: number) {
     if (this.blueTeam.size === 0 || this.redTeam.size === 0) {
-      this.finished = true
-      if (this.blueTeam.size === 0 && this.redTeam.size > 0) {
-        this.winnerId = this.redPlayer ? this.redPlayer.id : "pve"
-        this.redTeam.forEach((p) => {
-          p.status.clearNegativeStatus()
-          p.action = PokemonActionState.HOP
-        })
-      } else if (this.redTeam.size === 0 && this.blueTeam.size > 0) {
-        this.winnerId = this.bluePlayer?.id ?? ""
-        this.blueTeam.forEach((p) => {
-          p.status.clearNegativeStatus()
-          p.action = PokemonActionState.HOP
-        })
-      }
+      this.onFinish()
     }
 
     this.blueTeam.forEach((pkm, key) => {
@@ -1323,5 +1310,94 @@ export default class Simulation extends Schema implements ISimulation {
     this.weather = Weather.NEUTRAL
     this.winnerId = ""
     this.room.broadcast(Transfer.SIMULATION_STOP)
+  }
+
+  onFinish() {
+    this.finished = true
+
+    if (this.blueTeam.size === 0 && this.redTeam.size > 0) {
+      this.winnerId = this.redPlayerId
+    } else if (this.redTeam.size === 0 && this.blueTeam.size > 0) {
+      this.winnerId = this.bluePlayerId
+    }
+
+    const winningTeam =
+      this.winnerId === this.redPlayerId
+        ? this.redTeam
+        : this.winnerId === this.bluePlayerId
+          ? this.blueTeam
+          : null
+    if (winningTeam) {
+      winningTeam.forEach((p) => {
+        p.status.clearNegativeStatus()
+        p.action = PokemonActionState.HOP
+      })
+    }
+
+    if (this.redPlayer && this.id === this.redPlayer.simulationId) {
+      this.redPlayer.addBattleResult(
+        this.redPlayer.opponentId,
+        this.redPlayer.opponentName,
+        this.winnerId === this.redPlayerId
+          ? BattleResult.WIN
+          : this.winnerId === this.bluePlayerId
+            ? BattleResult.DEFEAT
+            : BattleResult.DRAW,
+        this.redPlayer.opponentAvatar,
+        this.weather
+      )
+    }
+
+    if (this.bluePlayer && this.id === this.bluePlayer.simulationId) {
+      this.bluePlayer.addBattleResult(
+        this.bluePlayer.opponentId,
+        this.bluePlayer.opponentName,
+        this.winnerId === this.bluePlayerId
+          ? BattleResult.WIN
+          : this.winnerId === this.redPlayerId
+            ? BattleResult.DEFEAT
+            : BattleResult.DRAW,
+        this.bluePlayer.opponentAvatar,
+        this.weather
+      )
+    }
+
+    if (
+      this.bluePlayer &&
+      this.winnerId !== this.bluePlayerId &&
+      this.id === this.bluePlayer.simulationId
+    ) {
+      const playerDamage = this.room.computeRoundDamage(
+        this.redTeam,
+        this.stageLevel
+      )
+      this.bluePlayer.life -= playerDamage
+      if (playerDamage > 0) {
+        const client = this.room.clients.find(
+          (cli) => cli.auth.uid === this.bluePlayerId
+        )
+        client?.send(Transfer.PLAYER_DAMAGE, playerDamage)
+      }
+    }
+
+    if (
+      this.redPlayer &&
+      this.winnerId !== this.redPlayerId &&
+      this.id === this.redPlayer.simulationId
+    ) {
+      const playerDamage = this.room.computeRoundDamage(
+        this.blueTeam,
+        this.stageLevel
+      )
+      this.redPlayer.life -= playerDamage
+      if (playerDamage > 0) {
+        const client = this.room.clients.find(
+          (cli) => cli.auth.uid === this.redPlayerId
+        )
+        client?.send(Transfer.PLAYER_DAMAGE, playerDamage)
+      }
+    }
+
+    this.room.rankPlayers()
   }
 }

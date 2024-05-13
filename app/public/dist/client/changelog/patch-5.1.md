@@ -59,7 +59,8 @@
 # UI
 
 - Add an option to disable damage numbers
-- Add a button to quickly change avatar from collection screen,
+- Add a button to quickly change avatar from collection screen
+- Player damage is now computed immediately on victory instead of on round change
 
 # Bugfix
 - Fixed emote keyboard shortcut changing tab

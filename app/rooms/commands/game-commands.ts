@@ -849,89 +849,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     }
   }
 
-  computeRoundDamage(
-    opponentTeam: MapSchema<IPokemonEntity>,
-    stageLevel: number
-  ) {
-    if (this.state.specialGameRule === SpecialGameRule.NINE_LIVES) return 1
-
-    let damage = Math.ceil(stageLevel / 2)
-    if (opponentTeam.size > 0) {
-      opponentTeam.forEach((pokemon) => {
-        if (!pokemon.isClone) {
-          damage += 1
-        }
-      })
-    }
-    return damage
-  }
-
-  rankPlayers() {
-    const rankArray = new Array<{ id: string; life: number; level: number }>()
-    this.state.players.forEach((player) => {
-      if (!player.alive) {
-        return
-      }
-
-      rankArray.push({
-        id: player.id,
-        life: player.life,
-        level: player.experienceManager.level
-      })
-    })
-
-    const sortPlayers = (
-      a: { id: string; life: number; level: number },
-      b: { id: string; life: number; level: number }
-    ) => {
-      let diff = b.life - a.life
-      if (diff == 0) {
-        diff = b.level - a.level
-      }
-      return diff
-    }
-
-    rankArray.sort(sortPlayers)
-
-    rankArray.forEach((rankPlayer, index) => {
-      const player = this.state.players.get(rankPlayer.id)
-      if (player) {
-        player.rank = index + 1
-      }
-    })
-  }
-
-  computeLife() {
-    this.state.players.forEach((player) => {
-      if (player.alive) {
-        const currentResult = this.state.simulations
-          .get(player.simulationId)
-          ?.getCurrentBattleResult(player.id)
-
-        const opponentTeam = this.state.simulations
-          .get(player.simulationId)
-          ?.getOpponentTeam(player.id)
-        if (
-          opponentTeam &&
-          (currentResult === BattleResult.DEFEAT ||
-            currentResult === BattleResult.DRAW)
-        ) {
-          const playerDamage = this.computeRoundDamage(
-            opponentTeam,
-            this.state.stageLevel
-          )
-          player.life -= playerDamage
-          if (playerDamage > 0) {
-            const client = this.room.clients.find(
-              (cli) => cli.auth.uid === player.id
-            )
-            client?.send(Transfer.PLAYER_DAMAGE, playerDamage)
-          }
-        }
-      }
-    })
-  }
-
   computeStreak(isPVE: boolean) {
     if (isPVE) return // PVE rounds do not change the current streak
     this.state.players.forEach((player) => {
@@ -977,25 +894,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     })
   }
 
-  registerBattleResults() {
-    this.state.players.forEach((player) => {
-      if (player.alive) {
-        const currentResult = this.state.simulations
-          .get(player.simulationId)
-          ?.getCurrentBattleResult(player.id)
-        if (currentResult) {
-          player.addBattleResult(
-            player.opponentId,
-            player.opponentName,
-            currentResult,
-            player.opponentAvatar,
-            this.state.simulations.get(player.simulationId)?.weather
-          )
-        }
-      }
-    })
-  }
-
   checkDeath() {
     this.state.players.forEach((player: Player) => {
       if (player.life <= 0 && player.alive) {
@@ -1007,7 +905,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             this.state.shop.releasePokemon(pokemon.name, player)
           })
         }
-        player.life = 0
         player.alive = false
       }
     })
@@ -1158,9 +1055,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
     this.computeAchievements()
     this.computeStreak(isPVE)
-    this.computeLife()
-    this.registerBattleResults()
-    this.rankPlayers()
     this.checkDeath()
     this.computeIncome()
     this.state.simulations.forEach((simulation) => {
