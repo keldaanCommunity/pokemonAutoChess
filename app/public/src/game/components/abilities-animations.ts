@@ -946,7 +946,7 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
-    case Ability.GROUND_SLAM:
+    case Ability.HEAVY_SLAM:
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 

@@ -341,7 +341,7 @@
     "POWER_WHIP": "Power Whip",
     "DARK_HARVEST": "Dark Harvest",
     "PSYSHOCK": "Psyshock",
-    "GROUND_SLAM": "Ground Slam",
+    "HEAVY_SLAM": "Heavy Slam",
     "HAIL": "Hail",
     "RAPID_SPIN": "Rapid Spin",
     "BOUNCE": "Bounce"
@@ -1453,7 +1453,7 @@
     "POWER_WHIP": "Lock on to the farthest enemy and unleash a giant vine towards it, dealing [30,60,SP] SPECIAL to any enemies hit",
     "DARK_HARVEST": "The pokémon teleports into the largest group of enemies. For the next 3 seconds, the pokémon suffers SILENCE and drains the HP of adjacent enemies, inflicting [10,20,40,SP] SPECIAL per second and healing HP for [20,30,40,SP]% of the SPECIAL inflicted",
     "PSYSHOCK": "Burn [30,60,100,SP] PP from target and gain it as SHIELD. If the target has not enough PP, the remainder is dealt as SPECIAL.",
-    "GROUND_SLAM": "Slams the ground, dealing [10,20,40,SP] SPECIAL and granting himself [10,20,40] SHIELD",
+    "HEAVY_SLAM": "Slams the ground, dealing [10,20,40,SP] SPECIAL and granting himself [10,20,40] SHIELD. The more the user outweighs the target in max HP, the greater the move's power.",
     "RAPID_SPIN": "Deal [20,50,SP] SPECIAL then gain [20,30,SP]% of ATK as DEF and SPE_DEF",
     "BOUNCE": "Bounce [1,2,3,SP] times to the farthest target, dealing [10,SP] SPECIAL to all adjacent enemies for each bounce"
   },
@@ -1819,7 +1819,7 @@
     "SMOKE_BALL": "Once below 33% max HP, drop the smoke ball and jump to a cell away. Every adjacent enemy is PARALYSIS for 3 seconds, and the smoke reduce the precision of all pokemons inside by 50%.",
     "XRAY_VISION": "+50% ATK_SPEED. The holder attacks can no longer miss.",
     "RAZOR_FANG": "+100% CRIT_DAMAGE. Critical hits apply ARMOR_REDUCTION for 4 seconds.",
-    "SOOTHE_BELL": "The holder attack gives 25% of damage dealt as SHIELD to the ally closest to the target",
+    "SOOTHE_BELL": "The holder attacks give 25% of damage dealt as SHIELD to the ally closest to the target",
     "CHOICE_SCARF": "On hit deal 50% basic attack damage to an adjacent enemy",
     "FIRE_GEM": "Attacks do double damage on SHIELD and deal 8 % of target max HP as additional damage",
     "DEFENSIVE_RIBBON": "When the holder takes damage, gain 1 stack. Every 2 stacks, the holder gains +1 DEF, +1 ATK and +5% ATK_SPEED (max 20 stacks)",

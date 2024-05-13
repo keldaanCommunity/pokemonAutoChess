@@ -341,7 +341,7 @@
     "POWER_WHIP": "Mégafouet",
     "DARK_HARVEST": "Sombre Récolte",
     "PSYSHOCK": "Choc Psy",
-    "GROUND_SLAM": "Tacle Lourd",
+    "HEAVY_SLAM": "Tacle Lourd",
     "HAIL": "Grêle",
     "RAPID_SPIN": "Tour Rapide",
     "BOUNCE": "Rebond"
@@ -1453,7 +1453,7 @@
     "POWER_WHIP": "S'agrippe à l'unité adverse la plus lointaine en projetant une liane gigantesque, infligeant [30,60,SP] SPECIAL à tous les ennemis touchés",
     "DARK_HARVEST": "Se téléporte près du plus gros groupe d'adversaires. Pendant les 3 prochaines secondes, le lanceur subit SILENCE et draine les HP des adversaires adjacents, infligeant [10,20,40,SP] SPECIAL per seconde et se soignant à hauteur de [20,30,40,SP]% des SPECIAL infligés",
     "PSYSHOCK": "Consume [30,60,100,SP] PP de la cible et les récupère en SHIELD. Si la cible n'a pas assez de PP, le reste est infligé en SPECIAL.",
-    "GROUND_SLAM": "Le lanceur se jette sur l'ennemi de tout son poids, infligeant [10,20,40,SP] SPECIAL et gagnant [10,20,40] SHIELD",
+    "HEAVY_SLAM": "Le lanceur se jette sur l'ennemi de tout son poids, infligeant [10,20,40,SP] SPECIAL et gagnant [10,20,40] SHIELD. Plus il a de max HP par rapport à la cible, plus la puissance de cette capacité augmente.",
     "RAPID_SPIN": "Inflige [20,50,SP] SPECIAL et gagne [20,30,SP]% de son ATK en DEF et SPE_DEF",
     "BOUNCE": "Rebondit [1,2,3,SP] fois jusqu'à la cible la plus lointaine, infligeant [10,SP] SPECIAL à tous les adversaires adjacents à chaque rebond"
   },

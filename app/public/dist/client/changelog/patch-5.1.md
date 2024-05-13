@@ -27,7 +27,7 @@
 - Nerf Burmy: Spedef 5 → 3
 - Nerf Wormadam: HP 200 → 150, Attack 20 → 13, SpeDef 3 → 5, PP 80 → 100
 - Nerf Mothim: PP 60 → 80
-- New ability for Aron Ground Slam: The pokémon slams the ground, dealing 10/20/40 special damage and granting himself 10/20/40 Shield
+- New ability for Aron Heavy Slam: The pokémon slams the ground, dealing 10/20/40 special damage and granting himself 10/20/40 Shield. The more the user outweighs the target in max HP, the greater the move's power.
 - Changed Icy wind (Snorunt): is now an effect in line
 - Revert PP nerfs for Water units from patch 5.0
 - Changed Dive (Lapras, Wailmer): now also gain 50 shield
