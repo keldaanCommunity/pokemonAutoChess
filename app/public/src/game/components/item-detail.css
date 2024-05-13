@@ -3,7 +3,7 @@
   max-width: 400px;
   color: white;
   display: grid;
-  grid-template-columns: 50px 1fr;
+  grid-template-columns: 55px 1fr;
   grid-template-areas:
     "icon name"
     "icon stats"
@@ -16,8 +16,8 @@
 }
 
 .game-item-detail-icon {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   image-rendering: pixelated;
   object-fit: contain;
   grid-area: icon;

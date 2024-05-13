@@ -7,7 +7,6 @@ import { Weather } from "./enum/Weather"
 
 export const ON_ATTACK_MANA = 5
 export const MANA_SCARF_MANA = 8
-export const DELTA_ORB_MANA = 4
 export const SCOPE_LENS_MANA = 15
 
 export const BOARD_WIDTH = 8
@@ -570,7 +569,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.BLUE_ORB]: { [Stat.PP]: 15, [Stat.ATK_SPEED]: 10 },
   [Item.SCOPE_LENS]: { [Stat.PP]: 15, [Stat.CRIT_CHANCE]: 25 },
   [Item.STAR_DUST]: { [Stat.PP]: 15, [Stat.SHIELD]: 15 },
-  [Item.DELTA_ORB]: { [Stat.PP]: 15, [Stat.SPE_DEF]: 2 },
+  [Item.GREEN_ORB]: { [Stat.PP]: 15, [Stat.SPE_DEF]: 2 },
   [Item.MANA_SCARF]: { [Stat.PP]: 15, [Stat.ATK]: 3 },
   [Item.SMOKE_BALL]: { [Stat.PP]: 15, [Stat.DEF]: 2 },
   [Item.XRAY_VISION]: { [Stat.ATK_SPEED]: 50 },

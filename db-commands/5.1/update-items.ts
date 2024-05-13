@@ -1,13 +1,14 @@
 import dotenv from "dotenv"
 import { connect } from "mongoose"
-import { BotV2 } from "../app/models/mongo-models/bot-v2"
-import { ItemsStatistics } from "../app/models/mongo-models/items-statistic"
-import { Item } from "../app/types/enum/Item"
-import { logger } from "../app/utils/logger"
+import { BotV2 } from "../../app/models/mongo-models/bot-v2"
+import { ItemsStatistics } from "../../app/models/mongo-models/items-statistic"
+import { Item } from "../../app/types/enum/Item"
+import { logger } from "../../app/utils/logger"
 
 const itemsToReplace = new Map<string, Item>([
   ["ORAN_BERRY", Item.KINGS_ROCK],
-  ["LEFTOVERS", Item.SOOTHE_BELL]
+  ["LEFTOVERS", Item.SOOTHE_BELL],
+  ["DELTA_ORB", Item.GREEN_ORB]
 ])
 
 async function main() {

@@ -43,8 +43,10 @@
 # Changes to Items
 
 - Removed Leftovers
-- Changed recipe for Gracidea Flower: magnet + seed
+- Removed Delta Orb
 - New item: Soothe Bell (charcoal + seed): the holder attack gives 25% of damage dealt as Shield to the ally closest to the target
+- New item: Green Orb: the holder and adjacent allies heal 5% of their max HP every second
+- Changed recipe for Gracidea Flower: magnet + seed
 - Buff Incense: ~~10~~ 15% chance to charm on attack received
 - Buff Macho Brace: ~~-25~~ -15% attack speed
 - Buff Electirizer: ~~+40~~ +50% attack speed, paralysis duration ~~4~~ 2 seconds
@@ -62,9 +64,9 @@
 - Add a button to quickly change avatar from collection screen,
 
 # Bugfix
+
 - Fixed emote keyboard shortcut changing tab
 - Fixed emote menu when player uses a shiny avatar
-
 - Fix burn and poison damage sometimes applying too soon after the second time the status is applied
 
 # Misc
