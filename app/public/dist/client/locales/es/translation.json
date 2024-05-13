@@ -1960,7 +1960,7 @@
     "TOXIC_BOOST": "El pokémon gana 10 ATK mientras esté POISONNED",
     "SHUCKLE": "Convierte las bayas consumidas en BERRY_JUICE",
     "GUZZLORD": "Guzzlord pesa demasiado y no puede saltar.",
-    "ENVIRONMENTAL_ADAPTATION": "Este Pokémon adapta sus sinergias a su región.",
+    "ENVIRONMENTAL_ADAPTATION": "Este Pokémon adapta sus sinergias a la región.",
     "MOTHIM": "$t(pkm.MOTHIM) toma sinergias de todas las formas regionales de $t(pkm.BURMY) encontradas por el jugador.",
     "PSYDUCK": "Cuando esté CONFUSION, gana 100% AP"
   },
@@ -2009,7 +2009,7 @@
     "ARMOR_REDUCTION": "Reducción de armadura",
     "CHARM": "Encantado",
     "FLINCH": "Amedrentado",
-    "CURSE": "Maldición",
+    "CURSE": "Maldecido",
     "RUNE_PROTECT": "Protección de runas",
     "ELECTRIC_FIELD": "Campo eléctrico",
     "PSYCHIC_FIELD": "Campo psíquico",
@@ -2224,11 +2224,11 @@
     "ARCHEOLOGIST": "Descifrar el mensaje secreto de los Unowns",
     "DENTIST": "Posee el Arbok enojado",
     "FISHERMAN": "Consigue un Gyarados",
-    "CHOSEN_ONE": "Alcanza el nivel máximo de la sinergia Luz en un juego.",
+    "CHOSEN_ONE": "Alcanza el nivel máximo con la sinergia Luz en un juego.",
     "VANQUISHER": "Gana una Partida Clasificatoria",
     "OUTSIDER": "Gana una Partida Clasificatoria con 8 jugadores teniendo el Elo más bajo de todos",
     "GLUTTON": "Ten un Snorlax con mas de 750 HP base.",
-    "STARGAZER": "Consigue Solgaleo o Lunala"
+    "STARGAZER": "Consigue a Solgaleo o Lunala"
   },
   "weather": {
     "NEUTRAL": "Clima tranquilo",
@@ -2331,7 +2331,7 @@
   "yes": "Sí",
   "no": "No",
   "title_label": "Título",
-  "mobile_warning": "This game is not adapted for mobile, play it on desktop",
+  "mobile_warning": "Este juego no está adaptado para dispositivos móviles, juega en computadora.",
   "nintendo_warning": "Non profit, open source. All rights to The Pokemon Company®",
   "collection": "Recopilación",
   "wiki": "Wiki",
@@ -2528,7 +2528,7 @@
   "craftable_items": "Construibles",
   "berries": "Bayas",
   "artificial_items": "Artificial",
-  "special_items": "Objetos Speciales",
+  "special_items": "Objetos Especiales",
   "item_recipes": "Recetas de Objetos",
   "news": "Noticias",
   "patch_notes": "Notas del Parche",
@@ -2620,7 +2620,7 @@
   "titles_unlocked": "Títulos desbloqueados",
   "game-reconnect-modal-title": "Vuelve a conectarte al juego",
   "game-reconnect-modal-body": "Dejaste un juego en progreso. ¿Quieres volver a conectarte a tu juego anterior?",
-  "toggle_locked": "Mostar Bloqueados",
+  "toggle_locked": "Mostrar Bloqueados",
   "key": "Llave",
   "action": "Acción",
   "key_desc_buy_xp": "Comprar experiencia",
@@ -2652,7 +2652,7 @@
   "elorank": {
     "BEGINNER": "Principiante",
     "POKEBALL": "Poké Ball",
-    "GREATBALL": "Great Ball",
+    "GREATBALL": "Super Ball",
     "ULTRABALL": "Ultra Ball",
     "MASTERBALL": "Master Ball"
   },
@@ -2663,7 +2663,7 @@
   "ranked_match": "Partida Clasificatoria",
   "kecleon_dialog": {
     "welcome": "¡Bienvenido a la tienda de Kecleon!",
-    "tell_price": "10 GOLD cada uno !",
+    "tell_price": "10 GOLD cada uno!",
     "thank_you": "GRACIAS !"
   },
   "scribble": {
