@@ -5191,7 +5191,7 @@ export class Rayquaza extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 3
   evolution = Pkm.MEGA_RAYQUAZA
-  evolutionRule = new ItemEvolutionRule([Item.DELTA_ORB])
+  evolutionRule = new ItemEvolutionRule([Item.GREEN_ORB])
   hp = 300
   atk = 30
   def = 5

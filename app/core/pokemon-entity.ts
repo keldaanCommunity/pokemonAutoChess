@@ -17,7 +17,6 @@ import {
 import {
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_DAMAGE,
-  DELTA_ORB_MANA,
   MANA_SCARF_MANA,
   ON_ATTACK_MANA,
   SCOPE_LENS_MANA
@@ -606,9 +605,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.items.has(Item.MANA_SCARF)) {
       this.addPP(MANA_SCARF_MANA)
-    }
-    if (this.status.deltaOrbStacks > 0) {
-      this.addPP(DELTA_ORB_MANA * this.status.deltaOrbStacks)
     }
 
     if (this.effects.has(Effect.TELEPORT_NEXT_ATTACK)) {

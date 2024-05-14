@@ -191,15 +191,15 @@ export default class PokemonState {
         const damageBlocked = pokemon.effects.has(Effect.JUSTIFIED)
           ? 15
           : pokemon.effects.has(Effect.DEFIANT)
-          ? 10
-          : pokemon.effects.has(Effect.STURDY)
-          ? 7
-          : 4
+            ? 10
+            : pokemon.effects.has(Effect.STURDY)
+              ? 7
+              : 4
         reducedDamage = reducedDamage - damageBlocked
         pokemon.count.fightingBlockCount++
       }
 
-      if(pokemon.passive === Passive.WONDER_GUARD){
+      if (pokemon.passive === Passive.WONDER_GUARD) {
         const damageBlocked = 20
         reducedDamage = reducedDamage - damageBlocked
       }
@@ -296,13 +296,13 @@ export default class PokemonState {
           const healBonus = pokemon.effects.has(Effect.FORGOTTEN_POWER)
             ? 1
             : pokemon.effects.has(Effect.ELDER_POWER)
-            ? 0.8
-            : 0.4
+              ? 0.8
+              : 0.4
           const attackBonus = pokemon.effects.has(Effect.FORGOTTEN_POWER)
             ? 1
             : pokemon.effects.has(Effect.ELDER_POWER)
-            ? 0.6
-            : 0.3
+              ? 0.6
+              : 0.3
           pokemon.life = pokemon.hp * healBonus
           pokemon.addAttack(pokemon.baseAtk * attackBonus)
           SynergyEffects[Synergy.FOSSIL].forEach((e) =>
@@ -451,8 +451,8 @@ export default class PokemonState {
         let heal = pokemon.effects.has(Effect.SPORE)
           ? 30
           : pokemon.effects.has(Effect.GROWTH)
-          ? 15
-          : 8
+            ? 15
+            : 8
         if (
           pokemon.effects.has(Effect.HYDRATATION) &&
           pokemon.simulation.weather === Weather.RAIN
@@ -520,6 +520,17 @@ export default class PokemonState {
       }
       if (pokemon.items.has(Item.METRONOME)) {
         pokemon.addPP(5)
+      }
+      if (pokemon.items.has(Item.GREEN_ORB)) {
+        for (const cell of board.getAdjacentCells(
+          pokemon.positionX,
+          pokemon.positionY,
+          true
+        )) {
+          if (cell.value && cell.value.team === pokemon.team) {
+            cell.value.handleHeal(0.05 * cell.value.hp, pokemon, 0)
+          }
+        }
       }
       pokemon.manaCooldown = 1000
     } else {

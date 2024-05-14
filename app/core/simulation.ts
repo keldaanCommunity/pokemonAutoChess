@@ -557,18 +557,6 @@ export default class Simulation extends Schema implements ISimulation {
           })
         }
 
-        if (pokemon.items.has(Item.DELTA_ORB)) {
-          ;[-1, 0, 1].forEach((offset) => {
-            const value = this.board.getValue(
-              pokemon.positionX + offset,
-              pokemon.positionY
-            )
-            if (value) {
-              value.status.deltaOrbStacks += 1
-            }
-          })
-        }
-
         if (pokemon.items.has(Item.EXP_SHARE)) {
           ;[-1, 1].forEach((offset) => {
             const value = this.board.getValue(

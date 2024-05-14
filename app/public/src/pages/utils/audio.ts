@@ -51,9 +51,9 @@ function setupSounds() {
 preloadSounds()
 setupSounds()
 
-export function playSound(key: Soundkey) {
+export function playSound(key: Soundkey, volume?: number) {
   if (AUDIO_ELEMENTS[key]) {
-    AUDIO_ELEMENTS[key]!.volume = preferences.sfxVolume / 100
+    AUDIO_ELEMENTS[key]!.volume = volume || preferences.sfxVolume / 100
     AUDIO_ELEMENTS[key]!.play()
   }
 }
@@ -61,7 +61,7 @@ export function playSound(key: Soundkey) {
 type SceneWithMusic = Phaser.Scene & { music?: Phaser.Sound.WebAudioSound }
 
 export function playMusic(scene: SceneWithMusic, name: string) {
-  if (scene == null || scene.music?.key === "music_"+name) return
+  if (scene == null || scene.music?.key === "music_" + name) return
   if (scene.music) scene.music.destroy()
   scene.music = scene.sound.add("music_" + name, {
     loop: true
