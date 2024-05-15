@@ -63,6 +63,7 @@
 
 - Regional pokemons are no longer restricted by rarity and stage level, but are removed from the pool after traveling to a new region
 - When a regional pokemon is a variant of another family (ie. Alolan Graveler vs Graveler), it will replace the original family in your shops
+- New weather: Blood moon, unlocked at Wild 9
 
 # UI
 
