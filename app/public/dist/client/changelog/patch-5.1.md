@@ -57,6 +57,7 @@
 
 - Regional pokemons are no longer restricted by rarity and stage level, but are removed from the pool after traveling to a new region
 - When a regional pokemon is a variant of another family (ie. Alolan Graveler vs Graveler), it will replace the original family in your shops
+- The additional 1 gold that you get when winning a round is obtained immediately on victory, and no longer on round change
 
 # UI
 
