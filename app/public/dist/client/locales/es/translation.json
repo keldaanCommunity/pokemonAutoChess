@@ -1992,7 +1992,7 @@
     "ATK": "Daño infligido en cada ataque básico",
     "ATK_SPEED": "Número de ataques por segundo. Máximo 2,5.",
     "CRIT_CHANCE": "Los golpes críticos infligen el doble de daño. Las habilidades no pueden hacer crítico por defecto.",
-    "CRIT_DAMAGE": "Multiplicador por golpes críticos daño adicional",
+    "CRIT_DAMAGE": "Multiplicador de daño por golpe crítico",
     "DEF": "Reduce el PHYSICAL recibido",
     "SPE_DEF": "Reduce el SPECIAL recibido",
     "HP": "Puntos de salud",
