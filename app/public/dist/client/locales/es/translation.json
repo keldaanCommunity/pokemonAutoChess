@@ -1996,7 +1996,7 @@
     "DEF": "Reduce el PHYSICAL recibido",
     "SPE_DEF": "Reduce el SPECIAL recibido",
     "HP": "Puntos de salud",
-    "RANGE": "Los pokemon de 1 rango son cuerpo a cuerpo",
+    "RANGE": "Los pokemon de rango 1 son cuerpo a cuerpo",
     "PP": "maná",
     "MAX_PP": "Cantidad de maná necesaria para lanzar la habilidad. Los Pokémon reciben maná con el tiempo (10 por segundo), al atacar (5 por ataque) y al recibir daño (10 % del daño recibido)",
     "AP": "Aumenta los efectos de SPECIAL y de habilidad de varias maneras.",
