@@ -17,6 +17,7 @@
 - Slowpoke is now Water/Psychic and regional in maps with Water or Psychic synergy. Removed item-based evolution for Slowking.
 - Chimchar is now regional in maps with Human synergy
 - Nidoran Male is now the regional variant of Nidoran Female
+- Cascoon is now the regional variant of Silcoon in maps with Poison synergy.
 - Alolan Graveler is moved to Common
 - Alolan Rattata is moved to Common
 - All Burmy/Wormadam forms are now considered of the same family

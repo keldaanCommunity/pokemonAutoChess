@@ -1911,7 +1911,6 @@
     "NIGHT": "Change weather to NIGHT",
     "WINDY": "Change weather to WINDY",
     "AIRLOCK": "Neutralize weather effects, getting back to NEUTRAL",
-    "WURMPLE": "Wurmple evolves depending on the weather at the previous stage:\nCascoon: NIGHT, BLOODMOON, STORM, SANDSTORM, SNOW\nSilcoon: SUN, RAIN, MISTY, WINDY\nRandom if NEUTRAL",
     "HYDRATATION": "GRASS synergy is healing 5 additional HP per second under the RAIN",
     "SHARED_VISION": "Shared vision: all Pokemon with shared vision will attack the same target, if at range",
     "WATER_SPRING": "Whenever an enemy uses their ability, gain 5 PP",

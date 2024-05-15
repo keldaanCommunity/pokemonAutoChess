@@ -10709,39 +10709,12 @@ export class Wurmple extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ENTANGLING_THREAD
-  passive = Passive.WURMPLE
   attackSprite = AttackSprite.BUG_MELEE
-
   evolutionRule = new CountEvolutionRule(
     3,
     (pokemon: Pokemon, player: Player) => {
-      const lastWeather = player.getLastBattle()?.weather ?? Weather.NEUTRAL
-      let existingSecondTier: Pkm | null = null
-      player.board.forEach((pkm) => {
-        if (pkm.name === Pkm.CASCOON) existingSecondTier = Pkm.CASCOON
-        else if (pkm.name === Pkm.SILCOON) existingSecondTier = Pkm.SILCOON
-      })
-      if (existingSecondTier !== null) {
-        return existingSecondTier
-      } else if (
-        [
-          Weather.NIGHT,
-          Weather.BLOODMOON,
-          Weather.STORM,
-          Weather.SANDSTORM,
-          Weather.SNOW
-        ].includes(lastWeather)
-      ) {
-        return Pkm.CASCOON
-      } else if (
-        [Weather.SUN, Weather.RAIN, Weather.MISTY, Weather.WINDY].includes(
-          lastWeather
-        )
-      ) {
-        return Pkm.SILCOON
-      } else {
-        return coinflip() ? Pkm.CASCOON : Pkm.SILCOON
-      }
+      if (player.regionalPokemons.includes(Pkm.CASCOON)) return Pkm.CASCOON
+      else return Pkm.SILCOON
     }
   )
 }
@@ -10788,6 +10761,11 @@ export class Cascoon extends Pokemon {
   range = 1
   skill = Ability.SPIKE_ARMOR
   attackSprite = AttackSprite.BUG_MELEE
+  regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.POISON)
+  }
 }
 
 export class Dustox extends Pokemon {
@@ -10802,6 +10780,11 @@ export class Dustox extends Pokemon {
   range = 1
   skill = Ability.POISON_POWDER
   attackSprite = AttackSprite.BUG_MELEE
+  regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.POISON)
+  }
 }
 
 export class Tinkatink extends Pokemon {

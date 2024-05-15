@@ -1,4 +1,5 @@
 import { Room } from "colyseus.js"
+import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import Phaser from "phaser"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin.js"
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin.js"
@@ -23,7 +24,6 @@ import {
   IPlayer,
   IPokemon,
   ISimplePlayer,
-  NonFunctionPropNames,
   Transfer
 } from "../../../types"
 import { Ability } from "../../../types/enum/Ability"
@@ -374,7 +374,7 @@ class GameContainer {
         ]
         fields.forEach((field) => {
           pokemon.listen(field, (value, previousValue) => {
-            if (player.id === this.spectatedPlayerId) {
+            if (field && player.id === this.spectatedPlayerId) {
               this.gameScene?.board?.changePokemon(pokemon, field, value)
             }
           })

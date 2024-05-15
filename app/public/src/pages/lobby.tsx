@@ -1,4 +1,5 @@
 import { Client, Room, RoomAvailable } from "colyseus.js"
+import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -15,7 +16,6 @@ import { IBot } from "../../../models/mongo-models/bot-v2"
 import {
   ICustomLobbyState,
   ISuggestionUser,
-  NonFunctionPropNames,
   PkmWithConfig,
   Transfer
 } from "../../../types"
