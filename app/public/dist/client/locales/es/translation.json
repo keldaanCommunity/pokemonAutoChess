@@ -1396,7 +1396,7 @@
     "CURSE": "inflige CURSE al objetivo con mayor HP, el cual sera debilitado tras [12,8,4,SP=-0.2] segundos",
     "DOOM_DESIRE": "Después de 2 segundos, inflige [150,SP] SPECIAL al objetivo. Recupera 40 PP si el objetivo está fuera de combate.",
     "TIME_TRAVEL": "Regresa cities en el tiempo para recuperar la salud perdida. Todos los aliados tienen sus estados negativos limpiados y recuperan su HP en [25,SP]",
-    "POLTERGEIST": "Inflige [30,60,120,SP] de SPECIAL + [20, SP] de SPECIAL por cada objeto del objetivo (CYO, SP] si es un objeto ARTIFICIAL)",
+    "POLTERGEIST": "Inflige [30,60,120,SP] de SPECIAL + [20, SP] de SPECIAL por cada objeto del objetivo ([40,SP] si es un objeto ARTIFICIAL)",
     "GOLD_RUSH": "Hace [20,SP] + tu cantidad de GOLD como SPECIAL, luego gana 2 GOLD",
     "MAKE_IT_RAIN": "Inflige [100,SP] + tu cantidad de GOLD como SPECIAL",
     "CRUSH_GRIP": "El objetivo es aplastado con gran fuerza. Cuantos más HP le queden al objetivo, mayor será el daño: entre [20,SP] y [200,SP] PHYSICAL.",
