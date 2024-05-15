@@ -10726,6 +10726,7 @@ export class Wurmple extends Pokemon {
       } else if (
         [
           Weather.NIGHT,
+          Weather.BLOODMOON,
           Weather.STORM,
           Weather.SANDSTORM,
           Weather.SNOW
@@ -12620,48 +12621,77 @@ export class Kangaskhan extends Pokemon {
 
 export class Teddiursa extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND])
-  rarity = Rarity.EPIC
+  rarity = Rarity.ULTRA
   stars = 1
   evolution = Pkm.URSARING
-  hp = 100
-  atk = 10
+  hp = 150
+  atk = 12
   def = 4
-  speDef = 4
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.FURY_SWIPES
   attackSprite = AttackSprite.NORMAL_MELEE
-  stages = 2 // while waiting for Ursaluna
 }
 
 export class Ursaring extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND])
-  rarity = Rarity.EPIC
+  rarity = Rarity.ULTRA
   stars = 2
-  //evolution = Pkm.URSALUNA // when ready
-  hp = 200
-  atk = 20
-  def = 4
-  speDef = 4
+  evolution = Pkm.URSALUNA
+  hp = 280
+  atk = 23
+  def = 6
+  speDef = 5
   maxPP = 100
   range = 1
   skill = Ability.FURY_SWIPES
   attackSprite = AttackSprite.NORMAL_MELEE
-  stages = 2 // while waiting for Ursaluna
 }
 
 export class Ursaluna extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND])
-  rarity = Rarity.EPIC
+  rarity = Rarity.ULTRA
   stars = 3
-  hp = 300
-  atk = 30
-  def = 4
-  speDef = 4
+  hp = 450
+  atk = 28
+  def = 12
+  speDef = 10
   maxPP = 100
   range = 1
-  skill = Ability.DEFAULT //Ability.FURY_SWIPES
+  skill = Ability.FURY_SWIPES
+  passive = Passive.BLOODMOON
   attackSprite = AttackSprite.NORMAL_MELEE
+  beforeSimulationStart({
+    weather,
+    player
+  }: { weather: Weather; player: Player }) {
+    if (weather === Weather.BLOODMOON) {
+      player.transformPokemon(this, Pkm.URSALUNA_BLOODMOON)
+    }
+  }
+}
+
+export class UrsalunaBloodmoon extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND])
+  rarity = Rarity.ULTRA
+  stars = 3
+  hp = 380
+  atk = 36
+  def = 14
+  speDef = 7
+  maxPP = 100
+  range = 1
+  skill = Ability.BLOOD_MOON
+  attackSprite = AttackSprite.NORMAL_MELEE
+  beforeSimulationStart({
+    weather,
+    player
+  }: { weather: Weather; player: Player }) {
+    if (weather !== Weather.BLOODMOON) {
+      player.transformPokemon(this, Pkm.URSALUNA)
+    }
+  }
 }
 
 export class Aipom extends Pokemon {
@@ -14145,6 +14175,7 @@ export const PokemonClasses: Record<
   [Pkm.TEDDIURSA]: Teddiursa,
   [Pkm.URSARING]: Ursaring,
   [Pkm.URSALUNA]: Ursaluna,
+  [Pkm.URSALUNA_BLOODMOON]: UrsalunaBloodmoon,
   [Pkm.AIPOM]: Aipom,
   [Pkm.AMBIPOM]: Ambipom,
   [Pkm.DEERLING]: Deerling,

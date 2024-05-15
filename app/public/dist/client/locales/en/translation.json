@@ -344,7 +344,8 @@
     "HEAVY_SLAM": "Heavy Slam",
     "HAIL": "Hail",
     "RAPID_SPIN": "Rapid Spin",
-    "BOUNCE": "Bounce"
+    "BOUNCE": "Bounce",
+    "BLOOD_MOON": "Blood moon"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1076,6 +1077,7 @@
     "TEDDIURSA": "Teddiursa",
     "URSARING": "Ursaring",
     "URSALUNA": "Ursaluna",
+    "URSALUNA_BLOODMOON": "Blood moon Ursaluna",
     "AIPOM": "Aipom",
     "AMBIPOM": "Ambipom",
     "DEERLING": "Deerling",
@@ -1455,7 +1457,8 @@
     "PSYSHOCK": "Burn [30,60,100,SP] PP from target and gain it as SHIELD. If the target has not enough PP, the remainder is dealt as SPECIAL.",
     "HEAVY_SLAM": "Slams the ground, dealing [10,20,40,SP] SPECIAL and granting himself [10,20,40] SHIELD. The more the user outweighs the target in max HP, the greater the move's power.",
     "RAPID_SPIN": "Deal [20,50,SP] SPECIAL then gain [20,30,SP]% of ATK as DEF and SPE_DEF",
-    "BOUNCE": "Bounce [1,2,3,SP] times to the farthest target, dealing [10,SP] SPECIAL to all adjacent enemies for each bounce"
+    "BOUNCE": "Bounce [1,2,3,SP] times to the farthest target, dealing [10,SP] SPECIAL to all adjacent enemies for each bounce",
+    "BLOOD_MOON": "Concentrates all his energy in the blood-red moon on his forehead and projects it in a line, dealing [200,SP]% of ATK as SPECIAL and WOUND for 3 seconds all enemies hit"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1690,7 +1693,7 @@
     "QUICK_FEET": "+30% ATK and move speed",
     "RUN_AWAY": "+50% ATK and move speed",
     "HUSTLE": "+80% ATK and move speed",
-    "BERSERK": "+120% ATK and move speed, RAGE 5 seconds sooner"
+    "BERSERK": "+100% ATK and move speed, RAGE 5 seconds sooner"
   },
   "item": {
     "FOSSIL_STONE": "Fossil Stone",
@@ -1908,7 +1911,7 @@
     "NIGHT": "Change weather to NIGHT",
     "WINDY": "Change weather to WINDY",
     "AIRLOCK": "Neutralize weather effects, getting back to NEUTRAL",
-    "WURMPLE": "Wurmple evolves depending on the weather at the previous stage:\nCascoon: NIGHT, STORM, SANDSTORM, SNOW\nSilcoon: SUN, RAIN, MISTY, WINDY\nRandom if NEUTRAL",
+    "WURMPLE": "Wurmple evolves depending on the weather at the previous stage:\nCascoon: NIGHT, BLOODMOON, STORM, SANDSTORM, SNOW\nSilcoon: SUN, RAIN, MISTY, WINDY\nRandom if NEUTRAL",
     "HYDRATATION": "GRASS synergy is healing 5 additional HP per second under the RAIN",
     "SHARED_VISION": "Shared vision: all Pokemon with shared vision will attack the same target, if at range",
     "WATER_SPRING": "Whenever an enemy uses their ability, gain 5 PP",
@@ -1970,7 +1973,8 @@
     "GUZZLORD": "Guzzlord is too heavy and can't jump",
     "ENVIRONMENTAL_ADAPTATION": "This pokemon adapted its synergies to its region",
     "MOTHIM": "Mothim gets the synergies of all your regional Burmy forms",
-    "PSYDUCK": "When CONFUSION, gain 100% AP"
+    "PSYDUCK": "When CONFUSION, gain 100% AP",
+    "BLOODMOON": "Changes form during BLOODMOON"
   },
   "stat": {
     "ATK": "Attack",
@@ -2248,7 +2252,8 @@
     "STORM": "Storm",
     "MISTY": "Misty",
     "SNOW": "Snow",
-    "SANDSTORM": "Sandstorm"
+    "SANDSTORM": "Sandstorm",
+    "BLOODMOON": "Blood Moon"
   },
   "weather_description": {
     "NEUTRAL": "Normal weather. No effects.",
@@ -2259,7 +2264,8 @@
     "STORM": "Lightning randomly strikes on the board, dealing 100 SPECIAL (ELECTRIC are immune)\n+30% PARALYSIS duration",
     "MISTY": "+20% SPECIAL\n+30% CHARM duration",
     "SNOW": "-25% movement speed\n+30% FREEZE duration",
-    "SANDSTORM": "5 SPECIAL per second (GROUND are immune)\n+30% CONFUSION duration"
+    "SANDSTORM": "5 SPECIAL per second (GROUND are immune)\n+30% CONFUSION duration",
+    "BLOODMOON": "+20% PHYSICAL\n+30% WOUND duration"
   },
   "emotion": {
     "Normal": "Normal",

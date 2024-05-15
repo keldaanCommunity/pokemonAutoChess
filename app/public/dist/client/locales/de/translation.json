@@ -1519,7 +1519,7 @@
     "QUICK_FEET": "+30% ATK und Bewegungstempo",
     "RUN_AWAY": "+50% ATK und Bewegungstempo, und 10% Chance auf WILD Pokémon im Shop",
     "HUSTLE": "+80% ATK und Bewegungstempo, und 15% Chance auf WILD Pokémon im Shop",
-    "BERSERK": "+120% ATK und Bewegungstempo, und 20% Chance auf WILD Pokémon im Shop. RAGE 5 Sekunden früher"
+    "BERSERK": "+100% ATK und Bewegungstempo, und 20% Chance auf WILD Pokémon im Shop. RAGE 5 Sekunden früher"
   },
   "item": {
     "FOSSIL_STONE": "Fossil",

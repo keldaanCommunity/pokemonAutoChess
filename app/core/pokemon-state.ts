@@ -164,6 +164,13 @@ export default class PokemonState {
         damage = Math.ceil(damage * 1.2)
       }
 
+      if (
+        pokemon.simulation.weather === Weather.BLOODMOON &&
+        attackType === AttackType.PHYSICAL
+      ) {
+        damage = Math.ceil(damage * 1.2)
+      }
+
       const ARMOR_FACTOR = 0.1
       const def = pokemon.status.armorReduction
         ? Math.round(pokemon.def / 2)

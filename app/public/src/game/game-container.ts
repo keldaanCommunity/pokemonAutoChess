@@ -480,6 +480,8 @@ class GameContainer {
           this.gameScene.weatherManager.addSnow()
         } else if (value === Weather.NIGHT) {
           this.gameScene.weatherManager.addNight()
+        } else if (value === Weather.BLOODMOON) {
+          this.gameScene.weatherManager.addBloodMoon()
         } else if (value === Weather.WINDY) {
           this.gameScene.weatherManager.addWind()
         } else if (value === Weather.STORM) {

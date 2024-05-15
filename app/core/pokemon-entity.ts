@@ -1503,7 +1503,7 @@ export function getMoveSpeed(
   } else if (pokemon.effects.has(Effect.HUSTLE)) {
     moveSpeed += 0.8
   } else if (pokemon.effects.has(Effect.BERSERK)) {
-    moveSpeed += 1.2
+    moveSpeed += 1.0
   }
 
   return moveSpeed

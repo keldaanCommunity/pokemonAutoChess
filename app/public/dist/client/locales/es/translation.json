@@ -1686,7 +1686,7 @@
     "QUICK_FEET": "+30 % de ATK y velocidad de movimiento",
     "RUN_AWAY": "+50% ATK y velocidad de movimiento",
     "HUSTLE": "+80% ATK y velocidad de movimiento",
-    "BERSERK": "+120% ATK y velocidad de movimiento, RAGE 5 segundos antes"
+    "BERSERK": "+100% ATK y velocidad de movimiento, RAGE 5 segundos antes"
   },
   "item": {
     "FOSSIL_STONE": "Piedra Fósil",

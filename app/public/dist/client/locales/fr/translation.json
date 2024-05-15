@@ -1690,7 +1690,7 @@
     "QUICK_FEET": "+30% ATK et vitesse de déplacement",
     "RUN_AWAY": "+50% ATK et vitesse de déplacement",
     "HUSTLE": "+80% ATK et vitesse de déplacement,",
-    "BERSERK": "+120% ATK et vitesse de déplacement. Vos pokémons deviennent RAGE 5 secondes plus tôt."
+    "BERSERK": "+100% ATK et vitesse de déplacement. Vos pokémons deviennent RAGE 5 secondes plus tôt."
   },
   "item": {
     "FOSSIL_STONE": "Fossile Dome",

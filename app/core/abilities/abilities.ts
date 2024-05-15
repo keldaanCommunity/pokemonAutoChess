@@ -48,7 +48,7 @@ import { Weather } from "../../types/enum/Weather"
 import PokemonFactory from "../../models/pokemon-factory"
 import { createRandomEgg } from "../../models/egg-factory"
 import Board, { Cell } from "../board"
-import { getMoveSpeed, PokemonEntity } from "../pokemon-entity"
+import { PokemonEntity } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 
 import { getFirstAvailablePositionInBench } from "../../utils/board"
@@ -7858,6 +7858,33 @@ export class MoongeistBeamStrategy extends AbilityStrategy {
   }
 }
 
+export class BloodMoonStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = Math.round(2 * pokemon.atk)
+    effectInLine(board, pokemon, target, (targetInLine) => {
+      if (targetInLine != null) {
+        if (targetInLine.team !== pokemon.team) {
+          targetInLine.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          targetInLine.status.triggerWound(3000, targetInLine, pokemon)
+        }
+      }
+    })
+  }
+}
+
 export class MantisBladesStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -9080,5 +9107,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.AQUA_TAIL]: new AquaTailStrategy(),
   [Ability.HAIL]: new HailStrategy(),
   [Ability.RAPID_SPIN]: new RapidSpinStrategy(),
-  [Ability.BOUNCE]: new BounceStrategy()
+  [Ability.BOUNCE]: new BounceStrategy(),
+  [Ability.BLOOD_MOON]: new BloodMoonStrategy()
 }

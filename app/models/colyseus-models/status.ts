@@ -839,6 +839,9 @@ export default class Status extends Schema implements IStatus {
   ) {
     if (!this.runeProtect) {
       this.wound = true
+      if (pkm.simulation.weather === Weather.BLOODMOON) {
+        duration *= 1.3
+      }
       if (pkm.effects.has(Effect.SWIFT_SWIM)) {
         duration *= 0.7
       } else if (pkm.effects.has(Effect.HYDRATION)) {

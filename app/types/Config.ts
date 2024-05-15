@@ -369,6 +369,7 @@ export const WeatherThreshold: { [weather in Weather]: number } = {
   [Weather.MISTY]: 8,
   [Weather.NEUTRAL]: 8,
   [Weather.NIGHT]: 8,
+  [Weather.BLOODMOON]: 9,
   [Weather.RAIN]: 8,
   [Weather.SANDSTORM]: 8,
   [Weather.SNOW]: 6,
