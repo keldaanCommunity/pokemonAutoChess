@@ -2171,7 +2171,8 @@
     "OUTSIDER": "Outsider",
     "WILD": "Sauvage",
     "GLUTTON": "Goinfre",
-    "STARGAZER": "Astronome"
+    "STARGAZER": "Astronome",
+    "BLOODY": "Sanguinaire"
   },
   "title_description": {
     "NOVICE": "Jouez votre première partie",
@@ -2236,7 +2237,8 @@
     "VANQUISHER": "Remporter un match classé",
     "OUTSIDER": "Remporter un match classé à 8 joueurs en étant le joueur au plus bas ELO",
     "GLUTTON": "Monter un Ronflex à plus de 750 PV de base",
-    "STARGAZER": "Obtenez Solgaleo ou Lunala"
+    "STARGAZER": "Obtenez Solgaleo ou Lunala",
+    "BLOODY": "Obtenez Ursaking en forme Lune Vermeille"
   },
   "weather": {
     "NEUTRAL": "Temps calme",

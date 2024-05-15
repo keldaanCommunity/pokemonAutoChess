@@ -2175,7 +2175,8 @@
     "OUTSIDER": "Outsider",
     "WILD": "Wild",
     "GLUTTON": "Glutton",
-    "STARGAZER": "Stargazer"
+    "STARGAZER": "Stargazer",
+    "BLOODY": "Bloody"
   },
   "title_description": {
     "NOVICE": "Play your first game",
@@ -2240,7 +2241,8 @@
     "VANQUISHER": "Win a Ranked match",
     "OUTSIDER": "Win a Ranked match with 8 players while having the lowest Elo of all",
     "GLUTTON": "Get a Snorlax with more than 750 base HP",
-    "STARGAZER": "Get Solgaleo or Lunala"
+    "STARGAZER": "Get Solgaleo or Lunala",
+    "BLOODY": "Get Bloodmoon Ursaluna"
   },
   "weather": {
     "NEUTRAL": "Calm weather",

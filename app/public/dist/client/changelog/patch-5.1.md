@@ -9,6 +9,8 @@
  - Donphan
  - Spoink
  - Grumpig
+ - Ursaluna
+ - Bloodmoon Ursaluna
 
 # Changes to Pokemon & Abilities
 
@@ -36,6 +38,7 @@
 - New ability for Oshawott line: Aqua tail: Deal 30/60/100 special damage to the target and gain 30/60/100 shield
 - Changed Mawile: new ability Play rough - Removed passive
 - New ability for Amaura Hail: A hailstorm hits 10/20/30 random cells on the board, dealing 50 special damage. Hailstones stay on the ground, dealing 10 special damage and freezing opponents that walk on it for 1 second, if not Ice.
+- Moved Teddiursa to Ultra category
 
 # Changes to Synergies
 
@@ -74,3 +77,5 @@
 - Fix burn and poison damage sometimes applying too soon after the second time the status is applied
 
 # Misc
+
+- New title: Bloody

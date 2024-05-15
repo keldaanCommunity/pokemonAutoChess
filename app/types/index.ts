@@ -671,7 +671,8 @@ export enum Title {
   VANQUISHER = "VANQUISHER",
   OUTSIDER = "OUTSIDER",
   GLUTTON = "GLUTTON",
-  STARGAZER = "STARGAZER"
+  STARGAZER = "STARGAZER",
+  BLOODY = "BLOODY"
 }
 
 export interface IBoardEvent {

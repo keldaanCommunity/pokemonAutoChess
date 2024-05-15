@@ -12675,6 +12675,9 @@ export class UrsalunaBloodmoon extends Pokemon {
       player.transformPokemon(this, Pkm.URSALUNA)
     }
   }
+  onAcquired(player: Player) {
+    player.titles.add(Title.BLOODY)
+  }
 }
 
 export class Aipom extends Pokemon {
