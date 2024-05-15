@@ -25,12 +25,7 @@ import { logger } from "../../../../utils/logger"
 import { values } from "../../../../utils/schemas"
 import { clearTitleNotificationIcon } from "../../../../utils/window"
 import { getGameContainer } from "../../pages/game"
-import {
-  SOUNDS,
-  playMusic,
-  playSound,
-  preloadMusic
-} from "../../pages/utils/audio"
+import { SOUNDS, playMusic, playSound } from "../../pages/utils/audio"
 import { transformCoordinate } from "../../pages/utils/utils"
 import { preferences } from "../../preferences"
 import AnimationManager from "../animation-manager"

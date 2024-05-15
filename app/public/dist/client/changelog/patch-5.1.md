@@ -76,7 +76,9 @@
 - Fixed emote keyboard shortcut changing tab
 - Fixed emote menu when player uses a shiny avatar
 - Fix burn and poison damage sometimes applying too soon after the second time the status is applied
+- Fixed no music when spectating game
 
 # Misc
 
 - New title: Bloody
+- Finishing 8th now gives 50 xp instead of zero

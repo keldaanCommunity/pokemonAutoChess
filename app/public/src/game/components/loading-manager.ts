@@ -50,9 +50,9 @@ export default class LoadingManager {
 
     if (scene instanceof GameScene) {
       const players = values(scene.room?.state.players!)
-      const player = players.find((p) => p.id === scene.uid)
+      const player = players.find((p) => p.id === scene.uid) ?? players[0]
       await scene.preloadMaps(players.map((p) => p.map))
-      if (player) preloadMusic(scene, DungeonDetails[player.map].music)
+      preloadMusic(scene, DungeonDetails[player.map].music)
     }
     scene.load.image("rain", "/assets/ui/rain.png")
     scene.load.image("sand", "/assets/ui/sand.png")

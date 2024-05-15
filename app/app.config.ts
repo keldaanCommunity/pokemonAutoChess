@@ -1,6 +1,5 @@
 import { monitor } from "@colyseus/monitor"
 import config from "@colyseus/tools"
-import compression from "compression"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
@@ -58,9 +57,6 @@ export default config({
      * Bind your custom express routes here:
      * Read more: https://expressjs.com/en/starter/basic-routing.html
      */
-
-    // compress all responses
-    app.use(compression())
 
     app.use(((err, req, res, next) => {
       res.status(err.status).json(err)
