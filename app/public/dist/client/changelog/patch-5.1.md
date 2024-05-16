@@ -45,6 +45,7 @@
 - Nerf Deoxys Speed Form: Attack 30 → 25
 - Nerf Sandsear Storm (Landorus): Burn duration 4 → 2 seconds
 - Moved Porygon Z to tier 2. Adjusted stats for the entire Porygon line.
+- Nerf Ho-Oh: range 3 → 2
 
 # Changes to Synergies
 
