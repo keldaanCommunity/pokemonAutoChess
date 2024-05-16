@@ -109,7 +109,7 @@ export class OnJoinCommand extends Command<
               user.donor,
               records,
               user.honors,
-              user.pokemonCollection,
+              user.uid === client.auth.uid ? user.pokemonCollection : null,
               user.booster,
               user.titles,
               user.title,
