@@ -2469,7 +2469,6 @@
   "heal": "Heal",
   "lvl": "Lvl",
   "lose_game_hint": "You lose the game when you have no more Health Points",
-  "players_disconnected_hint": "Players disconnected for more than 3 minutes are kicked out of the game. Game will start after 5 minutes max of loading no matter what.",
   "unlock": "Unlock",
   "lock": "Lock",
   "current_shop_for_next_turn": "current shop for next turn",
@@ -2874,5 +2873,19 @@
     "CROWDED": "+3 units max on board",
     "KECLEONS_SHOP": "Item carousels are replaced by Kecleon's shop, that propose 6 items for 10 GOLD each",
     "FREE_MARKET": "Pokemons are bought and sold for 0 GOLD"
+  },
+  "loading_hints": {
+    "tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",
+    "max_loading_time": "Game will start after 5 minutes of loading, no matter what...",
+    "disconnection_time": "Players disconnected for more than 3 minutes are kicked out of the game. If it happens before stage 6, they won't lose Elo.",
+    "translation_project": "Translations in game are managed by the community ! Check on Discord if you want to contribute.",
+    "discord": "Join our Discord to meet the community! Link in the side menu",
+    "tipeee": "This game has no monetization or ads and only rely on your donations. Thanks to all the tippers ❤",
+    "bug_report": "You found a bug ? Go on Discord and report it in #bug-report channel.",
+    "moderation": "If you witness bad behavior on the game, take a screenshot and report it to a moderator on Discord.",
+    "berry_tree": "Playing Grass ? Don't forget to take care of the berry tree over your character.",
+    "spriters": "Many of the game's animations are the work of independent artists. Some take commissions, so you can sponsor them. More info on Discord",
+    "wiki": "The game has a complete wiki accessible from the side menu, don't miss it!",
+    "avatar": "To change your player avatar, play games to earn XP and level up. Each level grants you a booster which when opened gives you shards that can be spent in the Collection menu to buy new avatars."
   }
 }

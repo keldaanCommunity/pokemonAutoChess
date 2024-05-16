@@ -1827,7 +1827,6 @@
   "heal": "Genezen",
   "lvl": "niveau",
   "lose_game_hint": "Je verliest het spel als je geen gezondheidspunten meer hebt",
-  "players_disconnected_hint": "Spelers die langer dan 3 minuten geen verbinding hebben, worden uit het spel gezet. Het spel start hoe dan ook na maximaal 5 minuten laden.",
   "unlock": "Ontgrendelen",
   "lock": "Slot",
   "current_shop_for_next_turn": "huidige winkel voor de volgende beurt",

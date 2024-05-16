@@ -1847,7 +1847,6 @@
   "heal": "Guarire",
   "lvl": "liv",
   "lose_game_hint": "Perdi la partita quando non hai più punti salute",
-  "players_disconnected_hint": "I giocatori disconnessi per più di 3 minuti vengono espulsi dal gioco. Il gioco inizierà dopo 5 minuti al massimo di caricamento, qualunque cosa accada.",
   "unlock": "Sbloccare",
   "lock": "Serratura",
   "current_shop_for_next_turn": "negozio attuale per il prossimo turno",
