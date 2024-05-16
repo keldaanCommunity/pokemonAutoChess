@@ -39,12 +39,22 @@
 - Changed Mawile: new ability Play rough - Removed passive
 - New ability for Amaura Hail: A hailstorm hits 10/20/30 random cells on the board, dealing 50 special damage. Hailstones stay on the ground, dealing 10 special damage and freezing opponents that walk on it for 1 second, if not Ice.
 - Moved Teddiursa to Ultra category
+- Buff Nasty Plot (Phione): reduce cooldown to 250ms
+- Nerf Sunsteel Strike (Solgaleo): 100 → 80 special damage
+- Nerf Deoxys Attack Form: Attack 38 → 30
+- Nerf Deoxys Speed Form: Attack 30 → 25
+- Nerf Sandsear Storm (Landorus): Burn duration 4 → 2 seconds
+- Moved Porygon Z to tier 2. Adjusted stats for the entire Porygon line.
+- Nerf Ho-Oh: range 3 → 2
+- Nerf Doduo line: PP 40 → 70
+- Buff Buizel line: PP 55 → 50, Attack 9/22 → 9/24
 
 # Changes to Synergies
 
 - Buff Water: dodge 20 → 30%
 - Changed Wild 9: +120% → +100% attack 
 - Added Blood Moon weather at Wild 9: +20% physical damage, +30% wound duration
+- Nerf Steel 8: 130% → 120% true damage
 
 # Changes to Items
 

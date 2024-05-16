@@ -1588,10 +1588,10 @@ export class Porygon extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.PORYGON_2
-  hp = 120
-  atk = 6
-  def = 1
-  speDef = 1
+  hp = 100
+  atk = 7
+  def = 2
+  speDef = 2
   maxPP = 90
   range = 2
   skill = Ability.TRI_ATTACK
@@ -1610,10 +1610,10 @@ export class Porygon2 extends Pokemon {
   stars = 2
   evolution = Pkm.PORYGON_Z
   hp = 185
-  atk = 16
+  atk = 14
   evolutionRule = new ItemEvolutionRule([Item.UPGRADE])
-  def = 3
-  speDef = 3
+  def = 5
+  speDef = 5
   maxPP = 90
   range = 2
   skill = Ability.TRI_ATTACK
@@ -1629,11 +1629,11 @@ export class PorygonZ extends Pokemon {
     Synergy.ARTIFICIAL
   ])
   rarity = Rarity.EPIC
-  stars = 3
-  hp = 200
-  atk = 33
-  def = 5
-  speDef = 5
+  stars = 2
+  hp = 185
+  atk = 24
+  def = 2
+  speDef = 2
   maxPP = 90
   range = 2
   skill = Ability.TRI_ATTACK
@@ -6124,7 +6124,7 @@ export class DeoxysAttack extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 240
-  atk = 38
+  atk = 30
   def = 2
   speDef = 2
   maxPP = 90
@@ -6146,7 +6146,7 @@ export class DeoxysSpeed extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 240
-  atk = 30
+  atk = 25
   def = 3
   speDef = 3
   maxPP = 50
@@ -6231,7 +6231,7 @@ export class HooH extends Pokemon {
   def = 3
   speDef = 3
   maxPP = 100
-  range = 3
+  range = 2
   skill = Ability.FIRE_SPIN
   passive = Passive.SUN
   attackSprite = AttackSprite.FIRE_RANGE
@@ -7523,7 +7523,7 @@ export class Buizel extends Pokemon {
   atk = 9
   def = 3
   speDef = 3
-  maxPP = 55
+  maxPP = 50
   range = 1
   skill = Ability.AQUA_JET
   additional = true
@@ -7538,10 +7538,10 @@ export class Floatzel extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 180
-  atk = 22
+  atk = 24
   def = 5
   speDef = 5
-  maxPP = 55
+  maxPP = 50
   range = 1
   skill = Ability.AQUA_JET
   additional = true
@@ -11622,7 +11622,7 @@ export class Doduo extends Pokemon {
   atk = 12
   def = 3
   speDef = 2
-  maxPP = 40
+  maxPP = 70
   range = 1
   skill = Ability.AGILITY
   attackSprite = AttackSprite.NORMAL_MELEE
@@ -11637,7 +11637,7 @@ export class Dodrio extends Pokemon {
   atk = 28
   def = 5
   speDef = 3
-  maxPP = 40
+  maxPP = 70
   range = 1
   skill = Ability.AGILITY
   attackSprite = AttackSprite.NORMAL_MELEE

@@ -1542,7 +1542,7 @@ export class TriAttackStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [30, 50, 70][pokemon.stars - 1] ?? 70
+    const damage = [30, 60][pokemon.stars - 1] ?? 60
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     const effect = randomBetween(1, 3)
     switch (effect) {
@@ -3837,6 +3837,7 @@ export class NastyPlotStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const buff = 10
     pokemon.addAttack(buff, true)
+    pokemon.cooldown = 250
   }
 }
 
@@ -4078,7 +4079,7 @@ export class SandsearStormStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        targetInLine.status.triggerBurn(4000, targetInLine, pokemon)
+        targetInLine.status.triggerBurn(2000, targetInLine, pokemon)
       }
     })
   }
@@ -7815,13 +7816,7 @@ export class SunsteelStrikeStrategy extends AbilityStrategy {
 
         cells.forEach((cell) => {
           if (cell.value && cell.value.team !== pokemon.team) {
-            cell.value.handleSpecialDamage(
-              100,
-              board,
-              AttackType.SPECIAL,
-              pokemon,
-              crit
-            )
+            cell.value.handleSpecialDamage(80, board, AttackType.SPECIAL, pokemon, crit)
             cell.value.status.triggerBurn(3000, cell.value, pokemon)
           }
         })
