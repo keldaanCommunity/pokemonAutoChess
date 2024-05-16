@@ -41,6 +41,8 @@
 - Moved Teddiursa to Ultra category
 - Buff Nasty Plot (Phione): reduce cooldown to 250ms
 - Nerf Sunsteel Strike (Solgaleo): 100 → 80 special damage
+- Nerf Deoxys Attack Form: Attack 38 → 30
+- Nerf Deoxys Speed Form: Attack 30 → 25
 
 # Changes to Synergies
 
