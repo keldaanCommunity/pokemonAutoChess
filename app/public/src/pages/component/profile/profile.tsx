@@ -126,9 +126,7 @@ function OtherProfileActions({ resetSearch }) {
         className="bubbly red"
         onClick={() => {
           const reason = prompt(`Reason for the ban:`)
-          dispatch(
-            ban({ uid: user.id, name: user.name, reason: reason ? reason : "" })
-          )
+          dispatch(ban({ uid: user.id, reason: reason ? reason : "" }))
         }}
       >
         <p style={{ margin: "0px" }}>{t("ban_user")}</p>
