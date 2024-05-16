@@ -1411,7 +1411,7 @@
     "KOWTOW_CLEAVE": "Inflige 150% ATK + [20,SP]%  por aliado caído como TRUE. Puede asestar un golpe crítico por defecto.",
     "SHIELDS_DOWN": "Transforma a Minior en una forma núcleo aleatoria",
     "SHIELDS_UP": "Transforma a Minior a su forma Meteorito",
-    "SANDSEAR_STORM": "Arena abrasadora que golpea a todos los enemigos en línea recta, causando [80,SP] SPECIAL y BURN durante 4 segundos",
+    "SANDSEAR_STORM": "Arena abrasadora que golpea a todos los enemigos en línea recta, causando [80,SP] SPECIAL y BURN durante 2 segundos",
     "WILDBOLT_STORM": "Tempestad atronadora que golpea a todos los enemigos en línea recta, causando [80,SP] SPECIAL y PARALYSIS durante 4 segundos.",
     "BLEAKWIND_STORM": "Vientos salvajemente fríos que golpean a todos los enemigos en línea recta, causando [80,SP] SPECIAL y FREEZE durante 2 segundos.",
     "SPRINGTIDE_STORM": "Feroces vientos mezclados de amor y odio golpean a todos los enemigos en línea recta, causando [80,SP] SPECIAL y CHARM durante 2 segundos.",

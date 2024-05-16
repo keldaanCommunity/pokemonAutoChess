@@ -4079,7 +4079,7 @@ export class SandsearStormStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        targetInLine.status.triggerBurn(4000, targetInLine, pokemon)
+        targetInLine.status.triggerBurn(2000, targetInLine, pokemon)
       }
     })
   }

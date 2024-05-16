@@ -43,6 +43,7 @@
 - Nerf Sunsteel Strike (Solgaleo): 100 → 80 special damage
 - Nerf Deoxys Attack Form: Attack 38 → 30
 - Nerf Deoxys Speed Form: Attack 30 → 25
+- Nerf Sandsear Storm (Landorus): Burn duration 4 → 2 seconds
 
 # Changes to Synergies
 

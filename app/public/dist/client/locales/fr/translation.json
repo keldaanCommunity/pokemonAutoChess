@@ -1411,7 +1411,7 @@
     "KOWTOW_CLEAVE": "Inflige 150% ATK + [20,SP]% par allié KO en TRUE. Peut infliger un coup critique par défaut.",
     "SHIELDS_DOWN": "Transforme Météno en une forme Noyau aléatoire",
     "SHIELDS_UP": "Transforme Météno en forme Météore",
-    "SANDSEAR_STORM": "Un violent typhon mêlé à du sable ardent s'abat sur les ennemis en ligne droite, infligeant [80,SP] SPECIAL et BURN pendant 4 secondes",
+    "SANDSEAR_STORM": "Un violent typhon mêlé à du sable ardent s'abat sur les ennemis en ligne droite, infligeant [80,SP] SPECIAL et BURN pendant 2 secondes",
     "WILDBOLT_STORM": "Un violent typhon orageux dont les rafales et la foudre s'abattent sur les ennemis en ligne droite, infligeant [80,SP] SPECIAL et PARALYSIS pendant 4 secondes",
     "BLEAKWIND_STORM": "Un typhon froid et brutal fait trembler le cœur et le corps des ennemis en ligne droite, infligeant [80,SP] SPECIAL et FREEZE pendant 2 secondes",
     "SPRINGTIDE_STORM": "Un violent typhon mêlé de haine et d'amour s'abat sur les ennemis en ligne droite, infligeant [80,SP] SPECIAL et CHARM pendant 2 secondes",

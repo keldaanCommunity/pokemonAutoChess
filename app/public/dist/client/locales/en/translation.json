@@ -1413,7 +1413,7 @@
     "KOWTOW_CLEAVE": "Deals 150% ATK + [20,SP]% per fallen ally as TRUE. Can crit by default",
     "SHIELDS_DOWN": "Transform Minior to a random core form",
     "SHIELDS_UP": "Transform Minior to its meteor form",
-    "SANDSEAR_STORM": "Searingly hot sand that strikes all enemies in a straight line, dealing [80,SP] SPECIAL and BURN for 4 seconds",
+    "SANDSEAR_STORM": "Searingly hot sand that strikes all enemies in a straight line, dealing [80,SP] SPECIAL and BURN for 2 seconds",
     "WILDBOLT_STORM": "Thunderous tempest that strikes all enemies in a straight line, dealing [80,SP] SPECIAL and PARALYSIS for 4 seconds",
     "BLEAKWIND_STORM": "Savagely cold winds that strike all enemies in a straight line, dealing [80,SP] SPECIAL and FREEZE for 2 seconds",
     "SPRINGTIDE_STORM": "Fierce winds brimming with love and hate strike all enemies in a straight line, dealing [80,SP] SPECIAL and CHARM for 2 seconds",
