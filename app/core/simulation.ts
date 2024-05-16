@@ -1334,6 +1334,24 @@ export default class Simulation extends Schema implements ISimulation {
         this.redPlayer.opponentAvatar,
         this.weather
       )
+
+      const client = this.room.clients.find(
+        (cli) => cli.auth.uid === this.redPlayerId
+      )
+
+      if (this.winnerId === this.redPlayerId) {
+        this.redPlayer.money += 1
+        client?.send(Transfer.PLAYER_INCOME, 1)
+      } else {
+        const playerDamage = this.room.computeRoundDamage(
+          this.blueTeam,
+          this.stageLevel
+        )
+        this.redPlayer.life -= playerDamage
+        if (playerDamage > 0) {
+          client?.send(Transfer.PLAYER_DAMAGE, playerDamage)
+        }
+      }
     }
 
     if (this.bluePlayer && this.id === this.bluePlayer.simulationId) {
@@ -1348,41 +1366,23 @@ export default class Simulation extends Schema implements ISimulation {
         this.bluePlayer.opponentAvatar,
         this.weather
       )
-    }
 
-    if (
-      this.bluePlayer &&
-      this.winnerId !== this.bluePlayerId &&
-      this.id === this.bluePlayer.simulationId
-    ) {
-      const playerDamage = this.room.computeRoundDamage(
-        this.redTeam,
-        this.stageLevel
+      const client = this.room.clients.find(
+        (cli) => cli.auth.uid === this.bluePlayerId
       )
-      this.bluePlayer.life -= playerDamage
-      if (playerDamage > 0) {
-        const client = this.room.clients.find(
-          (cli) => cli.auth.uid === this.bluePlayerId
-        )
-        client?.send(Transfer.PLAYER_DAMAGE, playerDamage)
-      }
-    }
 
-    if (
-      this.redPlayer &&
-      this.winnerId !== this.redPlayerId &&
-      this.id === this.redPlayer.simulationId
-    ) {
-      const playerDamage = this.room.computeRoundDamage(
-        this.blueTeam,
-        this.stageLevel
-      )
-      this.redPlayer.life -= playerDamage
-      if (playerDamage > 0) {
-        const client = this.room.clients.find(
-          (cli) => cli.auth.uid === this.redPlayerId
+      if (this.winnerId === this.bluePlayerId) {
+        this.bluePlayer.money += 1
+        client?.send(Transfer.PLAYER_INCOME, 1)
+      } else {
+        const playerDamage = this.room.computeRoundDamage(
+          this.redTeam,
+          this.stageLevel
         )
-        client?.send(Transfer.PLAYER_DAMAGE, playerDamage)
+        this.bluePlayer.life -= playerDamage
+        if (playerDamage > 0) {
+          client?.send(Transfer.PLAYER_DAMAGE, playerDamage)
+        }
       }
     }
 

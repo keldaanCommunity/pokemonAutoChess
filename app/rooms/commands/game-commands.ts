@@ -878,9 +878,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         player.interest = Math.min(Math.floor(player.money / 10), 5)
         income += player.interest
         income += player.streak
-        if (player.getLastBattleResult() == BattleResult.WIN) {
-          income += 1
-        }
         income += 5
         player.money += income
         if (income > 0) {
