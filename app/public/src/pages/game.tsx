@@ -1,4 +1,5 @@
 import { Client, Room } from "colyseus.js"
+import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -17,7 +18,6 @@ import {
   IDragDropMessage,
   IPlayer,
   ISimplePlayer,
-  NonFunctionPropNames,
   Role,
   Transfer
 } from "../../../types"

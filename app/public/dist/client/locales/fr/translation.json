@@ -1690,7 +1690,7 @@
     "QUICK_FEET": "+30% ATK et vitesse de déplacement",
     "RUN_AWAY": "+50% ATK et vitesse de déplacement",
     "HUSTLE": "+80% ATK et vitesse de déplacement,",
-    "BERSERK": "+120% ATK et vitesse de déplacement. Vos pokémons deviennent RAGE 5 secondes plus tôt."
+    "BERSERK": "+100% ATK et vitesse de déplacement. Vos pokémons deviennent RAGE 5 secondes plus tôt."
   },
   "item": {
     "FOSSIL_STONE": "Fossile Dome",
@@ -1908,7 +1908,6 @@
     "NIGHT": "Changer la météo en NIGHT",
     "WINDY": "Changer la météo en WINDY",
     "AIRLOCK": "Neutraliser les effets météorologiques, revenir au NEUTRAL",
-    "WURMPLE": "Chenipotte évolue en fonction de la météo à la manche précédente :\nBlindalys : NUIT, TEMPÊTE, TEMPÊTE DE SABLE, NEIGE\nArmulys : SOLEIL, PLUIE, BRUME, VENT\nAléatoire si NEUTRE",
     "HYDRATATION": "La synergie GRASS soigne 5 HP supplémentaires par seconde sous la RAIN",
     "SHARED_VISION": "Vision partagée: tous les Pokémon avec vision partagée attaquent la même cible, si elle est à portée",
     "WATER_SPRING": "Chaque fois qu'un ennemi utilise sa capacité, gagne 5 PP",
@@ -2172,7 +2171,8 @@
     "OUTSIDER": "Outsider",
     "WILD": "Sauvage",
     "GLUTTON": "Goinfre",
-    "STARGAZER": "Astronome"
+    "STARGAZER": "Astronome",
+    "BLOODY": "Sanguinaire"
   },
   "title_description": {
     "NOVICE": "Jouez votre première partie",
@@ -2237,7 +2237,8 @@
     "VANQUISHER": "Remporter un match classé",
     "OUTSIDER": "Remporter un match classé à 8 joueurs en étant le joueur au plus bas ELO",
     "GLUTTON": "Monter un Ronflex à plus de 750 PV de base",
-    "STARGAZER": "Obtenez Solgaleo ou Lunala"
+    "STARGAZER": "Obtenez Solgaleo ou Lunala",
+    "BLOODY": "Obtenez Ursaking en forme Lune Vermeille"
   },
   "weather": {
     "NEUTRAL": "Temps calme",

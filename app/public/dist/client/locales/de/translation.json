@@ -1519,7 +1519,7 @@
     "QUICK_FEET": "+30% ATK und Bewegungstempo",
     "RUN_AWAY": "+50% ATK und Bewegungstempo, und 10% Chance auf WILD Pokémon im Shop",
     "HUSTLE": "+80% ATK und Bewegungstempo, und 15% Chance auf WILD Pokémon im Shop",
-    "BERSERK": "+120% ATK und Bewegungstempo, und 20% Chance auf WILD Pokémon im Shop. RAGE 5 Sekunden früher"
+    "BERSERK": "+100% ATK und Bewegungstempo, und 20% Chance auf WILD Pokémon im Shop. RAGE 5 Sekunden früher"
   },
   "item": {
     "FOSSIL_STONE": "Fossil",
@@ -1723,7 +1723,6 @@
     "NIGHT": "Ändern Sie das Wetter auf NACHT",
     "WINDY": "Ändern Sie das Wetter auf WINDY",
     "AIRLOCK": "Neutralisieren Sie Wettereffekte und kehren Sie zu NEUTRAL zurück",
-    "WURMPLE": "Wurmple entwickelt sich abhängig vom Wetter in der vorherigen Phase:\nCascoon: NACHT, STURM, SANDSTURM, SCHNEE\nSilcoon: SONNE, REGEN, NEBEL, WINDIG\nZufällig, wenn NEUTRAL",
     "HYDRATATION": "Die GRASS-Synergie heilt unter dem RAIN 5 zusätzliche HP pro Sekunde",
     "SHARED_VISION": "Gemeinsame Sicht: Alle Pokémon mit gemeinsamer Sicht greifen dasselbe Ziel an, wenn sie sich in Reichweite befinden",
     "WATER_SPRING": "Immer wenn ein Feind seine Fähigkeit nutzt, erhältst du 5 PP",

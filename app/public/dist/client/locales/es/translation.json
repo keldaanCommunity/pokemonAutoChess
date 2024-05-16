@@ -1690,7 +1690,7 @@
     "QUICK_FEET": "+30 % de ATK y velocidad de movimiento",
     "RUN_AWAY": "+50% ATK y velocidad de movimiento",
     "HUSTLE": "+80% ATK y velocidad de movimiento",
-    "BERSERK": "+120% ATK y velocidad de movimiento, RAGE 5 segundos antes"
+    "BERSERK": "+100% ATK y velocidad de movimiento, RAGE 5 segundos antes"
   },
   "item": {
     "FOSSIL_STONE": "Piedra Fósil",
@@ -1908,7 +1908,6 @@
     "NIGHT": "Cambia el tiempo a NIGHT",
     "WINDY": "Cambia el tiempo a WINDY",
     "AIRLOCK": "Neutraliza los efectos del clima, volviendo a NEUTRAL",
-    "WURMPLE": "Wurmple evoluciona dependiendo del clima en la etapa anterior:\nCascoon: NOCHE, TORMENTA, TORMENTA DE ARENA, NIEVE\nSilcoon: SOL, LLUVIA, NIEBLA, VIENTO\nAleatorio si es NEUTRO",
     "HYDRATATION": "La sinergia GRASS está curando 5 HP adicionales por segundo bajo la RAIN",
     "SHARED_VISION": "Visión compartida: todos los Pokémon con visión compartida atacarán al mismo objetivo, si están a distancia.",
     "WATER_SPRING": "Cada vez que un enemigo usa su habilidad, gana 5 PP",

@@ -2,7 +2,7 @@ import fs from "fs"
 import fetch from "node-fetch"
 import { CDN_URL } from "../app/types"
 
-async function main() {
+export async function precomputeTracker() {
   console.time("precompute-tracker")
   const response = await fetch(`${CDN_URL}/tracker.json`)
   const tracker = await response.json()
@@ -12,5 +12,3 @@ async function main() {
   )
   console.timeEnd("precompute-tracker")
 }
-
-main()

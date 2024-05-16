@@ -1174,7 +1174,7 @@ export default class Simulation extends Schema implements ISimulation {
         case Effect.BERSERK:
           if (types.has(Synergy.WILD)) {
             pokemon.effects.add(Effect.BERSERK)
-            pokemon.addAttack(Math.ceil(1.2 * pokemon.baseAtk))
+            pokemon.addAttack(Math.ceil(1.0 * pokemon.baseAtk))
             pokemon.status.enrageDelay -= 5000
           }
           break
