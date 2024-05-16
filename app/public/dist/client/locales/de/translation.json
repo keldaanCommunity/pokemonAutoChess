@@ -1854,7 +1854,7 @@
     "NORMAL": "NORMAL Pokémon und ihre benachbarten Verbündeten erhalten SHIELD, wenn der Kampf beginnt",
     "GRASS": "GRASS Pokémon regenerieren HP und produzieren mit der Zeit Beeren",
     "FIRE": "FIRE Pokémon erhalten nach jedem Treffer ATK und haben die Chance, ihre Feinde 2 Sekunden lang zu BURN",
-    "WATER": "WATER Pokémon generieren mehr PP und haben eine 20%ige Chance, Basisangriffen auszuweichen. Nach jeder PvP-Runde wird ein neues WATER Pokémon gefischt und auf deine Bank gesetzt.",
+    "WATER": "WATER Pokémon generieren mehr PP und haben eine 30%ige Chance, Basisangriffen auszuweichen. Nach jeder PvP-Runde wird ein neues WATER Pokémon gefischt und auf deine Bank gesetzt.",
     "ELECTRIC": "Die Grundangriffe ELECTRIC Pokémons können zwei zusätzliche Angriffe auslösen",
     "FIGHTING": "FIGHTING Pokémon blocken einen Teil des Schadens, bei jedem erlittenen Angriff. Nach 10 geblockten Angriffen, wird das Ziel weggeworfen und sein SHIELD zerstört.",
     "PSYCHIC": "PSYCHIC Pokémon erhalten zusätzliche AP und locken Unbekannte an",

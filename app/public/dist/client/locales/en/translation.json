@@ -2084,7 +2084,7 @@
     "NORMAL": "NORMAL pokemons and their adjacent allies gain SHIELD when combat starts",
     "GRASS": "GRASS pokemons heal and produce berries over time",
     "FIRE": "FIRE pokemons gain ATK after every hit and have a chance to BURN their enemies for 2 seconds",
-    "WATER": "WATER pokemons generate more PP and have 20% chance to dodge basic attacks. A new WATER pokemon is fished after each PvP turn and put on your bench.",
+    "WATER": "WATER pokemons generate more PP and have 30% chance to dodge basic attacks. A new WATER pokemon is fished after each PvP turn and put on your bench.",
     "ELECTRIC": "ELECTRIC pokemons basic attacks can trigger two additional attacks",
     "FIGHTING": "FIGHTING pokemons block a flat amount of damage on every hit received. After 10 hits blocked, throw the target away, destroying its SHIELD.",
     "PSYCHIC": "PSYCHIC pokemons gain additional AP and attract Unowns",
