@@ -7523,7 +7523,7 @@ export class Buizel extends Pokemon {
   atk = 9
   def = 3
   speDef = 3
-  maxPP = 55
+  maxPP = 50
   range = 1
   skill = Ability.AQUA_JET
   additional = true
@@ -7538,10 +7538,10 @@ export class Floatzel extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 180
-  atk = 22
+  atk = 24
   def = 5
   speDef = 5
-  maxPP = 55
+  maxPP = 50
   range = 1
   skill = Ability.AQUA_JET
   additional = true

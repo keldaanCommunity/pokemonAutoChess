@@ -47,6 +47,7 @@
 - Moved Porygon Z to tier 2. Adjusted stats for the entire Porygon line.
 - Nerf Ho-Oh: range 3 → 2
 - Nerf Doduo line: PP 40 → 70
+- Buff Buizel line: PP 55 → 50, Attack 9/22 → 9/24
 
 # Changes to Synergies
 
