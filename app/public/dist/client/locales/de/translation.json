@@ -2203,7 +2203,6 @@
   "heal": "Heilen",
   "lvl": "Lvl",
   "lose_game_hint": "Sie verlieren das Spiel, wenn Sie keine Gesundheitspunkte mehr haben",
-  "players_disconnected_hint": "Spieler, die länger als 3 Minuten nicht verbunden sind, werden aus dem Spiel geworfen. Das Spiel startet auf jeden Fall nach maximal 5 Minuten Ladezeit.",
   "unlock": "Freischalten",
   "lock": "Sperren",
   "current_shop_for_next_turn": "Aktueller Shop für die nächste Runde",

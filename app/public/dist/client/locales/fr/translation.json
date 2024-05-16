@@ -2463,7 +2463,6 @@
   "heal": "Soin",
   "lvl": "Niv",
   "lose_game_hint": "Vous perdez la partie lorsque vous n'avez plus de points de vie",
-  "players_disconnected_hint": "Les joueurs déconnectés pendant plus de 3 minutes sont expulsés du jeu. Le jeu démarrera après 5 minutes maximum de chargement quoi qu'il arrive.",
   "unlock": "Déverouiller",
   "lock": "Verrouiller",
   "current_shop_for_next_turn": "le magasin actuel pour le prochain tour",

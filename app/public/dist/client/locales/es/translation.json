@@ -2461,7 +2461,6 @@
   "heal": "Sanar",
   "lvl": "Nivel",
   "lose_game_hint": "Pierdes el juego cuando no tienes más puntos de salud.",
-  "players_disconnected_hint": "Los jugadores desconectados por más de 3 minutos son expulsados del juego. El juego comenzará después de 5 minutos como máximo de carga sin importar qué.",
   "unlock": "Desbloquear",
   "lock": "Cerrar",
   "current_shop_for_next_turn": "tienda actual para el próximo turno",
