@@ -828,7 +828,7 @@
     "FAIRY_WIND": "Geef [10,20,30,SP=0.5] PP aan alle vriendelijke Pokémon, behalve de gebruiker",
     "HIGH_JUMP_KICK": "Breng [50,100,200,SP] SPECIAL toe en steel al het PP van het doelwit",
     "GRASS_WHISTLE": "Pas de SLEEP status toe op [1,2,4] vijandelijke Pokémon voor 2 seconden",
-    "TRI_ATTACK": "Richt [30,50,70,SP] SPECIAL aan. Kan het doelwit BURN, FREEZE of PARALYSIS",
+    "TRI_ATTACK": "Richt [30,60,SP] SPECIAL aan. Kan het doelwit BURN, FREEZE of PARALYSIS",
     "ECHO": "Breng [3,6,9,SP] SPECIAL toe aan alle vijandelijke Pokémon. Elke keer als de gebruiker deze vaardigheid gebruikt gaat de schade omhoog met [3,6,9,SP]",
     "PETAL_DANCE": "Deel [20,30,50,SP] SPECIAL uit aan de [3,4,5] dichtstbijzijnde vijanden",
     "HYPER_VOICE": "Breng [30,60,150,SP] SPECIAL uit aan alle vijandelijke Pokémon in de rij van het doelwit en zorg ervoor dat ze [1,2,3] seconden CONFUSION",

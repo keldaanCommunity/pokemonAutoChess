@@ -1588,10 +1588,10 @@ export class Porygon extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.PORYGON_2
-  hp = 120
-  atk = 6
-  def = 1
-  speDef = 1
+  hp = 100
+  atk = 7
+  def = 2
+  speDef = 2
   maxPP = 90
   range = 2
   skill = Ability.TRI_ATTACK
@@ -1610,10 +1610,10 @@ export class Porygon2 extends Pokemon {
   stars = 2
   evolution = Pkm.PORYGON_Z
   hp = 185
-  atk = 16
+  atk = 14
   evolutionRule = new ItemEvolutionRule([Item.UPGRADE])
-  def = 3
-  speDef = 3
+  def = 5
+  speDef = 5
   maxPP = 90
   range = 2
   skill = Ability.TRI_ATTACK
@@ -1629,11 +1629,11 @@ export class PorygonZ extends Pokemon {
     Synergy.ARTIFICIAL
   ])
   rarity = Rarity.EPIC
-  stars = 3
-  hp = 200
-  atk = 33
-  def = 5
-  speDef = 5
+  stars = 2
+  hp = 185
+  atk = 24
+  def = 2
+  speDef = 2
   maxPP = 90
   range = 2
   skill = Ability.TRI_ATTACK
