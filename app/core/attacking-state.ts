@@ -178,7 +178,7 @@ export default class AttackingState extends PokemonState {
       } else if (pokemon.effects.has(Effect.CORKSCREW_CRASH)) {
         trueDamagePart += 1.0
       } else if (pokemon.effects.has(Effect.MAX_MELTDOWN)) {
-        trueDamagePart += 1.3
+        trueDamagePart += 1.2
       }
       if (pokemon.items.has(Item.RED_ORB) && target) {
         trueDamagePart += 0.25

@@ -1642,7 +1642,7 @@
     "STEEL_SURGE": "Reparte el 33 % del ATK como TRUE",
     "STEEL_SPIKE": "Repartir el 66% del ATK como TRUE",
     "CORKSCREW_CRASH": "Reparte el 100 % del ATK como TRUE",
-    "MAX_MELTDOWN": "Reparte el 130 % del ATK como TRUE",
+    "MAX_MELTDOWN": "Reparte el 120 % del ATK como TRUE",
     "BAD_DREAMS": "La unidad del oponente con el HP + SHIELD más alto pierde el 50% del mismo y es FLINCH durante 7 segundos",
     "PHANTOM_FORCE": "Además, la unidad oponente con el mayor ATK pierde el 50% del mismo y es PARALYSIS durante 7 segundos",
     "SHADOW_TAG": "Además, la unidad rival con el AP más alto pierde un 50% del mismo y es SILENCE durante 7 segundos.",

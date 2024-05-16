@@ -1475,7 +1475,7 @@
     "STEEL_SURGE": "Handle 33 % der ATK als TRUE",
     "STEEL_SPIKE": "Handle 66 % der ATK als TRUE",
     "CORKSCREW_CRASH": "Handle 100 % der ATK als TRUE",
-    "MAX_MELTDOWN": "Handle 130 % der ATK als TRUE",
+    "MAX_MELTDOWN": "Handle 120 % der ATK als TRUE",
     "BAD_DREAMS": "Die gegnerische Einheit mit den höchsten HP + SHIELD verliert 50% davon und ist 7 Sekunden lang FLINCH.",
     "PHANTOM_FORCE": "Außerdem verliert die gegnerische Einheit mit dem höchsten ATK 50% davon ihres ATK und wird 7 Sekunden lang PARALYSIS",
     "SHADOW_TAG": "Außerdem verliert die gegnerische Einheit mit der höchsten AP 50% davon und ist 7 Sekunden lang SILENCE",

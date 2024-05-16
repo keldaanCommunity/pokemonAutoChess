@@ -52,6 +52,7 @@
 - Buff Water: dodge 20 → 30%
 - Changed Wild 9: +120% → +100% attack 
 - Added Blood Moon weather at Wild 9: +20% physical damage, +30% wound duration
+- Nerf Steel 8: 130% → 120% true damage
 
 # Changes to Items
 
