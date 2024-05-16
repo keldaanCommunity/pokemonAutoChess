@@ -46,6 +46,7 @@
 - Nerf Sandsear Storm (Landorus): Burn duration 4 → 2 seconds
 - Moved Porygon Z to tier 2. Adjusted stats for the entire Porygon line.
 - Nerf Ho-Oh: range 3 → 2
+- Nerf Doduo line: PP 40 → 70
 
 # Changes to Synergies
 
