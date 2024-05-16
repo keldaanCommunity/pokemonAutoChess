@@ -101,7 +101,7 @@ export const SpecialItems: Item[] = [
   Item.BERRY_JUICE
 ]
 
-export const BasicItems: Item[] = [
+export const ItemComponents: Item[] = [
   Item.FOSSIL_STONE,
   Item.TWISTED_SPOON,
   Item.MAGNET,

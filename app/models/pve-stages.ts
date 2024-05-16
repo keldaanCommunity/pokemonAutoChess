@@ -1,7 +1,7 @@
 import { Emotion } from "../types"
 import {
   ArtificialItems,
-  BasicItems,
+  ItemComponents,
   CraftableItems,
   Item,
   NonSpecialItemComponents,
@@ -29,8 +29,10 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.MAGIKARP, 3, 1],
       [Pkm.MAGIKARP, 5, 1]
     ],
-    getRewards() {
-      return [pickRandomIn(BasicItems)]
+    getRewards(shiny, player) {
+      const randomComponent = pickRandomIn(NonSpecialItemComponents)
+      player.randomComponentsGiven.push(randomComponent)
+      return [randomComponent]
     }
   },
 
@@ -41,8 +43,14 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.RATTATA, 3, 1],
       [Pkm.RATTATA, 5, 1]
     ],
-    getRewards() {
-      return [pickRandomIn(BasicItems)]
+    getRewards(shiny, player) {
+      const randomComponent = pickRandomIn(
+        NonSpecialItemComponents.filter(
+          (i) => player.randomComponentsGiven.includes(i) === false
+        )
+      )
+      player.randomComponentsGiven.push(randomComponent)
+      return [randomComponent]
     }
   },
 
@@ -54,8 +62,14 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.SPEAROW, 5, 1],
       [Pkm.SPEAROW, 4, 2]
     ],
-    getRewards() {
-      return [pickRandomIn(BasicItems)]
+    getRewards(shiny, player) {
+      const randomComponent = pickRandomIn(
+        NonSpecialItemComponents.filter(
+          (i) => player.randomComponentsGiven.includes(i) === false
+        )
+      )
+      player.randomComponentsGiven.push(randomComponent)
+      return [randomComponent]
     }
   },
 
@@ -64,12 +78,9 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     avatar: Pkm.GYARADOS,
     shinyChance: 1 / 20,
     board: [[Pkm.GYARADOS, 4, 2]],
-    getRewards(shiny) {
-      if (shiny) {
-        return pickNRandomIn(BasicItems, 3)
-      } else {
-        return [pickRandomIn(BasicItems)]
-      }
+    getRewards(shiny, player) {
+      const randomComponents = pickNRandomIn(ItemComponents, shiny ? 3 : 1)
+      return randomComponents
     }
   },
 

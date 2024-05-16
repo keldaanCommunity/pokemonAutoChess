@@ -10,7 +10,7 @@ import {
 } from "../../../../../types/Config"
 import { Rarity } from "../../../../../types/enum/Game"
 import {
-  BasicItems,
+  ItemComponents,
   CraftableItems,
   Item
 } from "../../../../../types/enum/Item"
@@ -154,7 +154,11 @@ export function getNbComponentsOnBoard(board: IDetailledPokemon[]): number {
     .reduce(
       (nbComponents: number, item: Item) =>
         nbComponents +
-        (CraftableItems.includes(item) ? 2 : BasicItems.includes(item) ? 1 : 0),
+        (CraftableItems.includes(item)
+          ? 2
+          : ItemComponents.includes(item)
+            ? 1
+            : 0),
       0
     )
 }

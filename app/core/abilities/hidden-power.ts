@@ -4,7 +4,7 @@ import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../models/precomp
 import { Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, PokemonActionState, Rarity } from "../../types/enum/Game"
-import { BasicItems, Berries, Item } from "../../types/enum/Item"
+import { ItemComponents, Berries, Item } from "../../types/enum/Item"
 import { Pkm, getUnownsPoolPerStage } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { pickNRandomIn, pickRandomIn } from "../../utils/random"
@@ -227,7 +227,7 @@ export class HiddenPowerIStrategy extends HiddenPowerStrategy {
   ) {
     super.process(unown, state, board, target, crit)
     if (unown.player) {
-      unown.player.items.push(pickRandomIn(BasicItems))
+      unown.player.items.push(pickRandomIn(ItemComponents))
     }
   }
 }
