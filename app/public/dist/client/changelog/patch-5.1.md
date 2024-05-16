@@ -48,6 +48,7 @@
 
 # Changes to Items
 
+- You are now guaranteed to have different components in PvE rewards of rounds 1, 2 and 3, and these rewards cannot be fossil stones
 - Removed Leftovers
 - Removed Delta Orb
 - New item: Soothe Bell (charcoal + seed): the holder attack gives 25% of damage dealt as Shield to the ally closest to the target

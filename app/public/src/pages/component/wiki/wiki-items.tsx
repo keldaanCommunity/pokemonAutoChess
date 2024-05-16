@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import {
   ArtificialItems,
-  BasicItems,
+  ItemComponents,
   Berries,
   Item,
   ItemRecipe,
@@ -32,7 +32,7 @@ export default function WikiItems() {
               >
                 +
               </td>
-              {BasicItems.map((i) => {
+              {ItemComponents.map((i) => {
                 return (
                   <th
                     key={i}
@@ -47,7 +47,7 @@ export default function WikiItems() {
                 )
               })}
             </tr>
-            {BasicItems.map((i) => {
+            {ItemComponents.map((i) => {
               return (
                 <tr key={"tr-" + i}>
                   <td
@@ -59,7 +59,7 @@ export default function WikiItems() {
                       className="item"
                     ></img>
                   </td>
-                  {BasicItems.map((j) => {
+                  {ItemComponents.map((j) => {
                     let tier2Item
                     Object.keys(ItemRecipe).forEach((recipeName) => {
                       if (

@@ -3,7 +3,7 @@ import { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
 import { EvolutionTime } from "../types/Config"
 import { PokemonActionState } from "../types/enum/Game"
-import { BasicItems, Item } from "../types/enum/Item"
+import { ItemComponents, Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
 import { logger } from "../utils/logger"
@@ -92,7 +92,7 @@ export class CountEvolutionRule extends EvolutionRule {
 
     let coord: { x: number; y: number } | undefined
     const itemsToAdd = new Array<Item>()
-    const basicItemsToAdd = new Array<Item>()
+    const itemComponentsToAdd = new Array<Item>()
 
     const pokemonsBeforeEvolution: Pokemon[] = []
 
@@ -114,8 +114,8 @@ export class CountEvolutionRule extends EvolutionRule {
         }
 
         pkm.items.forEach((el) => {
-          if (BasicItems.includes(el)) {
-            basicItemsToAdd.push(el)
+          if (ItemComponents.includes(el)) {
+            itemComponentsToAdd.push(el)
           } else {
             itemsToAdd.push(el)
           }
@@ -147,7 +147,7 @@ export class CountEvolutionRule extends EvolutionRule {
     itemsToAdd.forEach((item) => {
       player.items.push(item)
     })
-    basicItemsToAdd.forEach((item) => {
+    itemComponentsToAdd.forEach((item) => {
       player.items.push(item)
     })
 
