@@ -32,10 +32,9 @@
 
 .game-loading-screen .loading-hint {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   width: 16vw;
   right: 2vw;
+  bottom: 0;
 }
 
 .game-loading-screen .loading-hint img {
