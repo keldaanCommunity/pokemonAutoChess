@@ -1,6 +1,6 @@
 import { Command } from "@colyseus/command"
 import { ArraySchema, MapSchema } from "@colyseus/schema"
-import { Client, matchMaker, RoomListingData } from "colyseus"
+import { Client, RoomListingData, matchMaker } from "colyseus"
 import { EmbedBuilder } from "discord.js"
 import { nanoid } from "nanoid"
 import {
@@ -768,22 +768,26 @@ export class OnSearchCommand extends Command<
 
 export class BanUserCommand extends Command<
   CustomLobbyRoom,
-  { client: Client; uid: string; name: string; reason: string }
+  { client: Client; uid: string; reason: string }
 > {
   async execute({
     client,
     uid,
-    name,
     reason
   }: {
     client: Client
     uid: string
-    name: string
     reason: string
   }) {
     try {
+      const potentialBannedUser = await UserMetadata.findOne({ uid: uid })
       const user = this.state.users.get(client.auth.uid)
-      if (user && (user.role === Role.ADMIN || user.role === Role.MODERATOR)) {
+      if (
+        user &&
+        potentialBannedUser &&
+        (user.role === Role.ADMIN || user.role === Role.MODERATOR) &&
+        potentialBannedUser.role !== Role.ADMIN
+      ) {
         this.state.removeMessages(uid)
         const banned = await BannedUser.findOne({ uid })
         if (!banned) {
@@ -791,20 +795,25 @@ export class BanUserCommand extends Command<
             uid,
             author: user.name,
             time: Date.now(),
-            name
+            name: potentialBannedUser.displayName
           })
-          client.send(Transfer.BANNED, `${user.name} banned the user ${name}`)
+          client.send(
+            Transfer.BANNED,
+            `${user.name} banned the user ${potentialBannedUser.displayName}`
+          )
 
           const dsEmbed = new EmbedBuilder()
-            .setTitle(`${user.name} banned the user ${name}`)
+            .setTitle(
+              `${user.name} banned the user ${potentialBannedUser.displayName}`
+            )
             .setAuthor({
               name: user.name,
               iconURL: getAvatarSrc(user.avatar)
             })
             .setDescription(
-              `${user.name} banned the user ${name}. Reason: ${reason}`
+              `${user.name} banned the user ${potentialBannedUser.displayName}. Reason: ${reason}`
             )
-            .setThumbnail(getAvatarSrc(user.avatar))
+            .setThumbnail(getAvatarSrc(potentialBannedUser.avatar))
           try {
             this.room.discordBanWebhook?.send({
               embeds: [dsEmbed]
@@ -813,7 +822,10 @@ export class BanUserCommand extends Command<
             logger.error(error)
           }
         } else {
-          client.send(Transfer.BANNED, `${name} was already banned`)
+          client.send(
+            Transfer.BANNED,
+            `${potentialBannedUser.displayName} was already banned`
+          )
         }
         this.room.clients.forEach((c) => {
           if (c.auth.uid === uid) {
