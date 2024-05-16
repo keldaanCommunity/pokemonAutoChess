@@ -40,6 +40,7 @@
 - New ability for Amaura Hail: A hailstorm hits 10/20/30 random cells on the board, dealing 50 special damage. Hailstones stay on the ground, dealing 10 special damage and freezing opponents that walk on it for 1 second, if not Ice.
 - Moved Teddiursa to Ultra category
 - Buff Nasty Plot (Phione): reduce cooldown to 250ms
+- Nerf Sunsteel Strike (Solgaleo): 100 → 80 special damage
 
 # Changes to Synergies
 

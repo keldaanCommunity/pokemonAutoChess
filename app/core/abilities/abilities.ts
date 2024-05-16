@@ -7816,13 +7816,7 @@ export class SunsteelStrikeStrategy extends AbilityStrategy {
 
         cells.forEach((cell) => {
           if (cell.value && cell.value.team !== pokemon.team) {
-            cell.value.handleSpecialDamage(
-              100,
-              board,
-              AttackType.SPECIAL,
-              pokemon,
-              crit
-            )
+            cell.value.handleSpecialDamage(80, board, AttackType.SPECIAL, pokemon, crit)
             cell.value.status.triggerBurn(3000, cell.value, pokemon)
           }
         })

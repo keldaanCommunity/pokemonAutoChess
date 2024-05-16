@@ -1426,7 +1426,7 @@
     "STICKY_WEB": "Inflige [20,35,70,SP] SPECIAL al objetivo y proyecta una red a su alrededor. Pokémon que caminen en la red son PARALYSIS por 2 segundos.",
     "ACCELEROCK": "Salta al enemigo más lejano y lo ataca inmediatamente, haciendo [100,SP]% de ATK como SPECIAL. En el proceso, pierde hasta [5,SP] DEF y gana 5% ATK_SPEED por cada punto de DEF perdido.",
     "PETAL_BLIZZARD": "Hace [30,SP] SPECIAL a los enemigos que lo rodeen y gana 10 AP",
-    "SUNSTEEL_STRIKE": "Salta y aterriza al medio del equipo enemigo con el poder de un meteoro, infligiendo [100,SP] SPECIAL a los enemigos adyacentes y BURN por 3 segundos",
+    "SUNSTEEL_STRIKE": "Salta y aterriza al medio del equipo enemigo con el poder de un meteoro, infligiendo [80,SP] SPECIAL a los enemigos adyacentes y BURN por 3 segundos",
     "MOONGEIST_BEAM": "Hace [100,SP] SPECIAL a todos los Pokémon enemigos en una línea recta y los deja PARALYSIS por 3 segundos. Aliados en el rayo ganan [100,SP] SHIELD.",
     "FLEUR_CANNON": "Manda un devastador rayo laser que inflige [120,SP] SPECIAL a todos los enemigos en el rayo. Reduce el AP del emisor en 20",
     "SPIRIT_BREAK": "Hace [20,40,80,SP] SPECIAL y baja el AP del objetivo en [20,SP]",
