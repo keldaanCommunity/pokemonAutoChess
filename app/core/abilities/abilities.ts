@@ -3837,6 +3837,7 @@ export class NastyPlotStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const buff = 10
     pokemon.addAttack(buff, true)
+    pokemon.cooldown = 250
   }
 }
 
