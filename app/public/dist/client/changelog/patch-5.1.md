@@ -48,6 +48,7 @@
 - Nerf Ho-Oh: range 3 → 2
 - Nerf Doduo line: PP 40 → 70
 - Buff Buizel line: PP 55 → 50, Attack 9/22 → 9/24
+- Buff Zangoose: HP 200 → 250, 50% less poison damage received
 
 # Changes to Synergies
 
@@ -83,6 +84,7 @@
 - Add a button to quickly change avatar from collection screen
 - Player damage is now computed immediately on victory instead of on round change
 - Added hints on the loading screen
+- Improved some basic attacks visual effects
 
 # Bugfix
 

@@ -151,6 +151,7 @@ export enum Transfer {
 
 export enum AttackSprite {
   BUG_MELEE = "BUG/melee",
+  BUG_RANGE = "BUG/range",
   DARK_MELEE = "DARK/melee",
   DARK_RANGE = "DARK/range",
   DRAGON_MELEE = "DRAGON/melee",
@@ -179,12 +180,14 @@ export enum AttackSprite {
   WATER_RANGE = "WATER/range",
   ROCK_MELEE = "ROCK/melee",
   ROCK_RANGE = "ROCK/range",
+  SOUND_RANGE = "SOUND/range",
   STEEL_MELEE = "STEEL/melee"
 }
 
 export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
   {
     "BUG/melee": [1.5, 1.5],
+    "BUG/range": [2, 2],
     "DARK/melee": [1.5, 1.5],
     "DARK/range": [1.5, 1.5],
     "DRAGON/melee": [2, 2],
@@ -192,12 +195,12 @@ export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
     "ELECTRIC/melee": [1.5, 1.5],
     "ELECTRIC/range": [2, 2],
     "FAIRY/melee": [2, 2],
-    "FAIRY/range": [1.5, 1.5],
+    "FAIRY/range": [2, 2],
     "FIGHTING/melee": [2, 2],
     "FIGHTING/range": [2, 2],
     "FIRE/melee": [1, 1],
     "FIRE/range": [2, 2],
-    "FLYING/melee": [1.5, 1.5],
+    "FLYING/melee": [1, 1],
     "FLYING/range": [1.5, 1.5],
     "GHOST/range": [2, 2],
     "GRASS/melee": [1, 1],
@@ -212,6 +215,7 @@ export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
     "ROCK/melee": [1.5, 1.5],
     "ROCK/range": [2, 2],
     "STEEL/melee": [1.5, 1.5],
+    "SOUND/range": [2, 2],
     "WATER/melee": [2, 2],
     "WATER/range": [3, 3]
   }

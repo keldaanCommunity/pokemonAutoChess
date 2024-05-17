@@ -615,21 +615,24 @@ export default class Status extends Schema implements IStatus {
     if (this.poisonDamageCooldown - dt <= 0) {
       let poisonDamage = Math.ceil(pkm.hp * 0.05 * this.poisonStacks)
       if (pkm.simulation.weather === Weather.RAIN) {
-        poisonDamage = Math.round(poisonDamage * 0.7)
+        poisonDamage *= 0.7
       }
 
       if (pkm.items.has(Item.ASSAULT_VEST)) {
-        poisonDamage = Math.round(poisonDamage * 0.5)
+        poisonDamage *= 0.5
+      }
+      if (pkm.passive === Passive.TOXIC_BOOST) {
+        poisonDamage *= 0.5
       }
 
       if (
         pkm.passive === Passive.POISON_HEAL ||
         pkm.passive === Passive.GLIGAR
       ) {
-        pkm.handleHeal(poisonDamage, pkm, 0)
+        pkm.handleHeal(Math.round(poisonDamage), pkm, 0)
       } else {
         pkm.handleDamage({
-          damage: poisonDamage,
+          damage: Math.round(poisonDamage),
           board,
           attackType: AttackType.TRUE,
           attacker: this.poisonOrigin ?? null,
