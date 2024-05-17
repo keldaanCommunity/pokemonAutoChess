@@ -414,7 +414,7 @@ export default class PokemonSprite extends DraggableObject {
         this.projectile?.once(
           Phaser.Animations.Events.ANIMATION_COMPLETE,
           () => {
-            this.projectile?.destroy()
+          this.projectile?.destroy()
           }
         )
       } else if (

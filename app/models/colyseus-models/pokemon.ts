@@ -379,7 +379,7 @@ export class Cutiefly extends Pokemon {
   maxPP = 40
   range = 2
   skill = Ability.POLLEN_PUFF
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.BUG_RANGE
   regional = true
 }
 
@@ -394,7 +394,7 @@ export class Ribombee extends Pokemon {
   maxPP = 40
   range = 2
   skill = Ability.POLLEN_PUFF
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.BUG_RANGE
   regional = true
 }
 
@@ -2499,7 +2499,7 @@ export class Whismur extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.ECHO
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.SOUND_RANGE
 }
 export class Loudred extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.SOUND])
@@ -2513,7 +2513,7 @@ export class Loudred extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.ECHO
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.SOUND_RANGE
 }
 
 export class Exploud extends Pokemon {
@@ -2527,7 +2527,7 @@ export class Exploud extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.ECHO
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.SOUND_RANGE
 }
 
 export class Swinub extends Pokemon {
@@ -2678,7 +2678,7 @@ export class Vanillite extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.SLEEP
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.ICE_RANGE
 }
 
 export class Vanillish extends Pokemon {
@@ -2697,7 +2697,7 @@ export class Vanillish extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.SLEEP
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.ICE_RANGE
 }
 
 export class Vanilluxe extends Pokemon {
@@ -2715,7 +2715,7 @@ export class Vanilluxe extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.SLEEP
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.ICE_RANGE
 }
 
 export class Trapinch extends Pokemon {
@@ -2898,7 +2898,7 @@ export class Igglybuff extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.SLEEP
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.SOUND_RANGE
 }
 
 export class Jigglypuff extends Pokemon {
@@ -2913,7 +2913,7 @@ export class Jigglypuff extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.SLEEP
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.SOUND_RANGE
 }
 
 export class Wigglytuff extends Pokemon {
@@ -2927,7 +2927,7 @@ export class Wigglytuff extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.SLEEP
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.SOUND_RANGE
 }
 
 export class Duskull extends Pokemon {
@@ -3074,7 +3074,7 @@ export class Flabebe extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.FAIRY_WIND
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.FAIRY_RANGE
 }
 
 export class Floette extends Pokemon {
@@ -3089,7 +3089,7 @@ export class Floette extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.FAIRY_WIND
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.FAIRY_RANGE
 }
 export class Florges extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.SOUND, Synergy.FAIRY, Synergy.FLORA])
@@ -3102,7 +3102,7 @@ export class Florges extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.FAIRY_WIND
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.FAIRY_RANGE
 }
 
 export class Chikorita extends Pokemon {
@@ -3618,7 +3618,7 @@ export class Torchic extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLAZE_KICK
-  attackSprite = AttackSprite.FIRE_MELEE
+  attackSprite = AttackSprite.FLYING_MELEE
 }
 
 export class Combusken extends Pokemon {
@@ -3637,7 +3637,7 @@ export class Combusken extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLAZE_KICK
-  attackSprite = AttackSprite.FIRE_MELEE
+  attackSprite = AttackSprite.FLYING_MELEE
 }
 
 export class Blaziken extends Pokemon {
@@ -3655,7 +3655,7 @@ export class Blaziken extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLAZE_KICK
-  attackSprite = AttackSprite.FIRE_MELEE
+  attackSprite = AttackSprite.FLYING_MELEE
 }
 
 export class Treecko extends Pokemon {
@@ -4322,7 +4322,7 @@ export class Caterpie extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.STRING_SHOT
-  attackSprite = AttackSprite.POISON_RANGE
+  attackSprite = AttackSprite.BUG_RANGE
 }
 
 export class Metapod extends Pokemon {
@@ -4337,7 +4337,7 @@ export class Metapod extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.STRING_SHOT
-  attackSprite = AttackSprite.POISON_RANGE
+  attackSprite = AttackSprite.BUG_RANGE
 }
 
 export class Butterfree extends Pokemon {
@@ -4351,7 +4351,7 @@ export class Butterfree extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.STRING_SHOT
-  attackSprite = AttackSprite.POISON_RANGE
+  attackSprite = AttackSprite.BUG_RANGE
 }
 
 export class Weedle extends Pokemon {
@@ -4720,7 +4720,7 @@ export class Meloetta extends Pokemon {
   maxPP = 60
   range = 4
   skill = Ability.RELIC_SONG
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.SOUND_RANGE
 }
 
 export class PirouetteMeloetta extends Pokemon {
@@ -4734,7 +4734,7 @@ export class PirouetteMeloetta extends Pokemon {
   maxPP = 120
   range = 4
   skill = Ability.DEFAULT
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.SOUND_RANGE
 }
 
 export class Lugia extends Pokemon {
@@ -7784,7 +7784,7 @@ export class Hoothoot extends Pokemon {
   range = 1
   skill = Ability.HYPNOSIS
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.FLYING_MELEE
 }
 
 export class Noctowl extends Pokemon {
@@ -7803,7 +7803,7 @@ export class Noctowl extends Pokemon {
   range = 1
   skill = Ability.HYPNOSIS
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.FLYING_MELEE
 }
 
 export class Munchlax extends Pokemon {
@@ -7975,7 +7975,7 @@ export class MimeJr extends Pokemon {
   range = 2
   skill = Ability.MIMIC
   additional = true
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.FAIRY_RANGE
 }
 
 export class MrMime extends Pokemon {
@@ -7994,7 +7994,7 @@ export class MrMime extends Pokemon {
   range = 2
   skill = Ability.MIMIC
   additional = true
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.FAIRY_RANGE
 }
 
 export class Salandit extends Pokemon {
@@ -9506,7 +9506,7 @@ export class Nosepass extends Pokemon {
   range = 2
   skill = Ability.MAGNET_RISE
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE
+  attackSprite = AttackSprite.ROCK_RANGE
 }
 
 export class Probopass extends Pokemon {
@@ -9521,7 +9521,7 @@ export class Probopass extends Pokemon {
   range = 2
   skill = Ability.MAGNET_RISE
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE
+  attackSprite = AttackSprite.ROCK_RANGE
 }
 
 export class Woobat extends Pokemon {
@@ -9541,7 +9541,7 @@ export class Woobat extends Pokemon {
   range = 3
   skill = Ability.ATTRACT
   additional = true
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.SOUND_RANGE
 }
 
 export class Swoobat extends Pokemon {
@@ -9560,7 +9560,7 @@ export class Swoobat extends Pokemon {
   range = 3
   skill = Ability.ATTRACT
   additional = true
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.SOUND_RANGE
 }
 
 export class Pineco extends Pokemon {
@@ -11625,7 +11625,7 @@ export class Doduo extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.AGILITY
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.FLYING_MELEE
   regional = true
 }
 
@@ -11640,7 +11640,7 @@ export class Dodrio extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.AGILITY
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.FLYING_MELEE
   regional = true
 }
 
