@@ -1162,7 +1162,7 @@ export class OnCreateTournamentCommand extends Command<
   CustomLobbyRoom,
   { client: Client; name: string; startDate: string }
 > {
-  execute({
+  async execute({
     client,
     name,
     startDate
@@ -1174,7 +1174,8 @@ export class OnCreateTournamentCommand extends Command<
     try {
       const user = this.state.users.get(client.auth.uid)
       if (user && user.role && user.role === Role.ADMIN) {
-        this.state.createTournament(name, startDate)
+        await this.state.createTournament(name, startDate)
+        await this.room.fetchTournaments()
       }
     } catch (error) {
       logger.error(error)
@@ -1313,7 +1314,7 @@ export class CreateTournamentLobbiesCommand extends Command<
       )
 
       const brackets = makeBrackets(tournament)
-      tournament.brackets = new MapSchema<TournamentBracketSchema>()
+      tournament.brackets.clear()
 
       for (const bracket of brackets) {
         const bracketId = nanoid()
