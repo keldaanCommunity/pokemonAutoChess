@@ -703,13 +703,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       start: true
     })
 
-    const tournamentRefreshJob = CronJob.from({
-      cronTime: "0 0 0/1 * * *", // every hour
-      timeZone: "Europe/Paris",
-      onTick: () => this.fetchTournaments(),
-      start: true
-    })
-
     const rankedLobbyJob = CronJob.from({
       cronTime: RANKED_LOBBY_CRON,
       //cronTime: "0 0/1 * * * *", // DEBUG: trigger every minute
