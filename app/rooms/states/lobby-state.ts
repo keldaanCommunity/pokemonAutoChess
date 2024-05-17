@@ -81,12 +81,10 @@ export default class LobbyState extends Schema {
     }
   }
 
-  async createTournament(
-    name: string,
-    startDate: string
-  ): Promise<TournamentSchema> {
+  async createTournament(name: string, startDate: string) {
     const id = nanoid()
-    const t = await tournament.create({
+    logger.debug(`creating tournament id ${id}`)
+    return tournament.create({
       id,
       name,
       startDate,
@@ -94,17 +92,6 @@ export default class LobbyState extends Schema {
       players: new Map(),
       finished: false
     })
-    logger.debug(`created tournament id ${t.id}`)
-    const tournamentSchema = new TournamentSchema(
-      t.id,
-      t.name,
-      t.startDate,
-      t.players,
-      t.brackets,
-      false
-    )
-    this.tournaments.push(tournamentSchema)
-    return tournamentSchema
   }
 
   removeTournament(id: string) {
