@@ -1,10 +1,11 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Navigate } from "react-router"
 import { useAppSelector } from "../../../hooks"
 import { getGameScene } from "../../game"
-import "./game-loading-screen.css"
 import GamePlayerLoading from "./game-player-loading"
+import { shuffleArray } from "../../../../../utils/random"
+import "./game-loading-screen.css"
 
 export default function GameLoadingScreen(props: { connectError: string }) {
   const { t } = useTranslation()
@@ -15,6 +16,32 @@ export default function GameLoadingScreen(props: { connectError: string }) {
   )?.loadingProgress
   const statusMessage = getGameScene()?.loadingManager?.statusMessage
   const [toAuth, setToAuth] = useState<boolean>(false)
+  const [hint, setHint] = useState<string>("tab_out")  
+  
+  useEffect(() => {
+    const loadingHints = [
+      "tab_out",
+      ...shuffleArray([
+      "max_loading_time",
+      "disconnection_time",
+      "translation_project",
+      "discord",
+      "tipeee",
+      "bug_report",
+      "moderation",
+      "berry_tree",
+      "spriters",
+      "wiki",
+      "avatar"
+      ])
+    ]
+
+    const interval = setInterval(() => {
+        setHint(hint => loadingHints[(loadingHints.indexOf(hint)+1) % loadingHints.length]);
+    }, 20000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   if (toAuth) {
     return <Navigate to={"/"} />
@@ -52,7 +79,10 @@ export default function GameLoadingScreen(props: { connectError: string }) {
           </>
         )}
       </div>
-      <footer>{t("players_disconnected_hint")}</footer>
+      <div className="loading-hint">
+        <div className="speech-bubble">{t("loading_hints."+hint)}</div>
+        <img src={"/assets/loading_hints/"+hint+".webp"} />
+      </div>
     </div>
   )
 }

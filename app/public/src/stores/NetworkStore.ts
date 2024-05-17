@@ -1,5 +1,5 @@
 import { User } from "@firebase/auth-types"
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { Client, Room } from "colyseus.js"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
@@ -263,10 +263,7 @@ export const networkSlice = createSlice({
     deleteRoom: (state) => {
       state.preparation?.send(Transfer.DELETE_ROOM)
     },
-    ban: (
-      state,
-      action: PayloadAction<{ uid: string; name: string; reason: string }>
-    ) => {
+    ban: (state, action: PayloadAction<{ uid: string; reason: string }>) => {
       state.lobby?.send(Transfer.BAN, action.payload)
     },
     unban: (state, action: PayloadAction<{ uid: string; name: string }>) => {

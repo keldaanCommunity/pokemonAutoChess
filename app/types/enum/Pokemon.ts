@@ -727,6 +727,7 @@ export enum Pkm {
   TEDDIURSA = "TEDDIURSA",
   URSARING = "URSARING",
   URSALUNA = "URSALUNA",
+  URSALUNA_BLOODMOON = "URSALUNA_BLOODMOON",
   AIPOM = "AIPOM",
   AMBIPOM = "AMBIPOM",
   DEERLING = "DEERLING",
@@ -1490,6 +1491,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.TEDDIURSA]: "0216",
   [Pkm.URSARING]: "0217",
   [Pkm.URSALUNA]: "0901",
+  [Pkm.URSALUNA_BLOODMOON]: "0901-0001",
   [Pkm.AIPOM]: "0190",
   [Pkm.AMBIPOM]: "0424",
   [Pkm.DEERLING]: "0585",
@@ -2278,6 +2280,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TEDDIURSA]: Pkm.TEDDIURSA,
   [Pkm.URSARING]: Pkm.TEDDIURSA,
   [Pkm.URSALUNA]: Pkm.TEDDIURSA,
+  [Pkm.URSALUNA_BLOODMOON]: Pkm.TEDDIURSA,
   [Pkm.AIPOM]: Pkm.AIPOM,
   [Pkm.AMBIPOM]: Pkm.AIPOM,
   [Pkm.DEERLING]: Pkm.DEERLING,
@@ -6030,10 +6033,14 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.URSALUNA]: {
-    //TODO: anims not yet available
-    attack: AnimationType.Idle,
-    ability: AnimationType.Idle,
-    emote: AnimationType.Idle
+    attack: AnimationType.Attack,
+    ability: AnimationType.Strike,
+    emote: AnimationType.RearUp
+  },
+  [Pkm.URSALUNA_BLOODMOON]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.AIPOM]: {
     attack: AnimationType.Attack,

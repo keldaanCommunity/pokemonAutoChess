@@ -9,6 +9,8 @@
  - Donphan
  - Spoink
  - Grumpig
+ - Ursaluna
+ - Bloodmoon Ursaluna
 
 # Changes to Pokemon & Abilities
 
@@ -17,6 +19,7 @@
 - Slowpoke is now Water/Psychic and regional in maps with Water or Psychic synergy. Removed item-based evolution for Slowking.
 - Chimchar is now regional in maps with Human synergy
 - Nidoran Male is now the regional variant of Nidoran Female
+- Cascoon is now the regional variant of Silcoon in maps with Poison synergy.
 - Alolan Graveler is moved to Common
 - Alolan Rattata is moved to Common
 - All Burmy/Wormadam forms are now considered of the same family
@@ -35,13 +38,28 @@
 - New ability for Oshawott line: Aqua tail: Deal 30/60/100 special damage to the target and gain 30/60/100 shield
 - Changed Mawile: new ability Play rough - Removed passive
 - New ability for Amaura Hail: A hailstorm hits 10/20/30 random cells on the board, dealing 50 special damage. Hailstones stay on the ground, dealing 10 special damage and freezing opponents that walk on it for 1 second, if not Ice.
+- Moved Teddiursa to Ultra category
+- Buff Nasty Plot (Phione): reduce cooldown to 250ms
+- Nerf Sunsteel Strike (Solgaleo): 100 → 80 special damage
+- Nerf Deoxys Attack Form: Attack 38 → 30
+- Nerf Deoxys Speed Form: Attack 30 → 25
+- Nerf Sandsear Storm (Landorus): Burn duration 4 → 2 seconds
+- Moved Porygon Z to tier 2. Adjusted stats for the entire Porygon line.
+- Nerf Ho-Oh: range 3 → 2
+- Nerf Doduo line: PP 40 → 70
+- Buff Buizel line: PP 55 → 50, Attack 9/22 → 9/24
+- Buff Zangoose: HP 200 → 250, 50% less poison damage received
 
 # Changes to Synergies
 
 - Buff Water: dodge 20 → 30%
+- Changed Wild 9: +120% → +100% attack 
+- Added Blood Moon weather at Wild 9: +20% physical damage, +30% wound duration
+- Nerf Steel 8: 130% → 120% true damage
 
 # Changes to Items
 
+- You are now guaranteed to have different components in PvE rewards of rounds 1, 2 and 3, and these rewards cannot be fossil stones
 - Removed Leftovers
 - Removed Delta Orb
 - New item: Soothe Bell (charcoal + seed): the holder attack gives 25% of damage dealt as Shield to the ally closest to the target
@@ -57,17 +75,25 @@
 
 - Regional pokemons are no longer restricted by rarity and stage level, but are removed from the pool after traveling to a new region
 - When a regional pokemon is a variant of another family (ie. Alolan Graveler vs Graveler), it will replace the original family in your shops
+- New weather: Blood moon, unlocked at Wild 9
+- The additional 1 gold that you get when winning a round is obtained immediately on victory, and no longer on round change
 
 # UI
 
 - Add an option to disable damage numbers
 - Add a button to quickly change avatar from collection screen
 - Player damage is now computed immediately on victory instead of on round change
+- Added hints on the loading screen
+- Improved some basic attacks visual effects
 
 # Bugfix
 
 - Fixed emote keyboard shortcut changing tab
 - Fixed emote menu when player uses a shiny avatar
 - Fix burn and poison damage sometimes applying too soon after the second time the status is applied
+- Fixed no music when spectating game
 
 # Misc
+
+- New title: Bloody
+- Finishing 8th now gives 50 xp instead of zero

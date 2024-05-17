@@ -110,7 +110,7 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
 
 export const RequiredStageLevelForXpElligibility = 10
 
-export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 0]
+export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 50]
 
 export const RarityColor: { [key in Rarity]: string } = {
   [Rarity.COMMON]: "#9f9f9f",
@@ -369,6 +369,7 @@ export const WeatherThreshold: { [weather in Weather]: number } = {
   [Weather.MISTY]: 8,
   [Weather.NEUTRAL]: 8,
   [Weather.NIGHT]: 8,
+  [Weather.BLOODMOON]: 9,
   [Weather.RAIN]: 8,
   [Weather.SANDSTORM]: 8,
   [Weather.SNOW]: 6,

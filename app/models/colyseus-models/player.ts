@@ -85,6 +85,7 @@ export default class Player extends Schema implements IPlayer {
   titles: Set<Title> = new Set<Title>()
   rerollCount: number = 0
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
+  randomComponentsGiven: Item[] = []
   lightX: number
   lightY: number
   canRegainLife: boolean = true

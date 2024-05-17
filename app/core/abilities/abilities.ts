@@ -48,7 +48,7 @@ import { Weather } from "../../types/enum/Weather"
 import PokemonFactory from "../../models/pokemon-factory"
 import { createRandomEgg } from "../../models/egg-factory"
 import Board, { Cell } from "../board"
-import { getMoveSpeed, PokemonEntity } from "../pokemon-entity"
+import { PokemonEntity } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 
 import { getFirstAvailablePositionInBench } from "../../utils/board"
@@ -1542,7 +1542,7 @@ export class TriAttackStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [30, 50, 70][pokemon.stars - 1] ?? 70
+    const damage = [30, 60][pokemon.stars - 1] ?? 60
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     const effect = randomBetween(1, 3)
     switch (effect) {
@@ -3837,6 +3837,7 @@ export class NastyPlotStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const buff = 10
     pokemon.addAttack(buff, true)
+    pokemon.cooldown = 250
   }
 }
 
@@ -4078,7 +4079,7 @@ export class SandsearStormStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        targetInLine.status.triggerBurn(4000, targetInLine, pokemon)
+        targetInLine.status.triggerBurn(2000, targetInLine, pokemon)
       }
     })
   }
@@ -7815,13 +7816,7 @@ export class SunsteelStrikeStrategy extends AbilityStrategy {
 
         cells.forEach((cell) => {
           if (cell.value && cell.value.team !== pokemon.team) {
-            cell.value.handleSpecialDamage(
-              100,
-              board,
-              AttackType.SPECIAL,
-              pokemon,
-              crit
-            )
+            cell.value.handleSpecialDamage(80, board, AttackType.SPECIAL, pokemon, crit)
             cell.value.status.triggerBurn(3000, cell.value, pokemon)
           }
         })
@@ -7852,6 +7847,33 @@ export class MoongeistBeamStrategy extends AbilityStrategy {
           targetInLine.status.triggerParalysis(3000, targetInLine)
         } else {
           targetInLine.addShield(100, pokemon, true)
+        }
+      }
+    })
+  }
+}
+
+export class BloodMoonStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = Math.round(2 * pokemon.atk)
+    effectInLine(board, pokemon, target, (targetInLine) => {
+      if (targetInLine != null) {
+        if (targetInLine.team !== pokemon.team) {
+          targetInLine.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          targetInLine.status.triggerWound(3000, targetInLine, pokemon)
         }
       }
     })
@@ -9080,5 +9102,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.AQUA_TAIL]: new AquaTailStrategy(),
   [Ability.HAIL]: new HailStrategy(),
   [Ability.RAPID_SPIN]: new RapidSpinStrategy(),
-  [Ability.BOUNCE]: new BounceStrategy()
+  [Ability.BOUNCE]: new BounceStrategy(),
+  [Ability.BLOOD_MOON]: new BloodMoonStrategy()
 }

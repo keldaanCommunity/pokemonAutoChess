@@ -200,6 +200,61 @@ export default class WeatherManager {
     )
   }
 
+  addBloodMoon() {
+    this.colorFilter = this.scene.add.existing(
+      new Phaser.GameObjects.Rectangle(
+        this.scene,
+        1500,
+        1000,
+        3000,
+        2000,
+        0x460818,
+        0.6
+      ).setDepth(8)
+    )
+
+    const offscreenSource = {
+      x: { min: 0, max: 2000 },
+      y: { min: 0, max: 100 }
+    }
+
+    this.particlesEmitters.push(
+      this.scene.add.particles(0, 0, "rain", {
+        ...offscreenSource,
+        deathZone: { source: this.screen, type: "onLeave" },
+        frequency: 400,
+        speedY: { min: 260, max: 280 },
+        tint: 0xff0000,
+        lifespan: 5000,
+        scale: 0.7
+      })
+    )
+
+    this.particlesEmitters.push(
+      this.scene.add.particles(0, 0, "rain", {
+        ...offscreenSource,
+        deathZone: { source: this.screen, type: "onLeave" },
+        frequency: 500,
+        speedY: { min: 360, max: 380 },
+        tint: 0xff0000,
+        lifespan: 5000,
+        scale: 0.8
+      })
+    )
+
+    this.particlesEmitters.push(
+      this.scene.add.particles(0, 0, "rain", {
+        ...offscreenSource,
+        deathZone: { source: this.screen, type: "onLeave" },
+        frequency: 800,
+        quantity: 4,
+        speedY: { min: 460, max: 480 },
+        tint: 0xff0000,
+        lifespan: 5000
+      })
+    )
+  }
+
   addWind() {
     const leftScreenSource = {
       x: { min: 0, max: 100 },

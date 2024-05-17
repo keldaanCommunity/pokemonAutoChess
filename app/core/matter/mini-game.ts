@@ -15,7 +15,7 @@ import Player from "../../models/colyseus-models/player"
 import { getOrientation } from "../../public/src/pages/utils/utils"
 import { PokemonActionState, Rarity } from "../../types/enum/Game"
 import {
-  BasicItems,
+  ItemComponents,
   CraftableItems,
   Item,
   SynergyStones
@@ -366,7 +366,7 @@ export class MiniGame {
 
     let nbItemsToPick = clamp(this.alivePlayers.length + 3, 5, 9)
     let maxCopiesPerItem = 2
-    let itemsSet = BasicItems
+    let itemsSet = ItemComponents
 
     if (stageLevel >= 20) {
       // Carousels after stage 20 propose full items and no longer components, and have one more proposition

@@ -1,4 +1,5 @@
 import { DungeonMusic } from "../../../../types/enum/Dungeon"
+import { logger } from "../../../../utils/logger"
 import { preferences } from "../../preferences"
 
 export const SOUNDS = {
@@ -67,5 +68,9 @@ export function playMusic(scene: SceneWithMusic, name: string) {
     loop: true
   }) as Phaser.Sound.WebAudioSound
   const musicVolume = preferences.musicVolume / 100
-  scene.music.play({ volume: musicVolume, loop: true })
+  try {
+    scene.music.play({ volume: musicVolume, loop: true })
+  } catch (err) {
+    logger.error("can't play music", err)
+  }
 }

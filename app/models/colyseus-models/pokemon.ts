@@ -44,7 +44,7 @@ import { Weather } from "../../types/enum/Weather"
 import { sum } from "../../utils/array"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { distanceM } from "../../utils/distance"
-import { coinflip, pickRandomIn } from "../../utils/random"
+import { pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
@@ -379,7 +379,7 @@ export class Cutiefly extends Pokemon {
   maxPP = 40
   range = 2
   skill = Ability.POLLEN_PUFF
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.BUG_RANGE
   regional = true
 }
 
@@ -394,7 +394,7 @@ export class Ribombee extends Pokemon {
   maxPP = 40
   range = 2
   skill = Ability.POLLEN_PUFF
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.BUG_RANGE
   regional = true
 }
 
@@ -1588,10 +1588,10 @@ export class Porygon extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.PORYGON_2
-  hp = 120
-  atk = 6
-  def = 1
-  speDef = 1
+  hp = 100
+  atk = 7
+  def = 2
+  speDef = 2
   maxPP = 90
   range = 2
   skill = Ability.TRI_ATTACK
@@ -1610,10 +1610,10 @@ export class Porygon2 extends Pokemon {
   stars = 2
   evolution = Pkm.PORYGON_Z
   hp = 185
-  atk = 16
+  atk = 14
   evolutionRule = new ItemEvolutionRule([Item.UPGRADE])
-  def = 3
-  speDef = 3
+  def = 5
+  speDef = 5
   maxPP = 90
   range = 2
   skill = Ability.TRI_ATTACK
@@ -1629,11 +1629,11 @@ export class PorygonZ extends Pokemon {
     Synergy.ARTIFICIAL
   ])
   rarity = Rarity.EPIC
-  stars = 3
-  hp = 200
-  atk = 33
-  def = 5
-  speDef = 5
+  stars = 2
+  hp = 185
+  atk = 24
+  def = 2
+  speDef = 2
   maxPP = 90
   range = 2
   skill = Ability.TRI_ATTACK
@@ -2499,7 +2499,7 @@ export class Whismur extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.ECHO
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.SOUND_RANGE
 }
 export class Loudred extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.SOUND])
@@ -2513,7 +2513,7 @@ export class Loudred extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.ECHO
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.SOUND_RANGE
 }
 
 export class Exploud extends Pokemon {
@@ -2527,7 +2527,7 @@ export class Exploud extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.ECHO
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.SOUND_RANGE
 }
 
 export class Swinub extends Pokemon {
@@ -2678,7 +2678,7 @@ export class Vanillite extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.SLEEP
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.ICE_RANGE
 }
 
 export class Vanillish extends Pokemon {
@@ -2697,7 +2697,7 @@ export class Vanillish extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.SLEEP
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.ICE_RANGE
 }
 
 export class Vanilluxe extends Pokemon {
@@ -2715,7 +2715,7 @@ export class Vanilluxe extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.SLEEP
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.ICE_RANGE
 }
 
 export class Trapinch extends Pokemon {
@@ -2898,7 +2898,7 @@ export class Igglybuff extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.SLEEP
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.SOUND_RANGE
 }
 
 export class Jigglypuff extends Pokemon {
@@ -2913,7 +2913,7 @@ export class Jigglypuff extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.SLEEP
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.SOUND_RANGE
 }
 
 export class Wigglytuff extends Pokemon {
@@ -2927,7 +2927,7 @@ export class Wigglytuff extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.SLEEP
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.SOUND_RANGE
 }
 
 export class Duskull extends Pokemon {
@@ -3074,7 +3074,7 @@ export class Flabebe extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.FAIRY_WIND
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.FAIRY_RANGE
 }
 
 export class Floette extends Pokemon {
@@ -3089,7 +3089,7 @@ export class Floette extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.FAIRY_WIND
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.FAIRY_RANGE
 }
 export class Florges extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.SOUND, Synergy.FAIRY, Synergy.FLORA])
@@ -3102,7 +3102,7 @@ export class Florges extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.FAIRY_WIND
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.FAIRY_RANGE
 }
 
 export class Chikorita extends Pokemon {
@@ -3618,7 +3618,7 @@ export class Torchic extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLAZE_KICK
-  attackSprite = AttackSprite.FIRE_MELEE
+  attackSprite = AttackSprite.FLYING_MELEE
 }
 
 export class Combusken extends Pokemon {
@@ -3637,7 +3637,7 @@ export class Combusken extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLAZE_KICK
-  attackSprite = AttackSprite.FIRE_MELEE
+  attackSprite = AttackSprite.FLYING_MELEE
 }
 
 export class Blaziken extends Pokemon {
@@ -3655,7 +3655,7 @@ export class Blaziken extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLAZE_KICK
-  attackSprite = AttackSprite.FIRE_MELEE
+  attackSprite = AttackSprite.FLYING_MELEE
 }
 
 export class Treecko extends Pokemon {
@@ -4322,7 +4322,7 @@ export class Caterpie extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.STRING_SHOT
-  attackSprite = AttackSprite.POISON_RANGE
+  attackSprite = AttackSprite.BUG_RANGE
 }
 
 export class Metapod extends Pokemon {
@@ -4337,7 +4337,7 @@ export class Metapod extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.STRING_SHOT
-  attackSprite = AttackSprite.POISON_RANGE
+  attackSprite = AttackSprite.BUG_RANGE
 }
 
 export class Butterfree extends Pokemon {
@@ -4351,7 +4351,7 @@ export class Butterfree extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.STRING_SHOT
-  attackSprite = AttackSprite.POISON_RANGE
+  attackSprite = AttackSprite.BUG_RANGE
 }
 
 export class Weedle extends Pokemon {
@@ -4720,7 +4720,7 @@ export class Meloetta extends Pokemon {
   maxPP = 60
   range = 4
   skill = Ability.RELIC_SONG
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.SOUND_RANGE
 }
 
 export class PirouetteMeloetta extends Pokemon {
@@ -4734,7 +4734,7 @@ export class PirouetteMeloetta extends Pokemon {
   maxPP = 120
   range = 4
   skill = Ability.DEFAULT
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.SOUND_RANGE
 }
 
 export class Lugia extends Pokemon {
@@ -5109,7 +5109,7 @@ export class Zangoose extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 200
+  hp = 250
   atk = 20
   def = 2
   speDef = 2
@@ -6124,7 +6124,7 @@ export class DeoxysAttack extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 240
-  atk = 38
+  atk = 30
   def = 2
   speDef = 2
   maxPP = 90
@@ -6146,7 +6146,7 @@ export class DeoxysSpeed extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 240
-  atk = 30
+  atk = 25
   def = 3
   speDef = 3
   maxPP = 50
@@ -6231,7 +6231,7 @@ export class HooH extends Pokemon {
   def = 3
   speDef = 3
   maxPP = 100
-  range = 3
+  range = 2
   skill = Ability.FIRE_SPIN
   passive = Passive.SUN
   attackSprite = AttackSprite.FIRE_RANGE
@@ -7523,7 +7523,7 @@ export class Buizel extends Pokemon {
   atk = 9
   def = 3
   speDef = 3
-  maxPP = 55
+  maxPP = 50
   range = 1
   skill = Ability.AQUA_JET
   additional = true
@@ -7538,10 +7538,10 @@ export class Floatzel extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 180
-  atk = 22
+  atk = 24
   def = 5
   speDef = 5
-  maxPP = 55
+  maxPP = 50
   range = 1
   skill = Ability.AQUA_JET
   additional = true
@@ -7784,7 +7784,7 @@ export class Hoothoot extends Pokemon {
   range = 1
   skill = Ability.HYPNOSIS
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.FLYING_MELEE
 }
 
 export class Noctowl extends Pokemon {
@@ -7803,7 +7803,7 @@ export class Noctowl extends Pokemon {
   range = 1
   skill = Ability.HYPNOSIS
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.FLYING_MELEE
 }
 
 export class Munchlax extends Pokemon {
@@ -7975,7 +7975,7 @@ export class MimeJr extends Pokemon {
   range = 2
   skill = Ability.MIMIC
   additional = true
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.FAIRY_RANGE
 }
 
 export class MrMime extends Pokemon {
@@ -7994,7 +7994,7 @@ export class MrMime extends Pokemon {
   range = 2
   skill = Ability.MIMIC
   additional = true
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.FAIRY_RANGE
 }
 
 export class Salandit extends Pokemon {
@@ -9506,7 +9506,7 @@ export class Nosepass extends Pokemon {
   range = 2
   skill = Ability.MAGNET_RISE
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE
+  attackSprite = AttackSprite.ROCK_RANGE
 }
 
 export class Probopass extends Pokemon {
@@ -9521,7 +9521,7 @@ export class Probopass extends Pokemon {
   range = 2
   skill = Ability.MAGNET_RISE
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE
+  attackSprite = AttackSprite.ROCK_RANGE
 }
 
 export class Woobat extends Pokemon {
@@ -9541,7 +9541,7 @@ export class Woobat extends Pokemon {
   range = 3
   skill = Ability.ATTRACT
   additional = true
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.SOUND_RANGE
 }
 
 export class Swoobat extends Pokemon {
@@ -9560,7 +9560,7 @@ export class Swoobat extends Pokemon {
   range = 3
   skill = Ability.ATTRACT
   additional = true
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.SOUND_RANGE
 }
 
 export class Pineco extends Pokemon {
@@ -10709,38 +10709,12 @@ export class Wurmple extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ENTANGLING_THREAD
-  passive = Passive.WURMPLE
   attackSprite = AttackSprite.BUG_MELEE
-
   evolutionRule = new CountEvolutionRule(
     3,
     (pokemon: Pokemon, player: Player) => {
-      const lastWeather = player.getLastBattle()?.weather ?? Weather.NEUTRAL
-      let existingSecondTier: Pkm | null = null
-      player.board.forEach((pkm) => {
-        if (pkm.name === Pkm.CASCOON) existingSecondTier = Pkm.CASCOON
-        else if (pkm.name === Pkm.SILCOON) existingSecondTier = Pkm.SILCOON
-      })
-      if (existingSecondTier !== null) {
-        return existingSecondTier
-      } else if (
-        [
-          Weather.NIGHT,
-          Weather.STORM,
-          Weather.SANDSTORM,
-          Weather.SNOW
-        ].includes(lastWeather)
-      ) {
-        return Pkm.CASCOON
-      } else if (
-        [Weather.SUN, Weather.RAIN, Weather.MISTY, Weather.WINDY].includes(
-          lastWeather
-        )
-      ) {
-        return Pkm.SILCOON
-      } else {
-        return coinflip() ? Pkm.CASCOON : Pkm.SILCOON
-      }
+      if (player.regionalPokemons.includes(Pkm.CASCOON)) return Pkm.CASCOON
+      else return Pkm.SILCOON
     }
   )
 }
@@ -10787,6 +10761,11 @@ export class Cascoon extends Pokemon {
   range = 1
   skill = Ability.SPIKE_ARMOR
   attackSprite = AttackSprite.BUG_MELEE
+  regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.POISON)
+  }
 }
 
 export class Dustox extends Pokemon {
@@ -10801,6 +10780,11 @@ export class Dustox extends Pokemon {
   range = 1
   skill = Ability.POISON_POWDER
   attackSprite = AttackSprite.BUG_MELEE
+  regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.POISON)
+  }
 }
 
 export class Tinkatink extends Pokemon {
@@ -11638,10 +11622,10 @@ export class Doduo extends Pokemon {
   atk = 12
   def = 3
   speDef = 2
-  maxPP = 40
+  maxPP = 70
   range = 1
   skill = Ability.AGILITY
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.FLYING_MELEE
   regional = true
 }
 
@@ -11653,10 +11637,10 @@ export class Dodrio extends Pokemon {
   atk = 28
   def = 5
   speDef = 3
-  maxPP = 40
+  maxPP = 70
   range = 1
   skill = Ability.AGILITY
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.FLYING_MELEE
   regional = true
 }
 
@@ -12620,48 +12604,80 @@ export class Kangaskhan extends Pokemon {
 
 export class Teddiursa extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND])
-  rarity = Rarity.EPIC
+  rarity = Rarity.ULTRA
   stars = 1
   evolution = Pkm.URSARING
-  hp = 100
-  atk = 10
+  hp = 150
+  atk = 12
   def = 4
-  speDef = 4
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.FURY_SWIPES
   attackSprite = AttackSprite.NORMAL_MELEE
-  stages = 2 // while waiting for Ursaluna
 }
 
 export class Ursaring extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND])
-  rarity = Rarity.EPIC
+  rarity = Rarity.ULTRA
   stars = 2
-  //evolution = Pkm.URSALUNA // when ready
-  hp = 200
-  atk = 20
-  def = 4
-  speDef = 4
+  evolution = Pkm.URSALUNA
+  hp = 280
+  atk = 23
+  def = 6
+  speDef = 5
   maxPP = 100
   range = 1
   skill = Ability.FURY_SWIPES
   attackSprite = AttackSprite.NORMAL_MELEE
-  stages = 2 // while waiting for Ursaluna
 }
 
 export class Ursaluna extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND])
-  rarity = Rarity.EPIC
+  rarity = Rarity.ULTRA
   stars = 3
-  hp = 300
-  atk = 30
-  def = 4
-  speDef = 4
+  hp = 450
+  atk = 28
+  def = 12
+  speDef = 10
   maxPP = 100
   range = 1
-  skill = Ability.DEFAULT //Ability.FURY_SWIPES
+  skill = Ability.FURY_SWIPES
+  passive = Passive.BLOODMOON
   attackSprite = AttackSprite.NORMAL_MELEE
+  beforeSimulationStart({
+    weather,
+    player
+  }: { weather: Weather; player: Player }) {
+    if (weather === Weather.BLOODMOON) {
+      player.transformPokemon(this, Pkm.URSALUNA_BLOODMOON)
+    }
+  }
+}
+
+export class UrsalunaBloodmoon extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND])
+  rarity = Rarity.ULTRA
+  stars = 3
+  hp = 380
+  atk = 36
+  def = 14
+  speDef = 7
+  maxPP = 100
+  range = 1
+  skill = Ability.BLOOD_MOON
+  attackSprite = AttackSprite.NORMAL_MELEE
+  beforeSimulationStart({
+    weather,
+    player
+  }: { weather: Weather; player: Player }) {
+    if (weather !== Weather.BLOODMOON) {
+      player.transformPokemon(this, Pkm.URSALUNA)
+    }
+  }
+  onAcquired(player: Player) {
+    player.titles.add(Title.BLOODY)
+  }
 }
 
 export class Aipom extends Pokemon {
@@ -14145,6 +14161,7 @@ export const PokemonClasses: Record<
   [Pkm.TEDDIURSA]: Teddiursa,
   [Pkm.URSARING]: Ursaring,
   [Pkm.URSALUNA]: Ursaluna,
+  [Pkm.URSALUNA_BLOODMOON]: UrsalunaBloodmoon,
   [Pkm.AIPOM]: Aipom,
   [Pkm.AMBIPOM]: Ambipom,
   [Pkm.DEERLING]: Deerling,

@@ -47,7 +47,7 @@ import {
 } from "../../types/enum/Game"
 import {
   ArtificialItems,
-  BasicItems,
+  ItemComponents,
   Berries,
   Item,
   ItemRecipe,
@@ -422,9 +422,9 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
-    const isBasicItem = BasicItems.includes(item)
+    const isBasicItem = ItemComponents.includes(item)
     const existingBasicItemToCombine = values(pokemon.items).find((i) =>
-      BasicItems.includes(i)
+      ItemComponents.includes(i)
     )
 
     // check if full items and nothing to combine
@@ -878,9 +878,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         player.interest = Math.min(Math.floor(player.money / 10), 5)
         income += player.interest
         income += player.streak
-        if (player.getLastBattleResult() == BattleResult.WIN) {
-          income += 1
-        }
         income += 5
         player.money += income
         if (income > 0) {
@@ -918,7 +915,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     // Item propositions stages
     if (ItemProposalStages.includes(this.state.stageLevel)) {
       this.state.players.forEach((player: Player) => {
-        let itemSet = BasicItems
+        let itemSet = ItemComponents
         if (this.state.specialGameRule === SpecialGameRule.TECHNOLOGIC) {
           itemSet = ArtificialItems
         }
@@ -937,7 +934,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       let remainingAddPicks = 8
       this.state.players.forEach((player: Player) => {
         if (!player.isBot) {
-          const items = pickNRandomIn(BasicItems, 3)
+          const items = pickNRandomIn(ItemComponents, 3)
           for (let i = 0; i < 3; i++) {
             const p = pool.pop()
             if (p) {

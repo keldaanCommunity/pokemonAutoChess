@@ -1,16 +1,13 @@
 /* eslint-disable no-case-declarations */
 import { GameObjects } from "phaser"
+import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import { getMoveSpeed } from "../../../../core/pokemon-entity"
 import Simulation from "../../../../core/simulation"
 import Count from "../../../../models/colyseus-models/count"
 import Player from "../../../../models/colyseus-models/player"
 import Status from "../../../../models/colyseus-models/status"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
-import {
-  IBoardEvent,
-  IPokemonEntity,
-  NonFunctionPropNames
-} from "../../../../types"
+import { IBoardEvent, IPokemonEntity } from "../../../../types"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import { Effect } from "../../../../types/enum/Effect"

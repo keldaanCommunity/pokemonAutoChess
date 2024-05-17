@@ -89,6 +89,30 @@ export function displayAbility(
         )
       break
 
+    case Ability.BLOOD_MOON: {
+      const [dx, dy] = OrientationVector[orientation]
+      const finalCoordinates = [
+        coordinates[0] + dx * 16,
+        coordinates[1] - dy * 16 - 24
+      ]
+      addAbilitySprite(Ability.DYNAMAX_CANNON, finalCoordinates, true)
+        .setScale(2)
+        .setTint(0xff5060)
+        .setOrigin(0.5, 0)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) -
+            Math.PI / 2
+        )
+      addAbilitySprite(Ability.COSMIC_POWER, coordinates, true)
+        .setTint(0xff5060)
+        .setOrigin(0.5, 1)
+        .setScale(2)
+      break
+    }
+
     case Ability.DYNAMIC_PUNCH:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
@@ -2049,7 +2073,7 @@ export function displayAbility(
         true
       ).setScale(2)
       break
-      
+
     case "HAIL_PROJECTILE": {
       const specialProjectile = addAbilitySprite(skill, [
         coordinatesTarget[0] + 60,

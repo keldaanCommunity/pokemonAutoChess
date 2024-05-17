@@ -63,7 +63,7 @@ export default class LobbyUser extends Schema implements ILobbyUser {
     donor: boolean,
     history: GameRecord[],
     honors: string[],
-    pokemonCollection: Map<string, IPokemonConfig>,
+    pokemonCollection: Map<string, IPokemonConfig> | null,
     booster: number,
     titles: Title[],
     title: "" | Title,
