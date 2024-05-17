@@ -1964,7 +1964,7 @@
     "SOUL_HEART": "Cada vez que el lanzador consigue un KO, gana 10 AP y 10 PP.",
     "ALIEN_DNA": "$t(pkm.DEOXYS) reacciona al METEORITE cambiando de forma",
     "BERRY_EATER": "Cuando el Pokémon ataca a un objetivo, le roba todas sus bayas y se las come.",
-    "TOXIC_BOOST": "El pokémon gana 10 ATK mientras esté POISONNED",
+    "TOXIC_BOOST": "El pokémon recibe un 50% menos de daño de veneno y gana 10 ATK mientras esté POISONNED",
     "SHUCKLE": "Convierte las bayas consumidas en BERRY_JUICE",
     "GUZZLORD": "Guzzlord pesa demasiado y no puede saltar.",
     "ENVIRONMENTAL_ADAPTATION": "Este Pokémon adapta sus sinergias a la región.",

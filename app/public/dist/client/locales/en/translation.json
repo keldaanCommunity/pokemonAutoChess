@@ -1967,7 +1967,7 @@
     "SOUL_HEART": "Every time the caster gets a KO, gain 10 AP and 10 PP",
     "ALIEN_DNA": "$t(pkm.DEOXYS) reacts to METEORITE by changing shape",
     "BERRY_EATER": "When the Pokémon attacks a target, he steals all its berries and eats them",
-    "TOXIC_BOOST": "The pokémon gains 10 ATK as long as it is POISONNED",
+    "TOXIC_BOOST": "The pokémon takes 50% less poison damage and gains 10 ATK as long as it is POISONNED",
     "SHUCKLE": "Turn consummed berries into BERRY_JUICE",
     "GUZZLORD": "Guzzlord is too heavy and can't jump",
     "ENVIRONMENTAL_ADAPTATION": "This pokemon adapted its synergies to its region",
