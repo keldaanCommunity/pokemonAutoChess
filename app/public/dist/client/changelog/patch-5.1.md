@@ -49,6 +49,7 @@
 - Nerf Doduo line: PP 40 → 70
 - Buff Buizel line: PP 55 → 50, Attack 9/22 → 9/24
 - Buff Zangoose: HP 200 → 250, 50% less poison damage received
+- Nerf Fuecoco line: Def/SpeDef 4/5/6 → 3/4/5
 
 # Changes to Synergies
 
