@@ -54,9 +54,10 @@
 
 # Changes to Synergies
 
-- Buff Water: dodge 20 → 30%
-- Changed Wild 9: +120% → +100% attack 
+- Changed how Wild odds in shop work: now 1% per wild star on board + 5% on PvE rounds
+- Changed Wild 9: +120% → +100% attack
 - Added Blood Moon weather at Wild 9: +20% physical damage, +30% wound duration
+- Buff Water: dodge 20 → 30%
 - Nerf Steel 8: 130% → 120% true damage
 
 # Changes to Items
