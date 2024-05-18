@@ -6241,9 +6241,9 @@ export class Torkoal extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.GROUND])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 240
+  hp = 220
   atk = 10
-  def = 10
+  def = 8
   speDef = 2
   maxPP = 110
   range = 1

@@ -50,6 +50,7 @@
 - Buff Buizel line: PP 55 → 50, Attack 9/22 → 9/24
 - Buff Zangoose: HP 200 → 250, 50% less poison damage received
 - Nerf Fuecoco line: Def/SpeDef 4/5/6 → 3/4/5
+- Nerf Torkoal: HP 240 → 220, Def 10 → 8
 
 # Changes to Synergies
 
