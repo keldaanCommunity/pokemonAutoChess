@@ -2249,7 +2249,8 @@
     "STORM": "Tormenta",
     "MISTY": "Brumoso",
     "SNOW": "Nieve",
-    "SANDSTORM": "Tormenta de arena"
+    "SANDSTORM": "Tormenta de arena",
+    "BLOODMOON": "Luna carmesí"
   },
   "weather_description": {
     "NEUTRAL": "Clima normal. Sin efectos.",
