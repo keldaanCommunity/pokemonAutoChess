@@ -344,7 +344,8 @@
     "HEAVY_SLAM": "Cuerpo Pesado",
     "HAIL": "Granizo",
     "RAPID_SPIN": "Giro Rápido",
-    "BOUNCE": "Bote"
+    "BOUNCE": "Bote",
+    "BLOOD_MOON": "Luna carmesí"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1076,6 +1077,7 @@
     "TEDDIURSA": "Teddiursa",
     "URSARING": "Ursaring",
     "URSALUNA": "Ursaluna",
+    "URSALUNA_BLOODMOON": "Ursaluna luna carmesí",
     "AIPOM": "Aipom",
     "AMBIPOM": "Ambipom",
     "DEERLING": "Deerling",
@@ -2865,5 +2867,11 @@
     "CROWDED": "+3 unidades máximas en el tablero",
     "KECLEONS_SHOP": "Los carruseles de objetos son reemplazados por la tienda de Kecleon, que propone 6 objetos por 10 GOLD cada uno",
     "FREE_MARKET": "Los pokémon se compran y venden por 0 GOLD"
+  },
+  "loading_hints": {
+    "max_loading_time": "El juego comenzará tras 5 minutos de carga, no importa que...",
+    "disconnection_time": "Los jugadores desconectados por más de 3 minutos serán expulsados de la partida. Si esto ocurre antes des escenario 6, no perderán Elo.",
+    "discord": "¡Únete a nuestra comunidad Discord! Enlace en el panel lateral",
+    "bug_report": "¿Has encontrado un bug? Entra en Discord y comunícalo en el canal #bug-report."
   }
 }
