@@ -768,7 +768,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           case Effect.HEART_OF_THE_SWARM:
             player.titles.add(Title.BUG_MANIAC)
             break
-          case Effect.MAX_GUARD:
+          case Effect.SKYDIVE:
             player.titles.add(Title.BIRD_KEEPER)
             break
           case Effect.SUN_FLOWER:
