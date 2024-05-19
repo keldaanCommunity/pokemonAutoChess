@@ -1292,7 +1292,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  resetStats() {
+  resurrect() {
     const cloneForStatsReference = PokemonFactory.createPokemonFromName(
       this.name
     )
@@ -1314,6 +1314,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.simulation.applyWeatherEffects(this)
     this.status.resurection = false // prevent reapplying max revive again
     this.shield = 0 // prevent reapplying shield again
+    this.flyingProtection = 0 // prevent flying effects twice
     SynergyEffects[Synergy.FOSSIL].forEach((fossilResurectEffect) =>
       this.effects.delete(fossilResurectEffect)
     ) // prevent resurecting fossils twice

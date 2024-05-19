@@ -994,7 +994,7 @@ export default class Status extends Schema implements IStatus {
   updateResurecting(dt: number, pokemon: PokemonEntity) {
     if (this.resurectingCooldown - dt <= 0) {
       this.resurecting = false
-      pokemon.resetStats()
+      pokemon.resurrect()
       pokemon.toMovingState()
       pokemon.cooldown = 0
     } else {
