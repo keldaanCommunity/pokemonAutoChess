@@ -325,7 +325,7 @@ export class SlackOffStrategy extends AbilityStrategy {
     pokemon.status.clearNegativeStatus()
     const healFactor =
       pokemon.stars === 3 ? 0.5 : pokemon.stars === 2 ? 0.4 : 0.3
-    pokemon.handleHeal(pokemon.hp * healFactor, pokemon, 0.5)
+    pokemon.handleHeal(pokemon.hp * healFactor, pokemon, 0.5, crit)
     pokemon.status.triggerSleep(5000, pokemon)
   }
 }
@@ -430,7 +430,7 @@ export class IllusionStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const heal = pokemon.stars === 3 ? 70 : pokemon.stars === 2 ? 50 : 30
-    pokemon.handleHeal(heal, pokemon, 0.5)
+    pokemon.handleHeal(heal, pokemon, 0.5, crit)
     if (target) {
       pokemon.index = target.index
       pokemon.atk = Math.max(pokemon.atk, target.atk)
@@ -801,7 +801,7 @@ export class TimeTravelStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     board.forEach((x, y, ally) => {
       if (ally && pokemon.team == ally.team) {
-        ally.handleHeal(25, pokemon, 1)
+        ally.handleHeal(25, pokemon, 1, crit)
         ally.status.clearNegativeStatus()
       }
     })
@@ -973,7 +973,7 @@ export class LeechSeedStrategy extends AbilityStrategy {
       duration = 6000
       heal = 80
     }
-    pokemon.handleHeal(heal, pokemon, 1)
+    pokemon.handleHeal(heal, pokemon, 1, crit)
     target.status.triggerPoison(duration, target, pokemon)
   }
 }
@@ -2718,7 +2718,7 @@ export class WishStrategy extends AbilityStrategy {
         count > 0 &&
         ally.life < ally.hp
       ) {
-        ally.handleHeal(heal, pokemon, 1)
+        ally.handleHeal(heal, pokemon, 1, crit)
         count -= 1
       }
     })
@@ -2745,7 +2745,8 @@ export class NaturalGiftStrategy extends AbilityStrategy {
       lowestHealthAlly.handleHeal(
         pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30,
         pokemon,
-        1
+        1,
+        crit
       )
       lowestHealthAlly.status.triggerRuneProtect(pokemon.stars * 1000)
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
@@ -3182,7 +3183,7 @@ export class BiteStrategy extends AbilityStrategy {
       pokemon,
       crit
     )
-    pokemon.handleHeal(Math.ceil(0.3 * takenDamage), pokemon, 1)
+    pokemon.handleHeal(Math.ceil(0.3 * takenDamage), pokemon, 1, crit)
     if (takenDamage > 0) target.status.triggerFlinch(5000, target, pokemon)
   }
 }
@@ -3258,7 +3259,7 @@ export class PresentStrategy extends AbilityStrategy {
        heal 80HP: 20%
     */
     if (chance < 0.2) {
-      target.handleHeal(80, pokemon, 0)
+      target.handleHeal(80, pokemon, 0, false)
     } else if (chance < 0.6) {
       target.handleSpecialDamage(80, board, AttackType.SPECIAL, pokemon, crit)
     } else if (chance < 0.9) {
@@ -3490,7 +3491,7 @@ export class RootStrategy extends AbilityStrategy {
     )
     cells.forEach((cell) => {
       if (cell.value && pokemon.team == cell.value.team) {
-        cell.value.handleHeal(heal, pokemon, 1)
+        cell.value.handleHeal(heal, pokemon, 1, crit)
       }
     })
   }
@@ -3761,7 +3762,7 @@ export class LeechLifeStrategy extends AbilityStrategy {
     }
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    pokemon.handleHeal(damage, pokemon, 1)
+    pokemon.handleHeal(damage, pokemon, 1, crit)
   }
 }
 
@@ -4478,7 +4479,7 @@ export class PlasmaFistStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = 120
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    pokemon.handleHeal(damage * 0.25, pokemon, 1)
+    pokemon.handleHeal(damage * 0.25, pokemon, 1, crit)
   }
 }
 
@@ -4618,7 +4619,7 @@ export class DeathWingStrategy extends AbilityStrategy {
       crit
     )
     if (takenDamage > 0) {
-      pokemon.handleHeal(Math.round(0.75 * takenDamage), pokemon, 0)
+      pokemon.handleHeal(Math.round(0.75 * takenDamage), pokemon, 0, false)
     }
   }
 }
@@ -4706,7 +4707,7 @@ export class HealOrderStrategy extends AbilityStrategy {
           )
         } else {
           cell.value.count.healOrderCount++
-          cell.value.handleHeal(damage, pokemon, 1)
+          cell.value.handleHeal(damage, pokemon, 1, crit)
         }
       }
     })
@@ -5075,7 +5076,7 @@ export class AbsorbStrategy extends AbilityStrategy {
     )
     cells.forEach((cell) => {
       if (cell.value && cell.value.team === pokemon.team) {
-        cell.value.handleHeal(damage * 0.1, pokemon, 1)
+        cell.value.handleHeal(damage * 0.1, pokemon, 1, crit)
       }
     })
   }
@@ -5353,7 +5354,7 @@ export class MudBubbleStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const heal = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
-    pokemon.handleHeal(heal, pokemon, 1)
+    pokemon.handleHeal(heal, pokemon, 1, crit)
   }
 }
 
@@ -5936,7 +5937,7 @@ export class ParabolicChargeStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const heal = pokemon.stars > 1 ? 50 : 25
     const overHeal = Math.max(0, heal + pokemon.life - pokemon.hp)
-    pokemon.handleHeal(heal, pokemon, 0)
+    pokemon.handleHeal(heal, pokemon, 0, false)
     target.handleSpecialDamage(
       (pokemon.stars === 3 ? 100 : pokemon.stars === 2 ? 50 : 25) + overHeal,
       board,
@@ -6128,7 +6129,8 @@ export class AquaRingStrategy extends AbilityStrategy {
           cell.value.handleHeal(
             pokemon.stars === 3 ? 50 : pokemon.stars === 2 ? 30 : 20,
             pokemon,
-            1
+            1,
+            crit
           )
         }
       })
@@ -6948,7 +6950,7 @@ export class FloralHealingStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     // we explicitely not trigger super.process() so that the pokemon doesn't get twice the oncast effects
-    pokemon.handleHeal(pokemon.maxPP, pokemon, 0)
+    pokemon.handleHeal(pokemon.maxPP, pokemon, 0, false)
   }
 }
 
@@ -7146,7 +7148,7 @@ export class RecoverStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    pokemon.handleHeal(0.25 * pokemon.hp, pokemon, 1)
+    pokemon.handleHeal(0.25 * pokemon.hp, pokemon, 1, crit)
   }
 }
 
@@ -7636,7 +7638,7 @@ export class AromatherapyStrategy extends AbilityStrategy {
       .forEach((cell) => {
         if (cell.value && cell.value.team === pokemon.team) {
           cell.value.status.clearNegativeStatus()
-          cell.value.handleHeal(heal, pokemon, 1)
+          cell.value.handleHeal(heal, pokemon, 1, crit)
         }
       })
   }
@@ -8150,7 +8152,8 @@ export class PollenPuffStrategy extends AbilityStrategy {
       lowestHealthAlly.handleHeal(
         pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30,
         pokemon,
-        1
+        1,
+        crit
       )
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
         id: pokemon.simulation.id,
@@ -8254,7 +8257,7 @@ export class DreamEaterStrategy extends AbilityStrategy {
         crit,
         true
       )
-      pokemon.handleHeal(takenDamage, pokemon, 1)
+      pokemon.handleHeal(takenDamage, pokemon, 1, crit)
     } else {
       target.status.triggerSleep(duration, target)
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
@@ -8350,7 +8353,7 @@ export class CrunchStrategy extends AbilityStrategy {
       true
     )
     if (death) {
-      pokemon.handleHeal(Math.ceil(0.5 * target.hp), pokemon, 0)
+      pokemon.handleHeal(Math.ceil(0.5 * target.hp), pokemon, 0, crit)
     }
   }
 }

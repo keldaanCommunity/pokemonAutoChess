@@ -10,6 +10,7 @@ import { Passive } from "../../types/enum/Passive"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { max } from "../../utils/number"
+import { chance } from "../../utils/random"
 
 export default class Status extends Schema implements IStatus {
   @type("boolean") burn = false
@@ -356,7 +357,7 @@ export default class Status extends Schema implements IStatus {
     if (this.drySkinCooldown - dt <= 0) {
       this.drySkin = false
       this.triggerDrySkin(1000)
-      pkm.handleHeal(8, pkm, 0)
+      pkm.handleHeal(8, pkm, 0, false)
     } else {
       this.drySkinCooldown -= dt
     }
@@ -422,10 +423,13 @@ export default class Status extends Schema implements IStatus {
         positionX: pkm.positionX,
         positionY: pkm.positionY
       })
+      const crit = pkm.items.has(Item.REAPER_CLOTH) ? chance(pkm.critChance) : false
       board.getAdjacentCells(pkm.positionX, pkm.positionY).forEach((cell) => {
         if (cell?.value && cell.value.team !== pkm.team) {
-          const darkHarvestDamage =
-            pkm.stars === 3 ? 40 : pkm.stars === 2 ? 20 : 10
+          let darkHarvestDamage = pkm.stars === 3 ? 40 : pkm.stars === 2 ? 20 : 10
+          if (crit) {
+            darkHarvestDamage = Math.round(darkHarvestDamage * pkm.critDamage)
+          }
 
           cell.value.handleDamage({
             damage: darkHarvestDamage,
@@ -436,7 +440,7 @@ export default class Status extends Schema implements IStatus {
           })
 
           const factor = pkm.stars === 3 ? 0.4 : pkm.stars === 2 ? 0.3 : 0.2
-          pkm.handleHeal(Math.round(darkHarvestDamage * factor), pkm, 1)
+          pkm.handleHeal(Math.round(darkHarvestDamage * factor), pkm, 1, crit)
           this.darkHarvestDamageCooldown = 1000
         }
       })
@@ -629,7 +633,7 @@ export default class Status extends Schema implements IStatus {
         pkm.passive === Passive.POISON_HEAL ||
         pkm.passive === Passive.GLIGAR
       ) {
-        pkm.handleHeal(Math.round(poisonDamage), pkm, 0)
+        pkm.handleHeal(Math.round(poisonDamage), pkm, 0, false)
       } else {
         pkm.handleDamage({
           damage: Math.round(poisonDamage),

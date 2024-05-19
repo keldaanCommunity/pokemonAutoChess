@@ -25,7 +25,8 @@ export default class PokemonState {
     pokemon: IPokemonEntity,
     heal: number,
     caster: IPokemonEntity,
-    apBoost = 0
+    apBoost: number,
+    crit: boolean
   ): void {
     if (
       pokemon.life > 0 &&
@@ -35,6 +36,9 @@ export default class PokemonState {
     ) {
       if (apBoost > 0) {
         heal *= 1 + (apBoost * caster.ap) / 100
+      }
+      if (crit) {
+        heal *= caster.critDamage
       }
       if (pokemon.effects.has(Effect.BUFF_HEAL_RECEIVED)) {
         heal *= 1.5
@@ -466,7 +470,7 @@ export default class PokemonState {
         ) {
           heal += 5
         }
-        pokemon.handleHeal(heal, pokemon, 0)
+        pokemon.handleHeal(heal, pokemon, 0, false)
         pokemon.grassHealCooldown = 2000
         pokemon.simulation.room.broadcast(Transfer.ABILITY, {
           id: pokemon.simulation.id,
@@ -535,7 +539,7 @@ export default class PokemonState {
           true
         )) {
           if (cell.value && cell.value.team === pokemon.team) {
-            cell.value.handleHeal(0.05 * cell.value.hp, pokemon, 0)
+            cell.value.handleHeal(0.05 * cell.value.hp, pokemon, 0, false)
           }
         }
       }

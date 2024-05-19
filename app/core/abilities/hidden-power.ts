@@ -210,7 +210,7 @@ export class HiddenPowerHStrategy extends HiddenPowerStrategy {
     board.forEach(
       (x: number, y: number, pokemon: PokemonEntity | undefined) => {
         if (pokemon && unown.team === pokemon.team) {
-          pokemon.handleHeal(pokemon.hp - pokemon.life, unown, 1)
+          pokemon.handleHeal(pokemon.hp - pokemon.life, unown, 1, crit)
         }
       }
     )

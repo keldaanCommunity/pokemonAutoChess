@@ -308,8 +308,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  handleHeal(heal: number, caster: IPokemonEntity, apBoost: number) {
-    return this.state.handleHeal(this, heal, caster, apBoost)
+  handleHeal(
+    heal: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ) {
+    return this.state.handleHeal(this, heal, caster, apBoost, crit)
   }
 
   addShield(shield: number, caster: IPokemonEntity, apBoost?: boolean) {
@@ -530,7 +535,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (this.name === Pkm.MINIOR_KERNEL_GREEN) {
         cells.forEach((v) => {
           if (v && v.value && v.value.team === this.team) {
-            v.value.handleHeal(physicalDamage, this, 0)
+            v.value.handleHeal(physicalDamage, this, 0, false)
           }
         })
       }
@@ -808,11 +813,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       } else if (this.effects.has(Effect.CALM_MIND)) {
         lifesteal = 0.6
       }
-      this.handleHeal(Math.ceil(lifesteal * damage), this, 0)
+      this.handleHeal(Math.ceil(lifesteal * damage), this, 0, false)
     }
 
     if (this.items.has(Item.SHELL_BELL)) {
-      this.handleHeal(Math.ceil(0.33 * damage), this, 0)
+      this.handleHeal(Math.ceil(0.33 * damage), this, 0, false)
     }
   }
 
@@ -1068,7 +1073,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (target.items.has(Item.BABIRI_BERRY)) {
       target.status.triggerProtect(2000)
-      target.handleHeal(20, target, 0)
+      target.handleHeal(20, target, 0, false)
       target.items.delete(Item.BABIRI_BERRY)
       target.refToBoardPokemon.items.delete(Item.BABIRI_BERRY)
     }
@@ -1229,7 +1234,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             value.types.has(Synergy.FIELD)
           ) {
             value.count.fieldCount++
-            value.handleHeal(heal, _pokemon, 0)
+            value.handleHeal(heal, _pokemon, 0, false)
             value.addAttackSpeed(speedBoost)
           }
         })
@@ -1287,7 +1292,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.addShield(value, this)
         break
       case Stat.HP:
-        this.handleHeal(value, this, 0)
+        this.handleHeal(value, this, 0, false)
         break
     }
   }
@@ -1324,64 +1329,64 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   eatBerry(berry: Item, stealedFrom?: PokemonEntity) {
     switch (berry) {
       case Item.AGUAV_BERRY:
-        this.handleHeal(this.hp - this.life, this, 0)
+        this.handleHeal(this.hp - this.life, this, 0, false)
         this.status.triggerConfusion(3000, this)
         break
       case Item.APICOT_BERRY:
-        this.handleHeal(20, this, 0)
+        this.handleHeal(20, this, 0, false)
         this.addSpecialDefense(20)
         break
       case Item.ASPEAR_BERRY:
         this.status.freeze = false
         this.status.freezeCooldown = 0
         this.effects.add(Effect.IMMUNITY_FREEZE)
-        this.handleHeal(20, this, 0)
+        this.handleHeal(20, this, 0, false)
         this.addAttackSpeed(15, false)
         break
       case Item.CHERI_BERRY:
         this.status.healParalysis(this)
         this.effects.add(Effect.IMMUNITY_PARALYSIS)
-        this.handleHeal(20, this, 0)
+        this.handleHeal(20, this, 0, false)
         this.addAttack(10, false)
         break
       case Item.CHESTO_BERRY:
         this.status.sleep = false
         this.status.sleepCooldown = 0
         this.effects.add(Effect.IMMUNITY_SLEEP)
-        this.handleHeal(20, this, 0)
+        this.handleHeal(20, this, 0, false)
         this.addAbilityPower(15, false)
         break
       case Item.GANLON_BERRY:
-        this.handleHeal(20, this, 0)
+        this.handleHeal(20, this, 0, false)
         this.addDefense(20)
         break
       case Item.JABOCA_BERRY:
-        this.handleHeal(20, this, 0)
+        this.handleHeal(20, this, 0, false)
         this.status.triggerSpikeArmor(10000)
         break
       case Item.LANSAT_BERRY:
-        this.handleHeal(20, this, 0)
+        this.handleHeal(20, this, 0, false)
         this.addCritChance(50)
         break
       case Item.LEPPA_BERRY:
-        this.handleHeal(20, this, 0)
+        this.handleHeal(20, this, 0, false)
         this.addPP(50)
         break
       case Item.LIECHI_BERRY:
-        this.handleHeal(20, this, 0)
+        this.handleHeal(20, this, 0, false)
         this.addAttack(15)
         break
       case Item.LUM_BERRY:
-        this.handleHeal(20, this, 0)
+        this.handleHeal(20, this, 0, false)
         this.status.clearNegativeStatus()
         this.status.triggerRuneProtect(5000)
         break
       case Item.ORAN_BERRY:
-        this.handleHeal(20, this, 0)
+        this.handleHeal(20, this, 0, false)
         this.addShield(80, this)
         break
       case Item.PECHA_BERRY:
-        this.handleHeal(50, this, 0)
+        this.handleHeal(50, this, 0, false)
         this.status.poisonOrigin = undefined
         this.status.poisonStacks = 0
         this.status.poisonDamageCooldown = 0
@@ -1391,33 +1396,33 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.status.confusion = false
         this.status.confusionCooldown = 0
         this.effects.add(Effect.IMMUNITY_CONFUSION)
-        this.handleHeal(20, this, 0)
+        this.handleHeal(20, this, 0, false)
         this.addSpecialDefense(10, false)
         break
       case Item.PETAYA_BERRY:
-        this.handleHeal(20, this, 0)
+        this.handleHeal(20, this, 0, false)
         this.addAbilityPower(80)
         break
       case Item.ROWAP_BERRY:
-        this.handleHeal(20, this, 0)
+        this.handleHeal(20, this, 0, false)
         this.status.triggerMagicBounce(10000)
         break
       case Item.RAWST_BERRY:
         this.status.healBurn(this)
         this.effects.add(Effect.IMMUNITY_BURN)
-        this.handleHeal(20, this, 0)
+        this.handleHeal(20, this, 0, false)
         this.addDefense(10, false)
         break
       case Item.SALAC_BERRY:
-        this.handleHeal(20, this, 0)
+        this.handleHeal(20, this, 0, false)
         this.addAttackSpeed(50)
         break
       case Item.SITRUS_BERRY:
         this.effects.add(Effect.BUFF_HEAL_RECEIVED)
-        this.handleHeal(20, this, 0)
+        this.handleHeal(20, this, 0, false)
         break
       case Item.BERRY_JUICE:
-        this.handleHeal(this.hp - this.life, this, 0)
+        this.handleHeal(this.hp - this.life, this, 0, false)
         break
     }
 
