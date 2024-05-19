@@ -49,12 +49,15 @@
 - Nerf Doduo line: PP 40 → 70
 - Buff Buizel line: PP 55 → 50, Attack 9/22 → 9/24
 - Buff Zangoose: HP 200 → 250, 50% less poison damage received
+- Nerf Fuecoco line: Def/SpeDef 4/5/6 → 3/4/5
+- Nerf Torkoal: HP 240 → 220, Def 10 → 8
 
 # Changes to Synergies
 
-- Buff Water: dodge 20 → 30%
-- Changed Wild 9: +120% → +100% attack 
+- Changed how Wild odds in shop work: now 1% per wild star on board + 5% on PvE rounds
+- Changed Wild 9: +120% → +100% attack
 - Added Blood Moon weather at Wild 9: +20% physical damage, +30% wound duration
+- Buff Water: dodge 20 → 30%
 - Nerf Steel 8: 130% → 120% true damage
 
 # Changes to Items

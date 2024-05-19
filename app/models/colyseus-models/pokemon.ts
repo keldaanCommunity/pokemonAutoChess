@@ -1092,8 +1092,8 @@ export class Fuecoco extends Pokemon {
   evolution = Pkm.CROCALOR
   hp = 110
   atk = 5
-  def = 4
-  speDef = 4
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 2
   skill = Ability.TORCH_SONG
@@ -1107,8 +1107,8 @@ export class Crocalor extends Pokemon {
   evolution = Pkm.SKELEDIRGE
   hp = 170
   atk = 13
-  def = 5
-  speDef = 5
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 2
   skill = Ability.TORCH_SONG
@@ -1121,8 +1121,8 @@ export class Skeledirge extends Pokemon {
   stars = 3
   hp = 350
   atk = 24
-  def = 6
-  speDef = 6
+  def = 5
+  speDef = 5
   maxPP = 100
   range = 2
   skill = Ability.TORCH_SONG
@@ -6241,9 +6241,9 @@ export class Torkoal extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.GROUND])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 240
+  hp = 220
   atk = 10
-  def = 10
+  def = 8
   speDef = 2
   maxPP = 110
   range = 1
