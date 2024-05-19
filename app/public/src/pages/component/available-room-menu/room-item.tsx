@@ -43,7 +43,7 @@ export default function RoomItem(props: {
 
   return (
     <div className="room-item my-box">
-      <span className="room-name" title={"Owner: "+props.room.metadata?.ownerName}>{props.room.metadata?.name}</span>
+      <span className="room-name" title={props.room.metadata?.ownerName ? "Owner: "+props.room.metadata?.ownerName : ""}>{props.room.metadata?.name}</span>
       {props.room.metadata?.password && (
         <img
           alt={t("private")}
@@ -58,7 +58,6 @@ export default function RoomItem(props: {
           title={t("smeargle_scribble_hint")}
           className="scribble icon"
           src="/assets/ui/scribble.png"
-          style={{ borderRadius: "50%" }}
         />
       )}
       {props.room.metadata?.noElo &&
@@ -68,9 +67,16 @@ export default function RoomItem(props: {
             title={t("no_elo")}
             className="noelo icon"
             src="/assets/ui/noelo.png"
-            style={{ borderRadius: "50%" }}
           />
         )}
+      {props.room.metadata?.gameMode === GameMode.QUICKPLAY && (
+        <img
+          alt={t("quick_play")}
+          title={t("quick_play_hint")}
+          className="quickplay icon"
+          src="/assets/ui/quickplay.png"
+        />
+      )}
       {props.room.metadata?.minRank && (
         <img
           alt={t("minimum_rank")}

@@ -87,7 +87,8 @@ export default class PreparationRoom extends Room<PreparationState> {
     // logger.debug(defaultRoomName);
     this.setState(new PreparationState(options))
     this.setMetadata(<IPreparationMetadata>{
-      ownerName: options.ownerId,
+      ownerName:
+        options.gameMode === GameMode.QUICKPLAY ? null : options.ownerId,
       minRank: options.minRank ?? null,
       noElo: options.noElo ?? false,
       gameMode: options.gameMode,
@@ -96,12 +97,10 @@ export default class PreparationRoom extends Room<PreparationState> {
       bracketId: options.bracketId ?? null
     })
     this.maxClients = 8
-    // if (options.ownerId) {
-    //   this.dispatcher.dispatch(new InitializeBotsCommand(), {
-    //     ownerId: options.ownerId
-    //   })
-    // }
-    if (options.gameMode !== GameMode.NORMAL) {
+    if (
+      options.gameMode !== GameMode.NORMAL &&
+      options.gameMode !== GameMode.QUICKPLAY
+    ) {
       this.autoDispose = false
     }
 

@@ -40,6 +40,7 @@
 
 .tournament-item .player-ranks {
   display: block;
+  min-width: 2ch;
 }
 
 .tournament-item p {
