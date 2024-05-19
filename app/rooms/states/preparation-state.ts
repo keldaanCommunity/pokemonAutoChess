@@ -39,7 +39,7 @@ export default class PreparationState
     gameMode: GameMode
   }) {
     super()
-    this.ownerId = params.ownerId ?? ""
+    this.ownerId = params.gameMode === GameMode.NORMAL ? params.ownerId ?? "" : ""
     this.name = params.roomName
     this.gameStarted = false
     this.ownerName = ""

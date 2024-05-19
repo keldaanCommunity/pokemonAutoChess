@@ -22,7 +22,7 @@
 
 .room-menu .create-room-button {
   width: 100%;
-  margin: 0 auto;
+  margin: 0.5em auto 0 auto;
 }
 
 .room-menu .rank.icon {
