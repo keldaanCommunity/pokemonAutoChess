@@ -323,7 +323,7 @@ export default class Status extends Schema implements IStatus {
     if (this.enrageDelay - dt <= 0 && !pokemon.simulation.finished) {
       this.enraged = true
       this.protect = false
-      pokemon.addAttackSpeed(100)
+      pokemon.addAttackSpeed(100, pokemon, 0, false)
     } else {
       this.enrageDelay -= dt
     }
@@ -340,7 +340,7 @@ export default class Status extends Schema implements IStatus {
     if (this.clearWingCooldown - dt <= 0) {
       this.clearWing = false
       this.triggerClearWing(1000)
-      pkm.addAttackSpeed(2, false)
+      pkm.addAttackSpeed(2, pkm, 0, false)
     } else {
       this.clearWingCooldown -= dt
     }
@@ -397,7 +397,7 @@ export default class Status extends Schema implements IStatus {
   updateSoulDew(dt: number, pkm: PokemonEntity) {
     if (this.soulDewCooldown - dt <= 0) {
       this.soulDew = false
-      pkm.addAbilityPower(8)
+      pkm.addAbilityPower(8, pkm, 0, false)
       pkm.count.soulDewCount++
       if (pkm.items.has(Item.SOUL_DEW)) {
         this.triggerSoulDew(1000)
@@ -484,7 +484,7 @@ export default class Status extends Schema implements IStatus {
 
       if (pkm.passive === Passive.GUTS && !this.guts) {
         this.guts = true
-        pkm.addAttack(5, false)
+        pkm.addAttack(5, pkm, 0, false)
       }
 
       if (pkm.items.has(Item.RAWST_BERRY)) {
@@ -533,7 +533,7 @@ export default class Status extends Schema implements IStatus {
     this.burnDamageCooldown = 1000
     if (pkm.passive === Passive.GUTS && this.poisonStacks === 0) {
       this.guts = false
-      pkm.addAttack(-5, false)
+      pkm.addAttack(-5, pkm, 0, false)
     }
   }
 
@@ -601,12 +601,12 @@ export default class Status extends Schema implements IStatus {
       }
       if (pkm.passive === Passive.GUTS && !this.guts) {
         this.guts = true
-        pkm.addAttack(5, false)
+        pkm.addAttack(5, pkm, 0, false)
       }
 
       if (pkm.passive === Passive.TOXIC_BOOST && !this.toxicBoost) {
         this.toxicBoost = true
-        pkm.addAttack(10, false)
+        pkm.addAttack(10, pkm, 0, false)
       }
 
       if (pkm.items.has(Item.PECHA_BERRY)) {
@@ -660,11 +660,11 @@ export default class Status extends Schema implements IStatus {
       this.poisonDamageCooldown = 1000
       if (pkm.passive === Passive.GUTS && !this.burn) {
         this.guts = false
-        pkm.addAttack(-5, false)
+        pkm.addAttack(-5, pkm, 0, false)
       }
       if (pkm.passive === Passive.TOXIC_BOOST) {
         this.toxicBoost = false
-        pkm.addAttack(-10, false)
+        pkm.addAttack(-10, pkm, 0, false)
       }
     } else {
       this.poisonCooldown = this.poisonCooldown - dt
@@ -788,7 +788,7 @@ export default class Status extends Schema implements IStatus {
       }
 
       if (pkm.passive === Passive.PSYDUCK) {
-        pkm.addAbilityPower(100, false)
+        pkm.addAbilityPower(100, pkm, 0, false)
       }
     }
   }
@@ -879,7 +879,7 @@ export default class Status extends Schema implements IStatus {
     if (!this.runeProtect && !pkm.effects.has(Effect.IMMUNITY_PARALYSIS)) {
       if (!this.paralysis) {
         this.paralysis = true
-        pkm.addAttackSpeed(-40)
+        pkm.addAttackSpeed(-40, pkm, 0, false)
       }
       if (pkm.simulation.weather === Weather.STORM) {
         duration *= 1.3
@@ -914,7 +914,7 @@ export default class Status extends Schema implements IStatus {
     if (this.paralysis) {
       this.paralysis = false
       this.paralysisCooldown = 0
-      pkm.addAttackSpeed(40)
+      pkm.addAttackSpeed(40, pkm, 0, false)
     }
   }
 
