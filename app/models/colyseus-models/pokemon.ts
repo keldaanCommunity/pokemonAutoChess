@@ -23,7 +23,7 @@ import {
 import {
   DEFAULT_ATK_SPEED,
   DEFAULT_CRIT_CHANCE,
-  DEFAULT_CRIT_DAMAGE,
+  DEFAULT_CRIT_POWER,
   EvolutionTime,
   SynergyTriggers
 } from "../../types/Config"
@@ -12231,8 +12231,8 @@ export class Comfey extends Pokemon {
         0,
         false
       )
-      nearestAllyWithFreeItemSlot.addCritDamage(
-        entity.critDamage - DEFAULT_CRIT_DAMAGE,
+      nearestAllyWithFreeItemSlot.addCritPower(
+        entity.critPower - DEFAULT_CRIT_POWER,
         entity,
         0,
         false

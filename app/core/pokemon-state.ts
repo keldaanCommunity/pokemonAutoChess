@@ -38,7 +38,7 @@ export default class PokemonState {
         heal *= 1 + (apBoost * caster.ap) / 100
       }
       if (crit) {
-        heal *= caster.critDamage
+        heal *= caster.critPower
       }
       if (pokemon.effects.has(Effect.BUFF_HEAL_RECEIVED)) {
         heal *= 1.5
@@ -80,7 +80,7 @@ export default class PokemonState {
   ) {
     if (pokemon.life > 0) {
       if (apBoost > 0) shield *= 1 + (caster.ap * apBoost) / 100
-      if (crit) shield *= caster.critDamage
+      if (crit) shield *= caster.critPower
       if (pokemon.status.enraged) shield *= 0.5
 
       shield = Math.round(shield)

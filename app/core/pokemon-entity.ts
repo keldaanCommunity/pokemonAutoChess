@@ -16,7 +16,7 @@ import {
 } from "../types"
 import {
   DEFAULT_CRIT_CHANCE,
-  DEFAULT_CRIT_DAMAGE,
+  DEFAULT_CRIT_POWER,
   MANA_SCARF_MANA,
   ON_ATTACK_MANA,
   SCOPE_LENS_MANA
@@ -83,7 +83,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   @type(Status) status: Status
   @type(Count) count: Count
   @type("uint8") critChance = DEFAULT_CRIT_CHANCE
-  @type("float32") critDamage = DEFAULT_CRIT_DAMAGE
+  @type("float32") critPower = DEFAULT_CRIT_POWER
   @type("int16") ap = 0
   @type("uint16") healDone: number
   @type("string") emotion: Emotion
@@ -253,7 +253,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           ([0.5, 1][this.stars - 1] ?? 1) *
             damage *
             (1 + this.ap / 100) *
-            (bounceCrit ? this.critDamage : 1)
+            (bounceCrit ? this.critPower : 1)
         )
         // not handleSpecialDamage to not trigger infinite loop between two magic bounces
         attacker?.handleDamage({
@@ -273,7 +273,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attacker.status.doubleDamage = false
       }
       if (crit && attacker && this.items.has(Item.ROCKY_HELMET) === false) {
-        specialDamage = Math.round(specialDamage * attacker.critDamage)
+        specialDamage = Math.round(specialDamage * attacker.critPower)
       }
       if (
         attacker &&
@@ -346,7 +346,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addPP(value: number, caster: IPokemonEntity, apBoost: number, crit: boolean) {
     value = Math.round(
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critDamage : 1)
+      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
 
     if (
@@ -365,26 +365,26 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     apBoost: number,
     crit: boolean
   ) {
-    // for every 5% crit chance > 100, +0.1 crit damage
+    // for every 5% crit chance > 100, +0.1 crit power
     this.critChance += value
 
     if (this.critChance > 100) {
       const overCritChance = Math.round(this.critChance - 100)
-      this.addCritDamage(overCritChance / 50, this, 0, false)
+      this.addCritPower(overCritChance / 50, this, 0, false)
       this.critChance = 100
     }
   }
 
-  addCritDamage(
+  addCritPower(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
     crit: boolean
   ) {
     value = Math.round(
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critDamage : 1)
+      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-    this.critDamage = Math.max(0, roundTo2Digits(this.critDamage + value))
+    this.critPower = Math.max(0, roundTo2Digits(this.critPower + value))
   }
 
   addMaxHP(value: number) {
@@ -399,7 +399,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean
   ) {
     value = Math.round(
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critDamage : 1)
+      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
     this.dodge = max(0.9)(this.dodge + value)
   }
@@ -411,7 +411,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean
   ) {
     value = Math.round(
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critDamage : 1)
+      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
     this.ap = min(-100)(this.ap + value)
   }
@@ -423,7 +423,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean
   ) {
     value = Math.round(
-      value * (1 + (apBoost * this.ap) / 100) * (crit ? this.critDamage : 1)
+      value * (1 + (apBoost * this.ap) / 100) * (crit ? this.critPower : 1)
     )
     this.def = min(0)(this.def + value)
   }
@@ -435,7 +435,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean
   ) {
     value = Math.round(
-      value * (1 + (apBoost * this.ap) / 100) * (crit ? this.critDamage : 1)
+      value * (1 + (apBoost * this.ap) / 100) * (crit ? this.critPower : 1)
     )
     this.speDef = min(0)(this.speDef + value)
   }
@@ -447,7 +447,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean
   ) {
     value = Math.round(
-      value * (1 + (apBoost * this.ap) / 100) * (crit ? this.critDamage : 1)
+      value * (1 + (apBoost * this.ap) / 100) * (crit ? this.critPower : 1)
     )
     this.atk = min(1)(this.atk + value)
   }
@@ -459,7 +459,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean
   ) {
     value = Math.round(
-      value * (1 + (apBoost * this.ap) / 100) * (crit ? this.critDamage : 1)
+      value * (1 + (apBoost * this.ap) / 100) * (crit ? this.critPower : 1)
     )
     const currentAtkSpeedBonus = 100 * (this.atkSpeed / 0.75 - 1)
     const atkSpeedBonus = currentAtkSpeedBonus + value
@@ -1345,8 +1345,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       case Stat.CRIT_CHANCE:
         this.addCritChance(value, this, 0, false)
         break
-      case Stat.CRIT_DAMAGE:
-        this.addCritDamage(value, this, 0, false)
+      case Stat.CRIT_POWER:
+        this.addCritPower(value, this, 0, false)
         break
       case Stat.SHIELD:
         this.addShield(value, this, 0, false)
@@ -1370,7 +1370,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.speDef = cloneForStatsReference.speDef
     this.atkSpeed = cloneForStatsReference.atkSpeed
     this.critChance = DEFAULT_CRIT_CHANCE
-    this.critDamage = DEFAULT_CRIT_DAMAGE
+    this.critPower = DEFAULT_CRIT_POWER
     this.count = new Count()
     this.status.clearNegativeStatus()
     this.effects.clear()

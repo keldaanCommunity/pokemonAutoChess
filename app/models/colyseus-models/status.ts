@@ -428,7 +428,7 @@ export default class Status extends Schema implements IStatus {
         if (cell?.value && cell.value.team !== pkm.team) {
           let darkHarvestDamage = pkm.stars === 3 ? 40 : pkm.stars === 2 ? 20 : 10
           if (crit) {
-            darkHarvestDamage = Math.round(darkHarvestDamage * pkm.critDamage)
+            darkHarvestDamage = Math.round(darkHarvestDamage * pkm.critPower)
           }
 
           cell.value.handleDamage({

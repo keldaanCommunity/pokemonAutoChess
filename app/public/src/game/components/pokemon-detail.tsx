@@ -23,7 +23,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
   range: HTMLDivElement
   atkSpeed: HTMLDivElement
   critChance: HTMLDivElement
-  critDamage: HTMLDivElement
+  critPower: HTMLDivElement
   ap: HTMLDivElement
   abilityDescription: HTMLDivElement
   passiveDescription: HTMLDivElement
@@ -44,7 +44,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     range: number,
     atkSpeed: number,
     critChance: number,
-    critDamage: number,
+    critPower: number,
     ap: number,
     pp: number,
     types: Set<Synergy>,
@@ -84,8 +84,8 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     this.critChance = document.createElement("p")
     this.critChance.textContent = critChance.toString() + "%"
 
-    this.critDamage = document.createElement("p")
-    this.critDamage.textContent = critDamage.toString()
+    this.critPower = document.createElement("p")
+    this.critPower.textContent = critPower.toString()
 
     this.ap = document.createElement("p")
     this.ap.textContent = ap.toString()
@@ -157,7 +157,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
       { stat: Stat.DEF, elm: this.def },
       { stat: Stat.ATK, elm: this.atk },
       { stat: Stat.ATK_SPEED, elm: this.atkSpeed },
-      { stat: Stat.CRIT_DAMAGE, elm: this.critDamage },
+      { stat: Stat.CRIT_POWER, elm: this.critPower },
       { stat: Stat.PP, elm: this.pp },
       { stat: Stat.SPE_DEF, elm: this.speDef },
       { stat: Stat.AP, elm: this.ap },

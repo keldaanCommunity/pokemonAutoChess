@@ -514,7 +514,7 @@ export interface IPokemonEntity {
     apBoost: number,
     crit: boolean
   ): void
-  addCritDamage(
+  addCritPower(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
@@ -562,7 +562,7 @@ export interface IPokemonEntity {
   passive: Passive
   status: Status
   count: Count
-  critDamage: number
+  critPower: number
   ap: number
   healDone: number
   shiny: boolean

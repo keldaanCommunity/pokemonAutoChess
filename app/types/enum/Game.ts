@@ -101,7 +101,7 @@ export enum Stat {
   PP = "PP",
   MAX_PP = "MAX_PP",
   CRIT_CHANCE = "CRIT_CHANCE",
-  CRIT_DAMAGE = "CRIT_DAMAGE",
+  CRIT_POWER = "CRIT_POWER",
   AP = "AP",
   SHIELD = "SHIELD"
 }
