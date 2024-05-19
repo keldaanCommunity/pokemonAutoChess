@@ -409,6 +409,7 @@ export interface IPokemon {
   action: PokemonActionState
   canBePlaced: boolean
   canBeCloned: boolean
+  canHoldItems: boolean
 }
 
 export interface IExperienceManager {

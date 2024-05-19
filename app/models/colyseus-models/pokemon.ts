@@ -169,7 +169,6 @@ export class Ditto extends Pokemon {
   skill = Ability.TRANSFORM
   passive = Passive.DITTO
   attackSprite = AttackSprite.NORMAL_MELEE
-  canHoldItems = false
 }
 
 export class Substitute extends Pokemon {
@@ -12172,7 +12171,10 @@ export class Comfey extends Pokemon {
     entity: IPokemonEntity
   }) {
     const alliesWithFreeSlots = values(team).filter(
-      (p) => p.name !== Pkm.COMFEY && p.items.size < 3
+      (p) =>
+        p.name !== Pkm.COMFEY &&
+        p.items.size < 3 &&
+        p.refToBoardPokemon.canHoldItems
     )
 
     if (alliesWithFreeSlots.length > 0) {
