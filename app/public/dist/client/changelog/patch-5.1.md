@@ -80,6 +80,7 @@
 
 # UI
 
+- Add Quick play button. In one click, create or join a lobby that auto start when 8 players joined. Elo enabled, all levels accepted, no bots, no room owner, no ready check.
 - Add an option to disable damage numbers
 - Add a button to quickly change avatar from collection screen
 - Player damage is now computed immediately on victory instead of on round change
