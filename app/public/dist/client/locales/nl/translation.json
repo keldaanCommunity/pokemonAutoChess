@@ -1501,7 +1501,7 @@
     "HUMAN": "Je hele team geneest voor een percentage van de schade die ze aanrichten met aanvallen en vaardigheden",
     "AQUATIC": "AQUATIC pokemons verkorten de duur van statusaandoeningen voor je hele team",
     "BUG": "Aan het begin van het gevecht worden je sterkste BUG Pokémon gekloond",
-    "FLYING": "FLYING pokemons vliegen weg als ze onder een bepaalde hoeveelheid HP vallen",
+    "FLYING": "FLYING pokemons vliegen weg als ze onder een bepaalde hoeveelheid HP vallen, tenzij PARALYSIS, FREEZE of SLEEP",
     "FLORA": "Als de eerste FLORA pokemon KO is, bloeit er een bloem. Het ontvangt een willekeurig item van elke FLORA bondgenoot KO.",
     "ROCK": "ROCK pokemons krijgen DEF en zijn beter bestand tegen kritieke schade",
     "GHOST": "GHOST pokemons heeft 25% kans om te SILENCE bij een treffer en spreekt aan het begin van het gevecht verschillende vervloekingen uit over de tegenstander.",

@@ -1797,7 +1797,7 @@
     "HUMAN": "Toda a sua equipe cura uma porcentagem do dano causado com ataques e habilidades",
     "AQUATIC": "Os pokémons AQUATIC reduzem a duração das afecções de estado de toda a sua equipa",
     "BUG": "No início do combate, seus pokémons BUG mais fortes são duplicados",
-    "FLYING": "Os pokémons FLYING voam para longe quando caem abaixo de uma certa quantidade de HP",
+    "FLYING": "Os pokémons FLYING voam para longe quando caem abaixo de uma certa quantidade de HP, a menos que PARALYSIS, FREEZE ou SLEEP",
     "FLORA": "Quando o primeiro pokemon FLORA é KO, uma flor desabrocha. Recebe um item aleatório de cada aliado FLORA KO.",
     "ROCK": "Pokémons ROCK ganham DEF e resistem melhor a danos críticos",
     "GHOST": "Os pokémons GHOST tem 25% de chance de SILENCE ao ser atingido e lança várias maldições nos adversários no início do combate",
