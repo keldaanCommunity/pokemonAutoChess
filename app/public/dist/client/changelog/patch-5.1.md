@@ -51,6 +51,7 @@
 - Buff Zangoose: HP 200 → 250, 50% less poison damage received
 - Nerf Fuecoco line: Def/SpeDef 4/5/6 → 3/4/5
 - Nerf Torkoal: HP 240 → 220, Def 10 → 8
+- Ditto can now hold items. Items are dropped when Ditto is transforming to another pokemon.
 
 # Changes to Synergies
 
@@ -98,6 +99,7 @@
 - Fixed emote menu when player uses a shiny avatar
 - Fix burn and poison damage sometimes applying too soon after the second time the status is applied
 - Fixed no music when spectating game
+- Comfey can no longer be hold by pokemons that cannot hold items like Unowns
 - Fixed Comfey being duplicated when given to flora spawn
 - Flying protections no longer are reset after resurection
 
