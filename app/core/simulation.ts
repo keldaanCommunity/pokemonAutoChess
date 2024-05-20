@@ -429,11 +429,11 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     if (item === Item.SWIFT_WING) {
-      pokemon.addDodgeChance(0.1)
+      pokemon.addDodgeChance(0.1, pokemon, 0, false)
     }
 
     if (item === Item.FLAME_ORB) {
-      pokemon.addAttack(pokemon.baseAtk)
+      pokemon.addAttack(pokemon.baseAtk, pokemon, 0, false)
       pokemon.status.triggerBurn(
         60000,
         pokemon as PokemonEntity,
@@ -442,7 +442,7 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     if (item === Item.TOXIC_ORB) {
-      pokemon.addAttack(pokemon.baseAtk)
+      pokemon.addAttack(pokemon.baseAtk, pokemon, 0, false)
       pokemon.status.triggerPoison(
         60000,
         pokemon as PokemonEntity,
@@ -463,7 +463,7 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     if (pokemon.types.has(Synergy.WATER)) {
-      pokemon.addDodgeChance(0.3)
+      pokemon.addDodgeChance(0.3, pokemon, 0, false)
     }
   }
 
@@ -472,10 +472,15 @@ export default class Simulation extends Schema implements ISimulation {
     if (weatherEffect) {
       switch (weatherEffect) {
         case Effect.WINDY:
-          pokemon.addDodgeChance(pokemon.types.has(Synergy.FLYING) ? 0.2 : 0.1)
+          pokemon.addDodgeChance(
+            pokemon.types.has(Synergy.FLYING) ? 0.2 : 0.1,
+            pokemon,
+            0,
+            false
+          )
           break
         case Effect.NIGHT:
-          pokemon.addCritChance(10)
+          pokemon.addCritChance(10, pokemon, 0, false)
           break
       }
       pokemon.effects.add(weatherEffect)
@@ -489,11 +494,11 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.effects.has(Effect.DRAGON_SCALES) ||
           pokemon.effects.has(Effect.DRAGON_DANCE)
         ) {
-          pokemon.addShield(30 * pokemon.stars, pokemon, false)
+          pokemon.addShield(30 * pokemon.stars, pokemon, 0, false)
         }
         if (pokemon.effects.has(Effect.DRAGON_DANCE)) {
-          pokemon.addAbilityPower(10 * pokemon.stars)
-          pokemon.addAttackSpeed(10 * pokemon.stars)
+          pokemon.addAbilityPower(10 * pokemon.stars, pokemon, 0, false)
+          pokemon.addAttackSpeed(10 * pokemon.stars, pokemon, 0, false)
         }
         let shieldBonus = 0
         if (pokemon.effects.has(Effect.STAMINA)) {
@@ -509,7 +514,7 @@ export default class Simulation extends Schema implements ISimulation {
           shieldBonus += 50
         }
         if (shieldBonus >= 0) {
-          pokemon.addShield(shieldBonus, pokemon)
+          pokemon.addShield(shieldBonus, pokemon, 0, false)
           const cells = this.board.getAdjacentCells(
             pokemon.positionX,
             pokemon.positionY
@@ -517,7 +522,7 @@ export default class Simulation extends Schema implements ISimulation {
 
           cells.forEach((cell) => {
             if (cell.value && pokemon.team == cell.value.team) {
-              cell.value.addShield(shieldBonus, pokemon)
+              cell.value.addShield(shieldBonus, pokemon, 0, false)
             }
           })
         }
@@ -528,7 +533,7 @@ export default class Simulation extends Schema implements ISimulation {
               pokemon.positionY
             )
             if (ally && ally.team === pokemon.team) {
-              ally.addAbilityPower(40)
+              ally.addAbilityPower(40, pokemon, 0, false)
             }
           })
         }
@@ -539,7 +544,7 @@ export default class Simulation extends Schema implements ISimulation {
               pokemon.positionY
             )
             if (ally && ally.team === pokemon.team) {
-              ally.addShield(Math.ceil(0.2 * ally.hp), ally, false)
+              ally.addShield(Math.ceil(0.2 * ally.hp), ally, 0, false)
               ally.status.triggerRuneProtect(5000)
             }
           })
@@ -552,7 +557,7 @@ export default class Simulation extends Schema implements ISimulation {
               pokemon.positionY
             )
             if (value) {
-              value.addAttackSpeed(20)
+              value.addAttackSpeed(20, pokemon, 0, false)
             }
           })
         }
@@ -603,6 +608,7 @@ export default class Simulation extends Schema implements ISimulation {
           enemyWithHighestHP.addShield(
             Math.round(-0.5 * enemyWithHighestHP.shield),
             enemyWithHighestHP,
+            0,
             false
           )
           enemyWithHighestHP.status.triggerFlinch(
@@ -629,7 +635,10 @@ export default class Simulation extends Schema implements ISimulation {
         if (enemyWithHighestATK) {
           enemyWithHighestATK = enemyWithHighestATK as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
           enemyWithHighestATK.addAttack(
-            Math.round(-0.5 * enemyWithHighestATK.atk)
+            Math.round(-0.5 * enemyWithHighestATK.atk),
+            enemyWithHighestATK,
+            0,
+            false
           )
           enemyWithHighestATK.status.triggerParalysis(7000, enemyWithHighestATK)
         }
@@ -646,7 +655,7 @@ export default class Simulation extends Schema implements ISimulation {
         })
         if (enemyWithHighestAP) {
           enemyWithHighestAP = enemyWithHighestAP as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
-          enemyWithHighestAP.addAbilityPower(-50)
+          enemyWithHighestAP.addAbilityPower(-50, enemyWithHighestAP, 0, false)
           enemyWithHighestAP.status.triggerSilence(
             7000,
             enemyWithHighestAP,
@@ -673,24 +682,24 @@ export default class Simulation extends Schema implements ISimulation {
       switch (effect) {
         case Effect.HONE_CLAWS:
           if (types.has(Synergy.DARK)) {
-            pokemon.addCritChance(40)
-            pokemon.addCritDamage(0.25)
+            pokemon.addCritChance(40, pokemon, 0, false)
+            pokemon.addCritPower(0.25, pokemon, 0, false)
             pokemon.effects.add(Effect.HONE_CLAWS)
           }
           break
 
         case Effect.ASSURANCE:
           if (types.has(Synergy.DARK)) {
-            pokemon.addCritChance(55)
-            pokemon.addCritDamage(0.35)
+            pokemon.addCritChance(55, pokemon, 0, false)
+            pokemon.addCritPower(0.35, pokemon, 0, false)
             pokemon.effects.add(Effect.ASSURANCE)
           }
           break
 
         case Effect.BEAT_UP:
           if (types.has(Synergy.DARK)) {
-            pokemon.addCritChance(70)
-            pokemon.addCritDamage(0.5)
+            pokemon.addCritChance(70, pokemon, 0, false)
+            pokemon.addCritPower(0.5, pokemon, 0, false)
             pokemon.effects.add(Effect.BEAT_UP)
           }
           break
@@ -856,21 +865,21 @@ export default class Simulation extends Schema implements ISimulation {
         case Effect.AMNESIA:
           if (types.has(Synergy.PSYCHIC)) {
             pokemon.effects.add(Effect.AMNESIA)
-            pokemon.addAbilityPower(50)
+            pokemon.addAbilityPower(50, pokemon, 0, false)
           }
           break
 
         case Effect.LIGHT_SCREEN:
           if (types.has(Synergy.PSYCHIC)) {
             pokemon.effects.add(Effect.LIGHT_SCREEN)
-            pokemon.addAbilityPower(100)
+            pokemon.addAbilityPower(100, pokemon, 0, false)
           }
           break
 
         case Effect.EERIE_SPELL:
           if (types.has(Synergy.PSYCHIC)) {
             pokemon.effects.add(Effect.EERIE_SPELL)
-            pokemon.addAbilityPower(150)
+            pokemon.addAbilityPower(150, pokemon, 0, false)
           }
           break
 
@@ -946,21 +955,21 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.BATTLE_ARMOR:
           if (types.has(Synergy.ROCK)) {
-            pokemon.addDefense(5)
+            pokemon.addDefense(5, pokemon, 0, false)
             pokemon.effects.add(Effect.BATTLE_ARMOR)
           }
           break
 
         case Effect.MOUTAIN_RESISTANCE:
           if (types.has(Synergy.ROCK)) {
-            pokemon.addDefense(15)
+            pokemon.addDefense(15, pokemon, 0, false)
             pokemon.effects.add(Effect.MOUTAIN_RESISTANCE)
           }
           break
 
         case Effect.DIAMOND_STORM:
           if (types.has(Synergy.ROCK)) {
-            pokemon.addDefense(30)
+            pokemon.addDefense(30, pokemon, 0, false)
             pokemon.effects.add(Effect.DIAMOND_STORM)
           }
           break
@@ -993,27 +1002,27 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.COOL_BREEZE:
           pokemon.effects.add(Effect.COOL_BREEZE)
-          pokemon.addSpecialDefense(2)
+          pokemon.addSpecialDefense(2, pokemon, 0, false)
           break
 
         case Effect.CHILLY:
           pokemon.effects.add(Effect.FROSTY)
-          pokemon.addSpecialDefense(2)
+          pokemon.addSpecialDefense(2, pokemon, 0, false)
           break
 
         case Effect.FROSTY:
           pokemon.effects.add(Effect.FROSTY)
-          pokemon.addSpecialDefense(6)
+          pokemon.addSpecialDefense(6, pokemon, 0, false)
           break
 
         case Effect.FREEZING:
           pokemon.effects.add(Effect.FROSTY)
-          pokemon.addSpecialDefense(20)
+          pokemon.addSpecialDefense(20, pokemon, 0, false)
           break
 
         case Effect.SHEER_COLD:
           pokemon.effects.add(Effect.SHEER_COLD)
-          pokemon.addSpecialDefense(30)
+          pokemon.addSpecialDefense(30, pokemon, 0, false)
           break
 
         case Effect.POISONOUS:
@@ -1071,9 +1080,19 @@ export default class Simulation extends Schema implements ISimulation {
               [Effect.LINK_CABLE]: 0.1,
               [Effect.GOOGLE_SPECS]: 0.2
             }[effect]
-            pokemon.addAttack(attackBoost * pokemon.baseAtk * nbItems)
-            pokemon.addAbilityPower(apBoost * nbItems)
-            pokemon.addShield(shieldBoost * pokemon.hp * nbItems, pokemon)
+            pokemon.addAttack(
+              attackBoost * pokemon.baseAtk * nbItems,
+              pokemon,
+              0,
+              false
+            )
+            pokemon.addAbilityPower(apBoost * nbItems, pokemon, 0, false)
+            pokemon.addShield(
+              shieldBoost * pokemon.hp * nbItems,
+              pokemon,
+              0,
+              false
+            )
             pokemon.effects.add(Effect.GOOGLE_SPECS)
           }
           break
@@ -1110,8 +1129,8 @@ export default class Simulation extends Schema implements ISimulation {
           if (pokemon.inLightCell) {
             pokemon.status.light = true
             pokemon.effects.add(Effect.SHINING_RAY)
-            pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), false)
-            pokemon.addAbilityPower(20, false)
+            pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
+            pokemon.addAbilityPower(20, pokemon, 0, false)
           }
           break
 
@@ -1119,8 +1138,8 @@ export default class Simulation extends Schema implements ISimulation {
           if (pokemon.inLightCell) {
             pokemon.status.light = true
             pokemon.effects.add(Effect.LIGHT_PULSE)
-            pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), false)
-            pokemon.addAbilityPower(20, false)
+            pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
+            pokemon.addAbilityPower(20, pokemon, 0, false)
           }
           break
 
@@ -1128,11 +1147,16 @@ export default class Simulation extends Schema implements ISimulation {
           if (pokemon.inLightCell) {
             pokemon.status.light = true
             pokemon.effects.add(Effect.ETERNAL_LIGHT)
-            pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), false)
-            pokemon.addAbilityPower(20, false)
+            pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
+            pokemon.addAbilityPower(20, pokemon, 0, false)
             pokemon.status.triggerRuneProtect(10000)
-            pokemon.addDefense(0.5 * pokemon.baseDef)
-            pokemon.addSpecialDefense(0.5 * pokemon.baseSpeDef)
+            pokemon.addDefense(0.5 * pokemon.baseDef, pokemon, 0, false)
+            pokemon.addSpecialDefense(
+              0.5 * pokemon.baseSpeDef,
+              pokemon,
+              0,
+              false
+            )
           }
           break
 
@@ -1140,12 +1164,17 @@ export default class Simulation extends Schema implements ISimulation {
           if (pokemon.inLightCell) {
             pokemon.status.light = true
             pokemon.effects.add(Effect.MAX_ILLUMINATION)
-            pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), false)
-            pokemon.addAbilityPower(20, false)
+            pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
+            pokemon.addAbilityPower(20, pokemon, 0, false)
             pokemon.status.triggerRuneProtect(10000)
-            pokemon.addDefense(0.5 * pokemon.baseDef)
-            pokemon.addSpecialDefense(0.5 * pokemon.baseSpeDef)
-            pokemon.addShield(100, pokemon)
+            pokemon.addDefense(0.5 * pokemon.baseDef, pokemon, 0, false)
+            pokemon.addSpecialDefense(
+              0.5 * pokemon.baseSpeDef,
+              pokemon,
+              0,
+              false
+            )
+            pokemon.addShield(100, pokemon, 0, false)
             pokemon.status.resurection = true
           }
           break
@@ -1153,28 +1182,28 @@ export default class Simulation extends Schema implements ISimulation {
         case Effect.QUICK_FEET:
           if (types.has(Synergy.WILD)) {
             pokemon.effects.add(Effect.QUICK_FEET)
-            pokemon.addAttack(Math.ceil(0.3 * pokemon.baseAtk))
+            pokemon.addAttack(Math.ceil(0.3 * pokemon.baseAtk), pokemon, 0, false)
           }
           break
 
         case Effect.RUN_AWAY:
           if (types.has(Synergy.WILD)) {
             pokemon.effects.add(Effect.RUN_AWAY)
-            pokemon.addAttack(Math.ceil(0.5 * pokemon.baseAtk))
+            pokemon.addAttack(Math.ceil(0.5 * pokemon.baseAtk), pokemon, 0, false)
           }
           break
 
         case Effect.HUSTLE:
           if (types.has(Synergy.WILD)) {
             pokemon.effects.add(Effect.HUSTLE)
-            pokemon.addAttack(Math.ceil(0.8 * pokemon.baseAtk))
+            pokemon.addAttack(Math.ceil(0.8 * pokemon.baseAtk), pokemon, 0, false)
           }
           break
 
         case Effect.BERSERK:
           if (types.has(Synergy.WILD)) {
             pokemon.effects.add(Effect.BERSERK)
-            pokemon.addAttack(Math.ceil(1.0 * pokemon.baseAtk))
+            pokemon.addAttack(Math.ceil(1.0 * pokemon.baseAtk), pokemon, 0, false)
             pokemon.status.enrageDelay -= 5000
           }
           break
@@ -1207,10 +1236,10 @@ export default class Simulation extends Schema implements ISimulation {
       this.weather === Weather.SANDSTORM &&
       pokemon.passive === Passive.DRY_SKIN
     ) {
-      pokemon.addDodgeChance(0.25)
+      pokemon.addDodgeChance(0.25, pokemon, 0, false)
     }
     if (this.weather === Weather.SUN && pokemon.passive === Passive.DRY_SKIN) {
-      pokemon.addAbilityPower(50, false)
+      pokemon.addAbilityPower(50, pokemon, 0, false)
     }
   }
 

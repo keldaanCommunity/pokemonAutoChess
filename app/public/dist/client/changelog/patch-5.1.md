@@ -80,6 +80,7 @@
 - When a regional pokemon is a variant of another family (ie. Alolan Graveler vs Graveler), it will replace the original family in your shops
 - New weather: Blood moon, unlocked at Wild 9
 - The additional 1 gold that you get when winning a round is obtained immediately on victory, and no longer on round change
+- Critical damage is now renamed Critical power. Ability crits now also use critical power stat as multiplier for heals, buffs and debuffs values that scale with Ability Power.
 
 # UI
 

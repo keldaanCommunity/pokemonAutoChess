@@ -14,7 +14,7 @@ import {
 } from "../../../../types"
 import {
   DEFAULT_CRIT_CHANCE,
-  DEFAULT_CRIT_DAMAGE
+  DEFAULT_CRIT_POWER
 } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import {
@@ -67,7 +67,7 @@ export default class PokemonSprite extends DraggableObject {
   positionY: number
   attackSprite: AttackSprite
   team: number | undefined
-  critDamage: number
+  critPower: number
   ap: number
   life: number | undefined
   shield: number | undefined
@@ -240,11 +240,11 @@ export default class PokemonSprite extends DraggableObject {
       this.team = p.team
       this.shield = p.shield
       this.life = p.life
-      this.critDamage = p.critDamage
+      this.critPower = p.critPower
       this.ap = p.ap
       this.critChance = p.critChance
     } else {
-      this.critDamage = DEFAULT_CRIT_DAMAGE
+      this.critPower = DEFAULT_CRIT_POWER
       this.ap = 0
       this.critChance = DEFAULT_CRIT_CHANCE
     }
@@ -319,7 +319,7 @@ export default class PokemonSprite extends DraggableObject {
       this.range,
       this.atkSpeed,
       this.critChance,
-      this.critDamage,
+      this.critPower,
       this.ap,
       this.pp || this.maxPP,
       this.types,
@@ -414,7 +414,7 @@ export default class PokemonSprite extends DraggableObject {
         this.projectile?.once(
           Phaser.Animations.Events.ANIMATION_COMPLETE,
           () => {
-          this.projectile?.destroy()
+            this.projectile?.destroy()
           }
         )
       } else if (

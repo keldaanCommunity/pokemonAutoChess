@@ -139,7 +139,7 @@ class GameContainer {
         "orientation",
         "action",
         "critChance",
-        "critDamage",
+        "critPower",
         "ap",
         "atkSpeed",
         "life",
