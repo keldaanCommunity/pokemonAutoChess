@@ -98,6 +98,7 @@
 - Fixed emote menu when player uses a shiny avatar
 - Fix burn and poison damage sometimes applying too soon after the second time the status is applied
 - Fixed no music when spectating game
+- Fixed Comfey being duplicated when given to flora spawn
 - Flying protections no longer are reset after resurection
 
 # Misc

@@ -32,7 +32,7 @@ import {
   Stat,
   Team
 } from "../types/enum/Game"
-import { Berries, Item } from "../types/enum/Item"
+import { Berries, Item, SpecialItems } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
@@ -1241,6 +1241,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (floraSpawn && randomItem && floraSpawn.items.size < 3) {
         floraSpawn.items.add(randomItem)
         floraSpawn.simulation.applyItemEffect(floraSpawn, randomItem)
+        target.items.delete(randomItem)
       }
     }
 
