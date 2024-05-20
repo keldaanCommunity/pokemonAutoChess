@@ -60,6 +60,7 @@
 - Added Blood Moon weather at Wild 9: +20% physical damage, +30% wound duration
 - Buff Water: dodge 20 → 30%
 - Nerf Steel 8: 130% → 120% true damage
+- Nerf Flying 8: removed paralysis on take off
 
 # Changes to Items
 
@@ -81,6 +82,7 @@
 - When a regional pokemon is a variant of another family (ie. Alolan Graveler vs Graveler), it will replace the original family in your shops
 - New weather: Blood moon, unlocked at Wild 9
 - The additional 1 gold that you get when winning a round is obtained immediately on victory, and no longer on round change
+- Critical damage is now renamed Critical power. Ability crits now also use critical power stat as multiplier for heals, buffs and debuffs values that scale with Ability Power.
 
 # UI
 
@@ -98,6 +100,8 @@
 - Fix burn and poison damage sometimes applying too soon after the second time the status is applied
 - Fixed no music when spectating game
 - Comfey can no longer be hold by pokemons that cannot hold items like Unowns
+- Fixed Comfey being duplicated when given to flora spawn
+- Flying protections no longer are reset after resurection
 
 # Misc
 

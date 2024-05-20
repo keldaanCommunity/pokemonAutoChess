@@ -637,10 +637,10 @@ export default class BattleManager {
               pkm.detail.critChance.textContent =
                 pokemon.critChance.toString() + "%"
             }
-          } else if (field === "critDamage") {
-            pkm.critDamage = parseFloat(pokemon.critDamage.toFixed(2))
+          } else if (field === "critPower") {
+            pkm.critPower = parseFloat(pokemon.critPower.toFixed(2))
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-              pkm.detail.critDamage.textContent = pokemon.critDamage.toFixed(2)
+              pkm.detail.critPower.textContent = pokemon.critPower.toFixed(2)
             }
           } else if (field === "ap") {
             value > previousValue &&

@@ -10,6 +10,7 @@ import { Passive } from "../../types/enum/Passive"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { max } from "../../utils/number"
+import { chance } from "../../utils/random"
 
 export default class Status extends Schema implements IStatus {
   @type("boolean") burn = false
@@ -322,7 +323,7 @@ export default class Status extends Schema implements IStatus {
     if (this.enrageDelay - dt <= 0 && !pokemon.simulation.finished) {
       this.enraged = true
       this.protect = false
-      pokemon.addAttackSpeed(100)
+      pokemon.addAttackSpeed(100, pokemon, 0, false)
     } else {
       this.enrageDelay -= dt
     }
@@ -339,7 +340,7 @@ export default class Status extends Schema implements IStatus {
     if (this.clearWingCooldown - dt <= 0) {
       this.clearWing = false
       this.triggerClearWing(1000)
-      pkm.addAttackSpeed(2, false)
+      pkm.addAttackSpeed(2, pkm, 0, false)
     } else {
       this.clearWingCooldown -= dt
     }
@@ -356,7 +357,7 @@ export default class Status extends Schema implements IStatus {
     if (this.drySkinCooldown - dt <= 0) {
       this.drySkin = false
       this.triggerDrySkin(1000)
-      pkm.handleHeal(8, pkm, 0)
+      pkm.handleHeal(8, pkm, 0, false)
     } else {
       this.drySkinCooldown -= dt
     }
@@ -396,7 +397,7 @@ export default class Status extends Schema implements IStatus {
   updateSoulDew(dt: number, pkm: PokemonEntity) {
     if (this.soulDewCooldown - dt <= 0) {
       this.soulDew = false
-      pkm.addAbilityPower(8)
+      pkm.addAbilityPower(8, pkm, 0, false)
       pkm.count.soulDewCount++
       if (pkm.items.has(Item.SOUL_DEW)) {
         this.triggerSoulDew(1000)
@@ -422,10 +423,13 @@ export default class Status extends Schema implements IStatus {
         positionX: pkm.positionX,
         positionY: pkm.positionY
       })
+      const crit = pkm.items.has(Item.REAPER_CLOTH) ? chance(pkm.critChance) : false
       board.getAdjacentCells(pkm.positionX, pkm.positionY).forEach((cell) => {
         if (cell?.value && cell.value.team !== pkm.team) {
-          const darkHarvestDamage =
-            pkm.stars === 3 ? 40 : pkm.stars === 2 ? 20 : 10
+          let darkHarvestDamage = pkm.stars === 3 ? 40 : pkm.stars === 2 ? 20 : 10
+          if (crit) {
+            darkHarvestDamage = Math.round(darkHarvestDamage * pkm.critPower)
+          }
 
           cell.value.handleDamage({
             damage: darkHarvestDamage,
@@ -436,7 +440,7 @@ export default class Status extends Schema implements IStatus {
           })
 
           const factor = pkm.stars === 3 ? 0.4 : pkm.stars === 2 ? 0.3 : 0.2
-          pkm.handleHeal(Math.round(darkHarvestDamage * factor), pkm, 1)
+          pkm.handleHeal(Math.round(darkHarvestDamage * factor), pkm, 1, crit)
           this.darkHarvestDamageCooldown = 1000
         }
       })
@@ -480,7 +484,7 @@ export default class Status extends Schema implements IStatus {
 
       if (pkm.passive === Passive.GUTS && !this.guts) {
         this.guts = true
-        pkm.addAttack(5, false)
+        pkm.addAttack(5, pkm, 0, false)
       }
 
       if (pkm.items.has(Item.RAWST_BERRY)) {
@@ -529,7 +533,7 @@ export default class Status extends Schema implements IStatus {
     this.burnDamageCooldown = 1000
     if (pkm.passive === Passive.GUTS && this.poisonStacks === 0) {
       this.guts = false
-      pkm.addAttack(-5, false)
+      pkm.addAttack(-5, pkm, 0, false)
     }
   }
 
@@ -597,12 +601,12 @@ export default class Status extends Schema implements IStatus {
       }
       if (pkm.passive === Passive.GUTS && !this.guts) {
         this.guts = true
-        pkm.addAttack(5, false)
+        pkm.addAttack(5, pkm, 0, false)
       }
 
       if (pkm.passive === Passive.TOXIC_BOOST && !this.toxicBoost) {
         this.toxicBoost = true
-        pkm.addAttack(10, false)
+        pkm.addAttack(10, pkm, 0, false)
       }
 
       if (pkm.items.has(Item.PECHA_BERRY)) {
@@ -629,7 +633,7 @@ export default class Status extends Schema implements IStatus {
         pkm.passive === Passive.POISON_HEAL ||
         pkm.passive === Passive.GLIGAR
       ) {
-        pkm.handleHeal(Math.round(poisonDamage), pkm, 0)
+        pkm.handleHeal(Math.round(poisonDamage), pkm, 0, false)
       } else {
         pkm.handleDamage({
           damage: Math.round(poisonDamage),
@@ -656,11 +660,11 @@ export default class Status extends Schema implements IStatus {
       this.poisonDamageCooldown = 1000
       if (pkm.passive === Passive.GUTS && !this.burn) {
         this.guts = false
-        pkm.addAttack(-5, false)
+        pkm.addAttack(-5, pkm, 0, false)
       }
       if (pkm.passive === Passive.TOXIC_BOOST) {
         this.toxicBoost = false
-        pkm.addAttack(-10, false)
+        pkm.addAttack(-10, pkm, 0, false)
       }
     } else {
       this.poisonCooldown = this.poisonCooldown - dt
@@ -784,7 +788,7 @@ export default class Status extends Schema implements IStatus {
       }
 
       if (pkm.passive === Passive.PSYDUCK) {
-        pkm.addAbilityPower(100, false)
+        pkm.addAbilityPower(100, pkm, 0, false)
       }
     }
   }
@@ -875,7 +879,7 @@ export default class Status extends Schema implements IStatus {
     if (!this.runeProtect && !pkm.effects.has(Effect.IMMUNITY_PARALYSIS)) {
       if (!this.paralysis) {
         this.paralysis = true
-        pkm.addAttackSpeed(-40)
+        pkm.addAttackSpeed(-40, pkm, 0, false)
       }
       if (pkm.simulation.weather === Weather.STORM) {
         duration *= 1.3
@@ -910,7 +914,7 @@ export default class Status extends Schema implements IStatus {
     if (this.paralysis) {
       this.paralysis = false
       this.paralysisCooldown = 0
-      pkm.addAttackSpeed(40)
+      pkm.addAttackSpeed(40, pkm, 0, false)
     }
   }
 
@@ -994,7 +998,7 @@ export default class Status extends Schema implements IStatus {
   updateResurecting(dt: number, pokemon: PokemonEntity) {
     if (this.resurectingCooldown - dt <= 0) {
       this.resurecting = false
-      pokemon.resetStats()
+      pokemon.resurrect()
       pokemon.toMovingState()
       pokemon.cooldown = 0
     } else {

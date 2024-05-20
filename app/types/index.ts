@@ -466,20 +466,61 @@ export interface IPokemonEntity {
   simulation: ISimulation
   refToBoardPokemon: IPokemon
   applyStat(stat: Stat, value: number): void
-  addAbilityPower(value: number): void
-  addPP(pp: number): void
-  addAttack(atk: number): void
-  addAttackSpeed(as: number): void
+  addAbilityPower(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
+  addPP(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
+  addAttack(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
+  addAttackSpeed(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
   addMaxHP(life: number): void
   addShield(
-    shieldBonus: number,
-    pokemon: IPokemonEntity,
-    apBoost?: boolean
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
   ): void
-  addDefense(value: number, apBoost?: boolean): void
-  addSpecialDefense(value: number, apBoost?: boolean): void
-  addCritChance(value: number): void
-  addCritDamage(value: number, apBoost?: boolean): void
+  addDefense(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
+  addSpecialDefense(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
+  addCritChance(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
+  addCritPower(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
   update(
     dt: number,
     board: Board,
@@ -522,7 +563,7 @@ export interface IPokemonEntity {
   passive: Passive
   status: Status
   count: Count
-  critDamage: number
+  critPower: number
   ap: number
   healDone: number
   shiny: boolean
