@@ -5054,9 +5054,9 @@ export class EruptionStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 3 ? 100 : pokemon.stars === 2 ? 50 : 30
+    const damage = pokemon.stars === 1 ? 30 : pokemon.stars === 2 ? 50 : 100
     const numberOfProjectiles =
-      pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 30 : 20
+      pokemon.stars === 1 ? 15 : pokemon.stars === 2 ? 25 : 40
 
     for (let i = 0; i < numberOfProjectiles; i++) {
       const x = randomBetween(0, BOARD_WIDTH - 1)

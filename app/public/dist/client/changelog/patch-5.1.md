@@ -51,6 +51,7 @@
 - Buff Zangoose: HP 200 → 250, 50% less poison damage received
 - Nerf Fuecoco line: Def/SpeDef 4/5/6 → 3/4/5
 - Nerf Torkoal: HP 240 → 220, Def 10 → 8
+- Nerf Eruption (Numel): 20/30/40 → 15/25/40 projectiles
 - Ditto can now hold items. Items are dropped when Ditto is transforming to another pokemon.
 
 # Changes to Synergies
