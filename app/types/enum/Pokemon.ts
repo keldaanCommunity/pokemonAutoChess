@@ -784,7 +784,13 @@ export enum Pkm {
   PHANPY = "PHANPY",
   DONPHAN = "DONPHAN",
   SPOINK = "SPOINK",
-  GRUMPIG = "GRUMPIG"
+  GRUMPIG = "GRUMPIG",
+  SINISTEA = "SINISTEA",
+  POLTEAGEIST = "POLTEAGEIST",
+  FERROSEED = "FERROSEED",
+  FERROTHORN = "FERROTHORN",
+  GOLETT = "GOLETT",
+  GOLURK = "GOLURK"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1571,7 +1577,13 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.PHANPY]: "0231",
   [Pkm.DONPHAN]: "0232",
   [Pkm.SPOINK]: "0325",
-  [Pkm.GRUMPIG]: "0326"
+  [Pkm.GRUMPIG]: "0326",
+  [Pkm.SINISTEA]: "0854",
+  [Pkm.POLTEAGEIST]: "0855",
+  [Pkm.FERROSEED]: "0597",
+  [Pkm.FERROTHORN]: "0598",
+  [Pkm.GOLETT]: "0622",
+  [Pkm.GOLURK]: "0623"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2358,7 +2370,13 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.PHANPY]: Pkm.PHANPY,
   [Pkm.DONPHAN]: Pkm.PHANPY,
   [Pkm.SPOINK]: Pkm.SPOINK,
-  [Pkm.GRUMPIG]: Pkm.SPOINK
+  [Pkm.GRUMPIG]: Pkm.SPOINK,
+  [Pkm.SINISTEA]: Pkm.SINISTEA,
+  [Pkm.POLTEAGEIST]: Pkm.SINISTEA,
+  [Pkm.FERROSEED]: Pkm.FERROSEED,
+  [Pkm.FERROTHORN]: Pkm.FERROSEED,
+  [Pkm.GOLETT]: Pkm.GOLETT,
+  [Pkm.GOLURK]: Pkm.GOLETT
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
@@ -6436,5 +6454,35 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Hop,
     emote: AnimationType.Shoot
+  },
+  [Pkm.SINISTEA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.POLTEAGEIST]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.FERROSEED]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Special0,
+    emote: AnimationType.DeepBreath
+  },
+  [Pkm.FERROTHORN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Special0,
+    emote: AnimationType.Special0
+  },
+  [Pkm.GOLETT]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Tumble,
+    emote: AnimationType.Pose
+  },
+  [Pkm.GOLURK]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge
   }
 }

@@ -1088,6 +1088,26 @@ export default class BattleManager {
       })
     }
 
+    if (event.type === BoardEvent.SPIKES) {
+      const sprite = this.scene.add.sprite(
+        coordinates[0],
+        coordinates[1],
+        "abilities",
+        "SPIKES/001.png"
+      )
+      sprite.setDepth(1)
+      sprite.setScale(1, 1)
+      this.boardEventSprites[index] = sprite
+      this.group.add(sprite)
+
+      this.scene.tweens.add({
+        targets: sprite,
+        alpha: 1,
+        duration: 200,
+        delay: 500
+      })
+    }
+
     if (event.type === BoardEvent.STICKY_WEB) {
       const sprite = this.scene.add.sprite(
         coordinates[0],

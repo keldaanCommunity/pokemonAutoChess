@@ -123,6 +123,7 @@ export enum BoardEvent {
   GAS = "GAS",
   POISON_GAS = "POISON_GAS",
   STEALTH_ROCKS = "STEALTH_ROCKS",
+  SPIKES = "SPIKES",
   STICKY_WEB = "STICKY_WEB",
   HAIL = "HAIL"
 }

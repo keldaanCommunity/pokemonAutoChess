@@ -620,6 +620,19 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.effects.delete(Effect.TELEPORT_NEXT_ATTACK)
     }
 
+    if (this.effects.has(Effect.SHADOW_PUNCH_NEXT_ATTACK)) {
+      const crit =
+        this.items.has(Item.REAPER_CLOTH) && chance(this.critChance / 100)
+      target.handleSpecialDamage(
+        [30, 60, 120][this.stars - 1],
+        board,
+        AttackType.SPECIAL,
+        this,
+        crit
+      )
+      this.effects.delete(Effect.SHADOW_PUNCH_NEXT_ATTACK)
+    }
+
     if (this.passive === Passive.SHARED_VISION) {
       board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
         if (

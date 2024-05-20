@@ -20,7 +20,7 @@ export function precomputeEmotions() {
     data.set(
       pokemon.index,
       emotions.map((emotion) =>
-        emotion in (metadata.portrait_files ?? {}) ? 1 : 0
+        emotion in (metadata?.portrait_files ?? {}) ? 1 : 0
       )
     )
   })

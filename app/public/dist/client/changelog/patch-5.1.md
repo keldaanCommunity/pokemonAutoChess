@@ -11,6 +11,12 @@
  - Grumpig
  - Ursaluna
  - Bloodmoon Ursaluna
+ - Sinistea
+ - Polteageist
+ - Ferroseed
+ - Ferrothorn
+ - Golett
+ - Golurk
 
 # Changes to Pokemon & Abilities
 
