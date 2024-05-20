@@ -57,6 +57,7 @@
 - Buff Zangoose: HP 200 → 250, 50% less poison damage received
 - Nerf Fuecoco line: Def/SpeDef 4/5/6 → 3/4/5
 - Nerf Torkoal: HP 240 → 220, Def 10 → 8
+- Ditto can now hold items. Items are dropped when Ditto is transforming to another pokemon.
 
 # Changes to Synergies
 
@@ -65,6 +66,7 @@
 - Added Blood Moon weather at Wild 9: +20% physical damage, +30% wound duration
 - Buff Water: dodge 20 → 30%
 - Nerf Steel 8: 130% → 120% true damage
+- Nerf Flying 8: removed paralysis on take off
 
 # Changes to Items
 
@@ -86,6 +88,7 @@
 - When a regional pokemon is a variant of another family (ie. Alolan Graveler vs Graveler), it will replace the original family in your shops
 - New weather: Blood moon, unlocked at Wild 9
 - The additional 1 gold that you get when winning a round is obtained immediately on victory, and no longer on round change
+- Critical damage is now renamed Critical power. Ability crits now also use critical power stat as multiplier for heals, buffs and debuffs values that scale with Ability Power.
 
 # UI
 
@@ -95,6 +98,7 @@
 - Player damage is now computed immediately on victory instead of on round change
 - Added hints on the loading screen
 - Improved some basic attacks visual effects
+- Improve the visuals of final rank window
 
 # Bugfix
 
@@ -102,8 +106,14 @@
 - Fixed emote menu when player uses a shiny avatar
 - Fix burn and poison damage sometimes applying too soon after the second time the status is applied
 - Fixed no music when spectating game
+- Comfey can no longer be hold by pokemons that cannot hold items like Unowns
+- Fixed Comfey being duplicated when given to flora spawn
+- Flying protections no longer are reset after resurection
 
 # Misc
 
 - New title: Bloody
+- The minimum amount of players to make a room elligible for Elo is 4 human players instead of 2.
 - Finishing 8th now gives 50 xp instead of zero
+- The spanish translation has been improved and completed thanks to the efforts of ryuknn and ImLowTier. Muchas gracias!
+- You can now filter pokemon meta report section by elo

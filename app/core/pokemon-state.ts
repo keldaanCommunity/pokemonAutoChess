@@ -25,7 +25,8 @@ export default class PokemonState {
     pokemon: IPokemonEntity,
     heal: number,
     caster: IPokemonEntity,
-    apBoost = 0
+    apBoost: number,
+    crit: boolean
   ): void {
     if (
       pokemon.life > 0 &&
@@ -35,6 +36,9 @@ export default class PokemonState {
     ) {
       if (apBoost > 0) {
         heal *= 1 + (apBoost * caster.ap) / 100
+      }
+      if (crit) {
+        heal *= caster.critPower
       }
       if (pokemon.effects.has(Effect.BUFF_HEAL_RECEIVED)) {
         heal *= 1.5
@@ -71,12 +75,15 @@ export default class PokemonState {
     pokemon: IPokemonEntity,
     shield: number,
     caster: IPokemonEntity,
-    apBoost?: boolean
+    apBoost: number,
+    crit: boolean
   ) {
     if (pokemon.life > 0) {
-      if (apBoost) shield = Math.round(shield * (1 + caster.ap / 100))
-      if (pokemon.status.enraged) shield = Math.round(shield / 2)
+      if (apBoost > 0) shield *= 1 + (caster.ap * apBoost) / 100
+      if (crit) shield *= caster.critPower
+      if (pokemon.status.enraged) shield *= 0.5
 
+      shield = Math.round(shield)
       pokemon.shield += shield
       if (caster && shield > 0) {
         if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {
@@ -260,7 +267,7 @@ export default class PokemonState {
       // logger.debug(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
 
       if (shouldTargetGainMana) {
-        pokemon.addPP(Math.ceil(damage / 10))
+        pokemon.addPP(Math.ceil(damage / 10), pokemon, 0, false)
       }
 
       if (takenDamage > 0) {
@@ -311,7 +318,7 @@ export default class PokemonState {
               ? 0.6
               : 0.3
           pokemon.life = pokemon.hp * healBonus
-          pokemon.addAttack(pokemon.baseAtk * attackBonus)
+          pokemon.addAttack(pokemon.baseAtk * attackBonus, pokemon, 0, false)
           SynergyEffects[Synergy.FOSSIL].forEach((e) =>
             pokemon.effects.delete(e)
           )
@@ -421,21 +428,21 @@ export default class PokemonState {
         pokemon.growGroundTimer = 3000
         pokemon.count.growGroundCount += 1
         if (pokemon.effects.has(Effect.TILLER)) {
-          pokemon.addDefense(1)
-          pokemon.addSpecialDefense(1)
-          pokemon.addAttack(1)
+          pokemon.addDefense(1, pokemon, 0, false)
+          pokemon.addSpecialDefense(1, pokemon, 0, false)
+          pokemon.addAttack(1, pokemon, 0, false)
         } else if (pokemon.effects.has(Effect.DIGGER)) {
-          pokemon.addDefense(2)
-          pokemon.addSpecialDefense(2)
-          pokemon.addAttack(2)
+          pokemon.addDefense(2, pokemon, 0, false)
+          pokemon.addSpecialDefense(2, pokemon, 0, false)
+          pokemon.addAttack(2, pokemon, 0, false)
         } else if (pokemon.effects.has(Effect.DRILLER)) {
-          pokemon.addDefense(3)
-          pokemon.addSpecialDefense(3)
-          pokemon.addAttack(3)
+          pokemon.addDefense(3, pokemon, 0, false)
+          pokemon.addSpecialDefense(3, pokemon, 0, false)
+          pokemon.addAttack(3, pokemon, 0, false)
         } else if (pokemon.effects.has(Effect.DEEP_MINER)) {
-          pokemon.addDefense(4)
-          pokemon.addSpecialDefense(4)
-          pokemon.addAttack(4)
+          pokemon.addDefense(4, pokemon, 0, false)
+          pokemon.addSpecialDefense(4, pokemon, 0, false)
+          pokemon.addAttack(4, pokemon, 0, false)
         }
 
         if (
@@ -466,7 +473,7 @@ export default class PokemonState {
         ) {
           heal += 5
         }
-        pokemon.handleHeal(heal, pokemon, 0)
+        pokemon.handleHeal(heal, pokemon, 0, false)
         pokemon.grassHealCooldown = 2000
         pokemon.simulation.room.broadcast(Transfer.ABILITY, {
           id: pokemon.simulation.id,
@@ -498,23 +505,23 @@ export default class PokemonState {
     }
 
     if (pokemon.manaCooldown <= 0) {
-      pokemon.addPP(10)
+      pokemon.addPP(10, pokemon, 0, false)
       if (pokemon.effects.has(Effect.RAIN_DANCE)) {
-        pokemon.addPP(4)
+        pokemon.addPP(4, pokemon, 0, false)
       }
       if (pokemon.effects.has(Effect.DRIZZLE)) {
-        pokemon.addPP(7)
+        pokemon.addPP(7, pokemon, 0, false)
       }
       if (pokemon.effects.has(Effect.PRIMORDIAL_SEA)) {
-        pokemon.addPP(10)
+        pokemon.addPP(10, pokemon, 0, false)
       }
       if (pokemon.simulation.weather === Weather.RAIN) {
-        pokemon.addPP(3)
+        pokemon.addPP(3, pokemon, 0, false)
       }
       if (pokemon.passive === Passive.ILLUMISE_VOLBEAT) {
         board.forEach((x, y, p) => {
           if (p && p.passive === Passive.ILLUMISE_VOLBEAT && p !== pokemon) {
-            pokemon.addPP(5)
+            pokemon.addPP(5, pokemon, 0, false)
           }
         })
       }
@@ -523,10 +530,10 @@ export default class PokemonState {
         pokemon.effects.has(Effect.ETERNAL_LIGHT) ||
         pokemon.effects.has(Effect.MAX_ILLUMINATION)
       ) {
-        pokemon.addPP(10)
+        pokemon.addPP(10, pokemon, 0, false)
       }
       if (pokemon.items.has(Item.METRONOME)) {
-        pokemon.addPP(5)
+        pokemon.addPP(5, pokemon, 0, false)
       }
       if (pokemon.items.has(Item.GREEN_ORB)) {
         for (const cell of board.getAdjacentCells(
@@ -535,7 +542,7 @@ export default class PokemonState {
           true
         )) {
           if (cell.value && cell.value.team === pokemon.team) {
-            cell.value.handleHeal(0.05 * cell.value.hp, pokemon, 0)
+            cell.value.handleHeal(0.05 * cell.value.hp, pokemon, 0, false)
           }
         }
       }

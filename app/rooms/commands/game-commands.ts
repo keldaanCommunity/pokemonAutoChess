@@ -768,7 +768,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           case Effect.HEART_OF_THE_SWARM:
             player.titles.add(Title.BUG_MANIAC)
             break
-          case Effect.MAX_GUARD:
+          case Effect.SKYDIVE:
             player.titles.add(Title.BIRD_KEEPER)
             break
           case Effect.SUN_FLOWER:
@@ -831,16 +831,15 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   }
 
   checkEndGame() {
-    const numberOfPlayersAlive = values(this.state.players).filter(
-      (p) => p.alive
-    ).length
+    const playersAlive = values(this.state.players).filter((p) => p.alive)
 
-    if (numberOfPlayersAlive <= 1) {
+    if (playersAlive.length <= 1) {
       this.state.gameFinished = true
-      this.room.broadcast(Transfer.BROADCAST_INFO, {
-        title: "End of the game",
-        info: "We have a winner !"
-      })
+      const winner = playersAlive[0]
+      const client = this.room.clients.find((cli) => cli.auth.uid === winner.id)
+      if (client) {
+        client.send(Transfer.FINAL_RANK, 1)
+      }
       setTimeout(() => {
         // dispose the room automatically after 30 seconds
         this.room.broadcast(Transfer.GAME_END)
@@ -1159,6 +1158,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         })
         // Refreshes effects (like tapu Terrains)
         player.updateSynergies()
+      } else {
+        const client = this.room.clients.find(
+          (cli) => cli.auth.uid === player.id
+        )
+        if (client) {
+          client.send(Transfer.FINAL_RANK, player.rank)
+        }
       }
     })
 
