@@ -23,7 +23,7 @@ import {
 import {
   DEFAULT_ATK_SPEED,
   DEFAULT_CRIT_CHANCE,
-  DEFAULT_CRIT_DAMAGE,
+  DEFAULT_CRIT_POWER,
   EvolutionTime,
   SynergyTriggers
 } from "../../types/Config"
@@ -12208,20 +12208,34 @@ export class Comfey extends Pokemon {
       nearestAllyWithFreeItemSlot.items.add(Item.COMFEY)
 
       // apply comfey stats
-      nearestAllyWithFreeItemSlot.addAbilityPower(entity.ap)
-      nearestAllyWithFreeItemSlot.addAttack(entity.atk)
+      nearestAllyWithFreeItemSlot.addAbilityPower(entity.ap, entity, 0, false)
+      nearestAllyWithFreeItemSlot.addAttack(entity.atk, entity, 0, false)
       nearestAllyWithFreeItemSlot.addAttackSpeed(
-        entity.atkSpeed - DEFAULT_ATK_SPEED
+        entity.atkSpeed - DEFAULT_ATK_SPEED,
+        entity,
+        0,
+        false
       )
-      nearestAllyWithFreeItemSlot.addShield(entity.shield, entity)
+      nearestAllyWithFreeItemSlot.addShield(entity.shield, entity, 0, false)
       nearestAllyWithFreeItemSlot.addMaxHP(entity.hp)
-      nearestAllyWithFreeItemSlot.addDefense(entity.def)
-      nearestAllyWithFreeItemSlot.addSpecialDefense(entity.speDef)
-      nearestAllyWithFreeItemSlot.addCritChance(
-        entity.critChance - DEFAULT_CRIT_CHANCE
+      nearestAllyWithFreeItemSlot.addDefense(entity.def, entity, 0, false)
+      nearestAllyWithFreeItemSlot.addSpecialDefense(
+        entity.speDef,
+        entity,
+        0,
+        false
       )
-      nearestAllyWithFreeItemSlot.addCritDamage(
-        entity.critDamage - DEFAULT_CRIT_DAMAGE
+      nearestAllyWithFreeItemSlot.addCritChance(
+        entity.critChance - DEFAULT_CRIT_CHANCE,
+        entity,
+        0,
+        false
+      )
+      nearestAllyWithFreeItemSlot.addCritPower(
+        entity.critPower - DEFAULT_CRIT_POWER,
+        entity,
+        0,
+        false
       )
     }
   }
