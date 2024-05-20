@@ -916,10 +916,10 @@ export default class Simulation extends Schema implements ISimulation {
           }
           break
 
-        case Effect.MAX_GUARD:
+        case Effect.SKYDIVE:
           if (types.has(Synergy.FLYING)) {
             pokemon.flyingProtection = 2
-            pokemon.effects.add(Effect.MAX_GUARD)
+            pokemon.effects.add(Effect.SKYDIVE)
           }
           break
 

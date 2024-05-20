@@ -59,6 +59,7 @@
 - Added Blood Moon weather at Wild 9: +20% physical damage, +30% wound duration
 - Buff Water: dodge 20 → 30%
 - Nerf Steel 8: 130% → 120% true damage
+- Nerf Flying 8: removed paralysis on take off
 
 # Changes to Items
 

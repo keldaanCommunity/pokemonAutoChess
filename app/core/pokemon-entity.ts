@@ -957,7 +957,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           this.flyAway(board)
           this.flyingProtection--
         }
-      } else if (this.effects.has(Effect.MAX_GUARD)) {
+      } else if (this.effects.has(Effect.SKYDIVE)) {
         if (
           (this.flyingProtection === 2 && pcLife < 0.5) ||
           (this.flyingProtection === 1 && pcLife < 0.2)
@@ -966,12 +966,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             this.state.getFarthestTargetCoordinateAvailablePlace(this, board)
           if (destination) {
             this.status.triggerProtect(2000)
-            const cells = board.getAdjacentCells(this.positionX, this.positionY)
-            cells.forEach((cell) => {
-              if (cell.value && this.team != cell.value.team) {
-                cell.value.status.triggerParalysis(2000, cell.value)
-              }
-            })
             this.simulation.room.broadcast(Transfer.ABILITY, {
               id: this.simulation.id,
               skill: "FLYING_TAKEOFF",
