@@ -94,6 +94,8 @@
 - Added hints on the loading screen
 - Improved some basic attacks visual effects
 - Improve the visuals of final rank window
+- If you can't buy a pokemon in shop, it will be in grayscale
+- New sound effects for evolutions and shop refresh
 
 # Bugfix
 
