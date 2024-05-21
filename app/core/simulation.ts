@@ -1067,18 +1067,18 @@ export default class Simulation extends Schema implements ISimulation {
               pokemon.items.size + (pokemon.items.has(Item.WONDER_BOX) ? 1 : 0)
             const attackBoost = {
               [Effect.DUBIOUS_DISC]: 0,
-              [Effect.LINK_CABLE]: 0.1,
-              [Effect.GOOGLE_SPECS]: 0.2
+              [Effect.LINK_CABLE]: 8 / 100,
+              [Effect.GOOGLE_SPECS]: 15 / 100
             }[effect]
             const apBoost = {
               [Effect.DUBIOUS_DISC]: 0,
-              [Effect.LINK_CABLE]: 10,
-              [Effect.GOOGLE_SPECS]: 20
+              [Effect.LINK_CABLE]: 8 / 100,
+              [Effect.GOOGLE_SPECS]: 15 / 100
             }[effect]
             const shieldBoost = {
               [Effect.DUBIOUS_DISC]: 0,
-              [Effect.LINK_CABLE]: 0.1,
-              [Effect.GOOGLE_SPECS]: 0.2
+              [Effect.LINK_CABLE]: 8 / 100,
+              [Effect.GOOGLE_SPECS]: 15 / 100
             }[effect]
             pokemon.addAttack(
               attackBoost * pokemon.baseAtk * nbItems,

@@ -3822,22 +3822,6 @@ export class ThiefStrategy extends AbilityStrategy {
       }
     })
 
-    // update artificial synergy bonuses
-    if (pokemon.effects.has(Effect.DUBIOUS_DISC)) {
-      pokemon.addAttack(4 * l, pokemon, 0, false)
-      pokemon.addShield(20 * l, pokemon, 0, false)
-    }
-
-    if (pokemon.effects.has(Effect.LINK_CABLE)) {
-      pokemon.addAttack(7 * l, pokemon, 0, false)
-      pokemon.addShield(30 * l, pokemon, 0, false)
-    }
-
-    if (pokemon.effects.has(Effect.GOOGLE_SPECS)) {
-      pokemon.addAttack(10 * l, pokemon, 0, false)
-      pokemon.addShield(50 * l, pokemon, 0, false)
-    }
-
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
