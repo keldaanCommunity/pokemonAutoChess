@@ -57,6 +57,7 @@
 - Changed Meteor Mash (Beldum): now deal 3 times 15/30/60 special damage to target and buff user attack by 2
 - Buff Wingull line: HP 80/180 → 90/200, Def 3/4 → 5/7, PP 85 → 75
 - Nerf Volbeat and Illumise: HP 150 → 130
+- Buff Growlithe: HP 70/130 → 75/140
 
 # Changes to Synergies
 
