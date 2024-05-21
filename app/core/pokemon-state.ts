@@ -136,10 +136,6 @@ export default class PokemonState {
       death = false
       takenDamage = 0
     } else {
-      if (pokemon.items.has(Item.POKE_DOLL)) {
-        damage = Math.ceil(damage * 0.7)
-      }
-
       if (attacker && attacker.status.electricField) {
         damage = Math.ceil(damage * 1.2)
       }
@@ -195,27 +191,33 @@ export default class PokemonState {
         reducedDamage = damage
       }
 
-      if (
-        attackType !== AttackType.TRUE &&
-        (pokemon.effects.has(Effect.GUTS) ||
+      if (attackType !== AttackType.TRUE) {
+        // damage reduction
+        if (pokemon.items.has(Item.POKE_DOLL)) {
+          reducedDamage = Math.ceil(reducedDamage * 0.7)
+        }
+
+        if (
+          pokemon.effects.has(Effect.GUTS) ||
           pokemon.effects.has(Effect.STURDY) ||
           pokemon.effects.has(Effect.DEFIANT) ||
-          pokemon.effects.has(Effect.JUSTIFIED))
-      ) {
-        const damageBlocked = pokemon.effects.has(Effect.JUSTIFIED)
-          ? 15
-          : pokemon.effects.has(Effect.DEFIANT)
-            ? 10
-            : pokemon.effects.has(Effect.STURDY)
-              ? 7
-              : 4
-        reducedDamage = reducedDamage - damageBlocked
-        pokemon.count.fightingBlockCount++
-      }
+          pokemon.effects.has(Effect.JUSTIFIED)
+        ) {
+          const damageBlocked = pokemon.effects.has(Effect.JUSTIFIED)
+            ? 15
+            : pokemon.effects.has(Effect.DEFIANT)
+              ? 10
+              : pokemon.effects.has(Effect.STURDY)
+                ? 7
+                : 4
+          reducedDamage = reducedDamage - damageBlocked
+          pokemon.count.fightingBlockCount++
+        }
 
-      if (pokemon.passive === Passive.WONDER_GUARD) {
-        const damageBlocked = 20
-        reducedDamage = reducedDamage - damageBlocked
+        if (pokemon.passive === Passive.WONDER_GUARD) {
+          const damageBlocked = 20
+          reducedDamage = reducedDamage - damageBlocked
+        }
       }
 
       reducedDamage = min(1)(reducedDamage) // should deal 1 damage at least

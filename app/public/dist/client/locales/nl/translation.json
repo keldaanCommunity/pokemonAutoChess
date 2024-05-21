@@ -1336,7 +1336,7 @@
     "FLAME_ORB": "Houder is verbrand, maar verhoogt zijn ATK met 100%",
     "ASSAULT_VEST": "+20 SPE_DEF. Verminder BURN en POISONNED schade met 50%",
     "AMULET_COIN": "+1 goud elke keer dat de houder een tegenstander neerhaalt",
-    "POKE_DOLL": "Verminder alle inkomende schade met 30%",
+    "POKE_DOLL": "Verminder alle inkomende PHYSICAL en SPECIAL met 30%",
     "RED_ORB": "+10ATK. 25% van de aanvalsschade wordt behandeld als TRUE",
     "MAX_REVIVE": "Geef RESURECTION, voorkom dat de houder als eerste knock-out gaat en herstel tot max. HP",
     "ROCKY_HELMET": "+12 DEF. Negeert kritieke bonusschade door inkomende kritieke treffers."

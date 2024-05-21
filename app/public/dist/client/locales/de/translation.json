@@ -1657,7 +1657,7 @@
     "FLAME_ORB": "Der Halter wird verbrannt, erhöht aber seine ATK um 100 %.",
     "ASSAULT_VEST": "+20 SPE_DEF. Reduziert den Schaden durch VERBRENNUNGEN und POISONNED um 50 %",
     "AMULET_COIN": "+1 Gold jedes Mal, wenn der Besitzer einen Gegner niederschlägt",
-    "POKE_DOLL": "Reduziere den gesamten eingehenden Schaden um 30 %",
+    "POKE_DOLL": "Reduziere den gesamten eingehenden PHYSICAL und SPECIAL um 30 %",
     "RED_ORB": "+10 ATK. 25 % des Angriffsschadens werden als TRUE verursacht",
     "MAX_REVIVE": "Geben Sie RESURECTION, verhindern Sie, dass der Besitzer zuerst KO macht, und stellen Sie die maximalen HP wieder her",
     "ROCKY_HELMET": "+12 DEF. Negiert den kritischen Bonusschaden durch eingehende kritische Treffer.",

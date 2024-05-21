@@ -1832,7 +1832,7 @@
     "FLAME_ORB": "Le porteur est BURN pendant le combat mais augmente son ATK de 100%",
     "ASSAULT_VEST": "+20 SPE_DEF. Réduit les dégâts de BURN et POISONNED de 50 %",
     "AMULET_COIN": "+1 pièce à chaque fois que le porteur met KO un adversaire",
-    "POKE_DOLL": "Réduit tous les dégâts subis de 30%",
+    "POKE_DOLL": "Réduit tous les PHYSICAL et SPECIAL subis de 30%",
     "RED_ORB": "+10 ATK. 25% des dégâts d'attaque sont infligés comme TRUE",
     "MAX_REVIVE": "Donne RESURECTION, empêchant le premier KO du porteur et le restaurant au max de ses HP",
     "ROCKY_HELMET": "+12 DEF. Annule les dégâts bonus critiques des coups critiques entrants.",

@@ -110,6 +110,7 @@
 - Comfey can no longer be hold by pokemons that cannot hold items like Unowns
 - Fixed Comfey being duplicated when given to flora spawn
 - Flying protections no longer are reset after resurection
+- Pokedoll no longer reduce true damage
 
 # Misc
 
