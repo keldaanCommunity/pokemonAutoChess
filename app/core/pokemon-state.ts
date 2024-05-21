@@ -506,51 +506,11 @@ export default class PokemonState {
       }
     }
 
-    if (pokemon.manaCooldown <= 0) {
-      pokemon.addPP(10, pokemon, 0, false)
-      if (pokemon.effects.has(Effect.RAIN_DANCE)) {
-        pokemon.addPP(4, pokemon, 0, false)
-      }
-      if (pokemon.effects.has(Effect.DRIZZLE)) {
-        pokemon.addPP(7, pokemon, 0, false)
-      }
-      if (pokemon.effects.has(Effect.PRIMORDIAL_SEA)) {
-        pokemon.addPP(10, pokemon, 0, false)
-      }
-      if (pokemon.simulation.weather === Weather.RAIN) {
-        pokemon.addPP(3, pokemon, 0, false)
-      }
-      if (pokemon.passive === Passive.ILLUMISE_VOLBEAT) {
-        board.forEach((x, y, p) => {
-          if (p && p.passive === Passive.ILLUMISE_VOLBEAT && p !== pokemon) {
-            pokemon.addPP(5, pokemon, 0, false)
-          }
-        })
-      }
-      if (
-        pokemon.effects.has(Effect.LIGHT_PULSE) ||
-        pokemon.effects.has(Effect.ETERNAL_LIGHT) ||
-        pokemon.effects.has(Effect.MAX_ILLUMINATION)
-      ) {
-        pokemon.addPP(10, pokemon, 0, false)
-      }
-      if (pokemon.items.has(Item.METRONOME)) {
-        pokemon.addPP(5, pokemon, 0, false)
-      }
-      if (pokemon.items.has(Item.GREEN_ORB)) {
-        for (const cell of board.getAdjacentCells(
-          pokemon.positionX,
-          pokemon.positionY,
-          true
-        )) {
-          if (cell.value && cell.value.team === pokemon.team) {
-            cell.value.handleHeal(0.05 * cell.value.hp, pokemon, 0, false)
-          }
-        }
-      }
-      pokemon.manaCooldown = 1000
+    if (pokemon.oneSecondCooldown <= 0) {
+      this.updateEachSecond(pokemon, board, weather, player)
+      pokemon.oneSecondCooldown = 1000
     } else {
-      pokemon.manaCooldown = min(0)(pokemon.manaCooldown - dt)
+      pokemon.oneSecondCooldown = min(0)(pokemon.oneSecondCooldown - dt)
     }
 
     if (pokemon.fairySplashCooldown > 0) {
@@ -571,6 +531,100 @@ export default class PokemonState {
       pokemon.action !== PokemonActionState.HOP
     ) {
       pokemon.status.triggerPoison(60000, pokemon, pokemon)
+    }
+  }
+
+  updateEachSecond(
+    pokemon: PokemonEntity,
+    board: Board,
+    weather: Weather,
+    player: Player | undefined
+  ) {
+    pokemon.addPP(10, pokemon, 0, false)
+    if (pokemon.effects.has(Effect.RAIN_DANCE)) {
+      pokemon.addPP(4, pokemon, 0, false)
+    }
+    if (pokemon.effects.has(Effect.DRIZZLE)) {
+      pokemon.addPP(7, pokemon, 0, false)
+    }
+    if (pokemon.effects.has(Effect.PRIMORDIAL_SEA)) {
+      pokemon.addPP(10, pokemon, 0, false)
+    }
+    if (pokemon.simulation.weather === Weather.RAIN) {
+      pokemon.addPP(3, pokemon, 0, false)
+    }
+
+    if (pokemon.passive === Passive.ILLUMISE_VOLBEAT) {
+      board.forEach((x, y, p) => {
+        if (p && p.passive === Passive.ILLUMISE_VOLBEAT && p !== pokemon) {
+          pokemon.addPP(5, pokemon, 0, false)
+        }
+      })
+    }
+
+    if (
+      pokemon.effects.has(Effect.LIGHT_PULSE) ||
+      pokemon.effects.has(Effect.ETERNAL_LIGHT) ||
+      pokemon.effects.has(Effect.MAX_ILLUMINATION)
+    ) {
+      pokemon.addPP(10, pokemon, 0, false)
+    }
+
+    if (pokemon.items.has(Item.METRONOME)) {
+      pokemon.addPP(5, pokemon, 0, false)
+    }
+
+    if (pokemon.items.has(Item.GREEN_ORB)) {
+      for (const cell of board.getAdjacentCells(
+        pokemon.positionX,
+        pokemon.positionY,
+        true
+      )) {
+        if (cell.value && cell.value.team === pokemon.team) {
+          cell.value.handleHeal(0.05 * cell.value.hp, pokemon, 0, false)
+        }
+      }
+    }
+
+    if (
+      pokemon.effects.has(Effect.STEALTH_ROCKS) &&
+      !pokemon.types.has(Synergy.ROCK) &&
+      !pokemon.types.has(Synergy.FLYING)
+    ) {
+      pokemon.handleDamage({
+        damage: 10,
+        board,
+        attackType: AttackType.PHYSICAL,
+        attacker: null,
+        shouldTargetGainMana: true
+      })
+      pokemon.status.triggerWound(1000, pokemon, undefined)
+    }
+
+    if (
+      pokemon.effects.has(Effect.SPIKES) &&
+      !pokemon.types.has(Synergy.FLYING)
+    ) {
+      pokemon.handleDamage({
+        damage: 10,
+        board,
+        attackType: AttackType.TRUE,
+        attacker: null,
+        shouldTargetGainMana: true
+      })
+      pokemon.status.triggerArmorReduction(1000, pokemon)
+    }
+
+    if (pokemon.effects.has(Effect.HAIL) && !pokemon.types.has(Synergy.ICE)) {
+      pokemon.handleDamage({
+        damage: 10,
+        board,
+        attackType: AttackType.SPECIAL,
+        attacker: null,
+        shouldTargetGainMana: true
+      })
+      pokemon.status.triggerFreeze(1000, pokemon)
+      pokemon.effects.delete(Effect.HAIL)
     }
   }
 

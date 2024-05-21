@@ -32,7 +32,7 @@ import {
   Stat,
   Team
 } from "../types/enum/Game"
-import { Berries, Item, SpecialItems } from "../types/enum/Item"
+import { Berries, Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
@@ -88,7 +88,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("uint16") healDone: number
   @type("string") emotion: Emotion
   cooldown = 500
-  manaCooldown = 1000
+  oneSecondCooldown = 1000
   state: PokemonState
   simulation: Simulation
   baseAtk: number
