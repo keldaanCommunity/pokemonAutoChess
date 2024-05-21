@@ -3,13 +3,14 @@ import { Pkm } from "../../../../../types/enum/Pokemon"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { shopClick } from "../../../stores/NetworkStore"
 import { getGameScene } from "../../game"
+import { playSound, SOUNDS } from "../../utils/audio"
 import GamePokemonPortrait from "./game-pokemon-portrait"
 
 export default function GameStore() {
   const dispatch = useAppDispatch()
   const shop = useAppSelector((state) => state.game.shop)
   const scene = getGameScene()
-
+  
   return (
     <ul className="game-pokemons-store">
       {shop.map((pokemon, index) => {
@@ -27,6 +28,7 @@ export default function GameStore() {
                 if (scene) scene.shopIndexHovered = null
               }}
               click={(e) => {
+                playSound(SOUNDS.BUTTON_CLICK)
                 dispatch(shopClick(index))
               }}
             />
@@ -38,7 +40,6 @@ export default function GameStore() {
               origin="shop"
               index={index}
               pokemon={undefined}
-              click={() => {}}
             />
           )
         }

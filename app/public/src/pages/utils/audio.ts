@@ -1,3 +1,4 @@
+import { type Scene } from "phaser"
 import { DungeonMusic } from "../../../../types/enum/Dungeon"
 import { logger } from "../../../../utils/logger"
 import { preferences } from "../../preferences"
@@ -6,6 +7,8 @@ export const SOUNDS = {
   BUTTON_CLICK: "buttonclick.ogg",
   BUTTON_HOVER: "buttonhover.ogg",
   CAROUSEL_UNLOCK: "carouselunlock.ogg",
+  EVOLUTION_T2: "evolutiont2.ogg",
+  EVOLUTION_T3: "evolutiont3.ogg",
   FINISH1: "finish1.ogg",
   FINISH2: "finish2.ogg",
   FINISH3: "finish3.ogg",
@@ -16,6 +19,7 @@ export const SOUNDS = {
   FINISH8: "finish8.ogg",
   JOIN_ROOM: "joinroom.ogg",
   LEAVE_ROOM: "leaveroom.ogg",
+  REFRESH: "refresh.ogg",
   SET_READY: "setready.ogg",
   START_GAME: "startgame.ogg"
 } as const
@@ -30,7 +34,7 @@ export function preloadSounds() {
   )
 }
 
-export function preloadMusic(scene: Phaser.Scene, dungeonMusic: DungeonMusic) {
+export function preloadMusic(scene: Scene, dungeonMusic: DungeonMusic) {
   scene.load.audio("music_" + dungeonMusic, [
     `assets/musics/ogg/${dungeonMusic}.ogg`
   ])
@@ -43,7 +47,10 @@ function setupSounds() {
     }
   })
   document.body.addEventListener("click", (e) => {
-    if (e.target instanceof HTMLButtonElement) {
+    if (
+      e.target instanceof HTMLButtonElement ||
+      (e.target instanceof HTMLElement && e.target.closest("button") != null)
+    ) {
       playSound(SOUNDS.BUTTON_CLICK)
     }
   })
@@ -52,10 +59,12 @@ function setupSounds() {
 preloadSounds()
 setupSounds()
 
-export function playSound(key: Soundkey, volume?: number) {
-  if (AUDIO_ELEMENTS[key]) {
-    AUDIO_ELEMENTS[key]!.volume = volume || preferences.sfxVolume / 100
-    AUDIO_ELEMENTS[key]!.play()
+export function playSound(key: Soundkey, volume = 1) {
+  const sound = AUDIO_ELEMENTS[key]
+  if (sound) {
+    sound.currentTime = 0
+    sound.volume = (volume * preferences.sfxVolume) / 100
+    sound.play()
   }
 }
 

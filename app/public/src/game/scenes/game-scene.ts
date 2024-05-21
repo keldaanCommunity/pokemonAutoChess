@@ -173,6 +173,7 @@ export default class GameScene extends Scene {
 
   registerKeys() {
     this.input.keyboard!.on("keydown-D", () => {
+      playSound(SOUNDS.REFRESH, 0.5)
       this.refreshShop()
     })
 
@@ -201,7 +202,16 @@ export default class GameScene extends Scene {
   }
 
   refreshShop() {
-    this.room?.send(Transfer.REFRESH)
+    const player = this.room?.state.players.get(this.uid!)
+    if (
+      player &&
+      player.alive &&
+      player.money > 1 &&
+      player === this.board?.player
+    ) {
+      this.room?.send(Transfer.REFRESH)
+      playSound(SOUNDS.REFRESH, 0.5)
+    }
   }
 
   buyExperience() {
