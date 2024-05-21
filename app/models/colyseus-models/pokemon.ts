@@ -11861,8 +11861,8 @@ export class Xurkitree extends Pokemon {
   atk = 16
   def = 3
   speDef = 3
-  maxPP = 80
-  range = 3
+  maxPP = 100
+  range = 2
   skill = Ability.CHARGE_BEAM
   passive = Passive.SPECIAL_ATTACK
   attackSprite = AttackSprite.ELECTRIC_RANGE
