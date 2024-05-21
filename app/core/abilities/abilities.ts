@@ -7839,16 +7839,16 @@ export class SheerColdStrategy extends AbilityStrategy {
     if (target.types.has(Synergy.ICE)) executeChance = 0
     else if (target.status.freeze) executeChance = 1
 
-    if (chance(executeChance)) {
-      target.handleSpecialDamage(
-        9999,
-        board,
-        AttackType.SPECIAL,
-        pokemon,
-        crit,
-        true
-      )
-    }
+    let damage = [50, 100, 200][pokemon.stars - 1] ?? 200
+    if (chance(executeChance)) damage = 9999
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
   }
 }
 

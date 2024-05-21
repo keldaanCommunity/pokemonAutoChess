@@ -1430,7 +1430,7 @@
     "MOONGEIST_BEAM": "Hace [100,SP] SPECIAL a todos los Pokémon enemigos en una línea recta y los deja PARALYSIS por 3 segundos. Aliados en el rayo ganan [100,SP] SHIELD.",
     "FLEUR_CANNON": "Manda un devastador rayo laser que inflige [120,SP] SPECIAL a todos los enemigos en el rayo. Reduce el AP del emisor en 20",
     "SPIRIT_BREAK": "Hace [20,40,80,SP] SPECIAL y baja el AP del objetivo en [20,SP]",
-    "SHEER_COLD": "Un golpe de frío bajo cero que tiene un [30,SP]% de ejecutar al objetivo. Mientras más HP el usuario tenga en comparación al objetivo, mayor será la probabilidad. Siempre ejecuta a enemigos FREEZE, pero nunca ejecuta a objetivos ICE.",
+    "SHEER_COLD": "Un golpe de frío bajo cero inflige [50,100,200,SP] SPECIAL con un [30,SP]% de probabilidad de ejecutar. Mientras más HP el usuario tenga en comparación al objetivo, mayor será la probabilidad. Siempre ejecuta a enemigos FREEZE, pero nunca ejecuta a objetivos ICE.",
     "EXTREME_SPEED": "Avanza hacia el enemigo más lejano, infligiendo [40,SP] PHYSICAL en el camino",
     "ZAP_CANNON": "El emisor da un disparo eléctrico como un cañón para infligir [25,50,100,SP] SPECIAL y causar PARALYSIS junto a ARMOR_REDUCTION por [1,2,4] segundos",
     "PSYCHO_BOOST": "Traza un corte horizontalmente alrededor del enemigo, haciendo [140,SP] SPECIAL a todos los enemigos golpeados. Reduce el AP del emisor en 20 por cada Pokémon golpeado.",

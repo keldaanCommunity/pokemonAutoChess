@@ -59,6 +59,7 @@
 - Nerf Volbeat and Illumise: HP 150 → 130
 - Buff Growlithe: HP 70/130 → 75/140
 - Changed Whirlpool (Seadra): now deals special damage
+- Changed Sheer Cold (Snover): now deals special damage when not executing, 50/100/200 special damage
 
 # Changes to Synergies
 

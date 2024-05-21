@@ -1432,7 +1432,7 @@
     "MOONGEIST_BEAM": "Deals [100,SP] SPECIAL to all enemy Pokémon in a straight line and make them PARALYSIS for 3 seconds. Allies in the beam gain [100,SP] SHIELD.",
     "FLEUR_CANNON": "Sends a devastating laser beam that inflicts [120,SP] SPECIAL on all enemies in the beam. Reduces the AP of the caster by 20",
     "SPIRIT_BREAK": "Deals [20,40,80,SP] SPECIAL and lowers the target's AP by [20,SP]",
-    "SHEER_COLD": "A blast of absolute-zero cold that has [30,SP]% chance to execute the target. The more HP the user has relative to the target, the greater the chance. Always execute FREEZE enemies, but never execute ICE targets.",
+    "SHEER_COLD": "A blast of absolute-zero cold deals [50,100,200,SP] SPECIAL to the target with [30,SP]% chance to execute. The more HP the user has relative to the target, the greater the chance. Always execute FREEZE enemies, but never execute ICE targets.",
     "EXTREME_SPEED": "Dash towards the furthest enemy, inflicting [40,SP] PHYSICAL along the way",
     "ZAP_CANNON": "The caster fires an electric blast like a cannon to inflict [25,50,100,SP] SPECIAL and cause PARALYSIS and ARMOR_REDUCTION for [1,2,4] seconds",
     "PSYCHO_BOOST": "Cut a slash horizontally around the target, dealing [140,SP] SPECIAL to all ennemies hit. Reduce the caster AP by 20 for each Pokémon hit.",
