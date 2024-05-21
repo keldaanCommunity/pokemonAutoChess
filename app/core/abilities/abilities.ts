@@ -40,7 +40,7 @@ import {
 } from "../../types/Config"
 import { Effect } from "../../types/enum/Effect"
 import { AttackType, BoardEvent, Team } from "../../types/enum/Game"
-import { ArtificialItems, Item } from "../../types/enum/Item"
+import { ArtificialItems, Berries, Item } from "../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
@@ -229,12 +229,7 @@ export class SoftBoiledStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let shield = 30
-    if (pokemon.stars == 2) {
-      shield = 60
-    } else if (pokemon.stars == 3) {
-      shield = 120
-    }
+    const shield = [30, 60, 120][pokemon.stars - 1] ?? 120
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team == tg.team) {
         pokemon.simulation.room.broadcast(Transfer.ABILITY, {
@@ -250,6 +245,36 @@ export class SoftBoiledStrategy extends AbilityStrategy {
     })
   }
 }
+
+export class TeaTimeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const heal = [20, 40, 80][pokemon.stars - 1] ?? 80
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+      if (tg && pokemon.team == tg.team) {
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: pokemon.skill,
+          positionX: tg.positionX,
+          positionY: tg.positionX,
+          orientation: pokemon.orientation
+        })
+        tg.handleHeal(heal, pokemon, 1, crit)
+        const berry = values(tg.items).find((item) => Berries.includes(item))
+        if (berry) {
+          tg.eatBerry(berry)
+        }
+      }
+    })
+  }
+}
+
 
 export class EarthquakeStrategy extends AbilityStrategy {
   process(
@@ -6226,6 +6251,57 @@ export class StealthRocksStrategy extends AbilityStrategy {
   }
 }
 
+export class SpikesStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const nbSpikes = Math.round(6 * (1 + pokemon.ap / 100))
+    const cells = pickNRandomIn(
+      board.getCellsInFront(pokemon, target, 3),
+      nbSpikes
+    )
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
+
+    cells.forEach((cell) => {
+      const index = cell.y * board.columns + cell.x
+      if (board.effects[index] !== Effect.SPIKES) {
+        board.effects[index] = Effect.SPIKES
+        pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+          simulationId: pokemon.simulation.id,
+          type: BoardEvent.SPIKES,
+          x: cell.x,
+          y: cell.y
+        })
+      }
+
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: Ability.SPIKES,
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: cell.x,
+        targetY: cell.y
+      })
+
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.effects.add(Effect.SPIKES)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
+  }
+}
+
 export class StickyWebStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -7315,6 +7391,42 @@ export class ShedTailStrategy extends AbilityStrategy {
       )
       pokemon.moveTo(coord.x, coord.y, board)
       pokemon.simulation.addPokemon(substitute, x, y, pokemon.team, true)
+    }
+  }
+}
+
+export class ShadowPunchStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const x = pokemon.positionX
+    const y = pokemon.positionY
+    const lowestHealthEnemy = (
+      board.cells.filter(
+        (cell) => cell && cell.team !== pokemon.team
+      ) as PokemonEntity[]
+    ).sort((a, b) => a.life / a.hp - b.life / b.hp)[0]
+
+    if (lowestHealthEnemy) {
+      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
+        lowestHealthEnemy,
+        (lowestHealthEnemy.team + 1) % 2
+      )
+      pokemon.orientation = board.orientation(
+        coord.x,
+        coord.y,
+        pokemon.positionX,
+        pokemon.positionY,
+        pokemon,
+        lowestHealthEnemy
+      )
+      pokemon.moveTo(coord.x, coord.y, board)
+      pokemon.effects.add(Effect.SHADOW_PUNCH_NEXT_ATTACK)
     }
   }
 }
@@ -8998,5 +9110,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.HAIL]: new HailStrategy(),
   [Ability.RAPID_SPIN]: new RapidSpinStrategy(),
   [Ability.BOUNCE]: new BounceStrategy(),
-  [Ability.BLOOD_MOON]: new BloodMoonStrategy()
+  [Ability.BLOOD_MOON]: new BloodMoonStrategy(),
+  [Ability.TEA_TIME]: new TeaTimeStrategy(),
+  [Ability.SPIKES]: new SpikesStrategy(),
+  [Ability.SHADOW_PUNCH]: new ShadowPunchStrategy()
 }

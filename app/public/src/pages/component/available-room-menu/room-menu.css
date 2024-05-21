@@ -44,3 +44,8 @@
 .special-game-announcement span:last-child {
   flex: 0 0 6ch;
 }
+
+.room-menu .tab-available-rooms > ul {
+  max-height: calc(100% - 10em);
+  overflow: auto;
+}

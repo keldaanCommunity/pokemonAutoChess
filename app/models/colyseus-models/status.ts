@@ -141,6 +141,21 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (
+      pokemon.effects.has(Effect.SPIKES) &&
+      !pokemon.types.has(Synergy.FLYING) &&
+      !this.armorReduction
+    ) {
+      pokemon.handleDamage({
+        damage: 10,
+        board,
+        attackType: AttackType.TRUE,
+        attacker: null,
+        shouldTargetGainMana: true
+      })
+      this.triggerArmorReduction(1000, pokemon)
+    }
+
+    if (
       pokemon.effects.has(Effect.HAIL) &&
       !pokemon.types.has(Synergy.ICE) &&
       !this.freeze
