@@ -1338,7 +1338,7 @@
     "FLAME_ORB": "ホルダーは火傷しますが、攻撃力が100％増加します",
     "ASSAULT_VEST": "+20 SPE_DEF。 BURN と POISONNED のダメージを50%軽減",
     "AMULET_COIN": "ホルダーが敵を倒すたびに +1 ゴールド",
-    "POKE_DOLL": "すべての受けるダメージを30%軽減",
+    "POKE_DOLL": "入ってくるすべてのPHYSICALとSPECIALを30%削減",
     "RED_ORB": "+10攻撃力。攻撃ダメージの25%がTRUEとして与えられる",
     "MAX_REVIVE": "RESURECTIONを与え、ホルダーの最初のKOを防ぎ、最大HPまで回復します",
     "ROCKY_HELMET": "防御力+12クリティカルヒットによるクリティカルボーナスダメージを無効化します。"

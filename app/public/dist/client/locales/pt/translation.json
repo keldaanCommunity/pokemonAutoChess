@@ -1615,7 +1615,7 @@
     "FLAME_ORB": "Holder é queimado, mas aumenta seu ATK em 100%",
     "ASSAULT_VEST": "+20 SPE_DEF. Reduz o dano de BURN e POISONNED em 50%",
     "AMULET_COIN": "+1 de ouro cada vez que o titular derrubar um oponente",
-    "POKE_DOLL": "Reduza todo o dano recebido em 30%",
+    "POKE_DOLL": "Reduza todo o PHYSICAL e SPECIAL recebido em 30%",
     "RED_ORB": "+10 ATK. 25% do dano de ataque é tratado como TRUE",
     "MAX_REVIVE": "Dê RESURECTION, impedindo o primeiro KO do titular e restaurando o HP máximo",
     "ROCKY_HELMET": "+12 DEF. Nega dano bônus crítico de acertos críticos recebidos."
