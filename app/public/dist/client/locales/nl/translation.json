@@ -1011,7 +1011,7 @@
     "ASTRAL_BARRAGE": "Stuurt [3,SP=2] kleine geesten naar willekeurige vijandige Pokémon. Elk van hen deelt 20 SPECIAL uit",
     "WATERFALL": "SHIELD zelf voor [30,60,120,SP], duidelijke negatieve status en bestuursceleffect",
     "PYRO_BALL": "De gebruiker valt aan door een kleine steen aan te steken en deze als een vurige bal naar het verste doelwit te lanceren, waarbij hij [10,20,40,SP] SPECIAL uitdeelt en 2 seconden lang alles onderweg verbrandt",
-    "WHIRLPOOL": "Richt je op de verste vijand en laat een hagel van 4 draaikolken op hen los. Elk deelt [125,SP]% ATK PHYSICAL uit aan de eerste vijandelijke treffer",
+    "WHIRLPOOL": "Richt je op de verste vijand en laat een hagel van 4 draaikolken op hen los. Elk deelt [125,SP]% ATK SPECIAL uit aan de eerste vijandelijke treffer",
     "SMOKE_SCREEN": "Kanaal ondergronds en verschijnt opnieuw in het midden van het vijandelijke team, waarbij [10,20,40,SP] SPECIAL, BURN en ARMOR_REDUCTION alle aangrenzende eenheden gedurende 2 seconden worden uitgedeeld",
     "PRESENT": "Deelt [80,SP], [150,SP], [300,SP] SPECIAL uit, of geneest 80 HP van het doelwit",
     "AURASPHERE": "Straalt een aura uit en projecteert energie in een lijn die [25,50,SP] SPECIAL en SILENCE uitdeelt aan elke getroffen tegenstander gedurende 3 seconden."

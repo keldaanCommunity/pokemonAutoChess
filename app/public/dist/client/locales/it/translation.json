@@ -1012,7 +1012,7 @@
     "ASTRAL_BARRAGE": "Invia [3, SP=2] piccoli fantasmi a Pokémon avversari casuali. Ognuno di loro distribuisce 20 SPECIAL",
     "WATERFALL": "SHIELD stesso per [30,60,120,SP], cancella lo stato negativo e l'effetto della cella sul tabellone",
     "PYRO_BALL": "L'utilizzatore attacca accendendo una piccola pietra e lanciandola come una palla infuocata contro il bersaglio più lontano, infliggendo [10,20,40,SP] SPECIAL e BRUCIA per 2 secondi tutto ciò che incontra sulla sua strada",
-    "WHIRLPOOL": "Punta sul nemico più lontano e scatena una grandinata di 4 vortici verso di lui. Ciascuno infligge il [125,SP]% ATK FISICO al primo nemico colpito",
+    "WHIRLPOOL": "Punta sul nemico più lontano e scatena una grandinata di 4 vortici verso di lui. Ciascuno infligge il [125,SP]% ATK SPECIAL al primo nemico colpito",
     "SMOKE_SCREEN": "Canalizza sottoterra e riappare al centro della squadra nemica, infliggendo [10,20,40,SP] SPECIAL, BURN e ARMOR_REDUCTION a tutte le unità adiacenti per 2 secondi",
     "PRESENT": "Infligge [80,SP], [150,SP], [300,SP] SPECIAL o cura 80 HP del bersaglio",
     "AURASPHERE": "Emana un'aura e proietta energia in linea, infliggendo [25,50,SP] SPECIAL e SILENCE a ogni avversario colpito per 3 secondi."

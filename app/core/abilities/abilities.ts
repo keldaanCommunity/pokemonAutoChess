@@ -5555,7 +5555,7 @@ export class WhirlpoolStrategy extends AbilityStrategy {
           cell.value.handleSpecialDamage(
             Math.ceil(pokemon.atk * 1.25),
             board,
-            AttackType.PHYSICAL,
+            AttackType.SPECIAL,
             pokemon,
             crit
           )

@@ -1342,7 +1342,7 @@
     "ASTRAL_BARRAGE": "Envía [3,SP=2] pequeños fantasmas a Pokémon enemigos aleatorios. Cada uno de ellos Causa 20 de SPECIAL",
     "WATERFALL": "Obtiene [30,60,120,SP] SHIELD, limpia cualquier estado negativo y limpia la casilla",
     "PYRO_BALL": "El usuario ataca encendiendo una pequeña piedra y lanzándola como una bola de fuego al objetivo más lejano, causando [10,20,40,SP] de SPECIAL y dejando BURN durante 2 s todo lo que encuentre en su camino.",
-    "WHIRLPOOL": "Fija al enemigo más lejano y desata una lluvia de 4 remolinos hacia él. Cada uno inflige [125,SP] % de ATK PHYSICAL al primer enemigo golpeado.",
+    "WHIRLPOOL": "Fija al enemigo más lejano y desata una lluvia de 4 remolinos hacia él. Cada uno inflige [125,SP] % de ATK SPECIAL al primer enemigo golpeado.",
     "SMOKE_SCREEN": "Se esconde bajo tierera y reaparece en medio del equipo enemigo, causando [10,20,40,SP] de SPECIAL, dejandolo BURN y ARMOR_REDUCTION a todas las unidades adyacentes durante 2 segundos.",
     "PRESENT": "Puede infligir [80,SP], [150,SP], [300,SP] SPECIAL o curar 80 HP al objetivo",
     "LEAF_BLADE": "El siguiente ataque es un ataque crítico asegurado que inflige [100,SP]% de ATK como SPECIAL",
