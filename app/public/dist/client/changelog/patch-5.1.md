@@ -55,6 +55,7 @@
 - Nerf Eruption (Numel): 20/30/40 → 15/25/40 projectiles
 - Ditto can now hold items. Items are dropped when Ditto is transforming to another pokemon.
 - Changed Meteor Mash (Beldum): now deal 3 times 15/30/60 special damage to target and buff user attack by 2
+- Buff Wingull line: HP 80/180 → 90/200, Def 3/4 → 5/7, PP 85 → 75
 
 # Changes to Synergies
 
@@ -64,6 +65,7 @@
 - Buff Water: dodge 20 → 30%
 - Nerf Steel 8: 130% → 120% true damage
 - Nerf Flying 8: removed paralysis on take off
+- Nerf Artificial: 0/10/20% → 0/8/15% Attack, AP and Shield buff per item hold
 
 # Changes to Items
 
