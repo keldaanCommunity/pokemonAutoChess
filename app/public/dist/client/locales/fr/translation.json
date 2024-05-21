@@ -1204,7 +1204,7 @@
     "NASTY_PLOT": "Augmente l'ATK des pokémons de [10,SP] points",
     "THIEF": "Vole tous les objets de la cible que le porteur peut porter et inflige [15,30,60,SP] SPECIAL",
     "STUN_SPORE": "Inflige [10,20,40,SP] SPECIAL et PARALYSIS pendant 5 secondes aux ennemis adjacents",
-    "METEOR_MASH": "Zone d'effet autour de la cible qui inflige [30,50,70,SP] SPECIAL. Buff pokemon ATK par [5,SP].",
+    "METEOR_MASH": "Inflige 3 fois [15,30,60,SP] SPECIAL à la cible et augmente l'ATK du lanceur de [2,SP]",
     "HURRICANE": "Attaque à effet de zone qui inflige [25,50,100,SP] SPECIAL dans une ligne derrière la cible et rend la PARALYSIS pendant 4 secondes",
     "HEAL_BLOCK": "Inflige [20,40,80,SP] SPECIAL et WOUND pendant 5 secondes à tous les ennemis adjacents",
     "ROAR_OF_TIME": "Donne RESURECTION et [20,SP]% ATK_SPEED à votre allié le plus fort (le plus d'objets > le plus d'étoiles > le plus rare)",

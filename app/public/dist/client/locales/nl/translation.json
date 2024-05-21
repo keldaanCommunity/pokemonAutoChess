@@ -880,7 +880,7 @@
     "NASTY_PLOT": "Verbeter de ATK van de gebruiker met [10,SP]",
     "THIEF": "Steel zo veel mogelijk items van het doelwit die de gebruiker in bezit kan hebben en richt [15,30,60,SP] SPECIAL aan",
     "STUN_SPORE": "Breng [10,20,40,SP] SPECIAL uit en geeft PARALYSIS gedurende 5 seconden aan aangrenzende vijanden",
-    "METEOR_MASH": "Breng [30,50,70,SP] SPECIAL toe in een gebied rond het doelwit. Verbeter de gebruiker's ATK met [5,SP]",
+    "METEOR_MASH": "Breng 3 keer [15,30,60,SP] SPECIAL uit aan het doelwit en verbeter de ATK van de gebruiker met [2,SP]",
     "HURRICANE": "Breng [25,50,100,SP] SPECIAL toe aan alle vijandelijke Pokémon achter het doelwit en pas de PARALYSIS status op ze toe voor 4 seconden",
     "HEAL_BLOCK": "Breng [20,40,80,SP] SPECIAL en pas de WOUND status toe op alle aangrenzende vijandelijke Pokémon gedurende 5 seconden",
     "ROAR_OF_TIME": "Geef RESURECTION en [20,SP]% ATK_SPEED aan je sterkste bondgenoot (de meeste items > de meeste sterren > meest zeldzaam)",

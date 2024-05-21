@@ -3900,21 +3900,18 @@ export class MeteorMashStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [30, 50, 70][pokemon.stars - 1] ?? 70
-    pokemon.addAttack(5, pokemon, 1, crit)
-
-    const cells = board.getAdjacentCells(pokemon.targetX, pokemon.targetY, true)
-    cells.forEach((cell) => {
-      if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-      }
-    })
+    const nbHits = 3
+    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
+    pokemon.addAttack(2, pokemon, 1, crit)
+    for (let n = 0; n < nbHits; n++) {
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    }
   }
 }
 

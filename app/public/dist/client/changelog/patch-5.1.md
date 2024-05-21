@@ -53,6 +53,7 @@
 - Nerf Torkoal: HP 240 → 220, Def 10 → 8
 - Nerf Eruption (Numel): 20/30/40 → 15/25/40 projectiles
 - Ditto can now hold items. Items are dropped when Ditto is transforming to another pokemon.
+- Changed Meteor Mash (Beldum): now deal 3 times 15/30/60 special damage to target and buff user attack by 2
 
 # Changes to Synergies
 
