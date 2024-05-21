@@ -548,10 +548,6 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
-    case Ability.METEOR_MASH:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(3)
-      break
-
     case Ability.HURRICANE: {
       const [dx, dy] = OrientationVector[orientation]
       const finalCoordinates = transformAttackCoordinate(
