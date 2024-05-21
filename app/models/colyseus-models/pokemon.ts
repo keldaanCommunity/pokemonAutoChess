@@ -1540,7 +1540,7 @@ export class Litwick extends Pokemon {
   stars = 1
   evolution = Pkm.LAMPENT
   hp = 50
-  atk = 5
+  atk = 4
   def = 1
   speDef = 1
   maxPP = 100
@@ -13467,6 +13467,107 @@ export class Grumpig extends Pokemon {
   regional = true
 }
 
+export class Sinistea extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.POLTEAGEIST
+  hp = 80
+  atk = 4
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.TEA_TIME
+  attackSprite = AttackSprite.GHOST_RANGE
+  additional = true
+}
+
+export class Polteageist extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 180
+  atk = 9
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 2
+  skill = Ability.TEA_TIME
+  attackSprite = AttackSprite.GHOST_RANGE
+  additional = true
+}
+
+export class Ferroseed extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.STEEL])
+  rarity = Rarity.EPIC
+  evolution = Pkm.FERROTHORN
+  stars = 1
+  hp = 100
+  atk = 7
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 1
+  skill = Ability.SPIKES
+  attackSprite = AttackSprite.GRASS_MELEE
+  additional = true
+}
+
+export class Ferrothorn extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.STEEL])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 220
+  atk = 14
+  def = 14
+  speDef = 14
+  maxPP = 100
+  range = 1
+  skill = Ability.SPIKES
+  attackSprite = AttackSprite.GRASS_MELEE
+  additional = true
+}
+
+export class Golett extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GROUND,
+    Synergy.ARTIFICIAL,
+    Synergy.GHOST
+  ])
+  rarity = Rarity.RARE
+  evolution = Pkm.GOLURK
+  stars = 1
+  hp = 80
+  atk = 7
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.SHADOW_PUNCH
+  attackSprite = AttackSprite.NORMAL_MELEE
+  additional = true
+}
+
+export class Golurk extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GROUND,
+    Synergy.ARTIFICIAL,
+    Synergy.GHOST
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 180
+  atk = 20
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.SHADOW_PUNCH
+  attackSprite = AttackSprite.NORMAL_MELEE
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -14257,5 +14358,11 @@ export const PokemonClasses: Record<
   [Pkm.PHANPY]: Phanpy,
   [Pkm.DONPHAN]: Donphan,
   [Pkm.SPOINK]: Spoink,
-  [Pkm.GRUMPIG]: Grumpig
+  [Pkm.GRUMPIG]: Grumpig,
+  [Pkm.SINISTEA]: Sinistea,
+  [Pkm.POLTEAGEIST]: Polteageist,
+  [Pkm.FERROSEED]: Ferroseed,
+  [Pkm.FERROTHORN]: Ferrothorn,
+  [Pkm.GOLETT]: Golett,
+  [Pkm.GOLURK]: Golurk
 }
