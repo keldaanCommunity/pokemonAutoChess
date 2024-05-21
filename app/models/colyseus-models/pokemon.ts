@@ -7859,7 +7859,7 @@ export class Growlithe extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.ARCANINE
-  hp = 70
+  hp = 75
   atk = 6
   def = 2
   speDef = 2
@@ -7874,7 +7874,7 @@ export class Arcanine extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 130
+  hp = 140
   atk = 14
   def = 5
   speDef = 5
