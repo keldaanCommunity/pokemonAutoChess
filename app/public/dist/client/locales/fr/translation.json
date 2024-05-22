@@ -2170,7 +2170,8 @@
     "WILD": "Sauvage",
     "GLUTTON": "Goinfre",
     "STARGAZER": "Astronome",
-    "BLOODY": "Sanguinaire"
+    "BLOODY": "Sanguinaire",
+    "ETERNAL": "Eternel"
   },
   "title_description": {
     "NOVICE": "Jouez votre première partie",
@@ -2236,7 +2237,8 @@
     "OUTSIDER": "Remporter un match classé à 8 joueurs en étant le joueur au plus bas ELO",
     "GLUTTON": "Monter un Ronflex à plus de 750 PV de base",
     "STARGAZER": "Obtenez Solgaleo ou Lunala",
-    "BLOODY": "Obtenez Ursaking en forme Lune Vermeille"
+    "BLOODY": "Obtenez Ursaking en forme Lune Vermeille",
+    "ETERNAL": "Rencontrez Arceus au tour 40"
   },
   "weather": {
     "NEUTRAL": "Temps calme",

@@ -827,6 +827,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (heal > 1000) {
         player.titles.add(Title.NURSE)
       }
+
+      if (this.state.stageLevel >= 40) {
+        player.titles.add(Title.ETERNAL)
+      }
     }
   }
 
