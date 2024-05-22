@@ -18,21 +18,24 @@ import {
   IPlayer,
   IPokemon,
   IPokemonEntity,
-  Title
+  Title,
 } from "../../types"
 import {
   DEFAULT_ATK_SPEED,
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_DAMAGE,
   EvolutionTime,
-  SynergyTriggers
+  SynergyTriggers,
+  ItemStats
 } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
-import { AttackType, PokemonActionState, Rarity } from "../../types/enum/Game"
+import { AttackType, PokemonActionState, Rarity, Stat } from "../../types/enum/Game"
 import {
   AllItems,
   Berries,
+  BasicItems,
+  ArtificialItems,
   Item,
   ItemRecipe,
   SynergyItems
@@ -48,6 +51,9 @@ import { coinflip, pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
+import { logger } from "../../utils/logger"
+import { validateHeaderValue } from "node:http"
+import { PokemonEntity } from "../../core/pokemon-entity"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -127,7 +133,11 @@ export class Pokemon extends Schema implements IPokemon {
     pokemonsBeforeEvolution: Pokemon[]
     player: Player
   }) {
+    if (params.pokemonEvolved instanceof Garbodor) {
+      const garbodor: Garbodor = params.pokemonEvolved as Garbodor
+    }
     // called after evolving
+    
   }
 
   beforeSimulationStart(params: {
@@ -1730,7 +1740,7 @@ export class Torterra extends Pokemon {
 }
 
 export class Deino extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.DRAGON])
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.DARK])
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.ZWEILOUS
@@ -1746,7 +1756,7 @@ export class Deino extends Pokemon {
 }
 
 export class Zweilous extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.DRAGON])
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.DARK])
   rarity = Rarity.RARE
   stars = 2
   evolution = Pkm.HYDREIGON
@@ -1762,7 +1772,7 @@ export class Zweilous extends Pokemon {
 }
 
 export class Hydreigon extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.DRAGON])
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.DARK])
   rarity = Rarity.RARE
   stars = 3
   hp = 230
@@ -13435,6 +13445,162 @@ export class Grumpig extends Pokemon {
   regional = true
 }
 
+export class Trubbish extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.ARTIFICIAL])
+  rarity = Rarity.EPIC
+  evolution = Pkm.GARBODOR
+  stars = 1
+  hp = 110
+  atk = 8
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.GUNK_SHOT
+  passive = Passive.RECYCLE
+  attackSprite = AttackSprite.POISON_MELEE
+  additional = true
+
+  defaultValues = {
+    [Stat.HP] : this.hp,
+    [Stat.ATK] : this.atk,
+    [Stat.DEF] : this.def,
+    [Stat.SPE_DEF] : this.speDef,
+  }
+
+  statIncreases = {
+    [Stat.HP] : 0,
+    [Stat.ATK] : 0,
+    [Stat.ATK_SPEED] : 0,
+    [Stat.AP] : 0,
+    [Stat.DEF] : 0,
+    [Stat.SPE_DEF] : 0,
+    [Stat.CRIT_CHANCE] : 0,
+    [Stat.PP] : 0,
+    [Stat.SHIELD] : 0
+  }
+
+  beforeSimulationStart({ player }: { player: Player }) {
+    this.items.forEach((item) => {
+      if (BasicItems.includes(item) || Berries.includes(item)) {
+        this.statIncreases[Stat.HP] += 10
+      }
+      if (ArtificialItems.includes(item)) {
+        this.statIncreases[Stat.HP] += 50
+
+        let itemIndex = player.artificialItems.indexOf(item)
+        player.artificialItems[itemIndex] = Item.TRASH
+        player.items.push(player.artificialItems[itemIndex])
+      }
+    })
+    this.hp = this.defaultValues[Stat.HP] + this.statIncreases[Stat.HP]
+  }
+
+  afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
+
+    // Add non-permanent stats to Trubbish
+    entity.addAbilityPower(this.statIncreases[Stat.AP])
+    entity.addShield(this.statIncreases[Stat.SHIELD], entity)
+    entity.addCritChance(this.statIncreases[Stat.CRIT_CHANCE])
+    entity.addPP(this.statIncreases[Stat.PP])
+    entity.addAttackSpeed(this.statIncreases[Stat.ATK_SPEED])
+
+    entity.items.forEach((item) => {
+      if (BasicItems.includes(item) || ArtificialItems.includes(item) || Berries.includes(item)) {
+
+        // Add item Stats
+        if (ItemStats[item]) {
+          Object.entries(ItemStats[item]).forEach(([stat, value]) =>
+            this.statIncreases[stat as Stat] += value
+          )
+        }
+
+        // Delete item
+        entity.items.delete(item)
+        entity.refToBoardPokemon.items.delete(item)
+      }
+    })
+
+    // Update permanent stats
+    entity.refToBoardPokemon.hp = this.defaultValues[Stat.HP] + this.statIncreases[Stat.HP]
+    entity.refToBoardPokemon.atk = this.defaultValues[Stat.ATK] + this.statIncreases[Stat.ATK]
+    entity.refToBoardPokemon.def = this.defaultValues[Stat.DEF] + this.statIncreases[Stat.DEF]
+    entity.refToBoardPokemon.speDef = this.defaultValues[Stat.SPE_DEF] + this.statIncreases[Stat.SPE_DEF]
+  }
+
+  onEvolve({
+    pokemonEvolved: garbodorObj,
+    pokemonsBeforeEvolution: trubbishes
+  }: {
+    pokemonEvolved: Pokemon
+    pokemonsBeforeEvolution: Pokemon[]
+  }) {
+    // Carry over the stats gained with passive
+    let trubbishStats = {
+      [Stat.HP] : 0,
+      [Stat.ATK] : 0,
+      [Stat.ATK_SPEED] : 0,
+      [Stat.AP] : 0,
+      [Stat.DEF] : 0,
+      [Stat.SPE_DEF] : 0,
+      [Stat.CRIT_CHANCE] : 0,
+      [Stat.PP] : 0,
+      [Stat.SHIELD] : 0
+    }
+    trubbishes.forEach((trubbishObj) => {
+      const trubbish = trubbishObj as Trubbish
+      for(let key in trubbishStats){
+        trubbishStats[key] += trubbish.statIncreases[key]
+      }
+
+    });
+    const garbodor = garbodorObj as Garbodor
+    garbodor.statIncreases = trubbishStats
+    garbodor.hp += garbodor.statIncreases[Stat.HP]
+    garbodor.atk += garbodor.statIncreases[Stat.ATK]
+    garbodor.def += garbodor.statIncreases[Stat.DEF]
+    garbodor.speDef += garbodor.statIncreases[Stat.SPE_DEF]
+  }
+}
+
+export class Garbodor extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.ARTIFICIAL])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 230
+  atk = 15
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.GUNK_SHOT
+  passive = Passive.RECYCLE
+  attackSprite = AttackSprite.POISON_MELEE
+  additional = true
+  
+  statIncreases = {
+    [Stat.HP] : 0,
+    [Stat.ATK] : 0,
+    [Stat.ATK_SPEED] : 0,
+    [Stat.AP] : 0,
+    [Stat.DEF] : 0,
+    [Stat.SPE_DEF] : 0,
+    [Stat.CRIT_CHANCE] : 0,
+    [Stat.PP] : 0,
+    [Stat.SHIELD] : 0
+  }
+
+  defaultValues = {
+    [Stat.HP] : this.hp,
+    [Stat.ATK] : this.atk,
+    [Stat.DEF] : this.def,
+    [Stat.SPE_DEF] : this.speDef
+  }
+
+  beforeSimulationStart = Trubbish.prototype.beforeSimulationStart
+  afterSimulationStart = Trubbish.prototype.afterSimulationStart
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -14224,5 +14390,7 @@ export const PokemonClasses: Record<
   [Pkm.PHANPY]: Phanpy,
   [Pkm.DONPHAN]: Donphan,
   [Pkm.SPOINK]: Spoink,
-  [Pkm.GRUMPIG]: Grumpig
+  [Pkm.GRUMPIG]: Grumpig,
+  [Pkm.TRUBBISH]: Trubbish,
+  [Pkm.GARBODOR]: Garbodor
 }

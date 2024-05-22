@@ -89,7 +89,8 @@ export enum Item {
   INCENSE = "INCENSE",
   EXP_SHARE = "EXP_SHARE",
   METEORITE = "METEORITE",
-  BERRY_JUICE = "BERRY_JUICE"
+  BERRY_JUICE = "BERRY_JUICE",
+  TRASH = "TRASH"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -98,7 +99,8 @@ export const AllItems: Item[] = Object.values(Item)
 export const SpecialItems: Item[] = [
   Item.COMFEY,
   Item.METEORITE,
-  Item.BERRY_JUICE
+  Item.BERRY_JUICE,
+  Item.TRASH
 ]
 
 export const BasicItems: Item[] = [

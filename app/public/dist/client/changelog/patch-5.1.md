@@ -9,6 +9,8 @@
  - Donphan
  - Spoink
  - Grumpig
+ - Trubbish
+ - Garbodor
 
 # Changes to Pokemon & Abilities
 
@@ -45,6 +47,7 @@
 - Removed Leftovers
 - Changed recipe for Gracidea Flower: magnet + seed
 - New item: Soothe Bell (charcoal + seed): the holder attack gives 25% of damage dealt as Shield to the ally closest to the target
+- New item: Trash: The remains of an artificial item. It does nothing.
 - Buff Incense: ~~10~~ 15% chance to charm on attack received
 - Buff Macho Brace: ~~-25~~ -15% attack speed
 - Buff Electirizer: ~~+40~~ +50% attack speed, paralysis duration ~~4~~ 2 seconds

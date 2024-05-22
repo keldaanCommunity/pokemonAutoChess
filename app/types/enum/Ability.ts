@@ -322,5 +322,6 @@ export enum Ability {
   AQUA_TAIL = "AQUA_TAIL",
   HAIL = "HAIL",
   RAPID_SPIN = "RAPID_SPIN",
-  BOUNCE = "BOUNCE"
+  BOUNCE = "BOUNCE",
+  GUNK_SHOT = "GUNK_SHOT"
 }
