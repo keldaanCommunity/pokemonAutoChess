@@ -124,53 +124,6 @@ export default class Status extends Schema implements IStatus {
       this.triggerParalysis(2000, pokemon)
     }
 
-    if (
-      pokemon.effects.has(Effect.STEALTH_ROCKS) &&
-      !pokemon.types.has(Synergy.ROCK) &&
-      !pokemon.types.has(Synergy.FLYING) &&
-      !this.wound
-    ) {
-      pokemon.handleDamage({
-        damage: 10,
-        board,
-        attackType: AttackType.PHYSICAL,
-        attacker: null,
-        shouldTargetGainMana: true
-      })
-      this.triggerWound(1000, pokemon, undefined)
-    }
-
-    if (
-      pokemon.effects.has(Effect.SPIKES) &&
-      !pokemon.types.has(Synergy.FLYING) &&
-      !this.armorReduction
-    ) {
-      pokemon.handleDamage({
-        damage: 10,
-        board,
-        attackType: AttackType.TRUE,
-        attacker: null,
-        shouldTargetGainMana: true
-      })
-      this.triggerArmorReduction(1000, pokemon)
-    }
-
-    if (
-      pokemon.effects.has(Effect.HAIL) &&
-      !pokemon.types.has(Synergy.ICE) &&
-      !this.freeze
-    ) {
-      pokemon.handleDamage({
-        damage: 10,
-        board,
-        attackType: AttackType.SPECIAL,
-        attacker: null,
-        shouldTargetGainMana: true
-      })
-      this.triggerFreeze(1000, pokemon)
-      pokemon.effects.delete(Effect.HAIL)
-    }
-
     if (pokemon.status.runeProtect) {
       this.updateRuneProtect(dt)
     }
