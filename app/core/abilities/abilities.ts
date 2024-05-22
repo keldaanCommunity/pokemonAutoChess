@@ -48,7 +48,7 @@ import { Weather } from "../../types/enum/Weather"
 import PokemonFactory from "../../models/pokemon-factory"
 import { createRandomEgg } from "../../models/egg-factory"
 import Board, { Cell } from "../board"
-import { PokemonEntity } from "../pokemon-entity"
+import { getStrongestUnit, PokemonEntity } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 
 import { getFirstAvailablePositionInBench } from "../../utils/board"
@@ -1999,8 +1999,10 @@ export class RoarOfTimeStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const atkSpeedBuff = 20
-
-    const strongest = board.getStrongestUnitOnBoard(pokemon.team)
+    const candidates = board.cells.filter(
+      (cell) => cell && cell.team === pokemon.team && !cell.status.resurection
+    ) as PokemonEntity[]
+    const strongest = getStrongestUnit(candidates)
     if (strongest) {
       strongest.status.resurection = true
       strongest.addAttackSpeed(atkSpeedBuff, pokemon, 1, true)

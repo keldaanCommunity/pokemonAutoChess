@@ -111,6 +111,7 @@
 - Fixed Comfey being duplicated when given to flora spawn
 - Flying protections no longer are reset after resurection
 - Pokedoll no longer reduce true damage
+- Roar of time now cannot target units that already have resurection status
 
 # Misc
 
