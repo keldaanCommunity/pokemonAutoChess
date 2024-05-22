@@ -5,6 +5,7 @@ import { Pkm, PkmDuo, PkmDuos } from "../../../../../types/enum/Pokemon"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { pokemonPropositionClick } from "../../../stores/NetworkStore"
 import { getGameScene } from "../../game"
+import { playSound, SOUNDS } from "../../utils/audio"
 import { addIconsToDescription } from "../../utils/descriptions"
 import GamePokemonDuoPortrait from "./game-pokemon-duo-portrait"
 import GamePokemonPortrait from "./game-pokemon-portrait"
@@ -46,7 +47,10 @@ export default function GamePokemonsPropositions() {
                 <div
                   key={index}
                   className="my-box active clickable"
-                  onClick={() => dispatch(pokemonPropositionClick(proposition))}
+                  onClick={() => {
+                    playSound(SOUNDS.BUTTON_CLICK)
+                    dispatch(pokemonPropositionClick(proposition))
+                  }}
                 >
                   {proposition in PkmDuos ? (
                     <GamePokemonDuoPortrait

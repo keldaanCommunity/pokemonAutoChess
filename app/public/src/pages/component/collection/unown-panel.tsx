@@ -15,10 +15,10 @@ export default function UnownPanel(props: {
     (state) => state.lobby.pokemonCollection
   )
   const secretMessage = `    
-    To unleash ancient power ?
-    Max Groudon with a red Orb
-    Delta Sphere over Rayquaza
-    And blue Jewel for Kyogre!
+    To unleash ancient powers?
+    Max Groudon with a red orb
+    Give Kyogre a blue orb and
+    use Jade orb for Rayquaza!
     `
     .replace(/^\s+/gm, "")
     .replace(/\s+$/gm, "")
@@ -42,7 +42,7 @@ export default function UnownPanel(props: {
           return (b.config?.dust ?? 0) - (a.config?.dust ?? 0)
         }
       }),
-    [props.sort]
+    [props.sort, pokemonCollection]
   )
 
   return (

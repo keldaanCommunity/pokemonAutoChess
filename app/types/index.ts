@@ -47,10 +47,6 @@ export const CDN_URL =
 
 export const USERNAME_REGEXP = /^(\p{Letter}|[0-9]|\.|-|_){3,24}$/u
 
-export type NonFunctionPropNames<T> = {
-  [K in keyof T]: T[K] extends (...rest: unknown[]) => unknown ? never : K
-}[keyof T]
-
 export type PkmWithConfig = { name: Pkm; shiny?: boolean; emotion?: Emotion }
 
 export enum Role {
@@ -106,7 +102,7 @@ export enum Transfer {
   USER = "USER",
   DRAG_DROP_FAILED = "DRAG_DROP_FAILED",
   SHOW_EMOTE = "SHOW_EMOTE",
-  BROADCAST_INFO = "BROADCAST_INFO",
+  FINAL_RANK = "FINAL_RANK",
   SEARCH_BY_ID = "SEARCH_BY_ID",
   SUGGESTIONS = "SUGGESTIONS",
   SET_TITLE = "SET_TITLE",
@@ -155,6 +151,7 @@ export enum Transfer {
 
 export enum AttackSprite {
   BUG_MELEE = "BUG/melee",
+  BUG_RANGE = "BUG/range",
   DARK_MELEE = "DARK/melee",
   DARK_RANGE = "DARK/range",
   DRAGON_MELEE = "DRAGON/melee",
@@ -183,12 +180,14 @@ export enum AttackSprite {
   WATER_RANGE = "WATER/range",
   ROCK_MELEE = "ROCK/melee",
   ROCK_RANGE = "ROCK/range",
+  SOUND_RANGE = "SOUND/range",
   STEEL_MELEE = "STEEL/melee"
 }
 
 export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
   {
     "BUG/melee": [1.5, 1.5],
+    "BUG/range": [2, 2],
     "DARK/melee": [1.5, 1.5],
     "DARK/range": [1.5, 1.5],
     "DRAGON/melee": [2, 2],
@@ -196,12 +195,12 @@ export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
     "ELECTRIC/melee": [1.5, 1.5],
     "ELECTRIC/range": [2, 2],
     "FAIRY/melee": [2, 2],
-    "FAIRY/range": [1.5, 1.5],
+    "FAIRY/range": [2, 2],
     "FIGHTING/melee": [2, 2],
     "FIGHTING/range": [2, 2],
     "FIRE/melee": [1, 1],
     "FIRE/range": [2, 2],
-    "FLYING/melee": [1.5, 1.5],
+    "FLYING/melee": [1, 1],
     "FLYING/range": [1.5, 1.5],
     "GHOST/range": [2, 2],
     "GRASS/melee": [1, 1],
@@ -216,6 +215,7 @@ export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
     "ROCK/melee": [1.5, 1.5],
     "ROCK/range": [2, 2],
     "STEEL/melee": [1.5, 1.5],
+    "SOUND/range": [2, 2],
     "WATER/melee": [2, 2],
     "WATER/range": [3, 3]
   }
@@ -409,6 +409,7 @@ export interface IPokemon {
   action: PokemonActionState
   canBePlaced: boolean
   canBeCloned: boolean
+  canHoldItems: boolean
 }
 
 export interface IExperienceManager {
@@ -465,20 +466,61 @@ export interface IPokemonEntity {
   simulation: ISimulation
   refToBoardPokemon: IPokemon
   applyStat(stat: Stat, value: number): void
-  addAbilityPower(value: number): void
-  addPP(pp: number): void
-  addAttack(atk: number): void
-  addAttackSpeed(as: number): void
+  addAbilityPower(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
+  addPP(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
+  addAttack(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
+  addAttackSpeed(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
   addMaxHP(life: number): void
   addShield(
-    shieldBonus: number,
-    pokemon: IPokemonEntity,
-    apBoost?: boolean
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
   ): void
-  addDefense(value: number, apBoost?: boolean): void
-  addSpecialDefense(value: number, apBoost?: boolean): void
-  addCritChance(value: number): void
-  addCritDamage(value: number, apBoost?: boolean): void
+  addDefense(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
+  addSpecialDefense(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
+  addCritChance(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
+  addCritPower(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
   update(
     dt: number,
     board: Board,
@@ -521,7 +563,7 @@ export interface IPokemonEntity {
   passive: Passive
   status: Status
   count: Count
-  critDamage: number
+  critPower: number
   ap: number
   healDone: number
   shiny: boolean
@@ -581,6 +623,7 @@ export interface ICount {
 
 export interface IPreparationMetadata {
   name: string
+  ownerName: string
   password: string | null
   noElo: boolean
   type: "preparation"
@@ -594,6 +637,7 @@ export interface IPreparationMetadata {
 
 export interface IGameMetadata {
   name: string
+  ownerName: string
   gameMode: GameMode
   playerIds: string[]
   stageLevel: number
@@ -673,7 +717,8 @@ export enum Title {
   VANQUISHER = "VANQUISHER",
   OUTSIDER = "OUTSIDER",
   GLUTTON = "GLUTTON",
-  STARGAZER = "STARGAZER"
+  STARGAZER = "STARGAZER",
+  BLOODY = "BLOODY"
 }
 
 export interface IBoardEvent {

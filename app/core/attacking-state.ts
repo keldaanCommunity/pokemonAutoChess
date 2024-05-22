@@ -146,15 +146,15 @@ export default class AttackingState extends PokemonState {
       if (Math.random() * 100 < pokemon.critChance) {
         pokemon.onCriticalAttack({ target, board })
         if (target.items.has(Item.ROCKY_HELMET) === false) {
-          let opponentCritDamage = pokemon.critDamage
+          let opponentCritPower = pokemon.critPower
           if (target.effects.has(Effect.BATTLE_ARMOR)) {
-            opponentCritDamage -= 0.3
+            opponentCritPower -= 0.3
           } else if (target.effects.has(Effect.MOUTAIN_RESISTANCE)) {
-            opponentCritDamage -= 0.5
+            opponentCritPower -= 0.5
           } else if (target.effects.has(Effect.DIAMOND_STORM)) {
-            opponentCritDamage -= 0.7
+            opponentCritPower -= 0.7
           }
-          damage = Math.round(damage * opponentCritDamage)
+          damage = Math.round(damage * opponentCritPower)
         }
       }
 
@@ -178,7 +178,7 @@ export default class AttackingState extends PokemonState {
       } else if (pokemon.effects.has(Effect.CORKSCREW_CRASH)) {
         trueDamagePart += 1.0
       } else if (pokemon.effects.has(Effect.MAX_MELTDOWN)) {
-        trueDamagePart += 1.3
+        trueDamagePart += 1.2
       }
       if (pokemon.items.has(Item.RED_ORB) && target) {
         trueDamagePart += 0.25

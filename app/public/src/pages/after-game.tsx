@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { Navigate } from "react-router-dom"
 import AfterGameState from "../../../rooms/states/after-game-state"
 import { useAppDispatch, useAppSelector } from "../hooks"
+import { preferences } from "../preferences"
 import {
   addPlayer,
   leaveAfter,
@@ -76,7 +77,7 @@ export default function AfterGame() {
       r.state.players.onAdd((player) => {
         dispatch(addPlayer(player))
         if (player.id === currentPlayerId) {
-          playSound(SOUNDS["FINISH" + player.rank])
+          playSound(SOUNDS["FINISH" + player.rank], preferences.musicVolume / 100)
         }
       })
       r.state.listen("elligibleToELO", (value, previousValue) => {

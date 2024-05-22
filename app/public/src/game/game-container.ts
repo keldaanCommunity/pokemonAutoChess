@@ -1,4 +1,5 @@
 import { Room } from "colyseus.js"
+import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import Phaser from "phaser"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin.js"
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin.js"
@@ -23,7 +24,6 @@ import {
   IPlayer,
   IPokemon,
   ISimplePlayer,
-  NonFunctionPropNames,
   Transfer
 } from "../../../types"
 import { Ability } from "../../../types/enum/Ability"
@@ -45,6 +45,7 @@ import { changePlayer } from "../stores/GameStore"
 import { getPortraitSrc } from "../utils"
 import { BoardMode } from "./components/board-manager"
 import GameScene from "./scenes/game-scene"
+import { playSound, SOUNDS } from "../pages/utils/audio"
 
 class GameContainer {
   room: Room<GameState>
@@ -103,7 +104,6 @@ class GameContainer {
       "charm",
       "confusion",
       "curse",
-      "deltaOrbStacks",
       "electricField",
       "fairyField",
       "flinch",
@@ -140,7 +140,7 @@ class GameContainer {
         "orientation",
         "action",
         "critChance",
-        "critDamage",
+        "critPower",
         "ap",
         "atkSpeed",
         "life",
@@ -375,7 +375,7 @@ class GameContainer {
         ]
         fields.forEach((field) => {
           pokemon.listen(field, (value, previousValue) => {
-            if (player.id === this.spectatedPlayerId) {
+            if (field && player.id === this.spectatedPlayerId) {
               this.gameScene?.board?.changePokemon(pokemon, field, value)
             }
           })
@@ -481,6 +481,8 @@ class GameContainer {
           this.gameScene.weatherManager.addSnow()
         } else if (value === Weather.NIGHT) {
           this.gameScene.weatherManager.addNight()
+        } else if (value === Weather.BLOODMOON) {
+          this.gameScene.weatherManager.addBloodMoon()
         } else if (value === Weather.WINDY) {
           this.gameScene.weatherManager.addWind()
         } else if (value === Weather.STORM) {
@@ -566,6 +568,7 @@ class GameContainer {
         pokemonUI.fishingAnimation()
       } else if (pokemonUI && pokemon.stars > 1) {
         pokemonUI.evolutionAnimation()
+        playSound(pokemon.stars === 2 ? SOUNDS.EVOLUTION_T2 : SOUNDS.EVOLUTION_T3)
       } else if (pokemonUI && pokemon.rarity === Rarity.HATCH) {
         pokemonUI.hatchAnimation()
       }

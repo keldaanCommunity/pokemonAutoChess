@@ -54,7 +54,6 @@
     "body-parser": "^1.20.1",
     "colyseus": "^0.15.17",
     "colyseus.js": "^0.15.16",
-    "compression": "^1.7.4",
     "cors": "^2.8.5",
     "cron": "^3.1.6",
     "d3": "^7.8.5",
@@ -122,7 +121,7 @@
     "npm-run-all": "^4.1.5",
     "openapi-typescript": "^6.7.4",
     "pm2": "^5.3.1",
-    "rimraf": "^5.0.5",
+    "rimraf": "^5.0.7",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.3"
   }

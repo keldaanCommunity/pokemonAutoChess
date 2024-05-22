@@ -727,6 +727,7 @@ export enum Pkm {
   TEDDIURSA = "TEDDIURSA",
   URSARING = "URSARING",
   URSALUNA = "URSALUNA",
+  URSALUNA_BLOODMOON = "URSALUNA_BLOODMOON",
   AIPOM = "AIPOM",
   AMBIPOM = "AMBIPOM",
   DEERLING = "DEERLING",
@@ -784,6 +785,12 @@ export enum Pkm {
   DONPHAN = "DONPHAN",
   SPOINK = "SPOINK",
   GRUMPIG = "GRUMPIG",
+  SINISTEA = "SINISTEA",
+  POLTEAGEIST = "POLTEAGEIST",
+  FERROSEED = "FERROSEED",
+  FERROTHORN = "FERROTHORN",
+  GOLETT = "GOLETT",
+  GOLURK = "GOLURK",
   TRUBBISH = "TRUBBISH",
   GARBODOR = "GARBODOR"
 }
@@ -1492,6 +1499,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.TEDDIURSA]: "0216",
   [Pkm.URSARING]: "0217",
   [Pkm.URSALUNA]: "0901",
+  [Pkm.URSALUNA_BLOODMOON]: "0901-0001",
   [Pkm.AIPOM]: "0190",
   [Pkm.AMBIPOM]: "0424",
   [Pkm.DEERLING]: "0585",
@@ -1572,6 +1580,12 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.DONPHAN]: "0232",
   [Pkm.SPOINK]: "0325",
   [Pkm.GRUMPIG]: "0326",
+  [Pkm.SINISTEA]: "0854",
+  [Pkm.POLTEAGEIST]: "0855",
+  [Pkm.FERROSEED]: "0597",
+  [Pkm.FERROTHORN]: "0598",
+  [Pkm.GOLETT]: "0622",
+  [Pkm.GOLURK]: "0623",
   [Pkm.TRUBBISH]: "0568",
   [Pkm.GARBODOR]: "0569"
 }
@@ -2282,6 +2296,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TEDDIURSA]: Pkm.TEDDIURSA,
   [Pkm.URSARING]: Pkm.TEDDIURSA,
   [Pkm.URSALUNA]: Pkm.TEDDIURSA,
+  [Pkm.URSALUNA_BLOODMOON]: Pkm.TEDDIURSA,
   [Pkm.AIPOM]: Pkm.AIPOM,
   [Pkm.AMBIPOM]: Pkm.AIPOM,
   [Pkm.DEERLING]: Pkm.DEERLING,
@@ -2360,6 +2375,12 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.DONPHAN]: Pkm.PHANPY,
   [Pkm.SPOINK]: Pkm.SPOINK,
   [Pkm.GRUMPIG]: Pkm.SPOINK,
+  [Pkm.SINISTEA]: Pkm.SINISTEA,
+  [Pkm.POLTEAGEIST]: Pkm.SINISTEA,
+  [Pkm.FERROSEED]: Pkm.FERROSEED,
+  [Pkm.FERROTHORN]: Pkm.FERROSEED,
+  [Pkm.GOLETT]: Pkm.GOLETT,
+  [Pkm.GOLURK]: Pkm.GOLETT,
   [Pkm.TRUBBISH]: Pkm.TRUBBISH,
   [Pkm.GARBODOR]: Pkm.TRUBBISH
 }
@@ -6036,10 +6057,14 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.URSALUNA]: {
-    //TODO: anims not yet available
-    attack: AnimationType.Idle,
-    ability: AnimationType.Idle,
-    emote: AnimationType.Idle
+    attack: AnimationType.Attack,
+    ability: AnimationType.Strike,
+    emote: AnimationType.RearUp
+  },
+  [Pkm.URSALUNA_BLOODMOON]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.AIPOM]: {
     attack: AnimationType.Attack,
@@ -6435,6 +6460,36 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Hop,
     emote: AnimationType.Shoot
+  },
+  [Pkm.SINISTEA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.POLTEAGEIST]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.FERROSEED]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Special0,
+    emote: AnimationType.DeepBreath
+  },
+  [Pkm.FERROTHORN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Special0,
+    emote: AnimationType.Special0
+  },
+  [Pkm.GOLETT]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Tumble,
+    emote: AnimationType.Pose
+  },
+  [Pkm.GOLURK]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge
   },
   [Pkm.TRUBBISH]: {
     attack: AnimationType.Attack,

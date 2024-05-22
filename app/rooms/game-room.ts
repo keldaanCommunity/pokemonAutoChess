@@ -33,6 +33,7 @@ import {
   IGameHistorySimplePlayer,
   IGameMetadata,
   IPokemon,
+  IPokemonEntity,
   Role,
   Title,
   Transfer
@@ -96,6 +97,7 @@ export default class GameRoom extends Room<GameState> {
     users: MapSchema<IGameUser>
     preparationId: string
     name: string
+    ownerName: string
     noElo: boolean
     gameMode: GameMode
     minRank: EloRank | null
@@ -106,6 +108,7 @@ export default class GameRoom extends Room<GameState> {
     logger.trace("create game room")
     this.setMetadata(<IGameMetadata>{
       name: options.name,
+      ownerName: options.ownerName,
       gameMode: options.gameMode,
       playerIds: keys(options.users).filter(
         (id) => options.users.get(id)!.isBot === false
@@ -950,4 +953,58 @@ export default class GameRoom extends Room<GameState> {
       player.itemsProposition.clear()
     }
   }
+
+  computeRoundDamage(
+    opponentTeam: MapSchema<IPokemonEntity>,
+    stageLevel: number
+  ) {
+    if (this.state.specialGameRule === SpecialGameRule.NINE_LIVES) return 1
+
+    let damage = Math.ceil(stageLevel / 2)
+    if (opponentTeam.size > 0) {
+      opponentTeam.forEach((pokemon) => {
+        if (!pokemon.isClone) {
+          damage += 1
+        }
+      })
+    }
+    return damage
+  }
+
+  rankPlayers() {
+    const rankArray = new Array<{ id: string; life: number; level: number }>()
+    this.state.players.forEach((player) => {
+      if (!player.alive) {
+        return
+      }
+
+      rankArray.push({
+        id: player.id,
+        life: player.life,
+        level: player.experienceManager.level
+      })
+    })
+
+    const sortPlayers = (
+      a: { id: string; life: number; level: number },
+      b: { id: string; life: number; level: number }
+    ) => {
+      let diff = b.life - a.life
+      if (diff == 0) {
+        diff = b.level - a.level
+      }
+      return diff
+    }
+
+    rankArray.sort(sortPlayers)
+
+    rankArray.forEach((rankPlayer, index) => {
+      const player = this.state.players.get(rankPlayer.id)
+      if (player) {
+        player.rank = index + 1
+      }
+    })
+  }
+
+
 }

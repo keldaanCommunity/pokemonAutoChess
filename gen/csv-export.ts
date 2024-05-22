@@ -63,58 +63,60 @@ interface PokemonData {
   duo: boolean
 }
 
-const data: PokemonData[] = []
+export function csvExport() {
+  const data: PokemonData[] = []
 
-Object.values(Pkm)
-  .sort((a, b) => PkmIndex[a].localeCompare(PkmIndex[b]))
-  .forEach((pkm) => {
-    const pokemon = PokemonFactory.createPokemonFromName(pkm)
-    const pokemonData = getPokemonData(pkm)
-    if (pokemon.skill != Ability.DEFAULT) {
-      const family = Object.keys(PkmFamily).filter(
-        (p) => PkmFamily[p] === PkmFamily[pkm]
-      )
-      const types: Synergy[] = pokemonData.types
-      const familyTypes = [
-        ...new Set(
-          family.flatMap((p) => [
-            ...Array.from(
-              PokemonFactory.createPokemonFromName(p as Pkm).types.values()
-            )
-          ])
+  Object.values(Pkm)
+    .sort((a, b) => PkmIndex[a].localeCompare(PkmIndex[b]))
+    .forEach((pkm) => {
+      const pokemon = PokemonFactory.createPokemonFromName(pkm)
+      const pokemonData = getPokemonData(pkm)
+      if (pokemon.skill != Ability.DEFAULT) {
+        const family = Object.keys(PkmFamily).filter(
+          (p) => PkmFamily[p] === PkmFamily[pkm]
         )
-      ]
-      data.push({
-        index: pokemon.index,
-        name: pkm,
-        category: pokemon.rarity,
-        tier: pokemon.stars,
-        stages:
-          pokemon.stages ??
-          Math.max(...family.map((p) => getPokemonData(p as Pkm).stars)),
-        additional: pokemonData.additional,
-        regional: pokemonData.regional,
-        duo: Object.values(PkmDuos).some((duo) => duo.includes(pkm)),
-        type1: types[0] ?? "",
-        type2: types[1] ?? "",
-        type3: types[2] ?? "",
-        type4: types[3] ?? "",
-        hp: pokemon.hp,
-        attack: pokemon.atk,
-        def: pokemon.def,
-        spedef: pokemon.speDef,
-        range: pokemon.range,
-        pp: pokemon.maxPP,
-        ability: pokemon.skill,
-        family: PkmFamily[pkm],
-        familyType1: familyTypes[0] ?? "",
-        familyType2: familyTypes[1] ?? "",
-        familyType3: familyTypes[2] ?? "",
-        familyType4: familyTypes[3] ?? ""
-      })
-    }
-  })
+        const types: Synergy[] = pokemonData.types
+        const familyTypes = [
+          ...new Set(
+            family.flatMap((p) => [
+              ...Array.from(
+                PokemonFactory.createPokemonFromName(p as Pkm).types.values()
+              )
+            ])
+          )
+        ]
+        data.push({
+          index: pokemon.index,
+          name: pkm,
+          category: pokemon.rarity,
+          tier: pokemon.stars,
+          stages:
+            pokemon.stages ??
+            Math.max(...family.map((p) => getPokemonData(p as Pkm).stars)),
+          additional: pokemonData.additional,
+          regional: pokemonData.regional,
+          duo: Object.values(PkmDuos).some((duo) => duo.includes(pkm)),
+          type1: types[0] ?? "",
+          type2: types[1] ?? "",
+          type3: types[2] ?? "",
+          type4: types[3] ?? "",
+          hp: pokemon.hp,
+          attack: pokemon.atk,
+          def: pokemon.def,
+          spedef: pokemon.speDef,
+          range: pokemon.range,
+          pp: pokemon.maxPP,
+          ability: pokemon.skill,
+          family: PkmFamily[pkm],
+          familyType1: familyTypes[0] ?? "",
+          familyType2: familyTypes[1] ?? "",
+          familyType3: familyTypes[2] ?? "",
+          familyType4: familyTypes[3] ?? ""
+        })
+      }
+    })
 
-csvWriter
-  .writeRecords(data)
-  .then(() => logger.info("CSV export done successfully"))
+  csvWriter
+    .writeRecords(data)
+    .then(() => logger.info("CSV export done successfully"))
+}

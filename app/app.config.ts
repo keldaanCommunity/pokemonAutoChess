@@ -1,6 +1,5 @@
 import { monitor } from "@colyseus/monitor"
 import config from "@colyseus/tools"
-import compression from "compression"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
@@ -11,7 +10,7 @@ import path from "path"
 import { initTilemap } from "./core/design"
 import ItemsStatistics from "./models/mongo-models/items-statistic"
 import Meta from "./models/mongo-models/meta"
-import PokemonsStatistics from "./models/mongo-models/pokemons-statistic"
+import PokemonsStatistics from "./models/mongo-models/pokemons-statistic-v2"
 import TitleStatistic from "./models/mongo-models/title-statistic"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "./models/precomputed/precomputed-types"
 import AfterGameRoom from "./rooms/after-game-room"
@@ -58,9 +57,6 @@ export default config({
      * Bind your custom express routes here:
      * Read more: https://expressjs.com/en/starter/basic-routing.html
      */
-
-    // compress all responses
-    app.use(compression())
 
     app.use(((err, req, res, next) => {
       res.status(err.status).json(err)

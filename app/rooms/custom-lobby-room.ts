@@ -43,12 +43,16 @@ import {
   ChangeNameCommand,
   ChangeSelectedEmotionCommand,
   ChangeTitleCommand,
+  CreateTournamentLobbiesCommand,
   DeleteBotCommand,
+  EndTournamentMatchCommand,
   GiveBoostersCommand,
   GiveRoleCommand,
   GiveTitleCommand,
   MakeServerAnnouncementCommand,
+  NextTournamentStageCommand,
   OnBotUploadCommand,
+  OnCreateTournamentCommand,
   OnJoinCommand,
   OnLeaveCommand,
   OnNewMessageCommand,
@@ -56,16 +60,12 @@ import {
   OnSearchCommand,
   OpenBoosterCommand,
   OpenSpecialGameCommand,
+  ParticipateInTournamentCommand,
   RemoveMessageCommand,
+  RemoveTournamentCommand,
   SelectLanguageCommand,
   UnbanUserCommand,
-  createBotList,
-  RemoveTournamentCommand,
-  OnCreateTournamentCommand,
-  ParticipateInTournamentCommand,
-  NextTournamentStageCommand,
-  EndTournamentMatchCommand,
-  CreateTournamentLobbiesCommand
+  createBotList
 } from "./commands/lobby-commands"
 import LobbyState from "./states/lobby-state"
 
@@ -215,14 +215,10 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
     this.onMessage(
       Transfer.BAN,
-      (
-        client,
-        { uid, name, reason }: { uid: string; name: string; reason: string }
-      ) => {
+      (client, { uid, reason }: { uid: string; reason: string }) => {
         this.dispatcher.dispatch(new BanUserCommand(), {
           client,
           uid,
-          name,
           reason
         })
       }
@@ -474,7 +470,10 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         noElo?: boolean
       }) => {
         // open another special lobby when the previous one is full
-        if(params.gameMode === GameMode.RANKED || params.gameMode === GameMode.SCRIBBLE){
+        if (
+          params.gameMode === GameMode.RANKED ||
+          params.gameMode === GameMode.SCRIBBLE
+        ) {
           this.dispatcher.dispatch(new OpenSpecialGameCommand(), params)
         }
       }
@@ -701,13 +700,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       cronTime: "0 0/10 * * * *", // every 10 minutes
       timeZone: "Europe/Paris",
       onTick: () => this.fetchLeaderboards(),
-      start: true
-    })
-
-    const tournamentRefreshJob = CronJob.from({
-      cronTime: "0 0 0/1 * * *", // every hour
-      timeZone: "Europe/Paris",
-      onTick: () => this.fetchTournaments(),
       start: true
     })
 

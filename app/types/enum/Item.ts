@@ -31,7 +31,7 @@ export enum Item {
   BLUE_ORB = "BLUE_ORB",
   SCOPE_LENS = "SCOPE_LENS",
   STAR_DUST = "STAR_DUST",
-  DELTA_ORB = "DELTA_ORB",
+  GREEN_ORB = "GREEN_ORB",
   MANA_SCARF = "MANA_SCARF",
   SMOKE_BALL = "SMOKE_BALL",
   XRAY_VISION = "XRAY_VISION",
@@ -103,7 +103,7 @@ export const SpecialItems: Item[] = [
   Item.TRASH
 ]
 
-export const BasicItems: Item[] = [
+export const ItemComponents: Item[] = [
   Item.FOSSIL_STONE,
   Item.TWISTED_SPOON,
   Item.MAGNET,
@@ -137,7 +137,7 @@ export const ItemRecipe: { [key in Item]?: Item[] } = {
   [Item.BLUE_ORB]: [Item.MYSTIC_WATER, Item.MAGNET],
   [Item.SCOPE_LENS]: [Item.MYSTIC_WATER, Item.BLACK_GLASSES],
   [Item.STAR_DUST]: [Item.MYSTIC_WATER, Item.MIRACLE_SEED],
-  [Item.DELTA_ORB]: [Item.MYSTIC_WATER, Item.NEVER_MELT_ICE],
+  [Item.GREEN_ORB]: [Item.MYSTIC_WATER, Item.NEVER_MELT_ICE],
   [Item.MANA_SCARF]: [Item.MYSTIC_WATER, Item.CHARCOAL],
   [Item.SMOKE_BALL]: [Item.MYSTIC_WATER, Item.HEART_SCALE],
   [Item.XRAY_VISION]: [Item.MAGNET, Item.MAGNET],

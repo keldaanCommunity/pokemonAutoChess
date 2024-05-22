@@ -7,7 +7,6 @@ import { Weather } from "./enum/Weather"
 
 export const ON_ATTACK_MANA = 5
 export const MANA_SCARF_MANA = 8
-export const DELTA_ORB_MANA = 4
 export const SCOPE_LENS_MANA = 15
 
 export const BOARD_WIDTH = 8
@@ -111,7 +110,7 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
 
 export const RequiredStageLevelForXpElligibility = 10
 
-export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 0]
+export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 50]
 
 export const RarityColor: { [key in Rarity]: string } = {
   [Rarity.COMMON]: "#9f9f9f",
@@ -333,7 +332,7 @@ export const MAX_PLAYERS_PER_GAME = 8
 
 export const DEFAULT_ATK_SPEED = 0.75
 export const DEFAULT_CRIT_CHANCE = 10
-export const DEFAULT_CRIT_DAMAGE = 2
+export const DEFAULT_CRIT_POWER = 2
 
 export const StageDuration: Record<number | "DEFAULT", number> = {
   1: 30,
@@ -370,6 +369,7 @@ export const WeatherThreshold: { [weather in Weather]: number } = {
   [Weather.MISTY]: 8,
   [Weather.NEUTRAL]: 8,
   [Weather.NIGHT]: 8,
+  [Weather.BLOODMOON]: 9,
   [Weather.RAIN]: 8,
   [Weather.SANDSTORM]: 8,
   [Weather.SNOW]: 6,
@@ -570,14 +570,14 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.BLUE_ORB]: { [Stat.PP]: 15, [Stat.ATK_SPEED]: 10 },
   [Item.SCOPE_LENS]: { [Stat.PP]: 15, [Stat.CRIT_CHANCE]: 25 },
   [Item.STAR_DUST]: { [Stat.PP]: 15, [Stat.SHIELD]: 15 },
-  [Item.DELTA_ORB]: { [Stat.PP]: 15, [Stat.SPE_DEF]: 2 },
+  [Item.GREEN_ORB]: { [Stat.PP]: 15, [Stat.SPE_DEF]: 2 },
   [Item.MANA_SCARF]: { [Stat.PP]: 15, [Stat.ATK]: 3 },
   [Item.SMOKE_BALL]: { [Stat.PP]: 15, [Stat.DEF]: 2 },
   [Item.XRAY_VISION]: { [Stat.ATK_SPEED]: 50 },
   [Item.RAZOR_FANG]: {
     [Stat.ATK_SPEED]: 10,
     [Stat.CRIT_CHANCE]: 10,
-    [Stat.CRIT_DAMAGE]: 1
+    [Stat.CRIT_POWER]: 1
   },
   [Item.GRACIDEA_FLOWER]: { [Stat.ATK_SPEED]: 10, [Stat.SHIELD]: 15 },
   [Item.CHOICE_SCARF]: { [Stat.ATK_SPEED]: 10, [Stat.SPE_DEF]: 2 },

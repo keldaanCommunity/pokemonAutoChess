@@ -79,6 +79,7 @@ export function selectMatchups(state: GameState): Matchup[] {
   /* step 1) establish all the matchups possible with players alive and their associated count
   count = number of times A fought B or his ghost) +(number of times B fought A or his ghost) */
   const players = values(state.players).filter((p) => p.alive)
+  if (players.length <= 1) return []
   const matchups = getAllPossibleMatchups(players)
 
   /* step 2) establish all the matchup combinations possible */

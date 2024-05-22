@@ -14,10 +14,6 @@ app/public/dist/index.js
 app/public/dist/client/assets
 app/public/src/assets/musics
 *.code-workspace
-/app/public/dist/assets/tiles/newBackground.tmx
-/app/public/dist/assets/tiles/sleepBackground.json
-/app/public/dist/assets/tiles/sleepBackground.png
-/app/public/dist/assets/tiles/sleepBackgroundMirror.png
 /app/public/dist/index.js.LICENSE.txt
 /db-commands/old-statistic.js
 /db-commands/*.sh
@@ -37,3 +33,5 @@ export/dbg_output_pmdo_full_ani
 export/*.json
 export/tilesets
 export/samples
+id_digital_ocean
+id_digital_ocean.pub

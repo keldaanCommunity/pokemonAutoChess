@@ -13,9 +13,9 @@ import {
 } from "matter-js"
 import Player from "../../models/colyseus-models/player"
 import { getOrientation } from "../../public/src/pages/utils/utils"
-import { PokemonActionState, Rarity } from "../../types/enum/Game"
+import { PokemonActionState } from "../../types/enum/Game"
 import {
-  BasicItems,
+  ItemComponents,
   CraftableItems,
   Item,
   SynergyStones
@@ -331,6 +331,18 @@ export class MiniGame {
       }
     })
     this.bodies.forEach((body, id) => {
+      if (
+        body.position.x < 0 ||
+        body.position.x > 720 ||
+        body.position.y < 0 ||
+        body.position.y > 590
+      ) {
+        // prevent going out of bounds in case of lag
+        Body.setPosition(body, {
+          x: clamp(body.position.x, 0, 720),
+          y: clamp(body.position.y, 0, 590)
+        })
+      }
       if (this.avatars?.has(id)) {
         const avatar = this.avatars.get(id)!
         avatar.x = body.position.x
@@ -366,7 +378,7 @@ export class MiniGame {
 
     let nbItemsToPick = clamp(this.alivePlayers.length + 3, 5, 9)
     let maxCopiesPerItem = 2
-    let itemsSet = BasicItems
+    let itemsSet = ItemComponents
 
     if (stageLevel >= 20) {
       // Carousels after stage 20 propose full items and no longer components, and have one more proposition

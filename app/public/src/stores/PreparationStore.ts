@@ -3,7 +3,6 @@ import { GameUser, IGameUser } from "../../../models/colyseus-models/game-user"
 import Message from "../../../models/colyseus-models/message"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import { IChatV2 } from "../../../types"
-import { DungeonPMDO } from "../../../types/enum/Dungeon"
 import { GameMode } from "../../../types/enum/Game"
 
 interface IUserPreparationState {

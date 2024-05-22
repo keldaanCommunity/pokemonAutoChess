@@ -50,7 +50,7 @@ export default class Player extends Schema implements IPlayer {
   @type(ExperienceManager) experienceManager = new ExperienceManager()
   @type({ map: "uint8" }) synergies = new Synergies()
   @type("uint16") money = process.env.MODE == "dev" ? 999 : 6
-  @type("uint8") life = 100
+  @type("int8") life = 100
   @type("boolean") shopLocked: boolean = false
   @type("uint8") streak: number = 0
   @type("uint8") interest: number = 0
@@ -86,6 +86,7 @@ export default class Player extends Schema implements IPlayer {
   titles: Set<Title> = new Set<Title>()
   rerollCount: number = 0
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
+  randomComponentsGiven: Item[] = []
   lightX: number
   lightY: number
   canRegainLife: boolean = true

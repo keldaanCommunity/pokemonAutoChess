@@ -7,7 +7,7 @@ import {
 } from "../../../../../models/mongo-models/items-statistic"
 import {
   ArtificialItems,
-  BasicItems,
+  ItemComponents,
   Berries,
   CraftableItems
 } from "../../../../../types/enum/Item"
@@ -39,7 +39,7 @@ export function ItemReport() {
       key: "artificial_items",
       items: ArtificialItems
     },
-    { label: t("components"), key: "components", items: BasicItems },
+    { label: t("components"), key: "components", items: ItemComponents },
     { label: t("berries"), key: "berries", items: Berries }
   ]
 

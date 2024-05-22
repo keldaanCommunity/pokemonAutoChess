@@ -47,7 +47,7 @@ import {
 } from "../../types/enum/Game"
 import {
   ArtificialItems,
-  BasicItems,
+  ItemComponents,
   Berries,
   Item,
   ItemRecipe,
@@ -422,9 +422,9 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
-    const isBasicItem = BasicItems.includes(item)
+    const isBasicItem = ItemComponents.includes(item)
     const existingBasicItemToCombine = values(pokemon.items).find((i) =>
-      BasicItems.includes(i)
+      ItemComponents.includes(i)
     )
 
     // check if full items and nothing to combine
@@ -770,7 +770,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           case Effect.HEART_OF_THE_SWARM:
             player.titles.add(Title.BUG_MANIAC)
             break
-          case Effect.MAX_GUARD:
+          case Effect.SKYDIVE:
             player.titles.add(Title.BIRD_KEEPER)
             break
           case Effect.SUN_FLOWER:
@@ -833,105 +833,21 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   }
 
   checkEndGame() {
-    const numberOfPlayersAlive = values(this.state.players).filter(
-      (p) => p.alive
-    ).length
+    const playersAlive = values(this.state.players).filter((p) => p.alive)
 
-    if (numberOfPlayersAlive <= 1) {
+    if (playersAlive.length <= 1) {
       this.state.gameFinished = true
-      this.room.broadcast(Transfer.BROADCAST_INFO, {
-        title: "End of the game",
-        info: "We have a winner !"
-      })
+      const winner = playersAlive[0]
+      const client = this.room.clients.find((cli) => cli.auth.uid === winner.id)
+      if (client) {
+        client.send(Transfer.FINAL_RANK, 1)
+      }
       setTimeout(() => {
         // dispose the room automatically after 30 seconds
         this.room.broadcast(Transfer.GAME_END)
         this.room.disconnect()
       }, 30 * 1000)
     }
-  }
-
-  computeRoundDamage(
-    opponentTeam: MapSchema<IPokemonEntity>,
-    stageLevel: number
-  ) {
-    if (this.state.specialGameRule === SpecialGameRule.NINE_LIVES) return 1
-
-    let damage = Math.ceil(stageLevel / 2)
-    if (opponentTeam.size > 0) {
-      opponentTeam.forEach((pokemon) => {
-        if (!pokemon.isClone) {
-          damage += 1
-        }
-      })
-    }
-    return damage
-  }
-
-  rankPlayers() {
-    const rankArray = new Array<{ id: string; life: number; level: number }>()
-    this.state.players.forEach((player) => {
-      if (!player.alive) {
-        return
-      }
-
-      rankArray.push({
-        id: player.id,
-        life: player.life,
-        level: player.experienceManager.level
-      })
-    })
-
-    const sortPlayers = (
-      a: { id: string; life: number; level: number },
-      b: { id: string; life: number; level: number }
-    ) => {
-      let diff = b.life - a.life
-      if (diff == 0) {
-        diff = b.level - a.level
-      }
-      return diff
-    }
-
-    rankArray.sort(sortPlayers)
-
-    rankArray.forEach((rankPlayer, index) => {
-      const player = this.state.players.get(rankPlayer.id)
-      if (player) {
-        player.rank = index + 1
-      }
-    })
-  }
-
-  computeLife() {
-    this.state.players.forEach((player) => {
-      if (player.alive) {
-        const currentResult = this.state.simulations
-          .get(player.simulationId)
-          ?.getCurrentBattleResult(player.id)
-
-        const opponentTeam = this.state.simulations
-          .get(player.simulationId)
-          ?.getOpponentTeam(player.id)
-        if (
-          opponentTeam &&
-          (currentResult === BattleResult.DEFEAT ||
-            currentResult === BattleResult.DRAW)
-        ) {
-          const playerDamage = this.computeRoundDamage(
-            opponentTeam,
-            this.state.stageLevel
-          )
-          player.life -= playerDamage
-          if (playerDamage > 0) {
-            const client = this.room.clients.find(
-              (cli) => cli.auth.uid === player.id
-            )
-            client?.send(Transfer.PLAYER_DAMAGE, playerDamage)
-          }
-        }
-      }
-    })
   }
 
   computeStreak(isPVE: boolean) {
@@ -963,9 +879,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         player.interest = Math.min(Math.floor(player.money / 10), 5)
         income += player.interest
         income += player.streak
-        if (player.getLastBattleResult() == BattleResult.WIN) {
-          income += 1
-        }
         income += 5
         player.money += income
         if (income > 0) {
@@ -975,25 +888,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           client?.send(Transfer.PLAYER_INCOME, income)
         }
         player.experienceManager.addExperience(2)
-      }
-    })
-  }
-
-  registerBattleResults() {
-    this.state.players.forEach((player) => {
-      if (player.alive) {
-        const currentResult = this.state.simulations
-          .get(player.simulationId)
-          ?.getCurrentBattleResult(player.id)
-        if (currentResult) {
-          player.addBattleResult(
-            player.opponentId,
-            player.opponentName,
-            currentResult,
-            player.opponentAvatar,
-            this.state.simulations.get(player.simulationId)?.weather
-          )
-        }
       }
     })
   }
@@ -1009,7 +903,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             this.state.shop.releasePokemon(pokemon.name, player)
           })
         }
-        player.life = 0
         player.alive = false
       }
     })
@@ -1023,9 +916,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     // Item propositions stages
     if (ItemProposalStages.includes(this.state.stageLevel)) {
       this.state.players.forEach((player: Player) => {
-        let itemSet = BasicItems
+        let itemSet = ItemComponents
         if (this.state.specialGameRule === SpecialGameRule.TECHNOLOGIC) {
-          itemSet = ArtificialItems
+          itemSet = ArtificialItems.filter(
+            (item) => player.artificialItems.includes(item) === false
+          )
         }
         resetArraySchema(player.itemsProposition, pickNRandomIn(itemSet, 3))
       })
@@ -1042,7 +937,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       let remainingAddPicks = 8
       this.state.players.forEach((player: Player) => {
         if (!player.isBot) {
-          const items = pickNRandomIn(BasicItems, 3)
+          const items = pickNRandomIn(ItemComponents, 3)
           for (let i = 0; i < 3; i++) {
             const p = pool.pop()
             if (p) {
@@ -1160,9 +1055,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
     this.computeAchievements()
     this.computeStreak(isPVE)
-    this.computeLife()
-    this.registerBattleResults()
-    this.rankPlayers()
     this.checkDeath()
     this.computeIncome()
     this.state.simulations.forEach((simulation) => {
@@ -1270,6 +1162,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         })
         // Refreshes effects (like tapu Terrains)
         player.updateSynergies()
+      } else {
+        const client = this.room.clients.find(
+          (cli) => cli.auth.uid === player.id
+        )
+        if (client) {
+          client.send(Transfer.FINAL_RANK, player.rank)
+        }
       }
     })
 

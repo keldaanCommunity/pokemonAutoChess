@@ -1,5 +1,5 @@
 import { User } from "@firebase/auth-types"
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { Client, Room } from "colyseus.js"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
@@ -174,9 +174,6 @@ export const networkSlice = createSlice({
     toggleEloRoom: (state, action: PayloadAction<boolean>) => {
       state.preparation?.send(Transfer.TOGGLE_NO_ELO, action.payload)
     },
-    refreshClick: (state) => {
-      state.game?.send(Transfer.REFRESH)
-    },
     lockClick: (state) => {
       state.game?.send(Transfer.LOCK)
     },
@@ -263,10 +260,7 @@ export const networkSlice = createSlice({
     deleteRoom: (state) => {
       state.preparation?.send(Transfer.DELETE_ROOM)
     },
-    ban: (
-      state,
-      action: PayloadAction<{ uid: string; name: string; reason: string }>
-    ) => {
+    ban: (state, action: PayloadAction<{ uid: string; reason: string }>) => {
       state.lobby?.send(Transfer.BAN, action.payload)
     },
     unban: (state, action: PayloadAction<{ uid: string; name: string }>) => {
@@ -344,7 +338,6 @@ export const {
   shopClick,
   levelClick,
   lockClick,
-  refreshClick,
   searchById,
   setTitle,
   kick,

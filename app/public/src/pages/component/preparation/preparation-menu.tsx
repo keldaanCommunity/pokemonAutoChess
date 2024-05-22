@@ -76,7 +76,7 @@ export default function PreparationMenu() {
   }, [nbUsersReady, users.length])
 
   const humans = users.filter((u) => !u.isBot)
-  const isElligibleForELO = users.filter((u) => !u.isBot).length >= 2
+  const isElligibleForELO = gameMode === GameMode.QUICKPLAY || users.filter((u) => !u.isBot).length >= 2
   const averageElo = Math.round(
     humans.reduce((acc, u) => acc + u.elo, 0) / humans.length
   )
@@ -125,9 +125,20 @@ export default function PreparationMenu() {
             title={t("smeargle_scribble_hint")}
             className="scribble icon"
             src={"/assets/ui/scribble.png"}
-            style={{ borderRadius: "50%" }}
           />
           {t("smeargle_scribble_hint")}
+        </p>
+      )}
+
+      {gameMode === GameMode.QUICKPLAY && (
+        <p>
+          <img
+            alt={t("quick_play")}
+            title={t("quick_play_hint")}
+            className="quickplay icon"
+            src={"/assets/ui/quickplay.png"}
+          />
+          {t("quick_play_hint")}
         </p>
       )}
 
@@ -136,9 +147,8 @@ export default function PreparationMenu() {
           <img
             alt={t("no_elo")}
             title={t("no_elo_hint")}
-            className="noelo-icon"
+            className="noelo icon"
             src="/assets/ui/noelo.png"
-            style={{ borderRadius: "50%" }}
           />
           {t("no_elo_hint")}
         </p>
@@ -152,7 +162,7 @@ export default function PreparationMenu() {
         <p>{t("not_elligible_elo_hint")}</p>
       ) : null}
 
-      {users.length === 1 && <p>{t("add_bot_or_wait_hint")}</p>}
+      {gameMode === GameMode.NORMAL && users.length === 1 && <p>{t("add_bot_or_wait_hint")}</p>}
     </>
   )
 
@@ -180,7 +190,7 @@ export default function PreparationMenu() {
       </button>
     )
 
-  const roomNameInput = (isOwner || isModerator || isAdmin) &&
+  const roomNameInput = gameMode === GameMode.NORMAL && (isOwner || isModerator || isAdmin) &&
     user &&
     !user.anonymous && (
       <div className="my-input-group">
@@ -203,7 +213,7 @@ export default function PreparationMenu() {
       </div>
     )
 
-  const botControls = (isOwner || isAdmin) && (
+  const botControls = gameMode === GameMode.NORMAL && (isOwner || isAdmin) && (
     <div className="my-input-group">
       <button
         className="bubbly blue"
@@ -233,7 +243,7 @@ export default function PreparationMenu() {
     </div>
   )
 
-  const roomInfo = (
+  const roomInfo = gameMode === GameMode.NORMAL && (
     <p className="room-info">
       {t("room_leader")}: {ownerName}{" "}
       {password && (
@@ -245,7 +255,7 @@ export default function PreparationMenu() {
     </p>
   )
 
-  const readyButton = (
+  const readyButton = gameMode === GameMode.NORMAL && (
     <button
       className={cc("bubbly", "ready-button", isReady ? "green" : "orange")}
       onClick={() => {
