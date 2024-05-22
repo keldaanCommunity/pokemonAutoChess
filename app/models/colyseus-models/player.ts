@@ -281,7 +281,9 @@ export default class Player extends Schema implements IPlayer {
       )
 
       // variables for managing number of "Trash" items
-      let lostTrash = lostArtificialItems.filter(item => item === Item.TRASH).length
+      const lostTrash = lostArtificialItems.filter(
+        (item) => item === Item.TRASH
+      ).length
       let cleanedTrash = 0
 
       this.board.forEach((pokemon) => {
