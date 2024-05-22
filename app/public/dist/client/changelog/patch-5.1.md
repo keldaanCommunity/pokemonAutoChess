@@ -121,6 +121,7 @@
 - Fixed Comfey being duplicated when given to flora spawn
 - Flying protections no longer are reset after resurection
 - Pokedoll no longer reduce true damage
+- Fixed Technologic Scribble giving you twice the same artificial item
 
 # Misc
 
