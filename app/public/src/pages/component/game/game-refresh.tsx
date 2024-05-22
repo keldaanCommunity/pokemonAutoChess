@@ -1,18 +1,16 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { useAppDispatch } from "../../../hooks"
-import { refreshClick } from "../../../stores/NetworkStore"
+import { getGameScene } from "../../game"
 import { Money } from "../icons/money"
 
 export default function GameRefresh() {
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
   return (
     <button
       className="bubbly blue refresh-button"
       title={t("refresh_gold_hint")}
       onClick={() => {
-        dispatch(refreshClick())
+        getGameScene()?.refreshShop()
       }}
     >
       <img src={`/assets/ui/refresh.svg`} />
