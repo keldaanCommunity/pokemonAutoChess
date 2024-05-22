@@ -3847,22 +3847,6 @@ export class ThiefStrategy extends AbilityStrategy {
       }
     })
 
-    // update artificial synergy bonuses
-    if (pokemon.effects.has(Effect.DUBIOUS_DISC)) {
-      pokemon.addAttack(4 * l, pokemon, 0, false)
-      pokemon.addShield(20 * l, pokemon, 0, false)
-    }
-
-    if (pokemon.effects.has(Effect.LINK_CABLE)) {
-      pokemon.addAttack(7 * l, pokemon, 0, false)
-      pokemon.addShield(30 * l, pokemon, 0, false)
-    }
-
-    if (pokemon.effects.has(Effect.GOOGLE_SPECS)) {
-      pokemon.addAttack(10 * l, pokemon, 0, false)
-      pokemon.addShield(50 * l, pokemon, 0, false)
-    }
-
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -3925,21 +3909,18 @@ export class MeteorMashStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [30, 50, 70][pokemon.stars - 1] ?? 70
-    pokemon.addAttack(5, pokemon, 1, crit)
-
-    const cells = board.getAdjacentCells(pokemon.targetX, pokemon.targetY, true)
-    cells.forEach((cell) => {
-      if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-      }
-    })
+    const nbHits = 3
+    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
+    pokemon.addAttack(2, pokemon, 1, crit)
+    for (let n = 0; n < nbHits; n++) {
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    }
   }
 }
 
@@ -5599,7 +5580,7 @@ export class WhirlpoolStrategy extends AbilityStrategy {
           cell.value.handleSpecialDamage(
             Math.ceil(pokemon.atk * 1.25),
             board,
-            AttackType.PHYSICAL,
+            AttackType.SPECIAL,
             pokemon,
             crit
           )
@@ -7970,16 +7951,16 @@ export class SheerColdStrategy extends AbilityStrategy {
     if (target.types.has(Synergy.ICE)) executeChance = 0
     else if (target.status.freeze) executeChance = 1
 
-    if (chance(executeChance)) {
-      target.handleSpecialDamage(
-        9999,
-        board,
-        AttackType.SPECIAL,
-        pokemon,
-        crit,
-        true
-      )
-    }
+    let damage = [50, 100, 200][pokemon.stars - 1] ?? 200
+    if (chance(executeChance)) damage = 9999
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
   }
 }
 
