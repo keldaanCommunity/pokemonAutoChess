@@ -126,6 +126,7 @@
 # Misc
 
 - New title: Bloody
+- New title: Eternal
 - The minimum amount of players to make a room elligible for Elo is 4 human players instead of 2.
 - Finishing 8th now gives 50 xp instead of zero
 - The spanish translation has been improved and completed thanks to the efforts of ryuknn and ImLowTier. Muchas gracias!

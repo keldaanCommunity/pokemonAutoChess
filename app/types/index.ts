@@ -718,7 +718,8 @@ export enum Title {
   OUTSIDER = "OUTSIDER",
   GLUTTON = "GLUTTON",
   STARGAZER = "STARGAZER",
-  BLOODY = "BLOODY"
+  BLOODY = "BLOODY",
+  ETERNAL = "ETERNAL"
 }
 
 export interface IBoardEvent {

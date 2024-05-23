@@ -2186,7 +2186,8 @@
     "WILD": "Wild",
     "GLUTTON": "Glutton",
     "STARGAZER": "Stargazer",
-    "BLOODY": "Bloody"
+    "BLOODY": "Bloody",
+    "ETERNAL": "Eternal"
   },
   "title_description": {
     "NOVICE": "Play your first game",
@@ -2252,7 +2253,8 @@
     "OUTSIDER": "Win a Ranked match with 8 players while having the lowest Elo of all",
     "GLUTTON": "Get a Snorlax with more than 750 base HP",
     "STARGAZER": "Get Solgaleo or Lunala",
-    "BLOODY": "Get Bloodmoon Ursaluna"
+    "BLOODY": "Get Bloodmoon Ursaluna",
+    "ETERNAL": "Meet Arceus at stage 40"
   },
   "weather": {
     "NEUTRAL": "Calm weather",
