@@ -174,9 +174,6 @@ export const networkSlice = createSlice({
     toggleEloRoom: (state, action: PayloadAction<boolean>) => {
       state.preparation?.send(Transfer.TOGGLE_NO_ELO, action.payload)
     },
-    refreshClick: (state) => {
-      state.game?.send(Transfer.REFRESH)
-    },
     lockClick: (state) => {
       state.game?.send(Transfer.LOCK)
     },
@@ -341,7 +338,6 @@ export const {
   shopClick,
   levelClick,
   lockClick,
-  refreshClick,
   searchById,
   setTitle,
   kick,

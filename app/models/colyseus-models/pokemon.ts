@@ -7859,7 +7859,7 @@ export class Growlithe extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.ARCANINE
-  hp = 70
+  hp = 75
   atk = 6
   def = 2
   speDef = 2
@@ -7874,7 +7874,7 @@ export class Arcanine extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 130
+  hp = 140
   atk = 14
   def = 5
   speDef = 5
@@ -11439,7 +11439,7 @@ export class Illumise extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.BUG, Synergy.LIGHT])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 150
+  hp = 130
   atk = 13
   def = 3
   speDef = 3
@@ -11454,7 +11454,7 @@ export class Volbeat extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.BUG, Synergy.LIGHT])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 150
+  hp = 130
   atk = 13
   def = 3
   speDef = 3
@@ -11712,11 +11712,11 @@ export class Wingull extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.PELIPPER
-  hp = 80
+  hp = 90
   atk = 8
-  def = 3
+  def = 5
   speDef = 3
-  maxPP = 85
+  maxPP = 75
   range = 2
   skill = Ability.WHIRLWIND
   additional = true
@@ -11728,11 +11728,11 @@ export class Pelipper extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FLYING])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 180
+  hp = 200
   atk = 20
-  def = 4
+  def = 7
   speDef = 4
-  maxPP = 85
+  maxPP = 75
   range = 2
   skill = Ability.WHIRLWIND
   additional = true
@@ -11861,8 +11861,8 @@ export class Xurkitree extends Pokemon {
   atk = 16
   def = 3
   speDef = 3
-  maxPP = 80
-  range = 3
+  maxPP = 100
+  range = 2
   skill = Ability.CHARGE_BEAM
   passive = Passive.SPECIAL_ATTACK
   attackSprite = AttackSprite.ELECTRIC_RANGE

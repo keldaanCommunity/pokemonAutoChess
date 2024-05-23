@@ -827,6 +827,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (heal > 1000) {
         player.titles.add(Title.NURSE)
       }
+
+      if (this.state.stageLevel >= 40) {
+        player.titles.add(Title.ETERNAL)
+      }
     }
   }
 
@@ -916,7 +920,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       this.state.players.forEach((player: Player) => {
         let itemSet = ItemComponents
         if (this.state.specialGameRule === SpecialGameRule.TECHNOLOGIC) {
-          itemSet = ArtificialItems
+          itemSet = ArtificialItems.filter(
+            (item) => player.artificialItems.includes(item) === false
+          )
         }
         resetArraySchema(player.itemsProposition, pickNRandomIn(itemSet, 3))
       })
