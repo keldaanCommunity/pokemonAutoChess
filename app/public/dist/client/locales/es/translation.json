@@ -1973,7 +1973,7 @@
     "ENVIRONMENTAL_ADAPTATION": "Este Pokémon adapta sus sinergias a la región.",
     "MOTHIM": "$t(pkm.MOTHIM) toma sinergias de todas las formas regionales de $t(pkm.BURMY) encontradas por el jugador.",
     "PSYDUCK": "Cuando esté CONFUSION, gana 100% AP",
-    "BLOODMOON": "Cambios de forma durante BLOODMOON"
+    "BLOODMOON": "Cambia de forma durante BLOODMOON"
   },
   "stat": {
     "ATK": "Ataque",
@@ -2266,7 +2266,7 @@
     "MISTY": "+20%SPECIAL\n+30% de duración del SILENCE",
     "SNOW": "-25% de velocidad de movimiento\n+30% de duración de FREEZE",
     "SANDSTORM": "5 SPECIAL por segundo (GROUND son inmunes)\n CONFUSION duración +30%",
-    "BLOODMOON": "+20% PHYSICAL\nduración de WOUND +30% "
+    "BLOODMOON": "+20% PHYSICAL\nDuración de WOUND +30% "
   },
   "emotion": {
     "Normal": "Normal",
@@ -2879,13 +2879,13 @@
     "max_loading_time": "El juego comenzará después de 5 minutos de carga pase lo que pase..",
     "disconnection_time": "Los jugadores desconectados durante más de 3 minutos son expulsados ​​del juego. Si sucede antes de la etapa 6, no perderán ELO",
     "translation_project": "¡Las traducciones del juego son gestionadas por la comunidad! Consulta Discord si quieres contribuir.",
-    "discord": "¡Únete a nuestro Discord para conocer a la comunidad! Enlace en el menú lateral",
+    "discord": "¡Únete a nuestro Discord para conocer a la comunidad! Enlace en el menú lateral.",
     "tipeee": "Este juego no tiene monetización ni publicidad y solo depende de tus donaciones. Gracias a todos los que apoyan con propinas ❤",
     "bug_report": "¿Encontraste un error? Vaya a Discord e infórmelo en el canal #bug-report.",
     "moderation": "Si eres testigo de un mal comportamiento en el juego, toma una captura de pantalla e infórmalo a un moderador en Discord.",
     "berry_tree": "¿Jugando a la hierba? No olvides cuidar el árbol de bayas de tu personaje.",
     "spriters": "Muchas de las animaciones del juego son obra de artistas independientes. Algunos cobran comisiones por lo que puedes patrocinarlos. Más información en nuestro Discord",
     "wiki": "El juego cuenta con una wiki completa accesible desde el menú lateral, ¡no te la pierdas!",
-    "avatar": "Para cambiar tu avatar de jugador debes jugar partidas para conseguir XP y subir de nivel. Cada nivel te otorga un refuerzo que, cuando se abre, te brinda fragmentos que puedes gastar en el menú Colección para comprar nuevos avatares."
+    "avatar": "Para cambiar tu avatar de jugador debes jugar partidas, conseguir XP y subir de nivel. Cada nivel te otorga un refuerzo que, cuando se abre, te brinda fragmentos que puedes gastar en el menú Colección para comprar nuevos avatares."
   }
 }
