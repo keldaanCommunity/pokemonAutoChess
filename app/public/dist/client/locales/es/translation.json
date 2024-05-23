@@ -344,7 +344,8 @@
     "HEAVY_SLAM": "Cuerpo Pesado",
     "HAIL": "Granizo",
     "RAPID_SPIN": "Giro Rápido",
-    "BOUNCE": "Bote"
+    "BOUNCE": "Bote",
+    "BLOOD_MOON": "Luna Roja"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1076,6 +1077,7 @@
     "TEDDIURSA": "Teddiursa",
     "URSARING": "Ursaring",
     "URSALUNA": "Ursaluna",
+    "URSALUNA_BLOODMOON": "Ursaluna Luna Carmesí",
     "AIPOM": "Aipom",
     "AMBIPOM": "Ambipom",
     "DEERLING": "Deerling",
@@ -1455,7 +1457,8 @@
     "PSYSHOCK": "Quema [30,60,100,SP] PP del objetivo y lo obtiene como SHIELD. Si el objetivo no tiene suficientes PP, el resto se inflige como SPECIAL.",
     "HEAVY_SLAM": "Golpea el suelo causando [10,20,40,SP] SPECIAL y otorgándose [10,20,40] SHIELD. Cuanto más supere el usuario al objetivo en HP máximo, mayor será el poder del movimiento.",
     "RAPID_SPIN": "Este pokémon inflige [20,50] SPECIAL y luego gana [20,30,SP]% de ATK como DEF y SPE_DEF",
-    "BOUNCE": "Rebota [1,2,3,SP] veces hacia el objetivo más lejano, causando [10,SP] SPECIAL a todos los enemigos adyacentes por cada rebote."
+    "BOUNCE": "Rebota [1,2,3,SP] veces hacia el objetivo más lejano, causando [10,SP] SPECIAL a todos los enemigos adyacentes por cada rebote.",
+    "BLOOD_MOON": "Concentra toda su energía en la luna roja sangrienta en su frente y la proyecta en una línea, causando [200,SP]% de ATK como SPECIAL y WOUND durante 3 segundos a todos los enemigos golpeados"
   },
   "effect": {
     "INGRAIN": "Arraigo",
@@ -1969,7 +1972,8 @@
     "GUZZLORD": "Guzzlord pesa demasiado y no puede saltar.",
     "ENVIRONMENTAL_ADAPTATION": "Este Pokémon adapta sus sinergias a la región.",
     "MOTHIM": "$t(pkm.MOTHIM) toma sinergias de todas las formas regionales de $t(pkm.BURMY) encontradas por el jugador.",
-    "PSYDUCK": "Cuando esté CONFUSION, gana 100% AP"
+    "PSYDUCK": "Cuando esté CONFUSION, gana 100% AP",
+    "BLOODMOON": "Cambios de forma durante BLOODMOON"
   },
   "stat": {
     "ATK": "Ataque",
@@ -2171,7 +2175,8 @@
     "OUTSIDER": "Forastero",
     "WILD": "Salvaje",
     "GLUTTON": "Glotón",
-    "STARGAZER": "Astrónomo"
+    "STARGAZER": "Astrónomo",
+    "BLOODY": "Sanguinario"
   },
   "title_description": {
     "NOVICE": "Juega tu primer juego",
@@ -2236,7 +2241,8 @@
     "VANQUISHER": "Gana una Partida Clasificatoria",
     "OUTSIDER": "Gana una Partida Clasificatoria con 8 jugadores teniendo el Elo más bajo de todos",
     "GLUTTON": "Ten un Snorlax con mas de 750 HP base.",
-    "STARGAZER": "Consigue a Solgaleo o Lunala"
+    "STARGAZER": "Consigue a Solgaleo o Lunala",
+    "BLOODY": "Consigue Ursaluna Luna Carmesí"
   },
   "weather": {
     "NEUTRAL": "Clima tranquilo",
@@ -2247,7 +2253,8 @@
     "STORM": "Tormenta",
     "MISTY": "Brumoso",
     "SNOW": "Nieve",
-    "SANDSTORM": "Tormenta de arena"
+    "SANDSTORM": "Tormenta de arena",
+    "BLOODMOON": "Luna Sangrienta"
   },
   "weather_description": {
     "NEUTRAL": "Clima normal. Sin efectos.",
@@ -2258,7 +2265,8 @@
     "STORM": "Un rayo cae aleatoriamente en el tablero y daña 100 de SPECIAL (ELECTRIC es inmune)\n+30% de duración de la PARALYSIS",
     "MISTY": "+20%SPECIAL\n+30% de duración del SILENCE",
     "SNOW": "-25% de velocidad de movimiento\n+30% de duración de FREEZE",
-    "SANDSTORM": "5 SPECIAL por segundo (GROUND son inmunes)\n CONFUSION duración +30%"
+    "SANDSTORM": "5 SPECIAL por segundo (GROUND son inmunes)\n CONFUSION duración +30%",
+    "BLOODMOON": "+20% PHYSICAL\nduración de WOUND +30% "
   },
   "emotion": {
     "Normal": "Normal",
@@ -2865,5 +2873,19 @@
     "CROWDED": "+3 unidades máximas en el tablero",
     "KECLEONS_SHOP": "Los carruseles de objetos son reemplazados por la tienda de Kecleon, que propone 6 objetos por 10 GOLD cada uno",
     "FREE_MARKET": "Los pokémon se compran y venden por 0 GOLD"
+  },
+  "loading_hints": {
+    "tab_out": "¡No te desconectes! La carga se detiene cuando esta ventana del navegador está inactiva.",
+    "max_loading_time": "El juego comenzará después de 5 minutos de carga pase lo que pase..",
+    "disconnection_time": "Los jugadores desconectados durante más de 3 minutos son expulsados ​​del juego. Si sucede antes de la etapa 6, no perderán ELO",
+    "translation_project": "¡Las traducciones del juego son gestionadas por la comunidad! Consulta Discord si quieres contribuir.",
+    "discord": "¡Únete a nuestro Discord para conocer a la comunidad! Enlace en el menú lateral",
+    "tipeee": "Este juego no tiene monetización ni publicidad y solo depende de tus donaciones. Gracias a todos los que apoyan con propinas ❤",
+    "bug_report": "¿Encontraste un error? Vaya a Discord e infórmelo en el canal #bug-report.",
+    "moderation": "Si eres testigo de un mal comportamiento en el juego, toma una captura de pantalla e infórmalo a un moderador en Discord.",
+    "berry_tree": "¿Jugando a la hierba? No olvides cuidar el árbol de bayas de tu personaje.",
+    "spriters": "Muchas de las animaciones del juego son obra de artistas independientes. Algunos cobran comisiones por lo que puedes patrocinarlos. Más información en nuestro Discord",
+    "wiki": "El juego cuenta con una wiki completa accesible desde el menú lateral, ¡no te la pierdas!",
+    "avatar": "Para cambiar tu avatar de jugador debes jugar partidas para conseguir XP y subir de nivel. Cada nivel te otorga un refuerzo que, cuando se abre, te brinda fragmentos que puedes gastar en el menú Colección para comprar nuevos avatares."
   }
 }
