@@ -1991,7 +1991,7 @@
     "MOTHIM": "Mothim gets the synergies of all your regional Burmy forms",
     "PSYDUCK": "When CONFUSION, gain 100% AP",
     "BLOODMOON": "Changes form during BLOODMOON",
-    "RECYCLE": "Feed it with basic components or berries to gain 10 HP + item stats. Feed it with artificial items to gain 50 HP + item stats, and get TRASH in return"
+    "RECYCLE": "Feed it with berries to gain 10 HP, or with basic components for 25 HP + item stats. Feed it with artificial items to gain 50 HP + item stats, and get TRASH in return"
   },
   "stat": {
     "ATK": "Attack",

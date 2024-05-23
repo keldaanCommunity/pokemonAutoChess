@@ -13612,8 +13612,11 @@ export class Trubbish extends Pokemon {
 
   beforeSimulationStart({ player }: { player: Player }) {
     this.items.forEach((item) => {
-      if (ItemComponents.includes(item) || Berries.includes(item)) {
+      if (Berries.includes(item)) {
         this.statIncreases[Stat.HP] += 10
+      }
+      if (ItemComponents.includes(item)) {
+        this.statIncreases[Stat.HP] += 25
       }
       if (ArtificialItems.includes(item)) {
         this.statIncreases[Stat.HP] += 50
