@@ -121,11 +121,13 @@
 - Fixed Comfey being duplicated when given to flora spawn
 - Flying protections no longer are reset after resurection
 - Pokedoll no longer reduce true damage
+- Roar of time now cannot target units that already have resurection status
 - Fixed Technologic Scribble giving you twice the same artificial item
 
 # Misc
 
 - New title: Bloody
+- New title: Eternal
 - The minimum amount of players to make a room elligible for Elo is 4 human players instead of 2.
 - Finishing 8th now gives 50 xp instead of zero
 - The spanish translation has been improved and completed thanks to the efforts of ryuknn and ImLowTier. Muchas gracias!
