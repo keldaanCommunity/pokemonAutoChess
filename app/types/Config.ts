@@ -635,7 +635,8 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.INCENSE]: { [Stat.SPE_DEF]: 5 },
   [Item.EXP_SHARE]: {},
   [Item.METEORITE]: {},
-  [Item.BERRY_JUICE]: {}
+  [Item.BERRY_JUICE]: {},
+  [Item.TRASH]: {}
 }
 
 export type TilesetExchangeFile = {

@@ -438,7 +438,8 @@ export class OnDragDropItemCommand extends Command<
 
     if (
       SynergyItems.includes(item) &&
-      pokemon.types.has(SynergyGivenByItem[item])
+      pokemon.types.has(SynergyGivenByItem[item]) &&
+      pokemon.passive !== Passive.RECYCLE
     ) {
       // prevent adding a synergy stone on a pokemon that already has this synergy
       client.send(Transfer.DRAG_DROP_FAILED, message)
@@ -467,7 +468,8 @@ export class OnDragDropItemCommand extends Command<
 
       if (
         itemCombined in SynergyGivenByItem &&
-        pokemon.types.has(SynergyGivenByItem[itemCombined])
+        pokemon.types.has(SynergyGivenByItem[itemCombined]
+        )
       ) {
         // prevent combining into a synergy stone on a pokemon that already has this synergy
         client.send(Transfer.DRAG_DROP_FAILED, message)

@@ -345,6 +345,7 @@
     "HAIL": "Hail",
     "RAPID_SPIN": "Rapid Spin",
     "BOUNCE": "Bounce",
+    "GUNK_SHOT": "Gunk Shot",
     "BLOOD_MOON": "Blood moon",
     "TEA_TIME": "Tea Time",
     "SPIKES": "Spikes",
@@ -1136,6 +1137,8 @@
     "DONPHAN": "Donphan",
     "SPOINK": "Spoink",
     "GRUMPIG": "Grumpig",
+    "TRUBBISH": "Trubbish",
+    "GARBODOR": "Garbodor",
     "SINISTEA": "Sinistea",
     "POLTEAGEIST": "Polteageist",
     "FERROSEED": "Ferroseed",
@@ -1470,7 +1473,9 @@
     "BLOOD_MOON": "Concentrates all his energy in the blood-red moon on his forehead and projects it in a line, dealing [200,SP]% of ATK as SPECIAL and WOUND for 3 seconds all enemies hit",
     "TEA_TIME": "Heal allies [20,40,80,SP] HP. All pokemons holding a berry eat it immediately.",
     "SPIKES": "Throw up up to [6, SP] metal spikes within a 3-cell radius in front, dealing [25,50,SP] TRUE. The spikes stay on field, dealing 10 TRUE per second and ARMOR_REDUCTION to opponents that walk on it, if not FLYING.",
-    "SHADOW_PUNCH": "Fly towards the target with the lowest HP. The next attack deals additional [30,60,120,SP] SPECIAL."
+    "SHADOW_PUNCH": "Fly towards the target with the lowest HP. The next attack deals additional [30,60,120,SP] SPECIAL.",
+    "GUNK_SHOT": "Deal [50,100,SP] SPECIAL to the target, inflicting POISONNED for [2,4,SP] seconds"
+
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1794,7 +1799,8 @@
     "INCENSE": "Incense",
     "EXP_SHARE": "Exp. Share",
     "METEORITE": "Meteorite",
-    "BERRY_JUICE": "Berry Juice"
+    "BERRY_JUICE": "Berry Juice",
+    "TRASH": "Trash"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -1885,7 +1891,8 @@
     "INCENSE": "Gives FLORA synergy. Every attack received has a 15% chance to make the attacker CHARM for 2 seconds.",
     "EXP_SHARE": "Get the best ATK, DEF and SPE_DEF values of adjacent allies in the same row",
     "METEORITE": "A meteorite that seems to interact with Deoxys. It continues to give off a faint glow and is slightly warm to the touch.",
-    "BERRY_JUICE": "Consumed once below 50% HP, restore to max HP"
+    "BERRY_JUICE": "Consumed once below 50% HP, restore to max HP",
+    "TRASH": "The remains of an artificial item. It does nothing"
   },
   "passive_description": {
     "NONE": "No passive",
@@ -1983,7 +1990,8 @@
     "ENVIRONMENTAL_ADAPTATION": "This pokemon adapted its synergies to its region",
     "MOTHIM": "Mothim gets the synergies of all your regional Burmy forms",
     "PSYDUCK": "When CONFUSION, gain 100% AP",
-    "BLOODMOON": "Changes form during BLOODMOON"
+    "BLOODMOON": "Changes form during BLOODMOON",
+    "RECYCLE": "Feed it with berries to gain 10 HP, or with basic components for 25 HP + item stats. Feed it with artificial items to gain 50 HP + item stats, and get TRASH in return"
   },
   "stat": {
     "ATK": "Attack",

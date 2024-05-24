@@ -323,6 +323,7 @@ export enum Ability {
   HAIL = "HAIL",
   RAPID_SPIN = "RAPID_SPIN",
   BOUNCE = "BOUNCE",
+  GUNK_SHOT = "GUNK_SHOT",
   BLOOD_MOON = "BLOOD_MOON",
   TEA_TIME = "TEA_TIME",
   SPIKES = "SPIKES",

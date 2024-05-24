@@ -8766,6 +8766,24 @@ export class BounceStrategy extends AbilityStrategy {
   }
 }
 
+export class GunkShotStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 2 ? 100 : 50
+    const baseDuration = pokemon.stars === 2 ? 4000 : 2000
+    const duration = Math.round(baseDuration * (1 + pokemon.ap / 100))
+    
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.status.triggerPoison(duration, target, pokemon)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -9093,6 +9111,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.HAIL]: new HailStrategy(),
   [Ability.RAPID_SPIN]: new RapidSpinStrategy(),
   [Ability.BOUNCE]: new BounceStrategy(),
+  [Ability.GUNK_SHOT]: new GunkShotStrategy(),
   [Ability.BLOOD_MOON]: new BloodMoonStrategy(),
   [Ability.TEA_TIME]: new TeaTimeStrategy(),
   [Ability.SPIKES]: new SpikesStrategy(),
