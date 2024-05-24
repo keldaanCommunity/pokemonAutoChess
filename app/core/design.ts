@@ -145,6 +145,8 @@ export default class Design {
 
     // berry tree slots
     this.terrain[14][8] = TerrainType.GROUND
+    this.terrain[14][7] = TerrainType.GROUND
+    this.terrain[14][6] = TerrainType.GROUND
 
     // smeargle slot
     this.terrain[8][31] = TerrainType.GROUND

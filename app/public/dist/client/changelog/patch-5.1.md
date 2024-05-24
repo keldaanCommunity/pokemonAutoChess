@@ -78,6 +78,7 @@
 - Nerf Steel 8: 130% → 120% true damage
 - Nerf Flying 8: removed paralysis on take off
 - Nerf Artificial: 0/10/20% → 0/8/15% Attack, AP and Shield buff per item hold
+- Grass levels now increase the number of berry trees instead of reducing the number of rounds before harvest
 
 # Changes to Items
 

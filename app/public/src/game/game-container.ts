@@ -23,6 +23,7 @@ import {
   IDragDropMessage,
   IPlayer,
   IPokemon,
+  IPokemonEntity,
   ISimplePlayer,
   Transfer
 } from "../../../types"
@@ -134,7 +135,7 @@ class GameContainer {
     })
 
     pokemon.onChange(() => {
-      const fields: NonFunctionPropNames<PokemonEntity>[] = [
+      const fields: NonFunctionPropNames<IPokemonEntity>[] = [
         "positionX",
         "positionY",
         "orientation",
