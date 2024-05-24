@@ -434,10 +434,13 @@ export default class GameRoom extends Room<GameState> {
       }
     })
 
-    this.onMessage(Transfer.PICK_BERRY, async (client) => {
+    this.onMessage(Transfer.PICK_BERRY, async (client, index) => {
       if (!this.state.gameFinished && client.auth) {
         try {
-          this.dispatcher.dispatch(new OnPickBerryCommand(), client.auth.uid)
+          this.dispatcher.dispatch(new OnPickBerryCommand(), {
+            playerId: client.auth.uid,
+            berryIndex: index
+          })
         } catch (error) {
           logger.error("error picking berry", error)
         }

@@ -70,8 +70,12 @@ export default class Player extends Schema implements IPlayer {
   @type(["string"]) pokemonsProposition = new ArraySchema<PkmProposition>()
   @type(["string"]) pveRewards = new ArraySchema<Item>()
   @type("float32") loadingProgress: number = 0
-  @type("string") berry: Item = pickRandomIn(Berries)
-  @type("uint8") berryTreeStage: number = 1
+  @type(["string"]) berryTreesType: Item[] = [
+    pickRandomIn(Berries),
+    pickRandomIn(Berries),
+    pickRandomIn(Berries)
+  ]
+  @type(["uint8"]) berryTreesStage: number[] = [1, 1, 1]
   @type("string") map: DungeonPMDO
   @type({ set: "string" }) effects: Effects = new Effects()
   @type(["string"]) regionalPokemons = new ArraySchema<Pkm>()
