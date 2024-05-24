@@ -6051,14 +6051,15 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.URSALUNA]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Strike,
-    emote: AnimationType.RearUp
+    attack: AnimationType.Idle, // TEMP while waiting for anims to be drawn
+    ability: AnimationType.Idle, // TEMP while waiting for anims to be drawn
+    emote: AnimationType.Idle // TEMP while waiting for anims to be drawn
   },
   [Pkm.URSALUNA_BLOODMOON]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.AIPOM]: {
     attack: AnimationType.Attack,
@@ -6463,7 +6464,8 @@ export const AnimationConfig: {
   [Pkm.POLTEAGEIST]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Hop,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.FERROSEED]: {
     attack: AnimationType.Attack,
