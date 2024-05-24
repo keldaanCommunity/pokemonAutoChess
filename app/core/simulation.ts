@@ -589,40 +589,40 @@ export default class Simulation extends Schema implements ISimulation {
       ]) as PokemonEntity[]
 
       if (
-        teamEffects.has(Effect.BAD_DREAMS) ||
-        teamEffects.has(Effect.PHANTOM_FORCE) ||
-        teamEffects.has(Effect.SHADOW_TAG) ||
-        teamEffects.has(Effect.CURSE)
+        teamEffects.has(Effect.CURSE_OF_VULNERABILITY) ||
+        teamEffects.has(Effect.CURSE_OF_WEAKNESS) ||
+        teamEffects.has(Effect.CURSE_OF_SILENCE) ||
+        teamEffects.has(Effect.CURSE_OF_FATE)
       ) {
-        let enemyWithHighestHP: PokemonEntity | undefined = undefined
-        let highestHP = 0
+        let enemyWithHighestDef: PokemonEntity | undefined = undefined
+        let highestDef = 0
         opponentsCursable.forEach((enemy) => {
-          if (enemy.hp + enemy.shield > highestHP) {
-            highestHP = enemy.hp + enemy.shield
-            enemyWithHighestHP = enemy as PokemonEntity
+          if (enemy.def + enemy.speDef > highestDef) {
+            highestDef = enemy.def + enemy.speDef
+            enemyWithHighestDef = enemy as PokemonEntity
           }
         })
-        if (enemyWithHighestHP) {
-          enemyWithHighestHP = enemyWithHighestHP as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
-          enemyWithHighestHP.addMaxHP(Math.round(-0.5 * enemyWithHighestHP.hp))
-          enemyWithHighestHP.addShield(
-            Math.round(-0.5 * enemyWithHighestHP.shield),
-            enemyWithHighestHP,
+        if (enemyWithHighestDef) {
+          enemyWithHighestDef = enemyWithHighestDef as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
+          enemyWithHighestDef.addDefense(-5, enemyWithHighestDef, 0, false)
+          enemyWithHighestDef.addSpecialDefense(
+            -5,
+            enemyWithHighestDef,
             0,
             false
           )
-          enemyWithHighestHP.status.triggerFlinch(
+          enemyWithHighestDef.status.triggerFlinch(
             7000,
-            enemyWithHighestHP,
+            enemyWithHighestDef,
             undefined
           )
         }
       }
 
       if (
-        teamEffects.has(Effect.PHANTOM_FORCE) ||
-        teamEffects.has(Effect.SHADOW_TAG) ||
-        teamEffects.has(Effect.CURSE)
+        teamEffects.has(Effect.CURSE_OF_WEAKNESS) ||
+        teamEffects.has(Effect.CURSE_OF_SILENCE) ||
+        teamEffects.has(Effect.CURSE_OF_FATE)
       ) {
         let enemyWithHighestATK: PokemonEntity | undefined = undefined
         let highestATK = 0
@@ -644,7 +644,10 @@ export default class Simulation extends Schema implements ISimulation {
         }
       }
 
-      if (teamEffects.has(Effect.SHADOW_TAG) || teamEffects.has(Effect.CURSE)) {
+      if (
+        teamEffects.has(Effect.CURSE_OF_SILENCE) ||
+        teamEffects.has(Effect.CURSE_OF_FATE)
+      ) {
         let enemyWithHighestAP: PokemonEntity | undefined = undefined
         let highestAP = 0
         opponentsCursable.forEach((enemy) => {
@@ -664,7 +667,7 @@ export default class Simulation extends Schema implements ISimulation {
         }
       }
 
-      if (teamEffects.has(Effect.CURSE)) {
+      if (teamEffects.has(Effect.CURSE_OF_FATE)) {
         const strongestEnemy = getStrongestUnit(opponentsCursable)
         if (strongestEnemy) {
           strongestEnemy.status.triggerCurse(3000)
@@ -971,15 +974,6 @@ export default class Simulation extends Schema implements ISimulation {
           if (types.has(Synergy.ROCK)) {
             pokemon.addDefense(30, pokemon, 0, false)
             pokemon.effects.add(Effect.DIAMOND_STORM)
-          }
-          break
-
-        case Effect.SHADOW_TAG:
-        case Effect.BAD_DREAMS:
-        case Effect.PHANTOM_FORCE:
-        case Effect.CURSE:
-          if (types.has(Synergy.GHOST)) {
-            pokemon.effects.add(effect)
           }
           break
 

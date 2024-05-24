@@ -423,7 +423,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean
   ) {
     value = Math.round(
-      value * (1 + (apBoost * this.ap) / 100) * (crit ? this.critPower : 1)
+      value * (1 + (apBoost * caster.ap) / 100) * (crit ? this.critPower : 1)
     )
     this.def = min(0)(this.def + value)
   }
@@ -435,7 +435,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean
   ) {
     value = Math.round(
-      value * (1 + (apBoost * this.ap) / 100) * (crit ? this.critPower : 1)
+      value * (1 + (apBoost * caster.ap) / 100) * (crit ? this.critPower : 1)
     )
     this.speDef = min(0)(this.speDef + value)
   }
@@ -447,7 +447,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean
   ) {
     value = Math.round(
-      value * (1 + (apBoost * this.ap) / 100) * (crit ? this.critPower : 1)
+      value * (1 + (apBoost * caster.ap) / 100) * (crit ? this.critPower : 1)
     )
     this.atk = min(1)(this.atk + value)
   }
@@ -459,7 +459,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean
   ) {
     value = Math.round(
-      value * (1 + (apBoost * this.ap) / 100) * (crit ? this.critPower : 1)
+      value * (1 + (apBoost * caster.ap) / 100) * (crit ? this.critPower : 1)
     )
     const currentAtkSpeedBonus = 100 * (this.atkSpeed / 0.75 - 1)
     const atkSpeedBonus = currentAtkSpeedBonus + value
