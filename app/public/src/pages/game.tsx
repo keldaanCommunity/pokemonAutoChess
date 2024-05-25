@@ -81,7 +81,7 @@ import { joinGame, logIn, setProfile } from "../stores/NetworkStore"
 import GameDpsMeter from "./component/game/game-dps-meter"
 import GameItemsProposition from "./component/game/game-items-proposition"
 import GameLoadingScreen from "./component/game/game-loading-screen"
-import GameModal from "./component/game/game-modal"
+import GameFinalRank from "./component/game/game-final-rank"
 import GamePlayers from "./component/game/game-players"
 import GamePokemonsProposition from "./component/game/game-pokemons-proposition"
 import GameShop from "./component/game/game-shop"
@@ -125,9 +125,8 @@ export default function Game() {
   const connected = useRef<boolean>(false)
   const [loaded, setLoaded] = useState<boolean>(false)
   const [connectError, setConnectError] = useState<string>("")
-  const [modalTitle, setModalTitle] = useState<string>("")
-  const [modalInfo, setModalInfo] = useState<string>("")
-  const [modalVisible, setModalVisible] = useState<boolean>(false)
+  const [finalRank, setFinalRank] = useState<number>(0)
+  const [finalRankVisible, setFinalRankVisible] = useState<boolean>(false)
   const [toAfter, setToAfter] = useState<boolean>(false)
   const [toAuth, setToAuth] = useState<boolean>(false)
   const container = useRef<HTMLDivElement>(null)
@@ -221,7 +220,7 @@ export default function Game() {
     const elligibleToELO =
       elligibleToXP &&
       !room?.state.noElo &&
-      savedPlayers.filter((p) => p.role !== Role.BOT).length >= 2
+      savedPlayers.filter((p) => p.role !== Role.BOT).length >= 4
 
     const r: Room<AfterGameState> = await client.create("after-game", {
       players: savedPlayers,
@@ -289,10 +288,9 @@ export default function Game() {
       room.onMessage(Transfer.LOADING_COMPLETE, () => {
         setLoaded(true)
       })
-      room.onMessage(Transfer.BROADCAST_INFO, (message) => {
-        setModalTitle(message.title)
-        setModalInfo(message.info)
-        setModalVisible(true)
+      room.onMessage(Transfer.FINAL_RANK, (finalRank) => {
+        setFinalRank(finalRank)
+        setFinalRankVisible(true)
       })
       room.onMessage(Transfer.PRELOAD_MAPS, async (maps) => {
         logger.info("preloading maps", maps)
@@ -557,15 +555,6 @@ export default function Game() {
           dispatch(setPokemonCollection(player.pokemonCollection))
           dispatch(setPlayer(player))
 
-          player.listen("alive", (value) => {
-            const rankPhrase = getRankLabel(player.rank)!
-            const titlePhrase = "Game Over"
-            if (value === false) {
-              setModalTitle(titlePhrase)
-              setModalInfo(rankPhrase)
-              setModalVisible(true)
-            }
-          })
           player.listen("interest", (value) => {
             dispatch(setInterest(value))
           })
@@ -600,6 +589,7 @@ export default function Game() {
         })
         player.listen("life", (value) => {
           dispatch(setLife({ id: player.id, value: value }))
+          setFinalRankVisible(value <= 0)
         })
         player.listen("money", (value) => {
           dispatch(setCurrentPlayerMoney({ id: player.id, value: value }))
@@ -725,12 +715,11 @@ export default function Game() {
       {loaded ? (
         <>
           <MainSidebar page="game" leave={leave} leaveLabel={t("leave_game")} />
-          <GameModal
-            visible={modalVisible}
-            modalTitle={modalTitle}
-            modalInfo={modalInfo}
-            hideModal={setModalVisible}
+          <GameFinalRank
+            rank={finalRank}
+            hide={() => setFinalRankVisible(false)}
             leave={leave}
+            visible={finalRankVisible}
           />
           {!spectate && <GameShop />}
           <GameStageInfo />

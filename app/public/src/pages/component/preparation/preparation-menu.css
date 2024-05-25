@@ -25,6 +25,10 @@
   width: 2em;
   height: 2em;
   margin-right: 0.5em;
+
+  &.noelo, &.scribble, &.quickplay {
+    border-radius: 50%;
+  }
 }
 
 .preparation-menu-users {

@@ -331,11 +331,4 @@ export default class Board {
       return this.effects[this.columns * y + x]
     }
   }
-
-  getStrongestUnitOnBoard(team?: number): PokemonEntity | undefined {
-    const candidates = this.cells.filter(
-      (cell) => cell && (cell.team === team || team === undefined)
-    ) as PokemonEntity[]
-    return getStrongestUnit(candidates)
-  }
 }

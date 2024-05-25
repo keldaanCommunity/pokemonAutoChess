@@ -40,10 +40,11 @@
 
 .tournament-item .player-ranks {
   display: block;
+  min-width: 2ch;
 }
 
 .tournament-item p {
-  margin: 0.25em 0;
+  margin: 0;
   flex: 1;
 }
 

@@ -18,21 +18,24 @@ import {
   IPlayer,
   IPokemon,
   IPokemonEntity,
-  Title
+  Title,
 } from "../../types"
 import {
   DEFAULT_ATK_SPEED,
   DEFAULT_CRIT_CHANCE,
-  DEFAULT_CRIT_DAMAGE,
+  DEFAULT_CRIT_POWER,
   EvolutionTime,
-  SynergyTriggers
+  SynergyTriggers,
+  ItemStats
 } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
-import { AttackType, PokemonActionState, Rarity } from "../../types/enum/Game"
+import { AttackType, PokemonActionState, Rarity, Stat } from "../../types/enum/Game"
 import {
   AllItems,
   Berries,
+  ItemComponents,
+  ArtificialItems,
   Item,
   ItemRecipe,
   SynergyItems
@@ -127,7 +130,11 @@ export class Pokemon extends Schema implements IPokemon {
     pokemonsBeforeEvolution: Pokemon[]
     player: Player
   }) {
+    if (params.pokemonEvolved instanceof Garbodor) {
+      const garbodor: Garbodor = params.pokemonEvolved as Garbodor
+    }
     // called after evolving
+    
   }
 
   beforeSimulationStart(params: {
@@ -169,7 +176,6 @@ export class Ditto extends Pokemon {
   skill = Ability.TRANSFORM
   passive = Passive.DITTO
   attackSprite = AttackSprite.NORMAL_MELEE
-  canHoldItems = false
 }
 
 export class Substitute extends Pokemon {
@@ -1092,8 +1098,8 @@ export class Fuecoco extends Pokemon {
   evolution = Pkm.CROCALOR
   hp = 110
   atk = 5
-  def = 4
-  speDef = 4
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 2
   skill = Ability.TORCH_SONG
@@ -1107,8 +1113,8 @@ export class Crocalor extends Pokemon {
   evolution = Pkm.SKELEDIRGE
   hp = 170
   atk = 13
-  def = 5
-  speDef = 5
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 2
   skill = Ability.TORCH_SONG
@@ -1121,8 +1127,8 @@ export class Skeledirge extends Pokemon {
   stars = 3
   hp = 350
   atk = 24
-  def = 6
-  speDef = 6
+  def = 5
+  speDef = 5
   maxPP = 100
   range = 2
   skill = Ability.TORCH_SONG
@@ -1541,7 +1547,7 @@ export class Litwick extends Pokemon {
   stars = 1
   evolution = Pkm.LAMPENT
   hp = 50
-  atk = 5
+  atk = 4
   def = 1
   speDef = 1
   maxPP = 100
@@ -1730,7 +1736,7 @@ export class Torterra extends Pokemon {
 }
 
 export class Deino extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.DRAGON])
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.DARK])
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.ZWEILOUS
@@ -1746,7 +1752,7 @@ export class Deino extends Pokemon {
 }
 
 export class Zweilous extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.DRAGON])
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.DARK])
   rarity = Rarity.RARE
   stars = 2
   evolution = Pkm.HYDREIGON
@@ -1762,7 +1768,7 @@ export class Zweilous extends Pokemon {
 }
 
 export class Hydreigon extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.DRAGON])
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.DARK])
   rarity = Rarity.RARE
   stars = 3
   hp = 230
@@ -6241,9 +6247,9 @@ export class Torkoal extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.GROUND])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 240
+  hp = 220
   atk = 10
-  def = 10
+  def = 8
   speDef = 2
   maxPP = 110
   range = 1
@@ -7860,7 +7866,7 @@ export class Growlithe extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.ARCANINE
-  hp = 70
+  hp = 75
   atk = 6
   def = 2
   speDef = 2
@@ -7875,7 +7881,7 @@ export class Arcanine extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 130
+  hp = 140
   atk = 14
   def = 5
   speDef = 5
@@ -11440,7 +11446,7 @@ export class Illumise extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.BUG, Synergy.LIGHT])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 150
+  hp = 130
   atk = 13
   def = 3
   speDef = 3
@@ -11455,7 +11461,7 @@ export class Volbeat extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.BUG, Synergy.LIGHT])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 150
+  hp = 130
   atk = 13
   def = 3
   speDef = 3
@@ -11713,11 +11719,11 @@ export class Wingull extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.PELIPPER
-  hp = 80
+  hp = 90
   atk = 8
-  def = 3
+  def = 5
   speDef = 3
-  maxPP = 85
+  maxPP = 75
   range = 2
   skill = Ability.WHIRLWIND
   additional = true
@@ -11729,11 +11735,11 @@ export class Pelipper extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FLYING])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 180
+  hp = 200
   atk = 20
-  def = 4
+  def = 7
   speDef = 4
-  maxPP = 85
+  maxPP = 75
   range = 2
   skill = Ability.WHIRLWIND
   additional = true
@@ -11862,8 +11868,8 @@ export class Xurkitree extends Pokemon {
   atk = 16
   def = 3
   speDef = 3
-  maxPP = 80
-  range = 3
+  maxPP = 100
+  range = 2
   skill = Ability.CHARGE_BEAM
   passive = Passive.SPECIAL_ATTACK
   attackSprite = AttackSprite.ELECTRIC_RANGE
@@ -12172,7 +12178,10 @@ export class Comfey extends Pokemon {
     entity: IPokemonEntity
   }) {
     const alliesWithFreeSlots = values(team).filter(
-      (p) => p.name !== Pkm.COMFEY && p.items.size < 3
+      (p) =>
+        p.name !== Pkm.COMFEY &&
+        p.items.size < 3 &&
+        p.refToBoardPokemon.canHoldItems
     )
 
     if (alliesWithFreeSlots.length > 0) {
@@ -12208,20 +12217,34 @@ export class Comfey extends Pokemon {
       nearestAllyWithFreeItemSlot.items.add(Item.COMFEY)
 
       // apply comfey stats
-      nearestAllyWithFreeItemSlot.addAbilityPower(entity.ap)
-      nearestAllyWithFreeItemSlot.addAttack(entity.atk)
+      nearestAllyWithFreeItemSlot.addAbilityPower(entity.ap, entity, 0, false)
+      nearestAllyWithFreeItemSlot.addAttack(entity.atk, entity, 0, false)
       nearestAllyWithFreeItemSlot.addAttackSpeed(
-        entity.atkSpeed - DEFAULT_ATK_SPEED
+        entity.atkSpeed - DEFAULT_ATK_SPEED,
+        entity,
+        0,
+        false
       )
-      nearestAllyWithFreeItemSlot.addShield(entity.shield, entity)
+      nearestAllyWithFreeItemSlot.addShield(entity.shield, entity, 0, false)
       nearestAllyWithFreeItemSlot.addMaxHP(entity.hp)
-      nearestAllyWithFreeItemSlot.addDefense(entity.def)
-      nearestAllyWithFreeItemSlot.addSpecialDefense(entity.speDef)
-      nearestAllyWithFreeItemSlot.addCritChance(
-        entity.critChance - DEFAULT_CRIT_CHANCE
+      nearestAllyWithFreeItemSlot.addDefense(entity.def, entity, 0, false)
+      nearestAllyWithFreeItemSlot.addSpecialDefense(
+        entity.speDef,
+        entity,
+        0,
+        false
       )
-      nearestAllyWithFreeItemSlot.addCritDamage(
-        entity.critDamage - DEFAULT_CRIT_DAMAGE
+      nearestAllyWithFreeItemSlot.addCritChance(
+        entity.critChance - DEFAULT_CRIT_CHANCE,
+        entity,
+        0,
+        false
+      )
+      nearestAllyWithFreeItemSlot.addCritPower(
+        entity.critPower - DEFAULT_CRIT_POWER,
+        entity,
+        0,
+        false
       )
     }
   }
@@ -13451,6 +13474,273 @@ export class Grumpig extends Pokemon {
   regional = true
 }
 
+export class Sinistea extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.POLTEAGEIST
+  hp = 80
+  atk = 4
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.TEA_TIME
+  attackSprite = AttackSprite.GHOST_RANGE
+  additional = true
+}
+
+export class Polteageist extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 180
+  atk = 9
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 2
+  skill = Ability.TEA_TIME
+  attackSprite = AttackSprite.GHOST_RANGE
+  additional = true
+}
+
+export class Ferroseed extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.STEEL])
+  rarity = Rarity.EPIC
+  evolution = Pkm.FERROTHORN
+  stars = 1
+  hp = 100
+  atk = 7
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 1
+  skill = Ability.SPIKES
+  attackSprite = AttackSprite.GRASS_MELEE
+  additional = true
+}
+
+export class Ferrothorn extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.STEEL])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 220
+  atk = 14
+  def = 14
+  speDef = 14
+  maxPP = 100
+  range = 1
+  skill = Ability.SPIKES
+  attackSprite = AttackSprite.GRASS_MELEE
+  additional = true
+}
+
+export class Golett extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GROUND,
+    Synergy.ARTIFICIAL,
+    Synergy.GHOST
+  ])
+  rarity = Rarity.RARE
+  evolution = Pkm.GOLURK
+  stars = 1
+  hp = 80
+  atk = 7
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.SHADOW_PUNCH
+  attackSprite = AttackSprite.NORMAL_MELEE
+  additional = true
+}
+
+export class Golurk extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GROUND,
+    Synergy.ARTIFICIAL,
+    Synergy.GHOST
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 180
+  atk = 20
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.SHADOW_PUNCH
+  attackSprite = AttackSprite.NORMAL_MELEE
+  additional = true
+}
+
+export class Trubbish extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.ARTIFICIAL])
+  rarity = Rarity.EPIC
+  evolution = Pkm.GARBODOR
+  stars = 1
+  hp = 110
+  atk = 8
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.GUNK_SHOT
+  passive = Passive.RECYCLE
+  attackSprite = AttackSprite.POISON_MELEE
+  additional = true
+
+  defaultValues = {
+    [Stat.HP] : this.hp,
+    [Stat.ATK] : this.atk,
+    [Stat.DEF] : this.def,
+    [Stat.SPE_DEF] : this.speDef,
+  }
+
+  statIncreases = {
+    [Stat.HP] : 0,
+    [Stat.ATK] : 0,
+    [Stat.ATK_SPEED] : 0,
+    [Stat.AP] : 0,
+    [Stat.DEF] : 0,
+    [Stat.SPE_DEF] : 0,
+    [Stat.CRIT_CHANCE] : 0,
+    [Stat.PP] : 0,
+    [Stat.SHIELD] : 0
+  }
+
+  beforeSimulationStart({ player }: { player: Player }) {
+    this.items.forEach((item) => {
+      if (Berries.includes(item)) {
+        this.statIncreases[Stat.HP] += 10
+      }
+      if (ItemComponents.includes(item)) {
+        this.statIncreases[Stat.HP] += 25
+      }
+      if (ArtificialItems.includes(item)) {
+        this.statIncreases[Stat.HP] += 50
+
+        const itemIndex = player.artificialItems.indexOf(item)
+        player.artificialItems[itemIndex] = Item.TRASH
+        player.items.push(player.artificialItems[itemIndex])
+      }
+    })
+    this.hp = this.defaultValues[Stat.HP] + this.statIncreases[Stat.HP]
+  }
+
+  afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
+
+    // Add non-permanent stats to Trubbish
+    entity.addAbilityPower(this.statIncreases[Stat.AP], entity, 0, false)
+    entity.addShield(this.statIncreases[Stat.SHIELD], entity, 0, false)
+    entity.addCritChance(this.statIncreases[Stat.CRIT_CHANCE], entity, 0, false)
+    entity.addPP(this.statIncreases[Stat.PP], entity, 0, false)
+    entity.addAttackSpeed(this.statIncreases[Stat.ATK_SPEED], entity, 0, false)
+
+    entity.items.forEach((item) => {
+      if (
+        ItemComponents.includes(item) ||
+        ArtificialItems.includes(item) ||
+        Berries.includes(item)
+      ) {
+        // Add item Stats
+        if (ItemStats[item]) {
+          Object.entries(ItemStats[item]).forEach(
+            ([stat, value]) => (this.statIncreases[stat as Stat] += value)
+          )
+        }
+
+        // Delete item
+        entity.items.delete(item)
+        entity.refToBoardPokemon.items.delete(item)
+      }
+    })
+
+    // Update permanent stats
+    entity.refToBoardPokemon.hp =
+      this.defaultValues[Stat.HP] + this.statIncreases[Stat.HP]
+    entity.refToBoardPokemon.atk =
+      this.defaultValues[Stat.ATK] + this.statIncreases[Stat.ATK]
+    entity.refToBoardPokemon.def =
+      this.defaultValues[Stat.DEF] + this.statIncreases[Stat.DEF]
+    entity.refToBoardPokemon.speDef =
+      this.defaultValues[Stat.SPE_DEF] + this.statIncreases[Stat.SPE_DEF]
+  }
+
+  onEvolve({
+    pokemonEvolved: garbodorObj,
+    pokemonsBeforeEvolution: trubbishes
+  }: {
+    pokemonEvolved: Pokemon
+    pokemonsBeforeEvolution: Pokemon[]
+  }) {
+    // Carry over the stats gained with passive
+    const trubbishStats = {
+      [Stat.HP]: 0,
+      [Stat.ATK]: 0,
+      [Stat.ATK_SPEED]: 0,
+      [Stat.AP]: 0,
+      [Stat.DEF]: 0,
+      [Stat.SPE_DEF]: 0,
+      [Stat.CRIT_CHANCE]: 0,
+      [Stat.PP]: 0,
+      [Stat.SHIELD]: 0
+    }
+    trubbishes.forEach((trubbishObj) => {
+      const trubbish = trubbishObj as Trubbish
+      for (const key in trubbishStats) {
+        trubbishStats[key] += trubbish.statIncreases[key]
+      }
+
+    });
+    const garbodor = garbodorObj as Garbodor
+    garbodor.statIncreases = trubbishStats
+    garbodor.hp += garbodor.statIncreases[Stat.HP]
+    garbodor.atk += garbodor.statIncreases[Stat.ATK]
+    garbodor.def += garbodor.statIncreases[Stat.DEF]
+    garbodor.speDef += garbodor.statIncreases[Stat.SPE_DEF]
+  }
+}
+
+export class Garbodor extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.ARTIFICIAL])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 230
+  atk = 15
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.GUNK_SHOT
+  passive = Passive.RECYCLE
+  attackSprite = AttackSprite.POISON_MELEE
+  additional = true
+  
+  statIncreases = {
+    [Stat.HP] : 0,
+    [Stat.ATK] : 0,
+    [Stat.ATK_SPEED] : 0,
+    [Stat.AP] : 0,
+    [Stat.DEF] : 0,
+    [Stat.SPE_DEF] : 0,
+    [Stat.CRIT_CHANCE] : 0,
+    [Stat.PP] : 0,
+    [Stat.SHIELD] : 0
+  }
+
+  defaultValues = {
+    [Stat.HP] : this.hp,
+    [Stat.ATK] : this.atk,
+    [Stat.DEF] : this.def,
+    [Stat.SPE_DEF] : this.speDef
+  }
+
+  beforeSimulationStart = Trubbish.prototype.beforeSimulationStart
+  afterSimulationStart = Trubbish.prototype.afterSimulationStart
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -14241,5 +14531,13 @@ export const PokemonClasses: Record<
   [Pkm.PHANPY]: Phanpy,
   [Pkm.DONPHAN]: Donphan,
   [Pkm.SPOINK]: Spoink,
-  [Pkm.GRUMPIG]: Grumpig
+  [Pkm.GRUMPIG]: Grumpig,
+  [Pkm.SINISTEA]: Sinistea,
+  [Pkm.POLTEAGEIST]: Polteageist,
+  [Pkm.FERROSEED]: Ferroseed,
+  [Pkm.FERROTHORN]: Ferrothorn,
+  [Pkm.GOLETT]: Golett,
+  [Pkm.GOLURK]: Golurk,
+  [Pkm.TRUBBISH]: Trubbish,
+  [Pkm.GARBODOR]: Garbodor
 }

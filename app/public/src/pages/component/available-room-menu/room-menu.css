@@ -22,7 +22,7 @@
 
 .room-menu .create-room-button {
   width: 100%;
-  margin: 0 auto;
+  margin: 0.5em auto 0 auto;
 }
 
 .room-menu .rank.icon {
@@ -43,4 +43,9 @@
 
 .special-game-announcement span:last-child {
   flex: 0 0 6ch;
+}
+
+.room-menu .tab-available-rooms > ul {
+  max-height: calc(100% - 10em);
+  overflow: auto;
 }

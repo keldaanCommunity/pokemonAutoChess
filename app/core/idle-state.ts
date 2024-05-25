@@ -28,7 +28,7 @@ export class IdleState extends PokemonState {
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = 500
       if (pokemon.passive === Passive.SUDOWOODO && pokemon.status.tree) {
-        pokemon.addAttack(pokemon.stars === 1 ? 1 : 2)
+        pokemon.addAttack(pokemon.stars === 1 ? 1 : 2, pokemon, 0, false)
       }
     } else {
       pokemon.cooldown -= dt

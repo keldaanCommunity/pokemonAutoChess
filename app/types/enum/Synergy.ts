@@ -88,7 +88,7 @@ export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
     Effect.TAILWIND,
     Effect.FEATHER_DANCE,
     Effect.MAX_AIRSTREAM,
-    Effect.MAX_GUARD
+    Effect.SKYDIVE
   ],
   [Synergy.FLORA]: [
     Effect.ODD_FLOWER,

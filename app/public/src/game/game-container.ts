@@ -23,6 +23,7 @@ import {
   IDragDropMessage,
   IPlayer,
   IPokemon,
+  IPokemonEntity,
   ISimplePlayer,
   Transfer
 } from "../../../types"
@@ -45,6 +46,7 @@ import { changePlayer } from "../stores/GameStore"
 import { getPortraitSrc } from "../utils"
 import { BoardMode } from "./components/board-manager"
 import GameScene from "./scenes/game-scene"
+import { playSound, SOUNDS } from "../pages/utils/audio"
 
 class GameContainer {
   room: Room<GameState>
@@ -133,13 +135,13 @@ class GameContainer {
     })
 
     pokemon.onChange(() => {
-      const fields: NonFunctionPropNames<PokemonEntity>[] = [
+      const fields: NonFunctionPropNames<IPokemonEntity>[] = [
         "positionX",
         "positionY",
         "orientation",
         "action",
         "critChance",
-        "critDamage",
+        "critPower",
         "ap",
         "atkSpeed",
         "life",
@@ -567,6 +569,7 @@ class GameContainer {
         pokemonUI.fishingAnimation()
       } else if (pokemonUI && pokemon.stars > 1) {
         pokemonUI.evolutionAnimation()
+        playSound(pokemon.stars === 2 ? SOUNDS.EVOLUTION_T2 : SOUNDS.EVOLUTION_T3)
       } else if (pokemonUI && pokemon.rarity === Rarity.HATCH) {
         pokemonUI.hatchAnimation()
       }

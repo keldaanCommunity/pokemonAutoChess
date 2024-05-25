@@ -81,10 +81,10 @@ export default function WikiStatistic() {
         </p>
       </li>
       <li className="my-box">
-        <img style={imgStyle} src="assets/icons/CRIT_DAMAGE.png"></img>
-        <p>{t("stat.CRIT_DAMAGE")}</p>
+        <img style={imgStyle} src="assets/icons/CRIT_POWER.png"></img>
+        <p>{t("stat.CRIT_POWER")}</p>
         <p className="description">
-          {addIconsToDescription(t("stat_description.CRIT_DAMAGE"))}
+          {addIconsToDescription(t("stat_description.CRIT_POWER"))}
         </p>
       </li>
     </ul>

@@ -13,7 +13,7 @@ import {
 } from "matter-js"
 import Player from "../../models/colyseus-models/player"
 import { getOrientation } from "../../public/src/pages/utils/utils"
-import { PokemonActionState, Rarity } from "../../types/enum/Game"
+import { PokemonActionState } from "../../types/enum/Game"
 import {
   ItemComponents,
   CraftableItems,
@@ -331,6 +331,18 @@ export class MiniGame {
       }
     })
     this.bodies.forEach((body, id) => {
+      if (
+        body.position.x < 0 ||
+        body.position.x > 720 ||
+        body.position.y < 0 ||
+        body.position.y > 590
+      ) {
+        // prevent going out of bounds in case of lag
+        Body.setPosition(body, {
+          x: clamp(body.position.x, 0, 720),
+          y: clamp(body.position.y, 0, 590)
+        })
+      }
       if (this.avatars?.has(id)) {
         const avatar = this.avatars.get(id)!
         avatar.x = body.position.x

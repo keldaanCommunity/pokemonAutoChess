@@ -548,10 +548,6 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
-    case Ability.METEOR_MASH:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(3)
-      break
-
     case Ability.HURRICANE: {
       const [dx, dy] = OrientationVector[orientation]
       const finalCoordinates = transformAttackCoordinate(
@@ -1506,6 +1502,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
+    case Ability.TEA_TIME:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
     case Ability.DRAGON_DARTS: {
       const specialProjectile = addAbilitySprite(skill, coordinates)
         .setScale(1)
@@ -1794,6 +1794,31 @@ export function displayAbility(
     case Ability.STEALTH_ROCKS:
       addAbilitySprite(skill, coordinates, true).setDepth(1).setScale(2)
       break
+
+    case Ability.SPIKES: {
+      const specialProjectile = addAbilitySprite(skill, coordinates)
+        .setScale(1)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) -
+            Math.PI / 2
+        )
+
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        yoyo: false,
+        duration: 500,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
 
     case "LINK_CABLE_link": {
       const distance = distanceE(positionX, positionY, targetX, targetY)
@@ -2110,6 +2135,21 @@ export function displayAbility(
     case Ability.BOUNCE:
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
+
+    case Ability.GUNK_SHOT: {
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "Power2",
+        duration: 700,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
 
     case "FIELD_DEATH":
       addAbilitySprite("FIELD_DEATH", coordinates, true).setScale(2)

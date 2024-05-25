@@ -332,7 +332,7 @@ export const MAX_PLAYERS_PER_GAME = 8
 
 export const DEFAULT_ATK_SPEED = 0.75
 export const DEFAULT_CRIT_CHANCE = 10
-export const DEFAULT_CRIT_DAMAGE = 2
+export const DEFAULT_CRIT_POWER = 2
 
 export const StageDuration: Record<number | "DEFAULT", number> = {
   1: 30,
@@ -577,7 +577,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.RAZOR_FANG]: {
     [Stat.ATK_SPEED]: 10,
     [Stat.CRIT_CHANCE]: 10,
-    [Stat.CRIT_DAMAGE]: 1
+    [Stat.CRIT_POWER]: 1
   },
   [Item.GRACIDEA_FLOWER]: { [Stat.ATK_SPEED]: 10, [Stat.SHIELD]: 15 },
   [Item.CHOICE_SCARF]: { [Stat.ATK_SPEED]: 10, [Stat.SPE_DEF]: 2 },
@@ -635,7 +635,8 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.INCENSE]: { [Stat.SPE_DEF]: 5 },
   [Item.EXP_SHARE]: {},
   [Item.METEORITE]: {},
-  [Item.BERRY_JUICE]: {}
+  [Item.BERRY_JUICE]: {},
+  [Item.TRASH]: {}
 }
 
 export type TilesetExchangeFile = {

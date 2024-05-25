@@ -37,7 +37,8 @@ import {
   MAX_PLAYERS_PER_GAME,
   PORTAL_CAROUSEL_BASE_DURATION,
   PortalCarouselStages,
-  StageDuration
+  StageDuration,
+  SynergyTriggers
 } from "../../types/Config"
 import { Effect } from "../../types/enum/Effect"
 import {
@@ -57,6 +58,7 @@ import {
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
+import { Synergy } from "../../types/enum/Synergy"
 import { removeInArray } from "../../utils/array"
 import {
   getFirstAvailablePositionInBench,
@@ -438,7 +440,8 @@ export class OnDragDropItemCommand extends Command<
 
     if (
       SynergyItems.includes(item) &&
-      pokemon.types.has(SynergyGivenByItem[item])
+      pokemon.types.has(SynergyGivenByItem[item]) &&
+      pokemon.passive !== Passive.RECYCLE
     ) {
       // prevent adding a synergy stone on a pokemon that already has this synergy
       client.send(Transfer.DRAG_DROP_FAILED, message)
@@ -467,7 +470,8 @@ export class OnDragDropItemCommand extends Command<
 
       if (
         itemCombined in SynergyGivenByItem &&
-        pokemon.types.has(SynergyGivenByItem[itemCombined])
+        pokemon.types.has(SynergyGivenByItem[itemCombined]
+        )
       ) {
         // prevent combining into a synergy stone on a pokemon that already has this synergy
         client.send(Transfer.DRAG_DROP_FAILED, message)
@@ -592,15 +596,16 @@ export class OnLevelUpCommand extends Command<
 export class OnPickBerryCommand extends Command<
   GameRoom,
   {
-    id: string
+    playerId: string
+    berryIndex: number
   }
 > {
-  execute(id) {
-    const player = this.state.players.get(id)
-    if (player && player.berryTreeStage >= 3) {
-      player.berryTreeStage = 0
-      player.items.push(player.berry)
-      player.berry = pickRandomIn(Berries)
+  execute({ playerId, berryIndex }) {
+    const player = this.state.players.get(playerId)
+    if (player && player.berryTreesStage[berryIndex] >= 3) {
+      player.berryTreesStage[berryIndex] = 0
+      player.items.push(player.berryTreesType[berryIndex])
+      player.berryTreesType[berryIndex] = pickRandomIn(Berries)
     }
   }
 }
@@ -768,7 +773,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           case Effect.HEART_OF_THE_SWARM:
             player.titles.add(Title.BUG_MANIAC)
             break
-          case Effect.MAX_GUARD:
+          case Effect.SKYDIVE:
             player.titles.add(Title.BIRD_KEEPER)
             break
           case Effect.SUN_FLOWER:
@@ -827,20 +832,23 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (heal > 1000) {
         player.titles.add(Title.NURSE)
       }
+
+      if (this.state.stageLevel >= 40) {
+        player.titles.add(Title.ETERNAL)
+      }
     }
   }
 
   checkEndGame() {
-    const numberOfPlayersAlive = values(this.state.players).filter(
-      (p) => p.alive
-    ).length
+    const playersAlive = values(this.state.players).filter((p) => p.alive)
 
-    if (numberOfPlayersAlive <= 1) {
+    if (playersAlive.length <= 1) {
       this.state.gameFinished = true
-      this.room.broadcast(Transfer.BROADCAST_INFO, {
-        title: "End of the game",
-        info: "We have a winner !"
-      })
+      const winner = playersAlive[0]
+      const client = this.room.clients.find((cli) => cli.auth.uid === winner.id)
+      if (client) {
+        client.send(Transfer.FINAL_RANK, 1)
+      }
       setTimeout(() => {
         // dispose the room automatically after 30 seconds
         this.room.broadcast(Transfer.GAME_END)
@@ -917,7 +925,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       this.state.players.forEach((player: Player) => {
         let itemSet = ItemComponents
         if (this.state.specialGameRule === SpecialGameRule.TECHNOLOGIC) {
-          itemSet = ArtificialItems
+          itemSet = ArtificialItems.filter(
+            (item) => player.artificialItems.includes(item) === false
+          )
         }
         resetArraySchema(player.itemsProposition, pickNRandomIn(itemSet, 3))
       })
@@ -984,14 +994,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         }, 1000)
       }
 
-      if (player.effects.has(Effect.INGRAIN)) {
-        player.berryTreeStage = max(3)(player.berryTreeStage + 1)
-      }
-      if (player.effects.has(Effect.GROWTH)) {
-        player.berryTreeStage = max(3)(player.berryTreeStage + 2)
-      }
-      if (player.effects.has(Effect.SPORE)) {
-        player.berryTreeStage = max(3)(player.berryTreeStage + 3)
+      const grassLevel = player.synergies.get(Synergy.GRASS) ?? 0
+      const nbTrees = SynergyTriggers[Synergy.GRASS].filter(
+        (n) => n <= grassLevel
+      ).length
+      for (let i = 0; i < nbTrees; i++) {
+        player.berryTreesStage[i] = max(3)(player.berryTreesStage[i] + 1)
       }
     })
 
@@ -1159,6 +1167,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         })
         // Refreshes effects (like tapu Terrains)
         player.updateSynergies()
+      } else {
+        const client = this.room.clients.find(
+          (cli) => cli.auth.uid === player.id
+        )
+        if (client) {
+          client.send(Transfer.FINAL_RANK, player.rank)
+        }
       }
     })
 

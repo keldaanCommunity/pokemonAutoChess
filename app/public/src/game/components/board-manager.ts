@@ -43,7 +43,7 @@ export default class BoardManager {
   lightX: number
   lightY: number
   lightCell: Phaser.GameObjects.Sprite | null
-  berryTree: Phaser.GameObjects.Sprite | null
+  berryTrees: Phaser.GameObjects.Sprite[] = []
   gameMode: GameMode
   smeargle: PokemonSprite | null = null
   specialGameRule: SpecialGameRule | null = null
@@ -220,42 +220,50 @@ export default class BoardManager {
   }
 
   showBerryTree() {
-    this.hideBerryTree()
-    const grassCount = this.player.synergies.get(Synergy.GRASS)
-    if (grassCount && grassCount >= SynergyTriggers[Synergy.GRASS][0]) {
-      this.berryTree = this.scene.add.sprite(
-        408,
-        710,
+    this.berryTrees.forEach((tree) => tree.destroy())
+    this.berryTrees = []
+    const grassLevel = this.player.synergies.get(Synergy.GRASS) ?? 0
+    const nbTrees = SynergyTriggers[Synergy.GRASS].filter(
+      (n) => n <= grassLevel
+    ).length
+
+    const treePositions = [
+      [408, 710],
+      [360, 710],
+      [312, 710]
+    ]
+
+    for (let i = 0; i < nbTrees; i++) {
+      const tree = this.scene.add.sprite(
+        treePositions[i][0],
+        treePositions[i][1],
         "berry_trees",
-        this.player.berry + "_1"
+        this.player.berryTreesType[i] + "_1"
       )
-      this.berryTree.setDepth(1)
-      this.berryTree.setScale(2, 2)
-      this.berryTree.setOrigin(0.5, 1)
-      if (this.player.berryTreeStage === 0) {
-        this.berryTree.anims.play("CROP")
+
+      tree.setDepth(1).setScale(2, 2).setOrigin(0.5, 1)
+      if (this.player.berryTreesStage[i] === 0) {
+        tree.anims.play("CROP")
       } else {
-        this.berryTree.anims.play(
-          `${this.player.berry}_TREE_STEP_${this.player.berryTreeStage}`
+        tree.anims.play(
+          `${this.player.berryTreesType[i]}_TREE_STEP_${this.player.berryTreesStage[i]}`
         )
       }
 
-      this.berryTree.setInteractive()
-      this.berryTree.on("pointerdown", (pointer) => {
+      tree.setInteractive()
+      tree.on("pointerdown", (pointer) => {
         if (this.player.id !== this.scene.uid) return
-        if (this.scene.room && this.player.berryTreeStage >= 3) {
-          this.scene.room.send(Transfer.PICK_BERRY)
+        if (this.scene.room && this.player.berryTreesStage[i] >= 3) {
+          this.scene.room.send(Transfer.PICK_BERRY, i)
           this.displayText(pointer.x, pointer.y, t("berry_gained"))
-          this.berryTree?.play("CROP")
+          tree.play("CROP")
         } else {
           this.displayText(pointer.x, pointer.y, t("berry_unripe"))
         }
       })
-    }
-  }
 
-  hideBerryTree() {
-    this.berryTree?.destroy()
+      this.berryTrees.push(tree)
+    }
   }
 
   displayText(x: number, y: number, label: string) {

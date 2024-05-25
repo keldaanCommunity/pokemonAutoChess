@@ -37,6 +37,7 @@ import { Pokemon, isOnBench, PokemonClasses } from "./pokemon"
 import PokemonCollection from "./pokemon-collection"
 import PokemonConfig from "./pokemon-config"
 import Synergies, { computeSynergies } from "./synergies"
+import { logger } from "../../utils/logger"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
@@ -70,8 +71,12 @@ export default class Player extends Schema implements IPlayer {
   @type(["string"]) pokemonsProposition = new ArraySchema<PkmProposition>()
   @type(["string"]) pveRewards = new ArraySchema<Item>()
   @type("float32") loadingProgress: number = 0
-  @type("string") berry: Item = pickRandomIn(Berries)
-  @type("uint8") berryTreeStage: number = 1
+  @type(["string"]) berryTreesType: Item[] = [
+    pickRandomIn(Berries),
+    pickRandomIn(Berries),
+    pickRandomIn(Berries)
+  ]
+  @type(["uint8"]) berryTreesStage: number[] = [1, 1, 1]
   @type("string") map: DungeonPMDO
   @type({ set: "string" }) effects: Effects = new Effects()
   @type(["string"]) regionalPokemons = new ArraySchema<Pkm>()
@@ -278,25 +283,47 @@ export default class Player extends Schema implements IPlayer {
         newNbArtifItems,
         previousNbArtifItems
       )
-      lostArtificialItems.forEach((item) => {
-        removeInArray<Item>(this.items, item)
-      })
+
+      // variables for managing number of "Trash" items
+      const lostTrash = lostArtificialItems.filter(
+        (item) => item === Item.TRASH
+      ).length
+      let cleanedTrash = 0
+
       this.board.forEach((pokemon) => {
         lostArtificialItems.forEach((item) => {
           if (pokemon.items.has(item)) {
-            pokemon.items.delete(item)
-            if (item in SynergyGivenByItem) {
-              const type = SynergyGivenByItem[item]
-              const nativeTypes = getPokemonData(pokemon.name).types
-              if (nativeTypes.includes(type) === false) {
-                pokemon.types.delete(type)
-                if (!isOnBench(pokemon)) {
-                  needsRecomputingSynergiesAgain = true
+            if (item === Item.TRASH && lostTrash - cleanedTrash > 0){
+                pokemon.items.delete(item)
+                cleanedTrash++
+            }
+            else if (item !== Item.TRASH) {
+              pokemon.items.delete(item)
+              
+              if (item in SynergyGivenByItem) {
+                const type = SynergyGivenByItem[item]
+                const nativeTypes = getPokemonData(pokemon.name).types
+                if (nativeTypes.includes(type) === false) {
+                  pokemon.types.delete(type)
+                  if (!isOnBench(pokemon)) {
+                    needsRecomputingSynergiesAgain = true
+                  }
                 }
               }
             }
+            
           }
         })
+      })
+
+      lostArtificialItems.forEach((item) => {
+        if (item !== Item.TRASH) {
+          removeInArray<Item>(this.items, item) 
+        }
+        else if (item === Item.TRASH && lostTrash - cleanedTrash > 0){
+          removeInArray<Item>(this.items, item) 
+          cleanedTrash++
+        }
       })
     }
 
