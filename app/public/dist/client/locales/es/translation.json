@@ -345,7 +345,11 @@
     "HAIL": "Granizo",
     "RAPID_SPIN": "Giro Rápido",
     "BOUNCE": "Bote",
-    "BLOOD_MOON": "Luna Roja"
+    "GUNK_SHOT": "Lanzamugre",
+    "BLOOD_MOON": "Luna Roja",
+    "TEA_TIME": "Hora del Té",
+    "SPIKES": "Púas",
+    "SHADOW_PUNCH": "Puño Sombra"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1132,7 +1136,15 @@
     "PHANPY": "Phanpy",
     "DONPHAN": "Donphan",
     "SPOINK": "Spoink",
-    "GRUMPIG": "Grumpig"
+    "GRUMPIG": "Grumpig",
+    "TRUBBISH": "Trubbish",
+    "GARBODOR": "Garbodor",
+    "SINISTEA": "Sinistea",
+    "POLTEAGEIST": "Polteageist",
+    "FERROSEED": "Ferroseed",
+    "FERROTHORN": "Ferrothorn",
+    "GOLETT": "Golett",
+    "GOLURK": "Golurk"
   },
   "ability_description": {
     "SOFT_BOILED": "Cura todos los efectos de estado y otorga [20,40,80,SP] SHIELD para cada aliado",
@@ -1458,7 +1470,11 @@
     "HEAVY_SLAM": "Golpea el suelo causando [10,20,40,SP] SPECIAL y otorgándose [10,20,40] SHIELD. Cuanto más supere el usuario al objetivo en HP máximo, mayor será el poder del movimiento.",
     "RAPID_SPIN": "Este pokémon inflige [20,50] SPECIAL y luego gana [20,30,SP]% de ATK como DEF y SPE_DEF",
     "BOUNCE": "Rebota [1,2,3,SP] veces hacia el objetivo más lejano, causando [10,SP] SPECIAL a todos los enemigos adyacentes por cada rebote.",
-    "BLOOD_MOON": "Concentra toda su energía en la luna roja sangrienta en su frente y la proyecta en una línea, causando [200,SP]% de ATK como SPECIAL y WOUND durante 3 segundos a todos los enemigos golpeados"
+    "BLOOD_MOON": "Concentra toda su energía en la luna roja sangrienta en su frente y la proyecta en una línea, causando [200,SP]% de ATK como SPECIAL y WOUND durante 3 segundos a todos los enemigos golpeados",
+    "TEA_TIME": "Cura a los aliados [20,40,80,SP] HP. Todos los Pokémon que tengan una baya se la comen inmediatamente.",
+    "SPIKES": "Lanza hasta [6, SP] púas de metal dentro de un radio de 3 celdas por delante, lo que causa [25,50,SP] TRUE. Los púas permanecen en el campo, causando 10 TRUE por segundo y ARMOR_REDUCTION a los oponentes que caminan sobre ellos, si no FLYING.",
+    "SHADOW_PUNCH": "Vuela hacia el objetivo con el HP más bajo. El siguiente ataque inflige [30,60,120,SP] SPECIAL adicional.",
+    "GUNK_SHOT": "Inflige [50,100,SP] SPECIAL al objetivo, infligiendo POISONNED durante [2,4,SP] segundos"
   },
   "effect": {
     "INGRAIN": "Arraigo",
@@ -1782,7 +1798,8 @@
     "INCENSE": "Incienso",
     "EXP_SHARE": "Repartir Experiencia",
     "METEORITE": "Meteorito",
-    "BERRY_JUICE": "Zumo de baya"
+    "BERRY_JUICE": "Zumo de baya",
+    "TRASH": "Basura"
   },
   "item_description": {
     "FOSSIL_STONE": "Un fósil de un Pokémon que vivió en la prehistoria",
@@ -1873,7 +1890,8 @@
     "INCENSE": "El usuario obtiene el tipo FLORA. Cada ataque recibido tiene un 15% de posibilidad de hacer CHARM al atacante durante 2 segundos",
     "EXP_SHARE": "Obtén los mejores valores de ATK, DEF y SPE_DEF de los aliados adyacentes en la misma fila",
     "METEORITE": "Un meteorito que parece interactuar con Deoxys. Continúa emitiendo un brillo tenue y resulta ligeramente cálido al tacto.",
-    "BERRY_JUICE": "Se consume al estar por debajo del 50% HP, restaura el HP al máximo"
+    "BERRY_JUICE": "Se consume al estar por debajo del 50% HP, restaura el HP al máximo",
+    "TRASH": "Los restos de un objeto artificial. No hace nada"
   },
   "passive_description": {
     "NONE": "sin pasivo",
@@ -1971,7 +1989,8 @@
     "ENVIRONMENTAL_ADAPTATION": "Este Pokémon adapta sus sinergias a la región.",
     "MOTHIM": "$t(pkm.MOTHIM) toma sinergias de todas las formas regionales de $t(pkm.BURMY) encontradas por el jugador.",
     "PSYDUCK": "Cuando esté CONFUSION, gana 100% AP",
-    "BLOODMOON": "Cambia de forma durante BLOODMOON"
+    "BLOODMOON": "Cambia de forma durante BLOODMOON",
+    "RECYCLE": "Aliméntelo con bayas para ganar 10 HP, con componentes básicos para obtener 25 HP + estadísticas de objetos o aliméntelo con objetos artificiales para obtener 50 HP + estadísticas de objetos y obtenga TRASH a cambio."
   },
   "stat": {
     "ATK": "Ataque",
@@ -2174,7 +2193,8 @@
     "WILD": "Salvaje",
     "GLUTTON": "Glotón",
     "STARGAZER": "Astrónomo",
-    "BLOODY": "Sanguinario"
+    "BLOODY": "Sanguinario",
+    "ETERNAL": "Eterno"
   },
   "title_description": {
     "NOVICE": "Juega tu primer juego",
@@ -2240,7 +2260,8 @@
     "OUTSIDER": "Gana una Partida Clasificatoria con 8 jugadores teniendo el Elo más bajo de todos",
     "GLUTTON": "Ten un Snorlax con mas de 750 HP base.",
     "STARGAZER": "Consigue a Solgaleo o Lunala",
-    "BLOODY": "Consigue Ursaluna Luna Carmesí"
+    "BLOODY": "Consigue Ursaluna Luna Carmesí",
+    "ETERNAL": "Conoce a Arceus en la etapa 40"
   },
   "weather": {
     "NEUTRAL": "Clima tranquilo",
@@ -2393,12 +2414,13 @@
   "minimum_rank": "Rango mínimo",
   "smeargle_scribble": "Bocetos de Smeargle",
   "smeargle_scribble_hint": "Smeargle dibuja una nueva regla aleatoria que se aplica durante todo el juego.",
+  "quick_play": "Únase a un lobby",
+  "quick_play_hint": "El juego comenzará automáticamente cuando se unan 8 jugadores.",
   "password_protected": "Vestíbulo privado (protegido con contraseña)",
   "private": "Privado",
   "available_rooms": "Salas Disponibles",
   "in_game": "En Juego",
   "tournament": "Torneo",
-  "quick_play": "Únase a un lobby",
   "create_custom_room": "Crear Sala",
   "loading": "Cargando...",
   "no_data_available": "Sin información disponible",
@@ -2501,6 +2523,8 @@
   "regional_pokemons": "Pokemon regionales",
   "unique_picks": "Selecciones míticas",
   "stages": "Etapas",
+  "waiting_final_rank": "Esperando resultados de otras batallas...",
+  "stay_till_the_end": "Quedate Hasta el Final",
   "and": " y",
   "place_up_to": "Coloque hasta",
   "pokemons_on_your_board": "Pokémon en tu tablero.",

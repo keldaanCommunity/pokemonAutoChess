@@ -1472,10 +1472,9 @@
     "BOUNCE": "Bounce [1,2,3,SP] times to the farthest target, dealing [10,SP] SPECIAL to all adjacent enemies for each bounce",
     "BLOOD_MOON": "Concentrates all his energy in the blood-red moon on his forehead and projects it in a line, dealing [200,SP]% of ATK as SPECIAL and WOUND for 3 seconds all enemies hit",
     "TEA_TIME": "Heal allies [20,40,80,SP] HP. All pokemons holding a berry eat it immediately.",
-    "SPIKES": "Throw up up to [6, SP] metal spikes within a 3-cell radius in front, dealing [25,50,SP] TRUE. The spikes stay on field, dealing 10 TRUE per second and ARMOR_REDUCTION to opponents that walk on it, if not FLYING.",
+    "SPIKES": "Throw up to [6, SP] metal spikes within a 3-cell radius in front, dealing [25,50,SP] TRUE. The spikes stay on field, dealing 10 TRUE per second and ARMOR_REDUCTION to opponents that walk on it, if not FLYING.",
     "SHADOW_PUNCH": "Fly towards the target with the lowest HP. The next attack deals additional [30,60,120,SP] SPECIAL.",
     "GUNK_SHOT": "Deal [50,100,SP] SPECIAL to the target, inflicting POISONNED for [2,4,SP] seconds"
-
   },
   "effect": {
     "INGRAIN": "Ingrain",
