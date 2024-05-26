@@ -589,7 +589,9 @@ export default function Game() {
         })
         player.listen("life", (value) => {
           dispatch(setLife({ id: player.id, value: value }))
-          setFinalRankVisible(value <= 0)
+          if (value <= 0 && player.id === uid && !spectate) {
+            setFinalRankVisible(true)
+          }
         })
         player.listen("money", (value) => {
           dispatch(setCurrentPlayerMoney({ id: player.id, value: value }))
