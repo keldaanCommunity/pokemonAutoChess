@@ -206,7 +206,7 @@ export default class GameScene extends Scene {
     if (
       player &&
       player.alive &&
-      player.money > 1 &&
+      player.money >= 1 &&
       player === this.board?.player
     ) {
       this.room?.send(Transfer.REFRESH)
