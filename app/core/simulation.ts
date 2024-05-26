@@ -1067,32 +1067,22 @@ export default class Simulation extends Schema implements ISimulation {
               pokemon.items.size + (pokemon.items.has(Item.WONDER_BOX) ? 1 : 0)
             const attackBoost = {
               [Effect.DUBIOUS_DISC]: 0,
-              [Effect.LINK_CABLE]: 8 / 100,
-              [Effect.GOOGLE_SPECS]: 15 / 100
+              [Effect.LINK_CABLE]: (8 / 100) * pokemon.baseAtk,
+              [Effect.GOOGLE_SPECS]: (15 / 100) * pokemon.baseAtk
             }[effect]
             const apBoost = {
               [Effect.DUBIOUS_DISC]: 0,
-              [Effect.LINK_CABLE]: 8 / 100,
-              [Effect.GOOGLE_SPECS]: 15 / 100
+              [Effect.LINK_CABLE]: 8,
+              [Effect.GOOGLE_SPECS]: 15
             }[effect]
             const shieldBoost = {
               [Effect.DUBIOUS_DISC]: 0,
-              [Effect.LINK_CABLE]: 8 / 100,
-              [Effect.GOOGLE_SPECS]: 15 / 100
+              [Effect.LINK_CABLE]: (8 / 100) * pokemon.hp,
+              [Effect.GOOGLE_SPECS]: (15 / 100) * pokemon.hp
             }[effect]
-            pokemon.addAttack(
-              attackBoost * pokemon.baseAtk * nbItems,
-              pokemon,
-              0,
-              false
-            )
+            pokemon.addAttack(attackBoost * nbItems, pokemon, 0, false)
             pokemon.addAbilityPower(apBoost * nbItems, pokemon, 0, false)
-            pokemon.addShield(
-              shieldBoost * pokemon.hp * nbItems,
-              pokemon,
-              0,
-              false
-            )
+            pokemon.addShield(shieldBoost * nbItems, pokemon, 0, false)
             pokemon.effects.add(Effect.GOOGLE_SPECS)
           }
           break
