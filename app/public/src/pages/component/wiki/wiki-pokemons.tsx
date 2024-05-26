@@ -33,7 +33,10 @@ export default function WikiPokemons() {
     <Tabs
       className="wiki-pokemons"
       selectedIndex={tabIndex}
-      onSelect={(index) => setTabIndex(index)}
+      onSelect={(index) => {
+        setSelectedPkm("")
+        setTabIndex(index)
+      }}
     >
       <PokemonTypeahead
         value={selectedPkm ?? ""}
