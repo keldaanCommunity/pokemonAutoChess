@@ -44,5 +44,5 @@ root.render(
 )
 
 if (navigator.serviceWorker) {
-  navigator.serviceWorker.register("sw.js")
+  navigator.serviceWorker.register("sw-nocache.js")
 }

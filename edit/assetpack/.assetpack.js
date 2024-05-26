@@ -114,9 +114,9 @@ function texturePackAtlas() {
       //fs.writeJSONSync("tree.json", tree)
       fs.writeJSONSync(atlasPath, atlas)
 
-      const sw = fs.readFileSync("../../app/public/dist/client/sw.js", "utf8")
+      const sw = fs.readFileSync("../../app/public/dist/client/sw-nocache.js", "utf8")
       fs.writeFileSync(
-        "../../app/public/dist/client/sw.js",
+        "../../app/public/dist/client/sw-nocache.js",
         sw.replace(/CACHE v[\d\.]+/, `CACHE v${newVersion}`)
       )
 
