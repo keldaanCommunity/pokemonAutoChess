@@ -18,25 +18,30 @@ import {
   IPlayer,
   IPokemon,
   IPokemonEntity,
-  Title,
+  Title
 } from "../../types"
 import {
   DEFAULT_ATK_SPEED,
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER,
   EvolutionTime,
-  SynergyTriggers,
-  ItemStats
+  ItemStats,
+  SynergyTriggers
 } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
-import { AttackType, PokemonActionState, Rarity, Stat } from "../../types/enum/Game"
+import {
+  AttackType,
+  PokemonActionState,
+  Rarity,
+  Stat
+} from "../../types/enum/Game"
 import {
   AllItems,
-  Berries,
-  ItemComponents,
   ArtificialItems,
+  Berries,
   Item,
+  ItemComponents,
   ItemRecipe,
   SynergyItems
 } from "../../types/enum/Item"
@@ -134,7 +139,6 @@ export class Pokemon extends Schema implements IPokemon {
       const garbodor: Garbodor = params.pokemonEvolved as Garbodor
     }
     // called after evolving
-    
   }
 
   beforeSimulationStart(params: {
@@ -1744,7 +1748,7 @@ export class Deino extends Pokemon {
   atk = 6
   def = 2
   speDef = 2
-  maxPP = 50
+  maxPP = 100
   range = 2
   skill = Ability.DARK_HARVEST
   attackSprite = AttackSprite.DARK_RANGE
@@ -13592,22 +13596,22 @@ export class Trubbish extends Pokemon {
   additional = true
 
   defaultValues = {
-    [Stat.HP] : this.hp,
-    [Stat.ATK] : this.atk,
-    [Stat.DEF] : this.def,
-    [Stat.SPE_DEF] : this.speDef,
+    [Stat.HP]: this.hp,
+    [Stat.ATK]: this.atk,
+    [Stat.DEF]: this.def,
+    [Stat.SPE_DEF]: this.speDef
   }
 
   statIncreases = {
-    [Stat.HP] : 0,
-    [Stat.ATK] : 0,
-    [Stat.ATK_SPEED] : 0,
-    [Stat.AP] : 0,
-    [Stat.DEF] : 0,
-    [Stat.SPE_DEF] : 0,
-    [Stat.CRIT_CHANCE] : 0,
-    [Stat.PP] : 0,
-    [Stat.SHIELD] : 0
+    [Stat.HP]: 0,
+    [Stat.ATK]: 0,
+    [Stat.ATK_SPEED]: 0,
+    [Stat.AP]: 0,
+    [Stat.DEF]: 0,
+    [Stat.SPE_DEF]: 0,
+    [Stat.CRIT_CHANCE]: 0,
+    [Stat.PP]: 0,
+    [Stat.SHIELD]: 0
   }
 
   beforeSimulationStart({ player }: { player: Player }) {
@@ -13630,7 +13634,6 @@ export class Trubbish extends Pokemon {
   }
 
   afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
-
     // Add non-permanent stats to Trubbish
     entity.addAbilityPower(this.statIncreases[Stat.AP], entity, 0, false)
     entity.addShield(this.statIncreases[Stat.SHIELD], entity, 0, false)
@@ -13692,8 +13695,7 @@ export class Trubbish extends Pokemon {
       for (const key in trubbishStats) {
         trubbishStats[key] += trubbish.statIncreases[key]
       }
-
-    });
+    })
     const garbodor = garbodorObj as Garbodor
     garbodor.statIncreases = trubbishStats
     garbodor.hp += garbodor.statIncreases[Stat.HP]
@@ -13717,24 +13719,24 @@ export class Garbodor extends Pokemon {
   passive = Passive.RECYCLE
   attackSprite = AttackSprite.POISON_MELEE
   additional = true
-  
+
   statIncreases = {
-    [Stat.HP] : 0,
-    [Stat.ATK] : 0,
-    [Stat.ATK_SPEED] : 0,
-    [Stat.AP] : 0,
-    [Stat.DEF] : 0,
-    [Stat.SPE_DEF] : 0,
-    [Stat.CRIT_CHANCE] : 0,
-    [Stat.PP] : 0,
-    [Stat.SHIELD] : 0
+    [Stat.HP]: 0,
+    [Stat.ATK]: 0,
+    [Stat.ATK_SPEED]: 0,
+    [Stat.AP]: 0,
+    [Stat.DEF]: 0,
+    [Stat.SPE_DEF]: 0,
+    [Stat.CRIT_CHANCE]: 0,
+    [Stat.PP]: 0,
+    [Stat.SHIELD]: 0
   }
 
   defaultValues = {
-    [Stat.HP] : this.hp,
-    [Stat.ATK] : this.atk,
-    [Stat.DEF] : this.def,
-    [Stat.SPE_DEF] : this.speDef
+    [Stat.HP]: this.hp,
+    [Stat.ATK]: this.atk,
+    [Stat.DEF]: this.def,
+    [Stat.SPE_DEF]: this.speDef
   }
 
   beforeSimulationStart = Trubbish.prototype.beforeSimulationStart
