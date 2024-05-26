@@ -863,14 +863,17 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (!player.alive) {
         return
       }
-      const currentResult = this.state.simulations
-        .get(player.simulationId)
-        ?.getCurrentBattleResult(player.id)
-      const currentStreakType = player.getCurrentStreakType()
 
-      if (currentResult === BattleResult.DRAW) {
+      const [previousBattleResult, lastBattleResult] = player.history
+        .filter(
+          (stage) => stage.id !== "pve" && stage.result !== BattleResult.DRAW
+        )
+        .map((stage) => stage.result)
+        .slice(-2)
+
+      if (lastBattleResult === BattleResult.DRAW) {
         // preserve existing streak but lose HP
-      } else if (currentResult !== currentStreakType) {
+      } else if (lastBattleResult !== previousBattleResult) {
         // reset streak
         player.streak = 0
       } else {
@@ -1057,14 +1060,18 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
   stopFightingPhase() {
     const isPVE = this.state.stageLevel in PVEStages
+    
+    this.state.simulations.forEach((simulation) => {
+      if (!simulation.finished) {
+        simulation.onFinish()
+      }
+      simulation.stop()
+    })
 
     this.computeAchievements()
     this.computeStreak(isPVE)
     this.checkDeath()
     this.computeIncome()
-    this.state.simulations.forEach((simulation) => {
-      simulation.stop()
-    })
 
     this.state.players.forEach((player: Player) => {
       if (player.alive) {
