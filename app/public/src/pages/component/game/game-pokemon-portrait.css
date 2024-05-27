@@ -25,7 +25,7 @@
 }
 
 .game-pokemon-portrait.disabled {
-  filter: grayscale(1)
+  filter: contrast(0.8) brightness(0.8);
 }
 
 .game-pokemon-portrait-cost {
