@@ -394,11 +394,10 @@ export default class Status extends Schema implements IStatus {
       const crit = pkm.items.has(Item.REAPER_CLOTH) ? chance(pkm.critChance) : false
       board.getAdjacentCells(pkm.positionX, pkm.positionY).forEach((cell) => {
         if (cell?.value && cell.value.team !== pkm.team) {
-          let darkHarvestDamage = pkm.stars === 3 ? 40 : pkm.stars === 2 ? 20 : 10
-          if (crit) {
-            darkHarvestDamage = Math.round(darkHarvestDamage * pkm.critPower)
-          }
-
+          const darkHarvestDamage =
+            ([10, 20, 40][pkm.stars - 1] ?? 40) *
+            (1 + pkm.ap / 100) *
+            (crit ? pkm.critPower : 1)
           cell.value.handleDamage({
             damage: darkHarvestDamage,
             board,
@@ -407,8 +406,13 @@ export default class Status extends Schema implements IStatus {
             shouldTargetGainMana: true
           })
 
-          const factor = pkm.stars === 3 ? 0.4 : pkm.stars === 2 ? 0.3 : 0.2
-          pkm.handleHeal(Math.round(darkHarvestDamage * factor), pkm, 1, crit)
+          const healFactor = [0.2, 0.3, 0.4][pkm.stars - 1] ?? 0.4
+          pkm.handleHeal(
+            Math.round(darkHarvestDamage * healFactor),
+            pkm,
+            0,
+            false
+          )
           this.darkHarvestDamageCooldown = 1000
         }
       })
