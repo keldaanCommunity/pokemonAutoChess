@@ -8,8 +8,12 @@ app/public/dist/server/**/*.js.map
 app/public/dist/**/*.d.ts
 app/public/dist/client/index.js
 app/public/dist/client/index.js.map
+app/public/dist/client/index-nocache.js
+app/public/dist/client/index-nocache.js.map
 app/public/dist/client/index.css
 app/public/dist/client/index.css.map
+app/public/dist/client/index-nocache.css
+app/public/dist/client/index-nocache.css.map
 app/public/dist/index.js
 app/public/dist/client/assets
 app/public/src/assets/musics

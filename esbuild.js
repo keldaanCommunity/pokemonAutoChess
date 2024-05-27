@@ -9,7 +9,7 @@ const isProdBuild = process.argv[2] === "--build"
 
 context({
   entryPoints: ["./app/public/src/index.tsx"],
-  outfile: "app/public/dist/client/index.js",
+  outfile: "app/public/dist/client/index-nocache.js",
   external: ["assets/*"],
   bundle: true,
   metafile: true,
