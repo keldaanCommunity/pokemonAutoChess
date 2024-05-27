@@ -1359,7 +1359,7 @@
     "WHIRLPOOL": "Fija al enemigo más lejano y desata una lluvia de 4 remolinos hacia él. Cada uno inflige [125,SP] % de ATK SPECIAL al primer enemigo golpeado.",
     "SMOKE_SCREEN": "Se esconde bajo tierera y reaparece en medio del equipo enemigo, causando [10,20,40,SP] de SPECIAL, dejandolo BURN y ARMOR_REDUCTION a todas las unidades adyacentes durante 2 segundos.",
     "PRESENT": "Puede infligir [80,SP], [150,SP], [300,SP] SPECIAL o curar 80 HP al objetivo",
-    "LEAF_BLADE": "El siguiente ataque es un ataque crítico asegurado que inflige [100,SP]% de ATK como SPECIAL",
+    "LEAF_BLADE": "El siguiente ataque es un ataque crítico asegurado que inflige [100,SP]% de ATK como TRUE",
     "ANCHOR_SHOT": "Agarra al pokémon mas lejano para infligirle [20,40,80,SP] de SPECIAL",
     "MAGNET_RISE": "Otorga PROTECT durante 2 segundos y [10,SP]% de probabilidad de esquivar al usuario y a los [2,4,6] pokémon aliados adyacentes",
     "ATTRACT": "Make [1,2,3] pokémon chosen randomly CHARM for [1,SP] seconds",
@@ -1987,7 +1987,7 @@
     "SHUCKLE": "Convierte las bayas consumidas en BERRY_JUICE",
     "GUZZLORD": "Guzzlord pesa demasiado y no puede saltar.",
     "ENVIRONMENTAL_ADAPTATION": "Este Pokémon adapta sus sinergias a la región.",
-    "MOTHIM": "$t(pkm.MOTHIM) toma sinergias de todas las formas regionales de $t(pkm.BURMY) encontradas por el jugador.",
+    "MOTHIM": "$t(pkm.MOTHIM) toma sinergias de la forma regional de $t(pkm.BURMY) encontradas por el jugador.",
     "PSYDUCK": "Cuando esté CONFUSION, gana 100% AP",
     "BLOODMOON": "Cambia de forma durante BLOODMOON",
     "RECYCLE": "Aliméntelo con bayas para ganar 10 HP, con componentes básicos para obtener 25 HP + estadísticas de objetos o aliméntelo con objetos artificiales para obtener 50 HP + estadísticas de objetos y obtenga TRASH a cambio."
