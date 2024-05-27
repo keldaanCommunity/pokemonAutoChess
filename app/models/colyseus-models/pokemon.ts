@@ -13227,6 +13227,7 @@ export class BurmyTrash extends Pokemon {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
       regionSynergies.includes(Synergy.ARTIFICIAL) &&
+      !regionSynergies.includes(Synergy.GROUND) &&
       !regionSynergies.includes(Synergy.GRASS)
     )
   }
@@ -13320,12 +13321,9 @@ export class Mothim extends Pokemon {
   stages = 3
   regional = true
   isInRegion(pkm: Pkm, map: DungeonPMDO, state?: GameState) {
-    const regionSynergies = DungeonDetails[map]?.synergies
-    return (
-      regionSynergies.includes(Synergy.GRASS) ||
-      regionSynergies.includes(Synergy.GROUND) ||
-      regionSynergies.includes(Synergy.ARTIFICIAL)
-    )
+    // always hide mothim to avoid showing duplicated with other burmy forms
+    // this does not impact the evolution of wormadam
+    return false 
   }
   onAcquired(player: Player) {
     if (player.regionalPokemons.includes(Pkm.BURMY_PLANT)) {
