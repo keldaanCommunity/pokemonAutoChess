@@ -37,7 +37,6 @@ import { Pokemon, isOnBench, PokemonClasses } from "./pokemon"
 import PokemonCollection from "./pokemon-collection"
 import PokemonConfig from "./pokemon-config"
 import Synergies, { computeSynergies } from "./synergies"
-import { logger } from "../../utils/logger"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
@@ -49,7 +48,7 @@ export default class Player extends Schema implements IPlayer {
   @type(["string"]) shop = new ArraySchema<Pkm>()
   @type(ExperienceManager) experienceManager = new ExperienceManager()
   @type({ map: "uint8" }) synergies = new Synergies()
-  @type("uint16") money = process.env.MODE == "dev" ? 999 : 6
+  @type("uint16") money = 6 //process.env.MODE == "dev" ? 999 : 6
   @type("int8") life = 100
   @type("boolean") shopLocked: boolean = false
   @type("uint8") streak: number = 0
@@ -281,13 +280,12 @@ export default class Player extends Schema implements IPlayer {
       this.board.forEach((pokemon) => {
         lostArtificialItems.forEach((item) => {
           if (pokemon.items.has(item)) {
-            if (item === Item.TRASH && lostTrash - cleanedTrash > 0){
-                pokemon.items.delete(item)
-                cleanedTrash++
-            }
-            else if (item !== Item.TRASH) {
+            if (item === Item.TRASH && lostTrash - cleanedTrash > 0) {
               pokemon.items.delete(item)
-              
+              cleanedTrash++
+            } else if (item !== Item.TRASH) {
+              pokemon.items.delete(item)
+
               if (item in SynergyGivenByItem) {
                 const type = SynergyGivenByItem[item]
                 const nativeTypes = getPokemonData(pokemon.name).types
@@ -299,17 +297,15 @@ export default class Player extends Schema implements IPlayer {
                 }
               }
             }
-            
           }
         })
       })
 
       lostArtificialItems.forEach((item) => {
         if (item !== Item.TRASH) {
-          removeInArray<Item>(this.items, item) 
-        }
-        else if (item === Item.TRASH && lostTrash - cleanedTrash > 0){
-          removeInArray<Item>(this.items, item) 
+          removeInArray<Item>(this.items, item)
+        } else if (item === Item.TRASH && lostTrash - cleanedTrash > 0) {
+          removeInArray<Item>(this.items, item)
           cleanedTrash++
         }
       })

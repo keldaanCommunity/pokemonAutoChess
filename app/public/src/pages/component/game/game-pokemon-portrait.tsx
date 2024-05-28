@@ -136,7 +136,7 @@ export default function GamePokemonPortrait(props: {
     <div
       className={cc("my-box", "clickable", "game-pokemon-portrait", {
         shimmer: shouldShimmer,
-        disabled: !canBuy
+        disabled: !canBuy && props.origin === "shop"
       })}
       style={{
         backgroundColor: rarityColor,
