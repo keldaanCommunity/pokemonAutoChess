@@ -328,61 +328,57 @@ export class OpenBoosterCommand extends Command<
       const user = this.state.users.get(client.auth.uid)
       if (!user) return
 
-      const NB_BOOSTERS = 10
-      if (user && user.booster && user.booster > 0) {
-        user.booster -= 1
-        const boosterContent: PkmWithConfig[] = []
+      const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
+      if (!mongoUser || mongoUser.booster <= 0) return
 
-        for (let i = 0; i < NB_BOOSTERS; i++) {
-          const guaranteedUnique = i === NB_BOOSTERS - 1
-          boosterContent.push(pickRandomPokemonBooster(guaranteedUnique))
-        }
+      const NB_PER_BOOSTER = 10
 
-        boosterContent.forEach((pkmWithConfig) => {
-          const i = PkmIndex[pkmWithConfig.name]
-          const c = user.pokemonCollection.get(i)
-          const dustGain = pkmWithConfig.shiny
-            ? DUST_PER_SHINY
-            : DUST_PER_BOOSTER
+      mongoUser.booster -= 1
+      const boosterContent: PkmWithConfig[] = []
 
-          if (c) {
-            c.dust += dustGain
-          } else {
-            const newConfig = new PokemonConfig(i)
-            newConfig.dust += dustGain
-            user.pokemonCollection.set(i, newConfig)
-          }
-        })
-
-        const u = await UserMetadata.findOne({ uid: client.auth.uid })
-
-        if (u) {
-          u.booster = user.booster
-          boosterContent.forEach((pkmWithConfig) => {
-            const i = PkmIndex[pkmWithConfig.name]
-            const c = u.pokemonCollection.get(i)
-            const dustGain = pkmWithConfig.shiny
-              ? DUST_PER_SHINY
-              : DUST_PER_BOOSTER
-
-            if (c) {
-              c.dust += dustGain
-            } else {
-              u.pokemonCollection.set(i, {
-                id: i,
-                emotions: [],
-                shinyEmotions: [],
-                dust: dustGain,
-                selectedEmotion: Emotion.NORMAL,
-                selectedShiny: false
-              })
-            }
-          })
-          u.save()
-        }
-
-        client.send(Transfer.BOOSTER_CONTENT, boosterContent)
+      for (let i = 0; i < NB_PER_BOOSTER; i++) {
+        const guaranteedUnique = i === NB_PER_BOOSTER - 1
+        boosterContent.push(pickRandomPokemonBooster(guaranteedUnique))
       }
+
+      boosterContent.forEach((pkmWithConfig) => {
+        const index = PkmIndex[pkmWithConfig.name]
+        const mongoPokemonConfig = mongoUser.pokemonCollection.get(index)
+        const dustGain = pkmWithConfig.shiny ? DUST_PER_SHINY : DUST_PER_BOOSTER
+
+        if (mongoPokemonConfig) {
+          mongoPokemonConfig.dust += dustGain
+        } else {
+          mongoUser.pokemonCollection.set(index, {
+            id: index,
+            emotions: [],
+            shinyEmotions: [],
+            dust: dustGain,
+            selectedEmotion: Emotion.NORMAL,
+            selectedShiny: false
+          })
+        }
+      })
+
+      mongoUser.save()
+
+      // resync, db-authoritative
+      user.booster = mongoUser.booster
+      boosterContent.forEach((pkmWithConfig) => {
+        const index = PkmIndex[pkmWithConfig.name]
+        const pokemonConfig = user.pokemonCollection.get(index)
+        const mongoPokemonConfig = mongoUser.pokemonCollection.get(index)
+        if (!mongoPokemonConfig) return
+        if (pokemonConfig) {
+          pokemonConfig.dust = mongoPokemonConfig.dust
+        } else {
+          const newConfig = new PokemonConfig(index)
+          newConfig.dust = mongoPokemonConfig.dust
+          user.pokemonCollection.set(index, newConfig)
+        }
+      })
+
+      client.send(Transfer.BOOSTER_CONTENT, boosterContent)
     } catch (error) {
       logger.error(error)
     }
