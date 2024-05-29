@@ -17,6 +17,7 @@ import AfterGameRoom from "./rooms/after-game-room"
 import CustomLobbyRoom from "./rooms/custom-lobby-room"
 import GameRoom from "./rooms/game-room"
 import PreparationRoom from "./rooms/preparation-room"
+import { Title } from "./types"
 import { SynergyTriggers } from "./types/Config"
 import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Item } from "./types/enum/Item"
@@ -120,6 +121,10 @@ export default config({
 
     app.get("/pokemons", (req, res) => {
       res.send(Pkm)
+    })
+
+    app.get("/titles", (req, res) => {
+      res.send(Title)
     })
 
     app.get("/pokemons-index", (req, res) => {
