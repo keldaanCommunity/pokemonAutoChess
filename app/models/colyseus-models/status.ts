@@ -394,17 +394,15 @@ export default class Status extends Schema implements IStatus {
       const crit = pkm.items.has(Item.REAPER_CLOTH) ? chance(pkm.critChance) : false
       board.getAdjacentCells(pkm.positionX, pkm.positionY).forEach((cell) => {
         if (cell?.value && cell.value.team !== pkm.team) {
-          const darkHarvestDamage =
-            ([10, 20, 40][pkm.stars - 1] ?? 40) *
-            (1 + pkm.ap / 100) *
-            (crit ? pkm.critPower : 1)
-          cell.value.handleDamage({
-            damage: darkHarvestDamage,
+          const darkHarvestDamage = [10, 20, 40][pkm.stars - 1] ?? 40
+          cell.value.handleSpecialDamage(
+            darkHarvestDamage,
             board,
-            attackType: AttackType.SPECIAL,
-            attacker: pkm,
-            shouldTargetGainMana: true
-          })
+            AttackType.SPECIAL,
+            pkm,
+            crit,
+            true
+          )
 
           const healFactor = [0.2, 0.3, 0.4][pkm.stars - 1] ?? 0.4
           pkm.handleHeal(
