@@ -207,6 +207,7 @@ export default class Player extends Schema implements IPlayer {
     newPokemon.positionY = pokemon.positionY
     this.board.delete(pokemon.id)
     this.board.set(newPokemon.id, newPokemon)
+    newPokemon.onAcquired(this)
     this.updateSynergies()
     return newPokemon
   }
