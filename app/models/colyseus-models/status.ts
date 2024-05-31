@@ -7,7 +7,6 @@ import { Effect } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { max } from "../../utils/number"
 import { chance } from "../../utils/random"
@@ -36,6 +35,10 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") magicBounce = false
   @type("boolean") light = false
   @type("boolean") curse = false
+  @type("boolean") curseVulnerability = false
+  @type("boolean") curseWeakness = false
+  @type("boolean") curseTorment = false
+  @type("boolean") curseFate = false
   @type("boolean") enraged = false
   @type("boolean") skydiving = false
   magmaStorm = false
@@ -219,6 +222,31 @@ export default class Status extends Schema implements IStatus {
     if (!this.enraged) {
       this.updateRage(dt, pokemon)
     }
+
+    if (
+      pokemon.effects.has(Effect.CURSE_OF_VULNERABILITY) &&
+      !pokemon.status.flinch
+    ) {
+      this.triggerFlinch(30000, pokemon)
+    }
+
+    if (
+      pokemon.effects.has(Effect.CURSE_OF_WEAKNESS) &&
+      !pokemon.status.paralysis
+    ) {
+      this.triggerParalysis(30000, pokemon)
+    }
+
+    if (
+      pokemon.effects.has(Effect.CURSE_OF_TORMENT) &&
+      !pokemon.status.silence
+    ) {
+      this.triggerSilence(30000, pokemon)
+    }
+
+    if (pokemon.effects.has(Effect.CURSE_OF_FATE) && !pokemon.status.curse) {
+      this.triggerCurse(5000)
+    }
   }
 
   triggerMagmaStorm(pkm: PokemonEntity, origin: PokemonEntity | null) {
@@ -391,10 +419,13 @@ export default class Status extends Schema implements IStatus {
         positionX: pkm.positionX,
         positionY: pkm.positionY
       })
-      const crit = pkm.items.has(Item.REAPER_CLOTH) ? chance(pkm.critChance) : false
+      const crit = pkm.items.has(Item.REAPER_CLOTH)
+        ? chance(pkm.critChance)
+        : false
       board.getAdjacentCells(pkm.positionX, pkm.positionY).forEach((cell) => {
         if (cell?.value && cell.value.team !== pkm.team) {
-          let darkHarvestDamage = pkm.stars === 3 ? 40 : pkm.stars === 2 ? 20 : 10
+          let darkHarvestDamage =
+            pkm.stars === 3 ? 40 : pkm.stars === 2 ? 20 : 10
           if (crit) {
             darkHarvestDamage = Math.round(darkHarvestDamage * pkm.critPower)
           }
@@ -505,11 +536,7 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerSilence(
-    duration: number,
-    pkm: PokemonEntity,
-    origin: PokemonEntity | undefined
-  ) {
+  triggerSilence(duration: number, pkm: PokemonEntity, origin?: PokemonEntity) {
     if (!this.runeProtect && !this.tree) {
       if (pkm.effects.has(Effect.SWIFT_SWIM)) {
         duration = Math.round(duration * 0.7)

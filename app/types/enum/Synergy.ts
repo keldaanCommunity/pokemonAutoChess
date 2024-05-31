@@ -104,7 +104,7 @@ export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
   [Synergy.GHOST]: [
     Effect.CURSE_OF_VULNERABILITY,
     Effect.CURSE_OF_WEAKNESS,
-    Effect.CURSE_OF_SILENCE,
+    Effect.CURSE_OF_TORMENT,
     Effect.CURSE_OF_FATE
   ],
   [Synergy.FAIRY]: [
