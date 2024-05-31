@@ -13613,22 +13613,36 @@ export class Trubbish extends Pokemon {
   }
 
   beforeSimulationStart({ player }: { player: Player }) {
-    this.items.forEach((item) => {
+    values(this.items).forEach((item) => {
       if (Berries.includes(item)) {
         this.statIncreases[Stat.HP] += 10
+        this.items.delete(item)
       }
       if (ItemComponents.includes(item)) {
         this.statIncreases[Stat.HP] += 25
+        if (ItemStats[item]) {
+          Object.entries(ItemStats[item]).forEach(
+            ([stat, value]) => (this.statIncreases[stat as Stat] += value)
+          )
+        }
+        this.items.delete(item)
       }
       if (ArtificialItems.includes(item)) {
         this.statIncreases[Stat.HP] += 50
+        this.items.delete(item)
 
         const itemIndex = player.artificialItems.indexOf(item)
         player.artificialItems[itemIndex] = Item.TRASH
         player.items.push(player.artificialItems[itemIndex])
       }
     })
+
+    // Update permanent stats
     this.hp = this.defaultValues[Stat.HP] + this.statIncreases[Stat.HP]
+    this.atk = this.defaultValues[Stat.ATK] + this.statIncreases[Stat.ATK]
+    this.def = this.defaultValues[Stat.DEF] + this.statIncreases[Stat.DEF]
+    this.speDef =
+      this.defaultValues[Stat.SPE_DEF] + this.statIncreases[Stat.SPE_DEF]
   }
 
   afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
@@ -13637,36 +13651,7 @@ export class Trubbish extends Pokemon {
     entity.addShield(this.statIncreases[Stat.SHIELD], entity, 0, false)
     entity.addCritChance(this.statIncreases[Stat.CRIT_CHANCE], entity, 0, false)
     entity.addPP(this.statIncreases[Stat.PP], entity, 0, false)
-    entity.addAttackSpeed(this.statIncreases[Stat.ATK_SPEED], entity, 0, false)
-
-    entity.items.forEach((item) => {
-      if (
-        ItemComponents.includes(item) ||
-        ArtificialItems.includes(item) ||
-        Berries.includes(item)
-      ) {
-        // Add item Stats
-        if (ItemStats[item]) {
-          Object.entries(ItemStats[item]).forEach(
-            ([stat, value]) => (this.statIncreases[stat as Stat] += value)
-          )
-        }
-
-        // Delete item
-        entity.items.delete(item)
-        entity.refToBoardPokemon.items.delete(item)
-      }
-    })
-
-    // Update permanent stats
-    entity.refToBoardPokemon.hp =
-      this.defaultValues[Stat.HP] + this.statIncreases[Stat.HP]
-    entity.refToBoardPokemon.atk =
-      this.defaultValues[Stat.ATK] + this.statIncreases[Stat.ATK]
-    entity.refToBoardPokemon.def =
-      this.defaultValues[Stat.DEF] + this.statIncreases[Stat.DEF]
-    entity.refToBoardPokemon.speDef =
-      this.defaultValues[Stat.SPE_DEF] + this.statIncreases[Stat.SPE_DEF]
+    entity.addAttackSpeed(this.statIncreases[Stat.ATK_SPEED], entity, 0, false)   
   }
 
   onEvolve({
@@ -13677,7 +13662,8 @@ export class Trubbish extends Pokemon {
     pokemonsBeforeEvolution: Pokemon[]
   }) {
     // Carry over the stats gained with passive
-    const trubbishStats = {
+    const garbodor = garbodorObj as Garbodor
+    garbodor.statIncreases = {
       [Stat.HP]: 0,
       [Stat.ATK]: 0,
       [Stat.ATK_SPEED]: 0,
@@ -13688,14 +13674,14 @@ export class Trubbish extends Pokemon {
       [Stat.PP]: 0,
       [Stat.SHIELD]: 0
     }
+
     trubbishes.forEach((trubbishObj) => {
       const trubbish = trubbishObj as Trubbish
       for (const key in trubbishStats) {
-        trubbishStats[key] += trubbish.statIncreases[key]
+        garbodor.statIncreases[key] += trubbish.statIncreases[key]
       }
     })
-    const garbodor = garbodorObj as Garbodor
-    garbodor.statIncreases = trubbishStats
+
     garbodor.hp += garbodor.statIncreases[Stat.HP]
     garbodor.atk += garbodor.statIncreases[Stat.ATK]
     garbodor.def += garbodor.statIncreases[Stat.DEF]
