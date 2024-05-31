@@ -13323,7 +13323,7 @@ export class Mothim extends Pokemon {
   isInRegion(pkm: Pkm, map: DungeonPMDO, state?: GameState) {
     // always hide mothim to avoid showing duplicated with other burmy forms
     // this does not impact the evolution of wormadam
-    return false 
+    return false
   }
   onAcquired(player: Player) {
     if (player.regionalPokemons.includes(Pkm.BURMY_PLANT)) {
@@ -13651,7 +13651,7 @@ export class Trubbish extends Pokemon {
     entity.addShield(this.statIncreases[Stat.SHIELD], entity, 0, false)
     entity.addCritChance(this.statIncreases[Stat.CRIT_CHANCE], entity, 0, false)
     entity.addPP(this.statIncreases[Stat.PP], entity, 0, false)
-    entity.addAttackSpeed(this.statIncreases[Stat.ATK_SPEED], entity, 0, false)   
+    entity.addAttackSpeed(this.statIncreases[Stat.ATK_SPEED], entity, 0, false)
   }
 
   onEvolve({
@@ -13677,7 +13677,7 @@ export class Trubbish extends Pokemon {
 
     trubbishes.forEach((trubbishObj) => {
       const trubbish = trubbishObj as Trubbish
-      for (const key in trubbishStats) {
+      for (const key in garbodor.statIncreases) {
         garbodor.statIncreases[key] += trubbish.statIncreases[key]
       }
     })
