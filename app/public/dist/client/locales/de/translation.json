@@ -1478,7 +1478,7 @@
     "CURSE_OF_VULNERABILITY": "Der Gegner mit der höchsten DEF + SPE_DEF verliert 5 davon und ist FLINCH",
     "CURSE_OF_WEAKNESS": "Außerdem verliert der Gegner mit dem höchsten ATK 50% davon und ist PARALYSIS",
     "CURSE_OF_TORMENT": "Außerdem verliert der Gegner mit dem höchsten AP 50 % davon und ist SILENCE",
-    "CURSE_OF_FATE": "Auch die stärkste gegnerische Einheit ist CURSE und wird nach 5 Sekunden KO sein",
+    "CURSE_OF_FATE": "Auch die stärkste gegnerische Einheit ist CURSE und wird nach 6 Sekunden KO sein",
     "AROMATIC_MIST": "Schocks bescheren 15 SPECIAL",
     "FAIRY_WIND": "Schocks bescheren 30 SPECIAL",
     "STRANGE_STEAM": "Schocks bieten 50 SPECIAL",

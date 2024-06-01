@@ -1365,9 +1365,9 @@ export default class Simulation extends Schema implements ISimulation {
   applyCurse(effect: Effect, opponentTeamNumber: number) {
     const opponentTeam =
       opponentTeamNumber === Team.BLUE_TEAM ? this.blueTeam : this.redTeam
-    const opponentsCursable = shuffleArray([
-      ...opponentTeam.values()
-    ]) as PokemonEntity[]
+    const opponentsCursable = shuffleArray([...opponentTeam.values()]).filter(
+      (p) => p.life > 0
+    ) as PokemonEntity[]
 
     if (effect === Effect.CURSE_OF_VULNERABILITY) {
       let enemyWithHighestDef: PokemonEntity | undefined = undefined
@@ -1403,7 +1403,7 @@ export default class Simulation extends Schema implements ISimulation {
       if (enemyWithHighestAtk) {
         enemyWithHighestAtk = enemyWithHighestAtk as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
         enemyWithHighestAtk.addAttack(
-          Math.round(-0.5 * enemyWithHighestAtk.atk),
+          Math.round(-0.3 * enemyWithHighestAtk.atk),
           enemyWithHighestAtk,
           0,
           false
@@ -1438,7 +1438,7 @@ export default class Simulation extends Schema implements ISimulation {
       const strongestEnemy = getStrongestUnit(opponentsCursable)
       if (strongestEnemy) {
         strongestEnemy.status.curseFate = true
-        strongestEnemy.status.triggerCurse(5000)
+        strongestEnemy.status.triggerCurse(6000)
       }
     }
   }
