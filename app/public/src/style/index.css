@@ -24,7 +24,7 @@ body {
   height: 100vh;
   overflow: hidden;
   background-color: rgb(104,130,158);
-  background-image: linear-gradient(45deg, rgb(80,81,96) 25%, transparent 25%, transparent 75%, rgb(80,81,96) 75%, rgb(80,81,96)), linear-gradient(45deg, rgb(80,81,96) 25%, transparent 25%, transparent 75%, rgb(80,81,96) 75%, rgb(80,81,96));
+  background-image: linear-gradient(45deg, rgb(80,81,96) 25%, transparent 25%, transparent 74.9%, rgb(80,81,96) 75%, rgb(80,81,96)), linear-gradient(45deg, rgb(80,81,96) 25%, transparent 25%, transparent 74.9%, rgb(80,81,96) 75%, rgb(80,81,96));
   background-size: 240px 240px;
   background-position: 0 0, 120px 120px;
 }

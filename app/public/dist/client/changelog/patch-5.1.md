@@ -17,6 +17,8 @@
  - Ferrothorn
  - Golett
  - Golurk
+ - Trubbish
+ - Garbodor
 
 # Changes to Pokemon & Abilities
 
@@ -76,6 +78,7 @@
 - Nerf Steel 8: 130% → 120% true damage
 - Nerf Flying 8: removed paralysis on take off
 - Nerf Artificial: 0/10/20% → 0/8/15% Attack, AP and Shield buff per item hold
+- Grass levels now increase the number of berry trees instead of reducing the number of rounds before harvest
 
 # Changes to Items
 
@@ -84,6 +87,7 @@
 - Removed Delta Orb
 - New item: Soothe Bell (charcoal + seed): the holder attack gives 25% of damage dealt as Shield to the ally closest to the target
 - New item: Green Orb: the holder and adjacent allies heal 5% of their max HP every second
+- New item: Trash: The remains of an artificial item. It does nothing.
 - Changed recipe for Gracidea Flower: magnet + seed
 - Buff Incense: ~~10~~ 15% chance to charm on attack received
 - Buff Macho Brace: ~~-25~~ -15% attack speed

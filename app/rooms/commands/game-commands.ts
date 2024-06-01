@@ -37,7 +37,8 @@ import {
   MAX_PLAYERS_PER_GAME,
   PORTAL_CAROUSEL_BASE_DURATION,
   PortalCarouselStages,
-  StageDuration
+  StageDuration,
+  SynergyTriggers
 } from "../../types/Config"
 import { Effect } from "../../types/enum/Effect"
 import {
@@ -57,6 +58,7 @@ import {
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
+import { Synergy } from "../../types/enum/Synergy"
 import { removeInArray } from "../../utils/array"
 import {
   getFirstAvailablePositionInBench,
@@ -438,7 +440,8 @@ export class OnDragDropItemCommand extends Command<
 
     if (
       SynergyItems.includes(item) &&
-      pokemon.types.has(SynergyGivenByItem[item])
+      pokemon.types.has(SynergyGivenByItem[item]) &&
+      pokemon.passive !== Passive.RECYCLE
     ) {
       // prevent adding a synergy stone on a pokemon that already has this synergy
       client.send(Transfer.DRAG_DROP_FAILED, message)
@@ -467,7 +470,8 @@ export class OnDragDropItemCommand extends Command<
 
       if (
         itemCombined in SynergyGivenByItem &&
-        pokemon.types.has(SynergyGivenByItem[itemCombined])
+        pokemon.types.has(SynergyGivenByItem[itemCombined]
+        )
       ) {
         // prevent combining into a synergy stone on a pokemon that already has this synergy
         client.send(Transfer.DRAG_DROP_FAILED, message)
@@ -592,15 +596,16 @@ export class OnLevelUpCommand extends Command<
 export class OnPickBerryCommand extends Command<
   GameRoom,
   {
-    id: string
+    playerId: string
+    berryIndex: number
   }
 > {
-  execute(id) {
-    const player = this.state.players.get(id)
-    if (player && player.berryTreeStage >= 3) {
-      player.berryTreeStage = 0
-      player.items.push(player.berry)
-      player.berry = pickRandomIn(Berries)
+  execute({ playerId, berryIndex }) {
+    const player = this.state.players.get(playerId)
+    if (player && player.berryTreesStage[berryIndex] >= 3) {
+      player.berryTreesStage[berryIndex] = 0
+      player.items.push(player.berryTreesType[berryIndex])
+      player.berryTreesType[berryIndex] = pickRandomIn(Berries)
     }
   }
 }
@@ -858,14 +863,17 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (!player.alive) {
         return
       }
-      const currentResult = this.state.simulations
-        .get(player.simulationId)
-        ?.getCurrentBattleResult(player.id)
-      const currentStreakType = player.getCurrentStreakType()
 
-      if (currentResult === BattleResult.DRAW) {
+      const [previousBattleResult, lastBattleResult] = player.history
+        .filter(
+          (stage) => stage.id !== "pve" && stage.result !== BattleResult.DRAW
+        )
+        .map((stage) => stage.result)
+        .slice(-2)
+
+      if (lastBattleResult === BattleResult.DRAW) {
         // preserve existing streak but lose HP
-      } else if (currentResult !== currentStreakType) {
+      } else if (lastBattleResult !== previousBattleResult) {
         // reset streak
         player.streak = 0
       } else {
@@ -989,14 +997,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         }, 1000)
       }
 
-      if (player.effects.has(Effect.INGRAIN)) {
-        player.berryTreeStage = max(3)(player.berryTreeStage + 1)
-      }
-      if (player.effects.has(Effect.GROWTH)) {
-        player.berryTreeStage = max(3)(player.berryTreeStage + 2)
-      }
-      if (player.effects.has(Effect.SPORE)) {
-        player.berryTreeStage = max(3)(player.berryTreeStage + 3)
+      const grassLevel = player.synergies.get(Synergy.GRASS) ?? 0
+      const nbTrees = SynergyTriggers[Synergy.GRASS].filter(
+        (n) => n <= grassLevel
+      ).length
+      for (let i = 0; i < nbTrees; i++) {
+        player.berryTreesStage[i] = max(3)(player.berryTreesStage[i] + 1)
       }
     })
 
@@ -1054,14 +1060,18 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
   stopFightingPhase() {
     const isPVE = this.state.stageLevel in PVEStages
+    
+    this.state.simulations.forEach((simulation) => {
+      if (!simulation.finished) {
+        simulation.onFinish()
+      }
+      simulation.stop()
+    })
 
     this.computeAchievements()
     this.computeStreak(isPVE)
     this.checkDeath()
     this.computeIncome()
-    this.state.simulations.forEach((simulation) => {
-      simulation.stop()
-    })
 
     this.state.players.forEach((player: Player) => {
       if (player.alive) {

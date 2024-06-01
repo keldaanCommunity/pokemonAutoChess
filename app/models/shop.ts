@@ -345,6 +345,15 @@ export default class Shop {
     let pkm = Pkm.MAGIKARP
     const candidates = (this.getPool(rarity) ?? [])
       .concat(this.getRegionalPool(rarity, player) ?? [])
+      .map((pkm) => {
+        if (pkm in PkmRegionalVariants) {
+          const regionalVariants = PkmRegionalVariants[pkm]!.filter((p) =>
+            player.regionalPokemons.includes(p)
+          )
+          if (regionalVariants.length > 0) pkm = pickRandomIn(regionalVariants)
+        }
+        return pkm
+      })
       .filter((pkm) => {
         const types = getPokemonData(pkm).types
         const isOfTypeWanted = specificTypeWanted
@@ -356,12 +365,6 @@ export default class Shop {
 
     if (candidates.length > 0) {
       pkm = pickRandomIn(candidates)
-      if (PkmRegionalVariants[pkm]) {
-        const regionalVariants = PkmRegionalVariants[pkm]!.filter((p) =>
-          player.regionalPokemons.includes(p)
-        )
-        if (regionalVariants.length > 0) pkm = pickRandomIn(regionalVariants)
-      }
     } else if (specificTypeWanted === Synergy.WATER) {
       return Pkm.MAGIKARP // if no more water in pool, return magikarp
     } else if (specificTypeWanted) {

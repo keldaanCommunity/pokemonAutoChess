@@ -790,7 +790,9 @@ export enum Pkm {
   FERROSEED = "FERROSEED",
   FERROTHORN = "FERROTHORN",
   GOLETT = "GOLETT",
-  GOLURK = "GOLURK"
+  GOLURK = "GOLURK",
+  TRUBBISH = "TRUBBISH",
+  GARBODOR = "GARBODOR"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1583,7 +1585,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.FERROSEED]: "0597",
   [Pkm.FERROTHORN]: "0598",
   [Pkm.GOLETT]: "0622",
-  [Pkm.GOLURK]: "0623"
+  [Pkm.GOLURK]: "0623",
+  [Pkm.TRUBBISH]: "0568",
+  [Pkm.GARBODOR]: "0569"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2352,11 +2356,11 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.KILOWATTREL]: Pkm.WATTREL,
   [Pkm.STANTLER]: Pkm.STANTLER,
   [Pkm.BURMY_PLANT]: Pkm.BURMY_PLANT,
-  [Pkm.BURMY_SANDY]: Pkm.BURMY_PLANT, // NOTE: all forms share the same line
-  [Pkm.BURMY_TRASH]: Pkm.BURMY_PLANT, // NOTE: all forms share the same line
+  [Pkm.BURMY_SANDY]: Pkm.BURMY_SANDY,
+  [Pkm.BURMY_TRASH]: Pkm.BURMY_TRASH,
   [Pkm.WORMADAM_PLANT]: Pkm.BURMY_PLANT,
-  [Pkm.WORMADAM_SANDY]: Pkm.BURMY_PLANT, // NOTE: all forms share the same line
-  [Pkm.WORMADAM_TRASH]: Pkm.BURMY_PLANT, // NOTE: all forms share the same line
+  [Pkm.WORMADAM_SANDY]: Pkm.BURMY_SANDY,
+  [Pkm.WORMADAM_TRASH]: Pkm.BURMY_TRASH,
   [Pkm.MOTHIM]: Pkm.BURMY_PLANT, // NOTE: converging evolution
   [Pkm.PALDEA_WOOPER]: Pkm.PALDEA_WOOPER,
   [Pkm.CLODSIRE]: Pkm.PALDEA_WOOPER,
@@ -2376,7 +2380,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.FERROSEED]: Pkm.FERROSEED,
   [Pkm.FERROTHORN]: Pkm.FERROSEED,
   [Pkm.GOLETT]: Pkm.GOLETT,
-  [Pkm.GOLURK]: Pkm.GOLETT
+  [Pkm.GOLURK]: Pkm.GOLETT,
+  [Pkm.TRUBBISH]: Pkm.TRUBBISH,
+  [Pkm.GARBODOR]: Pkm.TRUBBISH
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
@@ -6486,5 +6492,16 @@ export const AnimationConfig: {
     attack: AnimationType.Strike,
     ability: AnimationType.SpAttack,
     emote: AnimationType.Charge
+  },
+  [Pkm.TRUBBISH]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Pose
+  },
+  [Pkm.GARBODOR]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Idle,
+    shinyUnavailable: true
   }
 }

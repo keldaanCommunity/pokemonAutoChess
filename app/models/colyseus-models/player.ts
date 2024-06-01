@@ -70,8 +70,12 @@ export default class Player extends Schema implements IPlayer {
   @type(["string"]) pokemonsProposition = new ArraySchema<PkmProposition>()
   @type(["string"]) pveRewards = new ArraySchema<Item>()
   @type("float32") loadingProgress: number = 0
-  @type("string") berry: Item = pickRandomIn(Berries)
-  @type("uint8") berryTreeStage: number = 1
+  @type(["string"]) berryTreesType: Item[] = [
+    pickRandomIn(Berries),
+    pickRandomIn(Berries),
+    pickRandomIn(Berries)
+  ]
+  @type(["uint8"]) berryTreesStage: number[] = [1, 1, 1]
   @type("string") map: DungeonPMDO
   @type({ set: "string" }) effects: Effects = new Effects()
   @type(["string"]) regionalPokemons = new ArraySchema<Pkm>()
@@ -183,18 +187,6 @@ export default class Player extends Schema implements IPlayer {
     return this.getLastBattle()?.result ?? ""
   }
 
-  getCurrentStreakType(): BattleResult | null {
-    for (let i = this.history.length - 1; i >= 0; i--) {
-      if (
-        this.history[i].id !== "pve" &&
-        this.history[i].result !== BattleResult.DRAW
-      ) {
-        return this.history[i].result
-      }
-    }
-    return null
-  }
-
   getPokemonAt(x: number, y: number): Pokemon | undefined {
     let p: Pokemon | undefined = undefined
 
@@ -215,6 +207,7 @@ export default class Player extends Schema implements IPlayer {
     newPokemon.positionY = pokemon.positionY
     this.board.delete(pokemon.id)
     this.board.set(newPokemon.id, newPokemon)
+    newPokemon.onAcquired(this)
     this.updateSynergies()
     return newPokemon
   }
@@ -278,25 +271,44 @@ export default class Player extends Schema implements IPlayer {
         newNbArtifItems,
         previousNbArtifItems
       )
-      lostArtificialItems.forEach((item) => {
-        removeInArray<Item>(this.items, item)
-      })
+
+      // variables for managing number of "Trash" items
+      const lostTrash = lostArtificialItems.filter(
+        (item) => item === Item.TRASH
+      ).length
+      let cleanedTrash = 0
+
       this.board.forEach((pokemon) => {
         lostArtificialItems.forEach((item) => {
           if (pokemon.items.has(item)) {
-            pokemon.items.delete(item)
-            if (item in SynergyGivenByItem) {
-              const type = SynergyGivenByItem[item]
-              const nativeTypes = getPokemonData(pokemon.name).types
-              if (nativeTypes.includes(type) === false) {
-                pokemon.types.delete(type)
-                if (!isOnBench(pokemon)) {
-                  needsRecomputingSynergiesAgain = true
+            if (item === Item.TRASH && lostTrash - cleanedTrash > 0) {
+              pokemon.items.delete(item)
+              cleanedTrash++
+            } else if (item !== Item.TRASH) {
+              pokemon.items.delete(item)
+
+              if (item in SynergyGivenByItem) {
+                const type = SynergyGivenByItem[item]
+                const nativeTypes = getPokemonData(pokemon.name).types
+                if (nativeTypes.includes(type) === false) {
+                  pokemon.types.delete(type)
+                  if (!isOnBench(pokemon)) {
+                    needsRecomputingSynergiesAgain = true
+                  }
                 }
               }
             }
           }
         })
+      })
+
+      lostArtificialItems.forEach((item) => {
+        if (item !== Item.TRASH) {
+          removeInArray<Item>(this.items, item)
+        } else if (item === Item.TRASH && lostTrash - cleanedTrash > 0) {
+          removeInArray<Item>(this.items, item)
+          cleanedTrash++
+        }
       })
     }
 
@@ -321,7 +333,8 @@ export default class Player extends Schema implements IPlayer {
     resetArraySchema(
       this.regionalPokemons,
       newRegionalPokemons.filter(
-        (p, index, array) => array.indexOf(PkmFamily[p]) === index // dedup same family
+        (p, index, array) =>
+          array.findIndex((p2) => PkmFamily[p] === PkmFamily[p2]) === index // dedup same family
       )
     )
   }

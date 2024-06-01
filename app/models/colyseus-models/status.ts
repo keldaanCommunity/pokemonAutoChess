@@ -424,22 +424,23 @@ export default class Status extends Schema implements IStatus {
         : false
       board.getAdjacentCells(pkm.positionX, pkm.positionY).forEach((cell) => {
         if (cell?.value && cell.value.team !== pkm.team) {
-          let darkHarvestDamage =
-            pkm.stars === 3 ? 40 : pkm.stars === 2 ? 20 : 10
-          if (crit) {
-            darkHarvestDamage = Math.round(darkHarvestDamage * pkm.critPower)
-          }
-
-          cell.value.handleDamage({
-            damage: darkHarvestDamage,
+          const darkHarvestDamage = [10, 20, 40][pkm.stars - 1] ?? 40
+          cell.value.handleSpecialDamage(
+            darkHarvestDamage,
             board,
-            attackType: AttackType.SPECIAL,
-            attacker: pkm,
-            shouldTargetGainMana: true
-          })
+            AttackType.SPECIAL,
+            pkm,
+            crit,
+            true
+          )
 
-          const factor = pkm.stars === 3 ? 0.4 : pkm.stars === 2 ? 0.3 : 0.2
-          pkm.handleHeal(Math.round(darkHarvestDamage * factor), pkm, 1, crit)
+          const healFactor = [0.2, 0.3, 0.4][pkm.stars - 1] ?? 0.4
+          pkm.handleHeal(
+            Math.round(darkHarvestDamage * healFactor),
+            pkm,
+            0,
+            false
+          )
           this.darkHarvestDamageCooldown = 1000
         }
       })
