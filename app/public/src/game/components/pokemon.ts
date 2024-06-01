@@ -785,7 +785,7 @@ export default class PokemonSprite extends DraggableObject {
   addCurseTorment() {
     if (!this.curseTorment) {
       this.curseTorment = this.scene.add
-        .sprite(-30, -20, "status", "CURSE_OF_TORMENT/000.png")
+        .sprite(-30, -20, "abilities", "CURSE_OF_TORMENT/000.png")
         .setScale(1)
       this.curseTorment.anims.play("CURSE_OF_TORMENT")
       this.add(this.curseTorment)
@@ -795,7 +795,7 @@ export default class PokemonSprite extends DraggableObject {
   addCurseFate() {
     if (!this.curseFate) {
       this.curseFate = this.scene.add
-        .sprite(0, -50, "status", "CURSE_OF_FATE/000.png")
+        .sprite(0, -50, "abilities", "CURSE_OF_FATE/000.png")
         .setScale(1)
       this.curseFate.anims.play("CURSE_OF_FATE")
       this.add(this.curseFate)
