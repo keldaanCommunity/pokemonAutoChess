@@ -8653,7 +8653,7 @@ export class PsyShockStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit, true)
     const ppBurn = [30, 60, 100][pokemon.stars - 1] ?? 100
-    const ppStolen = min(ppBurn)(target.pp)
+    const ppStolen = max(target.pp)(ppBurn)
     const extraPP = ppBurn - ppStolen
 
     target.addPP(-ppStolen, pokemon, 1, crit)
