@@ -127,9 +127,16 @@ export class OnJoinCommand extends Command<
         // auto start when special lobby is full and all ready
         this.room.state.addMessage({
           authorId: "server",
-          payload: `Lobby is full, starting match...`
+          payload: `Lobby is full, starting match in 5 seconds...`
         })
         this.clock.setTimeout(() => {
+          if (this.state.users.size < nbExpectedPlayers) {
+            this.room.state.addMessage({
+              authorId: "server",
+              payload: `Game did not start because one player left.`
+            })
+            return
+          }
           this.room.dispatcher.dispatch(new OnGameStartRequestCommand())
           // open another one
           this.room.presence.publish("lobby-full", {
@@ -137,7 +144,7 @@ export class OnJoinCommand extends Command<
             minRank: this.state.minRank,
             noElo: this.state.noElo
           })
-        }, 2000)
+        }, 5000)
       }
     } catch (error) {
       logger.error(error)
