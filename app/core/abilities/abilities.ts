@@ -7417,6 +7417,110 @@ export class ShadowPunchStrategy extends AbilityStrategy {
   }
 }
 
+export class MagnetBombStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
+    const centerDamage = [20, 40, 80][pokemon.stars - 1] ?? 80
+
+    target.handleSpecialDamage(
+      centerDamage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+
+    const cells = board.getAdjacentCells(
+      target.positionX,
+      target.positionY,
+      false
+    )
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team != cell.value.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
+
+    const mappingAttractCell = [
+      {
+        to: [target.positionX - 1, target.positionY],
+        from: [[target.positionX - 2, target.positionY]]
+      },
+      {
+        to: [target.positionX + 1, target.positionY],
+        from: [[target.positionX + 2, target.positionY]]
+      },
+      {
+        to: [target.positionX, target.positionY - 1],
+        from: [[target.positionX, target.positionY - 2]]
+      },
+      {
+        to: [target.positionX, target.positionY + 1],
+        from: [[target.positionX, target.positionY + 2]]
+      },
+      {
+        to: [target.positionX - 1, target.positionY - 1],
+        from: [
+          [target.positionX - 2, target.positionY - 1],
+          [target.positionX - 2, target.positionY - 2],
+          [target.positionX - 1, target.positionY - 2]
+        ]
+      },
+      {
+        to: [target.positionX + 1, target.positionY - 1],
+        from: [
+          [target.positionX + 2, target.positionY - 1],
+          [target.positionX + 2, target.positionY - 2],
+          [target.positionX + 1, target.positionY - 2]
+        ]
+      },
+      {
+        to: [target.positionX - 1, target.positionY + 1],
+        from: [
+          [target.positionX - 2, target.positionY + 1],
+          [target.positionX - 2, target.positionY + 2],
+          [target.positionX - 1, target.positionY + 2]
+        ]
+      },
+      {
+        to: [target.positionX + 1, target.positionY + 1],
+        from: [
+          [target.positionX + 2, target.positionY + 1],
+          [target.positionX + 2, target.positionY + 2],
+          [target.positionX + 1, target.positionY + 2]
+        ]
+      }
+    ]
+
+    mappingAttractCell.forEach((cell) => {
+      const attractedEnemies = cell.from
+        .map(([x, y]) => board.getValue(x, y))
+        .filter((enemy) => enemy && enemy.team === target.team)
+      const [destX, destY] = cell.to
+      if (
+        attractedEnemies.length > 0 &&
+        board.getValue(destX, destY) === undefined
+      ) {
+        const attractedEnemy = pickRandomIn(attractedEnemies)!
+        attractedEnemy.moveTo(destX, destY, board)
+      }
+    })
+  }
+}
+
 export class NightSlashStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -9118,5 +9222,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BLOOD_MOON]: new BloodMoonStrategy(),
   [Ability.TEA_TIME]: new TeaTimeStrategy(),
   [Ability.SPIKES]: new SpikesStrategy(),
-  [Ability.SHADOW_PUNCH]: new ShadowPunchStrategy()
+  [Ability.SHADOW_PUNCH]: new ShadowPunchStrategy(),
+  [Ability.MAGNET_BOMB]: new MagnetBombStrategy()
 }

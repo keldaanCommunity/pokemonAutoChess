@@ -2995,7 +2995,7 @@ export class Magnemite extends Pokemon {
   speDef = 1
   maxPP = 100
   range = 2
-  skill = Ability.ZAP_CANNON
+  skill = Ability.MAGNET_BOMB
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -3010,7 +3010,7 @@ export class Magneton extends Pokemon {
   speDef = 1
   maxPP = 100
   range = 2
-  skill = Ability.ZAP_CANNON
+  skill = Ability.MAGNET_BOMB
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -3024,7 +3024,7 @@ export class Magnezone extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 2
-  skill = Ability.ZAP_CANNON
+  skill = Ability.MAGNET_BOMB
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 

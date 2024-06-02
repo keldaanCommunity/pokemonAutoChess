@@ -9,6 +9,7 @@
 
 - Buff Haxorus: HP ~~180~~ 200
 - Nerf Crabrawler: HP ~~110~~ 90, Attack ~~11~~ 9, Def/Spedef ~~3~~ 2
+- New ability for Magnemite line: Magnet bomb
 
 # Changes to Synergies
 
