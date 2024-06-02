@@ -6099,7 +6099,9 @@ export class Deoxys extends Pokemon {
   attackSprite = AttackSprite.PSYCHIC_MELEE
   passive = Passive.ALIEN_DNA
   onAcquired(player: Player) {
-    player.items.push(Item.METEORITE)
+    if (player.items.includes(Item.METEORITE) === false) {
+      player.items.push(Item.METEORITE)
+    }
   }
 }
 
@@ -6121,7 +6123,9 @@ export class DeoxysDefense extends Pokemon {
   attackSprite = AttackSprite.PSYCHIC_MELEE
   passive = Passive.ALIEN_DNA
   onAcquired(player: Player) {
-    player.items.push(Item.METEORITE)
+    if (player.items.includes(Item.METEORITE) === false) {
+      player.items.push(Item.METEORITE)
+    }
   }
 }
 
@@ -6143,7 +6147,9 @@ export class DeoxysAttack extends Pokemon {
   attackSprite = AttackSprite.PSYCHIC_RANGE
   passive = Passive.ALIEN_DNA
   onAcquired(player: Player) {
-    player.items.push(Item.METEORITE)
+    if (player.items.includes(Item.METEORITE) === false) {
+      player.items.push(Item.METEORITE)
+    }
   }
 }
 
@@ -6165,7 +6171,9 @@ export class DeoxysSpeed extends Pokemon {
   attackSprite = AttackSprite.PSYCHIC_RANGE
   passive = Passive.ALIEN_DNA
   onAcquired(player: Player) {
-    player.items.push(Item.METEORITE)
+    if (player.items.includes(Item.METEORITE) === false) {
+      player.items.push(Item.METEORITE)
+    }
   }
 }
 
