@@ -785,7 +785,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           case Effect.DIAMOND_STORM:
             player.titles.add(Title.HIKER)
             break
-          case Effect.CURSE:
+          case Effect.CURSE_OF_FATE:
             player.titles.add(Title.HEX_MANIAC)
             break
           case Effect.MOON_FORCE:

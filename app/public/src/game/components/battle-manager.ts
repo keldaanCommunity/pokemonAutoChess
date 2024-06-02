@@ -150,13 +150,13 @@ export default class BattleManager {
         const pkm = <PokemonSprite>children[i]
 
         if (pkm.id == pokemon.id) {
-          if (field == "poisonStacks") {
+          if (field === "poisonStacks") {
             if (pokemon.status.poisonStacks > 0) {
               pkm.addPoison()
             } else {
               pkm.removePoison()
             }
-          } else if (field == "sleep") {
+          } else if (field === "sleep") {
             if (pokemon.status.sleep) {
               pkm.addSleep()
               this.animationManager.animatePokemon(
@@ -167,133 +167,149 @@ export default class BattleManager {
             } else {
               pkm.removeSleep()
             }
-          } else if (field == "burn") {
+          } else if (field === "burn") {
             if (pokemon.status.burn) {
               pkm.addBurn()
             } else {
               pkm.removeBurn()
             }
-          } else if (field == "silence") {
+          } else if (field === "silence") {
             if (pokemon.status.silence) {
               pkm.addSilence()
             } else {
               pkm.removeSilence()
             }
-          } else if (field == "confusion") {
+          } else if (field === "confusion") {
             if (pokemon.status.confusion) {
               pkm.addConfusion()
             } else {
               pkm.removeConfusion()
             }
-          } else if (field == "freeze") {
+          } else if (field === "freeze") {
             if (pokemon.status.freeze) {
               pkm.addFreeze()
             } else {
               pkm.removeFreeze()
             }
-          } else if (field == "protect") {
+          } else if (field === "protect") {
             if (pokemon.status.protect) {
               pkm.addProtect()
             } else {
               pkm.removeProtect()
             }
-          } else if (field == "skydiving") {
+          } else if (field === "skydiving") {
             if (pokemon.status.skydiving) {
               pkm.skydiveUp()
             } else {
               pkm.skydiveDown()
             }
-          } else if (field == "wound") {
+          } else if (field === "wound") {
             if (pokemon.status.wound) {
               pkm.addWound()
             } else {
               pkm.removeWound()
             }
-          } else if (field == "resurection") {
+          } else if (field === "resurection") {
             if (pokemon.status.resurection) {
               pkm.addResurection()
             } else {
               pkm.removeResurection()
             }
-          } else if (field == "resurecting") {
+          } else if (field === "resurecting") {
             if (pokemon.status.resurecting) {
               pkm.resurectAnimation()
             } else {
               pkm.animationLocked = false
             }
-          } else if (field == "paralysis") {
+          } else if (field === "paralysis") {
             if (pokemon.status.paralysis) {
               pkm.addParalysis()
             } else {
               pkm.removeParalysis()
             }
-          } else if (field == "armorReduction") {
+          } else if (field === "armorReduction") {
             if (pokemon.status.armorReduction) {
               pkm.addArmorReduction()
             } else {
               pkm.removeArmorReduction()
             }
-          } else if (field == "charm") {
+          } else if (field === "charm") {
             if (pokemon.status.charm) {
               pkm.addCharm()
             } else {
               pkm.removeCharm()
             }
-          } else if (field == "flinch") {
+          } else if (field === "flinch") {
             if (pokemon.status.flinch) {
               pkm.addFlinch()
             } else {
               pkm.removeFlinch()
             }
-          } else if (field == "runeProtect") {
+          } else if (field === "runeProtect") {
             if (pokemon.status.runeProtect) {
               pkm.addRuneProtect()
             } else {
               pkm.removeRuneProtect()
             }
-          } else if (field == "curse") {
+          } else if (field === "curse") {
             if (pokemon.status.curse) {
               pkm.addCurse()
             } else {
               pkm.removeCurse()
             }
-          } else if (field == "spikeArmor") {
+          } else if (field === "curseVulnerability") {
+            if (pokemon.status.curseVulnerability) {
+              pkm.addCurseVulnerability()
+            }
+          } else if (field === "curseWeakness") {
+            if (pokemon.status.curseWeakness) {
+              pkm.addCurseWeakness()
+            }
+          } else if (field === "curseTorment") {
+            if (pokemon.status.curseTorment) {
+              pkm.addCurseTorment()
+            }
+          } else if (field === "curseFate") {
+            if (pokemon.status.curseFate) {
+              pkm.addCurseFate()
+            }
+          } else if (field === "spikeArmor") {
             if (pokemon.status.spikeArmor) {
               pkm.addSpikeArmor()
             } else {
               pkm.removeSpikeArmor()
             }
-          } else if (field == "magicBounce") {
+          } else if (field === "magicBounce") {
             if (pokemon.status.magicBounce) {
               pkm.addMagicBounce()
             } else {
               pkm.removeMagicBounce()
             }
-          } else if (field == "electricField") {
+          } else if (field === "electricField") {
             if (pokemon.status.electricField) {
               pkm.addElectricField()
             } else {
               pkm.removeElectricField()
             }
-          } else if (field == "psychicField") {
+          } else if (field === "psychicField") {
             if (pokemon.status.psychicField) {
               pkm.addPsychicField()
             } else {
               pkm.removePsychicField()
             }
-          } else if (field == "grassField") {
+          } else if (field === "grassField") {
             if (pokemon.status.grassField) {
               pkm.addGrassField()
             } else {
               pkm.removeGrassField()
             }
-          } else if (field == "fairyField") {
+          } else if (field === "fairyField") {
             if (pokemon.status.fairyField) {
               pkm.addFairyField()
             } else {
               pkm.removeFairyField()
             }
-          } else if (field == "enraged") {
+          } else if (field === "enraged") {
             if (pokemon.status.enraged) {
               pkm.addRageEffect()
             }

@@ -105,6 +105,10 @@ class GameContainer {
       "charm",
       "confusion",
       "curse",
+      "curseVulnerability",
+      "curseWeakness",
+      "curseTorment",
+      "curseFate",
       "electricField",
       "fairyField",
       "flinch",
@@ -135,7 +139,8 @@ class GameContainer {
     })
 
     pokemon.onChange(() => {
-      const fields: NonFunctionPropNames<IPokemonEntity>[] = [
+      const fields: (NonFunctionPropNames<PokemonEntity> &
+        keyof IPokemonEntity)[] = [
         "positionX",
         "positionY",
         "orientation",
@@ -569,7 +574,9 @@ class GameContainer {
         pokemonUI.fishingAnimation()
       } else if (pokemonUI && pokemon.stars > 1) {
         pokemonUI.evolutionAnimation()
-        playSound(pokemon.stars === 2 ? SOUNDS.EVOLUTION_T2 : SOUNDS.EVOLUTION_T3)
+        playSound(
+          pokemon.stars === 2 ? SOUNDS.EVOLUTION_T2 : SOUNDS.EVOLUTION_T3
+        )
       } else if (pokemonUI && pokemon.rarity === Rarity.HATCH) {
         pokemonUI.hatchAnimation()
       }
