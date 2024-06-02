@@ -1144,7 +1144,10 @@
     "FERROSEED": "Ferroseed",
     "FERROTHORN": "Ferrothorn",
     "GOLETT": "Golett",
-    "GOLURK": "Golurk"
+    "GOLURK": "Golurk",
+    "GRUBBIN": "Grubbin",
+    "CHARJABUG": "Charjabug",
+    "VIKAVOLT": "Vikavolt"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
