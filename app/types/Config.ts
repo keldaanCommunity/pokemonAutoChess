@@ -105,7 +105,8 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.ARTIFICIAL]: [2, 4, 6],
   [Synergy.BABY]: [3, 5, 7],
   [Synergy.LIGHT]: [2, 3, 4, 5],
-  [Synergy.WILD]: [2, 4, 6, 9]
+  [Synergy.WILD]: [2, 4, 6, 9],
+  [Synergy.AMORPHOUS]: [2, 4, 6]
 }
 
 export const RequiredStageLevelForXpElligibility = 10

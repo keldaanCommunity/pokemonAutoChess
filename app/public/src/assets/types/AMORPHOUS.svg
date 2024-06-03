@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="953" height="881" viewBox="0 0 953 881">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #e5b2f4;
+      }
+
+      .cls-1, .cls-3 {
+        fill-rule: evenodd;
+      }
+
+      .cls-1 {
+        filter: url(#filter);
+      }
+
+      .cls-3 {
+        fill: #885597;
+        filter: url(#filter-2);
+      }
+    </style>
+    <filter id="filter" x="63.219" y="41.906" width="804.843" height="806.125" filterUnits="userSpaceOnUse">
+      <feFlood result="flood" flood-color="#885597"/>
+      <feComposite result="composite" operator="in" in2="SourceGraphic"/>
+      <feBlend result="blend" in2="SourceGraphic"/>
+    </filter>
+    <filter id="filter-2" x="203" y="165.875" width="524" height="570.125" filterUnits="userSpaceOnUse">
+      <feOffset result="offset" dy="17" in="SourceAlpha"/>
+      <feGaussianBlur result="blur"/>
+      <feFlood result="flood" flood-opacity="0.25"/>
+      <feComposite result="composite" operator="in" in2="blur"/>
+      <feBlend result="blend" in="SourceGraphic"/>
+      <feFlood result="flood-2" flood-color="#28292e"/>
+      <feComposite result="composite-2" operator="in" in2="SourceGraphic"/>
+      <feBlend result="blend-2" in2="blend"/>
+    </filter>
+  </defs>
+  <path id="Color_Fill_1" data-name="Color Fill 1" class="cls-1" d="M452,42c198.592-3.483,329.7,110.79,387,249,38.229,92.211,39.316,216.31,0,309C789.85,715.875,698.073,794.7,571,833c-26.917,8.112-56.3,7.753-87,13-57.8,9.88-139.866-18.318-176-34C152.68,744.594.063,536.776,90,306,134.757,191.154,215.253,110.866,330,66c24.178-9.454,51.472-14.57,79-20Z"/>
+  <circle class="cls-2" cx="462.5" cy="442.5" r="361.5"/>
+  <path id="Color_Fill_2" data-name="Color Fill 2" class="cls-3" d="M441,166c68.433-1.537,113.661,9.864,150,39,15.374,12.327,33.377,22.437,24,48-14.547,7.515-66.953,25.66-50,52,12.1,18.794,52.785,19.374,72,31,4.116,19.341-58.546,79.319-75,90-6.693,4.345-18.18,10.977-31,8-14.879-3.456-27.456-17.272-39-25-35.326-23.649-108.474-87.361-170-66l-44,23c-26.277-7.043,1.2-70.869,7-82,24.66-47.361,57.2-83.436,107-106ZM341,357c83.554-1.533,122.421,81.334,191,96,41.283,8.829,77.123-41.007,93-61,7.821-9.849,22.647-32.456,44-27,17.468,4.464,22.723,26.007,29,42,19.826,50.518,40.542,154.967,6,206-8.72,12.883-25.506,20.728-42,10-22.69-14.758-36.408-39.128-61-53-42.026-23.706-97.851-22.291-155-32-55.474-9.425-117.861,20.992-151,38-15.466,7.938-42.264,29.419-66,18-28.1-13.519-24.2-65.364-15-98,15.582-55.254,43.029-98.35,87-125C313,363.725,326.814,363.113,341,357Zm93,203c70.623-1.228,130.91,8.617,172,37,13.672,9.444,35.92,28.457,25,55-34.78,84.539-315.367,81.566-355,2-27.467-55.142,77.283-82.5,116-90Z"/>
+</svg>
