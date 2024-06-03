@@ -350,7 +350,9 @@
     "TEA_TIME": "Tea Time",
     "SPIKES": "Spikes",
     "SHADOW_PUNCH": "Shadow Punch",
-    "MAGNET_BOMB": "Magnet Bomb"
+    "MAGNET_BOMB": "Magnet Bomb",
+    "MUDDY_WATER": "Muddy Water",
+    "ANCIENT_POWER": "Ancient Power"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1148,8 +1150,11 @@
     "GOLURK": "Golurk",
     "GRUBBIN": "Grubbin",
     "CHARJABUG": "Charjabug",
-    "VIKAVOLT": "Vikavolt"
-  },
+    "VIKAVOLT": "Vikavolt",
+    "SHELLOS_WEST_SEA": "Shellos (West Sea)",
+    "GASTRODON_WEST_SEA": "Gastrodon (West Sea)",
+    "SHELLOS_EAST_SEA": "Shellos (East Sea)",
+    "GASTRODON_EAST_SEA": "Gastrodon (East Sea)"  },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
     "EARTHQUAKE": "Deal [120,SP] SPECIAL to all enemy Pokémon in the same column as the user",
@@ -1479,7 +1484,9 @@
     "SPIKES": "Throw up to [6, SP] metal spikes within a 3-cell radius in front, dealing [25,50,SP] TRUE. The spikes stay on field, dealing 10 TRUE per second and ARMOR_REDUCTION to opponents that walk on it, if not FLYING.",
     "SHADOW_PUNCH": "Fly towards the target with the lowest HP. The next attack deals additional [30,60,120,SP] SPECIAL.",
     "GUNK_SHOT": "Deal [50,100,SP] SPECIAL to the target, inflicting POISONNED for [2,4,SP] seconds",
-    "MAGNET_BOMB": "A magnetic bomb dealing [20,40,80,SP] SPECIAL to target, [10,20,40,SP] SPECIAL to adjacent enemies and attracting distant enemies"
+    "MAGNET_BOMB": "A magnetic bomb dealing [20,40,80,SP] SPECIAL to target, [10,20,40,SP] SPECIAL to adjacent enemies and attracting distant enemies",
+    "MUDDY_WATER": "Spurts muddy water at up to 3 targets in front of itself, dealing [20,40,SP] SPECIAL and reducing their accuracy by 50% for 2 AP seconds",
+    "ANCIENT_POWER": "Launches rocks at the target, dealing [40,80] SPECIAL. Raises the user's AP by [25,SP]"
   },
   "effect": {
     "INGRAIN": "Ingrain",

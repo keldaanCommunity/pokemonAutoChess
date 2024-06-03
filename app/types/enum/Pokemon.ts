@@ -795,7 +795,11 @@ export enum Pkm {
   GARBODOR = "GARBODOR",
   GRUBBIN = "GRUBBIN",
   CHARJABUG = "CHARJABUG",
-  VIKAVOLT = "VIKAVOLT"
+  VIKAVOLT = "VIKAVOLT",
+  SHELLOS_WEST_SEA = "SHELLOS_WEST_SEA",
+  GASTRODON_WEST_SEA = "GASTRODON_WEST_SEA",
+  SHELLOS_EAST_SEA = "SHELLOS_EAST_SEA",
+  GASTRODON_EAST_SEA = "GASTRODON_EAST_SEA"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1593,8 +1597,11 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GARBODOR]: "0569",
   [Pkm.GRUBBIN]: "0736",
   [Pkm.CHARJABUG]: "0737",
-  [Pkm.VIKAVOLT]: "0738"
-}
+  [Pkm.VIKAVOLT]: "0738",
+  [Pkm.SHELLOS_WEST_SEA]: "0422",
+  [Pkm.GASTRODON_WEST_SEA]: "0423",
+  [Pkm.SHELLOS_EAST_SEA]: "0422-0001",
+  [Pkm.GASTRODON_EAST_SEA]: "0423-0001"}
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.EGG]: Pkm.EGG,
@@ -2391,8 +2398,11 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GARBODOR]: Pkm.TRUBBISH,
   [Pkm.GRUBBIN]: Pkm.GRUBBIN,
   [Pkm.CHARJABUG]: Pkm.GRUBBIN,
-  [Pkm.VIKAVOLT]: Pkm.GRUBBIN
-}
+  [Pkm.VIKAVOLT]: Pkm.GRUBBIN,
+  [Pkm.SHELLOS_WEST_SEA]: Pkm.SHELLOS_WEST_SEA,
+  [Pkm.GASTRODON_WEST_SEA]: Pkm.SHELLOS_WEST_SEA,
+  [Pkm.SHELLOS_EAST_SEA]: Pkm.SHELLOS_EAST_SEA,
+  [Pkm.GASTRODON_EAST_SEA]: Pkm.SHELLOS_EAST_SEA}
 
 export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
   [Pkm.RATTATA]: [Pkm.ALOLAN_RATTATA],
@@ -6526,6 +6536,26 @@ export const AnimationConfig: {
   [Pkm.VIKAVOLT]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SHELLOS_WEST_SEA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.GASTRODON_WEST_SEA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SHELLOS_EAST_SEA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.GASTRODON_EAST_SEA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
     emote: AnimationType.Shoot
   }
 }
