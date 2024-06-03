@@ -345,10 +345,10 @@ export class Crabrawler extends Pokemon {
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.CRABOMINABLE
-  hp = 110
-  atk = 11
-  def = 3
-  speDef = 3
+  hp = 90
+  atk = 9
+  def = 2
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.ICE_HAMMER
@@ -2109,7 +2109,7 @@ export class Haxorus extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON])
   rarity = Rarity.HATCH
   stars = 3
-  hp = 180
+  hp = 200
   atk = 30
   def = 4
   speDef = 6
@@ -2995,7 +2995,7 @@ export class Magnemite extends Pokemon {
   speDef = 1
   maxPP = 100
   range = 2
-  skill = Ability.ZAP_CANNON
+  skill = Ability.MAGNET_BOMB
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -3010,7 +3010,7 @@ export class Magneton extends Pokemon {
   speDef = 1
   maxPP = 100
   range = 2
-  skill = Ability.ZAP_CANNON
+  skill = Ability.MAGNET_BOMB
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -3024,7 +3024,7 @@ export class Magnezone extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 2
-  skill = Ability.ZAP_CANNON
+  skill = Ability.MAGNET_BOMB
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -13843,6 +13843,52 @@ export class Garbodor extends Pokemon {
   afterSimulationStart = Trubbish.prototype.afterSimulationStart
 }
 
+export class Grubbin extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ELECTRIC])
+  rarity = Rarity.HATCH
+  stars = 1
+  evolution = Pkm.CHARJABUG
+  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  hp = 80
+  atk = 6
+  def = 2
+  speDef = 2
+  maxPP = 80
+  range = 3
+  skill = Ability.ZAP_CANNON
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+}
+
+export class Charjabug extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ELECTRIC])
+  rarity = Rarity.HATCH
+  stars = 2
+  evolution = Pkm.VIKAVOLT
+  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  hp = 140
+  atk = 13
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 3
+  skill = Ability.ZAP_CANNON
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+}
+
+export class Vikavolt extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ELECTRIC])
+  rarity = Rarity.HATCH
+  stars = 3
+  hp = 190
+  atk = 25
+  def = 4
+  speDef = 4
+  maxPP = 80
+  range = 3
+  skill = Ability.ZAP_CANNON
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -14641,5 +14687,8 @@ export const PokemonClasses: Record<
   [Pkm.GOLETT]: Golett,
   [Pkm.GOLURK]: Golurk,
   [Pkm.TRUBBISH]: Trubbish,
-  [Pkm.GARBODOR]: Garbodor
+  [Pkm.GARBODOR]: Garbodor,
+  [Pkm.GRUBBIN]: Grubbin,
+  [Pkm.CHARJABUG]: Charjabug,
+  [Pkm.VIKAVOLT]: Vikavolt
 }
