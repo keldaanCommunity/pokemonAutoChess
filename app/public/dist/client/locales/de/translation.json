@@ -1114,7 +1114,7 @@
     "WHEEL_OF_FIRE": "Sendet ein Feuerrad, das eine Hin- und Rückfahrt macht und dabei [10,20,30,SP] SPECIAL macht",
     "SEISMIC_TOSS": "Mono-Zielangriff, der [7,14,28,SP] TRUE multipliziert mit der Anzahl der Pokémon in Ihrem Team verursacht",
     "GUILLOTINE": "Mono-Zielangriff, der [1,2,3,SP] x ATK SPECIAL verursacht. Stellt die Hälfte von PP wieder her, wenn das Ziel KO ist",
-    "ROCK_SLIDE": "Mono-Zielangriff, der [30,60,120,SP] SPECIAL verursacht. Verdoppelt den Schaden, wenn das Ziel fliegend ist.",
+    "ROCK_SLIDE": "Mono-Zielangriff, der [30,60,120,SP] SPECIAL verursacht. Verdoppelt den Schaden, wenn das Ziel FLYING ist.",
     "HEAT_WAVE": "Flächenangriff, der allen Feinden in einer Linie hinter dem Ziel [20,40,80,SP] SPECIAL zufügt.",
     "THUNDER": "Monozielschaden, der [30,60,120,SP] SPECIAL verursacht.",
     "HYDRO_PUMP": "Flächenangriff, der allen Feinden in einer Linie hinter dem Ziel [25,50,100,SP] SPECIAL zufügt.",
