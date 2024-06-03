@@ -914,6 +914,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           })
         }
         player.alive = false
+        const client = this.room.clients.find(
+          (cli) => cli.auth.uid === player.id
+        )
+        if (client) {
+          client.send(Transfer.FINAL_RANK, player.rank)
+        }
       }
     })
   }
@@ -1174,13 +1180,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         })
         // Refreshes effects (like tapu Terrains)
         player.updateSynergies()
-      } else {
-        const client = this.room.clients.find(
-          (cli) => cli.auth.uid === player.id
-        )
-        if (client) {
-          client.send(Transfer.FINAL_RANK, player.rank)
-        }
       }
     })
 

@@ -1080,7 +1080,7 @@
     "WHEEL_OF_FIRE": "Envia uma roda de fogo que faz uma viagem de ida e volta fazendo [10,20,30,SP] SPECIAL",
     "SEISMIC_TOSS": "Ataque de alvo mono que causa [7,14,28,SP] TRUE multiplicado pelo número de Pokémon em sua equipe",
     "GUILLOTINE": "Ataque de alvo mono que causa [1,2,3,SP] x ATK SPECIAL. Restaura metade do PP se o alvo for nocauteado",
-    "ROCK_SLIDE": "Ataque de alvo mono que causa [30,60,120,SP] SPECIAL. Dobra o dano se o alvo for do tipo voador.",
+    "ROCK_SLIDE": "Ataque de alvo mono que causa [30,60,120,SP] SPECIAL. Dobra o dano se o alvo for do tipo FLYING.",
     "HEAT_WAVE": "Ataque em área de efeito que causa [20,40,80,SP] SPECIAL a todos os inimigos em uma linha atrás do alvo.",
     "THUNDER": "Dano de alvo mono que causa [30,60,120,SP] SPECIAL.",
     "HYDRO_PUMP": "Ataque em área de efeito que causa [25,50,100,SP] SPECIAL a todos os inimigos em uma linha atrás do alvo.",

@@ -587,9 +587,14 @@ export default function Game() {
         player.listen("boardSize", (value) => {
           dispatch(setBoardSize({ id: player.id, value: value }))
         })
-        player.listen("life", (value) => {
+        player.listen("life", (value, previousValue) => {
           dispatch(setLife({ id: player.id, value: value }))
-          if (value <= 0 && player.id === uid && !spectate) {
+          if (
+            value <= 0 &&
+            value !== previousValue &&
+            player.id === uid &&
+            !spectate
+          ) {
             setFinalRankVisible(true)
           }
         })
