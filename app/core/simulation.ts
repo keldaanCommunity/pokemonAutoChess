@@ -457,9 +457,19 @@ export default class Simulation extends Schema implements ISimulation {
 
   applySynergyEffects(pokemon: PokemonEntity) {
     if (pokemon.team === Team.BLUE_TEAM) {
-      this.applyEffects(pokemon, pokemon.types, this.blueEffects)
+      this.applyEffects(
+        pokemon,
+        pokemon.types,
+        this.blueEffects,
+        this.bluePlayer?.synergies.countActiveSynergies() || 0
+      )
     } else if (pokemon.team === Team.RED_TEAM) {
-      this.applyEffects(pokemon, pokemon.types, this.redEffects)
+      this.applyEffects(
+        pokemon,
+        pokemon.types,
+        this.redEffects,
+        this.redPlayer?.synergies.countActiveSynergies() || 0
+      )
     }
 
     if (pokemon.types.has(Synergy.WATER)) {
@@ -619,7 +629,8 @@ export default class Simulation extends Schema implements ISimulation {
   applyEffects(
     pokemon: PokemonEntity,
     types: SetSchema<Synergy>,
-    allyEffects: Set<Effect>
+    allyEffects: Set<Effect>,
+    activeSynergies: number
   ) {
     allyEffects.forEach((effect) => {
       switch (effect) {
@@ -1151,6 +1162,36 @@ export default class Simulation extends Schema implements ISimulation {
             pokemon.status.enrageDelay -= 5000
           }
           break
+
+        case Effect.FLUID: {
+          pokemon.addAttackSpeed(4 * activeSynergies, pokemon, 0, false)
+          pokemon.addShield(7 * activeSynergies, pokemon, 0, false)
+          break
+        }
+
+        case Effect.SHAPELESS: {
+          pokemon.effects.add(Effect.SHAPELESS)
+          pokemon.addAttackSpeed(4 * activeSynergies, pokemon, 0, false)
+          pokemon.addShield(7 * activeSynergies, pokemon, 0, false)
+          pokemon.addAttack(1 * activeSynergies, pokemon, 0, false)
+          pokemon.addAbilityPower(5 * activeSynergies, pokemon, 0, false)
+          break
+        }
+
+        case Effect.ETHEREAL: {
+          pokemon.effects.add(Effect.ETHEREAL)
+          pokemon.addAttackSpeed(4 * activeSynergies, pokemon, 0, false)
+          pokemon.addShield(7 * activeSynergies, pokemon, 0, false)
+          pokemon.addAttack(1 * activeSynergies, pokemon, 0, false)
+          pokemon.addAbilityPower(5 * activeSynergies, pokemon, 0, false)
+          if (types.has(Synergy.AMORPHOUS)) {
+            pokemon.addAttackSpeed(4 * activeSynergies, pokemon, 0, false)
+            pokemon.addShield(7 * activeSynergies, pokemon, 0, false)
+            pokemon.addAttack(1 * activeSynergies, pokemon, 0, false)
+            pokemon.addAbilityPower(5 * activeSynergies, pokemon, 0, false)
+          }
+          break
+        }
 
         default:
           break
