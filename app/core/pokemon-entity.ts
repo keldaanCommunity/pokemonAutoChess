@@ -368,7 +368,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-    
+
     // for every 5% crit chance > 100, +0.1 crit power
     this.critChance += value
 
@@ -1311,6 +1311,19 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           }
         })
       }, 16) // delay to next tick, targeting 60 ticks per second
+    }
+
+    if (this.status.curseVulnerability) {
+      this.simulation.applyCurse(Effect.CURSE_OF_VULNERABILITY, this.team)
+    }
+    if (this.status.curseWeakness) {
+      this.simulation.applyCurse(Effect.CURSE_OF_WEAKNESS, this.team)
+    }
+    if (this.status.curseTorment) {
+      this.simulation.applyCurse(Effect.CURSE_OF_TORMENT, this.team)
+    }
+    if (this.status.curseFate) {
+      this.simulation.applyCurse(Effect.CURSE_OF_FATE, this.team)
     }
 
     if (this.passive === Passive.CORSOLA && this.player) {

@@ -107,6 +107,10 @@ export default class PokemonSprite extends DraggableObject {
   psychicField: GameObjects.Sprite | undefined
   grassField: GameObjects.Sprite | undefined
   fairyField: GameObjects.Sprite | undefined
+  curseVulnerability: GameObjects.Sprite | undefined
+  curseWeakness: GameObjects.Sprite | undefined
+  curseTorment: GameObjects.Sprite | undefined
+  curseFate: GameObjects.Sprite | undefined
   light: GameObjects.Sprite | undefined
   stars: number
   playerId: string
@@ -755,6 +759,46 @@ export default class PokemonSprite extends DraggableObject {
     if (this.curse) {
       this.remove(this.curse, true)
       this.curse = undefined
+    }
+  }
+
+  addCurseVulnerability() {
+    if (!this.curseVulnerability) {
+      this.curseVulnerability = this.scene.add
+        .sprite(0, 15, "abilities", "CURSE_OF_VULNERABILITY/000.png")
+        .setScale(1)
+      this.curseVulnerability.anims.play("CURSE_OF_VULNERABILITY")
+      this.add(this.curseVulnerability)
+    }
+  }
+
+  addCurseWeakness() {
+    if (!this.curseWeakness) {
+      this.curseWeakness = this.scene.add
+        .sprite(-30, -15, "abilities", "CURSE_OF_WEAKNESS/000.png")
+        .setScale(1)
+      this.curseWeakness.anims.play("CURSE_OF_WEAKNESS")
+      this.add(this.curseWeakness)
+    }
+  }
+
+  addCurseTorment() {
+    if (!this.curseTorment) {
+      this.curseTorment = this.scene.add
+        .sprite(30, -15, "abilities", "CURSE_OF_TORMENT/000.png")
+        .setScale(1)
+      this.curseTorment.anims.play("CURSE_OF_TORMENT")
+      this.add(this.curseTorment)
+    }
+  }
+
+  addCurseFate() {
+    if (!this.curseFate) {
+      this.curseFate = this.scene.add
+        .sprite(0, -45, "abilities", "CURSE_OF_FATE/000.png")
+        .setScale(1)
+      this.curseFate.anims.play("CURSE_OF_FATE")
+      this.add(this.curseFate)
     }
   }
 

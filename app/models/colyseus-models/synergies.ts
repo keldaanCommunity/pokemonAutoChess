@@ -1,7 +1,11 @@
 import { MapSchema } from "@colyseus/schema"
 import { IPokemon } from "../../types"
 import { SynergyTriggers } from "../../types/Config"
-import { ArtificialItems, SynergyGivenByItem, SynergyItems } from "../../types/enum/Item"
+import {
+  ArtificialItems,
+  SynergyGivenByItem,
+  SynergyItems
+} from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmFamily } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
@@ -16,6 +20,16 @@ export default class Synergies
     Object.keys(Synergy).forEach((key) => {
       this.set(key as Synergy, 0)
     })
+  }
+
+  countActiveSynergies() {
+    let count = 0
+    this.forEach((value, key) => {
+      if (value >= SynergyTriggers[key][0]) {
+        count++
+      }
+    })
+    return count
   }
 }
 
@@ -92,7 +106,10 @@ export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
 
 export function addSynergiesGivenByItems(pkm: IPokemon) {
   for (const item of SynergyItems) {
-    if (pkm.items.has(item) && !(pkm.passive === Passive.RECYCLE && ArtificialItems.includes(item)) ) {
+    if (
+      pkm.items.has(item) &&
+      !(pkm.passive === Passive.RECYCLE && ArtificialItems.includes(item))
+    ) {
       pkm.types.add(SynergyGivenByItem[item])
     }
   }

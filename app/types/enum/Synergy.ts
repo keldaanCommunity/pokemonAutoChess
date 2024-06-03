@@ -29,7 +29,8 @@ export enum Synergy {
   ARTIFICIAL = "ARTIFICIAL",
   LIGHT = "LIGHT",
   WILD = "WILD",
-  BABY = "BABY"
+  BABY = "BABY",
+  AMORPHOUS = "AMORPHOUS"
 }
 
 export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
@@ -102,10 +103,10 @@ export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
     Effect.DIAMOND_STORM
   ],
   [Synergy.GHOST]: [
-    Effect.BAD_DREAMS,
-    Effect.PHANTOM_FORCE,
-    Effect.SHADOW_TAG,
-    Effect.CURSE
+    Effect.CURSE_OF_VULNERABILITY,
+    Effect.CURSE_OF_WEAKNESS,
+    Effect.CURSE_OF_TORMENT,
+    Effect.CURSE_OF_FATE
   ],
   [Synergy.FAIRY]: [
     Effect.AROMATIC_MIST,
@@ -142,5 +143,6 @@ export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
     Effect.RUN_AWAY,
     Effect.HUSTLE,
     Effect.BERSERK
-  ]
+  ],
+  [Synergy.AMORPHOUS]: [Effect.FLUID, Effect.SHAPELESS, Effect.ETHEREAL]
 })

@@ -1953,8 +1953,8 @@ export function displayAbility(
       const effect = scene.add.sprite(
         coordinates[0],
         coordinates[1],
-        "CURSE_EFFECT",
-        "0"
+        "status",
+        "CURSE_EFFECT/000.png"
       )
       effect.anims.play("CURSE_EFFECT")
       scene.tweens.add({
