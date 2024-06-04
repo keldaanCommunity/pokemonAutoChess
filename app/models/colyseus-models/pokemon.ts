@@ -13889,6 +13889,120 @@ export class Vikavolt extends Pokemon {
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
+export class ShellosWestSea extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.GROUND,
+    Synergy.AMORPHOUS
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.GASTRODON_WEST_SEA
+  hp = 120
+  atk = 8
+  def = 3
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.MUDDY_WATER
+  attackSprite = AttackSprite.WATER_MELEE
+  regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      regionSynergies.includes(Synergy.WATER) ||
+      regionSynergies.includes(Synergy.GROUND)
+    )
+  }
+}
+
+export class GastrodonWestSea extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.GROUND,
+    Synergy.AMORPHOUS
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 270
+  atk = 18
+  def = 5
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.MUDDY_WATER
+  attackSprite = AttackSprite.WATER_MELEE
+  regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      regionSynergies.includes(Synergy.WATER) ||
+      regionSynergies.includes(Synergy.GROUND)
+    )
+  }
+}
+
+export class ShellosEastSea extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.AQUATIC,
+    Synergy.ROCK,
+    Synergy.AMORPHOUS
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.GASTRODON_EAST_SEA
+  hp = 120
+  atk = 8
+  def = 3
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.ANCIENT_POWER
+  attackSprite = AttackSprite.WATER_MELEE
+  regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      (regionSynergies.includes(Synergy.AQUATIC) ||
+        regionSynergies.includes(Synergy.ROCK)) &&
+      !(
+        regionSynergies.includes(Synergy.GROUND) ||
+        regionSynergies.includes(Synergy.WATER)
+      )
+    )
+  }
+}
+
+export class GastrodonEastSea extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.AQUATIC,
+    Synergy.ROCK,
+    Synergy.AMORPHOUS
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 270
+  atk = 18
+  def = 5
+  speDef = 6
+  maxPP = 80
+  range = 1
+  skill = Ability.ANCIENT_POWER
+  attackSprite = AttackSprite.WATER_MELEE
+  regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      (regionSynergies.includes(Synergy.AQUATIC) ||
+        regionSynergies.includes(Synergy.ROCK)) &&
+      !(
+        regionSynergies.includes(Synergy.GROUND) ||
+        regionSynergies.includes(Synergy.WATER)
+      )
+    )
+  }
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -14690,5 +14804,9 @@ export const PokemonClasses: Record<
   [Pkm.GARBODOR]: Garbodor,
   [Pkm.GRUBBIN]: Grubbin,
   [Pkm.CHARJABUG]: Charjabug,
-  [Pkm.VIKAVOLT]: Vikavolt
+  [Pkm.VIKAVOLT]: Vikavolt,
+  [Pkm.SHELLOS_WEST_SEA]: ShellosWestSea,
+  [Pkm.GASTRODON_WEST_SEA]: GastrodonWestSea,
+  [Pkm.SHELLOS_EAST_SEA]: ShellosEastSea,
+  [Pkm.GASTRODON_EAST_SEA]: GastrodonEastSea
 }

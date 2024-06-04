@@ -948,6 +948,27 @@ export function displayAbility(
         )
       break
 
+    case Ability.MUDDY_WATER:
+      addAbilitySprite(skill, coordinatesTarget, true)
+        .setScale(2)
+        .setOrigin(0.5, 1)
+      break
+
+    case Ability.ANCIENT_POWER: {
+      const rock = addAbilitySprite(skill, coordinates).setScale(2)
+      scene.tweens.add({
+        targets: rock,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 1000,
+        onComplete: () => {
+          rock.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.STEAM_ERUPTION:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break

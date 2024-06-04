@@ -19,9 +19,9 @@ import {
   PkmDuos,
   PkmFamily,
   PkmProposition,
-  getUnownsPoolPerStage,
   PkmRegionalVariants,
-  Unowns
+  Unowns,
+  getUnownsPoolPerStage
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
