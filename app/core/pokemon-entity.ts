@@ -1254,7 +1254,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             entity.name
           )
       )
-      const randomItem = pickRandomIn(values(target.items))
+      const randomItem = pickRandomIn(
+        values(target.items).filter((item) => item !== Item.COMFEY)
+      )
       if (floraSpawn && randomItem && floraSpawn.items.size < 3) {
         floraSpawn.items.add(randomItem)
         floraSpawn.simulation.applyItemEffect(floraSpawn, randomItem)
