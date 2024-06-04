@@ -3,6 +3,10 @@
  - Grubbin
  - Charjabug
  - Vikavolt
+ - Shellow West Sea
+ - Gastrodon West Sea
+ - Shellos East Sea
+ - Gastrodon East Sea
 
 
 # Changes to Pokemon & Abilities

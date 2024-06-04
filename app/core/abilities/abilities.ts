@@ -8922,6 +8922,9 @@ export class AncientPowerStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    const damage = pokemon.stars === 2 ? 80 : 40
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    pokemon.addAbilityPower(25, pokemon, 1, crit)
   }
 }
 
@@ -8933,7 +8936,28 @@ export class MuddyWaterStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
+    const cells = board.getCellsInFront(pokemon, target)
+    const damage = pokemon.stars === 2 ? 80 : 40
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: pokemon.skill,
+          targetX: cell.value.positionX,
+          targetY: cell.value.positionY
+        })
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        cell.value.status.triggerArmorReduction(4000, cell.value)
+        cell.value.status.triggerWound(4000, cell.value, pokemon)
+      }
+    })
   }
 }
 

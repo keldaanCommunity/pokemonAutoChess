@@ -13904,12 +13904,15 @@ export class ShellosWestSea extends Pokemon {
   speDef = 5
   maxPP = 100
   range = 1
-  skill = Ability.POLLEN_PUFF
+  skill = Ability.MUDDY_WATER
   attackSprite = AttackSprite.WATER_MELEE
   regional = true
   isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.WATER)
+    return (
+      regionSynergies.includes(Synergy.WATER) ||
+      regionSynergies.includes(Synergy.GROUND)
+    )
   }
 }
 
@@ -13927,12 +13930,15 @@ export class GastrodonWestSea extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.POLLEN_PUFF
+  skill = Ability.MUDDY_WATER
   attackSprite = AttackSprite.WATER_MELEE
   regional = true
   isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.WATER)
+    return (
+      regionSynergies.includes(Synergy.WATER) ||
+      regionSynergies.includes(Synergy.GROUND)
+    )
   }
 }
 
@@ -13949,14 +13955,21 @@ export class ShellosEastSea extends Pokemon {
   atk = 8
   def = 3
   speDef = 5
-  maxPP = 100
+  maxPP = 80
   range = 1
-  skill = Ability.POLLEN_PUFF
+  skill = Ability.ANCIENT_POWER
   attackSprite = AttackSprite.WATER_MELEE
   regional = true
   isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.AQUATIC)
+    return (
+      (regionSynergies.includes(Synergy.AQUATIC) ||
+        regionSynergies.includes(Synergy.ROCK)) &&
+      !(
+        regionSynergies.includes(Synergy.GROUND) ||
+        regionSynergies.includes(Synergy.WATER)
+      )
+    )
   }
 }
 
@@ -13972,17 +13985,23 @@ export class GastrodonEastSea extends Pokemon {
   atk = 18
   def = 5
   speDef = 6
-  maxPP = 100
+  maxPP = 80
   range = 1
-  skill = Ability.POLLEN_PUFF
+  skill = Ability.ANCIENT_POWER
   attackSprite = AttackSprite.WATER_MELEE
   regional = true
   isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.AQUATIC)
+    return (
+      (regionSynergies.includes(Synergy.AQUATIC) ||
+        regionSynergies.includes(Synergy.ROCK)) &&
+      !(
+        regionSynergies.includes(Synergy.GROUND) ||
+        regionSynergies.includes(Synergy.WATER)
+      )
+    )
   }
 }
-
 
 export const PokemonClasses: Record<
   Pkm,

@@ -949,7 +949,9 @@ export function displayAbility(
       break
 
     case Ability.MUDDY_WATER:
-      addAbilitySprite(skill, coordinates, true).setScale(2).setOrigin(0.5, 0)
+      addAbilitySprite(skill, coordinatesTarget, true)
+        .setScale(2)
+        .setOrigin(0.5, 1)
       break
 
     case Ability.ANCIENT_POWER: {
