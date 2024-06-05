@@ -7,7 +7,8 @@
  - Gastrodon West Sea
  - Shellos East Sea
  - Gastrodon East Sea
-
+ - Munna
+ - Musharna
 
 # Changes to Pokemon & Abilities
 

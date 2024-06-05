@@ -6583,6 +6583,47 @@ export class Wobbuffet extends Pokemon {
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
+export class Munna extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.FIELD,
+    Synergy.AMORPHOUS
+  ])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.MUSHARNA
+  hp = 80
+  atk = 8
+  def = 2
+  speDef = 2
+  maxPP = 80
+  range = 3
+  skill = Ability.MOON_DREAM
+  passive = Passive.DREAM_CATCHER
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
+
+export class Musharna extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.FIELD,
+    Synergy.AMORPHOUS
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 240
+  atk = 16
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 3
+  skill = Ability.MOON_DREAM
+  passive = Passive.DREAM_CATCHER
+  additional = true
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
+
 export class Archen extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.ROCK, Synergy.FLYING])
   rarity = Rarity.RARE
@@ -14808,5 +14849,7 @@ export const PokemonClasses: Record<
   [Pkm.SHELLOS_WEST_SEA]: ShellosWestSea,
   [Pkm.GASTRODON_WEST_SEA]: GastrodonWestSea,
   [Pkm.SHELLOS_EAST_SEA]: ShellosEastSea,
-  [Pkm.GASTRODON_EAST_SEA]: GastrodonEastSea
+  [Pkm.GASTRODON_EAST_SEA]: GastrodonEastSea,
+  [Pkm.MUNNA]: Munna,
+  [Pkm.MUSHARNA]: Musharna
 }

@@ -38,7 +38,7 @@ import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
-import { distanceC } from "../utils/distance"
+import { distanceC, distanceM } from "../utils/distance"
 import { clamp, max, min, roundTo2Digits } from "../utils/number"
 import { chance, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
@@ -740,6 +740,34 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.name === Pkm.MINIOR) {
       this.addAttackSpeed(4, this, 1, false)
+    }
+
+    if (this.passive === Passive.DREAM_CATCHER && target.status.sleep) {
+      const allies = board.cells.filter(
+        (p) => p && p.team === this.team
+      ) as PokemonEntity[]
+      const alliesHit = allies
+        .sort(
+          (a, b) =>
+            distanceM(
+              a.positionX,
+              a.positionY,
+              this.positionX,
+              this.positionY
+            ) -
+            distanceM(b.positionX, b.positionY, this.positionX, this.positionY)
+        )
+        .slice(0, 2)
+
+      alliesHit.forEach((ally) => {
+        ally.addShield(10, ally, 1, false)
+        ally.simulation.room.broadcast(Transfer.ABILITY, {
+          id: ally.simulation.id,
+          skill: Ability.MOON_DREAM,
+          positionX: ally.positionX,
+          positionY: ally.positionY
+        })
+      })
     }
 
     if (this.items.has(Item.UPGRADE)) {

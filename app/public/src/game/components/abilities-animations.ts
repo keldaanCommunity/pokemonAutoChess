@@ -969,6 +969,28 @@ export function displayAbility(
       break
     }
 
+    case Ability.MOON_DREAM: {
+      const aboveTargetCoordinates = transformAttackCoordinate(
+        positionX,
+        positionY,
+        flip
+      )
+      aboveTargetCoordinates[1] -= 100
+      const moon = addAbilitySprite(skill, aboveTargetCoordinates).setScale(1.5)
+      scene.tweens.add({
+        targets: moon,
+        scale: 0.5,
+        x: coordinates[0],
+        y: coordinates[1],
+        ease: "linear",
+        duration: 500,
+        onComplete: () => {
+          moon.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.STEAM_ERUPTION:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break

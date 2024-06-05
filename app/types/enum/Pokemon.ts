@@ -799,7 +799,9 @@ export enum Pkm {
   SHELLOS_WEST_SEA = "SHELLOS_WEST_SEA",
   GASTRODON_WEST_SEA = "GASTRODON_WEST_SEA",
   SHELLOS_EAST_SEA = "SHELLOS_EAST_SEA",
-  GASTRODON_EAST_SEA = "GASTRODON_EAST_SEA"
+  GASTRODON_EAST_SEA = "GASTRODON_EAST_SEA",
+  MUNNA = "MUNNA",
+  MUSHARNA = "MUSHARNA"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1601,7 +1603,10 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SHELLOS_WEST_SEA]: "0422",
   [Pkm.GASTRODON_WEST_SEA]: "0423",
   [Pkm.SHELLOS_EAST_SEA]: "0422-0001",
-  [Pkm.GASTRODON_EAST_SEA]: "0423-0001"}
+  [Pkm.GASTRODON_EAST_SEA]: "0423-0001",
+  [Pkm.MUNNA]: "0517",
+  [Pkm.MUSHARNA]: "0518"
+}
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.EGG]: Pkm.EGG,
@@ -2402,7 +2407,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SHELLOS_WEST_SEA]: Pkm.SHELLOS_WEST_SEA,
   [Pkm.GASTRODON_WEST_SEA]: Pkm.SHELLOS_WEST_SEA,
   [Pkm.SHELLOS_EAST_SEA]: Pkm.SHELLOS_EAST_SEA,
-  [Pkm.GASTRODON_EAST_SEA]: Pkm.SHELLOS_EAST_SEA}
+  [Pkm.GASTRODON_EAST_SEA]: Pkm.SHELLOS_EAST_SEA,
+  [Pkm.MUNNA]: Pkm.MUNNA,
+  [Pkm.MUSHARNA]: Pkm.MUNNA
+}
 
 export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
   [Pkm.RATTATA]: [Pkm.ALOLAN_RATTATA],
@@ -6554,6 +6562,16 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.GASTRODON_EAST_SEA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.MUNNA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.MUSHARNA]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot
