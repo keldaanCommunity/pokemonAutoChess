@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import {
   ILeaderboardBotInfo,
   ILeaderboardInfo
-} from "../../../../../models/colyseus-models/leaderboard-info"
+} from "../../../../../types/interfaces/LeaderboardInfo"
 import { useAppDispatch } from "../../../hooks"
 import { searchById } from "../../../stores/NetworkStore"
 import { getAvatarSrc } from "../../../utils"

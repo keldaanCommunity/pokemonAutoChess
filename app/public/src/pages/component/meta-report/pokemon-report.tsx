@@ -5,7 +5,8 @@ import {
   IPokemonsStatisticV2,
   fetchMetaPokemons
 } from "../../../../../models/mongo-models/pokemons-statistic-v2"
-import { EloRank, EloRankThreshold } from "../../../../../types/Config"
+import { EloRankThreshold } from "../../../../../types/Config"
+import { EloRank } from "../../../../../types/enum/EloRank"
 import { Rarity } from "../../../../../types/enum/Game"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import "./pokemon-report.css"
@@ -61,7 +62,7 @@ export function PokemonReport() {
         <select
           value={synergy}
           onChange={(e) => {
-            setSynergy(e.target.value as any)
+            setSynergy(e.target.value as Synergy | "all")
           }}
         >
           <option value={"all"}>
@@ -75,7 +76,7 @@ export function PokemonReport() {
         </select>
         <select
           value={rarity}
-          onChange={(e) => setRarity(e.target.value as any)}
+          onChange={(e) => setRarity(e.target.value as Rarity | "all")}
         >
           <option value={"all"}>
             {t("rarity_label")}: {t("ALL")}
