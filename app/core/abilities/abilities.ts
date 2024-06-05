@@ -8977,7 +8977,7 @@ export class MoonDreamStrategy extends AbilityStrategy {
     const count = [2, 3, 4][pokemon.stars - 1] ?? 4
 
     const allies = board.cells.filter(
-      (p) => p && p.team === pokemon.team
+      (p) => p && p.team === pokemon.team && p.id !== pokemon.id
     ) as PokemonEntity[]
     const alliesHit = allies
       .sort(

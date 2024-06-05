@@ -744,7 +744,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.passive === Passive.DREAM_CATCHER && target.status.sleep) {
       const allies = board.cells.filter(
-        (p) => p && p.team === this.team
+        (p) => p && p.team === this.team && p.id !== this.id
       ) as PokemonEntity[]
       const alliesHit = allies
         .sort(
