@@ -71,4 +71,4 @@
 
 # Misc
 
--
+- Ultra ball ranked matches are back, twice per day at 10am and 10pm CET
