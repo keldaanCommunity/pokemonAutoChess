@@ -352,7 +352,8 @@
     "SHADOW_PUNCH": "Shadow Punch",
     "MAGNET_BOMB": "Magnet Bomb",
     "MUDDY_WATER": "Muddy Water",
-    "ANCIENT_POWER": "Ancient Power"
+    "ANCIENT_POWER": "Ancient Power",
+    "MOON_DREAM": "Moon Dream"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1154,7 +1155,9 @@
     "SHELLOS_WEST_SEA": "Shellos (West Sea)",
     "GASTRODON_WEST_SEA": "Gastrodon (West Sea)",
     "SHELLOS_EAST_SEA": "Shellos (East Sea)",
-    "GASTRODON_EAST_SEA": "Gastrodon (East Sea)"
+    "GASTRODON_EAST_SEA": "Gastrodon (East Sea)",
+    "MUNNA": "Munna",
+    "MUSHARNA": "Musharna"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1487,7 +1490,8 @@
     "GUNK_SHOT": "Deal [50,100,SP] SPECIAL to the target, inflicting POISONNED for [2,4,SP] seconds",
     "MAGNET_BOMB": "A magnetic bomb dealing [20,40,80,SP] SPECIAL to target, [10,20,40,SP] SPECIAL to adjacent enemies and attracting distant enemies",
     "MUDDY_WATER": "Spurts muddy water at up to 3 targets in front of itself, dealing [40,80,SP] SPECIAL, WOUND and ARMOR_REDUCTION for 4 seconds",
-    "ANCIENT_POWER": "Launches rocks at the target, dealing [50,100,SP] SPECIAL. Raises the user's AP by [25,SP]"
+    "ANCIENT_POWER": "Launches rocks at the target, dealing [50,100,SP] SPECIAL. Raises the user's AP by [25,SP]",
+    "MOON_DREAM": "Target falls SLEEP for [3,6,9] s and grants [10,20,30,SP] SHIELD to the caster's [3,4,5] closest allies"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2009,7 +2013,8 @@
     "MOTHIM": "Mothim gets the synergies of your regional Burmy form",
     "PSYDUCK": "When CONFUSION, gain 100% AP",
     "BLOODMOON": "Changes form during BLOODMOON",
-    "RECYCLE": "Feed it with berries to gain 10 HP, or with basic components for 25 HP + item stats. Feed it with artificial items to gain 50 HP + item stats, and get TRASH in return"
+    "RECYCLE": "Feed it with berries to gain 10 HP, or with basic components for 25 HP + item stats. Feed it with artificial items to gain 50 HP + item stats, and get TRASH in return",
+    "DREAM_CATCHER": "If the target of this pokémon is SLEEP, its attacks give 10 SHIELD to the 3 closest allies"
   },
   "stat": {
     "ATK": "Attack",

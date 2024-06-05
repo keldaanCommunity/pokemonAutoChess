@@ -8961,6 +8961,56 @@ export class MuddyWaterStrategy extends AbilityStrategy {
   }
 }
 
+export class MoonDreamStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const duration =
+      pokemon.stars === 1 ? 3000 : pokemon.stars === 2 ? 6000 : 9000
+
+    const shield = [10, 20, 30][pokemon.stars - 1] ?? 30
+    const count = [2, 3, 4][pokemon.stars - 1] ?? 4
+
+    const allies = board.cells.filter(
+      (p) => p && p.team === pokemon.team
+    ) as PokemonEntity[]
+    const alliesHit = allies
+      .sort(
+        (a, b) =>
+          distanceM(
+            a.positionX,
+            a.positionY,
+            pokemon.positionX,
+            pokemon.positionY
+          ) -
+          distanceM(
+            b.positionX,
+            b.positionY,
+            pokemon.positionX,
+            pokemon.positionY
+          )
+      )
+      .slice(0, count)
+
+    alliesHit.forEach((ally) => {
+      ally.addShield(shield, pokemon, 1, crit)
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: Ability.MOON_DREAM,
+        positionX: ally.positionX,
+        positionY: ally.positionY
+      })
+    })
+
+    target.status.triggerSleep(duration, target)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -9295,5 +9345,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SHADOW_PUNCH]: new ShadowPunchStrategy(),
   [Ability.MAGNET_BOMB]: new MagnetBombStrategy(),
   [Ability.MUDDY_WATER]: new MuddyWaterStrategy(),
-  [Ability.ANCIENT_POWER]: new AncientPowerStrategy()
+  [Ability.ANCIENT_POWER]: new AncientPowerStrategy(),
+  [Ability.MOON_DREAM]: new MoonDreamStrategy()
 }
