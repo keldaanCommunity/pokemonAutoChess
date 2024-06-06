@@ -1,4 +1,4 @@
-import { MapSchema, ArraySchema, Schema, type } from "@colyseus/schema"
+import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
 import { nanoid } from "nanoid"
 import { GameUser } from "../../models/colyseus-models/game-user"
 import Message from "../../models/colyseus-models/message"
@@ -39,7 +39,8 @@ export default class PreparationState
     gameMode: GameMode
   }) {
     super()
-    this.ownerId = params.gameMode === GameMode.NORMAL ? params.ownerId ?? "" : ""
+    this.ownerId =
+      params.gameMode === GameMode.NORMAL ? params.ownerId ?? "" : ""
     this.name = params.roomName
     this.gameStarted = false
     this.ownerName = ""
