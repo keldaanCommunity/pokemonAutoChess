@@ -12,6 +12,7 @@
 
 # Changes to Pokemon & Abilities
 
+- Nerf Hydreigon Dark Harvest: Special damage ~~10/20/40~~ 8/16/24
 - Buff Haxorus: HP ~~180~~ 200
 - Nerf Crabrawler: HP ~~110~~ 90, Attack ~~11~~ 9, Def/Spedef ~~3~~ 2
 - New ability for Magnemite line: Magnet bomb
