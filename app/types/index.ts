@@ -7,7 +7,8 @@ import Count from "../models/colyseus-models/count"
 import ExperienceManager from "../models/colyseus-models/experience-manager"
 import { IPokemonRecord } from "../models/colyseus-models/game-record"
 import HistoryItem from "../models/colyseus-models/history-item"
-import { ILeaderboardInfo } from "../models/colyseus-models/leaderboard-info"
+import { ILeaderboardInfo } from "../types/interfaces/LeaderboardInfo"
+import { ISpecialGamePlanned } from "../types/interfaces/Lobby"
 import LobbyUser from "../models/colyseus-models/lobby-user"
 import Message from "../models/colyseus-models/message"
 import Player from "../models/colyseus-models/player"
@@ -274,8 +275,7 @@ export interface ICustomLobbyState extends Schema {
   leaderboard: ILeaderboardInfo[]
   botLeaderboard: ILeaderboardInfo[]
   levelLeaderboard: ILeaderboardInfo[]
-  nextSpecialGameDate: string
-  nextSpecialGameMode: GameMode | ""
+  nextSpecialGame: ISpecialGamePlanned
   tournaments: ArraySchema<TournamentSchema>
 }
 

@@ -13,3 +13,4 @@ export interface ILeaderboardBotInfo {
   value: number
   author: string
 }
+  

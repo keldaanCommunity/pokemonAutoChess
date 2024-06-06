@@ -1,4 +1,5 @@
 import { Emotion } from "."
+import { EloRank } from "./enum/EloRank"
 import { AttackType, Rarity, Stat } from "./enum/Game"
 import { Item } from "./enum/Item"
 import { Pkm, PkmDuo, PkmProposition } from "./enum/Pokemon"
@@ -350,14 +351,6 @@ export const ItemProposalStages = [3, 15]
 export const AdditionalPicksStages = [5, 8, 11]
 export const PortalCarouselStages = [10, 20]
 
-export enum EloRank {
-  BEGINNER = "BEGINNER",
-  POKEBALL = "POKEBALL",
-  GREATBALL = "GREATBALL",
-  ULTRABALL = "ULTRABALL",
-  MASTERBALL = "MASTERBALL"
-}
-
 export const EloRankThreshold: { [key in EloRank]: number } = {
   [EloRank.BEGINNER]: 0,
   [EloRank.POKEBALL]: 900,
@@ -678,7 +671,8 @@ export const DTEF_TILESET_HEIGHT = 8
 export const DTEF_TILESET_TILE_WIDTH = 24
 
 export const SCRIBBLE_LOBBY_CRON = "0 0 0-20/4 * * *" // every four hours from 00h to 20h
-export const RANKED_LOBBY_CRON = "0 0 2-22/4 * * *" // every four hours from 2h to 22h
+export const GREATBALL_RANKED_LOBBY_CRON = "0 0 2,6,14,18 * * *" // every four hours from 2h to 22h
+export const ULTRABALL_RANKED_LOBBY_CRON = "0 0 10,22 * * *" // every four hours from 2h to 22h
 
 export const DUST_PER_BOOSTER = 50
 export const DUST_PER_SHINY = 250

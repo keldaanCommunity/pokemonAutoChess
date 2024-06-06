@@ -14,7 +14,7 @@ import { PastebinAPI } from "pastebin-ts/dist/api"
 import {
   ILeaderboardBotInfo,
   ILeaderboardInfo
-} from "../models/colyseus-models/leaderboard-info"
+} from "../types/interfaces/LeaderboardInfo"
 import Message from "../models/colyseus-models/message"
 import { TournamentSchema } from "../models/colyseus-models/tournament"
 import BannedUser from "../models/mongo-models/banned-user"
@@ -23,9 +23,10 @@ import ChatV2 from "../models/mongo-models/chat-v2"
 import Tournament from "../models/mongo-models/tournament"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { Emotion, IPlayer, Role, Title, Transfer } from "../types"
+import { EloRank } from "../types/enum/EloRank"
 import {
-  EloRank,
-  RANKED_LOBBY_CRON,
+  GREATBALL_RANKED_LOBBY_CRON,
+  ULTRABALL_RANKED_LOBBY_CRON,
   SCRIBBLE_LOBBY_CRON,
   TOURNAMENT_CLEANUP_DELAY,
   TOURNAMENT_REGISTRATION_TIME
@@ -119,7 +120,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
   async onCreate(): Promise<void> {
     logger.info("create lobby", this.roomId)
     this.setState(new LobbyState())
-    this.state.getNextSpecialGameDate()
+    this.state.getNextSpecialGame()
     this.autoDispose = false
     this.listing.unlisted = true
 
@@ -703,9 +704,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       start: true
     })
 
-    const rankedLobbyJob = CronJob.from({
-      cronTime: RANKED_LOBBY_CRON,
-      //cronTime: "0 0/1 * * * *", // DEBUG: trigger every minute
+    const greatBallRankedLobbyJob = CronJob.from({
+      cronTime: GREATBALL_RANKED_LOBBY_CRON,
       timeZone: "Europe/Paris",
       onTick: () => {
         this.dispatcher.dispatch(new OpenSpecialGameCommand(), {
@@ -716,9 +716,20 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       start: true
     })
 
+    const ultraBallRankedLobbyJob = CronJob.from({
+      cronTime: ULTRABALL_RANKED_LOBBY_CRON,
+      timeZone: "Europe/Paris",
+      onTick: () => {
+        this.dispatcher.dispatch(new OpenSpecialGameCommand(), {
+          gameMode: GameMode.RANKED,
+          minRank: EloRank.ULTRABALL
+        })
+      },
+      start: true
+    })
+
     const scribbleLobbyJob = CronJob.from({
       cronTime: SCRIBBLE_LOBBY_CRON,
-      //cronTime: "0 0/1 * * * *", // DEBUG: trigger every minute //TEMP
       timeZone: "Europe/Paris",
       onTick: () => {
         this.dispatcher.dispatch(new OpenSpecialGameCommand(), {

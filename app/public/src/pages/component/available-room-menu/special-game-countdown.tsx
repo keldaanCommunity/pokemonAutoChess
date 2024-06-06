@@ -1,6 +1,6 @@
 import { t } from "i18next"
 import React, { useEffect, useState } from "react"
-import { EloRank } from "../../../../../types/Config"
+import { EloRank } from "../../../../../types/enum/EloRank"
 import { GameMode } from "../../../../../types/enum/Game"
 import { useAppSelector } from "../../../hooks"
 import { formatTimeout } from "../../utils/date"
@@ -12,15 +12,11 @@ export function SpecialGameCountdown() {
     return () => clearInterval(interval)
   }, [])
 
-  const nextSpecialGameDate = useAppSelector(
-    (state) => state.lobby.nextSpecialGameDate
-  )
-  const nextSpecialGameMode = useAppSelector(
-    (state) => state.lobby.nextSpecialGameMode
-  )
+  const nextSpecialGame = useAppSelector((state) => state.lobby.nextSpecialGame)
+  if (nextSpecialGame === null) return null
 
   let specialGameIcon, specialGameName
-  if (nextSpecialGameMode === GameMode.RANKED) {
+  if (nextSpecialGame.mode === GameMode.RANKED) {
     specialGameName = `${t("elorank." + EloRank.GREATBALL)} ${t(
       "ranked_match"
     )}`
@@ -32,7 +28,7 @@ export function SpecialGameCountdown() {
         src={"/assets/ranks/" + EloRank.GREATBALL + ".svg"}
       />
     )
-  } else if (nextSpecialGameMode === GameMode.SCRIBBLE) {
+  } else if (nextSpecialGame.mode === GameMode.SCRIBBLE) {
     specialGameName = t("smeargle_scribble")
     specialGameIcon = (
       <img
@@ -46,13 +42,13 @@ export function SpecialGameCountdown() {
   }
 
   let timeUntilNext = -1
-  if (nextSpecialGameDate) {
+  if (nextSpecialGame.date) {
     timeUntilNext = Math.floor(
-      (new Date(nextSpecialGameDate).getTime() - clock.getTime()) / 1000
+      (new Date(nextSpecialGame.date).getTime() - clock.getTime()) / 1000
     )
   }
 
-  return nextSpecialGameDate && nextSpecialGameMode && timeUntilNext > 0 ? (
+  return nextSpecialGame.date && nextSpecialGame.mode && timeUntilNext > 0 ? (
     <p className="special-game-announcement">
       {specialGameIcon} {specialGameName}
       <span>{formatTimeout(timeUntilNext)}</span>
