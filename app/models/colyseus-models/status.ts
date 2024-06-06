@@ -7,7 +7,6 @@ import { Effect } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { max } from "../../utils/number"
 import { chance } from "../../utils/random"
@@ -391,11 +390,13 @@ export default class Status extends Schema implements IStatus {
         positionX: pkm.positionX,
         positionY: pkm.positionY
       })
-      const crit = pkm.items.has(Item.REAPER_CLOTH) ? chance(pkm.critChance) : false
+      const crit = pkm.items.has(Item.REAPER_CLOTH)
+        ? chance(pkm.critChance)
+        : false
       board.getAdjacentCells(pkm.positionX, pkm.positionY).forEach((cell) => {
         if (cell?.value && cell.value.team !== pkm.team) {
           const darkHarvestDamage =
-            ([10, 20, 40][pkm.stars - 1] ?? 40) *
+            ([8, 16, 24][pkm.stars - 1] ?? 24) *
             (1 + pkm.ap / 100) *
             (crit ? pkm.critPower : 1)
           cell.value.handleDamage({
