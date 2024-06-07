@@ -666,8 +666,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       })
 
       if (closestAlly != null) {
-        const shield = Math.round(totalDamage * 0.25)
-        ;(closestAlly as PokemonEntity).addShield(shield, this, 0, false)
+        const closestAllyFound = closestAlly as PokemonEntity // typescript is dumb
+        const shield = Math.round(totalDamage * 0.33)
+        closestAllyFound.addShield(shield, this, 0, false)
       }
     }
 

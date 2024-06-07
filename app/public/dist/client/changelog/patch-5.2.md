@@ -56,7 +56,7 @@
 
 # Changes to Items
 
--
+- Buff Soothe Bell: ~~25~~ 33% of damage inflicted as shield
 
 # Gameplay
 

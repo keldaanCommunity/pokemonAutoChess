@@ -1860,7 +1860,7 @@
     "SMOKE_BALL": "Once below 33% max HP, drop the smoke ball and jump to a cell away. Every adjacent enemy is PARALYSIS for 3 seconds, and the smoke reduce the precision of all pokemons inside by 50%.",
     "XRAY_VISION": "+50% ATK_SPEED. The holder attacks can no longer miss.",
     "RAZOR_FANG": "+100% CRIT_POWER. Critical hits apply ARMOR_REDUCTION for 4 seconds.",
-    "SOOTHE_BELL": "The holder attacks give 25% of damage dealt as SHIELD to the ally closest to the target",
+    "SOOTHE_BELL": "The holder attacks give 33% of damage dealt as SHIELD to the ally closest to the target",
     "CHOICE_SCARF": "On hit deal 50% basic attack damage to an adjacent enemy",
     "FIRE_GEM": "Attacks do double damage on SHIELD and deal 8 % of target max HP as additional damage",
     "DEFENSIVE_RIBBON": "When the holder takes damage, gain 1 stack. Every 2 stacks, the holder gains +1 DEF, +1 ATK and +5% ATK_SPEED (max 20 stacks)",
