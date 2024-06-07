@@ -365,9 +365,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     apBoost: number,
     crit: boolean
   ) {
-    value = Math.round(
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    )
+    value = value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
 
     // for every 5% crit chance > 100, +0.1 crit power
     this.critChance += value
@@ -385,7 +383,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     apBoost: number,
     crit: boolean
   ) {
-    value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
+    value = value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     
     this.critPower = Math.max(0, roundTo2Digits(this.critPower + value))
   }
@@ -461,9 +459,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     apBoost: number,
     crit: boolean
   ) {
-    value = Math.round(
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    )
+    value = value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     const currentAtkSpeedBonus = 100 * (this.atkSpeed / 0.75 - 1)
     const atkSpeedBonus = currentAtkSpeedBonus + value
     this.atkSpeed = clamp(
