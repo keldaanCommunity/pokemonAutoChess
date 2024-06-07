@@ -176,9 +176,20 @@ export class ItemEvolutionRule extends EvolutionRule {
   }
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
-    return values(pokemon.items).some((item) =>
+    const itemEvolution = values(pokemon.items).find((item) =>
       this.itemsTriggeringEvolution.includes(item)
     )
+
+    let pokemonEvolutionName = pokemon.evolution
+    if (this.divergentEvolution && itemEvolution) {
+      pokemonEvolutionName = this.divergentEvolution(
+        pokemon,
+        player,
+        itemEvolution
+      )
+    }
+
+    return itemEvolution != null && pokemonEvolutionName !== pokemon.name
   }
 
   evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
