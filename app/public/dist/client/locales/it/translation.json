@@ -1333,7 +1333,7 @@
     "SHELL_BELL": "Il possessore guarisce per il 33% di tutti i danni inflitti",
     "LUCKY_EGG": "+40% AP per detentore e alleati adiacenti nella stessa fila",
     "AQUA_EGG": "Il possessore guadagna +50 PP iniziale e recupera 20 PP dopo aver lanciato la sua abilità",
-    "BLUE_ORB": "Ogni terzo attacco del possessore scatena una catena di fulmini che rimbalza su 2 nemici, bruciando 20 PP",
+    "BLUE_ORB": "Ogni terzo attacco del portatore scatena una catena di fulmini che rimbalza sui 3 nemici vicini, infliggendo 10 SPECIAL e bruciando 20 PP",
     "SCOPE_LENS": "Guadagna il 25% di CRIT_CHANCE. I colpi critici rubano 15 PP al bersaglio.",
     "STAR_DUST": "Dopo aver lanciato l'abilità, ottieni il 60% del PP massimo come SHIELD",
     "GREEN_ORB": "Il possessore e gli alleati adiacenti recuperano il 5% dei loro HP massimi ogni secondo",

@@ -1809,7 +1809,7 @@
     "SHELL_BELL": "Le porteur se soigne d'un montant équivalent à 33% de tous les dégâts infligés",
     "LUCKY_EGG": "+40% AP pour le porteur et les alliés adjacents dans la même ligne",
     "AQUA_EGG": "Le détenteur gagne +50 PP de départ et regagne 20 PP après avoir lancé sa capacité",
-    "BLUE_ORB": "Chaque troisième attaque du détenteur libère une chaîne d'éclairs qui rebondit sur 2 ennemis, brûlant 20 PP",
+    "BLUE_ORB": "Chaque troisième attaque du porteur libère une chaîne d'éclairs qui rebondit sur les 3 ennemis les plus proches, infligeant 10 SPECIAL et retirant 20 PP",
     "SCOPE_LENS": "Gagne 25 % de CRIT_CHANCE. Les coups critiques volent 15 PP à la cible.",
     "STAR_DUST": "Après avoir lancé la capacité, gagne 60% des PP max en tant que SHIELD",
     "GREEN_ORB": "Le porteur et les alliés adjacents regagnent 5% de leurs HP max chaque seconde",

@@ -537,15 +537,54 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (this.count.staticHolderCount > 2) {
         this.count.staticHolderCount = 0
         // eslint-disable-next-line no-unused-vars
-        let c = 2
-        board.forEach((x, y, tg) => {
-          if (tg && this.team != tg.team && c > 0) {
-            tg.count.staticCount++
+
+        const nbBounces = 3
+        const closestEnemies = new Array<PokemonEntity>()
+        board.forEach(
+          (x: number, y: number, enemy: PokemonEntity | undefined) => {
+            if (enemy && this.team !== enemy.team) {
+              closestEnemies.push(enemy)
+            }
+          }
+        )
+        closestEnemies.sort((a, b) => {
+          const distanceA = distanceC(
+            a.positionX,
+            a.positionY,
+            this.positionX,
+            this.positionY
+          )
+          const distanceB = distanceC(
+            b.positionX,
+            b.positionY,
+            this.positionX,
+            this.positionY
+          )
+          return distanceA - distanceB
+        })
+
+        let previousTg: PokemonEntity = this
+        let tg: PokemonEntity | undefined = target
+
+        for (let i = 0; i < nbBounces; i++) {
+          tg = closestEnemies[i]
+          if (tg) {
+            this.simulation.room.broadcast(Transfer.ABILITY, {
+              id: this.simulation.id,
+              skill: "LINK_CABLE_link",
+              positionX: previousTg.positionX,
+              positionY: previousTg.positionY,
+              targetX: tg.positionX,
+              targetY: tg.positionY
+            })
+            tg.handleSpecialDamage(10, board, AttackType.SPECIAL, this, false)
             tg.addPP(-20, this, 0, false)
             tg.count.manaBurnCount++
-            c--
+            previousTg = tg
+          } else {
+            break
           }
-        })
+        }
       }
     }
 

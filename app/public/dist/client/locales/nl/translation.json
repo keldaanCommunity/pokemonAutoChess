@@ -1313,7 +1313,7 @@
     "SHELL_BELL": "Holder geneest voor 33% van alle toegebrachte schade",
     "LUCKY_EGG": "+40% AP voor houder en aangrenzende bondgenoten in dezelfde rij",
     "AQUA_EGG": "De houder krijgt +50 start-PP en krijgt 20 PP terug na het casten van zijn vaardigheid",
-    "BLUE_ORB": "Elke derde aanval van de houder ontketent een kettingbliksem die naar 2 vijanden stuitert en 20 PP verbrandt",
+    "BLUE_ORB": "Elke derde aanval van de houder ontketent een kettingbliksem die terugkaatst naar de 3 sluitende vijanden, wat 10 SPECIAL oplevert en 20 PP verbrandt",
     "SCOPE_LENS": "Wint 25% CRIT_CHANCE. Critical hits stelen 15 PP van het doelwit.",
     "STAR_DUST": "Krijg na het casten 60% van de maximale PP als SHIELD",
     "GREEN_ORB": "Houder en aangrenzende bondgenoten krijgen elke seconde 5% van hun maximale HP terug",

@@ -57,6 +57,7 @@
 # Changes to Items
 
 - Buff Soothe Bell: ~~25~~ 33% of damage inflicted as shield
+- Changed Blue Orb: the chain lightning now targets the 3 closest enemies, and inflicts 10 special damage in addition to the mana burn
 
 # Gameplay
 
