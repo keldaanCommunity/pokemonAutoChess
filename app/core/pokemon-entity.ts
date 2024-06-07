@@ -15,6 +15,7 @@ import {
   Transfer
 } from "../types"
 import {
+  ARMOR_FACTOR,
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER,
   MANA_SCARF_MANA,
@@ -290,7 +291,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attackType === AttackType.SPECIAL
       ) {
         attacker.handleDamage({
-          damage: Math.round(0.5 * specialDamage),
+          damage: Math.round(specialDamage / (1 + ARMOR_FACTOR * this.speDef)),
           board,
           attackType: AttackType.SPECIAL,
           attacker: this,

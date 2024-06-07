@@ -1329,7 +1329,7 @@
     "UPGRADE": "Gli attacchi riusciti garantiscono +4% di bonus ATK_SPEED per il resto del combattimento",
     "REAPER_CLOTH": "Gli incantesimi detentori possono colpire in modo critico",
     "POKEMONOMICON": "Quando il possessore infligge SPECIAL, brucia e ferisce il bersaglio per 3 secondi",
-    "POWER_LENS": "Il 50% dello SPECIAL in entrata viene distribuito anche all'attaccante",
+    "POWER_LENS": "La quantità di SPECIAL ridotta da SPE_DEF viene inflitta all'attaccante",
     "SHELL_BELL": "Il possessore guarisce per il 33% di tutti i danni inflitti",
     "LUCKY_EGG": "+40% AP per detentore e alleati adiacenti nella stessa fila",
     "AQUA_EGG": "Il possessore guadagna +50 PP iniziale e recupera 20 PP dopo aver lanciato la sua abilità",

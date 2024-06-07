@@ -1805,7 +1805,7 @@
     "UPGRADE": "Les attaques réussies confèrent +4 % de bonus ATK_SPEED pour le reste du combat",
     "REAPER_CLOTH": "Les capacités du détenteur peuvent infliger des coups critiques",
     "POKEMONOMICON": "Lorsque le porteur inflige des SPECIAL, il inflige également BURN et WOUND à la cible pendant 3 secondes",
-    "POWER_LENS": "50 % des SPECIAL entrants sont également infligés à l'attaquant",
+    "POWER_LENS": "Le montant de SPECIAL reçus réduits par la SPE_DEF est infligé à l'attaquant",
     "SHELL_BELL": "Le porteur se soigne d'un montant équivalent à 33% de tous les dégâts infligés",
     "LUCKY_EGG": "+40% AP pour le porteur et les alliés adjacents dans la même ligne",
     "AQUA_EGG": "Le détenteur gagne +50 PP de départ et regagne 20 PP après avoir lancé sa capacité",

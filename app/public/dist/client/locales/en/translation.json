@@ -1848,7 +1848,7 @@
     "UPGRADE": "Successful attacks grant +4% bonus ATK_SPEED for the rest of combat",
     "REAPER_CLOTH": "The holder spells can critically strike",
     "POKEMONOMICON": "When the holder deals SPECIAL, they BURN and WOUND the target for 3 seconds",
-    "POWER_LENS": "50% of incoming SPECIAL is also dealt to the attacker",
+    "POWER_LENS": "The amount of SPECIAL reduced by SPE_DEF is inflicted back to the attacker",
     "SHELL_BELL": "Holder heals for 33% of all damages inflicted",
     "LUCKY_EGG": "+40% AP for holder and adjacent allies in the same row",
     "AQUA_EGG": "The holder gains +50 starting PP and regains 20 PP after casting its ability",

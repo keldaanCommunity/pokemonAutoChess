@@ -1825,7 +1825,7 @@
     "UPGRADE": "Los ataques exitosos otorgan +4% de bonificación de ATK_SPEED por el resto del combate",
     "REAPER_CLOTH": "Los hechizos del usuario pueden golpear críticamente",
     "POKEMONOMICON": "Cuando el poseedor inflige SPECIAL, quema y hiere al objetivo durante 3 segundos.",
-    "POWER_LENS": "El 50% del SPECIAL entrante también se reparte al atacante.",
+    "POWER_LENS": "La cantidad de SPECIAL reducida en SPE_DEF se devuelve al atacante.",
     "SHELL_BELL": "El usuario cura el 33% de todos los daños infligidos.",
     "LUCKY_EGG": "+40% AP para el poseedor y aliados adyacentes en la misma fila",
     "AQUA_EGG": "El poseedor gana +50 PP inicial y recupera 20 PP después de lanzar su habilidad",

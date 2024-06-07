@@ -1708,7 +1708,7 @@
     "UPGRADE": "Erfolgreiche Angriffe gewähren dem Pokémon +4% ATK_SPEED für den Rest des Kampfes ",
     "REAPER_CLOTH": "Die Fähigkeiten dieses Pokémons können kritisch treffen.",
     "POKEMONOMICON": "Wenn das Pokémon SPECIAL verursacht, fügt es dem Ziel 3 Sekunden lang BURN and WOUND zu",
-    "POWER_LENS": "50% des erlittenen SPECIAL, werden auch dem Angreifer zugefügt",
+    "POWER_LENS": "Der durch SPE_DEF reduzierte SPECIAL Wert wird dem Angreifer wieder zugefügt.",
     "SHELL_BELL": "Das Pokémon heilt sich um 33% des verursachten Schadens",
     "LUCKY_EGG": "+40% AP für das Pokémon und angrenzende Verbündete in der selben Reihe",
     "AQUA_EGG": "Der Besitzer erhält +50 PP zu Beginn und 20 PP zurück, nachdem er seine Fähigkeit gewirkt hat",
