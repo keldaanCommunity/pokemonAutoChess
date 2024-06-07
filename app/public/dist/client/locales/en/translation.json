@@ -1822,7 +1822,10 @@
     "EXP_SHARE": "Exp. Share",
     "METEORITE": "Meteorite",
     "BERRY_JUICE": "Berry Juice",
-    "TRASH": "Trash"
+    "TRASH": "Trash",
+    "DYNAMAX_BAND": "Dynamax Band",
+    "SUPER_ROD": "Super Rod",
+    "SHINY_STONE": "Shiny Stone"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -1914,7 +1917,10 @@
     "EXP_SHARE": "Get the best ATK, DEF and SPE_DEF values of adjacent allies in the same row",
     "METEORITE": "A meteorite that seems to interact with Deoxys. It continues to give off a faint glow and is slightly warm to the touch.",
     "BERRY_JUICE": "Consumed once below 50% HP, restore to max HP",
-    "TRASH": "The remains of an artificial item. It does nothing"
+    "TRASH": "The remains of an artificial item. It does nothing",
+    "DYNAMAX_BAND": "At the start of the fight, raise max HP by 100%.",
+    "SUPER_ROD": "Every round, gain a Pokémon that matches your top synergy. When used on a Pokémon, get back all held items in your player inventory",
+    "SHINY_STONE": "Gives Light synergy and spawn a second light spot on the holder's cell"
   },
   "passive_description": {
     "NONE": "No passive",
@@ -2596,6 +2602,7 @@
   "berries": "Berries",
   "artificial_items": "Artificial",
   "special_items": "Special Items",
+  "shiny_items": "Shiny Items",
   "item_recipes": "Item Recipes",
   "news": "News",
   "patch_notes": "Patch Notes",
@@ -2927,7 +2934,7 @@
     "disconnection_time": "Players disconnected for more than 3 minutes are kicked out of the game. If it happens before stage 6, they won't lose Elo.",
     "translation_project": "Translations in game are managed by the community ! Check on Discord if you want to contribute.",
     "discord": "Join our Discord to meet the community! Link in the side menu",
-    "tipeee": "This game has no monetization or ads and only rely on your donations. Thanks to all the tippers ❤",
+    "tipeee": "This game has no monetization nor ads and only relies on your donations. Thanks to all the tippers ❤",
     "bug_report": "You found a bug ? Go on Discord and report it in #bug-report channel.",
     "moderation": "If you witness bad behavior on the game, take a screenshot and report it to a moderator on Discord.",
     "berry_tree": "Playing Grass ? Don't forget to take care of the berry tree over your character.",

@@ -90,7 +90,10 @@ export enum Item {
   EXP_SHARE = "EXP_SHARE",
   METEORITE = "METEORITE",
   BERRY_JUICE = "BERRY_JUICE",
-  TRASH = "TRASH"
+  TRASH = "TRASH",
+  DYNAMAX_BAND = "DYNAMAX_BAND",
+  SHINY_STONE = "SHINY_STONE",
+  SUPER_ROD = "SUPER_ROD"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -200,6 +203,8 @@ export const ArtificialItems: Item[] = [
   Item.METRONOME,
   Item.BIG_NUGGET
 ]
+
+export const ShinyItems: Item[] = [Item.DYNAMAX_BAND, Item.SHINY_STONE]
 
 export const CraftableItems: Item[] = Object.keys(ItemRecipe) as Item[]
 

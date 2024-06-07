@@ -453,6 +453,10 @@ export default class Simulation extends Schema implements ISimulation {
     if (item === Item.FLUFFY_TAIL) {
       pokemon.status.triggerRuneProtect(60000)
     }
+
+    if (item === Item.DYNAMAX_BAND) {
+      pokemon.addMaxHP(pokemon.hp)
+    }
   }
 
   applySynergyEffects(pokemon: PokemonEntity) {

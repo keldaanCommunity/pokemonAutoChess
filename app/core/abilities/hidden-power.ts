@@ -162,22 +162,8 @@ export class HiddenPowerFStrategy extends HiddenPowerStrategy {
 
     if (player) {
       for (let i = 0; i < nbFishes; i++) {
-        const pkm = unown.simulation.room.state.shop.fishPokemon(
-          player,
-          fishingLevel
-        )
-        const fish = PokemonFactory.createPokemonFromName(pkm, player)
-        const x = getFirstAvailablePositionInBench(player.board)
-        if (x !== undefined) {
-          fish.positionX = x
-          fish.positionY = 0
-          fish.action = PokemonActionState.FISH
-          player.board.set(fish.id, fish)
-          unown.simulation.room.checkEvolutionsAfterPokemonAcquired(player.id)
-          unown.simulation.room.clock.setTimeout(() => {
-            fish.action = PokemonActionState.IDLE
-          }, 1000)
-        }
+        const fish = unown.simulation.room.state.shop.pickFish(player, fishingLevel)
+        unown.simulation.room.fishPokemon(player, fish)
       }
     }
   }

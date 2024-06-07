@@ -47,7 +47,7 @@ import {
   RequiredStageLevelForXpElligibility,
   UniqueShop
 } from "../types/Config"
-import { GameMode, Rarity } from "../types/enum/Game"
+import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Pkm, PkmDuos, PkmProposition } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
@@ -822,6 +822,21 @@ export default class GameRoom extends Room<GameState> {
     return values(player.board).find(
       (pokemon) => pokemon.positionX == x && pokemon.positionY == y
     )
+  }
+
+  fishPokemon(player: Player, pkm: Pkm) {
+    const fish = PokemonFactory.createPokemonFromName(pkm, player)
+    const x = getFirstAvailablePositionInBench(player.board)
+    if (x !== undefined) {
+      fish.positionX = x
+      fish.positionY = 0
+      fish.action = PokemonActionState.FISH
+      player.board.set(fish.id, fish)
+      this.clock.setTimeout(() => {
+        fish.action = PokemonActionState.IDLE
+        this.checkEvolutionsAfterPokemonAcquired(player.id)
+      }, 1000)
+    }
   }
 
   checkEvolutionsAfterPokemonAcquired(playerId: string): boolean {

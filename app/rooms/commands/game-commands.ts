@@ -1,5 +1,4 @@
 import { Command } from "@colyseus/command"
-import { MapSchema } from "@colyseus/schema"
 import { Client, updateLobby } from "colyseus"
 import { nanoid } from "nanoid"
 
@@ -24,7 +23,6 @@ import {
   IDragDropCombineMessage,
   IDragDropItemMessage,
   IDragDropMessage,
-  IPokemonEntity,
   Title,
   Transfer
 } from "../../types"
@@ -38,14 +36,11 @@ import {
   PORTAL_CAROUSEL_BASE_DURATION,
   PortalCarouselStages,
   StageDuration,
-  SynergyTriggers
+  SynergyTriggers,
+  RarityProbabilityPerLevel
 } from "../../types/Config"
 import { Effect } from "../../types/enum/Effect"
-import {
-  BattleResult,
-  GamePhaseState,
-  PokemonActionState
-} from "../../types/enum/Game"
+import { BattleResult, GamePhaseState, Rarity } from "../../types/enum/Game"
 import {
   ArtificialItems,
   ItemComponents,
@@ -56,7 +51,7 @@ import {
   SynergyItems
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
+import { Pkm, PkmFamily, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { removeInArray } from "../../utils/array"
@@ -990,17 +985,53 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           : player.effects.has(Effect.DRIZZLE)
             ? 2
             : 1
-        const pkm = this.state.shop.fishPokemon(player, fishingLevel)
-        const fish = PokemonFactory.createPokemonFromName(pkm, player)
-        const x = getFirstAvailablePositionInBench(player.board)
-        fish.positionX = x !== undefined ? x : -1
-        fish.positionY = 0
-        fish.action = PokemonActionState.FISH
-        player.board.set(fish.id, fish)
-        this.room.checkEvolutionsAfterPokemonAcquired(player.id)
-        this.clock.setTimeout(() => {
-          fish.action = PokemonActionState.IDLE
-        }, 1000)
+        const fish = this.state.shop.pickFish(player, fishingLevel)
+        this.room.fishPokemon(player, fish)
+      }
+
+      if (player.items.includes(Item.SUPER_ROD)) {
+        const finals = new Set(
+          values(player.board)
+            .filter((pokemon) => pokemon.final)
+            .map((pokemon) => PkmFamily[pokemon.name])
+        )
+
+        const probas = RarityProbabilityPerLevel[player.experienceManager.level]
+        const rarity_seed = Math.random()
+        let i = 0,
+          threshold = 0
+        while (rarity_seed > threshold) {
+          threshold += probas[i]
+          i++
+        }
+        const rarity =
+          [
+            Rarity.COMMON,
+            Rarity.UNCOMMON,
+            Rarity.RARE,
+            Rarity.EPIC,
+            Rarity.ULTRA
+          ][i - 1] ?? Rarity.COMMON
+
+        let topSynergies: Synergy[] = []
+        let maxSynergyCount = 0
+        player.synergies.forEach((count, synergy) => {
+          if (count > maxSynergyCount) {
+            maxSynergyCount = count
+            topSynergies = [synergy]
+          } else if (count === maxSynergyCount) {
+            topSynergies.push(synergy)
+          }
+        })
+
+        const pkm = this.state.shop.getRandomPokemonFromPool(
+          rarity,
+          player,
+          finals,
+          pickRandomIn(topSynergies)
+        )
+
+        this.room.fishPokemon(player, pkm)
       }
 
       const grassLevel = player.synergies.get(Synergy.GRASS) ?? 0

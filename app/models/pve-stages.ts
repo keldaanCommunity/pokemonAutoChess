@@ -1,14 +1,14 @@
 import { Emotion } from "../types"
 import {
-  ArtificialItems,
   ItemComponents,
   CraftableItems,
   Item,
   NonSpecialItemComponents,
-  SynergyStones
+  ShinyItems
 } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
 import { pickNRandomIn, pickRandomIn } from "../utils/random"
+import { resetArraySchema } from "../utils/schemas"
 import Player from "./colyseus-models/player"
 
 export type PVEStage = {
@@ -29,7 +29,11 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.MAGIKARP, 3, 1],
       [Pkm.MAGIKARP, 5, 1]
     ],
-    getRewards(shiny, player) {
+    shinyChance: 1 / 20,
+    getRewards(shiny: boolean, player: Player) {
+      if (shiny) {
+        resetArraySchema(player.itemsProposition, pickNRandomIn(ShinyItems, 3))
+      }
       const randomComponent = pickRandomIn(NonSpecialItemComponents)
       player.randomComponentsGiven.push(randomComponent)
       return [randomComponent]
@@ -78,8 +82,11 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     avatar: Pkm.GYARADOS,
     shinyChance: 1 / 20,
     board: [[Pkm.GYARADOS, 4, 2]],
-    getRewards(shiny, player) {
-      const randomComponents = pickNRandomIn(ItemComponents, shiny ? 3 : 1)
+    getRewards(shiny: boolean, player: Player) {
+      if (shiny) {
+        resetArraySchema(player.itemsProposition, pickNRandomIn(ShinyItems, 3))
+      }
+      const randomComponents = pickNRandomIn(ItemComponents, 1)
       return randomComponents
     }
   },
@@ -95,17 +102,9 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     ],
     getRewards(shiny: boolean, player: Player) {
       if (shiny) {
-        return [
-          pickRandomIn(NonSpecialItemComponents),
-          pickRandomIn(
-            ArtificialItems.filter(
-              (item) => player.artificialItems.includes(item) === false
-            )
-          )
-        ]
-      } else {
-        return [pickRandomIn(NonSpecialItemComponents)]
+        resetArraySchema(player.itemsProposition, pickNRandomIn(ShinyItems, 3))
       }
+      return [pickRandomIn(NonSpecialItemComponents)]
     }
   },
 
@@ -118,12 +117,11 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.LUGIA, 3, 1],
       [Pkm.HO_OH, 5, 1]
     ],
-    getRewards(shiny) {
+    getRewards(shiny: boolean, player: Player) {
       if (shiny) {
-        return pickNRandomIn(NonSpecialItemComponents, 3)
-      } else {
-        return [pickRandomIn(NonSpecialItemComponents)]
+        resetArraySchema(player.itemsProposition, pickNRandomIn(ShinyItems, 3))
       }
+      return [pickRandomIn(NonSpecialItemComponents)]
     }
   },
 
@@ -199,12 +197,9 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.PALKIA, 6, 3],
       [Pkm.ARCEUS, 4, 1]
     ],
+    chooseOnlyOne: true,
     getRewards() {
-      return [
-        pickRandomIn(SynergyStones),
-        pickRandomIn(SynergyStones),
-        pickRandomIn(SynergyStones)
-      ]
+      return pickNRandomIn(ShinyItems, 3)
     }
   }
 }
