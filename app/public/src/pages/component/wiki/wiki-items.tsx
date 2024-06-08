@@ -8,7 +8,8 @@ import {
   Berries,
   Item,
   ItemRecipe,
-  SpecialItems
+  SpecialItems,
+  WeatherRocks
 } from "../../../../../types/enum/Item"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 
@@ -127,6 +128,22 @@ export default function WikiItems() {
         <h2>{t("special_items")}</h2>
         <ul className="special">
           {SpecialItems.map((i) => (
+            <li
+              key={i}
+              data-tooltip-id="detail-item"
+              onMouseOver={() => setItemHovered(i)}
+            >
+              <img src={"assets/item/" + i + ".png"} className="item"></img>
+            </li>
+          ))}
+        </ul>
+      </article>
+      <article></article>
+      <article></article>
+      <article>
+        <h2>{t("weather_rocks")}</h2>
+        <ul className="weather-rocks">
+          {WeatherRocks.map((i) => (
             <li
               key={i}
               data-tooltip-id="detail-item"

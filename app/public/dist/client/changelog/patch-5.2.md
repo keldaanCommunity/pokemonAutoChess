@@ -52,10 +52,14 @@
 - Changed Ghost 2: now targets the highest DEF + SPE DEF enemy, and remove 5 DEF and SPE_DEF in addition to Flinch
 - Ghost 4: Attack debuff ~~50~~ 30%
 - Ghost 8: Curse delay ~~3~~ 6 seconds
+- Rock now has an extra effect: At every stage, get a random "Weather Rock", granting a synergy, and counting towards the activation of a particular weather condition
 
 # Changes to Items
-
--
+- New item: Damp Rock: Gives Water synergy and counts for 3 towards Rain. Can only be used on rock Pokémon
+- New item: Icy Rock: Gives Ice synergy and counts for 3 towards Snow. Can only be used on rock Pokémon
+- New item: Heat Rock: Gives Fire synergy and counts for 3 towards Zenith. Can only be used on rock Pokémon
+- New item: Smooth Rock: Gives Ground synergy and counts for 3 towards Sandstorm. Can only be used on rock Pokémon
+- New item: Black Augurite: Gives Dark synergy and counts for 3 towards Night. Can only be used on rock Pokémon
 
 # Gameplay
 

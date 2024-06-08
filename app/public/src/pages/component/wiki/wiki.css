@@ -245,7 +245,10 @@
 }
 
 #wiki-items {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-template-rows: calc(18% + 210px) auto;
+  gap: 0.5em;
   justify-content: space-evenly;
 }
 
@@ -261,6 +264,11 @@
 }
 
 #wiki-items .artificial {
+  max-width: 290px;
+}
+
+#wiki-items .weather-rocks {
+  grid-row: 2;
   max-width: 290px;
 }
 
