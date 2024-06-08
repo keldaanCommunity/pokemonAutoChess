@@ -69,7 +69,8 @@ export class CountEvolutionRule extends EvolutionRule {
   }
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
-    if (pokemon.evolution === Pkm.DEFAULT) return false
+    if (pokemon.evolution === Pkm.DEFAULT || pokemon.items.has(Item.EVIOLITE))
+      return false
     const count = values(player.board).filter(
       (pkm) => pkm.index === pokemon.index
     ).length
@@ -77,7 +78,8 @@ export class CountEvolutionRule extends EvolutionRule {
   }
 
   canEvolveIfBuyingOne(pokemon: Pokemon, player: Player): boolean {
-    if (pokemon.evolution === Pkm.DEFAULT) return false
+    if (pokemon.evolution === Pkm.DEFAULT || pokemon.items.has(Item.EVIOLITE))
+      return false
     const count = values(player.board).filter(
       (pkm) => pkm.index === pokemon.index
     ).length
@@ -176,6 +178,7 @@ export class ItemEvolutionRule extends EvolutionRule {
   }
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
+    if (pokemon.items.has(Item.EVIOLITE)) return false
     return values(pokemon.items).some((item) =>
       this.itemsTriggeringEvolution.includes(item)
     )
@@ -232,6 +235,7 @@ export class HatchEvolutionRule extends EvolutionRule {
   }
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
+    if (pokemon.items.has(Item.EVIOLITE)) return false
     return this.evolutionTimer === 0
   }
 
@@ -265,6 +269,7 @@ export class ConditionBasedEvolutionRule extends EvolutionRule {
   }
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
+    if (pokemon.items.has(Item.EVIOLITE)) return false
     return this.condition(pokemon, player, stageLevel)
   }
 

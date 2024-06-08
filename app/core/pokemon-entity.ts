@@ -1406,7 +1406,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.addShield(value, this, 0, false)
         break
       case Stat.HP:
-        this.handleHeal(value, this, 0, false)
+        this.addMaxHP(value)
         break
     }
   }

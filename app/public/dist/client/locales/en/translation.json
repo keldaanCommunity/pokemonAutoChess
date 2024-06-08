@@ -1826,7 +1826,9 @@
     "DYNAMAX_BAND": "Dynamax Band",
     "SUPER_ROD": "Super Rod",
     "SHINY_STONE": "Shiny Stone",
-    "RARE_CANDY": "Rare Candy"
+    "RARE_CANDY": "Rare Candy",
+    "EVIOLITE": "Eviolite",
+    "WHITE_FLUTE": "White Flute"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -1922,7 +1924,9 @@
     "DYNAMAX_BAND": "At the start of the fight, raise max HP by 100%.",
     "SUPER_ROD": "Every round, gain a Pokémon that matches your top synergy. When used on a Pokémon, get back all held items in your player inventory",
     "SHINY_STONE": "Gives LIGHT synergy and spawn a second light spot on the holder's cell",
-    "RARE_CANDY": "Immediately make a Pokémon evolve"
+    "RARE_CANDY": "Immediately make a Pokémon evolve",
+    "EVIOLITE": "Can only be held by non-fully evolved Pokémon. Prevents the holder from evolving.",
+    "WHITE_FLUTE": "Spawn 3 WILD pokemons around the holder at the start of the fight. Rarity and tier increase with stage level."
   },
   "passive_description": {
     "NONE": "No passive",

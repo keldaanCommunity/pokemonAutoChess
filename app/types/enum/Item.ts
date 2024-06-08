@@ -94,7 +94,9 @@ export enum Item {
   DYNAMAX_BAND = "DYNAMAX_BAND",
   SHINY_STONE = "SHINY_STONE",
   SUPER_ROD = "SUPER_ROD",
-  RARE_CANDY = "RARE_CANDY"
+  RARE_CANDY = "RARE_CANDY",
+  EVIOLITE = "EVIOLITE",
+  WHITE_FLUTE = "WHITE_FLUTE"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -209,7 +211,9 @@ export const ShinyItems: Item[] = [
   Item.DYNAMAX_BAND,
   Item.SHINY_STONE,
   Item.SUPER_ROD,
-  Item.RARE_CANDY
+  Item.RARE_CANDY,
+  Item.EVIOLITE,
+  Item.WHITE_FLUTE
 ]
 
 export const CraftableItems: Item[] = Object.keys(ItemRecipe) as Item[]

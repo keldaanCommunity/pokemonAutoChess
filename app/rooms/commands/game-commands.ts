@@ -441,12 +441,17 @@ export class OnDragDropItemCommand extends Command<
 
     if (item === Item.RARE_CANDY) {
       const evolution = pokemon?.evolution
-      if (!evolution) {
+      if (!evolution || pokemon.items.has(Item.EVIOLITE)) {
         client.send(Transfer.DRAG_DROP_FAILED, message)
         return
       }
       player.transformPokemon(pokemon, evolution)
       removeInArray(player.items, item)
+      return
+    }
+
+    if (item === Item.EVIOLITE && !pokemon?.evolution) {
+      client.send(Transfer.DRAG_DROP_FAILED, message)
       return
     }
 
