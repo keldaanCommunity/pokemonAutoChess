@@ -15,6 +15,7 @@ import Player from "../../models/colyseus-models/player"
 import { isOnBench } from "../../models/colyseus-models/pokemon"
 import { createRandomEgg } from "../../models/egg-factory"
 import PokemonFactory from "../../models/pokemon-factory"
+import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"
 import { getAvatarString } from "../../public/src/utils"
@@ -412,6 +413,27 @@ export class OnDragDropItemCommand extends Command<
       }
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
+    }
+
+    if (item === Item.SUPER_ROD) {
+      let needsRecomputingSynergiesAgain = false
+      pokemon?.items.forEach((item) => {
+        pokemon.items.delete(item)
+        player.items.push(item)
+        if (item in SynergyGivenByItem) {
+          const type = SynergyGivenByItem[item]
+          const nativeTypes = getPokemonData(pokemon.name).types
+          if (nativeTypes.includes(type) === false) {
+            pokemon.types.delete(type)
+            if (!isOnBench(pokemon)) {
+              needsRecomputingSynergiesAgain = true
+            }
+          }
+        }
+      })
+      if (needsRecomputingSynergiesAgain) {
+        player.updateSynergies()
+      }
     }
 
     if (pokemon === undefined || !pokemon.canHoldItems) {
