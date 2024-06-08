@@ -1825,7 +1825,8 @@
     "TRASH": "Trash",
     "DYNAMAX_BAND": "Dynamax Band",
     "SUPER_ROD": "Super Rod",
-    "SHINY_STONE": "Shiny Stone"
+    "SHINY_STONE": "Shiny Stone",
+    "RARE_CANDY": "Rare Candy"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -1920,7 +1921,8 @@
     "TRASH": "The remains of an artificial item. It does nothing",
     "DYNAMAX_BAND": "At the start of the fight, raise max HP by 100%.",
     "SUPER_ROD": "Every round, gain a Pokémon that matches your top synergy. When used on a Pokémon, get back all held items in your player inventory",
-    "SHINY_STONE": "Gives LIGHT synergy and spawn a second light spot on the holder's cell"
+    "SHINY_STONE": "Gives LIGHT synergy and spawn a second light spot on the holder's cell",
+    "RARE_CANDY": "Immediately make a Pokémon evolve"
   },
   "passive_description": {
     "NONE": "No passive",

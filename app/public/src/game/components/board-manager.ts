@@ -16,6 +16,7 @@ import {
 import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../../types/enum/Synergy"
+import { values } from "../../../../utils/schemas"
 import { transformCoordinate } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
@@ -95,7 +96,10 @@ export default class BoardManager {
       }
       if (this.pveChest) {
         this.pveChest.anims.play("open_chest")
-        this.player.pveRewards.forEach((item, i) => {
+        const rewards = values(this.player.pveRewards).concat(
+          values(this.player.pveRewardsPropositions)
+        )
+        rewards.forEach((item, i) => {
           const itemSprite = this.scene.add.sprite(
             1512,
             122,
@@ -112,7 +116,7 @@ export default class BoardManager {
             ease: Phaser.Math.Easing.Quadratic.Out,
             duration: 1000,
             y: 75,
-            x: 1512 + (i - (this.player.pveRewards.length - 1) / 2) * 70
+            x: 1512 + (i - (rewards.length - 1) / 2) * 70
           })
         })
       }

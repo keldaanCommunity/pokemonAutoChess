@@ -49,7 +49,8 @@ import {
   Item,
   ItemRecipe,
   SynergyGivenByItem,
-  SynergyItems
+  SynergyItems,
+  ShinyItems
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmFamily, PkmIndex, Unowns } from "../../types/enum/Pokemon"
@@ -435,6 +436,17 @@ export class OnDragDropItemCommand extends Command<
         player.updateSynergies()
       }
       client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
+
+    if (item === Item.RARE_CANDY) {
+      const evolution = pokemon?.evolution
+      if (!evolution) {
+        client.send(Transfer.DRAG_DROP_FAILED, message)
+        return
+      }
+      player.transformPokemon(pokemon, evolution)
+      removeInArray(player.items, item)
       return
     }
 
@@ -1143,14 +1155,17 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         }
 
         if (isPVE && player.getLastBattleResult() === BattleResult.WIN) {
-          const pveStage = PVEStages[this.state.stageLevel]
           while (player.pveRewards.length > 0) {
             const reward = player.pveRewards.pop()!
-            if (pveStage.chooseOnlyOne) {
-              player.itemsProposition.push(reward)
-            } else {
-              player.items.push(reward)
-            }
+            player.items.push(reward)
+          }
+
+          if (player.pveRewardsPropositions.length > 0) {
+            resetArraySchema(
+              player.itemsProposition,
+              player.pveRewardsPropositions
+            )
+            player.pveRewardsPropositions.clear()
           }
         }
 
@@ -1280,8 +1295,15 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             pveStage.emotion
           )
           player.opponentTitle = "WILD"
-          const rewards = pveStage.getRewards(this.state.shinyEncounter, player)
+
+          const rewards = pveStage.getRewards?.(player) ?? ([] as Item[])
           resetArraySchema(player.pveRewards, rewards)
+
+          const rewardsPropositions = this.state.shinyEncounter
+            ? pickNRandomIn(ShinyItems, 3)
+            : pveStage.getRewardsPropositions?.(player) ?? ([] as Item[])
+
+          resetArraySchema(player.pveRewardsPropositions, rewardsPropositions)
 
           const pveBoard = PokemonFactory.makePveBoard(
             pveStage,
