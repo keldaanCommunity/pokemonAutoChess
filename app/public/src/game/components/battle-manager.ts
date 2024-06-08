@@ -512,20 +512,6 @@ export default class BattleManager {
             if (value != 0) {
               this.displayManaBurn(pkm.x, pkm.y)
             }
-          } else if (field == "staticCount") {
-            if (value != 0) {
-              displayAbility(
-                this.scene,
-                [],
-                "STATIC",
-                pkm.orientation,
-                pkm.positionX,
-                pkm.positionY,
-                pkm.targetX ?? -1,
-                pkm.targetY ?? -1,
-                this.flip
-              )
-            }
           } else if (field === "healOrderCount") {
             if (value != 0) {
               displayAbility(

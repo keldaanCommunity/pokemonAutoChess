@@ -2226,10 +2226,6 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
-    case "STATIC":
-      addAbilitySprite(skill, coordinates, true).setScale(3)
-      break
-
     case "HEAL_ORDER":
     case "ATTACK_ORDER":
       addAbilitySprite(skill, coordinates, true).setScale(2)
