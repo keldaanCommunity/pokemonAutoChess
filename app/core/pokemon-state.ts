@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import Player from "../models/colyseus-models/player"
 import { IPokemonEntity, Transfer } from "../types"
-import { FIGHTING_PHASE_DURATION } from "../types/Config"
+import { FIGHTING_PHASE_DURATION, ARMOR_FACTOR } from "../types/Config"
 import { Effect } from "../types/enum/Effect"
 import {
   AttackType,
@@ -174,7 +174,6 @@ export default class PokemonState {
         damage = Math.ceil(damage * 1.2)
       }
 
-      const ARMOR_FACTOR = 0.1
       const def = pokemon.status.armorReduction
         ? Math.round(pokemon.def / 2)
         : pokemon.def

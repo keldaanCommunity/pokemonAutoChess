@@ -605,7 +605,6 @@ export interface ICount {
   fightingBlockCount: number
   dodgeCount: number
   powerLensCount: number
-  staticCount: number
   starDustCount: number
   tripleAttackCount: number
   staticHolderCount: number

@@ -3,7 +3,7 @@
  - Grubbin
  - Charjabug
  - Vikavolt
- - Shellow West Sea
+ - Shellos West Sea
  - Gastrodon West Sea
  - Shellos East Sea
  - Gastrodon East Sea
@@ -61,6 +61,9 @@
 - New item: Heat Rock: Gives Fire synergy and counts for 3 towards Zenith. Can only be used on rock Pokémon
 - New item: Smooth Rock: Gives Ground synergy and counts for 3 towards Sandstorm. Can only be used on rock Pokémon
 - New item: Black Augurite: Gives Dark synergy and counts for 3 towards Night. Can only be used on rock Pokémon
+- Buff Soothe Bell: ~~25~~ 33% of damage inflicted as shield
+- Changed Blue Orb: the chain lightning now targets the 3 closest enemies, and inflicts 10 special damage in addition to the mana burn
+- Changed power lens: The amount of special damage reduced by special defense is inflicted back to the attacker
 
 # Gameplay
 
