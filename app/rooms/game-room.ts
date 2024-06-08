@@ -18,8 +18,8 @@ import UserMetadata, {
 } from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
 import {
-  getPokemonData,
-  PRECOMPUTED_REGIONAL_MONS
+  PRECOMPUTED_REGIONAL_MONS,
+  getPokemonData
 } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getAdditionalsTier1 } from "../models/shop"
@@ -1008,6 +1008,4 @@ export default class GameRoom extends Room<GameState> {
       }
     })
   }
-
-
 }

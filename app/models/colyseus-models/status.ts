@@ -424,7 +424,7 @@ export default class Status extends Schema implements IStatus {
         : false
       board.getAdjacentCells(pkm.positionX, pkm.positionY).forEach((cell) => {
         if (cell?.value && cell.value.team !== pkm.team) {
-          const darkHarvestDamage = [10, 20, 40][pkm.stars - 1] ?? 40
+          const darkHarvestDamage = [8, 16, 24][pkm.stars - 1] ?? 24
           cell.value.handleSpecialDamage(
             darkHarvestDamage,
             board,
