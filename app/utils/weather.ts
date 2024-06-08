@@ -56,7 +56,10 @@ export function getWeather(
 
             // add weather boosts for weather rocks
             pkm.items.forEach((item) => {
-              if (WeatherRocks.includes(item) && SynergyGivenByItem[item] === type){
+              if (
+                WeatherRocks.includes(item) &&
+                SynergyGivenByItem[item] === type
+              ){
                 boardWeatherScore.set(
                   weather,
                   (boardWeatherScore.get(weather) ?? 0) + 2
