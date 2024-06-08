@@ -1827,11 +1827,7 @@
     "ICY_ROCK": "Icy Rock",
     "HEAT_ROCK": "Heat Rock",
     "SMOOTH_ROCK": "Smooth Rock",
-    "FLOAT_STONE": "Float Stone",
-    "SHINY_STONE": "Shiny Stone",
-    "RED_STONE": "Red Stone",
-    "BLACK_AUGURITE": "Black Augurite",
-    "ELECTRIC_QUARTZ": "Electric Quartz"
+    "BLACK_AUGURITE": "Black Augurite"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -1928,11 +1924,7 @@
     "ICY_ROCK": "Gives ICE synergy and counts for 3 towards SNOW. Can only be used on ROCK Pokémon",
     "HEAT_ROCK": "Gives FIRE synergy and counts for 3 towards SUN. Can only be used on ROCK Pokémon",
     "SMOOTH_ROCK": "Gives GROUND synergy and counts for 3 towards SANDSTORM. Can only be used on ROCK Pokémon",
-    "FLOAT_STONE": "Gives FLYING synergy and counts for 3 towards WINDY. Can only be used on ROCK Pokémon",
-    "SHINY_STONE": "Gives FAIRY synergy and counts for 3 towards MISTY. Can only be used on ROCK Pokémon",
-    "RED_STONE": "Gives WILD synergy and counts for 3 towards BLOODMOON. Can only be used on ROCK Pokémon",
-    "BLACK_AUGURITE": "Gives DARK synergy and counts for 3 towards NIGHT. Can only be used on ROCK Pokémon",
-    "ELECTRIC_QUARTZ": "Gives ELECTRIC synergy and counts for 3 towards STORM. Can only be used on ROCK Pokémon"
+    "BLACK_AUGURITE": "Gives DARK synergy and counts for 3 towards NIGHT. Can only be used on ROCK Pokémon"
   },
   "passive_description": {
     "NONE": "No passive",
