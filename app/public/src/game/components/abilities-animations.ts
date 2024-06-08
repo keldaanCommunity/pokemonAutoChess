@@ -2236,7 +2236,10 @@ export function displayAbility(
       break
 
     case "FISHING":
-      addAbilitySprite(Ability.DIVE, coordinates, true).setDepth(0).setScale(1)
+      addAbilitySprite(Ability.DIVE, coordinates, true)
+        .setOrigin(0.5, -2)
+        .setDepth(0)
+        .setScale(1)
       break
 
     case "EVOLUTION":

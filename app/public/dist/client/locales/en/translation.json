@@ -1920,7 +1920,7 @@
     "TRASH": "The remains of an artificial item. It does nothing",
     "DYNAMAX_BAND": "At the start of the fight, raise max HP by 100%.",
     "SUPER_ROD": "Every round, gain a Pokémon that matches your top synergy. When used on a Pokémon, get back all held items in your player inventory",
-    "SHINY_STONE": "Gives Light synergy and spawn a second light spot on the holder's cell"
+    "SHINY_STONE": "Gives LIGHT synergy and spawn a second light spot on the holder's cell"
   },
   "passive_description": {
     "NONE": "No passive",

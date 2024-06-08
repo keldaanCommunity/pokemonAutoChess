@@ -204,7 +204,11 @@ export const ArtificialItems: Item[] = [
   Item.BIG_NUGGET
 ]
 
-export const ShinyItems: Item[] = [Item.DYNAMAX_BAND, Item.SHINY_STONE]
+export const ShinyItems: Item[] = [
+  Item.DYNAMAX_BAND,
+  Item.SHINY_STONE,
+  Item.SUPER_ROD
+]
 
 export const CraftableItems: Item[] = Object.keys(ItemRecipe) as Item[]
 
@@ -238,7 +242,8 @@ export const SynergyItems = [
   Item.SWIFT_WING,
   Item.HARD_STONE,
   Item.BIG_NUGGET,
-  Item.INCENSE
+  Item.INCENSE,
+  Item.SHINY_STONE
 ] as const
 
 export const SynergyGivenByItem: Record<
@@ -262,7 +267,8 @@ export const SynergyGivenByItem: Record<
   [Item.SWIFT_WING]: Synergy.FLYING,
   [Item.HARD_STONE]: Synergy.ROCK,
   [Item.BIG_NUGGET]: Synergy.GROUND,
-  [Item.INCENSE]: Synergy.FLORA
+  [Item.INCENSE]: Synergy.FLORA,
+  [Item.SHINY_STONE]: Synergy.LIGHT
 }
 
 export const NonSpecialItemComponents: Item[] = [

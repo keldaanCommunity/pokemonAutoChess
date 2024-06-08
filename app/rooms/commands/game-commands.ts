@@ -434,6 +434,8 @@ export class OnDragDropItemCommand extends Command<
       if (needsRecomputingSynergiesAgain) {
         player.updateSynergies()
       }
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
     }
 
     if (pokemon === undefined || !pokemon.canHoldItems) {
