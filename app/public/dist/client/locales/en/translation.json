@@ -1674,9 +1674,9 @@
     "GLOOM_FLOWER": "Summon Gloom",
     "VILE_FLOWER": "Summon Vileplume",
     "SUN_FLOWER": "Summon Bellossom",
-    "BATTLE_ARMOR": "Gain 5 DEF, receive -30% critical damage",
-    "MOUTAIN_RESISTANCE": "Gain 15 DEF, receive -50% critical damage",
-    "DIAMOND_STORM": "Gain 30 DEF, receive -70% critical damage",
+    "BATTLE_ARMOR": "Gain 5 DEF, receive -30% critical damage. Gain a weather rock.",
+    "MOUTAIN_RESISTANCE": "Gain 15 DEF, receive -50% critical damage. Gain another weather rock.",
+    "DIAMOND_STORM": "Gain 30 DEF, receive -70% critical damage. Gain a final weather rock.",
     "STEEL_SURGE": "Deal 33% of ATK as TRUE",
     "STEEL_SPIKE": "Deal 66% of ATK as TRUE",
     "CORKSCREW_CRASH": "Deal 100% of ATK as TRUE",
@@ -1822,7 +1822,12 @@
     "EXP_SHARE": "Exp. Share",
     "METEORITE": "Meteorite",
     "BERRY_JUICE": "Berry Juice",
-    "TRASH": "Trash"
+    "TRASH": "Trash",
+    "DAMP_ROCK": "Damp Rock",
+    "ICY_ROCK": "Icy Rock",
+    "HEAT_ROCK": "Heat Rock",
+    "SMOOTH_ROCK": "Smooth Rock",
+    "BLACK_AUGURITE": "Black Augurite"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -1914,7 +1919,12 @@
     "EXP_SHARE": "Get the best ATK, DEF and SPE_DEF values of adjacent allies in the same row",
     "METEORITE": "A meteorite that seems to interact with Deoxys. It continues to give off a faint glow and is slightly warm to the touch.",
     "BERRY_JUICE": "Consumed once below 50% HP, restore to max HP",
-    "TRASH": "The remains of an artificial item. It does nothing"
+    "TRASH": "The remains of an artificial item. It does nothing",
+    "DAMP_ROCK": "Gives WATER synergy and counts for 3 towards RAIN. Can only be used on ROCK Pokémon",
+    "ICY_ROCK": "Gives ICE synergy and counts for 3 towards SNOW. Can only be used on ROCK Pokémon",
+    "HEAT_ROCK": "Gives FIRE synergy and counts for 3 towards SUN. Can only be used on ROCK Pokémon",
+    "SMOOTH_ROCK": "Gives GROUND synergy and counts for 3 towards SANDSTORM. Can only be used on ROCK Pokémon",
+    "BLACK_AUGURITE": "Gives DARK synergy and counts for 3 towards NIGHT. Can only be used on ROCK Pokémon"
   },
   "passive_description": {
     "NONE": "No passive",
@@ -2142,7 +2152,7 @@
     "BUG": "At the start of the combat, your strongest BUG pokemons are cloned",
     "FLYING": "FLYING pokemons fly away when they fell under a certain amount of HP, unless PARALYSIS, FREEZE or SLEEP",
     "FLORA": "When the first FLORA pokemon is KO, a flower blossoms. It receives one random item from each FLORA ally KO",
-    "ROCK": "ROCK pokemons gain DEF and better resist to critical damage",
+    "ROCK": "ROCK pokemons gain DEF and better resist to critical damage. At each stage, get a random weather rock",
     "GHOST": "GHOST pokemons have 25% chance to SILENCE on hit and apply various curses on opponents",
     "FAIRY": "FAIRY pokemons, upon dealing or receiving a critical hit, unleash a shock on melee contact and make their targets CHARM for 2 seconds on eye contact",
     "ICE": "ICE pokemons have a chance to FREEZE the enemy for 2 seconds after a hit and give SPE_DEF to the whole team",
@@ -2595,6 +2605,7 @@
   "craftable_items": "Craftable",
   "berries": "Berries",
   "artificial_items": "Artificial",
+  "weather_rocks": "Weather Rocks",
   "special_items": "Special Items",
   "item_recipes": "Item Recipes",
   "news": "News",

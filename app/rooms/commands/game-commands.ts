@@ -53,7 +53,8 @@ import {
   Item,
   ItemRecipe,
   SynergyGivenByItem,
-  SynergyItems
+  SynergyItems,
+  WeatherRocks
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
@@ -444,6 +445,17 @@ export class OnDragDropItemCommand extends Command<
       pokemon.passive !== Passive.RECYCLE
     ) {
       // prevent adding a synergy stone on a pokemon that already has this synergy
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
+
+    if (
+      WeatherRocks.includes(item) &&
+      (!pokemon.types.has(Synergy.ROCK) ||
+        pokemon.types.has(SynergyGivenByItem[item])
+      )
+    ) {
+      // prevent adding weather rocks to non-rock pokemon, or to those with the synergy already
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
     }
