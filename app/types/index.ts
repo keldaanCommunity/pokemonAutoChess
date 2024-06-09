@@ -630,6 +630,7 @@ export interface IPreparationMetadata {
   minRank: string | null
   gameMode: GameMode
   whitelist: string[] | null
+  blacklist: string[]
   tournamentId: string | null
   bracketId: string | null
 }

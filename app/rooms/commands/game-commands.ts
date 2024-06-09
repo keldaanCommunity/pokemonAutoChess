@@ -681,7 +681,7 @@ export class OnJoinCommand extends Command<
           }
         }
       } else {
-        logger.warn(`player not in game room whitelist tried to join game`, {
+        logger.warn(`player not in this game players list tried to join game`, {
           userId: client.auth.uid,
           roomId: this.room.roomId
         })

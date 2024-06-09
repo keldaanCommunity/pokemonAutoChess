@@ -2907,6 +2907,7 @@
   "game_already_started": "Game has already started",
   "min_rank_not_reached": "Your rank is not high enough to play this ranked match",
   "not_whitelisted": "This match is restricted to a whitelist of players",
+  "blacklisted": "You have been kicked from this match",
   "ranked_match": "Ranked Match",
   "kecleon_dialog": {
     "welcome": "Welcome to Kecleon's shop !",
