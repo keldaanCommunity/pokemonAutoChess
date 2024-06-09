@@ -56,7 +56,8 @@
 
 # Changes to Items
 
--
+- New item category: Shiny items, as exclusive rewards when encountering a shiny wild Pokémon during PvE rounds
+- Added 6 shiny items: Dynamax Band, Super Rod, Shiny Stone, White Flute, Rare Candy, Eviolite
 
 # Gameplay
 
@@ -65,6 +66,7 @@
 # UI
 
 - Add visual effect to each Ghost curse
+- Add variant background colors to items based on their item category
 
 # Bugfix
 
