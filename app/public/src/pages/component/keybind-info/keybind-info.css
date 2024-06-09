@@ -19,3 +19,11 @@
 .keybind-container dd {
   grid-column-start: 2;
 }
+
+kbd.remappable {
+  cursor: var(--cursor-hover);
+}
+
+kbd.remapping {
+  background-color: var(--color-bg-accent);
+}
