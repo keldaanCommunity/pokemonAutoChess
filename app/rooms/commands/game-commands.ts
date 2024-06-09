@@ -50,7 +50,8 @@ import {
   ItemRecipe,
   SynergyGivenByItem,
   SynergyItems,
-  ShinyItems
+  ShinyItems,
+  WeatherRocks
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmFamily, PkmIndex, Unowns } from "../../types/enum/Pokemon"
@@ -484,6 +485,16 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
+    if (
+      WeatherRocks.includes(item) &&
+      (!pokemon.types.has(Synergy.ROCK) ||
+        pokemon.types.has(SynergyGivenByItem[item]))
+    ) {
+      // prevent adding weather rocks to non-rock pokemon, or to those with the synergy already
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
+
     if (!isBasicItem && pokemon.items.has(item)) {
       // prevent adding twitce the same completed item
       client.send(Transfer.DRAG_DROP_FAILED, message)
@@ -506,8 +517,7 @@ export class OnDragDropItemCommand extends Command<
 
       if (
         itemCombined in SynergyGivenByItem &&
-        pokemon.types.has(SynergyGivenByItem[itemCombined]
-        )
+        pokemon.types.has(SynergyGivenByItem[itemCombined])
       ) {
         // prevent combining into a synergy stone on a pokemon that already has this synergy
         client.send(Transfer.DRAG_DROP_FAILED, message)
@@ -1138,7 +1148,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
   stopFightingPhase() {
     const isPVE = this.state.stageLevel in PVEStages
-    
+
     this.state.simulations.forEach((simulation) => {
       if (!simulation.finished) {
         simulation.onFinish()

@@ -9,7 +9,7 @@ import { Weather } from "./enum/Weather"
 export const ON_ATTACK_MANA = 5
 export const MANA_SCARF_MANA = 8
 export const SCOPE_LENS_MANA = 15
-
+export const ARMOR_FACTOR = 0.1
 export const BOARD_WIDTH = 8
 export const BOARD_HEIGHT = 6
 

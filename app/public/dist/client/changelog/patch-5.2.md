@@ -3,7 +3,7 @@
  - Grubbin
  - Charjabug
  - Vikavolt
- - Shellow West Sea
+ - Shellos West Sea
  - Gastrodon West Sea
  - Shellos East Sea
  - Gastrodon East Sea
@@ -53,11 +53,21 @@
 - Changed Ghost 2: now targets the highest DEF + SPE DEF enemy, and remove 5 DEF and SPE_DEF in addition to Flinch
 - Ghost 4: Attack debuff ~~50~~ 30%
 - Ghost 8: Curse delay ~~3~~ 6 seconds
+- Rock now has an extra effect: At every stage, get a random "Weather Rock", granting a synergy, and counting towards the activation of a particular weather condition
 
 # Changes to Items
 
 - New item category: Shiny items, as exclusive rewards when encountering a shiny wild Pokémon during PvE rounds
 - Added 6 shiny items: Dynamax Band, Super Rod, Shiny Stone, White Flute, Rare Candy, Eviolite
+- New item category: Weather Rocks, unlocked with Rock synergy
+- New item: Damp Rock: Gives Water synergy and counts for 3 towards Rain. Can only be used on rock Pokémon
+- New item: Icy Rock: Gives Ice synergy and counts for 3 towards Snow. Can only be used on rock Pokémon
+- New item: Heat Rock: Gives Fire synergy and counts for 3 towards Zenith. Can only be used on rock Pokémon
+- New item: Smooth Rock: Gives Ground synergy and counts for 3 towards Sandstorm. Can only be used on rock Pokémon
+- New item: Black Augurite: Gives Dark synergy and counts for 3 towards Night. Can only be used on rock Pokémon
+- Buff Soothe Bell: ~~25~~ 33% of damage inflicted as shield
+- Changed Blue Orb: the chain lightning now targets the 3 closest enemies, and inflicts 10 special damage in addition to the mana burn
+- Changed power lens: The amount of special damage reduced by special defense is inflicted back to the attacker
 
 # Gameplay
 

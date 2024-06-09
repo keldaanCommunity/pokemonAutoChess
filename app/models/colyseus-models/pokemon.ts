@@ -43,6 +43,7 @@ import {
   Item,
   ItemComponents,
   ItemRecipe,
+  SynergyGivenByItem,
   SynergyItems
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
@@ -8565,53 +8566,52 @@ export class Granbull extends Pokemon {
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
-const rksSystemEvolutionRule = (itemToExclude: Item | null) =>
-  new ItemEvolutionRule(
-    SynergyItems.filter((i) => i !== itemToExclude),
-    (pokemon, player, item_) => {
-      const item = item_ as Item | undefined
-      switch (item) {
-        case Item.OLD_AMBER:
-          return Pkm.SILVALLY_FOSSIL
-        case Item.DAWN_STONE:
-          return Pkm.SILVALLY_PSYCHIC
-        case Item.WATER_STONE:
-          return Pkm.SILVALLY_WATER
-        case Item.THUNDER_STONE:
-          return Pkm.SILVALLY_ELECTRIC
-        case Item.FIRE_STONE:
-          return Pkm.SILVALLY_FIRE
-        case Item.MOON_STONE:
-          return Pkm.SILVALLY_FAIRY
-        case Item.DUSK_STONE:
-          return Pkm.SILVALLY_DARK
-        case Item.LEAF_STONE:
-          return Pkm.SILVALLY_GRASS
-        case Item.ICE_STONE:
-          return Pkm.SILVALLY_ICE
-        case Item.MACHO_BRACE:
-          return Pkm.SILVALLY_FIGHTING
-        case Item.LIGHT_BALL:
-          return Pkm.SILVALLY_LIGHT
-        case Item.TOXIC_ORB:
-          return Pkm.SILVALLY_POISON
-        case Item.METRONOME:
-          return Pkm.SILVALLY_SOUND
-        case Item.METAL_COAT:
-          return Pkm.SILVALLY_STEEL
-        case Item.SWIFT_WING:
-          return Pkm.SILVALLY_FLYING
-        case Item.HARD_STONE:
-          return Pkm.SILVALLY_ROCK
-        case Item.BIG_NUGGET:
-          return Pkm.SILVALLY_GROUND
-        case Item.INCENSE:
-          return Pkm.SILVALLY_FLORA
-        default:
-          return Pkm.SILVALLY_FIRE
-      }
+const rksSystemEvolutionRule = new ItemEvolutionRule(
+  [...SynergyItems],
+  (pokemon, player, item) => {
+    const type = SynergyGivenByItem[item as Item] as Synergy
+    switch (type) {
+      case Synergy.FOSSIL:
+        return Pkm.SILVALLY_FOSSIL
+      case Synergy.PSYCHIC:
+        return Pkm.SILVALLY_PSYCHIC
+      case Synergy.WATER:
+        return Pkm.SILVALLY_WATER
+      case Synergy.ELECTRIC:
+        return Pkm.SILVALLY_ELECTRIC
+      case Synergy.FIRE:
+        return Pkm.SILVALLY_FIRE
+      case Synergy.FAIRY:
+        return Pkm.SILVALLY_FAIRY
+      case Synergy.DARK:
+        return Pkm.SILVALLY_DARK
+      case Synergy.GRASS:
+        return Pkm.SILVALLY_GRASS
+      case Synergy.ICE:
+        return Pkm.SILVALLY_ICE
+      case Synergy.FIGHTING:
+        return Pkm.SILVALLY_FIGHTING
+      case Synergy.LIGHT:
+        return Pkm.SILVALLY_LIGHT
+      case Synergy.POISON:
+        return Pkm.SILVALLY_POISON
+      case Synergy.SOUND:
+        return Pkm.SILVALLY_SOUND
+      case Synergy.STEEL:
+        return Pkm.SILVALLY_STEEL
+      case Synergy.FLYING:
+        return Pkm.SILVALLY_FLYING
+      case Synergy.ROCK:
+        return Pkm.SILVALLY_ROCK
+      case Synergy.GROUND:
+        return Pkm.SILVALLY_GROUND
+      case Synergy.FLORA:
+        return Pkm.SILVALLY_FLORA
+      default:
+        return pokemon.name
     }
-  )
+  }
+)
 
 const rksSystemOnChangePosition = function (
   this: Pokemon,
@@ -8626,6 +8626,7 @@ const rksSystemOnChangePosition = function (
         player.items.push(synergyItem)
       }
     })
+    player.transformPokemon(this, Pkm.TYPE_NULL)
   }
 }
 
@@ -8634,7 +8635,7 @@ export class TypeNull extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 2
   evolution = Pkm.SILVALLY_FIRE
-  evolutionRule = rksSystemEvolutionRule(null)
+  evolutionRule = rksSystemEvolutionRule
   hp = 200
   atk = 14
   def = 3
@@ -8662,7 +8663,7 @@ export class SilvallyFire extends Pokemon {
   range = 1
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
-  evolutionRule = rksSystemEvolutionRule(Item.FIRE_STONE)
+  evolutionRule = rksSystemEvolutionRule
   attackSprite = AttackSprite.NORMAL_MELEE
   onChangePosition = rksSystemOnChangePosition
 }
@@ -8683,7 +8684,7 @@ export class SilvallyFossil extends Pokemon {
   range = 1
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
-  evolutionRule = rksSystemEvolutionRule(Item.OLD_AMBER)
+  evolutionRule = rksSystemEvolutionRule
   attackSprite = AttackSprite.NORMAL_MELEE
   onChangePosition = rksSystemOnChangePosition
 }
@@ -8704,7 +8705,7 @@ export class SilvallyPsychic extends Pokemon {
   range = 1
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
-  evolutionRule = rksSystemEvolutionRule(Item.DAWN_STONE)
+  evolutionRule = rksSystemEvolutionRule
   attackSprite = AttackSprite.NORMAL_MELEE
   onChangePosition = rksSystemOnChangePosition
 }
@@ -8725,7 +8726,7 @@ export class SilvallyWater extends Pokemon {
   range = 1
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
-  evolutionRule = rksSystemEvolutionRule(Item.WATER_STONE)
+  evolutionRule = rksSystemEvolutionRule
   attackSprite = AttackSprite.NORMAL_MELEE
   onChangePosition = rksSystemOnChangePosition
 }
@@ -8746,7 +8747,7 @@ export class SilvallyElectric extends Pokemon {
   range = 1
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
-  evolutionRule = rksSystemEvolutionRule(Item.THUNDER_STONE)
+  evolutionRule = rksSystemEvolutionRule
   attackSprite = AttackSprite.NORMAL_MELEE
   onChangePosition = rksSystemOnChangePosition
 }
@@ -8767,7 +8768,7 @@ export class SilvallyFairy extends Pokemon {
   range = 1
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
-  evolutionRule = rksSystemEvolutionRule(Item.MOON_STONE)
+  evolutionRule = rksSystemEvolutionRule
   attackSprite = AttackSprite.NORMAL_MELEE
   onChangePosition = rksSystemOnChangePosition
 }
@@ -8788,7 +8789,7 @@ export class SilvallyDark extends Pokemon {
   range = 1
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
-  evolutionRule = rksSystemEvolutionRule(Item.DUSK_STONE)
+  evolutionRule = rksSystemEvolutionRule
   attackSprite = AttackSprite.NORMAL_MELEE
   onChangePosition = rksSystemOnChangePosition
 }
@@ -8809,7 +8810,7 @@ export class SilvallyGrass extends Pokemon {
   range = 1
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
-  evolutionRule = rksSystemEvolutionRule(Item.LEAF_STONE)
+  evolutionRule = rksSystemEvolutionRule
   attackSprite = AttackSprite.NORMAL_MELEE
   onChangePosition = rksSystemOnChangePosition
 }
@@ -8830,7 +8831,7 @@ export class SilvallyIce extends Pokemon {
   range = 1
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
-  evolutionRule = rksSystemEvolutionRule(Item.ICE_STONE)
+  evolutionRule = rksSystemEvolutionRule
   attackSprite = AttackSprite.NORMAL_MELEE
   onChangePosition = rksSystemOnChangePosition
 }
@@ -8851,7 +8852,7 @@ export class SilvallyFighting extends Pokemon {
   range = 1
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
-  evolutionRule = rksSystemEvolutionRule(Item.MACHO_BRACE)
+  evolutionRule = rksSystemEvolutionRule
   attackSprite = AttackSprite.NORMAL_MELEE
   onChangePosition = rksSystemOnChangePosition
 }
@@ -8872,7 +8873,7 @@ export class SilvallyLight extends Pokemon {
   range = 1
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
-  evolutionRule = rksSystemEvolutionRule(Item.LIGHT_BALL)
+  evolutionRule = rksSystemEvolutionRule
   attackSprite = AttackSprite.NORMAL_MELEE
   onChangePosition = rksSystemOnChangePosition
 }
@@ -8893,7 +8894,7 @@ export class SilvallyPoison extends Pokemon {
   range = 1
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
-  evolutionRule = rksSystemEvolutionRule(Item.TOXIC_ORB)
+  evolutionRule = rksSystemEvolutionRule
   attackSprite = AttackSprite.NORMAL_MELEE
   onChangePosition = rksSystemOnChangePosition
 }
@@ -8914,7 +8915,7 @@ export class SilvallySound extends Pokemon {
   range = 1
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
-  evolutionRule = rksSystemEvolutionRule(Item.METRONOME)
+  evolutionRule = rksSystemEvolutionRule
   attackSprite = AttackSprite.NORMAL_MELEE
   onChangePosition = rksSystemOnChangePosition
 }
@@ -8935,7 +8936,7 @@ export class SilvallySteel extends Pokemon {
   range = 1
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
-  evolutionRule = rksSystemEvolutionRule(Item.METAL_COAT)
+  evolutionRule = rksSystemEvolutionRule
   attackSprite = AttackSprite.NORMAL_MELEE
   onChangePosition = rksSystemOnChangePosition
 }
@@ -8956,7 +8957,7 @@ export class SilvallyFlying extends Pokemon {
   range = 1
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
-  evolutionRule = rksSystemEvolutionRule(Item.SWIFT_WING)
+  evolutionRule = rksSystemEvolutionRule
   attackSprite = AttackSprite.NORMAL_MELEE
   onChangePosition = rksSystemOnChangePosition
 }
@@ -8977,7 +8978,7 @@ export class SilvallyRock extends Pokemon {
   range = 1
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
-  evolutionRule = rksSystemEvolutionRule(Item.HARD_STONE)
+  evolutionRule = rksSystemEvolutionRule
   attackSprite = AttackSprite.NORMAL_MELEE
   onChangePosition = rksSystemOnChangePosition
 }
@@ -8998,7 +8999,7 @@ export class SilvallyGround extends Pokemon {
   range = 1
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
-  evolutionRule = rksSystemEvolutionRule(Item.BIG_NUGGET)
+  evolutionRule = rksSystemEvolutionRule
   attackSprite = AttackSprite.NORMAL_MELEE
   onChangePosition = rksSystemOnChangePosition
 }
@@ -9019,7 +9020,7 @@ export class SilvallyFlora extends Pokemon {
   range = 1
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
-  evolutionRule = rksSystemEvolutionRule(Item.INCENSE)
+  evolutionRule = rksSystemEvolutionRule
   attackSprite = AttackSprite.NORMAL_MELEE
   onChangePosition = rksSystemOnChangePosition
 }

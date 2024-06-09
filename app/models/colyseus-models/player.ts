@@ -6,6 +6,7 @@ import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { BattleResult } from "../../types/enum/Game"
 import {
   ArtificialItems,
+  WeatherRocks,
   Berries,
   Item,
   SynergyGivenByItem
@@ -90,6 +91,7 @@ export default class Player extends Schema implements IPlayer {
   titles: Set<Title> = new Set<Title>()
   rerollCount: number = 0
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
+  weatherRocks: Item[] = pickNRandomIn(WeatherRocks, 3)
   randomComponentsGiven: Item[] = []
   lightX: number
   lightY: number
@@ -217,8 +219,9 @@ export default class Player extends Schema implements IPlayer {
     const pokemons: Pokemon[] = values(this.board)
     let updatedSynergies = computeSynergies(pokemons)
 
-    const needsRecomputing = this.updateArtificialItems(updatedSynergies)
-    if (needsRecomputing) {
+    const artifNeedsRecomputing = this.updateArtificialItems(updatedSynergies)
+    const rockNeedsRecomputing = this.updateWeatherRocks(updatedSynergies)
+    if (artifNeedsRecomputing || rockNeedsRecomputing) {
       /* NOTE: computing twice is costly in performance but the safest way to get the synergies
       right after losing an artificial item, since many edgecases may need to be adressed when 
       losing a type (Axew double dragon + artif item for example) ; it's not as easy as just 
@@ -310,6 +313,59 @@ export default class Player extends Schema implements IPlayer {
           removeInArray<Item>(this.items, item)
           cleanedTrash++
         }
+      })
+    }
+
+    return needsRecomputingSynergiesAgain
+  }
+
+  updateWeatherRocks(updatedSynergies: Map<Synergy, number>): boolean {
+    let needsRecomputingSynergiesAgain = false
+    const previousNbRockItems = SynergyTriggers[Synergy.ROCK].filter(
+      (n) => (this.synergies.get(Synergy.ROCK) ?? 0) >= n
+    ).length
+
+    const newNbRockItems = SynergyTriggers[Synergy.ROCK].filter(
+      (n) => (updatedSynergies.get(Synergy.ROCK) ?? 0) >= n
+    ).length
+
+    if (newNbRockItems > previousNbRockItems) {
+      // some weather rocks are gained
+      const gainedWeatherRocks = this.weatherRocks.slice(
+        previousNbRockItems,
+        newNbRockItems
+      )
+      gainedWeatherRocks.forEach((item) => {
+        this.items.push(item)
+      })
+    } else if (newNbRockItems < previousNbRockItems) {
+      // some weather rocks are lost
+      const lostWeatherRocks = this.weatherRocks.slice(
+        newNbRockItems,
+        previousNbRockItems
+      )
+
+      this.board.forEach((pokemon) => {
+        lostWeatherRocks.forEach((item) => {
+          if (pokemon.items.has(item)) {
+            pokemon.items.delete(item)
+
+            if (item in SynergyGivenByItem) {
+              const type = SynergyGivenByItem[item]
+              const nativeTypes = getPokemonData(pokemon.name).types
+              if (nativeTypes.includes(type) === false) {
+                pokemon.types.delete(type)
+                if (!isOnBench(pokemon)) {
+                  needsRecomputingSynergiesAgain = true
+                }
+              }
+            } 
+          }
+        })
+      })
+
+      lostWeatherRocks.forEach((item) => {
+        removeInArray<Item>(this.items, item)
       })
     }
 
