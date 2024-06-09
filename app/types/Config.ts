@@ -630,7 +630,19 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.EXP_SHARE]: {},
   [Item.METEORITE]: {},
   [Item.BERRY_JUICE]: {},
-  [Item.TRASH]: {}
+  [Item.TRASH]: {},
+  [Item.DYNAMAX_BAND]: {},
+  [Item.SHINY_STONE]: {},
+  [Item.SUPER_ROD]: {},
+  [Item.RARE_CANDY]: {},
+  [Item.EVIOLITE]: {
+    [Stat.HP]: 100,
+    [Stat.ATK]: 10,
+    [Stat.AP]: 50,
+    [Stat.DEF]: 5,
+    [Stat.SPE_DEF]: 5
+  },
+  [Item.WHITE_FLUTE]: {}
 }
 
 export type TilesetExchangeFile = {
