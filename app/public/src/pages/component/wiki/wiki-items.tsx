@@ -131,7 +131,9 @@ export default function WikiItems() {
           ))}
         </ul>
 
-        <h2>{t("weather_rocks")}</h2>
+        <h2>
+          <SynergyIcon type={Synergy.ROCK} /> {t("weather_rocks")}
+        </h2>
         <ul className="weather-rocks">
           {WeatherRocks.map((i) => (
             <li
