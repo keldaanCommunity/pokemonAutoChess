@@ -529,6 +529,20 @@ export class MegaScizor extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class Kleavor extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING, Synergy.ROCK])
+  rarity = Rarity.UNIQUE
+  stars = 4
+  hp = 190
+  atk = 25
+  def = 7
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.STONE_AXE
+  attackSprite = AttackSprite.ROCK_MELEE
+}
+
 export class Bounsweet extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING])
   rarity = Rarity.EPIC
@@ -14219,6 +14233,7 @@ export const PokemonClasses: Record<
   [Pkm.SCYTHER]: Scyther,
   [Pkm.SCIZOR]: Scizor,
   [Pkm.MEGA_SCIZOR]: MegaScizor,
+  [Pkm.KLEAVOR]: Kleavor,
   [Pkm.RIOLU]: Riolu,
   [Pkm.LUCARIO]: Lucario,
   [Pkm.MAGIKARP]: Magikarp,
