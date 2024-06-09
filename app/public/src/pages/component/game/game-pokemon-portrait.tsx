@@ -7,7 +7,7 @@ import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { getBuyPrice } from "../../../../../models/shop"
 import { RarityColor } from "../../../../../types/Config"
-import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
@@ -66,13 +66,11 @@ export default function GamePokemonPortrait(props: {
       pokemon
     ) {
       board.forEach((p) => {
-        if (p.index === pokemon.index && p.evolution !== Pkm.DEFAULT) {
+        if (p.name === pokemon.name && p.evolution !== Pkm.DEFAULT) {
           _count++
-        }
-        if (
-          pokemonEvolution !== Pkm.DEFAULT &&
-          p.evolution !== Pkm.DEFAULT &&
-          p.index === PkmIndex[pokemonEvolution]
+        } else if (
+          PkmFamily[p.name] === pokemon.name &&
+          p.evolution !== Pkm.DEFAULT
         ) {
           _countEvol++
         }
@@ -81,7 +79,7 @@ export default function GamePokemonPortrait(props: {
 
     setCount(_count)
     setCountEvol(_countEvol)
-  }, [board?.size, props.pokemon])
+  }, [board, board?.size, props.pokemon, pokemon, isOnAnotherBoard])
 
   if (!props.pokemon || !pokemon) {
     return <div className="game-pokemon-portrait my-box empty" />

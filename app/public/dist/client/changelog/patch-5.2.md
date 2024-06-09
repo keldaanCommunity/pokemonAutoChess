@@ -68,7 +68,7 @@
 
 # Bugfix
 
--
+- Fix shop unit highlight when using regional variants
 
 # Misc
 
