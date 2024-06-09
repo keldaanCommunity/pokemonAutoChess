@@ -48,9 +48,9 @@ export default function GameOptionsModal(props: {
       <Modal.Body className="game-options-modal-body">
         <Tabs>
           <TabList>
-            <Tab key="sound">Sound</Tab>
-            <Tab>Interface</Tab>
-            <Tab>Hotkeys</Tab>
+            <Tab key="sound">{t("sound")}</Tab>
+            <Tab key="interface">{t("interface")}</Tab>
+            <Tab key="hotkeys">{t("hotkeys")}</Tab>
           </TabList>
 
           <TabPanel>
