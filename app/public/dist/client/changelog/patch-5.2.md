@@ -72,6 +72,7 @@
 # UI
 
 - Add visual effect to each Ghost curse
+- Improved Options Menu. Game hotkeys are now remappable.
 
 # Bugfix
 
