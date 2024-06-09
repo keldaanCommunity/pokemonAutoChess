@@ -408,6 +408,9 @@ export class OnKickPlayerCommand extends Command<
                 avatar: this.state.users.get(client.auth.uid)?.avatar
               })
               this.state.users.delete(userId)
+              this.room.setMetadata({
+                blacklist: this.room.metadata.blacklist.concat(userId)
+              })
               cli.send(Transfer.KICK)
               cli.leave()
             } else {

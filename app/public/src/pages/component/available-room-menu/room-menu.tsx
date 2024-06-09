@@ -102,7 +102,9 @@ export default function RoomMenu(props: {
       selectedRoom.clients >= MAX_PLAYERS_PER_GAME ||
       selectedRoom.metadata?.gameStarted === true ||
       (selectedRoom.metadata?.whitelist &&
-        selectedRoom.metadata?.whitelist.includes(uid) === false)
+        selectedRoom.metadata?.whitelist.includes(uid) === false) ||
+      (selectedRoom.metadata?.blacklist &&
+        selectedRoom.metadata?.blacklist.includes(uid) === true)
     ) {
       return
     }
