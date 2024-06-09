@@ -262,9 +262,9 @@
 
 #wiki-items .artificial,
 #wiki-items .weather-rocks,
-#wiki-items .shiny
+#wiki-items .shiny,
 #wiki-items .special {
-  max-width: 400px;
+  max-width: 460px;
 }
 
 #wiki-items img.item {
