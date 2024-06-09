@@ -97,7 +97,7 @@
     "react-tabs": "^6.0.2",
     "react-toastify": "^10.0.3",
     "react-tooltip": "5.21.5",
-    "unique-names-generator": "^4.7.1"
+    "@joaomoreno/unique-names-generator": "^5.1.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.23.8",
