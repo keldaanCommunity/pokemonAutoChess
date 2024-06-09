@@ -25,7 +25,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   height: 16px;
   cursor: var(--cursor-hover);
   box-shadow: 0px 0px 0px #000000;
-  background: #ffffff;
+  background: #4f5160;
   border-radius: 0px;
   border: 2px solid #000000;
 }
@@ -36,14 +36,14 @@ input[type="range"]::-webkit-slider-thumb {
   height: 30px;
   width: 20px;
   border-radius: 0px;
-  background: #000000;
+  background: #61738a;
   cursor: var(--cursor-hover);
   -webkit-appearance: none;
   margin-top: -10px;
 }
 
 input[type="range"]:focus::-webkit-slider-runnable-track {
-  background: #ffffff;
+  background: #4f5160;
 }
 
 input[type="range"]::-moz-range-track {
@@ -51,7 +51,7 @@ input[type="range"]::-moz-range-track {
   height: 16px;
   cursor: var(--cursor-hover);
   box-shadow: 0px 0px 0px #000000;
-  background: #ffffff;
+  background: #4f5160;
   border-radius: 0px;
   border: 2px solid #000000;
 }
@@ -62,7 +62,7 @@ input[type="range"]::-moz-range-thumb {
   height: 30px;
   width: 20px;
   border-radius: 0px;
-  background: #000000;
+  background: #61738a;
   cursor: var(--cursor-hover);
 }
 
@@ -76,14 +76,14 @@ input[type="range"]::-ms-track {
 }
 
 input[type="range"]::-ms-fill-lower {
-  background: #ffffff;
+  background: #61738a;
   border: 2px solid #000000;
   border-radius: 0px;
   box-shadow: 0px 0px 0px #000000;
 }
 
 input[type="range"]::-ms-fill-upper {
-  background: #ffffff;
+  background: #4f5160;
   border: 2px solid #000000;
   border-radius: 0px;
   box-shadow: 0px 0px 0px #000000;
@@ -96,16 +96,16 @@ input[type="range"]::-ms-thumb {
   height: 30px;
   width: 20px;
   border-radius: 0px;
-  background: #000000;
+  background: #61738a;
   cursor: var(--cursor-hover), pointer;
 }
 
 input[type="range"]:focus::-ms-fill-lower {
-  background: #ffffff;
+  background: #61738a;
 }
 
 input[type="range"]:focus::-ms-fill-upper {
-  background: #ffffff;
+  background: #4f5160;
 }
 
 select {
@@ -156,7 +156,7 @@ input[type="checkbox"] + span {
 input[type="checkbox"] + span::before,
 input[type="checkbox"]:checked + span::before {
   position: absolute;
-  top: -3px;
+  top: 2px;
   left: -28px;
   content: "";
 }

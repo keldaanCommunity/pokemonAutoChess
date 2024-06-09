@@ -6,7 +6,7 @@ import "./keybind-info.css"
 export default function KeybindInfo() {
   const { t } = useTranslation()
   return (
-    <div className="my-container keybind-container">
+    <div className="keybind-container">
       <h2>{t("key_bindings")}</h2>
       <dl>
         <dt>
