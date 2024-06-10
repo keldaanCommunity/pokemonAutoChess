@@ -9011,6 +9011,52 @@ export class MoonDreamStrategy extends AbilityStrategy {
   }
 }
 
+export class StoneAxeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const cells = board.getAdjacentCells(target.positionX, target.positionY)
+    const damage = 50
+
+    cells.forEach((cell) => {
+      const index = cell.y * board.columns + cell.x
+      if (board.effects[index] !== Effect.STEALTH_ROCKS) {
+        board.effects[index] = Effect.STEALTH_ROCKS
+        pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+          simulationId: pokemon.simulation.id,
+          type: BoardEvent.STEALTH_ROCKS,
+          x: cell.x,
+          y: cell.y
+        })
+      }
+
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: Ability.STEALTH_ROCKS,
+        positionX: cell.x,
+        positionY: cell.y
+      })
+
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.effects.add(Effect.STEALTH_ROCKS)
+      }
+
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.TRUE,
+        pokemon,
+        crit
+      )
+    })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -9346,5 +9392,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MAGNET_BOMB]: new MagnetBombStrategy(),
   [Ability.MUDDY_WATER]: new MuddyWaterStrategy(),
   [Ability.ANCIENT_POWER]: new AncientPowerStrategy(),
-  [Ability.MOON_DREAM]: new MoonDreamStrategy()
+  [Ability.MOON_DREAM]: new MoonDreamStrategy(),
+  [Ability.STONE_AXE]: new StoneAxeStrategy()
 }

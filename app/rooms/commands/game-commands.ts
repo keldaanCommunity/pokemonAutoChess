@@ -451,13 +451,18 @@ export class OnDragDropItemCommand extends Command<
 
     if (
       WeatherRocks.includes(item) &&
-      (!pokemon.types.has(Synergy.ROCK) ||
+      ((!pokemon.types.has(Synergy.ROCK) ||
         pokemon.types.has(SynergyGivenByItem[item])
-      )
+      ))
     ) {
-      // prevent adding weather rocks to non-rock pokemon, or to those with the synergy already
-      client.send(Transfer.DRAG_DROP_FAILED, message)
-      return
+      if (
+        item !== Item.BLACK_AUGURITE || 
+        pokemon.passive !== Passive.SCYTHER
+      ){
+        // prevent adding weather rocks to non-rock pokemon, or to those with the synergy already
+        client.send(Transfer.DRAG_DROP_FAILED, message)
+        return
+      }
     }
 
     if (!isBasicItem && pokemon.items.has(item)) {
