@@ -46,6 +46,7 @@ import { EloRank } from "../../types/enum/EloRank"
 import { GameMode, Rarity } from "../../types/enum/Game"
 import { Language } from "../../types/enum/Language"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
+import { ITournamentPlayer } from "../../types/interfaces/Tournament"
 import { sum } from "../../utils/array"
 import { logger } from "../../utils/logger"
 import { cleanProfanity } from "../../utils/profanity-filter"
@@ -1438,13 +1439,28 @@ export class EndTournamentCommand extends Command<
       if (!tournament)
         return logger.error(`Tournament not found: ${tournamentId}`)
 
-      const players = getRemainingPlayers(tournament)
-      const winner = players.find((p) => p.ranks.at(-1) === 1)
+      let finalists: (ITournamentPlayer & { id: string })[] = [],
+        nbMatchsPlayed = 0
+
+      tournament.players.forEach((player, playerId) => {
+        if (player.ranks.length > nbMatchsPlayed) {
+          finalists = []
+          nbMatchsPlayed = player.ranks.length
+        }
+        if (player.ranks.length === nbMatchsPlayed) {
+          finalists.push({
+            id: playerId,
+            ...player
+          })
+        }
+      })
+
+      const winner = finalists.find((p) => p.ranks.at(-1) === 1)
       if (winner) {
         this.room.presence.publish("tournament-winner", winner)
       }
 
-      for (const player of players) {
+      for (const player of finalists) {
         const mongoUser = await UserMetadata.findOne({ uid: player.id })
         const user = this.state.users.get(player.id)
         const rank = player.ranks.at(-1) ?? 1
