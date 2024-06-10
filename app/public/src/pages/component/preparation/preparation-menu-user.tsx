@@ -31,7 +31,9 @@ export default function PreparationMenuUser(props: {
   ) : canKick && props.user.id !== user?.id ? (
     <RemoveButton
       onClick={() => {
-        dispatch(kick(props.user.id))
+        if (confirm(`Kick ${props.user.name} ?`)) {
+          dispatch(kick(props.user.id))
+        }
       }}
       title={t("kick_user")}
     />

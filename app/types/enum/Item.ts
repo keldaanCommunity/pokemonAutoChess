@@ -91,11 +91,17 @@ export enum Item {
   METEORITE = "METEORITE",
   BERRY_JUICE = "BERRY_JUICE",
   TRASH = "TRASH",
+  DYNAMAX_BAND = "DYNAMAX_BAND",
+  SHINY_STONE = "SHINY_STONE",
+  SUPER_ROD = "SUPER_ROD",
+  RARE_CANDY = "RARE_CANDY",
+  EVIOLITE = "EVIOLITE",
+  WHITE_FLUTE = "WHITE_FLUTE",
   DAMP_ROCK = "DAMP_ROCK",
   ICY_ROCK = "ICY_ROCK",
   HEAT_ROCK = "HEAT_ROCK",
   SMOOTH_ROCK = "SMOOTH_ROCK",
-  BLACK_AUGURITE = "BLACK_AUGURITE",
+  BLACK_AUGURITE = "BLACK_AUGURITE"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -206,12 +212,21 @@ export const ArtificialItems: Item[] = [
   Item.BIG_NUGGET
 ]
 
+export const ShinyItems: Item[] = [
+  Item.DYNAMAX_BAND,
+  Item.SHINY_STONE,
+  Item.SUPER_ROD,
+  Item.RARE_CANDY,
+  Item.EVIOLITE,
+  Item.WHITE_FLUTE
+]
+
 export const WeatherRocks: Item[] = [
   Item.DAMP_ROCK,
   Item.ICY_ROCK,
   Item.HEAT_ROCK,
   Item.SMOOTH_ROCK,
-  Item.BLACK_AUGURITE,
+  Item.BLACK_AUGURITE
 ]
 
 export const CraftableItems: Item[] = Object.keys(ItemRecipe) as Item[]
@@ -247,6 +262,7 @@ export const SynergyItems = [
   Item.HARD_STONE,
   Item.BIG_NUGGET,
   Item.INCENSE,
+  Item.SHINY_STONE,
   Item.DAMP_ROCK,
   Item.ICY_ROCK,
   Item.HEAT_ROCK,
@@ -276,6 +292,7 @@ export const SynergyGivenByItem: Record<
   [Item.HARD_STONE]: Synergy.ROCK,
   [Item.BIG_NUGGET]: Synergy.GROUND,
   [Item.INCENSE]: Synergy.FLORA,
+  [Item.SHINY_STONE]: Synergy.LIGHT,
   [Item.DAMP_ROCK]: Synergy.WATER,
   [Item.ICY_ROCK]: Synergy.ICE,
   [Item.HEAT_ROCK]: Synergy.FIRE,

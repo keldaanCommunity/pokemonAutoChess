@@ -1,5 +1,11 @@
 import { localStore, LocalStoreKeys } from "./pages/utils/store"
 
+export type Keybindings = {
+  sell: string
+  buy_xp: string
+  refresh: string
+  emote: string
+}
 export interface IPreferencesState {
   musicVolume: number
   sfxVolume: number
@@ -7,6 +13,7 @@ export interface IPreferencesState {
   showDetailsOnHover: boolean
   showDamageNumbers: boolean
   disableAnimatedTilemap: boolean
+  keybindings: Keybindings
 }
 
 const defaultPreferences: IPreferencesState = {
@@ -15,7 +22,13 @@ const defaultPreferences: IPreferencesState = {
   showDpsMeter: false,
   showDetailsOnHover: false,
   showDamageNumbers: true,
-  disableAnimatedTilemap: false
+  disableAnimatedTilemap: false,
+  keybindings: {
+    sell: "E",
+    buy_xp: "F",
+    refresh: "D",
+    emote: "A"
+  }
 }
 
 export const preferences: IPreferencesState = loadPreferences()

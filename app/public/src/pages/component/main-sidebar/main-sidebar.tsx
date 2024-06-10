@@ -13,7 +13,6 @@ import TeamBuilderModal from "../bot-builder/team-builder-modal"
 import PokemonCollection from "../collection/pokemon-collection"
 import GameOptionsModal from "../game/game-options-modal"
 import Jukebox from "../jukebox/jukebox"
-import KeybindInfo from "../keybind-info/keybind-info"
 import MetaReport from "../meta-report/meta-report"
 import { BasicModal } from "../modal/modal"
 import Patchnotes from "../patchnotes/patchnotes"
@@ -203,12 +202,6 @@ export function MainSidebar(props: MainSidebarProps) {
           </>
         )}
 
-        {page === "game" && (
-          <NavLink svg="keyboard" location="keybinds" handleClick={changeModal}>
-            {t("key_bindings")}
-          </NavLink>
-        )}
-
         {page === "game" && profileLevel >= GADGETS.JUKEBOX.levelRequired && (
           <NavLink
             svg="compact-disc"
@@ -392,11 +385,6 @@ function Modals({
         show={modal === "meta"}
         handleClose={closeModal}
         body={<MetaReport />}
-      />
-      <BasicModal
-        show={modal === "keybinds"}
-        handleClose={closeModal}
-        body={<KeybindInfo />}
       />
       <TeamBuilderModal
         show={modal === "team-builder"}

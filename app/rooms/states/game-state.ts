@@ -58,6 +58,7 @@ export default class GameState extends Schema {
   preparationId: string
   shinyEncounter = false
   pveRewards: Item[] = []
+  pveRewardsPropositions: Item[] = []
   minRank: EloRank | null = null
 
   constructor(

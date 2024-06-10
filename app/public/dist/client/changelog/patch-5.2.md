@@ -56,6 +56,10 @@
 - Rock now has an extra effect: At every stage, get a random "Weather Rock", granting a synergy, and counting towards the activation of a particular weather condition
 
 # Changes to Items
+
+- New item category: Shiny items, as exclusive rewards when encountering a shiny wild Pokémon during PvE rounds
+- Added 6 shiny items: Dynamax Band, Super Rod, Shiny Stone, White Flute, Rare Candy, Eviolite
+- New item category: Weather Rocks, unlocked with Rock synergy
 - New item: Damp Rock: Gives Water synergy and counts for 3 towards Rain. Can only be used on rock Pokémon
 - New item: Icy Rock: Gives Ice synergy and counts for 3 towards Snow. Can only be used on rock Pokémon
 - New item: Heat Rock: Gives Fire synergy and counts for 3 towards Zenith. Can only be used on rock Pokémon
@@ -72,11 +76,14 @@
 # UI
 
 - Add visual effect to each Ghost curse
+- Improved Options Menu. Game hotkeys are now remappable.
+- Add variant background colors to items based on their item category
 
 # Bugfix
 
--
+- Fix shop unit highlight when using regional variants
 
 # Misc
 
 - Ultra ball ranked matches are back, twice per day at 10am and 10pm CET
+- Users kicked from a lobby cannot rejoin it again. Added a confirmation popup when kicking a user

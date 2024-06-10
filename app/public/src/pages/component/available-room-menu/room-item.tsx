@@ -27,6 +27,13 @@ export default function RoomItem(props: {
     canJoin = false
     disabledReason = t("game_already_started")
   } else if (
+    props.room.metadata?.blacklist &&
+    user?.id &&
+    props.room.metadata?.blacklist.includes(user.id) === true
+  ) {
+    canJoin = false
+    disabledReason = t("blacklisted")
+  } else if (
     props.room.metadata?.whitelist &&
     user?.id &&
     props.room.metadata?.whitelist.includes(user.id) === false
