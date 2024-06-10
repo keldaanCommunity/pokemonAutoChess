@@ -9,6 +9,7 @@
  - Gastrodon East Sea
  - Munna
  - Musharna
+ - Kleavor
 
 # Changes to Pokemon & Abilities
 
