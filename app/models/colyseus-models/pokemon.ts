@@ -486,8 +486,8 @@ export class MegaAltaria extends Pokemon {
 
 export class Scyther extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING])
-  rarity = Rarity.COMMON
-  stars = 1
+  rarity = Rarity.UNIQUE
+  stars = 3
   hp = 190
   atk = 19
   def = 5
