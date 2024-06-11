@@ -93,6 +93,7 @@ export default class Player extends Schema implements IPlayer {
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
   weatherRocks: Item[] = pickNRandomIn(WeatherRocks, 3)
   randomComponentsGiven: Item[] = []
+  randomEggsGiven: Pkm[] = []
   lightX: number
   lightY: number
   canRegainLife: boolean = true
@@ -359,7 +360,7 @@ export default class Player extends Schema implements IPlayer {
                   needsRecomputingSynergiesAgain = true
                 }
               }
-            } 
+            }
           }
         })
       })

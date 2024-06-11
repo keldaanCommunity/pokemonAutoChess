@@ -1220,7 +1220,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           nbOfEggs < nbMaxEggs
         ) {
           const eggShiny = player.effects.has(Effect.GOLDEN_EGGS)
-          const egg = createRandomEgg(eggShiny)
+          const egg = createRandomEgg(eggShiny, player)
           const x = getFirstAvailablePositionInBench(player.board)
           egg.positionX = x !== undefined ? x : -1
           egg.positionY = 0
