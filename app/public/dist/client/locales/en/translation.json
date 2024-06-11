@@ -1376,7 +1376,7 @@
     "ANCHOR_SHOT": "Grab the farthest pokémon and deals [20,40,80,SP] SPECIAL",
     "MAGNET_RISE": "Grants PROTECT for 2 seconds and [10,SP]% dodge chance to user and [2,4,6] adjacent ally pokémon",
     "ATTRACT": "Make [1,2,3] pokémon chosen randomly CHARM for [1,SP] seconds",
-    "WATER_PULSE": "Deals [75,150,SP] SPECIAL to the target and adjacent ennemis and make them CONFUSION for 2 seconds",
+    "WATER_PULSE": "Deals [75,150,SP] SPECIAL to the target and adjacent enemies and make them CONFUSION for 2 seconds",
     "PLAY_ROUGH": "Deals [30,60,120,SP] SPECIAL to the target and make it CHARM for 2.5 seconds",
     "AERIAL_ACE": "Deals [25,50,100,SP] TRUE",
     "PARABOLIC_CHARGE": "Heal [25,50] HP and deals [25,50,100,SP] SPECIAL damage to the target. Excess HP is converted into SPECIAL",
