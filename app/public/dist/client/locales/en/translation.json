@@ -353,7 +353,8 @@
     "MAGNET_BOMB": "Magnet Bomb",
     "MUDDY_WATER": "Muddy Water",
     "ANCIENT_POWER": "Ancient Power",
-    "MOON_DREAM": "Moon Dream"
+    "MOON_DREAM": "Moon Dream",
+    "STONE_AXE": "Stone Axe"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -522,6 +523,7 @@
     "SCYTHER": "Scyther",
     "SCIZOR": "Scizor",
     "MEGA_SCIZOR": "Mega Scizor",
+    "KLEAVOR": "Kleavor",
     "RIOLU": "Riolu",
     "LUCARIO": "Lucario",
     "MAGIKARP": "Magikarp",
@@ -1491,7 +1493,8 @@
     "MAGNET_BOMB": "A magnetic bomb dealing [20,40,80,SP] SPECIAL to target, [10,20,40,SP] SPECIAL to adjacent enemies and attracting distant enemies",
     "MUDDY_WATER": "Spurts muddy water at up to 3 targets in front of itself, dealing [40,80,SP] SPECIAL, WOUND and ARMOR_REDUCTION for 4 seconds",
     "ANCIENT_POWER": "Launches rocks at the target, dealing [50,100,SP] SPECIAL. Raises the user's AP by [25,SP]",
-    "MOON_DREAM": "Target falls SLEEP for [3,6,9] s and grants [10,20,30,SP] SHIELD to the caster's [3,4,5] closest allies"
+    "MOON_DREAM": "Target falls SLEEP for [3,6,9] s and grants [10,20,30,SP] SHIELD to the caster's [3,4,5] closest allies",
+    "STONE_AXE": "Deal [50,SP] TRUE. Lay sharp stones around the target. The stones stay on the field, dealing 10 PHYSICAL per second and WOUND opponents that walk on it, if not ROCK or FLYING"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1945,7 +1948,7 @@
     "PROTEAN3": "The pokemon acquires the typing of the 3 highest synergies on the team",
     "CASTFORM": "Castform changes its form and the weather to SUN, RAIN or SNOW depending on your dominant synergy between FIRE WATER ICE",
     "PHIONE": "Phione is looking for an AQUA_EGG",
-    "SCYTHER": "$t(pkm.SCYTHER) is looking for a METAL_COAT",
+    "SCYTHER": "$t(pkm.SCYTHER) is looking for a METAL_COAT or a BLACK_AUGURITE",
     "PRIMAL": "Legend has it that you could unleash the ancient powers of these pokemons",
     "WONDER_GUARD": "Blocks 20 damage on every hit received",
     "ELECTRIC_TERRAIN": "Give ELECTRIC_FIELD to your ELECTRIC Pokemon, boosting their damage by 20%",
