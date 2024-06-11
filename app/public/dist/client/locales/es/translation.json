@@ -1685,7 +1685,7 @@
     "GOOGLE_SPECS": "Obtén +15 % de ATK base, AP y HP máximo como SHIELD por objeto retenido. Consigue otro objeto artificial.",
     "HATCHER": "25% de probabilidad por derrota consecutiva de obtener un huevo, máximo 1 huevo en el banquillo",
     "BREEDER": "Consigue un huevo tras cada derrota contra un jugador, no hay límite de huevos en el banquillo",
-    "GOLDEN_EGGS": "Consigue un Huevo dorado después de cada derrota contra un jugador, que se puede vender por 10 GOLD",
+    "GOLDEN_EGGS": "Consigue un Huevo dorado después de cada derrota contra un jugador, que se puede vender por 10 GOLD o dar un objeto brillante al nacer",
     "GRASSY_TERRAIN": "Aumenta el daño infligido en un 20 % (solo hierba)",
     "PSYCHIC_TERRAIN": "Aumenta el daño infligido en un 20% (solo psíquico)",
     "ELECTRIC_TERRAIN": "Aumenta el daño infligido en un 20% (solo eléctrico)",

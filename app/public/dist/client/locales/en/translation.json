@@ -1705,7 +1705,7 @@
     "GOOGLE_SPECS": "Gain +15% base ATK, AP and max HP as SHIELD per held item. Get another artificial item.",
     "HATCHER": "25% chance per loss streak to get an Egg, 1 egg max on the bench",
     "BREEDER": "Get an Egg after each defeat against a player, no limit for amount of eggs on the bench",
-    "GOLDEN_EGGS": "Get a golden Egg after each defeat against a player, that can be sold for 10 GOLD",
+    "GOLDEN_EGGS": "Get a golden Egg after each defeat against a player, that can be sold for 10 GOLD or give a shiny item when hatched",
     "GRASSY_TERRAIN": "Increase damage dealt by 20% (Grass only)",
     "PSYCHIC_TERRAIN": "Increase damage dealt by 20% (Psychic only)",
     "ELECTRIC_TERRAIN": "Increase damage dealt by 20% (Electric only)",
