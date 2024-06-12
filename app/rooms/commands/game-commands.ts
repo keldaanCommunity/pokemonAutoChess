@@ -928,7 +928,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         // reset streak
         player.streak = 0
       } else {
-        player.streak = max(5)(player.streak + 1)
+        player.streak += 1
       }
     })
   }
@@ -939,7 +939,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (player.alive && !player.isBot) {
         player.interest = Math.min(Math.floor(player.money / 10), 5)
         income += player.interest
-        income += player.streak
+        income += max(5)(player.streak)
         income += 5
         player.money += income
         if (income > 0) {
@@ -1203,7 +1203,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           player.getLastBattleResult() == BattleResult.DEFEAT &&
           player.effects.has(Effect.HATCHER)
         ) {
-          eggChance = 0.25 * player.streak
+          eggChance = 0.25 * (player.streak + 1)
           nbMaxEggs = 1
         }
 
@@ -1225,7 +1225,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           nbOfEggs < nbMaxEggs
         ) {
           const eggShiny = player.effects.has(Effect.GOLDEN_EGGS)
-          const egg = createRandomEgg(eggShiny)
+          const egg = createRandomEgg(eggShiny, player)
           const x = getFirstAvailablePositionInBench(player.board)
           egg.positionX = x !== undefined ? x : -1
           egg.positionY = 0

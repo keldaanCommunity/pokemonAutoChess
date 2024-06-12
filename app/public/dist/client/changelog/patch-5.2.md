@@ -55,6 +55,9 @@
 - Ghost 4: Attack debuff ~~50~~ 30%
 - Ghost 8: Curse delay ~~3~~ 6 seconds
 - Rock now has an extra effect: At every stage, get a random "Weather Rock", granting a synergy, and counting towards the activation of a particular weather condition
+- Baby synergy won't give you the same unit in egg twice, unless you got all the possible eggs before. Hidden Power (E) and Eggsplosion still give random eggs.
+- Buff Baby 3: now gives 25% chance to hatch an egg at first defeat instead of first defeat streak
+- Buff Baby 7: when golden eggs are hatched, gain a random shiny item
 
 # Changes to Items
 
