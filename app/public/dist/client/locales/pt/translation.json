@@ -1592,7 +1592,7 @@
     "LUCKY_EGG": "+40% AP para titular e aliados adjacentes na mesma linha",
     "AQUA_EGG": "O detentor ganha +50 de PP inicial e recupera 20 de PP após lançar sua habilidade",
     "BLUE_ORB": "Cada terceiro ataque do titular libera uma corrente de raios que atinge os 3 inimigos que se aproximam, causando 10 SPECIAL e queimando 20 PP",
-    "SCOPE_LENS": "Ganha 25% CRIT_CHANCE. Acertos críticos roubam 15 de PP do alvo.",
+    "SCOPE_LENS": "Acertos críticos roubam 15 de PP do alvo.",
     "STAR_DUST": "Após lançar a habilidade, ganhe 60% da PP máxima como SHIELD",
     "GREEN_ORB": "Titular e aliados adjacentes na mesma linha ganham 4 bônus de PP por acerto",
     "MANA_SCARF": "Os ataques do detentor restauram 8 PP adicionais",

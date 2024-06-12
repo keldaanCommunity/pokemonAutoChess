@@ -55,6 +55,7 @@
 - Ghost 4: Attack debuff ~~50~~ 30%
 - Ghost 8: Curse delay ~~3~~ 6 seconds
 - Rock now has an extra effect: At every stage, get a random "Weather Rock", granting a synergy, and counting towards the activation of a particular weather condition
+- Nerf Dark: Crit chance ~~40/55/70~~ 30/40/50
 
 # Changes to Items
 
@@ -69,6 +70,7 @@
 - Buff Soothe Bell: ~~25~~ 33% of damage inflicted as shield
 - Changed Blue Orb: the chain lightning now targets the 3 closest enemies, and inflicts 10 special damage in addition to the mana burn
 - Changed power lens: The amount of special damage reduced by special defense is inflicted back to the attacker
+- Buff Reaper Cloth: ~~10~~ 15% crit chance
 
 # Gameplay
 
