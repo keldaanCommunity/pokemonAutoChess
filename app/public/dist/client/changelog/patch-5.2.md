@@ -55,7 +55,7 @@
 - Ghost 4: Attack debuff ~~50~~ 30%
 - Ghost 8: Curse delay ~~3~~ 6 seconds
 - Rock now has an extra effect: At every stage, get a random "Weather Rock", granting a synergy, and counting towards the activation of a particular weather condition
-- Nerf Dark: Crit chance ~~40/55/70~~ 30/40/50
+- Adapted Dark: Crit chance ~~40/55/70~~ 30/40/50%, Crit power ~~25/35/50~~ 60/80/100%
 
 # Changes to Items
 
