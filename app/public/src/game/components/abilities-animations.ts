@@ -2198,6 +2198,10 @@ export function displayAbility(
       break
     }
 
+    case Ability.STONE_AXE:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
     case "FIELD_DEATH":
       addAbilitySprite("FIELD_DEATH", coordinates, true).setScale(2)
       break

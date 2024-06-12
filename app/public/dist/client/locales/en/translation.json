@@ -353,7 +353,8 @@
     "MAGNET_BOMB": "Magnet Bomb",
     "MUDDY_WATER": "Muddy Water",
     "ANCIENT_POWER": "Ancient Power",
-    "MOON_DREAM": "Moon Dream"
+    "MOON_DREAM": "Moon Dream",
+    "STONE_AXE": "Stone Axe"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -522,6 +523,7 @@
     "SCYTHER": "Scyther",
     "SCIZOR": "Scizor",
     "MEGA_SCIZOR": "Mega Scizor",
+    "KLEAVOR": "Kleavor",
     "RIOLU": "Riolu",
     "LUCARIO": "Lucario",
     "MAGIKARP": "Magikarp",
@@ -1376,7 +1378,7 @@
     "ANCHOR_SHOT": "Grab the farthest pokémon and deals [20,40,80,SP] SPECIAL",
     "MAGNET_RISE": "Grants PROTECT for 2 seconds and [10,SP]% dodge chance to user and [2,4,6] adjacent ally pokémon",
     "ATTRACT": "Make [1,2,3] pokémon chosen randomly CHARM for [1,SP] seconds",
-    "WATER_PULSE": "Deals [75,150,SP] SPECIAL to the target and adjacent ennemis and make them CONFUSION for 2 seconds",
+    "WATER_PULSE": "Deals [75,150,SP] SPECIAL to the target and adjacent enemies and make them CONFUSION for 2 seconds",
     "PLAY_ROUGH": "Deals [30,60,120,SP] SPECIAL to the target and make it CHARM for 2.5 seconds",
     "AERIAL_ACE": "Deals [25,50,100,SP] TRUE",
     "PARABOLIC_CHARGE": "Heal [25,50] HP and deals [25,50,100,SP] SPECIAL damage to the target. Excess HP is converted into SPECIAL",
@@ -1491,7 +1493,8 @@
     "MAGNET_BOMB": "A magnetic bomb dealing [20,40,80,SP] SPECIAL to target, [10,20,40,SP] SPECIAL to adjacent enemies and attracting distant enemies",
     "MUDDY_WATER": "Spurts muddy water at up to 3 targets in front of itself, dealing [40,80,SP] SPECIAL, WOUND and ARMOR_REDUCTION for 4 seconds",
     "ANCIENT_POWER": "Launches rocks at the target, dealing [50,100,SP] SPECIAL. Raises the user's AP by [25,SP]",
-    "MOON_DREAM": "Target falls SLEEP for [3,6,9] s and grants [10,20,30,SP] SHIELD to the caster's [3,4,5] closest allies"
+    "MOON_DREAM": "Target falls SLEEP for [3,6,9] s and grants [10,20,30,SP] SHIELD to the caster's [3,4,5] closest allies",
+    "STONE_AXE": "Deal [50,SP] TRUE. Lay sharp stones around the target. The stones stay on the field, dealing 10 PHYSICAL per second and WOUND opponents that walk on it, if not ROCK or FLYING"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1705,7 +1708,7 @@
     "GOOGLE_SPECS": "Gain +15% base ATK, AP and max HP as SHIELD per held item. Get another artificial item.",
     "HATCHER": "25% chance per loss streak to get an Egg, 1 egg max on the bench",
     "BREEDER": "Get an Egg after each defeat against a player, no limit for amount of eggs on the bench",
-    "GOLDEN_EGGS": "Get a golden Egg after each defeat against a player, that can be sold for 10 GOLD",
+    "GOLDEN_EGGS": "Get a golden Egg after each defeat against a player, that can be sold for 10 GOLD or give a shiny item when hatched",
     "GRASSY_TERRAIN": "Increase damage dealt by 20% (Grass only)",
     "PSYCHIC_TERRAIN": "Increase damage dealt by 20% (Psychic only)",
     "ELECTRIC_TERRAIN": "Increase damage dealt by 20% (Electric only)",
@@ -1945,7 +1948,7 @@
     "PROTEAN3": "The pokemon acquires the typing of the 3 highest synergies on the team",
     "CASTFORM": "Castform changes its form and the weather to SUN, RAIN or SNOW depending on your dominant synergy between FIRE WATER ICE",
     "PHIONE": "Phione is looking for an AQUA_EGG",
-    "SCYTHER": "$t(pkm.SCYTHER) is looking for a METAL_COAT",
+    "SCYTHER": "$t(pkm.SCYTHER) is looking for a METAL_COAT or a BLACK_AUGURITE",
     "PRIMAL": "Legend has it that you could unleash the ancient powers of these pokemons",
     "WONDER_GUARD": "Blocks 20 damage on every hit received",
     "ELECTRIC_TERRAIN": "Give ELECTRIC_FIELD to your ELECTRIC Pokemon, boosting their damage by 20%",
