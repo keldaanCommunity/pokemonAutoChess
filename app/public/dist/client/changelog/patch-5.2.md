@@ -56,6 +56,7 @@
 - Ghost 8: Curse delay ~~3~~ 6 seconds
 - Rock now has an extra effect: At every stage, get a random "Weather Rock", granting a synergy, and counting towards the activation of a particular weather condition
 - Adapted Dark: Crit chance ~~40/55/70~~ 30/40/50%, Crit power ~~25/35/50~~ 60/80/100%
+- Buff Water: ~~4/7/10~~ 4/8/12 PP per second
 
 # Changes to Items
 
