@@ -1451,7 +1451,7 @@
     "QUIVER_DANCE": "Gagne [5,SP] ATK, [5,SP] SPE_DEF, [20,SP]% ATK_SPEED et 20% AP",
     "TORCH_SONG": "Souffle des flammes furieuses sur les [1,2,3] adversaires les plus forts. Chaque flamme brûle la cible et les unités adjacentes pour [10,20,30,SP] SPECIAL. Gagne 10 AP pour chaque unité touchée ayant le statut BURN, CURSE ou SILENCE.",
     "POWER_WHIP": "S'agrippe à l'unité adverse la plus lointaine en projetant une liane gigantesque, infligeant [30,60,SP] SPECIAL à tous les ennemis touchés",
-    "DARK_HARVEST": "Se téléporte près du plus gros groupe d'adversaires. Pendant les 3 prochaines secondes, le lanceur subit SILENCE et draine les HP des adversaires adjacents, infligeant [8,16,24,SP] SPECIAL per seconde et se soignant à hauteur de [20,30,40]% des SPECIAL infligés",
+    "DARK_HARVEST": "Se téléporte près du plus gros groupe d'adversaires. Pendant les 3 prochaines secondes, le lanceur subit SILENCE et draine les HP des adversaires adjacents, infligeant [5,10,20,SP] SPECIAL per seconde et se soignant à hauteur de 30% des SPECIAL infligés",
     "PSYSHOCK": "Consume [30,60,100,SP] PP de la cible et les récupère en SHIELD. Si la cible n'a pas assez de PP, le reste est infligé en SPECIAL.",
     "HEAVY_SLAM": "Le lanceur se jette sur l'ennemi de tout son poids, infligeant [10,20,40,SP] SPECIAL et gagnant [10,20,40] SHIELD. Plus il a de max HP par rapport à la cible, plus la puissance de cette capacité augmente.",
     "RAPID_SPIN": "Inflige [20,50,SP] SPECIAL et gagne [20,30,SP]% de son ATK en DEF et SPE_DEF",
