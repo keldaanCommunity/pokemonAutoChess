@@ -8764,7 +8764,7 @@ export class DarkHarvestStrategy extends AbilityStrategy {
         board
       )
       pokemon.status.triggerDarkHarvest(3200)
-      pokemon.status.triggerSilence(3000, pokemon, pokemon)
+      pokemon.status.triggerSilence(3200, pokemon, pokemon)
     }
   }
 }
