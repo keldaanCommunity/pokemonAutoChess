@@ -13,7 +13,7 @@
 
 # Changes to Pokemon & Abilities
 
-- Nerf Hydreigon Dark Harvest: Special damage ~~10/20/40~~ 5/10/20, heal 30% at all tiers
+- Nerf Hydreigon Dark Harvest: Special damage ~~8/16/24~~ 5/10/20, heal 30% at all tiers
 - Buff Haxorus: HP ~~180~~ 200
 - Nerf Crabrawler: HP ~~110~~ 90, Attack ~~11~~ 9, Def/Spedef ~~3~~ 2
 - New ability for Magnemite line: Magnet bomb
@@ -29,7 +29,7 @@
 - Deoxys ~~Psychic Artificial Human~~ Psychic Amorphous Human
 - Darkrai ~~Dark Ghost Monster~~ Dark Ghost Amorhpous
 - Nihilego ~~Poison Rock~~ Poison Rock Amorphous
-- Vaporeon ~~Water Aquatic/Field~~ Water Amorphous Fied
+- Vaporeon ~~Water Aquatic/Field~~ Water Amorphous Field
 - Grimer ~~Poison Monster~~ Poison Monster Amorphous
 - Omanyte ~~Water Fossil~~~ Water Fossil Amorphous
 - Dewpider ~~Water Bug~~ Water Bug Amorphous
@@ -48,7 +48,7 @@
 # Changes to Synergies
 
 - New Synergy Amorphous: Those pokémons are extremely flexible and lack their own shape. Your team gains bonuses by activating a wide variety of synergies
-  - FLUID": Ally team gains +4% ATK_SPEED and 7 SHIELD per unique active synergy
+  - FLUID: Ally team gains +4% ATK_SPEED and 7 SHIELD per unique active synergy
   - SHAPELESS: Ally team gains +4% ATK_SPEED, 7 SHIELD, +1 ATK and +5% AP per unique active synergy
   - ETHEREAL: Your AMORPHOUS pokemons gain double the bonuses
 - Ghost curses now transmit to another enemy when the cursed pokemon is KO. The curse status afflictions no longer have durations, and will be reapplied every second (important for cleanse tag)
