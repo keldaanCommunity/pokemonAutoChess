@@ -49,6 +49,7 @@
     "@colyseus/redis-presence": "^0.15.4",
     "@colyseus/tools": "^0.15.36",
     "@colyseus/ws-transport": "^0.15.0",
+    "@joaomoreno/unique-names-generator": "^5.1.0",
     "@reduxjs/toolkit": "^2.2.1",
     "@types/bootstrap": "^5.2.10",
     "body-parser": "^1.20.1",
@@ -70,7 +71,7 @@
     "fs-extra": "^11.2.0",
     "graceful-fs": "^4.2.10",
     "i18next": "^23.7.16",
-    "i18next-browser-languagedetector": "^7.2.0",
+    "i18next-browser-languagedetector": "^8.0.0",
     "i18next-http-backend": "^2.4.2",
     "immer": "^10.0.3",
     "jimp": "^0.22.10",
@@ -96,8 +97,7 @@
     "react-router-dom": "^6.21.3",
     "react-tabs": "^6.0.2",
     "react-toastify": "^10.0.3",
-    "react-tooltip": "5.21.5",
-    "unique-names-generator": "^4.7.1"
+    "react-tooltip": "5.21.5"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.23.8",
@@ -114,7 +114,7 @@
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
     "csv-writer": "^1.6.0",
-    "esbuild": "^0.20.1",
+    "esbuild": "^0.21.5",
     "eslint": "^8.55.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-react-hooks": "^4.6.0",

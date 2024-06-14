@@ -1,4 +1,5 @@
 import { Emotion } from "."
+import { EloRank } from "./enum/EloRank"
 import { AttackType, Rarity, Stat } from "./enum/Game"
 import { Item } from "./enum/Item"
 import { Pkm, PkmDuo, PkmProposition } from "./enum/Pokemon"
@@ -8,7 +9,7 @@ import { Weather } from "./enum/Weather"
 export const ON_ATTACK_MANA = 5
 export const MANA_SCARF_MANA = 8
 export const SCOPE_LENS_MANA = 15
-
+export const ARMOR_FACTOR = 0.1
 export const BOARD_WIDTH = 8
 export const BOARD_HEIGHT = 6
 
@@ -350,14 +351,6 @@ export const ItemProposalStages = [3, 15]
 export const AdditionalPicksStages = [5, 8, 11]
 export const PortalCarouselStages = [10, 20]
 
-export enum EloRank {
-  BEGINNER = "BEGINNER",
-  POKEBALL = "POKEBALL",
-  GREATBALL = "GREATBALL",
-  ULTRABALL = "ULTRABALL",
-  MASTERBALL = "MASTERBALL"
-}
-
 export const EloRankThreshold: { [key in EloRank]: number } = {
   [EloRank.BEGINNER]: 0,
   [EloRank.POKEBALL]: 900,
@@ -562,7 +555,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.CHOICE_SPECS]: { [Stat.AP]: 100 },
   [Item.SOUL_DEW]: { [Stat.AP]: 10, [Stat.PP]: 15 },
   [Item.UPGRADE]: { [Stat.AP]: 10, [Stat.ATK_SPEED]: 10 },
-  [Item.REAPER_CLOTH]: { [Stat.AP]: 10, [Stat.CRIT_CHANCE]: 10 },
+  [Item.REAPER_CLOTH]: { [Stat.AP]: 10, [Stat.CRIT_CHANCE]: 15 },
   [Item.POKEMONOMICON]: { [Stat.AP]: 10, [Stat.SHIELD]: 15 },
   [Item.POWER_LENS]: { [Stat.AP]: 10, [Stat.SPE_DEF]: 5 },
   [Item.SHELL_BELL]: { [Stat.AP]: 10, [Stat.ATK]: 3 },
@@ -637,7 +630,19 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.EXP_SHARE]: {},
   [Item.METEORITE]: {},
   [Item.BERRY_JUICE]: {},
-  [Item.TRASH]: {}
+  [Item.TRASH]: {},
+  [Item.DYNAMAX_BAND]: {},
+  [Item.SHINY_STONE]: {},
+  [Item.SUPER_ROD]: {},
+  [Item.RARE_CANDY]: {},
+  [Item.EVIOLITE]: {
+    [Stat.HP]: 100,
+    [Stat.ATK]: 10,
+    [Stat.AP]: 50,
+    [Stat.DEF]: 5,
+    [Stat.SPE_DEF]: 5
+  },
+  [Item.WHITE_FLUTE]: {}
 }
 
 export type TilesetExchangeFile = {
@@ -678,10 +683,13 @@ export const DTEF_TILESET_HEIGHT = 8
 export const DTEF_TILESET_TILE_WIDTH = 24
 
 export const SCRIBBLE_LOBBY_CRON = "0 0 0-20/4 * * *" // every four hours from 00h to 20h
-export const RANKED_LOBBY_CRON = "0 0 2-22/4 * * *" // every four hours from 2h to 22h
+export const GREATBALL_RANKED_LOBBY_CRON = "0 0 2,6,14,18 * * *" // every four hours from 2h to 22h
+export const ULTRABALL_RANKED_LOBBY_CRON = "0 0 10,22 * * *" // every four hours from 2h to 22h
 
 export const DUST_PER_BOOSTER = 50
 export const DUST_PER_SHINY = 250
 
 export const TOURNAMENT_REGISTRATION_TIME = 60 * 60 * 1000 // 1 hour
 export const TOURNAMENT_CLEANUP_DELAY = 24 * 60 * 60 * 1000 // 1 day
+
+export { EloRank }

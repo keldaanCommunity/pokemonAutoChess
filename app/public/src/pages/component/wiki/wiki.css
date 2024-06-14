@@ -260,12 +260,11 @@
   max-width: 400px;
 }
 
-#wiki-items .artificial {
-  max-width: 290px;
-}
-
+#wiki-items .artificial,
+#wiki-items .weather-rocks,
+#wiki-items .shiny,
 #wiki-items .special {
-  max-width: 290px;
+  max-width: 460px;
 }
 
 #wiki-items img.item {

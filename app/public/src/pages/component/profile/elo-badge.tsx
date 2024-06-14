@@ -1,6 +1,7 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { EloRank, EloRankThreshold } from "../../../../../types/Config"
+import { EloRankThreshold } from "../../../../../types/Config"
+import { EloRank } from "../../../../../types/enum/EloRank"
 import "./elo-badge.css"
 
 export function EloBadge(props: { elo: number }) {

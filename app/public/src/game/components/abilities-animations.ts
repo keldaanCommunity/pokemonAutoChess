@@ -948,6 +948,49 @@ export function displayAbility(
         )
       break
 
+    case Ability.MUDDY_WATER:
+      addAbilitySprite(skill, coordinatesTarget, true)
+        .setScale(2)
+        .setOrigin(0.5, 1)
+      break
+
+    case Ability.ANCIENT_POWER: {
+      const rock = addAbilitySprite(skill, coordinates).setScale(2)
+      scene.tweens.add({
+        targets: rock,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 1000,
+        onComplete: () => {
+          rock.destroy()
+        }
+      })
+      break
+    }
+
+    case Ability.MOON_DREAM: {
+      const aboveTargetCoordinates = transformAttackCoordinate(
+        positionX,
+        positionY,
+        flip
+      )
+      aboveTargetCoordinates[1] -= 100
+      const moon = addAbilitySprite(skill, aboveTargetCoordinates).setScale(1.5)
+      scene.tweens.add({
+        targets: moon,
+        scale: 0.5,
+        x: coordinates[0],
+        y: coordinates[1],
+        ease: "linear",
+        duration: 500,
+        onComplete: () => {
+          moon.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.STEAM_ERUPTION:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
@@ -2136,6 +2179,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
+    case Ability.MAGNET_BOMB:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
     case Ability.GUNK_SHOT: {
       const specialProjectile = addAbilitySprite(skill, coordinates).setScale(2)
       scene.tweens.add({
@@ -2150,6 +2197,10 @@ export function displayAbility(
       })
       break
     }
+
+    case Ability.STONE_AXE:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
 
     case "FIELD_DEATH":
       addAbilitySprite("FIELD_DEATH", coordinates, true).setScale(2)
@@ -2179,17 +2230,16 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
-    case "STATIC":
-      addAbilitySprite(skill, coordinates, true).setScale(3)
-      break
-
     case "HEAL_ORDER":
     case "ATTACK_ORDER":
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
     case "FISHING":
-      addAbilitySprite(Ability.DIVE, coordinates, true).setDepth(0).setScale(1)
+      addAbilitySprite(Ability.DIVE, coordinates, true)
+        .setOrigin(0.5, -2)
+        .setDepth(0)
+        .setScale(1)
       break
 
     case "EVOLUTION":

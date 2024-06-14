@@ -8,9 +8,13 @@ import {
   Berries,
   Item,
   ItemRecipe,
-  SpecialItems
+  SpecialItems,
+  ShinyItems,
+  WeatherRocks
 } from "../../../../../types/enum/Item"
+import { Synergy } from "../../../../../types/enum/Synergy"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
+import SynergyIcon from "../icons/synergy-icon"
 
 export default function WikiItems() {
   const [itemHovered, setItemHovered] = useState<Item>()
@@ -91,7 +95,9 @@ export default function WikiItems() {
         </table>
       </article>
       <article>
-        <h2>{t("berries")}</h2>
+        <h2>
+          <SynergyIcon type={Synergy.GRASS} /> {t("berries")}
+        </h2>
         <ul className="berries">
           {Berries.map((i) => (
             <li
@@ -110,7 +116,9 @@ export default function WikiItems() {
         </ul>
       </article>
       <article>
-        <h2>{t("artificial_items")}</h2>
+        <h2>
+          <SynergyIcon type={Synergy.ARTIFICIAL} /> {t("artificial_items")}
+        </h2>
         <ul className="artificial">
           {ArtificialItems.map((i) => (
             <li
@@ -122,8 +130,35 @@ export default function WikiItems() {
             </li>
           ))}
         </ul>
-      </article>
-      <article>
+
+        <h2>
+          <SynergyIcon type={Synergy.ROCK} /> {t("weather_rocks")}
+        </h2>
+        <ul className="weather-rocks">
+          {WeatherRocks.map((i) => (
+            <li
+              key={i}
+              data-tooltip-id="detail-item"
+              onMouseOver={() => setItemHovered(i)}
+            >
+              <img src={"assets/item/" + i + ".png"} className="item"></img>
+            </li>
+          ))}
+        </ul>
+
+        <h2>{t("shiny_items")}</h2>
+        <ul className="shiny">
+          {ShinyItems.map((i) => (
+            <li
+              key={i}
+              data-tooltip-id="detail-item"
+              onMouseOver={() => setItemHovered(i)}
+            >
+              <img src={"assets/item/" + i + ".png"} className="item"></img>
+            </li>
+          ))}
+        </ul>
+
         <h2>{t("special_items")}</h2>
         <ul className="special">
           {SpecialItems.map((i) => (

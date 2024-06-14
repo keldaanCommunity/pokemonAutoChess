@@ -19,9 +19,9 @@ import {
   PkmDuos,
   PkmFamily,
   PkmProposition,
-  getUnownsPoolPerStage,
   PkmRegionalVariants,
-  Unowns
+  Unowns,
+  getUnownsPoolPerStage
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
@@ -448,7 +448,7 @@ export default class Shop {
     )
   }
 
-  fishPokemon(player: Player, fishingLevel: number): Pkm {
+  pickFish(player: Player, fishingLevel: number): Pkm {
     const rarityProbability = FishRarityProbability[fishingLevel]
     const rarity_seed = Math.random()
     let fish: Pkm = Pkm.MAGIKARP

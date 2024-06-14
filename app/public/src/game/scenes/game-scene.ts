@@ -27,7 +27,7 @@ import { clearTitleNotificationIcon } from "../../../../utils/window"
 import { getGameContainer } from "../../pages/game"
 import { SOUNDS, playMusic, playSound } from "../../pages/utils/audio"
 import { transformCoordinate } from "../../pages/utils/utils"
-import { preferences } from "../../preferences"
+import { loadPreferences, preferences } from "../../preferences"
 import AnimationManager from "../animation-manager"
 import BattleManager from "../components/battle-manager"
 import BoardManager from "../components/board-manager"
@@ -172,16 +172,21 @@ export default class GameScene extends Scene {
   }
 
   registerKeys() {
-    this.input.keyboard!.on("keydown-D", () => {
-      playSound(SOUNDS.REFRESH, 0.5)
-      this.refreshShop()
-    })
+    const preferences = loadPreferences()
+    this.input.keyboard!.removeAllListeners()
+    this.input.keyboard!.on(
+      "keydown-" + preferences.keybindings.refresh,
+      () => {
+        playSound(SOUNDS.REFRESH, 0.5)
+        this.refreshShop()
+      }
+    )
 
-    this.input.keyboard!.on("keydown-F", () => {
+    this.input.keyboard!.on("keydown-" + preferences.keybindings.buy_xp, () => {
       this.buyExperience()
     })
 
-    this.input.keyboard!.on("keydown-E", () => {
+    this.input.keyboard!.on("keydown-" + preferences.keybindings.sell, () => {
       if (this.pokemonHovered) {
         this.sellPokemon(this.pokemonHovered)
       } else if (this.shopIndexHovered !== null) {

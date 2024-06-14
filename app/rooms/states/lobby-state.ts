@@ -4,17 +4,24 @@ import { nanoid } from "nanoid"
 import LobbyUser from "../../models/colyseus-models/lobby-user"
 import Message from "../../models/colyseus-models/message"
 import { TournamentSchema } from "../../models/colyseus-models/tournament"
+import { SpecialGamePlannedSchema } from "../../models/colyseus-models/lobby"
 import chatV2 from "../../models/mongo-models/chat-v2"
 import tournament from "../../models/mongo-models/tournament"
-import { RANKED_LOBBY_CRON, SCRIBBLE_LOBBY_CRON } from "../../types/Config"
+import {
+  GREATBALL_RANKED_LOBBY_CRON,
+  ULTRABALL_RANKED_LOBBY_CRON,
+  SCRIBBLE_LOBBY_CRON
+} from "../../types/Config"
+import { EloRank } from "../../types/enum/EloRank"
 import { GameMode } from "../../types/enum/Game"
+import { ISpecialGamePlanned } from "../../types/interfaces/Lobby"
 import { logger } from "../../utils/logger"
 
 export default class LobbyState extends Schema {
   @type([Message]) messages = new ArraySchema<Message>()
   @type({ map: LobbyUser }) users = new MapSchema<LobbyUser>()
-  @type("string") nextSpecialGameDate: string = ""
-  @type("string") nextSpecialGameMode: GameMode | "" = ""
+  @type(SpecialGamePlannedSchema) nextSpecialGame: ISpecialGamePlanned | null =
+    null
   @type([TournamentSchema]) tournaments = new ArraySchema<TournamentSchema>()
 
   addMessage(
@@ -64,20 +71,38 @@ export default class LobbyState extends Schema {
     this.addMessage(message, "server", "Server Announcement", "0294/Joyous")
   }
 
-  getNextSpecialGameDate() {
+  getNextSpecialGame() {
     const getNextDate = (t: string) =>
       new CronTime(t, "Europe/Paris").sendAt().toUnixInteger()
-    const nextRanked = getNextDate(RANKED_LOBBY_CRON)
+    const nextGreatballRanked = getNextDate(GREATBALL_RANKED_LOBBY_CRON)
+    const nextUltraballRanked = getNextDate(ULTRABALL_RANKED_LOBBY_CRON)
     const nextScribble = getNextDate(SCRIBBLE_LOBBY_CRON)
-    const nextSpecialGameDateInt = Math.min(nextRanked, nextScribble)
-    this.nextSpecialGameDate = new Date(
+    const nextSpecialGameDateInt = Math.min(
+      nextGreatballRanked,
+      nextUltraballRanked,
+      nextScribble
+    )
+    const nextSpecialGameDate = new Date(
       nextSpecialGameDateInt * 1000
     ).toISOString()
 
-    if (nextSpecialGameDateInt === nextRanked) {
-      this.nextSpecialGameMode = GameMode.RANKED
+    if (nextSpecialGameDateInt === nextGreatballRanked) {
+      this.nextSpecialGame = new SpecialGamePlannedSchema(
+        GameMode.RANKED,
+        nextSpecialGameDate,
+        EloRank.GREATBALL
+      )
+    } else if (nextSpecialGameDateInt === nextGreatballRanked) {
+      this.nextSpecialGame = new SpecialGamePlannedSchema(
+        GameMode.RANKED,
+        nextSpecialGameDate,
+        EloRank.ULTRABALL
+      )
     } else if (nextSpecialGameDateInt === nextScribble) {
-      this.nextSpecialGameMode = GameMode.SCRIBBLE
+      this.nextSpecialGame = new SpecialGamePlannedSchema(
+        GameMode.SCRIBBLE,
+        nextSpecialGameDate
+      )
     }
   }
 

@@ -15,6 +15,7 @@ import {
   Transfer
 } from "../types"
 import {
+  ARMOR_FACTOR,
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER,
   MANA_SCARF_MANA,
@@ -38,7 +39,7 @@ import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
-import { distanceC } from "../utils/distance"
+import { distanceC, distanceM } from "../utils/distance"
 import { clamp, max, min, roundTo2Digits } from "../utils/number"
 import { chance, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
@@ -290,7 +291,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attackType === AttackType.SPECIAL
       ) {
         attacker.handleDamage({
-          damage: Math.round(0.5 * specialDamage),
+          damage: Math.round(specialDamage / (1 + ARMOR_FACTOR * this.speDef)),
           board,
           attackType: AttackType.SPECIAL,
           attacker: this,
@@ -365,9 +366,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     apBoost: number,
     crit: boolean
   ) {
-    value = Math.round(
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    )
+    value = value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
 
     // for every 5% crit chance > 100, +0.1 crit power
     this.critChance += value
@@ -385,9 +384,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     apBoost: number,
     crit: boolean
   ) {
-    value = Math.round(
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    )
+    value = value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
+    
     this.critPower = Math.max(0, roundTo2Digits(this.critPower + value))
   }
 
@@ -462,9 +460,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     apBoost: number,
     crit: boolean
   ) {
-    value = Math.round(
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    )
+    value = value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     const currentAtkSpeedBonus = 100 * (this.atkSpeed / 0.75 - 1)
     const atkSpeedBonus = currentAtkSpeedBonus + value
     this.atkSpeed = clamp(
@@ -538,15 +534,54 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (this.count.staticHolderCount > 2) {
         this.count.staticHolderCount = 0
         // eslint-disable-next-line no-unused-vars
-        let c = 2
-        board.forEach((x, y, tg) => {
-          if (tg && this.team != tg.team && c > 0) {
-            tg.count.staticCount++
+
+        const nbBounces = 3
+        const closestEnemies = new Array<PokemonEntity>()
+        board.forEach(
+          (x: number, y: number, enemy: PokemonEntity | undefined) => {
+            if (enemy && this.team !== enemy.team) {
+              closestEnemies.push(enemy)
+            }
+          }
+        )
+        closestEnemies.sort((a, b) => {
+          const distanceA = distanceC(
+            a.positionX,
+            a.positionY,
+            this.positionX,
+            this.positionY
+          )
+          const distanceB = distanceC(
+            b.positionX,
+            b.positionY,
+            this.positionX,
+            this.positionY
+          )
+          return distanceA - distanceB
+        })
+
+        let previousTg: PokemonEntity = this
+        let tg: PokemonEntity | undefined = target
+
+        for (let i = 0; i < nbBounces; i++) {
+          tg = closestEnemies[i]
+          if (tg) {
+            this.simulation.room.broadcast(Transfer.ABILITY, {
+              id: this.simulation.id,
+              skill: "LINK_CABLE_link",
+              positionX: previousTg.positionX,
+              positionY: previousTg.positionY,
+              targetX: tg.positionX,
+              targetY: tg.positionY
+            })
+            tg.handleSpecialDamage(10, board, AttackType.SPECIAL, this, false)
             tg.addPP(-20, this, 0, false)
             tg.count.manaBurnCount++
-            c--
+            previousTg = tg
+          } else {
+            break
           }
-        })
+        }
       }
     }
 
@@ -667,8 +702,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       })
 
       if (closestAlly != null) {
-        const shield = Math.round(totalDamage * 0.25)
-        ;(closestAlly as PokemonEntity).addShield(shield, this, 0, false)
+        const closestAllyFound = closestAlly as PokemonEntity // typescript is dumb
+        const shield = Math.round(totalDamage * 0.33)
+        closestAllyFound.addShield(shield, this, 0, false)
       }
     }
 
@@ -740,6 +776,34 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.name === Pkm.MINIOR) {
       this.addAttackSpeed(4, this, 1, false)
+    }
+
+    if (this.passive === Passive.DREAM_CATCHER && target.status.sleep) {
+      const allies = board.cells.filter(
+        (p) => p && p.team === this.team && p.id !== this.id
+      ) as PokemonEntity[]
+      const alliesHit = allies
+        .sort(
+          (a, b) =>
+            distanceM(
+              a.positionX,
+              a.positionY,
+              this.positionX,
+              this.positionY
+            ) -
+            distanceM(b.positionX, b.positionY, this.positionX, this.positionY)
+        )
+        .slice(0, 2)
+
+      alliesHit.forEach((ally) => {
+        ally.addShield(10, ally, 1, false)
+        ally.simulation.room.broadcast(Transfer.ABILITY, {
+          id: ally.simulation.id,
+          skill: Ability.MOON_DREAM,
+          positionX: ally.positionX,
+          positionY: ally.positionY
+        })
+      })
     }
 
     if (this.items.has(Item.UPGRADE)) {
@@ -1254,7 +1318,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             entity.name
           )
       )
-      const randomItem = pickRandomIn(values(target.items))
+      const randomItem = pickRandomIn(
+        values(target.items).filter((item) => item !== Item.COMFEY)
+      )
       if (floraSpawn && randomItem && floraSpawn.items.size < 3) {
         floraSpawn.items.add(randomItem)
         floraSpawn.simulation.applyItemEffect(floraSpawn, randomItem)
@@ -1377,7 +1443,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.addShield(value, this, 0, false)
         break
       case Stat.HP:
-        this.handleHeal(value, this, 0, false)
+        this.addMaxHP(value)
         break
     }
   }

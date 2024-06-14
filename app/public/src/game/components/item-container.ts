@@ -1,5 +1,11 @@
 import { GameObjects } from "phaser"
-import { Item } from "../../../../types/enum/Item"
+import {
+  ArtificialItems,
+  Berries,
+  Item,
+  ShinyItems,
+  WeatherRocks
+} from "../../../../types/enum/Item"
 import { getGameScene } from "../../pages/game"
 import { preferences } from "../../preferences"
 import DraggableObject from "./draggable-object"
@@ -31,14 +37,17 @@ export default class ItemContainer extends DraggableObject {
     const currentPlayerUid = getGameScene()?.uid
     const itemSize = pokemonId === null ? 60 : 25
     super(scene, x, y, itemSize, itemSize, playerId !== currentPlayerUid)
+    this.name = item
     this.scene = scene
     this.pokemonId = pokemonId
     this.playerId = playerId
-    this.circle = scene.add.image(0, 0, "cell", 0)
+    this.circle = scene.add.image(0, 0, "cell", this.cellIndex * 3)
     if (pokemonId) {
-      this.circle.setFrame(2).setScale(0.45)
+      this.circle.setFrame(this.cellIndex * 3 + 2).setScale(0.45)
     } else {
-      this.circle.setFrame(playerId === currentPlayerUid ? 0 : 2)
+      this.circle.setFrame(
+        this.cellIndex * 3 + (playerId === currentPlayerUid ? 0 : 2)
+      )
     }
     this.add(this.circle)
     this.sprite = new GameObjects.Image(
@@ -49,11 +58,18 @@ export default class ItemContainer extends DraggableObject {
       item + ".png"
     ).setScale(pokemonId === null ? 0.5 : 0.25)
 
-    this.name = item
     this.add(this.sprite)
     this.setInteractive()
     this.updateDropZone(true)
     this.draggable = this.pokemonId === null && playerId === currentPlayerUid
+  }
+
+  get cellIndex() {
+    if (ShinyItems.includes(this.name)) return 1
+    if (Berries.includes(this.name)) return 2
+    if (ArtificialItems.includes(this.name)) return 3
+    if (WeatherRocks.includes(this.name)) return 4
+    return 0
   }
 
   updateDropZone(value: boolean) {
@@ -70,7 +86,7 @@ export default class ItemContainer extends DraggableObject {
     }
     this.updateDropZone(false)
     if (this.draggable) {
-      this.circle?.setFrame(1)
+      this.circle?.setFrame(this.cellIndex * 3 + 1)
     }
   }
 
@@ -80,7 +96,7 @@ export default class ItemContainer extends DraggableObject {
       this.updateDropZone(true)
     }
     if (this.draggable) {
-      this.circle?.setFrame(0)
+      this.circle?.setFrame(this.cellIndex * 3)
     }
     if (preferences.showDetailsOnHover) {
       this.mouseoutTimeout = setTimeout(

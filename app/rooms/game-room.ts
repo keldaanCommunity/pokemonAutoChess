@@ -18,8 +18,8 @@ import UserMetadata, {
 } from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
 import {
-  getPokemonData,
-  PRECOMPUTED_REGIONAL_MONS
+  PRECOMPUTED_REGIONAL_MONS,
+  getPokemonData
 } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getAdditionalsTier1 } from "../models/shop"
@@ -47,7 +47,7 @@ import {
   RequiredStageLevelForXpElligibility,
   UniqueShop
 } from "../types/Config"
-import { GameMode, Rarity } from "../types/enum/Game"
+import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Pkm, PkmDuos, PkmProposition } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
@@ -824,6 +824,21 @@ export default class GameRoom extends Room<GameState> {
     )
   }
 
+  fishPokemon(player: Player, pkm: Pkm) {
+    const fish = PokemonFactory.createPokemonFromName(pkm, player)
+    const x = getFirstAvailablePositionInBench(player.board)
+    if (x !== undefined) {
+      fish.positionX = x
+      fish.positionY = 0
+      fish.action = PokemonActionState.FISH
+      player.board.set(fish.id, fish)
+      this.clock.setTimeout(() => {
+        fish.action = PokemonActionState.IDLE
+        this.checkEvolutionsAfterPokemonAcquired(player.id)
+      }, 1000)
+    }
+  }
+
   checkEvolutionsAfterPokemonAcquired(playerId: string): boolean {
     const player = this.state.players.get(playerId)
     if (!player) return false
@@ -1008,6 +1023,4 @@ export default class GameRoom extends Room<GameState> {
       }
     })
   }
-
-
 }

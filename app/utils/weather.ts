@@ -5,9 +5,11 @@ import {
   WeatherPassives
 } from "../types/enum/Weather"
 
+import { SynergyGivenByItem, WeatherRocks } from "../types/enum/Item"
 import { MapSchema } from "@colyseus/schema"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { WeatherThreshold } from "../types/Config"
+import { Synergy } from "../types/enum/Synergy"
 
 export function getWeather(
   playerBoard: MapSchema<Pokemon, string>,
@@ -51,6 +53,20 @@ export function getWeather(
               weather,
               (boardWeatherScore.get(weather) ?? 0) + 1
             )
+
+            // add weather boosts for weather rocks
+            pkm.items.forEach((item) => {
+              if (
+                WeatherRocks.includes(item) &&
+                SynergyGivenByItem[item] === type
+              ){
+                boardWeatherScore.set(
+                  weather,
+                  (boardWeatherScore.get(weather) ?? 0) + 2
+                )
+              }
+            })
+                
             if (
               pkm.passive === Passive.SAND_STREAM &&
               weather === Weather.SANDSTORM

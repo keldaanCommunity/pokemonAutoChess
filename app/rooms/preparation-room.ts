@@ -75,6 +75,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     noElo?: boolean
     autoStartDelayInSeconds?: number
     whitelist?: string[]
+    blacklist?: string[]
     tournamentId?: string
     bracketId?: string
   }) {
@@ -93,6 +94,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       noElo: options.noElo ?? false,
       gameMode: options.gameMode,
       whitelist: options.whitelist ?? null,
+      blacklist: options.blacklist ?? [],
       tournamentId: options.tournamentId ?? null,
       bracketId: options.bracketId ?? null
     })
@@ -312,6 +314,8 @@ export default class PreparationRoom extends Room<PreparationState> {
         throw "No display name"
       } else if (isBanned) {
         throw "User banned"
+      } else if (this.metadata.blacklist.includes(user.uid)) {
+        throw "User previously kicked"
       } else if (isAlreadyInRoom) {
         throw "User already in room"
       } else {

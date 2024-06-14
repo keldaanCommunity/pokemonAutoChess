@@ -1,5 +1,5 @@
 import { Command } from "@colyseus/command"
-import { ArraySchema, MapSchema } from "@colyseus/schema"
+import { ArraySchema } from "@colyseus/schema"
 import { Client, RoomListingData, matchMaker } from "colyseus"
 import { EmbedBuilder } from "discord.js"
 import { nanoid } from "nanoid"
@@ -40,12 +40,13 @@ import {
   BoosterRarityProbability,
   DUST_PER_BOOSTER,
   DUST_PER_SHINY,
-  EloRank,
   getEmotionCost
 } from "../../types/Config"
+import { EloRank } from "../../types/enum/EloRank"
 import { GameMode, Rarity } from "../../types/enum/Game"
 import { Language } from "../../types/enum/Language"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
+import { ITournamentPlayer } from "../../types/interfaces/Tournament"
 import { sum } from "../../utils/array"
 import { logger } from "../../utils/logger"
 import { cleanProfanity } from "../../utils/profanity-filter"
@@ -1126,7 +1127,13 @@ export class OpenSpecialGameCommand extends Command<
     logger.info(`Creating special game ${gameMode} ${minRank ?? ""}`)
     let roomName = "Special game"
     if (gameMode === GameMode.RANKED) {
-      roomName = "Ranked Match"
+      if (minRank === EloRank.GREATBALL) {
+        roomName = `Great Ball Ranked Match`
+      } else if (minRank === EloRank.ULTRABALL) {
+        roomName = `Ultra Ball Ranked Match`
+      } else {
+        roomName = `Ranked Match`
+      }
     } else if (gameMode === GameMode.SCRIBBLE) {
       roomName = "Smeargle's Scribble"
     }
@@ -1140,7 +1147,7 @@ export class OpenSpecialGameCommand extends Command<
       autoStartDelayInSeconds: 15 * 60
     })
 
-    this.state.getNextSpecialGameDate()
+    this.state.getNextSpecialGame()
   }
 }
 
@@ -1432,13 +1439,28 @@ export class EndTournamentCommand extends Command<
       if (!tournament)
         return logger.error(`Tournament not found: ${tournamentId}`)
 
-      const players = getRemainingPlayers(tournament)
-      const winner = players.find((p) => p.ranks.at(-1) === 1)
+      let finalists: (ITournamentPlayer & { id: string })[] = [],
+        nbMatchsPlayed = 0
+
+      tournament.players.forEach((player, playerId) => {
+        if (player.ranks.length > nbMatchsPlayed) {
+          finalists = []
+          nbMatchsPlayed = player.ranks.length
+        }
+        if (player.ranks.length === nbMatchsPlayed) {
+          finalists.push({
+            id: playerId,
+            ...player
+          })
+        }
+      })
+
+      const winner = finalists.find((p) => p.ranks.at(-1) === 1)
       if (winner) {
         this.room.presence.publish("tournament-winner", winner)
       }
 
-      for (const player of players) {
+      for (const player of finalists) {
         const mongoUser = await UserMetadata.findOne({ uid: player.id })
         const user = this.state.users.get(player.id)
         const rank = player.ranks.at(-1) ?? 1

@@ -3,10 +3,11 @@ import { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
 import { EvolutionTime } from "../types/Config"
 import { PokemonActionState } from "../types/enum/Game"
-import { ItemComponents, Item } from "../types/enum/Item"
+import { ItemComponents, Item, ShinyItems } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
 import { logger } from "../utils/logger"
+import { pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 
 type DivergentEvolution = (
@@ -69,7 +70,8 @@ export class CountEvolutionRule extends EvolutionRule {
   }
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
-    if (pokemon.evolution === Pkm.DEFAULT) return false
+    if (pokemon.evolution === Pkm.DEFAULT || pokemon.items.has(Item.EVIOLITE))
+      return false
     const count = values(player.board).filter(
       (pkm) => pkm.index === pokemon.index
     ).length
@@ -77,7 +79,8 @@ export class CountEvolutionRule extends EvolutionRule {
   }
 
   canEvolveIfBuyingOne(pokemon: Pokemon, player: Player): boolean {
-    if (pokemon.evolution === Pkm.DEFAULT) return false
+    if (pokemon.evolution === Pkm.DEFAULT || pokemon.items.has(Item.EVIOLITE))
+      return false
     const count = values(player.board).filter(
       (pkm) => pkm.index === pokemon.index
     ).length
@@ -176,9 +179,21 @@ export class ItemEvolutionRule extends EvolutionRule {
   }
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
-    return values(pokemon.items).some((item) =>
+    if (pokemon.items.has(Item.EVIOLITE)) return false
+    const itemEvolution = values(pokemon.items).find((item) =>
       this.itemsTriggeringEvolution.includes(item)
     )
+
+    let pokemonEvolutionName = pokemon.evolution
+    if (this.divergentEvolution && itemEvolution) {
+      pokemonEvolutionName = this.divergentEvolution(
+        pokemon,
+        player,
+        itemEvolution
+      )
+    }
+
+    return itemEvolution != null && pokemonEvolutionName !== pokemon.name
   }
 
   evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
@@ -217,10 +232,12 @@ export class HatchEvolutionRule extends EvolutionRule {
     const willHatch = this.canEvolve(pokemon, player, stageLevel)
     if (willHatch) {
       pokemon.action = PokemonActionState.HOP
-      setTimeout(
-        () => pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel),
-        2000
-      )
+      setTimeout(() => {
+        pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
+        if (pokemon.name === Pkm.EGG && pokemon.shiny) {
+          player.items.push(pickRandomIn(ShinyItems))
+        }
+      }, 2000)
     } else if (pokemon.name === Pkm.EGG) {
       pokemon.action =
         [
@@ -232,6 +249,7 @@ export class HatchEvolutionRule extends EvolutionRule {
   }
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
+    if (pokemon.items.has(Item.EVIOLITE)) return false
     return this.evolutionTimer === 0
   }
 
@@ -265,6 +283,7 @@ export class ConditionBasedEvolutionRule extends EvolutionRule {
   }
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
+    if (pokemon.items.has(Item.EVIOLITE)) return false
     return this.condition(pokemon, player, stageLevel)
   }
 

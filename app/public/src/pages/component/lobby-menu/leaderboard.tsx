@@ -2,7 +2,7 @@ import React from "react"
 import {
   ILeaderboardBotInfo,
   ILeaderboardInfo
-} from "../../../../../models/colyseus-models/leaderboard-info"
+} from "../../../../../types/interfaces/LeaderboardInfo"
 import LeaderboardItem from "./leaderboard-item"
 
 export default function Leaderboard(props: {

@@ -6,7 +6,7 @@ import { distanceC } from "../utils/distance"
 import { logger } from "../utils/logger"
 import { OrientationArray, OrientationVector } from "../utils/orientation"
 import { pickRandomIn } from "../utils/random"
-import { PokemonEntity, getStrongestUnit } from "./pokemon-entity"
+import { PokemonEntity } from "./pokemon-entity"
 
 export type Cell = {
   x: number

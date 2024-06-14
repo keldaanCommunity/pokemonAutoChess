@@ -200,7 +200,6 @@ class GameContainer {
       "mindBlownCount",
       "spellBlockedCount",
       "manaBurnCount",
-      "staticCount",
       "moneyCount",
       "amuletCoinCount",
       "attackCount",

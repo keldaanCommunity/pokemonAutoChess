@@ -424,7 +424,7 @@ export default class Status extends Schema implements IStatus {
         : false
       board.getAdjacentCells(pkm.positionX, pkm.positionY).forEach((cell) => {
         if (cell?.value && cell.value.team !== pkm.team) {
-          const darkHarvestDamage = [10, 20, 40][pkm.stars - 1] ?? 40
+          const darkHarvestDamage = [5, 10, 20][pkm.stars - 1] ?? 20
           cell.value.handleSpecialDamage(
             darkHarvestDamage,
             board,
@@ -434,7 +434,7 @@ export default class Status extends Schema implements IStatus {
             true
           )
 
-          const healFactor = [0.2, 0.3, 0.4][pkm.stars - 1] ?? 0.4
+          const healFactor = 0.3
           pkm.handleHeal(
             Math.round(darkHarvestDamage * healFactor),
             pkm,

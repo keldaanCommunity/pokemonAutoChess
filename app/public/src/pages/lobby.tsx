@@ -48,8 +48,7 @@ import {
   setLanguage,
   setLeaderboard,
   setLevelLeaderboard,
-  setNextSpecialGameDate,
-  setNextSpecialGameMode,
+  setNextSpecialGame,
   setPastebinUrl,
   setSearchedUser,
   setSuggestions,
@@ -74,8 +73,8 @@ import { FIREBASE_CONFIG } from "./utils/utils"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import { logger } from "../../../utils/logger"
 import { localStore, LocalStoreKeys } from "./utils/store"
-import "./lobby.css"
 import { cc } from "./utils/jsx"
+import "./lobby.css"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
@@ -410,12 +409,8 @@ export async function joinLobbyRoom(
             })
           })
 
-          room.state.listen("nextSpecialGameDate", (date) => {
-            dispatch(setNextSpecialGameDate(date))
-          })
-
-          room.state.listen("nextSpecialGameMode", (type) => {
-            dispatch(setNextSpecialGameMode(type))
+          room.state.listen("nextSpecialGame", (specialGame) => {
+            dispatch(setNextSpecialGame(specialGame))
           })
 
           room.state.users.onRemove((u) => {
