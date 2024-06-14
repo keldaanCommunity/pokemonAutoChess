@@ -42,6 +42,7 @@
 - Misdreavus ~~Ghost Fairy~~ Ghost Fairy Amorphous
 - Gourgeist ~~Ghost Grass~~ Ghost Grass Amorhpous
 - Dreepy ~~Dragon Ghost~~ Dragon Ghost Amorphous
+- Cleffa line is now regional in Normal/Baby/Light regions
 
 # Changes to Synergies
 

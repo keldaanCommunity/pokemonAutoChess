@@ -1932,7 +1932,6 @@
     "PORYGON": "Porygon2 cherche un UPGRADE",
     "MOXIE": "Chaque fois qu'un pokémon adverse est KO, gagne autant d' ATK que son nombre d'étoiles",
     "BELLSPROUT": "$t(pkm.WEEPINBELL} cherche des baies",
-    "CLEFAIRY": "$t(pkm.CLEFAIRY) cherche une POKE_DOLL",
     "ILLUMISE_VOLBEAT": "$t(pkm.ILLUMISE) and $t{pkm.VOLBEAT} gagnent 5 PP par seconde pour chaque autre membre de leur espèce en vie sur le plateau",
     "PRISM": "$t(pkm.NECROZMA) alterne entre sa forme normale et Ultra selon s'il est exposé à la LIGHT",
     "BLOSSOM": "$t(pkm.CHERRIM) alterne entre sa forme normale et Ensoleillée selon s'il est exposé à la LIGHT",
