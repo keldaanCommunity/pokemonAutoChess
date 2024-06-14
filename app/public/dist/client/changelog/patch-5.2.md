@@ -54,6 +54,7 @@
 - Ghost 4: Attack debuff ~~50~~ 30%
 - Ghost 8: Curse delay ~~3~~ 6 seconds
 - Rock now has an extra effect: At every stage, get a random "Weather Rock", granting a synergy, and counting towards the activation of a particular weather condition
+- Yet another Fairy rework: removed shock on crit dealt by fairy mons ; removed charm on eye contact ; added additional special damage on basic attacks ; increased splash cooldown to 250ms
 
 # Changes to Items
 
