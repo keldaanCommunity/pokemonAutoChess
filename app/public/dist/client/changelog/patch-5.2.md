@@ -9,10 +9,11 @@
  - Gastrodon East Sea
  - Munna
  - Musharna
+ - Kleavor
 
 # Changes to Pokemon & Abilities
 
-- Nerf Hydreigon Dark Harvest: Special damage ~~10/20/40~~ 8/16/24
+- Nerf Hydreigon Dark Harvest: Special damage ~~8/16/24~~ 5/10/20, heal 30% at all tiers
 - Buff Haxorus: HP ~~180~~ 200
 - Nerf Crabrawler: HP ~~110~~ 90, Attack ~~11~~ 9, Def/Spedef ~~3~~ 2
 - New ability for Magnemite line: Magnet bomb
@@ -28,7 +29,7 @@
 - Deoxys ~~Psychic Artificial Human~~ Psychic Amorphous Human
 - Darkrai ~~Dark Ghost Monster~~ Dark Ghost Amorhpous
 - Nihilego ~~Poison Rock~~ Poison Rock Amorphous
-- Vaporeon ~~Water Aquatic/Field~~ Water Amorphous Fied
+- Vaporeon ~~Water Aquatic/Field~~ Water Amorphous Field
 - Grimer ~~Poison Monster~~ Poison Monster Amorphous
 - Omanyte ~~Water Fossil~~~ Water Fossil Amorphous
 - Dewpider ~~Water Bug~~ Water Bug Amorphous
@@ -44,10 +45,11 @@
 - Dreepy ~~Dragon Ghost~~ Dragon Ghost Amorphous
 - Cleffa line is now regional in Normal/Baby/Light regions
 
+
 # Changes to Synergies
 
 - New Synergy Amorphous: Those pokémons are extremely flexible and lack their own shape. Your team gains bonuses by activating a wide variety of synergies
-  - FLUID": Ally team gains +4% ATK_SPEED and 7 SHIELD per unique active synergy
+  - FLUID: Ally team gains +4% ATK_SPEED and 7 SHIELD per unique active synergy
   - SHAPELESS: Ally team gains +4% ATK_SPEED, 7 SHIELD, +1 ATK and +5% AP per unique active synergy
   - ETHEREAL: Your AMORPHOUS pokemons gain double the bonuses
 - Ghost curses now transmit to another enemy when the cursed pokemon is KO. The curse status afflictions no longer have durations, and will be reapplied every second (important for cleanse tag)
@@ -56,6 +58,11 @@
 - Ghost 8: Curse delay ~~3~~ 6 seconds
 - Rock now has an extra effect: At every stage, get a random "Weather Rock", granting a synergy, and counting towards the activation of a particular weather condition
 - Yet another Fairy rework: removed shock on crit dealt by fairy mons ; removed charm on eye contact ; added additional special damage on basic attacks ; increased splash cooldown to 250ms
+- Adapted Dark: Crit chance ~~40/55/70~~ 30/40/50%, Crit power ~~25/35/50~~ 60/80/100%
+- Buff Water: ~~4/7/10~~ 4/8/12 PP per second
+- Baby synergy won't give you the same unit in egg twice, unless you got all the possible eggs before. Hidden Power (E) and Eggsplosion still give random eggs.
+- Buff Baby 3: now gives 25% chance to hatch an egg at first defeat instead of first defeat streak
+- Buff Baby 7: when golden eggs are hatched, gain a random shiny item
 
 # Changes to Items
 
@@ -70,6 +77,7 @@
 - Buff Soothe Bell: ~~25~~ 33% of damage inflicted as shield
 - Changed Blue Orb: the chain lightning now targets the 3 closest enemies, and inflicts 10 special damage in addition to the mana burn
 - Changed power lens: The amount of special damage reduced by special defense is inflicted back to the attacker
+- Buff Reaper Cloth: ~~10~~ 15% crit chance
 
 # Gameplay
 

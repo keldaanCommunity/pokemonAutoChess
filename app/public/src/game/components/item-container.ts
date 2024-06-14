@@ -3,7 +3,8 @@ import {
   ArtificialItems,
   Berries,
   Item,
-  ShinyItems
+  ShinyItems,
+  WeatherRocks
 } from "../../../../types/enum/Item"
 import { getGameScene } from "../../pages/game"
 import { preferences } from "../../preferences"
@@ -67,7 +68,7 @@ export default class ItemContainer extends DraggableObject {
     if (ShinyItems.includes(this.name)) return 1
     if (Berries.includes(this.name)) return 2
     if (ArtificialItems.includes(this.name)) return 3
-    //if( WeatherRocks.includes(this.name)) return 4
+    if (WeatherRocks.includes(this.name)) return 4
     return 0
   }
 

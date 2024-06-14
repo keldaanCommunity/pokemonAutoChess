@@ -488,8 +488,6 @@ export class Scyther extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING])
   rarity = Rarity.UNIQUE
   stars = 3
-  evolution = Pkm.SCIZOR
-  evolutionRule = new ItemEvolutionRule([Item.METAL_COAT])
   hp = 190
   atk = 19
   def = 5
@@ -499,6 +497,21 @@ export class Scyther extends Pokemon {
   skill = Ability.X_SCISSOR
   attackSprite = AttackSprite.NORMAL_MELEE
   passive = Passive.SCYTHER
+
+  evolutionRule = new ItemEvolutionRule(
+    [
+      Item.METAL_COAT, 
+      Item.BLACK_AUGURITE
+    ],
+    (pokemon, player, item) => {
+      if (item === Item.METAL_COAT){
+        return Pkm.SCIZOR
+      }
+      else {
+        return Pkm.KLEAVOR
+      }
+    }
+  )
 }
 
 export class Scizor extends Pokemon {
@@ -527,6 +540,20 @@ export class MegaScizor extends Pokemon {
   range = 1
   skill = Ability.DEFAULT
   attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Kleavor extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ROCK, Synergy.DARK])
+  rarity = Rarity.UNIQUE
+  stars = 4
+  hp = 190
+  atk = 25
+  def = 7
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.STONE_AXE
+  attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Bounsweet extends Pokemon {
@@ -14240,6 +14267,7 @@ export const PokemonClasses: Record<
   [Pkm.SCYTHER]: Scyther,
   [Pkm.SCIZOR]: Scizor,
   [Pkm.MEGA_SCIZOR]: MegaScizor,
+  [Pkm.KLEAVOR]: Kleavor,
   [Pkm.RIOLU]: Riolu,
   [Pkm.LUCARIO]: Lucario,
   [Pkm.MAGIKARP]: Magikarp,
