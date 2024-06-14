@@ -642,7 +642,12 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
     [Stat.DEF]: 5,
     [Stat.SPE_DEF]: 5
   },
-  [Item.WHITE_FLUTE]: {}
+  [Item.WHITE_FLUTE]: {},
+  [Item.DAMP_ROCK]: {},
+  [Item.ICY_ROCK]: {},
+  [Item.HEAT_ROCK]: {},
+  [Item.SMOOTH_ROCK]: {},
+  [Item.BLACK_AUGURITE]: {}
 }
 
 export type TilesetExchangeFile = {
