@@ -24,8 +24,7 @@ export const WeatherPassives: Map<Passive, Weather> = new Map([
   [Passive.SNOW, Weather.SNOW],
   [Passive.STORM, Weather.STORM],
   [Passive.NIGHT, Weather.NIGHT],
-  [Passive.WINDY, Weather.WINDY],
-  [Passive.AIRLOCK, Weather.NEUTRAL]
+  [Passive.WINDY, Weather.WINDY]
 ])
 
 export const PassiveAssociatedToWeather = reverseMap(WeatherPassives)

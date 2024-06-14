@@ -130,6 +130,13 @@ export function getWeather(
             )
           }
         }
+        //Mega Rayquaza AIRLOCK overrules every weather
+        if (pkm.passive === Passive.AIRLOCK) {
+            boardWeatherScore.set(
+                Weather.NEUTRAL,
+                999
+            )
+        }
       }
     })
   })
