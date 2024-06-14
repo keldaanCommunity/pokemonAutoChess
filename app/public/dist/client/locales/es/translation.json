@@ -349,7 +349,12 @@
     "BLOOD_MOON": "Luna Roja",
     "TEA_TIME": "Hora del Té",
     "SPIKES": "Púas",
-    "SHADOW_PUNCH": "Puño Sombra"
+    "SHADOW_PUNCH": "Puño Sombra",
+    "MAGNET_BOMB": "Bomba Imán",
+    "MUDDY_WATER": "Agua Lodosa",
+    "ANCIENT_POWER": "Poder Pasado",
+    "MOON_DREAM": "Sueño Lunar",
+    "STONE_AXE": "Hachazo Pétreo"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -518,6 +523,7 @@
     "SCYTHER": "Scyther",
     "SCIZOR": "Scizor",
     "MEGA_SCIZOR": "Mega Scizor",
+    "KLEAVOR": "Kleavor",
     "RIOLU": "Riolu",
     "LUCARIO": "Lucario",
     "MAGIKARP": "Magikarp",
@@ -1144,7 +1150,16 @@
     "FERROSEED": "Ferroseed",
     "FERROTHORN": "Ferrothorn",
     "GOLETT": "Golett",
-    "GOLURK": "Golurk"
+    "GOLURK": "Golurk",
+    "GRUBBIN": "Grubbin",
+    "CHARJABUG": "Charjabug",
+    "VIKAVOLT": "Vikavolt",
+    "SHELLOS_WEST_SEA": "Shellos (Mar Oeste)",
+    "GASTRODON_WEST_SEA": "Gastrodon (Mar Oeste)",
+    "SHELLOS_EAST_SEA": "Shellos (Mar Este)",
+    "GASTRODON_EAST_SEA": "Gastrodon (Mar Este)",
+    "MUNNA": "Munna",
+    "MUSHARNA": "Musharna"
   },
   "ability_description": {
     "SOFT_BOILED": "Cura todos los efectos de estado y otorga [20,40,80,SP] SHIELD para cada aliado",
@@ -1474,7 +1489,12 @@
     "TEA_TIME": "Cura a los aliados [20,40,80,SP] HP. Todos los Pokémon que tengan una baya se la comen inmediatamente.",
     "SPIKES": "Lanza hasta [6, SP] púas de metal dentro de un radio de 3 celdas por delante, lo que causa [25,50,SP] TRUE. Los púas permanecen en el campo, causando 10 TRUE por segundo y ARMOR_REDUCTION a los oponentes que caminan sobre ellos, si no FLYING.",
     "SHADOW_PUNCH": "Vuela hacia el objetivo con el HP más bajo. El siguiente ataque inflige [30,60,120,SP] SPECIAL adicional.",
-    "GUNK_SHOT": "Inflige [50,100,SP] SPECIAL al objetivo, infligiendo POISONNED durante [2,4,SP] segundos"
+    "GUNK_SHOT": "Inflige [50,100,SP] SPECIAL al objetivo, infligiendo POISONNED durante [2,4,SP] segundos",
+    "MAGNET_BOMB": "Una bomba magnética que inflige [20,40,80,SP] SPECIAL al objetivo, [10,20,40,SP] SPECIAL a enemigos adyacentes y atrae a enemigos distantes.",
+    "MUDDY_WATER": "Lanza agua fangosa hacia 3 objetivos frente a él, causando [40,80,SP] SPECIAL, WOUND y ARMOR_REDUCTION durante 4 segundos.",
+    "ANCIENT_POWER": "Lanza piedras al objetivo, causando [50,100,SP] SPECIAL. Aumenta el AP del usuario en [25,SP]",
+    "MOON_DREAM": "El objetivo cae SLEEP durante [3,6,9] segundos y otorga [10,20,30,SP] SHIELD a los [3,4,5] aliados más cercanos del lanzador.",
+    "STONE_AXE": "Causa [50,SP] TRUE. Coloca piedras afiladas alrededor del objetivo. Las piedras permanecen en el campo causando 10 PHYSICAL por segundo y WOUND a los oponentes que caminan sobre él, si no son ROCK o FLYING"
   },
   "effect": {
     "INGRAIN": "Arraigo",
@@ -1805,7 +1825,18 @@
     "EXP_SHARE": "Repartir Experiencia",
     "METEORITE": "Meteorito",
     "BERRY_JUICE": "Zumo de baya",
-    "TRASH": "Basura"
+    "TRASH": "Basura",
+    "DYNAMAX_BAND": "Maximuñequera",
+    "SUPER_ROD": "Supercaña",
+    "SHINY_STONE": "Piedra día",
+    "RARE_CANDY": "Caramelo Raro",
+    "EVIOLITE": "Mineral Evolutivo",
+    "WHITE_FLUTE": "Flauta Blanca",
+    "DAMP_ROCK": "Roca Lluvia",
+    "ICY_ROCK": "Roca Helada",
+    "HEAT_ROCK": "Roca Calor",
+    "SMOOTH_ROCK": "Roca Suave",
+    "BLACK_AUGURITE": "Mineral Negro"
   },
   "item_description": {
     "FOSSIL_STONE": "Un fósil de un Pokémon que vivió en la prehistoria",
@@ -1897,7 +1928,18 @@
     "EXP_SHARE": "Obtén los mejores valores de ATK, DEF y SPE_DEF de los aliados adyacentes en la misma fila",
     "METEORITE": "Un meteorito que parece interactuar con Deoxys. Continúa emitiendo un brillo tenue y resulta ligeramente cálido al tacto.",
     "BERRY_JUICE": "Se consume al estar por debajo del 50% HP, restaura el HP al máximo",
-    "TRASH": "Los restos de un objeto artificial. No hace nada"
+    "TRASH": "Los restos de un objeto artificial. No hace nada",
+    "DYNAMAX_BAND": "Al comienzo de la pelea, aumenta el HP máximo en un 100%.",
+    "SUPER_ROD": "En cada ronda, obtiene un Pokémon que coincida con tu sinergia máxima. Cuando se usa en un Pokémon, devuelve todos los objetos que porta al inventario del jugador.",
+    "SHINY_STONE": "Da sinergia LIGHT y genera un segundo punto de luz en la celda del pokémon.",
+    "RARE_CANDY": "Hace evolucionar inmediatamente a un Pokémon",
+    "EVIOLITE": "Sólo lo pueden tener Pokémon que no estén completamente evolucionados. Impide que el titular evolucione.",
+    "WHITE_FLUTE": "Genera 3 Pokémon WILD alrededor del poseedor al comienzo de la pelea. La rareza y el nivel aumentan con el nivel del escenario.",
+    "DAMP_ROCK": "Da sinergia WATER y cuenta por 3 para RAIN. Sólo se puede usar en Pokémon ROCK",
+    "ICY_ROCK": "Da sinergia ICE y cuenta por 3 para SNOW. Sólo se puede usar en Pokémon ROCK",
+    "HEAT_ROCK": "Da sinergia FIRE y cuenta por 3 para SUN. Sólo se puede usar en Pokémon ROCK",
+    "SMOOTH_ROCK": "Da sinergia GROUND y cuenta por 3 para SANDSTORM. Sólo se puede usar en Pokémon ROCK",
+    "BLACK_AUGURITE": "Da sinergia DARK y cuenta por 3 para NIGHT. Sólo se puede usar en Pokémon ROCK"
   },
   "passive_description": {
     "NONE": "sin pasivo",
@@ -1996,7 +2038,8 @@
     "MOTHIM": "$t(pkm.MOTHIM) toma sinergias de la forma regional de $t(pkm.BURMY) encontradas por el jugador.",
     "PSYDUCK": "Cuando esté CONFUSION, gana 100% AP",
     "BLOODMOON": "Cambia de forma durante BLOODMOON",
-    "RECYCLE": "Aliméntelo con bayas para ganar 10 HP, con componentes básicos para obtener 25 HP + estadísticas de objetos o aliméntelo con objetos artificiales para obtener 50 HP + estadísticas de objetos y obtenga TRASH a cambio."
+    "RECYCLE": "Aliméntelo con bayas para ganar 10 HP, con componentes básicos para obtener 25 HP + estadísticas de objetos o aliméntelo con objetos artificiales para obtener 50 HP + estadísticas de objetos y obtenga TRASH a cambio.",
+    "DREAM_CATCHER": "Si el objetivo de este pokémon esta SLEEP, sus ataques otorgan 10 de SHIELD a los 3 aliados más cercanos."
   },
   "stat": {
     "ATK": "Ataque",
@@ -2505,6 +2548,9 @@
   "victory_income_hint": "Obtenga 1 bonificación de oro por cada racha de victorias o derrotas, hasta 5 bonificaciones de oro.",
   "additional_income_hint": "Obtenga 1 GOLD extra por 10 de GOLD ahorrado, hasta un máximo de 5 GOLD con 50 de GOLD ahorrado.",
   "options": "Opciones",
+  "sound": "Sonido",
+  "interface": "Interfaz",
+  "hotkeys": "Teclas de acceso rápido",
   "language": "Idioma",
   "music_volume": "Volumen de la música",
   "sfx_volume": "Volumen de efectos especiales",
@@ -2577,7 +2623,9 @@
   "craftable_items": "Construibles",
   "berries": "Bayas",
   "artificial_items": "Artificial",
+  "weather_rocks": "Rocas Meteorológicas",
   "special_items": "Objetos Especiales",
+  "shiny_items": "Objetos Shiny",
   "item_recipes": "Recetas de Objetos",
   "news": "Noticias",
   "patch_notes": "Notas del Parche",
@@ -2865,6 +2913,7 @@
   "game_already_started": "El juego ya empezó",
   "min_rank_not_reached": "Tu rango no es lo suficientemente alto para jugar esta partida clasificatoria.",
   "not_whitelisted": "Este partido está restringido a una lista blanca de jugadores.",
+  "blacklisted": "Has sido expulsado de esta Partida.",
   "ranked_match": "Partida Clasificatoria",
   "kecleon_dialog": {
     "welcome": "¡Bienvenido a la tienda de Kecleon!",
