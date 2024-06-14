@@ -78,6 +78,7 @@
 - Add visual effect to each Ghost curse
 - Improved Options Menu. Game hotkeys are now remappable.
 - Add variant background colors to items based on their item category
+- The more def+spe def a pokemon has, the thicker the outline will be when hovering over it
 
 # Bugfix
 
