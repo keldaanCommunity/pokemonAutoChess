@@ -1591,7 +1591,10 @@
     "QUICK_FEET": "Piés Rápidos",
     "RUN_AWAY": "Fuga",
     "HUSTLE": "Entusiasmo",
-    "BERSERK": "Berserk"
+    "BERSERK": "Berserk",
+    "FLUID": "Fluido",
+    "SHAPELESS": "Sin Forma",
+    "ETHEREAL": "Etéreo "
   },
   "effect_description": {
     "STAMINA": "Gana 15 SHIELD",
@@ -1707,7 +1710,10 @@
     "QUICK_FEET": "+30 % de ATK y velocidad de movimiento",
     "RUN_AWAY": "+50% ATK y velocidad de movimiento",
     "HUSTLE": "+80% ATK y velocidad de movimiento",
-    "BERSERK": "+100% ATK y velocidad de movimiento, RAGE 5 segundos antes"
+    "BERSERK": "+100% ATK y velocidad de movimiento, RAGE 5 segundos antes",
+    "FLUID": "El equipo gana +4% ATK_SPEED and 7 SHIELD por cada sinergia activa.",
+    "SHAPELESS": "El equipo gana +4% ATK_SPEED, 7 SHIELD, +1 ATK y +5% AP por cada sinergia activa.",
+    "ETHEREAL": "Tus AMORPHOUS pokémons ganan el doble de las bonificaciones."
   },
   "item": {
     "FOSSIL_STONE": "Piedra Fósil",
@@ -2095,7 +2101,8 @@
     "ARTIFICIAL": "Artificial",
     "BABY": "Bebé",
     "LIGHT": "Luz",
-    "WILD": "Salvaje"
+    "WILD": "Salvaje",
+    "AMORPHOUS": "Amorfo"
   },
   "synergy_description": {
     "NORMAL": "Los Pokémon NORMAL y sus aliados adyacentes obtienen SHIELD cuando comienza el combate.",
@@ -2126,7 +2133,8 @@
     "ARTIFICIAL": "Los pokémon ARTIFICIAL dan objetos únicos y ganan ATK, AP y SHIELD cuando tienen objetos.",
     "BABY": "Los BABY pueden traerte huevos de Pokémon para consolarte después de una derrota",
     "LIGHT": "La LIGHT revela un foco en el campo de batalla. La unidad que se encuentra en el centro de atención al comienzo del combate obtiene bonificaciones únicas.",
-    "WILD": "Los Pokémon WILD obtienen un mayor ATK, se mueven más rápido y tienen un 25% de posibilidades de WOUND a su objetivo. Por cada STAR de tus pokémon WILD en el tablero, obtén +1% de probabilidad de encontrar WILD en tus tiendas + 5% de probabilidad durante las rondas JCE."
+    "WILD": "Los Pokémon WILD obtienen un mayor ATK, se mueven más rápido y tienen un 25% de posibilidades de WOUND a su objetivo. Por cada STAR de tus pokémon WILD en el tablero, obtén +1% de probabilidad de encontrar WILD en tus tiendas + 5% de probabilidad durante las rondas JCE.",
+    "AMORPHOUS": "AMORPHOUS pokémons son extremadamente flexibles y carecen de una forma propia. Tu equipo gana bonificaciones activando una amplia variedad de sinergias."
   },
   "title": {
     "NOVICE": "Principiante",
