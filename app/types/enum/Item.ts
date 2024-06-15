@@ -121,10 +121,10 @@ export const SpecialItems: Item[] = [
 ]
 
 export const FishingRods = [
-  Item.OLD_ROD,
-  Item.GOOD_ROD,
+  Item.GOLDEN_ROD,
   Item.SUPER_ROD,
-  Item.GOLDEN_ROD
+  Item.GOOD_ROD,
+  Item.OLD_ROD
 ] as const
 
 export type FishingRod = (typeof FishingRods)[number]
