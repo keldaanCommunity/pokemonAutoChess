@@ -168,8 +168,8 @@ export const networkSlice = createSlice({
     listBots: (state) => {
       state.preparation?.send(Transfer.REQUEST_BOT_LIST)
     },
-    toggleReady: (state) => {
-      state.preparation?.send(Transfer.TOGGLE_READY)
+    toggleReady: (state, action: PayloadAction<boolean | undefined>) => {
+      state.preparation?.send(Transfer.TOGGLE_READY, action.payload)
     },
     toggleEloRoom: (state, action: PayloadAction<boolean>) => {
       state.preparation?.send(Transfer.TOGGLE_NO_ELO, action.payload)

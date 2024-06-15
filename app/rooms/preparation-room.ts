@@ -218,9 +218,9 @@ export default class PreparationRoom extends Room<PreparationState> {
       }
     })
 
-    this.onMessage(Transfer.TOGGLE_READY, (client) => {
+    this.onMessage(Transfer.TOGGLE_READY, (client, ready?: boolean) => {
       try {
-        this.dispatcher.dispatch(new OnToggleReadyCommand(), { client })
+        this.dispatcher.dispatch(new OnToggleReadyCommand(), { client, ready })
       } catch (error) {
         logger.error(error)
       }
@@ -341,8 +341,8 @@ export default class PreparationRoom extends Room<PreparationState> {
       if (consented) {
         throw new Error("consented leave")
       }
-      // allow disconnected client to reconnect into this room until 10 seconds
-      await this.allowReconnection(client, 10)
+      // allow disconnected client to reconnect into this room until 3 seconds
+      await this.allowReconnection(client, 3)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
         /*logger.info(
