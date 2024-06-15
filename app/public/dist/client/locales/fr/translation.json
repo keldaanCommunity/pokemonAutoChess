@@ -1586,9 +1586,9 @@
     "VICTORY_STAR": "40% de chance de BURN, +1 ATK après chaque coup",
     "DROUGHT": "50% de chance de BURN, +2 ATK après chaque coup",
     "DESOLATE_LAND": "100% de chance de BURN, +3 ATK après chaque coup",
-    "RAIN_DANCE": "+4 PP par seconde. Pêche un pokémon après chaque combat PvP.",
-    "DRIZZLE": "+8 PP par seconde. Les pokémons rares peuvent être pêchés.",
-    "PRIMORDIAL_SEA": "+12 PP par seconde. Les pokémons épiques peuvent être pêchés.",
+    "RAIN_DANCE": "+4 PP par seconde. Obtenez une Canne.",
+    "DRIZZLE": "+8 PP par seconde. Obtenez une Super Canne.",
+    "PRIMORDIAL_SEA": "+12 PP par seconde. Obtenez une Mega Canne.",
     "RISING_VOLTAGE": "Chaque quatrième attaque est une triple attaque",
     "OVERDRIVE": "Chaque troisième attaque est une triple attaque",
     "GUTS": "Bloque 4 dégâts",
@@ -1779,7 +1779,10 @@
     "INCENSE": "Encens",
     "EXP_SHARE": "Multi Exp",
     "METEORITE": "Météorite",
-    "BERRY_JUICE": "Jus de Baie"
+    "BERRY_JUICE": "Jus de Baie",
+    "OLD_ROD": "Canne",
+    "GOOD_ROD": "Super Canne",
+    "SUPER_ROD": "Mega Canne"
   },
   "item_description": {
     "FOSSIL_STONE": "Un fossile d'un Pokémon ayant vécu à l'époque préhistorique",
@@ -2077,7 +2080,7 @@
     "NORMAL": "Les pokémons NORMAL et leurs alliés adjacents gagnent le SHIELD lorsque le combat commence",
     "GRASS": "Les pokémons GRASS guérissent et produisent des baies avec le temps",
     "FIRE": "Les pokémons FIRE gagnent de l'ATK après chaque coup et ont une chance de BURN leurs ennemis pendant 2 secondes",
-    "WATER": "Les pokémons WATER génèrent plus de PP et ont 30% de chance d'esquiver les attaques de base. Un nouveau pokémon WATER est pêché après chaque tour PvP et mis sur votre banc.",
+    "WATER": "Les pokémons WATER génèrent plus de PP, ont 30% de chance d'esquiver les attaques de base et peuvent être pêchés avec une canne",
     "ELECTRIC": "Les attaques de base des pokémons ELECTRIC peuvent déclencher deux attaques supplémentaires",
     "FIGHTING": "Les pokémons FIGHTING bloquent un montant fixe de dégâts à chaque coup reçu",
     "PSYCHIC": "Les pokémons PSYCHIC gagnent des AP supplémentaires et attirent les Zarbi",

@@ -2150,7 +2150,7 @@
     "NORMAL": "Los Pokémon NORMAL y sus aliados adyacentes obtienen SHIELD cuando comienza el combate.",
     "GRASS": "Los Pokémon GRASS curan y producen bayas con el tiempo.",
     "FIRE": "Los Pokémon FIRE ganan ATK después de cada golpe y tienen la posibilidad de provocar BURN a sus enemigos durante 2 segundos.",
-    "WATER": "Los pokémon WATER generan más PP y tienen un 30% de posibilidades de esquivar ataques básicos. Después de cada turno PvP, se pesca un nuevo pokémon WATER y se coloca en tu banquillo.",
+    "WATER": "Los pokémon WATER generan más PP y tienen un 30% de posibilidades de esquivar ataques y se pueden pescar con caña.",
     "ELECTRIC": "Los ataques básicos de Pokémon ELECTRIC pueden desencadenar dos ataques adicionales",
     "FIGHTING": "Los Pokémon FIGHTING bloquean una cantidad fija de daño con cada golpe recibido.",
     "PSYCHIC": "Los Pokémon PSYCHIC ganan AP adicionales y atraen a Unowns",

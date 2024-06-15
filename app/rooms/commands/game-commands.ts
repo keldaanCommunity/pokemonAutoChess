@@ -417,7 +417,16 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
-    if (item === Item.SUPER_ROD) {
+    if (
+      item === Item.OLD_ROD ||
+      item === Item.GOOD_ROD ||
+      item === Item.SUPER_ROD
+    ) {
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
+
+    if (item === Item.GOLDEN_ROD) {
       let needsRecomputingSynergiesAgain = false
       pokemon?.items.forEach((item) => {
         pokemon.items.delete(item)
@@ -490,10 +499,7 @@ export class OnDragDropItemCommand extends Command<
       (!pokemon.types.has(Synergy.ROCK) ||
         pokemon.types.has(SynergyGivenByItem[item]))
     ) {
-      if (
-        item !== Item.BLACK_AUGURITE || 
-        pokemon.passive !== Passive.SCYTHER
-      ){
+      if (item !== Item.BLACK_AUGURITE || pokemon.passive !== Passive.SCYTHER) {
         // prevent adding weather rocks to non-rock pokemon, or to those with the synergy already
         client.send(Transfer.DRAG_DROP_FAILED, message)
         return
@@ -1045,7 +1051,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         this.room.fishPokemon(player, fish)
       }
 
-      if (player.items.includes(Item.SUPER_ROD)) {
+      if (player.items.includes(Item.GOLDEN_ROD)) {
         const finals = new Set(
           values(player.board)
             .filter((pokemon) => pokemon.final)
