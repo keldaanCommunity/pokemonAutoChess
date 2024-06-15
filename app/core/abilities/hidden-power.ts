@@ -156,13 +156,15 @@ export class HiddenPowerFStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    const fishingLevel = 3
     const nbFishes = 3
     const player = unown.player
 
     if (player) {
       for (let i = 0; i < nbFishes; i++) {
-        const fish = unown.simulation.room.state.shop.pickFish(player, fishingLevel)
+        const fish = unown.simulation.room.state.shop.pickFish(
+          player,
+          Item.SUPER_ROD
+        )
         unown.simulation.room.fishPokemon(player, fish)
       }
     }
