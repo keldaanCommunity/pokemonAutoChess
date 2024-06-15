@@ -188,6 +188,17 @@ export default class AttackingState extends PokemonState {
         pokemon.effects.delete(Effect.LOCK_ON)
       }
 
+      let additionalSpecialDamagePart = 0
+      if (pokemon.effects.has(Effect.AROMATIC_MIST)) {
+        additionalSpecialDamagePart += 0.1
+      } else if (pokemon.effects.has(Effect.FAIRY_WIND)) {
+        additionalSpecialDamagePart += 0.2
+      } else if (pokemon.effects.has(Effect.STRANGE_STEAM)) {
+        additionalSpecialDamagePart += 0.3
+      } else if (pokemon.effects.has(Effect.MOON_FORCE)) {
+        additionalSpecialDamagePart += 0.4
+      }
+
       let isAttackSuccessful = true
       let dodgeChance = target.dodge
       if (pokemon.effects.has(Effect.GAS)) {
@@ -231,6 +242,10 @@ export default class AttackingState extends PokemonState {
         specialDamage = damage
       } else {
         physicalDamage = damage
+      }
+
+      if (additionalSpecialDamagePart > 0) {
+        specialDamage += Math.ceil(damage * additionalSpecialDamagePart)
       }
 
       if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {

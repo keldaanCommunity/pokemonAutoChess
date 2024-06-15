@@ -43,6 +43,7 @@
 - Misdreavus ~~Ghost Fairy~~ Ghost Fairy Amorphous
 - Gourgeist ~~Ghost Grass~~ Ghost Grass Amorhpous
 - Dreepy ~~Dragon Ghost~~ Dragon Ghost Amorphous
+- Cleffa line is now regional in Normal/Baby/Light regions
 
 
 # Changes to Synergies
@@ -56,6 +57,7 @@
 - Ghost 4: Attack debuff ~~50~~ 30%
 - Ghost 8: Curse delay ~~3~~ 6 seconds
 - Rock now has an extra effect: At every stage, get a random "Weather Rock", granting a synergy, and counting towards the activation of a particular weather condition
+- Yet another Fairy rework: removed shock on crit dealt by fairy mons ; removed charm on eye contact ; added additional special damage on basic attacks ; increased splash cooldown to 250ms
 - Adapted Dark: Crit chance ~~40/55/70~~ 30/40/50%, Crit power ~~25/35/50~~ 60/80/100%
 - Buff Water: ~~4/7/10~~ 4/8/12 PP per second
 - Baby synergy won't give you the same unit in egg twice, unless you got all the possible eggs before. Hidden Power (E) and Eggsplosion still give random eggs.

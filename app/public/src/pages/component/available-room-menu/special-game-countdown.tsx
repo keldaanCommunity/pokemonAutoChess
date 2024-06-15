@@ -1,6 +1,5 @@
 import { t } from "i18next"
 import React, { useEffect, useState } from "react"
-import { EloRank } from "../../../../../types/enum/EloRank"
 import { GameMode } from "../../../../../types/enum/Game"
 import { useAppSelector } from "../../../hooks"
 import { formatTimeout } from "../../utils/date"
@@ -17,15 +16,17 @@ export function SpecialGameCountdown() {
 
   let specialGameIcon, specialGameName
   if (nextSpecialGame.mode === GameMode.RANKED) {
-    specialGameName = `${t("elorank." + EloRank.GREATBALL)} ${t(
+    specialGameName = `${t("elorank." + nextSpecialGame.minRank)} ${t(
       "ranked_match"
     )}`
     specialGameIcon = (
       <img
         alt={t("minimum_rank")}
-        title={t("minimum_rank") + ": " + t("elorank." + EloRank.GREATBALL)}
+        title={
+          t("minimum_rank") + ": " + t("elorank." + nextSpecialGame.minRank)
+        }
         className="rank icon"
-        src={"/assets/ranks/" + EloRank.GREATBALL + ".svg"}
+        src={"/assets/ranks/" + nextSpecialGame.minRank + ".svg"}
       />
     )
   } else if (nextSpecialGame.mode === GameMode.SCRIBBLE) {
