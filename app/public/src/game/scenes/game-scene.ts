@@ -380,9 +380,10 @@ export default class GameScene extends Scene {
             outline.remove(previouslyHovered.sprite)
           }
 
+          const thickness = Math.round(1 + Math.log(gameObject.def + gameObject.speDef))
           this.pokemonHovered = gameObject
           outline.add(gameObject.sprite, {
-            thickness: 2,
+            thickness,
             outlineColor: 0xffffff
           })
         }
