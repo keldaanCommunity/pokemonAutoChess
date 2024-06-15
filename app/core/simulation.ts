@@ -459,7 +459,7 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     if (item === Item.DYNAMAX_BAND) {
-      pokemon.addMaxHP(pokemon.hp)
+      pokemon.addMaxHP(3 * pokemon.hp)
     }
   }
 
