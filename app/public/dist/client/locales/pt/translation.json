@@ -1781,7 +1781,7 @@
     "NORMAL": "Pokémon NORMAL e seus aliados adjacentes ganham SHIELD quando o combate começa",
     "GRASS": "Pokémon GRASS curam e produzem frutas com o tempo",
     "FIRE": "Os pokémons FIRE ganham ATK após cada ataque e têm chance de BURN seus inimigos por 2 segundos",
-    "WATER": "Os pokemons WATER geram mais PP e têm 30% de chance de se esquivar de ataques básicos. Um novo pokémon WATER é pescado após cada turno de PvP e colocado no teu banco.",
+    "WATER": "Os pokemons WATER geram mais PP e têm 30% de chance de se esquivar de ataques e podem ser pescados com vara",
     "ELECTRIC": "Ataques básicos de pokémons ELECTRIC podem desencadear dois ataques adicionais",
     "FIGHTING": "Os pokémons FIGHTING bloqueiam uma quantidade fixa de dano em cada golpe recebido",
     "PSYCHIC": "Pokémon PSYCHIC ganham AP adicional e atraem Unowns",

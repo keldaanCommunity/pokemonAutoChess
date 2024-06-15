@@ -3,6 +3,7 @@ import type GameState from "../../rooms/states/game-state"
 import type { IPlayer, Role, Title } from "../../types"
 import { SynergyTriggers, UniqueShop } from "../../types/Config"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
+import { Effect } from "../../types/enum/Effect"
 import { BattleResult } from "../../types/enum/Game"
 import {
   ArtificialItems,
@@ -220,6 +221,7 @@ export default class Player extends Schema implements IPlayer {
     const pokemons: Pokemon[] = values(this.board)
     let updatedSynergies = computeSynergies(pokemons)
 
+    this.updateFishingRods(updatedSynergies)
     const artifNeedsRecomputing = this.updateArtificialItems(updatedSynergies)
     const rockNeedsRecomputing = this.updateWeatherRocks(updatedSynergies)
     if (artifNeedsRecomputing || rockNeedsRecomputing) {
@@ -371,6 +373,26 @@ export default class Player extends Schema implements IPlayer {
     }
 
     return needsRecomputingSynergiesAgain
+  }
+
+  updateFishingRods(updatedSynergies: Map<Synergy, number>) {
+    const fishingLevel = SynergyTriggers[Synergy.WATER].filter(
+      (n) => (updatedSynergies.get(Synergy.WATER) ?? 0) >= n
+    ).length
+
+    if (this.items.includes(Item.OLD_ROD) && fishingLevel !== 1)
+      removeInArray(this.items, Item.OLD_ROD)
+    if (this.items.includes(Item.GOOD_ROD) && fishingLevel !== 2)
+      removeInArray(this.items, Item.GOOD_ROD)
+    if (this.items.includes(Item.SUPER_ROD) && fishingLevel !== 3)
+      removeInArray(this.items, Item.SUPER_ROD)
+
+    if (this.items.includes(Item.OLD_ROD) === false && fishingLevel === 1)
+      this.items.push(Item.OLD_ROD)
+    if (this.items.includes(Item.GOOD_ROD) === false && fishingLevel === 2)
+      this.items.push(Item.GOOD_ROD)
+    if (this.items.includes(Item.SUPER_ROD) === false && fishingLevel === 3)
+      this.items.push(Item.SUPER_ROD)
   }
 
   updateRegionalPool(state: GameState) {

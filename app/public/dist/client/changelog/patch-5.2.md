@@ -61,11 +61,12 @@
 - Baby synergy won't give you the same unit in egg twice, unless you got all the possible eggs before. Hidden Power (E) and Eggsplosion still give random eggs.
 - Buff Baby 3: now gives 25% chance to hatch an egg at first defeat instead of first defeat streak
 - Buff Baby 7: when golden eggs are hatched, gain a random shiny item
+- Add rods to Water synergy. No change to the synergy effects, just lore and a way to push more information.
 
 # Changes to Items
 
 - New item category: Shiny items, as exclusive rewards when encountering a shiny wild Pokémon during PvE rounds
-- Added 6 shiny items: Dynamax Band, Super Rod, Shiny Stone, White Flute, Rare Candy, Eviolite
+- Added 6 shiny items: Dynamax Band, Golden Rod, Shiny Stone, White Flute, Rare Candy, Eviolite
 - New item category: Weather Rocks, unlocked with Rock synergy
 - New item: Damp Rock: Gives Water synergy and counts for 3 towards Rain. Can only be used on rock Pokémon
 - New item: Icy Rock: Gives Ice synergy and counts for 3 towards Snow. Can only be used on rock Pokémon
