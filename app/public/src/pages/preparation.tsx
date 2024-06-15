@@ -13,7 +13,12 @@ import { Transfer } from "../../../types"
 import { logger } from "../../../utils/logger"
 import { PreloadingScene } from "../game/scenes/preloading-scene"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import { joinPreparation, logIn, setProfile } from "../stores/NetworkStore"
+import {
+  joinPreparation,
+  logIn,
+  setProfile,
+  toggleReady
+} from "../stores/NetworkStore"
 import {
   addUser,
   changeUser,
@@ -34,10 +39,11 @@ import {
 import Chat from "./component/chat/chat"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import PreparationMenu from "./component/preparation/preparation-menu"
-import "./preparation.css"
 import { SOUNDS, playSound } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import { FIREBASE_CONFIG } from "./utils/utils"
+import { GameMode } from "../../../types/enum/Game"
+import "./preparation.css"
 
 export default function Preparation() {
   const { t } = useTranslation()
@@ -127,6 +133,9 @@ export default function Preparation() {
 
       r.state.listen("gameMode", (value, previousValue) => {
         dispatch(setGameMode(value))
+        if (value !== GameMode.NORMAL) {
+          dispatch(toggleReady(true)) // automatically set users ready in non-classic game mode
+        }
       })
 
       r.state.users.onAdd((u) => {
