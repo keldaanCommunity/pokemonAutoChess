@@ -1929,7 +1929,7 @@
     "METEORITE": "Un meteorito que parece interactuar con Deoxys. Continúa emitiendo un brillo tenue y resulta ligeramente cálido al tacto.",
     "BERRY_JUICE": "Se consume al estar por debajo del 50% HP, restaura el HP al máximo",
     "TRASH": "Los restos de un objeto artificial. No hace nada",
-    "DYNAMAX_BAND": "Al comienzo de la pelea, aumenta el HP máximo en un 100%.",
+    "DYNAMAX_BAND": "Al comienzo de la pelea, aumenta el HP máximo en un 300%.",
     "SUPER_ROD": "En cada ronda, obtiene un Pokémon que coincida con tu sinergia máxima. Cuando se usa en un Pokémon, devuelve todos los objetos que porta al inventario del jugador.",
     "SHINY_STONE": "Da sinergia LIGHT y genera un segundo punto de luz en la celda del pokémon.",
     "RARE_CANDY": "Hace evolucionar inmediatamente a un Pokémon",

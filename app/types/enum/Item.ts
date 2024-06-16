@@ -120,6 +120,15 @@ export const SpecialItems: Item[] = [
   Item.TRASH
 ]
 
+export const FishingRods = [
+  Item.GOLDEN_ROD,
+  Item.SUPER_ROD,
+  Item.GOOD_ROD,
+  Item.OLD_ROD
+] as const
+
+export type FishingRod = (typeof FishingRods)[number]
+
 export const ItemComponents: Item[] = [
   Item.FOSSIL_STONE,
   Item.TWISTED_SPOON,
