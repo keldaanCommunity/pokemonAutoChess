@@ -1257,7 +1257,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     const pveStage = PVEStages[this.state.stageLevel]
 
     if (pveStage) {
-      this.state.shinyEncounter = chance(pveStage.shinyChance ?? 0)
+      this.state.shinyEncounter =
+        this.state.specialGameRule === SpecialGameRule.SHINY_HUNTER ||
+        chance(pveStage.shinyChance ?? 0)
       this.state.players.forEach((player: Player) => {
         if (player.alive) {
           player.opponentId = "pve"

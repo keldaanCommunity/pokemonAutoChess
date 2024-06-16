@@ -2295,7 +2295,7 @@
   "preloading_start": "Pré-carregando o jogo...",
   "loading_asset": "Carregando recurso:",
   "loading_complete": "Carregando completo, aguardando outros jogadores...",
-  "select_pokemon": "Selecione um pokémon",
+  "search_pokemon": "Selecione um pokémon",
   "search_player": "Pesquisar por nome do jogador...",
   "team_builder": "Planificador de Times",
   "titles_unlocked": "Títulos Disponíveis",

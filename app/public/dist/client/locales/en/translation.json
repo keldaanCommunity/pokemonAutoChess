@@ -2719,7 +2719,7 @@
   "preloading_start": "Preloading game...",
   "loading_asset": "Loading asset:",
   "loading_complete": "Loading complete, waiting for other players...",
-  "select_pokemon": "Select a Pokémon",
+  "search_pokemon": "Search for a Pokémon",
   "search_player": "Search by Player Name...",
   "team_builder": "Team Planner",
   "titles_unlocked": "titles unlocked",
@@ -2939,7 +2939,8 @@
     "NINE_LIVES": "Nine Lives",
     "CROWDED": "Crowded Board",
     "KECLEONS_SHOP": "Kecleon's Shop",
-    "FREE_MARKET": "Free Market"
+    "FREE_MARKET": "Free Market",
+    "SHINY_HUNTER": "Shiny Hunter"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "All the additional picks are available immediately",
@@ -2955,7 +2956,8 @@
     "NINE_LIVES": "You are eliminated after losing 9 rounds",
     "CROWDED": "+3 units max on board",
     "KECLEONS_SHOP": "Item carousels are replaced by Kecleon's shop, that propose 6 items for 10 GOLD each",
-    "FREE_MARKET": "Pokemons are bought and sold for 0 GOLD"
+    "FREE_MARKET": "Pokemons are bought and sold for 0 GOLD",
+    "SHINY_HUNTER": "All the Wild PvE encounters are shiny"
   },
   "loading_hints": {
     "tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",
