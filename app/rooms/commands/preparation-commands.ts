@@ -67,7 +67,6 @@ export class OnJoinCommand extends Command<
             return // rank not high enough
           }
 
-          const initiallyReady = this.state.gameMode !== GameMode.NORMAL
           this.state.users.set(
             client.auth.uid,
             new GameUser(
@@ -76,7 +75,7 @@ export class OnJoinCommand extends Command<
               u.elo,
               u.avatar,
               false,
-              initiallyReady,
+              false,
               u.title,
               u.role,
               auth.email === undefined && auth.photoURL === undefined
@@ -114,37 +113,6 @@ export class OnJoinCommand extends Command<
             `There is more than 8 players in the lobby which was not supposed to happen`
           )
         }
-      }
-
-      const nbExpectedPlayers = this.room.metadata?.whitelist
-        ? max(MAX_PLAYERS_PER_GAME)(this.room.metadata?.whitelist.length)
-        : MAX_PLAYERS_PER_GAME
-
-      if (
-        this.state.gameMode !== GameMode.NORMAL &&
-        this.state.users.size === nbExpectedPlayers
-      ) {
-        // auto start when special lobby is full and all ready
-        this.room.state.addMessage({
-          authorId: "server",
-          payload: `Lobby is full, starting match in 5 seconds...`
-        })
-        this.clock.setTimeout(() => {
-          if (this.state.users.size < nbExpectedPlayers) {
-            this.room.state.addMessage({
-              authorId: "server",
-              payload: `Game did not start because one player left.`
-            })
-            return
-          }
-          this.room.dispatcher.dispatch(new OnGameStartRequestCommand())
-          // open another one
-          this.room.presence.publish("lobby-full", {
-            gameMode: this.state.gameMode,
-            minRank: this.state.minRank,
-            noElo: this.state.noElo
-          })
-        }, 5000)
       }
     } catch (error) {
       logger.error(error)
@@ -507,21 +475,43 @@ export class OnToggleReadyCommand extends Command<
   PreparationRoom,
   {
     client: Client
+    ready: boolean | undefined
   }
 > {
-  execute({ client }) {
+  execute({ client, ready }) {
     try {
       // logger.debug(this.state.users.get(client.auth.uid).ready);
       if (client.auth?.uid && this.state.users.has(client.auth.uid)) {
         const user = this.state.users.get(client.auth.uid)!
-        user.ready = !user.ready
+        user.ready = ready !== undefined ? ready : !user.ready
       }
+
+      const nbExpectedPlayers = this.room.metadata?.whitelist
+        ? max(MAX_PLAYERS_PER_GAME)(this.room.metadata?.whitelist.length)
+        : MAX_PLAYERS_PER_GAME
+
       if (
         this.state.gameMode !== GameMode.NORMAL &&
-        this.state.users.size === this.room.maxClients &&
-        values(this.state.users).every((user) => user.ready === true)
+        this.state.users.size === nbExpectedPlayers &&
+        values(this.state.users).every((user) => user.ready)
       ) {
         // auto start when ranked lobby is full and all ready
+        this.room.state.addMessage({
+          authorId: "server",
+          payload: `Lobby is full, starting match...`
+        })
+
+        if (
+          [GameMode.RANKED, GameMode.SCRIBBLE].includes(this.state.gameMode)
+        ) {
+          // open another one
+          this.room.presence.publish("lobby-full", {
+            gameMode: this.state.gameMode,
+            minRank: this.state.minRank,
+            noElo: this.state.noElo
+          })
+        }
+
         return [new OnGameStartRequestCommand()]
       }
     } catch (error) {

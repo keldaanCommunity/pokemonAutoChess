@@ -94,6 +94,7 @@
 # Bugfix
 
 - Fix shop unit highlight when using regional variants
+- Quick play and other automated-start lobbies now wait for an automatic ready flag from all players before starting the game. This should fix the issue where the game was not starting for the 8th player despite the player being counted in the players list.
 
 # Misc
 
