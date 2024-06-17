@@ -2713,7 +2713,7 @@
   "preloading_start": "Precargando juego...",
   "loading_asset": "Cargando activo:",
   "loading_complete": "Carga completa, esperando a otros jugadores...",
-  "select_pokemon": "Selecciona un Pokémon",
+  "search_pokemon": "Selecciona un Pokémon",
   "search_player": "Buscar por nombre de jugador...",
   "team_builder": "Planificador de Equipos",
   "titles_unlocked": "Títulos desbloqueados",

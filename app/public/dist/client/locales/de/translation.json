@@ -2428,7 +2428,7 @@
   "preloading_start": "Spiel wird vorab geladen...",
   "loading_asset": "Asset wird geladen:",
   "loading_complete": "Der Ladevorgang ist abgeschlossen, ich warte auf andere Spieler ...",
-  "select_pokemon": "Wähle ein Pokémon aus",
+  "search_pokemon": "Wähle ein Pokémon aus",
   "search_player": "Nach Spielernamen suchen...",
   "team_builder": "Teamplaner",
   "titles_unlocked": "Titel freigeschaltet",

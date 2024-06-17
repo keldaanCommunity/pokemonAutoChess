@@ -1958,7 +1958,7 @@
   "preloading_start": "Spel voorladen...",
   "loading_asset": "Activa laden:",
   "loading_complete": "Laden voltooid, wachten op andere spelers...",
-  "select_pokemon": "Selecteer een Pokemon",
+  "search_pokemon": "Selecteer een Pokemon",
   "search_player": "Zoeken op spelersnaam...",
   "game-reconnect-modal-title": "Maak opnieuw verbinding met het spel",
   "game-reconnect-modal-body": "Je hebt een lopende game verlaten. Wil je opnieuw verbinding maken met je vorige game?"

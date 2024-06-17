@@ -2634,7 +2634,7 @@
   "preloading_start": "Préchargement du jeu...",
   "loading_asset": "Chargement:",
   "loading_complete": "Chargement terminé, en attente des autres joueurs...",
-  "select_pokemon": "Sélectionnez un pokemon",
+  "search_pokemon": "Chercher un Pokémon",
   "search_player": "Chercher par nom de joueur...",
   "team_builder": "Planificateur",
   "titles_unlocked": "titres débloqués",

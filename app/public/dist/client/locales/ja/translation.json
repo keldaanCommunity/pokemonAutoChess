@@ -1958,7 +1958,7 @@
   "preloading_start": "ゲームをプリロード中...",
   "loading_asset": "アセットのロード:",
   "loading_complete": "ロードが完了しました。他のプレイヤーを待っています...",
-  "select_pokemon": "ポケモンを選択してください",
+  "search_pokemon": "ポケモンを選択してください",
   "search_player": "プレイヤー名で検索...",
   "game-reconnect-modal-title": "ゲームに再接続する",
   "game-reconnect-modal-body": "進行中のゲームを放置しました。以前のゲームに再接続しますか?"

@@ -100,3 +100,4 @@
 
 - Ultra ball ranked matches are back, twice per day at 10am and 10pm CET
 - Users kicked from a lobby cannot rejoin it again. Added a confirmation popup when kicking a user
+- New Scribble rule
