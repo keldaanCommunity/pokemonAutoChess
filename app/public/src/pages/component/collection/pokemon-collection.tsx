@@ -13,37 +13,35 @@ import UnownPanel from "./unown-panel";
 import "./pokemon-collection.css";
 
 export default function PokemonCollection() {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   const [selectedPokemon, setSelectedPokemon] = useState<Pkm | undefined>(
     undefined
-  );
+  )
 
   const prevFilterState = useMemo(() => {
-    const prevState = localStore.get(LocalStoreKeys.COLLECTION_FILTER);
+    const prevState = localStore.get(LocalStoreKeys.COLLECTION_FILTER)
     return {
       filter: prevState?.filter ?? "unlockable",
       sort: prevState?.sort ?? "index",
       shinyOnly: prevState?.shinyOnly ?? false,
-    };
-  }, [localStore]);
+    }
+  }, [localStore])
 
-  const [filter, setFilter] = useState<string>(prevFilterState.filter);
-  const [sort, setSort] = useState<string>(prevFilterState.sort);
-  const [shinyOnly, setShinyOnly] = useState<boolean>(
-    prevFilterState.shinyOnly
-  );
+  const [filter, setFilter] = useState<string>(prevFilterState.filter)
+  const [sort, setSort] = useState<string>(prevFilterState.sort)
+  const [shinyOnly, setShinyOnly] = useState<boolean>(prevFilterState.shinyOnly)
 
   useEffect(() => {
     localStore.set(LocalStoreKeys.COLLECTION_FILTER, {
       filter,
       sort,
       shinyOnly,
-    });
-  }, [filter, sort, shinyOnly]);
+    })
+  }, [filter, sort, shinyOnly])
 
   return (
-    <div id='pokemon-collection'>
-      <header className='my-container'>
+    <div id="pokemon-collection">
+      <header className="my-container">
         <PokemonTypeahead
           value={selectedPokemon ?? ""}
           onChange={setSelectedPokemon}
@@ -68,22 +66,22 @@ export default function PokemonCollection() {
           isDark
         />
       </header>
-      <div className='my-container'>
+      <div className="my-container">
         <Tabs>
-          <TabList className='pokemon-collection-tabs'>
-            <Tab key='title-all'>{t("ALL")}</Tab>
+          <TabList className="pokemon-collection-tabs">
+            <Tab key="title-all">{t("ALL")}</Tab>
             {(Object.keys(Synergy) as Synergy[]).map((type) => {
               return (
                 <Tab key={"title-" + type}>
                   <SynergyIcon type={type} />
                 </Tab>
-              );
+              )
             })}
-            <Tab key='?'>
+            <Tab key="?">
               <img
-                src='assets/unown/unown-qm.png'
-                alt='?'
-                className='unown-icon'
+                src="assets/unown/unown-qm.png"
+                alt="?"
+                className="unown-icon"
               />
             </Tab>
           </TabList>
@@ -100,7 +98,7 @@ export default function PokemonCollection() {
                     shinyOnly={shinyOnly}
                   />
                 </TabPanel>
-              );
+              )
             }
           )}
           <TabPanel>
@@ -120,5 +118,5 @@ export default function PokemonCollection() {
         />
       )}
     </div>
-  );
+  )
 }
