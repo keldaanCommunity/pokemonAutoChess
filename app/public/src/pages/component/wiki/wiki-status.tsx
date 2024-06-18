@@ -15,6 +15,7 @@ export default function WikiStatus() {
     Status.FREEZE,
     Status.PARALYSIS,
     Status.POISONNED,
+    Status.POKERUS,
     Status.PROTECT,
     Status.RESURECTION,
     Status.RUNE_PROTECT,

@@ -454,6 +454,10 @@ export default class Simulation extends Schema implements ISimulation {
       )
     }
 
+    if (item === Item.POKERUS_VIAL) {
+      pokemon.status.triggerPokerus()
+    }
+
     if (item === Item.FLUFFY_TAIL) {
       pokemon.status.triggerRuneProtect(60000)
     }

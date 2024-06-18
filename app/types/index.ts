@@ -585,6 +585,7 @@ export interface IStatus {
   resurection: boolean
   resurecting: boolean
   paralysis: boolean
+  pokerus: boolean
   armorReduction: boolean
   runeProtect: boolean
   electricField: boolean

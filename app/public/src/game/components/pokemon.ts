@@ -92,6 +92,7 @@ export default class PokemonSprite extends DraggableObject {
   freeze: GameObjects.Sprite | undefined
   confusion: GameObjects.Sprite | undefined
   paralysis: GameObjects.Sprite | undefined
+  pokerus: GameObjects.Sprite | undefined
   armorReduction: GameObjects.Sprite | undefined
   charm: GameObjects.Sprite | undefined
   flinch: GameObjects.Sprite | undefined
@@ -691,6 +692,23 @@ export default class PokemonSprite extends DraggableObject {
     if (this.paralysis) {
       this.remove(this.paralysis, true)
       this.paralysis = undefined
+    }
+  }
+
+  addPokerus() {
+    if (!this.pokerus) {
+      this.pokerus = this.scene.add
+        .sprite(0, -50, "status", "POKERUS/000.png")
+        .setScale(2)
+      this.pokerus.anims.play("POKERUS")
+      this.add(this.pokerus)
+    }
+  }
+
+  removePokerus() {
+    if (this.pokerus) {
+      this.remove(this.pokerus, true)
+      this.pokerus = undefined
     }
   }
 
