@@ -83,7 +83,8 @@ export enum LocalStoreKeys {
   PREFERENCES = "pac_preferences",
   RECONNECTION_TOKEN = "reconnection_token",
   TEAM_PLANNER = "team_planner",
-  LAST_PATCH_READ = "last_patch_read"
+  LAST_PATCH_READ = "last_patch_read",
+  COLLECTION_FILTER = "collection_filter"
 }
 
 export const localStore = new LocalStore<LocalStoreKeys>()
