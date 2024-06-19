@@ -20,18 +20,18 @@
 - Ditto ~~Normal~~ -> Amorphous
 - Gastly ~~Ghost Poison Monster~~ Ghost Poison Amorphous
 - Solosis ~~Psychic~~ Psychic Amorphous
-- Spiritomb ~~Ghost Dark~~ Ghost Dark Amorhpous
-- Phione ~~Water Bug Aquatic~~ Water Auatic Amorphous
+- Spiritomb ~~Ghost Dark~~ Ghost Dark Amorphous
+- Phione ~~Water Bug Aquatic~~ Water Aquatic Amorphous
 - Phione Atk ~~14~~ 15 Hp ~~160~~ 190
 - Manaphy Atk ~~16~~ 17
-- Castform ~~Normal Artificial~~ Artificial Amorhpous
+- Castform ~~Normal Artificial~~ Artificial Amorphous
 - Mimikyu ~~Ghost Fairy~~ Ghost Fairy Amorphous
 - Deoxys ~~Psychic Artificial Human~~ Psychic Amorphous Human
-- Darkrai ~~Dark Ghost Monster~~ Dark Ghost Amorhpous
+- Darkrai ~~Dark Ghost Monster~~ Dark Ghost Amorphous
 - Nihilego ~~Poison Rock~~ Poison Rock Amorphous
 - Vaporeon ~~Water Aquatic/Field~~ Water Amorphous Field
 - Grimer ~~Poison Monster~~ Poison Monster Amorphous
-- Omanyte ~~Water Fossil~~~ Water Fossil Amorphous
+- Omanyte ~~Water Fossil~~ Water Fossil Amorphous
 - Dewpider ~~Water Bug~~ Water Bug Amorphous
 - Alolan Grimmer ~~Poison Dark~~ Poison Dark Amorphous
 - Vanillite ~~Ice Artificial~~ Ice Artificial Amorphous
@@ -41,7 +41,7 @@
 - Goomy ~~Dragon Aquatic Monster~~ Dragon Aquatic Amorphous
 - Hisui Sligoo ~~Dragon Steel Monster~~ Dragon Steel Amorphous
 - Misdreavus ~~Ghost Fairy~~ Ghost Fairy Amorphous
-- Gourgeist ~~Ghost Grass~~ Ghost Grass Amorhpous
+- Gourgeist ~~Ghost Grass~~ Ghost Grass Amorphous
 - Dreepy ~~Dragon Ghost~~ Dragon Ghost Amorphous
 - Cleffa line is now regional in Normal/Baby/Light regions
 
