@@ -1302,7 +1302,7 @@
     "MAGMA_STORM": "La cible est piégée dans un maelström de feu qui inflige [80,SP] SPECIAL avant de se déplacer vers une cible adjacente",
     "SLASHING_CLAW": "Inflige [15,30,60,SP] à la cible et la WOUND pendant 5 secondes. Si la cible a déjà WOUND, inflige 30 % de bonus SPECIAL",
     "ERUPTION": "Tire [15,25,40] projectiles en l'air. Chaque projectile inflige [30,50,100,SP] SPECIAL et BURN pendant 5 secondes",
-    "HAIL": "Une tempête de grêle frappe [10,20,30] cases aléatoires du plateau, infligeant [50,SP] SPECIAL. Les grêlons restent sur le terrain, infligeant 10 SPECIAL et FREEZE pendant 1 seconde aux adversaires qui marchent dessus, s'ils ne sont pas de type ICE.",
+    "HAIL": "Une tempête de grêle frappe [10,20,30] cases aléatoires du plateau, infligeant [50,SP] SPECIAL. Les grêlons restent sur le terrain, infligeant 10 SPECIAL et FREEZE pendant 1 seconde aux pokémons qui marchent dessus, s'ils ne sont pas de type ICE.",
     "LUSTER_PURGE": "Lance une boule de lumière en ligne droite qui inflige [25,SP] SPECIAL deux fois et réduit deux fois la SPE_DEF de tous les ennemis touchés de 3",
     "MIST_BALL": "Lance une bulle de brume en ligne droite qui inflige [25,SP] SPECIAL deux fois et réduit deux fois l'AP de tous les ennemis touchés de 30 %",
     "MUD_BUBBLE": "Soigne le lanceur de [10,20,40,SP] HP",
