@@ -244,7 +244,7 @@ export default class GameScene extends Scene {
       this.board?.battleMode()
     } else if (newPhase === GamePhaseState.MINIGAME) {
       this.board?.minigameMode()
-      this.minigameManager.initialize()
+      this.minigameManager?.initialize()
     } else {
       this.board?.pickMode()
     }
@@ -380,7 +380,9 @@ export default class GameScene extends Scene {
             outline.remove(previouslyHovered.sprite)
           }
 
-          const thickness = Math.round(1 + Math.log(gameObject.def + gameObject.speDef))
+          const thickness = Math.round(
+            1 + Math.log(gameObject.def + gameObject.speDef)
+          )
           this.pokemonHovered = gameObject
           outline.add(gameObject.sprite, {
             thickness,
