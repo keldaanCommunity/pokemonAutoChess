@@ -10,6 +10,8 @@
  - Munna
  - Musharna
  - Kleavor
+ - Rotom Drone
+ - Silvally Ghost
 
 # Changes to Pokemon & Abilities
 
@@ -75,6 +77,8 @@
 - New item: Heat Rock: Gives Fire synergy and counts for 3 towards Zenith. Can only be used on rock Pokémon
 - New item: Smooth Rock: Gives Ground synergy and counts for 3 towards Sandstorm. Can only be used on rock Pokémon
 - New item: Black Augurite: Gives Dark synergy and counts for 3 towards Night. Can only be used on rock Pokémon
+- New Artificial item: Pokérus Vial: Infects the holder with Pokérus
+- New Artificial item: Rotom Phone: Gives Ghost synergy. Summons Rotom Drone near the holder
 - Buff Soothe Bell: ~~25~~ 33% of damage inflicted as shield
 - Changed Blue Orb: the chain lightning now targets the 3 closest enemies, and inflicts 10 special damage in addition to the mana burn
 - Changed power lens: The amount of special damage reduced by special defense is inflicted back to the attacker
@@ -82,7 +86,7 @@
 
 # Gameplay
 
--
+- New Status: Pokérus: Every 2 seconds, gain 1 Attack and 10% Ability Power before infecting 2 adjacent allies with Pokérus
 
 # UI
 

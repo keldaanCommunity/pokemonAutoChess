@@ -197,6 +197,19 @@ export default class Simulation extends Schema implements ISimulation {
                 entity
               })
             }
+
+            if (pokemon.items.has(Item.ROTOM_PHONE)) {
+              const teamIndex = team === blueTeam ? 0 : 1
+              const rotomDrone = PokemonFactory.createPokemonFromName(
+                Pkm.ROTOM_DRONE,
+                player
+              )
+              const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
+                pokemon,
+                teamIndex
+              )
+              this.addPokemon(rotomDrone, coord.x, coord.y, teamIndex, true)
+            }
           })
         }
       }
@@ -597,15 +610,6 @@ export default class Simulation extends Schema implements ISimulation {
               if (value.speDef > pokemon.speDef) pokemon.speDef = value.speDef
             }
           })
-        }
-
-        if (pokemon.items.has(Item.ROTOM_PHONE)) {
-          const mon = PokemonFactory.createPokemonFromName(Pkm.ROTOM_DRONE)
-          const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
-              pokemon,
-              pokemon.team
-          )
-          this.addPokemon(mon, coord.x, coord.y, pokemon.team, true)
         }
 
         if (pokemon.items.has(Item.WHITE_FLUTE)) {

@@ -215,7 +215,7 @@ export const Berries: Item[] = [
 ]
 
 export const ArtificialItems: Item[] = [
-  /*Item.ELECTIRIZER,
+  Item.ELECTIRIZER,
   Item.MAGMARIZER,
   Item.EXP_SHARE,
   Item.LIGHT_BALL,
@@ -225,7 +225,7 @@ export const ArtificialItems: Item[] = [
   Item.SWIFT_WING,
   Item.MACHO_BRACE,
   Item.INCENSE,
-  Item.METRONOME,*/
+  Item.METRONOME,
   Item.BIG_NUGGET,
   Item.POKERUS_VIAL,
   Item.ROTOM_PHONE

@@ -5855,14 +5855,14 @@ export class RotomDrone extends Pokemon {
   ])
   rarity = Rarity.SPECIAL
   stars = 1
-  hp = 120
+  hp = 80
   atk = 6
   def = 4
   speDef = 4
   maxPP = 50
-  range = 1
+  range = 3
   skill = Ability.CAMERA_FLASH
-  attackSprite = AttackSprite.STEEL_MELEE
+  attackSprite = AttackSprite.GHOST_RANGE
 }
 
 export class Spiritomb extends Pokemon {
