@@ -1,0 +1,151 @@
+.wiki-panel {
+    --top-height: 40px;
+    --top-padding: 12px;
+
+    display: grid;
+    grid-template-areas: 'select' 'content';
+    grid-template-rows: var(--top-height) 1fr;
+    gap: var(--top-padding);
+    padding: var(--top-padding) 8px;
+    min-height: calc(100vh - var(--top-height) - var(--top-padding));
+    max-width: 20vw;
+
+}
+
+.wiki-page-select {
+    grid-area: select;
+    position: sticky;
+    top: 12px;
+    z-index: 1;
+}
+
+.wiki-content {
+    grid-area: content;
+    width: 100%;
+    min-width: 300px;
+}
+
+.wiki-content li {
+    list-style: none;
+}
+
+.wiki-content ul {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.wiki-panel-pokemon {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.wiki-content .wiki-panel-pokemon ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.wiki-panel-pokemon li {
+    padding: 4px;
+    background: none;
+}
+
+.wiki-panel-pokemon-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.wiki-panel-pokemon-detail-pokemon {
+}
+
+.wiki-panel-pokemon-detail-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    color: white;
+    width: 316px;
+    column-gap: 12px;
+}
+
+button.close {
+    position: absolute;
+    right: 16px;
+    top: 6px;
+    color: white;
+}
+
+.wiki-panel-pokemon #wiki-pokemons-all {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.wiki-panel-pokemon #wiki-pokemons-all section {
+    width: 100%;
+}
+
+.wiki-types ul,
+#wiki-items article ul,
+#wiki-weather .my-box ul,
+#wiki-ability .my-box ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#wiki-ability {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#wiki-ability input {
+    width: 100%;
+}
+
+#wiki-dungeon .my-box img {
+    max-width: -webkit-fill-available;
+    max-width: fill-available;
+}
+
+#wiki-weather img {
+    max-width: 100px;
+}
+
+#wiki-items img {
+    width: 100%;
+    min-width: 30px;
+    max-width: 50px;
+}
+
+.wiki-types table tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.wiki-types table tr td:last-of-type {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.wiki-types div {
+    flex-direction: column;
+    align-items: flex-start !important;
+}
+
+#wiki-types-all section {
+    width: 100%;
+}
+
+.wiki-types > ul {
+    width: 100%;
+    min-width: 320px;
+}

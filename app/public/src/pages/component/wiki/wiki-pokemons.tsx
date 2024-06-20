@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react"
+import React, { useEffect, useState, useMemo, useCallback } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { RarityColor } from "../../../../../types/Config"
@@ -21,31 +21,27 @@ import ReactDOM from "react-dom"
 export default function WikiPokemons() {
   const { t } = useTranslation()
   const tabs = Object.values(Rarity) as Rarity[]
-  const [selectedPkm, setSelectedPkm] = useState<Pkm | "">("")
+  const [selectedPkm, setSelectedPkm] = useState<Pkm>()
   const [tabIndex, setTabIndex] = useState(0)
-  useEffect(() => {
-    if (selectedPkm) {
-      setTabIndex(tabs.indexOf(getPokemonData(selectedPkm).rarity))
+
+  const selectPokemon = useCallback((pokemon: Pkm | number) => {
+    if (typeof pokemon === "number") {
+      setTabIndex(pokemon)
+      setSelectedPkm(selectedPkm)
+    } else {
+      const index = tabs.indexOf(getPokemonData(pokemon).rarity)
+      setTabIndex(index)
+      setSelectedPkm(pokemon)
     }
-  }, [selectedPkm, tabs])
+  }, [])
 
   return (
     <Tabs
       className="wiki-pokemons"
       selectedIndex={tabIndex}
-      onSelect={(index) => {
-        setSelectedPkm("")
-        setTabIndex(index)
-      }}
+      onSelect={selectPokemon}
     >
-      <PokemonTypeahead
-        value={selectedPkm ?? ""}
-        onChange={(pkm) => {
-          if (pkm) {
-            setSelectedPkm(pkm)
-          }
-        }}
-      />
+      <PokemonTypeahead value={selectedPkm ?? ""} onChange={selectPokemon} />
       <TabList>
         {tabs.map((r) => {
           return (
@@ -77,10 +73,10 @@ export default function WikiPokemons() {
 
 export function WikiPokemon(props: {
   rarity: Rarity
-  selected: Pkm | ""
+  selected?: Pkm
   onSelect: (pkm: Pkm) => void
 }) {
-  const pokemons = useMemo(
+  const pokemons: Pkm[] = useMemo(
     () =>
       PRECOMPUTED_POKEMONS_PER_RARITY[props.rarity]
         .filter((p) => p !== Pkm.DEFAULT)
@@ -97,18 +93,21 @@ export function WikiPokemon(props: {
       selectedIndex={props.selected ? pokemons.indexOf(props.selected) : -1}
       onSelect={(index) => props.onSelect(pokemons[index])}
     >
-      <TabList>
-        {pokemons.map((pkm) => {
-          return (
-            <Tab key={"title-" + pkm}>
-              <img
-                className="pokemon-portrait"
-                src={getPortraitSrc(PkmIndex[pkm])}
-              ></img>
-            </Tab>
-          )
-        })}
-      </TabList>
+      {
+        <TabList>
+          {!props.selected &&
+            pokemons.map((pkm) => {
+              return (
+                <Tab key={"title-" + pkm}>
+                  <img
+                    className="pokemon-portrait"
+                    src={getPortraitSrc(PkmIndex[pkm])}
+                  ></img>
+                </Tab>
+              )
+            })}
+        </TabList>
+      }
 
       {pokemons.map((pkm) => {
         return (
@@ -156,7 +155,7 @@ export function WikiAllPokemons() {
                       key={p.name}
                       className={cc("pokemon-portrait", {
                         additional: p.additional,
-                        regional: p.regional
+                        regional: p.regional,
                       })}
                       onMouseOver={() => {
                         setHoveredPokemon(p.name)
