@@ -23,6 +23,7 @@ import {
 import { Berries, CraftableItems, Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Synergy } from "../types/enum/Synergy"
+import { Pkm } from "../types/enum/Pokemon"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
 import { IPokemonData } from "../types/interfaces/PokemonData"
 import { pickRandomIn, randomBetween, shuffleArray } from "../utils/random"
@@ -596,6 +597,15 @@ export default class Simulation extends Schema implements ISimulation {
               if (value.speDef > pokemon.speDef) pokemon.speDef = value.speDef
             }
           })
+        }
+
+        if (pokemon.items.has(Item.ROTOM_PHONE)) {
+          const mon = PokemonFactory.createPokemonFromName(Pkm.ROTOM_DRONE)
+          const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
+              pokemon,
+              pokemon.team
+          )
+          this.addPokemon(mon, coord.x, coord.y, pokemon.team, true)
         }
 
         if (pokemon.items.has(Item.WHITE_FLUTE)) {
