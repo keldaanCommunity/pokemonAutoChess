@@ -41,5 +41,6 @@ Shiny items, as exclusive rewards when encountering a shiny wild Pokémon during
 ![Munna](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0517/Normal.png)
 ![Musharna](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0518/Normal.png)
 ![Kleavor](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0900/Normal.png)
+![Rotom Drone](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0479/0008/Normal.png)
 
 Check out the full changelog on Discord !
