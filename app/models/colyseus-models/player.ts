@@ -3,14 +3,13 @@ import type GameState from "../../rooms/states/game-state"
 import type { IPlayer, Role, Title } from "../../types"
 import { SynergyTriggers, UniqueShop } from "../../types/Config"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
-import { Effect } from "../../types/enum/Effect"
 import { BattleResult } from "../../types/enum/Game"
 import {
   ArtificialItems,
-  WeatherRocks,
   Berries,
   Item,
-  SynergyGivenByItem
+  SynergyGivenByItem,
+  WeatherRocks
 } from "../../types/enum/Item"
 import {
   Pkm,
@@ -30,12 +29,12 @@ import { Effects } from "../effects"
 import type { IPokemonConfig } from "../mongo-models/user-metadata"
 import PokemonFactory from "../pokemon-factory"
 import {
-  getPokemonData,
-  PRECOMPUTED_REGIONAL_MONS
+  PRECOMPUTED_REGIONAL_MONS,
+  getPokemonData
 } from "../precomputed/precomputed-pokemon-data"
 import ExperienceManager from "./experience-manager"
 import HistoryItem from "./history-item"
-import { Pokemon, isOnBench, PokemonClasses } from "./pokemon"
+import { Pokemon, PokemonClasses, isOnBench } from "./pokemon"
 import PokemonCollection from "./pokemon-collection"
 import PokemonConfig from "./pokemon-config"
 import Synergies, { computeSynergies } from "./synergies"
@@ -381,11 +380,11 @@ export default class Player extends Schema implements IPlayer {
     ).length
 
     if (this.items.includes(Item.OLD_ROD) && fishingLevel !== 1)
-      removeInArray(this.items, Item.OLD_ROD)
+      removeInArray<Item>(this.items, Item.OLD_ROD)
     if (this.items.includes(Item.GOOD_ROD) && fishingLevel !== 2)
-      removeInArray(this.items, Item.GOOD_ROD)
+      removeInArray<Item>(this.items, Item.GOOD_ROD)
     if (this.items.includes(Item.SUPER_ROD) && fishingLevel !== 3)
-      removeInArray(this.items, Item.SUPER_ROD)
+      removeInArray<Item>(this.items, Item.SUPER_ROD)
 
     if (this.items.includes(Item.OLD_ROD) === false && fishingLevel === 1)
       this.items.push(Item.OLD_ROD)

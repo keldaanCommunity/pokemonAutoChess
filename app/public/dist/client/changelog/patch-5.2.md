@@ -102,3 +102,4 @@
 - Ultra ball ranked matches are back, twice per day at 10am and 10pm CET
 - Users kicked from a lobby cannot rejoin it again. Added a confirmation popup when kicking a user
 - New Scribble rule
+- Since June 22th, Facebook requires its facebook for developers authentication users to undergo enterprise-level verification, including a SIRET number and a full address. This means that all Facebook accounts are no longer accessible. We apologise for any inconvenience caused. But as we do not directly control access to your personal data, we cannot offer you any solutions.
