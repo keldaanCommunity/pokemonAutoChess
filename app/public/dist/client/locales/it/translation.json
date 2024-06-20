@@ -1978,8 +1978,8 @@
   "preloading_start": "Precaricamento del gioco...",
   "loading_asset": "Caricamento risorsa:",
   "loading_complete": "Caricamento completato, in attesa di altri giocatori...",
-  "select_pokemon": "Seleziona un Pokémon",
   "search_player": "Cerca per nome giocatore...",
   "game-reconnect-modal-title": "Riconnettiti al gioco",
-  "game-reconnect-modal-body": "Hai lasciato una partita in corso. Vuoi riconnetterti al gioco precedente?"
+  "game-reconnect-modal-body": "Hai lasciato una partita in corso. Vuoi riconnetterti al gioco precedente?",
+  "select_pokemon": "Seleziona un Pokémon"
 }

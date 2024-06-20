@@ -1827,7 +1827,10 @@
     "BERRY_JUICE": "Zumo de baya",
     "TRASH": "Basura",
     "DYNAMAX_BAND": "Maximuñequera",
+    "OLD_ROD": "Caña Vieja",
+    "GOOD_ROD": "Caña Buena",
     "SUPER_ROD": "Supercaña",
+    "GOLDEN_ROD": "Supercaña",
     "SHINY_STONE": "Piedra día",
     "RARE_CANDY": "Caramelo Raro",
     "EVIOLITE": "Mineral Evolutivo",
@@ -1929,8 +1932,11 @@
     "METEORITE": "Un meteorito que parece interactuar con Deoxys. Continúa emitiendo un brillo tenue y resulta ligeramente cálido al tacto.",
     "BERRY_JUICE": "Se consume al estar por debajo del 50% HP, restaura el HP al máximo",
     "TRASH": "Los restos de un objeto artificial. No hace nada",
-    "DYNAMAX_BAND": "Al comienzo de la pelea, aumenta el HP máximo en un 300%.",
+    "OLD_ROD": "Después de cada ronda JcJ, pesca un Pokémon que luego se agrega a un espacio libre en tu banco. Puede atrapar Pokémon WATER comunes y poco comunes, así como a Magikarp.",
+    "GOOD_ROD": "Después de cada ronda JcJ, pesca un Pokémon que luego se agrega a un espacio libre en tu banco. Puede atrapar Pokémon WATER raros y a Feebas",
     "SUPER_ROD": "En cada ronda, obtiene un Pokémon que coincida con tu sinergia máxima. Cuando se usa en un Pokémon, devuelve todos los objetos que porta al inventario del jugador.",
+    "DYNAMAX_BAND": "Al comienzo de la pelea, aumenta el HP máximo en un 300%.",
+    "GOLDEN_ROD": "Después de cada ronda JcJ, pesca un Pokémon que luego se agrega a un espacio libre en tu banco. Puedes atrapar Pokémon únicos o Pokémon que coincidan con tu sinergia principal. Cuando se usa en un Pokémon, recupera todos los elementos que tiene en tu inventario de jugador.",
     "SHINY_STONE": "Da sinergia LIGHT y genera un segundo punto de luz en la celda del pokémon.",
     "RARE_CANDY": "Hace evolucionar inmediatamente a un Pokémon",
     "EVIOLITE": "Sólo lo pueden tener Pokémon que no estén completamente evolucionados. Impide que el titular evolucione.",
@@ -2933,7 +2939,8 @@
     "NINE_LIVES": "Nueve Vidas",
     "CROWDED": "Tablero Lleno",
     "KECLEONS_SHOP": "Tienda de Kecleon",
-    "FREE_MARKET": "Mercado Gratis"
+    "FREE_MARKET": "Mercado Gratis",
+    "SHINY_HUNTER": "Cazador Shiny"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "Todas los pokémon adicionales están disponibles de inmediato.",
@@ -2949,7 +2956,8 @@
     "NINE_LIVES": "Eres eliminado después de perder 9 rondas",
     "CROWDED": "+3 unidades máximas en el tablero",
     "KECLEONS_SHOP": "Los carruseles de objetos son reemplazados por la tienda de Kecleon, que propone 6 objetos por 10 GOLD cada uno",
-    "FREE_MARKET": "Los pokémon se compran y venden por 0 GOLD"
+    "FREE_MARKET": "Los pokémon se compran y venden por 0 GOLD",
+    "SHINY_HUNTER": "Todos los encuentros JcE salvajes son shiny."
   },
   "loading_hints": {
     "tab_out": "¡No te desconectes! La carga se detiene cuando esta ventana del navegador está inactiva.",
