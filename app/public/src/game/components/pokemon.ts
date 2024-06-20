@@ -118,6 +118,7 @@ export default class PokemonSprite extends DraggableObject {
   shouldShowTooltip: boolean
   flip: boolean
   animationLocked: boolean /* will prevent another anim to play before current one is completed */
+  skydiving: boolean
 
   constructor(
     scene: GameScene | DebugScene,
@@ -855,28 +856,34 @@ export default class PokemonSprite extends DraggableObject {
   }
 
   skydiveUp() {
-    // animation where pokemon is flying up out of the screen for a screen dive animation. Should take <= 500 milliseconds
-    this.moveManager.setSpeed(800)
-    this.moveManager.moveTo(this.x, -100)
+    if (!this.skydiving) {
+      // animation where pokemon is flying up out of the screen for a screen dive animation. Should take <= 500 milliseconds
+      this.skydiving = true
+      this.moveManager.setSpeed(800)
+      this.moveManager.moveTo(this.x, -100)
+    }
   }
 
   skydiveDown() {
-    // animation after a skydiving attack where pokemon moves from its target cell to its final reserved adjacent cell
-    const landingCoordinates = transformAttackCoordinate(
-      this.targetX ?? this.positionX,
-      this.targetY ?? this.positionY,
-      this.flip
-    )
-    const finalCoordinates = transformAttackCoordinate(
-      this.positionX,
-      this.positionY,
-      this.flip
-    )
+    if (this.skydiving) {
+      // animation after a skydiving attack where pokemon moves from its target cell to its final reserved adjacent cell
+      const landingCoordinates = transformAttackCoordinate(
+        this.targetX ?? this.positionX,
+        this.targetY ?? this.positionY,
+        this.flip
+      )
+      const finalCoordinates = transformAttackCoordinate(
+        this.positionX,
+        this.positionY,
+        this.flip
+      )
 
-    this.x = landingCoordinates[0]
-    this.y = landingCoordinates[1]
-    this.moveManager.setSpeed(3)
-    this.moveManager.moveTo(finalCoordinates[0], finalCoordinates[1])
+      this.x = landingCoordinates[0]
+      this.y = landingCoordinates[1]
+      this.moveManager.setSpeed(3)
+      this.moveManager.moveTo(finalCoordinates[0], finalCoordinates[1])
+      this.skydiving = false
+    }
   }
 
   addResurection() {

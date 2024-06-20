@@ -55,7 +55,6 @@ export default class MovingState extends PokemonState {
       pokemon.cooldown = Math.max(0, pokemon.cooldown - dt)
       if (pokemon.status.skydiving && pokemon.cooldown <= 0) {
         pokemon.status.skydiving = false
-        pokemon.cooldown = 500 // adding a cooldown again just for moving from landing cell to final cell after skydiving
       }
     }
   }
@@ -69,7 +68,11 @@ export default class MovingState extends PokemonState {
 
     let x: number | undefined = undefined
     let y: number | undefined = undefined
-    if (pokemon.types.has(Synergy.DARK) && pokemon.baseRange === 1 && pokemon.passive !== Passive.GUZZLORD) {
+    if (
+      pokemon.types.has(Synergy.DARK) &&
+      pokemon.baseRange === 1 &&
+      pokemon.passive !== Passive.GUZZLORD
+    ) {
       // dark jump
       const farthestCoordinate = this.getFarthestTargetCoordinateAvailablePlace(
         pokemon,

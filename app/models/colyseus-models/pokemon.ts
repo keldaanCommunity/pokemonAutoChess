@@ -13875,6 +13875,11 @@ export class Trubbish extends Pokemon {
       }
       if (ArtificialItems.includes(item)) {
         this.statIncreases[Stat.HP] += 50
+        if (ItemStats[item]) {
+          Object.entries(ItemStats[item]).forEach(
+            ([stat, value]) => (this.statIncreases[stat as Stat] += value)
+          )
+        }
         this.items.delete(item)
 
         const itemIndex = player.artificialItems.indexOf(item)

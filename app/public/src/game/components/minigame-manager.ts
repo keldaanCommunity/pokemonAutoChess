@@ -57,7 +57,11 @@ export default class MinigameManager {
   }
 
   initialize() {
-    this.addKecleon()
+    if (
+      this.scene.room?.state?.specialGameRule === SpecialGameRule.KECLEONS_SHOP
+    ) {
+      this.addKecleon()
+    }
   }
 
   dispose() {
@@ -341,19 +345,15 @@ export default class MinigameManager {
   }
 
   addKecleon() {
-    if (
-      this.scene.room?.state?.specialGameRule === SpecialGameRule.KECLEONS_SHOP
-    ) {
-      this.kecleon = new PokemonSpecial(
-        this.scene,
-        1000,
-        408,
-        Pkm.KECLEON,
-        this.animationManager,
-        t("kecleon_dialog.tell_price"),
-        t("kecleon_dialog.welcome")
-      )
-    }
+    this.kecleon = new PokemonSpecial(
+      this.scene,
+      1000,
+      408,
+      Pkm.KECLEON,
+      this.animationManager,
+      t("kecleon_dialog.tell_price"),
+      t("kecleon_dialog.welcome")
+    )
   }
 
   showEmote(id: string, emote: Emotion) {
@@ -368,7 +368,7 @@ export default class MinigameManager {
       pokemonAvatar.drawSpeechBubble(emote, false)
     }
   }
-  
+
   onNpcDialog({ npc, dialog }: { npc: string; dialog: string }) {
     if (npc === "kecleon" && this.kecleon) {
       this.scene.board?.displayText(960, 370, t(`kecleon_dialog.${dialog}`))
