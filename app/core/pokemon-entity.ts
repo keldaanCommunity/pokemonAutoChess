@@ -1059,6 +1059,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
               targetY: destination.target.positionY
             })
             this.skydiveTo(destination.x, destination.y, board)
+            this.targetX = destination.target.positionX
+            this.targetY = destination.target.positionY
             this.flyingProtection--
             setTimeout(() => {
               this.simulation.room.broadcast(Transfer.ABILITY, {
