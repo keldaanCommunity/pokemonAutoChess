@@ -92,7 +92,7 @@ export default class LobbyState extends Schema {
         nextSpecialGameDate,
         EloRank.GREATBALL
       )
-    } else if (nextSpecialGameDateInt === nextGreatballRanked) {
+    } else if (nextSpecialGameDateInt === nextUltraballRanked) {
       this.nextSpecialGame = new SpecialGamePlannedSchema(
         GameMode.RANKED,
         nextSpecialGameDate,

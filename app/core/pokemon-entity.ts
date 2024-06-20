@@ -366,7 +366,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     apBoost: number,
     crit: boolean
   ) {
-    value = value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
+    value =
+      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
 
     // for every 5% crit chance > 100, +0.1 crit power
     this.critChance += value
@@ -384,8 +385,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     apBoost: number,
     crit: boolean
   ) {
-    value = value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    
+    value =
+      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
+
     this.critPower = Math.max(0, roundTo2Digits(this.critPower + value))
   }
 
@@ -460,7 +462,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     apBoost: number,
     crit: boolean
   ) {
-    value = value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
+    value =
+      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     const currentAtkSpeedBonus = 100 * (this.atkSpeed / 0.75 - 1)
     const atkSpeedBonus = currentAtkSpeedBonus + value
     this.atkSpeed = clamp(
@@ -1056,6 +1059,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
               targetY: destination.target.positionY
             })
             this.skydiveTo(destination.x, destination.y, board)
+            this.targetX = destination.target.positionX
+            this.targetY = destination.target.positionY
             this.flyingProtection--
             setTimeout(() => {
               this.simulation.room.broadcast(Transfer.ABILITY, {
@@ -1142,59 +1147,45 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     target.count.crit++
 
     // proc fairy splash damage for both the attacker and the target
-    ;[this, target].forEach((pokemon) => {
-      if (
-        pokemon.fairySplashCooldown === 0 &&
-        (pokemon.effects.has(Effect.FAIRY_WIND) ||
-          pokemon.effects.has(Effect.STRANGE_STEAM) ||
-          pokemon.effects.has(Effect.AROMATIC_MIST) ||
-          pokemon.effects.has(Effect.MOON_FORCE))
-      ) {
-        let damage = 0
-        if (pokemon.effects.has(Effect.AROMATIC_MIST)) {
-          damage = 15
-        } else if (pokemon.effects.has(Effect.FAIRY_WIND)) {
-          damage = 30
-        } else if (pokemon.effects.has(Effect.STRANGE_STEAM)) {
-          damage = 50
-        } else if (pokemon.effects.has(Effect.MOON_FORCE)) {
-          damage = 70
-        }
-
-        const isCritReceived = pokemon === target
-        const splashTarget = isCritReceived ? this : target
-        const distance = distanceC(
-          pokemon.positionX,
-          pokemon.positionY,
-          splashTarget.positionX,
-          splashTarget.positionY
-        )
-
-        pokemon.count.fairyCritCount++
-        pokemon.fairySplashCooldown = 1
-
-        const hasEyeContact =
-          pokemon.targetX === target.positionX &&
-          pokemon.targetY === target.positionY &&
-          target.targetX === pokemon.positionX &&
-          target.targetY === pokemon.positionY
-
-        if (distance <= 1) {
-          // melee range
-          splashTarget.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            false
-          )
-        }
-
-        if (hasEyeContact) {
-          splashTarget.status.triggerCharm(2000, splashTarget, pokemon)
-        }
+    if (
+      target.fairySplashCooldown === 0 &&
+      (target.effects.has(Effect.FAIRY_WIND) ||
+        target.effects.has(Effect.STRANGE_STEAM) ||
+        target.effects.has(Effect.AROMATIC_MIST) ||
+        target.effects.has(Effect.MOON_FORCE))
+    ) {
+      let damage = 0
+      if (target.effects.has(Effect.AROMATIC_MIST)) {
+        damage = 10
+      } else if (target.effects.has(Effect.FAIRY_WIND)) {
+        damage = 20
+      } else if (target.effects.has(Effect.STRANGE_STEAM)) {
+        damage = 30
+      } else if (target.effects.has(Effect.MOON_FORCE)) {
+        damage = 50
       }
-    })
+
+      target.count.fairyCritCount++
+      target.fairySplashCooldown = 250
+
+      const distance = distanceC(
+        this.positionX,
+        this.positionY,
+        target.positionX,
+        target.positionY
+      )
+
+      if (distance <= 1) {
+        // melee range
+        this.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          target,
+          false
+        )
+      }
+    }
 
     if (this.items.has(Item.SCOPE_LENS)) {
       this.addPP(SCOPE_LENS_MANA, this, 0, false)

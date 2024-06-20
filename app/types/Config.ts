@@ -1,7 +1,7 @@
 import { Emotion } from "."
 import { EloRank } from "./enum/EloRank"
 import { AttackType, Rarity, Stat } from "./enum/Game"
-import { Item } from "./enum/Item"
+import { FishingRod, Item } from "./enum/Item"
 import { Pkm, PkmDuo, PkmProposition } from "./enum/Pokemon"
 import { Synergy } from "./enum/Synergy"
 import { Weather } from "./enum/Weather"
@@ -305,28 +305,38 @@ export const NB_UNIQUE_PROPOSITIONS = 6
 export const SHOP_SIZE = 6
 
 export const FishRarityProbability: {
-  [waterLevel: number]: { [key in Rarity]?: number }
+  [rod in FishingRod]: {
+    [key in Rarity]?: number
+  }
 } = {
-  1: {
+  [Item.OLD_ROD]: {
     [Rarity.SPECIAL]: 0.55,
     [Rarity.COMMON]: 0.35,
     [Rarity.UNCOMMON]: 0.1,
     [Rarity.RARE]: 0,
     [Rarity.EPIC]: 0
   },
-  2: {
+  [Item.GOOD_ROD]: {
     [Rarity.SPECIAL]: 0.3,
     [Rarity.COMMON]: 0.35,
     [Rarity.UNCOMMON]: 0.25,
     [Rarity.RARE]: 0.1,
     [Rarity.EPIC]: 0
   },
-  3: {
+  [Item.SUPER_ROD]: {
     [Rarity.SPECIAL]: 0,
-    [Rarity.COMMON]: 0.4,
+    [Rarity.COMMON]: 0.35,
     [Rarity.UNCOMMON]: 0.3,
-    [Rarity.RARE]: 0.2,
+    [Rarity.RARE]: 0.25,
     [Rarity.EPIC]: 0.1
+  },
+  [Item.GOLDEN_ROD]: {
+    [Rarity.SPECIAL]: 0.1,
+    [Rarity.COMMON]: 0.2,
+    [Rarity.UNCOMMON]: 0.25,
+    [Rarity.RARE]: 0.25,
+    [Rarity.EPIC]: 0.15,
+    [Rarity.ULTRA]: 0.05
   }
 }
 
@@ -633,7 +643,10 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.TRASH]: {},
   [Item.DYNAMAX_BAND]: {},
   [Item.SHINY_STONE]: {},
+  [Item.OLD_ROD]: {},
+  [Item.GOOD_ROD]: {},
   [Item.SUPER_ROD]: {},
+  [Item.GOLDEN_ROD]: {},
   [Item.RARE_CANDY]: {},
   [Item.EVIOLITE]: {
     [Stat.HP]: 100,
@@ -642,7 +655,12 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
     [Stat.DEF]: 5,
     [Stat.SPE_DEF]: 5
   },
-  [Item.WHITE_FLUTE]: {}
+  [Item.WHITE_FLUTE]: {},
+  [Item.DAMP_ROCK]: {},
+  [Item.ICY_ROCK]: {},
+  [Item.HEAT_ROCK]: {},
+  [Item.SMOOTH_ROCK]: {},
+  [Item.BLACK_AUGURITE]: {}
 }
 
 export type TilesetExchangeFile = {

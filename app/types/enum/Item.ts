@@ -93,7 +93,10 @@ export enum Item {
   TRASH = "TRASH",
   DYNAMAX_BAND = "DYNAMAX_BAND",
   SHINY_STONE = "SHINY_STONE",
+  OLD_ROD = "OLD_ROD",
+  GOOD_ROD = "GOOD_ROD",
   SUPER_ROD = "SUPER_ROD",
+  GOLDEN_ROD = "GOLDEN_ROD",
   RARE_CANDY = "RARE_CANDY",
   EVIOLITE = "EVIOLITE",
   WHITE_FLUTE = "WHITE_FLUTE",
@@ -111,8 +114,20 @@ export const SpecialItems: Item[] = [
   Item.COMFEY,
   Item.METEORITE,
   Item.BERRY_JUICE,
+  Item.OLD_ROD,
+  Item.GOOD_ROD,
+  Item.SUPER_ROD,
   Item.TRASH
 ]
+
+export const FishingRods = [
+  Item.GOLDEN_ROD,
+  Item.SUPER_ROD,
+  Item.GOOD_ROD,
+  Item.OLD_ROD
+] as const
+
+export type FishingRod = (typeof FishingRods)[number]
 
 export const ItemComponents: Item[] = [
   Item.FOSSIL_STONE,
@@ -215,7 +230,7 @@ export const ArtificialItems: Item[] = [
 export const ShinyItems: Item[] = [
   Item.DYNAMAX_BAND,
   Item.SHINY_STONE,
-  Item.SUPER_ROD,
+  Item.GOLDEN_ROD,
   Item.RARE_CANDY,
   Item.EVIOLITE,
   Item.WHITE_FLUTE

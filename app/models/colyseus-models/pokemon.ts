@@ -4310,9 +4310,16 @@ export class Cleffa extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.METRONOME
-  passive = Passive.CLEFAIRY
-  additional = true
   attackSprite = AttackSprite.FAIRY_MELEE
+  regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      regionSynergies.includes(Synergy.NORMAL) ||
+      regionSynergies.includes(Synergy.BABY) ||
+      regionSynergies.includes(Synergy.LIGHT)
+    )
+  }
 }
 
 export class Clefairy extends Pokemon {
@@ -4320,7 +4327,6 @@ export class Clefairy extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.CLEFABLE
-  evolutionRule = new ItemEvolutionRule([Item.POKE_DOLL])
   hp = 150
   atk = 11
   def = 3
@@ -4328,9 +4334,16 @@ export class Clefairy extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.METRONOME
-  passive = Passive.CLEFAIRY
-  additional = true
   attackSprite = AttackSprite.FAIRY_MELEE
+  regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      regionSynergies.includes(Synergy.NORMAL) ||
+      regionSynergies.includes(Synergy.BABY) ||
+      regionSynergies.includes(Synergy.LIGHT)
+    )
+  }
 }
 
 export class Clefable extends Pokemon {
@@ -4344,8 +4357,16 @@ export class Clefable extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.METRONOME
-  additional = true
   attackSprite = AttackSprite.FAIRY_MELEE
+  regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      regionSynergies.includes(Synergy.NORMAL) ||
+      regionSynergies.includes(Synergy.BABY) ||
+      regionSynergies.includes(Synergy.LIGHT)
+    )
+  }
 }
 
 export class Caterpie extends Pokemon {
@@ -13814,6 +13835,11 @@ export class Trubbish extends Pokemon {
       }
       if (ArtificialItems.includes(item)) {
         this.statIncreases[Stat.HP] += 50
+        if (ItemStats[item]) {
+          Object.entries(ItemStats[item]).forEach(
+            ([stat, value]) => (this.statIncreases[stat as Stat] += value)
+          )
+        }
         this.items.delete(item)
 
         const itemIndex = player.artificialItems.indexOf(item)

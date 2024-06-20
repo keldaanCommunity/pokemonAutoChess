@@ -14,6 +14,7 @@ import {
 import { Ability } from "../types/enum/Ability"
 import { Effect } from "../types/enum/Effect"
 import { Rarity } from "../types/enum/Game"
+import { FishingRod, Item } from "../types/enum/Item"
 import {
   Pkm,
   PkmDuos,
@@ -34,6 +35,7 @@ import Player from "./colyseus-models/player"
 import PokemonFactory from "./pokemon-factory"
 import { getPokemonData } from "./precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed/precomputed-rarity"
+import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "./precomputed/precomputed-types-and-categories"
 import { PVEStages } from "./pve-stages"
 
 export function getPoolSize(rarity: Rarity, maxStars: number): number {
@@ -448,8 +450,8 @@ export default class Shop {
     )
   }
 
-  pickFish(player: Player, fishingLevel: number): Pkm {
-    const rarityProbability = FishRarityProbability[fishingLevel]
+  pickFish(player: Player, rod: FishingRod): Pkm {
+    const rarityProbability = FishRarityProbability[rod]
     const rarity_seed = Math.random()
     let fish: Pkm = Pkm.MAGIKARP
     let threshold = 0
@@ -468,9 +470,28 @@ export default class Shop {
       }
     }
 
-    if (rarity === Rarity.SPECIAL) {
-      if (fishingLevel === 1) fish = Pkm.MAGIKARP
-      if (fishingLevel === 2) fish = Pkm.FEEBAS
+    if (rod === Item.GOLDEN_ROD) {
+      let topSynergies: Synergy[] = []
+      let maxSynergyCount = 0
+      player.synergies.forEach((count, synergy) => {
+        if (count > maxSynergyCount) {
+          maxSynergyCount = count
+          topSynergies = [synergy]
+        } else if (count === maxSynergyCount) {
+          topSynergies.push(synergy)
+        }
+      })
+      const typeWanted = pickRandomIn(topSynergies)
+      const uniques =
+        PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[typeWanted].uniquePokemons
+      if (rarity === Rarity.SPECIAL && uniques.length > 0) {
+        fish = pickRandomIn(uniques)
+      } else {
+        fish = this.getRandomPokemonFromPool(rarity, player, finals, typeWanted)
+      }
+    } else if (rarity === Rarity.SPECIAL) {
+      if (rod === Item.OLD_ROD) fish = Pkm.MAGIKARP
+      if (rod === Item.GOOD_ROD) fish = Pkm.FEEBAS
       //if (fishingLevel >= 3) fish = Pkm.WISHIWASHI // when available
     } else {
       fish = this.getRandomPokemonFromPool(
