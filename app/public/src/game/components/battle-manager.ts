@@ -1,4 +1,3 @@
-/* eslint-disable no-case-declarations */
 import { GameObjects } from "phaser"
 import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import { getMoveSpeed } from "../../../../core/pokemon-entity"

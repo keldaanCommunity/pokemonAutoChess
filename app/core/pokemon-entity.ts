@@ -536,8 +536,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.count.staticHolderCount++
       if (this.count.staticHolderCount > 2) {
         this.count.staticHolderCount = 0
-        // eslint-disable-next-line no-unused-vars
-
         const nbBounces = 3
         const closestEnemies = new Array<PokemonEntity>()
         board.forEach(
@@ -1353,7 +1351,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       } else if (isAngerPoint) {
         speedBoost = 30
       }
-      // eslint-disable-next-line @typescript-eslint/no-this-alias
       const _pokemon = this // beware of closure vars
       this.simulation.room.clock.setTimeout(() => {
         board.forEach((x, y, value) => {

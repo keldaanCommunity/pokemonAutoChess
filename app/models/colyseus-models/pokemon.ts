@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable max-len */
-
 import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
 import { nanoid } from "nanoid"
 import {
@@ -499,15 +496,11 @@ export class Scyther extends Pokemon {
   passive = Passive.SCYTHER
 
   evolutionRule = new ItemEvolutionRule(
-    [
-      Item.METAL_COAT, 
-      Item.BLACK_AUGURITE
-    ],
+    [Item.METAL_COAT, Item.BLACK_AUGURITE],
     (pokemon, player, item) => {
-      if (item === Item.METAL_COAT){
+      if (item === Item.METAL_COAT) {
         return Pkm.SCIZOR
-      }
-      else {
+      } else {
         return Pkm.KLEAVOR
       }
     }

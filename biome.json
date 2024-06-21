@@ -88,7 +88,6 @@
 		"formatter": {
 			"jsxQuoteStyle": "double",
 			"quoteProperties": "asNeeded",
-			"trailingComma": "none",
 			"semicolons": "asNeeded",
 			"arrowParentheses": "always",
 			"bracketSpacing": true,

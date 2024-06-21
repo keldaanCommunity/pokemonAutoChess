@@ -89,7 +89,6 @@ async function main() {
 
   try {
     logger.info("connect to db ...")
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const db = await connect(process.env.MONGO_URI!)
     for (let i = 0; i < tournamentNames.length; i++) {
       const name = tournamentNames[i]
