@@ -9057,6 +9057,20 @@ export class StoneAxeStrategy extends AbilityStrategy {
   }
 }
 
+export class CameraFlashStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    
+    target.status.triggerParalysis(2000, target)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -9393,5 +9407,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MUDDY_WATER]: new MuddyWaterStrategy(),
   [Ability.ANCIENT_POWER]: new AncientPowerStrategy(),
   [Ability.MOON_DREAM]: new MoonDreamStrategy(),
-  [Ability.STONE_AXE]: new StoneAxeStrategy()
+  [Ability.STONE_AXE]: new StoneAxeStrategy(),
+  [Ability.CAMERA_FLASH]: new CameraFlashStrategy()
 }

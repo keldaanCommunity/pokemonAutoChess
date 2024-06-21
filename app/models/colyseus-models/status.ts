@@ -23,6 +23,7 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") resurection = false
   @type("boolean") resurecting = false
   @type("boolean") paralysis = false
+  @type("boolean") pokerus = false
   @type("boolean") armorReduction = false
   @type("boolean") runeProtect = false
   @type("boolean") charm = false
@@ -80,6 +81,7 @@ export default class Status extends Schema implements IStatus {
   drySkin = false
   drySkinCooldown = 1000
   curseCooldown = 0
+  pokerusCooldown = 2000
   enrageDelay = 35000
   darkHarvest = false
   darkHarvestCooldown = 0
@@ -173,6 +175,10 @@ export default class Status extends Schema implements IStatus {
 
     if (this.paralysis) {
       this.updateParalysis(dt, pokemon)
+    }
+
+    if (this.pokerus) {
+      this.updatePokerus(dt, pokemon, board)
     }
 
     if (this.armorReduction) {
@@ -1032,6 +1038,40 @@ export default class Status extends Schema implements IStatus {
       })
     } else {
       this.curseCooldown -= dt
+    }
+  }
+
+  triggerPokerus() {
+    if (
+      !this.pokerus
+    ) {
+      this.pokerus = true
+    }
+  }
+
+  updatePokerus(dt: number, pokemon: PokemonEntity, board: Board) {
+    if (this.pokerusCooldown - dt <= 0) {
+      pokemon.addAttack(1, pokemon, 0, false)
+      pokemon.addAbilityPower(10, pokemon, 0, false)
+      let infectCount = 0
+      let cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
+      cells.forEach((cell) => {
+        if (
+          infectCount < 2 
+          && cell.value !== undefined
+        ){
+          if (
+            cell.value.team === pokemon.team 
+            && cell.value.status.pokerus === false
+          ){
+            cell.value.status.triggerPokerus()
+            infectCount++
+          }
+        }
+      })
+      this.pokerusCooldown = 2000
+    } else {
+      this.pokerusCooldown -= dt
     }
   }
 }

@@ -5848,6 +5848,23 @@ export class Rotom extends Pokemon {
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
+export class RotomDrone extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GHOST,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  hp = 80
+  atk = 6
+  def = 4
+  speDef = 4
+  maxPP = 50
+  range = 3
+  skill = Ability.CAMERA_FLASH
+  attackSprite = AttackSprite.GHOST_RANGE
+}
+
 export class Spiritomb extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DARK,
@@ -8655,6 +8672,8 @@ const rksSystemEvolutionRule = new ItemEvolutionRule(
         return Pkm.SILVALLY_GROUND
       case Synergy.FLORA:
         return Pkm.SILVALLY_FLORA
+      case Synergy.GHOST:
+        return Pkm.SILVALLY_GHOST
       default:
         return pokemon.name
     }
@@ -9057,6 +9076,27 @@ export class SilvallyFlora extends Pokemon {
     Synergy.WILD,
     Synergy.ARTIFICIAL,
     Synergy.FLORA
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 260
+  atk = 18
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.MULTI_ATTACK
+  passive = Passive.RKS_SYSTEM
+  evolutionRule = rksSystemEvolutionRule
+  attackSprite = AttackSprite.NORMAL_MELEE
+  onChangePosition = rksSystemOnChangePosition
+}
+
+export class SilvallyGhost extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.ARTIFICIAL,
+    Synergy.GHOST
   ])
   rarity = Rarity.UNIQUE
   stars = 3
@@ -14369,6 +14409,7 @@ export const PokemonClasses: Record<
   [Pkm.HEATRAN]: Heatran,
   [Pkm.HO_OH]: HooH,
   [Pkm.ROTOM]: Rotom,
+  [Pkm.ROTOM_DRONE]: RotomDrone,
   [Pkm.AERODACTYL]: Aerodactyl,
   [Pkm.SWABLU]: Swablu,
   [Pkm.CARVANHA]: Carvanha,
@@ -14839,6 +14880,7 @@ export const PokemonClasses: Record<
   [Pkm.SILVALLY_ROCK]: SilvallyRock,
   [Pkm.SILVALLY_GROUND]: SilvallyGround,
   [Pkm.SILVALLY_FLORA]: SilvallyFlora,
+  [Pkm.SILVALLY_GHOST]: SilvallyGhost,
   [Pkm.DEWPIDER]: Dewpider,
   [Pkm.ARAQUANID]: Araquanid,
   [Pkm.ROCKRUFF]: Rockruff,

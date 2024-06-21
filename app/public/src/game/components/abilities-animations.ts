@@ -2202,6 +2202,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.CAMERA_FLASH:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
     case "FIELD_DEATH":
       addAbilitySprite("FIELD_DEATH", coordinates, true).setScale(2)
       break

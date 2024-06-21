@@ -115,6 +115,7 @@ class GameContainer {
       "freeze",
       "grassField",
       "paralysis",
+      "pokerus",
       "poisonStacks",
       "protect",
       "skydiving",

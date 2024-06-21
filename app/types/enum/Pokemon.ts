@@ -244,6 +244,7 @@ export enum Pkm {
   COBALION = "COBALION",
   MANAPHY = "MANAPHY",
   ROTOM = "ROTOM",
+  ROTOM_DRONE = "ROTOM_DRONE",
   SPIRITOMB = "SPIRITOMB",
   ABSOL = "ABSOL",
   LAPRAS = "LAPRAS",
@@ -570,6 +571,7 @@ export enum Pkm {
   SILVALLY_ROCK = "SILVALLY_ROCK",
   SILVALLY_GROUND = "SILVALLY_GROUND",
   SILVALLY_FLORA = "SILVALLY_FLORA",
+  SILVALLY_GHOST = "SILVALLY_GHOST",
   TYPE_NULL = "TYPE_NULL",
   ZERAORA = "ZERAORA",
   XERNEAS = "XERNEAS",
@@ -1053,6 +1055,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.COBALION]: "0638",
   [Pkm.MANAPHY]: "0490",
   [Pkm.ROTOM]: "0479",
+  [Pkm.ROTOM_DRONE]: "0479-0008",
   [Pkm.SPIRITOMB]: "0442",
   [Pkm.ABSOL]: "0359",
   [Pkm.LAPRAS]: "0131",
@@ -1540,6 +1543,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SILVALLY_ROCK]: "0773-0005",
   [Pkm.SILVALLY_GROUND]: "0773-0004",
   [Pkm.SILVALLY_FLORA]: "0773-0006",
+  [Pkm.SILVALLY_GHOST]: "0773-0007",
   [Pkm.DEWPIDER]: "0751",
   [Pkm.ARAQUANID]: "0752",
   [Pkm.ROCKRUFF]: "0744",
@@ -1827,6 +1831,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.COBALION]: Pkm.COBALION,
   [Pkm.MANAPHY]: Pkm.PHIONE,
   [Pkm.ROTOM]: Pkm.ROTOM,
+  [Pkm.ROTOM_DRONE]: Pkm.ROTOM_DRONE,
   [Pkm.SPIRITOMB]: Pkm.SPIRITOMB,
   [Pkm.ABSOL]: Pkm.ABSOL,
   [Pkm.LAPRAS]: Pkm.LAPRAS,
@@ -2345,6 +2350,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SILVALLY_ROCK]: Pkm.TYPE_NULL,
   [Pkm.SILVALLY_GROUND]: Pkm.TYPE_NULL,
   [Pkm.SILVALLY_FLORA]: Pkm.TYPE_NULL,
+  [Pkm.SILVALLY_GHOST]: Pkm.TYPE_NULL,
   [Pkm.DEWPIDER]: Pkm.DEWPIDER,
   [Pkm.ARAQUANID]: Pkm.DEWPIDER,
   [Pkm.ROCKRUFF]: Pkm.ROCKRUFF,
@@ -3762,6 +3768,12 @@ export const AnimationConfig: {
     attack: AnimationType.Emit,
     ability: AnimationType.Double,
     emote: AnimationType.Shoot
+  },
+  [Pkm.ROTOM_DRONE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.SPIRITOMB]: {
     attack: AnimationType.Withdraw,
@@ -6233,6 +6245,11 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.SILVALLY_FLORA]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_GHOST]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
