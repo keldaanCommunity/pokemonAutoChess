@@ -22,6 +22,7 @@ import {
 import { Berries, CraftableItems, Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Synergy } from "../types/enum/Synergy"
+import { Pkm } from "../types/enum/Pokemon"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
 import { IPokemonData } from "../types/interfaces/PokemonData"
 import { pickRandomIn, randomBetween, shuffleArray } from "../utils/random"
@@ -194,6 +195,19 @@ export default class Simulation extends Schema implements ISimulation {
                 team: entityTeam,
                 entity
               })
+            }
+
+            if (pokemon.items.has(Item.ROTOM_PHONE)) {
+              const teamIndex = team === blueTeam ? 0 : 1
+              const rotomDrone = PokemonFactory.createPokemonFromName(
+                Pkm.ROTOM_DRONE,
+                player
+              )
+              const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
+                pokemon,
+                teamIndex
+              )
+              this.addPokemon(rotomDrone, coord.x, coord.y, teamIndex, true)
             }
           })
         }
@@ -451,6 +465,10 @@ export default class Simulation extends Schema implements ISimulation {
         pokemon as PokemonEntity,
         pokemon as PokemonEntity
       )
+    }
+
+    if (item === Item.POKERUS_VIAL) {
+      pokemon.status.triggerPokerus()
     }
 
     if (item === Item.FLUFFY_TAIL) {

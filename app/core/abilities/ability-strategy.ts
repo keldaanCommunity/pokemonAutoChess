@@ -9,6 +9,7 @@ import Board from "../board"
 import { PokemonEntity } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 import { AbilityStrategies } from "./abilities"
+import triggerPokerus from "../../models/colyseus-models/status"
 
 export class AbilityStrategy {
   copyable = true // if true, can be copied by mimic, metronome...

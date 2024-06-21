@@ -88,6 +88,8 @@ export enum Item {
   BIG_NUGGET = "BIG_NUGGET",
   INCENSE = "INCENSE",
   EXP_SHARE = "EXP_SHARE",
+  POKERUS_VIAL = "POKERUS_VIAL",
+  ROTOM_PHONE = "ROTOM_PHONE",
   METEORITE = "METEORITE",
   BERRY_JUICE = "BERRY_JUICE",
   TRASH = "TRASH",
@@ -224,7 +226,9 @@ export const ArtificialItems: Item[] = [
   Item.MACHO_BRACE,
   Item.INCENSE,
   Item.METRONOME,
-  Item.BIG_NUGGET
+  Item.BIG_NUGGET,
+  Item.POKERUS_VIAL,
+  Item.ROTOM_PHONE
 ]
 
 export const ShinyItems: Item[] = [
@@ -277,6 +281,7 @@ export const SynergyItems = [
   Item.HARD_STONE,
   Item.BIG_NUGGET,
   Item.INCENSE,
+  Item.ROTOM_PHONE,
   Item.SHINY_STONE,
   Item.DAMP_ROCK,
   Item.ICY_ROCK,
@@ -307,6 +312,7 @@ export const SynergyGivenByItem: Record<
   [Item.HARD_STONE]: Synergy.ROCK,
   [Item.BIG_NUGGET]: Synergy.GROUND,
   [Item.INCENSE]: Synergy.FLORA,
+  [Item.ROTOM_PHONE]: Synergy.GHOST,
   [Item.SHINY_STONE]: Synergy.LIGHT,
   [Item.DAMP_ROCK]: Synergy.WATER,
   [Item.ICY_ROCK]: Synergy.ICE,

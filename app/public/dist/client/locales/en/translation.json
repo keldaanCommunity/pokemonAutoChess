@@ -354,7 +354,8 @@
     "MUDDY_WATER": "Muddy Water",
     "ANCIENT_POWER": "Ancient Power",
     "MOON_DREAM": "Moon Dream",
-    "STONE_AXE": "Stone Axe"
+    "STONE_AXE": "Stone Axe",
+    "CAMERA_FLASH": "Camera Flash"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -600,6 +601,7 @@
     "COBALION": "Cobalion",
     "MANAPHY": "Manaphy",
     "ROTOM": "Rotom",
+    "ROTOM_DRONE": "Rotom (Drone)",
     "SPIRITOMB": "Spiritomb",
     "ABSOL": "Absol",
     "LAPRAS": "Lapras",
@@ -926,7 +928,8 @@
     "SILVALLY_FLYING": "Silvally (Flying)",
     "SILVALLY_ROCK": "Silvally (Rock)",
     "SILVALLY_GROUND": "Silvally (Ground)",
-    "SILVALLY_FLORA": "Silvally (Flower)",
+    "SILVALLY_FLORA": "Silvally (Flora)",
+    "SILVALLY_GHOST": "Silvally (Ghost)",
     "TYPE_NULL": "Type: Null",
     "ZERAORA": "Zeraora",
     "XERNEAS": "Xerneas",
@@ -1494,7 +1497,8 @@
     "MUDDY_WATER": "Spurts muddy water at up to 3 targets in front of itself, dealing [40,80,SP] SPECIAL, WOUND and ARMOR_REDUCTION for 4 seconds",
     "ANCIENT_POWER": "Launches rocks at the target, dealing [50,100,SP] SPECIAL. Raises the user's AP by [25,SP]",
     "MOON_DREAM": "Target falls SLEEP for [3,6,9] s and grants [10,20,30,SP] SHIELD to the caster's [3,4,5] closest allies",
-    "STONE_AXE": "Deal [50,SP] TRUE. Lay sharp stones around the target. The stones stay on the field, dealing 10 PHYSICAL per second and WOUND opponents that walk on it, if not ROCK or FLYING"
+    "STONE_AXE": "Deal [50,SP] TRUE. Lay sharp stones around the target. The stones stay on the field, dealing 10 PHYSICAL per second and WOUND opponents that walk on it, if not ROCK or FLYING",
+    "CAMERA_FLASH": "The target is PARALYSIS for [2,SP] seconds"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1823,6 +1827,8 @@
     "BIG_NUGGET": "Big Nugget",
     "INCENSE": "Incense",
     "EXP_SHARE": "Exp. Share",
+    "POKERUS_VIAL": "Pokérus Vial",
+    "ROTOM_PHONE": "Rotom Phone",
     "METEORITE": "Meteorite",
     "BERRY_JUICE": "Berry Juice",
     "TRASH": "Trash",
@@ -1929,6 +1935,8 @@
     "BIG_NUGGET": "Gives GROUND synergy. If the holder is alive after 15 seconds and gets 5 stacks of GROUND, gain 3 GOLD.",
     "INCENSE": "Gives FLORA synergy. Every attack received has a 15% chance to make the attacker CHARM for 2 seconds.",
     "EXP_SHARE": "Get the best ATK, DEF and SPE_DEF values of adjacent allies in the same row",
+    "POKERUS_VIAL": "Infects the holder with POKERUS",
+    "ROTOM_PHONE": "Gives GHOST synergy. Summons Rotom Drone near the holder",
     "METEORITE": "A meteorite that seems to interact with Deoxys. It continues to give off a faint glow and is slightly warm to the touch.",
     "BERRY_JUICE": "Consumed once below 50% HP, restore to max HP",
     "TRASH": "The remains of an artificial item. It does nothing",
@@ -2088,6 +2096,7 @@
     "RAGE": "Enraged",
     "RESURECTION": "Resurection",
     "PARALYSIS": "Paralyzed",
+    "POKERUS": "Pokérus",
     "ARMOR_REDUCTION": "Armor Reduction",
     "CHARM": "Charmed",
     "FLINCH": "Flinch",
@@ -2110,6 +2119,7 @@
     "RAGE": "Double damage and speed, half shield, healing, freeze and sleep durations, lose PROTECT. All units become RAGE after 35 seconds of fight.",
     "RESURECTION": "Prevents KO once, restoring to max HP",
     "PARALYSIS": "Reduce ATK_SPEED and move speed by 40%, prevents dodging attacks",
+    "POKERUS": "Every 2 seconds, gain 1 ATK and 10% AP before infecting 2 adjacent allies with POKERUS",
     "ARMOR_REDUCTION": "Reduce DEF & SPE_DEF by 50%",
     "CHARM": "Prevents attacking the target and forces to get closer to it",
     "FLINCH": "All incoming damage bypass SHIELD",

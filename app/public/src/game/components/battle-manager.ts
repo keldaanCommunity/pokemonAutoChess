@@ -226,6 +226,12 @@ export default class BattleManager {
             } else {
               pkm.removeParalysis()
             }
+          } else if (field === "pokerus") {
+            if (pokemon.status.pokerus) {
+              pkm.addPokerus()
+            } else {
+              pkm.removePokerus()
+            }
           } else if (field === "armorReduction") {
             if (pokemon.status.armorReduction) {
               pkm.addArmorReduction()
