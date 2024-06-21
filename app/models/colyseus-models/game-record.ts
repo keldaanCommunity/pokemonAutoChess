@@ -4,7 +4,7 @@ import { Item } from "../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 export interface IPokemonRecord {
   name: Pkm
-  items: Item[]
+  items: Item[] | ArraySchema<Item>
   avatar: string
 }
 export class PokemonRecord extends Schema implements IPokemonRecord {
@@ -28,7 +28,7 @@ export class PokemonRecord extends Schema implements IPokemonRecord {
 export interface IGameRecord {
   time: number
   rank: number
-  pokemons: IPokemonRecord[]
+  pokemons: IPokemonRecord[] | ArraySchema<IPokemonRecord>
   elo: number
 }
 

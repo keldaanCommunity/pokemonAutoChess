@@ -18,7 +18,7 @@ export default function Jukebox(props: {
   const MUSICS: DungeonMusic[] = Object.values(DungeonMusic)
 
   const [music, setMusic] = useState<DungeonMusic>(
-    getGameScene()?.music?.key?.replace("music_", "") as DungeonMusic
+    getGameScene()?.music?.key?.replace("music_", "") as DungeonMusic,
   )
   const [loading, setLoading] = useState<boolean>(false)
   const [volume, setVolume] = useState<number>(preferences.musicVolume)
@@ -29,7 +29,7 @@ export default function Jukebox(props: {
     if (gameScene) {
       gameScene.music?.destroy()
       setLoading(true)
-      let alreadyLoading = gameScene.load.isLoading()
+      const alreadyLoading = gameScene.load.isLoading()
       if (!alreadyLoading) {
         gameScene.load.reset()
       }

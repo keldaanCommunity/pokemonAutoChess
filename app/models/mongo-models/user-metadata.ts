@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose"
+import { ArraySchema } from "@colyseus/schema"
 import { Emotion, Role, Title } from "../../types"
 import { Language } from "../../types/enum/Language"
 import MapTileset from "../colyseus-models/map-tileset"
@@ -26,8 +27,8 @@ export interface IUserMetadata {
 
 export interface IPokemonConfig {
   dust: number
-  emotions: Emotion[]
-  shinyEmotions: Emotion[]
+  emotions: Emotion[] | ArraySchema<Emotion>
+  shinyEmotions: Emotion[] | ArraySchema<Emotion>
   selectedEmotion: Emotion
   selectedShiny: boolean
   id: string
@@ -35,144 +36,144 @@ export interface IPokemonConfig {
 
 const userMetadataSchema = new Schema({
   uid: {
-    type: String
+    type: String,
   },
   displayName: {
-    type: String
+    type: String,
   },
   language: {
     type: String,
-    default: "en"
+    default: "en",
   },
   avatar: {
     type: String,
-    default: "0019/Normal"
+    default: "0019/Normal",
   },
   wins: {
     type: Number,
-    default: 0
+    default: 0,
   },
   exp: {
     type: Number,
-    default: 0
+    default: 0,
   },
   level: {
     type: Number,
-    default: 0
+    default: 0,
   },
   elo: {
     type: Number,
-    default: 1000
+    default: 1000,
   },
   donor: {
     type: Boolean,
-    default: false
+    default: false,
   },
   booster: {
     type: Number,
-    default: 0
+    default: 0,
   },
   mapWin: {
     ICE: {
       type: Number,
-      default: 0
+      default: 0,
     },
     FIRE: {
       type: Number,
-      default: 0
+      default: 0,
     },
     GROUND: {
       type: Number,
-      default: 0
+      default: 0,
     },
     NORMAL: {
       type: Number,
-      default: 0
+      default: 0,
     },
     GRASS: {
       type: Number,
-      default: 0
+      default: 0,
     },
     WATER: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   map: {
     ICE: {
       type: String,
-      default: "ICE0"
+      default: "ICE0",
     },
     FIRE: {
       type: String,
-      default: "FIRE0"
+      default: "FIRE0",
     },
     GROUND: {
       type: String,
-      default: "GROUND0"
+      default: "GROUND0",
     },
     NORMAL: {
       type: String,
-      default: "NORMAL0"
+      default: "NORMAL0",
     },
     GRASS: {
       type: String,
-      default: "GRASS0"
+      default: "GRASS0",
     },
     WATER: {
       type: String,
-      default: "WATER0"
-    }
+      default: "WATER0",
+    },
   },
   title: {
-    type: String
+    type: String,
   },
   role: {
     type: String,
     enum: Role,
-    default: Role.BASIC
+    default: Role.BASIC,
   },
   honors: [
     {
-      type: String
-    }
+      type: String,
+    },
   ],
   titles: [
     {
       type: String,
-      enum: Title
-    }
+      enum: Title,
+    },
   ],
   pokemonCollection: {
     type: Map,
     of: {
       dust: {
-        type: Number
+        type: Number,
       },
       selectedEmotion: {
         type: String,
-        enum: Emotion
+        enum: Emotion,
       },
       emotions: [
         {
           type: String,
-          enum: Emotion
-        }
+          enum: Emotion,
+        },
       ],
       shinyEmotions: [
         {
           type: String,
-          enum: Emotion
-        }
+          enum: Emotion,
+        },
       ],
       selectedShiny: {
-        type: Boolean
+        type: Boolean,
       },
       id: {
-        type: String
-      }
-    }
-  }
+        type: String,
+      },
+    },
+  },
 })
 
 export default model<IUserMetadata>("UserMetadata", userMetadataSchema)
