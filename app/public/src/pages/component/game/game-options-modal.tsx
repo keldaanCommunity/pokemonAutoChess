@@ -8,7 +8,7 @@ import { useAppDispatch } from "../../../hooks"
 import {
   IPreferencesState,
   preferences as initialPreferences,
-  savePreferences
+  savePreferences,
 } from "../../../preferences"
 import { selectLanguage } from "../../../stores/NetworkStore"
 import { getGameScene } from "../../game"
@@ -28,7 +28,10 @@ export default function GameOptionsModal(props: {
   const dispatch = useAppDispatch()
   const language = i18n.language
 
-  function changePreference(key: keyof IPreferencesState, value: string | number | boolean) {
+  function changePreference(
+    key: keyof IPreferencesState,
+    value: string | number | boolean,
+  ) {
     setPreferences({ ...preferences, [key]: value })
     savePreferences({ [key]: value })
 
@@ -64,7 +67,7 @@ export default function GameOptionsModal(props: {
                 onInput={(e) =>
                   changePreference(
                     "musicVolume",
-                    Number.parseFloat((e.target as HTMLInputElement).value)
+                    Number.parseFloat((e.target as HTMLInputElement).value),
                   )
                 }
               ></input>
@@ -79,7 +82,7 @@ export default function GameOptionsModal(props: {
                 onInput={(e) =>
                   changePreference(
                     "sfxVolume",
-                    Number.parseFloat((e.target as HTMLInputElement).value)
+                    Number.parseFloat((e.target as HTMLInputElement).value),
                   )
                 }
               ></input>
@@ -145,7 +148,6 @@ export default function GameOptionsModal(props: {
                   changePreference("disableAnimatedTilemap", checked)
                   const gameScene = getGameScene()
                   if (gameScene) {
-                    // biome-ignore lint/suspicious/noExplicitAny: no types for animatedTiles plugin
                     const animatedTiles = (gameScene?.sys as any).animatedTiles
                     if (checked) animatedTiles.pause()
                     else animatedTiles.resume()

@@ -30,7 +30,7 @@ import {
   Orientation,
   PokemonActionState,
   Rarity,
-  Stat
+  Stat,
 } from "./enum/Game"
 import { Item } from "./enum/Item"
 import { Passive } from "./enum/Passive"
@@ -55,7 +55,7 @@ export enum Role {
   MODERATOR = "MODERATOR",
   BASIC = "BASIC",
   BOT = "BOT",
-  BOT_MANAGER = "BOT_MANAGER"
+  BOT_MANAGER = "BOT_MANAGER",
 }
 
 export const RoleColor: { [key in Role]: string } = {
@@ -63,7 +63,7 @@ export const RoleColor: { [key in Role]: string } = {
   [Role.MODERATOR]: "primary",
   [Role.BASIC]: "",
   [Role.BOT]: "secondary",
-  [Role.BOT_MANAGER]: "danger"
+  [Role.BOT_MANAGER]: "danger",
 }
 
 export enum Transfer {
@@ -147,7 +147,7 @@ export enum Transfer {
   PICK_BERRY = "PICK_BERRY",
   SERVER_ANNOUNCEMENT = "SERVER_ANNOUNCEMENT",
   PRELOAD_MAPS = "PRELOAD_MAPS",
-  NPC_DIALOG = "NPC_DIALOG"
+  NPC_DIALOG = "NPC_DIALOG",
 }
 
 export enum AttackSprite {
@@ -182,7 +182,7 @@ export enum AttackSprite {
   ROCK_MELEE = "ROCK/melee",
   ROCK_RANGE = "ROCK/range",
   SOUND_RANGE = "SOUND/range",
-  STEEL_MELEE = "STEEL/melee"
+  STEEL_MELEE = "STEEL/melee",
 }
 
 export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
@@ -218,17 +218,17 @@ export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
     "STEEL/melee": [1.5, 1.5],
     "SOUND/range": [2, 2],
     "WATER/melee": [2, 2],
-    "WATER/range": [3, 3]
+    "WATER/range": [3, 3],
   }
 
 export enum ModalMode {
   EXPORT = "EXPORT",
-  IMPORT = "IMPORT"
+  IMPORT = "IMPORT",
 }
 
 export enum ReadWriteMode {
   WRITE = "WRITE",
-  ERASE = "ERASE"
+  ERASE = "ERASE",
 }
 
 export interface ICreditName {
@@ -295,8 +295,10 @@ export interface ISimplePlayer {
   avatar: string
   title: string
   role: Role
-  pokemons: IPokemonRecord[]
-  synergies: Array<{ name: Synergy; value: number }>
+  pokemons: IPokemonRecord[] | ArraySchema<IPokemonRecord>
+  synergies:
+    | Array<{ name: Synergy; value: number }>
+    | ArraySchema<{ name: Synergy; value: number }>
 }
 
 export interface IGameHistorySimplePlayer extends ISimplePlayer {
@@ -439,7 +441,7 @@ export interface IDps {
   changeDamage(
     physicalDamage: number,
     specialDamage: number,
-    trueDamage: number
+    trueDamage: number,
   )
   id: string
   name: string
@@ -457,7 +459,7 @@ export interface IDpsHeal {
 }
 
 export function instanceofPokemonEntity(
-  obj: IPokemon | IPokemonEntity | IPokemonAvatar
+  obj: IPokemon | IPokemonEntity | IPokemonAvatar,
 ) {
   return "pp" in obj
 }
@@ -470,62 +472,62 @@ export interface IPokemonEntity {
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
   ): void
   addPP(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
   ): void
   addAttack(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
   ): void
   addAttackSpeed(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
   ): void
   addMaxHP(life: number): void
   addShield(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
   ): void
   addDefense(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
   ): void
   addSpecialDefense(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
   ): void
   addCritChance(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
   ): void
   addCritPower(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
   ): void
   update(
     dt: number,
     board: Board,
     weather: string,
-    player: Player | undefined
+    player: Player | undefined,
   ): void
   physicalDamage: number
   specialDamage: number
@@ -720,7 +722,7 @@ export enum Title {
   GLUTTON = "GLUTTON",
   STARGAZER = "STARGAZER",
   BLOODY = "BLOODY",
-  ETERNAL = "ETERNAL"
+  ETERNAL = "ETERNAL",
 }
 
 export interface IBoardEvent {

@@ -15,7 +15,6 @@ async function main() {
 
   try {
     logger.info("connect to db ...")
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const db = await connect(process.env.MONGO_URI!)
     const bots = await BotV2.find()
     for (let i = 0; i < bots.length; i++) {

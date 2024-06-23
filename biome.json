@@ -64,8 +64,8 @@
 				"noDuplicateClassMembers": "error",
 				"noDuplicateObjectKeys": "error",
 				"noDuplicateParameters": "error",
-				"noEmptyBlockStatements": "error",
-				"noExplicitAny": "warn",
+				"noEmptyBlockStatements": "off",
+				"noExplicitAny": "off",
 				"noExtraNonNullAssertion": "error",
 				"noFallthroughSwitchClause": "error",
 				"noFunctionAssign": "error",
@@ -88,7 +88,6 @@
 		"formatter": {
 			"jsxQuoteStyle": "double",
 			"quoteProperties": "asNeeded",
-			"trailingComma": "none",
 			"semicolons": "asNeeded",
 			"arrowParentheses": "always",
 			"bracketSpacing": true,

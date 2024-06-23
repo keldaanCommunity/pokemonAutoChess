@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import Player from "../models/colyseus-models/player"
 import { IPokemonEntity, Transfer } from "../types"
 import { FIGHTING_PHASE_DURATION, ARMOR_FACTOR } from "../types/Config"
