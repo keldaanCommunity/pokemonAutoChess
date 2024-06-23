@@ -1490,14 +1490,14 @@
     "BOUNCE": "Bounce [1,2,3,SP] times to the farthest target, dealing [10,SP] SPECIAL to all adjacent enemies for each bounce",
     "BLOOD_MOON": "Concentrates all his energy in the blood-red moon on his forehead and projects it in a line, dealing [200,SP]% of ATK as SPECIAL and WOUND for 3 seconds all enemies hit",
     "TEA_TIME": "Heal allies [20,40,80,SP] HP. All Pokémons holding a berry eat it immediately.",
-    "SPIKES": "Throw up to [6, SP] metal spikes within a 3-cell radius in front, dealing [25,50,SP] SPECIAL. The spikes stay on field, dealing 10 TRUE per second and ARMOR_REDUCTION to opponents that walk on it, if not FLYING.",
+    "SPIKES": "Throw up to [6, SP] metal spikes within a 3-cell radius in front, dealing [25,50,SP] SPECIAL. The spikes stay on field, dealing 10 TRUE per second and ARMOR_REDUCTION to Pokémons that walk on it, if not FLYING.",
     "SHADOW_PUNCH": "Fly towards the target with the lowest HP. The next attack deals additional [30,60,120,SP] SPECIAL.",
     "GUNK_SHOT": "Deal [50,100,SP] SPECIAL to the target, inflicting POISONNED for [2,4,SP] seconds",
     "MAGNET_BOMB": "A magnetic bomb dealing [20,40,80,SP] SPECIAL to target, [10,20,40,SP] SPECIAL to adjacent enemies and attracting distant enemies",
     "MUDDY_WATER": "Spurts muddy water at up to 3 targets in front of itself, dealing [40,80,SP] SPECIAL, WOUND and ARMOR_REDUCTION for 4 seconds",
-    "ANCIENT_POWER": "Launches rocks at the target, dealing [50,100,SP] SPECIAL. Raises the user's AP by [25,SP]",
-    "MOON_DREAM": "Target falls SLEEP for [3,6,9] s and grants [10,20,30,SP] SHIELD to the caster's [3,4,5] closest allies",
-    "STONE_AXE": "Deal [50,SP] TRUE. Lay sharp stones around the target. The stones stay on the field, dealing 10 PHYSICAL per second and WOUND opponents that walk on it, if not ROCK or FLYING",
+    "ANCIENT_POWER": "Launches rocks at the target, dealing [50,100,SP] SPECIAL. Raises the user's AP by [25,SP]%",
+    "MOON_DREAM": "Target falls SLEEP for [3,6,9] seconds and grants [10,20,30,SP] SHIELD to the caster's [3,4,5] closest allies",
+    "STONE_AXE": "Deal [50,SP] TRUE. Lay sharp stones around the target. The stones stay on the field, dealing 10 PHYSICAL per second and WOUND Pokémons that walk on it, if not ROCK or FLYING",
     "CAMERA_FLASH": "The target is PARALYSIS for [2,SP] seconds"
   },
   "effect": {
@@ -2052,7 +2052,7 @@
     "PSYDUCK": "When CONFUSION, gain 100% AP",
     "BLOODMOON": "Changes form during BLOODMOON",
     "RECYCLE": "Feed it with berries to gain 10 HP, or with basic components for 25 HP + item stats. Feed it with artificial items to gain 50 HP + item stats, and get TRASH in return",
-    "DREAM_CATCHER": "If the target of this Pokémon is SLEEP, its attacks give 10 SHIELD to the 3 closest allies"
+    "DREAM_CATCHER": "If its target is SLEEP, holder attacks give 10 SHIELD to the 3 closest allies"
   },
   "stat": {
     "ATK": "Attack",
@@ -2192,7 +2192,7 @@
     "BABY": "BABY can bring you Pokemon Eggs to comfort you after a defeat",
     "LIGHT": "LIGHT reveal a spotlight on the battlefield. The unit standing in the spotlight at the start of combat gains unique bonuses",
     "WILD": "WILD Pokémons get increased ATK, move faster, and have 25% chance to WOUND their target. For each WILD Pokémon STAR on board, get +1% chance to find WILD in your shops + 5% chance during PvE rounds",
-    "AMORPHOUS": "AMORPHOUS Pokémons are extremely flexible and lack their own shape. Your team gains bonuses by activating a wide variety of synergies"
+    "AMORPHOUS": "AMORPHOUS Pokémons are extremely flexible and lack their own shape. Your team gains bonuses by activating a wide variety of synergies."
   },
   "title": {
     "NOVICE": "Novice",
@@ -2971,14 +2971,14 @@
   },
   "loading_hints": {
     "tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",
-    "max_loading_time": "Game will start after 5 minutes of loading, no matter what...",
+    "max_loading_time": "Game will start after maximum 5 minutes of loading, no matter what...",
     "disconnection_time": "Players disconnected for more than 3 minutes are kicked out of the game. If it happens before stage 6, they won't lose Elo.",
     "translation_project": "Translations in game are managed by the community ! Check on Discord if you want to contribute.",
     "discord": "Join our Discord to meet the community! Link in the side menu",
     "tipeee": "This game has no monetization nor ads and only relies on your donations. Thanks to all the tippers ❤",
     "bug_report": "You found a bug ? Go on Discord and report it in #bug-report channel.",
     "moderation": "If you witness bad behavior on the game, take a screenshot and report it to a moderator on Discord.",
-    "berry_tree": "Playing Grass ? Don't forget to take care of the berry tree over your character.",
+    "berry_tree": "Playing Grass ? Don't forget to take care of the berry trees next to your character.",
     "spriters": "Many of the game's animations are the work of independent artists. Some take commissions, so you can sponsor them. More info on Discord",
     "wiki": "The game has a complete wiki accessible from the side menu, don't miss it!",
     "avatar": "To change your player avatar, play games to earn XP and level up. Each level grants you a booster which when opened gives you shards that can be spent in the Collection menu to buy new avatars."

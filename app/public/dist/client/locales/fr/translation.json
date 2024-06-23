@@ -1487,7 +1487,17 @@
     "PSYSHOCK": "Consume [30,60,100,SP] PP de la cible et les récupère en SHIELD. Si la cible n'a pas assez de PP, le reste est infligé en SPECIAL.",
     "HEAVY_SLAM": "Le lanceur se jette sur l'ennemi de tout son poids, infligeant [10,20,40,SP] SPECIAL et gagnant [10,20,40] SHIELD. Plus il a de max HP par rapport à la cible, plus la puissance de cette capacité augmente.",
     "RAPID_SPIN": "Inflige [20,50,SP] SPECIAL et gagne [20,30,SP]% de son ATK en DEF et SPE_DEF",
-    "BOUNCE": "Rebondit [1,2,3,SP] fois jusqu'à la cible la plus lointaine, infligeant [10,SP] SPECIAL à tous les adversaires adjacents à chaque rebond"
+    "BOUNCE": "Rebondit [1,2,3,SP] fois jusqu'à la cible la plus lointaine, infligeant [10,SP] SPECIAL à tous les adversaires adjacents à chaque rebond",
+    "TEA_TIME": "Soigne les alliés de [20, 40, 80, SP] HP. Tous les Pokémons tenant une Baie la consomment immédiatement.",
+    "SPIKES": "Projette jusqu'à [6, SP] picots dans un rayon de 3 cases devant, infligeant [25,50, SP] SPECIAL. Les picots restent sur le terrain, infligeant 10 TRUE par seconde et ARMOR_REDUCTION aux Pokémons qui marchent dessus, excepté si FLYING",
+    "SHADOW_PUNCH": "Vole jusqu'à la cible aux plus bas HP. La prochaine attaque inflige [30,60,120,SP] SPECIAL additionnels.",
+    "GUNK_SHOT": "Inflige [50,100,SP] SPECIAL à la cible et POISONNED pendant [2,4,SP] secondes",
+    "MAGNET_BOMB": "Une bombe magnétique inflige [20,40,80,SP] SPECIAL à la cible, [10,20,40,SP] SPECIAL aux ennemis adjacents et attire les ennemis les plus distants.",
+    "MUDDY_WATER": "Projette une eau boueuse sur jusqu'à 3 cibles devant, infligeant [40,80,SP] SPECIAL, WOUND et ARMOR_REDUCTION pendant 4 secondes",
+    "ANCIENT_POWER": "Lance des rochers sur la cible, infligeant [50,100,SP] SPECIAL. Augmente l'AP du lanceur de [25,SP] %",
+    "MOON_DREAM": "La cible tombe SLEEP pendant [3,6,9] secondes et les [3,4,5] alliés les plus proches du lanceur gagnent [10,20,30,SP] SHIELD",
+    "STONE_AXE": "Inflige [50,SP] TRUE. Des pierres pointues tombent autour de la cible et restent sur le terrain, infligeant 10 PHYSICAL par seconde et WOUND aux Pokémons qui marchent dessus, excepté si ROCK ou FLYING",
+    "CAMERA_FLASH": "La cible est paralysée pendant [2,SP] secondes"
   },
   "effect": {
     "INGRAIN": "Enraciné",
@@ -1604,7 +1614,10 @@
     "QUICK_FEET": "Pied Véloce",
     "RUN_AWAY": "Fuite",
     "HUSTLE": "Agitation",
-    "BERSERK": "Folle Furie"
+    "BERSERK": "Folle Furie",
+    "FLUID": "Fluide",
+    "SHAPELESS": "Amorphe",
+    "ETHEREAL": "Ethéré"
   },
   "effect_description": {
     "STAMINA": "Gagne 15 SHIELD",
@@ -1720,7 +1733,10 @@
     "QUICK_FEET": "+30% ATK et vitesse de déplacement",
     "RUN_AWAY": "+50% ATK et vitesse de déplacement",
     "HUSTLE": "+80% ATK et vitesse de déplacement,",
-    "BERSERK": "+100% ATK et vitesse de déplacement. Vos pokémons deviennent RAGE 5 secondes plus tôt."
+    "BERSERK": "+100% ATK et vitesse de déplacement. Vos pokémons deviennent RAGE 5 secondes plus tôt.",
+    "FLUID": "L'équipe gagne +4% ATK_SPEED et 7 SHIELD par synergie unique active",
+    "SHAPELESS": "L'équipe gagne également +1 ATK et +5% AP par synergie unique active",
+    "ETHEREAL": "Vos Pokémons AMORPHOUS gagnent le double des bonus"
   },
   "item": {
     "FOSSIL_STONE": "Fossile Dome",
@@ -1810,11 +1826,25 @@
     "BIG_NUGGET": "Maxi Pépite",
     "INCENSE": "Encens",
     "EXP_SHARE": "Multi Exp",
+    "POKERUS_VIAL": "Fiole Pokérus",
+    "ROTOM_PHONE": "Motismart",
     "METEORITE": "Météorite",
     "BERRY_JUICE": "Jus de Baie",
+    "TRASH": "Déchet",
+    "DYNAMAX_BAND": "Poignet Dynamax",
     "OLD_ROD": "Canne",
     "GOOD_ROD": "Super Canne",
-    "SUPER_ROD": "Mega Canne"
+    "SUPER_ROD": "Mega Canne",
+    "GOLDEN_ROD": "Canne dorée",
+    "SHINY_STONE": "Pierre Éclat",
+    "RARE_CANDY": "Super Bonbon",
+    "EVIOLITE": "Évoluroc",
+    "WHITE_FLUTE": "Flûte Blanche",
+    "DAMP_ROCK": "Roche Humide",
+    "ICY_ROCK": "Roche Glace",
+    "HEAT_ROCK": "Roche Chaude",
+    "SMOOTH_ROCK": "Roche Lisse",
+    "BLACK_AUGURITE": "Obsidienne"
   },
   "item_description": {
     "FOSSIL_STONE": "Un fossile d'un Pokémon ayant vécu à l'époque préhistorique",
@@ -1904,8 +1934,25 @@
     "BIG_NUGGET": "Le porteur gagne le type GROUND. Après 15 secondes et 5 effets de GROUND, vous gagnez 3 GOLD.",
     "INCENSE": "Le porteur gagne le type FLORA. Chaque attaque reçue a 15% de chances de rendre l'attaquant CHARM pendant 2 secondes.",
     "EXP_SHARE": "Copie la plus haute valeur d'ATK, de DEF et de SPE_DEF des alliés adjacents sur la même ligne",
+    "POKERUS_VIAL": "Infecte le porteur avec le POKERUS",
+    "ROTOM_PHONE": "Donne la synergie GHOST. Invoque Motismart près du porteur",
     "METEORITE": "Une météorite qui semble interagir avec Deoxys. Elle émet une faible lueur et est légèrement chaude au toucher.",
-    "BERRY_JUICE": "Consommé une fois sous les 50% HP, restaure au max des HP"
+    "BERRY_JUICE": "Consommé une fois sous les 50% HP, restaure au max des HP",
+    "TRASH": "Les restes d'un objet artificiel devenu inutilisable",
+    "OLD_ROD": "Après chaque tour PvP, pêche un Pokémon qui est ajouté à un emplacement libre de votre banc. Peut attraper des Pokémons WATER communs et peu communs ainsi que des Magikarp.",
+    "GOOD_ROD": "Après chaque tour PvP, pêche un Pokémon qui est ajouté à un emplacement libre de votre banc. Peut attraper des Pokémons WATER rares ainsi que des Barpau.",
+    "SUPER_ROD": "Après chaque tour PvP, pêche un Pokémon qui est ajouté à un emplacement libre de votre banc. Peut attraper des Pokémons WATER épiques ainsi que des Barpau.",
+    "DYNAMAX_BAND": "Au début du combat, augmente les HP max du porteur de 300%",
+    "GOLDEN_ROD": "Après chaque tour PvP, pêche un Pokémon qui est ajouté à un emplacement libre de votre banc. Peut attraper des Pokémons WATER épiques ainsi que des Barpau.",
+    "SHINY_STONE": "Donne la synergie LIGHT et invoque un second spot de lumière sur la case du porteur",
+    "RARE_CANDY": "Fait évoluer immédiatement un Pokémon",
+    "EVIOLITE": "Peut seulement être porté par un Pokémon qui n'est pas pleinement évolué. Empêche celui-ci d'évoluer.",
+    "WHITE_FLUTE": "Invoque 3 Pokémons WILD autour du porteur au début du combat. La rareté et le niveau augmentent de tour en tour.",
+    "DAMP_ROCK": "Donne la synergie WATER et compte pour 3 pour la RAIN. Peut seulement être porté par des Pokémons ROCK.",
+    "ICY_ROCK": "Donne la synergie ICE et compte pour 3 pour SNOW. Peut seulement être porté par des Pokémons ROCK.",
+    "HEAT_ROCK": "Donne la synergie FIRE et compte pour 3 pour SUN. Peut seulement être porté par des Pokémons ROCK.",
+    "SMOOTH_ROCK": "Donne la synergie GROUND et compte pour 3 pour SANDSTORM. Peut seulement être porté par des Pokémons ROCK.",
+    "BLACK_AUGURITE": "Donne la synergie DARK et compte pour 3 pour la NIGHT. Peut seulement être porté par des Pokémons ROCK."
   },
   "passive_description": {
     "NONE": "Pas de passif",
@@ -2001,7 +2048,10 @@
     "GUZZLORD": "$t(pkm.GUZZLORD) est trop lourd et ne peut pas sauter en ligne arrière",
     "ENVIRONMENTAL_ADAPTATION": "Ce Pokémon adapte ses synergies à sa région",
     "MOTHIM": "$t(pkm.MOTHIM) prend les synergies de la forme régionale de $t(pkm.BURMY) rencontrée par le joueur.",
-    "PSYDUCK": "Lorsque ce pokémon est CONFUSION, il gagne 100% AP"
+    "PSYDUCK": "Lorsque ce pokémon est CONFUSION, il gagne 100% AP",
+    "BLOODMOON": "Change de forme pendant la BLOODMOON",
+    "RECYCLE": "Nourrissez-le avec des Baies pour gagner 10HP, ou des composants pour gagner 15HP + les stats du composant, ou des objets artificiels pour gagner 50 HP + les stats de l'objet, et obtenez un TRASH en retour.",
+    "DREAM_CATCHER": "Si sa cible est SLEEP, les attaques du porteur donnent 10 SHIELD aux 3 alliés les plus proches"
   },
   "stat": {
     "ATK": "Attaque",
@@ -2045,6 +2095,7 @@
     "RAGE": "Enragé",
     "RESURECTION": "Résurrection",
     "PARALYSIS": "Paralysie",
+    "POKERUS": "Pokérus",
     "ARMOR_REDUCTION": "Réduction d'armure",
     "CHARM": "Charmé",
     "FLINCH": "Peur",
@@ -2067,6 +2118,7 @@
     "RAGE": "Double les dégâts et la vitesse, réduit de moitié les boucliers, soins, durées de gel et sommeil, retire PROTECT. Toutes les unités deviennent RAGE après 35 secondes de combat.",
     "RESURECTION": "Empêche de tomber KO une fois, restaurant au maximum des HP",
     "PARALYSIS": "Réduit la ATK_SPEED et vitesse de déplacement de 40 %. Ne peut plus esquiver les attaques.",
+    "POKERUS": "Toutes les 2 secondes, gagnez 1 ATK et 10% AP avant d'infecter 2 alliés adjacents avec le POKERUS",
     "ARMOR_REDUCTION": "Réduit la DEF et SPE_DEF de 50 %",
     "CHARM": "Empêche d'attaquer la cible et force à s'en rapprocher",
     "FLINCH": "Tous les dégâts reçus passent à travers le SHIELD",
@@ -2106,7 +2158,8 @@
     "ARTIFICIAL": "Artificiel",
     "BABY": "Bébé",
     "LIGHT": "Lumière",
-    "WILD": "Sauvage"
+    "WILD": "Sauvage",
+    "AMORPHOUS": "Amorphe"
   },
   "synergy_description": {
     "NORMAL": "Les pokémons NORMAL et leurs alliés adjacents gagnent le SHIELD lorsque le combat commence",
@@ -2137,7 +2190,8 @@
     "ARTIFICIAL": "Les pokémons ARTIFICIAL donnent des objets uniques et gagnent de l'ATK, de la AP et du SHIELD lorsqu'ils portent des objets.",
     "BABY": "Les pokémons BABY peuvent vous apporter des œufs Pokémon pour vous réconforter après une défaite",
     "LIGHT": "La lumière révèle un projecteur sur le champ de bataille. L’unité sous les projecteurs au début du combat bénéficie de bonus uniques.",
-    "WILD": "Les pokémons WILD gagnent en ATK et vitesse de déplacement, et ont 25% de chance d'infliger WOUND. Pour chaque STAR de vos pokémons WILD sur le plateau, obtenez +1% de chance de trouver des pokémons WILD dans le magasin + 5% de chance durant les rounds PvE."
+    "WILD": "Les pokémons WILD gagnent en ATK et vitesse de déplacement, et ont 25% de chance d'infliger WOUND. Pour chaque STAR de vos pokémons WILD sur le plateau, obtenez +1% de chance de trouver des pokémons WILD dans le magasin + 5% de chance durant les rounds PvE.",
+    "AMORPHOUS": "Les Pokémons AMORPHOUS peuvent prendre de nombreuses formes. Votre équipe gagne des bonus en activant un grand nombre de synergies différentes."
   },
   "title": {
     "NOVICE": "Novice",
@@ -2283,7 +2337,8 @@
     "STORM": "Tempête",
     "MISTY": "Brumeux",
     "SNOW": "Neige",
-    "SANDSTORM": "Tempête de sable"
+    "SANDSTORM": "Tempête de sable",
+    "BLOODMOON": "Lune Rouge"
   },
   "weather_description": {
     "NEUTRAL": "Temps normal. Aucun effet.",
@@ -2294,7 +2349,8 @@
     "STORM": "La foudre frappe au hasard sur le plateau, infligeant 100 SPECIAL (les ELECTRIC sont immunisés)\n+30% de durée de PARALYSIS",
     "MISTY": "+20% SPECIAL\n+30% de durée de CHARM",
     "SNOW": "-25% de vitesse de déplacement\n+30% de durée de FREEZE",
-    "SANDSTORM": "Inflige 5 SPECIAL par seconde (les GROUND sont immunisés)\n Durée CONFUSION +30%"
+    "SANDSTORM": "Inflige 5 SPECIAL par seconde (les GROUND sont immunisés)\n Durée CONFUSION +30%",
+    "BLOODMOON": "+20% PHYSICAL\n+30% durée de WOUND"
   },
   "emotion": {
     "Normal": "Normal",
@@ -2506,6 +2562,9 @@
   "victory_income_hint": "Gagnez 1 GOLD bonus pour chaque série de victoires ou de défaites, jusqu'à 5 GOLD bonus.",
   "additional_income_hint": "Gagnez 1 GOLD bonus pour 10 GOLD économisées, jusqu'à 5 GOLD bonus pour 50 GOLD économisées.",
   "options": "Options",
+  "sound": "Audio",
+  "interface": "Interface",
+  "hotkeys": "Raccourcis",
   "language": "Langue",
   "music_volume": "Volume de la musique",
   "sfx_volume": "Volume SFX",
@@ -2532,6 +2591,8 @@
   "regional_pokemons": "Pokémons régionaux",
   "unique_picks": "Choix Mythique",
   "stages": "Manches",
+  "waiting_final_rank": "En attente du résultat des autres combats...",
+  "stay_till_the_end": "Rester jusqu'au bout",
   "and": " et ",
   "place_up_to": "Placez jusqu'à",
   "pokemons_on_your_board": "pokémons sur votre plateau.",
@@ -2576,6 +2637,7 @@
   "craftable_items": "Fabriquables",
   "berries": "Baies",
   "artificial_items": "Objets artificiels",
+  "weather_rocks": "Roches Météo",
   "special_items": "Objets spéciaux",
   "shiny_items": "Objets chromatiques",
   "item_recipes": "Combos d'objets",
@@ -2865,6 +2927,7 @@
   "game_already_started": "La partie a déjà commencé",
   "min_rank_not_reached": "Votre rang n'est pas assez élevé pour jouer ce match classé",
   "not_whitelisted": "Cette partie est réservée à une liste blanche de joueurs",
+  "blacklisted": "Vous avez été expulsé de ce match",
   "ranked_match": "Match Classé",
   "kecleon_dialog": {
     "welcome": "Bienvenue au magasin Kecleon !",
@@ -2885,7 +2948,8 @@
     "NINE_LIVES": "Neuf Vies",
     "CROWDED": "Plateau encombré",
     "KECLEONS_SHOP": "Magasin de Kecleon",
-    "FREE_MARKET": "Marché libre"
+    "FREE_MARKET": "Marché libre",
+    "SHINY_HUNTER": "Chasseur de Shiny"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "Tous les Pokémons additionnels sont disponibles immédiatement",
@@ -2901,6 +2965,21 @@
     "NINE_LIVES": "Vous êtes éliminés après avoir perdu 9 matchs",
     "CROWDED": "+3 unités maximum sur le plateau",
     "KECLEONS_SHOP": "Les carousels d'objets sont remplacés par le magasin de Kecleon qui vous propose 6 objets pour 10 GOLD pièce",
-    "FREE_MARKET": "Les Pokémons s'achètent et se vendent pour 0 GOLD"
+    "FREE_MARKET": "Les Pokémons s'achètent et se vendent pour 0 GOLD",
+    "SHINY_HUNTER": "Toutes les rencontres PvE sont des shiny"
+  },
+  "loading_hints": {
+    "tab_out": "Ne changez pas d'onglet ! Le chargement est mis en pause si cette fenêtre est inactive.",
+    "max_loading_time": "La partie démarrera après 5 minutes max de chargement, peu importe ce qui se passe...",
+    "disconnection_time": "Les joueurs déconnectés pendant plus de 3 minutes sont expulsés de la partie. Si cela survient avant le tour 6, ils ne perdront pas d'Elo.",
+    "translation_project": "Les traductions dans le jeu sont gérées par la communauté. Joignez notre Discord si vous voulez y contribuer.",
+    "discord": "Joignez notre Discord pour rencontrer la communauté. Le lien est dans le menu latéral.",
+    "tipeee": "Ce jeu n'a ni publicité ni monétisation, et repose entièrement sur vos donations. Merci à tous les donateurs ❤",
+    "bug_report": "Vous avez trouvé un bug ? Allez sur Discord et reportez-le en section #bug-report",
+    "moderation": "Si vous êtes de témoins de messages haineux ou comportements déplacés de la part d'autres joueurs, prenez une capture d'écran et contactez un modérateur sur notre serveur Discord.",
+    "berry_tree": "Vous jouez Plante ? N'oubliez pas de prendre soin de vos arbres à baies près de votre personnage.",
+    "spriters": "Beaucoup d'animations du jeu sont l'oeuvre d'artistes indépendants. Certains travaillent sur commande, vous pouvez donc les sponsoriser. Plus d'infos sur Discord.",
+    "wiki": "Ce jeu dispose d'un wiki complet accessible depuis le menu latéral, ne passez pas à côté !",
+    "avatar": "Pour changer votre avatar de joueur, jouez quelques parties pour gagner de l'XP et monter en niveau. Chaque niveau vous fait gagner un booster qui une fois ouvert vous donne des fragments de Pokémon qui peuvent être dépensés dans le menu Collection pour acheter de nouveaux avatars."
   }
 }
