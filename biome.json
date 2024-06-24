@@ -93,7 +93,8 @@
 			"bracketSpacing": true,
 			"bracketSameLine": false,
 			"quoteStyle": "double",
-			"attributePosition": "auto"
+			"attributePosition": "auto",
+			"trailingCommas": "none"
 		}
 	},
 	"overrides": [

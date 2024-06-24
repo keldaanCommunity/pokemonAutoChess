@@ -22,7 +22,7 @@ export const RarityHpCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.UNIQUE]: 3,
   [Rarity.LEGENDARY]: 3,
   [Rarity.SPECIAL]: 1,
-  [Rarity.HATCH]: 4,
+  [Rarity.HATCH]: 4
 })
 
 // used to evaluate unit value, even if some categories are not found in shop
@@ -35,7 +35,7 @@ export const RarityCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.ULTRA]: 5,
   [Rarity.UNIQUE]: 6,
   [Rarity.LEGENDARY]: 7,
-  [Rarity.HATCH]: 11,
+  [Rarity.HATCH]: 11
 })
 
 export const EmotionCost: { [key in Emotion]: number } = {
@@ -58,7 +58,7 @@ export const EmotionCost: { [key in Emotion]: number } = {
   [Emotion.SIGH]: 200,
   [Emotion.STUNNED]: 200,
   [Emotion.SPECIAL2]: 200,
-  [Emotion.SPECIAL3]: 200,
+  [Emotion.SPECIAL3]: 200
 }
 
 export function getEmotionCost(emotion: Emotion, isShiny: boolean): number {
@@ -74,7 +74,7 @@ export const ExpTable: { [key: number]: number } = Object.freeze({
   6: 32,
   7: 50,
   8: 70,
-  9: 255,
+  9: 255
 })
 
 export const SynergyTriggers: { [key in Synergy]: number[] } = {
@@ -107,7 +107,7 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.BABY]: [3, 5, 7],
   [Synergy.LIGHT]: [2, 3, 4, 5],
   [Synergy.WILD]: [2, 4, 6, 9],
-  [Synergy.AMORPHOUS]: [2, 4, 6],
+  [Synergy.AMORPHOUS]: [2, 4, 6]
 }
 
 export const RequiredStageLevelForXpElligibility = 10
@@ -123,7 +123,7 @@ export const RarityColor: { [key in Rarity]: string } = {
   [Rarity.UNIQUE]: "#ffffff",
   [Rarity.LEGENDARY]: "#e6cb49",
   [Rarity.SPECIAL]: "#967FFF",
-  [Rarity.HATCH]: "#b9915a",
+  [Rarity.HATCH]: "#b9915a"
 }
 
 export const BoosterRarityProbability: { [key in Rarity]: number } = {
@@ -135,7 +135,7 @@ export const BoosterRarityProbability: { [key in Rarity]: number } = {
   [Rarity.UNIQUE]: 0.08,
   [Rarity.LEGENDARY]: 0.05,
   [Rarity.HATCH]: 0.1,
-  [Rarity.SPECIAL]: 0.03,
+  [Rarity.SPECIAL]: 0.03
 }
 
 export const DITTO_RATE = 0.005
@@ -143,7 +143,7 @@ export const DITTO_RATE = 0.005
 export const AttackTypeColor: { [key in AttackType] } = {
   [AttackType.PHYSICAL]: "#FF6E55",
   [AttackType.SPECIAL]: "#7FC9FF",
-  [AttackType.TRUE]: "#FFD800",
+  [AttackType.TRUE]: "#FFD800"
 }
 
 export const RarityProbabilityPerLevel: { [key: number]: number[] } = {
@@ -155,12 +155,12 @@ export const RarityProbabilityPerLevel: { [key: number]: number[] } = {
   6: [0.25, 0.4, 0.3, 0.05, 0],
   7: [0.16, 0.33, 0.35, 0.15, 0.01],
   8: [0.11, 0.27, 0.35, 0.22, 0.05],
-  9: [0.05, 0.2, 0.35, 0.3, 0.1],
+  9: [0.05, 0.2, 0.35, 0.3, 0.1]
 }
 
 export const EvolutionTime = {
   EGG_HATCH: 3,
-  EVOLVE_HATCH: 5,
+  EVOLVE_HATCH: 5
 }
 
 export const KECLEON_SHOP_COST = 10
@@ -174,7 +174,7 @@ export const PoolSize: { [key in Rarity]: [number, number, number] } = {
   [Rarity.UNIQUE]: [1, 1, 1],
   [Rarity.LEGENDARY]: [1, 1, 1],
   [Rarity.SPECIAL]: [0, 0, 0],
-  [Rarity.HATCH]: [0, 0, 0],
+  [Rarity.HATCH]: [0, 0, 0]
 }
 
 export const UniqueShop = new Array<PkmProposition>(
@@ -248,7 +248,7 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.SCYTHER,
   Pkm.ZANGOOSE,
   Pkm.SMEARGLE,
-  Pkm.STANTLER,
+  Pkm.STANTLER
 )
 
 export const LegendaryShop = new Array<PkmProposition>(
@@ -298,7 +298,7 @@ export const LegendaryShop = new Array<PkmProposition>(
   Pkm.THUNDURUS,
   Pkm.LANDORUS,
   Pkm.ENAMORUS,
-  Pkm.MAGEARNA,
+  Pkm.MAGEARNA
 )
 
 export const NB_UNIQUE_PROPOSITIONS = 6
@@ -314,21 +314,21 @@ export const FishRarityProbability: {
     [Rarity.COMMON]: 0.35,
     [Rarity.UNCOMMON]: 0.1,
     [Rarity.RARE]: 0,
-    [Rarity.EPIC]: 0,
+    [Rarity.EPIC]: 0
   },
   [Item.GOOD_ROD]: {
     [Rarity.SPECIAL]: 0.3,
     [Rarity.COMMON]: 0.35,
     [Rarity.UNCOMMON]: 0.25,
     [Rarity.RARE]: 0.1,
-    [Rarity.EPIC]: 0,
+    [Rarity.EPIC]: 0
   },
   [Item.SUPER_ROD]: {
     [Rarity.SPECIAL]: 0,
     [Rarity.COMMON]: 0.35,
     [Rarity.UNCOMMON]: 0.3,
     [Rarity.RARE]: 0.25,
-    [Rarity.EPIC]: 0.1,
+    [Rarity.EPIC]: 0.1
   },
   [Item.GOLDEN_ROD]: {
     [Rarity.SPECIAL]: 0.1,
@@ -336,8 +336,8 @@ export const FishRarityProbability: {
     [Rarity.UNCOMMON]: 0.25,
     [Rarity.RARE]: 0.25,
     [Rarity.EPIC]: 0.15,
-    [Rarity.ULTRA]: 0.05,
-  },
+    [Rarity.ULTRA]: 0.05
+  }
 }
 
 export const MAX_PLAYERS_PER_GAME = 8
@@ -350,7 +350,7 @@ export const StageDuration: Record<number | "DEFAULT", number> = {
   1: 30,
   10: 45,
   20: 45,
-  DEFAULT: 30,
+  DEFAULT: 30
 }
 export const FIGHTING_PHASE_DURATION = 40000
 export const ITEM_CAROUSEL_BASE_DURATION = 15000
@@ -366,7 +366,7 @@ export const EloRankThreshold: { [key in EloRank]: number } = {
   [EloRank.POKEBALL]: 900,
   [EloRank.GREATBALL]: 1100,
   [EloRank.ULTRABALL]: 1250,
-  [EloRank.MASTERBALL]: 1400,
+  [EloRank.MASTERBALL]: 1400
 }
 
 export const WeatherThreshold: { [weather in Weather]: number } = {
@@ -379,7 +379,7 @@ export const WeatherThreshold: { [weather in Weather]: number } = {
   [Weather.SNOW]: 6,
   [Weather.STORM]: 6,
   [Weather.SUN]: 8,
-  [Weather.WINDY]: 8,
+  [Weather.WINDY]: 8
 }
 
 // 4  A  1
@@ -434,7 +434,7 @@ export const MaskCoordinate: { [key in Mask]: { x: number; y: number } } =
     A1B2CD4: { x: 1, y: 5 },
     A1BC3D: { x: 4, y: 7 },
     AB2CD4: { x: 5, y: 7 },
-    A1B2C3D4: { x: 1, y: 1 },
+    A1B2C3D4: { x: 1, y: 1 }
   })
 
 export enum Mask {
@@ -484,13 +484,13 @@ export enum Mask {
   A1B2CD4 = "A1B2CD4",
   A1BC3D = "A1BC3D",
   AB2CD4 = "AB2CD4",
-  A1B2C3D4 = "A1B2C3D4",
+  A1B2C3D4 = "A1B2C3D4"
 }
 
 export enum TerrainType {
   WALL,
   WATER,
-  GROUND,
+  GROUND
 }
 
 export const IdTable: { [key: number]: Mask } = {
@@ -540,7 +540,7 @@ export const IdTable: { [key: number]: Mask } = {
   191: Mask.A1B2CD4,
   95: Mask.A1BC3D,
   175: Mask.AB2CD4,
-  255: Mask.A1B2C3D4,
+  255: Mask.A1B2C3D4
 }
 
 export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
@@ -581,7 +581,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.RAZOR_FANG]: {
     [Stat.ATK_SPEED]: 10,
     [Stat.CRIT_CHANCE]: 10,
-    [Stat.CRIT_POWER]: 1,
+    [Stat.CRIT_POWER]: 1
   },
   [Item.GRACIDEA_FLOWER]: { [Stat.ATK_SPEED]: 10, [Stat.SHIELD]: 15 },
   [Item.CHOICE_SCARF]: { [Stat.ATK_SPEED]: 10, [Stat.SPE_DEF]: 2 },
@@ -634,7 +634,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.HARD_STONE]: { [Stat.SHIELD]: 100 },
   [Item.BIG_NUGGET]: {
     [Stat.DEF]: 5,
-    [Stat.SPE_DEF]: 5,
+    [Stat.SPE_DEF]: 5
   },
   [Item.INCENSE]: { [Stat.SPE_DEF]: 5 },
   [Item.EXP_SHARE]: {},
@@ -653,7 +653,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
     [Stat.ATK]: 10,
     [Stat.AP]: 50,
     [Stat.DEF]: 5,
-    [Stat.SPE_DEF]: 5,
+    [Stat.SPE_DEF]: 5
   },
   [Item.WHITE_FLUTE]: {},
   [Item.DAMP_ROCK]: {},
@@ -662,7 +662,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.SMOOTH_ROCK]: {},
   [Item.BLACK_AUGURITE]: {},
   [Item.POKERUS_VIAL]: {},
-  [Item.ROTOM_PHONE]: {},
+  [Item.ROTOM_PHONE]: {}
 }
 
 export type TilesetExchangeFile = {

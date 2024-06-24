@@ -5842,10 +5842,7 @@ export class Rotom extends Pokemon {
 }
 
 export class RotomDrone extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.GHOST,
-    Synergy.ARTIFICIAL
-  ])
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
   rarity = Rarity.SPECIAL
   stars = 1
   hp = 80
@@ -6183,8 +6180,8 @@ export class Deoxys extends Pokemon {
 export class DeoxysDefense extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.PSYCHIC,
-    Synergy.HUMAN,
-    Synergy.ARTIFICIAL
+    Synergy.AMORPHOUS,
+    Synergy.HUMAN
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
@@ -6207,8 +6204,8 @@ export class DeoxysDefense extends Pokemon {
 export class DeoxysAttack extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.PSYCHIC,
-    Synergy.HUMAN,
-    Synergy.ARTIFICIAL
+    Synergy.AMORPHOUS,
+    Synergy.HUMAN
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
@@ -6231,8 +6228,8 @@ export class DeoxysAttack extends Pokemon {
 export class DeoxysSpeed extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.PSYCHIC,
-    Synergy.HUMAN,
-    Synergy.ARTIFICIAL
+    Synergy.AMORPHOUS,
+    Synergy.HUMAN
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
@@ -9351,7 +9348,11 @@ export class Drakloak extends Pokemon {
 }
 
 export class Dragapult extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.GHOST,
+    Synergy.AMORPHOUS
+  ])
   rarity = Rarity.HATCH
   stars = 3
   hp = 190
