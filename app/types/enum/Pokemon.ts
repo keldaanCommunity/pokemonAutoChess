@@ -6559,12 +6559,14 @@ export const AnimationConfig: {
   [Pkm.GRUBBIN]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.CHARJABUG]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.VIKAVOLT]: {
     attack: AnimationType.Shoot,
