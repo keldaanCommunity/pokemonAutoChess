@@ -76,7 +76,8 @@ export default function PreparationMenu() {
   }, [nbUsersReady, users.length])
 
   const humans = users.filter((u) => !u.isBot)
-  const isElligibleForELO = gameMode === GameMode.QUICKPLAY || users.filter((u) => !u.isBot).length >= 2
+  const isElligibleForELO =
+    gameMode === GameMode.QUICKPLAY || users.filter((u) => !u.isBot).length >= 2
   const averageElo = Math.round(
     humans.reduce((acc, u) => acc + u.elo, 0) / humans.length
   )
@@ -162,7 +163,9 @@ export default function PreparationMenu() {
         <p>{t("not_elligible_elo_hint")}</p>
       ) : null}
 
-      {gameMode === GameMode.NORMAL && users.length === 1 && <p>{t("add_bot_or_wait_hint")}</p>}
+      {gameMode === GameMode.NORMAL && users.length === 1 && (
+        <p>{t("add_bot_or_wait_hint")}</p>
+      )}
     </>
   )
 
@@ -190,7 +193,8 @@ export default function PreparationMenu() {
       </button>
     )
 
-  const roomNameInput = gameMode === GameMode.NORMAL && (isOwner || isModerator || isAdmin) &&
+  const roomNameInput = gameMode === GameMode.NORMAL &&
+    (isOwner || isModerator || isAdmin) &&
     user &&
     !user.anonymous && (
       <div className="my-input-group">
@@ -255,7 +259,7 @@ export default function PreparationMenu() {
     </p>
   )
 
-  const readyButton = gameMode === GameMode.NORMAL && (
+  const readyButton = gameMode === GameMode.NORMAL && users.length > 0 && (
     <button
       className={cc("bubbly", "ready-button", isReady ? "green" : "orange")}
       onClick={() => {
