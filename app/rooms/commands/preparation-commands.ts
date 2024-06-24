@@ -480,6 +480,9 @@ export class OnToggleReadyCommand extends Command<
 > {
   execute({ client, ready }) {
     try {
+      // cannot toggle ready in quick play / ranked / tournament game mode
+      if (this.room.state.gameMode !== GameMode.NORMAL) return
+
       // logger.debug(this.state.users.get(client.auth.uid).ready);
       if (client.auth?.uid && this.state.users.has(client.auth.uid)) {
         const user = this.state.users.get(client.auth.uid)!
