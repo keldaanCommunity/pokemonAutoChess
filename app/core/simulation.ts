@@ -21,8 +21,8 @@ import {
 } from "../types/enum/Game"
 import { Berries, CraftableItems, Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
-import { Synergy } from "../types/enum/Synergy"
 import { Pkm } from "../types/enum/Pokemon"
+import { Synergy } from "../types/enum/Synergy"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
 import { IPokemonData } from "../types/interfaces/PokemonData"
 import { pickRandomIn, randomBetween, shuffleArray } from "../utils/random"
@@ -616,12 +616,16 @@ export default class Simulation extends Schema implements ISimulation {
             getPokemonData(p)
           )
           const spawns: IPokemonData[] = []
-          const pickWild = (rarity: Rarity, tier: number) =>
-            spawns.push(
-              pickRandomIn(
-                wilds.filter((p) => p.rarity === rarity && p.stars === tier)
-              )
+          const pickWild = (rarity: Rarity, tier: number) => {
+            const randomWild = pickRandomIn(
+              wilds.filter((p) => p.rarity === rarity && p.stars === tier)
             )
+            if (randomWild) {
+              spawns.push(randomWild)
+            } else {
+              console.log("no pokemon found for white flute call", rarity, tier)
+            }
+          }
 
           if (this.stageLevel <= 5) {
             pickWild(Rarity.COMMON, 1)
@@ -642,11 +646,11 @@ export default class Simulation extends Schema implements ISimulation {
           } else if (this.stageLevel <= 25) {
             pickWild(Rarity.RARE, 2)
             pickWild(Rarity.EPIC, 1)
-            pickWild(Rarity.UNIQUE, 1)
+            pickWild(Rarity.UNIQUE, 3)
           } else if (this.stageLevel <= 30) {
             pickWild(Rarity.RARE, 2)
             pickWild(Rarity.EPIC, 2)
-            pickWild(Rarity.UNIQUE, 1)
+            pickWild(Rarity.UNIQUE, 3)
           } else if (this.stageLevel <= 35) {
             pickWild(Rarity.RARE, 2)
             pickWild(Rarity.EPIC, 2)
