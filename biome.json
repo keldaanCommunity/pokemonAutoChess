@@ -94,7 +94,8 @@
 			"bracketSameLine": false,
 			"quoteStyle": "double",
 			"attributePosition": "auto",
-			"trailingCommas": "none"
+			"trailingCommas": "none",
+			"trailingComma": "none"
 		}
 	},
 	"overrides": [

@@ -123,7 +123,7 @@ export default config({
       res.send(Pkm)
     })
 
-    app.get("/titles", (req, res) => {
+    app.get("/title-names", (req, res) => {
       res.send(Title)
     })
 

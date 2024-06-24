@@ -1,9 +1,9 @@
-import { Pokemon } from "../colyseus-models/pokemon"
+import { precomputedPokemons } from "../../../gen/precomputed-pokemons"
 import { Ability } from "../../types/enum/Ability"
 import { Passive } from "../../types/enum/Passive"
-import { Synergy } from "../../types/enum/Synergy"
-import { precomputedPokemons } from "../../../gen/precomputed-pokemons"
 import { Pkm } from "../../types/enum/Pokemon"
+import { Synergy } from "../../types/enum/Synergy"
+import { Pokemon } from "../colyseus-models/pokemon"
 
 console.time("precompute-types")
 
