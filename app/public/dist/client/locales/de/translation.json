@@ -1574,7 +1574,7 @@
     "GOOGLE_SPECS": "Erhalte +15% Basis-ATK, AP und maximale HP als SHIELD pro gehaltenem Item. Erhalte ein weiteres Artificial-Item.",
     "HATCHER": "25 % Chance pro Verlustserie, ein Ei zu erhalten, maximal 1 Ei auf der Bank",
     "BREEDER": "Erhalte ein Ei nach jeder Niederlage gegen einen Spieler, kein Limit für die Anzahl der Eier auf der Bank",
-    "GOLDEN_EGGS": "Erhalte nach jeder Niederlage gegen einen Spieler ein goldenes Ei, das für 10 GOLD verkauft werden kann oder beim Schlüpfen einen glänzenden Gegenstand ergibt",
+    "GOLDEN_EGGS": "25 % Chance pro Verlustserie, ein goldenes Ei zu erhalten, maximal 1 goldenes Ei auf der Bank. Goldene Eier können für 10 GOLD verkauft werden oder ergeben beim Ausbrüten einen glänzenden Gegenstand.",
     "GRASSY_TERRAIN": "Erhöht den verursachten Schaden um 20 % (nur Gras)",
     "PSYCHIC_TERRAIN": "Erhöht den verursachten Schaden um 20 % (nur Hellseher)",
     "ELECTRIC_TERRAIN": "Erhöht den verursachten Schaden um 20 % (nur elektrisch)",
