@@ -1454,7 +1454,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.status.clearNegativeStatus()
     this.effects.clear()
     this.simulation.applySynergyEffects(this)
-    this.simulation.applyItemsEffects(this)
+    this.simulation.applyItemsEffects(this, [Item.DYNAMAX_BAND])
     this.simulation.applyWeatherEffects(this)
     this.status.resurection = false // prevent reapplying max revive again
     this.shield = 0 // prevent reapplying shield again
