@@ -402,7 +402,7 @@ export default class Simulation extends Schema implements ISimulation {
     )
   }
 
-  applyItemsEffects(pokemon: PokemonEntity) {
+  applyItemsEffects(pokemon: PokemonEntity, ignoreItemsEffects?: Item[]) {
     if (pokemon.passive === Passive.PICKUP && pokemon.items.size === 0) {
       pokemon.items.add(pickRandomIn(CraftableItems.concat(Berries)))
     }
@@ -418,7 +418,7 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     pokemon.items.forEach((item) => {
-      this.applyItemEffect(pokemon, item)
+      !ignoreItemsEffects?.includes(item) && this.applyItemEffect(pokemon, item)
     })
 
     if (pokemon.passive === Passive.SYNCHRO) {
