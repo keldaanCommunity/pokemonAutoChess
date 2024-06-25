@@ -1735,7 +1735,7 @@
     "RUN_AWAY": "+50% ATK and move speed",
     "HUSTLE": "+80% ATK and move speed",
     "BERSERK": "+100% ATK and move speed, RAGE 5 seconds sooner",
-    "FLUID": "Ally team gains +4% ATK_SPEED and 7 SHIELD per unique active synergy",
+    "FLUID": "Ally team gains +2% ATK_SPEED and 5 SHIELD per unique active synergy",
     "SHAPELESS": "Ally team also gains +1 ATK and +5% AP per unique active synergy",
     "ETHEREAL": "Your AMORPHOUS Pokémons gain double the bonuses"
   },

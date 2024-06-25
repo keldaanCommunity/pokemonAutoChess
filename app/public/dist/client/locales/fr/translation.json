@@ -1734,7 +1734,7 @@
     "RUN_AWAY": "+50% ATK et vitesse de déplacement",
     "HUSTLE": "+80% ATK et vitesse de déplacement,",
     "BERSERK": "+100% ATK et vitesse de déplacement. Vos pokémons deviennent RAGE 5 secondes plus tôt.",
-    "FLUID": "L'équipe gagne +4% ATK_SPEED et 7 SHIELD par synergie unique active",
+    "FLUID": "L'équipe gagne +2% ATK_SPEED et 5 SHIELD par synergie unique active",
     "SHAPELESS": "L'équipe gagne également +1 ATK et +5% AP par synergie unique active",
     "ETHEREAL": "Vos Pokémons AMORPHOUS gagnent le double des bonus"
   },
