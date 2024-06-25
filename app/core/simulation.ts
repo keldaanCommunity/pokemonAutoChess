@@ -1249,15 +1249,15 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.FLUID: {
-          pokemon.addAttackSpeed(4 * activeSynergies, pokemon, 0, false)
-          pokemon.addShield(7 * activeSynergies, pokemon, 0, false)
+          pokemon.addAttackSpeed(2 * activeSynergies, pokemon, 0, false)
+          pokemon.addShield(5 * activeSynergies, pokemon, 0, false)
           break
         }
 
         case Effect.SHAPELESS: {
           pokemon.effects.add(Effect.SHAPELESS)
-          pokemon.addAttackSpeed(4 * activeSynergies, pokemon, 0, false)
-          pokemon.addShield(7 * activeSynergies, pokemon, 0, false)
+          pokemon.addAttackSpeed(2 * activeSynergies, pokemon, 0, false)
+          pokemon.addShield(5 * activeSynergies, pokemon, 0, false)
           pokemon.addAttack(1 * activeSynergies, pokemon, 0, false)
           pokemon.addAbilityPower(5 * activeSynergies, pokemon, 0, false)
           break
@@ -1265,13 +1265,13 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.ETHEREAL: {
           pokemon.effects.add(Effect.ETHEREAL)
-          pokemon.addAttackSpeed(4 * activeSynergies, pokemon, 0, false)
-          pokemon.addShield(7 * activeSynergies, pokemon, 0, false)
+          pokemon.addAttackSpeed(2 * activeSynergies, pokemon, 0, false)
+          pokemon.addShield(5 * activeSynergies, pokemon, 0, false)
           pokemon.addAttack(1 * activeSynergies, pokemon, 0, false)
           pokemon.addAbilityPower(5 * activeSynergies, pokemon, 0, false)
           if (types.has(Synergy.AMORPHOUS)) {
-            pokemon.addAttackSpeed(4 * activeSynergies, pokemon, 0, false)
-            pokemon.addShield(7 * activeSynergies, pokemon, 0, false)
+            pokemon.addAttackSpeed(2 * activeSynergies, pokemon, 0, false)
+            pokemon.addShield(5 * activeSynergies, pokemon, 0, false)
             pokemon.addAttack(1 * activeSynergies, pokemon, 0, false)
             pokemon.addAbilityPower(5 * activeSynergies, pokemon, 0, false)
           }
