@@ -482,8 +482,9 @@ export default class Shop {
         }
       })
       const typeWanted = pickRandomIn(topSynergies)
-      const uniques =
-        PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[typeWanted].uniquePokemons
+      const uniques = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
+        typeWanted
+      ].uniquePokemons.filter((p) => getPokemonData(p).stars === 3)
       if (rarity === Rarity.SPECIAL && uniques.length > 0) {
         fish = pickRandomIn(uniques)
       } else {
