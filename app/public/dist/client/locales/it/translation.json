@@ -1215,7 +1215,7 @@
     "GOOGLE_SPECS": "Guadagna +15% ATK base, AP e HP massimi come SHIELD per ogni oggetto tenuto. Ottenere un altro oggetto artificiale.",
     "HATCHER": "25% di possibilità di ottenere un uovo per ogni serie di sconfitte, massimo 1 uovo in panchina",
     "BREEDER": "Ottenere un uovo dopo ogni sconfitta contro un giocatore, nessun limite per la quantità di uova in panchina",
-    "GOLDEN_EGGS": "Ottenere un Uovo d'oro dopo ogni sconfitta contro un giocatore, che può essere venduto per 10 GOLD o regalare un oggetto luccicante quando si schiude",
+    "GOLDEN_EGGS": "25% di possibilità di ottenere un Uovo d'oro per ogni serie di sconfitte, massimo 1 uovo d'oro in panchina. Le uova d'oro possono essere vendute per 10 GOLD o regalare un oggetto luccicante quando si schiudono.",
     "GRASSY_TERRAIN": "Aumenta i danni inflitti del 20% (solo erba)",
     "PSYCHIC_TERRAIN": "Aumenta i danni inflitti del 20% (solo psichico)",
     "ELECTRIC_TERRAIN": "Aumenta i danni inflitti del 20% (solo elettricità)",

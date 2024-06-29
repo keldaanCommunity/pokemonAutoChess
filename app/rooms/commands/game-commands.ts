@@ -452,7 +452,11 @@ export class OnDragDropItemCommand extends Command<
 
     if (item === Item.RARE_CANDY) {
       const evolution = pokemon?.evolution
-      if (!evolution || pokemon.items.has(Item.EVIOLITE)) {
+      if (
+        !evolution ||
+        evolution === Pkm.DEFAULT ||
+        pokemon.items.has(Item.EVIOLITE)
+      ) {
         client.send(Transfer.DRAG_DROP_FAILED, message)
         return
       }
@@ -1143,6 +1147,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         }
 
         let eggChance = 0,
+          shinyChance = 0,
           nbMaxEggs = 0
         if (
           player.getLastBattleResult() == BattleResult.DEFEAT &&
@@ -1151,6 +1156,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         ) {
           eggChance = 1
           nbMaxEggs = 8
+          shinyChance = player.effects.has(Effect.GOLDEN_EGGS)
+            ? 0.25 * (player.streak + 1)
+            : 0
         }
         if (
           player.getLastBattleResult() == BattleResult.DEFEAT &&
@@ -1166,19 +1174,22 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         ) {
           eggChance = 1
           nbMaxEggs = 8
+          shinyChance = 1 / 20
         }
 
-        const nbOfEggs = values(player.board).filter(
+        const eggsOnBench = values(player.board).filter(
           (p) => p.name === Pkm.EGG
-        ).length
+        )
+        const nbOfEggs = eggsOnBench.length
+        const nbOfShinyEggs = eggsOnBench.filter((p) => p.shiny).length
 
         if (
           chance(eggChance) &&
           getFreeSpaceOnBench(player.board) > 0 &&
           nbOfEggs < nbMaxEggs
         ) {
-          const eggShiny = player.effects.has(Effect.GOLDEN_EGGS)
-          const egg = createRandomEgg(eggShiny, player)
+          const shiny = chance(shinyChance) && nbOfShinyEggs === 0
+          const egg = createRandomEgg(shiny, player)
           const x = getFirstAvailablePositionInBench(player.board)
           egg.positionX = x !== undefined ? x : -1
           egg.positionY = 0
