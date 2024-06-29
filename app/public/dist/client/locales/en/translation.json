@@ -1714,7 +1714,7 @@
     "GOOGLE_SPECS": "Gain +15% base ATK, AP and max HP as SHIELD per held item. Get another artificial item.",
     "HATCHER": "25% chance per loss streak to get an Egg, 1 egg max on the bench",
     "BREEDER": "Get an Egg after each defeat against a player, no limit for amount of eggs on the bench",
-    "GOLDEN_EGGS": "Get a golden Egg after each defeat against a player, that can be sold for 10 GOLD or give a shiny item when hatched",
+    "GOLDEN_EGGS": "25% chance per loss streak to get a golden Egg, 1 golden egg max on the bench. Golden eggs can be sold for 10 GOLD or give a shiny item when hatched.",
     "GRASSY_TERRAIN": "Increase damage dealt by 20% (Grass only)",
     "PSYCHIC_TERRAIN": "Increase damage dealt by 20% (Psychic only)",
     "ELECTRIC_TERRAIN": "Increase damage dealt by 20% (Electric only)",
@@ -1737,7 +1737,7 @@
     "RUN_AWAY": "+50% ATK and move speed",
     "HUSTLE": "+80% ATK and move speed",
     "BERSERK": "+100% ATK and move speed, RAGE 5 seconds sooner",
-    "FLUID": "Ally team gains +4% ATK_SPEED and 7 SHIELD per unique active synergy",
+    "FLUID": "Ally team gains +2% ATK_SPEED and 5 SHIELD per unique active synergy",
     "SHAPELESS": "Ally team also gains +1 ATK and +5% AP per unique active synergy",
     "ETHEREAL": "Your AMORPHOUS Pokémons gain double the bonuses"
   },

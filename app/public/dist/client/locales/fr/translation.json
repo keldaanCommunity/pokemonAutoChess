@@ -1711,7 +1711,7 @@
     "GOOGLE_SPECS": "Gagne +15% d'ATK de base, d'AP et de HP max en tant que SHIELD par objet détenu. Obtenez un autre objet artificiel.",
     "HATCHER": "25 % de chance par défaite consécutive d'obtenir un Œuf, 1 œuf max sur le banc",
     "BREEDER": "Obtenez un œuf après chaque défaite contre un joueur, pas de limite d'œufs sur le banc",
-    "GOLDEN_EGGS": "Obtenez un œuf shiny après chaque défaite, qui peut être vendu pour 10 GOLD ou rapporter un objet chromatique à l'éclosion",
+    "GOLDEN_EGGS": "25 % de chance par défaite consécutive d'obtenir un Œuf d'or, 1 œuf d'or max sur le banc. Les œufs d'or peuvent être vendus pour 10 GOLD ou rapporter un objet chromatique à l'éclosion",
     "GRASSY_TERRAIN": "Augmente les dégâts infligés de 20% (GRASS uniquement)",
     "PSYCHIC_TERRAIN": "Augmente les dégâts infligés de 20% (PSYCHIC uniquement)",
     "ELECTRIC_TERRAIN": "Augmente les dégâts infligés de 20% (ELECTRIC uniquement)",
@@ -1734,7 +1734,7 @@
     "RUN_AWAY": "+50% ATK et vitesse de déplacement",
     "HUSTLE": "+80% ATK et vitesse de déplacement,",
     "BERSERK": "+100% ATK et vitesse de déplacement. Vos pokémons deviennent RAGE 5 secondes plus tôt.",
-    "FLUID": "L'équipe gagne +4% ATK_SPEED et 7 SHIELD par synergie unique active",
+    "FLUID": "L'équipe gagne +2% ATK_SPEED et 5 SHIELD par synergie unique active",
     "SHAPELESS": "L'équipe gagne également +1 ATK et +5% AP par synergie unique active",
     "ETHEREAL": "Vos Pokémons AMORPHOUS gagnent le double des bonus"
   },

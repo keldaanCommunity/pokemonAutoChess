@@ -3,7 +3,11 @@ import Modal from "react-bootstrap/esm/Modal"
 import { useTranslation } from "react-i18next"
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed/precomputed-emotions"
 import { Emotion } from "../../../../../types"
-import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
+import {
+  AnimationConfig,
+  Pkm,
+  PkmIndex
+} from "../../../../../types/enum/Pokemon"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   buyBooster,
@@ -32,6 +36,9 @@ export default function PokemonEmotionsModal(props: {
   const availableEmotions: Emotion[] = Object.values(Emotion).filter(
     (e, i) => PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[index]?.[i] === 1
   )
+
+  const shinyAvailable =
+    AnimationConfig[props.pokemon]?.shinyUnavailable !== true
 
   const pConfig = useMemo(() => {
     const foundPokemon = pokemonCollection.find((c) => c.id == index) ?? {
@@ -79,7 +86,8 @@ export default function PokemonEmotionsModal(props: {
           <h1>{t(`pkm.${props.pokemon}`)}</h1>
           <div className="spacer" />
           <p className="dust">
-            {pConfig.dust} {t("shards")} <img src={getPortraitSrc(index)} className="dust" alt="dust" />
+            {pConfig.dust} {t("shards")}{" "}
+            <img src={getPortraitSrc(index)} className="dust" alt="dust" />
           </p>
         </Modal.Title>
       </Modal.Header>
@@ -94,7 +102,9 @@ export default function PokemonEmotionsModal(props: {
                   index={index}
                   shiny={false}
                   unlocked={pConfig && pConfig.emotions.includes(e)}
-                  selected={pConfig.selectedEmotion === e && !pConfig.selectedShiny}
+                  selected={
+                    pConfig.selectedEmotion === e && !pConfig.selectedShiny
+                  }
                   path={index.replace("-", "/")}
                   emotion={e}
                   dust={pConfig.dust}
@@ -109,47 +119,69 @@ export default function PokemonEmotionsModal(props: {
             })}
           </div>
         </section>
-        <section>
-          <p>{t("shiny_emotions")}</p>
-          <div>
-            {availableEmotions.map((e) => {
-              return (
-                <PokemonEmotion
-                  key={e}
-                  index={index}
-                  shiny={true}
-                  unlocked={pConfig && pConfig.shinyEmotions.includes(e)}
-                  selected={pConfig.selectedEmotion === e && pConfig.selectedShiny}
-                  path={`${index.replace("-", "/")}/0000/0001`}
-                  emotion={e}
-                  dust={pConfig.dust}
-                  onClick={() =>
-                    handlePokemonEmotionClick(
-                      pConfig && pConfig.shinyEmotions.includes(e),
-                      { index: index, emotion: e, shiny: true }
-                    )
-                  }
-                />
-              )
-            })}
-          </div>
-        </section>
+        {shinyAvailable && (
+          <section>
+            <p>{t("shiny_emotions")}</p>
+            <div>
+              {availableEmotions.map((e) => {
+                return (
+                  <PokemonEmotion
+                    key={e}
+                    index={index}
+                    shiny={true}
+                    unlocked={pConfig && pConfig.shinyEmotions.includes(e)}
+                    selected={
+                      pConfig.selectedEmotion === e && pConfig.selectedShiny
+                    }
+                    path={`${index.replace("-", "/")}/0000/0001`}
+                    emotion={e}
+                    dust={pConfig.dust}
+                    onClick={() =>
+                      handlePokemonEmotionClick(
+                        pConfig && pConfig.shinyEmotions.includes(e),
+                        { index: index, emotion: e, shiny: true }
+                      )
+                    }
+                  />
+                )
+              })}
+            </div>
+          </section>
+        )}
       </Modal.Body>
       <Modal.Footer>
-      <button
+        <button
           className="bubbly blue"
-          disabled={(pConfig.emotions.length === 0 && pConfig.shinyEmotions.length === 0) || 
-            (user && getAvatarSrc(user?.avatar) === getPortraitSrc(index,pConfig.selectedShiny, pConfig.selectedEmotion))}
-          onClick={() => dispatch(
-            changeAvatar({
-              index,
-              emotion: pConfig.selectedEmotion,
-              shiny: pConfig.selectedShiny
-            })
-          )}
+          disabled={
+            (pConfig.emotions.length === 0 &&
+              pConfig.shinyEmotions.length === 0) ||
+            (user &&
+              getAvatarSrc(user?.avatar) ===
+                getPortraitSrc(
+                  index,
+                  pConfig.selectedShiny,
+                  pConfig.selectedEmotion
+                ))
+          }
+          onClick={() =>
+            dispatch(
+              changeAvatar({
+                index,
+                emotion: pConfig.selectedEmotion,
+                shiny: pConfig.selectedShiny
+              })
+            )
+          }
         >
           {t("choose_as_avatar")}&nbsp;
-          <img src={getPortraitSrc(index,pConfig.selectedShiny, pConfig.selectedEmotion)} alt="avatar" />
+          <img
+            src={getPortraitSrc(
+              index,
+              pConfig.selectedShiny,
+              pConfig.selectedEmotion
+            )}
+            alt="avatar"
+          />
         </button>
 
         <button

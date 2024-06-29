@@ -81,6 +81,7 @@ export class OnJoinCommand extends Command<
               auth.email === undefined && auth.photoURL === undefined
             )
           )
+
           if (u.uid == this.state.ownerId) {
             // logger.debug(user.displayName);
             this.state.ownerName = u.displayName
@@ -88,6 +89,20 @@ export class OnJoinCommand extends Command<
               ownerName: this.state.ownerName
             })
           }
+
+          if (this.state.gameMode !== GameMode.NORMAL) {
+            this.clock.setTimeout(() => {
+              if (
+                this.state.users.has(u.uid) &&
+                !this.state.users.get(u.uid)!.ready
+              ) {
+                this.state.users.delete(u.uid)
+                client.send(Transfer.KICK)
+                client.leave()
+              }
+            }, 10000)
+          }
+
           this.state.addMessage({
             authorId: "server",
             payload: `${u.displayName} joined.`,
@@ -480,6 +495,9 @@ export class OnToggleReadyCommand extends Command<
 > {
   execute({ client, ready }) {
     try {
+      // cannot toggle ready in quick play / ranked / tournament game mode
+      if (this.room.state.gameMode !== GameMode.NORMAL && ready !== true) return
+
       // logger.debug(this.state.users.get(client.auth.uid).ready);
       if (client.auth?.uid && this.state.users.has(client.auth.uid)) {
         const user = this.state.users.get(client.auth.uid)!

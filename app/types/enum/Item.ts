@@ -127,7 +127,7 @@ export const FishingRods = [
   Item.SUPER_ROD,
   Item.GOOD_ROD,
   Item.OLD_ROD
-] as const
+] as const // order matters
 
 export type FishingRod = (typeof FishingRods)[number]
 

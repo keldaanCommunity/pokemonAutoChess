@@ -9022,6 +9022,7 @@ export class StoneAxeStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     const damage = 50
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
 
     cells.forEach((cell) => {
       const index = cell.y * board.columns + cell.x
@@ -9045,8 +9046,6 @@ export class StoneAxeStrategy extends AbilityStrategy {
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.effects.add(Effect.STEALTH_ROCKS)
       }
-
-      target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
     })
   }
 }
