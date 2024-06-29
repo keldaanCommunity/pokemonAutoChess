@@ -4070,8 +4070,8 @@ export const AnimationConfig: {
   },
   [Pkm.TYRUNT]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Bite,
+    emote: AnimationType.RearUp
   },
   [Pkm.TYRANTRUM]: {
     attack: AnimationType.Attack,
