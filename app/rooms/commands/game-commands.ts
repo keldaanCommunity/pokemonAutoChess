@@ -1036,10 +1036,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     const commands = new Array<Command>()
 
     this.state.players.forEach((player: Player) => {
-      const rod = FishingRods.find((rod) => player.items.includes(rod))
+      const bestRod = FishingRods.find((rod) => player.items.includes(rod))
 
-      if (rod && getFreeSpaceOnBench(player.board) > 0 && !isAfterPVE) {
-        const fish = this.state.shop.pickFish(player, rod)
+      if (bestRod && getFreeSpaceOnBench(player.board) > 0 && !isAfterPVE) {
+        const fish = this.state.shop.pickFish(player, bestRod)
         this.room.fishPokemon(player, fish)
       }
 
