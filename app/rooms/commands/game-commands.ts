@@ -401,6 +401,10 @@ export class OnDragDropItemCommand extends Command<
     }
 
     const pokemon = player.getPokemonAt(x, y)
+    if (pokemon === undefined) {
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
 
     if (item === Item.METEORITE) {
       if (pokemon?.passive === Passive.ALIEN_DNA) {
@@ -465,12 +469,12 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
-    if (item === Item.EVIOLITE && !pokemon?.evolution) {
+    if (!pokemon.canHoldItems) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
     }
 
-    if (pokemon === undefined || !pokemon.canHoldItems) {
+    if (item === Item.EVIOLITE && pokemon.evolution === Pkm.DEFAULT) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
     }
