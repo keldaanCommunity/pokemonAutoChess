@@ -6,8 +6,10 @@ import { IGameUser } from "../../../../../models/colyseus-models/game-user"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import { Role } from "../../../../../types"
+import { MAX_PLAYERS_PER_GAME } from "../../../../../types/Config"
 import { BotDifficulty, GameMode } from "../../../../../types/enum/Game"
 import { throttle } from "../../../../../utils/function"
+import { max } from "../../../../../utils/number"
 import { setTitleNotificationIcon } from "../../../../../utils/window"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
@@ -62,6 +64,12 @@ export default function PreparationMenu() {
 
   const isAdmin = user?.role === Role.ADMIN
   const isModerator = user?.role === Role.MODERATOR
+
+  const nbExpectedPlayers = useAppSelector((state) =>
+    state.preparation.whitelist
+      ? max(MAX_PLAYERS_PER_GAME)(state.preparation.whitelist.length)
+      : MAX_PLAYERS_PER_GAME
+  )
 
   useEffect(() => {
     if (allUsersReady) {
@@ -287,7 +295,7 @@ export default function PreparationMenu() {
     <div className="preparation-menu my-container is-centered custom-bg">
       <header>
         <h1>
-          {name}: {users.length}/8
+          {name}: {users.length}/{nbExpectedPlayers}
         </h1>
         {headerMessage}
       </header>
