@@ -20,7 +20,8 @@ import { usePatchVersion } from "../patchnotes/usePatchVersion"
 import Profile from "../profile/profile"
 import { ServerAnnouncementForm } from "../server-announcement/server-announcement-form"
 import { TournamentsAdmin } from "../tournaments-admin/tournaments-admin"
-import Wiki from "../wiki/wiki"
+import { SidebarSectionTemplate } from "./sidebar-section-template"
+import { WikiPanel } from "../wiki/wiki-panel"
 
 import "./main-sidebar.css"
 
@@ -35,24 +36,15 @@ interface MainSidebarProps {
 export function MainSidebar(props: MainSidebarProps) {
   const { page, leave, leaveLabel } = props
   const [collapsed, setCollapsed] = useState(true)
-  const navigate = useNavigate()
   const [modal, setModal] = useState<Modals>()
   const changeModal = useCallback(
     (nextModal: Modals) => setModal(nextModal),
     []
   )
+  const [view, setView] = useState<Modals | "links">("links")
   const sidebarRef = useRef<HTMLHtmlElement>(null)
 
   const { t } = useTranslation()
-  const user = useAppSelector((state) => state.lobby.user)
-  const profile = useAppSelector((state) => state.network.profile)
-  const profileLevel = profile?.level ?? 0
-
-  const { isNewPatch, updateVersionChecked } = usePatchVersion()
-
-  const version = pkg.version
-
-  const numberOfBooster = profile?.booster ?? 0
 
   useEffect(() => {
     if (!sidebarRef.current) {
@@ -76,184 +68,243 @@ export function MainSidebar(props: MainSidebarProps) {
   }, [collapsed])
 
   return (
-    <Sidebar collapsed={collapsed} className="sidebar" ref={sidebarRef}>
+    <Sidebar
+      collapsed={collapsed && view === "links"}
+      className={`sidebar ${view !== "links" ? "sidebar-wide" : ""}`}
+      ref={sidebarRef}
+    >
       <Menu>
-        <div className="sidebar-logo" onClick={() => setCollapsed(!collapsed)}>
-          <img src={`assets/ui/colyseus-icon.png`} />
-          <div>
-            <h1>Pokemon Auto Chess</h1>
-            <small>v{version}</small>
-          </div>
-        </div>
-
-        <NavLink
-          svg="meta"
-          onClick={() =>
-            window.open(
-              "https://github.com/keldaanCommunity/pokemonAutoChess/blob/master/policy.md",
-              "_blank"
-            )
-          }
-        >
-          {t("policy")}
-        </NavLink>
-
-        <NavLink
-          location="news"
-          svg="newspaper"
-          handleClick={(newModal) => {
-            changeModal(newModal)
-            if (isNewPatch) {
-              updateVersionChecked()
-            }
-          }}
-          shimmer={isNewPatch}
-        >
-          {t("news")}
-        </NavLink>
-
-        {page === "main_lobby" && (
-          <NavLink location="profile" svg="profile" handleClick={changeModal}>
-            {t("profile")}
-          </NavLink>
-        )}
-
-        {page === "main_lobby" && profileLevel >= GADGETS.BAG.levelRequired && (
-          <NavLink
-            location="collection"
-            svg="collection"
-            className="blue"
-            handleClick={changeModal}
-          >
-            {t("collection")}
-          </NavLink>
-        )}
-        {page === "main_lobby" && profileLevel >= GADGETS.BAG.levelRequired && (
-          <NavLink
-            location="booster"
-            svg="booster"
-            className="blue"
-            handleClick={changeModal}
-            shimmer={numberOfBooster > 0}
-          >
-            {t("boosters")}
-          </NavLink>
-        )}
-        <NavLink
-          location="wiki"
-          svg="wiki"
-          className="green"
-          handleClick={changeModal}
-        >
-          {t("wiki")}
-        </NavLink>
-        <NavLink
-          svg="meta"
-          className="green"
-          location="meta"
-          handleClick={changeModal}
-        >
-          {t("meta")}
-        </NavLink>
-
-        {profileLevel >= GADGETS.TEAM_PLANNER.levelRequired && (
-          <NavLink
-            svg="team-builder"
-            location="team-builder"
-            handleClick={changeModal}
-          >
-            {t("team_builder")}
-          </NavLink>
-        )}
-
-        {page !== "game" &&
-          user?.anonymous === false &&
-          profileLevel >= GADGETS.BOT_BUILDER.levelRequired && (
-            <NavLink svg="bot" onClick={() => navigate("/bot-builder")}>
-              {t("bot_builder")}
-            </NavLink>
-          )}
-
-        {page !== "game" && user?.role === Role.ADMIN && (
+        {view === "links" && (
           <>
-            <NavLink
-              svg="pokemon-sprite"
-              onClick={() => navigate("/sprite-viewer")}
-            >
-              Sprite Viewer
-            </NavLink>
-            <NavLink svg="map" onClick={() => navigate("/map-viewer")}>
-              Map Viewer
-            </NavLink>
-            <NavLink
-              svg="megaphone"
-              location="announcement"
-              handleClick={changeModal}
-            >
-              Announcement
-            </NavLink>
-            <NavLink
-              svg="tournament"
-              location="tournaments"
-              handleClick={changeModal}
-            >
-              Tournaments
-            </NavLink>
+            <SidebarMenu
+              collapsed={collapsed}
+              setCollapsed={setCollapsed}
+              changeModal={changeModal}
+              page={page}
+              t={t}
+              leave={leave}
+              leaveLabel={leaveLabel}
+              setView={setView}
+            />
+            <Modals modal={modal} setModal={setModal} page={page} />
           </>
         )}
 
-        {page === "game" && profileLevel >= GADGETS.JUKEBOX.levelRequired && (
+        {view === "wiki" && (
+          <SidebarSectionTemplate goBack={() => setView("links")}>
+            <WikiPanel inGame={page === "game"} />
+          </SidebarSectionTemplate>
+        )}
+      </Menu>
+    </Sidebar>
+  )
+}
+
+interface SidebarMenuProps {
+  collapsed: boolean
+  setCollapsed: (value: boolean) => void
+  changeModal: (modal: Modals) => void
+  page: Page
+  t: (text: string) => string
+  leave: () => void
+  leaveLabel: string
+  setView: (value: Modals) => void
+}
+
+function SidebarMenu({
+  collapsed,
+  setCollapsed,
+  changeModal,
+  page,
+  t,
+  leave,
+  leaveLabel,
+  setView,
+}: SidebarMenuProps) {
+  const navigate = useNavigate()
+  const user = useAppSelector((state) => state.lobby.user)
+  const profile = useAppSelector((state) => state.network.profile)
+  const { isNewPatch, updateVersionChecked } = usePatchVersion()
+  const profileLevel = profile?.level ?? 0
+
+  const version = pkg.version
+
+  const numberOfBooster = profile?.booster ?? 0
+  return (
+    <>
+      <div className="sidebar-logo" onClick={() => setCollapsed(!collapsed)}>
+        <img src={`assets/ui/colyseus-icon.png`} />
+        <div>
+          <h1>Pokemon Auto Chess</h1>
+          <small>v{version}</small>
+        </div>
+      </div>
+
+      <NavLink
+        svg="meta"
+        onClick={() =>
+          window.open(
+            "https://github.com/keldaanCommunity/pokemonAutoChess/blob/master/policy.md",
+            "_blank"
+          )
+        }
+      >
+        {t("policy")}
+      </NavLink>
+
+      <NavLink
+        location="news"
+        svg="newspaper"
+        handleClick={(newModal) => {
+          changeModal(newModal)
+          if (isNewPatch) {
+            updateVersionChecked()
+          }
+        }}
+        shimmer={isNewPatch}
+      >
+        {t("news")}
+      </NavLink>
+
+      {page === "main_lobby" && (
+        <NavLink location="profile" svg="profile" handleClick={changeModal}>
+          {t("profile")}
+        </NavLink>
+      )}
+
+      {page === "main_lobby" && profileLevel >= GADGETS.BAG.levelRequired && (
+        <NavLink
+          location="collection"
+          svg="collection"
+          className="blue"
+          handleClick={changeModal}
+        >
+          {t("collection")}
+        </NavLink>
+      )}
+      {page === "main_lobby" && profileLevel >= GADGETS.BAG.levelRequired && (
+        <NavLink
+          location="booster"
+          svg="booster"
+          className="blue"
+          handleClick={changeModal}
+          shimmer={numberOfBooster > 0}
+        >
+          {t("boosters")}
+        </NavLink>
+      )}
+      <NavLink
+        location="wiki"
+        svg="wiki"
+        className="green"
+        handleClick={setView}
+      >
+        {t("wiki")}
+      </NavLink>
+      <NavLink
+        svg="meta"
+        className="green"
+        location="meta"
+        handleClick={changeModal}
+      >
+        {t("meta")}
+      </NavLink>
+
+      {profileLevel >= GADGETS.TEAM_PLANNER.levelRequired && (
+        <NavLink
+          svg="team-builder"
+          location="team-builder"
+          handleClick={changeModal}
+        >
+          {t("team_builder")}
+        </NavLink>
+      )}
+
+      {page !== "game" &&
+        user?.anonymous === false &&
+        profileLevel >= GADGETS.BOT_BUILDER.levelRequired && (
+          <NavLink svg="bot" onClick={() => navigate("/bot-builder")}>
+            {t("bot_builder")}
+          </NavLink>
+        )}
+
+      {page !== "game" && user?.role === Role.ADMIN && (
+        <>
           <NavLink
-            svg="compact-disc"
-            location="jukebox"
+            svg="pokemon-sprite"
+            onClick={() => navigate("/sprite-viewer")}
+          >
+            Sprite Viewer
+          </NavLink>
+          <NavLink svg="map" onClick={() => navigate("/map-viewer")}>
+            Map Viewer
+          </NavLink>
+          <NavLink
+            svg="megaphone"
+            location="announcement"
             handleClick={changeModal}
           >
-            Jukebox
+            Announcement
           </NavLink>
-        )}
-
-        <NavLink svg="options" location="options" handleClick={changeModal}>
-          {t("options")}
-        </NavLink>
-
-        <div className="spacer"></div>
-
-        {page !== "game" && (
           <NavLink
-            svg="donate"
-            className="tipeee"
-            onClick={() =>
-              window.open("https://en.tipeee.com/pokemon-auto-chess", "_blank")
-            }
+            svg="tournament"
+            location="tournaments"
+            handleClick={changeModal}
           >
-            {t("donate")}
-            <img
-              src="assets/ui/tipeee.svg"
-              style={{
-                height: "1.25em",
-                display: "inline-block"
-              }}
-            />
+            Tournaments
           </NavLink>
-        )}
+        </>
+      )}
 
-        {page !== "game" && (
-          <NavLink
-            svg="discord"
-            className="discord"
-            onClick={() => window.open("https://discord.gg/6JMS7tr", "_blank")}
-          >
-            Discord
-          </NavLink>
-        )}
-
-        <NavLink svg="exit-door" className="red logout" onClick={leave}>
-          {leaveLabel}
+      {page === "game" && profileLevel >= GADGETS.JUKEBOX.levelRequired && (
+        <NavLink
+          svg="compact-disc"
+          location="jukebox"
+          handleClick={changeModal}
+        >
+          Jukebox
         </NavLink>
-      </Menu>
+      )}
 
-      <Modals modal={modal} setModal={setModal} page={page} />
-    </Sidebar>
+      <NavLink svg="options" location="options" handleClick={changeModal}>
+        {t("options")}
+      </NavLink>
+
+      <div className="spacer"></div>
+
+      {page !== "game" && (
+        <NavLink
+          svg="donate"
+          className="tipeee"
+          onClick={() =>
+            window.open("https://en.tipeee.com/pokemon-auto-chess", "_blank")
+          }
+        >
+          {t("donate")}
+          <img
+            src="assets/ui/tipeee.svg"
+            style={{
+              height: "1.25em",
+              display: "inline-block",
+            }}
+          />
+        </NavLink>
+      )}
+
+      {page !== "game" && (
+        <NavLink
+          svg="discord"
+          className="discord"
+          onClick={() => window.open("https://discord.gg/6JMS7tr", "_blank")}
+        >
+          Discord
+        </NavLink>
+      )}
+
+      <NavLink svg="exit-door" className="red logout" onClick={leave}>
+        {leaveLabel}
+      </NavLink>
+    </>
   )
 }
 
@@ -270,7 +321,7 @@ type NavPageLink = {
   handleClick?: (update: Modals) => void
 }
 
-function NavLink(props: NavLinkProps) {
+export function NavLink(props: NavLinkProps) {
   const {
     children,
     location,
@@ -280,7 +331,7 @@ function NavLink(props: NavLinkProps) {
     png,
     icon,
     className = "default",
-    onClick
+    onClick,
   } = props
 
   return (
@@ -331,7 +382,7 @@ export type Modals =
 function Modals({
   modal,
   setModal,
-  page
+  page,
 }: {
   modal?: Modals
   setModal: (nextModal?: Modals) => void
@@ -379,7 +430,7 @@ function Modals({
       <BasicModal
         handleClose={closeModal}
         show={modal === "wiki"}
-        body={<Wiki inGame={page === "game"} />}
+        body={<WikiPanel inGame={page === "game"} />}
       />
       <BasicModal
         show={modal === "meta"}

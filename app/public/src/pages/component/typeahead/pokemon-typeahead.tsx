@@ -19,6 +19,7 @@ export function PokemonTypeahead({ onChange, value }: TypeaheadProps<Pkm>) {
 
   return (
     <Typeahead
+      clearButton
       id="pokemon-typeahead"
       className="pokemon-typeahead"
       defaultInputValue={value}

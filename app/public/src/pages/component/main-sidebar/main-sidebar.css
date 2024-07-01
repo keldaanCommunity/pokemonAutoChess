@@ -3,6 +3,12 @@ aside.sidebar {
   height: 100%;
   z-index: 100;
   background-color: var(--color-bg-primary);
+  max-width: 20vw;
+}
+
+aside.sidebar-wide {
+  width: 100%;
+  min-width: 340px;
 }
 
 .sidebar-logo {
@@ -64,7 +70,7 @@ aside.sidebar {
 }
 
 .ps-menu-root {
-  height: 100%;
+  min-height: 100%;
   background-color: var(--color-bg-primary);
 }
 
@@ -211,4 +217,16 @@ aside.sidebar {
   100% {
     opacity: 1;
   }
+}
+
+.sidebar-section {
+  position: relative;
+  min-height: 100%;
+  background-color: var(--color-bg-primary);
+}
+
+li.go-back-btn {
+  position: sticky;
+  bottom: 0;
+
 }

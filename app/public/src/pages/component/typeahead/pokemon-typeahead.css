@@ -6,7 +6,7 @@
   width: 100%;
   border: var(--border-thin);
   padding: 0 0.75rem;
-  min-height: 1em;
+  min-height: 2em;
 }
 
 .pokemon-typeahead .form-control::placeholder {

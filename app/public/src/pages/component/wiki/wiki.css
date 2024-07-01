@@ -52,7 +52,7 @@
 }
 
 #wiki-page .wiki-pokemons .pokemon-typeahead {
-  float: right;
+  float: left;
 }
 
 #wiki-page p.description {
@@ -304,4 +304,18 @@
   #wiki-page .wiki-types li[role="tab"] {
     padding: 4px;
   }
+}
+
+#wiki-page.wiki-sidebar {
+  width: 100%;
+}
+
+#wiki-page.wiki-sidebar ul {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#wiki-page.wiki-sidebar .my-container {
+  border-radius: 0;
+  border: 0;
 }
