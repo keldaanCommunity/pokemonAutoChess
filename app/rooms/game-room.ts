@@ -551,14 +551,18 @@ export default class GameRoom extends Room<GameState> {
   }
 
   async onDispose() {
-    const numberOfPlayersAlive = values(this.state.players).filter(
-      (p) => p.alive && !p.isBot
-    ).length
-    if (numberOfPlayersAlive > 1) {
-      logger.warn(
-        `Game room has been disposed while they were still ${numberOfPlayersAlive} players alive.`
-      )
-      return // we skip elo compute/game history in case of technical issue such as a crash of node
+    const playersAlive = values(this.state.players).filter((p) => p.alive)
+    if (playersAlive.length > 1) {
+      const humansAlive = playersAlive.filter((p) => !p.isBot)
+      if (humansAlive.length > 1) {
+        // this can happen if all players disconnect before the end
+        // or if there's another technical issue
+        // adding a log just in case
+        logger.warn(
+          `Game room has been disposed while they were still ${humansAlive.length} players alive.`
+        )
+      }
+      return // game not finished before being disposed, we skip elo compute/game history
     }
 
     try {
