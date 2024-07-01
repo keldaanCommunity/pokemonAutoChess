@@ -192,7 +192,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   get canMove(): boolean {
-    return !this.status.freeze && !this.status.sleep && !this.status.resurecting
+    return !this.status.freeze && !this.status.sleep && !this.status.resurecting && !this.status.locked
   }
 
   get isTargettable(): boolean {

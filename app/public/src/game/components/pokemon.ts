@@ -93,6 +93,7 @@ export default class PokemonSprite extends DraggableObject {
   confusion: GameObjects.Sprite | undefined
   paralysis: GameObjects.Sprite | undefined
   pokerus: GameObjects.Sprite | undefined
+  locked: GameObjects.Sprite | undefined
   armorReduction: GameObjects.Sprite | undefined
   charm: GameObjects.Sprite | undefined
   flinch: GameObjects.Sprite | undefined
@@ -710,6 +711,23 @@ export default class PokemonSprite extends DraggableObject {
     if (this.pokerus) {
       this.remove(this.pokerus, true)
       this.pokerus = undefined
+    }
+  }
+
+  addLocked() {
+    if (!this.locked) {
+      this.locked = this.scene.add
+        .sprite(0, -30, "status", "LOCKED/000.png")
+        .setScale(2)
+      this.locked.anims.play("LOCKED")
+      this.add(this.locked)
+    }
+  }
+
+  removeLocked() {
+    if (this.locked) {
+      this.remove(this.locked, true)
+      this.locked = undefined
     }
   }
 

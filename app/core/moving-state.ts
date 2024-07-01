@@ -47,7 +47,7 @@ export default class MovingState extends PokemonState {
           pokemon,
           board
         )
-        if (targetAtSight) {
+        if (targetAtSight && !pokemon.status.locked) {
           this.move(pokemon, board, targetAtSight)
         }
       }

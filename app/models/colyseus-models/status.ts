@@ -10,6 +10,7 @@ import { Passive } from "../../types/enum/Passive"
 import { Weather } from "../../types/enum/Weather"
 import { max } from "../../utils/number"
 import { chance } from "../../utils/random"
+import { Pokemon } from "./pokemon"
 
 export default class Status extends Schema implements IStatus {
   @type("boolean") burn = false
@@ -24,6 +25,7 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") resurecting = false
   @type("boolean") paralysis = false
   @type("boolean") pokerus = false
+  @type("boolean") locked = false
   @type("boolean") armorReduction = false
   @type("boolean") runeProtect = false
   @type("boolean") charm = false
@@ -82,6 +84,7 @@ export default class Status extends Schema implements IStatus {
   drySkinCooldown = 1000
   curseCooldown = 0
   pokerusCooldown = 2000
+  lockedCooldown = 0
   enrageDelay = 35000
   darkHarvest = false
   darkHarvestCooldown = 0
@@ -101,6 +104,7 @@ export default class Status extends Schema implements IStatus {
     this.armorReductionCooldown = 0
     this.curseCooldown = 0
     this.curse = false
+    this.lockedCooldown = 0
   }
 
   hasNegativeStatus() {
@@ -116,7 +120,8 @@ export default class Status extends Schema implements IStatus {
       this.charm ||
       this.flinch ||
       this.armorReduction ||
-      this.curse
+      this.curse ||
+      this.locked
     )
   }
 
@@ -175,6 +180,10 @@ export default class Status extends Schema implements IStatus {
 
     if (this.paralysis) {
       this.updateParalysis(dt, pokemon)
+    }
+
+    if (this.locked) {
+      this.updateLocked(dt)
     }
 
     if (this.pokerus) {
@@ -1072,6 +1081,30 @@ export default class Status extends Schema implements IStatus {
       this.pokerusCooldown = 2000
     } else {
       this.pokerusCooldown -= dt
+    }
+  }
+
+  triggerLocked(duration: number, pkm: PokemonEntity) {
+    if (
+      !this.locked && // lock cannot be stacked
+      !this.runeProtect
+
+    ) {
+
+      if (pkm.status.enraged) {
+        duration = duration / 2
+      }
+
+      this.locked = true
+      this.lockedCooldown = Math.round(duration)
+    }
+  }
+
+  updateLocked(dt: number) {
+    if (this.lockedCooldown - dt <= 0) {
+      this.locked = false
+    } else {
+      this.lockedCooldown -= dt
     }
   }
 }

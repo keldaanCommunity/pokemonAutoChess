@@ -2125,6 +2125,7 @@
     "FLINCH": "All incoming damage bypass SHIELD",
     "CURSE": "KOs the cursed Pokémon after some time",
     "RUNE_PROTECT": "Protects from status alterations",
+    "LOCKED": "Prevents moving",
     "ELECTRIC_FIELD": "Increase damage dealt by 20% (ELECTRIC only)",
     "PSYCHIC_FIELD": "Increase damage dealt by 20% (PSYCHIC only)",
     "GRASS_FIELD": "Increase damage dealt by 20% (GRASS only)",

@@ -130,6 +130,7 @@ class GameContainer {
       "synchro",
       "wound",
       "enraged",
+      "locked",
       "magicBounce"
     ]
 
