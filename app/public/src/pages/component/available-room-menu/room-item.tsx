@@ -18,9 +18,13 @@ export default function RoomItem(props: {
   const { t } = useTranslation()
   const user = useAppSelector((state) => state.lobby.user)
 
+  const nbPlayersExpected = props.room.metadata?.whitelist
+    ? props.room.metadata?.whitelist.length
+    : MAX_PLAYERS_PER_GAME
+
   let canJoin = true,
     disabledReason: string | null = null
-  if (props.room.clients >= MAX_PLAYERS_PER_GAME) {
+  if (props.room.clients >= nbPlayersExpected) {
     canJoin = false
     disabledReason = t("game_full")
   } else if (props.room.metadata?.gameStarted === true) {
@@ -50,7 +54,16 @@ export default function RoomItem(props: {
 
   return (
     <div className="room-item my-box">
-      <span className="room-name" title={props.room.metadata?.ownerName ? "Owner: "+props.room.metadata?.ownerName : ""}>{props.room.metadata?.name}</span>
+      <span
+        className="room-name"
+        title={
+          props.room.metadata?.ownerName
+            ? "Owner: " + props.room.metadata?.ownerName
+            : ""
+        }
+      >
+        {props.room.metadata?.name}
+      </span>
       {props.room.metadata?.password && (
         <img
           alt={t("private")}
@@ -97,7 +110,7 @@ export default function RoomItem(props: {
         />
       )}
       <span>
-        {props.room.clients}/{MAX_PLAYERS_PER_GAME}
+        {props.room.clients}/{nbPlayersExpected}
       </span>
       <button
         title={disabledReason ?? t("join")}
@@ -108,7 +121,7 @@ export default function RoomItem(props: {
         )}
         onClick={() => {
           if (
-            props.room.clients < MAX_PLAYERS_PER_GAME &&
+            props.room.clients < nbPlayersExpected &&
             props.room.metadata?.gameStarted !== true
           ) {
             props.click(props.room)

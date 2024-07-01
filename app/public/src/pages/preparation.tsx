@@ -34,7 +34,9 @@ import {
   setOwnerId,
   setOwnerName,
   setPassword,
-  setUser
+  setUser,
+  setWhiteList,
+  setBlackList
 } from "../stores/PreparationStore"
 import Chat from "./component/chat/chat"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
@@ -129,6 +131,14 @@ export default function Preparation() {
 
       r.state.listen("noElo", (value, previousValue) => {
         dispatch(setNoELO(value))
+      })
+
+      r.state.listen("whitelist", (value, previousValue) => {
+        dispatch(setWhiteList(value))
+      })
+
+      r.state.listen("blacklist", (value, previousValue) => {
+        dispatch(setBlackList(value))
       })
 
       r.state.listen("gameMode", (value, previousValue) => {
