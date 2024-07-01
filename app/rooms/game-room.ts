@@ -552,8 +552,11 @@ export default class GameRoom extends Room<GameState> {
 
   async onDispose() {
     const playersAlive = values(this.state.players).filter((p) => p.alive)
-    if (playersAlive.length > 1) {
-      const humansAlive = playersAlive.filter((p) => !p.isBot)
+    const humansAlive = playersAlive.filter((p) => !p.isBot)
+
+    // we skip elo compute/game history if game is not finished
+    // that is at least two players including one human are still alive
+    if (playersAlive.length >= 2 && humansAlive.length >= 1) {
       if (humansAlive.length > 1) {
         // this can happen if all players disconnect before the end
         // or if there's another technical issue
