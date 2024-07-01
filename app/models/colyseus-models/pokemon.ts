@@ -6681,14 +6681,14 @@ export class Musharna extends Pokemon {
 }
 
 export class Archen extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.ROCK, Synergy.FLYING])
-  rarity = Rarity.RARE
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.FLYING, Synergy.FOSSIL])
+  rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.ARCHEOPS
-  hp = 80
-  atk = 6
-  def = 3
-  speDef = 3
+  hp = 70
+  atk = 5
+  def = 2
+  speDef = 2
   maxPP = 90
   range = 1
   skill = Ability.ROCK_SMASH
@@ -6697,13 +6697,13 @@ export class Archen extends Pokemon {
 }
 
 export class Archeops extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.ROCK, Synergy.FLYING])
-  rarity = Rarity.RARE
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.FLYING, Synergy.FOSSIL])
+  rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 180
-  atk = 14
-  def = 5
-  speDef = 5
+  hp = 130
+  atk = 11
+  def = 4
+  speDef = 4
   maxPP = 90
   range = 2
   skill = Ability.ROCK_SMASH
@@ -7035,32 +7035,32 @@ export class Relicanth extends Pokemon {
 }
 
 export class Tyrunt extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.DRAGON])
-  rarity = Rarity.UNCOMMON
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.ROCK, Synergy.FOSSIL])
+  rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.TYRANTRUM
-  hp = 135
-  atk = 10
+  hp = 70
+  atk = 8
   def = 4
-  speDef = 2
-  maxPP = 100
+  speDef = 1
+  maxPP = 70
   range = 1
-  skill = Ability.DEFAULT
+  skill = Ability.ROCK_HEAD
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Tyrantrum extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.DRAGON])
-  rarity = Rarity.UNCOMMON
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.ROCK, Synergy.FOSSIL])
+  rarity = Rarity.RARE
   stars = 2
-  hp = 290
-  atk = 22
-  def = 7
-  speDef = 4
-  maxPP = 100
+  hp = 170
+  atk = 18
+  def = 6
+  speDef = 2
+  maxPP = 70
   range = 1
-  skill = Ability.DEFAULT
+  skill = Ability.ROCK_HEAD
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
