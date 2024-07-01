@@ -183,7 +183,7 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (this.locked) {
-      this.updateLocked(dt)
+      this.updateLocked(dt, pokemon)
     }
 
     if (this.pokerus) {
@@ -1097,12 +1097,14 @@ export default class Status extends Schema implements IStatus {
 
       this.locked = true
       this.lockedCooldown = Math.round(duration)
+      pkm.range = 1
     }
   }
 
-  updateLocked(dt: number) {
+  updateLocked(dt: number, pokemon: PokemonEntity) {
     if (this.lockedCooldown - dt <= 0) {
       this.locked = false
+      pokemon.range = pokemon.baseRange
     } else {
       this.lockedCooldown -= dt
     }

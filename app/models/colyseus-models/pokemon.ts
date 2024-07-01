@@ -14133,6 +14133,21 @@ export class GastrodonEastSea extends Pokemon {
   }
 }
 
+export class Klefki extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FAIRY, Synergy.ARTIFICIAL])
+  //rarity = Rarity.UNIQUE
+  rarity= Rarity.COMMON
+  stars = 1
+  hp = 170
+  atk = 15
+  def = 7
+  speDef = 6
+  maxPP = 90
+  range = 3
+  skill = Ability.FAIRY_LOCK
+  attackSprite = AttackSprite.FAIRY_RANGE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -14943,5 +14958,6 @@ export const PokemonClasses: Record<
   [Pkm.SHELLOS_EAST_SEA]: ShellosEastSea,
   [Pkm.GASTRODON_EAST_SEA]: GastrodonEastSea,
   [Pkm.MUNNA]: Munna,
-  [Pkm.MUSHARNA]: Musharna
+  [Pkm.MUSHARNA]: Musharna,
+  [Pkm.KLEFKI]: Klefki
 }

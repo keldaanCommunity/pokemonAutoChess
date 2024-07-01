@@ -9064,6 +9064,20 @@ export class CameraFlashStrategy extends AbilityStrategy {
   }
 }
 
+export class FairyLockStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    target.status.triggerLocked(4000, target)
+    pokemon.addSpecialDefense(2, pokemon, 1, crit)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -9401,5 +9415,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ANCIENT_POWER]: new AncientPowerStrategy(),
   [Ability.MOON_DREAM]: new MoonDreamStrategy(),
   [Ability.STONE_AXE]: new StoneAxeStrategy(),
-  [Ability.CAMERA_FLASH]: new CameraFlashStrategy()
+  [Ability.CAMERA_FLASH]: new CameraFlashStrategy(),
+  [Ability.FAIRY_LOCK]: new FairyLockStrategy()
 }

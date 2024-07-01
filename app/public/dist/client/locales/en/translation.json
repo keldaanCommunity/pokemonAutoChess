@@ -355,7 +355,8 @@
     "ANCIENT_POWER": "Ancient Power",
     "MOON_DREAM": "Moon Dream",
     "STONE_AXE": "Stone Axe",
-    "CAMERA_FLASH": "Camera Flash"
+    "CAMERA_FLASH": "Camera Flash",
+    "FAIRY_LOCK": "Fairy Lock"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1162,7 +1163,8 @@
     "SHELLOS_EAST_SEA": "Shellos (East Sea)",
     "GASTRODON_EAST_SEA": "Gastrodon (East Sea)",
     "MUNNA": "Munna",
-    "MUSHARNA": "Musharna"
+    "MUSHARNA": "Musharna",
+    "KLEFKI": "Klefki"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1498,7 +1500,8 @@
     "ANCIENT_POWER": "Launches rocks at the target, dealing [50,100,SP] SPECIAL. Raises the user's AP by [25,SP]%",
     "MOON_DREAM": "Target falls SLEEP for [3,6,9] seconds and grants [10,20,30,SP] SHIELD to the caster's [3,4,5] closest allies",
     "STONE_AXE": "Deal [50,SP] TRUE. Lay sharp stones around the target. The stones stay on the field, dealing 10 PHYSICAL per second and WOUND Pokémons that walk on it, if not ROCK or FLYING",
-    "CAMERA_FLASH": "The target is PARALYSIS for [2,SP] seconds"
+    "CAMERA_FLASH": "The target is PARALYSIS for [2,SP] seconds",
+    "FAIRY_LOCK": "The target is LOCKED for 4 seconds. The user gains [2,SP] SPE_DEF"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2097,6 +2100,7 @@
     "RESURECTION": "Resurection",
     "PARALYSIS": "Paralyzed",
     "POKERUS": "Pokérus",
+    "LOCKED": "Locked",
     "ARMOR_REDUCTION": "Armor Reduction",
     "CHARM": "Charmed",
     "FLINCH": "Flinch",
@@ -2125,7 +2129,7 @@
     "FLINCH": "All incoming damage bypass SHIELD",
     "CURSE": "KOs the cursed Pokémon after some time",
     "RUNE_PROTECT": "Protects from status alterations",
-    "LOCKED": "Prevents moving",
+    "LOCKED": "Prevents moving and sets RANGE to 1",
     "ELECTRIC_FIELD": "Increase damage dealt by 20% (ELECTRIC only)",
     "PSYCHIC_FIELD": "Increase damage dealt by 20% (PSYCHIC only)",
     "GRASS_FIELD": "Increase damage dealt by 20% (GRASS only)",

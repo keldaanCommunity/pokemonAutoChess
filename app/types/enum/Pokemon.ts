@@ -804,7 +804,8 @@ export enum Pkm {
   SHELLOS_EAST_SEA = "SHELLOS_EAST_SEA",
   GASTRODON_EAST_SEA = "GASTRODON_EAST_SEA",
   MUNNA = "MUNNA",
-  MUSHARNA = "MUSHARNA"
+  MUSHARNA = "MUSHARNA",
+  KLEFKI = "KLEFKI"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1611,7 +1612,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SHELLOS_EAST_SEA]: "0422-0001",
   [Pkm.GASTRODON_EAST_SEA]: "0423-0001",
   [Pkm.MUNNA]: "0517",
-  [Pkm.MUSHARNA]: "0518"
+  [Pkm.MUSHARNA]: "0518",
+  [Pkm.KLEFKI]: "0707"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2418,7 +2420,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SHELLOS_EAST_SEA]: Pkm.SHELLOS_EAST_SEA,
   [Pkm.GASTRODON_EAST_SEA]: Pkm.SHELLOS_EAST_SEA,
   [Pkm.MUNNA]: Pkm.MUNNA,
-  [Pkm.MUSHARNA]: Pkm.MUNNA
+  [Pkm.MUSHARNA]: Pkm.MUNNA,
+  [Pkm.KLEFKI]: Pkm.KLEFKI
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
@@ -2429,7 +2432,8 @@ export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
   [Pkm.DIGLETT]: [Pkm.ALOLAN_DIGLETT],
   [Pkm.ZORUA]: [Pkm.HISUI_ZORUA],
   [Pkm.GRIMER]: [Pkm.ALOLAN_GRIMER],
-  [Pkm.NIDORANF]: [Pkm.NIDORANM]
+  [Pkm.NIDORANF]: [Pkm.NIDORANM],
+  [Pkm.KLEFKI]: [Pkm.KLEFKI]
 }
 
 export enum PkmDuo {
@@ -6599,6 +6603,11 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.MUSHARNA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.KLEFKI]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot
