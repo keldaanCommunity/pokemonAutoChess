@@ -6653,7 +6653,7 @@ export class Munna extends Pokemon {
   def = 2
   speDef = 2
   maxPP = 80
-  range = 3
+  range = 2
   skill = Ability.MOON_DREAM
   passive = Passive.DREAM_CATCHER
   additional = true
@@ -6673,7 +6673,7 @@ export class Musharna extends Pokemon {
   def = 3
   speDef = 3
   maxPP = 80
-  range = 3
+  range = 2
   skill = Ability.MOON_DREAM
   passive = Passive.DREAM_CATCHER
   additional = true

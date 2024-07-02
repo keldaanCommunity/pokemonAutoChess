@@ -8974,7 +8974,7 @@ export class MoonDreamStrategy extends AbilityStrategy {
       pokemon.stars === 1 ? 3000 : pokemon.stars === 2 ? 6000 : 9000
 
     const shield = [10, 20, 30][pokemon.stars - 1] ?? 30
-    const count = [2, 3, 4][pokemon.stars - 1] ?? 4
+    const count = 3
 
     const allies = board.cells.filter(
       (p) => p && p.team === pokemon.team && p.id !== pokemon.id
@@ -8985,15 +8985,10 @@ export class MoonDreamStrategy extends AbilityStrategy {
           distanceM(
             a.positionX,
             a.positionY,
-            pokemon.positionX,
-            pokemon.positionY
+            pokemon.targetX,
+            pokemon.targetY
           ) -
-          distanceM(
-            b.positionX,
-            b.positionY,
-            pokemon.positionX,
-            pokemon.positionY
-          )
+          distanceM(b.positionX, b.positionY, pokemon.targetX, pokemon.targetY)
       )
       .slice(0, count)
 

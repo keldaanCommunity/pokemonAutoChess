@@ -1493,7 +1493,7 @@
     "MAGNET_BOMB": "Una bomba magnética que inflige [20,40,80,SP] SPECIAL al objetivo, [10,20,40,SP] SPECIAL a enemigos adyacentes y atrae a enemigos distantes.",
     "MUDDY_WATER": "Lanza agua fangosa hacia 3 objetivos frente a él, causando [40,80,SP] SPECIAL, WOUND y ARMOR_REDUCTION durante 4 segundos.",
     "ANCIENT_POWER": "Lanza piedras al objetivo, causando [50,100,SP] SPECIAL. Aumenta el AP del usuario en [25,SP]",
-    "MOON_DREAM": "El objetivo cae SLEEP durante [3,6,9] segundos y otorga [10,20,30,SP] SHIELD a los [3,4,5] aliados más cercanos del lanzador.",
+    "MOON_DREAM": "El objetivo cae SLEEP durante [3,6,9] segundos y otorga [10,20,30,SP] SHIELD a los 3 aliados más cercanos a él.",
     "STONE_AXE": "Causa [50,SP] TRUE. Coloca piedras afiladas alrededor del objetivo. Las piedras permanecen en el campo causando 10 PHYSICAL por segundo y WOUND a los oponentes que caminan sobre él, si no son ROCK o FLYING"
   },
   "effect": {
@@ -2044,7 +2044,7 @@
     "PSYDUCK": "Cuando esté CONFUSION, gana 100% AP",
     "BLOODMOON": "Cambia de forma durante BLOODMOON",
     "RECYCLE": "Aliméntelo con bayas para ganar 10 HP, con componentes básicos para obtener 25 HP + estadísticas de objetos o aliméntelo con objetos artificiales para obtener 50 HP + estadísticas de objetos y obtenga TRASH a cambio.",
-    "DREAM_CATCHER": "Si el objetivo de este pokémon esta SLEEP, sus ataques otorgan 10 de SHIELD a los 3 aliados más cercanos."
+    "DREAM_CATCHER": "Si el objetivo de este pokémon esta SLEEP, sus ataques otorgan 10 de SHIELD a los 3 aliados más cercanos a él."
   },
   "stat": {
     "ATK": "Ataque",

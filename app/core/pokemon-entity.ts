@@ -786,13 +786,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       const alliesHit = allies
         .sort(
           (a, b) =>
-            distanceM(
-              a.positionX,
-              a.positionY,
-              this.positionX,
-              this.positionY
-            ) -
-            distanceM(b.positionX, b.positionY, this.positionX, this.positionY)
+            distanceM(a.positionX, a.positionY, this.targetX, this.targetY) -
+            distanceM(b.positionX, b.positionY, this.targetX, this.targetY)
         )
         .slice(0, 2)
 
