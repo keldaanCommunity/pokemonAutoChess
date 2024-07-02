@@ -14,12 +14,17 @@
 - Nerf Misdreavus line: HP ~~90/180~~ 80/160, Attack ~~9/26~~ 8/23
 - Removed Amorphous from Pumpkaboo line
 - Nerf Spiritomb: HP ~~200~~ 150
-- Change Mimikyu: HP ~~200~~ 180, Attack ~~20~~ 15.  Busted form now gives 10 Attack instead of 30% Attack Speed
+- Change Mimikyu: HP ~~200~~ 180, Attack ~~20~~ 15. Busted form now gives 10 Attack instead of 30% Attack Speed
 - Nerf Deoxys: HP ~~240~~ 220
 - Nerf Darkrai: HP ~~300~~ 250, Attack ~~30~~ 27
 - Nerf Empty Light: ~~40~~ 33 special damage
 
 # Changes to Synergies
+
+- Change Amorphous: now gain Attack Speed and HP to differenciate with Artificial synergy
+    - (3) Fluid: Ally team gains 2% Attack Speed and 5 HP per unique active synergy
+    - (5) Shapeless: Ally team gains 4% Attack Speed and 10 HP per unique active synergy
+    - (7) Ethereal: Amorphous Pokémons gain more bonuses: 6% Attack Speed and 15 HP per unique active synergy
 
 # Changes to Items
 

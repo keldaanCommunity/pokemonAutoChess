@@ -1731,9 +1731,9 @@
     "RUN_AWAY": "+50% ATK y velocidad de movimiento",
     "HUSTLE": "+80% ATK y velocidad de movimiento",
     "BERSERK": "+100% ATK y velocidad de movimiento, RAGE 5 segundos antes",
-    "FLUID": "El equipo gana +2% ATK_SPEED and 5 SHIELD por cada sinergia activa.",
-    "SHAPELESS": "El equipo también gana +1 ATK y +5% AP por cada sinergia activa.",
-    "ETHEREAL": "Tus AMORPHOUS pokémons ganan el doble de las bonificaciones."
+    "FLUID": "El equipo gana 2% ATK_SPEED and 5 HP por cada sinergia activa.",
+    "SHAPELESS": "El equipo gana 4% ATK_SPEED y 10 HP por cada sinergia activa.",
+    "ETHEREAL": "El equipo gana 6% ATK_SPEED y 15 HP por cada sinergia activa."
   },
   "item": {
     "FOSSIL_STONE": "Piedra Fósil",
@@ -2182,7 +2182,7 @@
     "BABY": "Los BABY pueden traerte huevos de Pokémon para consolarte después de una derrota",
     "LIGHT": "La LIGHT revela un foco en el campo de batalla. La unidad que se encuentra en el centro de atención al comienzo del combate obtiene bonificaciones únicas.",
     "WILD": "Los Pokémon WILD obtienen un mayor ATK, se mueven más rápido y tienen un 25% de posibilidades de WOUND a su objetivo. Por cada STAR de tus pokémon WILD en el tablero, obtén +1% de probabilidad de encontrar WILD en tus tiendas + 5% de probabilidad durante las rondas JCE.",
-    "AMORPHOUS": "AMORPHOUS pokémons son extremadamente flexibles y carecen de una forma propia. Tu equipo gana bonificaciones activando una amplia variedad de sinergias."
+    "AMORPHOUS": "AMORPHOUS pokémons son extremadamente flexibles y carecen de una forma propia. Tu equipo gana HP y ATK_SPEED activando una amplia variedad de sinergias."
   },
   "title": {
     "NOVICE": "Principiante",

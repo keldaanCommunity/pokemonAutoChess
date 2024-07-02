@@ -1737,9 +1737,9 @@
     "RUN_AWAY": "+50% ATK and move speed",
     "HUSTLE": "+80% ATK and move speed",
     "BERSERK": "+100% ATK and move speed, RAGE 5 seconds sooner",
-    "FLUID": "Ally team gains +2% ATK_SPEED and 5 SHIELD per unique active synergy",
-    "SHAPELESS": "Ally team also gains +1 ATK and +5% AP per unique active synergy",
-    "ETHEREAL": "Your AMORPHOUS Pokémons gain double the bonuses"
+    "FLUID": "Ally team gains 2% ATK_SPEED and 5 HP per unique active synergy",
+    "SHAPELESS": "Ally team gains 4% ATK_SPEED and 10 HP per unique active synergy",
+    "ETHEREAL": "Ally team gains 6% ATK_SPEED and 15 HP per unique active synergy"
   },
   "item": {
     "FOSSIL_STONE": "Fossil Stone",
@@ -2194,7 +2194,7 @@
     "BABY": "BABY can bring you Pokemon Eggs to comfort you after a defeat",
     "LIGHT": "LIGHT reveal a spotlight on the battlefield. The unit standing in the spotlight at the start of combat gains unique bonuses",
     "WILD": "WILD Pokémons get increased ATK, move faster, and have 25% chance to WOUND their target. For each WILD Pokémon STAR on board, get +1% chance to find WILD in your shops + 5% chance during PvE rounds",
-    "AMORPHOUS": "AMORPHOUS Pokémons are extremely flexible and lack their own shape. Your team gains bonuses by activating a wide variety of synergies."
+    "AMORPHOUS": "AMORPHOUS Pokémons are extremely flexible and lack their own shape. Your team gains HP and ATK_SPEED by activating a wide variety of synergies."
   },
   "title": {
     "NOVICE": "Novice",

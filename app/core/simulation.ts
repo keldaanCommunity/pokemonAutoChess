@@ -1250,31 +1250,21 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.FLUID: {
           pokemon.addAttackSpeed(2 * activeSynergies, pokemon, 0, false)
-          pokemon.addShield(5 * activeSynergies, pokemon, 0, false)
+          pokemon.addMaxHP(5 * activeSynergies)
           break
         }
 
         case Effect.SHAPELESS: {
           pokemon.effects.add(Effect.SHAPELESS)
-          pokemon.addAttackSpeed(2 * activeSynergies, pokemon, 0, false)
-          pokemon.addShield(5 * activeSynergies, pokemon, 0, false)
-          pokemon.addAttack(1 * activeSynergies, pokemon, 0, false)
-          pokemon.addAbilityPower(5 * activeSynergies, pokemon, 0, false)
+          pokemon.addAttackSpeed(4 * activeSynergies, pokemon, 0, false)
+          pokemon.addMaxHP(10 * activeSynergies)
           break
         }
 
         case Effect.ETHEREAL: {
           pokemon.effects.add(Effect.ETHEREAL)
-          pokemon.addAttackSpeed(2 * activeSynergies, pokemon, 0, false)
-          pokemon.addShield(5 * activeSynergies, pokemon, 0, false)
-          pokemon.addAttack(1 * activeSynergies, pokemon, 0, false)
-          pokemon.addAbilityPower(5 * activeSynergies, pokemon, 0, false)
-          if (types.has(Synergy.AMORPHOUS)) {
-            pokemon.addAttackSpeed(2 * activeSynergies, pokemon, 0, false)
-            pokemon.addShield(5 * activeSynergies, pokemon, 0, false)
-            pokemon.addAttack(1 * activeSynergies, pokemon, 0, false)
-            pokemon.addAbilityPower(5 * activeSynergies, pokemon, 0, false)
-          }
+          pokemon.addAttackSpeed(6 * activeSynergies, pokemon, 0, false)
+          pokemon.addMaxHP(15 * activeSynergies)
           break
         }
 

@@ -1734,9 +1734,9 @@
     "RUN_AWAY": "+50% ATK et vitesse de déplacement",
     "HUSTLE": "+80% ATK et vitesse de déplacement,",
     "BERSERK": "+100% ATK et vitesse de déplacement. Vos pokémons deviennent RAGE 5 secondes plus tôt.",
-    "FLUID": "L'équipe gagne +2% ATK_SPEED et 5 SHIELD par synergie unique active",
-    "SHAPELESS": "L'équipe gagne également +1 ATK et +5% AP par synergie unique active",
-    "ETHEREAL": "Vos Pokémons AMORPHOUS gagnent le double des bonus"
+    "FLUID": "L'équipe gagne 2% ATK_SPEED et 5 HP par synergie unique active",
+    "SHAPELESS": "L'équipe gagne 4% ATK_SPEED et 10 HP par synergie unique active",
+    "ETHEREAL": "L'équipe gagne 6% ATK_SPEED et 15 HP par synergie unique active"
   },
   "item": {
     "FOSSIL_STONE": "Fossile Dome",
@@ -2191,7 +2191,7 @@
     "BABY": "Les pokémons BABY peuvent vous apporter des œufs Pokémon pour vous réconforter après une défaite",
     "LIGHT": "La lumière révèle un projecteur sur le champ de bataille. L’unité sous les projecteurs au début du combat bénéficie de bonus uniques.",
     "WILD": "Les pokémons WILD gagnent en ATK et vitesse de déplacement, et ont 25% de chance d'infliger WOUND. Pour chaque STAR de vos pokémons WILD sur le plateau, obtenez +1% de chance de trouver des pokémons WILD dans le magasin + 5% de chance durant les rounds PvE.",
-    "AMORPHOUS": "Les Pokémons AMORPHOUS peuvent prendre de nombreuses formes. Votre équipe gagne des bonus en activant un grand nombre de synergies différentes."
+    "AMORPHOUS": "Les Pokémons AMORPHOUS peuvent prendre de nombreuses formes. Votre équipe gagne des HP et de la ATK_SPEED en activant un grand nombre de synergies différentes."
   },
   "title": {
     "NOVICE": "Novice",
