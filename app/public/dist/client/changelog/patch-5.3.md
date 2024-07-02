@@ -11,7 +11,13 @@
 - Nerf Wynaut line: Attack ~~7/18~~ 5/15
 - Nerf Drifloon: HP ~~120~~ 100
 - Change Munna line: Range ~~3~~ 2, Moon Dream shield now targets the 3 closest allies ~~to the caster~~ to the target
-
+- Nerf Misdreavus line: HP ~~90/180~~ 80/160, Attack ~~9/26~~ 8/23
+- Removed Amorphous from Pumpkaboo line
+- Nerf Spiritomb: HP ~~200~~ 150
+- Change Mimikyu: HP ~~200~~ 180, Attack ~~20~~ 15.  Busted form now gives 10 Attack instead of 30% Attack Speed
+- Nerf Deoxys: HP ~~240~~ 220
+- Nerf Darkrai: HP ~~300~~ 250, Attack ~~30~~ 27
+- Nerf Empty Light: ~~40~~ 33 special damage
 
 # Changes to Synergies
 

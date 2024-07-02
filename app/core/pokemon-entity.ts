@@ -1131,7 +1131,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
       this.name = Pkm.MIMIKYU_BUSTED
       this.passive = Passive.MIMIKYU_BUSTED
-      this.addAttackSpeed(30, this, 0, false)
+      this.addAttack(10, this, 0, false)
       this.status.triggerProtect(2000)
     }
   }

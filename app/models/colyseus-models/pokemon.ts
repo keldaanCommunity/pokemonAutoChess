@@ -5442,8 +5442,8 @@ export class Darkrai extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 300
-  atk = 30
+  hp = 250
+  atk = 27
   def = 2
   speDef = 2
   maxPP = 120
@@ -5863,7 +5863,7 @@ export class Spiritomb extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 200
+  hp = 150
   atk = 20
   def = 2
   speDef = 2
@@ -6161,7 +6161,7 @@ export class Deoxys extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 240
+  hp = 220
   atk = 30
   def = 5
   speDef = 5
@@ -6185,7 +6185,7 @@ export class DeoxysDefense extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 240
+  hp = 220
   atk = 20
   def = 8
   speDef = 8
@@ -6209,7 +6209,7 @@ export class DeoxysAttack extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 240
+  hp = 220
   atk = 30
   def = 2
   speDef = 2
@@ -6233,7 +6233,7 @@ export class DeoxysSpeed extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 240
+  hp = 220
   atk = 25
   def = 3
   speDef = 3
@@ -7525,11 +7525,7 @@ export class Cacturne extends Pokemon {
 }
 
 export class Pumpkaboo extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.GHOST,
-    Synergy.GRASS,
-    Synergy.AMORPHOUS
-  ])
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.GRASS])
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.GOURGEIST
@@ -7544,11 +7540,7 @@ export class Pumpkaboo extends Pokemon {
   attackSprite = AttackSprite.GRASS_MELEE
 }
 export class Gourgeist extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.GHOST,
-    Synergy.GRASS,
-    Synergy.AMORPHOUS
-  ])
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.GRASS])
   rarity = Rarity.EPIC
   stars = 2
   hp = 190
@@ -10766,8 +10758,8 @@ export class Mimikyu extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 200
-  atk = 20
+  hp = 180
+  atk = 15
   def = 5
   speDef = 6
   maxPP = 40
@@ -10785,8 +10777,8 @@ export class MimikyuBusted extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 200
-  atk = 20
+  hp = 180
+  atk = 25
   def = 5
   speDef = 6
   maxPP = 40
@@ -11825,8 +11817,8 @@ export class Misdreavus extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.MISMAGIUS
-  hp = 90
-  atk = 9
+  hp = 80
+  atk = 8
   def = 2
   speDef = 3
   maxPP = 95
@@ -11844,8 +11836,8 @@ export class Mismagius extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 180
-  atk = 26
+  hp = 160
+  atk = 23
   def = 2
   speDef = 4
   maxPP = 95
