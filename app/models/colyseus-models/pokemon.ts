@@ -8491,7 +8491,7 @@ export class Drifloon extends Pokemon {
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.DRIFBLIM
-  hp = 120
+  hp = 100
   atk = 5
   def = 2
   speDef = 2
@@ -10452,8 +10452,8 @@ export class Grimer extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.MUK
-  hp = 90
-  atk = 5
+  hp = 80
+  atk = 4
   def = 3
   speDef = 2
   maxPP = 100
@@ -10471,8 +10471,8 @@ export class Muk extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 190
-  atk = 10
+  hp = 170
+  atk = 9
   def = 6
   speDef = 4
   maxPP = 100
@@ -10491,8 +10491,8 @@ export class AlolanGrimer extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.ALOLAN_MUK
-  hp = 80
-  atk = 7
+  hp = 70
+  atk = 6
   def = 2
   speDef = 2
   maxPP = 100
@@ -10517,8 +10517,8 @@ export class AlolanMuk extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 160
-  atk = 15
+  hp = 150
+  atk = 13
   def = 6
   speDef = 4
   maxPP = 100
@@ -10778,7 +10778,11 @@ export class Mimikyu extends Pokemon {
 }
 
 export class MimikyuBusted extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FAIRY])
+  types = new SetSchema<Synergy>([
+    Synergy.GHOST,
+    Synergy.FAIRY,
+    Synergy.AMORPHOUS
+  ])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
@@ -11212,7 +11216,7 @@ export class Koffing extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.WEEZING
-  hp = 85
+  hp = 70
   atk = 5
   def = 3
   speDef = 3
@@ -11231,7 +11235,7 @@ export class Weezing extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 190
+  hp = 170
   atk = 10
   def = 5
   speDef = 5
