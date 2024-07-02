@@ -35,7 +35,6 @@ import Player from "./colyseus-models/player"
 import PokemonFactory from "./pokemon-factory"
 import { getPokemonData } from "./precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed/precomputed-rarity"
-import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "./precomputed/precomputed-types-and-categories"
 import { PVEStages } from "./pve-stages"
 
 export function getPoolSize(rarity: Rarity, maxStars: number): number {
@@ -482,9 +481,12 @@ export default class Shop {
         }
       })
       const typeWanted = pickRandomIn(topSynergies)
-      const uniques = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
-        typeWanted
-      ].uniquePokemons.filter((p) => getPokemonData(p).stars === 3)
+      const uniques = UniqueShop.filter(
+        (p) =>
+          p in PkmDuos === false &&
+          getPokemonData(p as Pkm).types.includes(typeWanted)
+      ) as Pkm[]
+
       if (rarity === Rarity.SPECIAL && uniques.length > 0) {
         fish = pickRandomIn(uniques)
       } else {
