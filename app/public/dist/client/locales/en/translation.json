@@ -1501,7 +1501,7 @@
     "MOON_DREAM": "Target falls SLEEP for [3,6,9] seconds and grants [10,20,30,SP] SHIELD to the caster's [3,4,5] closest allies",
     "STONE_AXE": "Deal [50,SP] TRUE. Lay sharp stones around the target. The stones stay on the field, dealing 10 PHYSICAL per second and WOUND Pokémons that walk on it, if not ROCK or FLYING",
     "CAMERA_FLASH": "The target is PARALYSIS for [2,SP] seconds",
-    "FAIRY_LOCK": "The target is LOCKED for 4 seconds. The user gains [2,SP] SPE_DEF"
+    "FAIRY_LOCK": "The target and adjacent enemies are LOCKED for 2 seconds. The user gains [2,SP] SPE_DEF"
   },
   "effect": {
     "INGRAIN": "Ingrain",

@@ -9073,7 +9073,22 @@ export class FairyLockStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    target.status.triggerLocked(4000, target)
+
+    const cells = board.getAdjacentCells(target.positionX, target.positionY, true)
+
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team){
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: pokemon.skill,
+          targetX: cell.value.positionX,
+          targetY: cell.value.positionY
+        })
+
+        cell.value.status.triggerLocked(2000, cell.value)
+      }
+    })
+    
     pokemon.addSpecialDefense(2, pokemon, 1, crit)
   }
 }
