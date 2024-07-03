@@ -1917,7 +1917,7 @@
     "SALAC_BERRY": "Se consume al estar por debajo del 50% HP, Cura 20 HP y gana 50% ATK_SPEED",
     "SITRUS_BERRY": "Se consume al estar por debajo del 50% HP, Cura 30 HP y aumenta toda la curación recibida en un 50%",
     "COMFEY": "Equipa $t(pkm.COMFEY) y obtiene su habilidad y todas sus estadísticas",
-    "ELECTIRIZER": "Cada ataque recibido inflige PARALYSIS durante 2 segundos tanto al atacante como al portador.",
+    "ELECTIRIZER": "Cada tercer ataque quema 15 PP del objetivo e inflige PARALYSIS durante 2 segundos",
     "MAGMARIZER": "Cada ataque exitoso aumenta el ATK en 1 e inflige BURN durante 2 segundos",
     "MACHO_BRACE": "El usuario obtiene el tipo FIGHTING",
     "LIGHT_BALL": "El usuario obtiene el tipo LIGHT",

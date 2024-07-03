@@ -28,6 +28,8 @@
 
 # Changes to Items
 
+- Changed Electirizer: Every third attack burns 15 PP of the target and inflicts PARALYSIS for 2 seconds
+
 # Gameplay
 
 # UI
