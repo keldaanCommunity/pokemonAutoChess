@@ -165,7 +165,7 @@ export class HiddenPowerFStrategy extends HiddenPowerStrategy {
           player,
           Item.SUPER_ROD
         )
-        unown.simulation.room.fishPokemon(player, fish)
+        unown.simulation.room.spawnOnBench(player, fish, "fishing")
       }
     }
   }
