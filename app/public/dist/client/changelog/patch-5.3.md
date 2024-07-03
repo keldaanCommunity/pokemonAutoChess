@@ -28,6 +28,8 @@
 
 # Changes to Items
 
+- White Flute: the average power of the 3 pokemons spawned has been slightly reduced at all stages
+
 # Gameplay
 
 # UI
