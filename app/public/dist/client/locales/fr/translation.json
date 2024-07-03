@@ -1406,7 +1406,7 @@
     "SCREECH": "Réduit la DEF de tous les ennemis adjacents de [1,2,4,SP]",
     "SAND_TOMB": "Inflige [10,20,40,SP] SPECIAL ainsi que SILENCE and PARALYSIS pendant [3,5,8] secondes",
     "WHIRLWIND": "Inflige [40,80,120,SP] SPECIAL et envoie la cible voler au loin",
-    "EMPTY_LIGHT": "Projette du poison sur l'ennemi, infligeant [40,SP] SPECIAL et réduisant sa SPE_DEF de 3. Le poison rebondit ensuite sur un autre pokémon avec une plus faible SPE_DEF (5 rebonds maximum)",
+    "EMPTY_LIGHT": "Projette du poison sur l'ennemi, infligeant [33,SP] SPECIAL et réduisant sa SPE_DEF de 3. Le poison rebondit ensuite sur un autre pokémon avec une plus faible SPE_DEF (5 rebonds maximum)",
     "UNBOUND": "Se libère de ses chaînes pour devenir la vraie forme de Hoopa et gagner une grande puissance",
     "HYPERSPACE_FURY": "Avec ses nombreux bras, déclenche une pluie de [4,SP] coups. Chaque coup descend la DEF de la cible de 1.",
     "SNIPE_SHOT": "Tire un jet d'eau du bout de son index sur l'adversaire le plus éloigné, infligeant [50,100,200,SP] SPECIAL à tous les adversaires sur le chemin.",
@@ -1495,7 +1495,7 @@
     "MAGNET_BOMB": "Une bombe magnétique inflige [20,40,80,SP] SPECIAL à la cible, [10,20,40,SP] SPECIAL aux ennemis adjacents et attire les ennemis les plus distants.",
     "MUDDY_WATER": "Projette une eau boueuse sur jusqu'à 3 cibles devant, infligeant [40,80,SP] SPECIAL, WOUND et ARMOR_REDUCTION pendant 4 secondes",
     "ANCIENT_POWER": "Lance des rochers sur la cible, infligeant [50,100,SP] SPECIAL. Augmente l'AP du lanceur de [25,SP] %",
-    "MOON_DREAM": "La cible tombe SLEEP pendant [3,6,9] secondes et les [3,4,5] alliés les plus proches du lanceur gagnent [10,20,30,SP] SHIELD",
+    "MOON_DREAM": "La cible tombe SLEEP pendant [3,6,9] secondes et les 3 alliés les plus proches de celle-ci gagnent [10,20,30,SP] SHIELD",
     "STONE_AXE": "Inflige [50,SP] TRUE. Des pierres pointues tombent autour de la cible et restent sur le terrain, infligeant 10 PHYSICAL par seconde et WOUND aux Pokémons qui marchent dessus, excepté si ROCK ou FLYING",
     "CAMERA_FLASH": "La cible est paralysée pendant [2,SP] secondes"
   },
@@ -1734,9 +1734,9 @@
     "RUN_AWAY": "+50% ATK et vitesse de déplacement",
     "HUSTLE": "+80% ATK et vitesse de déplacement,",
     "BERSERK": "+100% ATK et vitesse de déplacement. Vos pokémons deviennent RAGE 5 secondes plus tôt.",
-    "FLUID": "L'équipe gagne +2% ATK_SPEED et 5 SHIELD par synergie unique active",
-    "SHAPELESS": "L'équipe gagne également +1 ATK et +5% AP par synergie unique active",
-    "ETHEREAL": "Vos Pokémons AMORPHOUS gagnent le double des bonus"
+    "FLUID": "L'équipe gagne 2% ATK_SPEED et 5 HP par synergie unique active",
+    "SHAPELESS": "L'équipe gagne 4% ATK_SPEED et 10 HP par synergie unique active",
+    "ETHEREAL": "L'équipe gagne 6% ATK_SPEED et 15 HP par synergie unique active"
   },
   "item": {
     "FOSSIL_STONE": "Fossile Dome",
@@ -2033,7 +2033,7 @@
     "GIMMIGHOUL": "$t(pkm.GIMMIGHOUL) a besoin de 99 GOLD",
     "GHOLDENGO": "Au début de chaque combat, si le joueur a 50 GOLD ou plus, $t(pkm.GHOLDENGO) gagne RUNE_PROTECT pendant tout le combat",
     "METEOR": "$t(pkm.MINIOR) alterne entre sa forme Météore et ses formes Noyau. La forme Météore octroie [4,SP]% ATK_SPEED par attaque.\nLes attaques en forme Noyau infligent des effets supplémentaires à la cible et aux ennemis adjacents:\nRouge: inflige 150% PHYSICAL\nBleu: inflige 100% SPECIAL\nOrange: inflige 50% TRUE\nVert: les dégats d'attaque soignent les alliés adjacents",
-    "MIMIKYU": "Sous les 50% de HP, Mimiqui bascule en forme cassée, gagnant 30% ATK_SPEED et PROTECT pendant 2 secondes",
+    "MIMIKYU": "Sous les 50% de HP, Mimiqui bascule en forme cassée, gagnant 10 ATK et PROTECT pendant 2 secondes",
     "MIMIKYU_BUSTED": "Son cou est cassé. Mimiqui n'oubliera jamais la personne qui a endommagé son costume.",
     "HUNGER_SWITCH": "$t(pkm.MORPEKO) alterne entre sa forme rassasiée et affamée.\nLes triple-attaques en forme rassasiée infligent PARALYSIS pendant 2 secondes.\nLes triple-attaques en forme affamée infligent WOUND pendant 4 secondes.",
     "WATER_BUBBLE": "Le pokémon est immunisé contre BURN",
@@ -2051,7 +2051,7 @@
     "PSYDUCK": "Lorsque ce pokémon est CONFUSION, il gagne 100% AP",
     "BLOODMOON": "Change de forme pendant la BLOODMOON",
     "RECYCLE": "Nourrissez-le avec des Baies pour gagner 10HP, ou des composants pour gagner 15HP + les stats du composant, ou des objets artificiels pour gagner 50 HP + les stats de l'objet, et obtenez un TRASH en retour.",
-    "DREAM_CATCHER": "Si sa cible est SLEEP, les attaques du porteur donnent 10 SHIELD aux 3 alliés les plus proches"
+    "DREAM_CATCHER": "Si sa cible est SLEEP, les attaques du porteur donnent 10 SHIELD aux 3 alliés les plus proches de celle-ci"
   },
   "stat": {
     "ATK": "Attaque",
@@ -2191,7 +2191,7 @@
     "BABY": "Les pokémons BABY peuvent vous apporter des œufs Pokémon pour vous réconforter après une défaite",
     "LIGHT": "La lumière révèle un projecteur sur le champ de bataille. L’unité sous les projecteurs au début du combat bénéficie de bonus uniques.",
     "WILD": "Les pokémons WILD gagnent en ATK et vitesse de déplacement, et ont 25% de chance d'infliger WOUND. Pour chaque STAR de vos pokémons WILD sur le plateau, obtenez +1% de chance de trouver des pokémons WILD dans le magasin + 5% de chance durant les rounds PvE.",
-    "AMORPHOUS": "Les Pokémons AMORPHOUS peuvent prendre de nombreuses formes. Votre équipe gagne des bonus en activant un grand nombre de synergies différentes."
+    "AMORPHOUS": "Les Pokémons AMORPHOUS peuvent prendre de nombreuses formes. Votre équipe gagne des HP et de la ATK_SPEED en activant un grand nombre de synergies différentes."
   },
   "title": {
     "NOVICE": "Novice",

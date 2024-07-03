@@ -786,13 +786,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       const alliesHit = allies
         .sort(
           (a, b) =>
-            distanceM(
-              a.positionX,
-              a.positionY,
-              this.positionX,
-              this.positionY
-            ) -
-            distanceM(b.positionX, b.positionY, this.positionX, this.positionY)
+            distanceM(a.positionX, a.positionY, this.targetX, this.targetY) -
+            distanceM(b.positionX, b.positionY, this.targetX, this.targetY)
         )
         .slice(0, 2)
 
@@ -1136,7 +1131,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
       this.name = Pkm.MIMIKYU_BUSTED
       this.passive = Passive.MIMIKYU_BUSTED
-      this.addAttackSpeed(30, this, 0, false)
+      this.addAttack(10, this, 0, false)
       this.status.triggerProtect(2000)
     }
   }
