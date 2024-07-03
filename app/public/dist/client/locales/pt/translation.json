@@ -1635,7 +1635,7 @@
     "RKS_SYSTEM": "Sistema RKS: $t(pkm.SILVALLY) pode mudar os seus itens de sinergia em qualquer altura. Coloca-o no banco para deixar cair os itens de sinergia.",
     "SUDOWOODO": "Finge ser uma árvore e não ataca, mas ganha [2,4] ATK por segundo (acumulável).\nComeça a atacar quando a barra de PP está cheia",
     "WOBBUFFET": "Não se move ou ataca até que a barra PP esteja cheia",
-    "DITTO": "Ditto pode se transformar para criar uma cópia da forma básica de um de seus pokémons que você derrubar (exceto Unique e Hatch)",
+    "DITTO": "Ditto pode se transformar para criar uma 1 STAR cópia de um de seus pokémons que você derrubar (exceto Unique e Legendary e Hatch)",
     "EGG": "Você pode sentir algo se movendo por dentro",
     "HATCH": "Os pokémons eclodidos evoluem automaticamente após 5 estágios",
     "SYNCHRO": "Se o pokémon for afetado por POISONNED, BURN, WOUND ou SILENCE, o caster inimigo sofrerá o mesmo status negativo",
