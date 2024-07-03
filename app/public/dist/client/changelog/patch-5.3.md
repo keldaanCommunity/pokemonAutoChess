@@ -31,7 +31,7 @@
 - White Flute: the average power of the 3 pokemons spawned has been slightly reduced at all stages
 - Shiny Stone: now gives +3 to Light synergy count
 - Golden Rod: Unique pool no longer tier 3 only, but taken from unique propositions list at t10, duos excluded. Unique no longer matches top synergies.
-- Rare Candy: after each PvP round, spawns a 1 ⭐ copy of the holder on bench
+- Rare Candy: after each round, spawns a 1 ⭐ copy of the holder on bench
 
 # Gameplay
 
