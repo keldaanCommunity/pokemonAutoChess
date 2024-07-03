@@ -29,6 +29,8 @@
 # Changes to Items
 
 - White Flute: the average power of the 3 pokemons spawned has been slightly reduced at all stages
+- Shiny Stone: now gives +3 to Light synergy count
+
 
 # Gameplay
 
