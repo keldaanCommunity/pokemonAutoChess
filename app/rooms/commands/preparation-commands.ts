@@ -504,9 +504,11 @@ export class OnToggleReadyCommand extends Command<
         user.ready = ready !== undefined ? ready : !user.ready
       }
 
-      const nbExpectedPlayers = this.room.metadata?.whitelist
-        ? max(MAX_PLAYERS_PER_GAME)(this.room.metadata?.whitelist.length)
-        : MAX_PLAYERS_PER_GAME
+      const nbExpectedPlayers =
+        this.room.metadata?.whitelist &&
+        this.room.metadata?.whitelist.length > 0
+          ? max(MAX_PLAYERS_PER_GAME)(this.room.metadata?.whitelist.length)
+          : MAX_PLAYERS_PER_GAME
 
       if (
         this.state.gameMode !== GameMode.NORMAL &&

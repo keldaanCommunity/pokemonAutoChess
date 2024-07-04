@@ -51,7 +51,6 @@ import {
   SynergyItems,
   ShinyItems,
   WeatherRocks,
-  FishingRod,
   FishingRods
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
@@ -607,12 +606,7 @@ export class OnSellDropCommand extends Command<
   }
 }
 
-export class OnRefreshCommand extends Command<
-  GameRoom,
-  {
-    id: string
-  }
-> {
+export class OnRefreshCommand extends Command<GameRoom, string> {
   execute(id) {
     const player = this.state.players.get(id)
     if (player && player.money >= 1 && player.alive) {
@@ -623,16 +617,26 @@ export class OnRefreshCommand extends Command<
   }
 }
 
-export class OnLockCommand extends Command<
-  GameRoom,
-  {
-    id: string
-  }
-> {
+export class OnLockCommand extends Command<GameRoom, string> {
   execute(id) {
     const player = this.state.players.get(id)
     if (player) {
       player.shopLocked = !player.shopLocked
+    }
+  }
+}
+
+export class OnSpectateCommand extends Command<
+  GameRoom,
+  {
+    id: string
+    spectatedPlayerId: string
+  }
+> {
+  execute({ id, spectatedPlayerId }) {
+    const player = this.state.players.get(id)
+    if (player) {
+      player.spectatedPlayerId = spectatedPlayerId
     }
   }
 }

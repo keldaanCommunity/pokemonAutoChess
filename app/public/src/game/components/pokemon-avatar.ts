@@ -13,6 +13,7 @@ import PokemonSprite from "./pokemon"
 import { throttle } from "../../../../utils/function"
 
 export default class PokemonAvatar extends PokemonSprite {
+  scene: GameScene
   circleHitbox: GameObjects.Ellipse | undefined
   circleTimer: GameObjects.Graphics
   isCurrentPlayerAvatar: boolean
@@ -24,7 +25,8 @@ export default class PokemonAvatar extends PokemonSprite {
     x: number,
     y: number,
     pokemon: IPokemonAvatar,
-    playerId: string
+    playerId: string,
+    scouting?: boolean
   ) {
     super(
       scene,
@@ -44,10 +46,14 @@ export default class PokemonAvatar extends PokemonSprite {
     this.isCurrentPlayerAvatar = this.playerId === scene.uid
     if (scene.room?.state.phase === GamePhaseState.MINIGAME) {
       this.drawCircles()
-    } else {
+    } else if (!scouting) {
       this.drawLifebar()
     }
-    this.registerKeys()
+    if (this.isCurrentPlayerAvatar) {
+      this.registerKeys()
+    } else {
+      this.disableInteractive()
+    }
     this.setDepth(2)
     this.sendEmote = throttle(this.sendEmote, 1000).bind(this)
   }
@@ -183,7 +189,7 @@ export default class PokemonAvatar extends PokemonSprite {
   showEmoteMenu() {
     if (this.isCurrentPlayerAvatar && !this.emoteMenu) {
       this.emoteMenu = new EmoteMenu(
-        this.scene,
+        this.scene as GameScene,
         this.index,
         this.shiny,
         this.sendEmote
@@ -206,9 +212,7 @@ export default class PokemonAvatar extends PokemonSprite {
 
   sendEmote(emotion: Emotion) {
     const state = store.getState()
-    const player = state.game.players.find(
-      (p) => p.id === state.game.currentPlayerId
-    )
+    const player = state.game.players.find((p) => p.id === this.scene.uid)
     const pokemonCollection = player?.pokemonCollection
     const pConfig = pokemonCollection?.[this.index]
     const emotions = this.shiny ? pConfig.shinyEmotions : pConfig.emotions

@@ -18,9 +18,10 @@ export default function RoomItem(props: {
   const { t } = useTranslation()
   const user = useAppSelector((state) => state.lobby.user)
 
-  const nbPlayersExpected = props.room.metadata?.whitelist
-    ? props.room.metadata?.whitelist.length
-    : MAX_PLAYERS_PER_GAME
+  const nbPlayersExpected =
+    props.room.metadata?.whitelist && props.room.metadata.whitelist.length > 0
+      ? props.room.metadata?.whitelist.length
+      : MAX_PLAYERS_PER_GAME
 
   let canJoin = true,
     disabledReason: string | null = null
@@ -32,15 +33,17 @@ export default function RoomItem(props: {
     disabledReason = t("game_already_started")
   } else if (
     props.room.metadata?.blacklist &&
+    props.room.metadata.blacklist.length > 0 &&
     user?.id &&
-    props.room.metadata?.blacklist.includes(user.id) === true
+    props.room.metadata.blacklist.includes(user.id) === true
   ) {
     canJoin = false
     disabledReason = t("blacklisted")
   } else if (
     props.room.metadata?.whitelist &&
+    props.room.metadata.whitelist.length > 0 &&
     user?.id &&
-    props.room.metadata?.whitelist.includes(user.id) === false
+    props.room.metadata.whitelist.includes(user.id) === false
   ) {
     canJoin = false
     disabledReason = t("not_whitelisted")

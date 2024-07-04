@@ -9,6 +9,7 @@ import { logger } from "../../../../utils/logger"
 import { cc } from "../../pages/utils/jsx"
 import store from "../../stores"
 import { getPortraitSrc } from "../../utils"
+import GameScene from "../scenes/game-scene"
 import "./emote-menu.css"
 
 export function EmoteMenuComponent(props: {
@@ -26,7 +27,10 @@ export function EmoteMenuComponent(props: {
   })
 
   const pokemonCollection = props.player.pokemonCollection
-  const pConfig = pokemonCollection[props.index]
+  const pConfig = pokemonCollection[props.index] ?? {
+    emotions: [],
+    shinyEmotions: []
+  }
 
   return emotions.length === 0 ? (
     <div>{t("no_emotions_available")}</div>
@@ -54,16 +58,15 @@ export function EmoteMenuComponent(props: {
 export default class EmoteMenu extends GameObjects.DOMElement {
   dom: HTMLDivElement
   constructor(
-    scene: Phaser.Scene,
+    scene: GameScene,
     avatarIndex: string,
     shiny: boolean,
     sendEmote: (emotion: Emotion) => void
   ) {
     super(scene, -350, -150)
     const state = store.getState()
-    const player = state.game.players.find(
-      (p) => p.id === state.game.currentPlayerId
-    )
+    const player = state.game.players.find((p) => p.id === scene.uid)
+
     this.dom = document.createElement("div")
     this.dom.className = "my-container emote-menu"
     this.setElement(this.dom)

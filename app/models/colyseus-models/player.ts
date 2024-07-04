@@ -58,6 +58,7 @@ export default class Player extends Schema implements IPlayer {
   @type("string") opponentName: string = ""
   @type("string") opponentAvatar: string = ""
   @type("string") opponentTitle: string = ""
+  @type("string") spectatedPlayerId: string
   @type("uint8") boardSize: number = 0
   @type(["string"]) items = new ArraySchema<Item>()
   @type("uint8") rank: number
@@ -113,6 +114,7 @@ export default class Player extends Schema implements IPlayer {
   ) {
     super()
     this.id = id
+    this.spectatedPlayerId = id
     this.name = name
     this.elo = elo
     this.avatar = avatar
