@@ -831,13 +831,16 @@ export default class GameRoom extends Room<GameState> {
     )
   }
 
-  fishPokemon(player: Player, pkm: Pkm) {
+  spawnOnBench(player: Player, pkm: Pkm, anim: "fishing" | "spawn" = "spawn") {
     const fish = PokemonFactory.createPokemonFromName(pkm, player)
     const x = getFirstAvailablePositionInBench(player.board)
     if (x !== undefined) {
       fish.positionX = x
       fish.positionY = 0
-      fish.action = PokemonActionState.FISH
+      if (anim === "fishing") {
+        fish.action = PokemonActionState.FISH
+      }
+
       player.board.set(fish.id, fish)
       this.clock.setTimeout(() => {
         fish.action = PokemonActionState.IDLE

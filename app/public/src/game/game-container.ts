@@ -579,6 +579,8 @@ class GameContainer {
         )
       } else if (pokemonUI && pokemon.rarity === Rarity.HATCH) {
         pokemonUI.hatchAnimation()
+      } else if (pokemonUI) {
+        pokemonUI.spawnAnimation()
       }
     }
   }

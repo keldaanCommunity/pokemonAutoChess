@@ -633,32 +633,32 @@ export default class Simulation extends Schema implements ISimulation {
             pickWild(Rarity.UNCOMMON, 1)
           } else if (this.stageLevel <= 10) {
             pickWild(Rarity.COMMON, 2)
-            pickWild(Rarity.UNCOMMON, 1)
+            pickWild(Rarity.COMMON, 1)
             pickWild(Rarity.UNCOMMON, 1)
           } else if (this.stageLevel <= 15) {
+            pickWild(Rarity.UNCOMMON, 1)
             pickWild(Rarity.COMMON, 2)
-            pickWild(Rarity.UNCOMMON, 2)
             pickWild(Rarity.RARE, 1)
           } else if (this.stageLevel <= 20) {
             pickWild(Rarity.UNCOMMON, 2)
-            pickWild(Rarity.RARE, 2)
+            pickWild(Rarity.RARE, 1)
             pickWild(Rarity.EPIC, 1)
           } else if (this.stageLevel <= 25) {
+            pickWild(Rarity.UNCOMMON, 2)
             pickWild(Rarity.RARE, 2)
             pickWild(Rarity.EPIC, 1)
-            pickWild(Rarity.UNIQUE, 3)
           } else if (this.stageLevel <= 30) {
             pickWild(Rarity.RARE, 2)
+            pickWild(Rarity.EPIC, 1)
             pickWild(Rarity.EPIC, 2)
-            pickWild(Rarity.UNIQUE, 3)
           } else if (this.stageLevel <= 35) {
             pickWild(Rarity.RARE, 2)
             pickWild(Rarity.EPIC, 2)
-            pickWild(Rarity.ULTRA, 2)
+            pickWild(Rarity.UNIQUE, 3)
           } else {
             pickWild(Rarity.EPIC, 2)
-            pickWild(Rarity.EPIC, 2)
-            pickWild(Rarity.ULTRA, 3)
+            pickWild(Rarity.UNIQUE, 3)
+            pickWild(Rarity.ULTRA, 2)
           }
 
           spawns.forEach((spawn) => {

@@ -30,11 +30,16 @@
 
 - Rework Electirizer: Every third attack burns 15 PP of the target and inflicts PARALYSIS for 2 seconds
 - Rework Incense: No longer give Flora synergy. Prevent wild Pokémon encounter in shop when held. Instead, each Pokémon in shop has an additional 5% chance to share a common synergy with the holder.
-
+- White Flute: the average power of the 3 pokemons spawned has been slightly reduced at all stages
+- Shiny Stone: now gives +3 to Light synergy count
+- Golden Rod: Unique pool no longer tier 3 only, but taken from unique propositions list at t10, duos excluded. Unique no longer matches top synergies.
+- Rare Candy: after each round, spawns a 1 ⭐ copy of the holder on bench
 
 # Gameplay
 
 # UI
+
+- New spawn animation when buying/picking a pokemon
 
 # Bugfix
 

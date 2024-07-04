@@ -2738,17 +2738,17 @@ export const AnimationConfig: {
   [Pkm.PIDGEY]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.FlapAround,
-    emote: AnimationType.Attack
+    emote: AnimationType.Shoot
   },
   [Pkm.PIDGEOTTO]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.FlapAround,
-    emote: AnimationType.Attack
+    emote: AnimationType.Shoot
   },
   [Pkm.PIDGEOT]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.FlapAround,
-    emote: AnimationType.Attack
+    emote: AnimationType.Shoot
   },
   [Pkm.HOPPIP]: {
     attack: AnimationType.Shoot,
