@@ -819,10 +819,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       target.status.triggerParalysis(2000, target)
     }
 
-    if (target.items.has(Item.INCENSE) && chance(15 / 100)) {
-      this.status.triggerCharm(2000, target, this)
-    }
-
     // Synergy effects on hit
 
     if (this.types.has(Synergy.ICE)) {

@@ -414,7 +414,13 @@ export default class Shop {
     )
 
     let specificTypeWanted: Synergy | undefined = undefined
-    if (wildChance > 0 && chance(wildChance)) {
+
+    const incenseHolder = values(player.board).find((p) =>
+      p.items.has(Item.INCENSE)
+    )
+    if (incenseHolder && chance(5 / 100)) {
+      specificTypeWanted = pickRandomIn(values(incenseHolder.types))
+    } else if (wildChance > 0 && chance(wildChance)) {
       specificTypeWanted = Synergy.WILD
     }
 
