@@ -487,13 +487,11 @@ export default class Shop {
         }
       })
       const typeWanted = pickRandomIn(topSynergies)
-      const uniques = UniqueShop.filter(
-        (p) =>
-          p in PkmDuos === false &&
-          getPokemonData(p as Pkm).types.includes(typeWanted)
-      ) as Pkm[]
 
-      if (rarity === Rarity.SPECIAL && uniques.length > 0) {
+      if (rarity === Rarity.SPECIAL) {
+        const uniques = UniqueShop.filter(
+          (p) => p in PkmDuos === false
+        ) as Pkm[]
         fish = pickRandomIn(uniques)
       } else {
         fish = this.getRandomPokemonFromPool(rarity, player, finals, typeWanted)
