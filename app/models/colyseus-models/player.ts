@@ -222,12 +222,19 @@ export default class Player extends Schema implements IPlayer {
 
     this.updateFishingRods(updatedSynergies)
     const artifNeedsRecomputing = this.updateArtificialItems(updatedSynergies)
-    const rockNeedsRecomputing = this.updateWeatherRocks(updatedSynergies)
-    if (artifNeedsRecomputing || rockNeedsRecomputing) {
+    if (artifNeedsRecomputing) {
       /* NOTE: computing twice is costly in performance but the safest way to get the synergies
       right after losing an artificial item, since many edgecases may need to be adressed when 
       losing a type (Axew double dragon + artif item for example) ; it's not as easy as just 
       decrementing by 1 in updatedSynergies map count
+      */
+      updatedSynergies = computeSynergies(pokemons)
+    }
+
+    const rockNeedsRecomputing = this.updateWeatherRocks(updatedSynergies)
+    if (rockNeedsRecomputing) {
+      /* NOTE: in some edge cases like losing Hard Rock artif item, we may need to compute synergies
+        3 times in a row to get the right synergies, since losing a weather rock item may lead to losing a type
       */
       updatedSynergies = computeSynergies(pokemons)
     }
