@@ -28,7 +28,9 @@
 
 # Changes to Items
 
-- Changed Electirizer: Every third attack burns 15 PP of the target and inflicts PARALYSIS for 2 seconds
+- Rework Electirizer: Every third attack burns 15 PP of the target and inflicts PARALYSIS for 2 seconds
+- Rework Incense: No longer give Flora synergy. Prevent wild Pokémon encounter in shop when held. Instead, each Pokémon in shop has an additional 5% chance to share a common synergy with the holder.
+
 
 # Gameplay
 
