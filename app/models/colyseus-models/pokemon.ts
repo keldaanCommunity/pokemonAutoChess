@@ -8652,8 +8652,6 @@ const rksSystemEvolutionRule = new ItemEvolutionRule(
         return Pkm.SILVALLY_ROCK
       case Synergy.GROUND:
         return Pkm.SILVALLY_GROUND
-      case Synergy.FLORA:
-        return Pkm.SILVALLY_FLORA
       case Synergy.GHOST:
         return Pkm.SILVALLY_GHOST
       default:
@@ -14870,7 +14868,6 @@ export const PokemonClasses: Record<
   [Pkm.SILVALLY_FLYING]: SilvallyFlying,
   [Pkm.SILVALLY_ROCK]: SilvallyRock,
   [Pkm.SILVALLY_GROUND]: SilvallyGround,
-  [Pkm.SILVALLY_FLORA]: SilvallyFlora,
   [Pkm.SILVALLY_GHOST]: SilvallyGhost,
   [Pkm.DEWPIDER]: Dewpider,
   [Pkm.ARAQUANID]: Araquanid,
