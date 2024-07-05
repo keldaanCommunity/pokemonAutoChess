@@ -66,7 +66,7 @@ export default function PreparationMenu() {
   const isModerator = user?.role === Role.MODERATOR
 
   const nbExpectedPlayers = useAppSelector((state) =>
-    state.preparation.whitelist
+    state.preparation.whitelist && state.preparation.whitelist.length > 0
       ? max(MAX_PLAYERS_PER_GAME)(state.preparation.whitelist.length)
       : MAX_PLAYERS_PER_GAME
   )

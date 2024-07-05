@@ -65,7 +65,9 @@ export default function RoomMenu(props: {
 
   const navigate = useNavigate()
 
-  const createRoom = throttle(async function create(gameMode = GameMode.NORMAL) {
+  const createRoom = throttle(async function create(
+    gameMode = GameMode.NORMAL
+  ) {
     if (lobby && !props.toPreparation && !isJoining) {
       setJoining(true)
       const user = firebase.auth().currentUser
@@ -79,7 +81,10 @@ export default function RoomMenu(props: {
             gameMode,
             idToken: token,
             ownerId: uid,
-            roomName: gameMode === GameMode.QUICKPLAY ? "Quick play" : `${name}'${name.endsWith("s") ? "" : "s"} room`
+            roomName:
+              gameMode === GameMode.QUICKPLAY
+                ? "Quick play"
+                : `${name}'${name.endsWith("s") ? "" : "s"} room`
           }
         )
         await lobby.leave()
@@ -98,19 +103,21 @@ export default function RoomMenu(props: {
   const joinPrepRoom = throttle(async function join(
     selectedRoom: RoomAvailable<IPreparationMetadata>
   ) {
+    const { whitelist, blacklist, gameStarted, password } =
+      selectedRoom.metadata ?? {}
     if (
       selectedRoom.clients >= MAX_PLAYERS_PER_GAME ||
-      selectedRoom.metadata?.gameStarted === true ||
-      (selectedRoom.metadata?.whitelist &&
-        selectedRoom.metadata?.whitelist.includes(uid) === false) ||
-      (selectedRoom.metadata?.blacklist &&
-        selectedRoom.metadata?.blacklist.includes(uid) === true)
+      gameStarted === true ||
+      (whitelist &&
+        whitelist.length > 0 &&
+        whitelist.includes(uid) === false) ||
+      (blacklist && blacklist.length > 0 && blacklist.includes(uid) === true)
     ) {
       return
     }
 
     if (lobby && !props.toPreparation && !isJoining) {
-      if (selectedRoom.metadata?.password) {
+      if (password) {
         const lobbyUser = lobbyUsers.find((u) => u.id === uid)
         if (lobbyUser && lobbyUser.role === Role.BASIC) {
           const password = prompt(`This room is private. Enter password`)
@@ -142,12 +149,13 @@ export default function RoomMenu(props: {
         }
       }
     }
-  },
-  1000)
+  }, 1000)
 
   const quickPlay = throttle(async function quickPlay() {
-    const existingQuickPlayRoom = preparationRooms.find(room => room.metadata?.gameMode === GameMode.QUICKPLAY)
-    if(existingQuickPlayRoom){
+    const existingQuickPlayRoom = preparationRooms.find(
+      (room) => room.metadata?.gameMode === GameMode.QUICKPLAY
+    )
+    if (existingQuickPlayRoom) {
       joinPrepRoom(existingQuickPlayRoom)
     } else {
       createRoom(GameMode.QUICKPLAY)
@@ -180,8 +188,7 @@ export default function RoomMenu(props: {
         navigate("/game")
       }
     }
-  },
-  1000)
+  }, 1000)
 
   return (
     <Tabs className="my-container room-menu custom-bg">

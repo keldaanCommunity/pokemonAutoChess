@@ -73,6 +73,7 @@ import {
   OnRemoveFromShopCommand,
   OnSellDropCommand,
   OnShopCommand,
+  OnSpectateCommand,
   OnUpdateCommand
 } from "./commands/game-commands"
 import GameState from "./states/game-state"
@@ -371,6 +372,19 @@ export default class GameRoom extends Room<GameState> {
           this.dispatcher.dispatch(new OnLockCommand(), client.auth.uid)
         } catch (error) {
           logger.error("lock error", message)
+        }
+      }
+    })
+
+    this.onMessage(Transfer.SPECTATE, (client, spectatedPlayerId: string) => {
+      if (client.auth) {
+        try {
+          this.dispatcher.dispatch(new OnSpectateCommand(), {
+            id: client.auth.uid,
+            spectatedPlayerId
+          })
+        } catch (error) {
+          logger.error("spectate error", client.auth.uid, spectatedPlayerId)
         }
       }
     })

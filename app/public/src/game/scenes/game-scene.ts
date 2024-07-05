@@ -4,7 +4,6 @@ import { GameObjects, Scene } from "phaser"
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"
 import { DesignTiled } from "../../../../core/design"
 import { canSell } from "../../../../core/pokemon-entity"
-import Simulation from "../../../../core/simulation"
 import Player from "../../../../models/colyseus-models/player"
 import GameState from "../../../../rooms/states/game-state"
 import {
@@ -193,17 +192,6 @@ export default class GameScene extends Scene {
         this.removeFromShop(this.shopIndexHovered)
       }
     })
-  }
-
-  setPlayer(player: Player) {
-    this.setMap(player.map)
-    this.battle?.setPlayer(player)
-    this.board?.setPlayer(player)
-    this.itemsContainer?.setPlayer(player)
-  }
-
-  setSimulation(simulation: Simulation) {
-    this.battle?.setSimulation(simulation)
   }
 
   refreshShop() {

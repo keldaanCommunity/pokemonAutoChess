@@ -30,8 +30,8 @@ export default class PreparationState
   @type("string") minRank: EloRank | null
   @type("string") gameMode: GameMode = GameMode.NORMAL
   @type("boolean") noElo: boolean
-  @type(["string"]) whitelist: string[] | null
-  @type(["string"]) blacklist: string[] | null
+  @type(["string"]) whitelist: string[]
+  @type(["string"]) blacklist: string[]
 
   constructor(params: {
     ownerId?: string
@@ -52,8 +52,8 @@ export default class PreparationState
     this.noElo = params.noElo ?? false
     this.minRank = params.minRank ?? null
     this.gameMode = params.gameMode
-    this.whitelist = params.whitelist ?? null
-    this.blacklist = params.blacklist ?? null
+    this.whitelist = params.whitelist ?? []
+    this.blacklist = params.blacklist ?? []
   }
 
   addMessage(params: {
