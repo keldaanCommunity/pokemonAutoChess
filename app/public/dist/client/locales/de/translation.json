@@ -1873,7 +1873,7 @@
     "DARK": "Kritische Treffer von DARK Pokemon sind stärker und häufiger. Meelee DARK Pokemon Springen zum entferntesten Gegner.",
     "STEEL": "STEEL Pokemon verursachen einen Teil ihres Schadens als TRUE",
     "GROUND": "GROUND Pokemon erhalten alle 3 Sekunden zusätzlich ATK, DEF und SPE_DEF.",
-    "POISON": "POISON Pokemon haben die Chance ihr Ziel mit ihren Grundangriffen 4 Sekunden lang zu VERGIFTEN. Gift verursacht mit der Zeit TRUE.\nPOISON Pokemon können ihrem Ziel mit Standardangriffen 4 Sekunden lang POISONNED zufügen. POISONNED verursacht TRUE über Zeit",
+    "POISON": "POISON Pokemon können ihrem Ziel mit Standardangriffen 4 Sekunden lang POISONNED zufügen. POISONNED verursacht TRUE über Zeit",
     "DRAGON": "DRAGON verstärkt Synergien und erhält mehr Werte, wenn er vollständig entwickelt ist.",
     "FIELD": "Wenn ein FIELD Pokémon stirbt, werden alle anderen FIELD Pokémon geheilt und erhalten ATK_SPEED",
     "MONSTER": "MONSTER Pokémon können ihre Gegner FLINCH. Jedes Mal, wenn sie einen KO erleiden, erhalten sie ATK, heilen sich, erhöhen ihre maximalen HP und werden größer.",
