@@ -1891,7 +1891,7 @@
     "ARTIFICIAL": "ARTIFICIAL Pokémons geben einzigartige Items und erhalten ATK, AP und SHIELD, wenn sie Items tragen.",
     "BABY": "BABY können dir Pokémon-Eier bringen, um dich nach einer Niederlage zu trösten",
     "LIGHT": "LIGHT bringt einen Scheinwerfer auf das Schlachtfeld. Die Einheit, die zu Beginn des Kampfes im Rampenlicht steht, erhält einzigartige Boni.",
-    "WILD": "WILD Pokemon erhöhen ihren ATK, bewegen sich schneller und haben eine 25% Chance bei dem Ziel WOUND zu verursachen. Für jedes WILD Pokemon STAR auf dem Feld erhält der Spieler +1% Chance WILD Pokemon im Shop zu finden (+5% während PvE-Runden)"
+    "WILD": "WILD Pokemon erhöhen ihren ATK, bewegen sich schneller und haben eine 25% Chance bei dem Ziel WOUND zu verursachen. Für jedes WILD Pokemon STAR auf dem Feld erhält der Spieler +1% Chance WILD Pokemon im Shop zu finden (+5% während PvE-Runden)."
   },
   "title": {
     "NOVICE": "Anfänger",
