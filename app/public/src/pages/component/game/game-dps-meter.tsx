@@ -5,9 +5,9 @@ import { PVEStages } from "../../../../../models/pve-stages"
 import { useAppSelector } from "../../../hooks"
 import { preferences, savePreferences } from "../../../preferences"
 import { getAvatarSrc } from "../../../utils"
-import "./game-dps-meter.css"
 import GamePlayerDpsMeter from "./game-player-dps-meter"
 import GamePlayerHpsMeter from "./game-player-hps-meter"
+import "./game-dps-meter.css"
 
 export default function GameDpsMeter() {
   const { t } = useTranslation()

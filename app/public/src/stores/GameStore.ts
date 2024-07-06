@@ -195,10 +195,6 @@ export const gameSlice = createSlice({
     ) => {
       if (state.currentPlayerId === action.payload.id) {
         state.currentPlayerOpponentAvatar = action.payload.value
-        getGameScene()?.board?.updateOpponentAvatar(
-          state.currentPlayerOpponentId,
-          state.currentPlayerOpponentAvatar
-        )
       }
     },
     setOpponentTitle: (

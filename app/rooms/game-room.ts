@@ -73,6 +73,7 @@ import {
   OnRemoveFromShopCommand,
   OnSellDropCommand,
   OnShopCommand,
+  OnSpectateCommand,
   OnUpdateCommand
 } from "./commands/game-commands"
 import GameState from "./states/game-state"
@@ -375,6 +376,19 @@ export default class GameRoom extends Room<GameState> {
       }
     })
 
+    this.onMessage(Transfer.SPECTATE, (client, spectatedPlayerId: string) => {
+      if (client.auth) {
+        try {
+          this.dispatcher.dispatch(new OnSpectateCommand(), {
+            id: client.auth.uid,
+            spectatedPlayerId
+          })
+        } catch (error) {
+          logger.error("spectate error", client.auth.uid, spectatedPlayerId)
+        }
+      }
+    })
+
     this.onMessage(Transfer.LEVEL_UP, (client, message) => {
       if (!this.state.gameFinished && client.auth) {
         try {
@@ -551,14 +565,21 @@ export default class GameRoom extends Room<GameState> {
   }
 
   async onDispose() {
-    const numberOfPlayersAlive = values(this.state.players).filter(
-      (p) => p.alive && !p.isBot
-    ).length
-    if (numberOfPlayersAlive > 1) {
-      logger.warn(
-        `Game room has been disposed while they were still ${numberOfPlayersAlive} players alive.`
-      )
-      return // we skip elo compute/game history in case of technical issue such as a crash of node
+    const playersAlive = values(this.state.players).filter((p) => p.alive)
+    const humansAlive = playersAlive.filter((p) => !p.isBot)
+
+    // we skip elo compute/game history if game is not finished
+    // that is at least two players including one human are still alive
+    if (playersAlive.length >= 2 && humansAlive.length >= 1) {
+      if (humansAlive.length > 1) {
+        // this can happen if all players disconnect before the end
+        // or if there's another technical issue
+        // adding a log just in case
+        logger.warn(
+          `Game room has been disposed while they were still ${humansAlive.length} players alive.`
+        )
+      }
+      return // game not finished before being disposed, we skip elo compute/game history
     }
 
     try {
@@ -824,13 +845,16 @@ export default class GameRoom extends Room<GameState> {
     )
   }
 
-  fishPokemon(player: Player, pkm: Pkm) {
+  spawnOnBench(player: Player, pkm: Pkm, anim: "fishing" | "spawn" = "spawn") {
     const fish = PokemonFactory.createPokemonFromName(pkm, player)
     const x = getFirstAvailablePositionInBench(player.board)
     if (x !== undefined) {
       fish.positionX = x
       fish.positionY = 0
-      fish.action = PokemonActionState.FISH
+      if (anim === "fishing") {
+        fish.action = PokemonActionState.FISH
+      }
+
       player.board.set(fish.id, fish)
       this.clock.setTimeout(() => {
         fish.action = PokemonActionState.IDLE

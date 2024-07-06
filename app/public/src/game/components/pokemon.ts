@@ -530,6 +530,16 @@ export default class PokemonSprite extends DraggableObject {
     )
   }
 
+  spawnAnimation() {
+    this.displayAnimation("SPAWN")
+    const g = <GameScene>this.scene
+    g.animationManager?.animatePokemon(
+      this,
+      PokemonActionState.EMOTE,
+      this.flip
+    )
+  }
+
   hatchAnimation() {
     this.displayAnimation("HATCH")
     const g = <GameScene>this.scene

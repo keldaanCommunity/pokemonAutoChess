@@ -3,6 +3,7 @@ import { IPokemon } from "../../types"
 import { SynergyTriggers } from "../../types/Config"
 import {
   ArtificialItems,
+  Item,
   SynergyGivenByItem,
   SynergyItems
 } from "../../types/enum/Item"
@@ -59,6 +60,9 @@ export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
         if (!dragonDoubleTypes.has(family))
           dragonDoubleTypes.set(family, new Set())
         dragonDoubleTypes.get(family)!.add(values(pkm.types)[1])
+      }
+      if (pkm.items.has(Item.SHINY_STONE)) {
+        synergies.set(Synergy.LIGHT, (synergies.get(Synergy.LIGHT) ?? 0) + 2)
       }
     }
   })

@@ -570,7 +570,6 @@ export enum Pkm {
   SILVALLY_FLYING = "SILVALLY_FLYING",
   SILVALLY_ROCK = "SILVALLY_ROCK",
   SILVALLY_GROUND = "SILVALLY_GROUND",
-  SILVALLY_FLORA = "SILVALLY_FLORA",
   SILVALLY_GHOST = "SILVALLY_GHOST",
   TYPE_NULL = "TYPE_NULL",
   ZERAORA = "ZERAORA",
@@ -1536,14 +1535,13 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SILVALLY_GRASS]: "0773-0011",
   [Pkm.SILVALLY_ICE]: "0773-0014",
   [Pkm.SILVALLY_FIGHTING]: "0773-0001",
-  [Pkm.SILVALLY_LIGHT]: "0773",
+  [Pkm.SILVALLY_LIGHT]: "0773-0006",
   [Pkm.SILVALLY_POISON]: "0773-0003",
-  [Pkm.SILVALLY_SOUND]: "0773-0007",
+  [Pkm.SILVALLY_SOUND]: "0773",
   [Pkm.SILVALLY_STEEL]: "0773-0008",
   [Pkm.SILVALLY_FLYING]: "0773-0002",
   [Pkm.SILVALLY_ROCK]: "0773-0005",
   [Pkm.SILVALLY_GROUND]: "0773-0004",
-  [Pkm.SILVALLY_FLORA]: "0773-0006",
   [Pkm.SILVALLY_GHOST]: "0773-0007",
   [Pkm.DEWPIDER]: "0751",
   [Pkm.ARAQUANID]: "0752",
@@ -2351,7 +2349,6 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SILVALLY_FLYING]: Pkm.TYPE_NULL,
   [Pkm.SILVALLY_ROCK]: Pkm.TYPE_NULL,
   [Pkm.SILVALLY_GROUND]: Pkm.TYPE_NULL,
-  [Pkm.SILVALLY_FLORA]: Pkm.TYPE_NULL,
   [Pkm.SILVALLY_GHOST]: Pkm.TYPE_NULL,
   [Pkm.DEWPIDER]: Pkm.DEWPIDER,
   [Pkm.ARAQUANID]: Pkm.DEWPIDER,
@@ -2745,17 +2742,17 @@ export const AnimationConfig: {
   [Pkm.PIDGEY]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.FlapAround,
-    emote: AnimationType.Attack
+    emote: AnimationType.Shoot
   },
   [Pkm.PIDGEOTTO]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.FlapAround,
-    emote: AnimationType.Attack
+    emote: AnimationType.Shoot
   },
   [Pkm.PIDGEOT]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.FlapAround,
-    emote: AnimationType.Attack
+    emote: AnimationType.Shoot
   },
   [Pkm.HOPPIP]: {
     attack: AnimationType.Shoot,
@@ -4074,8 +4071,8 @@ export const AnimationConfig: {
   },
   [Pkm.TYRUNT]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Bite,
+    emote: AnimationType.RearUp
   },
   [Pkm.TYRANTRUM]: {
     attack: AnimationType.Attack,
@@ -6244,11 +6241,6 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.SILVALLY_GROUND]: {
-    attack: AnimationType.Strike,
-    ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot
-  },
-  [Pkm.SILVALLY_FLORA]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot

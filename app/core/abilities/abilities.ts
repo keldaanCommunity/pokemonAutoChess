@@ -6657,7 +6657,7 @@ export class EmptyLightStrategy extends AbilityStrategy {
           targetY: tg.positionY
         })
         tg.addSpecialDefense(-3, pokemon, 0, false)
-        tg.handleSpecialDamage(40, board, AttackType.SPECIAL, pokemon, crit)
+        tg.handleSpecialDamage(33, board, AttackType.SPECIAL, pokemon, crit)
         affectedTargetsIds.push(tg.id)
         const cells = board.getAdjacentCells(tg.positionX, tg.positionY)
         tg = cells
@@ -8974,7 +8974,7 @@ export class MoonDreamStrategy extends AbilityStrategy {
       pokemon.stars === 1 ? 3000 : pokemon.stars === 2 ? 6000 : 9000
 
     const shield = [10, 20, 30][pokemon.stars - 1] ?? 30
-    const count = [2, 3, 4][pokemon.stars - 1] ?? 4
+    const count = 3
 
     const allies = board.cells.filter(
       (p) => p && p.team === pokemon.team && p.id !== pokemon.id
@@ -8985,15 +8985,10 @@ export class MoonDreamStrategy extends AbilityStrategy {
           distanceM(
             a.positionX,
             a.positionY,
-            pokemon.positionX,
-            pokemon.positionY
+            pokemon.targetX,
+            pokemon.targetY
           ) -
-          distanceM(
-            b.positionX,
-            b.positionY,
-            pokemon.positionX,
-            pokemon.positionY
-          )
+          distanceM(b.positionX, b.positionY, pokemon.targetX, pokemon.targetY)
       )
       .slice(0, count)
 
@@ -9064,6 +9059,28 @@ export class CameraFlashStrategy extends AbilityStrategy {
   }
 }
 
+export class RockHeadStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = Math.round(1.2 * (pokemon.atk + pokemon.def))
+
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
+  }
+}
+
 export class FairyLockStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -9073,21 +9090,6 @@ export class FairyLockStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-
-    /*let atkLoss = Math.round(5 * (1 + pokemon.ap / 100))
-    if (target.atk > 1) {
-      if (target.atk - atkLoss < 1){
-        pokemon.atk += target.atk - 1
-        target.atk = 1
-      }
-      else {
-        pokemon.atk += atkLoss
-        target.atk -= atkLoss
-      }
-    }*/
-    //const damage = target.atk * Math.round(2 * (1 + pokemon.ap / 100))
-    //const damage = Math.round(40 * (1 + pokemon.ap / 100))
-    //pokemon.handleHeal(40, pokemon, 1, crit)
     
     const cells = board.getAdjacentCells(
       target.positionX,
@@ -9464,5 +9466,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MOON_DREAM]: new MoonDreamStrategy(),
   [Ability.STONE_AXE]: new StoneAxeStrategy(),
   [Ability.CAMERA_FLASH]: new CameraFlashStrategy(),
+  [Ability.ROCK_HEAD]: new RockHeadStrategy(),
   [Ability.FAIRY_LOCK]: new FairyLockStrategy()
 }

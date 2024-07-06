@@ -152,6 +152,7 @@ function OtherProfileActions({ resetSearch }) {
           className="bubbly orange"
           onClick={() => {
             dispatch(giveRole({ uid: user.id, role: profileRole }))
+            alert(`Role ${profileRole} given to ${user.name}`)
           }}
         >
           {t("give_role")}
@@ -178,6 +179,7 @@ function OtherProfileActions({ resetSearch }) {
           className="bubbly blue"
           onClick={() => {
             dispatch(giveTitle({ uid: user.id, title: title }))
+            alert(`Title ${title} given to ${user.name}`)
           }}
         >
           {t("give_title")}

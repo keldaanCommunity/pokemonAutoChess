@@ -2250,6 +2250,13 @@ export function displayAbility(
         .setScale(1)
       break
 
+    case "SPAWN":
+      addAbilitySprite("SPAWN", coordinates, true)
+        .setOrigin(0.5, -1.5)
+        .setDepth(0)
+        .setScale(2)
+      break
+
     case "EVOLUTION":
       addAbilitySprite("EVOLUTION", coordinates, true)
         .setOrigin(0.5, -0.4)

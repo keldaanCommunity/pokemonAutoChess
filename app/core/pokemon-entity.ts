@@ -788,13 +788,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       const alliesHit = allies
         .sort(
           (a, b) =>
-            distanceM(
-              a.positionX,
-              a.positionY,
-              this.positionX,
-              this.positionY
-            ) -
-            distanceM(b.positionX, b.positionY, this.positionX, this.positionY)
+            distanceM(a.positionX, a.positionY, this.targetX, this.targetY) -
+            distanceM(b.positionX, b.positionY, this.targetX, this.targetY)
         )
         .slice(0, 2)
 
@@ -820,13 +815,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.count.magmarizerCount++
     }
 
-    if (this.items.has(Item.ELECTIRIZER)) {
-      this.status.triggerParalysis(2000, this)
+    if (this.items.has(Item.ELECTIRIZER) && this.count.attackCount % 3 === 0) {
+      target.addPP(-15, this, 0, false)
+      target.count.manaBurnCount++
       target.status.triggerParalysis(2000, target)
-    }
-
-    if (target.items.has(Item.INCENSE) && chance(15 / 100)) {
-      this.status.triggerCharm(2000, target, this)
     }
 
     // Synergy effects on hit
@@ -1138,7 +1130,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
       this.name = Pkm.MIMIKYU_BUSTED
       this.passive = Passive.MIMIKYU_BUSTED
-      this.addAttackSpeed(30, this, 0, false)
+      this.addAttack(10, this, 0, false)
       this.status.triggerProtect(2000)
     }
   }

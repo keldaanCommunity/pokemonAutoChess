@@ -40,7 +40,7 @@ import {
   SynergyTriggers
 } from "../../types/Config"
 import { Effect } from "../../types/enum/Effect"
-import { BattleResult, GamePhaseState } from "../../types/enum/Game"
+import { BattleResult, GamePhaseState, Rarity } from "../../types/enum/Game"
 import {
   ArtificialItems,
   ItemComponents,
@@ -51,11 +51,10 @@ import {
   SynergyItems,
   ShinyItems,
   WeatherRocks,
-  FishingRod,
   FishingRods
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
+import { Pkm, PkmFamily, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { removeInArray } from "../../utils/array"
@@ -401,6 +400,10 @@ export class OnDragDropItemCommand extends Command<
     }
 
     const pokemon = player.getPokemonAt(x, y)
+    if (pokemon === undefined) {
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
 
     if (item === Item.METEORITE) {
       if (pokemon?.passive === Passive.ALIEN_DNA) {
@@ -450,27 +453,23 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
-    if (item === Item.RARE_CANDY) {
-      const evolution = pokemon?.evolution
-      if (
-        !evolution ||
-        evolution === Pkm.DEFAULT ||
-        pokemon.items.has(Item.EVIOLITE)
-      ) {
-        client.send(Transfer.DRAG_DROP_FAILED, message)
-        return
-      }
-      player.transformPokemon(pokemon, evolution)
-      removeInArray(player.items, item)
-      return
-    }
-
-    if (item === Item.EVIOLITE && !pokemon?.evolution) {
+    if (!pokemon.canHoldItems) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
     }
 
-    if (pokemon === undefined || !pokemon.canHoldItems) {
+    if (item === Item.EVIOLITE && pokemon.evolution === Pkm.DEFAULT) {
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
+
+    if (
+      item === Item.RARE_CANDY &&
+      (pokemon.evolution === Pkm.DEFAULT ||
+        pokemon.rarity === Rarity.UNIQUE ||
+        pokemon.rarity === Rarity.LEGENDARY ||
+        pokemon.rarity === Rarity.HATCH)
+    ) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
     }
@@ -607,12 +606,7 @@ export class OnSellDropCommand extends Command<
   }
 }
 
-export class OnRefreshCommand extends Command<
-  GameRoom,
-  {
-    id: string
-  }
-> {
+export class OnRefreshCommand extends Command<GameRoom, string> {
   execute(id) {
     const player = this.state.players.get(id)
     if (player && player.money >= 1 && player.alive) {
@@ -623,16 +617,26 @@ export class OnRefreshCommand extends Command<
   }
 }
 
-export class OnLockCommand extends Command<
-  GameRoom,
-  {
-    id: string
-  }
-> {
+export class OnLockCommand extends Command<GameRoom, string> {
   execute(id) {
     const player = this.state.players.get(id)
     if (player) {
       player.shopLocked = !player.shopLocked
+    }
+  }
+}
+
+export class OnSpectateCommand extends Command<
+  GameRoom,
+  {
+    id: string
+    spectatedPlayerId: string
+  }
+> {
+  execute({ id, spectatedPlayerId }) {
+    const player = this.state.players.get(id)
+    if (player) {
+      player.spectatedPlayerId = spectatedPlayerId
     }
   }
 }
@@ -1044,7 +1048,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
       if (bestRod && getFreeSpaceOnBench(player.board) > 0 && !isAfterPVE) {
         const fish = this.state.shop.pickFish(player, bestRod)
-        this.room.fishPokemon(player, fish)
+        this.room.spawnOnBench(player, fish, "fishing")
       }
 
       const grassLevel = player.synergies.get(Synergy.GRASS) ?? 0
@@ -1054,6 +1058,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       for (let i = 0; i < nbTrees; i++) {
         player.berryTreesStage[i] = max(3)(player.berryTreesStage[i] + 1)
       }
+
+      player.board.forEach((pokemon) => {
+        if (pokemon.items.has(Item.RARE_CANDY)) {
+          this.room.spawnOnBench(player, PkmFamily[pokemon.name])
+        }
+      })
     })
 
     this.spawnWanderingPokemons()
