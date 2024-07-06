@@ -3912,8 +3912,7 @@ export const AnimationConfig: {
   [Pkm.KROOKODILE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot,
-    shinyUnavailable: true
+    emote: AnimationType.Shoot
   },
   [Pkm.SOLOSIS]: {
     attack: AnimationType.Attack,
@@ -4119,8 +4118,7 @@ export const AnimationConfig: {
   [Pkm.SCOLIPEDE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot,
-    shinyUnavailable: true
+    emote: AnimationType.Shoot
   },
   [Pkm.PORYGON]: {
     attack: AnimationType.RearUp,
@@ -6287,8 +6285,7 @@ export const AnimationConfig: {
   [Pkm.LUNALA]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Charge,
-    emote: AnimationType.Shoot,
-    shinyUnavailable: true
+    emote: AnimationType.Shoot
   },
   [Pkm.MAGEARNA]: {
     attack: AnimationType.Shoot,
@@ -6378,14 +6375,12 @@ export const AnimationConfig: {
   [Pkm.WATTREL]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.FlapAround,
-    shinyUnavailable: true
+    emote: AnimationType.FlapAround
   },
   [Pkm.KILOWATTREL]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.FlapAround,
-    shinyUnavailable: true
+    emote: AnimationType.FlapAround
   },
   [Pkm.STANTLER]: {
     attack: AnimationType.Attack,
