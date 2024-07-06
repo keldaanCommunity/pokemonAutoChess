@@ -1312,7 +1312,7 @@
     "OVERHEAT": "Deals [30,SP] SPECIAL to all enemies. +30% damage if target is BURN",
     "HYPNOSIS": "Put SLEEP 1 enemy in the back lines for [2,3.5,6,SP=0.5] seconds",
     "MIMIC": "Copies the ability of the current target",
-    "HEX": "Deals [20,40,80,SP] SPECIAL to the target. Doubles damage if target is BURN, CONFUSION, FREEZE, PARALYSIS, POISONNED, SILENCE, SLEEP, FLINCH, CHARM, ARMOR_REDUCTION or WOUND",
+    "HEX": "Deals [20,40,80,SP] SPECIAL to the target. Doubles damage if target is BURN, CONFUSION, FREEZE, PARALYSIS, POISONNED, SILENCE, SLEEP, FLINCH, CHARM, ARMOR_REDUCTION, WOUND or LOCKED",
     "GROWTH": "Increase body size and ATK by [10,SP]. Grows twice as fast if weather is SUN",
     "HEAL_ORDER": "Deals [25,45,65,SP] SPECIAL to adjacent enemies and heal [25,45,65,SP] to adjacent allies",
     "SHELL_TRAP": "After the next PHYSICAL received, the trap explodes and deal [100,SP] SPECIAL to adjacent enemies",
@@ -1501,7 +1501,7 @@
     "MOON_DREAM": "Target falls SLEEP for [3,6,9] seconds and grants [10,20,30,SP] SHIELD to the caster's [3,4,5] closest allies",
     "STONE_AXE": "Deal [50,SP] TRUE. Lay sharp stones around the target. The stones stay on the field, dealing 10 PHYSICAL per second and WOUND Pokémons that walk on it, if not ROCK or FLYING",
     "CAMERA_FLASH": "The target is PARALYSIS for [2,SP] seconds",
-    "FAIRY_LOCK": "The target and adjacent enemies are LOCKED for 2 seconds. The user gains [2,SP] SPE_DEF"
+    "FAIRY_LOCK": "Spreads [70,SP] SPECIAL evenly across the target and adjacent enemies. Target is LOCKED for 1.5 seconds per enemy hit"
   },
   "effect": {
     "INGRAIN": "Ingrain",

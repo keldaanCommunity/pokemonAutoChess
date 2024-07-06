@@ -14138,11 +14138,11 @@ export class Klefki extends Pokemon {
   //rarity = Rarity.UNIQUE
   rarity= Rarity.COMMON
   stars = 1
-  hp = 170
-  atk = 15
-  def = 7
-  speDef = 6
-  maxPP = 90
+  hp = 200
+  atk = 16
+  def = 4
+  speDef = 3
+  maxPP = 80
   range = 3
   skill = Ability.FAIRY_LOCK
   attackSprite = AttackSprite.FAIRY_RANGE

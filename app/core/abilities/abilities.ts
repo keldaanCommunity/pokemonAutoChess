@@ -9074,22 +9074,55 @@ export class FairyLockStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
 
-    const cells = board.getAdjacentCells(target.positionX, target.positionY, true)
+    /*let atkLoss = Math.round(5 * (1 + pokemon.ap / 100))
+    if (target.atk > 1) {
+      if (target.atk - atkLoss < 1){
+        pokemon.atk += target.atk - 1
+        target.atk = 1
+      }
+      else {
+        pokemon.atk += atkLoss
+        target.atk -= atkLoss
+      }
+    }*/
+    //const damage = target.atk * Math.round(2 * (1 + pokemon.ap / 100))
+    //const damage = Math.round(40 * (1 + pokemon.ap / 100))
+    //pokemon.handleHeal(40, pokemon, 1, crit)
+    
+    const cells = board.getAdjacentCells(
+      target.positionX,
+      target.positionY,
+      true
+    )
+
+    let inhabitedCells = new Array<Cell>()
+    let enemiesHit = 0
 
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team){
+        inhabitedCells.push(cell)
+        enemiesHit += 1
+      }
+    })
+    inhabitedCells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
         pokemon.simulation.room.broadcast(Transfer.ABILITY, {
           id: pokemon.simulation.id,
           skill: pokemon.skill,
           targetX: cell.value.positionX,
           targetY: cell.value.positionY
         })
-
-        cell.value.status.triggerLocked(2000, cell.value)
+        cell.value.handleSpecialDamage(
+          Math.round(70 / enemiesHit),
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
       }
     })
     
-    pokemon.addSpecialDefense(2, pokemon, 1, crit)
+    target.status.triggerLocked(1500 * enemiesHit, target)
   }
 }
 
