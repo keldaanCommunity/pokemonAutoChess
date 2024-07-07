@@ -1883,7 +1883,7 @@
     "WIDE_LENS": "El poseedor gana +2 RANGE",
     "RAZOR_CLAW": "El titular gana +50% CRIT_CHANCE",
     "FLUFFY_TAIL": "El titular es inmune a todas las alteraciones de estado.",
-    "KINGS_ROCK": "+150 SHIELD cuando comienza el combate",
+    "KINGS_ROCK": "+100 SHIELD + 30% HP SHIELD cuando comienza el combate",
     "SHINY_CHARM": "Previene daños y otorga PROTECT durante 2 segundos la primera vez que los poseedores bajan del 30% de HP.",
     "GRACIDEA_FLOWER": "Cuando comienza el combate, el poseedor y los aliados adyacentes en la misma fila ganan +20 % ATK_SPEED",
     "FLAME_ORB": "El titular se quema pero aumenta su ATK en un 100%",

@@ -36,7 +36,7 @@
 - Rare Candy: after each round, spawns a 1 ⭐ copy of the holder on bench
 - Buff Upgrade: ~~+4~~ +5% Attack Speed per hit
 - Buff Soul Dew: ~~+8%~~ +10% Ability Power per second
-- Change King's Rock: ~~150 shield~~ 100 shield + 30% max HP as shield
+- Change King's Rock: ~~150 shield~~ 100 shield + 30% HP as shield
 
 # Gameplay
 

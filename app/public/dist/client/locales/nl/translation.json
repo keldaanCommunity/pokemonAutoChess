@@ -1328,7 +1328,7 @@
     "WIDE_LENS": "De houder krijgt +2 BEREIK",
     "RAZOR_CLAW": "De houder krijgt +50% CRIT_CHANCE",
     "FLUFFY_TAIL": "Holder is immuun voor alle statusveranderingen",
-    "KINGS_ROCK": "+150 SHIELD wanneer het gevecht begint",
+    "KINGS_ROCK": "+100 SHIELD + 30% HP SHIELD wanneer het gevecht begint",
     "SHINY_CHARM": "Voorkomt schade en biedt PROTECT gedurende 2 seconden de eerste keer dat de houder onder de 30% HP zakt",
     "GRACIDEA_FLOWER": "Wanneer het gevecht begint, krijgen de houder en aangrenzende bondgenoten in dezelfde rij +20% ATK_SPEED",
     "FLAME_ORB": "Houder is verbrand, maar verhoogt zijn ATK met 100%",

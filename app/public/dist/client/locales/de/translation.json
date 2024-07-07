@@ -1725,7 +1725,7 @@
     "WIDE_LENS": "Der Besitzer erhält +2 RANGE",
     "RAZOR_CLAW": "Der Inhaber erhält +50 % CRIT_CHANCE",
     "FLUFFY_TAIL": "Der Inhaber ist gegen alle Statusänderungen immun",
-    "KINGS_ROCK": "+150 SHIELD, wenn der Kampf beginnt",
+    "KINGS_ROCK": "+100 SHIELD + 30% HP as SHIELD, wenn der Kampf beginnt",
     "SHINY_CHARM": "Verhindert Schaden und gewährt 2 Sekunden lang PROTECT, wenn der Träger zum ersten Mal weniger als 30 % HP hat",
     "GRACIDEA_FLOWER": "Wenn der Kampf beginnt, erhalten der Träger und benachbarte Verbündete in derselben Reihe +20 % ATK_SPEED",
     "FLAME_ORB": "Der Halter wird verbrannt, erhöht aber seine ATK um 100 %.",

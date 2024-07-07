@@ -1888,7 +1888,7 @@
     "WIDE_LENS": "Le porteur gagne +2 RANGE",
     "RAZOR_CLAW": "Le détenteur gagne +50% CRIT_CHANCE",
     "FLUFFY_TAIL": "Le porteur est immunisé contre toutes les altérations de statut",
-    "KINGS_ROCK": "+150 SHIELD au début du combat",
+    "KINGS_ROCK": "+100 SHIELD + 30% HP as SHIELD au début du combat",
     "SHINY_CHARM": "Annule les dégats et déclenche PROTECT pendant 2 secondes la première fois que le porteur tombe sous les 30% de HP",
     "GRACIDEA_FLOWER": "Lorsque le combat commence, le porteur et les alliés adjacents dans la même ligne gagnent 20% ATK_SPEED",
     "FLAME_ORB": "Le porteur est BURN pendant le combat mais augmente son ATK de 100%",

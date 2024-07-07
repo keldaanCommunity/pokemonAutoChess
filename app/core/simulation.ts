@@ -475,6 +475,10 @@ export default class Simulation extends Schema implements ISimulation {
       pokemon.status.triggerRuneProtect(60000)
     }
 
+    if (item === Item.KINGS_ROCK) {
+      pokemon.addShield(0.3 * pokemon.hp, pokemon, 0, false)
+    }
+
     if (item === Item.DYNAMAX_BAND) {
       pokemon.addMaxHP(3 * pokemon.hp)
     }

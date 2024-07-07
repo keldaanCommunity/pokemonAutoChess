@@ -1891,7 +1891,7 @@
     "WIDE_LENS": "The holder gains +2 RANGE",
     "RAZOR_CLAW": "The holder gains +50% CRIT_CHANCE",
     "FLUFFY_TAIL": "Holder is immune to all status alterations",
-    "KINGS_ROCK": "+150 SHIELD when combat begins",
+    "KINGS_ROCK": "+100 SHIELD + 30% HP as SHIELD when combat begins",
     "SHINY_CHARM": "Prevents damage and give PROTECT for 2 seconds the first time the holders gets below 30% HP",
     "GRACIDEA_FLOWER": "When combat begins, the holder and adjacent allies in the same row gain +20 % ATK_SPEED",
     "FLAME_ORB": "Holder is burned but increase its ATK by 100%",
