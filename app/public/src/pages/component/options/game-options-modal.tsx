@@ -8,12 +8,13 @@ import { useAppDispatch } from "../../../hooks"
 import {
   IPreferencesState,
   preferences as initialPreferences,
-  savePreferences,
+  savePreferences
 } from "../../../preferences"
 import { selectLanguage } from "../../../stores/NetworkStore"
 import { getGameScene } from "../../game"
 import { Checkbox } from "../checkbox/checkbox"
-import KeybindInfo from "../keybind-info/keybind-info"
+import KeybindInfo from "./keybind-info"
+import GameFiles from "./game-files"
 import { Page } from "../main-sidebar/main-sidebar"
 
 import "./game-options-modal.css"
@@ -30,7 +31,7 @@ export default function GameOptionsModal(props: {
 
   function changePreference(
     key: keyof IPreferencesState,
-    value: string | number | boolean,
+    value: string | number | boolean
   ) {
     setPreferences({ ...preferences, [key]: value })
     savePreferences({ [key]: value })
@@ -54,6 +55,7 @@ export default function GameOptionsModal(props: {
             <Tab key="sound">{t("sound")}</Tab>
             <Tab key="interface">{t("interface")}</Tab>
             <Tab key="hotkeys">{t("hotkeys")}</Tab>
+            <Tab key="files">{t("game_files")}</Tab>
           </TabList>
 
           <TabPanel>
@@ -67,7 +69,7 @@ export default function GameOptionsModal(props: {
                 onInput={(e) =>
                   changePreference(
                     "musicVolume",
-                    Number.parseFloat((e.target as HTMLInputElement).value),
+                    Number.parseFloat((e.target as HTMLInputElement).value)
                   )
                 }
               ></input>
@@ -82,7 +84,7 @@ export default function GameOptionsModal(props: {
                 onInput={(e) =>
                   changePreference(
                     "sfxVolume",
-                    Number.parseFloat((e.target as HTMLInputElement).value),
+                    Number.parseFloat((e.target as HTMLInputElement).value)
                   )
                 }
               ></input>
@@ -160,6 +162,10 @@ export default function GameOptionsModal(props: {
 
           <TabPanel>
             <KeybindInfo />
+          </TabPanel>
+
+          <TabPanel>
+            <GameFiles />
           </TabPanel>
         </Tabs>
       </Modal.Body>

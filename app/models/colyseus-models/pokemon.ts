@@ -521,20 +521,6 @@ export class Scizor extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
-export class MegaScizor extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING, Synergy.STEEL])
-  rarity = Rarity.UNIQUE
-  stars = 3
-  hp = 250
-  atk = 48
-  def = 7
-  speDef = 7
-  maxPP = 80
-  range = 1
-  skill = Ability.DEFAULT
-  attackSprite = AttackSprite.NORMAL_MELEE
-}
-
 export class Kleavor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ROCK, Synergy.DARK])
   rarity = Rarity.UNIQUE
@@ -764,24 +750,6 @@ export class Medicham extends Pokemon {
   attackSprite = AttackSprite.PSYCHIC_RANGE
   additional = true
   stages = 2
-}
-
-export class MegaMedicham extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.PSYCHIC,
-    Synergy.HUMAN,
-    Synergy.FIGHTING
-  ])
-  rarity = Rarity.EPIC
-  stars = 3
-  hp = 300
-  atk = 35
-  def = 7
-  speDef = 7
-  maxPP = 60
-  range = 2
-  skill = Ability.DEFAULT
-  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Elekid extends Pokemon {
@@ -14314,7 +14282,6 @@ export const PokemonClasses: Record<
   [Pkm.MEGA_STEELIX]: MegaSteelix,
   [Pkm.SCYTHER]: Scyther,
   [Pkm.SCIZOR]: Scizor,
-  [Pkm.MEGA_SCIZOR]: MegaScizor,
   [Pkm.KLEAVOR]: Kleavor,
   [Pkm.RIOLU]: Riolu,
   [Pkm.LUCARIO]: Lucario,
@@ -14355,7 +14322,6 @@ export const PokemonClasses: Record<
   [Pkm.GLACEON]: Glaceon,
   [Pkm.MEDITITE]: Meditite,
   [Pkm.MEDICHAM]: Medicham,
-  [Pkm.MEGA_MEDICHAM]: MegaMedicham,
   [Pkm.NUMEL]: Numel,
   [Pkm.CAMERUPT]: Camerupt,
   [Pkm.MEGA_CAMERUPT]: MegaCamerupt,
