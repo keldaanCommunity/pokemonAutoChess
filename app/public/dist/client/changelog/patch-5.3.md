@@ -34,6 +34,9 @@
 - Shiny Stone: now gives +3 to Light synergy count
 - Golden Rod: Unique pool no longer tier 3 only, but taken from unique propositions list at t10, duos excluded. Unique no longer matches top synergies.
 - Rare Candy: after each round, spawns a 1 ⭐ copy of the holder on bench
+- Buff Upgrade: ~~+4~~ +5% Attack Speed per hit
+- Buff Soul Dew: ~~+8%~~ +10% Ability Power per second
+- Change King's Rock: ~~150 shield~~ 100 shield + 30% max HP as shield
 
 # Gameplay
 

@@ -399,7 +399,7 @@ export default class Status extends Schema implements IStatus {
   updateSoulDew(dt: number, pkm: PokemonEntity) {
     if (this.soulDewCooldown - dt <= 0) {
       this.soulDew = false
-      pkm.addAbilityPower(8, pkm, 0, false)
+      pkm.addAbilityPower(10, pkm, 0, false)
       pkm.count.soulDewCount++
       if (pkm.items.has(Item.SOUL_DEW)) {
         this.triggerSoulDew(1000)
@@ -1042,9 +1042,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerPokerus() {
-    if (
-      !this.pokerus
-    ) {
+    if (!this.pokerus) {
       this.pokerus = true
     }
   }
@@ -1054,16 +1052,17 @@ export default class Status extends Schema implements IStatus {
       pokemon.addAttack(1, pokemon, 0, false)
       pokemon.addAbilityPower(10, pokemon, 0, false)
       let infectCount = 0
-      let cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
+      let cells = board.getAdjacentCells(
+        pokemon.positionX,
+        pokemon.positionY,
+        false
+      )
       cells.forEach((cell) => {
-        if (
-          infectCount < 2 
-          && cell.value !== undefined
-        ){
+        if (infectCount < 2 && cell.value !== undefined) {
           if (
-            cell.value.team === pokemon.team 
-            && cell.value.status.pokerus === false
-          ){
+            cell.value.team === pokemon.team &&
+            cell.value.status.pokerus === false
+          ) {
             cell.value.status.triggerPokerus()
             infectCount++
           }
