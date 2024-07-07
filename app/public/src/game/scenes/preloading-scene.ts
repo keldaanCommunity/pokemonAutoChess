@@ -21,6 +21,4 @@ export class PreloadingScene extends Phaser.Scene {
       this.onComplete()
     })
   }
-
-  create() {}
 }

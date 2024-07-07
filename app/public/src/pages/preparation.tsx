@@ -11,7 +11,6 @@ import GameState from "../../../rooms/states/game-state"
 import PreparationState from "../../../rooms/states/preparation-state"
 import { Transfer } from "../../../types"
 import { logger } from "../../../utils/logger"
-import { PreloadingScene } from "../game/scenes/preloading-scene"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import {
   joinPreparation,
@@ -53,16 +52,10 @@ export default function Preparation() {
     (state) => state.network.preparation
   )
   const initialized = useRef<boolean>(false)
-  const preloading = useRef<boolean>(false)
   const [toGame, setToGame] = useState<boolean>(false)
   const [toAuth, setToAuth] = useState<boolean>(false)
   const [toLobby, setToLobby] = useState<boolean>(false)
   const connectingToGame = useRef<boolean>(false)
-  const gameRef = useRef<Phaser.Game | null>(null)
-  const preloadingScene = useRef<PreloadingScene>()
-  const [preloadingMessage, setPreloadingMessage] = useState<string>(
-    t("preloading_start")
-  )
 
   useEffect(() => {
     const reconnect = async () => {
@@ -225,28 +218,6 @@ export default function Preparation() {
     }
   })
 
-  useEffect(() => {
-    if (!preloading.current) {
-      preloading.current = true
-      preloadingScene.current = new PreloadingScene(
-        () =>
-          setPreloadingMessage(
-            preloadingScene.current?.loadingManager.statusMessage ?? ""
-          ),
-        () => {
-          setPreloadingMessage(t("finished_preloading"))
-          gameRef.current?.destroy(true)
-          gameRef.current = null
-        }
-      )
-      gameRef.current = new Phaser.Game({
-        type: Phaser.AUTO,
-        scene: [preloadingScene.current],
-        backgroundColor: "#000000"
-      })
-    }
-  }, [preloading, t])
-
   if (toGame) {
     return <Navigate to="/game" />
   }
@@ -273,9 +244,6 @@ export default function Preparation() {
           <PreparationMenu />
           <Chat source="preparation" />
         </main>
-        <footer>
-          <p id="preloading-message">{preloadingMessage}</p>
-        </footer>
       </div>
     )
   }
