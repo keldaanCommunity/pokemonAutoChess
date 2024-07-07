@@ -70,21 +70,25 @@ export class CountEvolutionRule extends EvolutionRule {
   }
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
-    if (pokemon.evolution === Pkm.DEFAULT || pokemon.items.has(Item.EVIOLITE))
+    const copies = values(player.board).filter((p) => p.index === pokemon.index)
+    if (
+      pokemon.evolution === Pkm.DEFAULT ||
+      copies.some((p) => p.items.has(Item.EVIOLITE))
+    ) {
       return false
-    const count = values(player.board).filter(
-      (pkm) => pkm.index === pokemon.index
-    ).length
-    return count >= this.numberRequired
+    }
+    return copies.length >= this.numberRequired
   }
 
   canEvolveIfBuyingOne(pokemon: Pokemon, player: Player): boolean {
-    if (pokemon.evolution === Pkm.DEFAULT || pokemon.items.has(Item.EVIOLITE))
+    const copies = values(player.board).filter((p) => p.index === pokemon.index)
+    if (
+      pokemon.evolution === Pkm.DEFAULT ||
+      copies.some((p) => p.items.has(Item.EVIOLITE))
+    ) {
       return false
-    const count = values(player.board).filter(
-      (pkm) => pkm.index === pokemon.index
-    ).length
-    return count >= this.numberRequired - 1
+    }
+    return copies.length >= this.numberRequired - 1
   }
 
   evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {

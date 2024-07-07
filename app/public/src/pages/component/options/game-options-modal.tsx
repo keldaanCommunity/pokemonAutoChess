@@ -150,7 +150,6 @@ export default function GameOptionsModal(props: {
                   changePreference("disableAnimatedTilemap", checked)
                   const gameScene = getGameScene()
                   if (gameScene) {
-                    // biome-ignore lint/suspicious/noExplicitAny: no types for animatedTiles plugin
                     const animatedTiles = (gameScene?.sys as any).animatedTiles
                     if (checked) animatedTiles.pause()
                     else animatedTiles.resume()

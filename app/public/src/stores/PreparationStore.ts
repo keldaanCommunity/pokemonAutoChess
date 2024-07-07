@@ -17,6 +17,8 @@ interface IUserPreparationState {
   user: GameUser | undefined
   botsList: IBot[] | null
   gameMode: GameMode
+  whitelist: string[]
+  blacklist: string[]
 }
 
 const initialState: IUserPreparationState = {
@@ -30,7 +32,9 @@ const initialState: IUserPreparationState = {
   password: null,
   noElo: false,
   botsList: null,
-  gameMode: GameMode.NORMAL
+  gameMode: GameMode.NORMAL,
+  whitelist: [],
+  blacklist: []
 }
 
 export const preparationSlice = createSlice({
@@ -91,6 +95,12 @@ export const preparationSlice = createSlice({
     leavePreparation: () => initialState,
     setBotsList: (state, action: PayloadAction<IBot[] | null>) => {
       state.botsList = action.payload
+    },
+    setWhiteList: (state, action: PayloadAction<string[]>) => {
+      state.whitelist = action.payload
+    },
+    setBlackList: (state, action: PayloadAction<string[]>) => {
+      state.blacklist = action.payload
     }
   }
 })
@@ -109,6 +119,8 @@ export const {
   setOwnerName,
   setPassword,
   setNoELO,
+  setWhiteList,
+  setBlackList,
   setGameMode,
   leavePreparation
 } = preparationSlice.actions

@@ -123,7 +123,7 @@ export default config({
       res.send(Pkm)
     })
 
-    app.get("/titles", (req, res) => {
+    app.get("/title-names", (req, res) => {
       res.send(Title)
     })
 
@@ -203,11 +203,8 @@ export default config({
     connect(process.env.MONGO_URI!)
     admin.initializeApp({
       credential: admin.credential.cert({
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         projectId: process.env.FIREBASE_PROJECT_ID!,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         privateKey: process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, "\n")
       })
     })

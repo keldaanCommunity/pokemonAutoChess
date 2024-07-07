@@ -35,7 +35,6 @@ import Player from "./colyseus-models/player"
 import PokemonFactory from "./pokemon-factory"
 import { getPokemonData } from "./precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed/precomputed-rarity"
-import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "./precomputed/precomputed-types-and-categories"
 import { PVEStages } from "./pve-stages"
 
 export function getPoolSize(rarity: Rarity, maxStars: number): number {
@@ -415,7 +414,13 @@ export default class Shop {
     )
 
     let specificTypeWanted: Synergy | undefined = undefined
-    if (wildChance > 0 && chance(wildChance)) {
+
+    const incenseHolder = values(player.board).find((p) =>
+      p.items.has(Item.INCENSE)
+    )
+    if (incenseHolder && chance(5 / 100)) {
+      specificTypeWanted = pickRandomIn(values(incenseHolder.types))
+    } else if (wildChance > 0 && chance(wildChance)) {
       specificTypeWanted = Synergy.WILD
     }
 
@@ -482,9 +487,11 @@ export default class Shop {
         }
       })
       const typeWanted = pickRandomIn(topSynergies)
-      const uniques =
-        PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[typeWanted].uniquePokemons
-      if (rarity === Rarity.SPECIAL && uniques.length > 0) {
+
+      if (rarity === Rarity.SPECIAL) {
+        const uniques = UniqueShop.filter(
+          (p) => p in PkmDuos === false
+        ) as Pkm[]
         fish = pickRandomIn(uniques)
       } else {
         fish = this.getRandomPokemonFromPool(rarity, player, finals, typeWanted)

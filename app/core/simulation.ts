@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-extra-semi */
 import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
@@ -22,8 +21,8 @@ import {
 } from "../types/enum/Game"
 import { Berries, CraftableItems, Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
-import { Synergy } from "../types/enum/Synergy"
 import { Pkm } from "../types/enum/Pokemon"
+import { Synergy } from "../types/enum/Synergy"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
 import { IPokemonData } from "../types/interfaces/PokemonData"
 import { pickRandomIn, randomBetween, shuffleArray } from "../utils/random"
@@ -403,7 +402,7 @@ export default class Simulation extends Schema implements ISimulation {
     )
   }
 
-  applyItemsEffects(pokemon: PokemonEntity) {
+  applyItemsEffects(pokemon: PokemonEntity, ignoreItemsEffects?: Item[]) {
     if (pokemon.passive === Passive.PICKUP && pokemon.items.size === 0) {
       pokemon.items.add(pickRandomIn(CraftableItems.concat(Berries)))
     }
@@ -419,7 +418,7 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     pokemon.items.forEach((item) => {
-      this.applyItemEffect(pokemon, item)
+      !ignoreItemsEffects?.includes(item) && this.applyItemEffect(pokemon, item)
     })
 
     if (pokemon.passive === Passive.SYNCHRO) {
@@ -617,12 +616,16 @@ export default class Simulation extends Schema implements ISimulation {
             getPokemonData(p)
           )
           const spawns: IPokemonData[] = []
-          const pickWild = (rarity: Rarity, tier: number) =>
-            spawns.push(
-              pickRandomIn(
-                wilds.filter((p) => p.rarity === rarity && p.stars === tier)
-              )
+          const pickWild = (rarity: Rarity, tier: number) => {
+            const randomWild = pickRandomIn(
+              wilds.filter((p) => p.rarity === rarity && p.stars === tier)
             )
+            if (randomWild) {
+              spawns.push(randomWild)
+            } else {
+              console.log("no pokemon found for white flute call", rarity, tier)
+            }
+          }
 
           if (this.stageLevel <= 5) {
             pickWild(Rarity.COMMON, 1)
@@ -630,32 +633,32 @@ export default class Simulation extends Schema implements ISimulation {
             pickWild(Rarity.UNCOMMON, 1)
           } else if (this.stageLevel <= 10) {
             pickWild(Rarity.COMMON, 2)
-            pickWild(Rarity.UNCOMMON, 1)
+            pickWild(Rarity.COMMON, 1)
             pickWild(Rarity.UNCOMMON, 1)
           } else if (this.stageLevel <= 15) {
+            pickWild(Rarity.UNCOMMON, 1)
             pickWild(Rarity.COMMON, 2)
-            pickWild(Rarity.UNCOMMON, 2)
             pickWild(Rarity.RARE, 1)
           } else if (this.stageLevel <= 20) {
             pickWild(Rarity.UNCOMMON, 2)
-            pickWild(Rarity.RARE, 2)
+            pickWild(Rarity.RARE, 1)
             pickWild(Rarity.EPIC, 1)
           } else if (this.stageLevel <= 25) {
+            pickWild(Rarity.UNCOMMON, 2)
             pickWild(Rarity.RARE, 2)
             pickWild(Rarity.EPIC, 1)
-            pickWild(Rarity.UNIQUE, 1)
           } else if (this.stageLevel <= 30) {
             pickWild(Rarity.RARE, 2)
+            pickWild(Rarity.EPIC, 1)
             pickWild(Rarity.EPIC, 2)
-            pickWild(Rarity.UNIQUE, 1)
           } else if (this.stageLevel <= 35) {
             pickWild(Rarity.RARE, 2)
             pickWild(Rarity.EPIC, 2)
-            pickWild(Rarity.ULTRA, 2)
+            pickWild(Rarity.UNIQUE, 3)
           } else {
             pickWild(Rarity.EPIC, 2)
-            pickWild(Rarity.EPIC, 2)
-            pickWild(Rarity.ULTRA, 3)
+            pickWild(Rarity.UNIQUE, 3)
+            pickWild(Rarity.ULTRA, 2)
           }
 
           spawns.forEach((spawn) => {
@@ -1246,32 +1249,22 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.FLUID: {
-          pokemon.addAttackSpeed(4 * activeSynergies, pokemon, 0, false)
-          pokemon.addShield(7 * activeSynergies, pokemon, 0, false)
+          pokemon.addAttackSpeed(2 * activeSynergies, pokemon, 0, false)
+          pokemon.addMaxHP(5 * activeSynergies)
           break
         }
 
         case Effect.SHAPELESS: {
           pokemon.effects.add(Effect.SHAPELESS)
           pokemon.addAttackSpeed(4 * activeSynergies, pokemon, 0, false)
-          pokemon.addShield(7 * activeSynergies, pokemon, 0, false)
-          pokemon.addAttack(1 * activeSynergies, pokemon, 0, false)
-          pokemon.addAbilityPower(5 * activeSynergies, pokemon, 0, false)
+          pokemon.addMaxHP(10 * activeSynergies)
           break
         }
 
         case Effect.ETHEREAL: {
           pokemon.effects.add(Effect.ETHEREAL)
-          pokemon.addAttackSpeed(4 * activeSynergies, pokemon, 0, false)
-          pokemon.addShield(7 * activeSynergies, pokemon, 0, false)
-          pokemon.addAttack(1 * activeSynergies, pokemon, 0, false)
-          pokemon.addAbilityPower(5 * activeSynergies, pokemon, 0, false)
-          if (types.has(Synergy.AMORPHOUS)) {
-            pokemon.addAttackSpeed(4 * activeSynergies, pokemon, 0, false)
-            pokemon.addShield(7 * activeSynergies, pokemon, 0, false)
-            pokemon.addAttack(1 * activeSynergies, pokemon, 0, false)
-            pokemon.addAbilityPower(5 * activeSynergies, pokemon, 0, false)
-          }
+          pokemon.addAttackSpeed(6 * activeSynergies, pokemon, 0, false)
+          pokemon.addMaxHP(15 * activeSynergies)
           break
         }
 

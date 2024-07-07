@@ -1,4 +1,4 @@
-const notificationIcons = /[🔴🟠🟡🟢🔵🟣💬]/g
+const notificationIcons = /[🔴🟠🟡🟢🔵🟣💬]/gu
 
 export function setTitleNotificationIcon(message: string) {
   document.title = `${message} ${document.title.replace(notificationIcons, "")}`

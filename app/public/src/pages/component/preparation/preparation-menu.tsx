@@ -6,8 +6,10 @@ import { IGameUser } from "../../../../../models/colyseus-models/game-user"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import { Role } from "../../../../../types"
+import { MAX_PLAYERS_PER_GAME } from "../../../../../types/Config"
 import { BotDifficulty, GameMode } from "../../../../../types/enum/Game"
 import { throttle } from "../../../../../utils/function"
+import { max } from "../../../../../utils/number"
 import { setTitleNotificationIcon } from "../../../../../utils/window"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
@@ -63,6 +65,12 @@ export default function PreparationMenu() {
   const isAdmin = user?.role === Role.ADMIN
   const isModerator = user?.role === Role.MODERATOR
 
+  const nbExpectedPlayers = useAppSelector((state) =>
+    state.preparation.whitelist && state.preparation.whitelist.length > 0
+      ? max(MAX_PLAYERS_PER_GAME)(state.preparation.whitelist.length)
+      : MAX_PLAYERS_PER_GAME
+  )
+
   useEffect(() => {
     if (allUsersReady) {
       setTitleNotificationIcon("🟢")
@@ -76,7 +84,8 @@ export default function PreparationMenu() {
   }, [nbUsersReady, users.length])
 
   const humans = users.filter((u) => !u.isBot)
-  const isElligibleForELO = gameMode === GameMode.QUICKPLAY || users.filter((u) => !u.isBot).length >= 2
+  const isElligibleForELO =
+    gameMode === GameMode.QUICKPLAY || users.filter((u) => !u.isBot).length >= 2
   const averageElo = Math.round(
     humans.reduce((acc, u) => acc + u.elo, 0) / humans.length
   )
@@ -162,7 +171,9 @@ export default function PreparationMenu() {
         <p>{t("not_elligible_elo_hint")}</p>
       ) : null}
 
-      {gameMode === GameMode.NORMAL && users.length === 1 && <p>{t("add_bot_or_wait_hint")}</p>}
+      {gameMode === GameMode.NORMAL && users.length === 1 && (
+        <p>{t("add_bot_or_wait_hint")}</p>
+      )}
     </>
   )
 
@@ -190,7 +201,8 @@ export default function PreparationMenu() {
       </button>
     )
 
-  const roomNameInput = gameMode === GameMode.NORMAL && (isOwner || isModerator || isAdmin) &&
+  const roomNameInput = gameMode === GameMode.NORMAL &&
+    (isOwner || isModerator || isAdmin) &&
     user &&
     !user.anonymous && (
       <div className="my-input-group">
@@ -255,7 +267,7 @@ export default function PreparationMenu() {
     </p>
   )
 
-  const readyButton = gameMode === GameMode.NORMAL && (
+  const readyButton = gameMode === GameMode.NORMAL && users.length > 0 && (
     <button
       className={cc("bubbly", "ready-button", isReady ? "green" : "orange")}
       onClick={() => {
@@ -283,7 +295,7 @@ export default function PreparationMenu() {
     <div className="preparation-menu my-container is-centered custom-bg">
       <header>
         <h1>
-          {name}: {users.length}/8
+          {name}: {users.length}/{nbExpectedPlayers}
         </h1>
         {headerMessage}
       </header>

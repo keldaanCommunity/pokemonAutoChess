@@ -1,4 +1,3 @@
-/* eslint-disable no-unsafe-optional-chaining */
 import { XMLParser } from "fast-xml-parser"
 import fs from "fs"
 import gracefulFs from "graceful-fs"

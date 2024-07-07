@@ -34,12 +34,14 @@ export default class SimplePlayer extends Schema implements ISimplePlayer {
     name: string,
     avatar: string,
     rank: number,
-    pokemons: IPokemonRecord[],
+    pokemons: IPokemonRecord[] | ArraySchema<IPokemonRecord>,
     exp: number,
     title: string,
     role: Role,
-    synergies: Array<{ name: Synergy; value: number }>,
-    elo: number
+    synergies:
+      | Array<{ name: Synergy; value: number }>
+      | ArraySchema<{ name: Synergy; value: number }>,
+    elo: number,
   ) {
     super()
     this.id = id

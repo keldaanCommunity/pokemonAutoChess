@@ -93,7 +93,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       minRank: options.minRank ?? null,
       noElo: options.noElo ?? false,
       gameMode: options.gameMode,
-      whitelist: options.whitelist ?? null,
+      whitelist: options.whitelist ?? [],
       blacklist: options.blacklist ?? [],
       tournamentId: options.tournamentId ?? null,
       bracketId: options.bracketId ?? null

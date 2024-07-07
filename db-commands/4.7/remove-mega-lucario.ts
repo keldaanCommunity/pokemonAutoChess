@@ -21,7 +21,6 @@ async function removePokemonFromGame(
 ) {
   try {
     logger.info("connect to db ...")
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const db = await connect(process.env.MONGO_URI!)
 
     // Bots

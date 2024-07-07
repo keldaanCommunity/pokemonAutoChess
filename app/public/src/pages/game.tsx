@@ -64,14 +64,12 @@ import {
   setOpponentName,
   setOpponentTitle,
   setPhase,
-  setPlayer,
   setPlayerExperienceManager,
   setPokemonCollection,
   setPokemonProposition,
   setRoundTime,
   setShop,
   setShopLocked,
-  setSimulation,
   setStageLevel,
   setStreak,
   setSynergies,
@@ -183,18 +181,7 @@ export default function Game() {
   )
 
   function playerClick(id: string) {
-    gameContainer.onPlayerClick(id)
-
-    if (room?.state?.players) {
-      const player = room?.state?.players.get(id)
-      if (player) {
-        dispatch(setPlayer(player))
-        const simulation = room?.state?.simulations.get(player.simulationId)
-        if (simulation) {
-          dispatch(setSimulation(simulation))
-        }
-      }
-    }
+    room?.send(Transfer.SPECTATE, id)
   }
 
   const leave = useCallback(async () => {
@@ -432,7 +419,6 @@ export default function Game() {
 
       room.state.simulations.onAdd((simulation) => {
         gameContainer.initializeSimulation(simulation)
-        dispatch(setSimulation(simulation))
 
         simulation.listen("weather", (value) => {
           dispatch(setWeather({ id: simulation.id, value: value }))
@@ -553,7 +539,6 @@ export default function Game() {
           dispatch(setStreak(player.streak))
           dispatch(setShopLocked(player.shopLocked))
           dispatch(setPokemonCollection(player.pokemonCollection))
-          dispatch(setPlayer(player))
 
           player.listen("interest", (value) => {
             dispatch(setInterest(value))
@@ -625,7 +610,7 @@ export default function Game() {
           dispatch(setLoadingProgress({ id: player.id, value: value }))
         })
         player.listen("map", (newMap) => {
-          if (player.id === uid) {
+          if (player.id === currentPlayerId) {
             const gameScene = getGameScene()
             if (gameScene) {
               gameScene.setMap(newMap)
@@ -643,6 +628,25 @@ export default function Game() {
             }
           }
           dispatch(changePlayer({ id: player.id, field: "map", value: newMap }))
+        })
+
+        player.listen("spectatedPlayerId", (spectatedPlayerId) => {
+          if (room?.state?.players) {
+            const spectatedPlayer = room?.state?.players.get(spectatedPlayerId)
+            const gameContainer = getGameContainer()
+            if (spectatedPlayer && player.id === uid) {
+              gameContainer.setPlayer(spectatedPlayer)
+
+              const simulation = room.state.simulations.get(
+                spectatedPlayer.simulationId
+              )
+              if (simulation) {
+                gameContainer.setSimulation(simulation)
+              }
+            }
+
+            gameContainer.gameScene?.board?.updateScoutingAvatars()
+          }
         })
 
         const fields: NonFunctionPropNames<IPlayer>[] = [

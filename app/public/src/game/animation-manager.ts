@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-extra-semi */
-/* eslint-disable max-len */
 import { AnimationComplete, AnimationType } from "../../../types/Animation"
 import {
   Orientation,

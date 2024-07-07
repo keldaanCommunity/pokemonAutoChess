@@ -88,6 +88,7 @@ export enum Transfer {
   TOGGLE_READY = "TOGGLE_READY",
   TOGGLE_NO_ELO = "TOGGLE_NO_ELO",
   REFRESH = "REFRESH",
+  SPECTATE = "SPECTATE",
   LOCK = "LOCK",
   LEVEL_UP = "LEVEL_UP",
   SHOP = "SHOP",
@@ -295,8 +296,10 @@ export interface ISimplePlayer {
   avatar: string
   title: string
   role: Role
-  pokemons: IPokemonRecord[]
-  synergies: Array<{ name: Synergy; value: number }>
+  pokemons: IPokemonRecord[] | ArraySchema<IPokemonRecord>
+  synergies:
+    | Array<{ name: Synergy; value: number }>
+    | ArraySchema<{ name: Synergy; value: number }>
 }
 
 export interface IGameHistorySimplePlayer extends ISimplePlayer {
@@ -630,7 +633,7 @@ export interface IPreparationMetadata {
   gameStarted: boolean
   minRank: string | null
   gameMode: GameMode
-  whitelist: string[] | null
+  whitelist: string[]
   blacklist: string[]
   tournamentId: string | null
   bracketId: string | null

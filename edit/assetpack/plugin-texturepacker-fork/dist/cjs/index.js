@@ -83,7 +83,6 @@ function texturePacker(options) {
                 out.forEach((o) => {
                     const oo = o.split(front)[0];
                     if (o.endsWith('.json')) {
-                        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                         !cacheMap.get(oo) && cacheMap.set(oo, { paths: [], name: processor.trimOutputPath(`${oo}.json`) });
                         const d = cacheMap.get(oo);
                         d.paths.push(processor.trimOutputPath(o));

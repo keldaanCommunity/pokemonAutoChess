@@ -6657,7 +6657,7 @@ export class EmptyLightStrategy extends AbilityStrategy {
           targetY: tg.positionY
         })
         tg.addSpecialDefense(-3, pokemon, 0, false)
-        tg.handleSpecialDamage(40, board, AttackType.SPECIAL, pokemon, crit)
+        tg.handleSpecialDamage(33, board, AttackType.SPECIAL, pokemon, crit)
         affectedTargetsIds.push(tg.id)
         const cells = board.getAdjacentCells(tg.positionX, tg.positionY)
         tg = cells
@@ -8974,7 +8974,7 @@ export class MoonDreamStrategy extends AbilityStrategy {
       pokemon.stars === 1 ? 3000 : pokemon.stars === 2 ? 6000 : 9000
 
     const shield = [10, 20, 30][pokemon.stars - 1] ?? 30
-    const count = [2, 3, 4][pokemon.stars - 1] ?? 4
+    const count = 3
 
     const allies = board.cells.filter(
       (p) => p && p.team === pokemon.team && p.id !== pokemon.id
@@ -8985,15 +8985,10 @@ export class MoonDreamStrategy extends AbilityStrategy {
           distanceM(
             a.positionX,
             a.positionY,
-            pokemon.positionX,
-            pokemon.positionY
+            pokemon.targetX,
+            pokemon.targetY
           ) -
-          distanceM(
-            b.positionX,
-            b.positionY,
-            pokemon.positionX,
-            pokemon.positionY
-          )
+          distanceM(b.positionX, b.positionY, pokemon.targetX, pokemon.targetY)
       )
       .slice(0, count)
 
@@ -9022,6 +9017,7 @@ export class StoneAxeStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     const damage = 50
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
 
     cells.forEach((cell) => {
       const index = cell.y * board.columns + cell.x
@@ -9045,14 +9041,6 @@ export class StoneAxeStrategy extends AbilityStrategy {
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.effects.add(Effect.STEALTH_ROCKS)
       }
-
-      target.handleSpecialDamage(
-        damage,
-        board,
-        AttackType.TRUE,
-        pokemon,
-        crit
-      )
     })
   }
 }
@@ -9066,8 +9054,30 @@ export class CameraFlashStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    
+
     target.status.triggerParalysis(2000, target)
+  }
+}
+
+export class RockHeadStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = Math.round(1.2 * (pokemon.atk + pokemon.def))
+
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
   }
 }
 
@@ -9408,5 +9418,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ANCIENT_POWER]: new AncientPowerStrategy(),
   [Ability.MOON_DREAM]: new MoonDreamStrategy(),
   [Ability.STONE_AXE]: new StoneAxeStrategy(),
-  [Ability.CAMERA_FLASH]: new CameraFlashStrategy()
+  [Ability.CAMERA_FLASH]: new CameraFlashStrategy(),
+  [Ability.ROCK_HEAD]: new RockHeadStrategy()
 }

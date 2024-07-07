@@ -536,8 +536,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.count.staticHolderCount++
       if (this.count.staticHolderCount > 2) {
         this.count.staticHolderCount = 0
-        // eslint-disable-next-line no-unused-vars
-
         const nbBounces = 3
         const closestEnemies = new Array<PokemonEntity>()
         board.forEach(
@@ -788,13 +786,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       const alliesHit = allies
         .sort(
           (a, b) =>
-            distanceM(
-              a.positionX,
-              a.positionY,
-              this.positionX,
-              this.positionY
-            ) -
-            distanceM(b.positionX, b.positionY, this.positionX, this.positionY)
+            distanceM(a.positionX, a.positionY, this.targetX, this.targetY) -
+            distanceM(b.positionX, b.positionY, this.targetX, this.targetY)
         )
         .slice(0, 2)
 
@@ -820,13 +813,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.count.magmarizerCount++
     }
 
-    if (this.items.has(Item.ELECTIRIZER)) {
-      this.status.triggerParalysis(2000, this)
+    if (this.items.has(Item.ELECTIRIZER) && this.count.attackCount % 3 === 0) {
+      target.addPP(-15, this, 0, false)
+      target.count.manaBurnCount++
       target.status.triggerParalysis(2000, target)
-    }
-
-    if (target.items.has(Item.INCENSE) && chance(15 / 100)) {
-      this.status.triggerCharm(2000, target, this)
     }
 
     // Synergy effects on hit
@@ -1138,7 +1128,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
       this.name = Pkm.MIMIKYU_BUSTED
       this.passive = Passive.MIMIKYU_BUSTED
-      this.addAttackSpeed(30, this, 0, false)
+      this.addAttack(10, this, 0, false)
       this.status.triggerProtect(2000)
     }
   }
@@ -1353,7 +1343,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       } else if (isAngerPoint) {
         speedBoost = 30
       }
-      // eslint-disable-next-line @typescript-eslint/no-this-alias
       const _pokemon = this // beware of closure vars
       this.simulation.room.clock.setTimeout(() => {
         board.forEach((x, y, value) => {
@@ -1457,7 +1446,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.status.clearNegativeStatus()
     this.effects.clear()
     this.simulation.applySynergyEffects(this)
-    this.simulation.applyItemsEffects(this)
+    this.simulation.applyItemsEffects(this, [Item.DYNAMAX_BAND])
     this.simulation.applyWeatherEffects(this)
     this.status.resurection = false // prevent reapplying max revive again
     this.shield = 0 // prevent reapplying shield again

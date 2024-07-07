@@ -926,7 +926,6 @@
     "SILVALLY_FLYING": "Silvally (Volador)",
     "SILVALLY_ROCK": "Silvally (Roca)",
     "SILVALLY_GROUND": "Silvally (Tierra)",
-    "SILVALLY_FLORA": "Silvally (Flor)",
     "TYPE_NULL": "Código Cero",
     "ZERAORA": "Zeraora",
     "XERNEAS": "Xerneas",
@@ -1403,7 +1402,7 @@
     "SCREECH": "Reduce la DEF de todos los enemigos adyacentes en [1,2,4,SP]",
     "SAND_TOMB": "Inflige [10,20,40,SP] de SPECIAL, causa SILENCE y PARALYSIS por [3,5,8] segndos",
     "WHIRLWIND": "Inflige [40,80,120,SP] de SPECIAL y hace volar por los aires al objetivo",
-    "EMPTY_LIGHT": "Arroja veneno al enemigo, infligiendo [40,SP] de SPECIAL y reduciendo su SPE_DEF por 3. La habilidad rebota en otro pokémon con una SPE_DEF menor. (5 rebotes máximo)",
+    "EMPTY_LIGHT": "Arroja veneno al enemigo, infligiendo [33,SP] de SPECIAL y reduciendo su SPE_DEF por 3. La habilidad rebota en otro pokémon con una SPE_DEF menor. (5 rebotes máximo)",
     "UNBOUND": "Se desata para transformarse en la verdadera forma de Hoopa and recibir una gran cantidad de poder",
     "HYPERSPACE_FURY": "Usando sus multiples brazos, desata una ráfaga de [4,SP] golpes. Cada uno reduce la DEF del objetivo en 1.",
     "SNIPE_SHOT": "Lanza un disparo con la punta de sus dedos al enemigo mas lejano, causando [50,100,200,SP] de SPECIAL a todos los oponentes en el camino",
@@ -1493,7 +1492,7 @@
     "MAGNET_BOMB": "Una bomba magnética que inflige [20,40,80,SP] SPECIAL al objetivo, [10,20,40,SP] SPECIAL a enemigos adyacentes y atrae a enemigos distantes.",
     "MUDDY_WATER": "Lanza agua fangosa hacia 3 objetivos frente a él, causando [40,80,SP] SPECIAL, WOUND y ARMOR_REDUCTION durante 4 segundos.",
     "ANCIENT_POWER": "Lanza piedras al objetivo, causando [50,100,SP] SPECIAL. Aumenta el AP del usuario en [25,SP]",
-    "MOON_DREAM": "El objetivo cae SLEEP durante [3,6,9] segundos y otorga [10,20,30,SP] SHIELD a los [3,4,5] aliados más cercanos del lanzador.",
+    "MOON_DREAM": "El objetivo cae SLEEP durante [3,6,9] segundos y otorga [10,20,30,SP] SHIELD a los 3 aliados más cercanos a él.",
     "STONE_AXE": "Causa [50,SP] TRUE. Coloca piedras afiladas alrededor del objetivo. Las piedras permanecen en el campo causando 10 PHYSICAL por segundo y WOUND a los oponentes que caminan sobre él, si no son ROCK o FLYING"
   },
   "effect": {
@@ -1708,7 +1707,7 @@
     "GOOGLE_SPECS": "Obtén +15 % de ATK base, AP y HP máximo como SHIELD por objeto retenido. Consigue otro objeto artificial.",
     "HATCHER": "25% de probabilidad por derrota consecutiva de obtener un huevo, máximo 1 huevo en el banquillo",
     "BREEDER": "Consigue un huevo tras cada derrota contra un jugador, no hay límite de huevos en el banquillo",
-    "GOLDEN_EGGS": "Consigue un Huevo dorado después de cada derrota contra un jugador, que se puede vender por 10 GOLD o dar un objeto brillante al nacer",
+    "GOLDEN_EGGS": "25% de probabilidad por derrota consecutiva de obtener un huevo de oro, máximo 1 huevo de oro en el banquillo. Los huevos de oro se pueden vender por 10 GOLD o dar un objeto brillante al nacer.",
     "GRASSY_TERRAIN": "Aumenta el daño infligido en un 20 % (solo hierba)",
     "PSYCHIC_TERRAIN": "Aumenta el daño infligido en un 20% (solo psíquico)",
     "ELECTRIC_TERRAIN": "Aumenta el daño infligido en un 20% (solo eléctrico)",
@@ -1731,9 +1730,9 @@
     "RUN_AWAY": "+50% ATK y velocidad de movimiento",
     "HUSTLE": "+80% ATK y velocidad de movimiento",
     "BERSERK": "+100% ATK y velocidad de movimiento, RAGE 5 segundos antes",
-    "FLUID": "El equipo gana +4% ATK_SPEED and 7 SHIELD por cada sinergia activa.",
-    "SHAPELESS": "El equipo gana +4% ATK_SPEED, 7 SHIELD, +1 ATK y +5% AP por cada sinergia activa.",
-    "ETHEREAL": "Tus AMORPHOUS pokémons ganan el doble de las bonificaciones."
+    "FLUID": "El equipo gana 2% ATK_SPEED and 5 HP por cada sinergia activa.",
+    "SHAPELESS": "El equipo gana 4% ATK_SPEED y 10 HP por cada sinergia activa.",
+    "ETHEREAL": "El equipo gana 6% ATK_SPEED y 15 HP por cada sinergia activa."
   },
   "item": {
     "FOSSIL_STONE": "Piedra Fósil",
@@ -1917,7 +1916,7 @@
     "SALAC_BERRY": "Se consume al estar por debajo del 50% HP, Cura 20 HP y gana 50% ATK_SPEED",
     "SITRUS_BERRY": "Se consume al estar por debajo del 50% HP, Cura 30 HP y aumenta toda la curación recibida en un 50%",
     "COMFEY": "Equipa $t(pkm.COMFEY) y obtiene su habilidad y todas sus estadísticas",
-    "ELECTIRIZER": "Cada ataque recibido inflige PARALYSIS durante 2 segundos tanto al atacante como al portador.",
+    "ELECTIRIZER": "Cada tercer ataque quema 15 PP del objetivo e inflige PARALYSIS durante 2 segundos",
     "MAGMARIZER": "Cada ataque exitoso aumenta el ATK en 1 e inflige BURN durante 2 segundos",
     "MACHO_BRACE": "El usuario obtiene el tipo FIGHTING",
     "LIGHT_BALL": "El usuario obtiene el tipo LIGHT",
@@ -1927,7 +1926,7 @@
     "SWIFT_WING": "El portador gana el tipo FLYING. Gana un 10% de probabilidad de esquivar ataques.",
     "HARD_STONE": "El portador gana el tipo ROCK.",
     "BIG_NUGGET": "El usuario obtiene el tipo GROUND. Si el portador esta vivo después de 15 segundos y obtiene 5 acumulaciones de GROUND, gana 3 GOLD",
-    "INCENSE": "El usuario obtiene el tipo FLORA. Cada ataque recibido tiene un 15% de posibilidad de hacer CHARM al atacante durante 2 segundos",
+    "INCENSE": "Evita el encuentro con Pokémon WILD en la tienda cuando lo tienes. En cambio, cada Pokémon en la tienda tiene un 5% adicional de posibilidades de compartir una sinergia común con su poseedor.",
     "EXP_SHARE": "Obtén los mejores valores de ATK, DEF y SPE_DEF de los aliados adyacentes en la misma fila",
     "METEORITE": "Un meteorito que parece interactuar con Deoxys. Continúa emitiendo un brillo tenue y resulta ligeramente cálido al tacto.",
     "BERRY_JUICE": "Se consume al estar por debajo del 50% HP, restaura el HP al máximo",
@@ -1937,8 +1936,8 @@
     "SUPER_ROD": "Después de cada ronda JcJ, pesca un Pokémon que luego se agrega a un espacio libre en tu banco. Puede atrapar Pokémon épicos de WATER  y a Feebas.",
     "DYNAMAX_BAND": "Al comienzo de la pelea, aumenta el HP máximo en un 300%.",
     "GOLDEN_ROD": "Después de cada ronda JcJ, pesca un Pokémon que luego se agrega a un espacio libre en tu banco. Puedes atrapar Pokémon únicos o Pokémon que coincidan con tu sinergia principal. Cuando se usa en un Pokémon, recupera todos los objetos que tiene en tu inventario de jugador.",
-    "SHINY_STONE": "Da sinergia LIGHT y genera un segundo punto de luz en la celda del pokémon.",
-    "RARE_CANDY": "Hace evolucionar inmediatamente a un Pokémon",
+    "SHINY_STONE": "Da +3 a la sinergia LIGHT y genera un segundo punto de luz en la celda del pokémon.",
+    "RARE_CANDY": "Después de cada ronda, genera una copia 1 STAR del titular en el banco (excepto Único y Legendary y Eclosionado)",
     "EVIOLITE": "Sólo lo pueden tener Pokémon que no estén completamente evolucionados. Impide que el titular evolucione.",
     "WHITE_FLUTE": "Genera 3 Pokémon WILD alrededor del poseedor al comienzo de la pelea. La rareza y el nivel aumentan con el nivel del escenario.",
     "DAMP_ROCK": "Da sinergia WATER y cuenta por 3 para RAIN. Sólo se puede usar en Pokémon ROCK",
@@ -1966,7 +1965,7 @@
     "RKS_SYSTEM": "Sistema RKS: $t(pkm.SILVALLY) puede cambiar sus objetos de sinergia en cualquier momento. Colócalo en el banco para soltar los objetos sinérgicos.",
     "SUDOWOODO": "Pretende ser un árbol y no ataca, sino que gana [2,4] ATK por segundo (acumulable).\nComienza a atacar cuando la barra de PP está llena. No puede ser SILENCE ni perder PP hasta entonces.",
     "WOBBUFFET": "No se mueve ni ataca hasta que la barra de PP esté llena. No puede ser SILENCE ni perder PP hasta entonces.",
-    "DITTO": "Ditto puede transformarse para crear una copia de la forma básica de uno de tus pokémon sobre el que lo sueltas (excepto Único y Eclosionado)",
+    "DITTO": "Ditto puede transformarse para crear una 1 STAR copia de uno de tus pokémon sobre el que lo sueltas (excepto Único y Legendary y Eclosionado)",
     "EGG": "Puedes sentir algo moviéndose dentro",
     "HATCH": "Los Pokémon eclosionados evolucionan automáticamente después de 5 etapas",
     "SYNCHRO": "Si el pokémon es POISONNED, BURN, WOUND o SILENCE, el lanzador enemigo sufrirá el mismo estado negativo",
@@ -2026,7 +2025,7 @@
     "GIMMIGHOUL": "$t(pkm.GIMMIGHOUL) está buscando 99 GOLD",
     "GHOLDENGO": "Al comienzo de cada pelea, si el jugador tiene 50 GOLD o más, $t(pkm.GHOLDENGO) gana RUNE_PROTECT para toda la pelea.",
     "METEOR": "$t(pkm.MINIOR) alterna entre sus formas de meteorito y núcleo. La forma de meteorito otorga [4,SP]% ATK_SPEED por ataque. Los ataques de forma núcleo aplican efectos adicionales al objetivo y a los enemigos adyacentes:\nAzul: Inflige 100% SPECIAL\nRojo: Inflige 150% PHYSICAL\nNaranja: Inflige 50% TRUE\nVerde: El daño de ataque cura a los aliados adyacentes.",
-    "MIMIKYU": "Cuando es golpeado por debajo del 50% de HP, Mimikyu cambia a su forma descubierta, ganando 30% ATK_SPEED y PROTECT durante 2 segundos.",
+    "MIMIKYU": "Cuando es golpeado por debajo del 50% de HP, Mimikyu cambia a su forma descubierta, ganando 10 ATK y PROTECT durante 2 segundos.",
     "MIMIKYU_BUSTED": "Tiene el cuello roto. Mimikyu nunca olvidará a la persona que dañó su trapo mientras esté vivo.",
     "HUNGER_SWITCH": "$t(pkm.MORPEKO) alterna entre su forma normal y Voraz. \nLos ataques triples en forma normal infligen PARALYSIS durante 2 segundos. \nLos ataques triples en forma voraz infligen WOUND durante 4 segundos.",
     "WATER_BUBBLE": "Este pokémon es inmune a BURN",
@@ -2044,7 +2043,7 @@
     "PSYDUCK": "Cuando esté CONFUSION, gana 100% AP",
     "BLOODMOON": "Cambia de forma durante BLOODMOON",
     "RECYCLE": "Aliméntelo con bayas para ganar 10 HP, con componentes básicos para obtener 25 HP + estadísticas de objetos o aliméntelo con objetos artificiales para obtener 50 HP + estadísticas de objetos y obtenga TRASH a cambio.",
-    "DREAM_CATCHER": "Si el objetivo de este pokémon esta SLEEP, sus ataques otorgan 10 de SHIELD a los 3 aliados más cercanos."
+    "DREAM_CATCHER": "Si el objetivo de este pokémon esta SLEEP, sus ataques otorgan 10 de SHIELD a los 3 aliados más cercanos a él."
   },
   "stat": {
     "ATK": "Ataque",
@@ -2182,7 +2181,7 @@
     "BABY": "Los BABY pueden traerte huevos de Pokémon para consolarte después de una derrota",
     "LIGHT": "La LIGHT revela un foco en el campo de batalla. La unidad que se encuentra en el centro de atención al comienzo del combate obtiene bonificaciones únicas.",
     "WILD": "Los Pokémon WILD obtienen un mayor ATK, se mueven más rápido y tienen un 25% de posibilidades de WOUND a su objetivo. Por cada STAR de tus pokémon WILD en el tablero, obtén +1% de probabilidad de encontrar WILD en tus tiendas + 5% de probabilidad durante las rondas JCE.",
-    "AMORPHOUS": "AMORPHOUS pokémons son extremadamente flexibles y carecen de una forma propia. Tu equipo gana bonificaciones activando una amplia variedad de sinergias."
+    "AMORPHOUS": "AMORPHOUS pokémons son extremadamente flexibles y carecen de una forma propia. Tu equipo gana HP y ATK_SPEED activando una amplia variedad de sinergias."
   },
   "title": {
     "NOVICE": "Principiante",

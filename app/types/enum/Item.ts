@@ -127,7 +127,7 @@ export const FishingRods = [
   Item.SUPER_ROD,
   Item.GOOD_ROD,
   Item.OLD_ROD
-] as const
+] as const // order matters
 
 export type FishingRod = (typeof FishingRods)[number]
 
@@ -280,7 +280,6 @@ export const SynergyItems = [
   Item.SWIFT_WING,
   Item.HARD_STONE,
   Item.BIG_NUGGET,
-  Item.INCENSE,
   Item.ROTOM_PHONE,
   Item.SHINY_STONE,
   Item.DAMP_ROCK,
@@ -311,7 +310,6 @@ export const SynergyGivenByItem: Record<
   [Item.SWIFT_WING]: Synergy.FLYING,
   [Item.HARD_STONE]: Synergy.ROCK,
   [Item.BIG_NUGGET]: Synergy.GROUND,
-  [Item.INCENSE]: Synergy.FLORA,
   [Item.ROTOM_PHONE]: Synergy.GHOST,
   [Item.SHINY_STONE]: Synergy.LIGHT,
   [Item.DAMP_ROCK]: Synergy.WATER,

@@ -42,7 +42,7 @@ import { clamp, max } from "../../../utils/number"
 import { getPath, transformCoordinate } from "../pages/utils/utils"
 import { preferences } from "../preferences"
 import store from "../stores"
-import { changePlayer } from "../stores/GameStore"
+import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
 import { getPortraitSrc } from "../utils"
 import { BoardMode } from "./components/board-manager"
 import GameScene from "./scenes/game-scene"
@@ -366,6 +366,7 @@ class GameContainer {
   initializePlayer(player: Player) {
     //logger.debug("initializePlayer", player, player.id)
     if (this.uid == player.id || (this.spectate && !this.player)) {
+      this.room.send(Transfer.SPECTATE, this.uid) // always spectate yourself when loading the game initially
       this.setPlayer(player)
       this.initializeGame()
     }
@@ -579,6 +580,8 @@ class GameContainer {
         )
       } else if (pokemonUI && pokemon.rarity === Rarity.HATCH) {
         pokemonUI.hatchAnimation()
+      } else if (pokemonUI) {
+        pokemonUI.spawnAnimation()
       }
     }
   }
@@ -600,24 +603,18 @@ class GameContainer {
     }
   }
 
-  onPlayerClick(id: string) {
-    const player = this.room.state.players.get(id)
-    if (player) {
-      this.setPlayer(player)
-      const simulation = this.room.state.simulations.get(player.simulationId)
-      if (simulation) {
-        this.setSimulation(simulation)
-      }
-    }
-  }
-
   setPlayer(player: Player) {
     this.player = player
-    this.gameScene?.setPlayer(player)
+    this.gameScene?.setMap(player.map)
+    this.gameScene?.battle?.setPlayer(player)
+    this.gameScene?.board?.setPlayer(player)
+    this.gameScene?.itemsContainer?.setPlayer(player)
+    store.dispatch(setPlayer(player))
   }
 
   setSimulation(simulation: Simulation) {
     this.simulation = simulation
+    store.dispatch(setSimulation(simulation))
     if (this.gameScene?.battle) {
       this.gameScene?.battle.setSimulation(this.simulation)
     }

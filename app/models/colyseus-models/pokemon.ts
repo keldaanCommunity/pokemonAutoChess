@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable max-len */
-
 import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
 import { nanoid } from "nanoid"
 import {
@@ -499,15 +496,11 @@ export class Scyther extends Pokemon {
   passive = Passive.SCYTHER
 
   evolutionRule = new ItemEvolutionRule(
-    [
-      Item.METAL_COAT, 
-      Item.BLACK_AUGURITE
-    ],
+    [Item.METAL_COAT, Item.BLACK_AUGURITE],
     (pokemon, player, item) => {
-      if (item === Item.METAL_COAT){
+      if (item === Item.METAL_COAT) {
         return Pkm.SCIZOR
-      }
-      else {
+      } else {
         return Pkm.KLEAVOR
       }
     }
@@ -5449,8 +5442,8 @@ export class Darkrai extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 300
-  atk = 30
+  hp = 250
+  atk = 27
   def = 2
   speDef = 2
   maxPP = 120
@@ -5849,10 +5842,7 @@ export class Rotom extends Pokemon {
 }
 
 export class RotomDrone extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.GHOST,
-    Synergy.ARTIFICIAL
-  ])
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
   rarity = Rarity.SPECIAL
   stars = 1
   hp = 80
@@ -5873,7 +5863,7 @@ export class Spiritomb extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 200
+  hp = 150
   atk = 20
   def = 2
   speDef = 2
@@ -6171,7 +6161,7 @@ export class Deoxys extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 240
+  hp = 220
   atk = 30
   def = 5
   speDef = 5
@@ -6190,12 +6180,12 @@ export class Deoxys extends Pokemon {
 export class DeoxysDefense extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.PSYCHIC,
-    Synergy.HUMAN,
-    Synergy.ARTIFICIAL
+    Synergy.AMORPHOUS,
+    Synergy.HUMAN
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 240
+  hp = 220
   atk = 20
   def = 8
   speDef = 8
@@ -6214,12 +6204,12 @@ export class DeoxysDefense extends Pokemon {
 export class DeoxysAttack extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.PSYCHIC,
-    Synergy.HUMAN,
-    Synergy.ARTIFICIAL
+    Synergy.AMORPHOUS,
+    Synergy.HUMAN
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 240
+  hp = 220
   atk = 30
   def = 2
   speDef = 2
@@ -6238,12 +6228,12 @@ export class DeoxysAttack extends Pokemon {
 export class DeoxysSpeed extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.PSYCHIC,
-    Synergy.HUMAN,
-    Synergy.ARTIFICIAL
+    Synergy.AMORPHOUS,
+    Synergy.HUMAN
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 240
+  hp = 220
   atk = 25
   def = 3
   speDef = 3
@@ -6663,7 +6653,7 @@ export class Munna extends Pokemon {
   def = 2
   speDef = 2
   maxPP = 80
-  range = 3
+  range = 2
   skill = Ability.MOON_DREAM
   passive = Passive.DREAM_CATCHER
   additional = true
@@ -6683,7 +6673,7 @@ export class Musharna extends Pokemon {
   def = 3
   speDef = 3
   maxPP = 80
-  range = 3
+  range = 2
   skill = Ability.MOON_DREAM
   passive = Passive.DREAM_CATCHER
   additional = true
@@ -6691,14 +6681,14 @@ export class Musharna extends Pokemon {
 }
 
 export class Archen extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.ROCK, Synergy.FLYING])
-  rarity = Rarity.RARE
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.FLYING, Synergy.FOSSIL])
+  rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.ARCHEOPS
-  hp = 80
-  atk = 6
-  def = 3
-  speDef = 3
+  hp = 70
+  atk = 5
+  def = 2
+  speDef = 2
   maxPP = 90
   range = 1
   skill = Ability.ROCK_SMASH
@@ -6707,13 +6697,13 @@ export class Archen extends Pokemon {
 }
 
 export class Archeops extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.ROCK, Synergy.FLYING])
-  rarity = Rarity.RARE
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.FLYING, Synergy.FOSSIL])
+  rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 180
-  atk = 14
-  def = 5
-  speDef = 5
+  hp = 130
+  atk = 11
+  def = 4
+  speDef = 4
   maxPP = 90
   range = 2
   skill = Ability.ROCK_SMASH
@@ -7045,32 +7035,32 @@ export class Relicanth extends Pokemon {
 }
 
 export class Tyrunt extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.DRAGON])
-  rarity = Rarity.UNCOMMON
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.ROCK, Synergy.FOSSIL])
+  rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.TYRANTRUM
-  hp = 135
-  atk = 10
+  hp = 70
+  atk = 8
   def = 4
-  speDef = 2
-  maxPP = 100
+  speDef = 1
+  maxPP = 70
   range = 1
-  skill = Ability.DEFAULT
+  skill = Ability.ROCK_HEAD
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Tyrantrum extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.DRAGON])
-  rarity = Rarity.UNCOMMON
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.ROCK, Synergy.FOSSIL])
+  rarity = Rarity.RARE
   stars = 2
-  hp = 290
-  atk = 22
-  def = 7
-  speDef = 4
-  maxPP = 100
+  hp = 170
+  atk = 18
+  def = 6
+  speDef = 2
+  maxPP = 70
   range = 1
-  skill = Ability.DEFAULT
+  skill = Ability.ROCK_HEAD
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
@@ -7535,11 +7525,7 @@ export class Cacturne extends Pokemon {
 }
 
 export class Pumpkaboo extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.GHOST,
-    Synergy.GRASS,
-    Synergy.AMORPHOUS
-  ])
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.GRASS])
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.GOURGEIST
@@ -7554,11 +7540,7 @@ export class Pumpkaboo extends Pokemon {
   attackSprite = AttackSprite.GRASS_MELEE
 }
 export class Gourgeist extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.GHOST,
-    Synergy.GRASS,
-    Synergy.AMORPHOUS
-  ])
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.GRASS])
   rarity = Rarity.EPIC
   stars = 2
   hp = 190
@@ -8501,7 +8483,7 @@ export class Drifloon extends Pokemon {
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.DRIFBLIM
-  hp = 120
+  hp = 100
   atk = 5
   def = 2
   speDef = 2
@@ -8670,8 +8652,6 @@ const rksSystemEvolutionRule = new ItemEvolutionRule(
         return Pkm.SILVALLY_ROCK
       case Synergy.GROUND:
         return Pkm.SILVALLY_GROUND
-      case Synergy.FLORA:
-        return Pkm.SILVALLY_FLORA
       case Synergy.GHOST:
         return Pkm.SILVALLY_GHOST
       default:
@@ -9358,7 +9338,11 @@ export class Drakloak extends Pokemon {
 }
 
 export class Dragapult extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.GHOST,
+    Synergy.AMORPHOUS
+  ])
   rarity = Rarity.HATCH
   stars = 3
   hp = 190
@@ -10458,8 +10442,8 @@ export class Grimer extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.MUK
-  hp = 90
-  atk = 5
+  hp = 80
+  atk = 4
   def = 3
   speDef = 2
   maxPP = 100
@@ -10477,8 +10461,8 @@ export class Muk extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 190
-  atk = 10
+  hp = 170
+  atk = 9
   def = 6
   speDef = 4
   maxPP = 100
@@ -10497,8 +10481,8 @@ export class AlolanGrimer extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.ALOLAN_MUK
-  hp = 80
-  atk = 7
+  hp = 70
+  atk = 6
   def = 2
   speDef = 2
   maxPP = 100
@@ -10523,8 +10507,8 @@ export class AlolanMuk extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 160
-  atk = 15
+  hp = 150
+  atk = 13
   def = 6
   speDef = 4
   maxPP = 100
@@ -10772,8 +10756,8 @@ export class Mimikyu extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 200
-  atk = 20
+  hp = 180
+  atk = 15
   def = 5
   speDef = 6
   maxPP = 40
@@ -10784,11 +10768,15 @@ export class Mimikyu extends Pokemon {
 }
 
 export class MimikyuBusted extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FAIRY])
+  types = new SetSchema<Synergy>([
+    Synergy.GHOST,
+    Synergy.FAIRY,
+    Synergy.AMORPHOUS
+  ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 200
-  atk = 20
+  hp = 180
+  atk = 25
   def = 5
   speDef = 6
   maxPP = 40
@@ -11218,7 +11206,7 @@ export class Koffing extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.WEEZING
-  hp = 85
+  hp = 70
   atk = 5
   def = 3
   speDef = 3
@@ -11237,7 +11225,7 @@ export class Weezing extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 190
+  hp = 170
   atk = 10
   def = 5
   speDef = 5
@@ -11827,8 +11815,8 @@ export class Misdreavus extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.MISMAGIUS
-  hp = 90
-  atk = 9
+  hp = 80
+  atk = 8
   def = 2
   speDef = 3
   maxPP = 95
@@ -11846,8 +11834,8 @@ export class Mismagius extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 180
-  atk = 26
+  hp = 160
+  atk = 23
   def = 2
   speDef = 4
   maxPP = 95
@@ -13546,6 +13534,7 @@ export class WormadamTrash extends Pokemon {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
       regionSynergies.includes(Synergy.ARTIFICIAL) &&
+      !regionSynergies.includes(Synergy.GROUND) &&
       !regionSynergies.includes(Synergy.GRASS)
     )
   }
@@ -14879,7 +14868,6 @@ export const PokemonClasses: Record<
   [Pkm.SILVALLY_FLYING]: SilvallyFlying,
   [Pkm.SILVALLY_ROCK]: SilvallyRock,
   [Pkm.SILVALLY_GROUND]: SilvallyGround,
-  [Pkm.SILVALLY_FLORA]: SilvallyFlora,
   [Pkm.SILVALLY_GHOST]: SilvallyGhost,
   [Pkm.DEWPIDER]: Dewpider,
   [Pkm.ARAQUANID]: Araquanid,
