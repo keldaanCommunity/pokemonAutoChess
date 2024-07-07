@@ -14129,9 +14129,8 @@ export class GastrodonEastSea extends Pokemon {
 
 export class Klefki extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FAIRY, Synergy.ARTIFICIAL])
-  //rarity = Rarity.UNIQUE
-  rarity= Rarity.COMMON
-  stars = 1
+  rarity = Rarity.UNIQUE
+  stars = 3
   hp = 200
   atk = 16
   def = 4
