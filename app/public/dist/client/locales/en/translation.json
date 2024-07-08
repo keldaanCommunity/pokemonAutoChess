@@ -2048,7 +2048,7 @@
     "GUZZLORD": "Guzzlord is too heavy and can't jump",
     "ENVIRONMENTAL_ADAPTATION": "This Pokémon adapted its synergies to its region",
     "MOTHIM": "Mothim gets the synergies of your regional Burmy form",
-    "PSYDUCK": "When CONFUSION, gain 100% AP",
+    "PSYDUCK": "Has 10% chance to get CONFUSION when taking a hit. Every time it gets CONFUSION, gain 100% AP",
     "BLOODMOON": "Changes form during BLOODMOON",
     "RECYCLE": "Feed it with berries to gain 10 HP, or with basic components for 25 HP + item stats. Feed it with artificial items to gain 50 HP + item stats, and get TRASH in return",
     "DREAM_CATCHER": "If its target is SLEEP, holder attacks give 10 SHIELD to the 3 allies closest to it"

@@ -23,6 +23,7 @@
 - Nerf Poison Jab (Gligar): Poison for ~~4~~ 3 seconds
 - Nerf Mega Camerupt: Eruption damage: ~~100~~ 70 per projectile
 - Hippopotas line is now Ground/Normal instead of Ground/Rock
+- Changed Psyduck passive: now has 10% chance to become confused when hit
 
 # Changes to Synergies
 

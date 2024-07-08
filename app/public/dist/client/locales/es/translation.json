@@ -2038,7 +2038,7 @@
     "GUZZLORD": "Guzzlord pesa demasiado y no puede saltar.",
     "ENVIRONMENTAL_ADAPTATION": "Este Pokémon adapta sus sinergias a la región.",
     "MOTHIM": "$t(pkm.MOTHIM) toma sinergias de la forma regional de $t(pkm.BURMY) encontradas por el jugador.",
-    "PSYDUCK": "Cuando esté CONFUSION, gana 100% AP",
+    "PSYDUCK": "Tiene un 10% de posibilidades de sufrir CONFUSION al recibir un golpe. Cada vez que entra en CONFUSION, gana 100% AP",
     "BLOODMOON": "Cambia de forma durante BLOODMOON",
     "RECYCLE": "Aliméntelo con bayas para ganar 10 HP, con componentes básicos para obtener 25 HP + estadísticas de objetos o aliméntelo con objetos artificiales para obtener 50 HP + estadísticas de objetos y obtenga TRASH a cambio.",
     "DREAM_CATCHER": "Si el objetivo de este pokémon esta SLEEP, sus ataques otorgan 10 de SHIELD a los 3 aliados más cercanos a él."
