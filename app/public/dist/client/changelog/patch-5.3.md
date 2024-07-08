@@ -47,6 +47,8 @@
 
 # Bugfix
 
+- Tapus and Maractus passives are no longer applied when they are not in the battlefield
+
 # Misc
 
 - Removed the 10am CEST Ultra-ball ranked lobby. Its now once per day at 10pm CEST
