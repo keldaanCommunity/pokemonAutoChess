@@ -5190,7 +5190,7 @@ export class Kyogre extends Pokemon {
 }
 
 export class Groudon extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.FIRE])
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.MONSTER])
   rarity = Rarity.LEGENDARY
   stars = 3
   evolution = Pkm.PRIMAL_GROUDON
@@ -6310,7 +6310,11 @@ export class Torkoal extends Pokemon {
 }
 
 export class PrimalGroudon extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.FIRE])
+  types = new SetSchema<Synergy>([
+    Synergy.GROUND,
+    Synergy.MONSTER,
+    Synergy.FIRE
+  ])
   rarity = Rarity.LEGENDARY
   stars = 4
   hp = 400
