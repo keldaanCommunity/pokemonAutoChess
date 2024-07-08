@@ -1197,8 +1197,8 @@ export class PoisonJabStrategy extends AbilityStrategy {
         pokemon,
         crit
       )
-      farthestTarget.status.triggerPoison(4000, farthestTarget, pokemon)
-      pokemon.status.triggerPoison(4000, pokemon, pokemon)
+      farthestTarget.status.triggerPoison(3000, farthestTarget, pokemon)
+      pokemon.status.triggerPoison(3000, pokemon, pokemon)
       pokemon.moveTo(farthestTarget.positionX, farthestTarget.positionY, board)
     }
   }

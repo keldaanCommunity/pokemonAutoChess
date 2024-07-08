@@ -1365,7 +1365,7 @@
     "HIDDEN_POWER_Z": "Mettre l'équipe ennemie en SLEEP pendant 5 secondes",
     "HIDDEN_POWER_QM": "Invoque 4 Zarbi aléatoires sur votre banc",
     "HIDDEN_POWER_EM": "Invoque 4 Zarbi aléatoires à chaque coin du plateau",
-    "POISON_JAB": "Inflige [30,60,90,120,SP] SPECIAL, change de place avec la cible et inflige POISONNED à la fois à la cible et au lanceur pendant 4 secondes",
+    "POISON_JAB": "Inflige [30,60,90,120,SP] SPECIAL, change de place avec la cible et inflige POISONNED à la fois à la cible et au lanceur pendant 3 secondes",
     "SHELL_SMASH": "Inflige [15,30,SP] SPECIAL aux ennemis adjacents ; gagne 2 ATK, 20% AP et 20% ATK_SPEED, et perd 1 DEF, 1 SPE_DEF",
     "HELPING_HAND": "Donne [30,60,100,SP] SHIELD aux 2 alliés les plus proches et double les dégâts de leur prochaine capacité",
     "ASTRAL_BARRAGE": "Attaque des ennemis aléatoires avec [3,SP=2] petits spectres, chacun infligeant 20 SPECIAL",

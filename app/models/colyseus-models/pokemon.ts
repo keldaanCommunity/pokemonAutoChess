@@ -6319,8 +6319,8 @@ export class PrimalGroudon extends Pokemon {
   stars = 4
   hp = 400
   atk = 30
-  def = 10
-  speDef = 10
+  def = 8
+  speDef = 8
   maxPP = 100
   range = 1
   skill = Ability.EARTHQUAKE

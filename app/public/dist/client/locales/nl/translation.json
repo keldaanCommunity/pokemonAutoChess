@@ -1003,7 +1003,7 @@
     "HIDDEN_POWER_Z": "Laat het vijandelijke team 5 seconden SLAPEN",
     "HIDDEN_POWER_QM": "Krijg 4 willekeurige Unown op je bank",
     "HIDDEN_POWER_EM": "Spawn 4 willekeurige Unown in elke hoek van het bord",
-    "POISON_JAB": "Deals [30,60,90,120,SP] SPECIAL, ruilen van plaats met het doelwit en POISONNED zowel het doelwit als de caster voor 4s",
+    "POISON_JAB": "Deals [30,60,90,120,SP] SPECIAL, ruilen van plaats met het doelwit en POISONNED zowel het doelwit als de caster voor 3s",
     "SHELL_SMASH": "Biedt [15,30,SP] SPECIAL aan aangrenzende vijanden; geeft 2 ATK, 20% AP en 20% ATK_SPEED, en verlies 1 DEF, 1 SPE_DEF",
     "HELPING_HAND": "Geeft [30,60,100,SP] SHIELD aan de 2 dichtstbijzijnde bondgenoten en verdubbel de schade van de volgende vaardigheid.",
     "ASTRAL_BARRAGE": "Stuurt [3,SP=2] kleine geesten naar willekeurige vijandige Pokémon. Elk van hen deelt 20 SPECIAL uit",

@@ -18,9 +18,10 @@
 - Nerf Deoxys: HP ~~240~~ 220
 - Nerf Darkrai: HP ~~300~~ 250, Attack ~~30~~ 27
 - Nerf Empty Light: ~~40~~ 33 special damage
-- Groudon is now Ground/Monster ; Primal Groudon is now Ground/Monster/Fire
+- Groudon is now Ground/Monster ; Primal Groudon is now Ground/Monster/Fire ; Primal Groudon def/spedef: ~~10~~ 5
 - Buff Uxie, Azelf, Mesprit: Attack ~~15~~ 18
-- 
+- Nerf Poison Jab (Gligar): Poison for ~~4~~ 3 seconds
+
 
 # Changes to Synergies
 
