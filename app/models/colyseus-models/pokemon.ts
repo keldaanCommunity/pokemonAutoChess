@@ -10614,7 +10614,7 @@ export class Chingling extends Pokemon {
   evolution = Pkm.CHIMECHO
   evolutionRule = new ItemEvolutionRule([Item.STAR_DUST])
   hp = 150
-  atk = 8
+  atk = 10
   def = 2
   speDef = 4
   maxPP = 80
