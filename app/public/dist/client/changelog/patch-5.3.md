@@ -22,6 +22,7 @@
 - Buff Uxie, Azelf, Mesprit: Attack ~~15~~ 18
 - Nerf Poison Jab (Gligar): Poison for ~~4~~ 3 seconds
 - Nerf Mega Camerupt: Eruption damage: ~~100~~ 70 per projectile
+- Hippopotas line is now Ground/Normal instead of Ground/Rock
 
 # Changes to Synergies
 
