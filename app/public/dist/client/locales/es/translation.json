@@ -1327,7 +1327,7 @@
     "SOLAR_BEAM": "Inflige [30,60,120,SP] de SPECIAL en línea recta detrás del objetivo. Si el clima es soleado, los objetivos se quedan BURN durante 3 s y recupera 40 PP",
     "MAGMA_STORM": "El objetivo queda atrapado en una vorágine de fuego que inflige [80,SP] de SPECIAL antes de moverse a un objetivo adyacente",
     "SLASHING_CLAW": "Inflige [15,30,60,SP] al objetivo y lo deja WOUND durante 5 segundos. Si el objetivo ya está WOUND, otorga un 30 % de bonificación de SPECIAL",
-    "ERUPTION": "Dispara [15,25,40] proyectiles en el aire. Cada proyectil inflige [30,50,100,SP] de SPECIAL y causa BURN durante 5 segundos",
+    "ERUPTION": "Dispara [15,25,40] proyectiles en el aire. Cada proyectil inflige [30,50,70,SP] de SPECIAL y causa BURN durante 5 segundos",
     "HAIL": "Una tormenta de granizo golpea [10,20,30] celdas aleatorias en el tablero, causando [50,SP] SPECIAL. Los granizos permanecen en el suelo causando 10 SPECIAL y FREEZE a los pokémons que caminan sobre él durante 1 segundo, si no ICE.",
     "LUSTER_PURGE": "Lanza una bola de luz en línea recta que inflige [25,SP] de SPECIAL dos veces y reduce dos veces el SPE_DEF de todos los enemigos alcanzados en 3",
     "MIST_BALL": "Lanza una burbuja de niebla en línea recta que inflige [25,SP] SPECIAL dos veces y reduce el AP de todos los enemigos golpeados en un 30 %",
