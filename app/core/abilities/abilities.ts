@@ -9115,7 +9115,7 @@ export class FairyLockStrategy extends AbilityStrategy {
           targetY: cell.value.positionY
         })
         cell.value.handleSpecialDamage(
-          Math.round(70 / enemiesHit),
+          Math.round(90 / enemiesHit),
           board,
           AttackType.SPECIAL,
           pokemon,
