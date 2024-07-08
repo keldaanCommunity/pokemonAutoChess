@@ -1772,8 +1772,20 @@
     "TYPHLOSION": "Typhlosion sucht nach einem REAPER_CLOTH",
     "HISUIAN_TYPHLOSION": "Dieses Pokémon beginnt den Kampf mit einem zufälligen Item, wenn es keines hält",
     "PICKUP": "Das Pokemon startet den Kampf mit einem zufälligen Item, wenn es keines trägt.",
-    "WATER_BUBBLE": "Das Pokémon ist Immun gegen BURN",
-    "LYCANROC": "Wolwerock wechselt in die Nachtform während NACHT und in die Tagform während SUN."
+    "CELEBI": "Der Spieler stellt jedes Mal, wenn $t(pkm.CELEBI) „$t(ability.TIME_TRAVEL)“ einsetzt, 1 Lebenspunkt wieder her.",
+    "GHOLDENGO": "Wenn der Spieler zu beginn des Kampfe mindesten 50 GOLD hat, erhält $t(pkm.GHOLDENGO) RUNE_PROTECT für den Kampf.",
+    "METEOR": "$t(pkm.MINIOR) wechselt zwischen der Meteor- und der Kernform. In der Meteorform erhält $t(pkm.MINIOR) [4,SP]% ATK_SPEED pro Angriff.\nAngriffe in der Kernform haben zusätzliche Effekte auf das Ziel und benachbarte Feinde:\nBlauer Kern: Verursacht 100% SPECIAL\nRoter Kern: Verursacht 150% PHYSICAL\nOranger Kern: Verursacht 50% TRUE\nGrüner Kern: Angriffsschaden heilt benachbarte Verbündete",
+    "MIMIKYU": "Wenn Mimigma weniger als 50% der max. HP hat, erhält 30% ATK_SPEED, ein PROTECT für 2 Sekunden und wechselt in die „Entlarvte Form\".",
+    "MIMIKYU_BUSTED": "Mimigma wird nie vergessen, welche Person sein Kostüm ruiniert hat, solange es am Leben ist.",
+    "HUNGER_SWITCH": "$t(pkm.MORPEKO) wechselt zwischen dem „Pappsattmuster“ und dem „Kohldampfmuster“.\nDreifachangriffe mit dem „Pappsattmuster“ verursachen 2 Sekunden lang PARALYSIS.\nDreifachangriffe mit dem „Kohldampfmuster\" verursachen 4 Sekunden lang WOUND.",
+    "WATER_BUBBLE": "Das Pokemon ist Immun gegen BURN.",
+    "LYCANROC": "Wolwerock wechselt bei NIGHT in die „Nachtform\" und bei SUN in die „Tagform\".",
+    "SOUL_HEART": "Jedes Mal, wenn Magearna ein KO erzielt, erhält es 10 AP und 10 PP.",
+    "ALIEN_DNA": "$t(pkm.DEOXYS) reagiert auf den METEORIT und ändert seine.",
+    "BERRY_EATER": "Wenn das Pokémon einen Gegner angreift, stiehlt es ihm alle Beeren und isst sie.",
+    "TOXIC_BOOST": "Sengo erhält 10 ATK, solange es unter POISONNED steht.",
+    "SHUCKLE": "Verwandelt verzehrte Beeren in BEERY_JUICE.",
+    "GUZZLORD": "Schlingking ist zu schwer zum Springen."
   },
   "stat": {
     "ATK": "Angriff",
