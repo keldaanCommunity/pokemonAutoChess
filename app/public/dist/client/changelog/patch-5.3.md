@@ -19,6 +19,8 @@
 - Nerf Darkrai: HP ~~300~~ 250, Attack ~~30~~ 27
 - Nerf Empty Light: ~~40~~ 33 special damage
 - Groudon is now Ground/Monster ; Primal Groudon is now Ground/Monster/Fire
+- Buff Uxie, Azelf, Mesprit: Attack ~~15~~ 18
+- 
 
 # Changes to Synergies
 

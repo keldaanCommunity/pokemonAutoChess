@@ -5936,7 +5936,7 @@ export class Uxie extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 15
+  atk = 18
   def = 3
   speDef = 3
   maxPP = 90
@@ -5950,7 +5950,7 @@ export class Mesprit extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 15
+  atk = 18
   def = 3
   speDef = 3
   maxPP = 90
@@ -5964,7 +5964,7 @@ export class Azelf extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 15
+  atk = 18
   def = 3
   speDef = 3
   maxPP = 90
