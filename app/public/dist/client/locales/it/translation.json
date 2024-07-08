@@ -1264,7 +1264,6 @@
     "SMOKE_BALL": "Palla di fumo",
     "XRAY_VISION": "Visione a raggi X",
     "RAZOR_FANG": "Zanna di rasoio",
-    "SOOTHE_BELL": "Calmanella",
     "CHOICE_SCARF": "Sciarpa scelta",
     "FIRE_GEM": "Gemma di fuoco",
     "DEFENSIVE_RIBBON": "Nastro difensivo",
@@ -1301,7 +1300,8 @@
     "RAWST_BERRY": "Bacca di Rawst",
     "ROWAP_BERRY": "Bacca di Rowap",
     "SALAC_BERRY": "Bacca di Salac",
-    "SITRUS_BERRY": "BaBacca di ie Sitrus"
+    "SITRUS_BERRY": "BaBacca di ie Sitrus",
+    "SOOTHE_BELL": "Calmanella"
   },
   "item_description": {
     "FOSSIL_STONE": "Un fossile di un Pokémon vissuto in epoca preistorica",
@@ -1339,7 +1339,6 @@
     "SMOKE_BALL": "Una volta sotto il 33% degli HP massimi, lascia cadere la palla di fumo e salta in una cella di distanza. Ogni nemico adiacente viene PARALYSIS per 3 secondi e il fumo riduce la precisione di tutti i Pokemon all'interno del 50%.",
     "XRAY_VISION": "+50% ATK_SPEED. Gli attacchi del titolare non possono più fallire.",
     "RAZOR_FANG": "+100% CRIT_POWER. I colpi critici applicano ARMOR_REDUCTION per 4 secondi.",
-    "SOOTHE_BELL": "L'attacco del titolare dà il 33% dei danni inflitti come SHIELD all'alleato più vicino al bersaglio.",
     "CHOICE_SCARF": "Quando viene colpito, infliggi il 50% dell'attacco base a un nemico adiacente",
     "FIRE_GEM": "Gli attacchi infliggono il doppio dei danni a SHIELD e infliggono il 8% degli HP massimi del bersaglio come danno aggiuntivo",
     "DEFENSIVE_RIBBON": "Quando il possessore subisce danni, guadagna 1 stack. Ogni 2 stack, l'holder guadagna +1 DEF, +1 ATK e +5% ATK_SPEED (max 20 stack)",
@@ -1357,7 +1356,8 @@
     "POKE_DOLL": "Riduce tutti i PHYSICAL e SPECIAL in arrivo del 30%",
     "RED_ORB": "+10 ATT. Il 25% dell'attacco fisico viene inflitto come TRUE",
     "MAX_REVIVE": "Dai RESURECTION, impedendo al possessore di KO prima e ripristinando gli HP massimi",
-    "ROCKY_HELMET": "+12 DEF. Nega il danno bonus critico dai colpi critici in arrivo."
+    "ROCKY_HELMET": "+12 DEF. Nega il danno bonus critico dai colpi critici in arrivo.",
+    "SOOTHE_BELL": "L'attacco del titolare dà il 33% dei danni inflitti come SHIELD all'alleato più vicino al bersaglio."
   },
   "passive_description": {
     "NONE": "Nessun passivo",

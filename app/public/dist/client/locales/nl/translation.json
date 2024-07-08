@@ -1263,7 +1263,6 @@
     "SMOKE_BALL": "Rookbom",
     "XRAY_VISION": "XRay-visie",
     "RAZOR_FANG": "Scheermes Hoek",
-    "SOOTHE_BELL": "Soothe bel",
     "CHOICE_SCARF": "Keuze Sjaal",
     "FIRE_GEM": "Vuur juweeltje",
     "DEFENSIVE_RIBBON": "Defensief Lint",
@@ -1281,7 +1280,8 @@
     "RED_ORB": "Rode bol",
     "MAX_REVIVE": "Max herleven",
     "ROCKY_HELMET": "Rotsachtige helm",
-    "ORAN_BERRY": "Oranje Bes"
+    "ORAN_BERRY": "Oranje Bes",
+    "SOOTHE_BELL": "Soothe bel"
   },
   "item_description": {
     "FOSSIL_STONE": "Een fossiel van een Pokémon die in de prehistorie leefde",
@@ -1319,7 +1319,6 @@
     "SMOKE_BALL": "Eenmaal onder de 33% maximale HP laat je de rookbal vallen en spring je naar een cel verderop. Elke aangrenzende vijand is gedurende 3 seconden PARALYSIS, en de rook vermindert de precisie van alle Pokémon binnenin met 50%.",
     "XRAY_VISION": "+50% ATK_SPEED. De aanvallen van de houder kunnen niet meer missen.",
     "RAZOR_FANG": "+100% CRIT_POWER. Critical hits passen ARMOR_REDUCTION gedurende 4 seconden toe.",
-    "SOOTHE_BELL": "De houderaanval geeft 33% van de schade die als SHIELD wordt toegebracht aan de bondgenoot die het dichtst bij het doelwit staat.",
     "CHOICE_SCARF": "Bij treffer wordt 50% basisaanvalschade toegebracht aan een aangrenzende vijand",
     "FIRE_GEM": "Aanvallen richten dubbele schade aan op SHIELD en brengen 8% van de maximale HP als extra schade toe",
     "DEFENSIVE_RIBBON": "Als de houder schade oploopt, krijg je 1 stapel. Elke 2 stapels krijgt de houder +1 DEF, +1 ATK en +5% ATK_SPEED (max. 20 stapels)",
@@ -1337,7 +1336,8 @@
     "POKE_DOLL": "Verminder alle inkomende PHYSICAL en SPECIAL met 30%",
     "RED_ORB": "+10ATK. 25% van de aanvalsschade wordt behandeld als TRUE",
     "MAX_REVIVE": "Geef RESURECTION, voorkom dat de houder als eerste knock-out gaat en herstel tot max. HP",
-    "ROCKY_HELMET": "+12 DEF. Negeert kritieke bonusschade door inkomende kritieke treffers."
+    "ROCKY_HELMET": "+12 DEF. Negeert kritieke bonusschade door inkomende kritieke treffers.",
+    "SOOTHE_BELL": "De houderaanval geeft 33% van de schade die als SHIELD wordt toegebracht aan de bondgenoot die het dichtst bij het doelwit staat."
   },
   "passive_description": {
     "NONE": "Geen passief",

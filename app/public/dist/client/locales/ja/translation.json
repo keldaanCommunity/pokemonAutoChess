@@ -1264,7 +1264,6 @@
     "SMOKE_BALL": "スモークボール",
     "XRAY_VISION": "XRayビジョン",
     "RAZOR_FANG": "カミソリの牙",
-    "SOOTHE_BELL": "やすらぎのすず",
     "CHOICE_SCARF": "チョイススカーフ",
     "FIRE_GEM": "ファイアジェム",
     "DEFENSIVE_RIBBON": "ディフェンスリボン",
@@ -1281,7 +1280,8 @@
     "POKE_DOLL": "ポケドール",
     "RED_ORB": "レッドオーブ",
     "MAX_REVIVE": "マックスリバイブ",
-    "ROCKY_HELMET": "ロッキーヘルメット"
+    "ROCKY_HELMET": "ロッキーヘルメット",
+    "SOOTHE_BELL": "やすらぎのすず"
   },
   "item_description": {
     "FOSSIL_STONE": "先史時代に生きていたポケモンの化石",
@@ -1319,7 +1319,6 @@
     "SMOKE_BALL": "最大HPが33%を下回ったら、煙玉を落として離れたセルにジャンプします。 隣接するすべての敵は 3 秒間 PARALYSIS 状態になり、煙により内部にいるすべてのポケモンの命中率が 50% 低下します。",
     "XRAY_VISION": "+50% ATK_SPEED。ホルダーの攻撃が外れなくなりました。",
     "RAZOR_FANG": "+100% CRIT_POWER。クリティカルヒットには ARMOR_REDUCTION が 4 秒間適用されます。",
-    "SOOTHE_BELL": "ホルダーの攻撃はSHIELDとして与えたダメージの33%を対象に最も近い味方に与える。",
     "CHOICE_SCARF": "ヒット時、隣接する敵に50%の基本攻撃ダメージを与える",
     "FIRE_GEM": "攻撃はSHIELDに2倍のダメージを与え、追加ダメージとしてターゲットの最大HPの8％を与えます",
     "DEFENSIVE_RIBBON": "ホルダーがダメージを受けると、1スタックを獲得します。 2スタックごとに、保持者は+1 DEF、+1 ATK、+5% ATK_SPEEDを獲得します（最大20スタック）",
@@ -1337,7 +1336,8 @@
     "POKE_DOLL": "入ってくるすべてのPHYSICALとSPECIALを30%削減",
     "RED_ORB": "+10攻撃力。攻撃ダメージの25%がTRUEとして与えられる",
     "MAX_REVIVE": "RESURECTIONを与え、ホルダーの最初のKOを防ぎ、最大HPまで回復します",
-    "ROCKY_HELMET": "防御力+12クリティカルヒットによるクリティカルボーナスダメージを無効化します。"
+    "ROCKY_HELMET": "防御力+12クリティカルヒットによるクリティカルボーナスダメージを無効化します。",
+    "SOOTHE_BELL": "ホルダーの攻撃はSHIELDとして与えたダメージの33%を対象に最も近い味方に与える。"
   },
   "passive_description": {
     "NONE": "パッシブなし",
