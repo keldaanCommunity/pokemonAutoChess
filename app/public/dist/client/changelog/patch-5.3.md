@@ -26,6 +26,10 @@
 - Changed Psyduck passive: now has 10% chance to become confused when hit
 - Buff Chingling: Attack ~~8~~ 10
 - Buff Doom Desire (Jirachi): PP regain if ability fails: ~~40~~ 60
+- Tapu Bulu now only shows up on Grass portal symbols
+- Tapu Fini now only shows up on Water portal symbols
+- Tapu Koko now only shows up on Electric portal symbols
+- Tapu Lele now only shows up on Psychic portal symbols
 
 # Changes to Synergies
 
