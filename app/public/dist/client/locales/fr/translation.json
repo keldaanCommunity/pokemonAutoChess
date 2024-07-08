@@ -1423,7 +1423,7 @@
     "FISHIOUS_REND": "Inflige [80,SP] SPECIAL. Double dégâts si l'attaquant a plus de ATK_SPEED que sa cible.",
     "RECOVER": "Se soigne à hauteur de [25,SP]% des HP max",
     "CURSE": "Inflige CURSE à l'adversaire avec le plus de HP, ce qui le mettra KO après [12,8,4,SP=-0.2] secondes",
-    "DOOM_DESIRE": "Après 2 secondes, inflige [150,SP] SPECIAL à la cible. Regagne 40 PP si la cible est KO.",
+    "DOOM_DESIRE": "Après 2 secondes, inflige [150,SP] SPECIAL à la cible. Regagne 60 PP si la cible est KO entre temps.",
     "TIME_TRAVEL": "Retourne dans le passé pour retrouver la vie perdue. Tous les alliés perdent leurs altérations de statut et sont soignés de [25,SP] HP.",
     "POLTERGEIST": "Inflige [30,60,120,SP] SPECIAL + [20,SP] SPECIAL par objet tenu par la cible ([40,SP] si l'objet est artificiel) ",
     "GOLD_RUSH": "Inflige [20,SP] + votre quantité de GOLD en banque en SPECIAL, puis gagne 2 GOLD",
