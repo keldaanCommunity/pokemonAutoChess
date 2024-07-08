@@ -23,7 +23,6 @@ import {
 } from "../../../types"
 import { RequiredStageLevelForXpElligibility } from "../../../types/Config"
 import { Pkm } from "../../../types/enum/Pokemon"
-import { getRankLabel } from "../../../types/strings/Strings"
 import { logger } from "../../../utils/logger"
 import { addWanderingPokemon } from "../game/components/pokemon"
 import GameContainer from "../game/game-container"
@@ -91,6 +90,7 @@ import { LocalStoreKeys, localStore } from "./utils/store"
 import { FIREBASE_CONFIG } from "./utils/utils"
 import { DungeonDetails } from "../../../types/enum/Dungeon"
 import { playMusic, preloadMusic } from "./utils/audio"
+import store from "../stores"
 
 let gameContainer: GameContainer
 
@@ -610,7 +610,7 @@ export default function Game() {
           dispatch(setLoadingProgress({ id: player.id, value: value }))
         })
         player.listen("map", (newMap) => {
-          if (player.id === currentPlayerId) {
+          if (player.id === store.getState().game.currentPlayerId) {
             const gameScene = getGameScene()
             if (gameScene) {
               gameScene.setMap(newMap)
