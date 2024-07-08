@@ -579,7 +579,7 @@ export default class PokemonState {
         true
       )) {
         if (cell.value && cell.value.team === pokemon.team) {
-          cell.value.handleHeal(0.05 * cell.value.hp, pokemon, 0, false)
+          cell.value.handleHeal(0.04 * cell.value.hp, pokemon, 0, false)
         }
       }
     }

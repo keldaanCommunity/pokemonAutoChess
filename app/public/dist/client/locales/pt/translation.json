@@ -1591,7 +1591,7 @@
     "BLUE_ORB": "Cada terceiro ataque do titular libera uma corrente de raios que atinge os 3 inimigos que se aproximam, causando 10 SPECIAL e queimando 20 PP",
     "SCOPE_LENS": "Acertos críticos roubam 15 de PP do alvo.",
     "STAR_DUST": "Após lançar a habilidade, ganhe 60% da PP máxima como SHIELD",
-    "GREEN_ORB": "Titular e aliados adjacentes na mesma linha ganham 4 bônus de PP por acerto",
+    "GREEN_ORB": "O titular e aliados adjacentes recuperam 4% do seu HP máximo a cada segundo",
     "MANA_SCARF": "Os ataques do detentor restauram 8 PP adicionais",
     "SMOKE_BALL": "Quando estiver abaixo de 33% do HP máximo, solte a bola de fumaça e pule para uma cela de distância. Cada inimigo adjacente fica PARALYSIS por 3 segundos, e a fumaça reduz a precisão de todos os pokémons dentro dele em 50%.",
     "XRAY_VISION": "+50% ATK_SPEED. Os ataques titulares não podem mais errar.",

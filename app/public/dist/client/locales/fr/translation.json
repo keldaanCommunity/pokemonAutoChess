@@ -1874,7 +1874,7 @@
     "BLUE_ORB": "Chaque troisième attaque du porteur libère une chaîne d'éclairs qui rebondit sur les 3 ennemis les plus proches, infligeant 10 SPECIAL et retirant 20 PP",
     "SCOPE_LENS": "Les coups critiques volent 15 PP à la cible.",
     "STAR_DUST": "Après avoir lancé la capacité, gagne 60% des PP max en tant que SHIELD",
-    "GREEN_ORB": "Le porteur et les alliés adjacents regagnent 5% de leurs HP max chaque seconde",
+    "GREEN_ORB": "Le porteur et les alliés adjacents regagnent 4% de leurs HP max chaque seconde",
     "MANA_SCARF": "Les attaques du porteur restaurent 8 PP supplémentaires",
     "SMOKE_BALL": "Une fois sous les 33% HP max, lâche la boule de fumée et saute dans une cellule plus loin. Chaque ennemi adjacent est PARALYSIS pendant 3 secondes, et la fumée réduit la précision de tous les pokémons à l'intérieur de 50 %.",
     "XRAY_VISION": "+50 % ATK_SPEED. Les attaques du porteur ne peuvent plus manquer.",

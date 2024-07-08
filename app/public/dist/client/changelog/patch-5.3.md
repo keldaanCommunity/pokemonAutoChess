@@ -38,6 +38,7 @@
 - Shiny Stone: now gives +3 to Light synergy count
 - Golden Rod: Unique pool no longer tier 3 only, but taken from unique propositions list at t10, duos excluded. Unique no longer matches top synergies.
 - Rare Candy: after each round, spawns a 1 ⭐ copy of the holder on bench
+- Nerf Green orb: Heal ~~5~~ 4% of max HP every second
 
 # Gameplay
 
