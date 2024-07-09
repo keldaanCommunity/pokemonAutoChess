@@ -11070,7 +11070,7 @@ export class Spectrier extends Pokemon {
   atk = 30
   def = 5
   speDef = 10
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.ASTRAL_BARRAGE
   passive = Passive.GRIM_NEIGH

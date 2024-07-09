@@ -30,6 +30,7 @@
 - Tapu Fini now only shows up on Water portal symbols
 - Tapu Koko now only shows up on Electric portal symbols
 - Tapu Lele now only shows up on Psychic portal symbols
+- Buff Spectrier: PP 100 → 80
 
 # Changes to Synergies
 
