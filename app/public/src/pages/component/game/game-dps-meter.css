@@ -37,6 +37,13 @@
   grid-template-columns: 1fr 1fr;
 }
 
+.game-dps-meter .react-tabs__tab-panel > p {
+  grid-column: span 2;
+  text-align: center;
+  margin-bottom: 0.5em;
+  font-size: 0.8em;
+}
+
 .game-dps-bar {
   display: flex;
   align-items: center;

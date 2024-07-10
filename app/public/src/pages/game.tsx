@@ -12,7 +12,6 @@ import GameState from "../../../rooms/states/game-state"
 import {
   IBoardEvent,
   IDps,
-  IDpsHeal,
   IDragDropCombineMessage,
   IDragDropItemMessage,
   IDragDropMessage,
@@ -29,22 +28,13 @@ import GameContainer from "../game/game-container"
 import GameScene from "../game/scenes/game-scene"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import {
-  addBlueDpsMeter,
-  addBlueHealDpsMeter,
+  addDpsMeter,
   addPlayer,
-  addRedDpsMeter,
-  addRedHealDpsMeter,
-  changeBlueDpsMeter,
-  changeBlueHealDpsMeter,
+  changeDpsMeter,
   changePlayer,
-  changeRedDpsMeter,
-  changeRedHealDpsMeter,
   leaveGame,
-  removeBlueDpsMeter,
-  removeBlueHealDpsMeter,
+  removeDpsMeter,
   removePlayer,
-  removeRedDpsMeter,
-  removeRedHealDpsMeter,
   setAdditionalPokemons,
   setBoardSize,
   setCurrentPlayerAvatar,
@@ -91,6 +81,7 @@ import { FIREBASE_CONFIG } from "./utils/utils"
 import { DungeonDetails } from "../../../types/enum/Dungeon"
 import { playMusic, preloadMusic } from "./utils/audio"
 import store from "../stores"
+import { Team } from "../../../types/enum/Game"
 
 let gameContainer: GameContainer
 
@@ -424,109 +415,43 @@ export default function Game() {
           dispatch(setWeather({ id: simulation.id, value: value }))
         })
 
-        simulation.blueDpsMeter.onAdd((dps) => {
-          dispatch(addBlueDpsMeter({ value: dps, id: simulation.id }))
-          const fields: NonFunctionPropNames<IDps>[] = [
-            "id",
-            "name",
-            "physicalDamage",
-            "specialDamage",
-            "trueDamage"
-          ]
-          fields.forEach((field) => {
-            dps.listen(field, (value) => {
-              dispatch(
-                changeBlueDpsMeter({
-                  id: dps.id,
-                  field: field,
-                  value: value,
-                  simulationId: simulation.id
-                })
-              )
+        const teams = [Team.BLUE_TEAM, Team.RED_TEAM]
+        teams.forEach((team) => {
+          const dpsMeter =
+            team === Team.BLUE_TEAM
+              ? simulation.blueDpsMeter
+              : simulation.redDpsMeter
+          dpsMeter.onAdd((dps) => {
+            dispatch(addDpsMeter({ value: dps, id: simulation.id, team }))
+            const fields: NonFunctionPropNames<IDps>[] = [
+              "id",
+              "name",
+              "physicalDamage",
+              "specialDamage",
+              "trueDamage",
+              "heal",
+              "shield",
+              "hpDamageTaken",
+              "shieldDamageTaken"
+            ]
+            fields.forEach((field) => {
+              dps.listen(field, (value) => {
+                dispatch(
+                  changeDpsMeter({
+                    id: dps.id,
+                    team,
+                    field: field,
+                    value: value,
+                    simulationId: simulation.id
+                  })
+                )
+              })
             })
           })
-        })
 
-        simulation.blueDpsMeter.onRemove(() => {
-          dispatch(removeBlueDpsMeter(simulation.id))
-        })
-
-        simulation.redDpsMeter.onAdd((dps) => {
-          dispatch(addRedDpsMeter({ value: dps, id: simulation.id }))
-          const fields: NonFunctionPropNames<IDps>[] = [
-            "id",
-            "name",
-            "physicalDamage",
-            "specialDamage",
-            "trueDamage"
-          ]
-          fields.forEach((field) => {
-            dps.listen(field, (value) => {
-              dispatch(
-                changeRedDpsMeter({
-                  id: dps.id,
-                  field: field,
-                  value: value,
-                  simulationId: simulation.id
-                })
-              )
-            })
+          dpsMeter.onRemove(() => {
+            dispatch(removeDpsMeter({ simulationId: simulation.id, team }))
           })
-        })
-        simulation.redDpsMeter.onRemove(() => {
-          dispatch(removeRedDpsMeter(simulation.id))
-        })
-
-        simulation.blueHealDpsMeter.onAdd((dps) => {
-          dispatch(addBlueHealDpsMeter({ value: dps, id: simulation.id }))
-          const fields: NonFunctionPropNames<IDpsHeal>[] = [
-            "heal",
-            "id",
-            "name",
-            "shield"
-          ]
-
-          fields.forEach((field) => {
-            dps.listen(field, (value) => {
-              dispatch(
-                changeBlueHealDpsMeter({
-                  id: dps.id,
-                  field: field,
-                  value: value,
-                  simulationId: simulation.id
-                })
-              )
-            })
-          })
-        })
-        simulation.blueHealDpsMeter.onRemove(() => {
-          dispatch(removeBlueHealDpsMeter(simulation.id))
-        })
-
-        simulation.redHealDpsMeter.onAdd((dps) => {
-          dispatch(addRedHealDpsMeter({ value: dps, id: simulation.id }))
-          const fields: NonFunctionPropNames<IDpsHeal>[] = [
-            "heal",
-            "id",
-            "name",
-            "shield"
-          ]
-
-          fields.forEach((field) => {
-            dps.listen(field, (value) => {
-              dispatch(
-                changeRedHealDpsMeter({
-                  id: dps.id,
-                  field: field,
-                  value: value,
-                  simulationId: simulation.id
-                })
-              )
-            })
-          })
-        })
-        simulation.redHealDpsMeter.onRemove(() => {
-          dispatch(removeRedHealDpsMeter(simulation.id))
         })
       })
 
