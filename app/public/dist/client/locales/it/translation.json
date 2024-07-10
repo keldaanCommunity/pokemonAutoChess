@@ -1725,7 +1725,7 @@
     "elo_answer": "Il sistema elo in Pokemon Auto Chess funziona come in altri giochi basati su elo come Chess, Lol, Starcraft ecc... Per guadagnare punti elo, devi battere gli altri giocatori. Più alto è l'elo del tuo avversario, più elo guadagnerai sconfiggendolo e viceversa. Se non giochi per 10 giorni, il tuo elo inizierà a diminuire (-10 elo/giorno).",
     "missing_points": "Non ho ottenuto punti elo nella mia ultima partita, perché?",
     "missing_points_answer": "Il gioco deve essere terminato per vincere/perdere punti elo. Se qualcuno è ancora in gioco, devi aspettare. I bot non danno elo, solo i giocatori umani sono considerati per la valutazione elo. È anche possibile che il gioco avesse elo disabilitato (modalità \"Solo per divertimento\")",
-    "damage_label": "Quali sono i danni speciali ei danni fisici?",
+    "damage": "Quali sono i danni speciali ei danni fisici?",
     "damage_answer": "Gli attacchi automatici infliggono principalmente danni fisici, mentre le abilità infliggono principalmente danni speciali. Alcune abilità tuttavia possono infliggere danni reali o danni fisici.",
     "defense": "Puoi dirmi come funziona la difesa? È una riduzione del danno fissa?",
     "defense_answer": "Stesso sistema di League of Legends: danno: atk / (1+(0.1*def)). La difesa funziona per i danni fisici, la difesa speciale per i danni speciali",
@@ -1738,8 +1738,7 @@
     "code": "Quale lingua/libreria viene utilizzata per codificare il gioco?",
     "code_answer": "TypeScript, Phaser, Colyseus. Se vuoi contribuisci",
     "pull_requests": "le richieste pull sono aperte",
-    "faq": "FAQ.",
-    "damage": "Quali sono i danni speciali ei danni fisici?"
+    "faq": "FAQ."
   },
   "tutorial": {
     "start": "Come iniziare un gioco?",
@@ -1838,8 +1837,9 @@
   "buy_booster_500": "Acquista un nuovo booster per 500",
   "close": "Vicino",
   "additional_pokemon_hint": "Ogni giocatore ha scelto Pokemon aggiuntivi da rendere disponibili nel negozio di tutti i giocatori per questo gioco.",
-  "damage_label": "Danno",
-  "heal": "Guarire",
+  "damage_dealt": "Danno",
+  "damage_taken": "Danno subito",
+  "heal_shield": "Guarigione e scudo forniti",
   "lvl": "liv",
   "lose_game_hint": "Perdi la partita quando non hai più punti salute",
   "unlock": "Sbloccare",

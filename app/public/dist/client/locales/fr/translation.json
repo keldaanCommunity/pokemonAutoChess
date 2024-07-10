@@ -2403,7 +2403,7 @@
     "elo_answer": "Le système ELO dans Pokemon Auto Chess fonctionne de la même manière que dans d'autres jeux basés sur ELO comme Chess, Lol, Starcraft etc... Pour gagner des points ELO, vous devez battre d'autres joueurs. Plus l'ELO de votre adversaire est élevé, plus vous gagnerez d'ELO en le battant, et vice versa. Si vous ne jouez pas pendant 10 jours, votre ELO commencera à décliner (-10 ELO/jour).",
     "missing_points": "Je n'ai pas obtenu de points ELO lors de mon dernier match, pourquoi ?",
     "missing_points_answer": "La partie doit être totalement terminée pour gagner/perdre des points ELO. Si quelqu'un est encore en jeu, vous devez attendre. Les bots ne donnent pas d'ELO, seuls les joueurs humains sont comptabilisés pour l'ELO. Il est également possible que le jeu ait désactivé les gains d'ELO (mode \"Pour le fun\")",
-    "damage_label": "Quels sont les dommages spéciaux et les dommages physiques ?",
+    "damage": "Quels sont les dommages spéciaux et les dommages physiques ?",
     "damage_answer": "Les attaques automatiques infligent principalement des dégâts physiques, tandis que les capacités infligent principalement des dégâts spéciaux. Certaines capacités peuvent cependant infliger des dégâts physiques ou des dégâts bruts.",
     "defense": "Comment fonctionne la défense et la défense spéciale ?",
     "defense_answer": "Même système que League of Legends : dégâts = attaque * (PV / PV * (1+(0.1*def))). La défense est utilisée pour les dégâts physiques, la défense spéciale pour les dégâts spéciaux",
@@ -2416,8 +2416,7 @@
     "code": "Quel langage/bibliothèque est utilisé pour coder le jeu ?",
     "code_answer": "TypeScript, Phaser, Colyseus. Si vous souhaitez contribuer",
     "pull_requests": "les pull requests sont ouvertes",
-    "faq": "FAQ.",
-    "damage": "Quels sont les dommages spéciaux et les dommages physiques ?"
+    "faq": "FAQ."
   },
   "tutorial": {
     "start": "Comment démarrer une partie ?",
@@ -2546,8 +2545,9 @@
   "close": "Fermer",
   "additional_pokemon_hint": "Chaque joueur choisit des Pokémon supplémentaires qui seront disponibles dans le magasin de tous les joueurs pour ce jeu.",
   "regional_pokemon_hint": "Après avoir voyagé vers une nouvelle région, vous rencontrerez de nouvelles espèces régionales de Pokémons.",
-  "damage_label": "Dégats",
-  "heal": "Soin",
+  "damage_dealt": "Dégats infligés",
+  "damage_taken": "Dégats reçus",
+  "heal_shield": "Soin et Bouclier donnés",
   "lvl": "Niv",
   "lose_game_hint": "Vous perdez la partie lorsque vous n'avez plus de points de vie",
   "unlock": "Déverouiller",

@@ -2406,7 +2406,7 @@
     "elo_answer": "The elo system in Pokemon Auto Chess works the same as in other elo based games like Chess, Lol, Starcraft etc... To gain elo points, you need to beat other players. The higher your opponent's elo, the more elo you will gain by defeating him, and vice versa. If you don't play for 10 days, your elo will start to decay (-10 elo/day).",
     "missing_points": "I didn't get elo points in my last game, why ?",
     "missing_points_answer": "The game needs to be finished in order to win/lose elo points. If someone is still in game, you need to wait. Bots do not give elo, only human players are accounted for elo rating. It is also possible that the game had elo disabled (\"Just for fun\" mode)",
-    "damage_label": "What are the special damages and physical damages ?",
+    "damage": "What are the special damages and physical damages ?",
     "damage_answer": "Auto attacks mostly deal Physical damage, while Abilities mostly deal Special damage. Some abilities however can deal true damage or physical damage.",
     "defense": "Can you tell me how defense works? Is it flat damage reduction?",
     "defense_answer": "Same system as League of Legends: damage: atk / (1+(0.1*def)). Defense works for physical damage, special defense for special damage",
@@ -2419,8 +2419,7 @@
     "code": "What language/library is used to code the game ?",
     "code_answer": "TypeScript, Phaser, Colyseus. If you want to contribute",
     "pull_requests": "pull requests are open",
-    "faq": "F.A.Q.",
-    "damage": "What are the special damages and physical damages ?"
+    "faq": "F.A.Q."
   },
   "tutorial": {
     "start": "How to start a game ?",
@@ -2549,8 +2548,10 @@
   "close": "Close",
   "additional_pokemon_hint": "Each player picked additional Pokemon to be available in all players shop for this game.",
   "regional_pokemon_hint": "After travelling to a new region, you will encounter new regional species of Pokemon.",
-  "damage_label": "Damage",
-  "heal": "Heal",
+  "damage_dealt": "Damage dealt",
+  "damage_taken": "Damage taken",
+  "heal_shield": "Heal and Shield given",
+  "total": "Total",
   "lvl": "Lvl",
   "lose_game_hint": "You lose the game when you have no more Health Points",
   "unlock": "Unlock",
