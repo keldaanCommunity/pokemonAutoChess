@@ -1705,7 +1705,7 @@
     "elo_answer": "Het elo-systeem in Pokemon Auto Chess werkt hetzelfde als in andere op elo gebaseerde spellen zoals Chess, Lol, Starcraft enz... Om elo-punten te verdienen, moet je andere spelers verslaan. Hoe hoger de elo van je tegenstander, hoe meer elo je krijgt door hem te verslaan, en vice versa. Als je 10 dagen niet speelt, begint je elo af te nemen (-10 elo/dag).",
     "missing_points": "Ik heb geen elo-punten gekregen in mijn laatste spel, waarom?",
     "missing_points_answer": "Het spel moet worden uitgespeeld om elo-punten te winnen/verliezen. Als er nog iemand in het spel is, moet je wachten. Bots geven geen elo, alleen menselijke spelers tellen mee voor de elo-rating. Het is ook mogelijk dat de game elo had uitgeschakeld (\"Just for fun\"-modus)",
-    "damage_label": "Wat zijn de speciale schade en fysieke schade?",
+    "damage": "Wat zijn de speciale schade en fysieke schade?",
     "damage_answer": "Auto-aanvallen richten meestal fysieke schade aan, terwijl vaardigheden meestal speciale schade aanrichten. Sommige vaardigheden kunnen echter echte schade of fysieke schade aanrichten.",
     "defense": "Kunt u mij vertellen hoe defensie werkt? Is het vlakke schadebeperking?",
     "defense_answer": "Zelfde systeem als League of Legends: schade: atk / (1+(0.1*def)). Verdediging werkt voor fysieke schade, speciale verdediging voor speciale schade",
@@ -1718,8 +1718,7 @@
     "code": "Welke taal/bibliotheek wordt gebruikt om het spel te coderen?",
     "code_answer": "TypeScript, Phaser, Colyseus. Als je wilt bijdragen",
     "pull_requests": "pull-aanvragen zijn open",
-    "faq": "FAQ.",
-    "damage": "Wat zijn de speciale schade en fysieke schade?"
+    "faq": "FAQ."
   },
   "tutorial": {
     "start": "Hoe start je een spel?",
@@ -1818,8 +1817,9 @@
   "buy_booster_500": "Koop een nieuwe booster voor 500",
   "close": "Dichtbij",
   "additional_pokemon_hint": "Elke speler koos extra Pokemon om beschikbaar te zijn in de winkel van alle spelers voor dit spel.",
-  "damage_label": "schade_label",
-  "heal": "Genezen",
+  "damage_dealt": "Schade",
+  "damage_taken": "Schade genomen",
+  "heal_shield": "Genezing en schild gegeven",
   "lvl": "niveau",
   "lose_game_hint": "Je verliest het spel als je geen gezondheidspunten meer hebt",
   "unlock": "Ontgrendelen",

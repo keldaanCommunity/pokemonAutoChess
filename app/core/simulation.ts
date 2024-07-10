@@ -29,7 +29,6 @@ import { pickRandomIn, randomBetween, shuffleArray } from "../utils/random"
 import { values } from "../utils/schemas"
 import Board from "./board"
 import Dps from "./dps"
-import DpsHeal from "./dps-heal"
 import { PokemonEntity, getStrongestUnit, getUnitScore } from "./pokemon-entity"
 
 export default class Simulation extends Schema implements ISimulation {
@@ -39,8 +38,6 @@ export default class Simulation extends Schema implements ISimulation {
   @type({ map: PokemonEntity }) redTeam = new MapSchema<IPokemonEntity>()
   @type({ map: Dps }) blueDpsMeter = new MapSchema<Dps>()
   @type({ map: Dps }) redDpsMeter = new MapSchema<Dps>()
-  @type({ map: DpsHeal }) blueHealDpsMeter = new MapSchema<DpsHeal>()
-  @type({ map: DpsHeal }) redHealDpsMeter = new MapSchema<DpsHeal>()
   @type("string") id: string
   @type("string") bluePlayerId: string
   @type("string") redPlayerId: string
@@ -246,14 +243,6 @@ export default class Simulation extends Schema implements ISimulation {
         : undefined
   }
 
-  getHealDpsMeter(playerId: string) {
-    return playerId === this.bluePlayer?.id
-      ? this.blueHealDpsMeter
-      : playerId === this.redPlayer?.id
-        ? this.redHealDpsMeter
-        : undefined
-  }
-
   getTeam(playerId: string) {
     return playerId === this.bluePlayer?.id
       ? this.blueTeam
@@ -290,17 +279,13 @@ export default class Simulation extends Schema implements ISimulation {
 
     if (team == Team.BLUE_TEAM) {
       const dps = new Dps(pokemonEntity.id, getPath(pokemonEntity))
-      const dpsHeal = new DpsHeal(pokemonEntity.id, getPath(pokemonEntity))
       this.blueTeam.set(pokemonEntity.id, pokemonEntity)
       this.blueDpsMeter.set(pokemonEntity.id, dps)
-      this.blueHealDpsMeter.set(pokemonEntity.id, dpsHeal)
     }
     if (team == Team.RED_TEAM) {
       const dps = new Dps(pokemonEntity.id, getPath(pokemonEntity))
-      const dpsHeal = new DpsHeal(pokemonEntity.id, getPath(pokemonEntity))
       this.redTeam.set(pokemonEntity.id, pokemonEntity)
       this.redDpsMeter.set(pokemonEntity.id, dps)
-      this.redHealDpsMeter.set(pokemonEntity.id, dpsHeal)
     }
     return pokemonEntity
   }
@@ -1315,8 +1300,15 @@ export default class Simulation extends Schema implements ISimulation {
     this.blueTeam.forEach((pkm, key) => {
       this.blueDpsMeter
         .get(key)
-        ?.changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage)
-      this.blueHealDpsMeter.get(key)?.changeHeal(pkm.healDone, pkm.shieldDone)
+        ?.update(
+          pkm.physicalDamage,
+          pkm.specialDamage,
+          pkm.trueDamage,
+          pkm.hpDamageTaken,
+          pkm.shieldDamageTaken,
+          pkm.healDone,
+          pkm.shieldDone
+        )
 
       if (
         (!pkm.life || pkm.life <= 0) &&
@@ -1332,8 +1324,15 @@ export default class Simulation extends Schema implements ISimulation {
     this.redTeam.forEach((pkm, key) => {
       this.redDpsMeter
         .get(key)
-        ?.changeDamage(pkm.physicalDamage, pkm.specialDamage, pkm.trueDamage)
-      this.redHealDpsMeter.get(key)?.changeHeal(pkm.healDone, pkm.shieldDone)
+        ?.update(
+          pkm.physicalDamage,
+          pkm.specialDamage,
+          pkm.trueDamage,
+          pkm.hpDamageTaken,
+          pkm.shieldDamageTaken,
+          pkm.healDone,
+          pkm.shieldDone
+        )
 
       if (
         (!pkm.life || pkm.life <= 0) &&

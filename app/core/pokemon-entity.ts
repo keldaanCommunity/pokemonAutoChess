@@ -100,6 +100,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   physicalDamage: number
   specialDamage: number
   trueDamage: number
+  hpDamageTaken: number
+  shieldDamageTaken: number
   shieldDone: number
   flyingProtection = 0
   growGroundTimer = 3000
@@ -162,6 +164,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.physicalDamage = 0
     this.specialDamage = 0
     this.trueDamage = 0
+    this.hpDamageTaken = 0
+    this.shieldDamageTaken = 0
     this.healDone = 0
     this.shieldDone = 0
 

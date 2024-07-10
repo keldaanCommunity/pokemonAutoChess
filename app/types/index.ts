@@ -1,7 +1,6 @@
 import { ArraySchema, MapSchema, Schema, SetSchema } from "@colyseus/schema"
 import Board from "../core/board"
 import Dps from "../core/dps"
-import DpsHeal from "../core/dps-heal"
 import { EvolutionRule } from "../core/evolution-rules"
 import Count from "../models/colyseus-models/count"
 import ExperienceManager from "../models/colyseus-models/experience-manager"
@@ -432,29 +431,27 @@ export interface ISimulation {
   redTeam: MapSchema<IPokemonEntity>
   blueDpsMeter: MapSchema<Dps>
   redDpsMeter: MapSchema<Dps>
-  blueHealDpsMeter: MapSchema<DpsHeal>
-  redHealDpsMeter: MapSchema<DpsHeal>
   bluePlayerId: string
   redPlayerId: string
 }
 
 export interface IDps {
-  changeDamage(
+  update(
     physicalDamage: number,
     specialDamage: number,
-    trueDamage: number
+    trueDamage: number,
+    hpDamageTaken: number,
+    shieldDamageTaken: number,
+    heal: number,
+    shield: number
   )
   id: string
   name: string
   physicalDamage: number
   specialDamage: number
   trueDamage: number
-}
-
-export interface IDpsHeal {
-  changeHeal(healDone: number, shieldDone: number)
-  id: string
-  name: string
+  hpDamageTaken: number
+  shieldDamageTaken: number
   heal: number
   shield: number
 }
@@ -533,6 +530,8 @@ export interface IPokemonEntity {
   physicalDamage: number
   specialDamage: number
   trueDamage: number
+  hpDamageTaken: number
+  shieldDamageTaken: number
   shieldDone: number
   positionX: number
   positionY: number

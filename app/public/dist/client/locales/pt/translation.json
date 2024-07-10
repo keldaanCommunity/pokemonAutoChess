@@ -2007,7 +2007,7 @@
     "elo_answer": "O sistema elo em Pokemon Auto Chess funciona da mesma forma que em outros jogos baseados em elo como Chess, Lol, Starcraft etc... Para ganhar pontos elo, você precisa vencer outros jogadores. Quanto maior o elo do seu oponente, mais elo você ganhará ao derrotá-lo e vice-versa. Se você não jogar por 10 dias, seu elo começará a decair (-10 elo/dia).",
     "missing_points": "Não ganhei pontos elo no meu último jogo, por quê?",
     "missing_points_answer": "O jogo precisa ser finalizado para ganhar/perder pontos elo. Se alguém ainda estiver no jogo, você precisa esperar. Bots não dão elo, apenas jogadores humanos são contabilizados para classificação elo. Também é possível que o jogo tenha elo desativado (modo \"Só por diversão\")",
-    "damage_label": "Quais são os danos especiais e danos físicos?",
+    "damage": "Quais são os danos especiais e danos físicos?",
     "damage_answer": "Os ataques automáticos causam principalmente dano físico, enquanto as habilidades causam principalmente dano especial. Algumas habilidades, entretanto, podem causar dano verdadeiro ou dano físico.",
     "defense": "Você pode me dizer como funciona a defesa? É redução de dano plana?",
     "defense_answer": "Mesmo sistema de League of Legends: dano: atk / (1+(0.1*def)). Defesa funciona para dano físico, defesa especial para dano especial",
@@ -2020,8 +2020,7 @@
     "code": "Qual linguagem/biblioteca é usada para codificar o jogo?",
     "code_answer": "TypeScript, Phaser, Coliseu. Se você quiser contribuir",
     "pull_requests": "solicitações pull estão abertas",
-    "faq": "PERGUNTAS FREQUENTES.",
-    "damage": "Quais são os danos especiais e danos físicos?"
+    "faq": "PERGUNTAS FREQUENTES."
   },
   "tutorial": {
     "start": "Como iniciar um jogo?",
@@ -2130,8 +2129,9 @@
   "buy_booster_500": "Compre um novo booster por 500",
   "close": "Fechar",
   "additional_pokemon_hint": "Cada jogador escolheu Pokémon adicionais para estarem disponíveis na loja de todos os jogadores para este jogo.",
-  "damage_label": "Dano",
-  "heal": "Curar",
+  "damage_dealt": "Dano",
+  "damage_taken": "Dano recebido",
+  "heal_shield": "Cura e escudo dados",
   "lvl": "lvl",
   "lose_game_hint": "Você perde o jogo quando não tem mais pontos de saúde",
   "unlock": "desbloquear",

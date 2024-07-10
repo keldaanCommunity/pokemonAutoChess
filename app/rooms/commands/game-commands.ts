@@ -883,7 +883,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       let heal = 0
       const dpsMeter = this.state.simulations
         .get(player.simulationId)
-        ?.getHealDpsMeter(player.id)
+        ?.getDpsMeter(player.id)
 
       if (dpsMeter) {
         dpsMeter.forEach((v) => {

@@ -244,12 +244,15 @@ export default class PokemonState {
           damageOnShield = pokemon.shield
         }
 
+        pokemon.shieldDamageTaken += damageOnShield
         takenDamage += damageOnShield
-        pokemon.shield = pokemon.shield - damageOnShield
+        pokemon.shield -= damageOnShield
         residualDamage = min(0)(reducedDamage - damageOnShield)
       }
 
-      takenDamage += Math.min(residualDamage, pokemon.life)
+      const hpDamageTaken = Math.min(residualDamage, pokemon.life)
+      pokemon.hpDamageTaken += hpDamageTaken
+      takenDamage += hpDamageTaken
 
       if (
         pokemon.items.has(Item.SHINY_CHARM) &&

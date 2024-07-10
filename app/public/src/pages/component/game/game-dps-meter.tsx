@@ -1,11 +1,11 @@
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { PVEStages } from "../../../../../models/pve-stages"
 import { useAppSelector } from "../../../hooks"
 import { preferences, savePreferences } from "../../../preferences"
 import { getAvatarSrc } from "../../../utils"
 import GamePlayerDpsMeter from "./game-player-dps-meter"
+import GamePlayerDpsTakenMeter from "./game-player-dps-taken-meter"
 import GamePlayerHpsMeter from "./game-player-hps-meter"
 import "./game-dps-meter.css"
 
@@ -26,16 +26,9 @@ export default function GameDpsMeter() {
   const myDpsMeter = teamIndex === 0 ? blueDpsMeter : redDpsMeter
   const opponentDpsMeter = teamIndex === 0 ? redDpsMeter : blueDpsMeter
 
-  const blueHpsMeter = useAppSelector((state) => state.game.blueHealDpsMeter)
-  const redHpsMeter = useAppSelector((state) => state.game.redHealDpsMeter)
-  const myHpsMeter = teamIndex === 0 ? blueHpsMeter : redHpsMeter
-  const opponentHpsMeter = teamIndex === 0 ? redHpsMeter : blueHpsMeter
-
   const avatar = useAppSelector((state) => state.game.currentPlayerAvatar)
   const name = useAppSelector((state) => state.game.currentPlayerName)
   const [isOpen, setOpen] = useState(preferences.showDpsMeter)
-
-  const isPVE = useAppSelector((state) => state.game.stageLevel in PVEStages)
 
   function toggleOpen() {
     setOpen(!isOpen)
@@ -71,27 +64,50 @@ export default function GameDpsMeter() {
               src={getAvatarSrc(opponentAvatar)}
               className="pokemon-portrait"
             ></img>
-            <p>{isPVE ? t(opponentName) : opponentName}</p>
+            <p>{t(opponentName)}</p>
           </div>
         </header>
         <Tabs>
           <TabList>
-            <Tab key="damage_label">
-              <p>{t("damage_label")}</p>
+            <Tab key="damage_dealt">
+              <img
+                src="assets/icons/ATK.png"
+                title={t("damage_dealt")}
+                alt={t("damage_dealt")}
+              ></img>
+            </Tab>
+            <Tab key="damage_taken">
+              <img
+                src="assets/icons/SHIELD.png"
+                title={t("damage_taken")}
+                alt={t("damage_taken")}
+              ></img>
             </Tab>
             <Tab key="heal">
-              <p>{t("heal")}</p>
+              <img
+                src="assets/icons/HP.png"
+                title={t("heal_shield")}
+                alt={t("heal_shield")}
+              ></img>
             </Tab>
           </TabList>
 
           <TabPanel>
+            <p>{t("damage_dealt")}</p>
             <GamePlayerDpsMeter dpsMeter={myDpsMeter} />
             <GamePlayerDpsMeter dpsMeter={opponentDpsMeter} />
           </TabPanel>
 
           <TabPanel>
-            <GamePlayerHpsMeter hpsMeter={myHpsMeter} />
-            <GamePlayerHpsMeter hpsMeter={opponentHpsMeter} />
+            <p>{t("damage_taken")}</p>
+            <GamePlayerDpsTakenMeter dpsMeter={myDpsMeter} />
+            <GamePlayerDpsTakenMeter dpsMeter={opponentDpsMeter} />
+          </TabPanel>
+
+          <TabPanel>
+            <p>{t("heal_shield")}</p>
+            <GamePlayerHpsMeter dpsMeter={myDpsMeter} />
+            <GamePlayerHpsMeter dpsMeter={opponentDpsMeter} />
           </TabPanel>
         </Tabs>
       </div>

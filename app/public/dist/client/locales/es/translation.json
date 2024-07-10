@@ -2394,7 +2394,7 @@
     "elo_answer": "El sistema elo en Pokemon Auto Chess funciona igual que en otros juegos basados en elo como Chess, Lol, Starcraft, etc. Para ganar puntos elo, debes vencer a otros jugadores. Cuanto mayor sea el elo de tu oponente, más elo ganarás al derrotarlo, y viceversa. Si no juegas durante 10 días, tu elo comenzará a decaer (-10 elo/día).",
     "missing_points": "No obtuve puntos elo en mi último juego, ¿por qué?",
     "missing_points_answer": "El juego debe terminarse para ganar/perder puntos elo. Si alguien todavía está en el juego, debes esperar. Los bots no otorgan elo, solo los jugadores humanos tienen en cuenta la calificación de elo. También es posible que el juego tuviera elo desactivado (modo \"Solo por diversión\")",
-    "damage_label": "¿Qué es el daño especial y el daño físico?",
+    "damage": "¿Qué es el daño especial y el daño físico?",
     "damage_answer": "Los ataques automáticos en su mayoría infligen daño físico, mientras que las habilidades en su mayoría infligen daño especial. Sin embargo, algunas habilidades pueden causar daño verdadero o daño físico.",
     "defense": "¿Puedes decirme cómo funciona la defensa? ¿Es la reducción de daño plana?",
     "defense_answer": "Mismo sistema que League of Legends: daño: atk / (1+(0.1*def)). Obras de defensa por daño físico, defensa especial por daño especial",
@@ -2407,8 +2407,7 @@
     "code": "¿Qué idioma/biblioteca se utiliza para codificar el juego?",
     "code_answer": "TypeScript, Phaser, Coliseo. Si quieres contribuir",
     "pull_requests": "las solicitudes de extracción están abiertas",
-    "faq": "PREGUNTAS MÁS FRECUENTES.",
-    "damage": "¿Qué es el daño especial y el daño físico?"
+    "faq": "PREGUNTAS MÁS FRECUENTES."
   },
   "tutorial": {
     "start": "¿Cómo iniciar un juego?",
@@ -2537,8 +2536,9 @@
   "close": "Mirar",
   "additional_pokemon_hint": "Cada jugador eligió Pokémon adicionales para que estén disponibles en todas las tiendas de jugadores para este juego.",
   "regional_pokemon_hint": "Después de viajar a una nueva región, encontrarás nuevas especies regionales de Pokémon.",
-  "damage_label": "Daño",
-  "heal": "Sanar",
+  "damage_dealt": "Daño",
+  "damage_taken": "Daño recibido",
+  "heal_shield": "Curación y escudo dados",
   "lvl": "Nivel",
   "lose_game_hint": "Pierdes el juego cuando no tienes más puntos de salud.",
   "unlock": "Desbloquear",
