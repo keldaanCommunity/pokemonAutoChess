@@ -18,6 +18,19 @@
 - Nerf Deoxys: HP ~~240~~ 220
 - Nerf Darkrai: HP ~~300~~ 250, Attack ~~30~~ 27
 - Nerf Empty Light: ~~40~~ 33 special damage
+- Groudon is now Ground/Monster ; Primal Groudon is now Ground/Monster/Fire ; Primal Groudon def/spedef: ~~10~~ 5
+- Buff Uxie, Azelf, Mesprit: Attack ~~15~~ 18
+- Nerf Poison Jab (Gligar): Poison for ~~4~~ 3 seconds
+- Nerf Mega Camerupt: Eruption damage: ~~100~~ 70 per projectile
+- Hippopotas line is now Ground/Normal instead of Ground/Rock
+- Changed Psyduck passive: now has 10% chance to become confused when hit
+- Buff Chingling: Attack ~~8~~ 10
+- Buff Doom Desire (Jirachi): PP regain if ability fails: ~~40~~ 60
+- Tapu Bulu now only shows up on Grass portal symbols
+- Tapu Fini now only shows up on Water portal symbols
+- Tapu Koko now only shows up on Electric portal symbols
+- Tapu Lele now only shows up on Psychic portal symbols
+- Buff Spectrier: PP 100 → 80
 
 # Changes to Synergies
 
@@ -34,6 +47,7 @@
 - Shiny Stone: now gives +3 to Light synergy count
 - Golden Rod: Unique pool no longer tier 3 only, but taken from unique propositions list at t10, duos excluded. Unique no longer matches top synergies.
 - Rare Candy: after each round, spawns a 1 ⭐ copy of the holder on bench
+- Nerf Green orb: Heal ~~5~~ 4% of max HP every second
 - Buff Upgrade: ~~+4~~ +5% Attack Speed per hit
 - Buff Soul Dew: ~~+8%~~ +10% Ability Power per second
 - Change King's Rock: ~~150 shield~~ 100 shield + 30% HP as shield

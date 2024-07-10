@@ -775,6 +775,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
+    if (target.passive === Passive.PSYDUCK && chance(0.1)) {
+      target.status.triggerConfusion(3000, target)
+    }
+
     if (this.name === Pkm.MINIOR) {
       this.addAttackSpeed(4, this, 1, false)
     }

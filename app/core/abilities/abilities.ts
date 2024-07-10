@@ -1197,8 +1197,8 @@ export class PoisonJabStrategy extends AbilityStrategy {
         pokemon,
         crit
       )
-      farthestTarget.status.triggerPoison(4000, farthestTarget, pokemon)
-      pokemon.status.triggerPoison(4000, pokemon, pokemon)
+      farthestTarget.status.triggerPoison(3000, farthestTarget, pokemon)
+      pokemon.status.triggerPoison(3000, pokemon, pokemon)
       pokemon.moveTo(farthestTarget.positionX, farthestTarget.positionY, board)
     }
   }
@@ -5076,7 +5076,7 @@ export class EruptionStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 1 ? 30 : pokemon.stars === 2 ? 50 : 100
+    const damage = [30, 50, 70][pokemon.stars - 1] ?? 30
     const numberOfProjectiles =
       pokemon.stars === 1 ? 15 : pokemon.stars === 2 ? 25 : 40
 
@@ -7169,7 +7169,7 @@ export class DoomDesireStrategy extends AbilityStrategy {
           true
         )
       } else {
-        pokemon.addPP(40, pokemon, 0, false)
+        pokemon.addPP(60, pokemon, 0, false)
       }
     }, 2000)
   }

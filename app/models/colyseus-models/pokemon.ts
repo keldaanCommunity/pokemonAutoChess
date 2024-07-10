@@ -5190,7 +5190,7 @@ export class Kyogre extends Pokemon {
 }
 
 export class Groudon extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.FIRE])
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.MONSTER])
   rarity = Rarity.LEGENDARY
   stars = 3
   evolution = Pkm.PRIMAL_GROUDON
@@ -5936,7 +5936,7 @@ export class Uxie extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 15
+  atk = 18
   def = 3
   speDef = 3
   maxPP = 90
@@ -5950,7 +5950,7 @@ export class Mesprit extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 15
+  atk = 18
   def = 3
   speDef = 3
   maxPP = 90
@@ -5964,7 +5964,7 @@ export class Azelf extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 15
+  atk = 18
   def = 3
   speDef = 3
   maxPP = 90
@@ -6310,13 +6310,17 @@ export class Torkoal extends Pokemon {
 }
 
 export class PrimalGroudon extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.FIRE])
+  types = new SetSchema<Synergy>([
+    Synergy.GROUND,
+    Synergy.MONSTER,
+    Synergy.FIRE
+  ])
   rarity = Rarity.LEGENDARY
   stars = 4
   hp = 400
   atk = 30
-  def = 10
-  speDef = 10
+  def = 8
+  speDef = 8
   maxPP = 100
   range = 1
   skill = Ability.EARTHQUAKE
@@ -10610,7 +10614,7 @@ export class Chingling extends Pokemon {
   evolution = Pkm.CHIMECHO
   evolutionRule = new ItemEvolutionRule([Item.STAR_DUST])
   hp = 150
-  atk = 8
+  atk = 10
   def = 2
   speDef = 4
   maxPP = 80
@@ -11066,7 +11070,7 @@ export class Spectrier extends Pokemon {
   atk = 30
   def = 5
   speDef = 10
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.ASTRAL_BARRAGE
   passive = Passive.GRIM_NEIGH
@@ -11876,7 +11880,7 @@ export class Kricketune extends Pokemon {
 }
 
 export class Hippopotas extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ROCK])
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.NORMAL])
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.HIPPODOWN
@@ -11893,7 +11897,7 @@ export class Hippopotas extends Pokemon {
 }
 
 export class Hippodown extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ROCK])
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.NORMAL])
   rarity = Rarity.EPIC
   stars = 2
   hp = 270

@@ -1052,7 +1052,7 @@ export default class Status extends Schema implements IStatus {
       pokemon.addAttack(1, pokemon, 0, false)
       pokemon.addAbilityPower(10, pokemon, 0, false)
       let infectCount = 0
-      let cells = board.getAdjacentCells(
+      const cells = board.getAdjacentCells(
         pokemon.positionX,
         pokemon.positionY,
         false
