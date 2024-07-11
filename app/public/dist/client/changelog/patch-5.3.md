@@ -25,6 +25,7 @@
     - (3) Fluid: Ally team gains 2% Attack Speed and 5 HP per unique active synergy
     - (5) Shapeless: Ally team gains 4% Attack Speed and 10 HP per unique active synergy
     - (7) Ethereal: Amorphous Pokémons gain more bonuses: 6% Attack Speed and 15 HP per unique active synergy
+- New effect for Aquatic: after 8 seconds, a tidal wave cleans up negative status and field effects, heal your Aquatic allies and knock back and damage enemies. The wave is stronger with the Aquatic synergy level.
 
 # Changes to Items
 

@@ -14,6 +14,7 @@ import {
   AttackType,
   BattleResult,
   BoardEvent,
+  Orientation,
   PokemonActionState,
   Rarity,
   Stat,
@@ -25,6 +26,7 @@ import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
 import { IPokemonData } from "../types/interfaces/PokemonData"
+import { logger } from "../utils/logger"
 import { pickRandomIn, randomBetween, shuffleArray } from "../utils/random"
 import { values } from "../utils/schemas"
 import Board from "./board"
@@ -54,6 +56,7 @@ export default class Simulation extends Schema implements ISimulation {
   bluePlayer: Player | undefined
   redPlayer: Player | undefined
   stormLightningTimer = 0
+  tidalwaveTimer = 0
 
   constructor(
     id: string,
@@ -627,7 +630,7 @@ export default class Simulation extends Schema implements ISimulation {
             if (randomWild) {
               spawns.push(randomWild)
             } else {
-              console.log("no pokemon found for white flute call", rarity, tier)
+              logger.info("no pokemon found for white flute call", rarity, tier)
             }
           }
 
@@ -970,6 +973,7 @@ export default class Simulation extends Schema implements ISimulation {
         case Effect.HYDRATION:
         case Effect.WATER_VEIL:
           pokemon.effects.add(effect)
+          this.tidalwaveTimer = 8000
           break
 
         case Effect.ODD_FLOWER:
@@ -1375,6 +1379,13 @@ export default class Simulation extends Schema implements ISimulation {
         })
       }
     }
+
+    if (this.tidalwaveTimer > 0) {
+      this.tidalwaveTimer -= dt
+      if (this.tidalwaveTimer <= 0) {
+        this.triggerTidalWave()
+      }
+    }
   }
 
   stop() {
@@ -1559,6 +1570,118 @@ export default class Simulation extends Schema implements ISimulation {
       if (strongestEnemy) {
         strongestEnemy.status.curseFate = true
         strongestEnemy.status.triggerCurse(6000)
+      }
+    }
+  }
+
+  triggerTidalWave() {
+    if (
+      this.redEffects.has(Effect.SWIFT_SWIM) ||
+      this.redEffects.has(Effect.HYDRATION) ||
+      this.redEffects.has(Effect.WATER_VEIL)
+    ) {
+      const waveLevel = this.redEffects.has(Effect.WATER_VEIL)
+        ? 3
+        : this.redEffects.has(Effect.HYDRATION)
+          ? 2
+          : 1
+      this.room.broadcast(Transfer.ABILITY, {
+        id: this.id,
+        skill: "TIDAL_WAVE",
+        positionX: 0,
+        positionY: 0,
+        targetX: 0,
+        targetY: waveLevel - 1,
+        orientation: Orientation.DOWN
+      })
+
+      for (let y = 0; y < this.board.rows; y++) {
+        for (let x = 0; x < this.board.columns; x++) {
+          const cell = this.board.getValue(x, y)
+          this.board.effects[y * this.board.columns + x] = undefined // clear all board effects
+          if (cell) {
+            if (cell.team === Team.RED_TEAM) {
+              cell.status.clearNegativeStatus()
+              if (cell.types.has(Synergy.AQUATIC)) {
+                cell.handleHeal(waveLevel * 0.05 * cell.hp, cell, 0, false)
+              }
+            } else {
+              cell.handleDamage({
+                damage: waveLevel * 0.05 * cell.hp,
+                board: this.board,
+                attackType: AttackType.TRUE,
+                attacker: null,
+                shouldTargetGainMana: false
+              })
+              let newY = y
+              while (
+                newY > 0 &&
+                this.board.getValue(x, newY - 1) === undefined
+              ) {
+                newY--
+              }
+              if (newY !== y) {
+                cell.moveTo(x, newY, this.board) // push enemies away
+                cell.cooldown = 500
+              }
+            }
+          }
+        }
+      }
+    }
+
+    if (
+      this.blueEffects.has(Effect.SWIFT_SWIM) ||
+      this.blueEffects.has(Effect.HYDRATION) ||
+      this.blueEffects.has(Effect.WATER_VEIL)
+    ) {
+      const waveLevel = this.blueEffects.has(Effect.WATER_VEIL)
+        ? 3
+        : this.blueEffects.has(Effect.HYDRATION)
+          ? 2
+          : 1
+      this.room.broadcast(Transfer.ABILITY, {
+        id: this.id,
+        skill: "TIDAL_WAVE",
+        positionX: 0,
+        positionY: 0,
+        targetX: 0,
+        targetY: waveLevel - 1,
+        orientation: Orientation.UP
+      })
+
+      for (let y = this.board.rows - 1; y > 0; y--) {
+        for (let x = 0; x < this.board.columns; x++) {
+          const cell = this.board.getValue(x, y)
+          this.board.effects[y * this.board.columns + x] = undefined // clear all board effects
+          if (cell) {
+            if (cell.team === Team.BLUE_TEAM) {
+              cell.status.clearNegativeStatus()
+              if (cell.types.has(Synergy.AQUATIC)) {
+                cell.handleHeal(waveLevel * 0.1 * cell.hp, cell, 0, false)
+              }
+            } else {
+              cell.handleDamage({
+                damage: waveLevel * 0.05 * cell.hp,
+                board: this.board,
+                attackType: AttackType.TRUE,
+                attacker: null,
+                shouldTargetGainMana: false
+              })
+              let newY = y
+              while (
+                newY < this.board.rows - 1 &&
+                this.board.getValue(x, newY + 1) === undefined
+              ) {
+                newY++
+              }
+              if (newY !== y) {
+                cell.moveTo(x, newY, this.board) // push enemies away
+                cell.cooldown = 500
+              }
+            }
+          }
+        }
       }
     }
   }
