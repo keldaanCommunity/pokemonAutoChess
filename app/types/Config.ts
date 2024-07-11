@@ -1,15 +1,15 @@
 import { Emotion } from "."
+import { EloRank } from "./enum/EloRank"
 import { AttackType, Rarity, Stat } from "./enum/Game"
-import { Item } from "./enum/Item"
+import { FishingRod, Item } from "./enum/Item"
 import { Pkm, PkmDuo, PkmProposition } from "./enum/Pokemon"
 import { Synergy } from "./enum/Synergy"
 import { Weather } from "./enum/Weather"
 
 export const ON_ATTACK_MANA = 5
 export const MANA_SCARF_MANA = 8
-export const DELTA_ORB_MANA = 4
 export const SCOPE_LENS_MANA = 15
-
+export const ARMOR_FACTOR = 0.1
 export const BOARD_WIDTH = 8
 export const BOARD_HEIGHT = 6
 
@@ -106,12 +106,13 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.ARTIFICIAL]: [2, 4, 6],
   [Synergy.BABY]: [3, 5, 7],
   [Synergy.LIGHT]: [2, 3, 4, 5],
-  [Synergy.WILD]: [2, 4, 6, 9]
+  [Synergy.WILD]: [2, 4, 6, 9],
+  [Synergy.AMORPHOUS]: [3, 5, 7]
 }
 
 export const RequiredStageLevelForXpElligibility = 10
 
-export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 0]
+export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 50]
 
 export const RarityColor: { [key in Rarity]: string } = {
   [Rarity.COMMON]: "#9f9f9f",
@@ -246,7 +247,8 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.COSMOG,
   Pkm.SCYTHER,
   Pkm.ZANGOOSE,
-  Pkm.SMEARGLE
+  Pkm.SMEARGLE,
+  Pkm.STANTLER
 )
 
 export const LegendaryShop = new Array<PkmProposition>(
@@ -296,36 +298,45 @@ export const LegendaryShop = new Array<PkmProposition>(
   Pkm.THUNDURUS,
   Pkm.LANDORUS,
   Pkm.ENAMORUS,
-  Pkm.MAGEARNA,
-  Pkm.DEOXYS
+  Pkm.MAGEARNA
 )
 
 export const NB_UNIQUE_PROPOSITIONS = 6
 export const SHOP_SIZE = 6
 
 export const FishRarityProbability: {
-  [waterLevel: number]: { [key in Rarity]?: number }
+  [rod in FishingRod]: {
+    [key in Rarity]?: number
+  }
 } = {
-  1: {
+  [Item.OLD_ROD]: {
     [Rarity.SPECIAL]: 0.55,
     [Rarity.COMMON]: 0.35,
     [Rarity.UNCOMMON]: 0.1,
     [Rarity.RARE]: 0,
     [Rarity.EPIC]: 0
   },
-  2: {
+  [Item.GOOD_ROD]: {
     [Rarity.SPECIAL]: 0.3,
     [Rarity.COMMON]: 0.35,
     [Rarity.UNCOMMON]: 0.25,
     [Rarity.RARE]: 0.1,
     [Rarity.EPIC]: 0
   },
-  3: {
-    [Rarity.SPECIAL]: 0,
-    [Rarity.COMMON]: 0.4,
+  [Item.SUPER_ROD]: {
+    [Rarity.SPECIAL]: 0.1,
+    [Rarity.COMMON]: 0.25,
     [Rarity.UNCOMMON]: 0.3,
-    [Rarity.RARE]: 0.2,
+    [Rarity.RARE]: 0.25,
     [Rarity.EPIC]: 0.1
+  },
+  [Item.GOLDEN_ROD]: {
+    [Rarity.SPECIAL]: 0.1,
+    [Rarity.COMMON]: 0.2,
+    [Rarity.UNCOMMON]: 0.25,
+    [Rarity.RARE]: 0.25,
+    [Rarity.EPIC]: 0.15,
+    [Rarity.ULTRA]: 0.05
   }
 }
 
@@ -333,10 +344,10 @@ export const MAX_PLAYERS_PER_GAME = 8
 
 export const DEFAULT_ATK_SPEED = 0.75
 export const DEFAULT_CRIT_CHANCE = 10
-export const DEFAULT_CRIT_DAMAGE = 2
+export const DEFAULT_CRIT_POWER = 2
 
 export const StageDuration: Record<number | "DEFAULT", number> = {
-  1: 20,
+  1: 30,
   10: 45,
   20: 45,
   DEFAULT: 30
@@ -350,14 +361,6 @@ export const ItemProposalStages = [3, 15]
 export const AdditionalPicksStages = [5, 8, 11]
 export const PortalCarouselStages = [10, 20]
 
-export enum EloRank {
-  BEGINNER = "BEGINNER",
-  POKEBALL = "POKEBALL",
-  GREATBALL = "GREATBALL",
-  ULTRABALL = "ULTRABALL",
-  MASTERBALL = "MASTERBALL"
-}
-
 export const EloRankThreshold: { [key in EloRank]: number } = {
   [EloRank.BEGINNER]: 0,
   [EloRank.POKEBALL]: 900,
@@ -370,6 +373,7 @@ export const WeatherThreshold: { [weather in Weather]: number } = {
   [Weather.MISTY]: 8,
   [Weather.NEUTRAL]: 8,
   [Weather.NIGHT]: 8,
+  [Weather.BLOODMOON]: 9,
   [Weather.RAIN]: 8,
   [Weather.SANDSTORM]: 8,
   [Weather.SNOW]: 6,
@@ -561,7 +565,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.CHOICE_SPECS]: { [Stat.AP]: 100 },
   [Item.SOUL_DEW]: { [Stat.AP]: 10, [Stat.PP]: 15 },
   [Item.UPGRADE]: { [Stat.AP]: 10, [Stat.ATK_SPEED]: 10 },
-  [Item.REAPER_CLOTH]: { [Stat.AP]: 10, [Stat.CRIT_CHANCE]: 10 },
+  [Item.REAPER_CLOTH]: { [Stat.AP]: 10, [Stat.CRIT_CHANCE]: 15 },
   [Item.POKEMONOMICON]: { [Stat.AP]: 10, [Stat.SHIELD]: 15 },
   [Item.POWER_LENS]: { [Stat.AP]: 10, [Stat.SPE_DEF]: 5 },
   [Item.SHELL_BELL]: { [Stat.AP]: 10, [Stat.ATK]: 3 },
@@ -570,16 +574,16 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.BLUE_ORB]: { [Stat.PP]: 15, [Stat.ATK_SPEED]: 10 },
   [Item.SCOPE_LENS]: { [Stat.PP]: 15, [Stat.CRIT_CHANCE]: 25 },
   [Item.STAR_DUST]: { [Stat.PP]: 15, [Stat.SHIELD]: 15 },
-  [Item.DELTA_ORB]: { [Stat.PP]: 15, [Stat.SPE_DEF]: 2 },
+  [Item.GREEN_ORB]: { [Stat.PP]: 15, [Stat.SPE_DEF]: 2 },
   [Item.MANA_SCARF]: { [Stat.PP]: 15, [Stat.ATK]: 3 },
   [Item.SMOKE_BALL]: { [Stat.PP]: 15, [Stat.DEF]: 2 },
   [Item.XRAY_VISION]: { [Stat.ATK_SPEED]: 50 },
   [Item.RAZOR_FANG]: {
     [Stat.ATK_SPEED]: 10,
     [Stat.CRIT_CHANCE]: 10,
-    [Stat.CRIT_DAMAGE]: 1
+    [Stat.CRIT_POWER]: 1
   },
-  [Item.LEFTOVERS]: { [Stat.ATK_SPEED]: 10, [Stat.SHIELD]: 15 },
+  [Item.GRACIDEA_FLOWER]: { [Stat.ATK_SPEED]: 10, [Stat.SHIELD]: 15 },
   [Item.CHOICE_SCARF]: { [Stat.ATK_SPEED]: 10, [Stat.SPE_DEF]: 2 },
   [Item.FIRE_GEM]: { [Stat.ATK_SPEED]: 10, [Stat.ATK]: 3 },
   [Item.DEFENSIVE_RIBBON]: { [Stat.ATK_SPEED]: 10, [Stat.DEF]: 2 },
@@ -588,9 +592,9 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.WIDE_LENS]: { [Stat.CRIT_CHANCE]: 10, [Stat.SPE_DEF]: 2 },
   [Item.RAZOR_CLAW]: { [Stat.CRIT_CHANCE]: 50, [Stat.ATK]: 3 },
   [Item.FLUFFY_TAIL]: { [Stat.CRIT_CHANCE]: 10, [Stat.DEF]: 2 },
-  [Item.KINGS_ROCK]: { [Stat.SHIELD]: 150 },
+  [Item.KINGS_ROCK]: { [Stat.SHIELD]: 100 },
   [Item.SHINY_CHARM]: { [Stat.SHIELD]: 15, [Stat.SPE_DEF]: 2 },
-  [Item.GRACIDEA_FLOWER]: { [Stat.SHIELD]: 15, [Stat.ATK]: 3 },
+  [Item.SOOTHE_BELL]: { [Stat.SHIELD]: 15, [Stat.ATK]: 3 },
   [Item.FLAME_ORB]: { [Stat.SHIELD]: 15, [Stat.DEF]: 2 },
   [Item.ASSAULT_VEST]: { [Stat.SPE_DEF]: 20 },
   [Item.AMULET_COIN]: { [Stat.SPE_DEF]: 2, [Stat.ATK]: 3 },
@@ -619,9 +623,9 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.SALAC_BERRY]: {},
   [Item.SITRUS_BERRY]: {},
   [Item.COMFEY]: {},
-  [Item.ELECTIRIZER]: { [Stat.ATK_SPEED]: 40 },
-  [Item.MAGMARIZER]: { [Stat.ATK]: 8 },
-  [Item.MACHO_BRACE]: { [Stat.ATK]: 15, [Stat.ATK_SPEED]: -25 },
+  [Item.ELECTIRIZER]: { [Stat.ATK_SPEED]: 50 },
+  [Item.MAGMARIZER]: { [Stat.ATK]: 5 },
+  [Item.MACHO_BRACE]: { [Stat.ATK]: 15, [Stat.ATK_SPEED]: -15 },
   [Item.LIGHT_BALL]: { [Stat.AP]: 75 },
   [Item.TOXIC_ORB]: { [Stat.SHIELD]: 15, [Stat.SPE_DEF]: 2 },
   [Item.METRONOME]: { [Stat.PP]: 5 },
@@ -635,7 +639,30 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.INCENSE]: { [Stat.SPE_DEF]: 5 },
   [Item.EXP_SHARE]: {},
   [Item.METEORITE]: {},
-  [Item.BERRY_JUICE]: {}
+  [Item.BERRY_JUICE]: {},
+  [Item.TRASH]: {},
+  [Item.DYNAMAX_BAND]: {},
+  [Item.SHINY_STONE]: {},
+  [Item.OLD_ROD]: {},
+  [Item.GOOD_ROD]: {},
+  [Item.SUPER_ROD]: {},
+  [Item.GOLDEN_ROD]: {},
+  [Item.RARE_CANDY]: {},
+  [Item.EVIOLITE]: {
+    [Stat.HP]: 100,
+    [Stat.ATK]: 10,
+    [Stat.AP]: 50,
+    [Stat.DEF]: 5,
+    [Stat.SPE_DEF]: 5
+  },
+  [Item.WHITE_FLUTE]: {},
+  [Item.DAMP_ROCK]: {},
+  [Item.ICY_ROCK]: {},
+  [Item.HEAT_ROCK]: {},
+  [Item.SMOOTH_ROCK]: {},
+  [Item.BLACK_AUGURITE]: {},
+  [Item.POKERUS_VIAL]: {},
+  [Item.ROTOM_PHONE]: {}
 }
 
 export type TilesetExchangeFile = {
@@ -676,10 +703,13 @@ export const DTEF_TILESET_HEIGHT = 8
 export const DTEF_TILESET_TILE_WIDTH = 24
 
 export const SCRIBBLE_LOBBY_CRON = "0 0 0-20/4 * * *" // every four hours from 00h to 20h
-export const RANKED_LOBBY_CRON = "0 0 2-22/4 * * *" // every four hours from 2h to 22h
+export const GREATBALL_RANKED_LOBBY_CRON = "0 0 2,6,14,18 * * *" // every four hours from 2h to 22h
+export const ULTRABALL_RANKED_LOBBY_CRON = "0 0 22 * * *" // every day 22h
 
 export const DUST_PER_BOOSTER = 50
 export const DUST_PER_SHINY = 250
 
 export const TOURNAMENT_REGISTRATION_TIME = 60 * 60 * 1000 // 1 hour
 export const TOURNAMENT_CLEANUP_DELAY = 24 * 60 * 60 * 1000 // 1 day
+
+export { EloRank }

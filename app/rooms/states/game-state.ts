@@ -18,7 +18,6 @@ import {
   EloRank,
   StageDuration
 } from "../../types/Config"
-import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { GameMode, GamePhaseState } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { PkmProposition } from "../../types/enum/Pokemon"
@@ -59,6 +58,7 @@ export default class GameState extends Schema {
   preparationId: string
   shinyEncounter = false
   pveRewards: Item[] = []
+  pveRewardsPropositions: Item[] = []
   minRank: EloRank | null = null
 
   constructor(
@@ -76,7 +76,7 @@ export default class GameState extends Schema {
     this.gameMode = gameMode
     this.minRank = minRank
     this.weather = Weather.NEUTRAL
-    
+
     if (gameMode === GameMode.SCRIBBLE) {
       this.specialGameRule = pickRandomIn(Object.values(SpecialGameRule))
     }

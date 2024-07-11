@@ -23,10 +23,22 @@
   color: white;
 }
 
+
 .game-loading-screen .loading-bar p {
   text-align: center;
   font-family: monospace;
   font-size: 28pt;
+}
+
+.game-loading-screen .loading-hint {
+  position: absolute;
+  width: 14vw;
+  right: 2vw;
+  bottom: 0;
+}
+
+.game-loading-screen .loading-hint img {
+  width: 80%;
 }
 
 .game-loading-screen .error {
@@ -44,4 +56,26 @@
   bottom: 1rem;
   color: white;
   font-size: 1rem;
+}
+
+.speech-bubble {
+	position: relative;
+	background: #ffffff;
+	border-radius: .4em;
+  padding: 0.5em 0.25em;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-top-color: #ffffff;
+	border-bottom: 0;
+	border-left: 0;
+	margin-left: -10px;
+	margin-bottom: -19px;
 }

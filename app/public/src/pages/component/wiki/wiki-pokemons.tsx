@@ -5,10 +5,8 @@ import { RarityColor } from "../../../../../types/Config"
 import { Rarity } from "../../../../../types/enum/Game"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
-import {
-  PRECOMPUTED_POKEMONS_PER_RARITY,
-  getPokemonData
-} from "../../../../../models/precomputed"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
+import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
 import { getPortraitSrc } from "../../../utils"
 import WikiPokemonDetail from "./wiki-pokemon-detail"
 import { t } from "i18next"
@@ -29,13 +27,16 @@ export default function WikiPokemons() {
     if (selectedPkm) {
       setTabIndex(tabs.indexOf(getPokemonData(selectedPkm).rarity))
     }
-  }, [selectedPkm])
+  }, [selectedPkm, tabs])
 
   return (
     <Tabs
       className="wiki-pokemons"
       selectedIndex={tabIndex}
-      onSelect={(index) => setTabIndex(index)}
+      onSelect={(index) => {
+        setSelectedPkm("")
+        setTabIndex(index)
+      }}
     >
       <PokemonTypeahead
         value={selectedPkm ?? ""}
@@ -76,8 +77,8 @@ export default function WikiPokemons() {
 
 export function WikiPokemon(props: {
   rarity: Rarity
-  selected: Pkm
-  onSelect: (pkm: Pkm) => any
+  selected: Pkm | ""
+  onSelect: (pkm: Pkm) => void
 }) {
   const pokemons = useMemo(
     () =>
@@ -93,7 +94,7 @@ export function WikiPokemon(props: {
 
   return (
     <Tabs
-      selectedIndex={pokemons.indexOf(props.selected)}
+      selectedIndex={props.selected ? pokemons.indexOf(props.selected) : -1}
       onSelect={(index) => props.onSelect(pokemons[index])}
     >
       <TabList>
@@ -133,6 +134,7 @@ export function WikiAllPokemons() {
   const pokemonsPerRarity = groupBy(pokemons, (p) => p.rarity)
   for (const rarity in pokemonsPerRarity) {
     pokemonsPerRarity[rarity].sort((a: IPokemonData, b: IPokemonData) => {
+      if (a.regional !== b.regional) return +a.regional - +b.regional
       if (a.additional !== b.additional) return +a.additional - +b.additional
       return a.index < b.index ? -1 : 1
     })
@@ -153,7 +155,8 @@ export function WikiAllPokemons() {
                     <li
                       key={p.name}
                       className={cc("pokemon-portrait", {
-                        additional: p.additional
+                        additional: p.additional,
+                        regional: p.regional
                       })}
                       onMouseOver={() => {
                         setHoveredPokemon(p.name)

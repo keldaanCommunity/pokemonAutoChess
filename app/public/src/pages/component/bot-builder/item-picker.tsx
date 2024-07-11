@@ -6,7 +6,7 @@ import { Tooltip } from "react-tooltip"
 import { PkmWithConfig } from "../../../../../types"
 import {
   ArtificialItems,
-  BasicItems,
+  ItemComponents,
   Berries,
   CraftableItems,
   Item
@@ -25,7 +25,7 @@ export default function ItemPicker(props: {
   }
 
   const tabs = [
-    { label: t("components"), key: "components", items: BasicItems },
+    { label: t("components"), key: "components", items: ItemComponents },
     { label: t("craftable_items"), key: "craftable", items: CraftableItems },
     { label: t("berries"), key: "berries", items: Berries },
     {

@@ -11,7 +11,7 @@
   position: absolute;
   left: 0.5%;
   top: 9%;
-  max-height: 73%;
+  max-height: 70%;
   padding: 0;
   background-color: var(--color-bg-primary);
 }
@@ -21,8 +21,8 @@
   text-align: center;
 }
 
-@media (aspect-ratio < 4/3), (width <= 1366px) {
+@media (aspect-ratio < 4/3), (width <= 1280px) {
   #game-wrapper .synergies-container {
-    max-height: 60%;
+    max-height: 50%;
   }
 }

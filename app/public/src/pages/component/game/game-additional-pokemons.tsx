@@ -2,7 +2,7 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
-import { getPokemonData } from "../../../../../models/precomputed"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { RarityColor } from "../../../../../types/Config"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { useAppSelector } from "../../../hooks"
@@ -49,13 +49,14 @@ export function GameAdditionalPokemons() {
   } else if (!additionalPokemons || additionalPokemons.length === 0) {
     return (
       <div className="game-additional-pokemons">
-        <p>{t("additional_pokemon_hint")}</p>
+        <p className="help">{t("additional_pokemon_hint")}</p>
       </div>
     )
   } else {
     return (
       <div className="game-additional-pokemons">
         <h2>{t("additional_picks")}</h2>
+        <p className="help">{t("additional_pokemon_hint")}</p>
         <div className="grid">
           {additionalPokemons.map((p, index) => {
             const pokemon = getPokemonData(p)

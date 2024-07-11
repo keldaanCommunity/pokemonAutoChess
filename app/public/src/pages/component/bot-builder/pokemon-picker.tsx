@@ -3,10 +3,8 @@ import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { Tooltip } from "react-tooltip"
-import {
-  getPokemonData,
-  PRECOMPUTED_POKEMONS_PER_TYPE
-} from "../../../../../models/precomputed"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
+import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
 import { Emotion, PkmWithConfig } from "../../../../../types"
 import { RarityColor } from "../../../../../types/Config"
 import { Rarity } from "../../../../../types/enum/Game"
@@ -75,10 +73,12 @@ function PokemonPickerTab(props: {
   const pokemonsPerRarity = groupBy(props.pokemons, (p) => p.rarity)
   for (const rarity in pokemonsPerRarity) {
     pokemonsPerRarity[rarity].sort((a: IPokemonData, b: IPokemonData) => {
+      if (a.regional !== b.regional) return +a.regional - +b.regional
       if (a.additional !== b.additional) return +a.additional - +b.additional
-      return PkmFamily[a.name] === PkmFamily[b.name]
-        ? a.stars - b.stars
-        : PkmIndex[PkmFamily[a.name]].localeCompare(PkmIndex[PkmFamily[b.name]])
+      if (PkmFamily[a.name] === PkmFamily[b.name]) return a.stars - b.stars
+      return PkmIndex[PkmFamily[a.name]].localeCompare(
+        PkmIndex[PkmFamily[b.name]]
+      )
     })
   }
 
@@ -107,6 +107,7 @@ function PokemonPickerTab(props: {
                 <div
                   className={cc("pokemon-portrait", {
                     additional: p.additional,
+                    regional: p.regional,
                     selected: p.name === props.selected["name"]
                   })}
                   onClick={() => {

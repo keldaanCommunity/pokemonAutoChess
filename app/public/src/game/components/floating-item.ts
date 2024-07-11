@@ -22,6 +22,7 @@ export class FloatingItem extends GameObjects.Container {
     this.sprite = new GameObjects.Image(scene, 0, 0, "item", this.name+".png")
     this.sprite.setScale(0.32)
     this.add(this.sprite)
+    this.setDepth(2)
     this.scene.add.existing(this)
   }
 

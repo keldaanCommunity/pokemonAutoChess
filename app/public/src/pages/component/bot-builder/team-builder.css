@@ -2,12 +2,14 @@
   width: 100%;
   display: grid;
   grid-template-areas: "synergies board selected" "synergies pokemons items";
-  grid-template-columns: 250px 1fr 340px;
+  grid-template-columns: 250px 1fr 330px;
   grid-template-rows: 1fr 420px;
   min-width: 1400px;
   gap: 5px;
+  padding: 5px;
   height: 75vh;
   overflow-y: auto;
+  position: relative;
 }
 
 .basic-modal-body > #team-builder {
@@ -20,6 +22,8 @@
 #team-builder .synergies-container {
   grid-area: synergies;
   overflow: visible;
+  background-color: var(--color-bg-secondary);
+  border: var(--border-thin);
 }
 
 #team-editor {
@@ -71,6 +75,7 @@
   grid-area: selected;
   align-self: start;
   background-color: var(--color-bg-primary);
+  padding: 5px;
 }
 
 #selected-entity fieldset {
@@ -86,6 +91,7 @@
   flex-wrap: wrap;
   align-content: start;
   overflow: auto;
+  padding: 5px;
 }
 
 #item-picker .react-tabs__tab {
@@ -104,6 +110,7 @@
 #pokemon-picker {
   grid-area: pokemons;
   overflow-y: auto;
+  padding: 5px;
 }
 
 #pokemon-picker .selected,
@@ -111,11 +118,15 @@
   outline: 4px solid #109fff;
 }
 
-#pokemon-picker img.pokemon {
+#pokemon-picker .pokemon-portrait {
   width: 40px;
   height: 40px;
-  image-rendering: pixelated;
   cursor: var(--cursor-hover);
+}
+
+#pokemon-picker .pokemon-portrait img {
+  display: block;
+  image-rendering: pixelated;
 }
 
 #pokemon-picker .react-tabs__tab {

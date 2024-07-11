@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
-import GameState from "../../rooms/states/game-state"
-import { IPlayer, Role, Title } from "../../types"
+import type GameState from "../../rooms/states/game-state"
+import type { IPlayer, Role, Title } from "../../types"
 import { SynergyTriggers, UniqueShop } from "../../types/Config"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { BattleResult } from "../../types/enum/Game"
@@ -9,23 +8,33 @@ import {
   ArtificialItems,
   Berries,
   Item,
-  SynergyGivenByItem
+  SynergyGivenByItem,
+  WeatherRocks
 } from "../../types/enum/Item"
-import { Pkm, PkmDuos, PkmProposition } from "../../types/enum/Pokemon"
+import {
+  Pkm,
+  PkmDuos,
+  PkmFamily,
+  PkmRegionalVariants,
+  type PkmProposition
+} from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { removeInArray } from "../../utils/array"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { pickNRandomIn, pickRandomIn } from "../../utils/random"
-import { values } from "../../utils/schemas"
+import { resetArraySchema, values } from "../../utils/schemas"
 import { Effects } from "../effects"
-import { IPokemonConfig } from "../mongo-models/user-metadata"
+import type { IPokemonConfig } from "../mongo-models/user-metadata"
 import PokemonFactory from "../pokemon-factory"
-import { getPokemonData } from "../precomputed"
+import {
+  PRECOMPUTED_REGIONAL_MONS,
+  getPokemonData
+} from "../precomputed/precomputed-pokemon-data"
 import ExperienceManager from "./experience-manager"
 import HistoryItem from "./history-item"
-import { Pokemon, isOnBench } from "./pokemon"
+import { Pokemon, PokemonClasses, isOnBench } from "./pokemon"
 import PokemonCollection from "./pokemon-collection"
 import PokemonConfig from "./pokemon-config"
 import Synergies, { computeSynergies } from "./synergies"
@@ -41,7 +50,7 @@ export default class Player extends Schema implements IPlayer {
   @type(ExperienceManager) experienceManager = new ExperienceManager()
   @type({ map: "uint8" }) synergies = new Synergies()
   @type("uint16") money = process.env.MODE == "dev" ? 999 : 6
-  @type("uint8") life = 100
+  @type("int8") life = 100
   @type("boolean") shopLocked: boolean = false
   @type("uint8") streak: number = 0
   @type("uint8") interest: number = 0
@@ -49,6 +58,7 @@ export default class Player extends Schema implements IPlayer {
   @type("string") opponentName: string = ""
   @type("string") opponentAvatar: string = ""
   @type("string") opponentTitle: string = ""
+  @type("string") spectatedPlayerId: string
   @type("uint8") boardSize: number = 0
   @type(["string"]) items = new ArraySchema<Item>()
   @type("uint8") rank: number
@@ -61,19 +71,34 @@ export default class Player extends Schema implements IPlayer {
   @type(["string"]) itemsProposition = new ArraySchema<Item>()
   @type(["string"]) pokemonsProposition = new ArraySchema<PkmProposition>()
   @type(["string"]) pveRewards = new ArraySchema<Item>()
+  @type(["string"]) pveRewardsPropositions = new ArraySchema<Item>()
   @type("float32") loadingProgress: number = 0
-  @type("string") berry: Item = pickRandomIn(Berries)
-  @type("uint8") berryTreeStage: number = 1
+  @type(["string"]) berryTreesType: Item[] = [
+    pickRandomIn(Berries),
+    pickRandomIn(Berries),
+    pickRandomIn(Berries)
+  ]
+  @type(["uint8"]) berryTreesStage: number[] = [1, 1, 1]
   @type("string") map: DungeonPMDO
   @type({ set: "string" }) effects: Effects = new Effects()
+  @type(["string"]) regionalPokemons = new ArraySchema<Pkm>()
+  commonRegionalPool: Pkm[] = new Array<Pkm>()
+  uncommonRegionalPool: Pkm[] = new Array<Pkm>()
+  rareRegionalPool: Pkm[] = new Array<Pkm>()
+  epicRegionalPool: Pkm[] = new Array<Pkm>()
+  ultraRegionalPool: Pkm[] = new Array<Pkm>()
   isBot: boolean
   opponents: Map<string, number> = new Map<string, number>()
   titles: Set<Title> = new Set<Title>()
   rerollCount: number = 0
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
+  weatherRocks: Item[] = pickNRandomIn(WeatherRocks, 3)
+  randomComponentsGiven: Item[] = []
+  randomEggsGiven: Pkm[] = []
   lightX: number
   lightY: number
   canRegainLife: boolean = true
+  wildChance: number = 0
 
   constructor(
     id: string,
@@ -89,6 +114,7 @@ export default class Player extends Schema implements IPlayer {
   ) {
     super()
     this.id = id
+    this.spectatedPlayerId = id
     this.name = name
     this.elo = elo
     this.avatar = avatar
@@ -100,6 +126,8 @@ export default class Player extends Schema implements IPlayer {
     this.lightX = state.lightX
     this.lightY = state.lightY
     this.map = pickRandomIn(DungeonPMDO)
+    this.updateRegionalPool(state)
+
     if (isBot) {
       this.loadingProgress = 100
       this.lightX = 3
@@ -165,18 +193,6 @@ export default class Player extends Schema implements IPlayer {
     return this.getLastBattle()?.result ?? ""
   }
 
-  getCurrentStreakType(): BattleResult | null {
-    for (let i = this.history.length - 1; i >= 0; i--) {
-      if (
-        this.history[i].id !== "pve" &&
-        this.history[i].result !== BattleResult.DRAW
-      ) {
-        return this.history[i].result
-      }
-    }
-    return null
-  }
-
   getPokemonAt(x: number, y: number): Pokemon | undefined {
     let p: Pokemon | undefined = undefined
 
@@ -197,6 +213,7 @@ export default class Player extends Schema implements IPlayer {
     newPokemon.positionY = pokemon.positionY
     this.board.delete(pokemon.id)
     this.board.set(newPokemon.id, newPokemon)
+    newPokemon.onAcquired(this)
     this.updateSynergies()
     return newPokemon
   }
@@ -205,12 +222,21 @@ export default class Player extends Schema implements IPlayer {
     const pokemons: Pokemon[] = values(this.board)
     let updatedSynergies = computeSynergies(pokemons)
 
-    const needsRecomputing = this.updateArtificialItems(updatedSynergies)
-    if (needsRecomputing) {
+    this.updateFishingRods(updatedSynergies)
+    const artifNeedsRecomputing = this.updateArtificialItems(updatedSynergies)
+    if (artifNeedsRecomputing) {
       /* NOTE: computing twice is costly in performance but the safest way to get the synergies
       right after losing an artificial item, since many edgecases may need to be adressed when 
       losing a type (Axew double dragon + artif item for example) ; it's not as easy as just 
       decrementing by 1 in updatedSynergies map count
+      */
+      updatedSynergies = computeSynergies(pokemons)
+    }
+
+    const rockNeedsRecomputing = this.updateWeatherRocks(updatedSynergies)
+    if (rockNeedsRecomputing) {
+      /* NOTE: in some edge cases like losing Hard Rock artif item, we may need to compute synergies
+        3 times in a row to get the right synergies, since losing a weather rock item may lead to losing a type
       */
       updatedSynergies = computeSynergies(pokemons)
     }
@@ -229,6 +255,10 @@ export default class Player extends Schema implements IPlayer {
     if (lightChanged) this.onLightChange()
 
     this.effects.update(this.synergies, this.board)
+    this.wildChance =
+      pokemons
+        .filter((p) => p.types.has(Synergy.WILD))
+        .reduce((total, p) => total + p.stars, 0) / 100
   }
 
   updateArtificialItems(updatedSynergies: Map<Synergy, number>): boolean {
@@ -256,14 +286,82 @@ export default class Player extends Schema implements IPlayer {
         newNbArtifItems,
         previousNbArtifItems
       )
-      lostArtificialItems.forEach((item) => {
-        removeInArray<Item>(this.items, item)
-      })
+
+      // variables for managing number of "Trash" items
+      const lostTrash = lostArtificialItems.filter(
+        (item) => item === Item.TRASH
+      ).length
+      let cleanedTrash = 0
+
       this.board.forEach((pokemon) => {
         lostArtificialItems.forEach((item) => {
           if (pokemon.items.has(item)) {
+            if (item === Item.TRASH && lostTrash - cleanedTrash > 0) {
+              pokemon.items.delete(item)
+              cleanedTrash++
+            } else if (item !== Item.TRASH) {
+              pokemon.items.delete(item)
+
+              if (item in SynergyGivenByItem) {
+                const type = SynergyGivenByItem[item]
+                const nativeTypes = getPokemonData(pokemon.name).types
+                if (nativeTypes.includes(type) === false) {
+                  pokemon.types.delete(type)
+                  if (!isOnBench(pokemon)) {
+                    needsRecomputingSynergiesAgain = true
+                  }
+                }
+              }
+            }
+          }
+        })
+      })
+
+      lostArtificialItems.forEach((item) => {
+        if (item !== Item.TRASH) {
+          removeInArray<Item>(this.items, item)
+        } else if (item === Item.TRASH && lostTrash - cleanedTrash > 0) {
+          removeInArray<Item>(this.items, item)
+          cleanedTrash++
+        }
+      })
+    }
+
+    return needsRecomputingSynergiesAgain
+  }
+
+  updateWeatherRocks(updatedSynergies: Map<Synergy, number>): boolean {
+    let needsRecomputingSynergiesAgain = false
+    const previousNbRockItems = SynergyTriggers[Synergy.ROCK].filter(
+      (n) => (this.synergies.get(Synergy.ROCK) ?? 0) >= n
+    ).length
+
+    const newNbRockItems = SynergyTriggers[Synergy.ROCK].filter(
+      (n) => (updatedSynergies.get(Synergy.ROCK) ?? 0) >= n
+    ).length
+
+    if (newNbRockItems > previousNbRockItems) {
+      // some weather rocks are gained
+      const gainedWeatherRocks = this.weatherRocks.slice(
+        previousNbRockItems,
+        newNbRockItems
+      )
+      gainedWeatherRocks.forEach((item) => {
+        this.items.push(item)
+      })
+    } else if (newNbRockItems < previousNbRockItems) {
+      // some weather rocks are lost
+      const lostWeatherRocks = this.weatherRocks.slice(
+        newNbRockItems,
+        previousNbRockItems
+      )
+
+      this.board.forEach((pokemon) => {
+        lostWeatherRocks.forEach((item) => {
+          if (pokemon.items.has(item)) {
             pokemon.items.delete(item)
-            if (SynergyGivenByItem.hasOwnProperty(item)) {
+
+            if (item in SynergyGivenByItem) {
               const type = SynergyGivenByItem[item]
               const nativeTypes = getPokemonData(pokemon.name).types
               if (nativeTypes.includes(type) === false) {
@@ -276,9 +374,69 @@ export default class Player extends Schema implements IPlayer {
           }
         })
       })
+
+      lostWeatherRocks.forEach((item) => {
+        removeInArray<Item>(this.items, item)
+      })
     }
 
     return needsRecomputingSynergiesAgain
+  }
+
+  updateFishingRods(updatedSynergies: Map<Synergy, number>) {
+    const fishingLevel = SynergyTriggers[Synergy.WATER].filter(
+      (n) => (updatedSynergies.get(Synergy.WATER) ?? 0) >= n
+    ).length
+
+    if (this.items.includes(Item.OLD_ROD) && fishingLevel !== 1)
+      removeInArray<Item>(this.items, Item.OLD_ROD)
+    if (this.items.includes(Item.GOOD_ROD) && fishingLevel !== 2)
+      removeInArray<Item>(this.items, Item.GOOD_ROD)
+    if (this.items.includes(Item.SUPER_ROD) && fishingLevel !== 3)
+      removeInArray<Item>(this.items, Item.SUPER_ROD)
+
+    if (
+      this.items.includes(Item.OLD_ROD) === false &&
+      this.items.includes(Item.GOLDEN_ROD) === false &&
+      fishingLevel === 1
+    )
+      this.items.push(Item.OLD_ROD)
+    if (
+      this.items.includes(Item.GOOD_ROD) === false &&
+      this.items.includes(Item.GOLDEN_ROD) === false &&
+      fishingLevel === 2
+    )
+      this.items.push(Item.GOOD_ROD)
+    if (
+      this.items.includes(Item.SUPER_ROD) === false &&
+      this.items.includes(Item.GOLDEN_ROD) === false &&
+      fishingLevel === 3
+    )
+      this.items.push(Item.SUPER_ROD)
+  }
+
+  updateRegionalPool(state: GameState) {
+    const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
+      PokemonClasses[p].prototype.isInRegion(p, this.map, state)
+    )
+
+    state.shop.resetRegionalPool(this)
+    newRegionalPokemons.forEach((p) => {
+      const isVariant = Object.values(PkmRegionalVariants).some((variants) =>
+        variants.includes(p)
+      )
+      if (getPokemonData(p).stars === 1 && !isVariant) {
+        state.shop.addRegionalPokemon(p, this)
+      }
+    })
+
+    resetArraySchema(
+      this.regionalPokemons,
+      newRegionalPokemons.filter(
+        (p, index, array) =>
+          array.findIndex((p2) => PkmFamily[p] === PkmFamily[p2]) === index // dedup same family
+      )
+    )
   }
 
   onLightChange() {

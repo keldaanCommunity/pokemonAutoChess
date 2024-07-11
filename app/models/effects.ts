@@ -1,5 +1,5 @@
 import { MapSchema, SetSchema } from "@colyseus/schema"
-import { Pokemon } from "../models/colyseus-models/pokemon"
+import { isOnBench, Pokemon } from "../models/colyseus-models/pokemon"
 import { SynergyTriggers } from "../types/Config"
 import { Ability } from "../types/enum/Ability"
 import { Effect } from "../types/enum/Effect"
@@ -22,20 +22,22 @@ export class Effects extends SetSchema<Effect> {
     })
 
     board.forEach((p) => {
-      if (p.skill === Ability.GRASSY_SURGE) {
-        this.add(Effect.GRASSY_TERRAIN)
-      }
-      if (p.skill === Ability.MISTY_SURGE) {
-        this.add(Effect.MISTY_TERRAIN)
-      }
-      if (p.skill === Ability.ELECTRIC_SURGE) {
-        this.add(Effect.ELECTRIC_TERRAIN)
-      }
-      if (p.skill === Ability.PSYCHIC_SURGE) {
-        this.add(Effect.PSYCHIC_TERRAIN)
-      }
-      if (p.passive === Passive.HYDRATATION) {
-        this.add(Effect.HYDRATATION)
+      if (!isOnBench(p)) {
+        if (p.skill === Ability.GRASSY_SURGE) {
+          this.add(Effect.GRASSY_TERRAIN)
+        }
+        if (p.skill === Ability.MISTY_SURGE) {
+          this.add(Effect.MISTY_TERRAIN)
+        }
+        if (p.skill === Ability.ELECTRIC_SURGE) {
+          this.add(Effect.ELECTRIC_TERRAIN)
+        }
+        if (p.skill === Ability.PSYCHIC_SURGE) {
+          this.add(Effect.PSYCHIC_TERRAIN)
+        }
+        if (p.passive === Passive.HYDRATATION) {
+          this.add(Effect.HYDRATATION)
+        }
       }
     })
   }

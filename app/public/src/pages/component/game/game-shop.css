@@ -69,16 +69,23 @@
   margin: 0.25em;
 }
 
-.game-additional-pokemons {
+.game-additional-pokemons,
+.game-regional-pokemons {
   padding: 0 !important;
   color: white;
   background-color: rgb(97, 115, 138);
   overflow: hidden;
 }
 
-.game-additional-pokemons h2 {
-  margin: 0.25em auto;
+.game-additional-pokemons h2,
+.game-regional-pokemons h2 {
+  margin: 0.25em auto 0 auto;
   text-align: center;
+}
+
+.game-additional-pokemons p.help,
+.game-regional-pokemons p.help {
+  margin: 0 auto 0.5em auto;
 }
 
 .game-additional-pokemons .grid {
@@ -86,24 +93,34 @@
   grid-template: repeat(4, 1fr) / repeat(6, 1fr);
   grid-auto-flow: column;
   gap: 2px;
-  width: 680px;
+  width: 682px;
   height: 360px;
 }
 
-.game-additional-pokemons .game-pokemon-portrait {
-  width: 100%;
-  height: 100%;
+.game-regional-pokemons .grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2px;
+  width: 682px;
+}
+
+.game-additional-pokemons .game-pokemon-portrait,
+.game-regional-pokemons .game-pokemon-portrait {
+  width: 112px;
+  height: 90px;
   min-height: 0;
   min-width: 0;
   border: 2px solid #333;
 }
 
-.game-additional-pokemons .game-pokemon-portrait .synergy-icon {
+.game-additional-pokemons .game-pokemon-portrait .synergy-icon,
+.game-regional-pokemons .game-pokemon-portrait .synergy-icon {
   width: 24px;
   height: 24px;
 }
 
-.game-additional-pokemons > p {
+.game-additional-pokemons .grid > p,
+.game-regional-pokemons .grid > p {
   grid-row: 1/5;
   grid-column: 1/7;
   display: grid;
@@ -170,7 +187,6 @@
 .game-experience .progress-bar > .my-progress {
   overflow: hidden;
   height: 100%;
-  background-color: var(--color-bg-primary);
 }
 
 #game-shop-info {
@@ -181,6 +197,7 @@
   display: flex;
   gap: 1em;
   padding: 0 1em;
+  pointer-events: none;
 }
 
 #game-money-info {
@@ -222,7 +239,8 @@
   justify-content: end;
   color: white;
   border-radius: 12px 12px 0 0;
-  font-size: 1.5rem;
+  font-size: 1.25em;
+  pointer-events: initial;
 }
 
 .game-shop .information > div {
@@ -240,7 +258,7 @@
   height: 1em;
 }
 
-@media (aspect-ratio < 4/3), (width <= 1366px) {
+@media (aspect-ratio < 4/3), (width <= 1280px) {
   .game-shop.my-container {
     flex-wrap: wrap;
   }

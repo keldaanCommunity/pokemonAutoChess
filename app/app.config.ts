@@ -1,7 +1,5 @@
 import { monitor } from "@colyseus/monitor"
 import config from "@colyseus/tools"
-import { RedisDriver, RedisPresence } from "colyseus"
-import compression from "compression"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
@@ -12,13 +10,14 @@ import path from "path"
 import { initTilemap } from "./core/design"
 import ItemsStatistics from "./models/mongo-models/items-statistic"
 import Meta from "./models/mongo-models/meta"
-import PokemonsStatistics from "./models/mongo-models/pokemons-statistic"
+import PokemonsStatistics from "./models/mongo-models/pokemons-statistic-v2"
 import TitleStatistic from "./models/mongo-models/title-statistic"
-import { PRECOMPUTED_POKEMONS_PER_TYPE } from "./models/precomputed"
+import { PRECOMPUTED_POKEMONS_PER_TYPE } from "./models/precomputed/precomputed-types"
 import AfterGameRoom from "./rooms/after-game-room"
 import CustomLobbyRoom from "./rooms/custom-lobby-room"
 import GameRoom from "./rooms/game-room"
 import PreparationRoom from "./rooms/preparation-room"
+import { Title } from "./types"
 import { SynergyTriggers } from "./types/Config"
 import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Item } from "./types/enum/Item"
@@ -37,10 +36,10 @@ const clientSrc = __dirname.includes("server")
 
 const serverOptions = {}
 
-if (process.env.NODE_APP_INSTANCE) {
-  serverOptions["presence"] = new RedisPresence()
-  serverOptions["driver"] = new RedisDriver()
-}
+// if (process.env.NODE_APP_INSTANCE) {
+//   serverOptions["presence"] = new RedisPresence()
+//   serverOptions["driver"] = new RedisDriver()
+// }
 
 export default config({
   options: serverOptions,
@@ -60,9 +59,6 @@ export default config({
      * Read more: https://expressjs.com/en/starter/basic-routing.html
      */
 
-    // compress all responses
-    app.use(compression())
-
     app.use(((err, req, res, next) => {
       res.status(err.status).json(err)
     }) as ErrorRequestHandler)
@@ -74,7 +70,7 @@ export default config({
     // set up rate limiter: maximum of five requests per minute
     const limiter = rateLimit({
       windowMs: 15 * 60 * 1000, // 15 minutes
-      max: 500, // Allow 500 requests per minute
+      max: 5000, // Allow 500 requests per minute
       message: "Too many requests, please try again later.",
       statusCode: 429, // HTTP status code for rate limit exceeded
       headers: true // Include custom headers
@@ -125,6 +121,10 @@ export default config({
 
     app.get("/pokemons", (req, res) => {
       res.send(Pkm)
+    })
+
+    app.get("/title-names", (req, res) => {
+      res.send(Title)
     })
 
     app.get("/pokemons-index", (req, res) => {
@@ -203,11 +203,8 @@ export default config({
     connect(process.env.MONGO_URI!)
     admin.initializeApp({
       credential: admin.credential.cert({
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         projectId: process.env.FIREBASE_PROJECT_ID!,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         privateKey: process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, "\n")
       })
     })

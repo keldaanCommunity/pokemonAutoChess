@@ -9,13 +9,13 @@ export default function Credits(props: {
   const { t } = useTranslation()
   const { spriteCredits, creditsNames } = useCredits()
 
-  if (!spriteCredits || !spriteCredits.hasOwnProperty(props.index)) return null
+  if (!spriteCredits || !(props.index in spriteCredits)) return null
 
   let credits
   if (props.for === "portrait") {
-    credits = spriteCredits[props.index]?.portrait_credit
+    credits = spriteCredits[props.index].portrait_credit
   } else {
-    credits = spriteCredits[props.index]?.sprite_credit
+    credits = spriteCredits[props.index].sprite_credit
   }
 
   if (!credits) return null
@@ -31,11 +31,7 @@ export default function Credits(props: {
       }
     }
     return (
-      <a
-        style={{ marginRight: "0.5em" }}
-        key={id}
-        href={contact}
-      >
+      <a style={{ marginRight: "0.5em" }} key={id} href={contact}>
         {name}
       </a>
     )

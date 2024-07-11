@@ -3,16 +3,17 @@ import { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
 import { EvolutionTime } from "../types/Config"
 import { PokemonActionState } from "../types/enum/Game"
-import { BasicItems, Item } from "../types/enum/Item"
+import { ItemComponents, Item, ShinyItems } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
 import { logger } from "../utils/logger"
+import { pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 
 type DivergentEvolution = (
   pokemon: Pokemon,
   player: Player,
-  ...aditionalArgs: any[]
+  ...aditionalArgs: unknown[]
 ) => Pkm
 
 export abstract class EvolutionRule {
@@ -69,19 +70,25 @@ export class CountEvolutionRule extends EvolutionRule {
   }
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
-    if (pokemon.evolution === Pkm.DEFAULT) return false
-    const count = values(player.board).filter(
-      (pkm) => pkm.index === pokemon.index
-    ).length
-    return count >= this.numberRequired
+    const copies = values(player.board).filter((p) => p.index === pokemon.index)
+    if (
+      pokemon.evolution === Pkm.DEFAULT ||
+      copies.some((p) => p.items.has(Item.EVIOLITE))
+    ) {
+      return false
+    }
+    return copies.length >= this.numberRequired
   }
 
   canEvolveIfBuyingOne(pokemon: Pokemon, player: Player): boolean {
-    if (pokemon.evolution === Pkm.DEFAULT) return false
-    const count = values(player.board).filter(
-      (pkm) => pkm.index === pokemon.index
-    ).length
-    return count >= this.numberRequired - 1
+    const copies = values(player.board).filter((p) => p.index === pokemon.index)
+    if (
+      pokemon.evolution === Pkm.DEFAULT ||
+      copies.some((p) => p.items.has(Item.EVIOLITE))
+    ) {
+      return false
+    }
+    return copies.length >= this.numberRequired - 1
   }
 
   evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
@@ -92,7 +99,7 @@ export class CountEvolutionRule extends EvolutionRule {
 
     let coord: { x: number; y: number } | undefined
     const itemsToAdd = new Array<Item>()
-    const basicItemsToAdd = new Array<Item>()
+    const itemComponentsToAdd = new Array<Item>()
 
     const pokemonsBeforeEvolution: Pokemon[] = []
 
@@ -114,8 +121,8 @@ export class CountEvolutionRule extends EvolutionRule {
         }
 
         pkm.items.forEach((el) => {
-          if (BasicItems.includes(el)) {
-            basicItemsToAdd.push(el)
+          if (ItemComponents.includes(el)) {
+            itemComponentsToAdd.push(el)
           } else {
             itemsToAdd.push(el)
           }
@@ -147,7 +154,7 @@ export class CountEvolutionRule extends EvolutionRule {
     itemsToAdd.forEach((item) => {
       player.items.push(item)
     })
-    basicItemsToAdd.forEach((item) => {
+    itemComponentsToAdd.forEach((item) => {
       player.items.push(item)
     })
 
@@ -169,16 +176,28 @@ export class ItemEvolutionRule extends EvolutionRule {
 
   constructor(
     itemsTriggeringEvolution: Item[],
-    divergentEvolution?: (pokemon: Pokemon, player: Player, item: Item) => Pkm
+    divergentEvolution?: DivergentEvolution
   ) {
     super(divergentEvolution)
     this.itemsTriggeringEvolution = itemsTriggeringEvolution
   }
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
-    return values(pokemon.items).some((item) =>
+    if (pokemon.items.has(Item.EVIOLITE)) return false
+    const itemEvolution = values(pokemon.items).find((item) =>
       this.itemsTriggeringEvolution.includes(item)
     )
+
+    let pokemonEvolutionName = pokemon.evolution
+    if (this.divergentEvolution && itemEvolution) {
+      pokemonEvolutionName = this.divergentEvolution(
+        pokemon,
+        player,
+        itemEvolution
+      )
+    }
+
+    return itemEvolution != null && pokemonEvolutionName !== pokemon.name
   }
 
   evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
@@ -217,10 +236,12 @@ export class HatchEvolutionRule extends EvolutionRule {
     const willHatch = this.canEvolve(pokemon, player, stageLevel)
     if (willHatch) {
       pokemon.action = PokemonActionState.HOP
-      setTimeout(
-        () => pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel),
-        2000
-      )
+      setTimeout(() => {
+        pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
+        if (pokemon.name === Pkm.EGG && pokemon.shiny) {
+          player.items.push(pickRandomIn(ShinyItems))
+        }
+      }, 2000)
     } else if (pokemon.name === Pkm.EGG) {
       pokemon.action =
         [
@@ -232,6 +253,7 @@ export class HatchEvolutionRule extends EvolutionRule {
   }
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
+    if (pokemon.items.has(Item.EVIOLITE)) return false
     return this.evolutionTimer === 0
   }
 
@@ -265,6 +287,7 @@ export class ConditionBasedEvolutionRule extends EvolutionRule {
   }
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
+    if (pokemon.items.has(Item.EVIOLITE)) return false
     return this.condition(pokemon, player, stageLevel)
   }
 

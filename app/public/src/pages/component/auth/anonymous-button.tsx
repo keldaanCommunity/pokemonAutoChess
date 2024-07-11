@@ -7,7 +7,7 @@ import {
   animals,
   colors,
   uniqueNamesGenerator
-} from "unique-names-generator"
+} from "@joaomoreno/unique-names-generator"
 
 const customConfig: Config = {
   dictionaries: [adjectives, animals, colors],

@@ -13756,15 +13756,6 @@
           "_id": {
             "$oid": "6215ec660fd854f893588403"
           }
-        },
-        {
-          "name": "MEGA_SCIZOR",
-          "x": 2,
-          "y": 2,
-          "items": [],
-          "_id": {
-            "$oid": "6215ec660fd854f893588404"
-          }
         }
       ],
       "roundsRequired": 5,
@@ -13844,15 +13835,6 @@
           "items": [],
           "_id": {
             "$oid": "6215ec660fd854f89358840d"
-          }
-        },
-        {
-          "name": "MEGA_SCIZOR",
-          "x": 2,
-          "y": 2,
-          "items": [],
-          "_id": {
-            "$oid": "6215ec660fd854f89358840e"
           }
         }
       ],
@@ -19191,15 +19173,6 @@
           "items": [],
           "_id": {
             "$oid": "6215ec670fd854f8935887e2"
-          }
-        },
-        {
-          "name": "MEGA_MEDICHAM",
-          "x": 3,
-          "y": 2,
-          "items": [],
-          "_id": {
-            "$oid": "6215ec670fd854f8935887e3"
           }
         }
       ],
@@ -25431,15 +25404,6 @@
           }
         },
         {
-          "name": "MEGA_MEDICHAM",
-          "x": 5,
-          "y": 3,
-          "items": [],
-          "_id": {
-            "$oid": "6215ec670fd854f893588691"
-          }
-        },
-        {
           "name": "METANG",
           "x": 6,
           "y": 3,
@@ -25517,15 +25481,6 @@
           "items": [],
           "_id": {
             "$oid": "6215ec670fd854f89358869a"
-          }
-        },
-        {
-          "name": "MEGA_MEDICHAM",
-          "x": 5,
-          "y": 3,
-          "items": [],
-          "_id": {
-            "$oid": "6215ec670fd854f89358869b"
           }
         },
         {
@@ -33783,17 +33738,6 @@
           }
         },
         {
-          "name": "MEGA_SCIZOR",
-          "x": 4,
-          "y": 2,
-          "items": [
-            "WATER_STONE"
-          ],
-          "_id": {
-            "$oid": "623301c51cf1fcfbcf83a9c7"
-          }
-        },
-        {
           "name": "TORNADUS",
           "x": 3,
           "y": 1,
@@ -33865,19 +33809,6 @@
     },
     {
       "board": [
-        {
-          "name": "MEGA_SCIZOR",
-          "x": 4,
-          "y": 3,
-          "items": [
-            "ORAN_BERRY",
-            "POKE_DOLL",
-            "WATER_STONE"
-          ],
-          "_id": {
-            "$oid": "623301c51cf1fcfbcf83a9cf"
-          }
-        },
         {
           "name": "MEGA_ALTARIA",
           "x": 5,

@@ -49,19 +49,21 @@ export default class AttackingState extends PokemonState {
         )
       ) {
         // if target is no longer alive or at range, retargeting
-        const newTarget = this.getNearestTargetAtRange(pokemon, board)
-        if (newTarget) {
-          target = newTarget
-          targetCoordinate = {
-            x: newTarget.positionX,
-            y: newTarget.positionY
-          }
+        targetCoordinate = this.getNearestTargetAtRangeCoordinates(
+          pokemon,
+          board
+        )
+        if (targetCoordinate) {
+          target = board.getValue(targetCoordinate.x, targetCoordinate.y)
         }
       }
 
       // no target at range, changing to moving state
       if (!target || !targetCoordinate || pokemon.status.charm) {
-        const targetAtSight = this.getNearestTargetAtSight(pokemon, board)
+        const targetAtSight = this.getNearestTargetAtSightCoordinates(
+          pokemon,
+          board
+        )
         if (targetAtSight) {
           pokemon.toMovingState()
         }
@@ -100,7 +102,7 @@ export default class AttackingState extends PokemonState {
             pokemon.count.tripleAttackCount++
             this.attack(pokemon, board, targetCoordinate)
             this.attack(pokemon, board, targetCoordinate)
-            
+
             if (pokemon.name === Pkm.MORPEKO) {
               target.status.triggerParalysis(2000, pokemon)
             }
@@ -144,15 +146,15 @@ export default class AttackingState extends PokemonState {
       if (Math.random() * 100 < pokemon.critChance) {
         pokemon.onCriticalAttack({ target, board })
         if (target.items.has(Item.ROCKY_HELMET) === false) {
-          let opponentCritDamage = pokemon.critDamage
+          let opponentCritPower = pokemon.critPower
           if (target.effects.has(Effect.BATTLE_ARMOR)) {
-            opponentCritDamage -= 0.3
+            opponentCritPower -= 0.3
           } else if (target.effects.has(Effect.MOUTAIN_RESISTANCE)) {
-            opponentCritDamage -= 0.5
+            opponentCritPower -= 0.5
           } else if (target.effects.has(Effect.DIAMOND_STORM)) {
-            opponentCritDamage -= 0.7
+            opponentCritPower -= 0.7
           }
-          damage = Math.round(damage * opponentCritDamage)
+          damage = Math.round(damage * opponentCritPower)
         }
       }
 
@@ -176,7 +178,7 @@ export default class AttackingState extends PokemonState {
       } else if (pokemon.effects.has(Effect.CORKSCREW_CRASH)) {
         trueDamagePart += 1.0
       } else if (pokemon.effects.has(Effect.MAX_MELTDOWN)) {
-        trueDamagePart += 1.4
+        trueDamagePart += 1.2
       }
       if (pokemon.items.has(Item.RED_ORB) && target) {
         trueDamagePart += 0.25
@@ -184,6 +186,17 @@ export default class AttackingState extends PokemonState {
       if (pokemon.effects.has(Effect.LOCK_ON) && target) {
         trueDamagePart += 2.0 * (1 + pokemon.ap / 100)
         pokemon.effects.delete(Effect.LOCK_ON)
+      }
+
+      let additionalSpecialDamagePart = 0
+      if (pokemon.effects.has(Effect.AROMATIC_MIST)) {
+        additionalSpecialDamagePart += 0.1
+      } else if (pokemon.effects.has(Effect.FAIRY_WIND)) {
+        additionalSpecialDamagePart += 0.2
+      } else if (pokemon.effects.has(Effect.STRANGE_STEAM)) {
+        additionalSpecialDamagePart += 0.3
+      } else if (pokemon.effects.has(Effect.MOON_FORCE)) {
+        additionalSpecialDamagePart += 0.4
       }
 
       let isAttackSuccessful = true
@@ -229,6 +242,10 @@ export default class AttackingState extends PokemonState {
         specialDamage = damage
       } else {
         physicalDamage = damage
+      }
+
+      if (additionalSpecialDamagePart > 0) {
+        specialDamage += Math.ceil(damage * additionalSpecialDamagePart)
       }
 
       if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {

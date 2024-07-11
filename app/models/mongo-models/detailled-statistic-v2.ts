@@ -14,6 +14,7 @@ export interface IDetailledStatistic {
   time: number
   name: string
   rank: number
+  nbplayers: number
   avatar: string
   pokemons: Pokemon[]
 }
@@ -48,6 +49,9 @@ const statisticSchema = new Schema({
     type: String
   },
   rank: {
+    type: Number
+  },
+  nbplayers: {
     type: Number
   },
   avatar: {

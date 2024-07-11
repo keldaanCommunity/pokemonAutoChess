@@ -31,12 +31,12 @@ export enum Item {
   BLUE_ORB = "BLUE_ORB",
   SCOPE_LENS = "SCOPE_LENS",
   STAR_DUST = "STAR_DUST",
-  DELTA_ORB = "DELTA_ORB",
+  GREEN_ORB = "GREEN_ORB",
   MANA_SCARF = "MANA_SCARF",
   SMOKE_BALL = "SMOKE_BALL",
   XRAY_VISION = "XRAY_VISION",
   RAZOR_FANG = "RAZOR_FANG",
-  LEFTOVERS = "LEFTOVERS",
+  SOOTHE_BELL = "SOOTHE_BELL",
   CHOICE_SCARF = "CHOICE_SCARF",
   FIRE_GEM = "FIRE_GEM",
   DEFENSIVE_RIBBON = "DEFENSIVE_RIBBON",
@@ -88,8 +88,25 @@ export enum Item {
   BIG_NUGGET = "BIG_NUGGET",
   INCENSE = "INCENSE",
   EXP_SHARE = "EXP_SHARE",
+  POKERUS_VIAL = "POKERUS_VIAL",
+  ROTOM_PHONE = "ROTOM_PHONE",
   METEORITE = "METEORITE",
-  BERRY_JUICE = "BERRY_JUICE"
+  BERRY_JUICE = "BERRY_JUICE",
+  TRASH = "TRASH",
+  DYNAMAX_BAND = "DYNAMAX_BAND",
+  SHINY_STONE = "SHINY_STONE",
+  OLD_ROD = "OLD_ROD",
+  GOOD_ROD = "GOOD_ROD",
+  SUPER_ROD = "SUPER_ROD",
+  GOLDEN_ROD = "GOLDEN_ROD",
+  RARE_CANDY = "RARE_CANDY",
+  EVIOLITE = "EVIOLITE",
+  WHITE_FLUTE = "WHITE_FLUTE",
+  DAMP_ROCK = "DAMP_ROCK",
+  ICY_ROCK = "ICY_ROCK",
+  HEAT_ROCK = "HEAT_ROCK",
+  SMOOTH_ROCK = "SMOOTH_ROCK",
+  BLACK_AUGURITE = "BLACK_AUGURITE"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -98,10 +115,23 @@ export const AllItems: Item[] = Object.values(Item)
 export const SpecialItems: Item[] = [
   Item.COMFEY,
   Item.METEORITE,
-  Item.BERRY_JUICE
+  Item.BERRY_JUICE,
+  Item.OLD_ROD,
+  Item.GOOD_ROD,
+  Item.SUPER_ROD,
+  Item.TRASH
 ]
 
-export const BasicItems: Item[] = [
+export const FishingRods = [
+  Item.GOLDEN_ROD,
+  Item.SUPER_ROD,
+  Item.GOOD_ROD,
+  Item.OLD_ROD
+] as const // order matters
+
+export type FishingRod = (typeof FishingRods)[number]
+
+export const ItemComponents: Item[] = [
   Item.FOSSIL_STONE,
   Item.TWISTED_SPOON,
   Item.MAGNET,
@@ -135,12 +165,12 @@ export const ItemRecipe: { [key in Item]?: Item[] } = {
   [Item.BLUE_ORB]: [Item.MYSTIC_WATER, Item.MAGNET],
   [Item.SCOPE_LENS]: [Item.MYSTIC_WATER, Item.BLACK_GLASSES],
   [Item.STAR_DUST]: [Item.MYSTIC_WATER, Item.MIRACLE_SEED],
-  [Item.DELTA_ORB]: [Item.MYSTIC_WATER, Item.NEVER_MELT_ICE],
+  [Item.GREEN_ORB]: [Item.MYSTIC_WATER, Item.NEVER_MELT_ICE],
   [Item.MANA_SCARF]: [Item.MYSTIC_WATER, Item.CHARCOAL],
   [Item.SMOKE_BALL]: [Item.MYSTIC_WATER, Item.HEART_SCALE],
   [Item.XRAY_VISION]: [Item.MAGNET, Item.MAGNET],
   [Item.RAZOR_FANG]: [Item.MAGNET, Item.BLACK_GLASSES],
-  [Item.LEFTOVERS]: [Item.MAGNET, Item.MIRACLE_SEED],
+  [Item.GRACIDEA_FLOWER]: [Item.MAGNET, Item.MIRACLE_SEED],
   [Item.CHOICE_SCARF]: [Item.MAGNET, Item.NEVER_MELT_ICE],
   [Item.FIRE_GEM]: [Item.MAGNET, Item.CHARCOAL],
   [Item.DEFENSIVE_RIBBON]: [Item.MAGNET, Item.HEART_SCALE],
@@ -151,7 +181,7 @@ export const ItemRecipe: { [key in Item]?: Item[] } = {
   [Item.FLUFFY_TAIL]: [Item.BLACK_GLASSES, Item.HEART_SCALE],
   [Item.KINGS_ROCK]: [Item.MIRACLE_SEED, Item.MIRACLE_SEED],
   [Item.SHINY_CHARM]: [Item.MIRACLE_SEED, Item.NEVER_MELT_ICE],
-  [Item.GRACIDEA_FLOWER]: [Item.MIRACLE_SEED, Item.CHARCOAL],
+  [Item.SOOTHE_BELL]: [Item.MIRACLE_SEED, Item.CHARCOAL],
   [Item.FLAME_ORB]: [Item.MIRACLE_SEED, Item.HEART_SCALE],
   [Item.ASSAULT_VEST]: [Item.NEVER_MELT_ICE, Item.NEVER_MELT_ICE],
   [Item.AMULET_COIN]: [Item.NEVER_MELT_ICE, Item.CHARCOAL],
@@ -196,7 +226,26 @@ export const ArtificialItems: Item[] = [
   Item.MACHO_BRACE,
   Item.INCENSE,
   Item.METRONOME,
-  Item.BIG_NUGGET
+  Item.BIG_NUGGET,
+  Item.POKERUS_VIAL,
+  Item.ROTOM_PHONE
+]
+
+export const ShinyItems: Item[] = [
+  Item.DYNAMAX_BAND,
+  Item.SHINY_STONE,
+  Item.GOLDEN_ROD,
+  Item.RARE_CANDY,
+  Item.EVIOLITE,
+  Item.WHITE_FLUTE
+]
+
+export const WeatherRocks: Item[] = [
+  Item.DAMP_ROCK,
+  Item.ICY_ROCK,
+  Item.HEAT_ROCK,
+  Item.SMOOTH_ROCK,
+  Item.BLACK_AUGURITE
 ]
 
 export const CraftableItems: Item[] = Object.keys(ItemRecipe) as Item[]
@@ -231,7 +280,13 @@ export const SynergyItems = [
   Item.SWIFT_WING,
   Item.HARD_STONE,
   Item.BIG_NUGGET,
-  Item.INCENSE
+  Item.ROTOM_PHONE,
+  Item.SHINY_STONE,
+  Item.DAMP_ROCK,
+  Item.ICY_ROCK,
+  Item.HEAT_ROCK,
+  Item.SMOOTH_ROCK,
+  Item.BLACK_AUGURITE
 ] as const
 
 export const SynergyGivenByItem: Record<
@@ -255,7 +310,13 @@ export const SynergyGivenByItem: Record<
   [Item.SWIFT_WING]: Synergy.FLYING,
   [Item.HARD_STONE]: Synergy.ROCK,
   [Item.BIG_NUGGET]: Synergy.GROUND,
-  [Item.INCENSE]: Synergy.FLORA
+  [Item.ROTOM_PHONE]: Synergy.GHOST,
+  [Item.SHINY_STONE]: Synergy.LIGHT,
+  [Item.DAMP_ROCK]: Synergy.WATER,
+  [Item.ICY_ROCK]: Synergy.ICE,
+  [Item.HEAT_ROCK]: Synergy.FIRE,
+  [Item.SMOOTH_ROCK]: Synergy.GROUND,
+  [Item.BLACK_AUGURITE]: Synergy.DARK
 }
 
 export const NonSpecialItemComponents: Item[] = [

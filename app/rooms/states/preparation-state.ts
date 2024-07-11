@@ -1,4 +1,4 @@
-import { MapSchema, ArraySchema, Schema, type } from "@colyseus/schema"
+import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
 import { nanoid } from "nanoid"
 import { GameUser } from "../../models/colyseus-models/game-user"
 import Message from "../../models/colyseus-models/message"
@@ -30,6 +30,8 @@ export default class PreparationState
   @type("string") minRank: EloRank | null
   @type("string") gameMode: GameMode = GameMode.NORMAL
   @type("boolean") noElo: boolean
+  @type(["string"]) whitelist: string[]
+  @type(["string"]) blacklist: string[]
 
   constructor(params: {
     ownerId?: string
@@ -37,9 +39,12 @@ export default class PreparationState
     minRank?: EloRank
     noElo?: boolean
     gameMode: GameMode
+    whitelist?: string[]
+    blacklist?: string[]
   }) {
     super()
-    this.ownerId = params.ownerId ?? ""
+    this.ownerId =
+      params.gameMode === GameMode.NORMAL ? params.ownerId ?? "" : ""
     this.name = params.roomName
     this.gameStarted = false
     this.ownerName = ""
@@ -47,6 +52,8 @@ export default class PreparationState
     this.noElo = params.noElo ?? false
     this.minRank = params.minRank ?? null
     this.gameMode = params.gameMode
+    this.whitelist = params.whitelist ?? []
+    this.blacklist = params.blacklist ?? []
   }
 
   addMessage(params: {

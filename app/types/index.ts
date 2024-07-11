@@ -1,13 +1,13 @@
 import { ArraySchema, MapSchema, Schema, SetSchema } from "@colyseus/schema"
 import Board from "../core/board"
 import Dps from "../core/dps"
-import DpsHeal from "../core/dps-heal"
 import { EvolutionRule } from "../core/evolution-rules"
 import Count from "../models/colyseus-models/count"
 import ExperienceManager from "../models/colyseus-models/experience-manager"
 import { IPokemonRecord } from "../models/colyseus-models/game-record"
 import HistoryItem from "../models/colyseus-models/history-item"
-import { ILeaderboardInfo } from "../models/colyseus-models/leaderboard-info"
+import { ILeaderboardInfo } from "../types/interfaces/LeaderboardInfo"
+import { ISpecialGamePlanned } from "../types/interfaces/Lobby"
 import LobbyUser from "../models/colyseus-models/lobby-user"
 import Message from "../models/colyseus-models/message"
 import Player from "../models/colyseus-models/player"
@@ -45,13 +45,7 @@ export const CDN_PORTRAIT_URL =
 export const CDN_URL =
   "https://raw.githubusercontent.com/keldaanCommunity/SpriteCollab/master"
 
-// eslint-disable-next-line no-useless-escape
 export const USERNAME_REGEXP = /^(\p{Letter}|[0-9]|\.|-|_){3,24}$/u
-
-export type NonFunctionPropNames<T> = {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  [K in keyof T]: T[K] extends Function ? never : K
-}[keyof T]
 
 export type PkmWithConfig = { name: Pkm; shiny?: boolean; emotion?: Emotion }
 
@@ -93,6 +87,7 @@ export enum Transfer {
   TOGGLE_READY = "TOGGLE_READY",
   TOGGLE_NO_ELO = "TOGGLE_NO_ELO",
   REFRESH = "REFRESH",
+  SPECTATE = "SPECTATE",
   LOCK = "LOCK",
   LEVEL_UP = "LEVEL_UP",
   SHOP = "SHOP",
@@ -108,7 +103,7 @@ export enum Transfer {
   USER = "USER",
   DRAG_DROP_FAILED = "DRAG_DROP_FAILED",
   SHOW_EMOTE = "SHOW_EMOTE",
-  BROADCAST_INFO = "BROADCAST_INFO",
+  FINAL_RANK = "FINAL_RANK",
   SEARCH_BY_ID = "SEARCH_BY_ID",
   SUGGESTIONS = "SUGGESTIONS",
   SET_TITLE = "SET_TITLE",
@@ -151,11 +146,13 @@ export enum Transfer {
   USER_PROFILE = "USER_PROFILE",
   PICK_BERRY = "PICK_BERRY",
   SERVER_ANNOUNCEMENT = "SERVER_ANNOUNCEMENT",
-  PRELOAD_MAPS = "PRELOAD_MAPS"
+  PRELOAD_MAPS = "PRELOAD_MAPS",
+  NPC_DIALOG = "NPC_DIALOG"
 }
 
 export enum AttackSprite {
   BUG_MELEE = "BUG/melee",
+  BUG_RANGE = "BUG/range",
   DARK_MELEE = "DARK/melee",
   DARK_RANGE = "DARK/range",
   DRAGON_MELEE = "DRAGON/melee",
@@ -184,12 +181,14 @@ export enum AttackSprite {
   WATER_RANGE = "WATER/range",
   ROCK_MELEE = "ROCK/melee",
   ROCK_RANGE = "ROCK/range",
+  SOUND_RANGE = "SOUND/range",
   STEEL_MELEE = "STEEL/melee"
 }
 
 export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
   {
     "BUG/melee": [1.5, 1.5],
+    "BUG/range": [2, 2],
     "DARK/melee": [1.5, 1.5],
     "DARK/range": [1.5, 1.5],
     "DRAGON/melee": [2, 2],
@@ -197,12 +196,12 @@ export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
     "ELECTRIC/melee": [1.5, 1.5],
     "ELECTRIC/range": [2, 2],
     "FAIRY/melee": [2, 2],
-    "FAIRY/range": [1.5, 1.5],
+    "FAIRY/range": [2, 2],
     "FIGHTING/melee": [2, 2],
     "FIGHTING/range": [2, 2],
     "FIRE/melee": [1, 1],
     "FIRE/range": [2, 2],
-    "FLYING/melee": [1.5, 1.5],
+    "FLYING/melee": [1, 1],
     "FLYING/range": [1.5, 1.5],
     "GHOST/range": [2, 2],
     "GRASS/melee": [1, 1],
@@ -217,6 +216,7 @@ export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
     "ROCK/melee": [1.5, 1.5],
     "ROCK/range": [2, 2],
     "STEEL/melee": [1.5, 1.5],
+    "SOUND/range": [2, 2],
     "WATER/melee": [2, 2],
     "WATER/range": [3, 3]
   }
@@ -262,7 +262,6 @@ export interface IDragDropItemMessage {
   x: number
   y: number
   id: Item
-  bypass?: boolean
 }
 
 export interface IDragDropCombineMessage {
@@ -276,8 +275,7 @@ export interface ICustomLobbyState extends Schema {
   leaderboard: ILeaderboardInfo[]
   botLeaderboard: ILeaderboardInfo[]
   levelLeaderboard: ILeaderboardInfo[]
-  nextSpecialGameDate: string
-  nextSpecialGameMode: GameMode | ""
+  nextSpecialGame: ISpecialGamePlanned
   tournaments: ArraySchema<TournamentSchema>
 }
 
@@ -297,8 +295,10 @@ export interface ISimplePlayer {
   avatar: string
   title: string
   role: Role
-  pokemons: IPokemonRecord[]
-  synergies: Array<{ name: Synergy; value: number }>
+  pokemons: IPokemonRecord[] | ArraySchema<IPokemonRecord>
+  synergies:
+    | Array<{ name: Synergy; value: number }>
+    | ArraySchema<{ name: Synergy; value: number }>
 }
 
 export interface IGameHistorySimplePlayer extends ISimplePlayer {
@@ -373,6 +373,12 @@ export interface IPlayer {
   effects: Effects
   isBot: boolean
   map: DungeonPMDO
+  regionalPokemons: ArraySchema<Pkm>
+  commonRegionalPool: Pkm[]
+  uncommonRegionalPool: Pkm[]
+  rareRegionalPool: Pkm[]
+  epicRegionalPool: Pkm[]
+  ultraRegionalPool: Pkm[]
 }
 
 export interface IPokemon {
@@ -405,6 +411,7 @@ export interface IPokemon {
   action: PokemonActionState
   canBePlaced: boolean
   canBeCloned: boolean
+  canHoldItems: boolean
 }
 
 export interface IExperienceManager {
@@ -424,29 +431,27 @@ export interface ISimulation {
   redTeam: MapSchema<IPokemonEntity>
   blueDpsMeter: MapSchema<Dps>
   redDpsMeter: MapSchema<Dps>
-  blueHealDpsMeter: MapSchema<DpsHeal>
-  redHealDpsMeter: MapSchema<DpsHeal>
   bluePlayerId: string
   redPlayerId: string
 }
 
 export interface IDps {
-  changeDamage(
+  update(
     physicalDamage: number,
     specialDamage: number,
-    trueDamage: number
+    trueDamage: number,
+    hpDamageTaken: number,
+    shieldDamageTaken: number,
+    heal: number,
+    shield: number
   )
   id: string
   name: string
   physicalDamage: number
   specialDamage: number
   trueDamage: number
-}
-
-export interface IDpsHeal {
-  changeHeal(healDone: number, shieldDone: number)
-  id: string
-  name: string
+  hpDamageTaken: number
+  shieldDamageTaken: number
   heal: number
   shield: number
 }
@@ -461,20 +466,61 @@ export interface IPokemonEntity {
   simulation: ISimulation
   refToBoardPokemon: IPokemon
   applyStat(stat: Stat, value: number): void
-  addAbilityPower(value: number): void
-  addPP(pp: number): void
-  addAttack(atk: number): void
-  addAttackSpeed(as: number): void
+  addAbilityPower(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
+  addPP(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
+  addAttack(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
+  addAttackSpeed(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
   addMaxHP(life: number): void
   addShield(
-    shieldBonus: number,
-    pokemon: IPokemonEntity,
-    apBoost?: boolean
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
   ): void
-  addDefense(value: number, apBoost?: boolean): void
-  addSpecialDefense(value: number, apBoost?: boolean): void
-  addCritChance(value: number): void
-  addCritDamage(value: number, apBoost?: boolean): void
+  addDefense(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
+  addSpecialDefense(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
+  addCritChance(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
+  addCritPower(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
   update(
     dt: number,
     board: Board,
@@ -484,6 +530,8 @@ export interface IPokemonEntity {
   physicalDamage: number
   specialDamage: number
   trueDamage: number
+  hpDamageTaken: number
+  shieldDamageTaken: number
   shieldDone: number
   positionX: number
   positionY: number
@@ -517,7 +565,7 @@ export interface IPokemonEntity {
   passive: Passive
   status: Status
   count: Count
-  critDamage: number
+  critPower: number
   ap: number
   healDone: number
   shiny: boolean
@@ -539,6 +587,7 @@ export interface IStatus {
   resurection: boolean
   resurecting: boolean
   paralysis: boolean
+  pokerus: boolean
   armorReduction: boolean
   runeProtect: boolean
   electricField: boolean
@@ -559,7 +608,6 @@ export interface ICount {
   fightingBlockCount: number
   dodgeCount: number
   powerLensCount: number
-  staticCount: number
   starDustCount: number
   tripleAttackCount: number
   staticHolderCount: number
@@ -577,19 +625,22 @@ export interface ICount {
 
 export interface IPreparationMetadata {
   name: string
+  ownerName: string
   password: string | null
   noElo: boolean
   type: "preparation"
   gameStarted: boolean
   minRank: string | null
   gameMode: GameMode
-  whitelist: string[] | null
+  whitelist: string[]
+  blacklist: string[]
   tournamentId: string | null
   bracketId: string | null
 }
 
 export interface IGameMetadata {
   name: string
+  ownerName: string
   gameMode: GameMode
   playerIds: string[]
   stageLevel: number
@@ -669,7 +720,9 @@ export enum Title {
   VANQUISHER = "VANQUISHER",
   OUTSIDER = "OUTSIDER",
   GLUTTON = "GLUTTON",
-  STARGAZER = "STARGAZER"
+  STARGAZER = "STARGAZER",
+  BLOODY = "BLOODY",
+  ETERNAL = "ETERNAL"
 }
 
 export interface IBoardEvent {

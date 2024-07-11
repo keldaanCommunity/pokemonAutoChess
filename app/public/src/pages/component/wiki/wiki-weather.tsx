@@ -1,7 +1,7 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { getPokemonData } from "../../../../../models/precomputed"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { WeatherThreshold } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Pkm } from "../../../../../types/enum/Pokemon"
@@ -39,7 +39,7 @@ export default function WikiWeather() {
                 src={`/assets/icons/weather/${weather.toLowerCase()}.svg`}
               />
               <h2>{t(`weather.${weather}`)}</h2>
-              <span style={{ fontSize: "1.5em" }}>
+              <span>
                 {WeatherThreshold[weather]}
                 <SynergyIcon type={SynergyAssociatedToWeather.get(weather)!} />
               </span>
@@ -53,7 +53,8 @@ export default function WikiWeather() {
                   <div
                     key={p.name}
                     className={cc("pokemon-portrait", {
-                      additional: p.additional
+                      additional: p.additional,
+                      regional: p.regional
                     })}
                     data-tooltip-id={`pokemon-detail-${p.index}`}
                   >

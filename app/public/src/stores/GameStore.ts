@@ -5,9 +5,9 @@ import ExperienceManager from "../../../models/colyseus-models/experience-manage
 import PokemonCollection from "../../../models/colyseus-models/pokemon-collection"
 import Synergies from "../../../models/colyseus-models/synergies"
 import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
-import { IDps, IDpsHeal, IPlayer, ISimulation } from "../../../types"
+import { IDps, IPlayer, ISimulation } from "../../../types"
 import { StageDuration } from "../../../types/Config"
-import { GamePhaseState } from "../../../types/enum/Game"
+import { GamePhaseState, Team } from "../../../types/enum/Game"
 import { Item } from "../../../types/enum/Item"
 import { Pkm, PkmProposition } from "../../../types/enum/Pokemon"
 import { Synergy } from "../../../types/enum/Synergy"
@@ -49,8 +49,6 @@ interface GameStateStore {
   weather: Weather
   blueDpsMeter: IDps[]
   redDpsMeter: IDps[]
-  blueHealDpsMeter: IDpsHeal[]
-  redHealDpsMeter: IDpsHeal[]
   pokemonCollection: MapSchema<IPokemonConfig>
   additionalPokemons: Pkm[]
 }
@@ -90,8 +88,6 @@ const initialState: GameStateStore = {
   currentPlayerAvatar: "0019/Normal",
   blueDpsMeter: new Array<IDps>(),
   redDpsMeter: new Array<IDps>(),
-  blueHealDpsMeter: new Array<IDpsHeal>(),
-  redHealDpsMeter: new Array<IDpsHeal>(),
   pokemonCollection: new MapSchema<IPokemonConfig>(),
   additionalPokemons: new Array<Pkm>()
 }
@@ -195,10 +191,6 @@ export const gameSlice = createSlice({
     ) => {
       if (state.currentPlayerId === action.payload.id) {
         state.currentPlayerOpponentAvatar = action.payload.value
-        getGameScene()?.board?.updateOpponentAvatar(
-          state.currentPlayerOpponentId,
-          state.currentPlayerOpponentAvatar
-        )
       }
     },
     setOpponentTitle: (
@@ -298,19 +290,11 @@ export const gameSlice = createSlice({
         state.weather = action.payload.weather
         state.blueDpsMeter = new Array<IDps>()
         state.redDpsMeter = new Array<IDps>()
-        state.blueHealDpsMeter = new Array<IDpsHeal>()
-        state.redHealDpsMeter = new Array<IDpsHeal>()
         action.payload.blueDpsMeter.forEach((dps) => {
-          state.blueDpsMeter.push(JSON.parse(JSON.stringify(dps)))
+          state.blueDpsMeter.push(structuredClone(dps))
         })
         action.payload.redDpsMeter.forEach((dps) => {
-          state.redDpsMeter.push(JSON.parse(JSON.stringify(dps)))
-        })
-        action.payload.redHealDpsMeter.forEach((dps) => {
-          state.redHealDpsMeter.push(JSON.parse(JSON.stringify(dps)))
-        })
-        action.payload.blueHealDpsMeter.forEach((dps) => {
-          state.blueHealDpsMeter.push(JSON.parse(JSON.stringify(dps)))
+          state.redDpsMeter.push(structuredClone(dps))
         })
       }
     },
@@ -331,158 +315,53 @@ export const gameSlice = createSlice({
       state.currentPlayerTitle = action.payload.title
       state.currentPlayerBoardSize = action.payload.boardSize
     },
-    addRedDpsMeter: (
+    addDpsMeter: (
       state,
-      action: PayloadAction<{ value: IDps; id: string }>
+      action: PayloadAction<{ value: IDps; team: Team; id: string }>
     ) => {
+      const { value, team, id } = action.payload
+      const dpsMeter =
+        team === Team.BLUE_TEAM ? state.blueDpsMeter : state.redDpsMeter
       if (
-        state.currentSimulationId === action.payload.id &&
-        state.redDpsMeter.find((d) => d.id == action.payload.value.id) ===
-          undefined
+        state.currentSimulationId === id &&
+        dpsMeter.find((d) => d.id == value.id) === undefined
       ) {
-        state.redDpsMeter.push(JSON.parse(JSON.stringify(action.payload.value)))
+        dpsMeter.push(structuredClone(value))
       }
     },
-    addBlueDpsMeter: (
-      state,
-      action: PayloadAction<{ value: IDps; id: string }>
-    ) => {
-      if (
-        state.currentSimulationId === action.payload.id &&
-        state.blueDpsMeter.find((d) => d.id == action.payload.value.id) ===
-          undefined
-      ) {
-        state.blueDpsMeter.push(
-          JSON.parse(JSON.stringify(action.payload.value))
-        )
-      }
-    },
-    addRedHealDpsMeter: (
-      state,
-      action: PayloadAction<{ value: IDpsHeal; id: string }>
-    ) => {
-      if (
-        state.currentSimulationId === action.payload.id &&
-        state.redHealDpsMeter.find((d) => d.id == action.payload.value.id) ===
-          undefined
-      ) {
-        state.redHealDpsMeter.push(
-          JSON.parse(JSON.stringify(action.payload.value))
-        )
-      }
-    },
-    addBlueHealDpsMeter: (
-      state,
-      action: PayloadAction<{ value: IDpsHeal; id: string }>
-    ) => {
-      if (
-        state.currentSimulationId === action.payload.id &&
-        state.blueHealDpsMeter.find((d) => d.id == action.payload.value.id) ===
-          undefined
-      ) {
-        state.blueHealDpsMeter.push(
-          JSON.parse(JSON.stringify(action.payload.value))
-        )
-      }
-    },
-    changeRedDpsMeter: (
+
+    changeDpsMeter: (
       state,
       action: PayloadAction<{
         id: string
+        team: Team
         field: string
         value: string | number
         simulationId: string
       }>
     ) => {
-      if (state.currentSimulationId === action.payload.simulationId) {
-        const index = state.redDpsMeter.findIndex(
-          (e) => action.payload.id == e.id
-        )
+      const { value, field, team, id, simulationId } = action.payload
+      const dpsMeter =
+        team === Team.BLUE_TEAM ? state.blueDpsMeter : state.redDpsMeter
+      if (state.currentSimulationId === simulationId) {
+        const index = dpsMeter.findIndex((e) => id == e.id)
         if (index >= 0) {
-          state.redDpsMeter[index][action.payload.field] = action.payload.value
+          dpsMeter[index][field] = value
         }
       }
     },
-    changeBlueDpsMeter: (
+
+    removeDpsMeter: (
       state,
-      action: PayloadAction<{
-        id: string
-        field: string
-        value: string | number
-        simulationId: string
-      }>
+      action: PayloadAction<{ team: Team; simulationId: string }>
     ) => {
-      if (state.currentSimulationId === action.payload.simulationId) {
-        const index = state.blueDpsMeter.findIndex(
-          (e) => action.payload.id == e.id
-        )
-        if (index >= 0) {
-          state.blueDpsMeter[
-            state.blueDpsMeter.findIndex((e) => action.payload.id == e.id)
-          ][action.payload.field] = action.payload.value
-        }
+      const { team, simulationId } = action.payload
+      if (state.currentSimulationId === simulationId) {
+        if (team === Team.BLUE_TEAM) state.blueDpsMeter = new Array<IDps>()
+        if (team === Team.RED_TEAM) state.redDpsMeter = new Array<IDps>()
       }
     },
-    changeRedHealDpsMeter: (
-      state,
-      action: PayloadAction<{
-        id: string
-        field: string
-        value: string | number
-        simulationId: string
-      }>
-    ) => {
-      if (state.currentSimulationId === action.payload.simulationId) {
-        const index = state.redHealDpsMeter.findIndex(
-          (e) => action.payload.id == e.id
-        )
-        if (index >= 0) {
-          state.redHealDpsMeter[
-            state.redHealDpsMeter.findIndex((e) => action.payload.id == e.id)
-          ][action.payload.field] = action.payload.value
-        }
-      }
-    },
-    changeBlueHealDpsMeter: (
-      state,
-      action: PayloadAction<{
-        id: string
-        field: string
-        value: string | number
-        simulationId: string
-      }>
-    ) => {
-      if (state.currentSimulationId === action.payload.simulationId) {
-        const index = state.blueHealDpsMeter.findIndex(
-          (e) => action.payload.id == e.id
-        )
-        if (index >= 0) {
-          state.blueHealDpsMeter[
-            state.blueHealDpsMeter.findIndex((e) => action.payload.id == e.id)
-          ][action.payload.field] = action.payload.value
-        }
-      }
-    },
-    removeRedDpsMeter: (state, action: PayloadAction<string>) => {
-      if (state.currentSimulationId === action.payload) {
-        state.redDpsMeter = new Array<IDps>()
-      }
-    },
-    removeBlueDpsMeter: (state, action: PayloadAction<string>) => {
-      if (state.currentSimulationId === action.payload) {
-        state.blueDpsMeter = new Array<IDps>()
-      }
-    },
-    removeRedHealDpsMeter: (state, action: PayloadAction<string>) => {
-      if (state.currentSimulationId === action.payload) {
-        state.redHealDpsMeter = new Array<IDpsHeal>()
-      }
-    },
-    removeBlueHealDpsMeter: (state, action: PayloadAction<string>) => {
-      if (state.currentSimulationId === action.payload) {
-        state.blueHealDpsMeter = new Array<IDpsHeal>()
-      }
-    },
+
     setPokemonCollection: (state, action: PayloadAction<PokemonCollection>) => {
       state.pokemonCollection = action.payload
     },
@@ -496,18 +375,9 @@ export const {
   setPokemonProposition,
   setPokemonCollection,
   leaveGame,
-  removeBlueDpsMeter,
-  removeRedDpsMeter,
-  removeBlueHealDpsMeter,
-  removeRedHealDpsMeter,
-  changeBlueDpsMeter,
-  changeRedDpsMeter,
-  changeBlueHealDpsMeter,
-  changeRedHealDpsMeter,
-  addRedDpsMeter,
-  addBlueDpsMeter,
-  addRedHealDpsMeter,
-  addBlueHealDpsMeter,
+  removeDpsMeter,
+  changeDpsMeter,
+  addDpsMeter,
   setCurrentPlayerName,
   setCurrentPlayerTitle,
   setLoadingProgress,

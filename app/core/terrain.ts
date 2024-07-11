@@ -1,4 +1,3 @@
-/* eslint-disable no-var */
 const F = (Math.sqrt(3) - 1) / 2
 const G = (3 - Math.sqrt(3)) / 6
 const GRAD = [

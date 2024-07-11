@@ -8,7 +8,6 @@ import { IBot } from "../models/mongo-models/bot-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { IPreparationMetadata, Transfer } from "../types"
 import { EloRank, MAX_PLAYERS_PER_GAME } from "../types/Config"
-import { DungeonPMDO } from "../types/enum/Dungeon"
 import { BotDifficulty, GameMode } from "../types/enum/Game"
 import { logger } from "../utils/logger"
 import { values } from "../utils/schemas"
@@ -32,13 +31,11 @@ import PreparationState from "./states/preparation-state"
 
 export default class PreparationRoom extends Room<PreparationState> {
   dispatcher: Dispatcher<this>
-  elos: Map<any, any>
 
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
     this.maxClients = MAX_PLAYERS_PER_GAME
-    this.elos = new Map()
   }
 
   async setName(name: string) {
@@ -78,7 +75,8 @@ export default class PreparationRoom extends Room<PreparationState> {
     noElo?: boolean
     autoStartDelayInSeconds?: number
     whitelist?: string[]
-    tournamentId?: string,
+    blacklist?: string[]
+    tournamentId?: string
     bracketId?: string
   }) {
     // logger.debug(options);
@@ -90,20 +88,21 @@ export default class PreparationRoom extends Room<PreparationState> {
     // logger.debug(defaultRoomName);
     this.setState(new PreparationState(options))
     this.setMetadata(<IPreparationMetadata>{
+      ownerName:
+        options.gameMode === GameMode.QUICKPLAY ? null : options.ownerId,
       minRank: options.minRank ?? null,
       noElo: options.noElo ?? false,
       gameMode: options.gameMode,
-      whitelist: options.whitelist ?? null,
+      whitelist: options.whitelist ?? [],
+      blacklist: options.blacklist ?? [],
       tournamentId: options.tournamentId ?? null,
       bracketId: options.bracketId ?? null
     })
     this.maxClients = 8
-    // if (options.ownerId) {
-    //   this.dispatcher.dispatch(new InitializeBotsCommand(), {
-    //     ownerId: options.ownerId
-    //   })
-    // }
-    if (options.gameMode !== GameMode.NORMAL) {
+    if (
+      options.gameMode !== GameMode.NORMAL &&
+      options.gameMode !== GameMode.QUICKPLAY
+    ) {
       this.autoDispose = false
     }
 
@@ -130,33 +129,42 @@ export default class PreparationRoom extends Room<PreparationState> {
         }
       }, options.autoStartDelayInSeconds * 1000)
 
-      this.clock.setTimeout(() => {
-        for (let t = 0; t < 10; t++) {
-          this.clock.setTimeout(() => {
-            this.state.addMessage({
-              author: "Server",
-              authorId: "server",
-              payload: `Game is starting in ${10 - t}`,
-              avatar: "0070/Normal"
-            })
-          }, t * 1000)
-        }
-      }, (options.autoStartDelayInSeconds - 10) * 1000)
+      this.clock.setTimeout(
+        () => {
+          for (let t = 0; t < 10; t++) {
+            this.clock.setTimeout(() => {
+              this.state.addMessage({
+                author: "Server",
+                authorId: "server",
+                payload: `Game is starting in ${10 - t}`,
+                avatar: "0070/Normal"
+              })
+            }, t * 1000)
+          }
+        },
+        (options.autoStartDelayInSeconds - 10) * 1000
+      )
 
-      this.clock.setTimeout(() => {
-        for (let t = 0; t < 9; t++) {
-          this.clock.setTimeout(() => {
-            this.state.addMessage({
-              author: "Server",
-              authorId: "server",
-              payload: `Game will start automatically in ${10 - t} minute${
-                t !== 9 ? "s" : ""
-              }`,
-              avatar: "0340/Special1"
-            })
-          }, t * 60 * 1000)
-        }
-      }, (options.autoStartDelayInSeconds - 10 * 60) * 1000)
+      this.clock.setTimeout(
+        () => {
+          for (let t = 0; t < 9; t++) {
+            this.clock.setTimeout(
+              () => {
+                this.state.addMessage({
+                  author: "Server",
+                  authorId: "server",
+                  payload: `Game will start automatically in ${10 - t} minute${
+                    t !== 9 ? "s" : ""
+                  }`,
+                  avatar: "0340/Special1"
+                })
+              },
+              t * 60 * 1000
+            )
+          }
+        },
+        (options.autoStartDelayInSeconds - 10 * 60) * 1000
+      )
     }
 
     this.setName(options.roomName)
@@ -212,9 +220,9 @@ export default class PreparationRoom extends Room<PreparationState> {
       }
     })
 
-    this.onMessage(Transfer.TOGGLE_READY, (client) => {
+    this.onMessage(Transfer.TOGGLE_READY, (client, ready?: boolean) => {
       try {
-        this.dispatcher.dispatch(new OnToggleReadyCommand(), { client })
+        this.dispatcher.dispatch(new OnToggleReadyCommand(), { client, ready })
       } catch (error) {
         logger.error(error)
       }
@@ -306,6 +314,8 @@ export default class PreparationRoom extends Room<PreparationState> {
         throw "No display name"
       } else if (isBanned) {
         throw "User banned"
+      } else if (this.metadata.blacklist.includes(user.uid)) {
+        throw "User previously kicked"
       } else if (isAlreadyInRoom) {
         throw "User already in room"
       } else {
@@ -335,8 +345,8 @@ export default class PreparationRoom extends Room<PreparationState> {
       if (consented) {
         throw new Error("consented leave")
       }
-      // allow disconnected client to reconnect into this room until 10 seconds
-      await this.allowReconnection(client, 10)
+      // allow disconnected client to reconnect into this room until 3 seconds
+      await this.allowReconnection(client, 3)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
         /*logger.info(

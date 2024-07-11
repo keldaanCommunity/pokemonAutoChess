@@ -1,10 +1,10 @@
 import { Room } from "colyseus.js"
+import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import Phaser from "phaser"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin.js"
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin.js"
 import React from "react"
 import { toast } from "react-toastify"
-import { DesignTiled } from "../../../core/design"
 import { PokemonEntity } from "../../../core/pokemon-entity"
 import Simulation from "../../../core/simulation"
 import Count from "../../../models/colyseus-models/count"
@@ -23,8 +23,8 @@ import {
   IDragDropMessage,
   IPlayer,
   IPokemon,
+  IPokemonEntity,
   ISimplePlayer,
-  NonFunctionPropNames,
   Transfer
 } from "../../../types"
 import { Ability } from "../../../types/enum/Ability"
@@ -38,13 +38,15 @@ import {
 import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
 import { logger } from "../../../utils/logger"
-import { clamp } from "../../../utils/number"
+import { clamp, max } from "../../../utils/number"
 import { getPath, transformCoordinate } from "../pages/utils/utils"
+import { preferences } from "../preferences"
 import store from "../stores"
-import { changePlayer } from "../stores/GameStore"
+import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
 import { getPortraitSrc } from "../utils"
 import { BoardMode } from "./components/board-manager"
 import GameScene from "./scenes/game-scene"
+import { playSound, SOUNDS } from "../pages/utils/audio"
 
 class GameContainer {
   room: Room<GameState>
@@ -103,13 +105,17 @@ class GameContainer {
       "charm",
       "confusion",
       "curse",
-      "deltaOrbStacks",
+      "curseVulnerability",
+      "curseWeakness",
+      "curseTorment",
+      "curseFate",
       "electricField",
       "fairyField",
       "flinch",
       "freeze",
       "grassField",
       "paralysis",
+      "pokerus",
       "poisonStacks",
       "protect",
       "skydiving",
@@ -134,13 +140,14 @@ class GameContainer {
     })
 
     pokemon.onChange(() => {
-      const fields: NonFunctionPropNames<PokemonEntity>[] = [
+      const fields: (NonFunctionPropNames<PokemonEntity> &
+        keyof IPokemonEntity)[] = [
         "positionX",
         "positionY",
         "orientation",
         "action",
         "critChance",
-        "critDamage",
+        "critPower",
         "ap",
         "atkSpeed",
         "life",
@@ -194,7 +201,6 @@ class GameContainer {
       "mindBlownCount",
       "spellBlockedCount",
       "manaBurnCount",
-      "staticCount",
       "moneyCount",
       "amuletCoinCount",
       "attackCount",
@@ -262,13 +268,17 @@ class GameContainer {
     const screenWidth = window.innerWidth - 60
     const screenHeight = window.innerHeight
     const screenRatio = screenWidth / screenHeight
-    const WIDTH = 42 * 48
-    const MIN_HEIGHT = 1008
+    const IDEAL_WIDTH = 42 * 48
+    const MIN_HEIGHT = 1050
     const MAX_HEIGHT = 32 * 48
-    const height = clamp(WIDTH / screenRatio, MIN_HEIGHT, MAX_HEIGHT)
+    const height = clamp(IDEAL_WIDTH / screenRatio, MIN_HEIGHT, MAX_HEIGHT)
+    const width = max(50 * 48)(height * screenRatio)
 
-    if (this.game && this.game.scale.height !== height) {
-      this.game.scale.setGameSize(WIDTH, height)
+    if (
+      this.game &&
+      (this.game.scale.height !== height || this.game.scale.width !== width)
+    ) {
+      this.game.scale.setGameSize(width, height)
     }
   }
 
@@ -356,6 +366,7 @@ class GameContainer {
   initializePlayer(player: Player) {
     //logger.debug("initializePlayer", player, player.id)
     if (this.uid == player.id || (this.spectate && !this.player)) {
+      this.room.send(Transfer.SPECTATE, this.uid) // always spectate yourself when loading the game initially
       this.setPlayer(player)
       this.initializeGame()
     }
@@ -371,7 +382,7 @@ class GameContainer {
         ]
         fields.forEach((field) => {
           pokemon.listen(field, (value, previousValue) => {
-            if (player.id === this.spectatedPlayerId) {
+            if (field && player.id === this.spectatedPlayerId) {
               this.gameScene?.board?.changePokemon(pokemon, field, value)
             }
           })
@@ -477,6 +488,8 @@ class GameContainer {
           this.gameScene.weatherManager.addSnow()
         } else if (value === Weather.NIGHT) {
           this.gameScene.weatherManager.addNight()
+        } else if (value === Weather.BLOODMOON) {
+          this.gameScene.weatherManager.addBloodMoon()
         } else if (value === Weather.WINDY) {
           this.gameScene.weatherManager.addWind()
         } else if (value === Weather.STORM) {
@@ -514,14 +527,16 @@ class GameContainer {
     index: string
     amount: number
   }) {
-    this.gameScene?.battle?.displayDamage(
-      message.x,
-      message.y,
-      message.amount,
-      message.type,
-      message.index,
-      message.id
-    )
+    if (preferences.showDamageNumbers) {
+      this.gameScene?.battle?.displayDamage(
+        message.x,
+        message.y,
+        message.amount,
+        message.type,
+        message.index,
+        message.id
+      )
+    }
   }
 
   handleDisplayAbility(message: {
@@ -560,13 +575,21 @@ class GameContainer {
         pokemonUI.fishingAnimation()
       } else if (pokemonUI && pokemon.stars > 1) {
         pokemonUI.evolutionAnimation()
+        playSound(
+          pokemon.stars === 2 ? SOUNDS.EVOLUTION_T2 : SOUNDS.EVOLUTION_T3
+        )
       } else if (pokemonUI && pokemon.rarity === Rarity.HATCH) {
         pokemonUI.hatchAnimation()
+      } else if (pokemonUI) {
+        pokemonUI.spawnAnimation()
       }
     }
   }
 
-  handleDragDropFailed(message: any) {
+  handleDragDropFailed(message: {
+    updateBoard: boolean
+    updateItems: boolean
+  }) {
     const gameScene = this.gameScene
     if (gameScene?.lastDragDropPokemon && message.updateBoard) {
       const tg = gameScene.lastDragDropPokemon
@@ -580,24 +603,18 @@ class GameContainer {
     }
   }
 
-  onPlayerClick(id: string) {
-    const player = this.room.state.players.get(id)
-    if (player) {
-      this.setPlayer(player)
-      const simulation = this.room.state.simulations.get(player.simulationId)
-      if (simulation) {
-        this.setSimulation(simulation)
-      }
-    }
-  }
-
   setPlayer(player: Player) {
     this.player = player
-    this.gameScene?.setPlayer(player)
+    this.gameScene?.setMap(player.map)
+    this.gameScene?.battle?.setPlayer(player)
+    this.gameScene?.board?.setPlayer(player)
+    this.gameScene?.itemsContainer?.setPlayer(player)
+    store.dispatch(setPlayer(player))
   }
 
   setSimulation(simulation: Simulation) {
     this.simulation = simulation
+    store.dispatch(setSimulation(simulation))
     if (this.gameScene?.battle) {
       this.gameScene?.battle.setSimulation(this.simulation)
     }

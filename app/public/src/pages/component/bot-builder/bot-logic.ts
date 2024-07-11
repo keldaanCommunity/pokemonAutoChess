@@ -3,14 +3,14 @@ import {
   IDetailledPokemon,
   IStep
 } from "../../../../../models/mongo-models/bot-v2"
-import { getPokemonData } from "../../../../../models/precomputed"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import {
   AdditionalPicksStages,
   PortalCarouselStages
 } from "../../../../../types/Config"
 import { Rarity } from "../../../../../types/enum/Game"
 import {
-  BasicItems,
+  ItemComponents,
   CraftableItems,
   Item
 } from "../../../../../types/enum/Item"
@@ -111,7 +111,7 @@ export function getCategory(pkm: Pkm): string {
       false &&
     p.stars > 1
   ) {
-    category += p.additional ? " 2S" : " 3S"
+    category += p.stages === 2 ? " 2S" : " 3S"
   }
   category += ` T${p.stars}`
   if (Object.values(PkmDuos).some((duo) => duo.includes(pkm))) {
@@ -154,7 +154,11 @@ export function getNbComponentsOnBoard(board: IDetailledPokemon[]): number {
     .reduce(
       (nbComponents: number, item: Item) =>
         nbComponents +
-        (CraftableItems.includes(item) ? 2 : BasicItems.includes(item) ? 1 : 0),
+        (CraftableItems.includes(item)
+          ? 2
+          : ItemComponents.includes(item)
+            ? 1
+            : 0),
       0
     )
 }

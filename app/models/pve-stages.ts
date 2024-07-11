@@ -1,11 +1,10 @@
 import { Emotion } from "../types"
 import {
-  ArtificialItems,
-  BasicItems,
+  ItemComponents,
   CraftableItems,
   Item,
   NonSpecialItemComponents,
-  SynergyStones
+  ShinyItems
 } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
 import { pickNRandomIn, pickRandomIn } from "../utils/random"
@@ -16,8 +15,8 @@ export type PVEStage = {
   avatar: Pkm
   emotion?: Emotion
   shinyChance?: number
-  getRewards: (shiny: boolean, player: Player) => Item[]
-  chooseOnlyOne?: boolean
+  getRewards?: (player: Player) => Item[]
+  getRewardsPropositions?: (player: Player) => Item[]
   board: [pkm: Pkm, x: number, y: number][]
 }
 
@@ -29,8 +28,11 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.MAGIKARP, 3, 1],
       [Pkm.MAGIKARP, 5, 1]
     ],
-    getRewards() {
-      return [pickRandomIn(BasicItems)]
+    shinyChance: 1 / 20,
+    getRewards(player: Player) {
+      const randomComponent = pickRandomIn(NonSpecialItemComponents)
+      player.randomComponentsGiven.push(randomComponent)
+      return [randomComponent]
     }
   },
 
@@ -41,8 +43,14 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.RATTATA, 3, 1],
       [Pkm.RATTATA, 5, 1]
     ],
-    getRewards() {
-      return [pickRandomIn(BasicItems)]
+    getRewards(player) {
+      const randomComponent = pickRandomIn(
+        NonSpecialItemComponents.filter(
+          (i) => player.randomComponentsGiven.includes(i) === false
+        )
+      )
+      player.randomComponentsGiven.push(randomComponent)
+      return [randomComponent]
     }
   },
 
@@ -54,8 +62,14 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.SPEAROW, 5, 1],
       [Pkm.SPEAROW, 4, 2]
     ],
-    getRewards() {
-      return [pickRandomIn(BasicItems)]
+    getRewards(player) {
+      const randomComponent = pickRandomIn(
+        NonSpecialItemComponents.filter(
+          (i) => player.randomComponentsGiven.includes(i) === false
+        )
+      )
+      player.randomComponentsGiven.push(randomComponent)
+      return [randomComponent]
     }
   },
 
@@ -64,12 +78,9 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     avatar: Pkm.GYARADOS,
     shinyChance: 1 / 20,
     board: [[Pkm.GYARADOS, 4, 2]],
-    getRewards(shiny) {
-      if (shiny) {
-        return pickNRandomIn(BasicItems, 3)
-      } else {
-        return [pickRandomIn(BasicItems)]
-      }
+    getRewards(player: Player) {
+      const randomComponents = pickNRandomIn(ItemComponents, 1)
+      return randomComponents
     }
   },
 
@@ -77,23 +88,13 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     name: "pkm.MEWTWO",
     avatar: Pkm.MEWTWO,
     emotion: Emotion.DETERMINED,
-    shinyChance: 1 / 20,
+    shinyChance: 0, // can't propose shiny items because item proposition on stage 15
     board: [
       [Pkm.MEWTWO, 4, 2],
       [Pkm.MEW, 7, 1]
     ],
-    getRewards(shiny: boolean, player: Player) {
-      if (shiny) {
-        return [
-          pickRandomIn(
-            ArtificialItems.filter(
-              (item) => player.artificialItems.includes(item) === false
-            )
-          )
-        ]
-      } else {
-        return [pickRandomIn(NonSpecialItemComponents)]
-      }
+    getRewards(player: Player) {
+      return [pickRandomIn(NonSpecialItemComponents)]
     }
   },
 
@@ -106,12 +107,8 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.LUGIA, 3, 1],
       [Pkm.HO_OH, 5, 1]
     ],
-    getRewards(shiny) {
-      if (shiny) {
-        return pickNRandomIn(NonSpecialItemComponents, 3)
-      } else {
-        return [pickRandomIn(NonSpecialItemComponents)]
-      }
+    getRewards(player: Player) {
+      return [pickRandomIn(NonSpecialItemComponents)]
     }
   },
 
@@ -123,8 +120,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.MOLTRES, 4, 2],
       [Pkm.ARTICUNO, 6, 2]
     ],
-    chooseOnlyOne: true,
-    getRewards() {
+    getRewardsPropositions(player: Player) {
       return pickNRandomIn(CraftableItems, 3)
     }
   },
@@ -138,8 +134,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.RAIKOU, 4, 2],
       [Pkm.SUICUNE, 6, 2]
     ],
-    chooseOnlyOne: true,
-    getRewards() {
+    getRewardsPropositions(player: Player) {
       return pickNRandomIn(CraftableItems, 3)
     }
   },
@@ -153,8 +148,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.MEGA_RAYQUAZA, 4, 2],
       [Pkm.PRIMAL_GROUDON, 6, 2]
     ],
-    chooseOnlyOne: true,
-    getRewards() {
+    getRewardsPropositions(player: Player) {
       return pickNRandomIn(CraftableItems, 3)
     }
   },
@@ -171,8 +165,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.REGISTEEL, 5, 3],
       [Pkm.REGIDRAGO, 5, 2]
     ],
-    chooseOnlyOne: true,
-    getRewards() {
+    getRewardsPropositions(player: Player) {
       return pickNRandomIn(CraftableItems, 3)
     }
   },
@@ -187,12 +180,8 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.PALKIA, 6, 3],
       [Pkm.ARCEUS, 4, 1]
     ],
-    getRewards() {
-      return [
-        pickRandomIn(SynergyStones),
-        pickRandomIn(SynergyStones),
-        pickRandomIn(SynergyStones)
-      ]
+    getRewardsPropositions(player: Player) {
+      return pickNRandomIn(ShinyItems, 3)
     }
   }
 }

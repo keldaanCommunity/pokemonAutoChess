@@ -1,14 +1,13 @@
 import { Command } from "@colyseus/command"
 import { Client, matchMaker } from "colyseus"
 import { FilterQuery } from "mongoose"
-import os from "node:os"
 import { memoryUsage } from "node:process"
 import { GameUser, IGameUser } from "../../models/colyseus-models/game-user"
 import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
 import UserMetadata, {
   IUserMetadata
 } from "../../models/mongo-models/user-metadata"
-import { IChatV2, Role, Transfer } from "../../types"
+import { Role, Transfer } from "../../types"
 import { EloRankThreshold, MAX_PLAYERS_PER_GAME } from "../../types/Config"
 import { BotDifficulty, GameMode } from "../../types/enum/Game"
 import { logger } from "../../utils/logger"
@@ -68,7 +67,6 @@ export class OnJoinCommand extends Command<
             return // rank not high enough
           }
 
-          const initiallyReady = this.state.gameMode !== GameMode.NORMAL
           this.state.users.set(
             client.auth.uid,
             new GameUser(
@@ -77,16 +75,34 @@ export class OnJoinCommand extends Command<
               u.elo,
               u.avatar,
               false,
-              initiallyReady,
+              false,
               u.title,
               u.role,
               auth.email === undefined && auth.photoURL === undefined
             )
           )
+
           if (u.uid == this.state.ownerId) {
             // logger.debug(user.displayName);
             this.state.ownerName = u.displayName
+            this.room.setMetadata({
+              ownerName: this.state.ownerName
+            })
           }
+
+          if (this.state.gameMode !== GameMode.NORMAL) {
+            this.clock.setTimeout(() => {
+              if (
+                this.state.users.has(u.uid) &&
+                !this.state.users.get(u.uid)!.ready
+              ) {
+                this.state.users.delete(u.uid)
+                client.send(Transfer.KICK)
+                client.leave()
+              }
+            }, 10000)
+          }
+
           this.state.addMessage({
             authorId: "server",
             payload: `${u.displayName} joined.`,
@@ -112,30 +128,6 @@ export class OnJoinCommand extends Command<
             `There is more than 8 players in the lobby which was not supposed to happen`
           )
         }
-      }
-
-      const nbExpectedPlayers = this.room.metadata?.whitelist
-        ? max(MAX_PLAYERS_PER_GAME)(this.room.metadata?.whitelist.length)
-        : MAX_PLAYERS_PER_GAME
-
-      if (
-        this.state.gameMode !== GameMode.NORMAL &&
-        this.state.users.size === nbExpectedPlayers
-      ) {
-        // auto start when special lobby is full and all ready
-        this.room.state.addMessage({
-          authorId: "server",
-          payload: `Lobby is full, starting match...`
-        })
-        this.clock.setTimeout(() => {
-          this.room.dispatcher.dispatch(new OnGameStartRequestCommand())
-          // open another one
-          this.room.presence.publish("lobby-full", {
-            gameMode: this.state.gameMode,
-            minRank: this.state.minRank,
-            noElo: this.state.noElo
-          })
-        }, 2000)
       }
     } catch (error) {
       logger.error(error)
@@ -184,22 +176,23 @@ export class OnGameStartRequestCommand extends Command<
         return
       }
 
-      let freeMemory = os.freemem()
+      /*let freeMemory = os.freemem()
       let totalMemory = os.totalmem()
-      /*logger.info(
+      logger.info(
           `Memory freemem/totalmem: ${(
             (100 * freeMemory) /
             totalMemory
           ).toFixed(2)} % free (${totalMemory - freeMemory} / ${totalMemory})`
         )*/
-      freeMemory = memoryUsage().heapUsed
-      totalMemory = memoryUsage().heapTotal
+      const freeMemory = memoryUsage().heapUsed
+      const totalMemory = memoryUsage().heapTotal
       /*logger.info(
           `Memory heapUsed/heapTotal: ${(
             (100 * freeMemory) /
             totalMemory
           ).toFixed(2)} % free (${totalMemory - freeMemory} / ${totalMemory})`
         )*/
+
       if (freeMemory < 0.1 * totalMemory) {
         // if less than 10% free memory available, prevents starting another game to avoid out of memory crash
         this.state.addMessage({
@@ -232,6 +225,7 @@ export class OnGameStartRequestCommand extends Command<
         matchMaker.createRoom("game", {
           users: this.state.users,
           name: this.state.name,
+          ownerName: this.state.ownerName,
           preparationId: this.room.roomId,
           noElo: this.state.noElo,
           gameMode: this.state.gameMode,
@@ -303,14 +297,15 @@ export class OnRoomNameCommand extends Command<
     message: string
   }
 > {
-  execute({ client, message }) {
+  execute({ client, message: roomName }) {
+    roomName = cleanProfanity(roomName)
     try {
       if (
         client.auth?.uid == this.state.ownerId &&
-        this.state.name != message
+        this.state.name != roomName
       ) {
-        this.room.setName(message)
-        this.state.name = message
+        this.room.setName(roomName)
+        this.state.name = roomName
       }
     } catch (error) {
       logger.error(error)
@@ -396,6 +391,9 @@ export class OnKickPlayerCommand extends Command<
                 avatar: this.state.users.get(client.auth.uid)?.avatar
               })
               this.state.users.delete(userId)
+              this.room.setMetadata({
+                blacklist: this.room.metadata.blacklist.concat(userId)
+              })
               cli.send(Transfer.KICK)
               cli.leave()
             } else {
@@ -467,6 +465,12 @@ export class OnLeaveCommand extends Command<
             if (newOwner) {
               this.state.ownerId = newOwner.id
               this.state.ownerName = newOwner.name
+              this.room.setMetadata({ ownerName: this.state.ownerName })
+              this.room.setName(
+                `${newOwner.name}'${
+                  newOwner.name.endsWith("s") ? "" : "s"
+                } room`
+              )
               this.room.state.addMessage({
                 authorId: "server",
                 payload: `The new room leader is ${newOwner.name}`,
@@ -486,21 +490,48 @@ export class OnToggleReadyCommand extends Command<
   PreparationRoom,
   {
     client: Client
+    ready: boolean | undefined
   }
 > {
-  execute({ client }) {
+  execute({ client, ready }) {
     try {
+      // cannot toggle ready in quick play / ranked / tournament game mode
+      if (this.room.state.gameMode !== GameMode.NORMAL && ready !== true) return
+
       // logger.debug(this.state.users.get(client.auth.uid).ready);
       if (client.auth?.uid && this.state.users.has(client.auth.uid)) {
         const user = this.state.users.get(client.auth.uid)!
-        user.ready = !user.ready
+        user.ready = ready !== undefined ? ready : !user.ready
       }
+
+      const nbExpectedPlayers =
+        this.room.metadata?.whitelist &&
+        this.room.metadata?.whitelist.length > 0
+          ? max(MAX_PLAYERS_PER_GAME)(this.room.metadata?.whitelist.length)
+          : MAX_PLAYERS_PER_GAME
+
       if (
         this.state.gameMode !== GameMode.NORMAL &&
-        this.state.users.size === this.room.maxClients &&
-        values(this.state.users).every((user) => user.ready === true)
+        this.state.users.size === nbExpectedPlayers &&
+        values(this.state.users).every((user) => user.ready)
       ) {
         // auto start when ranked lobby is full and all ready
+        this.room.state.addMessage({
+          authorId: "server",
+          payload: `Lobby is full, starting match...`
+        })
+
+        if (
+          [GameMode.RANKED, GameMode.SCRIBBLE].includes(this.state.gameMode)
+        ) {
+          // open another one
+          this.room.presence.publish("lobby-full", {
+            gameMode: this.state.gameMode,
+            minRank: this.state.minRank,
+            noElo: this.state.noElo
+          })
+        }
+
         return [new OnGameStartRequestCommand()]
       }
     } catch (error) {

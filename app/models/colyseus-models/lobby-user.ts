@@ -1,4 +1,4 @@
-import { ArraySchema, Schema, type } from "@colyseus/schema"
+import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
 import { Role, Title } from "../../types"
 import { Language } from "../../types/enum/Language"
 import { IPokemonConfig } from "../mongo-models/user-metadata"
@@ -17,11 +17,11 @@ export interface ILobbyUser {
   exp: number
   level: number
   donor: boolean
-  honors: string[]
-  history: IGameRecord[]
-  pokemonCollection: Map<string, IPokemonConfig>
+  honors: string[] | ArraySchema<string>
+  history: IGameRecord[] | ArraySchema<IGameRecord>
+  pokemonCollection: Map<string, IPokemonConfig> | MapSchema<IPokemonConfig>
   booster: number
-  titles: Title[]
+  titles: Title[] | ArraySchema<Title>
   title: "" | Title
   role: Role
   anonymous: boolean
@@ -61,9 +61,9 @@ export default class LobbyUser extends Schema implements ILobbyUser {
     exp: number,
     level: number,
     donor: boolean,
-    history: GameRecord[],
+    history: GameRecord[] | ArraySchema<GameRecord>,
     honors: string[],
-    pokemonCollection: Map<string, IPokemonConfig>,
+    pokemonCollection: Map<string, IPokemonConfig> | null,
     booster: number,
     titles: Title[],
     title: "" | Title,
@@ -71,7 +71,7 @@ export default class LobbyUser extends Schema implements ILobbyUser {
     anonymous: boolean,
     creationTime: string,
     lastSignInTime: string,
-    language: Language | ""
+    language: Language | "",
   ) {
     super()
     this.id = id

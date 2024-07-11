@@ -24,6 +24,10 @@
   box-shadow: 0 0 4px #ffffff80;
 }
 
+.game-pokemon-portrait.disabled {
+  filter: contrast(0.8) brightness(0.8);
+}
+
 .game-pokemon-portrait-cost {
   position: absolute;
   left: 5px;

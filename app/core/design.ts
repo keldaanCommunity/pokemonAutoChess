@@ -46,7 +46,7 @@ export default class Design {
   terrain: TerrainType[][] = []
   bitmask: Mask[][] = []
   layers: TileMapping[][] = []
-  width = 42
+  width = 50
   height = 32
   frequency: number
   persistance: number
@@ -142,9 +142,12 @@ export default class Design {
     // player avatars slots
     this.drawGroundRect(9, 13, 3, 3)
     this.drawGroundRect(30, 1, 3, 3)
+    for (let y = 4; y < 12; y++) this.terrain[y][31] = TerrainType.GROUND
 
     // berry tree slots
     this.terrain[14][8] = TerrainType.GROUND
+    this.terrain[14][7] = TerrainType.GROUND
+    this.terrain[14][6] = TerrainType.GROUND
 
     // smeargle slot
     this.terrain[8][31] = TerrainType.GROUND

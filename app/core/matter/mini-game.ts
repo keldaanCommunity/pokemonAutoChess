@@ -15,7 +15,7 @@ import Player from "../../models/colyseus-models/player"
 import { getOrientation } from "../../public/src/pages/utils/utils"
 import { PokemonActionState } from "../../types/enum/Game"
 import {
-  BasicItems,
+  ItemComponents,
   CraftableItems,
   Item,
   SynergyStones
@@ -29,8 +29,6 @@ import {
 import { clamp, min } from "../../utils/number"
 import {
   ItemCarouselStages,
-  UniqueShop,
-  LegendaryShop,
   PortalCarouselStages,
   SynergyTriggers,
   KECLEON_SHOP_COST
@@ -55,13 +53,14 @@ export class MiniGame {
   items: MapSchema<FloatingItem> | undefined
   portals: MapSchema<Portal> | undefined
   symbols: MapSchema<SynergySymbol> | undefined
+  symbolsByPortal: Map<string, SynergySymbol[]> = new Map()
   bodies: Map<string, Body>
   alivePlayers: Player[]
   engine: Engine
   centerX: number = 325
   centerY: number = 250
 
-  constructor() {
+  constructor(room: GameRoom) {
     this.engine = Engine.create({ gravity: { x: 0, y: 0 } })
     this.bodies = new Map<string, Body>()
     this.alivePlayers = []
@@ -81,7 +80,7 @@ export class MiniGame {
       this.engine.world,
       Bodies.rectangle(0, 610, 2000, 40, { isStatic: true, restitution: 1 })
     )
-    Events.on(this.engine, "beforeUpdate", (event) => {
+    Events.on(this.engine, "beforeUpdate", () => {
       this.items?.forEach((item) => {
         if (item.avatarId === "") {
           const itemBody = this.bodies.get(item.id)
@@ -132,6 +131,26 @@ export class MiniGame {
           const item = this.items.get(itemBody.label)
 
           if (avatar?.itemId === "" && item?.avatarId === "") {
+            if (room.state.specialGameRule === SpecialGameRule.KECLEONS_SHOP) {
+              const player = room.state.players.get(avatar.id)
+              const client = room.clients.find(
+                (cli) => cli.auth.uid === avatar.id
+              )
+              if ((player?.money ?? 0) < KECLEON_SHOP_COST) {
+                // too poor to buy one item from kecleon's shop
+                client?.send(Transfer.NPC_DIALOG, {
+                  npc: "kecleon",
+                  dialog: "tell_price"
+                })
+                return
+              } else {
+                client?.send(Transfer.NPC_DIALOG, {
+                  npc: "kecleon",
+                  dialog: "thank_you"
+                })
+              }
+            }
+
             const constraint = Constraint.create({
               bodyA: avatarBody,
               bodyB: itemBody
@@ -302,28 +321,6 @@ export class MiniGame {
     }
 
     this.pickRandomSynergySymbols()
-
-    // assign a map to each portal
-    const maps = new Set(Object.values(DungeonPMDO))
-    this.portals?.forEach((portal) => {
-      const symbols = this.getSymbolsByPortalId(portal.id)
-      const portalSynergies = symbols.map((s) => s.synergy)
-      let nbMaxInCommon = 0,
-        candidateMaps: DungeonPMDO[] = []
-      maps.forEach((map) => {
-        const synergies = DungeonDetails[map].synergies
-        const inCommon = synergies.filter((s) => portalSynergies.includes(s))
-        if (inCommon.length > nbMaxInCommon) {
-          nbMaxInCommon = inCommon.length
-          candidateMaps = [map]
-        } else if (inCommon.length === nbMaxInCommon) {
-          candidateMaps.push(map)
-        }
-      })
-
-      portal.map = pickRandomIn(candidateMaps)
-      maps.delete(portal.map) // a map can't be taken twice
-    })
   }
 
   update(dt: number) {
@@ -334,6 +331,18 @@ export class MiniGame {
       }
     })
     this.bodies.forEach((body, id) => {
+      if (
+        body.position.x < 0 ||
+        body.position.x > 720 ||
+        body.position.y < 0 ||
+        body.position.y > 590
+      ) {
+        // prevent going out of bounds in case of lag
+        Body.setPosition(body, {
+          x: clamp(body.position.x, 0, 720),
+          y: clamp(body.position.y, 0, 590)
+        })
+      }
       if (this.avatars?.has(id)) {
         const avatar = this.avatars.get(id)!
         avatar.x = body.position.x
@@ -348,7 +357,7 @@ export class MiniGame {
         portal.x = body.position.x
         portal.y = body.position.y
         const t = this.engine.timing.timestamp * SYMBOL_ROTATION_SPEED
-        const symbols = this.getSymbolsByPortalId(portal.id)
+        const symbols = this.symbolsByPortal.get(portal.id) ?? []
         symbols.forEach((symbol) => {
           symbol.x =
             portal.x +
@@ -369,7 +378,7 @@ export class MiniGame {
 
     let nbItemsToPick = clamp(this.alivePlayers.length + 3, 5, 9)
     let maxCopiesPerItem = 2
-    let itemsSet = BasicItems
+    let itemsSet = ItemComponents
 
     if (stageLevel >= 20) {
       // Carousels after stage 20 propose full items and no longer components, and have one more proposition
@@ -432,7 +441,7 @@ export class MiniGame {
           .filter(
             ([type, level]) => level === 0 && player.synergies.get(type)! > 0
           )
-          .map(([type, level]) => type)
+          .map(([type, _level]) => type)
         candidatesSymbols.push(
           ...pickNRandomIn(incompleteSynergies, 4 - candidatesSymbols.length)
         )
@@ -461,18 +470,44 @@ export class MiniGame {
     // randomly distribute symbols accross portals
     const portalIds = shuffleArray(keys(this.portals!))
     const symbols = shuffleArray(values(this.symbols!))
-    symbols.forEach((symbol, i) => {
-      setTimeout(() => {
-        symbol.index = Math.floor(i / portalIds.length)
-        symbol.portalId = portalIds[i % portalIds.length]
-      }, 1500 + 1500 * (i / symbols.length))
-    })
-  }
+    this.symbolsByPortal = new Map()
 
-  getSymbolsByPortalId(portalId: string): SynergySymbol[] {
-    return [...(this.symbols?.values() ?? [])].filter(
-      (symbol) => symbol.portalId === portalId
-    )
+    symbols.forEach((symbol, i) => {
+      const portalId = portalIds[i % portalIds.length]
+      this.symbolsByPortal.set(portalId, [
+        ...(this.symbolsByPortal.get(portalId) ?? []),
+        symbol
+      ])
+      setTimeout(
+        () => {
+          symbol.index = Math.floor(i / portalIds.length)
+          symbol.portalId = portalId
+        },
+        1500 + 1500 * (i / symbols.length)
+      )
+    })
+
+    // assign a map to each portal
+    const maps = new Set(Object.values(DungeonPMDO))
+    this.portals?.forEach((portal) => {
+      const symbols = this.symbolsByPortal.get(portal.id)
+      const portalSynergies = (symbols ?? []).map((s) => s.synergy)
+      let nbMaxInCommon = 0,
+        candidateMaps: DungeonPMDO[] = []
+      maps.forEach((map) => {
+        const synergies = DungeonDetails[map].synergies
+        const inCommon = synergies.filter((s) => portalSynergies.includes(s))
+        if (inCommon.length > nbMaxInCommon) {
+          nbMaxInCommon = inCommon.length
+          candidateMaps = [map]
+        } else if (inCommon.length === nbMaxInCommon) {
+          candidateMaps.push(map)
+        }
+      })
+
+      portal.map = pickRandomIn(candidateMaps)
+      maps.delete(portal.map) // a map can't be taken twice
+    })
   }
 
   applyVector(id: string, x: number, y: number) {
@@ -517,7 +552,8 @@ export class MiniGame {
     }
   }
 
-  stop(state: GameState) {
+  stop(room: GameRoom) {
+    const state: GameState = room.state
     const players: MapSchema<Player> = state.players
     this.bodies.forEach((body, key) => {
       Composite.remove(this.engine.world, body)
@@ -525,10 +561,16 @@ export class MiniGame {
     })
     this.avatars!.forEach((avatar) => {
       const player = players.get(avatar.id)
-      if (avatar.itemId === "" && player && !player.isBot && this.items) {
+      if (
+        avatar.itemId === "" &&
+        player &&
+        !player.isBot &&
+        this.items &&
+        state.specialGameRule !== SpecialGameRule.KECLEONS_SHOP
+      ) {
         // give a random item if none was taken
         const remainingItems = [...this.items.entries()].filter(
-          ([itemId, item]) => item.avatarId == ""
+          ([_itemId, item]) => item.avatarId == ""
         )
         if (remainingItems.length > 0) {
           avatar.itemId = pickRandomIn(remainingItems)[0]
@@ -550,28 +592,20 @@ export class MiniGame {
         }
       }
 
-      if (avatar.portalId && player) {
-        const portal = this.portals?.get(avatar.portalId)
-        if (portal) {
+      if (player && PortalCarouselStages.includes(state.stageLevel)) {
+        if (avatar.portalId && this.portals?.has(avatar.portalId)) {
+          const portal = this.portals.get(avatar.portalId)!
           player.map = portal.map
+          player.updateRegionalPool(state)
         }
 
-        const symbols = this.getSymbolsByPortalId(avatar.portalId)
-        if (state.stageLevel === PortalCarouselStages[0]) {
-          state.shop.assignUniquePropositions(
-            player,
-            UniqueShop,
-            symbols.map((s) => s.synergy)
-          )
-        }
-
-        if (state.stageLevel === PortalCarouselStages[1]) {
-          state.shop.assignUniquePropositions(
-            player,
-            LegendaryShop,
-            symbols.map((s) => s.synergy)
-          )
-        }
+        const symbols = this.symbolsByPortal.get(avatar.portalId) ?? []
+        const portalSynergies = symbols.map((s) => s.synergy)
+        state.shop.assignUniquePropositions(
+          player,
+          state.stageLevel,
+          portalSynergies
+        )
       }
 
       this.avatars!.delete(avatar.id)

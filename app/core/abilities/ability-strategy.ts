@@ -9,6 +9,7 @@ import Board from "../board"
 import { PokemonEntity } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 import { AbilityStrategies } from "./abilities"
+import triggerPokerus from "../../models/colyseus-models/status"
 
 export class AbilityStrategy {
   copyable = true // if true, can be copied by mimic, metronome...
@@ -50,7 +51,7 @@ export class AbilityStrategy {
         pkm.team !== pokemon.team &&
         pkm.id !== pokemon.id
       ) {
-        pkm.addPP(5)
+        pkm.addPP(5, pkm, 0, false)
         pkm.simulation.room.broadcast(Transfer.ABILITY, {
           id: pokemon.simulation.id,
           skill: pkm.skill,
@@ -61,11 +62,11 @@ export class AbilityStrategy {
     })
 
     if (pokemon.items.has(Item.AQUA_EGG)) {
-      pokemon.addPP(20)
+      pokemon.addPP(20, pokemon, 0, false)
     }
 
     if (pokemon.items.has(Item.STAR_DUST)) {
-      pokemon.addShield(Math.round(0.6 * pokemon.maxPP), pokemon, false)
+      pokemon.addShield(Math.round(0.6 * pokemon.maxPP), pokemon, 0, false)
       pokemon.count.starDustCount++
     }
 
@@ -107,17 +108,17 @@ export function soundBoost(pokemon: PokemonEntity, board: Board) {
         pokemon.effects.has(Effect.ALLEGRO) ||
         pokemon.effects.has(Effect.PRESTO)
       ) {
-        ally.addAttack(chimechoBoost ? 2 : 1, false)
+        ally.addAttack(chimechoBoost ? 2 : 1, pokemon, 0, false)
       }
       if (
         pokemon.effects.has(Effect.ALLEGRO) ||
         pokemon.effects.has(Effect.PRESTO)
       ) {
-        ally.addAttackSpeed(chimechoBoost ? 10 : 5, false)
+        ally.addAttackSpeed(chimechoBoost ? 10 : 5, pokemon, 0, false)
       }
       if (pokemon.effects.has(Effect.PRESTO)) {
         const manaBoost = chimechoBoost ? 6 : 3
-        ally.addPP(manaBoost)
+        ally.addPP(manaBoost, pokemon, 0, false)
       }
     }
   })

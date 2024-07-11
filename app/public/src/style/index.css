@@ -23,11 +23,10 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: url("assets/ui/chessboardpattern.svg");
-  background-size: 240px;
-  background-repeat: repeat;
-  background-position: top right;
-  background-color: #68829e;
+  background-color: rgb(104,130,158);
+  background-image: linear-gradient(45deg, rgb(80,81,96) 25%, transparent 25%, transparent 74.9%, rgb(80,81,96) 75%, rgb(80,81,96)), linear-gradient(45deg, rgb(80,81,96) 25%, transparent 25%, transparent 74.9%, rgb(80,81,96) 75%, rgb(80,81,96));
+  background-size: 240px 240px;
+  background-position: 0 0, 120px 120px;
 }
 
 a {
@@ -248,4 +247,17 @@ p:last-child {
   background-size: cover;
   image-rendering: pixelated;
   filter: invert(1);
+}
+
+.pokemon-portrait.regional::after {
+  content: "R";
+  position: absolute;
+  top: -2px;
+  right: 0px;
+  height: 12px;
+  width: 12px;
+  font-size: 14px;
+  color: black;
+  text-shadow: 1px 1px 1px white, -1px 1px 1px white, 1px -1px 1px white,
+    -1px -1px 1px white;
 }

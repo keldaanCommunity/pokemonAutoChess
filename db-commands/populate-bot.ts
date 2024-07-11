@@ -25,7 +25,6 @@ async function main() {
   try {
     const json = JSON.parse(data)
     logger.debug("connect to db ...")
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const db = await connect(process.env.MONGO_URI!)
     const resultDelete = await BotV2.deleteMany({
       avatar: json.avatar,

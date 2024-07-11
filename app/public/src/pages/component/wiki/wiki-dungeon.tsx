@@ -1,6 +1,10 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
+import { PokemonClasses } from "../../../../../models/colyseus-models/pokemon"
+import { PRECOMPUTED_REGIONAL_MONS } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { DungeonDetails, DungeonPMDO } from "../../../../../types/enum/Dungeon"
+import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
+import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
 
 export function WikiDungeon() {
@@ -28,18 +32,26 @@ export function WikiDungeon() {
                 </div>
                 <img
                   src={`/assets/maps/${dungeon}-preview.png`}
-                  onMouseOver={(e) => {
-                    ;(
-                      e.target as HTMLImageElement
-                    ).src = `/assets/tilesets/${dungeon}/tileset_0.png`
-                  }}
-                  onMouseOut={(e) => {
-                    ;(
-                      e.target as HTMLImageElement
-                    ).src = `/assets/maps/${dungeon}-preview.png`
-                  }}
                   alt={dungeon}
                 />
+                <div className="wiki-dungeon-regional-mons">
+                  {PRECOMPUTED_REGIONAL_MONS.filter((p) =>
+                    PokemonClasses[p].prototype.isInRegion(p, dungeon)
+                  )
+                    .filter(
+                      (pkm, index, array) =>
+                        array.findIndex(
+                          (p) => PkmFamily[p] === PkmFamily[pkm]
+                        ) === index // dedup same family
+                    )
+                    .map((pkm) => (
+                      <img
+                        key={pkm}
+                        className="pokemon-portrait"
+                        src={getPortraitSrc(PkmIndex[pkm])}
+                      ></img>
+                    ))}
+                </div>
               </li>
             )
           })}

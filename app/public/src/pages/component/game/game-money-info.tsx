@@ -2,6 +2,7 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { BattleResult } from "../../../../../types/enum/Game"
+import { max } from "../../../../../utils/number"
 import { useAppSelector } from "../../../hooks"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { Money } from "../icons/money"
@@ -43,7 +44,9 @@ export function GameMoneyDetail() {
     <div className="game-money-detail">
       <p className="help">{addIconsToDescription(t("passive_income_hint"))}</p>
       <p>
-        <Money value={`${t("streak")}: ${streak === 0 ? 0 : "+" + streak}`} />{" "}
+        <Money
+          value={`${t("streak")}: ${streak === 0 ? 0 : "+" + max(5)(streak)}`}
+        />{" "}
         {lastBattleResult !== null && `(${streakLabel})`}
       </p>
       <p className="help">{addIconsToDescription(t("victory_income_hint"))}</p>

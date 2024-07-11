@@ -19,8 +19,8 @@ import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import SynergyIcon from "../icons/synergy-icon"
 import TimerBar from "./game-timer-bar"
-import "./game-stage-info.css"
 import { DungeonDetails } from "../../../../../types/enum/Dungeon"
+import "./game-stage-info.css"
 
 export default function GameStageInfo() {
   const { t } = useTranslation()
@@ -30,10 +30,10 @@ export default function GameStageInfo() {
   const avatar = useAppSelector((state) => state.game.currentPlayerAvatar)
   const weather = useAppSelector((state) => state.game.weather)
 
-  const currentPlayer = useAppSelector((state) =>
-    state.game.players.find((p) => p.id === state.game.currentPlayerId)
+  const currentPlayerMap = useAppSelector(
+    (state) =>
+      state.game.players.find((p) => p.id === state.game.currentPlayerId)?.map
   )
-  const map = currentPlayer?.map
 
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
   const isPVE = stageLevel in PVEStages
@@ -119,7 +119,7 @@ export default function GameStageInfo() {
           )}
         </div>
 
-        {map && (
+        {currentPlayerMap && (
           <div className="map-information" data-tooltip-id="detail-map">
             {ReactDOM.createPortal(
               <Tooltip
@@ -128,12 +128,12 @@ export default function GameStageInfo() {
                 place="bottom"
               >
                 <span style={{ verticalAlign: "middle" }}>
-                  {DungeonDetails[map].synergies.map((synergy) => (
+                  {DungeonDetails[currentPlayerMap].synergies.map((synergy) => (
                     <SynergyIcon type={synergy} key={"map_type_" + synergy} />
                   ))}
-                  {t(`map.${map}`)}
+                  {t(`map.${currentPlayerMap}`)}
                 </span>
-                <p>{addIconsToDescription(t(`map_description.${map}`))}</p>
+                {/*<p>{addIconsToDescription(t(`map_description.${currentPlayerMap}`))}</p>*/}
               </Tooltip>,
               document.body
             )}

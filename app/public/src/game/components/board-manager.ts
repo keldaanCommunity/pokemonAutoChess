@@ -3,7 +3,7 @@ import { GameObjects } from "phaser"
 import Player from "../../../../models/colyseus-models/player"
 import { isOnBench } from "../../../../models/colyseus-models/pokemon"
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
-import { getPokemonData } from "../../../../models/precomputed"
+import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import GameState from "../../../../rooms/states/game-state"
 import { IPokemon, Transfer } from "../../../../types"
 import { SynergyTriggers } from "../../../../types/Config"
@@ -16,7 +16,10 @@ import {
 import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../../types/enum/Synergy"
+import { logger } from "../../../../utils/logger"
+import { values } from "../../../../utils/schemas"
 import { transformCoordinate } from "../../pages/utils/utils"
+import store from "../../stores"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
@@ -33,17 +36,19 @@ export default class BoardManager {
   pokemons: Map<string, PokemonSprite>
   uid: string
   scene: GameScene
+  state: GameState
   player: Player
   mode: BoardMode
   animationManager: AnimationManager
   playerAvatar: PokemonAvatar
   opponentAvatar: PokemonAvatar | null
+  scoutingAvatars: PokemonAvatar[] = []
   pveChestGroup: Phaser.GameObjects.Group | null
   pveChest: Phaser.GameObjects.Sprite | null
   lightX: number
   lightY: number
   lightCell: Phaser.GameObjects.Sprite | null
-  berryTree: Phaser.GameObjects.Sprite | null
+  berryTrees: Phaser.GameObjects.Sprite[] = []
   gameMode: GameMode
   smeargle: PokemonSprite | null = null
   specialGameRule: SpecialGameRule | null = null
@@ -58,6 +63,7 @@ export default class BoardManager {
     this.pokemons = new Map<string, PokemonSprite>()
     this.uid = uid
     this.scene = scene
+    this.state = state
     this.player = player
     this.mode = BoardMode.PICK
     this.animationManager = animationManager
@@ -67,9 +73,9 @@ export default class BoardManager {
     this.specialGameRule = state.specialGameRule
     this.renderBoard()
 
-    if (this.scene.room?.state.phase == GamePhaseState.FIGHT) {
+    if (state.phase == GamePhaseState.FIGHT) {
       this.battleMode()
-    } else if (this.scene.room?.state.phase === GamePhaseState.MINIGAME) {
+    } else if (state.phase === GamePhaseState.MINIGAME) {
       this.minigameMode()
     } else {
       this.pickMode()
@@ -95,7 +101,10 @@ export default class BoardManager {
       }
       if (this.pveChest) {
         this.pveChest.anims.play("open_chest")
-        this.player.pveRewards.forEach((item, i) => {
+        const rewards = values(this.player.pveRewards).concat(
+          values(this.player.pveRewardsPropositions)
+        )
+        rewards.forEach((item, i) => {
           const itemSprite = this.scene.add.sprite(
             1512,
             122,
@@ -112,7 +121,7 @@ export default class BoardManager {
             ease: Phaser.Math.Easing.Quadratic.Out,
             duration: 1000,
             y: 75,
-            x: 1512 + (i - (this.player.pveRewards.length - 1) / 2) * 70
+            x: 1512 + (i - (rewards.length - 1) / 2) * 70
           })
         })
       }
@@ -209,7 +218,7 @@ export default class BoardManager {
         "abilities",
         "LIGHT_CELL/000.png"
       )
-      this.lightCell.setDepth(1)
+      this.lightCell.setDepth(2)
       this.lightCell.setScale(2, 2)
       this.lightCell.anims.play("LIGHT_CELL")
     }
@@ -217,45 +226,54 @@ export default class BoardManager {
 
   hideLightCell() {
     this.lightCell?.destroy()
+    this.lightCell = null
   }
 
   showBerryTree() {
-    this.hideBerryTree()
-    const grassCount = this.player.synergies.get(Synergy.GRASS)
-    if (grassCount && grassCount >= SynergyTriggers[Synergy.GRASS][0]) {
-      this.berryTree = this.scene.add.sprite(
-        408,
-        710,
+    this.berryTrees.forEach((tree) => tree.destroy())
+    this.berryTrees = []
+    const grassLevel = this.player.synergies.get(Synergy.GRASS) ?? 0
+    const nbTrees = SynergyTriggers[Synergy.GRASS].filter(
+      (n) => n <= grassLevel
+    ).length
+
+    const treePositions = [
+      [408, 710],
+      [360, 710],
+      [312, 710]
+    ]
+
+    for (let i = 0; i < nbTrees; i++) {
+      const tree = this.scene.add.sprite(
+        treePositions[i][0],
+        treePositions[i][1],
         "berry_trees",
-        this.player.berry + "_1"
+        this.player.berryTreesType[i] + "_1"
       )
-      this.berryTree.setDepth(1)
-      this.berryTree.setScale(2, 2)
-      this.berryTree.setOrigin(0.5, 1)
-      if (this.player.berryTreeStage === 0) {
-        this.berryTree.anims.play("CROP")
+
+      tree.setDepth(1).setScale(2, 2).setOrigin(0.5, 1)
+      if (this.player.berryTreesStage[i] === 0) {
+        tree.anims.play("CROP")
       } else {
-        this.berryTree.anims.play(
-          `${this.player.berry}_TREE_STEP_${this.player.berryTreeStage}`
+        tree.anims.play(
+          `${this.player.berryTreesType[i]}_TREE_STEP_${this.player.berryTreesStage[i]}`
         )
       }
 
-      this.berryTree.setInteractive()
-      this.berryTree.on("pointerdown", (pointer) => {
+      tree.setInteractive()
+      tree.on("pointerdown", (pointer) => {
         if (this.player.id !== this.scene.uid) return
-        if (this.scene.room && this.player.berryTreeStage >= 3) {
-          this.scene.room.send(Transfer.PICK_BERRY)
+        if (this.scene.room && this.player.berryTreesStage[i] >= 3) {
+          this.scene.room.send(Transfer.PICK_BERRY, i)
           this.displayText(pointer.x, pointer.y, t("berry_gained"))
-          this.berryTree?.play("CROP")
+          tree.play("CROP")
         } else {
           this.displayText(pointer.x, pointer.y, t("berry_unripe"))
         }
       })
-    }
-  }
 
-  hideBerryTree() {
-    this.berryTree?.destroy()
+      this.berryTrees.push(tree)
+    }
   }
 
   displayText(x: number, y: number, label: string) {
@@ -326,6 +344,7 @@ export default class BoardManager {
   ) {
     if (this.opponentAvatar) {
       this.opponentAvatar.destroy()
+      this.opponentAvatar = null
     }
     if (this.pveChestGroup) {
       this.pveChestGroup.destroy(true, true)
@@ -333,22 +352,26 @@ export default class BoardManager {
       this.pveChestGroup = null
     }
 
-    if (opponentId === "pve") {
+    if (this.mode === BoardMode.BATTLE && opponentId === "pve") {
       this.pveChestGroup = this.scene.add.group()
       this.pveChest = this.scene.add.sprite(1512, 122, "chest", "1.png")
       this.pveChest.setScale(2)
       this.pveChestGroup.add(this.pveChest)
-    } else if (this.mode === BoardMode.BATTLE) {
+    } else if (
+      this.mode === BoardMode.BATTLE &&
+      opponentAvatarString &&
+      opponentId
+    ) {
       let opponentLife = 0
-      this.scene.room?.state.players.forEach((p) => {
+      this.state.players.forEach((p) => {
         if (p.id === opponentId) opponentLife = p.life
       })
 
       // do not display avatar when player is dead
-      if (opponentLife <= 0 || !opponentAvatarString || !opponentId) return
+      if (opponentLife <= 0) return
 
       const opponentAvatar = new PokemonAvatarModel(
-        this.player.id,
+        this.player.opponentId,
         opponentAvatarString,
         0,
         0,
@@ -361,7 +384,7 @@ export default class BoardManager {
         opponentAvatar,
         opponentId
       )
-      this.opponentAvatar.disableInteractive()
+
       this.opponentAvatar.orientation = Orientation.DOWNLEFT
       this.opponentAvatar.updateLife(opponentLife)
       this.animationManager.animatePokemon(
@@ -369,7 +392,89 @@ export default class BoardManager {
         this.opponentAvatar.action,
         false
       )
+
+      this.updateScoutingAvatars() // will remove opponent from scouting avatars if needed
     }
+  }
+
+  updateScoutingAvatars(resetAll = false) {
+    const players = this.state.players
+    if (!players) return
+
+    const scoutingPlayers = values(players).filter((p) => {
+      const spectatedPlayer = players[p.spectatedPlayerId]
+
+      if (
+        !spectatedPlayer ||
+        spectatedPlayer.id === p.id || // can't scout yourself
+        this.mode === BoardMode.MINIGAME || // no scouting during minigame
+        p.id === this.opponentAvatar?.playerId // avatar already in opponent box
+      )
+        return false
+
+      // will show avatar when scouting your board or your fight
+      const isSpectatingBoard = spectatedPlayer.id === this.player.id
+      const isSpectatingBattle =
+        this.mode === BoardMode.BATTLE &&
+        spectatedPlayer.simulationId === this.player.simulationId
+
+      return isSpectatingBoard || isSpectatingBattle
+    })
+
+    /*logger.debug(
+      values(players)
+        .map((p) => `${p.name} (${p.id}) is watching ${p.spectatedPlayerId}`)
+        .join("\n")
+    )
+
+    logger.debug(
+      "scouting now",
+      scoutingPlayers.map((p) => `${p.name} (${p.id})`).join("\n")
+    )*/
+
+    this.scoutingAvatars = this.scoutingAvatars.filter((avatar) => {
+      // remove player avatars that stopped scouting
+      if (
+        resetAll ||
+        scoutingPlayers.some((p) => p.id === avatar.playerId) === false
+      ) {
+        avatar.destroy()
+        return false
+      }
+      return true
+    })
+
+    const newScoutingAvatars = scoutingPlayers.filter(
+      (p) => this.scoutingAvatars.some((a) => a.playerId === p.id) === false
+    )
+    newScoutingAvatars.forEach((player) => {
+      const playerIndex = values(players).findIndex((p) => p.id === player.id)
+      const scoutAvatarModel = new PokemonAvatarModel(
+        player.id,
+        player.avatar,
+        0,
+        0,
+        0
+      )
+
+      const scoutAvatar = new PokemonAvatar(
+        this.scene,
+        1512,
+        218 + 48 * playerIndex,
+        scoutAvatarModel,
+        player.id,
+        true
+      )
+
+      scoutAvatar.orientation = Orientation.DOWNLEFT
+      this.animationManager.animatePokemon(
+        scoutAvatar,
+        scoutAvatar.action,
+        false
+      )
+
+      this.scoutingAvatars.push(scoutAvatar)
+    })
   }
 
   updateAvatarLife(playerId: string, value: number) {
@@ -377,7 +482,7 @@ export default class BoardManager {
       this.playerAvatar.updateLife(value)
     }
 
-    if (this.opponentAvatar && this.opponentAvatar.id === playerId) {
+    if (this.opponentAvatar && this.opponentAvatar.playerId === playerId) {
       this.opponentAvatar.updateLife(value)
     }
   }
@@ -394,6 +499,13 @@ export default class BoardManager {
     })
     this.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
+    setTimeout(() => {
+      const gameState = store.getState().game
+      this.updateOpponentAvatar(
+        gameState.currentPlayerOpponentId,
+        gameState.currentPlayerOpponentAvatar
+      )
+    }, 0) // need to wait for next event loop for state to be up to date
   }
 
   pickMode() {
@@ -402,6 +514,7 @@ export default class BoardManager {
     this.renderBoard()
     this.updatePlayerAvatar()
     this.updateOpponentAvatar(null, null)
+    this.updateScoutingAvatars(true)
   }
 
   minigameMode() {
@@ -419,6 +532,7 @@ export default class BoardManager {
       this.playerAvatar.destroy()
     }
     this.updateOpponentAvatar(null, null)
+    this.updateScoutingAvatars(true)
   }
 
   setPlayer(player: Player) {
@@ -430,6 +544,7 @@ export default class BoardManager {
         this.player.opponentId,
         this.player.opponentAvatar
       )
+      this.updateScoutingAvatars(true)
     }
   }
 
@@ -478,12 +593,13 @@ export default class BoardManager {
           this.animationManager.animatePokemon(pokemonUI, value, false)
           break
 
-        case "hp":
+        case "hp": {
           const baseHP = getPokemonData(pokemon.name).hp
           const sizeBuff = (pokemon.hp - baseHP) / baseHP
           pokemonUI.sprite.setScale(2 + sizeBuff)
           pokemonUI.hp = value
           break
+        }
 
         default:
           pokemonUI[field] = value
@@ -516,17 +632,17 @@ export default class BoardManager {
   }
 
   showEmote(playerId: string, emote?: string) {
-    const player =
-      this.playerAvatar.playerId === playerId
-        ? this.playerAvatar
-        : this.opponentAvatar?.playerId === playerId
-        ? this.opponentAvatar
-        : undefined
+    const avatars = [
+      this.playerAvatar,
+      this.opponentAvatar,
+      ...this.scoutingAvatars
+    ]
+    const player = avatars.find((a) => a?.playerId === playerId)
     if (player) {
       this.animationManager.play(player, AnimationConfig[player.name].emote)
 
       if (emote) {
-        player.drawSpeechBubble(emote, false)
+        player.drawSpeechBubble(emote, player === this.opponentAvatar)
       }
     }
   }

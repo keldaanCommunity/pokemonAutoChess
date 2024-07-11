@@ -1,12 +1,10 @@
 import PokemonFactory from "../../models/pokemon-factory"
-import {
-  getPokemonData,
-  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY
-} from "../../models/precomputed"
+import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
+import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../models/precomputed/precomputed-types-and-categories"
 import { Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, PokemonActionState, Rarity } from "../../types/enum/Game"
-import { BasicItems, Berries, Item } from "../../types/enum/Item"
+import { ItemComponents, Berries, Item } from "../../types/enum/Item"
 import { Pkm, getUnownsPoolPerStage } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { pickNRandomIn, pickRandomIn } from "../../utils/random"
@@ -16,6 +14,7 @@ import PokemonState from "../pokemon-state"
 import { AbilityStrategies } from "./abilities"
 import { AbilityStrategy } from "./ability-strategy"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
+import { createRandomEgg } from "../../models/egg-factory"
 
 export class HiddenPowerStrategy extends AbilityStrategy {
   copyable = false
@@ -134,7 +133,7 @@ export class HiddenPowerEStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    const egg = PokemonFactory.createRandomEgg(false)
+    const egg = createRandomEgg(false)
     const player = unown.player
     if (player) {
       const x = getFirstAvailablePositionInBench(player.board)
@@ -157,28 +156,16 @@ export class HiddenPowerFStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    const fishingLevel = 3
     const nbFishes = 3
     const player = unown.player
 
     if (player) {
       for (let i = 0; i < nbFishes; i++) {
-        const pkm = unown.simulation.room.state.shop.fishPokemon(
+        const fish = unown.simulation.room.state.shop.pickFish(
           player,
-          fishingLevel
+          Item.SUPER_ROD
         )
-        const fish = PokemonFactory.createPokemonFromName(pkm, player)
-        const x = getFirstAvailablePositionInBench(player.board)
-        if (x !== undefined) {
-          fish.positionX = x
-          fish.positionY = 0
-          fish.action = PokemonActionState.FISH
-          player.board.set(fish.id, fish)
-          unown.simulation.room.checkEvolutionsAfterPokemonAcquired(player.id)
-          unown.simulation.room.clock.setTimeout(() => {
-            fish.action = PokemonActionState.IDLE
-          }, 1000)
-        }
+        unown.simulation.room.spawnOnBench(player, fish, "fishing")
       }
     }
   }
@@ -211,7 +198,7 @@ export class HiddenPowerHStrategy extends HiddenPowerStrategy {
     board.forEach(
       (x: number, y: number, pokemon: PokemonEntity | undefined) => {
         if (pokemon && unown.team === pokemon.team) {
-          pokemon.handleHeal(pokemon.hp - pokemon.life, unown, 1)
+          pokemon.handleHeal(pokemon.hp - pokemon.life, unown, 1, crit)
         }
       }
     )
@@ -228,7 +215,7 @@ export class HiddenPowerIStrategy extends HiddenPowerStrategy {
   ) {
     super.process(unown, state, board, target, crit)
     if (unown.player) {
-      unown.player.items.push(pickRandomIn(BasicItems))
+      unown.player.items.push(pickRandomIn(ItemComponents))
     }
   }
 }

@@ -4,7 +4,6 @@ import { GameObjects, Scene } from "phaser"
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"
 import { DesignTiled } from "../../../../core/design"
 import { canSell } from "../../../../core/pokemon-entity"
-import Simulation from "../../../../core/simulation"
 import Player from "../../../../models/colyseus-models/player"
 import GameState from "../../../../rooms/states/game-state"
 import {
@@ -25,14 +24,9 @@ import { logger } from "../../../../utils/logger"
 import { values } from "../../../../utils/schemas"
 import { clearTitleNotificationIcon } from "../../../../utils/window"
 import { getGameContainer } from "../../pages/game"
-import {
-  SOUNDS,
-  playMusic,
-  playSound,
-  preloadMusic
-} from "../../pages/utils/audio"
+import { SOUNDS, playMusic, playSound } from "../../pages/utils/audio"
 import { transformCoordinate } from "../../pages/utils/utils"
-import { preferences } from "../../preferences"
+import { loadPreferences, preferences } from "../../preferences"
 import AnimationManager from "../animation-manager"
 import BattleManager from "../components/battle-manager"
 import BoardManager from "../components/board-manager"
@@ -177,15 +171,21 @@ export default class GameScene extends Scene {
   }
 
   registerKeys() {
-    this.input.keyboard!.on("keydown-D", () => {
-      this.refreshShop()
-    })
+    const preferences = loadPreferences()
+    this.input.keyboard!.removeAllListeners()
+    this.input.keyboard!.on(
+      "keydown-" + preferences.keybindings.refresh,
+      () => {
+        playSound(SOUNDS.REFRESH, 0.5)
+        this.refreshShop()
+      }
+    )
 
-    this.input.keyboard!.on("keydown-F", () => {
+    this.input.keyboard!.on("keydown-" + preferences.keybindings.buy_xp, () => {
       this.buyExperience()
     })
 
-    this.input.keyboard!.on("keydown-E", () => {
+    this.input.keyboard!.on("keydown-" + preferences.keybindings.sell, () => {
       if (this.pokemonHovered) {
         this.sellPokemon(this.pokemonHovered)
       } else if (this.shopIndexHovered !== null) {
@@ -194,19 +194,17 @@ export default class GameScene extends Scene {
     })
   }
 
-  setPlayer(player: Player) {
-    this.setMap(player.map)
-    this.battle?.setPlayer(player)
-    this.board?.setPlayer(player)
-    this.itemsContainer?.setPlayer(player)
-  }
-
-  setSimulation(simulation: Simulation) {
-    this.battle?.setSimulation(simulation)
-  }
-
   refreshShop() {
-    this.room?.send(Transfer.REFRESH)
+    const player = this.room?.state.players.get(this.uid!)
+    if (
+      player &&
+      player.alive &&
+      player.money >= 1 &&
+      player === this.board?.player
+    ) {
+      this.room?.send(Transfer.REFRESH)
+      playSound(SOUNDS.REFRESH, 0.5)
+    }
   }
 
   buyExperience() {
@@ -234,7 +232,7 @@ export default class GameScene extends Scene {
       this.board?.battleMode()
     } else if (newPhase === GamePhaseState.MINIGAME) {
       this.board?.minigameMode()
-      this.minigameManager.initialize()
+      this.minigameManager?.initialize()
     } else {
       this.board?.pickMode()
     }
@@ -255,18 +253,19 @@ export default class GameScene extends Scene {
               )
             })
             this.load.tilemapTiledJSON("map_" + mapName, tilemap)
-            preloadMusic(this, DungeonDetails[mapName].music)
           })
       )
     )
   }
 
   async setMap(mapName: DungeonPMDO) {
+    const tilemap = this.tilemaps.get(mapName)
+    if (!tilemap)
+      return logger.error(`Tilemap not yet loaded for map ${mapName}`)
+
     const map = this.make.tilemap({ key: "map_" + mapName })
     if (this.map) this.map.destroy()
     this.map = map
-    const tilemap = this.tilemaps.get(mapName)
-    if (!tilemap) return logger.error(`Tilemap not loaded for map ${mapName}`)
     tilemap.layers.forEach((layer) => {
       const tileset = map.addTilesetImage(
         layer.name,
@@ -369,9 +368,12 @@ export default class GameScene extends Scene {
             outline.remove(previouslyHovered.sprite)
           }
 
+          const thickness = Math.round(
+            1 + Math.log(gameObject.def + gameObject.speDef)
+          )
           this.pokemonHovered = gameObject
           outline.add(gameObject.sprite, {
-            thickness: 2,
+            thickness,
             outlineColor: 0xffffff
           })
         }

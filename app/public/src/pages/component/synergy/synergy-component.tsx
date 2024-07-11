@@ -29,7 +29,7 @@ export default function SynergyComponent(props: {
             : "rgba(84, 89, 107,0)",
         margin: "5px",
         borderRadius: "12px",
-        padding: "5px",
+        padding: "2px",
         border:
           props.value >= SynergyTriggers[props.type][0]
             ? "var(--border-thin)"

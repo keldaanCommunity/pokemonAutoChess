@@ -12,6 +12,7 @@ export enum Rarity {
 
 export enum GameMode {
   NORMAL = "NORMAL",
+  QUICKPLAY = "QUICKPLAY",
   RANKED = "RANKED",
   SCRIBBLE = "SCRIBBLE",
   TOURNAMENT = "TOURNAMENT"
@@ -101,7 +102,7 @@ export enum Stat {
   PP = "PP",
   MAX_PP = "MAX_PP",
   CRIT_CHANCE = "CRIT_CHANCE",
-  CRIT_DAMAGE = "CRIT_DAMAGE",
+  CRIT_POWER = "CRIT_POWER",
   AP = "AP",
   SHIELD = "SHIELD"
 }
@@ -122,5 +123,7 @@ export enum BoardEvent {
   GAS = "GAS",
   POISON_GAS = "POISON_GAS",
   STEALTH_ROCKS = "STEALTH_ROCKS",
-  STICKY_WEB = "STICKY_WEB"
+  SPIKES = "SPIKES",
+  STICKY_WEB = "STICKY_WEB",
+  HAIL = "HAIL"
 }

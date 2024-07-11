@@ -24,11 +24,11 @@ export function ItemDetailTooltip({
   )
 
   const formatStat = (stat: Stat, value: number) => {
-    if ([Stat.CRIT_DAMAGE].includes(stat)) {
+    if ([Stat.CRIT_POWER].includes(stat)) {
       value = Math.round(value * 100)
     }
     let output = value.toString()
-    if ([Stat.ATK_SPEED, Stat.CRIT_CHANCE, Stat.CRIT_DAMAGE].includes(stat)) {
+    if ([Stat.ATK_SPEED, Stat.CRIT_CHANCE, Stat.CRIT_POWER].includes(stat)) {
       output += "%"
     }
     if (value >= 0) {

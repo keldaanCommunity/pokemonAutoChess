@@ -1,4 +1,5 @@
 import { Client, Room, RoomAvailable } from "colyseus.js"
+import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -15,7 +16,6 @@ import { IBot } from "../../../models/mongo-models/bot-v2"
 import {
   ICustomLobbyState,
   ISuggestionUser,
-  NonFunctionPropNames,
   PkmWithConfig,
   Transfer
 } from "../../../types"
@@ -48,8 +48,7 @@ import {
   setLanguage,
   setLeaderboard,
   setLevelLeaderboard,
-  setNextSpecialGameDate,
-  setNextSpecialGameMode,
+  setNextSpecialGame,
   setPastebinUrl,
   setSearchedUser,
   setSuggestions,
@@ -74,8 +73,8 @@ import { FIREBASE_CONFIG } from "./utils/utils"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import { logger } from "../../../utils/logger"
 import { localStore, LocalStoreKeys } from "./utils/store"
-import "./lobby.css"
 import { cc } from "./utils/jsx"
+import "./lobby.css"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
@@ -292,11 +291,11 @@ export async function joinLobbyRoom(
               dispatch(updateTournament()) // TOFIX: force redux reactivity
             })
 
-            tournament.brackets.onAdd((bracket, roomId) => {
+            tournament.brackets.onAdd((bracket, bracketId) => {
               dispatch(
                 addTournamentBracket({
                   tournamendId: tournament.id,
-                  roomId,
+                  bracketId,
                   bracket
                 })
               )
@@ -310,7 +309,7 @@ export async function joinLobbyRoom(
                   dispatch(
                     changeTournamentBracket({
                       tournamentId: tournament.id,
-                      roomId,
+                      bracketId,
                       field,
                       value
                     })
@@ -322,7 +321,7 @@ export async function joinLobbyRoom(
                 dispatch(
                   changeTournamentBracket({
                     tournamentId: tournament.id,
-                    roomId,
+                    bracketId,
                     field: "playersId",
                     value: bracket.playersId
                   })
@@ -330,9 +329,9 @@ export async function joinLobbyRoom(
               })
             })
 
-            tournament.brackets.onRemove((bracket, roomId) => {
+            tournament.brackets.onRemove((bracket, bracketId) => {
               dispatch(
-                removeTournamentBracket({ tournamendId: tournament.id, roomId })
+                removeTournamentBracket({ tournamendId: tournament.id, bracketId })
               )
             })
           })
@@ -410,12 +409,8 @@ export async function joinLobbyRoom(
             })
           })
 
-          room.state.listen("nextSpecialGameDate", (date) => {
-            dispatch(setNextSpecialGameDate(date))
-          })
-
-          room.state.listen("nextSpecialGameMode", (type) => {
-            dispatch(setNextSpecialGameMode(type))
+          room.state.listen("nextSpecialGame", (specialGame) => {
+            dispatch(setNextSpecialGame(specialGame))
           })
 
           room.state.users.onRemove((u) => {

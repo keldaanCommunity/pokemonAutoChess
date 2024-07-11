@@ -1,31 +1,31 @@
 import React from "react"
 import ProgressBar from "react-bootstrap/ProgressBar"
-import { IDpsHeal } from "../../../../../types"
+import { IDps } from "../../../../../types"
 import { getAvatarSrc } from "../../../utils"
 
 export default function GameDpsHeal(props: {
   maxHeal: number
-  dpsHeal: IDpsHeal
+  dpsMeter: IDps
 }) {
   return (
     <div className="game-dps-bar">
       <img
         className="pokemon-portrait"
-        src={getAvatarSrc(props.dpsHeal.name)}
+        src={getAvatarSrc(props.dpsMeter.name)}
       />
       <div className="game-dps-progress-wrapper">
-        <p>{props.dpsHeal.heal + props.dpsHeal.shield}</p>
+        <p>{props.dpsMeter.heal + props.dpsMeter.shield}</p>
         <ProgressBar className="my-progress is-primary">
           <ProgressBar
-            style={{ backgroundColor: "#92cc41" }}
+            style={{ backgroundColor: "#76c442" }}
             max={props.maxHeal}
-            now={props.dpsHeal.heal}
+            now={props.dpsMeter.heal}
             key="heal"
           />
           <ProgressBar
             style={{ backgroundColor: "#8d8d8d" }}
             max={props.maxHeal}
-            now={props.dpsHeal.shield}
+            now={props.dpsMeter.shield}
             key="shield"
           />
         </ProgressBar>

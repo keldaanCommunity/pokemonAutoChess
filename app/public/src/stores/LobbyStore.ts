@@ -3,14 +3,13 @@ import { RoomAvailable } from "colyseus.js"
 import {
   ILeaderboardBotInfo,
   ILeaderboardInfo
-} from "../../../models/colyseus-models/leaderboard-info"
+} from "../../../types/interfaces/LeaderboardInfo"
 import LobbyUser, {
   ILobbyUser
 } from "../../../models/colyseus-models/lobby-user"
 import Message from "../../../models/colyseus-models/message"
 import {
   TournamentBracketSchema,
-  TournamentPlayerSchema,
   TournamentSchema
 } from "../../../models/colyseus-models/tournament"
 import { IBot, IStep } from "../../../models/mongo-models/bot-v2"
@@ -25,7 +24,7 @@ import {
 import { GameMode } from "../../../types/enum/Game"
 import { Language } from "../../../types/enum/Language"
 import { MAX_BOTS_STAGE } from "../pages/component/bot-builder/bot-logic"
-import { playSound, SOUNDS } from "../pages/utils/audio"
+import { ISpecialGamePlanned } from "../../../types/interfaces/Lobby"
 
 export interface IUserLobbyState {
   botLogDatabase: string[]
@@ -46,8 +45,7 @@ export interface IUserLobbyState {
   boosterContent: PkmWithConfig[]
   suggestions: ISuggestionUser[]
   language: Language
-  nextSpecialGameDate: string | ""
-  nextSpecialGameMode: GameMode | ""
+  nextSpecialGame: ISpecialGamePlanned | null
   tournaments: TournamentSchema[]
 }
 
@@ -80,8 +78,7 @@ const initialState: IUserLobbyState = {
     name: "ditto",
     id: ""
   },
-  nextSpecialGameDate: "",
-  nextSpecialGameMode: "",
+  nextSpecialGame: null,
   tournaments: []
 }
 
@@ -175,9 +172,6 @@ export const lobbySlice = createSlice({
         if (roomIndex !== -1) {
           rooms[roomIndex] = action.payload
         } else {
-          if (metadata.type === "preparation") {
-            playSound(SOUNDS.NEW_ROOM)
-          }
           rooms.push(action.payload)
         }
       }
@@ -212,13 +206,14 @@ export const lobbySlice = createSlice({
       state.language = action.payload
     },
     leaveLobby: () => initialState,
-    setNextSpecialGameDate: (state, action: PayloadAction<string>) => {
-      state.nextSpecialGameDate = action.payload
-    },
-    setNextSpecialGameMode: (state, action: PayloadAction<string>) => {
-      state.nextSpecialGameMode = action.payload as GameMode
+    setNextSpecialGame: (state, action: PayloadAction<ISpecialGamePlanned>) => {
+      state.nextSpecialGame = action.payload
     },
     addTournament: (state, action: PayloadAction<TournamentSchema>) => {
+      // remove previous potential duplicate
+      state.tournaments = state.tournaments.filter(
+        (tournament) => tournament.id !== action.payload.id
+      )
       state.tournaments.push(action.payload)
     },
     removeTournament: (state, action: PayloadAction<TournamentSchema>) => {
@@ -263,7 +258,7 @@ export const lobbySlice = createSlice({
       state,
       action: PayloadAction<{
         tournamendId: string
-        roomId: string
+        bracketId: string
         bracket: TournamentBracketSchema
       }>
     ) => {
@@ -271,19 +266,22 @@ export const lobbySlice = createSlice({
         (t) => t.id == action.payload.tournamendId
       )
       if (tournament) {
-        tournament.brackets.set(action.payload.roomId, action.payload.bracket)
+        tournament.brackets.set(
+          action.payload.bracketId,
+          action.payload.bracket
+        )
         state.tournaments = [...state.tournaments] // TOFIX: force reactivity through immutability
       }
     },
     removeTournamentBracket: (
       state,
-      action: PayloadAction<{ tournamendId: string; roomId: string }>
+      action: PayloadAction<{ tournamendId: string; bracketId: string }>
     ) => {
       const tournament = state.tournaments.find(
         (t) => t.id == action.payload.tournamendId
       )
       if (tournament) {
-        tournament.brackets.delete(action.payload.roomId)
+        tournament.brackets.delete(action.payload.bracketId)
         state.tournaments = [...state.tournaments] // TOFIX: force reactivity through immutability
       }
     },
@@ -291,7 +289,7 @@ export const lobbySlice = createSlice({
       state,
       action: PayloadAction<{
         tournamentId: string
-        roomId: string
+        bracketId: string
         field: string
         value: any
       }>
@@ -299,8 +297,8 @@ export const lobbySlice = createSlice({
       const tournament = state.tournaments.find(
         (t) => t.id == action.payload.tournamentId
       )
-      if (tournament && tournament.brackets.has(action.payload.roomId)) {
-        const player = tournament.brackets.get(action.payload.roomId)!
+      if (tournament && tournament.brackets.has(action.payload.bracketId)) {
+        const player = tournament.brackets.get(action.payload.bracketId)!
         player[action.payload.field] = action.payload.value
         state.tournaments = [...state.tournaments] // TOFIX: force reactivity through immutability
       }
@@ -332,8 +330,7 @@ export const {
   leaveLobby,
   setSuggestions,
   pushBotLog,
-  setNextSpecialGameDate,
-  setNextSpecialGameMode,
+  setNextSpecialGame,
   addTournament,
   removeTournament,
   changeTournament,

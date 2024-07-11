@@ -159,17 +159,21 @@ export enum Pkm {
   SNORLAX = "SNORLAX",
   GROWLITHE = "GROWLITHE",
   ARCANINE = "ARCANINE",
+  HISUI_GROWLITHE = "HISUI_GROWLITHE",
+  HISUI_ARCANINE = "HISUI_ARCANINE",
   ONIX = "ONIX",
   STEELIX = "STEELIX",
   MEGA_STEELIX = "MEGA_STEELIX",
   SCYTHER = "SCYTHER",
   SCIZOR = "SCIZOR",
-  MEGA_SCIZOR = "MEGA_SCIZOR",
+  KLEAVOR = "KLEAVOR",
   RIOLU = "RIOLU",
   LUCARIO = "LUCARIO",
   MAGIKARP = "MAGIKARP",
   RATTATA = "RATTATA",
+  ALOLAN_RATTATA = "ALOLAN_RATTATA",
   RATICATE = "RATICATE",
+  ALOLAN_RATICATE = "ALOLAN_RATICATE",
   SPEAROW = "SPEAROW",
   FEAROW = "FEAROW",
   GYARADOS = "GYARADOS",
@@ -200,7 +204,6 @@ export enum Pkm {
   SYLVEON = "SYLVEON",
   MEDITITE = "MEDITITE",
   MEDICHAM = "MEDICHAM",
-  MEGA_MEDICHAM = "MEGA_MEDICHAM",
   NUMEL = "NUMEL",
   CAMERUPT = "CAMERUPT",
   MEGA_CAMERUPT = "MEGA_CAMERUPT",
@@ -239,6 +242,7 @@ export enum Pkm {
   COBALION = "COBALION",
   MANAPHY = "MANAPHY",
   ROTOM = "ROTOM",
+  ROTOM_DRONE = "ROTOM_DRONE",
   SPIRITOMB = "SPIRITOMB",
   ABSOL = "ABSOL",
   LAPRAS = "LAPRAS",
@@ -441,6 +445,8 @@ export enum Pkm {
   GOOMY = "GOOMY",
   SLIGOO = "SLIGOO",
   GOODRA = "GOODRA",
+  HISUI_SLIGGOO = "HISUI_SLIGGOO",
+  HISUI_GOODRA = "HISUI_GOODRA",
   MEW = "MEW",
   BOUNSWEET = "BOUNSWEET",
   STEENEE = "STEENEE",
@@ -504,7 +510,9 @@ export enum Pkm {
   TAPU_FINI = "TAPU_FINI",
   TAPU_BULU = "TAPU_BULU",
   DIGLETT = "DIGLETT",
+  ALOLAN_DIGLETT = "ALOLAN_DIGLETT",
   DUGTRIO = "DUGTRIO",
+  ALOLAN_DUGTRIO = "ALOLAN_DUGTRIO",
   ROWLET = "ROWLET",
   DARTIX = "DARTIX",
   DECIDUEYE = "DECIDUEYE",
@@ -560,7 +568,7 @@ export enum Pkm {
   SILVALLY_FLYING = "SILVALLY_FLYING",
   SILVALLY_ROCK = "SILVALLY_ROCK",
   SILVALLY_GROUND = "SILVALLY_GROUND",
-  SILVALLY_FLORA = "SILVALLY_FLORA",
+  SILVALLY_GHOST = "SILVALLY_GHOST",
   TYPE_NULL = "TYPE_NULL",
   ZERAORA = "ZERAORA",
   XERNEAS = "XERNEAS",
@@ -719,6 +727,7 @@ export enum Pkm {
   TEDDIURSA = "TEDDIURSA",
   URSARING = "URSARING",
   URSALUNA = "URSALUNA",
+  URSALUNA_BLOODMOON = "URSALUNA_BLOODMOON",
   AIPOM = "AIPOM",
   AMBIPOM = "AMBIPOM",
   DEERLING = "DEERLING",
@@ -754,7 +763,45 @@ export enum Pkm {
   DROWZEE = "DROWZEE",
   HYPNO = "HYPNO",
   WATTREL = "WATTREL",
-  KILOWATTREL = "KILOWATTREL"
+  KILOWATTREL = "KILOWATTREL",
+  STANTLER = "STANTLER",
+  BURMY_PLANT = "BURMY_PLANT",
+  BURMY_SANDY = "BURMY_SANDY",
+  BURMY_TRASH = "BURMY_TRASH",
+  WORMADAM_PLANT = "WORMADAM_PLANT",
+  WORMADAM_SANDY = "WORMADAM_SANDY",
+  WORMADAM_TRASH = "WORMADAM_TRASH",
+  MOTHIM = "MOTHIM",
+  PALDEA_WOOPER = "PALDEA_WOOPER",
+  CLODSIRE = "CLODSIRE",
+  FUECOCO = "FUECOCO",
+  CROCALOR = "CROCALOR",
+  SKELEDIRGE = "SKELEDIRGE",
+  TANGELA = "TANGELA",
+  TANGROWTH = "TANGROWTH",
+  PSYDUCK = "PSYDUCK",
+  GOLDUCK = "GOLDUCK",
+  PHANPY = "PHANPY",
+  DONPHAN = "DONPHAN",
+  SPOINK = "SPOINK",
+  GRUMPIG = "GRUMPIG",
+  SINISTEA = "SINISTEA",
+  POLTEAGEIST = "POLTEAGEIST",
+  FERROSEED = "FERROSEED",
+  FERROTHORN = "FERROTHORN",
+  GOLETT = "GOLETT",
+  GOLURK = "GOLURK",
+  TRUBBISH = "TRUBBISH",
+  GARBODOR = "GARBODOR",
+  GRUBBIN = "GRUBBIN",
+  CHARJABUG = "CHARJABUG",
+  VIKAVOLT = "VIKAVOLT",
+  SHELLOS_WEST_SEA = "SHELLOS_WEST_SEA",
+  GASTRODON_WEST_SEA = "GASTRODON_WEST_SEA",
+  SHELLOS_EAST_SEA = "SHELLOS_EAST_SEA",
+  GASTRODON_EAST_SEA = "GASTRODON_EAST_SEA",
+  MUNNA = "MUNNA",
+  MUSHARNA = "MUSHARNA"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -919,17 +966,21 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SNORLAX]: "0143",
   [Pkm.GROWLITHE]: "0058",
   [Pkm.ARCANINE]: "0059",
+  [Pkm.HISUI_GROWLITHE]: "0058-0001",
+  [Pkm.HISUI_ARCANINE]: "0059-0001",
   [Pkm.ONIX]: "0095",
   [Pkm.STEELIX]: "0208",
   [Pkm.MEGA_STEELIX]: "0208-0001",
   [Pkm.SCYTHER]: "0123",
   [Pkm.SCIZOR]: "0212",
-  [Pkm.MEGA_SCIZOR]: "0212-0001",
+  [Pkm.KLEAVOR]: "0900",
   [Pkm.RIOLU]: "0447",
   [Pkm.LUCARIO]: "0448",
   [Pkm.MAGIKARP]: "0129",
   [Pkm.RATTATA]: "0019",
+  [Pkm.ALOLAN_RATTATA]: "0019-0001",
   [Pkm.RATICATE]: "0020",
+  [Pkm.ALOLAN_RATICATE]: "0020-0001",
   [Pkm.SPEAROW]: "0021",
   [Pkm.FEAROW]: "0022",
   [Pkm.GYARADOS]: "0130",
@@ -960,7 +1011,6 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SYLVEON]: "0700",
   [Pkm.MEDITITE]: "0307",
   [Pkm.MEDICHAM]: "0308",
-  [Pkm.MEGA_MEDICHAM]: "0308-0001",
   [Pkm.NUMEL]: "0322",
   [Pkm.CAMERUPT]: "0323",
   [Pkm.MEGA_CAMERUPT]: "0323-0001",
@@ -1000,6 +1050,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.COBALION]: "0638",
   [Pkm.MANAPHY]: "0490",
   [Pkm.ROTOM]: "0479",
+  [Pkm.ROTOM_DRONE]: "0479-0008",
   [Pkm.SPIRITOMB]: "0442",
   [Pkm.ABSOL]: "0359",
   [Pkm.LAPRAS]: "0131",
@@ -1198,6 +1249,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GOOMY]: "0704",
   [Pkm.SLIGOO]: "0705",
   [Pkm.GOODRA]: "0706",
+  [Pkm.HISUI_SLIGGOO]: "0705-0001",
+  [Pkm.HISUI_GOODRA]: "0706-0001",
   [Pkm.MEW]: "0151",
   [Pkm.BOUNSWEET]: "0761",
   [Pkm.STEENEE]: "0762",
@@ -1259,7 +1312,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.TAPU_FINI]: "0788",
   [Pkm.TAPU_BULU]: "0787",
   [Pkm.DIGLETT]: "0050",
+  [Pkm.ALOLAN_DIGLETT]: "0050-0001",
   [Pkm.DUGTRIO]: "0051",
+  [Pkm.ALOLAN_DUGTRIO]: "0051-0001",
   [Pkm.ROWLET]: "0722",
   [Pkm.DARTIX]: "0723",
   [Pkm.DECIDUEYE]: "0724",
@@ -1453,6 +1508,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.TEDDIURSA]: "0216",
   [Pkm.URSARING]: "0217",
   [Pkm.URSALUNA]: "0901",
+  [Pkm.URSALUNA_BLOODMOON]: "0901-0001",
   [Pkm.AIPOM]: "0190",
   [Pkm.AMBIPOM]: "0424",
   [Pkm.DEERLING]: "0585",
@@ -1474,14 +1530,14 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SILVALLY_GRASS]: "0773-0011",
   [Pkm.SILVALLY_ICE]: "0773-0014",
   [Pkm.SILVALLY_FIGHTING]: "0773-0001",
-  [Pkm.SILVALLY_LIGHT]: "0773",
+  [Pkm.SILVALLY_LIGHT]: "0773-0006",
   [Pkm.SILVALLY_POISON]: "0773-0003",
-  [Pkm.SILVALLY_SOUND]: "0773-0007",
+  [Pkm.SILVALLY_SOUND]: "0773",
   [Pkm.SILVALLY_STEEL]: "0773-0008",
   [Pkm.SILVALLY_FLYING]: "0773-0002",
   [Pkm.SILVALLY_ROCK]: "0773-0005",
   [Pkm.SILVALLY_GROUND]: "0773-0004",
-  [Pkm.SILVALLY_FLORA]: "0773-0006",
+  [Pkm.SILVALLY_GHOST]: "0773-0007",
   [Pkm.DEWPIDER]: "0751",
   [Pkm.ARAQUANID]: "0752",
   [Pkm.ROCKRUFF]: "0744",
@@ -1511,7 +1567,45 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.DROWZEE]: "0096",
   [Pkm.HYPNO]: "0097",
   [Pkm.WATTREL]: "0940",
-  [Pkm.KILOWATTREL]: "0941"
+  [Pkm.KILOWATTREL]: "0941",
+  [Pkm.STANTLER]: "0234",
+  [Pkm.BURMY_PLANT]: "0412",
+  [Pkm.BURMY_SANDY]: "0412-0001",
+  [Pkm.BURMY_TRASH]: "0412-0002",
+  [Pkm.WORMADAM_PLANT]: "0413",
+  [Pkm.WORMADAM_SANDY]: "0413-0001",
+  [Pkm.WORMADAM_TRASH]: "0413-0002",
+  [Pkm.MOTHIM]: "0414",
+  [Pkm.PALDEA_WOOPER]: "0194-0002",
+  [Pkm.CLODSIRE]: "0980",
+  [Pkm.FUECOCO]: "0909",
+  [Pkm.CROCALOR]: "0910",
+  [Pkm.SKELEDIRGE]: "0911",
+  [Pkm.TANGELA]: "0114",
+  [Pkm.TANGROWTH]: "0465",
+  [Pkm.PSYDUCK]: "0054",
+  [Pkm.GOLDUCK]: "0055",
+  [Pkm.PHANPY]: "0231",
+  [Pkm.DONPHAN]: "0232",
+  [Pkm.SPOINK]: "0325",
+  [Pkm.GRUMPIG]: "0326",
+  [Pkm.SINISTEA]: "0854",
+  [Pkm.POLTEAGEIST]: "0855",
+  [Pkm.FERROSEED]: "0597",
+  [Pkm.FERROTHORN]: "0598",
+  [Pkm.GOLETT]: "0622",
+  [Pkm.GOLURK]: "0623",
+  [Pkm.TRUBBISH]: "0568",
+  [Pkm.GARBODOR]: "0569",
+  [Pkm.GRUBBIN]: "0736",
+  [Pkm.CHARJABUG]: "0737",
+  [Pkm.VIKAVOLT]: "0738",
+  [Pkm.SHELLOS_WEST_SEA]: "0422",
+  [Pkm.GASTRODON_WEST_SEA]: "0423",
+  [Pkm.SHELLOS_EAST_SEA]: "0422-0001",
+  [Pkm.GASTRODON_EAST_SEA]: "0423-0001",
+  [Pkm.MUNNA]: "0517",
+  [Pkm.MUSHARNA]: "0518"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -1673,12 +1767,14 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SNORLAX]: Pkm.MUNCHLAX,
   [Pkm.GROWLITHE]: Pkm.GROWLITHE,
   [Pkm.ARCANINE]: Pkm.GROWLITHE,
+  [Pkm.HISUI_GROWLITHE]: Pkm.HISUI_GROWLITHE,
+  [Pkm.HISUI_ARCANINE]: Pkm.HISUI_GROWLITHE,
   [Pkm.ONIX]: Pkm.ONIX,
   [Pkm.STEELIX]: Pkm.ONIX,
   [Pkm.MEGA_STEELIX]: Pkm.ONIX,
   [Pkm.SCYTHER]: Pkm.SCYTHER,
   [Pkm.SCIZOR]: Pkm.SCYTHER,
-  [Pkm.MEGA_SCIZOR]: Pkm.SCYTHER,
+  [Pkm.KLEAVOR]: Pkm.KLEAVOR,
   [Pkm.RIOLU]: Pkm.RIOLU,
   [Pkm.LUCARIO]: Pkm.RIOLU,
   [Pkm.EEVEE]: Pkm.EEVEE,
@@ -1692,7 +1788,6 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GLACEON]: Pkm.GLACEON,
   [Pkm.MEDITITE]: Pkm.MEDITITE,
   [Pkm.MEDICHAM]: Pkm.MEDITITE,
-  [Pkm.MEGA_MEDICHAM]: Pkm.MEDITITE,
   [Pkm.NUMEL]: Pkm.NUMEL,
   [Pkm.CAMERUPT]: Pkm.NUMEL,
   [Pkm.MEGA_CAMERUPT]: Pkm.NUMEL,
@@ -1728,6 +1823,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.COBALION]: Pkm.COBALION,
   [Pkm.MANAPHY]: Pkm.PHIONE,
   [Pkm.ROTOM]: Pkm.ROTOM,
+  [Pkm.ROTOM_DRONE]: Pkm.ROTOM_DRONE,
   [Pkm.SPIRITOMB]: Pkm.SPIRITOMB,
   [Pkm.ABSOL]: Pkm.ABSOL,
   [Pkm.LAPRAS]: Pkm.LAPRAS,
@@ -1769,7 +1865,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MAGIKARP]: Pkm.MAGIKARP,
   [Pkm.GYARADOS]: Pkm.MAGIKARP,
   [Pkm.RATTATA]: Pkm.RATTATA,
+  [Pkm.ALOLAN_RATTATA]: Pkm.ALOLAN_RATTATA,
   [Pkm.RATICATE]: Pkm.RATTATA,
+  [Pkm.ALOLAN_RATICATE]: Pkm.ALOLAN_RATTATA,
   [Pkm.LUGIA]: Pkm.LUGIA,
   [Pkm.CARVANHA]: Pkm.CARVANHA,
   [Pkm.SWABLU]: Pkm.SWABLU,
@@ -1951,6 +2049,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GOOMY]: Pkm.GOOMY,
   [Pkm.SLIGOO]: Pkm.GOOMY,
   [Pkm.GOODRA]: Pkm.GOOMY,
+  [Pkm.HISUI_SLIGGOO]: Pkm.GOOMY,
+  [Pkm.HISUI_GOODRA]: Pkm.GOOMY,
   [Pkm.MEW]: Pkm.MEW,
   [Pkm.BOUNSWEET]: Pkm.BOUNSWEET,
   [Pkm.STEENEE]: Pkm.BOUNSWEET,
@@ -2014,7 +2114,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TAPU_FINI]: Pkm.TAPU_FINI,
   [Pkm.TAPU_BULU]: Pkm.TAPU_BULU,
   [Pkm.DIGLETT]: Pkm.DIGLETT,
+  [Pkm.ALOLAN_DIGLETT]: Pkm.ALOLAN_DIGLETT,
   [Pkm.DUGTRIO]: Pkm.DIGLETT,
+  [Pkm.ALOLAN_DUGTRIO]: Pkm.ALOLAN_DIGLETT,
   [Pkm.ROWLET]: Pkm.ROWLET,
   [Pkm.DARTIX]: Pkm.ROWLET,
   [Pkm.DECIDUEYE]: Pkm.ROWLET,
@@ -2212,6 +2314,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TEDDIURSA]: Pkm.TEDDIURSA,
   [Pkm.URSARING]: Pkm.TEDDIURSA,
   [Pkm.URSALUNA]: Pkm.TEDDIURSA,
+  [Pkm.URSALUNA_BLOODMOON]: Pkm.TEDDIURSA,
   [Pkm.AIPOM]: Pkm.AIPOM,
   [Pkm.AMBIPOM]: Pkm.AIPOM,
   [Pkm.DEERLING]: Pkm.DEERLING,
@@ -2238,7 +2341,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SILVALLY_FLYING]: Pkm.TYPE_NULL,
   [Pkm.SILVALLY_ROCK]: Pkm.TYPE_NULL,
   [Pkm.SILVALLY_GROUND]: Pkm.TYPE_NULL,
-  [Pkm.SILVALLY_FLORA]: Pkm.TYPE_NULL,
+  [Pkm.SILVALLY_GHOST]: Pkm.TYPE_NULL,
   [Pkm.DEWPIDER]: Pkm.DEWPIDER,
   [Pkm.ARAQUANID]: Pkm.DEWPIDER,
   [Pkm.ROCKRUFF]: Pkm.ROCKRUFF,
@@ -2268,7 +2371,56 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.DROWZEE]: Pkm.DROWZEE,
   [Pkm.HYPNO]: Pkm.DROWZEE,
   [Pkm.WATTREL]: Pkm.WATTREL,
-  [Pkm.KILOWATTREL]: Pkm.WATTREL
+  [Pkm.KILOWATTREL]: Pkm.WATTREL,
+  [Pkm.STANTLER]: Pkm.STANTLER,
+  [Pkm.BURMY_PLANT]: Pkm.BURMY_PLANT,
+  [Pkm.BURMY_SANDY]: Pkm.BURMY_SANDY,
+  [Pkm.BURMY_TRASH]: Pkm.BURMY_TRASH,
+  [Pkm.WORMADAM_PLANT]: Pkm.BURMY_PLANT,
+  [Pkm.WORMADAM_SANDY]: Pkm.BURMY_SANDY,
+  [Pkm.WORMADAM_TRASH]: Pkm.BURMY_TRASH,
+  [Pkm.MOTHIM]: Pkm.BURMY_PLANT, // NOTE: converging evolution
+  [Pkm.PALDEA_WOOPER]: Pkm.PALDEA_WOOPER,
+  [Pkm.CLODSIRE]: Pkm.PALDEA_WOOPER,
+  [Pkm.FUECOCO]: Pkm.FUECOCO,
+  [Pkm.CROCALOR]: Pkm.FUECOCO,
+  [Pkm.SKELEDIRGE]: Pkm.FUECOCO,
+  [Pkm.TANGELA]: Pkm.TANGELA,
+  [Pkm.TANGROWTH]: Pkm.TANGELA,
+  [Pkm.PSYDUCK]: Pkm.PSYDUCK,
+  [Pkm.GOLDUCK]: Pkm.PSYDUCK,
+  [Pkm.PHANPY]: Pkm.PHANPY,
+  [Pkm.DONPHAN]: Pkm.PHANPY,
+  [Pkm.SPOINK]: Pkm.SPOINK,
+  [Pkm.GRUMPIG]: Pkm.SPOINK,
+  [Pkm.SINISTEA]: Pkm.SINISTEA,
+  [Pkm.POLTEAGEIST]: Pkm.SINISTEA,
+  [Pkm.FERROSEED]: Pkm.FERROSEED,
+  [Pkm.FERROTHORN]: Pkm.FERROSEED,
+  [Pkm.GOLETT]: Pkm.GOLETT,
+  [Pkm.GOLURK]: Pkm.GOLETT,
+  [Pkm.TRUBBISH]: Pkm.TRUBBISH,
+  [Pkm.GARBODOR]: Pkm.TRUBBISH,
+  [Pkm.GRUBBIN]: Pkm.GRUBBIN,
+  [Pkm.CHARJABUG]: Pkm.GRUBBIN,
+  [Pkm.VIKAVOLT]: Pkm.GRUBBIN,
+  [Pkm.SHELLOS_WEST_SEA]: Pkm.SHELLOS_WEST_SEA,
+  [Pkm.GASTRODON_WEST_SEA]: Pkm.SHELLOS_WEST_SEA,
+  [Pkm.SHELLOS_EAST_SEA]: Pkm.SHELLOS_EAST_SEA,
+  [Pkm.GASTRODON_EAST_SEA]: Pkm.SHELLOS_EAST_SEA,
+  [Pkm.MUNNA]: Pkm.MUNNA,
+  [Pkm.MUSHARNA]: Pkm.MUNNA
+}
+
+export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
+  [Pkm.RATTATA]: [Pkm.ALOLAN_RATTATA],
+  [Pkm.GROWLITHE]: [Pkm.HISUI_GROWLITHE],
+  [Pkm.VULPIX]: [Pkm.ALOLAN_VULPIX],
+  [Pkm.GEODUDE]: [Pkm.ALOLAN_GEODUDE],
+  [Pkm.DIGLETT]: [Pkm.ALOLAN_DIGLETT],
+  [Pkm.ZORUA]: [Pkm.HISUI_ZORUA],
+  [Pkm.GRIMER]: [Pkm.ALOLAN_GRIMER],
+  [Pkm.NIDORANF]: [Pkm.NIDORANM]
 }
 
 export enum PkmDuo {
@@ -2580,17 +2732,17 @@ export const AnimationConfig: {
   [Pkm.PIDGEY]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.FlapAround,
-    emote: AnimationType.Attack
+    emote: AnimationType.Shoot
   },
   [Pkm.PIDGEOTTO]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.FlapAround,
-    emote: AnimationType.Attack
+    emote: AnimationType.Shoot
   },
   [Pkm.PIDGEOT]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.FlapAround,
-    emote: AnimationType.Attack
+    emote: AnimationType.Shoot
   },
   [Pkm.HOPPIP]: {
     attack: AnimationType.Shoot,
@@ -2864,17 +3016,17 @@ export const AnimationConfig: {
   },
   [Pkm.SPHEAL]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.RearUp,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.SEALEO]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.RearUp,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.WALREIN]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.RearUp,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.ARON]: {
@@ -2968,19 +3120,19 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.SHINX]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Pose
   },
   [Pkm.LUXIO]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Pose
   },
   [Pkm.LUXRAY]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shake
   },
   [Pkm.POLIWAG]: {
     attack: AnimationType.Shoot,
@@ -3182,6 +3334,16 @@ export const AnimationConfig: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Rumble
   },
+  [Pkm.HISUI_GROWLITHE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.HISUI_ARCANINE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.QuickStrike,
+    emote: AnimationType.Shoot
+  },
   [Pkm.ONIX]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Charge,
@@ -3194,8 +3356,9 @@ export const AnimationConfig: {
   },
   [Pkm.MEGA_STEELIX]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.SCYTHER]: {
     attack: AnimationType.Attack,
@@ -3207,7 +3370,7 @@ export const AnimationConfig: {
     ability: AnimationType.MultiScratch,
     emote: AnimationType.Shoot
   },
-  [Pkm.MEGA_SCIZOR]: {
+  [Pkm.KLEAVOR]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Attack,
     emote: AnimationType.Shoot
@@ -3232,9 +3395,19 @@ export const AnimationConfig: {
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot
   },
+  [Pkm.ALOLAN_RATTATA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.TailWhip,
+    emote: AnimationType.Shoot
+  },
   [Pkm.RATICATE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.ALOLAN_RATICATE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.TailWhip,
     emote: AnimationType.Shoot
   },
   [Pkm.SPEAROW]: {
@@ -3293,14 +3466,14 @@ export const AnimationConfig: {
     emote: AnimationType.SpAttack
   },
   [Pkm.RAIKOU]: {
-    attack: AnimationType.Shock,
-    ability: AnimationType.Roar,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Attack,
+    ability: AnimationType.QuickStrike,
+    emote: AnimationType.Roar
   },
   [Pkm.ENTEI]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Roar,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
+    emote: AnimationType.SpAttack
   },
   [Pkm.REGICE]: {
     attack: AnimationType.Shoot,
@@ -3345,7 +3518,8 @@ export const AnimationConfig: {
   [Pkm.VAPOREON]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.RearUp,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.JOLTEON]: {
     attack: AnimationType.Shock,
@@ -3385,11 +3559,6 @@ export const AnimationConfig: {
   [Pkm.MEDICHAM]: {
     attack: AnimationType.Charge,
     ability: AnimationType.SpAttack,
-    emote: AnimationType.Shoot
-  },
-  [Pkm.MEGA_MEDICHAM]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
     emote: AnimationType.Shoot
   },
   [Pkm.NUMEL]: {
@@ -3582,6 +3751,12 @@ export const AnimationConfig: {
     ability: AnimationType.Double,
     emote: AnimationType.Shoot
   },
+  [Pkm.ROTOM_DRONE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
+  },
   [Pkm.SPIRITOMB]: {
     attack: AnimationType.Withdraw,
     ability: AnimationType.Special1,
@@ -3737,8 +3912,7 @@ export const AnimationConfig: {
   [Pkm.KROOKODILE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot,
-    shinyUnavailable: true
+    emote: AnimationType.Shoot
   },
   [Pkm.SOLOSIS]: {
     attack: AnimationType.Attack,
@@ -3877,8 +4051,9 @@ export const AnimationConfig: {
   },
   [Pkm.TYRUNT]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Bite,
+    emote: AnimationType.RearUp,
+    shinyUnavailable: true
   },
   [Pkm.TYRANTRUM]: {
     attack: AnimationType.Attack,
@@ -3943,8 +4118,7 @@ export const AnimationConfig: {
   [Pkm.SCOLIPEDE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot,
-    shinyUnavailable: true
+    emote: AnimationType.Shoot
   },
   [Pkm.PORYGON]: {
     attack: AnimationType.RearUp,
@@ -4577,6 +4751,16 @@ export const AnimationConfig: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
+  [Pkm.HISUI_SLIGGOO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.HISUI_GOODRA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
   [Pkm.MEW]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Charge,
@@ -4613,13 +4797,13 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.OSHAWOTT]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Pose
   },
   [Pkm.DEWOTT]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hop,
+    ability: AnimationType.Swing,
     emote: AnimationType.Shoot
   },
   [Pkm.SAMUROTT]: {
@@ -4893,10 +5077,20 @@ export const AnimationConfig: {
     ability: AnimationType.DigIn,
     emote: AnimationType.Special0
   },
+  [Pkm.ALOLAN_DIGLETT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.DigIn,
+    emote: AnimationType.Special0
+  },
   [Pkm.DUGTRIO]: {
     attack: AnimationType.Attack,
     ability: AnimationType.DigIn,
     emote: AnimationType.Special0
+  },
+  [Pkm.ALOLAN_DUGTRIO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Walk,
+    emote: AnimationType.Hop
   },
   [Pkm.ROWLET]: {
     attack: AnimationType.Attack,
@@ -4941,7 +5135,8 @@ export const AnimationConfig: {
   [Pkm.FROGADIER]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.GRENINJA]: {
     attack: AnimationType.Attack,
@@ -5076,7 +5271,8 @@ export const AnimationConfig: {
   [Pkm.MELMETAL]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.HOOPA]: {
     attack: AnimationType.Attack,
@@ -5891,10 +6087,15 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.URSALUNA]: {
-    //TODO: anims not yet available
-    attack: AnimationType.Idle,
-    ability: AnimationType.Idle,
-    emote: AnimationType.Idle
+    attack: AnimationType.Idle, // TEMP while waiting for anims to be drawn
+    ability: AnimationType.Idle, // TEMP while waiting for anims to be drawn
+    emote: AnimationType.Idle // TEMP while waiting for anims to be drawn
+  },
+  [Pkm.URSALUNA_BLOODMOON]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.AIPOM]: {
     attack: AnimationType.Attack,
@@ -6026,7 +6227,7 @@ export const AnimationConfig: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
-  [Pkm.SILVALLY_FLORA]: {
+  [Pkm.SILVALLY_GHOST]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
@@ -6084,8 +6285,7 @@ export const AnimationConfig: {
   [Pkm.LUNALA]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Charge,
-    emote: AnimationType.Shoot,
-    shinyUnavailable: true
+    emote: AnimationType.Shoot
   },
   [Pkm.MAGEARNA]: {
     attack: AnimationType.Shoot,
@@ -6175,13 +6375,208 @@ export const AnimationConfig: {
   [Pkm.WATTREL]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.FlapAround,
-    shinyUnavailable: true
+    emote: AnimationType.FlapAround
   },
   [Pkm.KILOWATTREL]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.FlapAround,
+    emote: AnimationType.FlapAround
+  },
+  [Pkm.STANTLER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.BURMY_PLANT]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Attack
+  },
+  [Pkm.BURMY_SANDY]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Attack
+  },
+  [Pkm.BURMY_TRASH]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Attack
+  },
+  [Pkm.WORMADAM_PLANT]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shake
+  },
+  [Pkm.WORMADAM_SANDY]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shake
+  },
+  [Pkm.WORMADAM_TRASH]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shake
+  },
+  [Pkm.MOTHIM]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Hover
+  },
+  [Pkm.PALDEA_WOOPER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Pose
+  },
+  [Pkm.CLODSIRE]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.FUECOCO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp
+  },
+  [Pkm.CROCALOR]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp,
     shinyUnavailable: true
+  },
+  [Pkm.SKELEDIRGE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp,
+    shinyUnavailable: true
+  },
+  [Pkm.TANGELA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shake
+  },
+  [Pkm.TANGROWTH]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Emit
+  },
+  [Pkm.PSYDUCK]: {
+    attack: AnimationType.MultiScratch,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.GOLDUCK]: {
+    attack: AnimationType.MultiScratch,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.PHANPY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.TumbleBack,
+    emote: AnimationType.Eat
+  },
+  [Pkm.DONPHAN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.TumbleBack,
+    emote: AnimationType.Idle
+  },
+  [Pkm.SPOINK]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Hop,
+    emote: AnimationType.Twirl
+  },
+  [Pkm.GRUMPIG]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SINISTEA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.POLTEAGEIST]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Hop,
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
+  },
+  [Pkm.FERROSEED]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Special0,
+    emote: AnimationType.DeepBreath
+  },
+  [Pkm.FERROTHORN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Special0,
+    emote: AnimationType.Special0
+  },
+  [Pkm.GOLETT]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Tumble,
+    emote: AnimationType.Pose
+  },
+  [Pkm.GOLURK]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge
+  },
+  [Pkm.TRUBBISH]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Pose,
+    shinyUnavailable: true
+  },
+  [Pkm.GARBODOR]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Idle,
+    shinyUnavailable: true
+  },
+  [Pkm.GRUBBIN]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
+  },
+  [Pkm.CHARJABUG]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
+  },
+  [Pkm.VIKAVOLT]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SHELLOS_WEST_SEA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.GASTRODON_WEST_SEA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SHELLOS_EAST_SEA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.GASTRODON_EAST_SEA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.MUNNA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.MUSHARNA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   }
 }

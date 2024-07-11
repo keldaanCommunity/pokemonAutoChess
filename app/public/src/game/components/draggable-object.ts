@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import { GameObjects } from "phaser"
 
 export default class DraggableObject extends GameObjects.Container {
@@ -44,7 +43,6 @@ export default class DraggableObject extends GameObjects.Container {
     this.scene.input.setDraggable(this, isDraggable)
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onPointerOver(pointer) {
     if (!this.dragDisabled) {
       document.body.classList.add("grab")
@@ -57,7 +55,6 @@ export default class DraggableObject extends GameObjects.Container {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onPointerDown(pointer) {
     if (!this.dragDisabled) {
       document.body.classList.add("grabbing")

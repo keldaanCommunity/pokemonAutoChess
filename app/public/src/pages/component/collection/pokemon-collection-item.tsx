@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react"
 import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
-import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed"
+import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed/precomputed-emotions"
 import { getEmotionCost } from "../../../../../types/Config"
 import { Emotion } from "../../../../../types/enum/Emotion"
 import { Pkm } from "../../../../../types/enum/Pokemon"

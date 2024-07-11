@@ -7,9 +7,9 @@ import { Effect } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { max } from "../../utils/number"
+import { chance } from "../../utils/random"
 
 export default class Status extends Schema implements IStatus {
   @type("boolean") burn = false
@@ -23,6 +23,7 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") resurection = false
   @type("boolean") resurecting = false
   @type("boolean") paralysis = false
+  @type("boolean") pokerus = false
   @type("boolean") armorReduction = false
   @type("boolean") runeProtect = false
   @type("boolean") charm = false
@@ -35,11 +36,14 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") magicBounce = false
   @type("boolean") light = false
   @type("boolean") curse = false
+  @type("boolean") curseVulnerability = false
+  @type("boolean") curseWeakness = false
+  @type("boolean") curseTorment = false
+  @type("boolean") curseFate = false
   @type("boolean") enraged = false
   @type("boolean") skydiving = false
   magmaStorm = false
   soulDew = false
-  deltaOrbStacks = 0
   clearWing = false
   guts = false
   toxicBoost = false
@@ -77,7 +81,11 @@ export default class Status extends Schema implements IStatus {
   drySkin = false
   drySkinCooldown = 1000
   curseCooldown = 0
+  pokerusCooldown = 2000
   enrageDelay = 35000
+  darkHarvest = false
+  darkHarvestCooldown = 0
+  darkHarvestDamageCooldown = 0
 
   clearNegativeStatus() {
     this.burnCooldown = 0
@@ -121,22 +129,6 @@ export default class Status extends Schema implements IStatus {
       this.triggerParalysis(2000, pokemon)
     }
 
-    if (
-      pokemon.effects.has(Effect.STEALTH_ROCKS) &&
-      !pokemon.types.has(Synergy.ROCK) &&
-      !pokemon.types.has(Synergy.FLYING) &&
-      !this.wound
-    ) {
-      pokemon.handleDamage({
-        damage: 10,
-        board,
-        attackType: AttackType.PHYSICAL,
-        attacker: null,
-        shouldTargetGainMana: true
-      })
-      this.triggerWound(1000, pokemon, undefined)
-    }
-
     if (pokemon.status.runeProtect) {
       this.updateRuneProtect(dt)
     }
@@ -177,8 +169,16 @@ export default class Status extends Schema implements IStatus {
       this.updateSoulDew(dt, pokemon)
     }
 
+    if (this.darkHarvest) {
+      this.updateDarkHarvest(dt, pokemon, board)
+    }
+
     if (this.paralysis) {
       this.updateParalysis(dt, pokemon)
+    }
+
+    if (this.pokerus) {
+      this.updatePokerus(dt, pokemon, board)
     }
 
     if (this.armorReduction) {
@@ -227,6 +227,31 @@ export default class Status extends Schema implements IStatus {
 
     if (!this.enraged) {
       this.updateRage(dt, pokemon)
+    }
+
+    if (
+      pokemon.effects.has(Effect.CURSE_OF_VULNERABILITY) &&
+      !pokemon.status.flinch
+    ) {
+      this.triggerFlinch(30000, pokemon)
+    }
+
+    if (
+      pokemon.effects.has(Effect.CURSE_OF_WEAKNESS) &&
+      !pokemon.status.paralysis
+    ) {
+      this.triggerParalysis(30000, pokemon)
+    }
+
+    if (
+      pokemon.effects.has(Effect.CURSE_OF_TORMENT) &&
+      !pokemon.status.silence
+    ) {
+      this.triggerSilence(30000, pokemon)
+    }
+
+    if (pokemon.effects.has(Effect.CURSE_OF_FATE) && !pokemon.status.curse) {
+      this.triggerCurse(5000)
     }
   }
 
@@ -300,7 +325,7 @@ export default class Status extends Schema implements IStatus {
     if (this.enrageDelay - dt <= 0 && !pokemon.simulation.finished) {
       this.enraged = true
       this.protect = false
-      pokemon.addAttackSpeed(100)
+      pokemon.addAttackSpeed(100, pokemon, 0, false)
     } else {
       this.enrageDelay -= dt
     }
@@ -317,7 +342,7 @@ export default class Status extends Schema implements IStatus {
     if (this.clearWingCooldown - dt <= 0) {
       this.clearWing = false
       this.triggerClearWing(1000)
-      pkm.addAttackSpeed(2, false)
+      pkm.addAttackSpeed(2, pkm, 0, false)
     } else {
       this.clearWingCooldown -= dt
     }
@@ -334,7 +359,7 @@ export default class Status extends Schema implements IStatus {
     if (this.drySkinCooldown - dt <= 0) {
       this.drySkin = false
       this.triggerDrySkin(1000)
-      pkm.handleHeal(8, pkm, 0)
+      pkm.handleHeal(8, pkm, 0, false)
     } else {
       this.drySkinCooldown -= dt
     }
@@ -374,13 +399,65 @@ export default class Status extends Schema implements IStatus {
   updateSoulDew(dt: number, pkm: PokemonEntity) {
     if (this.soulDewCooldown - dt <= 0) {
       this.soulDew = false
-      pkm.addAbilityPower(8)
+      pkm.addAbilityPower(10, pkm, 0, false)
       pkm.count.soulDewCount++
       if (pkm.items.has(Item.SOUL_DEW)) {
         this.triggerSoulDew(1000)
       }
     } else {
       this.soulDewCooldown -= dt
+    }
+  }
+
+  triggerDarkHarvest(duration: number) {
+    this.darkHarvest = true
+    if (duration > this.darkHarvestCooldown) {
+      this.darkHarvestCooldown = duration
+      this.darkHarvestDamageCooldown = 0
+    }
+  }
+
+  updateDarkHarvest(dt: number, pkm: PokemonEntity, board: Board) {
+    if (this.darkHarvestDamageCooldown - dt <= 0) {
+      pkm.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pkm.simulation.id,
+        skill: Ability.DARK_HARVEST,
+        positionX: pkm.positionX,
+        positionY: pkm.positionY
+      })
+      const crit = pkm.items.has(Item.REAPER_CLOTH)
+        ? chance(pkm.critChance)
+        : false
+      board.getAdjacentCells(pkm.positionX, pkm.positionY).forEach((cell) => {
+        if (cell?.value && cell.value.team !== pkm.team) {
+          const darkHarvestDamage = [5, 10, 20][pkm.stars - 1] ?? 20
+          cell.value.handleSpecialDamage(
+            darkHarvestDamage,
+            board,
+            AttackType.SPECIAL,
+            pkm,
+            crit,
+            true
+          )
+
+          const healFactor = 0.3
+          pkm.handleHeal(
+            Math.round(darkHarvestDamage * healFactor),
+            pkm,
+            0,
+            false
+          )
+          this.darkHarvestDamageCooldown = 1000
+        }
+      })
+    } else {
+      this.darkHarvestDamageCooldown -= dt
+    }
+
+    if (this.darkHarvestCooldown - dt <= 0) {
+      this.darkHarvest = false
+    } else {
+      this.darkHarvestCooldown -= dt
     }
   }
 
@@ -413,7 +490,7 @@ export default class Status extends Schema implements IStatus {
 
       if (pkm.passive === Passive.GUTS && !this.guts) {
         this.guts = true
-        pkm.addAttack(5, false)
+        pkm.addAttack(5, pkm, 0, false)
       }
 
       if (pkm.items.has(Item.RAWST_BERRY)) {
@@ -459,18 +536,14 @@ export default class Status extends Schema implements IStatus {
   healBurn(pkm: PokemonEntity) {
     this.burn = false
     this.burnOrigin = undefined
-    this.burnDamageCooldown = 0
+    this.burnDamageCooldown = 1000
     if (pkm.passive === Passive.GUTS && this.poisonStacks === 0) {
       this.guts = false
-      pkm.addAttack(-5, false)
+      pkm.addAttack(-5, pkm, 0, false)
     }
   }
 
-  triggerSilence(
-    duration: number,
-    pkm: PokemonEntity,
-    origin: PokemonEntity | undefined
-  ) {
+  triggerSilence(duration: number, pkm: PokemonEntity, origin?: PokemonEntity) {
     if (!this.runeProtect && !this.tree) {
       if (pkm.effects.has(Effect.SWIFT_SWIM)) {
         duration = Math.round(duration * 0.7)
@@ -530,12 +603,12 @@ export default class Status extends Schema implements IStatus {
       }
       if (pkm.passive === Passive.GUTS && !this.guts) {
         this.guts = true
-        pkm.addAttack(5, false)
+        pkm.addAttack(5, pkm, 0, false)
       }
 
       if (pkm.passive === Passive.TOXIC_BOOST && !this.toxicBoost) {
         this.toxicBoost = true
-        pkm.addAttack(10, false)
+        pkm.addAttack(10, pkm, 0, false)
       }
 
       if (pkm.items.has(Item.PECHA_BERRY)) {
@@ -548,21 +621,24 @@ export default class Status extends Schema implements IStatus {
     if (this.poisonDamageCooldown - dt <= 0) {
       let poisonDamage = Math.ceil(pkm.hp * 0.05 * this.poisonStacks)
       if (pkm.simulation.weather === Weather.RAIN) {
-        poisonDamage = Math.round(poisonDamage * 0.7)
+        poisonDamage *= 0.7
       }
 
       if (pkm.items.has(Item.ASSAULT_VEST)) {
-        poisonDamage = Math.round(poisonDamage * 0.5)
+        poisonDamage *= 0.5
+      }
+      if (pkm.passive === Passive.TOXIC_BOOST) {
+        poisonDamage *= 0.5
       }
 
       if (
         pkm.passive === Passive.POISON_HEAL ||
         pkm.passive === Passive.GLIGAR
       ) {
-        pkm.handleHeal(poisonDamage, pkm, 0)
+        pkm.handleHeal(Math.round(poisonDamage), pkm, 0, false)
       } else {
         pkm.handleDamage({
-          damage: poisonDamage,
+          damage: Math.round(poisonDamage),
           board,
           attackType: AttackType.TRUE,
           attacker: this.poisonOrigin ?? null,
@@ -583,13 +659,14 @@ export default class Status extends Schema implements IStatus {
     if (this.poisonCooldown - dt <= 0) {
       this.poisonStacks = 0
       this.poisonOrigin = undefined
+      this.poisonDamageCooldown = 1000
       if (pkm.passive === Passive.GUTS && !this.burn) {
         this.guts = false
-        pkm.addAttack(-5, false)
+        pkm.addAttack(-5, pkm, 0, false)
       }
       if (pkm.passive === Passive.TOXIC_BOOST) {
         this.toxicBoost = false
-        pkm.addAttack(-10, false)
+        pkm.addAttack(-10, pkm, 0, false)
       }
     } else {
       this.poisonCooldown = this.poisonCooldown - dt
@@ -711,6 +788,10 @@ export default class Status extends Schema implements IStatus {
       if (pkm.items.has(Item.PERSIM_BERRY)) {
         pkm.eatBerry(Item.PERSIM_BERRY)
       }
+
+      if (pkm.passive === Passive.PSYDUCK) {
+        pkm.addAbilityPower(100, pkm, 0, false)
+      }
     }
   }
 
@@ -767,6 +848,9 @@ export default class Status extends Schema implements IStatus {
   ) {
     if (!this.runeProtect) {
       this.wound = true
+      if (pkm.simulation.weather === Weather.BLOODMOON) {
+        duration *= 1.3
+      }
       if (pkm.effects.has(Effect.SWIFT_SWIM)) {
         duration *= 0.7
       } else if (pkm.effects.has(Effect.HYDRATION)) {
@@ -797,7 +881,7 @@ export default class Status extends Schema implements IStatus {
     if (!this.runeProtect && !pkm.effects.has(Effect.IMMUNITY_PARALYSIS)) {
       if (!this.paralysis) {
         this.paralysis = true
-        pkm.addAttackSpeed(-40)
+        pkm.addAttackSpeed(-40, pkm, 0, false)
       }
       if (pkm.simulation.weather === Weather.STORM) {
         duration *= 1.3
@@ -832,7 +916,7 @@ export default class Status extends Schema implements IStatus {
     if (this.paralysis) {
       this.paralysis = false
       this.paralysisCooldown = 0
-      pkm.addAttackSpeed(40)
+      pkm.addAttackSpeed(40, pkm, 0, false)
     }
   }
 
@@ -916,7 +1000,7 @@ export default class Status extends Schema implements IStatus {
   updateResurecting(dt: number, pokemon: PokemonEntity) {
     if (this.resurectingCooldown - dt <= 0) {
       this.resurecting = false
-      pokemon.resetStats()
+      pokemon.resurrect()
       pokemon.toMovingState()
       pokemon.cooldown = 0
     } else {
@@ -954,6 +1038,39 @@ export default class Status extends Schema implements IStatus {
       })
     } else {
       this.curseCooldown -= dt
+    }
+  }
+
+  triggerPokerus() {
+    if (!this.pokerus) {
+      this.pokerus = true
+    }
+  }
+
+  updatePokerus(dt: number, pokemon: PokemonEntity, board: Board) {
+    if (this.pokerusCooldown - dt <= 0) {
+      pokemon.addAttack(1, pokemon, 0, false)
+      pokemon.addAbilityPower(10, pokemon, 0, false)
+      let infectCount = 0
+      const cells = board.getAdjacentCells(
+        pokemon.positionX,
+        pokemon.positionY,
+        false
+      )
+      cells.forEach((cell) => {
+        if (infectCount < 2 && cell.value !== undefined) {
+          if (
+            cell.value.team === pokemon.team &&
+            cell.value.status.pokerus === false
+          ) {
+            cell.value.status.triggerPokerus()
+            infectCount++
+          }
+        }
+      })
+      this.pokerusCooldown = 2000
+    } else {
+      this.pokerusCooldown -= dt
     }
   }
 }

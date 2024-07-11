@@ -1,6 +1,6 @@
 import { path } from "@assetpack/core"
 import { compressJpg, compressPng } from "@assetpack/plugin-compress"
-import { audio } from "@assetpack/plugin-ffmpeg"
+//import { audio } from "@assetpack/plugin-ffmpeg"
 import { json } from "@assetpack/plugin-json"
 import fs from "fs-extra"
 import { texturePacker } from "./plugin-texturepacker-fork/dist/es/index.js"
@@ -11,8 +11,8 @@ export default {
   plugins: {
     compressPng: compressPng(),
     compressJpg: compressJpg(),
-    audio: audio({
-      inputs: [".mp3", ".ogg", ".wav"],
+    /*audio: audio({
+      inputs: [".mp3", ".wav", ".ogg"],
       outputs: [
         {
           formats: [".mp3"],
@@ -29,11 +29,11 @@ export default {
           options: {
             audioBitrate: 32,
             audioChannels: 1,
-            audioFrequency: 22050,
+            audioFrequency: 22050
           }
         }
       ]
-    }),
+    }),*/
     json: json(),
     texturePacker: texturePacker({
       texturePacker: {

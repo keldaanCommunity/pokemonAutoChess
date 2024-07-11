@@ -1,4 +1,5 @@
 import { Client, Room } from "colyseus.js"
+import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import firebase from "firebase/compat/app"
 import React, { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -8,11 +9,15 @@ import { IBot } from "../../../models/mongo-models/bot-v2"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import GameState from "../../../rooms/states/game-state"
 import PreparationState from "../../../rooms/states/preparation-state"
-import { NonFunctionPropNames, Transfer } from "../../../types"
+import { Transfer } from "../../../types"
 import { logger } from "../../../utils/logger"
-import { PreloadingScene } from "../game/scenes/preloading-scene"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import { joinPreparation, logIn, setProfile } from "../stores/NetworkStore"
+import {
+  joinPreparation,
+  logIn,
+  setProfile,
+  toggleReady
+} from "../stores/NetworkStore"
 import {
   addUser,
   changeUser,
@@ -28,15 +33,18 @@ import {
   setOwnerId,
   setOwnerName,
   setPassword,
-  setUser
+  setUser,
+  setWhiteList,
+  setBlackList
 } from "../stores/PreparationStore"
 import Chat from "./component/chat/chat"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import PreparationMenu from "./component/preparation/preparation-menu"
-import "./preparation.css"
 import { SOUNDS, playSound } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import { FIREBASE_CONFIG } from "./utils/utils"
+import { GameMode } from "../../../types/enum/Game"
+import "./preparation.css"
 
 export default function Preparation() {
   const { t } = useTranslation()
@@ -46,16 +54,10 @@ export default function Preparation() {
     (state) => state.network.preparation
   )
   const initialized = useRef<boolean>(false)
-  const preloading = useRef<boolean>(false)
   const [toGame, setToGame] = useState<boolean>(false)
   const [toAuth, setToAuth] = useState<boolean>(false)
   const [toLobby, setToLobby] = useState<boolean>(false)
   const connectingToGame = useRef<boolean>(false)
-  const gameRef = useRef<Phaser.Game | null>(null)
-  const preloadingScene = useRef<PreloadingScene>()
-  const [preloadingMessage, setPreloadingMessage] = useState<string>(
-    t("preloading_start")
-  )
 
   useEffect(() => {
     const reconnect = async () => {
@@ -124,8 +126,19 @@ export default function Preparation() {
         dispatch(setNoELO(value))
       })
 
+      r.state.listen("whitelist", (value, previousValue) => {
+        dispatch(setWhiteList(value))
+      })
+
+      r.state.listen("blacklist", (value, previousValue) => {
+        dispatch(setBlackList(value))
+      })
+
       r.state.listen("gameMode", (value, previousValue) => {
         dispatch(setGameMode(value))
+        if (value !== GameMode.NORMAL) {
+          dispatch(toggleReady(true)) // automatically set users ready in non-classic game mode
+        }
       })
 
       r.state.users.onAdd((u) => {
@@ -215,28 +228,6 @@ export default function Preparation() {
     }
   })
 
-  useEffect(() => {
-    if (!preloading.current) {
-      preloading.current = true
-      preloadingScene.current = new PreloadingScene(
-        () =>
-          setPreloadingMessage(
-            preloadingScene.current?.loadingManager.statusMessage ?? ""
-          ),
-        () => {
-          setPreloadingMessage(t("finished_preloading"))
-          gameRef.current?.destroy(true)
-          gameRef.current = null
-        }
-      )
-      gameRef.current = new Phaser.Game({
-        type: Phaser.AUTO,
-        scene: [preloadingScene.current],
-        backgroundColor: "#000000"
-      })
-    }
-  }, [preloading, t])
-
   if (toGame) {
     return <Navigate to="/game" />
   }
@@ -263,9 +254,6 @@ export default function Preparation() {
           <PreparationMenu />
           <Chat source="preparation" />
         </main>
-        <footer>
-          <p id="preloading-message">{preloadingMessage}</p>
-        </footer>
       </div>
     )
   }

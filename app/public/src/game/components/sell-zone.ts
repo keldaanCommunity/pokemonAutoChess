@@ -1,6 +1,6 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
-import PokemonFactory from "../../../../models/pokemon-factory"
+import { getSellPrice } from "../../../../models/shop"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { transformCoordinate } from "../../pages/utils/utils"
 import GameScene from "../scenes/game-scene"
@@ -51,7 +51,7 @@ export class SellZone extends GameObjects.Container {
 
   showForPokemon(pkm: PokemonSprite) {
     const specialGameRule = this.scene.room?.state.specialGameRule
-    const price = PokemonFactory.getSellPrice(
+    const price = getSellPrice(
       pkm.name as Pkm,
       pkm.shiny,
       specialGameRule

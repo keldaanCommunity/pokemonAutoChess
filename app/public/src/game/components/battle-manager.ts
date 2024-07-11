@@ -1,16 +1,12 @@
-/* eslint-disable no-case-declarations */
 import { GameObjects } from "phaser"
+import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import { getMoveSpeed } from "../../../../core/pokemon-entity"
 import Simulation from "../../../../core/simulation"
 import Count from "../../../../models/colyseus-models/count"
 import Player from "../../../../models/colyseus-models/player"
 import Status from "../../../../models/colyseus-models/status"
-import { getPokemonData } from "../../../../models/precomputed"
-import {
-  IBoardEvent,
-  IPokemonEntity,
-  NonFunctionPropNames
-} from "../../../../types"
+import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
+import { IBoardEvent, IPokemonEntity } from "../../../../types"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import { Effect } from "../../../../types/enum/Effect"
@@ -153,13 +149,13 @@ export default class BattleManager {
         const pkm = <PokemonSprite>children[i]
 
         if (pkm.id == pokemon.id) {
-          if (field == "poisonStacks") {
+          if (field === "poisonStacks") {
             if (pokemon.status.poisonStacks > 0) {
               pkm.addPoison()
             } else {
               pkm.removePoison()
             }
-          } else if (field == "sleep") {
+          } else if (field === "sleep") {
             if (pokemon.status.sleep) {
               pkm.addSleep()
               this.animationManager.animatePokemon(
@@ -170,133 +166,155 @@ export default class BattleManager {
             } else {
               pkm.removeSleep()
             }
-          } else if (field == "burn") {
+          } else if (field === "burn") {
             if (pokemon.status.burn) {
               pkm.addBurn()
             } else {
               pkm.removeBurn()
             }
-          } else if (field == "silence") {
+          } else if (field === "silence") {
             if (pokemon.status.silence) {
               pkm.addSilence()
             } else {
               pkm.removeSilence()
             }
-          } else if (field == "confusion") {
+          } else if (field === "confusion") {
             if (pokemon.status.confusion) {
               pkm.addConfusion()
             } else {
               pkm.removeConfusion()
             }
-          } else if (field == "freeze") {
+          } else if (field === "freeze") {
             if (pokemon.status.freeze) {
               pkm.addFreeze()
             } else {
               pkm.removeFreeze()
             }
-          } else if (field == "protect") {
+          } else if (field === "protect") {
             if (pokemon.status.protect) {
               pkm.addProtect()
             } else {
               pkm.removeProtect()
             }
-          } else if (field == "skydiving") {
+          } else if (field === "skydiving") {
             if (pokemon.status.skydiving) {
               pkm.skydiveUp()
             } else {
               pkm.skydiveDown()
             }
-          } else if (field == "wound") {
+          } else if (field === "wound") {
             if (pokemon.status.wound) {
               pkm.addWound()
             } else {
               pkm.removeWound()
             }
-          } else if (field == "resurection") {
+          } else if (field === "resurection") {
             if (pokemon.status.resurection) {
               pkm.addResurection()
             } else {
               pkm.removeResurection()
             }
-          } else if (field == "resurecting") {
+          } else if (field === "resurecting") {
             if (pokemon.status.resurecting) {
               pkm.resurectAnimation()
             } else {
               pkm.animationLocked = false
             }
-          } else if (field == "paralysis") {
+          } else if (field === "paralysis") {
             if (pokemon.status.paralysis) {
               pkm.addParalysis()
             } else {
               pkm.removeParalysis()
             }
-          } else if (field == "armorReduction") {
+          } else if (field === "pokerus") {
+            if (pokemon.status.pokerus) {
+              pkm.addPokerus()
+            } else {
+              pkm.removePokerus()
+            }
+          } else if (field === "armorReduction") {
             if (pokemon.status.armorReduction) {
               pkm.addArmorReduction()
             } else {
               pkm.removeArmorReduction()
             }
-          } else if (field == "charm") {
+          } else if (field === "charm") {
             if (pokemon.status.charm) {
               pkm.addCharm()
             } else {
               pkm.removeCharm()
             }
-          } else if (field == "flinch") {
+          } else if (field === "flinch") {
             if (pokemon.status.flinch) {
               pkm.addFlinch()
             } else {
               pkm.removeFlinch()
             }
-          } else if (field == "runeProtect") {
+          } else if (field === "runeProtect") {
             if (pokemon.status.runeProtect) {
               pkm.addRuneProtect()
             } else {
               pkm.removeRuneProtect()
             }
-          } else if (field == "curse") {
+          } else if (field === "curse") {
             if (pokemon.status.curse) {
               pkm.addCurse()
             } else {
               pkm.removeCurse()
             }
-          } else if (field == "spikeArmor") {
+          } else if (field === "curseVulnerability") {
+            if (pokemon.status.curseVulnerability) {
+              pkm.addCurseVulnerability()
+            }
+          } else if (field === "curseWeakness") {
+            if (pokemon.status.curseWeakness) {
+              pkm.addCurseWeakness()
+            }
+          } else if (field === "curseTorment") {
+            if (pokemon.status.curseTorment) {
+              pkm.addCurseTorment()
+            }
+          } else if (field === "curseFate") {
+            if (pokemon.status.curseFate) {
+              pkm.addCurseFate()
+            }
+          } else if (field === "spikeArmor") {
             if (pokemon.status.spikeArmor) {
               pkm.addSpikeArmor()
             } else {
               pkm.removeSpikeArmor()
             }
-          } else if (field == "magicBounce") {
+          } else if (field === "magicBounce") {
             if (pokemon.status.magicBounce) {
               pkm.addMagicBounce()
             } else {
               pkm.removeMagicBounce()
             }
-          } else if (field == "electricField") {
+          } else if (field === "electricField") {
             if (pokemon.status.electricField) {
               pkm.addElectricField()
             } else {
               pkm.removeElectricField()
             }
-          } else if (field == "psychicField") {
+          } else if (field === "psychicField") {
             if (pokemon.status.psychicField) {
               pkm.addPsychicField()
             } else {
               pkm.removePsychicField()
             }
-          } else if (field == "grassField") {
+          } else if (field === "grassField") {
             if (pokemon.status.grassField) {
               pkm.addGrassField()
             } else {
               pkm.removeGrassField()
             }
-          } else if (field == "fairyField") {
+          } else if (field === "fairyField") {
             if (pokemon.status.fairyField) {
               pkm.addFairyField()
             } else {
               pkm.removeFairyField()
             }
-          } else if (field == "enraged") {
+          } else if (field === "enraged") {
             if (pokemon.status.enraged) {
               pkm.addRageEffect()
             }
@@ -310,8 +328,8 @@ export default class BattleManager {
     simulationId: string,
     pokemon: IPokemonEntity,
     field: NonFunctionPropNames<Count>,
-    value: any,
-    previousValue: any
+    value: number,
+    previousValue: number
   ) {
     // logger.debug(field, value);
     if (this.simulation?.id == simulationId && this.group) {
@@ -499,20 +517,6 @@ export default class BattleManager {
             if (value != 0) {
               this.displayManaBurn(pkm.x, pkm.y)
             }
-          } else if (field == "staticCount") {
-            if (value != 0) {
-              displayAbility(
-                this.scene,
-                [],
-                "STATIC",
-                pkm.orientation,
-                pkm.positionX,
-                pkm.positionY,
-                pkm.targetX ?? -1,
-                pkm.targetY ?? -1,
-                this.flip
-              )
-            }
           } else if (field === "healOrderCount") {
             if (value != 0) {
               displayAbility(
@@ -583,12 +587,12 @@ export default class BattleManager {
     }
   }
 
-  changePokemon(
+  changePokemon<F extends keyof IPokemonEntity>(
     simulationId: string,
     pokemon: IPokemonEntity,
-    field: string,
-    value: any,
-    previousValue: any
+    field: F,
+    value: IPokemonEntity[F],
+    previousValue: IPokemonEntity[F]
   ) {
     if (this.simulation?.id == simulationId && this.group) {
       const children = this.group.getChildren()
@@ -633,24 +637,32 @@ export default class BattleManager {
             }
           } else if (field === "action") {
             pkm.action = pokemon.action
-            this.animationManager.animatePokemon(pkm, value, this.flip)
+            this.animationManager.animatePokemon(
+              pkm,
+              value as IPokemonEntity["action"],
+              this.flip
+            )
           } else if (field == "critChance") {
             pkm.critChance = pokemon.critChance
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
               pkm.detail.critChance.textContent =
                 pokemon.critChance.toString() + "%"
             }
-          } else if (field === "critDamage") {
-            pkm.critDamage = parseFloat(pokemon.critDamage.toFixed(2))
+          } else if (field === "critPower") {
+            pkm.critPower = parseFloat(pokemon.critPower.toFixed(2))
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-              pkm.detail.critDamage.textContent = pokemon.critDamage.toFixed(2)
+              pkm.detail.critPower.textContent = pokemon.critPower.toFixed(2)
             }
           } else if (field === "ap") {
             value > previousValue &&
               this.displayBoost(Stat.AP, pkm.positionX, pkm.positionY)
             pkm.ap = pokemon.ap
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-              pkm.detail.updateValue(pkm.detail.ap, previousValue, value)
+              pkm.detail.updateValue(
+                pkm.detail.ap,
+                previousValue as IPokemonEntity["ap"],
+                value as IPokemonEntity["ap"]
+              )
               pkm.detail.updateAbilityDescription(pkm.skill, pkm.stars, pkm.ap)
               if (pokemon.passive != Passive.NONE) {
                 pkm.detail.updatePassiveDescription(
@@ -688,33 +700,53 @@ export default class BattleManager {
             pkm.pp = pokemon.pp
             pkm.powerbar?.setAmount(pkm.pp)
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-              pkm.detail.updateValue(pkm.detail.pp, previousValue, value)
+              pkm.detail.updateValue(
+                pkm.detail.pp,
+                previousValue as IPokemonEntity["pp"],
+                value as IPokemonEntity["pp"]
+              )
             }
           } else if (field === "atk") {
             value > previousValue &&
               this.displayBoost(Stat.ATK, pkm.positionX, pkm.positionY)
             pkm.atk = pokemon.atk
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-              pkm.detail.updateValue(pkm.detail.atk, previousValue, value)
+              pkm.detail.updateValue(
+                pkm.detail.atk,
+                previousValue as IPokemonEntity["atk"],
+                value as IPokemonEntity["atk"]
+              )
             }
           } else if (field === "def") {
             value > previousValue &&
               this.displayBoost(Stat.DEF, pkm.positionX, pkm.positionY)
             pkm.def = pokemon.def
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-              pkm.detail.updateValue(pkm.detail.def, previousValue, value)
+              pkm.detail.updateValue(
+                pkm.detail.def,
+                previousValue as IPokemonEntity["def"],
+                value as IPokemonEntity["def"]
+              )
             }
           } else if (field === "speDef") {
             value > previousValue &&
               this.displayBoost(Stat.SPE_DEF, pkm.positionX, pkm.positionY)
             pkm.speDef = pokemon.speDef
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-              pkm.detail.updateValue(pkm.detail.speDef, previousValue, value)
+              pkm.detail.updateValue(
+                pkm.detail.speDef,
+                previousValue as IPokemonEntity["speDef"],
+                value as IPokemonEntity["speDef"]
+              )
             }
           } else if (field === "range") {
             pkm.range = pokemon.range
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-              pkm.detail.updateValue(pkm.detail.range, previousValue, value)
+              pkm.detail.updateValue(
+                pkm.detail.range,
+                previousValue as IPokemonEntity["range"],
+                value as IPokemonEntity["range"]
+              )
             }
           } else if (field === "targetX") {
             if (pokemon.targetX >= 0) {
@@ -730,22 +762,22 @@ export default class BattleManager {
             }
           } else if (field === "team") {
             if (pkm.lifebar) {
-              pkm.lifebar.setTeam(value, this.flip)
+              pkm.lifebar.setTeam(value as IPokemonEntity["team"], this.flip)
             }
           } else if (field === "index") {
-            pkm.index = value
+            pkm.index = value as IPokemonEntity["index"]
             this.animationManager.animatePokemon(
               pkm,
               PokemonActionState.IDLE,
               this.flip
             )
           } else if (field === "skill") {
-            pkm.skill = value
+            pkm.skill = value as IPokemonEntity["skill"]
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
               pkm.detail.updateAbilityDescription(pkm.skill, pkm.stars, pkm.ap)
             }
           } else if (field === "stars") {
-            pkm.stars = value
+            pkm.stars = value as IPokemonEntity["stars"]
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
               pkm.detail.updateAbilityDescription(pkm.skill, pkm.stars, pkm.ap)
             }
@@ -1091,6 +1123,26 @@ export default class BattleManager {
       })
     }
 
+    if (event.type === BoardEvent.SPIKES) {
+      const sprite = this.scene.add.sprite(
+        coordinates[0],
+        coordinates[1],
+        "abilities",
+        "SPIKES/001.png"
+      )
+      sprite.setDepth(1)
+      sprite.setScale(1, 1)
+      this.boardEventSprites[index] = sprite
+      this.group.add(sprite)
+
+      this.scene.tweens.add({
+        targets: sprite,
+        alpha: 1,
+        duration: 200,
+        delay: 500
+      })
+    }
+
     if (event.type === BoardEvent.STICKY_WEB) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
@@ -1110,6 +1162,26 @@ export default class BattleManager {
         alpha: 0.4,
         duration: 1000,
         delay: (8 - coordinates[1]) * 100
+      })
+    }
+
+    if (event.type === BoardEvent.HAIL) {
+      const sprite = this.scene.add.sprite(
+        coordinates[0],
+        coordinates[1],
+        "abilities",
+        `${Effect.HAIL}/000.png`
+      )
+      sprite.setDepth(7).setScale(1).setAlpha(0)
+      sprite.anims.play(Effect.HAIL)
+      this.boardEventSprites[index] = sprite
+      this.group.add(sprite)
+
+      this.scene.tweens.add({
+        targets: sprite,
+        alpha: 1,
+        duration: 200,
+        delay: 800
       })
     }
   }
@@ -1147,8 +1219,8 @@ export default class BattleManager {
         type === AttackType.PHYSICAL
           ? "#e76e55"
           : type === AttackType.SPECIAL
-          ? "#209cee"
-          : "#f7d51d"
+            ? "#209cee"
+            : "#f7d51d"
       this.displayTween(color, coordinates, index, damage)
       this.displayHit(coordinates[0], coordinates[1])
     }
@@ -1184,12 +1256,12 @@ export default class BattleManager {
       amount < 10
         ? "20px"
         : amount < 20
-        ? "25px"
-        : amount < 30
-        ? "30px"
-        : amount < 50
-        ? "35px"
-        : "40px"
+          ? "25px"
+          : amount < 30
+            ? "30px"
+            : amount < 50
+              ? "35px"
+              : "40px"
     const textStyle = {
       fontSize: fontSize,
       fontFamily: "Verdana",

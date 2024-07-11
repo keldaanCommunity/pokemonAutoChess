@@ -6,7 +6,7 @@ import { distanceC } from "../utils/distance"
 import { logger } from "../utils/logger"
 import { OrientationArray, OrientationVector } from "../utils/orientation"
 import { pickRandomIn } from "../utils/random"
-import { PokemonEntity, getStrongestUnit } from "./pokemon-entity"
+import { PokemonEntity } from "./pokemon-entity"
 
 export type Cell = {
   x: number
@@ -330,12 +330,5 @@ export default class Board {
     if (y >= 0 && y < this.rows && x >= 0 && x < this.columns) {
       return this.effects[this.columns * y + x]
     }
-  }
-
-  getStrongestUnitOnBoard(team?: number): PokemonEntity | undefined {
-    const candidates = this.cells.filter(
-      (cell) => cell && (cell.team === team || team === undefined)
-    ) as PokemonEntity[]
-    return getStrongestUnit(candidates)
   }
 }

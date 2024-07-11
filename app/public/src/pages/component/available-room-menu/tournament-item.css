@@ -12,11 +12,15 @@
   gap: 0.5em;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.5em;
+  border-radius: 12px;
+  border: var(--border-thin);
+  background-color: var(--color-bg-primary);
+  overflow: hidden;
+  margin-bottom: 0.25em;
 }
 
 .tournament-item .player-box.eliminated {
-  background-color: #61738a;
+  background-color: var(--color-bg-secondary);
   color: #ccc;
 }
 
@@ -25,7 +29,7 @@
 }
 
 .tournament-item .player-box.myself {
-  background-color: #1195ec;
+  background-color: var(--color-bg-accent);
 }
 
 .tournament-item .player-box span {
@@ -36,10 +40,11 @@
 
 .tournament-item .player-ranks {
   display: block;
+  min-width: 2ch;
 }
 
 .tournament-item p {
-  margin: 0.5em 0;
+  margin: 0;
   flex: 1;
 }
 

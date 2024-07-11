@@ -28,11 +28,13 @@ const itemsStatistic = new Schema({
   ]
 })
 
-export default model<IItemsStatistic>(
+export const ItemsStatistics = model<IItemsStatistic>(
   "ItemsStatistic",
   itemsStatistic,
   "items-statistic"
 )
+
+export default ItemsStatistics
 
 export async function fetchMetaItems(): Promise<IItemsStatistic[]> {
   return fetch("/meta/items").then((res) => res.json())

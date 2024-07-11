@@ -65,7 +65,9 @@ export default function RoomMenu(props: {
 
   const navigate = useNavigate()
 
-  const createRoom = throttle(async function create() {
+  const createRoom = throttle(async function create(
+    gameMode = GameMode.NORMAL
+  ) {
     if (lobby && !props.toPreparation && !isJoining) {
       setJoining(true)
       const user = firebase.auth().currentUser
@@ -76,10 +78,13 @@ export default function RoomMenu(props: {
         const room: Room<PreparationState> = await client.create(
           "preparation",
           {
-            gameMode: GameMode.NORMAL,
+            gameMode,
             idToken: token,
             ownerId: uid,
-            roomName: `${name}'${name.endsWith("s") ? "" : "s"} room`
+            roomName:
+              gameMode === GameMode.QUICKPLAY
+                ? "Quick play"
+                : `${name}'${name.endsWith("s") ? "" : "s"} room`
           }
         )
         await lobby.leave()
@@ -98,17 +103,21 @@ export default function RoomMenu(props: {
   const joinPrepRoom = throttle(async function join(
     selectedRoom: RoomAvailable<IPreparationMetadata>
   ) {
+    const { whitelist, blacklist, gameStarted, password } =
+      selectedRoom.metadata ?? {}
     if (
       selectedRoom.clients >= MAX_PLAYERS_PER_GAME ||
-      selectedRoom.metadata?.gameStarted === true ||
-      (selectedRoom.metadata?.whitelist &&
-        selectedRoom.metadata?.whitelist.includes(uid) === false)
+      gameStarted === true ||
+      (whitelist &&
+        whitelist.length > 0 &&
+        whitelist.includes(uid) === false) ||
+      (blacklist && blacklist.length > 0 && blacklist.includes(uid) === true)
     ) {
       return
     }
 
     if (lobby && !props.toPreparation && !isJoining) {
-      if (selectedRoom.metadata?.password) {
+      if (password) {
         const lobbyUser = lobbyUsers.find((u) => u.id === uid)
         if (lobbyUser && lobbyUser.role === Role.BASIC) {
           const password = prompt(`This room is private. Enter password`)
@@ -140,8 +149,18 @@ export default function RoomMenu(props: {
         }
       }
     }
-  },
-  1000)
+  }, 1000)
+
+  const quickPlay = throttle(async function quickPlay() {
+    const existingQuickPlayRoom = preparationRooms.find(
+      (room) => room.metadata?.gameMode === GameMode.QUICKPLAY
+    )
+    if (existingQuickPlayRoom) {
+      joinPrepRoom(existingQuickPlayRoom)
+    } else {
+      createRoom(GameMode.QUICKPLAY)
+    }
+  }, 1000)
 
   const joinGame = throttle(async function joinGame(
     selectedRoom: RoomAvailable<IGameMetadata>,
@@ -169,8 +188,7 @@ export default function RoomMenu(props: {
         navigate("/game")
       }
     }
-  },
-  1000)
+  }, 1000)
 
   return (
     <Tabs className="my-container room-menu custom-bg">
@@ -187,11 +205,6 @@ export default function RoomMenu(props: {
         {user ? (
           <>
             <SpecialGameCountdown />
-            {preparationRooms.length === 0 && (
-              <p className="subtitle">
-                {isFreshNewUser ? t("join_a_game") : t("click_on_create_room")}
-              </p>
-            )}
             <ul className="hidden-scrollable">
               {preparationRooms.map((r) => (
                 <li key={r.roomId}>
@@ -200,11 +213,17 @@ export default function RoomMenu(props: {
               ))}
             </ul>
             <button
-              onClick={createRoom}
-              disabled={isFreshNewUser}
+              onClick={quickPlay}
               className="bubbly green create-room-button"
             >
-              {t("create_room")}
+              {t("quick_play")}
+            </button>
+            <button
+              onClick={() => createRoom()}
+              disabled={isFreshNewUser}
+              className="bubbly blue create-room-button"
+            >
+              {t("create_custom_room")}
             </button>
           </>
         ) : (

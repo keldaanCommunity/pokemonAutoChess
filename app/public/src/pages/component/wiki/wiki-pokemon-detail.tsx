@@ -1,7 +1,7 @@
 import React, { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import PokemonFactory from "../../../../../models/pokemon-factory"
-import { getPokemonData } from "../../../../../models/precomputed"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { RarityColor } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Stat } from "../../../../../types/enum/Game"
@@ -33,7 +33,7 @@ export default function WikiPokemonDetail(props: { pokemon: Pkm }) {
     [Stat.RANGE]: "range",
     [Stat.SPE_DEF]: "speDef",
     [Stat.CRIT_CHANCE]: "critChance",
-    [Stat.CRIT_DAMAGE]: "critDamage",
+    [Stat.CRIT_POWER]: "critPower",
     [Stat.ATK_SPEED]: "atkSpeed",
     [Stat.PP]: "maxPP",
     [Stat.AP]: "ap",
@@ -54,6 +54,8 @@ export default function WikiPokemonDetail(props: { pokemon: Pkm }) {
         <dd style={{ color: RarityColor[pokemonData.rarity] }}>
           {t(`rarity.${pokemonData.rarity}`)}
         </dd>
+        <dt>{t("pool_label")}</dt>
+        <dd>{t(`pool.${pokemonData.regional ? 'regional' : pokemonData.additional ? 'additional' : 'regular'}`)}</dd>
         <dt style={{ verticalAlign: "middle" }}>{t("tier")}</dt>
         <dd>
           {Array.from({ length: pokemonData.stars }, (_, i) => (
