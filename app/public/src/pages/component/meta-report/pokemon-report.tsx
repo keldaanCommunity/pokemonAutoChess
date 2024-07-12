@@ -40,7 +40,6 @@ export function PokemonReport() {
     }))
   }, [metaPokemons, pokemonRankingBy])
 
-  console.log(sortedMetaPokemons)
   return (
     <div id="pokemon-report">
       <header>

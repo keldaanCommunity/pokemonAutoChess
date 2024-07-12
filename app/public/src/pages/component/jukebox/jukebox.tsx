@@ -28,7 +28,6 @@ export default function Jukebox(props: {
   useEffect(() => {
     if (musicPlaying !== music && !loading) {
       setMusic(musicPlaying)
-      console.log("updated music to", musicPlaying)
     }
   }, [music, musicPlaying, loading])
 

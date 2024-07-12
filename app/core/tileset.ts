@@ -8,6 +8,7 @@ import {
   TilesetExchangeFile
 } from "../types/Config"
 import { DungeonPMDO } from "../types/enum/Dungeon"
+import { logger } from "../utils/logger"
 import { pickRandomIn } from "../utils/random"
 import { TileMapping } from "./design"
 
@@ -99,7 +100,7 @@ export default class Tileset {
         }
       )
     } else {
-      console.log("error with layer id", layerId)
+      logger.warn("error with layer id", layerId)
     }
 
     return mappedAnimations

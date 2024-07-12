@@ -30,7 +30,6 @@ export default function GameFiles() {
       //listen to messages
       navigator.serviceWorker.onmessage = (event) => {
         if (event.data && event.data.type === "CACHE_STATUS") {
-          console.log("Service worker responded", event.data)
           setVersion(event.data.version)
           setCached(event.data.cached)
           askingSW.current = false
