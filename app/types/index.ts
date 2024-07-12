@@ -440,7 +440,8 @@ export interface IDps {
     physicalDamage: number,
     specialDamage: number,
     trueDamage: number,
-    hpDamageTaken: number,
+    physicalDamageReduced: number,
+    specialDamageReduced: number,
     shieldDamageTaken: number,
     heal: number,
     shield: number
@@ -450,7 +451,8 @@ export interface IDps {
   physicalDamage: number
   specialDamage: number
   trueDamage: number
-  hpDamageTaken: number
+  physicalDamageReduced: number
+  specialDamageReduced: number
   shieldDamageTaken: number
   heal: number
   shield: number
@@ -530,7 +532,8 @@ export interface IPokemonEntity {
   physicalDamage: number
   specialDamage: number
   trueDamage: number
-  hpDamageTaken: number
+  physicalDamageReduced: number
+  specialDamageReduced: number
   shieldDamageTaken: number
   shieldDone: number
   positionX: number

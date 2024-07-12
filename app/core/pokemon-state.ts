@@ -220,6 +220,12 @@ export default class PokemonState {
 
       reducedDamage = min(1)(reducedDamage) // should deal 1 damage at least
 
+      if (attackType === AttackType.PHYSICAL) {
+        pokemon.physicalDamageReduced += min(0)(damage - reducedDamage)
+      } else if (attackType === AttackType.SPECIAL) {
+        pokemon.specialDamageReduced += min(0)(damage - reducedDamage)
+      }
+
       if (isNaN(reducedDamage)) {
         reducedDamage = 0
         logger.error(
@@ -250,9 +256,7 @@ export default class PokemonState {
         residualDamage = min(0)(reducedDamage - damageOnShield)
       }
 
-      const hpDamageTaken = Math.min(residualDamage, pokemon.life)
-      pokemon.hpDamageTaken += hpDamageTaken
-      takenDamage += hpDamageTaken
+      takenDamage += Math.min(residualDamage, pokemon.life)
 
       if (
         pokemon.items.has(Item.SHINY_CHARM) &&

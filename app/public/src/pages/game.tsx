@@ -431,7 +431,8 @@ export default function Game() {
               "trueDamage",
               "heal",
               "shield",
-              "hpDamageTaken",
+              "physicalDamageReduced",
+              "specialDamageReduced",
               "shieldDamageTaken"
             ]
             fields.forEach((field) => {

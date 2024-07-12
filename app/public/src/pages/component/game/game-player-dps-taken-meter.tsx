@@ -11,9 +11,12 @@ export default function GamePlayerDpsTakenMeter({
     () =>
       [...dpsMeter].sort((a, b) => {
         return (
-          b.hpDamageTaken +
+          b.physicalDamageReduced +
+          b.specialDamageReduced +
           b.shieldDamageTaken -
-          (a.hpDamageTaken + a.shieldDamageTaken)
+          (a.physicalDamageReduced +
+            a.specialDamageReduced +
+            a.shieldDamageTaken)
         )
       }),
     [dpsMeter]
@@ -24,13 +27,20 @@ export default function GamePlayerDpsTakenMeter({
     if (!firstDps) {
       return 0
     }
-    return firstDps.hpDamageTaken + firstDps.shieldDamageTaken
+    return (
+      firstDps.physicalDamageReduced +
+      firstDps.specialDamageReduced +
+      firstDps.shieldDamageTaken
+    )
   }, [sortedDamageTaken])
 
   const totalDamageTaken = useMemo(
     () =>
       sortedDamageTaken.reduce((acc, dps) => {
-        acc += dps.hpDamageTaken + dps.shieldDamageTaken
+        acc +=
+          dps.physicalDamageReduced +
+          dps.specialDamageReduced +
+          dps.shieldDamageTaken
         return acc
       }, 0),
     [sortedDamageTaken]

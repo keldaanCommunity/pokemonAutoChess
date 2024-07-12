@@ -76,11 +76,11 @@ export default function GameDpsMeter() {
                 alt={t("damage_dealt")}
               ></img>
             </Tab>
-            <Tab key="damage_taken">
+            <Tab key="damage_blocked">
               <img
                 src="assets/icons/SHIELD.png"
-                title={t("damage_taken")}
-                alt={t("damage_taken")}
+                title={t("damage_blocked")}
+                alt={t("damage_blocked")}
               ></img>
             </Tab>
             <Tab key="heal">
@@ -99,7 +99,7 @@ export default function GameDpsMeter() {
           </TabPanel>
 
           <TabPanel>
-            <p>{t("damage_taken")}</p>
+            <p>{t("damage_blocked")}</p>
             <GamePlayerDpsTakenMeter dpsMeter={myDpsMeter} />
             <GamePlayerDpsTakenMeter dpsMeter={opponentDpsMeter} />
           </TabPanel>
