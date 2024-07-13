@@ -1588,7 +1588,7 @@
     "SHELL_BELL": "Titular cura 33% de todos os danos infligidos",
     "LUCKY_EGG": "+40% AP para titular e aliados adjacentes na mesma linha",
     "AQUA_EGG": "O detentor ganha +50 de PP inicial e recupera 20 de PP após lançar sua habilidade",
-    "BLUE_ORB": "Cada terceiro ataque do titular libera uma corrente de raios que atinge os 3 inimigos que se aproximam, causando 10 SPECIAL e queimando 20 PP",
+    "BLUE_ORB": "Cada terceiro ataque do titular libera uma corrente de raios que atinge os 2 inimigos que se aproximam, causando 10 SPECIAL e queimando 20 PP",
     "SCOPE_LENS": "Acertos críticos roubam 15 de PP do alvo.",
     "STAR_DUST": "Após lançar a habilidade, ganhe 60% da PP máxima como SHIELD",
     "GREEN_ORB": "O titular e aliados adjacentes recuperam 4% do seu HP máximo a cada segundo",
