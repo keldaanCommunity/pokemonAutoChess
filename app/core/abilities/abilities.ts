@@ -2726,6 +2726,24 @@ export class WishStrategy extends AbilityStrategy {
   }
 }
 
+export class LunarBlessingStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+      if (ally && pokemon.team == ally.team && ally.life < ally.hp) {
+        ally.handleHeal(0.25 * pokemon.hp, pokemon, 1, crit)
+        ally.status.clearNegativeStatus()
+      }
+    })
+  }
+}
+
 export class NaturalGiftStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -9139,6 +9157,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DRACO_METEOR]: new DracoMeteorStrategy(),
   [Ability.BLAZE_KICK]: new BlazeKickStrategy(),
   [Ability.WISH]: new WishStrategy(),
+  [Ability.LUNAR_BLESSING]: new LunarBlessingStrategy(),
   [Ability.CALM_MIND]: new CalmMindStrategy(),
   [Ability.IRON_DEFENSE]: new IronDefenseStrategy(),
   [Ability.DEFENSE_CURL]: new DefenseCurlStrategy(),

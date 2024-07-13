@@ -973,7 +973,7 @@
     "ERUPTION": "Spara [15,25,40] proiettili in aria. Ogni proiettile infligge [30,50,70,SP] SPECIAL e BURN per 5 secondi",
     "LUSTER_PURGE": "Lancia una sfera di luce in linea retta che infligge [25,SP] SPECIAL due volte e abbassa due volte la SPE_DEF di tutti i nemici colpiti di 3",
     "MIST_BALL": "Lancia una bolla di nebbia in linea retta che infligge [25,SP] SPECIAL due volte e riduce del 30% i AP di tutti i nemici colpiti del doppio",
-    "MUD_BUBBLE": "Cura l'incantatore per [10,20,40,SP]",
+    "MUD_BUBBLE": "Cura l'incantatore per [10,20,40,SP] HP",
     "LINK_CABLE": "Scatta in un nuovo punto, quindi innesca un arco elettrico tra Plusle e Minun che infligge [50,SP] SPECIAL. Se Plusle o Minun sono soli, infligge invece questo danno ai nemici adiacenti.",
     "MAGIC_BOUNCE": "Per 5 secondi, ogni volta che questo Pokémon viene colpito da un'abilità, blocca i danni e riflette [50,100,SP]% SPECIAL sul lanciatore",
     "HIDDEN_POWER_A": "Genera 4 Abra in ogni angolo del tabellone",

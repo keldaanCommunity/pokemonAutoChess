@@ -1318,7 +1318,7 @@
     "ERUPTION": "Feuert [15,25,40] Projektile in die Luft ab. Jedes Projektil verursacht [30,50,70,SP] SPECIAL und BURN für 5 Sekunden",
     "LUSTER_PURGE": "Schleudert einen Lichtball in einer geraden Linie, der zweimal [25,SP] SPECIAL verursacht und die SPE_DEF aller getroffenen Feinde um 3 verringert",
     "MIST_BALL": "Startet eine Nebelblase in einer geraden Linie, die zweimal [25,SP] SPECIAL verursacht und die AP aller getroffenen Feinde um das Doppelte um 30 % senkt.",
-    "MUD_BUBBLE": "Heilt den Zaubernden um [10,20,40,SP]",
+    "MUD_BUBBLE": "Heilt den Zaubernden um [10,20,40,SP] HP",
     "LINK_CABLE": "Springt an einen neuen Ort und löst dann einen elektrischen Lichtbogen zwischen Plusle und Minun aus, der [50,SP] SPECIAL verursacht. Wenn Plusle oder Minun allein sind, fügt er diesen Schaden stattdessen benachbarten Feinden zu.",
     "MAGIC_BOUNCE": "Immer wenn dieses Pokémon von einer Fähigkeit getroffen wird, blockt es 5 Sekunden lang Schaden und reflektiert [50,100,SP]% SPECIAL an den Zauberer",
     "HIDDEN_POWER_A": "Generiere 4 Abra an jeder Ecke des Spielbretts",

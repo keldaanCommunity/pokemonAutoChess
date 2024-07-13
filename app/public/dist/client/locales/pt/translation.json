@@ -1206,7 +1206,7 @@
     "ERUPTION": "Dispara projéteis [15,25,40] no ar. Cada projétil causa [30,50,70,SP] SPECIAL e BURN por 5 segundos",
     "LUSTER_PURGE": "Lança uma bola de luz em linha reta que causa [25,SP] SPECIAL duas vezes e reduz duas vezes a SPE_DEF de todos os inimigos atingidos por 3",
     "MIST_BALL": "Lança uma bolha de névoa em linha reta que causa [25,SP] SPECIAL duas vezes e reduz em 30% o AP de todos os inimigos atingidos",
-    "MUD_BUBBLE": "Cura o lançador em [10,20,40,SP]",
+    "MUD_BUBBLE": "Cura o lançador em [10,20,40,SP] HP",
     "LINK_CABLE": "Corra para um novo local e acione um arco elétrico entre Plusle e Minun que causa [50,SP] SPECIAL. Se Plusle ou Minun estiverem sozinhos, causa esse dano aos inimigos adjacentes.",
     "MAGIC_BOUNCE": "Por 5 segundos, sempre que este Pokémon for atingido por uma habilidade, ele bloqueia o dano e reflete [50,100,SP]% SPECIAL para o lançador",
     "HIDDEN_POWER_A": "Gere 4 Abra em cada canto do tabuleiro",

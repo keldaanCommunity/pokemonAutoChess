@@ -972,7 +972,7 @@
     "ERUPTION": "Vuurt [15,25,40] projectielen af in de lucht. Elk projectiel behandelt [30,50,70,SP] SPECIAL en BURN gedurende 5 seconden",
     "LUSTER_PURGE": "Lanceert een lichtbal in een rechte lijn die tweemaal [25,SP] SPECIAL uitdeelt en tweemaal de SPE_DEF verlaagt van alle vijanden die met 3 worden geraakt",
     "MIST_BALL": "Lanceert een mistbel in een rechte lijn die twee keer [25,SP] SPECIAL uitdeelt en het AP van alle geraakte vijanden tweemaal met 30% verlaagt",
-    "MUD_BUBBLE": "Geneest de caster voor [10,20,40,SP]",
+    "MUD_BUBBLE": "Geneest de caster voor [10,20,40,SP] HP",
     "LINK_CABLE": "Storm naar een nieuwe plek en veroorzaakt een elektrische boog tussen Plusle en Minun die [50,SP] SPECIAL uitdeelt. Als Plusle of Minun alleen zijn, brengt hij deze schade in plaats daarvan toe aan aangrenzende vijanden.",
     "MAGIC_BOUNCE": "Gedurende 5 seconden, telkens wanneer deze Pokémon wordt geraakt door een vaardigheid, blokkeert hij de schade en reflecteert hij [50,100,SP]% SPECIAL voor de caster",
     "HIDDEN_POWER_A": "Spawn 4 Abra op elke hoek van het bord",

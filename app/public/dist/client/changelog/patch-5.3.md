@@ -35,6 +35,7 @@
 - Tapu Lele now only shows up on Psychic portal symbols
 - Buff Spectrier: PP 100 → 80
 - Mew has been moved to Legendary rarity group
+- New ability for Cresselia: Lunar Blessing: heal 15% HP of user and all allies and clear their negative status
 
 # Changes to Synergies
 

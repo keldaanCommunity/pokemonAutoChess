@@ -6260,9 +6260,9 @@ export class Cresselia extends Pokemon {
   atk = 15
   def = 5
   speDef = 5
-  maxPP = 60
+  maxPP = 100
   range = 3
-  skill = Ability.WISH
+  skill = Ability.LUNAR_BLESSING
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
