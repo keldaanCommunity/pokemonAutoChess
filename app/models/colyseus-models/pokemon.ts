@@ -5936,9 +5936,9 @@ export class Uxie extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 18
-  def = 3
-  speDef = 3
+  atk = 15
+  def = 5
+  speDef = 5
   maxPP = 90
   range = 3
   skill = Ability.KNOWLEDGE_THIEF
@@ -5950,9 +5950,9 @@ export class Mesprit extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 18
-  def = 3
-  speDef = 3
+  atk = 16
+  def = 4
+  speDef = 4
   maxPP = 90
   range = 3
   skill = Ability.SONG_OF_DESIRE
@@ -5969,7 +5969,7 @@ export class Azelf extends Pokemon {
   speDef = 3
   maxPP = 90
   range = 3
-  skill = Ability.CONFUSING_MIND
+  skill = Ability.NASTY_PLOT
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 

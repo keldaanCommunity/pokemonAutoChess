@@ -814,9 +814,9 @@
   "ability_description": {
     "SOFT_BOILED": "すべての状態異常を治し、味方全員に[20,40,80,SP]のSHIELDを与える",
     "EARTHQUAKE": "攻撃側と同じ列/列の敵ユニット全員に[120,SP]SPECIALダメージを与える",
-    "SONG_OF_DESIRE": "CHARM [3,SP] 秒間、後衛の対戦相手 2 人に",
+    "SONG_OF_DESIRE": "後衛の敵2人を3秒間CHARM状態にし、ATKを[3,SP]減少させる",
     "CONFUSING_MIND": "CONFUSION [3,SP] 秒間、後衛の対戦相手 2 人に",
-    "KNOWLEDGE_THIEF": "究極のターゲットを発射する",
+    "KNOWLEDGE_THIEF": "ターゲットの能力を使用します。プレイヤーは 1 XP を獲得します。",
     "KING_SHIELD": "ユーザーを1.5秒間 PROTECT し、[10,20,30,SP] SHIELD を獲得し、最も遠い敵ポケモンと位置を交換します",
     "EXPLOSION": "隣接する敵全員に[50,100,200,SP]SPECIALを与える。使用者にも損害を与えます。",
     "NIGHTMARE": "[1.5,3,8]秒間、敵チーム全体にSILENCEを与える。SLEEP、FLINCH、または既にSILENCE状態の相手には、[25,50,100,SP]の特殊ダメージを与える。",

@@ -332,6 +332,7 @@ export class SongOfDesireStrategy extends AbilityStrategy {
           pokemon,
           true
         )
+        targetCharmed.addAttack(-3, pokemon, 1, crit)
       }
     }
   }
@@ -407,6 +408,9 @@ export class KnowledgeThiefStrategy extends AbilityStrategy {
         target,
         crit
       )
+    }
+    if (pokemon.player) {
+      pokemon.player.experienceManager.addExperience(1)
     }
   }
 }
