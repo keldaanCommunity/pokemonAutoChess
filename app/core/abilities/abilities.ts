@@ -3796,6 +3796,22 @@ export class NastyPlotStrategy extends AbilityStrategy {
   }
 }
 
+export class TakeHeartStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    pokemon.addAttack(8, pokemon, 1, crit)
+    pokemon.addSpecialDefense(4, pokemon, 1, crit)
+    pokemon.status.clearNegativeStatus()
+    pokemon.cooldown = 250
+  }
+}
+
 export class SpectralThiefStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -9423,5 +9439,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MOON_DREAM]: new MoonDreamStrategy(),
   [Ability.STONE_AXE]: new StoneAxeStrategy(),
   [Ability.CAMERA_FLASH]: new CameraFlashStrategy(),
-  [Ability.ROCK_HEAD]: new RockHeadStrategy()
+  [Ability.ROCK_HEAD]: new RockHeadStrategy(),
+  [Ability.TAKE_HEART]: new TakeHeartStrategy()
 }

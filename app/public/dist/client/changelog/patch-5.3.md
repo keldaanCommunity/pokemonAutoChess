@@ -22,6 +22,7 @@
 - Buff Uxie: Def/Spedef ~~3~~ 6 ; Knowledge Thief: now also give +1 XP to player
 - Buff Azelf: Attack ~~15~~ 18 ; new ability: Nasty plot
 - Buff Mesprit: Attack ~~15~~ 16, Def/Spedef ~~3~~ 4 ; Song of Desire: now also reduce attack by 10%
+- New ability for Phione/Manaphy: Take heart: heal negative status and gain 8 Attack and 4 Special Defense
 - Nerf Poison Jab (Gligar): Poison for ~~4~~ 3 seconds
 - Nerf Mega Camerupt: Eruption damage: ~~100~~ 70 per projectile
 - Hippopotas line is now Ground/Normal instead of Ground/Rock

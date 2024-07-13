@@ -5768,7 +5768,7 @@ export class Phione extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 3
-  skill = Ability.NASTY_PLOT
+  skill = Ability.TAKE_HEART
   passive = Passive.PHIONE
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
@@ -5787,7 +5787,7 @@ export class Manaphy extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 3
-  skill = Ability.NASTY_PLOT
+  skill = Ability.TAKE_HEART
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
