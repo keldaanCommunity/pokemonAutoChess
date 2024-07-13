@@ -2310,7 +2310,7 @@
   "close": "Schließen",
   "additional_pokemon_hint": "Jeder Spieler wählte zusätzliche Pokémon aus, die im All-Player-Shop für dieses Spiel verfügbar sein sollten.",
   "damage_dealt": "Schaden",
-  "damage_taken": "Schaden erlitten",
+  "damage_blocked": "Schaden blockiert",
   "heal_shield": "Heilung und Schild gegeben",
   "lvl": "Lvl",
   "lose_game_hint": "Sie verlieren das Spiel, wenn Sie keine Gesundheitspunkte mehr haben",

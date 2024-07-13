@@ -1,5 +1,6 @@
 import React from "react"
 import ProgressBar from "react-bootstrap/ProgressBar"
+import { useTranslation } from "react-i18next"
 import { IDps } from "../../../../../types"
 import { getAvatarSrc } from "../../../utils"
 
@@ -7,6 +8,7 @@ export default function GameDpsHeal(props: {
   maxHeal: number
   dpsMeter: IDps
 }) {
+  const { t } = useTranslation()
   return (
     <div className="game-dps-bar">
       <img
@@ -21,12 +23,14 @@ export default function GameDpsHeal(props: {
             max={props.maxHeal}
             now={props.dpsMeter.heal}
             key="heal"
+            title={`${t("hp_healed")}: ${props.dpsMeter.heal}`}
           />
           <ProgressBar
             style={{ backgroundColor: "#8d8d8d" }}
             max={props.maxHeal}
             now={props.dpsMeter.shield}
             key="shield"
+            title={`${t("shield_given")}: ${props.dpsMeter.shield}`}
           />
         </ProgressBar>
       </div>

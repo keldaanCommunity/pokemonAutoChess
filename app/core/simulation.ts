@@ -1308,7 +1308,8 @@ export default class Simulation extends Schema implements ISimulation {
           pkm.physicalDamage,
           pkm.specialDamage,
           pkm.trueDamage,
-          pkm.hpDamageTaken,
+          pkm.physicalDamageReduced,
+          pkm.specialDamageReduced,
           pkm.shieldDamageTaken,
           pkm.healDone,
           pkm.shieldDone
@@ -1332,7 +1333,8 @@ export default class Simulation extends Schema implements ISimulation {
           pkm.physicalDamage,
           pkm.specialDamage,
           pkm.trueDamage,
-          pkm.hpDamageTaken,
+          pkm.physicalDamageReduced,
+          pkm.specialDamageReduced,
           pkm.shieldDamageTaken,
           pkm.healDone,
           pkm.shieldDone

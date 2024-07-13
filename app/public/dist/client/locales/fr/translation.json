@@ -2546,7 +2546,7 @@
   "additional_pokemon_hint": "Chaque joueur choisit des Pokémon supplémentaires qui seront disponibles dans le magasin de tous les joueurs pour ce jeu.",
   "regional_pokemon_hint": "Après avoir voyagé vers une nouvelle région, vous rencontrerez de nouvelles espèces régionales de Pokémons.",
   "damage_dealt": "Dégats infligés",
-  "damage_taken": "Dégats reçus",
+  "damage_blocked": "Dégats bloqués",
   "heal_shield": "Soin et Bouclier donnés",
   "lvl": "Niv",
   "lose_game_hint": "Vous perdez la partie lorsque vous n'avez plus de points de vie",
