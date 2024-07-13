@@ -182,6 +182,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.status.tree = true
       this.toIdleState()
     }
+
+    if (this.passive === Passive.SLOW_START) {
+      this.atkSpeed -= 0.25
+    }
   }
 
   update(

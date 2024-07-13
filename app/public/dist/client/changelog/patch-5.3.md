@@ -36,6 +36,7 @@
 - Buff Spectrier: PP 100 → 80
 - Mew has been moved to Legendary rarity group
 - New ability for Cresselia: Lunar Blessing: heal 15% HP of user and all allies and clear their negative status
+- New passive for Regigigas, Slow start: start at 0.5 attack speed. After first ability cast, gains 30% attack speed and 10 attack
 
 # Changes to Synergies
 

@@ -5169,6 +5169,7 @@ export class Regigigas extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.CRUSH_GRIP
+  passive = Passive.SLOW_START
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
