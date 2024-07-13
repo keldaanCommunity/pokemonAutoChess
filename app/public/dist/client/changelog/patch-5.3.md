@@ -31,6 +31,7 @@
 - Tapu Koko now only shows up on Electric portal symbols
 - Tapu Lele now only shows up on Psychic portal symbols
 - Buff Spectrier: PP 100 → 80
+- Mew has been moved to Legendary rarity group
 
 # Changes to Synergies
 

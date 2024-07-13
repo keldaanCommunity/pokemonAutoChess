@@ -5975,13 +5975,13 @@ export class Azelf extends Pokemon {
 
 export class Mew extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.PSYCHIC])
-  rarity = Rarity.UNIQUE
+  rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
-  atk = 16
-  def = 2
-  speDef = 2
-  maxPP = 80
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 50
   range = 4
   skill = Ability.TELEPORT
   passive = Passive.SYNCHRO
@@ -5998,7 +5998,7 @@ export class Mewtwo extends Pokemon {
   stars = 3
   hp = 200
   atk = 30
-  def = 2
+  def = 5
   speDef = 5
   maxPP = 110
   range = 3
