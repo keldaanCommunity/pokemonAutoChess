@@ -414,6 +414,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(3)
       break
 
+    case Ability.LUNAR_BLESSING:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
     case Ability.CALM_MIND:
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
@@ -2277,7 +2281,7 @@ export function displayAbility(
       {
         const startCoords = transformAttackCoordinate(targetX, 9, false)
         const specialProjectile = addAbilitySprite(skill, startCoords).setScale(
-          1
+          2
         )
         scene.tweens.add({
           targets: specialProjectile,

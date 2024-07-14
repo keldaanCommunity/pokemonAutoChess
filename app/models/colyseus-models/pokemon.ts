@@ -5169,6 +5169,7 @@ export class Regigigas extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.CRUSH_GRIP
+  passive = Passive.SLOW_START
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -5768,7 +5769,7 @@ export class Phione extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 3
-  skill = Ability.NASTY_PLOT
+  skill = Ability.TAKE_HEART
   passive = Passive.PHIONE
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
@@ -5787,7 +5788,7 @@ export class Manaphy extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 3
-  skill = Ability.NASTY_PLOT
+  skill = Ability.TAKE_HEART
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -5936,9 +5937,9 @@ export class Uxie extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 18
-  def = 3
-  speDef = 3
+  atk = 15
+  def = 5
+  speDef = 5
   maxPP = 90
   range = 3
   skill = Ability.KNOWLEDGE_THIEF
@@ -5950,9 +5951,9 @@ export class Mesprit extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 18
-  def = 3
-  speDef = 3
+  atk = 16
+  def = 4
+  speDef = 4
   maxPP = 90
   range = 3
   skill = Ability.SONG_OF_DESIRE
@@ -5969,19 +5970,19 @@ export class Azelf extends Pokemon {
   speDef = 3
   maxPP = 90
   range = 3
-  skill = Ability.CONFUSING_MIND
+  skill = Ability.NASTY_PLOT
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Mew extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.PSYCHIC])
-  rarity = Rarity.UNIQUE
+  rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
-  atk = 16
-  def = 2
-  speDef = 2
-  maxPP = 80
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 50
   range = 4
   skill = Ability.TELEPORT
   passive = Passive.SYNCHRO
@@ -5998,7 +5999,7 @@ export class Mewtwo extends Pokemon {
   stars = 3
   hp = 200
   atk = 30
-  def = 2
+  def = 5
   speDef = 5
   maxPP = 110
   range = 3
@@ -6260,9 +6261,9 @@ export class Cresselia extends Pokemon {
   atk = 15
   def = 5
   speDef = 5
-  maxPP = 60
+  maxPP = 100
   range = 3
-  skill = Ability.WISH
+  skill = Ability.LUNAR_BLESSING
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 

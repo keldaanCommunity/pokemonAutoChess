@@ -182,6 +182,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.status.tree = true
       this.toIdleState()
     }
+
+    if (this.passive === Passive.SLOW_START) {
+      this.atkSpeed -= 0.25
+    }
   }
 
   update(
@@ -542,7 +546,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.count.staticHolderCount++
       if (this.count.staticHolderCount > 2) {
         this.count.staticHolderCount = 0
-        const nbBounces = 3
+        const nbBounces = 2
         const closestEnemies = new Array<PokemonEntity>()
         board.forEach(
           (x: number, y: number, enemy: PokemonEntity | undefined) => {

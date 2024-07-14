@@ -332,6 +332,7 @@ export class SongOfDesireStrategy extends AbilityStrategy {
           pokemon,
           true
         )
+        targetCharmed.addAttack(-3, pokemon, 1, crit)
       }
     }
   }
@@ -407,6 +408,9 @@ export class KnowledgeThiefStrategy extends AbilityStrategy {
         target,
         crit
       )
+    }
+    if (pokemon.player) {
+      pokemon.player.experienceManager.addExperience(1)
     }
   }
 }
@@ -2722,6 +2726,24 @@ export class WishStrategy extends AbilityStrategy {
   }
 }
 
+export class LunarBlessingStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+      if (ally && pokemon.team == ally.team && ally.life < ally.hp) {
+        ally.handleHeal(0.25 * pokemon.hp, pokemon, 1, crit)
+        ally.status.clearNegativeStatus()
+      }
+    })
+  }
+}
+
 export class NaturalGiftStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -3788,6 +3810,22 @@ export class NastyPlotStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const buff = 10
     pokemon.addAttack(buff, pokemon, 1, crit)
+    pokemon.cooldown = 250
+  }
+}
+
+export class TakeHeartStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    pokemon.addAttack(8, pokemon, 1, crit)
+    pokemon.addSpecialDefense(4, pokemon, 1, crit)
+    pokemon.status.clearNegativeStatus()
     pokemon.cooldown = 250
   }
 }
@@ -9119,6 +9157,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DRACO_METEOR]: new DracoMeteorStrategy(),
   [Ability.BLAZE_KICK]: new BlazeKickStrategy(),
   [Ability.WISH]: new WishStrategy(),
+  [Ability.LUNAR_BLESSING]: new LunarBlessingStrategy(),
   [Ability.CALM_MIND]: new CalmMindStrategy(),
   [Ability.IRON_DEFENSE]: new IronDefenseStrategy(),
   [Ability.DEFENSE_CURL]: new DefenseCurlStrategy(),
@@ -9419,5 +9458,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MOON_DREAM]: new MoonDreamStrategy(),
   [Ability.STONE_AXE]: new StoneAxeStrategy(),
   [Ability.CAMERA_FLASH]: new CameraFlashStrategy(),
-  [Ability.ROCK_HEAD]: new RockHeadStrategy()
+  [Ability.ROCK_HEAD]: new RockHeadStrategy(),
+  [Ability.TAKE_HEART]: new TakeHeartStrategy()
 }
