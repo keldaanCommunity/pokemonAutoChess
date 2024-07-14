@@ -677,6 +677,7 @@ export default class Status extends Schema implements IStatus {
     if (
       !this.freeze && // freeze cannot be stacked
       !this.runeProtect &&
+      !this.skydiving &&
       !pkm.effects.has(Effect.IMMUNITY_FREEZE)
     ) {
       if (pkm.simulation.weather === Weather.SNOW) {
@@ -732,6 +733,7 @@ export default class Status extends Schema implements IStatus {
     if (
       !this.sleep &&
       !this.runeProtect &&
+      !this.skydiving &&
       !pkm.effects.has(Effect.IMMUNITY_SLEEP)
     ) {
       if (pkm.simulation.weather === Weather.NIGHT) {
