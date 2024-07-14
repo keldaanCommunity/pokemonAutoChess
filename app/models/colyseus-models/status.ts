@@ -10,7 +10,6 @@ import { Passive } from "../../types/enum/Passive"
 import { Weather } from "../../types/enum/Weather"
 import { max } from "../../utils/number"
 import { chance } from "../../utils/random"
-import { Pokemon } from "./pokemon"
 
 export default class Status extends Schema implements IStatus {
   @type("boolean") burn = false
@@ -1094,10 +1093,19 @@ export default class Status extends Schema implements IStatus {
       if (pkm.status.enraged) {
         duration = duration / 2
       }
+      
+      if (pkm.effects.has(Effect.SWIFT_SWIM)) {
+        duration *= 0.7
+      } else if (pkm.effects.has(Effect.HYDRATION)) {
+        duration *= 0.4
+      } else if (pkm.effects.has(Effect.WATER_VEIL)) {
+        duration *= 0.1
+      }
 
       this.locked = true
       this.lockedCooldown = Math.round(duration)
       pkm.range = 1
+      pkm.toIdleState()
     }
   }
 

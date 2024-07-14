@@ -9095,36 +9095,28 @@ export class FairyLockStrategy extends AbilityStrategy {
       target.positionX,
       target.positionY,
       true
-    )
-
-    let inhabitedCells = new Array<Cell>()
-    let enemiesHit = 0
-
+      ).filter((cell) => cell &&
+      cell.value && cell.value.team !== pokemon.team
+      )
+    
     cells.forEach((cell) => {
-      if (cell.value && cell.value.team !== pokemon.team){
-        inhabitedCells.push(cell)
-        enemiesHit += 1
-      }
-    })
-    inhabitedCells.forEach((cell) => {
-      if (cell.value && cell.value.team !== pokemon.team) {
         pokemon.simulation.room.broadcast(Transfer.ABILITY, {
           id: pokemon.simulation.id,
           skill: pokemon.skill,
-          targetX: cell.value.positionX,
-          targetY: cell.value.positionY
+          targetX: cell.value?.positionX,
+          targetY: cell.value?.positionY
         })
-        cell.value.handleSpecialDamage(
-          Math.round(90 / enemiesHit),
+        cell.value?.handleSpecialDamage(
+          Math.round(90 / cells.length),
           board,
           AttackType.SPECIAL,
           pokemon,
           crit
         )
-      }
+      
     })
     
-    target.status.triggerLocked(1500 * enemiesHit, target)
+    target.status.triggerLocked(3000, target)
   }
 }
 

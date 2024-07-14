@@ -25,7 +25,7 @@ export default class MovingState extends PokemonState {
         pokemon,
         board
       )
-      if (pokemon.status.charm && !pokemon.status.locked) {
+      if (pokemon.status.charm && pokemon.canMove) {
         if (
           pokemon.status.charmOrigin &&
           distanceC(
@@ -47,7 +47,7 @@ export default class MovingState extends PokemonState {
           pokemon,
           board
         )
-        if (targetAtSight && !pokemon.status.locked) {
+        if (targetAtSight && pokemon.canMove) {
           this.move(pokemon, board, targetAtSight)
         }
       }
