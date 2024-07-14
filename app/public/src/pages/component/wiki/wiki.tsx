@@ -13,10 +13,16 @@ import WikiTypes from "./wiki-types"
 import WikiWeather from "./wiki-weather"
 import "./wiki.css"
 
-export default function Wiki({ inGame = false }: { inGame: boolean }) {
+export default function Wiki({
+  inGame = false,
+  inSidebar = false,
+}: {
+  inGame: boolean
+  inSidebar?: boolean
+}) {
   const { t } = useTranslation()
   return (
-    <div id="wiki-page">
+    <div id="wiki-page" className={inSidebar ? "wiki-sidebar" : ""}>
       <div className="my-container">
         <Tabs>
           <TabList>
