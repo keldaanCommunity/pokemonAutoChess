@@ -1104,7 +1104,6 @@ export default class Status extends Schema implements IStatus {
       this.locked = true
       this.lockedCooldown = Math.round(duration)
       pkm.range = 1
-      pkm.toIdleState()
     }
   }
 

@@ -14106,7 +14106,7 @@ export class Klefki extends Pokemon {
   atk = 16
   def = 4
   speDef = 3
-  maxPP = 80
+  maxPP = 90
   range = 3
   skill = Ability.FAIRY_LOCK
   attackSprite = AttackSprite.FAIRY_RANGE
