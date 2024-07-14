@@ -9119,6 +9119,30 @@ export class RockHeadStrategy extends AbilityStrategy {
   }
 }
 
+export class CrushClawStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const defLoss = [-3, -6][pokemon.stars - 1] ?? -6
+    target.addDefense(defLoss, pokemon, 0, false)
+    for (let i = 0; i < 2; i++) {
+      target.handleSpecialDamage(
+        pokemon.atk,
+        board,
+        AttackType.PHYSICAL,
+        pokemon,
+        crit,
+        true
+      )
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -9459,5 +9483,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.STONE_AXE]: new StoneAxeStrategy(),
   [Ability.CAMERA_FLASH]: new CameraFlashStrategy(),
   [Ability.ROCK_HEAD]: new RockHeadStrategy(),
-  [Ability.TAKE_HEART]: new TakeHeartStrategy()
+  [Ability.TAKE_HEART]: new TakeHeartStrategy(),
+  [Ability.CRUSH_CLAW]: new CrushClawStrategy()
 }
