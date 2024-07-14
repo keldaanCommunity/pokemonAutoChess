@@ -414,6 +414,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(3)
       break
 
+    case Ability.LUNAR_BLESSING:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
     case Ability.CALM_MIND:
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
@@ -2281,7 +2285,7 @@ export function displayAbility(
       {
         const startCoords = transformAttackCoordinate(targetX, 9, false)
         const specialProjectile = addAbilitySprite(skill, startCoords).setScale(
-          1
+          2
         )
         scene.tweens.add({
           targets: specialProjectile,
@@ -2291,6 +2295,43 @@ export function displayAbility(
           duration: 500,
           onComplete: () => {
             specialProjectile.destroy()
+          }
+        })
+      }
+      break
+
+    case "TIDAL_WAVE":
+      {
+        const down = orientation === (flip ? Orientation.UP : Orientation.DOWN)
+        const startCoords = transformAttackCoordinate(3.6, -4, down)
+        const endCoords = transformAttackCoordinate(3.6, 10, down)
+        const wave = scene.add
+          .sprite(
+            startCoords[0],
+            startCoords[1],
+            "abilities",
+            `TIDAL_WAVE/00${targetY}.png`
+          )
+          .setOrigin(0.5, 0.5)
+          .setDepth(7)
+          .setScale(3)
+          .setAlpha(0)
+          .setRotation(down ? Math.PI : 0)
+        scene.tweens.add({
+          targets: wave,
+          x: endCoords[0],
+          y: endCoords[1],
+          ease: "linear",
+          duration: 1800,
+          onComplete: () => {
+            wave.destroy()
+          },
+          onUpdate: function (tween) {
+            if (tween.progress < 0.2) {
+              wave.setAlpha(tween.progress * 5)
+            } else if (tween.progress > 0.8) {
+              wave.setAlpha((1 - tween.progress) * 5)
+            }
           }
         })
       }

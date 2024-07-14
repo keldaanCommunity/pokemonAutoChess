@@ -28,7 +28,7 @@ export function BotSelectModal(props: { bots: IBot[] }) {
   }
 
   const botsListSorted = [...props.bots]
-    .filter((b) => b.name.includes(queryBot))
+    .filter((b) => b.name.toLowerCase().includes(queryBot.toLowerCase()))
     .sort(
       (a, b) =>
         (a[sortBotsCriteria] < b[sortBotsCriteria] ? -1 : 1) *

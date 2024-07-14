@@ -5169,6 +5169,7 @@ export class Regigigas extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.CRUSH_GRIP
+  passive = Passive.SLOW_START
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -5190,7 +5191,7 @@ export class Kyogre extends Pokemon {
 }
 
 export class Groudon extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.FIRE])
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.MONSTER])
   rarity = Rarity.LEGENDARY
   stars = 3
   evolution = Pkm.PRIMAL_GROUDON
@@ -5768,7 +5769,7 @@ export class Phione extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 3
-  skill = Ability.NASTY_PLOT
+  skill = Ability.TAKE_HEART
   passive = Passive.PHIONE
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
@@ -5787,7 +5788,7 @@ export class Manaphy extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 3
-  skill = Ability.NASTY_PLOT
+  skill = Ability.TAKE_HEART
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -5937,8 +5938,8 @@ export class Uxie extends Pokemon {
   stars = 3
   hp = 200
   atk = 15
-  def = 3
-  speDef = 3
+  def = 5
+  speDef = 5
   maxPP = 90
   range = 3
   skill = Ability.KNOWLEDGE_THIEF
@@ -5950,9 +5951,9 @@ export class Mesprit extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 15
-  def = 3
-  speDef = 3
+  atk = 16
+  def = 4
+  speDef = 4
   maxPP = 90
   range = 3
   skill = Ability.SONG_OF_DESIRE
@@ -5964,24 +5965,24 @@ export class Azelf extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 15
+  atk = 18
   def = 3
   speDef = 3
   maxPP = 90
   range = 3
-  skill = Ability.CONFUSING_MIND
+  skill = Ability.NASTY_PLOT
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Mew extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.PSYCHIC])
-  rarity = Rarity.UNIQUE
+  rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
-  atk = 16
-  def = 2
-  speDef = 2
-  maxPP = 80
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 50
   range = 4
   skill = Ability.TELEPORT
   passive = Passive.SYNCHRO
@@ -5998,7 +5999,7 @@ export class Mewtwo extends Pokemon {
   stars = 3
   hp = 200
   atk = 30
-  def = 2
+  def = 5
   speDef = 5
   maxPP = 110
   range = 3
@@ -6260,9 +6261,9 @@ export class Cresselia extends Pokemon {
   atk = 15
   def = 5
   speDef = 5
-  maxPP = 60
+  maxPP = 100
   range = 3
-  skill = Ability.WISH
+  skill = Ability.LUNAR_BLESSING
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
@@ -6310,13 +6311,17 @@ export class Torkoal extends Pokemon {
 }
 
 export class PrimalGroudon extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.FIRE])
+  types = new SetSchema<Synergy>([
+    Synergy.GROUND,
+    Synergy.MONSTER,
+    Synergy.FIRE
+  ])
   rarity = Rarity.LEGENDARY
   stars = 4
   hp = 400
   atk = 30
-  def = 10
-  speDef = 10
+  def = 8
+  speDef = 8
   maxPP = 100
   range = 1
   skill = Ability.EARTHQUAKE
@@ -10610,7 +10615,7 @@ export class Chingling extends Pokemon {
   evolution = Pkm.CHIMECHO
   evolutionRule = new ItemEvolutionRule([Item.STAR_DUST])
   hp = 150
-  atk = 8
+  atk = 10
   def = 2
   speDef = 4
   maxPP = 80
@@ -11066,7 +11071,7 @@ export class Spectrier extends Pokemon {
   atk = 30
   def = 5
   speDef = 10
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.ASTRAL_BARRAGE
   passive = Passive.GRIM_NEIGH
@@ -11876,7 +11881,7 @@ export class Kricketune extends Pokemon {
 }
 
 export class Hippopotas extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ROCK])
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.NORMAL])
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.HIPPODOWN
@@ -11893,7 +11898,7 @@ export class Hippopotas extends Pokemon {
 }
 
 export class Hippodown extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ROCK])
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.NORMAL])
   rarity = Rarity.EPIC
   stars = 2
   hp = 270
@@ -12405,11 +12410,9 @@ export class Comfey extends Pokemon {
       simulation.board.setValue(entity.positionX, entity.positionY, undefined)
       if (simulation.blueDpsMeter.has(entity.id)) {
         simulation.blueDpsMeter.delete(entity.id)
-        simulation.blueHealDpsMeter.delete(entity.id)
       }
       if (simulation.redDpsMeter.has(entity.id)) {
         simulation.redDpsMeter.delete(entity.id)
-        simulation.redHealDpsMeter.delete(entity.id)
       }
 
       nearestAllyWithFreeItemSlot.items.add(Item.COMFEY)

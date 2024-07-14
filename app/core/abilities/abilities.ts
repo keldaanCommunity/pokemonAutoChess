@@ -332,6 +332,7 @@ export class SongOfDesireStrategy extends AbilityStrategy {
           pokemon,
           true
         )
+        targetCharmed.addAttack(-3, pokemon, 1, crit)
       }
     }
   }
@@ -407,6 +408,9 @@ export class KnowledgeThiefStrategy extends AbilityStrategy {
         target,
         crit
       )
+    }
+    if (pokemon.player) {
+      pokemon.player.experienceManager.addExperience(1)
     }
   }
 }
@@ -1197,8 +1201,8 @@ export class PoisonJabStrategy extends AbilityStrategy {
         pokemon,
         crit
       )
-      farthestTarget.status.triggerPoison(4000, farthestTarget, pokemon)
-      pokemon.status.triggerPoison(4000, pokemon, pokemon)
+      farthestTarget.status.triggerPoison(3000, farthestTarget, pokemon)
+      pokemon.status.triggerPoison(3000, pokemon, pokemon)
       pokemon.moveTo(farthestTarget.positionX, farthestTarget.positionY, board)
     }
   }
@@ -2722,6 +2726,24 @@ export class WishStrategy extends AbilityStrategy {
   }
 }
 
+export class LunarBlessingStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+      if (ally && pokemon.team == ally.team && ally.life < ally.hp) {
+        ally.handleHeal(0.25 * pokemon.hp, pokemon, 1, crit)
+        ally.status.clearNegativeStatus()
+      }
+    })
+  }
+}
+
 export class NaturalGiftStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -3788,6 +3810,22 @@ export class NastyPlotStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const buff = 10
     pokemon.addAttack(buff, pokemon, 1, crit)
+    pokemon.cooldown = 250
+  }
+}
+
+export class TakeHeartStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    pokemon.addAttack(8, pokemon, 1, crit)
+    pokemon.addSpecialDefense(4, pokemon, 1, crit)
+    pokemon.status.clearNegativeStatus()
     pokemon.cooldown = 250
   }
 }
@@ -5076,7 +5114,7 @@ export class EruptionStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 1 ? 30 : pokemon.stars === 2 ? 50 : 100
+    const damage = [30, 50, 70][pokemon.stars - 1] ?? 30
     const numberOfProjectiles =
       pokemon.stars === 1 ? 15 : pokemon.stars === 2 ? 25 : 40
 
@@ -7169,7 +7207,7 @@ export class DoomDesireStrategy extends AbilityStrategy {
           true
         )
       } else {
-        pokemon.addPP(40, pokemon, 0, false)
+        pokemon.addPP(60, pokemon, 0, false)
       }
     }, 2000)
   }
@@ -9158,6 +9196,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DRACO_METEOR]: new DracoMeteorStrategy(),
   [Ability.BLAZE_KICK]: new BlazeKickStrategy(),
   [Ability.WISH]: new WishStrategy(),
+  [Ability.LUNAR_BLESSING]: new LunarBlessingStrategy(),
   [Ability.CALM_MIND]: new CalmMindStrategy(),
   [Ability.IRON_DEFENSE]: new IronDefenseStrategy(),
   [Ability.DEFENSE_CURL]: new DefenseCurlStrategy(),
@@ -9459,5 +9498,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.STONE_AXE]: new StoneAxeStrategy(),
   [Ability.CAMERA_FLASH]: new CameraFlashStrategy(),
   [Ability.ROCK_HEAD]: new RockHeadStrategy(),
+  [Ability.TAKE_HEART]: new TakeHeartStrategy(),
   [Ability.FAIRY_LOCK]: new FairyLockStrategy()
 }

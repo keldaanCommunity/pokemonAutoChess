@@ -19,6 +19,25 @@
 - Nerf Deoxys: HP ~~240~~ 220
 - Nerf Darkrai: HP ~~300~~ 250, Attack ~~30~~ 27
 - Nerf Empty Light: ~~40~~ 33 special damage
+- Groudon is now Ground/Monster ; Primal Groudon is now Ground/Monster/Fire ; Primal Groudon def/spedef: ~~10~~ 5
+- Buff Uxie: Def/Spedef ~~3~~ 6 ; Knowledge Thief: now also give +1 XP to player
+- Buff Azelf: Attack ~~15~~ 18 ; new ability: Nasty plot
+- Buff Mesprit: Attack ~~15~~ 16, Def/Spedef ~~3~~ 4 ; Song of Desire: now also reduce attack by 10%
+- New ability for Phione/Manaphy: Take heart: heal negative status and gain 8 Attack and 4 Special Defense
+- Nerf Poison Jab (Gligar): Poison for ~~4~~ 3 seconds
+- Nerf Mega Camerupt: Eruption damage: ~~100~~ 70 per projectile
+- Hippopotas line is now Ground/Normal instead of Ground/Rock
+- Changed Psyduck passive: now has 10% chance to become confused when hit
+- Buff Chingling: Attack ~~8~~ 10
+- Buff Doom Desire (Jirachi): PP regain if ability fails: ~~40~~ 60
+- Tapu Bulu now only shows up on Grass portal symbols
+- Tapu Fini now only shows up on Water portal symbols
+- Tapu Koko now only shows up on Electric portal symbols
+- Tapu Lele now only shows up on Psychic portal symbols
+- Buff Spectrier: PP 100 → 80
+- Mew has been moved to Legendary rarity group
+- New ability for Cresselia: Lunar Blessing: heal 15% HP of user and all allies and clear their negative status
+- New passive for Regigigas, Slow start: start at 0.5 attack speed. After first ability cast, gains 30% attack speed and 10 attack
 
 # Changes to Synergies
 
@@ -26,6 +45,7 @@
     - (3) Fluid: Ally team gains 2% Attack Speed and 5 HP per unique active synergy
     - (5) Shapeless: Ally team gains 4% Attack Speed and 10 HP per unique active synergy
     - (7) Ethereal: Amorphous Pokémons gain more bonuses: 6% Attack Speed and 15 HP per unique active synergy
+- New effect for Aquatic: after 8 seconds, a tidal wave cleans up negative status and field effects, heal your Aquatic allies and knock back and damage enemies. The wave is stronger with the Aquatic synergy level.
 
 # Changes to Items
 
@@ -35,6 +55,11 @@
 - Shiny Stone: now gives +3 to Light synergy count
 - Golden Rod: Unique pool no longer tier 3 only, but taken from unique propositions list at t10, duos excluded. Unique no longer matches top synergies.
 - Rare Candy: after each round, spawns a 1 ⭐ copy of the holder on bench
+- Nerf Green orb: Heal ~~5~~ 4% of max HP every second
+- Nerf Blue Orb: chain lightning bounces to the ~~3~~ 2 closing enemies
+- Buff Upgrade: ~~+4~~ +5% Attack Speed per hit
+- Buff Soul Dew: ~~+8%~~ +10% Ability Power per second
+- Change King's Rock: ~~150 shield~~ 100 shield + 30% HP as shield
 
 # Gameplay
 - New Status: Locked: Prevents moving and sets RANGE to 1
@@ -43,9 +68,14 @@
 
 - New spawn animation when buying/picking a pokemon
 - Players scouting other boards now are visible on the right side of it. You can exchange emotes with other players outside of battle this way.
+- Added DPS meter for damage taken
 
 # Bugfix
+
+- Tapus and Maractus passives are no longer applied when they are not in the battlefield
 
 # Misc
 
 - Removed the 10am CEST Ultra-ball ranked lobby. Its now once per day at 10pm CEST
+- Initiated Korean translation thanks to Mrkim-0
+- Initiated Polski translation thanks to dil25kop

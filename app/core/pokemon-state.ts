@@ -220,6 +220,12 @@ export default class PokemonState {
 
       reducedDamage = min(1)(reducedDamage) // should deal 1 damage at least
 
+      if (attackType === AttackType.PHYSICAL) {
+        pokemon.physicalDamageReduced += min(0)(damage - reducedDamage)
+      } else if (attackType === AttackType.SPECIAL) {
+        pokemon.specialDamageReduced += min(0)(damage - reducedDamage)
+      }
+
       if (isNaN(reducedDamage)) {
         reducedDamage = 0
         logger.error(
@@ -244,8 +250,9 @@ export default class PokemonState {
           damageOnShield = pokemon.shield
         }
 
+        pokemon.shieldDamageTaken += damageOnShield
         takenDamage += damageOnShield
-        pokemon.shield = pokemon.shield - damageOnShield
+        pokemon.shield -= damageOnShield
         residualDamage = min(0)(reducedDamage - damageOnShield)
       }
 
@@ -579,7 +586,7 @@ export default class PokemonState {
         true
       )) {
         if (cell.value && cell.value.team === pokemon.team) {
-          cell.value.handleHeal(0.05 * cell.value.hp, pokemon, 0, false)
+          cell.value.handleHeal(0.04 * cell.value.hp, pokemon, 0, false)
         }
       }
     }

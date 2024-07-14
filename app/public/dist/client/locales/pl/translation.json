@@ -751,11 +751,11 @@
     "GRIMMSNARL": "Grimmsnarl"
   },
   "ability_description": {
-    "SOFT_BOILED": "Leczy wszystkie efekty statusu i zapewnia [20,40,80,SP] TARCZĘ każdemu sojuszniczemu Pokémonowi",
+    "SOFT_BOILED": "Leczy wszystkie efekty statusu i zapewnia [20,40,80,SP] SHIELD każdemu sojuszniczemu Pokémonowi",
     "EARTHQUAKE": "Zadaj [120,SP] OBRAŻEŃ SPECJALNYCH wszystkim wrogim Pokémonom w tej samej kolumnie, co użytkownik",
-    "SONG_OF_DESIRE": "2 przeciwników w tylnej linii staje sie ZAUROCZONA na [3,SP] sekund",
+    "SONG_OF_DESIRE": "2 przeciwników w tylnej linii staje sie CHARM na 3 sekund i zmniejsz ich ATK o [3,SP]",
     "CONFUSING_MIND": "Make 2 opponents in the backline CONFUSION for [3,SP] seconds",
-    "KNOWLEDGE_THIEF": "Użyj zdolności celu",
+    "KNOWLEDGE_THIEF": "Użyj zdolności celu. Gracz otrzymuje 1 XP.",
     "KING_SHIELD": "CHROŃ użytkownika na 1,5 sekundy, zyskaj [10,20,30,SP] SHIELD i zamień się pozycjami z najdalszym wrogim Pokémonem",
     "EXPLOSION": "Zadaj [50,100,200,SP] SPECJALNE wszystkim sąsiadującym wrogom. Niszczy użytkownika",
     "NIGHTMARE": "WYCISZ wszystkie wrogie Pokémony na [1.5,3,8] sekund. Każdy przeciwnik, który SPI, WZDRYGA SIE lub już WYCISZONY, otrzymuje [25,50,100,SP] SPECJALNE.",

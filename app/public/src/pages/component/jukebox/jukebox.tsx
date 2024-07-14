@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react"
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { Modal } from "react-bootstrap"
 import { useTranslation } from "react-i18next"
 import { DungeonMusic } from "../../../../../types/enum/Dungeon"
@@ -17,11 +17,19 @@ export default function Jukebox(props: {
 
   const MUSICS: DungeonMusic[] = Object.values(DungeonMusic)
 
-  const [music, setMusic] = useState<DungeonMusic>(
-    getGameScene()?.music?.key?.replace("music_", "") as DungeonMusic,
-  )
+  const musicPlaying = getGameScene()?.music?.key?.replace(
+    "music_",
+    ""
+  ) as DungeonMusic
+  const [music, setMusic] = useState<DungeonMusic>(musicPlaying)
   const [loading, setLoading] = useState<boolean>(false)
   const [volume, setVolume] = useState<number>(preferences.musicVolume)
+
+  useEffect(() => {
+    if (musicPlaying !== music && !loading) {
+      setMusic(musicPlaying)
+    }
+  }, [music, musicPlaying, loading])
 
   function changeMusic(name: DungeonMusic) {
     setMusic(name)

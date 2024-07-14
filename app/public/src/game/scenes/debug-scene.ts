@@ -239,19 +239,15 @@ export class DebugScene extends Phaser.Scene {
       }
       if (status == Status.ELECTRIC_FIELD) {
         this.pokemon.addElectricField()
-        this.pokemon.bringToTop(this.pokemon.sprite)
       }
       if (status == Status.PSYCHIC_FIELD) {
         this.pokemon.addPsychicField()
-        this.pokemon.bringToTop(this.pokemon.sprite)
       }
       if (status == Status.GRASS_FIELD) {
         this.pokemon.addGrassField()
-        this.pokemon.bringToTop(this.pokemon.sprite)
       }
       if (status == Status.FAIRY_FIELD) {
         this.pokemon.addFairyField()
-        this.pokemon.bringToTop(this.pokemon.sprite)
       }
     }
   }

@@ -7,6 +7,11 @@ export default class Dps extends Schema implements IDps {
   @type("uint16") physicalDamage = 0
   @type("uint16") specialDamage = 0
   @type("uint16") trueDamage = 0
+  @type("uint16") physicalDamageReduced = 0
+  @type("uint16") specialDamageReduced = 0
+  @type("uint16") shieldDamageTaken = 0
+  @type("uint16") heal = 0
+  @type("uint16") shield = 0
 
   constructor(id: string, name: string) {
     super()
@@ -14,10 +19,15 @@ export default class Dps extends Schema implements IDps {
     this.name = name
   }
 
-  changeDamage(
+  update(
     physicalDamage: number,
     specialDamage: number,
-    trueDamage: number
+    trueDamage: number,
+    physicalDamageReduced: number,
+    specialDamageReduced: number,
+    shieldDamageTaken: number,
+    heal: number,
+    shield: number
   ) {
     if (this.physicalDamage != physicalDamage) {
       this.physicalDamage = physicalDamage
@@ -27,6 +37,21 @@ export default class Dps extends Schema implements IDps {
     }
     if (this.trueDamage != trueDamage) {
       this.trueDamage = trueDamage
+    }
+    if (this.physicalDamageReduced != physicalDamageReduced) {
+      this.physicalDamageReduced = physicalDamageReduced
+    }
+    if (this.specialDamageReduced != specialDamageReduced) {
+      this.specialDamageReduced = specialDamageReduced
+    }
+    if (this.shieldDamageTaken != shieldDamageTaken) {
+      this.shieldDamageTaken = shieldDamageTaken
+    }
+    if (this.heal != heal) {
+      this.heal = heal
+    }
+    if (this.shield != shield) {
+      this.shield = shield
     }
   }
 }
