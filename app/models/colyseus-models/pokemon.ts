@@ -5237,7 +5237,7 @@ export class Eevee extends Pokemon {
   skill = Ability.HAPPY_HOUR
   passive = Passive.EEVEE
   attackSprite = AttackSprite.NORMAL_MELEE
-
+  evolution = Pkm.VAPOREON
   evolutionRule = new ItemEvolutionRule(
     [
       Item.WATER_STONE,
