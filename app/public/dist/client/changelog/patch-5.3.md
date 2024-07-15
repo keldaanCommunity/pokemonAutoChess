@@ -71,6 +71,7 @@
 # Bugfix
 
 - Tapus and Maractus passives are no longer applied when they are not in the battlefield
+- Prevent freeze and sleep during a skydiving move
 
 # Misc
 
