@@ -67,6 +67,7 @@
 - New spawn animation when buying/picking a pokemon
 - Players scouting other boards now are visible on the right side of it. You can exchange emotes with other players outside of battle this way.
 - Added DPS meter for damage taken
+- Added search bar on pokemon meta report
 
 # Bugfix
 

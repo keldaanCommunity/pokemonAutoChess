@@ -8,9 +8,11 @@ import {
 import { EloRankThreshold } from "../../../../../types/Config"
 import { EloRank } from "../../../../../types/enum/EloRank"
 import { Rarity } from "../../../../../types/enum/Game"
+import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import "./pokemon-report.css"
 import PokemonStatistic from "./pokemon-statistic"
+import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
+import "./pokemon-report.css"
 
 export function PokemonReport() {
   const [pokemonRankingBy, setPokemonRanking] = useState<string>("count")
@@ -18,6 +20,7 @@ export function PokemonReport() {
   const [rarity, setRarity] = useState<Rarity | "all">("all")
   const [loading, setLoading] = useState<boolean>(true)
   const [eloThreshold, setEloTreshold] = useState<EloRank>(EloRank.BEGINNER)
+  const [selectedPkm, setSelectedPkm] = useState<Pkm | "">("")
 
   const [metaPokemons, setMetaPokemons] = useState<IPokemonsStatisticV2[]>([])
   useEffect(() => {
@@ -96,9 +99,13 @@ export function PokemonReport() {
             </option>
           ))}
         </select>
+        <PokemonTypeahead
+          value={selectedPkm ?? ""}
+          onChange={(pkm) => setSelectedPkm(pkm)}
+        />
       </header>
       {loading && <p>{t("loading")}</p>}
-      {
+      {!loading && (
         <PokemonStatistic
           pokemons={
             sortedMetaPokemons?.find((p) => p.tier === eloThreshold)
@@ -107,8 +114,9 @@ export function PokemonReport() {
           rankingBy={pokemonRankingBy}
           synergy={synergy}
           rarity={rarity}
+          selectedPkm={selectedPkm}
         />
-      }
+      )}
     </div>
   )
 }
