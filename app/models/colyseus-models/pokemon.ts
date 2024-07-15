@@ -6065,7 +6065,11 @@ export class Zekrom extends Pokemon {
 }
 
 export class Celebi extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.PSYCHIC])
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.PSYCHIC,
+    Synergy.FLORA
+  ])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 300
@@ -7364,7 +7368,7 @@ export class TapuLele extends Pokemon {
 }
 
 export class Xerneas extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.LIGHT])
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.LIGHT, Synergy.FLORA])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 300
@@ -14144,7 +14148,11 @@ export class Braviary extends Pokemon {
 }
 
 export class Klefki extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FAIRY, Synergy.ARTIFICIAL])
+  types = new SetSchema<Synergy>([
+    Synergy.STEEL,
+    Synergy.FAIRY,
+    Synergy.ARTIFICIAL
+  ])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
