@@ -6310,6 +6310,20 @@ export class Torkoal extends Pokemon {
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
+export class Heatmor extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.FIRE_LASH
+  attackSprite = AttackSprite.FIRE_MELEE
+}
+
 export class PrimalGroudon extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.GROUND,
@@ -14939,5 +14953,6 @@ export const PokemonClasses: Record<
   [Pkm.MUNNA]: Munna,
   [Pkm.MUSHARNA]: Musharna,
   [Pkm.RUFFLET]: Rufflet,
-  [Pkm.BRAVIARY]: Braviary
+  [Pkm.BRAVIARY]: Braviary,
+  [Pkm.HEATMOR]: Heatmor
 }
