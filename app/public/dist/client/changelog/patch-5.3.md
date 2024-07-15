@@ -9,6 +9,8 @@
 - Mienfoo
 - Mienshao
 - Stonjourner
+- Hisuian Sneasel
+- Sneasler
 
 # Changes to Pokemon & Abilities
 - Archen line has been moved from Rare to Uncommon
