@@ -114,6 +114,9 @@ export default class GameRoom extends Room<GameState> {
       playerIds: keys(options.users).filter(
         (id) => options.users.get(id)!.isBot === false
       ),
+      playersInfo: keys(options.users).map(
+        (u) => `${options.users.get(u)!.name} [${options.users.get(u)!.elo}]`
+      ),
       stageLevel: 0,
       type: "game",
       tournamentId: options.tournamentId,

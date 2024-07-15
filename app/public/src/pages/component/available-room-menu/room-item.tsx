@@ -55,16 +55,11 @@ export default function RoomItem(props: {
     disabledReason = t("min_rank_not_reached")
   }
 
+  const title = `${props.room.metadata?.ownerName ? "Owner: " + props.room.metadata?.ownerName : ""}\n${props.room.metadata?.playersInfo?.join("\n")}`
+
   return (
     <div className="room-item my-box">
-      <span
-        className="room-name"
-        title={
-          props.room.metadata?.ownerName
-            ? "Owner: " + props.room.metadata?.ownerName
-            : ""
-        }
-      >
+      <span className="room-name" title={title}>
         {props.room.metadata?.name}
       </span>
       {props.room.metadata?.password && (

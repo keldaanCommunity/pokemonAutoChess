@@ -88,6 +88,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     // logger.debug(defaultRoomName);
     this.setState(new PreparationState(options))
     this.setMetadata(<IPreparationMetadata>{
+      name: options.roomName.slice(0, 30),
       ownerName:
         options.gameMode === GameMode.QUICKPLAY ? null : options.ownerId,
       minRank: options.minRank ?? null,
@@ -95,8 +96,12 @@ export default class PreparationRoom extends Room<PreparationState> {
       gameMode: options.gameMode,
       whitelist: options.whitelist ?? [],
       blacklist: options.blacklist ?? [],
+      playersInfo: [],
       tournamentId: options.tournamentId ?? null,
-      bracketId: options.bracketId ?? null
+      bracketId: options.bracketId ?? null,
+      gameStarted: false,
+      password: null,
+      type: "preparation"
     })
     this.maxClients = 8
     if (
@@ -166,8 +171,6 @@ export default class PreparationRoom extends Room<PreparationState> {
         (options.autoStartDelayInSeconds - 10 * 60) * 1000
       )
     }
-
-    this.setName(options.roomName)
 
     this.onMessage(Transfer.KICK, (client, message) => {
       try {
@@ -380,5 +383,13 @@ export default class PreparationRoom extends Room<PreparationState> {
       name: this.state.name,
       id: this.roomId
     }
+  }
+
+  updatePlayersInfo() {
+    this.setMetadata({
+      playersInfo: [...this.state.users.values()].map(
+        (u) => `${u.name} [${u.elo}]`
+      )
+    })
   }
 }

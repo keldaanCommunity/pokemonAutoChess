@@ -81,6 +81,7 @@ export class OnJoinCommand extends Command<
               auth.email === undefined && auth.photoURL === undefined
             )
           )
+          this.room.updatePlayersInfo()
 
           if (u.uid == this.state.ownerId) {
             // logger.debug(user.displayName);
@@ -577,6 +578,7 @@ export class InitializeBotsCommand extends Command<
             )
           })
         }
+        this.room.updatePlayersInfo()
       }
     } catch (error) {
       logger.error(error)
@@ -599,7 +601,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
       return
     }
 
-    const { type, user } = data
+    const { type } = data
     let bot: IBot | undefined
     if (typeof type === "object") {
       // pick a specific bot chosen by the user
@@ -674,6 +676,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
         )
       )
 
+      this.room.updatePlayersInfo()
       this.room.state.addMessage({
         authorId: "server",
         payload: `Bot ${bot.name} added.`

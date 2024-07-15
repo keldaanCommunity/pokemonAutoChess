@@ -638,6 +638,7 @@ export interface IPreparationMetadata {
   gameMode: GameMode
   whitelist: string[]
   blacklist: string[]
+  playersInfo: string[]
   tournamentId: string | null
   bracketId: string | null
 }
@@ -647,6 +648,7 @@ export interface IGameMetadata {
   ownerName: string
   gameMode: GameMode
   playerIds: string[]
+  playersInfo: string[]
   stageLevel: number
   type: "game"
   tournamentId: string | null
