@@ -995,6 +995,10 @@ export function displayAbility(
       break
     }
 
+    case Ability.FAIRY_LOCK:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(1)
+      break
+
     case Ability.STEAM_ERUPTION:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break

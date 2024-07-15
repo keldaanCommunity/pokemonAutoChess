@@ -24,6 +24,7 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") resurecting = false
   @type("boolean") paralysis = false
   @type("boolean") pokerus = false
+  @type("boolean") locked = false
   @type("boolean") armorReduction = false
   @type("boolean") runeProtect = false
   @type("boolean") charm = false
@@ -82,6 +83,7 @@ export default class Status extends Schema implements IStatus {
   drySkinCooldown = 1000
   curseCooldown = 0
   pokerusCooldown = 2000
+  lockedCooldown = 0
   enrageDelay = 35000
   darkHarvest = false
   darkHarvestCooldown = 0
@@ -101,6 +103,7 @@ export default class Status extends Schema implements IStatus {
     this.armorReductionCooldown = 0
     this.curseCooldown = 0
     this.curse = false
+    this.lockedCooldown = 0
   }
 
   hasNegativeStatus() {
@@ -116,7 +119,8 @@ export default class Status extends Schema implements IStatus {
       this.charm ||
       this.flinch ||
       this.armorReduction ||
-      this.curse
+      this.curse ||
+      this.locked
     )
   }
 
@@ -175,6 +179,10 @@ export default class Status extends Schema implements IStatus {
 
     if (this.paralysis) {
       this.updateParalysis(dt, pokemon)
+    }
+
+    if (this.locked) {
+      this.updateLocked(dt, pokemon)
     }
 
     if (this.pokerus) {
@@ -1073,6 +1081,40 @@ export default class Status extends Schema implements IStatus {
       this.pokerusCooldown = 2000
     } else {
       this.pokerusCooldown -= dt
+    }
+  }
+
+  triggerLocked(duration: number, pkm: PokemonEntity) {
+    if (
+      !this.locked && // lock cannot be stacked
+      !this.runeProtect
+
+    ) {
+
+      if (pkm.status.enraged) {
+        duration = duration / 2
+      }
+      
+      if (pkm.effects.has(Effect.SWIFT_SWIM)) {
+        duration *= 0.7
+      } else if (pkm.effects.has(Effect.HYDRATION)) {
+        duration *= 0.4
+      } else if (pkm.effects.has(Effect.WATER_VEIL)) {
+        duration *= 0.1
+      }
+
+      this.locked = true
+      this.lockedCooldown = Math.round(duration)
+      pkm.range = 1
+    }
+  }
+
+  updateLocked(dt: number, pokemon: PokemonEntity) {
+    if (this.lockedCooldown - dt <= 0) {
+      this.locked = false
+      pokemon.range = pokemon.baseRange
+    } else {
+      this.lockedCooldown -= dt
     }
   }
 }

@@ -14132,7 +14132,6 @@ export class Braviary extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.WILD])
   rarity = Rarity.UNCOMMON
   stars = 2
-  evolution = Pkm.BRAVIARY
   hp = 160
   atk = 16
   def = 4
@@ -14142,6 +14141,20 @@ export class Braviary extends Pokemon {
   skill = Ability.CRUSH_CLAW
   regional = true
   attackSprite = AttackSprite.FLYING_MELEE
+}
+
+export class Klefki extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FAIRY, Synergy.ARTIFICIAL])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 16
+  def = 4
+  speDef = 3
+  maxPP = 90
+  range = 3
+  skill = Ability.FAIRY_LOCK
+  attackSprite = AttackSprite.FAIRY_RANGE
 }
 
 export const PokemonClasses: Record<
@@ -14954,5 +14967,6 @@ export const PokemonClasses: Record<
   [Pkm.MUSHARNA]: Musharna,
   [Pkm.RUFFLET]: Rufflet,
   [Pkm.BRAVIARY]: Braviary,
-  [Pkm.HEATMOR]: Heatmor
+  [Pkm.HEATMOR]: Heatmor,
+  [Pkm.KLEFKI]: Klefki
 }

@@ -232,6 +232,12 @@ export default class BattleManager {
             } else {
               pkm.removePokerus()
             }
+          } else if (field === "locked") {
+            if (pokemon.status.locked) {
+              pkm.addLocked()
+            } else {
+              pkm.removeLocked()
+            }
           } else if (field === "armorReduction") {
             if (pokemon.status.armorReduction) {
               pkm.addArmorReduction()

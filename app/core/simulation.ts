@@ -20,7 +20,7 @@ import {
   Stat,
   Team
 } from "../types/enum/Game"
-import { Berries, CraftableItems, Item } from "../types/enum/Item"
+import { Berries, CraftableItems, Item, ItemComponents } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"

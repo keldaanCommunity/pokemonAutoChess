@@ -9164,6 +9164,43 @@ export class FireLashStrategy extends AbilityStrategy {
   }
 }
 
+export class FairyLockStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    
+    const cells = board.getAdjacentCells(
+      target.positionX,
+      target.positionY,
+      true
+      ).filter((cell) => cell &&
+      cell.value && cell.value.team !== pokemon.team
+      )
+    
+    cells.forEach((cell) => {
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: pokemon.skill,
+          targetX: cell.value?.positionX,
+          targetY: cell.value?.positionY
+        })
+        cell.value?.handleSpecialDamage(
+          Math.round(90 / cells.length),
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+    })
+    target.status.triggerLocked(3000, target)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -9506,5 +9543,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ROCK_HEAD]: new RockHeadStrategy(),
   [Ability.TAKE_HEART]: new TakeHeartStrategy(),
   [Ability.CRUSH_CLAW]: new CrushClawStrategy(),
-  [Ability.FIRE_LASH]: new FireLashStrategy()
+  [Ability.FIRE_LASH]: new FireLashStrategy(),
+  [Ability.FAIRY_LOCK]: new FairyLockStrategy()
 }

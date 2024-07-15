@@ -25,7 +25,7 @@ export default class MovingState extends PokemonState {
         pokemon,
         board
       )
-      if (pokemon.status.charm) {
+      if (pokemon.status.charm && pokemon.canMove) {
         if (
           pokemon.status.charmOrigin &&
           distanceC(
@@ -47,7 +47,7 @@ export default class MovingState extends PokemonState {
           pokemon,
           board
         )
-        if (targetAtSight) {
+        if (targetAtSight && pokemon.canMove) {
           this.move(pokemon, board, targetAtSight)
         }
       }
@@ -71,7 +71,8 @@ export default class MovingState extends PokemonState {
     if (
       pokemon.types.has(Synergy.DARK) &&
       pokemon.baseRange === 1 &&
-      pokemon.passive !== Passive.GUZZLORD
+      pokemon.passive !== Passive.GUZZLORD &&
+      !pokemon.status.locked
     ) {
       // dark jump
       const farthestCoordinate = this.getFarthestTargetCoordinateAvailablePlace(

@@ -1,6 +1,7 @@
 # New Pokemons:
 - Tyrunt
 - Tyrantrum
+- Klefki
 - Rufflet
 - Braviary
 - Heatmor
@@ -43,7 +44,7 @@
 
 # Changes to Synergies
 
-- Change Amorphous: now gain Attack Speed and HP to differenciate with Artificial synergy
+- Change Amorphous: now gain Attack Speed and HP to differentiate with Artificial synergy
     - (3) Fluid: Ally team gains 2% Attack Speed and 5 HP per unique active synergy
     - (5) Shapeless: Ally team gains 4% Attack Speed and 10 HP per unique active synergy
     - (7) Ethereal: Amorphous Pokémons gain more bonuses: 6% Attack Speed and 15 HP per unique active synergy
@@ -64,6 +65,7 @@
 - Change King's Rock: ~~150 shield~~ 100 shield + 30% HP as shield
 
 # Gameplay
+- New Status: Locked: Prevents moving and sets RANGE to 1
 
 # UI
 

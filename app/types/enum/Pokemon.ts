@@ -804,7 +804,8 @@ export enum Pkm {
   MUSHARNA = "MUSHARNA",
   RUFFLET = "RUFFLET",
   BRAVIARY = "BRAVIARY",
-  HEATMOR = "HEATMOR"
+  HEATMOR = "HEATMOR",
+  KLEFKI = "KLEFKI"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1611,7 +1612,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MUSHARNA]: "0518",
   [Pkm.RUFFLET]: "0627",
   [Pkm.BRAVIARY]: "0628",
-  [Pkm.HEATMOR]: "0631"
+  [Pkm.HEATMOR]: "0631",
+  [Pkm.KLEFKI]: "0707"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2418,7 +2420,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MUSHARNA]: Pkm.MUNNA,
   [Pkm.RUFFLET]: Pkm.RUFFLET,
   [Pkm.BRAVIARY]: Pkm.RUFFLET,
-  [Pkm.HEATMOR]: Pkm.HEATMOR
+  [Pkm.HEATMOR]: Pkm.HEATMOR,
+  [Pkm.KLEFKI]: Pkm.KLEFKI
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
@@ -2429,7 +2432,8 @@ export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
   [Pkm.DIGLETT]: [Pkm.ALOLAN_DIGLETT],
   [Pkm.ZORUA]: [Pkm.HISUI_ZORUA],
   [Pkm.GRIMER]: [Pkm.ALOLAN_GRIMER],
-  [Pkm.NIDORANF]: [Pkm.NIDORANM]
+  [Pkm.NIDORANF]: [Pkm.NIDORANM],
+  [Pkm.KLEFKI]: [Pkm.KLEFKI]
 }
 
 export enum PkmDuo {
@@ -6584,6 +6588,11 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.MUSHARNA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.KLEFKI]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot
