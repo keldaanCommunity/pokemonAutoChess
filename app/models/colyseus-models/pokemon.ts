@@ -8342,6 +8342,61 @@ export class Weavile extends Pokemon {
   attackSprite = AttackSprite.ICE_MELEE
 }
 
+export class HisuiSneasel extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.FIGHTING,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.SNEASLER
+  hp = 85
+  atk = 9
+  def = 1
+  speDef = 3
+  maxPP = 40
+  range = 1
+  skill = Ability.DIRE_CLAW
+  regional = true
+  attackSprite = AttackSprite.POISON_MELEE
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      (!state || state.additionalPokemons.includes(Pkm.SNEASEL)) &&
+      (regionSynergies.includes(Synergy.FIGHTING) ||
+        regionSynergies.includes(Synergy.POISON))
+    )
+  }
+}
+
+export class Sneasler extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.FIGHTING,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 200
+  atk = 22
+  def = 2
+  speDef = 3
+  maxPP = 40
+  range = 1
+  skill = Ability.DIRE_CLAW
+  regional = true
+  attackSprite = AttackSprite.POISON_MELEE
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      (!state || state.additionalPokemons.includes(Pkm.SNEASEL)) &&
+      (regionSynergies.includes(Synergy.FIGHTING) ||
+        regionSynergies.includes(Synergy.POISON))
+    )
+  }
+}
+
 export class Seel extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.AQUATIC])
   rarity = Rarity.UNCOMMON
@@ -15138,5 +15193,7 @@ export const PokemonClasses: Record<
   [Pkm.HAWLUCHA]: Hawlucha,
   [Pkm.MIENFOO]: Mienfoo,
   [Pkm.MIENSHAO]: Mienshao,
-  [Pkm.STONJOURNER]: Stonjourner
+  [Pkm.STONJOURNER]: Stonjourner,
+  [Pkm.HISUI_SNEASEL]: HisuiSneasel,
+  [Pkm.SNEASLER]: Sneasler
 }

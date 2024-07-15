@@ -809,7 +809,9 @@ export enum Pkm {
   HAWLUCHA = "HAWLUCHA",
   MIENFOO = "MIENFOO",
   MIENSHAO = "MIENSHAO",
-  STONJOURNER = "STONJOURNER"
+  STONJOURNER = "STONJOURNER",
+  HISUI_SNEASEL = "HISUI_SNEASEL",
+  SNEASLER = "SNEASLER"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1621,7 +1623,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.HAWLUCHA]: "0701",
   [Pkm.MIENFOO]: "0619",
   [Pkm.MIENSHAO]: "0620",
-  [Pkm.STONJOURNER]: "0874"
+  [Pkm.STONJOURNER]: "0874",
+  [Pkm.HISUI_SNEASEL]: "0215-0001",
+  [Pkm.SNEASLER]: "0903"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2433,7 +2437,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.HAWLUCHA]: Pkm.HAWLUCHA,
   [Pkm.MIENFOO]: Pkm.MIENFOO,
   [Pkm.MIENSHAO]: Pkm.MIENFOO,
-  [Pkm.STONJOURNER]: Pkm.STONJOURNER
+  [Pkm.STONJOURNER]: Pkm.STONJOURNER,
+  [Pkm.HISUI_SNEASEL]: Pkm.HISUI_SNEASEL,
+  [Pkm.SNEASLER]: Pkm.HISUI_SNEASEL
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
@@ -2445,7 +2451,8 @@ export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
   [Pkm.ZORUA]: [Pkm.HISUI_ZORUA],
   [Pkm.GRIMER]: [Pkm.ALOLAN_GRIMER],
   [Pkm.NIDORANF]: [Pkm.NIDORANM],
-  [Pkm.KLEFKI]: [Pkm.KLEFKI]
+  [Pkm.KLEFKI]: [Pkm.KLEFKI],
+  [Pkm.SNEASEL]: [Pkm.HISUI_SNEASEL]
 }
 
 export enum PkmDuo {
@@ -6643,5 +6650,15 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shake,
     emote: AnimationType.Shake
+  },
+  [Pkm.HISUI_SNEASEL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.MultiScratch,
+    emote: AnimationType.Pose
+  },
+  [Pkm.SNEASLER]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Charge
   }
 }

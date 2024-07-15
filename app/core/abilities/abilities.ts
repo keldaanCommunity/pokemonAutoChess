@@ -5153,6 +5153,32 @@ export class SlashingClawStrategy extends AbilityStrategy {
   }
 }
 
+export class DireClawStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    const status = pickRandomIn(["poison", "sleep", "paralysis"])
+    switch (status) {
+      case "poison":
+        target.status.triggerPoison(3000, target, pokemon)
+        break
+      case "sleep":
+        target.status.triggerSleep(3000, target)
+        break
+      case "paralysis":
+        target.status.triggerParalysis(3000, target)
+        break
+    }
+  }
+}
+
 export class EruptionStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -9630,5 +9656,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FAIRY_LOCK]: new FairyLockStrategy(),
   [Ability.FLYING_PRESS]: new FlyingPressStrategy(),
   [Ability.DRAIN_PUNCH]: new DrainPunchStrategy(),
-  [Ability.GRAVITY]: new GravityStrategy()
+  [Ability.GRAVITY]: new GravityStrategy(),
+  [Ability.DIRE_CLAW]: new DireClawStrategy()
 }
