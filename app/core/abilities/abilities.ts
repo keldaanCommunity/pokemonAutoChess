@@ -9143,6 +9143,27 @@ export class CrushClawStrategy extends AbilityStrategy {
   }
 }
 
+export class FireLashStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    target.status.triggerArmorReduction(4000, target)
+    target.handleSpecialDamage(
+      120,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -9484,5 +9505,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.CAMERA_FLASH]: new CameraFlashStrategy(),
   [Ability.ROCK_HEAD]: new RockHeadStrategy(),
   [Ability.TAKE_HEART]: new TakeHeartStrategy(),
-  [Ability.CRUSH_CLAW]: new CrushClawStrategy()
+  [Ability.CRUSH_CLAW]: new CrushClawStrategy(),
+  [Ability.FIRE_LASH]: new FireLashStrategy()
 }

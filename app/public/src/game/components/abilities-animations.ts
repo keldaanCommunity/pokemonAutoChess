@@ -1537,6 +1537,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setOrigin(0.5, 0.8).setScale(2)
       break
 
+    case Ability.FIRE_LASH:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(4)
+      break
+
     case "MIND_BLOWN/hit":
       addAbilitySprite("MIND_BLOWN/hit", coordinates, true).setScale(3)
       break
