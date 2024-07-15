@@ -14098,6 +14098,38 @@ export class GastrodonEastSea extends Pokemon {
   }
 }
 
+export class Rufflet extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.WILD])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.BRAVIARY
+  hp = 70
+  atk = 7
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.CRUSH_CLAW
+  regional = true
+  attackSprite = AttackSprite.FLYING_MELEE
+}
+
+export class Braviary extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.WILD])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.BRAVIARY
+  hp = 160
+  atk = 16
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.CRUSH_CLAW
+  regional = true
+  attackSprite = AttackSprite.FLYING_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -14905,5 +14937,7 @@ export const PokemonClasses: Record<
   [Pkm.SHELLOS_EAST_SEA]: ShellosEastSea,
   [Pkm.GASTRODON_EAST_SEA]: GastrodonEastSea,
   [Pkm.MUNNA]: Munna,
-  [Pkm.MUSHARNA]: Musharna
+  [Pkm.MUSHARNA]: Musharna,
+  [Pkm.RUFFLET]: Rufflet,
+  [Pkm.BRAVIARY]: Braviary
 }

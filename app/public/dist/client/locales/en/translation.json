@@ -358,7 +358,8 @@
     "ANCIENT_POWER": "Ancient Power",
     "MOON_DREAM": "Moon Dream",
     "STONE_AXE": "Stone Axe",
-    "CAMERA_FLASH": "Camera Flash"
+    "CAMERA_FLASH": "Camera Flash",
+    "CRUSH_CLAW": "Crush Claw"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1162,7 +1163,9 @@
     "SHELLOS_EAST_SEA": "Shellos (East Sea)",
     "GASTRODON_EAST_SEA": "Gastrodon (East Sea)",
     "MUNNA": "Munna",
-    "MUSHARNA": "Musharna"
+    "MUSHARNA": "Musharna",
+    "RUFFLET": "Rufflet",
+    "BRAVIARY": "Braviary"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1501,7 +1504,8 @@
     "ANCIENT_POWER": "Launches rocks at the target, dealing [50,100,SP] SPECIAL. Raises the user's AP by [25,SP]%",
     "MOON_DREAM": "Target falls SLEEP for [3,6,9] seconds and grants [10,20,30,SP] SHIELD to the 3 allies closest to the target",
     "STONE_AXE": "Deal [50,SP] TRUE. Lay sharp stones around the target. The stones stay on the field, dealing 10 PHYSICAL per second and WOUND Pokémons that walk on it, if not ROCK or FLYING",
-    "CAMERA_FLASH": "The target is PARALYSIS for [2,SP] seconds"
+    "CAMERA_FLASH": "The target is PARALYSIS for [2,SP] seconds",
+    "CRUSH_CLAW": "Reduce the target's DEF by [3,5] then perform two quick attacks dealing [100,SP]% of ATK as PHYSICAL each"
   },
   "effect": {
     "INGRAIN": "Ingrain",
