@@ -14132,7 +14132,6 @@ export class Braviary extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.WILD])
   rarity = Rarity.UNCOMMON
   stars = 2
-  evolution = Pkm.BRAVIARY
   hp = 160
   atk = 16
   def = 4
