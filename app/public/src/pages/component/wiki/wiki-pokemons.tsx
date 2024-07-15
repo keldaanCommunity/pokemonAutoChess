@@ -39,12 +39,8 @@ export default function WikiPokemons() {
       }}
     >
       <PokemonTypeahead
-        value={selectedPkm ?? ""}
-        onChange={(pkm) => {
-          if (pkm) {
-            setSelectedPkm(pkm)
-          }
-        }}
+        value={selectedPkm}
+        onChange={(pkm) => setSelectedPkm(pkm)}
       />
       <TabList>
         {tabs.map((r) => {

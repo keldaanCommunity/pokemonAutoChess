@@ -14,7 +14,7 @@ export default function PokemonCollectionItem(props: {
   config: IPokemonConfig | undefined
   filter: string
   shinyOnly: boolean
-  setPokemon: Dispatch<SetStateAction<Pkm | undefined>>
+  setPokemon: Dispatch<SetStateAction<Pkm | "">>
 }) {
   if (
     props.index in PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX === false ||

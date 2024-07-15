@@ -9119,6 +9119,51 @@ export class RockHeadStrategy extends AbilityStrategy {
   }
 }
 
+export class CrushClawStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const defLoss = [-3, -6][pokemon.stars - 1] ?? -6
+    target.addDefense(defLoss, pokemon, 0, false)
+    for (let i = 0; i < 2; i++) {
+      target.handleSpecialDamage(
+        pokemon.atk,
+        board,
+        AttackType.PHYSICAL,
+        pokemon,
+        crit,
+        true
+      )
+    }
+  }
+}
+
+export class FireLashStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    target.status.triggerArmorReduction(4000, target)
+    target.handleSpecialDamage(
+      120,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
+  }
+}
+
 export class FairyLockStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -9151,9 +9196,7 @@ export class FairyLockStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-      
     })
-    
     target.status.triggerLocked(3000, target)
   }
 }
@@ -9499,5 +9542,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.CAMERA_FLASH]: new CameraFlashStrategy(),
   [Ability.ROCK_HEAD]: new RockHeadStrategy(),
   [Ability.TAKE_HEART]: new TakeHeartStrategy(),
+  [Ability.CRUSH_CLAW]: new CrushClawStrategy(),
+  [Ability.FIRE_LASH]: new FireLashStrategy(),
   [Ability.FAIRY_LOCK]: new FairyLockStrategy()
 }

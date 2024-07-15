@@ -6310,6 +6310,20 @@ export class Torkoal extends Pokemon {
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
+export class Heatmor extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.FIRE_LASH
+  attackSprite = AttackSprite.FIRE_MELEE
+}
+
 export class PrimalGroudon extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.GROUND,
@@ -14098,6 +14112,38 @@ export class GastrodonEastSea extends Pokemon {
   }
 }
 
+export class Rufflet extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.WILD])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.BRAVIARY
+  hp = 70
+  atk = 7
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.CRUSH_CLAW
+  regional = true
+  attackSprite = AttackSprite.FLYING_MELEE
+}
+
+export class Braviary extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.WILD])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.BRAVIARY
+  hp = 160
+  atk = 16
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.CRUSH_CLAW
+  regional = true
+  attackSprite = AttackSprite.FLYING_MELEE
+}
+
 export class Klefki extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FAIRY, Synergy.ARTIFICIAL])
   rarity = Rarity.UNIQUE
@@ -14920,5 +14966,8 @@ export const PokemonClasses: Record<
   [Pkm.GASTRODON_EAST_SEA]: GastrodonEastSea,
   [Pkm.MUNNA]: Munna,
   [Pkm.MUSHARNA]: Musharna,
+  [Pkm.RUFFLET]: Rufflet,
+  [Pkm.BRAVIARY]: Braviary,
+  [Pkm.HEATMOR]: Heatmor,
   [Pkm.KLEFKI]: Klefki
 }

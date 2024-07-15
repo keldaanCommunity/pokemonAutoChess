@@ -1,29 +1,27 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-import { Pkm } from "../../../../../types/enum/Pokemon";
-import { localStore, LocalStoreKeys } from "../../utils/store";
-import { Synergy } from "../../../../../types/enum/Synergy";
-import { Checkbox } from "../checkbox/checkbox";
-import SynergyIcon from "../icons/synergy-icon";
-import { PokemonTypeahead } from "../typeahead/pokemon-typeahead";
-import PokemonCarousel from "./pokemon-carousel";
-import PokemonEmotionsModal from "./pokemon-emotions-modal";
-import UnownPanel from "./unown-panel";
-import "./pokemon-collection.css";
+import React, { useEffect, useMemo, useState } from "react"
+import { useTranslation } from "react-i18next"
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
+import { Pkm } from "../../../../../types/enum/Pokemon"
+import { localStore, LocalStoreKeys } from "../../utils/store"
+import { Synergy } from "../../../../../types/enum/Synergy"
+import { Checkbox } from "../checkbox/checkbox"
+import SynergyIcon from "../icons/synergy-icon"
+import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
+import PokemonCarousel from "./pokemon-carousel"
+import PokemonEmotionsModal from "./pokemon-emotions-modal"
+import UnownPanel from "./unown-panel"
+import "./pokemon-collection.css"
 
 export default function PokemonCollection() {
   const { t } = useTranslation()
-  const [selectedPokemon, setSelectedPokemon] = useState<Pkm | undefined>(
-    undefined
-  )
+  const [selectedPokemon, setSelectedPokemon] = useState<Pkm | "">("")
 
   const prevFilterState = useMemo(() => {
     const prevState = localStore.get(LocalStoreKeys.COLLECTION_FILTER)
     return {
       filter: prevState?.filter ?? "unlockable",
       sort: prevState?.sort ?? "index",
-      shinyOnly: prevState?.shinyOnly ?? false,
+      shinyOnly: prevState?.shinyOnly ?? false
     }
   }, [localStore])
 
@@ -35,7 +33,7 @@ export default function PokemonCollection() {
     localStore.set(LocalStoreKeys.COLLECTION_FILTER, {
       filter,
       sort,
-      shinyOnly,
+      shinyOnly
     })
   }, [filter, sort, shinyOnly])
 
@@ -43,7 +41,7 @@ export default function PokemonCollection() {
     <div id="pokemon-collection">
       <header className="my-container">
         <PokemonTypeahead
-          value={selectedPokemon ?? ""}
+          value={selectedPokemon}
           onChange={setSelectedPokemon}
         />
 
@@ -114,7 +112,7 @@ export default function PokemonCollection() {
       {selectedPokemon && (
         <PokemonEmotionsModal
           pokemon={selectedPokemon}
-          onHide={() => setSelectedPokemon(undefined)}
+          onHide={() => setSelectedPokemon("")}
         />
       )}
     </div>

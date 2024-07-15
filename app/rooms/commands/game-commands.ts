@@ -1060,7 +1060,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       }
 
       player.board.forEach((pokemon) => {
-        if (pokemon.items.has(Item.RARE_CANDY)) {
+        if (
+          pokemon.items.has(Item.RARE_CANDY) &&
+          pokemon.evolution !== Pkm.DEFAULT
+        ) {
           this.room.spawnOnBench(player, PkmFamily[pokemon.name])
         }
       })

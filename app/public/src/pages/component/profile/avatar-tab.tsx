@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
-import { PkmIndex } from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { changeAvatar } from "../../../stores/NetworkStore"
 import { getPortraitSrc } from "../../../utils"
@@ -12,7 +12,7 @@ export function AvatarTab() {
   const pokemonCollection = useAppSelector(
     (state) => state.lobby.pokemonCollection
   )
-  const [selectedPkm, setSelectedPkm] = useState<string>("")
+  const [selectedPkm, setSelectedPkm] = useState<Pkm | "">("")
 
   return (
     <div>

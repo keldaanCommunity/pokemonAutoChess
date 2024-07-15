@@ -802,6 +802,9 @@ export enum Pkm {
   GASTRODON_EAST_SEA = "GASTRODON_EAST_SEA",
   MUNNA = "MUNNA",
   MUSHARNA = "MUSHARNA",
+  RUFFLET = "RUFFLET",
+  BRAVIARY = "BRAVIARY",
+  HEATMOR = "HEATMOR",
   KLEFKI = "KLEFKI"
 }
 
@@ -1607,6 +1610,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GASTRODON_EAST_SEA]: "0423-0001",
   [Pkm.MUNNA]: "0517",
   [Pkm.MUSHARNA]: "0518",
+  [Pkm.RUFFLET]: "0627",
+  [Pkm.BRAVIARY]: "0628",
+  [Pkm.HEATMOR]: "0631",
   [Pkm.KLEFKI]: "0707"
 }
 
@@ -2412,6 +2418,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GASTRODON_EAST_SEA]: Pkm.SHELLOS_EAST_SEA,
   [Pkm.MUNNA]: Pkm.MUNNA,
   [Pkm.MUSHARNA]: Pkm.MUNNA,
+  [Pkm.RUFFLET]: Pkm.RUFFLET,
+  [Pkm.BRAVIARY]: Pkm.RUFFLET,
+  [Pkm.HEATMOR]: Pkm.HEATMOR,
   [Pkm.KLEFKI]: Pkm.KLEFKI
 }
 
@@ -6587,5 +6596,20 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot
+  },
+  [Pkm.RUFFLET]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.BRAVIARY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.HEATMOR]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
   }
 }

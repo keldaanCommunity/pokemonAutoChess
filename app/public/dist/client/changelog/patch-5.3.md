@@ -2,6 +2,9 @@
 - Tyrunt
 - Tyrantrum
 - Klefki
+- Rufflet
+- Braviary
+- Heatmor
 
 # Changes to Pokemon & Abilities
 - Archen line has been moved from Rare to Uncommon
@@ -69,10 +72,12 @@
 - New spawn animation when buying/picking a pokemon
 - Players scouting other boards now are visible on the right side of it. You can exchange emotes with other players outside of battle this way.
 - Added DPS meter for damage taken
+- Added search bar on pokemon meta report
 
 # Bugfix
 
 - Tapus and Maractus passives are no longer applied when they are not in the battlefield
+- Prevent freeze and sleep during a skydiving move
 
 # Misc
 

@@ -9,7 +9,7 @@ import PokemonCollectionItem from "./pokemon-collection-item"
 
 export default function PokemonCarousel(props: {
   type: Synergy | "all"
-  setPokemon: Dispatch<SetStateAction<Pkm | undefined>>
+  setPokemon: Dispatch<SetStateAction<Pkm | "">>
   filter: string
   sort: string
   shinyOnly: boolean

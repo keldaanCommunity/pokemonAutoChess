@@ -6,7 +6,7 @@ import PokemonCollectionItem from "./pokemon-collection-item"
 import "./unown-panel.css"
 
 export default function UnownPanel(props: {
-  setPokemon: Dispatch<SetStateAction<Pkm | undefined>>
+  setPokemon: Dispatch<SetStateAction<Pkm | "">>
   filter: string
   sort: string
   shinyOnly: boolean
