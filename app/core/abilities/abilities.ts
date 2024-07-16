@@ -4283,9 +4283,51 @@ export class SkyAttackStrategy extends AbilityStrategy {
       }, 500)
 
       setTimeout(() => {
-        if (destination.target?.hp > 0) {
+        if (destination.target?.life > 0) {
           const damage = 120
           destination.target.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      }, 1000)
+    }
+  }
+}
+
+export class FlyingPressStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const destination = state.getFarthestTargetCoordinateAvailablePlace(
+      pokemon,
+      board
+    )
+    if (destination) {
+      pokemon.skydiveTo(destination.x, destination.y, board)
+      setTimeout(() => {
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.FLYING_PRESS,
+          positionX: destination.x,
+          positionY: destination.y,
+          targetX: destination.target.positionX,
+          targetY: destination.target.positionY
+        })
+      }, 500)
+
+      setTimeout(() => {
+        if (target && target.life > 0) {
+          const damage = 0.3 * pokemon.hp
+          target.handleSpecialDamage(
             damage,
             board,
             AttackType.SPECIAL,
@@ -8393,7 +8435,7 @@ export class DreamEaterStrategy extends AbilityStrategy {
         targetX: sleepingTarget.positionX,
         targetY: sleepingTarget.positionY
       })
-      const coord = state.getAvailablePlaceCoordinatesInRange(
+      const coord = state.getNearestAvailablePlaceCoordinates(
         sleepingTarget,
         board,
         1
@@ -9173,29 +9215,25 @@ export class FairyLockStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    
-    const cells = board.getAdjacentCells(
-      target.positionX,
-      target.positionY,
-      true
-      ).filter((cell) => cell &&
-      cell.value && cell.value.team !== pokemon.team
-      )
-    
+
+    const cells = board
+      .getAdjacentCells(target.positionX, target.positionY, true)
+      .filter((cell) => cell && cell.value && cell.value.team !== pokemon.team)
+
     cells.forEach((cell) => {
-        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-          id: pokemon.simulation.id,
-          skill: pokemon.skill,
-          targetX: cell.value?.positionX,
-          targetY: cell.value?.positionY
-        })
-        cell.value?.handleSpecialDamage(
-          Math.round(90 / cells.length),
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: pokemon.skill,
+        targetX: cell.value?.positionX,
+        targetY: cell.value?.positionY
+      })
+      cell.value?.handleSpecialDamage(
+        Math.round(90 / cells.length),
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
     })
     target.status.triggerLocked(3000, target)
   }
@@ -9544,5 +9582,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.TAKE_HEART]: new TakeHeartStrategy(),
   [Ability.CRUSH_CLAW]: new CrushClawStrategy(),
   [Ability.FIRE_LASH]: new FireLashStrategy(),
-  [Ability.FAIRY_LOCK]: new FairyLockStrategy()
+  [Ability.FAIRY_LOCK]: new FairyLockStrategy(),
+  [Ability.FLYING_PRESS]: new FlyingPressStrategy()
 }

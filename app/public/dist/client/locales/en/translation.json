@@ -361,7 +361,8 @@
     "CAMERA_FLASH": "Camera Flash",
     "CRUSH_CLAW": "Crush Claw",
     "FIRE_LASH": "Fire Lash",
-    "FAIRY_LOCK": "Fairy Lock"
+    "FAIRY_LOCK": "Fairy Lock",
+    "FLYING_PRESS": "Flying Press"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1169,7 +1170,8 @@
     "RUFFLET": "Rufflet",
     "BRAVIARY": "Braviary",
     "HEATMOR": "Heatmor",
-    "KLEFKI": "Klefki"
+    "KLEFKI": "Klefki",
+    "HAWLUCHA": "Hawlucha"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1294,6 +1296,7 @@
     "GRASSY_SURGE": "Increase ATK of all GRASS Pokémons by [5,SP]",
     "MISTY_SURGE": "Give [30,SP] PP to FAIRY allies",
     "SKY_ATTACK": "Rises in the air and fall on the farthest target after one second, dealing [120,SP] SPECIAL",
+    "FLYING_PRESS": "Dives down onto the farthest target from the sky, dealing [30,SP]% of user's max HP as SPECIAL",
     "ILLUSION": "User recovers [30,50,70,SP=0.5] HP points and copies the form as well as the ATK,DEF, SPE_DEF, and RANGE of the targeted Pokemon",
     "SLUDGE": "Throws trash onto the 3 squares in front, which inflicts [2,3,4] stacks of POISONNED for [3,SP] seconds",
     "SLUDGE_WAVE": "Throw a spray of waste at the enemy with the most HP, inflicting [10,20,30,SP] SPECIAL and POISON for [2,4,6] seconds on all opponents in the path",

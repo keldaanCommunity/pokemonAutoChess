@@ -14165,6 +14165,24 @@ export class Klefki extends Pokemon {
   attackSprite = AttackSprite.FAIRY_RANGE
 }
 
+export class Hawlucha extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FIGHTING,
+    Synergy.FLYING,
+    Synergy.HUMAN
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 180
+  atk = 20
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.FLYING_PRESS
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -14976,5 +14994,6 @@ export const PokemonClasses: Record<
   [Pkm.RUFFLET]: Rufflet,
   [Pkm.BRAVIARY]: Braviary,
   [Pkm.HEATMOR]: Heatmor,
-  [Pkm.KLEFKI]: Klefki
+  [Pkm.KLEFKI]: Klefki,
+  [Pkm.HAWLUCHA]: Hawlucha
 }

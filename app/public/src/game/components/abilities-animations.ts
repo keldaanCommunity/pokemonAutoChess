@@ -745,6 +745,23 @@ export function displayAbility(
       break
     }
 
+    case Ability.FLYING_PRESS: {
+      const startCoords = transformAttackCoordinate(targetX, 9, false)
+      const specialProjectile = addAbilitySprite(skill, startCoords).setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 500,
+        onComplete: () => {
+          specialProjectile.destroy()
+          addAbilitySprite(Ability.HEAVY_SLAM, coordinatesTarget, true)
+        }
+      })
+      break
+    }
+
     case Ability.SUNSTEEL_STRIKE: {
       const startCoords = transformAttackCoordinate(targetX, 9, false)
       const specialProjectile = addAbilitySprite(skill, startCoords)

@@ -202,7 +202,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   get canMove(): boolean {
-    return !this.status.freeze && !this.status.sleep && !this.status.resurecting && !this.status.locked
+    return (
+      !this.status.freeze &&
+      !this.status.sleep &&
+      !this.status.resurecting &&
+      !this.status.locked
+    )
   }
 
   get isTargettable(): boolean {
@@ -1101,7 +1106,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         1
     ) {
       const targetAtContact = board.getValue(this.targetX, this.targetY)
-      const destination = this.state.getAvailablePlaceCoordinatesInRange(
+      const destination = this.state.getNearestAvailablePlaceCoordinates(
         this,
         board,
         4
@@ -1325,7 +1330,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (target.items.has(Item.COMFEY)) {
       const nearestAvailableCoordinate =
-        this.state.getNearestTargetCoordinateAvailablePlace(target, board)
+        this.state.getNearestAvailablePlaceCoordinates(target, board, 2)
       if (nearestAvailableCoordinate) {
         target.simulation.addPokemon(
           PokemonFactory.createPokemonFromName(Pkm.COMFEY, target.player),
