@@ -21,7 +21,6 @@ import {
   ISuggestionUser,
   PkmWithConfig
 } from "../../../types"
-import { GameMode } from "../../../types/enum/Game"
 import { Language } from "../../../types/enum/Language"
 import { MAX_BOTS_STAGE } from "../pages/component/bot-builder/bot-logic"
 import { ISpecialGamePlanned } from "../../../types/interfaces/Lobby"
