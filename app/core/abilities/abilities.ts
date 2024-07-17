@@ -9262,7 +9262,25 @@ export class FairyLockStrategy extends AbilityStrategy {
         crit
       )
     })
-    target.status.triggerLocked(3000, target)
+    target.status.triggerLocked(5000, target)
+  }
+}
+
+export class GravityStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const lockDuration = 2000 * (1 + pokemon.ap / 100)
+    board.forEach((x, y, unitOnCell) => {
+      if (unitOnCell && unitOnCell.team !== pokemon.team) {
+        unitOnCell.status.triggerLocked(lockDuration, target)
+      }
+    })
   }
 }
 
@@ -9611,5 +9629,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FIRE_LASH]: new FireLashStrategy(),
   [Ability.FAIRY_LOCK]: new FairyLockStrategy(),
   [Ability.FLYING_PRESS]: new FlyingPressStrategy(),
-  [Ability.DRAIN_PUNCH]: new DrainPunchStrategy()
+  [Ability.DRAIN_PUNCH]: new DrainPunchStrategy(),
+  [Ability.GRAVITY]: new GravityStrategy()
 }

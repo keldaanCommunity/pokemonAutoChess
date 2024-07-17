@@ -20,7 +20,12 @@ import {
   Stat,
   Team
 } from "../types/enum/Game"
-import { Berries, CraftableItems, Item } from "../types/enum/Item"
+import {
+  Berries,
+  CraftableItems,
+  Item,
+  ItemComponents
+} from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
@@ -1265,35 +1270,6 @@ export default class Simulation extends Schema implements ISimulation {
           break
       }
     })
-    if (
-      pokemon.passive === Passive.GHOLDENGO &&
-      pokemon.player &&
-      pokemon.player.money >= 50
-    ) {
-      pokemon.status.triggerRuneProtect(60000)
-    }
-
-    if (pokemon.passive === Passive.CLEAR_WING) {
-      pokemon.status.triggerClearWing(1000)
-    }
-    if (this.weather === Weather.RAIN && pokemon.passive === Passive.DRY_SKIN) {
-      pokemon.status.triggerDrySkin(1000)
-    }
-    if (
-      this.weather === Weather.RAIN &&
-      pokemon.passive === Passive.AQUA_VEIL
-    ) {
-      pokemon.status.triggerRuneProtect(60000)
-    }
-    if (
-      this.weather === Weather.SANDSTORM &&
-      pokemon.passive === Passive.DRY_SKIN
-    ) {
-      pokemon.addDodgeChance(0.25, pokemon, 0, false)
-    }
-    if (this.weather === Weather.SUN && pokemon.passive === Passive.DRY_SKIN) {
-      pokemon.addAbilityPower(50, pokemon, 0, false)
-    }
   }
 
   update(dt: number) {

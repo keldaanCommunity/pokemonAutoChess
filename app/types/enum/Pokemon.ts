@@ -808,7 +808,8 @@ export enum Pkm {
   KLEFKI = "KLEFKI",
   HAWLUCHA = "HAWLUCHA",
   MIENFOO = "MIENFOO",
-  MIENSHAO = "MIENSHAO"
+  MIENSHAO = "MIENSHAO",
+  STONJOURNER = "STONJOURNER"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1619,7 +1620,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.KLEFKI]: "0707",
   [Pkm.HAWLUCHA]: "0701",
   [Pkm.MIENFOO]: "0619",
-  [Pkm.MIENSHAO]: "0620"
+  [Pkm.MIENSHAO]: "0620",
+  [Pkm.STONJOURNER]: "0874"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2430,7 +2432,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.KLEFKI]: Pkm.KLEFKI,
   [Pkm.HAWLUCHA]: Pkm.HAWLUCHA,
   [Pkm.MIENFOO]: Pkm.MIENFOO,
-  [Pkm.MIENSHAO]: Pkm.MIENFOO
+  [Pkm.MIENSHAO]: Pkm.MIENFOO,
+  [Pkm.STONJOURNER]: Pkm.STONJOURNER
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
@@ -6635,5 +6638,10 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
+  },
+  [Pkm.STONJOURNER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shake,
+    emote: AnimationType.Shake
   }
 }
