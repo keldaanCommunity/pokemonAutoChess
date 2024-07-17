@@ -1562,6 +1562,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(4)
       break
 
+    case Ability.DRAIN_PUNCH:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
     case "MIND_BLOWN/hit":
       addAbilitySprite("MIND_BLOWN/hit", coordinates, true).setScale(3)
       break

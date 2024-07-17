@@ -362,7 +362,8 @@
     "CRUSH_CLAW": "Crush Claw",
     "FIRE_LASH": "Fire Lash",
     "FAIRY_LOCK": "Fairy Lock",
-    "FLYING_PRESS": "Flying Press"
+    "FLYING_PRESS": "Flying Press",
+    "DRAIN_PUNCH": "Drain Punch"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1171,7 +1172,9 @@
     "BRAVIARY": "Braviary",
     "HEATMOR": "Heatmor",
     "KLEFKI": "Klefki",
-    "HAWLUCHA": "Hawlucha"
+    "HAWLUCHA": "Hawlucha",
+    "MIENFOO": "Mienfoo",
+    "MIENSHAO": "Mienshao"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1514,7 +1517,8 @@
     "CAMERA_FLASH": "The target is PARALYSIS for [2,SP] seconds",
     "CRUSH_CLAW": "Reduce the target's DEF by [3,5] then perform two quick attacks dealing [100,SP]% of ATK as PHYSICAL each",
     "FIRE_LASH": "Deals [120,SP] SPECIAL and apply ARMOR_REDUCTION for 4 seconds",
-    "FAIRY_LOCK": "Spreads [90,SP] SPECIAL evenly across the target and adjacent enemies. Target is LOCKED for 3 seconds"
+    "FAIRY_LOCK": "Spreads [90,SP] SPECIAL evenly across the target and adjacent enemies. Target is LOCKED for 3 seconds",
+    "DRAIN_PUNCH": " The next attack inflicts [100,SP]% additional SPECIAL and restores [200,SP]% HP of the damage inflicted."
   },
   "effect": {
     "INGRAIN": "Ingrain",

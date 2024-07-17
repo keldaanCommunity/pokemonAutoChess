@@ -9206,6 +9206,27 @@ export class FireLashStrategy extends AbilityStrategy {
   }
 }
 
+export class DrainPunchStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const result = target.handleSpecialDamage(
+      pokemon.atk * 2,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
+    pokemon.handleHeal(result.takenDamage * 4, pokemon, 1, crit)
+  }
+}
+
 export class FairyLockStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -9583,5 +9604,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.CRUSH_CLAW]: new CrushClawStrategy(),
   [Ability.FIRE_LASH]: new FireLashStrategy(),
   [Ability.FAIRY_LOCK]: new FairyLockStrategy(),
-  [Ability.FLYING_PRESS]: new FlyingPressStrategy()
+  [Ability.FLYING_PRESS]: new FlyingPressStrategy(),
+  [Ability.DRAIN_PUNCH]: new DrainPunchStrategy()
 }
