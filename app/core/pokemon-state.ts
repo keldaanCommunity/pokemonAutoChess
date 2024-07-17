@@ -16,7 +16,7 @@ import { distanceC, distanceM } from "../utils/distance"
 import { logger } from "../utils/logger"
 import { max, min } from "../utils/number"
 import { pickRandomIn } from "../utils/random"
-import Board from "./board"
+import Board, { Cell } from "./board"
 import { PokemonEntity } from "./pokemon-entity"
 
 export default class PokemonState {
@@ -687,7 +687,7 @@ export default class PokemonState {
   getNearestTargetAtSightCoordinates(
     pokemon: PokemonEntity,
     board: Board
-  ): { x: number; y: number } | undefined {
+  ): { x: number; y: number } | null {
     let distance = 999
     let candidatesCoordinates: { x: number; y: number }[] = new Array<{
       x: number
@@ -714,10 +714,11 @@ export default class PokemonState {
         }
       }
     })
+
     if (candidatesCoordinates.length > 0) {
       return pickRandomIn(candidatesCoordinates)
     } else {
-      return undefined
+      return null
     }
   }
 
@@ -820,54 +821,29 @@ export default class PokemonState {
     return candidateCells[0]
   }
 
-  getAvailablePlaceCoordinatesInRange(
+  getNearestAvailablePlaceCoordinates(
     pokemon: PokemonEntity,
     board: Board,
-    range: number
-  ): { x: number; y: number } | undefined {
-    const candidateCells = new Array<{
-      distance: number
-      x: number
-      y: number
-    }>()
-
+    maxRange?: number | undefined
+  ): Cell | null {
+    let candidateCells: Cell[] = []
+    let minDistance = 999
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       const distance = distanceM(pokemon.positionX, pokemon.positionY, x, y)
-      if (value === undefined && distance >= range) {
-        candidateCells.push({
-          x,
-          y,
-          distance
-        })
+      if (
+        value === undefined &&
+        (maxRange === undefined || distance >= maxRange)
+      ) {
+        if (distance < minDistance) {
+          candidateCells = [{ x, y, value }]
+          minDistance = distance
+        } else if (distance == minDistance) {
+          candidateCells.push({ x, y, value })
+        }
       }
     })
 
-    candidateCells.sort((a, b) => a.distance - b.distance)
-    return candidateCells[0]
-  }
-
-  getNearestTargetCoordinateAvailablePlace(
-    pokemon: PokemonEntity,
-    board: Board
-  ): { x: number; y: number } | undefined {
-    const candidateCells = new Array<{
-      distance: number
-      x: number
-      y: number
-    }>()
-
-    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value === undefined) {
-        candidateCells.push({
-          x,
-          y,
-          distance: distanceM(pokemon.positionX, pokemon.positionY, x, y)
-        })
-      }
-    })
-
-    candidateCells.sort((a, b) => a.distance - b.distance)
-    return candidateCells[0]
+    return pickRandomIn(candidateCells)
   }
 
   getTargetCoordinateWhenConfused(

@@ -5,6 +5,7 @@
 - Rufflet
 - Braviary
 - Heatmor
+- Hawlucha
 
 # Changes to Pokemon & Abilities
 - Archen line has been moved from Rare to Uncommon
