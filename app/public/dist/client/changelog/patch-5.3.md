@@ -6,6 +6,8 @@
 - Braviary
 - Heatmor
 - Hawlucha
+- Mienfoo
+- Mienshao
 
 # Changes to Pokemon & Abilities
 - Archen line has been moved from Rare to Uncommon

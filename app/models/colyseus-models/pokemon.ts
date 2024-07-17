@@ -6774,6 +6774,37 @@ export class Bastiodon extends Pokemon {
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
+export class Mienfoo extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.FIELD])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.MIENSHAO
+  hp = 80
+  atk = 10
+  def = 3
+  speDef = 3
+  maxPP = 60
+  range = 1
+  skill = Ability.DRAIN_PUNCH
+  additional = true
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
+
+export class Mienshao extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.FIELD])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 175
+  atk = 20
+  def = 4
+  speDef = 4
+  maxPP = 60
+  range = 1
+  skill = Ability.DRAIN_PUNCH
+  additional = true
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
+
 export class Tirtouga extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.WATER])
   rarity = Rarity.UNCOMMON
@@ -14995,5 +15026,7 @@ export const PokemonClasses: Record<
   [Pkm.BRAVIARY]: Braviary,
   [Pkm.HEATMOR]: Heatmor,
   [Pkm.KLEFKI]: Klefki,
-  [Pkm.HAWLUCHA]: Hawlucha
+  [Pkm.HAWLUCHA]: Hawlucha,
+  [Pkm.MIENFOO]: Mienfoo,
+  [Pkm.MIENSHAO]: Mienshao
 }
