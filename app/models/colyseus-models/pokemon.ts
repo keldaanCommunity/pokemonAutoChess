@@ -6345,6 +6345,9 @@ export class PrimalGroudon extends Pokemon {
   skill = Ability.EARTHQUAKE
   passive = Passive.SANDSTORM
   attackSprite = AttackSprite.FIRE_MELEE
+  onAcquired(player: Player) {
+    player.titles.add(Title.PRIMAL)
+  }
 }
 
 export class PrimalKyogre extends Pokemon {
@@ -6364,6 +6367,9 @@ export class PrimalKyogre extends Pokemon {
   skill = Ability.ORIGIN_PULSE
   passive = Passive.RAIN
   attackSprite = AttackSprite.WATER_RANGE
+  onAcquired(player: Player) {
+    player.titles.add(Title.PRIMAL)
+  }
 }
 
 export class MegaRayquaza extends Pokemon {
@@ -6379,6 +6385,9 @@ export class MegaRayquaza extends Pokemon {
   skill = Ability.DRACO_METEOR
   passive = Passive.AIRLOCK
   attackSprite = AttackSprite.FIRE_RANGE
+  onAcquired(player: Player) {
+    player.titles.add(Title.PRIMAL)
+  }
 }
 
 export class Oddish extends Pokemon {
