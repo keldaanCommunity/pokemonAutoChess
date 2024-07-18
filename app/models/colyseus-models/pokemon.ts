@@ -45,7 +45,7 @@ import {
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
-import { Synergy } from "../../types/enum/Synergy"
+import { Synergy, SynergyEffects } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { sum } from "../../utils/array"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
@@ -13226,7 +13226,8 @@ export class Cosmoem extends Pokemon {
     (pokemon, player) => {
       if (
         pokemon.positionX === player.lightX &&
-        pokemon.positionY === player.lightY
+        pokemon.positionY === player.lightY &&
+        SynergyEffects[Synergy.LIGHT].some((e) => player.effects.has(e))
       )
         return Pkm.SOLGALEO
       else return Pkm.LUNALA
