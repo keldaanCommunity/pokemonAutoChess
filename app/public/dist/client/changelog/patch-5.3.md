@@ -89,3 +89,4 @@
 - Removed the 10am CEST Ultra-ball ranked lobby. Its now once per day at 10pm CEST
 - Initiated Korean translation thanks to Mrkim-0
 - Initiated Polski translation thanks to dil25kop
+- New titles: Blob, Tactician, Strategist, Primal
