@@ -20,7 +20,7 @@ import {
   Stat,
   Team
 } from "../types/enum/Game"
-import { Berries, CraftableItems, Item, ItemComponents } from "../types/enum/Item"
+import { Berries, CraftableItems, Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
@@ -1595,6 +1595,9 @@ export default class Simulation extends Schema implements ISimulation {
         targetY: waveLevel - 1,
         orientation: Orientation.DOWN
       })
+      this.room.broadcast(Transfer.CLEAR_BOARD, {
+        simulationId: this.id
+      })
 
       for (let y = 0; y < this.board.rows; y++) {
         for (let x = 0; x < this.board.columns; x++) {
@@ -1649,6 +1652,9 @@ export default class Simulation extends Schema implements ISimulation {
         targetX: 0,
         targetY: waveLevel - 1,
         orientation: Orientation.UP
+      })
+      this.room.broadcast(Transfer.CLEAR_BOARD, {
+        simulationId: this.id
       })
 
       for (let y = this.board.rows - 1; y > 0; y--) {

@@ -3326,6 +3326,12 @@ export class WaterfallStrategy extends AbilityStrategy {
     pokemon.status.clearNegativeStatus()
     board.effects[pokemon.positionY * board.columns + pokemon.positionX] =
       undefined
+    pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+      simulationId: pokemon.simulation.id,
+      type: "clear",
+      x: pokemon.positionX,
+      y: pokemon.positionY
+    })
   }
 }
 
