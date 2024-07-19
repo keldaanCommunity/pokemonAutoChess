@@ -3314,6 +3314,12 @@ export class WaterfallStrategy extends AbilityStrategy {
     pokemon.status.clearNegativeStatus()
     board.effects[pokemon.positionY * board.columns + pokemon.positionX] =
       undefined
+    pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+      simulationId: pokemon.simulation.id,
+      type: "clear",
+      x: pokemon.positionX,
+      y: pokemon.positionY
+    })
   }
 }
 
@@ -5118,6 +5124,32 @@ export class SlashingClawStrategy extends AbilityStrategy {
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     target.status.triggerWound(5000, target, pokemon)
+  }
+}
+
+export class DireClawStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    const status = pickRandomIn(["poison", "sleep", "paralysis"])
+    switch (status) {
+      case "poison":
+        target.status.triggerPoison(3000, target, pokemon)
+        break
+      case "sleep":
+        target.status.triggerSleep(3000, target)
+        break
+      case "paralysis":
+        target.status.triggerParalysis(3000, target)
+        break
+    }
   }
 }
 
@@ -9222,7 +9254,25 @@ export class FairyLockStrategy extends AbilityStrategy {
         crit
       )
     })
-    target.status.triggerLocked(3000, target)
+    target.status.triggerLocked(5000, target)
+  }
+}
+
+export class GravityStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const lockDuration = 2000 * (1 + pokemon.ap / 100)
+    board.forEach((x, y, unitOnCell) => {
+      if (unitOnCell && unitOnCell.team !== pokemon.team) {
+        unitOnCell.status.triggerLocked(lockDuration, target)
+      }
+    })
   }
 }
 
@@ -9571,5 +9621,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FIRE_LASH]: new FireLashStrategy(),
   [Ability.FAIRY_LOCK]: new FairyLockStrategy(),
   [Ability.FLYING_PRESS]: new FlyingPressStrategy(),
-  [Ability.DRAIN_PUNCH]: new DrainPunchStrategy()
+  [Ability.DRAIN_PUNCH]: new DrainPunchStrategy(),
+  [Ability.GRAVITY]: new GravityStrategy(),
+  [Ability.DIRE_CLAW]: new DireClawStrategy()
 }

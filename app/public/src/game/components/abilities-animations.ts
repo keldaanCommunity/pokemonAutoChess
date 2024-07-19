@@ -422,6 +422,13 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
+    case Ability.GRAVITY:
+      addAbilitySprite(Ability.CALM_MIND, coordinates, true)
+        .setScale(3)
+        .setTint(0xccff33)
+        .setDepth(0)
+      break
+
     case Ability.COSMIC_POWER:
       addAbilitySprite(skill, coordinates, true).setOrigin(0.5, 1).setScale(2)
       break

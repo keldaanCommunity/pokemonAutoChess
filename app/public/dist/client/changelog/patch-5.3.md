@@ -8,6 +8,9 @@
 - Hawlucha
 - Mienfoo
 - Mienshao
+- Stonjourner
+- Hisuian Sneasel
+- Sneasler
 
 # Changes to Pokemon & Abilities
 - Archen line has been moved from Rare to Uncommon
@@ -93,3 +96,4 @@
 - Removed the 10am CEST Ultra-ball ranked lobby. Its now once per day at 10pm CEST
 - Initiated Korean translation thanks to Mrkim-0
 - Initiated Polski translation thanks to dil25kop
+- New titles: Blob, Tactician, Strategist, Primal

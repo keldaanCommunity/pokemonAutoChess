@@ -1320,35 +1320,6 @@ export default class Simulation extends Schema implements ISimulation {
           break
       }
     })
-    if (
-      pokemon.passive === Passive.GHOLDENGO &&
-      pokemon.player &&
-      pokemon.player.money >= 50
-    ) {
-      pokemon.status.triggerRuneProtect(60000)
-    }
-
-    if (pokemon.passive === Passive.CLEAR_WING) {
-      pokemon.status.triggerClearWing(1000)
-    }
-    if (this.weather === Weather.RAIN && pokemon.passive === Passive.DRY_SKIN) {
-      pokemon.status.triggerDrySkin(1000)
-    }
-    if (
-      this.weather === Weather.RAIN &&
-      pokemon.passive === Passive.AQUA_VEIL
-    ) {
-      pokemon.status.triggerRuneProtect(60000)
-    }
-    if (
-      this.weather === Weather.SANDSTORM &&
-      pokemon.passive === Passive.DRY_SKIN
-    ) {
-      pokemon.addDodgeChance(0.25, pokemon, 0, false)
-    }
-    if (this.weather === Weather.SUN && pokemon.passive === Passive.DRY_SKIN) {
-      pokemon.addAbilityPower(50, pokemon, 0, false)
-    }
   }
 
   update(dt: number) {
@@ -1650,6 +1621,9 @@ export default class Simulation extends Schema implements ISimulation {
         targetY: waveLevel - 1,
         orientation: Orientation.DOWN
       })
+      this.room.broadcast(Transfer.CLEAR_BOARD, {
+        simulationId: this.id
+      })
 
       for (let y = 0; y < this.board.rows; y++) {
         for (let x = 0; x < this.board.columns; x++) {
@@ -1704,6 +1678,9 @@ export default class Simulation extends Schema implements ISimulation {
         targetX: 0,
         targetY: waveLevel - 1,
         orientation: Orientation.UP
+      })
+      this.room.broadcast(Transfer.CLEAR_BOARD, {
+        simulationId: this.id
       })
 
       for (let y = this.board.rows - 1; y > 0; y--) {
