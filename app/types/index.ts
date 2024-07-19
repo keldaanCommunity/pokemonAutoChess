@@ -140,6 +140,7 @@ export enum Transfer {
   BOT_DATABASE_LOG = "BOT_DATABASE_LOG",
   UNBAN = "UNBAN",
   BOARD_EVENT = "BOARD_EVENT",
+  CLEAR_BOARD = "CLEAR_BOARD",
   SIMULATION_STOP = "SIMULATION_STOP",
   ABILITY = "ABILITY",
   SELECT_LANGUAGE = "SELECT_LANGUAGE",
@@ -523,6 +524,12 @@ export interface IPokemonEntity {
     apBoost: number,
     crit: boolean
   ): void
+  addDodgeChance(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
   update(
     dt: number,
     board: Board,
@@ -530,6 +537,7 @@ export interface IPokemonEntity {
     player: Player | undefined
   ): void
   skydiveTo(x: number, y: number, board: Board): void
+  toIdleState(): void
   physicalDamage: number
   specialDamage: number
   trueDamage: number
@@ -702,7 +710,10 @@ export enum Title {
   MUSICIAN = "MUSICIAN",
   BABYSITTER = "BABYSITTER",
   ALCHEMIST = "ALCHEMIST",
+  BLOB = "BLOB",
   HARLEQUIN = "HARLEQUIN",
+  TACTICIAN = "TACTICIAN",
+  STRATEGIST = "STRATEGIST",
   GLITCH_TRAINER = "GLITCH_TRAINER",
   NURSE = "NURSE",
   GARDIAN = "GARDIAN",
@@ -721,6 +732,7 @@ export enum Title {
   BOT_BUILDER = "BOT_BUILDER",
   SHINY_SEEKER = "SHINY_SEEKER",
   ARCHEOLOGIST = "ARCHEOLOGIST",
+  PRIMAL = "PRIMAL",
   DENTIST = "DENTIST",
   FISHERMAN = "FISHERMAN",
   CHOSEN_ONE = "CHOSEN_ONE",

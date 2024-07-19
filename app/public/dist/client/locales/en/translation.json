@@ -363,7 +363,9 @@
     "FIRE_LASH": "Fire Lash",
     "FAIRY_LOCK": "Fairy Lock",
     "FLYING_PRESS": "Flying Press",
-    "DRAIN_PUNCH": "Drain Punch"
+    "DRAIN_PUNCH": "Drain Punch",
+    "GRAVITY": "Gravity",
+    "DIRE_CLAW": "Dire Claw"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -779,6 +781,8 @@
     "MAGCARGO": "Magcargo",
     "SNEASEL": "Sneasel",
     "WEAVILE": "Weavile",
+    "HISUI_SNEASEL": "Hisuian Sneasel",
+    "SNEASLER": "Sneasler",
     "CROAGUNK": "Croagunk",
     "TOXICROAK": "Toxicroak",
     "CHINCHOU": "Chinchou",
@@ -1174,7 +1178,8 @@
     "KLEFKI": "Klefki",
     "HAWLUCHA": "Hawlucha",
     "MIENFOO": "Mienfoo",
-    "MIENSHAO": "Mienshao"
+    "MIENSHAO": "Mienshao",
+    "STONJOURNER": "Stonjourner"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1348,6 +1353,7 @@
     "THRASH": "Buff ATK by [100,SP]% and become CONFUSION for 3 seconds",
     "SOLAR_BEAM": "Deals [30,60,120,SP] SPECIAL in a straight line behind the target. If the weather is SUN, targets are BURN for 3 seconds and restores 40 PP",
     "MAGMA_STORM": "The target becomes trapped within a maelstrom of fire that deals [80,SP] SPECIAL before moving to an adjacent target",
+    "DIRE_CLAW": "Deal [15,30,60,SP] to the target. Inflicts either POISON, SLEEP or PARALYSIS for 3 seconds.",
     "SLASHING_CLAW": "Deals [15,30,60,SP] to the target and WOUND it for 5 seconds. If the target is already WOUND, deals 30% bonus SPECIAL",
     "ERUPTION": "Fires [15,25,40] projectiles in the air. Every projectile deals [30,50,70,SP] SPECIAL and BURN for 5 seconds",
     "HAIL": "A hailstorm hits [10,20,30] random cells on the board, dealing [50,SP] SPECIAL. Hailstones stay on the ground, dealing 10 SPECIAL and FREEZE Pokémons that walk on it for 1 second, if not ICE.",
@@ -1517,8 +1523,9 @@
     "CAMERA_FLASH": "The target is PARALYSIS for [2,SP] seconds",
     "CRUSH_CLAW": "Reduce the target's DEF by [3,5] then perform two quick attacks dealing [100,SP]% of ATK as PHYSICAL each",
     "FIRE_LASH": "Deals [120,SP] SPECIAL and apply ARMOR_REDUCTION for 4 seconds",
-    "FAIRY_LOCK": "Spreads [90,SP] SPECIAL evenly across the target and adjacent enemies. Target is LOCKED for 3 seconds",
-    "DRAIN_PUNCH": " The next attack inflicts [100,SP]% additional SPECIAL and restores [200,SP]% HP of the damage inflicted."
+    "FAIRY_LOCK": "Spreads [90,SP] SPECIAL evenly across the target and adjacent enemies. Target is LOCKED for 5 seconds",
+    "DRAIN_PUNCH": " The next attack inflicts [100,SP]% additional SPECIAL and restores [200,SP]% HP of the damage inflicted.",
+    "GRAVITY": "The enemy team is LOCKED for [2,SP] seconds"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2081,7 +2088,8 @@
     "BLOODMOON": "Changes form during BLOODMOON",
     "RECYCLE": "Feed it with berries to gain 10 HP, or with basic components for 25 HP + item stats. Feed it with artificial items to gain 50 HP + item stats, and get TRASH in return",
     "DREAM_CATCHER": "If its target is SLEEP, holder attacks give 10 SHIELD to the 3 allies closest to it",
-    "SLOW_START": "Starts at 0.5 ATK_SPEED. After first ability cast, gains 30% ATK_SPEED and 10 ATK"
+    "SLOW_START": "Starts at 0.5 ATK_SPEED. After first ability cast, gains 30% ATK_SPEED and 10 ATK",
+    "STONJOURNER": "Does not move or attack until PP bar is full. Its power spot gives 50% AP to all adjacent allies at the start of the fight."
   },
   "stat": {
     "ATK": "Attack",
@@ -2261,6 +2269,8 @@
     "MUSICIAN": "Musician",
     "BABYSITTER": "Babysitter",
     "HARLEQUIN": "Harlequin",
+    "TACTICIAN": "Tactician",
+    "STRATEGIST": "Strategist",
     "GLITCH_TRAINER": "Glitch Trainer",
     "NURSE": "Nurse",
     "GARDIAN": "Guardian",
@@ -2281,7 +2291,9 @@
     "BOT_BUILDER": "Bot Builder",
     "SHINY_SEEKER": "Shiny Seeker",
     "ARCHEOLOGIST": "Archeologist",
+    "PRIMAL": "Primal",
     "ALCHEMIST": "Alchemist",
+    "BLOB": "Blob",
     "DENTIST": "Dentist",
     "FISHERMAN": "Fisherman",
     "CHOSEN_ONE": "Chosen One",
@@ -2329,7 +2341,10 @@
     "MUSICIAN": "Max Synergy With Sound Type in a game",
     "BABYSITTER": "Max Synergy With Baby Type in a game",
     "ALCHEMIST": "Max synergy with Artificial type in a game",
+    "BLOB": "Max synergy with Amorphous type in a game",
     "HARLEQUIN": "Have 5 different synergies at once",
+    "TACTICIAN": "Have 10 different synergies at once",
+    "STRATEGIST": "Have 15 different synergies at once",
     "GLITCH_TRAINER": "Report a Bug without annoying Keldaan",
     "NURSE": "Heal 1000 or more in a single fight",
     "GARDIAN": "Shield 1000 or more in a single fight",
@@ -2350,6 +2365,7 @@
     "BOT_BUILDER": "Reach level 20 to unlock the Bot Builder",
     "SHINY_SEEKER": "Have over 30 shiny Pokémon avatars",
     "ARCHEOLOGIST": "Decipher the secret message of the Unowns",
+    "PRIMAL": "Get Primal Groudon, Primal Kyogre or Mega Rayquaza",
     "DENTIST": "Own the angry Arbok",
     "FISHERMAN": "Get a Gyarados",
     "CHOSEN_ONE": "Max Synergy With Light type in a game",

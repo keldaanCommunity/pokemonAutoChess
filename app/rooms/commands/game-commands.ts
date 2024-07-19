@@ -848,6 +848,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           case Effect.GOOGLE_SPECS:
             player.titles.add(Title.ALCHEMIST)
             break
+          case Effect.ETHEREAL:
+            player.titles.add(Title.BLOB)
+            break
           case Effect.DIAMOND_STORM:
             player.titles.add(Title.HIKER)
             break
@@ -878,6 +881,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       })
       if (effects.size >= 5) {
         player.titles.add(Title.HARLEQUIN)
+      }
+      if (effects.size >= 10) {
+        player.titles.add(Title.TACTICIAN)
+      }
+      if (effects.size >= 15) {
+        player.titles.add(Title.STRATEGIST)
       }
       let shield = 0
       let heal = 0

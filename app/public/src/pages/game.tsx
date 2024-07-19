@@ -363,6 +363,18 @@ export default function Game() {
         }
       })
 
+      room.onMessage(
+        Transfer.CLEAR_BOARD,
+        (event: { simulationId: string }) => {
+          if (gameContainer.game) {
+            const g = getGameScene()
+            if (g?.battle?.simulation?.id === event.simulationId) {
+              g.battle.clearBoardEvents()
+            }
+          }
+        }
+      )
+
       room.onMessage(Transfer.SIMULATION_STOP, () => {
         if (gameContainer.game) {
           const g = getGameScene()
