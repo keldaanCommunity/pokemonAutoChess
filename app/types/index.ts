@@ -524,12 +524,19 @@ export interface IPokemonEntity {
     apBoost: number,
     crit: boolean
   ): void
+  addDodgeChance(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
   update(
     dt: number,
     board: Board,
     weather: string,
     player: Player | undefined
   ): void
+  toIdleState(): void
   physicalDamage: number
   specialDamage: number
   trueDamage: number

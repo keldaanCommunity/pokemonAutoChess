@@ -363,7 +363,8 @@
     "FIRE_LASH": "Fire Lash",
     "FAIRY_LOCK": "Fairy Lock",
     "FLYING_PRESS": "Flying Press",
-    "DRAIN_PUNCH": "Drain Punch"
+    "DRAIN_PUNCH": "Drain Punch",
+    "GRAVITY": "Gravity"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1174,7 +1175,8 @@
     "KLEFKI": "Klefki",
     "HAWLUCHA": "Hawlucha",
     "MIENFOO": "Mienfoo",
-    "MIENSHAO": "Mienshao"
+    "MIENSHAO": "Mienshao",
+    "STONJOURNER": "Stonjourner"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1517,8 +1519,9 @@
     "CAMERA_FLASH": "The target is PARALYSIS for [2,SP] seconds",
     "CRUSH_CLAW": "Reduce the target's DEF by [3,5] then perform two quick attacks dealing [100,SP]% of ATK as PHYSICAL each",
     "FIRE_LASH": "Deals [120,SP] SPECIAL and apply ARMOR_REDUCTION for 4 seconds",
-    "FAIRY_LOCK": "Spreads [90,SP] SPECIAL evenly across the target and adjacent enemies. Target is LOCKED for 3 seconds",
-    "DRAIN_PUNCH": " The next attack inflicts [100,SP]% additional SPECIAL and restores [200,SP]% HP of the damage inflicted."
+    "FAIRY_LOCK": "Spreads [90,SP] SPECIAL evenly across the target and adjacent enemies. Target is LOCKED for 5 seconds",
+    "DRAIN_PUNCH": " The next attack inflicts [100,SP]% additional SPECIAL and restores [200,SP]% HP of the damage inflicted.",
+    "GRAVITY": "The enemy team is LOCKED for [2,SP] seconds"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2073,7 +2076,8 @@
     "BLOODMOON": "Changes form during BLOODMOON",
     "RECYCLE": "Feed it with berries to gain 10 HP, or with basic components for 25 HP + item stats. Feed it with artificial items to gain 50 HP + item stats, and get TRASH in return",
     "DREAM_CATCHER": "If its target is SLEEP, holder attacks give 10 SHIELD to the 3 allies closest to it",
-    "SLOW_START": "Starts at 0.5 ATK_SPEED. After first ability cast, gains 30% ATK_SPEED and 10 ATK"
+    "SLOW_START": "Starts at 0.5 ATK_SPEED. After first ability cast, gains 30% ATK_SPEED and 10 ATK",
+    "STONJOURNER": "Does not move or attack until PP bar is full. Its power spot gives 50% AP to all adjacent allies at the start of the fight."
   },
   "stat": {
     "ATK": "Attack",
