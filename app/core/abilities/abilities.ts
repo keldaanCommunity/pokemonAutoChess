@@ -1763,7 +1763,7 @@ export class VoltSwitchStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
     const farthestCoordinate =
-      board.getFarthestTargetCoordinateAvailablePlace(board)
+      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
 
     if (farthestCoordinate) {
       const cells = board.getCellsBetween(
