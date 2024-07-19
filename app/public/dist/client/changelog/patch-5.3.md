@@ -59,12 +59,16 @@
 
 # Changes to Items
 
-- Rework Electirizer: Every third attack burns 15 PP of the target and inflicts PARALYSIS for 2 seconds
-- Rework Incense: No longer give Flora synergy. Prevent wild Pokémon encounter in shop when held. Instead, each Pokémon in shop has an additional 5% chance to share a common synergy with the holder.
+- New Shiny Item: Gold Bottle Cap: +1% crit chance and crit power per gold you have. Gain 1 gold per KO, and a 5 gold jackpot if eliminating the last enemy.
+- New Shiny Item: Absorb Bulb: All the damage reduction is absorbed by the bulb. Once under 50% HP, bulb explodes, dealing all damage absorbed to adjacent enemy units as special damage.
+- New Shiny Item: Sacred Ash: Gives Resurection status. After resurecting, up to 3 allies KO are resurected as well, but without items.
+- New Shiny Item: Comet Shard: Starts the round by diving like a comet on an enemy at the opposite side of the board, dealing 100 special damage and gaining Protect for 2 seconds.
 - White Flute: the average power of the 3 pokemons spawned has been slightly reduced at all stages
 - Shiny Stone: now gives +3 to Light synergy count
 - Golden Rod: Unique pool no longer tier 3 only, but taken from unique propositions list at t10, duos excluded. Unique no longer matches top synergies.
 - Rare Candy: after each round, spawns a 1 ⭐ copy of the holder on bench
+- Rework Electirizer: Every third attack burns 15 PP of the target and inflicts PARALYSIS for 2 seconds
+- Rework Incense: No longer give Flora synergy. Prevent wild Pokémon encounter in shop when held. Instead, each Pokémon in shop has an additional 5% chance to share a common synergy with the holder.
 - Nerf Green orb: Heal ~~5~~ 4% of max HP every second
 - Nerf Blue Orb: chain lightning bounces to the ~~3~~ 2 closing enemies
 - Buff Upgrade: ~~+4~~ +5% Attack Speed per hit
