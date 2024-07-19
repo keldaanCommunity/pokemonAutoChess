@@ -9,6 +9,7 @@ import { getPath } from "../public/src/pages/utils/utils"
 import GameRoom from "../rooms/game-room"
 import { IPokemon, IPokemonEntity, ISimulation, Transfer } from "../types"
 import { BOARD_HEIGHT, BOARD_WIDTH, ItemStats } from "../types/Config"
+import { Ability } from "../types/enum/Ability"
 import { Effect } from "../types/enum/Effect"
 import {
   AttackType,
@@ -20,7 +21,12 @@ import {
   Stat,
   Team
 } from "../types/enum/Game"
-import { Berries, CraftableItems, Item, ItemComponents } from "../types/enum/Item"
+import {
+  Berries,
+  CraftableItems,
+  Item,
+  ItemComponents
+} from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
@@ -390,7 +396,7 @@ export default class Simulation extends Schema implements ISimulation {
     )
   }
 
-  applyItemsEffects(pokemon: PokemonEntity, ignoreItemsEffects?: Item[]) {
+  applyItemsEffects(pokemon: PokemonEntity) {
     if (pokemon.passive === Passive.PICKUP && pokemon.items.size === 0) {
       pokemon.items.add(pickRandomIn(CraftableItems.concat(Berries)))
     }
@@ -406,7 +412,7 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     pokemon.items.forEach((item) => {
-      !ignoreItemsEffects?.includes(item) && this.applyItemEffect(pokemon, item)
+      this.applyItemEffect(pokemon, item)
     })
 
     if (pokemon.passive === Passive.SYNCHRO) {
@@ -469,6 +475,15 @@ export default class Simulation extends Schema implements ISimulation {
 
     if (item === Item.DYNAMAX_BAND) {
       pokemon.addMaxHP(3 * pokemon.hp)
+    }
+
+    if (item === Item.GOLD_BOTTLE_CAP && pokemon.player) {
+      pokemon.addCritChance(pokemon.player.money, pokemon, 0, false)
+      pokemon.addCritPower(pokemon.player.money / 100, pokemon, 0, false)
+    }
+
+    if (item === Item.SACRED_ASH) {
+      pokemon.status.resurection = true
     }
   }
 
@@ -661,6 +676,46 @@ export default class Simulation extends Schema implements ISimulation {
             )
             this.addPokemon(mon, coord.x, coord.y, pokemon.team, true)
           })
+        }
+
+        if (pokemon.items.has(Item.COMET_SHARD)) {
+          setTimeout(() => {
+            const farthestCoordinate =
+              this.board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+            if (farthestCoordinate) {
+              const target = farthestCoordinate.target as PokemonEntity
+              pokemon.skydiveTo(
+                farthestCoordinate.x,
+                farthestCoordinate.y,
+                this.board
+              )
+              pokemon.targetX = target.positionX
+              pokemon.targetY = target.positionY
+              pokemon.status.triggerProtect(2000)
+              setTimeout(() => {
+                pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+                  id: pokemon.simulation.id,
+                  skill: "COMET_CRASH",
+                  positionX: farthestCoordinate.x,
+                  positionY: farthestCoordinate.y,
+                  targetX: target.positionX,
+                  targetY: target.positionY
+                })
+              }, 500)
+
+              setTimeout(() => {
+                if (target?.life > 0) {
+                  target.handleSpecialDamage(
+                    100,
+                    this.board,
+                    AttackType.SPECIAL,
+                    pokemon as PokemonEntity,
+                    false
+                  )
+                }
+              }, 1000)
+            }
+          }, 100)
         }
 
         if (pokemon.passive === Passive.SPOT_PANDA) {

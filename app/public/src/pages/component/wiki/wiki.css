@@ -252,7 +252,7 @@
 #wiki-items ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5em;
+  gap: 0;
   padding: 0;
 }
 

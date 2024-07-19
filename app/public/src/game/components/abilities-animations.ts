@@ -778,6 +778,27 @@ export function displayAbility(
       break
     }
 
+    case "COMET_CRASH": {
+      const startCoords = transformAttackCoordinate(targetX, 9, false)
+      const specialProjectile = addAbilitySprite(
+        Ability.SUNSTEEL_STRIKE,
+        startCoords
+      )
+        .setScale(0.5)
+        .setTint(0x2020ff)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 500,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.ACROBATICS: {
       const startCoords = transformAttackCoordinate(
         targetX + 1,

@@ -529,6 +529,7 @@ export interface IPokemonEntity {
     weather: string,
     player: Player | undefined
   ): void
+  skydiveTo(x: number, y: number, board: Board): void
   physicalDamage: number
   specialDamage: number
   trueDamage: number

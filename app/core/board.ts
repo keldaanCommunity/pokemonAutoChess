@@ -2,7 +2,7 @@ import { IPokemonEntity } from "../types"
 import { Effect } from "../types/enum/Effect"
 import { Orientation } from "../types/enum/Game"
 import { Passive } from "../types/enum/Passive"
-import { distanceC } from "../utils/distance"
+import { distanceC, distanceM } from "../utils/distance"
 import { logger } from "../utils/logger"
 import { OrientationArray, OrientationVector } from "../utils/orientation"
 import { pickRandomIn } from "../utils/random"
@@ -330,5 +330,45 @@ export default class Board {
     if (y >= 0 && y < this.rows && x >= 0 && x < this.columns) {
       return this.effects[this.columns * y + x]
     }
+  }
+
+  getFarthestTargetCoordinateAvailablePlace(
+    pokemon: IPokemonEntity
+  ):
+    | { x: number; y: number; distance: number; target: IPokemonEntity }
+    | undefined {
+    const candidateCells = new Array<{
+      distance: number
+      target: PokemonEntity
+      x: number
+      y: number
+    }>()
+
+    this.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
+      if (
+        value !== undefined &&
+        value.team !== pokemon.team &&
+        value.isTargettable
+      ) {
+        candidateCells.push(
+          ...this.getAdjacentCells(x, y)
+            .filter((cell) => this.getValue(cell.x, cell.y) === undefined)
+            .map((cell) => ({
+              x: cell.x,
+              y: cell.y,
+              distance: distanceM(
+                pokemon.positionX,
+                pokemon.positionY,
+                cell.x,
+                cell.y
+              ),
+              target: value
+            }))
+        )
+      }
+    })
+
+    candidateCells.sort((a, b) => b.distance - a.distance)
+    return candidateCells[0]
   }
 }

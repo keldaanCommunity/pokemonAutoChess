@@ -75,10 +75,8 @@ export default class MovingState extends PokemonState {
       !pokemon.status.locked
     ) {
       // dark jump
-      const farthestCoordinate = this.getFarthestTargetCoordinateAvailablePlace(
-        pokemon,
-        board
-      )
+      const farthestCoordinate =
+        board.getFarthestTargetCoordinateAvailablePlace(pokemon)
       //logger.debug({ farthestCoordinate })
       if (farthestCoordinate) {
         x = farthestCoordinate.x
