@@ -364,7 +364,8 @@
     "FAIRY_LOCK": "Fairy Lock",
     "FLYING_PRESS": "Flying Press",
     "DRAIN_PUNCH": "Drain Punch",
-    "GRAVITY": "Gravity"
+    "GRAVITY": "Gravity",
+    "DIRE_CLAW": "Dire Claw"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -780,6 +781,8 @@
     "MAGCARGO": "Magcargo",
     "SNEASEL": "Sneasel",
     "WEAVILE": "Weavile",
+    "HISUI_SNEASEL": "Hisuian Sneasel",
+    "SNEASLER": "Sneasler",
     "CROAGUNK": "Croagunk",
     "TOXICROAK": "Toxicroak",
     "CHINCHOU": "Chinchou",
@@ -1350,6 +1353,7 @@
     "THRASH": "Buff ATK by [100,SP]% and become CONFUSION for 3 seconds",
     "SOLAR_BEAM": "Deals [30,60,120,SP] SPECIAL in a straight line behind the target. If the weather is SUN, targets are BURN for 3 seconds and restores 40 PP",
     "MAGMA_STORM": "The target becomes trapped within a maelstrom of fire that deals [80,SP] SPECIAL before moving to an adjacent target",
+    "DIRE_CLAW": "Deal [15,30,60,SP] to the target. Inflicts either POISON, SLEEP or PARALYSIS for 3 seconds.",
     "SLASHING_CLAW": "Deals [15,30,60,SP] to the target and WOUND it for 5 seconds. If the target is already WOUND, deals 30% bonus SPECIAL",
     "ERUPTION": "Fires [15,25,40] projectiles in the air. Every projectile deals [30,50,70,SP] SPECIAL and BURN for 5 seconds",
     "HAIL": "A hailstorm hits [10,20,30] random cells on the board, dealing [50,SP] SPECIAL. Hailstones stay on the ground, dealing 10 SPECIAL and FREEZE Pokémons that walk on it for 1 second, if not ICE.",
