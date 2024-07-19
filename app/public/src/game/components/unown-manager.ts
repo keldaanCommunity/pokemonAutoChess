@@ -17,12 +17,16 @@ export default class UnownManager {
   }
 
   addWanderingUnown() {
-    addWanderingPokemon(this.scene, pickRandomIn(Unowns), (unown, pointer, tween) => {
-      getGameContainer().room.send(Transfer.UNOWN_WANDERING, unown.index)
-      this.displayShardGain([pointer.x, pointer.y], unown.index)
-      unown.destroy()
-      tween.destroy()
-    })
+    addWanderingPokemon(
+      this.scene,
+      pickRandomIn(Unowns),
+      (unown, pointer, tween) => {
+        getGameContainer().room.send(Transfer.UNOWN_WANDERING, unown.index)
+        this.displayShardGain([pointer.x, pointer.y], unown.index)
+        unown.destroy()
+        tween.destroy()
+      }
+    )
   }
 
   displayShardGain(coordinates: number[], index: string) {
@@ -128,7 +132,7 @@ export const UNOWNS_PER_ABILITY = new Map([
   ],
   [
     Ability.HIDDEN_POWER_L,
-    [Pkm.UNOWN_L, Pkm.UNOWN_I, Pkm.UNOWN_F, Pkm.UNOWN_E]
+    [Pkm.UNOWN_L, Pkm.UNOWN_O, Pkm.UNOWN_C, Pkm.UNOWN_K]
   ],
   [
     Ability.HIDDEN_POWER_M,
