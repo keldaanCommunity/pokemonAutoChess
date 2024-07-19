@@ -3863,7 +3863,7 @@ export class Squirtle extends Pokemon {
   def = 1
   speDef = 1
   maxPP = 100
-  range = 2
+  range = 3
   skill = Ability.HYDRO_PUMP
   attackSprite = AttackSprite.WATER_RANGE
 }
@@ -3878,7 +3878,7 @@ export class Wartortle extends Pokemon {
   def = 1
   speDef = 1
   maxPP = 100
-  range = 2
+  range = 3
   skill = Ability.HYDRO_PUMP
   attackSprite = AttackSprite.WATER_RANGE
 }
@@ -3892,7 +3892,7 @@ export class Blastoise extends Pokemon {
   def = 1
   speDef = 1
   maxPP = 100
-  range = 2
+  range = 3
   skill = Ability.HYDRO_PUMP
   attackSprite = AttackSprite.WATER_RANGE
 }
