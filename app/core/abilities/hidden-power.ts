@@ -3,7 +3,7 @@ import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-dat
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../models/precomputed/precomputed-types-and-categories"
 import { Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
-import { AttackType, PokemonActionState, Rarity } from "../../types/enum/Game"
+import { AttackType, Rarity } from "../../types/enum/Game"
 import { ItemComponents, Berries, Item } from "../../types/enum/Item"
 import { Pkm, getUnownsPoolPerStage } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
@@ -285,11 +285,8 @@ export class HiddenPowerLStrategy extends HiddenPowerStrategy {
     super.process(unown, state, board, target, crit)
     board.forEach(
       (x: number, y: number, pokemon: PokemonEntity | undefined) => {
-        if (pokemon && unown.team === pokemon.team) {
-          if (pokemon.items.size < 3) {
-            pokemon.items.add(Item.MAX_REVIVE)
-            pokemon.simulation.applyItemEffect(pokemon, Item.MAX_REVIVE)
-          }
+        if (pokemon && unown.team !== pokemon.team) {
+          pokemon.status.triggerLocked(5000, pokemon)
         }
       }
     )
