@@ -1433,7 +1433,7 @@
     "TRANSFORM": "Toma la apariencia y las estadísticas de su objetivo (excepto su HP)",
     "PSYCHIC_FANGS": "Inflige [100,SP] PHYSICAL y elimina todas las ventajas de ATK, DEF y SPE_DEF del objetivo.",
     "SHED_TAIL": "Crea un sustituto y carga hacia el aliado con menos HP para otorgarle [80, SP] SHIELD",
-    "NIGHT_SLASH": "Inflige [15,30,60,SP] SPECIAL con una proporción de CRIT_CHANCE aumentada del [30,60,90] %",
+    "NIGHT_SLASH": "Inflige [15,30,60,SP] SPECIAL. Puede criticar por defecto.",
     "KOWTOW_CLEAVE": "Inflige 150% ATK + [20,SP]%  por aliado caído como TRUE. Puede asestar un golpe crítico por defecto.",
     "SHIELDS_DOWN": "Transforma a Minior en una forma núcleo aleatoria",
     "SHIELDS_UP": "Transforma a Minior a su forma Meteorito",
