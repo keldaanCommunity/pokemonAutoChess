@@ -1192,6 +1192,15 @@ export default class BattleManager {
     }
   }
 
+  clearBoardEvents() {
+    this.boardEventSprites.forEach((sprite, index) => {
+      if (sprite != null) {
+        this.group.remove(sprite, true, true)
+        this.boardEventSprites[index] = null
+      }
+    })
+  }
+
   displayHit(x: number, y: number) {
     const hitSprite = this.scene.add.sprite(
       x + (Math.random() - 0.5) * 30,

@@ -41,7 +41,7 @@ import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
 import { distanceC, distanceM } from "../utils/distance"
 import { clamp, max, min, roundTo2Digits } from "../utils/number"
-import { chance, pickRandomIn } from "../utils/random"
+import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import AttackingState from "./attacking-state"
 import Board from "./board"
@@ -174,14 +174,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     pokemon.types.forEach((type) => {
       this.types.add(type)
     })
-
-    if (
-      this.passive === Passive.SUDOWOODO ||
-      this.passive === Passive.WOBBUFFET
-    ) {
-      this.status.tree = true
-      this.toIdleState()
-    }
 
     if (this.passive === Passive.SLOW_START) {
       this.atkSpeed -= 0.25
@@ -1025,6 +1017,29 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.flyAway(board)
     }
 
+    if (this.items.has(Item.ABSORB_BULB) && this.life < 0.5 * this.hp) {
+      const damage = this.physicalDamageReduced + this.specialDamageReduced
+      this.simulation.room.broadcast(Transfer.ABILITY, {
+        id: this.simulation.id,
+        skill: Ability.EXPLOSION,
+        positionX: this.positionX,
+        positionY: this.positionY
+      })
+      board.getAdjacentCells(this.positionX, this.positionY).forEach((cell) => {
+        if (cell.value && cell.value.team !== this.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            this,
+            false,
+            false
+          )
+        }
+      })
+      this.items.delete(Item.ABSORB_BULB)
+    }
+
     // Flying protection
     if (
       this.flyingProtection > 0 &&
@@ -1056,7 +1071,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           (this.flyingProtection === 1 && pcLife < 0.2)
         ) {
           const destination =
-            this.state.getFarthestTargetCoordinateAvailablePlace(this, board)
+            board.getFarthestTargetCoordinateAvailablePlace(this)
           if (destination) {
             this.status.triggerProtect(2000)
             this.simulation.room.broadcast(Transfer.ABILITY, {
@@ -1226,6 +1241,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.count.moneyCount += 1
       this.count.amuletCoinCount += 1
     }
+
+    if (this.items.has(Item.GOLD_BOTTLE_CAP) && this.player) {
+      const isLastEnemy =
+        board.cells.some((p) => p && p.team !== this.team && p.life > 0) ===
+        false
+      this.player.money += isLastEnemy ? 5 : 1
+      this.count.moneyCount += isLastEnemy ? 5 : 1
+    }
+
     if (
       this.effects.has(Effect.PURSUIT) ||
       this.effects.has(Effect.BRUTAL_SWING) ||
@@ -1283,10 +1307,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       if (!target.simulation.flowerSpawn[target.team]) {
         target.simulation.flowerSpawn[target.team] = true
-        const spawnSpot = this.state.getFarthestTargetCoordinateAvailablePlace(
-          target,
-          board
-        )
+        const spawnSpot =
+          board.getFarthestTargetCoordinateAvailablePlace(target)
         if (spawnSpot) {
           let flowerSpawnName = Pkm.ODDISH
           if (target.effects.has(Effect.GLOOM_FLOWER)) {
@@ -1464,8 +1486,31 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.count = new Count()
     this.status.clearNegativeStatus()
     this.effects.clear()
+
+    if (this.items.has(Item.SACRED_ASH) && this.player) {
+      const team = this.simulation.getTeam(this.player.id)
+      if (team) {
+        const koAllies = values(this.player.board).filter(
+          (p) => values(team).some((entity) => p.id === entity.id) === false
+        )
+        const spawns = pickNRandomIn(koAllies, 3)
+        spawns.forEach((spawn) => {
+          const mon = PokemonFactory.createPokemonFromName(spawn.name)
+          const coord =
+            this.simulation.getClosestAvailablePlaceOnBoardToPokemon(
+              this,
+              this.team
+            )
+          this.simulation.addPokemon(mon, coord.x, coord.y, this.team, true)
+        })
+      }
+    }
+
+    this.items.delete(Item.DYNAMAX_BAND)
+    this.items.delete(Item.SACRED_ASH)
+
     this.simulation.applySynergyEffects(this)
-    this.simulation.applyItemsEffects(this, [Item.DYNAMAX_BAND])
+    this.simulation.applyItemsEffects(this)
     this.simulation.applyWeatherEffects(this)
     this.status.resurection = false // prevent reapplying max revive again
     this.shield = 0 // prevent reapplying shield again

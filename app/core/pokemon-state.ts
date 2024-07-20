@@ -779,48 +779,6 @@ export default class PokemonState {
     }
   }
 
-  getFarthestTargetCoordinateAvailablePlace(
-    pokemon: PokemonEntity,
-    board: Board
-  ):
-    | { x: number; y: number; distance: number; target: PokemonEntity }
-    | undefined {
-    const candidateCells = new Array<{
-      distance: number
-      target: PokemonEntity
-      x: number
-      y: number
-    }>()
-
-    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (
-        value !== undefined &&
-        value.team !== pokemon.team &&
-        value.isTargettable
-      ) {
-        candidateCells.push(
-          ...board
-            .getAdjacentCells(x, y)
-            .filter((cell) => board.getValue(cell.x, cell.y) === undefined)
-            .map((cell) => ({
-              x: cell.x,
-              y: cell.y,
-              distance: distanceM(
-                pokemon.positionX,
-                pokemon.positionY,
-                cell.x,
-                cell.y
-              ),
-              target: value
-            }))
-        )
-      }
-    })
-
-    candidateCells.sort((a, b) => b.distance - a.distance)
-    return candidateCells[0]
-  }
-
   getNearestAvailablePlaceCoordinates(
     pokemon: PokemonEntity,
     board: Board,

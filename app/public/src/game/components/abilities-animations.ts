@@ -422,6 +422,13 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
+    case Ability.GRAVITY:
+      addAbilitySprite(Ability.CALM_MIND, coordinates, true)
+        .setScale(3)
+        .setTint(0xccff33)
+        .setDepth(0)
+      break
+
     case Ability.COSMIC_POWER:
       addAbilitySprite(skill, coordinates, true).setOrigin(0.5, 1).setScale(2)
       break
@@ -765,6 +772,27 @@ export function displayAbility(
     case Ability.SUNSTEEL_STRIKE: {
       const startCoords = transformAttackCoordinate(targetX, 9, false)
       const specialProjectile = addAbilitySprite(skill, startCoords)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 500,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
+    case "COMET_CRASH": {
+      const startCoords = transformAttackCoordinate(targetX, 9, false)
+      const specialProjectile = addAbilitySprite(
+        Ability.SUNSTEEL_STRIKE,
+        startCoords
+      )
+        .setScale(0.5)
+        .setTint(0x2020ff)
       scene.tweens.add({
         targets: specialProjectile,
         x: coordinatesTarget[0],

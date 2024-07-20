@@ -45,7 +45,7 @@ import {
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
-import { Synergy } from "../../types/enum/Synergy"
+import { Synergy, SynergyEffects } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { sum } from "../../utils/array"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
@@ -5237,7 +5237,7 @@ export class Eevee extends Pokemon {
   skill = Ability.HAPPY_HOUR
   passive = Passive.EEVEE
   attackSprite = AttackSprite.NORMAL_MELEE
-
+  evolution = Pkm.VAPOREON
   evolutionRule = new ItemEvolutionRule(
     [
       Item.WATER_STONE,
@@ -5852,7 +5852,7 @@ export class Absol extends Pokemon {
   speDef = 5
   maxPP = 100
   range = 1
-  skill = Ability.THIEF
+  skill = Ability.NIGHT_SLASH
   attackSprite = AttackSprite.DARK_MELEE
 }
 
@@ -6345,6 +6345,9 @@ export class PrimalGroudon extends Pokemon {
   skill = Ability.EARTHQUAKE
   passive = Passive.SANDSTORM
   attackSprite = AttackSprite.FIRE_MELEE
+  onAcquired(player: Player) {
+    player.titles.add(Title.PRIMAL)
+  }
 }
 
 export class PrimalKyogre extends Pokemon {
@@ -6364,6 +6367,9 @@ export class PrimalKyogre extends Pokemon {
   skill = Ability.ORIGIN_PULSE
   passive = Passive.RAIN
   attackSprite = AttackSprite.WATER_RANGE
+  onAcquired(player: Player) {
+    player.titles.add(Title.PRIMAL)
+  }
 }
 
 export class MegaRayquaza extends Pokemon {
@@ -6379,6 +6385,9 @@ export class MegaRayquaza extends Pokemon {
   skill = Ability.DRACO_METEOR
   passive = Passive.AIRLOCK
   attackSprite = AttackSprite.FIRE_RANGE
+  onAcquired(player: Player) {
+    player.titles.add(Title.PRIMAL)
+  }
 }
 
 export class Oddish extends Pokemon {
@@ -6612,6 +6621,10 @@ export class Wynaut extends Pokemon {
   passive = Passive.WOBBUFFET
   additional = true
   attackSprite = AttackSprite.FIGHTING_MELEE
+  afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
+    entity.status.tree = true
+    entity.toIdleState()
+  }
 }
 
 export class Wobbuffet extends Pokemon {
@@ -6628,6 +6641,10 @@ export class Wobbuffet extends Pokemon {
   passive = Passive.WOBBUFFET
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
+  afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
+    entity.status.tree = true
+    entity.toIdleState()
+  }
 }
 
 export class Munna extends Pokemon {
@@ -8323,6 +8340,61 @@ export class Weavile extends Pokemon {
   skill = Ability.SLASHING_CLAW
   additional = true
   attackSprite = AttackSprite.ICE_MELEE
+}
+
+export class HisuiSneasel extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.FIGHTING,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.SNEASLER
+  hp = 85
+  atk = 9
+  def = 1
+  speDef = 3
+  maxPP = 40
+  range = 1
+  skill = Ability.DIRE_CLAW
+  regional = true
+  attackSprite = AttackSprite.POISON_MELEE
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      (!state || state.additionalPokemons.includes(Pkm.SNEASEL)) &&
+      (regionSynergies.includes(Synergy.FIGHTING) ||
+        regionSynergies.includes(Synergy.POISON))
+    )
+  }
+}
+
+export class Sneasler extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.FIGHTING,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 200
+  atk = 22
+  def = 2
+  speDef = 3
+  maxPP = 40
+  range = 1
+  skill = Ability.DIRE_CLAW
+  regional = true
+  attackSprite = AttackSprite.POISON_MELEE
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      (!state || state.additionalPokemons.includes(Pkm.SNEASEL)) &&
+      (regionSynergies.includes(Synergy.FIGHTING) ||
+        regionSynergies.includes(Synergy.POISON))
+    )
+  }
 }
 
 export class Seel extends Pokemon {
@@ -10823,6 +10895,10 @@ export class Bonsley extends Pokemon {
   passive = Passive.SUDOWOODO
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
+  afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
+    entity.status.tree = true
+    entity.toIdleState()
+  }
 }
 
 export class Sudowoodo extends Pokemon {
@@ -10839,6 +10915,10 @@ export class Sudowoodo extends Pokemon {
   passive = Passive.SUDOWOODO
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
+  afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
+    entity.status.tree = true
+    entity.toIdleState()
+  }
 }
 
 export class Combee extends Pokemon {
@@ -11306,6 +11386,9 @@ export class Yanma extends Pokemon {
   passive = Passive.CLEAR_WING
   additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
+    entity.status.triggerClearWing(1000)
+  }
 }
 
 export class Yanmega extends Pokemon {
@@ -11322,6 +11405,9 @@ export class Yanmega extends Pokemon {
   passive = Passive.CLEAR_WING
   additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
+    entity.status.triggerClearWing(1000)
+  }
 }
 
 export class Helioptile extends Pokemon {
@@ -11343,6 +11429,18 @@ export class Helioptile extends Pokemon {
   passive = Passive.DRY_SKIN
   additional = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
+  afterSimulationStart({
+    entity,
+    simulation
+  }: { entity: IPokemonEntity; simulation: Simulation }) {
+    if (simulation.weather === Weather.RAIN) {
+      entity.status.triggerDrySkin(1000)
+    } else if (simulation.weather === Weather.SANDSTORM) {
+      entity.addDodgeChance(0.25, entity, 0, false)
+    } else if (simulation.weather === Weather.SUN) {
+      entity.addAbilityPower(50, entity, 0, false)
+    }
+  }
 }
 
 export class Heliolisk extends Pokemon {
@@ -11363,6 +11461,18 @@ export class Heliolisk extends Pokemon {
   passive = Passive.DRY_SKIN
   additional = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
+  afterSimulationStart({
+    entity,
+    simulation
+  }: { entity: IPokemonEntity; simulation: Simulation }) {
+    if (simulation.weather === Weather.RAIN) {
+      entity.status.triggerDrySkin(1000)
+    } else if (simulation.weather === Weather.SANDSTORM) {
+      entity.addDodgeChance(0.25, entity, 0, false)
+    } else if (simulation.weather === Weather.SUN) {
+      entity.addAbilityPower(50, entity, 0, false)
+    }
+  }
 }
 
 export class Exeggcute extends Pokemon {
@@ -11567,6 +11677,14 @@ export class Barboach extends Pokemon {
   passive = Passive.AQUA_VEIL
   additional = true
   attackSprite = AttackSprite.WATER_MELEE
+  afterSimulationStart({
+    entity,
+    simulation
+  }: { entity: IPokemonEntity; simulation: Simulation }) {
+    if (simulation.weather === Weather.RAIN) {
+      entity.status.triggerRuneProtect(60000)
+    }
+  }
 }
 
 export class Whiscash extends Pokemon {
@@ -11583,6 +11701,14 @@ export class Whiscash extends Pokemon {
   passive = Passive.AQUA_VEIL
   additional = true
   attackSprite = AttackSprite.WATER_MELEE
+  afterSimulationStart({
+    entity,
+    simulation
+  }: { entity: IPokemonEntity; simulation: Simulation }) {
+    if (simulation.weather === Weather.RAIN) {
+      entity.status.triggerRuneProtect(60000)
+    }
+  }
 }
 
 export class Scraggy extends Pokemon {
@@ -12360,6 +12486,14 @@ export class Gholdengo extends Pokemon {
   skill = Ability.MAKE_IT_RAIN
   attackSprite = AttackSprite.DRAGON_MELEE
   passive = Passive.GHOLDENGO
+  afterSimulationStart({
+    entity,
+    player
+  }: { entity: IPokemonEntity; player: IPlayer }) {
+    if (player.money >= 50) {
+      entity.status.triggerRuneProtect(60000)
+    }
+  }
 }
 
 export class Sobble extends Pokemon {
@@ -13217,7 +13351,8 @@ export class Cosmoem extends Pokemon {
     (pokemon, player) => {
       if (
         pokemon.positionX === player.lightX &&
-        pokemon.positionY === player.lightY
+        pokemon.positionY === player.lightY &&
+        SynergyEffects[Synergy.LIGHT].some((e) => player.effects.has(e))
       )
         return Pkm.SOLGALEO
       else return Pkm.LUNALA
@@ -14214,6 +14349,35 @@ export class Hawlucha extends Pokemon {
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
+export class Stonjourner extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.GROUND, Synergy.LIGHT])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 10
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.GRAVITY
+  passive = Passive.STONJOURNER
+  attackSprite = AttackSprite.ROCK_MELEE
+  afterSimulationStart({
+    entity,
+    simulation
+  }: { entity: IPokemonEntity; simulation: Simulation }) {
+    simulation.board
+      .getAdjacentCells(entity.positionX, entity.positionY)
+      .forEach((cell) => {
+        if (cell.value && cell.value.team === entity.team) {
+          cell.value.addAbilityPower(50, cell.value, 0, false)
+        }
+      })
+    entity.status.tree = true
+    entity.toIdleState()
+  }
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -15028,5 +15192,8 @@ export const PokemonClasses: Record<
   [Pkm.KLEFKI]: Klefki,
   [Pkm.HAWLUCHA]: Hawlucha,
   [Pkm.MIENFOO]: Mienfoo,
-  [Pkm.MIENSHAO]: Mienshao
+  [Pkm.MIENSHAO]: Mienshao,
+  [Pkm.STONJOURNER]: Stonjourner,
+  [Pkm.HISUI_SNEASEL]: HisuiSneasel,
+  [Pkm.SNEASLER]: Sneasler
 }

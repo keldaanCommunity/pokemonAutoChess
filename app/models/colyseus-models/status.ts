@@ -1088,13 +1088,11 @@ export default class Status extends Schema implements IStatus {
     if (
       !this.locked && // lock cannot be stacked
       !this.runeProtect
-
     ) {
-
       if (pkm.status.enraged) {
         duration = duration / 2
       }
-      
+
       if (pkm.effects.has(Effect.SWIFT_SWIM)) {
         duration *= 0.7
       } else if (pkm.effects.has(Effect.HYDRATION)) {

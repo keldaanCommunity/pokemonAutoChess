@@ -251,7 +251,8 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.STANTLER,
   Pkm.KLEFKI,
   Pkm.HEATMOR,
-  Pkm.HAWLUCHA
+  Pkm.HAWLUCHA,
+  Pkm.STONJOURNER
 )
 
 export const LegendaryShop = new Array<PkmProposition>(
@@ -658,6 +659,10 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
     [Stat.DEF]: 5,
     [Stat.SPE_DEF]: 5
   },
+  [Item.GOLD_BOTTLE_CAP]: {},
+  [Item.SACRED_ASH]: {},
+  [Item.COMET_SHARD]: { [Stat.ATK]: 10 },
+  [Item.ABSORB_BULB]: { [Stat.DEF]: 10, [Stat.SPE_DEF]: 10 },
   [Item.WHITE_FLUTE]: {},
   [Item.DAMP_ROCK]: {},
   [Item.ICY_ROCK]: {},

@@ -849,10 +849,8 @@ export class AquaJetStrategy extends AbilityStrategy {
     if (pokemon.stars === 3) {
       damage = 80
     }
-    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
-      pokemon,
-      board
-    )
+    const farthestCoordinate =
+      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     if (farthestCoordinate) {
       const cells = board.getCellsBetween(
         pokemon.positionX,
@@ -948,10 +946,8 @@ export class FlameChargeStrategy extends AbilityStrategy {
     if (pokemon.stars === 3) {
       damage = 80
     }
-    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
-      pokemon,
-      board
-    )
+    const farthestCoordinate =
+      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     if (farthestCoordinate) {
       const cells = board.getCellsBetween(
         pokemon.positionX,
@@ -1729,10 +1725,8 @@ export class ShadowCloneStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
-      pokemon,
-      board
-    )
+    const farthestCoordinate =
+      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
 
     if (farthestCoordinate) {
       const p = PokemonFactory.createPokemonFromName(pokemon.name)
@@ -1768,10 +1762,8 @@ export class VoltSwitchStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
-    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
-      pokemon,
-      board
-    )
+    const farthestCoordinate =
+      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
 
     if (farthestCoordinate) {
       const cells = board.getCellsBetween(
@@ -1806,10 +1798,8 @@ export class AccelerockStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
-      pokemon,
-      board
-    )
+    const farthestCoordinate =
+      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
 
     if (farthestCoordinate) {
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
@@ -1851,10 +1841,8 @@ export class NuzzleStrategy extends AbilityStrategy {
   ) {
     const farthestTarget = state.getFarthestTarget(pokemon, board) ?? target
     super.process(pokemon, state, board, farthestTarget, crit)
-    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
-      pokemon,
-      board
-    )
+    const farthestCoordinate =
+      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
 
     if (farthestTarget && farthestCoordinate) {
       const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
@@ -3326,6 +3314,12 @@ export class WaterfallStrategy extends AbilityStrategy {
     pokemon.status.clearNegativeStatus()
     board.effects[pokemon.positionY * board.columns + pokemon.positionX] =
       undefined
+    pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+      simulationId: pokemon.simulation.id,
+      type: "clear",
+      x: pokemon.positionX,
+      y: pokemon.positionY
+    })
   }
 }
 
@@ -3839,10 +3833,8 @@ export class SpectralThiefStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
-      pokemon,
-      board
-    )
+    const farthestCoordinate =
+      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     const damage = 80
     if (farthestCoordinate) {
       target.handleSpecialDamage(
@@ -4265,10 +4257,7 @@ export class SkyAttackStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const destination = state.getFarthestTargetCoordinateAvailablePlace(
-      pokemon,
-      board
-    )
+    const destination = board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     if (destination) {
       pokemon.skydiveTo(destination.x, destination.y, board)
       setTimeout(() => {
@@ -4307,10 +4296,7 @@ export class FlyingPressStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const destination = state.getFarthestTargetCoordinateAvailablePlace(
-      pokemon,
-      board
-    )
+    const destination = board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     if (destination) {
       pokemon.skydiveTo(destination.x, destination.y, board)
       setTimeout(() => {
@@ -4735,10 +4721,8 @@ export class DigStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
 
-    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
-      pokemon,
-      board
-    )
+    const farthestCoordinate =
+      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
 
     if (farthestCoordinate) {
       const cells = board.getCellsBetween(
@@ -4894,10 +4878,8 @@ export class PoisonPowderStrategy extends AbilityStrategy {
       damage = 120
     }
 
-    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
-      pokemon,
-      board
-    )
+    const farthestCoordinate =
+      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
 
     if (farthestCoordinate) {
       const cells = board.getCellsBetween(
@@ -4942,10 +4924,8 @@ export class SilverWindStrategy extends AbilityStrategy {
       damage = 120
     }
 
-    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
-      pokemon,
-      board
-    )
+    const farthestCoordinate =
+      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
 
     pokemon.addAttack(1, pokemon, 0, false)
     pokemon.addDefense(1, pokemon, 0, false)
@@ -5144,6 +5124,32 @@ export class SlashingClawStrategy extends AbilityStrategy {
     }
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     target.status.triggerWound(5000, target, pokemon)
+  }
+}
+
+export class DireClawStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    const status = pickRandomIn(["poison", "sleep", "paralysis"])
+    switch (status) {
+      case "poison":
+        target.status.triggerPoison(3000, target, pokemon)
+        break
+      case "sleep":
+        target.status.triggerSleep(3000, target)
+        break
+      case "paralysis":
+        target.status.triggerParalysis(3000, target)
+        break
+    }
   }
 }
 
@@ -5365,10 +5371,8 @@ export class LinkCableStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const farthestTarget = state.getFarthestTarget(pokemon, board)
-    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
-      pokemon,
-      board
-    )
+    const farthestCoordinate =
+      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
 
     if (farthestCoordinate && farthestTarget) {
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
@@ -7622,7 +7626,7 @@ export class NightSlashStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
-    crit = crit || chance([0.3, 0.6, 0.9][pokemon.stars - 1] ?? 0.9)
+    crit = crit || chance(pokemon.critChance)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -8253,10 +8257,8 @@ export class ExtremeSpeedStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit, true)
     const damage = 40
-    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
-      pokemon,
-      board
-    )
+    const farthestCoordinate =
+      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     if (farthestCoordinate) {
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
         id: pokemon.simulation.id,
@@ -8671,10 +8673,8 @@ export class PsyshieldBashStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = 60
 
-    const farthestCoordinate = state.getFarthestTargetCoordinateAvailablePlace(
-      pokemon,
-      board
-    )
+    const farthestCoordinate =
+      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     if (farthestCoordinate) {
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
         id: pokemon.simulation.id,
@@ -8941,10 +8941,8 @@ export class BounceStrategy extends AbilityStrategy {
     )
     for (let i = 0; i < nbBounces; i++) {
       setTimeout(() => {
-        const destination = state.getFarthestTargetCoordinateAvailablePlace(
-          pokemon,
-          board
-        )
+        const destination =
+          board.getFarthestTargetCoordinateAvailablePlace(pokemon)
         if (destination && pokemon.hp > 0) {
           pokemon.simulation.room.broadcast(Transfer.ABILITY, {
             id: pokemon.simulation.id,
@@ -9256,7 +9254,25 @@ export class FairyLockStrategy extends AbilityStrategy {
         crit
       )
     })
-    target.status.triggerLocked(3000, target)
+    target.status.triggerLocked(5000, target)
+  }
+}
+
+export class GravityStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const lockDuration = 2000 * (1 + pokemon.ap / 100)
+    board.forEach((x, y, unitOnCell) => {
+      if (unitOnCell && unitOnCell.team !== pokemon.team) {
+        unitOnCell.status.triggerLocked(lockDuration, target)
+      }
+    })
   }
 }
 
@@ -9605,5 +9621,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FIRE_LASH]: new FireLashStrategy(),
   [Ability.FAIRY_LOCK]: new FairyLockStrategy(),
   [Ability.FLYING_PRESS]: new FlyingPressStrategy(),
-  [Ability.DRAIN_PUNCH]: new DrainPunchStrategy()
+  [Ability.DRAIN_PUNCH]: new DrainPunchStrategy(),
+  [Ability.GRAVITY]: new GravityStrategy(),
+  [Ability.DIRE_CLAW]: new DireClawStrategy()
 }
