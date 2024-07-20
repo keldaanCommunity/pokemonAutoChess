@@ -5852,7 +5852,7 @@ export class Absol extends Pokemon {
   speDef = 5
   maxPP = 100
   range = 1
-  skill = Ability.THIEF
+  skill = Ability.NIGHT_SLASH
   attackSprite = AttackSprite.DARK_MELEE
 }
 

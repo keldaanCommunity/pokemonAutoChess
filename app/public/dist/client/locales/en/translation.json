@@ -1461,7 +1461,7 @@
     "TRANSFORM": "Takes the appearance and the statistics of its target (except HP)",
     "PSYCHIC_FANGS": "Inflicts [100,SP] PHYSICAL and removes all the target's ATK, DEF and SPE_DEF buffs",
     "SHED_TAIL": "Create a substitute and charge towards the ally with the fewest HP to give it [80, SP] SHIELD",
-    "NIGHT_SLASH": "Deals [15,30,60,SP] SPECIAL with a [30,60,90]% increased CRIT_CHANCE ratio",
+    "NIGHT_SLASH": "Deals [15,30,60,SP] SPECIAL. Can crit by default.",
     "KOWTOW_CLEAVE": "Deals 150% ATK + [20,SP]% per fallen ally as TRUE. Can crit by default",
     "SHIELDS_DOWN": "Transform Minior to a random core form",
     "SHIELDS_UP": "Transform Minior to its meteor form",

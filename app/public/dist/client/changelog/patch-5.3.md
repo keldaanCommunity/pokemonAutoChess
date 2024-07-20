@@ -49,6 +49,7 @@
 - New passive for Regigigas, Slow start: start at 0.5 attack speed. After first ability cast, gains 30% attack speed and 10 attack
 - Celebi and Xerneas gain Flora synergy to give more variety for Flora T20
 - Unown L new hidden power: LOCK: the enemy team is locked during 5 seconds
+- New ability for Absol: Night Slash
 
 # Changes to Synergies
 

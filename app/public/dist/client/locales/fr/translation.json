@@ -1440,7 +1440,7 @@
     "TRANSFORM": "Prend l'apparence et les statistiques de la cible, excepté les HP",
     "PSYCHIC_FANGS": "Inflige [100,SP] PHYSICAL et retire les bonus d'ATK, de DEF et de SPE_DEF de la cible",
     "SHED_TAIL": "Lâche un leurre et court vers l'allié avec le moins de HP, lui donnant [80,SP] SHIELD",
-    "NIGHT_SLASH": "Inflige [15,30,60,SP] SPECIAL avec [30,60,90]% de CRIT_CHANCE augmentée",
+    "NIGHT_SLASH": "Inflige [15,30,60,SP] SPECIAL. Peut faire un coup critique par défaut.",
     "KOWTOW_CLEAVE": "Inflige 150% ATK + [20,SP]% par allié KO en TRUE. Peut infliger un coup critique par défaut.",
     "SHIELDS_DOWN": "Transforme Météno en une forme Noyau aléatoire",
     "SHIELDS_UP": "Transforme Météno en forme Météore",
