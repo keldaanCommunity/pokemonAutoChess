@@ -2628,6 +2628,8 @@
   "delete_cache": "Delete cache",
   "download_game_files": "Download game files",
   "language": "Language",
+  "renderer": "Renderer",
+  "renderer_info": "WebGL is faster but may cause visual glitches on some devices. Canvas is slower but more compatible.",
   "music_volume": "Music Volume",
   "sfx_volume": "SFX Volume",
   "show_details_on_hover": "Show details on hover instead of right click",
