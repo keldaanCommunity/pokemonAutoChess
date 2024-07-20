@@ -28,7 +28,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.MAGIKARP, 3, 1],
       [Pkm.MAGIKARP, 5, 1]
     ],
-    shinyChance: 1 / 20,
+    shinyChance: 1 / 40,
     getRewards(player: Player) {
       const randomComponent = pickRandomIn(NonSpecialItemComponents)
       player.randomComponentsGiven.push(randomComponent)
@@ -76,7 +76,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
   9: {
     name: "pkm.GYARADOS",
     avatar: Pkm.GYARADOS,
-    shinyChance: 1 / 20,
+    shinyChance: 1 / 40,
     board: [[Pkm.GYARADOS, 4, 2]],
     getRewards(player: Player) {
       const randomComponents = pickNRandomIn(ItemComponents, 1)
@@ -102,7 +102,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     name: "tower_duo",
     avatar: Pkm.LUGIA,
     emotion: Emotion.DETERMINED,
-    shinyChance: 1 / 20,
+    shinyChance: 1 / 40,
     board: [
       [Pkm.LUGIA, 3, 1],
       [Pkm.HO_OH, 5, 1]

@@ -99,3 +99,4 @@
 - Initiated Korean translation thanks to Mrkim-0
 - Initiated Polski translation thanks to dil25kop
 - New titles: Blob, Tactician, Strategist, Primal
+- Shiny PVE rounds are twice as rare

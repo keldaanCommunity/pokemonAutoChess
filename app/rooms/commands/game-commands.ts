@@ -1196,7 +1196,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         ) {
           eggChance = 1
           nbMaxEggs = 8
-          shinyChance = 1 / 20
         }
 
         const eggsOnBench = values(player.board).filter(
