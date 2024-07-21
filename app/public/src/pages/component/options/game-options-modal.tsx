@@ -29,6 +29,12 @@ export default function GameOptionsModal(props: {
   const dispatch = useAppDispatch()
   const language = i18n.language
 
+  const renderers = {
+    [Phaser.AUTO]: "Auto",
+    [Phaser.WEBGL]: "WebGL",
+    [Phaser.CANVAS]: "Canvas"
+  }
+
   function changePreference(
     key: keyof IPreferencesState,
     value: string | number | boolean
@@ -158,6 +164,27 @@ export default function GameOptionsModal(props: {
                 label={t("disable_animated_tilemap")}
               />
             </p>
+            {props.page === "main_lobby" && (
+              <>
+                <label>
+                  {t("renderer")}:&nbsp;
+                  <select
+                    className="is-light"
+                    value={preferences.renderer}
+                    onChange={(e) => {
+                      changePreference("renderer", e.target.value)
+                    }}
+                  >
+                    {Object.keys(renderers).map((r) => (
+                      <option key={r} value={r}>
+                        {renderers[r]}
+                      </option>
+                    ))}
+                  </select>
+                  <p>{t("renderer_info")}</p>
+                </label>
+              </>
+            )}
           </TabPanel>
 
           <TabPanel>

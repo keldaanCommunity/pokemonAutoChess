@@ -40,7 +40,7 @@ import { Weather } from "../../../types/enum/Weather"
 import { logger } from "../../../utils/logger"
 import { clamp, max } from "../../../utils/number"
 import { getPath, transformCoordinate } from "../pages/utils/utils"
-import { preferences } from "../preferences"
+import { loadPreferences, preferences } from "../preferences"
 import store from "../stores"
 import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
 import { getPortraitSrc } from "../utils"
@@ -231,7 +231,7 @@ class GameContainer {
     if (this.game != null) return // prevent initializing twice
     // Create Phaser game
     const config = {
-      type: Phaser.AUTO,
+      type: +(loadPreferences().renderer ?? Phaser.AUTO),
       width: 1950,
       height: 1000,
       parent: this.div,
