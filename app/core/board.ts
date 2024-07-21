@@ -335,7 +335,7 @@ export default class Board {
   getFarthestTargetCoordinateAvailablePlace(
     pokemon: IPokemonEntity
   ):
-    | { x: number; y: number; distance: number; target: IPokemonEntity }
+    | { x: number; y: number; distance: number; target: PokemonEntity }
     | undefined {
     const candidateCells = new Array<{
       distance: number
