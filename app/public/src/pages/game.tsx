@@ -172,7 +172,28 @@ export default function Game() {
   )
 
   function playerClick(id: string) {
-    room?.send(Transfer.SPECTATE, id)
+    const scene = getGameScene()
+    if (scene?.spectate) {
+      // if spectating game we switch directly without notifying the server to not show spectators avatars
+      if (room?.state?.players) {
+        const spectatedPlayer = room?.state?.players.get(id)
+        const gameContainer = getGameContainer()
+        if (spectatedPlayer) {
+          gameContainer.setPlayer(spectatedPlayer)
+
+          const simulation = room.state.simulations.get(
+            spectatedPlayer.simulationId
+          )
+          if (simulation) {
+            gameContainer.setSimulation(simulation)
+          }
+        }
+
+        gameContainer.gameScene?.board?.updateScoutingAvatars()
+      }
+    } else {
+      room?.send(Transfer.SPECTATE, id)
+    }
   }
 
   const leave = useCallback(async () => {
