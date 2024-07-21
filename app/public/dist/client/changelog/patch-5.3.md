@@ -35,6 +35,7 @@
 - New ability for Phione/Manaphy: Take heart: heal negative status and gain 8 Attack and 4 Special Defense
 - Nerf Poison Jab (Gligar): Poison for ~~4~~ 3 seconds
 - Nerf Mega Camerupt: Eruption damage: ~~100~~ 70 per projectile
+- Buff Mega Banette: PP ~~125~~ 100
 - Hippopotas line is now Ground/Normal instead of Ground/Rock
 - Changed Psyduck passive: now has 10% chance to become confused when hit
 - Buff Chingling: Attack ~~8~~ 10

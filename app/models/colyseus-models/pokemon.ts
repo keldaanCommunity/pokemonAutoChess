@@ -293,7 +293,7 @@ export class MegaBanette extends Pokemon {
   atk = 30
   def = 5
   speDef = 6
-  maxPP = 125
+  maxPP = 100
   range = 1
   skill = Ability.SHADOW_CLONE
   attackSprite = AttackSprite.DRAGON_MELEE
