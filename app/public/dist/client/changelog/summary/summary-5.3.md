@@ -8,6 +8,15 @@ After 8 seconds, a tidal wave cleans up negative status and field effects, heal 
 
 ![Aquatic](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/3c11a620df1707e68b30743b29cf900c0dd0c87e/app/public/src/assets/types/AQUATIC.svg)
 
+## New Shiny Items
+
+More shiny items, with shiny rate encounter halved
+
+![absorb bulb](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/ABSORB_BULB.png)
+![Gold Bottle Cap](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/GOLD_BOTTLE_CAP.png)
+![Sacred Ash](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/SACRED_ASH.png)
+![Comet Shard](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/COMET_SHARD.png)
+
 ## Electirizer Rework
 
 Every third attack burns 15 PP of the target and inflicts PARALYSIS for 2 seconds
@@ -19,8 +28,6 @@ Every third attack burns 15 PP of the target and inflicts PARALYSIS for 2 second
 Each Pokémon in shop has an additional 5% chance to share a common synergy with the holder.
 
 ![Incense](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/INCENSE.png)
-
-
 
 ## Newcomers in 5.3
 
