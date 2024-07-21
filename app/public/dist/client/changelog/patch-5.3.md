@@ -100,3 +100,4 @@
 - Initiated Polski translation thanks to dil25kop
 - New titles: Blob, Tactician, Strategist, Primal
 - Shiny PVE rounds are twice as rare
+- Added an option to choose between Canvas or WebGL rendering
