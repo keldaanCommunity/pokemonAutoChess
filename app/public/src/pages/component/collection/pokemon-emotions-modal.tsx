@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo } from "react"
-import Modal from "react-bootstrap/esm/Modal"
 import { useTranslation } from "react-i18next"
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed/precomputed-emotions"
 import { Emotion } from "../../../../../types"
@@ -17,6 +16,7 @@ import {
 } from "../../../stores/NetworkStore"
 import { getAvatarSrc, getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
+import { BasicModal } from "../modal/modal"
 import PokemonEmotion from "./pokemon-emotion"
 import "./pokemon-emotions-modal.css"
 
@@ -68,30 +68,28 @@ export default function PokemonEmotionsModal(props: {
   )
 
   return (
-    <Modal
+    <BasicModal
       show={true}
       onHide={props.onHide}
       dialogClassName="pokemon-emotions-modal is-dark is-large"
     >
-      <Modal.Header>
-        <Modal.Title>
-          <img
-            src={getPortraitSrc(
-              index,
-              pConfig.selectedShiny,
-              pConfig.selectedEmotion
-            )}
-            className={cc({ unlocked: pConfig != null })}
-          />
-          <h1>{t(`pkm.${props.pokemon}`)}</h1>
-          <div className="spacer" />
-          <p className="dust">
-            {pConfig.dust} {t("shards")}{" "}
-            <img src={getPortraitSrc(index)} className="dust" alt="dust" />
-          </p>
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
+      <header>
+        <img
+          src={getPortraitSrc(
+            index,
+            pConfig.selectedShiny,
+            pConfig.selectedEmotion
+          )}
+          className={cc({ unlocked: pConfig != null })}
+        />
+        <h1>{t(`pkm.${props.pokemon}`)}</h1>
+        <div className="spacer" />
+        <p className="dust">
+          {pConfig.dust} {t("shards")}{" "}
+          <img src={getPortraitSrc(index)} className="dust" alt="dust" />
+        </p>
+      </header>
+      <div>
         <section>
           <p>{t("normal_emotions")}</p>
           <div>
@@ -148,8 +146,8 @@ export default function PokemonEmotionsModal(props: {
             </div>
           </section>
         )}
-      </Modal.Body>
-      <Modal.Footer>
+      </div>
+      <footer>
         <button
           className="bubbly blue"
           disabled={
@@ -196,7 +194,7 @@ export default function PokemonEmotionsModal(props: {
         <button className="bubbly red" onClick={props.onHide}>
           {t("close")}
         </button>
-      </Modal.Footer>
-    </Modal>
+      </footer>
+    </BasicModal>
   )
 }

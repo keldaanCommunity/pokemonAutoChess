@@ -16,11 +16,6 @@
   color: white;
 }
 
-.hide-bg {
-  background: none;
-  border: none;
-}
-
 @media (width <= 640px) {
   .basic-modal {
     width: 95vw;

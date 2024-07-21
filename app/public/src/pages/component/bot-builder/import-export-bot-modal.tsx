@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react"
-import Modal from "react-bootstrap/Modal"
 import { useTranslation } from "react-i18next"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { ModalMode } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { createBot, requestBotData } from "../../../stores/NetworkStore"
+import { BasicModal } from "../modal/modal"
 
 export default function ImportExportBotModal(props: {
   bot: IBot
@@ -63,16 +63,13 @@ export default function ImportExportBotModal(props: {
 
   if (props.modalMode == ModalMode.EXPORT) {
     return (
-      <Modal
+      <BasicModal
         show={props.visible}
         onHide={props.hideModal}
-        size="lg"
         id="bot-export-modal"
       >
-        <Modal.Header>
-          <Modal.Title>Export</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+        <header>Export</header>
+        <div>
           <p>{t("export_hint")}</p>
           <textarea
             rows={10}
@@ -82,29 +79,26 @@ export default function ImportExportBotModal(props: {
           {jsonError && <p className="error">{jsonError}</p>}
           <p>{t("bot_ready_submission")}</p>
           {url}
-        </Modal.Body>
-        <Modal.Footer>
+        </div>
+        <footer>
           <button className="bubbly red" onClick={props.hideModal}>
             {t("cancel")}
           </button>
           <button className="bubbly green" onClick={exportBot}>
             {t("submit_your_bot")}
           </button>
-        </Modal.Footer>
-      </Modal>
+        </footer>
+      </BasicModal>
     )
   } else if (props.modalMode == ModalMode.IMPORT) {
     return (
-      <Modal
+      <BasicModal
         show={props.visible}
         onHide={props.hideModal}
-        size="lg"
         id="bot-import-modal"
       >
-        <Modal.Header>
-          <Modal.Title>{t("import")}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+        <header>{t("import")}</header>
+        <div>
           <p>{t("get_started_bot")}</p>
           <div style={{ display: "flex", marginBottom: "1em" }}>
             <label htmlFor="bot_select">{t("existing_bot")}</label>
@@ -134,8 +128,8 @@ export default function ImportExportBotModal(props: {
             onChange={(e) => handleTextAreaChange(e.target.value)}
           ></textarea>
           {jsonError && <p className="error">{jsonError}</p>}
-        </Modal.Body>
-        <Modal.Footer>
+        </div>
+        <footer>
           <button className="bubbly red" onClick={props.hideModal}>
             {t("cancel")}
           </button>
@@ -147,8 +141,8 @@ export default function ImportExportBotModal(props: {
           >
             {t("import")}
           </button>
-        </Modal.Footer>
-      </Modal>
+        </footer>
+      </BasicModal>
     )
   } else {
     return null

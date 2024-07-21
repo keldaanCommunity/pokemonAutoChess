@@ -1,42 +1,40 @@
 import React from "react"
-import { Button, Modal, ModalProps } from "react-bootstrap"
+import ReactDOM from "react-dom"
 
 import "./modal.css"
 
-interface BasicModalProps extends ModalProps {
+interface BasicModalProps {
+  show: boolean
+  handleClose: () => void
   title?: string
   body: JSX.Element
   confirmText?: string
-  centered?: boolean
 }
 
 export function BasicModal(props: BasicModalProps) {
-  const { show, handleClose, title, body, confirmText, centered = true } = props
+  const { show, handleClose, title, body, confirmText } = props
 
-  return (
-    <Modal
-      contentClassName="hide-bg"
-      dialogClassName="basic-modal"
-      show={show}
-      onHide={handleClose}
-      centered={centered}
-    >
-      {title && (
-        <Modal.Header closeButton className="basic-modal-header">
-          <Modal.Title>{title}</Modal.Title>
-        </Modal.Header>
-      )}
-      <Modal.Body className="basic-modal-body">{body}</Modal.Body>
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDialogElement>) => {
+    if (event.key === "Escape") {
+      handleClose()
+    }
+  }
+
+  return ReactDOM.createPortal(
+    <dialog className="basic-modal" open={show} onKeyDown={handleKeyDown}>
+      {title && <header className="basic-modal-header">{title}</header>}
+      <div className="basic-modal-body">{body}</div>
       {confirmText && (
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+        <footer>
+          <button className="secondary" onClick={handleClose}>
             Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
+          </button>
+          <button className="primary" onClick={handleClose}>
             {confirmText}
-          </Button>
-        </Modal.Footer>
+          </button>
+        </footer>
       )}
-    </Modal>
+    </dialog>,
+    document.body
   )
 }

@@ -369,7 +369,6 @@ function Modals({
         handleClose={closeModal}
         show={modal === "collection"}
         body={<PokemonCollection />}
-        centered={false}
       />
       <BasicModal
         handleClose={closeModal}

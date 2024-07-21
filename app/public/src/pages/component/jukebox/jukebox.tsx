@@ -1,11 +1,11 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
-import { Modal } from "react-bootstrap"
 import { useTranslation } from "react-i18next"
 import { DungeonMusic } from "../../../../../types/enum/Dungeon"
 import { preferences, savePreferences } from "../../../preferences"
 import { getGameScene } from "../../game"
 import { playMusic, preloadMusic } from "../../utils/audio"
 import { cc } from "../../utils/jsx"
+import { BasicModal } from "../modal/modal"
 
 import "./jukebox.css"
 
@@ -69,11 +69,9 @@ export default function Jukebox(props: {
   }
 
   return (
-    <Modal show={props.show} onHide={props.handleClose} width={800}>
-      <Modal.Header>
-        <Modal.Title>{t("jukebox")}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body className="game-jukebox-modal-body">
+    <BasicModal show={props.show} onHide={props.handleClose} width={800}>
+      <header>{t("jukebox")}</header>
+      <div className="game-jukebox-modal-body">
         <p className="actions">
           <button className="bubbly blue" onClick={() => nextMusic(-1)}>
             ◄
@@ -111,7 +109,7 @@ export default function Jukebox(props: {
             ></input>
           </label>
         </p>
-      </Modal.Body>
-    </Modal>
+      </div>
+    </BasicModal>
   )
 }

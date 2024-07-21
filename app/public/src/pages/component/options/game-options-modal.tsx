@@ -1,5 +1,4 @@
 import React, { Dispatch, SetStateAction, useState } from "react"
-import Modal from "react-bootstrap/Modal"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { Language } from "../../../../../types/enum/Language"
@@ -18,6 +17,7 @@ import GameFiles from "./game-files"
 import { Page } from "../main-sidebar/main-sidebar"
 
 import "./game-options-modal.css"
+import { BasicModal } from "../modal/modal"
 
 export default function GameOptionsModal(props: {
   show: boolean
@@ -51,11 +51,13 @@ export default function GameOptionsModal(props: {
   }
 
   return (
-    <Modal show={props.show} onHide={props.hideModal} dialogClassName="is-dark">
-      <Modal.Header>
-        <Modal.Title>{t("options")}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body className="game-options-modal-body">
+    <BasicModal
+      show={props.show}
+      onHide={props.hideModal}
+      dialogClassName="is-dark"
+    >
+      <header>{t("options")}</header>
+      <div className="game-options-modal-body">
         <Tabs>
           <TabList>
             <Tab key="sound">{t("sound")}</Tab>
@@ -195,7 +197,7 @@ export default function GameOptionsModal(props: {
             <GameFiles />
           </TabPanel>
         </Tabs>
-      </Modal.Body>
-    </Modal>
+      </div>
+    </BasicModal>
   )
 }
