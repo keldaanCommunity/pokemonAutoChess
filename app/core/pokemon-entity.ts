@@ -1490,9 +1490,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.items.has(Item.SACRED_ASH) && this.player) {
       const team = this.simulation.getTeam(this.player.id)
       if (team) {
-        const koAllies = values(this.player.board).filter(
-          (p) => values(team).some((entity) => p.id === entity.id) === false
-        )
+        const koAllies = values(this.player.board)
+          .filter(
+            (p) => values(team).some((entity) => p.id === entity.id) === false
+          )
+          .filter((p) => p.id !== this.id)
         const spawns = pickNRandomIn(koAllies, 3)
         spawns.forEach((spawn) => {
           const mon = PokemonFactory.createPokemonFromName(spawn.name)
