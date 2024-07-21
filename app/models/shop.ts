@@ -313,7 +313,7 @@ export default class Shop {
       const candidates = propositions.filter((m) => {
         const pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
         if (pkm === Pkm.TAPU_BULU) return synergy === Synergy.GRASS
-        if (pkm === Pkm.TAPU_FINI) return synergy === Synergy.WATER
+        if (pkm === Pkm.TAPU_FINI) return synergy === Synergy.FAIRY
         if (pkm === Pkm.TAPU_KOKO) return synergy === Synergy.ELECTRIC
         if (pkm === Pkm.TAPU_LELE) return synergy === Synergy.PSYCHIC
 
