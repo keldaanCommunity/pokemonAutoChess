@@ -330,7 +330,6 @@
     "SPARK": "Funkensprung",
     "CRUNCH": "Knirscher",
     "CROSS_POISON": "Giftstreich",
-    "AURA_WHEEL_HANGRY": "Aura-Rad",
     "DOUBLE_EDGE": "Risikotackle",
     "ICE_FANG": "Feuerzahn",
     "THUNDER_FANG": "Donnerzahn",
@@ -350,7 +349,8 @@
     "SHADOW_PUNCH": "Stachler",
     "MAGNET_BOMB": "Magnetbombe",
     "MUDDY_WATER": "Lehmbrühe",
-    "ANCIENT_POWER": "Antik-Kraft"
+    "ANCIENT_POWER": "Antik-Kraft",
+    "AURA_WHEEL_HANGRY": "Aura-Rad"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -2185,7 +2185,6 @@
     "elo_answer": "Das Elo-System in Pokemon Auto Chess funktioniert genauso wie in anderen Elo-basierten Spielen wie Schach, Lol, Starcraft usw. Um Elo-Punkte zu erhalten, müssen Sie andere Spieler schlagen. Je höher das Elo Ihres Gegners ist, desto mehr Elo erhalten Sie, wenn Sie ihn besiegen, und umgekehrt. Wenn Sie 10 Tage lang nicht spielen, beginnt Ihr Elo zu sinken (-10 Elo/Tag).",
     "missing_points": "Ich habe in meinem letzten Spiel keine Elo-Punkte erhalten, warum?",
     "missing_points_answer": "Das Spiel muss beendet werden, um Elo-Punkte zu gewinnen/verlieren. Wenn noch jemand im Spiel ist, müssen Sie warten. Bots geben keinen Elo an, nur menschliche Spieler werden für die Elo-Bewertung berücksichtigt. Es ist auch möglich, dass im Spiel Elo deaktiviert war (Modus „Nur zum Spaß“).",
-    "damage_label": "Was sind Sonderschäden und Sachschäden?",
     "damage_answer": "Automatische Angriffe verursachen hauptsächlich körperlichen Schaden, während Fähigkeiten hauptsächlich Spezialschaden verursachen. Einige Fähigkeiten können jedoch echten Schaden oder physischen Schaden verursachen.",
     "defense": "Können Sie mir sagen, wie Verteidigung funktioniert? Handelt es sich um eine pauschale Schadensreduzierung?",
     "defense_answer": "Gleiches System wie League of Legends: Schaden: Angriff / (1+(0,1*def)). Die Verteidigung funktioniert bei physischem Schaden, die Spezialverteidigung bei besonderem Schaden",
@@ -2198,7 +2197,8 @@
     "code": "Welche Sprache/Bibliothek wird zum Programmieren des Spiels verwendet?",
     "code_answer": "TypeScript, Phaser, Colyseus. Wenn Sie einen Beitrag leisten möchten",
     "pull_requests": "Pull-Anfragen sind offen",
-    "faq": "FAQ."
+    "faq": "FAQ.",
+    "damage_label": "Was sind Sonderschäden und Sachschäden?"
   },
   "tutorial": {
     "start": "Wie starte ich ein Spiel?",
