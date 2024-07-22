@@ -1342,7 +1342,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GRIMER]: "0088",
   [Pkm.MUK]: "0089",
   [Pkm.SHARPEDO]: "0319",
-  [Pkm.HISUI_ZORUA]: "0570-0002",
+  [Pkm.HISUI_ZORUA]: "0570-0001",
   [Pkm.HISUI_ZOROARK]: "0571-0001",
   [Pkm.ALOLAN_GRIMER]: "0088-0001",
   [Pkm.ALOLAN_MUK]: "0089-0001",
