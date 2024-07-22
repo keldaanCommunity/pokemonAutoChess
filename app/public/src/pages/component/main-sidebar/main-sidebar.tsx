@@ -337,6 +337,7 @@ function Modals({
   setModal: (nextModal?: Modals) => void
   page: Page
 }) {
+  const { t } = useTranslation()
   const searchedUser = useAppSelector((state) => state.lobby.searchedUser)
 
   const dispatch = useAppDispatch()
@@ -353,7 +354,9 @@ function Modals({
     <>
       <Modal
         onClose={closeModal}
-        show={modal === "news"}>
+        show={modal === "news"}
+        header={t("patch_notes")}
+        className="patchnotes">
         <Patchnotes />
       </Modal>
       <Modal

@@ -1,13 +1,8 @@
-.patchnotes {
-  color: white;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  font-size: 22px;
+.patchnotes.my-container {
   text-align: center;
-  max-height: 95vh;
-  margin: 0;
-  padding: 0 !important;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .patchnotes h1 {
@@ -15,51 +10,48 @@
   text-shadow: 2px 2px 2px #00000040;
 }
 
-.patchnotes .content {
+.patchnotes .modal-body {
   flex: 1;
-  max-width: 1200px;
   overflow-y: scroll;
-  line-height: 1em;
-  font-size: 80%;
 }
 
-.patchnotes .content h2 {
+.patchnotes .modal-body h2 {
   font-size: 120%;
   border-bottom: 2px solid #80808080;
 }
 
-.patchnotes .content ul {
+.patchnotes .modal-body ul {
   padding: 0;
   margin: auto;
   justify-content: center;
 }
 
-.patchnotes .content blockquote {
+.patchnotes .modal-body blockquote {
   text-align: right;
   color: gray;
   margin-bottom: 0.25em;
 }
 
-.patchnotes .content hr {
+.patchnotes .modal-body hr {
   height: 2px;
   background-color: white;
   margin: 1em 0;
 }
 
-.patchnotes .content > ul {
+.patchnotes .modal-body > ul {
   display: flex;
   flex-wrap: wrap;
   gap: 32px;
   padding: 0;
 }
 
-.patchnotes .content > ul > li {
+.patchnotes .modal-body > ul > li {
   list-style: none;
   padding: 0;
 }
 
 @media (max-width: 640px) {
-  .patchnotes .content {
+  .patchnotes .modal-body {
     padding: 0;
   }
 }
