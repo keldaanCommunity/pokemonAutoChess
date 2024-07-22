@@ -1,3 +1,8 @@
+input, select {
+  font-family: inherit;
+  font-size: 1em;
+}
+
 input[type="text"],
 input[type="search"] {
   border-radius: 12px;

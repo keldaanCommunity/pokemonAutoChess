@@ -1,13 +1,23 @@
 import React from "react"
-import Badge from "react-bootstrap/Badge"
 import { useTranslation } from "react-i18next"
-import { Role, RoleColor } from "../../../../../types"
+import { Role } from "../../../../../types"
+import { cc } from "../../utils/jsx"
+
+/*
+TODO
+port old classnames
+export const RoleColor: { [key in Role]: string } = {
+  [Role.ADMIN]: "success",
+  [Role.MODERATOR]: "primary",
+  [Role.BASIC]: "",
+  [Role.BOT]: "secondary",
+  [Role.BOT_MANAGER]: "danger"
+}
+*/
 
 export function RoleBadge(props: { role: Role }) {
   const { t } = useTranslation()
   return props.role && props.role !== Role.BASIC ? (
-    <Badge pill bg={RoleColor[props.role]}>
-      {t("role." + props.role)}
-    </Badge>
+    <div className={cc("badge", props.role)}>{t("role." + props.role)}</div>
   ) : null
 }

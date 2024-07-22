@@ -16,13 +16,13 @@ import {
 } from "../../../stores/NetworkStore"
 import { getAvatarSrc, getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
-import { BasicModal } from "../modal/modal"
+import { Modal } from "../modal/modal"
 import PokemonEmotion from "./pokemon-emotion"
 import "./pokemon-emotions-modal.css"
 
 export default function PokemonEmotionsModal(props: {
   pokemon: Pkm
-  onHide: () => void
+  onClose: () => void
 }) {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
@@ -68,12 +68,11 @@ export default function PokemonEmotionsModal(props: {
   )
 
   return (
-    <BasicModal
+    <Modal
       show={true}
-      onHide={props.onHide}
-      dialogClassName="pokemon-emotions-modal is-dark is-large"
-    >
-      <header>
+      onClose={props.onClose}
+      className="pokemon-emotions-modal anchor-top"
+      header={<>
         <img
           src={getPortraitSrc(
             index,
@@ -88,8 +87,8 @@ export default function PokemonEmotionsModal(props: {
           {pConfig.dust} {t("shards")}{" "}
           <img src={getPortraitSrc(index)} className="dust" alt="dust" />
         </p>
-      </header>
-      <div>
+      </>}
+      body={<>
         <section>
           <p>{t("normal_emotions")}</p>
           <div>
@@ -146,8 +145,8 @@ export default function PokemonEmotionsModal(props: {
             </div>
           </section>
         )}
-      </div>
-      <footer>
+      </>}
+      footer={<>
         <button
           className="bubbly blue"
           disabled={
@@ -155,11 +154,11 @@ export default function PokemonEmotionsModal(props: {
               pConfig.shinyEmotions.length === 0) ||
             (user &&
               getAvatarSrc(user?.avatar) ===
-                getPortraitSrc(
-                  index,
-                  pConfig.selectedShiny,
-                  pConfig.selectedEmotion
-                ))
+              getPortraitSrc(
+                index,
+                pConfig.selectedShiny,
+                pConfig.selectedEmotion
+              ))
           }
           onClick={() =>
             dispatch(
@@ -191,10 +190,22 @@ export default function PokemonEmotionsModal(props: {
           <img src={getPortraitSrc(index)} className="dust" alt="dust" />
         </button>
         <div className="spacer"></div>
-        <button className="bubbly red" onClick={props.onHide}>
+        <button className="bubbly red" onClick={props.onClose}>
           {t("close")}
         </button>
-      </footer>
-    </BasicModal>
+      </>}
+    >
+      <div className="my-container">
+        <header>
+
+        </header>
+        <div>
+
+        </div>
+        <footer>
+
+        </footer>
+      </div>
+    </Modal>
   )
 }

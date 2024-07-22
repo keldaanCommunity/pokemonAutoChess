@@ -68,7 +68,7 @@ export function PokemonReport() {
           }}
         >
           <option value={"all"}>
-            {t("ALL")} {t("synergies")}
+            {t("all")} {t("synergies")}
           </option>
           {Object.keys(Synergy).map((s) => (
             <option value={s} key={s}>
@@ -81,7 +81,7 @@ export function PokemonReport() {
           onChange={(e) => setRarity(e.target.value as Rarity | "all")}
         >
           <option value={"all"}>
-            {t("rarity_label")}: {t("ALL")}
+            {t("rarity_label")}: {t("all")}
           </option>
           {Object.keys(Rarity).map((r) => (
             <option value={r} key={r}>

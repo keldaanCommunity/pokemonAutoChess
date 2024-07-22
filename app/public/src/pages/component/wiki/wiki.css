@@ -1,6 +1,11 @@
+.wiki-modal.my-container {
+  background-color: var(--color-bg-secondary);
+  padding: 0;
+}
+
 #wiki-page {
-  width: 1880px;
-  max-width: 100%;
+  color: white;
+  width: min(95vw, 1800px);
 }
 
 #wiki-page ul {
@@ -21,21 +26,17 @@
 }
 
 #wiki-page .wiki-types li[role="tab"] {
-  padding: 4px 6px;
+  padding: 4px 5px;
   line-height: 40px;
   min-width: 48px;
   text-align: center;
 }
 
-#wiki-page > .my-container {
-  color: white;
-  background-color: var(--color-bg-secondary);
-}
-
-#wiki-page > .my-container > .react-tabs > .react-tabs__tab-panel {
+#wiki-page > .react-tabs > .react-tabs__tab-panel {
   height: 75vh;
-  padding-bottom: 40px;
+  padding: 0.5em 0 40px 0;
   overflow-y: auto;
+  background-color: var(--color-bg-secondary);
 }
 
 #wiki-page .pokemon-name {
@@ -53,6 +54,8 @@
 
 #wiki-page .wiki-pokemons .pokemon-typeahead {
   float: right;
+  font-size: 80%;
+  padding: 0px 36px 0px 16px;
 }
 
 #wiki-page p.description {
@@ -76,6 +79,11 @@
   grid-template: auto 1fr / 30% 1fr;
   padding: 0.5em;
   min-height: calc(122px + 1em);
+}
+
+#wiki-page .wiki-status h2 {
+  margin-top: 0;
+  font-size: 2rem;
 }
 
 #wiki-page .wiki-stat li {
@@ -156,6 +164,11 @@
   gap: 0.5em;
 }
 
+#wiki-ability h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
 #wiki-ability .my-box {
   background-color: var(--color-bg-primary);
   padding: 0.5em 1em;
@@ -165,6 +178,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
   gap: 0.5em;
+  margin: 0;
 }
 
 #wiki-ability > ul > .my-box {
@@ -200,6 +214,11 @@
   object-fit: cover;
 }
 
+#wiki-dungeon .my-box h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
 #wiki-dungeon .wiki-dungeon-regional-mons {
   position: absolute;
   bottom: 1em;
@@ -219,6 +238,7 @@
 #wiki-weather .my-box h2 {
   flex: 1;
   margin: 0;
+  font-size: 2rem;
 }
 
 #wiki-weather .my-box header .weather-icon {

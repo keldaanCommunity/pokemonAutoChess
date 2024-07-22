@@ -69,7 +69,6 @@
   flex: 1;
   overflow-y: auto;
   background-color: rgb(84, 89, 107);
-  padding: 1em;
   border-radius: 0 0 12px 12px;
   border: var(--border-thin);
   border-top: 0;
@@ -78,6 +77,11 @@
 .profile-actions > .my-container {
   height: 100%;
   background-color: var(--color-bg-secondary);
+}
+
+.profile-actions > button,
+.profile-actions > .my-input-group {
+  margin: 0.25em;
 }
 
 .profile .game-history-list {
@@ -97,6 +101,7 @@
   grid-template-columns: 100px 1fr;
   gap: 0 1em;
   margin-top: 1em;
+  border-width: 2px;
 }
 
 .profile .gadget > img {

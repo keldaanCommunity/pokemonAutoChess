@@ -5,6 +5,9 @@
   align-items: center;
   font-size: 22px;
   text-align: center;
+  max-height: 95vh;
+  margin: 0;
+  padding: 0 !important;
 }
 
 .patchnotes h1 {
@@ -18,7 +21,6 @@
   overflow-y: scroll;
   line-height: 1em;
   font-size: 80%;
-  padding: 1em 0.5em;
 }
 
 .patchnotes .content h2 {

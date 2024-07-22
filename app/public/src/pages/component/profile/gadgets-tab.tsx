@@ -15,7 +15,7 @@ export function GadgetsTab() {
 
   return user ? (
     <div>
-      <p>
+      <p style={{ textAlign: "right" }}>
         {nbGadgetsUnlocked} / {gadgets.length} {t("gadgets_unlocked")}
       </p>
       <ul className="gadgets">

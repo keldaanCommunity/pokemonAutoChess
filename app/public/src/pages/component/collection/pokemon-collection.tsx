@@ -39,7 +39,7 @@ export default function PokemonCollection() {
 
   return (
     <div id="pokemon-collection">
-      <header className="my-container">
+      <header>
         <PokemonTypeahead
           value={selectedPokemon}
           onChange={setSelectedPokemon}
@@ -64,10 +64,10 @@ export default function PokemonCollection() {
           isDark
         />
       </header>
-      <div className="my-container">
+      <div>
         <Tabs>
           <TabList className="pokemon-collection-tabs">
-            <Tab key="title-all">{t("ALL")}</Tab>
+            <Tab key="title-all">{t("all")}</Tab>
             {(Object.keys(Synergy) as Synergy[]).map((type) => {
               return (
                 <Tab key={"title-" + type}>
@@ -112,7 +112,7 @@ export default function PokemonCollection() {
       {selectedPokemon && (
         <PokemonEmotionsModal
           pokemon={selectedPokemon}
-          onHide={() => setSelectedPokemon("")}
+          onClose={() => setSelectedPokemon("")}
         />
       )}
     </div>

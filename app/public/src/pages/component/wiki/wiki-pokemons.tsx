@@ -50,7 +50,7 @@ export default function WikiPokemons() {
             </Tab>
           )
         })}
-        <Tab key="title-all">{t("ALL")}</Tab>
+        <Tab key="title-all">{t("all")}</Tab>
       </TabList>
 
       {(Object.values(Rarity) as Rarity[]).map((r) => {

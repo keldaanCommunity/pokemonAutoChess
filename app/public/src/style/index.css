@@ -18,6 +18,10 @@
   --shadow-clickable: #2d334b 2px 2px 0px;
 }
 
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   width: 100vw;
@@ -32,6 +36,28 @@ body {
 a {
   /* better contrast on dark background for accessibility */
   color: #7bbbff;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  margin: 0.5em 0;
+}
+
+p {
+  margin: 0;
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+dl, ol, ul {
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 
 #root {
@@ -166,22 +192,6 @@ p:last-child {
   margin: -5px -5px 4px -5px;
   font-size: 1.2em;
   box-shadow: 0 -1px 2px rgb(0 0 0 / 50%);
-}
-
-.modal-dialog.is-large {
-  max-width: 80vw;
-}
-
-.modal-dialog.is-dark .modal-content {
-  background-color: var(--color-bg-primary);
-  border: var(--border-thick);
-  color: white;
-}
-
-.modal-dialog.is-dark :is(.modal-header, .modal-footer) {
-  border-color: black;
-  border-width: 4px;
-  background-color: #4f5160;
 }
 
 .clickable {

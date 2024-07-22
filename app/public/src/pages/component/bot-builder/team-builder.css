@@ -12,7 +12,7 @@
   position: relative;
 }
 
-.basic-modal-body > #team-builder {
+.modal-body > #team-builder {
   margin-top: -4px;
   border-radius: 0 0 12px 12px;
   width: 2000px;
@@ -178,7 +178,7 @@
     overflow-y: auto;
   }
 
-  .basic-modal-body > #team-builder {
+  .modal-body > #team-builder {
     width: 95vw;
   }
 

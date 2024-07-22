@@ -1,3 +1,7 @@
+button {
+  font-family: inherit;
+}
+
 .bubbly {
   padding: 0.25em 0.5em;
   display: inline-block;

@@ -18,9 +18,9 @@ export function WikiDungeon() {
             return (
               <li key={dungeon} className="my-box">
                 <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
+                  style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
                 >
-                  <h3>{t(`map.${dungeon}`)}</h3>
+                  <h2>{t(`map.${dungeon}`)}</h2>
                   <div style={{ display: "flex", gap: "5px" }}>
                     {DungeonDetails[dungeon].synergies.map((synergy) => (
                       <SynergyIcon

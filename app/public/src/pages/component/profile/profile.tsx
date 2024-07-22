@@ -147,7 +147,7 @@ function OtherProfileActions({ resetSearch }) {
 
   const roleButton =
     user && role && role === Role.ADMIN ? (
-      <div style={{ display: "flex" }}>
+      <div className="my-input-group">
         <button
           className="bubbly orange"
           onClick={() => {
@@ -174,7 +174,7 @@ function OtherProfileActions({ resetSearch }) {
 
   const titleButton =
     user && role && role === Role.ADMIN ? (
-      <div style={{ display: "flex" }}>
+      <div className="my-input-group">
         <button
           className="bubbly blue"
           onClick={() => {
@@ -200,7 +200,7 @@ function OtherProfileActions({ resetSearch }) {
     ) : null
 
   return role === Role.ADMIN || role === Role.MODERATOR ? (
-    <div className="actions">
+    <>
       {giveButton}
       {roleButton}
       {titleButton}
@@ -209,6 +209,6 @@ function OtherProfileActions({ resetSearch }) {
       <button className="bubbly blue" onClick={resetSearch}>
         {t("back_to_my_profile")}
       </button>
-    </div>
+    </>
   ) : null
 }

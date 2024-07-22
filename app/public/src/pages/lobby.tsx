@@ -74,7 +74,7 @@ import { logger } from "../../../utils/logger"
 import { localStore, LocalStoreKeys } from "./utils/store"
 import { cc } from "./utils/jsx"
 import "./lobby.css"
-import { BasicModal } from "./component/modal/modal"
+import { Modal } from "./component/modal/modal"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
@@ -134,12 +134,10 @@ export default function Lobby() {
           setToPreparation={setToPreparation}
         />
       </div>
-      <BasicModal show={reconnectionToken != null}>
-        <header>{t("game-reconnect-modal-title")}</header>
-        <div className="game-reconnect-modal-body">
-          {t("game-reconnect-modal-body")}
-        </div>
-        <footer style={{ justifyContent: "space-evenly" }}>
+      <Modal show={reconnectionToken != null}
+        header={t("game-reconnect-modal-title")}
+        body={t("game-reconnect-modal-body")}
+        footer={<>
           <button className="bubbly green" onClick={() => setToGame(true)}>
             {t("yes")}
           </button>
@@ -151,8 +149,8 @@ export default function Lobby() {
           >
             {t("no")}
           </button>
-        </footer>
-      </BasicModal>
+        </>}>
+      </Modal>
     </main>
   )
 }
