@@ -93,7 +93,7 @@ async function removePokemonFromGame(
           if (player.pokemons) {
             player.pokemons.forEach((p) => {
               if (p.name === (pokemonNameToRemove as Pkm)) {
-                p.name = pokemonIndexToReplace
+                p.name = pokemonNameToReplace
                 if (p.avatar) {
                   p.avatar = p.avatar.replace(
                     pokemonIndexToRemove,
