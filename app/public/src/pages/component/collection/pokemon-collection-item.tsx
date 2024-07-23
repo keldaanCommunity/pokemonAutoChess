@@ -63,6 +63,7 @@ export default function PokemonCollectionItem(props: {
           props.config?.selectedShiny,
           props.config?.selectedEmotion
         )}
+        loading="lazy"
       />
       <p>
         <span>{props.config ? props.config.dust : 0}</span>
