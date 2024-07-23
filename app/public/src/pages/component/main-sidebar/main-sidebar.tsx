@@ -18,7 +18,7 @@ import { Modal } from "../modal/modal"
 import Patchnotes from "../patchnotes/patchnotes"
 import { usePatchVersion } from "../patchnotes/usePatchVersion"
 import Profile from "../profile/profile"
-import { ServerAnnouncementForm } from "../server-announcement/server-announcement-form"
+import { ServerAnnouncementModal } from "../server-announcement/server-announcement-modal"
 import { TournamentsAdmin } from "../tournaments-admin/tournaments-admin"
 import Wiki from "../wiki/wiki"
 
@@ -399,11 +399,9 @@ function Modals({
         page={page}
         hideModal={closeModal}
       />
-      <Modal
-        onClose={closeModal}
-        show={modal === "announcement"}>
-        <ServerAnnouncementForm />
-      </Modal>
+      <ServerAnnouncementModal
+        show={modal === "announcement"}
+        onClose={closeModal} />
       <Modal
         onClose={closeModal}
         show={modal === "tournaments"}>

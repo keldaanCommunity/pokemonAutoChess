@@ -1,4 +1,4 @@
-.profile.my-container {
+.profile {
   color: white;
   display: grid;
   grid-template-areas:
@@ -12,9 +12,9 @@
   padding-top: 0;
 }
 
-.profile h1 {
+.profile h2 {
   font-size: 2rem;
-  margin: 0.5em;
+  margin: 0 0 0.25em 0;
   text-align: center;
 }
 
@@ -126,7 +126,7 @@
 }
 
 @media (width <= 1280px) {
-  .profile.my-container {
+  .profile {
     display: block;
     overflow-y: auto;
     padding: 0 0.5em;

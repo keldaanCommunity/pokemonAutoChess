@@ -54,7 +54,8 @@ export default function GameOptionsModal(props: {
     <Modal
       show={props.show}
       onClose={props.hideModal}
-      header={t("options")}>
+      header={t("options")}
+      className="game-options-modal anchor-top">
       <Tabs>
         <TabList>
           <Tab key="sound">{t("sound")}</Tab>
@@ -115,7 +116,7 @@ export default function GameOptionsModal(props: {
                   ))}
                 </select>
               </label>
-              <p>
+              <p className="info">
                 {t("community_translations")}{" "}
                 <a
                   href="https://discord.com/channels/737230355039387749/1134014553529790464"
@@ -180,7 +181,7 @@ export default function GameOptionsModal(props: {
                     </option>
                   ))}
                 </select>
-                <p>{t("renderer_info")}</p>
+                <p className="info">{t("renderer_info")}</p>
               </label>
             </>
           )}

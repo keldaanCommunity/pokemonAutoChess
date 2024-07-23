@@ -80,11 +80,11 @@ export default function ImportExportBotModal(props: {
           {url}
         </>}
         footer={<>
-          <button className="bubbly red" onClick={props.hideModal}>
-            {t("cancel")}
-          </button>
           <button className="bubbly green" onClick={exportBot}>
             {t("submit_your_bot")}
+          </button>
+          <button className="bubbly red" onClick={props.hideModal}>
+            {t("cancel")}
           </button>
         </>}
       />
@@ -98,7 +98,7 @@ export default function ImportExportBotModal(props: {
         header={t("import")}
         body={<>
           <p>{t("get_started_bot")}</p>
-          <div style={{ display: "flex", marginBottom: "1em" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5em", marginBottom: "0.5em" }}>
             <label htmlFor="bot_select">{t("existing_bot")}</label>
             <select
               id="bot_select"
@@ -118,18 +118,15 @@ export default function ImportExportBotModal(props: {
                 </option>
               ))}
             </select>
-            <textarea
-              rows={10}
-              value={textArea}
-              onChange={(e) => handleTextAreaChange(e.target.value)}
-            ></textarea>
-            {jsonError && <p className="error">{jsonError}</p>}
           </div>
+          <textarea
+            rows={10}
+            value={textArea}
+            onChange={(e) => handleTextAreaChange(e.target.value)}
+          ></textarea>
+          {jsonError && <p className="error">{jsonError}</p>}
         </>}
         footer={<>
-          <button className="bubbly red" onClick={props.hideModal}>
-            {t("cancel")}
-          </button>
           <button
             className="bubbly green"
             onClick={() => {
@@ -137,6 +134,9 @@ export default function ImportExportBotModal(props: {
             }}
           >
             {t("import")}
+          </button>
+          <button className="bubbly red" onClick={props.hideModal}>
+            {t("cancel")}
           </button>
         </>}
       />

@@ -11,7 +11,7 @@ export default function MetaReport() {
   const { t } = useTranslation()
 
   return (
-    <div id="meta-report" className="my-container">
+    <div id="meta-report">
       <Tabs>
         <TabList>
           <Tab key="team-comps">{t("meta_report")}</Tab>

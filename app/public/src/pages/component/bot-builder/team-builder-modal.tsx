@@ -20,7 +20,8 @@ export default function TeamBuilderModal(props: {
     <Modal
       show={props.show}
       onClose={props.handleClose}
-      header={t("team_builder")}>
+      header={t("team_builder")}
+      className="team-builder-modal">
       <TeamBuilder board={board} updateBoard={updateBoard} />
     </Modal>
   )

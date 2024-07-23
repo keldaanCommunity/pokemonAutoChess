@@ -45,9 +45,9 @@ export default function Profile() {
   }, [dispatch])
 
   return (
-    <div className="my-container profile">
+    <div className="profile">
       <div className="profile-box">
-        <h1>{t("profile")}</h1>
+        <h2>{t("profile")}</h2>
         {profile && <PlayerBox user={profile} />}
       </div>
 

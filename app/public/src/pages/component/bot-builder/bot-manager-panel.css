@@ -13,7 +13,7 @@
   flex-flow: column;
   align-items: center;
   overflow: scroll;
-  min-width: 1400px;
+  min-width: 1000px;
   padding: 0;
 }
 

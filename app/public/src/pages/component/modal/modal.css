@@ -22,6 +22,9 @@
   background: transparent;
   border: none;
   pointer-events: all;
+}
+
+.modal.my-container {
   padding: 0;
 }
 
@@ -49,17 +52,18 @@
   background-color: var(--color-bg-secondary);
   color: white;
   padding: 0.5em;
+  text-align: center;
 }
 
 .modal-body {
-  display: flex;
-  justify-content: center;
   padding: 0.5em;
   color: white;
 }
 
 .modal > footer {
   display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
   border-top: var(--border-thin);
   background-color: var(--color-bg-secondary);
   color: white;
