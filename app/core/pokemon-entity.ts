@@ -49,6 +49,7 @@ import { IdleState } from "./idle-state"
 import MovingState from "./moving-state"
 import PokemonState from "./pokemon-state"
 import Simulation from "./simulation"
+import { SimulationCommand } from "./simulation-command"
 
 export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -112,6 +113,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   echo = 0
   isClone = false
   refToBoardPokemon: IPokemon
+  commands = new Array<SimulationCommand>()
 
   constructor(
     pokemon: IPokemon,

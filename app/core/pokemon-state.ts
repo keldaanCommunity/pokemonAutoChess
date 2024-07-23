@@ -1,6 +1,6 @@
 import Player from "../models/colyseus-models/player"
 import { IPokemonEntity, Transfer } from "../types"
-import { FIGHTING_PHASE_DURATION, ARMOR_FACTOR } from "../types/Config"
+import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../types/Config"
 import { Effect } from "../types/enum/Effect"
 import {
   AttackType,
@@ -402,6 +402,11 @@ export default class PokemonState {
     return { death, takenDamage }
   }
 
+  updateCommands(pokemon: PokemonEntity, dt: number) {
+    pokemon.commands.forEach((command) => command.update(dt))
+    pokemon.commands = pokemon.commands.filter((command) => !command.executed)
+  }
+
   update(
     pokemon: PokemonEntity,
     dt: number,
@@ -409,6 +414,7 @@ export default class PokemonState {
     weather: Weather,
     player: Player | undefined
   ) {
+    this.updateCommands(pokemon, dt)
     pokemon.status.updateAllStatus(dt, pokemon, board)
 
     if (
