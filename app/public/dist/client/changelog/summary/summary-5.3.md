@@ -1,6 +1,6 @@
 > Jul 20, 2024
 
-# Patch 5.3: Mystic Guardians
+# Patch 5.3: Ancient Temple
 
 ## Aquatic rework
 
