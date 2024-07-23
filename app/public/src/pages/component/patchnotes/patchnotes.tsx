@@ -1,11 +1,8 @@
 import React from "react"
-import { useTranslation } from "react-i18next"
 import "./patchnotes.css"
 import { Poster } from "./poster"
 
 export default function PatchNotes() {
-  const { t } = useTranslation()
-
   const PATCHES = [
     "5.3",
     "5.2",
@@ -27,17 +24,12 @@ export default function PatchNotes() {
   ]
 
   return (
-    <div className="my-container patchnotes">
-      <h1>{t("patch_notes")}</h1>
-      <div className="content">
-        <ul>
-          {PATCHES.map((v) => (
-            <li key={v}>
-              <Poster version={v} />
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+    <ul>
+      {PATCHES.map((v) => (
+        <li key={v}>
+          <Poster version={v} />
+        </li>
+      ))}
+    </ul>
   )
 }

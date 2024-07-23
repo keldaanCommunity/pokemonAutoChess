@@ -4,7 +4,6 @@ import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Navigate } from "react-router-dom"
-import { Modal } from "react-bootstrap"
 import LobbyUser from "../../../models/colyseus-models/lobby-user"
 import {
   TournamentBracketSchema,
@@ -75,6 +74,7 @@ import { logger } from "../../../utils/logger"
 import { localStore, LocalStoreKeys } from "./utils/store"
 import { cc } from "./utils/jsx"
 import "./lobby.css"
+import { Modal } from "./component/modal/modal"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
@@ -134,14 +134,10 @@ export default function Lobby() {
           setToPreparation={setToPreparation}
         />
       </div>
-      <Modal show={reconnectionToken != null}>
-        <Modal.Header>
-          <Modal.Title>{t("game-reconnect-modal-title")}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="game-reconnect-modal-body">
-          {t("game-reconnect-modal-body")}
-        </Modal.Body>
-        <Modal.Footer style={{ justifyContent: "space-evenly" }}>
+      <Modal show={reconnectionToken != null}
+        header={t("game-reconnect-modal-title")}
+        body={t("game-reconnect-modal-body")}
+        footer={<>
           <button className="bubbly green" onClick={() => setToGame(true)}>
             {t("yes")}
           </button>
@@ -153,7 +149,7 @@ export default function Lobby() {
           >
             {t("no")}
           </button>
-        </Modal.Footer>
+        </>}>
       </Modal>
     </main>
   )
@@ -331,7 +327,10 @@ export async function joinLobbyRoom(
 
             tournament.brackets.onRemove((bracket, bracketId) => {
               dispatch(
-                removeTournamentBracket({ tournamendId: tournament.id, bracketId })
+                removeTournamentBracket({
+                  tournamendId: tournament.id,
+                  bracketId
+                })
               )
             })
           })

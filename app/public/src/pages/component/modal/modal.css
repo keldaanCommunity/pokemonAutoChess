@@ -1,28 +1,83 @@
-.basic-modal {
+ #modal-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  place-content: center center;
+  z-index: 100;
+  pointer-events: none;
+ }
+
+ dialog::backdrop {
+  background-color: #00000080;
+ }
+
+.modal {
+  position: relative;
   max-width: 95vw;
+  max-height: 95vh;
   width: fit-content;
+  background: transparent;
+  border: none;
+  pointer-events: all;
 }
 
-.basic-modal-header {
-  border: var(--border-thick);
+.modal.my-container {
+  padding: 0;
+}
+
+.modal[open] {
+  animation: modal-slide-in 0.3s forwards;
+}
+
+@keyframes modal-slide-in {
+  0% {
+    top: -10vh;
+    opacity: 0;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+.modal.anchor-top {
+  margin: 2.5vh auto;
+}
+
+.modal > header {
+  border-bottom: var(--border-thin);
   background-color: var(--color-bg-secondary);
   color: white;
+  padding: 0.5em;
+  text-align: center;
 }
 
-.basic-modal-body {
-  display: flex;
-  justify-content: center;
-  padding: 0;
+.modal-body {
+  padding: 0.5em;
   color: white;
 }
 
-.hide-bg {
-  background: none;
-  border: none;
+.modal > footer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  border-top: var(--border-thin);
+  background-color: var(--color-bg-secondary);
+  color: white;
+  padding: 0.5em;
+  gap: 0.5em;
+}
+
+.modal.custom-bg {
+  background-attachment: local;
+  background-position: center;
 }
 
 @media (width <= 640px) {
-  .basic-modal {
+  .modal {
     width: 95vw;
   }
 }

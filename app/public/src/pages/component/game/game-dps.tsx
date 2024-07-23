@@ -1,8 +1,8 @@
 import React from "react"
-import ProgressBar from "react-bootstrap/ProgressBar"
 import { IDps } from "../../../../../types"
 import { getAvatarSrc } from "../../../utils"
 import { useTranslation } from "react-i18next"
+import ProgressBar from "../progress-bar/progress-bar"
 
 export default function GameDps(props: { maxDamage: number; dps: IDps }) {
   const { t } = useTranslation()

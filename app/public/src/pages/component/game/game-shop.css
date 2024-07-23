@@ -184,7 +184,7 @@
   place-content: center;
 }
 
-.game-experience .progress-bar > .my-progress {
+.game-experience .progress-bar > .progress {
   overflow: hidden;
   height: 100%;
 }

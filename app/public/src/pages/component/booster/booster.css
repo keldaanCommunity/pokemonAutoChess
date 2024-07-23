@@ -1,12 +1,7 @@
 #boosters-page {
-  height: 100%;
-  width: 1800px;
-  padding: 1vw;
-}
-
-#boosters-page > .my-container {
   position: relative;
   height: 90vh;
+  width: 1800px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
