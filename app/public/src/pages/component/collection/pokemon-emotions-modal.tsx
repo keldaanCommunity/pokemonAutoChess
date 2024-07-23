@@ -194,18 +194,6 @@ export default function PokemonEmotionsModal(props: {
           {t("close")}
         </button>
       </>}
-    >
-      <div className="my-container">
-        <header>
-
-        </header>
-        <div>
-
-        </div>
-        <footer>
-
-        </footer>
-      </div>
-    </Modal>
+    />
   )
 }
