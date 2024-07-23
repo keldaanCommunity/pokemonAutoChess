@@ -10,11 +10,8 @@ export abstract class SimulationCommand {
     this.delay -= dt
     if (this.delay < 0) {
       this.execute()
-      this.afterExecute()
+      this.executed = true
     }
-  }
-  afterExecute() {
-    this.executed = true
   }
 }
 
