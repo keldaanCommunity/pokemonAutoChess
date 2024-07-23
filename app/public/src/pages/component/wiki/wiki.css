@@ -264,6 +264,10 @@
   padding: 0;
 }
 
+#wiki-ability .my-box p {
+    font-size: 0.8em;
+}
+
 #wiki-items {
   display: flex;
   justify-content: space-evenly;

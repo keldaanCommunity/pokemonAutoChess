@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { PokemonClasses } from "../../../../../models/colyseus-models/pokemon"
 import { PRECOMPUTED_REGIONAL_MONS } from "../../../../../models/precomputed/precomputed-pokemon-data"
@@ -9,6 +9,28 @@ import SynergyIcon from "../icons/synergy-icon"
 
 export function WikiDungeon() {
   const { t } = useTranslation()
+
+  const [pokemonsPerRegion, setPokemonsPerRegion] = useState<{ [key in DungeonPMDO]?: Pkm[] }>({})
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setPokemonsPerRegion(Object.keys(DungeonPMDO).reduce((o, dungeon) => {
+        const regionalMons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
+          PokemonClasses[p].prototype.isInRegion(p, dungeon)
+        )
+          .filter(
+            (pkm, index, array) =>
+              array.findIndex(
+                (p) => PkmFamily[p] === PkmFamily[pkm]
+              ) === index // dedup same family
+          )
+        o[dungeon as DungeonPMDO] = regionalMons
+        return o
+      }, {}))
+    }, 100)
+    // Cleanup function to clear the timeout
+    return () => clearTimeout(timer);
+  }, [])
+
   return (
     <div id="wiki-dungeon">
       <ul>
@@ -32,25 +54,18 @@ export function WikiDungeon() {
                 </div>
                 <img
                   src={`/assets/maps/${dungeon}-preview.png`}
+                  loading="lazy"
                   alt={dungeon}
                 />
                 <div className="wiki-dungeon-regional-mons">
-                  {PRECOMPUTED_REGIONAL_MONS.filter((p) =>
-                    PokemonClasses[p].prototype.isInRegion(p, dungeon)
-                  )
-                    .filter(
-                      (pkm, index, array) =>
-                        array.findIndex(
-                          (p) => PkmFamily[p] === PkmFamily[pkm]
-                        ) === index // dedup same family
-                    )
-                    .map((pkm) => (
-                      <img
-                        key={pkm}
-                        className="pokemon-portrait"
-                        src={getPortraitSrc(PkmIndex[pkm])}
-                      ></img>
-                    ))}
+                  {(pokemonsPerRegion[dungeon] ?? []).map((pkm) => (
+                    <img
+                      key={pkm}
+                      className="pokemon-portrait"
+                      loading="lazy"
+                      src={getPortraitSrc(PkmIndex[pkm])}
+                    ></img>
+                  ))}
                 </div>
               </li>
             )
