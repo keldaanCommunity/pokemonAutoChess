@@ -50,7 +50,7 @@ function onlyProgressBar(props, propName, componentName): Error | null {
       : child
     error = new Error(
       `Children of ${componentName} can contain only ProgressBar ` +
-        `components. Found ${childIdentifier}.`
+      `components. Found ${childIdentifier}.`
     )
   })
 
@@ -180,22 +180,22 @@ const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
     } = props
 
     return (
-      <div ref={ref} {...wrapperProps} className={className}>
+      <div ref={ref} {...wrapperProps} className={classNames("progress", className)}>
         {children
           ? map(children, (child) => cloneElement(child, { isChild: true }))
           : renderProgressBar(
-              {
-                min,
-                now,
-                max,
-                label,
-                visuallyHidden,
-                striped,
-                animated,
-                variant
-              },
-              ref
-            )}
+            {
+              min,
+              now,
+              max,
+              label,
+              visuallyHidden,
+              striped,
+              animated,
+              variant
+            },
+            ref
+          )}
       </div>
     )
   }

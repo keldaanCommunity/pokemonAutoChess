@@ -254,40 +254,6 @@ input[type="checkbox"].is-dark:checked:focus + span::before {
   color: #fff;
 }
 
-/* Progress bar */
-.my-progress {
-  border-image-slice: none;
-  border-image-width: none;
-  border-image-repeat: none;
-  border-image-source: none;
-  border-image-outset: none;
-  border-radius: 12px;
-  border: var(--border-thin);
-  width: 100%;
-  height: 48px;
-  margin: 4px;
-  background-color: var(--color-bg-secondary);
-  color: white;
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-.my-progress::-webkit-progress-bar {
-  background-color: var(--color-bg-secondary);
-}
-
-.my-progress::-webkit-progress-value {
-  background-color: var(--color-bg-accent);
-}
-
-.my-progress::-moz-progress-bar {
-  background-color: var(--color-bg-accent);
-}
-
-.my-progress::-ms-fill {
-  background-color: var(--color-bg-secondary);
-  border: none;
-}
 
 .my-input-group {
   display: inline-flex;
