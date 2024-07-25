@@ -364,12 +364,14 @@ function Modals({
           closeModal()
           dispatch(setSearchedUser(undefined))
         }}
-        show={modal === "profile"}>
+        show={modal === "profile"}
+        header={t("profile")}>
         <Profile />
       </Modal>
       <Modal
         onClose={closeModal}
         show={modal === "collection"}
+        header={t("collection")}
         className="anchor-top">
         <PokemonCollection />
       </Modal>
@@ -382,11 +384,13 @@ function Modals({
       <Modal
         onClose={closeModal}
         show={modal === "wiki"}
-        className="wiki-modal">
+        className="wiki-modal"
+        header={t("wiki")}>
         <Wiki inGame={page === "game"} />
       </Modal>
       <Modal
         show={modal === "meta"}
+        header={t("meta")}
         onClose={closeModal}>
         <MetaReport />
       </Modal>
@@ -404,7 +408,8 @@ function Modals({
         onClose={closeModal} />
       <Modal
         onClose={closeModal}
-        show={modal === "tournaments"}>
+        show={modal === "tournaments"}
+        header="Tournaments">
         <TournamentsAdmin />
       </Modal>
       <Jukebox show={modal === "jukebox"} handleClose={closeModal} />
