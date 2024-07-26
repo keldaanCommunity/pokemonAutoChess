@@ -12517,7 +12517,7 @@ export class Drizzile extends Pokemon {
   evolution = Pkm.INTELEON
   stars = 2
   hp = 200
-  atk = 23
+  atk = 26
   def = 4
   speDef = 4
   maxPP = 100
@@ -13398,10 +13398,10 @@ export class Lunala extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 300
+  hp = 250
   atk = 25
-  def = 8
-  speDef = 8
+  def = 5
+  speDef = 5
   maxPP = 100
   range = 4
   skill = Ability.MOONGEIST_BEAM
