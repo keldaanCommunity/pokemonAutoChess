@@ -8682,8 +8682,8 @@ export class Snubull extends Pokemon {
   stars = 1
   evolution = Pkm.GRANBULL
   hp = 115
-  atk = 10
-  def = 3
+  atk = 12
+  def = 4
   speDef = 2
   maxPP = 70
   range = 1
