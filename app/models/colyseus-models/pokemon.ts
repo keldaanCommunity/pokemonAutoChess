@@ -12779,7 +12779,7 @@ export class Smeargle extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.HUMAN])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 220
+  hp = 250
   atk = 20
   def = 3
   speDef = 3
