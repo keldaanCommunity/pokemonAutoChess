@@ -1,5 +1,6 @@
 import { AnimationComplete, AnimationType } from "../../../types/Animation"
 import {
+  FPS_POKEMON_ANIMS,
   Orientation,
   OrientationFlip,
   PokemonActionState,
@@ -17,7 +18,6 @@ import PokemonSprite from "./components/pokemon"
 import delays from "../../../types/delays.json"
 
 const FPS_EFFECTS = 20
-const FPS_POKEMON_ANIMS = 36
 
 export default class AnimationManager {
   game: Phaser.Scene
