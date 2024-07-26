@@ -357,7 +357,7 @@ export default class BattleManager {
               this.animationManager.play(
                 pkm,
                 AnimationConfig[pkm.name as Pkm].ability,
-                { flip: this.flip, lock: true, repeat: 0 }
+                { flip: this.flip, lock: true, repeat: 0, shrink: true }
               )
               pkm.specialAttackAnimation(this.group, value)
             }

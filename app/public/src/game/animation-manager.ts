@@ -14,6 +14,7 @@ import durations from "../../dist/client/assets/pokemons/durations.json"
 import indexList from "../../dist/client/assets/pokemons/indexList.json"
 import atlas from "../assets/atlas.json"
 import PokemonSprite from "./components/pokemon"
+import delays from "../../../types/delays.json"
 
 const FPS_EFFECTS = 20
 const FPS_POKEMON_ANIMS = 36
@@ -269,7 +270,8 @@ export default class AnimationManager {
       this.play(entity, animation, {
         flip,
         lock: shouldLock,
-        repeat: shouldLoop ? -1 : 0
+        repeat: shouldLoop ? -1 : 0,
+        shrink: action === PokemonActionState.ATTACK
       })
     } catch (err) {
       logger.warn(`Can't play animation ${animation} for ${entity?.name}`, err)
@@ -279,7 +281,12 @@ export default class AnimationManager {
   play(
     entity: PokemonSprite,
     animation: AnimationType,
-    config: { flip?: boolean; repeat?: number; lock?: boolean } = {}
+    config: {
+      flip?: boolean
+      repeat?: number
+      lock?: boolean
+      shrink?: boolean
+    } = {}
   ) {
     if (entity.animationLocked || !entity.sprite?.anims) return
 
@@ -301,8 +308,27 @@ export default class AnimationManager {
     const animKey = `${textureIndex}/${tint}/${animation}/${SpriteType.ANIM}/${orientationCorrected}`
     const shadowKey = `${textureIndex}/${tint}/${animation}/${SpriteType.SHADOW}/${orientationCorrected}`
 
-    entity.sprite.anims.play({ key: animKey, repeat: config.repeat })
-    entity.shadow.anims.play({ key: shadowKey, repeat: config.repeat })
+    let timeScale = 1
+    if (config.shrink) {
+      const total = delays[entity.index].t
+      const animationDuration = total
+        ? total * (1000 / FPS_POKEMON_ANIMS)
+        : 1000
+      const attackDuration = 1000 / entity.atkSpeed
+      if (animationDuration > attackDuration) {
+        timeScale = animationDuration / attackDuration
+      }
+    }
+    entity.sprite.anims.play({
+      key: animKey,
+      repeat: config.repeat,
+      timeScale: timeScale
+    })
+    entity.shadow.anims.play({
+      key: shadowKey,
+      repeat: config.repeat,
+      timeScale: timeScale
+    })
     if (config.lock) {
       entity.animationLocked = true
     }
