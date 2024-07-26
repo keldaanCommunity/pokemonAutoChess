@@ -546,9 +546,11 @@ export class MistySurgeStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit, true)
     const ppGain = 30
+    const hpGain = 30
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team && ally.types.has(Synergy.FAIRY)) {
         ally.addPP(ppGain, pokemon, 1, crit)
+        ally.handleHeal(hpGain, pokemon, 1, crit)
       }
     })
   }

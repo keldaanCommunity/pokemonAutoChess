@@ -924,7 +924,7 @@
     "SPARKLING_ARIA": "Infligge [15,30,60,SP] SPECIAL al bersaglio e ai nemici adiacenti. Se gli alleati adiacenti sono USTIONI, l'ustione viene curata.",
     "DRAGON_DARTS": "Lancia 3 freccette che infliggono [10,20,40,SP] SPECIAL al bersaglio. Se il bersaglio muore, recupera 40 PP.",
     "GRASSY_SURGE": "Aumenta l'ATK di tutti i Pokémon GRASS di [5,SP]",
-    "MISTY_SURGE": "Dai [30,SP] PP agli alleati FAIRY",
+    "MISTY_SURGE": "Tutti gli alleati FAIRY recuperano [30,SP] HP e [30,SP] PP.",
     "SKY_ATTACK": "Si alza in aria e cade sul bersaglio più lontano dopo un secondo, infliggendo [120,SP] SPECIAL",
     "ILLUSION": "L'utente recupera [30,50,70,SP=0.5] punti HP e copia la forma, ATK, DEF, SPE_DEF e RANGE del Pokemon preso di mira",
     "AURORA_BEAM": "Spara un raggio in linea. Tutti i bersagli colpiti prendono [25,50,100,SP] SPECIAL e possono essere FREEZE (probabilità basata sull'attuale sinergia di ghiaccio)",

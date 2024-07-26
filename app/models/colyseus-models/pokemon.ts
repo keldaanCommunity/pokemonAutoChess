@@ -7438,7 +7438,7 @@ export class TapuFini extends Pokemon {
   atk = 17
   def = 3
   speDef = 3
-  maxPP = 100
+  maxPP = 80
   range = 3
   skill = Ability.MISTY_SURGE
   passive = Passive.MISTY_TERRAIN
