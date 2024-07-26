@@ -5164,6 +5164,22 @@ export class DireClawStrategy extends AbilityStrategy {
   }
 }
 
+export class FakeOutStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [50, 100, 150][pokemon.stars - 1] ?? 150
+    if (pokemon.ap >= 0) target.status.triggerFlinch(3000, target)
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    pokemon.addAbilityPower(-30, pokemon, 0, false)
+  }
+}
+
 export class EruptionStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -9650,5 +9666,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FLYING_PRESS]: new FlyingPressStrategy(),
   [Ability.DRAIN_PUNCH]: new DrainPunchStrategy(),
   [Ability.GRAVITY]: new GravityStrategy(),
-  [Ability.DIRE_CLAW]: new DireClawStrategy()
+  [Ability.DIRE_CLAW]: new DireClawStrategy(),
+  [Ability.FAKE_OUT]: new FakeOutStrategy()
 }

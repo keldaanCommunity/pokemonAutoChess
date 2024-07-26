@@ -365,7 +365,8 @@
     "FLYING_PRESS": "Flying Press",
     "DRAIN_PUNCH": "Drain Punch",
     "GRAVITY": "Gravity",
-    "DIRE_CLAW": "Dire Claw"
+    "DIRE_CLAW": "Dire Claw",
+    "FAKE_OUT": "Fake Out"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1525,7 +1526,8 @@
     "FIRE_LASH": "Deals [120,SP] SPECIAL and apply ARMOR_REDUCTION for 4 seconds",
     "FAIRY_LOCK": "Spreads [90,SP] SPECIAL evenly across the target and adjacent enemies. Target is LOCKED for 5 seconds",
     "DRAIN_PUNCH": " The next attack inflicts [100,SP]% additional SPECIAL and restores [200,SP]% HP of the damage inflicted.",
-    "GRAVITY": "The enemy team is LOCKED for [2,SP] seconds"
+    "GRAVITY": "The enemy team is LOCKED for [2,SP] seconds",
+    "FAKE_OUT": "Deals [50,100,150,SP] SPECIAL to target, then user loses 30% AP. Target is FLINCH for 3 seconds unless user AP was negative."
   },
   "effect": {
     "INGRAIN": "Ingrain",

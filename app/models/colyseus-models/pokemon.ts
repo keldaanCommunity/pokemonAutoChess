@@ -11638,11 +11638,11 @@ export class Purrloin extends Pokemon {
   evolution = Pkm.LIEPARD
   hp = 80
   atk = 9
-  def = 1
-  speDef = 1
+  def = 2
+  speDef = 2
   maxPP = 90
   range = 1
-  skill = Ability.ASSIST
+  skill = Ability.FAKE_OUT
   additional = true
   attackSprite = AttackSprite.DARK_MELEE
 }
@@ -11653,11 +11653,11 @@ export class Liepard extends Pokemon {
   stars = 2
   hp = 175
   atk = 25
-  def = 2
-  speDef = 2
+  def = 3
+  speDef = 3
   maxPP = 90
   range = 1
-  skill = Ability.ASSIST
+  skill = Ability.FAKE_OUT
   additional = true
   attackSprite = AttackSprite.DARK_MELEE
 }
