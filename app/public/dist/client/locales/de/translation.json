@@ -1163,7 +1163,7 @@
     "NIGHTMARE": "Fügt allen gegnerischen Pokémon SILENCE für [1.5,3,8] Sekunden zu. Jeder SLEEP, FLINCH oder bereits SILENCE Gegner erleidet [25,50,100,SP] SPECIAL",
     "CLANGOROUS_SOUL": "Verstärkt sich und benachbarte Verbündete ATK, DEF und SPE_DEF um [1,2,4,SP]",
     "BONEMERANG": "Wirf einen Bumerangknochen durch das gegnerische Team und füge ihm auf dem Weg [30,60,120,SP] SPECIAL zu",
-    "GROWL": "Verleihe dem gesamten gegnerischen Team für [3,6,9,SP] Sekunden den FLINCH Status",
+    "GROWL": "FLINCH benachbarte Feinde 3 Sekunden lang zusammen und reduziere ihren ATK um [3,5,7,SP]",
     "RELIC_SONG": "Gibt eine Notiz aus. Nach der dritten Note SCHLAFEN Sie das gesamte gegnerische Team für [2,SP=0,5] Sekunden",
     "FAIRY_WIND": "Gibt allen Verbündeten außer dem Zaubernden [10,20,40,SP=0,5] PP",
     "DISARMING_VOICE": "Gegner im Umkreis von 2 Feldern sind CHARM für [1,SP] Sekunden",

@@ -1406,13 +1406,15 @@ export class GrowlStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let duration = [3000, 6000, 9000][pokemon.stars - 1] ?? 9000
-    duration = Math.round(duration * (1 + pokemon.ap / 100))
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team) {
-        tg.status.triggerFlinch(duration, tg, pokemon)
-      }
-    })
+    const atkDebuff = [3, 5, 7][pokemon.stars - 1] ?? 7
+    board
+      .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+      .forEach((cell) => {
+        if (cell.value && cell.value.team !== pokemon.team) {
+          cell.value.status.triggerFlinch(3000, cell.value, pokemon)
+          cell.value.addAttack(-atkDebuff, pokemon, 1, crit)
+        }
+      })
   }
 }
 

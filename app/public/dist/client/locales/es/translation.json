@@ -1192,7 +1192,7 @@
     "NIGHTMARE": "Deja SILENCE a todo el equipo enemigo durante [1.5,3,8] segundos. Cualquier oponente SLEEP o FLINCH o SILENCE toma [25,50,100,SP] SPECIAL.",
     "CLANGOROUS_SOUL": "Se mejora a sí mismo y a los aliados adyacentes en ATK, DEF y SPE_DEF en [1,2,4,SP]",
     "BONEMERANG": "Lanza un hueso de boomerang a través del equipo enemigo, infligiendo [30,60,120,SP] SPECIAL en su camino",
-    "GROWL": "Deja FLINCH a todo el equipo enemigo durante [3,6,9,SP] segundos",
+    "GROWL": "FLINCH a los enemigos adyacentes durante 3 segundos y reduce su ATK en [3,5,7,SP]",
     "RELIC_SONG": "Emite una nota. Después de la tercera nota, deja SLEEP a todo el equipo enemigo durante [2,SP=0.5] segundos",
     "FAIRY_WIND": "Otorga [10,20,30,SP=0.5] PP a todos los aliados excepto al lanzador",
     "DISARMING_VOICE": "Hace que los enemigos dentro de un radio de 2 celdas queden CHARM durante [1,SP] segundos",

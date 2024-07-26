@@ -1193,7 +1193,7 @@
     "NIGHTMARE": "SILENCE all enemy Pokémon for [1.5,3,8] seconds. Any SLEEP, FLINCH or already SILENCE opponent take [25,50,100,SP] SPECIAL.",
     "CLANGOROUS_SOUL": "Buff itself and adjacent allies ATK, DEF and SPE_DEF by [1,2,4,SP]",
     "BONEMERANG": "Throw a bone like a boomerang through the enemy team, dealing [30,60,90,SP] SPECIAL to every enemy Pokémon it hits",
-    "GROWL": "FLINCH all enemy Pokémon for [3,6,9,SP] seconds",
+    "GROWL": "FLINCH adjacent enemies for 3 seconds and reduce their ATK by [3,5,7,SP]",
     "RELIC_SONG": "Emits a note. After the third note, SLEEP the whole enemy team for [2,SP=0.5] seconds",
     "FAIRY_WIND": "Give [10,20,30,SP=0.5] PP to all allied Pokémon, except the user",
     "DISARMING_VOICE": "Make enemies within a 2-cell radius CHARM for [1,SP] seconds",

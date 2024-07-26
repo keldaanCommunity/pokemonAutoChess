@@ -8509,7 +8509,7 @@ export class Poochyena extends Pokemon {
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.MIGHTYENA
-  hp = 70
+  hp = 80
   atk = 9
   def = 2
   speDef = 2
@@ -8523,7 +8523,7 @@ export class Mightyena extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
   rarity = Rarity.RARE
   stars = 2
-  hp = 160
+  hp = 190
   atk = 19
   def = 4
   speDef = 4

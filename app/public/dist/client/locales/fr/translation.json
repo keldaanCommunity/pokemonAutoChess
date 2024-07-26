@@ -1174,7 +1174,7 @@
     "NIGHTMARE": "Inflige SILENCE à toute l'équipe ennemie pendant [1.5,3,8] secondes. Tout adversaire ayant SLEEP, FLINCH ou déjà SILENCE subit [25,50,100,SP] SPECIAL.",
     "CLANGOROUS_SOUL": "Le lanceur et ses alliés adjacents gagnent [1,2,4,SP] ATK, DEF et SPE_DEF",
     "BONEMERANG": "Lance un os à travers l'équipe ennemie, infligeant [30,60,120,SP] SPECIAL sur son chemin",
-    "GROWL": "Inflige FLINCH à toute l'équipe ennemie pendant [3,6,9,SP] secondes",
+    "GROWL": "Inflige FLINCH aux ennemis adjacents pendant 3 secondes et réduit leur ATK de [3,5,7,SP]",
     "RELIC_SONG": "Émet une note. Après la troisième note, SLEEP toute l'équipe ennemie pendant [2,SP=0.5] secondes",
     "FAIRY_WIND": "Donne [10,20,30,SP=0.5] PP à tous les alliés sauf l'utilisateur",
     "DISARMING_VOICE": "Les ennemis dans un rayon de 2 cases sont CHARMED pendant [1,SP] secondes.",
