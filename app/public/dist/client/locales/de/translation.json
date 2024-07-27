@@ -349,8 +349,7 @@
     "SHADOW_PUNCH": "Stachler",
     "MAGNET_BOMB": "Magnetbombe",
     "MUDDY_WATER": "Lehmbrühe",
-    "ANCIENT_POWER": "Antik-Kraft",
-    "AURA_WHEEL_HANGRY": "Aura-Rad"
+    "ANCIENT_POWER": "Antik-Kraft"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1163,7 +1162,7 @@
     "NIGHTMARE": "Fügt allen gegnerischen Pokémon SILENCE für [1.5,3,8] Sekunden zu. Jeder SLEEP, FLINCH oder bereits SILENCE Gegner erleidet [25,50,100,SP] SPECIAL",
     "CLANGOROUS_SOUL": "Verstärkt sich und benachbarte Verbündete ATK, DEF und SPE_DEF um [1,2,4,SP]",
     "BONEMERANG": "Wirf einen Bumerangknochen durch das gegnerische Team und füge ihm auf dem Weg [30,60,120,SP] SPECIAL zu",
-    "GROWL": "Verleihe dem gesamten gegnerischen Team für [3,6,9,SP] Sekunden den FLINCH Status",
+    "GROWL": "FLINCH benachbarte Feinde 3 Sekunden lang zusammen und reduziere ihren ATK um [3,5,7,SP]",
     "RELIC_SONG": "Gibt eine Notiz aus. Nach der dritten Note SCHLAFEN Sie das gesamte gegnerische Team für [2,SP=0,5] Sekunden",
     "FAIRY_WIND": "Gibt allen Verbündeten außer dem Zaubernden [10,20,40,SP=0,5] PP",
     "DISARMING_VOICE": "Gegner im Umkreis von 2 Feldern sind CHARM für [1,SP] Sekunden",
@@ -1268,7 +1267,7 @@
     "SPARKLING_ARIA": "Fügt dem Ziel und angrenzenden Feinden [15,30,60,SP] SPECIAL zu. Wenn benachbarte Verbündete BURN, wird die Verbrennung geheilt.",
     "DRAGON_DARTS": "Wirft 3 Pfeile, die dem Ziel jeweils [10,20,40,SP] SPECIAL zufügen. Wenn das Ziel stirbt, erhältst du 40 PP zurück.",
     "GRASSY_SURGE": "Erhöhe die ATK aller GRASS Pokémon um [5,SP]",
-    "MISTY_SURGE": "Gib [30,SP] PP an FAIRY Verbündete",
+    "MISTY_SURGE": "Alle FAIRY Verbündeten erholen sich von [30,SP] HP und [30,SP] PP.",
     "SKY_ATTACK": "Erhebt sich in die Luft und fällt nach einer Sekunde auf das am weitesten entfernte Ziel und verursacht [120,SP] SPECIAL",
     "ILLUSION": "Der Benutzer gewinnt [30,50,70,SP=0,5] HP-Punkte zurück und kopiert die Form sowie die ATK, DEF, SPE_DEF und RANGE des Ziel-Pokémon",
     "AURORA_BEAM": "Feuert einen Strahl in einer Linie ab. Alle getroffenen Ziele erhalten [25,50,100,SP] SPECIAL und können eingefroren werden (Chance basiert auf der aktuellen Eissynergie).",
@@ -2197,8 +2196,7 @@
     "code": "Welche Sprache/Bibliothek wird zum Programmieren des Spiels verwendet?",
     "code_answer": "TypeScript, Phaser, Colyseus. Wenn Sie einen Beitrag leisten möchten",
     "pull_requests": "Pull-Anfragen sind offen",
-    "faq": "FAQ.",
-    "damage_label": "Was sind Sonderschäden und Sachschäden?"
+    "faq": "FAQ."
   },
   "tutorial": {
     "start": "Wie starte ich ein Spiel?",
@@ -2626,16 +2624,5 @@
     "CROWDED": "+3 max. Pokémon auf dem Feld",
     "KECLEONS_SHOP": "Item Karusselle werden, durch Kecleon´s Shop, ersetzt, die 6 Items für je 10 GOLD anbieten",
     "FREE_MARKET": "Pokemon werden für 0 GOLD gekauft und verkauft"
-  },
-  "region_pokemon": {
-    "KANTO": "Kanto",
-    "JOHTO": "Johto",
-    "HOENN": "Hoenn",
-    "SINNOH": "Sinnoh",
-    "UNYS": "Einall",
-    "KALOS": "Kalos",
-    "ALOLA": "Alola",
-    "GALAR": "Galar",
-    "PALDEA": "Paldea"
   }
 }

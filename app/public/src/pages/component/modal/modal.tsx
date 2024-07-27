@@ -6,7 +6,7 @@ import "./modal.css"
 
 interface ModalProps {
   show: boolean
-  onClose: () => void
+  onClose?: () => void
   className?: string
   header?: JSX.Element | string
   body?: JSX.Element | string
@@ -37,8 +37,8 @@ export function Modal(props: ModalProps) {
     if (show) {
       const dialog = ref.current!
       dialog.addEventListener('click', function (event) {
-        var rect = dialog.getBoundingClientRect();
-        var isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
+        const rect = dialog.getBoundingClientRect();
+        const isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
           rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
         if (!isInDialog) {
           close();
@@ -55,7 +55,7 @@ export function Modal(props: ModalProps) {
 
   return show ? ReactDOM.createPortal(
     <dialog ref={ref} onCancel={close} className={cc("modal", "my-container", className)} onKeyDown={handleKeyDown}>
-      {header && <header>{header}</header>}
+      {header && <header>{header}<button className="close-btn" onClick={close}>🗙</button></header>}
       <div className="modal-body">{body || children}</div>
       {(footer || confirmText) && (
         <footer>

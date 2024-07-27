@@ -822,7 +822,7 @@
     "NIGHTMARE": "SILENCE l'intera squadra nemica per [1.5,3,8] secondi. Qualsiasi avversario SLEEP o FLINCH o SILENCE prende [25,50,100,SP] SPECIAL.",
     "CLANGOROUS_SOUL": "Buffare se stesso e gli alleati adiacenti ATK, DEF e SPE_DEF di [1,2,4,SP]",
     "BONEMERANG": "Lancia un osso boomerang attraverso la squadra nemica, infliggendo [30,60,120,SP] SPECIAL lungo la strada",
-    "GROWL": "Applica lo stato FLINCH all'intera squadra nemica per [3,6,9,SP] secondi",
+    "GROWL": "FLINCH i nemici adiacenti per 3 secondi e riduce il loro ATK di [3,5,7,SP]",
     "RELIC_SONG": "Emette una nota. Dopo la terza nota, DORMIRE l'intera squadra nemica per [2,SP=0.5] secondi",
     "FAIRY_WIND": "Fornisce [10,20,30,SP=0.5] PP a tutti gli alleati tranne l'incantatore",
     "HIGH_JUMP_KICK": "Infligge [50.100.200 SP] SPECIAL e sottrae tutto il PP al bersaglio",
@@ -924,7 +924,7 @@
     "SPARKLING_ARIA": "Infligge [15,30,60,SP] SPECIAL al bersaglio e ai nemici adiacenti. Se gli alleati adiacenti sono USTIONI, l'ustione viene curata.",
     "DRAGON_DARTS": "Lancia 3 freccette che infliggono [10,20,40,SP] SPECIAL al bersaglio. Se il bersaglio muore, recupera 40 PP.",
     "GRASSY_SURGE": "Aumenta l'ATK di tutti i Pokémon GRASS di [5,SP]",
-    "MISTY_SURGE": "Dai [30,SP] PP agli alleati FAIRY",
+    "MISTY_SURGE": "Tutti gli alleati FAIRY recuperano [30,SP] HP e [30,SP] PP.",
     "SKY_ATTACK": "Si alza in aria e cade sul bersaglio più lontano dopo un secondo, infliggendo [120,SP] SPECIAL",
     "ILLUSION": "L'utente recupera [30,50,70,SP=0.5] punti HP e copia la forma, ATK, DEF, SPE_DEF e RANGE del Pokemon preso di mira",
     "AURORA_BEAM": "Spara un raggio in linea. Tutti i bersagli colpiti prendono [25,50,100,SP] SPECIAL e possono essere FREEZE (probabilità basata sull'attuale sinergia di ghiaccio)",
@@ -1978,6 +1978,5 @@
   "loading_complete": "Caricamento completato, in attesa di altri giocatori...",
   "search_player": "Cerca per nome giocatore...",
   "game-reconnect-modal-title": "Riconnettiti al gioco",
-  "game-reconnect-modal-body": "Hai lasciato una partita in corso. Vuoi riconnetterti al gioco precedente?",
-  "select_pokemon": "Seleziona un Pokémon"
+  "game-reconnect-modal-body": "Hai lasciato una partita in corso. Vuoi riconnetterti al gioco precedente?"
 }

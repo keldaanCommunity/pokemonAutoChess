@@ -16,8 +16,7 @@
 
 .modal {
   position: relative;
-  max-width: 95vw;
-  max-height: 95vh;
+  max-width: 95vw;  
   width: fit-content;
   background: transparent;
   border: none;
@@ -55,20 +54,33 @@
   text-align: center;
 }
 
+.modal > header .close-btn {
+  float: right;
+  padding: 0.5em;    
+  margin: -0.5em 0;
+  cursor: var(--cursor-hover);
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1em;
+}
+
 .modal-body {
   padding: 0.5em;
   color: white;
+  max-height: 90vh;
 }
 
 .modal > footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   flex-direction: row-reverse;
   border-top: var(--border-thin);
   background-color: var(--color-bg-secondary);
   color: white;
-  padding: 0.5em;
-  gap: 0.5em;
+  padding: 0.5em 1em;
+  gap: 1em;
 }
 
 .modal.custom-bg {
