@@ -1978,6 +1978,5 @@
   "loading_complete": "Caricamento completato, in attesa di altri giocatori...",
   "search_player": "Cerca per nome giocatore...",
   "game-reconnect-modal-title": "Riconnettiti al gioco",
-  "game-reconnect-modal-body": "Hai lasciato una partita in corso. Vuoi riconnetterti al gioco precedente?",
-  "select_pokemon": "Seleziona un Pokémon"
+  "game-reconnect-modal-body": "Hai lasciato una partita in corso. Vuoi riconnetterti al gioco precedente?"
 }
