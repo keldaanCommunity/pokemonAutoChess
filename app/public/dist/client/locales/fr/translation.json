@@ -102,6 +102,7 @@
     "ROCK_TOMB": "Tomberoche",
     "ROCK_SMASH": "Éclate-Roc",
     "HEAD_SMASH": "Fracass'Tête",
+    "ROCK_HEAD": "Tête de Roc",
     "CORRUPTED_NATURE": "Nature Corrompue",
     "CRABHAMMER": "Pince-Masse",
     "DIAMOND_STORM": "Orage Adamantin",
@@ -357,7 +358,15 @@
     "ANCIENT_POWER": "Pouvoir Antique",
     "MOON_DREAM": "Rêve Lunaire",
     "STONE_AXE": "Hache de Pierre",
-    "CAMERA_FLASH": "Flash"
+    "CAMERA_FLASH": "Flash",
+    "CRUSH_CLAW": "Éclate Griffe",
+    "FIRE_LASH": "Fouet de Feu",
+    "FAIRY_LOCK": "Verrou Enchanté",
+    "FLYING_PRESS": "Flying Press",
+    "DRAIN_PUNCH": "Vampi-Poing",
+    "GRAVITY": "Gravité",
+    "DIRE_CLAW": "Griffes Funestes",
+    "FAKE_OUT": "Bluff"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -773,6 +782,8 @@
     "MAGCARGO": "Volcaropod",
     "SNEASEL": "Farfuret",
     "WEAVILE": "Dimoret",
+    "HISUI_SNEASEL": "Farfuret de Hisui",
+    "SNEASLER": "Farfurex",
     "CROAGUNK": "Cradopaud",
     "TOXICROAK": "Coatox",
     "CHINCHOU": "Loupio",
@@ -1161,7 +1172,15 @@
     "SHELLOS_EAST_SEA": "Sancoki (Mer Orient)",
     "GASTRODON_EAST_SEA": "Tritosor (Mer Orient)",
     "MUNNA": "Munna",
-    "MUSHARNA": "Mushana"
+    "MUSHARNA": "Mushana",
+    "RUFFLET": "Furaiglon",
+    "BRAVIARY": "Gueriaigle",
+    "HEATMOR": "Aflamanoir",
+    "KLEFKI": "Trousselin",
+    "HAWLUCHA": "Brutalibré",
+    "MIENFOO": "Kungfouine",
+    "MIENSHAO": "Shaofouine",
+    "STONJOURNER": "Dolman"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
