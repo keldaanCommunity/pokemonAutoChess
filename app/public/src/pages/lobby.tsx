@@ -73,17 +73,22 @@ import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import { logger } from "../../../utils/logger"
 import { localStore, LocalStoreKeys } from "./utils/store"
 import { cc } from "./utils/jsx"
-import "./lobby.css"
 import { Modal } from "./component/modal/modal"
+import "./lobby.css"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
   const lobby = useAppSelector((state) => state.network.lobby)
 
   const lobbyJoined = useRef<boolean>(false)
-  const [reconnectionToken, setReconnectionToken] = useState<string | null>(
-    localStore.get(LocalStoreKeys.RECONNECTION_TOKEN)
+  const [gameToReconnect, setGameToReconnect] = useState<string | null>(
+    localStore.get(LocalStoreKeys.RECONNECTION_GAME)
   )
+  const gameRooms: RoomAvailable[] = useAppSelector(
+    (state) => state.lobby.gameRooms
+  )
+  const showGameReconnect = gameToReconnect != null && gameRooms.some((r) => r.roomId === gameToReconnect)
+  console.log("reconnect game id", gameToReconnect, "rooms ids", gameRooms.map(r => r.roomId))
 
   const [toPreparation, setToPreparation] = useState<boolean>(false)
   const [toGame, setToGame] = useState<boolean>(false)
@@ -134,7 +139,7 @@ export default function Lobby() {
           setToPreparation={setToPreparation}
         />
       </div>
-      <Modal show={reconnectionToken != null}
+      <Modal show={showGameReconnect}
         header={t("game-reconnect-modal-title")}
         body={t("game-reconnect-modal-body")}
         footer={<>
@@ -144,7 +149,8 @@ export default function Lobby() {
           <button
             className="bubbly red"
             onClick={() => {
-              setReconnectionToken(null)
+              setGameToReconnect(null)
+              localStore.delete(LocalStoreKeys.RECONNECTION_GAME)
             }}
           >
             {t("no")}

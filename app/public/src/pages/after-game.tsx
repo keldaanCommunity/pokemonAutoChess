@@ -73,6 +73,7 @@ export default function AfterGame() {
     }
 
     const initialize = async (r: Room<AfterGameState>) => {
+      localStore.delete(LocalStoreKeys.RECONNECTION_GAME)
       localStore.set(LocalStoreKeys.RECONNECTION_TOKEN, r.reconnectionToken, 30)
       r.state.players.onAdd((player) => {
         dispatch(addPlayer(player))

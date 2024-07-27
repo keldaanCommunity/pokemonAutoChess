@@ -146,6 +146,7 @@ export default function Game() {
               room.reconnectionToken,
               60 * 60
             )
+            localStore.set(LocalStoreKeys.RECONNECTION_GAME, room.id, 60 * 60)
             dispatch(joinGame(room))
             connected.current = true
             connecting.current = false
