@@ -83,9 +83,6 @@ export default function ImportExportBotModal(props: {
           <button className="bubbly green" onClick={exportBot}>
             {t("submit_your_bot")}
           </button>
-          <button className="bubbly red" onClick={props.hideModal}>
-            {t("cancel")}
-          </button>
         </>}
       />
     )
@@ -134,9 +131,6 @@ export default function ImportExportBotModal(props: {
             }}
           >
             {t("import")}
-          </button>
-          <button className="bubbly red" onClick={props.hideModal}>
-            {t("cancel")}
           </button>
         </>}
       />
