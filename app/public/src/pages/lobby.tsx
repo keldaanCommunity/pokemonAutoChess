@@ -88,7 +88,6 @@ export default function Lobby() {
     (state) => state.lobby.gameRooms
   )
   const showGameReconnect = gameToReconnect != null && gameRooms.some((r) => r.roomId === gameToReconnect)
-  console.log("reconnect game id", gameToReconnect, "rooms ids", gameRooms.map(r => r.roomId))
 
   const [toPreparation, setToPreparation] = useState<boolean>(false)
   const [toGame, setToGame] = useState<boolean>(false)
