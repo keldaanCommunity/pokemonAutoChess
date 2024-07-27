@@ -81,7 +81,7 @@ export default function PokemonEmotionsModal(props: {
           )}
           className={cc({ unlocked: pConfig != null })}
         />
-        <h1>{t(`pkm.${props.pokemon}`)}</h1>
+        <h2>{t(`pkm.${props.pokemon}`)}</h2>
         <div className="spacer" />
         <p className="dust">
           {pConfig.dust} {t("shards")}{" "}

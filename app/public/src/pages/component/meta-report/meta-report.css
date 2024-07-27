@@ -1,12 +1,12 @@
 #meta-report {
-  height: 90vh;
+  height: calc(95vh - 6rem);
   color: white;
   width: 1920px;
   max-width: 95vw;
 }
 
 #meta-report h2 {
-  margin: 0.25em 0.5em 0 0.5em;
+  margin: 0;
 }
 
 #meta-report .react-tabs {
