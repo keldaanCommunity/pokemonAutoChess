@@ -19,6 +19,15 @@ import delays from "../../../types/delays.json"
 
 const FPS_EFFECTS = 20
 
+export function getTimescale(entity: PokemonSprite) {
+  const total = delays[entity.index].t
+  const animationDuration = total ? total * (1000 / FPS_POKEMON_ANIMS) : 1000
+  const attackDuration = 1000 / entity.atkSpeed
+  return animationDuration > attackDuration
+    ? animationDuration / attackDuration
+    : 1
+}
+
 export default class AnimationManager {
   game: Phaser.Scene
 
@@ -308,17 +317,8 @@ export default class AnimationManager {
     const animKey = `${textureIndex}/${tint}/${animation}/${SpriteType.ANIM}/${orientationCorrected}`
     const shadowKey = `${textureIndex}/${tint}/${animation}/${SpriteType.SHADOW}/${orientationCorrected}`
 
-    let timeScale = 1
-    if (config.shrink) {
-      const total = delays[entity.index].t
-      const animationDuration = total
-        ? total * (1000 / FPS_POKEMON_ANIMS)
-        : 1000
-      const attackDuration = 1000 / entity.atkSpeed
-      if (animationDuration > attackDuration) {
-        timeScale = animationDuration / attackDuration
-      }
-    }
+    const timeScale = config.shrink ? getTimescale(entity) : 1
+
     entity.sprite.anims.play({
       key: animKey,
       repeat: config.repeat,
