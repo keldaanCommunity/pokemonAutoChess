@@ -18,6 +18,8 @@
 
 # UI
 
+- Rework the way animation are handled.
+
 # Bugfix
 
 # Misc
