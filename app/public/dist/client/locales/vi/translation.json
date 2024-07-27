@@ -1,0 +1,29 @@
+{
+  "rarity": {
+    "COMMON": "Common",
+    "UNCOMMON": "Uncommon",
+    "RARE": "Rare",
+    "EPIC": "Epic",
+    "ULTRA": "Ultra",
+    "UNIQUE": "Unique",
+    "LEGENDARY": "Legendary",
+    "MYTHICAL": "Mythical",
+    "HATCH": "Nở",
+    "SPECIAL": "Đặc biệt"
+  },
+  "pool": {
+    "regional": "vùng miền"
+  },
+  "damage": {
+    "SPECIAL": "đặc biệt",
+    "PHYSICAL": "vật lý",
+    "TRUE": "chuẩn"
+  },
+  "ability": {
+    "SOFT_BOILED": "trứng lòng đào",
+    "EARTHQUAKE": "động đất",
+    "SONG_OF_DESIRE": "trường ca mặt đường khát vọng",
+    "CONFUSING_MIND": "thôi miên",
+    "KNOWLEDGE_THIEF": "tên chộm thông minh"
+  }
+}
