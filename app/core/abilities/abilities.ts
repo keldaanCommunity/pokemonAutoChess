@@ -3117,7 +3117,6 @@ export class SmokeScreenStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit, true)
     const damage = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
-    const duration = 2000
     const mostSurroundedCoordinate =
       state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
 
@@ -3127,6 +3126,11 @@ export class SmokeScreenStrategy extends AbilityStrategy {
         mostSurroundedCoordinate.y,
         board
       )
+
+      const backRow = mostSurroundedCoordinate.y <= 2 ? 0 : 5
+      const midRow = mostSurroundedCoordinate.y <= 2 ? 1 : 4
+      const frontRow = mostSurroundedCoordinate.y <= 2 ? 2 : 3
+      let chosenRowForSmoke = frontRow
 
       const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
@@ -3149,8 +3153,7 @@ export class SmokeScreenStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
-          cell.value.status.triggerBurn(duration, cell.value, pokemon)
-          cell.value.status.triggerArmorReduction(duration, cell.value)
+
           pokemon.simulation.room.broadcast(Transfer.ABILITY, {
             id: pokemon.simulation.id,
             skill: pokemon.skill,
@@ -3160,6 +3163,41 @@ export class SmokeScreenStrategy extends AbilityStrategy {
             targetY: cell.y,
             orientation: pokemon.orientation
           })
+
+          if (cell.y === backRow) chosenRowForSmoke = backRow
+          if (cell.y === midRow && chosenRowForSmoke !== backRow)
+            chosenRowForSmoke = midRow
+        }
+      })
+
+      const smokeCells = [
+        [pokemon.positionX - 1, chosenRowForSmoke],
+        [pokemon.positionX, chosenRowForSmoke],
+        [pokemon.positionX + 1, chosenRowForSmoke]
+      ].filter(
+        ([x, y]) =>
+          y >= 0 &&
+          y < board.rows &&
+          x >= 0 &&
+          x < board.columns &&
+          !(x === pokemon.positionX && y === pokemon.positionY)
+      )
+
+      smokeCells.forEach(([x, y]) => {
+        const index = y * board.columns + x
+        if (board.effects[index] !== Effect.GAS) {
+          board.effects[index] = Effect.GAS
+          pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+            simulationId: pokemon.simulation.id,
+            type: BoardEvent.GAS,
+            x,
+            y
+          })
+        }
+
+        const enemy = board.getValue(x, y)
+        if (enemy) {
+          enemy.effects.add(Effect.GAS)
         }
       })
     }
