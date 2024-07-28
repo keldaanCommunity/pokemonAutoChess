@@ -12,18 +12,18 @@
     "SPECIAL": "Đặc biệt"
   },
   "pool": {
-    "regional": "vùng miền"
+    "regional": "Vùng miền"
   },
   "damage": {
-    "SPECIAL": "phép",
-    "PHYSICAL": "vật lý",
-    "TRUE": "chuẩn"
+    "SPECIAL": "Sát thương phép",
+    "PHYSICAL": "Sát thương vật lý",
+    "TRUE": "Sát thương chuẩn"
   },
   "ability": {
-    "SOFT_BOILED": "trứng lòng đào",
+    "SOFT_BOILED": "Trứng lòng đào",
     "EARTHQUAKE": "Động đất",
-    "SONG_OF_DESIRE": "Trường ca mặt đường khát vọng",
-    "CONFUSING_MIND": "Chóng mặt",
+    "SONG_OF_DESIRE": "Trường ca Mặt đường khát vọng",
+    "CONFUSING_MIND": "Hack não",
     "KNOWLEDGE_THIEF": "Trộm kiến thức",
     "KING_SHIELD": "Chiếc khiên của nhà vưa",
     "EXPLOSION": "Vụ nổ lớn",
@@ -31,10 +31,10 @@
     "CLANGOROUS_SOUL": "Linh hồn vang vọng",
     "BONEMERANG": "Bonemerang",
     "GROWL": "Gầm",
-    "RELIC_SONG": "Lời thì thầm từ thời cổ đại",
-    "DISARMING_VOICE": "Disarming Voice",
-    "FAIRY_WIND": "Fairy Wind",
-    "HIGH_JUMP_KICK": "High Jump Kick",
+    "RELIC_SONG": "Giai điệu của Thánh tích",
+    "DISARMING_VOICE": "Thanh tẩy",
+    "FAIRY_WIND": "Gió tiên",
+    "HIGH_JUMP_KICK": "Đá vỡ alo",
     "GRASS_WHISTLE": "Tiếng xào xạc",
     "TRI_ATTACK": "Tri Attack"
   },
