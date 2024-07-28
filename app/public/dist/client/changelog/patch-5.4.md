@@ -16,9 +16,11 @@
 
 # Gameplay
 
+- Extra PP generated when reaching max PP are now saved and restored after casting ability
+
 # UI
 
-- Rework the way animation are handled.
+- Rework the way fighting animations are handled. Attacks and abilities now have a frame delay before damage and effects are applied.
 
 # Bugfix
 

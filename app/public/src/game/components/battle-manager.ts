@@ -27,6 +27,7 @@ import GameScene from "../scenes/game-scene"
 import { displayAbility } from "./abilities-animations"
 import PokemonSprite from "./pokemon"
 import PokemonDetail from "./pokemon-detail"
+import { max } from "../../../../utils/number"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -699,7 +700,7 @@ export default class BattleManager {
             }
           } else if (field === "pp") {
             pkm.pp = pokemon.pp
-            pkm.powerbar?.setAmount(pkm.pp)
+            pkm.powerbar?.setAmount(max(pkm.maxPP)(pkm.pp))
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
               pkm.detail.updateValue(
                 pkm.detail.pp,
