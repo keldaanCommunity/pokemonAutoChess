@@ -211,6 +211,7 @@ export default function Preparation() {
             game.reconnectionToken,
             5 * 60
           ) // 5 minutes allowed to start game
+          localStore.set(LocalStoreKeys.RECONNECTION_GAME, roomId, 60 * 60)
           await r.leave()
           game.connection.close()
           dispatch(leavePreparation())

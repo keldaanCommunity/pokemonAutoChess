@@ -763,6 +763,6 @@
     "BONEMERANG": "Rzuć kość jak bumerang przez wrogą drużynę, zadając [30,60,90,SP] SPECJALNE każdemu wrogiemu Pokémonowi, którego trafi",
     "GROWL": "FLINCH sąsiadujących wrogów na 3 sekundy i zmniejsza ich ATK o [3,5,7,SP]",
     "RELIC_SONG": "Emituje notatkę. Po trzeciej nucie UŚPIJ całą drużynę wroga na [2,SP=0,5] sekundy",
-    "FAIRY_WIND": "Daj [10,20,30,SP=0,5] PP wszystkim sojuszniczym Pokémonom, z wyjątkiem użytkownika"
+    "FAIRY_WIND": "Daj [5,10,20,SP] PP wszystkim sojuszniczym Pokémonom, z wyjątkiem użytkownika"
   }
 }

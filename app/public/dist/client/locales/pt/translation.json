@@ -1057,7 +1057,7 @@
     "BONEMERANG": "Jogue um osso de bumerangue no time inimigo, causando [30,60,120,SP] SPECIAL no caminho",
     "GROWL": "FLINCH inimigos adjacentes por 3 segundos e reduz seu ATK em [3,5,7,SP]",
     "RELIC_SONG": "Emite uma nota. Após a terceira nota, SLEEP todo o time inimigo por [2,SP=0.5] segundos",
-    "FAIRY_WIND": "Concede [10,20,40,SP=0,5] PP a todos os aliados, exceto ao lançador",
+    "FAIRY_WIND": "Concede [5,10,20,SP] PP a todos os aliados, exceto ao lançador",
     "HIGH_JUMP_KICK": "Inflige [50,100,200,SP] SPECIAL e rouba todo o PP de seu alvo",
     "GRASS_WHISTLE": "Coloque os inimigos SLEEP [1,2,4] por 2 segundos",
     "TRI_ATTACK": "Inflige [30,60,SP] SPECIAL. Pode BURN, FREEZE ou PARALYSIS o alvo",

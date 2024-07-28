@@ -82,6 +82,7 @@ export class LocalStore<Key extends string> extends Store<Key> {
 export enum LocalStoreKeys {
   PREFERENCES = "pac_preferences",
   RECONNECTION_TOKEN = "reconnection_token",
+  RECONNECTION_GAME = "reconnection_game",
   TEAM_PLANNER = "team_planner",
   LAST_PATCH_READ = "last_patch_read",
   COLLECTION_FILTER = "collection_filter"
