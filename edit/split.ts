@@ -88,7 +88,7 @@ export function loadDurationsFile() {
 export function loadDelaysFile() {
   try {
     const rawdata = fs.readFileSync(
-      "../app/public/src/assets/pokemons/delays.json",
+      "../app/types/delays.json",
       "utf8"
     )
     Object.assign(delays, JSON.parse(rawdata))
@@ -103,7 +103,7 @@ export function loadDelaysFile() {
 }
 
 export function saveDurationsFile() {
-  const fileA = fs.createWriteStream("sheets/durations.json")
+  const fileA = fs.createWriteStream("./sheets/durations.json")
   fileA.on("error", function (err) {
     logger.error(err)
   })
@@ -115,7 +115,7 @@ export function saveDurationsFile() {
 }
 
 export function saveDelaysFile() {
-  const fileA = fs.createWriteStream("sheets/delays.json")
+  const fileA = fs.createWriteStream("./sheets/delays.json")
   fileA.on("error", function (err) {
     logger.error(err)
   })
