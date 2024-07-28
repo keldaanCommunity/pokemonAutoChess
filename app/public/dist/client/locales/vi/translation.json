@@ -1,0 +1,82 @@
+{
+  "rarity": {
+    "COMMON": "Common",
+    "UNCOMMON": "Uncommon",
+    "RARE": "Rare",
+    "EPIC": "Epic",
+    "ULTRA": "Ultra",
+    "UNIQUE": "Unique",
+    "LEGENDARY": "Legendary",
+    "MYTHICAL": "Mythical",
+    "HATCH": "Nở",
+    "SPECIAL": "Đặc biệt"
+  },
+  "pool": {
+    "regional": "vùng miền"
+  },
+  "damage": {
+    "SPECIAL": "phép",
+    "PHYSICAL": "vật lý",
+    "TRUE": "chuẩn"
+  },
+  "ability": {
+    "SOFT_BOILED": "trứng lòng đào",
+    "EARTHQUAKE": "Động đất",
+    "SONG_OF_DESIRE": "Trường ca mặt đường khát vọng",
+    "CONFUSING_MIND": "Chóng mặt",
+    "KNOWLEDGE_THIEF": "Trộm kiến thức",
+    "KING_SHIELD": "Chiếc khiên của nhà vưa",
+    "EXPLOSION": "Vụ nổ lớn",
+    "NIGHTMARE": "Ác mộng",
+    "CLANGOROUS_SOUL": "Linh hồn vang vọng",
+    "BONEMERANG": "Bonemerang",
+    "GROWL": "Gầm",
+    "RELIC_SONG": "Lời thì thầm từ thời cổ đại",
+    "DISARMING_VOICE": "Disarming Voice",
+    "FAIRY_WIND": "Fairy Wind",
+    "HIGH_JUMP_KICK": "High Jump Kick",
+    "GRASS_WHISTLE": "Tiếng xào xạc",
+    "TRI_ATTACK": "Tri Attack"
+  },
+  "community_translations": "Bản dịch được thực hiện bởi cộng đồng Pokemon Autochess. Nếu bạn muốn đóng góp hoặc chỉnh sửa bản dịch, hãy đến",
+  "no_emotions_available": "Không có cảm xúc",
+  "loading_asset": "Đang tải tài nguyên",
+  "loading_complete": "Tải xong",
+  "search_pokemon": "Tìm pokemon",
+  "search_player": "Tìm người chơi",
+  "team_builder": "Lên đồ",
+  "titles_unlocked": "Thành tích đạt được",
+  "game-reconnect-modal-title": "Kết nối lại",
+  "game-reconnect-modal-body": "Bạn vừa thoát trận. Bạn có muốn quay trở lại trận đấu vừa nãy?",
+  "key": "Chìa khoá",
+  "action": "Hành động",
+  "key_desc_buy_xp": "Mua king nghiệm",
+  "key_desc_refresh": "Làm mới shop",
+  "key_desc_avatar_anim": "Chạy biểu cảm nhân vật",
+  "key_desc_avatar_emotes": "Chuyển đổi menu biểu cảm",
+  "key_desc_avatar_show_emote": "Kích hoạt biểu cảm ",
+  "jukebox": "Jukebox",
+  "gadgets": "Dụng cụ",
+  "gadgets_unlocked": "Công cụ đã được mở khoá",
+  "gadget": {
+    "trainer_card": "Thẻ người chơi",
+    "trainer_card_desc": "Thay đổi tên, ava và danh hiệu",
+    "bag": "Túi",
+    "bag_desc": "Dùng để lưu trữ bộ sưu tập và thẻ nâng cấp",
+    "team_planner_desc": "Chuẩn bị đồ cho team",
+    "bot_builder": "Tạo bot",
+    "bot_builder_desc": "Tạo ra một con bot của riêng bạn và gửi nó cho chúng tôi để được cho vào game",
+    "jukebox": "Máy phát nhạc không thủ công",
+    "jukebox_desc": "Chọn nhạc trong trò chơi"
+  },
+  "level_required": "Yêu cầu cấp động",
+  "map": {
+    "random": "Máp ngẫu nhiên",
+    "AmpPlains": "Đồng bằng điện",
+    "AppleWoods": "Rừng táo",
+    "BarrenValley": "Thung lũng cằn cỗi",
+    "BeachCave": "đỉ đỉ",
+    "BrineCave": "Hang động mặn mà",
+    "BuriedRelic1": "Cổ vật bị lãng quên 1"
+  }
+}
