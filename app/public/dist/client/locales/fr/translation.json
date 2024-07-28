@@ -1903,7 +1903,7 @@
     "SOUL_DEW": "Pendant le combat, le porteur gagne 10% AP chaque seconde",
     "UPGRADE": "Les attaques réussies confèrent +5 % de bonus ATK_SPEED pour le reste du combat",
     "REAPER_CLOTH": "Les capacités du détenteur peuvent infliger des coups critiques",
-    "POKEMONOMICON": "Lorsque le porteur inflige des SPECIAL, il inflige également BURN et WOUND à la cible pendant 3 secondes",
+    "POKEMONOMICON": "Lorsque le porteur inflige des SPECIAL, il inflige également BURN à la cible pendant 3 secondes",
     "POWER_LENS": "Le montant de SPECIAL reçus réduits par la SPE_DEF est infligé à l'attaquant",
     "SHELL_BELL": "Le porteur se soigne d'un montant équivalent à 33% de tous les dégâts infligés",
     "LUCKY_EGG": "+40% AP pour le porteur et les alliés adjacents dans la même ligne",

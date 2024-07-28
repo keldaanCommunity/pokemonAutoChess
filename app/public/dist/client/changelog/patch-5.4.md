@@ -14,6 +14,8 @@
 
 # Changes to Items
 
+- Pokemonomicon no longer applies Wound
+
 # Gameplay
 
 # UI
@@ -23,3 +25,5 @@
 # Bugfix
 
 # Misc
+
+- Vietnamese translation has been started thanks to Camchanh

@@ -291,7 +291,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attackType === AttackType.SPECIAL
       ) {
         this.status.triggerBurn(3000, this, attacker)
-        this.status.triggerWound(3000, this, attacker)
       }
       if (
         this.items.has(Item.POWER_LENS) &&
