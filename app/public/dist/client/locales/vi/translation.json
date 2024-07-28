@@ -15,16 +15,22 @@
     "regional": "vùng miền"
   },
   "damage": {
-    "SPECIAL": "đặc biệt",
+    "SPECIAL": "phép",
     "PHYSICAL": "vật lý",
     "TRUE": "chuẩn"
   },
   "ability": {
     "SOFT_BOILED": "trứng lòng đào",
-    "EARTHQUAKE": "động đất",
-    "SONG_OF_DESIRE": "trường ca mặt đường khát vọng",
-    "CONFUSING_MIND": "thôi miên",
-    "KNOWLEDGE_THIEF": "tên chộm thông minh"
+    "EARTHQUAKE": "Động đất",
+    "SONG_OF_DESIRE": "Trường ca mặt đường khát vọng",
+    "CONFUSING_MIND": "Chóng mặt",
+    "KNOWLEDGE_THIEF": "Trộm kiến thức",
+    "KING_SHIELD": "Chiếc khiên của nhà vưa",
+    "EXPLOSION": "Vụ nổ lớn",
+    "NIGHTMARE": "Ác mộng",
+    "CLANGOROUS_SOUL": "Linh hồn vang vọng",
+    "BONEMERANG": "Bonemerang",
+    "GROWL": "Gầm"
   },
   "community_translations": "Bản dịch được thực hiện bởi cộng đồng Pokemon Autochess. Nếu bạn muốn đóng góp hoặc chỉnh sửa bản dịch, hãy đến",
   "no_emotions_available": "Không có cảm xúc",
