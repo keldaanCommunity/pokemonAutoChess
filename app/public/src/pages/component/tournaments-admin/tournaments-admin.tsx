@@ -32,8 +32,7 @@ export function TournamentsAdmin() {
   }
 
   return (
-    <div className="my-container tournaments-admin">
-      <h1>Tournaments</h1>
+    <div className="tournaments-admin">
       <div className="content">
         {isLoading && <p>Loading...</p>}
         {tournaments.length === 0 && <p>No tournaments planned</p>}

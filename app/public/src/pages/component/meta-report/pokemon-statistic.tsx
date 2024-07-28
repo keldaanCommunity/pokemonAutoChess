@@ -115,8 +115,7 @@ export default function PokemonStatistic(props: {
           </span>
 
           <span style={{ fontSize: "150%" }}>
-            {family.averageItemHeld?.toFixed(2)}
-            <label>{t("held_items")}</label>
+            <label>{t("held_items")}:</label> {family.averageItemHeld?.toFixed(2)}
           </span>
 
           <ul

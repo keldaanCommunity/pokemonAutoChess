@@ -16,28 +16,28 @@ export default function GameLoadingScreen(props: { connectError: string }) {
   )?.loadingProgress
   const statusMessage = getGameScene()?.loadingManager?.statusMessage
   const [toAuth, setToAuth] = useState<boolean>(false)
-  const [hint, setHint] = useState<string>("tab_out")  
-  
+  const [hint, setHint] = useState<string>("tab_out")
+
   useEffect(() => {
     const loadingHints = [
       "tab_out",
       ...shuffleArray([
-      "max_loading_time",
-      "disconnection_time",
-      "translation_project",
-      "discord",
-      "tipeee",
-      "bug_report",
-      "moderation",
-      "berry_tree",
-      "spriters",
-      "wiki",
-      "avatar"
+        "max_loading_time",
+        "disconnection_time",
+        "translation_project",
+        "discord",
+        "tipeee",
+        "bug_report",
+        "moderation",
+        "berry_tree",
+        "spriters",
+        "wiki",
+        "avatar"
       ])
     ]
 
     const interval = setInterval(() => {
-        setHint(hint => loadingHints[(loadingHints.indexOf(hint)+1) % loadingHints.length]);
+      setHint(hint => loadingHints[(loadingHints.indexOf(hint) + 1) % loadingHints.length]);
     }, 20000);
 
     return () => clearInterval(interval);
@@ -80,8 +80,8 @@ export default function GameLoadingScreen(props: { connectError: string }) {
         )}
       </div>
       <div className="loading-hint">
-        <div className="speech-bubble">{t("loading_hints."+hint)}</div>
-        <img src={"/assets/loading_hints/"+hint+".webp"} />
+        <div className="speech-bubble">{t("loading_hints." + hint)}</div>
+        <img src={"/assets/loading_hints/" + hint + ".webp"} />
       </div>
     </div>
   )

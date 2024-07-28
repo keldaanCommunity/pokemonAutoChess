@@ -12,11 +12,15 @@
   position: relative;
 }
 
-.basic-modal-body > #team-builder {
-  margin-top: -4px;
+.team-builder-modal .modal-body {
+  padding: 0;
+
+}
+
+.modal-body > #team-builder {
   border-radius: 0 0 12px 12px;
   width: 2000px;
-  max-width: 98vw;
+  max-width: 94vw;
 }
 
 #team-builder .synergies-container {
@@ -83,6 +87,9 @@
   font-size: 1rem;
   display: flex;
   justify-content: space-between;
+  border: none;
+  padding: 0;
+  margin: 0 0 0.5em 0;
 }
 
 #item-picker {
@@ -178,7 +185,7 @@
     overflow-y: auto;
   }
 
-  .basic-modal-body > #team-builder {
+  .modal-body > #team-builder {
     width: 95vw;
   }
 

@@ -1,5 +1,4 @@
 import React, { Dispatch, SetStateAction, useState } from "react"
-import Modal from "react-bootstrap/Modal"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { Language } from "../../../../../types/enum/Language"
@@ -18,6 +17,7 @@ import GameFiles from "./game-files"
 import { Page } from "../main-sidebar/main-sidebar"
 
 import "./game-options-modal.css"
+import { Modal } from "../modal/modal"
 
 export default function GameOptionsModal(props: {
   show: boolean
@@ -51,151 +51,150 @@ export default function GameOptionsModal(props: {
   }
 
   return (
-    <Modal show={props.show} onHide={props.hideModal} dialogClassName="is-dark">
-      <Modal.Header>
-        <Modal.Title>{t("options")}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body className="game-options-modal-body">
-        <Tabs>
-          <TabList>
-            <Tab key="sound">{t("sound")}</Tab>
-            <Tab key="interface">{t("interface")}</Tab>
-            <Tab key="hotkeys">{t("hotkeys")}</Tab>
-            <Tab key="files">{t("game_files")}</Tab>
-          </TabList>
+    <Modal
+      show={props.show}
+      onClose={props.hideModal}
+      header={t("options")}
+      className="game-options-modal anchor-top">
+      <Tabs>
+        <TabList>
+          <Tab key="sound">{t("sound")}</Tab>
+          <Tab key="interface">{t("interface")}</Tab>
+          <Tab key="hotkeys">{t("hotkeys")}</Tab>
+          <Tab key="files">{t("game_files")}</Tab>
+        </TabList>
 
-          <TabPanel>
-            <label style={{ width: "100%" }}>
-              {t("music_volume")}: {preferences.musicVolume} %
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={preferences.musicVolume}
-                onInput={(e) =>
-                  changePreference(
-                    "musicVolume",
-                    Number.parseFloat((e.target as HTMLInputElement).value)
-                  )
+        <TabPanel>
+          <label style={{ width: "100%" }}>
+            {t("music_volume")}: {preferences.musicVolume} %
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={preferences.musicVolume}
+              onInput={(e) =>
+                changePreference(
+                  "musicVolume",
+                  Number.parseFloat((e.target as HTMLInputElement).value)
+                )
+              }
+            ></input>
+          </label>
+          <label style={{ width: "100%" }}>
+            {t("sfx_volume")}: {preferences.sfxVolume} %
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={preferences.sfxVolume}
+              onInput={(e) =>
+                changePreference(
+                  "sfxVolume",
+                  Number.parseFloat((e.target as HTMLInputElement).value)
+                )
+              }
+            ></input>
+          </label>
+        </TabPanel>
+
+        <TabPanel>
+          {props.page === "main_lobby" && (
+            <>
+              <label>
+                {t("language")}:&nbsp;
+                <select
+                  className="is-light"
+                  value={language}
+                  onChange={(e) => {
+                    dispatch(selectLanguage(e.target.value as Language))
+                  }}
+                >
+                  {Object.keys(Language).map((lng) => (
+                    <option key={lng} value={lng}>
+                      {LanguageNames[lng]}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <p className="info">
+                {t("community_translations")}{" "}
+                <a
+                  href="https://discord.com/channels/737230355039387749/1134014553529790464"
+                  target="_blank"
+                >
+                  Discord
+                </a>
+              </p>
+            </>
+          )}
+
+          <p>
+            <Checkbox
+              isDark
+              checked={preferences.showDetailsOnHover}
+              onToggle={(checked) =>
+                changePreference("showDetailsOnHover", checked)
+              }
+              label={t("show_details_on_hover")}
+            />
+          </p>
+          <p>
+            <Checkbox
+              isDark
+              checked={preferences.showDamageNumbers}
+              onToggle={(checked) =>
+                changePreference("showDamageNumbers", checked)
+              }
+              label={t("show_damage_numbers")}
+            />
+          </p>
+          <p>
+            <Checkbox
+              isDark
+              checked={preferences.disableAnimatedTilemap}
+              onToggle={(checked) => {
+                changePreference("disableAnimatedTilemap", checked)
+                const gameScene = getGameScene()
+                if (gameScene) {
+                  const animatedTiles = (gameScene?.sys as any).animatedTiles
+                  if (checked) animatedTiles.pause()
+                  else animatedTiles.resume()
                 }
-              ></input>
-            </label>
-            <label style={{ width: "100%" }}>
-              {t("sfx_volume")}: {preferences.sfxVolume} %
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={preferences.sfxVolume}
-                onInput={(e) =>
-                  changePreference(
-                    "sfxVolume",
-                    Number.parseFloat((e.target as HTMLInputElement).value)
-                  )
-                }
-              ></input>
-            </label>
-          </TabPanel>
+              }}
+              label={t("disable_animated_tilemap")}
+            />
+          </p>
+          {props.page === "main_lobby" && (
+            <>
+              <label>
+                {t("renderer")}:&nbsp;
+                <select
+                  className="is-light"
+                  value={preferences.renderer}
+                  onChange={(e) => {
+                    changePreference("renderer", e.target.value)
+                  }}
+                >
+                  {Object.keys(renderers).map((r) => (
+                    <option key={r} value={r}>
+                      {renderers[r]}
+                    </option>
+                  ))}
+                </select>
+                <p className="info">{t("renderer_info")}</p>
+              </label>
+            </>
+          )}
+        </TabPanel>
 
-          <TabPanel>
-            {props.page === "main_lobby" && (
-              <>
-                <label>
-                  {t("language")}:&nbsp;
-                  <select
-                    className="is-light"
-                    value={language}
-                    onChange={(e) => {
-                      dispatch(selectLanguage(e.target.value as Language))
-                    }}
-                  >
-                    {Object.keys(Language).map((lng) => (
-                      <option key={lng} value={lng}>
-                        {LanguageNames[lng]}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <p>
-                  {t("community_translations")}{" "}
-                  <a
-                    href="https://discord.com/channels/737230355039387749/1134014553529790464"
-                    target="_blank"
-                  >
-                    Discord
-                  </a>
-                </p>
-              </>
-            )}
+        <TabPanel>
+          <KeybindInfo />
+        </TabPanel>
 
-            <p>
-              <Checkbox
-                isDark
-                checked={preferences.showDetailsOnHover}
-                onToggle={(checked) =>
-                  changePreference("showDetailsOnHover", checked)
-                }
-                label={t("show_details_on_hover")}
-              />
-            </p>
-            <p>
-              <Checkbox
-                isDark
-                checked={preferences.showDamageNumbers}
-                onToggle={(checked) =>
-                  changePreference("showDamageNumbers", checked)
-                }
-                label={t("show_damage_numbers")}
-              />
-            </p>
-            <p>
-              <Checkbox
-                isDark
-                checked={preferences.disableAnimatedTilemap}
-                onToggle={(checked) => {
-                  changePreference("disableAnimatedTilemap", checked)
-                  const gameScene = getGameScene()
-                  if (gameScene) {
-                    const animatedTiles = (gameScene?.sys as any).animatedTiles
-                    if (checked) animatedTiles.pause()
-                    else animatedTiles.resume()
-                  }
-                }}
-                label={t("disable_animated_tilemap")}
-              />
-            </p>
-            {props.page === "main_lobby" && (
-              <>
-                <label>
-                  {t("renderer")}:&nbsp;
-                  <select
-                    className="is-light"
-                    value={preferences.renderer}
-                    onChange={(e) => {
-                      changePreference("renderer", e.target.value)
-                    }}
-                  >
-                    {Object.keys(renderers).map((r) => (
-                      <option key={r} value={r}>
-                        {renderers[r]}
-                      </option>
-                    ))}
-                  </select>
-                  <p>{t("renderer_info")}</p>
-                </label>
-              </>
-            )}
-          </TabPanel>
-
-          <TabPanel>
-            <KeybindInfo />
-          </TabPanel>
-
-          <TabPanel>
-            <GameFiles />
-          </TabPanel>
-        </Tabs>
-      </Modal.Body>
+        <TabPanel>
+          <GameFiles />
+        </TabPanel>
+      </Tabs>
     </Modal>
   )
 }

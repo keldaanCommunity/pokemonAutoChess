@@ -27,7 +27,7 @@ export default function ItemStatistic(props: {
       <span>
         <label>{t("count")}:</label> {props.item.count}
       </span>
-      <div style={{ display: "flex", gap: "0.5em", alignContent: "center" }}>
+      <div style={{ display: "flex", gap: "0.5em", alignItems: "center" }}>
         <label>{t("popular_holders")}:</label>
         {props.item.pokemons.map((pokemon) => (
           <img

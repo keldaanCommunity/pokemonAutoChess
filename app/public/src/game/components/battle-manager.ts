@@ -27,6 +27,7 @@ import GameScene from "../scenes/game-scene"
 import { displayAbility } from "./abilities-animations"
 import PokemonSprite from "./pokemon"
 import PokemonDetail from "./pokemon-detail"
+import { max } from "../../../../utils/number"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -357,7 +358,7 @@ export default class BattleManager {
               this.animationManager.play(
                 pkm,
                 AnimationConfig[pkm.name as Pkm].ability,
-                { flip: this.flip, lock: true, repeat: 0 }
+                { flip: this.flip, lock: true, repeat: 0, shrink: true }
               )
               pkm.specialAttackAnimation(this.group, value)
             }
@@ -561,7 +562,6 @@ export default class BattleManager {
             }
           } else if (field == "attackCount") {
             if (value != 0) {
-              // logger.debug(value, pkm.action, pkm.targetX, pkm.targetY);
               if (
                 pkm.action == PokemonActionState.ATTACK &&
                 pkm.targetX !== null &&
@@ -643,11 +643,7 @@ export default class BattleManager {
             }
           } else if (field === "action") {
             pkm.action = pokemon.action
-            this.animationManager.animatePokemon(
-              pkm,
-              value as IPokemonEntity["action"],
-              this.flip
-            )
+            this.animationManager.animatePokemon(pkm, pokemon.action, this.flip)
           } else if (field == "critChance") {
             pkm.critChance = pokemon.critChance
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
@@ -696,7 +692,7 @@ export default class BattleManager {
               pkm.detail.hp.textContent = pokemon.life.toString()
             }
           } else if (field === "shield") {
-            if (value >= 0) {
+            if (pokemon.shield >= 0) {
               value > previousValue &&
                 this.displayBoost(Stat.SHIELD, pkm.positionX, pkm.positionY)
               pkm.shield = pokemon.shield
@@ -704,7 +700,7 @@ export default class BattleManager {
             }
           } else if (field === "pp") {
             pkm.pp = pokemon.pp
-            pkm.powerbar?.setAmount(pkm.pp)
+            pkm.powerbar?.setAmount(max(pkm.maxPP)(pkm.pp))
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
               pkm.detail.updateValue(
                 pkm.detail.pp,
@@ -770,14 +766,17 @@ export default class BattleManager {
             if (pkm.lifebar) {
               pkm.lifebar.setTeam(value as IPokemonEntity["team"], this.flip)
             }
-          } else if (field === "index") {
-            pkm.index = value as IPokemonEntity["index"]
-            this.animationManager.animatePokemon(
-              pkm,
-              PokemonActionState.IDLE,
-              this.flip
-            )
-          } else if (field === "skill") {
+          }
+          // } else if (field === "index") {
+          //   pkm.index = value as IPokemonEntity["index"]
+          //   this.animationManager.animatePokemon(
+          //     pkm,
+          //     PokemonActionState.IDLE,
+          //     this.flip,
+          //     "index"
+          //   )
+          // }
+          else if (field === "skill") {
             pkm.skill = value as IPokemonEntity["skill"]
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
               pkm.detail.updateAbilityDescription(pkm.skill, pkm.stars, pkm.ap)

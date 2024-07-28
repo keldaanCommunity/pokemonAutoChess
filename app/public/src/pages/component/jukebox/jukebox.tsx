@@ -1,11 +1,11 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
-import { Modal } from "react-bootstrap"
 import { useTranslation } from "react-i18next"
 import { DungeonMusic } from "../../../../../types/enum/Dungeon"
 import { preferences, savePreferences } from "../../../preferences"
 import { getGameScene } from "../../game"
 import { playMusic, preloadMusic } from "../../utils/audio"
 import { cc } from "../../utils/jsx"
+import { Modal } from "../modal/modal"
 
 import "./jukebox.css"
 
@@ -69,49 +69,47 @@ export default function Jukebox(props: {
   }
 
   return (
-    <Modal show={props.show} onHide={props.handleClose} width={800}>
-      <Modal.Header>
-        <Modal.Title>{t("jukebox")}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body className="game-jukebox-modal-body">
-        <p className="actions">
-          <button className="bubbly blue" onClick={() => nextMusic(-1)}>
-            ◄
-          </button>
-          <div className={cc("compact-disc", { loading })}>
-            <img src="/assets/ui/compact-disc.svg" />
-            <span>{loading && t("loading")}</span>
-          </div>
-          <button className="bubbly blue" onClick={() => nextMusic(+1)}>
-            ►
-          </button>
-        </p>
+    <Modal show={props.show} onClose={props.handleClose}
+      className="game-jukebox-modal"
+      header={t("jukebox")}
+    >
+      <p className="actions">
+        <button className="bubbly blue" onClick={() => nextMusic(-1)}>
+          ◄
+        </button>
+        <div className={cc("compact-disc", { loading })}>
+          <img src="/assets/ui/compact-disc.svg" />
+          <span>{loading && t("loading")}</span>
+        </div>
+        <button className="bubbly blue" onClick={() => nextMusic(+1)}>
+          ►
+        </button>
+      </p>
 
-        <select
-          value={music}
-          onChange={(e) => changeMusic(e.target.value as DungeonMusic)}
-          className="is-light"
-        >
-          {MUSICS.map((m) => (
-            <option key={m} value={m}>
-              {m}
-            </option>
-          ))}
-        </select>
+      <select
+        value={music}
+        onChange={(e) => changeMusic(e.target.value as DungeonMusic)}
+        className="is-light"
+      >
+        {MUSICS.map((m) => (
+          <option key={m} value={m}>
+            {m}
+          </option>
+        ))}
+      </select>
 
-        <p>
-          <label className="full-width">
-            {t("music_volume")}: {volume} %
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={volume}
-              onInput={handleVolumeChange}
-            ></input>
-          </label>
-        </p>
-      </Modal.Body>
+      <p>
+        <label className="full-width">
+          {t("music_volume")}: {volume} %
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value={volume}
+            onInput={handleVolumeChange}
+          ></input>
+        </label>
+      </p>
     </Modal>
   )
 }

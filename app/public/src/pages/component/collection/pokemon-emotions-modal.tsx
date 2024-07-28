@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo } from "react"
-import Modal from "react-bootstrap/esm/Modal"
 import { useTranslation } from "react-i18next"
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed/precomputed-emotions"
 import { Emotion } from "../../../../../types"
@@ -17,12 +16,13 @@ import {
 } from "../../../stores/NetworkStore"
 import { getAvatarSrc, getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
+import { Modal } from "../modal/modal"
 import PokemonEmotion from "./pokemon-emotion"
 import "./pokemon-emotions-modal.css"
 
 export default function PokemonEmotionsModal(props: {
   pokemon: Pkm
-  onHide: () => void
+  onClose: () => void
 }) {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
@@ -70,28 +70,25 @@ export default function PokemonEmotionsModal(props: {
   return (
     <Modal
       show={true}
-      onHide={props.onHide}
-      dialogClassName="pokemon-emotions-modal is-dark is-large"
-    >
-      <Modal.Header>
-        <Modal.Title>
-          <img
-            src={getPortraitSrc(
-              index,
-              pConfig.selectedShiny,
-              pConfig.selectedEmotion
-            )}
-            className={cc({ unlocked: pConfig != null })}
-          />
-          <h1>{t(`pkm.${props.pokemon}`)}</h1>
-          <div className="spacer" />
-          <p className="dust">
-            {pConfig.dust} {t("shards")}{" "}
-            <img src={getPortraitSrc(index)} className="dust" alt="dust" />
-          </p>
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
+      onClose={props.onClose}
+      className="pokemon-emotions-modal anchor-top"
+      header={<>
+        <img
+          src={getPortraitSrc(
+            index,
+            pConfig.selectedShiny,
+            pConfig.selectedEmotion
+          )}
+          className={cc({ unlocked: pConfig != null })}
+        />
+        <h2>{t(`pkm.${props.pokemon}`)}</h2>
+        <div className="spacer" />
+        <p className="dust">
+          {pConfig.dust} {t("shards")}{" "}
+          <img src={getPortraitSrc(index)} className="dust" alt="dust" />
+        </p>
+      </>}
+      body={<>
         <section>
           <p>{t("normal_emotions")}</p>
           <div>
@@ -148,8 +145,8 @@ export default function PokemonEmotionsModal(props: {
             </div>
           </section>
         )}
-      </Modal.Body>
-      <Modal.Footer>
+      </>}
+      footer={<>
         <button
           className="bubbly blue"
           disabled={
@@ -157,11 +154,11 @@ export default function PokemonEmotionsModal(props: {
               pConfig.shinyEmotions.length === 0) ||
             (user &&
               getAvatarSrc(user?.avatar) ===
-                getPortraitSrc(
-                  index,
-                  pConfig.selectedShiny,
-                  pConfig.selectedEmotion
-                ))
+              getPortraitSrc(
+                index,
+                pConfig.selectedShiny,
+                pConfig.selectedEmotion
+              ))
           }
           onClick={() =>
             dispatch(
@@ -193,10 +190,10 @@ export default function PokemonEmotionsModal(props: {
           <img src={getPortraitSrc(index)} className="dust" alt="dust" />
         </button>
         <div className="spacer"></div>
-        <button className="bubbly red" onClick={props.onHide}>
+        <button className="bubbly red" onClick={props.onClose}>
           {t("close")}
         </button>
-      </Modal.Footer>
-    </Modal>
+      </>}
+    />
   )
 }

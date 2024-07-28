@@ -1,40 +1,39 @@
-.pokemon-emotions-modal .modal-header {
+.pokemon-emotions-modal.my-container {
   padding: 0;
 }
 
-.pokemon-emotions-modal .modal-title {
+.pokemon-emotions-modal header {
+  padding: 0;
   color: white;
-  font-size: 140%;
   text-transform: capitalize;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
 }
 
-.pokemon-emotions-modal .modal-title > img {
+.pokemon-emotions-modal header > img {
   width: 80px;
   height: 80px;
   margin-right: 0.5em;
   image-rendering: pixelated;
 }
 
-.pokemon-emotions-modal .modal-title img.unlocked {
+.pokemon-emotions-modal header img.unlocked {
   filter: grayscale(0);
 }
 
-.pokemon-emotions-modal .modal-title > h1 {
+.pokemon-emotions-modal header > h2 {
   margin: 0;
 }
 
-.pokemon-emotions-modal .modal-title .dust {
+.pokemon-emotions-modal header .dust {
   display: flex;
   align-items: center;
   color: white;
   font-size: 120%;
 }
 
-.pokemon-emotions-modal .modal-title img  {
+.pokemon-emotions-modal header img  {
   width: 40px;
   height: 40px;
   margin: 0 0.5em;

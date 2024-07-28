@@ -291,7 +291,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attackType === AttackType.SPECIAL
       ) {
         this.status.triggerBurn(3000, this, attacker)
-        this.status.triggerWound(3000, this, attacker)
       }
       if (
         this.items.has(Item.POWER_LENS) &&
@@ -365,7 +364,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       !this.status.resurecting &&
       !(value < 0 && this.status.tree) // cannot lose PP if tree
     ) {
-      this.pp = clamp(this.pp + value, 0, this.maxPP)
+      this.pp = min(0)(this.pp + value)
     }
   }
 
@@ -790,6 +789,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.name === Pkm.MINIOR) {
       this.addAttackSpeed(4, this, 1, false)
+    }
+
+    if (this.name === Pkm.MORPEKO) {
+      target.status.triggerParalysis(2000, target)
+    }
+
+    if (this.name === Pkm.MORPEKO_HANGRY) {
+      target.status.triggerWound(4000, target, this)
     }
 
     if (this.passive === Passive.DREAM_CATCHER && target.status.sleep) {

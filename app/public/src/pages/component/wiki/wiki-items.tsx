@@ -173,16 +173,12 @@ export default function WikiItems() {
         </ul>
       </article>
 
-      {itemHovered &&
-        ReactDOM.createPortal(
-          <Tooltip
-            id="detail-item"
-            className="custom-theme-tooltip item-detail-tooltip"
-          >
-            <ItemDetailTooltip item={itemHovered} />
-          </Tooltip>,
-          document.body
-        )}
+      {itemHovered && <Tooltip
+        id="detail-item"
+        className="custom-theme-tooltip item-detail-tooltip"
+      >
+        <ItemDetailTooltip item={itemHovered} />
+      </Tooltip>}
     </div>
   )
 }

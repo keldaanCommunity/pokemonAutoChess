@@ -4,7 +4,6 @@ import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Navigate } from "react-router-dom"
-import { Modal } from "react-bootstrap"
 import LobbyUser from "../../../models/colyseus-models/lobby-user"
 import {
   TournamentBracketSchema,
@@ -74,6 +73,7 @@ import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import { logger } from "../../../utils/logger"
 import { localStore, LocalStoreKeys } from "./utils/store"
 import { cc } from "./utils/jsx"
+import { Modal } from "./component/modal/modal"
 import "./lobby.css"
 
 export default function Lobby() {
@@ -81,9 +81,13 @@ export default function Lobby() {
   const lobby = useAppSelector((state) => state.network.lobby)
 
   const lobbyJoined = useRef<boolean>(false)
-  const [reconnectionToken, setReconnectionToken] = useState<string | null>(
-    localStore.get(LocalStoreKeys.RECONNECTION_TOKEN)
+  const [gameToReconnect, setGameToReconnect] = useState<string | null>(
+    localStore.get(LocalStoreKeys.RECONNECTION_GAME)
   )
+  const gameRooms: RoomAvailable[] = useAppSelector(
+    (state) => state.lobby.gameRooms
+  )
+  const showGameReconnect = gameToReconnect != null && gameRooms.some((r) => r.roomId === gameToReconnect)
 
   const [toPreparation, setToPreparation] = useState<boolean>(false)
   const [toGame, setToGame] = useState<boolean>(false)
@@ -134,26 +138,23 @@ export default function Lobby() {
           setToPreparation={setToPreparation}
         />
       </div>
-      <Modal show={reconnectionToken != null}>
-        <Modal.Header>
-          <Modal.Title>{t("game-reconnect-modal-title")}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="game-reconnect-modal-body">
-          {t("game-reconnect-modal-body")}
-        </Modal.Body>
-        <Modal.Footer style={{ justifyContent: "space-evenly" }}>
+      <Modal show={showGameReconnect}
+        header={t("game-reconnect-modal-title")}
+        body={t("game-reconnect-modal-body")}
+        footer={<>
           <button className="bubbly green" onClick={() => setToGame(true)}>
             {t("yes")}
           </button>
           <button
             className="bubbly red"
             onClick={() => {
-              setReconnectionToken(null)
+              setGameToReconnect(null)
+              localStore.delete(LocalStoreKeys.RECONNECTION_GAME)
             }}
           >
             {t("no")}
           </button>
-        </Modal.Footer>
+        </>}>
       </Modal>
     </main>
   )
@@ -331,7 +332,10 @@ export async function joinLobbyRoom(
 
             tournament.brackets.onRemove((bracket, bracketId) => {
               dispatch(
-                removeTournamentBracket({ tournamendId: tournament.id, bracketId })
+                removeTournamentBracket({
+                  tournamendId: tournament.id,
+                  bracketId
+                })
               )
             })
           })

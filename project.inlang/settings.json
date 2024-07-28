@@ -9,10 +9,11 @@
     "fr",
     "it",
     "ja",
+    "ko",
     "nl",
     "pl",
     "pt",
-    "ko"
+    "vi"
   ],
   "modules": [
     "https://cdn.jsdelivr.net/npm/@inlang/plugin-i18next@latest/dist/index.js",

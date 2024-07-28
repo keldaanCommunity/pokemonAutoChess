@@ -546,9 +546,11 @@ export class MistySurgeStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit, true)
     const ppGain = 30
+    const hpGain = 30
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team && ally.types.has(Synergy.FAIRY)) {
         ally.addPP(ppGain, pokemon, 1, crit)
+        ally.handleHeal(hpGain, pokemon, 1, crit)
       }
     })
   }
@@ -1404,13 +1406,15 @@ export class GrowlStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let duration = [3000, 6000, 9000][pokemon.stars - 1] ?? 9000
-    duration = Math.round(duration * (1 + pokemon.ap / 100))
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team) {
-        tg.status.triggerFlinch(duration, tg, pokemon)
-      }
-    })
+    const atkDebuff = [3, 5, 7][pokemon.stars - 1] ?? 7
+    board
+      .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+      .forEach((cell) => {
+        if (cell.value && cell.value.team !== pokemon.team) {
+          cell.value.status.triggerFlinch(3000, cell.value, pokemon)
+          cell.value.addAttack(-atkDebuff, pokemon, 1, crit)
+        }
+      })
   }
 }
 
@@ -1450,10 +1454,10 @@ export class FairyWindStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const ppGain = [10, 20, 30][pokemon.stars - 1] ?? 0
+    const ppGain = [5, 10, 20][pokemon.stars - 1] ?? 0
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team === tg.team && tg.id !== pokemon.id) {
-        tg.addPP(ppGain, pokemon, 0.5, crit)
+        tg.addPP(ppGain, pokemon, 1, crit)
         pokemon.simulation.room.broadcast(Transfer.ABILITY, {
           id: pokemon.simulation.id,
           skill: pokemon.skill,
@@ -3113,7 +3117,6 @@ export class SmokeScreenStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit, true)
     const damage = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
-    const duration = 2000
     const mostSurroundedCoordinate =
       state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
 
@@ -3123,6 +3126,11 @@ export class SmokeScreenStrategy extends AbilityStrategy {
         mostSurroundedCoordinate.y,
         board
       )
+
+      const backRow = mostSurroundedCoordinate.y <= 2 ? 0 : 5
+      const midRow = mostSurroundedCoordinate.y <= 2 ? 1 : 4
+      const frontRow = mostSurroundedCoordinate.y <= 2 ? 2 : 3
+      let chosenRowForSmoke = frontRow
 
       const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
@@ -3145,8 +3153,7 @@ export class SmokeScreenStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
-          cell.value.status.triggerBurn(duration, cell.value, pokemon)
-          cell.value.status.triggerArmorReduction(duration, cell.value)
+
           pokemon.simulation.room.broadcast(Transfer.ABILITY, {
             id: pokemon.simulation.id,
             skill: pokemon.skill,
@@ -3156,6 +3163,41 @@ export class SmokeScreenStrategy extends AbilityStrategy {
             targetY: cell.y,
             orientation: pokemon.orientation
           })
+
+          if (cell.y === backRow) chosenRowForSmoke = backRow
+          if (cell.y === midRow && chosenRowForSmoke !== backRow)
+            chosenRowForSmoke = midRow
+        }
+      })
+
+      const smokeCells = [
+        [pokemon.positionX - 1, chosenRowForSmoke],
+        [pokemon.positionX, chosenRowForSmoke],
+        [pokemon.positionX + 1, chosenRowForSmoke]
+      ].filter(
+        ([x, y]) =>
+          y >= 0 &&
+          y < board.rows &&
+          x >= 0 &&
+          x < board.columns &&
+          !(x === pokemon.positionX && y === pokemon.positionY)
+      )
+
+      smokeCells.forEach(([x, y]) => {
+        const index = y * board.columns + x
+        if (board.effects[index] !== Effect.GAS) {
+          board.effects[index] = Effect.GAS
+          pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+            simulationId: pokemon.simulation.id,
+            type: BoardEvent.GAS,
+            x,
+            y
+          })
+        }
+
+        const enemy = board.getValue(x, y)
+        if (enemy) {
+          enemy.effects.add(Effect.GAS)
         }
       })
     }
@@ -5159,6 +5201,22 @@ export class DireClawStrategy extends AbilityStrategy {
         target.status.triggerParalysis(3000, target)
         break
     }
+  }
+}
+
+export class FakeOutStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [50, 100, 150][pokemon.stars - 1] ?? 150
+    if (pokemon.ap >= 0) target.status.triggerFlinch(3000, target)
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    pokemon.addAbilityPower(-30, pokemon, 0, false)
   }
 }
 
@@ -9648,5 +9706,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FLYING_PRESS]: new FlyingPressStrategy(),
   [Ability.DRAIN_PUNCH]: new DrainPunchStrategy(),
   [Ability.GRAVITY]: new GravityStrategy(),
-  [Ability.DIRE_CLAW]: new DireClawStrategy()
+  [Ability.DIRE_CLAW]: new DireClawStrategy(),
+  [Ability.FAKE_OUT]: new FakeOutStrategy()
 }

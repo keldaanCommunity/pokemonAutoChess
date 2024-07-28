@@ -2,7 +2,7 @@ import { t } from "i18next"
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { IDetailledPokemon } from "../../../../../models/mongo-models/bot-v2"
 import { LocalStoreKeys, localStore } from "../../utils/store"
-import { BasicModal } from "../modal/modal"
+import { Modal } from "../modal/modal"
 import TeamBuilder from "./team-builder"
 
 export default function TeamBuilderModal(props: {
@@ -17,11 +17,12 @@ export default function TeamBuilderModal(props: {
   }, [board])
 
   return (
-    <BasicModal
+    <Modal
       show={props.show}
-      handleClose={props.handleClose}
-      title={t("team_builder")}
-      body={<TeamBuilder board={board} updateBoard={updateBoard} />}
-    />
+      onClose={props.handleClose}
+      header={t("team_builder")}
+      className="team-builder-modal">
+      <TeamBuilder board={board} updateBoard={updateBoard} />
+    </Modal>
   )
 }

@@ -7,8 +7,6 @@ import {
 } from "../../../../../models/mongo-models/items-statistic"
 import {
   ArtificialItems,
-  ItemComponents,
-  Berries,
   CraftableItems,
   WeatherRocks,
   ShinyItems

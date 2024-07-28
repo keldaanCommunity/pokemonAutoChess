@@ -14,11 +14,11 @@ import PokemonCollection from "../collection/pokemon-collection"
 import GameOptionsModal from "../options/game-options-modal"
 import Jukebox from "../jukebox/jukebox"
 import MetaReport from "../meta-report/meta-report"
-import { BasicModal } from "../modal/modal"
+import { Modal } from "../modal/modal"
 import Patchnotes from "../patchnotes/patchnotes"
 import { usePatchVersion } from "../patchnotes/usePatchVersion"
 import Profile from "../profile/profile"
-import { ServerAnnouncementForm } from "../server-announcement/server-announcement-form"
+import { ServerAnnouncementModal } from "../server-announcement/server-announcement-modal"
 import { TournamentsAdmin } from "../tournaments-admin/tournaments-admin"
 import Wiki from "../wiki/wiki"
 
@@ -337,12 +337,12 @@ function Modals({
   setModal: (nextModal?: Modals) => void
   page: Page
 }) {
+  const { t } = useTranslation()
   const searchedUser = useAppSelector((state) => state.lobby.searchedUser)
 
   const dispatch = useAppDispatch()
 
   const closeModal = useCallback(() => setModal(undefined), [setModal])
-  const { t } = useTranslation()
 
   useEffect(() => {
     if (searchedUser && modal !== "profile") {
@@ -352,40 +352,48 @@ function Modals({
 
   return (
     <>
-      <BasicModal
-        handleClose={closeModal}
+      <Modal
+        onClose={closeModal}
         show={modal === "news"}
-        body={<Patchnotes />}
-      />
-      <BasicModal
-        handleClose={() => {
+        header={t("patch_notes")}
+        className="patchnotes">
+        <Patchnotes />
+      </Modal>
+      <Modal
+        onClose={() => {
           closeModal()
           dispatch(setSearchedUser(undefined))
         }}
         show={modal === "profile"}
-        body={<Profile />}
-      />
-      <BasicModal
-        handleClose={closeModal}
+        header={t("profile")}>
+        <Profile />
+      </Modal>
+      <Modal
+        onClose={closeModal}
         show={modal === "collection"}
-        body={<PokemonCollection />}
-        centered={false}
-      />
-      <BasicModal
-        handleClose={closeModal}
+        header={t("collection")}
+        className="anchor-top">
+        <PokemonCollection />
+      </Modal>
+      <Modal
+        onClose={closeModal}
         show={modal === "booster"}
-        body={<Booster />}
-      />
-      <BasicModal
-        handleClose={closeModal}
+        className="custom-bg">
+        <Booster />
+      </Modal>
+      <Modal
+        onClose={closeModal}
         show={modal === "wiki"}
-        body={<Wiki inGame={page === "game"} />}
-      />
-      <BasicModal
+        className="wiki-modal"
+        header={t("wiki")}>
+        <Wiki inGame={page === "game"} />
+      </Modal>
+      <Modal
         show={modal === "meta"}
-        handleClose={closeModal}
-        body={<MetaReport />}
-      />
+        header={t("meta")}
+        onClose={closeModal}>
+        <MetaReport />
+      </Modal>
       <TeamBuilderModal
         show={modal === "team-builder"}
         handleClose={closeModal}
@@ -395,16 +403,15 @@ function Modals({
         page={page}
         hideModal={closeModal}
       />
-      <BasicModal
-        handleClose={closeModal}
+      <ServerAnnouncementModal
         show={modal === "announcement"}
-        body={<ServerAnnouncementForm />}
-      />
-      <BasicModal
-        handleClose={closeModal}
+        onClose={closeModal} />
+      <Modal
+        onClose={closeModal}
         show={modal === "tournaments"}
-        body={<TournamentsAdmin />}
-      />
+        header="Tournaments">
+        <TournamentsAdmin />
+      </Modal>
       <Jukebox show={modal === "jukebox"} handleClose={closeModal} />
     </>
   )

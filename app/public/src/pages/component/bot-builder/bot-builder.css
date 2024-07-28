@@ -72,8 +72,8 @@
   background-repeat: no-repeat;
 }
 
-#bot-export-modal .error,
-#bot-import-modal .error {
+.bot-export-modal .error,
+.bot-import-modal .error {
   background-color: red;
   font-weight: bold;
 }

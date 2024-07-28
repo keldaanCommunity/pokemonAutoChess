@@ -1,8 +1,8 @@
 import React from "react"
-import ProgressBar from "react-bootstrap/ProgressBar"
 import { useTranslation } from "react-i18next"
 import { IDps } from "../../../../../types"
 import { getAvatarSrc } from "../../../utils"
+import ProgressBar from "../progress-bar/progress-bar"
 
 export default function GameDpsHeal(props: {
   maxHeal: number
