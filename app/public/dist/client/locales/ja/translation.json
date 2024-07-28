@@ -1305,7 +1305,7 @@
     "SOUL_DEW": "戦闘中、保持者は毎秒 10% AP を獲得します",
     "UPGRADE": "攻撃が成功すると、残りの戦闘中、+5% のボーナス ATK_SPEED が付与されます",
     "REAPER_CLOTH": "所有者の呪文はクリティカル攻撃を行うことができます",
-    "POKEMONOMICON": "ホルダーがSPECIALを実行すると、ターゲットを3秒間燃やし傷を負います",
+    "POKEMONOMICON": "保持者が SPECIAL を与えると、対象を3秒間 BURN する",
     "POWER_LENS": "SPE_DEFによって減少したSPECIALの量は攻撃者に返される",
     "SHELL_BELL": "所有者は与えられた全ダメージの33%を回復する",
     "LUCKY_EGG": "同じ列のホルダーと隣接する味方の AP +40%",

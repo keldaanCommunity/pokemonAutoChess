@@ -16,6 +16,8 @@
 
 # Changes to Items
 
+- Pokemonomicon no longer applies Wound
+
 # Gameplay
 
 - Extra PP generated when reaching max PP are now saved and restored after casting ability
@@ -27,3 +29,5 @@
 # Bugfix
 
 # Misc
+
+- Vietnamese translation has been started thanks to Camchanh

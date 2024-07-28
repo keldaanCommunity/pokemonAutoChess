@@ -1901,7 +1901,7 @@
     "SOUL_DEW": "Durante el combate, el poseedor gana 10% AP cada segundo",
     "UPGRADE": "Los ataques exitosos otorgan +5% de bonificación de ATK_SPEED por el resto del combate",
     "REAPER_CLOTH": "Los hechizos del usuario pueden golpear críticamente",
-    "POKEMONOMICON": "Cuando el poseedor inflige SPECIAL, quema y hiere al objetivo durante 3 segundos.",
+    "POKEMONOMICON": "Cuando el poseedor inflige SPECIAL, BURN al objetivo durante 3 segundos.",
     "POWER_LENS": "La cantidad de SPECIAL reducida en SPE_DEF se devuelve al atacante.",
     "SHELL_BELL": "El usuario cura el 33% de todos los daños infligidos.",
     "LUCKY_EGG": "+40% AP para el poseedor y aliados adyacentes en la misma fila",

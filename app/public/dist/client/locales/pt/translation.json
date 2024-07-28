@@ -1582,7 +1582,7 @@
     "SOUL_DEW": "Durante o combate, o titular ganha 10% AP a cada segundo",
     "UPGRADE": "Ataques bem-sucedidos concedem +5% de bônus ATK_SPEED pelo resto do combate",
     "REAPER_CLOTH": "Os feitiços do titular podem atingir criticamente",
-    "POKEMONOMICON": "Quando o titular dá SPECIAL, eles queimam e ferem o alvo por 3 segundos",
+    "POKEMONOMICON": "Quando o titular dá SPECIAL, eles BURN o alvo por 3 segundos",
     "POWER_LENS": "A quantidade de SPECIAL reduzida por SPE_DEF é infligida de volta ao atacante",
     "SHELL_BELL": "Titular cura 33% de todos os danos infligidos",
     "LUCKY_EGG": "+40% AP para titular e aliados adjacentes na mesma linha",

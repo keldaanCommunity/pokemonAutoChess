@@ -1708,7 +1708,7 @@
     "SOUL_DEW": "Während des Kampfes erhält das Pokémon jede Sekunde 10% AP",
     "UPGRADE": "Erfolgreiche Angriffe gewähren dem Pokémon +5% ATK_SPEED für den Rest des Kampfes ",
     "REAPER_CLOTH": "Die Fähigkeiten dieses Pokémons können kritisch treffen.",
-    "POKEMONOMICON": "Wenn das Pokémon SPECIAL verursacht, fügt es dem Ziel 3 Sekunden lang BURN and WOUND zu",
+    "POKEMONOMICON": "Wenn das Pokémon SPECIAL verursacht, fügt es dem Ziel 3 Sekunden lang BURN zu",
     "POWER_LENS": "Der durch SPE_DEF reduzierte SPECIAL Wert wird dem Angreifer wieder zugefügt.",
     "SHELL_BELL": "Das Pokémon heilt sich um 33% des verursachten Schadens",
     "LUCKY_EGG": "+40% AP für das Pokémon und angrenzende Verbündete in der selben Reihe",

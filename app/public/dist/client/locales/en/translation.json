@@ -1903,7 +1903,7 @@
     "SOUL_DEW": "During combat, the holder gains 10% AP every second",
     "UPGRADE": "Successful attacks grant +5% bonus ATK_SPEED for the rest of combat",
     "REAPER_CLOTH": "The holder spells can critically strike",
-    "POKEMONOMICON": "When the holder deals SPECIAL, they BURN and WOUND the target for 3 seconds",
+    "POKEMONOMICON": "When the holder deals SPECIAL, they BURN the target for 3 seconds",
     "POWER_LENS": "The amount of SPECIAL reduced by SPE_DEF is inflicted back to the attacker",
     "SHELL_BELL": "Holder heals for 33% of all damages inflicted",
     "LUCKY_EGG": "+40% AP for holder and adjacent allies in the same row",
