@@ -9,6 +9,7 @@
 - Buff Snubull: Attack 10 → 12, Def 3 → 4
 - Buff Purrloin & Liepard : Def/Spedef 1/2 → 2/3 ; new ability Fake out: deals 50/100/150 special damage to the target, then lose 30% AP. Target is FLINCH for 3 seconds unless AP was negative
 - Changed Poochyena line: Growl now only flinch adjacent enemies, but reduce their ATK by 3 ; HP 70/160 → 80/190
+- Nerf Florges Fairy Wind: ~~10/20/30~~ 5/10/20 PP, AP scaling ~~0.5~~ 1
 
 # Changes to Synergies
 
@@ -16,9 +17,11 @@
 
 # Gameplay
 
+- Extra PP generated when reaching max PP are now saved and restored after casting ability
+
 # UI
 
-- Rework the way animation are handled.
+- Rework the way fighting animations are handled. Attacks and abilities now have a frame delay before damage and effects are applied.
 
 # Bugfix
 
