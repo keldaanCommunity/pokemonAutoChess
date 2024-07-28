@@ -1164,7 +1164,7 @@
     "BONEMERANG": "Wirf einen Bumerangknochen durch das gegnerische Team und füge ihm auf dem Weg [30,60,120,SP] SPECIAL zu",
     "GROWL": "FLINCH benachbarte Feinde 3 Sekunden lang zusammen und reduziere ihren ATK um [3,5,7,SP]",
     "RELIC_SONG": "Gibt eine Notiz aus. Nach der dritten Note SCHLAFEN Sie das gesamte gegnerische Team für [2,SP=0,5] Sekunden",
-    "FAIRY_WIND": "Gibt allen Verbündeten außer dem Zaubernden [10,20,40,SP=0,5] PP",
+    "FAIRY_WIND": "Gibt allen Verbündeten außer dem Zaubernden [5,10,20,SP] PP",
     "DISARMING_VOICE": "Gegner im Umkreis von 2 Feldern sind CHARM für [1,SP] Sekunden",
     "HIGH_JUMP_KICK": "Verursacht [50,100,200,SP] SPECIAL und stiehlt dem Ziel das gesamte PP",
     "GRASS_WHISTLE": "Versetzen Sie Feinde 2 Sekunden lang in SLEEP [1,2,4].",
