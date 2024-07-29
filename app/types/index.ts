@@ -6,8 +6,6 @@ import Count from "../models/colyseus-models/count"
 import ExperienceManager from "../models/colyseus-models/experience-manager"
 import { IPokemonRecord } from "../models/colyseus-models/game-record"
 import HistoryItem from "../models/colyseus-models/history-item"
-import { ILeaderboardInfo } from "../types/interfaces/LeaderboardInfo"
-import { ISpecialGamePlanned } from "../types/interfaces/Lobby"
 import LobbyUser from "../models/colyseus-models/lobby-user"
 import Message from "../models/colyseus-models/message"
 import Player from "../models/colyseus-models/player"
@@ -18,6 +16,8 @@ import Synergies from "../models/colyseus-models/synergies"
 import { TournamentSchema } from "../models/colyseus-models/tournament"
 import { Effects } from "../models/effects"
 import GameRoom from "../rooms/game-room"
+import { ILeaderboardInfo } from "../types/interfaces/LeaderboardInfo"
+import { ISpecialGamePlanned } from "../types/interfaces/Lobby"
 import { Ability } from "./enum/Ability"
 import { DungeonPMDO } from "./enum/Dungeon"
 import { Effect } from "./enum/Effect"
@@ -140,7 +140,8 @@ export enum Transfer {
   PICK_BERRY = "PICK_BERRY",
   SERVER_ANNOUNCEMENT = "SERVER_ANNOUNCEMENT",
   PRELOAD_MAPS = "PRELOAD_MAPS",
-  NPC_DIALOG = "NPC_DIALOG"
+  NPC_DIALOG = "NPC_DIALOG",
+  PROJECTILE_EVENT = "PROJECTILE_EVENT"
 }
 
 export enum AttackSprite {
@@ -741,4 +742,13 @@ export interface IBoardEvent {
   type: BoardEvent
   x: number
   y: number
+}
+
+export interface IProjectileEvent {
+  simulationId: string
+  pokemonId: string
+  targetX: number
+  targetY: number
+  timeScale: number
+  delay: number
 }

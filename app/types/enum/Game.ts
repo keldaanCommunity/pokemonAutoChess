@@ -1,3 +1,5 @@
+export const FPS_POKEMON_ANIMS = 36
+
 export enum Rarity {
   COMMON = "COMMON",
   UNCOMMON = "UNCOMMON",

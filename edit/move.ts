@@ -17,6 +17,10 @@ fse.copySync(
   }
 )
 
+fse.copySync(`sheets/delays.json`, `../app/types/delays.json`, {
+  overwrite: true
+})
+
 if (pkmIndex) {
   moveSheet(pkmIndex)
 } else {

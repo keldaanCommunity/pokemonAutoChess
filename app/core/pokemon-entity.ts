@@ -791,6 +791,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.addAttackSpeed(4, this, 1, false)
     }
 
+    if (this.name === Pkm.MORPEKO) {
+      target.status.triggerParalysis(2000, target)
+    }
+
+    if (this.name === Pkm.MORPEKO_HANGRY) {
+      target.status.triggerWound(4000, target, this)
+    }
+
     if (this.passive === Passive.DREAM_CATCHER && target.status.sleep) {
       const allies = board.cells.filter(
         (p) => p && p.team === this.team && p.id !== this.id

@@ -30,6 +30,7 @@ interface IAnim {
   FrameHeight: number
   Durations: IDuration
   CopyOf: string
+  HitFrame: number
 }
 
 interface IDuration {
@@ -53,6 +54,7 @@ logger.debug(mapName)
 
 // const credits = {};
 const durations = {}
+const delays = {}
 let missing = ""
 
 async function splitAll() {
@@ -83,8 +85,25 @@ export function loadDurationsFile() {
   )
 }
 
+export function loadDelaysFile() {
+  try {
+    const rawdata = fs.readFileSync(
+      "../app/types/delays.json",
+      "utf8"
+    )
+    Object.assign(delays, JSON.parse(rawdata))
+    logger.debug(
+      `Loaded delays file, ${
+        Object.keys(delays).length
+      } delays already computed`
+    )
+  } catch (error) {
+    logger.error(error)
+  }
+}
+
 export function saveDurationsFile() {
-  const fileA = fs.createWriteStream("sheets/durations.json")
+  const fileA = fs.createWriteStream("./sheets/durations.json")
   fileA.on("error", function (err) {
     logger.error(err)
   })
@@ -92,6 +111,18 @@ export function saveDurationsFile() {
   fileA.end()
   logger.debug(
     `Saved durations file, ${Object.keys(durations).length} durations entries`
+  )
+}
+
+export function saveDelaysFile() {
+  const fileA = fs.createWriteStream("./sheets/delays.json")
+  fileA.on("error", function (err) {
+    logger.error(err)
+  })
+  fileA.write(JSON.stringify(delays))
+  fileA.end()
+  logger.debug(
+    `Saved delays file, ${Object.keys(delays).length} delays entries`
   )
 }
 
@@ -163,6 +194,21 @@ async function splitIndex(index: string) {
       const xmlFile = fs.readFileSync(`${path}/sprite/${pad}/AnimData.xml`)
       const parser = new XMLParser()
       const xmlData = <IPMDCollab>parser.parse(xmlFile)
+      const attackMetadata = xmlData.AnimData.Anims.Anim.find(
+        (m) => m.Name === AnimationConfig[mapName.get(index) as Pkm].attack
+      )
+      if (attackMetadata) {
+        const attackDurations: number[] =
+          attackMetadata.Durations.Duration.length !== undefined
+            ? [...attackMetadata.Durations.Duration]
+            : [attackMetadata.Durations.Duration]
+        delays[index] = {
+          d: attackDurations
+            .slice(0, attackMetadata.HitFrame)
+            .reduce((prev, curr) => prev + curr, 0),
+          t: attackDurations.reduce((prev, curr) => prev + curr, 0)
+        }
+      }
       for (let k = 0; k < Object.values(SpriteType).length; k++) {
         const anim = Object.values(SpriteType)[k]
         const conf = mapName.get(index)
@@ -292,10 +338,12 @@ async function splitIndex(index: string) {
 }
 
 async function main() {
+  loadDelaysFile()
   loadDurationsFile()
   if (specificIndexToSplit) {
     await splitIndex(specificIndexToSplit)
     saveDurationsFile()
+    saveDelaysFile()
   } else {
     logger.info("started spliting all ...")
     await splitAll()
@@ -303,6 +351,8 @@ async function main() {
     saveDurationsFile()
     logger.info("saving missing files ...")
     saveMissingFiles()
+    logger.info("saving delays files ...")
+    saveDelaysFile()
   }
 }
 

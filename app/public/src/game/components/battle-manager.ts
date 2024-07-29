@@ -1,12 +1,16 @@
-import { GameObjects } from "phaser"
 import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
+import { GameObjects } from "phaser"
 import { getMoveSpeed } from "../../../../core/pokemon-entity"
 import Simulation from "../../../../core/simulation"
 import Count from "../../../../models/colyseus-models/count"
 import Player from "../../../../models/colyseus-models/player"
 import Status from "../../../../models/colyseus-models/status"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
-import { IBoardEvent, IPokemonEntity } from "../../../../types"
+import {
+  IBoardEvent,
+  IPokemonEntity,
+  IProjectileEvent
+} from "../../../../types"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import { Effect } from "../../../../types/enum/Effect"
@@ -21,13 +25,13 @@ import {
 import { Item } from "../../../../types/enum/Item"
 import { Passive } from "../../../../types/enum/Passive"
 import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
+import { max } from "../../../../utils/number"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import { displayAbility } from "./abilities-animations"
 import PokemonSprite from "./pokemon"
 import PokemonDetail from "./pokemon-detail"
-import { max } from "../../../../utils/number"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -358,7 +362,7 @@ export default class BattleManager {
               this.animationManager.play(
                 pkm,
                 AnimationConfig[pkm.name as Pkm].ability,
-                { flip: this.flip, lock: true, repeat: 0 }
+                { flip: this.flip, lock: true, repeat: 0, shrink: true }
               )
               pkm.specialAttackAnimation(this.group, value)
             }
@@ -562,7 +566,6 @@ export default class BattleManager {
             }
           } else if (field == "attackCount") {
             if (value != 0) {
-              // logger.debug(value, pkm.action, pkm.targetX, pkm.targetY);
               if (
                 pkm.action == PokemonActionState.ATTACK &&
                 pkm.targetX !== null &&
@@ -573,7 +576,6 @@ export default class BattleManager {
                   PokemonActionState.ATTACK,
                   this.flip
                 )
-                pkm.attackAnimation()
               }
             }
           } else if (field == "tripleAttackCount") {
@@ -590,6 +592,22 @@ export default class BattleManager {
             pkm.itemsContainer.updateCount(Item.MAGMARIZER, value)
           }
         }
+      }
+    }
+  }
+
+  displayProjectileEvent(event: IProjectileEvent) {
+    if (this.simulation?.id === event.simulationId && this.group) {
+      const pokemon = (this.group.getChildren() as PokemonSprite[]).find(
+        (p) => p.id === event.pokemonId
+      )
+      if (pokemon) {
+        pokemon.attackAnimation(
+          event.targetX,
+          event.targetY,
+          event.delay,
+          event.timeScale
+        )
       }
     }
   }
@@ -644,11 +662,7 @@ export default class BattleManager {
             }
           } else if (field === "action") {
             pkm.action = pokemon.action
-            this.animationManager.animatePokemon(
-              pkm,
-              value as IPokemonEntity["action"],
-              this.flip
-            )
+            this.animationManager.animatePokemon(pkm, pokemon.action, this.flip)
           } else if (field == "critChance") {
             pkm.critChance = pokemon.critChance
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
@@ -697,7 +711,7 @@ export default class BattleManager {
               pkm.detail.hp.textContent = pokemon.life.toString()
             }
           } else if (field === "shield") {
-            if (value >= 0) {
+            if (pokemon.shield >= 0) {
               value > previousValue &&
                 this.displayBoost(Stat.SHIELD, pkm.positionX, pkm.positionY)
               pkm.shield = pokemon.shield
@@ -771,14 +785,17 @@ export default class BattleManager {
             if (pkm.lifebar) {
               pkm.lifebar.setTeam(value as IPokemonEntity["team"], this.flip)
             }
-          } else if (field === "index") {
-            pkm.index = value as IPokemonEntity["index"]
-            this.animationManager.animatePokemon(
-              pkm,
-              PokemonActionState.IDLE,
-              this.flip
-            )
-          } else if (field === "skill") {
+          }
+          // } else if (field === "index") {
+          //   pkm.index = value as IPokemonEntity["index"]
+          //   this.animationManager.animatePokemon(
+          //     pkm,
+          //     PokemonActionState.IDLE,
+          //     this.flip,
+          //     "index"
+          //   )
+          // }
+          else if (field === "skill") {
             pkm.skill = value as IPokemonEntity["skill"]
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
               pkm.detail.updateAbilityDescription(pkm.skill, pkm.stars, pkm.ap)
