@@ -349,6 +349,7 @@ export const MAX_PLAYERS_PER_GAME = 8
 export const DEFAULT_ATK_SPEED = 0.75
 export const DEFAULT_CRIT_CHANCE = 10
 export const DEFAULT_CRIT_POWER = 2
+export const PROJECTILE_SPEED = 4
 
 export const StageDuration: Record<number | "DEFAULT", number> = {
   1: 30,

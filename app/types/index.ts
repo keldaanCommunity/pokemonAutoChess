@@ -140,8 +140,7 @@ export enum Transfer {
   PICK_BERRY = "PICK_BERRY",
   SERVER_ANNOUNCEMENT = "SERVER_ANNOUNCEMENT",
   PRELOAD_MAPS = "PRELOAD_MAPS",
-  NPC_DIALOG = "NPC_DIALOG",
-  PROJECTILE_EVENT = "PROJECTILE_EVENT"
+  NPC_DIALOG = "NPC_DIALOG"
 }
 
 export enum AttackSprite {
@@ -744,11 +743,11 @@ export interface IBoardEvent {
   y: number
 }
 
-export interface IProjectileEvent {
+export interface IAttackEvent {
   simulationId: string
   pokemonId: string
   targetX: number
   targetY: number
-  timeScale: number
+  travelTime: number
   delay: number
 }

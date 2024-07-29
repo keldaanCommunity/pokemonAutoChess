@@ -6,11 +6,7 @@ import Count from "../../../../models/colyseus-models/count"
 import Player from "../../../../models/colyseus-models/player"
 import Status from "../../../../models/colyseus-models/status"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
-import {
-  IBoardEvent,
-  IPokemonEntity,
-  IProjectileEvent
-} from "../../../../types"
+import { IBoardEvent, IPokemonEntity } from "../../../../types"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import { Effect } from "../../../../types/enum/Effect"
@@ -27,7 +23,7 @@ import { Passive } from "../../../../types/enum/Passive"
 import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
 import { max } from "../../../../utils/number"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
-import AnimationManager from "../animation-manager"
+import AnimationManager, { getAttackTimings } from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import { displayAbility } from "./abilities-animations"
 import PokemonSprite from "./pokemon"
@@ -362,7 +358,7 @@ export default class BattleManager {
               this.animationManager.play(
                 pkm,
                 AnimationConfig[pkm.name as Pkm].ability,
-                { flip: this.flip, lock: true, repeat: 0, shrink: true }
+                { flip: this.flip, lock: true, repeat: 0 }
               )
               pkm.specialAttackAnimation(this.group, value)
             }
@@ -576,6 +572,14 @@ export default class BattleManager {
                   PokemonActionState.ATTACK,
                   this.flip
                 )
+                const { delayBeforeShoot, travelTime } =
+                  getAttackTimings(pokemon)
+                pkm.attackAnimation(
+                  pokemon.targetX,
+                  pokemon.targetY,
+                  delayBeforeShoot,
+                  travelTime
+                )
               }
             }
           } else if (field == "tripleAttackCount") {
@@ -592,22 +596,6 @@ export default class BattleManager {
             pkm.itemsContainer.updateCount(Item.MAGMARIZER, value)
           }
         }
-      }
-    }
-  }
-
-  displayProjectileEvent(event: IProjectileEvent) {
-    if (this.simulation?.id === event.simulationId && this.group) {
-      const pokemon = (this.group.getChildren() as PokemonSprite[]).find(
-        (p) => p.id === event.pokemonId
-      )
-      if (pokemon) {
-        pokemon.attackAnimation(
-          event.targetX,
-          event.targetY,
-          event.delay,
-          event.timeScale
-        )
       }
     }
   }

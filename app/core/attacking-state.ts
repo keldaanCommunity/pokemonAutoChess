@@ -1,7 +1,5 @@
 import Player from "../models/colyseus-models/player"
-import { IProjectileEvent, Transfer } from "../types"
-import delays from "../types/delays.json"
-import { FPS_POKEMON_ANIMS, PokemonActionState } from "../types/enum/Game"
+import { PokemonActionState } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Weather } from "../types/enum/Weather"
 import { distanceC } from "../utils/distance"
@@ -11,6 +9,7 @@ import Board from "./board"
 import { PokemonEntity } from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { AttackCommand } from "./simulation-command"
+import { getAttackTimings } from "../public/src/game/animation-manager"
 
 export default class AttackingState extends PokemonState {
   update(
@@ -86,24 +85,25 @@ export default class AttackingState extends PokemonState {
       } else {
         // BASIC ATTACK
         pokemon.count.attackCount++
-        const animationDuration =
-          delays[pokemon.index].t * (1000 / FPS_POKEMON_ANIMS)
-        const attackDuration = 1000 / pokemon.atkSpeed
-        const hitDuration = delays[pokemon.index].d * (1000 / FPS_POKEMON_ANIMS)
-        const timeScale =
-          animationDuration > attackDuration
-            ? animationDuration / attackDuration
-            : 1
-        const delay = hitDuration / timeScale || 200
-        pokemon.simulation.room.broadcast(Transfer.PROJECTILE_EVENT, {
-          pokemonId: pokemon.id,
-          simulationId: pokemon.simulation.id,
-          targetX: targetCoordinate.x,
-          targetY: targetCoordinate.y,
-          delay: delay
-        } as IProjectileEvent)
+        pokemon.targetX = targetCoordinate.x
+        pokemon.targetY = targetCoordinate.y
+        pokemon.orientation = board.orientation(
+          pokemon.positionX,
+          pokemon.positionY,
+          targetCoordinate.x,
+          targetCoordinate.y,
+          pokemon,
+          target
+        )
+
+        const { delayBeforeShoot, travelTime } = getAttackTimings(pokemon)
         pokemon.commands.push(
-          new AttackCommand(delay, pokemon, board, targetCoordinate)
+          new AttackCommand(
+            delayBeforeShoot + travelTime,
+            pokemon,
+            board,
+            targetCoordinate
+          )
         )
       }
     } else {

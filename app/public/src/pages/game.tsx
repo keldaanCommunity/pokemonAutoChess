@@ -1,7 +1,7 @@
 import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import { Client, Room } from "colyseus.js"
 import firebase from "firebase/compat/app"
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Navigate } from "react-router-dom"
 import { toast } from "react-toastify"
@@ -15,7 +15,6 @@ import {
   IDragDropItemMessage,
   IDragDropMessage,
   IPlayer,
-  IProjectileEvent,
   ISimplePlayer,
   Role,
   Transfer
@@ -382,15 +381,6 @@ export default function Game() {
           const g = getGameScene()
           if (g?.battle?.simulation?.id === event.simulationId) {
             g.battle.displayBoardEvent(event)
-          }
-        }
-      })
-
-      room.onMessage(Transfer.PROJECTILE_EVENT, (event: IProjectileEvent) => {
-        if (gameContainer.game) {
-          const g = getGameScene()
-          if (g?.battle?.simulation?.id === event.simulationId) {
-            g.battle.displayProjectileEvent(event)
           }
         }
       })
