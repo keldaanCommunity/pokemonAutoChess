@@ -329,12 +329,13 @@ export class OpenBoosterCommand extends Command<
       const user = this.state.users.get(client.auth.uid)
       if (!user) return
 
-      const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
-      if (!mongoUser || mongoUser.booster <= 0) return
+      const mongoUser = await UserMetadata.findOneAndUpdate(
+        { uid: client.auth.uid, booster: { $gt: 0 } },
+        { $inc: { booster: -1 } }
+      )
+      if (!mongoUser) return
 
       const NB_PER_BOOSTER = 10
-
-      mongoUser.booster -= 1
       const boosterContent: PkmWithConfig[] = []
 
       for (let i = 0; i < NB_PER_BOOSTER; i++) {
@@ -364,7 +365,7 @@ export class OpenBoosterCommand extends Command<
       mongoUser.save()
 
       // resync, db-authoritative
-      user.booster = mongoUser.booster
+      user.booster = mongoUser.booster - 1
       boosterContent.forEach((pkmWithConfig) => {
         const index = PkmIndex[pkmWithConfig.name]
         const pokemonConfig = user.pokemonCollection.get(index)
