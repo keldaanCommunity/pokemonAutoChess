@@ -1,12 +1,16 @@
-import { GameObjects } from "phaser"
 import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
+import { GameObjects } from "phaser"
 import { getMoveSpeed } from "../../../../core/pokemon-entity"
 import Simulation from "../../../../core/simulation"
 import Count from "../../../../models/colyseus-models/count"
 import Player from "../../../../models/colyseus-models/player"
 import Status from "../../../../models/colyseus-models/status"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
-import { IBoardEvent, IPokemonEntity } from "../../../../types"
+import {
+  IBoardEvent,
+  IPokemonEntity,
+  IProjectileEvent
+} from "../../../../types"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import { Effect } from "../../../../types/enum/Effect"
@@ -21,13 +25,13 @@ import {
 import { Item } from "../../../../types/enum/Item"
 import { Passive } from "../../../../types/enum/Passive"
 import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
+import { max } from "../../../../utils/number"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import { displayAbility } from "./abilities-animations"
 import PokemonSprite from "./pokemon"
 import PokemonDetail from "./pokemon-detail"
-import { max } from "../../../../utils/number"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -572,7 +576,6 @@ export default class BattleManager {
                   PokemonActionState.ATTACK,
                   this.flip
                 )
-                pkm.attackAnimation()
               }
             }
           } else if (field == "tripleAttackCount") {
@@ -589,6 +592,22 @@ export default class BattleManager {
             pkm.itemsContainer.updateCount(Item.MAGMARIZER, value)
           }
         }
+      }
+    }
+  }
+
+  displayProjectileEvent(event: IProjectileEvent) {
+    if (this.simulation?.id === event.simulationId && this.group) {
+      const pokemon = (this.group.getChildren() as PokemonSprite[]).find(
+        (p) => p.id === event.pokemonId
+      )
+      if (pokemon) {
+        pokemon.attackAnimation(
+          event.targetX,
+          event.targetY,
+          event.delay,
+          event.timeScale
+        )
       }
     }
   }

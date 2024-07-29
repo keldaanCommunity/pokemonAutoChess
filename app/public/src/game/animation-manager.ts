@@ -1,4 +1,5 @@
 import { AnimationComplete, AnimationType } from "../../../types/Animation"
+import delays from "../../../types/delays.json"
 import {
   FPS_POKEMON_ANIMS,
   Orientation,
@@ -15,7 +16,6 @@ import durations from "../../dist/client/assets/pokemons/durations.json"
 import indexList from "../../dist/client/assets/pokemons/indexList.json"
 import atlas from "../assets/atlas.json"
 import PokemonSprite from "./components/pokemon"
-import delays from "../../../types/delays.json"
 
 const FPS_EFFECTS = 20
 
