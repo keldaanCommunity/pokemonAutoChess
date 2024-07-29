@@ -83,6 +83,12 @@ export default function PreparationMenu() {
     }
   }, [nbUsersReady, users.length])
 
+  useEffect(() => {
+    if (gameMode !== GameMode.NORMAL) {
+      dispatch(toggleReady(true)) // automatically set users ready in non-classic game mode
+    }
+  }, [gameMode])
+
   const humans = users.filter((u) => !u.isBot)
   const isElligibleForELO =
     gameMode === GameMode.QUICKPLAY || users.filter((u) => !u.isBot).length >= 2
@@ -267,7 +273,7 @@ export default function PreparationMenu() {
     </p>
   )
 
-  const readyButton = gameMode === GameMode.NORMAL && users.length > 0 && (
+  const readyButton = (gameMode === GameMode.NORMAL || !isReady) && users.length > 0 && (
     <button
       className={cc("bubbly", "ready-button", isReady ? "green" : "orange")}
       onClick={() => {

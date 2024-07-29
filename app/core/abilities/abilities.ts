@@ -4361,9 +4361,9 @@ export class FlyingPressStrategy extends AbilityStrategy {
 
       pokemon.commands.push(
         new AbilityCommand(() => {
-          if (target && target.life > 0) {
+          if (destination.target && destination.target.life > 0) {
             const damage = 0.3 * pokemon.hp
-            target.handleSpecialDamage(
+            destination.target.handleSpecialDamage(
               damage,
               board,
               AttackType.SPECIAL,
