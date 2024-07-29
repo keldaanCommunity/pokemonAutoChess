@@ -13,6 +13,7 @@
   },
   "pool": {
     "regular": "Thường xuyên",
+    "additional": "Thêm vào",
     "regional": "Vùng miền"
   },
   "damage": {
