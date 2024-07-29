@@ -18,7 +18,6 @@ import {
 } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import {
-  FPS_POKEMON_ANIMS,
   Orientation,
   PokemonActionState,
   PokemonTint,
@@ -44,8 +43,6 @@ import Lifebar from "./life-bar"
 import PokemonDetail from "./pokemon-detail"
 import type { PokemonSpecialDetail } from "./pokemon-special-detail"
 import PowerBar from "./power-bar"
-import delays from "../../../../types/delays.json"
-import { getTimescale } from "../animation-manager"
 
 export default class PokemonSprite extends DraggableObject {
   evolution: Pkm
@@ -445,10 +442,7 @@ export default class PokemonSprite extends DraggableObject {
           x: coordinatesTarget[0],
           y: coordinatesTarget[1],
           ease: "Linear",
-          duration:
-            delays[this.index].d *
-              (1000 / FPS_POKEMON_ANIMS) *
-              getTimescale(this) || 1500,
+          duration: this.atkSpeed ? 1000 / this.atkSpeed : 1500,
           onComplete: () => {
             if (this.projectile) {
               this.projectile.destroy()
