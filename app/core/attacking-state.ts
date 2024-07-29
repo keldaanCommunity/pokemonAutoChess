@@ -1,16 +1,23 @@
 import Player from "../models/colyseus-models/player"
-import { IProjectileEvent, Transfer } from "../types"
-import delays from "../types/delays.json"
-import { FPS_POKEMON_ANIMS, PokemonActionState } from "../types/enum/Game"
+import { Effect } from "../types/enum/Effect"
+import {
+  AttackType,
+  FPS_POKEMON_ANIMS,
+  PokemonActionState
+} from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
+import { Passive } from "../types/enum/Passive"
+import { Pkm } from "../types/enum/Pokemon"
 import { Weather } from "../types/enum/Weather"
 import { distanceC } from "../utils/distance"
+import { max, min } from "../utils/number"
 import { chance } from "../utils/random"
 import { AbilityStrategies } from "./abilities/abilities"
 import Board from "./board"
 import { PokemonEntity } from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { AttackCommand } from "./simulation-command"
+import delays from "../types/delays.json"
 
 export default class AttackingState extends PokemonState {
   update(
@@ -94,16 +101,13 @@ export default class AttackingState extends PokemonState {
           animationDuration > attackDuration
             ? animationDuration / attackDuration
             : 1
-        const delay = hitDuration / timeScale || 200
-        pokemon.simulation.room.broadcast(Transfer.PROJECTILE_EVENT, {
-          pokemonId: pokemon.id,
-          simulationId: pokemon.simulation.id,
-          targetX: targetCoordinate.x,
-          targetY: targetCoordinate.y,
-          delay: delay
-        } as IProjectileEvent)
         pokemon.commands.push(
-          new AttackCommand(delay, pokemon, board, targetCoordinate)
+          new AttackCommand(
+            hitDuration / timeScale || 200,
+            pokemon,
+            board,
+            targetCoordinate
+          )
         )
       }
     } else {

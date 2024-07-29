@@ -5,12 +5,12 @@ import type MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import {
-  type AttackSprite,
   AttackSpriteScale,
+  instanceofPokemonEntity,
+  type AttackSprite,
   type Emotion,
   type IPokemon,
-  type IPokemonEntity,
-  instanceofPokemonEntity
+  type IPokemonEntity
 } from "../../../../types"
 import {
   DEFAULT_CRIT_CHANCE,
@@ -18,12 +18,13 @@ import {
 } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import {
-  type AttackType,
+  FPS_POKEMON_ANIMS,
   Orientation,
   PokemonActionState,
   PokemonTint,
-  type Rarity,
   SpriteType,
+  type AttackType,
+  type Rarity,
   type Team
 } from "../../../../types/enum/Game"
 import type { Passive } from "../../../../types/enum/Passive"
@@ -43,6 +44,8 @@ import Lifebar from "./life-bar"
 import PokemonDetail from "./pokemon-detail"
 import type { PokemonSpecialDetail } from "./pokemon-special-detail"
 import PowerBar from "./power-bar"
+import delays from "../../../../types/delays.json"
+import { getTimescale } from "../animation-manager"
 
 export default class PokemonSprite extends DraggableObject {
   evolution: Pkm
@@ -394,19 +397,14 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
-  attackAnimation(
-    targetX: number,
-    targetY: number,
-    delay: number,
-    timescale: number
-  ) {
+  attackAnimation() {
     if (this.projectile) {
       this.projectile.destroy()
     }
 
     const isRange = this.range > 1
-    const startX = isRange ? this.positionX : targetX
-    const startY = isRange ? this.positionY : targetY
+    const startX = isRange ? this.positionX : this.targetX
+    const startY = isRange ? this.positionY : this.targetY
 
     if (startX && startY) {
       const coordinates = transformAttackCoordinate(startX, startY, this.flip)
@@ -420,27 +418,24 @@ export default class PokemonSprite extends DraggableObject {
       const scale = AttackSpriteScale[this.attackSprite]
       this.projectile.setScale(scale[0], scale[1])
       this.projectile.setDepth(6)
+      this.projectile.anims.play(`${this.attackSprite}`)
 
       if (!isRange) {
-        this.projectile.anims.play({
-          key: this.attackSprite,
-          timeScale: timescale,
-          delay: delay
-        })
         this.projectile?.once(
           Phaser.Animations.Events.ANIMATION_COMPLETE,
           () => {
             this.projectile?.destroy()
           }
         )
-      } else {
-        this.projectile.anims.play({
-          key: this.attackSprite,
-          timeScale: timescale
-        })
+      } else if (
+        this.targetX &&
+        this.targetY &&
+        this.targetX !== -1 &&
+        this.targetY !== -1
+      ) {
         const coordinatesTarget = transformAttackCoordinate(
-          targetX,
-          targetY,
+          this.targetX,
+          this.targetY,
           this.flip
         )
 
@@ -450,7 +445,10 @@ export default class PokemonSprite extends DraggableObject {
           x: coordinatesTarget[0],
           y: coordinatesTarget[1],
           ease: "Linear",
-          duration: delay,
+          duration:
+            delays[this.index].d *
+              (1000 / FPS_POKEMON_ANIMS) *
+              getTimescale(this) || 1500,
           onComplete: () => {
             if (this.projectile) {
               this.projectile.destroy()
