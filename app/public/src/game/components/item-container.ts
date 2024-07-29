@@ -204,7 +204,7 @@ export default class ItemContainer extends DraggableObject {
     if (this.countText === undefined) {
       const textStyle = {
         fontSize: "16px",
-        fontFamily: "brandonGrotesque",
+        fontFamily: "BrandonGrotesqueBlack",
         color: "#FFFFFF",
         align: "center",
         strokeThickness: 2,
