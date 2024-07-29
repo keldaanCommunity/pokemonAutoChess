@@ -25,20 +25,8 @@ export default class PokemonState {
     board: Board,
     coordinates: { x: number; y: number }
   ) {
-    pokemon.targetX = coordinates.x
-    pokemon.targetY = coordinates.y
-
     const target = board.getValue(coordinates.x, coordinates.y)
     if (target) {
-      pokemon.orientation = board.orientation(
-        pokemon.positionX,
-        pokemon.positionY,
-        target.positionX,
-        target.positionY,
-        pokemon,
-        target
-      )
-
       let damage = pokemon.atk
       let physicalDamage = 0
       let specialDamage = 0

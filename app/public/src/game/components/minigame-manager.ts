@@ -363,6 +363,7 @@ export default class MinigameManager {
       this.animationManager.animatePokemon(
         pokemonAvatar,
         PokemonActionState.EMOTE,
+        false,
         false
       )
       pokemonAvatar.drawSpeechBubble(emote, false)

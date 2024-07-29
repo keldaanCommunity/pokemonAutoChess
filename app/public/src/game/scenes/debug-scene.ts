@@ -275,20 +275,14 @@ export class DebugScene extends Phaser.Scene {
   }
 
   addAttackAnim() {
-    this.pokemon?.attackAnimation(
-      this.pokemon.targetX || 0,
-      this.pokemon.targetY || 0,
-      0,
-      1
-    )
-    this.attackAnimInterval = setInterval(() => {
+    const attack = () =>
       this.pokemon?.attackAnimation(
         this.pokemon.targetX || 0,
         this.pokemon.targetY || 0,
         0,
-        1
+        1000
       )
-    }, 2000)
+    this.attackAnimInterval = setInterval(attack, 2000)
   }
 
   addAbilityAnim() {

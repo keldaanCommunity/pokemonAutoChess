@@ -29,6 +29,7 @@ import {
 import type { Passive } from "../../../../types/enum/Passive"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import type { Synergy } from "../../../../types/enum/Synergy"
+import { logger } from "../../../../utils/logger"
 import { clamp, min } from "../../../../utils/number"
 import { coinflip } from "../../../../utils/random"
 import { values } from "../../../../utils/schemas"
@@ -397,65 +398,54 @@ export default class PokemonSprite extends DraggableObject {
   attackAnimation(
     targetX: number,
     targetY: number,
-    delay: number,
-    timescale: number
+    delayBeforeShoot: number,
+    travelTime: number
   ) {
-    if (this.projectile) {
-      this.projectile.destroy()
-    }
-
     const isRange = this.range > 1
     const startX = isRange ? this.positionX : targetX
     const startY = isRange ? this.positionY : targetY
+    const LATENCY_COMPENSATION = 20
 
     if (startX && startY) {
       const coordinates = transformAttackCoordinate(startX, startY, this.flip)
-
-      this.projectile = this.scene.add.sprite(
+      const projectile = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
         "attacks",
         `${this.attackSprite}/000.png`
       )
       const scale = AttackSpriteScale[this.attackSprite]
-      this.projectile.setScale(scale[0], scale[1])
-      this.projectile.setDepth(6)
+      projectile.setScale(scale[0], scale[1]).setDepth(6).setVisible(false)
 
       if (!isRange) {
-        this.projectile.anims.play({
+        projectile.anims.play({
           key: this.attackSprite,
-          timeScale: timescale,
-          delay: delay
+          showOnStart: true,
+          delay: delayBeforeShoot - LATENCY_COMPENSATION
         })
-        this.projectile?.once(
-          Phaser.Animations.Events.ANIMATION_COMPLETE,
-          () => {
-            this.projectile?.destroy()
-          }
+        projectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () =>
+          projectile.destroy()
         )
       } else {
-        this.projectile.anims.play({
-          key: this.attackSprite,
-          timeScale: timescale
-        })
+        projectile.anims.play({ key: this.attackSprite })
         const coordinatesTarget = transformAttackCoordinate(
           targetX,
           targetY,
           this.flip
         )
 
-        // logger.debug(`Shooting a projectile to (${this.targetX},${this.targetY})`);
+        logger.debug(
+          `Shooting a projectile to (${this.targetX},${this.targetY}) travel time ${travelTime}ms delay ${delayBeforeShoot}ms`
+        )
         this.scene.tweens.add({
-          targets: this.projectile,
+          targets: projectile,
           x: coordinatesTarget[0],
           y: coordinatesTarget[1],
           ease: "Linear",
-          duration: delay,
-          onComplete: () => {
-            if (this.projectile) {
-              this.projectile.destroy()
-            }
-          }
+          duration: min(250)(travelTime),
+          delay: delayBeforeShoot - LATENCY_COMPENSATION,
+          onComplete: () => projectile.destroy(),
+          onStart: () => projectile.setVisible(true)
         })
       }
     }
@@ -465,10 +455,6 @@ export default class PokemonSprite extends DraggableObject {
     this.life = 0
     if (this.lifebar) {
       this.lifebar.setAmount(this.life)
-    }
-
-    if (this.projectile) {
-      this.projectile.destroy()
     }
 
     this.scene.add.tween({
@@ -534,7 +520,8 @@ export default class PokemonSprite extends DraggableObject {
     g.animationManager?.animatePokemon(
       this,
       PokemonActionState.EMOTE,
-      this.flip
+      this.flip,
+      false
     )
   }
 
@@ -544,7 +531,8 @@ export default class PokemonSprite extends DraggableObject {
     g.animationManager?.animatePokemon(
       this,
       PokemonActionState.EMOTE,
-      this.flip
+      this.flip,
+      false
     )
   }
 
@@ -554,7 +542,8 @@ export default class PokemonSprite extends DraggableObject {
     g.animationManager?.animatePokemon(
       this,
       PokemonActionState.EMOTE,
-      this.flip
+      this.flip,
+      false
     )
   }
 
