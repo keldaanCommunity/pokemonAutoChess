@@ -16,6 +16,8 @@
 
 # Changes to Synergies
 
+- Buff Fairy: ~~10/20/30/40~~ 15/30/50/70% additional special damage to attacks and shocks. Shocks damage are now a percentage of the incoming critical damage, 30% initially.
+
 # Changes to Items
 
 - Pokemonomicon no longer applies Wound

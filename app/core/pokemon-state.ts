@@ -34,7 +34,6 @@ export default class PokemonState {
       let totalTakenDamage = 0
 
       if (Math.random() * 100 < pokemon.critChance) {
-        pokemon.onCriticalAttack({ target, board })
         if (target.items.has(Item.ROCKY_HELMET) === false) {
           let opponentCritPower = pokemon.critPower
           if (target.effects.has(Effect.BATTLE_ARMOR)) {
@@ -46,6 +45,7 @@ export default class PokemonState {
           }
           damage = Math.round(damage * opponentCritPower)
         }
+        pokemon.onCriticalAttack({ target, board, damage })
       }
 
       if (pokemon.items.has(Item.FIRE_GEM)) {
@@ -80,13 +80,13 @@ export default class PokemonState {
 
       let additionalSpecialDamagePart = 0
       if (pokemon.effects.has(Effect.AROMATIC_MIST)) {
-        additionalSpecialDamagePart += 0.1
+        additionalSpecialDamagePart += 0.15
       } else if (pokemon.effects.has(Effect.FAIRY_WIND)) {
-        additionalSpecialDamagePart += 0.2
-      } else if (pokemon.effects.has(Effect.STRANGE_STEAM)) {
         additionalSpecialDamagePart += 0.3
+      } else if (pokemon.effects.has(Effect.STRANGE_STEAM)) {
+        additionalSpecialDamagePart += 0.5
       } else if (pokemon.effects.has(Effect.MOON_FORCE)) {
-        additionalSpecialDamagePart += 0.4
+        additionalSpecialDamagePart += 0.7
       }
 
       let isAttackSuccessful = true

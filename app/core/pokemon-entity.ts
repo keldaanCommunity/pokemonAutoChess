@@ -1176,28 +1176,27 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  onCriticalAttack({ target, board }: { target: PokemonEntity; board: Board }) {
+  onCriticalAttack({
+    target,
+    board,
+    damage
+  }: { target: PokemonEntity; board: Board; damage: number }) {
     target.count.crit++
 
     // proc fairy splash damage for both the attacker and the target
-    if (
-      target.fairySplashCooldown === 0 &&
-      (target.effects.has(Effect.FAIRY_WIND) ||
-        target.effects.has(Effect.STRANGE_STEAM) ||
-        target.effects.has(Effect.AROMATIC_MIST) ||
-        target.effects.has(Effect.MOON_FORCE))
-    ) {
-      let damage = 0
+    if (target.fairySplashCooldown === 0 && target.types.has(Synergy.FAIRY)) {
+      let shockDamageFactor = 0.3
       if (target.effects.has(Effect.AROMATIC_MIST)) {
-        damage = 10
+        shockDamageFactor += 0.15
       } else if (target.effects.has(Effect.FAIRY_WIND)) {
-        damage = 20
+        shockDamageFactor += 0.3
       } else if (target.effects.has(Effect.STRANGE_STEAM)) {
-        damage = 30
+        shockDamageFactor += 0.5
       } else if (target.effects.has(Effect.MOON_FORCE)) {
-        damage = 50
+        shockDamageFactor += 0.7
       }
 
+      const shockDamage = shockDamageFactor * damage
       target.count.fairyCritCount++
       target.fairySplashCooldown = 250
 
@@ -1211,7 +1210,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (distance <= 1) {
         // melee range
         this.handleSpecialDamage(
-          damage,
+          shockDamage,
           board,
           AttackType.SPECIAL,
           target,
