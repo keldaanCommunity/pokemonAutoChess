@@ -2232,7 +2232,8 @@
     "ARTIFICIAL": "ARTIFICIAL Pokémons give unique items and gain ATK, AP and SHIELD when holding items",
     "BABY": "BABY can bring you Pokemon Eggs to comfort you after a defeat",
     "LIGHT": "LIGHT reveal a spotlight on the battlefield. The unit standing in the spotlight at the start of combat gains unique bonuses",
-    "WILD": "WILD Pokémons get increased ATK, move faster, and have 25% chance to WOUND their target. For each WILD Pokémon STAR on board, get +1% chance to find WILD in your shops + 5% chance during PvE rounds",
+    "WILD": "WILD Pokémons get increased ATK, move faster, and have 25% chance to WOUND their target. For each WILD Pokémon STAR on board, get +1% chance to find WILD in your shops + 5% chance during PvE rounds{{additionalInfo}}",
+    "WILD_ADDITIONAL": "\n\nCurrent chance to find a WILD pokemon: {{wildChance}}%",
     "AMORPHOUS": "AMORPHOUS Pokémons are extremely flexible and lack their own shape. Your team gains HP and ATK_SPEED by activating a wide variety of synergies."
   },
   "title": {

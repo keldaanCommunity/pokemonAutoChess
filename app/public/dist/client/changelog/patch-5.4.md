@@ -21,10 +21,13 @@
 # Gameplay
 
 - Extra PP generated when reaching max PP are now saved and restored after casting ability
+- Attacks and abilities now have a frame delay specific to each pokemon before damage and effects are applied
+- Projectiles now have travel time
 
 # UI
 
-- Rework the way fighting animations are handled. Attacks and abilities now have a frame delay before damage and effects are applied.
+- Rework all fighting animations 
+- Show current Wild pokemon chance in synergy description ingame
 
 # Bugfix
 

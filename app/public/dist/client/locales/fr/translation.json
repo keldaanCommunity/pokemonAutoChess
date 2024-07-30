@@ -2232,7 +2232,8 @@
     "ARTIFICIAL": "Les pokémons ARTIFICIAL donnent des objets uniques et gagnent de l'ATK, de la AP et du SHIELD lorsqu'ils portent des objets.",
     "BABY": "Les pokémons BABY peuvent vous apporter des œufs Pokémon pour vous réconforter après une défaite",
     "LIGHT": "La lumière révèle un projecteur sur le champ de bataille. L’unité sous les projecteurs au début du combat bénéficie de bonus uniques.",
-    "WILD": "Les pokémons WILD gagnent en ATK et vitesse de déplacement, et ont 25% de chance d'infliger WOUND. Pour chaque STAR de vos pokémons WILD sur le plateau, obtenez +1% de chance de trouver des pokémons WILD dans le magasin + 5% de chance durant les rounds PvE.",
+    "WILD": "Les pokémons WILD gagnent en ATK et vitesse de déplacement, et ont 25% de chance d'infliger WOUND. Pour chaque STAR de vos pokémons WILD sur le plateau, obtenez +1% de chance de trouver des pokémons WILD dans le magasin + 5% de chance durant les rounds PvE.{{additionalInfo}}",
+    "WILD_ADDITIONAL": "\n\nChances actuelles de pokémon WILD: {{wildChance}}%",
     "AMORPHOUS": "Les Pokémons AMORPHOUS peuvent prendre de nombreuses formes. Votre équipe gagne des HP et de la ATK_SPEED en activant un grand nombre de synergies différentes."
   },
   "title": {
