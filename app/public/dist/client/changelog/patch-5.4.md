@@ -11,6 +11,8 @@
 - Changed Poochyena line: Growl now only flinch adjacent enemies, but reduce their ATK by 3 ; HP 70/160 → 80/190
 - Rework Torkoal ability: Smoke Screen no longer cause Burn and Armor Reduction, but smoke 3 cells in the backline to reduce their accuracy by 50%
 - Nerf Florges Fairy Wind: ~~10/20/30~~ 5/10/20 PP, AP scaling ~~0.5~~ 1
+- Nerf Groudon: SpeDef 5 → 3 ; Nerf Primal Groudon Def 8 → 6 SpeDef 8 → 3
+- Buff Primal Kyogre: PP 120 → 100
 
 # Changes to Synergies
 
