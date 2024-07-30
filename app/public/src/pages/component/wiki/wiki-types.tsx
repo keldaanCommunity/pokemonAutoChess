@@ -79,7 +79,7 @@ export function WikiType(props: { type: Synergy }) {
       <h2>
         <SynergyIcon type={props.type} /> {t(`synergy.${props.type}`)}
       </h2>
-      <p>{addIconsToDescription(t(`synergy_description.${props.type}`))}</p>
+      <p>{addIconsToDescription(t(`synergy_description.${props.type}`, { additionalInfo: "" }))}</p>
       {SynergyEffects[props.type].map((effect, i) => {
         return (
           <div

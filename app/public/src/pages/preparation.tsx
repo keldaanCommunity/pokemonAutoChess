@@ -136,9 +136,6 @@ export default function Preparation() {
 
       r.state.listen("gameMode", (value, previousValue) => {
         dispatch(setGameMode(value))
-        if (value !== GameMode.NORMAL) {
-          dispatch(toggleReady(true)) // automatically set users ready in non-classic game mode
-        }
       })
 
       r.state.users.onAdd((u) => {

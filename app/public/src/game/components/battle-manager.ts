@@ -1,5 +1,5 @@
-import { GameObjects } from "phaser"
 import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
+import { GameObjects } from "phaser"
 import { getMoveSpeed } from "../../../../core/pokemon-entity"
 import Simulation from "../../../../core/simulation"
 import Count from "../../../../models/colyseus-models/count"
@@ -21,13 +21,13 @@ import {
 import { Item } from "../../../../types/enum/Item"
 import { Passive } from "../../../../types/enum/Passive"
 import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
+import { max } from "../../../../utils/number"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
-import AnimationManager from "../animation-manager"
+import AnimationManager, { getAttackTimings } from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import { displayAbility } from "./abilities-animations"
 import PokemonSprite from "./pokemon"
 import PokemonDetail from "./pokemon-detail"
-import { max } from "../../../../utils/number"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -358,7 +358,7 @@ export default class BattleManager {
               this.animationManager.play(
                 pkm,
                 AnimationConfig[pkm.name as Pkm].ability,
-                { flip: this.flip, lock: true, repeat: 0, shrink: true }
+                { flip: this.flip, lock: true, repeat: 0 }
               )
               pkm.specialAttackAnimation(this.group, value)
             }
@@ -572,7 +572,14 @@ export default class BattleManager {
                   PokemonActionState.ATTACK,
                   this.flip
                 )
-                pkm.attackAnimation()
+                const { delayBeforeShoot, travelTime } =
+                  getAttackTimings(pokemon)
+                pkm.attackAnimation(
+                  pokemon.targetX,
+                  pokemon.targetY,
+                  delayBeforeShoot,
+                  travelTime
+                )
               }
             }
           } else if (field == "tripleAttackCount") {

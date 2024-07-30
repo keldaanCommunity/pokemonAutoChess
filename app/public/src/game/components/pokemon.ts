@@ -5,12 +5,12 @@ import type MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import {
-  AttackSpriteScale,
-  instanceofPokemonEntity,
   type AttackSprite,
+  AttackSpriteScale,
   type Emotion,
   type IPokemon,
-  type IPokemonEntity
+  type IPokemonEntity,
+  instanceofPokemonEntity
 } from "../../../../types"
 import {
   DEFAULT_CRIT_CHANCE,
@@ -18,18 +18,18 @@ import {
 } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import {
-  FPS_POKEMON_ANIMS,
+  type AttackType,
   Orientation,
   PokemonActionState,
   PokemonTint,
-  SpriteType,
-  type AttackType,
   type Rarity,
+  SpriteType,
   type Team
 } from "../../../../types/enum/Game"
 import type { Passive } from "../../../../types/enum/Passive"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import type { Synergy } from "../../../../types/enum/Synergy"
+import { logger } from "../../../../utils/logger"
 import { clamp, min } from "../../../../utils/number"
 import { coinflip } from "../../../../utils/random"
 import { values } from "../../../../utils/schemas"
@@ -44,8 +44,6 @@ import Lifebar from "./life-bar"
 import PokemonDetail from "./pokemon-detail"
 import type { PokemonSpecialDetail } from "./pokemon-special-detail"
 import PowerBar from "./power-bar"
-import delays from "../../../../types/delays.json"
-import { getTimescale } from "../animation-manager"
 
 export default class PokemonSprite extends DraggableObject {
   evolution: Pkm
@@ -397,63 +395,57 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
-  attackAnimation() {
-    if (this.projectile) {
-      this.projectile.destroy()
-    }
-
+  attackAnimation(
+    targetX: number,
+    targetY: number,
+    delayBeforeShoot: number,
+    travelTime: number
+  ) {
     const isRange = this.range > 1
-    const startX = isRange ? this.positionX : this.targetX
-    const startY = isRange ? this.positionY : this.targetY
+    const startX = isRange ? this.positionX : targetX
+    const startY = isRange ? this.positionY : targetY
+    const LATENCY_COMPENSATION = 20
 
     if (startX && startY) {
       const coordinates = transformAttackCoordinate(startX, startY, this.flip)
-
-      this.projectile = this.scene.add.sprite(
+      const projectile = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
         "attacks",
         `${this.attackSprite}/000.png`
       )
       const scale = AttackSpriteScale[this.attackSprite]
-      this.projectile.setScale(scale[0], scale[1])
-      this.projectile.setDepth(6)
-      this.projectile.anims.play(`${this.attackSprite}`)
+      projectile.setScale(scale[0], scale[1]).setDepth(6).setVisible(false)
 
       if (!isRange) {
-        this.projectile?.once(
-          Phaser.Animations.Events.ANIMATION_COMPLETE,
-          () => {
-            this.projectile?.destroy()
-          }
+        projectile.anims.play({
+          key: this.attackSprite,
+          showOnStart: true,
+          delay: delayBeforeShoot - LATENCY_COMPENSATION
+        })
+        projectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () =>
+          projectile.destroy()
         )
-      } else if (
-        this.targetX &&
-        this.targetY &&
-        this.targetX !== -1 &&
-        this.targetY !== -1
-      ) {
+      } else {
+        projectile.anims.play({ key: this.attackSprite })
         const coordinatesTarget = transformAttackCoordinate(
-          this.targetX,
-          this.targetY,
+          targetX,
+          targetY,
           this.flip
         )
 
-        // logger.debug(`Shooting a projectile to (${this.targetX},${this.targetY})`);
+        logger.debug(
+          `Shooting a projectile to (${this.targetX},${this.targetY}) travel time ${travelTime}ms delay ${delayBeforeShoot}ms`
+        )
         this.scene.tweens.add({
-          targets: this.projectile,
+          targets: projectile,
           x: coordinatesTarget[0],
           y: coordinatesTarget[1],
           ease: "Linear",
-          duration:
-            delays[this.index].d *
-              (1000 / FPS_POKEMON_ANIMS) *
-              getTimescale(this) || 1500,
-          onComplete: () => {
-            if (this.projectile) {
-              this.projectile.destroy()
-            }
-          }
+          duration: min(250)(travelTime),
+          delay: delayBeforeShoot - LATENCY_COMPENSATION,
+          onComplete: () => projectile.destroy(),
+          onStart: () => projectile.setVisible(true)
         })
       }
     }
@@ -463,10 +455,6 @@ export default class PokemonSprite extends DraggableObject {
     this.life = 0
     if (this.lifebar) {
       this.lifebar.setAmount(this.life)
-    }
-
-    if (this.projectile) {
-      this.projectile.destroy()
     }
 
     this.scene.add.tween({
@@ -532,7 +520,8 @@ export default class PokemonSprite extends DraggableObject {
     g.animationManager?.animatePokemon(
       this,
       PokemonActionState.EMOTE,
-      this.flip
+      this.flip,
+      false
     )
   }
 
@@ -542,7 +531,8 @@ export default class PokemonSprite extends DraggableObject {
     g.animationManager?.animatePokemon(
       this,
       PokemonActionState.EMOTE,
-      this.flip
+      this.flip,
+      false
     )
   }
 
@@ -552,7 +542,8 @@ export default class PokemonSprite extends DraggableObject {
     g.animationManager?.animatePokemon(
       this,
       PokemonActionState.EMOTE,
-      this.flip
+      this.flip,
+      false
     )
   }
 
