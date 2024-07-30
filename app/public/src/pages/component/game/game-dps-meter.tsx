@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { useAppSelector } from "../../../hooks"
+import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { preferences, savePreferences } from "../../../preferences"
 import { getAvatarSrc } from "../../../utils"
 import GamePlayerDpsMeter from "./game-player-dps-meter"
@@ -11,13 +11,7 @@ import "./game-dps-meter.css"
 
 export default function GameDpsMeter() {
   const { t } = useTranslation()
-  const opponentName = useAppSelector(
-    (state) => state.game.currentPlayerOpponentName
-  )
-  const opponentAvatar = useAppSelector(
-    (state) => state.game.currentPlayerOpponentAvatar
-  )
-
+  const currentPlayer = useAppSelector(selectCurrentPlayer)
   const teamIndex = useAppSelector(
     (state) => state.game.currentSimulationTeamIndex
   )
@@ -26,9 +20,14 @@ export default function GameDpsMeter() {
   const myDpsMeter = teamIndex === 0 ? blueDpsMeter : redDpsMeter
   const opponentDpsMeter = teamIndex === 0 ? redDpsMeter : blueDpsMeter
 
-  const avatar = useAppSelector((state) => state.game.currentPlayerAvatar)
-  const name = useAppSelector((state) => state.game.currentPlayerName)
   const [isOpen, setOpen] = useState(preferences.showDpsMeter)
+
+  if (!currentPlayer) return null
+
+  const name = currentPlayer.name
+  const avatar = currentPlayer.avatar
+  const opponentName = currentPlayer.opponentName
+  const opponentAvatar = currentPlayer.opponentAvatar
 
   function toggleOpen() {
     setOpen(!isOpen)
@@ -49,9 +48,8 @@ export default function GameDpsMeter() {
       >
         <img src="/assets/ui/dpsmeter.svg" />
       </div>
-      <div
+      {isOpen && <div
         className="my-container hidden-scrollable game-dps-meter"
-        hidden={!isOpen}
       >
         <header>
           <div>
@@ -110,7 +108,7 @@ export default function GameDpsMeter() {
             <GamePlayerHpsMeter dpsMeter={opponentDpsMeter} />
           </TabPanel>
         </Tabs>
-      </div>
+      </div>}
     </>
   )
 }
