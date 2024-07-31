@@ -365,7 +365,8 @@
     "FLYING_PRESS": "Plancha Voladora",
     "DRAIN_PUNCH": "Puño Drenaje",
     "GRAVITY": "Gravedad",
-    "DIRE_CLAW": "Garra Nociva"
+    "DIRE_CLAW": "Garra Nociva",
+    "FAKE_OUT": "Sorpresa"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1525,7 +1526,8 @@
     "FIRE_LASH": "Hace [120,SP] SPECIAL y aplica ARMOR_REDUCTION por 4 segundos",
     "FAIRY_LOCK": "Esparce [90,SP] SPECIAL equitativamente entre el objetivo y los enemigos adyacentes. El objetivo es LOCKED por 5 segundos",
     "DRAIN_PUNCH": "El próximo ataque inflige [100,SP]% de SPECIAL adicional y restaura [200,SP]% HP del daño infligido.",
-    "GRAVITY": "El equipo enemigo es LOCKED por [2,SP] segundos"
+    "GRAVITY": "El equipo enemigo es LOCKED por [2,SP] segundos",
+    "FAKE_OUT": "Inflige [50,100,150,SP] SPECIAL al objetivo, después el usuario pierde el 30% de AP. El objetivo es FLINCH por 3 segundos a menos que el usuario tenga AP negativo"
   },
   "effect": {
     "INGRAIN": "Arraigo",
@@ -2229,8 +2231,11 @@
     "SOUND": "Los Pokémon SOUND emiten un grito cuando usan sus habilidades, lo que despierta a los aliados dormidos y les otorga estadísticas adicionales.",
     "ARTIFICIAL": "Los pokémon ARTIFICIAL dan objetos únicos y ganan ATK, AP y SHIELD cuando tienen objetos.",
     "BABY": "Los BABY pueden traerte huevos de Pokémon para consolarte después de una derrota",
+    "BABY_EGG_CHANCE": "Posibilidades actuales de encontrar un Huevo después de una derrota: {{eggChance}}%",
+    "BABY_GOLDEN_EGG_CHANCE": "Posibilidades actuales de encontrar un Huevo de Oro después de una derrota: {{eggChance}}%",
     "LIGHT": "La LIGHT revela un foco en el campo de batalla. La unidad que se encuentra en el centro de atención al comienzo del combate obtiene bonificaciones únicas.",
     "WILD": "Los Pokémon WILD obtienen un mayor ATK, se mueven más rápido y tienen un 25% de posibilidades de WOUND a su objetivo. Por cada STAR de tus pokémon WILD en el tablero, obtén +1% de probabilidad de encontrar WILD en tus tiendas + 5% de probabilidad durante las rondas JCE.{{additionalInfo}}",
+    "WILD_ADDITIONAL": "Posibilidades actuales de encontrar un pokémon WILD : {{wildChance}}%",
     "AMORPHOUS": "Los Pokémon AMOPRHOUS son extremadamente flexibles y carecen de una forma propia. Tu equipo gana HP y ATK_SPEED al activar una gran variedad de sinergias."
   },
   "title": {
@@ -2618,6 +2623,10 @@
   "passive_income_hint": "Cada etapa, gana 5 de oro + 1 de oro extra si ganaste la batalla anterior.",
   "victory_income_hint": "Obtenga 1 bonificación de oro por cada racha de victorias o derrotas, hasta 5 bonificaciones de oro.",
   "additional_income_hint": "Obtenga 1 GOLD extra por 10 de GOLD ahorrado, hasta un máximo de 5 GOLD con 50 de GOLD ahorrado.",
+  "victory_count_one": "{{count}} victoria",
+  "victory_count_other": "{{count}} victorias",
+  "defeat_count_one": "{{count}} derrota",
+  "defeat_count_other": "{{count}} derrotas",
   "options": "Opciones",
   "sound": "Sonido",
   "interface": "Interfaz",
@@ -2652,7 +2661,7 @@
   "pve_stages": "Etapas JcE",
   "carousel_stages": "Etapas del carrusel",
   "additional_picks": "Selecciones adicionales",
-  "regional_pokemons": "Pokemon regionales",
+  "regional_pokemons": "Pokemon Regionales",
   "unique_picks": "Selecciones míticas",
   "stages": "Etapas",
   "waiting_final_rank": "Esperando resultados de otras batallas...",
@@ -2786,7 +2795,7 @@
   "super_ancients": "Super Ancianos",
   "legendary_giants": "Gigantes legendarios",
   "pokemons_of_myth": "Pokémon Míticos",
-  "community_translations": "Las traducciones son gestionadas por la comunidad. Si desea agregar o\r\n              ayuda a mejorar una traducción, dirígete a",
+  "community_translations": "Las traducciones son gestionadas por la comunidad. Si desea agregar o\r\n              ayudar a mejorar una traducción, dirígete a",
   "no_emotions_available": "No hay emociones disponibles",
   "finished_preloading": "Precarga terminada",
   "preloading_start": "Precargando juego...",
