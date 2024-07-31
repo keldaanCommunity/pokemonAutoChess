@@ -139,7 +139,8 @@ export enum Transfer {
   USER_PROFILE = "USER_PROFILE",
   PICK_BERRY = "PICK_BERRY",
   PRELOAD_MAPS = "PRELOAD_MAPS",
-  NPC_DIALOG = "NPC_DIALOG"
+  NPC_DIALOG = "NPC_DIALOG",
+  AUTH_FAILED = "AUTH_FAILED"
 }
 
 export enum AttackSprite {
@@ -262,6 +263,7 @@ export interface IDragDropCombineMessage {
 }
 
 export interface ICustomLobbyState extends Schema {
+  ccu: number
   messages: ArraySchema<Message>
   users: MapSchema<LobbyUser>
   leaderboard: ILeaderboardInfo[]
@@ -635,7 +637,7 @@ export interface IPreparationMetadata {
   password: string | null
   noElo: boolean
   type: "preparation"
-  gameStarted: boolean
+  gameStartedAt: string | null
   minRank: string | null
   gameMode: GameMode
   whitelist: string[]

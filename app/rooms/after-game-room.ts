@@ -42,6 +42,10 @@ export default class AfterGameRoom extends Room<AfterGameState> {
         this.state.players.set(player.id, player)
       })
     }
+    this.clock.setTimeout(() => {
+      // dispose the room automatically after 120 second
+      this.disconnect()
+    }, 120 * 1000)
   }
 
   async onAuth(client: Client, options, request) {

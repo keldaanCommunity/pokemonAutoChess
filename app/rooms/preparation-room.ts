@@ -61,10 +61,8 @@ export default class PreparationRoom extends Room<PreparationState> {
     updateLobby(this)
   }
 
-  async setGameStarted(gameStarted: boolean) {
-    await this.setMetadata(<IPreparationMetadata>{
-      gameStarted: gameStarted
-    })
+  async setGameStarted(gameStartedAt: string) {
+    await this.setMetadata(<IPreparationMetadata>{ gameStartedAt })
   }
 
   onCreate(options: {
@@ -79,6 +77,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     tournamentId?: string
     bracketId?: string
   }) {
+    logger.info("create preparation room")
     // logger.debug(options);
     //logger.info(`create ${options.roomName}`)
 
@@ -99,7 +98,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       playersInfo: [],
       tournamentId: options.tournamentId ?? null,
       bracketId: options.bracketId ?? null,
-      gameStarted: false,
+      gameStartedAt: null,
       password: null,
       type: "preparation"
     })
@@ -286,14 +285,11 @@ export default class PreparationRoom extends Room<PreparationState> {
       }
     })
 
-    this.presence.subscribe("server-announcement", (message: string) => {
-      this.state.addMessage({
-        author: "Server Announcement",
-        authorId: "server",
-        payload: message,
-        avatar: "0294/Joyous"
-      })
-    })
+    this.onServerAnnouncement = this.onServerAnnouncement.bind(this)
+    this.presence.subscribe("server-announcement", this.onServerAnnouncement)
+
+    this.onGameStart = this.onGameStart.bind(this)
+    this.presence.subscribe("game-started", this.onGameStart)
   }
 
   async onAuth(client: Client, options: any, request: any) {
@@ -311,7 +307,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       ).length
       if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME) {
         throw "Room is full"
-      } else if (this.state.gameStarted) {
+      } else if (this.state.gameStartedAt != null) {
         throw "Game already started"
       } else if (!user.displayName) {
         throw "No display name"
@@ -363,7 +359,26 @@ export default class PreparationRoom extends Room<PreparationState> {
   onDispose() {
     //logger.info("Dispose preparation room")
     this.dispatcher.stop()
-    this.presence.unsubscribe("server-announcement")
+    this.presence.unsubscribe("server-announcement", this.onServerAnnouncement)
+    this.presence.unsubscribe("game-started", this.onGameStart)
+  }
+
+  onServerAnnouncement(message: string) {
+    this.state.addMessage({
+      author: "Server Announcement",
+      authorId: "server",
+      payload: message,
+      avatar: "0294/Joyous"
+    })
+  }
+
+  onGameStart({ gameId, preparationId }: { gameId: string; preparationId: string }) {
+    if (this.roomId === preparationId) {
+      this.lock()
+      this.setGameStarted(new Date().toISOString())
+      //logger.debug("game start", game.roomId)
+      this.broadcast(Transfer.GAME_START, gameId)
+    }
   }
 
   status() {

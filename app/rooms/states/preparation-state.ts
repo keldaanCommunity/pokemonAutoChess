@@ -8,7 +8,7 @@ import { GameMode } from "../../types/enum/Game"
 export interface IPreparationState {
   users: MapSchema<GameUser>
   messages: ArraySchema<Message>
-  gameStarted: boolean
+  gameStartedAt: string | null
   ownerId: string
   ownerName: string
   name: string
@@ -22,7 +22,7 @@ export default class PreparationState
 {
   @type([Message]) messages = new ArraySchema<Message>()
   @type({ map: GameUser }) users = new MapSchema<GameUser>()
-  @type("boolean") gameStarted: boolean
+  @type("string") gameStartedAt: string | null
   @type("string") ownerId: string
   @type("string") ownerName: string
   @type("string") name: string
@@ -46,7 +46,7 @@ export default class PreparationState
     this.ownerId =
       params.gameMode === GameMode.NORMAL ? params.ownerId ?? "" : ""
     this.name = params.roomName
-    this.gameStarted = false
+    this.gameStartedAt = null
     this.ownerName = ""
     this.password = null
     this.noElo = params.noElo ?? false
