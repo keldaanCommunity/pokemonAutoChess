@@ -2232,7 +2232,7 @@
     "ARTIFICIAL": "Los pokémon ARTIFICIAL dan objetos únicos y ganan ATK, AP y SHIELD cuando tienen objetos.",
     "BABY": "Los BABY pueden traerte huevos de Pokémon para consolarte después de una derrota",
     "BABY_EGG_CHANCE": "Posibilidades actuales de encontrar un Huevo después de una derrota: {{eggChance}}%",
-    "BABY_GOLDEN_EGG_CHANCE": "Posibilidades actuales de encontrar un Huevo de Oro después de una derrota: {{eggChance}}%",
+    "BABY_GOLDEN_EGG_CHANCE": "Posibilidades actuales de encontrar un Huevo Oro después de una derrota: {{eggChance}}%",
     "LIGHT": "La LIGHT revela un foco en el campo de batalla. La unidad que se encuentra en el centro de atención al comienzo del combate obtiene bonificaciones únicas.",
     "WILD": "Los Pokémon WILD obtienen un mayor ATK, se mueven más rápido y tienen un 25% de posibilidades de WOUND a su objetivo. Por cada STAR de tus pokémon WILD en el tablero, obtén +1% de probabilidad de encontrar WILD en tus tiendas + 5% de probabilidad durante las rondas JCE.{{additionalInfo}}",
     "WILD_ADDITIONAL": "Posibilidades actuales de encontrar un pokémon WILD : {{wildChance}}%",
