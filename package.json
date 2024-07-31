@@ -31,7 +31,7 @@
     "build-client": "node esbuild.js --build",
     "build-server": "tsc",
     "download-music": "rimraf -rf ./app/public/src/assets/musics && git clone https://github.com/keldaanCommunity/pokemonAutoChessMusic ./app/public/src/assets/musics",
-    "build": "npm run assetpack && npm run build-client && npm run build-server",
+    "build": "npm run build-client && npm run build-server",
     "start": "node ./app/public/dist/server/app/index.js",
     "add-bot": "node ./app/public/dist/server/db-commands/populate-bot.js",
     "monitor-bot": "node ./app/public/dist/server/scheduled/monitor-bot.js",
