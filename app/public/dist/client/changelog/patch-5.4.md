@@ -13,6 +13,7 @@
 - Nerf Florges Fairy Wind: ~~10/20/30~~ 5/10/20 PP, AP scaling ~~0.5~~ 1
 - Nerf Groudon: SpeDef 5 → 3 ; Nerf Primal Groudon Def 8 → 6 SpeDef 8 → 3
 - Buff Primal Kyogre: PP 120 → 100
+- Change Seed Flare (Shaymin): now deals damage in a 5-cell radius around Shaymin
 
 # Changes to Synergies
 

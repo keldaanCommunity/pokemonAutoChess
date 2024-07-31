@@ -2085,10 +2085,10 @@ export class SeedFlareStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = 30
 
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team) {
-        tg.addSpecialDefense(-2, pokemon, 0, false)
-        tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    board.getCellsInRadius(pokemon.positionX, pokemon.positionY, 5).forEach((cell) => {
+      if (cell.value && pokemon.team !== cell.value.team) {
+        cell.value.addSpecialDefense(-2, pokemon, 0, false)
+        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
       }
     })
   }
