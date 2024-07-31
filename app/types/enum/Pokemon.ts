@@ -2451,7 +2451,6 @@ export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
   [Pkm.ZORUA]: [Pkm.HISUI_ZORUA],
   [Pkm.GRIMER]: [Pkm.ALOLAN_GRIMER],
   [Pkm.NIDORANF]: [Pkm.NIDORANM],
-  [Pkm.KLEFKI]: [Pkm.KLEFKI],
   [Pkm.SNEASEL]: [Pkm.HISUI_SNEASEL]
 }
 
