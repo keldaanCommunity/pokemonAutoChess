@@ -2553,7 +2553,7 @@
   "edit": "Modifier",
   "delete": "Supprimer",
   "load_bot_with_url": "Charger le bot avec l'URL",
-  "load": "Charger",
+  "load": "Laden",
   "url_created": "URL créée !",
   "export_hint": " Vous pouvez exporter votre travail actuel en copiant-collant les données suivantes. Vous pouvez ensuite importer les données du bot plus tard.",
   "bot_ready_submission": "Si vous pensez que votre bot est prêt, vous pouvez soumettre votre bot à la communauté Discord. Votre bot sera examiné dans le canal discord #bot-creation.",
