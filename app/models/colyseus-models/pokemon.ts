@@ -2236,7 +2236,7 @@ export class HisuiSliggoo extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 2
-  evolution = Pkm.GOODRA
+  evolution = Pkm.HISUI_GOODRA
   hp = 160
   atk = 12
   def = 7
