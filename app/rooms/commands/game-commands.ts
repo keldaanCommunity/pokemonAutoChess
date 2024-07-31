@@ -1153,7 +1153,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           )
         }
 
-        if (isPVE && player.getLastBattleResult() === BattleResult.WIN) {
+        if (isPVE && player.history.at(-1)?.result === BattleResult.WIN) {
           while (player.pveRewards.length > 0) {
             const reward = player.pveRewards.pop()!
             player.items.push(reward)
@@ -1172,7 +1172,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           shinyChance = 0,
           nbMaxEggs = 0
         if (
-          player.getLastBattleResult() == BattleResult.DEFEAT &&
+          player.history.at(-1)?.result === BattleResult.DEFEAT &&
           (player.effects.has(Effect.BREEDER) ||
             player.effects.has(Effect.GOLDEN_EGGS))
         ) {
@@ -1183,7 +1183,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             : 0
         }
         if (
-          player.getLastBattleResult() == BattleResult.DEFEAT &&
+          player.history.at(-1)?.result === BattleResult.DEFEAT &&
           player.effects.has(Effect.HATCHER)
         ) {
           eggChance = 0.25 * (player.streak + 1)
