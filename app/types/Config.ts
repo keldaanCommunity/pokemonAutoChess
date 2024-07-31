@@ -353,8 +353,15 @@ export const PROJECTILE_SPEED = 4
 
 export const StageDuration: Record<number | "DEFAULT", number> = {
   1: 30,
-  10: 45,
-  20: 45,
+  3: 40,
+  5: 40,
+  8: 40,
+  9: 40,
+  10: 50,
+  11: 40,
+  15: 40,
+  19: 40,
+  20: 50,
   DEFAULT: 30
 }
 export const FIGHTING_PHASE_DURATION = 40000

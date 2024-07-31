@@ -5199,7 +5199,7 @@ export class Groudon extends Pokemon {
   hp = 300
   atk = 30
   def = 5
-  speDef = 5
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.EARTHQUAKE
@@ -6338,8 +6338,8 @@ export class PrimalGroudon extends Pokemon {
   stars = 4
   hp = 400
   atk = 30
-  def = 8
-  speDef = 8
+  def = 6
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.EARTHQUAKE
@@ -6362,7 +6362,7 @@ export class PrimalKyogre extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 120
+  maxPP = 100
   range = 3
   skill = Ability.ORIGIN_PULSE
   passive = Passive.RAIN

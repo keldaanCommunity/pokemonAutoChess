@@ -11,8 +11,13 @@
 - Changed Poochyena line: Growl now only flinch adjacent enemies, but reduce their ATK by 3 ; HP 70/160 → 80/190
 - Rework Torkoal ability: Smoke Screen no longer cause Burn and Armor Reduction, but smoke 3 cells in the backline to reduce their accuracy by 50%
 - Nerf Florges Fairy Wind: ~~10/20/30~~ 5/10/20 PP, AP scaling ~~0.5~~ 1
+- Nerf Groudon: SpeDef 5 → 3 ; Nerf Primal Groudon Def 8 → 6 SpeDef 8 → 3
+- Buff Primal Kyogre: PP 120 → 100
+- Change Seed Flare (Shaymin): now deals damage in a 5-cell radius around Shaymin
 
 # Changes to Synergies
+
+- Buff Fairy: ~~10/20/30/40~~ 15/30/50/70% additional special damage to attacks and shocks. Shocks damage are now a percentage of the incoming critical damage, 30% initially.
 
 # Changes to Items
 
@@ -23,6 +28,7 @@
 - Extra PP generated when reaching max PP are now saved and restored after casting ability
 - Attacks and abilities now have a frame delay specific to each pokemon before damage and effects are applied
 - Projectiles now have travel time
+- Increased preparation phase duration for rounds 3, 5, 8, 9, 11, 15 and 19: ~~30~~ 40 seconds ; for rounds 10 and 20: ~~45~~ 50 seconds
 
 # UI
 
