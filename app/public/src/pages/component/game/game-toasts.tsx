@@ -1,4 +1,4 @@
-import React, { memo } from "react"
+import { memo } from "react"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
@@ -10,7 +10,6 @@ function GameToasts() {
           key={i.toString()}
           className={`toast toast-${i}`}
           containerId={`${i}`}
-          enableMultiContainer
           position="bottom-right"
           autoClose={500}
           hideProgressBar

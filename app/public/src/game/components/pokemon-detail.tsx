@@ -1,6 +1,5 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
-import React from "react"
 import ReactDOM from "react-dom/client"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import { Emotion } from "../../../../types"
@@ -25,11 +24,11 @@ export default class PokemonDetail extends GameObjects.DOMElement {
   critChance: HTMLDivElement
   critPower: HTMLDivElement
   ap: HTMLDivElement
-  abilityDescription: HTMLDivElement
-  passiveDescription: HTMLDivElement
+  abilityDescription: HTMLDivElement | null = null
+  passiveDescription: HTMLDivElement | null = null
   pp: HTMLDivElement
-  abilityRoot: ReactDOM.Root
-  passiveDescriptionRoot: ReactDOM.Root
+  abilityRoot: ReactDOM.Root | null = null
+  passiveDescriptionRoot: ReactDOM.Root | null = null
 
   constructor(
     scene: Phaser.Scene,
@@ -205,7 +204,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
   }
 
   updateAbilityDescription(skill: Ability, abilityTier: number, ap: number) {
-    this.abilityRoot.render(
+    this.abilityRoot?.render(
       <>
         <div className="ability-name">{t(`ability.${skill}`)}</div>
         <AbilityTooltip ability={skill} tier={abilityTier} ap={ap} />
@@ -214,7 +213,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
   }
 
   updatePassiveDescription(passive: Passive, abilityTier: number, ap: number) {
-    this.passiveDescriptionRoot.render(
+    this.passiveDescriptionRoot?.render(
       <p>
         {addIconsToDescription(
           t(`passive_description.${passive}`),

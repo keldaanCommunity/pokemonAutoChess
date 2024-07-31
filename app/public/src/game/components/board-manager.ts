@@ -8,8 +8,8 @@ import GameState from "../../../../rooms/states/game-state"
 import { IPokemon, Transfer } from "../../../../types"
 import { SynergyTriggers } from "../../../../types/Config"
 import {
-  GamePhaseState,
   GameMode,
+  GamePhaseState,
   Orientation,
   PokemonActionState
 } from "../../../../types/enum/Game"
@@ -135,17 +135,19 @@ export default class BoardManager {
         PokemonActionState.HOP,
         false
       )
-      this.animationManager.animatePokemon(
-        this.playerAvatar,
-        PokemonActionState.HURT,
-        false
-      )
+      this.playerAvatar &&
+        this.animationManager.animatePokemon(
+          this.playerAvatar,
+          PokemonActionState.HURT,
+          false
+        )
     } else {
-      this.animationManager.animatePokemon(
-        this.playerAvatar,
-        PokemonActionState.IDLE,
-        false
-      )
+      this.playerAvatar &&
+        this.animationManager.animatePokemon(
+          this.playerAvatar,
+          PokemonActionState.IDLE,
+          false
+        )
       if (this.opponentAvatar) {
         this.animationManager.animatePokemon(
           this.opponentAvatar,

@@ -31,7 +31,7 @@ export default function History(props: { history: IGameRecord[] }) {
               </span>
               <EloBadge elo={r.elo} />
               <ul className="synergies">
-                {getTopSynergies(r.pokemons).map(([type, value]) => (
+                {getTopSynergies(r.pokemons.map(p=>p)).map(([type, value]) => (
                   <li key={r.time + type}>
                     <SynergyIcon type={type} />
                     <span>{value}</span>
@@ -39,7 +39,7 @@ export default function History(props: { history: IGameRecord[] }) {
                 ))}
               </ul>
               <p className="date">{formatDate(r.time)}</p>
-              <Team team={r.pokemons}></Team>
+              <Team team={r.pokemons.map(p=>p)}></Team>
             </div>
           ))}
       </div>

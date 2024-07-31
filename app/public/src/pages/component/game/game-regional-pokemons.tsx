@@ -35,7 +35,7 @@ export function GameRegionalPokemons() {
   const { t } = useTranslation()
   const currentPlayer = useAppSelector(selectCurrentPlayer)
   const specialGameRule = getGameScene()?.room?.state.specialGameRule
-  const regionalPokemons: Pkm[] = currentPlayer?.regionalPokemons ?? []
+  const regionalPokemons: Pkm[] = currentPlayer?.regionalPokemons.map(p=>p) ?? new Array<Pkm>()
   const pokemonCollection = useAppSelector(
     (state) => state.game.pokemonCollection
   )

@@ -63,7 +63,7 @@ export default function Profile() {
         )}
       </div>
 
-      {profile && <History history={profile.history} />}
+      {profile && <History history={profile.history.map(r=>r)} />}
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import { ArraySchema, MapSchema } from "@colyseus/schema"
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import Simulation from "../../../core/simulation"
 import ExperienceManager from "../../../models/colyseus-models/experience-manager"
 import PokemonCollection from "../../../models/colyseus-models/pokemon-collection"
@@ -14,7 +14,7 @@ import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
 import { getGameScene } from "../pages/game"
 
-interface GameStateStore {
+export interface GameStateStore {
   afterGameId: string
   phaseDuration: number
   roundTime: number
@@ -119,7 +119,7 @@ export const gameSlice = createSlice({
       state.players[index][action.payload.field] = action.payload.value
     },
     setShop: (state, action: PayloadAction<ArraySchema<Pkm>>) => {
-      state.shop = action.payload
+      state.shop = action.payload.map(p=>p)
     },
     setItemsProposition: (state, action: PayloadAction<ArraySchema<Item>>) => {
       state.itemsProposition = JSON.parse(JSON.stringify(action.payload))
