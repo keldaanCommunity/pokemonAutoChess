@@ -28,6 +28,7 @@
 - Extra PP generated when reaching max PP are now saved and restored after casting ability
 - Attacks and abilities now have a frame delay specific to each pokemon before damage and effects are applied
 - Projectiles now have travel time
+- Increased preparation phase duration for rounds 3, 5, 8, 9, 11, 15 and 19: ~~30~~ 40 seconds ; for rounds 10 and 20: ~~45~~ 50 seconds
 
 # UI
 
