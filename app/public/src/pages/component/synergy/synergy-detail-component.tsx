@@ -9,9 +9,11 @@ import {
   RarityCost,
   SynergyTriggers
 } from "../../../../../types/Config"
+import { BattleResult } from "../../../../../types/enum/Game"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
 import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
+import { max } from "../../../../../utils/number"
 import { values } from "../../../../../utils/schemas"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
@@ -87,6 +89,19 @@ export default function SynergyDetailComponent(props: {
       .filter((p) => p.types.has(Synergy.WILD) && !isOnBench(p))
       .reduce((total, p) => total + p.stars, 0) + (isPVE ? 5 : 0)
     additionalInfo = t('synergy_description.WILD_ADDITIONAL', { wildChance })
+  }
+
+  if (props.type === Synergy.BABY && currentPlayer) {
+    const lastResult = currentPlayer.history.at(-1)?.result ?? null
+    if (levelReached === SynergyTriggers[Synergy.BABY][0]) {
+      const eggChance = lastResult === BattleResult.DEFEAT ? max(100)(25 * (currentPlayer.streak + 1)) : 0
+      additionalInfo = t('synergy_description.BABY_EGG_CHANCE', { eggChance })
+    } else if (levelReached === SynergyTriggers[Synergy.BABY][1]) {
+      additionalInfo = t('synergy_description.BABY_EGG_CHANCE', { eggChance: 100 })
+    } else if (SynergyTriggers[Synergy.BABY][2]) {
+      const eggChance = lastResult === BattleResult.DEFEAT ? max(100)(25 * (currentPlayer.streak + 1)) : 0
+      additionalInfo = t('synergy_description.BABY_GOLDEN_EGG_CHANCE', { eggChance })
+    }
   }
 
   return (

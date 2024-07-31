@@ -3,17 +3,17 @@ import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { getMaxTeamSize } from "../../../../../utils/board"
-import { useAppSelector } from "../../../hooks"
+import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { getGameScene } from "../../game"
 
 export function GameTeamInfo() {
   const { t } = useTranslation()
-  const experienceManager = useAppSelector(
-    (state) => state.game.currentPlayerExperienceManager
-  )
-  const boardSize = useAppSelector((state) => state.game.currentPlayerBoardSize)
+  const currentPlayer = useAppSelector(selectCurrentPlayer)
+
+  if (!currentPlayer) return null
+
   const specialGameRule = getGameScene()?.room?.state.specialGameRule
-  const maxTeamSize = getMaxTeamSize(experienceManager.level, specialGameRule)
+  const maxTeamSize = getMaxTeamSize(currentPlayer.experienceManager.level, specialGameRule)
 
   return (
     <div id="game-team-info" className="my-container team-size information">
@@ -32,7 +32,7 @@ export function GameTeamInfo() {
           )}
         </Tooltip>
         <span>
-          {boardSize}/{maxTeamSize}
+          {currentPlayer.boardSize}/{maxTeamSize}
         </span>
         <img className="icon" src="assets/ui/pokeball.svg" />
       </div>

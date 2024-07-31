@@ -13,7 +13,7 @@ import { BattleResult, GamePhaseState } from "../../../../../types/enum/Game"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { SynergyAssociatedToWeather } from "../../../../../types/enum/Weather"
 import { min } from "../../../../../utils/number"
-import { useAppSelector } from "../../../hooks"
+import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { getAvatarSrc, getPortraitSrc } from "../../../utils"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
@@ -25,34 +25,23 @@ import "./game-stage-info.css"
 export default function GameStageInfo() {
   const { t } = useTranslation()
   const phase = useAppSelector((state) => state.game.phase)
-  const name = useAppSelector((state) => state.game.currentPlayerName)
-  const title = useAppSelector((state) => state.game.currentPlayerTitle)
-  const avatar = useAppSelector((state) => state.game.currentPlayerAvatar)
   const weather = useAppSelector((state) => state.game.weather)
 
-  const currentPlayerMap = useAppSelector(
-    (state) =>
-      state.game.players.find((p) => p.id === state.game.currentPlayerId)?.map
-  )
-
+  const currentPlayer = useAppSelector(selectCurrentPlayer)
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
-  const isPVE = stageLevel in PVEStages
-  const currentPlayerOpponentName = useAppSelector(
-    (state) => state.game.currentPlayerOpponentName
-  )
-  const currentPlayerOpponentAvatar = useAppSelector(
-    (state) => state.game.currentPlayerOpponentAvatar
-  )
-  const currentPlayerOpponentTitle = useAppSelector(
-    (state) => state.game.currentPlayerOpponentTitle
-  )
 
+  if (!currentPlayer) return null
+
+  const isPVE = stageLevel in PVEStages
+  const name = currentPlayer.name
+  const title = currentPlayer.title
+  const avatar = currentPlayer.avatar
   const opponentName =
-    phase === GamePhaseState.FIGHT ? currentPlayerOpponentName : ""
+    phase === GamePhaseState.FIGHT ? currentPlayer.opponentName : ""
   const opponentAvatar =
-    phase === GamePhaseState.FIGHT ? currentPlayerOpponentAvatar : ""
+    phase === GamePhaseState.FIGHT ? currentPlayer.opponentAvatar : ""
   const opponentTitle =
-    phase === GamePhaseState.FIGHT ? currentPlayerOpponentTitle : ""
+    phase === GamePhaseState.FIGHT ? currentPlayer.opponentTitle : ""
 
   return (
     <>
@@ -119,7 +108,7 @@ export default function GameStageInfo() {
           )}
         </div>
 
-        {currentPlayerMap && (
+        {currentPlayer.map && (
           <div className="map-information" data-tooltip-id="detail-map">
             {ReactDOM.createPortal(
               <Tooltip
@@ -127,13 +116,12 @@ export default function GameStageInfo() {
                 className="custom-theme-tooltip"
                 place="bottom"
               >
-                <span style={{ verticalAlign: "middle" }}>
-                  {DungeonDetails[currentPlayerMap].synergies.map((synergy) => (
+                <div style={{ display: "flex", alignContent: "center" }}>
+                  {DungeonDetails[currentPlayer.map].synergies.map((synergy) => (
                     <SynergyIcon type={synergy} key={"map_type_" + synergy} />
                   ))}
-                  {t(`map.${currentPlayerMap}`)}
-                </span>
-                {/*<p>{addIconsToDescription(t(`map_description.${currentPlayerMap}`))}</p>*/}
+                  <p>{t(`map.${currentPlayer.map}`)}</p>
+                </div>
               </Tooltip>,
               document.body
             )}
@@ -180,9 +168,7 @@ type PathStep = {
 
 export function StagePath() {
   const { t } = useTranslation()
-  const currentPlayer = useAppSelector((state) =>
-    state.game.players.find((p) => p.id === state.game.currentPlayerId)
-  )
+  const currentPlayer = useAppSelector(selectCurrentPlayer)
   const history = [...(currentPlayer?.history ?? [])]
   const phase = useAppSelector((state) => state.game.phase)
   const stageLevel = useAppSelector((state) => state.game.stageLevel)

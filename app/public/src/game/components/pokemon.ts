@@ -434,9 +434,9 @@ export default class PokemonSprite extends DraggableObject {
           this.flip
         )
 
-        logger.debug(
+        /*logger.debug(
           `Shooting a projectile to (${this.targetX},${this.targetY}) travel time ${travelTime}ms delay ${delayBeforeShoot}ms`
-        )
+        )*/
         this.scene.tweens.add({
           targets: projectile,
           x: coordinatesTarget[0],

@@ -9,7 +9,7 @@ import { getBuyPrice } from "../../../../../models/shop"
 import { RarityColor } from "../../../../../types/Config"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
-import { useAppSelector } from "../../../hooks"
+import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
 import { getGameScene } from "../../game"
 import { cc } from "../../utils/jsx"
@@ -42,9 +42,7 @@ export default function GamePokemonPortrait(props: {
   const currentPlayerId: string = useAppSelector(
     (state) => state.game.currentPlayerId
   )
-  const currentPlayer = useAppSelector((state) =>
-    state.game.players.find((p) => p.id === currentPlayerId)
-  )
+  const currentPlayer = useAppSelector(selectCurrentPlayer)
 
   const board = useAppSelector(
     (state) => state.game.players.find((p) => p.id === uid)?.board
