@@ -5199,7 +5199,7 @@ export class Groudon extends Pokemon {
   hp = 300
   atk = 30
   def = 5
-  speDef = 3
+  speDef = 5
   maxPP = 100
   range = 1
   skill = Ability.EARTHQUAKE
@@ -6338,8 +6338,8 @@ export class PrimalGroudon extends Pokemon {
   stars = 4
   hp = 400
   atk = 30
-  def = 6
-  speDef = 3
+  def = 8
+  speDef = 8
   maxPP = 100
   range = 1
   skill = Ability.EARTHQUAKE
@@ -6362,7 +6362,7 @@ export class PrimalKyogre extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 100
+  maxPP = 120
   range = 3
   skill = Ability.ORIGIN_PULSE
   passive = Passive.RAIN
@@ -14378,6 +14378,20 @@ export class Stonjourner extends Pokemon {
   }
 }
 
+export class Skarmory extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.STEEL])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 190
+  atk = 20
+  def = 8
+  speDef = 2
+  maxPP = 80
+  range = 1
+  skill = Ability.SPIKES
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -15195,5 +15209,7 @@ export const PokemonClasses: Record<
   [Pkm.MIENSHAO]: Mienshao,
   [Pkm.STONJOURNER]: Stonjourner,
   [Pkm.HISUI_SNEASEL]: HisuiSneasel,
-  [Pkm.SNEASLER]: Sneasler
+  [Pkm.SNEASLER]: Sneasler,
+  [Pkm.SKARMORY]: Skarmory
+
 }
