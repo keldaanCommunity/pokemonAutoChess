@@ -9,12 +9,12 @@ import PokemonSprite from "./pokemon"
 export class SellZone extends GameObjects.Container {
   scene: GameScene
   rectangle: Phaser.GameObjects.Rectangle
-  zone: Phaser.GameObjects.Zone
   text: Phaser.GameObjects.Text
 
   constructor(scene: GameScene) {
     const sellZoneCoord = transformCoordinate(4, 5.5)
     super(scene, sellZoneCoord[0] - 48, sellZoneCoord[1] + 24)
+    this.scene = scene
 
     const sellZone = scene.add.zone(0, 0, 8 * 96, 240)
     sellZone.setRectangleDropZone(8 * 96, 240)

@@ -295,9 +295,9 @@ export default function Game() {
       })
       room.onMessage(Transfer.SHOW_EMOTE, (message) => {
         const g = getGameScene()
-        if (g && g.minigameManager.pokemons.size > 0) {
+        if ( g?.minigameManager?.pokemons?.size && g.minigameManager.pokemons.size > 0) {
           // early return here to prevent showing animation twice
-          return g.minigameManager.showEmote(message.id, message?.emote)
+          return g.minigameManager?.showEmote(message.id, message?.emote)
         }
 
         if (g && g.board) {
@@ -423,7 +423,7 @@ export default function Game() {
       })
 
       room.state.additionalPokemons.onAdd(() => {
-        dispatch(setAdditionalPokemons(room.state.additionalPokemons))
+        dispatch(setAdditionalPokemons(room.state.additionalPokemons.map(p=>p)))
       })
 
       room.state.simulations.onRemove(() => {
@@ -606,12 +606,12 @@ export default function Game() {
 
         player.pokemonsProposition.onAdd(() => {
           if (player.id == uid) {
-            dispatch(setPokemonProposition(player.pokemonsProposition))
+            dispatch(setPokemonProposition(player.pokemonsProposition.map(p=>p)))
           }
         })
         player.pokemonsProposition.onRemove(() => {
           if (player.id == uid) {
-            dispatch(setPokemonProposition(player.pokemonsProposition))
+            dispatch(setPokemonProposition(player.pokemonsProposition.map(p=>p)))
           }
         })
       })

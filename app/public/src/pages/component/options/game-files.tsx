@@ -50,7 +50,7 @@ export default function GameFiles() {
         (pc) => {
           setPreloadingPc(pc * 100)
           setPreloadingMessage(
-            preloadingScene.current?.loadingManager.statusMessage ?? ""
+            preloadingScene.current?.loadingManager?.statusMessage ?? ""
           )
         },
         () => {

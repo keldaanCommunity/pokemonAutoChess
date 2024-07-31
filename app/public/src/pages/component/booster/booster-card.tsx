@@ -20,7 +20,7 @@ export function BoosterCard(props: { pkm: PkmWithConfig; shards: number }) {
       className={cc(
         "booster-card",
         "rarity-" + pokemonData.rarity.toLowerCase(),
-        { shiny: props.pkm.shiny }
+        { shiny: props.pkm.shiny || false }
       )}
       style={style}
       onClick={(e) => e.currentTarget.classList.add("flipped")}

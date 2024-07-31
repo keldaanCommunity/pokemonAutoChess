@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import SimplePlayer from "../../../models/colyseus-models/simple-player"
 
-interface IUserAfterState {
+export interface IUserAfterState {
   players: SimplePlayer[]
   elligibleToXP: boolean
   elligibleToELO: boolean

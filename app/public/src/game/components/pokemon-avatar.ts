@@ -2,7 +2,8 @@ import { GameObjects } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { AvatarEmotions, Emotion, IPokemonAvatar } from "../../../../types"
 import { GamePhaseState } from "../../../../types/enum/Game"
-import { playSound, SOUNDS } from "../../pages/utils/audio"
+import { throttle } from "../../../../utils/function"
+import { SOUNDS, playSound } from "../../pages/utils/audio"
 import store from "../../stores"
 import { showEmote } from "../../stores/NetworkStore"
 import { getAvatarSrc, getAvatarString } from "../../utils"
@@ -10,12 +11,11 @@ import GameScene from "../scenes/game-scene"
 import EmoteMenu from "./emote-menu"
 import LifeBar from "./life-bar"
 import PokemonSprite from "./pokemon"
-import { throttle } from "../../../../utils/function"
 
 export default class PokemonAvatar extends PokemonSprite {
   scene: GameScene
-  circleHitbox: GameObjects.Ellipse | undefined
-  circleTimer: GameObjects.Graphics
+  circleHitbox: GameObjects.Ellipse | null = null
+  circleTimer: GameObjects.Graphics | null = null
   isCurrentPlayerAvatar: boolean
   emoteBubble: EmoteBubble | null
   emoteMenu: EmoteMenu | null
@@ -39,6 +39,7 @@ export default class PokemonAvatar extends PokemonSprite {
       false,
       false
     )
+    this.scene = scene
     this.shouldShowTooltip = false
     this.draggable = false
     this.emoteBubble = null
@@ -128,22 +129,22 @@ export default class PokemonAvatar extends PokemonSprite {
 
   updateCircleTimer(timer: number) {
     if (timer <= 0) {
-      this.circleTimer.destroy()
+      this.circleTimer?.destroy()
       if (this.isCurrentPlayerAvatar) {
         playSound(SOUNDS.CAROUSEL_UNLOCK)
       }
     } else {
-      this.circleTimer.clear()
-      this.circleTimer.lineStyle(
+      this.circleTimer?.clear()
+      this.circleTimer?.lineStyle(
         8,
         0xf7d51d,
         this.isCurrentPlayerAvatar ? 0.8 : 0.5
       )
-      this.circleTimer.beginPath()
+      this.circleTimer?.beginPath()
 
       const angle = (Math.min(timer, 8000) / 8000) * Math.PI * 2
-      this.circleTimer.arc(0, 0, 30, 0, angle)
-      this.circleTimer.strokePath()
+      this.circleTimer?.arc(0, 0, 30, 0, angle)
+      this.circleTimer?.strokePath()
     }
   }
 
