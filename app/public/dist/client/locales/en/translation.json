@@ -366,7 +366,8 @@
     "DRAIN_PUNCH": "Drain Punch",
     "GRAVITY": "Gravity",
     "DIRE_CLAW": "Dire Claw",
-    "FAKE_OUT": "Fake Out"
+    "FAKE_OUT": "Fake Out",
+    "FELL_STINGER": "Fell Stinger"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1180,7 +1181,9 @@
     "HAWLUCHA": "Hawlucha",
     "MIENFOO": "Mienfoo",
     "MIENSHAO": "Mienshao",
-    "STONJOURNER": "Stonjourner"
+    "STONJOURNER": "Stonjourner",
+    "POIPOLE": "Poipole",
+    "NAGANADEL": "Naganadel"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1524,10 +1527,11 @@
     "CAMERA_FLASH": "The target is PARALYSIS for [2,SP] seconds",
     "CRUSH_CLAW": "Reduce the target's DEF by [3,5] then perform two quick attacks dealing [100,SP]% of ATK as PHYSICAL each",
     "FIRE_LASH": "Deals [120,SP] SPECIAL to target and apply ARMOR_REDUCTION for 4 seconds",
-    "FAIRY_LOCK": "Spreads [90,SP] SPECIAL evenly across the target and adjacent enemies. Target is LOCKED for 5 seconds.",
-    "DRAIN_PUNCH": " The next attack inflicts [100,SP]% additional SPECIAL and restores [200,SP]% HP of the damage inflicted.",
+    "FAIRY_LOCK": "Spreads [90,SP] SPECIAL evenly across the target and adjacent enemies. Target is LOCKED for 5 seconds",
+    "DRAIN_PUNCH": " The next attack inflicts [100,SP]% additional SPECIAL and restores [200,SP]% HP of the damage inflicted",
     "GRAVITY": "The enemy team is LOCKED for [2,SP] seconds",
-    "FAKE_OUT": "Deals [50,100,150,SP] SPECIAL to target, then user loses 30% AP. Target is FLINCH for 3 seconds unless user AP was negative."
+    "FAKE_OUT": "Deals [50,100,150,SP] SPECIAL to target, then user loses 30% AP. Target is FLINCH for 3 seconds unless user AP was negative",
+    "FELL_STINGER": "Deals [20,40,70,SP] SPECIAL to the target. If it kills the target, it permanently gains +1 ATK, +5% AP and +10 HP"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2090,8 +2094,9 @@
     "BLOODMOON": "Changes form during BLOODMOON",
     "RECYCLE": "Feed it with berries to gain 10 HP, or with basic components for 25 HP + item stats. Feed it with artificial items to gain 50 HP + item stats, and get TRASH in return",
     "DREAM_CATCHER": "If its target is SLEEP, holder attacks give 10 SHIELD to the 3 allies closest to it",
-    "SLOW_START": "Starts at 0.5 ATK_SPEED. After first ability cast, gains 30% ATK_SPEED and 10 ATK.",
-    "STONJOURNER": "Does not move or attack until PP bar is full. Its power spot gives 50% AP to all adjacent allies at the start of the fight."
+    "SLOW_START": "Starts at 0.5 ATK_SPEED. After first ability cast, gains 30% ATK_SPEED and 10 ATK",
+    "STONJOURNER": "Does not move or attack until PP bar is full. Its power spot gives 50% AP to all adjacent allies at the start of the fight",
+    "POISON_PIN": "Poipole will evolve into Naganadel after stacking 200 HP"
   },
   "stat": {
     "ATK": "Attack",

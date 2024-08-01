@@ -35,3 +35,8 @@ export/tilesets
 export/samples
 id_digital_ocean
 id_digital_ocean.pub
+/app/public/dist/server/app/public/dist/client/assets/pokemons/durations.json
+/app/public/dist/server/app/public/dist/client/assets/pokemons/indexList.json
+/app/public/dist/server/app/public/src/assets/atlas.json
+/app/public/dist/server/app/public/src/assets/pokemons/indexList.json
+/app/public/dist/server/package.json

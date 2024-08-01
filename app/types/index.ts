@@ -394,6 +394,7 @@ export interface IPokemon {
   range: number
   stars: number
   maxPP: number
+  ap: number
   skill: Ability
   passive: Passive
   items: SetSchema<Item>

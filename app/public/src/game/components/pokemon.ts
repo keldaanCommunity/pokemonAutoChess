@@ -163,6 +163,7 @@ export default class PokemonSprite extends DraggableObject {
     this.positionX = pokemon.positionX
     this.positionY = pokemon.positionY
     this.attackSprite = pokemon.attackSprite
+    this.ap = pokemon.ap
     if (this.range > 1) {
       this.rangeType = "range"
     } else {
