@@ -14378,6 +14378,39 @@ export class Stonjourner extends Pokemon {
   }
 }
 
+export class Cramorant extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FLYING,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.GULP_MISSILE
+  attackSprite = AttackSprite.FLYING_RANGE
+}
+
+export class Arrokuda extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WATER
+  ])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  hp = 80
+  atk = 10
+  def = 1
+  speDef = 1
+  maxPP = 140
+  range = 1
+  skill = Ability.AQUA_JET
+  attackSprite = AttackSprite.WATER_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -15195,5 +15228,7 @@ export const PokemonClasses: Record<
   [Pkm.MIENSHAO]: Mienshao,
   [Pkm.STONJOURNER]: Stonjourner,
   [Pkm.HISUI_SNEASEL]: HisuiSneasel,
-  [Pkm.SNEASLER]: Sneasler
+  [Pkm.SNEASLER]: Sneasler,
+  [Pkm.CRAMORANT]: Cramorant,
+  [Pkm.ARROKUDA]: Arrokuda
 }

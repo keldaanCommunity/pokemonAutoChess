@@ -365,7 +365,8 @@
     "FLYING_PRESS": "Flying Press",
     "DRAIN_PUNCH": "Drain Punch",
     "GRAVITY": "Gravity",
-    "DIRE_CLAW": "Dire Claw"
+    "DIRE_CLAW": "Dire Claw",
+    "GULP_MISSILE": "Gulp Missile"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1179,7 +1180,9 @@
     "HAWLUCHA": "Hawlucha",
     "MIENFOO": "Mienfoo",
     "MIENSHAO": "Mienshao",
-    "STONJOURNER": "Stonjourner"
+    "STONJOURNER": "Stonjourner",
+    "CRAMORANT": "Cramorant",
+    "ARROKUDA": "Arrokuda"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1525,7 +1528,8 @@
     "FIRE_LASH": "Deals [120,SP] SPECIAL and apply ARMOR_REDUCTION for 4 seconds",
     "FAIRY_LOCK": "Spreads [90,SP] SPECIAL evenly across the target and adjacent enemies. Target is LOCKED for 5 seconds",
     "DRAIN_PUNCH": " The next attack inflicts [100,SP]% additional SPECIAL and restores [200,SP]% HP of the damage inflicted.",
-    "GRAVITY": "The enemy team is LOCKED for [2,SP] seconds"
+    "GRAVITY": "The enemy team is LOCKED for [2,SP] seconds",
+    "GULP_MISSILE": "Shoot an Arrokuda with full PP at the enemy team, dealing [55,SP] SPECIAL to all surrounding enemies. There is a 1 in 3 chance a Pikachu will be fired instead."
   },
   "effect": {
     "INGRAIN": "Ingrain",

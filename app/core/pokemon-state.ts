@@ -757,7 +757,7 @@ export default class PokemonState {
     const team = pokemon.team
     const emptyPlaces = new Array<{ x: number; y: number; neighbour: number }>()
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value === undefined) {
+      if (value === undefined && board.getEffectOnCell(x, y) !== Effect.RESERVED_TILE) {
         const cells = board.getAdjacentCells(x, y)
         let n = 0
         cells.forEach((cell) => {

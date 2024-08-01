@@ -295,7 +295,7 @@ export default class Board {
     ].forEach((coord) => {
       const cells = this.getCellsBetween(x, y, coord.x, coord.y)
       cells.forEach((cell) => {
-        if (cell.value === undefined) {
+        if (cell.value === undefined && this.getEffectOnCell(x, y) !== Effect.RESERVED_TILE) {
           candidates.push(cell)
         }
       })
@@ -323,7 +323,7 @@ export default class Board {
       }
     }
 
-    return candidates[0].value === undefined ? candidates[0] : null
+    return (candidates[0].value === undefined && this.getEffectOnCell(candidates[0].x, candidates[0].y) !== Effect.RESERVED_TILE) ? candidates[0] : null
   }
 
   getEffectOnCell(x: number, y: number): Effect | undefined {
@@ -348,7 +348,8 @@ export default class Board {
       if (
         value !== undefined &&
         value.team !== pokemon.team &&
-        value.isTargettable
+        value.isTargettable &&
+        this.getEffectOnCell(x, y) !== Effect.RESERVED_TILE
       ) {
         candidateCells.push(
           ...this.getAdjacentCells(x, y)

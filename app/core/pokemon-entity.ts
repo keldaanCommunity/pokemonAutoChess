@@ -511,16 +511,20 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   moveTo(x: number, y: number, board: Board) {
-    board.swapValue(this.positionX, this.positionY, x, y)
-    this.toMovingState()
-    this.cooldown = 100 // for faster retargeting
+    if (board.effects[board.columns * y + x] !== Effect.RESERVED_TILE){
+      board.swapValue(this.positionX, this.positionY, x, y)
+      this.toMovingState()
+      this.cooldown = 100 // for faster retargeting
+    }
   }
 
   skydiveTo(x: number, y: number, board: Board) {
-    board.swapValue(this.positionX, this.positionY, x, y)
-    this.status.skydiving = true
-    this.toMovingState()
-    this.cooldown = 1000 // 500ms for flying up and 500ms for skydive anim
+    if (board.effects[board.columns * y + x] !== Effect.RESERVED_TILE){
+      board.swapValue(this.positionX, this.positionY, x, y)
+      this.status.skydiving = true
+      this.toMovingState()
+      this.cooldown = 1000 // 500ms for flying up and 500ms for skydive anim
+    }
   }
 
   // called after every attack, no matter if it's successful or not

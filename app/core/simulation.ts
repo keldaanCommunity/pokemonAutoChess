@@ -1628,7 +1628,7 @@ export default class Simulation extends Schema implements ISimulation {
       for (let y = 0; y < this.board.rows; y++) {
         for (let x = 0; x < this.board.columns; x++) {
           const cell = this.board.getValue(x, y)
-          this.board.effects[y * this.board.columns + x] = undefined // clear all board effects
+          
           if (cell) {
             if (cell.team === Team.RED_TEAM) {
               cell.status.clearNegativeStatus()
@@ -1654,6 +1654,8 @@ export default class Simulation extends Schema implements ISimulation {
                 cell.moveTo(x, newY, this.board) // push enemies away
                 cell.cooldown = 500
               }
+
+              this.board.effects[y * this.board.columns + x] = undefined // clear all board effects
             }
           }
         }

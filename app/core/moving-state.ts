@@ -68,6 +68,7 @@ export default class MovingState extends PokemonState {
 
     let x: number | undefined = undefined
     let y: number | undefined = undefined
+
     if (
       pokemon.types.has(Synergy.DARK) &&
       pokemon.baseRange === 1 &&
@@ -115,7 +116,7 @@ export default class MovingState extends PokemonState {
       let distance = 999
 
       cells.forEach((cell) => {
-        if (cell.value === undefined) {
+        if (cell.value === undefined && board.getEffectOnCell(cell.x, cell.y) !== Effect.RESERVED_TILE) {
           const candidateDistance = distanceC(
             coordinates.x,
             coordinates.y,
