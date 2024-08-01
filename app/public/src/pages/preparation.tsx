@@ -136,9 +136,6 @@ export default function Preparation() {
 
       r.state.listen("gameMode", (value, previousValue) => {
         dispatch(setGameMode(value))
-        if (value !== GameMode.NORMAL) {
-          dispatch(toggleReady(true)) // automatically set users ready in non-classic game mode
-        }
       })
 
       r.state.users.onAdd((u) => {
@@ -211,6 +208,7 @@ export default function Preparation() {
             game.reconnectionToken,
             5 * 60
           ) // 5 minutes allowed to start game
+          localStore.set(LocalStoreKeys.RECONNECTION_GAME, roomId, 60 * 60)
           await r.leave()
           game.connection.close()
           dispatch(leavePreparation())

@@ -1,11 +1,10 @@
-import { Client, Room } from "colyseus.js"
 import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
+import { Client, Room } from "colyseus.js"
 import firebase from "firebase/compat/app"
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Navigate } from "react-router-dom"
 import { toast } from "react-toastify"
-import { getFreeSpaceOnBench } from "../../../utils/board"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import AfterGameState from "../../../rooms/states/after-game-state"
 import GameState from "../../../rooms/states/game-state"
@@ -21,12 +20,16 @@ import {
   Transfer
 } from "../../../types"
 import { RequiredStageLevelForXpElligibility } from "../../../types/Config"
+import { DungeonDetails } from "../../../types/enum/Dungeon"
+import { Team } from "../../../types/enum/Game"
 import { Pkm } from "../../../types/enum/Pokemon"
+import { getFreeSpaceOnBench } from "../../../utils/board"
 import { logger } from "../../../utils/logger"
 import { addWanderingPokemon } from "../game/components/pokemon"
 import GameContainer from "../game/game-container"
 import GameScene from "../game/scenes/game-scene"
-import { useAppDispatch, useAppSelector } from "../hooks"
+import { selectCurrentPlayer, useAppDispatch, useAppSelector } from "../hooks"
+import store from "../stores"
 import {
   addDpsMeter,
   addPlayer,
@@ -36,11 +39,6 @@ import {
   removeDpsMeter,
   removePlayer,
   setAdditionalPokemons,
-  setBoardSize,
-  setCurrentPlayerAvatar,
-  setCurrentPlayerMoney,
-  setCurrentPlayerName,
-  setCurrentPlayerTitle,
   setExperienceManager,
   setInterest,
   setItemsProposition,
@@ -48,12 +46,7 @@ import {
   setLoadingProgress,
   setMoney,
   setNoELO,
-  setOpponentAvatar,
-  setOpponentId,
-  setOpponentName,
-  setOpponentTitle,
   setPhase,
-  setPlayerExperienceManager,
   setPokemonCollection,
   setPokemonProposition,
   setRoundTime,
@@ -66,9 +59,9 @@ import {
 } from "../stores/GameStore"
 import { joinGame, logIn, setProfile } from "../stores/NetworkStore"
 import GameDpsMeter from "./component/game/game-dps-meter"
+import GameFinalRank from "./component/game/game-final-rank"
 import GameItemsProposition from "./component/game/game-items-proposition"
 import GameLoadingScreen from "./component/game/game-loading-screen"
-import GameFinalRank from "./component/game/game-final-rank"
 import GamePlayers from "./component/game/game-players"
 import GamePokemonsProposition from "./component/game/game-pokemons-proposition"
 import GameShop from "./component/game/game-shop"
@@ -76,12 +69,9 @@ import GameStageInfo from "./component/game/game-stage-info"
 import GameSynergies from "./component/game/game-synergies"
 import GameToasts from "./component/game/game-toasts"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
+import { playMusic, preloadMusic } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import { FIREBASE_CONFIG } from "./utils/utils"
-import { DungeonDetails } from "../../../types/enum/Dungeon"
-import { playMusic, preloadMusic } from "./utils/audio"
-import store from "../stores"
-import { Team } from "../../../types/enum/Game"
 
 let gameContainer: GameContainer
 
@@ -104,9 +94,7 @@ export default function Game() {
   const currentPlayerId: string = useAppSelector(
     (state) => state.game.currentPlayerId
   )
-  const currentPlayer = useAppSelector((state) =>
-    state.game.players.find((p) => p.id === state.game.currentPlayerId)
-  )
+  const currentPlayer = useAppSelector(selectCurrentPlayer)
   const spectate = currentPlayerId !== uid || !currentPlayer?.alive
 
   const initialized = useRef<boolean>(false)
@@ -146,6 +134,7 @@ export default function Game() {
               room.reconnectionToken,
               60 * 60
             )
+            localStore.set(LocalStoreKeys.RECONNECTION_GAME, room.id, 60 * 60)
             dispatch(joinGame(room))
             connected.current = true
             connecting.current = false
@@ -306,9 +295,9 @@ export default function Game() {
       })
       room.onMessage(Transfer.SHOW_EMOTE, (message) => {
         const g = getGameScene()
-        if (g && g.minigameManager.pokemons.size > 0) {
+        if ( g?.minigameManager?.pokemons?.size && g.minigameManager.pokemons.size > 0) {
           // early return here to prevent showing animation twice
-          return g.minigameManager.showEmote(message.id, message?.emote)
+          return g.minigameManager?.showEmote(message.id, message?.emote)
         }
 
         if (g && g.board) {
@@ -434,7 +423,7 @@ export default function Game() {
       })
 
       room.state.additionalPokemons.onAdd(() => {
-        dispatch(setAdditionalPokemons(room.state.additionalPokemons))
+        dispatch(setAdditionalPokemons(room.state.additionalPokemons.map(p=>p)))
       })
 
       room.state.simulations.onRemove(() => {
@@ -515,22 +504,6 @@ export default function Game() {
             dispatch(setStreak(value))
           })
         }
-
-        player.listen("opponentId", (value) => {
-          dispatch(setOpponentId({ id: player.id, value: value }))
-        })
-        player.listen("opponentName", (value) => {
-          dispatch(setOpponentName({ id: player.id, value: value }))
-        })
-        player.listen("opponentAvatar", (value) => {
-          dispatch(setOpponentAvatar({ id: player.id, value: value }))
-        })
-        player.listen("opponentTitle", (value) => {
-          dispatch(setOpponentTitle({ id: player.id, value: value }))
-        })
-        player.listen("boardSize", (value) => {
-          dispatch(setBoardSize({ id: player.id, value: value }))
-        })
         player.listen("life", (value, previousValue) => {
           dispatch(setLife({ id: player.id, value: value }))
           if (
@@ -542,28 +515,10 @@ export default function Game() {
             setFinalRankVisible(true)
           }
         })
-        player.listen("money", (value) => {
-          dispatch(setCurrentPlayerMoney({ id: player.id, value: value }))
-        })
         player.listen("experienceManager", (value) => {
           if (player.id === uid) {
             dispatch(setExperienceManager(value))
           }
-          dispatch(
-            setPlayerExperienceManager({
-              id: player.id,
-              value: value
-            })
-          )
-        })
-        player.listen("avatar", (value) => {
-          dispatch(setCurrentPlayerAvatar({ id: player.id, value: value }))
-        })
-        player.listen("name", (value) => {
-          dispatch(setCurrentPlayerName({ id: player.id, value: value }))
-        })
-        player.listen("title", (value) => {
-          dispatch(setCurrentPlayerTitle({ id: player.id, value: value }))
         })
         player.listen("loadingProgress", (value) => {
           dispatch(setLoadingProgress({ id: player.id, value: value }))
@@ -609,11 +564,21 @@ export default function Game() {
         })
 
         const fields: NonFunctionPropNames<IPlayer>[] = [
+          "name",
+          "avatar",
+          "boardSize",
+          "experienceManager",
           "money",
           "history",
           "life",
+          "opponentId",
+          "opponentName",
+          "opponentAvatar",
+          "opponentTitle",
           "rank",
-          "regionalPokemons"
+          "regionalPokemons",
+          "streak",
+          "title"
         ]
 
         fields.forEach((field) => {
@@ -641,12 +606,12 @@ export default function Game() {
 
         player.pokemonsProposition.onAdd(() => {
           if (player.id == uid) {
-            dispatch(setPokemonProposition(player.pokemonsProposition))
+            dispatch(setPokemonProposition(player.pokemonsProposition.map(p=>p)))
           }
         })
         player.pokemonsProposition.onRemove(() => {
           if (player.id == uid) {
-            dispatch(setPokemonProposition(player.pokemonsProposition))
+            dispatch(setPokemonProposition(player.pokemonsProposition.map(p=>p)))
           }
         })
       })

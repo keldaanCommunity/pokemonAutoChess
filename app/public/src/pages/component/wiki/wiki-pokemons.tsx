@@ -1,22 +1,22 @@
+import { t } from "i18next"
 import React, { useEffect, useState, useMemo } from "react"
+import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { RarityColor } from "../../../../../types/Config"
-import { Rarity } from "../../../../../types/enum/Game"
-import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
-import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
+import { Tooltip } from "react-tooltip"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
-import { getPortraitSrc } from "../../../utils"
-import WikiPokemonDetail from "./wiki-pokemon-detail"
-import { t } from "i18next"
-import { Tooltip } from "react-tooltip"
+import { RarityColor } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
+import { Rarity } from "../../../../../types/enum/Game"
+import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { groupBy } from "../../../../../utils/array"
+import { getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
-import ReactDOM from "react-dom"
+import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
+import WikiPokemonDetail from "./wiki-pokemon-detail"
 
 export default function WikiPokemons() {
   const { t } = useTranslation()
@@ -78,7 +78,7 @@ export function WikiPokemon(props: {
 }) {
   const pokemons = useMemo(
     () =>
-      PRECOMPUTED_POKEMONS_PER_RARITY[props.rarity]
+      (PRECOMPUTED_POKEMONS_PER_RARITY[props.rarity] )
         .filter((p) => p !== Pkm.DEFAULT)
         .sort((a: Pkm, b: Pkm) => {
           return PkmFamily[a] === PkmFamily[b]
@@ -86,7 +86,7 @@ export function WikiPokemon(props: {
             : PkmIndex[PkmFamily[a]].localeCompare(PkmIndex[PkmFamily[b]])
         }),
     [props.rarity]
-  )
+  ) as Pkm[]
 
   return (
     <Tabs

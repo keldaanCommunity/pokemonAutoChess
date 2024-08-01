@@ -1070,6 +1070,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.FAKE_OUT:
+      addAbilitySprite(Ability.FACADE, coordinates, true).setScale(2)
+      break
+
     case Ability.ICE_HAMMER:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break

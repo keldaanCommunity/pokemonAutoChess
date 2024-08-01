@@ -127,4 +127,5 @@
 #detail-map p {
   white-space: pre-line;
   margin: 0 0.25em;
+  line-height: 40px;
 }

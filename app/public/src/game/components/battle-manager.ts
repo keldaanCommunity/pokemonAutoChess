@@ -1,5 +1,5 @@
-import { GameObjects } from "phaser"
 import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
+import { GameObjects } from "phaser"
 import { getMoveSpeed } from "../../../../core/pokemon-entity"
 import Simulation from "../../../../core/simulation"
 import Count from "../../../../models/colyseus-models/count"
@@ -21,8 +21,9 @@ import {
 import { Item } from "../../../../types/enum/Item"
 import { Passive } from "../../../../types/enum/Passive"
 import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
+import { max } from "../../../../utils/number"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
-import AnimationManager from "../animation-manager"
+import AnimationManager, { getAttackTimings } from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import { displayAbility } from "./abilities-animations"
 import PokemonSprite from "./pokemon"
@@ -561,7 +562,6 @@ export default class BattleManager {
             }
           } else if (field == "attackCount") {
             if (value != 0) {
-              // logger.debug(value, pkm.action, pkm.targetX, pkm.targetY);
               if (
                 pkm.action == PokemonActionState.ATTACK &&
                 pkm.targetX !== null &&
@@ -572,7 +572,14 @@ export default class BattleManager {
                   PokemonActionState.ATTACK,
                   this.flip
                 )
-                pkm.attackAnimation()
+                const { delayBeforeShoot, travelTime } =
+                  getAttackTimings(pokemon)
+                pkm.attackAnimation(
+                  pokemon.targetX,
+                  pokemon.targetY,
+                  delayBeforeShoot,
+                  travelTime
+                )
               }
             }
           } else if (field == "tripleAttackCount") {
@@ -643,11 +650,7 @@ export default class BattleManager {
             }
           } else if (field === "action") {
             pkm.action = pokemon.action
-            this.animationManager.animatePokemon(
-              pkm,
-              value as IPokemonEntity["action"],
-              this.flip
-            )
+            this.animationManager.animatePokemon(pkm, pokemon.action, this.flip)
           } else if (field == "critChance") {
             pkm.critChance = pokemon.critChance
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
@@ -696,7 +699,7 @@ export default class BattleManager {
               pkm.detail.hp.textContent = pokemon.life.toString()
             }
           } else if (field === "shield") {
-            if (value >= 0) {
+            if (pokemon.shield >= 0) {
               value > previousValue &&
                 this.displayBoost(Stat.SHIELD, pkm.positionX, pkm.positionY)
               pkm.shield = pokemon.shield
@@ -704,7 +707,7 @@ export default class BattleManager {
             }
           } else if (field === "pp") {
             pkm.pp = pokemon.pp
-            pkm.powerbar?.setAmount(pkm.pp)
+            pkm.powerbar?.setAmount(max(pkm.maxPP)(pkm.pp))
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
               pkm.detail.updateValue(
                 pkm.detail.pp,
@@ -770,14 +773,17 @@ export default class BattleManager {
             if (pkm.lifebar) {
               pkm.lifebar.setTeam(value as IPokemonEntity["team"], this.flip)
             }
-          } else if (field === "index") {
-            pkm.index = value as IPokemonEntity["index"]
-            this.animationManager.animatePokemon(
-              pkm,
-              PokemonActionState.IDLE,
-              this.flip
-            )
-          } else if (field === "skill") {
+          }
+          // } else if (field === "index") {
+          //   pkm.index = value as IPokemonEntity["index"]
+          //   this.animationManager.animatePokemon(
+          //     pkm,
+          //     PokemonActionState.IDLE,
+          //     this.flip,
+          //     "index"
+          //   )
+          // }
+          else if (field === "skill") {
             pkm.skill = value as IPokemonEntity["skill"]
             if (pkm.detail && pkm.detail instanceof PokemonDetail) {
               pkm.detail.updateAbilityDescription(pkm.skill, pkm.stars, pkm.ap)

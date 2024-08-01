@@ -11,7 +11,7 @@ import GameScene from "../scenes/game-scene"
 
 export default class LoadingManager {
   scene: Phaser.Scene
-  loadingBar: GameObjects.Container
+  loadingBar: GameObjects.Container | null = null
   statusMessage: string
 
   constructor(scene: Phaser.Scene) {

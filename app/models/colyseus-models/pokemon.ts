@@ -2236,7 +2236,7 @@ export class HisuiSliggoo extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 2
-  evolution = Pkm.GOODRA
+  evolution = Pkm.HISUI_GOODRA
   hp = 160
   atk = 12
   def = 7
@@ -5199,7 +5199,7 @@ export class Groudon extends Pokemon {
   hp = 300
   atk = 30
   def = 5
-  speDef = 5
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.EARTHQUAKE
@@ -6338,8 +6338,8 @@ export class PrimalGroudon extends Pokemon {
   stars = 4
   hp = 400
   atk = 30
-  def = 8
-  speDef = 8
+  def = 6
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.EARTHQUAKE
@@ -6362,7 +6362,7 @@ export class PrimalKyogre extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 120
+  maxPP = 100
   range = 3
   skill = Ability.ORIGIN_PULSE
   passive = Passive.RAIN
@@ -7438,7 +7438,7 @@ export class TapuFini extends Pokemon {
   atk = 17
   def = 3
   speDef = 3
-  maxPP = 100
+  maxPP = 80
   range = 3
   skill = Ability.MISTY_SURGE
   passive = Passive.MISTY_TERRAIN
@@ -8509,7 +8509,7 @@ export class Poochyena extends Pokemon {
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.MIGHTYENA
-  hp = 70
+  hp = 80
   atk = 9
   def = 2
   speDef = 2
@@ -8523,7 +8523,7 @@ export class Mightyena extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
   rarity = Rarity.RARE
   stars = 2
-  hp = 160
+  hp = 190
   atk = 19
   def = 4
   speDef = 4
@@ -8682,8 +8682,8 @@ export class Snubull extends Pokemon {
   stars = 1
   evolution = Pkm.GRANBULL
   hp = 115
-  atk = 10
-  def = 3
+  atk = 12
+  def = 4
   speDef = 2
   maxPP = 70
   range = 1
@@ -11638,11 +11638,11 @@ export class Purrloin extends Pokemon {
   evolution = Pkm.LIEPARD
   hp = 80
   atk = 9
-  def = 1
-  speDef = 1
+  def = 2
+  speDef = 2
   maxPP = 90
   range = 1
-  skill = Ability.ASSIST
+  skill = Ability.FAKE_OUT
   additional = true
   attackSprite = AttackSprite.DARK_MELEE
 }
@@ -11653,11 +11653,11 @@ export class Liepard extends Pokemon {
   stars = 2
   hp = 175
   atk = 25
-  def = 2
-  speDef = 2
+  def = 3
+  speDef = 3
   maxPP = 90
   range = 1
-  skill = Ability.ASSIST
+  skill = Ability.FAKE_OUT
   additional = true
   attackSprite = AttackSprite.DARK_MELEE
 }
@@ -12517,7 +12517,7 @@ export class Drizzile extends Pokemon {
   evolution = Pkm.INTELEON
   stars = 2
   hp = 200
-  atk = 23
+  atk = 26
   def = 4
   speDef = 4
   maxPP = 100
@@ -12779,7 +12779,7 @@ export class Smeargle extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.HUMAN])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 220
+  hp = 250
   atk = 20
   def = 3
   speDef = 3
@@ -13398,10 +13398,10 @@ export class Lunala extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 300
+  hp = 250
   atk = 25
-  def = 8
-  speDef = 8
+  def = 5
+  speDef = 5
   maxPP = 100
   range = 4
   skill = Ability.MOONGEIST_BEAM

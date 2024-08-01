@@ -1,9 +1,18 @@
 @font-face {
-  font-family: brandonGrotesque;
-  src: url("assets/ui/brandon-grotesque-black.otf") format("opentype");
+  font-family: BrandonGrotesqueBlack;
+  src: url("assets/ui/BrandonGrotesque-Black.woff2") format("opentype");
+}
+
+@font-face {
+  font-family: BrandonGrotesqueBold;
+  src: url("assets/ui/BrandonGrotesque-Bold.woff2") format("opentype");
 }
 
 body {
-  font-family: brandonGrotesque !important;
+  font-family: BrandonGrotesqueBlack;
   font-size: 18px;
+}
+
+p {
+  font-family: BrandonGrotesqueBold;
 }

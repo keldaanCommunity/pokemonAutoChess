@@ -15,11 +15,179 @@ import { Weather } from "../types/enum/Weather"
 import { distanceC, distanceM } from "../utils/distance"
 import { logger } from "../utils/logger"
 import { max, min } from "../utils/number"
-import { pickRandomIn } from "../utils/random"
+import { chance, pickRandomIn } from "../utils/random"
 import Board, { Cell } from "./board"
 import { PokemonEntity } from "./pokemon-entity"
 
 export default class PokemonState {
+  attack(
+    pokemon: PokemonEntity,
+    board: Board,
+    coordinates: { x: number; y: number }
+  ) {
+    const target = board.getValue(coordinates.x, coordinates.y)
+    if (target) {
+      let damage = pokemon.atk
+      let physicalDamage = 0
+      let specialDamage = 0
+      let trueDamage = 0
+      let totalTakenDamage = 0
+
+      if (Math.random() * 100 < pokemon.critChance) {
+        if (target.items.has(Item.ROCKY_HELMET) === false) {
+          let opponentCritPower = pokemon.critPower
+          if (target.effects.has(Effect.BATTLE_ARMOR)) {
+            opponentCritPower -= 0.3
+          } else if (target.effects.has(Effect.MOUTAIN_RESISTANCE)) {
+            opponentCritPower -= 0.5
+          } else if (target.effects.has(Effect.DIAMOND_STORM)) {
+            opponentCritPower -= 0.7
+          }
+          damage = Math.round(damage * opponentCritPower)
+        }
+        pokemon.onCriticalAttack({ target, board, damage })
+      }
+
+      if (pokemon.items.has(Item.FIRE_GEM)) {
+        damage = Math.round(damage + target.hp * 0.08)
+      }
+
+      if (pokemon.attackType === AttackType.SPECIAL) {
+        damage = Math.ceil(damage * (1 + pokemon.ap / 100))
+      }
+
+      if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {
+        damage = Math.ceil(damage * (1 + pokemon.ap / 100))
+      }
+
+      let trueDamagePart = 0
+      if (pokemon.effects.has(Effect.STEEL_SURGE)) {
+        trueDamagePart += 0.33
+      } else if (pokemon.effects.has(Effect.STEEL_SPIKE)) {
+        trueDamagePart += 0.66
+      } else if (pokemon.effects.has(Effect.CORKSCREW_CRASH)) {
+        trueDamagePart += 1.0
+      } else if (pokemon.effects.has(Effect.MAX_MELTDOWN)) {
+        trueDamagePart += 1.2
+      }
+      if (pokemon.items.has(Item.RED_ORB) && target) {
+        trueDamagePart += 0.25
+      }
+      if (pokemon.effects.has(Effect.LOCK_ON) && target) {
+        trueDamagePart += 2.0 * (1 + pokemon.ap / 100)
+        pokemon.effects.delete(Effect.LOCK_ON)
+      }
+
+      let additionalSpecialDamagePart = 0
+      if (pokemon.effects.has(Effect.AROMATIC_MIST)) {
+        additionalSpecialDamagePart += 0.15
+      } else if (pokemon.effects.has(Effect.FAIRY_WIND)) {
+        additionalSpecialDamagePart += 0.3
+      } else if (pokemon.effects.has(Effect.STRANGE_STEAM)) {
+        additionalSpecialDamagePart += 0.5
+      } else if (pokemon.effects.has(Effect.MOON_FORCE)) {
+        additionalSpecialDamagePart += 0.7
+      }
+
+      let isAttackSuccessful = true
+      let dodgeChance = target.dodge
+      if (pokemon.effects.has(Effect.GAS)) {
+        dodgeChance += 0.5
+      }
+      dodgeChance = max(0.9)(dodgeChance)
+
+      if (
+        chance(dodgeChance) &&
+        !pokemon.items.has(Item.XRAY_VISION) &&
+        !pokemon.effects.has(Effect.LOCK_ON) &&
+        !target.status.paralysis &&
+        !target.status.sleep &&
+        !target.status.freeze
+      ) {
+        isAttackSuccessful = false
+        damage = 0
+        target.count.dodgeCount += 1
+      }
+      if (target.status.protect || target.status.skydiving) {
+        isAttackSuccessful = false
+        damage = 0
+      }
+
+      if (trueDamagePart > 0) {
+        // Apply true damage part
+        trueDamage = Math.ceil(damage * trueDamagePart)
+        damage = min(0)(damage * (1 - trueDamagePart))
+
+        const { takenDamage } = target.handleDamage({
+          damage: trueDamage,
+          board,
+          attackType: AttackType.TRUE,
+          attacker: pokemon,
+          shouldTargetGainMana: true
+        })
+        totalTakenDamage += takenDamage
+      }
+
+      if (pokemon.attackType === AttackType.SPECIAL) {
+        specialDamage = damage
+      } else {
+        physicalDamage = damage
+      }
+
+      if (additionalSpecialDamagePart > 0) {
+        specialDamage += Math.ceil(damage * additionalSpecialDamagePart)
+      }
+
+      if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {
+        specialDamage += 1 * damage * (1 + pokemon.ap / 100)
+      }
+
+      if (physicalDamage > 0) {
+        // Apply attack physical damage
+        const { takenDamage } = target.handleDamage({
+          damage: physicalDamage,
+          board,
+          attackType: AttackType.PHYSICAL,
+          attacker: pokemon,
+          shouldTargetGainMana: true
+        })
+        totalTakenDamage += takenDamage
+      }
+
+      if (specialDamage > 0) {
+        // Apply special damage
+        const { takenDamage } = target.handleDamage({
+          damage: specialDamage,
+          board,
+          attackType: AttackType.SPECIAL,
+          attacker: pokemon,
+          shouldTargetGainMana: true
+        })
+        totalTakenDamage += takenDamage
+      }
+
+      const totalDamage = physicalDamage + specialDamage + trueDamage
+      pokemon.onAttack({
+        target,
+        board,
+        physicalDamage,
+        specialDamage,
+        trueDamage,
+        totalDamage
+      })
+      if (isAttackSuccessful) {
+        pokemon.onHit({
+          target,
+          board,
+          totalTakenDamage,
+          physicalDamage,
+          specialDamage,
+          trueDamage
+        })
+      }
+    }
+  }
+
   handleHeal(
     pokemon: IPokemonEntity,
     heal: number,

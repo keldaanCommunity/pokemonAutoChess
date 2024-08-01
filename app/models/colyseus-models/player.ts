@@ -181,18 +181,6 @@ export default class Player extends Schema implements IPlayer {
     )
   }
 
-  getLastBattle(): HistoryItem | null {
-    if (this.history.length > 0) {
-      return this.history[this.history.length - 1]
-    } else {
-      return null
-    }
-  }
-
-  getLastBattleResult(): BattleResult | "" {
-    return this.getLastBattle()?.result ?? ""
-  }
-
   getPokemonAt(x: number, y: number): Pokemon | undefined {
     let p: Pokemon | undefined = undefined
 

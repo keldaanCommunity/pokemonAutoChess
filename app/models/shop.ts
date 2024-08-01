@@ -425,7 +425,7 @@ export default class Shop {
     )
     if (incenseHolder && chance(5 / 100)) {
       specificTypeWanted = pickRandomIn(values(incenseHolder.types))
-    } else if (wildChance > 0 && chance(wildChance)) {
+    } else if (!incenseHolder && wildChance > 0 && chance(wildChance)) {
       specificTypeWanted = Synergy.WILD
     }
 

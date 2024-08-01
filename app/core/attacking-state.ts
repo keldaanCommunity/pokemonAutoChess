@@ -1,17 +1,15 @@
 import Player from "../models/colyseus-models/player"
-import { Effect } from "../types/enum/Effect"
-import { AttackType, PokemonActionState } from "../types/enum/Game"
+import { PokemonActionState } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
-import { Passive } from "../types/enum/Passive"
-import { Pkm } from "../types/enum/Pokemon"
 import { Weather } from "../types/enum/Weather"
 import { distanceC } from "../utils/distance"
-import { max, min } from "../utils/number"
 import { chance } from "../utils/random"
 import { AbilityStrategies } from "./abilities/abilities"
 import Board from "./board"
 import { PokemonEntity } from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
+import { AttackCommand } from "./simulation-command"
+import { getAttackTimings } from "../public/src/game/animation-manager"
 
 export default class AttackingState extends PokemonState {
   update(
@@ -87,214 +85,29 @@ export default class AttackingState extends PokemonState {
       } else {
         // BASIC ATTACK
         pokemon.count.attackCount++
-        this.attack(pokemon, board, targetCoordinate)
-        if (
-          pokemon.effects.has(Effect.RISING_VOLTAGE) ||
-          pokemon.effects.has(Effect.OVERDRIVE)
-        ) {
-          let isTripleAttack = false
-          if (pokemon.effects.has(Effect.RISING_VOLTAGE)) {
-            isTripleAttack = pokemon.count.attackCount % 4 === 0
-          } else if (pokemon.effects.has(Effect.OVERDRIVE)) {
-            isTripleAttack = pokemon.count.attackCount % 3 === 0
-          }
-          if (isTripleAttack) {
-            pokemon.count.tripleAttackCount++
-            this.attack(pokemon, board, targetCoordinate)
-            this.attack(pokemon, board, targetCoordinate)
+        pokemon.targetX = targetCoordinate.x
+        pokemon.targetY = targetCoordinate.y
+        pokemon.orientation = board.orientation(
+          pokemon.positionX,
+          pokemon.positionY,
+          targetCoordinate.x,
+          targetCoordinate.y,
+          pokemon,
+          target
+        )
 
-            if (pokemon.name === Pkm.MORPEKO) {
-              target.status.triggerParalysis(2000, pokemon)
-            }
-
-            if (pokemon.name === Pkm.MORPEKO_HANGRY) {
-              target.status.triggerWound(4000, target, pokemon)
-            }
-          }
-        }
+        const { delayBeforeShoot, travelTime } = getAttackTimings(pokemon)
+        pokemon.commands.push(
+          new AttackCommand(
+            delayBeforeShoot + travelTime,
+            pokemon,
+            board,
+            targetCoordinate
+          )
+        )
       }
     } else {
       pokemon.cooldown = Math.max(0, pokemon.cooldown - dt)
-    }
-  }
-
-  attack(
-    pokemon: PokemonEntity,
-    board: Board,
-    coordinates: { x: number; y: number }
-  ) {
-    pokemon.targetX = coordinates.x
-    pokemon.targetY = coordinates.y
-
-    const target = board.getValue(coordinates.x, coordinates.y)
-    if (target) {
-      pokemon.orientation = board.orientation(
-        pokemon.positionX,
-        pokemon.positionY,
-        target.positionX,
-        target.positionY,
-        pokemon,
-        target
-      )
-
-      let damage = pokemon.atk
-      let physicalDamage = 0
-      let specialDamage = 0
-      let trueDamage = 0
-      let totalTakenDamage = 0
-
-      if (Math.random() * 100 < pokemon.critChance) {
-        pokemon.onCriticalAttack({ target, board })
-        if (target.items.has(Item.ROCKY_HELMET) === false) {
-          let opponentCritPower = pokemon.critPower
-          if (target.effects.has(Effect.BATTLE_ARMOR)) {
-            opponentCritPower -= 0.3
-          } else if (target.effects.has(Effect.MOUTAIN_RESISTANCE)) {
-            opponentCritPower -= 0.5
-          } else if (target.effects.has(Effect.DIAMOND_STORM)) {
-            opponentCritPower -= 0.7
-          }
-          damage = Math.round(damage * opponentCritPower)
-        }
-      }
-
-      if (pokemon.items.has(Item.FIRE_GEM)) {
-        damage = Math.round(damage + target.hp * 0.08)
-      }
-
-      if (pokemon.attackType === AttackType.SPECIAL) {
-        damage = Math.ceil(damage * (1 + pokemon.ap / 100))
-      }
-
-      if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {
-        damage = Math.ceil(damage * (1 + pokemon.ap / 100))
-      }
-
-      let trueDamagePart = 0
-      if (pokemon.effects.has(Effect.STEEL_SURGE)) {
-        trueDamagePart += 0.33
-      } else if (pokemon.effects.has(Effect.STEEL_SPIKE)) {
-        trueDamagePart += 0.66
-      } else if (pokemon.effects.has(Effect.CORKSCREW_CRASH)) {
-        trueDamagePart += 1.0
-      } else if (pokemon.effects.has(Effect.MAX_MELTDOWN)) {
-        trueDamagePart += 1.2
-      }
-      if (pokemon.items.has(Item.RED_ORB) && target) {
-        trueDamagePart += 0.25
-      }
-      if (pokemon.effects.has(Effect.LOCK_ON) && target) {
-        trueDamagePart += 2.0 * (1 + pokemon.ap / 100)
-        pokemon.effects.delete(Effect.LOCK_ON)
-      }
-
-      let additionalSpecialDamagePart = 0
-      if (pokemon.effects.has(Effect.AROMATIC_MIST)) {
-        additionalSpecialDamagePart += 0.1
-      } else if (pokemon.effects.has(Effect.FAIRY_WIND)) {
-        additionalSpecialDamagePart += 0.2
-      } else if (pokemon.effects.has(Effect.STRANGE_STEAM)) {
-        additionalSpecialDamagePart += 0.3
-      } else if (pokemon.effects.has(Effect.MOON_FORCE)) {
-        additionalSpecialDamagePart += 0.4
-      }
-
-      let isAttackSuccessful = true
-      let dodgeChance = target.dodge
-      if (pokemon.effects.has(Effect.GAS)) {
-        dodgeChance += 0.5
-      }
-      dodgeChance = max(0.9)(dodgeChance)
-
-      if (
-        chance(dodgeChance) &&
-        !pokemon.items.has(Item.XRAY_VISION) &&
-        !pokemon.effects.has(Effect.LOCK_ON) &&
-        !target.status.paralysis &&
-        !target.status.sleep &&
-        !target.status.freeze
-      ) {
-        isAttackSuccessful = false
-        damage = 0
-        target.count.dodgeCount += 1
-      }
-      if (target.status.protect || target.status.skydiving) {
-        isAttackSuccessful = false
-        damage = 0
-      }
-
-      if (trueDamagePart > 0) {
-        // Apply true damage part
-        trueDamage = Math.ceil(damage * trueDamagePart)
-        damage = min(0)(damage * (1 - trueDamagePart))
-
-        const { takenDamage } = target.handleDamage({
-          damage: trueDamage,
-          board,
-          attackType: AttackType.TRUE,
-          attacker: pokemon,
-          shouldTargetGainMana: true
-        })
-        totalTakenDamage += takenDamage
-      }
-
-      if (pokemon.attackType === AttackType.SPECIAL) {
-        specialDamage = damage
-      } else {
-        physicalDamage = damage
-      }
-
-      if (additionalSpecialDamagePart > 0) {
-        specialDamage += Math.ceil(damage * additionalSpecialDamagePart)
-      }
-
-      if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {
-        specialDamage += 1 * damage * (1 + pokemon.ap / 100)
-      }
-
-      if (physicalDamage > 0) {
-        // Apply attack physical damage
-        const { takenDamage } = target.handleDamage({
-          damage: physicalDamage,
-          board,
-          attackType: AttackType.PHYSICAL,
-          attacker: pokemon,
-          shouldTargetGainMana: true
-        })
-        totalTakenDamage += takenDamage
-      }
-
-      if (specialDamage > 0) {
-        // Apply special damage
-        const { takenDamage } = target.handleDamage({
-          damage: specialDamage,
-          board,
-          attackType: AttackType.SPECIAL,
-          attacker: pokemon,
-          shouldTargetGainMana: true
-        })
-        totalTakenDamage += takenDamage
-      }
-
-      const totalDamage = physicalDamage + specialDamage + trueDamage
-      pokemon.onAttack({
-        target,
-        board,
-        physicalDamage,
-        specialDamage,
-        trueDamage,
-        totalDamage
-      })
-      if (isAttackSuccessful) {
-        pokemon.onHit({
-          target,
-          board,
-          totalTakenDamage,
-          physicalDamage,
-          specialDamage,
-          trueDamage
-        })
-      }
     }
   }
 

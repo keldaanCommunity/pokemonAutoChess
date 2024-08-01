@@ -45,9 +45,9 @@ export default function Profile() {
   }, [dispatch])
 
   return (
-    <div className="profile">
+    <div className="profile-modal">
       <div className="profile-box">
-        <h2>{t("profile")}</h2>
+        <h2>{profile?.name ?? ""} {t("profile")}</h2>
         {profile && <PlayerBox user={profile} />}
       </div>
 
@@ -63,7 +63,7 @@ export default function Profile() {
         )}
       </div>
 
-      {profile && <History history={profile.history} />}
+      {profile && <History history={profile.history.map(r=>r)} />}
     </div>
   )
 }

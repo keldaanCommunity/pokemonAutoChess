@@ -21,11 +21,10 @@ export default class ItemContainer extends DraggableObject {
   countText: GameObjects.Text | undefined
   circle?: GameObjects.Image
   name: Item
-  parentContainer: ItemsContainer
   scene: Phaser.Scene
   pokemonId: string | null
   playerId: string
-  mouseoutTimeout: ReturnType<typeof setTimeout>
+  mouseoutTimeout: NodeJS.Timeout | null = null
 
   constructor(
     scene: Phaser.Scene,
@@ -83,7 +82,7 @@ export default class ItemContainer extends DraggableObject {
   onPointerOver(pointer) {
     super.onPointerOver(pointer)
     if (preferences.showDetailsOnHover && !this.detail?.visible) {
-      clearTimeout(this.mouseoutTimeout)
+      this.mouseoutTimeout && clearTimeout(this.mouseoutTimeout)
       this.openDetail()
     }
     this.updateDropZone(false)
@@ -133,7 +132,7 @@ export default class ItemContainer extends DraggableObject {
 
   openDetail() {
     if (this.parentContainer.visible) {
-      this.parentContainer.closeDetails() // close other open item tooltips
+      ;(this.parentContainer as ItemsContainer).closeDetails() // close other open item tooltips
 
       if (this.detail === undefined) {
         this.detail = new ItemDetail(this.scene, 0, 0, this.name)
@@ -144,7 +143,7 @@ export default class ItemContainer extends DraggableObject {
         )
         this.detail.setVisible(false)
         this.detail.dom.addEventListener("mouseenter", () => {
-          clearTimeout(this.mouseoutTimeout)
+          this.mouseoutTimeout && clearTimeout(this.mouseoutTimeout)
         })
         this.detail.dom.addEventListener("mouseleave", () => {
           if (preferences.showDetailsOnHover) {
@@ -204,7 +203,7 @@ export default class ItemContainer extends DraggableObject {
     if (this.countText === undefined) {
       const textStyle = {
         fontSize: "16px",
-        fontFamily: "brandonGrotesque",
+        fontFamily: "BrandonGrotesqueBlack",
         color: "#FFFFFF",
         align: "center",
         strokeThickness: 2,

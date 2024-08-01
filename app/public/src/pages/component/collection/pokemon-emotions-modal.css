@@ -22,7 +22,7 @@
   filter: grayscale(0);
 }
 
-.pokemon-emotions-modal header > h1 {
+.pokemon-emotions-modal header > h2 {
   margin: 0;
 }
 

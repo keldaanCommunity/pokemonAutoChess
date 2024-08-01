@@ -6477,8 +6477,7 @@ export const AnimationConfig: {
   [Pkm.CROCALOR]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.RearUp,
-    shinyUnavailable: true
+    emote: AnimationType.RearUp
   },
   [Pkm.SKELEDIRGE]: {
     attack: AnimationType.Attack,

@@ -18,8 +18,8 @@ import PokemonSprite from "../components/pokemon"
 export class DebugScene extends Phaser.Scene {
   height: number
   width: number
-  animationManager: AnimationManager
-  loadingManager: LoadingManager
+  animationManager: AnimationManager | null = null
+  loadingManager: LoadingManager | null = null
   onProgress: (value: number) => void
   onComplete: () => void
   pokemon?: PokemonSprite
@@ -27,7 +27,7 @@ export class DebugScene extends Phaser.Scene {
   uid = "debug"
   tilemap: DesignTiled | undefined
   map: Phaser.Tilemaps.Tilemap | undefined
-  music: Phaser.Sound.WebAudioSound
+  music: Phaser.Sound.WebAudioSound | null = null
   attackAnimInterval: ReturnType<typeof setInterval> | undefined
 
   constructor(
@@ -100,7 +100,7 @@ export class DebugScene extends Phaser.Scene {
     }
 
     try {
-      this.animationManager.play(this.pokemon, animationName, { repeat: -1 })
+      this.animationManager?.play(this.pokemon, animationName, { repeat: -1 })
     } catch (err) {
       logger.error(
         `Error playing animation ${this.pokemon.name} ${animationType}: ${animationName}`,
@@ -120,7 +120,7 @@ export class DebugScene extends Phaser.Scene {
         return new Promise((resolve) => {
           this.load.reset()
           tilemap.tilesets.forEach((t) => {
-            logger.debug(`loading tileset ${t.image}`)
+            //logger.debug(`loading tileset ${t.image}`)
             this.load.image(
               mapName + "/" + t.name,
               "/assets/tilesets/" + mapName + "/" + t.image
@@ -143,7 +143,7 @@ export class DebugScene extends Phaser.Scene {
           map.createLayer(layer.name, tileset, 0, 0)?.setScale(2, 2)
         })
         ;(this.sys as any).animatedTiles.init(map)
-        playMusic(this, DungeonDetails[mapName].music)
+        playMusic(this as any, DungeonDetails[mapName].music)
       })
   }
 
@@ -271,14 +271,18 @@ export class DebugScene extends Phaser.Scene {
     )
     this.target.positionX = tx
     this.target.positionY = ty
-    this.animationManager.play(this.target, AnimationType.Idle, { repeat: -1 })
+    this.animationManager?.play(this.target, AnimationType.Idle, { repeat: -1 })
   }
 
   addAttackAnim() {
-    this.pokemon?.attackAnimation()
-    this.attackAnimInterval = setInterval(() => {
-      this.pokemon?.attackAnimation()
-    }, 2000)
+    const attack = () =>
+      this.pokemon?.attackAnimation(
+        this.pokemon.targetX || 0,
+        this.pokemon.targetY || 0,
+        0,
+        1000
+      )
+    this.attackAnimInterval = setInterval(attack, 2000)
   }
 
   addAbilityAnim() {

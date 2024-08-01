@@ -291,7 +291,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attackType === AttackType.SPECIAL
       ) {
         this.status.triggerBurn(3000, this, attacker)
-        this.status.triggerWound(3000, this, attacker)
       }
       if (
         this.items.has(Item.POWER_LENS) &&
@@ -365,7 +364,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       !this.status.resurecting &&
       !(value < 0 && this.status.tree) // cannot lose PP if tree
     ) {
-      this.pp = clamp(this.pp + value, 0, this.maxPP)
+      this.pp = min(0)(this.pp + value)
     }
   }
 
@@ -796,6 +795,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.addAttackSpeed(4, this, 1, false)
     }
 
+    if (this.name === Pkm.MORPEKO) {
+      target.status.triggerParalysis(2000, target)
+    }
+
+    if (this.name === Pkm.MORPEKO_HANGRY) {
+      target.status.triggerWound(4000, target, this)
+    }
+
     if (this.passive === Passive.DREAM_CATCHER && target.status.sleep) {
       const allies = board.cells.filter(
         (p) => p && p.team === this.team && p.id !== this.id
@@ -1173,28 +1180,27 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  onCriticalAttack({ target, board }: { target: PokemonEntity; board: Board }) {
+  onCriticalAttack({
+    target,
+    board,
+    damage
+  }: { target: PokemonEntity; board: Board; damage: number }) {
     target.count.crit++
 
     // proc fairy splash damage for both the attacker and the target
-    if (
-      target.fairySplashCooldown === 0 &&
-      (target.effects.has(Effect.FAIRY_WIND) ||
-        target.effects.has(Effect.STRANGE_STEAM) ||
-        target.effects.has(Effect.AROMATIC_MIST) ||
-        target.effects.has(Effect.MOON_FORCE))
-    ) {
-      let damage = 0
+    if (target.fairySplashCooldown === 0 && target.types.has(Synergy.FAIRY)) {
+      let shockDamageFactor = 0.3
       if (target.effects.has(Effect.AROMATIC_MIST)) {
-        damage = 10
+        shockDamageFactor += 0.15
       } else if (target.effects.has(Effect.FAIRY_WIND)) {
-        damage = 20
+        shockDamageFactor += 0.3
       } else if (target.effects.has(Effect.STRANGE_STEAM)) {
-        damage = 30
+        shockDamageFactor += 0.5
       } else if (target.effects.has(Effect.MOON_FORCE)) {
-        damage = 50
+        shockDamageFactor += 0.7
       }
 
+      const shockDamage = shockDamageFactor * damage
       target.count.fairyCritCount++
       target.fairySplashCooldown = 250
 
@@ -1208,7 +1214,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (distance <= 1) {
         // melee range
         this.handleSpecialDamage(
-          damage,
+          shockDamage,
           board,
           AttackType.SPECIAL,
           target,
@@ -1496,11 +1502,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.items.has(Item.SACRED_ASH) && this.player) {
       const team = this.simulation.getTeam(this.player.id)
       if (team) {
-        const koAllies = values(this.player.board)
-          .filter(
-            (p) => values(team).some((entity) => p.id === entity.id) === false
-          )
-          .filter((p) => p.id !== this.id)
+        const alliesAlive = values(team)
+          .filter((e) => e.life > 0)
+          .map((e) => e.refToBoardPokemon.id)
+        const koAllies = values(this.player.board).filter(
+          (p) =>
+            p.id !== this.refToBoardPokemon.id &&
+            alliesAlive.includes(p.id) === false
+        )
+
         const spawns = pickNRandomIn(koAllies, 3)
         spawns.forEach((spawn) => {
           const mon = PokemonFactory.createPokemonFromName(spawn.name)

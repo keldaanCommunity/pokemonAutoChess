@@ -251,7 +251,8 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.KLEFKI,
   Pkm.HEATMOR,
   Pkm.HAWLUCHA,
-  Pkm.STONJOURNER
+  Pkm.STONJOURNER,
+  Pkm.CRAMORANT
 )
 
 export const LegendaryShop = new Array<PkmProposition>(
@@ -349,11 +350,19 @@ export const MAX_PLAYERS_PER_GAME = 8
 export const DEFAULT_ATK_SPEED = 0.75
 export const DEFAULT_CRIT_CHANCE = 10
 export const DEFAULT_CRIT_POWER = 2
+export const PROJECTILE_SPEED = 4
 
 export const StageDuration: Record<number | "DEFAULT", number> = {
   1: 30,
-  10: 45,
-  20: 45,
+  3: 40,
+  5: 40,
+  8: 40,
+  9: 40,
+  10: 50,
+  11: 40,
+  15: 40,
+  19: 40,
+  20: 50,
   DEFAULT: 30
 }
 export const FIGHTING_PHASE_DURATION = 40000

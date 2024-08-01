@@ -2,15 +2,15 @@
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { PokemonActionState } from "../../../../types/enum/Game"
 import { Pkm } from "../../../../types/enum/Pokemon"
+import { clamp, min } from "../../../../utils/number"
+import { preferences } from "../../preferences"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
-import { preferences } from "../../preferences"
-import { clamp, min } from "../../../../utils/number"
 import { PokemonSpecialDetail } from "./pokemon-special-detail"
 
 export default class PokemonSpecial extends PokemonSprite {
-  detail: PokemonSpecialDetail | null
+  detail: PokemonSpecialDetail | null = null
   animationManager: AnimationManager
   dialog?: string
   dialogTitle?: string

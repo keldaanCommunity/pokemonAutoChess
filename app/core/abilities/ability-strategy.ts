@@ -9,7 +9,7 @@ import Board from "../board"
 import { PokemonEntity } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 import { AbilityStrategies } from "./abilities"
-import triggerPokerus from "../../models/colyseus-models/status"
+import { min } from "../../utils/number"
 
 export class AbilityStrategy {
   copyable = true // if true, can be copied by mimic, metronome...
@@ -21,7 +21,7 @@ export class AbilityStrategy {
     crit: boolean,
     preventDefaultAnim?: boolean
   ) {
-    pokemon.pp = 0
+    pokemon.pp = min(0)(pokemon.pp - pokemon.maxPP)
     pokemon.count.ult += 1
 
     if (!preventDefaultAnim) {

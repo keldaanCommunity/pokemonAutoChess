@@ -8,15 +8,14 @@ import GameState from "../../../../rooms/states/game-state"
 import { IPokemon, Transfer } from "../../../../types"
 import { SynergyTriggers } from "../../../../types/Config"
 import {
-  GamePhaseState,
   GameMode,
+  GamePhaseState,
   Orientation,
   PokemonActionState
 } from "../../../../types/enum/Game"
 import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../../types/enum/Synergy"
-import { logger } from "../../../../utils/logger"
 import { values } from "../../../../utils/schemas"
 import { transformCoordinate } from "../../pages/utils/utils"
 import store from "../../stores"
@@ -40,7 +39,7 @@ export default class BoardManager {
   player: Player
   mode: BoardMode
   animationManager: AnimationManager
-  playerAvatar: PokemonAvatar
+  playerAvatar: PokemonAvatar | null
   opponentAvatar: PokemonAvatar | null
   scoutingAvatars: PokemonAvatar[] = []
   pveChestGroup: Phaser.GameObjects.Group | null
@@ -71,6 +70,11 @@ export default class BoardManager {
     this.lightY = state.lightY
     this.gameMode = state.gameMode
     this.specialGameRule = state.specialGameRule
+    this.playerAvatar = null
+    this.opponentAvatar = null
+    this.lightCell = null
+    this.pveChest = null
+    this.pveChestGroup = null
     this.renderBoard()
 
     if (state.phase == GamePhaseState.FIGHT) {
@@ -131,17 +135,19 @@ export default class BoardManager {
         PokemonActionState.HOP,
         false
       )
-      this.animationManager.animatePokemon(
-        this.playerAvatar,
-        PokemonActionState.HURT,
-        false
-      )
+      this.playerAvatar &&
+        this.animationManager.animatePokemon(
+          this.playerAvatar,
+          PokemonActionState.HURT,
+          false
+        )
     } else {
-      this.animationManager.animatePokemon(
-        this.playerAvatar,
-        PokemonActionState.IDLE,
-        false
-      )
+      this.playerAvatar &&
+        this.animationManager.animatePokemon(
+          this.playerAvatar,
+          PokemonActionState.IDLE,
+          false
+        )
       if (this.opponentAvatar) {
         this.animationManager.animatePokemon(
           this.opponentAvatar,
@@ -501,10 +507,15 @@ export default class BoardManager {
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
     setTimeout(() => {
       const gameState = store.getState().game
-      this.updateOpponentAvatar(
-        gameState.currentPlayerOpponentId,
-        gameState.currentPlayerOpponentAvatar
+      const currentPlayer = gameState.players.find(
+        (p) => p.id === gameState.currentPlayerId
       )
+      if (currentPlayer) {
+        this.updateOpponentAvatar(
+          currentPlayer.opponentId,
+          currentPlayer.opponentAvatar
+        )
+      }
     }, 0) // need to wait for next event loop for state to be up to date
   }
 
