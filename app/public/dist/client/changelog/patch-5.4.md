@@ -42,4 +42,5 @@
 
 # Misc
 
+- New accounts now start with a random avatar among Pokemon Mystery Dungeon starters
 - Vietnamese translation has been started thanks to Camchanh
