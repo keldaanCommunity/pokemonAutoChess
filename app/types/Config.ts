@@ -251,7 +251,8 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.KLEFKI,
   Pkm.HEATMOR,
   Pkm.HAWLUCHA,
-  Pkm.STONJOURNER
+  Pkm.STONJOURNER,
+  Pkm.SKARMORY
 )
 
 export const LegendaryShop = new Array<PkmProposition>(

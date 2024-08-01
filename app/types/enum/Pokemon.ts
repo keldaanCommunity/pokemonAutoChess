@@ -811,7 +811,8 @@ export enum Pkm {
   MIENSHAO = "MIENSHAO",
   STONJOURNER = "STONJOURNER",
   HISUI_SNEASEL = "HISUI_SNEASEL",
-  SNEASLER = "SNEASLER"
+  SNEASLER = "SNEASLER",
+  SKARMORY = "SKARMORY"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1625,7 +1626,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MIENSHAO]: "0620",
   [Pkm.STONJOURNER]: "0874",
   [Pkm.HISUI_SNEASEL]: "0215-0001",
-  [Pkm.SNEASLER]: "0903"
+  [Pkm.SNEASLER]: "0903",
+  [Pkm.SKARMORY]: "0227"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2439,7 +2441,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MIENSHAO]: Pkm.MIENFOO,
   [Pkm.STONJOURNER]: Pkm.STONJOURNER,
   [Pkm.HISUI_SNEASEL]: Pkm.HISUI_SNEASEL,
-  [Pkm.SNEASLER]: Pkm.HISUI_SNEASEL
+  [Pkm.SNEASLER]: Pkm.HISUI_SNEASEL,
+  [Pkm.SKARMORY]: Pkm.SKARMORY
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
@@ -6659,5 +6662,10 @@ export const AnimationConfig: {
     attack: AnimationType.Strike,
     ability: AnimationType.Attack,
     emote: AnimationType.Charge
+  },
+  [Pkm.SKARMORY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Roar,
+    emote: AnimationType.Roar
   }
 }
