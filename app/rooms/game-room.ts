@@ -942,7 +942,7 @@ export default class GameRoom extends Room<GameState> {
   ) {
     const player = this.state.players.get(playerId)
     if (!player || player.pokemonsProposition.length === 0) return
-    if (this.state.additionalPokemons.includes(pkm)) return // already picked, probably a double click
+    if (this.state.additionalPokemons.includes(pkm as Pkm)) return // already picked, probably a double click
     if (
       UniqueShop.includes(pkm) &&
       this.state.stageLevel !== PortalCarouselStages[0]
@@ -966,7 +966,7 @@ export default class GameRoom extends Room<GameState> {
     player.pokemonsProposition.clear()
 
     if (AdditionalPicksStages.includes(this.state.stageLevel)) {
-      this.state.additionalPokemons.push(pkm)
+      this.state.additionalPokemons.push(pkm as Pkm)
       this.state.shop.addAdditionalPokemon(pkm)
 
       if (
