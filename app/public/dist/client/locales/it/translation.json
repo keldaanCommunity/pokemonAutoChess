@@ -339,7 +339,8 @@
     "THUNDER_FANG": "Fulmindenti",
     "TAIL_WHIP": "Colpocoda",
     "PSYSHIELD_BASH": "Barrierassalto",
-    "QUIVER_DANCE": "Eledanza"
+    "QUIVER_DANCE": "Eledanza",
+    "TORCH_SONG": "Canzone Ardente"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
