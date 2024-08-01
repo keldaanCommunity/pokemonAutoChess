@@ -5231,33 +5231,33 @@ export class EruptionStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = [30, 50, 70][pokemon.stars - 1] ?? 30
     const numberOfProjectiles =
-      pokemon.stars === 1 ? 15 : pokemon.stars === 2 ? 25 : 40
+      pokemon.stars === 1 ? 20 : pokemon.stars === 2 ? 30 : 45
 
     for (let i = 0; i < numberOfProjectiles; i++) {
-      const x = randomBetween(0, BOARD_WIDTH - 1)
-      const y = randomBetween(0, BOARD_HEIGHT - 1)
-      const value = board.getValue(x, y)
-      if (value && value.team !== pokemon.team) {
-        value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-      }
-      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-        id: pokemon.simulation.id,
-        skill: Ability.ERUPTION,
-        positionX: pokemon.positionX,
-        positionY: pokemon.positionY,
-        targetX: x,
-        targetY: y
-      })
-    }
+      pokemon.commands.push(new AbilityCommand(()=>{
+        const x = randomBetween(0, BOARD_WIDTH - 1)
+        const y = randomBetween(0, BOARD_HEIGHT - 1)
+        const value = board.getValue(x, y)
+        if (value && value.team !== pokemon.team) {
+          value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.ERUPTION,
+          positionX: pokemon.positionX,
+          positionY: pokemon.positionY,
+          targetX: x,
+          targetY: y
+        })
+      }, i * 100))
 
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerBurn(5000, target, pokemon)
+    }
   }
 }
 

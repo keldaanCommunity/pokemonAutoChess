@@ -1349,7 +1349,7 @@
     "MAGMA_STORM": "Das Ziel wird in einem Mahlstrom aus Feuer gefangen, der [80,SP] SPECIAL verursacht, bevor er sich zu einem benachbarten Ziel bewegt",
     "DIRE_CLAW": "Fügt dem Ziel [15,30,60,SP] SPECIAL zu. Verursacht 3 Sekunden lang entweder POISON, SLEEP oder PARALYSIS.",
     "SLASHING_CLAW": "Fügt dem Ziel [15,30,60,SP] zu und verwundet es 5 Sekunden lang. Wenn das Ziel bereits WOUND ist, wird ein SPECIAL bonus von 30 % gewährt",
-    "ERUPTION": "Feuert [15,25,40] Projektile in die Luft ab. Jedes Projektil verursacht [30,50,70,SP] SPECIAL und BURN für 5 Sekunden",
+    "ERUPTION": "Feuert [20,30,45] Projektile in die Luft ab. Jedes Projektil verursacht [30,50,70,SP] SPECIAL und BURN für 5 Sekunden",
     "HAIL": "Ein Hagelsturm trifft [10,20,30] zufällige Felder auf dem Spielfeld und verursacht [50,SP] SPECIAL. Hagelkörner bleiben auf dem Boden liegen, verursachen 10 SPECIAL und FREEZE Pokémon, die darauf laufen, 1 Sekunde lang ein, wenn sie nicht ICE sind.",
     "LUSTER_PURGE": "Schleudert einen Lichtball in einer geraden Linie, der zweimal [25,SP] SPECIAL verursacht und die SPE_DEF aller getroffenen Feinde um 3 verringert",
     "MIST_BALL": "Startet eine Nebelblase in einer geraden Linie, die zweimal [25,SP] SPECIAL verursacht und die AP aller getroffenen Feinde um das Doppelte um 30 % senkt.",

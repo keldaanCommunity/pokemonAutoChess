@@ -14,6 +14,7 @@
 - Nerf Groudon: SpeDef 5 → 3 ; Nerf Primal Groudon Def 8 → 6 SpeDef 8 → 3
 - Buff Primal Kyogre: PP 120 → 100
 - Change Seed Flare (Shaymin): now deals damage in a 5-cell radius around Shaymin
+- Changed Eruption (Numel): Lava projectiles spreads over time (over a few seconds)
 
 # Changes to Synergies
 
