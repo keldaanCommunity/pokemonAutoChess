@@ -122,13 +122,13 @@ export const gameSlice = createSlice({
       state.shop = action.payload.map(p=>p)
     },
     setItemsProposition: (state, action: PayloadAction<ArraySchema<Item>>) => {
-      state.itemsProposition = JSON.parse(JSON.stringify(action.payload))
+      state.itemsProposition = action.payload.map(p=>p)
     },
     setPokemonProposition: (state, action: PayloadAction<PkmProposition[]>) => {
-      state.pokemonsProposition = JSON.parse(JSON.stringify(action.payload))
+      state.pokemonsProposition = action.payload.map(p=>p)
     },
-    setAdditionalPokemons: (state, action: PayloadAction<PkmProposition[]>) => {
-      state.additionalPokemons = JSON.parse(JSON.stringify(action.payload))
+    setAdditionalPokemons: (state, action: PayloadAction<Pkm[]>) => {
+      state.additionalPokemons = action.payload.map(p=>p)
     },
     setSynergies: (
       state,

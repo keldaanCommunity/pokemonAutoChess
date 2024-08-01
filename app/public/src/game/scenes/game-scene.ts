@@ -246,7 +246,7 @@ export default class GameScene extends Scene {
           .then((tilemap: DesignTiled) => {
             this.tilemaps.set(mapName, tilemap)
             tilemap.tilesets.forEach((t) => {
-              logger.debug(`loading tileset ${mapName + "/" + t.name}`)
+              //logger.debug(`loading tileset ${mapName + "/" + t.name}`)
               this.load.image(
                 mapName + "/" + t.name,
                 "/assets/tilesets/" + mapName + "/" + t.image

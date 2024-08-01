@@ -3,7 +3,7 @@ import { Pkm } from "../../../../../types/enum/Pokemon"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { shopClick } from "../../../stores/NetworkStore"
 import { getGameScene } from "../../game"
-import { playSound, SOUNDS } from "../../utils/audio"
+import { SOUNDS, playSound } from "../../utils/audio"
 import GamePokemonPortrait from "./game-pokemon-portrait"
 
 export default function GameStore() {
