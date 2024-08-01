@@ -1,5 +1,8 @@
 # New Pokemons:
 
+- Poipole
+- Naganadel
+
 # Changes to Pokemon & Abilities
 
 - Buff Drizzile: Attack 23 → 26

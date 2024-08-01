@@ -2085,12 +2085,20 @@ export class SeedFlareStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = 30
 
-    board.getCellsInRadius(pokemon.positionX, pokemon.positionY, 5).forEach((cell) => {
-      if (cell.value && pokemon.team !== cell.value.team) {
-        cell.value.addSpecialDefense(-2, pokemon, 0, false)
-        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-      }
-    })
+    board
+      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 5)
+      .forEach((cell) => {
+        if (cell.value && pokemon.team !== cell.value.team) {
+          cell.value.addSpecialDefense(-2, pokemon, 0, false)
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
   }
 }
 
@@ -5220,6 +5228,35 @@ export class FakeOutStrategy extends AbilityStrategy {
   }
 }
 
+export class FellStingerStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [20, 40, 70][pokemon.stars - 1] ?? 30
+    const victim = target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+    if (victim.death && !pokemon.isClone) {
+      pokemon.addAbilityPower(5, pokemon, 0, false)
+      pokemon.addAttack(1, pokemon, 0, false)
+      pokemon.addMaxHP(10)
+      pokemon.handleHeal(10, pokemon, 0, false)
+      pokemon.refToBoardPokemon.atk += 1
+      pokemon.refToBoardPokemon.ap += 5
+      pokemon.refToBoardPokemon.hp += 10
+    }
+  }
+}
+
 export class EruptionStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -5234,29 +5271,30 @@ export class EruptionStrategy extends AbilityStrategy {
       pokemon.stars === 1 ? 20 : pokemon.stars === 2 ? 30 : 45
 
     for (let i = 0; i < numberOfProjectiles; i++) {
-      pokemon.commands.push(new AbilityCommand(()=>{
-        const x = randomBetween(0, BOARD_WIDTH - 1)
-        const y = randomBetween(0, BOARD_HEIGHT - 1)
-        const value = board.getValue(x, y)
-        if (value && value.team !== pokemon.team) {
-          value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
-        }
-        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-          id: pokemon.simulation.id,
-          skill: Ability.ERUPTION,
-          positionX: pokemon.positionX,
-          positionY: pokemon.positionY,
-          targetX: x,
-          targetY: y
-        })
-      }, i * 100))
-
+      pokemon.commands.push(
+        new AbilityCommand(() => {
+          const x = randomBetween(0, BOARD_WIDTH - 1)
+          const y = randomBetween(0, BOARD_HEIGHT - 1)
+          const value = board.getValue(x, y)
+          if (value && value.team !== pokemon.team) {
+            value.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: Ability.ERUPTION,
+            positionX: pokemon.positionX,
+            positionY: pokemon.positionY,
+            targetX: x,
+            targetY: y
+          })
+        }, i * 100)
+      )
     }
   }
 }
@@ -9707,5 +9745,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DRAIN_PUNCH]: new DrainPunchStrategy(),
   [Ability.GRAVITY]: new GravityStrategy(),
   [Ability.DIRE_CLAW]: new DireClawStrategy(),
-  [Ability.FAKE_OUT]: new FakeOutStrategy()
+  [Ability.FAKE_OUT]: new FakeOutStrategy(),
+  [Ability.FELL_STINGER]: new FellStingerStrategy()
 }

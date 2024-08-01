@@ -535,6 +535,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.FELL_STINGER:
+      addAbilitySprite(Ability.VENOSHOCK, coordinatesTarget, true).setScale(2)
+      break
+
     case Ability.LEECH_LIFE:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
