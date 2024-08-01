@@ -38,6 +38,8 @@
 
 # Bugfix
 
+- Regional lists was not correctly updated when picking an additional pick with a regional variant
+
 # Misc
 
 - Vietnamese translation has been started thanks to Camchanh
