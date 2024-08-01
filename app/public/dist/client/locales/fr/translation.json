@@ -1475,7 +1475,7 @@
     "FURY_SWIPES": "L'ennemi est lacéré par des faux ou des griffes, causant [2,SP] à [5,SP] attaques d'affilée en PHYSICAL",
     "TICKLE": "Réduit l'ATK et la DEF des [1,2] ennemis les plus proches de [3,SP]",
     "AROMATHERAPY": "Supprime les effets négatfs de statut des alliés adjacents et les soigne de [20,40,80,SP] HP",
-    "DETECT": "Donne PROTECT aux alliés adjacents pendant [0.5,SP] secondes mutiplié par le nombre d'ennemis adjacents",
+    "DETECT": "Donne PROTECT aux alliés adjacents pendant [500,SP] ms mutiplié par le nombre d'ennemis adjacents",
     "SPACIAL_REND": "Inverse les position des unités ennemies, puis inflige [100,SP] SPECIAL à tous les ennemis d'une rangée",
     "MULTI_ATTACK": "Inflige [10,SP] SPECIAL aux ennemis adjacents, multiplié par le niveau de synergie de la forme actuelle de $t(pkm.SILVALLY)",
     "STICKY_WEB": "Inflige [20,35,70,SP] SPECIAL à la cible et projette une toile autour d'elle. Les adversaires marchant sur la toile subissent PARALYSIS pendant 2 secondes.",
