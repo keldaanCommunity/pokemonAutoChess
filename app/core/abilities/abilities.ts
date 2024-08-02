@@ -9359,6 +9359,22 @@ export class GravityStrategy extends AbilityStrategy {
   }
 }
 
+export class PurifyStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const heal = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const poison = [1, 2, 4][pokemon.stars - 1] ?? 4
+    pokemon.handleHeal(heal, pokemon, 1, crit)
+    target.status.triggerPoison(poison, target, pokemon)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -9707,5 +9723,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DRAIN_PUNCH]: new DrainPunchStrategy(),
   [Ability.GRAVITY]: new GravityStrategy(),
   [Ability.DIRE_CLAW]: new DireClawStrategy(),
-  [Ability.FAKE_OUT]: new FakeOutStrategy()
+  [Ability.FAKE_OUT]: new FakeOutStrategy(),
+  [Ability.PURIFY]: new PurifyStrategy()
 }

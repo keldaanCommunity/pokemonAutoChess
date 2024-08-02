@@ -14378,6 +14378,21 @@ export class Stonjourner extends Pokemon {
   }
 }
 
+export class Pyukumuku extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.POISON, Synergy.AMORPHOUS])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 160
+  atk = 8
+  def = 10
+  speDef = 10
+  maxPP = 80
+  range = 1
+  skill = Ability.PURIFY
+  passive = Passive.PYUKUMUKU
+  attackSprite = AttackSprite.WATER_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -15195,5 +15210,6 @@ export const PokemonClasses: Record<
   [Pkm.MIENSHAO]: Mienshao,
   [Pkm.STONJOURNER]: Stonjourner,
   [Pkm.HISUI_SNEASEL]: HisuiSneasel,
-  [Pkm.SNEASLER]: Sneasler
+  [Pkm.SNEASLER]: Sneasler,
+  [Pkm.PYUKUMUKU]: Pyukumuku
 }

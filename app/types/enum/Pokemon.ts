@@ -811,7 +811,8 @@ export enum Pkm {
   MIENSHAO = "MIENSHAO",
   STONJOURNER = "STONJOURNER",
   HISUI_SNEASEL = "HISUI_SNEASEL",
-  SNEASLER = "SNEASLER"
+  SNEASLER = "SNEASLER",
+  PYUKUMUKU = "PYUKUMUKU"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1625,7 +1626,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MIENSHAO]: "0620",
   [Pkm.STONJOURNER]: "0874",
   [Pkm.HISUI_SNEASEL]: "0215-0001",
-  [Pkm.SNEASLER]: "0903"
+  [Pkm.SNEASLER]: "0903",
+  [Pkm.PYUKUMUKU]: "0771"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2439,7 +2441,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MIENSHAO]: Pkm.MIENFOO,
   [Pkm.STONJOURNER]: Pkm.STONJOURNER,
   [Pkm.HISUI_SNEASEL]: Pkm.HISUI_SNEASEL,
-  [Pkm.SNEASLER]: Pkm.HISUI_SNEASEL
+  [Pkm.SNEASLER]: Pkm.HISUI_SNEASEL,
+  [Pkm.PYUKUMUKU]: Pkm.PYUKUMUKU
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
@@ -6659,5 +6662,10 @@ export const AnimationConfig: {
     attack: AnimationType.Strike,
     ability: AnimationType.Attack,
     emote: AnimationType.Charge
+  },
+  [Pkm.PYUKUMUKU]: {  // TODO: Update these when sprites are validated
+    attack: AnimationType.Idle,
+    ability: AnimationType.Idle,
+    emote: AnimationType.Sleep
   }
 }

@@ -1422,6 +1422,21 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.simulation.applyCurse(Effect.CURSE_OF_FATE, this.team)
     }
 
+    if (this.passive === Passive.PYUKUMUKU) {
+      const adjcells = board.getAdjacentCells(this.positionX, this.positionY)
+      adjcells.forEach((cell) => {
+        if (cell.value && this.team != cell.value.team) {
+          cell.value.handleSpecialDamage(
+            100,
+            board,
+            AttackType.SPECIAL,
+            this,
+            false
+          )
+        }
+      })
+    }
+
     if (this.passive === Passive.CORSOLA && this.player) {
       const galarCorsola = this.refToBoardPokemon.evolutionRule.evolve(
         this.refToBoardPokemon as Pokemon,
