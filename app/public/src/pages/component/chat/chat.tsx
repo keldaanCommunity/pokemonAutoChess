@@ -28,12 +28,20 @@ export default function Chat(props: { source: string }) {
       >
         <input
           placeholder={
-            user?.anonymous ? t("chat_disabled_anonymous") : t("type_here")
+            props.source === "lobby"
+              ? "Chat is temporarily disabled"
+              : user?.anonymous
+                ? t("chat_disabled_anonymous")
+                : t("type_here")
           }
-          disabled={user?.anonymous}
+          disabled={props.source === "lobby" || user?.anonymous}
           type="text"
           title={
-            user?.anonymous ? t("chat_disabled_anonymous") : t("type_here")
+            props.source === "lobby"
+              ? "Chat is temporarily disabled"
+              : user?.anonymous
+                ? t("chat_disabled_anonymous")
+                : t("type_here")
           }
           onChange={(e) => {
             setCurrentText(e.target.value)
@@ -43,9 +51,13 @@ export default function Chat(props: { source: string }) {
         />
         <button
           className="bubbly blue"
-          disabled={user?.anonymous}
+          disabled={props.source === "lobby" || user?.anonymous}
           title={
-            user?.anonymous ? t("chat_disabled_anonymous") : t("send_message")
+            props.source === "lobby"
+              ? "Chat temporarily disabled due to massive influx of new visitors"
+              : user?.anonymous
+                ? t("chat_disabled_anonymous")
+                : t("type_here")
           }
         >
           {t("send")}

@@ -112,7 +112,7 @@ export const networkSlice = createSlice({
     },
     sendMessage: (state, action: PayloadAction<string>) => {
       if (state.lobby) {
-        state.lobby.send(Transfer.NEW_MESSAGE, action.payload)
+        //state.lobby.send(Transfer.NEW_MESSAGE, action.payload)
       }
       if (state.preparation) {
         state.preparation.send(Transfer.NEW_MESSAGE, action.payload)

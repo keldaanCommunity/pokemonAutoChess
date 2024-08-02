@@ -11,10 +11,6 @@ import { WebhookClient } from "discord.js"
 import admin from "firebase-admin"
 import { nanoid } from "nanoid"
 import { PastebinAPI } from "pastebin-ts/dist/api"
-import {
-  ILeaderboardBotInfo,
-  ILeaderboardInfo
-} from "../types/interfaces/LeaderboardInfo"
 import Message from "../models/colyseus-models/message"
 import { TournamentSchema } from "../models/colyseus-models/tournament"
 import BannedUser from "../models/mongo-models/banned-user"
@@ -23,16 +19,20 @@ import ChatV2 from "../models/mongo-models/chat-v2"
 import Tournament from "../models/mongo-models/tournament"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { Emotion, IPlayer, Role, Title, Transfer } from "../types"
-import { EloRank } from "../types/enum/EloRank"
 import {
   GREATBALL_RANKED_LOBBY_CRON,
-  ULTRABALL_RANKED_LOBBY_CRON,
   SCRIBBLE_LOBBY_CRON,
   TOURNAMENT_CLEANUP_DELAY,
-  TOURNAMENT_REGISTRATION_TIME
+  TOURNAMENT_REGISTRATION_TIME,
+  ULTRABALL_RANKED_LOBBY_CRON
 } from "../types/Config"
+import { EloRank } from "../types/enum/EloRank"
 import { GameMode } from "../types/enum/Game"
 import { Language } from "../types/enum/Language"
+import {
+  ILeaderboardBotInfo,
+  ILeaderboardInfo
+} from "../types/interfaces/LeaderboardInfo"
 import { ITournament } from "../types/interfaces/Tournament"
 import { logger } from "../utils/logger"
 import {
@@ -225,9 +225,9 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       }
     )
 
-    this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
-      this.dispatcher.dispatch(new OnNewMessageCommand(), { client, message })
-    })
+    // this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
+    //   this.dispatcher.dispatch(new OnNewMessageCommand(), { client, message })
+    // })
 
     this.onMessage(
       Transfer.REMOVE_MESSAGE,
@@ -485,7 +485,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     })
 
     this.initCronJobs()
-    this.fetchChat()
+    //this.fetchChat()
     this.fetchLeaderboards()
     this.fetchTournaments()
   }
