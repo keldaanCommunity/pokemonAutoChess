@@ -9397,6 +9397,86 @@ export class GravityStrategy extends AbilityStrategy {
   }
 }
 
+export class GulpMissileStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+
+    let missilePkm = Pkm.ARROKUDA
+    let missilePkmString = "arrokuda"
+
+    const damage = 55
+
+    if (chance(0.3)) {
+      missilePkm = Pkm.PIKACHU
+      missilePkmString = "pikachu"
+    }
+
+    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+      id: pokemon.simulation.id,
+      skill: `GULP_MISSILE/${missilePkmString}`,
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY,
+      targetX: target.positionX,
+      targetY: target.positionY
+    })
+
+    const missile = PokemonFactory.createPokemonFromName(
+      missilePkm,
+      pokemon.player
+    )
+
+    pokemon.commands.push(
+      new AbilityCommand(
+        () => {
+          const coord = state.getNearestAvailablePlaceCoordinates(target, board)
+          if (coord) {
+            const entity = pokemon.simulation.addPokemon(
+              missile,
+              coord.x,
+              coord.y,
+              pokemon.team,
+              true
+            )
+
+            entity.pp = entity.maxPP
+
+            const cells = board.getAdjacentCells(
+              target.positionX,
+              target.positionY
+            )
+
+            cells.forEach((cell) => {
+              if (cell.value && cell.value.team !== pokemon.team) {
+                cell.value.handleSpecialDamage(
+                  damage,
+                  board,
+                  AttackType.SPECIAL,
+                  pokemon,
+                  crit
+                )
+              }
+            })
+          }
+        },
+        distanceM(
+          target.positionX,
+          target.positionY,
+          pokemon.positionX,
+          pokemon.positionY
+        ) *
+          150 -
+          30
+      )
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -9746,5 +9826,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.GRAVITY]: new GravityStrategy(),
   [Ability.DIRE_CLAW]: new DireClawStrategy(),
   [Ability.FAKE_OUT]: new FakeOutStrategy(),
-  [Ability.FELL_STINGER]: new FellStingerStrategy()
+  [Ability.FELL_STINGER]: new FellStingerStrategy(),
+  [Ability.GULP_MISSILE]: new GulpMissileStrategy()
 }

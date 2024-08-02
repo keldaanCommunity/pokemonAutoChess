@@ -1,5 +1,6 @@
 # New Pokemons:
-
+- Cramorant
+- Arrokuda
 - Poipole
 - Naganadel
 
