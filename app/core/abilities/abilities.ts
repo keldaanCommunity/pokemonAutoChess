@@ -9406,76 +9406,74 @@ export class GulpMissileStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    
+
     let missilePkm = Pkm.ARROKUDA
     let missilePkmString = "arrokuda"
 
     const damage = 55
-    const coord = state.getMostSurroundedCoordinateAvailablePlace(
-      pokemon, 
-      board
+
+    if (chance(0.3)) {
+      missilePkm = Pkm.PIKACHU
+      missilePkmString = "pikachu"
+    }
+
+    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+      id: pokemon.simulation.id,
+      skill: `GULP_MISSILE/${missilePkmString}`,
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY,
+      targetX: target.positionX,
+      targetY: target.positionY
+    })
+
+    const missile = PokemonFactory.createPokemonFromName(
+      missilePkm,
+      pokemon.player
     )
-    
-    if (coord){
-      if (Math.random() < 0.34) {
-        missilePkm = Pkm.PIKACHU
-        missilePkmString = "pikachu"
-      } 
-      
-      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-        id: pokemon.simulation.id,
-        skill: `GULP_MISSILE/${missilePkmString}`,
-        positionX: pokemon.positionX,
-        positionY: pokemon.positionY,
-        targetX: coord.x,
-        targetY: coord.y
-      })
-      
-      const missile = PokemonFactory.createPokemonFromName(
-        missilePkm,
-        pokemon.player
-      )
 
-      let oldBoardEffect = board.getEffectOnCell(coord.x, coord.y)
-      board.effects[coord.y * board.columns + coord.x] = Effect.RESERVED_TILE 
-          
-      pokemon.commands.push(
-        new AbilityCommand(() => {
-          let entity = pokemon.simulation.addPokemon(
-            missile,
-            coord.x,
-            coord.y,
-            pokemon.team,
-            true
-          )
+    pokemon.commands.push(
+      new AbilityCommand(
+        () => {
+          const coord = state.getNearestAvailablePlaceCoordinates(target, board)
+          if (coord) {
+            const entity = pokemon.simulation.addPokemon(
+              missile,
+              coord.x,
+              coord.y,
+              pokemon.team,
+              true
+            )
 
-          entity.pp = entity.maxPP
+            entity.pp = entity.maxPP
 
-          board.effects[coord.y * board.columns + coord.x] = oldBoardEffect
+            const cells = board.getAdjacentCells(
+              target.positionX,
+              target.positionY
+            )
 
-          const cells = board.getAdjacentCells(coord.x, coord.y)
-
-          cells.forEach((cell) => {
-            if (cell.value && cell.value.team !== pokemon.team) {
-              cell.value.handleSpecialDamage(
-                damage,
-                board,
-                AttackType.SPECIAL,
-                pokemon,
-                crit
-              )
-            }
-          })
-
-        }, distanceM(
-          coord.x,
-          coord.y,
+            cells.forEach((cell) => {
+              if (cell.value && cell.value.team !== pokemon.team) {
+                cell.value.handleSpecialDamage(
+                  damage,
+                  board,
+                  AttackType.SPECIAL,
+                  pokemon,
+                  crit
+                )
+              }
+            })
+          }
+        },
+        distanceM(
+          target.positionX,
+          target.positionY,
           pokemon.positionX,
           pokemon.positionY
-        )*150 - 30)
+        ) *
+          150 -
+          30
       )
-
-    }
+    )
   }
 }
 

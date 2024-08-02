@@ -7,7 +7,7 @@ import { Synergy } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
 import { distanceC } from "../utils/distance"
 import Board from "./board"
-import { getMoveSpeed, PokemonEntity } from "./pokemon-entity"
+import { PokemonEntity, getMoveSpeed } from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 
 export default class MovingState extends PokemonState {
@@ -116,7 +116,7 @@ export default class MovingState extends PokemonState {
       let distance = 999
 
       cells.forEach((cell) => {
-        if (cell.value === undefined && board.getEffectOnCell(cell.x, cell.y) !== Effect.RESERVED_TILE) {
+        if (cell.value === undefined) {
           const candidateDistance = distanceC(
             coordinates.x,
             coordinates.y,
