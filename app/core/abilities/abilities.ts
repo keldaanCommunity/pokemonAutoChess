@@ -9477,6 +9477,30 @@ export class GulpMissileStrategy extends AbilityStrategy {
   }
 }
 
+export class DoubleShockStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+
+    const damage = pokemon.stars === 3 ? 200 : pokemon.stars === 2 ? 100 : 50
+
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+
+    pokemon.status.triggerParalysis(3000, pokemon)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -9827,5 +9851,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DIRE_CLAW]: new DireClawStrategy(),
   [Ability.FAKE_OUT]: new FakeOutStrategy(),
   [Ability.FELL_STINGER]: new FellStingerStrategy(),
-  [Ability.GULP_MISSILE]: new GulpMissileStrategy()
+  [Ability.GULP_MISSILE]: new GulpMissileStrategy(),
+  [Ability.DOUBLE_SHOCK]: new DoubleShockStrategy()
 }

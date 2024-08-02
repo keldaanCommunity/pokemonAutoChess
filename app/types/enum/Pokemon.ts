@@ -815,7 +815,10 @@ export enum Pkm {
   POIPOLE = "POIPOLE",
   NAGANADEL = "NAGANADEL",
   CRAMORANT = "CRAMORANT",
-  ARROKUDA = "ARROKUDA"
+  ARROKUDA = "ARROKUDA",
+  PAWMI = "PAWMI",
+  PAWMO = "PAWMO",
+  PAWMOT = "PAWMOT"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1633,7 +1636,10 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.POIPOLE]: "0803",
   [Pkm.NAGANADEL]: "0804",
   [Pkm.CRAMORANT]: "0845",
-  [Pkm.ARROKUDA]: "0846"
+  [Pkm.ARROKUDA]: "0846",
+  [Pkm.PAWMI]: "0921",
+  [Pkm.PAWMO]: "0922",
+  [Pkm.PAWMOT]: "0923"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2451,7 +2457,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.POIPOLE]: Pkm.POIPOLE,
   [Pkm.NAGANADEL]: Pkm.POIPOLE,
   [Pkm.CRAMORANT]: Pkm.CRAMORANT,
-  [Pkm.ARROKUDA]: Pkm.ARROKUDA
+  [Pkm.ARROKUDA]: Pkm.ARROKUDA,
+  [Pkm.PAWMI]: Pkm.PAWMI,
+  [Pkm.PAWMO]: Pkm.PAWMI,
+  [Pkm.PAWMOT]: Pkm.PAWMI
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
@@ -6689,6 +6698,21 @@ export const AnimationConfig: {
   [Pkm.ARROKUDA]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.PAWMI]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.PAWMO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
+    emote: AnimationType.Charge
+  },
+  [Pkm.PAWMOT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
     emote: AnimationType.Charge
   }
 }

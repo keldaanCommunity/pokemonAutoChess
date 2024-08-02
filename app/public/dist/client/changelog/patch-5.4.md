@@ -3,6 +3,9 @@
 - Arrokuda
 - Poipole
 - Naganadel
+- Pawmi
+- Pawmo
+- Pawmot
 
 # Changes to Pokemon & Abilities
 
