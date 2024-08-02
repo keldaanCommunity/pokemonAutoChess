@@ -17,10 +17,7 @@
     "url": "https://github.com/keldaanCommunity/pokemonAutoChess/issues"
   },
   "author": "keldaan-ag",
-  "contributors": [
-    "ogus",
-    "sylvainpolletvillard"
-  ],
+  "contributors": ["ogus", "sylvainpolletvillard"],
   "main": "public/dist/server/app/index.js",
   "scripts": {
     "reset": "rimraf -rf node_modules/",
@@ -36,7 +33,7 @@
     "add-bot": "node ./app/public/dist/server/db-commands/populate-bot.js",
     "monitor-bot": "node ./app/public/dist/server/scheduled/monitor-bot.js",
     "translate": "npx @inlang/cli machine translate -f",
-    "postinstall": "npm run download-music && cd edit/assetpack && npm install",
+    "postinstall": "cd edit/assetpack && npm install",
     "assetpack": "cd edit/assetpack && npm run assetpack",
     "precompute": "cd gen && ts-node precompute-all.ts",
     "colyseus-post-deploy": "npx colyseus-post-deploy",
