@@ -74,6 +74,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("uint8") range: number = 1
   @type("uint8") stars: number = 1
   @type("uint8") maxPP: number = 100
+  @type("uint16") ap: number = 0
   @type("string") skill: Ability = Ability.DEFAULT
   @type("string") passive: Passive = Passive.NONE
   @type({ set: "string" }) items = new SetSchema<Item>()
@@ -8037,6 +8038,56 @@ export class Snorlax extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class Poipole extends Pokemon {
+  baseHp = 120
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.BUG])
+  rarity = Rarity.UNIQUE
+  stars = 2
+  evolution = Pkm.NAGANADEL
+  hp = this.baseHp
+  atk = 12
+  def = 3
+  speDef = 3
+  maxPP = 75
+  range = 1
+  skill = Ability.FELL_STINGER
+  passive = Passive.POISON_PIN
+  attackSprite = AttackSprite.DRAGON_MELEE
+
+  evolutionRule = new ConditionBasedEvolutionRule(
+    (pokemon) => pokemon.hp >= 200
+  )
+
+  onEvolve({
+    pokemonEvolved: naganadel,
+    pokemonsBeforeEvolution: poipoles
+  }: {
+    pokemonEvolved: Pokemon
+    pokemonsBeforeEvolution: Pokemon[]
+  }) {
+    // carry over the hp gained with passive
+    const apStacked = sum(poipoles.map((m) => m.ap))
+    naganadel.ap += apStacked
+
+    const atkStacked = sum(poipoles.map((m) => m.atk))
+    naganadel.atk += atkStacked
+  }
+}
+
+export class Naganadel extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.POISON, Synergy.BUG])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 75
+  range = 1
+  skill = Ability.FELL_STINGER
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
+
 export class Growlithe extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
   rarity = Rarity.UNCOMMON
@@ -15229,6 +15280,8 @@ export const PokemonClasses: Record<
   [Pkm.STONJOURNER]: Stonjourner,
   [Pkm.HISUI_SNEASEL]: HisuiSneasel,
   [Pkm.SNEASLER]: Sneasler,
+  [Pkm.POIPOLE]: Poipole,
+  [Pkm.NAGANADEL]: Naganadel,
   [Pkm.CRAMORANT]: Cramorant,
   [Pkm.ARROKUDA]: Arrokuda
 }

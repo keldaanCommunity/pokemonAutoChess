@@ -42,6 +42,7 @@ import {
   DUST_PER_SHINY,
   getEmotionCost
 } from "../../types/Config"
+import { StarterAvatars } from "../../types/enum/Starters"
 import { EloRank } from "../../types/enum/EloRank"
 import { GameMode, Rarity } from "../../types/enum/Game"
 import { Language } from "../../types/enum/Language"
@@ -126,9 +127,11 @@ export class OnJoinCommand extends Command<
       } else {
         // create new user account
         const numberOfBoosters = 3
+        const starterAvatar = pickRandomIn(StarterAvatars)
         UserMetadata.create({
           uid: client.auth.uid,
           displayName: client.auth.displayName,
+          avatar: starterAvatar,
           booster: numberOfBoosters,
           pokemonCollection: new Map<string, IPokemonConfig>()
         })
@@ -138,7 +141,7 @@ export class OnJoinCommand extends Command<
             client.auth.uid,
             client.auth.displayName,
             1000,
-            "0019/Normal",
+            starterAvatar,
             0,
             0,
             0,

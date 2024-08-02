@@ -612,6 +612,14 @@ export default class BoardManager {
           break
         }
 
+        case "atk":
+          pokemonUI.atk = value
+          break
+
+        case "ap":
+          pokemonUI.ap = value
+          break
+
         default:
           pokemonUI[field] = value
           break

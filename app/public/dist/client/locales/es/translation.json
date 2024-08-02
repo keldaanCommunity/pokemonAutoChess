@@ -1475,7 +1475,7 @@
     "FURY_SWIPES": "El enemigo es cortado con guadañas o garras, lo que provoca ataques seguidos de [2,SP] a [5,SP]  PHYSICAL",
     "TICKLE": "Reduce el ATK y DEF de los enemigos más cercanos [1,2] en [3,SP]",
     "AROMATHERAPY": "Elimina las alteraciones de estado negativas y cura [20,40,80,SP] HP de los aliados adyacentes",
-    "DETECT": "PROTECT a los aliados adyacentes durante [0.5,SP] segundos multiplicados por el número de enemigos adyacentes",
+    "DETECT": "PROTECT a los aliados adyacentes durante [500,SP] ms multiplicados por el número de enemigos adyacentes",
     "SPACIAL_REND": "Invierte la posición del equipo enemigo y luego inflige [100,SP] SPECIAL a todos los enemigos en la fila del objetivo inicial.",
     "MULTI_ATTACK": "Inflige [10,SP] SPECIAL a los enemigos que lo rodeen, multiplicado por el nivel de sinergia de la actual forma de $t(pkm.SILVALLY)",
     "STICKY_WEB": "Inflige [20,35,70,SP] SPECIAL al objetivo y proyecta una red a su alrededor. Pokémon que caminen en la red son PARALYSIS por 2 segundos.",

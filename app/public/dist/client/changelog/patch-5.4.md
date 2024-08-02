@@ -1,6 +1,8 @@
 # New Pokemons:
 - Cramorant
 - Arrokuda
+- Poipole
+- Naganadel
 
 # Changes to Pokemon & Abilities
 
@@ -40,6 +42,9 @@
 
 # Bugfix
 
+- Regional lists was not correctly updated when picking an additional pick with a regional variant
+
 # Misc
 
+- New accounts now start with a random avatar among Pokemon Mystery Dungeon starters
 - Vietnamese translation has been started thanks to Camchanh

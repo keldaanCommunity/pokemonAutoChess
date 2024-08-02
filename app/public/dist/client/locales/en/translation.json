@@ -367,6 +367,7 @@
     "GRAVITY": "Gravity",
     "DIRE_CLAW": "Dire Claw",
     "FAKE_OUT": "Fake Out",
+    "FELL_STINGER": "Fell Stinger",
     "GULP_MISSILE": "Gulp Missile"
   },
   "pkm": {
@@ -1182,6 +1183,8 @@
     "MIENFOO": "Mienfoo",
     "MIENSHAO": "Mienshao",
     "STONJOURNER": "Stonjourner",
+    "POIPOLE": "Poipole",
+    "NAGANADEL": "Naganadel",
     "CRAMORANT": "Cramorant",
     "ARROKUDA": "Arrokuda"
   },
@@ -1478,7 +1481,7 @@
     "FURY_SWIPES": "Deals [2,SP] to [5,SP] attacks as PHYSICAL",
     "TICKLE": "Reduce ATK and DEF of the [1,2] closest targets by [3,SP]",
     "AROMATHERAPY": "Clear negative status alterations and heal [20,40,80,SP] HP of adjacent allies",
-    "DETECT": "PROTECT adjacent allies for [0.5,SP] seconds mutiplied by the number of adjacent enemies",
+    "DETECT": "PROTECT adjacent allies for [500,SP] ms mutiplied by the number of adjacent enemies",
     "SPACIAL_REND": "Reverse the position of the enemy team, then deals [100,SP] SPECIAL to all enemies in a row",
     "MULTI_ATTACK": "Inflicts [10,SP] SPECIAL to surounding enemies, multiplied by the synergy level of current $t(pkm.SILVALLY) form",
     "STICKY_WEB": "Inflicts [20,35,70,SP] SPECIAL on the target and projects a web around it. Pokémon walking on the web are PARALYSIS for 2 seconds.",
@@ -1527,10 +1530,11 @@
     "CAMERA_FLASH": "The target is PARALYSIS for [2,SP] seconds",
     "CRUSH_CLAW": "Reduce the target's DEF by [3,5] then perform two quick attacks dealing [100,SP]% of ATK as PHYSICAL each",
     "FIRE_LASH": "Deals [120,SP] SPECIAL to target and apply ARMOR_REDUCTION for 4 seconds",
-    "FAIRY_LOCK": "Spreads [90,SP] SPECIAL evenly across the target and adjacent enemies. Target is LOCKED for 5 seconds.",
-    "DRAIN_PUNCH": " The next attack inflicts [100,SP]% additional SPECIAL and restores [200,SP]% HP of the damage inflicted.",
+    "FAIRY_LOCK": "Spreads [90,SP] SPECIAL evenly across the target and adjacent enemies. Target is LOCKED for 5 seconds",
+    "DRAIN_PUNCH": " The next attack inflicts [100,SP]% additional SPECIAL and restores [200,SP]% HP of the damage inflicted",
     "GRAVITY": "The enemy team is LOCKED for [2,SP] seconds",
-    "FAKE_OUT": "Deals [50,100,150,SP] SPECIAL to target, then user loses 30% AP. Target is FLINCH for 3 seconds unless user AP was negative.",
+    "FAKE_OUT": "Deals [50,100,150,SP] SPECIAL to target, then user loses 30% AP. Target is FLINCH for 3 seconds unless user AP was negative",
+    "FELL_STINGER": "Deals [20,40,70,SP] SPECIAL to the target. If it kills the target, it permanently gains +1 ATK, +5% AP and +10 HP",
     "GULP_MISSILE": "Shoot an Arrokuda with full PP at the enemy team, dealing [55,SP] SPECIAL to all surrounding enemies. There is a 1 in 3 chance a Pikachu will be fired instead."
   },
   "effect": {
@@ -2094,8 +2098,9 @@
     "BLOODMOON": "Changes form during BLOODMOON",
     "RECYCLE": "Feed it with berries to gain 10 HP, or with basic components for 25 HP + item stats. Feed it with artificial items to gain 50 HP + item stats, and get TRASH in return",
     "DREAM_CATCHER": "If its target is SLEEP, holder attacks give 10 SHIELD to the 3 allies closest to it",
-    "SLOW_START": "Starts at 0.5 ATK_SPEED. After first ability cast, gains 30% ATK_SPEED and 10 ATK.",
-    "STONJOURNER": "Does not move or attack until PP bar is full. Its power spot gives 50% AP to all adjacent allies at the start of the fight."
+    "SLOW_START": "Starts at 0.5 ATK_SPEED. After first ability cast, gains 30% ATK_SPEED and 10 ATK",
+    "STONJOURNER": "Does not move or attack until PP bar is full. Its power spot gives 50% AP to all adjacent allies at the start of the fight",
+    "POISON_PIN": "Poipole will evolve into Naganadel after stacking 200 HP"
   },
   "stat": {
     "ATK": "Attack",
