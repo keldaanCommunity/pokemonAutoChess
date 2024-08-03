@@ -1159,22 +1159,6 @@ export class OpenSpecialGameCommand extends Command<
   }
 }
 
-export class MakeServerAnnouncementCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client; message: string }
-> {
-  async execute({ client, message }: { client: Client; message: string }) {
-    try {
-      const u = this.state.users.get(client.auth.uid)
-      if (u && u.role && u.role === Role.ADMIN) {
-        this.room.presence.publish("server-announcement", message)
-      }
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-}
-
 export class OnCreateTournamentCommand extends Command<
   CustomLobbyRoom,
   { client: Client; name: string; startDate: string }
