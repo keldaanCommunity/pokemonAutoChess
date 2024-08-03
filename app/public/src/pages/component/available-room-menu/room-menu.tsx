@@ -23,8 +23,6 @@ import { leaveLobby } from "../../../stores/LobbyStore"
 import { LocalStoreKeys, localStore } from "../../utils/store"
 import GameRoomItem from "./game-room-item"
 import RoomItem from "./room-item"
-import { SpecialGameCountdown } from "./special-game-countdown"
-import TournamentItem from "./tournament-item"
 import "./room-menu.css"
 
 export default function RoomMenu(props: {
@@ -39,9 +37,7 @@ export default function RoomMenu(props: {
   const gameRooms: RoomAvailable[] = useAppSelector(
     (state) => state.lobby.gameRooms
   )
-  const tournaments: TournamentSchema[] = useAppSelector(
-    (state) => state.lobby.tournaments
-  )
+
   const client: Client = useAppSelector((state) => state.network.client)
   const lobby: Room<ICustomLobbyState> | undefined = useAppSelector(
     (state) => state.network.lobby
@@ -55,13 +51,6 @@ export default function RoomMenu(props: {
     Date.now() - new Date(user.creationTime).getTime() < 10 * 60 * 1000
   const [isJoining, setJoining] = useState<boolean>(false)
 
-  const sortedTournaments = [...tournaments].sort((a, b) =>
-    a.finished !== b.finished
-      ? a.finished
-        ? +1
-        : -1
-      : new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
-  )
 
   const navigate = useNavigate()
 
@@ -198,7 +187,6 @@ export default function RoomMenu(props: {
         <Tab>
           {t("in_game")} ({gameRooms.length})
         </Tab>
-        {tournaments.length > 0 && <Tab>{t("tournament")}</Tab>}
       </TabList>
 
       <TabPanel className={"tab-available-rooms"}>
@@ -241,17 +229,6 @@ export default function RoomMenu(props: {
           ))}
         </ul>
       </TabPanel>
-      {tournaments.length > 0 && (
-        <TabPanel className={"tab-tournament"}>
-          <ul className="hidden-scrollable">
-            {sortedTournaments.map((t) => (
-              <li key={t.id}>
-                <TournamentItem tournament={t} />
-              </li>
-            ))}
-          </ul>
-        </TabPanel>
-      )}
     </Tabs>
   )
 }
