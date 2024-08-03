@@ -1,11 +1,12 @@
+import path from "path"
 import { monitor } from "@colyseus/monitor"
 import config from "@colyseus/tools"
+import { RedisDriver, RedisPresence } from "colyseus"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
 import admin from "firebase-admin"
 import { connect } from "mongoose"
-import path from "path"
 import { initTilemap } from "./core/design"
 import ItemsStatistics from "./models/mongo-models/items-statistic"
 import Meta from "./models/mongo-models/meta"
@@ -33,15 +34,20 @@ const clientSrc = __dirname.includes("server")
  * Import your Room files
  */
 
-const serverOptions = {}
+let gameOptions = {}
 
-// if (process.env.NODE_APP_INSTANCE) {
-//   serverOptions["presence"] = new RedisPresence()
-//   serverOptions["driver"] = new RedisDriver()
-// }
+if (process.env.NODE_APP_INSTANCE) {
+  const processNumber = Number(process.env.NODE_APP_INSTANCE || "0")
+  const port = 2567 + processNumber
+  gameOptions = {
+    presence: new RedisPresence(process.env.REDIS_URI),
+    driver: new RedisDriver(process.env.REDIS_URI),
+    publicAddress: `${process.env.SUBDOMAIN}.${process.env.SERVER_NAME}/${port}`
+  }
+}
 
 export default config({
-  options: serverOptions,
+  options: gameOptions,
   initializeGameServer: (gameServer) => {
     /**
      * Define your room handlers:

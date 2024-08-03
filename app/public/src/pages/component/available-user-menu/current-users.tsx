@@ -8,18 +8,15 @@ import "./current-users.css"
 
 export default function CurrentUsers() {
   const { t } = useTranslation()
-  const usersInLobby: ILobbyUser[] = useAppSelector((state) => state.lobby.users)
-  const nbUsersInPrepRoom = useAppSelector((state) => state.lobby.preparationRooms.reduce((total, r) => total + r.clients, 0))
-  const nbUsersInGameRoom = useAppSelector((state) => state.lobby.gameRooms.reduce((total, r) => total + r.clients, 0))
-  const nbTotalUsers = usersInLobby.length + nbUsersInPrepRoom + nbUsersInGameRoom
+  const users: ILobbyUser[] = useAppSelector((state) => state.lobby.users)
 
   return (
     <div className="my-container hidden-scrollable current-users-menu custom-bg">
       <h1>
-        {t("online")}: {nbTotalUsers}
+        {t("online")}: {users.length}
       </h1>
       <ul>
-        {usersInLobby.map((v, i) => (
+        {users.map((v, i) => (
           <User key={i} v={v} />
         ))}
       </ul>

@@ -79,6 +79,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     tournamentId?: string
     bracketId?: string
   }) {
+    logger.info("create preparation room")
     // logger.debug(options);
     //logger.info(`create ${options.roomName}`)
 
@@ -293,6 +294,15 @@ export default class PreparationRoom extends Room<PreparationState> {
         payload: message,
         avatar: "0294/Joyous"
       })
+    })
+
+    this.presence.subscribe("game-started", ({ gameId, preparationId }) => {
+      if (this.roomId === preparationId) {
+        this.setGameStarted(true)
+        //logger.debug("game start", game.roomId)
+        this.broadcast(Transfer.GAME_START, gameId)
+        setTimeout(() => this.disconnect(), 30000) // TRYFIX: ranked lobbies prep rooms not being removed
+      }
     })
   }
 
