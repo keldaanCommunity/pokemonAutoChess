@@ -1518,7 +1518,15 @@
     "MAGNET_BOMB": "Eine magnetische Bombe, die [20,40,80,SP] SPECIAL auf das Ziel, [10,20,40,SP] SPECIAL auf benachbarte Feinde und die Anziehung entfernter Feinde verursacht",
     "MUDDY_WATER": "Spritzt schlammiges Wasser auf bis zu 3 Ziele vor sich, verursacht 4 Sekunden lang [40,80,SP] SPECIAL, WOUND und ARMOR_REDUCTION",
     "ANCIENT_POWER": "Schleudert Felsen auf das Ziel und verursacht [50,100,SP] SPECIAL. Erhöht die AP des Anwenders um [25,SP]%.",
-    "MOON_DREAM": "Das Ziel fällt für [3,6,9] Sekunden in SLEEP und gewährt den 3 Verbündeten, die dem Ziel am nächsten sind, [10,20,30,SP] SHIELD"
+    "MOON_DREAM": "Das Ziel fällt für [3,6,9] Sekunden in SLEEP und gewährt den 3 Verbündeten, die dem Ziel am nächsten sind, [10,20,30,SP] SHIELD",
+    "STONE_AXE": "Geben [50,SP] TRUE. Legt scharfe Steine um das Ziel herum. Die Steine bleiben auf dem Spielfeld liegen und fügen Pokémons, die darauf laufen, 10 PHYSICAL pro Sekunde zu und WOUND sie, wenn sie nicht ROCK oder FLYING.",
+    "CAMERA_FLASH": "Das Ziel ist PARALYSIS für [2,SP] Sekunden",
+    "CRUSH_CLAW": "Verringere die DEF des Ziels um [3,5] und führe dann zwei schnelle Angriffe aus, die jeweils [100,SP]% der ATK als PHYSICAL verursachen",
+    "FIRE_LASH": "Fügt dem Ziel [120,SP] SPECIAL zu und wendet 4 Sekunden lang ARMOR_REDUCTION an",
+    "FAIRY_LOCK": "Verteilt [90,SP] SPECIAL gleichmäßig auf das Ziel und benachbarte Gegner. Das Ziel ist für 5 Sekunden LOCKED.",
+    "DRAIN_PUNCH": " Der nächste Angriff fügt [100,SP]% zusätzliche SPECIAL zu und stellt [200,SP]% HP des zugefügten Schadens wieder her.",
+    "GRAVITY": "Das gegnerische Team ist für [2,SP] Sekunden LOCKED",
+    "FAKE_OUT": "Fügt dem Ziel [50,100,150,SP] SPECIAL zu, dann verliert der Anwender 30% AP. Das Ziel ist für 3 Sekunden FLINCH, es sei denn, die AP des Anwenders waren negativ."
   },
   "effect": {
     "INGRAIN": "Verwurzler",
@@ -1637,7 +1645,8 @@
     "HUSTLE": "Übereifer",
     "BERSERK": "Wutausbruch",
     "FLUID": "Flüssigkeit",
-    "SHAPELESS": "Formlos"
+    "SHAPELESS": "Formlos",
+    "ETHEREAL": "Ätherisch"
   },
   "effect_description": {
     "STAMINA": "Erhalte 15 SHIELD",
@@ -1745,11 +1754,18 @@
     "WINDY": "+10 % Ausweichchance (+20 % beim FLIEGEN)",
     "NIGHT": "+20 % CRIT_CHANCE\n+30 % SLEEP-Dauer",
     "HYDRATATION": "Die GRASS Synergie heilt unter dem RAIN 5 zusätzliche HP pro Sekunde",
+    "POISON_GAS": "Verursacht POISONNED jede Sekunde",
     "SHINING_RAY": "Erhöht",
+    "LIGHT_PULSE": "Gibt außerdem +10 PP pro Sekunde",
+    "ETERNAL_LIGHT": "Erhöht außerdem DEF und SPE_DEF um 50% und verleiht RUNE_PROTECT für 10 Sekunden",
+    "MAX_ILLUMINATION": "Gibt auch 100 SHIELD und RESURECTION",
     "QUICK_FEET": "+30% ATK und Bewegungstempo",
     "RUN_AWAY": "+50% ATK und Bewegungstempo, und 10% Chance auf WILD Pokémon im Shop",
     "HUSTLE": "+80% ATK und Bewegungstempo, und 15% Chance auf WILD Pokémon im Shop",
-    "BERSERK": "+100% ATK und Bewegungstempo, und 20% Chance auf WILD Pokémon im Shop. RAGE 5 Sekunden früher"
+    "BERSERK": "+100% ATK und Bewegungstempo, und 20% Chance auf WILD Pokémon im Shop. RAGE 5 Sekunden früher",
+    "FLUID": "Verbündetes Team erhält 2% ATK_SPEED und 5 HP pro einzigartiger aktiver Synergie",
+    "SHAPELESS": "Verbündetes Team erhält 4% ATK_SPEED und 10 HP pro einzigartiger aktiver Synergie",
+    "ETHEREAL": "Verbündetes Team erhält 6% ATK_SPEED und 15 HP pro einzigartiger aktiver Synergie"
   },
   "item": {
     "FOSSIL_STONE": "Fossil",
@@ -1899,6 +1915,7 @@
     "SMOKE_BALL": "Sobald die maximale HP unter 33 % liegt, lassen Sie die Rauchkugel fallen und springen Sie in eine Zelle weiter entfernt. Jeder benachbarte Feind ist 3 Sekunden lang PARALYSIS und der Rauch verringert die Präzision aller darin befindlichen Pokémon um 50 %.",
     "XRAY_VISION": "+50% ATK_SPEED. Die Angriffe des Pokémons können nicht mehr verfehlen.",
     "RAZOR_FANG": "+100% CRIT_POWER. Kritische Treffer verursachen 4 Sekunden lang ARMOR_REDUCTION.",
+    "SOOTHE_BELL": "Die Angriffe des Halters verleihen dem Verbündeten, der sich am nächsten zum Ziel befindet, 33% des Schadens, der als SHIELD zugefügt wird.",
     "CHOICE_SCARF": "Jeder Treffer fügt einem angrenzenden Gegner 50% Basisangriffs Schaden zu",
     "FIRE_GEM": "Angriffe verursachen doppelten Schaden gegen SHIELD und 8% der max. HP des Ziels als zusätzlichen Schaden",
     "DEFENSIVE_RIBBON": "Wenn der Träger Schaden erleidet, erhältst du 1 Stapel. Alle 2 Stapel erhält der Besitzer +1 DEF, +1 ATK und +5 % ATK_SPEED (maximal 20 Stapel).",
@@ -1937,6 +1954,8 @@
     "ROWAP_BERRY": "Fallen die HP des Trägers unter 50%, regeneriere 20 HP und benutze die Fähigkeit $t(ability.MAGIC_BOUNCE) für 10 Sekunden. (Verbrauchsitem)",
     "SALAC_BERRY": "Fallen die HP des Trägers unter 50%, regeneriere 20 HP und erhalte +50% ATK_SPEED. (Verbrauchsitem)",
     "SITRUS_BERRY": "Fallen die HP des Trägers unter 50%, regeneriere 30 HP und Erhöhe jegliche erhaltene Heilung um 50%. (Verbrauchsitem)",
+    "COMFEY": "Trägt $t(pkm.COMFEY) und erhält seine Fähigkeit und alle seine Werte",
+    "ELECTIRIZER": "Jeder dritte Angriff verbrennt 15 PP des Ziels und verursacht 2 Sekunden lang PARALYSIS",
     "MAGMARIZER": "Jeder Treffer des Pokémons erhöht den ATK um 1 und verursacht beim Ziel BURN für 2 Sekunden.",
     "MACHO_BRACE": "Träger erhält die FIGHTING Synergie",
     "LIGHT_BALL": "Das Pokémon erhält den LIGHT-Typ",
@@ -1944,7 +1963,13 @@
     "METRONOME": "Das Pokémon erhält den SOUND-Typ. Das Pokémon erhält jede Sekunde 5 PP.",
     "METAL_COAT": "Das Pokémon erhält den STEEL-Typ.",
     "SWIFT_WING": "Das Pokémon erhält den FLUG-Typ und +10% Chance Angriffen auszuweichen.",
-    "HARD_STONE": "Das Pokémon erhält den ROCK-Typ"
+    "HARD_STONE": "Das Pokémon erhält den ROCK-Typ",
+    "BIG_NUGGET": "Verleiht GROUND Synergie. Wenn der Besitzer nach 15 Sekunden noch am Leben ist und 5 Stapel GROUND erhält, erhält er 3 GOLD.",
+    "INCENSE": "Verhindert, dass WILD Pokémon im Shop auftauchen, wenn sie gehalten werden. Stattdessen hat jedes Pokémon im Shop eine zusätzliche Chance von 5%, eine gemeinsame Synergie mit dem Besitzer zu teilen.",
+    "EXP_SHARE": "Ermittelt die besten ATK, DEF- und SPE_DEF Werte benachbarter Verbündeter in derselben Reihe",
+    "POKERUS_VIAL": "Infiziert den Träger mit POKERUS, gewinnt alle 2 Sekunden 1 ATK und 10% AP und überträgt sich auf Verbündete",
+    "ROTOM_PHONE": "Verleiht GHOST Synergie. Beschwört Rotom Drohne in der Nähe des Halters",
+    "METEORITE": "Ein Meteorit, der mit Deoxys zu interagieren scheint. Er strahlt weiterhin ein schwaches Leuchten aus und fühlt sich leicht warm an."
   },
   "passive_description": {
     "NONE": "Keine Passive",
