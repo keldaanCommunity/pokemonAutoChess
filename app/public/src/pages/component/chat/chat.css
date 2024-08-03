@@ -5,6 +5,10 @@
   align-items: stretch;
 }
 
+.user-chat h2 {
+  text-align: center;
+}
+
 .user-chat form {
   display: flex;
   flex-flow: row nowrap;

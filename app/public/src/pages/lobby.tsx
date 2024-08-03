@@ -26,7 +26,6 @@ import {
   addRoom,
   addTournament,
   addTournamentBracket,
-  addUser,
   changePokemonConfig,
   changeTournament,
   changeTournamentBracket,
@@ -39,7 +38,6 @@ import {
   removeRoom,
   removeTournament,
   removeTournamentBracket,
-  removeUser,
   setBoosterContent,
   setBotData,
   setBotLeaderboard,
@@ -352,8 +350,6 @@ export async function joinLobbyRoom(
           })
 
           room.state.users.onAdd((u) => {
-            dispatch(addUser(u))
-
             if (u.id == user.uid) {
               u.pokemonCollection.onAdd((p) => {
                 const pokemonConfig = p as PokemonConfig
@@ -422,10 +418,6 @@ export async function joinLobbyRoom(
 
           room.state.listen("nextSpecialGame", (specialGame) => {
             dispatch(setNextSpecialGame(specialGame))
-          })
-
-          room.state.users.onRemove((u) => {
-            dispatch(removeUser(u.id))
           })
 
           room.onMessage(Transfer.REQUEST_LEADERBOARD, (l) => {

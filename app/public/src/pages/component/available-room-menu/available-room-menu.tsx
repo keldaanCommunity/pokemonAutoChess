@@ -33,7 +33,6 @@ export default function AvailableRoomMenu() {
     (state) => state.network.lobby
   )
   const uid: string = useAppSelector((state) => state.network.uid)
-  const lobbyUsers: ILobbyUser[] = useAppSelector((state) => state.lobby.users)
   const user = useAppSelector((state) => state.lobby.user)
   const isFreshNewUser =
     user &&
@@ -46,11 +45,10 @@ export default function AvailableRoomMenu() {
   ) {
     if (lobby && !isJoining) {
       setJoining(true)
-      const user = firebase.auth().currentUser
-      const token = await user?.getIdToken()
-      const lobbyUser = lobbyUsers.find((u) => u.id === uid)
-      if (token && lobbyUser) {
-        const name = lobbyUser?.name ?? user?.displayName
+      const firebaseUser = firebase.auth().currentUser
+      const token = await firebaseUser?.getIdToken()
+      if (token && user) {
+        const name = user.name ?? "Player"
         const room: Room<PreparationState> = await client.create(
           "preparation",
           {
@@ -94,8 +92,7 @@ export default function AvailableRoomMenu() {
 
     if (lobby && !isJoining) {
       if (password) {
-        const lobbyUser = lobbyUsers.find((u) => u.id === uid)
-        if (lobbyUser && lobbyUser.role === Role.BASIC) {
+        if (user && user.role === Role.BASIC) {
           const password = prompt(`This room is private. Enter password`)
           if (selectedRoom.metadata?.password != password)
             return alert(`Wrong password !`)

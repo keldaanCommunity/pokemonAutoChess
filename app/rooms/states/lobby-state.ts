@@ -1,4 +1,10 @@
-import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
+import {
+  ArraySchema,
+  MapSchema,
+  Schema,
+  type,
+  filterChildren
+} from "@colyseus/schema"
 import { CronTime } from "cron"
 import { nanoid } from "nanoid"
 import LobbyUser from "../../models/colyseus-models/lobby-user"
@@ -16,10 +22,17 @@ import { EloRank } from "../../types/enum/EloRank"
 import { GameMode } from "../../types/enum/Game"
 import { ISpecialGamePlanned } from "../../types/interfaces/Lobby"
 import { logger } from "../../utils/logger"
+import { Client } from "colyseus"
 
 export default class LobbyState extends Schema {
   @type([Message]) messages = new ArraySchema<Message>()
-  @type({ map: LobbyUser }) users = new MapSchema<LobbyUser>()
+
+  @filterChildren(function (client: Client, key: string) {
+    return client.auth.uid === key // only send user info to the associated user
+  })
+  @type({ map: LobbyUser })
+  users = new MapSchema<LobbyUser>()
+
   @type(SpecialGamePlannedSchema) nextSpecialGame: ISpecialGamePlanned | null =
     null
   @type([TournamentSchema]) tournaments = new ArraySchema<TournamentSchema>()
