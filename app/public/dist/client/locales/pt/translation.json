@@ -2,10 +2,10 @@
   "rarity": {
     "COMMON": "Comum",
     "UNCOMMON": "Incomum",
-    "RARE": "Cru",
+    "RARE": "Raro",
     "EPIC": "Épico",
     "ULTRA": "Ultra",
-    "UNIQUE": "Exclusivo",
+    "UNIQUE": "Único",
     "LEGENDARY": "Lendário",
     "MYTHICAL": "Mítico",
     "HATCH": "Escotilha",
