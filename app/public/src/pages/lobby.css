@@ -53,16 +53,19 @@
   flex-direction: column;
 }
 
-.lobby .user-chat {
-  overflow-y: auto;
+.lobby .announcements {
   height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
 }
 
-.lobby .news {
-  height: 100%;
+.lobby .announcements .user-chat {
+  flex: 1;
 }
 
-.lobby h1 {
+.lobby h2 {
   text-align: center;
   color: white;
   font-size: 1.5vw;
@@ -78,12 +81,6 @@
   display: flex;
   justify-content: space-between;
   gap: 4px;
-}
-
-.main-lobby .news-chat {
-  display: flex;
-  gap: 4px;
-  width: 50%;
 }
 
 .main-lobby-nav {
@@ -122,18 +119,12 @@
   margin: 0 auto;
 }
 
-@media (width <= 1400px) {
-  .main-lobby .news-chat {
-    flex-direction: column;
-  }
-}
-
 @media (width <= 960px) {
   .lobby nav {
     flex-wrap: wrap;
   }
 
-  .lobby h1 {
+  .lobby h2 {
     font-size: 4vw;
   }
 

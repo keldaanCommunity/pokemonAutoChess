@@ -65,7 +65,6 @@ import {
 } from "../stores/NetworkStore"
 import RoomMenu from "./component/available-room-menu/room-menu"
 import CurrentUsers from "./component/available-user-menu/current-users"
-import Chat from "./component/chat/chat"
 import TabMenu from "./component/lobby-menu/tab-menu"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { FIREBASE_CONFIG } from "./utils/utils"
@@ -74,6 +73,7 @@ import { logger } from "../../../utils/logger"
 import { localStore, LocalStoreKeys } from "./utils/store"
 import { cc } from "./utils/jsx"
 import { Modal } from "./component/modal/modal"
+import { Announcements } from "./component/announcements/announcements"
 import "./lobby.css"
 
 export default function Lobby() {
@@ -181,19 +181,19 @@ function MainLobby({ toPreparation, setToPreparation }) {
             <img width={32} height={32} src={`assets/ui/room.svg`} />
             {t("rooms")}
           </li>
-          <li
+          {/*<li
             onClick={() => setActive("online")}
             className={cc({ active: activeSection === "online" })}
           >
             <img width={32} height={32} src={`assets/ui/players.svg`} />
             {t("online")}
-          </li>
+          </li>*/}
           <li
             onClick={() => setActive("chat")}
             className={cc({ active: activeSection === "chat" })}
           >
             <img width={32} height={32} src={`assets/ui/chat.svg`} />
-            {t("chat")}
+            {t("announcements")}
           </li>
         </ul>
       </nav>
@@ -213,8 +213,8 @@ function MainLobby({ toPreparation, setToPreparation }) {
       <section className={cc("online", { active: activeSection === "online" })}>
         <CurrentUsers />
       </section>
-      <section className={cc("chat", { active: activeSection === "chat" })}>
-        <Chat source="lobby" />
+      <section className={cc("announcements", { active: activeSection === "announcements" })}>
+        <Announcements />
       </section>
     </div>
   )

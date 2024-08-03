@@ -12,9 +12,9 @@ export default function CurrentUsers() {
 
   return (
     <div className="my-container hidden-scrollable current-users-menu custom-bg">
-      <h1>
+      <h2>
         {t("online")}: {users.length}
-      </h1>
+      </h2>
       <ul>
         {users.map((v, i) => (
           <User key={i} v={v} />

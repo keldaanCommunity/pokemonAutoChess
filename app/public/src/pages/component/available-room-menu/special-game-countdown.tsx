@@ -50,9 +50,9 @@ export function SpecialGameCountdown() {
   }
 
   return nextSpecialGame.date && nextSpecialGame.mode && timeUntilNext > 0 ? (
-    <p className="special-game-announcement">
+    <div className="special-game-announcement my-box">
       {specialGameIcon} {specialGameName}
       <span>{formatTimeout(timeUntilNext)}</span>
-    </p>
+    </div>
   ) : null
 }

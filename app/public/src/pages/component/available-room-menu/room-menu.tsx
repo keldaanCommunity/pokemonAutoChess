@@ -192,7 +192,7 @@ export default function RoomMenu(props: {
 
   return (
     <Tabs className="my-container room-menu custom-bg">
-      <h1>{t("rooms")}</h1>
+      <h2>{t("rooms")}</h2>
       <TabList>
         <Tab>{t("available_rooms")}</Tab>
         <Tab>
@@ -204,7 +204,6 @@ export default function RoomMenu(props: {
       <TabPanel className={"tab-available-rooms"}>
         {user ? (
           <>
-            <SpecialGameCountdown />
             <ul className="hidden-scrollable">
               {preparationRooms.map((r) => (
                 <li key={r.roomId}>
