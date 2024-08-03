@@ -75,6 +75,7 @@ export class OnJoinCommand extends Command<
   }) {
     try {
       //logger.info(`${client.auth.displayName} ${client.id} join lobby room`)
+      this.state.clients = this.room.clients.length
       client.send(Transfer.ROOMS, rooms)
       const user = await UserMetadata.findOne({ uid: client.auth.uid })
 
@@ -173,6 +174,7 @@ export class OnLeaveCommand extends Command<
 > {
   execute({ client }: { client: Client }) {
     try {
+      this.state.clients = this.room.clients.length
       if (client && client.auth && client.auth.displayName && client.auth.uid) {
         //logger.info(`${client.auth.displayName} ${client.id} leave lobby`)
         this.state.users.delete(client.auth.uid)

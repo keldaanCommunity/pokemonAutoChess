@@ -269,6 +269,7 @@ export interface ICustomLobbyState extends Schema {
   levelLeaderboard: ILeaderboardInfo[]
   nextSpecialGame: ISpecialGamePlanned
   tournaments: ArraySchema<TournamentSchema>
+  clients: number
 }
 
 export interface IGameState extends Schema {

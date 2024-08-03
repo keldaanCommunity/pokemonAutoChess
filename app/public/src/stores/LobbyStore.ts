@@ -45,6 +45,7 @@ export interface IUserLobbyState {
   language: Language
   nextSpecialGame: ISpecialGamePlanned | null
   tournaments: TournamentSchema[]
+  clients: number
 }
 
 const initialState: IUserLobbyState = {
@@ -76,7 +77,8 @@ const initialState: IUserLobbyState = {
     id: ""
   },
   nextSpecialGame: null,
-  tournaments: []
+  tournaments: [],
+  clients: 0
 }
 
 export const lobbySlice = createSlice({
@@ -136,6 +138,9 @@ export const lobbySlice = createSlice({
     },
     setTabIndex: (state, action: PayloadAction<number>) => {
       state.tabIndex = action.payload
+    },
+    setClientsCount: (state, action: PayloadAction<number>) => {
+      state.clients = action.payload
     },
     addRoom: (state, action: PayloadAction<RoomAvailable>) => {
       const metadata: IPreparationMetadata | IGameMetadata =
@@ -300,6 +305,7 @@ export const {
   setTabIndex,
   addRoom,
   removeRoom,
+  setClientsCount,
   setSearchedUser,
   setBotList,
   setPastebinUrl,

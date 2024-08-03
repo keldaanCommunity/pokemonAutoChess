@@ -42,6 +42,7 @@ import {
   setBotData,
   setBotLeaderboard,
   setBotList,
+  setClientsCount,
   setLanguage,
   setLeaderboard,
   setLevelLeaderboard,
@@ -252,6 +253,10 @@ export async function joinLobbyRoom(
           })
           room.state.messages.onRemove((m) => {
             dispatch(removeMessage(m))
+          })
+
+          room.state.listen("clients", (value) => {
+            dispatch(setClientsCount(value))
           })
 
           room.state.tournaments.onAdd((tournament) => {

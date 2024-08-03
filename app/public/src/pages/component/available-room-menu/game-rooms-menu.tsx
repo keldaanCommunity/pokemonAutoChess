@@ -52,8 +52,11 @@ export function GameRoomsMenu() {
         }
     }, 1000)
 
+    const nbUsersInGameRoom = useAppSelector((state) => state.lobby.gameRooms.reduce((total, r) => total + r.clients, 0))
+
     return <div className="my-container room-menu custom-bg">
-        <h2>{t("in_game")} ({gameRooms.length})</h2>
+        <h2>{t("in_game")}</h2>
+        <p style={{ textAlign: "center" }}>{t("players", { count: nbUsersInGameRoom })}, {t("rooms", { count: gameRooms.length })}</p>
         <ul className="hidden-scrollable">
             {gameRooms.map((r) => (
                 <li key={r.roomId}>

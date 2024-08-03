@@ -135,9 +135,14 @@ export default function AvailableRoomMenu() {
     }
   }, 1000)
 
+
+  const nbUsersInPrepRoom = useAppSelector((state) => state.lobby.preparationRooms.reduce((total, r) => total + r.clients, 0))
+  const nbUsersInLobbyRoom = useAppSelector((state) => state.lobby.clients)
+
   return (
     <div className="my-container room-menu custom-bg">
-      <h2>{t("available_rooms")} ({preparationRooms.length})</h2>
+      <h2>{t("available_rooms")}</h2>
+      <p style={{ textAlign: "center" }}>{t("players", { count: nbUsersInPrepRoom + nbUsersInLobbyRoom })}, {t("rooms", { count: preparationRooms.length })}</p>
       {user ? (
         <>
           <ul>

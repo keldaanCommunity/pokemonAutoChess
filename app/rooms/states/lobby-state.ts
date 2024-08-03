@@ -36,6 +36,7 @@ export default class LobbyState extends Schema {
   @type(SpecialGamePlannedSchema) nextSpecialGame: ISpecialGamePlanned | null =
     null
   @type([TournamentSchema]) tournaments = new ArraySchema<TournamentSchema>()
+  @type("number") clients = 0
 
   addMessage(
     payload: string,
