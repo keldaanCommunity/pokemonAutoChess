@@ -29,7 +29,14 @@
   width: 50px;
 }
 
-.room-menu .tab-available-rooms > ul {
+.room-menu > ul {
+  padding: 0;
+  margin: 0;
   max-height: calc(100% - 10em);
   overflow: auto;
+  flex: 1;
+}
+
+.room-menu li {
+  list-style: none;
 }

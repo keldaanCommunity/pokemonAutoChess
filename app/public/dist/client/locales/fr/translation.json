@@ -2535,7 +2535,7 @@
   "quick_play_hint": "La partie démarrera automatiquement quand 8 joueurs auront rejoint",
   "password_protected": "Lobby privé (protégé par mot de passe)",
   "private": "Privé",
-  "available_rooms": "Salons disponibles",
+  "available_rooms": "Salons ouverts",
   "in_game": "En jeu",
   "tournament": "Tournoi",
   "create_custom_room": "Créer un salon personnalisé",

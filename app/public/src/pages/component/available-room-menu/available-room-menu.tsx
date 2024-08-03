@@ -1,16 +1,12 @@
 import { Client, Room, RoomAvailable } from "colyseus.js"
 import firebase from "firebase/compat/app"
-import React, { Dispatch, SetStateAction, useState } from "react"
+import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
-import { useNavigate } from "react-router"
-import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
+import { useNavigate } from "react-router-dom"
 import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
-import { TournamentSchema } from "../../../../../models/colyseus-models/tournament"
-import GameState from "../../../../../rooms/states/game-state"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import {
   ICustomLobbyState,
-  IGameMetadata,
   IPreparationMetadata,
   Role
 } from "../../../../../types"
@@ -21,21 +17,15 @@ import { logger } from "../../../../../utils/logger"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { leaveLobby } from "../../../stores/LobbyStore"
 import { LocalStoreKeys, localStore } from "../../utils/store"
-import GameRoomItem from "./game-room-item"
 import RoomItem from "./room-item"
-import "./room-menu.css"
+import "./available-room-menu.css"
 
-export default function RoomMenu(props: {
-  toPreparation: boolean
-  setToPreparation: Dispatch<SetStateAction<boolean>>
-}) {
+export default function AvailableRoomMenu() {
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const preparationRooms: RoomAvailable[] = useAppSelector(
     (state) => state.lobby.preparationRooms
-  )
-  const gameRooms: RoomAvailable[] = useAppSelector(
-    (state) => state.lobby.gameRooms
   )
 
   const client: Client = useAppSelector((state) => state.network.client)
@@ -51,13 +41,10 @@ export default function RoomMenu(props: {
     Date.now() - new Date(user.creationTime).getTime() < 10 * 60 * 1000
   const [isJoining, setJoining] = useState<boolean>(false)
 
-
-  const navigate = useNavigate()
-
   const createRoom = throttle(async function create(
     gameMode = GameMode.NORMAL
   ) {
-    if (lobby && !props.toPreparation && !isJoining) {
+    if (lobby && !isJoining) {
       setJoining(true)
       const user = firebase.auth().currentUser
       const token = await user?.getIdToken()
@@ -84,7 +71,7 @@ export default function RoomMenu(props: {
           30
         )
         dispatch(leaveLobby())
-        props.setToPreparation(true)
+        navigate("/preparation")
       }
     }
   }, 1000)
@@ -105,7 +92,7 @@ export default function RoomMenu(props: {
       return
     }
 
-    if (lobby && !props.toPreparation && !isJoining) {
+    if (lobby && !isJoining) {
       if (password) {
         const lobbyUser = lobbyUsers.find((u) => u.id === uid)
         if (lobbyUser && lobbyUser.role === Role.BASIC) {
@@ -132,7 +119,7 @@ export default function RoomMenu(props: {
           await lobby.leave()
           room.connection.close()
           dispatch(leaveLobby())
-          props.setToPreparation(true)
+          navigate("/preparation")
         } catch (error) {
           logger.error(error)
         }
@@ -151,84 +138,35 @@ export default function RoomMenu(props: {
     }
   }, 1000)
 
-  const joinGame = throttle(async function joinGame(
-    selectedRoom: RoomAvailable<IGameMetadata>,
-    spectate: boolean
-  ) {
-    if (lobby && !isJoining) {
-      setJoining(true)
-      const idToken = await firebase.auth().currentUser?.getIdToken()
-      if (idToken) {
-        const game: Room<GameState> = await client.joinById(
-          selectedRoom.roomId,
-          {
-            idToken,
-            spectate
-          }
-        )
-        localStore.set(
-          LocalStoreKeys.RECONNECTION_TOKEN,
-          game.reconnectionToken,
-          30
-        )
-        await lobby.leave()
-        game.connection.close()
-        dispatch(leaveLobby())
-        navigate("/game")
-      }
-    }
-  }, 1000)
-
   return (
-    <Tabs className="my-container room-menu custom-bg">
-      <h2>{t("rooms")}</h2>
-      <TabList>
-        <Tab>{t("available_rooms")}</Tab>
-        <Tab>
-          {t("in_game")} ({gameRooms.length})
-        </Tab>
-      </TabList>
-
-      <TabPanel className={"tab-available-rooms"}>
-        {user ? (
-          <>
-            <ul className="hidden-scrollable">
-              {preparationRooms.map((r) => (
-                <li key={r.roomId}>
-                  <RoomItem room={r} click={joinPrepRoom} />
-                </li>
-              ))}
-            </ul>
-            <button
-              onClick={quickPlay}
-              className="bubbly green create-room-button"
-            >
-              {t("quick_play")}
-            </button>
-            <button
-              onClick={() => createRoom()}
-              disabled={isFreshNewUser}
-              className="bubbly blue create-room-button"
-            >
-              {t("create_custom_room")}
-            </button>
-          </>
-        ) : (
-          <p className="subtitle">{t("loading")}</p>
-        )}
-      </TabPanel>
-      <TabPanel className={"tab-ingame-rooms"}>
-        <ul className="hidden-scrollable">
-          {gameRooms.map((r) => (
-            <li key={r.roomId}>
-              <GameRoomItem
-                room={r}
-                onJoin={(spectate) => joinGame(r, spectate)}
-              />
-            </li>
-          ))}
-        </ul>
-      </TabPanel>
-    </Tabs>
+    <div className="my-container room-menu custom-bg">
+      <h2>{t("available_rooms")} ({preparationRooms.length})</h2>
+      {user ? (
+        <>
+          <ul>
+            {preparationRooms.map((r) => (
+              <li key={r.roomId}>
+                <RoomItem room={r} click={joinPrepRoom} />
+              </li>
+            ))}
+          </ul>
+          <button
+            onClick={quickPlay}
+            className="bubbly green create-room-button"
+          >
+            {t("quick_play")}
+          </button>
+          <button
+            onClick={() => createRoom()}
+            disabled={isFreshNewUser}
+            className="bubbly blue create-room-button"
+          >
+            {t("create_custom_room")}
+          </button>
+        </>
+      ) : (
+        <p className="subtitle">{t("loading")}</p>
+      )}
+    </div>
   )
 }

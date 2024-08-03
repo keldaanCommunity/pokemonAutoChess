@@ -2544,7 +2544,7 @@
   "quick_play_hint": "The game will automatically start when 8 players joined",
   "password_protected": "Private game (password protected)",
   "private": "Private",
-  "available_rooms": "Available Rooms",
+  "available_rooms": "Open Lobbies",
   "in_game": "In Game",
   "tournament": "Tournament",
   "create_custom_room": "Create a custom room",
