@@ -294,7 +294,11 @@ export class OnNewMessageCommand extends Command<
       message = cleanProfanity(message.substring(0, MAX_MESSAGE_LENGTH))
 
       const user = this.state.users.get(client.auth.uid)
-      if (user && !user.anonymous && message != "") {
+      if (
+        user &&
+        [Role.ADMIN, Role.MODERATOR].includes(user.role) &&
+        message != ""
+      ) {
         this.state.addMessage(message, user.id, user.name, user.avatar)
       }
     } catch (error) {
