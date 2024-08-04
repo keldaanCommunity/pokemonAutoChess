@@ -125,10 +125,6 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateAllStatus(dt: number, pokemon: PokemonEntity, board: Board) {
-    if (pokemon.effects.has(Effect.POISON_GAS) && this.poisonStacks === 0) {
-      this.triggerPoison(1500, pokemon, undefined)
-    }
-
     if (pokemon.effects.has(Effect.STICKY_WEB) && !this.paralysis) {
       this.triggerParalysis(2000, pokemon)
     }
@@ -143,6 +139,10 @@ export default class Status extends Schema implements IStatus {
 
     if (this.poisonStacks > 0) {
       this.updatePoison(dt, pokemon, board)
+    }
+
+    if (pokemon.effects.has(Effect.POISON_GAS) && this.poisonStacks === 0) {
+      this.triggerPoison(1500, pokemon, undefined)
     }
 
     if (this.sleep) {
