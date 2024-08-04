@@ -22,6 +22,7 @@ import { SynergyTriggers } from "./types/Config"
 import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Item } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
+import { logger } from "./utils/logger"
 
 const viewsSrc = __dirname.includes("server")
   ? path.join(__dirname, "..", "..", "..", "..", "views", "index.html")
@@ -44,6 +45,8 @@ if (process.env.NODE_APP_INSTANCE) {
     driver: new RedisDriver(process.env.REDIS_URI),
     publicAddress: `${process.env.SUBDOMAIN}.${process.env.SERVER_NAME}/${port}`
   }
+
+  logger.info(gameOptions)
 }
 
 export default config({
