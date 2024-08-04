@@ -553,9 +553,7 @@ export default class Status extends Schema implements IStatus {
       this.silence = true
       if (duration > this.silenceDuration) {
         this.silenceDuration = duration
-        if (origin) {
-          this.silenceOrigin = origin
-        }
+        this.silenceOrigin = origin ?? this.silenceOrigin
       }
     }
   }
