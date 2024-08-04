@@ -8,7 +8,7 @@
     "UNIQUE": "유니크",
     "LEGENDARY": "전설",
     "MYTHICAL": "신화",
-    "HATCH": "해치",
+    "HATCH": "부화",
     "SPECIAL": "스페셜"
   },
   "pool": {
@@ -17,9 +17,9 @@
     "regional": "리전폼"
   },
   "damage": {
-    "SPECIAL": "특수데미지",
-    "PHYSICAL": "물리데미지",
-    "TRUE": "트루데미지"
+    "SPECIAL": "특수피해",
+    "PHYSICAL": "물리피해",
+    "TRUE": "고정피해"
   },
   "ability": {
     "SOFT_BOILED": "알낳기",
