@@ -82,7 +82,7 @@ export function TournamentsAdmin() {
   )
 }
 
-export function TournamentItem(props: { tournament: ITournament }) {
+function TournamentItem(props: { tournament: ITournament }) {
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
 

@@ -3,7 +3,7 @@ import PokemonFactory from "../../../../models/pokemon-factory"
 import { AttackSprite } from "../../../../types"
 import { Ability } from "../../../../types/enum/Ability"
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
-import { distanceE } from "../../../../utils/distance"
+import { distanceE, distanceM } from "../../../../utils/distance"
 import {
   OrientationArray,
   OrientationVector
@@ -533,6 +533,10 @@ export function displayAbility(
 
     case Ability.VENOSHOCK:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
+    case Ability.FELL_STINGER:
+      addAbilitySprite(Ability.VENOSHOCK, coordinatesTarget, true).setScale(2)
       break
 
     case Ability.LEECH_LIFE:
@@ -1539,6 +1543,58 @@ export function displayAbility(
         x: finalCoords[0],
         y: finalCoords[1],
         duration: 500,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
+    case "GULP_MISSILE/pikachu": {
+      const duration = distanceM(positionX, positionY, targetX, targetY) * 150
+
+      const specialProjectile = addAbilitySprite(skill, coordinates)
+        .setScale(2)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) -
+            Math.PI / 2
+        )
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        yoyo: false,
+        duration: duration,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
+    case "GULP_MISSILE/arrokuda": {
+      const duration = distanceM(positionX, positionY, targetX, targetY) * 150
+
+      const specialProjectile = addAbilitySprite(skill, coordinates)
+        .setScale(2)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) -
+            Math.PI / 2
+        )
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        yoyo: false,
+        duration: duration,
         onComplete: () => {
           specialProjectile.destroy()
         }

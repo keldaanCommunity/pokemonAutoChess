@@ -1,5 +1,5 @@
-import { Room } from "colyseus.js"
 import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
+import { Room } from "colyseus.js"
 import Phaser from "phaser"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin.js"
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin.js"
@@ -39,6 +39,7 @@ import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
 import { logger } from "../../../utils/logger"
 import { clamp, max } from "../../../utils/number"
+import { SOUNDS, playSound } from "../pages/utils/audio"
 import { getPath, transformCoordinate } from "../pages/utils/utils"
 import { loadPreferences, preferences } from "../preferences"
 import store from "../stores"
@@ -46,7 +47,6 @@ import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
 import { getPortraitSrc } from "../utils"
 import { BoardMode } from "./components/board-manager"
 import GameScene from "./scenes/game-scene"
-import { playSound, SOUNDS } from "../pages/utils/audio"
 
 class GameContainer {
   room: Room<GameState>
@@ -379,7 +379,9 @@ class GameContainer {
           "positionY",
           "action",
           "types",
-          "hp"
+          "hp",
+          "atk",
+          "ap"
         ]
         fields.forEach((field) => {
           pokemon.listen(field, (value, previousValue) => {

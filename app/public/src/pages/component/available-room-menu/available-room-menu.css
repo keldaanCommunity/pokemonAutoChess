@@ -29,22 +29,14 @@
   width: 50px;
 }
 
-.special-game-announcement {
-  background: #40404080;
-  padding: 0.4em 0.5em;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5em;
+.room-menu > ul {
+  padding: 0;
   margin: 0;
-}
-
-.special-game-announcement span:last-child {
-  flex: 0 0 6ch;
-}
-
-.room-menu .tab-available-rooms > ul {
   max-height: calc(100% - 10em);
   overflow: auto;
+  flex: 1;
+}
+
+.room-menu li {
+  list-style: none;
 }

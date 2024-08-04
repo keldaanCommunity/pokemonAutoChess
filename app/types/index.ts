@@ -138,7 +138,6 @@ export enum Transfer {
   SELECT_LANGUAGE = "SELECT_LANGUAGE",
   USER_PROFILE = "USER_PROFILE",
   PICK_BERRY = "PICK_BERRY",
-  SERVER_ANNOUNCEMENT = "SERVER_ANNOUNCEMENT",
   PRELOAD_MAPS = "PRELOAD_MAPS",
   NPC_DIALOG = "NPC_DIALOG"
 }
@@ -270,6 +269,7 @@ export interface ICustomLobbyState extends Schema {
   levelLeaderboard: ILeaderboardInfo[]
   nextSpecialGame: ISpecialGamePlanned
   tournaments: ArraySchema<TournamentSchema>
+  clients: number
 }
 
 export interface IGameState extends Schema {
@@ -394,6 +394,7 @@ export interface IPokemon {
   range: number
   stars: number
   maxPP: number
+  ap: number
   skill: Ability
   passive: Passive
   items: SetSchema<Item>

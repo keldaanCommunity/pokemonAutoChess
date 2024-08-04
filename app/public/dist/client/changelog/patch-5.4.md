@@ -1,4 +1,8 @@
 # New Pokemons:
+- Cramorant
+- Arrokuda
+- Poipole
+- Naganadel
 
 # Changes to Pokemon & Abilities
 
@@ -33,11 +37,18 @@
 
 # UI
 
-- Rework all fighting animations 
+- Rework all fighting animations to match with frame delays
 - Show current Wild pokemon chance in synergy description ingame
+- Show current egg chance in Baby synergy description ingame
+- Main lobby chat is now reserved to game announcements, and admins/mods announcements. We invite you to join Discord for general chat instead.
+- Added tournament info on lobby screen
+- Removed online list from lobby screen. It was inpractical with the current number of players.
 
 # Bugfix
 
+- Regional lists was not correctly updated when picking an additional pick with a regional variant
+
 # Misc
 
+- New accounts now start with a random avatar among Pokemon Mystery Dungeon starters
 - Vietnamese translation has been started thanks to Camchanh

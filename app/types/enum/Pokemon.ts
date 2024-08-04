@@ -811,7 +811,11 @@ export enum Pkm {
   MIENSHAO = "MIENSHAO",
   STONJOURNER = "STONJOURNER",
   HISUI_SNEASEL = "HISUI_SNEASEL",
-  SNEASLER = "SNEASLER"
+  SNEASLER = "SNEASLER",
+  POIPOLE = "POIPOLE",
+  NAGANADEL = "NAGANADEL",
+  CRAMORANT = "CRAMORANT",
+  ARROKUDA = "ARROKUDA"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1625,7 +1629,11 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MIENSHAO]: "0620",
   [Pkm.STONJOURNER]: "0874",
   [Pkm.HISUI_SNEASEL]: "0215-0001",
-  [Pkm.SNEASLER]: "0903"
+  [Pkm.SNEASLER]: "0903",
+  [Pkm.POIPOLE]: "0803",
+  [Pkm.NAGANADEL]: "0804",
+  [Pkm.CRAMORANT]: "0845",
+  [Pkm.ARROKUDA]: "0846"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2439,7 +2447,11 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MIENSHAO]: Pkm.MIENFOO,
   [Pkm.STONJOURNER]: Pkm.STONJOURNER,
   [Pkm.HISUI_SNEASEL]: Pkm.HISUI_SNEASEL,
-  [Pkm.SNEASLER]: Pkm.HISUI_SNEASEL
+  [Pkm.SNEASLER]: Pkm.HISUI_SNEASEL,
+  [Pkm.POIPOLE]: Pkm.POIPOLE,
+  [Pkm.NAGANADEL]: Pkm.POIPOLE,
+  [Pkm.CRAMORANT]: Pkm.CRAMORANT,
+  [Pkm.ARROKUDA]: Pkm.ARROKUDA
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
@@ -2451,7 +2463,6 @@ export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
   [Pkm.ZORUA]: [Pkm.HISUI_ZORUA],
   [Pkm.GRIMER]: [Pkm.ALOLAN_GRIMER],
   [Pkm.NIDORANF]: [Pkm.NIDORANM],
-  [Pkm.KLEFKI]: [Pkm.KLEFKI],
   [Pkm.SNEASEL]: [Pkm.HISUI_SNEASEL]
 }
 
@@ -6658,6 +6669,26 @@ export const AnimationConfig: {
   [Pkm.SNEASLER]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Attack,
+    emote: AnimationType.Charge
+  },
+  [Pkm.POIPOLE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.NAGANADEL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.CRAMORANT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.ARROKUDA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Charge
   }
 }

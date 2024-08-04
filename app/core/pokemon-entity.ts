@@ -162,6 +162,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.passive = pokemon.passive
     this.shiny = pokemon.shiny
     this.emotion = pokemon.emotion
+    this.ap = pokemon.ap
 
     this.dodge = 0
     this.physicalDamage = 0

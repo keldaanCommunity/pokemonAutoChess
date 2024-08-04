@@ -1,3 +1,20 @@
+.tournament-item {
+  display: flex;
+  flex-flow: column nowrap;
+  overflow-y: auto;
+}
+
+.tournament-item > * {
+  flex: 0;
+}
+
+.tournament-item > .react-tabs {
+  flex: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  min-height: 0;
+}
+
 .tournament-item .actions {
   display: flex;
   justify-content: end;
@@ -48,8 +65,17 @@
   flex: 1;
 }
 
+.tournament-item ul {
+  padding: 0;
+  margin: 0;
+}
+
 .tournament-item .player-rank {
   line-height: 40px;
   min-width: 2ch;
   text-align: center;
+}
+
+.tournament-item .react-tabs__tab-panel--selected {
+  overflow-y: auto;
 }

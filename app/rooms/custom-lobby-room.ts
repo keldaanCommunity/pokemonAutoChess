@@ -50,7 +50,6 @@ import {
   GiveBoostersCommand,
   GiveRoleCommand,
   GiveTitleCommand,
-  MakeServerAnnouncementCommand,
   NextTournamentStageCommand,
   OnBotUploadCommand,
   OnCreateTournamentCommand,
@@ -406,16 +405,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     this.onMessage(Transfer.SEARCH, (client, { name }: { name: string }) => {
       this.dispatcher.dispatch(new OnSearchCommand(), { client, name })
     })
-
-    this.onMessage(
-      Transfer.SERVER_ANNOUNCEMENT,
-      (client, { message }: { message: string }) => {
-        this.dispatcher.dispatch(new MakeServerAnnouncementCommand(), {
-          client,
-          message
-        })
-      }
-    )
 
     this.onMessage(
       Transfer.CHANGE_AVATAR,

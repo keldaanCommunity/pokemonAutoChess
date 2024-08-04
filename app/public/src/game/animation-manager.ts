@@ -1,6 +1,7 @@
 import { IPokemonEntity } from "../../../types"
-import delays from "../../../types/delays.json"
 import { AnimationComplete, AnimationType } from "../../../types/Animation"
+import { PROJECTILE_SPEED } from "../../../types/Config"
+import delays from "../../../types/delays.json"
 import {
   Orientation,
   OrientationFlip,
@@ -10,14 +11,13 @@ import {
 } from "../../../types/enum/Game"
 import { Berries } from "../../../types/enum/Item"
 import { AnimationConfig, Pkm, PkmIndex } from "../../../types/enum/Pokemon"
+import { distanceC } from "../../../utils/distance"
 import { logger } from "../../../utils/logger"
 import { fpsToDuration, max } from "../../../utils/number"
 import durations from "../../dist/client/assets/pokemons/durations.json"
 import indexList from "../../dist/client/assets/pokemons/indexList.json"
 import atlas from "../assets/atlas.json"
 import PokemonSprite from "./components/pokemon"
-import { distanceC } from "../../../utils/distance"
-import { PROJECTILE_SPEED } from "../../../types/Config"
 
 const FPS_EFFECTS = 20
 const FPS_POKEMON_ANIMS = 36
@@ -338,7 +338,9 @@ export function getAttackTimings(pokemon: IPokemonEntity): {
   attackDuration: number
 } {
   const attackDuration = 1000 / pokemon.atkSpeed
-  const { d = 18, t = 36 } = delays[pokemon.index]
+  const d = delays[pokemon.index]?.d || 18
+  const t = delays[pokemon.index]?.t || 36
+
   const delayBeforeShoot = max(attackDuration / 2)((attackDuration * d) / t)
   const distance = distanceC(
     pokemon.targetX,

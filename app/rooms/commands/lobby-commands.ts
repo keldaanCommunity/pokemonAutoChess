@@ -42,6 +42,7 @@ import {
   DUST_PER_SHINY,
   getEmotionCost
 } from "../../types/Config"
+import { StarterAvatars } from "../../types/enum/Starters"
 import { EloRank } from "../../types/enum/EloRank"
 import { GameMode, Rarity } from "../../types/enum/Game"
 import { Language } from "../../types/enum/Language"
@@ -74,6 +75,7 @@ export class OnJoinCommand extends Command<
   }) {
     try {
       //logger.info(`${client.auth.displayName} ${client.id} join lobby room`)
+      this.state.clients = this.room.clients.length
       client.send(Transfer.ROOMS, rooms)
       const user = await UserMetadata.findOne({ uid: client.auth.uid })
 
@@ -126,9 +128,11 @@ export class OnJoinCommand extends Command<
       } else {
         // create new user account
         const numberOfBoosters = 3
+        const starterAvatar = pickRandomIn(StarterAvatars)
         UserMetadata.create({
           uid: client.auth.uid,
           displayName: client.auth.displayName,
+          avatar: starterAvatar,
           booster: numberOfBoosters,
           pokemonCollection: new Map<string, IPokemonConfig>()
         })
@@ -138,7 +142,7 @@ export class OnJoinCommand extends Command<
             client.auth.uid,
             client.auth.displayName,
             1000,
-            "0019/Normal",
+            starterAvatar,
             0,
             0,
             0,
@@ -170,6 +174,7 @@ export class OnLeaveCommand extends Command<
 > {
   execute({ client }: { client: Client }) {
     try {
+      this.state.clients = this.room.clients.length
       if (client && client.auth && client.auth.displayName && client.auth.uid) {
         //logger.info(`${client.auth.displayName} ${client.id} leave lobby`)
         this.state.users.delete(client.auth.uid)
@@ -291,7 +296,11 @@ export class OnNewMessageCommand extends Command<
       message = cleanProfanity(message.substring(0, MAX_MESSAGE_LENGTH))
 
       const user = this.state.users.get(client.auth.uid)
-      if (user && !user.anonymous && message != "") {
+      if (
+        user &&
+        [Role.ADMIN, Role.MODERATOR].includes(user.role) &&
+        message != ""
+      ) {
         this.state.addMessage(message, user.id, user.name, user.avatar)
       }
     } catch (error) {
@@ -1149,22 +1158,6 @@ export class OpenSpecialGameCommand extends Command<
     })
 
     this.state.getNextSpecialGame()
-  }
-}
-
-export class MakeServerAnnouncementCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client; message: string }
-> {
-  async execute({ client, message }: { client: Client; message: string }) {
-    try {
-      const u = this.state.users.get(client.auth.uid)
-      if (u && u.role && u.role === Role.ADMIN) {
-        this.room.presence.publish("server-announcement", message)
-      }
-    } catch (error) {
-      logger.error(error)
-    }
   }
 }
 

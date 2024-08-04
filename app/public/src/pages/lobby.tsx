@@ -26,7 +26,6 @@ import {
   addRoom,
   addTournament,
   addTournamentBracket,
-  addUser,
   changePokemonConfig,
   changeTournament,
   changeTournamentBracket,
@@ -39,11 +38,11 @@ import {
   removeRoom,
   removeTournament,
   removeTournamentBracket,
-  removeUser,
   setBoosterContent,
   setBotData,
   setBotLeaderboard,
   setBotList,
+  setClientsCount,
   setLanguage,
   setLeaderboard,
   setLevelLeaderboard,
@@ -63,9 +62,8 @@ import {
   requestLevelLeaderboard,
   setProfile
 } from "../stores/NetworkStore"
-import RoomMenu from "./component/available-room-menu/room-menu"
-import CurrentUsers from "./component/available-user-menu/current-users"
-import Chat from "./component/chat/chat"
+import AvailableRoomMenu from "./component/available-room-menu/available-room-menu"
+import { GameRoomsMenu } from "./component/available-room-menu/game-rooms-menu"
 import TabMenu from "./component/lobby-menu/tab-menu"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { FIREBASE_CONFIG } from "./utils/utils"
@@ -74,6 +72,7 @@ import { logger } from "../../../utils/logger"
 import { localStore, LocalStoreKeys } from "./utils/store"
 import { cc } from "./utils/jsx"
 import { Modal } from "./component/modal/modal"
+import { Announcements } from "./component/announcements/announcements"
 import "./lobby.css"
 
 export default function Lobby() {
@@ -175,25 +174,32 @@ function MainLobby({ toPreparation, setToPreparation }) {
             {t("leaderboard")}
           </li>
           <li
-            onClick={() => setActive("rooms")}
-            className={cc({ active: activeSection === "rooms" })}
+            onClick={() => setActive("available_rooms")}
+            className={cc({ active: activeSection === "available_rooms" })}
           >
             <img width={32} height={32} src={`assets/ui/room.svg`} />
             {t("rooms")}
           </li>
           <li
+            onClick={() => setActive("game_rooms")}
+            className={cc({ active: activeSection === "game_rooms" })}
+          >
+            <img width={32} height={32} src={`assets/ui/spectate.svg`} />
+            {t("in_game")}
+          </li>
+          {/*<li
             onClick={() => setActive("online")}
             className={cc({ active: activeSection === "online" })}
           >
             <img width={32} height={32} src={`assets/ui/players.svg`} />
             {t("online")}
-          </li>
+          </li>*/}
           <li
-            onClick={() => setActive("chat")}
-            className={cc({ active: activeSection === "chat" })}
+            onClick={() => setActive("announcements")}
+            className={cc({ active: activeSection === "announcements" })}
           >
             <img width={32} height={32} src={`assets/ui/chat.svg`} />
-            {t("chat")}
+            {t("announcements")}
           </li>
         </ul>
       </nav>
@@ -204,17 +210,17 @@ function MainLobby({ toPreparation, setToPreparation }) {
       >
         <TabMenu />
       </section>
-      <section className={cc("rooms", { active: activeSection === "rooms" })}>
-        <RoomMenu
-          toPreparation={toPreparation}
-          setToPreparation={setToPreparation}
-        />
+      <section className={cc("rooms", { active: activeSection === "available_rooms" })}>
+        <AvailableRoomMenu />
       </section>
-      <section className={cc("online", { active: activeSection === "online" })}>
+      <section className={cc("game_rooms", { active: activeSection === "game_rooms" })}>
+        <GameRoomsMenu />
+      </section>
+      {/*<section className={cc("online", { active: activeSection === "online" })}>
         <CurrentUsers />
-      </section>
-      <section className={cc("chat", { active: activeSection === "chat" })}>
-        <Chat source="lobby" />
+      </section>*/}
+      <section className={cc("announcements", { active: activeSection === "announcements" })}>
+        <Announcements />
       </section>
     </div>
   )
@@ -247,6 +253,10 @@ export async function joinLobbyRoom(
           })
           room.state.messages.onRemove((m) => {
             dispatch(removeMessage(m))
+          })
+
+          room.state.listen("clients", (value) => {
+            dispatch(setClientsCount(value))
           })
 
           room.state.tournaments.onAdd((tournament) => {
@@ -345,8 +355,6 @@ export async function joinLobbyRoom(
           })
 
           room.state.users.onAdd((u) => {
-            dispatch(addUser(u))
-
             if (u.id == user.uid) {
               u.pokemonCollection.onAdd((p) => {
                 const pokemonConfig = p as PokemonConfig
@@ -415,10 +423,6 @@ export async function joinLobbyRoom(
 
           room.state.listen("nextSpecialGame", (specialGame) => {
             dispatch(setNextSpecialGame(specialGame))
-          })
-
-          room.state.users.onRemove((u) => {
-            dispatch(removeUser(u.id))
           })
 
           room.onMessage(Transfer.REQUEST_LEADERBOARD, (l) => {
