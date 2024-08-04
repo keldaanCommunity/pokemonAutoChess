@@ -125,11 +125,17 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateAllStatus(dt: number, pokemon: PokemonEntity, board: Board) {
-    if (pokemon.effects.has(Effect.POISON_GAS) && this.poisonStacks === 0) {
+    if (
+      pokemon.effects.has(Effect.POISON_GAS) && 
+      this.poisonStacks === 0
+    ) {
       this.triggerPoison(1500, pokemon, undefined)
     }
 
-    if (pokemon.effects.has(Effect.STICKY_WEB) && !this.paralysis) {
+    if (
+      pokemon.effects.has(Effect.STICKY_WEB) && 
+      !this.paralysis
+    ) {
       this.triggerParalysis(2000, pokemon)
     }
 
@@ -258,7 +264,10 @@ export default class Status extends Schema implements IStatus {
       this.triggerSilence(30000, pokemon)
     }
 
-    if (pokemon.effects.has(Effect.CURSE_OF_FATE) && !pokemon.status.curse) {
+    if (
+      pokemon.effects.has(Effect.CURSE_OF_FATE) && 
+      !pokemon.status.curse
+    ) {
       this.triggerCurse(5000)
     }
   }
@@ -307,7 +316,7 @@ export default class Status extends Schema implements IStatus {
     if (!this.runeProtect) {
       this.armorReduction = true
 
-      duration = applyAquatic(duration, pkm)
+      duration = applyAquaticReduction(duration, pkm)
 
       if (duration > this.armorReductionDuration) {
         this.armorReductionDuration = Math.round(duration)
@@ -468,7 +477,7 @@ export default class Status extends Schema implements IStatus {
     ) {
       this.burn = true
 
-      duration = applyAquatic(duration, pkm)
+      duration = applyAquaticReduction(duration, pkm)
 
       if (duration > this.burnDuration) {
         this.burnDuration = duration
@@ -533,7 +542,7 @@ export default class Status extends Schema implements IStatus {
 
   triggerSilence(duration: number, pkm: PokemonEntity, origin?: PokemonEntity) {
     if (!this.runeProtect && !this.tree) {
-      duration = applyAquatic(duration, pkm)
+      duration = applyAquaticReduction(duration, pkm)
 
       this.silence = true
       if (duration > this.silenceDuration) {
@@ -571,7 +580,7 @@ export default class Status extends Schema implements IStatus {
       }
       this.poisonStacks = max(maxStacks)(this.poisonStacks + 1)
 
-      duration = applyAquatic(duration, pkm)
+      duration = applyAquaticReduction(duration, pkm)
 
       if (duration > this.poisonDuration) {
         this.poisonDuration = duration
@@ -663,7 +672,7 @@ export default class Status extends Schema implements IStatus {
         duration = duration / 2
       }
 
-      duration = applyAquatic(duration, pkm)
+      duration = applyAquaticReduction(duration, pkm)
 
       this.freeze = true
       this.freezeDuration = Math.round(duration)
@@ -710,7 +719,7 @@ export default class Status extends Schema implements IStatus {
         duration = duration / 2
       }
 
-      duration = applyAquatic(duration, pkm)
+      duration = applyAquaticReduction(duration, pkm)
 
       this.sleep = true
       this.sleepDuration = Math.round(duration)
@@ -738,7 +747,7 @@ export default class Status extends Schema implements IStatus {
         duration *= 1.3
       }
 
-      duration = applyAquatic(duration, pkm)
+      duration = applyAquaticReduction(duration, pkm)
 
       this.confusion = true
       this.confusionDuration = Math.round(duration)
@@ -773,7 +782,7 @@ export default class Status extends Schema implements IStatus {
         duration *= 1.3
       }
 
-      duration = applyAquatic(duration, pkm)
+      duration = applyAquaticReduction(duration, pkm)
 
       this.charm = true
       this.charmDuration = duration
@@ -804,7 +813,7 @@ export default class Status extends Schema implements IStatus {
         duration *= 1.3
       }
 
-      duration = applyAquatic(duration, pkm)
+      duration = applyAquaticReduction(duration, pkm)
 
       if (duration > this.woundDuration) {
         this.woundDuration = duration
@@ -833,7 +842,7 @@ export default class Status extends Schema implements IStatus {
         duration *= 1.3
       }
 
-      duration = applyAquatic(duration, pkm)
+      duration = applyAquaticReduction(duration, pkm)
 
       if (duration > this.paralysisDuration) {
         this.paralysisDuration = Math.round(duration)
@@ -878,7 +887,7 @@ export default class Status extends Schema implements IStatus {
   triggerFlinch(duration: number, pkm: PokemonEntity, origin?: PokemonEntity) {
     if (!this.runeProtect) {
       this.flinch = true
-      duration = applyAquatic(duration, pkm)
+      duration = applyAquaticReduction(duration, pkm)
       if (duration > this.flinchDuration) {
         this.flinchDuration = Math.round(duration)
       }
@@ -1011,7 +1020,7 @@ export default class Status extends Schema implements IStatus {
         duration = duration / 2
       }
 
-      duration = applyAquatic(duration, pkm)
+      duration = applyAquaticReduction(duration, pkm)
 
       this.locked = true
       this.lockedDuration = Math.round(duration)
@@ -1027,7 +1036,7 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  private applyAquatic(duration: number, pkm: PokemonEntity) : number {
+  private applyAquaticReduction(duration: number, pkm: PokemonEntity) : number {
     if (pkm.effects.has(Effect.SWIFT_SWIM)) {
       duration *= 0.7
     } else if (pkm.effects.has(Effect.HYDRATION)) {
