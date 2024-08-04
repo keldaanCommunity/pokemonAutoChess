@@ -1090,7 +1090,7 @@
     "HIDDEN_POWER_I": "무작위 아이템 구성품을 얻습니다.",
     "HIDDEN_POWER_J": "RAZOR_CLAW 을 지닌 샤크니아 2마리를 생성합니다.",
     "HIDDEN_POWER_K": "RED_ORB 을 지닌 시라소몬을 PP가 가득찬 상태로 생성합니다.",
-    "HIDDEN_POWER_L": "5초간 상대팀이 봉인됩니다.",
+    "HIDDEN_POWER_L": "5초간 상대팀이 LOCKED 됩니다.",
     "HIDDEN_POWER_M": "팀 구성원 전체의 PP를 가득 체웁니다.",
     "HIDDEN_POWER_N": "팀 구성원 전체가 $t(ability.EXPLOSION)을 시전합니다.",
     "HIDDEN_POWER_O": "팀 구성원 전체가 ORAN_BERRY 를 획득합니다. 이 아이템은 전투후 제거됩니다.",
