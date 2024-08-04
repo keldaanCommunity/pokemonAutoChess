@@ -75,6 +75,7 @@ export class OnJoinCommand extends Command<
   }) {
     try {
       //logger.info(`${client.auth.displayName} ${client.id} join lobby room`)
+      this.state.clients = this.room.clients.length
       client.send(Transfer.ROOMS, rooms)
       const user = await UserMetadata.findOne({ uid: client.auth.uid })
 
@@ -173,6 +174,7 @@ export class OnLeaveCommand extends Command<
 > {
   execute({ client }: { client: Client }) {
     try {
+      this.state.clients = this.room.clients.length
       if (client && client.auth && client.auth.displayName && client.auth.uid) {
         //logger.info(`${client.auth.displayName} ${client.id} leave lobby`)
         this.state.users.delete(client.auth.uid)
@@ -294,7 +296,11 @@ export class OnNewMessageCommand extends Command<
       message = cleanProfanity(message.substring(0, MAX_MESSAGE_LENGTH))
 
       const user = this.state.users.get(client.auth.uid)
-      if (user && !user.anonymous && message != "") {
+      if (
+        user &&
+        [Role.ADMIN, Role.MODERATOR].includes(user.role) &&
+        message != ""
+      ) {
         this.state.addMessage(message, user.id, user.name, user.avatar)
       }
     } catch (error) {
@@ -1152,22 +1158,6 @@ export class OpenSpecialGameCommand extends Command<
     })
 
     this.state.getNextSpecialGame()
-  }
-}
-
-export class MakeServerAnnouncementCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client; message: string }
-> {
-  async execute({ client, message }: { client: Client; message: string }) {
-    try {
-      const u = this.state.users.get(client.auth.uid)
-      if (u && u.role && u.role === Role.ADMIN) {
-        this.room.presence.publish("server-announcement", message)
-      }
-    } catch (error) {
-      logger.error(error)
-    }
   }
 }
 

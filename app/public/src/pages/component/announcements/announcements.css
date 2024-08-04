@@ -1,0 +1,47 @@
+.announcements-container {
+    flex: 1;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    overflow-y: auto;
+}
+
+.special-game-announcement {
+    background: #40404080;
+    padding: 0.4em 0.5em;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5em;
+    margin: 0;
+}
+
+.special-game-announcement img {
+    width: 50px;
+    height: 50px;
+}
+
+.special-game-announcement span:last-child {
+    flex: 0 0 6ch;
+}
+
+.announcements .tournaments {
+    flex: 0;
+    padding: 0;
+
+    & > li {
+        list-style: none;
+        margin: 0.5em 0;
+    }
+}
+
+.announcements .user-chat {
+    flex: 1;
+    min-height: 250px;
+}
+
+.announcements .tournaments li .tournament-item {
+    max-height: 50vh;
+}
