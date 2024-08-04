@@ -11733,7 +11733,7 @@ export class Barboach extends Pokemon {
     simulation
   }: { entity: IPokemonEntity; simulation: Simulation }) {
     if (simulation.weather === Weather.RAIN) {
-      entity.status.triggerRuneProtect(60000)
+      entity.status.triggerRuneProtect(60000, entity)
     }
   }
 }
@@ -11757,7 +11757,7 @@ export class Whiscash extends Pokemon {
     simulation
   }: { entity: IPokemonEntity; simulation: Simulation }) {
     if (simulation.weather === Weather.RAIN) {
-      entity.status.triggerRuneProtect(60000)
+      entity.status.triggerRuneProtect(60000, entity)
     }
   }
 }
@@ -12542,7 +12542,7 @@ export class Gholdengo extends Pokemon {
     player
   }: { entity: IPokemonEntity; player: IPlayer }) {
     if (player.money >= 50) {
-      entity.status.triggerRuneProtect(60000)
+      entity.status.triggerRuneProtect(60000, entity)
     }
   }
 }

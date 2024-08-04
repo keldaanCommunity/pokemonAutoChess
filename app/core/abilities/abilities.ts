@@ -241,7 +241,7 @@ export class SoftBoiledStrategy extends AbilityStrategy {
           orientation: pokemon.orientation
         })
         tg.addShield(shield, pokemon, 1, crit)
-        tg.status.clearNegativeStatus()
+        tg.status.clearNegativeStatus(tg)
       }
     })
   }
@@ -348,7 +348,7 @@ export class SlackOffStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    pokemon.status.clearNegativeStatus()
+    pokemon.status.clearNegativeStatus(pokemon)
     const healFactor =
       pokemon.stars === 3 ? 0.5 : pokemon.stars === 2 ? 0.4 : 0.3
     pokemon.handleHeal(pokemon.hp * healFactor, pokemon, 0.5, crit)
@@ -787,7 +787,7 @@ export class ElectroBoostStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     board.forEach((x, y, tg) => {
       if (tg && pokemon.team == tg.team && tg.types.has(Synergy.ELECTRIC)) {
-        tg.status.triggerRuneProtect(5000)
+        tg.status.triggerRuneProtect(5000, tg)
       }
     })
   }
@@ -808,7 +808,7 @@ export class AuroraVeilStrategy extends AbilityStrategy {
     board.forEach((x, y, tg) => {
       if (tg && pokemon.team == tg.team) {
         tg.addShield(shield, pokemon, 1, crit)
-        tg.status.triggerRuneProtect(runeProtectDuration)
+        tg.status.triggerRuneProtect(runeProtectDuration, tg)
       }
     })
   }
@@ -826,7 +826,7 @@ export class TimeTravelStrategy extends AbilityStrategy {
     board.forEach((x, y, ally) => {
       if (ally && pokemon.team == ally.team) {
         ally.handleHeal(25, pokemon, 1, crit)
-        ally.status.clearNegativeStatus()
+        ally.status.clearNegativeStatus(ally)
       }
     })
 
@@ -2739,7 +2739,7 @@ export class LunarBlessingStrategy extends AbilityStrategy {
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team && ally.life < ally.hp) {
         ally.handleHeal(0.25 * pokemon.hp, pokemon, 1, crit)
-        ally.status.clearNegativeStatus()
+        ally.status.clearNegativeStatus(ally)
       }
     })
   }
@@ -2768,7 +2768,7 @@ export class NaturalGiftStrategy extends AbilityStrategy {
         1,
         crit
       )
-      lowestHealthAlly.status.triggerRuneProtect(pokemon.stars * 1000)
+      lowestHealthAlly.status.triggerRuneProtect(pokemon.stars * 1000, lowestHealthAlly)
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
         id: pokemon.simulation.id,
         skill: Ability.NATURAL_GIFT,
@@ -3362,7 +3362,7 @@ export class WaterfallStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const shield = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
     pokemon.addShield(shield, pokemon, 1, crit)
-    pokemon.status.clearNegativeStatus()
+    pokemon.status.clearNegativeStatus(pokemon)
     board.effects[pokemon.positionY * board.columns + pokemon.positionX] =
       undefined
     pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
@@ -3870,7 +3870,7 @@ export class TakeHeartStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     pokemon.addAttack(8, pokemon, 1, crit)
     pokemon.addSpecialDefense(4, pokemon, 1, crit)
-    pokemon.status.clearNegativeStatus()
+    pokemon.status.clearNegativeStatus(pokemon)
     pokemon.cooldown = 250
   }
 }
@@ -6239,7 +6239,7 @@ export class AquaRingStrategy extends AbilityStrategy {
 
       cells.forEach((cell) => {
         if (cell.value && cell.value.team === pokemon.team) {
-          cell.value.status.clearNegativeStatus()
+          cell.value.status.clearNegativeStatus(cell.value)
           cell.value.handleHeal(
             pokemon.stars === 3 ? 50 : pokemon.stars === 2 ? 30 : 20,
             pokemon,
@@ -7944,7 +7944,7 @@ export class AromatherapyStrategy extends AbilityStrategy {
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .forEach((cell) => {
         if (cell.value && cell.value.team === pokemon.team) {
-          cell.value.status.clearNegativeStatus()
+          cell.value.status.clearNegativeStatus(cell.value)
           cell.value.handleHeal(heal, pokemon, 1, crit)
         }
       })

@@ -89,21 +89,20 @@ export default class Status extends Schema implements IStatus {
   darkHarvestDuration = 0
   darkHarvestDamageCooldown = 0
 
-  clearNegativeStatus() {
-    this.burnDuration = 0
-    this.silenceDuration = 0
-    this.poisonDuration = 0
-    this.freezeDuration = 0
-    this.sleepDuration = 0
-    this.confusionDuration = 0
-    this.woundDuration = 0
-    this.paralysisDuration = 0
-    this.charmDuration = 0
-    this.flinchDuration = 0
-    this.armorReductionDuration = 0
-    this.curseDuration = 0
-    this.curse = false
-    this.lockedDuration = 0
+  clearNegativeStatus(pkm: IPokemonEntity) {
+    this.healBurn(pkm)
+    this.healSilence()
+    this.healPoison(pkm)
+    this.healFreeze()
+    this.healSleep()
+    this.healConfusion()
+    this.healWound()
+    this.healParalysis(pkm)
+    this.healCharm()
+    this.healFlinch()
+    this.healArmorReduction()
+    this.healCurse()
+    this.healLocked(pkm)
   }
 
   hasNegativeStatus() {
@@ -244,28 +243,32 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (
-      pokemon.effects.has(Effect.CURSE_OF_VULNERABILITY) &&
+      (pokemon.effects.has(Effect.CURSE_OF_VULNERABILITY) ||
+       pokemon.status.curseVulnerability) &&
       !pokemon.status.flinch
     ) {
       this.triggerFlinch(30000, pokemon)
     }
 
     if (
-      pokemon.effects.has(Effect.CURSE_OF_WEAKNESS) &&
+      (pokemon.effects.has(Effect.CURSE_OF_WEAKNESS) ||
+       pokemon.status.curseWeakness) &&
       !pokemon.status.paralysis
     ) {
       this.triggerParalysis(30000, pokemon)
     }
 
     if (
-      pokemon.effects.has(Effect.CURSE_OF_TORMENT) &&
+      (pokemon.effects.has(Effect.CURSE_OF_TORMENT) ||
+       pokemon.status.curseTorment) &&
       !pokemon.status.silence
     ) {
       this.triggerSilence(30000, pokemon)
     }
 
     if (
-      pokemon.effects.has(Effect.CURSE_OF_FATE) && 
+      (pokemon.effects.has(Effect.CURSE_OF_FATE) ||
+       pokemon.status.curseFate) &&
       !pokemon.status.curse
     ) {
       this.triggerCurse(5000)
@@ -316,7 +319,7 @@ export default class Status extends Schema implements IStatus {
     if (!this.runeProtect) {
       this.armorReduction = true
 
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       if (duration > this.armorReductionDuration) {
         this.armorReductionDuration = Math.round(duration)
@@ -327,8 +330,13 @@ export default class Status extends Schema implements IStatus {
   updateArmorReduction(dt: number) {
     this.armorReductionDuration -= dt
     if (this.armorReductionDuration <= 0) {
-      this.armorReduction = false
+      this.healArmorReduction()
     }
+  }
+
+  healArmorReduction() {
+    this.armorReduction = false
+    this.armorReductionDuration = 0
   }
 
   updateRage(dt: number, pokemon: PokemonEntity) {
@@ -476,13 +484,11 @@ export default class Status extends Schema implements IStatus {
     ) {
       this.burn = true
 
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       if (duration > this.burnDuration) {
         this.burnDuration = duration
-        if (origin) {
-          this.burnOrigin = origin
-        }
+        this.burnOrigin = origin ?? this.burnOrigin
       }
 
       if (pkm.passive === Passive.GUTS && !this.guts) {
@@ -533,6 +539,7 @@ export default class Status extends Schema implements IStatus {
     this.burn = false
     this.burnOrigin = undefined
     this.burnDamageCooldown = 1000
+    this.burnDuration = 0
     if (pkm.passive === Passive.GUTS && this.poisonStacks === 0) {
       this.guts = false
       pkm.addAttack(-5, pkm, 0, false)
@@ -541,7 +548,7 @@ export default class Status extends Schema implements IStatus {
 
   triggerSilence(duration: number, pkm: PokemonEntity, origin?: PokemonEntity) {
     if (!this.runeProtect && !this.tree) {
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       this.silence = true
       if (duration > this.silenceDuration) {
@@ -556,9 +563,14 @@ export default class Status extends Schema implements IStatus {
   updateSilence(dt: number) {
     this.silenceDuration -= dt
     if (this.silenceDuration <= 0) {
-      this.silence = false
-      this.silenceOrigin = undefined
+      this.healSilence()
     }
+  }
+
+  healSilence() {
+    this.silence = false
+    this.silenceOrigin = undefined
+    this.silenceDuration = 0
   }
 
   triggerPoison(
@@ -579,7 +591,7 @@ export default class Status extends Schema implements IStatus {
       }
       this.poisonStacks = max(maxStacks)(this.poisonStacks + 1)
 
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       if (duration > this.poisonDuration) {
         this.poisonDuration = duration
@@ -641,9 +653,15 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (this.poisonDuration <= 0) {
+      this.healPoison(pkm)
+    }
+  }
+
+  healPoison(pkm : PokemonEntity) {
       this.poisonStacks = 0
       this.poisonOrigin = undefined
       this.poisonDamageCooldown = 1000
+      this.poisonDuration = 0
       if (pkm.passive === Passive.GUTS && !this.burn) {
         this.guts = false
         pkm.addAttack(-5, pkm, 0, false)
@@ -652,7 +670,6 @@ export default class Status extends Schema implements IStatus {
         this.toxicBoost = false
         pkm.addAttack(-10, pkm, 0, false)
       }
-    }
   }
 
   triggerFreeze(duration: number, pkm: PokemonEntity) {
@@ -671,7 +688,7 @@ export default class Status extends Schema implements IStatus {
         duration = duration / 2
       }
 
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       this.freeze = true
       this.freezeDuration = Math.round(duration)
@@ -685,8 +702,13 @@ export default class Status extends Schema implements IStatus {
   updateFreeze(dt: number) {
     this.freezeDuration -= dt
     if (this.freezeDuration <= 0) {
-      this.freeze = false
+      this.healFreeze()
     }
+  }
+
+  healFreeze() {
+    this.freeze = false
+    this.freezeDuration = 0
   }
 
   triggerProtect(timer: number) {
@@ -718,7 +740,7 @@ export default class Status extends Schema implements IStatus {
         duration = duration / 2
       }
 
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       this.sleep = true
       this.sleepDuration = Math.round(duration)
@@ -732,8 +754,13 @@ export default class Status extends Schema implements IStatus {
   updateSleep(dt: number) {
     this.sleepDuration -= dt
     if (this.sleepDuration <= 0) {
-      this.sleep = false
+      this.healSleep()
     }
+  }
+
+  healSleep() {
+    this.sleep = false
+    this.sleepDuration = 0
   }
 
   triggerConfusion(duration: number, pkm: PokemonEntity) {
@@ -746,7 +773,7 @@ export default class Status extends Schema implements IStatus {
         duration *= 1.3
       }
 
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       this.confusion = true
       this.confusionDuration = Math.round(duration)
@@ -764,8 +791,13 @@ export default class Status extends Schema implements IStatus {
   updateConfusion(dt: number) {
     this.confusionDuration -= dt
     if (this.confusionDuration <= 0) {
-      this.confusion = false
+      this.healConfusion()
     }
+  }
+
+  healConfusion() {
+    this.confusion = false
+    this.confusionDuration = 0
   }
 
   triggerCharm(
@@ -781,7 +813,7 @@ export default class Status extends Schema implements IStatus {
         duration *= 1.3
       }
 
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       this.charm = true
       this.charmDuration = duration
@@ -796,9 +828,14 @@ export default class Status extends Schema implements IStatus {
   updateCharm(dt: number) {
     this.charmDuration -= dt
     if (this.charmDuration <= 0) {
-      this.charm = false
-      this.charmOrigin = undefined
+      this.healCharm()
     }
+  }
+
+  healCharm() {
+    this.charm = false
+    this.charmOrigin = undefined
+    this.charmDuration = 0
   }
 
   triggerWound(
@@ -812,13 +849,11 @@ export default class Status extends Schema implements IStatus {
         duration *= 1.3
       }
 
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       if (duration > this.woundDuration) {
         this.woundDuration = duration
-        if (origin) {
-          this.woundOrigin = origin
-        }
+        this.woundOrigin = origin ?? this.woundOrigin
       }
     }
   }
@@ -826,9 +861,14 @@ export default class Status extends Schema implements IStatus {
   updateWound(dt: number) {
     this.woundDuration -= dt
     if (this.woundDuration <= 0) {
-      this.wound = false
-      this.woundOrigin = undefined
+      this.healWound()
     }
+  }
+
+  healWound() {
+    this.wound = false
+    this.woundOrigin = undefined
+    this.woundDuration = 0
   }
 
   triggerParalysis(duration: number, pkm: PokemonEntity) {
@@ -841,7 +881,7 @@ export default class Status extends Schema implements IStatus {
         duration *= 1.3
       }
 
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       if (duration > this.paralysisDuration) {
         this.paralysisDuration = Math.round(duration)
@@ -868,9 +908,9 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerRuneProtect(timer: number) {
+  triggerRuneProtect(timer: number, pkm: IPokemonEntity) {
     this.runeProtect = true
-    this.clearNegativeStatus()
+    this.clearNegativeStatus(pkm)
     if (timer > this.runeProtectDuration) {
       this.runeProtectDuration = timer
     }
@@ -886,7 +926,7 @@ export default class Status extends Schema implements IStatus {
   triggerFlinch(duration: number, pkm: PokemonEntity, origin?: PokemonEntity) {
     if (!this.runeProtect) {
       this.flinch = true
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
       if (duration > this.flinchDuration) {
         this.flinchDuration = Math.round(duration)
       }
@@ -896,8 +936,13 @@ export default class Status extends Schema implements IStatus {
   updateFlinch(dt: number) {
     this.flinchDuration -= dt
     if (this.flinchDuration <= 0) {
-      this.flinch = false
+      this.healFlinch()
     }
+  }
+
+  healFlinch() {
+    this.flinch = false
+    this.flinchDuration = 0
   }
 
   triggerSpikeArmor(timer: number) {
@@ -932,7 +977,7 @@ export default class Status extends Schema implements IStatus {
     this.resurection = false
     this.resurecting = true
     this.resurrectingDuration = 2000
-    pokemon.status.clearNegativeStatus()
+    pokemon.status.clearNegativeStatus(pokemon)
   }
 
   updateResurecting(dt: number, pokemon: PokemonEntity) {
@@ -977,6 +1022,11 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
+  healCurse() {
+    this.curse = false
+    this.curseDuration = 0
+  }
+
   triggerPokerus() {
     if (!this.pokerus) {
       this.pokerus = true
@@ -1019,7 +1069,7 @@ export default class Status extends Schema implements IStatus {
         duration = duration / 2
       }
 
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       this.locked = true
       this.lockedDuration = Math.round(duration)
@@ -1030,9 +1080,14 @@ export default class Status extends Schema implements IStatus {
   updateLocked(dt: number, pokemon: PokemonEntity) {
     this.lockedDuration -= dt
     if (this.lockedDuration <= 0) {
-      this.locked = false
-      pokemon.range = pokemon.baseRange
+      this.healLocked(pokemon)
     }
+  }
+  
+  healLocked(pkm: PokemonEntity) {
+    this.locked = false
+    this.lockedDuration = 0
+    pkm.range = pkm.baseRange
   }
 
   private applyAquaticReduction(duration: number, pkm: PokemonEntity) : number {

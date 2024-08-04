@@ -1493,7 +1493,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.critChance = DEFAULT_CRIT_CHANCE
     this.critPower = DEFAULT_CRIT_POWER
     this.count = new Count()
-    this.status.clearNegativeStatus()
+    this.status.clearNegativeStatus(this)
     this.effects.clear()
 
     if (this.items.has(Item.SACRED_ASH) && this.player) {
@@ -1548,8 +1548,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.addSpecialDefense(20, this, 0, false)
         break
       case Item.ASPEAR_BERRY:
-        this.status.freeze = false
-        this.status.freezeCooldown = 0
+        this.status.healFreeze()
         this.effects.add(Effect.IMMUNITY_FREEZE)
         this.handleHeal(20, this, 0, false)
         this.addAttackSpeed(15, this, 0, false)
@@ -1561,8 +1560,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.addAttack(10, this, 0, false)
         break
       case Item.CHESTO_BERRY:
-        this.status.sleep = false
-        this.status.sleepCooldown = 0
+        this.status.healSleep()
         this.effects.add(Effect.IMMUNITY_SLEEP)
         this.handleHeal(20, this, 0, false)
         this.addAbilityPower(15, this, 0, false)
@@ -1589,8 +1587,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         break
       case Item.LUM_BERRY:
         this.handleHeal(20, this, 0, false)
-        this.status.clearNegativeStatus()
-        this.status.triggerRuneProtect(5000)
+        this.status.triggerRuneProtect(5000, this)
         break
       case Item.ORAN_BERRY:
         this.handleHeal(20, this, 0, false)
@@ -1598,14 +1595,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         break
       case Item.PECHA_BERRY:
         this.handleHeal(50, this, 0, false)
-        this.status.poisonOrigin = undefined
-        this.status.poisonStacks = 0
-        this.status.poisonDamageCooldown = 0
+        this.status.healPoison(this)
         this.effects.add(Effect.IMMUNITY_POISON)
         break
       case Item.PERSIM_BERRY:
-        this.status.confusion = false
-        this.status.confusionCooldown = 0
+        this.status.healConfusion()
         this.effects.add(Effect.IMMUNITY_CONFUSION)
         this.handleHeal(20, this, 0, false)
         this.addSpecialDefense(10, this, 0, false)

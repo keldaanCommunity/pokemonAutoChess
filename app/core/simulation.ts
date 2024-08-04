@@ -466,7 +466,7 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     if (item === Item.FLUFFY_TAIL) {
-      pokemon.status.triggerRuneProtect(60000)
+      pokemon.status.triggerRuneProtect(60000, pokemon)
     }
 
     if (item === Item.KINGS_ROCK) {
@@ -587,7 +587,7 @@ export default class Simulation extends Schema implements ISimulation {
             )
             if (ally && ally.team === pokemon.team) {
               ally.addShield(Math.ceil(0.2 * ally.hp), ally, 0, false)
-              ally.status.triggerRuneProtect(5000)
+              ally.status.triggerRuneProtect(5000, ally)
             }
           })
         }
@@ -1217,7 +1217,7 @@ export default class Simulation extends Schema implements ISimulation {
             pokemon.effects.add(Effect.ETERNAL_LIGHT)
             pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
             pokemon.addAbilityPower(20, pokemon, 0, false)
-            pokemon.status.triggerRuneProtect(10000)
+            pokemon.status.triggerRuneProtect(10000, pokemon)
             pokemon.addDefense(0.5 * pokemon.baseDef, pokemon, 0, false)
             pokemon.addSpecialDefense(
               0.5 * pokemon.baseSpeDef,
@@ -1234,7 +1234,7 @@ export default class Simulation extends Schema implements ISimulation {
             pokemon.effects.add(Effect.MAX_ILLUMINATION)
             pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
             pokemon.addAbilityPower(20, pokemon, 0, false)
-            pokemon.status.triggerRuneProtect(10000)
+            pokemon.status.triggerRuneProtect(10000, pokemon)
             pokemon.addDefense(0.5 * pokemon.baseDef, pokemon, 0, false)
             pokemon.addSpecialDefense(
               0.5 * pokemon.baseSpeDef,
@@ -1448,7 +1448,7 @@ export default class Simulation extends Schema implements ISimulation {
           : null
     if (winningTeam) {
       winningTeam.forEach((p) => {
-        p.status.clearNegativeStatus()
+        p.status.clearNegativeStatus(p)
         p.action = PokemonActionState.HOP
       })
     }
@@ -1631,7 +1631,7 @@ export default class Simulation extends Schema implements ISimulation {
           this.board.effects[y * this.board.columns + x] = undefined // clear all board effects
           if (cell) {
             if (cell.team === Team.RED_TEAM) {
-              cell.status.clearNegativeStatus()
+              cell.status.clearNegativeStatus(cell)
               if (cell.types.has(Synergy.AQUATIC)) {
                 cell.handleHeal(waveLevel * 0.05 * cell.hp, cell, 0, false)
               }
@@ -1689,7 +1689,7 @@ export default class Simulation extends Schema implements ISimulation {
           this.board.effects[y * this.board.columns + x] = undefined // clear all board effects
           if (cell) {
             if (cell.team === Team.BLUE_TEAM) {
-              cell.status.clearNegativeStatus()
+              cell.status.clearNegativeStatus(cell)
               if (cell.types.has(Synergy.AQUATIC)) {
                 cell.handleHeal(waveLevel * 0.1 * cell.hp, cell, 0, false)
               }
