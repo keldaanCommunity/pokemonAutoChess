@@ -380,7 +380,6 @@ export default class Status extends Schema implements IStatus {
   updateSynchro(dt: number, board: Board, pkm: PokemonEntity) {
     this.synchroCooldown -= dt
     if (this.synchroCooldown <= 0) {
-      this.synchro = false
       this.triggerSynchro()
       if (this.burn && this.burnOrigin) {
         this.burnOrigin.status.triggerBurn(3000, this.burnOrigin, pkm)
