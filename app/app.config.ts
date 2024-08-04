@@ -37,6 +37,9 @@ const clientSrc = __dirname.includes("server")
 
 let gameOptions = {}
 
+logger.info("SUBDOMAIN :", process.env.SUBDOMAIN)
+logger.info("SERVER_NAME :", process.env.SERVER_NAME)
+
 if (process.env.NODE_APP_INSTANCE) {
   const processNumber = Number(process.env.NODE_APP_INSTANCE || "0")
   const port = 2567 + processNumber
