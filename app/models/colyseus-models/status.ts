@@ -55,55 +55,55 @@ export default class Status extends Schema implements IStatus {
   charmOrigin: PokemonEntity | undefined = undefined
   magmaStormOrigin: PokemonEntity | null = null
   clearWingCooldown = 1000
-  burnCooldown = 0
+  burnDuration = 0
   burnDamageCooldown = 1000
-  silenceCooldown = 0
-  poisonCooldown = 0
+  silenceDuration = 0
+  poisonDuration = 0
   poisonDamageCooldown = 1000
-  freezeCooldown = 0
-  protectCooldown = 0
-  sleepCooldown = 0
-  confusionCooldown = 0
-  woundCooldown = 0
+  freezeDuration = 0
+  protectDuration = 0
+  sleepDuration = 0
+  confusionDuration = 0
+  woundDuration = 0
   soulDewCooldown = 0
-  paralysisCooldown = 0
-  armorReductionCooldown = 0
-  runeProtectCooldown = 0
-  charmCooldown = 0
-  flinchCooldown = 0
-  spikeArmorCooldown = 0
-  magicBounceCooldown = 0
+  paralysisDuration = 0
+  armorReductionDuration = 0
+  runeprotectDuration = 0
+  charmDuration = 0
+  flinchDuration = 0
+  spikeArmorDuration = 0
+  magicBounceDuration = 0
   synchroCooldown = 3000
   magmaStormCooldown = 0
   synchro = false
   tree = false
-  resurectingCooldown = 0
+  resurectingDuration = 0
   doubleDamage = false
   drySkin = false
   drySkinCooldown = 1000
-  curseCooldown = 0
+  curseDuration = 0
   pokerusCooldown = 2000
-  lockedCooldown = 0
+  lockedDuration = 0
   enrageDelay = 35000
   darkHarvest = false
-  darkHarvestCooldown = 0
+  darkHarvestDuration = 0
   darkHarvestDamageCooldown = 0
 
   clearNegativeStatus() {
-    this.burnCooldown = 0
-    this.silenceCooldown = 0
-    this.poisonCooldown = 0
-    this.freezeCooldown = 0
-    this.sleepCooldown = 0
-    this.confusionCooldown = 0
-    this.woundCooldown = 0
-    this.paralysisCooldown = 0
-    this.charmCooldown = 0
-    this.flinchCooldown = 0
-    this.armorReductionCooldown = 0
-    this.curseCooldown = 0
+    this.burnDuration = 0
+    this.silenceDuration = 0
+    this.poisonDuration = 0
+    this.freezeDuration = 0
+    this.sleepDuration = 0
+    this.confusionDuration = 0
+    this.woundDuration = 0
+    this.paralysisDuration = 0
+    this.charmDuration = 0
+    this.flinchDuration = 0
+    this.armorReductionDuration = 0
+    this.curseDuration = 0
     this.curse = false
-    this.lockedCooldown = 0
+    this.lockedDuration = 0
   }
 
   hasNegativeStatus() {
@@ -310,17 +310,17 @@ export default class Status extends Schema implements IStatus {
 
       duration = applyAquatic(duration, pkm)
 
-      if (duration > this.armorReductionCooldown) {
-        this.armorReductionCooldown = Math.round(duration)
+      if (duration > this.armorReductionDuration) {
+        this.armorReductionDuration = Math.round(duration)
       }
     }
   }
 
   updateArmorReduction(dt: number) {
-    if (this.armorReductionCooldown - dt <= 0) {
+    if (this.armorReductionDuration - dt <= 0) {
       this.armorReduction = false
     } else {
-      this.armorReductionCooldown -= dt
+      this.armorReductionDuration -= dt
     }
   }
 
@@ -414,8 +414,8 @@ export default class Status extends Schema implements IStatus {
 
   triggerDarkHarvest(duration: number) {
     this.darkHarvest = true
-    if (duration > this.darkHarvestCooldown) {
-      this.darkHarvestCooldown = duration
+    if (duration > this.darkHarvestDuration) {
+      this.darkHarvestDuration = duration
       this.darkHarvestDamageCooldown = 0
     }
   }
@@ -457,10 +457,10 @@ export default class Status extends Schema implements IStatus {
       this.darkHarvestDamageCooldown -= dt
     }
 
-    if (this.darkHarvestCooldown - dt <= 0) {
+    if (this.darkHarvestDuration - dt <= 0) {
       this.darkHarvest = false
     } else {
-      this.darkHarvestCooldown -= dt
+      this.darkHarvestDuration -= dt
     }
   }
 
@@ -478,8 +478,8 @@ export default class Status extends Schema implements IStatus {
 
       duration = applyAquatic(duration, pkm)
 
-      if (duration > this.burnCooldown) {
-        this.burnCooldown = duration
+      if (duration > this.burnDuration) {
+        this.burnDuration = duration
         if (origin) {
           this.burnOrigin = origin
         }
@@ -523,10 +523,10 @@ export default class Status extends Schema implements IStatus {
       this.burnDamageCooldown -= dt
     }
 
-    if (this.burnCooldown - dt <= 0) {
+    if (this.burnDuration - dt <= 0) {
       this.healBurn(pkm)
     } else {
-      this.burnCooldown -= dt
+      this.burnDuration -= dt
     }
   }
 
@@ -545,8 +545,8 @@ export default class Status extends Schema implements IStatus {
       duration = applyAquatic(duration, pkm)
 
       this.silence = true
-      if (duration > this.silenceCooldown) {
-        this.silenceCooldown = duration
+      if (duration > this.silenceDuration) {
+        this.silenceDuration = duration
         if (origin) {
           this.silenceOrigin = origin
         }
@@ -555,11 +555,11 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateSilence(dt: number) {
-    if (this.silenceCooldown - dt <= 0) {
+    if (this.silenceDuration - dt <= 0) {
       this.silence = false
       this.silenceOrigin = undefined
     } else {
-      this.silenceCooldown -= dt
+      this.silenceDuration -= dt
     }
   }
 
@@ -583,8 +583,8 @@ export default class Status extends Schema implements IStatus {
 
       duration = applyAquatic(duration, pkm)
 
-      if (duration > this.poisonCooldown) {
-        this.poisonCooldown = duration
+      if (duration > this.poisonDuration) {
+        this.poisonDuration = duration
       }
       if (pkm.passive === Passive.GUTS && !this.guts) {
         this.guts = true
@@ -641,7 +641,7 @@ export default class Status extends Schema implements IStatus {
       this.poisonDamageCooldown -= dt
     }
 
-    if (this.poisonCooldown - dt <= 0) {
+    if (this.poisonDuration - dt <= 0) {
       this.poisonStacks = 0
       this.poisonOrigin = undefined
       this.poisonDamageCooldown = 1000
@@ -654,7 +654,7 @@ export default class Status extends Schema implements IStatus {
         pkm.addAttack(-10, pkm, 0, false)
       }
     } else {
-      this.poisonCooldown = this.poisonCooldown - dt
+      this.poisonDuration = this.poisonDuration - dt
     }
   }
 
@@ -677,7 +677,7 @@ export default class Status extends Schema implements IStatus {
       duration = applyAquatic(duration, pkm)
 
       this.freeze = true
-      this.freezeCooldown = Math.round(duration)
+      this.freezeDuration = Math.round(duration)
 
       if (pkm.items.has(Item.ASPEAR_BERRY)) {
         pkm.eatBerry(Item.ASPEAR_BERRY)
@@ -686,10 +686,10 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateFreeze(dt: number) {
-    if (this.freezeCooldown - dt <= 0) {
+    if (this.freezeDuration - dt <= 0) {
       this.freeze = false
     } else {
-      this.freezeCooldown -= dt
+      this.freezeDuration -= dt
     }
   }
 
@@ -697,15 +697,15 @@ export default class Status extends Schema implements IStatus {
     if (!this.protect && !this.enraged) {
       // protect cannot be stacked
       this.protect = true
-      this.protectCooldown = timer
+      this.protectDuration = timer
     }
   }
 
   updateProtect(dt: number) {
-    if (this.protectCooldown - dt <= 0) {
+    if (this.protectDuration - dt <= 0) {
       this.protect = false
     } else {
-      this.protectCooldown -= dt
+      this.protectDuration -= dt
     }
   }
 
@@ -726,7 +726,7 @@ export default class Status extends Schema implements IStatus {
       duration = applyAquatic(duration, pkm)
 
       this.sleep = true
-      this.sleepCooldown = Math.round(duration)
+      this.sleepDuration = Math.round(duration)
 
       if (pkm.items.has(Item.CHESTO_BERRY)) {
         pkm.eatBerry(Item.CHESTO_BERRY)
@@ -735,10 +735,10 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateSleep(dt: number) {
-    if (this.sleepCooldown - dt <= 0) {
+    if (this.sleepDuration - dt <= 0) {
       this.sleep = false
     } else {
-      this.sleepCooldown = this.sleepCooldown - dt
+      this.sleepDuration = this.sleepDuration - dt
     }
   }
 
@@ -755,7 +755,7 @@ export default class Status extends Schema implements IStatus {
       duration = applyAquatic(duration, pkm)
 
       this.confusion = true
-      this.confusionCooldown = Math.round(duration)
+      this.confusionDuration = Math.round(duration)
 
       if (pkm.items.has(Item.PERSIM_BERRY)) {
         pkm.eatBerry(Item.PERSIM_BERRY)
@@ -768,10 +768,10 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateConfusion(dt: number) {
-    if (this.confusionCooldown - dt <= 0) {
+    if (this.confusionDuration - dt <= 0) {
       this.confusion = false
     } else {
-      this.confusionCooldown -= dt
+      this.confusionDuration -= dt
     }
   }
 
@@ -791,7 +791,7 @@ export default class Status extends Schema implements IStatus {
       duration = applyAquatic(duration, pkm)
 
       this.charm = true
-      this.charmCooldown = duration
+      this.charmDuration = duration
       this.charmOrigin = origin
       if (origin) {
         pkm.targetX = origin?.positionX
@@ -801,11 +801,11 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateCharm(dt: number) {
-    if (this.charmCooldown - dt <= 0) {
+    if (this.charmDuration - dt <= 0) {
       this.charm = false
       this.charmOrigin = undefined
     } else {
-      this.charmCooldown -= dt
+      this.charmDuration -= dt
     }
   }
 
@@ -822,8 +822,8 @@ export default class Status extends Schema implements IStatus {
 
       duration = applyAquatic(duration, pkm)
 
-      if (duration > this.woundCooldown) {
-        this.woundCooldown = duration
+      if (duration > this.woundDuration) {
+        this.woundDuration = duration
         if (origin) {
           this.woundOrigin = origin
         }
@@ -832,11 +832,11 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateWound(dt: number) {
-    if (this.woundCooldown - dt <= 0) {
+    if (this.woundDuration - dt <= 0) {
       this.wound = false
       this.woundOrigin = undefined
     } else {
-      this.woundCooldown -= dt
+      this.woundDuration -= dt
     }
   }
 
@@ -852,8 +852,8 @@ export default class Status extends Schema implements IStatus {
 
       duration = applyAquatic(duration, pkm)
 
-      if (duration > this.paralysisCooldown) {
-        this.paralysisCooldown = Math.round(duration)
+      if (duration > this.paralysisDuration) {
+        this.paralysisDuration = Math.round(duration)
       }
 
       if (pkm.items.has(Item.CHERI_BERRY)) {
@@ -863,17 +863,17 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateParalysis(dt: number, pkm: PokemonEntity) {
-    if (this.paralysisCooldown - dt <= 0) {
+    if (this.paralysisDuration - dt <= 0) {
       this.healParalysis(pkm)
     } else {
-      this.paralysisCooldown -= dt
+      this.paralysisDuration -= dt
     }
   }
 
   healParalysis(pkm: PokemonEntity) {
     if (this.paralysis) {
       this.paralysis = false
-      this.paralysisCooldown = 0
+      this.paralysisDuration = 0
       pkm.addAttackSpeed(40, pkm, 0, false)
     }
   }
@@ -881,16 +881,16 @@ export default class Status extends Schema implements IStatus {
   triggerRuneProtect(timer: number) {
     this.runeProtect = true
     this.clearNegativeStatus()
-    if (timer > this.runeProtectCooldown) {
-      this.runeProtectCooldown = timer
+    if (timer > this.runeprotectDuration) {
+      this.runeprotectDuration = timer
     }
   }
 
   updateRuneProtect(dt: number) {
-    if (this.runeProtectCooldown - dt <= 0) {
+    if (this.runeprotectDuration - dt <= 0) {
       this.runeProtect = false
     } else {
-      this.runeProtectCooldown -= dt
+      this.runeprotectDuration -= dt
     }
   }
 
@@ -898,81 +898,81 @@ export default class Status extends Schema implements IStatus {
     if (!this.runeProtect) {
       this.flinch = true
       duration = applyAquatic(duration, pkm)
-      if (duration > this.flinchCooldown) {
-        this.flinchCooldown = Math.round(duration)
+      if (duration > this.flinchDuration) {
+        this.flinchDuration = Math.round(duration)
       }
     }
   }
 
   updateFlinch(dt: number) {
-    if (this.flinchCooldown - dt <= 0) {
+    if (this.flinchDuration - dt <= 0) {
       this.flinch = false
     } else {
-      this.flinchCooldown -= dt
+      this.flinchDuration -= dt
     }
   }
 
   triggerSpikeArmor(timer: number) {
     this.spikeArmor = true
-    if (timer > this.spikeArmorCooldown) {
-      this.spikeArmorCooldown = timer
+    if (timer > this.spikeArmorDuration) {
+      this.spikeArmorDuration = timer
     }
   }
 
   updateSpikeArmor(dt: number) {
-    if (this.spikeArmorCooldown - dt <= 0) {
+    if (this.spikeArmorDuration - dt <= 0) {
       this.spikeArmor = false
     } else {
-      this.spikeArmorCooldown -= dt
+      this.spikeArmorDuration -= dt
     }
   }
 
   triggerMagicBounce(timer: number) {
     this.magicBounce = true
-    if (timer > this.magicBounceCooldown) {
-      this.magicBounceCooldown = timer
+    if (timer > this.magicBounceDuration) {
+      this.magicBounceDuration = timer
     }
   }
 
   updateMagicBounce(dt: number) {
-    if (this.magicBounceCooldown - dt <= 0) {
+    if (this.magicBounceDuration - dt <= 0) {
       this.magicBounce = false
     } else {
-      this.magicBounceCooldown -= dt
+      this.magicBounceDuration -= dt
     }
   }
 
   triggerResurection(pokemon: PokemonEntity) {
     this.resurection = false
     this.resurecting = true
-    this.resurectingCooldown = 2000
+    this.resurectingDuration = 2000
     pokemon.status.clearNegativeStatus()
   }
 
   updateResurecting(dt: number, pokemon: PokemonEntity) {
-    if (this.resurectingCooldown - dt <= 0) {
+    if (this.resurectingDuration - dt <= 0) {
       this.resurecting = false
       pokemon.resurrect()
       pokemon.toMovingState()
       pokemon.cooldown = 0
     } else {
-      this.resurectingCooldown -= dt
+      this.resurectingDuration -= dt
     }
   }
 
   triggerCurse(timer: number) {
     if (!this.runeProtect) {
       if (this.curse) {
-        this.curseCooldown = 0 // apply curse immediately if already cursed
+        this.curseDuration = 0 // apply curse immediately if already cursed
       } else {
         this.curse = true
-        this.curseCooldown = timer
+        this.curseDuration = timer
       }
     }
   }
 
   updateCurse(dt: number, board: Board, pokemon: PokemonEntity) {
-    if (this.curseCooldown - dt <= 0) {
+    if (this.curseDuration - dt <= 0) {
       this.curse = false
       pokemon.handleDamage({
         damage: 9999,
@@ -989,7 +989,7 @@ export default class Status extends Schema implements IStatus {
         orientation: pokemon.orientation
       })
     } else {
-      this.curseCooldown -= dt
+      this.curseDuration -= dt
     }
   }
 
@@ -1038,17 +1038,17 @@ export default class Status extends Schema implements IStatus {
       duration = applyAquatic(duration, pkm)
 
       this.locked = true
-      this.lockedCooldown = Math.round(duration)
+      this.lockedDuration = Math.round(duration)
       pkm.range = 1
     }
   }
 
   updateLocked(dt: number, pokemon: PokemonEntity) {
-    if (this.lockedCooldown - dt <= 0) {
+    if (this.lockedDuration - dt <= 0) {
       this.locked = false
       pokemon.range = pokemon.baseRange
     } else {
-      this.lockedCooldown -= dt
+      this.lockedDuration -= dt
     }
   }
 
