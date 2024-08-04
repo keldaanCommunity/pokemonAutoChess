@@ -6663,9 +6663,9 @@ export const AnimationConfig: {
     ability: AnimationType.Attack,
     emote: AnimationType.Charge
   },
-  [Pkm.PYUKUMUKU]: {  // TODO: Update these when sprites are validated
-    attack: AnimationType.Idle,
-    ability: AnimationType.Idle,
-    emote: AnimationType.Sleep
+  [Pkm.PYUKUMUKU]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Rumble
   }
 }

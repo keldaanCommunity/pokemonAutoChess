@@ -1530,7 +1530,7 @@
     "DRAIN_PUNCH": " The next attack inflicts [100,SP]% additional SPECIAL and restores [200,SP]% HP of the damage inflicted.",
     "GRAVITY": "The enemy team is LOCKED for [2,SP] seconds",
     "FAKE_OUT": "Deals [50,100,150,SP] SPECIAL to target, then user loses 30% AP. Target is FLINCH for 3 seconds unless user AP was negative.",
-    "PURIFY": "POISONNED the target for [1,2,4,SP] seconds and heal the user for [20,40,80,SP] HP."
+    "PURIFY": "POISONNED the target for [2,3,4,SP] seconds and heal the user for [20,40,80,SP] HP."
   },
   "effect": {
     "INGRAIN": "Ingrain",
