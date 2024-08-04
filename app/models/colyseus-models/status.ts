@@ -493,28 +493,27 @@ export default class Status extends Schema implements IStatus {
     this.burnDuration -= dt
 
     if (this.burnDamageCooldown <= 0) {
-      if (this.burnOrigin) {
-        let burnDamage = Math.ceil(pkm.hp * 0.05)
+      let burnDamage = Math.ceil(pkm.hp * 0.05)
 
-        if (pkm.simulation.weather === Weather.SUN) {
-          burnDamage = burnDamage * 1.3
-        } else if (pkm.simulation.weather === Weather.RAIN) {
-          burnDamage = burnDamage * 0.7
-        }
-
-        if (pkm.items.has(Item.ASSAULT_VEST)) {
-          burnDamage = burnDamage * 0.5
-        }
-
-        pkm.handleDamage({
-          damage: Math.round(burnDamage),
-          board,
-          attackType: AttackType.TRUE,
-          attacker: this.burnOrigin,
-          shouldTargetGainMana: true
-        })
-        this.burnDamageCooldown = 1000
+      if (pkm.simulation.weather === Weather.SUN) {
+        burnDamage = burnDamage * 1.3
+      } else if (pkm.simulation.weather === Weather.RAIN) {
+        burnDamage = burnDamage * 0.7
       }
+
+      if (pkm.items.has(Item.ASSAULT_VEST)) {
+        burnDamage = burnDamage * 0.5
+      }
+
+      pkm.handleDamage({
+        damage: Math.round(burnDamage),
+        board,
+        attackType: AttackType.TRUE,
+        attacker: this.burnOrigin ?? null,
+        shouldTargetGainMana: true // Why? Poison doesn't give mana on trigger, so either Poison should or Burn shouldn't.
+      })
+
+      this.burnDamageCooldown = 1000
     }
 
     if (this.burnDuration <= 0) {
