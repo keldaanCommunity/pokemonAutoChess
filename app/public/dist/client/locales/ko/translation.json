@@ -575,6 +575,8 @@
     "HIDDEN_POWER_EM": "보드의 구석에 안농을 총 4마리 소환합니다.",
     "SUPER_FANG": "현재 대상에게 [30,60,90,SP] SPECIAL. GRASS 에게는 두배의 데미지"
   },
+  "ability_label": "특성",
+  "weather_dominant_hint2": "날씨를 바꾸기 위해선 특정 타입의 포켓몬 다수가 필요합니다. 어떤 강한 포켓몬은 혼자서 날씨를 바꾸는 특성을 지닌 경우도 있습니다.",
   "kecleon_dialog": {
     "welcome": "켈리몬의 상점에 어서와요!",
     "tell_price": "각각 10골드입니다!",
