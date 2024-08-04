@@ -68,7 +68,7 @@ export default class Status extends Schema implements IStatus {
   soulDewCooldown = 0
   paralysisDuration = 0
   armorReductionDuration = 0
-  runeprotectDuration = 0
+  runeProtectDuration = 0
   charmDuration = 0
   flinchDuration = 0
   spikeArmorDuration = 0
@@ -77,7 +77,7 @@ export default class Status extends Schema implements IStatus {
   magmaStormCooldown = 0
   synchro = false
   tree = false
-  resurectingDuration = 0
+  resurrectingDuration = 0
   doubleDamage = false
   drySkin = false
   drySkinCooldown = 1000
@@ -272,7 +272,8 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateMagmaStorm(dt: number, board: Board, pkm: PokemonEntity) {
-    if (this.magmaStormCooldown - dt <= 0) {
+    this.magmaStormCooldown -= dt
+    if (this.magmaStormCooldown <= 0) {
       this.magmaStorm = false
       const adjacentCells = board.getAdjacentCells(pkm.positionX, pkm.positionY)
       for (let i = 0; i < adjacentCells.length; i++) {
@@ -299,8 +300,6 @@ export default class Status extends Schema implements IStatus {
       )
       this.magmaStormOrigin = null
       this.magmaStormCooldown = 0
-    } else {
-      this.magmaStormCooldown -= dt
     }
   }
 
@@ -317,20 +316,18 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateArmorReduction(dt: number) {
-    if (this.armorReductionDuration - dt <= 0) {
+    this.armorReductionDuration -= dt
+    if (this.armorReductionDuration <= 0) {
       this.armorReduction = false
-    } else {
-      this.armorReductionDuration -= dt
     }
   }
 
   updateRage(dt: number, pokemon: PokemonEntity) {
-    if (this.enrageDelay - dt <= 0 && !pokemon.simulation.finished) {
+    this.enrageDelay -= dt
+    if (this.enrageDelay <= 0 && !pokemon.simulation.finished) {
       this.enraged = true
       this.protect = false
       pokemon.addAttackSpeed(100, pokemon, 0, false)
-    } else {
-      this.enrageDelay -= dt
     }
   }
 
@@ -342,12 +339,11 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateClearWing(dt: number, pkm: PokemonEntity) {
-    if (this.clearWingCooldown - dt <= 0) {
+    this.clearWingCooldown -= dt
+    if (this.clearWingCooldown <= 0) {
       this.clearWing = false
       this.triggerClearWing(1000)
       pkm.addAttackSpeed(2, pkm, 0, false)
-    } else {
-      this.clearWingCooldown -= dt
     }
   }
 
@@ -359,12 +355,11 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateDrySkin(dt: number, pkm: PokemonEntity) {
-    if (this.drySkinCooldown - dt <= 0) {
+    this.drySkinCooldown -= dt
+    if (this.drySkinCooldown <= 0) {
       this.drySkin = false
       this.triggerDrySkin(1000)
       pkm.handleHeal(8, pkm, 0, false)
-    } else {
-      this.drySkinCooldown -= dt
     }
   }
 
@@ -374,7 +369,8 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateSynchro(dt: number, board: Board, pkm: PokemonEntity) {
-    if (this.synchroCooldown - dt <= 0) {
+    this.synchroCooldown -= dt
+    if (this.synchroCooldown <= 0) {
       this.synchro = false
       this.triggerSynchro()
       if (this.burn && this.burnOrigin) {
@@ -389,8 +385,6 @@ export default class Status extends Schema implements IStatus {
       if (this.silence && this.silenceOrigin) {
         this.silenceOrigin.status.triggerSilence(3000, this.silenceOrigin, pkm)
       }
-    } else {
-      this.synchroCooldown -= dt
     }
   }
 
@@ -400,15 +394,14 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateSoulDew(dt: number, pkm: PokemonEntity) {
-    if (this.soulDewCooldown - dt <= 0) {
+    this.soulDewCooldown -= dt
+    if (this.soulDewCooldown <= 0) {
       this.soulDew = false
       pkm.addAbilityPower(10, pkm, 0, false)
       pkm.count.soulDewCount++
       if (pkm.items.has(Item.SOUL_DEW)) {
         this.triggerSoulDew(1000)
       }
-    } else {
-      this.soulDewCooldown -= dt
     }
   }
 
@@ -421,7 +414,10 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateDarkHarvest(dt: number, pkm: PokemonEntity, board: Board) {
-    if (this.darkHarvestDamageCooldown - dt <= 0) {
+    this.darkHarvestDuration -= dt
+    this.darkHarvestDamageCooldown -= dt
+
+    if (this.darkHarvestDamageCooldown <= 0) {
       pkm.simulation.room.broadcast(Transfer.ABILITY, {
         id: pkm.simulation.id,
         skill: Ability.DARK_HARVEST,
@@ -453,14 +449,10 @@ export default class Status extends Schema implements IStatus {
           this.darkHarvestDamageCooldown = 1000
         }
       })
-    } else {
-      this.darkHarvestDamageCooldown -= dt
     }
 
-    if (this.darkHarvestDuration - dt <= 0) {
+    if (this.darkHarvestDuration <= 0) {
       this.darkHarvest = false
-    } else {
-      this.darkHarvestDuration -= dt
     }
   }
 
@@ -497,21 +489,25 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateBurn(dt: number, pkm: PokemonEntity, board: Board) {
-    if (this.burnDamageCooldown - dt <= 0) {
+    this.burnDamageCooldown -= dt
+    this.burnDuration -= dt
+
+    if (this.burnDamageCooldown <= 0) {
       if (this.burnOrigin) {
         let burnDamage = Math.ceil(pkm.hp * 0.05)
+
         if (pkm.simulation.weather === Weather.SUN) {
-          burnDamage = Math.round(burnDamage * 1.3)
+          burnDamage = burnDamage * 1.3
         } else if (pkm.simulation.weather === Weather.RAIN) {
-          burnDamage = Math.round(burnDamage * 0.7)
+          burnDamage = burnDamage * 0.7
         }
 
         if (pkm.items.has(Item.ASSAULT_VEST)) {
-          burnDamage = Math.round(burnDamage * 0.5)
+          burnDamage = burnDamage * 0.5
         }
 
         pkm.handleDamage({
-          damage: burnDamage,
+          damage: Math.round(burnDamage),
           board,
           attackType: AttackType.TRUE,
           attacker: this.burnOrigin,
@@ -519,14 +515,10 @@ export default class Status extends Schema implements IStatus {
         })
         this.burnDamageCooldown = 1000
       }
-    } else {
-      this.burnDamageCooldown -= dt
     }
 
-    if (this.burnDuration - dt <= 0) {
+    if (this.burnDuration <= 0) {
       this.healBurn(pkm)
-    } else {
-      this.burnDuration -= dt
     }
   }
 
@@ -555,11 +547,10 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateSilence(dt: number) {
-    if (this.silenceDuration - dt <= 0) {
+    this.silenceDuration -= dt
+    if (this.silenceDuration <= 0) {
       this.silence = false
       this.silenceOrigin = undefined
-    } else {
-      this.silenceDuration -= dt
     }
   }
 
@@ -603,7 +594,10 @@ export default class Status extends Schema implements IStatus {
   }
 
   updatePoison(dt: number, pkm: PokemonEntity, board: Board) {
-    if (this.poisonDamageCooldown - dt <= 0) {
+    this.poisonDamageCooldown -= dt
+    this.poisonDuration -= dt
+
+    if (this.poisonDamageCooldown <= 0) {
       let poisonDamage = Math.ceil(pkm.hp * 0.05 * this.poisonStacks)
       if (pkm.simulation.weather === Weather.RAIN) {
         poisonDamage *= 0.7
@@ -637,11 +631,9 @@ export default class Status extends Schema implements IStatus {
       }
 
       this.poisonDamageCooldown = 1000
-    } else {
-      this.poisonDamageCooldown -= dt
     }
 
-    if (this.poisonDuration - dt <= 0) {
+    if (this.poisonDuration <= 0) {
       this.poisonStacks = 0
       this.poisonOrigin = undefined
       this.poisonDamageCooldown = 1000
@@ -653,8 +645,6 @@ export default class Status extends Schema implements IStatus {
         this.toxicBoost = false
         pkm.addAttack(-10, pkm, 0, false)
       }
-    } else {
-      this.poisonDuration = this.poisonDuration - dt
     }
   }
 
@@ -686,10 +676,9 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateFreeze(dt: number) {
-    if (this.freezeDuration - dt <= 0) {
+    this.freezeDuration -= dt
+    if (this.freezeDuration <= 0) {
       this.freeze = false
-    } else {
-      this.freezeDuration -= dt
     }
   }
 
@@ -702,10 +691,9 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateProtect(dt: number) {
-    if (this.protectDuration - dt <= 0) {
+    this.protectDuration -= dt
+    if (this.protectDuration <= 0) {
       this.protect = false
-    } else {
-      this.protectDuration -= dt
     }
   }
 
@@ -735,10 +723,9 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateSleep(dt: number) {
-    if (this.sleepDuration - dt <= 0) {
+    this.sleepDuration -= dt
+    if (this.sleepDuration <= 0) {
       this.sleep = false
-    } else {
-      this.sleepDuration = this.sleepDuration - dt
     }
   }
 
@@ -768,10 +755,9 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateConfusion(dt: number) {
-    if (this.confusionDuration - dt <= 0) {
+    this.confusionDuration -= dt
+    if (this.confusionDuration <= 0) {
       this.confusion = false
-    } else {
-      this.confusionDuration -= dt
     }
   }
 
@@ -801,11 +787,10 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateCharm(dt: number) {
-    if (this.charmDuration - dt <= 0) {
+    this.charmDuration -= dt
+    if (this.charmDuration <= 0) {
       this.charm = false
       this.charmOrigin = undefined
-    } else {
-      this.charmDuration -= dt
     }
   }
 
@@ -832,11 +817,10 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateWound(dt: number) {
-    if (this.woundDuration - dt <= 0) {
+    this.woundDuration -= dt
+    if (this.woundDuration <= 0) {
       this.wound = false
       this.woundOrigin = undefined
-    } else {
-      this.woundDuration -= dt
     }
   }
 
@@ -863,10 +847,9 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateParalysis(dt: number, pkm: PokemonEntity) {
-    if (this.paralysisDuration - dt <= 0) {
+    this.paralysisDuration -= dt
+    if (this.paralysisDuration <= 0) {
       this.healParalysis(pkm)
-    } else {
-      this.paralysisDuration -= dt
     }
   }
 
@@ -881,16 +864,15 @@ export default class Status extends Schema implements IStatus {
   triggerRuneProtect(timer: number) {
     this.runeProtect = true
     this.clearNegativeStatus()
-    if (timer > this.runeprotectDuration) {
-      this.runeprotectDuration = timer
+    if (timer > this.runeProtectDuration) {
+      this.runeProtectDuration = timer
     }
   }
 
   updateRuneProtect(dt: number) {
-    if (this.runeprotectDuration - dt <= 0) {
+    this.runeProtectDuration -= dt
+    if (this.runeProtectDuration <= 0) {
       this.runeProtect = false
-    } else {
-      this.runeprotectDuration -= dt
     }
   }
 
@@ -905,10 +887,9 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateFlinch(dt: number) {
-    if (this.flinchDuration - dt <= 0) {
+    this.flinchDuration -= dt
+    if (this.flinchDuration <= 0) {
       this.flinch = false
-    } else {
-      this.flinchDuration -= dt
     }
   }
 
@@ -920,10 +901,9 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateSpikeArmor(dt: number) {
-    if (this.spikeArmorDuration - dt <= 0) {
+    this.spikeArmorDuration -= dt
+    if (this.spikeArmorDuration <= 0) {
       this.spikeArmor = false
-    } else {
-      this.spikeArmorDuration -= dt
     }
   }
 
@@ -935,28 +915,26 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateMagicBounce(dt: number) {
-    if (this.magicBounceDuration - dt <= 0) {
+    this.magicBounceDuration -= dt
+    if (this.magicBounceDuration <= 0) {
       this.magicBounce = false
-    } else {
-      this.magicBounceDuration -= dt
     }
   }
 
   triggerResurection(pokemon: PokemonEntity) {
     this.resurection = false
     this.resurecting = true
-    this.resurectingDuration = 2000
+    this.resurrectingDuration = 2000
     pokemon.status.clearNegativeStatus()
   }
 
   updateResurecting(dt: number, pokemon: PokemonEntity) {
-    if (this.resurectingDuration - dt <= 0) {
+    this.resurrectingDuration -= dt
+    if (this.resurrectingDuration <= 0) {
       this.resurecting = false
       pokemon.resurrect()
       pokemon.toMovingState()
       pokemon.cooldown = 0
-    } else {
-      this.resurectingDuration -= dt
     }
   }
 
@@ -972,7 +950,8 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateCurse(dt: number, board: Board, pokemon: PokemonEntity) {
-    if (this.curseDuration - dt <= 0) {
+    this.curseDuration -= dt
+    if (this.curseDuration <= 0) {
       this.curse = false
       pokemon.handleDamage({
         damage: 9999,
@@ -988,8 +967,6 @@ export default class Status extends Schema implements IStatus {
         positionY: pokemon.positionY,
         orientation: pokemon.orientation
       })
-    } else {
-      this.curseDuration -= dt
     }
   }
 
@@ -1000,7 +977,9 @@ export default class Status extends Schema implements IStatus {
   }
 
   updatePokerus(dt: number, pokemon: PokemonEntity, board: Board) {
-    if (this.pokerusCooldown - dt <= 0) {
+    this.pokerusCooldown -= dt
+
+    if (this.pokerusCooldown <= 0) {
       pokemon.addAttack(1, pokemon, 0, false)
       pokemon.addAbilityPower(10, pokemon, 0, false)
       let infectCount = 0
@@ -1021,8 +1000,6 @@ export default class Status extends Schema implements IStatus {
         }
       })
       this.pokerusCooldown = 2000
-    } else {
-      this.pokerusCooldown -= dt
     }
   }
 
@@ -1044,11 +1021,10 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateLocked(dt: number, pokemon: PokemonEntity) {
-    if (this.lockedDuration - dt <= 0) {
+    this.lockedDuration -= dt
+    if (this.lockedDuration <= 0) {
       this.locked = false
       pokemon.range = pokemon.baseRange
-    } else {
-      this.lockedDuration -= dt
     }
   }
 
@@ -1060,7 +1036,6 @@ export default class Status extends Schema implements IStatus {
     } else if (pkm.effects.has(Effect.WATER_VEIL)) {
       duration *= 0.1
     }
-
     return duration
   }
 }
