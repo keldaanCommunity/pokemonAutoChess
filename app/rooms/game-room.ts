@@ -489,16 +489,6 @@ export default class GameRoom extends Room<GameState> {
         }
       }
     })
-
-    // room ready
-    setTimeout(
-      () =>
-        this.presence.publish("game-started", {
-          gameId: this.roomId,
-          preparationId: options.preparationId
-        }),
-      1000
-    )
   }
 
   startGame() {

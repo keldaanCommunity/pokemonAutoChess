@@ -142,7 +142,7 @@ export class OnGameStartRequestCommand extends Command<
     client?: Client
   }
 > {
-  execute({ client }: { client?: Client } = {}) {
+  async execute({ client }: { client?: Client } = {}) {
     try {
       if (this.state.gameStarted) {
         return // game already started
@@ -223,7 +223,7 @@ export class OnGameStartRequestCommand extends Command<
         })
       } else {
         this.state.gameStarted = true
-        matchMaker.createRoom("game", {
+        const gameRoom = await matchMaker.createRoom("game", {
           users: this.state.users.toJSON(),
           name: this.state.name,
           ownerName: this.state.ownerName,
@@ -233,6 +233,11 @@ export class OnGameStartRequestCommand extends Command<
           tournamentId: this.room.metadata?.tournamentId,
           bracketId: this.room.metadata?.bracketId,
           minRank: this.state.minRank
+        })
+
+        this.room.presence.publish("game-started", {
+          gameId: gameRoom.roomId,
+          preparationId: this.room.roomId
         })
       }
     } catch (error) {
