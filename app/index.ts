@@ -9,12 +9,20 @@
  * See: https://docs.colyseus.io/server/api/#constructor-options
  */
 import { listen } from "@colyseus/tools"
+import { matchMaker } from "colyseus"
 import app from "./app.config"
 import { initializeMetrics } from "./metrics"
 
-if (process.env.NODE_APP_INSTANCE) {
-  initializeMetrics()
-  listen(app)
-} else {
-  listen(app, 9000)
+async function main() {
+  if (process.env.NODE_APP_INSTANCE) {
+    const processNumber = Number(process.env.NODE_APP_INSTANCE || "0")
+    initializeMetrics()
+    await listen(app)
+    processNumber === 0 && matchMaker.createRoom("lobby", {})
+  } else {
+    await listen(app, 9000)
+    matchMaker.createRoom("lobby", {})
+  }
 }
+
+main()
