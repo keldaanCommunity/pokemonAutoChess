@@ -24,6 +24,17 @@ Source: [https://github.com/keldaanCommunity/pokemonAutoChess](https://github.co
 
 Install [Node LTS](https://nodejs.org/en).
 
+Install project dependencies:
+```
+npm install
+```
+
+Download and pack all the game assets:
+```
+npm run assetpack
+npm run download-music
+```
+
 Main libs used
 
 Pokemon Auto Chess use mongoDB to store its data and Firebase for authentication. Those 2 dependencies requires credentials to use. Credentials will be stored in a `.env` at the root of the repository.
@@ -99,10 +110,9 @@ FIREBASE_PRIVATE_KEY=<private_key>
 
 And you are done for the configuration part.
 
-To start the development,
+To start the development server:
 
 ```
-npm install
 npm run dev
 ```
 
@@ -110,7 +120,7 @@ Game runs locally on port [http://localhost:9000/](http://localhost:9000/)
 
 ### Administration rights
 
-You might want to have full access right on your local version. To do so, you can set your role to `ADMIN` by editing your player rights in the `usermetadatas` table.
+You might want to have full access rights on your local version. To do so, you can set your role to `ADMIN` by editing your player rights in the `usermetadatas` table.
 
 # Extensions
 
