@@ -223,6 +223,7 @@ export class OnGameStartRequestCommand extends Command<
         })
       } else {
         this.state.gameStarted = true
+        this.room.lock()
         const gameRoom = await matchMaker.createRoom("game", {
           users: this.state.users.toJSON(),
           name: this.state.name,
@@ -239,6 +240,7 @@ export class OnGameStartRequestCommand extends Command<
           gameId: gameRoom.roomId,
           preparationId: this.room.roomId
         })
+        this.clock.setTimeout(() => this.room.disconnect(), 30000) // TRYFIX: remove stale rooms
       }
     } catch (error) {
       logger.error(error)
