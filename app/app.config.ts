@@ -1,11 +1,11 @@
 import path from "path"
 import { monitor } from "@colyseus/monitor"
 import config from "@colyseus/tools"
-import { RedisDriver, RedisPresence } from "colyseus"
+import { RedisDriver, RedisPresence, matchMaker } from "colyseus"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
-import admin from "firebase-admin"
+import admin, { app } from "firebase-admin"
 import { connect } from "mongoose"
 import { initTilemap } from "./core/design"
 import ItemsStatistics from "./models/mongo-models/items-statistic"
@@ -45,8 +45,6 @@ if (process.env.NODE_APP_INSTANCE) {
     driver: new RedisDriver(process.env.REDIS_URI),
     publicAddress: `${process.env.SERVER_NAME}/${port}`
   }
-
-  logger.info(gameOptions)
 }
 
 export default config({
@@ -59,6 +57,7 @@ export default config({
     gameServer.define("lobby", CustomLobbyRoom)
     gameServer.define("preparation", PreparationRoom).enableRealtimeListing()
     gameServer.define("game", GameRoom).enableRealtimeListing()
+    matchMaker.createRoom("lobby", {})
   },
 
   initializeExpress: (app) => {
