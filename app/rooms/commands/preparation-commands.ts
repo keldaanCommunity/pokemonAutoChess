@@ -223,6 +223,7 @@ export class OnGameStartRequestCommand extends Command<
         })
       } else {
         this.state.gameStarted = true
+        this.room.lock()
         const gameRoom = await matchMaker.createRoom("game", {
           users: this.state.users.toJSON(),
           name: this.state.name,
