@@ -238,28 +238,28 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (
-      pokemon.effects.has(Effect.CURSE_OF_VULNERABILITY) &&
+      pokemon.status.curseVulnerability &&
       !pokemon.status.flinch
     ) {
       this.triggerFlinch(30000, pokemon)
     }
 
     if (
-      pokemon.effects.has(Effect.CURSE_OF_WEAKNESS) &&
+      pokemon.status.curseWeakness &&
       !pokemon.status.paralysis
     ) {
       this.triggerParalysis(30000, pokemon)
     }
 
     if (
-      pokemon.effects.has(Effect.CURSE_OF_TORMENT) &&
+      pokemon.status.curseTorment &&
       !pokemon.status.silence
     ) {
       this.triggerSilence(30000, pokemon)
     }
 
-    if (pokemon.effects.has(Effect.CURSE_OF_FATE) && !pokemon.status.curse) {
-      this.triggerCurse(5000)
+    if (pokemon.curseFate && !pokemon.status.curse) {
+      this.triggerCurse(5000) //Intentionally at 5s to account for status update delay
     }
   }
 
