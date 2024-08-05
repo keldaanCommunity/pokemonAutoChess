@@ -298,10 +298,11 @@ export default class PreparationRoom extends Room<PreparationState> {
 
     this.presence.subscribe("game-started", ({ gameId, preparationId }) => {
       if (this.roomId === preparationId) {
+        this.lock()
         this.setGameStarted(true)
         //logger.debug("game start", game.roomId)
         this.broadcast(Transfer.GAME_START, gameId)
-        setTimeout(() => this.disconnect(), 30000) // TRYFIX: ranked lobbies prep rooms not being removed
+        this.clock.setTimeout(() => this.disconnect(), 30000) // TRYFIX: ranked lobbies prep rooms not being removed
       }
     })
   }
