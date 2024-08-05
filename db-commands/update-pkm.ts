@@ -14,18 +14,17 @@ async function main() {
     for (let i = 0; i < bots.length; i++) {
       let modified = false
       const bot = bots[i]
-      console.log(bot.name)
-      if (bot.name === "SHEDNINJA") {
-        bot.name = Pkm.SHEDINJA
+      if (bot.name === "MEGA_SCIZOR") {
+        bot.name = Pkm.SCIZOR
         modified = true
         console.log(bot.name)
       }
       bot.steps.forEach((step) => {
         step.board.forEach((p) => {
-          if (p.name === ("SHEDNINJA" as Pkm)) {
-            p.name = Pkm.SHEDINJA
+          if (p.name === ("MEGA_SCIZOR" as Pkm)) {
+            p.name = Pkm.SCIZOR
             modified = true
-            console.log(p.name)
+            console.log(p.name, "in BOT", bot.name, "by ", bot.author)
           }
         })
       })
