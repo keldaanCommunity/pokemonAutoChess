@@ -1,7 +1,7 @@
 import path from "path"
 import { monitor } from "@colyseus/monitor"
 import config from "@colyseus/tools"
-import { RedisDriver, RedisPresence, matchMaker } from "colyseus"
+import { RedisDriver, RedisPresence, ServerOptions, matchMaker } from "colyseus"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
@@ -35,7 +35,7 @@ const clientSrc = __dirname.includes("server")
  * Import your Room files
  */
 
-let gameOptions = {}
+let gameOptions: ServerOptions = {}
 
 if (process.env.NODE_APP_INSTANCE) {
   const processNumber = Number(process.env.NODE_APP_INSTANCE || "0")
@@ -43,7 +43,15 @@ if (process.env.NODE_APP_INSTANCE) {
   gameOptions = {
     presence: new RedisPresence(process.env.REDIS_URI),
     driver: new RedisDriver(process.env.REDIS_URI),
-    publicAddress: `${process.env.SERVER_NAME}/${port}`
+    publicAddress: `${process.env.SERVER_NAME}/${port}`,
+    selectProcessIdToCreateRoom: async function (
+      roomName: string,
+      clientOptions: any
+    ) {
+      return (await matchMaker.stats.fetchAll()).sort((p1, p2) =>
+        p1.ccu > p2.ccu ? 1 : -1
+      )[0].processId
+    }
   }
 }
 
