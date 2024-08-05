@@ -65,7 +65,12 @@ export default config({
     gameServer.define("lobby", CustomLobbyRoom)
     gameServer.define("preparation", PreparationRoom).enableRealtimeListing()
     gameServer.define("game", GameRoom).enableRealtimeListing()
-    matchMaker.createRoom("lobby", {})
+    if (process.env.NODE_APP_INSTANCE) {
+      const processNumber = Number(process.env.NODE_APP_INSTANCE || "0")
+      processNumber === 0 && matchMaker.createRoom("lobby", {})
+    } else {
+      matchMaker.createRoom("lobby", {})
+    }
   },
 
   initializeExpress: (app) => {
