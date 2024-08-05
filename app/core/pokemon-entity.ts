@@ -1158,13 +1158,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     // Reduce sleep duration
-    if (this.status.sleepDuration > 0) {
-      this.status.sleepDuration -= 500
+    if (this.status.sleepCooldown > 0) {
+      this.status.sleepCooldown -= 500
     }
 
     // Reduce charm duration
-    if (this.status.charmDuration > 0 && attacker === this.status.charmOrigin) {
-      this.status.charmDuration -= 500
+    if (this.status.charmCooldown > 0 && attacker === this.status.charmOrigin) {
+      this.status.charmCooldown -= 500
     }
 
     // Other passives
