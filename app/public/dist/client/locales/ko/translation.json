@@ -1270,6 +1270,13 @@
     "MAX_REVIVE": "장착자에게 RESURECTION 이 부여됩니다. 1회에 한해 기절시 최대체력으로 부활합니다.",
     "ROCKY_HELMET": "장착 시 DEF +12 증가, 치명타에 의한 추가피해는 받지 않습니다."
   },
+  "stat_description": {
+    "DEF": "받는 PHYSICAL 을 감소시킵니다.",
+    "SPE_DEF": "받는 SPECIAL 을 감소시킵니다.",
+    "HP": "포켓몬의 체력이 다 떨어지면 기절합니다.",
+    "RANGE": "거리가 1인 포켓몬은 근접포켓몬으로 분류됩니다.",
+    "PP": "파워포인트"
+  },
   "emotion": {
     "Normal": "평온",
     "Happy": "행복",
@@ -1345,6 +1352,13 @@
   "collection": "수집품",
   "wiki": "위키",
   "ability_label": "특성",
+  "spectate": "참관",
+  "join": "입장하기",
+  "reconnect": "재접속",
+  "participate": "참가하기",
+  "participating": "참가",
+  "participants": "참가자",
+  "players_remaining": "남아있는 플레이어들",
   "item_components": "도구 재료품",
   "lose_game_hint": "체력이 다 떨어지면 패배하게 됩니다.",
   "game_files": "게임 파일",
@@ -1359,9 +1373,23 @@
   "special_items": "특별한 도구",
   "shiny_items": "빛나는 도구",
   "item_recipes": "도구 조합법",
+  "kick_user": "추방하기",
+  "enter_password": "방에 들어가기 위해선 비밀번호를 입력해야 합니다.",
   "ranked_game_hint": "8명이 모두 차거나 15분이 지나면 자동으로 시작합니다.",
+  "private_game": "비공개 게임",
+  "make_room_private": "비공개방으로 설정하기",
+  "make_room_public": "공개방으로 설정하기",
+  "make_room_private_hint": "이 방의 비밀번호 설정하기",
+  "make_room_public_hint": "이 방의 비밀번호 제거하기",
+  "change_room_name": "방제 바꾸기",
+  "add_bot": "봇 추가",
   "weather_dominant_hint2": "날씨를 바꾸기 위해선 특정 타입의 포켓몬 다수가 필요합니다. 어떤 강한 포켓몬은 혼자서 날씨를 바꾸는 특성을 지닌 경우도 있습니다.",
   "items_label": "도구들",
+  "jukebox": "주크박스",
+  "gadget": {
+    "jukebox": "주크박스",
+    "jukebox_desc": "인게임에서의 음악을 선택할 수 있습니다."
+  },
   "held_items": "지닌 도구들",
   "role": {
     "ADMIN": "제작자",
