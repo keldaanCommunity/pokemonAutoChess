@@ -67,6 +67,7 @@ export default config({
     gameServer.define("game", GameRoom).enableRealtimeListing()
     if (process.env.NODE_APP_INSTANCE) {
       const processNumber = Number(process.env.NODE_APP_INSTANCE || "0")
+      logger.info("process number", processNumber)
       processNumber === 0 && matchMaker.createRoom("lobby", {})
     } else {
       matchMaker.createRoom("lobby", {})
