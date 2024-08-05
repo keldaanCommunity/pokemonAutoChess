@@ -239,6 +239,7 @@ export class OnGameStartRequestCommand extends Command<
           gameId: gameRoom.roomId,
           preparationId: this.room.roomId
         })
+        this.clock.setTimeout(() => this.room.disconnect(), 30000) // TRYFIX: remove stale rooms
       }
     } catch (error) {
       logger.error(error)
