@@ -65,13 +65,6 @@ export default config({
     gameServer.define("lobby", CustomLobbyRoom)
     gameServer.define("preparation", PreparationRoom).enableRealtimeListing()
     gameServer.define("game", GameRoom).enableRealtimeListing()
-    if (process.env.NODE_APP_INSTANCE) {
-      const processNumber = Number(process.env.NODE_APP_INSTANCE || "0")
-      logger.info("process number", processNumber)
-      processNumber === 0 && matchMaker.createRoom("lobby", {})
-    } else {
-      matchMaker.createRoom("lobby", {})
-    }
   },
 
   initializeExpress: (app) => {
@@ -209,6 +202,13 @@ export default config({
     /**
      * Before before gameServer.listen() is called.
      */
+    if (process.env.NODE_APP_INSTANCE) {
+      const processNumber = Number(process.env.NODE_APP_INSTANCE || "0")
+      logger.info("process number", processNumber)
+      processNumber === 0 && matchMaker.createRoom("lobby", {})
+    } else {
+      matchMaker.createRoom("lobby", {})
+    }
     connect(process.env.MONGO_URI!)
     admin.initializeApp({
       credential: admin.credential.cert({
