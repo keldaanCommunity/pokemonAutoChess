@@ -1333,6 +1333,7 @@
     "POISON_POWDER": "적 후방에 돌진하며, 경로상의 모든 적들에 [30,60,120,SP] SPECIAL 및 5초간 POISONNED 상태를 가한다.",
     "GIGATON_HAMMER": "시전자가 6초간 SILENCE상태가 되는 대신 대상에 [100,200,400,SP] SPECIAL을 가한다.",
     "ACROBATICS": "대상에 [20,40,80,SP] SPECIAL 을 가한다. 시전자가 도구를 지니지 않았을 경우 두배의 피해를 준다.",
+    "MUD_BUBBLE": "시전자의 HP를 [10,20,40,SP] 회복한다.",
     "HIDDEN_POWER_A": "보드 구석에 케이시를 총 4마리 생성한다.",
     "HIDDEN_POWER_B": "상대팀 전원을 30초간 화상상태로 만든다.",
     "HIDDEN_POWER_C": "아군이 AMULET_COIN 를 얻는다. 이 아이템은 싸움이 끝난 후 제거된다.",
@@ -1365,6 +1366,10 @@
     "KNOCK_OFF": "대상에 [90,SP] SPECIAL 을 가한다. 대상이 들고 있는 도구를 제거하며, 도구 하나당 [30,SP] 의 SPECIAL 의 추가피해를 가한다.",
     "TIME_TRAVEL": "과거로 돌아가서 잃었던 체력을 회복합니다. 모든 아군 포켓몬의 부정적 상태가 제거되며 [25,SP]HP 회복됩니다.",
     "POLTERGEIST": "대상에 [30,60,120,SP] + 대상이 지닌 도구 하나당 [20,SP]( ARTIFICIAL 은 [40,SP]) 만큼의 SPECIAL 을 가한다.",
+    "TRANSFORM": "대상의 외형과 능력치를 가져온다.(체력제외)",
+    "NIGHT_SLASH": "대상에 [15,30,60,SP] SPECIAL를 가한다. 치명타가 터질 수 있다.",
+    "SHIELDS_DOWN": "메테노가 무작위 색깔의 코어의 모습으로 변신한다.",
+    "SHIELDS_UP": "메테노가 운석의 모습으로 변화한다.",
     "MULTI_ATTACK": "주변의 적들에 [10,SP]SPECIAL 을 가한다. 이 값은 현재 $t(pkm.SILVALLY)의 폼의 시너지 레벨만큼 곱해진다.",
     "CAMERA_FLASH": "대상을 [2,SP] 초간 PARALYSIS 상태로 만든다.",
     "GRAVITY": "적팀을 [2,SP]초간 LOCKED상태로 만든다."
