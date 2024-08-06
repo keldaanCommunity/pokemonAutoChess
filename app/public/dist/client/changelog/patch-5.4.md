@@ -43,6 +43,7 @@
 - Main lobby chat is now reserved to game announcements, and admins/mods announcements. We invite you to join Discord for general chat instead.
 - Added tournament info on lobby screen
 - Removed online list from lobby screen. It was inpractical with the current number of players.
+- Hide authenticated account name on login page
 
 # Bugfix
 

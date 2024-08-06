@@ -1,8 +1,8 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import "./auth.css"
 import Login from "./component/auth/login"
 import Media from "./component/auth/media"
+import "./auth.css"
 
 export default function Auth() {
   const { t } = useTranslation()

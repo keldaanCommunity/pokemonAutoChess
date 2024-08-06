@@ -1,7 +1,9 @@
-.welcome-text {
-  font-size: 400%;
-  text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+
+#play-panel p {
+  font-size: 150%;
   color: white;
+  margin-bottom: 2em;
+  text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
 }
 
 #play-panel .actions {
