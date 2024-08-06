@@ -13,8 +13,8 @@
   },
   "pool": {
     "regular": "레귤러",
-    "additional": "추가풀",
-    "regional": "리전폼"
+    "additional": "추가되는 포켓몬",
+    "regional": "지역에 따른 포켓몬"
   },
   "damage": {
     "SPECIAL": "특수피해",
