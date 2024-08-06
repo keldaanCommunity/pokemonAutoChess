@@ -739,5 +739,26 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       },
       start: true
     })
+
+    // TEMP: auto clean up stale rooms
+    CronJob.from({
+      cronTime: "*/1 * * * *", // every minute
+      timeZone: "Europe/Paris",
+      onTick: () => {
+        logger.debug(`Auto clean up stale rooms`)
+        this.rooms?.forEach(async (room) => {
+          const { type, gameStartedAt } = room.metadata ?? {}
+          if (
+            type === "preparation" &&
+            gameStartedAt != null &&
+            new Date(gameStartedAt).getTime() < Date.now() - 60000
+          ) {
+            logger.debug(`Room ${room.roomId} is stale, deleting it`)
+            await room.disconnect()
+          }
+        })
+      },
+      start: true
+    })
   }
 }
