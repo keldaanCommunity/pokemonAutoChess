@@ -1365,6 +1365,7 @@
     "KNOCK_OFF": "대상에 [90,SP] SPECIAL 을 가한다. 대상이 들고 있는 도구를 제거하며, 도구 하나당 [30,SP] 의 SPECIAL 의 추가피해를 가한다.",
     "TIME_TRAVEL": "과거로 돌아가서 잃었던 체력을 회복합니다. 모든 아군 포켓몬의 부정적 상태가 제거되며 [25,SP]HP 회복됩니다.",
     "POLTERGEIST": "대상에 [30,60,120,SP] + 대상이 지닌 도구 하나당 [20,SP]( ARTIFICIAL 은 [40,SP]) 만큼의 SPECIAL 을 가한다.",
+    "MULTI_ATTACK": "주변의 적들에 [10,SP]SPECIAL 을 가한다. 이 값은 현재 $t(pkm.SILVALLY)의 폼의 시너지 레벨만큼 곱해진다.",
     "CAMERA_FLASH": "대상을 [2,SP] 초간 PARALYSIS 상태로 만든다.",
     "GRAVITY": "적팀을 [2,SP]초간 LOCKED상태로 만든다."
   },
@@ -1375,10 +1376,12 @@
     "MISTY_TERRAIN": "미스트필드"
   },
   "effect_description": {
+    "DRAGON_ENERGY": "드래곤들의 두번째 시너지는 두번 계산된다. (세번째가 아닌 것에 주의)",
     "DUBIOUS_DISC": "ARTIFICIAL 도구를 얻는다. 시너지가 없어질 경우 함께 사라진다.",
     "LINK_CABLE": "기본 ATK, AP 가 가진 도구 갯수당 8%씩 증가하며 최대체력의 해당 비율만큼의 실드를 획득한다. 다른 ARITIFICIAL 도구를 얻는다.",
     "GOOGLE_SPECS": "기본 ATK , AP 가 가진 도구 갯수당 15%씩 증가하며 최대체력의 해당 비율만큼의 실드를 획득한다. 다른 ARITIFICIAL 도구를 얻는다.",
-    "GOLDEN_EGGS": "연패 횟수 x 25% 만큼 황금알을 얻는다. 대기석에 최대 1개의 황금알만 얻을 수 있다. 황금알은 10 GOLD 에 팔 수 있으며, 부화하면 빛나는 도구를 얻는다."
+    "GOLDEN_EGGS": "연패 횟수 x 25% 만큼 황금알을 얻는다. 대기석에 최대 1개의 황금알만 얻을 수 있다. 황금알은 10 GOLD 에 팔 수 있으며, 부화하면 빛나는 도구를 얻는다.",
+    "HYDRATATION": "GRASS포켓몬들은 RAIN일때 초당 5HP를 회복한다."
   },
   "item": {
     "TWISTED_SPOON": "휘어진스푼",
@@ -1491,7 +1494,15 @@
     "POKE_DOLL": "장착자가 받는 PHYSICAL 와 SPECIAL 30% 감소",
     "RED_ORB": "장착자의 기본공격 대미지의 25%는 TRUE 가 됩니다.",
     "MAX_REVIVE": "장착자에게 RESURECTION 이 부여됩니다. 1회에 한해 기절시 최대체력으로 부활합니다.",
-    "ROCKY_HELMET": "장착 시 DEF +12 증가, 치명타에 의한 추가피해는 받지 않습니다."
+    "ROCKY_HELMET": "장착 시 DEF +12 증가, 치명타에 의한 추가피해는 받지 않습니다.",
+    "MACHO_BRACE": "FIGHTING 시너지를 부여한다.",
+    "LIGHT_BALL": "LIGHT 시너지를 부여한다.",
+    "TOXIC_ORB": "POISON 시너지를 부여한다. 소지자는 POISONNED되는 대신 ATK이 100% 증가한다.",
+    "METRONOME": "SOUND 시너지를 부여한다. 소지자는 매초마다 5PP를 획득한다.",
+    "METAL_COAT": "STEEL 시너지를 부여한다.",
+    "SWIFT_WING": "FLYING 시너지를 부여한다. 10%의 회피율을 부여한다.",
+    "HARD_STONE": "ROCK 시너지를 부여한다.",
+    "BIG_NUGGET": "GROUND 시너지를 부여한다. 소지자가 15초간 생존하여 GROUND 효과를 5번 쌓으면 3GOLD 획득한다."
   },
   "passive_description": {
     "CELEBI": "$t(pkm.CELEBI)가 $t(ability.TIME_TRAVEL)을 시전할때마다 플레이어의 HP가 1 회복됩니다.",
