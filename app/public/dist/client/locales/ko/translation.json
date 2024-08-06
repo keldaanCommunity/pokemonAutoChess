@@ -1368,6 +1368,12 @@
     "CAMERA_FLASH": "대상을 [2,SP] 초간 PARALYSIS 상태로 만든다.",
     "GRAVITY": "적팀을 [2,SP]초간 LOCKED상태로 만든다."
   },
+  "effect": {
+    "GRASSY_TERRAIN": "그래스필드",
+    "PSYCHIC_TERRAIN": "사이코필드",
+    "ELECTRIC_TERRAIN": "일렉트릭필드",
+    "MISTY_TERRAIN": "미스트필드"
+  },
   "effect_description": {
     "DUBIOUS_DISC": "ARTIFICIAL 도구를 얻는다. 시너지가 없어질 경우 함께 사라진다.",
     "LINK_CABLE": "기본 ATK, AP 가 가진 도구 갯수당 8%씩 증가하며 최대체력의 해당 비율만큼의 실드를 획득한다. 다른 ARITIFICIAL 도구를 얻는다.",
