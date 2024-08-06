@@ -1771,6 +1771,7 @@
   "add_bot": "봇 추가",
   "weather_dominant_hint2": "날씨를 바꾸기 위해선 특정 타입의 포켓몬 다수가 필요합니다. 어떤 강한 포켓몬은 혼자서 날씨를 바꾸는 특성을 지닌 경우도 있습니다.",
   "items_label": "도구들",
+  "game-reconnect-modal-body": "진행중인 게임에서 나왔습니다. 이전 게임에 재접속하시겠습니까?",
   "jukebox": "주크박스",
   "gadget": {
     "jukebox": "주크박스",
