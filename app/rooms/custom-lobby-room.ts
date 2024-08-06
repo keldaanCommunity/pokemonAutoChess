@@ -754,7 +754,11 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
             new Date(gameStartedAt).getTime() < Date.now() - 60000
           ) {
             logger.debug(`Room ${room.roomId} is stale, deleting it`)
-            await room.disconnect()
+            try {
+              await matchMaker.remoteRoomCall(room.roomId, "disconnect")
+            } catch (error) {
+              logger.error(error)
+            }
           }
         })
       },
