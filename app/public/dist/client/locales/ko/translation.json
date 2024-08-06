@@ -1675,6 +1675,18 @@
     "SANDSTORM": "모래폭풍",
     "BLOODMOON": "블러드문"
   },
+  "weather_description": {
+    "NEUTRAL": "평범한 날씨입니다. 아무런 효과도 없습니다.",
+    "SUN": "BURN 피해량 +30%\nFREEZE 지속시간 -30%",
+    "WINDY": "회피율 +10% (+20% FLYING이라면)",
+    "RAIN": "초당 PP 회복량 +3\nBURN 및 POISONNED 피해량 -30%",
+    "NIGHT": "CRIT_CHANCE +10%\nSLEEP 지속시간 +30%",
+    "STORM": "100 SPECIAL을 가하는 번개가 보드판에 아무곳에나 떨어집니다. (ELECTRIC는 피해를 입지 않습니다.)\nPARALYSIS 지속시간+30%",
+    "MISTY": "SPECIAL +20% \nCHARM 지속시간 +30%",
+    "SNOW": "이동속도 -25%\nFREEZE 지속시간 +30%",
+    "SANDSTORM": "모든 포켓몬은 초당 5 SPECIAL를 입습니다. (GROUND는 피해를 입지 않습니다.)\nCONFUSION 지속시간 +30%",
+    "BLOODMOON": "PHYSICAL +20%\nWOUND 지속시간 +30%"
+  },
   "emotion": {
     "Normal": "평온",
     "Happy": "행복",
