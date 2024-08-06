@@ -761,7 +761,19 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
               )
               logger.debug(disconnection)
             } catch (error) {
-              logger.error(error)
+              if (this.rooms) {
+                const roomIndex = this.rooms.findIndex(
+                  (r) => r.roomId === room.roomId
+                )
+                if (roomIndex !== -1) {
+                  this.rooms.splice(roomIndex, 1)
+
+                  this.clients.forEach((client) => {
+                    client.send(Transfer.REMOVE_ROOM, room.roomId)
+                  })
+                }
+                logger.error(error)
+              }
             }
           }
         })
