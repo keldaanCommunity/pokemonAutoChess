@@ -285,23 +285,11 @@ export default class PreparationRoom extends Room<PreparationState> {
       }
     })
 
-    this.presence.subscribe("server-announcement", (message: string) => {
-      this.state.addMessage({
-        author: "Server Announcement",
-        authorId: "server",
-        payload: message,
-        avatar: "0294/Joyous"
-      })
-    })
+    this.onServerAnnouncement = this.onServerAnnouncement.bind(this)
+    this.presence.subscribe("server-announcement", this.onServerAnnouncement)
 
-    this.presence.subscribe("game-started", ({ gameId, preparationId }) => {
-      if (this.roomId === preparationId) {
-        this.lock()
-        this.setGameStarted(new Date().toISOString())
-        //logger.debug("game start", game.roomId)
-        this.broadcast(Transfer.GAME_START, gameId)
-      }
-    })
+    this.onGameStart = this.onGameStart.bind(this)
+    this.presence.subscribe("game-started", this.onGameStart)
   }
 
   async onAuth(client: Client, options: any, request: any) {
@@ -371,7 +359,26 @@ export default class PreparationRoom extends Room<PreparationState> {
   onDispose() {
     //logger.info("Dispose preparation room")
     this.dispatcher.stop()
-    this.presence.unsubscribe("server-announcement")
+    this.presence.unsubscribe("server-announcement", this.onServerAnnouncement)
+    this.presence.unsubscribe("game-started", this.onGameStart)
+  }
+
+  onServerAnnouncement(message: string) {
+    this.state.addMessage({
+      author: "Server Announcement",
+      authorId: "server",
+      payload: message,
+      avatar: "0294/Joyous"
+    })
+  }
+
+  onGameStart({ gameId, preparationId }: { gameId: string; preparationId: string }) {
+    if (this.roomId === preparationId) {
+      this.lock()
+      this.setGameStarted(new Date().toISOString())
+      //logger.debug("game start", game.roomId)
+      this.broadcast(Transfer.GAME_START, gameId)
+    }
   }
 
   status() {
