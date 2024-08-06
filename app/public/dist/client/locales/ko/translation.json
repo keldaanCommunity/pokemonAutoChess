@@ -1323,6 +1323,10 @@
     "SLACK_OFF": "시전자의 모든 부정적 상태를 제거되고 최대 HP의 [30,40,50,SP=0.5]%만큼 회복하지만 5초간 SLEEP상태가 된다.",
     "DARK_VOID": "모든 적에 [30,SP] SPECIAL를 가한다. SILENCE 상태의 대상에게는 2초간 SLEEP상태로 만든다.",
     "OVERHEAT": "모든 적에 [30,SP] SPECIAL를 가한다. BURN상태의 대상에게는 30%의 추가피해를 가한다.",
+    "HYPNOSIS": "[2,3.5,6,SP=0.5]초 동안 후방 라인의 적 1마리를 SLEEP상태로 만든다.",
+    "MIMIC": "대상의 능력을 베껴서 사용한다.",
+    "HEX": "대상에 [20,40,80,SP]SPECIAL를 가한다. 대상이 BURN, CONFUSION, FREEZE, PARALYSIS, POISONNED, SILENCE, SLEEP, FLINCH, CHARM, ARMOR_REDUCTION, WOUND, 또는 LOCKED 상태인 경우 피해가 두 배로 증가합니다.",
+    "GROWTH": "시전자의 몸이 커지며 ATK [10,SP] 증가한다. 날씨가 SUN이면 두 배 빨리 자랍니다.",
     "SPLASH": "그냥 튀어오를뿐 아무런 효과가 없습니다...",
     "PECK": "대상에 [10,20,30,SP] SPECIAL를 가한다.",
     "COSMIC_POWER": "모든 아군의 AP 를 [20,SP] 만큼 올린다.",
@@ -1359,7 +1363,8 @@
     "SUPER_FANG": "현재 대상에게 [30,60,90,SP] SPECIAL. GRASS 에게는 두배의 데미지",
     "KNOCK_OFF": "대상에 [90,SP] SPECIAL 을 가한다. 대상이 들고 있는 도구를 제거하며, 도구 하나당 [30,SP] 의 SPECIAL 의 추가피해를 가한다.",
     "POLTERGEIST": "대상에 [30,60,120,SP] + 대상이 지닌 도구 하나당 [20,SP]( ARTIFICIAL 은 [40,SP]) 만큼의 SPECIAL 을 가한다.",
-    "CAMERA_FLASH": "대상을 [2,SP] 초간 PARALYSIS 상태로 만든다."
+    "CAMERA_FLASH": "대상을 [2,SP] 초간 PARALYSIS 상태로 만든다.",
+    "GRAVITY": "적팀을 [2,SP]초간 LOCKED상태로 만든다."
   },
   "effect_description": {
     "DUBIOUS_DISC": "ARTIFICIAL 도구를 얻는다. 시너지가 없어질 경우 함께 사라진다.",
