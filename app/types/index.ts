@@ -642,7 +642,7 @@ export interface IPreparationMetadata {
   password: string | null
   noElo: boolean
   type: "preparation"
-  gameStarted: boolean
+  gameStartedAt: string | null
   minRank: string | null
   gameMode: GameMode
   whitelist: string[]
