@@ -1382,6 +1382,9 @@
     "GRAVITY": "적팀을 [2,SP]초간 LOCKED상태로 만든다."
   },
   "effect": {
+    "LARGO": "라르고",
+    "ALLEGRO": "알레그로",
+    "PRESTO": "프레스토",
     "GRASSY_TERRAIN": "그래스필드",
     "PSYCHIC_TERRAIN": "사이코필드",
     "ELECTRIC_TERRAIN": "일렉트릭필드",
@@ -1517,6 +1520,7 @@
     "BIG_NUGGET": "GROUND 시너지를 부여한다. 소지자가 15초간 생존하여 GROUND 효과를 5번 쌓으면 3GOLD 획득한다."
   },
   "passive_description": {
+    "EGG": "껍데기 안에서 무언가 움직이는게 느껴집니다.",
     "CELEBI": "$t(pkm.CELEBI)가 $t(ability.TIME_TRAVEL)을 시전할때마다 플레이어의 HP가 1 회복됩니다.",
     "WATER_BUBBLE": "이 포켓몬은 BURN상태가 되지 않습니다."
   },
