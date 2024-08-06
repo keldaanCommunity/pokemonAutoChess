@@ -1921,6 +1921,7 @@
   "role": {
     "ADMIN": "제작자",
     "MODERATOR": "관리자",
+    "BASIC": "기본",
     "BOT": "봇",
     "BOT_MANAGER": "봇 관리자"
   },
@@ -1934,6 +1935,7 @@
   "game_full": "방이 가득 찼습니다.",
   "game_already_started": "게임이 이미 시작했습니다.",
   "min_rank_not_reached": "이 랭크매치를 하기 위해선 랭크가 더 높아야 합니다.",
+  "not_whitelisted": "이 게임은 허용된 플레이어만 참가가능합니다.",
   "blacklisted": "이 경기에서 추방당했습니다.",
   "ranked_match": "랭크매치",
   "kecleon_dialog": {
