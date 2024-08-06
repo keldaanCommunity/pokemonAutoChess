@@ -755,7 +755,11 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
           ) {
             logger.debug(`Room ${room.roomId} is stale, deleting it`)
             try {
-              await matchMaker.remoteRoomCall(room.roomId, "disconnect")
+              const disconnection = await matchMaker.remoteRoomCall(
+                room.roomId,
+                "disconnect"
+              )
+              logger.debug(disconnection)
             } catch (error) {
               logger.error(error)
             }
