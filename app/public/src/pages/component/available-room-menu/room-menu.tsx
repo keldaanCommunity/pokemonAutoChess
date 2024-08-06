@@ -103,11 +103,11 @@ export default function RoomMenu(props: {
   const joinPrepRoom = throttle(async function join(
     selectedRoom: RoomAvailable<IPreparationMetadata>
   ) {
-    const { whitelist, blacklist, gameStarted, password } =
+    const { whitelist, blacklist, gameStartedAt, password } =
       selectedRoom.metadata ?? {}
     if (
       selectedRoom.clients >= MAX_PLAYERS_PER_GAME ||
-      gameStarted === true ||
+      gameStartedAt != null ||
       (whitelist &&
         whitelist.length > 0 &&
         whitelist.includes(uid) === false) ||

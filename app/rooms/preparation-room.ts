@@ -61,10 +61,8 @@ export default class PreparationRoom extends Room<PreparationState> {
     updateLobby(this)
   }
 
-  async setGameStarted(gameStarted: boolean) {
-    await this.setMetadata(<IPreparationMetadata>{
-      gameStarted: gameStarted
-    })
+  async setGameStarted(gameStartedAt: string) {
+    await this.setMetadata(<IPreparationMetadata>{ gameStartedAt })
   }
 
   onCreate(options: {
@@ -100,7 +98,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       playersInfo: [],
       tournamentId: options.tournamentId ?? null,
       bracketId: options.bracketId ?? null,
-      gameStarted: false,
+      gameStartedAt: null,
       password: null,
       type: "preparation"
     })
@@ -299,10 +297,9 @@ export default class PreparationRoom extends Room<PreparationState> {
     this.presence.subscribe("game-started", ({ gameId, preparationId }) => {
       if (this.roomId === preparationId) {
         this.lock()
-        this.setGameStarted(true)
+        this.setGameStarted(new Date().toISOString())
         //logger.debug("game start", game.roomId)
         this.broadcast(Transfer.GAME_START, gameId)
-        this.clock.setTimeout(() => this.disconnect(), 30000) // TRYFIX: remove stale rooms
       }
     })
   }
@@ -322,7 +319,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       ).length
       if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME) {
         throw "Room is full"
-      } else if (this.state.gameStarted) {
+      } else if (this.state.gameStartedAt != null) {
         throw "Game already started"
       } else if (!user.displayName) {
         throw "No display name"

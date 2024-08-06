@@ -144,7 +144,7 @@ export class OnGameStartRequestCommand extends Command<
 > {
   async execute({ client }: { client?: Client } = {}) {
     try {
-      if (this.state.gameStarted) {
+      if (this.state.gameStartedAt != null) {
         return // game already started
       }
       let allUsersReady = true
@@ -222,7 +222,7 @@ export class OnGameStartRequestCommand extends Command<
           avatar: "0025/Pain"
         })
       } else {
-        this.state.gameStarted = true
+        this.state.gameStartedAt = new Date().toISOString()
         this.room.lock()
         const gameRoom = await matchMaker.createRoom("game", {
           users: this.state.users.toJSON(),
@@ -240,7 +240,6 @@ export class OnGameStartRequestCommand extends Command<
           gameId: gameRoom.roomId,
           preparationId: this.room.roomId
         })
-        this.clock.setTimeout(() => this.room.disconnect(), 30000) // TRYFIX: remove stale rooms
       }
     } catch (error) {
       logger.error(error)
