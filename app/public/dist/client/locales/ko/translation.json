@@ -1656,7 +1656,24 @@
     "BACKER": "게임을 자본적으로 후원해주기",
     "TYRANT": "체력 100으로 게임 승리",
     "SURVIVOR": "체력 1만 남은 상태로 게임 승리",
-    "GAMBLER": "한 경기에서 리롤 60회 이상하기"
+    "GAMBLER": "한 경기에서 리롤 60회 이상하기",
+    "CHOSEN_ONE": "빛 시너지가 최대치까지 도달",
+    "VANQUISHER": "랭크매치에서 승리하기",
+    "OUTSIDER": "참가자 8명 중 가장 낮은 Elo를 가진 상태에서 랭크매치에서 승리하기",
+    "GLUTTON": "750 이상의 잠만보 만들기",
+    "STARGAZER": "솔가레오나 루나아라 만들기"
+  },
+  "weather": {
+    "NEUTRAL": "평범한 날씨",
+    "SUN": "쾌청",
+    "WINDY": "강한 바람",
+    "RAIN": "비",
+    "NIGHT": "밤",
+    "STORM": "폭풍",
+    "MISTY": "안개",
+    "SNOW": "눈",
+    "SANDSTORM": "모래폭풍",
+    "BLOODMOON": "블러드문"
   },
   "emotion": {
     "Normal": "평온",
