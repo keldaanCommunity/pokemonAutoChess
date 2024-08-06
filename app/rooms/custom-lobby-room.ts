@@ -761,6 +761,9 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
               )
               logger.debug(disconnection)
             } catch (error) {
+              logger.error(error)
+              this.presence.hdel("roomcaches", room.roomId)
+            } finally {
               if (this.rooms) {
                 const roomIndex = this.rooms.findIndex(
                   (r) => r.roomId === room.roomId
@@ -772,7 +775,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
                     client.send(Transfer.REMOVE_ROOM, room.roomId)
                   })
                 }
-                logger.error(error)
               }
             }
           }
