@@ -1942,19 +1942,24 @@
     "thank_you": "감사합니다!"
   },
   "scribble": {
+    "EVERYONE_IS_HERE": "모두 다 모여!",
     "UNIQUE_STARTER": "시작부터 유니크",
     "OMELETTE_COOK": "오믈렛 요리",
     "SYNERGY_WHEEL": "시너지의 수레바퀴",
     "DITTO_PARTY": "메타몽 파티",
     "RARE_IS_EXPENSIVE": "귀한 것은 비싼 법",
-    "GOTTA_CATCH_EM_ALL": "다 잡아버리자!",
+    "GOTTA_CATCH_EM_ALL": "넌 내꺼야!",
+    "BUYER_FEVER": "구매 열풍",
+    "TECHNOLOGIC": "과학이 미래를 개척하는 시대",
     "SIX_PACK": "식스팩",
     "NINE_LIVES": "9번의 기회",
     "CROWDED": "북적이는 보드",
     "KECLEONS_SHOP": "켈리몬의 가게",
+    "FREE_MARKET": "모든 것이 거저",
     "SHINY_HUNTER": "희귀품 사냥꾼"
   },
   "scribble_description": {
+    "EVERYONE_IS_HERE": "모든 선택 포켓몬이 시작과 동시에 구매가 가능해집니다.",
     "UNIQUE_STARTER": "스테이지 1에서 무작위 유니크 포켓몬을 얻습니다.",
     "OMELETTE_COOK": "1,2,3 스테이지 후에 포켓몬 알을 얻습니다.",
     "SYNERGY_WHEEL": "이제 초밥에서 시너지 돌만 등장합니다.",
@@ -1962,6 +1967,7 @@
     "RARE_IS_EXPENSIVE": "경험치 구매 비용이 8골드가 됩니다. 포켓몬의 구매 및 판매가격이 1골드 더 싸집니다.",
     "GOTTA_CATCH_EM_ALL": "일부 포켓몬들은 PvE 라운드 이전에 잡을 수 있습니다.",
     "BUYER_FEVER": "상점에서의 진화가 이제 공짜입니다.",
+    "TECHNOLOGIC": "3스테이지와 15스테이지때 3개의 유물아이템 중 하나를 고를 수 있습니다.",
     "SIX_PACK": "레벨과는 무관하게 최대 6마리의 포켓몬만 배치할 수 있습니다.",
     "NINE_LIVES": "라운드에서 9번 패배할 시 탈락합니다.",
     "CROWDED": "보드에 놓을 수 있는 최대 포켓몬 마릿수 +3",
