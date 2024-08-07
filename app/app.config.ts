@@ -22,12 +22,10 @@ import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Item } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
 
-const viewsSrc = __dirname.includes("server")
-  ? path.join(__dirname, "..", "..", "..", "..", "views", "index.html")
-  : path.join(__dirname, "views", "index.html")
 const clientSrc = __dirname.includes("server")
   ? path.join(__dirname, "..", "..", "client")
   : path.join(__dirname, "public", "dist", "client")
+const viewsSrc = path.join(clientSrc, "index.html")
 
 /**
  * Import your Room files
