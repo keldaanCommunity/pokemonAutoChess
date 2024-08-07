@@ -11544,8 +11544,8 @@ export class Exeggutor extends Pokemon {
   stars = 2
   hp = 300
   atk = 20
-  def = 4
-  speDef = 4
+  def = 5
+  speDef = 5
   maxPP = 100
   range = 1
   skill = Ability.EGGSPLOSION
@@ -11560,11 +11560,11 @@ export class AlolanExeggutor extends Pokemon {
     Synergy.PSYCHIC
   ])
   rarity = Rarity.EPIC
-  stars = 3
+  stars = 2
   hp = 350
   atk = 24
-  def = 5
-  speDef = 5
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.EGGSPLOSION

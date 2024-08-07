@@ -23,6 +23,7 @@
 - Nerf Wattrel line: PP 80 → 100
 - Nerf Butterfree: HP 200 → 180
 - Nerf Beedrill: HP: 200 → 180
+- Alolan Exeggutor is now tier 2, Def/Spedef 5/5 → 3/3
 
 # Changes to Synergies
 
