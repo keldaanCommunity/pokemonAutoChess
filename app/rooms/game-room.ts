@@ -106,6 +106,7 @@ export default class GameRoom extends Room<GameState> {
     bracketId: string | null
   }) {
     logger.info("create game room")
+    this.listing.unlisted = true
     this.setMetadata(<IGameMetadata>{
       name: options.name,
       ownerName: options.ownerName,
