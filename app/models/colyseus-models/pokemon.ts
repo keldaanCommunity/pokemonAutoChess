@@ -4365,7 +4365,7 @@ export class Butterfree extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG, Synergy.FLYING])
   rarity = Rarity.COMMON
   stars = 3
-  hp = 200
+  hp = 180
   atk = 16
   def = 2
   speDef = 3

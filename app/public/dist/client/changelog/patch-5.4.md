@@ -21,6 +21,7 @@
 - Changed Eruption (Numel): Lava projectiles spreads over time (over a few seconds)
 - Changed Dreepy: removed Amorphous type, Attack 5/12/22 → 6/15/26
 - Nerf Wattrel line: PP 80 → 100
+- Nerf Butterfree: HP 200 → 180
 
 # Changes to Synergies
 
