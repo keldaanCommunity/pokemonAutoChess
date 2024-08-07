@@ -36,6 +36,7 @@
 - Attacks and abilities now have a frame delay specific to each pokemon before damage and effects are applied
 - Projectiles now have travel time
 - Increased preparation phase duration for rounds 3, 5, 8, 9, 11, 15 and 19: ~~30~~ 40 seconds ; for rounds 10 and 20: ~~45~~ 50 seconds
+- Increase experience cost for level 6,7,8,9 by 2
 
 # UI
 
@@ -49,6 +50,7 @@
 # Bugfix
 
 - Regional lists was not correctly updated when picking an additional pick with a regional variant
+- Fixed Ghost curses status afflictions not reapplied correctly after status is cleared
 
 # Misc
 

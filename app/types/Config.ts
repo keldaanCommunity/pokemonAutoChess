@@ -70,10 +70,10 @@ export const ExpTable: { [key: number]: number } = Object.freeze({
   2: 2,
   3: 6,
   4: 10,
-  5: 20,
-  6: 32,
-  7: 50,
-  8: 70,
+  5: 22,
+  6: 34,
+  7: 52,
+  8: 72,
   9: 255
 })
 
