@@ -2514,6 +2514,8 @@
   "join_as_guest": "Join as Guest",
   "welcome": "Welcome",
   "join_lobby": "Join Lobby",
+  "authenticated_as": "Authenticated as",
+  "hover_to_reveal": "(hover to reveal)",
   "made_for_fans": "Made by 2 fans, for fans",
   "non_profit": "Non profit",
   "open_source": "Open Source",

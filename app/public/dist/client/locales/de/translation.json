@@ -366,7 +366,9 @@
     "DRAIN_PUNCH": "Ableithieb",
     "GRAVITY": "Erdanziehung",
     "DIRE_CLAW": "Unheilsklauen",
-    "FAKE_OUT": "Mogelhieb"
+    "FAKE_OUT": "Mogelhieb",
+    "FELL_STINGER": "Stachelfinale",
+    "GULP_MISSILE": "Würggeschoss"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1180,7 +1182,11 @@
     "HAWLUCHA": "Resladero",
     "MIENFOO": "Lin-Fu",
     "MIENSHAO": "Wie-Shu",
-    "STONJOURNER": "Humanolith"
+    "STONJOURNER": "Humanolith",
+    "POIPOLE": "Venicro",
+    "NAGANADEL": "Agoyon",
+    "CRAMORANT": "Urgl",
+    "ARROKUDA": "Pikuda"
   },
   "ability_description": {
     "SOFT_BOILED": "Heilt alle Statuseffekte und gewährt jedem Verbündeten [20,40,80,SP] SHIELD.",
@@ -1527,7 +1533,9 @@
     "FAIRY_LOCK": "Verteilt [90,SP] SPECIAL gleichmäßig auf das Ziel und benachbarte Gegner. Das Ziel ist für 5 Sekunden LOCKED.",
     "DRAIN_PUNCH": " Der nächste Angriff fügt [100,SP]% zusätzliche SPECIAL zu und stellt [200,SP]% HP des zugefügten Schadens wieder her.",
     "GRAVITY": "Das gegnerische Team ist für [2,SP] Sekunden LOCKED",
-    "FAKE_OUT": "Fügt dem Ziel [50,100,150,SP] SPECIAL zu, dann verliert der Anwender 30% AP. Das Ziel ist für 3 Sekunden FLINCH, es sei denn, die AP des Anwenders waren negativ."
+    "FAKE_OUT": "Fügt dem Ziel [50,100,150,SP] SPECIAL zu, dann verliert der Anwender 30% AP. Das Ziel ist für 3 Sekunden FLINCH, es sei denn, die AP des Anwenders waren negativ.",
+    "FELL_STINGER": "Verursacht [20,40,70,SP] SPECIAL am Ziel. Wenn es das Ziel besiegt, erhält es permanent +1 ATK, +5% AP and +10 HP",
+    "GULP_MISSILE": "Schießt ein $t(pkm.ARROKUDA) mit vollen PP auf das Ziel, und verursacht [55,SP] SPECIAL an allen angrenzenden Gegener. Es besteht eine 1 zu 3 Chance, dass $t(pkm.PIKACHU) stattdessen geschossen wird."
   },
   "effect": {
     "INGRAIN": "Verwurzler",
@@ -2091,7 +2099,8 @@
     "RECYCLE": "Füttere ihn mit Beeren, um 10 HP zu erhalten, oder mit Basiskomponenten, um 25 HP + Gegenstandsstatistiken zu erhalten. Füttere ihn mit künstlichen Gegenständen, um 50 HP + Gegenstandsstatistiken zu erhalten, und erhalte im Gegenzug TRASH",
     "DREAM_CATCHER": "Wenn sein Ziel SLEEP ist, geben die Angriffe des Halters den 3 Verbündeten, die ihm am nächsten sind, 10 SHIELD.",
     "SLOW_START": "Beginnt mit 0,5 ATK_SPEED. Nach der ersten gewirkten Fähigkeit erhält sie 30% ATK_SPEED und 10 ATK.",
-    "STONJOURNER": "Bewegt sich nicht und greift nicht an, bis die PP-Leiste voll ist. Sein Kraftpunkt gibt allen benachbarten Verbündeten zu Beginn des Kampfes 50% AP."
+    "STONJOURNER": "Bewegt sich nicht und greift nicht an, bis die PP-Leiste voll ist. Sein Kraftpunkt gibt allen benachbarten Verbündeten zu Beginn des Kampfes 50% AP.",
+    "POISON_PIN": "Venicro entwickelt sich zu Agoyon, wenn es 200 HP gesammelt hat."
   },
   "stat": {
     "ATK": "Angriff",
@@ -2543,12 +2552,18 @@
   "no_data_available": "Keine Daten vorhanden",
   "leaderboard": "Bestenliste",
   "rooms": "Räume",
+  "rooms_one": "{{count}} Raum",
+  "rooms_other": "{{count}} Räume",
+  "players": "Spieler",
+  "players_one": "{{count}} Spieler",
+  "players_other": "{{count}} Spieler",
   "online": "Online",
   "shards": "Scherben",
   "boosters_hint": "Spielen Sie mehr Spiele, um ein höheres Level zu erreichen und neue Booster zu verdienen.",
   "open_boosters_hint": "Öffne Booster, um neue Avatare freizuschalten und deine Sammlung zu vervollständigen!",
   "open_booster": "Öffnen Sie einen Booster",
   "lobby": "Empfangshalle",
+  "announcements": "Ankündigungen",
   "chat": "Chat",
   "edit": "Bearbeiten",
   "delete": "Löschen",
