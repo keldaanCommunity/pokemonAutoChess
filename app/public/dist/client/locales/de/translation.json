@@ -1772,9 +1772,9 @@
     "RUN_AWAY": "+50% ATK und Bewegungstempo, und 10% Chance auf WILD Pokémon im Shop",
     "HUSTLE": "+80% ATK und Bewegungstempo, und 15% Chance auf WILD Pokémon im Shop",
     "BERSERK": "+100% ATK und Bewegungstempo, und 20% Chance auf WILD Pokémon im Shop. RAGE 5 Sekunden früher",
-    "FLUID": "Verbündetes Team erhält 2% ATK_SPEED und 5 HP pro einzigartiger aktiver Synergie",
-    "SHAPELESS": "Verbündetes Team erhält 4% ATK_SPEED und 10 HP pro einzigartiger aktiver Synergie",
-    "ETHEREAL": "Verbündetes Team erhält 6% ATK_SPEED und 15 HP pro einzigartiger aktiver Synergie"
+    "FLUID": "Verbündetes Team erhält 1% ATK_SPEED und 4 HP pro einzigartiger aktiver Synergie",
+    "SHAPELESS": "Verbündetes Team erhält 3% ATK_SPEED und 8 HP pro einzigartiger aktiver Synergie",
+    "ETHEREAL": "Verbündetes Team erhält 5% ATK_SPEED und 12 HP pro einzigartiger aktiver Synergie"
   },
   "item": {
     "FOSSIL_STONE": "Fossil",

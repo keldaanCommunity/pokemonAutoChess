@@ -24,6 +24,7 @@
 # Changes to Synergies
 
 - Buff Fairy: ~~10/20/30/40~~ 15/30/50/70% additional special damage to attacks and shocks. Shocks damage are now a percentage of the incoming critical damage, 30% initially.
+- Nerf Amorphous: HP: 5/10/15 → 4/8/12, Attack speed : 2%/4%/6% > 1%/3%/5%
 
 # Changes to Items
 

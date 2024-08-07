@@ -1764,9 +1764,9 @@
     "RUN_AWAY": "+50% ATK y velocidad de movimiento",
     "HUSTLE": "+80% ATK y velocidad de movimiento",
     "BERSERK": "+100% ATK y velocidad de movimiento, RAGE 5 segundos antes",
-    "FLUID": "El equipo gana 2% ATK_SPEED and 5 HP por cada sinergia activa.",
-    "SHAPELESS": "El equipo gana 4% ATK_SPEED y 10 HP por cada sinergia activa.",
-    "ETHEREAL": "El equipo gana 6% ATK_SPEED y 15 HP por cada sinergia activa."
+    "FLUID": "El equipo gana 1% ATK_SPEED and 4 HP por cada sinergia activa.",
+    "SHAPELESS": "El equipo gana 3% ATK_SPEED y 8 HP por cada sinergia activa.",
+    "ETHEREAL": "El equipo gana 5% ATK_SPEED y 12 HP por cada sinergia activa."
   },
   "item": {
     "FOSSIL_STONE": "Piedra Fósil",
