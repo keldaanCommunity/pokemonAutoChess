@@ -9,7 +9,6 @@ import { getPath } from "../public/src/pages/utils/utils"
 import GameRoom from "../rooms/game-room"
 import { IPokemon, IPokemonEntity, ISimulation, Transfer } from "../types"
 import { BOARD_HEIGHT, BOARD_WIDTH, ItemStats } from "../types/Config"
-import { Ability } from "../types/enum/Ability"
 import { Effect } from "../types/enum/Effect"
 import {
   AttackType,
@@ -21,12 +20,7 @@ import {
   Stat,
   Team
 } from "../types/enum/Game"
-import {
-  Berries,
-  CraftableItems,
-  Item,
-  ItemComponents
-} from "../types/enum/Item"
+import { Berries, CraftableItems, Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"

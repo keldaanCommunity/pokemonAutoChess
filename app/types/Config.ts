@@ -729,4 +729,6 @@ export const DUST_PER_SHINY = 250
 export const TOURNAMENT_REGISTRATION_TIME = 60 * 60 * 1000 // 1 hour
 export const TOURNAMENT_CLEANUP_DELAY = 24 * 60 * 60 * 1000 // 1 day
 
+export const MAX_SIMULATION_DELTA_TIME = 50 // milliseconds
+
 export { EloRank }
