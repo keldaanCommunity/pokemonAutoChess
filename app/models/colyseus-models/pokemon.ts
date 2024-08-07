@@ -13564,7 +13564,7 @@ export class Wattrel extends Pokemon {
   atk = 9
   def = 3
   speDef = 3
-  maxPP = 80
+  maxPP = 100
   range = 2
   skill = Ability.SPARK
   attackSprite = AttackSprite.ELECTRIC_RANGE
@@ -13580,7 +13580,7 @@ export class Kilowattrel extends Pokemon {
   atk = 19
   def = 4
   speDef = 4
-  maxPP = 80
+  maxPP = 100
   range = 2
   skill = Ability.SPARK
   attackSprite = AttackSprite.ELECTRIC_RANGE
