@@ -9,6 +9,8 @@ const isProdBuild = process.argv[2] === "--build"
 
 context({
   entryPoints: ["./app/public/src/index.tsx"],
+  entryNames: "[dir]/[name]-[hash]",
+  assetNames: "[dir]/[name]-[hash]",
   outfile: "app/public/dist/client/index.js",
   external: ["assets/*"],
   bundle: true,
@@ -41,6 +43,37 @@ context({
         }
         context.dispose()
       })
+    }
+
+    //update hash in index.html
+    const fs = require('fs');
+    const path = require('path');
+
+    const distDir = path.join(__dirname, 'app/public/dist/client');
+    const htmlFile = path.join(__dirname, 'app/views/index.html');
+    const htmlOutputFile = path.join(distDir, 'index.html');
+
+    // Find the hashed script file
+    const scriptFile = fs.readdirSync(distDir).find(file => file.startsWith('index-') && file.endsWith('.js'));
+    const cssFile = fs.readdirSync(distDir).find(file => file.startsWith('index-') && file.endsWith('.css'));
+
+    if (scriptFile) {
+      // Read the HTML file
+      let htmlContent = fs.readFileSync(htmlFile, 'utf8');
+
+      // Replace the placeholder with the actual script tag
+      htmlContent = htmlContent.replace(
+        '<script src="index.js" defer></script>',
+        `<script src="${scriptFile}" defer></script>`
+      ).replace(
+        `<link rel="stylesheet" type="text/css" href="index.css" />`,
+        `<link rel="stylesheet" type="text/css" href="${cssFile}">`
+      );
+
+      // Write the updated HTML back to the file
+      fs.writeFileSync(htmlOutputFile, htmlContent, 'utf8');
+    } else {
+      console.error('Hashed entry files not found.');
     }
   })
   .catch((error) => {
