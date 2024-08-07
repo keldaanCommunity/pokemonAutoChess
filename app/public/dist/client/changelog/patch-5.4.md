@@ -22,6 +22,7 @@
 - Changed Dreepy: removed Amorphous type, Attack 5/12/22 → 6/15/26
 - Nerf Wattrel line: PP 80 → 100
 - Nerf Butterfree: HP 200 → 180
+- Nerf Beedrill: HP: 200 → 180
 
 # Changes to Synergies
 
