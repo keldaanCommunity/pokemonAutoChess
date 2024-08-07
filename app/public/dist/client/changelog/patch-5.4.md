@@ -31,6 +31,9 @@
 # Changes to Items
 
 - Pokemonomicon no longer applies Wound
+- Nerf Absorb Bulb: Def/Spedef: 10 → 8
+- Nerf Shiny Stone: +3 → +2 to Light synergy
+- Changed Comet Shard: damage 100 flat → 300% ATK, protect time 2 → 3 seconds
 
 # Gameplay
 
