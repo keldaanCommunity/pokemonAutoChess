@@ -43,6 +43,7 @@
 - Projectiles now have travel time
 - Increased preparation phase duration for rounds 3, 5, 8, 9, 11, 15 and 19: ~~30~~ 40 seconds ; for rounds 10 and 20: ~~45~~ 50 seconds
 - Increase experience cost for level 6,7,8,9 by 2
+- Reduce sleep duration reduction when taking a hit: 500ms → 300ms
 
 # UI
 
