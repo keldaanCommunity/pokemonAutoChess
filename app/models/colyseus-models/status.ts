@@ -1054,7 +1054,7 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  private applyAquaticReduction(duration: number, pkm: PokemonEntity): number {
+  private applyAquaticReduction(duration: number, pkm: IPokemonEntity): number {
     if (pkm.effects.has(Effect.SWIFT_SWIM)) {
       duration = Math.round(duration * 0.7)
     } else if (pkm.effects.has(Effect.HYDRATION)) {
