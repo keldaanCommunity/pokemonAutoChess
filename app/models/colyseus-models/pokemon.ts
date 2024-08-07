@@ -9441,17 +9441,13 @@ export class Wailord extends Pokemon {
 }
 
 export class Dreepy extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.DRAGON,
-    Synergy.GHOST,
-    Synergy.AMORPHOUS
-  ])
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.DRAKLOAK
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 90
-  atk = 5
+  atk = 6
   def = 3
   speDef = 3
   maxPP = 100
@@ -9462,17 +9458,13 @@ export class Dreepy extends Pokemon {
 }
 
 export class Drakloak extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.DRAGON,
-    Synergy.GHOST,
-    Synergy.AMORPHOUS
-  ])
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.DRAGAPULT
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 140
-  atk = 12
+  atk = 15
   def = 3
   speDef = 3
   maxPP = 100
@@ -9483,15 +9475,11 @@ export class Drakloak extends Pokemon {
 }
 
 export class Dragapult extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.DRAGON,
-    Synergy.GHOST,
-    Synergy.AMORPHOUS
-  ])
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
   rarity = Rarity.HATCH
   stars = 3
   hp = 190
-  atk = 22
+  atk = 26
   def = 3
   speDef = 3
   maxPP = 100
@@ -14430,10 +14418,7 @@ export class Stonjourner extends Pokemon {
 }
 
 export class Cramorant extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.FLYING,
-    Synergy.AQUATIC
-  ])
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.AQUATIC])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
@@ -14447,9 +14432,7 @@ export class Cramorant extends Pokemon {
 }
 
 export class Arrokuda extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WATER
-  ])
+  types = new SetSchema<Synergy>([Synergy.WATER])
   rarity = Rarity.SPECIAL
   stars = 1
   hp = 80

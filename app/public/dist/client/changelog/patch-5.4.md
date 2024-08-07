@@ -19,6 +19,7 @@
 - Buff Primal Kyogre: PP 120 → 100
 - Change Seed Flare (Shaymin): now deals damage in a 5-cell radius around Shaymin
 - Changed Eruption (Numel): Lava projectiles spreads over time (over a few seconds)
+- Changed Dreepy: removed Amorphous type, Attack 5/12/22 → 6/15/26
 
 # Changes to Synergies
 
