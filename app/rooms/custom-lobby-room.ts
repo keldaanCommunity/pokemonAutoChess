@@ -117,6 +117,43 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     this.tournamentCronJobs = new Map<string, CronJob>()
   }
 
+  removeRoom(index: number, roomId: string) {
+    // remove room listing data
+    if (index !== -1) {
+      this.rooms?.splice(index, 1)
+
+      this.clients.forEach((client) => {
+        client.send(Transfer.REMOVE_ROOM, roomId)
+      })
+    }
+  }
+
+  addRoom(roomId: string, data: RoomListingData<any>) {
+    // append room listing data
+    this.rooms?.push(data)
+
+    this.clients.forEach((client) => {
+      client.send(Transfer.ADD_ROOM, [roomId, data])
+    })
+  }
+
+  changeRoom(index: number, roomId: string, data: RoomListingData<any>) {
+    if (this.rooms) {
+      const previousData = this.rooms[index]
+
+      // replace room listing data
+      this.rooms[index] = data
+
+      this.clients.forEach((client) => {
+        if (previousData && !data) {
+          client.send(Transfer.REMOVE_ROOM, roomId)
+        } else if (data) {
+          client.send(Transfer.ADD_ROOM, [roomId, data])
+        }
+      })
+    }
+  }
+
   async onCreate(): Promise<void> {
     logger.info("create lobby", this.roomId)
     this.setState(new LobbyState())
@@ -131,34 +168,11 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         )
 
         if (!data) {
-          // remove room listing data
-          if (roomIndex !== -1) {
-            this.rooms.splice(roomIndex, 1)
-
-            this.clients.forEach((client) => {
-              client.send(Transfer.REMOVE_ROOM, roomId)
-            })
-          }
+          this.removeRoom(roomIndex, roomId)
         } else if (roomIndex === -1) {
-          // append room listing data
-          this.rooms.push(data)
-
-          this.clients.forEach((client) => {
-            client.send(Transfer.ADD_ROOM, [roomId, data])
-          })
+          this.addRoom(roomId, data)
         } else {
-          const previousData = this.rooms[roomIndex]
-
-          // replace room listing data
-          this.rooms[roomIndex] = data
-
-          this.clients.forEach((client) => {
-            if (previousData && !data) {
-              client.send(Transfer.REMOVE_ROOM, roomId)
-            } else if (data) {
-              client.send(Transfer.ADD_ROOM, [roomId, data])
-            }
-          })
+          this.changeRoom(roomIndex, roomId, data)
         }
       }
     })
@@ -744,14 +758,25 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     CronJob.from({
       cronTime: "*/1 * * * *", // every minute
       timeZone: "Europe/Paris",
-      onTick: () => {
+      onTick: async () => {
         logger.debug(`Auto clean up stale rooms`)
-        this.rooms?.forEach(async (room) => {
+        const query = await matchMaker.query({
+          private: false,
+          unlisted: false
+        })
+
+        query.forEach((data) => {
+          if (!this.rooms?.map((r) => r.roomId).includes(data.roomId)) {
+            this.addRoom(data.roomId, data)
+          }
+        })
+        this.rooms?.forEach(async (room, roomIndex) => {
           const { type, gameStartedAt } = room.metadata ?? {}
           if (
-            type === "preparation" &&
-            gameStartedAt != null &&
-            new Date(gameStartedAt).getTime() < Date.now() - 60000
+            (type === "preparation" &&
+              gameStartedAt != null &&
+              new Date(gameStartedAt).getTime() < Date.now() - 60000) ||
+            !query.map((r) => r.roomId).includes(room.roomId)
           ) {
             logger.debug(`Room ${room.roomId} is stale, deleting it`)
             try {
@@ -764,19 +789,26 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
               logger.error(error)
               this.presence.hdel("roomcaches", room.roomId)
             } finally {
-              if (this.rooms) {
-                const roomIndex = this.rooms.findIndex(
-                  (r) => r.roomId === room.roomId
-                )
-                if (roomIndex !== -1) {
-                  this.rooms.splice(roomIndex, 1)
-
-                  this.clients.forEach((client) => {
-                    client.send(Transfer.REMOVE_ROOM, room.roomId)
-                  })
-                }
-              }
+              this.removeRoom(roomIndex, room.roomId)
             }
+          }
+        })
+      },
+      start: true
+    })
+
+    // TEMP: force leave for clients in room > 10 min
+    CronJob.from({
+      cronTime: "*/1 * * * *", // every minute
+      timeZone: "Europe/Paris",
+      onTick: async () => {
+        this.clients.forEach((c) => {
+          if (
+            c.userData.joinedAt &&
+            c.userData.joinedAt < Date.now() - 600000
+          ) {
+            logger.info("force deconnection of user", c.id)
+            c.leave()
           }
         })
       },

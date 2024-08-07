@@ -75,6 +75,7 @@ export class OnJoinCommand extends Command<
     try {
       //logger.info(`${client.auth.displayName} ${client.id} join lobby room`)
       client.send(Transfer.ROOMS, rooms)
+      client.userData = { joinedAt: Date.now() }
       const user = await UserMetadata.findOne({ uid: client.auth.uid })
 
       if (user) {
