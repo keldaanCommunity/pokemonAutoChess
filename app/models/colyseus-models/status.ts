@@ -258,7 +258,7 @@ export default class Status extends Schema implements IStatus {
       this.triggerSilence(30000, pokemon)
     }
 
-    if (pokemon.curseFate && !pokemon.status.curse) {
+    if (pokemon.status.curseFate && !pokemon.status.curse) {
       this.triggerCurse(5000) //Intentionally at 5s to account for status update delay
     }
   }
@@ -308,7 +308,7 @@ export default class Status extends Schema implements IStatus {
     if (!this.runeProtect) {
       this.armorReduction = true
 
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       if (duration > this.armorReductionCooldown) {
         this.armorReductionCooldown = Math.round(duration)
@@ -476,7 +476,7 @@ export default class Status extends Schema implements IStatus {
     ) {
       this.burn = true
 
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       if (duration > this.burnCooldown) {
         this.burnCooldown = duration
@@ -542,7 +542,7 @@ export default class Status extends Schema implements IStatus {
 
   triggerSilence(duration: number, pkm: PokemonEntity, origin?: PokemonEntity) {
     if (!this.runeProtect && !this.tree) {
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       this.silence = true
       if (duration > this.silenceCooldown) {
@@ -581,7 +581,7 @@ export default class Status extends Schema implements IStatus {
       }
       this.poisonStacks = max(maxStacks)(this.poisonStacks + 1)
 
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       if (duration > this.poisonCooldown) {
         this.poisonCooldown = duration
@@ -674,7 +674,7 @@ export default class Status extends Schema implements IStatus {
         duration = duration / 2
       }
 
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       this.freeze = true
       this.freezeCooldown = Math.round(duration)
@@ -723,7 +723,7 @@ export default class Status extends Schema implements IStatus {
         duration = duration / 2
       }
 
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       this.sleep = true
       this.sleepCooldown = Math.round(duration)
@@ -752,7 +752,7 @@ export default class Status extends Schema implements IStatus {
         duration *= 1.3
       }
 
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       this.confusion = true
       this.confusionCooldown = Math.round(duration)
@@ -788,7 +788,7 @@ export default class Status extends Schema implements IStatus {
         duration *= 1.3
       }
 
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       this.charm = true
       this.charmCooldown = duration
@@ -820,7 +820,7 @@ export default class Status extends Schema implements IStatus {
         duration *= 1.3
       }
 
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       if (duration > this.woundCooldown) {
         this.woundCooldown = duration
@@ -850,7 +850,7 @@ export default class Status extends Schema implements IStatus {
         duration *= 1.3
       }
 
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       if (duration > this.paralysisCooldown) {
         this.paralysisCooldown = Math.round(duration)
@@ -898,7 +898,7 @@ export default class Status extends Schema implements IStatus {
     if (!this.runeProtect) {
       this.flinch = true
 
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       if (duration > this.flinchCooldown) {
         this.flinchCooldown = Math.round(duration)
@@ -1037,7 +1037,7 @@ export default class Status extends Schema implements IStatus {
         duration = duration / 2
       }
 
-      duration = applyAquaticReduction(duration, pkm)
+      duration = this.applyAquaticReduction(duration, pkm)
 
       this.locked = true
       this.lockedCooldown = Math.round(duration)
