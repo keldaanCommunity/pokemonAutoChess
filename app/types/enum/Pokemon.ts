@@ -815,7 +815,9 @@ export enum Pkm {
   POIPOLE = "POIPOLE",
   NAGANADEL = "NAGANADEL",
   CRAMORANT = "CRAMORANT",
-  ARROKUDA = "ARROKUDA"
+  ARROKUDA = "ARROKUDA",
+  WISHIWASHI = "WISHIWASHI",
+  WISHIWASHI_SCHOOL = "WISHIWASHI_SCHOOL"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1633,7 +1635,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.POIPOLE]: "0803",
   [Pkm.NAGANADEL]: "0804",
   [Pkm.CRAMORANT]: "0845",
-  [Pkm.ARROKUDA]: "0846"
+  [Pkm.ARROKUDA]: "0846",
+  [Pkm.WISHIWASHI]: "0746",
+  [Pkm.WISHIWASHI_SCHOOL]: "0746-0001"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2451,7 +2455,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.POIPOLE]: Pkm.POIPOLE,
   [Pkm.NAGANADEL]: Pkm.POIPOLE,
   [Pkm.CRAMORANT]: Pkm.CRAMORANT,
-  [Pkm.ARROKUDA]: Pkm.ARROKUDA
+  [Pkm.ARROKUDA]: Pkm.ARROKUDA,
+  [Pkm.WISHIWASHI]: Pkm.WISHIWASHI,
+  [Pkm.WISHIWASHI_SCHOOL]: Pkm.WISHIWASHI
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
@@ -6690,5 +6696,15 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
+  },
+  [Pkm.WISHIWASHI]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.WISHIWASHI_SCHOOL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
+    emote: AnimationType.RearUp
   }
 }

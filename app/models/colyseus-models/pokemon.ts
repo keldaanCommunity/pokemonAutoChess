@@ -14448,6 +14448,42 @@ export class Arrokuda extends Pokemon {
   attackSprite = AttackSprite.WATER_MELEE
 }
 
+export class Wishiwashi extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  evolution = Pkm.WISHIWASHI_SCHOOL
+  hp = 100
+  atk = 10
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.AQUA_JET
+  attackSprite = AttackSprite.WATER_MELEE
+  passive = Passive.WISHIWASHI
+  evolutionRule = new CountEvolutionRule(3)
+}
+
+export class WishiwashiSchool extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.MONSTER,
+    Synergy.AMORPHOUS
+  ])
+  rarity = Rarity.SPECIAL
+  stars = 3
+  evolution = Pkm.WISHIWASHI_SCHOOL
+  hp = 300
+  atk = 20
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.SCHOOLING
+  attackSprite = AttackSprite.WATER_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -15269,5 +15305,7 @@ export const PokemonClasses: Record<
   [Pkm.POIPOLE]: Poipole,
   [Pkm.NAGANADEL]: Naganadel,
   [Pkm.CRAMORANT]: Cramorant,
-  [Pkm.ARROKUDA]: Arrokuda
+  [Pkm.ARROKUDA]: Arrokuda,
+  [Pkm.WISHIWASHI]: Wishiwashi,
+  [Pkm.WISHIWASHI_SCHOOL]: WishiwashiSchool
 }
