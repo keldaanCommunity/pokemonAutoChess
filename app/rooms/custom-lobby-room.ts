@@ -116,7 +116,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     this.botLeaderboard = new Array<ILeaderboardBotInfo>()
     this.levelLeaderboard = new Array<ILeaderboardInfo>()
     this.tournamentCronJobs = new Map<string, CronJob>()
-    this.maxClients = 200
+    this.maxClients = 100
   }
 
   removeRoom(index: number, roomId: string) {

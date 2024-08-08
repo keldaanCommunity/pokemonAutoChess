@@ -43,15 +43,15 @@ import { Effect } from "../../types/enum/Effect"
 import { BattleResult, GamePhaseState, Rarity } from "../../types/enum/Game"
 import {
   ArtificialItems,
-  ItemComponents,
   Berries,
+  FishingRods,
   Item,
+  ItemComponents,
   ItemRecipe,
+  ShinyItems,
   SynergyGivenByItem,
   SynergyItems,
-  ShinyItems,
-  WeatherRocks,
-  FishingRods
+  WeatherRocks
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmFamily, PkmIndex, Unowns } from "../../types/enum/Pokemon"
@@ -924,7 +924,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (client) {
         client.send(Transfer.FINAL_RANK, 1)
       }
-      setTimeout(() => {
+      this.clock.setTimeout(() => {
         // dispose the room automatically after 30 seconds
         this.room.broadcast(Transfer.GAME_END)
         this.room.disconnect()
