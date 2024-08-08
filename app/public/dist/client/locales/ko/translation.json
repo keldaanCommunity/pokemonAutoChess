@@ -2010,9 +2010,25 @@
     "PoisonMaze": "독타입 수련장",
     "RescueTeamMaze": "구조대 수련장",
     "RockMaze": "바위타입 수련장",
-    "WaterMaze": "물타입 수련장"
+    "UnusedWaterfallPond": "폭포 연못",
+    "VastIceMountain": "거대한 얼음 산",
+    "VastIceMountainPeak": "거대한 얼음 산 정상",
+    "WaterfallCave": "폭포 동굴",
+    "WaterfallPond": "폭포 연못",
+    "WaterMaze": "물타입 수련장",
+    "WesternCave1": "서쪽 동굴 1",
+    "WesternCave2": "서쪽 동굴 2",
+    "WishCave1": "소원 동굴 1 ",
+    "WishCave2": "소원 동굴 2",
+    "WorldAbyss2": "세계 심연  ",
+    "WyvernHill": "와이번 힐",
+    "ZeroIsleEast3": "제로 섬 동쪽 3",
+    "ZeroIsleEast4": "제로 섬 동쪽 4",
+    "ZeroIsleSouth1": "제로 섬 남쪽 1",
+    "ZeroIsleSouth2": "제로 섬 남쪽 2 "
   },
   "held_items": "지닌 도구들",
+  "by_average_held_items": "지닌 도구들 평균 ",
   "role": {
     "ADMIN": "제작자",
     "MODERATOR": "관리자",
@@ -2073,14 +2089,17 @@
     "SHINY_HUNTER": "PVE에서 만나는 모든 야생포켓몬들이 모두 이로치가 됩니다."
   },
   "loading_hints": {
+    "tab_out": "로딩 화면 밖으로 나가지 마세요! 브라우저가 비활성화 되면 로딩이 멈춥니다. ",
     "max_loading_time": "게임 시작시 로딩시간은 최대 5분입니다. 어찌되든 간에...",
     "disconnection_time": "3분 이상 연결이 끊긴 플레이어는 게임에서 추방됩니다. 6스테이지 이전에 추방당한 경우에는 Elo를 잃지 않아요.",
     "translation_project": "이 게임의 번역은 디스코드 구성원들이 하고 있습니다! 참가하고 싶으시다면 디스코드를 참조해주세요.",
+    "discord": "디스코드에 참가해서 커뮤니티를 만나세요! 링크는 사이드 메뉴에 있습니다. ",
     "tipeee": "이 게임은 광고를 포함하고 있지 않으며 여러분들의 후원들로만 운영됩니다. 후원자분들 감사합니다 ♥",
     "bug_report": "버그를 발견하셨다고요? 디스코드로 와서 #bug-report 채널로 제보해주세요.",
     "moderation": "게임중 불건전한 행위를 감지했다면, 스크린샷을 찍어서 디스코드의 관리자에게 제보해주세요.",
     "berry_tree": "풀타입으로 플레이하시고 계신가요? 캐릭터 옆의 열매나무를 주시해주세요!",
     "spriters": "이 게임에 있는 애니메이션들 대부분은 각각의 예술가분들의 작품입니다. 커미션(작품제작 의뢰)를 받고 계신분들도 계시니, 여러분들도 많은 관심 부탁드립니다. 자세한 내용은 디스코드를 참조해주세요.",
+    "wiki": "사이드 메뉴에 게임 위키가 있으니 놓치지 마세요!  ",
     "avatar": "플레이어 아바타를 바꾸려면 게임을 플레이해서 XP를 얻어서 레벨을 올려야 합니다. 레벨을 올릴때마다 주는 부스터팩에는 콜렉션 메뉴에서 새로운 아바타를 구매할때 쓸 수 있는 조각을 얻을 수 있어요."
   }
 }
