@@ -43,13 +43,19 @@ import {
   EloRank,
   ExpPlace,
   LegendaryShop,
+  MAX_SIMULATION_DELTA_TIME,
   PortalCarouselStages,
   RequiredStageLevelForXpElligibility,
   UniqueShop
 } from "../types/Config"
 import { GameMode, PokemonActionState } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
-import { Pkm, PkmDuos, PkmProposition, PkmRegionalVariants } from "../types/enum/Pokemon"
+import {
+  Pkm,
+  PkmDuos,
+  PkmProposition,
+  PkmRegionalVariants
+} from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { removeInArray } from "../utils/array"
@@ -499,6 +505,9 @@ export default class GameRoom extends Room<GameState> {
     if (this.state.gameLoaded) return // already started
     this.state.gameLoaded = true
     this.setSimulationInterval((deltaTime: number) => {
+      /* in case of lag spikes, the game should feel slower, 
+      but this max simulation dt helps preserving the correctness of simulation result */
+      deltaTime = Math.min(MAX_SIMULATION_DELTA_TIME, deltaTime)
       if (!this.state.gameFinished) {
         try {
           this.dispatcher.dispatch(new OnUpdateCommand(), { deltaTime })
