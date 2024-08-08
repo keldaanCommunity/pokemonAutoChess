@@ -808,7 +808,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
     this.cleanUpCronJobs.push(staleJob)
 
-    // TEMP: force leave for clients in room > 10 min
+    // TEMP: force leave for clients in room > 5 min
     const afkJob = CronJob.from({
       cronTime: "*/1 * * * *", // every minute
       timeZone: "Europe/Paris",
@@ -816,7 +816,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         this.clients.forEach((c) => {
           if (
             c.userData.joinedAt &&
-            c.userData.joinedAt < Date.now() - 600000
+            c.userData.joinedAt < Date.now() - 300000
           ) {
             //logger.info("force deconnection of user", c.id)
             c.leave()
