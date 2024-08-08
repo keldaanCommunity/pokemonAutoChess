@@ -148,6 +148,7 @@ export class MiniGame {
                   npc: "kecleon",
                   dialog: "thank_you"
                 })
+                player.money -= KECLEON_SHOP_COST
               }
             }
 
@@ -585,9 +586,6 @@ export class MiniGame {
       if (avatar.itemId) {
         const item = this.items?.get(avatar.itemId)
         if (item && player && !player.isBot) {
-          if (state.specialGameRule === SpecialGameRule.KECLEONS_SHOP) {
-            player.money -= KECLEON_SHOP_COST
-          }
           player.items.push(item.name)
         }
       }
