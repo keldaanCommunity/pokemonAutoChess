@@ -65,4 +65,5 @@
 
 - New accounts now start with a random avatar among Pokemon Mystery Dungeon starters
 - Vietnamese translation has been started thanks to Camchanh
+- Thank you to all contributors to the translations: gongdi1234, johnkyokim4, Kite2810,  CubeRubik, Camchanh, akaya0, mokers, Kimera24
 - Improved fight simulation accuracy in case of high server stress
