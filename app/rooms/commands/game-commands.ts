@@ -848,6 +848,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           case Effect.GOOGLE_SPECS:
             player.titles.add(Title.ALCHEMIST)
             break
+          case Effect.BERSERK:
+            player.titles.add(Title.BERSERKER)
+            break
           case Effect.ETHEREAL:
             player.titles.add(Title.BLOB)
             break

@@ -345,7 +345,7 @@ export default class Shop {
   getRandomPokemonFromPool(
     rarity: Rarity,
     player: Player,
-    finals: Set<Pkm>,
+    finals: Set<Pkm> = new Set(),
     specificTypeWanted?: Synergy
   ): Pkm {
     let pkm = Pkm.MAGIKARP

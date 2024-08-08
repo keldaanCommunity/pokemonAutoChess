@@ -39,6 +39,7 @@
 
 # Gameplay
 
+- Players now start the game with 5 gold and one random common pokemon instead of 6 gold
 - Extra PP generated when reaching max PP are now saved and restored after casting ability
 - Attacks and abilities now have a frame delay specific to each pokemon before damage and effects are applied
 - Projectiles now have travel time
@@ -68,3 +69,4 @@
 - Thank you to all contributors to the translations: gongdi1234, johnkyokim4, Kite2810,  CubeRubik, Camchanh, akaya0, mokers, Kimera24
 - Improved fight simulation accuracy in case of high server stress
 - Team Planner is now unlocked at lvl 2, Jukebox at level 10
+- New titles: Berserker, Natural, Golden

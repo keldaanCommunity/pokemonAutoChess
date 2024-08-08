@@ -12533,6 +12533,9 @@ export class Gholdengo extends Pokemon {
       entity.status.triggerRuneProtect(60000)
     }
   }
+  onAcquired(player: Player) {
+    player.titles.add(Title.GOLDEN)
+  }
 }
 
 export class Sobble extends Pokemon {
