@@ -754,6 +754,8 @@ export default class GameRoom extends Room<GameState> {
 
             if (player.rerollCount > 60) {
               player.titles.add(Title.GAMBLER)
+            } else if (player.rerollCount < 20 && rank === 1) {
+              player.titles.add(Title.NATURAL)
             }
 
             if (usr.titles === undefined) {
