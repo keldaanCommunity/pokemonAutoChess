@@ -39,6 +39,7 @@
 
 # Gameplay
 
+- Players now start the game with 5 gold and one random common pokemon instead of 6 gold
 - Extra PP generated when reaching max PP are now saved and restored after casting ability
 - Attacks and abilities now have a frame delay specific to each pokemon before damage and effects are applied
 - Projectiles now have travel time
