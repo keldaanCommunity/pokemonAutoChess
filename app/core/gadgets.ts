@@ -23,6 +23,13 @@ const TEAM_PLANNER: Gadget = {
   name: "gadget.team_planner",
   description: "gadget.team_planner_desc",
   icon: "team-builder",
+  levelRequired: 2
+}
+
+const JUKEBOX: Gadget = {
+  name: "gadget.jukebox",
+  description: "gadget.jukebox_desc",
+  icon: "compact-disc",
   levelRequired: 10
 }
 
@@ -33,17 +40,10 @@ const BOT_BUILDER: Gadget = {
   levelRequired: 20
 }
 
-const JUKEBOX: Gadget = {
-  name: "gadget.jukebox",
-  description: "gadget.jukebox_desc",
-  icon: "compact-disc",
-  levelRequired: 30
-}
-
 export const GADGETS = {
   TRAINER_CARD,
   BAG,
   TEAM_PLANNER,
-  BOT_BUILDER,
-  JUKEBOX
+  JUKEBOX,
+  BOT_BUILDER
 } as const
