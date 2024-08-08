@@ -17,20 +17,20 @@
     "regional": "리전폼"
   },
   "damage": {
-    "SPECIAL": "특수피해",
-    "PHYSICAL": "물리피해",
-    "TRUE": "고정피해"
+    "SPECIAL": "특수 데미지",
+    "PHYSICAL": "물리 데미지",
+    "TRUE": "고정 데미지"
   },
   "ability": {
     "SOFT_BOILED": "알낳기",
     "EARTHQUAKE": "지진",
-    "SONG_OF_DESIRE": "주술",
-    "CONFUSING_MIND": "정신없는생각",
-    "KNOWLEDGE_THIEF": "지식훔치기",
-    "KING_SHIELD": "킹실드",
+    "SONG_OF_DESIRE": "매혹의 노래",
+    "CONFUSING_MIND": "혼란",
+    "KNOWLEDGE_THIEF": "스킬 훔치기",
+    "KING_SHIELD": "왕의 방패",
     "EXPLOSION": "대폭발",
     "NIGHTMARE": "악몽",
-    "CLANGOROUS_SOUL": "소울비트",
+    "CLANGOROUS_SOUL": "드래곤옐",
     "BONEMERANG": "뼈다귀부메랑",
     "GROWL": "울음소리",
     "RELIC_SONG": "옛노래",
@@ -53,7 +53,7 @@
     "BLIZZARD": "눈보라",
     "CONFUSION": "혼란",
     "FIRE_BLAST": "불대문자",
-    "WHEEL_OF_FIRE": "화염자동차",
+    "WHEEL_OF_FIRE": "화염바퀴",
     "SEISMIC_TOSS": "지구던지기",
     "GUILLOTINE": "가위자르기",
     "ROCK_SLIDE": "스톤샤워",
@@ -72,7 +72,7 @@
     "ORIGIN_PULSE": "근원의파동",
     "SEED_FLARE": "시드플레어",
     "IRON_TAIL": "아이언테일",
-    "BLAST_BURN": "블러스트번",
+    "BLAST_BURN": "화염방사",
     "CHARGE": "충전",
     "DISCHARGE": "방전",
     "BITE": "물기",
@@ -89,7 +89,7 @@
     "STRING_SHOT": "실뿜기",
     "VENOSHOCK": "베놈쇼크",
     "LEECH_LIFE": "흡혈",
-    "HAPPY_HOUR": "해피타임",
+    "HAPPY_HOUR": "도우미",
     "TELEPORT": "순간이동",
     "NASTY_PLOT": "나쁜음모",
     "TAKE_HEART": "브레이브차지",
@@ -1429,6 +1429,7 @@
     "RARE_IS_EXPENSIVE": "경험치 구매 비용이 8골드가 됩니다. 포켓몬의 구매 및 판매가격이 1골드 더 싸집니다.",
     "GOTTA_CATCH_EM_ALL": "일부 포켓몬들은 PvE 라운드 이전에 잡을 수 있습니다.",
     "BUYER_FEVER": "상점에서의 진화가 이제 공짜입니다.",
+    "TECHNOLOGIC": "스테이지 3과 5에서는 3 아티팩트 중 1개를 택하세요.",
     "SIX_PACK": "레벨과는 무관하게 최대 6마리의 포켓몬만 배치할 수 있습니다.",
     "NINE_LIVES": "라운드에서 9번 패배할 시 탈락합니다.",
     "CROWDED": "보드에 놓을 수 있는 최대 포켓몬 마릿수 +3",
@@ -1437,14 +1438,17 @@
     "SHINY_HUNTER": "PVE에서 만나는 모든 야생포켓몬들이 모두 이로치가 됩니다."
   },
   "loading_hints": {
+    "tab_out": "이 탭을 벗어나지 마시오! 이 탭을 나갈 시 로딩이 중단됩니다.",
     "max_loading_time": "게임 시작시 로딩시간은 최대 5분입니다. 어찌되든 간에...",
     "disconnection_time": "3분 이상 연결이 끊긴 플레이어는 게임에서 추방됩니다. 6스테이지 이전에 추방당한 경우에는 Elo를 잃지 않아요.",
     "translation_project": "이 게임의 번역은 디스코드 구성원들이 하고 있습니다! 참가하고 싶으시다면 디스코드를 참조해주세요.",
+    "discord": "우리의 디스코드에 가입해서 커뮤티에서 의견을 주고 받으세요! 링크는 왼쪽 사이드 메뉴에!",
     "tipeee": "이 게임은 광고를 포함하고 있지 않으며 여러분들의 후원들로만 운영됩니다. 후원자분들 감사합니다 ♥",
     "bug_report": "버그를 발견하셨다고요? 디스코드로 와서 #bug-report 채널로 제보해주세요.",
     "moderation": "게임중 불건전한 행위를 감지했다면, 스크린샷을 찍어서 디스코드의 관리자에게 제보해주세요.",
     "berry_tree": "풀타입으로 플레이하시고 계신가요? 캐릭터 옆의 열매나무를 주시해주세요!",
     "spriters": "이 게임에 있는 애니메이션들 대부분은 각각의 예술가분들의 작품입니다. 커미션(작품제작 의뢰)를 받고 계신분들도 계시니, 여러분들도 많은 관심 부탁드립니다. 자세한 내용은 디스코드를 참조해주세요.",
+    "wiki": "이 게임은 왼쪽의 사이드 메뉴에 위키백과가 구비되어 있으니 챙겨보세요!",
     "avatar": "플레이어 아바타를 바꾸려면 게임을 플레이해서 XP를 얻어서 레벨을 올려야 합니다. 레벨을 올릴때마다 주는 부스터팩에는 콜렉션 메뉴에서 새로운 아바타를 구매할때 쓸 수 있는 조각을 얻을 수 있어요."
   }
 }
