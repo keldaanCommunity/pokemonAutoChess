@@ -82,6 +82,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
   rooms: RoomListingData<any>[] | undefined
   dispatcher: Dispatcher<this>
   tournamentCronJobs: Map<string, CronJob>
+  cleanUpCronJobs: CronJob[] = []
 
   constructor() {
     super()
@@ -115,6 +116,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     this.botLeaderboard = new Array<ILeaderboardBotInfo>()
     this.levelLeaderboard = new Array<ILeaderboardInfo>()
     this.tournamentCronJobs = new Map<string, CronJob>()
+    this.maxClients = 200
   }
 
   removeRoom(index: number, roomId: string) {
@@ -542,6 +544,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     try {
       logger.info("dispose lobby")
       this.dispatcher.stop()
+      this.cleanUpCronJobs.forEach((j) => j.stop())
       if (this.unsubscribeLobby) {
         this.unsubscribeLobby()
       }
@@ -717,6 +720,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       onTick: () => this.fetchLeaderboards(),
       start: true
     })
+    this.cleanUpCronJobs.push(leaderboardRefreshJob)
 
     const greatBallRankedLobbyJob = CronJob.from({
       cronTime: GREATBALL_RANKED_LOBBY_CRON,
@@ -729,6 +733,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       },
       start: true
     })
+    this.cleanUpCronJobs.push(greatBallRankedLobbyJob)
 
     const ultraBallRankedLobbyJob = CronJob.from({
       cronTime: ULTRABALL_RANKED_LOBBY_CRON,
@@ -741,6 +746,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       },
       start: true
     })
+    this.cleanUpCronJobs.push(ultraBallRankedLobbyJob)
 
     const scribbleLobbyJob = CronJob.from({
       cronTime: SCRIBBLE_LOBBY_CRON,
@@ -753,41 +759,44 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       },
       start: true
     })
+    this.cleanUpCronJobs.push(scribbleLobbyJob)
 
     // TEMP: auto clean up stale rooms
-    CronJob.from({
+    const staleJob = CronJob.from({
       cronTime: "*/1 * * * *", // every minute
       timeZone: "Europe/Paris",
       onTick: async () => {
         logger.debug(`Auto clean up stale rooms`)
         const query = await matchMaker.query({
+          // query all the available rooms
           private: false,
           unlisted: false
         })
 
         query.forEach((data) => {
           if (!this.rooms?.map((r) => r.roomId).includes(data.roomId)) {
+            // if the query room was not in this.rooms, add it
             this.addRoom(data.roomId, data)
           }
         })
         this.rooms?.forEach(async (room, roomIndex) => {
-          const { type, gameStartedAt } = room.metadata ?? {}
-          if (
-            (type === "preparation" &&
-              gameStartedAt != null &&
-              new Date(gameStartedAt).getTime() < Date.now() - 60000) ||
-            !query.map((r) => r.roomId).includes(room.roomId)
-          ) {
-            logger.debug(`Room ${room.roomId} is stale, deleting it`)
+          if (!query.map((r) => r.roomId).includes(room.roomId)) {
+            // if the room (this.rooms managed by subscribeLobby) was not in the query, delete it
+            //logger.debug(`Room ${room.roomId} is stale, deleting it`)
             try {
+              // Attempt to see if the room exit. If it exist, disconnect it
               const disconnection = await matchMaker.remoteRoomCall(
                 room.roomId,
                 "disconnect"
               )
-              logger.debug(disconnection)
+              //logger.debug(disconnection)
             } catch (error) {
-              logger.error(error)
-              this.presence.hdel("roomcaches", room.roomId)
+              //logger.error(error)
+              // The room does not exist.
+              if (!this.presence.hdel("roomcaches", room.roomId)) {
+                // Should i delete the whole cache ?
+                this.presence.del("roomcaches")
+              }
             } finally {
               this.removeRoom(roomIndex, room.roomId)
             }
@@ -797,8 +806,10 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       start: true
     })
 
+    this.cleanUpCronJobs.push(staleJob)
+
     // TEMP: force leave for clients in room > 10 min
-    CronJob.from({
+    const afkJob = CronJob.from({
       cronTime: "*/1 * * * *", // every minute
       timeZone: "Europe/Paris",
       onTick: async () => {
@@ -807,12 +818,13 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
             c.userData.joinedAt &&
             c.userData.joinedAt < Date.now() - 600000
           ) {
-            logger.info("force deconnection of user", c.id)
+            //logger.info("force deconnection of user", c.id)
             c.leave()
           }
         })
       },
       start: true
     })
+    this.cleanUpCronJobs.push(afkJob)
   }
 }
