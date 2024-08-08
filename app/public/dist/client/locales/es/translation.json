@@ -2474,12 +2474,6 @@
     "pull_requests": "las solicitudes de extracción están abiertas",
     "faq": "PREGUNTAS MÁS FRECUENTES."
   },
-  "tutorial": {
-    "start": "¿Cómo iniciar un juego?",
-    "friends": "¿Cómo hacer un lobby con amigos?",
-    "screen": "Explicación de la pantalla del juego",
-    "tips": "5 consejos para Pokemon AutoChess"
-  },
   "yes": "Sí",
   "no": "No",
   "title_label": "Título",

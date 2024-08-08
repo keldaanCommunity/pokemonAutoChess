@@ -2483,12 +2483,6 @@
     "pull_requests": "pull requests are open",
     "faq": "F.A.Q."
   },
-  "tutorial": {
-    "start": "How to start a game ?",
-    "friends": "How to start a game with friends ?",
-    "screen": "Game Screen explained",
-    "tips": "5 Tips for Pokemon AutoChess"
-  },
   "yes": "Yes",
   "no": "No",
   "title_label": "Title",
@@ -2769,7 +2763,7 @@
   "invalid": "Invalid",
   "others": "Others",
   "thanks_to": "Thanks to",
-  "tutorial_work": "for his work on tutorial videos !",
+  "tutorial_work": "for their work on tutorial videos !",
   "all": "All",
   "weather_dominant_hint": "The dominant type of Pokémons on the board during a battle can influence the weather. The weather has various effects on all of your team's and opponent's Pokémons.",
   "weather_dominant_hint2": "It will require a certain number of Pokémons of this type on the board to change the weather. Some powerful Pokémons also have the ability to change weather by their own.",
