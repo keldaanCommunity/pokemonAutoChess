@@ -12969,6 +12969,9 @@ export class Milotic extends Pokemon {
   range = 2
   skill = Ability.ATTRACT
   attackSprite = AttackSprite.FAIRY_RANGE
+  onAcquired(player: Player) {
+    player.titles.add(Title.SIREN)
+  }
 }
 
 export class Dewpider extends Pokemon {
@@ -14482,6 +14485,9 @@ export class WishiwashiSchool extends Pokemon {
   range = 1
   skill = Ability.SCHOOLING
   attackSprite = AttackSprite.WATER_MELEE
+  onAcquired(player: Player) {
+    player.titles.add(Title.FEARSOME)
+  }
 }
 
 export const PokemonClasses: Record<
