@@ -18,7 +18,7 @@ export function PokemonTypeahead({
 
   return (
     <select value={value} onChange={(e) => onChange((e.target?.value as Pkm) ?? "")} className="pokemon-typeahead">
-      <option value="" disabled selected>{t("search_pokemon")}</option>
+      <option value="" disabled>{t("search_pokemon")}</option>
       <option value="">{t("all")}</option>
       {pokemonOptions.map((p) => (
         <option key={p} value={p}>{t("pkm." + p)}</option>
