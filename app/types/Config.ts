@@ -70,10 +70,10 @@ export const ExpTable: { [key: number]: number } = Object.freeze({
   2: 2,
   3: 6,
   4: 10,
-  5: 20,
-  6: 32,
-  7: 50,
-  8: 70,
+  5: 22,
+  6: 34,
+  7: 52,
+  8: 72,
   9: 255
 })
 
@@ -671,7 +671,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.GOLD_BOTTLE_CAP]: {},
   [Item.SACRED_ASH]: {},
   [Item.COMET_SHARD]: { [Stat.ATK]: 10 },
-  [Item.ABSORB_BULB]: { [Stat.DEF]: 10, [Stat.SPE_DEF]: 10 },
+  [Item.ABSORB_BULB]: { [Stat.DEF]: 8, [Stat.SPE_DEF]: 8 },
   [Item.WHITE_FLUTE]: {},
   [Item.DAMP_ROCK]: {},
   [Item.ICY_ROCK]: {},
@@ -728,5 +728,7 @@ export const DUST_PER_SHINY = 250
 
 export const TOURNAMENT_REGISTRATION_TIME = 60 * 60 * 1000 // 1 hour
 export const TOURNAMENT_CLEANUP_DELAY = 24 * 60 * 60 * 1000 // 1 day
+
+export const MAX_SIMULATION_DELTA_TIME = 50 // milliseconds
 
 export { EloRank }

@@ -1764,9 +1764,9 @@
     "RUN_AWAY": "+50% ATK et vitesse de déplacement",
     "HUSTLE": "+80% ATK et vitesse de déplacement,",
     "BERSERK": "+100% ATK et vitesse de déplacement. Vos pokémons deviennent RAGE 5 secondes plus tôt.",
-    "FLUID": "L'équipe gagne 2% ATK_SPEED et 5 HP par synergie unique active",
-    "SHAPELESS": "L'équipe gagne 4% ATK_SPEED et 10 HP par synergie unique active",
-    "ETHEREAL": "L'équipe gagne 6% ATK_SPEED et 15 HP par synergie unique active"
+    "FLUID": "L'équipe gagne 1% ATK_SPEED et 4 HP par synergie unique active",
+    "SHAPELESS": "L'équipe gagne 3% ATK_SPEED et 8 HP par synergie unique active",
+    "ETHEREAL": "L'équipe gagne 5% ATK_SPEED et 12 HP par synergie unique active"
   },
   "item": {
     "FOSSIL_STONE": "Fossile Dome",
@@ -1978,14 +1978,14 @@
     "SUPER_ROD": "Après chaque tour PvP, pêche un Pokémon qui est ajouté à un emplacement libre de votre banc. Peut attraper des Pokémons WATER épiques ainsi que des Barpau.",
     "DYNAMAX_BAND": "Au début du combat, augmente les HP max du porteur de 300%",
     "GOLDEN_ROD": "Après chaque tour PvP, pêche un Pokémon qui est ajouté à un emplacement libre de votre banc. Peut attraper des Pokémons uniques ou correspondant à votre synergie principale.",
-    "SHINY_STONE": "Donne +3 à la synergie LIGHT et invoque un second spot de lumière sur la case du porteur",
+    "SHINY_STONE": "Donne +2 à la synergie LIGHT et invoque un second spot de lumière sur la case du porteur",
     "RARE_CANDY": "Après chaque tour, si le porteur peut évoluer, invoque une copie 1 STAR de celui-ci sur votre banc (sauf Unique, Légendaire et éclos)",
     "EVIOLITE": "Peut seulement être porté par un Pokémon qui n'est pas pleinement évolué. Empêche celui-ci d'évoluer.",
     "WHITE_FLUTE": "Invoque 3 Pokémons WILD autour du porteur au début du combat. La rareté et le niveau augmentent de tour en tour.",
     "GOLD_BOTTLE_CAP": "+1% CRIT_CHANCE et CRIT_POWER par GOLD en votre possession. Gagnez 1 GOLD par KO, et un jackpot de 5 GOLD si le porteur élimine le dernier ennemi.",
     "ABSORB_BULB": "Tous les dégâts réduits sont absorbés par le bulbe. Une fois sous les 50% de HP, le bulbe explose, infligeant tous les dégâts absorbés en SPECIAL aux ennemis adjacents ",
     "SACRED_ASH": "Octroie RESURECTION. Après résurrection, jusqu'à 3 alliés KO sont ressuscités également, mais sans leurs objets.",
-    "COMET_SHARD": "Au début du combat, plonge tel une comète sur l'ennemi dans le coin opposé du plateau, infligeant 100 SPECIAL et gagnant PROTECT pendant 2 secondes.",
+    "COMET_SHARD": "Au début du combat, plonge tel une comète sur l'ennemi dans le coin opposé du plateau, infligeant 300% de son ATK en SPECIAL et gagnant PROTECT pendant 3 secondes.",
     "DAMP_ROCK": "Donne la synergie WATER et compte pour 3 pour la RAIN. Peut seulement être porté par des Pokémons ROCK.",
     "ICY_ROCK": "Donne la synergie ICE et compte pour 3 pour SNOW. Peut seulement être porté par des Pokémons ROCK.",
     "HEAT_ROCK": "Donne la synergie FIRE et compte pour 3 pour SUN. Peut seulement être porté par des Pokémons ROCK.",
@@ -2474,12 +2474,6 @@
     "pull_requests": "les pull requests sont ouvertes",
     "faq": "FAQ."
   },
-  "tutorial": {
-    "start": "Comment démarrer une partie ?",
-    "friends": "Comment faire un lobby entre amis ?",
-    "screen": "Écran de jeu expliqué",
-    "tips": "5 conseils pour Pokemon AutoChess"
-  },
   "yes": "Oui",
   "no": "Non",
   "title_label": "Titres",
@@ -2752,7 +2746,7 @@
   "invalid": "Invalide",
   "others": "Autres",
   "thanks_to": "Merci à",
-  "tutorial_work": "pour son travail sur les vidéos tutoriels !",
+  "tutorial_work": "pour leur travail sur les vidéos tutoriels !",
   "all": "Tous",
   "weather_dominant_hint": "Le type dominant de pokémons sur le plateau pendant une bataille peut influencer la météo. La météo a divers effets sur tous les pokémons de votre équipe et de vos adversaires.",
   "weather_dominant_hint2": "Il faudra un certain nombre de pokémons de ce type sur le plateau pour changer la météo. Certains pokémons puissants ont également la capacité de changer la météo par eux-mêmes.",

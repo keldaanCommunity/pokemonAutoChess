@@ -4365,7 +4365,7 @@ export class Butterfree extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG, Synergy.FLYING])
   rarity = Rarity.COMMON
   stars = 3
-  hp = 200
+  hp = 180
   atk = 16
   def = 2
   speDef = 3
@@ -4409,7 +4409,7 @@ export class Beedrill extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.POISON, Synergy.BUG, Synergy.FLYING])
   rarity = Rarity.COMMON
   stars = 3
-  hp = 200
+  hp = 180
   atk = 18
   def = 2
   speDef = 2
@@ -9441,17 +9441,13 @@ export class Wailord extends Pokemon {
 }
 
 export class Dreepy extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.DRAGON,
-    Synergy.GHOST,
-    Synergy.AMORPHOUS
-  ])
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.DRAKLOAK
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 90
-  atk = 5
+  atk = 6
   def = 3
   speDef = 3
   maxPP = 100
@@ -9462,17 +9458,13 @@ export class Dreepy extends Pokemon {
 }
 
 export class Drakloak extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.DRAGON,
-    Synergy.GHOST,
-    Synergy.AMORPHOUS
-  ])
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.DRAGAPULT
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 140
-  atk = 12
+  atk = 15
   def = 3
   speDef = 3
   maxPP = 100
@@ -9483,15 +9475,11 @@ export class Drakloak extends Pokemon {
 }
 
 export class Dragapult extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.DRAGON,
-    Synergy.GHOST,
-    Synergy.AMORPHOUS
-  ])
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
   rarity = Rarity.HATCH
   stars = 3
   hp = 190
-  atk = 22
+  atk = 26
   def = 3
   speDef = 3
   maxPP = 100
@@ -11556,8 +11544,8 @@ export class Exeggutor extends Pokemon {
   stars = 2
   hp = 300
   atk = 20
-  def = 4
-  speDef = 4
+  def = 5
+  speDef = 5
   maxPP = 100
   range = 1
   skill = Ability.EGGSPLOSION
@@ -11572,11 +11560,11 @@ export class AlolanExeggutor extends Pokemon {
     Synergy.PSYCHIC
   ])
   rarity = Rarity.EPIC
-  stars = 3
+  stars = 2
   hp = 350
   atk = 24
-  def = 5
-  speDef = 5
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.EGGSPLOSION
@@ -13576,7 +13564,7 @@ export class Wattrel extends Pokemon {
   atk = 9
   def = 3
   speDef = 3
-  maxPP = 80
+  maxPP = 100
   range = 2
   skill = Ability.SPARK
   attackSprite = AttackSprite.ELECTRIC_RANGE
@@ -13592,7 +13580,7 @@ export class Kilowattrel extends Pokemon {
   atk = 19
   def = 4
   speDef = 4
-  maxPP = 80
+  maxPP = 100
   range = 2
   skill = Ability.SPARK
   attackSprite = AttackSprite.ELECTRIC_RANGE
@@ -14430,10 +14418,7 @@ export class Stonjourner extends Pokemon {
 }
 
 export class Cramorant extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.FLYING,
-    Synergy.AQUATIC
-  ])
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.AQUATIC])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
@@ -14447,9 +14432,7 @@ export class Cramorant extends Pokemon {
 }
 
 export class Arrokuda extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WATER
-  ])
+  types = new SetSchema<Synergy>([Synergy.WATER])
   rarity = Rarity.SPECIAL
   stars = 1
   hp = 80

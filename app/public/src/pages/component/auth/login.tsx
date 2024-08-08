@@ -63,9 +63,7 @@ export default function Login() {
   } else {
     return (
       <div id="play-panel">
-        <p className="welcome-text">
-          {t("welcome")} {displayName}
-        </p>
+        <p>{t("authenticated_as")}: <span title={displayName}>{t("hover_to_reveal")}</span></p>
         <ul className="actions">
           <li>
             <Link className="bubbly green" to={"/lobby"}>
