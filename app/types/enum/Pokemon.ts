@@ -5979,9 +5979,9 @@ export const AnimationConfig: {
     emote: AnimationType.Charge
   },
   [Pkm.DRACOVISH]: {
-    attack: AnimationType.Idle, // TEMP while waiting for anims to be drawn
-    ability: AnimationType.Idle, // TEMP while waiting for anims to be drawn
-    emote: AnimationType.Idle, // TEMP while waiting for anims to be drawn,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Hop,
     shinyUnavailable: true
   },
   [Pkm.CORSOLA]: {
@@ -6624,7 +6624,7 @@ export const AnimationConfig: {
   [Pkm.KLEFKI]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Attack
   },
   [Pkm.RUFFLET]: {
     attack: AnimationType.Attack,

@@ -1764,9 +1764,9 @@
     "RUN_AWAY": "+50% ATK y velocidad de movimiento",
     "HUSTLE": "+80% ATK y velocidad de movimiento",
     "BERSERK": "+100% ATK y velocidad de movimiento, RAGE 5 segundos antes",
-    "FLUID": "El equipo gana 2% ATK_SPEED and 5 HP por cada sinergia activa.",
-    "SHAPELESS": "El equipo gana 4% ATK_SPEED y 10 HP por cada sinergia activa.",
-    "ETHEREAL": "El equipo gana 6% ATK_SPEED y 15 HP por cada sinergia activa."
+    "FLUID": "El equipo gana 1% ATK_SPEED and 4 HP por cada sinergia activa.",
+    "SHAPELESS": "El equipo gana 3% ATK_SPEED y 8 HP por cada sinergia activa.",
+    "ETHEREAL": "El equipo gana 5% ATK_SPEED y 12 HP por cada sinergia activa."
   },
   "item": {
     "FOSSIL_STONE": "Piedra Fósil",
@@ -1978,14 +1978,14 @@
     "SUPER_ROD": "Después de cada ronda JcJ, pesca un Pokémon que luego se agrega a un espacio libre en tu banco. Puede atrapar Pokémon épicos de WATER  y a Feebas.",
     "DYNAMAX_BAND": "Al comienzo de la pelea, aumenta el HP máximo en un 300%.",
     "GOLDEN_ROD": "Después de cada ronda JcJ, pesca un Pokémon que luego se agrega a un espacio libre en tu banco. Puedes atrapar Pokémon únicos o Pokémon que coincidan con tu sinergia principal. Cuando se usa en un Pokémon, recupera todos los objetos que tiene en tu inventario de jugador.",
-    "SHINY_STONE": "Da +3 a la sinergia LIGHT y genera un segundo punto de luz en la celda del pokémon.",
+    "SHINY_STONE": "Da +2 a la sinergia LIGHT y genera un segundo punto de luz en la celda del pokémon.",
     "RARE_CANDY": "Después de cada ronda, si el poseedor puede evolucionar, genera una copia 1 STAR en el banco (excepto Único y Legendary y Eclosionado)",
     "EVIOLITE": "Sólo lo pueden tener Pokémon que no estén completamente evolucionados. Impide que el titular evolucione.",
     "WHITE_FLUTE": "Genera 3 Pokémon WILD alrededor del poseedor al comienzo de la pelea. La rareza y el nivel aumentan con el nivel del escenario.",
     "GOLD_BOTTLE_CAP": "+1% CRIT_CHANCE y CRIT_POWER por GOLD que tengas. Obtén 1 GOLD por KO, y un premio de 5 GOLD si elimina al ultimo enemigo.",
     "ABSORB_BULB": "Toda la reducción de daño es absorbida por el tubérculo. Una vez pasados los 50% HP, el tubérculo explota, infligiendo todo el daño absorbido a las unidades enemigas adyacentes como SPECIAL.",
     "SACRED_ASH": "Da RESURECTION. Después de revivir, hasta 3 aliados ya noqueados son revividos también, pero sin objetos.",
-    "COMET_SHARD": "Empieza la ronda lanzándose como un cometa sobre un enemigo en el lado opuesto del tablero, infligiendo 100 SPECIAL y obteniendo PROTECT por 2 segundos.",
+    "COMET_SHARD": "Empieza la ronda lanzándose como un cometa sobre un enemigo en el lado opuesto del tablero, infligiendo 300% ATK como SPECIAL y obteniendo PROTECT por 3 segundos.",
     "DAMP_ROCK": "Da sinergia WATER y cuenta por 3 para RAIN. Sólo se puede usar en Pokémon ROCK",
     "ICY_ROCK": "Da sinergia ICE y cuenta por 3 para SNOW. Sólo se puede usar en Pokémon ROCK",
     "HEAT_ROCK": "Da sinergia FIRE y cuenta por 3 para SUN. Sólo se puede usar en Pokémon ROCK",
@@ -2473,12 +2473,6 @@
     "code_answer": "TypeScript, Phaser, Coliseo. Si quieres contribuir",
     "pull_requests": "las solicitudes de extracción están abiertas",
     "faq": "PREGUNTAS MÁS FRECUENTES."
-  },
-  "tutorial": {
-    "start": "¿Cómo iniciar un juego?",
-    "friends": "¿Cómo hacer un lobby con amigos?",
-    "screen": "Explicación de la pantalla del juego",
-    "tips": "5 consejos para Pokemon AutoChess"
   },
   "yes": "Sí",
   "no": "No",
