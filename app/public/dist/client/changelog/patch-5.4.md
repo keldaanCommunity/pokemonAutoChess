@@ -19,14 +19,23 @@
 - Buff Primal Kyogre: PP 120 → 100
 - Change Seed Flare (Shaymin): now deals damage in a 5-cell radius around Shaymin
 - Changed Eruption (Numel): Lava projectiles spreads over time (over a few seconds)
+- Changed Dreepy: removed Amorphous type, Attack 5/12/22 → 6/15/26
+- Nerf Wattrel line: PP 80 → 100
+- Nerf Butterfree: HP 200 → 180
+- Nerf Beedrill: HP: 200 → 180
+- Alolan Exeggutor is now tier 2, Def/Spedef 5/5 → 3/3
 
 # Changes to Synergies
 
 - Buff Fairy: ~~10/20/30/40~~ 15/30/50/70% additional special damage to attacks and shocks. Shocks damage are now a percentage of the incoming critical damage, 30% initially.
+- Nerf Amorphous: HP: 5/10/15 → 4/8/12, Attack speed : 2%/4%/6% > 1%/3%/5%
 
 # Changes to Items
 
 - Pokemonomicon no longer applies Wound
+- Nerf Absorb Bulb: Def/Spedef: 10 → 8
+- Nerf Shiny Stone: +3 → +2 to Light synergy
+- Changed Comet Shard: damage 100 flat → 300% ATK, protect time 2 → 3 seconds
 
 # Gameplay
 
@@ -34,6 +43,8 @@
 - Attacks and abilities now have a frame delay specific to each pokemon before damage and effects are applied
 - Projectiles now have travel time
 - Increased preparation phase duration for rounds 3, 5, 8, 9, 11, 15 and 19: ~~30~~ 40 seconds ; for rounds 10 and 20: ~~45~~ 50 seconds
+- Increase experience cost for level 6,7,8,9 by 2
+- Reduce sleep duration reduction when taking a hit: 500ms → 300ms
 
 # UI
 
@@ -48,6 +59,7 @@
 # Bugfix
 
 - Regional lists was not correctly updated when picking an additional pick with a regional variant
+- Fixed Ghost curses status afflictions not reapplied correctly after status is cleared
 
 # Misc
 
