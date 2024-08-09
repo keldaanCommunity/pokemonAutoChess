@@ -26,6 +26,7 @@
 - Nerf Butterfree: HP 200 → 180
 - Nerf Beedrill: HP: 200 → 180
 - Alolan Exeggutor is now tier 2, Def/Spedef 5/5 → 3/3
+- Nerf Dive (Lapras, Wailord): Freeze duration 1.5 → 1 second, damage: 15/30/60 → 15/30/50
 
 # Changes to Synergies
 

@@ -3120,8 +3120,8 @@ export class DiveStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 3 ? 60 : pokemon.stars === 2 ? 30 : 15
-    const freezeDuration = 1500
+    const damage = pokemon.stars === 3 ? 50 : pokemon.stars === 2 ? 30 : 15
+    const freezeDuration = 1000
     const mostSurroundedCoordinate =
       state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
 

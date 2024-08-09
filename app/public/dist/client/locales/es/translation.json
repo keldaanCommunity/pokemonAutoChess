@@ -1296,7 +1296,7 @@
     "SACRED_SWORD": "Hace [100,SP] de TRUE al objetivo",
     "PSYCHIC": "Inflige [50,100,200,SP] de SPECIAL y consume 15 PP al objetivo y enemigos adyacentes",
     "PSYBEAM": "Inflige [25,50,100,SP] de SPECIAL a todos los enemigos detrás del objetivo con un 50% de probabilidad de dejarlo CONFUSION durante 4 segundos",
-    "DIVE": "Se sumerge bajo el agua y gana [50,SP] SHIELD, luego reaparece en medio del equipo enemigo, infligiendo [15,30,60,SP] de SPECIAL y dejando FREEZE a todas las unidades adyacentes durante 1,5 segundos.",
+    "DIVE": "Se sumerge bajo el agua y gana [50,SP] SHIELD, luego reaparece en medio del equipo enemigo, infligiendo [15,30,50,SP] de SPECIAL y dejando FREEZE a todas las unidades adyacentes durante 1 segundos.",
     "SPIKE_ARMOR": "Durante [3,5,10] segundos, los objetivos que atacan cuerpo a cuerpo a este Pokémon quedan WOUND y reciben SPECIAL equivalente al [100,SP]% de la DEF actual",
     "FUTURE_SIGHT": "Causa [15,30,60,SP] de SPECIAL a 5 enemigos",
     "FAKE_TEARS": "Causa [3,6,9,SP] de SPECIAL a todo el equipo enemigo y activa ARMOR_REDUCTION durante 3 segundos",
