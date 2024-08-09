@@ -8082,7 +8082,7 @@ export class MultiAttackStrategy extends AbilityStrategy {
     if (synergies && silvallyType && synergies.has(silvallyType)) {
       synergyLevelCount = synergies.get(silvallyType)!
     }
-    const damage = 10 * synergyLevelCount
+    const damage = 15 * synergyLevelCount
 
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)

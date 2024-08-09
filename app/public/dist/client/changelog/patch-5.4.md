@@ -31,6 +31,7 @@
 - Buff Lovely Kiss (Jynx): if already asleep, deal 50/100/150 special damage
 - Buff Aurora Beam (Iron Bundle, Dewgong): doubled freeze chance
 - Buff Alolan Rattata: Attack 4/10 → 6/15
+- Changed Silvally: no longer Wild, MultiAttack: 10 → 15 x synergy level special damage
 
 
 # Changes to Synergies

@@ -1477,7 +1477,7 @@
     "AROMATHERAPY": "Supprime les effets négatfs de statut des alliés adjacents et les soigne de [20,40,80,SP] HP",
     "DETECT": "Donne PROTECT aux alliés adjacents pendant [500,SP] ms mutiplié par le nombre d'ennemis adjacents",
     "SPACIAL_REND": "Inverse les position des unités ennemies, puis inflige [100,SP] SPECIAL à tous les ennemis d'une rangée",
-    "MULTI_ATTACK": "Inflige [10,SP] SPECIAL aux ennemis adjacents, multiplié par le niveau de synergie de la forme actuelle de $t(pkm.SILVALLY)",
+    "MULTI_ATTACK": "Inflige [15,SP] SPECIAL aux ennemis adjacents, multiplié par le niveau de synergie de la forme actuelle de $t(pkm.SILVALLY)",
     "STICKY_WEB": "Inflige [20,35,70,SP] SPECIAL à la cible et projette une toile autour d'elle. Les adversaires marchant sur la toile subissent PARALYSIS pendant 2 secondes.",
     "ACCELEROCK": "Saute à côté de l'ennemi le plus lointain et l'attaque immédiatement, infligeant [100,SP]% de l'ATK en SPECIAL. Dans la foulée, perd jusqu'à [5,SP] DEF et gagne 5% ATK_SPEED pour chaque point de DEF perdu.",
     "PETAL_BLIZZARD": "Inflige [30,SP] aux ennemis adjacents et gagne 10 de AP",

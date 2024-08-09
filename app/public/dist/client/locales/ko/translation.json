@@ -1389,7 +1389,7 @@
     "NIGHT_SLASH": "대상에 [15,30,60,SP] SPECIAL를 가한다. 치명타가 터질 수 있다.",
     "SHIELDS_DOWN": "메테노가 무작위 색깔의 코어의 모습으로 변신한다.",
     "SHIELDS_UP": "메테노가 운석의 모습으로 변화한다.",
-    "MULTI_ATTACK": "주변의 적들에 [10,SP]SPECIAL 을 가한다. 이 값은 현재 $t(pkm.SILVALLY)의 폼의 시너지 레벨만큼 곱해진다.",
+    "MULTI_ATTACK": "주변의 적들에 [15,SP]SPECIAL 을 가한다. 이 값은 현재 $t(pkm.SILVALLY)의 폼의 시너지 레벨만큼 곱해진다.",
     "CAMERA_FLASH": "대상을 [2,SP] 초간 PARALYSIS 상태로 만든다.",
     "GRAVITY": "적팀을 [2,SP]초간 LOCKED상태로 만든다."
   },
