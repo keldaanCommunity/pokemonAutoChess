@@ -1,16 +1,16 @@
 import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
 import { CronTime } from "cron"
 import { nanoid } from "nanoid"
+import { SpecialGamePlannedSchema } from "../../models/colyseus-models/lobby"
 import LobbyUser from "../../models/colyseus-models/lobby-user"
 import Message from "../../models/colyseus-models/message"
 import { TournamentSchema } from "../../models/colyseus-models/tournament"
-import { SpecialGamePlannedSchema } from "../../models/colyseus-models/lobby"
 import chatV2 from "../../models/mongo-models/chat-v2"
 import tournament from "../../models/mongo-models/tournament"
 import {
   GREATBALL_RANKED_LOBBY_CRON,
-  ULTRABALL_RANKED_LOBBY_CRON,
-  SCRIBBLE_LOBBY_CRON
+  SCRIBBLE_LOBBY_CRON,
+  ULTRABALL_RANKED_LOBBY_CRON
 } from "../../types/Config"
 import { EloRank } from "../../types/enum/EloRank"
 import { GameMode } from "../../types/enum/Game"
@@ -23,6 +23,7 @@ export default class LobbyState extends Schema {
   @type(SpecialGamePlannedSchema) nextSpecialGame: ISpecialGamePlanned | null =
     null
   @type([TournamentSchema]) tournaments = new ArraySchema<TournamentSchema>()
+  @type("int32") ccu = 0
 
   addMessage(
     payload: string,

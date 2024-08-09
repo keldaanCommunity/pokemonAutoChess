@@ -70,6 +70,8 @@ import {
 } from "./commands/lobby-commands"
 import LobbyState from "./states/lobby-state"
 
+const MAX_CCU = 1000
+
 export default class CustomLobbyRoom extends Room<LobbyState> {
   discordWebhook: WebhookClient | undefined
   discordBanWebhook: WebhookClient | undefined
@@ -162,6 +164,11 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     this.state.getNextSpecialGame()
     this.autoDispose = false
     this.listing.unlisted = true
+
+    this.clock.setInterval(async () => {
+      const ccu = await matchMaker.stats.getGlobalCCU()
+      this.state.ccu = ccu
+    }, 1000)
 
     this.unsubscribeLobby = await subscribeLobby((roomId, data) => {
       if (this.rooms) {
@@ -519,6 +526,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         throw "No display name"
       } else if (isBanned) {
         throw "User banned"
+      } else if (this.state.ccu > MAX_CCU) {
+        throw "Maximum capacity reached"
       } else {
         return user
       }

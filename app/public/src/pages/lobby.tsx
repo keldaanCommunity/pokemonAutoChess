@@ -47,6 +47,7 @@ import {
   setBotData,
   setBotLeaderboard,
   setBotList,
+  setCcu,
   setLanguage,
   setLeaderboard,
   setLevelLeaderboard,
@@ -245,6 +246,10 @@ export async function joinLobbyRoom(
           })
           room.state.messages.onRemove((m) => {
             dispatch(removeMessage(m))
+          })
+
+          room.state.listen("ccu", (value) => {
+            dispatch(setCcu(value))
           })
 
           room.state.tournaments.onAdd((tournament) => {

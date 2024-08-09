@@ -21,6 +21,7 @@ async function main() {
     processNumber === 0 && matchMaker.createRoom("lobby", {})
   } else {
     await listen(app, 9000)
+    matchMaker.setHealthChecksEnabled(false)
     matchMaker.createRoom("lobby", {})
   }
 }

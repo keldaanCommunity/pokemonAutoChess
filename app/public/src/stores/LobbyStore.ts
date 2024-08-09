@@ -1,9 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { RoomAvailable } from "colyseus.js"
-import {
-  ILeaderboardBotInfo,
-  ILeaderboardInfo
-} from "../../../types/interfaces/LeaderboardInfo"
 import LobbyUser, {
   ILobbyUser
 } from "../../../models/colyseus-models/lobby-user"
@@ -22,8 +18,12 @@ import {
   PkmWithConfig
 } from "../../../types"
 import { Language } from "../../../types/enum/Language"
-import { MAX_BOTS_STAGE } from "../pages/component/bot-builder/bot-logic"
+import {
+  ILeaderboardBotInfo,
+  ILeaderboardInfo
+} from "../../../types/interfaces/LeaderboardInfo"
 import { ISpecialGamePlanned } from "../../../types/interfaces/Lobby"
+import { MAX_BOTS_STAGE } from "../pages/component/bot-builder/bot-logic"
 
 export interface IUserLobbyState {
   botLogDatabase: string[]
@@ -46,9 +46,11 @@ export interface IUserLobbyState {
   language: Language
   nextSpecialGame: ISpecialGamePlanned | null
   tournaments: TournamentSchema[]
+  ccu: number
 }
 
 const initialState: IUserLobbyState = {
+  ccu: 0,
   language: Language.en,
   botLogDatabase: [],
   suggestions: [],
@@ -85,6 +87,9 @@ export const lobbySlice = createSlice({
   name: "lobby",
   initialState: initialState,
   reducers: {
+    setCcu: (state, action: PayloadAction<number>) => {
+      state.ccu = action.payload
+    },
     pushBotLog: (state, action: PayloadAction<string>) => {
       state.botLogDatabase.push(action.payload)
     },
@@ -337,7 +342,8 @@ export const {
   changeTournamentPlayer,
   addTournamentBracket,
   removeTournamentBracket,
-  changeTournamentBracket
+  changeTournamentBracket,
+  setCcu
 } = lobbySlice.actions
 
 export default lobbySlice.reducer
