@@ -1642,6 +1642,11 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
+    case Ability.DOUBLE_SHOCK:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
     case Ability.MIND_BLOWN:
       addAbilitySprite(skill, coordinates, true).setOrigin(0.5, 0.8).setScale(2)
       break
