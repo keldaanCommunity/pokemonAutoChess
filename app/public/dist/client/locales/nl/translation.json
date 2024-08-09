@@ -916,7 +916,7 @@
     "APPLE_ACID": "Biedt [15,30,60,SP] SPECIAL naar de doelwitten vooraan en verlaagt hun DEF en SPE_DEF met [5,SP] punten",
     "SACRED_SWORD": "Biedt [100,SP] TRUE aan het doelwit",
     "PSYCHIC": "Deelt [50,100,200,SP] SPECIAL uit en verbrandt 15 PP aan het doelwit en aangrenzende vijanden",
-    "DIVE": "Duikt onder water en krijgt [50,SP] SHIELD, verschijnt dan weer midden in het vijandelijke team en deelt gedurende 1,5 seconde [15,30,60,SP] SPECIAL en FREEZE uit aan alle aangrenzende eenheden",
+    "DIVE": "Duikt onder water en krijgt [50,SP] SHIELD, verschijnt dan weer midden in het vijandelijke team en deelt gedurende 1 seconde [15,30,50,SP] SPECIAL en FREEZE uit aan alle aangrenzende eenheden",
     "SPIKE_ARMOR": "Gedurende [3,5,10] seconden krijgen doelwitten die melee aanvallen deze Pokémon WOUND en SPECIAL gelijk aan [100,SP]% van de huidige DEF",
     "FUTURE_SIGHT": "Geeft [15,30,60,SP] SPECIAL aan 5 vijanden",
     "FAKE_TEARS": "Deelt [3,6,9,SP] SPECIAL uit voor het hele vijandelijke team en activeer ARMOR_REDUCTION voor 3s",
@@ -1718,12 +1718,6 @@
     "code_answer": "TypeScript, Phaser, Colyseus. Als je wilt bijdragen",
     "pull_requests": "pull-aanvragen zijn open",
     "faq": "FAQ."
-  },
-  "tutorial": {
-    "start": "Hoe start je een spel?",
-    "friends": "Hoe maak je een lobby met vrienden?",
-    "screen": "Spelscherm uitgelegd",
-    "tips": "5 Tips voor Pokémon AutoChess"
   },
   "yes": "Ja",
   "no": "Nee",

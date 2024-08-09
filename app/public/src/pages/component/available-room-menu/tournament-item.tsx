@@ -49,7 +49,10 @@ export default function TournamentItem(props: {
 
   return (
     <div className="tournament-item my-box">
-      <span className="tournament-name">{props.tournament.name}</span>
+      <span className="tournament-name">
+        <img width="32" height="32" src="assets/ui/tournament.svg" style={{ marginRight: "0.5em", verticalAlign: "text-bottom" }} />
+        {props.tournament.name}
+      </span>
       {tournamentFinished ? (
         <div>{getTournamentStage(props.tournament)}</div>
       ) : tournamentStarted ? (
@@ -85,11 +88,10 @@ export default function TournamentItem(props: {
             >
               {t("participating")}
             </button>
-          ) : (
+          ) : registrationsOpen ? (
             <button
               className="participate-btn bubbly blue"
               title={t("register_tournament_participation")}
-              disabled={!registrationsOpen}
               onClick={() => {
                 dispatch(
                   participateInTournament({
@@ -101,7 +103,7 @@ export default function TournamentItem(props: {
             >
               {t("participate")}
             </button>
-          )}
+          ) : null}
         </div>
       )}
       <Tabs>

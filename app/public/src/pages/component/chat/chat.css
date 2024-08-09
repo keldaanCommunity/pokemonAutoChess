@@ -5,8 +5,7 @@
   align-items: stretch;
 }
 
-#root .user-chat h1 {
-  color: white;
+.user-chat h2 {
   text-align: center;
 }
 

@@ -8,30 +8,21 @@ export default function WikiTutorials() {
       <ul>
         <li className="my-box">
           <iframe
-            src="https://www.youtube.com/embed/Uq-r48kV0t0"
+            src="https://www.youtube.com/embed/wU8tzabmvJo"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
           ></iframe>
-          <h3>{t("tutorial.start")}</h3>
+          <h3>Learn the basics</h3>
         </li>
         <li className="my-box">
           <iframe
-            src="https://www.youtube.com/embed/E_vvXdHosXg"
+            src="https://www.youtube.com/embed/3LJbX2v6ba8"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
           ></iframe>
-          <h3>{t("tutorial.friends")}</h3>
-        </li>
-        <li className="my-box">
-          <iframe
-            src="https://www.youtube.com/embed/LCU5oSyZagw"
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>
-          <h3>{t("tutorial.screen")}</h3>
+          <h3>Official Trailer</h3>
         </li>
         <li className="my-box">
           <iframe
@@ -40,11 +31,17 @@ export default function WikiTutorials() {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
           ></iframe>
-          <h3>{t("tutorial.tips")}</h3>
+          <h3>5 Tips for Pokemon Auto Chess</h3>
         </li>
       </ul>
       <p>
         {t("thanks_to")}&nbsp;
+        <a href="https://www.youtube.com/ProperGoodGames" target="_blank">
+          ProperGoodGames
+        </a>{", "}
+        <a href="https://www.youtube.com/@PokePlagued" target="_blank">
+          Plagued
+        </a>{", "}
         <a href="https://www.youtube.com/@batotsu2751" target="_blank">
           Batotsu
         </a>{" "}

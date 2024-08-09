@@ -2324,6 +2324,10 @@ export function displayAbility(
       break
     }
 
+    case Ability.SCHOOLING:
+      addAbilitySprite(skill, coordinates, true).setDepth(0).setScale(4)
+      break
+
     case Ability.STONE_AXE:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break

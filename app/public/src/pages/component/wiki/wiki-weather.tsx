@@ -39,7 +39,7 @@ export default function WikiWeather() {
                 src={`/assets/icons/weather/${weather.toLowerCase()}.svg`}
               />
               <h2>{t(`weather.${weather}`)}</h2>
-              <span>
+              <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
                 {WeatherThreshold[weather]}
                 <SynergyIcon type={SynergyAssociatedToWeather.get(weather)!} />
               </span>

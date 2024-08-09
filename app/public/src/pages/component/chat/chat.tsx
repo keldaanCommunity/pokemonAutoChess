@@ -7,17 +7,16 @@ import "./chat.css"
 
 const MAX_MESSAGE_LENGTH = 250
 
-export default function Chat(props: { source: string }) {
+export default function Chat(props: { source: string, canWrite: boolean }) {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const [currentText, setCurrentText] = useState<string>("")
   const user = useAppSelector((state) => state[props.source].user)
 
   return (
-    <div className="my-container user-chat custom-bg">
-      <h1>{user?.anonymous ? t("chat_disabled_anonymous") : t("chat")}</h1>
+    <div className="user-chat">
       <ChatHistory source={props.source} />
-      <form
+      {props.canWrite && <form
         onSubmit={(e) => {
           if (!user?.anonymous) {
             e.preventDefault()
@@ -50,7 +49,7 @@ export default function Chat(props: { source: string }) {
         >
           {t("send")}
         </button>
-      </form>
+      </form>}
     </div>
   )
 }

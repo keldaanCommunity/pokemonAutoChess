@@ -18,7 +18,6 @@ import { Modal } from "../modal/modal"
 import Patchnotes from "../patchnotes/patchnotes"
 import { usePatchVersion } from "../patchnotes/usePatchVersion"
 import Profile from "../profile/profile"
-import { ServerAnnouncementModal } from "../server-announcement/server-announcement-modal"
 import { TournamentsAdmin } from "../tournaments-admin/tournaments-admin"
 import Wiki from "../wiki/wiki"
 
@@ -184,13 +183,6 @@ export function MainSidebar(props: MainSidebarProps) {
             </NavLink>
             <NavLink svg="map" onClick={() => navigate("/map-viewer")}>
               Map Viewer
-            </NavLink>
-            <NavLink
-              svg="megaphone"
-              location="announcement"
-              handleClick={changeModal}
-            >
-              Announcement
             </NavLink>
             <NavLink
               svg="tournament"
@@ -403,9 +395,6 @@ function Modals({
         page={page}
         hideModal={closeModal}
       />
-      <ServerAnnouncementModal
-        show={modal === "announcement"}
-        onClose={closeModal} />
       <Modal
         onClose={closeModal}
         show={modal === "tournaments"}
