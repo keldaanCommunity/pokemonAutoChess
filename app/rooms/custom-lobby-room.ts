@@ -798,7 +798,13 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
           }
         })
         this.rooms?.forEach(async (room, roomIndex) => {
-          if (!query.map((r) => r.roomId).includes(room.roomId)) {
+          const { type, gameStartedAt } = room.metadata ?? {}
+          if (
+            (type === "preparation" &&
+              gameStartedAt != null &&
+              new Date(gameStartedAt).getTime() < Date.now() - 60000) ||
+            !query.map((r) => r.roomId).includes(room.roomId)
+          ) {
             // if the room (this.rooms managed by subscribeLobby) was not in the query, delete it
             //logger.debug(`Room ${room.roomId} is stale, deleting it`)
             try {
