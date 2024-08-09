@@ -3,7 +3,6 @@ import config from "@colyseus/tools"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
-import rateLimit from "express-rate-limit"
 import admin from "firebase-admin"
 import { connect } from "mongoose"
 import path from "path"
@@ -23,12 +22,10 @@ import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Item } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
 
-const viewsSrc = __dirname.includes("server")
-  ? path.join(__dirname, "..", "..", "..", "..", "views", "index.html")
-  : path.join(__dirname, "views", "index.html")
 const clientSrc = __dirname.includes("server")
   ? path.join(__dirname, "..", "..", "client")
   : path.join(__dirname, "public", "dist", "client")
+const viewsSrc = path.join(clientSrc, "index.html")
 
 /**
  * Import your Room files
@@ -66,18 +63,6 @@ export default config({
     app.use(cors())
     app.use(express.json())
     app.use(express.static(clientSrc))
-
-    // set up rate limiter: maximum of five requests per minute
-    const limiter = rateLimit({
-      windowMs: 15 * 60 * 1000, // 15 minutes
-      max: 5000, // Allow 500 requests per minute
-      message: "Too many requests, please try again later.",
-      statusCode: 429, // HTTP status code for rate limit exceeded
-      headers: true // Include custom headers
-    })
-
-    // Apply the rate limiting middleware to all requests
-    app.use(limiter)
 
     app.get("/", (req, res) => {
       res.sendFile(viewsSrc)

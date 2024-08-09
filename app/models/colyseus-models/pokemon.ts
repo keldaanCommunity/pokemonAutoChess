@@ -74,6 +74,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("uint8") range: number = 1
   @type("uint8") stars: number = 1
   @type("uint8") maxPP: number = 100
+  @type("uint16") ap: number = 0
   @type("string") skill: Ability = Ability.DEFAULT
   @type("string") passive: Passive = Passive.NONE
   @type({ set: "string" }) items = new SetSchema<Item>()
@@ -2236,7 +2237,7 @@ export class HisuiSliggoo extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 2
-  evolution = Pkm.GOODRA
+  evolution = Pkm.HISUI_GOODRA
   hp = 160
   atk = 12
   def = 7
@@ -4364,7 +4365,7 @@ export class Butterfree extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG, Synergy.FLYING])
   rarity = Rarity.COMMON
   stars = 3
-  hp = 200
+  hp = 180
   atk = 16
   def = 2
   speDef = 3
@@ -4408,7 +4409,7 @@ export class Beedrill extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.POISON, Synergy.BUG, Synergy.FLYING])
   rarity = Rarity.COMMON
   stars = 3
-  hp = 200
+  hp = 180
   atk = 18
   def = 2
   speDef = 2
@@ -5199,7 +5200,7 @@ export class Groudon extends Pokemon {
   hp = 300
   atk = 30
   def = 5
-  speDef = 5
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.EARTHQUAKE
@@ -6338,8 +6339,8 @@ export class PrimalGroudon extends Pokemon {
   stars = 4
   hp = 400
   atk = 30
-  def = 8
-  speDef = 8
+  def = 6
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.EARTHQUAKE
@@ -6362,7 +6363,7 @@ export class PrimalKyogre extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 120
+  maxPP = 100
   range = 3
   skill = Ability.ORIGIN_PULSE
   passive = Passive.RAIN
@@ -8037,6 +8038,56 @@ export class Snorlax extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class Poipole extends Pokemon {
+  baseHp = 120
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.BUG])
+  rarity = Rarity.UNIQUE
+  stars = 2
+  evolution = Pkm.NAGANADEL
+  hp = this.baseHp
+  atk = 12
+  def = 3
+  speDef = 3
+  maxPP = 75
+  range = 1
+  skill = Ability.FELL_STINGER
+  passive = Passive.POISON_PIN
+  attackSprite = AttackSprite.DRAGON_MELEE
+
+  evolutionRule = new ConditionBasedEvolutionRule(
+    (pokemon) => pokemon.hp >= 200
+  )
+
+  onEvolve({
+    pokemonEvolved: naganadel,
+    pokemonsBeforeEvolution: poipoles
+  }: {
+    pokemonEvolved: Pokemon
+    pokemonsBeforeEvolution: Pokemon[]
+  }) {
+    // carry over the hp gained with passive
+    const apStacked = sum(poipoles.map((m) => m.ap))
+    naganadel.ap += apStacked
+
+    const atkStacked = sum(poipoles.map((m) => m.atk))
+    naganadel.atk += atkStacked
+  }
+}
+
+export class Naganadel extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.POISON, Synergy.BUG])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 75
+  range = 1
+  skill = Ability.FELL_STINGER
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
+
 export class Growlithe extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
   rarity = Rarity.UNCOMMON
@@ -9390,17 +9441,13 @@ export class Wailord extends Pokemon {
 }
 
 export class Dreepy extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.DRAGON,
-    Synergy.GHOST,
-    Synergy.AMORPHOUS
-  ])
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.DRAKLOAK
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 90
-  atk = 5
+  atk = 6
   def = 3
   speDef = 3
   maxPP = 100
@@ -9411,17 +9458,13 @@ export class Dreepy extends Pokemon {
 }
 
 export class Drakloak extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.DRAGON,
-    Synergy.GHOST,
-    Synergy.AMORPHOUS
-  ])
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.DRAGAPULT
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 140
-  atk = 12
+  atk = 15
   def = 3
   speDef = 3
   maxPP = 100
@@ -9432,15 +9475,11 @@ export class Drakloak extends Pokemon {
 }
 
 export class Dragapult extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.DRAGON,
-    Synergy.GHOST,
-    Synergy.AMORPHOUS
-  ])
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
   rarity = Rarity.HATCH
   stars = 3
   hp = 190
-  atk = 22
+  atk = 26
   def = 3
   speDef = 3
   maxPP = 100
@@ -11505,8 +11544,8 @@ export class Exeggutor extends Pokemon {
   stars = 2
   hp = 300
   atk = 20
-  def = 4
-  speDef = 4
+  def = 5
+  speDef = 5
   maxPP = 100
   range = 1
   skill = Ability.EGGSPLOSION
@@ -11521,11 +11560,11 @@ export class AlolanExeggutor extends Pokemon {
     Synergy.PSYCHIC
   ])
   rarity = Rarity.EPIC
-  stars = 3
+  stars = 2
   hp = 350
   atk = 24
-  def = 5
-  speDef = 5
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.EGGSPLOSION
@@ -12493,6 +12532,9 @@ export class Gholdengo extends Pokemon {
     if (player.money >= 50) {
       entity.status.triggerRuneProtect(60000)
     }
+  }
+  onAcquired(player: Player) {
+    player.titles.add(Title.GOLDEN)
   }
 }
 
@@ -13525,7 +13567,7 @@ export class Wattrel extends Pokemon {
   atk = 9
   def = 3
   speDef = 3
-  maxPP = 80
+  maxPP = 100
   range = 2
   skill = Ability.SPARK
   attackSprite = AttackSprite.ELECTRIC_RANGE
@@ -13541,7 +13583,7 @@ export class Kilowattrel extends Pokemon {
   atk = 19
   def = 4
   speDef = 4
-  maxPP = 80
+  maxPP = 100
   range = 2
   skill = Ability.SPARK
   attackSprite = AttackSprite.ELECTRIC_RANGE
@@ -14378,6 +14420,34 @@ export class Stonjourner extends Pokemon {
   }
 }
 
+export class Cramorant extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.AQUATIC])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.GULP_MISSILE
+  attackSprite = AttackSprite.FLYING_RANGE
+}
+
+export class Arrokuda extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  hp = 80
+  atk = 10
+  def = 1
+  speDef = 1
+  maxPP = 140
+  range = 1
+  skill = Ability.AQUA_JET
+  attackSprite = AttackSprite.WATER_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -15195,5 +15265,9 @@ export const PokemonClasses: Record<
   [Pkm.MIENSHAO]: Mienshao,
   [Pkm.STONJOURNER]: Stonjourner,
   [Pkm.HISUI_SNEASEL]: HisuiSneasel,
-  [Pkm.SNEASLER]: Sneasler
+  [Pkm.SNEASLER]: Sneasler,
+  [Pkm.POIPOLE]: Poipole,
+  [Pkm.NAGANADEL]: Naganadel,
+  [Pkm.CRAMORANT]: Cramorant,
+  [Pkm.ARROKUDA]: Arrokuda
 }

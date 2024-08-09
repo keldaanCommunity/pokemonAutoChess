@@ -8,7 +8,7 @@ import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
 import { MiniGame } from "../core/matter/mini-game"
 import { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
-import { Pokemon } from "../models/colyseus-models/pokemon"
+import { Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
 import BannedUser from "../models/mongo-models/banned-user"
 import { BotV2 } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
@@ -43,13 +43,19 @@ import {
   EloRank,
   ExpPlace,
   LegendaryShop,
+  MAX_SIMULATION_DELTA_TIME,
   PortalCarouselStages,
   RequiredStageLevelForXpElligibility,
   UniqueShop
 } from "../types/Config"
-import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
+import { GameMode, PokemonActionState } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
-import { Pkm, PkmDuos, PkmProposition } from "../types/enum/Pokemon"
+import {
+  Pkm,
+  PkmDuos,
+  PkmProposition,
+  PkmRegionalVariants
+} from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { removeInArray } from "../utils/array"
@@ -499,6 +505,9 @@ export default class GameRoom extends Room<GameState> {
     if (this.state.gameLoaded) return // already started
     this.state.gameLoaded = true
     this.setSimulationInterval((deltaTime: number) => {
+      /* in case of lag spikes, the game should feel slower, 
+      but this max simulation dt helps preserving the correctness of simulation result */
+      deltaTime = Math.min(MAX_SIMULATION_DELTA_TIME, deltaTime)
       if (!this.state.gameFinished) {
         try {
           this.dispatcher.dispatch(new OnUpdateCommand(), { deltaTime })
@@ -745,6 +754,8 @@ export default class GameRoom extends Room<GameState> {
 
             if (player.rerollCount > 60) {
               player.titles.add(Title.GAMBLER)
+            } else if (player.rerollCount < 20 && rank === 1) {
+              player.titles.add(Title.NATURAL)
             }
 
             if (usr.titles === undefined) {
@@ -942,7 +953,7 @@ export default class GameRoom extends Room<GameState> {
   ) {
     const player = this.state.players.get(playerId)
     if (!player || player.pokemonsProposition.length === 0) return
-    if (this.state.additionalPokemons.includes(pkm)) return // already picked, probably a double click
+    if (this.state.additionalPokemons.includes(pkm as Pkm)) return // already picked, probably a double click
     if (
       UniqueShop.includes(pkm) &&
       this.state.stageLevel !== PortalCarouselStages[0]
@@ -966,8 +977,20 @@ export default class GameRoom extends Room<GameState> {
     player.pokemonsProposition.clear()
 
     if (AdditionalPicksStages.includes(this.state.stageLevel)) {
-      this.state.additionalPokemons.push(pkm)
+      this.state.additionalPokemons.push(pkm as Pkm)
       this.state.shop.addAdditionalPokemon(pkm)
+      if (pkm in PkmRegionalVariants) {
+        const variant = PkmRegionalVariants[pkm]
+        if (
+          PokemonClasses[variant].prototype.isInRegion(
+            variant,
+            player.map,
+            this.state
+          )
+        ) {
+          player.regionalPokemons.push(variant)
+        }
+      }
 
       if (
         player.itemsProposition.length > 0 &&

@@ -28,7 +28,7 @@ import { logger } from "../../../utils/logger"
 import { addWanderingPokemon } from "../game/components/pokemon"
 import GameContainer from "../game/game-container"
 import GameScene from "../game/scenes/game-scene"
-import { useAppDispatch, useAppSelector } from "../hooks"
+import { selectCurrentPlayer, useAppDispatch, useAppSelector } from "../hooks"
 import store from "../stores"
 import {
   addDpsMeter,
@@ -39,11 +39,6 @@ import {
   removeDpsMeter,
   removePlayer,
   setAdditionalPokemons,
-  setBoardSize,
-  setCurrentPlayerAvatar,
-  setCurrentPlayerMoney,
-  setCurrentPlayerName,
-  setCurrentPlayerTitle,
   setExperienceManager,
   setInterest,
   setItemsProposition,
@@ -51,12 +46,7 @@ import {
   setLoadingProgress,
   setMoney,
   setNoELO,
-  setOpponentAvatar,
-  setOpponentId,
-  setOpponentName,
-  setOpponentTitle,
   setPhase,
-  setPlayerExperienceManager,
   setPokemonCollection,
   setPokemonProposition,
   setRoundTime,
@@ -104,9 +94,7 @@ export default function Game() {
   const currentPlayerId: string = useAppSelector(
     (state) => state.game.currentPlayerId
   )
-  const currentPlayer = useAppSelector((state) =>
-    state.game.players.find((p) => p.id === state.game.currentPlayerId)
-  )
+  const currentPlayer = useAppSelector(selectCurrentPlayer)
   const spectate = currentPlayerId !== uid || !currentPlayer?.alive
 
   const initialized = useRef<boolean>(false)
@@ -307,9 +295,9 @@ export default function Game() {
       })
       room.onMessage(Transfer.SHOW_EMOTE, (message) => {
         const g = getGameScene()
-        if (g && g.minigameManager.pokemons.size > 0) {
+        if ( g?.minigameManager?.pokemons?.size && g.minigameManager.pokemons.size > 0) {
           // early return here to prevent showing animation twice
-          return g.minigameManager.showEmote(message.id, message?.emote)
+          return g.minigameManager?.showEmote(message.id, message?.emote)
         }
 
         if (g && g.board) {
@@ -435,7 +423,7 @@ export default function Game() {
       })
 
       room.state.additionalPokemons.onAdd(() => {
-        dispatch(setAdditionalPokemons(room.state.additionalPokemons))
+        dispatch(setAdditionalPokemons(room.state.additionalPokemons.map(p=>p)))
       })
 
       room.state.simulations.onRemove(() => {
@@ -516,22 +504,6 @@ export default function Game() {
             dispatch(setStreak(value))
           })
         }
-
-        player.listen("opponentId", (value) => {
-          dispatch(setOpponentId({ id: player.id, value: value }))
-        })
-        player.listen("opponentName", (value) => {
-          dispatch(setOpponentName({ id: player.id, value: value }))
-        })
-        player.listen("opponentAvatar", (value) => {
-          dispatch(setOpponentAvatar({ id: player.id, value: value }))
-        })
-        player.listen("opponentTitle", (value) => {
-          dispatch(setOpponentTitle({ id: player.id, value: value }))
-        })
-        player.listen("boardSize", (value) => {
-          dispatch(setBoardSize({ id: player.id, value: value }))
-        })
         player.listen("life", (value, previousValue) => {
           dispatch(setLife({ id: player.id, value: value }))
           if (
@@ -543,28 +515,10 @@ export default function Game() {
             setFinalRankVisible(true)
           }
         })
-        player.listen("money", (value) => {
-          dispatch(setCurrentPlayerMoney({ id: player.id, value: value }))
-        })
         player.listen("experienceManager", (value) => {
           if (player.id === uid) {
             dispatch(setExperienceManager(value))
           }
-          dispatch(
-            setPlayerExperienceManager({
-              id: player.id,
-              value: value
-            })
-          )
-        })
-        player.listen("avatar", (value) => {
-          dispatch(setCurrentPlayerAvatar({ id: player.id, value: value }))
-        })
-        player.listen("name", (value) => {
-          dispatch(setCurrentPlayerName({ id: player.id, value: value }))
-        })
-        player.listen("title", (value) => {
-          dispatch(setCurrentPlayerTitle({ id: player.id, value: value }))
         })
         player.listen("loadingProgress", (value) => {
           dispatch(setLoadingProgress({ id: player.id, value: value }))
@@ -610,11 +564,21 @@ export default function Game() {
         })
 
         const fields: NonFunctionPropNames<IPlayer>[] = [
+          "name",
+          "avatar",
+          "boardSize",
+          "experienceManager",
           "money",
           "history",
           "life",
+          "opponentId",
+          "opponentName",
+          "opponentAvatar",
+          "opponentTitle",
           "rank",
-          "regionalPokemons"
+          "regionalPokemons",
+          "streak",
+          "title"
         ]
 
         fields.forEach((field) => {
@@ -642,12 +606,12 @@ export default function Game() {
 
         player.pokemonsProposition.onAdd(() => {
           if (player.id == uid) {
-            dispatch(setPokemonProposition(player.pokemonsProposition))
+            dispatch(setPokemonProposition(player.pokemonsProposition.map(p=>p)))
           }
         })
         player.pokemonsProposition.onRemove(() => {
           if (player.id == uid) {
-            dispatch(setPokemonProposition(player.pokemonsProposition))
+            dispatch(setPokemonProposition(player.pokemonsProposition.map(p=>p)))
           }
         })
       })

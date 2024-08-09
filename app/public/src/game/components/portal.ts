@@ -34,6 +34,7 @@ export class SynergySymbol
   ) {
     super(scene, x, y, "types", synergy + ".png")
     this.id = id
+    this.synergy = synergy
     this.setDepth(2)
     this.scene.add.existing(this)
   }

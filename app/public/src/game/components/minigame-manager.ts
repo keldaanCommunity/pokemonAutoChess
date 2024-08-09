@@ -32,7 +32,7 @@ export default class MinigameManager {
   scene: GameScene
   display: boolean
   animationManager: AnimationManager
-  kecleon: PokemonSpecial | null
+  kecleon: PokemonSpecial | null = null
 
   constructor(
     scene: GameScene,

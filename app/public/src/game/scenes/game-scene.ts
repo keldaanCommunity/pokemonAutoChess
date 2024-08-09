@@ -40,7 +40,7 @@ import UnownManager from "../components/unown-manager"
 import WeatherManager from "../components/weather-manager"
 
 export default class GameScene extends Scene {
-  tilemaps: Map<DungeonPMDO, DesignTiled>
+  tilemaps: Map<DungeonPMDO, DesignTiled> = new Map<DungeonPMDO, DesignTiled>()
   room: Room<GameState> | undefined
   uid: string | undefined
   map: Phaser.Tilemaps.Tilemap | undefined
@@ -60,11 +60,11 @@ export default class GameScene extends Scene {
   sellZone: SellZone | undefined
   zones: Phaser.GameObjects.Zone[] = []
   lastDragDropPokemon: PokemonSprite | undefined
-  lastPokemonDetail: PokemonSprite | null
-  minigameManager: MinigameManager
-  loadingManager: LoadingManager
-  started: boolean
-  spectate: boolean
+  lastPokemonDetail: PokemonSprite | null = null
+  minigameManager: MinigameManager | null = null
+  loadingManager: LoadingManager | null = null
+  started: boolean = false
+  spectate: boolean = false
 
   constructor() {
     super({
@@ -225,7 +225,7 @@ export default class GameScene extends Scene {
     this.resetDragState()
 
     if (previousPhase === GamePhaseState.MINIGAME) {
-      this.minigameManager.dispose()
+      this.minigameManager?.dispose()
     }
 
     if (newPhase === GamePhaseState.FIGHT) {
@@ -246,7 +246,7 @@ export default class GameScene extends Scene {
           .then((tilemap: DesignTiled) => {
             this.tilemaps.set(mapName, tilemap)
             tilemap.tilesets.forEach((t) => {
-              logger.debug(`loading tileset ${mapName + "/" + t.name}`)
+              //logger.debug(`loading tileset ${mapName + "/" + t.name}`)
               this.load.image(
                 mapName + "/" + t.name,
                 "/assets/tilesets/" + mapName + "/" + t.image

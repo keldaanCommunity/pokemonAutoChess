@@ -1,5 +1,5 @@
 import { ArraySchema, MapSchema } from "@colyseus/schema"
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import Simulation from "../../../core/simulation"
 import ExperienceManager from "../../../models/colyseus-models/experience-manager"
 import PokemonCollection from "../../../models/colyseus-models/pokemon-collection"
@@ -14,7 +14,7 @@ import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
 import { getGameScene } from "../pages/game"
 
-interface GameStateStore {
+export interface GameStateStore {
   afterGameId: string
   phaseDuration: number
   roundTime: number
@@ -35,17 +35,6 @@ interface GameStateStore {
   itemsProposition: Item[]
   pokemonsProposition: PkmProposition[]
   currentPlayerSynergies: [string, number][]
-  currentPlayerOpponentId: string
-  currentPlayerOpponentName: string
-  currentPlayerOpponentAvatar: string
-  currentPlayerOpponentTitle: string
-  currentPlayerBoardSize: number
-  currentPlayerLife: number
-  currentPlayerMoney: number
-  currentPlayerExperienceManager: ExperienceManager
-  currentPlayerName: string
-  currentPlayerAvatar: string
-  currentPlayerTitle: string
   weather: Weather
   blueDpsMeter: IDps[]
   redDpsMeter: IDps[]
@@ -75,17 +64,6 @@ const initialState: GameStateStore = {
   itemsProposition: new Array<Item>(),
   pokemonsProposition: new Array<Pkm>(),
   currentPlayerSynergies: new Array<[Synergy, number]>(),
-  currentPlayerOpponentId: "",
-  currentPlayerOpponentName: "",
-  currentPlayerOpponentAvatar: "0019/Normal",
-  currentPlayerOpponentTitle: "",
-  currentPlayerBoardSize: 0,
-  currentPlayerLife: 100,
-  currentPlayerMoney: 5,
-  currentPlayerExperienceManager: new ExperienceManager(),
-  currentPlayerName: "",
-  currentPlayerTitle: "",
-  currentPlayerAvatar: "0019/Normal",
   blueDpsMeter: new Array<IDps>(),
   redDpsMeter: new Array<IDps>(),
   pokemonCollection: new MapSchema<IPokemonConfig>(),
@@ -141,16 +119,16 @@ export const gameSlice = createSlice({
       state.players[index][action.payload.field] = action.payload.value
     },
     setShop: (state, action: PayloadAction<ArraySchema<Pkm>>) => {
-      state.shop = action.payload
+      state.shop = action.payload as unknown as Pkm[]
     },
     setItemsProposition: (state, action: PayloadAction<ArraySchema<Item>>) => {
-      state.itemsProposition = JSON.parse(JSON.stringify(action.payload))
+      state.itemsProposition = action.payload.map((i) => i)
     },
     setPokemonProposition: (state, action: PayloadAction<PkmProposition[]>) => {
-      state.pokemonsProposition = JSON.parse(JSON.stringify(action.payload))
+      state.pokemonsProposition = action.payload.map((p) => p)
     },
-    setAdditionalPokemons: (state, action: PayloadAction<PkmProposition[]>) => {
-      state.additionalPokemons = JSON.parse(JSON.stringify(action.payload))
+    setAdditionalPokemons: (state, action: PayloadAction<Pkm[]>) => {
+      state.additionalPokemons = action.payload.map((p) => p)
     },
     setSynergies: (
       state,
@@ -169,98 +147,11 @@ export const gameSlice = createSlice({
           action.payload.value.toJSON()
       }
     },
-    setOpponentId: (
-      state,
-      action: PayloadAction<{ value: string; id: string }>
-    ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerOpponentId = action.payload.value
-      }
-    },
-    setOpponentName: (
-      state,
-      action: PayloadAction<{ value: string; id: string }>
-    ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerOpponentName = action.payload.value
-      }
-    },
-    setOpponentAvatar: (
-      state,
-      action: PayloadAction<{ value: string; id: string }>
-    ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerOpponentAvatar = action.payload.value
-      }
-    },
-    setOpponentTitle: (
-      state,
-      action: PayloadAction<{ value: string; id: string }>
-    ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerOpponentTitle = action.payload.value
-      }
-    },
-    setBoardSize: (
-      state,
-      action: PayloadAction<{ value: number; id: string }>
-    ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerBoardSize = action.payload.value
-      }
-    },
     setLife: (state, action: PayloadAction<{ value: number; id: string }>) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerLife = action.payload.value
-      }
       getGameScene()?.board?.updateAvatarLife(
         action.payload.id,
         action.payload.value
       )
-    },
-    setPlayerExperienceManager: (
-      state,
-      action: PayloadAction<{ value: ExperienceManager; id: string }>
-    ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerExperienceManager = action.payload.value
-      }
-      const player = state.players.find((e) => e.id === action.payload.id)
-      if (player) {
-        player.experienceManager = action.payload.value
-      }
-    },
-    setCurrentPlayerMoney: (
-      state,
-      action: PayloadAction<{ value: number; id: string }>
-    ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerMoney = action.payload.value
-      }
-    },
-    setCurrentPlayerName: (
-      state,
-      action: PayloadAction<{ value: string; id: string }>
-    ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerName = action.payload.value
-      }
-    },
-    setCurrentPlayerTitle: (
-      state,
-      action: PayloadAction<{ value: string; id: string }>
-    ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerTitle = action.payload.value
-      }
-    },
-    setCurrentPlayerAvatar: (
-      state,
-      action: PayloadAction<{ value: string; id: string }>
-    ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerAvatar = action.payload.value
-      }
     },
     setLoadingProgress: (
       state,
@@ -302,18 +193,7 @@ export const gameSlice = createSlice({
       state.currentPlayerId = action.payload.id
       state.currentSimulationId = action.payload.simulationId
       state.currentSimulationTeamIndex = action.payload.simulationTeamIndex
-      state.currentPlayerMoney = action.payload.money
-      state.currentPlayerExperienceManager = action.payload.experienceManager
-      state.currentPlayerOpponentId = action.payload.opponentId
-      state.currentPlayerOpponentName = action.payload.opponentName
-      state.currentPlayerOpponentAvatar = action.payload.opponentAvatar
-      state.currentPlayerOpponentTitle = action.payload.opponentTitle
-      state.currentPlayerLife = action.payload.life
       state.currentPlayerSynergies = Array.from(action.payload.synergies)
-      state.currentPlayerAvatar = action.payload.avatar
-      state.currentPlayerName = action.payload.name
-      state.currentPlayerTitle = action.payload.title
-      state.currentPlayerBoardSize = action.payload.boardSize
     },
     addDpsMeter: (
       state,
@@ -378,19 +258,9 @@ export const {
   removeDpsMeter,
   changeDpsMeter,
   addDpsMeter,
-  setCurrentPlayerName,
-  setCurrentPlayerTitle,
   setLoadingProgress,
   setPlayer,
-  setCurrentPlayerAvatar,
-  setPlayerExperienceManager,
-  setCurrentPlayerMoney,
   setLife,
-  setBoardSize,
-  setOpponentId,
-  setOpponentName,
-  setOpponentAvatar,
-  setOpponentTitle,
   setSynergies,
   setRoundTime,
   setAfterGameId,

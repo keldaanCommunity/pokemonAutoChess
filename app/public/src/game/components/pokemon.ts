@@ -29,7 +29,6 @@ import {
 import type { Passive } from "../../../../types/enum/Passive"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import type { Synergy } from "../../../../types/enum/Synergy"
-import { logger } from "../../../../utils/logger"
 import { clamp, min } from "../../../../utils/number"
 import { coinflip } from "../../../../utils/random"
 import { values } from "../../../../utils/schemas"
@@ -80,7 +79,7 @@ export default class PokemonSprite extends DraggableObject {
   rangeType: string
   types = new Set<Synergy>()
   lifebar: Lifebar | undefined
-  detail: PokemonDetail | PokemonSpecialDetail | null
+  detail: PokemonDetail | PokemonSpecialDetail | null = null
   pp: number | undefined
   maxPP: number
   powerbar: PowerBar | undefined
@@ -119,8 +118,8 @@ export default class PokemonSprite extends DraggableObject {
   playerId: string
   shouldShowTooltip: boolean
   flip: boolean
-  animationLocked: boolean /* will prevent another anim to play before current one is completed */
-  skydiving: boolean
+  animationLocked: boolean /* will prevent another anim to play before current one is completed */ = false
+  skydiving: boolean = false
 
   constructor(
     scene: GameScene | DebugScene,
@@ -164,6 +163,7 @@ export default class PokemonSprite extends DraggableObject {
     this.positionX = pokemon.positionX
     this.positionY = pokemon.positionY
     this.attackSprite = pokemon.attackSprite
+    this.ap = pokemon.ap
     if (this.range > 1) {
       this.rangeType = "range"
     } else {
@@ -434,9 +434,9 @@ export default class PokemonSprite extends DraggableObject {
           this.flip
         )
 
-        logger.debug(
+        /*logger.debug(
           `Shooting a projectile to (${this.targetX},${this.targetY}) travel time ${travelTime}ms delay ${delayBeforeShoot}ms`
-        )
+        )*/
         this.scene.tweens.add({
           targets: projectile,
           x: coordinatesTarget[0],
