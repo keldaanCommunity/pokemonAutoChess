@@ -523,10 +523,19 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       client.send(Transfer.USER_PROFILE, userProfile)
 
       if (!user.displayName) {
+        client.send(
+          Transfer.AUTH_FAILED,
+          "No display name. Please report this error."
+        )
         throw "No display name"
       } else if (isBanned) {
+        client.send(Transfer.AUTH_FAILED, "Account banned")
         throw "User banned"
       } else if (this.state.ccu > MAX_CCU) {
+        client.send(
+          Transfer.AUTH_FAILED,
+          "The servers are currently at maximum capacity. Please try again later."
+        )
         throw "Maximum capacity reached"
       } else {
         return user

@@ -472,6 +472,10 @@ export async function joinLobbyRoom(
             dispatch(setProfile(user))
           })
 
+          room.onMessage(Transfer.AUTH_FAILED, (message: string) => {
+            alert(message)
+          })
+
           room.onMessage(Transfer.USER, (user: LobbyUser) =>
             dispatch(setSearchedUser(user))
           )
