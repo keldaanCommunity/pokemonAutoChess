@@ -3242,7 +3242,7 @@ export class Spheal extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.SEALEO
-  hp = 70
+  hp = 80
   atk = 6
   def = 3
   speDef = 2
@@ -3257,7 +3257,7 @@ export class Sealeo extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.WALREIN
-  hp = 140
+  hp = 150
   atk = 12
   def = 3
   speDef = 2
@@ -3271,7 +3271,7 @@ export class Walrein extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.ICE])
   rarity = Rarity.UNCOMMON
   stars = 3
-  hp = 260
+  hp = 300
   atk = 24
   def = 3
   speDef = 3
