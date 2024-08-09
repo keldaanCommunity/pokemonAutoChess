@@ -504,7 +504,7 @@ export default class Shop {
     } else if (rarity === Rarity.SPECIAL) {
       if (rod === Item.OLD_ROD) fish = Pkm.MAGIKARP
       if (rod === Item.GOOD_ROD) fish = Pkm.FEEBAS
-      //if (fishingLevel >= 3) fish = Pkm.WISHIWASHI // when available
+      if (rod === Item.SUPER_ROD) fish = Pkm.WISHIWASHI
     } else {
       fish = this.getRandomPokemonFromPool(
         rarity,

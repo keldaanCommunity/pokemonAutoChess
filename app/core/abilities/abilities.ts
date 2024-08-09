@@ -66,6 +66,7 @@ import {
 } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { AbilityCommand } from "../simulation-command"
+import { isOnBench } from "../../models/colyseus-models/pokemon"
 
 export class BlueFlareStrategy extends AbilityStrategy {
   process(
@@ -874,6 +875,42 @@ export class AquaJetStrategy extends AbilityStrategy {
       })
 
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
+    }
+  }
+}
+
+export class SchoolingStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 0.1 * pokemon.hp
+
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
+
+    if (pokemon.player) {
+      pokemon.player.board.forEach((ally, id) => {
+        if (ally && ally.name === Pkm.WISHIWASHI && isOnBench(ally)) {
+          pokemon.addMaxHP(50)
+          pokemon.refToBoardPokemon.hp += 50
+          pokemon.player!.board.delete(id)
+        }
+      })
     }
   }
 }
@@ -3083,8 +3120,8 @@ export class DiveStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 3 ? 60 : pokemon.stars === 2 ? 30 : 15
-    const freezeDuration = 1500
+    const damage = pokemon.stars === 3 ? 50 : pokemon.stars === 2 ? 30 : 15
+    const freezeDuration = 1000
     const mostSurroundedCoordinate =
       state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
 
@@ -9827,5 +9864,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DIRE_CLAW]: new DireClawStrategy(),
   [Ability.FAKE_OUT]: new FakeOutStrategy(),
   [Ability.FELL_STINGER]: new FellStingerStrategy(),
-  [Ability.GULP_MISSILE]: new GulpMissileStrategy()
+  [Ability.GULP_MISSILE]: new GulpMissileStrategy(),
+  [Ability.SCHOOLING]: new SchoolingStrategy()
 }

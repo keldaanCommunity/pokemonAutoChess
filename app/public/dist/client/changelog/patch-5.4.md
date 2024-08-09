@@ -3,6 +3,8 @@
 - Arrokuda
 - Poipole
 - Naganadel
+- Wishiwashi
+- Wishiwashi (School)
 
 # Changes to Pokemon & Abilities
 
@@ -24,6 +26,7 @@
 - Nerf Butterfree: HP 200 → 180
 - Nerf Beedrill: HP: 200 → 180
 - Alolan Exeggutor is now tier 2, Def/Spedef 5/5 → 3/3
+- Nerf Dive (Lapras, Wailord): Freeze duration 1.5 → 1 second, damage: 15/30/60 → 15/30/50
 
 # Changes to Synergies
 
@@ -69,4 +72,4 @@
 - Thank you to all contributors to the translations: gongdi1234, johnkyokim4, Kite2810,  CubeRubik, Camchanh, akaya0, mokers, Kimera24
 - Improved fight simulation accuracy in case of high server stress
 - Team Planner is now unlocked at lvl 2, Jukebox at level 10
-- New titles: Berserker, Natural, Golden
+- New titles: Berserker, Natural, Golden, Siren, Fearsome
