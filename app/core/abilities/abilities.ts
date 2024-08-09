@@ -7495,10 +7495,22 @@ export class LovelyKissStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const duration = Math.round(
-      ([2000, 4000][pokemon.stars - 1] ?? 2000) * (1 + pokemon.ap / 100)
-    )
-    target.status.triggerSleep(duration, target)
+
+    if (target.status.sleep) {
+      const damage = [50, 100, 150][pokemon.stars - 1] ?? 50
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    } else {
+      const duration = Math.round(
+        ([2000, 4000, 6000][pokemon.stars - 1] ?? 2000) * (1 + pokemon.ap / 100)
+      )
+      target.status.triggerSleep(duration, target)
+    }
   }
 }
 

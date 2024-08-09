@@ -28,6 +28,7 @@
 - Alolan Exeggutor is now tier 2, Def/Spedef 5/5 → 3/3
 - Nerf Dive (Lapras, Wailord): Freeze duration 1.5 → 1 second, damage: 15/30/60 → 15/30/50
 - Buff Spheal line: HP 70/140/260 → 80/150/300
+- Buff Lovely Kiss (Jynx): if already asleep, deal 50/100/150 special damage
 
 
 # Changes to Synergies

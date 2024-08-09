@@ -1467,7 +1467,7 @@
     "AURASPHERE": "Exudes an aura and projects energy in a line, dealing [25,50,SP] SPECIAL and SILENCE every opponent hit for 3 seconds",
     "SKETCH": "Copies the ability, max PP and STAR of the ally on his left at the start of the fight",
     "OVERDRIVE": "Deals [120,SP]% of ATK as SPECIAL within a 3-cell radius by twanging an electric guitar, causing a huge echo and strong vibration. The damage is reduced with the distance, 20% per cell.",
-    "LOVELY_KISS": "Kisses the enemy with a frightening expression. Puts the enemy SLEEP for [2,4,SP] seconds.",
+    "LOVELY_KISS": "Kisses the enemy with a frightening expression. Puts the enemy SLEEP for [2,4,6,SP] seconds. If already asleep, deal [50,100,150,SP] SPECIAL instead.",
     "TRANSFORM": "Takes the appearance and the statistics of its target (except HP)",
     "PSYCHIC_FANGS": "Inflicts [100,SP] PHYSICAL and removes all the target's ATK, DEF and SPE_DEF buffs",
     "SHED_TAIL": "Create a substitute and charge towards the ally with the fewest HP to give it [80, SP] SHIELD",

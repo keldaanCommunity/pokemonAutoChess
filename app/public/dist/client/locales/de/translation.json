@@ -1464,7 +1464,7 @@
     "AURASPHERE": "Verströmt eine Aura und projiziert Energie in einer Linie, die jedem getroffenen Gegner 3 Sekunden lang [25,50,SP] SPECIAL und SILENCE zufügt",
     "SKETCH": "Kopiert die Fähigkeit, die maximalen PP und den STAR des Verbündeten zu seiner Linken zu Beginn des Kampfes",
     "OVERDRIVE": "Verursacht [120,SP]% der ATK als SPECIAL in einem Radius von 3 Zellen, indem er eine E-Gitarre zupft und ein großes Echo und starke Vibrationen verursacht. Der Schaden wird mit der Entfernung reduziert, 20% pro Zelle.",
-    "LOVELY_KISS": "Küsst den Feind mit einem furchterregenden Ausdruck. Versetzt den Feind für [2,4,SP] Sekunden in den SLEEP.",
+    "LOVELY_KISS": "Küsst den Feind mit einem furchterregenden Ausdruck. Versetzt den Feind für [2,4,6,SP] Sekunden in den SLEEP. Wenn Sie bereits schlafen, geben Sie stattdessen [50,100,150,SP] SPECIAL.",
     "TRANSFORM": "Übernimmt das Aussehen und die Statistiken seines Ziels (außer HP)",
     "PSYCHIC_FANGS": "Fügt [100,SP] PHYSICAL zu und entfernt alle ATK-, DEF- und SPE_DEF-Buffs des Ziels",
     "SHED_TAIL": "Erschaffe einen Ersatz und stürme auf den Verbündeten mit den wenigsten HP zu, um ihm [80, SP] SHIELD zu geben",

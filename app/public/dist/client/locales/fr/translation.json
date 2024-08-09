@@ -1458,7 +1458,7 @@
     "AURASPHERE": "Dégage une aura et projette de l'énergie en ligne droite, infligeant [25,50,SP] SPECIAL et SILENCE pendant 3 secondes aux adversaires touchés",
     "SKETCH": "Copie la capacité, les STAR et les PP max de l'allié à sa gauche au début du combat",
     "OVERDRIVE": "Inflige [120,SP]% de l'ATK en SPECIAL dans un cercle de 3 cases de rayon en faisant vibrer une guitare électrique, ce qui cause une forte vibration. Les dégâts sont réduits avec la distance, de 20% par case.",
-    "LOVELY_KISS": "Le lanceur fait un bisou à l'ennemi en prenant une mine effrayante, ce qui le rend SLEEP pendant [2,4,SP] secondes",
+    "LOVELY_KISS": "Le lanceur fait un bisou à l'ennemi en prenant une mine effrayante, ce qui le rend SLEEP pendant [2,4,6,SP] secondes. S'il est déjà endormi, inflige [50,100,150,SP] SPECIAL.",
     "TRANSFORM": "Prend l'apparence et les statistiques de la cible, excepté les HP",
     "PSYCHIC_FANGS": "Inflige [100,SP] PHYSICAL et retire les bonus d'ATK, de DEF et de SPE_DEF de la cible",
     "SHED_TAIL": "Lâche un leurre et court vers l'allié avec le moins de HP, lui donnant [80,SP] SHIELD",
