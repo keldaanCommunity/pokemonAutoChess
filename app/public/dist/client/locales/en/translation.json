@@ -368,7 +368,8 @@
     "DIRE_CLAW": "Dire Claw",
     "FAKE_OUT": "Fake Out",
     "FELL_STINGER": "Fell Stinger",
-    "GULP_MISSILE": "Gulp Missile"
+    "GULP_MISSILE": "Gulp Missile",
+    "SCHOOLING": "Schooling"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1186,7 +1187,9 @@
     "POIPOLE": "Poipole",
     "NAGANADEL": "Naganadel",
     "CRAMORANT": "Cramorant",
-    "ARROKUDA": "Arrokuda"
+    "ARROKUDA": "Arrokuda",
+    "WISHIWASHI": "Wishiwashi",
+    "WISHIWASHI_SCHOOL": "Wishiwashi (School)"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1302,7 +1305,7 @@
     "SACRED_SWORD": "Deals [100,SP] TRUE to the target",
     "PSYCHIC": "Deals [50,100,200,SP] SPECIAL and burn 15 PP to the target and adjacent enemies",
     "PSYBEAM": "Deal [25,50,100,SP] special damage to all enemy Pokémon behind the target with 50% chance to make them CONFUSION for 4 seconds",
-    "DIVE": "Dives underwater and gain [50,SP] SHIELD, then reappears in the middle of the enemy team, dealing [15,30,60,SP] SPECIAL and FREEZE all adjacent units for 1.5 second",
+    "DIVE": "Dives underwater and gain [50,SP] SHIELD, then reappears in the middle of the enemy team, dealing [15,30,50,SP] SPECIAL and FREEZE all adjacent units for 1 second",
     "SPIKE_ARMOR": "For [3,5,10] seconds, targets that melee attack this Pokémon receive WOUND and take SPECIAL equal to [100,SP]% of current DEF",
     "FUTURE_SIGHT": "Deals [15,30,60,SP] SPECIAL to 5 enemies",
     "FAKE_TEARS": "Deals [3,6,9,SP] SPECIAL to the whole enemy team and trigger ARMOR_REDUCTION for 3 seconds",
@@ -1535,7 +1538,8 @@
     "GRAVITY": "The enemy team is LOCKED for [2,SP] seconds",
     "FAKE_OUT": "Deals [50,100,150,SP] SPECIAL to target, then user loses 30% AP. Target is FLINCH for 3 seconds unless user AP was negative",
     "FELL_STINGER": "Deals [20,40,70,SP] SPECIAL to the target. If it kills the target, it permanently gains +1 ATK, +5% AP and +10 HP",
-    "GULP_MISSILE": "Shoot an $t(pkm.ARROKUDA) with full PP at the target, dealing [55,SP] SPECIAL to all adjacent enemies. There is a 1 in 3 chance a $t(pkm.PIKACHU) will be fired instead."
+    "GULP_MISSILE": "Shoot an $t(pkm.ARROKUDA) with full PP at the target, dealing [55,SP] SPECIAL to all adjacent enemies. There is a 1 in 3 chance a $t(pkm.PIKACHU) will be fired instead.",
+    "SCHOOLING": "Deals [10,SP]% of its max HP as SPECIAL to the target and adjacent enemies. If a Wishiwashi is on the bench, it joins the school and gives 50 permanent HP to the user."
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1983,7 +1987,7 @@
     "TRASH": "The remains of an artificial item. It does nothing",
     "OLD_ROD": "After each PvP round, fish a Pokémon that is then added to a free slot on your bench. Can catch common and uncommon WATER Pokémons as well as Magikarp.",
     "GOOD_ROD": "After each PvP round, fish a Pokémon that is then added to a free slot on your bench. Can catch rare WATER Pokémons and Feebas.",
-    "SUPER_ROD": "After each PvP round, fish a Pokémon that is then added to a free slot on your bench. Can catch epic WATER Pokémons and Feebas.",
+    "SUPER_ROD": "After each PvP round, fish a Pokémon that is then added to a free slot on your bench. Can catch epic WATER Pokémons and Wishiwashi.",
     "DYNAMAX_BAND": "At the start of the fight, raise max HP by 300%.",
     "GOLDEN_ROD": "After each PvP round, fish a Pokémon that is then added to a free slot on your bench. Can catch unique Pokémons or Pokémons that matches your top synergy. When used on a Pokémon, get back all held items in your player inventory.",
     "SHINY_STONE": "Gives +2 to LIGHT synergy and spawn a second light spot on the holder's cell",
@@ -2039,6 +2043,7 @@
     "WATER_SPRING": "Whenever an enemy uses their ability, gain 5 PP",
     "MAGIKARP": "8 Magikarp evolve in Gyarados",
     "FEEBAS": "6 Feebas evolve in Milotic",
+    "WISHIWASHI": "3 Wishiwashi evolve in School Form",
     "GIRATINA": "Giratina switches between its Altered Forme and Origin Forme depending on its position on the board",
     "UNOWN": "Unown cannot hold items and vanish after one fight or after casting their ability",
     "GLIGAR": "Gligar is looking for a RAZOR_FANG. If the Pokémon is POISONNED, it will gain HP instead of taking damage",
@@ -2312,6 +2317,8 @@
     "BLOB": "Blob",
     "DENTIST": "Dentist",
     "FISHERMAN": "Fisherman",
+    "SIREN": "Siren",
+    "FEARSOME": "Fearsome",
     "GOLDEN": "Golden",
     "CHOSEN_ONE": "Chosen One",
     "VANQUISHER": "Vanquisher",
@@ -2387,6 +2394,8 @@
     "PRIMAL": "Get Primal Groudon, Primal Kyogre or Mega Rayquaza",
     "DENTIST": "Own the angry Arbok",
     "FISHERMAN": "Get a Gyarados",
+    "SIREN": "Get a Milotic",
+    "FEARSOME": "Get a Wishiwashi in School form",
     "GOLDEN": "Get a Gholdengo",
     "CHOSEN_ONE": "Max Synergy With Light type in a game",
     "VANQUISHER": "Win a Ranked match",
@@ -2463,7 +2472,7 @@
     "mythical": "How do I get unique / legendary Pokémons ?",
     "mythical_answer": "On stages 10 and 20, portals with synergy symbols will appear. Entering a portal will give the opportunity to select one of six powerful Pokemon, with each symbol guaranteeing a synergy of one of the Pokemon. If no portal is entered, all Pokemon options will be entirely random. Symbols are determined by the synergy levels reached by each remaining player, with 4 symbols per player chosen randomly from a pool of one symbol per each of their reached synergy levels.",
     "ditto": "How does Ditto work ?",
-    "ditto_answer": "Ditto creates a plain copy of the unit you hover and drop it over. Each Pokémon in shop has a 0.5% chance to be a Ditto at every roll. You can't copy mythical Pokémons.",
+    "ditto_answer": "Ditto creates a plain copy of the unit you hover and drop it over. Each Pokémon in shop has a 0.5% chance to be a Ditto at every roll. You can't copy unique and hatch Pokémon.",
     "items": "How do the items work ?",
     "items_answer": "You can gain item components by winning PvE rounds or picking one in an item carousel. You can combine two item components to create a powerful tier 2 item. Every Pokémon can hold up to 3 items. The crafting list of all items is available in the wiki, in the items section.",
     "bots": "How do bots work ?",

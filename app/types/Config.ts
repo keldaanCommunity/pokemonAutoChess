@@ -323,15 +323,15 @@ export const FishRarityProbability: {
   },
   [Item.GOOD_ROD]: {
     [Rarity.SPECIAL]: 0.3,
-    [Rarity.COMMON]: 0.35,
-    [Rarity.UNCOMMON]: 0.25,
+    [Rarity.COMMON]: 0.3,
+    [Rarity.UNCOMMON]: 0.3,
     [Rarity.RARE]: 0.1,
     [Rarity.EPIC]: 0
   },
   [Item.SUPER_ROD]: {
-    [Rarity.SPECIAL]: 0.1,
-    [Rarity.COMMON]: 0.25,
-    [Rarity.UNCOMMON]: 0.3,
+    [Rarity.SPECIAL]: 0.35,
+    [Rarity.COMMON]: 0.05,
+    [Rarity.UNCOMMON]: 0.25,
     [Rarity.RARE]: 0.25,
     [Rarity.EPIC]: 0.1
   },
