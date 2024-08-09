@@ -30,6 +30,7 @@
 - Buff Spheal line: HP 70/140/260 → 80/150/300
 - Buff Lovely Kiss (Jynx): if already asleep, deal 50/100/150 special damage
 - Buff Aurora Beam (Iron Bundle, Dewgong): doubled freeze chance
+- Buff Alolan Rattata: Attack 4/10 → 6/15
 
 
 # Changes to Synergies

@@ -4668,7 +4668,7 @@ export class AlolanRattata extends Pokemon {
   stars = 1
   evolution = Pkm.ALOLAN_RATICATE
   hp = 60
-  atk = 4
+  atk = 6
   def = 1
   speDef = 1
   maxPP = 90
@@ -4686,8 +4686,8 @@ export class AlolanRaticate extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
   rarity = Rarity.COMMON
   stars = 2
-  hp = 120
-  atk = 10
+  hp = 130
+  atk = 15
   def = 2
   speDef = 2
   maxPP = 90
