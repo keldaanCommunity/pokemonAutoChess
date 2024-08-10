@@ -14414,6 +14414,53 @@ export class WishiwashiSchool extends Pokemon {
   }
 }
 
+export class Pawmi extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIGHTING])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.PAWMO
+  hp = 80
+  atk = 7
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.DOUBLE_SHOCK
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+  regional = true
+}
+
+export class Pawmo extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIGHTING])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.PAWMOT
+  hp = 150
+  atk = 15
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.DOUBLE_SHOCK
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+  regional = true
+}
+
+export class Pawmot extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIGHTING])
+  rarity = Rarity.RARE
+  stars = 3
+  hp = 230
+  atk = 27
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.DOUBLE_SHOCK
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+  regional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -15237,5 +15284,8 @@ export const PokemonClasses: Record<
   [Pkm.CRAMORANT]: Cramorant,
   [Pkm.ARROKUDA]: Arrokuda,
   [Pkm.WISHIWASHI]: Wishiwashi,
-  [Pkm.WISHIWASHI_SCHOOL]: WishiwashiSchool
+  [Pkm.WISHIWASHI_SCHOOL]: WishiwashiSchool,
+  [Pkm.PAWMI]: Pawmi,
+  [Pkm.PAWMO]: Pawmo,
+  [Pkm.PAWMOT]: Pawmot
 }
