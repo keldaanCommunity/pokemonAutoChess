@@ -196,7 +196,16 @@
     "ERUPTION": "Núi lửa phun trào",
     "LUSTER_PURGE": "Ánh sáng của Đảng",
     "MIST_BALL": "Hà cầu",
-    "MUD_BUBBLE": "Bong bóng bùn"
+    "MUD_BUBBLE": "Bong bóng bùn",
+    "LINK_CABLE": "Dây cáp",
+    "MAGIC_BOUNCE": "Công chúa bong bóng",
+    "HIDDEN_POWER_A": "Sức mạnh tiềm ẩn (ABRA)",
+    "HIDDEN_POWER_B": "Sức mạnh tiềm ẩn (Thiêu đốt)",
+    "HIDDEN_POWER_C": "Sức mạnh tiềm ẩn (Thần tài)",
+    "HIDDEN_POWER_D": "Sức mạnh tiềm ẩn (DITTO)",
+    "HIDDEN_POWER_E": "Sức mạnh tiềm ẩn (Trứng)",
+    "HIDDEN_POWER_F": "Sức mạnh tiềm ẩn (Cá)",
+    "HIDDEN_POWER_G": "Sức mạnh tiềm ẩn (Vàng)"
   },
   "community_translations": "Bản dịch được thực hiện bởi cộng đồng Pokemon Autochess. Nếu bạn muốn đóng góp hoặc chỉnh sửa bản dịch, hãy đến",
   "no_emotions_available": "Không có cảm xúc",
