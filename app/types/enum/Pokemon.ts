@@ -6714,7 +6714,8 @@ export const AnimationConfig: {
   [Pkm.WISHIWASHI_SCHOOL]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Swing,
-    emote: AnimationType.RearUp
+    emote: AnimationType.RearUp,
+    shinyUnavailable: true
   },
   [Pkm.PAWMI]: {
     attack: AnimationType.Attack,
