@@ -1517,9 +1517,25 @@
     "BIG_NUGGET": "GROUND 시너지를 부여한다. 소지자가 15초간 생존하여 GROUND 효과를 5번 쌓으면 3GOLD 획득한다."
   },
   "passive_description": {
+    "NONE": "효과 없음",
+    "TYROGUE": "이 포켓몬에게 첫번째로 주어진 아이템에 따라 다음의 포켓몬으로 변신함.\nCHARCOAL MAGNET: $t(pkm.HITMONLEE)\nHEART_SCALE NEVER_MELT_ICE: $t(pkm.HITMONCHAN)\n그 외 아이템: $t(pkm.HITMONTOP)",
+    "PROTEAN2": "팀에서 가장 높은 시너지 2개를 부여받음",
+    "PROTEAN3": "팀에서 가장 높은 시너지 3개를 부여받음",
+    "CASTFORM": "팀에서 FIRE WATER ICE 셋중 어떤 시너지를 가장 많이 지녔나에 따라 캐스퐁은 폼체인지하며 날씨도 SUN, RAIN, SNOW로 바꿉니다.",
+    "PHIONE": "피오네는 AQUA_EGG를 찾아 헤매고 있습니다.",
+    "SCYTHER": "$t(pkm.SCYTHER)은 METAL_COAT 혹은 BLACK_AUGURITE를 찾아 헤매고 있습니다.",
+    "PRIMAL": "이 포켓몬들의 고대의 힘을 해방시킬 수 있다는 전설이 있습니다.",
+    "WONDER_GUARD": "공격받을때마다 받는 피해량 20감소",
+    "ELECTRIC_TERRAIN": "자신의 ELECTRIC 포켓몬들에게 공격력을 20% 증가시키는  ELECTRIC_FIELD 부여",
+    "GRASSY_TERRAIN": "자신의 GRASS 포켓몬들에게 공격력을 20% 증가시키는  GRASS_FIELD 부여",
+    "MISTY_TERRAIN": "자신의 FAIRY 포켓몬들에게 공격력을 20% 증가시키는  FAIRY_FIELD 부여",
+    "PSYCHIC_TERRAIN": "자신의 PSYCHIC 포켓몬들에게 공격력을 20% 증가시키는  PSYCHIC_FIELD 부여",
+    "EEVEE": "이브이는 주어진 시너지 돌에 따라서 8가지의 이브이 진화체로 진화합니다.",
+    "TYPE_NULL": "$t(pkm.TYPE_NULL)은 시너지 아이템을 받았을 때 $t(pkm.SILVALLY)로 진화합니다.",
+    "RKS_SYSTEM": "AR 시스템: $t(pkm.SILVALLY)은 게임 중 언제든지 시너지 아이템을 바꿀 수 있습니다. 대기석에 놓으면 시너지 아이템을 다시 떨어뜨립니다.",
     "EGG": "껍데기 안에서 무언가 움직이는게 느껴집니다.",
     "CELEBI": "$t(pkm.CELEBI)가 $t(ability.TIME_TRAVEL)을 시전할때마다 플레이어의 HP가 1 회복됩니다.",
-    "WATER_BUBBLE": "이 포켓몬은 BURN상태가 되지 않습니다."
+    "WATER_BUBBLE": "BURN 상태에 면역"
   },
   "stat": {
     "ATK": "공격력",
