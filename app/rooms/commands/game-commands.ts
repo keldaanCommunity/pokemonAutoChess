@@ -923,10 +923,18 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     if (playersAlive.length <= 1) {
       this.state.gameFinished = true
       const winner = playersAlive[0]
-      const client = this.room.clients.find((cli) => cli.auth.uid === winner.id)
-      if (client) {
-        client.send(Transfer.FINAL_RANK, 1)
+      if (winner) {
+        /* there is a case where none of the players is alive because
+         all the remaining players are dead due to a draw battle.
+         In that case, they all already received their rank with checkDeath function */
+        const client = this.room.clients.find(
+          (cli) => cli.auth.uid === winner.id
+        )
+        if (client) {
+          client.send(Transfer.FINAL_RANK, 1)
+        }
       }
+
       setTimeout(() => {
         // dispose the room automatically after 30 seconds
         this.room.broadcast(Transfer.GAME_END)

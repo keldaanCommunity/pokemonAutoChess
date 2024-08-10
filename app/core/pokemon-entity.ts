@@ -1,4 +1,5 @@
 import { Schema, SetSchema, type } from "@colyseus/schema"
+import { logger } from "../utils/logger"
 import { nanoid } from "nanoid"
 import Count from "../models/colyseus-models/count"
 import Player from "../models/colyseus-models/player"
@@ -210,9 +211,19 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   get player(): Player | undefined {
-    return this.team === Team.BLUE_TEAM
-      ? this.simulation.bluePlayer
-      : this.simulation.redPlayer
+    const player =
+      this.team === Team.BLUE_TEAM
+        ? this.simulation.bluePlayer
+        : this.simulation.redPlayer
+    if (player instanceof Player) {
+      return player
+    } else if (player) {
+      logger.error(
+        "pokemon.player is not undefined neither an instance of Player, why ?",
+        player
+      )
+      return undefined
+    }
   }
 
   get inLightCell(): boolean {
@@ -1422,15 +1433,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.simulation.applyCurse(Effect.CURSE_OF_FATE, this.team)
     }
 
-    if (this.passive === Passive.CORSOLA && this.player) {
+    const player = this.player
+    if (this.passive === Passive.CORSOLA && player instanceof Player) {
       const galarCorsola = this.refToBoardPokemon.evolutionRule.evolve(
         this.refToBoardPokemon as Pokemon,
-        this.player,
+        player,
         this.simulation.stageLevel
       )
       galarCorsola.evolutionRule.tryEvolve(
         galarCorsola,
-        this.player,
+        player,
         this.simulation.stageLevel
       )
     }
