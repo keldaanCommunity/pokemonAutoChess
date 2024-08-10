@@ -2181,7 +2181,7 @@
     "POKERUS": "Every 2 seconds, gain 1 ATK and 10% AP before infecting 2 adjacent allies with POKERUS",
     "ARMOR_REDUCTION": "Reduce DEF & SPE_DEF by 50%",
     "CHARM": "Prevents attacking the target and forces to get closer to it",
-    "FLINCH": "All incoming damage bypass SHIELD",
+    "FLINCH": "50% of incoming damage bypass SHIELD",
     "CURSE": "KOs the cursed Pokémon after some time",
     "RUNE_PROTECT": "Protects from status alterations",
     "LOCKED": "Prevents moving and sets RANGE to 1",
