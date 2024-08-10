@@ -1418,13 +1418,13 @@ export class AuroraBeamStrategy extends AbilityStrategy {
         )
         let freezeChance = 0
         if (pokemon.effects.has(Effect.CHILLY)) {
-          freezeChance = 0.2
-        } else if (pokemon.effects.has(Effect.FROSTY)) {
-          freezeChance = 0.3
-        } else if (pokemon.effects.has(Effect.FREEZING)) {
           freezeChance = 0.4
+        } else if (pokemon.effects.has(Effect.FROSTY)) {
+          freezeChance = 0.6
+        } else if (pokemon.effects.has(Effect.FREEZING)) {
+          freezeChance = 0.8
         } else if (pokemon.effects.has(Effect.SHEER_COLD)) {
-          freezeChance = 0.5
+          freezeChance = 1.0
         }
         if (chance(freezeChance)) {
           targetInLine.status.triggerFreeze(2000, target)
@@ -7495,10 +7495,22 @@ export class LovelyKissStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const duration = Math.round(
-      ([2000, 4000][pokemon.stars - 1] ?? 2000) * (1 + pokemon.ap / 100)
-    )
-    target.status.triggerSleep(duration, target)
+
+    if (target.status.sleep) {
+      const damage = [50, 100, 150][pokemon.stars - 1] ?? 50
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    } else {
+      const duration = Math.round(
+        ([2000, 4000, 6000][pokemon.stars - 1] ?? 2000) * (1 + pokemon.ap / 100)
+      )
+      target.status.triggerSleep(duration, target)
+    }
   }
 }
 
@@ -8070,7 +8082,7 @@ export class MultiAttackStrategy extends AbilityStrategy {
     if (synergies && silvallyType && synergies.has(silvallyType)) {
       synergyLevelCount = synergies.get(silvallyType)!
     }
-    const damage = 10 * synergyLevelCount
+    const damage = 15 * synergyLevelCount
 
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)

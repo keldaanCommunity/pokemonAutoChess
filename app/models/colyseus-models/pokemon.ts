@@ -3242,7 +3242,7 @@ export class Spheal extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.SEALEO
-  hp = 70
+  hp = 80
   atk = 6
   def = 3
   speDef = 2
@@ -3257,7 +3257,7 @@ export class Sealeo extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.WALREIN
-  hp = 140
+  hp = 150
   atk = 12
   def = 3
   speDef = 2
@@ -3271,7 +3271,7 @@ export class Walrein extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.ICE])
   rarity = Rarity.UNCOMMON
   stars = 3
-  hp = 260
+  hp = 300
   atk = 24
   def = 3
   speDef = 3
@@ -4668,7 +4668,7 @@ export class AlolanRattata extends Pokemon {
   stars = 1
   evolution = Pkm.ALOLAN_RATICATE
   hp = 60
-  atk = 4
+  atk = 6
   def = 1
   speDef = 1
   maxPP = 90
@@ -4686,8 +4686,8 @@ export class AlolanRaticate extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
   rarity = Rarity.COMMON
   stars = 2
-  hp = 120
-  atk = 10
+  hp = 130
+  atk = 15
   def = 2
   speDef = 2
   maxPP = 90
@@ -8823,7 +8823,7 @@ const rksSystemOnChangePosition = function (
 }
 
 export class TypeNull extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ARTIFICIAL])
+  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL])
   rarity = Rarity.UNIQUE
   stars = 2
   evolution = Pkm.SILVALLY_FIRE
@@ -8840,11 +8840,7 @@ export class TypeNull extends Pokemon {
 }
 
 export class SilvallyFire extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WILD,
-    Synergy.ARTIFICIAL,
-    Synergy.FIRE
-  ])
+  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL, Synergy.FIRE])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 260
@@ -8861,11 +8857,7 @@ export class SilvallyFire extends Pokemon {
 }
 
 export class SilvallyFossil extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WILD,
-    Synergy.ARTIFICIAL,
-    Synergy.FOSSIL
-  ])
+  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL, Synergy.FOSSIL])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 260
@@ -8882,11 +8874,7 @@ export class SilvallyFossil extends Pokemon {
 }
 
 export class SilvallyPsychic extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WILD,
-    Synergy.ARTIFICIAL,
-    Synergy.PSYCHIC
-  ])
+  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL, Synergy.PSYCHIC])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 260
@@ -8903,11 +8891,7 @@ export class SilvallyPsychic extends Pokemon {
 }
 
 export class SilvallyWater extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WILD,
-    Synergy.ARTIFICIAL,
-    Synergy.WATER
-  ])
+  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL, Synergy.WATER])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 260
@@ -8924,11 +8908,7 @@ export class SilvallyWater extends Pokemon {
 }
 
 export class SilvallyElectric extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WILD,
-    Synergy.ARTIFICIAL,
-    Synergy.ELECTRIC
-  ])
+  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL, Synergy.ELECTRIC])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 260
@@ -8945,11 +8925,7 @@ export class SilvallyElectric extends Pokemon {
 }
 
 export class SilvallyFairy extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WILD,
-    Synergy.ARTIFICIAL,
-    Synergy.FAIRY
-  ])
+  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL, Synergy.FAIRY])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 260
@@ -8966,11 +8942,7 @@ export class SilvallyFairy extends Pokemon {
 }
 
 export class SilvallyDark extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WILD,
-    Synergy.ARTIFICIAL,
-    Synergy.DARK
-  ])
+  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL, Synergy.DARK])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 260
@@ -8987,11 +8959,7 @@ export class SilvallyDark extends Pokemon {
 }
 
 export class SilvallyGrass extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WILD,
-    Synergy.ARTIFICIAL,
-    Synergy.GRASS
-  ])
+  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL, Synergy.GRASS])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 260
@@ -9008,11 +8976,7 @@ export class SilvallyGrass extends Pokemon {
 }
 
 export class SilvallyIce extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WILD,
-    Synergy.ARTIFICIAL,
-    Synergy.ICE
-  ])
+  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL, Synergy.ICE])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 260
@@ -9029,11 +8993,7 @@ export class SilvallyIce extends Pokemon {
 }
 
 export class SilvallyFighting extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WILD,
-    Synergy.ARTIFICIAL,
-    Synergy.FIGHTING
-  ])
+  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL, Synergy.FIGHTING])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 260
@@ -9050,11 +9010,7 @@ export class SilvallyFighting extends Pokemon {
 }
 
 export class SilvallyLight extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WILD,
-    Synergy.ARTIFICIAL,
-    Synergy.LIGHT
-  ])
+  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL, Synergy.LIGHT])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 260
@@ -9071,11 +9027,7 @@ export class SilvallyLight extends Pokemon {
 }
 
 export class SilvallyPoison extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WILD,
-    Synergy.ARTIFICIAL,
-    Synergy.POISON
-  ])
+  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL, Synergy.POISON])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 260
@@ -9092,11 +9044,7 @@ export class SilvallyPoison extends Pokemon {
 }
 
 export class SilvallySound extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WILD,
-    Synergy.ARTIFICIAL,
-    Synergy.SOUND
-  ])
+  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL, Synergy.SOUND])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 260
@@ -9113,11 +9061,7 @@ export class SilvallySound extends Pokemon {
 }
 
 export class SilvallySteel extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WILD,
-    Synergy.ARTIFICIAL,
-    Synergy.STEEL
-  ])
+  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL, Synergy.STEEL])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 260
@@ -9134,11 +9078,7 @@ export class SilvallySteel extends Pokemon {
 }
 
 export class SilvallyFlying extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WILD,
-    Synergy.ARTIFICIAL,
-    Synergy.FLYING
-  ])
+  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL, Synergy.FLYING])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 260
@@ -9155,11 +9095,7 @@ export class SilvallyFlying extends Pokemon {
 }
 
 export class SilvallyRock extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WILD,
-    Synergy.ARTIFICIAL,
-    Synergy.ROCK
-  ])
+  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL, Synergy.ROCK])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 260
@@ -9176,11 +9112,7 @@ export class SilvallyRock extends Pokemon {
 }
 
 export class SilvallyGround extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WILD,
-    Synergy.ARTIFICIAL,
-    Synergy.GROUND
-  ])
+  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL, Synergy.GROUND])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 260
@@ -9197,11 +9129,7 @@ export class SilvallyGround extends Pokemon {
 }
 
 export class SilvallyFlora extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WILD,
-    Synergy.ARTIFICIAL,
-    Synergy.FLORA
-  ])
+  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL, Synergy.FLORA])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 260
@@ -9218,11 +9146,7 @@ export class SilvallyFlora extends Pokemon {
 }
 
 export class SilvallyGhost extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WILD,
-    Synergy.ARTIFICIAL,
-    Synergy.GHOST
-  ])
+  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL, Synergy.GHOST])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 260
