@@ -1600,11 +1600,15 @@
     "WATER_BUBBLE": "BURN 상태에 면역",
     "SOUL_HEART": "시전자가 적을 기절시킬시 10AP와 10PP를 얻습니다.",
     "ALIEN_DNA": "$t(pkm.DEOXYS)는 METEORITE와 반응하여 모습을 바꿉니다.",
+    "BERRY_EATER": "나무열매를 지닌 대상 공격시 빼앗아 먹습니다.",
+    "TOXIC_BOOST": "독 대미지를 50% 적게 받으며 POISONNED 동안 10ATK 증가합니다.",
     "SHUCKLE": "소모된 나무열매를 BERRY_JUICE로 바꿉니다.",
     "GUZZLORD": "악식킹은 너무 무거워서 도약할 수 없습니다.",
     "ENVIRONMENTAL_ADAPTATION": "이 포켓몬은 지역에 따라 각기 다른 시너지로 적응했습니다.",
+    "PSYDUCK": "피격시 10% 확률로 CONFUSION 상태가 됩니다. CONFUSION 상태가 될시 100% AP 증가합니다.",
     "BLOODMOON": "BLOODMOON 상태일때 폼이 변합니다.",
     "DREAM_CATCHER": "SLEEP 상태의 적을 공격할시 보유자의 주변 아군 3마리에 10SHIELD를 부여합니다.",
+    "SLOW_START": "전투 시작시 0.5 ATK_SPEED로 고정되며, 첫번째 기술을 사용하면 30% ATK_SPEED 및 10 ATK 증가합니다.",
     "POISON_PIN": "베베놈이 기술효과로 HP를 200이상 증가하면 아고용으로 진화합니다."
   },
   "stat": {
