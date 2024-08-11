@@ -409,19 +409,26 @@ export default class PokemonState {
 
       let residualDamage = reducedDamage
 
-      if (pokemon.shield > 0 && !pokemon.status.flinch) {
-        let damageOnShield = reducedDamage
+      if (pokemon.shield > 0) {
+        let damageOnShield
+        if (pokemon.status.flinch) {
+          damageOnShield = reducedDamage * 0.5
+          residualDamage = reducedDamage * 0.5
+        } else {
+          damageOnShield = reducedDamage
+          residualDamage = 0
+        }
         if (attacker && attacker.items.has(Item.FIRE_GEM)) {
           damageOnShield *= 2 // double damage on shield
         }
         if (damageOnShield > pokemon.shield) {
+          residualDamage += damageOnShield - pokemon.shield
           damageOnShield = pokemon.shield
         }
 
         pokemon.shieldDamageTaken += damageOnShield
         takenDamage += damageOnShield
         pokemon.shield -= damageOnShield
-        residualDamage = min(0)(reducedDamage - damageOnShield)
       }
 
       takenDamage += Math.min(residualDamage, pokemon.life)

@@ -2162,7 +2162,7 @@
     "POKERUS": "Cada 2 segundos, obtiene 1 ATK y 10% AP antes de infectar a 2 aliados adyacentes con POKERUS",
     "ARMOR_REDUCTION": "Reduce la DEF y la SPE_DEF en un 50%",
     "CHARM": "Impide atacar al objetivo y obliga a acercarse a él.",
-    "FLINCH": "El daño entrante atraviesa SHIELD",
+    "FLINCH": "El 50% del daño entrante atraviesa SHIELD",
     "CURSE": "KO al Pokémon maldito después de un tiempo",
     "RUNE_PROTECT": "Protege de alteraciones de estado",
     "LOCKED": "Previene el movimiento y fija el RANGE a 1",

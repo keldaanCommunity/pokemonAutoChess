@@ -2,27 +2,27 @@ import {
   ArraySchema,
   MapSchema,
   Schema,
-  type,
-  filterChildren
+  filterChildren,
+  type
 } from "@colyseus/schema"
+import { Client } from "colyseus"
 import { CronTime } from "cron"
 import { nanoid } from "nanoid"
+import { SpecialGamePlannedSchema } from "../../models/colyseus-models/lobby"
 import LobbyUser from "../../models/colyseus-models/lobby-user"
 import Message from "../../models/colyseus-models/message"
 import { TournamentSchema } from "../../models/colyseus-models/tournament"
-import { SpecialGamePlannedSchema } from "../../models/colyseus-models/lobby"
 import chatV2 from "../../models/mongo-models/chat-v2"
 import tournament from "../../models/mongo-models/tournament"
 import {
   GREATBALL_RANKED_LOBBY_CRON,
-  ULTRABALL_RANKED_LOBBY_CRON,
-  SCRIBBLE_LOBBY_CRON
+  SCRIBBLE_LOBBY_CRON,
+  ULTRABALL_RANKED_LOBBY_CRON
 } from "../../types/Config"
 import { EloRank } from "../../types/enum/EloRank"
 import { GameMode } from "../../types/enum/Game"
 import { ISpecialGamePlanned } from "../../types/interfaces/Lobby"
 import { logger } from "../../utils/logger"
-import { Client } from "colyseus"
 
 export default class LobbyState extends Schema {
   @type([Message]) messages = new ArraySchema<Message>()
@@ -36,7 +36,7 @@ export default class LobbyState extends Schema {
   @type(SpecialGamePlannedSchema) nextSpecialGame: ISpecialGamePlanned | null =
     null
   @type([TournamentSchema]) tournaments = new ArraySchema<TournamentSchema>()
-  @type("number") clients = 0
+  @type("number") ccu = 0
 
   addMessage(
     payload: string,

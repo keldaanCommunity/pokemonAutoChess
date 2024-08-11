@@ -2162,7 +2162,7 @@
     "POKERUS": "Toutes les 2 secondes, gagnez 1 ATK et 10% AP avant d'infecter 2 alliés adjacents avec le POKERUS",
     "ARMOR_REDUCTION": "Réduit la DEF et SPE_DEF de 50 %",
     "CHARM": "Empêche d'attaquer la cible et force à s'en rapprocher",
-    "FLINCH": "Tous les dégâts reçus passent à travers le SHIELD",
+    "FLINCH": "50% des dégâts reçus passent à travers le SHIELD",
     "CURSE": "Met KO le pokémon maudit à la fin du compte à rebours",
     "RUNE_PROTECT": "Protège des altérations d'état",
     "LOCKED": "Empêche de bouger et réduit la RANGE à 1",

@@ -27,6 +27,7 @@ export default function AvailableRoomMenu() {
   const preparationRooms: RoomAvailable[] = useAppSelector(
     (state) => state.lobby.preparationRooms
   )
+  const ccu = useAppSelector((state) => state.lobby.ccu)
 
   const client: Client = useAppSelector((state) => state.network.client)
   const lobby: Room<ICustomLobbyState> | undefined = useAppSelector(
@@ -77,11 +78,11 @@ export default function AvailableRoomMenu() {
   const joinPrepRoom = throttle(async function join(
     selectedRoom: RoomAvailable<IPreparationMetadata>
   ) {
-    const { whitelist, blacklist, gameStarted, password } =
+    const { whitelist, blacklist, gameStartedAt, password } =
       selectedRoom.metadata ?? {}
     if (
       selectedRoom.clients >= MAX_PLAYERS_PER_GAME ||
-      gameStarted === true ||
+      gameStartedAt ||
       (whitelist &&
         whitelist.length > 0 &&
         whitelist.includes(uid) === false) ||
@@ -135,14 +136,13 @@ export default function AvailableRoomMenu() {
     }
   }, 1000)
 
-
-  const nbUsersInPrepRoom = useAppSelector((state) => state.lobby.preparationRooms.reduce((total, r) => total + r.clients, 0))
-  const nbUsersInLobbyRoom = useAppSelector((state) => state.lobby.clients)
-
   return (
     <div className="my-container room-menu custom-bg">
       <h2>{t("available_rooms")}</h2>
-      <p style={{ textAlign: "center" }}>{t("players", { count: nbUsersInPrepRoom + nbUsersInLobbyRoom })}, {t("rooms", { count: preparationRooms.length })}</p>
+      <p style={{ textAlign: "center" }}>
+        {t("players", { count: ccu })},{" "}
+        {t("rooms", { count: preparationRooms.length })}
+      </p>
       {user ? (
         <>
           <ul>

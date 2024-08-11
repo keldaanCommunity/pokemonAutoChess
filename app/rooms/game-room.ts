@@ -101,7 +101,7 @@ export default class GameRoom extends Room<GameState> {
 
   // When room is initialized
   async onCreate(options: {
-    users: MapSchema<IGameUser>
+    users: Record<string, IGameUser>
     preparationId: string
     name: string
     ownerName: string
@@ -110,18 +110,18 @@ export default class GameRoom extends Room<GameState> {
     minRank: EloRank | null
     tournamentId: string | null
     bracketId: string | null
-    whenReady: (room: GameRoom) => void
   }) {
-    logger.trace("create game room")
+    logger.info("create game room")
+    this.listing.unlisted = true
     this.setMetadata(<IGameMetadata>{
       name: options.name,
       ownerName: options.ownerName,
       gameMode: options.gameMode,
-      playerIds: keys(options.users).filter(
-        (id) => options.users.get(id)!.isBot === false
+      playerIds: Object.keys(options.users).filter(
+        (id) => options.users[id].isBot === false
       ),
-      playersInfo: keys(options.users).map(
-        (u) => `${options.users.get(u)!.name} [${options.users.get(u)!.elo}]`
+      playersInfo: Object.keys(options.users).map(
+        (u) => `${options.users[u].name} [${options.users[u].elo}]`
       ),
       stageLevel: 0,
       type: "game",
@@ -172,7 +172,7 @@ export default class GameRoom extends Room<GameState> {
     }
 
     await Promise.all(
-      keys(options.users).map(async (id) => {
+      Object.keys(options.users).map(async (id) => {
         const user = options.users[id]
         //logger.debug(`init player`, user)
         if (user.isBot) {
@@ -496,9 +496,6 @@ export default class GameRoom extends Room<GameState> {
         }
       }
     })
-
-    // room ready
-    options.whenReady(this)
   }
 
   startGame() {

@@ -1,9 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { RoomAvailable } from "colyseus.js"
-import {
-  ILeaderboardBotInfo,
-  ILeaderboardInfo
-} from "../../../types/interfaces/LeaderboardInfo"
 import LobbyUser, {
   ILobbyUser
 } from "../../../models/colyseus-models/lobby-user"
@@ -22,8 +18,12 @@ import {
   PkmWithConfig
 } from "../../../types"
 import { Language } from "../../../types/enum/Language"
-import { MAX_BOTS_STAGE } from "../pages/component/bot-builder/bot-logic"
+import {
+  ILeaderboardBotInfo,
+  ILeaderboardInfo
+} from "../../../types/interfaces/LeaderboardInfo"
 import { ISpecialGamePlanned } from "../../../types/interfaces/Lobby"
+import { MAX_BOTS_STAGE } from "../pages/component/bot-builder/bot-logic"
 
 export interface IUserLobbyState {
   botLogDatabase: string[]
@@ -45,7 +45,7 @@ export interface IUserLobbyState {
   language: Language
   nextSpecialGame: ISpecialGamePlanned | null
   tournaments: TournamentSchema[]
-  clients: number
+  ccu: number
 }
 
 const initialState: IUserLobbyState = {
@@ -78,7 +78,7 @@ const initialState: IUserLobbyState = {
   },
   nextSpecialGame: null,
   tournaments: [],
-  clients: 0
+  ccu: 0
 }
 
 export const lobbySlice = createSlice({
@@ -139,8 +139,8 @@ export const lobbySlice = createSlice({
     setTabIndex: (state, action: PayloadAction<number>) => {
       state.tabIndex = action.payload
     },
-    setClientsCount: (state, action: PayloadAction<number>) => {
-      state.clients = action.payload
+    setCcu: (state, action: PayloadAction<number>) => {
+      state.ccu = action.payload
     },
     addRoom: (state, action: PayloadAction<RoomAvailable>) => {
       const metadata: IPreparationMetadata | IGameMetadata =
@@ -305,7 +305,7 @@ export const {
   setTabIndex,
   addRoom,
   removeRoom,
-  setClientsCount,
+  setCcu,
   setSearchedUser,
   setBotList,
   setPastebinUrl,
