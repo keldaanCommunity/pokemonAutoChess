@@ -1598,6 +1598,9 @@
     "MIMIKYU_BUSTED": "목이 꺾였습니다. 따라큐는 자신이 살아있는 동안 천을 망가뜨린 자가 누구인지 절대로 잊지 않을 것입니다.",
     "HUNGER_SWITCH": "$t(pkm.MORPEKO)은 일반모습과 배고픈모습으로 바뀔 수 있습니다.\n일반 모습의 3연타 공격시 대상을 2초간 PARALYSIS 상태로 만듭니다.\n배고픈 모습의 3연타 공격시 대상을 4초간 WOUND 상태로 만듭니다.",
     "WATER_BUBBLE": "BURN 상태에 면역",
+    "LYCANROC": "$t(pkm.LYCANROC_DUSK)은 NIGHT동안 밤폼으로, SUN동안 낮폼으로 바뀝니다.",
+    "COSMOG": "$t(pkm.COSMOG)은 별의 에너지를 먹고 자랍니다. 포켓몬을 진화시킬때마다 영구적으로 최대HP 10 증가합니다. 10회 후 진화합니다.",
+    "COSMOEM": "$t(pkm.COSMOEM)은 별의 에너지를 먹고 자랍니다. 포켓몬을 진화시킬때마다 영구적으로 최대HP 10 증가합니다. 10회 후 진화하며 그때 스포트라이트를 받고 있을 경우 $t(pkm.SOLGALEO)로, 그렇지 않다면 $t(pkm.LUNALA)로 진화합니다.",
     "SOUL_HEART": "시전자가 적을 기절시킬시 10AP와 10PP를 얻습니다.",
     "ALIEN_DNA": "$t(pkm.DEOXYS)는 METEORITE와 반응하여 모습을 바꿉니다.",
     "BERRY_EATER": "나무열매를 지닌 대상 공격시 빼앗아 먹습니다.",
@@ -1605,10 +1608,13 @@
     "SHUCKLE": "소모된 나무열매를 BERRY_JUICE로 바꿉니다.",
     "GUZZLORD": "악식킹은 너무 무거워서 도약할 수 없습니다.",
     "ENVIRONMENTAL_ADAPTATION": "이 포켓몬은 지역에 따라 각기 다른 시너지로 적응했습니다.",
+    "MOTHIM": "나메일은 도롱충이의 지역별 시너지를 따릅니다.",
     "PSYDUCK": "피격시 10% 확률로 CONFUSION 상태가 됩니다. CONFUSION 상태가 될시 100% AP 증가합니다.",
     "BLOODMOON": "BLOODMOON 상태일때 폼이 변합니다.",
+    "RECYCLE": "나무열매를 보유할 경우 10HP를, 기본 조합템을 얻을 경우 25HP 및 아이템의 능력치 증가를, 인공아이템을 얻을 경우 50HP 및 아이템의 능력치 증가를 얻으며 TRASH를 받습니다.",
     "DREAM_CATCHER": "SLEEP 상태의 적을 공격할시 보유자의 주변 아군 3마리에 10SHIELD를 부여합니다.",
     "SLOW_START": "전투 시작시 0.5 ATK_SPEED로 고정되며, 첫번째 기술을 사용하면 30% ATK_SPEED 및 10 ATK 증가합니다.",
+    "STONJOURNER": "PP가 가득 찰때까지 움직이거나 공격하지 않습니다. 전투시작시 주변의 아군의 AP 50%만큼 증가시킵니다.",
     "POISON_PIN": "베베놈이 기술효과로 HP를 200이상 증가하면 아고용으로 진화합니다."
   },
   "stat": {
