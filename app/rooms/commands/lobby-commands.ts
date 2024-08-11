@@ -573,35 +573,49 @@ export class BuyEmotionCommand extends Command<
   }) {
     try {
       const user = this.state.users.get(client.auth.uid)
+      const cost = getEmotionCost(emotion, shiny)
       if (!user) return
       const pokemonConfig = user.pokemonCollection.get(index)
       if (!pokemonConfig) return
 
-      const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
+      const mongoUser = await UserMetadata.findOneAndUpdate(
+        {
+          uid: client.auth.uid,
+          $and: [
+            { [`pokemonCollection.${index}.dust`]: { $gte: cost } },
+            {
+              [`pokemonCollection.${index}.${shiny ? "shinyEmotions" : "emotions"}`]:
+                { $ne: emotion }
+            }
+          ]
+        },
+        {
+          $inc: { [`pokemonCollection.${index}.dust`]: -cost },
+          $push: {
+            [`pokemonCollection.${index}.${shiny ? "shinyEmotions" : "emotions"}`]:
+              emotion
+          },
+          [`pokemonCollection.${index}.selectedEmotion`]: emotion,
+          [`pokemonCollection.${index}.selectedShiny`]: shiny
+        },
+        { new: true }
+      )
+
+      // const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
       if (!mongoUser) return
 
       const mongoPokemonConfig = mongoUser.pokemonCollection.get(index)
       if (!mongoPokemonConfig) return
 
-      const cost = getEmotionCost(emotion, shiny)
-      const emotions = shiny
-        ? mongoPokemonConfig.shinyEmotions
-        : mongoPokemonConfig.emotions
-
-      if (emotions.includes(emotion) || mongoPokemonConfig.dust < cost) return // already bought or can't afford
-
-      emotions.push(emotion)
-      mongoPokemonConfig.dust -= cost
-      mongoPokemonConfig.selectedEmotion = emotion
-      mongoPokemonConfig.selectedShiny = shiny
-
       pokemonConfig.dust = mongoPokemonConfig.dust // resync shards to database value, db authoritative
-      pokemonConfig.selectedEmotion = emotion
-      pokemonConfig.selectedShiny = shiny
+      pokemonConfig.selectedShiny = mongoPokemonConfig.selectedShiny
+      pokemonConfig.selectedEmotion = mongoPokemonConfig.selectedEmotion
 
-      if (shiny) {
+      if (shiny && mongoPokemonConfig.shinyEmotions.includes(emotion)) {
         pokemonConfig.shinyEmotions.push(emotion)
-      } else {
+      }
+
+      if (!shiny && mongoPokemonConfig.emotions.includes(emotion)) {
         pokemonConfig.emotions.push(emotion)
       }
 
@@ -669,24 +683,32 @@ export class BuyBoosterCommand extends Command<
   async execute({ client, index }: { client: Client; index: string }) {
     try {
       const user = this.state.users.get(client.auth.uid)
+      const BOOSTER_COST = 500
       if (!user) return
+
+      const mongoUser = await UserMetadata.findOneAndUpdate(
+        {
+          uid: client.auth.uid,
+          [`pokemonCollection.${index}.dust`]: { $gte: BOOSTER_COST }
+        },
+        {
+          $inc: {
+            booster: 1,
+            [`pokemonCollection.${index}.dust`]: -BOOSTER_COST
+          }
+        },
+        { new: true }
+      )
+      if (!mongoUser) return
+
       const pokemonConfig = user.pokemonCollection.get(index)
       if (!pokemonConfig) return
 
-      const BOOSTER_COST = 500
-      const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
-      const mongoPokemonConfig = mongoUser?.pokemonCollection.get(index)
-      if (
-        mongoUser &&
-        mongoPokemonConfig &&
-        mongoPokemonConfig.dust >= BOOSTER_COST
-      ) {
-        mongoPokemonConfig.dust -= BOOSTER_COST
-        pokemonConfig.dust = mongoPokemonConfig.dust // resync shards to database value, db authoritative
-        mongoUser.booster += 1
-        user.booster = mongoUser.booster
-        mongoUser.save()
-      }
+      const mongoPokemonConfig = mongoUser.pokemonCollection.get(index)
+      if (!mongoPokemonConfig) return
+
+      user.booster = mongoUser.booster
+      pokemonConfig.dust = mongoPokemonConfig.dust // resync shards to database value, db authoritative
     } catch (error) {
       logger.error(error)
     }
