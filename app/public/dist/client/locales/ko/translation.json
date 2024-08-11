@@ -1185,7 +1185,12 @@
     "POIPOLE": "베베놈",
     "NAGANADEL": "아고용",
     "CRAMORANT": "윽우지",
-    "ARROKUDA": "찌로꼬치"
+    "ARROKUDA": "찌로꼬치",
+    "WISHIWASHI": "약어리",
+    "WISHIWASHI_SCHOOL": "약어리 (군집)",
+    "PAWMI": "빠모",
+    "PAWMO": "빠모트",
+    "PAWMOT": "빠르모트"
   },
   "ability_description": {
     "SOFT_BOILED": "모든 아군 포켓몬의 상태이상효과를 회복하며 [20,40,80,SP] 만큼의 실드를 부여한다.",
