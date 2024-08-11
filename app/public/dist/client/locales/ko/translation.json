@@ -1561,7 +1561,11 @@
     "BIG_NUGGET": "GROUND 시너지 부여. 소지자 15초간 생존 및 GROUND 효과 5번 중첩 시 3 GOLD 획득",
     "INCENSE": "소지 시 상점에서 WILD 포켓몬 출현 방지. 대신, 상점의 각 포켓몬이 소지자와 같은 시너지를 공유할 확률 5% 상승 ",
     "EXP_SHARE": "같은 열 근접한 포켓몬의 가장 높은 ATK, DEF, 그리고 SPE_DEF를 획득 ",
-    "POKERUS_VIAL": "POKERUS 소지자를 감염, ATK 1 과 매 2초 마다 AP 10% 획득, 그리고 동료에게 전송 "
+    "POKERUS_VIAL": "POKERUS 소지자를 감염, ATK 1 과 매 2초 마다 AP 10% 획득, 그리고 동료에게 전송 ",
+    "ROTOM_PHONE": "GHOST 시너지 부여, 소지자 주변에 로토무 드론 소환 ",
+    "METEORITE": "테오키스와 상호작용 하는 것으로 보이는 유성. 희미한 광채를 지속적으로 발산하며 살짝 따뜻함. ",
+    "BERRY_JUICE": "HP이 50% 이하 시 섭취, 최대 HP로 회복 ",
+    "TRASH": "\bARTIFICIAL 아이템의 남은 부분. 아무 효과 없음"
   },
   "passive_description": {
     "EGG": "껍데기 안에서 무언가 움직이는게 느껴집니다.",
