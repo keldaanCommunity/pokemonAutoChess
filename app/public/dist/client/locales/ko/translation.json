@@ -1558,7 +1558,8 @@
     "METAL_COAT": "STEEL 시너지 부여",
     "SWIFT_WING": "FLYING 시너지 부여 및 회피율 10% 상승",
     "HARD_STONE": "ROCK 시너지 부여",
-    "BIG_NUGGET": "GROUND 시너지 부여. 소지자 15초간 생존 및 GROUND 효과 5번 중첩 시 3 GOLD 획득"
+    "BIG_NUGGET": "GROUND 시너지 부여. 소지자 15초간 생존 및 GROUND 효과 5번 중첩 시 3 GOLD 획득",
+    "INCENSE": "소지 시 상점에서 WILD 포켓몬 출현 방지. 대신, 상점의 각 포켓몬이 소지자와 같은 시너지를 공유할 확률 5% 상승 "
   },
   "passive_description": {
     "EGG": "껍데기 안에서 무언가 움직이는게 느껴집니다.",
