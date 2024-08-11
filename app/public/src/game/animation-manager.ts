@@ -14,9 +14,9 @@ import { AnimationConfig, Pkm, PkmIndex } from "../../../types/enum/Pokemon"
 import { distanceC } from "../../../utils/distance"
 import { logger } from "../../../utils/logger"
 import { fpsToDuration, max } from "../../../utils/number"
-import durations from "../../dist/client/assets/pokemons/durations.json"
-import indexList from "../../dist/client/assets/pokemons/indexList.json"
 import atlas from "../assets/atlas.json"
+import durations from "../assets/pokemons/durations.json"
+import indexList from "../assets/pokemons/indexList.json"
 import PokemonSprite from "./components/pokemon"
 
 const FPS_EFFECTS = 20

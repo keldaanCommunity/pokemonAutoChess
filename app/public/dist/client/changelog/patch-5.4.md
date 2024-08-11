@@ -3,6 +3,11 @@
 - Arrokuda
 - Poipole
 - Naganadel
+- Pawmi
+- Pawmo
+- Pawmot
+- Wishiwashi
+- Wishiwashi (School)
 
 # Changes to Pokemon & Abilities
 
@@ -24,6 +29,13 @@
 - Nerf Butterfree: HP 200 → 180
 - Nerf Beedrill: HP: 200 → 180
 - Alolan Exeggutor is now tier 2, Def/Spedef 5/5 → 3/3
+- Nerf Dive (Lapras, Wailord): Freeze duration 1.5 → 1 second, damage: 15/30/60 → 15/30/50
+- Buff Spheal line: HP 70/140/260 → 80/150/300
+- Buff Lovely Kiss (Jynx): if already asleep, deal 50/100/150 special damage
+- Buff Aurora Beam (Iron Bundle, Dewgong): doubled freeze chance
+- Buff Alolan Rattata: Attack 4/10 → 6/15
+- Changed Silvally: no longer Wild, MultiAttack: 10 → 15 x synergy level special damage
+
 
 # Changes to Synergies
 
@@ -39,12 +51,14 @@
 
 # Gameplay
 
+- Players now start the game with 5 gold and one random common pokemon instead of 6 gold
 - Extra PP generated when reaching max PP are now saved and restored after casting ability
 - Attacks and abilities now have a frame delay specific to each pokemon before damage and effects are applied
 - Projectiles now have travel time
 - Increased preparation phase duration for rounds 3, 5, 8, 9, 11, 15 and 19: ~~30~~ 40 seconds ; for rounds 10 and 20: ~~45~~ 50 seconds
 - Increase experience cost for level 6,7,8,9 by 2
 - Reduce sleep duration reduction when taking a hit: 500ms → 300ms
+- Flinch status changed: ~~100~~ 50% of incoming damage bypass shield
 
 # UI
 
@@ -65,4 +79,7 @@
 
 - New accounts now start with a random avatar among Pokemon Mystery Dungeon starters
 - Vietnamese translation has been started thanks to Camchanh
+- Thank you to all contributors to the translations: gongdi1234, johnkyokim4, Kite2810,  CubeRubik, Camchanh, akaya0, mokers, Kimera24
 - Improved fight simulation accuracy in case of high server stress
+- Team Planner is now unlocked at lvl 2, Jukebox at level 10
+- New titles: Berserker, Natural, Golden, Siren, Fearsome

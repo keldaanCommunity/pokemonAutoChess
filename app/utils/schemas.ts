@@ -2,8 +2,8 @@ import {
   ArraySchema,
   CollectionSchema,
   MapSchema,
-  SetSchema,
-  Schema
+  Schema,
+  SetSchema
 } from "@colyseus/schema"
 
 export function keys(schema: MapSchema): string[] {

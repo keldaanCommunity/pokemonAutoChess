@@ -1,45 +1,45 @@
-import { PokemonAvatarModel } from "../../models/colyseus-models/pokemon-avatar"
-import { FloatingItem } from "../../models/colyseus-models/floating-item"
-import { Portal, SynergySymbol } from "../../models/colyseus-models/portal"
 import { MapSchema } from "@colyseus/schema"
 import {
   Bodies,
-  Composite,
-  Engine,
   Body,
-  Vector,
+  Composite,
+  Constraint,
+  Engine,
   Events,
-  Constraint
+  Vector
 } from "matter-js"
+import { FloatingItem } from "../../models/colyseus-models/floating-item"
 import Player from "../../models/colyseus-models/player"
+import { PokemonAvatarModel } from "../../models/colyseus-models/pokemon-avatar"
+import { Portal, SynergySymbol } from "../../models/colyseus-models/portal"
 import { getOrientation } from "../../public/src/pages/utils/utils"
+import GameRoom from "../../rooms/game-room"
+import GameState from "../../rooms/states/game-state"
+import { Transfer } from "../../types"
+import {
+  ItemCarouselStages,
+  KECLEON_SHOP_COST,
+  PortalCarouselStages,
+  SynergyTriggers
+} from "../../types/Config"
+import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
 import { PokemonActionState } from "../../types/enum/Game"
 import {
-  ItemComponents,
   CraftableItems,
   Item,
+  ItemComponents,
   SynergyStones
 } from "../../types/enum/Item"
+import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
+import { Synergy } from "../../types/enum/Synergy"
+import { clamp, min } from "../../utils/number"
 import {
   pickNRandomIn,
   pickRandomIn,
   randomBetween,
   shuffleArray
 } from "../../utils/random"
-import { clamp, min } from "../../utils/number"
-import {
-  ItemCarouselStages,
-  PortalCarouselStages,
-  SynergyTriggers,
-  KECLEON_SHOP_COST
-} from "../../types/Config"
-import { Synergy } from "../../types/enum/Synergy"
-import GameState from "../../rooms/states/game-state"
 import { keys, values } from "../../utils/schemas"
-import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
-import GameRoom from "../../rooms/game-room"
-import { Transfer } from "../../types"
-import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -148,6 +148,9 @@ export class MiniGame {
                   npc: "kecleon",
                   dialog: "thank_you"
                 })
+                if (player) {
+                  player.money -= KECLEON_SHOP_COST
+                }
               }
             }
 
@@ -585,9 +588,6 @@ export class MiniGame {
       if (avatar.itemId) {
         const item = this.items?.get(avatar.itemId)
         if (item && player && !player.isBot) {
-          if (state.specialGameRule === SpecialGameRule.KECLEONS_SHOP) {
-            player.money -= KECLEON_SHOP_COST
-          }
           player.items.push(item.name)
         }
       }
