@@ -10,8 +10,22 @@ const isProdBuild = process.argv[2] === "--build"
 let hashIndexPlugin = {
   name: "hash-index-plugin",
   setup(build) {
+    build.onStart(() => {
+      const files = fs.readdirSync("app/public/dist/client")
+      files.forEach((file) => {
+        // remove old files
+        if (file.startsWith("index-") && file.endsWith(".js")) {
+          fs.unlinkSync(`app/public/dist/client/${file}`)
+        }
+        if (file.startsWith("index-") && file.endsWith(".css")) {
+          fs.unlinkSync(`app/public/dist/client/${file}`)
+        }
+      })
+    })
     build.onEnd((result) => {
-      console.log(`build ended with ${result.errors.length} errors`)
+      if (result.errors.length > 0) {
+        console.log(`build ended with ${result.errors.length} errors`)
+      }
       updateHashedFilesInIndex()
     })
   }
