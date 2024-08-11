@@ -43,13 +43,19 @@ import {
   EloRank,
   ExpPlace,
   LegendaryShop,
+  MAX_SIMULATION_DELTA_TIME,
   PortalCarouselStages,
   RequiredStageLevelForXpElligibility,
   UniqueShop
 } from "../types/Config"
 import { GameMode, PokemonActionState } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
-import { Pkm, PkmDuos, PkmProposition, PkmRegionalVariants } from "../types/enum/Pokemon"
+import {
+  Pkm,
+  PkmDuos,
+  PkmProposition,
+  PkmRegionalVariants
+} from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { removeInArray } from "../utils/array"
@@ -95,7 +101,7 @@ export default class GameRoom extends Room<GameState> {
 
   // When room is initialized
   async onCreate(options: {
-    users: MapSchema<IGameUser>
+    users: Record<string, IGameUser>
     preparationId: string
     name: string
     ownerName: string
@@ -104,18 +110,18 @@ export default class GameRoom extends Room<GameState> {
     minRank: EloRank | null
     tournamentId: string | null
     bracketId: string | null
-    whenReady: (room: GameRoom) => void
   }) {
-    logger.trace("create game room")
+    logger.info("create game room")
+    this.listing.unlisted = true
     this.setMetadata(<IGameMetadata>{
       name: options.name,
       ownerName: options.ownerName,
       gameMode: options.gameMode,
-      playerIds: keys(options.users).filter(
-        (id) => options.users.get(id)!.isBot === false
+      playerIds: Object.keys(options.users).filter(
+        (id) => options.users[id].isBot === false
       ),
-      playersInfo: keys(options.users).map(
-        (u) => `${options.users.get(u)!.name} [${options.users.get(u)!.elo}]`
+      playersInfo: Object.keys(options.users).map(
+        (u) => `${options.users[u].name} [${options.users[u].elo}]`
       ),
       stageLevel: 0,
       type: "game",
@@ -166,7 +172,7 @@ export default class GameRoom extends Room<GameState> {
     }
 
     await Promise.all(
-      keys(options.users).map(async (id) => {
+      Object.keys(options.users).map(async (id) => {
         const user = options.users[id]
         //logger.debug(`init player`, user)
         if (user.isBot) {
@@ -490,15 +496,15 @@ export default class GameRoom extends Room<GameState> {
         }
       }
     })
-
-    // room ready
-    options.whenReady(this)
   }
 
   startGame() {
     if (this.state.gameLoaded) return // already started
     this.state.gameLoaded = true
     this.setSimulationInterval((deltaTime: number) => {
+      /* in case of lag spikes, the game should feel slower, 
+      but this max simulation dt helps preserving the correctness of simulation result */
+      deltaTime = Math.min(MAX_SIMULATION_DELTA_TIME, deltaTime)
       if (!this.state.gameFinished) {
         try {
           this.dispatcher.dispatch(new OnUpdateCommand(), { deltaTime })
@@ -745,6 +751,8 @@ export default class GameRoom extends Room<GameState> {
 
             if (player.rerollCount > 60) {
               player.titles.add(Title.GAMBLER)
+            } else if (player.rerollCount < 20 && rank === 1) {
+              player.titles.add(Title.NATURAL)
             }
 
             if (usr.titles === undefined) {

@@ -7,7 +7,7 @@ import { GameMode } from "../../../types/enum/Game"
 
 export interface IUserPreparationState {
   users: IGameUser[]
-  gameStarted: boolean
+  gameStartedAt: string | null
   ownerId: string
   ownerName: string
   messages: IChatV2[]
@@ -23,7 +23,7 @@ export interface IUserPreparationState {
 
 const initialState: IUserPreparationState = {
   users: [],
-  gameStarted: false,
+  gameStartedAt: null,
   ownerId: "",
   ownerName: "",
   messages: [],
@@ -71,8 +71,8 @@ export const preparationSlice = createSlice({
         1
       )
     },
-    setGameStarted: (state, action: PayloadAction<boolean>) => {
-      state.gameStarted = action.payload
+    setGameStarted: (state, action: PayloadAction<string | null>) => {
+      state.gameStartedAt = action.payload
     },
     setOwnerId: (state, action: PayloadAction<string>) => {
       state.ownerId = action.payload

@@ -95,7 +95,7 @@ export default function WikiItems() {
         </table>
       </article>
       <article>
-        <h2>
+        <h2 style={{ display: "flex", alignItems: "center" }}>
           <SynergyIcon type={Synergy.GRASS} /> {t("berries")}
         </h2>
         <ul className="berries">
@@ -116,7 +116,7 @@ export default function WikiItems() {
         </ul>
       </article>
       <article>
-        <h2>
+        <h2 style={{ display: "flex", alignItems: "center" }}>
           <SynergyIcon type={Synergy.ARTIFICIAL} /> {t("artificial_items")}
         </h2>
         <ul className="artificial">
@@ -131,7 +131,7 @@ export default function WikiItems() {
           ))}
         </ul>
 
-        <h2>
+        <h2 style={{ display: "flex", alignItems: "center" }}>
           <SynergyIcon type={Synergy.ROCK} /> {t("weather_rocks")}
         </h2>
         <ul className="weather-rocks">

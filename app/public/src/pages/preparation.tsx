@@ -101,7 +101,7 @@ export default function Preparation() {
         dispatch(addUser(u))
       })
 
-      r.state.listen("gameStarted", (value, previousValue) => {
+      r.state.listen("gameStartedAt", (value, previousValue) => {
         dispatch(setGameStarted(value))
       })
 

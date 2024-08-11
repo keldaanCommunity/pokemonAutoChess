@@ -815,7 +815,12 @@ export enum Pkm {
   POIPOLE = "POIPOLE",
   NAGANADEL = "NAGANADEL",
   CRAMORANT = "CRAMORANT",
-  ARROKUDA = "ARROKUDA"
+  ARROKUDA = "ARROKUDA",
+  WISHIWASHI = "WISHIWASHI",
+  WISHIWASHI_SCHOOL = "WISHIWASHI_SCHOOL",
+  PAWMI = "PAWMI",
+  PAWMO = "PAWMO",
+  PAWMOT = "PAWMOT"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1633,7 +1638,12 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.POIPOLE]: "0803",
   [Pkm.NAGANADEL]: "0804",
   [Pkm.CRAMORANT]: "0845",
-  [Pkm.ARROKUDA]: "0846"
+  [Pkm.ARROKUDA]: "0846",
+  [Pkm.WISHIWASHI]: "0746",
+  [Pkm.WISHIWASHI_SCHOOL]: "0746-0001",
+  [Pkm.PAWMI]: "0921",
+  [Pkm.PAWMO]: "0922",
+  [Pkm.PAWMOT]: "0923"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2451,7 +2461,12 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.POIPOLE]: Pkm.POIPOLE,
   [Pkm.NAGANADEL]: Pkm.POIPOLE,
   [Pkm.CRAMORANT]: Pkm.CRAMORANT,
-  [Pkm.ARROKUDA]: Pkm.ARROKUDA
+  [Pkm.ARROKUDA]: Pkm.ARROKUDA,
+  [Pkm.WISHIWASHI]: Pkm.WISHIWASHI,
+  [Pkm.WISHIWASHI_SCHOOL]: Pkm.WISHIWASHI,
+  [Pkm.PAWMI]: Pkm.PAWMI,
+  [Pkm.PAWMO]: Pkm.PAWMI,
+  [Pkm.PAWMOT]: Pkm.PAWMI
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
@@ -5979,9 +5994,9 @@ export const AnimationConfig: {
     emote: AnimationType.Charge
   },
   [Pkm.DRACOVISH]: {
-    attack: AnimationType.Idle, // TEMP while waiting for anims to be drawn
-    ability: AnimationType.Idle, // TEMP while waiting for anims to be drawn
-    emote: AnimationType.Idle, // TEMP while waiting for anims to be drawn,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Hop,
     shinyUnavailable: true
   },
   [Pkm.CORSOLA]: {
@@ -6624,7 +6639,7 @@ export const AnimationConfig: {
   [Pkm.KLEFKI]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Attack
   },
   [Pkm.RUFFLET]: {
     attack: AnimationType.Attack,
@@ -6689,6 +6704,32 @@ export const AnimationConfig: {
   [Pkm.ARROKUDA]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.WISHIWASHI]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.WISHIWASHI_SCHOOL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
+    emote: AnimationType.RearUp,
+    shinyUnavailable: true
+  },
+  [Pkm.PAWMI]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.PAWMO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
+    emote: AnimationType.Charge
+  },
+  [Pkm.PAWMOT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
     emote: AnimationType.Charge
   }
 }
