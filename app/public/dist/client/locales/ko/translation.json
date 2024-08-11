@@ -367,7 +367,9 @@
     "DIRE_CLAW": "페이탈클로",
     "FAKE_OUT": "속이다",
     "FELL_STINGER": "마지막일침",
-    "GULP_MISSILE": "그대로꿀꺽미사일"
+    "GULP_MISSILE": "그대로꿀꺽미사일",
+    "SCHOOLING": "어군",
+    "DOUBLE_SHOCK": "전광쌍격"
   },
   "pkm": {
     "DEFAULT": "미싱노",
