@@ -53,7 +53,7 @@
     "@reduxjs/toolkit": "^2.2.1",
     "@types/bootstrap": "^5.2.10",
     "body-parser": "^1.20.1",
-    "colyseus": "^0.15.16",
+    "colyseus": "^0.15.15",
     "colyseus.js": "^0.15.16",
     "cors": "^2.8.5",
     "cron": "^3.1.6",
