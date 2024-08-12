@@ -28,6 +28,7 @@ export interface INetwork {
   uid: string
   displayName: string
   profile: IUserMetadata | undefined
+  error: string | null
 }
 
 const endpoint = `${window.location.protocol.replace("http", "ws")}//${
@@ -43,7 +44,8 @@ const initalState: INetwork = {
   after: undefined,
   uid: "",
   displayName: "",
-  profile: undefined
+  profile: undefined,
+  error: null
 }
 
 export const networkSlice = createSlice({
@@ -286,6 +288,10 @@ export const networkSlice = createSlice({
       action: PayloadAction<{ name: string; startDate: string }>
     ) => {
       state.lobby?.send(Transfer.NEW_TOURNAMENT, action.payload)
+    },
+    setNetworkError: (state, action: PayloadAction<string | null>) => {
+      console.log("Setting network error to", action.payload)
+      state.error = action.payload
     }
   }
 })
@@ -343,7 +349,8 @@ export const {
   kick,
   deleteRoom,
   makeServerAnnouncement,
-  createTournament
+  createTournament,
+  setNetworkError
 } = networkSlice.actions
 
 export default networkSlice.reducer

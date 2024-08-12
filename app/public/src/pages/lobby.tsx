@@ -65,6 +65,7 @@ import {
   requestBotLeaderboard,
   requestLeaderboard,
   requestLevelLeaderboard,
+  setNetworkError,
   setProfile
 } from "../stores/NetworkStore"
 import RoomMenu from "./component/available-room-menu/room-menu"
@@ -96,6 +97,7 @@ export default function Lobby() {
     if (!lobbyJoined.current) {
       joinLobbyRoom(dispatch, client).catch((err) => {
         logger.error(err)
+        dispatch(setNetworkError(err.message))
         setToAuth(true)
       })
       lobbyJoined.current = true
@@ -470,10 +472,6 @@ export async function joinLobbyRoom(
 
           room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
             dispatch(setProfile(user))
-          })
-
-          room.onMessage(Transfer.AUTH_FAILED, (message: string) => {
-            alert(message)
           })
 
           room.onMessage(Transfer.USER, (user: LobbyUser) =>

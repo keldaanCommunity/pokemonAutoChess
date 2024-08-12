@@ -523,25 +523,22 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       client.send(Transfer.USER_PROFILE, userProfile)
 
       if (!user.displayName) {
-        client.send(
-          Transfer.AUTH_FAILED,
-          "No display name. Please report this error."
+        logger.error("No display name for this account", user.uid)
+        throw new Error(
+          "No display name for this account. Please report this error."
         )
-        throw "No display name"
       } else if (isBanned) {
-        client.send(Transfer.AUTH_FAILED, "Account banned")
-        throw "User banned"
+        throw new Error("Account banned")
       } else if (this.state.ccu > MAX_CCU) {
-        client.send(
-          Transfer.AUTH_FAILED,
+        throw new Error(
           "The servers are currently at maximum capacity. Please try again later."
         )
-        throw "Maximum capacity reached"
       } else {
         return user
       }
     } catch (error) {
-      logger.error(error)
+      logger.info(error)
+      throw error // https://docs.colyseus.io/community/deny-player-join-a-room/
     }
   }
 
