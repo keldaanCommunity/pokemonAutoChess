@@ -47,7 +47,10 @@ if (process.env.NODE_APP_INSTANCE) {
       clientOptions: any
     ) {
       if (roomName === "lobby") {
-        throw "Attempt to create one lobby"
+        const lobbies = await matchMaker.query({ name: "lobby" })
+        if (lobbies.length !== 0) {
+          throw "Attempt to create one lobby"
+        }
       }
       return (await matchMaker.stats.fetchAll()).sort((p1, p2) =>
         p1.ccu > p2.ccu ? 1 : -1
