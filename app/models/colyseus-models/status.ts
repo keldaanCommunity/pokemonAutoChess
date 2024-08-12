@@ -238,28 +238,28 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (
-      pokemon.effects.has(Effect.CURSE_OF_VULNERABILITY) &&
+      pokemon.status.curseVulnerability &&
       !pokemon.status.flinch
     ) {
       this.triggerFlinch(30000, pokemon)
     }
 
     if (
-      pokemon.effects.has(Effect.CURSE_OF_WEAKNESS) &&
+      pokemon.status.curseWeakness &&
       !pokemon.status.paralysis
     ) {
       this.triggerParalysis(30000, pokemon)
     }
 
     if (
-      pokemon.effects.has(Effect.CURSE_OF_TORMENT) &&
+      pokemon.status.curseTorment &&
       !pokemon.status.silence
     ) {
       this.triggerSilence(30000, pokemon)
     }
 
-    if (pokemon.effects.has(Effect.CURSE_OF_FATE) && !pokemon.status.curse) {
-      this.triggerCurse(5000)
+    if (pokemon.status.curseFate && !pokemon.status.curse) {
+      this.triggerCurse(5000) //Intentionally at 5s to account for status update delay
     }
   }
 
@@ -307,13 +307,8 @@ export default class Status extends Schema implements IStatus {
   triggerArmorReduction(duration: number, pkm: PokemonEntity) {
     if (!this.runeProtect) {
       this.armorReduction = true
-      if (pkm.effects.has(Effect.SWIFT_SWIM)) {
-        duration *= 0.7
-      } else if (pkm.effects.has(Effect.HYDRATION)) {
-        duration *= 0.4
-      } else if (pkm.effects.has(Effect.WATER_VEIL)) {
-        duration *= 0.1
-      }
+
+      duration = this.applyAquaticReduction(duration, pkm)
 
       if (duration > this.armorReductionCooldown) {
         this.armorReductionCooldown = Math.round(duration)
@@ -481,13 +476,7 @@ export default class Status extends Schema implements IStatus {
     ) {
       this.burn = true
 
-      if (pkm.effects.has(Effect.SWIFT_SWIM)) {
-        duration = Math.round(duration * 0.7)
-      } else if (pkm.effects.has(Effect.HYDRATION)) {
-        duration = Math.round(duration * 0.4)
-      } else if (pkm.effects.has(Effect.WATER_VEIL)) {
-        duration = Math.round(duration * 0.1)
-      }
+      duration = this.applyAquaticReduction(duration, pkm)
 
       if (duration > this.burnCooldown) {
         this.burnCooldown = duration
@@ -553,13 +542,7 @@ export default class Status extends Schema implements IStatus {
 
   triggerSilence(duration: number, pkm: PokemonEntity, origin?: PokemonEntity) {
     if (!this.runeProtect && !this.tree) {
-      if (pkm.effects.has(Effect.SWIFT_SWIM)) {
-        duration = Math.round(duration * 0.7)
-      } else if (pkm.effects.has(Effect.HYDRATION)) {
-        duration = Math.round(duration * 0.4)
-      } else if (pkm.effects.has(Effect.WATER_VEIL)) {
-        duration = Math.round(duration * 0.1)
-      }
+      duration = this.applyAquaticReduction(duration, pkm)
 
       this.silence = true
       if (duration > this.silenceCooldown) {
@@ -598,13 +581,7 @@ export default class Status extends Schema implements IStatus {
       }
       this.poisonStacks = max(maxStacks)(this.poisonStacks + 1)
 
-      if (pkm.effects.has(Effect.SWIFT_SWIM)) {
-        duration = Math.round(duration * 0.7)
-      } else if (pkm.effects.has(Effect.HYDRATION)) {
-        duration = Math.round(duration * 0.4)
-      } else if (pkm.effects.has(Effect.WATER_VEIL)) {
-        duration = Math.round(duration * 0.1)
-      }
+      duration = this.applyAquaticReduction(duration, pkm)
 
       if (duration > this.poisonCooldown) {
         this.poisonCooldown = duration
@@ -696,13 +673,8 @@ export default class Status extends Schema implements IStatus {
       if (pkm.status.enraged) {
         duration = duration / 2
       }
-      if (pkm.effects.has(Effect.SWIFT_SWIM)) {
-        duration *= 0.7
-      } else if (pkm.effects.has(Effect.HYDRATION)) {
-        duration *= 0.4
-      } else if (pkm.effects.has(Effect.WATER_VEIL)) {
-        duration *= 0.1
-      }
+
+      duration = this.applyAquaticReduction(duration, pkm)
 
       this.freeze = true
       this.freezeCooldown = Math.round(duration)
@@ -750,13 +722,8 @@ export default class Status extends Schema implements IStatus {
       if (pkm.status.enraged) {
         duration = duration / 2
       }
-      if (pkm.effects.has(Effect.SWIFT_SWIM)) {
-        duration *= 0.7
-      } else if (pkm.effects.has(Effect.HYDRATION)) {
-        duration *= 0.4
-      } else if (pkm.effects.has(Effect.WATER_VEIL)) {
-        duration *= 0.1
-      }
+
+      duration = this.applyAquaticReduction(duration, pkm)
 
       this.sleep = true
       this.sleepCooldown = Math.round(duration)
@@ -784,13 +751,8 @@ export default class Status extends Schema implements IStatus {
       if (pkm.simulation.weather === Weather.SANDSTORM) {
         duration *= 1.3
       }
-      if (pkm.effects.has(Effect.SWIFT_SWIM)) {
-        duration *= 0.7
-      } else if (pkm.effects.has(Effect.HYDRATION)) {
-        duration *= 0.4
-      } else if (pkm.effects.has(Effect.WATER_VEIL)) {
-        duration *= 0.1
-      }
+
+      duration = this.applyAquaticReduction(duration, pkm)
 
       this.confusion = true
       this.confusionCooldown = Math.round(duration)
@@ -825,13 +787,9 @@ export default class Status extends Schema implements IStatus {
       if (pkm.simulation.weather === Weather.MISTY) {
         duration *= 1.3
       }
-      if (pkm.effects.has(Effect.SWIFT_SWIM)) {
-        duration *= 0.7
-      } else if (pkm.effects.has(Effect.HYDRATION)) {
-        duration *= 0.4
-      } else if (pkm.effects.has(Effect.WATER_VEIL)) {
-        duration *= 0.1
-      }
+
+      duration = this.applyAquaticReduction(duration, pkm)
+
       this.charm = true
       this.charmCooldown = duration
       this.charmOrigin = origin
@@ -861,13 +819,8 @@ export default class Status extends Schema implements IStatus {
       if (pkm.simulation.weather === Weather.BLOODMOON) {
         duration *= 1.3
       }
-      if (pkm.effects.has(Effect.SWIFT_SWIM)) {
-        duration *= 0.7
-      } else if (pkm.effects.has(Effect.HYDRATION)) {
-        duration *= 0.4
-      } else if (pkm.effects.has(Effect.WATER_VEIL)) {
-        duration *= 0.1
-      }
+
+      duration = this.applyAquaticReduction(duration, pkm)
 
       if (duration > this.woundCooldown) {
         this.woundCooldown = duration
@@ -896,13 +849,8 @@ export default class Status extends Schema implements IStatus {
       if (pkm.simulation.weather === Weather.STORM) {
         duration *= 1.3
       }
-      if (pkm.effects.has(Effect.SWIFT_SWIM)) {
-        duration *= 0.7
-      } else if (pkm.effects.has(Effect.HYDRATION)) {
-        duration *= 0.4
-      } else if (pkm.effects.has(Effect.WATER_VEIL)) {
-        duration *= 0.1
-      }
+
+      duration = this.applyAquaticReduction(duration, pkm)
 
       if (duration > this.paralysisCooldown) {
         this.paralysisCooldown = Math.round(duration)
@@ -949,13 +897,9 @@ export default class Status extends Schema implements IStatus {
   triggerFlinch(duration: number, pkm: PokemonEntity, origin?: PokemonEntity) {
     if (!this.runeProtect) {
       this.flinch = true
-      if (pkm.effects.has(Effect.SWIFT_SWIM)) {
-        duration *= 0.7
-      } else if (pkm.effects.has(Effect.HYDRATION)) {
-        duration *= 0.4
-      } else if (pkm.effects.has(Effect.WATER_VEIL)) {
-        duration *= 0.1
-      }
+
+      duration = this.applyAquaticReduction(duration, pkm)
+
       if (duration > this.flinchCooldown) {
         this.flinchCooldown = Math.round(duration)
       }
@@ -1093,13 +1037,7 @@ export default class Status extends Schema implements IStatus {
         duration = duration / 2
       }
 
-      if (pkm.effects.has(Effect.SWIFT_SWIM)) {
-        duration *= 0.7
-      } else if (pkm.effects.has(Effect.HYDRATION)) {
-        duration *= 0.4
-      } else if (pkm.effects.has(Effect.WATER_VEIL)) {
-        duration *= 0.1
-      }
+      duration = this.applyAquaticReduction(duration, pkm)
 
       this.locked = true
       this.lockedCooldown = Math.round(duration)
@@ -1114,5 +1052,16 @@ export default class Status extends Schema implements IStatus {
     } else {
       this.lockedCooldown -= dt
     }
+  }
+
+  private applyAquaticReduction(duration: number, pkm: IPokemonEntity): number {
+    if (pkm.effects.has(Effect.SWIFT_SWIM)) {
+      duration = Math.round(duration * 0.7)
+    } else if (pkm.effects.has(Effect.HYDRATION)) {
+      duration = Math.round(duration * 0.4)
+    } else if (pkm.effects.has(Effect.WATER_VEIL)) {
+      duration = Math.round(duration * 0.1)
+    }
+    return duration
   }
 }

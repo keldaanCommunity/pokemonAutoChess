@@ -1,23 +1,25 @@
-import { Client, Room, RoomAvailable } from "colyseus.js"
 import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
+import { Client, Room, RoomAvailable } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Navigate } from "react-router-dom"
 import LobbyUser from "../../../models/colyseus-models/lobby-user"
+import PokemonConfig from "../../../models/colyseus-models/pokemon-config"
 import {
   TournamentBracketSchema,
   TournamentPlayerSchema,
   TournamentSchema
 } from "../../../models/colyseus-models/tournament"
-import PokemonConfig from "../../../models/colyseus-models/pokemon-config"
 import { IBot } from "../../../models/mongo-models/bot-v2"
+import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import {
   ICustomLobbyState,
   ISuggestionUser,
   PkmWithConfig,
   Transfer
 } from "../../../types"
+import { logger } from "../../../utils/logger"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import i18n from "../i18n"
 import store from "../stores"
@@ -26,7 +28,6 @@ import {
   addRoom,
   addTournament,
   addTournamentBracket,
-  addUser,
   changePokemonConfig,
   changeTournament,
   changeTournamentBracket,
@@ -39,11 +40,11 @@ import {
   removeRoom,
   removeTournament,
   removeTournamentBracket,
-  removeUser,
   setBoosterContent,
   setBotData,
   setBotLeaderboard,
   setBotList,
+  setCcu,
   setLanguage,
   setLeaderboard,
   setLevelLeaderboard,
@@ -63,18 +64,16 @@ import {
   requestLevelLeaderboard,
   setProfile
 } from "../stores/NetworkStore"
-import RoomMenu from "./component/available-room-menu/room-menu"
-import CurrentUsers from "./component/available-user-menu/current-users"
-import Chat from "./component/chat/chat"
+import { Announcements } from "./component/announcements/announcements"
+import AvailableRoomMenu from "./component/available-room-menu/available-room-menu"
+import { GameRoomsMenu } from "./component/available-room-menu/game-rooms-menu"
 import TabMenu from "./component/lobby-menu/tab-menu"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
-import { FIREBASE_CONFIG } from "./utils/utils"
-import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
-import { logger } from "../../../utils/logger"
-import { localStore, LocalStoreKeys } from "./utils/store"
 import { cc } from "./utils/jsx"
-import { Modal } from "./component/modal/modal"
+import { LocalStoreKeys, localStore } from "./utils/store"
+import { FIREBASE_CONFIG } from "./utils/utils"
 import "./lobby.css"
+import { Modal } from "./component/modal/modal"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
@@ -87,7 +86,9 @@ export default function Lobby() {
   const gameRooms: RoomAvailable[] = useAppSelector(
     (state) => state.lobby.gameRooms
   )
-  const showGameReconnect = gameToReconnect != null && gameRooms.some((r) => r.roomId === gameToReconnect)
+  const showGameReconnect =
+    gameToReconnect != null &&
+    gameRooms.some((r) => r.roomId === gameToReconnect)
 
   const [toPreparation, setToPreparation] = useState<boolean>(false)
   const [toGame, setToGame] = useState<boolean>(false)
@@ -138,24 +139,27 @@ export default function Lobby() {
           setToPreparation={setToPreparation}
         />
       </div>
-      <Modal show={showGameReconnect}
+      <Modal
+        show={showGameReconnect}
         header={t("game-reconnect-modal-title")}
         body={t("game-reconnect-modal-body")}
-        footer={<>
-          <button className="bubbly green" onClick={() => setToGame(true)}>
-            {t("yes")}
-          </button>
-          <button
-            className="bubbly red"
-            onClick={() => {
-              setGameToReconnect(null)
-              localStore.delete(LocalStoreKeys.RECONNECTION_GAME)
-            }}
-          >
-            {t("no")}
-          </button>
-        </>}>
-      </Modal>
+        footer={
+          <>
+            <button className="bubbly green" onClick={() => setToGame(true)}>
+              {t("yes")}
+            </button>
+            <button
+              className="bubbly red"
+              onClick={() => {
+                setGameToReconnect(null)
+                localStore.delete(LocalStoreKeys.RECONNECTION_GAME)
+              }}
+            >
+              {t("no")}
+            </button>
+          </>
+        }
+      ></Modal>
     </main>
   )
 }
@@ -175,25 +179,32 @@ function MainLobby({ toPreparation, setToPreparation }) {
             {t("leaderboard")}
           </li>
           <li
-            onClick={() => setActive("rooms")}
-            className={cc({ active: activeSection === "rooms" })}
+            onClick={() => setActive("available_rooms")}
+            className={cc({ active: activeSection === "available_rooms" })}
           >
             <img width={32} height={32} src={`assets/ui/room.svg`} />
             {t("rooms")}
           </li>
           <li
+            onClick={() => setActive("game_rooms")}
+            className={cc({ active: activeSection === "game_rooms" })}
+          >
+            <img width={32} height={32} src={`assets/ui/spectate.svg`} />
+            {t("in_game")}
+          </li>
+          {/*<li
             onClick={() => setActive("online")}
             className={cc({ active: activeSection === "online" })}
           >
             <img width={32} height={32} src={`assets/ui/players.svg`} />
             {t("online")}
-          </li>
+          </li>*/}
           <li
-            onClick={() => setActive("chat")}
-            className={cc({ active: activeSection === "chat" })}
+            onClick={() => setActive("announcements")}
+            className={cc({ active: activeSection === "announcements" })}
           >
             <img width={32} height={32} src={`assets/ui/chat.svg`} />
-            {t("chat")}
+            {t("announcements")}
           </li>
         </ul>
       </nav>
@@ -204,17 +215,25 @@ function MainLobby({ toPreparation, setToPreparation }) {
       >
         <TabMenu />
       </section>
-      <section className={cc("rooms", { active: activeSection === "rooms" })}>
-        <RoomMenu
-          toPreparation={toPreparation}
-          setToPreparation={setToPreparation}
-        />
+      <section
+        className={cc("rooms", { active: activeSection === "available_rooms" })}
+      >
+        <AvailableRoomMenu />
       </section>
-      <section className={cc("online", { active: activeSection === "online" })}>
+      <section
+        className={cc("game_rooms", { active: activeSection === "game_rooms" })}
+      >
+        <GameRoomsMenu />
+      </section>
+      {/*<section className={cc("online", { active: activeSection === "online" })}>
         <CurrentUsers />
-      </section>
-      <section className={cc("chat", { active: activeSection === "chat" })}>
-        <Chat source="lobby" />
+      </section>*/}
+      <section
+        className={cc("announcements", {
+          active: activeSection === "announcements"
+        })}
+      >
+        <Announcements />
       </section>
     </div>
   )
@@ -238,15 +257,18 @@ export async function joinLobbyRoom(
           if (lobby) {
             await lobby.leave()
           }
-          const room: Room<ICustomLobbyState> = await client.joinOrCreate(
-            "lobby",
-            { idToken: token }
-          )
+          const room: Room<ICustomLobbyState> = await client.join("lobby", {
+            idToken: token
+          })
           room.state.messages.onAdd((m) => {
             dispatch(pushMessage(m))
           })
           room.state.messages.onRemove((m) => {
             dispatch(removeMessage(m))
+          })
+
+          room.state.listen("ccu", (value) => {
+            dispatch(setCcu(value))
           })
 
           room.state.tournaments.onAdd((tournament) => {
@@ -345,8 +367,6 @@ export async function joinLobbyRoom(
           })
 
           room.state.users.onAdd((u) => {
-            dispatch(addUser(u))
-
             if (u.id == user.uid) {
               u.pokemonCollection.onAdd((p) => {
                 const pokemonConfig = p as PokemonConfig
@@ -417,10 +437,6 @@ export async function joinLobbyRoom(
             dispatch(setNextSpecialGame(specialGame))
           })
 
-          room.state.users.onRemove((u) => {
-            dispatch(removeUser(u.id))
-          })
-
           room.onMessage(Transfer.REQUEST_LEADERBOARD, (l) => {
             dispatch(setLeaderboard(l))
           })
@@ -467,6 +483,10 @@ export async function joinLobbyRoom(
 
           room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
             dispatch(setProfile(user))
+          })
+
+          room.onMessage(Transfer.AUTH_FAILED, (message: string) => {
+            alert(message)
           })
 
           room.onMessage(Transfer.USER, (user: LobbyUser) =>

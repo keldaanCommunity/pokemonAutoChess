@@ -28,7 +28,7 @@ export default function RoomItem(props: {
   if (props.room.clients >= nbPlayersExpected) {
     canJoin = false
     disabledReason = t("game_full")
-  } else if (props.room.metadata?.gameStarted === true) {
+  } else if (props.room.metadata?.gameStartedAt != null) {
     canJoin = false
     disabledReason = t("game_already_started")
   } else if (
@@ -120,7 +120,7 @@ export default function RoomItem(props: {
         onClick={() => {
           if (
             props.room.clients < nbPlayersExpected &&
-            props.room.metadata?.gameStarted !== true
+            props.room.metadata?.gameStartedAt === null
           ) {
             props.click(props.room)
           }

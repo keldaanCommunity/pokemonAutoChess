@@ -812,7 +812,16 @@ export enum Pkm {
   STONJOURNER = "STONJOURNER",
   HISUI_SNEASEL = "HISUI_SNEASEL",
   SNEASLER = "SNEASLER",
-  PYUKUMUKU = "PYUKUMUKU"
+  PYUKUMUKU = "PYUKUMUKU",
+  POIPOLE = "POIPOLE",
+  NAGANADEL = "NAGANADEL",
+  CRAMORANT = "CRAMORANT",
+  ARROKUDA = "ARROKUDA",
+  WISHIWASHI = "WISHIWASHI",
+  WISHIWASHI_SCHOOL = "WISHIWASHI_SCHOOL",
+  PAWMI = "PAWMI",
+  PAWMO = "PAWMO",
+  PAWMOT = "PAWMOT"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1627,7 +1636,16 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.STONJOURNER]: "0874",
   [Pkm.HISUI_SNEASEL]: "0215-0001",
   [Pkm.SNEASLER]: "0903",
-  [Pkm.PYUKUMUKU]: "0771"
+  [Pkm.PYUKUMUKU]: "0771",
+  [Pkm.POIPOLE]: "0803",
+  [Pkm.NAGANADEL]: "0804",
+  [Pkm.CRAMORANT]: "0845",
+  [Pkm.ARROKUDA]: "0846",
+  [Pkm.WISHIWASHI]: "0746",
+  [Pkm.WISHIWASHI_SCHOOL]: "0746-0001",
+  [Pkm.PAWMI]: "0921",
+  [Pkm.PAWMO]: "0922",
+  [Pkm.PAWMOT]: "0923"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2442,7 +2460,16 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.STONJOURNER]: Pkm.STONJOURNER,
   [Pkm.HISUI_SNEASEL]: Pkm.HISUI_SNEASEL,
   [Pkm.SNEASLER]: Pkm.HISUI_SNEASEL,
-  [Pkm.PYUKUMUKU]: Pkm.PYUKUMUKU
+  [Pkm.PYUKUMUKU]: Pkm.PYUKUMUKU,
+  [Pkm.POIPOLE]: Pkm.POIPOLE,
+  [Pkm.NAGANADEL]: Pkm.POIPOLE,
+  [Pkm.CRAMORANT]: Pkm.CRAMORANT,
+  [Pkm.ARROKUDA]: Pkm.ARROKUDA,
+  [Pkm.WISHIWASHI]: Pkm.WISHIWASHI,
+  [Pkm.WISHIWASHI_SCHOOL]: Pkm.WISHIWASHI,
+  [Pkm.PAWMI]: Pkm.PAWMI,
+  [Pkm.PAWMO]: Pkm.PAWMI,
+  [Pkm.PAWMOT]: Pkm.PAWMI
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
@@ -2454,7 +2481,6 @@ export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
   [Pkm.ZORUA]: [Pkm.HISUI_ZORUA],
   [Pkm.GRIMER]: [Pkm.ALOLAN_GRIMER],
   [Pkm.NIDORANF]: [Pkm.NIDORANM],
-  [Pkm.KLEFKI]: [Pkm.KLEFKI],
   [Pkm.SNEASEL]: [Pkm.HISUI_SNEASEL]
 }
 
@@ -5971,9 +5997,9 @@ export const AnimationConfig: {
     emote: AnimationType.Charge
   },
   [Pkm.DRACOVISH]: {
-    attack: AnimationType.Idle, // TEMP while waiting for anims to be drawn
-    ability: AnimationType.Idle, // TEMP while waiting for anims to be drawn
-    emote: AnimationType.Idle, // TEMP while waiting for anims to be drawn,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Hop,
     shinyUnavailable: true
   },
   [Pkm.CORSOLA]: {
@@ -6616,7 +6642,7 @@ export const AnimationConfig: {
   [Pkm.KLEFKI]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Attack
   },
   [Pkm.RUFFLET]: {
     attack: AnimationType.Attack,
@@ -6661,6 +6687,52 @@ export const AnimationConfig: {
   [Pkm.SNEASLER]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Attack,
+    emote: AnimationType.Charge
+  },
+  [Pkm.POIPOLE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.NAGANADEL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.CRAMORANT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.ARROKUDA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.WISHIWASHI]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.WISHIWASHI_SCHOOL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
+    emote: AnimationType.RearUp,
+    shinyUnavailable: true
+  },
+  [Pkm.PAWMI]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.PAWMO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
+    emote: AnimationType.Charge
+  },
+  [Pkm.PAWMOT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
     emote: AnimationType.Charge
   },
   [Pkm.PYUKUMUKU]: {

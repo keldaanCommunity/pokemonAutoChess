@@ -20,7 +20,7 @@ import {
 } from "../../types/Config"
 import { GameMode, GamePhaseState } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
-import { PkmProposition } from "../../types/enum/Pokemon"
+import { Pkm, PkmProposition } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Weather } from "../../types/enum/Weather"
 import { pickRandomIn, randomBetween } from "../../utils/random"
@@ -35,7 +35,7 @@ export default class GameState extends Schema {
   @type({ map: FloatingItem }) floatingItems = new MapSchema<FloatingItem>()
   @type({ map: Portal }) portals = new MapSchema<Portal>()
   @type({ map: SynergySymbol }) symbols = new MapSchema<SynergySymbol>()
-  @type(["string"]) additionalPokemons = new ArraySchema<PkmProposition>()
+  @type(["string"]) additionalPokemons = new ArraySchema<Pkm>()
   @type("uint8") stageLevel = 1
   @type("string") weather: Weather
   @type("boolean") noElo = false

@@ -15,8 +15,7 @@ import { useAppDispatch, useAppSelector } from "../hooks"
 import {
   joinPreparation,
   logIn,
-  setProfile,
-  toggleReady
+  setProfile
 } from "../stores/NetworkStore"
 import {
   addUser,
@@ -43,7 +42,6 @@ import PreparationMenu from "./component/preparation/preparation-menu"
 import { SOUNDS, playSound } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import { FIREBASE_CONFIG } from "./utils/utils"
-import { GameMode } from "../../../types/enum/Game"
 import "./preparation.css"
 
 export default function Preparation() {
@@ -53,6 +51,7 @@ export default function Preparation() {
   const room: Room<PreparationState> | undefined = useAppSelector(
     (state) => state.network.preparation
   )
+  const user = useAppSelector((state) => state.lobby.user)
   const initialized = useRef<boolean>(false)
   const [toGame, setToGame] = useState<boolean>(false)
   const [toAuth, setToAuth] = useState<boolean>(false)
@@ -102,7 +101,7 @@ export default function Preparation() {
         dispatch(addUser(u))
       })
 
-      r.state.listen("gameStarted", (value, previousValue) => {
+      r.state.listen("gameStartedAt", (value, previousValue) => {
         dispatch(setGameStarted(value))
       })
 
@@ -250,7 +249,10 @@ export default function Preparation() {
         />
         <main>
           <PreparationMenu />
-          <Chat source="preparation" />
+          <div className="my-container user-chat custom-bg">
+            <h2>{user?.anonymous ? t("chat_disabled_anonymous") : t("chat")}</h2>
+            <Chat source="preparation" canWrite={user ? !user.anonymous : false} />
+          </div>
         </main>
       </div>
     )

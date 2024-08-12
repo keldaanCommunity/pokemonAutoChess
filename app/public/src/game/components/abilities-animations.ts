@@ -3,7 +3,7 @@ import PokemonFactory from "../../../../models/pokemon-factory"
 import { AttackSprite } from "../../../../types"
 import { Ability } from "../../../../types/enum/Ability"
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
-import { distanceE } from "../../../../utils/distance"
+import { distanceE, distanceM } from "../../../../utils/distance"
 import {
   OrientationArray,
   OrientationVector
@@ -533,6 +533,10 @@ export function displayAbility(
 
     case Ability.VENOSHOCK:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
+    case Ability.FELL_STINGER:
+      addAbilitySprite(Ability.VENOSHOCK, coordinatesTarget, true).setScale(2)
       break
 
     case Ability.LEECH_LIFE:
@@ -1546,6 +1550,58 @@ export function displayAbility(
       break
     }
 
+    case "GULP_MISSILE/pikachu": {
+      const duration = distanceM(positionX, positionY, targetX, targetY) * 150
+
+      const specialProjectile = addAbilitySprite(skill, coordinates)
+        .setScale(2)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) -
+            Math.PI / 2
+        )
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        yoyo: false,
+        duration: duration,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
+    case "GULP_MISSILE/arrokuda": {
+      const duration = distanceM(positionX, positionY, targetX, targetY) * 150
+
+      const specialProjectile = addAbilitySprite(skill, coordinates)
+        .setScale(2)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) -
+            Math.PI / 2
+        )
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        yoyo: false,
+        duration: duration,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.AURORA_BEAM: {
       const [dx, dy] = OrientationVector[orientation]
       const finalCoords = transformAttackCoordinate(
@@ -1582,6 +1638,11 @@ export function displayAbility(
       break
 
     case Ability.CONFUSING_MIND:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
+    case Ability.DOUBLE_SHOCK:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
@@ -2262,6 +2323,10 @@ export function displayAbility(
       })
       break
     }
+
+    case Ability.SCHOOLING:
+      addAbilitySprite(skill, coordinates, true).setDepth(0).setScale(4)
+      break
 
     case Ability.STONE_AXE:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)

@@ -62,7 +62,7 @@ export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
         dragonDoubleTypes.get(family)!.add(values(pkm.types)[1])
       }
       if (pkm.items.has(Item.SHINY_STONE)) {
-        synergies.set(Synergy.LIGHT, (synergies.get(Synergy.LIGHT) ?? 0) + 2)
+        synergies.set(Synergy.LIGHT, (synergies.get(Synergy.LIGHT) ?? 0) + 1)
       }
     }
   })

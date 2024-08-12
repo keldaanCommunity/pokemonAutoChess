@@ -66,6 +66,7 @@ import {
 } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { AbilityCommand } from "../simulation-command"
+import { isOnBench } from "../../models/colyseus-models/pokemon"
 
 export class BlueFlareStrategy extends AbilityStrategy {
   process(
@@ -878,6 +879,42 @@ export class AquaJetStrategy extends AbilityStrategy {
   }
 }
 
+export class SchoolingStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 0.1 * pokemon.hp
+
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
+
+    if (pokemon.player) {
+      pokemon.player.board.forEach((ally, id) => {
+        if (ally && ally.name === Pkm.WISHIWASHI && isOnBench(ally)) {
+          pokemon.addMaxHP(50)
+          pokemon.refToBoardPokemon.hp += 50
+          pokemon.player!.board.delete(id)
+        }
+      })
+    }
+  }
+}
+
 export class ElectroWebStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -1381,13 +1418,13 @@ export class AuroraBeamStrategy extends AbilityStrategy {
         )
         let freezeChance = 0
         if (pokemon.effects.has(Effect.CHILLY)) {
-          freezeChance = 0.2
-        } else if (pokemon.effects.has(Effect.FROSTY)) {
-          freezeChance = 0.3
-        } else if (pokemon.effects.has(Effect.FREEZING)) {
           freezeChance = 0.4
+        } else if (pokemon.effects.has(Effect.FROSTY)) {
+          freezeChance = 0.6
+        } else if (pokemon.effects.has(Effect.FREEZING)) {
+          freezeChance = 0.8
         } else if (pokemon.effects.has(Effect.SHEER_COLD)) {
-          freezeChance = 0.5
+          freezeChance = 1.0
         }
         if (chance(freezeChance)) {
           targetInLine.status.triggerFreeze(2000, target)
@@ -2085,12 +2122,20 @@ export class SeedFlareStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = 30
 
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team) {
-        tg.addSpecialDefense(-2, pokemon, 0, false)
-        tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-      }
-    })
+    board
+      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 5)
+      .forEach((cell) => {
+        if (cell.value && pokemon.team !== cell.value.team) {
+          cell.value.addSpecialDefense(-2, pokemon, 0, false)
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
   }
 }
 
@@ -3075,8 +3120,8 @@ export class DiveStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 3 ? 60 : pokemon.stars === 2 ? 30 : 15
-    const freezeDuration = 1500
+    const damage = pokemon.stars === 3 ? 50 : pokemon.stars === 2 ? 30 : 15
+    const freezeDuration = 1000
     const mostSurroundedCoordinate =
       state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
 
@@ -5220,6 +5265,35 @@ export class FakeOutStrategy extends AbilityStrategy {
   }
 }
 
+export class FellStingerStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [20, 40, 70][pokemon.stars - 1] ?? 30
+    const victim = target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+    if (victim.death && !pokemon.isClone) {
+      pokemon.addAbilityPower(5, pokemon, 0, false)
+      pokemon.addAttack(1, pokemon, 0, false)
+      pokemon.addMaxHP(10)
+      pokemon.handleHeal(10, pokemon, 0, false)
+      pokemon.refToBoardPokemon.atk += 1
+      pokemon.refToBoardPokemon.ap += 5
+      pokemon.refToBoardPokemon.hp += 10
+    }
+  }
+}
+
 export class EruptionStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -5231,33 +5305,34 @@ export class EruptionStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = [30, 50, 70][pokemon.stars - 1] ?? 30
     const numberOfProjectiles =
-      pokemon.stars === 1 ? 15 : pokemon.stars === 2 ? 25 : 40
+      pokemon.stars === 1 ? 20 : pokemon.stars === 2 ? 30 : 45
 
     for (let i = 0; i < numberOfProjectiles; i++) {
-      const x = randomBetween(0, BOARD_WIDTH - 1)
-      const y = randomBetween(0, BOARD_HEIGHT - 1)
-      const value = board.getValue(x, y)
-      if (value && value.team !== pokemon.team) {
-        value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-      }
-      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-        id: pokemon.simulation.id,
-        skill: Ability.ERUPTION,
-        positionX: pokemon.positionX,
-        positionY: pokemon.positionY,
-        targetX: x,
-        targetY: y
-      })
+      pokemon.commands.push(
+        new AbilityCommand(() => {
+          const x = randomBetween(0, BOARD_WIDTH - 1)
+          const y = randomBetween(0, BOARD_HEIGHT - 1)
+          const value = board.getValue(x, y)
+          if (value && value.team !== pokemon.team) {
+            value.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: Ability.ERUPTION,
+            positionX: pokemon.positionX,
+            positionY: pokemon.positionY,
+            targetX: x,
+            targetY: y
+          })
+        }, i * 100)
+      )
     }
-
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerBurn(5000, target, pokemon)
   }
 }
 
@@ -7420,10 +7495,22 @@ export class LovelyKissStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const duration = Math.round(
-      ([2000, 4000][pokemon.stars - 1] ?? 2000) * (1 + pokemon.ap / 100)
-    )
-    target.status.triggerSleep(duration, target)
+
+    if (target.status.sleep) {
+      const damage = [50, 100, 150][pokemon.stars - 1] ?? 50
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    } else {
+      const duration = Math.round(
+        ([2000, 4000, 6000][pokemon.stars - 1] ?? 2000) * (1 + pokemon.ap / 100)
+      )
+      target.status.triggerSleep(duration, target)
+    }
   }
 }
 
@@ -7995,7 +8082,7 @@ export class MultiAttackStrategy extends AbilityStrategy {
     if (synergies && silvallyType && synergies.has(silvallyType)) {
       synergyLevelCount = synergies.get(silvallyType)!
     }
-    const damage = 10 * synergyLevelCount
+    const damage = 15 * synergyLevelCount
 
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
@@ -9359,6 +9446,110 @@ export class GravityStrategy extends AbilityStrategy {
   }
 }
 
+export class GulpMissileStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+
+    let missilePkm = Pkm.ARROKUDA
+    let missilePkmString = "arrokuda"
+
+    const damage = 55
+
+    if (chance(0.3)) {
+      missilePkm = Pkm.PIKACHU
+      missilePkmString = "pikachu"
+    }
+
+    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+      id: pokemon.simulation.id,
+      skill: `GULP_MISSILE/${missilePkmString}`,
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY,
+      targetX: target.positionX,
+      targetY: target.positionY
+    })
+
+    const missile = PokemonFactory.createPokemonFromName(
+      missilePkm,
+      pokemon.player
+    )
+
+    pokemon.commands.push(
+      new AbilityCommand(
+        () => {
+          const coord = state.getNearestAvailablePlaceCoordinates(target, board)
+          if (coord) {
+            const entity = pokemon.simulation.addPokemon(
+              missile,
+              coord.x,
+              coord.y,
+              pokemon.team,
+              true
+            )
+
+            entity.pp = entity.maxPP
+
+            const cells = board.getAdjacentCells(
+              target.positionX,
+              target.positionY
+            )
+
+            cells.forEach((cell) => {
+              if (cell.value && cell.value.team !== pokemon.team) {
+                cell.value.handleSpecialDamage(
+                  damage,
+                  board,
+                  AttackType.SPECIAL,
+                  pokemon,
+                  crit
+                )
+              }
+            })
+          }
+        },
+        distanceM(
+          target.positionX,
+          target.positionY,
+          pokemon.positionX,
+          pokemon.positionY
+        ) *
+          150 -
+          30
+      )
+    )
+  }
+}
+
+export class DoubleShockStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+
+    const damage = pokemon.stars === 3 ? 200 : pokemon.stars === 2 ? 100 : 50
+
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+
+    pokemon.status.triggerParalysis(3000, pokemon)
+  }
+}
+
 export class PurifyStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -9724,5 +9915,9 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.GRAVITY]: new GravityStrategy(),
   [Ability.DIRE_CLAW]: new DireClawStrategy(),
   [Ability.FAKE_OUT]: new FakeOutStrategy(),
-  [Ability.PURIFY]: new PurifyStrategy()
+  [Ability.PURIFY]: new PurifyStrategy(),
+  [Ability.FELL_STINGER]: new FellStingerStrategy(),
+  [Ability.GULP_MISSILE]: new GulpMissileStrategy(),
+  [Ability.SCHOOLING]: new SchoolingStrategy(),
+  [Ability.DOUBLE_SHOCK]: new DoubleShockStrategy()
 }

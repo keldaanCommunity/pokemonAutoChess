@@ -3,7 +3,7 @@ import type GameState from "../../rooms/states/game-state"
 import type { IPlayer, Role, Title } from "../../types"
 import { SynergyTriggers, UniqueShop } from "../../types/Config"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
-import { BattleResult } from "../../types/enum/Game"
+import { BattleResult, Rarity } from "../../types/enum/Game"
 import {
   ArtificialItems,
   Berries,
@@ -49,7 +49,7 @@ export default class Player extends Schema implements IPlayer {
   @type(["string"]) shop = new ArraySchema<Pkm>()
   @type(ExperienceManager) experienceManager = new ExperienceManager()
   @type({ map: "uint8" }) synergies = new Synergies()
-  @type("uint16") money = process.env.MODE == "dev" ? 999 : 6
+  @type("uint16") money = process.env.MODE == "dev" ? 999 : 5
   @type("int8") life = 100
   @type("boolean") shopLocked: boolean = false
   @type("uint8") streak: number = 0
@@ -138,6 +138,16 @@ export default class Player extends Schema implements IPlayer {
       this.life = 9
       this.canRegainLife = false
     }
+
+    const randomStarter = state.shop.getRandomPokemonFromPool(
+      Rarity.COMMON,
+      this
+    )
+    const pokemon = PokemonFactory.createPokemonFromName(randomStarter, this)
+    pokemon.positionX = getFirstAvailablePositionInBench(this.board) ?? 0
+    pokemon.positionY = 0
+    this.board.set(pokemon.id, pokemon)
+    pokemon.onAcquired(this)
 
     if (state.specialGameRule === SpecialGameRule.UNIQUE_STARTER) {
       const randomUnique = pickRandomIn(UniqueShop)

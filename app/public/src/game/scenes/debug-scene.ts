@@ -120,7 +120,7 @@ export class DebugScene extends Phaser.Scene {
         return new Promise((resolve) => {
           this.load.reset()
           tilemap.tilesets.forEach((t) => {
-            logger.debug(`loading tileset ${t.image}`)
+            //logger.debug(`loading tileset ${t.image}`)
             this.load.image(
               mapName + "/" + t.name,
               "/assets/tilesets/" + mapName + "/" + t.image

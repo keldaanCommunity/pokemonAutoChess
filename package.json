@@ -17,10 +17,7 @@
     "url": "https://github.com/keldaanCommunity/pokemonAutoChess/issues"
   },
   "author": "keldaan-ag",
-  "contributors": [
-    "ogus",
-    "sylvainpolletvillard"
-  ],
+  "contributors": ["ogus", "sylvainpolletvillard"],
   "main": "public/dist/server/app/index.js",
   "scripts": {
     "reset": "rimraf -rf node_modules/",
@@ -31,12 +28,12 @@
     "build-client": "node esbuild.js --build",
     "build-server": "tsc",
     "download-music": "rimraf -rf ./app/public/src/assets/musics && git clone https://github.com/keldaanCommunity/pokemonAutoChessMusic ./app/public/src/assets/musics",
-    "build": "npm run assetpack && npm run build-client && npm run build-server",
+    "build": "npm run build-client && npm run build-server",
     "start": "node ./app/public/dist/server/app/index.js",
     "add-bot": "node ./app/public/dist/server/db-commands/populate-bot.js",
     "monitor-bot": "node ./app/public/dist/server/scheduled/monitor-bot.js",
     "translate": "npx @inlang/cli machine translate -f",
-    "postinstall": "npm run download-music && cd edit/assetpack && npm install",
+    "postinstall": "cd edit/assetpack && npm install",
     "assetpack": "cd edit/assetpack && npm run assetpack",
     "precompute": "cd gen && ts-node precompute-all.ts",
     "colyseus-post-deploy": "npx colyseus-post-deploy",
@@ -47,6 +44,7 @@
     "@colyseus/monitor": "^0.15.7",
     "@colyseus/redis-driver": "^0.15.5",
     "@colyseus/redis-presence": "^0.15.4",
+    "@colyseus/schema": "^2.0.34",
     "@colyseus/tools": "^0.15.36",
     "@colyseus/ws-transport": "^0.15.0",
     "@joaomoreno/unique-names-generator": "^5.1.0",

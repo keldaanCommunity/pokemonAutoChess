@@ -275,12 +275,6 @@ export const networkSlice = createSlice({
     selectLanguage: (state, action: PayloadAction<Language>) => {
       state.lobby?.send(Transfer.SELECT_LANGUAGE, action.payload)
     },
-    makeServerAnnouncement: (
-      state,
-      action: PayloadAction<{ message: string }>
-    ) => {
-      state.lobby?.send(Transfer.SERVER_ANNOUNCEMENT, action.payload)
-    },
     createTournament: (
       state,
       action: PayloadAction<{ name: string; startDate: string }>
@@ -342,7 +336,6 @@ export const {
   setTitle,
   kick,
   deleteRoom,
-  makeServerAnnouncement,
   createTournament
 } = networkSlice.actions
 

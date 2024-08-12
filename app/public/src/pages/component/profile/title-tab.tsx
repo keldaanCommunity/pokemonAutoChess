@@ -19,6 +19,11 @@ export function TitleTab() {
 
   useEffect(() => {
     fetchTitles().then((res) => {
+      Object.keys(Title).forEach((title) => {
+        if (!res.some((t) => t.name === title)) {
+          res.push({ name: title as Title, rarity: 0 })
+        }
+      })
       setTitles(res)
     })
   }, [])

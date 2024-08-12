@@ -46,6 +46,7 @@ import { EloRank } from "../../types/enum/EloRank"
 import { GameMode, Rarity } from "../../types/enum/Game"
 import { Language } from "../../types/enum/Language"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
+import { StarterAvatars } from "../../types/enum/Starters"
 import { ITournamentPlayer } from "../../types/interfaces/Tournament"
 import { sum } from "../../utils/array"
 import { logger } from "../../utils/logger"
@@ -75,6 +76,7 @@ export class OnJoinCommand extends Command<
     try {
       //logger.info(`${client.auth.displayName} ${client.id} join lobby room`)
       client.send(Transfer.ROOMS, rooms)
+      client.userData = { joinedAt: Date.now() }
       const user = await UserMetadata.findOne({ uid: client.auth.uid })
 
       if (user) {
@@ -126,9 +128,11 @@ export class OnJoinCommand extends Command<
       } else {
         // create new user account
         const numberOfBoosters = 3
+        const starterAvatar = pickRandomIn(StarterAvatars)
         UserMetadata.create({
           uid: client.auth.uid,
           displayName: client.auth.displayName,
+          avatar: starterAvatar,
           booster: numberOfBoosters,
           pokemonCollection: new Map<string, IPokemonConfig>()
         })
@@ -138,7 +142,7 @@ export class OnJoinCommand extends Command<
             client.auth.uid,
             client.auth.displayName,
             1000,
-            "0019/Normal",
+            starterAvatar,
             0,
             0,
             0,
@@ -291,7 +295,11 @@ export class OnNewMessageCommand extends Command<
       message = cleanProfanity(message.substring(0, MAX_MESSAGE_LENGTH))
 
       const user = this.state.users.get(client.auth.uid)
-      if (user && !user.anonymous && message != "") {
+      if (
+        user &&
+        [Role.ADMIN, Role.MODERATOR].includes(user.role) &&
+        message != ""
+      ) {
         this.state.addMessage(message, user.id, user.name, user.avatar)
       }
     } catch (error) {
@@ -572,35 +580,49 @@ export class BuyEmotionCommand extends Command<
   }) {
     try {
       const user = this.state.users.get(client.auth.uid)
+      const cost = getEmotionCost(emotion, shiny)
       if (!user) return
       const pokemonConfig = user.pokemonCollection.get(index)
       if (!pokemonConfig) return
 
-      const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
+      const mongoUser = await UserMetadata.findOneAndUpdate(
+        {
+          uid: client.auth.uid,
+          $and: [
+            { [`pokemonCollection.${index}.dust`]: { $gte: cost } },
+            {
+              [`pokemonCollection.${index}.${shiny ? "shinyEmotions" : "emotions"}`]:
+                { $ne: emotion }
+            }
+          ]
+        },
+        {
+          $inc: { [`pokemonCollection.${index}.dust`]: -cost },
+          $push: {
+            [`pokemonCollection.${index}.${shiny ? "shinyEmotions" : "emotions"}`]:
+              emotion
+          },
+          [`pokemonCollection.${index}.selectedEmotion`]: emotion,
+          [`pokemonCollection.${index}.selectedShiny`]: shiny
+        },
+        { new: true }
+      )
+
+      // const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
       if (!mongoUser) return
 
       const mongoPokemonConfig = mongoUser.pokemonCollection.get(index)
       if (!mongoPokemonConfig) return
 
-      const cost = getEmotionCost(emotion, shiny)
-      const emotions = shiny
-        ? mongoPokemonConfig.shinyEmotions
-        : mongoPokemonConfig.emotions
-
-      if (emotions.includes(emotion) || mongoPokemonConfig.dust < cost) return // already bought or can't afford
-
-      emotions.push(emotion)
-      mongoPokemonConfig.dust -= cost
-      mongoPokemonConfig.selectedEmotion = emotion
-      mongoPokemonConfig.selectedShiny = shiny
-
       pokemonConfig.dust = mongoPokemonConfig.dust // resync shards to database value, db authoritative
-      pokemonConfig.selectedEmotion = emotion
-      pokemonConfig.selectedShiny = shiny
+      pokemonConfig.selectedShiny = mongoPokemonConfig.selectedShiny
+      pokemonConfig.selectedEmotion = mongoPokemonConfig.selectedEmotion
 
-      if (shiny) {
+      if (shiny && mongoPokemonConfig.shinyEmotions.includes(emotion)) {
         pokemonConfig.shinyEmotions.push(emotion)
-      } else {
+      }
+
+      if (!shiny && mongoPokemonConfig.emotions.includes(emotion)) {
         pokemonConfig.emotions.push(emotion)
       }
 
@@ -668,24 +690,32 @@ export class BuyBoosterCommand extends Command<
   async execute({ client, index }: { client: Client; index: string }) {
     try {
       const user = this.state.users.get(client.auth.uid)
+      const BOOSTER_COST = 500
       if (!user) return
+
+      const mongoUser = await UserMetadata.findOneAndUpdate(
+        {
+          uid: client.auth.uid,
+          [`pokemonCollection.${index}.dust`]: { $gte: BOOSTER_COST }
+        },
+        {
+          $inc: {
+            booster: 1,
+            [`pokemonCollection.${index}.dust`]: -BOOSTER_COST
+          }
+        },
+        { new: true }
+      )
+      if (!mongoUser) return
+
       const pokemonConfig = user.pokemonCollection.get(index)
       if (!pokemonConfig) return
 
-      const BOOSTER_COST = 500
-      const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
-      const mongoPokemonConfig = mongoUser?.pokemonCollection.get(index)
-      if (
-        mongoUser &&
-        mongoPokemonConfig &&
-        mongoPokemonConfig.dust >= BOOSTER_COST
-      ) {
-        mongoPokemonConfig.dust -= BOOSTER_COST
-        pokemonConfig.dust = mongoPokemonConfig.dust // resync shards to database value, db authoritative
-        mongoUser.booster += 1
-        user.booster = mongoUser.booster
-        mongoUser.save()
-      }
+      const mongoPokemonConfig = mongoUser.pokemonCollection.get(index)
+      if (!mongoPokemonConfig) return
+
+      user.booster = mongoUser.booster
+      pokemonConfig.dust = mongoPokemonConfig.dust // resync shards to database value, db authoritative
     } catch (error) {
       logger.error(error)
     }
@@ -1149,22 +1179,6 @@ export class OpenSpecialGameCommand extends Command<
     })
 
     this.state.getNextSpecialGame()
-  }
-}
-
-export class MakeServerAnnouncementCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client; message: string }
-> {
-  async execute({ client, message }: { client: Client; message: string }) {
-    try {
-      const u = this.state.users.get(client.auth.uid)
-      if (u && u.role && u.role === Role.ADMIN) {
-        this.room.presence.publish("server-announcement", message)
-      }
-    } catch (error) {
-      logger.error(error)
-    }
   }
 }
 

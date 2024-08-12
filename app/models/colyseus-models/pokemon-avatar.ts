@@ -7,7 +7,7 @@ import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 
 export class PokemonAvatarModel extends Schema implements IPokemonAvatar {
   @type("string") id: string
-  @type("string") name: Pkm = Pkm.RATTATA
+  @type("string") name: Pkm
   @type("boolean") shiny: boolean
   @type("number") x: number
   @type("number") y: number

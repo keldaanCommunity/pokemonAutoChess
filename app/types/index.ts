@@ -138,9 +138,9 @@ export enum Transfer {
   SELECT_LANGUAGE = "SELECT_LANGUAGE",
   USER_PROFILE = "USER_PROFILE",
   PICK_BERRY = "PICK_BERRY",
-  SERVER_ANNOUNCEMENT = "SERVER_ANNOUNCEMENT",
   PRELOAD_MAPS = "PRELOAD_MAPS",
-  NPC_DIALOG = "NPC_DIALOG"
+  NPC_DIALOG = "NPC_DIALOG",
+  AUTH_FAILED = "AUTH_FAILED"
 }
 
 export enum AttackSprite {
@@ -263,6 +263,7 @@ export interface IDragDropCombineMessage {
 }
 
 export interface ICustomLobbyState extends Schema {
+  ccu: number
   messages: ArraySchema<Message>
   users: MapSchema<LobbyUser>
   leaderboard: ILeaderboardInfo[]
@@ -270,6 +271,7 @@ export interface ICustomLobbyState extends Schema {
   levelLeaderboard: ILeaderboardInfo[]
   nextSpecialGame: ISpecialGamePlanned
   tournaments: ArraySchema<TournamentSchema>
+  clients: number
 }
 
 export interface IGameState extends Schema {
@@ -394,6 +396,7 @@ export interface IPokemon {
   range: number
   stars: number
   maxPP: number
+  ap: number
   skill: Ability
   passive: Passive
   items: SetSchema<Item>
@@ -634,7 +637,7 @@ export interface IPreparationMetadata {
   password: string | null
   noElo: boolean
   type: "preparation"
-  gameStarted: boolean
+  gameStartedAt: string | null
   minRank: string | null
   gameMode: GameMode
   whitelist: string[]
@@ -702,6 +705,7 @@ export enum Title {
   MUSICIAN = "MUSICIAN",
   BABYSITTER = "BABYSITTER",
   ALCHEMIST = "ALCHEMIST",
+  BERSERKER = "BERSERKER",
   BLOB = "BLOB",
   HARLEQUIN = "HARLEQUIN",
   TACTICIAN = "TACTICIAN",
@@ -721,12 +725,16 @@ export enum Title {
   TYRANT = "TYRANT",
   SURVIVOR = "SURVIVOR",
   GAMBLER = "GAMBLER",
+  NATURAL = "NATURAL",
   BOT_BUILDER = "BOT_BUILDER",
   SHINY_SEEKER = "SHINY_SEEKER",
   ARCHEOLOGIST = "ARCHEOLOGIST",
   PRIMAL = "PRIMAL",
   DENTIST = "DENTIST",
   FISHERMAN = "FISHERMAN",
+  SIREN = "SIREN",
+  FEARSOME = "FEARSOME",
+  GOLDEN = "GOLDEN",
   CHOSEN_ONE = "CHOSEN_ONE",
   VANQUISHER = "VANQUISHER",
   OUTSIDER = "OUTSIDER",
