@@ -3,6 +3,8 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: stretch;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .user-chat h2 {
