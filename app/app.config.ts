@@ -62,7 +62,7 @@ export default config({
     gameServer.define("after-game", AfterGameRoom)
     gameServer.define("lobby", CustomLobbyRoom)
     gameServer.define("preparation", PreparationRoom).enableRealtimeListing()
-    gameServer.define("game", GameRoom)
+    gameServer.define("game", GameRoom).enableRealtimeListing()
   },
 
   initializeExpress: (app) => {

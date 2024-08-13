@@ -35,6 +35,7 @@
 - Buff Aurora Beam (Iron Bundle, Dewgong): doubled freeze chance
 - Buff Alolan Rattata: Attack 4/10 → 6/15
 - Changed Silvally: no longer Wild, MultiAttack: 10 → 15 x synergy level special damage
+- Buff Suicune: PP 130 → 100
 
 
 # Changes to Synergies
@@ -65,6 +66,7 @@
 - Rework all fighting animations to match with frame delays
 - Show current Wild pokemon chance in synergy description ingame
 - Show current egg chance in Baby synergy description ingame
+- Show units acquired in synergy description tooltips
 - Main lobby chat is now reserved to game announcements, and admins/mods announcements. We invite you to join Discord for general chat instead.
 - Added tournament info on lobby screen
 - Removed online list from lobby screen. It was inpractical with the current number of players.
@@ -79,7 +81,7 @@
 
 - New accounts now start with a random avatar among Pokemon Mystery Dungeon starters
 - Vietnamese translation has been started thanks to Camchanh
-- Thank you to all contributors to the translations: gongdi1234, johnkyokim4, Kite2810,  CubeRubik, Camchanh, akaya0, mokers, Kimera24
+- Thank you to all contributors to the translations: gongdi1234, johnkyokim4, Kite2810,  CubeRubik, Camchanh, akaya0, mokers, Kimera24, Ryusei, yeopo, Yacha
 - Improved fight simulation accuracy in case of high server stress
 - Team Planner is now unlocked at lvl 2, Jukebox at level 10
 - New titles: Berserker, Natural, Golden, Siren, Fearsome

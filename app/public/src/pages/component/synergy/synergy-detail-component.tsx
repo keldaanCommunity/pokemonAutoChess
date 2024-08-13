@@ -4,6 +4,7 @@ import { isOnBench } from "../../../../../models/colyseus-models/pokemon"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../../../../models/precomputed/precomputed-types-and-categories"
 import { PVEStages } from "../../../../../models/pve-stages"
+import { IPlayer } from "../../../../../types"
 import {
   RarityColor,
   RarityCost,
@@ -142,45 +143,46 @@ export default function SynergyDetailComponent(props: {
       })}
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {regulars.map((p) => (
-          <PokemonPortrait p={p} key={p.name} />
+          <PokemonPortrait p={p} key={p.name} player={currentPlayer} />
         ))}
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "0.5em" }}>
         {additionals.map((p) => (
-          <PokemonPortrait p={p} key={p.name} />
+          <PokemonPortrait p={p} key={p.name} player={currentPlayer} />
         ))}
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "0.5em" }}>
         {uniques.map((p) => (
-          <PokemonPortrait p={p} key={p.name} />
+          <PokemonPortrait p={p} key={p.name} player={currentPlayer} />
         ))}
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "0.5em" }}>
         {legendaries.map((p) => (
-          <PokemonPortrait p={p} key={p.name} />
+          <PokemonPortrait p={p} key={p.name} player={currentPlayer} />
         ))}
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "0.5em" }}>
         {specials.map((p) => (
-          <PokemonPortrait p={p} key={p.name} />
+          <PokemonPortrait p={p} key={p.name} player={currentPlayer} />
         ))}
       </div>
     </div>
   )
 }
-function PokemonPortrait(props: { p: IPokemonData }) {
+
+function PokemonPortrait(props: { p: IPokemonData, player?: IPlayer }) {
+  const isOnTeam = (p: Pkm) => props.player != null && values(props.player.board).some((x) => PkmFamily[x.name] === p)
   return (
     <div
       className={cc("pokemon-portrait", {
         additional: props.p.additional,
-        regional: props.p.regional
+        regional: props.p.regional,
+        acquired: isOnTeam(props.p.name)
       })}
       key={props.p.name}
+      style={{ color: RarityColor[props.p.rarity], border: "3px solid " + RarityColor[props.p.rarity] }}
     >
-      <img
-        style={{ border: "3px solid " + RarityColor[props.p.rarity] }}
-        src={getPortraitSrc(props.p.index)}
-      />
+      <img src={getPortraitSrc(props.p.index)} />
     </div>
   )
 }

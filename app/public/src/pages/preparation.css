@@ -15,7 +15,7 @@
 }
 
 .preparation-page .preparation-menu,
-.preparation-page .user-chat {
+.preparation-page .chat-container {
   height: calc(100vh - 8vw);
 }
 
@@ -23,8 +23,10 @@
   flex: 0 1 50em;
 }
 
-.preparation-page .user-chat {
+.preparation-page .chat-container {
   flex: 0 1 30em;
+  display: flex;
+  flex-direction: column;
 }
 
 .preparation-page > footer {
@@ -41,13 +43,13 @@
   }
 
   .preparation-page .preparation-menu,
-  .preparation-page .user-chat {
+  .preparation-page .chat-container {
     min-height: initial;
     overflow: auto;
     margin-bottom: 1em;
   }
 
-  .preparation-page .user-chat {
+  .preparation-page .chat-container {
     padding-bottom: 60px;
   }
 }
