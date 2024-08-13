@@ -226,7 +226,16 @@
     "HIDDEN_POWER_Y": "Sức mạnh tiềm ẩn (YOGA)",
     "HIDDEN_POWER_Z": "Sức mạnh tiềm ẩn (ZZZZ)",
     "HIDDEN_POWER_QM": "Sức mạnh tiềm ẩn (?)",
-    "HIDDEN_POWER_EM": "Sức mạnh tiềm ẩn (!)"
+    "HIDDEN_POWER_EM": "Sức mạnh tiềm ẩn (!)",
+    "POISON_JAB": "Đâm độc",
+    "SHELL_SMASH": "Đập vỏ",
+    "HELPING_HAND": "Đưa tay đây nào",
+    "ASTRAL_BARRAGE": "Dòng chảy tinh tú",
+    "WATERFALL": "Thác đổ",
+    "PYRO_BALL": "Cầu lửa",
+    "WHIRLPOOL": "Xoáy nước",
+    "SMOKE_SCREEN": "Bom khói",
+    "PRESENT": "Quà tặng cột sống"
   },
   "community_translations": "Bản dịch được thực hiện bởi cộng đồng Pokemon Autochess. Nếu bạn muốn đóng góp hoặc chỉnh sửa bản dịch, hãy đến",
   "no_emotions_available": "Không có cảm xúc",
