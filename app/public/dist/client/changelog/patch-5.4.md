@@ -52,6 +52,7 @@
 # Gameplay
 
 - Players now start the game with 5 gold and one random common pokemon instead of 6 gold
+- Ditto can no longer appear on stage 1
 - Extra PP generated when reaching max PP are now saved and restored after casting ability
 - Attacks and abilities now have a frame delay specific to each pokemon before damage and effects are applied
 - Projectiles now have travel time
