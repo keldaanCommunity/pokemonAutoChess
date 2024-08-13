@@ -319,7 +319,7 @@
     "GRASS_WHISTLE": "Ru NGỦ [1,2,4] Pokemon đối thủ trong 2 giây",
     "TRI_ATTACK": "Gây [30,60,SP] SÁT THƯƠNG PHÉP. Có thể THIÊU ĐỐT, ĐÓNG BĂNG hoặc TÊ LIỆT mục tiêu",
     "ECHO": "Gây [3,6,9,SP]  SÁT THƯƠNG PHÉP cho tất cả Pokemon đối thủ. Mỗi lần bản thân sử dụng khả năng này, sát thương tăng thêm [3,6,9,SP]",
-    "PETAL_DANCE": "Gây [20,30,50,SP] SÁT THƯƠNG PHÉP tới [3,4,5] đối thủ gần nhất"
+    "PETAL_DANCE": "Gây [20,30,50,SP] SÁT THƯƠNG PHÉP tới [3,4,5] đối thủ gần nhất "
   },
   "community_translations": "Bản dịch được thực hiện bởi cộng đồng Pokemon Autochess. Nếu bạn muốn đóng góp hoặc chỉnh sửa bản dịch, hãy đến",
   "no_emotions_available": "Không có cảm xúc",
