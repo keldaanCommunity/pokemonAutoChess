@@ -235,7 +235,17 @@
     "PYRO_BALL": "Cầu lửa",
     "WHIRLPOOL": "Xoáy nước",
     "SMOKE_SCREEN": "Bom khói",
-    "PRESENT": "Quà tặng cột sống"
+    "PRESENT": "Quà tặng cột sống",
+    "LEAF_BLADE": "Đao lá",
+    "PSYCHIC": "Tâm linh",
+    "PSYBEAM": "Chùm tia tâm linh",
+    "ATTRACT": "Thả thính ",
+    "WATER_PULSE": "Xung nước",
+    "PLAY_ROUGH": "Chơi bẩnDSM ",
+    "AERIAL_ACE": "Ba bích trên trời",
+    "PARABOLIC_CHARGE": "y=ax²",
+    "SUPER_FANG": "Sonic siêu nanh",
+    "TEETER_DANCE": "Múa thoát y"
   },
   "community_translations": "Bản dịch được thực hiện bởi cộng đồng Pokemon Autochess. Nếu bạn muốn đóng góp hoặc chỉnh sửa bản dịch, hãy đến",
   "no_emotions_available": "Không có cảm xúc",
