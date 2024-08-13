@@ -124,6 +124,8 @@ export class FusionBoltStrategy extends AbilityStrategy {
       multiplier = 1
     } else if (pokemon.effects.has(Effect.OVERDRIVE)) {
       multiplier = 2
+    } else if (pokemon.effects.has(Effect.POWER_SURGE)) {
+      multiplier = 3
     }
     damage += multiplier * 40
 
