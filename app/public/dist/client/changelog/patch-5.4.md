@@ -36,6 +36,7 @@
 - Buff Alolan Rattata: Attack 4/10 → 6/15
 - Changed Silvally: no longer Wild, MultiAttack: 10 → 15 x synergy level special damage
 - Buff Present (Delibird): chance to heal ~~80~~ 50HP: ~~20~~ 10%; chance to deal 300 damage ~~10~~ 20%
+- Buff Suicune: PP 130 → 100
 
 
 # Changes to Synergies
