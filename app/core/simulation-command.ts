@@ -1,4 +1,6 @@
+import { Transfer } from "../types"
 import { Effect } from "../types/enum/Effect"
+import { AttackType } from "../types/enum/Game"
 import Board from "./board"
 import { PokemonEntity } from "./pokemon-entity"
 
@@ -52,13 +54,18 @@ export class AttackCommand extends SimulationCommand {
     this.pokemon.state.attack(this.pokemon, this.board, this.targetCoordinate)
     if (
       this.pokemon.effects.has(Effect.RISING_VOLTAGE) ||
-      this.pokemon.effects.has(Effect.OVERDRIVE)
+      this.pokemon.effects.has(Effect.OVERDRIVE) ||
+      this.pokemon.effects.has(Effect.POWER_SURGE)
     ) {
-      let isTripleAttack = false
+      let isTripleAttack = false,
+        isPowerSurge = false
       if (this.pokemon.effects.has(Effect.RISING_VOLTAGE)) {
         isTripleAttack = this.pokemon.count.attackCount % 4 === 0
       } else if (this.pokemon.effects.has(Effect.OVERDRIVE)) {
         isTripleAttack = this.pokemon.count.attackCount % 3 === 0
+      } else if (this.pokemon.effects.has(Effect.POWER_SURGE)) {
+        isTripleAttack = this.pokemon.count.attackCount % 3 === 0
+        isPowerSurge = true
       }
       if (isTripleAttack) {
         this.pokemon.count.tripleAttackCount++
@@ -72,6 +79,32 @@ export class AttackCommand extends SimulationCommand {
           this.board,
           this.targetCoordinate
         )
+        if (isPowerSurge) {
+          this.board
+            .getAdjacentCells(this.targetCoordinate.x, this.targetCoordinate.y)
+            .forEach((cell) => {
+              if (cell) {
+                const enemy = this.board.getValue(cell.x, cell.y)
+                if (enemy && this.pokemon.team !== enemy.team) {
+                  enemy.handleSpecialDamage(
+                    10,
+                    this.board,
+                    AttackType.SPECIAL,
+                    this.pokemon,
+                    false
+                  )
+                  this.pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+                    id: this.pokemon.simulation.id,
+                    skill: "LINK_CABLE_link",
+                    positionX: this.targetCoordinate.x,
+                    positionY: this.targetCoordinate.y,
+                    targetX: enemy.positionX,
+                    targetY: enemy.positionY
+                  })
+                }
+              }
+            })
+        }
       }
     }
   }
