@@ -265,15 +265,17 @@ export default class AnimationManager {
       action === PokemonActionState.HURT ||
       action === PokemonActionState.EMOTE
 
-    const duration =
-      action === PokemonActionState.ATTACK ? 1000 / entity.atkSpeed : undefined
+    const timeScale =
+      action === PokemonActionState.ATTACK
+        ? getAttackAnimTimeScale(entity.index, entity.atkSpeed)
+        : 1
 
     try {
       this.play(entity, animation, {
         flip,
         lock: shouldLock,
         repeat: loop ? -1 : 0,
-        duration
+        timeScale
       })
     } catch (err) {
       logger.warn(`Can't play animation ${animation} for ${entity?.name}`, err)
@@ -287,7 +289,7 @@ export default class AnimationManager {
       flip?: boolean
       repeat?: number
       lock?: boolean
-      duration?: number
+      timeScale?: number
     } = {}
   ) {
     if (entity.animationLocked || !entity.sprite?.anims) return
@@ -319,12 +321,12 @@ export default class AnimationManager {
     entity.sprite.anims.play({
       key: animKey,
       repeat: config.repeat,
-      duration: config.duration
+      timeScale: config.timeScale
     })
     entity.shadow.anims.play({
       key: shadowKey,
       repeat: config.repeat,
-      duration: config.duration
+      timeScale: config.timeScale
     })
     if (config.lock) {
       entity.animationLocked = true
@@ -338,8 +340,8 @@ export function getAttackTimings(pokemon: IPokemonEntity): {
   attackDuration: number
 } {
   const attackDuration = 1000 / pokemon.atkSpeed
-  const d = delays[pokemon.index]?.d || 18
-  const t = delays[pokemon.index]?.t || 36
+  const d = delays[pokemon.index]?.d || 18 // number of frames before hit
+  const t = delays[pokemon.index]?.t || 36 // total number of frames in the animation
 
   const delayBeforeShoot = max(attackDuration / 2)((attackDuration * d) / t)
   const distance = distanceC(
@@ -350,4 +352,11 @@ export function getAttackTimings(pokemon: IPokemonEntity): {
   )
   const travelTime = (distance * 1000) / PROJECTILE_SPEED
   return { delayBeforeShoot, travelTime, attackDuration }
+}
+
+export function getAttackAnimTimeScale(pokemonIndex: string, atkSpeed: number) {
+  const t = delays[pokemonIndex]?.t || 36 // total number of frames in the animation
+
+  const timeScale = (t * atkSpeed) / FPS_POKEMON_ANIMS
+  return timeScale
 }

@@ -36,6 +36,7 @@ export default class BattleManager {
   animationManager: AnimationManager
   player: Player
   boardEventSprites: Array<GameObjects.Sprite | null>
+  pokemonSprites: Map<string, PokemonSprite> = new Map()
 
   constructor(
     scene: GameScene,
@@ -49,6 +50,7 @@ export default class BattleManager {
     this.animationManager = animationManager
     this.player = player
     this.boardEventSprites = new Array(BOARD_WIDTH * BOARD_HEIGHT).fill(null)
+    this.pokemonSprites = new Map()
     if (simulation) this.setSimulation(simulation)
   }
 
@@ -95,6 +97,7 @@ export default class BattleManager {
         this.flip
       )
       this.group.add(pokemonUI)
+      this.pokemonSprites.set(pokemon.id, pokemonUI)
     }
   }
 
@@ -107,6 +110,7 @@ export default class BattleManager {
     })
     this.group.clear(true, true)
     this.boardEventSprites = new Array(BOARD_WIDTH * BOARD_HEIGHT).fill(null)
+    this.pokemonSprites.clear()
   }
 
   removePokemon(simulationId: string, pokemon: IPokemonEntity) {
@@ -339,263 +343,255 @@ export default class BattleManager {
     previousValue: number
   ) {
     // logger.debug(field, value);
-    if (this.simulation?.id == simulationId && this.group) {
-      const children = this.group.getChildren()
-      for (let i = 0; i < children.length; i++) {
-        const pkm = <PokemonSprite>children[i]
-
-        if (pkm.id == pokemon.id) {
-          if (field == "crit") {
-            if (value != 0) {
-              this.displayCriticalHit(pkm.x, pkm.y)
-            }
-          } else if (field == "dodgeCount") {
-            if (value != 0) {
-              this.displayDodge(pkm.x, pkm.y)
-            }
-          } else if (field == "ult") {
-            if (value != 0) {
-              this.animationManager.play(
-                pkm,
-                AnimationConfig[pkm.name as Pkm].ability,
-                { flip: this.flip, lock: true, repeat: 0 }
-              )
-              pkm.specialAttackAnimation(this.group, value)
-            }
-          } else if (field == "petalDanceCount") {
-            if (value != 0) {
-              displayAbility(
-                this.scene,
-                [],
-                Ability.PETAL_DANCE,
-                pkm.orientation,
-                pkm.positionX,
-                pkm.positionY,
-                pkm.targetX ?? -1,
-                pkm.targetY ?? -1,
-                this.flip
-              )
-            }
-          } else if (field == "futureSightCount") {
-            if (value != 0) {
-              displayAbility(
-                this.scene,
-                [],
-                Ability.FUTURE_SIGHT,
-                pkm.orientation,
-                pkm.positionX,
-                pkm.positionY,
-                pkm.targetX ?? -1,
-                pkm.targetY ?? -1,
-                this.flip
-              )
-            }
-          } else if (field == "earthquakeCount") {
-            if (value != 0) {
-              displayAbility(
-                this.scene,
-                [],
-                Ability.EARTHQUAKE,
-                pkm.orientation,
-                pkm.positionX,
-                pkm.positionY,
-                pkm.targetX ?? -1,
-                pkm.targetY ?? -1,
-                this.flip
-              )
-            }
-          } else if (field == "fieldCount") {
-            if (value != 0) {
-              displayAbility(
-                this.scene,
-                [],
-                "FIELD_DEATH",
-                pkm.orientation,
-                pkm.positionX,
-                pkm.positionY,
-                pkm.targetX ?? -1,
-                pkm.targetY ?? -1,
-                this.flip
-              )
-            }
-          } else if (field == "soundCount") {
-            if (value != 0) {
-              displayAbility(
-                this.scene,
-                [],
-                Ability.ECHO,
-                pkm.orientation,
-                pkm.positionX,
-                pkm.positionY,
-                pkm.targetX ?? -1,
-                pkm.targetY ?? -1,
-                this.flip
-              )
-            }
-          } else if (field == "growGroundCount") {
-            if (value != 0) {
-              displayAbility(
-                this.scene,
-                [],
-                "GROUND_GROW",
-                pkm.orientation,
-                pkm.positionX,
-                pkm.positionY,
-                pkm.targetX ?? -1,
-                pkm.targetY ?? -1,
-                this.flip
-              )
-            }
-          } else if (field == "fightingBlockCount") {
-            if (value > 0 && value % 10 === 0) {
-              displayAbility(
-                this.scene,
-                [],
-                "FIGHTING_KNOCKBACK",
-                pkm.orientation,
-                pkm.positionX,
-                pkm.positionY,
-                pkm.targetX ?? -1,
-                pkm.targetY ?? -1,
-                this.flip
-              )
-            }
-          } else if (field == "fairyCritCount") {
-            if (value != 0) {
-              displayAbility(
-                this.scene,
-                [],
-                "FAIRY_CRIT",
-                pkm.orientation,
-                pkm.positionX,
-                pkm.positionY,
-                pkm.targetX ?? -1,
-                pkm.targetY ?? -1,
-                this.flip
-              )
-            }
-          } else if (field == "powerLensCount") {
-            if (value != 0) {
-              displayAbility(
-                this.scene,
-                [],
-                "POWER_LENS",
-                pkm.orientation,
-                pkm.positionX,
-                pkm.positionY,
-                pkm.targetX ?? -1,
-                pkm.targetY ?? -1,
-                this.flip
-              )
-            }
-          } else if (field == "starDustCount") {
-            if (value != 0) {
-              displayAbility(
-                this.scene,
-                [],
-                "STAR_DUST",
-                pkm.orientation,
-                pkm.positionX,
-                pkm.positionY,
-                pkm.targetX ?? -1,
-                pkm.targetY ?? -1,
-                this.flip
-              )
-            }
-          } else if (field == "mindBlownCount") {
-            if (value != 0) {
-              displayAbility(
-                this.scene,
-                [],
-                "MIND_BLOWN/hit",
-                pkm.orientation,
-                pkm.positionX,
-                pkm.positionY,
-                pkm.targetX ?? -1,
-                pkm.targetY ?? -1,
-                this.flip
-              )
-            }
-          } else if (field == "spellBlockedCount") {
-            if (value != 0) {
-              this.displayBlockedSpell(pkm.x, pkm.y)
-            }
-          } else if (field == "manaBurnCount") {
-            if (value != 0) {
-              this.displayManaBurn(pkm.x, pkm.y)
-            }
-          } else if (field === "healOrderCount") {
-            if (value != 0) {
-              displayAbility(
-                this.scene,
-                [],
-                "HEAL_ORDER",
-                pkm.orientation,
-                pkm.positionX,
-                pkm.positionY,
-                pkm.targetX ?? -1,
-                pkm.targetY ?? -1,
-                this.flip
-              )
-            }
-          } else if (field === "attackOrderCount") {
-            if (value != 0) {
-              displayAbility(
-                this.scene,
-                [],
-                "ATTACK_ORDER",
-                pkm.orientation,
-                pkm.positionX,
-                pkm.positionY,
-                pkm.targetX ?? -1,
-                pkm.targetY ?? -1,
-                this.flip
-              )
-            }
-          } else if (field == "moneyCount") {
-            if (value > 0) {
-              this.moneyAnimation(pkm.x, pkm.y, value - previousValue)
-            }
-          } else if (field == "amuletCoinCount") {
-            if (value > 0) {
-              pkm.itemsContainer.updateCount(Item.AMULET_COIN, value)
-            }
-          } else if (field == "attackCount") {
-            if (value != 0) {
-              if (
-                pkm.action == PokemonActionState.ATTACK &&
-                pkm.targetX !== null &&
-                pkm.targetY !== null
-              ) {
-                this.animationManager.animatePokemon(
-                  pkm,
-                  PokemonActionState.ATTACK,
-                  this.flip
-                )
-                const { delayBeforeShoot, travelTime } =
-                  getAttackTimings(pokemon)
-                pkm.attackAnimation(
-                  pokemon.targetX,
-                  pokemon.targetY,
-                  delayBeforeShoot,
-                  travelTime
-                )
-              }
-            }
-          } else if (field == "tripleAttackCount") {
-            if (value != 0) {
-              this.displayTripleAttack(pkm.x, pkm.y)
-            }
-          } else if (field == "upgradeCount") {
-            pkm.itemsContainer.updateCount(Item.UPGRADE, value)
-          } else if (field == "soulDewCount") {
-            pkm.itemsContainer.updateCount(Item.SOUL_DEW, value)
-          } else if (field == "defensiveRibbonCount") {
-            pkm.itemsContainer.updateCount(Item.DEFENSIVE_RIBBON, value)
-          } else if (field == "magmarizerCount") {
-            pkm.itemsContainer.updateCount(Item.MAGMARIZER, value)
+    if (
+      this.simulation?.id == simulationId &&
+      this.group &&
+      this.pokemonSprites.has(pokemon.id)
+    ) {
+      const pkm = this.pokemonSprites.get(pokemon.id)!
+      if (field == "crit") {
+        if (value != 0) {
+          this.displayCriticalHit(pkm.x, pkm.y)
+        }
+      } else if (field == "dodgeCount") {
+        if (value != 0) {
+          this.displayDodge(pkm.x, pkm.y)
+        }
+      } else if (field == "ult") {
+        if (value != 0) {
+          this.animationManager.play(
+            pkm,
+            AnimationConfig[pkm.name as Pkm].ability,
+            { flip: this.flip, lock: true, repeat: 0 }
+          )
+          pkm.specialAttackAnimation(this.group, value)
+        }
+      } else if (field == "petalDanceCount") {
+        if (value != 0) {
+          displayAbility(
+            this.scene,
+            [],
+            Ability.PETAL_DANCE,
+            pkm.orientation,
+            pkm.positionX,
+            pkm.positionY,
+            pkm.targetX ?? -1,
+            pkm.targetY ?? -1,
+            this.flip
+          )
+        }
+      } else if (field == "futureSightCount") {
+        if (value != 0) {
+          displayAbility(
+            this.scene,
+            [],
+            Ability.FUTURE_SIGHT,
+            pkm.orientation,
+            pkm.positionX,
+            pkm.positionY,
+            pkm.targetX ?? -1,
+            pkm.targetY ?? -1,
+            this.flip
+          )
+        }
+      } else if (field == "earthquakeCount") {
+        if (value != 0) {
+          displayAbility(
+            this.scene,
+            [],
+            Ability.EARTHQUAKE,
+            pkm.orientation,
+            pkm.positionX,
+            pkm.positionY,
+            pkm.targetX ?? -1,
+            pkm.targetY ?? -1,
+            this.flip
+          )
+        }
+      } else if (field == "fieldCount") {
+        if (value != 0) {
+          displayAbility(
+            this.scene,
+            [],
+            "FIELD_DEATH",
+            pkm.orientation,
+            pkm.positionX,
+            pkm.positionY,
+            pkm.targetX ?? -1,
+            pkm.targetY ?? -1,
+            this.flip
+          )
+        }
+      } else if (field == "soundCount") {
+        if (value != 0) {
+          displayAbility(
+            this.scene,
+            [],
+            Ability.ECHO,
+            pkm.orientation,
+            pkm.positionX,
+            pkm.positionY,
+            pkm.targetX ?? -1,
+            pkm.targetY ?? -1,
+            this.flip
+          )
+        }
+      } else if (field == "growGroundCount") {
+        if (value != 0) {
+          displayAbility(
+            this.scene,
+            [],
+            "GROUND_GROW",
+            pkm.orientation,
+            pkm.positionX,
+            pkm.positionY,
+            pkm.targetX ?? -1,
+            pkm.targetY ?? -1,
+            this.flip
+          )
+        }
+      } else if (field == "fightingBlockCount") {
+        if (value > 0 && value % 10 === 0) {
+          displayAbility(
+            this.scene,
+            [],
+            "FIGHTING_KNOCKBACK",
+            pkm.orientation,
+            pkm.positionX,
+            pkm.positionY,
+            pkm.targetX ?? -1,
+            pkm.targetY ?? -1,
+            this.flip
+          )
+        }
+      } else if (field == "fairyCritCount") {
+        if (value != 0) {
+          displayAbility(
+            this.scene,
+            [],
+            "FAIRY_CRIT",
+            pkm.orientation,
+            pkm.positionX,
+            pkm.positionY,
+            pkm.targetX ?? -1,
+            pkm.targetY ?? -1,
+            this.flip
+          )
+        }
+      } else if (field == "powerLensCount") {
+        if (value != 0) {
+          displayAbility(
+            this.scene,
+            [],
+            "POWER_LENS",
+            pkm.orientation,
+            pkm.positionX,
+            pkm.positionY,
+            pkm.targetX ?? -1,
+            pkm.targetY ?? -1,
+            this.flip
+          )
+        }
+      } else if (field == "starDustCount") {
+        if (value != 0) {
+          displayAbility(
+            this.scene,
+            [],
+            "STAR_DUST",
+            pkm.orientation,
+            pkm.positionX,
+            pkm.positionY,
+            pkm.targetX ?? -1,
+            pkm.targetY ?? -1,
+            this.flip
+          )
+        }
+      } else if (field == "mindBlownCount") {
+        if (value != 0) {
+          displayAbility(
+            this.scene,
+            [],
+            "MIND_BLOWN/hit",
+            pkm.orientation,
+            pkm.positionX,
+            pkm.positionY,
+            pkm.targetX ?? -1,
+            pkm.targetY ?? -1,
+            this.flip
+          )
+        }
+      } else if (field == "spellBlockedCount") {
+        if (value != 0) {
+          this.displayBlockedSpell(pkm.x, pkm.y)
+        }
+      } else if (field == "manaBurnCount") {
+        if (value != 0) {
+          this.displayManaBurn(pkm.x, pkm.y)
+        }
+      } else if (field === "healOrderCount") {
+        if (value != 0) {
+          displayAbility(
+            this.scene,
+            [],
+            "HEAL_ORDER",
+            pkm.orientation,
+            pkm.positionX,
+            pkm.positionY,
+            pkm.targetX ?? -1,
+            pkm.targetY ?? -1,
+            this.flip
+          )
+        }
+      } else if (field === "attackOrderCount") {
+        if (value != 0) {
+          displayAbility(
+            this.scene,
+            [],
+            "ATTACK_ORDER",
+            pkm.orientation,
+            pkm.positionX,
+            pkm.positionY,
+            pkm.targetX ?? -1,
+            pkm.targetY ?? -1,
+            this.flip
+          )
+        }
+      } else if (field == "moneyCount") {
+        if (value > 0) {
+          this.moneyAnimation(pkm.x, pkm.y, value - previousValue)
+        }
+      } else if (field == "amuletCoinCount") {
+        if (value > 0) {
+          pkm.itemsContainer.updateCount(Item.AMULET_COIN, value)
+        }
+      } else if (field == "attackCount") {
+        if (value !== 0) {
+          if (
+            pkm.action == PokemonActionState.ATTACK &&
+            pkm.targetX !== null &&
+            pkm.targetY !== null
+          ) {
+            const { delayBeforeShoot, travelTime } = getAttackTimings(pokemon)
+            pkm.attackAnimation(
+              pokemon.targetX,
+              pokemon.targetY,
+              delayBeforeShoot,
+              travelTime
+            )
           }
         }
+      } else if (field == "tripleAttackCount") {
+        if (value !== 0) {
+          this.displayTripleAttack(pkm.x, pkm.y)
+        }
+      } else if (field == "upgradeCount") {
+        pkm.itemsContainer.updateCount(Item.UPGRADE, value)
+      } else if (field == "soulDewCount") {
+        pkm.itemsContainer.updateCount(Item.SOUL_DEW, value)
+      } else if (field == "defensiveRibbonCount") {
+        pkm.itemsContainer.updateCount(Item.DEFENSIVE_RIBBON, value)
+      } else if (field == "magmarizerCount") {
+        pkm.itemsContainer.updateCount(Item.MAGMARIZER, value)
       }
     }
   }
@@ -639,7 +635,10 @@ export default class BattleManager {
               )
               pkm.moveManager.moveTo(coordinates[0], coordinates[1])
             }
-          } else if (field === "orientation") {
+          } else if (
+            field === "orientation" &&
+            pkm.orientation !== pokemon.orientation
+          ) {
             pkm.orientation = pokemon.orientation
             if (pokemon.action !== PokemonActionState.SLEEP) {
               this.animationManager.animatePokemon(
@@ -648,7 +647,7 @@ export default class BattleManager {
                 this.flip
               )
             }
-          } else if (field === "action") {
+          } else if (field === "action" && pkm.action !== pokemon.action) {
             pkm.action = pokemon.action
             this.animationManager.animatePokemon(pkm, pokemon.action, this.flip)
           } else if (field == "critChance") {
