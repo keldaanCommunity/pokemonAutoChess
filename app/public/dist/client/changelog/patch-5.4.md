@@ -63,6 +63,7 @@
 - Increase experience cost for level 6,7,8,9 by 2
 - Reduce sleep duration reduction when taking a hit: 500ms → 300ms
 - Flinch status changed: ~~100~~ 50% of incoming damage bypass shield
+- Changed behavior when more than 3 items are merged after an evolution: the excessive items dropped are now random, but item components still are dropped in priority
 
 # UI
 
