@@ -901,6 +901,33 @@
     "PETAL_DANCE": "Gây [20,30,50,SP] SPECIAL tới [3,4,5] đối thủ gần nhất ",
     "HYPER_VOICE": "Gây [30,60,150,SP] SPECIAL cho tất cả Pokémon đối thủ trong hàng của mục tiêu và khiến chúng CONFUSION trong [1,2,3] giây"
   },
+  "stat": {
+    "ATK": "Sức tấn công",
+    "ATK_SPEED": "Tốc đánh",
+    "CRIT_CHANCE": "Tỉ lệ chí mạng",
+    "CRIT_POWER": "Sát thương chí mạng",
+    "DEF": "Phòng thủ",
+    "SPE_DEF": "Kháng phép",
+    "HP": "Máu",
+    "HEALTH_POINTS": "Máu (HP)",
+    "RANGE": "Tầm đánh",
+    "PP": "Thời gian hồi chiêu",
+    "POWER_POINTS": "Thời gian hồi chiêu (PP)",
+    "MAX_PP": "Giới hạn thời gian hồi chiêu",
+    "AP": "Sát thương chiêu",
+    "SHIELD": "Khiên"
+  },
+  "stat_description": {
+    "ATK": "Sát thương gây ra bởi các đòn đánh thường",
+    "ATK_SPEED": "Số đòn đánh trong một giây. Tối đa 2.5.",
+    "CRIT_CHANCE": "Đòn đánh chí mạng gây 2x sát thương. Kĩ năng không thể gây chí mạng. Tỉ lệ chí mạng quá 100% sẽ được chuyển thành Sát thương chí mạng",
+    "CRIT_POWER": "Hệ số nhân sát thương cho đòn đánh chí mạng, hồi máu và tăng sức mạnh",
+    "DEF": "Giảm PHYSICAL nhận vào",
+    "SPE_DEF": "Giảm SPECIAL nhận vào",
+    "HP": "Pokémon sẽ bị hạ gục nếu không còn máu",
+    "RANGE": "Pokémon có tầm đánh trong bán kính 1 ô sẽ là cận chiến",
+    "MAX_PP": "Lượng thời gian cần thiết để vận chiêu. Pokemon hồi chiêu qua thời gian (10 mỗi giây), khi tấn công (5 mỗi lần tấn công) và khi nhận sát thương (10% của sát thương nhận vào)"
+  },
   "community_translations": "Bản dịch được thực hiện bởi cộng đồng Pokemon Autochess. Nếu bạn muốn đóng góp hoặc chỉnh sửa bản dịch, hãy đến",
   "no_emotions_available": "Không có cảm xúc",
   "loading_asset": "Đang tải tài nguyên",
