@@ -236,6 +236,7 @@
   flex-wrap: wrap;
   gap: 0.5em;
   padding: 0;
+  margin: 0;
 }
 
 #wiki-ability .my-box ul {
@@ -262,7 +263,8 @@
 }
 
 #wiki-items .berries {
-  max-width: 400px;
+  display: grid;
+  grid-template-columns: repeat(5, min-content);
 }
 
 #wiki-items .artificial,

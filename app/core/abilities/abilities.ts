@@ -66,6 +66,7 @@ import {
 } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { AbilityCommand } from "../simulation-command"
+import { isOnBench } from "../../models/colyseus-models/pokemon"
 
 export class BlueFlareStrategy extends AbilityStrategy {
   process(
@@ -123,6 +124,8 @@ export class FusionBoltStrategy extends AbilityStrategy {
       multiplier = 1
     } else if (pokemon.effects.has(Effect.OVERDRIVE)) {
       multiplier = 2
+    } else if (pokemon.effects.has(Effect.POWER_SURGE)) {
+      multiplier = 3
     }
     damage += multiplier * 40
 
@@ -878,6 +881,42 @@ export class AquaJetStrategy extends AbilityStrategy {
   }
 }
 
+export class SchoolingStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 0.1 * pokemon.hp
+
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
+
+    if (pokemon.player) {
+      pokemon.player.board.forEach((ally, id) => {
+        if (ally && ally.name === Pkm.WISHIWASHI && isOnBench(ally)) {
+          pokemon.addMaxHP(50)
+          pokemon.refToBoardPokemon.hp += 50
+          pokemon.player!.board.delete(id)
+        }
+      })
+    }
+  }
+}
+
 export class ElectroWebStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -1381,13 +1420,13 @@ export class AuroraBeamStrategy extends AbilityStrategy {
         )
         let freezeChance = 0
         if (pokemon.effects.has(Effect.CHILLY)) {
-          freezeChance = 0.2
-        } else if (pokemon.effects.has(Effect.FROSTY)) {
-          freezeChance = 0.3
-        } else if (pokemon.effects.has(Effect.FREEZING)) {
           freezeChance = 0.4
+        } else if (pokemon.effects.has(Effect.FROSTY)) {
+          freezeChance = 0.6
+        } else if (pokemon.effects.has(Effect.FREEZING)) {
+          freezeChance = 0.8
         } else if (pokemon.effects.has(Effect.SHEER_COLD)) {
-          freezeChance = 0.5
+          freezeChance = 1.0
         }
         if (chance(freezeChance)) {
           targetInLine.status.triggerFreeze(2000, target)
@@ -3083,8 +3122,8 @@ export class DiveStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 3 ? 60 : pokemon.stars === 2 ? 30 : 15
-    const freezeDuration = 1500
+    const damage = pokemon.stars === 3 ? 50 : pokemon.stars === 2 ? 30 : 15
+    const freezeDuration = 1000
     const mostSurroundedCoordinate =
       state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
 
@@ -3301,14 +3340,14 @@ export class PresentStrategy extends AbilityStrategy {
     const chance = Math.random()
     /* 80 damage: 40%
        150 damage: 30%
-       300 damage: 10%
-       heal 80HP: 20%
+       300 damage: 20%
+       heal 50HP: 10%
     */
-    if (chance < 0.2) {
-      target.handleHeal(80, pokemon, 0, false)
-    } else if (chance < 0.6) {
+    if (chance < 0.1) {
+      target.handleHeal(50, pokemon, 0, false)
+    } else if (chance < 0.5) {
       target.handleSpecialDamage(80, board, AttackType.SPECIAL, pokemon, crit)
-    } else if (chance < 0.9) {
+    } else if (chance < 0.8) {
       target.handleSpecialDamage(150, board, AttackType.SPECIAL, pokemon, crit)
     } else {
       target.handleSpecialDamage(300, board, AttackType.SPECIAL, pokemon, crit)
@@ -7458,10 +7497,22 @@ export class LovelyKissStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const duration = Math.round(
-      ([2000, 4000][pokemon.stars - 1] ?? 2000) * (1 + pokemon.ap / 100)
-    )
-    target.status.triggerSleep(duration, target)
+
+    if (target.status.sleep) {
+      const damage = [50, 100, 150][pokemon.stars - 1] ?? 50
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    } else {
+      const duration = Math.round(
+        ([2000, 4000, 6000][pokemon.stars - 1] ?? 2000) * (1 + pokemon.ap / 100)
+      )
+      target.status.triggerSleep(duration, target)
+    }
   }
 }
 
@@ -8033,7 +8084,7 @@ export class MultiAttackStrategy extends AbilityStrategy {
     if (synergies && silvallyType && synergies.has(silvallyType)) {
       synergyLevelCount = synergies.get(silvallyType)!
     }
-    const damage = 10 * synergyLevelCount
+    const damage = 15 * synergyLevelCount
 
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
@@ -9477,6 +9528,24 @@ export class GulpMissileStrategy extends AbilityStrategy {
   }
 }
 
+export class DoubleShockStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+
+    const damage = pokemon.stars === 3 ? 200 : pokemon.stars === 2 ? 100 : 50
+
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+
+    pokemon.status.triggerParalysis(3000, pokemon)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -9827,5 +9896,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DIRE_CLAW]: new DireClawStrategy(),
   [Ability.FAKE_OUT]: new FakeOutStrategy(),
   [Ability.FELL_STINGER]: new FellStingerStrategy(),
-  [Ability.GULP_MISSILE]: new GulpMissileStrategy()
+  [Ability.GULP_MISSILE]: new GulpMissileStrategy(),
+  [Ability.SCHOOLING]: new SchoolingStrategy(),
+  [Ability.DOUBLE_SHOCK]: new DoubleShockStrategy()
 }

@@ -1,14 +1,18 @@
+import { memoryUsage } from "node:process"
 import { Command } from "@colyseus/command"
 import { Client, matchMaker } from "colyseus"
 import { FilterQuery } from "mongoose"
-import { memoryUsage } from "node:process"
 import { GameUser, IGameUser } from "../../models/colyseus-models/game-user"
 import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
 import UserMetadata, {
   IUserMetadata
 } from "../../models/mongo-models/user-metadata"
 import { Role, Transfer } from "../../types"
-import { EloRankThreshold, MAX_PLAYERS_PER_GAME } from "../../types/Config"
+import {
+  EloRankThreshold,
+  MAX_PLAYERS_PER_GAME,
+  MIN_HUMAN_PLAYERS
+} from "../../types/Config"
 import { BotDifficulty, GameMode } from "../../types/enum/Game"
 import { logger } from "../../utils/logger"
 import { max } from "../../utils/number"
@@ -142,9 +146,9 @@ export class OnGameStartRequestCommand extends Command<
     client?: Client
   }
 > {
-  execute({ client }: { client?: Client } = {}) {
+  async execute({ client }: { client?: Client } = {}) {
     try {
-      if (this.state.gameStarted) {
+      if (this.state.gameStartedAt != null) {
         return // game already started
       }
       let allUsersReady = true
@@ -158,6 +162,15 @@ export class OnGameStartRequestCommand extends Command<
           nbHumanPlayers++
         }
       })
+
+      if (nbHumanPlayers < MIN_HUMAN_PLAYERS && process.env.MODE !== "dev") {
+        this.state.addMessage({
+          authorId: "Server",
+          payload: `Due to the current high traffic on the game, to limit the resources used server side, only games with a minimum of 8 players are authorized.`,
+          avatar: "0054/Surprised"
+        })
+        return
+      }
 
       if (this.state.users.size < 2) {
         this.state.addMessage({
@@ -222,9 +235,10 @@ export class OnGameStartRequestCommand extends Command<
           avatar: "0025/Pain"
         })
       } else {
-        this.state.gameStarted = true
-        matchMaker.createRoom("game", {
-          users: this.state.users,
+        this.state.gameStartedAt = new Date().toISOString()
+        this.room.lock()
+        const gameRoom = await matchMaker.createRoom("game", {
+          users: this.state.users.toJSON(),
           name: this.state.name,
           ownerName: this.state.ownerName,
           preparationId: this.room.roomId,
@@ -232,13 +246,12 @@ export class OnGameStartRequestCommand extends Command<
           gameMode: this.state.gameMode,
           tournamentId: this.room.metadata?.tournamentId,
           bracketId: this.room.metadata?.bracketId,
-          minRank: this.state.minRank,
-          whenReady: (game) => {
-            this.room.setGameStarted(true)
-            //logger.debug("game start", game.roomId)
-            this.room.broadcast(Transfer.GAME_START, game.roomId)
-            setTimeout(() => this.room.disconnect(), 30000) // TRYFIX: ranked lobbies prep rooms not being removed
-          }
+          minRank: this.state.minRank
+        })
+
+        this.room.presence.publish("game-started", {
+          gameId: gameRoom.roomId,
+          preparationId: this.room.roomId
         })
       }
     } catch (error) {

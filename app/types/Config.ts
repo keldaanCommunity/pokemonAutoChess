@@ -82,7 +82,7 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.GRASS]: [3, 5, 7],
   [Synergy.FIRE]: [2, 4, 6, 8],
   [Synergy.WATER]: [3, 6, 9],
-  [Synergy.ELECTRIC]: [3, 6],
+  [Synergy.ELECTRIC]: [3, 6, 9],
   [Synergy.FIGHTING]: [2, 4, 6, 8],
   [Synergy.PSYCHIC]: [2, 4, 6],
   [Synergy.DARK]: [3, 5, 7],
@@ -323,15 +323,15 @@ export const FishRarityProbability: {
   },
   [Item.GOOD_ROD]: {
     [Rarity.SPECIAL]: 0.3,
-    [Rarity.COMMON]: 0.35,
-    [Rarity.UNCOMMON]: 0.25,
+    [Rarity.COMMON]: 0.3,
+    [Rarity.UNCOMMON]: 0.3,
     [Rarity.RARE]: 0.1,
     [Rarity.EPIC]: 0
   },
   [Item.SUPER_ROD]: {
-    [Rarity.SPECIAL]: 0.1,
-    [Rarity.COMMON]: 0.25,
-    [Rarity.UNCOMMON]: 0.3,
+    [Rarity.SPECIAL]: 0.35,
+    [Rarity.COMMON]: 0.05,
+    [Rarity.UNCOMMON]: 0.25,
     [Rarity.RARE]: 0.25,
     [Rarity.EPIC]: 0.1
   },
@@ -346,6 +346,7 @@ export const FishRarityProbability: {
 }
 
 export const MAX_PLAYERS_PER_GAME = 8
+export const MIN_HUMAN_PLAYERS = 8
 
 export const DEFAULT_ATK_SPEED = 0.75
 export const DEFAULT_CRIT_CHANCE = 10

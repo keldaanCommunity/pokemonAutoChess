@@ -877,14 +877,10 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.RISING_VOLTAGE:
-          if (types.has(Synergy.ELECTRIC)) {
-            pokemon.effects.add(Effect.RISING_VOLTAGE)
-          }
-          break
-
         case Effect.OVERDRIVE:
+        case Effect.POWER_SURGE:
           if (types.has(Synergy.ELECTRIC)) {
-            pokemon.effects.add(Effect.OVERDRIVE)
+            pokemon.effects.add(effect)
           }
           break
 

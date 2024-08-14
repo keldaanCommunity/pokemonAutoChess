@@ -11,10 +11,6 @@ import { WebhookClient } from "discord.js"
 import admin from "firebase-admin"
 import { nanoid } from "nanoid"
 import { PastebinAPI } from "pastebin-ts/dist/api"
-import {
-  ILeaderboardBotInfo,
-  ILeaderboardInfo
-} from "../types/interfaces/LeaderboardInfo"
 import Message from "../models/colyseus-models/message"
 import { TournamentSchema } from "../models/colyseus-models/tournament"
 import BannedUser from "../models/mongo-models/banned-user"
@@ -23,16 +19,20 @@ import ChatV2 from "../models/mongo-models/chat-v2"
 import Tournament from "../models/mongo-models/tournament"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { Emotion, IPlayer, Role, Title, Transfer } from "../types"
-import { EloRank } from "../types/enum/EloRank"
 import {
   GREATBALL_RANKED_LOBBY_CRON,
-  ULTRABALL_RANKED_LOBBY_CRON,
   SCRIBBLE_LOBBY_CRON,
   TOURNAMENT_CLEANUP_DELAY,
-  TOURNAMENT_REGISTRATION_TIME
+  TOURNAMENT_REGISTRATION_TIME,
+  ULTRABALL_RANKED_LOBBY_CRON
 } from "../types/Config"
+import { EloRank } from "../types/enum/EloRank"
 import { GameMode } from "../types/enum/Game"
 import { Language } from "../types/enum/Language"
+import {
+  ILeaderboardBotInfo,
+  ILeaderboardInfo
+} from "../types/interfaces/LeaderboardInfo"
 import { ITournament } from "../types/interfaces/Tournament"
 import { logger } from "../utils/logger"
 import {
@@ -69,6 +69,8 @@ import {
 } from "./commands/lobby-commands"
 import LobbyState from "./states/lobby-state"
 
+const MAX_CCU = 1000
+
 export default class CustomLobbyRoom extends Room<LobbyState> {
   discordWebhook: WebhookClient | undefined
   discordBanWebhook: WebhookClient | undefined
@@ -81,6 +83,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
   rooms: RoomListingData<any>[] | undefined
   dispatcher: Dispatcher<this>
   tournamentCronJobs: Map<string, CronJob>
+  cleanUpCronJobs: CronJob[] = []
 
   constructor() {
     super()
@@ -114,6 +117,44 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     this.botLeaderboard = new Array<ILeaderboardBotInfo>()
     this.levelLeaderboard = new Array<ILeaderboardInfo>()
     this.tournamentCronJobs = new Map<string, CronJob>()
+    this.maxClients = 100
+  }
+
+  removeRoom(index: number, roomId: string) {
+    // remove room listing data
+    if (index !== -1) {
+      this.rooms?.splice(index, 1)
+
+      this.clients.forEach((client) => {
+        client.send(Transfer.REMOVE_ROOM, roomId)
+      })
+    }
+  }
+
+  addRoom(roomId: string, data: RoomListingData<any>) {
+    // append room listing data
+    this.rooms?.push(data)
+
+    this.clients.forEach((client) => {
+      client.send(Transfer.ADD_ROOM, [roomId, data])
+    })
+  }
+
+  changeRoom(index: number, roomId: string, data: RoomListingData<any>) {
+    if (this.rooms) {
+      const previousData = this.rooms[index]
+
+      // replace room listing data
+      this.rooms[index] = data
+
+      this.clients.forEach((client) => {
+        if (previousData && !data) {
+          client.send(Transfer.REMOVE_ROOM, roomId)
+        } else if (data) {
+          client.send(Transfer.ADD_ROOM, [roomId, data])
+        }
+      })
+    }
   }
 
   async onCreate(): Promise<void> {
@@ -123,6 +164,11 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     this.autoDispose = false
     this.listing.unlisted = true
 
+    this.clock.setInterval(async () => {
+      const ccu = await matchMaker.stats.getGlobalCCU()
+      this.state.ccu = ccu
+    }, 1000)
+
     this.unsubscribeLobby = await subscribeLobby((roomId, data) => {
       if (this.rooms) {
         const roomIndex = this.rooms?.findIndex(
@@ -130,34 +176,11 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         )
 
         if (!data) {
-          // remove room listing data
-          if (roomIndex !== -1) {
-            this.rooms.splice(roomIndex, 1)
-
-            this.clients.forEach((client) => {
-              client.send(Transfer.REMOVE_ROOM, roomId)
-            })
-          }
+          this.removeRoom(roomIndex, roomId)
         } else if (roomIndex === -1) {
-          // append room listing data
-          this.rooms.push(data)
-
-          this.clients.forEach((client) => {
-            client.send(Transfer.ADD_ROOM, [roomId, data])
-          })
+          this.addRoom(roomId, data)
         } else {
-          const previousData = this.rooms[roomIndex]
-
-          // replace room listing data
-          this.rooms[roomIndex] = data
-
-          this.clients.forEach((client) => {
-            if (previousData && !data) {
-              client.send(Transfer.REMOVE_ROOM, roomId)
-            } else if (data) {
-              client.send(Transfer.ADD_ROOM, [roomId, data])
-            }
-          })
+          this.changeRoom(roomIndex, roomId, data)
         }
       }
     })
@@ -474,7 +497,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     })
 
     this.initCronJobs()
-    this.fetchChat()
+    //this.fetchChat()
     this.fetchLeaderboards()
     this.fetchTournaments()
   }
@@ -489,9 +512,20 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       client.send(Transfer.USER_PROFILE, userProfile)
 
       if (!user.displayName) {
+        client.send(
+          Transfer.AUTH_FAILED,
+          "No display name. Please report this error."
+        )
         throw "No display name"
       } else if (isBanned) {
+        client.send(Transfer.AUTH_FAILED, "Account banned")
         throw "User banned"
+      } else if (this.state.ccu > MAX_CCU) {
+        client.send(
+          Transfer.AUTH_FAILED,
+          "The servers are currently at maximum capacity. Please try again later."
+        )
+        throw "Maximum capacity reached"
       } else {
         return user
       }
@@ -517,6 +551,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     try {
       logger.info("dispose lobby")
       this.dispatcher.stop()
+      this.cleanUpCronJobs.forEach((j) => j.stop())
       if (this.unsubscribeLobby) {
         this.unsubscribeLobby()
       }
@@ -692,6 +727,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       onTick: () => this.fetchLeaderboards(),
       start: true
     })
+    this.cleanUpCronJobs.push(leaderboardRefreshJob)
 
     const greatBallRankedLobbyJob = CronJob.from({
       cronTime: GREATBALL_RANKED_LOBBY_CRON,
@@ -704,6 +740,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       },
       start: true
     })
+    this.cleanUpCronJobs.push(greatBallRankedLobbyJob)
 
     const ultraBallRankedLobbyJob = CronJob.from({
       cronTime: ULTRABALL_RANKED_LOBBY_CRON,
@@ -716,6 +753,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       },
       start: true
     })
+    this.cleanUpCronJobs.push(ultraBallRankedLobbyJob)
 
     const scribbleLobbyJob = CronJob.from({
       cronTime: SCRIBBLE_LOBBY_CRON,
@@ -728,5 +766,65 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       },
       start: true
     })
+    this.cleanUpCronJobs.push(scribbleLobbyJob)
+
+    if (process.env.NODE_APP_INSTANCE) {
+      const staleJob = CronJob.from({
+        cronTime: "*/1 * * * *", // every minute
+        timeZone: "Europe/Paris",
+        onTick: async () => {
+          logger.debug(`Auto clean up stale rooms`)
+          const query = await matchMaker.query({
+            // query all the available rooms
+            private: false,
+            unlisted: false
+          })
+
+          query.forEach((data) => {
+            if (!this.rooms?.map((r) => r.roomId).includes(data.roomId)) {
+              // if the query room was not in this.rooms, add it
+              this.addRoom(data.roomId, data)
+            }
+          })
+          this.rooms?.forEach(async (room, roomIndex) => {
+            const { type, gameStartedAt } = room.metadata ?? {}
+            if (
+              (type === "preparation" &&
+                gameStartedAt != null &&
+                new Date(gameStartedAt).getTime() < Date.now() - 60000) ||
+              !query.map((r) => r.roomId).includes(room.roomId)
+            ) {
+              this.presence.hdel("roomcaches", room.roomId)
+              this.removeRoom(roomIndex, room.roomId)
+              //   // Attempt to see if the room exit. If it exist, disconnect it
+              //   const disconnection = await matchMaker.remoteRoomCall(
+              //     room.roomId,
+              //     "disconnect"
+            }
+          })
+        },
+        start: true
+      })
+
+      this.cleanUpCronJobs.push(staleJob)
+
+      const afkJob = CronJob.from({
+        cronTime: "*/1 * * * *", // every minute
+        timeZone: "Europe/Paris",
+        onTick: async () => {
+          this.clients.forEach((c) => {
+            if (
+              c.userData.joinedAt &&
+              c.userData.joinedAt < Date.now() - 300000
+            ) {
+              //logger.info("force deconnection of user", c.id)
+              c.leave()
+            }
+          })
+        },
+        start: true
+      })
+      this.cleanUpCronJobs.push(afkJob)
+    }
   }
 }

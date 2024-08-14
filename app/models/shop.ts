@@ -345,7 +345,7 @@ export default class Shop {
   getRandomPokemonFromPool(
     rarity: Rarity,
     player: Player,
-    finals: Set<Pkm>,
+    finals: Set<Pkm> = new Set(),
     specificTypeWanted?: Synergy
   ): Pkm {
     let pkm = Pkm.MAGIKARP
@@ -394,7 +394,8 @@ export default class Shop {
   pickPokemon(player: Player, state: GameState) {
     if (
       state.specialGameRule !== SpecialGameRule.DITTO_PARTY &&
-      chance(DITTO_RATE)
+      chance(DITTO_RATE) &&
+      state.stageLevel >= 2
     ) {
       return Pkm.DITTO
     }
@@ -504,7 +505,7 @@ export default class Shop {
     } else if (rarity === Rarity.SPECIAL) {
       if (rod === Item.OLD_ROD) fish = Pkm.MAGIKARP
       if (rod === Item.GOOD_ROD) fish = Pkm.FEEBAS
-      //if (fishingLevel >= 3) fish = Pkm.WISHIWASHI // when available
+      if (rod === Item.SUPER_ROD) fish = Pkm.WISHIWASHI
     } else {
       fish = this.getRandomPokemonFromPool(
         rarity,

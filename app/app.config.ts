@@ -1,11 +1,12 @@
+import path from "path"
 import { monitor } from "@colyseus/monitor"
 import config from "@colyseus/tools"
+import { RedisDriver, RedisPresence, ServerOptions, matchMaker } from "colyseus"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
-import admin from "firebase-admin"
+import admin, { app } from "firebase-admin"
 import { connect } from "mongoose"
-import path from "path"
 import { initTilemap } from "./core/design"
 import ItemsStatistics from "./models/mongo-models/items-statistic"
 import Meta from "./models/mongo-models/meta"
@@ -21,6 +22,7 @@ import { SynergyTriggers } from "./types/Config"
 import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Item } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
+import { logger } from "./utils/logger"
 
 const clientSrc = __dirname.includes("server")
   ? path.join(__dirname, "..", "..", "client")
@@ -31,15 +33,34 @@ const viewsSrc = path.join(clientSrc, "index.html")
  * Import your Room files
  */
 
-const serverOptions = {}
+let gameOptions: ServerOptions = {}
 
-// if (process.env.NODE_APP_INSTANCE) {
-//   serverOptions["presence"] = new RedisPresence()
-//   serverOptions["driver"] = new RedisDriver()
-// }
+if (process.env.NODE_APP_INSTANCE) {
+  const processNumber = Number(process.env.NODE_APP_INSTANCE || "0")
+  const port = 2567 + processNumber
+  gameOptions = {
+    presence: new RedisPresence(process.env.REDIS_URI),
+    driver: new RedisDriver(process.env.REDIS_URI),
+    publicAddress: `${process.env.SERVER_NAME}/${port}`,
+    selectProcessIdToCreateRoom: async function (
+      roomName: string,
+      clientOptions: any
+    ) {
+      if (roomName === "lobby") {
+        const lobbies = await matchMaker.query({ name: "lobby" })
+        if (lobbies.length !== 0) {
+          throw "Attempt to create one lobby"
+        }
+      }
+      return (await matchMaker.stats.fetchAll()).sort((p1, p2) =>
+        p1.ccu > p2.ccu ? 1 : -1
+      )[0].processId
+    }
+  }
+}
 
 export default config({
-  options: serverOptions,
+  options: gameOptions,
   initializeGameServer: (gameServer) => {
     /**
      * Define your room handlers:

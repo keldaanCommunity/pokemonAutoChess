@@ -283,3 +283,16 @@ p:last-child {
   text-shadow: 1px 1px 1px white, -1px 1px 1px white, 1px -1px 1px white,
     -1px -1px 1px white;
 }
+
+.pokemon-portrait.acquired::before {
+  content: "✔";
+  position: absolute;
+  bottom: 4px;
+  right: 0px;
+  height: 12px;
+  width: 12px;
+  font-size: 14px;
+  color: black;
+  text-shadow: 1px 1px 1px white, -1px 1px 1px white, 1px -1px 1px white,
+    -1px -1px 1px white;
+}

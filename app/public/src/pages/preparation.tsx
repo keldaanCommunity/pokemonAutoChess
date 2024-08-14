@@ -51,7 +51,7 @@ export default function Preparation() {
   const room: Room<PreparationState> | undefined = useAppSelector(
     (state) => state.network.preparation
   )
-  const user = useAppSelector((state) => state.lobby.user)
+  const user = useAppSelector((state) => state.preparation.user)
   const initialized = useRef<boolean>(false)
   const [toGame, setToGame] = useState<boolean>(false)
   const [toAuth, setToAuth] = useState<boolean>(false)
@@ -101,7 +101,7 @@ export default function Preparation() {
         dispatch(addUser(u))
       })
 
-      r.state.listen("gameStarted", (value, previousValue) => {
+      r.state.listen("gameStartedAt", (value, previousValue) => {
         dispatch(setGameStarted(value))
       })
 
@@ -249,7 +249,7 @@ export default function Preparation() {
         />
         <main>
           <PreparationMenu />
-          <div className="my-container user-chat custom-bg">
+          <div className="my-container custom-bg chat-container">
             <h2>{user?.anonymous ? t("chat_disabled_anonymous") : t("chat")}</h2>
             <Chat source="preparation" canWrite={user ? !user.anonymous : false} />
           </div>

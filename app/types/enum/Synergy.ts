@@ -48,7 +48,11 @@ export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
     Effect.DESOLATE_LAND
   ],
   [Synergy.WATER]: [Effect.RAIN_DANCE, Effect.DRIZZLE, Effect.PRIMORDIAL_SEA],
-  [Synergy.ELECTRIC]: [Effect.RISING_VOLTAGE, Effect.OVERDRIVE],
+  [Synergy.ELECTRIC]: [
+    Effect.RISING_VOLTAGE,
+    Effect.OVERDRIVE,
+    Effect.POWER_SURGE
+  ],
   [Synergy.FIGHTING]: [
     Effect.GUTS,
     Effect.STURDY,

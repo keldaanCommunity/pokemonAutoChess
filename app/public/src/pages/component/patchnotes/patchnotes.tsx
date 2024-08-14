@@ -4,6 +4,7 @@ import { Poster } from "./poster"
 
 export default function PatchNotes() {
   const PATCHES = [
+    "5.4",
     "5.3",
     "5.2",
     "5.1",
