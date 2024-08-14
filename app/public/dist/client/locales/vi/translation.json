@@ -367,7 +367,10 @@
     "GRAVITY": "Trọng lực",
     "DIRE_CLAW": "Vuốt tử thần",
     "FAKE_OUT": "Đập tay",
-    "FELL_STINGER": "Kim châm kết liễu"
+    "FELL_STINGER": "Kim châm kết liễu",
+    "GULP_MISSILE": "Gulp Missile",
+    "SCHOOLING": "Học tập",
+    "DOUBLE_SHOCK": "Điện quang song kíck"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
