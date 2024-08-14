@@ -768,7 +768,7 @@
     "DISARMING_VOICE": "Khiến đối thủ trong vòng bán kính 2 ô bị CHARM trong [1,SP] giây",
     "HIGH_JUMP_KICK": "Gây [50,100,200,SP] SPECIAL và đánh cắp hết tất cả PP của mục tiêu",
     "GRASS_WHISTLE": "Ru SLEEP [1,2,4] Pokemon đối thủ trong 2 giây",
-    "TRI_ATTACK": "Gây [30,60,SP] SPECIAL. Có thể BRUN, FREEZE hoặc PARALYSIS mục tiêu",
+    "TRI_ATTACK": "Gây [30,60,SP] SPECIAL. Có thể BURN, FREEZE hoặc PARALYSIS mục tiêu",
     "ECHO": "Gây [3,6,9,SP]  SPECIAL cho tất cả Pokemon đối thủ. Mỗi lần bản thân sử dụng khả năng này, sát thương tăng thêm [3,6,9,SP]",
     "PETAL_DANCE": "Gây [20,30,50,SP] SPECIAL tới [3,4,5] đối thủ gần nhất ",
     "HYPER_VOICE": "Gây [30,60,150,SP] SPECIAL cho tất cả Pokémon đối thủ trong hàng của mục tiêu và khiến chúng CONFUSION trong [1,2,3] giây"
