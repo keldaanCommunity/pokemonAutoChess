@@ -573,6 +573,7 @@
     "ESPEON": "Espeon",
     "UMBREON": "Umbreon",
     "LEAFEON": "Leafeon",
+    "SYLVEON": "Sylveon",
     "MEDITITE": "Meditite",
     "MEDICHAM": "Medicham",
     "NUMEL": "Numel",
@@ -749,7 +750,13 @@
     "GUZZLORD": "Guzzlord",
     "ETERNATUS": "Eternatus",
     "PONYTA": "Ponyta",
-    "RAPIDASH": "Rapidash"
+    "RAPIDASH": "Rapidash",
+    "NINCADA": "Nincada",
+    "NINJASK": "Ninjask",
+    "SHEDINJA": "Shedinja",
+    "NOIBAT": "Noibat",
+    "NOIVERN": "Noivern",
+    "PUMPKABOO": "Pumpkaboo"
   },
   "ability_description": {
     "SOFT_BOILED": "Giải trừ hiệu ứng và nhận [20,40,80,SP] SHIELD cho Pokemon đồng minh",
