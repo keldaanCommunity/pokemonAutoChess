@@ -217,12 +217,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         : this.simulation.redPlayer
     if (player instanceof Player) {
       return player
-    } else if (player) {
-      logger.error(
-        "pokemon.player is not undefined neither an instance of Player, why ?",
-        player
-      )
-      return undefined
+    } else {
+      return undefined // PvE or ghost player
     }
   }
 
