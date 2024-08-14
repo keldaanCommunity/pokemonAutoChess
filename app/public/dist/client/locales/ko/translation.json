@@ -1555,7 +1555,7 @@
     "POISONOUS": "30% 확률로 POISONNED",
     "VENOMOUS": "60% 확률로 POISONNED, POISONNED 상태의 최대 중첩수 +1",
     "TOXIC": "100% 확률로 POISONNED, POISONNED 상태의 최대 중첩수 +2",
-    "DRAGON_ENERGY": "드래곤들의 두번째 시너지는 두번 계산된다. (세번째가 아닌 것에 주의)",
+    "DRAGON_ENERGY": "드래곤의 두번째 시너지는 2배로 카운트",
     "DRAGON_SCALES": "STAR당 30SHIELD 획득",
     "DRAGON_DANCE": "STAR당 10% ATK_SPEED, 10% AP 증가",
     "BULK_UP": "HP 30 회복, ATK_SPEED 20% 증가",
