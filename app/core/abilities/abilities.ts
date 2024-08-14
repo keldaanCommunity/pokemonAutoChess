@@ -124,6 +124,8 @@ export class FusionBoltStrategy extends AbilityStrategy {
       multiplier = 1
     } else if (pokemon.effects.has(Effect.OVERDRIVE)) {
       multiplier = 2
+    } else if (pokemon.effects.has(Effect.POWER_SURGE)) {
+      multiplier = 3
     }
     damage += multiplier * 40
 
@@ -3338,14 +3340,14 @@ export class PresentStrategy extends AbilityStrategy {
     const chance = Math.random()
     /* 80 damage: 40%
        150 damage: 30%
-       300 damage: 10%
-       heal 80HP: 20%
+       300 damage: 20%
+       heal 50HP: 10%
     */
-    if (chance < 0.2) {
-      target.handleHeal(80, pokemon, 0, false)
-    } else if (chance < 0.6) {
+    if (chance < 0.1) {
+      target.handleHeal(50, pokemon, 0, false)
+    } else if (chance < 0.5) {
       target.handleSpecialDamage(80, board, AttackType.SPECIAL, pokemon, crit)
-    } else if (chance < 0.9) {
+    } else if (chance < 0.8) {
       target.handleSpecialDamage(150, board, AttackType.SPECIAL, pokemon, crit)
     } else {
       target.handleSpecialDamage(300, board, AttackType.SPECIAL, pokemon, crit)
@@ -9538,13 +9540,7 @@ export class DoubleShockStrategy extends AbilityStrategy {
 
     const damage = pokemon.stars === 3 ? 200 : pokemon.stars === 2 ? 100 : 50
 
-    target.handleSpecialDamage(
-      damage,
-      board,
-      AttackType.SPECIAL,
-      pokemon,
-      crit
-    )
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
 
     pokemon.status.triggerParalysis(3000, pokemon)
   }

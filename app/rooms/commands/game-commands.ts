@@ -800,7 +800,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           case Effect.PRIMORDIAL_SEA:
             player.titles.add(Title.FIREFIGHTER)
             break
-          case Effect.OVERDRIVE:
+          case Effect.POWER_SURGE:
             player.titles.add(Title.ELECTRICIAN)
             break
           case Effect.JUSTIFIED:
