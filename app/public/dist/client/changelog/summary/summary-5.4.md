@@ -2,28 +2,21 @@
 
 # Patch 5.4: Stormy Waters
 
-## Electric Power Surge
+## Charged by the abyss
 
-Add Electric 9: Power Surge: Triple attacks also deal 10 special damage to enemies adjacent to the target.
+- ![Electric](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/3c11a620df1707e68b30743b29cf900c0dd0c87e/app/public/src/assets/types/ELECTRIC.svg) More power unleasged at Electric 9
+- ![Water](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/3c11a620df1707e68b30743b29cf900c0dd0c87e/app/public/src/assets/types/WATER.svg) A new danger awaits at Water 9
+- ![pp](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/icons/PP.png)  Extra PP generated are now saved for later
 
-![Aquatic](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/3c11a620df1707e68b30743b29cf900c0dd0c87e/app/public/src/assets/types/ELECTRIC.svg)
+## Battle animations reworked
+
+- Attacks and abilities now have a frame delay before damage and effects are applied
+- Projectiles now have travel time
+- Battle animations now scale with attack speed
 
 ## New start
 
 - Players now start the game with 5 gold and one random common pokemon instead of 6 gold
-
-## Power Points overload
-
-- Extra PP generated when reaching max PP are now saved and restored after casting ability
-
-![pp](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/icons/PP.png)
-
-## Attack animations
-
-- Attacks and abilities now have a frame delay specific to each pokemon before damage and effects are applied
-- Projectiles now have travel time
-
-![range](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/icons/RANGE.png)
 
 ## Newcomers in 5.4
 
@@ -36,5 +29,6 @@ Add Electric 9: Power Surge: Triple attacks also deal 10 special damage to enemi
 ![Pawmot](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0923/Normal.png)
 ![Wishiwashi](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0746/Normal.png)
 ![Wishiwashi School](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0746/0001/Normal.png)
+![Pyukumuku](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0771/Normal.png)
 
 Check out the full changelog on Discord !

@@ -44,4 +44,4 @@ Each Pokémon in shop has an additional 5% chance to share a common synergy with
 ![Mienfoo](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0619/Normal.png)
 ![Mienshao](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0620/Normal.png)
 
-Check out the full changelog on Discord !
+Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1264453620821393481) !

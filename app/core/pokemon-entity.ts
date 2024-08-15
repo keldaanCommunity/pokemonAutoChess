@@ -217,12 +217,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         : this.simulation.redPlayer
     if (player instanceof Player) {
       return player
-    } else if (player) {
-      logger.error(
-        "pokemon.player is not undefined neither an instance of Player, why ?",
-        player
-      )
-      return undefined
+    } else {
+      return undefined // PvE or ghost player
     }
   }
 
@@ -1431,6 +1427,27 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
     if (this.status.curseFate) {
       this.simulation.applyCurse(Effect.CURSE_OF_FATE, this.team)
+    }
+
+    if (this.passive === Passive.PYUKUMUKU) {
+      this.simulation.room.broadcast(Transfer.ABILITY, {
+        id: this.simulation.id,
+        skill: Ability.EXPLOSION,
+        positionX: this.positionX,
+        positionY: this.positionY
+      })
+      const adjcells = board.getAdjacentCells(this.positionX, this.positionY)
+      adjcells.forEach((cell) => {
+        if (cell.value && this.team != cell.value.team) {
+          cell.value.handleSpecialDamage(
+            100,
+            board,
+            AttackType.SPECIAL,
+            this,
+            false
+          )
+        }
+      })
     }
 
     const player = this.player

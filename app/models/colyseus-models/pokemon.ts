@@ -14461,6 +14461,25 @@ export class Pawmot extends Pokemon {
   regional = true
 }
 
+export class Pyukumuku extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.POISON,
+    Synergy.AMORPHOUS
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 150
+  atk = 8
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 1
+  skill = Ability.PURIFY
+  passive = Passive.PYUKUMUKU
+  attackSprite = AttackSprite.WATER_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -15279,6 +15298,7 @@ export const PokemonClasses: Record<
   [Pkm.STONJOURNER]: Stonjourner,
   [Pkm.HISUI_SNEASEL]: HisuiSneasel,
   [Pkm.SNEASLER]: Sneasler,
+  [Pkm.PYUKUMUKU]: Pyukumuku,
   [Pkm.POIPOLE]: Poipole,
   [Pkm.NAGANADEL]: Naganadel,
   [Pkm.CRAMORANT]: Cramorant,

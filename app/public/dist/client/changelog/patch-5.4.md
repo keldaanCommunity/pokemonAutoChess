@@ -8,6 +8,7 @@
 - Pawmot
 - Wishiwashi
 - Wishiwashi (School)
+- Pyukumuku
 
 # Changes to Pokemon & Abilities
 
@@ -37,6 +38,7 @@
 - Changed Silvally: no longer Wild, MultiAttack: 10 → 15 x synergy level special damage
 - Buff Present (Delibird): chance to heal ~~80~~ 50HP: ~~20~~ 10%; chance to deal 300 damage ~~10~~ 20%
 - Buff Suicune: PP 130 → 100
+- Buff Mud Bubble (Mudkip): remove ability cooldown
 
 
 # Changes to Synergies
@@ -75,6 +77,8 @@
 - Added tournament info on lobby screen
 - Removed online list from lobby screen. It was inpractical with the current number of players.
 - Hide authenticated account name on login page
+- Add wiki on login page
+- Add pokemon emote shortcut info in collection emotions window
 
 # Bugfix
 

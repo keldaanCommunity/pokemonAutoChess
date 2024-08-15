@@ -5506,6 +5506,7 @@ export class MudBubbleStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const heal = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
     pokemon.handleHeal(heal, pokemon, 1, crit)
+    pokemon.cooldown = 0
   }
 }
 
@@ -9546,6 +9547,21 @@ export class DoubleShockStrategy extends AbilityStrategy {
   }
 }
 
+export class PurifyStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const heal = [15, 30, 60][pokemon.stars - 1] ?? 60
+    pokemon.handleHeal(heal, pokemon, 1, crit)
+    pokemon.status.clearNegativeStatus()
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -9895,6 +9911,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.GRAVITY]: new GravityStrategy(),
   [Ability.DIRE_CLAW]: new DireClawStrategy(),
   [Ability.FAKE_OUT]: new FakeOutStrategy(),
+  [Ability.PURIFY]: new PurifyStrategy(),
   [Ability.FELL_STINGER]: new FellStingerStrategy(),
   [Ability.GULP_MISSILE]: new GulpMissileStrategy(),
   [Ability.SCHOOLING]: new SchoolingStrategy(),

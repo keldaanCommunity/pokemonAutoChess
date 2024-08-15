@@ -8,6 +8,7 @@ export default function GithubButton() {
       rel="noopener noreferrer"
     >
       <button type="button" className="bubbly">
+        <img width={32} src={`assets/ui/github.svg`} style={{ objectFit: "contain" }} />
         Github
       </button>
     </a>

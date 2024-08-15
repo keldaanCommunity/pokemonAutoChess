@@ -22,8 +22,15 @@
   text-align: center;
 }
 
-@media (aspect-ratio < 4/3), (width <= 1280px) {
+@media (aspect-ratio < 4/3) {
   #game-wrapper .synergies-container {
-    max-height: 50%;
+    max-height: 70%;
+  }
+}
+
+@media(width <= 1280px) {
+  #game-wrapper .synergies-container {
+    transform: scale(0.8);
+    transform-origin: top left;
   }
 }

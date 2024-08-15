@@ -1,6 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { Emotion } from "../../../../../types"
+import { AvatarEmotions, Emotion } from "../../../../../types"
 import { getEmotionCost } from "../../../../../types/Config"
 import { getPortraitSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
@@ -31,6 +31,7 @@ export default function PokemonEmotion(props: {
       onClick={props.onClick}
     >
       <img src={getPortraitSrc(props.index, props.shiny, props.emotion)} />
+      {AvatarEmotions.includes(props.emotion) && (<span className="shortcut">Ctrl+{AvatarEmotions.indexOf(props.emotion) + 1}</span>)}
       {props.unlocked ? (
         <p>{t(`emotion.${props.emotion}`)}</p>
       ) : (

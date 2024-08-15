@@ -46,4 +46,4 @@ Tons of newcomers this patch with exclusive regional forms:
 
 Water pokemons now generate more PP, and Aquatic pokemons reduce negative status duration for your whole team.
 
-Check out the [full changelog on Discord](https://discord.com/channels/737230355039387749/737230355039387752/1234828223922049025) !
+Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1234828223922049025) !

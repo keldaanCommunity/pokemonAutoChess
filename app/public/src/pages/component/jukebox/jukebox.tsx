@@ -73,7 +73,7 @@ export default function Jukebox(props: {
       className="game-jukebox-modal"
       header={t("jukebox")}
     >
-      <p className="actions">
+      <p className="actions" style={{ marginBottom: "0.5em" }}>
         <button className="bubbly blue" onClick={() => nextMusic(-1)}>
           ◄
         </button>

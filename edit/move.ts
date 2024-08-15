@@ -1,12 +1,21 @@
 import fs from "fs"
 import fse from "fs-extra"
 import { PkmIndex } from "../app/types/enum/Pokemon"
+import * as pathlib from 'path'
+import * as os from 'os'
 
 const args = process.argv.slice(2)
 const path = args[0]
 const pkmIndex = args[1]
 
-const creditsName = fs.readFileSync(`${path}/credit_names.txt`)
+function expandHomeDir(filePath: string): string {
+  if (filePath.startsWith('~')) {
+    return pathlib.join(os.homedir(), filePath.slice(1));
+  }
+  return filePath;
+}
+
+const creditsName = fs.readFileSync(expandHomeDir(`${path}/credit_names.txt`))
 fs.writeFileSync("sheets/credit_names.txt", creditsName)
 
 fse.copySync(
