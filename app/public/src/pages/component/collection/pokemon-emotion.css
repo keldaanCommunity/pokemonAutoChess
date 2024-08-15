@@ -37,6 +37,16 @@
   word-break: break-word;
 }
 
+.pokemon-emotion .shortcut {
+  font-size: 0.5em;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #00000080;
+  border-radius: 8px;
+  padding: 0 4px;
+}
+
 .pokemon-emotion p > * {
   vertical-align: middle;
   color: white;
