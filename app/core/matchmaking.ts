@@ -1,12 +1,13 @@
 import Player from "../models/colyseus-models/player"
 import GameState from "../rooms/states/game-state"
+import { IPlayer } from "../types"
 import { sum } from "../utils/array"
 import { pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 
 export type Matchup = {
-  a: Player
-  b: Player
+  a: IPlayer
+  b: IPlayer
   count: number
   distance: number
   ghost?: boolean
@@ -34,7 +35,7 @@ function completeMatchupCombination(
   matchups: Matchup[],
   players: Player[]
 ): Matchup[][] {
-  const remainingPlayers = players.filter(
+  const remainingPlayers: IPlayer[] = players.filter(
     (p) => !combination.some((m) => m.a === p || m.b === p)
   )
   if (remainingPlayers.length === 0)
@@ -47,13 +48,14 @@ function completeMatchupCombination(
       .map((matchup) => {
         const playerToGhost =
           matchup.a === remainingPlayer ? matchup.b : matchup.a
-        const ghost: Player = {
+        const ghost: IPlayer = {
           /* dereference player so that money gain is not applied to original player when playing as ghost */
           ...playerToGhost,
           id: "ghost-" + playerToGhost.id,
           name: `Ghost of ${playerToGhost.name}`,
-          avatar: playerToGhost.avatar
-        } as Player
+          avatar: playerToGhost.avatar,
+          ghost: true
+        }
         const ghostMatchup: Matchup = {
           ghost: true,
           a: remainingPlayer, // ensure remaining player is player A and ghost is playerB in ghost round
@@ -156,7 +158,7 @@ export function selectMatchups(state: GameState): Matchup[] {
   return selectedMatchups
 }
 
-export function getCount(a: Player, b: Player, bIsGhost: boolean): number {
+export function getCount(a: IPlayer, b: IPlayer, bIsGhost: boolean): number {
   // count(A,B) = (number of times A fought B or his ghost) + (number of times B fought A or his ghost)
   const countA =
     (a.opponents.get(b.id) ?? 0) + (a.opponents.get("ghost-" + b.id) ?? 0)
@@ -167,7 +169,7 @@ export function getCount(a: Player, b: Player, bIsGhost: boolean): number {
   else return countA + countB
 }
 
-export function getDistance(a: Player, b: Player, bIsGhost: boolean): number {
+export function getDistance(a: IPlayer, b: IPlayer, bIsGhost: boolean): number {
   // distance(A,B) = (number of stages ago A fought B or his ghost) + (number of stages ago B fought A or his ghost)
   const distanceA =
     a.history.length -

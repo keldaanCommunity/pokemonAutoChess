@@ -257,7 +257,7 @@
   height: 1em;
 }
 
-@media (aspect-ratio < 4/3), (width <= 1280px) {
+@media (aspect-ratio < 4/3) {
   .game-shop.my-container {
     flex-wrap: wrap;
   }
@@ -307,5 +307,19 @@
   .game-shop .game-pokemon-portrait .synergy-icon {
     width: 2.5vw;
     height: 2.5vw;
+  }
+}
+
+@media(aspect-ratio > 4/3) and (width <= 1280px) {
+  #game-wrapper .game-shop {
+    transform: scale(0.8);
+    transform-origin: bottom left;
+    right: 0;
+  }
+}
+
+@media(aspect-ratio > 4/3){
+  #game-wrapper .game-shop {
+    max-height: 20vh;
   }
 }

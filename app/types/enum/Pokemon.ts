@@ -4208,7 +4208,7 @@ export const AnimationConfig: {
   },
   [Pkm.MEGA_MANECTRIC]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
+    ability: AnimationType.Shock,
     emote: AnimationType.Shoot
   },
   [Pkm.SHUPPET]: {

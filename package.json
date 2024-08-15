@@ -1,6 +1,6 @@
 {
   "name": "pokemon-auto-chess",
-  "version": "5.3.0",
+  "version": "5.4.0",
   "description": "",
   "keywords": [],
   "license": "BSD-3-Clause",
@@ -17,7 +17,10 @@
     "url": "https://github.com/keldaanCommunity/pokemonAutoChess/issues"
   },
   "author": "keldaan-ag",
-  "contributors": ["ogus", "sylvainpolletvillard"],
+  "contributors": [
+    "ogus",
+    "sylvainpolletvillard"
+  ],
   "main": "public/dist/server/app/index.js",
   "scripts": {
     "reset": "rimraf -rf node_modules/",
@@ -28,7 +31,7 @@
     "build-client": "node esbuild.js --build",
     "build-server": "tsc",
     "download-music": "rimraf -rf ./app/public/src/assets/musics && git clone https://github.com/keldaanCommunity/pokemonAutoChessMusic ./app/public/src/assets/musics",
-    "build": "npm run build-client && npm run build-server",
+    "build": "npm run assetpack && npm run build-client && npm run build-server",
     "start": "node ./app/public/dist/server/app/index.js",
     "add-bot": "node ./app/public/dist/server/db-commands/populate-bot.js",
     "monitor-bot": "node ./app/public/dist/server/scheduled/monitor-bot.js",
@@ -51,7 +54,7 @@
     "@reduxjs/toolkit": "^2.2.7",
     "@types/bootstrap": "^5.2.10",
     "body-parser": "^1.20.1",
-    "colyseus": "^0.15.17",
+    "colyseus": "^0.15.15",
     "colyseus.js": "^0.15.25",
     "cors": "^2.8.5",
     "cron": "^3.1.6",

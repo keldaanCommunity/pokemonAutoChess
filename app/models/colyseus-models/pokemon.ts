@@ -4987,7 +4987,7 @@ export class Suicune extends Pokemon {
   atk = 30
   def = 5
   speDef = 5
-  maxPP = 130
+  maxPP = 100
   range = 1
   skill = Ability.AQUA_JET
   attackSprite = AttackSprite.WATER_MELEE

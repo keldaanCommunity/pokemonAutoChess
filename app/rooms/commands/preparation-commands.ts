@@ -8,7 +8,11 @@ import UserMetadata, {
   IUserMetadata
 } from "../../models/mongo-models/user-metadata"
 import { Role, Transfer } from "../../types"
-import { EloRankThreshold, MAX_PLAYERS_PER_GAME } from "../../types/Config"
+import {
+  EloRankThreshold,
+  MAX_PLAYERS_PER_GAME,
+  MIN_HUMAN_PLAYERS
+} from "../../types/Config"
 import { BotDifficulty, GameMode } from "../../types/enum/Game"
 import { logger } from "../../utils/logger"
 import { max } from "../../utils/number"
@@ -158,6 +162,15 @@ export class OnGameStartRequestCommand extends Command<
           nbHumanPlayers++
         }
       })
+
+      if (nbHumanPlayers < MIN_HUMAN_PLAYERS && process.env.MODE !== "dev") {
+        this.state.addMessage({
+          authorId: "Server",
+          payload: `Due to the current high traffic on the game, to limit the resources used server side, only games with a minimum of 8 players are authorized.`,
+          avatar: "0054/Surprised"
+        })
+        return
+      }
 
       if (this.state.users.size < 2) {
         this.state.addMessage({

@@ -36,10 +36,13 @@
 - Buff Aurora Beam (Iron Bundle, Dewgong): doubled freeze chance
 - Buff Alolan Rattata: Attack 4/10 → 6/15
 - Changed Silvally: no longer Wild, MultiAttack: 10 → 15 x synergy level special damage
+- Buff Present (Delibird): chance to heal ~~80~~ 50HP: ~~20~~ 10%; chance to deal 300 damage ~~10~~ 20%
+- Buff Suicune: PP 130 → 100
 
 
 # Changes to Synergies
 
+- Add Electric 9: Power Surge: Triple attacks also deal 10 special damage to enemies adjacent to the target
 - Buff Fairy: ~~10/20/30/40~~ 15/30/50/70% additional special damage to attacks and shocks. Shocks damage are now a percentage of the incoming critical damage, 30% initially.
 - Nerf Amorphous: HP: 5/10/15 → 4/8/12, Attack speed : 2%/4%/6% > 1%/3%/5%
 
@@ -53,6 +56,7 @@
 # Gameplay
 
 - Players now start the game with 5 gold and one random common pokemon instead of 6 gold
+- Ditto can no longer appear on stage 1
 - Extra PP generated when reaching max PP are now saved and restored after casting ability
 - Attacks and abilities now have a frame delay specific to each pokemon before damage and effects are applied
 - Projectiles now have travel time
@@ -60,6 +64,7 @@
 - Increase experience cost for level 6,7,8,9 by 2
 - Reduce sleep duration reduction when taking a hit: 500ms → 300ms
 - Flinch status changed: ~~100~~ 50% of incoming damage bypass shield
+- Changed behavior when more than 3 items are merged after an evolution: the excessive items dropped are now random, but item components still are dropped in priority
 
 # UI
 
@@ -71,6 +76,7 @@
 - Added tournament info on lobby screen
 - Removed online list from lobby screen. It was inpractical with the current number of players.
 - Hide authenticated account name on login page
+- Add wiki on login page
 
 # Bugfix
 

@@ -794,25 +794,12 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
                 new Date(gameStartedAt).getTime() < Date.now() - 60000) ||
               !query.map((r) => r.roomId).includes(room.roomId)
             ) {
-              // if the room (this.rooms managed by subscribeLobby) was not in the query, delete it
-              //logger.debug(`Room ${room.roomId} is stale, deleting it`)
-              try {
-                // Attempt to see if the room exit. If it exist, disconnect it
-                const disconnection = await matchMaker.remoteRoomCall(
-                  room.roomId,
-                  "disconnect"
-                )
-                //logger.debug(disconnection)
-              } catch (error) {
-                //logger.error(error)
-                // The room does not exist.
-                if (!this.presence.hdel("roomcaches", room.roomId)) {
-                  // Should i delete the whole cache ?
-                  this.presence.del("roomcaches")
-                }
-              } finally {
-                this.removeRoom(roomIndex, room.roomId)
-              }
+              this.presence.hdel("roomcaches", room.roomId)
+              this.removeRoom(roomIndex, room.roomId)
+              //   // Attempt to see if the room exit. If it exist, disconnect it
+              //   const disconnection = await matchMaker.remoteRoomCall(
+              //     room.roomId,
+              //     "disconnect"
             }
           })
         },

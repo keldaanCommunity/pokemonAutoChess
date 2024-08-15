@@ -46,6 +46,12 @@ if (process.env.NODE_APP_INSTANCE) {
       roomName: string,
       clientOptions: any
     ) {
+      if (roomName === "lobby") {
+        const lobbies = await matchMaker.query({ name: "lobby" })
+        if (lobbies.length !== 0) {
+          throw "Attempt to create one lobby"
+        }
+      }
       return (await matchMaker.stats.fetchAll()).sort((p1, p2) =>
         p1.ccu > p2.ccu ? 1 : -1
       )[0].processId
@@ -62,7 +68,7 @@ export default config({
     gameServer.define("after-game", AfterGameRoom)
     gameServer.define("lobby", CustomLobbyRoom)
     gameServer.define("preparation", PreparationRoom).enableRealtimeListing()
-    gameServer.define("game", GameRoom)
+    gameServer.define("game", GameRoom).enableRealtimeListing()
   },
 
   initializeExpress: (app) => {
