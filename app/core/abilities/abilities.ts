@@ -9556,9 +9556,8 @@ export class PurifyStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const heal = [20, 40, 80][pokemon.stars - 1] ?? 80
-    const poison = [2, 3, 4][pokemon.stars - 1] ?? 4
     pokemon.handleHeal(heal, pokemon, 1, crit)
-    target.status.triggerPoison(poison, target, pokemon)
+    pokemon.status.clearNegativeStatus()
   }
 }
 
