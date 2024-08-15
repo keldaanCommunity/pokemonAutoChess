@@ -877,7 +877,22 @@
     "UNOWN_V": "Unown-V",
     "UNOWN_W": "Unown-W",
     "UNOWN_X": "Unown-X",
-    "UNOWN_Y": "Unown-Y"
+    "UNOWN_Y": "Unown-Y",
+    "UNOWN_Z": "Unown-Z",
+    "UNOWN_QUESTION": "Unown-?",
+    "UNOWN_EXCLAMATION": "Unown-!",
+    "TAPU_FINI": "Tapu Fini",
+    "TAPU_BULU": "Tapu Bulu",
+    "DIGLETT": "Diglett",
+    "DUGTRIO": "Dugtrio",
+    "ALOLAN_DIGLETT": "Alolan Diglett",
+    "ALOLAN_DUGTRIO": "Alolan Dugtrio",
+    "ROWLET": "Rowlet",
+    "DARTIX": "Dartrix",
+    "DECIDUEYE": "Decidueye",
+    "ZORUA": "Zorua",
+    "ZOROARK": "Zoroark",
+    "HISUI_ZORUA": "Hisuian Zorua"
   },
   "ability_description": {
     "SOFT_BOILED": "Giải trừ hiệu ứng và nhận [20,40,80,SP] SHIELD cho Pokemon đồng minh",
