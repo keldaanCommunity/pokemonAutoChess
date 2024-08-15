@@ -6,11 +6,21 @@ import { AnimationType } from "../app/types/Animation"
 import { PokemonTint, SpriteType } from "../app/types/enum/Game"
 import { AnimationConfig, Pkm, PkmIndex } from "../app/types/enum/Pokemon"
 import { logger } from "../app/utils/logger"
+import * as pathlib from 'path'
+import * as os from 'os'
 
 gracefulFs.gracefulify(fs)
 const args = process.argv.slice(2)
 const path = args[0]
 const specificIndexToSplit = args[1]
+
+function expandHomeDir(filePath: string): string {
+  if (filePath.startsWith('~')) {
+    return pathlib.join(os.homedir(), filePath.slice(1));
+  }
+  return filePath;
+}
+
 
 interface IPMDCollab {
   AnimData: IAnimData
@@ -191,7 +201,7 @@ async function splitIndex(index: string) {
     const pad = allPads[j]
     try {
       const shiny = pathIndex == pad ? PokemonTint.NORMAL : PokemonTint.SHINY
-      const xmlFile = fs.readFileSync(`${path}/sprite/${pad}/AnimData.xml`)
+      const xmlFile = fs.readFileSync(expandHomeDir(`${path}/sprite/${pad}/AnimData.xml`))
       const parser = new XMLParser()
       const xmlData = <IPMDCollab>parser.parse(xmlFile)
       const attackMetadata = xmlData.AnimData.Anims.Anim.find(
@@ -245,14 +255,14 @@ async function splitIndex(index: string) {
             if (metadata) {
               if (metadata.CopyOf) {
                 img = await Jimp.read(
-                  `${path}/sprite/${pad}/${metadata.CopyOf}-${anim}.png`
+                  expandHomeDir(`${path}/sprite/${pad}/${metadata.CopyOf}-${anim}.png`)
                 )
                 metadata = xmlData.AnimData.Anims.Anim.find(
                   (m) => m.Name == metadata?.CopyOf
                 )
               } else {
                 img = await Jimp.read(
-                  `${path}/sprite/${pad}/${action}-${anim}.png`
+                  expandHomeDir(`${path}/sprite/${pad}/${action}-${anim}.png`)
                 )
               }
 
