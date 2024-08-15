@@ -9,7 +9,8 @@
  * See: https://docs.colyseus.io/server/api/#constructor-options
  */
 import { listen } from "@colyseus/tools"
-import { matchMaker } from "colyseus"
+import { logger, matchMaker } from "colyseus"
+import { CronJob } from "cron"
 import app from "./app.config"
 import { initializeMetrics } from "./metrics"
 
@@ -18,11 +19,45 @@ async function main() {
     const processNumber = Number(process.env.NODE_APP_INSTANCE || "0")
     initializeMetrics()
     await listen(app)
-    processNumber === 0 && matchMaker.createRoom("lobby", {})
+    if (processNumber === 0) {
+      await matchMaker.createRoom("lobby", {})
+      initializeLobby()
+    }
   } else {
     await listen(app, 9000)
-    matchMaker.createRoom("lobby", {})
+    await matchMaker.createRoom("lobby", {})
   }
+}
+
+function initializeLobby() {
+  logger.info("initializeLobby cron job")
+  CronJob.from({
+    cronTime: "0 */12 * * *", // every 12 hours
+    timeZone: "Europe/Paris",
+    onTick: async () => {
+      logger.debug(`Refresh lobby room`)
+      const query = await matchMaker.query({ name: "lobby" })
+      for (let i = 0; i < query.length; i++) {
+        try {
+          // Attempt to see if the room exit. If it exist, disconnect it
+          const disconnection = await matchMaker.remoteRoomCall(
+            query[i].roomId,
+            "disconnect",
+            [],
+            60000
+          )
+
+          logger.error("lobby disconected", disconnection)
+        } catch (error) {
+          logger.error(error)
+        } finally {
+          matchMaker.presence.hdel("roomcaches", query[i].roomId)
+        }
+      }
+      matchMaker.createRoom("lobby", {})
+    },
+    start: true
+  })
 }
 
 main()
