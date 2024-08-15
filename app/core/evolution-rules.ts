@@ -7,7 +7,7 @@ import { ItemComponents, Item, ShinyItems } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
 import { logger } from "../utils/logger"
-import { pickRandomIn } from "../utils/random"
+import { pickRandomIn, shuffleArray } from "../utils/random"
 import { values } from "../utils/schemas"
 
 type DivergentEvolution = (
@@ -140,23 +140,26 @@ export class CountEvolutionRule extends EvolutionRule {
       pokemon.onEvolve({ pokemonEvolved, pokemonsBeforeEvolution, player })
     }
 
-    for (let i = 0; i < 3; i++) {
-      const itemToAdd = itemsToAdd.pop()
-      if (itemToAdd) {
-        if (pokemonEvolved.items.has(itemToAdd)) {
-          player.items.push(itemToAdd)
-        } else {
-          pokemonEvolved.items.add(itemToAdd)
-        }
+    shuffleArray(itemsToAdd)
+    for (const item of itemsToAdd) {
+      if (pokemonEvolved.items.has(item) || pokemonEvolved.items.size >= 3) {
+        player.items.push(item)
+      } else {
+        pokemonEvolved.items.add(item)
       }
     }
 
-    itemsToAdd.forEach((item) => {
-      player.items.push(item)
-    })
-    itemComponentsToAdd.forEach((item) => {
-      player.items.push(item)
-    })
+    shuffleArray(itemComponentsToAdd)
+    for (const itemComponent of itemComponentsToAdd) {
+      if (
+        pokemonEvolved.items.has(itemComponent) ||
+        pokemonEvolved.items.size >= 3
+      ) {
+        player.items.push(itemComponent)
+      } else {
+        pokemonEvolved.items.add(itemComponent)
+      }
+    }
 
     if (coord) {
       // logger.debug(coord, pokemonEvolved.name)

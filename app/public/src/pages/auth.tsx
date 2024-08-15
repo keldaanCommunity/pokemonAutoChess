@@ -1,14 +1,20 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import Login from "./component/auth/login"
-import Media from "./component/auth/media"
 import "./auth.css"
+import Wiki from "./component/wiki/wiki"
+import { Modal } from "./component/modal/modal"
+import DiscordButton from "./component/buttons/discord-button"
+import GithubButton from "./component/buttons/github-button"
+import PolicyButton from "./component/buttons/policy-button"
+import pkg from "../../../../package.json"
 
 export default function Auth() {
   const { t } = useTranslation()
   const isSupposedlyMobile =
     navigator.maxTouchPoints > 0 &&
     window.matchMedia("(orientation: portrait)").matches
+  const [modal, setModal] = React.useState<string | null>(null)
 
   return (
     <div className="auth-page">
@@ -25,7 +31,30 @@ export default function Auth() {
       <main>
         <Login />
       </main>
-      <Media />
+      <div className="media">
+        <DiscordButton />
+        <GithubButton />
+        <PolicyButton />
+        <button className="bubbly blue" onClick={() => setModal("wiki")}>
+          <img width={32} height={32} src={`assets/ui/wiki.svg`} />
+          {t("wiki")}
+        </button>
+        <span>V{pkg.version}</span>
+        <p>
+          {t("made_for_fans")}
+          <br />
+          {t("non_profit")} / {t("open_source")}
+          <br />
+          {t("copyright")}
+        </p>
+      </div>
+      <Modal
+        onClose={() => setModal(null)}
+        show={modal === "wiki"}
+        className="wiki-modal"
+        header={t("wiki")}>
+        <Wiki inGame={false} />
+      </Modal>
     </div>
   )
 }
