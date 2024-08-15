@@ -5506,6 +5506,7 @@ export class MudBubbleStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const heal = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
     pokemon.handleHeal(heal, pokemon, 1, crit)
+    pokemon.cooldown = 0
   }
 }
 
@@ -9555,7 +9556,7 @@ export class PurifyStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const heal = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const heal = [15, 30, 60][pokemon.stars - 1] ?? 60
     pokemon.handleHeal(heal, pokemon, 1, crit)
     pokemon.status.clearNegativeStatus()
   }

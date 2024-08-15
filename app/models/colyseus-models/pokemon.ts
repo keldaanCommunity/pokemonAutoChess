@@ -14462,14 +14462,18 @@ export class Pawmot extends Pokemon {
 }
 
 export class Pyukumuku extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.POISON, Synergy.AMORPHOUS])
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.POISON,
+    Synergy.AMORPHOUS
+  ])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 150
   atk = 8
-  def = 8
-  speDef = 8
-  maxPP = 80
+  def = 7
+  speDef = 7
+  maxPP = 100
   range = 1
   skill = Ability.PURIFY
   passive = Passive.PYUKUMUKU

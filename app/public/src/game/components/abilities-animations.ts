@@ -1280,6 +1280,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
+    case Ability.PURIFY:
+      addAbilitySprite(Ability.MUD_BUBBLE, coordinates, true).setScale(4)
+      break
+
     case Ability.ERUPTION: {
       const startCoords = transformAttackCoordinate(
         targetX + 3,
