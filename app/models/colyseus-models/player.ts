@@ -99,6 +99,7 @@ export default class Player extends Schema implements IPlayer {
   lightY: number
   canRegainLife: boolean = true
   wildChance: number = 0
+  ghost: boolean = false
 
   constructor(
     id: string,

@@ -374,6 +374,8 @@ export interface IPlayer {
   rareRegionalPool: Pkm[]
   epicRegionalPool: Pkm[]
   ultraRegionalPool: Pkm[]
+  opponents: Map<string, number>
+  ghost: boolean
 }
 
 export interface IPokemon {

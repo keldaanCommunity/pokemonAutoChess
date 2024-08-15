@@ -406,7 +406,7 @@ export default class PokemonSprite extends DraggableObject {
     const startY = isRange ? this.positionY : targetY
     const LATENCY_COMPENSATION = 20
 
-    if (startX && startY) {
+    if (startX != null && startY != null) {
       const coordinates = transformAttackCoordinate(startX, startY, this.flip)
       const projectile = this.scene.add.sprite(
         coordinates[0],
