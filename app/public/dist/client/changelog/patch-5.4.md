@@ -75,6 +75,7 @@
 - Added tournament info on lobby screen
 - Removed online list from lobby screen. It was inpractical with the current number of players.
 - Hide authenticated account name on login page
+- Add wiki on login page
 
 # Bugfix
 
