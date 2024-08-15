@@ -1430,6 +1430,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.passive === Passive.PYUKUMUKU) {
+      this.simulation.room.broadcast(Transfer.ABILITY, {
+        id: this.simulation.id,
+        skill: Ability.EXPLOSION,
+        positionX: this.positionX,
+        positionY: this.positionY
+      })
       const adjcells = board.getAdjacentCells(this.positionX, this.positionY)
       adjcells.forEach((cell) => {
         if (cell.value && this.team != cell.value.team) {
