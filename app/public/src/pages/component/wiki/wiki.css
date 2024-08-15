@@ -119,6 +119,10 @@
   padding: 0;
 }
 
+#wiki-page .wiki-tutorials h3 {
+  margin: 0;
+}
+
 #wiki-page .wiki-tutorials iframe {
   width: 560px;
   height: 315px;
