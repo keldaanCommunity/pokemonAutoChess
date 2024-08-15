@@ -1180,7 +1180,10 @@
     "HAWLUCHA": "Brutalibré",
     "MIENFOO": "Kungfouine",
     "MIENSHAO": "Shaofouine",
-    "STONJOURNER": "Dolman"
+    "STONJOURNER": "Dolman",
+    "PYUKUMUKU": "Concombaffe",
+    "POIPOLE": "Vémini",
+    "NAGANADEL": "Mandrillon"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
@@ -2093,7 +2096,9 @@
     "RECYCLE": "Nourrissez-le avec des Baies pour gagner 10HP, ou des composants pour gagner 15HP + les stats du composant, ou des objets artificiels pour gagner 50 HP + les stats de l'objet, et obtenez un TRASH en retour.",
     "DREAM_CATCHER": "Si sa cible est SLEEP, les attaques du porteur donnent 10 SHIELD aux 3 alliés les plus proches de celle-ci",
     "SLOW_START": "Démarre avec 0.5 ATK_SPEED. Après avoir lancé sa capacité la première fois, gagne 30% ATK_SPEED et 10 ATK.",
-    "STONJOURNER": "Ne bouge pas et n'attaque pas tant que sa barre de PP n'est pas pleine. Son cercle d'énergie octroie 50% AP à tous les alliés adjacents au début du combat."
+    "STONJOURNER": "Ne bouge pas et n'attaque pas tant que sa barre de PP n'est pas pleine. Son cercle d'énergie octroie 50% AP à tous les alliés adjacents au début du combat.",
+    "POISON_PIN": "Vémini évoluera en Mandrillon après avoir atteint 200 HP",
+    "PYUKUMUKU": "Quand ce Pokémon est KO, il explose en infligeant [100,SP] SPECIAL aux ennemis adjacents"
   },
   "stat": {
     "ATK": "Attaque",
