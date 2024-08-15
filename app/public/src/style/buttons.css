@@ -4,23 +4,24 @@ button {
 
 .bubbly {
   padding: 0.25em 0.5em;
+  background: #e7e7e7;
   display: inline-block;
   text-align: center;
   border-radius: 12px;
   font-size: 140%;
   border: var(--border-thin);
   text-shadow: 2px 2px 2px #00000040;
-  box-shadow: var(--shadow-clickable);
+  box-shadow: inset -6px -6px 0px 0px #cfcfcf, var(--shadow-clickable);
 }
 
 .bubbly:not([disabled]):hover {
-  background: #e7e7e7;
+  background: #ffffff;
   cursor: var(--cursor-hover);
 }
 
 .bubbly:not([disabled]):active {
-  background: #cfcfcf;
-  box-shadow: inset 6px 6px 0px 0px #e7e7e7, var(--shadow-clickable);
+  background: #e7e7e7;
+  box-shadow: inset 6px 6px 0px 0px #cfcfcf, var(--shadow-clickable);
 }
 
 .bubbly.green {
@@ -96,6 +97,21 @@ button {
 .bubbly.pink:not([disabled]):active {
   background: #ee2097;
   box-shadow: inset 6px 6px 0px 0px #902c74;
+}
+
+.bubbly.dark {
+  background: #444;
+  color: white;
+  box-shadow: inset -6px -6px 0px 0px #333, var(--shadow-clickable);
+}
+
+.bubbly.dark:not([disabled]):hover {
+  background: #555;
+}
+
+.bubbly.dark:not([disabled]):active {
+  background: #444;
+  box-shadow: inset 6px 6px 0px 0px #333;
 }
 
 .bubbly.discord {
