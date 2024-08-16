@@ -4,6 +4,7 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import WikiAbility from "./wiki-ability"
 import WikiPokemons from "./wiki-pokemons"
 import { WikiDungeon } from "./wiki-dungeon"
+import WikiData from "./wiki-data"
 import WikiFaq from "./wiki-faq"
 import WikiItems from "./wiki-items"
 import WikiStatistic from "./wiki-statistic"
@@ -33,6 +34,7 @@ export default function Wiki({ inGame = false }: { inGame: boolean }) {
           <Tab key="title-status">{t("status_label")}</Tab>
           <Tab key="title-weather">{t("weather_label")}</Tab>
           <Tab key="title-dungeon">{t("dungeon_label")}</Tab>
+          <Tab key="title-data">{t("data_label")}</Tab>
         </TabList>
 
         {!inGame && (
@@ -68,6 +70,9 @@ export default function Wiki({ inGame = false }: { inGame: boolean }) {
         </TabPanel>
         <TabPanel key="dungeon">
           <WikiDungeon />
+        </TabPanel>
+        <TabPanel key="data">
+          <WikiData />
         </TabPanel>
       </Tabs>
     </div>

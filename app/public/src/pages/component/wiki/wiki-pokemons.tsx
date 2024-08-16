@@ -168,17 +168,13 @@ export function WikiAllPokemons() {
           )
         })}
       </div>
-      {hoveredPokemon &&
-        ReactDOM.createPortal(
-          <Tooltip
-            id="pokemon-detail"
-            className="custom-theme-tooltip game-pokemon-detail-tooltip"
-            float
-          >
-            <GamePokemonDetail pokemon={hoveredPokemon} />
-          </Tooltip>,
-          document.body
-        )}
+      {hoveredPokemon && <Tooltip
+        id="pokemon-detail"
+        className="custom-theme-tooltip game-pokemon-detail-tooltip"
+        float
+      >
+        <GamePokemonDetail pokemon={hoveredPokemon} />
+      </Tooltip>}
     </>
   )
 }

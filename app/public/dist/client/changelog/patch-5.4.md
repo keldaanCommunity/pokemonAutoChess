@@ -76,9 +76,10 @@
 - Main lobby chat is now reserved to game announcements, and admins/mods announcements. We invite you to join Discord for general chat instead.
 - Added tournament info on lobby screen
 - Removed online list from lobby screen. It was inpractical with the current number of players.
-- Hide authenticated account name on login page
-- Add wiki on login page
-- Add pokemon emote shortcut info in collection emotions window
+- Authenticated account name is now hidden on login page, hover to reveal. No more doxing !
+- Added wiki on login page
+- Added pokemon emote shortcut info in collection emotions window
+- Added data section to the wiki, containing random game data for the geeks
 
 # Bugfix
 

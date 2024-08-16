@@ -2515,7 +2515,7 @@
   "mobile_warning": "This game is not adapted for mobile, play it on desktop",
   "nintendo_warning": "Non profit, open source. All rights to The Pokemon Company®",
   "collection": "Collection",
-  "wiki": "Wiki",
+  "wiki_label": "Wiki",
   "bot_builder": "Bot Builder",
   "meta": "Meta",
   "key_bindings": "Key bindings",
@@ -2651,6 +2651,8 @@
   "shield_given": "Shield given",
   "total": "Total",
   "lvl": "Lvl",
+  "xp": "XP",
+  "experience": "Experience",
   "lose_game_hint": "You lose the game when you have no more Health Points",
   "unlock": "Unlock",
   "lock": "Lock",
@@ -2802,6 +2804,7 @@
   "dungeon_label": "Regions",
   "items_label": "Items",
   "pokemons_label": "Pokémons",
+  "data_label": "Data",
   "pokemon_auto_chess": "Pokemon Auto Chess",
   "help": "Help",
   "index": "Index",
@@ -3091,5 +3094,22 @@
     "spriters": "Many of the game's animations are the work of independent artists. Some take commissions, so you can sponsor them. More info on Discord",
     "wiki": "The game has a complete wiki accessible from the side menu, don't miss it!",
     "avatar": "To change your player avatar, play games to earn XP and level up. Each level grants you a booster which when opened gives you shards that can be spent in the Collection menu to buy new avatars."
+  },
+  "wiki": {
+    "data_description": "Various data about the game for the geeks",
+    "tiers_by_level_title": "Tiers by level",
+    "tiers_by_level_description": "The odds of getting a certain rarity of Pokémon in your shop changes with your player level. The higher the level, the higher the rarity and the cost in the shop.",
+    "experience_by_rank": "Experience by rank",
+    "experience_by_rank_description": "You gain experience points at the end of each game based on your final rank. Every 1000 XP, you level up and gain one booster.",
+    "booster_rarity_probability": "Booster rarity probability",
+    "booster_rarity_probability_description": "The chances to find a Pokémon in a booster pack depends on its rarity.",
+    "special_pokemons_rate": "Special Pokémons",
+    "ditto_rate": "Chance to find Ditto in shop",
+    "kecleon_rate": "Chance to find Kecleon in stage 10 propositions",
+    "arceus_rate": "Chance to find Arceus in stage 20 propositions",
+    "fishing_rarity_rate": "Fishing rarity by rod quality",
+    "fishing_rarity_rate_description": "The quality of the rod you use to fish influences the rarity of the Pokémon you can catch.",
+    "pool_size_per_category": "Pool size per category",
+    "pool_size_per_category_description": "The pokemons you find in shops are taken from a pool shared by all players. The number of specimens of each Pokémon in the pool depends on its rarity and its number of evolution stages."
   }
 }

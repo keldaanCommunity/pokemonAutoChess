@@ -301,6 +301,30 @@
   background-color: var(--color-bg-primary);
 }
 
+#wiki-data {
+  padding: 0 0.5em;
+}
+
+#wiki-data table {
+  text-align: center;
+  table-layout: fixed;
+  background-color: var(--color-bg-secondary);
+}
+
+#wiki-data thead {
+  border-bottom: 2px solid currentColor;
+}
+
+#wiki-data th,
+#wiki-data td {
+  padding: 0 0.5em;
+}
+
+#wiki-data-tiers-by-level th,
+#wiki-data-booster-rarity-probability th {
+  width: 10ch;
+}
+
 @media (width <= 960px) {
   #wiki-items {
     display: block;

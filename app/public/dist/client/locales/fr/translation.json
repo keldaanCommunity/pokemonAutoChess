@@ -2487,7 +2487,7 @@
   "mobile_warning": "Ce jeu n'est pas adapté pour mobile.",
   "nintendo_warning": "Sans but lucratif, open source. Tous les droits à The Pokemon Company®",
   "collection": "Collection",
-  "wiki": "Wiki",
+  "wiki_label": "Wiki",
   "bot_builder": "Bot Builder",
   "meta": "Méta",
   "key_bindings": "Raccourcis",
@@ -3055,5 +3055,22 @@
     "spriters": "Beaucoup d'animations du jeu sont l'oeuvre d'artistes indépendants. Certains travaillent sur commande, vous pouvez donc les sponsoriser. Plus d'infos sur Discord.",
     "wiki": "Ce jeu dispose d'un wiki complet accessible depuis le menu latéral, ne passez pas à côté !",
     "avatar": "Pour changer votre avatar de joueur, jouez quelques parties pour gagner de l'XP et monter en niveau. Chaque niveau vous fait gagner un booster qui une fois ouvert vous donne des fragments de Pokémon qui peuvent être dépensés dans le menu Collection pour acheter de nouveaux avatars."
+  },
+  "wiki": {
+    "data_description": "Diverses données autour du jeu pour les geeks",
+    "tiers_by_level_title": "Rareté dans le magasin selon le niveau",
+    "tiers_by_level_description": "Les chances d'avoir une certaine rareté de Pokémon dans le magasin changent en fonction de votre niveau de joueur. Plus votre niveau est élevé, plus les Pokémons du magasin sont rares et chers.",
+    "experience_by_rank": "Expérience gagnée selon le classement",
+    "experience_by_rank_description": "Vous gagnez des points d'expérience pour votre niveau de compte à la fin de chaque partie, en fonction de votre classement final. Tous les 1000 points d'expérience, votre compte monte en niveau et vous gagnez un booster.",
+    "booster_rarity_probability": "Rareté des Pokémons dans les boosters",
+    "booster_rarity_probability_description": "Les chances de trouver un certain Pokémon dans un booster dépendent de sa rareté.",
+    "special_pokemons_rate": "Pokémons spéciaux",
+    "ditto_rate": "Chance de trouver $t(pkm.DITTO) dans le magasin",
+    "kecleon_rate": "Chance de trouver $t(pkm.KECLEON) dans les propositions du tour 10",
+    "arceus_rate": "Chance de trouver $t(pkm.ARCEUS) dans les propositions du tour 20",
+    "fishing_rarity_rate": "Rareté des Pokémons péchés en fonction de la canne à pêche",
+    "fishing_rarity_rate_description": "La qualité de la canne à pêche influence la rareté des Pokémons que vous pouvez attraper.",
+    "pool_size_per_category": "Nombre de spécimens dans la pioche par catégorie",
+    "pool_size_per_category_description": "Les Pokémons que vous trouvez dans vos magasins sont tirés d'une pioche partagée par tous les joueurs. Le nombre de spécimens de chaque espèce dans cette pioche dépend de la rareté et du nombre d'étapes d'évolutions de cette espèce."
   }
 }

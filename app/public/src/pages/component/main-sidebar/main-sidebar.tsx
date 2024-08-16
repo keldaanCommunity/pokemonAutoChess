@@ -144,7 +144,7 @@ export function MainSidebar(props: MainSidebarProps) {
           className="green"
           handleClick={changeModal}
         >
-          {t("wiki")}
+          {t("wiki_label")}
         </NavLink>
         <NavLink
           svg="meta"
@@ -362,7 +362,7 @@ function Modals({
         onClose={closeModal}
         show={modal === "wiki"}
         className="wiki-modal"
-        header={t("wiki")}
+        header={t("wiki_label")}
       >
         <Wiki inGame={page === "game"} />
       </Modal>

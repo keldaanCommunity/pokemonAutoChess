@@ -1,7 +1,9 @@
 import GameState from "../rooms/states/game-state"
 import {
+  ARCEUS_RATE,
   DITTO_RATE,
   FishRarityProbability,
+  KECLEON_RATE,
   LegendaryShop,
   NB_UNIQUE_PROPOSITIONS,
   PoolSize,
@@ -325,14 +327,14 @@ export default class Shop {
       if (
         stageLevel === PortalCarouselStages[0] &&
         player.pokemonsProposition.includes(Pkm.KECLEON) === false &&
-        chance(1 / 100)
+        chance(KECLEON_RATE)
       ) {
         selectedProposition = Pkm.KECLEON
       }
       if (
         stageLevel === PortalCarouselStages[1] &&
         player.pokemonsProposition.includes(Pkm.ARCEUS) === false &&
-        chance(1 / 100)
+        chance(ARCEUS_RATE)
       ) {
         selectedProposition = Pkm.ARCEUS
       }
