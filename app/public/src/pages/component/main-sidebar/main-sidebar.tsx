@@ -11,10 +11,10 @@ import { cc } from "../../utils/jsx"
 import Booster from "../booster/booster"
 import TeamBuilderModal from "../bot-builder/team-builder-modal"
 import PokemonCollection from "../collection/pokemon-collection"
-import GameOptionsModal from "../options/game-options-modal"
 import Jukebox from "../jukebox/jukebox"
 import MetaReport from "../meta-report/meta-report"
 import { Modal } from "../modal/modal"
+import GameOptionsModal from "../options/game-options-modal"
 import Patchnotes from "../patchnotes/patchnotes"
 import { usePatchVersion } from "../patchnotes/usePatchVersion"
 import Profile from "../profile/profile"
@@ -212,25 +212,6 @@ export function MainSidebar(props: MainSidebarProps) {
 
         {page !== "game" && (
           <NavLink
-            svg="donate"
-            className="tipeee"
-            onClick={() =>
-              window.open("https://en.tipeee.com/pokemon-auto-chess", "_blank")
-            }
-          >
-            {t("donate")}
-            <img
-              src="assets/ui/tipeee.svg"
-              style={{
-                height: "1.25em",
-                display: "inline-block"
-              }}
-            />
-          </NavLink>
-        )}
-
-        {page !== "game" && (
-          <NavLink
             svg="discord"
             className="discord"
             onClick={() => window.open("https://discord.gg/6JMS7tr", "_blank")}
@@ -348,7 +329,8 @@ function Modals({
         onClose={closeModal}
         show={modal === "news"}
         header={t("patch_notes")}
-        className="patchnotes">
+        className="patchnotes"
+      >
         <Patchnotes />
       </Modal>
       <Modal
@@ -357,33 +339,34 @@ function Modals({
           dispatch(setSearchedUser(undefined))
         }}
         show={modal === "profile"}
-        header={t("profile")}>
+        header={t("profile")}
+      >
         <Profile />
       </Modal>
       <Modal
         onClose={closeModal}
         show={modal === "collection"}
         header={t("collection")}
-        className="anchor-top">
+        className="anchor-top"
+      >
         <PokemonCollection />
       </Modal>
       <Modal
         onClose={closeModal}
         show={modal === "booster"}
-        className="custom-bg">
+        className="custom-bg"
+      >
         <Booster />
       </Modal>
       <Modal
         onClose={closeModal}
         show={modal === "wiki"}
         className="wiki-modal"
-        header={t("wiki")}>
+        header={t("wiki")}
+      >
         <Wiki inGame={page === "game"} />
       </Modal>
-      <Modal
-        show={modal === "meta"}
-        header={t("meta")}
-        onClose={closeModal}>
+      <Modal show={modal === "meta"} header={t("meta")} onClose={closeModal}>
         <MetaReport />
       </Modal>
       <TeamBuilderModal
@@ -398,7 +381,8 @@ function Modals({
       <Modal
         onClose={closeModal}
         show={modal === "tournaments"}
-        header="Tournaments">
+        header="Tournaments"
+      >
         <TournamentsAdmin />
       </Modal>
       <Jukebox show={modal === "jukebox"} handleClose={closeModal} />
