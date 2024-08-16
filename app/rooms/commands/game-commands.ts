@@ -1355,8 +1355,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           this.room,
           playerA.board,
           playerB.board,
-          playerA,
-          playerB,
+          playerA as Player,
+          playerB as Player,
           this.state.stageLevel,
           weather
         )
