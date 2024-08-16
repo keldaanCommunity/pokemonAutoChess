@@ -1,6 +1,6 @@
 # How to deploy your own Pokemon Auto Chess
 
-The guide goal is to show you how to deploy Pokemon Auto Chess in different providers.
+The guide goal is to show you how to deploy Pokemon Auto Chess in different providers. At the end of the tutorial, you will have your own pokemon auto chess server like https://pokemon-auto-chess-505f643cbc85.herokuapp.com/.
 
 ### Prerequisites
 
