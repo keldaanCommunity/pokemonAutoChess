@@ -367,6 +367,7 @@
     "GRAVITY": "Gravity",
     "DIRE_CLAW": "Dire Claw",
     "FAKE_OUT": "Fake Out",
+    "PURIFY": "Purify",
     "FELL_STINGER": "Fell Stinger",
     "GULP_MISSILE": "Gulp Missile",
     "SCHOOLING": "Schooling",
@@ -1185,6 +1186,7 @@
     "MIENFOO": "Mienfoo",
     "MIENSHAO": "Mienshao",
     "STONJOURNER": "Stonjourner",
+    "PYUKUMUKU": "Pyukumuku",
     "POIPOLE": "Poipole",
     "NAGANADEL": "Naganadel",
     "CRAMORANT": "Cramorant",
@@ -1314,7 +1316,7 @@
     "FUTURE_SIGHT": "Deals [15,30,60,SP] SPECIAL to 5 enemies",
     "FAKE_TEARS": "Deals [3,6,9,SP] SPECIAL to the whole enemy team and trigger ARMOR_REDUCTION for 3 seconds",
     "SPARKLING_ARIA": "Deals [15,30,60,SP] SPECIAL to the target and adjacent enemies. If adjacent allies are BURN, the burn is healed.",
-    "DRAGON_DARTS": "Throws 3 darts that deals [10,20,40,SP] SPECIAL each to the target. If the target dies, regain 40 PP.",
+    "DRAGON_DARTS": "Throws 3 darts that deals [10,20,40,SP] SPECIAL each to the target. If the target is KO, regain 40 PP.",
     "GRASSY_SURGE": "Increase ATK of all GRASS Pokémons by [5,SP]",
     "MISTY_SURGE": "All FAIRY allies recover [30,SP] HP and [30,SP] PP.",
     "SKY_ATTACK": "Rises in the air and fall on the farthest target after one second, dealing [120,SP] SPECIAL",
@@ -1544,7 +1546,8 @@
     "FELL_STINGER": "Deals [20,40,70,SP] SPECIAL to the target. If it kills the target, it permanently gains +1 ATK, +5% AP and +10 HP",
     "GULP_MISSILE": "Shoot an $t(pkm.ARROKUDA) with full PP at the target, dealing [55,SP] SPECIAL to all adjacent enemies. There is a 1 in 3 chance a $t(pkm.PIKACHU) will be fired instead.",
     "SCHOOLING": "Deals [10,SP]% of its max HP as SPECIAL to the target and adjacent enemies. If a Wishiwashi is on the bench, it joins the school and gives 50 permanent HP to the user.",
-    "DOUBLE_SHOCK": "The user emits a powerful electric shock, dealing [50,100,200,SP] SPECIAL. The user is PARALYSIS for 3 seconds."
+    "DOUBLE_SHOCK": "The user emits a powerful electric shock, dealing [50,100,200,SP] SPECIAL. The user is PARALYSIS for 3 seconds.",
+    "PURIFY": "Clear negative status and heal the user for [15,30,60,SP] HP."
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2070,7 +2073,7 @@
     "STENCH": "Leaves behind a stinking cloud that POISONNED any unit that breathes it",
     "AQUA_VEIL": "Give RUNE_PROTECT under RAIN",
     "PORYGON": "Porygon2 is looking for an UPGRADE",
-    "MOXIE": "Every time an enemy Pokémon dies, it gains ATK equal to its stars",
+    "MOXIE": "Every time an enemy Pokémon is KO, it gains ATK equal to its stars",
     "BELLSPROUT": "Weepinbell is looking for berries",
     "ILLUMISE_VOLBEAT": "Illumise and Volbeat gain 5 PP per second for each other member of their species alive on the board",
     "PRISM": "Necrozma switches between its Ultra form and Normal form depending on its exposure to LIGHT",
@@ -2112,7 +2115,8 @@
     "DREAM_CATCHER": "If its target is SLEEP, holder attacks give 10 SHIELD to the 3 allies closest to it",
     "SLOW_START": "Starts at 0.5 ATK_SPEED. After first ability cast, gains 30% ATK_SPEED and 10 ATK",
     "STONJOURNER": "Does not move or attack until PP bar is full. Its power spot gives 50% AP to all adjacent allies at the start of the fight",
-    "POISON_PIN": "Poipole will evolve into Naganadel after stacking 200 HP"
+    "POISON_PIN": "Poipole will evolve into Naganadel after stacking 200 HP",
+    "PYUKUMUKU": "When this pokemon is KO, it explodes dealing [100,SP] SPECIAL to adjacent enemies."
   },
   "stat": {
     "ATK": "Attack",
@@ -2237,7 +2241,7 @@
     "GROUND": "GROUND Pokémons gain bonus ATK, DEF and SPE_DEF every 3 seconds.",
     "POISON": "POISON Pokémons have a chance to POISONNED their target for 4 seconds with their basic attacks. Poison inflicts TRUE over time",
     "DRAGON": "DRAGON amplify synergies and gains more stats when fully evolved.",
-    "FIELD": "When a FIELD Pokémon dies, all the other FIELD Pokémons are healed and gain ATK_SPEED",
+    "FIELD": "When a FIELD Pokémon is KO, all the other FIELD Pokémons are healed and gain ATK_SPEED",
     "MONSTER": "MONSTER Pokémons can FLINCH their opponents. Every time they get a KO, they gain stats, heal and grow in size",
     "HUMAN": "HUMAN Pokémons seek to stay on their feet. All your team heals for a percentage of the damage they deal with attacks and abilities",
     "AQUATIC": "AQUATIC Pokémons reduce the duration of status afflictions for all your team. After 8 seconds, a tidal wave cleans up negative status and field effects, heal your AQUATIC allies and knock back and damage enemies.",

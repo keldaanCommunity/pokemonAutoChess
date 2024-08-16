@@ -24,7 +24,7 @@ async function main() {
       initializeLobby()
     }
   } else {
-    await listen(app, 9000)
+    await listen(app, process.env.PORT ? parseInt(process.env.PORT) : 9000)
     await matchMaker.createRoom("lobby", {})
   }
 }

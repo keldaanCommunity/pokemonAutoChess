@@ -32,4 +32,4 @@ You now have the option to quickly join a room that will start automatically at 
 
 Regional pokemons are no longer restricted by rarity and stage level, and when a regional pokemon is a variant of another family, it will replace the original family in your shops
 
-Check out the full changelog on Discord !
+Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1244201260941316159) !

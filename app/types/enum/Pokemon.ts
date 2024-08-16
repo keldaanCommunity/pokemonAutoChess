@@ -812,6 +812,7 @@ export enum Pkm {
   STONJOURNER = "STONJOURNER",
   HISUI_SNEASEL = "HISUI_SNEASEL",
   SNEASLER = "SNEASLER",
+  PYUKUMUKU = "PYUKUMUKU",
   POIPOLE = "POIPOLE",
   NAGANADEL = "NAGANADEL",
   CRAMORANT = "CRAMORANT",
@@ -1635,6 +1636,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.STONJOURNER]: "0874",
   [Pkm.HISUI_SNEASEL]: "0215-0001",
   [Pkm.SNEASLER]: "0903",
+  [Pkm.PYUKUMUKU]: "0771",
   [Pkm.POIPOLE]: "0803",
   [Pkm.NAGANADEL]: "0804",
   [Pkm.CRAMORANT]: "0845",
@@ -2458,6 +2460,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.STONJOURNER]: Pkm.STONJOURNER,
   [Pkm.HISUI_SNEASEL]: Pkm.HISUI_SNEASEL,
   [Pkm.SNEASLER]: Pkm.HISUI_SNEASEL,
+  [Pkm.PYUKUMUKU]: Pkm.PYUKUMUKU,
   [Pkm.POIPOLE]: Pkm.POIPOLE,
   [Pkm.NAGANADEL]: Pkm.POIPOLE,
   [Pkm.CRAMORANT]: Pkm.CRAMORANT,
@@ -6731,5 +6734,10 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shock,
     emote: AnimationType.Charge
+  },
+  [Pkm.PYUKUMUKU]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Rumble
   }
 }

@@ -57,13 +57,16 @@ export default function Login() {
           uiConfig={uiConfig}
           firebaseAuth={firebase.auth()}
         />
-        <AnonymousButton />
+        {/* <AnonymousButton /> */}
       </div>
     )
   } else {
     return (
       <div id="play-panel">
-        <p>{t("authenticated_as")}: <span title={displayName}>{t("hover_to_reveal")}</span></p>
+        <p>
+          {t("authenticated_as")}:{" "}
+          <span title={displayName}>{t("hover_to_reveal")}</span>
+        </p>
         <ul className="actions">
           <li>
             <Link className="bubbly green" to={"/lobby"}>

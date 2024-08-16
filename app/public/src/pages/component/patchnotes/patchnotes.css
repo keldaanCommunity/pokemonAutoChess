@@ -29,7 +29,7 @@
 .patchnotes .modal-body blockquote {
   text-align: right;
   color: gray;
-  margin-bottom: 0.25em;
+  margin: 0;
 }
 
 .patchnotes .modal-body hr {
