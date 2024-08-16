@@ -1,7 +1,7 @@
 import React from "react"
 
 export default function DiscordButton(props: { channel?: string }) {
-  let url = "https://discord.gg/6JMS7tr"
+  let url = process.env.DISCORD_SERVER
   if (props.channel === "bot-creation")
     url = "https://discord.com/channels/737230355039387749/914503292875325461"
   return (

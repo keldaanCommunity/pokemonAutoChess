@@ -214,7 +214,7 @@ export function MainSidebar(props: MainSidebarProps) {
           <NavLink
             svg="discord"
             className="discord"
-            onClick={() => window.open("https://discord.gg/6JMS7tr", "_blank")}
+            onClick={() => window.open(process.env.DISCORD_SERVER, "_blank")}
           >
             Discord
           </NavLink>
