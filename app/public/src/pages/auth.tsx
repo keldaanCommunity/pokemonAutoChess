@@ -37,7 +37,7 @@ export default function Auth() {
         <PolicyButton />
         <button className="bubbly blue" onClick={() => setModal("wiki")}>
           <img width={32} height={32} src={`assets/ui/wiki.svg`} />
-          {t("wiki")}
+          {t("wiki_label")}
         </button>
         <span>V{pkg.version}</span>
         <p>
@@ -52,7 +52,7 @@ export default function Auth() {
         onClose={() => setModal(null)}
         show={modal === "wiki"}
         className="wiki-modal"
-        header={t("wiki")}>
+        header={t("wiki_label")}>
         <Wiki inGame={false} />
       </Modal>
     </div>
