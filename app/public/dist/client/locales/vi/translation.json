@@ -1378,7 +1378,9 @@
     "HIDDEN_POWER_O": "Tất cả đồng minh được cho ăn ORAN_BERRY. Vật phẩm này sẽ mất đi vào cuối trận đấu",
     "HIDDEN_POWER_P": "Tạo ra 5 con STAR BUG Pokémon ngẫu nhiên",
     "HIDDEN_POWER_Q": "Ngay lập tức kết thúc trận đấu với một trận hòa",
-    "HIDDEN_POWER_R": "Tạo ra Geodude, Graveler và Golem với Rocky Helmets"
+    "HIDDEN_POWER_R": "Tạo ra Geodude, Graveler và Golem với Rocky Helmets",
+    "HIDDEN_POWER_S": "FREEZE tất cả đối thủ trong 4 giây",
+    "HIDDEN_POWER_T": "Nhận được 3 quả berry ngẫu nhiên"
   },
   "effect": {
     "INGRAIN": "Cắm rễ",
