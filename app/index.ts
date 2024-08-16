@@ -24,7 +24,7 @@ async function main() {
       initializeLobby()
     }
   } else {
-    await listen(app, 5173)
+    await listen(app, 9000)
     await matchMaker.createRoom("lobby", {})
   }
 }
