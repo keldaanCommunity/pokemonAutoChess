@@ -5,7 +5,7 @@
     border-radius: 12px !important;
     border-color: black !important;
     border-width: 4px !important;
-    font-family: BrandonGrotesqueBlack !important;
+    font-family: var(--font-black) !important;
     max-width: 360px !important;
     cursor: var(--cursor-hover) !important;
   }
