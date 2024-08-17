@@ -360,8 +360,8 @@ export default class GameScene extends Scene {
     this.input.on(
       Phaser.Input.Events.GAMEOBJECT_OVER,
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
-        const outline = <OutlinePlugin>this.plugins.get("rexOutline")
         if (gameObject instanceof PokemonSprite && gameObject.draggable) {
+          const outline = <OutlinePlugin>this.plugins.get("rexOutline")
           const previouslyHovered = this.pokemonHovered
           this.pokemonHovered = gameObject
           if (previouslyHovered && previouslyHovered !== gameObject) {
@@ -383,8 +383,8 @@ export default class GameScene extends Scene {
     this.input.on(
       Phaser.Input.Events.GAMEOBJECT_OUT,
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
-        const outline = <OutlinePlugin>this.plugins.get("rexOutline")
         if (this.pokemonHovered === gameObject) {
+          const outline = <OutlinePlugin>this.plugins.get("rexOutline")
           outline.remove(this.pokemonHovered.sprite)
           this.pokemonHovered = undefined
         }
