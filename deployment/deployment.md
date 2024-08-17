@@ -1,10 +1,13 @@
 # How to deploy your own Pokemon Auto Chess
 
-The guide goal is to show you how to deploy Pokemon Auto Chess in different providers. At the end of the tutorial, you will have your own pokemon auto chess server like https://pokemon-auto-chess-505f643cbc85.herokuapp.com/.
+The guide goal is to show you how to deploy Pokemon Auto Chess in different providers. At the end of the tutorial, you will have your own pokemon auto chess server like:
+- https://pokemon-auto-chess-505f643cbc85.herokuapp.com/
+- https://pokemonautochess.onrender.com
 
 ### Prerequisites
 
 - Minimum Javascript knowledge
+- Minimum Git knwolegdge
 
 # Getting started
 
@@ -40,9 +43,41 @@ The google provider needs a valid redirect uri. Go to the your google console ap
 - In Firebase, setup a Firebase Web SDK, "Add Firebase to your web app" and keep all generated secrets. Those informations will be needed when filling the server environment variables.
 ![alt text](image-13.png)
 
+### Server hosting: deploy with Render (Free / $7/month)
+
+Deployment on Render is free. Render’s Free Instance lets you run a service for 750 hours in a month. Idle services spin down after 15 minutes of activity. You can upgrade your render instance to a paid tier ($7/month) to bypass those limitations.
+
+- Create a render account on [render.com](https://render.com/)
+- In creation, create a new web service. As your fork repository is public, you can fill the url of your own public git repository.
+![alt text](image-16.png)
+- In the render configuration page, modify the build phase with `npm install && npm run build`.
+![alt text](image-17.png)
+- In the render environment configuration, fill all the required environment variables 
+```
+// from MongoDB
+MONGO_URI=<The mongo URI from your atlas mongodb cluster>
+
+// from Firebase Web SDK
+FIREBASE_API_KEY=<firebase_api_key>
+FIREBASE_AUTH_DOMAIN=<firebase_auth_domain>
+FIREBASE_PROJECT_ID=<firebase_project_id>
+FIREBASE_STORAGE_BUCKET=<firebase_storage_bucket>
+FIREBASE_MESSAGING_SENDER_ID=<firebase_messaging_sender_id>
+FIREBASE_APP_ID=<firebase_app_id>
+
+// from Firebase Authentication private key
+FIREBASE_CLIENT_EMAIL=<client_email>
+FIREBASE_PRIVATE_KEY=<private_key>
+```
+![alt text](image-18.png)
+You can then start the deployment. It'll give you the url where your service is deployed (ex: [pokemonautochess.onrender.com](pokemonautochess.onrender.com)). 
+- Add this url in the authorized domains in Firebase Authentication settings
+![alt text](image-19.png)
+You're ready ! Check your url and see if everything works !
+
 ### Server hosting: deploy With Heroku ($7/month)
 
-With a Basic dyno type, you can host your own small server. Follow the steps:
+With a Basic dyno type, you can host your own small server on Heroku for $7/month. Follow the steps:
 
 - Create a Heroku account
 - Create an app, with the name you want (ex: pokemon-auto-chess)
@@ -109,6 +144,8 @@ In MongoDB Compass, you can import bots data (`./db-commmands/botv2.json`) in th
 This tutorial only focus on small single process servers in Platform as a service environment. Getting a multi process server running is way more complex and requires both lots of server architecture knowledge and an infrastructure as a service host. 
 
 ### Legal considerations
+
+**Don't use this for commercial project**
 
 When hosting your own server for Pokemon Auto Chess, there are several legal considerations to keep in mind:
 
