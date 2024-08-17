@@ -407,7 +407,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.critPower = Math.max(0, roundTo2Digits(this.critPower + value))
   }
 
-  addMaxHP(value: number) {
+  addMaxHP(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ) {
+    value =
+      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     this.hp = min(1)(this.hp + value)
     this.life = max(this.hp)(this.life + value)
   }
@@ -1293,7 +1300,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           apBoost = 30
         }
         if (this.life > 0) {
-          this.addMaxHP(lifeBoost)
+          this.addMaxHP(lifeBoost, this, 0, false)
           this.addAttack(attackBoost, this, 0, false)
           this.addAbilityPower(apBoost, this, 0, false)
         }
@@ -1502,7 +1509,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.addShield(value, this, 0, false)
         break
       case Stat.HP:
-        this.addMaxHP(value)
+        this.addMaxHP(value, this, 0, false)
         break
     }
   }

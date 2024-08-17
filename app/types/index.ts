@@ -489,7 +489,12 @@ export interface IPokemonEntity {
     apBoost: number,
     crit: boolean
   ): void
-  addMaxHP(life: number): void
+  addMaxHP(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
   addShield(
     value: number,
     caster: IPokemonEntity,

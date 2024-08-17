@@ -39,7 +39,7 @@
 - Buff Present (Delibird): chance to heal ~~80~~ 50HP: ~~20~~ 10%; chance to deal 300 damage ~~10~~ 20%
 - Buff Suicune: PP 130 → 100
 - Buff Mud Bubble (Mudkip): remove ability cooldown
-
+- Changed Growth (Torterra): ~~increase Attack by 10~~ increase HP by 30/40/50 and Attack by 3/4/5
 
 # Changes to Synergies
 

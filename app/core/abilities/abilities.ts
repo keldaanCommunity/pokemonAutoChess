@@ -908,7 +908,7 @@ export class SchoolingStrategy extends AbilityStrategy {
     if (pokemon.player) {
       pokemon.player.board.forEach((ally, id) => {
         if (ally && ally.name === Pkm.WISHIWASHI && isOnBench(ally)) {
-          pokemon.addMaxHP(50)
+          pokemon.addMaxHP(50, pokemon, 0, false)
           pokemon.refToBoardPokemon.hp += 50
           pokemon.player!.board.delete(id)
         }
@@ -4755,11 +4755,14 @@ export class GrowthStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
 
-    let attackBuff = 10
+    let attackBuff = 5
+    let hpBuff = 50
     if (pokemon.simulation.weather === Weather.SUN) {
       attackBuff *= 2 // grows twice as fast if sunny weather
+      hpBuff *= 2
     }
     pokemon.addAttack(attackBuff, pokemon, 1, crit)
+    pokemon.addMaxHP(hpBuff, pokemon, 1, crit)
   }
 }
 
@@ -5287,7 +5290,7 @@ export class FellStingerStrategy extends AbilityStrategy {
     if (victim.death && !pokemon.isClone) {
       pokemon.addAbilityPower(5, pokemon, 0, false)
       pokemon.addAttack(1, pokemon, 0, false)
-      pokemon.addMaxHP(10)
+      pokemon.addMaxHP(10, pokemon, 0, false)
       pokemon.handleHeal(10, pokemon, 0, false)
       pokemon.refToBoardPokemon.atk += 1
       pokemon.refToBoardPokemon.ap += 5
@@ -6923,9 +6926,9 @@ export class UnboundStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     pokemon.index = PkmIndex[Pkm.HOOPA_UNBOUND]
     pokemon.skill = Ability.HYPERSPACE_FURY
-    pokemon.atk += 10
+    pokemon.addAttack(10, pokemon, 0, false)
+    pokemon.addMaxHP(100, pokemon, 0, false)
     pokemon.toMovingState()
-    pokemon.addMaxHP(100)
   }
 }
 
