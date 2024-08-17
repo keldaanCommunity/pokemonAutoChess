@@ -26,7 +26,6 @@ export default function GameLoadingScreen(props: { connectError: string }) {
         "disconnection_time",
         "translation_project",
         "discord",
-        "tipeee",
         "bug_report",
         "moderation",
         "berry_tree",
