@@ -1,3 +1,5 @@
+@import "react-tabs/style/react-tabs.css";
+
 .react-tabs__tab {
   cursor: var(--cursor-hover);
   background-color: #40404080;

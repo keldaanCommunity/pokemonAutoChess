@@ -9,15 +9,15 @@ import {
 import { CronJob } from "cron"
 import { WebhookClient } from "discord.js"
 import admin from "firebase-admin"
-import { nanoid } from "nanoid"
 import { PastebinAPI } from "pastebin-ts/dist/api"
 import Message from "../models/colyseus-models/message"
 import { TournamentSchema } from "../models/colyseus-models/tournament"
 import BannedUser from "../models/mongo-models/banned-user"
-import { BotV2, IBot } from "../models/mongo-models/bot-v2"
+import { IBot } from "../models/mongo-models/bot-v2"
 import ChatV2 from "../models/mongo-models/chat-v2"
 import Tournament from "../models/mongo-models/tournament"
 import UserMetadata from "../models/mongo-models/user-metadata"
+import { createBotList } from "../services/bots"
 import { Emotion, IPlayer, Role, Title, Transfer } from "../types"
 import {
   GREATBALL_RANKED_LOBBY_CRON,
@@ -29,10 +29,6 @@ import {
 import { EloRank } from "../types/enum/EloRank"
 import { GameMode } from "../types/enum/Game"
 import { Language } from "../types/enum/Language"
-import {
-  ILeaderboardBotInfo,
-  ILeaderboardInfo
-} from "../types/interfaces/LeaderboardInfo"
 import { ITournament } from "../types/interfaces/Tournament"
 import { logger } from "../utils/logger"
 import {
@@ -64,8 +60,7 @@ import {
   RemoveMessageCommand,
   RemoveTournamentCommand,
   SelectLanguageCommand,
-  UnbanUserCommand,
-  createBotList
+  UnbanUserCommand
 } from "./commands/lobby-commands"
 import LobbyState from "./states/lobby-state"
 
@@ -75,9 +70,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
   discordWebhook: WebhookClient | undefined
   discordBanWebhook: WebhookClient | undefined
   bots: Map<string, IBot>
-  leaderboard: ILeaderboardInfo[]
-  botLeaderboard: ILeaderboardBotInfo[]
-  levelLeaderboard: ILeaderboardInfo[]
   pastebin: PastebinAPI | undefined = undefined
   unsubscribeLobby: (() => void) | undefined
   rooms: RoomListingData<any>[] | undefined
@@ -113,9 +105,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
     this.dispatcher = new Dispatcher(this)
     this.bots = new Map<string, IBot>()
-    this.leaderboard = new Array<ILeaderboardInfo>()
-    this.botLeaderboard = new Array<ILeaderboardBotInfo>()
-    this.levelLeaderboard = new Array<ILeaderboardInfo>()
     this.tournamentCronJobs = new Map<string, CronJob>()
     this.maxClients = 100
   }
@@ -186,30 +175,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     })
 
     this.rooms = await matchMaker.query({ private: false, unlisted: false })
-
-    this.onMessage(Transfer.REQUEST_LEADERBOARD, (client, message) => {
-      try {
-        client.send(Transfer.REQUEST_LEADERBOARD, this.leaderboard)
-      } catch (error) {
-        logger.error(error)
-      }
-    })
-
-    this.onMessage(Transfer.REQUEST_BOT_LEADERBOARD, (client, message) => {
-      try {
-        client.send(Transfer.REQUEST_BOT_LEADERBOARD, this.botLeaderboard)
-      } catch (error) {
-        logger.error(error)
-      }
-    })
-
-    this.onMessage(Transfer.REQUEST_LEVEL_LEADERBOARD, (client, message) => {
-      try {
-        client.send(Transfer.REQUEST_LEVEL_LEADERBOARD, this.levelLeaderboard)
-      } catch (error) {
-        logger.error(error)
-      }
-    })
 
     this.onMessage(Transfer.DELETE_BOT_DATABASE, async (client, message) => {
       this.dispatcher.dispatch(new DeleteBotCommand(), { client, message })
@@ -498,7 +463,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
     this.initCronJobs()
     //this.fetchChat()
-    this.fetchLeaderboards()
     this.fetchTournaments()
   }
 
@@ -578,62 +542,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       }
     } catch (error) {
       logger.error(error)
-    }
-  }
-
-  async fetchLeaderboards() {
-    const users = await UserMetadata.find(
-      {},
-      ["displayName", "avatar", "elo", "uid"],
-      { limit: 100, sort: { elo: -1 } }
-    )
-
-    if (users) {
-      this.leaderboard = users.map((user, i) => ({
-        name: user.displayName,
-        rank: i + 1,
-        avatar: user.avatar,
-        value: user.elo,
-        id: user.uid
-      }))
-    }
-
-    const levelUsers = await UserMetadata.find(
-      {},
-      ["displayName", "avatar", "level", "uid"],
-      { limit: 100, sort: { level: -1 } }
-    )
-
-    if (levelUsers) {
-      this.levelLeaderboard = levelUsers.map((user, i) => ({
-        name: user.displayName,
-        rank: i + 1,
-        avatar: user.avatar,
-        value: user.level,
-        id: user.uid
-      }))
-    }
-
-    const bots = await BotV2.find({}, {}, { sort: { elo: -1 } })
-    if (bots) {
-      const ids = new Array<string>()
-      this.botLeaderboard = []
-      bots.forEach((bot, i) => {
-        if (ids.includes(bot.id)) {
-          const id = nanoid()
-          bot.id = id
-          bot.save()
-        }
-        ids.push(bot.id)
-        this.bots.set(bot.id, bot)
-        this.botLeaderboard.push({
-          name: bot.name,
-          avatar: bot.avatar,
-          rank: i + 1,
-          value: bot.elo,
-          author: bot.author
-        })
-      })
     }
   }
 
@@ -717,15 +625,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
   }
 
   initCronJobs() {
-    logger.debug("init cron jobs")
-    const leaderboardRefreshJob = CronJob.from({
-      cronTime: "0 0/10 * * * *", // every 10 minutes
-      timeZone: "Europe/Paris",
-      onTick: () => this.fetchLeaderboards(),
-      start: true
-    })
-    this.cleanUpCronJobs.push(leaderboardRefreshJob)
-
+    logger.debug("init lobby cron jobs")
     const greatBallRankedLobbyJob = CronJob.from({
       cronTime: GREATBALL_RANKED_LOBBY_CRON,
       timeZone: "Europe/Paris",

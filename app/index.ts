@@ -13,8 +13,13 @@ import { logger, matchMaker } from "colyseus"
 import { CronJob } from "cron"
 import app from "./app.config"
 import { initializeMetrics } from "./metrics"
+import { initCronJobs } from "./services/cronjobs"
+import { fetchLeaderboards } from "./services/leaderboard"
 
 async function main() {
+  initCronJobs()
+  fetchLeaderboards()
+  
   if (process.env.NODE_APP_INSTANCE) {
     const processNumber = Number(process.env.NODE_APP_INSTANCE || "0")
     initializeMetrics()
