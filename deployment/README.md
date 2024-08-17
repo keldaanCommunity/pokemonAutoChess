@@ -1,8 +1,9 @@
 # How to deploy your own Pokemon Auto Chess
 
 The guide goal is to show you how to deploy Pokemon Auto Chess in different providers. At the end of the tutorial, you will have your own pokemon auto chess server like:
-- https://pokemon-auto-chess-505f643cbc85.herokuapp.com/
-- https://pokemonautochess.onrender.com
+- [https://pokemon-auto-chess-505f643cbc85.herokuapp.com](https://pokemon-auto-chess-505f643cbc85.herokuapp.com)
+- [https://pokemonautochess.onrender.com](https://pokemonautochess.onrender.com)
+- [frightened-natalya-keldaancommunity-409a151d.koyeb.app](https://frightened-natalya-keldaancommunity-409a151d.koyeb.app/)
 
 ### Prerequisites
 
@@ -155,6 +156,16 @@ FIREBASE_CLIENT_EMAIL=<client_email>
 FIREBASE_PRIVATE_KEY=<private_key>
 ```
 ![alt text](image-22.png)
+
+For some reasons, Koyeb buildpack does not always have the LTS version in its npm list. To work around this issue, you need to commit on your fork the removal of the "engine" part of `the package.json`. (You can take a look at [this commit](https://github.com/keldaanCommunity/pokemonAutoChess/commit/9d00dc691b10c13bb3a1f70306518aafb05585f2))
+![alt text](image-23.png)
+
+Then, Start your first deployment
+
+Add the public url to the authorized domains list of firebase authentication
+![alt text](image-24.png)
+
+And you're set ! [frightened-natalya-keldaancommunity-409a151d.koyeb.app](frightened-natalya-keldaancommunity-409a151d.koyeb.app)
 
 ### Configuration
 
