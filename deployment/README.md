@@ -130,6 +130,32 @@ To help you, you can take a look at https://github.com/keldaanCommunity/pokemonA
 Now, you can manually deploy your application in heroku website and test if everything works !
 ![alt text](image-15.png)
 
+### Server Hosting: Deploy with Koyeb (Free)
+
+- Create a account on [https://app.koyeb.com/](https://app.koyeb.com/).
+- Create a new web service. As your fork repository is public, you can fill the url of your own public git repository.
+![alt text](image-17.png)
+- Choose the free plan
+![alt text](image-21.png)
+- In "Edit all environment variables", add all the required environment variables
+```
+// from MongoDB
+MONGO_URI=<The mongo URI from your atlas mongodb cluster>
+
+// from Firebase Web SDK
+FIREBASE_API_KEY=<firebase_api_key>
+FIREBASE_AUTH_DOMAIN=<firebase_auth_domain>
+FIREBASE_PROJECT_ID=<firebase_project_id>
+FIREBASE_STORAGE_BUCKET=<firebase_storage_bucket>
+FIREBASE_MESSAGING_SENDER_ID=<firebase_messaging_sender_id>
+FIREBASE_APP_ID=<firebase_app_id>
+
+// from Firebase Authentication private key
+FIREBASE_CLIENT_EMAIL=<client_email>
+FIREBASE_PRIVATE_KEY=<private_key>
+```
+![alt text](image-22.png)
+
 ### Configuration
 
 There are extra server environment variables that you can add in your `.env` / Configuration variables.
