@@ -8,11 +8,21 @@
   src: url("assets/ui/BrandonGrotesque-Bold.woff2") format("opentype");
 }
 
+html {
+  --font-bold: BrandonGrotesqueBold;
+  --font-black: BrandonGrotesqueBlack;
+}
+
+html[lang="vi"]{
+  --font-bold: system-ui;
+  --font-black: system-ui;
+}
+
 body {
-  font-family: BrandonGrotesqueBlack;
+  font-family: var(--font-black);
   font-size: 18px;
 }
 
 p {
-  font-family: BrandonGrotesqueBold;
+  font-family: var(--font-bold);
 }
