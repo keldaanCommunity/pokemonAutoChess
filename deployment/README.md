@@ -50,8 +50,10 @@ Deployment on Render is free. Render’s Free Instance lets you run a service fo
 - Create a render account on [render.com](https://render.com/)
 - In creation, create a new web service. As your fork repository is public, you can fill the url of your own public git repository.
 ![alt text](image-16.png)
-- In the render configuration page, modify the build phase with `npm install && npm run build`.
-![alt text](image-17.png)
+- In the render configuration page, modify :
+ - the build command by `npm install && npm run build`.
+ - the start command by `node ./app/public/dist/server/app/index.js`
+![alt text](image-20.png)
 - In the render environment configuration, fill all the required environment variables 
 ```
 // from MongoDB
