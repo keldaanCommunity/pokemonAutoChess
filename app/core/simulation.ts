@@ -468,7 +468,7 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     if (item === Item.DYNAMAX_BAND) {
-      pokemon.addMaxHP(3 * pokemon.hp)
+      pokemon.addMaxHP(3 * pokemon.hp, pokemon, 0, false)
     }
 
     if (item === Item.GOLD_BOTTLE_CAP && pokemon.player) {
@@ -1288,21 +1288,21 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.FLUID: {
           pokemon.addAttackSpeed(1 * activeSynergies, pokemon, 0, false)
-          pokemon.addMaxHP(4 * activeSynergies)
+          pokemon.addMaxHP(4 * activeSynergies, pokemon, 0, false)
           break
         }
 
         case Effect.SHAPELESS: {
           pokemon.effects.add(Effect.SHAPELESS)
           pokemon.addAttackSpeed(3 * activeSynergies, pokemon, 0, false)
-          pokemon.addMaxHP(8 * activeSynergies)
+          pokemon.addMaxHP(8 * activeSynergies, pokemon, 0, false)
           break
         }
 
         case Effect.ETHEREAL: {
           pokemon.effects.add(Effect.ETHEREAL)
           pokemon.addAttackSpeed(5 * activeSynergies, pokemon, 0, false)
-          pokemon.addMaxHP(12 * activeSynergies)
+          pokemon.addMaxHP(12 * activeSynergies, pokemon, 0, false)
           break
         }
 

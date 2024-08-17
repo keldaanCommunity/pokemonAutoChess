@@ -12576,7 +12576,7 @@ export class Comfey extends Pokemon {
         false
       )
       nearestAllyWithFreeItemSlot.addShield(entity.shield, entity, 0, false)
-      nearestAllyWithFreeItemSlot.addMaxHP(entity.hp)
+      nearestAllyWithFreeItemSlot.addMaxHP(entity.hp, entity, 0, false)
       nearestAllyWithFreeItemSlot.addDefense(entity.def, entity, 0, false)
       nearestAllyWithFreeItemSlot.addSpecialDefense(
         entity.speDef,

@@ -1346,7 +1346,7 @@
     "HYPNOSIS": "Infliggi lo status SLEEP  ad 1 nemico nelle retrovie per [2,3.5,6,SP=0.5] secondi.",
     "MIMIC": "Copia l'abilità del bersaglio attuale",
     "HEX": "Infliggi [20,40,80,SP] SPECIAL. Raddoppia i danni se il bersaglio è afflitto da BURN, CONFUSION, FREEZE, PARALYSIS, POISONNED, SILENCE, SLEEP o WOUND",
-    "GROWTH": "Aumenta le dimensioni del corpo e l'ATK di [10,SP]. Cresce due volte più velocemente se il tempo è soleggiato",
+    "GROWTH": "Aumenta i PV massimi di [30,40,50,SP] e l'ATK di [3,4,5,SP]. Cresce due volte più velocemente se il tempo è SUN",
     "HEAL_ORDER": "Infligge [25,45,65,SP] SPECIAL ai nemici adiacenti e guarisce [25,45,65,SP] agli alleati adiacenti",
     "SHELL_TRAP": "Dopo il successivo PHYSICAL ricevuto, la trappola esplode e infligge [100,SP] SPECIAL ai nemici adiacenti",
     "DIG": "Scava sottoterra e riappare accanto al nemico più lontano, infliggendo [10,20,40,SP] SPECIAL a tutti i nemici lungo la strada",
