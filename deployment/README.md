@@ -167,6 +167,10 @@ Add the public url to the authorized domains list of firebase authentication
 
 And you're set ! [frightened-natalya-keldaancommunity-409a151d.koyeb.app](frightened-natalya-keldaancommunity-409a151d.koyeb.app)
 
+### Other providers
+
+- [https://pokemon-auto-chess.com](https://pokemon-auto-chess.com) is hosted on [digitalocean.com](https://cloud.digitalocean.com/). A credit card is required.
+
 ### Configuration
 
 There are extra server environment variables that you can add in your `.env` / Configuration variables.
