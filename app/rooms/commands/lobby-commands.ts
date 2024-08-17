@@ -25,6 +25,7 @@ import UserMetadata, {
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../models/precomputed/precomputed-emotions"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
 import { getAvatarSrc, getPortraitSrc } from "../../public/src/utils"
+import { createBotList } from "../../services/bots"
 import {
   CDN_PORTRAIT_URL,
   Emotion,
@@ -1082,20 +1083,6 @@ export class DeleteBotCommand extends Command<
       client.send(Transfer.BOT_DATABASE_LOG, JSON.stringify(error))
     }
   }
-}
-
-export function createBotList(
-  bots: Map<string, IBot>,
-  options: { withSteps: boolean } = { withSteps: true }
-): Partial<IBot>[] {
-  return [...bots.values()].map((bot) => ({
-    name: bot.name,
-    avatar: bot.avatar,
-    id: bot.id,
-    author: bot.author,
-    elo: bot.elo,
-    ...(options.withSteps ? { steps: bot.steps } : {})
-  }))
 }
 
 export class OnBotUploadCommand extends Command<

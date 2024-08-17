@@ -152,15 +152,6 @@ export const networkSlice = createSlice({
     requestBotData: (state, action: PayloadAction<string>) => {
       state.lobby?.send(Transfer.REQUEST_BOT_DATA, action.payload)
     },
-    requestLeaderboard: (state) => {
-      state.lobby?.send(Transfer.REQUEST_LEADERBOARD)
-    },
-    requestBotLeaderboard: (state) => {
-      state.lobby?.send(Transfer.REQUEST_BOT_LEADERBOARD)
-    },
-    requestLevelLeaderboard: (state) => {
-      state.lobby?.send(Transfer.REQUEST_LEVEL_LEADERBOARD)
-    },
     addBot: (state, action: PayloadAction<BotDifficulty | IBot>) => {
       state.preparation?.send(Transfer.ADD_BOT, action.payload)
     },
@@ -296,9 +287,6 @@ export const {
   addBotDatabase,
   ban,
   pokemonPropositionClick,
-  requestLeaderboard,
-  requestBotLeaderboard,
-  requestLevelLeaderboard,
   giveTitle,
   giveRole,
   removeMessage,

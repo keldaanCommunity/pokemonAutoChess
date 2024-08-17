@@ -1,19 +1,26 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import "react-tabs/style/react-tabs.css"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { setTabIndex } from "../../../stores/LobbyStore"
+import { setBotLeaderboard, setLeaderboard, setLevelLeaderboard, setTabIndex } from "../../../stores/LobbyStore"
 import BotLeaderboard from "./bot-leaderboard"
 import LevelLeaderboard from "./level-leaderboard"
 import PlayerLeaderboard from "./player-leaderboard"
-import "./tab-menu.css"
+import "./leaderboard-menu.css"
 
-export default function TabMenu() {
+export default function LeaderboardMenu() {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
 
   const tabIndex: number = useAppSelector((state) => state.lobby.tabIndex)
+
+  useEffect(() => {
+    fetch("/leaderboards").then(res => res.json()).then(data => {
+      dispatch(setLeaderboard(data.leaderboard))
+      dispatch(setBotLeaderboard(data.botLeaderboard))
+      dispatch(setLevelLeaderboard(data.levelLeaderboard))
+    })
+  }, [])
 
   return (
     <Tabs

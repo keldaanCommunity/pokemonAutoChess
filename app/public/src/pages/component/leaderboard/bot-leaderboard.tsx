@@ -1,10 +1,10 @@
 import React from "react"
-import { ILeaderboardInfo } from "../../../../../types/interfaces/LeaderboardInfo"
+import { ILeaderboardBotInfo } from "../../../../../types/interfaces/LeaderboardInfo"
 import { useAppSelector } from "../../../hooks"
 import Leaderboard from "./leaderboard"
 
 export default function BotLeaderboard() {
-  const infos: ILeaderboardInfo[] = useAppSelector(
+  const infos: ILeaderboardBotInfo[] = useAppSelector(
     (state) => state.lobby.botLeaderboard
   )
   return <Leaderboard isBot={true} infos={infos} noElo={false} />

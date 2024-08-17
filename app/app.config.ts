@@ -23,6 +23,7 @@ import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Item } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
 import { logger } from "./utils/logger"
+import { getLeaderboard } from "./services/leaderboard"
 
 const clientSrc = __dirname.includes("server")
   ? path.join(__dirname, "..", "..", "client")
@@ -180,6 +181,10 @@ export default config({
     app.get("/tilemap/:map", async (req, res) => {
       const tilemap = initTilemap(req.params.map as DungeonPMDO)
       res.send(tilemap)
+    })
+
+    app.get("/leaderboards", async (req, res) => {
+      res.send(getLeaderboard())
     })
 
     const basicAuthMiddleware = basicAuth({

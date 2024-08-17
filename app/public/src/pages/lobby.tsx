@@ -42,12 +42,9 @@ import {
   removeTournamentBracket,
   setBoosterContent,
   setBotData,
-  setBotLeaderboard,
   setBotList,
   setCcu,
   setLanguage,
-  setLeaderboard,
-  setLevelLeaderboard,
   setNextSpecialGame,
   setPastebinUrl,
   setSearchedUser,
@@ -59,22 +56,19 @@ import {
   joinLobby,
   logIn,
   logOut,
-  requestBotLeaderboard,
-  requestLeaderboard,
-  requestLevelLeaderboard,
   setNetworkError,
   setProfile
 } from "../stores/NetworkStore"
 import { Announcements } from "./component/announcements/announcements"
 import AvailableRoomMenu from "./component/available-room-menu/available-room-menu"
 import { GameRoomsMenu } from "./component/available-room-menu/game-rooms-menu"
-import TabMenu from "./component/lobby-menu/tab-menu"
+import LeaderboardMenu from "./component/leaderboard/leaderboard-menu"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
+import { Modal } from "./component/modal/modal"
 import { cc } from "./utils/jsx"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import { FIREBASE_CONFIG } from "./utils/utils"
 import "./lobby.css"
-import { Modal } from "./component/modal/modal"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
@@ -215,7 +209,7 @@ function MainLobby({ toPreparation, setToPreparation }) {
           active: activeSection === "leaderboard"
         })}
       >
-        <TabMenu />
+        <LeaderboardMenu />
       </section>
       <section
         className={cc("rooms", { active: activeSection === "available_rooms" })}
@@ -439,18 +433,6 @@ export async function joinLobbyRoom(
             dispatch(setNextSpecialGame(specialGame))
           })
 
-          room.onMessage(Transfer.REQUEST_LEADERBOARD, (l) => {
-            dispatch(setLeaderboard(l))
-          })
-
-          room.onMessage(Transfer.REQUEST_BOT_LEADERBOARD, (l) => {
-            dispatch(setBotLeaderboard(l))
-          })
-
-          room.onMessage(Transfer.REQUEST_LEVEL_LEADERBOARD, (l) => {
-            dispatch(setLevelLeaderboard(l))
-          })
-
           room.onMessage(Transfer.BAN, () => reject("banned"))
 
           room.onMessage(Transfer.BANNED, (message) => {
@@ -510,9 +492,6 @@ export async function joinLobbyRoom(
           )
 
           dispatch(joinLobby(room))
-          dispatch(requestLeaderboard())
-          dispatch(requestBotLeaderboard())
-          dispatch(requestLevelLeaderboard())
 
           resolve(room)
         } catch (error) {
