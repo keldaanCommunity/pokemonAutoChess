@@ -139,8 +139,7 @@ export enum Transfer {
   USER_PROFILE = "USER_PROFILE",
   PICK_BERRY = "PICK_BERRY",
   PRELOAD_MAPS = "PRELOAD_MAPS",
-  NPC_DIALOG = "NPC_DIALOG",
-  AUTH_FAILED = "AUTH_FAILED"
+  NPC_DIALOG = "NPC_DIALOG"
 }
 
 export enum AttackSprite {

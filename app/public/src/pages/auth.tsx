@@ -1,13 +1,15 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import Login from "./component/auth/login"
-import "./auth.css"
 import Wiki from "./component/wiki/wiki"
 import { Modal } from "./component/modal/modal"
 import DiscordButton from "./component/buttons/discord-button"
 import GithubButton from "./component/buttons/github-button"
 import PolicyButton from "./component/buttons/policy-button"
+import { useAppDispatch, useAppSelector } from "../hooks"
+import { setNetworkError } from "../stores/NetworkStore"
 import pkg from "../../../../package.json"
+import Login from "./component/auth/login"
+import "./auth.css"
 
 export default function Auth() {
   const { t } = useTranslation()
@@ -15,6 +17,8 @@ export default function Auth() {
     navigator.maxTouchPoints > 0 &&
     window.matchMedia("(orientation: portrait)").matches
   const [modal, setModal] = React.useState<string | null>(null)
+  const dispatch = useAppDispatch()
+  const networkError = useAppSelector(state => state.network.error)
 
   return (
     <div className="auth-page">
@@ -55,6 +59,12 @@ export default function Auth() {
         header={t("wiki_label")}>
         <Wiki inGame={false} />
       </Modal>
+      <Modal
+        show={networkError != null}
+        onClose={() => dispatch(setNetworkError(null))}
+        className="is-dark basic-modal-body"
+        body={<p style={{ padding: "1em" }}>{networkError}</p>}
+      />
     </div>
   )
 }
