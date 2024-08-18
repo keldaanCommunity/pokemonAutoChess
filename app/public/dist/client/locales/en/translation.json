@@ -1413,7 +1413,7 @@
     "WATERFALL": "Gain [30,60,120,SP] SHIELD, clear any negative status and clean up the board cell",
     "PYRO_BALL": "The user attacks by igniting a small stone and launching it as a fiery ball at the farthest target, dealing [10,20,40,SP] SPECIAL and BURN for 2s everything on its way",
     "WHIRLPOOL": "Lock on to the farthest enemy and unleash a hail of 4 whirlpools toward them, each dealing [125,SP]% ATK SPECIAL to the first enemy hit",
-    "SMOKE_SCREEN": "Channel undergound and reappears in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL to all adjacent units and smoking the back row to reduce their accuracy",
+    "SMOKE_SCREEN": "Channel undergound and reappears in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL to all adjacent units and smoking the back row to reduce their accuracy by 50%",
     "PRESENT": "Either deals [80,SP], [150,SP], [300,SP] SPECIAL, or heal 80 HP of the target",
     "LEAF_BLADE": "Next attack is a guaranteed critical hit dealing [100,SP]% of ATK as TRUE",
     "ANCHOR_SHOT": "Grab the farthest Pokémon and deals [20,40,80,SP] SPECIAL",
