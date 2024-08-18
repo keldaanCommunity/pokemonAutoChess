@@ -976,15 +976,17 @@ export default class GameRoom extends Room<GameState> {
       this.state.additionalPokemons.push(pkm as Pkm)
       this.state.shop.addAdditionalPokemon(pkm)
       if (pkm in PkmRegionalVariants) {
-        const variant = PkmRegionalVariants[pkm]
-        if (
-          PokemonClasses[variant].prototype.isInRegion(
-            variant,
-            player.map,
-            this.state
-          )
-        ) {
-          player.regionalPokemons.push(variant)
+        const variants: Pkm[] = PkmRegionalVariants[pkm]
+        for (const variant of variants) {
+          if (
+            PokemonClasses[variant].prototype.isInRegion(
+              variant,
+              player.map,
+              this.state
+            )
+          ) {
+            player.regionalPokemons.push(variant)
+          }
         }
       }
 
