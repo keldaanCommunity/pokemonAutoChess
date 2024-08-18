@@ -90,8 +90,7 @@
 # Misc
 
 - New accounts now start with a random avatar among Pokemon Mystery Dungeon starters
-- Vietnamese translation has been started thanks to Camchanh
-- Thank you to all contributors to the translations: gongdi1234, johnkyokim4, Kite2810,  CubeRubik, Camchanh, akaya0, mokers, Kimera24, Ryusei, yeopo, Yacha
+- Vietnamese, Korean, German and Italian translations has been updated. Thanks to all contributors to the translations: gongdi1234, johnkyokim4, Kite2810,  CubeRubik, Camchanh, akaya0, mokers, Kimera24, Ryusei, yeopo, Yacha, Darkatek7
 - Improved fight simulation accuracy in case of high server stress
 - Team Planner is now unlocked at lvl 2, Jukebox at level 10
 - New titles: Berserker, Natural, Golden, Siren, Fearsome
