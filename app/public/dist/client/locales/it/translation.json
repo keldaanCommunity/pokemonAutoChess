@@ -1432,6 +1432,16 @@
     "BRAVE_BIRD": "Vola via insieme al bersaglio, infliggendogli [30,60,90,SP] SPECIAL.",
     "MAGICAL_LEAF": "L'utilizzatore sparge foglie molto singolari che inseguono il Pokèmon nemico più lontano, infliggendo [10,20,40,SP] SPECIAL e ARMOR_REDUCTION per 3 secondi a tutto ciò che si trova nella traiettoria.",
     "STEALTH_ROCKS": "Lascia di fronte all'utilizzatore rocce appuntite in un raggio di 2 celle, infliggendo [50,SP] SPECIAL. Le rocce rimangono sul campo, infliggendo 10 PHYSICAL per secondo e WOUND a tutti i Pokèmon nemici che ci camminano sopra, tranne se sono di tipo ROCK o FLYING.",
+    "TAIL_GLOW": "Infliggi [30,SP] SPECIAL a tutti i nemici adiacenti ed aumenta i AP dell'utilizzatore del 50%.",
+    "STRUGGLE_BUG": "Infliggi [30,SP] SPECIAL a tutti i nemici adiacenti e riduci i loro AP del 50%.",
+    "PRISMATIC_LASER": "Spara un raggio prismatico in linea retta, infliggendo [80,SP] SPECIAL e spostando ogni nemico colpito.",
+    "NATURAL_GIFT": "Cura [30,60,120,SP] HP al Pokèmon alleato più ferito e riceve RUNE_PROTECT per [1,2,3] secondi.",
+    "NIGHT_SHADE": "Infliggi il [25,33,50,SP=0.5]% dei HP massimi del bersaglio come TRUE.",
+    "CHARGE_BEAM": "Spara un fascio di elettricità concentrato che si propaga ad un massimo di 3 bersagli adiacenti, infliggendo ad ognuno [15,30,60,SP] SPECIAL.",
+    "POPULATION_BOMB": "Infliggi 10 SPECIALI per [4,8,12,16,SP] volte.",
+    "SCREECH": "Riduci la DEF di ogni nemico adiacente di [1,2,4,SP].",
+    "SAND_TOMB": "Infliggi [10,20,40,SP] SPECIAL e causa SILENCE e PARALYSIS per [3,5,8] secondi.",
+    "WHIRLWIND": "Infliggi [40,80,120,SP] SPECIAL e fai volare via il bersaglio.",
     "AURASPHERE": "Emana un'aura e proietta energia in linea, infliggendo [25,50,SP] SPECIAL e SILENCE a ogni avversario colpito per 3 secondi."
   },
   "effect": {
