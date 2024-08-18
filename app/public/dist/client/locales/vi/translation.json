@@ -1326,6 +1326,7 @@
     "SLUDGE_WAVE": "Ném một luồng chất thải vào kẻ địch có nhiều HP nhất, gây [10,20,30,SP] SPECIAL và POISON trong [2,4,6] giây cho tất cả kẻ địch trên đường đi",
     "SMOG": "Đánh rắm lên 3 ô phía trước, gây [10,20,40,SP] SPECIAL. Hơi rắm sẽ ở lại trên chiến trường cho đến khi kết thúc trận chiến và giảm 50% chính xác của Pokémon ở trong",
     "SHELTER": "Nhận thêm [3,6,12,SP] chỉ số DEF và tạo ra đám khói lên 3 ô phía trước. Đám khói này sẽ ở lại trên chiến trường cho đến hết trận đấu và làm giảm 50% độ chính xác của Pokemon dính phải",
+    "AURORA_BEAM": "Bắn ra một tia sáng theo chiều dọc. Tất cả mục tiêu trúng đòn nhận [25,50,100,SP] SPECIAL và có thể bị FREEZE  (cơ hội dựa trên số lượng pkm hệ băng hiện có)",
     "SHADOW_SNEAK": "Gây [50,SP] SPECIAL. Nếu mục tiêu đã trúng hiệu ứng SILENCE, gây TRUE",
     "MACH_PUNCH": "Gây [50,SP] SPECIAL và tấn công đối thủ sau đó ngay lập tức",
     "UPPERCUT": "Gây [60,SP] SPECIAL. Gấp đôi sát thương nếu Pokémon tấn công có chỉ số DEF cao hơn mục tiêu",
