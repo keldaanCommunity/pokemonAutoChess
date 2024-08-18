@@ -23,7 +23,7 @@ module.exports = {
         "ref"  : "origin/prod",  
         "repo" : "git@github.com:keldaanCommunity/pokemonAutoChess.git",  
         "path" : "/home/deploy",  
-        "post-deploy" : "npm install && npm run build && npm run colyseus-post-deploy"  
+        "post-deploy" : "npm install && npm run build"  
       },
       vultr : {  
         "user" : "deploy",  
@@ -31,7 +31,7 @@ module.exports = {
         "ref"  : "origin/prod",  
         "repo" : "git@github.com:keldaanCommunity/pokemonAutoChess.git",  
         "path" : "/home/deploy",  
-        "post-deploy" : "npm install && npm run build && npm run colyseus-post-deploy"  
+        "post-deploy" : "npm install && npm run build"  
       }    
     }  
 }
