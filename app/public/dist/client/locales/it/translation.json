@@ -1423,6 +1423,15 @@
     "PARABOLIC_CHARGE": "Cura [25,50] HP ed infliggi [25,50,100,SP] SPECIAL. HP curati in eccesso si convertono in SPECIAL.",
     "SUPER_FANG": "Infliggi [30,60,90,SP] SPECIAL. Il danno raddoppia sui Pokèmon GRASS.",
     "TEETER_DANCE": "Potenzia la ATK_SPEED del [20,SP]%. Tutti gli altri Pokèmon, sia della tua squadra che quella avversaria, sono afflitti da CONFUSION per 3 secondi.",
+    "CLOSE_COMBAT": "Infliggi [130,SP] SPECIAL e riduci la DEF e la SPE_DEF dell'utilizzatore di 2.",
+    "AQUA_RING": "Tuffati al centro della tua squadra, creando un anello d'acqua che cura di [20,30,50,SP] HP e degli status negativi.",
+    "POISON_GAS": "Lancia una nuvola di gas puzzolente a tutti i nemici adiacenti, infliggendo [15,30,60,SP] SPECIAL e POISONNED per 3 secondi.",
+    "ASSIST": "Copia e usa un'abilità casuale di un Pokèmon alleato.",
+    "FISSURE": "Apri [2,3,4] spaccature nel terreno. Ogni spaccatura infligge [25,50,75,SP] SPECIAL.",
+    "ASSURANCE": "Infliggi [25,50,100,SP] SPECIAL. Il danno è raddoppiato se l'utilizzatore è sotto il 50% dei HP.",
+    "BRAVE_BIRD": "Vola via insieme al bersaglio, infliggendogli [30,60,90,SP] SPECIAL.",
+    "MAGICAL_LEAF": "L'utilizzatore sparge foglie molto singolari che inseguono il Pokèmon nemico più lontano, infliggendo [10,20,40,SP] SPECIAL e ARMOR_REDUCTION per 3 secondi a tutto ciò che si trova nella traiettoria.",
+    "STEALTH_ROCKS": "Lascia di fronte all'utilizzatore rocce appuntite in un raggio di 2 celle, infliggendo [50,SP] SPECIAL. Le rocce rimangono sul campo, infliggendo 10 PHYSICAL per secondo e WOUND a tutti i Pokèmon nemici che ci camminano sopra, tranne se sono di tipo ROCK o FLYING.",
     "AURASPHERE": "Emana un'aura e proietta energia in linea, infliggendo [25,50,SP] SPECIAL e SILENCE a ogni avversario colpito per 3 secondi."
   },
   "effect": {
