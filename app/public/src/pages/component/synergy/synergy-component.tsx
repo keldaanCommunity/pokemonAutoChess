@@ -4,8 +4,11 @@ import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { SynergyTriggers } from "../../../../../types/Config"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
+import { getGameScene } from "../../game"
 import SynergyIcon from "../icons/synergy-icon"
 import SynergyDetailComponent from "./synergy-detail-component"
+import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"
 
 export default function SynergyComponent(props: {
   type: Synergy
@@ -16,6 +19,39 @@ export default function SynergyComponent(props: {
   const levelReached = SynergyTriggers[props.type]
     .filter((n) => n <= props.value)
     .at(-1)
+
+  const currentPlayer = useAppSelector(selectCurrentPlayer)
+  const hightlightSynergy = (type: Synergy) => {
+    const scene = getGameScene()
+    if (!scene) return
+    const outline = scene.plugins.get("rexOutline") as OutlinePlugin
+    currentPlayer?.board.forEach((p) => {
+      if (p.types.has(type)) {
+        const sprite = scene.board?.pokemons.get(p.id)?.sprite
+        if (sprite) {
+          outline.add(sprite, {
+            thickness: 4,
+            outlineColor: 0xffffff
+          })
+        }
+      }
+    })
+  }
+
+  const removeHightlightSynergy = (type: Synergy) => {
+    const scene = getGameScene()
+    if (!scene) return
+    const outline = scene.plugins.get("rexOutline") as OutlinePlugin
+    currentPlayer?.board.forEach((p) => {
+      if (p.types.has(type)) {
+        const sprite = scene.board?.pokemons.get(p.id)?.sprite
+        if (sprite) {
+          outline.remove(sprite)
+        }
+      }
+    })
+  }
+
   return (
     <div
       style={{
@@ -37,6 +73,8 @@ export default function SynergyComponent(props: {
         cursor: "var(--cursor-hover)"
       }}
       data-tooltip-id={"detail-" + props.type}
+      onMouseEnter={() => { hightlightSynergy(props.type) }}
+      onMouseLeave={() => { removeHightlightSynergy(props.type) }}
     >
       {ReactDOM.createPortal(
         <Tooltip
@@ -82,8 +120,8 @@ export default function SynergyComponent(props: {
                     levelReached === t
                       ? "#f7d51d"
                       : props.value >= t
-                      ? "#ffffff"
-                      : "#b8b8b8"
+                        ? "#ffffff"
+                        : "#b8b8b8"
                 }}
               >
                 {t}

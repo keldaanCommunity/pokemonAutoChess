@@ -73,6 +73,7 @@
 - Show current Wild pokemon chance in synergy description ingame
 - Show current egg chance in Baby synergy description ingame
 - Show units acquired in synergy description tooltips
+- Outline units of a certain synergy when hovering over this synergy in the synergies list
 - Main lobby chat is now reserved to game announcements, and admins/mods announcements. We invite you to join Discord for general chat instead.
 - Added tournament info on lobby screen
 - Removed online list from lobby screen. It was inpractical with the current number of players.
