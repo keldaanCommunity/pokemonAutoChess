@@ -371,7 +371,7 @@
     "FELL_STINGER": "Kim châm kết liễu",
     "GULP_MISSILE": "Gulp Missile",
     "SCHOOLING": "Học tập",
-    "DOUBLE_SHOCK": "Điện quang song kíck"
+    "DOUBLE_SHOCK": "Điện quang song kích"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1406,10 +1406,10 @@
     "DEFIANT": "Hiên ngang",
     "JUSTIFIED": "Trái tim nghĩa hiệp",
     "AMNESIA": "Đãng trí",
-    "LIGHT_SCREEN": "Màn hình mỏng",
+    "LIGHT_SCREEN": "Tấm chắn ánh sáng",
     "EERIE_SPELL": "Phép thuật kì lạ",
     "HONE_CLAWS": "Mài móng",
-    "ASSURANCE": "Bảo hiểm",
+    "ASSURANCE": "Kết án",
     "BEAT_UP": "Đánh bại",
     "STEEL_SURGE": "Cường thép",
     "STEEL_SPIKE": "Gai thép",
