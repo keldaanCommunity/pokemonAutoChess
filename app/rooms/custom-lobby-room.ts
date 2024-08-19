@@ -482,7 +482,11 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         )
       } else if (isBanned) {
         throw new Error("Account banned")
-      } else if (this.state.ccu > MAX_CCU && userProfile?.role !== Role.ADMIN) {
+      } else if (
+        this.state.ccu > MAX_CCU &&
+        userProfile?.role !== Role.ADMIN &&
+        userProfile?.role !== Role.MODERATOR
+      ) {
         throw new Error(
           "The servers are currently at maximum capacity. Please try again later."
         )
