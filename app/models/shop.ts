@@ -87,7 +87,13 @@ export function getSellPrice(
     price = 0
   } else if (name === Pkm.FEEBAS) {
     price = 1
-  } else if (name === Pkm.GYARADOS || name === Pkm.MILOTIC) {
+  } else if (name === Pkm.WISHIWASHI) {
+    price = 3
+  } else if (
+    name === Pkm.GYARADOS ||
+    name === Pkm.MILOTIC ||
+    name === Pkm.WISHIWASHI_SCHOOL
+  ) {
     price = 10
   } else if (Unowns.includes(name)) {
     price = 1

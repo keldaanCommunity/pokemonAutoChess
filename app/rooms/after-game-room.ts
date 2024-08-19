@@ -21,7 +21,7 @@ export default class AfterGameRoom extends Room<AfterGameState> {
     elligibleToXP: boolean
     elligibleToELO: boolean
   }) {
-    //logger.info("create after game", this.roomId)
+    logger.info("Create AfterGame ", this.roomId)
 
     this.setState(new AfterGameState(options))
     // logger.debug('before', this.state.players);
@@ -89,7 +89,7 @@ export default class AfterGameRoom extends Room<AfterGameState> {
   }
 
   onDispose() {
-    //logger.info("dispose after game")
+    logger.info("dispose AfterGame ", this.roomId)
     this.dispatcher.stop()
   }
 }
