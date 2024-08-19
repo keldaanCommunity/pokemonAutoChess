@@ -111,7 +111,7 @@ export default class GameRoom extends Room<GameState> {
     tournamentId: string | null
     bracketId: string | null
   }) {
-    logger.info("create game room")
+    logger.info("Create Game ", this.roomId)
     this.setMetadata(<IGameMetadata>{
       name: options.name,
       ownerName: options.ownerName,
@@ -573,6 +573,7 @@ export default class GameRoom extends Room<GameState> {
   }
 
   async onDispose() {
+    logger.info("Dispose Game ", this.roomId)
     const playersAlive = values(this.state.players).filter((p) => p.alive)
     const humansAlive = playersAlive.filter((p) => !p.isBot)
 

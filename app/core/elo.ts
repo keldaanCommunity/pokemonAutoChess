@@ -34,8 +34,8 @@ export function computeElo(
     meanGain = min(previousElo + 1)(meanGain) // ensure you get minimum +1 if finishing first
   }
 
-  logger.info(
-    `${player.name} (was ${previousElo}) will be ${meanGain} (${rank})`
-  )
+  // logger.info(
+  //   `${player.name} (was ${previousElo}) will be ${meanGain} (${rank})`
+  // )
   return meanGain
 }

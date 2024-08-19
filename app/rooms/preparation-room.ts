@@ -77,7 +77,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     tournamentId?: string
     bracketId?: string
   }) {
-    logger.info("create preparation room")
+    logger.info("create Preparation ", this.roomId)
     // logger.debug(options);
     //logger.info(`create ${options.roomName}`)
 
@@ -357,7 +357,7 @@ export default class PreparationRoom extends Room<PreparationState> {
   }
 
   onDispose() {
-    //logger.info("Dispose preparation room")
+    logger.info("Dispose Preparation", this.roomId)
     this.dispatcher.stop()
     this.presence.unsubscribe("server-announcement", this.onServerAnnouncement)
     this.presence.unsubscribe("game-started", this.onGameStart)
@@ -372,7 +372,10 @@ export default class PreparationRoom extends Room<PreparationState> {
     })
   }
 
-  onGameStart({ gameId, preparationId }: { gameId: string; preparationId: string }) {
+  onGameStart({
+    gameId,
+    preparationId
+  }: { gameId: string; preparationId: string }) {
     if (this.roomId === preparationId) {
       this.lock()
       this.setGameStarted(new Date().toISOString())
