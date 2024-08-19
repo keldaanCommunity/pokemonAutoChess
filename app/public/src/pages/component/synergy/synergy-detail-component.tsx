@@ -134,7 +134,7 @@ export default function SynergyDetailComponent(props: {
               padding: "5px"
             }}
           >
-            <h4 style={{ fontSize: "1.2em" }}>
+            <h4 style={{ fontSize: "1.2em", marginBottom: 0 }}>
               ({SynergyTriggers[props.type][i]}) {t(`effect.${d}`)}
             </h4>
             <EffectDescriptionComponent effect={d} />
