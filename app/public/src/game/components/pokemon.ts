@@ -445,6 +445,7 @@ export default class PokemonSprite extends DraggableObject {
           duration: min(250)(travelTime),
           delay: delayBeforeShoot - LATENCY_COMPENSATION,
           onComplete: () => projectile.destroy(),
+          onStop: () => projectile.destroy(),
           onStart: () => projectile.setVisible(true)
         })
       }
