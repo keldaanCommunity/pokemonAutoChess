@@ -985,15 +985,12 @@ export default class PokemonState {
     return pickRandomIn(candidateCells)
   }
 
-  getTargetCoordinateWhenConfused(
+  getTargetWhenConfused(
     pokemon: PokemonEntity,
     board: Board
-  ): { x: number; y: number } | undefined {
+  ): PokemonEntity {
     let distance = 999
-    let candidatesCoordinates: { x: number; y: number }[] = new Array<{
-      x: number
-      y: number
-    }>()
+    let candidatePokemon: PokemonEntity[] = new Array<PokemonEntity>()
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (
@@ -1009,20 +1006,15 @@ export default class PokemonState {
         )
         if (candidateDistance < distance) {
           distance = candidateDistance
-          candidatesCoordinates = [{ x, y }]
+          candidatePokemon = [value as PokemonEntity]
         } else if (candidateDistance == distance) {
-          candidatesCoordinates.push({ x, y })
+          candidatePokemon.push(value as PokemonEntity)
         }
       }
     })
 
-    // Removed as a potential sinner for an orientation error.
-    //candidatesCoordinates.push({ x: pokemon.positionX, y: pokemon.positionY }) // sometimes attack itself when confused
+    candidatePokemon.push(pokemon) // sometimes attack itself when confused
 
-    if (candidatesCoordinates.length > 0) {
-      return pickRandomIn(candidatesCoordinates)
-    } else {
-      return undefined
-    }
+    return pickRandomIn(candidatePokemon)
   }
 }
