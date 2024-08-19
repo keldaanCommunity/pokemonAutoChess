@@ -1327,6 +1327,8 @@
     "SMOG": "Đánh rắm lên 3 ô phía trước, gây [10,20,40,SP] SPECIAL. Hơi rắm sẽ ở lại trên chiến trường cho đến khi kết thúc trận chiến và giảm 50% chính xác của Pokémon ở trong",
     "SHELTER": "Nhận thêm [3,6,12,SP] chỉ số DEF và tạo ra đám khói lên 3 ô phía trước. Đám khói này sẽ ở lại trên chiến trường cho đến hết trận đấu và làm giảm 50% độ chính xác của Pokemon dính phải",
     "AURORA_BEAM": "Bắn ra một tia sáng theo chiều dọc. Tất cả mục tiêu trúng đòn nhận [25,50,100,SP] SPECIAL và có thể bị FREEZE  (cơ hội dựa trên số lượng pkm hệ băng hiện có)",
+    "AGILITY": "Tăng [10,20,30,SP] % chỉ số ATK_SPEED (tích tầng)",
+    "SPIRIT_SHACKLE": "Bắn ra một mũi tên có thể xuyên thấu gây [30,60,90,SP] SPECIAL trên một đường thẳng phía sau mục tiêu và gây WOUND trong 4 giây cho tất cả mục tiêu trúng đòn",
     "SHADOW_SNEAK": "Gây [50,SP] SPECIAL. Nếu mục tiêu đã trúng hiệu ứng SILENCE, gây TRUE",
     "MACH_PUNCH": "Gây [50,SP] SPECIAL và tấn công đối thủ sau đó ngay lập tức",
     "UPPERCUT": "Gây [60,SP] SPECIAL. Gấp đôi sát thương nếu Pokémon tấn công có chỉ số DEF cao hơn mục tiêu",
