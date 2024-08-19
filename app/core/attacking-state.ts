@@ -33,19 +33,7 @@ export default class AttackingState extends PokemonState {
 
       if (pokemon.status.confusion) {
         target = this.getTargetWhenConfused(pokemon, board)
-        // If attacking self, pick random targetCoordinates that differs from own coordinates.
-        if (target.id === pokemon.id) {
-          let tempX = target.positionX
-          let tempY = target.positionY
-          while (tempX === pokemon.positionX && tempY === pokemon.positionY) {
-            tempX = pickRandomIn([0,1,2,3,4,5,6,7])
-            tempY = pickRandomIn([0,1,2,3,4,5,6,7])
-          }
-          targetCoordinate = {x: tempX, y: tempY}
-          
-        } else {
-          targetCoordinate = { x: target.positionX, y: target.positionY }
-        }
+        targetCoordinate = { x: target.positionX, y: target.positionY }
       } else if (
         !(
           target &&
@@ -100,14 +88,33 @@ export default class AttackingState extends PokemonState {
         pokemon.count.attackCount++
         pokemon.targetX = targetCoordinate.x
         pokemon.targetY = targetCoordinate.y
-        pokemon.orientation = board.orientation(
-          pokemon.positionX,
-          pokemon.positionY,
-          targetCoordinate.x,
-          targetCoordinate.y,
-          pokemon,
-          target
-        )
+        
+        // If attacking self, pick random coordinates that differs from own coordinates for orientation.
+        if (targetCoordinate.x === pokemon.positionX && targetCoordinate.y === pokemon.positionY) {
+          let tempX = targetCoordinate.x
+          let tempY = targetCoordinate.y
+          while (tempX === pokemon.positionX && tempY === pokemon.positionY) {
+            tempX = pickRandomIn([0,1,2,3,4,5,6,7])
+            tempY = pickRandomIn([0,1,2,3,4,5,6,7])
+          }
+          pokemon.orientation = board.orientation(
+            pokemon.positionX,
+            pokemon.positionY,
+            tempX,
+            tempY,
+            pokemon,
+            target
+          )
+        } else {
+          pokemon.orientation = board.orientation(
+            pokemon.positionX,
+            pokemon.positionY,
+            targetCoordinate.x,
+            targetCoordinate.y,
+            pokemon,
+            target
+          )
+        }
 
         const { delayBeforeShoot, travelTime } = getAttackTimings(pokemon)
         pokemon.commands.push(
