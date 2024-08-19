@@ -1016,8 +1016,7 @@ export default class PokemonState {
       }
     })
 
-    // Removed as a potential sinner for an orientation error.
-    //candidatesCoordinates.push({ x: pokemon.positionX, y: pokemon.positionY }) // sometimes attack itself when confused
+    candidatesCoordinates.push({ x: pokemon.positionX, y: pokemon.positionY }) // sometimes attack itself when confused
 
     if (candidatesCoordinates.length > 0) {
       return pickRandomIn(candidatesCoordinates)
