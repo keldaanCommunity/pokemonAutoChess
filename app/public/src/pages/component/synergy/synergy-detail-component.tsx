@@ -106,7 +106,7 @@ export default function SynergyDetailComponent(props: {
   }
 
   return (
-    <div style={{ maxWidth: "480px" }}>
+    <div style={{ maxWidth: "560px" }}>
       <div style={{ display: "flex", alignItems: "center" }}>
         <SynergyIcon type={props.type} size="40px" />
         <h3 style={{ margin: 0 }}>{t(`synergy.${props.type}`)}</h3>
