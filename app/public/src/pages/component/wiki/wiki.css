@@ -1,6 +1,6 @@
 #wiki-page {
   color: white;
-  width: min(95vw, 1800px);
+  width: min(1800px, 100%);
 }
 
 #wiki-page ul {
