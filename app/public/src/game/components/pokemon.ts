@@ -401,7 +401,7 @@ export default class PokemonSprite extends DraggableObject {
     delayBeforeShoot: number,
     travelTime: number
   ) {
-    const isRange = this.range > 1
+    const isRange = this.attackSprite.endsWith("/range")
     const startX = isRange ? this.positionX : targetX
     const startY = isRange ? this.positionY : targetY
     const LATENCY_COMPENSATION = 20
