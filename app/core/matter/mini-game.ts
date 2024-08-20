@@ -470,7 +470,7 @@ export class MiniGame {
       })
     })
 
-    // randomly distribute symbols accross portals
+    // randomly distribute symbols across portals
     const portalIds = shuffleArray(keys(this.portals!))
     const symbols = shuffleArray(values(this.symbols!))
     this.symbolsByPortal = new Map()
