@@ -39,7 +39,7 @@ export function Modal(props: ModalProps) {
       dialog.addEventListener('click', function (event) {
         const rect = dialog.getBoundingClientRect();
         const isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
-          rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+          rect.left <= event.clientX && event.clientX <= rect.left + rect.width) || event.target?.tagName === "OPTION";
         if (!isInDialog) {
           close();
         }
