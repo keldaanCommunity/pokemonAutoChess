@@ -4,5 +4,5 @@ import Synergies from "../synergy/synergies"
 
 export default function GameSynergies() {
   const synergies = useAppSelector((state) => state.game.currentPlayerSynergies)
-  return <Synergies synergies={synergies} />
+  return <Synergies synergies={synergies} tooltipPortal={true} />
 }
