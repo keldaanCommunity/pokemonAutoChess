@@ -763,7 +763,7 @@ export default class BattleManager {
           pkm.index = value as IPokemonEntity["index"]
           this.animationManager.animatePokemon(
             pkm,
-            PokemonActionState.EMOTE,
+            PokemonActionState.IDLE,
             this.flip,
             false
           )
