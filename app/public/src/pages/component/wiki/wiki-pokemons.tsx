@@ -78,7 +78,7 @@ export function WikiPokemon(props: {
 }) {
   const pokemons = useMemo(
     () =>
-      (PRECOMPUTED_POKEMONS_PER_RARITY[props.rarity] )
+      (PRECOMPUTED_POKEMONS_PER_RARITY[props.rarity])
         .filter((p) => p !== Pkm.DEFAULT)
         .sort((a: Pkm, b: Pkm) => {
           return PkmFamily[a] === PkmFamily[b]
@@ -132,7 +132,9 @@ export function WikiAllPokemons() {
     pokemonsPerRarity[rarity].sort((a: IPokemonData, b: IPokemonData) => {
       if (a.regional !== b.regional) return +a.regional - +b.regional
       if (a.additional !== b.additional) return +a.additional - +b.additional
-      return a.index < b.index ? -1 : 1
+      return PkmFamily[a.name] === PkmFamily[b.name]
+        ? a.stars - b.stars
+        : PkmIndex[PkmFamily[a.name]].localeCompare(PkmIndex[PkmFamily[b.name]])
     })
   }
 
