@@ -1,12 +1,12 @@
 # Privacy Policy
 
-Your privacy is important to us. It is Keldaan's policy to respect your privacy and comply with any applicable law and regulation regarding any personal information we may collect about you, including across our website, https://pokemon-auto-chess.com, and other sites we own and operate.
+Your privacy is important to us. It is Keldaan's policy to respect your privacy and comply with any applicable law and regulation regarding any personal information we may collect about you, including across our website, https://pokemon.darkatek7.com/, and other sites we own and operate.
 
-This policy is effective as of 5 October 2021 and was last updated on 5 October 2021.
+This policy is effective as of 18 August 2024 and was last updated on 21 August 2024.
 
 # How to request the deletion of your data?
 
-You can request at any time that all your data be deleted. To do so, please notify a moderator on the discord server or send a mail to keldaan.ag@gmail.com
+You can request at any time that all your data be deleted. To do so, please notify a moderator on the discord server or send a mail to admin@darkarek7.com
 
 # Information We Collect
 
