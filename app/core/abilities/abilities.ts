@@ -5509,7 +5509,6 @@ export class MudBubbleStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const heal = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
     pokemon.handleHeal(heal, pokemon, 1, crit)
-    pokemon.cooldown = 0
   }
 }
 
