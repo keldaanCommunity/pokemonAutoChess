@@ -39,6 +39,7 @@
 - Buff Present (Delibird): chance to heal ~~80~~ 50HP: ~~20~~ 10%; chance to deal 300 damage ~~10~~ 20%
 - Buff Suicune: PP 130 → 100
 - Changed Growth (Torterra): ~~increase Attack by 10~~ increase HP by 10/20/30 and Attack by 3/4/5
+- Nerf Psyshock (Golduck): PP burn 30/60/100 → 20/40/80
 
 # Changes to Synergies
 
