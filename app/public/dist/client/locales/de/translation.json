@@ -1382,7 +1382,7 @@
     "HIDDEN_POWER_B": "Brennen Sie das gegnerische Team 30 Sekunden lang",
     "HIDDEN_POWER_C": "Geben Sie Ihrem gesamten Team eine Amulettmünze. Der Gegenstand wird am Ende des Kampfes entfernt.",
     "HIDDEN_POWER_D": "Holen Sie sich ein Ditto auf Ihre Bank",
-    "HIDDEN_POWER_E": "Holen Sie sich ein Pokémon-Ei auf Ihre Bank. Es schlüpft im nächsten Stadium",
+    "HIDDEN_POWER_E": "Holen Sie sich ein Pokémon-Ei auf Ihre Bank. Es schlüpft auf der nächsten Ebene.",
     "HIDDEN_POWER_F": "Fange 2 zufällige WATER Pokémon auf maximalem Angellevel",
     "HIDDEN_POWER_G": "Erhalte 5 Gold",
     "HIDDEN_POWER_H": "Heile dein Team auf maximale HP",
@@ -2035,7 +2035,7 @@
     "WOBBUFFET": "Bewegt sich nicht und greift nicht an, bis die PP-Leiste voll ist",
     "DITTO": "Dito kann sich verwandeln, um eine 1 STAR Kopie der Pokémon zu erstellen, wenn du es darüber fallen lässt (außer Unique, Legendary und Hatch).",
     "EGG": "Man spürt, wie sich etwas in seinem Inneren bewegt",
-    "HATCH": "Geschlüpfte Pokémon entwickeln sich nach 5 Phasen automatisch weiter",
+    "HATCH": "Geschlüpfte Pokémon entwickeln sich nach 5 Ebenen automatisch weiter",
     "SYNCHRO": "Wenn das Pokémon von „GIFT“, „VERBRENNUNG“, „WUNDE“ oder „STILLE“ betroffen ist, erleidet der gegnerische Zauberer denselben negativen Status",
     "TADPOLE": "Poliwhirl entwickelt sich zu Poliwrath, wenn es auf der Frontlane platziert wird, andernfalls wird es zu Politoed",
     "BIVALVE": "Clamperl entwickelt sich zu Huntail, wenn es auf der Frontlane platziert wird, andernfalls zu Gorebyss",
@@ -2414,7 +2414,7 @@
     "GLUTTON": "Erhalte ein Relaxo mit mehr als 750 base HP",
     "STARGAZER": "Erhalte ein Solgaleo oder Lunala",
     "BLOODY": "Erhalte Ursaluna (Butmond)",
-    "ETERNAL": "Treffe Arceus auf Stufe 40"
+    "ETERNAL": "Treffe Arceus auf Ebene 40"
   },
   "weather": {
     "NEUTRAL": "Bewölkt",
@@ -2481,13 +2481,13 @@
     "sprite_answer2": "Wenn Sie möchten, dass die fehlenden Sprites hinzugefügt werden, denken Sie bitte über eine Spende an Pokemon Autochess nach. Jede Spende wird dazu verwendet, Sprites zu bezahlen, die Sprites für alle herstellen.",
     "sprite_answer1": "Sprites von Pokemon Auto Chess basieren auf",
     "mythical": "Wie erhalte ich einzigartige/legendäre Pokémon?",
-    "mythical_answer": "In Runde 10 und 20 erscheinen Portale mit Synergiesymbolen darauf. Gehen Sie in eines von ihnen rein, um Ihnen eine Reihe einzigartiger, starker Pokémon mit den passenden Synergien vorzuschlagen. Sie können eine davon auswählen.",
+    "mythical_answer": "Auf Ebene 10 und 20 erscheinen Portale mit Synergiesymbolen darauf. Gehen Sie in eines von ihnen rein, um Ihnen eine Reihe einzigartiger, starker Pokémon mit den passenden Synergien vorzuschlagen. Sie können eines davon auswählen.",
     "ditto": "Wie funktioniert Ditto?",
     "ditto_answer": "Ditto erstellt eine einfache Kopie der Einheit, über die Sie den Mauszeiger bewegen und fallen lassen. Jedes Pokémon im Shop hat eine Chance von 0,5 %, bei jedem Wurf ein Ditto zu sein. Man kann mythische Pokémon nicht kopieren.",
     "items": "Wie funktionieren die Items?",
     "items_answer": "Nachdem Sie eine PVE-Runde gewonnen haben, erhalten Sie einen zufälligen Basisgegenstand und können aus 3 Möglichkeiten einen anderen Basisgegenstand auswählen, der zu Ihnen passt. Sie können zwei Basisgegenstände kombinieren, um einen mächtigen Gegenstand der Stufe 2 zu erstellen. Die Herstellungsliste aller Gegenstände ist im Wiki im Abschnitt „Gegenstände“ verfügbar.",
     "bots": "Wie funktionieren Bots?",
-    "bots_answer": "Bots werden von anderen Spielern erstellt. Bots sind themenbasiert, ein Mewtwo-Bot hat zu einem bestimmten Zeitpunkt im Spiel immer einen Mewtwo in seinem Team. Bots verfügen in jeder Phase über eine Liste vordefinierter Teams.",
+    "bots_answer": "Bots werden von anderen Spielern erstellt. Bots sind themenbasiert, ein Mewtwo-Bot hat zu einem bestimmten Zeitpunkt im Spiel immer einen Mewtwo in seinem Team. Bots verfügen auf jeder Ebene über eine Liste vordefinierter Teams.",
     "create_bot": "Kann ich meinen eigenen Bot erstellen?",
     "create_bot_answer": "Sicher. Sie müssen mindestens Level 20 erreicht haben, um das Bot Builder-Gadget freizuschalten. Sie können damit Ihren Bot erstellen und einreichen. Er wird im #bot-creation-Kanal auf Discord zur Überprüfung durch das Bot-Reviewer-Team gesendet.",
     "elo": "Wie funktioniert das Elo-System?",
@@ -2540,7 +2540,7 @@
   "non_profit": "Gemeinnützig",
   "open_source": "Open Source",
   "copyright": "Alle Rechte liegen bei The Pokemon Company®",
-  "stage": "Bühne",
+  "stage": "Ebene",
   "spectate": "Zuschauen",
   "join": "Beitreten",
   "reconnect": "Erneut verbinden",
@@ -3084,7 +3084,7 @@
   "loading_hints": {
     "tab_out": "Nicht ausblenden! Der Ladevorgang wird angehalten, wenn dieses Browserfenster inaktiv ist.",
     "max_loading_time": "Das Spiel startet nach maximal 5 Minuten Ladezeit, egal was...",
-    "disconnection_time": "Spieler, deren Verbindung für mehr als 3 Minuten unterbrochen wird, werden aus dem Spiel geworfen. Wenn dies vor Stufe 6 geschieht, verlieren sie keine Elo.",
+    "disconnection_time": "Spieler, deren Verbindung für mehr als 3 Minuten unterbrochen wird, werden aus dem Spiel geworfen. Wenn dies vor Ebene 6 geschieht, verlieren sie keine Elo.",
     "translation_project": "Die Übersetzungen im Spiel werden von der Community verwaltet! Schauen Sie auf Discord, wenn Sie beitragen möchten.",
     "discord": "Tritt unserem Discord bei, um die Community zu treffen! Link im Seitenmenü",
     "bug_report": "Du hast einen Fehler gefunden? Geh auf Discord und melde ihn im Kanal #bug-report.",
@@ -3104,11 +3104,11 @@
     "booster_rarity_probability_description": "Die Wahrscheinlichkeit, ein Pokémon in einem Boosterpack zu finden, hängt von seiner Seltenheit ab.",
     "special_pokemons_rate": "Besondere Pokémon",
     "ditto_rate": "Chance, Ditto im Shop zu finden",
-    "kecleon_rate": "Chance, Kekleon in den Picks der Stufe 10 zu finden",
-    "arceus_rate": "Chance, Arceus in den Picks der Stufe 20 zu finden",
+    "kecleon_rate": "Chance, Kekleon in den Picks der Ebene 10 zu finden",
+    "arceus_rate": "Chance, Arceus in den Picks der Ebene 20 zu finden",
     "fishing_rarity_rate": "Angelrarität nach Rutenqualität",
     "fishing_rarity_rate_description": "Die Qualität der Angelrute, beeinflusst die Seltenheit der Pokémon, die Sie fangen können.",
     "pool_size_per_category": "Poolgröße je Kategorie",
-    "pool_size_per_category_description": "Die Pokémon, die du in Geschäften findest, stammen aus einem Pool, der von allen Spielern gemeinsam genutzt wird. Die Anzahl der Exemplare jedes Pokémon im Pool hängt von seiner Seltenheit und der Anzahl seiner Evolutionsstufen ab."
+    "pool_size_per_category_description": "Die Pokémon, die du im Shop findest, stammen aus einem Pool, der von allen Spielern gemeinsam genutzt wird. Die Anzahl der Exemplare jedes Pokémon im Pool hängt von seiner Seltenheit und der Anzahl seiner Evolutionsstufen ab."
   }
 }
