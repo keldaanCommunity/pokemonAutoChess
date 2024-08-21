@@ -173,7 +173,7 @@ export default function TeamBuilder(props: {
 
   return (
     <div id="team-builder">
-      <Synergies synergies={synergies} />
+      <Synergies synergies={synergies} tooltipPortal={false} />
       <TeamEditor
         board={board}
         handleEditorClick={handleEditorClick}
