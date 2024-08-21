@@ -372,7 +372,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       !this.status.resurecting &&
       !(value < 0 && this.status.tree) // cannot lose PP if tree
     ) {
-      this.pp = min(0)(this.pp + value)
+      this.pp = clamp(this.pp + value, 0, this.maxPP * 2 - 1)
     }
   }
 

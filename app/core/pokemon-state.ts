@@ -731,10 +731,10 @@ export default class PokemonState {
       pokemon.addPP(4, pokemon, 0, false)
     }
     if (pokemon.effects.has(Effect.DRIZZLE)) {
-      pokemon.addPP(8, pokemon, 0, false)
+      pokemon.addPP(7, pokemon, 0, false)
     }
     if (pokemon.effects.has(Effect.PRIMORDIAL_SEA)) {
-      pokemon.addPP(12, pokemon, 0, false)
+      pokemon.addPP(10, pokemon, 0, false)
     }
     if (pokemon.simulation.weather === Weather.RAIN) {
       pokemon.addPP(3, pokemon, 0, false)
