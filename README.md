@@ -8,7 +8,7 @@ Non profit game. For fans, by fans.
 
 ![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
-Play: [https://pokemon-auto-chess.com](https://pokemon-auto-chess.com/)
+Play: [https://pokemon.darkatek7.com/](https://pokemon.darkatek7.com/)
 
 Source: [https://github.com/keldaanCommunity/pokemonAutoChess](https://github.com/keldaanCommunity/pokemonAutoChess)
 
