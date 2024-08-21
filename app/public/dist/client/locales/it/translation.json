@@ -1309,7 +1309,7 @@
     "SACRED_SWORD": "Infliggi [100,SP] TRUE.",
     "PSYCHIC": "Infliggi [50,100,200,SP] SPECIAL e sottrai 15 PP al bersaglio e ai Pokèmon nemici adiacenti.",
     "PSYBEAM": "Infliggi [25,50,100,SP] danni speciali a tutti i Pokèmon nemici dietro il bersaglio, con il 50% di possibilità di infliggere CONFUSION per 4 secondi.",
-    "DIVE": "Si tuffa sott'acqua e ottieni [50,SP] SHIELD e riappare nel mezzo della squadra nemica, infliggendo [15,30,50,SP] SPECIAL e FREEZE a tutte le unità adiacenti per 1 secondo.",
+    "DIVE": "Si tuffa sott'acqua e ottieni [10,20,40,SP] SHIELD e riappare nel mezzo della squadra nemica, infliggendo [10,20,40,SP] SPECIAL e FREEZE a tutte le unità adiacenti per 1 secondo.",
     "SPIKE_ARMOR": "Per [3,5,10] secondi, i Pokèmon che attaccano in mischia l'utilizzatore ricevono WOUND e gli viene inflitto SPECIAL pari al [100,SP]% della DEF attuale dell'utilizzatore.",
     "FUTURE_SIGHT": "Infliggi [15,30,60,SP] SPECIAL a 5 Pokèmon nemici.",
     "FAKE_TEARS": "Infligge [3,6,9,SP] SPECIAL all'intera squadra nemica e causa ARMOR_REDUCTION per 3 secondi.",

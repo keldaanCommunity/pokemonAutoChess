@@ -1308,7 +1308,7 @@
     "SACRED_SWORD": "대상에 [100,SP] 의 TRUE 를 가한다.",
     "PSYCHIC": "대상 및 인접한 적들에게 [50,100,200,SP] 의 SPECIAL 을 가하며 15 PP 를 소멸시킨다.",
     "PSYBEAM": "대상 뒤에 있는 모든 적포켓몬들에게 [25,50,100,SP] 의 SPECIAL 을 가하며 50%확률로 4초간 CONFUSION 상태로 만든다.",
-    "DIVE": "물속으로 다이빙해서 [50,SP]의 SHIELD 를 얻는다. 그후 적팀의 한복판에 재등장하며 인접한 적들에게 [15,30,50,SP] 의 SPECIAL 를 가하며 1초간 FREEZE 상태로 만든다.",
+    "DIVE": "물속으로 다이빙해서 [10,20,40,SP]의 SHIELD 를 얻는다. 그후 적팀의 한복판에 재등장하며 인접한 적들에게 [10,20,40,SP] 의 SPECIAL 를 가하며 1초간 FREEZE 상태로 만든다.",
     "SPIKE_ARMOR": "[3,5,10]초간 시전자에게 근접공격을 하는 대상은 WOUND 상태가 되며 현재 DEF 의 [100,SP]% 의 SPECIAL 을 입는다.",
     "FUTURE_SIGHT": "적 5마리에게 [15,30,60,SP] 의 SPECIAL 을 가한다.",
     "FAKE_TEARS": "모든 적 포켓몬들에 [3,6,9,SP] 의 SPECIAL 을 가하며 3초간 AROMOR_REDUCTION 을 발동시킨다.",
