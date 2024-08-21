@@ -1348,7 +1348,7 @@
     "HYPNOSIS": "Platziere SLEEP 1 Feind für [2,3,5,6,SP=0,5] Sekunden in den hinteren Reihen",
     "MIMIC": "Kopiert die Fähigkeit des aktuellen Ziels",
     "HEX": "Fügt dem Ziel [20,40,80,SP] SPECIAL zu. Verdoppelt den Schaden, wenn das Ziel BURN, CONFUSION, FREEZE, PARALYSIS, POISONNED, SILENCE, SLEEP oder WOUND ist",
-    "GROWTH": "Erhöhe die maximalen HP um [30,40,50,SP] und ATK um [3,4,5,SP]. Wächst bei SUN Wetter doppelt so schnell",
+    "GROWTH": "Erhöhe die maximalen HP um [10,20,30,SP] und ATK um [3,4,5,SP]. Wächst bei SUN Wetter doppelt so schnell",
     "HEAL_ORDER": "Fügt benachbarten Feinden [25,45,65,SP] SPECIAL zu und heilt benachbarte Verbündete um [25,45,65,SP].",
     "SHELL_TRAP": "Nach dem nächsten empfangenen PHYSICAL explodiert die Falle und fügt benachbarten Feinden [100,SP] SPECIAL zu",
     "DIG": "Gräbt sich unter der Erde und taucht neben dem am weitesten entfernten Feind wieder auf, wobei er allen Feinden auf dem Weg [10,20,40,SP] Spezialschaden zufügt",
