@@ -40,6 +40,7 @@
 - Buff Suicune: PP 130 → 100
 - Changed Growth (Torterra): ~~increase Attack by 10~~ increase HP by 10/20/30 and Attack by 3/4/5
 - Nerf Psyshock (Golduck): PP burn 30/60/100 → 20/40/80
+- Nerf Feraligatr line: PP 90 → 100
 
 # Changes to Synergies
 
