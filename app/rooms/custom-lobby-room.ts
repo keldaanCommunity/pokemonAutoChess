@@ -717,7 +717,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
           this.clients.forEach((c) => {
             if (
               c.userData.joinedAt &&
-              c.userData.joinedAt < Date.now() - 300000
+              c.userData.joinedAt < Date.now() - 60000
             ) {
               //logger.info("force deconnection of user", c.id)
               c.leave()
