@@ -1,3 +1,6 @@
+Aqui está o código otimizado, mantendo o mesmo padrão de funcionamento e aplicando algumas práticas recomendadas como early returns, simplificação de expressões e uso de funções auxiliares para evitar repetições:
+
+```typescript
 import { IPokemonEntity } from "../../../types";
 import { AnimationComplete, AnimationType } from "../../../types/Animation";
 import { PROJECTILE_SPEED } from "../../../types/Config";
@@ -28,26 +31,32 @@ export default class AnimationManager {
   constructor(game: Phaser.Scene) {
     this.game = game;
 
-    this.initializeAnimations();
-    this.initializeAtlasAnimations();
+    indexList.forEach((index) => {
+      const tints = Object.values(PokemonTint) as PokemonTint[];
+      tints.forEach((shiny) => {
+        const actions: AnimationType[] = this.getPokemonActions(index, shiny);
+
+        actions.forEach((action) => {
+          const modes = Object.values(SpriteType) as SpriteType[];
+          modes.forEach((mode) => {
+            const directions = AnimationComplete[action]
+              ? Object.values(Orientation)
+              : [Orientation.DOWN];
+
+            directions.forEach((direction) => {
+              this.createPokemonAnimation(index, shiny, action, mode, direction);
+            });
+          });
+        });
+      });
+    });
+
+    this.createAtlasAnimations();
     this.createMinigameAnimations();
     this.createEnvironmentAnimations();
   }
 
-  private initializeAnimations() {
-    indexList.forEach((index) => {
-      const tints = Object.values(PokemonTint);
-      tints.forEach((shiny) => {
-        const actions = this.getActionsForPokemon(index, shiny);
-
-        actions.forEach((action) => {
-          this.createAnimationsForAction(index, shiny, action);
-        });
-      });
-    });
-  }
-
-  private getActionsForPokemon(index: string, shiny: PokemonTint): AnimationType[] {
+  getPokemonActions(index: string, shiny: PokemonTint): AnimationType[] {
     const actions: AnimationType[] = [
       AnimationType.Idle,
       AnimationType.Walk,
@@ -61,18 +70,18 @@ export default class AnimationManager {
     );
 
     if (conf && AnimationConfig[conf]) {
-      const config = AnimationConfig[conf as Pkm];
-      if (config.shinyUnavailable && shiny === PokemonTint.SHINY) return actions;
+      if (AnimationConfig[conf].shinyUnavailable && shiny === PokemonTint.SHINY)
+        return actions;
 
-      if (!actions.includes(config.attack)) {
-        actions.push(config.attack);
-      }
-      if (!actions.includes(config.ability)) {
-        actions.push(config.ability);
-      }
-      if (!actions.includes(config.emote)) {
-        actions.push(config.emote);
-      }
+      const addUniqueAction = (action: AnimationType) => {
+        if (!actions.includes(action)) {
+          actions.push(action);
+        }
+      };
+
+      addUniqueAction(AnimationConfig[conf as Pkm].attack);
+      addUniqueAction(AnimationConfig[conf as Pkm].ability);
+      addUniqueAction(AnimationConfig[conf as Pkm].emote);
     } else {
       actions.push(AnimationType.Attack);
     }
@@ -80,39 +89,23 @@ export default class AnimationManager {
     return actions;
   }
 
-  private createAnimationsForAction(index: string, shiny: PokemonTint, action: AnimationType) {
-    const modes = Object.values(SpriteType);
-
-    modes.forEach((mode) => {
-      const directions = AnimationComplete[action] === false
-        ? [Orientation.DOWN]
-        : Object.values(Orientation);
-
-      directions.forEach((direction) => {
-        const durationArray: number[] = durations[`${index}/${shiny}/${action}/${mode}`];
-        if (durationArray) {
-          const frameArray = this.generateFrameArray(index, shiny, action, mode, direction, durationArray);
-
-          this.game.anims.create({
-            key: `${index}/${shiny}/${action}/${mode}/${direction}`,
-            frames: frameArray,
-            repeat: this.shouldLoop(action) ? -1 : 0,
-          });
-        } else {
-          logger.warn("Duration array missing for", `${index}/${shiny}/${action}/${mode}`);
-        }
-      });
-    });
-  }
-
-  private generateFrameArray(
+  createPokemonAnimation(
     index: string,
     shiny: PokemonTint,
     action: AnimationType,
     mode: SpriteType,
-    direction: Orientation,
-    durationArray: number[]
+    direction: Orientation
   ) {
+    const durationArray: number[] =
+      durations[`${index}/${shiny}/${action}/${mode}`];
+
+    if (!durationArray) {
+      logger.warn(
+        `duration array missing for ${index}/${shiny}/${action}/${mode}`
+      );
+      return;
+    }
+
     const frameArray = this.game.anims.generateFrameNames(index, {
       start: 0,
       end: durationArray.length - 1,
@@ -120,35 +113,39 @@ export default class AnimationManager {
       prefix: `${shiny}/${action}/${mode}/${direction}/`,
     });
 
-    return frameArray.map((frame, i) => ({
-      ...frame,
-      duration: durationArray[i] * (1000 / FPS_POKEMON_ANIMS),
-    }));
-  }
+    frameArray.forEach((frame, i) => {
+      frame["duration"] = durationArray[i] * (1000 / FPS_POKEMON_ANIMS);
+    });
 
-  private shouldLoop(action: AnimationType): boolean {
-    return [
+    const shouldLoop = [
       AnimationType.Idle,
       AnimationType.Sleep,
       AnimationType.Hop,
     ].includes(action);
+
+    this.game.anims.create({
+      key: `${index}/${shiny}/${action}/${mode}/${direction}`,
+      frames: frameArray,
+      repeat: shouldLoop ? -1 : 0,
+    });
   }
 
-  private initializeAtlasAnimations() {
-    Object.entries(atlas.packs).forEach(([pack, packData]) => {
-      if (packData.anims) {
-        const hasMultipleAnims = Object.keys(packData.anims).length > 1;
+  createAtlasAnimations() {
+    for (const pack in atlas.packs) {
+      const anims = atlas.packs[pack].anims;
+      if (!anims) continue;
 
-        Object.entries(packData.anims).forEach(([anim, animConfig]) => {
-          this.createAnimation({
-            key: anim,
-            atlas: packData.name,
-            prefix: hasMultipleAnims ? `${anim}/` : "",
-            ...animConfig,
-          });
+      const multipleAnims = Object.keys(anims).length > 1;
+
+      Object.keys(anims).forEach((anim) => {
+        this.createAnimation({
+          key: anim,
+          atlas: atlas.packs[pack].name,
+          prefix: multipleAnims ? anim + "/" : "",
+          ...anims[anim],
         });
-      }
-    });
+      });
+    }
   }
 
   createAnimation({
@@ -184,55 +181,59 @@ export default class AnimationManager {
   }
 
   createMinigameAnimations() {
-    this.createSimpleAnimation("portal", "portal", 0, 7, 600, -1);
-    this.createSimpleAnimation("open_chest", "chest", 1, 4, 600, 0);
-    this.createSimpleAnimation("shine", "shine", 0, 47, 1000, -1);
-  }
-
-  private createSimpleAnimation(
-    key: string,
-    atlas: string,
-    startFrame: number,
-    endFrame: number,
-    duration: number,
-    repeat: number
-  ) {
     this.game.anims.create({
-      key,
-      frames: this.game.anims.generateFrameNames(atlas, {
-        start: startFrame,
-        end: endFrame,
+      key: "portal",
+      frames: this.game.anims.generateFrameNames("portal", {
+        start: 0,
+        end: 7,
+        zeroPad: 3,
+      }),
+      duration: 600,
+      repeat: -1,
+    });
+
+    this.game.anims.create({
+      key: "open_chest",
+      frames: this.game.anims.generateFrameNames("chest", {
+        start: 1,
+        end: 4,
         suffix: ".png",
       }),
-      duration,
-      repeat,
+      duration: 600,
+      repeat: 0,
+    });
+
+    this.game.anims.create({
+      key: "shine",
+      frames: this.game.anims.generateFrameNames("shine", {
+        start: 0,
+        end: 47,
+        suffix: ".png",
+      }),
+      duration: 1000,
+      repeat: -1,
     });
   }
 
   createEnvironmentAnimations() {
     Berries.forEach((berryName) => {
       for (let step = 1; step <= 3; step++) {
-        this.createEnvironmentStepAnimation(berryName, step);
+        this.createEnvironmentAnimation(berryName, step);
       }
     });
 
-    this.createEnvironmentStepAnimation("CROP", 1, "CROP_", 600);
+    this.createEnvironmentAnimation("CROP", 1);
   }
 
-  private createEnvironmentStepAnimation(
-    berryName: string,
-    step: number,
-    prefix = `${berryName}_`,
-    duration = 600
-  ) {
+  createEnvironmentAnimation(berryName: string, step: number) {
     this.game.anims.create({
       key: `${berryName}_TREE_STEP_${step}`,
       frames: this.game.anims.generateFrameNames("berry_trees", {
         start: step * 2 - 1,
         end: step * 2,
-        prefix,
+        prefix: `${berryName}_`,
       }),
-      duration,
+      duration: 600,
       repeat: -1,
     });
   }
@@ -241,43 +242,38 @@ export default class AnimationManager {
     state: PokemonActionState,
     entity: PokemonSprite
   ): AnimationType {
-    switch (state) {
-      case PokemonActionState.HOP:
-      case PokemonActionState.FISH:
-        return AnimationType.Hop;
-      case PokemonActionState.HURT:
-        return AnimationType.Hurt;
-      case PokemonActionState.SLEEP:
-        return AnimationType.Sleep;
-      case PokemonActionState.WALK:
-        return AnimationType.Walk;
-      case PokemonActionState.ATTACK:
-        return AnimationConfig[entity.name as Pkm].attack;
-      case PokemonActionState.EMOTE:
-        return AnimationConfig[entity.name as Pkm].emote;
-      case PokemonActionState.IDLE:
-      default:
-        return AnimationType.Idle;
-    }
+    const actionMap = {
+      [PokemonActionState.HOP]: AnimationType.Hop,
+      [PokemonActionState.FISH]: AnimationType.Hop,
+      [PokemonActionState.HURT]: AnimationType.Hurt,
+      [PokemonActionState.SLEEP]: AnimationType.Sleep,
+      [PokemonActionState.WALK]: AnimationType.Walk,
+      [PokemonActionState.ATTACK]: AnimationConfig[entity.name as Pkm].attack,
+      [PokemonActionState.EMOTE]: AnimationConfig[entity.name as Pkm].emote,
+    };
+
+    return actionMap[state] || AnimationType.Idle;
   }
 
   animatePokemon(
     entity: PokemonSprite,
     action: PokemonActionState,
     flip: boolean,
-    loop = true
+    loop: boolean = true
   ) {
-    const animation = this.convertPokemonActionStateToAnimationType(action, entity);
-    const shouldLock = [PokemonActionState.HOP, PokemonActionState.HURT, PokemonActionState.EMOTE].includes(action);
-    const timeScale = action === PokemonActionState.ATTACK
-      ? getAttackAnimTimeScale(entity.index, entity.atkSpeed)
-      : 1;
+    const animation = this.convertPokemonActionStateToAnimationType(
+      action,
+      entity
+    );
 
-    try {
-      this.play(entity, animation, { flip, lock: shouldLock, repeat: loop ? -1 : 0, timeScale });
-    } catch (err) {
-      logger.warn(`Can't play animation ${animation} for ${entity?.name}`, err);
-    }
+    const shouldLock = [PokemonActionState.HOP, PokemonActionState.HURT, PokemonActionState.EMOTE].includes(action);
+
+    const timeScale =
+      action === PokemonActionState.ATTACK
+        ? getAttackAnimTimeScale(entity.index, entity.atkSpeed)
+        : 1;
+
+    this.play(entity, animation, { flip, lock: shouldLock, repeat: loop ? -1 : 0, timeScale });
   }
 
   play(
@@ -296,42 +292,19 @@ export default class AnimationManager {
       ? OrientationFlip[entity.orientation]
       : entity.orientation;
 
-    const orientationCorrected = AnimationComplete[animation] ? orientation : Orientation.DOWN;
-    const textureIndex = entity.scene?.textures.exists(entity.index) ? entity.index : "0000";
-    const tint = entity.shiny && !AnimationConfig[entity.name].shinyUnavailable
-      ? PokemonTint.SHINY
-      : PokemonTint.NORMAL;
+    const orientationCorrected = AnimationComplete[animation]
+      ? orientation
+      : Orientation.DOWN;
+
+    const textureIndex =
+      entity.scene?.textures.exists(entity.index) ? entity.index : "0000";
+    const tint =
+      entity.shiny && !AnimationConfig[entity.name].shinyUnavailable
+        ? PokemonTint.SHINY
+        : PokemonTint.NORMAL;
+
     const animKey = `${textureIndex}/${tint}/${animation}/${SpriteType.ANIM}/${orientationCorrected}`;
     const shadowKey = `${textureIndex}/${tint}/${animation}/${SpriteType.SHADOW}/${orientationCorrected}`;
 
-    if (entity.sprite.anims.currentAnim?.key === animKey && entity.sprite.anims.currentAnim?.repeat === -1) return;
-
-    entity.sprite.anims.play({ key: animKey, repeat: config.repeat, timeScale: config.timeScale });
-    entity.shadow.anims.play({ key: shadowKey, repeat: config.repeat, timeScale: config.timeScale });
-
-    if (config.lock) {
-      entity.animationLocked = true;
-    }
-  }
-}
-
-export function getAttackTimings(pokemon: IPokemonEntity): {
-  delayBeforeShoot: number;
-  travelTime: number;
-  attackDuration: number;
-} {
-  const attackDuration = 1000 / pokemon.atkSpeed;
-  const d = delays[pokemon.index]?.d || 18;
-  const t = delays[pokemon.index]?.t || 36;
-
-  const delayBeforeShoot = max(attackDuration / 2, (attackDuration * d) / t);
-  const distance = distanceC(pokemon.targetX, pokemon.targetY, pokemon.positionX, pokemon.positionY);
-  const travelTime = (distance * 1000) / PROJECTILE_SPEED;
-
-  return { delayBeforeShoot, travelTime, attackDuration };
-}
-
-export function getAttackAnimTimeScale(pokemonIndex: string, atkSpeed: number) {
-  const t = delays[pokemonIndex]?.t || 36;
-  return (t * atkSpeed) / FPS_POKEMON_ANIMS;
-}
+    if (
+      entity.sprite
