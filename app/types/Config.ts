@@ -39,7 +39,7 @@ export const RarityCost: { [key in Rarity]: number } = Object.freeze({
 })
 
 export const EmotionCost: { [key in Emotion]: number } = {
-  [Emotion.NORMAL]: 0,
+  [Emotion.NORMAL]: -1,
   [Emotion.HAPPY]: 0,
   [Emotion.PAIN]: 0,
   [Emotion.ANGRY]: 0,
