@@ -9503,7 +9503,8 @@ export class GulpMissileStrategy extends AbilityStrategy {
 
             const cells = board.getAdjacentCells(
               target.positionX,
-              target.positionY
+              target.positionY,
+              true
             )
 
             cells.forEach((cell) => {
