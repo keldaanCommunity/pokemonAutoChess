@@ -2589,5 +2589,8 @@
     "SIX_PACK": "Poderás usar um máximo de 6 espaços no seu tabuleiro, com indiferença do teu nível",
     "NINE_LIVES": "Serás eliminado tras perder 9 rondas",
     "CROWDED": "+3 unidades máximas no tabuleiro"
+  },
+  "loading_hints": {
+    "bug_report": "Achou algum bug? Vá no Discord e reporta no canal #bug-report"
   }
 }
