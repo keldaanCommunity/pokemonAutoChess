@@ -79,6 +79,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
   constructor() {
     super()
+    this.maxClients = 50
     if (
       process.env.PASTEBIN_API_DEV_KEY &&
       process.env.PASTEBIN_API_USERNAME &&
