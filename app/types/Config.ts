@@ -39,26 +39,26 @@ export const RarityCost: { [key in Rarity]: number } = Object.freeze({
 })
 
 export const EmotionCost: { [key in Emotion]: number } = {
-  [Emotion.NORMAL]: 50,
-  [Emotion.HAPPY]: 100,
-  [Emotion.PAIN]: 100,
-  [Emotion.ANGRY]: 100,
-  [Emotion.WORRIED]: 100,
-  [Emotion.SAD]: 100,
-  [Emotion.CRYING]: 100,
-  [Emotion.SHOUTING]: 150,
-  [Emotion.TEARY_EYED]: 150,
-  [Emotion.DETERMINED]: 150,
-  [Emotion.JOYOUS]: 150,
-  [Emotion.INSPIRED]: 150,
-  [Emotion.SURPRISED]: 150,
-  [Emotion.DIZZY]: 150,
-  [Emotion.SPECIAL0]: 200,
-  [Emotion.SPECIAL1]: 200,
-  [Emotion.SIGH]: 200,
-  [Emotion.STUNNED]: 200,
-  [Emotion.SPECIAL2]: 200,
-  [Emotion.SPECIAL3]: 200
+  [Emotion.NORMAL]: 0,
+  [Emotion.HAPPY]: 0,
+  [Emotion.PAIN]: 0,
+  [Emotion.ANGRY]: 0,
+  [Emotion.WORRIED]: 0,
+  [Emotion.SAD]: 0,
+  [Emotion.CRYING]: 0,
+  [Emotion.SHOUTING]: 0,
+  [Emotion.TEARY_EYED]: 0,
+  [Emotion.DETERMINED]: 0,
+  [Emotion.JOYOUS]: 0,
+  [Emotion.INSPIRED]: 0,
+  [Emotion.SURPRISED]: 0,
+  [Emotion.DIZZY]: 0,
+  [Emotion.SPECIAL0]: 0,
+  [Emotion.SPECIAL1]: 0,
+  [Emotion.SIGH]: 0,
+  [Emotion.STUNNED]: 0,
+  [Emotion.SPECIAL2]: 0,
+  [Emotion.SPECIAL3]: 0
 }
 
 export function getEmotionCost(emotion: Emotion, isShiny: boolean): number {
