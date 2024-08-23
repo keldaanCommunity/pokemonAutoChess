@@ -5,7 +5,7 @@ import { RedisDriver, RedisPresence, ServerOptions, matchMaker } from "colyseus"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
-import admin, { app } from "firebase-admin"
+import admin from "firebase-admin"
 import { connect } from "mongoose"
 import { initTilemap } from "./core/design"
 import ItemsStatistics from "./models/mongo-models/items-statistic"
@@ -27,7 +27,6 @@ import { getBotData, getBotsList } from "./services/bots"
 import { discordService } from "./services/discord"
 import { pastebinService } from "./services/pastebin"
 import { logger } from "./utils/logger"
-import { log } from "console"
 
 const clientSrc = __dirname.includes("server")
   ? path.join(__dirname, "..", "..", "client")

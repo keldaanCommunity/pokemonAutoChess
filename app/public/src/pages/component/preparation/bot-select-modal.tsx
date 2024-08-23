@@ -26,11 +26,13 @@ export function BotSelectModal(props: { botsSelected: string[], close: () => voi
     }
   }
 
+  const [loading, setLoading] = useState<boolean>(true)
   const [botsList, setBotsList] = useState<IBot[] | null>(null)
   useEffect(() => {
     if (botsList === null) {
       fetch("/bots").then((r) => r.json()).then((bots) => {
         setBotsList(bots)
+        setLoading(false)
       })
     }
   }, [])
@@ -73,6 +75,9 @@ export function BotSelectModal(props: { botsSelected: string[], close: () => voi
           {t("sort_by_name")}
         </button>
       </header>
+
+      {loading && <p>{t("loading")}</p>}
+      {!loading && botsListSorted.length === 0 && <p>{t("no_bots_found")}</p>}
       <ul>
         {botsListSorted.map((bot) => (
           <li
@@ -94,7 +99,7 @@ export function BotSelectModal(props: { botsSelected: string[], close: () => voi
           </li>
         ))}
       </ul>
-      {botsListSorted.length === 0 && <p>No bots found !</p>}
+
       <footer className="actions">
         <button
           className="bubbly red"

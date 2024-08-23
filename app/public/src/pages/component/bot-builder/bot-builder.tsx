@@ -165,9 +165,7 @@ export default function BotBuilder() {
     }
   }, [board, currentStage])
 
-  if (toAuth) {
-    return <Navigate to={"/"} />
-  }
+  if (toAuth) return navigate("/")
 
   return (
     <div id="bot-builder">

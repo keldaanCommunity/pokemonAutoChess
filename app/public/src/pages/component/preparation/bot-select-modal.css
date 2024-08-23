@@ -4,7 +4,7 @@
   top: 5vh;
   left: 5vw;
   right: 5vw;
-  max-height: 90vh;
+  height: 90vh;
   overflow-y: auto;
   z-index: 20;
   display: grid;
