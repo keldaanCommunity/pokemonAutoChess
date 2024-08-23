@@ -2736,7 +2736,7 @@
   "change_room_name": "Changer le nom du salon",
   "add_bot": "Ajouter un bot",
   "easy_bot": "Facile (<800)",
-  "normal_bot": "Normale (800-1099)",
+  "normal_bot": "Normal (800-1099)",
   "hard_bot": "Difficile (1100-1400)",
   "extreme_bot": "Extrême (>1400)",
   "custom_bot": "Personnalisé",
