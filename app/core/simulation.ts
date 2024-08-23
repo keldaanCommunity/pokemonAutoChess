@@ -499,7 +499,7 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     if (pokemon.types.has(Synergy.WATER)) {
-      pokemon.addDodgeChance(0.3, pokemon, 0, false)
+      pokemon.addDodgeChance(0.2, pokemon, 0, false)
     }
   }
 

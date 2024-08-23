@@ -13,7 +13,8 @@ import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"
 export default function SynergyComponent(props: {
   type: Synergy
   value: number
-  index: number
+  index: number,
+  tooltipPortal: boolean
 }) {
   const { t } = useTranslation()
   const levelReached = SynergyTriggers[props.type]
@@ -52,6 +53,15 @@ export default function SynergyComponent(props: {
     })
   }
 
+  const tooltip = <Tooltip
+    id={"detail-" + props.type}
+    className="custom-theme-tooltip"
+    place="right"
+    data-tooltip-offset={{ bottom: (5 - props.index) * 50 }}
+  >
+    <SynergyDetailComponent type={props.type} value={props.value} />
+  </Tooltip>
+
   return (
     <div
       style={{
@@ -76,17 +86,7 @@ export default function SynergyComponent(props: {
       onMouseEnter={() => { hightlightSynergy(props.type) }}
       onMouseLeave={() => { removeHightlightSynergy(props.type) }}
     >
-      {ReactDOM.createPortal(
-        <Tooltip
-          id={"detail-" + props.type}
-          className="custom-theme-tooltip"
-          place="right"
-          data-tooltip-offset={{ bottom: (5 - props.index) * 50 }}
-        >
-          <SynergyDetailComponent type={props.type} value={props.value} />
-        </Tooltip>,
-        document.body
-      )}
+      {props.tooltipPortal ? ReactDOM.createPortal(tooltip, document.body) : tooltip}
 
       <SynergyIcon type={props.type} size="40px" />
       <span
