@@ -128,7 +128,7 @@ export class OnJoinCommand extends Command<
         }
       } else {
         // create new user account
-        const numberOfBoosters = 3
+        const numberOfBoosters = 100
         const starterAvatar = pickRandomIn(StarterAvatars)
         UserMetadata.create({
           uid: client.auth.uid,
