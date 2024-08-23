@@ -1,6 +1,5 @@
 import { t } from "i18next"
 import React, { useState } from "react"
-import ReactDOM from "react-dom"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { Tooltip } from "react-tooltip"
 import { PkmWithConfig } from "../../../../../types"
@@ -9,7 +8,10 @@ import {
   ItemComponents,
   Berries,
   CraftableItems,
-  Item
+  Item,
+  WeatherRocks,
+  ShinyItems,
+  SpecialItems
 } from "../../../../../types/enum/Item"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { cc } from "../../utils/jsx"
@@ -28,10 +30,23 @@ export default function ItemPicker(props: {
     { label: t("components"), key: "components", items: ItemComponents },
     { label: t("craftable_items"), key: "craftable", items: CraftableItems },
     { label: t("berries"), key: "berries", items: Berries },
+
+    { label: t("artificial_items"), key: "artificial", items: ArtificialItems },
+
     {
-      label: t("artificial_items"),
-      key: "artificial_items",
-      items: ArtificialItems
+      label: t("weather_rocks"),
+      key: "weather_rocks",
+      items: WeatherRocks
+    },
+    {
+      label: t("shiny_items"),
+      key: "shiny_items",
+      items: ShinyItems
+    },
+    {
+      label: t("special_items"),
+      key: "special_items",
+      items: SpecialItems
     }
   ]
 
@@ -58,16 +73,12 @@ export default function ItemPicker(props: {
           ))}
         </TabPanel>
       ))}
-      {itemHovered &&
-        ReactDOM.createPortal(
-          <Tooltip
-            id="detail-item"
-            className="custom-theme-tooltip item-detail-tooltip"
-          >
-            <ItemDetailTooltip item={itemHovered} />
-          </Tooltip>,
-          document.body
-        )}
+      {itemHovered && <Tooltip
+        id="detail-item"
+        className="custom-theme-tooltip item-detail-tooltip"
+      >
+        <ItemDetailTooltip item={itemHovered} />
+      </Tooltip>}
     </Tabs>
   )
 }

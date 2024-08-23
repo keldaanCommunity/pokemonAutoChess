@@ -342,7 +342,7 @@ export const DungeonDetails: { [key in DungeonPMDO]: DungeonPMDODetail } = {
     music: DungeonMusic.CRAGGY_COAST
   },
   [DungeonPMDO.CrystalCave1]: {
-    synergies: [Synergy.PSYCHIC, Synergy.SOUND, Synergy.DARK],
+    synergies: [Synergy.PSYCHIC, Synergy.SOUND, Synergy.FAIRY],
     music: DungeonMusic.CRYSTAL_CAVE
   },
   [DungeonPMDO.CrystalCave2]: {
@@ -362,7 +362,7 @@ export const DungeonDetails: { [key in DungeonPMDO]: DungeonPMDODetail } = {
     music: DungeonMusic.DARK_HILL
   },
   [DungeonPMDO.DarkHill2]: {
-    synergies: [Synergy.GHOST, Synergy.DARK, Synergy.FIELD],
+    synergies: [Synergy.GHOST, Synergy.DARK, Synergy.AMORPHOUS],
     music: DungeonMusic.I_SAW_SOMETHING_AGAIN
   },
   [DungeonPMDO.DarkIceMountain]: {
@@ -402,7 +402,7 @@ export const DungeonDetails: { [key in DungeonPMDO]: DungeonPMDODetail } = {
     music: DungeonMusic.PROTECTED_WORLD_PEACE
   },
   [DungeonPMDO.DeepSealedRuin]: {
-    synergies: [Synergy.HUMAN, Synergy.ARTIFICIAL, Synergy.MONSTER],
+    synergies: [Synergy.AMORPHOUS, Synergy.GHOST, Synergy.MONSTER],
     music: DungeonMusic.SEALED_RUIN_PIT
   },
   [DungeonPMDO.DesertRegion]: {
@@ -454,7 +454,7 @@ export const DungeonDetails: { [key in DungeonPMDO]: DungeonPMDODetail } = {
     music: DungeonMusic.TEMPORAL_TOWER
   },
   [DungeonPMDO.GoldenChamber]: {
-    synergies: [Synergy.LIGHT, Synergy.STEEL, Synergy.DRAGON],
+    synergies: [Synergy.DRAGON, Synergy.STEEL, Synergy.AMORPHOUS],
     music: DungeonMusic.OUTLAW
   },
   [DungeonPMDO.GrassMaze]: {
@@ -514,7 +514,7 @@ export const DungeonDetails: { [key in DungeonPMDO]: DungeonPMDODetail } = {
     music: DungeonMusic.LOWER_BRINE_CAVE
   },
   [DungeonPMDO.LushPrairie]: {
-    synergies: [Synergy.BUG, Synergy.BABY, Synergy.FLORA],
+    synergies: [Synergy.BUG, Synergy.LIGHT, Synergy.FLORA],
     music: DungeonMusic.WELCOME_TO_THE_WORLD_OF_POKEMON
   },
   [DungeonPMDO.MagmaCavern2]: {
@@ -546,7 +546,7 @@ export const DungeonDetails: { [key in DungeonPMDO]: DungeonPMDODetail } = {
     music: DungeonMusic.MT_BRISTLE
   },
   [DungeonPMDO.MtFaraway2]: {
-    synergies: [Synergy.ICE, Synergy.FLYING, Synergy.DRAGON],
+    synergies: [Synergy.ICE, Synergy.AMORPHOUS, Synergy.DRAGON],
     music: DungeonMusic.FROSTY_GROTTO
   },
   [DungeonPMDO.MtFaraway4]: {
@@ -566,7 +566,7 @@ export const DungeonDetails: { [key in DungeonPMDO]: DungeonPMDODetail } = {
     music: DungeonMusic.MT_STEEL
   },
   [DungeonPMDO.MtSteel2]: {
-    synergies: [Synergy.STEEL, Synergy.FLYING, Synergy.FIGHTING],
+    synergies: [Synergy.STEEL, Synergy.FLYING, Synergy.AMORPHOUS],
     music: DungeonMusic.BOSS_BATTLE
   },
   [DungeonPMDO.MtThunder]: {
@@ -630,7 +630,7 @@ export const DungeonDetails: { [key in DungeonPMDO]: DungeonPMDODetail } = {
     music: DungeonMusic.RANDOM_DUNGEON_3
   },
   [DungeonPMDO.PurityForest2]: {
-    synergies: [Synergy.BABY, Synergy.FAIRY, Synergy.FLORA],
+    synergies: [Synergy.BABY, Synergy.LIGHT, Synergy.AMORPHOUS],
     music: DungeonMusic.RUN_AWAY
   },
   [DungeonPMDO.PurityForest4]: {
@@ -662,7 +662,7 @@ export const DungeonDetails: { [key in DungeonPMDO]: DungeonPMDODetail } = {
     music: DungeonMusic.RESCUE_TEAM_BASE
   },
   [DungeonPMDO.RockAegisCave]: {
-    synergies: [Synergy.ROCK, Synergy.GHOST, Synergy.FIGHTING],
+    synergies: [Synergy.ROCK, Synergy.GHOST, Synergy.AMORPHOUS],
     music: DungeonMusic.FRIEND_AREA_SWAMP
   },
   [DungeonPMDO.RockMaze]: {
@@ -726,7 +726,7 @@ export const DungeonDetails: { [key in DungeonPMDO]: DungeonPMDODetail } = {
     music: DungeonMusic.SOUTHERN_JUNGLE
   },
   [DungeonPMDO.SpacialCliffs]: {
-    synergies: [Synergy.GHOST, Synergy.ROCK, Synergy.ELECTRIC],
+    synergies: [Synergy.GHOST, Synergy.AMORPHOUS, Synergy.ELECTRIC],
     music: DungeonMusic.SPACIAL_CLIFFS
   },
   [DungeonPMDO.SpacialRift1]: {
@@ -758,7 +758,7 @@ export const DungeonDetails: { [key in DungeonPMDO]: DungeonPMDODetail } = {
     music: DungeonMusic.SURROUNDED_SEA
   },
   [DungeonPMDO.TemporalSpire]: {
-    synergies: [Synergy.HUMAN, Synergy.PSYCHIC, Synergy.ARTIFICIAL],
+    synergies: [Synergy.HUMAN, Synergy.PSYCHIC, Synergy.AMORPHOUS],
     music: DungeonMusic.TEMPORAL_SPIRE
   },
   [DungeonPMDO.TemporalTower]: {
@@ -782,7 +782,7 @@ export const DungeonDetails: { [key in DungeonPMDO]: DungeonPMDODetail } = {
     music: DungeonMusic.THUNDERWAVE_CAVE
   },
   [DungeonPMDO.TinyMeadow]: {
-    synergies: [Synergy.GRASS, Synergy.BABY, Synergy.NORMAL],
+    synergies: [Synergy.NORMAL, Synergy.BABY, Synergy.AMORPHOUS],
     music: DungeonMusic.FRIEND_AREA_GRASSLANDS
   },
   [DungeonPMDO.TinyWoods]: {
@@ -790,7 +790,7 @@ export const DungeonDetails: { [key in DungeonPMDO]: DungeonPMDODetail } = {
     music: DungeonMusic.TINY_WOODS
   },
   [DungeonPMDO.TreeshroudForest1]: {
-    synergies: [Synergy.GRASS, Synergy.WATER, Synergy.BUG],
+    synergies: [Synergy.AMORPHOUS, Synergy.WATER, Synergy.BUG],
     music: DungeonMusic.TREESHROUD_FOREST
   },
   [DungeonPMDO.TreeshroudForest2]: {
@@ -826,7 +826,7 @@ export const DungeonDetails: { [key in DungeonPMDO]: DungeonPMDODetail } = {
     music: DungeonMusic.MAROWAK_DOJO
   },
   [DungeonPMDO.WaterfallPond]: {
-    synergies: [Synergy.WATER, Synergy.AQUATIC, Synergy.SOUND],
+    synergies: [Synergy.AQUATIC, Synergy.AMORPHOUS, Synergy.SOUND],
     music: DungeonMusic.WATERFALL_CAVE
   },
   [DungeonPMDO.WaterMaze]: {
@@ -858,7 +858,7 @@ export const DungeonDetails: { [key in DungeonPMDO]: DungeonPMDODetail } = {
     music: DungeonMusic.KECLEONS_SHOP
   },
   [DungeonPMDO.ZeroIsleEast3]: {
-    synergies: [Synergy.GROUND, Synergy.PSYCHIC, Synergy.STEEL],
+    synergies: [Synergy.AMORPHOUS, Synergy.PSYCHIC, Synergy.STEEL],
     music: DungeonMusic.VERSUS_BOSS
   },
   [DungeonPMDO.ZeroIsleEast4]: {
