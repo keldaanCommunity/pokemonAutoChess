@@ -19,11 +19,10 @@ module.exports = {
       production : {  
         "user" : "root",  
         "host" : ["146.190.113.96"],
-        "key"  : "./id_digital_ocean",
         "ref"  : "origin/prod",  
         "repo" : "git@github.com:keldaanCommunity/pokemonAutoChess.git",  
         "path" : "/home/deploy",  
-        "post-deploy" : "npm install && npm run build && npm run colyseus-post-deploy"  
+        "post-deploy" : "npm install && npm run build"  
       },
       vultr : {  
         "user" : "deploy",  
@@ -31,7 +30,7 @@ module.exports = {
         "ref"  : "origin/prod",  
         "repo" : "git@github.com:keldaanCommunity/pokemonAutoChess.git",  
         "path" : "/home/deploy",  
-        "post-deploy" : "npm install && npm run build && npm run colyseus-post-deploy"  
+        "post-deploy" : "npm install && npm run build"  
       }    
     }  
 }

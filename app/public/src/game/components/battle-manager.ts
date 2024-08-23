@@ -758,17 +758,17 @@ export default class BattleManager {
         if (pkm.lifebar) {
           pkm.lifebar.setTeam(value as IPokemonEntity["team"], this.flip)
         }
-      }
-      // } else if (field === "index") {
-      //   pkm.index = value as IPokemonEntity["index"]
-      //   this.animationManager.animatePokemon(
-      //     pkm,
-      //     PokemonActionState.IDLE,
-      //     this.flip,
-      //     "index"
-      //   )
-      // }
-      else if (field === "skill") {
+      } else if (field === "index") {
+        if (pkm.index !== value) {
+          pkm.index = value as IPokemonEntity["index"]
+          this.animationManager.animatePokemon(
+            pkm,
+            PokemonActionState.IDLE,
+            this.flip,
+            false
+          )
+        }
+      } else if (field === "skill") {
         pkm.skill = value as IPokemonEntity["skill"]
         if (pkm.detail && pkm.detail instanceof PokemonDetail) {
           pkm.detail.updateAbilityDescription(pkm.skill, pkm.stars, pkm.ap)

@@ -3,7 +3,7 @@ import { Client, Room } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Navigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import AfterGameState from "../../../rooms/states/after-game-state"
@@ -86,6 +86,7 @@ export function getGameScene(): GameScene | undefined {
 export default function Game() {
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const client: Client = useAppSelector((state) => state.network.client)
   const room: Room<GameState> | undefined = useAppSelector(
     (state) => state.network.game
@@ -104,8 +105,6 @@ export default function Game() {
   const [connectError, setConnectError] = useState<string>("")
   const [finalRank, setFinalRank] = useState<number>(0)
   const [finalRankVisible, setFinalRankVisible] = useState<boolean>(false)
-  const [toAfter, setToAfter] = useState<boolean>(false)
-  const [toAuth, setToAuth] = useState<boolean>(false)
   const container = useRef<HTMLDivElement>(null)
 
   const MAX_ATTEMPS_RECONNECT = 3
@@ -154,7 +153,7 @@ export default function Game() {
             }
           })
       } else {
-        setToAuth(true) // no reconnection token
+        navigate("/") // no reconnection token, login again
       }
     },
     [client, dispatch]
@@ -219,7 +218,7 @@ export default function Game() {
     localStore.set(LocalStoreKeys.RECONNECTION_TOKEN, r.reconnectionToken, 30)
     r.connection.close()
     dispatch(leaveGame())
-    setToAfter(true)
+    navigate("/after")
 
     try {
       await room?.leave()
@@ -227,6 +226,24 @@ export default function Game() {
       logger.warn("Room already closed")
     }
   }, [client, dispatch, room])
+
+  useEffect(() => {
+    // create a history entry to prevent back button switching page immediately, and leave game properly instead
+    window.history.pushState(null, "", window.location.href);
+    const confirmLeave = () => {
+      if(confirm("Do you want to leave game ?")){
+        leave()
+      } else {
+        // push again another entry to prevent back button from switching page, effectively canceling the back action
+        window.history.pushState(null, "", window.location.href);
+      }
+    }
+    // when pressing back button, properly leave game
+    window.addEventListener("popstate", confirmLeave)
+    return () => {
+      window.removeEventListener("popstate", confirmLeave)
+    }
+  },[])
 
   useEffect(() => {
     const connect = () => {
@@ -636,14 +653,6 @@ export default function Game() {
     connectToGame,
     leave
   ])
-
-  if (toAuth) {
-    return <Navigate to={"/"} />
-  }
-
-  if (toAfter) {
-    return <Navigate to="/after" />
-  }
 
   return (
     <main id="game-wrapper">

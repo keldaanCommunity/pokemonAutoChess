@@ -372,7 +372,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       !this.status.resurecting &&
       !(value < 0 && this.status.tree) // cannot lose PP if tree
     ) {
-      this.pp = min(0)(this.pp + value)
+      this.pp = clamp(this.pp + value, 0, this.maxPP * 2 - 1)
     }
   }
 
@@ -767,7 +767,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         if (
           ally &&
           ally.passive === Passive.SHARED_VISION &&
-          this.team === ally.team
+          this.team === ally.team &&
+          !(this.targetX === ally.positionX && this.targetY === ally.positionY) // do not self inflict damage if ally is confused and targeting you
         ) {
           ally.targetX = this.targetX
           ally.targetY = this.targetY

@@ -6,7 +6,7 @@ import SynergyComponent from "./synergy-component"
 
 import "./synergies.css"
 
-export default function Synergies(props: { synergies: [string, number][] }) {
+export default function Synergies(props: { synergies: [string, number][], tooltipPortal: boolean }) {
   const { t } = useTranslation()
   return (
     <div className="synergies-container my-container">
@@ -36,6 +36,7 @@ export default function Synergies(props: { synergies: [string, number][] }) {
                 type={type as Synergy}
                 value={s[1]}
                 index={index}
+                tooltipPortal={props.tooltipPortal}
               />
             )
           } else {
