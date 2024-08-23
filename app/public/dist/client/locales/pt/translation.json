@@ -1260,7 +1260,7 @@
     "SACRED_SWORD": "Distribui [100,SP] TRUE ao alvo",
     "PSYCHIC": "Oferece [50,100,200,SP] SPECIAL e queima 15 de PP para o alvo e inimigos adjacentes",
     "PSYBEAM": "Causa [25,50,100,SP] de dano especial a todos os Pokémon inimigos atrás do alvo com 50% de chance de deixá-los com CONFUSÃO por 4 segundos",
-    "DIVE": "Mergulha debaixo d'água e ganha [50,SP] SHIELD, então reaparece no meio do time inimigo, infligindo [15,30,50,SP] SPECIAL e FREEZE em todas as unidades adjacentes por 1 segundo",
+    "DIVE": "Mergulha debaixo d'água e ganha [10,20,40,SP] SHIELD, então reaparece no meio do time inimigo, infligindo [15,30,50,SP] SPECIAL e FREEZE em todas as unidades adjacentes por 1 segundo",
     "SPIKE_ARMOR": "Por [3,5,10] segundos, alvos que atacam corpo a corpo este Pokémon recebem WOUND e recebem SPECIAL igual a [100,SP]% da DEF atual",
     "FUTURE_SIGHT": "Oferece [15,30,60,SP] SPECIAL a 5 inimigos",
     "FAKE_TEARS": "Distribui [3,6,9,SP] SPECIAL para toda a equipe inimiga e ativa ARMOR_REDUCTION por 3s",
@@ -1297,7 +1297,7 @@
     "HYPNOSIS": "Coloque SLEEP 1 inimigo nas linhas de trás por [2,3.5,6,SP=0.5] segundos",
     "MIMIC": "Copia a habilidade do alvo atual",
     "HEX": "Distribui [20,40,80,SP] SPECIAL ao alvo. Dobra o dano se o alvo for BURN, CONFUSION, FREEZE, PARALYSIS, POISONNED, SILENCE, SLEEP ou WOUND",
-    "GROWTH": "Aumente o HP máximo em [30,40,50,SP] e o ATK em [3,4,5,SP]. Cresce duas vezes mais rápido se o clima for SUN",
+    "GROWTH": "Aumente o HP máximo em [10,20,30,SP] e o ATK em [3,4,5,SP]. Cresce duas vezes mais rápido se o clima for SUN",
     "HEAL_ORDER": "Oferece [25,45,65,SP] SPECIAL a inimigos adjacentes e cura [25,45,65,SP] a aliados adjacentes",
     "SHELL_TRAP": "Após o próximo PHYSICAL recebido, a armadilha explode e distribui [100,SP] SPECIAL para inimigos adjacentes",
     "DIG": "Cava no subsolo e reaparece ao lado do inimigo mais distante, causando [10,20,40,SP] SPECIAL a todos os inimigos no caminho",
@@ -1508,8 +1508,8 @@
     "DROUGHT": "50% de chance de BURN, +2 ATK após cada acerto",
     "DESOLATE_LAND": "100% de chance de BURN, +3 ATK após cada acerto",
     "RAIN_DANCE": "+4 PP por segundo. Pesque um pokémon após cada luta PvP.",
-    "DRIZZLE": "+8 PP por segundo. Pokémons raros podem ser pescados.",
-    "PRIMORDIAL_SEA": "+12 PP por segundo. Pokémons épicos podem ser pescados.",
+    "DRIZZLE": "+7 PP por segundo. Pokémons raros podem ser pescados.",
+    "PRIMORDIAL_SEA": "+10 PP por segundo. Pokémons épicos podem ser pescados.",
     "RISING_VOLTAGE": "Cada quarto ataque é um ataque triplo",
     "OVERDRIVE": "Cada terceiro ataque é um ataque triplo",
     "GUTS": "Bloqueia 4 danos",
@@ -1975,7 +1975,7 @@
     "NORMAL": "Pokémon NORMAL e seus aliados adjacentes ganham SHIELD quando o combate começa",
     "GRASS": "Pokémon GRASS curam e produzem frutas com o tempo",
     "FIRE": "Os pokémons FIRE ganham ATK após cada ataque e têm chance de BURN seus inimigos por 2 segundos",
-    "WATER": "Os pokemons WATER geram mais PP e têm 30% de chance de se esquivar de ataques e podem ser pescados com vara",
+    "WATER": "Os pokemons WATER geram mais PP e têm 20% de chance de se esquivar de ataques e podem ser pescados com vara",
     "ELECTRIC": "Ataques básicos de pokémons ELECTRIC podem desencadear dois ataques adicionais",
     "FIGHTING": "Os pokémons FIGHTING bloqueiam uma quantidade fixa de dano em cada golpe recebido",
     "PSYCHIC": "Pokémon PSYCHIC ganham AP adicional e atraem Unowns",
@@ -2249,7 +2249,7 @@
   "open_source": "Código aberto",
   "copyright": "Todos os direitos de The Pokemon Company®",
   "stage": "Estágio",
-  "spectate": "Olhar",
+  "spectate": "Assistir",
   "join": "Juntar",
   "reconnect": "Reconectar",
   "no_elo": "Apenas por diversão",
@@ -2483,7 +2483,7 @@
   "finished_preloading": "Pré-carregamento finalizado",
   "preloading_start": "Pré-carregando o jogo...",
   "loading_asset": "Carregando recurso:",
-  "loading_complete": "Carregando completo, aguardando outros jogadores...",
+  "loading_complete": "Carregamento completo, aguardando outros jogadores...",
   "search_pokemon": "Selecione um pokémon",
   "search_player": "Pesquisar por nome do jogador...",
   "team_builder": "Planificador de Times",
@@ -2552,12 +2552,12 @@
   "elorank": {
     "BEGINNER": "Iniciante",
     "POKEBALL": "Pokébola",
-    "GREATBALL": "Superball",
+    "GREATBALL": "Greatball",
     "ULTRABALL": "Últraball",
     "MASTERBALL": "Máster Ball"
   },
   "game_full": "Esta sala está completa",
-  "game_already_started": "O jogo já há sido iniciado",
+  "game_already_started": "O jogo já foi iniciado",
   "min_rank_not_reached": "Seu rank não é alto o suficiente para participar neste jogo rankeado",
   "not_whitelisted": "Este jogo está limitado a uma lista determinada de jogadores",
   "ranked_match": "Jogo Rankeado",
@@ -2589,5 +2589,17 @@
     "SIX_PACK": "Poderás usar um máximo de 6 espaços no seu tabuleiro, com indiferença do teu nível",
     "NINE_LIVES": "Serás eliminado tras perder 9 rondas",
     "CROWDED": "+3 unidades máximas no tabuleiro"
+  },
+  "loading_hints": {
+    "bug_report": "Achou algum bug? Vá no Discord e reporta no canal #bug-report",
+    "moderation": "Se você presenciar um comportamento antiesportivo no jogo, tire um print e reporte a algum moderador no Discord.",
+    "berry_tree": "Jogando com grama? Não se esqueça de cuidar das árvores de frutas perto do seu personagem.",
+    "spriters": "Muitas das animações do jogo são de trabalho de artistas independentes. Alguns aceitam comissões, assim você pode patrocinar eles. Mais informações no Discord.",
+    "wiki": "O Jogo tem uma wiki completa e acessível pelo menu lateral, não perca ela!",
+    "avatar": "Para mudar o seu avatar de jogador, jogue partidas  para ganhar XP e subir de nível. Cada nível garante à você um pacote que quando aberto lhe da fragmentos para gastar no menu Coleção e comprar novos avatares."
+  },
+  "wiki": {
+    "experience_by_rank": "Experiência por ranque",
+    "experience_by_rank_description": "Você ganha pontos de experiência no final de cada jogo baseado no seu ranque final. A cada 1000 XP, você sobe de nível e ganha um pacote."
   }
 }

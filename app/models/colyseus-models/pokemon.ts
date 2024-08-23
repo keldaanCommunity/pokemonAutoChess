@@ -4061,7 +4061,7 @@ export class Totodile extends Pokemon {
   atk = 7
   def = 2
   speDef = 2
-  maxPP = 90
+  maxPP = 100
   range = 1
   skill = Ability.WATERFALL
   attackSprite = AttackSprite.WATER_MELEE
@@ -4080,7 +4080,7 @@ export class Croconaw extends Pokemon {
   atk = 15
   def = 3
   speDef = 3
-  maxPP = 90
+  maxPP = 100
   range = 1
   skill = Ability.WATERFALL
   attackSprite = AttackSprite.WATER_MELEE
@@ -4098,7 +4098,7 @@ export class Feraligatr extends Pokemon {
   atk = 28
   def = 5
   speDef = 5
-  maxPP = 90
+  maxPP = 100
   range = 1
   skill = Ability.WATERFALL
   attackSprite = AttackSprite.WATER_MELEE

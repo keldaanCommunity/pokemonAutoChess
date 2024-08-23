@@ -64,7 +64,7 @@ import {
 } from "./commands/lobby-commands"
 import LobbyState from "./states/lobby-state"
 
-const MAX_CCU = 1000
+const MAX_CCU = 700
 
 export default class CustomLobbyRoom extends Room<LobbyState> {
   discordWebhook: WebhookClient | undefined
@@ -79,6 +79,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
   constructor() {
     super()
+    this.maxClients = 50
     if (
       process.env.PASTEBIN_API_DEV_KEY &&
       process.env.PASTEBIN_API_USERNAME &&
@@ -106,7 +107,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     this.dispatcher = new Dispatcher(this)
     this.bots = new Map<string, IBot>()
     this.tournamentCronJobs = new Map<string, CronJob>()
-    this.maxClients = 100
   }
 
   removeRoom(index: number, roomId: string) {
@@ -482,7 +482,11 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         )
       } else if (isBanned) {
         throw new Error("Account banned")
-      } else if (this.state.ccu > MAX_CCU && userProfile?.role !== Role.ADMIN) {
+      } else if (
+        this.state.ccu > MAX_CCU &&
+        userProfile?.role !== Role.ADMIN &&
+        userProfile?.role !== Role.MODERATOR
+      ) {
         throw new Error(
           "The servers are currently at maximum capacity. Please try again later."
         )
@@ -713,7 +717,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
           this.clients.forEach((c) => {
             if (
               c.userData.joinedAt &&
-              c.userData.joinedAt < Date.now() - 300000
+              c.userData.joinedAt < Date.now() - 60000
             ) {
               //logger.info("force deconnection of user", c.id)
               c.leave()

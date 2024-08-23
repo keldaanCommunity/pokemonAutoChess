@@ -106,7 +106,7 @@ export default function SynergyDetailComponent(props: {
   }
 
   return (
-    <div style={{ maxWidth: "480px" }}>
+    <div style={{ maxWidth: "560px" }}>
       <div style={{ display: "flex", alignItems: "center" }}>
         <SynergyIcon type={props.type} size="40px" />
         <h3 style={{ margin: 0 }}>{t(`synergy.${props.type}`)}</h3>
@@ -134,7 +134,7 @@ export default function SynergyDetailComponent(props: {
               padding: "5px"
             }}
           >
-            <h4 style={{ fontSize: "1.2em" }}>
+            <h4 style={{ fontSize: "1.2em", marginBottom: 0 }}>
               ({SynergyTriggers[props.type][i]}) {t(`effect.${d}`)}
             </h4>
             <EffectDescriptionComponent effect={d} />

@@ -606,66 +606,7 @@ type OnAddBotPayload = {
 
 export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
   async execute(data: OnAddBotPayload) {
-    if (this.state.users.size >= MAX_PLAYERS_PER_GAME) {
-      this.room.state.addMessage({
-        authorId: "server",
-        payload: "Room is full"
-      })
-      return
-    }
-
-    const { type } = data
-    let bot: IBot | undefined
-    if (typeof type === "object") {
-      // pick a specific bot chosen by the user
-      bot = type
-    } else {
-      // pick a random bot per difficulty
-      const difficulty = type
-      let d: FilterQuery<IBot> | undefined
-
-      switch (difficulty) {
-        case BotDifficulty.EASY:
-          d = { $lt: 800 }
-          break
-        case BotDifficulty.MEDIUM:
-          d = { $gte: 800, $lt: 1100 }
-          break
-        case BotDifficulty.HARD:
-          d = { $gte: 1100, $lt: 1400 }
-          break
-        case BotDifficulty.EXTREME:
-          d = { $gte: 1400 }
-          break
-      }
-
-      const existingBots = new Array<string>()
-      this.state.users.forEach((value: GameUser, key: string) => {
-        if (value.isBot) {
-          existingBots.push(key)
-        }
-      })
-
-      const bots = await BotV2.find({ id: { $nin: existingBots }, elo: d }, [
-        "avatar",
-        "elo",
-        "name",
-        "id"
-      ])
-
-      if (bots.length <= 0) {
-        this.room.state.addMessage({
-          authorId: "server",
-          payload: "Error: No bots found"
-        })
-        return
-      }
-
-      bot = pickRandomIn(bots)
-    }
-
-    if (bot) {
-      // we checked again the lobby size because of the async request ahead
+    try {
       if (this.state.users.size >= MAX_PLAYERS_PER_GAME) {
         this.room.state.addMessage({
           authorId: "server",
@@ -674,26 +615,89 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
         return
       }
 
-      this.state.users.set(
-        bot.id,
-        new GameUser(
-          bot.id,
-          bot.name,
-          bot.elo,
-          bot.avatar,
-          true,
-          true,
-          "",
-          Role.BOT,
-          false
-        )
-      )
+      const { type } = data
+      let bot: IBot | undefined
+      if (typeof type === "object") {
+        // pick a specific bot chosen by the user
+        bot = type
+      } else {
+        // pick a random bot per difficulty
+        const difficulty = type
+        let d: FilterQuery<IBot> | undefined
 
-      this.room.updatePlayersInfo()
-      this.room.state.addMessage({
-        authorId: "server",
-        payload: `Bot ${bot.name} added.`
-      })
+        switch (difficulty) {
+          case BotDifficulty.EASY:
+            d = { $lt: 800 }
+            break
+          case BotDifficulty.MEDIUM:
+            d = { $gte: 800, $lt: 1100 }
+            break
+          case BotDifficulty.HARD:
+            d = { $gte: 1100, $lt: 1400 }
+            break
+          case BotDifficulty.EXTREME:
+            d = { $gte: 1400 }
+            break
+        }
+
+        const existingBots = new Array<string>()
+        this.state.users.forEach((value: GameUser, key: string) => {
+          if (value.isBot) {
+            existingBots.push(key)
+          }
+        })
+
+        const bots = await BotV2.find({ id: { $nin: existingBots }, elo: d }, [
+          "avatar",
+          "elo",
+          "name",
+          "id"
+        ])
+
+        if (bots.length <= 0) {
+          this.room.state.addMessage({
+            authorId: "server",
+            payload: "Error: No bots found"
+          })
+          return
+        }
+
+        bot = pickRandomIn(bots)
+      }
+
+      if (bot) {
+        // we checked again the lobby size because of the async request ahead
+        if (this.state.users.size >= MAX_PLAYERS_PER_GAME) {
+          this.room.state.addMessage({
+            authorId: "server",
+            payload: "Room is full"
+          })
+          return
+        }
+
+        this.state.users.set(
+          bot.id,
+          new GameUser(
+            bot.id,
+            bot.name,
+            bot.elo,
+            bot.avatar,
+            true,
+            true,
+            "",
+            Role.BOT,
+            false
+          )
+        )
+
+        this.room.updatePlayersInfo()
+        this.room.state.addMessage({
+          authorId: "server",
+          payload: `Bot ${bot.name} added.`
+        })
+      }
+    } catch (error) {
+      logger.error(error)
     }
   }
 }

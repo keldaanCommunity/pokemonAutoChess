@@ -4,7 +4,7 @@
 
 ## Charged by the abyss
 
-- ![Electric](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/3c11a620df1707e68b30743b29cf900c0dd0c87e/app/public/src/assets/types/ELECTRIC.svg) More power unleasged at Electric 9
+- ![Electric](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/3c11a620df1707e68b30743b29cf900c0dd0c87e/app/public/src/assets/types/ELECTRIC.svg) More power unleashed at Electric 9
 - ![Water](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/3c11a620df1707e68b30743b29cf900c0dd0c87e/app/public/src/assets/types/WATER.svg) A new danger awaits at Water 9
 - ![pp](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/icons/PP.png)  Extra PP generated are now saved for later
 
