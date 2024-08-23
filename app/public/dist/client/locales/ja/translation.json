@@ -1769,7 +1769,7 @@
   "delete": "消去",
   "load_bot_with_url": "URLを使用してボットをロードする",
   "load": "ロード",
-  "url_created": "URLが作成されました！",
+  "url_created": "URLが作成されました",
   "export_hint": " 以下のデータをコピー＆ペーストすることで、現在の作業をエクスポートできます。後でボット データをインポートできます。",
   "bot_ready_submission": "ボットの準備ができたと思われる場合は、ボットを Discord コミュニティに送信できます。あなたのボットは discord チャンネル #bot-creation でレビューされます。",
   "cancel": "キャンセル",

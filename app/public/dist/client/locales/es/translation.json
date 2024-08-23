@@ -2591,7 +2591,7 @@
   "delete": "Borrar",
   "load_bot_with_url": "Cargar bot con URL",
   "load": "Carga",
-  "url_created": "¡URL creada!",
+  "url_created": "URL creada",
   "export_hint": " Puede exportar su trabajo actual copiando y pegando los siguientes datos. Luego puede importar los datos del bot más tarde.",
   "bot_ready_submission": "Si cree que su bot está listo, puede enviarlo a la comunidad de discord. Su bot será revisado en el canal de discordia #bot-creation.",
   "cancel": "Cancelar",

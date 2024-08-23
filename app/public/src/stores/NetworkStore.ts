@@ -140,26 +140,11 @@ export const networkSlice = createSlice({
     ) => {
       state.lobby?.send(Transfer.CHANGE_AVATAR, action.payload)
     },
-    requestBotList: (
-      state,
-      action: PayloadAction<{ withSteps: boolean } | undefined>
-    ) => {
-      state.lobby?.send(Transfer.REQUEST_BOT_LIST, action.payload)
-    },
-    createBot: (state, action: PayloadAction<IBot>) => {
-      state.lobby?.send(Transfer.BOT_CREATION, { bot: action.payload })
-    },
-    requestBotData: (state, action: PayloadAction<string>) => {
-      state.lobby?.send(Transfer.REQUEST_BOT_DATA, action.payload)
-    },
     addBot: (state, action: PayloadAction<BotDifficulty | IBot>) => {
       state.preparation?.send(Transfer.ADD_BOT, action.payload)
     },
     removeBot: (state, action: PayloadAction<string>) => {
       state.preparation?.send(Transfer.REMOVE_BOT, action.payload)
-    },
-    listBots: (state) => {
-      state.preparation?.send(Transfer.REQUEST_BOT_LIST)
     },
     toggleReady: (state, action: PayloadAction<boolean | undefined>) => {
       state.preparation?.send(Transfer.TOGGLE_READY, action.payload)
@@ -313,12 +298,8 @@ export const {
   joinAfter,
   changeName,
   changeAvatar,
-  requestBotList,
-  createBot,
-  requestBotData,
   addBot,
   removeBot,
-  listBots,
   toggleReady,
   toggleEloRoom,
   itemClick,

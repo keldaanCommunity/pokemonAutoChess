@@ -7,9 +7,7 @@ import {
   subscribeLobby
 } from "colyseus"
 import { CronJob } from "cron"
-import { WebhookClient } from "discord.js"
 import admin from "firebase-admin"
-import { PastebinAPI } from "pastebin-ts/dist/api"
 import Message from "../models/colyseus-models/message"
 import { TournamentSchema } from "../models/colyseus-models/tournament"
 import BannedUser from "../models/mongo-models/banned-user"
@@ -17,7 +15,6 @@ import { IBot } from "../models/mongo-models/bot-v2"
 import ChatV2 from "../models/mongo-models/chat-v2"
 import Tournament from "../models/mongo-models/tournament"
 import UserMetadata from "../models/mongo-models/user-metadata"
-import { createBotList } from "../services/bots"
 import { Emotion, IPlayer, Role, Title, Transfer } from "../types"
 import {
   GREATBALL_RANKED_LOBBY_CRON,
@@ -47,7 +44,6 @@ import {
   GiveRoleCommand,
   GiveTitleCommand,
   NextTournamentStageCommand,
-  OnBotUploadCommand,
   OnCreateTournamentCommand,
   OnJoinCommand,
   OnLeaveCommand,
@@ -67,10 +63,7 @@ import LobbyState from "./states/lobby-state"
 const MAX_CCU = 1000
 
 export default class CustomLobbyRoom extends Room<LobbyState> {
-  discordWebhook: WebhookClient | undefined
-  discordBanWebhook: WebhookClient | undefined
   bots: Map<string, IBot>
-  pastebin: PastebinAPI | undefined = undefined
   unsubscribeLobby: (() => void) | undefined
   rooms: RoomListingData<any>[] | undefined
   dispatcher: Dispatcher<this>
@@ -79,29 +72,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
   constructor() {
     super()
-    if (
-      process.env.PASTEBIN_API_DEV_KEY &&
-      process.env.PASTEBIN_API_USERNAME &&
-      process.env.PASTEBIN_API_DEV_KEY
-    ) {
-      this.pastebin = new PastebinAPI({
-        api_dev_key: process.env.PASTEBIN_API_DEV_KEY!,
-        api_user_name: process.env.PASTEBIN_API_USERNAME!,
-        api_user_password: process.env.PASTEBIN_API_PASSWORD!
-      })
-    }
-
-    if (process.env.DISCORD_WEBHOOK_URL) {
-      this.discordWebhook = new WebhookClient({
-        url: process.env.DISCORD_WEBHOOK_URL
-      })
-    }
-
-    if (process.env.DISCORD_BAN_WEBHOOK_URL) {
-      this.discordBanWebhook = new WebhookClient({
-        url: process.env.DISCORD_BAN_WEBHOOK_URL
-      })
-    }
 
     this.dispatcher = new Dispatcher(this)
     this.bots = new Map<string, IBot>()
@@ -180,8 +150,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       this.dispatcher.dispatch(new DeleteBotCommand(), { client, message })
     })
 
-    this.onMessage(Transfer.ADD_BOT_DATABASE, async (client, message) => {
-      this.dispatcher.dispatch(new AddBotCommand(), { client, message })
+    this.onMessage(Transfer.ADD_BOT_DATABASE, async (client, url) => {
+      this.dispatcher.dispatch(new AddBotCommand(), { client, url })
     })
 
     this.onMessage(
@@ -295,33 +265,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         this.dispatcher.dispatch(new GiveRoleCommand(), { client, uid, role })
       }
     )
-
-    this.onMessage(Transfer.BOT_CREATION, (client, { bot }: { bot: IBot }) => {
-      this.dispatcher.dispatch(new OnBotUploadCommand(), { client, bot })
-    })
-
-    this.onMessage(
-      Transfer.REQUEST_BOT_LIST,
-      (client, options?: { withSteps: boolean }) => {
-        try {
-          client.send(
-            Transfer.REQUEST_BOT_LIST,
-            createBotList(this.bots, options)
-          )
-        } catch (error) {
-          logger.error(error)
-        }
-      }
-    )
-
-    this.onMessage(Transfer.REQUEST_BOT_DATA, (client, bot) => {
-      try {
-        const botData = this.bots.get(bot)
-        client.send(Transfer.REQUEST_BOT_DATA, botData)
-      } catch (error) {
-        logger.error(error)
-      }
-    })
 
     this.onMessage(Transfer.OPEN_BOOSTER, (client) => {
       this.dispatcher.dispatch(new OpenBoosterCommand(), { client })

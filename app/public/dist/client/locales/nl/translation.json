@@ -1769,7 +1769,7 @@
   "delete": "Verwijderen",
   "load_bot_with_url": "Laad bot met URL",
   "load": "Laden",
-  "url_created": "URL gemaakt!",
+  "url_created": "URL gemaakt",
   "export_hint": " U kunt uw huidige werk exporteren door de volgende gegevens te kopiëren en te plakken. U kunt de botgegevens dan later importeren.",
   "bot_ready_submission": "Als je denkt dat je bot klaar is, kun je je bot indienen bij de discord-community. Je bot wordt beoordeeld in het discord-kanaal #bot-creation.",
   "cancel": "Annuleren",

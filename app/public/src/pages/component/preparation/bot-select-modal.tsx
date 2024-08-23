@@ -1,15 +1,14 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { useAppDispatch } from "../../../hooks"
 import { addBot } from "../../../stores/NetworkStore"
-import { setBotsList } from "../../../stores/PreparationStore"
 import { cc } from "../../utils/jsx"
 import { EloBadge } from "../profile/elo-badge"
 import { InlineAvatar } from "../profile/inline-avatar"
 import "./bot-select-modal.css"
 
-export function BotSelectModal(props: { bots: IBot[] }) {
+export function BotSelectModal(props: { botsSelected: string[], close: () => void }) {
   const dispatch = useAppDispatch()
 
   const [sortBotsOrder, setSortBotsOrder] = useState<boolean>(false)
@@ -27,8 +26,18 @@ export function BotSelectModal(props: { bots: IBot[] }) {
     }
   }
 
-  const botsListSorted = [...props.bots]
-    .filter((b) => b.name.toLowerCase().includes(queryBot.toLowerCase()))
+  const [botsList, setBotsList] = useState<IBot[] | null>(null)
+  useEffect(() => {
+    if (botsList === null) {
+      fetch("/bots").then((r) => r.json()).then((bots) => {
+        setBotsList(bots)
+      })
+    }
+  }, [])
+
+  const botsListSorted = (botsList ?? [])
+    .filter((bot) => !props.botsSelected || props.botsSelected.includes(bot.id) === false)
+    .filter((bot) => bot.name.toLowerCase().includes(queryBot.toLowerCase()))
     .sort(
       (a, b) =>
         (a[sortBotsCriteria] < b[sortBotsCriteria] ? -1 : 1) *
@@ -89,9 +98,7 @@ export function BotSelectModal(props: { bots: IBot[] }) {
       <footer className="actions">
         <button
           className="bubbly red"
-          onClick={() => {
-            dispatch(setBotsList(null))
-          }}
+          onClick={() => { props.close() }}
         >
           {t("cancel")}
         </button>
@@ -99,7 +106,7 @@ export function BotSelectModal(props: { bots: IBot[] }) {
           className="bubbly blue"
           onClick={() => {
             botsSelection.forEach((bot) => dispatch(addBot(bot)))
-            dispatch(setBotsList(null))
+            props.close()
           }}
         >
           {t("add")} {botsSelection.size} {t("bot")}

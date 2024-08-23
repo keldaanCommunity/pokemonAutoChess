@@ -2591,7 +2591,7 @@
   "delete": "Löschen",
   "load_bot_with_url": "Bot mit URL laden",
   "load": "Belastung",
-  "url_created": "URL erstellt!",
+  "url_created": "URL erstellt",
   "export_hint": " Sie können Ihre aktuelle Arbeit exportieren, indem Sie die folgenden Daten kopieren und einfügen. Anschließend können Sie die Bot-Daten später importieren.",
   "bot_ready_submission": "Wenn Sie der Meinung sind, dass Ihr Bot bereit ist, können Sie ihn bei der Discord-Community einreichen. Ihr Bot wird im Discord-Kanal #bot-creation überprüft.",
   "cancel": "Abbrechen",
