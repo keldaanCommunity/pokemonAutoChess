@@ -2589,5 +2589,17 @@
     "SIX_PACK": "Poderás usar um máximo de 6 espaços no seu tabuleiro, com indiferença do teu nível",
     "NINE_LIVES": "Serás eliminado tras perder 9 rondas",
     "CROWDED": "+3 unidades máximas no tabuleiro"
+  },
+  "loading_hints": {
+    "bug_report": "Achou algum bug? Vá no Discord e reporta no canal #bug-report",
+    "moderation": "Se você presenciar um comportamento antiesportivo no jogo, tire um print e reporte a algum moderador no Discord.",
+    "berry_tree": "Jogando com grama? Não se esqueça de cuidar das árvores de frutas perto do seu personagem.",
+    "spriters": "Muitas das animações do jogo são de trabalho de artistas independentes. Alguns aceitam comissões, assim você pode patrocinar eles. Mais informações no Discord.",
+    "wiki": "O Jogo tem uma wiki completa e acessível pelo menu lateral, não perca ela!",
+    "avatar": "Para mudar o seu avatar de jogador, jogue partidas  para ganhar XP e subir de nível. Cada nível garante à você um pacote que quando aberto lhe da fragmentos para gastar no menu Coleção e comprar novos avatares."
+  },
+  "wiki": {
+    "experience_by_rank": "Experiência por ranque",
+    "experience_by_rank_description": "Você ganha pontos de experiência no final de cada jogo baseado no seu ranque final. A cada 1000 XP, você sobe de nível e ganha um pacote."
   }
 }
