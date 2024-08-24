@@ -41,12 +41,9 @@ import {
   removeTournament,
   removeTournamentBracket,
   setBoosterContent,
-  setBotData,
-  setBotList,
   setCcu,
   setLanguage,
   setNextSpecialGame,
-  setPastebinUrl,
   setSearchedUser,
   setSuggestions,
   setUser,
@@ -443,16 +440,8 @@ export async function joinLobbyRoom(
             dispatch(pushBotLog(message))
           })
 
-          room.onMessage(Transfer.PASTEBIN_URL, (json: { url: string }) => {
-            dispatch(setPastebinUrl(json.url))
-          })
-
           room.onMessage(Transfer.ROOMS, (rooms: RoomAvailable[]) => {
             rooms.forEach((room) => dispatch(addRoom(room)))
-          })
-
-          room.onMessage(Transfer.REQUEST_BOT_LIST, (bots: IBot[]) => {
-            dispatch(setBotList(bots))
           })
 
           room.onMessage(Transfer.ADD_ROOM, ([, room]) => {
@@ -472,10 +461,6 @@ export async function joinLobbyRoom(
           room.onMessage(Transfer.USER, (user: LobbyUser) =>
             dispatch(setSearchedUser(user))
           )
-
-          room.onMessage(Transfer.REQUEST_BOT_DATA, (data: IBot) => {
-            dispatch(setBotData(data))
-          })
 
           room.onMessage(
             Transfer.BOOSTER_CONTENT,

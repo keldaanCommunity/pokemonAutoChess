@@ -5,7 +5,6 @@ import React, { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Navigate } from "react-router-dom"
 import { GameUser } from "../../../models/colyseus-models/game-user"
-import { IBot } from "../../../models/mongo-models/bot-v2"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import GameState from "../../../rooms/states/game-state"
 import PreparationState from "../../../rooms/states/preparation-state"
@@ -24,7 +23,6 @@ import {
   pushMessage,
   removeMessage,
   removeUser,
-  setBotsList,
   setGameStarted,
   setGameMode,
   setName,
@@ -188,10 +186,6 @@ export default function Preparation() {
         dispatch(leavePreparation())
         setToLobby(true)
         playSound(SOUNDS.LEAVE_ROOM)
-      })
-
-      r.onMessage(Transfer.REQUEST_BOT_LIST, (bots: IBot[]) => {
-        dispatch(setBotsList(bots))
       })
 
       r.onMessage(Transfer.GAME_START, async (roomId) => {

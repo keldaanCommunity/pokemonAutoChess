@@ -70,6 +70,7 @@
   padding: 0.5em;
   color: white;
   max-height: 90vh;
+  overflow-y: auto;
 }
 
 .modal > footer {

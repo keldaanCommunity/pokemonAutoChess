@@ -72,7 +72,7 @@ Added artificial items, obtained through Artificial synergy:
 - Magmarizer: +8 Attack ; Every successful attack increase ATK by 1 and inflicts BURN for 4 seconds
 - Exp Share: Get the best values of Attack, Defense and Special Defense from adjacent allies in the same row
 - Macho Brace: +15 Attack, -25% attack speed; gives Fighting synergy
-- Light Ball: +75% AP, gives Light synergy
+- Light Ball: +75 AP, gives Light synergy
 - Toxic Orb: +100% Attack, gives Poison synergy, holder is poisonned for the whole fight
 - Metronome: Gives SOUND synergy. Every second, the holder gains 5 PP
 - Metal Coat: Gives STEEL synergy. Reduce incoming damage by 20%

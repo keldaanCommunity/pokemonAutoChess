@@ -36,9 +36,6 @@ export interface IUserLobbyState {
   tabIndex: number
   preparationRooms: RoomAvailable[]
   gameRooms: RoomAvailable[]
-  botList: IBot[]
-  pastebinUrl: string
-  botData: IBot
   pokemonCollection: IPokemonConfig[]
   boosterContent: PkmWithConfig[]
   suggestions: ISuggestionUser[]
@@ -63,19 +60,6 @@ const initialState: IUserLobbyState = {
   preparationRooms: [],
   gameRooms: [],
   searchedUser: undefined,
-  botList: [],
-  pastebinUrl: "",
-  botData: {
-    steps: Array.from({ length: MAX_BOTS_STAGE + 1 }, () => ({
-      roundsRequired: 1,
-      board: []
-    })) as IStep[],
-    avatar: "ditto",
-    author: "",
-    elo: 1200,
-    name: "ditto",
-    id: ""
-  },
   nextSpecialGame: null,
   tournaments: [],
   ccu: 0
@@ -170,15 +154,6 @@ export const lobbySlice = createSlice({
     },
     setSearchedUser: (state, action: PayloadAction<LobbyUser | undefined>) => {
       state.searchedUser = action.payload
-    },
-    setBotList: (state, action: PayloadAction<IBot[]>) => {
-      state.botList = action.payload
-    },
-    setPastebinUrl: (state, action: PayloadAction<string>) => {
-      state.pastebinUrl = action.payload
-    },
-    setBotData: (state, action: PayloadAction<IBot>) => {
-      state.botData = action.payload
     },
     setBoosterContent: (state, action: PayloadAction<PkmWithConfig[]>) => {
       state.boosterContent = action.payload
@@ -307,9 +282,6 @@ export const {
   removeRoom,
   setCcu,
   setSearchedUser,
-  setBotList,
-  setPastebinUrl,
-  setBotData,
   leaveLobby,
   setSuggestions,
   pushBotLog,
