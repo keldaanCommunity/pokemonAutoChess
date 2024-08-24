@@ -1,4 +1,3 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import {
   IGameRecord,
@@ -16,6 +15,17 @@ import "./history.css"
 
 export default function History(props: { history: IGameRecord[] }) {
   const { t } = useTranslation()
+  const loadMore = async () => {
+    try {
+      const skip = props.history.length
+      const limit = 10
+
+      console.log("Loading More History, current length: ", skip, ", limit:", limit)
+    } catch (error) {
+      console.error("Failed to load more history:", error)
+    }
+  };
+
   return (
     <article className="game-history-list">
       <h2>{t("game_history")}</h2>
@@ -43,6 +53,12 @@ export default function History(props: { history: IGameRecord[] }) {
             </div>
           ))}
       </div>
+      <button
+          onClick={loadMore}
+          className="bubbly green"
+      >
+        {t("load_more")}
+      </button>
     </article>
   )
 }
