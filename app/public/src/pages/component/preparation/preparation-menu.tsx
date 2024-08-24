@@ -3,7 +3,6 @@ import firebase from "firebase/compat/app"
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { IGameUser } from "../../../../../models/colyseus-models/game-user"
-import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import { Role } from "../../../../../types"
 import { MAX_PLAYERS_PER_GAME } from "../../../../../types/Config"
@@ -18,7 +17,6 @@ import {
   changeRoomPassword,
   deleteRoom,
   gameStartRequest,
-  listBots,
   toggleEloRoom,
   toggleReady
 } from "../../../stores/NetworkStore"
@@ -42,9 +40,7 @@ export default function PreparationMenu() {
     (state) => state.preparation.password
   )
   const noElo: boolean = useAppSelector((state) => state.preparation.noElo)
-  const botsList: IBot[] | null = useAppSelector(
-    (state) => state.preparation.botsList
-  )
+  const [showBotSelectModal, setShowBotSelectModal] = useState(false)
   const uid: string = useAppSelector((state) => state.network.uid)
   const isOwner: boolean = useAppSelector(
     (state) => state.preparation.ownerId === state.network.uid
@@ -237,7 +233,7 @@ export default function PreparationMenu() {
         className="bubbly blue"
         onClick={() => {
           if (botDifficulty === BotDifficulty.CUSTOM) {
-            dispatch(listBots())
+            setShowBotSelectModal(true)
           } else {
             dispatch(addBot(botDifficulty))
           }
@@ -339,7 +335,7 @@ export default function PreparationMenu() {
         {startGameButton}
       </div>
 
-      {isOwner && botsList != null && <BotSelectModal bots={botsList} />}
+      {isOwner && showBotSelectModal && <BotSelectModal botsSelected={users.filter((u) => u.isBot).map(u => u.id)} close={() => setShowBotSelectModal(false)} />}
     </div>
   )
 }

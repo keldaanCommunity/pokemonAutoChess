@@ -18,7 +18,6 @@ import {
   OnJoinCommand,
   OnKickPlayerCommand,
   OnLeaveCommand,
-  OnListBotsCommand,
   OnNewMessageCommand,
   OnRemoveBotCommand,
   OnRoomNameCommand,
@@ -288,18 +287,6 @@ export default class PreparationRoom extends Room<PreparationState> {
             user: user
           })
         }
-      } catch (error) {
-        logger.error(error)
-      }
-    })
-    this.onMessage(Transfer.REQUEST_BOT_LIST, (client: Client) => {
-      logger.info(Transfer.REQUEST_BOT_LIST, this.roomName)
-      try {
-        const user = this.state.users.get(client.auth.uid)
-
-        this.dispatcher.dispatch(new OnListBotsCommand(), {
-          user: user
-        })
       } catch (error) {
         logger.error(error)
       }

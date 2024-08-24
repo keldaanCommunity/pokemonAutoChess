@@ -1,5 +1,6 @@
 import { BotV2, IBot } from "../models/mongo-models/bot-v2"
 import { nanoid } from "nanoid"
+import { mongo } from "mongoose"
 
 const bots = new Map<string, IBot>()
 
@@ -20,8 +21,7 @@ export async function fetchBots() {
   return bots
 }
 
-export function createBotList(
-  bots: Map<string, IBot>,
+export function getBotsList(
   options: { withSteps: boolean } = { withSteps: true }
 ): Partial<IBot>[] {
   return [...bots.values()].map((bot) => ({
@@ -32,4 +32,36 @@ export function createBotList(
     elo: bot.elo,
     ...(options.withSteps ? { steps: bot.steps } : {})
   }))
+}
+
+export function getBotData(id: string): IBot | undefined {
+  return bots.get(id)
+}
+
+export async function addBotToDatabase(json: {
+  name: string
+  avatar: string
+  elo: number
+  author: string
+  steps: number
+}): Promise<IBot> {
+  const resultCreate = await BotV2.create({
+    name: json.name,
+    avatar: json.avatar,
+    elo: json.elo ?? 1200,
+    author: json.author,
+    steps: json.steps,
+    id: nanoid()
+  })
+
+  bots.set(resultCreate.id, resultCreate)
+  return resultCreate
+}
+
+export async function deleteBotFromDatabase(
+  id: string
+): Promise<mongo.DeleteResult> {
+  const resultDelete = await BotV2.deleteOne({ id })
+  bots.delete(id)
+  return resultDelete
 }

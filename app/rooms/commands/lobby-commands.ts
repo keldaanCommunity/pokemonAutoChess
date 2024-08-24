@@ -1,7 +1,6 @@
 import { Command } from "@colyseus/command"
 import { ArraySchema } from "@colyseus/schema"
 import { Client, RoomListingData, matchMaker } from "colyseus"
-import { EmbedBuilder } from "discord.js"
 import { nanoid } from "nanoid"
 import {
   getRemainingPlayers,
@@ -16,7 +15,7 @@ import {
   TournamentPlayerSchema
 } from "../../models/colyseus-models/tournament"
 import BannedUser from "../../models/mongo-models/banned-user"
-import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
+import { BotV2 } from "../../models/mongo-models/bot-v2"
 import DetailledStatistic from "../../models/mongo-models/detailled-statistic-v2"
 import { Tournament } from "../../models/mongo-models/tournament"
 import UserMetadata, {
@@ -24,8 +23,14 @@ import UserMetadata, {
 } from "../../models/mongo-models/user-metadata"
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../models/precomputed/precomputed-emotions"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
-import { getAvatarSrc, getPortraitSrc } from "../../public/src/utils"
-import { createBotList } from "../../services/bots"
+import { getPortraitSrc } from "../../public/src/utils"
+import {
+  addBotToDatabase,
+  deleteBotFromDatabase,
+  getBotData
+} from "../../services/bots"
+import { discordService } from "../../services/discord"
+import { pastebinService } from "../../services/pastebin"
 import {
   CDN_PORTRAIT_URL,
   Emotion,
@@ -815,13 +820,13 @@ export class BanUserCommand extends Command<
     reason: string
   }) {
     try {
-      const potentialBannedUser = await UserMetadata.findOne({ uid: uid })
+      const bannedUser = await UserMetadata.findOne({ uid: uid })
       const user = this.state.users.get(client.auth.uid)
       if (
         user &&
-        potentialBannedUser &&
+        bannedUser &&
         (user.role === Role.ADMIN || user.role === Role.MODERATOR) &&
-        potentialBannedUser.role !== Role.ADMIN
+        bannedUser.role !== Role.ADMIN
       ) {
         this.state.removeMessages(uid)
         const banned = await BannedUser.findOne({ uid })
@@ -830,36 +835,18 @@ export class BanUserCommand extends Command<
             uid,
             author: user.name,
             time: Date.now(),
-            name: potentialBannedUser.displayName
+            name: bannedUser.displayName
           })
           client.send(
             Transfer.BANNED,
-            `${user.name} banned the user ${potentialBannedUser.displayName}`
+            `${user.name} banned the user ${bannedUser.displayName}`
           )
 
-          const dsEmbed = new EmbedBuilder()
-            .setTitle(
-              `${user.name} banned the user ${potentialBannedUser.displayName}`
-            )
-            .setAuthor({
-              name: user.name,
-              iconURL: getAvatarSrc(user.avatar)
-            })
-            .setDescription(
-              `${user.name} banned the user ${potentialBannedUser.displayName}. Reason: ${reason}`
-            )
-            .setThumbnail(getAvatarSrc(potentialBannedUser.avatar))
-          try {
-            this.room.discordBanWebhook?.send({
-              embeds: [dsEmbed]
-            })
-          } catch (error) {
-            logger.error(error)
-          }
+          discordService.announceBan(user, bannedUser, reason)
         } else {
           client.send(
             Transfer.BANNED,
-            `${potentialBannedUser.displayName} was already banned`
+            `${bannedUser.displayName} was already banned`
           )
         }
         this.room.clients.forEach((c) => {
@@ -894,21 +881,7 @@ export class UnbanUserCommand extends Command<
         const res = await BannedUser.deleteOne({ uid })
         if (res.deletedCount > 0) {
           client.send(Transfer.BANNED, `${user.name} unbanned the user ${name}`)
-          const dsEmbed = new EmbedBuilder()
-            .setTitle(`${user.name} unbanned the user ${name}`)
-            .setAuthor({
-              name: user.name,
-              iconURL: getAvatarSrc(user.avatar)
-            })
-            .setDescription(`${user.name} unbanned the user ${name}`)
-            .setThumbnail(getAvatarSrc(user.avatar))
-          try {
-            this.room.discordBanWebhook?.send({
-              embeds: [dsEmbed]
-            })
-          } catch (error) {
-            logger.error(error)
-          }
+          discordService.announceUnban(user, name)
         }
       }
     } catch (error) {
@@ -940,9 +913,9 @@ export class SelectLanguageCommand extends Command<
 
 export class AddBotCommand extends Command<
   CustomLobbyRoom,
-  { client: Client; message: any }
+  { client: Client; url: string }
 > {
-  async execute({ client, message }: { client: Client; message: any }) {
+  async execute({ client, url }: { client: Client; url: string }) {
     try {
       const user = this.state.users.get(client.auth.uid)
       if (
@@ -951,10 +924,10 @@ export class AddBotCommand extends Command<
           user.role === Role.BOT_MANAGER ||
           user.role === Role.MODERATOR)
       ) {
-        const id = message.slice(21)
+        const id = url.slice(21)
         client.send(Transfer.BOT_DATABASE_LOG, `retrieving id : ${id} ...`)
         client.send(Transfer.BOT_DATABASE_LOG, "retrieving data ...")
-        const data = await this.room.pastebin?.getPaste(id, false)
+        const data = await pastebinService.getPaste(id, false)
         if (data) {
           client.send(Transfer.BOT_DATABASE_LOG, "parsing JSON data ...")
           const json = JSON.parse(data)
@@ -979,45 +952,22 @@ export class AddBotCommand extends Command<
             Transfer.BOT_DATABASE_LOG,
             `creating Bot ${json.avatar} by ${json.author}...`
           )
-          const resultCreate = await BotV2.create({
+
+          const resultCreate = await addBotToDatabase({
             name: json.name,
             avatar: json.avatar,
             elo: json.elo ? json.elo : 1200,
             author: json.author,
-            steps: json.steps,
-            id: nanoid()
+            steps: json.steps
           })
 
-          const dsEmbed = new EmbedBuilder()
-            .setTitle(
-              `BOT ${json.name} by @${json.author} loaded by ${user.name}`
-            )
-            .setURL(message as string)
-            .setAuthor({
-              name: user.name,
-              iconURL: getAvatarSrc(user.avatar)
-            })
-            .setDescription(
-              `BOT ${json.name} by @${json.author} (url: ${message} ) loaded by ${user.name}`
-            )
-            .setThumbnail(getAvatarSrc(json.avatar))
-          try {
-            this.room.discordWebhook?.send({
-              embeds: [dsEmbed]
-            })
-          } catch (error) {
-            logger.error(error)
-          }
+          discordService.announceBotAddition(resultCreate, url, user)
 
           this.room.bots.set(resultCreate.id, resultCreate)
-          this.room.broadcast(
-            Transfer.REQUEST_BOT_LIST,
-            createBotList(this.room.bots, { withSteps: true })
-          )
         } else {
           client.send(
             Transfer.BOT_DATABASE_LOG,
-            `no pastebin found with given url ${message}`
+            `no pastebin found with given url ${url}`
           )
         }
       }
@@ -1042,41 +992,23 @@ export class DeleteBotCommand extends Command<
           user.role === Role.MODERATOR)
       ) {
         const id = message
-        const botData = this.room.bots.get(id)
+        const botData = getBotData(id)
+        if (!botData) {
+          client.send(Transfer.BOT_DATABASE_LOG, `Bot not found:${id}`)
+          return
+        }
         client.send(
           Transfer.BOT_DATABASE_LOG,
           `deleting bot ${botData?.name}by @${botData?.author} id ${id}`
         )
-        const resultDelete = await BotV2.deleteOne({ id: id })
+        const resultDelete = await deleteBotFromDatabase(id)
         client.send(
           Transfer.BOT_DATABASE_LOG,
           JSON.stringify(resultDelete, null, 2)
         )
-        const dsEmbed = new EmbedBuilder()
-          .setTitle(
-            `BOT ${botData?.name} by @${botData?.author} deleted by ${user.name}`
-          )
-          .setAuthor({
-            name: user.name,
-            iconURL: getAvatarSrc(user.avatar)
-          })
-          .setDescription(
-            `BOT ${botData?.name} by @${botData?.author} (id: ${message} ) deleted by ${user.name}`
-          )
-          .setThumbnail(getAvatarSrc(botData?.avatar ? botData?.avatar : ""))
-        try {
-          this.room.discordWebhook?.send({
-            embeds: [dsEmbed]
-          })
-        } catch (error) {
-          logger.error(error)
-        }
+        discordService.announceBotDeletion(botData, user)
 
         this.room.bots.delete(id)
-        this.room.broadcast(
-          Transfer.REQUEST_BOT_LIST,
-          createBotList(this.room.bots, { withSteps: true })
-        )
       }
     } catch (error) {
       logger.error(error)
@@ -1084,51 +1016,6 @@ export class DeleteBotCommand extends Command<
     }
   }
 }
-
-export class OnBotUploadCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client; bot: IBot }
-> {
-  execute({ client, bot }: { client: Client; bot: IBot }) {
-    try {
-      const user = this.state.users.get(client.auth.uid)
-      if (!user) return
-      this.room.pastebin
-        ?.createPaste({
-          text: JSON.stringify(bot),
-          title: `${user.name} has uploaded BOT ${bot.name}`,
-          format: "json"
-        })
-        .then((data: unknown) => {
-          const dsEmbed = new EmbedBuilder()
-            .setTitle(`BOT ${bot.name} created by ${bot.author}`)
-            .setURL(data as string)
-            .setAuthor({
-              name: user.name,
-              iconURL: getAvatarSrc(user.avatar)
-            })
-            .setDescription(
-              `A new bot has been created by ${user.name}, You can import the data in the Pokemon Auto Chess Bot Builder (url: ${data} ).`
-            )
-            .setThumbnail(getAvatarSrc(bot.avatar))
-          client.send(Transfer.PASTEBIN_URL, { url: data as string })
-          try {
-            this.room.discordWebhook?.send({
-              embeds: [dsEmbed]
-            })
-          } catch (error) {
-            logger.error(error)
-          }
-        })
-        .catch((error) => {
-          logger.error(error)
-        })
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-}
-
 export class OpenSpecialGameCommand extends Command<
   CustomLobbyRoom,
   { gameMode: GameMode; minRank?: EloRank | null; noElo?: boolean }
