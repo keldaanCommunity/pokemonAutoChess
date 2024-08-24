@@ -5,7 +5,7 @@ import ExperienceManager from "../../../models/colyseus-models/experience-manage
 import PokemonCollection from "../../../models/colyseus-models/pokemon-collection"
 import Synergies from "../../../models/colyseus-models/synergies"
 import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
-import { IDps, IPlayer, ISimulation } from "../../../types"
+import { IDps, IExperienceManager, IPlayer, ISimulation } from "../../../types"
 import { StageDuration } from "../../../types/Config"
 import { GamePhaseState, Team } from "../../../types/enum/Game"
 import { Item } from "../../../types/enum/Item"
@@ -30,7 +30,7 @@ export interface GameStateStore {
   interest: number
   streak: number
   shopLocked: boolean
-  experienceManager: ExperienceManager
+  experienceManager: IExperienceManager
   shop: Pkm[]
   itemsProposition: Item[]
   pokemonsProposition: PkmProposition[]
@@ -108,8 +108,16 @@ export const gameSlice = createSlice({
     setShopLocked: (state, action: PayloadAction<boolean>) => {
       state.shopLocked = action.payload
     },
-    setExperienceManager: (state, action: PayloadAction<ExperienceManager>) => {
-      state.experienceManager = action.payload
+    updateExperienceManager: (
+      state,
+      action: PayloadAction<IExperienceManager>
+    ) => {
+      state.experienceManager = {
+        ...state.experienceManager,
+        experience: action.payload.experience,
+        expNeeded: action.payload.expNeeded,
+        level: action.payload.level
+      }
     },
     changePlayer: (
       state,
@@ -270,7 +278,7 @@ export const {
   setNoELO,
   addPlayer,
   removePlayer,
-  setExperienceManager,
+  updateExperienceManager,
   setStreak,
   setInterest,
   setMoney,

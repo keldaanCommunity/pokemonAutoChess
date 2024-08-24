@@ -14,6 +14,7 @@ import {
   IDragDropCombineMessage,
   IDragDropItemMessage,
   IDragDropMessage,
+  IExperienceManager,
   IPlayer,
   ISimplePlayer,
   Role,
@@ -39,7 +40,7 @@ import {
   removeDpsMeter,
   removePlayer,
   setAdditionalPokemons,
-  setExperienceManager,
+  updateExperienceManager,
   setInterest,
   setItemsProposition,
   setLife,
@@ -231,7 +232,7 @@ export default function Game() {
     // create a history entry to prevent back button switching page immediately, and leave game properly instead
     window.history.pushState(null, "", window.location.href);
     const confirmLeave = () => {
-      if(confirm("Do you want to leave game ?")){
+      if (confirm("Do you want to leave game ?")) {
         leave()
       } else {
         // push again another entry to prevent back button from switching page, effectively canceling the back action
@@ -243,7 +244,7 @@ export default function Game() {
     return () => {
       window.removeEventListener("popstate", confirmLeave)
     }
-  },[])
+  }, [])
 
   useEffect(() => {
     const connect = () => {
@@ -312,7 +313,7 @@ export default function Game() {
       })
       room.onMessage(Transfer.SHOW_EMOTE, (message) => {
         const g = getGameScene()
-        if ( g?.minigameManager?.pokemons?.size && g.minigameManager.pokemons.size > 0) {
+        if (g?.minigameManager?.pokemons?.size && g.minigameManager.pokemons.size > 0) {
           // early return here to prevent showing animation twice
           return g.minigameManager?.showEmote(message.id, message?.emote)
         }
@@ -440,7 +441,7 @@ export default function Game() {
       })
 
       room.state.additionalPokemons.onAdd(() => {
-        dispatch(setAdditionalPokemons(room.state.additionalPokemons.map(p=>p)))
+        dispatch(setAdditionalPokemons([...room.state.additionalPokemons]))
       })
 
       room.state.simulations.onRemove(() => {
@@ -532,9 +533,19 @@ export default function Game() {
             setFinalRankVisible(true)
           }
         })
-        player.listen("experienceManager", (value) => {
+        player.listen("experienceManager", (experienceManager) => {
           if (player.id === uid) {
-            dispatch(setExperienceManager(value))
+            dispatch(updateExperienceManager(experienceManager))
+            const fields: NonFunctionPropNames<IExperienceManager>[] = [
+              "experience",
+              "expNeeded",
+              "level"
+            ]
+            fields.forEach((field) => {
+              experienceManager.listen(field, (value) => {
+                dispatch(updateExperienceManager({ ...experienceManager, [field]: value } as IExperienceManager))
+              })
+            })
           }
         })
         player.listen("loadingProgress", (value) => {
@@ -623,12 +634,12 @@ export default function Game() {
 
         player.pokemonsProposition.onAdd(() => {
           if (player.id == uid) {
-            dispatch(setPokemonProposition(player.pokemonsProposition.map(p=>p)))
+            dispatch(setPokemonProposition(player.pokemonsProposition.map(p => p)))
           }
         })
         player.pokemonsProposition.onRemove(() => {
           if (player.id == uid) {
-            dispatch(setPokemonProposition(player.pokemonsProposition.map(p=>p)))
+            dispatch(setPokemonProposition(player.pokemonsProposition.map(p => p)))
           }
         })
       })
