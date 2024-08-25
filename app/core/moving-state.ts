@@ -39,7 +39,7 @@ export default class MovingState extends PokemonState {
           this.move(pokemon, board, {
             x: pokemon.status.charmOrigin.positionX,
             y: pokemon.status.charmOrigin.positionY
-          });
+          })
         }
       } else if (targetAtRange) {
         pokemon.toAttackingState()
@@ -65,6 +65,8 @@ export default class MovingState extends PokemonState {
     board: Board,
     coordinates: { x: number; y: number }
   ) {
+    //logger.debug('move attempt');
+    
     let x: number | undefined = undefined
     let y: number | undefined = undefined
 
@@ -76,8 +78,8 @@ export default class MovingState extends PokemonState {
     ) {
       // dark jump
       const farthestCoordinate =
-      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
-    //logger.debug({ farthestCoordinate })
+        board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+      //logger.debug({ farthestCoordinate })
       if (farthestCoordinate) {
         x = farthestCoordinate.x
         y = farthestCoordinate.y
@@ -98,6 +100,7 @@ export default class MovingState extends PokemonState {
               }
             })
         }
+        
         // logger.debug(`pokemon ${pokemon.name} jumped from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates.x}, ${coordinates.y})), orientation: ${pokemon.orientation}`);
         board.swapValue(pokemon.positionX, pokemon.positionY, x, y)
         pokemon.orientation = board.orientation(
