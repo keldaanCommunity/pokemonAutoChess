@@ -4770,7 +4770,7 @@ export class Lugia extends Pokemon {
   atk = 30
   def = 6
   speDef = 6
-  maxPP = 60
+  maxPP = 80
   range = 1
   skill = Ability.SKY_ATTACK
   passive = Passive.WINDY
