@@ -19,10 +19,13 @@ export default class MovingState extends PokemonState {
     weather: Weather,
     player: Player
   ) {
-    super.update(pokemon, dt, board, weather, player);
+    super.update(pokemon, dt, board, weather, player)
     if (pokemon.cooldown <= 0) {
-      pokemon.cooldown = 500 / getMoveSpeed(pokemon, weather);
-      const targetAtRange = this.getNearestTargetAtRangeCoordinates(pokemon, board);
+      pokemon.cooldown = 500 / getMoveSpeed(pokemon, weather)
+      const targetAtRange = this.getNearestTargetAtRangeCoordinates(
+        pokemon,
+        board
+      )
       if (pokemon.status.charm && pokemon.canMove) {
         if (
           pokemon.status.charmOrigin &&
@@ -47,7 +50,7 @@ export default class MovingState extends PokemonState {
         }
       }
     } else {
-      pokemon.cooldown = Math.max(0, pokemon.cooldown - dt);
+      pokemon.cooldown = Math.max(0, pokemon.cooldown - dt)
       if (pokemon.status.skydiving && pokemon.cooldown <= 0) {
         pokemon.status.skydiving = false;
       }
@@ -69,10 +72,12 @@ export default class MovingState extends PokemonState {
       !pokemon.status.locked
     ) {
       // dark jump
-      const farthestCoordinate = board.getFarthestTargetCoordinateAvailablePlace(pokemon);
+      const farthestCoordinate =
+      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+    //logger.debug({ farthestCoordinate })
       if (farthestCoordinate) {
-        x = farthestCoordinate.x;
-        y = farthestCoordinate.y;
+        x = farthestCoordinate.x
+        y = farthestCoordinate.y
 
         if (pokemon.passive === Passive.STENCH) {
           board
@@ -87,10 +92,10 @@ export default class MovingState extends PokemonState {
                 });
                 board.effects[board.columns * cell.y + cell.x] = Effect.POISON_GAS;
               }
-            });
+            })
         }
-
-        board.swapValue(pokemon.positionX, pokemon.positionY, x, y);
+        // logger.debug(`pokemon ${pokemon.name} jumped from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates.x}, ${coordinates.y})), orientation: ${pokemon.orientation}`);
+        board.swapValue(pokemon.positionX, pokemon.positionY, x, y)
         pokemon.orientation = board.orientation(
           x,
           y,
@@ -98,7 +103,7 @@ export default class MovingState extends PokemonState {
           pokemon.targetY,
           pokemon,
           undefined
-        );
+        )
       }
     } else {
       // Using pathfinding to get optimal path
@@ -125,25 +130,18 @@ export default class MovingState extends PokemonState {
           pokemon,
           undefined
         );
-      
-        //console.debug(`Updated orientation for Pokémon ${pokemon.name}: ${pokemon.orientation}`);
-      
         board.swapValue(pokemon.positionX, pokemon.positionY, x, y);
-      
-        //console.debug(`Moved Pokémon ${pokemon.name} from (${pokemon.positionX}, ${pokemon.positionY}) to (${x}, ${y})`);
-      } else {
-        //console.debug('No valid path found for Pokémon ${pokemon.name}');
       }
     }
   }
 
   onEnter(pokemon: PokemonEntity) {
-    super.onEnter(pokemon);
-    pokemon.action = PokemonActionState.WALK;
-    pokemon.cooldown = 0;
+    super.onEnter(pokemon)
+    pokemon.action = PokemonActionState.WALK
+    pokemon.cooldown = 0
   }
 
   onExit(pokemon: PokemonEntity) {
-    super.onExit(pokemon);
+    super.onExit(pokemon)
   }
 }
