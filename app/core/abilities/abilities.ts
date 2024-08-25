@@ -2850,7 +2850,7 @@ export class CosmicPowerStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const apGain = 20
     board.forEach((x, y, ally) => {
-      if (ally && ally.team === pokemon.team) {
+      if (ally && ally.team === pokemon.team && ally.id !== pokemon.id) {
         ally.addAbilityPower(apGain, pokemon, 1, crit)
       }
     })
