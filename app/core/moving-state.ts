@@ -42,17 +42,20 @@ export default class MovingState extends PokemonState {
           });
         }
       } else if (targetAtRange) {
-        pokemon.toAttackingState();
+        pokemon.toAttackingState()
       } else {
-        const targetAtSight = this.getNearestTargetAtSightCoordinates(pokemon, board);
+        const targetAtSight = this.getNearestTargetAtSightCoordinates(
+          pokemon,
+          board
+        )
         if (targetAtSight && pokemon.canMove) {
-          this.move(pokemon, board, targetAtSight);
+          this.move(pokemon, board, targetAtSight)
         }
       }
     } else {
       pokemon.cooldown = Math.max(0, pokemon.cooldown - dt)
       if (pokemon.status.skydiving && pokemon.cooldown <= 0) {
-        pokemon.status.skydiving = false;
+        pokemon.status.skydiving = false
       }
     }
   }
@@ -62,8 +65,8 @@ export default class MovingState extends PokemonState {
     board: Board,
     coordinates: { x: number; y: number }
   ) {
-    let x: number | undefined = undefined;
-    let y: number | undefined = undefined;
+    let x: number | undefined = undefined
+    let y: number | undefined = undefined
 
     if (
       pokemon.types.has(Synergy.DARK) &&
@@ -89,8 +92,9 @@ export default class MovingState extends PokemonState {
                   type: BoardEvent.POISON_GAS,
                   x: cell.x,
                   y: cell.y
-                });
-                board.effects[board.columns * cell.y + cell.x] = Effect.POISON_GAS;
+                })
+                board.effects[board.columns * cell.y + cell.x] =
+                  Effect.POISON_GAS
               }
             })
         }
@@ -109,7 +113,7 @@ export default class MovingState extends PokemonState {
       // Using pathfinding to get optimal path
       //console.debug('Current Pokemon:', pokemon.name, 'Position:', pokemon.positionX, pokemon.positionY);
       //console.debug('target Pokemons position:', coordinates.x , coordinates.y);
-      const path = findPath(board, [pokemon.positionX, pokemon.positionY],[coordinates.x, coordinates.y]);
+      const path = findPath(board, [pokemon.positionX, pokemon.positionY],[coordinates.x, coordinates.y])
       
       //console.debug('Path found:', path);
       
@@ -129,8 +133,9 @@ export default class MovingState extends PokemonState {
           y,
           pokemon,
           undefined
-        );
-        board.swapValue(pokemon.positionX, pokemon.positionY, x, y);
+        )
+        // logger.debug(`pokemon ${pokemon.name} moved from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates.x}, ${coordinates.y})), orientation: ${pokemon.orientation}`);
+        board.swapValue(pokemon.positionX, pokemon.positionY, x, y)
       }
     }
   }
