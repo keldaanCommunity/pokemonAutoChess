@@ -164,6 +164,26 @@ export default class Board {
     return cells
   }
 
+  getOuterRangeCells(cellX: number, cellY: number, range = 1, includesCenter = false) {
+    const cells = new Array<Cell>()
+  
+    // Loop through the outer range cells
+    for (let y = cellY - range; y <= cellY + range; y++) {
+      for (let x = cellX - range; x <= cellX + range; x++) {
+        // Exclude the inner range
+        if (Math.abs(x - cellX) < range && Math.abs(y - cellY) < range) continue
+        // Skip the center if not included
+        if (x == cellX && y == cellY && !includesCenter) continue
+        // Ensure coordinates are within grid bounds
+        if (y >= 0 && y < this.rows && x >= 0 && x < this.columns) {
+          cells.push({ x, y, value: this.cells[this.columns * y + x] })
+        }
+      }
+    }
+  
+    return cells
+  }
+
   getCellsInFront(
     pokemon: PokemonEntity,
     target: PokemonEntity,

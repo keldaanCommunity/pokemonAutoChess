@@ -116,19 +116,23 @@ export default class MovingState extends PokemonState {
       // Using pathfinding to get optimal path
       //console.debug('Current Pokemon:', pokemon.name, 'Position:', pokemon.positionX, pokemon.positionY);
       //console.debug('target Pokemons position:', coordinates.x , coordinates.y);
-      const path = findPath(board, [pokemon.positionX, pokemon.positionY],[coordinates.x, coordinates.y])
-      
-      //console.debug('Path found:', path);
-      
-      if (path.length > 0) {
-        // Move Pokémon along the path
-        const nextStep = path[0]; // Get the next step in the path
-        x = nextStep[0];
-        y = nextStep[1];
-      
-        //console.debug(`Next step for Pokémon ${pokemon.name}: (${x}, ${y})`);
-      
-        // Update Pokémon's orientation and position
+      const cells = board.getOuterRangeCells(pokemon.positionX, pokemon.positionY, pokemon.range)
+      let distance = 999
+
+      cells.forEach((cell) => {
+        if (cell.value === undefined) {
+          const candidateDistance = findPath(board, [pokemon.positionX, pokemon.positionY],[coordinates.x, coordinates.y])
+          //logger.debug(`${pokemon.name} - Candidate (${cell.x},${cell.y}) to ${coordinates.x},${coordinates.y}, distance: ${candidateDistance}`);
+          if (candidateDistance.length < distance) {
+            distance = candidateDistance.length
+            const nextStep = candidateDistance[0];
+            x = nextStep[0];
+            y = nextStep[1];
+          }
+        }
+      })
+
+      if (x !== undefined && y !== undefined) {
         pokemon.orientation = board.orientation(
           pokemon.positionX,
           pokemon.positionY,
@@ -142,7 +146,7 @@ export default class MovingState extends PokemonState {
       }
     }
   }
-
+  
   onEnter(pokemon: PokemonEntity) {
     super.onEnter(pokemon)
     pokemon.action = PokemonActionState.WALK
