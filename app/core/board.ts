@@ -243,6 +243,18 @@ export default class Board {
     }
     return cells
   }
+  getAllPokemonCoordinates(board: Board): { x: number; y: number }[] {
+    let pokemonCoordinates: { x: number; y: number }[] = [];
+  
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
+      if (value !== undefined) {
+        // Add coordinates of all Pokémon to the list
+        pokemonCoordinates.push({ x, y });
+      }
+    });
+  
+    return pokemonCoordinates;
+  }
 
   getCellsBetween(x0: number, y0: number, x1: number, y1: number) {
     /* Supercover line algorithm from https://www.redblobgames.com/grids/line-drawing.html */
