@@ -39,7 +39,7 @@ In order to play against bots, you will need to load bots data into your newly c
 
 In both cases, create a database named `dev` with an empty collection named `botV2`. Then retrieve the URI connection. 
 
-You may need to create an admin user under Database Access > Create a New User. Make sure to Add Built-in Role > Atlas admin.
+If you are using MongoDB Cloud, you may need to create an admin user under Database Access > Create a New User. Make sure to Add Built-in Role > Atlas admin.
 
 - A cloud uri will look like smth `mongodb+srv://admin:<password>@<cluster>.mongodb.net/dev?retryWrites=true&w=majority`.
 - The local uri will look smth like `mongodb://localhost:27017/dev`.
