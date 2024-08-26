@@ -3,7 +3,7 @@ import React from "react"
 export default function DiscordButton(props: { channel?: string }) {
   let url = process.env.DISCORD_SERVER
   if (props.channel === "bot-creation")
-    url = "https://discord.com/channels/737230355039387749/914503292875325461"
+    url = "https://discord.com/invite/6JMS7tr"
   return (
     <a href={url} target="_blank" rel="noopener noreferrer">
       <button type="button" className="bubbly discord">
