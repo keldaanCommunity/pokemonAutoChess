@@ -25,40 +25,50 @@ export const getNeighbors = (node: Node, grid: number[][]): Node[] => {
     const directions = [
         { x: 1, y: 0 },  // Right
         { x: -1, y: 0 }, // Left
-        { x: 0, y: 1 },  // Down
-        { x: 0, y: -1 }, // Up
-        { x: 1, y: 1 },  // Down-right
-        { x: -1, y: -1 },// Up-left
-        { x: 1, y: -1 }, // Up-right
-        { x: -1, y: 1 }, // Down-left
+        { x: 0, y: 1 },  // Up
+        { x: 0, y: -1 }, // Down
+        { x: 1, y: 1 },  // Up-Right
+        { x: -1, y: -1 },// Down-Left
+        { x: 1, y: -1 }, // Down-Right
+        { x: -1, y: 1 }, // Up-Left
     ];
 
-    return directions.map(dir => ({
-        x: node.x + dir.x,
-        y: node.y + dir.y,
-        g: 0,
-        h: 0,
-        f: 0
-    })).filter(neighbor => {
-        const x = neighbor.x;
-        const y = neighbor.y;
-        return x >= 0 && x < grid[0].length && y >= 0 && y < grid.length && grid[y][x] !== 1;
-    });
-};
+    const neighbors: Node[] = [];
 
-export const findPath = (board: Board, start: [number, number], goal: [number, number]): [number, number][] => {
-    const gridCopy = defaultGrid.map(row => row.slice()); // Copy grid to modify for path
-    const pokemonCoordinates = board.getAllPokemonCoordinates(board);
-    //console.log('Pokémon coordinates:', pokemonCoordinates);
-    pokemonCoordinates.forEach(({ x, y }) => {
-        // Ensure the goal coordinates are not set to 1 on the matrix
-        if (gridCopy[y] && gridCopy[y][x] !== undefined && !(x === goal[0] && y === goal[1])) {
-            gridCopy[y][x] = 1; // Set the cell to 1 where Pokémon are located. Creates a 2d matrix map of obstacles(pokemon)
+    directions.forEach(dir => {
+        const x = node.x + dir.x;
+        const y = node.y + dir.y;
+
+        // Check if the coordinates are within grid bounds
+        if (x >= 0 && x < grid[0].length && y >= 0 && y < grid.length) {
+            if (grid[y][x] === 1) {
+            } else {
+                neighbors.push({
+                    x,
+                    y,
+                    g: 0,
+                    h: 0,
+                    f: 0,
+                    parent: node
+                });
+            }
         }
     });
-    // visualizeGrid(gridCopy); //uncomment to see obstacle map
 
-    //below is A* algorithm that calculates path given a start coord and a goal coord.
+    return neighbors;
+};
+
+
+export const findPath = (board: Board, start: [number, number], goal: [number, number]): [number, number][] => {
+    const gridCopy = defaultGrid.map(row => row.slice());
+    const pokemonCoordinates = board.getAllPokemonCoordinates(board);
+    pokemonCoordinates.forEach(({ x, y }) => {
+        if (gridCopy[y] && gridCopy[y][x] !== undefined && !(x === goal[0] && y === goal[1])) {
+            gridCopy[y][x] = 1; // Set cells to 1 where Pokémon are located, unless it’s the goal
+        }
+    });
+    //visualizeGrid(gridCopy); // Uncomment to see obstacle map
+
     const startNode: Node = { x: start[0], y: start[1], g: 0, h: getHeuristic({ x: start[0], y: start[1], g: 0, h: 0, f: 0 }, { x: goal[0], y: goal[1], g: 0, h: 0, f: 0 }), f: 0 };
     startNode.f = startNode.g + startNode.h;
     const goalNode: Node = { x: goal[0], y: goal[1], g: 0, h: 0, f: 0 };
@@ -74,7 +84,8 @@ export const findPath = (board: Board, start: [number, number], goal: [number, n
             const path: [number, number][] = [];
             let node: Node | undefined = currentNode;
             while (node) {
-                if (!(node.x === start[0] && node.y === start[1]) && !(node.x === goal[0] && node.y === goal[1])) {
+                // Include all nodes except the start node in the path
+                if (!(node.x === start[0] && node.y === start[1])) {
                     path.unshift([node.x, node.y]);
                 }
                 node = node.parent;
@@ -99,6 +110,7 @@ export const findPath = (board: Board, start: [number, number], goal: [number, n
 
     return [];
 };
+
 
 export const visualizeGrid = (grid: number[][]): void => {
     console.log('Grid Visualization:');

@@ -116,22 +116,21 @@ export default class MovingState extends PokemonState {
       // Using pathfinding to get optimal path
       //console.debug('Current Pokemon:', pokemon.name, 'Position:', pokemon.positionX, pokemon.positionY);
       //console.debug('target Pokemons position:', coordinates.x , coordinates.y);
-      const cells = board.getOuterRangeCells(pokemon.positionX, pokemon.positionY, pokemon.range)
+      const cells = board.getOuterRangeCells(coordinates.x, coordinates.y, pokemon.range)
       let distance = 999
-
       cells.forEach((cell) => {
         if (cell.value === undefined) {
-          const candidateDistance = findPath(board, [pokemon.positionX, pokemon.positionY],[coordinates.x, coordinates.y])
+          const candidateDistance = findPath(board, [pokemon.positionX, pokemon.positionY],[cell.x, cell.y])
           //logger.debug(`${pokemon.name} - Candidate (${cell.x},${cell.y}) to ${coordinates.x},${coordinates.y}, distance: ${candidateDistance}`);
-          if (candidateDistance.length < distance) {
+          if (candidateDistance.length < distance && candidateDistance.length !== 0) {
             distance = candidateDistance.length
             const nextStep = candidateDistance[0];
             x = nextStep[0];
             y = nextStep[1];
           }
         }
-      })
-
+      }
+    )
       if (x !== undefined && y !== undefined) {
         pokemon.orientation = board.orientation(
           pokemon.positionX,
