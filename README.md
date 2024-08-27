@@ -14,7 +14,7 @@ Source: [https://github.com/keldaanCommunity/pokemonAutoChess](https://github.co
 
 ## Getting started
 
-Install [Node LTS](https://nodejs.org/en).
+Install [Node LTS](https://nodejs.org/en). (It's recommended to use [nvm](https://github.com/nvm-sh/nvm) to install Node with the proper version)
 
 Install project dependencies:
 ```
@@ -29,7 +29,7 @@ npm run download-music
 
 Main libs used
 
-Pokemon Auto Chess use mongoDB to store its data and Firebase for authentication. Those 2 dependencies requires credentials to use. Credentials will be stored in a `.env` at the root of the repository.
+Pokemon Auto Chess use mongoDB to store its data and Firebase for authentication. Those 2 dependencies requires credentials to use. Credentials will be stored in a `.env` at the root of the repository. If you do not have a `.env` in your root repository, make one now.
 
 ### MongoDB
 
@@ -37,7 +37,9 @@ You can either setup using the cloud based [MongoDB Atlas](https://www.mongodb.c
 
 In order to play against bots, you will need to load bots data into your newly created database.
 
-In both cases, create a database named `dev` with an empty collection named `botV2`. Then retrieve de URI connection.
+In both cases, create a database named `dev` with an empty collection named `botv2`. Then retrieve the URI connection. 
+
+If you are using MongoDB Cloud, you may need to create an admin user under Database Access > Create a New User. Make sure to Add Built-in Role > Atlas admin.
 
 - A cloud uri will look like smth `mongodb+srv://admin:<password>@<cluster>.mongodb.net/dev?retryWrites=true&w=majority`.
 - The local uri will look smth like `mongodb://localhost:27017/dev`.
@@ -69,11 +71,11 @@ FIREBASE_MESSAGING_SENDER_ID=<firebase_messaging_sender_id>
 FIREBASE_APP_ID=<firebase_app_id>
 ```
 
-Then setup the authentication module. In sign in methods, only choose mail/password and anonymous.
+Then setup the authentication module. In sign in methods, only choose mail/password and anonymous. 
 
 You need to generate a SDK Admin Firebase private key for the server to be able to connect as administrator of the firebase project.
 
-This option is available in parameters project / service account
+This option is available in Project settings > Service accounts
 
 The private key is a json that contain those informations:
 
