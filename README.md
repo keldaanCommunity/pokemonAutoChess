@@ -37,7 +37,7 @@ You can either setup using the cloud based [MongoDB Atlas](https://www.mongodb.c
 
 In order to play against bots, you will need to load bots data into your newly created database.
 
-In both cases, create a database named `dev` with an empty collection named `botV2`. Then retrieve the URI connection. 
+In both cases, create a database named `dev` with an empty collection named `botv2`. Then retrieve the URI connection. 
 
 If you are using MongoDB Cloud, you may need to create an admin user under Database Access > Create a New User. Make sure to Add Built-in Role > Atlas admin.
 
