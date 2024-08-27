@@ -171,139 +171,156 @@ export default class PreparationRoom extends Room<PreparationState> {
       )
     }
 
-    this.onMessage(Transfer.KICK, (client, message) => {
-      logger.info(Transfer.KICK, this.roomName)
-      try {
-        this.dispatcher.dispatch(new OnKickPlayerCommand(), { client, message })
-      } catch (error) {
-        logger.error(error)
-      }
-    })
-
-    this.onMessage(Transfer.DELETE_ROOM, (client) => {
-      logger.info(Transfer.DELETE_ROOM, this.roomName)
-      try {
-        this.dispatcher.dispatch(new OnDeleteRoomCommand(), { client })
-      } catch (error) {
-        logger.error(error)
-      }
-    })
-
-    this.onMessage(Transfer.CHANGE_ROOM_NAME, (client, message) => {
-      logger.info(Transfer.CHANGE_ROOM_NAME, this.roomName)
-      try {
-        this.dispatcher.dispatch(new OnRoomNameCommand(), { client, message })
-      } catch (error) {
-        logger.error(error)
-      }
-    })
-
-    this.onMessage(Transfer.CHANGE_ROOM_PASSWORD, (client, message) => {
-      logger.info(Transfer.CHANGE_ROOM_PASSWORD, this.roomName)
-      try {
-        this.dispatcher.dispatch(new OnRoomPasswordCommand(), {
-          client,
-          message
-        })
-      } catch (error) {
-        logger.error(error)
-      }
-    })
-
-    this.onMessage(Transfer.TOGGLE_NO_ELO, (client, message) => {
-      logger.info(Transfer.TOGGLE_NO_ELO, this.roomName)
-      try {
-        this.dispatcher.dispatch(new OnToggleEloCommand(), { client, message })
-      } catch (error) {
-        logger.error(error)
-      }
-    })
-
-    this.onMessage(Transfer.GAME_START_REQUEST, (client) => {
-      logger.info(Transfer.GAME_START_REQUEST, this.roomName)
-      try {
-        this.dispatcher.dispatch(new OnGameStartRequestCommand(), { client })
-      } catch (error) {
-        logger.error(error)
-      }
-    })
-
-    this.onMessage(Transfer.TOGGLE_READY, (client, ready?: boolean) => {
-      logger.info(Transfer.TOGGLE_READY, this.roomName)
-      try {
-        this.dispatcher.dispatch(new OnToggleReadyCommand(), { client, ready })
-      } catch (error) {
-        logger.error(error)
-      }
-    })
-
-    this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
-      logger.info(Transfer.NEW_MESSAGE, this.roomName)
-      try {
-        this.dispatcher.dispatch(new OnNewMessageCommand(), { client, message })
-      } catch (error) {
-        logger.error(error)
-      }
-    })
-
-    this.onMessage(
-      Transfer.REMOVE_MESSAGE,
-      (client, message: { id: string }) => {
-        logger.info(Transfer.REMOVE_MESSAGE, this.roomName)
+    try {
+      this.onMessage(Transfer.KICK, (client, message) => {
+        logger.info(Transfer.KICK, this.roomName)
         try {
-          this.dispatcher.dispatch(new RemoveMessageCommand(), {
+          this.dispatcher.dispatch(new OnKickPlayerCommand(), {
             client,
-            messageId: message.id
+            message
           })
         } catch (error) {
           logger.error(error)
         }
-      }
-    )
+      })
 
-    this.onMessage(
-      Transfer.ADD_BOT,
-      (client: Client, botType: IBot | BotDifficulty) => {
-        logger.info(Transfer.ADD_BOT, this.roomName)
+      this.onMessage(Transfer.DELETE_ROOM, (client) => {
+        logger.info(Transfer.DELETE_ROOM, this.roomName)
+        try {
+          this.dispatcher.dispatch(new OnDeleteRoomCommand(), { client })
+        } catch (error) {
+          logger.error(error)
+        }
+      })
+
+      this.onMessage(Transfer.CHANGE_ROOM_NAME, (client, message) => {
+        logger.info(Transfer.CHANGE_ROOM_NAME, this.roomName)
+        try {
+          this.dispatcher.dispatch(new OnRoomNameCommand(), { client, message })
+        } catch (error) {
+          logger.error(error)
+        }
+      })
+
+      this.onMessage(Transfer.CHANGE_ROOM_PASSWORD, (client, message) => {
+        logger.info(Transfer.CHANGE_ROOM_PASSWORD, this.roomName)
+        try {
+          this.dispatcher.dispatch(new OnRoomPasswordCommand(), {
+            client,
+            message
+          })
+        } catch (error) {
+          logger.error(error)
+        }
+      })
+
+      this.onMessage(Transfer.TOGGLE_NO_ELO, (client, message) => {
+        logger.info(Transfer.TOGGLE_NO_ELO, this.roomName)
+        try {
+          this.dispatcher.dispatch(new OnToggleEloCommand(), {
+            client,
+            message
+          })
+        } catch (error) {
+          logger.error(error)
+        }
+      })
+
+      this.onMessage(Transfer.GAME_START_REQUEST, (client) => {
+        logger.info(Transfer.GAME_START_REQUEST, this.roomName)
+        try {
+          this.dispatcher.dispatch(new OnGameStartRequestCommand(), { client })
+        } catch (error) {
+          logger.error(error)
+        }
+      })
+
+      this.onMessage(Transfer.TOGGLE_READY, (client, ready?: boolean) => {
+        logger.info(Transfer.TOGGLE_READY, this.roomName)
+        try {
+          this.dispatcher.dispatch(new OnToggleReadyCommand(), {
+            client,
+            ready
+          })
+        } catch (error) {
+          logger.error(error)
+        }
+      })
+
+      this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
+        logger.info(Transfer.NEW_MESSAGE, this.roomName)
+        try {
+          this.dispatcher.dispatch(new OnNewMessageCommand(), {
+            client,
+            message
+          })
+        } catch (error) {
+          logger.error(error)
+        }
+      })
+
+      this.onMessage(
+        Transfer.REMOVE_MESSAGE,
+        (client, message: { id: string }) => {
+          logger.info(Transfer.REMOVE_MESSAGE, this.roomName)
+          try {
+            this.dispatcher.dispatch(new RemoveMessageCommand(), {
+              client,
+              messageId: message.id
+            })
+          } catch (error) {
+            logger.error(error)
+          }
+        }
+      )
+
+      this.onMessage(
+        Transfer.ADD_BOT,
+        (client: Client, botType: IBot | BotDifficulty) => {
+          logger.info(Transfer.ADD_BOT, this.roomName)
+          try {
+            const user = this.state.users.get(client.auth.uid)
+            if (user) {
+              this.dispatcher.dispatch(new OnAddBotCommand(), {
+                type: botType,
+                user: user
+              })
+            }
+          } catch (error) {
+            logger.error(error)
+          }
+        }
+      )
+      this.onMessage(Transfer.REMOVE_BOT, (client: Client, t: string) => {
+        logger.info(Transfer.REMOVE_BOT, this.roomName)
         try {
           const user = this.state.users.get(client.auth.uid)
           if (user) {
-            this.dispatcher.dispatch(new OnAddBotCommand(), {
-              type: botType,
+            this.dispatcher.dispatch(new OnRemoveBotCommand(), {
+              target: t,
               user: user
             })
           }
         } catch (error) {
           logger.error(error)
         }
-      }
-    )
-    this.onMessage(Transfer.REMOVE_BOT, (client: Client, t: string) => {
-      logger.info(Transfer.REMOVE_BOT, this.roomName)
-      try {
-        const user = this.state.users.get(client.auth.uid)
-        if (user) {
-          this.dispatcher.dispatch(new OnRemoveBotCommand(), {
-            target: t,
+      })
+      this.onMessage(Transfer.REQUEST_BOT_LIST, (client: Client) => {
+        logger.info(Transfer.REQUEST_BOT_LIST, this.roomName)
+        try {
+          const user = this.state.users.get(client.auth.uid)
+
+          this.dispatcher.dispatch(new OnListBotsCommand(), {
             user: user
           })
+        } catch (error) {
+          logger.error(error)
         }
-      } catch (error) {
-        logger.error(error)
-      }
-    })
-    this.onMessage(Transfer.REQUEST_BOT_LIST, (client: Client) => {
-      logger.info(Transfer.REQUEST_BOT_LIST, this.roomName)
-      try {
-        const user = this.state.users.get(client.auth.uid)
-
-        this.dispatcher.dispatch(new OnListBotsCommand(), {
-          user: user
-        })
-      } catch (error) {
-        logger.error(error)
-      }
-    })
+      })
+    } catch (error) {
+      logger.error(error)
+      this.disconnect()
+    }
 
     this.onServerAnnouncement = this.onServerAnnouncement.bind(this)
     this.presence.subscribe("server-announcement", this.onServerAnnouncement)
