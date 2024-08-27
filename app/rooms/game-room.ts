@@ -709,6 +709,10 @@ export default class GameRoom extends Room<GameState> {
               player.titles.add(Title.GRAND_MASTER)
             }
 
+            if (usr.name === "Dog") {
+              player.titles.add(Title.DOG)
+            }
+
             if (usr.elo != null && elligibleToELO) {
               const elo = computeElo(
                 this.transformToSimplePlayer(player),
