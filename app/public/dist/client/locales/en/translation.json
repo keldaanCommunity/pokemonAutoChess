@@ -2338,7 +2338,10 @@
     "GLUTTON": "Glutton",
     "STARGAZER": "Stargazer",
     "BLOODY": "Bloody",
-    "ETERNAL": "Eternal"
+    "ETERNAL": "Eternal",
+    "DOG": "Dog",
+    "FIRST_1100": "First 1100",
+    "FIRST_1200": "Frist 1200"
   },
   "title_description": {
     "NOVICE": "Play your first game",
@@ -2414,7 +2417,10 @@
     "GLUTTON": "Get a Snorlax with more than 750 base HP",
     "STARGAZER": "Get Solgaleo or Lunala",
     "BLOODY": "Get Bloodmoon Ursaluna",
-    "ETERNAL": "Meet Arceus at stage 40"
+    "ETERNAL": "Meet Arceus at stage 40",
+    "DOG": "Apenas o melhor amigo do homem",
+    "FIRST_1100": "Primeiro a conseguir o ranking 1100 do servidor",
+    "FIRST_1200": "Primeiro a conseguir o ranking 1200 do servidor"
   },
   "weather": {
     "NEUTRAL": "Calm weather",

@@ -711,6 +711,12 @@ export default class GameRoom extends Room<GameState> {
 
             if (usr.name === "Dog") {
               player.titles.add(Title.DOG)
+              player.titles.add(Title.FIRST_1100)
+            }
+
+            if (usr.name === "duckhead") {
+              player.titles.add(Title.DOG)
+              player.titles.add(Title.FIRST_1200)
             }
 
             if (usr.elo != null && elligibleToELO) {

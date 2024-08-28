@@ -2063,7 +2063,10 @@
     "VANQUISHER": "Destruidor",
     "OUTSIDER": "Forasteiro",
     "WILD": "Salvagem",
-    "GLUTTON": "Guloso"
+    "GLUTTON": "Guloso",
+    "DOG": "DOG",
+    "FIRST_1100": "First 1100",
+    "FIRST_1200": "First 1200"
   },
   "title_description": {
     "NOVICE": "Jogue seu primeiro jogo",
@@ -2127,7 +2130,10 @@
     "CHOSEN_ONE": "Sinergía Máxima com o tipo Luz em um jogo",
     "VANQUISHER": "Ganhar um jogo rankeado",
     "OUTSIDER": "Ganhar um jogo rankeado de 8 pessoas tendo o menor ELO de entre os participantes",
-    "GLUTTON": "conseguir um Snorlax com mais de 750 de HP base"
+    "GLUTTON": "conseguir um Snorlax com mais de 750 de HP base",
+    "DOG": "Apenas o melhor amigo do homem",
+    "FIRST_1100": "Primeiro a conseguir o ranking 1100 do servidor",
+    "FIRST_1200": "Primeiro a conseguir o ranking 1200 do servidor"
   },
   "weather": {
     "NEUTRAL": "tempo calmo",
