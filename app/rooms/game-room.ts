@@ -714,8 +714,7 @@ export default class GameRoom extends Room<GameState> {
               player.titles.add(Title.FIRST_1100)
             }
 
-            if (usr.name === "duckhead") {
-              player.titles.add(Title.DOG)
+            if (usr.name === "Duckhead") {
               player.titles.add(Title.FIRST_1200)
             }
 
