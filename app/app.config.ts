@@ -1,5 +1,6 @@
 import path from "path"
 import { monitor } from "@colyseus/monitor"
+import { ArraySchema } from "@colyseus/schema"
 import config from "@colyseus/tools"
 import { RedisDriver, RedisPresence, ServerOptions, matchMaker } from "colyseus"
 import cors from "cors"
@@ -8,6 +9,8 @@ import basicAuth from "express-basic-auth"
 import admin from "firebase-admin"
 import { connect } from "mongoose"
 import { initTilemap } from "./core/design"
+import { GameRecord } from "./models/colyseus-models/game-record"
+import DetailledStatistic from "./models/mongo-models/detailled-statistic-v2"
 import ItemsStatistics from "./models/mongo-models/items-statistic"
 import Meta from "./models/mongo-models/meta"
 import PokemonsStatistics from "./models/mongo-models/pokemons-statistic-v2"
@@ -188,6 +191,38 @@ export default config({
 
     app.get("/leaderboards", async (req, res) => {
       res.send(getLeaderboard())
+    })
+
+    app.get("/game-history/:playerUid", async (req, res) => {
+      const { playerUid } = req.params
+      const { page = 1 } = req.query
+      const limit = 10
+      const skip = (Number(page) - 1) * limit
+
+      const stats = await DetailledStatistic.find(
+        { playerId: playerUid },
+        ['pokemons', 'time', 'rank', 'elo'],
+        { limit: limit, skip: skip, sort: { time: -1 } }
+      )
+      if (stats) {
+        const records = new ArraySchema<GameRecord>()
+        stats.forEach((record) => {
+          records.push(
+            new GameRecord(
+              record.time,
+              record.rank,
+              record.elo,
+              record.pokemons
+            )
+          )
+        })
+
+        // Return the records as the response
+        return res.status(200).json(records)
+      }
+
+      // If no records found, return an empty array
+      return res.status(200).json([])
     })
 
     app.get("/bots", async (req, res) => {

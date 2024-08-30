@@ -63,7 +63,7 @@ export default function Profile() {
         )}
       </div>
 
-      {profile && <History history={profile.history.map(r=>r)} />}
+      {profile && <History history={profile.history.map(r=>r)} uid={profile.id}/>}
     </div>
   )
 }
