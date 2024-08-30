@@ -62,13 +62,15 @@ export default function AvailableRoomMenu() {
                 : `${name}'${name.endsWith("s") ? "" : "s"} room`
           }
         )
-        await lobby.leave()
-        room.connection.close()
         localStore.set(
           LocalStoreKeys.RECONNECTION_TOKEN,
           room.reconnectionToken,
           30
         )
+        if (lobby.connection.isOpen) {
+          await lobby.leave()
+        }
+        room.connection.close()
         dispatch(leaveLobby())
         navigate("/preparation")
       }
@@ -114,7 +116,9 @@ export default function AvailableRoomMenu() {
             room.reconnectionToken,
             30
           )
-          await lobby.leave()
+          if (lobby.connection.isOpen) {
+            await lobby.leave()
+          }
           room.connection.close()
           dispatch(leaveLobby())
           navigate("/preparation")
@@ -127,7 +131,7 @@ export default function AvailableRoomMenu() {
 
   const quickPlay = throttle(async function quickPlay() {
     const existingQuickPlayRoom = preparationRooms.find(
-      (room) => room.metadata?.gameMode === GameMode.QUICKPLAY
+      (room) => room.metadata?.gameMode === GameMode.QUICKPLAY && room.clients < MAX_PLAYERS_PER_GAME
     )
     if (existingQuickPlayRoom) {
       joinPrepRoom(existingQuickPlayRoom)
