@@ -72,9 +72,23 @@ export default function Preparation() {
                 LocalStoreKeys.RECONNECTION_TOKEN
               )
               if (cachedReconnectionToken) {
-                const r: Room<PreparationState> = await client.reconnect(
-                  cachedReconnectionToken
-                )
+                let r: Room<PreparationState> 
+                try {
+                  r = await client.reconnect(
+                    cachedReconnectionToken
+                  )
+                }
+                catch (error) {
+                  // this could be the token was set to a game room before this code was reached
+                  // or the room no longer exists
+                  if (localStore.get(LocalStoreKeys.RECONNECTION_GAME)) {
+                    setToGame(true)
+                  } else {
+                    localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
+                    setToLobby(true)
+                  }
+                  return
+                }
                 localStore.set(
                   LocalStoreKeys.RECONNECTION_TOKEN,
                   r.reconnectionToken,
@@ -181,7 +195,9 @@ export default function Preparation() {
       })
 
       r.onMessage(Transfer.KICK, async () => {
-        await r.leave(false)
+        if (r.connection.isOpen) {
+          await r.leave(false)
+        }
         localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
         dispatch(leavePreparation())
         setToLobby(true)
@@ -196,13 +212,15 @@ export default function Preparation() {
           const game: Room<GameState> = await client.joinById(roomId, {
             idToken: token
           })
+          localStore.set(LocalStoreKeys.RECONNECTION_GAME, roomId, 60 * 60)
           localStore.set(
             LocalStoreKeys.RECONNECTION_TOKEN,
             game.reconnectionToken,
             5 * 60
           ) // 5 minutes allowed to start game
-          localStore.set(LocalStoreKeys.RECONNECTION_GAME, roomId, 60 * 60)
-          await r.leave()
+          if (r.connection.isOpen) {
+            await r.leave()
+          }
           game.connection.close()
           dispatch(leavePreparation())
           setToGame(true)
