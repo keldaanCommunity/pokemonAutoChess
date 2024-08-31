@@ -664,7 +664,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
               c.userData.joinedAt &&
               c.userData.joinedAt < Date.now() - INACTIVITY_TIMEOUT
             ) {
-              logger.info("force deconnection of user", c.id)
+              //logger.info("disconnected user for inactivity", c.id)
               c.leave(CloseCodes.USER_INACTIVE)
             }
           })

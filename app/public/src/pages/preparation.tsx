@@ -197,7 +197,7 @@ export default function Preparation() {
       })
 
       r.onLeave((code) => {
-        const shouldGoToLobby = (code === CloseCodes.USER_KICKED || code === CloseCodes.ROOM_DELETED || code === CloseCodes.ROOM_FULL || code === CloseCodes.USER_BANNED || code === CloseCodes.USER_RANK_TOO_LOW)
+        const shouldGoToLobby = (code === CloseCodes.USER_KICKED || code === CloseCodes.ROOM_DELETED || code === CloseCodes.ROOM_FULL || code === CloseCodes.ROOM_EMPTY || code === CloseCodes.USER_BANNED || code === CloseCodes.USER_RANK_TOO_LOW)
         logger.info(`left preparation room with code ${code}`, { shouldGoToLobby })
         if (shouldGoToLobby) {
           const errorMessage = CloseCodesMessages[code]
@@ -229,6 +229,7 @@ export default function Preparation() {
             await r.leave()
           }
           game.connection.close()
+          dispatch(leavePreparation())
           navigate("/game")
         }
       })
