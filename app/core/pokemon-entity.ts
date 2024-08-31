@@ -1542,6 +1542,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         const koAllies = values(this.player.board).filter(
           (p) =>
             p.id !== this.refToBoardPokemon.id &&
+            !p.isOnBench() &&
             alliesAlive.includes(p.id) === false
         )
 
