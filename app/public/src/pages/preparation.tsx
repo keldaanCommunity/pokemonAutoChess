@@ -77,16 +77,19 @@ export default function Preparation() {
                   r = await client.reconnect(
                     cachedReconnectionToken
                   )
-                }
-                catch (error) {
-                  // this could be the token was set to a game room before this code was reached
-                  // or the room no longer exists
-                  if (localStore.get(LocalStoreKeys.RECONNECTION_GAME)) {
+                  if (r.name === "game") {
+                    if (r.connection.isOpen) {
+                      r.connection.close()
+                    }
                     setToGame(true)
-                  } else {
-                    localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
-                    setToLobby(true)
+                    return
+                  } else if (r.name !== "preparation") {
+                    throw new Error("Preparation: Wrong room type.")
                   }
+                } catch (error) {
+                  logger.log(error)
+                  localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
+                  setToLobby(true)
                   return
                 }
                 localStore.set(
@@ -196,7 +199,7 @@ export default function Preparation() {
 
       r.onMessage(Transfer.KICK, async () => {
         if (r.connection.isOpen) {
-          await r.leave(false)
+          await r.leave(true)
         }
         localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
         dispatch(leavePreparation())
@@ -212,6 +215,7 @@ export default function Preparation() {
           const game: Room<GameState> = await client.joinById(roomId, {
             idToken: token
           })
+          logger.log(game)
           localStore.set(LocalStoreKeys.RECONNECTION_GAME, roomId, 60 * 60)
           localStore.set(
             LocalStoreKeys.RECONNECTION_TOKEN,
@@ -219,9 +223,11 @@ export default function Preparation() {
             5 * 60
           ) // 5 minutes allowed to start game
           if (r.connection.isOpen) {
-            await r.leave()
+            await r.leave(true)
           }
-          game.connection.close()
+          if (game.connection.isOpen) {
+            game.connection.close()
+          }
           dispatch(leavePreparation())
           setToGame(true)
         }
@@ -252,7 +258,9 @@ export default function Preparation() {
           page="preparation"
           leaveLabel={t("leave_room")}
           leave={async () => {
-            await room?.leave(true)
+            if (room?.connection.isOpen) {
+              await room?.leave(true)
+            }
             localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
             dispatch(leavePreparation())
             setToLobby(true)

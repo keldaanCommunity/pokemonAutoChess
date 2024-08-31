@@ -3,7 +3,7 @@ import { Client, Room, RoomAvailable } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Navigate } from "react-router-dom"
+import { Navigate, useLocation } from "react-router-dom"
 import LobbyUser from "../../../models/colyseus-models/lobby-user"
 import PokemonConfig from "../../../models/colyseus-models/pokemon-config"
 import {
@@ -89,6 +89,7 @@ export default function Lobby() {
 
   useEffect(() => {
     const client = store.getState().network.client
+    
     if (!lobbyJoined.current) {
       joinLobbyRoom(dispatch, client).catch((err) => {
         logger.error(err)
@@ -100,7 +101,9 @@ export default function Lobby() {
   }, [lobbyJoined, dispatch])
 
   const signOut = useCallback(async () => {
-    await lobby?.leave()
+    if (lobby?.connection.isOpen) {
+      await lobby?.leave(true)
+    }
     await firebase.auth().signOut()
     dispatch(leaveLobby())
     dispatch(logOut())
@@ -246,11 +249,20 @@ export async function joinLobbyRoom(
         try {
           const token = await user.getIdToken()
 
-          const lobby = store.getState().network.lobby
-          if (lobby) {
-            await lobby.leave()
+          const reconnectToken: string = localStore.get(LocalStoreKeys.RECONNECTION_TOKEN)
+          if (reconnectToken) {
+            try {
+              const lobbyRoom: Room<ICustomLobbyState> = await client.reconnect(reconnectToken)
+              if (lobbyRoom.name === "lobby") {
+                dispatch(joinLobby(lobbyRoom))
+              }
+            } catch (error) {
+              logger.log(error)
+              localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
+            }
           }
-          const room: Room<ICustomLobbyState> = await client.join("lobby", {
+          const lobby = store.getState().network.lobby
+          const room: Room<ICustomLobbyState> = lobby ?? await client.join("lobby", {
             idToken: token
           })
           room.state.messages.onAdd((m) => {

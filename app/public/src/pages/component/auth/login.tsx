@@ -2,12 +2,16 @@ import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
 import React, { useEffect } from "react"
 import { useTranslation } from "react-i18next"
-import { Link } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { logIn, logOut } from "../../../stores/NetworkStore"
+import { logIn, logOut, setNetworkError } from "../../../stores/NetworkStore"
 import { FIREBASE_CONFIG } from "../../utils/utils"
 import AnonymousButton from "./anonymous-button"
 import { StyledFirebaseAuth } from "./styled-firebase-auth"
+import { logger } from "../../../../../utils/logger"
+import store from "../../../stores"
+import { throttle } from "../../../../../utils/function"
+import { LocalStoreKeys, localStore } from "../../utils/store"
 
 import "firebaseui/dist/firebaseui.css"
 import "./login.css"
@@ -15,8 +19,32 @@ import "./login.css"
 export default function Login() {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const uid = useAppSelector((state) => state.network.uid)
   const displayName = useAppSelector((state) => state.network.displayName)
+
+  const preJoinLobby = throttle(async function prejoin() {
+    firebase.auth().onAuthStateChanged(async (user) => {
+      if (user)
+      {
+        const client = store.getState().network.client
+        try {
+          const token = await user.getIdToken()
+          const room = await client.join("lobby", {
+            idToken: token
+          })
+          localStore.set(LocalStoreKeys.RECONNECTION_TOKEN, room.reconnectionToken, 30)
+          if (room.connection.isOpen) {
+            room.connection.close()
+          }
+          navigate("/lobby")
+        } catch (err) {
+          logger.error(err)
+          dispatch(setNetworkError(err.message))
+        }
+      }
+    })
+  }, 1000)
 
   const uiConfig = {
     // Popup signin flow rather than Navigate flow.
@@ -57,7 +85,7 @@ export default function Login() {
           uiConfig={uiConfig}
           firebaseAuth={firebase.auth()}
         />
-        {/* <AnonymousButton /> */}
+        <AnonymousButton />
       </div>
     )
   } else {
@@ -69,9 +97,12 @@ export default function Login() {
         </p>
         <ul className="actions">
           <li>
-            <Link className="bubbly green" to={"/lobby"}>
+            <button
+              className="bubbly green"
+              onClick={preJoinLobby}
+            >
               {t("join_lobby")}
-            </Link>
+            </button>
           </li>
           <li>
             <button
