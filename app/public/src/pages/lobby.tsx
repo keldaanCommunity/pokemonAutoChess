@@ -3,7 +3,7 @@ import { Client, Room, RoomAvailable } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Navigate, useLocation } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 import LobbyUser from "../../../models/colyseus-models/lobby-user"
 import PokemonConfig from "../../../models/colyseus-models/pokemon-config"
 import {
