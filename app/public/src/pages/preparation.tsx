@@ -84,6 +84,9 @@ export default function Preparation() {
                     setToGame(true)
                     return
                   } else if (r.name !== "preparation") {
+                    if (r.connection.isOpen) {
+                      r.connection.close()
+                    }
                     throw new Error("Preparation: Wrong room type.")
                   }
                 } catch (error) {
