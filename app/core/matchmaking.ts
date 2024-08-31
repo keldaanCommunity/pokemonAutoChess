@@ -2,6 +2,7 @@ import Player from "../models/colyseus-models/player"
 import GameState from "../rooms/states/game-state"
 import { IPlayer } from "../types"
 import { sum } from "../utils/array"
+import { logger } from "../utils/logger"
 import { pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 
@@ -71,6 +72,10 @@ function completeMatchupCombination(
     const remainingMatchups = matchups.filter(
       (m) => remainingPlayers.includes(m.a) && remainingPlayers.includes(m.b)
     )
+    if (remainingMatchups.length === 0) {
+      // no more matchups, need to complete with a ghost matchup
+      return completeMatchupCombination([...combination], matchups, players)
+    }
     return remainingMatchups.flatMap((m) =>
       completeMatchupCombination([...combination, m], matchups, players)
     )
@@ -79,7 +84,7 @@ function completeMatchupCombination(
 
 export function selectMatchups(state: GameState): Matchup[] {
   /* step 1) establish all the matchups possible with players alive and their associated count
-  count = number of times A fought B or his ghost) +(number of times B fought A or his ghost) */
+  count = number of times A fought B or his ghost) + (number of times B fought A or his ghost) */
   const players = values(state.players).filter((p) => p.alive)
   if (players.length <= 1) return []
   const matchups = getAllPossibleMatchups(players)
