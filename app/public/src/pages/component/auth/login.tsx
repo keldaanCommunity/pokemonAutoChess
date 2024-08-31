@@ -85,7 +85,7 @@ export default function Login() {
           uiConfig={uiConfig}
           firebaseAuth={firebase.auth()}
         />
-        <AnonymousButton />
+        {/* <AnonymousButton /> */}
       </div>
     )
   } else {
