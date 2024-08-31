@@ -101,8 +101,8 @@ export default class AttackingState extends PokemonState {
           new AttackCommand(
             delayBeforeShoot + travelTime,
             pokemon,
-            board,
-            targetCoordinate
+            target,
+            board
           )
         )
       }

@@ -18,6 +18,8 @@ import UserMetadata from "../models/mongo-models/user-metadata"
 import { Emotion, IPlayer, Role, Title, Transfer } from "../types"
 import {
   GREATBALL_RANKED_LOBBY_CRON,
+  MAX_CONCURRENT_PLAYERS_ON_LOBBY,
+  MAX_CONCURRENT_PLAYERS_ON_SERVER,
   SCRIBBLE_LOBBY_CRON,
   TOURNAMENT_CLEANUP_DELAY,
   TOURNAMENT_REGISTRATION_TIME,
@@ -60,8 +62,6 @@ import {
 } from "./commands/lobby-commands"
 import LobbyState from "./states/lobby-state"
 
-const MAX_CCU = 700
-
 export default class CustomLobbyRoom extends Room<LobbyState> {
   bots: Map<string, IBot>
   unsubscribeLobby: (() => void) | undefined
@@ -72,8 +72,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
   constructor() {
     super()
-    this.maxClients = 50
-
     this.dispatcher = new Dispatcher(this)
     this.bots = new Map<string, IBot>()
     this.tournamentCronJobs = new Map<string, CronJob>()
@@ -426,7 +424,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       } else if (isBanned) {
         throw new Error("Account banned")
       } else if (
-        this.state.ccu > MAX_CCU &&
+        (this.state.ccu > MAX_CONCURRENT_PLAYERS_ON_SERVER ||
+          this.clients.length > MAX_CONCURRENT_PLAYERS_ON_LOBBY) &&
         userProfile?.role !== Role.ADMIN &&
         userProfile?.role !== Role.MODERATOR
       ) {
