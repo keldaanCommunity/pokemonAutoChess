@@ -2484,6 +2484,18 @@ export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
   [Pkm.SNEASEL]: [Pkm.HISUI_SNEASEL]
 }
 
+export const RegionalPkmBaseForms: { [key in Pkm]?: Pkm } = {
+  [Pkm.ALOLAN_RATTATA]: Pkm.RATTATA,
+  [Pkm.HISUI_GROWLITHE]: Pkm.GROWLITHE,
+  [Pkm.ALOLAN_VULPIX]: Pkm.VULPIX,
+  [Pkm.ALOLAN_GEODUDE]: Pkm.GEODUDE,
+  [Pkm.ALOLAN_DIGLETT]: Pkm.DIGLETT,
+  [Pkm.HISUI_ZORUA]: Pkm.ZORUA,
+  [Pkm.ALOLAN_GRIMER]: Pkm.GRIMER,
+  [Pkm.NIDORANM]: Pkm.NIDORANF,
+  [Pkm.HISUI_SNEASEL]: Pkm.SNEASEL
+}
+
 export enum PkmDuo {
   LATIOS_LATIAS = "LATIOS_LATIAS",
   PLUSLE_MINUN = "PLUSLE_MINUN",

@@ -12,7 +12,7 @@ import { canSell } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import Player from "../../models/colyseus-models/player"
-import { isOnBench } from "../../models/colyseus-models/pokemon"
+import { isOnBench, PokemonClasses } from "../../models/colyseus-models/pokemon"
 import { createRandomEgg } from "../../models/egg-factory"
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
@@ -54,7 +54,13 @@ import {
   WeatherRocks
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { Pkm, PkmFamily, PkmIndex, Unowns } from "../../types/enum/Pokemon"
+import {
+  Pkm,
+  PkmFamily,
+  PkmIndex,
+  PkmRegionalVariants,
+  Unowns
+} from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { removeInArray } from "../../utils/array"
@@ -1042,7 +1048,20 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           for (let i = 0; i < 3; i++) {
             const p = pool.pop()
             if (p) {
-              player.pokemonsProposition.push(p)
+              // If the Pokemon has a regional variant in the player's region, show that instead of the base form.
+              // Base form will still be added to the pool for all players
+              const regionalVariants =
+                p in PkmRegionalVariants
+                  ? PkmRegionalVariants[p]!.filter((pkm) =>
+                      PokemonClasses[pkm].prototype.isInRegion(pkm, player.map)
+                    )
+                  : undefined
+
+              if (regionalVariants && regionalVariants.length > 0) {
+                player.pokemonsProposition.push(pickRandomIn(regionalVariants))
+              } else {
+                player.pokemonsProposition.push(p)
+              }
               player.itemsProposition.push(items[i])
             }
           }

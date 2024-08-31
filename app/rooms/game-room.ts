@@ -54,7 +54,8 @@ import {
   Pkm,
   PkmDuos,
   PkmProposition,
-  PkmRegionalVariants
+  PkmRegionalVariants,
+  RegionalPkmBaseForms
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
@@ -974,21 +975,15 @@ export default class GameRoom extends Room<GameState> {
     player.pokemonsProposition.clear()
 
     if (AdditionalPicksStages.includes(this.state.stageLevel)) {
-      this.state.additionalPokemons.push(pkm as Pkm)
-      this.state.shop.addAdditionalPokemon(pkm)
-      if (pkm in PkmRegionalVariants) {
-        const variants: Pkm[] = PkmRegionalVariants[pkm]
-        for (const variant of variants) {
-          if (
-            PokemonClasses[variant].prototype.isInRegion(
-              variant,
-              player.map,
-              this.state
-            )
-          ) {
-            player.regionalPokemons.push(variant)
-          }
-        }
+      // If player picked their regional variant, we need to add the base pokemon to the shop pool
+      if (pkm in RegionalPkmBaseForms) {
+        const basePkm = RegionalPkmBaseForms[pkm]
+        this.state.additionalPokemons.push(basePkm)
+        this.state.shop.addAdditionalPokemon(basePkm)
+        player.regionalPokemons.push(pkm as Pkm)
+      } else {
+        this.state.additionalPokemons.push(pkm as Pkm)
+        this.state.shop.addAdditionalPokemon(pkm)
       }
 
       if (
