@@ -255,7 +255,7 @@ export async function joinLobbyRoom(
               const lobbyRoom: Room<ICustomLobbyState> = await client.reconnect(reconnectToken)
               if (lobbyRoom.name === "lobby") {
                 dispatch(joinLobby(lobbyRoom))
-              } else {
+              } else if (lobbyRoom.connection.isOpen) {
                 lobbyRoom.connection.close()
               }
             } catch (error) {
