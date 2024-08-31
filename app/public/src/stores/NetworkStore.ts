@@ -259,7 +259,7 @@ export const networkSlice = createSlice({
     ) => {
       state.lobby?.send(Transfer.NEW_TOURNAMENT, action.payload)
     },
-    setNetworkError: (state, action: PayloadAction<string | null>) => {
+    setErrorAlertMessage: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload
     }
   }
@@ -311,7 +311,7 @@ export const {
   kick,
   deleteRoom,
   createTournament,
-  setNetworkError
+  setErrorAlertMessage
 } = networkSlice.actions
 
 export default networkSlice.reducer
