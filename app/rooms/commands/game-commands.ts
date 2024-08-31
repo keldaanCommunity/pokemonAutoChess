@@ -1050,14 +1050,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             if (p) {
               // If the Pokemon has a regional variant in the player's region, show that instead of the base form.
               // Base form will still be added to the pool for all players
-              const regionalVariants =
-                p in PkmRegionalVariants
-                  ? PkmRegionalVariants[p]!.filter((pkm) =>
-                      PokemonClasses[pkm].prototype.isInRegion(pkm, player.map)
-                    )
-                  : undefined
-
-              if (regionalVariants && regionalVariants.length > 0) {
+              const regionalVariants = (PkmRegionalVariants[p] ?? []).filter(
+                (pkm) =>
+                  PokemonClasses[pkm].prototype.isInRegion(pkm, player.map)
+              )
+              if (regionalVariants.length > 0) {
                 player.pokemonsProposition.push(pickRandomIn(regionalVariants))
               } else {
                 player.pokemonsProposition.push(p)

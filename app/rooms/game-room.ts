@@ -54,8 +54,7 @@ import {
   Pkm,
   PkmDuos,
   PkmProposition,
-  PkmRegionalVariants,
-  RegionalPkmBaseForms
+  PkmRegionalVariants
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
@@ -976,8 +975,10 @@ export default class GameRoom extends Room<GameState> {
 
     if (AdditionalPicksStages.includes(this.state.stageLevel)) {
       // If player picked their regional variant, we need to add the base pokemon to the shop pool
-      if (pkm in RegionalPkmBaseForms) {
-        const basePkm = RegionalPkmBaseForms[pkm]
+      if (pokemonsObtained[0]?.regional) {
+        const basePkm = (Object.keys(PkmRegionalVariants).find((p) =>
+          PkmRegionalVariants[p].includes(pokemonsObtained[0].name)
+        ) ?? pokemonsObtained[0].name) as Pkm
         this.state.additionalPokemons.push(basePkm)
         this.state.shop.addAdditionalPokemon(basePkm)
         player.regionalPokemons.push(pkm as Pkm)
