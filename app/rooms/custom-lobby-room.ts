@@ -454,8 +454,15 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     })
   }
 
-  onLeave(client: Client) {
-    this.dispatcher.dispatch(new OnLeaveCommand(), { client })
+  async onLeave(client: Client, consented: boolean) {
+    try {
+      if (consented) {
+        throw new Error("consented leave")
+      }
+      await this.allowReconnection(client, 30)
+    } catch (error) {
+      this.dispatcher.dispatch(new OnLeaveCommand(), { client })
+    }
   }
 
   onDispose() {
