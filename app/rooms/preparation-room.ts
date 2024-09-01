@@ -1,8 +1,6 @@
 import { Dispatcher } from "@colyseus/command"
 import { Client, Room, updateLobby } from "colyseus"
 import admin from "firebase-admin"
-import { components } from "../api-v1/openapi"
-import { GameUser } from "../models/colyseus-models/game-user"
 import BannedUser from "../models/mongo-models/banned-user"
 import { IBot } from "../models/mongo-models/bot-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
@@ -388,25 +386,6 @@ export default class PreparationRoom extends Room<PreparationState> {
       this.setGameStarted(new Date().toISOString())
       //logger.debug("game start", game.roomId)
       this.broadcast(Transfer.GAME_START, gameId)
-    }
-  }
-
-  status() {
-    const players = new Array<components["schemas"]["Player"]>()
-    this.state.users.forEach((user: GameUser) => {
-      if (!user.isBot) {
-        players.push({
-          id: user.uid,
-          avatar: user.avatar,
-          name: user.name,
-          elo: user.elo
-        })
-      }
-    })
-    return {
-      players: players,
-      name: this.state.name,
-      id: this.roomId
     }
   }
 

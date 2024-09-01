@@ -4,9 +4,7 @@ import { Client, matchMaker } from "colyseus"
 import { FilterQuery } from "mongoose"
 import { GameUser, IGameUser } from "../../models/colyseus-models/game-user"
 import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
-import UserMetadata, {
-  IUserMetadata
-} from "../../models/mongo-models/user-metadata"
+import UserMetadata from "../../models/mongo-models/user-metadata"
 import { Role, Transfer } from "../../types"
 import {
   EloRankThreshold,
