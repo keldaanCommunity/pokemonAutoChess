@@ -18,6 +18,7 @@ import UserMetadata from "../models/mongo-models/user-metadata"
 import { Emotion, IPlayer, Role, Title, Transfer } from "../types"
 import {
   GREATBALL_RANKED_LOBBY_CRON,
+  INACTIVITY_TIMEOUT,
   MAX_CONCURRENT_PLAYERS_ON_LOBBY,
   MAX_CONCURRENT_PLAYERS_ON_SERVER,
   SCRIBBLE_LOBBY_CRON,
@@ -25,6 +26,7 @@ import {
   TOURNAMENT_REGISTRATION_TIME,
   ULTRABALL_RANKED_LOBBY_CRON
 } from "../types/Config"
+import { CloseCodes } from "../types/enum/CloseCodes"
 import { EloRank } from "../types/enum/EloRank"
 import { GameMode } from "../types/enum/Game"
 import { Language } from "../types/enum/Language"
@@ -619,7 +621,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     })
     this.cleanUpCronJobs.push(scribbleLobbyJob)
 
-    if (process.env.NODE_APP_INSTANCE) {
+    if (process.env.NODE_APP_INSTANCE || process.env.MODE === "dev") {
       const staleJob = CronJob.from({
         cronTime: "*/1 * * * *", // every minute
         timeZone: "Europe/Paris",
@@ -663,13 +665,14 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         cronTime: "*/1 * * * *", // every minute
         timeZone: "Europe/Paris",
         onTick: async () => {
+          logger.debug("checking inactive users")
           this.clients.forEach((c) => {
             if (
               c.userData.joinedAt &&
-              c.userData.joinedAt < Date.now() - 60000
+              c.userData.joinedAt < Date.now() - INACTIVITY_TIMEOUT
             ) {
-              //logger.info("force deconnection of user", c.id)
-              c.leave()
+              //logger.info("disconnected user for inactivity", c.id)
+              c.leave(CloseCodes.USER_INACTIVE)
             }
           })
         },

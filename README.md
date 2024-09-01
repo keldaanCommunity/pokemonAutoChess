@@ -21,10 +21,10 @@ Install project dependencies:
 npm install
 ```
 
-Download and pack all the game assets:
+Download the music files and pack all the game assets:
 ```
-npm run assetpack
 npm run download-music
+npm run assetpack
 ```
 
 Game files are ready, now you need to configure two things: the database (MongoDB), and the authentication provider (Firebase).
@@ -138,6 +138,10 @@ You might want to have full access rights on your local version. To do so, you c
 - Assets are automatically packed from `public/src/assets` to `public/dist/client/assets` with assetpack: `npm run assetpack` ; You will need to run assetpack everytime you change the assets
 - The game use precomputed data stored in `app/models/precomputed` folder ; You will need to run `npm run precompute` everytime you change pokemon or synergy data
 - We recommend VSCode and these extensions: Biome for formatting and linting and Inlang for translations management.
+
+## How to deploy your own Pokemon Auto Chess
+
+See this [README](https://github.com/keldaanCommunity/pokemonAutoChess/blob/master/deployment/README.md)
 
 ## Internationalisation
 

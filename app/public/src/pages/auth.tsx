@@ -6,7 +6,7 @@ import DiscordButton from "./component/buttons/discord-button"
 import GithubButton from "./component/buttons/github-button"
 import PolicyButton from "./component/buttons/policy-button"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import { setNetworkError } from "../stores/NetworkStore"
+import { setErrorAlertMessage } from "../stores/NetworkStore"
 import pkg from "../../../../package.json"
 import Login from "./component/auth/login"
 import "./auth.css"
@@ -61,7 +61,7 @@ export default function Auth() {
       </Modal>
       <Modal
         show={networkError != null}
-        onClose={() => dispatch(setNetworkError(null))}
+        onClose={() => dispatch(setErrorAlertMessage(null))}
         className="is-dark basic-modal-body"
         body={<p style={{ padding: "1em" }}>{networkError}</p>}
       />
