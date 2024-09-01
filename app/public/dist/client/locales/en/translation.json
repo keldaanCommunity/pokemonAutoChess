@@ -3112,5 +3112,16 @@
     "fishing_rarity_rate_description": "The quality of the rod you use to fish influences the rarity of the Pokémon you can catch.",
     "pool_size_per_category": "Pool size per category",
     "pool_size_per_category_description": "The pokemons you find in shops are taken from a pool shared by all players. The number of specimens of each Pokémon in the pool depends on its rarity and its number of evolution stages."
+  },
+  "errors": {
+    "USER_INACTIVE": "You have been kicked for inactivity to save server resources",
+    "USER_KICKED": "You have been kicked from this lobby",
+    "USER_BANNED": "You account has been banned",
+    "USER_RANK_TOO_LOW": "Your player rank is not high enough to participate in this lobby",
+    "USER_NOT_AUTHENTICATED": "Please authenticate again",
+    "ROOM_FULL": "This room is full",
+    "ROOM_EMPTY": "This room has been removed due to lack of players",
+    "ROOM_DELETED": "This room has been deleted",
+    "UNKNOWN_ERROR": "An unexpected error occurred: {{error}}"
   }
 }

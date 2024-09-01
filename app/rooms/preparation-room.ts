@@ -8,6 +8,7 @@ import { IBot } from "../models/mongo-models/bot-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { IPreparationMetadata, Transfer } from "../types"
 import { EloRank, MAX_PLAYERS_PER_GAME } from "../types/Config"
+import { CloseCodes } from "../types/enum/CloseCodes"
 import { BotDifficulty, GameMode } from "../types/enum/Game"
 import { logger } from "../utils/logger"
 import { values } from "../utils/schemas"
@@ -125,8 +126,7 @@ export default class PreparationRoom extends Room<PreparationState> {
             })
           }
 
-          this.broadcast(Transfer.KICK)
-          this.disconnect()
+          this.disconnect(CloseCodes.ROOM_EMPTY)
         } else {
           this.dispatcher.dispatch(new OnGameStartRequestCommand())
         }
