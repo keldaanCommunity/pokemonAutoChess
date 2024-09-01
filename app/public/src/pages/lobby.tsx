@@ -3,7 +3,7 @@ import { Client, Room, RoomAvailable } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Navigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import LobbyUser from "../../../models/colyseus-models/lobby-user"
 import PokemonConfig from "../../../models/colyseus-models/pokemon-config"
 import {
@@ -11,7 +11,6 @@ import {
   TournamentPlayerSchema,
   TournamentSchema
 } from "../../../models/colyseus-models/tournament"
-import { IBot } from "../../../models/mongo-models/bot-v2"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import {
   ICustomLobbyState,
@@ -19,6 +18,7 @@ import {
   PkmWithConfig,
   Transfer
 } from "../../../types"
+import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
 import { logger } from "../../../utils/logger"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import i18n from "../i18n"
@@ -53,7 +53,7 @@ import {
   joinLobby,
   logIn,
   logOut,
-  setNetworkError,
+  setErrorAlertMessage,
   setProfile
 } from "../stores/NetworkStore"
 import { Announcements } from "./component/announcements/announcements"
@@ -69,12 +69,14 @@ import "./lobby.css"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const lobby = useAppSelector((state) => state.network.lobby)
 
   const lobbyJoined = useRef<boolean>(false)
   const [gameToReconnect, setGameToReconnect] = useState<string | null>(
     localStore.get(LocalStoreKeys.RECONNECTION_GAME)
   )
+  const networkError = useAppSelector(state => state.network.error)
   const gameRooms: RoomAvailable[] = useAppSelector(
     (state) => state.lobby.gameRooms
   )
@@ -82,18 +84,27 @@ export default function Lobby() {
     gameToReconnect != null &&
     gameRooms.some((r) => r.roomId === gameToReconnect)
 
-  const [toPreparation, setToPreparation] = useState<boolean>(false)
-  const [toGame, setToGame] = useState<boolean>(false)
-  const [toAuth, setToAuth] = useState<boolean>(false)
   const { t } = useTranslation()
+
+  const onLeave = (code: number) => {
+    logger.info(`left lobby with code ${code}`)
+    const errorMessage = CloseCodesMessages[code]
+    if (errorMessage) {
+      dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
+    }
+    navigate("/")
+  }
 
   useEffect(() => {
     const client = store.getState().network.client
     if (!lobbyJoined.current) {
-      joinLobbyRoom(dispatch, client).catch((err) => {
+      joinLobbyRoom(dispatch, client, onLeave).catch((err) => {
         logger.error(err)
-        dispatch(setNetworkError(err.message))
-        setToAuth(true)
+        const errorMessage = CloseCodesMessages[err] ?? "UNKNOWN_ERROR"
+        if (errorMessage) {
+          dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`, { error: err })))
+        }
+        navigate("/")
       })
       lobbyJoined.current = true
     }
@@ -104,20 +115,8 @@ export default function Lobby() {
     await firebase.auth().signOut()
     dispatch(leaveLobby())
     dispatch(logOut())
-    setToAuth(true)
+    navigate("/")
   }, [dispatch, lobby])
-
-  if (toAuth) {
-    return <Navigate to={"/"} />
-  }
-
-  if (toPreparation) {
-    return <Navigate to="/preparation"></Navigate>
-  }
-
-  if (toGame) {
-    return <Navigate to="/game"></Navigate>
-  }
 
   return (
     <main className="lobby">
@@ -127,10 +126,7 @@ export default function Lobby() {
         leaveLabel={t("sign_out")}
       />
       <div className="lobby-container">
-        <MainLobby
-          toPreparation={toPreparation}
-          setToPreparation={setToPreparation}
-        />
+        <MainLobby />
       </div>
       <Modal
         show={showGameReconnect}
@@ -138,7 +134,7 @@ export default function Lobby() {
         body={t("game-reconnect-modal-body")}
         footer={
           <>
-            <button className="bubbly green" onClick={() => setToGame(true)}>
+            <button className="bubbly green" onClick={() => navigate("/game")}>
               {t("yes")}
             </button>
             <button
@@ -153,11 +149,17 @@ export default function Lobby() {
           </>
         }
       ></Modal>
+      <Modal
+        show={networkError != null}
+        onClose={() => dispatch(setErrorAlertMessage(null))}
+        className="is-dark basic-modal-body"
+        body={<p style={{ padding: "1em" }}>{networkError}</p>}
+      />
     </main>
   )
 }
 
-function MainLobby({ toPreparation, setToPreparation }) {
+function MainLobby() {
   const [activeSection, setActive] = useState<string>("leaderboard")
   const { t } = useTranslation()
   return (
@@ -234,7 +236,8 @@ function MainLobby({ toPreparation, setToPreparation }) {
 
 export async function joinLobbyRoom(
   dispatch,
-  client: Client
+  client: Client,
+  onLeave: (code: number) => void
 ): Promise<Room<ICustomLobbyState>> {
   if (!firebase.apps.length) {
     firebase.initializeApp(FIREBASE_CONFIG)
@@ -253,6 +256,9 @@ export async function joinLobbyRoom(
           const room: Room<ICustomLobbyState> = await client.join("lobby", {
             idToken: token
           })
+
+          room.onLeave(onLeave)
+
           room.state.messages.onAdd((m) => {
             dispatch(pushMessage(m))
           })
@@ -430,8 +436,6 @@ export async function joinLobbyRoom(
             dispatch(setNextSpecialGame(specialGame))
           })
 
-          room.onMessage(Transfer.BAN, () => reject("banned"))
-
           room.onMessage(Transfer.BANNED, (message) => {
             alert(message)
           })
@@ -483,7 +487,7 @@ export async function joinLobbyRoom(
           reject(error)
         }
       } else {
-        reject("not authenticated")
+        reject(CloseCodes.USER_NOT_AUTHENTICATED)
       }
     })
   })
