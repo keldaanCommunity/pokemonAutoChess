@@ -77,22 +77,16 @@ export default function Preparation() {
                   r = await client.reconnect(
                     cachedReconnectionToken
                   )
-                  if (r.name === "game") {
-                    if (r.connection.isOpen) {
-                      r.connection.close()
-                    }
+                }
+                catch (error) {
+                  // this could be the token was set to a game room before this code was reached
+                  // or the room no longer exists
+                  if (localStore.get(LocalStoreKeys.RECONNECTION_GAME)) {
                     navigate("/game")
-                    return
-                  } else if (r.name !== "preparation") {
-                    if (r.connection.isOpen) {
-                      r.connection.close()
-                    }
-                    throw new Error("Preparation: Wrong room type.")
+                  } else {
+                    localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
+                    navigate("/lobby")
                   }
-                } catch (error) {
-                  logger.log(error)
-                  localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
-                  navigate("/lobby")
                   return
                 }
                 localStore.set(
@@ -234,9 +228,7 @@ export default function Preparation() {
           if (r.connection.isOpen) {
             await r.leave()
           }
-          if (game.connection.isOpen) {
-            game.connection.close()
-          }
+          game.connection.close()
           dispatch(leavePreparation())
           navigate("/game")
         }
@@ -258,9 +250,7 @@ export default function Preparation() {
         page="preparation"
         leaveLabel={t("leave_room")}
         leave={async () => {
-          if (room?.connection.isOpen) {
-            await room?.leave()
-          }
+          await room?.leave(true)
           localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
           dispatch(leavePreparation())
           navigate("/lobby")

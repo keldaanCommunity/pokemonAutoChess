@@ -312,7 +312,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       const numberOfHumanPlayers = values(this.state.users).filter(
         (u) => !u.isBot
       ).length
-      if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME && !isAlreadyInRoom) {
+      if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME) {
         throw "Room is full"
       } else if (this.state.gameStartedAt != null) {
         throw "Game already started"
@@ -322,6 +322,8 @@ export default class PreparationRoom extends Room<PreparationState> {
         throw "User banned"
       } else if (this.metadata.blacklist.includes(user.uid)) {
         throw "User previously kicked"
+      } else if (isAlreadyInRoom) {
+        throw "User already in room"
       } else {
         return user
       }

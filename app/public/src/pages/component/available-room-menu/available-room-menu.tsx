@@ -67,9 +67,7 @@ export default function AvailableRoomMenu() {
           room.reconnectionToken,
           30
         )
-        if (lobby.connection.isOpen) {
-          await lobby.leave()
-        }
+        await lobby.leave()
         if (room.connection.isOpen) {
           room.connection.close()
         }
@@ -121,9 +119,7 @@ export default function AvailableRoomMenu() {
           if (lobby.connection.isOpen) {
             await lobby.leave()
           }
-          if (room.connection.isOpen) {
-            room.connection.close()
-          }
+          room.connection.close()
           dispatch(leaveLobby())
           navigate("/preparation")
         } catch (error) {
@@ -138,9 +134,9 @@ export default function AvailableRoomMenu() {
       (room) => room.metadata?.gameMode === GameMode.QUICKPLAY && room.clients < MAX_PLAYERS_PER_GAME
     )
     if (existingQuickPlayRoom) {
-      await joinPrepRoom(existingQuickPlayRoom)
+      joinPrepRoom(existingQuickPlayRoom)
     } else {
-      await createRoom(GameMode.QUICKPLAY)
+      createRoom(GameMode.QUICKPLAY)
     }
   }, 1000)
 

@@ -44,12 +44,8 @@ export function GameRoomsMenu() {
                     game.reconnectionToken,
                     30
                 )
-                if (lobby.connection.isOpen) {
-                    await lobby.leave()
-                }
-                if (game.connection.isOpen) {
-                    game.connection.close()
-                }
+                await lobby.leave()
+                game.connection.close()
                 dispatch(leaveLobby())
                 navigate("/game")
             }
