@@ -13725,7 +13725,7 @@ export class Clodsire extends Pokemon {
   ])
   rarity = Rarity.RARE
   stars = 2
-  hp = 230
+  hp = 190
   atk = 10
   def = 5
   speDef = 8

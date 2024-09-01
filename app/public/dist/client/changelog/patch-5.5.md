@@ -6,6 +6,7 @@
 - Gligar is now tier 2, Gliscor is now tier 3
 - Nerf Lapras: PP 100 → 120
 - Nerf Slowking: HP 260 → 200, Attack 24 → 18
+- Nerf Closdire: HP 230 → 190
 
 # Changes to Synergies
 
