@@ -40,7 +40,7 @@ export const preparationSlice = createSlice({
   initialState: initialState,
   reducers: {
     setUser: (state, action: PayloadAction<GameUser>) => {
-      const u: GameUser = JSON.parse(JSON.stringify(action.payload))
+      const u: GameUser = structuredClone(action.payload)
       state.user = u
     },
     pushMessage: (state, action: PayloadAction<Message>) => {
@@ -52,7 +52,7 @@ export const preparationSlice = createSlice({
       )
     },
     addUser: (state, action: PayloadAction<IGameUser>) => {
-      const u: IGameUser = JSON.parse(JSON.stringify(action.payload))
+      const u: IGameUser = structuredClone(action.payload)
       state.users.push(u)
     },
     changeUser: (
