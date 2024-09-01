@@ -43,7 +43,6 @@ export function MainSidebar(props: MainSidebarProps) {
   const sidebarRef = useRef<HTMLHtmlElement>(null)
 
   const { t } = useTranslation()
-  const user = useAppSelector((state) => state.lobby.user)
   const profile = useAppSelector((state) => state.network.profile)
   const profileLevel = profile?.level ?? 0
 
@@ -72,7 +71,7 @@ export function MainSidebar(props: MainSidebarProps) {
         ref.removeEventListener("mouseleave", collapseSidebar)
       }
     }
-  }, [collapsed])
+  }, [])
 
   return (
     <Sidebar collapsed={collapsed} className="sidebar" ref={sidebarRef}>
@@ -165,15 +164,13 @@ export function MainSidebar(props: MainSidebarProps) {
           </NavLink>
         )}
 
-        {page !== "game" &&
-          user?.anonymous === false &&
-          profileLevel >= GADGETS.BOT_BUILDER.levelRequired && (
-            <NavLink svg="bot" onClick={() => navigate("/bot-builder")}>
-              {t("bot_builder")}
-            </NavLink>
-          )}
+        {page !== "game" && profileLevel >= GADGETS.BOT_BUILDER.levelRequired && (
+          <NavLink svg="bot" onClick={() => navigate("/bot-builder")}>
+            {t("bot_builder")}
+          </NavLink>
+        )}
 
-        {page !== "game" && user?.role === Role.ADMIN && (
+        {page !== "game" && profile?.role === Role.ADMIN && (
           <>
             <NavLink
               svg="pokemon-sprite"

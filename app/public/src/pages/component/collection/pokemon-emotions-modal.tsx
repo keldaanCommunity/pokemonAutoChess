@@ -29,7 +29,7 @@ export default function PokemonEmotionsModal(props: {
   const pokemonCollection = useAppSelector(
     (state) => state.lobby.pokemonCollection
   )
-  const user = useAppSelector((state) => state.lobby.user)
+  const user = useAppSelector((state) => state.network.profile)
 
   const index = PkmIndex[props.pokemon]
 

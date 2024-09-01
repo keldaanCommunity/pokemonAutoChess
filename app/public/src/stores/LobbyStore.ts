@@ -1,15 +1,14 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { RoomAvailable } from "colyseus.js"
-import LobbyUser, {
-  ILobbyUser
-} from "../../../models/colyseus-models/lobby-user"
 import Message from "../../../models/colyseus-models/message"
 import {
   TournamentBracketSchema,
   TournamentSchema
 } from "../../../models/colyseus-models/tournament"
-import { IBot, IStep } from "../../../models/mongo-models/bot-v2"
-import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
+import {
+  IPokemonConfig,
+  IUserMetadata
+} from "../../../models/mongo-models/user-metadata"
 import {
   IChatV2,
   IGameMetadata,
@@ -23,7 +22,6 @@ import {
   ILeaderboardInfo
 } from "../../../types/interfaces/LeaderboardInfo"
 import { ISpecialGamePlanned } from "../../../types/interfaces/Lobby"
-import { MAX_BOTS_STAGE } from "../pages/component/bot-builder/bot-logic"
 
 export interface IUserLobbyState {
   botLogDatabase: string[]
@@ -31,8 +29,8 @@ export interface IUserLobbyState {
   leaderboard: ILeaderboardInfo[]
   botLeaderboard: ILeaderboardBotInfo[]
   levelLeaderboard: ILeaderboardInfo[]
-  user: ILobbyUser | undefined
-  searchedUser: ILobbyUser | undefined
+  user: IUserMetadata | undefined
+  searchedUser: IUserMetadata | undefined
   tabIndex: number
   preparationRooms: RoomAvailable[]
   gameRooms: RoomAvailable[]
@@ -112,13 +110,9 @@ export const lobbySlice = createSlice({
       state,
       action: PayloadAction<{ id: string; field: string; value: any }>
     ) => {
-      if (state.user && action.payload.id == state.user.id) {
+      if (state.user && action.payload.id == state.user.uid) {
         state.user[action.payload.field] = action.payload.value
       }
-    },
-    setUser: (state, action: PayloadAction<LobbyUser>) => {
-      const u: ILobbyUser = JSON.parse(JSON.stringify(action.payload))
-      state.user = u
     },
     setTabIndex: (state, action: PayloadAction<number>) => {
       state.tabIndex = action.payload
@@ -152,7 +146,10 @@ export const lobbySlice = createSlice({
         (room) => room.roomId !== action.payload
       )
     },
-    setSearchedUser: (state, action: PayloadAction<LobbyUser | undefined>) => {
+    setSearchedUser: (
+      state,
+      action: PayloadAction<IUserMetadata | undefined>
+    ) => {
       state.searchedUser = action.payload
     },
     setBoosterContent: (state, action: PayloadAction<PkmWithConfig[]>) => {
@@ -276,7 +273,6 @@ export const {
   setBotLeaderboard,
   setLevelLeaderboard,
   changeUser,
-  setUser,
   setTabIndex,
   addRoom,
   removeRoom,

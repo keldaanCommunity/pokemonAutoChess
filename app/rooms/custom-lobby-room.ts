@@ -14,7 +14,9 @@ import BannedUser from "../models/mongo-models/banned-user"
 import { IBot } from "../models/mongo-models/bot-v2"
 import ChatV2 from "../models/mongo-models/chat-v2"
 import Tournament from "../models/mongo-models/tournament"
-import UserMetadata from "../models/mongo-models/user-metadata"
+import UserMetadata, {
+  IUserMetadata
+} from "../models/mongo-models/user-metadata"
 import { Emotion, IPlayer, Role, Title, Transfer } from "../types"
 import {
   GREATBALL_RANKED_LOBBY_CRON,
@@ -63,18 +65,17 @@ import {
 import LobbyState from "./states/lobby-state"
 
 export default class CustomLobbyRoom extends Room<LobbyState> {
-  bots: Map<string, IBot>
+  bots: Map<string, IBot> = new Map<string, IBot>()
   unsubscribeLobby: (() => void) | undefined
   rooms: RoomListingData<any>[] | undefined
   dispatcher: Dispatcher<this>
-  tournamentCronJobs: Map<string, CronJob>
+  tournamentCronJobs: Map<string, CronJob> = new Map<string, CronJob>()
   cleanUpCronJobs: CronJob[] = []
+  users: Map<string, IUserMetadata> = new Map<string, IUserMetadata>()
 
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
-    this.bots = new Map<string, IBot>()
-    this.tournamentCronJobs = new Map<string, CronJob>()
   }
 
   removeRoom(index: number, roomId: string) {

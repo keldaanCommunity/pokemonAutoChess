@@ -3,7 +3,6 @@ import firebase from "firebase/compat/app"
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
-import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import {
   ICustomLobbyState,
@@ -34,11 +33,7 @@ export default function AvailableRoomMenu() {
     (state) => state.network.lobby
   )
   const uid: string = useAppSelector((state) => state.network.uid)
-  const user = useAppSelector((state) => state.lobby.user)
-  const isFreshNewUser =
-    user &&
-    user.anonymous &&
-    Date.now() - new Date(user.creationTime).getTime() < 10 * 60 * 1000
+  const user = useAppSelector((state) => state.network.profile)
   const [isJoining, setJoining] = useState<boolean>(false)
 
   const createRoom = throttle(async function create(
@@ -49,7 +44,7 @@ export default function AvailableRoomMenu() {
       const firebaseUser = firebase.auth().currentUser
       const token = await firebaseUser?.getIdToken()
       if (token && user) {
-        const name = user.name ?? "Player"
+        const name = user.displayName ?? "Player"
         const room: Room<PreparationState> = await client.create(
           "preparation",
           {
@@ -152,7 +147,7 @@ export default function AvailableRoomMenu() {
           <ul>
             {preparationRooms.map((r) => (
               <li key={r.roomId}>
-                <RoomItem room={r} click={joinPrepRoom} />
+                <RoomItem room={r} click={(room) => joinPrepRoom(room)} />
               </li>
             ))}
           </ul>
@@ -164,7 +159,6 @@ export default function AvailableRoomMenu() {
           </button>
           <button
             onClick={() => createRoom()}
-            disabled={isFreshNewUser}
             className="bubbly blue create-room-button"
           >
             {t("create_custom_room")}

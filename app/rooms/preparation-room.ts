@@ -119,7 +119,7 @@ export default class PreparationRoom extends Room<PreparationState> {
               tournamentId: this.metadata?.tournamentId,
               bracketId: this.metadata?.bracketId,
               players: values(this.state.users).map((p) => ({
-                id: p.id,
+                id: p.uid,
                 rank: 1
               }))
             })
@@ -396,7 +396,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     this.state.users.forEach((user: GameUser) => {
       if (!user.isBot) {
         players.push({
-          id: user.id,
+          id: user.uid,
           avatar: user.avatar,
           name: user.name,
           elo: user.elo

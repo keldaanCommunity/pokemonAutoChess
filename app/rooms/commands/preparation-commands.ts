@@ -273,7 +273,7 @@ export class OnNewMessageCommand extends Command<
       if (user && !user.anonymous && message != "") {
         this.state.addMessage({
           author: user.name,
-          authorId: user.id,
+          authorId: user.uid,
           avatar: user.avatar,
           payload: message
         })
@@ -474,10 +474,10 @@ export class OnLeaveCommand extends Command<
 
           if (client.auth.uid === this.state.ownerId) {
             const newOwner = values(this.state.users).find(
-              (user) => user.id !== this.state.ownerId && !user.isBot
+              (user) => user.uid !== this.state.ownerId && !user.isBot
             )
             if (newOwner) {
-              this.state.ownerId = newOwner.id
+              this.state.ownerId = newOwner.uid
               this.state.ownerName = newOwner.name
               this.room.setMetadata({ ownerName: this.state.ownerName })
               this.room.setName(

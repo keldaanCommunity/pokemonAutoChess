@@ -59,13 +59,13 @@ export const preparationSlice = createSlice({
       state,
       action: PayloadAction<{ id: string; field: string; value: any }>
     ) => {
-      state.users[state.users.findIndex((u) => u.id == action.payload.id)][
+      state.users[state.users.findIndex((u) => u.uid == action.payload.id)][
         action.payload.field
       ] = action.payload.value
     },
     removeUser: (state, action: PayloadAction<string>) => {
       state.users.splice(
-        state.users.findIndex((u) => u.id == action.payload),
+        state.users.findIndex((u) => u.uid == action.payload),
         1
       )
     },

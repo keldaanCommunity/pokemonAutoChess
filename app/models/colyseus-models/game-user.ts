@@ -3,7 +3,7 @@ import { Role } from "../../types"
 import MapTileset from "./map-tileset"
 
 export interface IGameUser {
-  id: string
+  uid: string
   name: string
   avatar: string
   ready: boolean
@@ -14,7 +14,7 @@ export interface IGameUser {
   anonymous: boolean
 }
 export class GameUser extends Schema implements IGameUser {
-  @type("string") id: string
+  @type("string") uid: string
   @type("string") name: string
   @type("string") avatar: string
   @type("boolean") ready: boolean
@@ -26,7 +26,7 @@ export class GameUser extends Schema implements IGameUser {
   @type("boolean") anonymous: boolean
 
   constructor(
-    id: string,
+    uid: string,
     name: string,
     elo: number,
     avatar: string,
@@ -37,7 +37,7 @@ export class GameUser extends Schema implements IGameUser {
     anonymous: boolean
   ) {
     super()
-    this.id = id
+    this.uid = uid
     this.name = name
     this.avatar = avatar
     this.ready = ready
