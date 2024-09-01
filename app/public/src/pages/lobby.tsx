@@ -111,7 +111,9 @@ export default function Lobby() {
   }, [lobbyJoined, dispatch])
 
   const signOut = useCallback(async () => {
-    await lobby?.leave()
+    if (lobby?.connection.isOpen) {
+      await lobby?.leave()
+    }
     await firebase.auth().signOut()
     dispatch(leaveLobby())
     dispatch(logOut())
@@ -250,7 +252,7 @@ export async function joinLobbyRoom(
           const token = await user.getIdToken()
 
           const lobby = store.getState().network.lobby
-          if (lobby) {
+          if (lobby?.connection.isOpen) {
             await lobby.leave()
           }
           const room: Room<ICustomLobbyState> = await client.join("lobby", {

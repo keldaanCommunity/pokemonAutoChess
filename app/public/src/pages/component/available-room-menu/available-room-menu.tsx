@@ -70,7 +70,9 @@ export default function AvailableRoomMenu() {
         if (lobby.connection.isOpen) {
           await lobby.leave()
         }
-        room.connection.close()
+        if (room.connection.isOpen) {
+          room.connection.close()
+        }
         dispatch(leaveLobby())
         navigate("/preparation")
       }
@@ -119,7 +121,9 @@ export default function AvailableRoomMenu() {
           if (lobby.connection.isOpen) {
             await lobby.leave()
           }
-          room.connection.close()
+          if (room.connection.isOpen) {
+            room.connection.close()
+          }
           dispatch(leaveLobby())
           navigate("/preparation")
         } catch (error) {
