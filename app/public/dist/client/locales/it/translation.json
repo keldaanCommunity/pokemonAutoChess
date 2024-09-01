@@ -1404,7 +1404,7 @@
     "HIDDEN_POWER_Z": "Infliggi a tutta la squadra nemica SLEEP per 5 secondi.",
     "HIDDEN_POWER_QM": "Ottieni 4 Unown casuali sulla tua panchina",
     "HIDDEN_POWER_EM": "Evoca 4 Unown casuali in ogni angolo del campo.",
-    "POISON_JAB": "Infliggi [30,60,90,120,SP] SPECIAL, scambiati di posto con il bersaglio e causa POISONNED sia al bersaglio che all' utilizzatore per 3 secondi.",
+    "POISON_JAB": "Infliggi [30,60,90,SP] SPECIAL, scambiati di posto con il bersaglio e causa POISONNED sia al bersaglio che all' utilizzatore per 3 secondi.",
     "SHELL_SMASH": "Infliggi [15, 30,SP] SPECIAL ai nemici adiacenti; potenzi di 2 l' ATK, del 20% i AP e  di 20% l'ATK_SPEED e  riduci di 1 la DEF e di 1  la SPE_DEF.",
     "HELPING_HAND": "Dona [30,60,100,SP] SHIELD ai 2 alleati più vicini e raddoppia i danni della prossima abilità.",
     "ASTRAL_BARRAGE": "Manda all'attacco [3, SP=2] piccoli fantasmi a Pokémon avversari casuali. Ognuno di loro infligge 20 SPECIAL.",

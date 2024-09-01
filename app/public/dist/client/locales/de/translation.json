@@ -1406,7 +1406,7 @@
     "HIDDEN_POWER_Z": "Versetzen Sie das gegnerische Team für 5 Sekunden in den SLEEP",
     "HIDDEN_POWER_QM": "Holen Sie sich 4 zufällige Icognito auf Ihre Bank",
     "HIDDEN_POWER_EM": "Erzeuge 4 zufällige Icognito an jeder Ecke des Spielbretts",
-    "POISON_JAB": "Verursacht [30,60,90,120,SP] SPECIAL, tauscht die Plätze mit dem Ziel und POISONNED sowohl das Ziel als auch den Zaubernden für 3 Sekunden",
+    "POISON_JAB": "Verursacht [30,60,90,SP] SPECIAL, tauscht die Plätze mit dem Ziel und POISONNED sowohl das Ziel als auch den Zaubernden für 3 Sekunden",
     "SHELL_SMASH": "Fügt benachbarten Feinden [15, 30,SP] SPECIAL zu; Gewinne 2 ATK, 20 AP und 20 % ATK_SPEED und verliere 1 DEF, 1 SPE_DEF",
     "HELPING_HAND": "Gib [30,60,100,SP] SHIELD an die 2 nächstgelegenen Verbündeten und verdopple den Schaden der nächsten Fähigkeit",
     "ASTRAL_BARRAGE": "Sendet [3,SP=2] kleine Geister auf zufällige gegnerische Pokémon. Jeder von ihnen gibt 20 SPECIAL aus",

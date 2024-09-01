@@ -3,7 +3,7 @@
 
 # Changes to Pokemon & Abilities
 
-- 
+- Gligar is now tier 2, Gliscor is now tier 3
 
 # Changes to Synergies
 

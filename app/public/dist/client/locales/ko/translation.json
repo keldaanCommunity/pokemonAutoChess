@@ -1403,7 +1403,7 @@
     "HIDDEN_POWER_Z": "상대팀 전체를 5초간 SLEEP 상태로 만든다.",
     "HIDDEN_POWER_QM": "대기석에 4마리의 안농을 얻는다.",
     "HIDDEN_POWER_EM": "보드의 구석에 안농을 총 4마리를 생성한다.",
-    "POISON_JAB": "[30,60,90,120,SP] SPECIAL을 주고 대상과 자리를 바꾸며 3초 동안 대상과 시전자 모두를 POISONNED 로 만든다.",
+    "POISON_JAB": "[30,60,90,SP] SPECIAL을 주고 대상과 자리를 바꾸며 3초 동안 대상과 시전자 모두를 POISONNED 로 만든다.",
     "SHELL_SMASH": "인접한 적에게 [15,30,SP]의 SPECIAL을 주고 2 ATK, 20 AP 와 20% ATK_SPEED를 얻고,  1 DEF, 1 SPE_DEF을 잃는다.",
     "HELPING_HAND": "가장 가까운 아군 2명에게 [30,60,100,SP]의 SHIELD를 부여하고 다음 능력의 데미지를 두 배로 증폭시킨다.",
     "ASTRAL_BARRAGE": "무작위 적 포켓몬에게 20 SPECIAL을 입히는 [3,SP=2]개의 작은 유령을 보낸다.",

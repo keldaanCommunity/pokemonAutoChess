@@ -6727,7 +6727,7 @@ export class Gligar extends Pokemon {
     Synergy.FLYING
   ])
   rarity = Rarity.UNIQUE
-  stars = 3
+  stars = 2
   evolution = Pkm.GLISCOR
   evolutionRule = new ItemEvolutionRule([Item.RAZOR_FANG])
   hp = 150
@@ -6748,7 +6748,7 @@ export class Gliscor extends Pokemon {
     Synergy.FLYING
   ])
   rarity = Rarity.UNIQUE
-  stars = 4
+  stars = 3
   hp = 170
   atk = 18
   def = 4

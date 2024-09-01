@@ -1004,7 +1004,7 @@
     "HIDDEN_POWER_Z": "敵チームを5秒間睡眠状態にする",
     "HIDDEN_POWER_QM": "アンノーンをランダムで4体ベンチに配置する",
     "HIDDEN_POWER_EM": "ボードの隅々にランダムなアンノーンを 4 体出現させる",
-    "POISON_JAB": "[30,60,90,120,SP] SPECIALを与え、ターゲットと位置を交換し、ターゲットと術者の両方に3秒間 POISONNED を与える",
+    "POISON_JAB": "[30,60,90,SP] SPECIALを与え、ターゲットと位置を交換し、ターゲットと術者の両方に3秒間 POISONNED を与える",
     "SHELL_SMASH": "隣接する敵に[15, 30,SP] SPECIALを与える。 ATKが2、APが20%、ATK_SPEEDが20%増加し、DEFが1、SPE_DEFが1減少します",
     "HELPING_HAND": "最も近い味方2体に[30,60,100,SP] SHIELDを与え、次のアビリティのダメージを2倍にする。",
     "ASTRAL_BARRAGE": "ランダムな相手ポケモンに[3,SP=2]の小さなゴーストを送ります。それぞれ20 SPECIALを提供します",
