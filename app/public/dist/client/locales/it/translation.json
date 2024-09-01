@@ -1442,6 +1442,18 @@
     "SCREECH": "Riduci la DEF di ogni nemico adiacente di [1,2,4,SP].",
     "SAND_TOMB": "Infliggi [10,20,40,SP] SPECIAL e causa SILENCE e PARALYSIS per [3,5,8] secondi.",
     "WHIRLWIND": "Infliggi [40,80,120,SP] SPECIAL e fai volare via il bersaglio.",
+    "EMPTY_LIGHT": "Sputa veleno al nemico, infliggendogli [33,SP] SPECIAL e riducendogli la sua SPE_DEF di 3. Poi l'abilità rimbalza ad un altro Pokèmon nemico con una SPE_DEF minore del bersaglio precedente, per un massimo di 5 volte.",
+    "UNBOUND": "Hoopa si svincola per diventare la sua vera forma, ed ottiene un'enorme quantità di potere.",
+    "HYPERSPACE_FURY": "Usando la sua miriade di braccia, scatena una serie di [4,SP] attacchi. Ogni attacco riduce la DEF del bersaglio di 1.",
+    "SNIPE_SHOT": "Spara un colpo d'acqua dal suo indice al nemico più lontano, infliggendo [50,100,200,SP] SPECIAL a tutti i Pokèmon nemici nel tragitto.",
+    "AIR_SLASH": "Infliggi [25,50,100,SP] SPECIAL e causa FLINCH per 7 secondi.",
+    "EGGSPLOSION": "Lancia un uovo esplosivo, infliggendo [40,80,140,SP] SPECIAL e causa ARMOR_REDUCTION per 4 secondi a tutti i nemici adiacenti al bersaglio. Se il bersaglio va KO, hai il 30% di possibilità di ottenere un uovo nella tua panchina.",
+    "FLORAL_HEALING": "Cura un valore di HP uguale ai PP massimi di chi ha Comfey equipaggiato o di Comfey stesso se non è equipaggiato ad un Pokèmon.",
+    "VINE_WHIP": "Infliggi [100,SP] SPECIAL e causa FLINCH al bersaglio ed a i nemici adiacenti per 3 secondi.",
+    "BODY_SLAM": "Infliggi [30,SP]% dei HP massimi come SPECIAL.",
+    "BARB_BARRAGE": "Tuffati nel mezzo della squadra nemica, infliggendo [15,30,60,SP] SPECIAL e causa POISONNED a tutte le unità adiacenti per 3 secondi.",
+    "MAGIC_POWDER": "Ottieni [10,20,40,SP] SHIELD e causa SILENCE ai nemici adiacenti per [2,4,6] secondi.",
+    "INFERNAL_PARADE": "Lancia un Ruotafuoco, infliggendo 2 volte [30, SP] SPECIAL con il 50% di possibilità di causare BURN a tutti i Pokèmon colpiti nella sua traiettoria.",
     "AURASPHERE": "Emana un'aura e proietta energia in linea, infliggendo [25,50,SP] SPECIAL e SILENCE a ogni avversario colpito per 3 secondi."
   },
   "effect": {
