@@ -232,7 +232,7 @@ export default function Preparation() {
             5 * 60
           ) // 5 minutes allowed to start game
           if (r.connection.isOpen) {
-            await r.leave(true)
+            await r.leave()
           }
           if (game.connection.isOpen) {
             game.connection.close()
@@ -259,7 +259,7 @@ export default function Preparation() {
         leaveLabel={t("leave_room")}
         leave={async () => {
           if (room?.connection.isOpen) {
-            await room?.leave(true)
+            await room?.leave()
           }
           localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
           dispatch(leavePreparation())
