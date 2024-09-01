@@ -1494,7 +1494,16 @@
     "PETAL_BLIZZARD": "Infliggi [30,SP] SPECIAL ai nemici adiacenti e guadagna 10 AP",
     "SUNSTEEL_STRIKE": "Piomba nel mezzo della squadra nemica col il potere di un meteorite, infliggendo [80,SP] SPECIAL ai nemici adiacenti e causa loro BURN per 3 secondi.",
     "MOONGEIST_BEAM": "Infliggi [100,SP] SPECIAL a tutti i Pokèmon nemici in una linea retta e causa loro PARALYSIS per 3 secondi. I Pokèmon alleati dentro il raggio ottengono [100,SP] SHIELD.",
-    "FLEUR_CANNON": "Scaglia un laser devastante che infligge [120,SP] SPECIAL a tutti i nemici nel raggio laser. Riduci i AP dell'utilizzatore di 20."
+    "FLEUR_CANNON": "Scaglia un laser devastante che infligge [120,SP] SPECIAL a tutti i nemici nel raggio laser. Riduci i AP dell'utilizzatore di 20.",
+    "SPIRIT_BREAK": "Infliggi [20,40,80,SP] SPECIAL e riduci gli AP del bersaglio di [20,SP].",
+    "SHEER_COLD": "Una ventata di freddo gelido infligge [50,100,200,SP] SPECIAL col il [30,SP]% di probabilità di uccidere istantaneamente il bersaglio. Più sono i HP dell'utilizzatore rispetto al bersaglio, più è alta la probabilità. Uccidi istantaneamente sempre i nemici che sono sotto lo status FREEZE, però sono immuni i Pokèmon ICE.",
+    "EXTREME_SPEED": "Balza verso il nemico più lontano, infliggendo [40,SP] PHYSICAL a tutti i Pokèmon nella traiettoria.",
+    "ZAP_CANNON": "Scaglia una sfera elettrica che infligge [25,50,100,SP] SPECIAL e causa PARALYSIS e ARMOR_REDUCTION per [1,2,4] secondi.",
+    "PSYCHO_BOOST": "Tagliuzza i nemici affianco i nemici affianco al bersaglio, infliggendo [140,SP] SPECIAL a tutti i nemici colpiti. Riduci i AP dell'utilizzatore di 20 per ogni Pokèmon colpito.",
+    "ICE_HAMMER": "Infliggi [50,100,SP] SPECIAL e causa FREEZE per 3 secondi. Causa PARALYSIS all'utilizzatore per 3 secondi.",
+    "POLLEN_PUFF": "Cura l'alleato con meno HP di [20,40,80,SP].",
+    "PSYSTRIKE": "L'utilizzatore materializza un onda psichica in direzione del nemico più lontano, infliggendogli  [100,SP] PHYSICAL e teletrasporta tutto ciò che viene colpito nella traiettoria.",
+    "FACADE": "Infligge [20,40,80,SP] SPECIAL. Il danno raddoppia se l'utilizzatore ha uno status negativo."
   },
   "effect": {
     "INGRAIN": "Ingranato",
