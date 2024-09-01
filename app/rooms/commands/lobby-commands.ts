@@ -50,6 +50,7 @@ import { Language } from "../../types/enum/Language"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { StarterAvatars } from "../../types/enum/Starters"
 import { ITournamentPlayer } from "../../types/interfaces/Tournament"
+import { CloseCodes } from "../../types/enum/CloseCodes"
 import { sum } from "../../utils/array"
 import { logger } from "../../utils/logger"
 import { cleanProfanity } from "../../utils/profanity-filter"
@@ -764,8 +765,7 @@ export class BanUserCommand extends Command<
         }
         this.room.clients.forEach((c) => {
           if (c.auth.uid === uid) {
-            c.send(Transfer.BAN)
-            c.leave()
+            c.leave(CloseCodes.USER_BANNED)
           }
         })
       }
