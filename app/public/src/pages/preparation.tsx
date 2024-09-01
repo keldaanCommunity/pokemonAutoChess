@@ -225,7 +225,6 @@ export default function Preparation() {
           const game: Room<GameState> = await client.joinById(roomId, {
             idToken: token
           })
-          logger.log(game)
           localStore.set(LocalStoreKeys.RECONNECTION_GAME, roomId, 60 * 60)
           localStore.set(
             LocalStoreKeys.RECONNECTION_TOKEN,
