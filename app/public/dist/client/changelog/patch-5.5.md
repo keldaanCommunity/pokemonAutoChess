@@ -11,7 +11,7 @@
 
 # Changes to Items
 
-- 
+- Nerf Star dust: now gives 50% of max PP as SHIELD instead of 60%
 
 # Gameplay
 

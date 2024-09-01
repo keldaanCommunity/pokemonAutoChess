@@ -1932,7 +1932,7 @@
     "AQUA_EGG": "The holder gains +50 starting PP and regains 20 PP after casting its ability",
     "BLUE_ORB": "Every third attack dealt unleashes a chain lightning that bounces to the 2 closing enemies, dealing 10 SPECIAL and burning 20 PP",
     "SCOPE_LENS": "Critical hits steal 15 PP from the target.",
-    "STAR_DUST": "After casting ability, gain 60% of max PP as SHIELD",
+    "STAR_DUST": "After casting ability, gain 50% of max PP as SHIELD",
     "GREEN_ORB": "Holder and adjacent allies regain 4% of their max HP every second",
     "MANA_SCARF": "The holder attacks restore 8 additional PP",
     "SMOKE_BALL": "Once below 33% max HP, drop the smoke ball and jump to a cell away. Every adjacent enemy is PARALYSIS for 3 seconds, and the smoke reduce the precision of all Pokémons inside by 50%.",

@@ -1762,7 +1762,7 @@
     "AQUA_EGG": "Il possessore guadagna +50 PP iniziale e recupera 20 PP dopo aver lanciato la sua abilità",
     "BLUE_ORB": "Ogni terzo attacco del portatore scatena una catena di fulmini che rimbalza sui 2 nemici vicini, infliggendo 10 SPECIAL e bruciando 20 PP",
     "SCOPE_LENS": "I colpi critici rubano 15 PP al bersaglio.",
-    "STAR_DUST": "Dopo aver lanciato l'abilità, ottieni il 60% del PP massimo come SHIELD",
+    "STAR_DUST": "Dopo aver lanciato l'abilità, ottieni il 50% del PP massimo come SHIELD",
     "GREEN_ORB": "Il possessore e gli alleati adiacenti recuperano il 4% dei loro HP massimi ogni secondo",
     "MANA_SCARF": "Gli attacchi del possessore ripristinano 8 PP aggiuntivi",
     "SMOKE_BALL": "Una volta sotto il 33% degli HP massimi, lascia cadere la palla di fumo e salta in una cella di distanza. Ogni nemico adiacente viene PARALYSIS per 3 secondi e il fumo riduce la precisione di tutti i Pokemon all'interno del 50%.",
