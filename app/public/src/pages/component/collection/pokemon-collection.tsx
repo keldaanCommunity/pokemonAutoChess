@@ -193,5 +193,5 @@ export function PokemonCollectionList(props: {
     ]
   )
 
-  return <div className="pokemon-carousel">{elligiblePokemons}</div>
+  return <div className="pokemon-collection-list">{elligiblePokemons}</div>
 }

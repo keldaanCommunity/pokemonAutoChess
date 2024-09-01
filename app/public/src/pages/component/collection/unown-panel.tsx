@@ -54,7 +54,7 @@ export default function UnownPanel(props: {
       <div id="unown-panel">
         {secretMessage.map((char, i) => renderChar(char, i, unowns))}
       </div>
-      <div className="pokemon-carousel">
+      <div className="pokemon-collection-list">
         {unowns.map((unown) => {
           if (!unown) return null
           return (
