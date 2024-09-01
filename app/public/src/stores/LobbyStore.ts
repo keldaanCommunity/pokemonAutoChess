@@ -90,9 +90,6 @@ export const lobbySlice = createSlice({
     setLevelLeaderboard: (state, action: PayloadAction<ILeaderboardInfo[]>) => {
       state.levelLeaderboard = action.payload
     },
-    addPokemonConfig: (state, action: PayloadAction<IPokemonConfig>) => {
-      state.pokemonCollection = [...state.pokemonCollection, action.payload]
-    },
     changePokemonConfig: (
       state,
       action: PayloadAction<{ id: string; field: string; value: any }>
@@ -104,14 +101,6 @@ export const lobbySlice = createSlice({
       if (index !== -1) {
         clonedCollection[index][action.payload.field] = action.payload.value
         state.pokemonCollection = clonedCollection
-      }
-    },
-    changeUser: (
-      state,
-      action: PayloadAction<{ id: string; field: string; value: any }>
-    ) => {
-      if (state.user && action.payload.id == state.user.uid) {
-        state.user[action.payload.field] = action.payload.value
       }
     },
     setTabIndex: (state, action: PayloadAction<number>) => {
@@ -157,9 +146,6 @@ export const lobbySlice = createSlice({
     },
     setSuggestions: (state, action: PayloadAction<ISuggestionUser[]>) => {
       state.suggestions = action.payload
-    },
-    setLanguage: (state, action: PayloadAction<Language>) => {
-      state.language = action.payload
     },
     leaveLobby: () => initialState,
     setNextSpecialGame: (state, action: PayloadAction<ISpecialGamePlanned>) => {
@@ -263,16 +249,13 @@ export const lobbySlice = createSlice({
 })
 
 export const {
-  setLanguage,
   removeMessage,
   setBoosterContent,
-  addPokemonConfig,
   changePokemonConfig,
   pushMessage,
   setLeaderboard,
   setBotLeaderboard,
   setLevelLeaderboard,
-  changeUser,
   setTabIndex,
   addRoom,
   removeRoom,

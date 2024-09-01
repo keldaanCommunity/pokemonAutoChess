@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   list-style: none;
   gap: 8px;
-  margin: 0 0 0.5em 0;
+  margin: 0;
 }
 
 .player-team-pokemons li {

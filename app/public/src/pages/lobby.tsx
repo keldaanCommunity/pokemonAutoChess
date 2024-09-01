@@ -1,17 +1,14 @@
 import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import { Client, Room, RoomAvailable } from "colyseus.js"
 import firebase from "firebase/compat/app"
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Navigate } from "react-router-dom"
-import LobbyUser from "../../../models/colyseus-models/lobby-user"
-import PokemonConfig from "../../../models/colyseus-models/pokemon-config"
 import {
   TournamentBracketSchema,
   TournamentPlayerSchema,
   TournamentSchema
 } from "../../../models/colyseus-models/tournament"
-import { IBot } from "../../../models/mongo-models/bot-v2"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import {
   ICustomLobbyState,
@@ -21,18 +18,14 @@ import {
 } from "../../../types"
 import { logger } from "../../../utils/logger"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import i18n from "../i18n"
 import store from "../stores"
 import {
-  addPokemonConfig,
   addRoom,
   addTournament,
   addTournamentBracket,
-  changePokemonConfig,
   changeTournament,
   changeTournamentBracket,
   changeTournamentPlayer,
-  changeUser,
   leaveLobby,
   pushBotLog,
   pushMessage,
@@ -42,11 +35,9 @@ import {
   removeTournamentBracket,
   setBoosterContent,
   setCcu,
-  setLanguage,
   setNextSpecialGame,
   setSearchedUser,
   setSuggestions,
-  setUser,
   updateTournament
 } from "../stores/LobbyStore"
 import {
@@ -71,7 +62,7 @@ export default function Lobby() {
   const dispatch = useAppDispatch()
   const lobby = useAppSelector((state) => state.network.lobby)
 
-  const lobbyJoined = useRef<boolean>(false)
+  const [lobbyJoined, setLobbyJoined] = useState<boolean>(false)
   const [gameToReconnect, setGameToReconnect] = useState<string | null>(
     localStore.get(LocalStoreKeys.RECONNECTION_GAME)
   )
@@ -89,13 +80,13 @@ export default function Lobby() {
 
   useEffect(() => {
     const client = store.getState().network.client
-    if (!lobbyJoined.current) {
+    if (!lobbyJoined) {
       joinLobbyRoom(dispatch, client).catch((err) => {
         logger.error(err)
         dispatch(setNetworkError(err.message))
         setToAuth(true)
       })
-      lobbyJoined.current = true
+      setLobbyJoined(true)
     }
   }, [lobbyJoined, dispatch])
 
@@ -359,73 +350,6 @@ export async function joinLobbyRoom(
             dispatch(removeTournament(tournament))
           })
 
-          room.state.users.onAdd((u) => {
-            if (u.id == user.uid) {
-              u.pokemonCollection.onAdd((p) => {
-                const pokemonConfig = p as PokemonConfig
-                dispatch(addPokemonConfig(pokemonConfig))
-                const fields: NonFunctionPropNames<PokemonConfig>[] = [
-                  "dust",
-                  "emotions",
-                  "id",
-                  "selectedEmotion",
-                  "selectedShiny",
-                  "shinyEmotions"
-                ]
-
-                fields.forEach((field) => {
-                  pokemonConfig.listen(
-                    field,
-                    (value, previousValue) => {
-                      if (previousValue !== undefined) {
-                        dispatch(
-                          changePokemonConfig({
-                            id: pokemonConfig.id,
-                            field: field,
-                            value: value
-                          })
-                        )
-                      }
-                    },
-                    false
-                  )
-                })
-              }, false)
-              dispatch(setUser(u))
-              setSearchedUser(u)
-
-              u.listen("language", (value) => {
-                if (value) {
-                  dispatch(setLanguage(value))
-                  i18n.changeLanguage(value)
-                }
-              })
-            }
-            const fields: NonFunctionPropNames<LobbyUser>[] = [
-              "id",
-              "name",
-              "avatar",
-              "elo",
-              "wins",
-              "exp",
-              "level",
-              "donor",
-              "honors",
-              "history",
-              "booster",
-              "titles",
-              "title",
-              "role",
-              "anonymous"
-            ]
-
-            fields.forEach((field) => {
-              u.listen(field, (value) => {
-                dispatch(changeUser({ id: u.id, field: field, value: value }))
-              })
-            })
-          })
-
           room.state.listen("nextSpecialGame", (specialGame) => {
             dispatch(setNextSpecialGame(specialGame))
           })
@@ -458,7 +382,7 @@ export async function joinLobbyRoom(
             dispatch(setProfile(user))
           })
 
-          room.onMessage(Transfer.USER, (user: LobbyUser) =>
+          room.onMessage(Transfer.USER, (user: IUserMetadata) =>
             dispatch(setSearchedUser(user))
           )
 

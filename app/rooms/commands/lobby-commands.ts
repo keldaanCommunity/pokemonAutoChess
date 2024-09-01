@@ -392,10 +392,10 @@ export class ChangeNameCommand extends Command<
       if (!user) return
       if (USERNAME_REGEXP.test(name)) {
         user.displayName = name
-        const usr = await UserMetadata.findOne({ uid: client.auth.uid })
-        if (usr) {
-          usr.displayName = name
-          usr.save()
+        const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
+        if (mongoUser) {
+          mongoUser.displayName = name
+          await mongoUser.save()
         }
       }
     } catch (error) {
@@ -416,10 +416,10 @@ export class ChangeTitleCommand extends Command<
           title = "" // remove title if user already has it
         }
         user.title = title
-        const usr = await UserMetadata.findOne({ uid: client.auth.uid })
-        if (usr) {
-          usr.title = title
-          usr.save()
+        const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
+        if (mongoUser) {
+          mongoUser.title = title
+          await mongoUser.save()
         }
       }
     } catch (error) {
@@ -458,12 +458,12 @@ export class ChangeSelectedEmotionCommand extends Command<
         ) {
           pokemonConfig.selectedEmotion = emotion
           pokemonConfig.selectedShiny = shiny
-          const u = await UserMetadata.findOne({ uid: client.auth.uid })
-          const pkmConfig = u?.pokemonCollection.get(index)
-          if (u && pkmConfig) {
+          const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
+          const pkmConfig = mongoUser?.pokemonCollection.get(index)
+          if (mongoUser && pkmConfig) {
             pkmConfig.selectedEmotion = emotion
             pkmConfig.selectedShiny = shiny
-            u.save()
+            await mongoUser.save()
           }
         }
       }
@@ -625,7 +625,8 @@ export class BuyEmotionCommand extends Command<
         mongoUser.titles.push(Title.DUCHESS)
       }
 
-      mongoUser.save()
+      await mongoUser.save()
+      client.send(Transfer.USER_PROFILE, mongoUser)
     } catch (error) {
       logger.error(error)
     }
@@ -665,6 +666,7 @@ export class BuyBoosterCommand extends Command<
 
       user.booster = mongoUser.booster
       pokemonConfig.dust = mongoPokemonConfig.dust // resync shards to database value, db authoritative
+      client.send(Transfer.USER_PROFILE, mongoUser)
     } catch (error) {
       logger.error(error)
     }
