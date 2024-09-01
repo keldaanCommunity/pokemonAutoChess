@@ -68,9 +68,7 @@ export default function AvailableRoomMenu() {
           30
         )
         await lobby.leave()
-        if (room.connection.isOpen) {
-          room.connection.close()
-        }
+        room.connection.close()
         dispatch(leaveLobby())
         navigate("/preparation")
       }

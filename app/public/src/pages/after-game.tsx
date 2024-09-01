@@ -106,7 +106,7 @@ export default function AfterGame() {
           className="bubbly blue"
           style={{ margin: "10px 0 0 10px" }}
           onClick={() => {
-            if (room && room.connection.isOpen) {
+            if (room) {
               room.connection.close()
             }
             dispatch(leaveAfter())
