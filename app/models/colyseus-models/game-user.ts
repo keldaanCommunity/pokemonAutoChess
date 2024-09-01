@@ -1,6 +1,5 @@
 import { Schema, type } from "@colyseus/schema"
 import { Role } from "../../types"
-import MapTileset from "./map-tileset"
 
 export interface IGameUser {
   uid: string
@@ -20,7 +19,6 @@ export class GameUser extends Schema implements IGameUser {
   @type("boolean") ready: boolean
   @type("boolean") isBot: boolean
   @type("uint16") elo: number
-  @type(MapTileset) map = new MapTileset()
   @type("string") title: string
   @type("string") role: Role
   @type("boolean") anonymous: boolean
