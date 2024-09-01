@@ -3560,8 +3560,8 @@ export class RootStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const heal = [10, 20, 30][pokemon.stars - 1] ?? 10
-    const damage = [10, 20, 30][pokemon.stars - 1] ?? 10
+    const heal = [10, 20, 40][pokemon.stars - 1] ?? 10
+    const damage = [10, 20, 40][pokemon.stars - 1] ?? 10
     const lockedDuration = 4000
 
     const cells = board.getAdjacentCells(

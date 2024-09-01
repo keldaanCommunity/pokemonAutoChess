@@ -3910,9 +3910,15 @@ export class Bellsprout extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROOT
-  passive = Passive.BELLSPROUT
-  additional = true
   attackSprite = AttackSprite.GRASS_MELEE
+  regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      regionSynergies.includes(Synergy.GRASS) ||
+      regionSynergies.includes(Synergy.FLORA)
+    )
+  }
 }
 
 export class Weepinbell extends Pokemon {
@@ -3920,7 +3926,6 @@ export class Weepinbell extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.VICTREEBEL
-  evolutionRule = new ItemEvolutionRule(Berries)
   hp = 160
   atk = 12
   def = 2
@@ -3928,9 +3933,15 @@ export class Weepinbell extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROOT
-  passive = Passive.BELLSPROUT
-  additional = true
   attackSprite = AttackSprite.GRASS_MELEE
+  regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      regionSynergies.includes(Synergy.GRASS) ||
+      regionSynergies.includes(Synergy.FLORA)
+    )
+  }
 }
 
 export class Victreebel extends Pokemon {
@@ -3944,8 +3955,15 @@ export class Victreebel extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROOT
-  additional = true
   attackSprite = AttackSprite.GRASS_MELEE
+  regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      regionSynergies.includes(Synergy.GRASS) ||
+      regionSynergies.includes(Synergy.FLORA)
+    )
+  }
 }
 
 export class Pikipek extends Pokemon {
@@ -13753,7 +13771,7 @@ export class Tangela extends Pokemon {
   range = 1
   skill = Ability.POWER_WHIP
   attackSprite = AttackSprite.GRASS_MELEE
-  regional = true
+  additional = true
 }
 
 export class Tangrowth extends Pokemon {
@@ -13772,7 +13790,7 @@ export class Tangrowth extends Pokemon {
   range = 1
   skill = Ability.POWER_WHIP
   attackSprite = AttackSprite.GRASS_MELEE
-  regional = true
+  additional = true
 }
 
 export class Phanpy extends Pokemon {

@@ -7,7 +7,9 @@
 - Nerf Lapras: PP 100 → 120
 - Nerf Slowking: HP 260 → 200, Attack 24 → 18
 - Nerf Closdire: HP 230 → 190
-- Changed Root (Bellsprout): All adjacent enemies are Locked for 4 seconds and take 10/20/30 special damage whereas user and adjacent allies are healed by 10/20/30 HP
+- Changed Root (Bellsprout): All adjacent enemies are Locked for 4 seconds and take 10/20/40 special damage whereas user and adjacent allies are healed by 10/20/40 HP
+- Bellsprout line is now regional in Grass/Flora regions, and Weepinbell no longer evolve with berries
+- Tangela is now additional and no longer regional
 
 # Changes to Synergies
 
