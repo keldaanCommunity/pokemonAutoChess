@@ -5897,7 +5897,7 @@ export class Lapras extends Pokemon {
   atk = 12
   def = 5
   speDef = 6
-  maxPP = 100
+  maxPP = 120
   range = 1
   skill = Ability.DIVE
   attackSprite = AttackSprite.WATER_MELEE
