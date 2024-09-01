@@ -815,7 +815,7 @@ export class SelectLanguageCommand extends Command<
         const user = await UserMetadata.findOne({ uid: client.auth.uid })
         if (user) {
           user.language = message
-          user.save()
+          await user.save()
         }
         u.language = message
       }
