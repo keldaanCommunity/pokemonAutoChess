@@ -97,7 +97,6 @@ export default function Lobby() {
 
   useEffect(() => {
     const client = store.getState().network.client
-    
     if (!lobbyJoined.current) {
       joinLobbyRoom(dispatch, client, onLeave).catch((err) => {
         logger.error(err)
