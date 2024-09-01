@@ -9,6 +9,7 @@ import { distanceC } from "../utils/distance"
 import Board from "./board"
 import { PokemonEntity, getMoveSpeed } from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
+import {findPath} from "../utils/pathfind"
 
 export default class MovingState extends PokemonState {
   update(
@@ -65,7 +66,7 @@ export default class MovingState extends PokemonState {
     coordinates: { x: number; y: number }
   ) {
     //logger.debug('move attempt');
-
+    
     let x: number | undefined = undefined
     let y: number | undefined = undefined
 
@@ -99,7 +100,7 @@ export default class MovingState extends PokemonState {
               }
             })
         }
-
+        
         // logger.debug(`pokemon ${pokemon.name} jumped from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates.x}, ${coordinates.y})), orientation: ${pokemon.orientation}`);
         board.swapValue(pokemon.positionX, pokemon.positionY, x, y)
         pokemon.orientation = board.orientation(
@@ -112,26 +113,24 @@ export default class MovingState extends PokemonState {
         )
       }
     } else {
-      const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+      // Using pathfinding to get optimal path
+      //console.debug('Current Pokemon:', pokemon.name, 'Position:', pokemon.positionX, pokemon.positionY);
+      //console.debug('target Pokemons position:', coordinates.x , coordinates.y);
+      const cells = board.getOuterRangeCells(coordinates.x, coordinates.y, pokemon.range)
       let distance = 999
-
       cells.forEach((cell) => {
         if (cell.value === undefined) {
-          const candidateDistance = distanceC(
-            coordinates.x,
-            coordinates.y,
-            cell.x,
-            cell.y
-          )
-          // logger.debug(`${pokemon.name} - Candidate (${cell.x},${cell.y}) to ${coordinates.x},${coordinates.y}, distance: ${candidateDistance}`);
-          if (candidateDistance < distance) {
-            distance = candidateDistance
-            x = cell.x
-            y = cell.y
+          const candidateDistance = findPath(board, [pokemon.positionX, pokemon.positionY],[cell.x, cell.y])
+          //logger.debug(`${pokemon.name} - Candidate (${cell.x},${cell.y}) to ${coordinates.x},${coordinates.y}, distance: ${candidateDistance}`);
+          if (candidateDistance.length < distance && candidateDistance.length !== 0) {
+            distance = candidateDistance.length
+            const nextStep = candidateDistance[0];
+            x = nextStep[0];
+            y = nextStep[1];
           }
         }
-      })
-
+      }
+    )
       if (x !== undefined && y !== undefined) {
         pokemon.orientation = board.orientation(
           pokemon.positionX,
@@ -146,7 +145,7 @@ export default class MovingState extends PokemonState {
       }
     }
   }
-
+  
   onEnter(pokemon: PokemonEntity) {
     super.onEnter(pokemon)
     pokemon.action = PokemonActionState.WALK

@@ -18,11 +18,15 @@ import UserMetadata from "../models/mongo-models/user-metadata"
 import { Emotion, IPlayer, Role, Title, Transfer } from "../types"
 import {
   GREATBALL_RANKED_LOBBY_CRON,
+  INACTIVITY_TIMEOUT,
+  MAX_CONCURRENT_PLAYERS_ON_LOBBY,
+  MAX_CONCURRENT_PLAYERS_ON_SERVER,
   SCRIBBLE_LOBBY_CRON,
   TOURNAMENT_CLEANUP_DELAY,
   TOURNAMENT_REGISTRATION_TIME,
   ULTRABALL_RANKED_LOBBY_CRON
 } from "../types/Config"
+import { CloseCodes } from "../types/enum/CloseCodes"
 import { EloRank } from "../types/enum/EloRank"
 import { GameMode } from "../types/enum/Game"
 import { Language } from "../types/enum/Language"
@@ -60,8 +64,6 @@ import {
 } from "./commands/lobby-commands"
 import LobbyState from "./states/lobby-state"
 
-const MAX_CCU = 700
-
 export default class CustomLobbyRoom extends Room<LobbyState> {
   bots: Map<string, IBot>
   unsubscribeLobby: (() => void) | undefined
@@ -72,8 +74,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
   constructor() {
     super()
-    this.maxClients = 50
-
     this.dispatcher = new Dispatcher(this)
     this.bots = new Map<string, IBot>()
     this.tournamentCronJobs = new Map<string, CronJob>()
@@ -426,7 +426,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       } else if (isBanned) {
         throw new Error("Account banned")
       } else if (
-        this.state.ccu > MAX_CCU &&
+        (this.state.ccu > MAX_CONCURRENT_PLAYERS_ON_SERVER ||
+          this.clients.length > MAX_CONCURRENT_PLAYERS_ON_LOBBY) &&
         userProfile?.role !== Role.ADMIN &&
         userProfile?.role !== Role.MODERATOR
       ) {
@@ -613,7 +614,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     })
     this.cleanUpCronJobs.push(scribbleLobbyJob)
 
-    if (process.env.NODE_APP_INSTANCE) {
+    if (process.env.NODE_APP_INSTANCE || process.env.MODE === "dev") {
       const staleJob = CronJob.from({
         cronTime: "*/1 * * * *", // every minute
         timeZone: "Europe/Paris",
@@ -657,13 +658,14 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         cronTime: "*/1 * * * *", // every minute
         timeZone: "Europe/Paris",
         onTick: async () => {
+          logger.debug("checking inactive users")
           this.clients.forEach((c) => {
             if (
               c.userData.joinedAt &&
-              c.userData.joinedAt < Date.now() - 60000
+              c.userData.joinedAt < Date.now() - INACTIVITY_TIMEOUT
             ) {
-              //logger.info("force deconnection of user", c.id)
-              c.leave()
+              //logger.info("disconnected user for inactivity", c.id)
+              c.leave(CloseCodes.USER_INACTIVE)
             }
           })
         },

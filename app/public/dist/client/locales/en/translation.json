@@ -1930,7 +1930,7 @@
     "SHELL_BELL": "Holder heals for 33% of all damages inflicted",
     "LUCKY_EGG": "+40 AP for holder and adjacent allies in the same row",
     "AQUA_EGG": "The holder gains +50 starting PP and regains 20 PP after casting its ability",
-    "BLUE_ORB": "Every third attack from the holder unleashes a chain lightning that bounces to the 2 closing enemies, dealing 10 SPECIAL and burning 20 PP",
+    "BLUE_ORB": "Every third attack dealt unleashes a chain lightning that bounces to the 2 closing enemies, dealing 10 SPECIAL and burning 20 PP",
     "SCOPE_LENS": "Critical hits steal 15 PP from the target.",
     "STAR_DUST": "After casting ability, gain 60% of max PP as SHIELD",
     "GREEN_ORB": "Holder and adjacent allies regain 4% of their max HP every second",
@@ -2158,7 +2158,7 @@
     "CONFUSION": "Confused",
     "WOUND": "Wound",
     "RAGE": "Enraged",
-    "RESURECTION": "Resurection",
+    "RESURECTION": "Resurrection",
     "PARALYSIS": "Paralyzed",
     "POKERUS": "Pokérus",
     "LOCKED": "Locked",
@@ -2711,6 +2711,7 @@
   "pokemons_on_your_board": "Pokémons on your board.",
   "team_size_hint": "Increase your team size by leveling up",
   "game_history": "Game History",
+  "load_more": "Load More",
   "no_history_found": "No history found",
   "top": "Top",
   "level": "Level",
@@ -3111,5 +3112,16 @@
     "fishing_rarity_rate_description": "The quality of the rod you use to fish influences the rarity of the Pokémon you can catch.",
     "pool_size_per_category": "Pool size per category",
     "pool_size_per_category_description": "The pokemons you find in shops are taken from a pool shared by all players. The number of specimens of each Pokémon in the pool depends on its rarity and its number of evolution stages."
+  },
+  "errors": {
+    "USER_INACTIVE": "You have been kicked for inactivity to save server resources",
+    "USER_KICKED": "You have been kicked from this lobby",
+    "USER_BANNED": "You account has been banned",
+    "USER_RANK_TOO_LOW": "Your player rank is not high enough to participate in this lobby",
+    "USER_NOT_AUTHENTICATED": "Please authenticate again",
+    "ROOM_FULL": "This room is full",
+    "ROOM_EMPTY": "This room has been removed due to lack of players",
+    "ROOM_DELETED": "This room has been deleted",
+    "UNKNOWN_ERROR": "An unexpected error occurred: {{error}}"
   }
 }

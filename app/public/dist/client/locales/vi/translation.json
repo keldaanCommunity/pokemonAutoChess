@@ -338,7 +338,7 @@
     "ICE_FANG": "Băng nanh",
     "THUNDER_FANG": "Lôi nanh",
     "TAIL_WHIP": "Quật đuôi",
-    "PSYSHIELD_BASH": "Tâm thuẫn phong kích"
+    "PSYSHIELD_BASH": "Tâm thuẫn phong kích",
     "QUIVER_DANCE": "Điệp vũ",
     "TORCH_SONG": "Đuốc ca",
     "POWER_WHIP": "Roi năng lượng",
@@ -1479,7 +1479,7 @@
   "key_desc_avatar_show_emote": "Kích hoạt biểu cảm ",
   "jukebox": "Phát nhạc",
   "gadgets": "Dụng cụ",
-  "gadgets_unlocked": "Công cụ đã được mở khoá",
+  "gadgets_unlocked": "Công cụ đã mở khoá",
   "gadget": {
     "trainer_card": "Thẻ người chơi",
     "trainer_card_desc": "Thay đổi tên, ava và danh hiệu",
@@ -1488,17 +1488,17 @@
     "team_planner_desc": "Chuẩn bị đồ cho team",
     "bot_builder": "Tạo bot",
     "bot_builder_desc": "Tạo ra một con bot của riêng bạn và gửi nó cho chúng tôi để được cho vào game",
-    "jukebox": "Máy phát nhạc không thủ công",
+    "jukebox": "Máy phát nhạc",
     "jukebox_desc": "Chọn nhạc trong trò chơi"
   },
-  "level_required": "Yêu cầu cấp động",
+  "level_required": "Yêu cầu cấp độ",
   "map": {
-    "random": "Máp ngẫu nhiên",
+    "random": "Map ngẫu nhiên",
     "AmpPlains": "Đồng bằng điện",
     "AppleWoods": "Rừng táo",
     "BarrenValley": "Thung lũng cằn cỗi",
-    "BeachCave": "đỉ đỉ",
-    "BrineCave": "Hang động mặn mà",
+    "BeachCave": "Hang động bãi biển",
+    "BrineCave": "Hang động nước biển",
     "BuriedRelic1": "Cổ vật bị lãng quên 1"
   }
 }
