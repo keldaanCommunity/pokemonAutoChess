@@ -1,5 +1,4 @@
 import { WebhookClient, EmbedBuilder } from "discord.js"
-import { ILobbyUser } from "../models/colyseus-models/lobby-user"
 import { IBot } from "../models/mongo-models/bot-v2"
 import { IUserMetadata } from "../models/mongo-models/user-metadata"
 import { getAvatarSrc } from "../public/src/utils"
@@ -21,15 +20,15 @@ if (process.env.DISCORD_BAN_WEBHOOK_URL) {
 }
 
 export const discordService = {
-  announceBan(user: ILobbyUser, bannedUser: IUserMetadata, reason: string) {
+  announceBan(user: IUserMetadata, bannedUser: IUserMetadata, reason: string) {
     const dsEmbed = new EmbedBuilder()
-      .setTitle(`${user.name} banned the user ${bannedUser.displayName}`)
+      .setTitle(`${user.displayName} banned the user ${bannedUser.displayName}`)
       .setAuthor({
-        name: user.name,
+        name: user.displayName,
         iconURL: getAvatarSrc(user.avatar)
       })
       .setDescription(
-        `${user.name} banned the user ${bannedUser.displayName}. Reason: ${reason}`
+        `${user.displayName} banned the user ${bannedUser.displayName}. Reason: ${reason}`
       )
       .setThumbnail(getAvatarSrc(bannedUser.avatar))
     try {
@@ -41,14 +40,14 @@ export const discordService = {
     }
   },
 
-  announceUnban(user: ILobbyUser, name: string) {
+  announceUnban(user: IUserMetadata, name: string) {
     const dsEmbed = new EmbedBuilder()
-      .setTitle(`${user.name} unbanned the user ${name}`)
+      .setTitle(`${user.displayName} unbanned the user ${name}`)
       .setAuthor({
-        name: user.name,
+        name: user.displayName,
         iconURL: getAvatarSrc(user.avatar)
       })
-      .setDescription(`${user.name} unbanned the user ${name}`)
+      .setDescription(`${user.displayName} unbanned the user ${name}`)
       .setThumbnail(getAvatarSrc(user.avatar))
     try {
       discordBanWebhook?.send({
@@ -81,18 +80,18 @@ export const discordService = {
     }
   },
 
-  announceBotAddition(botData: IBot, url: string, user: ILobbyUser) {
+  announceBotAddition(botData: IBot, url: string, user: IUserMetadata) {
     const dsEmbed = new EmbedBuilder()
       .setTitle(
-        `BOT ${botData.name} by @${botData.author} loaded by ${user.name}`
+        `BOT ${botData.name} by @${botData.author} loaded by ${user.displayName}`
       )
       .setURL(url)
       .setAuthor({
-        name: user.name,
+        name: user.displayName,
         iconURL: getAvatarSrc(user.avatar)
       })
       .setDescription(
-        `BOT ${botData.name} by @${botData.author} (url: ${url} ) loaded by ${user.name}`
+        `BOT ${botData.name} by @${botData.author} (url: ${url} ) loaded by ${user.displayName}`
       )
       .setThumbnail(getAvatarSrc(botData.avatar))
     try {
@@ -104,17 +103,17 @@ export const discordService = {
     }
   },
 
-  announceBotDeletion(botData: IBot, user: ILobbyUser) {
+  announceBotDeletion(botData: IBot, user: IUserMetadata) {
     const dsEmbed = new EmbedBuilder()
       .setTitle(
-        `BOT ${botData?.name} by @${botData?.author} deleted by ${user.name}`
+        `BOT ${botData?.name} by @${botData?.author} deleted by ${user.displayName}`
       )
       .setAuthor({
-        name: user.name,
+        name: user.displayName,
         iconURL: getAvatarSrc(user.avatar)
       })
       .setDescription(
-        `BOT ${botData?.name} by @${botData?.author} (id: ${botData?.id} ) deleted by ${user.name}`
+        `BOT ${botData?.name} by @${botData?.author} (id: ${botData?.id} ) deleted by ${user.displayName}`
       )
       .setThumbnail(getAvatarSrc(botData?.avatar ? botData?.avatar : ""))
     try {

@@ -14,7 +14,7 @@ export function TitleTab() {
   const [showUnlocked, setShowUnlocked] = useState<boolean>(true)
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
-  const user = useAppSelector((state) => state.lobby.user)
+  const user = useAppSelector((state) => state.network.profile)
   const [titles, setTitles] = useState<ITitleStatistic[]>([])
 
   useEffect(() => {

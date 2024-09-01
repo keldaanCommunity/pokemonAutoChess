@@ -24,15 +24,15 @@ export default function PreparationMenuUser(props: {
   const removeButton = props.user.isBot ? (
     <RemoveButton
       onClick={() => {
-        dispatch(removeBot(props.user.id))
+        dispatch(removeBot(props.user.uid))
       }}
       title={t("remove_bot")}
     />
-  ) : canKick && props.user.id !== user?.id ? (
+  ) : canKick && props.user.uid !== user?.uid ? (
     <RemoveButton
       onClick={() => {
         if (confirm(`Kick ${props.user.name} ?`)) {
-          dispatch(kick(props.user.id))
+          dispatch(kick(props.user.uid))
         }
       }}
       title={t("kick_user")}
@@ -41,9 +41,8 @@ export default function PreparationMenuUser(props: {
 
   return (
     <div
-      className={`my-container player my-box preparation-menu-user ${
-        props.user.ready ? "ready" : "not-ready"
-      }`}
+      className={`my-container player my-box preparation-menu-user ${props.user.ready ? "ready" : "not-ready"
+        }`}
     >
       <EloBadge elo={props.user?.elo} />
       <InlineAvatar

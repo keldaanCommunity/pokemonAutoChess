@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction, useMemo } from "react"
+import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
 import { Emotion } from "../../../../../types/enum/Emotion"
 import { Pkm, PkmIndex, Unowns } from "../../../../../types/enum/Pokemon"
 import { useAppSelector } from "../../../hooks"
@@ -12,7 +13,7 @@ export default function UnownPanel(props: {
   shinyOnly: boolean
 }) {
   const pokemonCollection = useAppSelector(
-    (state) => state.lobby.pokemonCollection
+    (state) => state.network.profile?.pokemonCollection ?? new Map<string, IPokemonConfig>()
   )
   const secretMessage = `    
     To unleash ancient powers?
@@ -27,12 +28,15 @@ export default function UnownPanel(props: {
   const unowns = useMemo(
     () =>
       Unowns.flatMap((pkm: Pkm) => {
-        const config = pokemonCollection.find((p) => p.id === PkmIndex[pkm])
-        const { emotions, shinyEmotions } = config ?? {
+        const config = pokemonCollection.get(PkmIndex[pkm]) ?? {
           dust: 0,
           emotions: [] as Emotion[],
-          shinyEmotions: [] as Emotion[]
+          shinyEmotions: [] as Emotion[],
+          selectedEmotion: Emotion.NORMAL,
+          selectedShiny: false,
+          id: PkmIndex[pkm]
         }
+        const { emotions, shinyEmotions } = config
         const isUnlocked = emotions?.length > 0 || shinyEmotions?.length > 0
         return [{ pkm, config, isUnlocked }]
       }).sort((a, b) => {
@@ -50,7 +54,7 @@ export default function UnownPanel(props: {
       <div id="unown-panel">
         {secretMessage.map((char, i) => renderChar(char, i, unowns))}
       </div>
-      <div className="pokemon-carousel">
+      <div className="pokemon-collection-list">
         {unowns.map((unown) => {
           if (!unown) return null
           return (
