@@ -4,7 +4,8 @@ import React, { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { Link, Navigate, useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { logIn, logOut, setNetworkError } from "../../../stores/NetworkStore"
+import { logIn, logOut, setErrorAlertMessage } from "../../../stores/NetworkStore"
+import { CloseCodes, CloseCodesMessages } from "../../../../../types/enum/CloseCodes"
 import { FIREBASE_CONFIG } from "../../utils/utils"
 import AnonymousButton from "./anonymous-button"
 import { StyledFirebaseAuth } from "./styled-firebase-auth"
@@ -40,7 +41,10 @@ export default function Login() {
           navigate("/lobby")
         } catch (err) {
           logger.error(err)
-          dispatch(setNetworkError(err.message))
+          const errorMessage = CloseCodesMessages[err] ?? "UNKNOWN_ERROR"
+          if (errorMessage) {
+            dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`, { error: err })))
+          }
         }
       }
     })
