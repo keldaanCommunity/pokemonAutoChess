@@ -69,14 +69,14 @@ export default function History(props: { uid: string, onUpdate?: (history: IGame
           <p>{t("no_history_found")}</p>
         )}
         {gameHistory &&
-          gameHistory.map((r, i) => (
+          gameHistory.map((r) => (
             <div key={r.time} className="my-box game-history">
               <span className="top">
                 {t("top")} {r.rank}
               </span>
               <EloBadge elo={r.elo} />
               <ul className="synergies">
-                {getTopSynergies(r.pokemons.map(p => p)).map(([type, value]) => (
+                {getTopSynergies(r.pokemons).map(([type, value]) => (
                   <li key={r.time + type}>
                     <SynergyIcon type={type} />
                     <span>{value}</span>
@@ -84,7 +84,7 @@ export default function History(props: { uid: string, onUpdate?: (history: IGame
                 ))}
               </ul>
               <p className="date">{formatDate(r.time)}</p>
-              <Team team={r.pokemons.map(p => p)}></Team>
+              <Team team={r.pokemons}></Team>
             </div>
           ))}
         {hasMore && (
