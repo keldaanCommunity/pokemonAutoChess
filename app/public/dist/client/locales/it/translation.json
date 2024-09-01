@@ -1484,7 +1484,17 @@
     "AURA_WHEEL": "Infliggi [60,SP] SPECIAL, potenzia la ATK_SPEED del [10,SP]% e cambia fra la forma Panciapiena e la forma Panciavuota.",
     "LICK": "Infliggi [30,60,120,SP] SPECIAL e causa al bersaglio CONFUSION e PARALYSIS per 3 secondi.",
     "FURY_SWIPES": "Attacca [5,SP] ed infliggi [2,SP] come PHYSICAL.",
-    "TICKLE": "Riduci l'ATK e la DEF dei [1,2] bersagli più vicini di [3,SP]."
+    "TICKLE": "Riduci l'ATK e la DEF dei [1,2] bersagli più vicini di [3,SP].",
+    "AROMATHERAPY": "Rimuovi gli status alterati degli alleati vicini, e curagli [20,40,80,SP] HP.",
+    "DETECT": "Causa PROTECT agli alleati adiacenti per [500,SP] millisecondi, moltiplicati per il numero di nemici adiacenti.",
+    "SPACIAL_REND": "Inverti la posizione della squadra nemica, ed infliggi a tutti i nemici nella riga di fronte all'utilizzatore [100,SP] SPECIAL.",
+    "MULTI_ATTACK": "Infliggi [15,SP] SPECIAL a tutti i nemici adiacenti, moltiplicato per i livelli di sinergia della forma corrente di $t(pkm.SILVALLY).",
+    "STICKY_WEB": "Infliggi [20,35,70,SP] SPECIAL e proietta una ragnatela attorno al bersaglio. I Pokèmon che ci camminano sopra sono sotto PARALYSIS per 2 secondi.",
+    "ACCELEROCK": "Salta verso il nemico più lontano ed attaccalo immediatamente, infliggendogli [100,SP]% dell'ATK come SPECIAL. Perdi fino a [5,SP] di DEF e guadagna 5% di ATK_SPEED per ogni punto di DEF perso.",
+    "PETAL_BLIZZARD": "Infliggi [30,SP] SPECIAL ai nemici adiacenti e guadagna 10 AP",
+    "SUNSTEEL_STRIKE": "Piomba nel mezzo della squadra nemica col il potere di un meteorite, infliggendo [80,SP] SPECIAL ai nemici adiacenti e causa loro BURN per 3 secondi.",
+    "MOONGEIST_BEAM": "Infliggi [100,SP] SPECIAL a tutti i Pokèmon nemici in una linea retta e causa loro PARALYSIS per 3 secondi. I Pokèmon alleati dentro il raggio ottengono [100,SP] SHIELD.",
+    "FLEUR_CANNON": "Scaglia un laser devastante che infligge [120,SP] SPECIAL a tutti i nemici nel raggio laser. Riduci i AP dell'utilizzatore di 20."
   },
   "effect": {
     "INGRAIN": "Ingranato",
