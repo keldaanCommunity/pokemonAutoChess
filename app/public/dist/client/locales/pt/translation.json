@@ -1205,7 +1205,6 @@
     "DRAGON_TAIL": "Ataque de alvo mono que causa [30,60,100,SP] SPECIAL e buff DEF e SPE_DEF em [1,2,3,SP]",
     "DRAGON_BREATH": "Área de ataque de efeito que causa [25,50,100,SP] TRUE em uma linha atrás do alvo",
     "ICICLE_CRASH": "Ataque de área de efeito que causa [20,40,80,SP] SPECIAL ao redor do alvo",
-    "ROOT": "Cure todos os pokémons aliados próximos em [20,40,80,SP] HP",
     "TORMENT": "Aumente ATK_SPEED em [20,40,60,SP] %",
     "STOMP": "Alvo mono que lida [3,4,5,SP] x ATK SPECIAL",
     "PAYBACK": "Inflige [15,30,60,SP] SPECIAL para o alvo. Dano duplo se o usuário tiver menos da metade de sua vida.",

@@ -3560,21 +3560,9 @@ export class RootStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let heal = 0
-
-    switch (pokemon.stars) {
-      case 1:
-        heal = 20
-        break
-      case 2:
-        heal = 30
-        break
-      case 3:
-        heal = 40
-        break
-      default:
-        break
-    }
+    const heal = [10, 20, 30][pokemon.stars - 1] ?? 10
+    const damage = [10, 20, 30][pokemon.stars - 1] ?? 10
+    const lockedDuration = 4000
 
     const cells = board.getAdjacentCells(
       pokemon.positionX,
@@ -3584,6 +3572,15 @@ export class RootStrategy extends AbilityStrategy {
     cells.forEach((cell) => {
       if (cell.value && pokemon.team == cell.value.team) {
         cell.value.handleHeal(heal, pokemon, 1, crit)
+      } else if (cell.value && pokemon.team !== cell.value.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        cell.value.status.triggerLocked(lockedDuration, cell.value)
       }
     })
   }

@@ -1256,7 +1256,6 @@
     "DRAGON_TAIL": "Gây [30,60,100,SP] SPECIAL lên mục tiêu và tăng [1,2,3,SP] chỉ số DEF và SPE_DEF cho bản thân",
     "DRAGON_BREATH": "Gây [25,50,100,SP] TRUE lên tất cả Pokémon đối thủ đằng sau mục tiêu",
     "ICICLE_CRASH": "Gây [20,40,80,SP] SPECIAL lên khu vực xung quanh mục tiêu",
-    "ROOT": "Hồi [20,40,80,SP] HP cho Pokémon đồng minh ở gần",
     "TORMENT": "Tăng [20,40,60,SP]% ATK_SPEED",
     "STOMP": "Gây SPECIAL tương đương với [3,4,5,SP] x ATK chỉ số của mục tiêu",
     "PAYBACK": "Gây [15,30,60,SP] SPECIAL lên mục tiêu. Gấp đôi sát thương nếu thanh máu bản thân thấp hơn một nửa",

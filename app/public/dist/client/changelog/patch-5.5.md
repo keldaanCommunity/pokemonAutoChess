@@ -7,6 +7,7 @@
 - Nerf Lapras: PP 100 → 120
 - Nerf Slowking: HP 260 → 200, Attack 24 → 18
 - Nerf Closdire: HP 230 → 190
+- Changed Root (Bellsprout): All adjacent enemies are Locked for 4 seconds and take 10/20/30 special damage whereas user and adjacent allies are healed by 10/20/30 HP
 
 # Changes to Synergies
 

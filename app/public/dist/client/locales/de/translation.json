@@ -1256,7 +1256,6 @@
     "DRAGON_TAIL": "Attacke, die [30,60,100,SP] SPECIAL am Ziel verursacht und DEF und SPE_DEF um [1,2,3,SP] stärkt.",
     "DRAGON_BREATH": "Fügt dem Ziel und allen Gegnern dahinter [25,50,100,SP] TRUE zu.",
     "ICICLE_CRASH": "Flächenangriff, der [20,40,80,SP] SPECIAL um das Ziel herum verursacht",
-    "ROOT": "Heile alle verbündeten Pokémon in der Nähe um [20,40,80,SP] HP",
     "TORMENT": "Erhöhe ATK_SPEED um [20,40,60,SP] %",
     "STOMP": "Attacke, die [3,4,5,SP] x ATK SPECIAL am Ziel verursacht",
     "PAYBACK": "Verursacht [15,30,60,SP] SPECIAL. Doppelter Schaden, wenn der Benutzer weniger als die Hälfte seines Lebens hat.",

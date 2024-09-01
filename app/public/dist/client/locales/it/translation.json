@@ -1254,7 +1254,6 @@
     "DRAGON_TAIL": "Infliggi [30,60,100,SP] SPECIAL e potenzia la DEF e SPE_DEF dell'utilizzatore di [1,2,3,SP].",
     "DRAGON_BREATH": "Infligge [25,50,100,SP] TRUE a tutti i Pokèmon nemici dietro il bersaglio.",
     "ICICLE_CRASH": "Infligge [20,40,80,SP] SPECIAL in un'area attorno al bersaglio.",
-    "ROOT": "Cura tutti i Pokémon alleati adiacenti di [20,40,80,SP] HP.",
     "TORMENT": "Potenzia l' ATK_SPEED del [20,40,60,SP]%.",
     "STOMP": "Infligge SPECIAL uguale a [3,4,5,SP] moltiplicato per l' ATK  dell'utilizzatore.",
     "PAYBACK": "Infligge [15,30,60,SP] SPECIAL. Il danno raddoppia se l'utilizzatore ha meno della metà dei suoi punti salute.",

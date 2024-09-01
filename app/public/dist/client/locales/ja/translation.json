@@ -865,7 +865,6 @@
     "DRAGON_TAIL": "[30,60,100,SP]のSPECIALを与え、DEFとSPE_DEFを[1,2,3,SP]バフする単一ターゲット攻撃",
     "DRAGON_BREATH": "対象の後方一列に[25,50,100,SP]TRUEの範囲攻撃",
     "ICICLE_CRASH": "対象を中心に[20,40,80,SP]のSPECIALを与える範囲攻撃",
-    "ROOT": "近くの味方ポケモン全員のHPを[20,40,80,SP]回復する",
     "TORMENT": "ATK_SPEEDが[20,40,60,SP]%増加",
     "STOMP": "[3,4,5,SP]×ATK SPECIALを与える単対象",
     "PAYBACK": "ターゲットに[15,30,60,SP]SPECIALを与える。 使用者のライフが半分未満の場合、ダメージが2倍になります。",
