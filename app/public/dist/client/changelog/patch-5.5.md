@@ -24,10 +24,7 @@
 
 # Bugfix
 
-- Regional lists was not correctly updated when picking an additional pick with a regional variant
-- Fixed Ghost curses status afflictions not reapplied correctly after status is cleared
 - Fixed a bug that would lead to some pokemons being unkillable/uninnteractable after resurecting (thanks to Defenestrator for the analysis)
-
 
 # Misc
 

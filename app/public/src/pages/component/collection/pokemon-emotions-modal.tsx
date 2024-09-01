@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo } from "react"
 import { useTranslation } from "react-i18next"
+import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed/precomputed-emotions"
 import { Emotion } from "../../../../../types"
 import {
@@ -27,9 +28,9 @@ export default function PokemonEmotionsModal(props: {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const pokemonCollection = useAppSelector(
-    (state) => state.lobby.pokemonCollection
+    (state) => state.network.profile?.pokemonCollection ?? new Map<string, IPokemonConfig>()
   )
-  const user = useAppSelector((state) => state.lobby.user)
+  const user = useAppSelector((state) => state.network.profile)
 
   const index = PkmIndex[props.pokemon]
 
@@ -41,7 +42,7 @@ export default function PokemonEmotionsModal(props: {
     AnimationConfig[props.pokemon]?.shinyUnavailable !== true
 
   const pConfig = useMemo(() => {
-    const foundPokemon = pokemonCollection.find((c) => c.id == index) ?? {
+    const foundPokemon = pokemonCollection.get(index) ?? {
       dust: 0,
       emotions: [],
       shinyEmotions: [],

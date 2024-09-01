@@ -1,5 +1,4 @@
 import { Command } from "@colyseus/command"
-import { ArraySchema } from "@colyseus/schema"
 import { Client, RoomListingData, matchMaker } from "colyseus"
 import { nanoid } from "nanoid"
 import {
@@ -7,8 +6,6 @@ import {
   getTournamentStage,
   makeBrackets
 } from "../../core/tournament-logic"
-import { GameRecord } from "../../models/colyseus-models/game-record"
-import LobbyUser from "../../models/colyseus-models/lobby-user"
 import PokemonConfig from "../../models/colyseus-models/pokemon-config"
 import {
   TournamentBracketSchema,
@@ -16,7 +13,6 @@ import {
 } from "../../models/colyseus-models/tournament"
 import BannedUser from "../../models/mongo-models/banned-user"
 import { BotV2 } from "../../models/mongo-models/bot-v2"
-import DetailledStatistic from "../../models/mongo-models/detailled-statistic-v2"
 import { Tournament } from "../../models/mongo-models/tournament"
 import UserMetadata, {
   IPokemonConfig
@@ -54,6 +50,7 @@ import { Language } from "../../types/enum/Language"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { StarterAvatars } from "../../types/enum/Starters"
 import { ITournamentPlayer } from "../../types/interfaces/Tournament"
+import { CloseCodes } from "../../types/enum/CloseCodes"
 import { sum } from "../../utils/array"
 import { logger } from "../../utils/logger"
 import { cleanProfanity } from "../../utils/profanity-filter"
@@ -87,86 +84,33 @@ export class OnJoinCommand extends Command<
 
       if (user) {
         // load existing account
-        const stats = await DetailledStatistic.find(
-          { playerId: client.auth.uid },
-          ["pokemons", "time", "rank", "elo"],
-          { limit: 10, sort: { time: -1 } }
-        )
-        if (stats) {
-          const records = new ArraySchema<GameRecord>()
-          stats.forEach((record) => {
-            records.push(
-              new GameRecord(
-                record.time,
-                record.rank,
-                record.elo,
-                record.pokemons
-              )
-            )
-          })
-
-          this.state.users.set(
-            client.auth.uid,
-            new LobbyUser(
-              user.uid,
-              user.displayName,
-              user.elo,
-              user.avatar,
-              user.wins,
-              user.exp,
-              user.level,
-              user.donor,
-              records,
-              user.honors,
-              user.uid === client.auth.uid ? user.pokemonCollection : null,
-              user.booster,
-              user.titles,
-              user.title,
-              user.role,
-              client.auth.email === undefined &&
-                client.auth.photoURL === undefined,
-              client.auth.metadata.creationTime,
-              client.auth.metadata.lastSignInTime,
-              user.language
-            )
-          )
-        }
+        this.room.users.set(client.auth.uid, user)
       } else {
         // create new user account
-        const numberOfBoosters = 3
+        const starterBoosters = 3
         const starterAvatar = pickRandomIn(StarterAvatars)
         UserMetadata.create({
           uid: client.auth.uid,
           displayName: client.auth.displayName,
           avatar: starterAvatar,
-          booster: numberOfBoosters,
+          booster: starterBoosters,
           pokemonCollection: new Map<string, IPokemonConfig>()
         })
-        this.state.users.set(
-          client.auth.uid,
-          new LobbyUser(
-            client.auth.uid,
-            client.auth.displayName,
-            1000,
-            starterAvatar,
-            0,
-            0,
-            0,
-            false,
-            [],
-            [],
-            new Map<string, IPokemonConfig>(),
-            numberOfBoosters,
-            [],
-            "",
-            Role.BASIC,
-            client.auth.email === undefined &&
-              client.auth.photoURL === undefined,
-            client.auth.metadata.creationTime,
-            client.auth.metadata.lastSignInTime,
-            ""
-          )
-        )
+        this.room.users.set(client.auth.uid, {
+          uid: client.auth.uid,
+          displayName: client.auth.displayName,
+          language: client.auth.metadata.language,
+          avatar: starterAvatar,
+          wins: 0,
+          exp: 0,
+          level: 0,
+          elo: 1000,
+          pokemonCollection: new Map<string, IPokemonConfig>(),
+          booster: starterBoosters,
+          titles: [],
+          title: "",
+          role: Role.BASIC
+        })
       }
     } catch (error) {
       logger.error(error)
@@ -182,7 +126,7 @@ export class OnLeaveCommand extends Command<
     try {
       if (client && client.auth && client.auth.displayName && client.auth.uid) {
         //logger.info(`${client.auth.displayName} ${client.id} leave lobby`)
-        this.state.users.delete(client.auth.uid)
+        this.room.users.delete(client.auth.uid)
       }
     } catch (error) {
       logger.error(error)
@@ -204,8 +148,8 @@ export class GiveTitleCommand extends Command<
     title: Title
   }) {
     try {
-      const u = this.state.users.get(client.auth.uid)
-      const targetUser = this.state.users.get(uid)
+      const u = this.room.users.get(client.auth.uid)
+      const targetUser = this.room.users.get(uid)
 
       if (u && u.role && u.role === Role.ADMIN) {
         const user = await UserMetadata.findOne({ uid })
@@ -238,8 +182,8 @@ export class GiveBoostersCommand extends Command<
     numberOfBoosters: number
   }) {
     try {
-      const u = this.state.users.get(client.auth.uid)
-      const targetUser = this.state.users.get(uid)
+      const u = this.room.users.get(client.auth.uid)
+      const targetUser = this.room.users.get(uid)
 
       if (u && u.role && u.role === Role.ADMIN) {
         const user = await UserMetadata.findOne({ uid: uid })
@@ -272,8 +216,8 @@ export class GiveRoleCommand extends Command<
     role: Role
   }) {
     try {
-      const u = this.state.users.get(client.auth.uid)
-      const targetUser = this.state.users.get(uid)
+      const u = this.room.users.get(client.auth.uid)
+      const targetUser = this.room.users.get(uid)
       // logger.debug(u.role, uid)
       if (u && u.role === Role.ADMIN) {
         const user = await UserMetadata.findOne({ uid: uid })
@@ -300,13 +244,13 @@ export class OnNewMessageCommand extends Command<
       const MAX_MESSAGE_LENGTH = 250
       message = cleanProfanity(message.substring(0, MAX_MESSAGE_LENGTH))
 
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.room.users.get(client.auth.uid)
       if (
         user &&
         [Role.ADMIN, Role.MODERATOR].includes(user.role) &&
         message != ""
       ) {
-        this.state.addMessage(message, user.id, user.name, user.avatar)
+        this.state.addMessage(message, user.uid, user.displayName, user.avatar)
       }
     } catch (error) {
       logger.error(error)
@@ -320,7 +264,7 @@ export class RemoveMessageCommand extends Command<
 > {
   execute({ client, messageId }: { client: Client; messageId: string }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.room.users.get(client.auth.uid)
       if (
         user &&
         user.role &&
@@ -340,7 +284,7 @@ export class OpenBoosterCommand extends Command<
 > {
   async execute({ client }: { client: Client }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.room.users.get(client.auth.uid)
       if (!user) return
 
       const mongoUser = await UserMetadata.findOneAndUpdate(
@@ -445,14 +389,14 @@ export class ChangeNameCommand extends Command<
 > {
   async execute({ client, name }: { client: Client; name: string }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.room.users.get(client.auth.uid)
       if (!user) return
       if (USERNAME_REGEXP.test(name)) {
-        user.name = name
-        const usr = await UserMetadata.findOne({ uid: client.auth.uid })
-        if (usr) {
-          usr.displayName = name
-          usr.save()
+        user.displayName = name
+        const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
+        if (mongoUser) {
+          mongoUser.displayName = name
+          await mongoUser.save()
         }
       }
     } catch (error) {
@@ -467,16 +411,16 @@ export class ChangeTitleCommand extends Command<
 > {
   async execute({ client, title }: { client: Client; title: Title | "" }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.room.users.get(client.auth.uid)
       if (user) {
         if (user.title === title) {
           title = "" // remove title if user already has it
         }
         user.title = title
-        const usr = await UserMetadata.findOne({ uid: client.auth.uid })
-        if (usr) {
-          usr.title = title
-          usr.save()
+        const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
+        if (mongoUser) {
+          mongoUser.title = title
+          await mongoUser.save()
         }
       }
     } catch (error) {
@@ -501,7 +445,7 @@ export class ChangeSelectedEmotionCommand extends Command<
     shiny: boolean
   }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.room.users.get(client.auth.uid)
       if (!user) return
       const pokemonConfig = user.pokemonCollection.get(index)
       if (pokemonConfig) {
@@ -515,12 +459,12 @@ export class ChangeSelectedEmotionCommand extends Command<
         ) {
           pokemonConfig.selectedEmotion = emotion
           pokemonConfig.selectedShiny = shiny
-          const u = await UserMetadata.findOne({ uid: client.auth.uid })
-          const pkmConfig = u?.pokemonCollection.get(index)
-          if (u && pkmConfig) {
+          const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
+          const pkmConfig = mongoUser?.pokemonCollection.get(index)
+          if (mongoUser && pkmConfig) {
             pkmConfig.selectedEmotion = emotion
             pkmConfig.selectedShiny = shiny
-            u.save()
+            await mongoUser.save()
           }
         }
       }
@@ -546,7 +490,7 @@ export class ChangeAvatarCommand extends Command<
     shiny: boolean
   }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.room.users.get(client.auth.uid)
       if (!user) return
       const config = user.pokemonCollection.get(index)
       if (config) {
@@ -585,7 +529,7 @@ export class BuyEmotionCommand extends Command<
     shiny: boolean
   }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.room.users.get(client.auth.uid)
       const cost = getEmotionCost(emotion, shiny)
       if (!user) return
       const pokemonConfig = user.pokemonCollection.get(index)
@@ -682,7 +626,8 @@ export class BuyEmotionCommand extends Command<
         mongoUser.titles.push(Title.DUCHESS)
       }
 
-      mongoUser.save()
+      await mongoUser.save()
+      client.send(Transfer.USER_PROFILE, mongoUser)
     } catch (error) {
       logger.error(error)
     }
@@ -695,7 +640,7 @@ export class BuyBoosterCommand extends Command<
 > {
   async execute({ client, index }: { client: Client; index: string }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.room.users.get(client.auth.uid)
       const BOOSTER_COST = 500
       if (!user) return
 
@@ -722,6 +667,7 @@ export class BuyBoosterCommand extends Command<
 
       user.booster = mongoUser.booster
       pokemonConfig.dust = mongoPokemonConfig.dust // resync shards to database value, db authoritative
+      client.send(Transfer.USER_PROFILE, mongoUser)
     } catch (error) {
       logger.error(error)
     }
@@ -736,39 +682,7 @@ export class OnSearchByIdCommand extends Command<
     try {
       const user = await UserMetadata.findOne({ uid: uid })
       if (user) {
-        const statistic = await DetailledStatistic.find(
-          { playerId: user.uid },
-          ["pokemons", "time", "rank", "elo"],
-          { limit: 10, sort: { time: -1 } }
-        )
-        if (statistic) {
-          client.send(
-            Transfer.USER,
-            new LobbyUser(
-              user.uid,
-              user.displayName,
-              user.elo,
-              user.avatar,
-              user.wins,
-              user.exp,
-              user.level,
-              user.donor,
-              statistic.map((r) => {
-                return new GameRecord(r.time, r.rank, r.elo, r.pokemons)
-              }),
-              user.honors,
-              user.pokemonCollection,
-              user.booster,
-              user.titles,
-              user.title,
-              user.role,
-              false,
-              client.auth.metadata.creationTime,
-              client.auth.metadata.lastSignInTime,
-              user.language
-            )
-          )
-        }
+        client.send(Transfer.USER, user)
       }
     } catch (error) {
       logger.error(error)
@@ -821,7 +735,7 @@ export class BanUserCommand extends Command<
   }) {
     try {
       const bannedUser = await UserMetadata.findOne({ uid: uid })
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.room.users.get(client.auth.uid)
       if (
         user &&
         bannedUser &&
@@ -833,13 +747,13 @@ export class BanUserCommand extends Command<
         if (!banned) {
           BannedUser.create({
             uid,
-            author: user.name,
+            author: user.displayName,
             time: Date.now(),
             name: bannedUser.displayName
           })
           client.send(
             Transfer.BANNED,
-            `${user.name} banned the user ${bannedUser.displayName}`
+            `${user.displayName} banned the user ${bannedUser.displayName}`
           )
 
           discordService.announceBan(user, bannedUser, reason)
@@ -851,8 +765,7 @@ export class BanUserCommand extends Command<
         }
         this.room.clients.forEach((c) => {
           if (c.auth.uid === uid) {
-            c.send(Transfer.BAN)
-            c.leave()
+            c.leave(CloseCodes.USER_BANNED)
           }
         })
       }
@@ -876,11 +789,14 @@ export class UnbanUserCommand extends Command<
     name: string
   }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.room.users.get(client.auth.uid)
       if (user && (user.role === Role.ADMIN || user.role === Role.MODERATOR)) {
         const res = await BannedUser.deleteOne({ uid })
         if (res.deletedCount > 0) {
-          client.send(Transfer.BANNED, `${user.name} unbanned the user ${name}`)
+          client.send(
+            Transfer.BANNED,
+            `${user.displayName} unbanned the user ${name}`
+          )
           discordService.announceUnban(user, name)
         }
       }
@@ -896,12 +812,12 @@ export class SelectLanguageCommand extends Command<
 > {
   async execute({ client, message }: { client: Client; message: Language }) {
     try {
-      const u = this.state.users.get(client.auth.uid)
+      const u = this.room.users.get(client.auth.uid)
       if (client.auth.uid && u) {
         const user = await UserMetadata.findOne({ uid: client.auth.uid })
         if (user) {
           user.language = message
-          user.save()
+          await user.save()
         }
         u.language = message
       }
@@ -917,7 +833,7 @@ export class AddBotCommand extends Command<
 > {
   async execute({ client, url }: { client: Client; url: string }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.room.users.get(client.auth.uid)
       if (
         user &&
         (user.role === Role.ADMIN ||
@@ -984,7 +900,7 @@ export class DeleteBotCommand extends Command<
 > {
   async execute({ client, message }: { client: Client; message: string }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.room.users.get(client.auth.uid)
       if (
         user &&
         (user.role === Role.ADMIN ||
@@ -1070,7 +986,7 @@ export class OnCreateTournamentCommand extends Command<
     startDate: string
   }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.room.users.get(client.auth.uid)
       if (user && user.role && user.role === Role.ADMIN) {
         await this.state.createTournament(name, startDate)
         await this.room.fetchTournaments()
@@ -1087,7 +1003,7 @@ export class RemoveTournamentCommand extends Command<
 > {
   execute({ client, tournamentId }: { client: Client; tournamentId: string }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.room.users.get(client.auth.uid)
       if (user && user.role && user.role === Role.ADMIN) {
         this.state.removeTournament(tournamentId)
       }
@@ -1111,7 +1027,7 @@ export class ParticipateInTournamentCommand extends Command<
     participate: boolean
   }) {
     try {
-      if (!client.auth.uid || this.state.users.has(client.auth.uid) === false)
+      if (!client.auth.uid || this.room.users.has(client.auth.uid) === false)
         return
       const tournament = this.state.tournaments.find(
         (t) => t.id === tournamentId
@@ -1194,7 +1110,7 @@ export class CreateTournamentLobbiesCommand extends Command<
   }) {
     try {
       if (client) {
-        const user = this.state.users.get(client.auth.uid)
+        const user = this.room.users.get(client.auth.uid)
         if (!user || !user.role || user.role !== Role.ADMIN) {
           return
         }
@@ -1351,7 +1267,7 @@ export class EndTournamentCommand extends Command<
 
       for (const player of finalists) {
         const mongoUser = await UserMetadata.findOne({ uid: player.id })
-        const user = this.state.users.get(player.id)
+        const user = this.room.users.get(player.id)
         const rank = player.ranks.at(-1) ?? 1
 
         if (mongoUser == null || user == null) continue

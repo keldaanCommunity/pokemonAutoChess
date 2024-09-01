@@ -107,6 +107,7 @@ export default function GameOptionsModal(props: {
                   value={language}
                   onChange={(e) => {
                     dispatch(selectLanguage(e.target.value as Language))
+                    i18n.changeLanguage(e.target.value as Language)
                   }}
                 >
                   {Object.keys(Language).map((lng) => (

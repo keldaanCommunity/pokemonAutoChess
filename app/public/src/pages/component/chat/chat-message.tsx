@@ -7,9 +7,7 @@ import { cc } from "../../utils/jsx"
 
 export default function ChatMessage(props: { message: IChatV2 }) {
   const dispatch = useAppDispatch()
-  const lobbyUser = useAppSelector((state) => state.lobby.user)
-  const preparationUser = useAppSelector((state) => state.preparation.user)
-  const user = lobbyUser ?? preparationUser
+  const user = useAppSelector((state) => state.network.profile)
   const role = user?.role
   const time = new Date(props.message.time).toLocaleTimeString(undefined, {
     timeStyle: "short"
@@ -21,7 +19,7 @@ export default function ChatMessage(props: { message: IChatV2 }) {
       {props.message.author && (
         <div
           className={cc("chat-user", {
-            "same-user": props.message.authorId === user?.id,
+            "same-user": props.message.authorId === user?.uid,
             "server-message": isServerMessage
           })}
         >

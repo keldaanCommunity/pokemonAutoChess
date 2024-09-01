@@ -14,10 +14,13 @@ import BannedUser from "../models/mongo-models/banned-user"
 import { IBot } from "../models/mongo-models/bot-v2"
 import ChatV2 from "../models/mongo-models/chat-v2"
 import Tournament from "../models/mongo-models/tournament"
-import UserMetadata from "../models/mongo-models/user-metadata"
+import UserMetadata, {
+  IUserMetadata
+} from "../models/mongo-models/user-metadata"
 import { Emotion, IPlayer, Role, Title, Transfer } from "../types"
 import {
   GREATBALL_RANKED_LOBBY_CRON,
+  INACTIVITY_TIMEOUT,
   MAX_CONCURRENT_PLAYERS_ON_LOBBY,
   MAX_CONCURRENT_PLAYERS_ON_SERVER,
   SCRIBBLE_LOBBY_CRON,
@@ -25,6 +28,7 @@ import {
   TOURNAMENT_REGISTRATION_TIME,
   ULTRABALL_RANKED_LOBBY_CRON
 } from "../types/Config"
+import { CloseCodes } from "../types/enum/CloseCodes"
 import { EloRank } from "../types/enum/EloRank"
 import { GameMode } from "../types/enum/Game"
 import { Language } from "../types/enum/Language"
@@ -63,18 +67,17 @@ import {
 import LobbyState from "./states/lobby-state"
 
 export default class CustomLobbyRoom extends Room<LobbyState> {
-  bots: Map<string, IBot>
+  bots: Map<string, IBot> = new Map<string, IBot>()
   unsubscribeLobby: (() => void) | undefined
   rooms: RoomListingData<any>[] | undefined
   dispatcher: Dispatcher<this>
-  tournamentCronJobs: Map<string, CronJob>
+  tournamentCronJobs: Map<string, CronJob> = new Map<string, CronJob>()
   cleanUpCronJobs: CronJob[] = []
+  users: Map<string, IUserMetadata> = new Map<string, IUserMetadata>()
 
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
-    this.bots = new Map<string, IBot>()
-    this.tournamentCronJobs = new Map<string, CronJob>()
   }
 
   removeRoom(index: number, roomId: string) {
@@ -451,8 +454,15 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     })
   }
 
-  onLeave(client: Client) {
-    this.dispatcher.dispatch(new OnLeaveCommand(), { client })
+  async onLeave(client: Client, consented: boolean) {
+    try {
+      if (consented) {
+        throw new Error("consented leave")
+      }
+      await this.allowReconnection(client, 30)
+    } catch (error) {
+      this.dispatcher.dispatch(new OnLeaveCommand(), { client })
+    }
   }
 
   onDispose() {
@@ -612,7 +622,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     })
     this.cleanUpCronJobs.push(scribbleLobbyJob)
 
-    if (process.env.NODE_APP_INSTANCE) {
+    if (process.env.NODE_APP_INSTANCE || process.env.MODE === "dev") {
       const staleJob = CronJob.from({
         cronTime: "*/1 * * * *", // every minute
         timeZone: "Europe/Paris",
@@ -656,13 +666,14 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         cronTime: "*/1 * * * *", // every minute
         timeZone: "Europe/Paris",
         onTick: async () => {
+          logger.debug("checking inactive users")
           this.clients.forEach((c) => {
             if (
               c.userData.joinedAt &&
-              c.userData.joinedAt < Date.now() - 60000
+              c.userData.joinedAt < Date.now() - INACTIVITY_TIMEOUT
             ) {
-              //logger.info("force deconnection of user", c.id)
-              c.leave()
+              //logger.info("disconnected user for inactivity", c.id)
+              c.leave(CloseCodes.USER_INACTIVE)
             }
           })
         },
