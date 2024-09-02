@@ -242,22 +242,23 @@ export async function joinLobbyRoom(
         dispatch(logIn(user))
         try {
           const token = await user.getIdToken()
-
-          const reconnectToken: string = localStore.get(LocalStoreKeys.RECONNECTION_TOKEN)
-          if (reconnectToken) {
-            try {
-              const lobbyRoom: Room<ICustomLobbyState> = await client.reconnect(reconnectToken)
-              if (lobbyRoom.name === "lobby") {
-                dispatch(joinLobby(lobbyRoom))
-              } else if (lobbyRoom.connection.isOpen) {
-                lobbyRoom.connection.close()
+          const lobby = store.getState().network.lobby
+          if (!lobby) {
+            const reconnectToken: string = localStore.get(LocalStoreKeys.RECONNECTION_TOKEN)
+            if (reconnectToken) {
+              try {
+                const lobbyRoom: Room<ICustomLobbyState> = await client.reconnect(reconnectToken)
+                if (lobbyRoom.name === "lobby") {
+                  dispatch(joinLobby(lobbyRoom))
+                } else if (lobbyRoom.connection.isOpen) {
+                  lobbyRoom.connection.close()
+                }
+              } catch (error) {
+                logger.log(error)
+                localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
               }
-            } catch (error) {
-              logger.log(error)
-              localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
             }
           }
-          const lobby = store.getState().network.lobby
           const room: Room<ICustomLobbyState> = lobby ?? await client.join("lobby", {
             idToken: token
           })
