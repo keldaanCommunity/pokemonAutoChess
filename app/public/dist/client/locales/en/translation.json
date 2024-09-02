@@ -2571,6 +2571,7 @@
   "tournament": "Tournament",
   "create_custom_room": "Create a custom room",
   "loading": "Loading...",
+  "connecting": "Connecting...",
   "no_data_available": "No data available",
   "no_bots_found": "No bots found !",
   "leaderboard": "Leaderboard",
