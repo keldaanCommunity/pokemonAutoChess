@@ -247,6 +247,7 @@ export async function joinLobbyRoom(
               const lobbyRoom: Room<ICustomLobbyState> = await client.reconnect(reconnectToken)
               if (lobbyRoom.name === "lobby") {
                 dispatch(joinLobby(lobbyRoom))
+                localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
               } else if (lobbyRoom.connection.isOpen) {
                 lobbyRoom.connection.close()
               }
