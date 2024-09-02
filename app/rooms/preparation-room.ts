@@ -347,7 +347,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       if (consented) {
         throw new Error("consented leave")
       }
-      // allow disconnected client to reconnect into this room until 3 seconds
+      // allow disconnected client to reconnect into this room until 30 seconds
       await this.allowReconnection(client, 30)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
