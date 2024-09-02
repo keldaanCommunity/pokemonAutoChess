@@ -1503,7 +1503,18 @@
     "ICE_HAMMER": "Infliggi [50,100,SP] SPECIAL e causa FREEZE per 3 secondi. Causa PARALYSIS all'utilizzatore per 3 secondi.",
     "POLLEN_PUFF": "Cura l'alleato con meno HP di [20,40,80,SP].",
     "PSYSTRIKE": "L'utilizzatore materializza un onda psichica in direzione del nemico più lontano, infliggendogli  [100,SP] PHYSICAL e teletrasporta tutto ciò che viene colpito nella traiettoria.",
-    "FACADE": "Infligge [20,40,80,SP] SPECIAL. Il danno raddoppia se l'utilizzatore ha uno status negativo."
+    "FACADE": "Infligge [20,40,80,SP] SPECIAL. Il danno raddoppia se l'utilizzatore ha uno status negativo.",
+    "DREAM_EATER": "Se il bersaglio è SLEEP, saltaci affianco ed infliggi [45,90,SP] SPECIAL e recupera HP pari al danno inflitto. Se non ha lo status, causa lo status SLEEP per [2.5,5] secondi.",
+    "SPARK": "Il Pokèmon spara una scintilla carica d'elettricità al bersaglio, infliggendo [40,80,SP] SPECIAL. La scintilla può rimbalzare per 4 volte ai nemici adiacenti. Ogni rimbalzo dimezza il SPECIAL.",
+    "CRUNCH": "Infliggi [150,SP] SPECIAL. Se uccidi il bersaglio, curati del 50% dei HP massimi del bersaglio.",
+    "CROSS_POISON": "Infliggi [30,60,120,SP] SPECIAL al bersaglio e ai nemici adiacenti, e causa POISONNED per 3 secondi.",
+    "DOUBLE_EDGE": "Infliggi [55,110,220,SP] PHYSICAL. L'utilizzatore subisce il contraccolpo pari a [20,40,60,SP] PHYSICAL.",
+    "FIRE_FANG": "Infliggi [30,60,120,SP] SPECIAL e causa BURN per 2 secondi.",
+    "ICE_FANG": "Infliggi [30,60,120,SP] SPECIAL e causa FREEZE per 1 secondo.",
+    "THUNDER_FANG": "Infliggi [30,60,120,SP] SPECIAL e causa PARALYSIS per 3 secondi.",
+    "TAIL_WHIP": "Riduci la DEF del bersaglio del [30,SP] %.",
+    "PSYSHIELD_BASH": "Scatta verso la retrovia nemica, infliggendo [60,SP] SPECIAL a tutti i nemici nella traiettoria e l'utilizzatore ottiene PROTECT per 1 secondo.",
+    "QUIVER_DANCE": "Aumenta l'ATK di [5,SP], la SPE_DEF di [5,SP], la ATK_SPEED del [20,SP]% e guadagni 20 AP."
   },
   "effect": {
     "INGRAIN": "Ingranato",
