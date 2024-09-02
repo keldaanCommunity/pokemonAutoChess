@@ -293,7 +293,6 @@
     "GOLD_RUSH": "Cơn sốt vàng",
     "MAKE_IT_RAIN": "Cầu mưa",
     "CRUSH_GRIP": "Nén chặt",
-    "AURA_SPHERE": "Quang cầu",
     "SKETCH": "Phác thảo",
     "OVERDRIVE": "Quá tải",
     "LOVELY_KISS": "Nụ hôn đáng yêu",
@@ -371,7 +370,8 @@
     "FELL_STINGER": "Kim châm nhức nhối",
     "GULP_MISSILE": "Thực hoả tiễn",
     "SCHOOLING": "Bầy đàn",
-    "DOUBLE_SHOCK": "Điện quang song kích"
+    "DOUBLE_SHOCK": "Điện quang song kích",
+    "AURA_SPHERE": "Quang cầu"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",

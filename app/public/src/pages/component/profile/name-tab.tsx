@@ -7,9 +7,10 @@ export function NameTab() {
   const { t } = useTranslation()
   const [inputValue, setInputValue] = useState<string>("")
   const dispatch = useAppDispatch()
-  const user = useAppSelector((state) => state.lobby.user)
+  const user = useAppSelector((state) => state.network.profile)
+  const isAnonymous = false // TODO: retrieve from profile if we decide to add back anonymous users
 
-  if (user && user.anonymous) {
+  if (user && isAnonymous) {
     return (
       <div className="my-container">
         <p>{t("anonymous_users_name_hint")}</p>
@@ -23,7 +24,7 @@ export function NameTab() {
       <div style={{ display: "flex", gap: "0.5em" }}>
         <input
           type="text"
-          placeholder={user.name}
+          placeholder={user.displayName}
           onChange={(e) => {
             setInputValue(e.target.value)
           }}

@@ -160,7 +160,7 @@ export default function Preparation() {
       r.state.users.onAdd((u) => {
         dispatch(addUser(u))
 
-        if (u.id === uid) {
+        if (u.uid === uid) {
           dispatch(setUser(u))
         } else if (!u.isBot) {
           playSound(SOUNDS.JOIN_ROOM)
@@ -170,7 +170,7 @@ export default function Preparation() {
           "anonymous",
           "avatar",
           "elo",
-          "id",
+          "uid",
           "isBot",
           "map",
           "name",
@@ -184,13 +184,13 @@ export default function Preparation() {
             if (field === "ready" && value) {
               playSound(SOUNDS.SET_READY)
             }
-            dispatch(changeUser({ id: u.id, field: field, value: value }))
+            dispatch(changeUser({ id: u.uid, field: field, value: value }))
           })
         })
       })
       r.state.users.onRemove((u) => {
-        dispatch(removeUser(u.id))
-        if (!u.isBot && u.id !== uid && !connectingToGame.current) {
+        dispatch(removeUser(u.uid))
+        if (!u.isBot && u.uid !== uid && !connectingToGame.current) {
           playSound(SOUNDS.LEAVE_ROOM)
         }
       })

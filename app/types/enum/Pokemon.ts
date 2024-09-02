@@ -2472,7 +2472,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.PAWMOT]: Pkm.PAWMI
 }
 
-export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
+export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.RATTATA]: [Pkm.ALOLAN_RATTATA],
   [Pkm.GROWLITHE]: [Pkm.HISUI_GROWLITHE],
   [Pkm.VULPIX]: [Pkm.ALOLAN_VULPIX],
@@ -2482,7 +2482,7 @@ export const PkmRegionalVariants: { [key in Pkm]?: Pkm[] } = {
   [Pkm.GRIMER]: [Pkm.ALOLAN_GRIMER],
   [Pkm.NIDORANF]: [Pkm.NIDORANM],
   [Pkm.SNEASEL]: [Pkm.HISUI_SNEASEL]
-}
+} as const
 
 export enum PkmDuo {
   LATIOS_LATIAS = "LATIOS_LATIAS",
