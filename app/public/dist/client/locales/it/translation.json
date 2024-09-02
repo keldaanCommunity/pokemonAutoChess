@@ -1514,7 +1514,17 @@
     "THUNDER_FANG": "Infliggi [30,60,120,SP] SPECIAL e causa PARALYSIS per 3 secondi.",
     "TAIL_WHIP": "Riduci la DEF del bersaglio del [30,SP] %.",
     "PSYSHIELD_BASH": "Scatta verso la retrovia nemica, infliggendo [60,SP] SPECIAL a tutti i nemici nella traiettoria e l'utilizzatore ottiene PROTECT per 1 secondo.",
-    "QUIVER_DANCE": "Aumenta l'ATK di [5,SP], la SPE_DEF di [5,SP], la ATK_SPEED del [20,SP]% e guadagni 20 AP."
+    "QUIVER_DANCE": "Aumenta l'ATK di [5,SP], la SPE_DEF di [5,SP], la ATK_SPEED del [20,SP]% e guadagni 20 AP.",
+    "TORCH_SONG": "Appicca fiamme furenti ai [1,2,3] nemici più forti. Ogni fiamma brucia il nemico e le unità adiacenti ed infligge [10,20,30,SP] SPECIAL. Ottieni 10 AP per ogni unità colpita che ha lo status BURN, CURSE o SILENCE.",
+    "POWER_WHIP": "Punta verso il nemico più lontano e lancia una liana gigantesca verso il bersaglio, infliggendo [30,60,SP] SPECIAL a tutti i nemici colpiti nella traiettoria.",
+    "DARK_HARVEST": "Il Pokèmon si teletrasporta verso il gruppo più grande di nemici. Per i prossimi 3 secondi, il Pokèmon subisce SILENCE e prosciuga i HP dei nemici adiacenti, infliggendogli [5,10,20,SP] SPECIAL ogni secondo e curando i propri HP del 30% del SPECIAL inflitto.",
+    "PSYSHOCK": "Sottrai [20,40,80,SP] PP dal bersaglio e guadagnali come SHIELD. Se il bersaglio non ha abbastanza PP, i rimanenti vengono inflitti come SPECIAL.",
+    "HEAVY_SLAM": "L'utilizzatore si butta sul bersaglio, infliggendo [10,20,40,SP] SPECIAL e ottenendo [10,20,40] SHIELD. Più l'utilizzatore supera il bersaglio in HP massimi, maggiore è la potenza della mossa.",
+    "RAPID_SPIN": "Infliggi [20,50,SP] SPECIAL e guadagna il [20,30,SP]% dell'ATK come DEF e SPE_DEF.",
+    "BOUNCE": "Rimbalza [1,2,3,SP] volte verso il bersaglio più lontano, infliggendo [10,SP] SPECIAL a tutti i nemici adiacenti ad ogni rimbalzo.",
+    "BLOOD_MOON": "Concentra tutta la sua energia nella luna cremisi sulla sua fronte e la proietta in una linea retta, infliggendo il [200,SP]% dell'ATK come SPECIAL e causa WOUND a tutti i nemici colpiti per 3 secondi.",
+    "TEA_TIME": "Cura gli alleati di [20,40,80,SP] HP. Tutti i Pokèmon che hanno equipaggiata una bacca la mangiano immediatamente.",
+    "SPIKES": "Lancia fino a [6, SP] punte metalliche dentro in raggio di 3 celle di fronte all'utilizzatore, infliggendo [25,50,SP] SPECIAL. Le punti rimangono sul terreno, infliggendo 10 TRUE al secondo e causando ARMOR_REDUCTION a tutti i Pokèmon che ci camminano sopra, tranne se sono del tipo FLYING."
   },
   "effect": {
     "INGRAIN": "Ingranato",
