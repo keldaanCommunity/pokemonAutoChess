@@ -217,7 +217,9 @@ export default function Game() {
       elligibleToELO
     })
     localStore.set(LocalStoreKeys.RECONNECTION_TOKEN, r.reconnectionToken, 30)
-    r.connection.close()
+    if (r.connection.isOpen) {
+      r.connection.close()
+    }
     dispatch(leaveGame())
     navigate("/after")
 

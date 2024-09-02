@@ -234,7 +234,9 @@ export default function Preparation() {
           if (r.connection.isOpen) {
             await r.leave()
           }
-          game.connection.close()
+          if (game.connection.isOpen) {
+            game.connection.close()
+          }
           dispatch(leavePreparation())
           navigate("/game")
         }
@@ -256,7 +258,9 @@ export default function Preparation() {
         page="preparation"
         leaveLabel={t("leave_room")}
         leave={async () => {
-          await room?.leave(true)
+          if (room?.connection.isOpen) {
+            await room.leave(true)
+          }
           localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
           dispatch(leavePreparation())
           navigate("/lobby")

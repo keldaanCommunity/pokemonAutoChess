@@ -103,7 +103,9 @@ export default function Lobby() {
   }, [lobbyJoined, dispatch])
 
   const signOut = useCallback(async () => {
-    await lobby?.leave()
+    if (lobby?.connection.isOpen) {
+      await lobby.leave()
+    }
     await firebase.auth().signOut()
     dispatch(leaveLobby())
     dispatch(logOut())
