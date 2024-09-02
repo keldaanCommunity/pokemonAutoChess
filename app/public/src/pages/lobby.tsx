@@ -1,7 +1,7 @@
 import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import { Client, Room, RoomAvailable } from "colyseus.js"
 import firebase from "firebase/compat/app"
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import {
@@ -64,7 +64,7 @@ export default function Lobby() {
   const navigate = useNavigate()
   const lobby = useAppSelector((state) => state.network.lobby)
 
-  const [lobbyJoined, setLobbyJoined] = useState<boolean>(false)
+  const lobbyJoined = useRef<boolean>(false)
   const [gameToReconnect, setGameToReconnect] = useState<string | null>(
     localStore.get(LocalStoreKeys.RECONNECTION_GAME)
   )
@@ -89,7 +89,7 @@ export default function Lobby() {
 
   useEffect(() => {
     const client = store.getState().network.client
-    if (!lobbyJoined) {
+    if (!lobbyJoined.current) {
       joinLobbyRoom(dispatch, client, onLeave).catch((err) => {
         logger.error(err)
         const errorMessage = CloseCodesMessages[err] ?? "UNKNOWN_ERROR"
@@ -98,7 +98,7 @@ export default function Lobby() {
         }
         navigate("/")
       })
-      setLobbyJoined(true)
+      lobbyJoined.current = true
     }
   }, [lobbyJoined, dispatch])
 
