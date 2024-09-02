@@ -259,7 +259,7 @@ export default function Preparation() {
         leaveLabel={t("leave_room")}
         leave={async () => {
           if (room?.connection.isOpen) {
-            await room?.leave(true)
+            await room.leave(true)
           }
           localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
           dispatch(leavePreparation())
