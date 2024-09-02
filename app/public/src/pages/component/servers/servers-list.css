@@ -1,0 +1,72 @@
+#servers-list ul {
+    padding: 0;
+}
+
+#servers-list li {
+    list-style: none;
+    margin-bottom: 1em;
+}
+
+#servers-list .logo {
+    width: 64px;
+    height: 64px;
+    margin-right: 1em;
+    flex: 0;
+    object-fit: contain;
+}
+
+#servers-list .server header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#servers-list .server h2 {
+    flex: 1;
+}
+
+#servers-list .server dl {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 0.5em;
+}
+
+#servers-list .server dt {
+    flex: 0;
+}
+
+#servers-list .server dt::after {
+    content: ": ";
+}
+
+#servers-list .server dd {
+    flex: 1;
+    margin-left: .5em;
+}
+
+#servers-list .server .links {
+    float: right;
+    margin-top: -.5em;
+}
+
+#servers-list .server .links a {
+    text-decoration: none;
+    margin-left: 0.5em;
+}
+
+#servers-list .server .description {
+    background-color: var(--color-bg-primary);
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    padding: 1em;
+    margin: 0 -0.5em -0.5em -0.5em;
+    border-radius: 0 0 12px 12px;
+}
+
+#servers-list .server .status-online {
+    color: var(--color-fg-green);
+}
+#servers-list .server .status-offline {
+    color: var(--color-fg-red);
+}

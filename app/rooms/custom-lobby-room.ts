@@ -433,7 +433,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         userProfile?.role !== Role.MODERATOR
       ) {
         throw new Error(
-          "The servers are currently at maximum capacity. Please try again later."
+          "This server is currently at maximum capacity. Please try again later or join another server."
         )
       } else {
         return user
