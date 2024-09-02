@@ -16,6 +16,7 @@
 # Gameplay
 
 - Unit movement path-finding has been improved using the A* algorithm thanks to GaryOu101, big props to him for this awesome contribution!
+- Ranged attacks can no longer miss if target has moved to another cell during the projectile travel time
 
 # UI
 
@@ -23,7 +24,7 @@
 
 # Bugfix
 
-- 
+- Fixed a bug that would lead to some pokemons being unkillable/uninnteractable after resurecting (thanks to Defenestrator for the analysis)
 
 # Misc
 

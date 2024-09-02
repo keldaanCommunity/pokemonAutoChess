@@ -5,13 +5,13 @@
   gap: 4px;
 }
 
-#pokemon-collection .pokemon-carousel {
+#pokemon-collection .pokemon-collection-list {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5em;
   justify-content: center;
   overflow-y: scroll;
-  max-height: 65vh;
+  max-height: calc(90vh - 200px);
 }
 
 #pokemon-collection header {
