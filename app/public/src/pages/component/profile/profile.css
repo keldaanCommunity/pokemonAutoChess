@@ -89,7 +89,6 @@
   grid-area: history;
   margin-left: 1em;
   max-height: 100%;
-  overflow-y: scroll;
 }
 
 .profile-modal .gadgets {

@@ -1,15 +1,7 @@
-import {
-  ArraySchema,
-  MapSchema,
-  Schema,
-  filterChildren,
-  type
-} from "@colyseus/schema"
-import { Client } from "colyseus"
+import { ArraySchema, Schema, type } from "@colyseus/schema"
 import { CronTime } from "cron"
 import { nanoid } from "nanoid"
 import { SpecialGamePlannedSchema } from "../../models/colyseus-models/lobby"
-import LobbyUser from "../../models/colyseus-models/lobby-user"
 import Message from "../../models/colyseus-models/message"
 import { TournamentSchema } from "../../models/colyseus-models/tournament"
 import chatV2 from "../../models/mongo-models/chat-v2"
@@ -26,12 +18,6 @@ import { logger } from "../../utils/logger"
 
 export default class LobbyState extends Schema {
   @type([Message]) messages = new ArraySchema<Message>()
-
-  @filterChildren(function (client: Client, key: string) {
-    return client.auth.uid === key // only send user info to the associated user
-  })
-  @type({ map: LobbyUser })
-  users = new MapSchema<LobbyUser>()
 
   @type(SpecialGamePlannedSchema) nextSpecialGame: ISpecialGamePlanned | null =
     null

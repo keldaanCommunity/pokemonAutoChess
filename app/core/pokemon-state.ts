@@ -288,11 +288,15 @@ export default class PokemonState {
       return { death: false, takenDamage: 0 }
     }
 
+    if (pokemon.life <= 0 || pokemon.status.resurecting) {
+      return { death: false, takenDamage: 0 }
+    }
+
     if (attacker && attacker.status.enraged) {
       damage *= 2
     }
 
-    if (pokemon.life == 0) {
+    if (pokemon.life === 0) {
       death = true
     } else if (pokemon.status.protect || pokemon.status.skydiving) {
       death = false

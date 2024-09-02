@@ -54,7 +54,7 @@ export default function PreparationMenu() {
     BotDifficulty.MEDIUM
   )
 
-  const isReady = users.find((user) => user.id === uid)?.ready
+  const isReady = users.find((user) => user.uid === uid)?.ready
   const nbUsersReady = users.filter((user) => user.ready).length
   const allUsersReady = users.every((user) => user.ready) && nbUsersReady > 1
 
@@ -77,13 +77,13 @@ export default function PreparationMenu() {
     } else {
       setTitleNotificationIcon("🟠")
     }
-  }, [nbUsersReady, users.length])
+  }, [nbUsersReady, users.length, allUsersReady])
 
   useEffect(() => {
     if (gameMode !== GameMode.NORMAL) {
       dispatch(toggleReady(true)) // automatically set users ready in non-classic game mode
     }
-  }, [gameMode])
+  }, [gameMode, dispatch])
 
   const humans = users.filter((u) => !u.isBot)
   const isElligibleForELO =
@@ -306,7 +306,7 @@ export default function PreparationMenu() {
         {users.map((u) => {
           return (
             <PreparationMenuUser
-              key={u.id}
+              key={u.uid}
               user={u}
               isOwner={isOwner}
               ownerId={ownerId}
@@ -335,7 +335,7 @@ export default function PreparationMenu() {
         {startGameButton}
       </div>
 
-      {isOwner && showBotSelectModal && <BotSelectModal botsSelected={users.filter((u) => u.isBot).map(u => u.id)} close={() => setShowBotSelectModal(false)} />}
+      {isOwner && showBotSelectModal && <BotSelectModal botsSelected={users.filter((u) => u.isBot).map(u => u.uid)} close={() => setShowBotSelectModal(false)} />}
     </div>
   )
 }

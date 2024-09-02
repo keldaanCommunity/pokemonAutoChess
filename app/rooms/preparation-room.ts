@@ -1,8 +1,6 @@
 import { Dispatcher } from "@colyseus/command"
 import { Client, Room, updateLobby } from "colyseus"
 import admin from "firebase-admin"
-import { components } from "../api-v1/openapi"
-import { GameUser } from "../models/colyseus-models/game-user"
 import BannedUser from "../models/mongo-models/banned-user"
 import { IBot } from "../models/mongo-models/bot-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
@@ -120,7 +118,7 @@ export default class PreparationRoom extends Room<PreparationState> {
               tournamentId: this.metadata?.tournamentId,
               bracketId: this.metadata?.bracketId,
               players: values(this.state.users).map((p) => ({
-                id: p.id,
+                id: p.uid,
                 rank: 1
               }))
             })
@@ -312,7 +310,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       const numberOfHumanPlayers = values(this.state.users).filter(
         (u) => !u.isBot
       ).length
-      if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME) {
+      if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME && !isAlreadyInRoom) {
         throw "Room is full"
       } else if (this.state.gameStartedAt != null) {
         throw "Game already started"
@@ -322,8 +320,6 @@ export default class PreparationRoom extends Room<PreparationState> {
         throw "User banned"
       } else if (this.metadata.blacklist.includes(user.uid)) {
         throw "User previously kicked"
-      } else if (isAlreadyInRoom) {
-        throw "User already in room"
       } else {
         return user
       }
@@ -388,25 +384,6 @@ export default class PreparationRoom extends Room<PreparationState> {
       this.setGameStarted(new Date().toISOString())
       //logger.debug("game start", game.roomId)
       this.broadcast(Transfer.GAME_START, gameId)
-    }
-  }
-
-  status() {
-    const players = new Array<components["schemas"]["Player"]>()
-    this.state.users.forEach((user: GameUser) => {
-      if (!user.isBot) {
-        players.push({
-          id: user.id,
-          avatar: user.avatar,
-          name: user.name,
-          elo: user.elo
-        })
-      }
-    })
-    return {
-      players: players,
-      name: this.state.name,
-      id: this.roomId
     }
   }
 

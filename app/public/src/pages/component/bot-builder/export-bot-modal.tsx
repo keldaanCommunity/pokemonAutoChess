@@ -10,7 +10,7 @@ export default function ExportBotModal(props: {
   visible: boolean
 }) {
   const { t } = useTranslation()
-  const displayName = useAppSelector((state) => state.lobby.user?.name)
+  const displayName = useAppSelector((state) => state.network.profile?.displayName)
   const [pastebinUrl, setPastebinUrl] = useState<string>("")
 
   const url =

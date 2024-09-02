@@ -13,10 +13,10 @@ import "./room-item.css"
 
 export default function RoomItem(props: {
   room: RoomAvailable<IPreparationMetadata>
-  click: (room: RoomAvailable<IPreparationMetadata>) => Promise<void>
+  click: (room: RoomAvailable<IPreparationMetadata>) => Promise<any>
 }) {
   const { t } = useTranslation()
-  const user = useAppSelector((state) => state.lobby.user)
+  const user = useAppSelector((state) => state.network.profile)
 
   const nbPlayersExpected =
     props.room.metadata?.whitelist && props.room.metadata.whitelist.length > 0
@@ -34,16 +34,16 @@ export default function RoomItem(props: {
   } else if (
     props.room.metadata?.blacklist &&
     props.room.metadata.blacklist.length > 0 &&
-    user?.id &&
-    props.room.metadata.blacklist.includes(user.id) === true
+    user?.uid &&
+    props.room.metadata.blacklist.includes(user.uid) === true
   ) {
     canJoin = false
     disabledReason = t("blacklisted")
   } else if (
     props.room.metadata?.whitelist &&
     props.room.metadata.whitelist.length > 0 &&
-    user?.id &&
-    props.room.metadata.whitelist.includes(user.id) === false
+    user?.uid &&
+    props.room.metadata.whitelist.includes(user.uid) === false
   ) {
     canJoin = false
     disabledReason = t("not_whitelisted")

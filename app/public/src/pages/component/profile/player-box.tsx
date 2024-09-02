@@ -1,39 +1,50 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
+import { IGameRecord } from "../../../../../models/colyseus-models/game-record"
+import { IUserMetadata } from "../../../../../models/mongo-models/user-metadata"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Role } from "../../../../../types"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
+import { Synergy } from "../../../../../types/enum/Synergy"
 import { useAppSelector } from "../../../hooks"
 import { getAvatarSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
 import { EloBadge } from "./elo-badge"
 import { RoleBadge } from "./role-badge"
 
-export default function PlayerBox(props: { user: ILobbyUser }) {
+export default function PlayerBox(props: { user: IUserMetadata, history?: IGameRecord[] }) {
   const { t } = useTranslation()
-  const role = useAppSelector((state) => state.lobby.user?.role)
+  const role = useAppSelector((state) => state.network.profile?.role)
 
   const pokemons: Pkm[] = []
-  props.user.history.forEach((record) =>
-    pokemons.push(...record.pokemons.map((p) => p.name.toUpperCase() as Pkm))
-  )
-  const countPokemons = new Map()
-  const countSynergies = new Map()
-  pokemons.forEach((p) => {
-    countPokemons.set(p, (countPokemons.get(p) ?? 0) + 1)
-    getPokemonData(p).types.forEach((type) => {
-      countSynergies.set(type, (countSynergies.get(type) ?? 0) + 1)
+  const [favoritePokemons, setFavoritePokemons] = useState<Pkm[]>([])
+  const [favoriteSynergies, setFavoriteSynergies] = useState<Synergy[]>([])
+
+  useEffect(() => {
+    if (!props.history) return
+    props.history.forEach((record) =>
+      pokemons.push(...record.pokemons.map((p) => p.name.toUpperCase() as Pkm))
+    )
+    const countPokemons = new Map()
+    const countSynergies = new Map()
+    pokemons.forEach((p) => {
+      countPokemons.set(p, (countPokemons.get(p) ?? 0) + 1)
+      getPokemonData(p).types.forEach((type) => {
+        countSynergies.set(type, (countSynergies.get(type) ?? 0) + 1)
+      })
     })
-  })
-  const favoritePokemons = [...countPokemons.entries()]
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 5)
-    .map(([k, v]) => k)
-  const favoriteSynergies = [...countSynergies.entries()]
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 5)
-    .map(([k, v]) => k)
+    const favoritePokemons = [...countPokemons.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+      .map(([k, v]) => k)
+    const favoriteSynergies = [...countSynergies.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+      .map(([k, v]) => k)
+
+    setFavoritePokemons(favoritePokemons)
+    setFavoriteSynergies(favoriteSynergies)
+  }, [props.history])
 
   return (
     <div className="player my-box">
@@ -60,7 +71,7 @@ export default function PlayerBox(props: { user: ILobbyUser }) {
               textOverflow: "ellipsis"
             }}
           >
-            {props.user.name}
+            {props.user.displayName}
           </p>
         </div>
       </div>
@@ -106,7 +117,7 @@ export default function PlayerBox(props: { user: ILobbyUser }) {
       </div>
       {role === Role.ADMIN && (
         <p style={{ color: "#aaa", fontSize: "60%" }}>
-          {t("user_id")}: {props.user.id}
+          {t("user_id")}: {props.user.uid}
         </p>
       )}
     </div>
