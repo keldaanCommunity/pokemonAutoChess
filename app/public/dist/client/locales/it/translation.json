@@ -1663,16 +1663,16 @@
     "BERSERK": "Furore",
     "FLUID": "Fluido",
     "SHAPELESS": "Informe",
-    "ETHEREAL": "Eterno"
+    "ETHEREAL": "Etereo"
   },
   "effect_description": {
     "STAMINA": "Ottieni 15 SHIELD",
     "STRENGTH": "Ottieni 25 SHIELD",
     "ENDURE": "Ottieni 35 SHIELD",
     "PURE_POWER": "Ottieni 50 SHIELD",
-    "INGRAIN": "Ripristina 8 HP ogni 2 secondi. Prendi un albero di bacche.",
-    "GROWTH": "Ripristina 15 HP ogni 2 secondi. Prendi un altro albero di bacche.",
-    "SPORE": "Ripristina 30 HP ogni 2 secondi. Prendi un terzo albero di bacche.",
+    "INGRAIN": "Ripristina 8 HP ogni 2 secondi. Ottieni un albero di bacche.",
+    "GROWTH": "Ripristina 15 HP ogni 2 secondi. Ottieni un altro albero di bacche.",
+    "SPORE": "Ripristina 30 HP ogni 2 secondi. Ottieni un terzo albero di bacche.",
     "BLAZE": "30% di possibilità di BURN",
     "VICTORY_STAR": "Probabilità del 40% di BURN, +1 ATK dopo ogni colpo",
     "DROUGHT": "Probabilità del 50% di BURN, +2 ATK dopo ogni colpo",
