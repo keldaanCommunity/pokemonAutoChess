@@ -10,6 +10,7 @@
 - Changed Root (Bellsprout): All adjacent enemies are Locked for 4 seconds and take 10/20/40 special damage whereas user and adjacent allies are healed by 10/20/40 HP
 - Bellsprout line is now regional in Grass/Flora regions, and Weepinbell no longer evolve with berries
 - Tangela is now additional and no longer regional
+- Changed Lunala: HP 250 → 300, Def/SpeDef 5/5 → 3/3
 
 # Changes to Synergies
 

@@ -13385,10 +13385,10 @@ export class Lunala extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 250
+  hp = 300
   atk = 25
-  def = 5
-  speDef = 5
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 4
   skill = Ability.MOONGEIST_BEAM
