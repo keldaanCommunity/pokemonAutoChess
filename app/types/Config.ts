@@ -139,8 +139,8 @@ export const BoosterRarityProbability: { [key in Rarity]: number } = {
 }
 
 export const DITTO_RATE = 0.005
-export const KECLEON_RATE = 1/100
-export const ARCEUS_RATE = 1/100
+export const KECLEON_RATE = 1 / 100
+export const ARCEUS_RATE = 1 / 100
 
 export const AttackTypeColor: { [key in AttackType] } = {
   [AttackType.PHYSICAL]: "#FF6E55",
@@ -349,10 +349,13 @@ export const FishRarityProbability: {
   }
 }
 
+export const MAX_CONCURRENT_PLAYERS_ON_SERVER = 700
+export const MAX_CONCURRENT_PLAYERS_ON_LOBBY = 50
 export const MAX_PLAYERS_PER_GAME = 8
 export const MIN_HUMAN_PLAYERS = process.env.MIN_HUMAN_PLAYERS
   ? parseInt(process.env.MIN_HUMAN_PLAYERS)
   : 1
+export const INACTIVITY_TIMEOUT = 60 * 1000
 
 export const DEFAULT_ATK_SPEED = 0.75
 export const DEFAULT_CRIT_CHANCE = 10

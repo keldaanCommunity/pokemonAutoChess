@@ -20,13 +20,8 @@ import Board, { Cell } from "./board"
 import { PokemonEntity } from "./pokemon-entity"
 
 export default class PokemonState {
-  attack(
-    pokemon: PokemonEntity,
-    board: Board,
-    coordinates: { x: number; y: number }
-  ) {
-    const target = board.getValue(coordinates.x, coordinates.y)
-    if (target) {
+  attack(pokemon: PokemonEntity, board: Board, target: PokemonEntity) {
+    if (target.life > 0) {
       let damage = pokemon.atk
       let physicalDamage = 0
       let specialDamage = 0
@@ -293,11 +288,15 @@ export default class PokemonState {
       return { death: false, takenDamage: 0 }
     }
 
+    if (pokemon.life <= 0 || pokemon.status.resurecting) {
+      return { death: false, takenDamage: 0 }
+    }
+
     if (attacker && attacker.status.enraged) {
       damage *= 2
     }
 
-    if (pokemon.life == 0) {
+    if (pokemon.life === 0) {
       death = true
     } else if (pokemon.status.protect || pokemon.status.skydiving) {
       death = false
@@ -731,10 +730,10 @@ export default class PokemonState {
       pokemon.addPP(4, pokemon, 0, false)
     }
     if (pokemon.effects.has(Effect.DRIZZLE)) {
-      pokemon.addPP(8, pokemon, 0, false)
+      pokemon.addPP(7, pokemon, 0, false)
     }
     if (pokemon.effects.has(Effect.PRIMORDIAL_SEA)) {
-      pokemon.addPP(12, pokemon, 0, false)
+      pokemon.addPP(10, pokemon, 0, false)
     }
     if (pokemon.simulation.weather === Weather.RAIN) {
       pokemon.addPP(3, pokemon, 0, false)
@@ -1016,8 +1015,7 @@ export default class PokemonState {
       }
     })
 
-    // Removed as a potential sinner for an orientation error.
-    //candidatesCoordinates.push({ x: pokemon.positionX, y: pokemon.positionY }) // sometimes attack itself when confused
+    candidatesCoordinates.push({ x: pokemon.positionX, y: pokemon.positionY }) // sometimes attack itself when confused
 
     if (candidatesCoordinates.length > 0) {
       return pickRandomIn(candidatesCoordinates)

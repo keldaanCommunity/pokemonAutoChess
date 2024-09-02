@@ -1,14 +1,11 @@
 import React, { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Navigate, useNavigate } from "react-router-dom"
+import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { logger } from "../../../../../utils/logger"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import store from "../../../stores"
-import {
-  addBotDatabase,
-  deleteBotDatabase,
-  requestBotList
-} from "../../../stores/NetworkStore"
+import { addBotDatabase, deleteBotDatabase } from "../../../stores/NetworkStore"
 import { getAvatarSrc } from "../../../utils"
 import { joinLobbyRoom } from "../../lobby"
 import { rewriteBotRoundsRequiredto1, validateBot } from "./bot-logic"
@@ -46,15 +43,17 @@ function BotsList() {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const bots = useAppSelector((state) => state.lobby.botList)
+  const [bots, setBots] = useState<IBot[] | null>(null)
 
-  if (bots.length === 0) {
-    dispatch(requestBotList({ withSteps: true }))
-  }
+  useEffect(() => {
+    fetch("/bots?withSteps=true").then((res) => res.json()).then((data) => {
+      setBots(data)
+    })
+  }, [])
 
   return (
     <main id="bots-list" className="my-container">
-      {bots.length === 0 ? (
+      {bots === null ? (
         <p>Loading...</p>
       ) : (
         <table>

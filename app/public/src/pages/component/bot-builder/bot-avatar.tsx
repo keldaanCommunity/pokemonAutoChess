@@ -30,7 +30,7 @@ export default function BotAvatar(props: {
   const errors = validateBot(props.bot)
 
   return (
-    <div id="bot-info">
+    <div id="bot-info" className="my-box">
       <img
         className="bot-avatar"
         src={getAvatarSrc(props.bot.avatar)}

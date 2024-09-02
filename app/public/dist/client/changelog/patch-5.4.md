@@ -17,7 +17,7 @@
 - Buff Tapu Fini: PP 100 → 80 ; Misty Surge now also heals 30 HP to all fairy allies
 - Buff Smeargle: HP 220 → 250
 - Buff Snubull: Attack 10 → 12, Def 3 → 4
-- Buff Purrloin & Liepard : Def/Spedef 1/2 → 2/3 ; new ability Fake out: deals 50/100/150 special damage to the target, then lose 30% AP. Target is FLINCH for 3 seconds unless AP was negative
+- Buff Purrloin & Liepard : Def/Spedef 1/2 → 2/3 ; new ability Fake out: deals 50/100/150 special damage to the target, then lose 30 AP. Target is FLINCH for 3 seconds unless AP was negative
 - Changed Poochyena line: Growl now only flinch adjacent enemies, but reduce their ATK by 3 ; HP 70/160 → 80/190
 - Rework Torkoal ability: Smoke Screen no longer cause Burn and Armor Reduction, but smoke 3 cells in the backline to reduce their accuracy by 50%
 - Nerf Florges Fairy Wind: ~~10/20/30~~ 5/10/20 PP, AP scaling ~~0.5~~ 1
@@ -30,7 +30,7 @@
 - Nerf Butterfree: HP 200 → 180
 - Nerf Beedrill: HP: 200 → 180
 - Alolan Exeggutor is now tier 2, Def/Spedef 5/5 → 3/3
-- Nerf Dive (Lapras, Wailord): Freeze duration 1.5 → 1 second, damage: 15/30/60 → 15/30/50
+- Nerf Dive (Lapras, Wailord): Freeze duration 1.5 → 1 second, damage: 15/30/60 → 10/20/40, shield: 50 → 10/20/40
 - Buff Spheal line: HP 70/140/260 → 80/150/300
 - Buff Lovely Kiss (Jynx): if already asleep, deal 50/100/150 special damage
 - Buff Aurora Beam (Iron Bundle, Dewgong): doubled freeze chance
@@ -38,14 +38,16 @@
 - Changed Silvally: no longer Wild, MultiAttack: 10 → 15 x synergy level special damage
 - Buff Present (Delibird): chance to heal ~~80~~ 50HP: ~~20~~ 10%; chance to deal 300 damage ~~10~~ 20%
 - Buff Suicune: PP 130 → 100
-- Buff Mud Bubble (Mudkip): remove ability cooldown
-- Changed Growth (Torterra): ~~increase Attack by 10~~ increase HP by 30/40/50 and Attack by 3/4/5
+- Changed Growth (Torterra): ~~increase Attack by 10~~ increase HP by 10/20/30 and Attack by 3/4/5
+- Nerf Psyshock (Golduck): PP burn 30/60/100 → 20/40/80
+- Nerf Feraligatr line: PP 90 → 100
 
 # Changes to Synergies
 
 - Add Electric 9: Power Surge: Triple attacks also deal 10 special damage to enemies adjacent to the target
 - Buff Fairy: ~~10/20/30/40~~ 15/30/50/70% additional special damage to attacks and shocks. Shocks damage are now a percentage of the incoming critical damage, 30% initially.
 - Nerf Amorphous: HP: 5/10/15 → 4/8/12, Attack speed : 2%/4%/6% > 1%/3%/5%
+- Revert Water buffs from 5.1 and 5.2
 
 # Changes to Items
 

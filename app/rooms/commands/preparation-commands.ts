@@ -4,9 +4,7 @@ import { Client, matchMaker } from "colyseus"
 import { FilterQuery } from "mongoose"
 import { GameUser, IGameUser } from "../../models/colyseus-models/game-user"
 import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
-import UserMetadata, {
-  IUserMetadata
-} from "../../models/mongo-models/user-metadata"
+import UserMetadata from "../../models/mongo-models/user-metadata"
 import { Role, Transfer } from "../../types"
 import {
   EloRankThreshold,
@@ -20,6 +18,7 @@ import { cleanProfanity } from "../../utils/profanity-filter"
 import { pickRandomIn } from "../../utils/random"
 import { entries, values } from "../../utils/schemas"
 import PreparationRoom from "../preparation-room"
+import { CloseCodes } from "../../types/enum/CloseCodes"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -35,9 +34,8 @@ export class OnJoinCommand extends Command<
         (u) => !u.isBot
       ).length
       if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME) {
-        client.send(Transfer.KICK)
-        client.leave()
-        return // game already full
+        client.leave(CloseCodes.ROOM_FULL)
+        return
       }
       if (this.state.ownerId == "" && this.state.gameMode === GameMode.NORMAL) {
         this.state.ownerId = auth.uid
@@ -56,8 +54,7 @@ export class OnJoinCommand extends Command<
         ).length
         if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME) {
           // lobby has been filled with someone else while waiting for the database
-          client.send(Transfer.KICK)
-          client.leave()
+          client.leave(CloseCodes.ROOM_FULL)
           return
         }
 
@@ -66,9 +63,8 @@ export class OnJoinCommand extends Command<
             this.state.minRank != null &&
             u.elo < EloRankThreshold[this.state.minRank]
           ) {
-            client.send(Transfer.KICK)
-            client.leave()
-            return // rank not high enough
+            client.leave(CloseCodes.USER_RANK_TOO_LOW)
+            return
           }
 
           this.state.users.set(
@@ -102,8 +98,7 @@ export class OnJoinCommand extends Command<
                 !this.state.users.get(u.uid)!.ready
               ) {
                 this.state.users.delete(u.uid)
-                client.send(Transfer.KICK)
-                client.leave()
+                client.leave(CloseCodes.USER_KICKED) // kick clients that can't auto-ready in time. Still investigating why this happens for some people
               }
             }, 10000)
           }
@@ -273,7 +268,7 @@ export class OnNewMessageCommand extends Command<
       if (user && !user.anonymous && message != "") {
         this.state.addMessage({
           author: user.name,
-          authorId: user.id,
+          authorId: user.uid,
           avatar: user.avatar,
           payload: message
         })
@@ -408,8 +403,7 @@ export class OnKickPlayerCommand extends Command<
               this.room.setMetadata({
                 blacklist: this.room.metadata.blacklist.concat(userId)
               })
-              cli.send(Transfer.KICK)
-              cli.leave()
+              cli.leave(CloseCodes.USER_KICKED)
             } else {
               this.room.state.addMessage({
                 author: "Server",
@@ -438,12 +432,7 @@ export class OnDeleteRoomCommand extends Command<
       const user = this.state.users.get(client.auth?.uid)
       if (user && [Role.ADMIN, Role.MODERATOR].includes(user.role)) {
         this.room.clients.forEach((cli) => {
-          cli.send(Transfer.KICK)
-          cli.leave()
-        })
-        this.room.clients.forEach((cli) => {
-          cli.send(Transfer.KICK)
-          cli.leave()
+          cli.leave(CloseCodes.ROOM_DELETED)
         })
         this.room.disconnect()
       }
@@ -474,10 +463,10 @@ export class OnLeaveCommand extends Command<
 
           if (client.auth.uid === this.state.ownerId) {
             const newOwner = values(this.state.users).find(
-              (user) => user.id !== this.state.ownerId && !user.isBot
+              (user) => user.uid !== this.state.ownerId && !user.isBot
             )
             if (newOwner) {
-              this.state.ownerId = newOwner.id
+              this.state.ownerId = newOwner.uid
               this.state.ownerName = newOwner.name
               this.room.setMetadata({ ownerName: this.state.ownerName })
               this.room.setName(
@@ -606,66 +595,7 @@ type OnAddBotPayload = {
 
 export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
   async execute(data: OnAddBotPayload) {
-    if (this.state.users.size >= MAX_PLAYERS_PER_GAME) {
-      this.room.state.addMessage({
-        authorId: "server",
-        payload: "Room is full"
-      })
-      return
-    }
-
-    const { type } = data
-    let bot: IBot | undefined
-    if (typeof type === "object") {
-      // pick a specific bot chosen by the user
-      bot = type
-    } else {
-      // pick a random bot per difficulty
-      const difficulty = type
-      let d: FilterQuery<IBot> | undefined
-
-      switch (difficulty) {
-        case BotDifficulty.EASY:
-          d = { $lt: 800 }
-          break
-        case BotDifficulty.MEDIUM:
-          d = { $gte: 800, $lt: 1100 }
-          break
-        case BotDifficulty.HARD:
-          d = { $gte: 1100, $lt: 1400 }
-          break
-        case BotDifficulty.EXTREME:
-          d = { $gte: 1400 }
-          break
-      }
-
-      const existingBots = new Array<string>()
-      this.state.users.forEach((value: GameUser, key: string) => {
-        if (value.isBot) {
-          existingBots.push(key)
-        }
-      })
-
-      const bots = await BotV2.find({ id: { $nin: existingBots }, elo: d }, [
-        "avatar",
-        "elo",
-        "name",
-        "id"
-      ])
-
-      if (bots.length <= 0) {
-        this.room.state.addMessage({
-          authorId: "server",
-          payload: "Error: No bots found"
-        })
-        return
-      }
-
-      bot = pickRandomIn(bots)
-    }
-
-    if (bot) {
-      // we checked again the lobby size because of the async request ahead
+    try {
       if (this.state.users.size >= MAX_PLAYERS_PER_GAME) {
         this.room.state.addMessage({
           authorId: "server",
@@ -674,26 +604,89 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
         return
       }
 
-      this.state.users.set(
-        bot.id,
-        new GameUser(
-          bot.id,
-          bot.name,
-          bot.elo,
-          bot.avatar,
-          true,
-          true,
-          "",
-          Role.BOT,
-          false
-        )
-      )
+      const { type } = data
+      let bot: IBot | undefined
+      if (typeof type === "object") {
+        // pick a specific bot chosen by the user
+        bot = type
+      } else {
+        // pick a random bot per difficulty
+        const difficulty = type
+        let d: FilterQuery<IBot> | undefined
 
-      this.room.updatePlayersInfo()
-      this.room.state.addMessage({
-        authorId: "server",
-        payload: `Bot ${bot.name} added.`
-      })
+        switch (difficulty) {
+          case BotDifficulty.EASY:
+            d = { $lt: 800 }
+            break
+          case BotDifficulty.MEDIUM:
+            d = { $gte: 800, $lt: 1100 }
+            break
+          case BotDifficulty.HARD:
+            d = { $gte: 1100, $lt: 1400 }
+            break
+          case BotDifficulty.EXTREME:
+            d = { $gte: 1400 }
+            break
+        }
+
+        const existingBots = new Array<string>()
+        this.state.users.forEach((value: GameUser, key: string) => {
+          if (value.isBot) {
+            existingBots.push(key)
+          }
+        })
+
+        const bots = await BotV2.find({ id: { $nin: existingBots }, elo: d }, [
+          "avatar",
+          "elo",
+          "name",
+          "id"
+        ])
+
+        if (bots.length <= 0) {
+          this.room.state.addMessage({
+            authorId: "server",
+            payload: "Error: No bots found"
+          })
+          return
+        }
+
+        bot = pickRandomIn(bots)
+      }
+
+      if (bot) {
+        // we checked again the lobby size because of the async request ahead
+        if (this.state.users.size >= MAX_PLAYERS_PER_GAME) {
+          this.room.state.addMessage({
+            authorId: "server",
+            payload: "Room is full"
+          })
+          return
+        }
+
+        this.state.users.set(
+          bot.id,
+          new GameUser(
+            bot.id,
+            bot.name,
+            bot.elo,
+            bot.avatar,
+            true,
+            true,
+            "",
+            Role.BOT,
+            false
+          )
+        )
+
+        this.room.updatePlayersInfo()
+        this.room.state.addMessage({
+          authorId: "server",
+          payload: `Bot ${bot.name} added.`
+        })
+      }
+    } catch (error) {
+      logger.error(error)
     }
   }
 }
@@ -712,47 +705,6 @@ export class OnRemoveBotCommand extends Command<
         this.room.state.addMessage({
           authorId: "server",
           payload: `Bot ${name} removed.`
-        })
-      }
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-}
-
-export class OnListBotsCommand extends Command<PreparationRoom> {
-  async execute(data: { user: IUserMetadata }) {
-    try {
-      if (this.state.users.size >= MAX_PLAYERS_PER_GAME) {
-        return
-      }
-
-      const userArray = new Array<string>()
-
-      this.state.users.forEach((value: GameUser, key: string) => {
-        if (value.isBot) {
-          userArray.push(key)
-        }
-      })
-
-      const bots = await BotV2.find({ id: { $nin: userArray } }, [
-        "avatar",
-        "elo",
-        "name",
-        "id"
-      ])
-
-      if (bots) {
-        if (bots.length <= 0) {
-          this.room.state.addMessage({
-            authorId: "server",
-            payload: `Error: No bots found !`
-          })
-        }
-        this.room.clients.forEach((client) => {
-          if (client.auth?.uid === this.state.ownerId) {
-            client.send(Transfer.REQUEST_BOT_LIST, bots)
-          }
         })
       }
     } catch (error) {

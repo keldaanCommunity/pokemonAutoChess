@@ -1,13 +1,16 @@
 import path from "path"
 import { monitor } from "@colyseus/monitor"
+import { ArraySchema } from "@colyseus/schema"
 import config from "@colyseus/tools"
 import { RedisDriver, RedisPresence, ServerOptions, matchMaker } from "colyseus"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
-import admin, { app } from "firebase-admin"
+import admin from "firebase-admin"
 import { connect } from "mongoose"
 import { initTilemap } from "./core/design"
+import { GameRecord } from "./models/colyseus-models/game-record"
+import DetailledStatistic from "./models/mongo-models/detailled-statistic-v2"
 import ItemsStatistics from "./models/mongo-models/items-statistic"
 import Meta from "./models/mongo-models/meta"
 import PokemonsStatistics from "./models/mongo-models/pokemons-statistic-v2"
@@ -22,8 +25,11 @@ import { SynergyTriggers } from "./types/Config"
 import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Item } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
-import { logger } from "./utils/logger"
 import { getLeaderboard } from "./services/leaderboard"
+import { getBotData, getBotsList } from "./services/bots"
+import { discordService } from "./services/discord"
+import { pastebinService } from "./services/pastebin"
+import { logger } from "./utils/logger"
 
 const clientSrc = __dirname.includes("server")
   ? path.join(__dirname, "..", "..", "client")
@@ -185,6 +191,65 @@ export default config({
 
     app.get("/leaderboards", async (req, res) => {
       res.send(getLeaderboard())
+    })
+
+    app.get("/game-history/:playerUid", async (req, res) => {
+      const { playerUid } = req.params
+      const { page = 1 } = req.query
+      const limit = 10
+      const skip = (Number(page) - 1) * limit
+
+      const stats = await DetailledStatistic.find(
+        { playerId: playerUid },
+        ["pokemons", "time", "rank", "elo"],
+        { limit: limit, skip: skip, sort: { time: -1 } }
+      )
+      if (stats) {
+        const records = stats.map(
+          (record) =>
+            new GameRecord(
+              record.time,
+              record.rank,
+              record.elo,
+              record.pokemons
+            )
+        )
+
+        // Return the records as the response
+        return res.status(200).json(records)
+      }
+
+      // If no records found, return an empty array
+      return res.status(200).json([])
+    })
+
+    app.get("/bots", async (req, res) => {
+      res.send(getBotsList({ withSteps: req.query.withSteps === "true" }))
+    })
+
+    app.post("/bots", async (req, res) => {
+      // get json from body
+      try {
+        const { bot, author } = req.body
+        const pastebinUrl = (await pastebinService.createPaste(
+          `${author} has uploaded BOT ${bot.name}`,
+          JSON.stringify(bot, null, 2)
+        )) as string
+
+        logger.debug(
+          `bot ${bot.name} created by ${author} with pastebin url ${pastebinUrl}`
+        )
+
+        discordService.announceBotCreation(bot, pastebinUrl, author)
+        res.status(201).send(pastebinUrl)
+      } catch (error) {
+        logger.error(error)
+        res.status(500).send("Internal server error")
+      }
+    })
+
+    app.get("/bots/:id", async (req, res) => {
+      res.send(getBotData(req.params.id))
     })
 
     const basicAuthMiddleware = basicAuth({

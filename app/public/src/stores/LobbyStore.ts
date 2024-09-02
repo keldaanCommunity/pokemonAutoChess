@@ -1,15 +1,14 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { RoomAvailable } from "colyseus.js"
-import LobbyUser, {
-  ILobbyUser
-} from "../../../models/colyseus-models/lobby-user"
 import Message from "../../../models/colyseus-models/message"
 import {
   TournamentBracketSchema,
   TournamentSchema
 } from "../../../models/colyseus-models/tournament"
-import { IBot, IStep } from "../../../models/mongo-models/bot-v2"
-import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
+import {
+  IPokemonConfig,
+  IUserMetadata
+} from "../../../models/mongo-models/user-metadata"
 import {
   IChatV2,
   IGameMetadata,
@@ -23,7 +22,6 @@ import {
   ILeaderboardInfo
 } from "../../../types/interfaces/LeaderboardInfo"
 import { ISpecialGamePlanned } from "../../../types/interfaces/Lobby"
-import { MAX_BOTS_STAGE } from "../pages/component/bot-builder/bot-logic"
 
 export interface IUserLobbyState {
   botLogDatabase: string[]
@@ -31,14 +29,11 @@ export interface IUserLobbyState {
   leaderboard: ILeaderboardInfo[]
   botLeaderboard: ILeaderboardBotInfo[]
   levelLeaderboard: ILeaderboardInfo[]
-  user: ILobbyUser | undefined
-  searchedUser: ILobbyUser | undefined
+  user: IUserMetadata | undefined
+  searchedUser: IUserMetadata | undefined
   tabIndex: number
   preparationRooms: RoomAvailable[]
   gameRooms: RoomAvailable[]
-  botList: IBot[]
-  pastebinUrl: string
-  botData: IBot
   pokemonCollection: IPokemonConfig[]
   boosterContent: PkmWithConfig[]
   suggestions: ISuggestionUser[]
@@ -63,19 +58,6 @@ const initialState: IUserLobbyState = {
   preparationRooms: [],
   gameRooms: [],
   searchedUser: undefined,
-  botList: [],
-  pastebinUrl: "",
-  botData: {
-    steps: Array.from({ length: MAX_BOTS_STAGE + 1 }, () => ({
-      roundsRequired: 1,
-      board: []
-    })) as IStep[],
-    avatar: "ditto",
-    author: "",
-    elo: 1200,
-    name: "ditto",
-    id: ""
-  },
   nextSpecialGame: null,
   tournaments: [],
   ccu: 0
@@ -108,9 +90,6 @@ export const lobbySlice = createSlice({
     setLevelLeaderboard: (state, action: PayloadAction<ILeaderboardInfo[]>) => {
       state.levelLeaderboard = action.payload
     },
-    addPokemonConfig: (state, action: PayloadAction<IPokemonConfig>) => {
-      state.pokemonCollection = [...state.pokemonCollection, action.payload]
-    },
     changePokemonConfig: (
       state,
       action: PayloadAction<{ id: string; field: string; value: any }>
@@ -123,18 +102,6 @@ export const lobbySlice = createSlice({
         clonedCollection[index][action.payload.field] = action.payload.value
         state.pokemonCollection = clonedCollection
       }
-    },
-    changeUser: (
-      state,
-      action: PayloadAction<{ id: string; field: string; value: any }>
-    ) => {
-      if (state.user && action.payload.id == state.user.id) {
-        state.user[action.payload.field] = action.payload.value
-      }
-    },
-    setUser: (state, action: PayloadAction<LobbyUser>) => {
-      const u: ILobbyUser = JSON.parse(JSON.stringify(action.payload))
-      state.user = u
     },
     setTabIndex: (state, action: PayloadAction<number>) => {
       state.tabIndex = action.payload
@@ -168,26 +135,17 @@ export const lobbySlice = createSlice({
         (room) => room.roomId !== action.payload
       )
     },
-    setSearchedUser: (state, action: PayloadAction<LobbyUser | undefined>) => {
+    setSearchedUser: (
+      state,
+      action: PayloadAction<IUserMetadata | undefined>
+    ) => {
       state.searchedUser = action.payload
-    },
-    setBotList: (state, action: PayloadAction<IBot[]>) => {
-      state.botList = action.payload
-    },
-    setPastebinUrl: (state, action: PayloadAction<string>) => {
-      state.pastebinUrl = action.payload
-    },
-    setBotData: (state, action: PayloadAction<IBot>) => {
-      state.botData = action.payload
     },
     setBoosterContent: (state, action: PayloadAction<PkmWithConfig[]>) => {
       state.boosterContent = action.payload
     },
     setSuggestions: (state, action: PayloadAction<ISuggestionUser[]>) => {
       state.suggestions = action.payload
-    },
-    setLanguage: (state, action: PayloadAction<Language>) => {
-      state.language = action.payload
     },
     leaveLobby: () => initialState,
     setNextSpecialGame: (state, action: PayloadAction<ISpecialGamePlanned>) => {
@@ -291,25 +249,18 @@ export const lobbySlice = createSlice({
 })
 
 export const {
-  setLanguage,
   removeMessage,
   setBoosterContent,
-  addPokemonConfig,
   changePokemonConfig,
   pushMessage,
   setLeaderboard,
   setBotLeaderboard,
   setLevelLeaderboard,
-  changeUser,
-  setUser,
   setTabIndex,
   addRoom,
   removeRoom,
   setCcu,
   setSearchedUser,
-  setBotList,
-  setPastebinUrl,
-  setBotData,
   leaveLobby,
   setSuggestions,
   pushBotLog,

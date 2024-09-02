@@ -3,7 +3,6 @@ import firebase from "firebase/compat/app"
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { IGameUser } from "../../../../../models/colyseus-models/game-user"
-import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import { Role } from "../../../../../types"
 import { MAX_PLAYERS_PER_GAME } from "../../../../../types/Config"
@@ -18,7 +17,6 @@ import {
   changeRoomPassword,
   deleteRoom,
   gameStartRequest,
-  listBots,
   toggleEloRoom,
   toggleReady
 } from "../../../stores/NetworkStore"
@@ -42,9 +40,7 @@ export default function PreparationMenu() {
     (state) => state.preparation.password
   )
   const noElo: boolean = useAppSelector((state) => state.preparation.noElo)
-  const botsList: IBot[] | null = useAppSelector(
-    (state) => state.preparation.botsList
-  )
+  const [showBotSelectModal, setShowBotSelectModal] = useState(false)
   const uid: string = useAppSelector((state) => state.network.uid)
   const isOwner: boolean = useAppSelector(
     (state) => state.preparation.ownerId === state.network.uid
@@ -58,7 +54,7 @@ export default function PreparationMenu() {
     BotDifficulty.MEDIUM
   )
 
-  const isReady = users.find((user) => user.id === uid)?.ready
+  const isReady = users.find((user) => user.uid === uid)?.ready
   const nbUsersReady = users.filter((user) => user.ready).length
   const allUsersReady = users.every((user) => user.ready) && nbUsersReady > 1
 
@@ -81,13 +77,13 @@ export default function PreparationMenu() {
     } else {
       setTitleNotificationIcon("🟠")
     }
-  }, [nbUsersReady, users.length])
+  }, [nbUsersReady, users.length, allUsersReady])
 
   useEffect(() => {
     if (gameMode !== GameMode.NORMAL) {
       dispatch(toggleReady(true)) // automatically set users ready in non-classic game mode
     }
-  }, [gameMode])
+  }, [gameMode, dispatch])
 
   const humans = users.filter((u) => !u.isBot)
   const isElligibleForELO =
@@ -237,7 +233,7 @@ export default function PreparationMenu() {
         className="bubbly blue"
         onClick={() => {
           if (botDifficulty === BotDifficulty.CUSTOM) {
-            dispatch(listBots())
+            setShowBotSelectModal(true)
           } else {
             dispatch(addBot(botDifficulty))
           }
@@ -310,7 +306,7 @@ export default function PreparationMenu() {
         {users.map((u) => {
           return (
             <PreparationMenuUser
-              key={u.id}
+              key={u.uid}
               user={u}
               isOwner={isOwner}
               ownerId={ownerId}
@@ -339,7 +335,7 @@ export default function PreparationMenu() {
         {startGameButton}
       </div>
 
-      {isOwner && botsList != null && <BotSelectModal bots={botsList} />}
+      {isOwner && showBotSelectModal && <BotSelectModal botsSelected={users.filter((u) => u.isBot).map(u => u.uid)} close={() => setShowBotSelectModal(false)} />}
     </div>
   )
 }

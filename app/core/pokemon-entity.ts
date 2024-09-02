@@ -3,7 +3,7 @@ import { logger } from "../utils/logger"
 import { nanoid } from "nanoid"
 import Count from "../models/colyseus-models/count"
 import Player from "../models/colyseus-models/player"
-import { Pokemon } from "../models/colyseus-models/pokemon"
+import { isOnBench, Pokemon } from "../models/colyseus-models/pokemon"
 import Status from "../models/colyseus-models/status"
 import PokemonFactory from "../models/pokemon-factory"
 import { getSellPrice } from "../models/shop"
@@ -372,7 +372,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       !this.status.resurecting &&
       !(value < 0 && this.status.tree) // cannot lose PP if tree
     ) {
-      this.pp = min(0)(this.pp + value)
+      this.pp = clamp(this.pp + value, 0, this.maxPP * 2 - 1)
     }
   }
 
@@ -767,7 +767,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         if (
           ally &&
           ally.passive === Passive.SHARED_VISION &&
-          this.team === ally.team
+          this.team === ally.team &&
+          !(this.targetX === ally.positionX && this.targetY === ally.positionY) // do not self inflict damage if ally is confused and targeting you
         ) {
           ally.targetX = this.targetX
           ally.targetY = this.targetY
@@ -1541,6 +1542,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         const koAllies = values(this.player.board).filter(
           (p) =>
             p.id !== this.refToBoardPokemon.id &&
+            !isOnBench(p) &&
             alliesAlive.includes(p.id) === false
         )
 

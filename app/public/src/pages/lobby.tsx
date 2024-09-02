@@ -3,15 +3,12 @@ import { Client, Room, RoomAvailable } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Navigate } from "react-router-dom"
-import LobbyUser from "../../../models/colyseus-models/lobby-user"
-import PokemonConfig from "../../../models/colyseus-models/pokemon-config"
+import { useNavigate } from "react-router-dom"
 import {
   TournamentBracketSchema,
   TournamentPlayerSchema,
   TournamentSchema
 } from "../../../models/colyseus-models/tournament"
-import { IBot } from "../../../models/mongo-models/bot-v2"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import {
   ICustomLobbyState,
@@ -19,20 +16,17 @@ import {
   PkmWithConfig,
   Transfer
 } from "../../../types"
+import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
 import { logger } from "../../../utils/logger"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import i18n from "../i18n"
 import store from "../stores"
 import {
-  addPokemonConfig,
   addRoom,
   addTournament,
   addTournamentBracket,
-  changePokemonConfig,
   changeTournament,
   changeTournamentBracket,
   changeTournamentPlayer,
-  changeUser,
   leaveLobby,
   pushBotLog,
   pushMessage,
@@ -41,22 +35,17 @@ import {
   removeTournament,
   removeTournamentBracket,
   setBoosterContent,
-  setBotData,
-  setBotList,
   setCcu,
-  setLanguage,
   setNextSpecialGame,
-  setPastebinUrl,
   setSearchedUser,
   setSuggestions,
-  setUser,
   updateTournament
 } from "../stores/LobbyStore"
 import {
   joinLobby,
   logIn,
   logOut,
-  setNetworkError,
+  setErrorAlertMessage,
   setProfile
 } from "../stores/NetworkStore"
 import { Announcements } from "./component/announcements/announcements"
@@ -72,12 +61,14 @@ import "./lobby.css"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const lobby = useAppSelector((state) => state.network.lobby)
 
   const lobbyJoined = useRef<boolean>(false)
   const [gameToReconnect, setGameToReconnect] = useState<string | null>(
     localStore.get(LocalStoreKeys.RECONNECTION_GAME)
   )
+  const networkError = useAppSelector(state => state.network.error)
   const gameRooms: RoomAvailable[] = useAppSelector(
     (state) => state.lobby.gameRooms
   )
@@ -85,42 +76,41 @@ export default function Lobby() {
     gameToReconnect != null &&
     gameRooms.some((r) => r.roomId === gameToReconnect)
 
-  const [toPreparation, setToPreparation] = useState<boolean>(false)
-  const [toGame, setToGame] = useState<boolean>(false)
-  const [toAuth, setToAuth] = useState<boolean>(false)
   const { t } = useTranslation()
+
+  const onLeave = (code: number) => {
+    logger.info(`left lobby with code ${code}`)
+    const errorMessage = CloseCodesMessages[code]
+    if (errorMessage) {
+      dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
+    }
+    navigate("/")
+  }
 
   useEffect(() => {
     const client = store.getState().network.client
     if (!lobbyJoined.current) {
-      joinLobbyRoom(dispatch, client).catch((err) => {
+      joinLobbyRoom(dispatch, client, onLeave).catch((err) => {
         logger.error(err)
-        dispatch(setNetworkError(err.message))
-        setToAuth(true)
+        const errorMessage = CloseCodesMessages[err] ?? "UNKNOWN_ERROR"
+        if (errorMessage) {
+          dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`, { error: err })))
+        }
+        navigate("/")
       })
       lobbyJoined.current = true
     }
   }, [lobbyJoined, dispatch])
 
   const signOut = useCallback(async () => {
-    await lobby?.leave()
+    if (lobby?.connection.isOpen) {
+      await lobby.leave()
+    }
     await firebase.auth().signOut()
     dispatch(leaveLobby())
     dispatch(logOut())
-    setToAuth(true)
+    navigate("/")
   }, [dispatch, lobby])
-
-  if (toAuth) {
-    return <Navigate to={"/"} />
-  }
-
-  if (toPreparation) {
-    return <Navigate to="/preparation"></Navigate>
-  }
-
-  if (toGame) {
-    return <Navigate to="/game"></Navigate>
-  }
 
   return (
     <main className="lobby">
@@ -130,10 +120,7 @@ export default function Lobby() {
         leaveLabel={t("sign_out")}
       />
       <div className="lobby-container">
-        <MainLobby
-          toPreparation={toPreparation}
-          setToPreparation={setToPreparation}
-        />
+        <MainLobby />
       </div>
       <Modal
         show={showGameReconnect}
@@ -141,7 +128,7 @@ export default function Lobby() {
         body={t("game-reconnect-modal-body")}
         footer={
           <>
-            <button className="bubbly green" onClick={() => setToGame(true)}>
+            <button className="bubbly green" onClick={() => navigate("/game")}>
               {t("yes")}
             </button>
             <button
@@ -156,11 +143,17 @@ export default function Lobby() {
           </>
         }
       ></Modal>
+      <Modal
+        show={networkError != null}
+        onClose={() => dispatch(setErrorAlertMessage(null))}
+        className="is-dark basic-modal-body"
+        body={<p style={{ padding: "1em" }}>{networkError}</p>}
+      />
     </main>
   )
 }
 
-function MainLobby({ toPreparation, setToPreparation }) {
+function MainLobby() {
   const [activeSection, setActive] = useState<string>("leaderboard")
   const { t } = useTranslation()
   return (
@@ -237,7 +230,8 @@ function MainLobby({ toPreparation, setToPreparation }) {
 
 export async function joinLobbyRoom(
   dispatch,
-  client: Client
+  client: Client,
+  onLeave: (code: number) => void
 ): Promise<Room<ICustomLobbyState>> {
   if (!firebase.apps.length) {
     firebase.initializeApp(FIREBASE_CONFIG)
@@ -249,13 +243,27 @@ export async function joinLobbyRoom(
         try {
           const token = await user.getIdToken()
 
-          const lobby = store.getState().network.lobby
-          if (lobby) {
-            await lobby.leave()
+          const reconnectToken: string = localStore.get(LocalStoreKeys.RECONNECTION_TOKEN)
+          if (reconnectToken) {
+            try {
+              const lobbyRoom: Room<ICustomLobbyState> = await client.reconnect(reconnectToken)
+              if (lobbyRoom.name === "lobby") {
+                dispatch(joinLobby(lobbyRoom))
+              } else if (lobbyRoom.connection.isOpen) {
+                lobbyRoom.connection.close()
+              }
+            } catch (error) {
+              logger.log(error)
+              localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
+            }
           }
-          const room: Room<ICustomLobbyState> = await client.join("lobby", {
+          const lobby = store.getState().network.lobby
+          const room: Room<ICustomLobbyState> = lobby ?? await client.join("lobby", {
             idToken: token
           })
+
+          room.onLeave(onLeave)
+
           room.state.messages.onAdd((m) => {
             dispatch(pushMessage(m))
           })
@@ -362,78 +370,9 @@ export async function joinLobbyRoom(
             dispatch(removeTournament(tournament))
           })
 
-          room.state.users.onAdd((u) => {
-            if (u.id == user.uid) {
-              u.pokemonCollection.onAdd((p) => {
-                const pokemonConfig = p as PokemonConfig
-                dispatch(addPokemonConfig(pokemonConfig))
-                const fields: NonFunctionPropNames<PokemonConfig>[] = [
-                  "dust",
-                  "emotions",
-                  "id",
-                  "selectedEmotion",
-                  "selectedShiny",
-                  "shinyEmotions"
-                ]
-
-                fields.forEach((field) => {
-                  pokemonConfig.listen(
-                    field,
-                    (value, previousValue) => {
-                      if (previousValue !== undefined) {
-                        dispatch(
-                          changePokemonConfig({
-                            id: pokemonConfig.id,
-                            field: field,
-                            value: value
-                          })
-                        )
-                      }
-                    },
-                    false
-                  )
-                })
-              }, false)
-              dispatch(setUser(u))
-              setSearchedUser(u)
-
-              u.listen("language", (value) => {
-                if (value) {
-                  dispatch(setLanguage(value))
-                  i18n.changeLanguage(value)
-                }
-              })
-            }
-            const fields: NonFunctionPropNames<LobbyUser>[] = [
-              "id",
-              "name",
-              "avatar",
-              "elo",
-              "wins",
-              "exp",
-              "level",
-              "donor",
-              "honors",
-              "history",
-              "booster",
-              "titles",
-              "title",
-              "role",
-              "anonymous"
-            ]
-
-            fields.forEach((field) => {
-              u.listen(field, (value) => {
-                dispatch(changeUser({ id: u.id, field: field, value: value }))
-              })
-            })
-          })
-
           room.state.listen("nextSpecialGame", (specialGame) => {
             dispatch(setNextSpecialGame(specialGame))
           })
-
-          room.onMessage(Transfer.BAN, () => reject("banned"))
 
           room.onMessage(Transfer.BANNED, (message) => {
             alert(message)
@@ -443,16 +382,8 @@ export async function joinLobbyRoom(
             dispatch(pushBotLog(message))
           })
 
-          room.onMessage(Transfer.PASTEBIN_URL, (json: { url: string }) => {
-            dispatch(setPastebinUrl(json.url))
-          })
-
           room.onMessage(Transfer.ROOMS, (rooms: RoomAvailable[]) => {
             rooms.forEach((room) => dispatch(addRoom(room)))
-          })
-
-          room.onMessage(Transfer.REQUEST_BOT_LIST, (bots: IBot[]) => {
-            dispatch(setBotList(bots))
           })
 
           room.onMessage(Transfer.ADD_ROOM, ([, room]) => {
@@ -469,13 +400,9 @@ export async function joinLobbyRoom(
             dispatch(setProfile(user))
           })
 
-          room.onMessage(Transfer.USER, (user: LobbyUser) =>
+          room.onMessage(Transfer.USER, (user: IUserMetadata) =>
             dispatch(setSearchedUser(user))
           )
-
-          room.onMessage(Transfer.REQUEST_BOT_DATA, (data: IBot) => {
-            dispatch(setBotData(data))
-          })
 
           room.onMessage(
             Transfer.BOOSTER_CONTENT,
@@ -498,7 +425,7 @@ export async function joinLobbyRoom(
           reject(error)
         }
       } else {
-        reject("not authenticated")
+        reject(CloseCodes.USER_NOT_AUTHENTICATED)
       }
     })
   })

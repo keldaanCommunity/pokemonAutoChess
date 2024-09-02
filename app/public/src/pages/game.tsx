@@ -3,7 +3,7 @@ import { Client, Room } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Navigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import AfterGameState from "../../../rooms/states/after-game-state"
@@ -14,6 +14,7 @@ import {
   IDragDropCombineMessage,
   IDragDropItemMessage,
   IDragDropMessage,
+  IExperienceManager,
   IPlayer,
   ISimplePlayer,
   Role,
@@ -39,7 +40,7 @@ import {
   removeDpsMeter,
   removePlayer,
   setAdditionalPokemons,
-  setExperienceManager,
+  updateExperienceManager,
   setInterest,
   setItemsProposition,
   setLife,
@@ -86,6 +87,7 @@ export function getGameScene(): GameScene | undefined {
 export default function Game() {
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const client: Client = useAppSelector((state) => state.network.client)
   const room: Room<GameState> | undefined = useAppSelector(
     (state) => state.network.game
@@ -104,8 +106,6 @@ export default function Game() {
   const [connectError, setConnectError] = useState<string>("")
   const [finalRank, setFinalRank] = useState<number>(0)
   const [finalRankVisible, setFinalRankVisible] = useState<boolean>(false)
-  const [toAfter, setToAfter] = useState<boolean>(false)
-  const [toAuth, setToAuth] = useState<boolean>(false)
   const container = useRef<HTMLDivElement>(null)
 
   const MAX_ATTEMPS_RECONNECT = 3
@@ -154,10 +154,10 @@ export default function Game() {
             }
           })
       } else {
-        setToAuth(true) // no reconnection token
+        navigate("/") // no reconnection token, login again
       }
     },
-    [client, dispatch]
+    [client, dispatch, navigate]
   )
 
   function playerClick(id: string) {
@@ -217,16 +217,36 @@ export default function Game() {
       elligibleToELO
     })
     localStore.set(LocalStoreKeys.RECONNECTION_TOKEN, r.reconnectionToken, 30)
-    r.connection.close()
+    if (r.connection.isOpen) {
+      r.connection.close()
+    }
     dispatch(leaveGame())
-    setToAfter(true)
+    navigate("/after")
 
     try {
       await room?.leave()
     } catch (error) {
       logger.warn("Room already closed")
     }
-  }, [client, dispatch, room])
+  }, [client, dispatch, navigate, room])
+
+  useEffect(() => {
+    // create a history entry to prevent back button switching page immediately, and leave game properly instead
+    window.history.pushState(null, "", window.location.href);
+    const confirmLeave = () => {
+      if (confirm("Do you want to leave game ?")) {
+        leave()
+      } else {
+        // push again another entry to prevent back button from switching page, effectively canceling the back action
+        window.history.pushState(null, "", window.location.href);
+      }
+    }
+    // when pressing back button, properly leave game
+    window.addEventListener("popstate", confirmLeave)
+    return () => {
+      window.removeEventListener("popstate", confirmLeave)
+    }
+  }, [])
 
   useEffect(() => {
     const connect = () => {
@@ -295,7 +315,7 @@ export default function Game() {
       })
       room.onMessage(Transfer.SHOW_EMOTE, (message) => {
         const g = getGameScene()
-        if ( g?.minigameManager?.pokemons?.size && g.minigameManager.pokemons.size > 0) {
+        if (g?.minigameManager?.pokemons?.size && g.minigameManager.pokemons.size > 0) {
           // early return here to prevent showing animation twice
           return g.minigameManager?.showEmote(message.id, message?.emote)
         }
@@ -423,7 +443,7 @@ export default function Game() {
       })
 
       room.state.additionalPokemons.onAdd(() => {
-        dispatch(setAdditionalPokemons(room.state.additionalPokemons.map(p=>p)))
+        dispatch(setAdditionalPokemons([...room.state.additionalPokemons]))
       })
 
       room.state.simulations.onRemove(() => {
@@ -515,9 +535,19 @@ export default function Game() {
             setFinalRankVisible(true)
           }
         })
-        player.listen("experienceManager", (value) => {
+        player.listen("experienceManager", (experienceManager) => {
           if (player.id === uid) {
-            dispatch(setExperienceManager(value))
+            dispatch(updateExperienceManager(experienceManager))
+            const fields: NonFunctionPropNames<IExperienceManager>[] = [
+              "experience",
+              "expNeeded",
+              "level"
+            ]
+            fields.forEach((field) => {
+              experienceManager.listen(field, (value) => {
+                dispatch(updateExperienceManager({ ...experienceManager, [field]: value } as IExperienceManager))
+              })
+            })
           }
         })
         player.listen("loadingProgress", (value) => {
@@ -606,12 +636,12 @@ export default function Game() {
 
         player.pokemonsProposition.onAdd(() => {
           if (player.id == uid) {
-            dispatch(setPokemonProposition(player.pokemonsProposition.map(p=>p)))
+            dispatch(setPokemonProposition(player.pokemonsProposition.map(p => p)))
           }
         })
         player.pokemonsProposition.onRemove(() => {
           if (player.id == uid) {
-            dispatch(setPokemonProposition(player.pokemonsProposition.map(p=>p)))
+            dispatch(setPokemonProposition(player.pokemonsProposition.map(p => p)))
           }
         })
       })
@@ -636,14 +666,6 @@ export default function Game() {
     connectToGame,
     leave
   ])
-
-  if (toAuth) {
-    return <Navigate to={"/"} />
-  }
-
-  if (toAfter) {
-    return <Navigate to="/after" />
-  }
 
   return (
     <main id="game-wrapper">

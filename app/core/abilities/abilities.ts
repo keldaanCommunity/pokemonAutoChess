@@ -1228,7 +1228,7 @@ export class PoisonJabStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    const damage = [30, 60, 90, 120][pokemon.stars - 1] ?? 30
+    const damage = [30, 60, 90][pokemon.stars - 1] ?? 30
     const farthestTarget = state.getFarthestTarget(pokemon, board) ?? target
     super.process(pokemon, state, board, farthestTarget, crit)
     if (farthestTarget) {
@@ -3122,12 +3122,13 @@ export class DiveStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 3 ? 50 : pokemon.stars === 2 ? 30 : 15
+    const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
+    const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
     const freezeDuration = 1000
     const mostSurroundedCoordinate =
       state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
 
-    pokemon.addShield(50, pokemon, 1, crit)
+    pokemon.addShield(shield, pokemon, 1, crit)
 
     if (mostSurroundedCoordinate) {
       pokemon.moveTo(
@@ -3559,21 +3560,9 @@ export class RootStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let heal = 0
-
-    switch (pokemon.stars) {
-      case 1:
-        heal = 20
-        break
-      case 2:
-        heal = 30
-        break
-      case 3:
-        heal = 40
-        break
-      default:
-        break
-    }
+    const heal = [10, 20, 40][pokemon.stars - 1] ?? 10
+    const damage = [10, 20, 40][pokemon.stars - 1] ?? 10
+    const lockedDuration = 4000
 
     const cells = board.getAdjacentCells(
       pokemon.positionX,
@@ -3583,6 +3572,15 @@ export class RootStrategy extends AbilityStrategy {
     cells.forEach((cell) => {
       if (cell.value && pokemon.team == cell.value.team) {
         cell.value.handleHeal(heal, pokemon, 1, crit)
+      } else if (cell.value && pokemon.team !== cell.value.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        cell.value.status.triggerLocked(lockedDuration, cell.value)
       }
     })
   }
@@ -4756,7 +4754,7 @@ export class GrowthStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
 
     let attackBuff = 5
-    let hpBuff = 50
+    let hpBuff = [10, 20, 30][pokemon.stars - 1] ?? 30
     if (pokemon.simulation.weather === Weather.SUN) {
       attackBuff *= 2 // grows twice as fast if sunny weather
       hpBuff *= 2
@@ -5509,7 +5507,6 @@ export class MudBubbleStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const heal = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
     pokemon.handleHeal(heal, pokemon, 1, crit)
-    pokemon.cooldown = 0
   }
 }
 
@@ -9032,7 +9029,7 @@ export class PsyShockStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const ppBurn = [30, 60, 100][pokemon.stars - 1] ?? 100
+    const ppBurn = [20, 40, 80][pokemon.stars - 1] ?? 80
     const ppStolen = max(target.pp)(ppBurn)
     const extraPP = ppBurn - ppStolen
 
@@ -9503,7 +9500,8 @@ export class GulpMissileStrategy extends AbilityStrategy {
 
             const cells = board.getAdjacentCells(
               target.positionX,
-              target.positionY
+              target.positionY,
+              true
             )
 
             cells.forEach((cell) => {
