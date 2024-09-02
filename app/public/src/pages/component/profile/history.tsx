@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { ArraySchema } from "@colyseus/schema"
 import {
   IGameRecord,
   IPokemonRecord
@@ -97,7 +98,7 @@ export default function History(props: { uid: string, onUpdate?: (history: IGame
   );
 }
 
-function getTopSynergies(team: IPokemonRecord[]): [Synergy, number][] {
+function getTopSynergies(team: IPokemonRecord[] | ArraySchema<IPokemonRecord>): [Synergy, number][] {
   const synergies = computeSynergies(
     team.map((pkmRecord) => {
       const pkm = PokemonFactory.createPokemonFromName(pkmRecord.name)
