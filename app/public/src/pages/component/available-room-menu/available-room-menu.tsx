@@ -147,14 +147,14 @@ export default function AvailableRoomMenu() {
         localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
       }
     }
-    
+
     const existingQuickPlayRoom = preparationRooms.find(
       (room) => room.metadata?.gameMode === GameMode.QUICKPLAY && room.clients < MAX_PLAYERS_PER_GAME
     )
     if (existingQuickPlayRoom) {
-      await joinPrepRoom(existingQuickPlayRoom)
+      joinPrepRoom(existingQuickPlayRoom)
     } else {
-      await createRoom(GameMode.QUICKPLAY)
+      createRoom(GameMode.QUICKPLAY)
     }
   }, 1000)
 
