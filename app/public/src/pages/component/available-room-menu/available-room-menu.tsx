@@ -125,6 +125,29 @@ export default function AvailableRoomMenu() {
   }, 1000)
 
   const quickPlay = throttle(async function quickPlay() {
+    const reconnectToken: string = localStore.get(LocalStoreKeys.RECONNECTION_TOKEN)
+    if (reconnectToken) {
+      try {
+        const room: Room<PreparationState> = await client.reconnect(reconnectToken)
+        if (room.name === "preparation" && room.state.gameMode === GameMode.QUICKPLAY) {
+          localStore.set(
+            LocalStoreKeys.RECONNECTION_TOKEN,
+            room.reconnectionToken,
+            30
+          )
+          if (room.connection.isOpen) {
+            room.connection.close()
+          }
+          navigate("/preparation")
+          return
+        } else if (room.connection.isOpen) {
+          room.connection.close()
+        }
+      } catch (error) {
+        localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
+      }
+    }
+    
     const existingQuickPlayRoom = preparationRooms.find(
       (room) => room.metadata?.gameMode === GameMode.QUICKPLAY && room.clients < MAX_PLAYERS_PER_GAME
     )
