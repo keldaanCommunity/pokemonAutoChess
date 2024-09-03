@@ -245,6 +245,7 @@ export async function joinLobbyRoom(
           let lobby: Room<ICustomLobbyState> | undefined = store.getState().network.lobby
           if (lobby?.connection.isOpen) {
             await lobby.leave(false)
+            lobby = undefined
           }
           const reconnectToken: string = localStore.get(LocalStoreKeys.RECONNECTION_LOBBY)
           if (reconnectToken) {
