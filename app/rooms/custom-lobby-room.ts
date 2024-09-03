@@ -463,6 +463,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       const userProfile = this.users.get(client.auth.uid)
       if (userProfile) {
         client.send(Transfer.USER_PROFILE, userProfile)
+      } else {
+        throw new Error("Missing User Profile.")
       }
     } catch (error) {
       this.dispatcher.dispatch(new OnLeaveCommand(), { client })
