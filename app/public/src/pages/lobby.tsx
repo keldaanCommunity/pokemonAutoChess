@@ -64,7 +64,6 @@ export default function Lobby() {
   const navigate = useNavigate()
   const lobby = useAppSelector((state) => state.network.lobby)
 
-  const lobbyJoined = useRef<boolean>(false)
   const [profileRetries, setProfileRetries] = useState<number>(0)
   const [gameToReconnect, setGameToReconnect] = useState<string | null>(
     localStore.get(LocalStoreKeys.RECONNECTION_GAME)
@@ -89,21 +88,16 @@ export default function Lobby() {
   }
 
   useEffect(() => {
-    logger.log("useEffect")
     const client = store.getState().network.client
-    // if (!lobbyJoined.current) {
-      logger.log("joinLobbyRoom")
-      joinLobbyRoom(dispatch, client, onLeave, setProfileRetries).catch((err) => {
-        logger.error(err)
-        const errorMessage = CloseCodesMessages[err] ?? "UNKNOWN_ERROR"
-        if (errorMessage) {
-          dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`, { error: err })))
-        }
-        navigate("/")
-      })
-      // lobbyJoined.current = true
-    // }
-  }, [lobbyJoined, dispatch, profileRetries])
+    joinLobbyRoom(dispatch, client, onLeave, setProfileRetries).catch((err) => {
+      logger.error(err)
+      const errorMessage = CloseCodesMessages[err] ?? "UNKNOWN_ERROR"
+      if (errorMessage) {
+        dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`, { error: err })))
+      }
+      navigate("/")
+    })
+  }, [dispatch, profileRetries])
 
   const signOut = useCallback(async () => {
     if (lobby?.connection.isOpen) {
@@ -247,7 +241,7 @@ export async function joinLobbyRoom(
         try {
           const token = await user.getIdToken()
 
-          let lobby: Room<ICustomLobbyState> | undefined = undefined
+          let lobby: Room<ICustomLobbyState> | undefined
           const reconnectToken: string = localStore.get(LocalStoreKeys.RECONNECTION_TOKEN)
           if (reconnectToken) {
             try {
