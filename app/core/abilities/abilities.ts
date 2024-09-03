@@ -7169,7 +7169,7 @@ export class MagicPowderStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
-    const silenceDuration = [2000, 4000, 6000][pokemon.stars - 1] ?? 6000
+    const silenceDuration = [2000, 3000, 4000][pokemon.stars - 1] ?? 4000
     pokemon.addShield(shield, pokemon, 1, crit)
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)

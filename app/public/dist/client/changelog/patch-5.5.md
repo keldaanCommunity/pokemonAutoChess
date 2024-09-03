@@ -12,6 +12,7 @@
 - Tangela is now additional and no longer regional
 - Changed Lunala: HP 250 → 300, Def/SpeDef 5/5 → 3/3
 - Nerf Drain Punch (Mienshao): percentage of HP healed no longer scales with AP
+- Nerf Magic Powder (Hatenna): silence duration 2/4/6 → 2/3/4
 
 # Changes to Synergies
 

@@ -1451,7 +1451,7 @@
     "VINE_WHIP": "Infliggi [100,SP] SPECIAL e causa FLINCH al bersaglio ed a i nemici adiacenti per 3 secondi.",
     "BODY_SLAM": "Infliggi [30,SP]% dei HP massimi come SPECIAL.",
     "BARB_BARRAGE": "Tuffati nel mezzo della squadra nemica, infliggendo [15,30,60,SP] SPECIAL e causa POISONNED a tutte le unità adiacenti per 3 secondi.",
-    "MAGIC_POWDER": "Ottieni [10,20,40,SP] SHIELD e causa SILENCE ai nemici adiacenti per [2,4,6] secondi.",
+    "MAGIC_POWDER": "Ottieni [10,20,40,SP] SHIELD e causa SILENCE ai nemici adiacenti per [2,3,4] secondi.",
     "INFERNAL_PARADE": "Lancia un Ruotafuoco, infliggendo 2 volte [30, SP] SPECIAL con il 50% di possibilità di causare BURN a tutti i Pokèmon colpiti nella sua traiettoria.",
     "RETALIATE": "Infliggi [15,30,60,SP] SPECIAL più [10,15,25,SP] SPECIAL aggiuntivo per ogni alleato KO.",
     "SLASH": "Infliggi [10,20,40,SP] SPECIAL col il [30,60,90]% di CRIT_CHANCE aumentato.",
