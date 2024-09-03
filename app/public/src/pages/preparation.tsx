@@ -70,7 +70,7 @@ export default function Preparation() {
               initialized.current = true
               const cachedReconnectionToken = localStore.get(
                 LocalStoreKeys.RECONNECTION_PREPARATION
-              )
+              )?.reconnectionToken
               if (cachedReconnectionToken) {
                 let r: Room<PreparationState>
                 try {
@@ -225,9 +225,8 @@ export default function Preparation() {
           const game: Room<GameState> = await client.joinById(roomId, {
             idToken: token
           })
-          localStore.set(LocalStoreKeys.RECONNECTION_GAME, roomId, 60 * 60)
           localStore.set(
-            LocalStoreKeys.RECONNECTION_GAME2,
+            LocalStoreKeys.RECONNECTION_GAME,
             { reconnectionToken: game.reconnectionToken, roomId: game.roomId },
             5 * 60
           ) // 5 minutes allowed to start game

@@ -116,8 +116,8 @@ export default function Game() {
         `connectToGame attempt ${attempts} / ${MAX_ATTEMPS_RECONNECT}`
       )
       const cachedReconnectionToken = localStore.get(
-        LocalStoreKeys.RECONNECTION_GAME2
-      )
+        LocalStoreKeys.RECONNECTION_GAME
+      )?.reconnectionToken
       if (cachedReconnectionToken) {
         connecting.current = true
         const statusMessage = document.querySelector("#status-message")
@@ -130,11 +130,10 @@ export default function Game() {
           .then((room: Room) => {
             // store game token for 1 hour
             localStore.set(
-              LocalStoreKeys.RECONNECTION_GAME2,
+              LocalStoreKeys.RECONNECTION_GAME,
               { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
               60 * 60
             )
-            localStore.set(LocalStoreKeys.RECONNECTION_GAME, room.id, 60 * 60)
             dispatch(joinGame(room))
             connected.current = true
             connecting.current = false
