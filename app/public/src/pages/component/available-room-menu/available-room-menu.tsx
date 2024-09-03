@@ -63,7 +63,7 @@ export default function AvailableRoomMenu() {
           30
         )
         if (lobby.connection.isOpen) {
-          await lobby.leave()
+          lobby.leave(false)
         }
         room.connection.close()
         dispatch(leaveLobby())
@@ -112,7 +112,7 @@ export default function AvailableRoomMenu() {
             30
           )
           if (lobby.connection.isOpen) {
-            await lobby.leave()
+            lobby.leave(false)
           }
           room.connection.close()
           dispatch(leaveLobby())

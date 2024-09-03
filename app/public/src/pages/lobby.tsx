@@ -88,8 +88,11 @@ export default function Lobby() {
   }
 
   useEffect(() => {
+    logger.log("useEffect")
     const client = store.getState().network.client
+    logger.log(lobbyJoined)
     if (!lobbyJoined) {
+      logger.log("calling joinLobbyRoom")
       joinLobbyRoom(dispatch, client, onLeave).catch((err) => {
         logger.error(err)
         const errorMessage = CloseCodesMessages[err] ?? "UNKNOWN_ERROR"
@@ -98,9 +101,10 @@ export default function Lobby() {
         }
         navigate("/")
       })
+      logger.log("setting lobbyJoined")
       setLobbyJoined(true)
     }
-  }, [lobbyJoined, dispatch])
+  }, [dispatch, lobbyJoined])
 
   const signOut = useCallback(async () => {
     await lobby?.leave()
@@ -240,26 +244,26 @@ export async function joinLobbyRoom(
         dispatch(logIn(user))
         try {
           const token = await user.getIdToken()
-
-          const reconnectToken: string = localStore.get(LocalStoreKeys.RECONNECTION_TOKEN)
-          if (reconnectToken) {
-            try {
-              const lobbyRoom: Room<ICustomLobbyState> = await client.reconnect(reconnectToken)
-              if (lobbyRoom.name === "lobby") {
-                dispatch(joinLobby(lobbyRoom))
-                localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
-              } else if (lobbyRoom.connection.isOpen) {
-                lobbyRoom.connection.close()
+          let lobby: Room<ICustomLobbyState> | undefined = store.getState().network.lobby
+          if (!lobby) {
+            const reconnectToken: string = localStore.get(LocalStoreKeys.RECONNECTION_LOBBY)
+            if (reconnectToken) {
+              try {
+                logger.log("attempting lobby reconnect")
+                lobby = await client.reconnect(reconnectToken)
+                logger.log("successful lobby reconnect")
+              } catch (error) {
+                logger.log("reconnect error: " + error)
+                localStore.delete(LocalStoreKeys.RECONNECTION_LOBBY)
               }
-            } catch (error) {
-              logger.log(error)
-              localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
             }
           }
-          const lobby = store.getState().network.lobby
+          logger.log(Date.now() + ": starting lobby process")
+          logger.log(lobby)
           const room: Room<ICustomLobbyState> = lobby ?? await client.join("lobby", {
             idToken: token
           })
+          localStore.set(LocalStoreKeys.RECONNECTION_LOBBY, room.reconnectionToken, 60 * 5)
 
           room.onLeave(onLeave)
 
@@ -396,6 +400,7 @@ export async function joinLobbyRoom(
           )
 
           room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
+            logger.log(user)
             dispatch(setProfile(user))
           })
 

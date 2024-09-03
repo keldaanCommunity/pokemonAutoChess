@@ -13,6 +13,9 @@ import { logger } from "../../../../../utils/logger"
 import store from "../../../stores"
 import { throttle } from "../../../../../utils/function"
 import { LocalStoreKeys, localStore } from "../../utils/store"
+import { IUserMetadata } from "../../../../../models/mongo-models/user-metadata"
+import { Transfer } from "../../../../../types"
+import { setProfile } from "../../../stores/NetworkStore"
 
 import "firebaseui/dist/firebaseui.css"
 import "./login.css"
@@ -29,12 +32,26 @@ export default function Login() {
       if (user)
       {
         const client = store.getState().network.client
+        const reconnectToken: string = localStore.get(LocalStoreKeys.RECONNECTION_LOBBY)
+        if (reconnectToken) {
+          try {
+            const room = await client.reconnect(reconnectToken)
+            localStore.set(LocalStoreKeys.RECONNECTION_LOBBY, room.reconnectionToken, 30)
+            if (room.connection.isOpen) {
+              room.connection.close()
+            }
+            navigate("/lobby")
+            return
+          } catch (error) {
+            localStore.delete(LocalStoreKeys.RECONNECTION_LOBBY)
+          }
+        }
         try {
           const token = await user.getIdToken()
           const room = await client.join("lobby", {
             idToken: token
           })
-          localStore.set(LocalStoreKeys.RECONNECTION_TOKEN, room.reconnectionToken, 30)
+          localStore.set(LocalStoreKeys.RECONNECTION_LOBBY, room.reconnectionToken, 30)
           if (room.connection.isOpen) {
             room.connection.close()
           }
