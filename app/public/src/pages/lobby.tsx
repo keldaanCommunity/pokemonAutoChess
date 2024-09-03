@@ -243,7 +243,7 @@ export async function joinLobbyRoom(
         try {
           const token = await user.getIdToken()
 
-          const reconnectToken: string = localStore.get(LocalStoreKeys.RECONNECTION_TOKEN)
+          const reconnectToken: string = localStore.get(LocalStoreKeys.RECONNECTION_LOBBY)
           if (reconnectToken) {
             try {
               const lobbyRoom: Room<ICustomLobbyState> = await client.reconnect(reconnectToken)
@@ -254,7 +254,7 @@ export async function joinLobbyRoom(
               }
             } catch (error) {
               logger.log(error)
-              localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
+              localStore.delete(LocalStoreKeys.RECONNECTION_LOBBY)
             }
           }
           const lobby = store.getState().network.lobby

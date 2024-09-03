@@ -40,8 +40,8 @@ export function GameRoomsMenu() {
                     }
                 )
                 localStore.set(
-                    LocalStoreKeys.RECONNECTION_TOKEN,
-                    game.reconnectionToken,
+                    LocalStoreKeys.RECONNECTION_GAME2,
+                    { reconnectionToken: game.reconnectionToken, roomId: game.roomId },
                     30
                 )
                 if (lobby.connection.isOpen) {

@@ -58,8 +58,8 @@ export default function AvailableRoomMenu() {
           }
         )
         localStore.set(
-          LocalStoreKeys.RECONNECTION_TOKEN,
-          room.reconnectionToken,
+          LocalStoreKeys.RECONNECTION_PREPARATION,
+          { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
           30
         )
         if (lobby.connection.isOpen) {
@@ -109,7 +109,7 @@ export default function AvailableRoomMenu() {
             }
           )
           localStore.set(
-            LocalStoreKeys.RECONNECTION_TOKEN,
+            LocalStoreKeys.RECONNECTION_PREPARATION,
             room.reconnectionToken,
             30
           )

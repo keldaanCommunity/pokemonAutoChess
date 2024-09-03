@@ -116,7 +116,7 @@ export default function Game() {
         `connectToGame attempt ${attempts} / ${MAX_ATTEMPS_RECONNECT}`
       )
       const cachedReconnectionToken = localStore.get(
-        LocalStoreKeys.RECONNECTION_TOKEN
+        LocalStoreKeys.RECONNECTION_GAME2
       )
       if (cachedReconnectionToken) {
         connecting.current = true
@@ -130,8 +130,8 @@ export default function Game() {
           .then((room: Room) => {
             // store game token for 1 hour
             localStore.set(
-              LocalStoreKeys.RECONNECTION_TOKEN,
-              room.reconnectionToken,
+              LocalStoreKeys.RECONNECTION_GAME2,
+              { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
               60 * 60
             )
             localStore.set(LocalStoreKeys.RECONNECTION_GAME, room.id, 60 * 60)
@@ -216,7 +216,7 @@ export default function Game() {
       elligibleToXP,
       elligibleToELO
     })
-    localStore.set(LocalStoreKeys.RECONNECTION_TOKEN, r.reconnectionToken, 30)
+    localStore.set(LocalStoreKeys.RECONNECTION_AFTER_GAME, { reconnectionToken: r.reconnectionToken, roomId: r.roomId }, 30)
     if (r.connection.isOpen) {
       r.connection.close()
     }

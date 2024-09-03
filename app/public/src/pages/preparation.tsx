@@ -69,7 +69,7 @@ export default function Preparation() {
             if (!initialized.current) {
               initialized.current = true
               const cachedReconnectionToken = localStore.get(
-                LocalStoreKeys.RECONNECTION_TOKEN
+                LocalStoreKeys.RECONNECTION_PREPARATION
               )
               if (cachedReconnectionToken) {
                 let r: Room<PreparationState>
@@ -91,13 +91,13 @@ export default function Preparation() {
                   }
                 } catch (error) {
                   logger.log(error)
-                  localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
+                  localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
                   navigate("/lobby")
                   return
                 }
                 localStore.set(
-                  LocalStoreKeys.RECONNECTION_TOKEN,
-                  r.reconnectionToken,
+                  LocalStoreKeys.RECONNECTION_PREPARATION,
+                  { reconnectionToken: r.reconnectionToken, roomId: r.roomId },
                   30
                 )
                 await initialize(r, user.uid)
@@ -210,7 +210,7 @@ export default function Preparation() {
           if (errorMessage) {
             dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
           }
-          localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
+          localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
           dispatch(leavePreparation())
           navigate("/lobby")
           playSound(SOUNDS.LEAVE_ROOM)
@@ -227,8 +227,8 @@ export default function Preparation() {
           })
           localStore.set(LocalStoreKeys.RECONNECTION_GAME, roomId, 60 * 60)
           localStore.set(
-            LocalStoreKeys.RECONNECTION_TOKEN,
-            game.reconnectionToken,
+            LocalStoreKeys.RECONNECTION_GAME2,
+            { reconnectionToken: game.reconnectionToken, roomId: game.roomId },
             5 * 60
           ) // 5 minutes allowed to start game
           if (r.connection.isOpen) {
@@ -261,7 +261,7 @@ export default function Preparation() {
           if (room?.connection.isOpen) {
             await room.leave(true)
           }
-          localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
+          localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
           dispatch(leavePreparation())
           navigate("/lobby")
           playSound(SOUNDS.LEAVE_ROOM)
