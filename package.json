@@ -76,6 +76,7 @@
     "immer": "^10.0.3",
     "jimp": "^0.22.10",
     "loglevel": "^1.8.1",
+    "markdown-to-config": "^0.4.0",
     "marked": "^13.0.3",
     "matter-js": "^0.20.0",
     "mongoose": "^8.5.2",

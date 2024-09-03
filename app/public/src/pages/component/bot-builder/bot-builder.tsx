@@ -194,7 +194,7 @@ export default function BotBuilder() {
         >
           {t("export")}
         </button>
-        <DiscordButton channel="bot-creation" />
+        <DiscordButton url={"https://discord.com/channels/737230355039387749/914503292875325461"} />
       </header>
       <div className="step-info my-container">
         <div className="step-control">
