@@ -1,6 +1,5 @@
 import path from "path"
 import { monitor } from "@colyseus/monitor"
-import { ArraySchema } from "@colyseus/schema"
 import config from "@colyseus/tools"
 import { RedisDriver, RedisPresence, ServerOptions, matchMaker } from "colyseus"
 import cors from "cors"
@@ -21,7 +20,10 @@ import CustomLobbyRoom from "./rooms/custom-lobby-room"
 import GameRoom from "./rooms/game-room"
 import PreparationRoom from "./rooms/preparation-room"
 import { Title } from "./types"
-import { SynergyTriggers } from "./types/Config"
+import {
+  MAX_CONCURRENT_PLAYERS_ON_SERVER,
+  SynergyTriggers
+} from "./types/Config"
 import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Item } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
@@ -30,6 +32,7 @@ import { getBotData, getBotsList } from "./services/bots"
 import { discordService } from "./services/discord"
 import { pastebinService } from "./services/pastebin"
 import { logger } from "./utils/logger"
+import pkg from "../package.json"
 
 const clientSrc = __dirname.includes("server")
   ? path.join(__dirname, "..", "..", "client")
@@ -250,6 +253,12 @@ export default config({
 
     app.get("/bots/:id", async (req, res) => {
       res.send(getBotData(req.params.id))
+    })
+
+    app.get("/status", async (req, res) => {
+      const ccu = await matchMaker.stats.getGlobalCCU()
+      const version = pkg.version
+      res.send({ ccu, maxCcu: MAX_CONCURRENT_PLAYERS_ON_SERVER, version })
     })
 
     const basicAuthMiddleware = basicAuth({
