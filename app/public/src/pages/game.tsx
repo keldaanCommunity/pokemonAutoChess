@@ -157,7 +157,7 @@ export default function Game() {
         navigate("/") // no reconnection token, login again
       }
     },
-    [client, dispatch, navigate]
+    [client, dispatch]
   )
 
   function playerClick(id: string) {
@@ -228,7 +228,7 @@ export default function Game() {
     } catch (error) {
       logger.warn("Room already closed")
     }
-  }, [client, dispatch, navigate, room])
+  }, [client, dispatch, room])
 
   useEffect(() => {
     // create a history entry to prevent back button switching page immediately, and leave game properly instead

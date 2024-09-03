@@ -31,6 +31,8 @@ import ScoreIndicator from "./score-indicator"
 import TeamBuilder from "./team-builder"
 import { joinLobbyRoom } from "../../../game/lobby-logic"
 import "./bot-builder.css"
+import { CloseCodesMessages } from "../../../../../types/enum/CloseCodes"
+import { setErrorAlertMessage } from "../../../stores/NetworkStore"
 
 export default function BotBuilder() {
   const { t } = useTranslation()
