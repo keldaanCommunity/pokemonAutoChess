@@ -176,7 +176,7 @@ export default class GameRoom extends Room<GameState> {
         //logger.debug(`init player`, user)
         if (user.isBot) {
           const player = new Player(
-            user.id,
+            user.uid,
             user.name,
             user.elo,
             user.avatar,
@@ -187,7 +187,7 @@ export default class GameRoom extends Room<GameState> {
             Role.BOT,
             this.state
           )
-          this.state.players.set(user.id, player)
+          this.state.players.set(user.uid, player)
           this.state.botManager.addBot(player)
           //this.state.shop.assignShop(player)
         } else {

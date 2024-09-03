@@ -4,9 +4,7 @@ import { Client, matchMaker } from "colyseus"
 import { FilterQuery } from "mongoose"
 import { GameUser, IGameUser } from "../../models/colyseus-models/game-user"
 import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
-import UserMetadata, {
-  IUserMetadata
-} from "../../models/mongo-models/user-metadata"
+import UserMetadata from "../../models/mongo-models/user-metadata"
 import { Role, Transfer } from "../../types"
 import {
   EloRankThreshold,
@@ -270,7 +268,7 @@ export class OnNewMessageCommand extends Command<
       if (user && !user.anonymous && message != "") {
         this.state.addMessage({
           author: user.name,
-          authorId: user.id,
+          authorId: user.uid,
           avatar: user.avatar,
           payload: message
         })
@@ -465,10 +463,10 @@ export class OnLeaveCommand extends Command<
 
           if (client.auth.uid === this.state.ownerId) {
             const newOwner = values(this.state.users).find(
-              (user) => user.id !== this.state.ownerId && !user.isBot
+              (user) => user.uid !== this.state.ownerId && !user.isBot
             )
             if (newOwner) {
-              this.state.ownerId = newOwner.id
+              this.state.ownerId = newOwner.uid
               this.state.ownerName = newOwner.name
               this.room.setMetadata({ ownerName: this.state.ownerName })
               this.room.setName(

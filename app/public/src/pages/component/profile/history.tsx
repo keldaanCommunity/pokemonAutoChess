@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { ArraySchema } from "@colyseus/schema"
 import {
   IGameRecord,
   IPokemonRecord
@@ -14,39 +15,52 @@ import SynergyIcon from "../icons/synergy-icon"
 import { EloBadge } from "./elo-badge"
 import "./history.css"
 
-export default function History(props: { history: IGameRecord[]; uid: string }) {
+export default function History(props: { uid: string, onUpdate?: (history: IGameRecord[]) => void }) {
   const { t } = useTranslation();
-  const [gameHistory, setGameHistory] = useState<IGameRecord[]>(props.history);
+  const [gameHistory, setGameHistory] = useState<IGameRecord[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [hasMore, setHasMore] = useState<boolean>(true);
 
-  const loadMore = async () => {
-    if (loading || !hasMore) return
-    setLoading(true)
+  useEffect(() => {
+    if (props.onUpdate) {
+      props.onUpdate(gameHistory)
+    }
+  }, [gameHistory, props.onUpdate])
+
+  const pageSize = 10
+  const loadHistory = async (uid: string, page: number) => {
     try {
-      const uid = props.uid
-      const skip = gameHistory.length
-      const limit = 10
-      const page = Math.floor(skip / limit + 1)
+      setLoading(true)
 
       const response = await fetch(`/game-history/${uid}?page=${page}`)
       const data: IGameRecord[] = await response.json()
+      if (props.uid !== uid) return // ignore response if uid changed in the meantime
 
-      if (data.length < limit) {
+      if (data.length < pageSize) {
         setHasMore(false); // No more data to load
       }
 
-      setGameHistory((prevHistory) => [...prevHistory, ...data])
+      setGameHistory((prevHistory) => [...prevHistory, ...data.filter(h => prevHistory.some(p => p.time == h.time) == false)])
     } catch (error) {
-      console.error("Failed to load more history:", error)
+      console.error("Failed to load history:", error)
     } finally {
       setLoading(false)
     }
+  }
+
+  const loadMore = async () => {
+    if (loading || !hasMore) return
+    const skip = gameHistory.length
+    const page = Math.floor(skip / pageSize + 1)
+    loadHistory(props.uid, page)
   };
 
   useEffect(() => {
-    setGameHistory(props.history) // Update game history when props change
-  }, [props.history])
+    // reset history on uid change
+    setGameHistory([])
+    setHasMore(true)
+    loadHistory(props.uid, 1) // load last 10 games history
+  }, [props.uid])
 
   return (
     <article className="game-history-list">
@@ -63,7 +77,7 @@ export default function History(props: { history: IGameRecord[]; uid: string }) 
               </span>
               <EloBadge elo={r.elo} />
               <ul className="synergies">
-                {getTopSynergies(r.pokemons.map(p=>p)).map(([type, value]) => (
+                {getTopSynergies(r.pokemons).map(([type, value]) => (
                   <li key={r.time + type}>
                     <SynergyIcon type={type} />
                     <span>{value}</span>
@@ -71,20 +85,20 @@ export default function History(props: { history: IGameRecord[]; uid: string }) 
                 ))}
               </ul>
               <p className="date">{formatDate(r.time)}</p>
-              <Team team={r.pokemons.map(p=>p)}></Team>
+              <Team team={r.pokemons}></Team>
             </div>
           ))}
+        {hasMore && (
+          <button onClick={loadMore} className="bubbly green" disabled={loading}>
+            {loading ? t("loading") : t("load_more")}
+          </button>
+        )}
       </div>
-      {hasMore && (
-        <button onClick={loadMore} className="bubbly green" disabled={loading}>
-          {loading ? t("loading") : t("load_more")}
-        </button>
-      )}
     </article>
   );
 }
 
-function getTopSynergies(team: IPokemonRecord[]): [Synergy, number][] {
+function getTopSynergies(team: IPokemonRecord[] | ArraySchema<IPokemonRecord>): [Synergy, number][] {
   const synergies = computeSynergies(
     team.map((pkmRecord) => {
       const pkm = PokemonFactory.createPokemonFromName(pkmRecord.name)
@@ -103,8 +117,8 @@ function getTopSynergies(team: IPokemonRecord[]): [Synergy, number][] {
       return aReachedTrigger && !bReachedTrigger
         ? -1
         : bReachedTrigger && !aReachedTrigger
-        ? +1
-        : b[1] - a[1]
+          ? +1
+          : b[1] - a[1]
     })
     .slice(0, 3)
   return topSynergies

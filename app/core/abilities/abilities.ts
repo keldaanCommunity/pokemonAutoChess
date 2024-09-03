@@ -1228,7 +1228,7 @@ export class PoisonJabStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    const damage = [30, 60, 90, 120][pokemon.stars - 1] ?? 30
+    const damage = [30, 60, 90][pokemon.stars - 1] ?? 30
     const farthestTarget = state.getFarthestTarget(pokemon, board) ?? target
     super.process(pokemon, state, board, farthestTarget, crit)
     if (farthestTarget) {
@@ -3122,8 +3122,8 @@ export class DiveStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [10,20,40][pokemon.stars -1] ?? 40
-    const shield = [10,20,40][pokemon.stars -1] ?? 40
+    const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
+    const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
     const freezeDuration = 1000
     const mostSurroundedCoordinate =
       state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
@@ -3560,21 +3560,9 @@ export class RootStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let heal = 0
-
-    switch (pokemon.stars) {
-      case 1:
-        heal = 20
-        break
-      case 2:
-        heal = 30
-        break
-      case 3:
-        heal = 40
-        break
-      default:
-        break
-    }
+    const heal = [10, 20, 40][pokemon.stars - 1] ?? 10
+    const damage = [10, 20, 40][pokemon.stars - 1] ?? 10
+    const lockedDuration = 4000
 
     const cells = board.getAdjacentCells(
       pokemon.positionX,
@@ -3584,6 +3572,15 @@ export class RootStrategy extends AbilityStrategy {
     cells.forEach((cell) => {
       if (cell.value && pokemon.team == cell.value.team) {
         cell.value.handleHeal(heal, pokemon, 1, crit)
+      } else if (cell.value && pokemon.team !== cell.value.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        cell.value.status.triggerLocked(lockedDuration, cell.value)
       }
     })
   }

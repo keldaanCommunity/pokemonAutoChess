@@ -157,7 +157,7 @@ export default function Game() {
         navigate("/") // no reconnection token, login again
       }
     },
-    [client, dispatch]
+    [client, dispatch, navigate]
   )
 
   function playerClick(id: string) {
@@ -217,7 +217,9 @@ export default function Game() {
       elligibleToELO
     })
     localStore.set(LocalStoreKeys.RECONNECTION_TOKEN, r.reconnectionToken, 30)
-    r.connection.close()
+    if (r.connection.isOpen) {
+      r.connection.close()
+    }
     dispatch(leaveGame())
     navigate("/after")
 
@@ -226,7 +228,7 @@ export default function Game() {
     } catch (error) {
       logger.warn("Room already closed")
     }
-  }, [client, dispatch, room])
+  }, [client, dispatch, navigate, room])
 
   useEffect(() => {
     // create a history entry to prevent back button switching page immediately, and leave game properly instead
