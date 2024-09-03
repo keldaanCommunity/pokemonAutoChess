@@ -459,11 +459,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       if (consented) {
         throw new Error("consented leave")
       }
-      const userProfile = this.users.get(client.auth.uid)
-      if (!userProfile) {
-        throw new Error("Missing User Profile.")
-      }
       await this.allowReconnection(client, 30)
+      const userProfile = this.users.get(client.auth.uid)
       client.send(Transfer.USER_PROFILE, userProfile)
     } catch (error) {
       this.dispatcher.dispatch(new OnLeaveCommand(), { client })

@@ -243,6 +243,7 @@ export async function joinLobbyRoom(
           let lobby: Room<ICustomLobbyState> | undefined = store.getState().network.lobby
           if (lobby?.connection.isOpen) {
             localStore.set(LocalStoreKeys.RECONNECTION_LOBBY, lobby.reconnectionToken, 30)
+            lobby.onLeave.clear()
             await lobby.leave(false)
             lobby = undefined
           }
