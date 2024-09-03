@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
-import { Navigate, useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import {
   IBot,
   IDetailledPokemon
@@ -13,7 +13,6 @@ import { max, min } from "../../../../../utils/number"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import store from "../../../stores"
 import { getAvatarString } from "../../../utils"
-import { joinLobbyRoom } from "../../lobby"
 import DiscordButton from "../buttons/discord-button"
 import {
   DEFAULT_BOT_STATE,
@@ -30,6 +29,7 @@ import ImportBotModal from "./import-bot-modal"
 import ExportBotModal from "./export-bot-modal"
 import ScoreIndicator from "./score-indicator"
 import TeamBuilder from "./team-builder"
+import { joinLobbyRoom } from "../../../game/lobby-logic"
 import "./bot-builder.css"
 
 export default function BotBuilder() {
@@ -54,18 +54,13 @@ export default function BotBuilder() {
     }
   })
 
-  const [toAuth, setToAuth] = useState<boolean>(false)
-  const [lobbyJoined, setLobbyJoined] = useState<boolean>(false)
+  const lobbyJoined = useRef<boolean>(false)
   useEffect(() => {
-    const client = store.getState().network.client
-    if (!lobbyJoined) {
-      joinLobbyRoom(dispatch, client).catch((err) => {
-        logger.error(err)
-        setToAuth(true)
-      })
-      setLobbyJoined(true)
+    if (!lobbyJoined.current) {
+      joinLobbyRoom(dispatch, navigate)
+      lobbyJoined.current = true
     }
-  }, [lobbyJoined, dispatch])
+  }, [lobbyJoined])
 
   useEffect(() => {
     const botId = queryParams.get("bot")
@@ -162,8 +157,6 @@ export default function BotBuilder() {
       }
     }
   }, [board, currentStage])
-
-  if (toAuth) return navigate("/")
 
   return (
     <div id="bot-builder">
