@@ -65,6 +65,7 @@ export default function Lobby() {
   const lobby = useAppSelector((state) => state.network.lobby)
 
   const lobbyJoined = useRef<boolean>(false)
+  const [profileRetries, setProfileRetries] = useState<number>(0)
   const [gameToReconnect, setGameToReconnect] = useState<string | null>(
     localStore.get(LocalStoreKeys.RECONNECTION_GAME)
   )
@@ -88,9 +89,11 @@ export default function Lobby() {
   }
 
   useEffect(() => {
+    logger.log("useEffect")
     const client = store.getState().network.client
-    if (!lobbyJoined.current) {
-      joinLobbyRoom(dispatch, client, onLeave).catch((err) => {
+    // if (!lobbyJoined.current) {
+      logger.log("joinLobbyRoom")
+      joinLobbyRoom(dispatch, client, onLeave, setProfileRetries).catch((err) => {
         logger.error(err)
         const errorMessage = CloseCodesMessages[err] ?? "UNKNOWN_ERROR"
         if (errorMessage) {
@@ -98,9 +101,9 @@ export default function Lobby() {
         }
         navigate("/")
       })
-      lobbyJoined.current = true
-    }
-  }, [lobbyJoined, dispatch])
+      // lobbyJoined.current = true
+    // }
+  }, [lobbyJoined, dispatch, profileRetries])
 
   const signOut = useCallback(async () => {
     if (lobby?.connection.isOpen) {
@@ -231,7 +234,8 @@ function MainLobby() {
 export async function joinLobbyRoom(
   dispatch,
   client: Client,
-  onLeave: (code: number) => void
+  onLeave: (code: number) => void,
+  setProfileRetries?: (value: React.SetStateAction<number>) => void
 ): Promise<Room<ICustomLobbyState>> {
   if (!firebase.apps.length) {
     firebase.initializeApp(FIREBASE_CONFIG)
@@ -243,12 +247,13 @@ export async function joinLobbyRoom(
         try {
           const token = await user.getIdToken()
 
+          let lobby: Room<ICustomLobbyState> | undefined = undefined
           const reconnectToken: string = localStore.get(LocalStoreKeys.RECONNECTION_TOKEN)
           if (reconnectToken) {
             try {
               const lobbyRoom: Room<ICustomLobbyState> = await client.reconnect(reconnectToken)
               if (lobbyRoom.name === "lobby") {
-                dispatch(joinLobby(lobbyRoom))
+                lobby = lobbyRoom
               } else if (lobbyRoom.connection.isOpen) {
                 lobbyRoom.connection.close()
               }
@@ -257,7 +262,6 @@ export async function joinLobbyRoom(
               localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
             }
           }
-          const lobby = store.getState().network.lobby
           const room: Room<ICustomLobbyState> = lobby ?? await client.join("lobby", {
             idToken: token
           })
@@ -397,7 +401,11 @@ export async function joinLobbyRoom(
           )
 
           room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
-            dispatch(setProfile(user))
+            if (user) {
+              dispatch(setProfile(user))
+            } else if (setProfileRetries) {
+              setProfileRetries(x => x + 1)
+            }
           })
 
           room.onMessage(Transfer.USER, (user: IUserMetadata) =>

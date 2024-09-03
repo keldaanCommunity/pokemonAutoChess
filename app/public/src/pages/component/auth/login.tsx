@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { logIn, logOut, setErrorAlertMessage } from "../../../stores/NetworkStore"
 import { CloseCodesMessages } from "../../../../../types/enum/CloseCodes"
 import { FIREBASE_CONFIG } from "../../utils/utils"
-//import AnonymousButton from "./anonymous-button"
+import AnonymousButton from "./anonymous-button"
 import { StyledFirebaseAuth } from "./styled-firebase-auth"
 import { logger } from "../../../../../utils/logger"
 import store from "../../../stores"
@@ -91,7 +91,7 @@ export default function Login() {
           uiConfig={uiConfig}
           firebaseAuth={firebase.auth()}
         />
-        {/* <AnonymousButton /> */}
+        <AnonymousButton />
       </div>
     )
   } else {

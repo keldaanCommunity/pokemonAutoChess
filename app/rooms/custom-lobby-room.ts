@@ -412,6 +412,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
   async onAuth(client: Client, options: any, request: any) {
     try {
+      logger.log("onAuth")
       super.onAuth(client, options, request)
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
