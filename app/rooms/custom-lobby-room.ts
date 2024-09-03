@@ -414,7 +414,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
   async onAuth(client: Client, options: any, request: any) {
     try {
-      logger.log(Date.now() + ": onAuth")
       super.onAuth(client, options, request)
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
@@ -458,19 +457,16 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
   }
 
   async onLeave(client: Client, consented: boolean) {
-    logger.log("leave lobby: " + consented)
     try {
       if (consented) {
         throw new Error("consented leave")
       }
       await this.allowReconnection(client, 30)
-      logger.log("leave lobby: reconnect")
       const userProfile = this.users.get(client.auth.uid)
       if (userProfile) {
         client.send(Transfer.USER_PROFILE, userProfile)
       }
     } catch (error) {
-      logger.log("leave lobby error: " + error)
       this.dispatcher.dispatch(new OnLeaveCommand(), { client })
     }
   }

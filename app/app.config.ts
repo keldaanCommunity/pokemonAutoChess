@@ -201,21 +201,19 @@ export default config({
 
       const stats = await DetailledStatistic.find(
         { playerId: playerUid },
-        ['pokemons', 'time', 'rank', 'elo'],
+        ["pokemons", "time", "rank", "elo"],
         { limit: limit, skip: skip, sort: { time: -1 } }
       )
       if (stats) {
-        const records = new ArraySchema<GameRecord>()
-        stats.forEach((record) => {
-          records.push(
+        const records = stats.map(
+          (record) =>
             new GameRecord(
               record.time,
               record.rank,
               record.elo,
               record.pokemons
             )
-          )
-        })
+        )
 
         // Return the records as the response
         return res.status(200).json(records)

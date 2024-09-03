@@ -41,7 +41,7 @@ export default class SimplePlayer extends Schema implements ISimplePlayer {
     synergies:
       | Array<{ name: Synergy; value: number }>
       | ArraySchema<{ name: Synergy; value: number }>,
-    elo: number,
+    elo: number
   ) {
     super()
     this.id = id

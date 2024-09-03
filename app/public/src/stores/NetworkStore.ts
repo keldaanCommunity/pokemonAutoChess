@@ -56,6 +56,7 @@ export const networkSlice = createSlice({
     logIn: (state, action: PayloadAction<User>) => {
       if (action.payload) {
         state.uid = action.payload.uid
+        state.displayName = action.payload.displayName ?? "Anonymous"
       }
     },
     logOut: (state) => {

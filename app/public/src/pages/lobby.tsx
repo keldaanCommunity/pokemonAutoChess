@@ -1,7 +1,7 @@
 import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import { Client, Room, RoomAvailable } from "colyseus.js"
 import firebase from "firebase/compat/app"
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import {
@@ -64,7 +64,7 @@ export default function Lobby() {
   const navigate = useNavigate()
   const lobby = useAppSelector((state) => state.network.lobby)
 
-  const [lobbyJoined, setLobbyJoined] = useState<boolean>(false)
+  const lobbyJoined = useRef<boolean>(false)
   const [gameToReconnect, setGameToReconnect] = useState<string | null>(
     localStore.get(LocalStoreKeys.RECONNECTION_GAME)
   )
@@ -88,11 +88,8 @@ export default function Lobby() {
   }
 
   useEffect(() => {
-    logger.log("useEffect")
     const client = store.getState().network.client
-    logger.log(lobbyJoined)
-    if (!lobbyJoined) {
-      logger.log("calling joinLobbyRoom")
+    if (!lobbyJoined.current) {
       joinLobbyRoom(dispatch, client, onLeave).catch((err) => {
         logger.error(err)
         const errorMessage = CloseCodesMessages[err] ?? "UNKNOWN_ERROR"
@@ -101,13 +98,14 @@ export default function Lobby() {
         }
         navigate("/")
       })
-      logger.log("setting lobbyJoined")
-      setLobbyJoined(true)
+      lobbyJoined.current = true
     }
   }, [dispatch, lobbyJoined])
 
   const signOut = useCallback(async () => {
-    await lobby?.leave()
+    if (lobby?.connection.isOpen) {
+      await lobby.leave()
+    }
     await firebase.auth().signOut()
     dispatch(leaveLobby())
     dispatch(logOut())
@@ -249,20 +247,16 @@ export async function joinLobbyRoom(
             const reconnectToken: string = localStore.get(LocalStoreKeys.RECONNECTION_LOBBY)
             if (reconnectToken) {
               try {
-                logger.log("attempting lobby reconnect")
                 lobby = await client.reconnect(reconnectToken)
-                logger.log("successful lobby reconnect")
               } catch (error) {
-                logger.log("reconnect error: " + error)
                 localStore.delete(LocalStoreKeys.RECONNECTION_LOBBY)
               }
             }
           }
-          logger.log(Date.now() + ": starting lobby process")
-          logger.log(lobby)
           const room: Room<ICustomLobbyState> = lobby ?? await client.join("lobby", {
             idToken: token
           })
+          // store key for 5 minutes, but can still only rejoin within 30 seconds of leaving
           localStore.set(LocalStoreKeys.RECONNECTION_LOBBY, room.reconnectionToken, 60 * 5)
 
           room.onLeave(onLeave)
@@ -400,7 +394,6 @@ export async function joinLobbyRoom(
           )
 
           room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
-            logger.log(user)
             dispatch(setProfile(user))
           })
 

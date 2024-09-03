@@ -1,21 +1,18 @@
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { logIn, logOut, setErrorAlertMessage } from "../../../stores/NetworkStore"
 import { CloseCodesMessages } from "../../../../../types/enum/CloseCodes"
 import { FIREBASE_CONFIG } from "../../utils/utils"
-import AnonymousButton from "./anonymous-button"
+//import AnonymousButton from "./anonymous-button"
 import { StyledFirebaseAuth } from "./styled-firebase-auth"
 import { logger } from "../../../../../utils/logger"
 import store from "../../../stores"
 import { throttle } from "../../../../../utils/function"
 import { LocalStoreKeys, localStore } from "../../utils/store"
-import { IUserMetadata } from "../../../../../models/mongo-models/user-metadata"
-import { Transfer } from "../../../../../types"
-import { setProfile } from "../../../stores/NetworkStore"
 
 import "firebaseui/dist/firebaseui.css"
 import "./login.css"
@@ -26,11 +23,12 @@ export default function Login() {
   const navigate = useNavigate()
   const uid = useAppSelector((state) => state.network.uid)
   const displayName = useAppSelector((state) => state.network.displayName)
+  const [prejoining, setPrejoining] = useState(false)
 
   const preJoinLobby = throttle(async function prejoin() {
+    setPrejoining(true)
     firebase.auth().onAuthStateChanged(async (user) => {
-      if (user)
-      {
+      if (user) {
         const client = store.getState().network.client
         const reconnectToken: string = localStore.get(LocalStoreKeys.RECONNECTION_LOBBY)
         if (reconnectToken) {
@@ -62,6 +60,7 @@ export default function Login() {
           if (errorMessage) {
             dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`, { error: err })))
           }
+          setPrejoining(false)
         }
       }
     })
@@ -121,8 +120,9 @@ export default function Login() {
             <button
               className="bubbly green"
               onClick={preJoinLobby}
+              disabled={prejoining}
             >
-              {t("join_lobby")}
+              {prejoining ? t("connecting") : t("join_lobby")}
             </button>
           </li>
           <li>
