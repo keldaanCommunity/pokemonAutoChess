@@ -1536,7 +1536,7 @@
     "CRUSH_CLAW": "타겟의 DEF 를 [3,5]만큼 감소시킨 후, ATK 의 [100,SP]%만큼을 PHYSICAL 로 입히는 빠른 공격을 두 번 수행한다.",
     "FIRE_LASH": "타겟에게 [120,SP] SPECIAL을 입히고 4초 동안 ARMOR_REDUCTION을 부여한다.",
     "FAIRY_LOCK": "타겟과 인접한 적에게 [90,SP] SPECIAL을 고르게 입힌다. 타겟은 5초 동안 LOCKED를 부여받는다.",
-    "DRAIN_PUNCH": " 다음 공격은 [100,SP]% 만큼의 추가 SPECIAL을 입히고, 부여한 피해의 [200,SP]%만큼 HP를 회복한다.",
+    "DRAIN_PUNCH": " 다음 공격은 [100,SP]% 만큼의 추가 SPECIAL을 입히고, 부여한 피해의 200%만큼 HP를 회복한다.",
     "GRAVITY": "적팀을 [2,SP]초간 LOCKED상태로 만든다.",
     "FAKE_OUT": "대상에게 [50,100,150,SP] SPECIAL을 입히고, 자신은 AP를 30% 잃는다. 사용자 AP가 음수인 경우를 제외하고 대상은 3초 동안 FLINCH 에 빠진다.",
     "FELL_STINGER": "대상에게 [20,40,70,SP]의 SPECIAL 를 입힌다. 대상을 기절시키면 영구적으로 ATK+1, AP +5%, HP+10 을 얻는다.",

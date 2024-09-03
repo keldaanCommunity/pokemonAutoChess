@@ -11,6 +11,7 @@
 - Bellsprout line is now regional in Grass/Flora regions, and Weepinbell no longer evolve with berries
 - Tangela is now additional and no longer regional
 - Changed Lunala: HP 250 → 300, Def/SpeDef 5/5 → 3/3
+- Nerf Drain Punch (Mienshao): percentage of HP healed no longer scales with AP
 
 # Changes to Synergies
 

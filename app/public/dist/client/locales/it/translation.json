@@ -1535,7 +1535,7 @@
     "CRUSH_CLAW": "Riduci la DEF del bersaglio di [3,5], poi attaccalo 2 volte, infliggendo ad ogni colpo il [100,SP]% dell' ATK come PHYSICAL.",
     "FIRE_LASH": "Infliggi [120,SP] SPECIAL e causa ARMOR_REDUCTION per 4 secondi.",
     "FAIRY_LOCK": "Infliggi [90,SP] SPECIAL uniformemente al bersaglio ed ai nemici adiacenti. Il bersaglio subisce LOCKED per 5 secondi.",
-    "DRAIN_PUNCH": "Il prossimo attacco infligge [100,SP]% SPECIAL aggiuntivo e recupera HP pari al [200,SP]% dei danni inflitti.",
+    "DRAIN_PUNCH": "Il prossimo attacco infligge [100,SP]% SPECIAL aggiuntivo e recupera HP pari al 200% dei danni inflitti.",
     "GRAVITY": "La squadra nemica subisce lo status LOCKED per [2,SP] secondi.",
     "FAKE_OUT": "Infliggi [50,100,150,SP] SPECIAL, l'utilizzatore perde 30 AP. Il bersaglio subisce FLINCH per 3 secondi a meno che i AP dell'utilizzatore erano negativi.",
     "FELL_STINGER": "Infliggi [20,40,70,SP] SPECIAL. Se il bersaglio viene ucciso, l'utilizzatore ottiene permanentemente in più 1 ATK, 5 AP e 10 HP.",

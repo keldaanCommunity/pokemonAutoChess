@@ -9394,7 +9394,7 @@ export class DrainPunchStrategy extends AbilityStrategy {
       crit,
       true
     )
-    pokemon.handleHeal(result.takenDamage * 4, pokemon, 1, crit)
+    pokemon.handleHeal(result.takenDamage * 4, pokemon, 0, false)
   }
 }
 
