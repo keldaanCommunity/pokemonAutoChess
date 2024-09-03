@@ -17,9 +17,9 @@
     "regional": "Regionale"
   },
   "damage": {
-    "SPECIAL": "Danno speciale",
-    "PHYSICAL": "Danno fisico",
-    "TRUE": "Danno puro"
+    "SPECIAL": "Danni speciali",
+    "PHYSICAL": "Danni fisici",
+    "TRUE": "Danni puri"
   },
   "ability": {
     "SOFT_BOILED": "Covauova",
