@@ -100,7 +100,7 @@ export default function Lobby() {
       })
       lobbyJoined.current = true
     }
-  }, [dispatch, lobbyJoined])
+  }, [lobbyJoined, dispatch])
 
   const signOut = useCallback(async () => {
     if (lobby?.connection.isOpen) {

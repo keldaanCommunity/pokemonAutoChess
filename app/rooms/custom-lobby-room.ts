@@ -7,7 +7,6 @@ import {
   subscribeLobby
 } from "colyseus"
 import { CronJob } from "cron"
-import firebase from "firebase/compat/app"
 import admin from "firebase-admin"
 import Message from "../models/colyseus-models/message"
 import { TournamentSchema } from "../models/colyseus-models/tournament"
@@ -66,7 +65,6 @@ import {
   UnbanUserCommand
 } from "./commands/lobby-commands"
 import LobbyState from "./states/lobby-state"
-import { FIREBASE_CONFIG } from "../public/src/pages/utils/utils"
 
 export default class CustomLobbyRoom extends Room<LobbyState> {
   bots: Map<string, IBot> = new Map<string, IBot>()
