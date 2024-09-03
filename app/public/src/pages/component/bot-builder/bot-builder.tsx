@@ -31,6 +31,8 @@ import ExportBotModal from "./export-bot-modal"
 import ScoreIndicator from "./score-indicator"
 import TeamBuilder from "./team-builder"
 import "./bot-builder.css"
+import { CloseCodesMessages } from "../../../../../types/enum/CloseCodes"
+import { setErrorAlertMessage } from "../../../stores/NetworkStore"
 
 export default function BotBuilder() {
   const { t } = useTranslation()
@@ -56,10 +58,20 @@ export default function BotBuilder() {
 
   const [toAuth, setToAuth] = useState<boolean>(false)
   const [lobbyJoined, setLobbyJoined] = useState<boolean>(false)
+
+  const onLeave = (code: number) => {
+    logger.info(`left lobby with code ${code}`)
+    const errorMessage = CloseCodesMessages[code]
+    if (errorMessage) {
+      dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
+    }
+    navigate("/")
+  }
+
   useEffect(() => {
     const client = store.getState().network.client
     if (!lobbyJoined) {
-      joinLobbyRoom(dispatch, client).catch((err) => {
+      joinLobbyRoom(dispatch, client, onLeave).catch((err) => {
         logger.error(err)
         setToAuth(true)
       })
