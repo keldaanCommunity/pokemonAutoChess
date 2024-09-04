@@ -4760,20 +4760,36 @@ export class Meloetta extends Pokemon {
   range = 4
   skill = Ability.RELIC_SONG
   attackSprite = AttackSprite.SOUND_RANGE
+
+  onChangePosition(x: number, y: number, player: Player) {
+    if (y === 3) {
+      player.transformPokemon(this, Pkm.PIROUETTE_MELOETTA)
+    }
+  }
 }
 
 export class PirouetteMeloetta extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.SOUND])
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.SOUND,
+    Synergy.FIGHTING
+  ])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 300
-  atk = 30
+  atk = 25
   def = 5
   speDef = 5
-  maxPP = 120
-  range = 4
-  skill = Ability.DEFAULT
-  attackSprite = AttackSprite.SOUND_RANGE
+  maxPP = 60
+  range = 1
+  skill = Ability.U_TURN
+  attackSprite = AttackSprite.FIGHTING_MELEE
+
+  onChangePosition(x: number, y: number, player: Player) {
+    if (y !== 3) {
+      player.transformPokemon(this, Pkm.MELOETTA)
+    }
+  }
 }
 
 export class Lugia extends Pokemon {
@@ -14887,6 +14903,7 @@ export const PokemonClasses: Record<
   [Pkm.HAKAMO_O]: HakamoO,
   [Pkm.KOMMO_O]: KommoO,
   [Pkm.MELOETTA]: Meloetta,
+  [Pkm.PIROUETTE_MELOETTA]: PirouetteMeloetta,
   [Pkm.ALTARIA]: Altaria,
   [Pkm.MEGA_ALTARIA]: MegaAltaria,
   [Pkm.CASTFORM]: Castform,
@@ -15081,7 +15098,6 @@ export const PokemonClasses: Record<
   [Pkm.MIME_JR]: MimeJr,
   [Pkm.MR_MIME]: MrMime,
   [Pkm.ORIGIN_GIRATINA]: OriginGiratina,
-  [Pkm.PIROUETTE_MELOETTA]: PirouetteMeloetta,
   [Pkm.MELMETAL]: Melmetal,
   [Pkm.HOOPA]: Hoopa,
   [Pkm.HOOPA_UNBOUND]: HoopaUnbound,

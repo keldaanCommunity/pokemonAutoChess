@@ -1,6 +1,7 @@
 # New Pokemons:
 - Alolan Meowth
 - Alolan Persian
+- Meloetta Pirouette
 
 # Changes to Pokemon & Abilities
 

@@ -1254,6 +1254,22 @@ export class KingShieldStrategy extends AbilityStrategy {
   }
 }
 
+export class UTurnStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const shield = [15, 30, 50][pokemon.stars - 1] ?? 30
+    pokemon.moveTo(target.positionX, target.positionY, board)
+    pokemon.addShield(shield, pokemon, 1, crit)
+    target.status.triggerCharm(1000, target, pokemon, false)
+  }
+}
+
 export class PoisonJabStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -9607,6 +9623,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.CORRUPTED_NATURE]: new CorruptedNatureStrategy(),
   [Ability.CRABHAMMER]: new CrabHammerStrategy(),
   [Ability.KING_SHIELD]: new KingShieldStrategy(),
+  [Ability.U_TURN]: new UTurnStrategy(),
   [Ability.EXPLOSION]: new ExplosionStrategy(),
   [Ability.NIGHTMARE]: new NightmareStrategy(),
   [Ability.CLANGOROUS_SOUL]: new ClangorousSoulStrategy(),

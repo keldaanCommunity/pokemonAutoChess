@@ -1181,6 +1181,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.HAKAMO_O]: "0783",
   [Pkm.KOMMO_O]: "0784",
   [Pkm.MELOETTA]: "0648",
+  [Pkm.PIROUETTE_MELOETTA]: "0648-0001",
   [Pkm.ALTARIA]: "0334",
   [Pkm.MEGA_ALTARIA]: "0334-0001",
   [Pkm.CASTFORM]: "0351",
@@ -1372,7 +1373,6 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MIME_JR]: "0439",
   [Pkm.MR_MIME]: "0122",
   [Pkm.ORIGIN_GIRATINA]: "0487-0001",
-  [Pkm.PIROUETTE_MELOETTA]: "0648-0001",
   [Pkm.MELMETAL]: "0809",
   [Pkm.HOOPA]: "0720",
   [Pkm.HOOPA_UNBOUND]: "0720-0001",
@@ -4369,6 +4369,11 @@ export const AnimationConfig: {
     ability: AnimationType.Twirl,
     emote: AnimationType.Shoot
   },
+  [Pkm.PIROUETTE_MELOETTA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Twirl
+  },
   [Pkm.ALTARIA]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Hop,
@@ -5339,11 +5344,6 @@ export const AnimationConfig: {
   [Pkm.ORIGIN_GIRATINA]: {
     attack: AnimationType.Scratch,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot
-  },
-  [Pkm.PIROUETTE_MELOETTA]: {
-    attack: AnimationType.Swing,
-    ability: AnimationType.Twirl,
     emote: AnimationType.Shoot
   },
   [Pkm.MELMETAL]: {
