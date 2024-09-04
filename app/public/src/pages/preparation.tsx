@@ -79,13 +79,13 @@ export default function Preparation() {
                   )
                   if (r.name === "game") {
                     if (r.connection.isOpen) {
-                      r.connection.close()
+                      await r.leave(false)
                     }
                     navigate("/game")
                     return
                   } else if (r.name !== "preparation") {
                     if (r.connection.isOpen) {
-                      r.connection.close()
+                      await r.leave(false)
                     }
                     throw new Error("Preparation: Wrong room type.")
                   }
@@ -233,7 +233,7 @@ export default function Preparation() {
             await r.leave()
           }
           if (game.connection.isOpen) {
-            game.connection.close()
+            await game.leave(false)
           }
           dispatch(leavePreparation())
           navigate("/game")

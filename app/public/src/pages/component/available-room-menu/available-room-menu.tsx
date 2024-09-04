@@ -66,7 +66,7 @@ export default function AvailableRoomMenu() {
           await lobby.leave(false)
         }
         if (room.connection.isOpen) {
-          room.connection.close()
+          await room.leave(false)
         }
         dispatch(leaveLobby())
         navigate("/preparation")
@@ -117,7 +117,7 @@ export default function AvailableRoomMenu() {
             await lobby.leave(false)
           }
           if (room.connection.isOpen) {
-            room.connection.close()
+            await room.leave(false)
           }
           dispatch(leaveLobby())
           navigate("/preparation")
@@ -140,12 +140,12 @@ export default function AvailableRoomMenu() {
             30
           )
           if (room.connection.isOpen) {
-            room.connection.close()
+            await room.leave(false)
           }
           navigate("/preparation")
           return
         } else if (room.connection.isOpen) {
-          room.connection.close()
+          await room.leave(false)
         }
       } catch (error) {
         localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
