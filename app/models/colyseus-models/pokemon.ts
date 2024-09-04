@@ -2830,7 +2830,7 @@ export class AlolanRaichu extends Pokemon {
   atk = 20
   def = 6
   speDef = 6
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.NUZZLE
   passive = Passive.SURGE_SURFER
