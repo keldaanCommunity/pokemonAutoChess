@@ -2091,7 +2091,7 @@
     "CELEBI": "Der Spieler stellt jedes Mal, wenn $t(pkm.CELEBI) „$t(ability.TIME_TRAVEL)“ einsetzt, 1 Lebenspunkt wieder her.",
     "GIMMIGHOUL": "$t(pkm.GIMMIGHOUL) ist auf der Suche nach 99 GOLD",
     "GHOLDENGO": "Wenn der Spieler zu beginn des Kampfe mindesten 50 GOLD hat, erhält $t(pkm.GHOLDENGO) RUNE_PROTECT für den Kampf.",
-    "METEOR": "$t(pkm.MINIOR) wechselt zwischen der Meteor- und der Kernform. In der Meteorform erhält $t(pkm.MINIOR) [4,SP]% ATK_SPEED pro Angriff.\nAngriffe in der Kernform haben zusätzliche Effekte auf das Ziel und benachbarte Feinde:\nBlauer Kern: Verursacht 100% SPECIAL\nRoter Kern: Verursacht 150% PHYSICAL\nOranger Kern: Verursacht 50% TRUE\nGrüner Kern: Angriffsschaden heilt benachbarte Verbündete",
+    "METEOR": "$t(pkm.MINIOR) wechselt zwischen der Meteor- und der Kernform. In der Meteorform erhält $t(pkm.MINIOR) [5,SP]% ATK_SPEED pro Angriff.\nAngriffe in der Kernform haben zusätzliche Effekte auf das Ziel und benachbarte Feinde:\nBlauer Kern: Verursacht [100,SP]% SPECIAL\nRoter Kern: Verursacht [150,SP]% PHYSICAL\nOranger Kern: Verursacht [50,SP]% TRUE\nGrüner Kern: Angriffsschaden heilt benachbarte Verbündete",
     "MIMIKYU": "Wenn Mimigma weniger als 50% der max. HP hat, erhält 30% ATK_SPEED, ein PROTECT für 2 Sekunden und wechselt in die „Entlarvte Form\".",
     "MIMIKYU_BUSTED": "Mimigma wird nie vergessen, welche Person sein Kostüm ruiniert hat, solange es am Leben ist.",
     "HUNGER_SWITCH": "$t(pkm.MORPEKO) wechselt zwischen dem „Pappsattmuster“ und dem „Kohldampfmuster“.\nDreifachangriffe mit dem „Pappsattmuster“ verursachen 2 Sekunden lang PARALYSIS.\nDreifachangriffe mit dem „Kohldampfmuster\" verursachen 4 Sekunden lang WOUND.",

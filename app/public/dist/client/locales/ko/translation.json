@@ -2066,7 +2066,7 @@
     "CELEBI": "$t(pkm.CELEBI)가 $t(ability.TIME_TRAVEL)을 시전할때마다 플레이어의 HP가 1 회복됩니다.",
     "GIMMIGHOUL": "$t(pkm.GIMMIGHOUL)은 99GOLD를 찾아 헤매고 있습니다.",
     "GHOLDENGO": "보유한 GOLD가 50 이상이라면 $t(pkm.GHOLDENGO)은 전투 내내 RUNE_PROTECT를 얻습니다.",
-    "METEOR": "$t(pkm.MINIOR)는 메테오폼과 코어폼으로 바뀔 수 있습니다. 메테오폼은 공격할때마다 [4,SP]% ATK_SPEED를 얻습니다.\n코어폼은 해당 적 및 인접한 적에게 공격시 추가 효과를 부여합니다.\n 파랑색 : 100% SPECIAL를 가함\n 빨강색 : 150% PHYSICAL를 가함\n 주황색 : 50% TRUE를 가함\n 초록색 : 인접한 아군을 대미지만큼 회복시킴",
+    "METEOR": "$t(pkm.MINIOR)는 메테오폼과 코어폼으로 바뀔 수 있습니다. 메테오폼은 공격할때마다 [5,SP]% ATK_SPEED를 얻습니다.\n코어폼은 해당 적 및 인접한 적에게 공격시 추가 효과를 부여합니다.\n 파랑색 : [100,SP]% SPECIAL를 가함\n 빨강색 : [150,SP]% PHYSICAL를 가함\n 주황색 : [50,SP]% TRUE를 가함\n 초록색 : 인접한 아군을 대미지만큼 회복시킴",
     "MIMIKYU": "HP가 50% 이하로 내려갈시, 따라큐는 들킨모습으로 바뀌며 10 ATK와 2초간 PROTECT 상태를 부여받습니다.",
     "MIMIKYU_BUSTED": "목이 꺾였습니다. 따라큐는 자신이 살아있는 동안 천을 망가뜨린 자가 누구인지 절대로 잊지 않을 것입니다.",
     "HUNGER_SWITCH": "$t(pkm.MORPEKO)은 일반모습과 배고픈모습으로 바뀔 수 있습니다.\n일반 모습의 3연타 공격시 대상을 2초간 PARALYSIS 상태로 만듭니다.\n배고픈 모습의 3연타 공격시 대상을 4초간 WOUND 상태로 만듭니다.",

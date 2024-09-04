@@ -2074,7 +2074,7 @@
     "CELEBI": "Le joueur regagne 1 HP chaque fois que $t(pkm.CELEBI) utilise $t(ability.TIME_TRAVEL).",
     "GIMMIGHOUL": "$t(pkm.GIMMIGHOUL) a besoin de 99 GOLD",
     "GHOLDENGO": "Au début de chaque combat, si le joueur a 50 GOLD ou plus, $t(pkm.GHOLDENGO) gagne RUNE_PROTECT pendant tout le combat",
-    "METEOR": "$t(pkm.MINIOR) alterne entre sa forme Météore et ses formes Noyau. La forme Météore octroie [4,SP]% ATK_SPEED par attaque.\nLes attaques en forme Noyau infligent des effets supplémentaires à la cible et aux ennemis adjacents:\nRouge: inflige 150% PHYSICAL\nBleu: inflige 100% SPECIAL\nOrange: inflige 50% TRUE\nVert: les dégats d'attaque soignent les alliés adjacents",
+    "METEOR": "$t(pkm.MINIOR) alterne entre sa forme Météore et ses formes Noyau. La forme Météore octroie [5,SP]% ATK_SPEED par attaque.\nLes attaques en forme Noyau infligent des effets supplémentaires à la cible et aux ennemis adjacents:\nRouge: inflige [150,SP]% PHYSICAL\nBleu: inflige [100,SP]% SPECIAL\nOrange: inflige [50,SP]% TRUE\nVert: soigne les alliés adjacents de [100,SP]% des dégâts infligés",
     "MIMIKYU": "Sous les 50% de HP, Mimiqui bascule en forme cassée, gagnant 10 ATK et PROTECT pendant 2 secondes",
     "MIMIKYU_BUSTED": "Son cou est cassé. Mimiqui n'oubliera jamais la personne qui a endommagé son costume.",
     "HUNGER_SWITCH": "$t(pkm.MORPEKO) alterne entre sa forme rassasiée et affamée.\nLes triple-attaques en forme rassasiée infligent PARALYSIS pendant 2 secondes.\nLes triple-attaques en forme affamée infligent WOUND pendant 4 secondes.",

@@ -13,6 +13,7 @@
 - Changed Lunala: HP 250 → 300, Def/SpeDef 5/5 → 3/3
 - Nerf Drain Punch (Mienshao): percentage of HP healed no longer scales with AP
 - Nerf Magic Powder (Hatenna): silence duration 2/4/6 → 2/3/4
+- Buff Minior: attack speed gain on attack 4→5% ; added AP scaling on all core forms effects
 
 # Changes to Synergies
 

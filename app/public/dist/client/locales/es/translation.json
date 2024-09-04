@@ -2091,7 +2091,7 @@
     "CELEBI": "El jugador recupera 1 HP cada vez que $t(pkm.CELEBI) lanza $t(ability.TIME_TRAVEL).",
     "GIMMIGHOUL": "$t(pkm.GIMMIGHOUL) está buscando 99 GOLD",
     "GHOLDENGO": "Al comienzo de cada pelea, si el jugador tiene 50 GOLD o más, $t(pkm.GHOLDENGO) gana RUNE_PROTECT para toda la pelea.",
-    "METEOR": "$t(pkm.MINIOR) alterna entre sus formas de meteorito y núcleo. La forma de meteorito otorga [4,SP]% ATK_SPEED por ataque. Los ataques de forma núcleo aplican efectos adicionales al objetivo y a los enemigos adyacentes:\nAzul: Inflige 100% SPECIAL\nRojo: Inflige 150% PHYSICAL\nNaranja: Inflige 50% TRUE\nVerde: El daño de ataque cura a los aliados adyacentes.",
+    "METEOR": "$t(pkm.MINIOR) alterna entre sus formas de meteorito y núcleo. La forma de meteorito otorga [5,SP]% ATK_SPEED por ataque. Los ataques de forma núcleo aplican efectos adicionales al objetivo y a los enemigos adyacentes:\nAzul: Inflige [100,SP]% SPECIAL\nRojo: Inflige [150,SP]% PHYSICAL\nNaranja: Inflige [50,SP]% TRUE\nVerde: El daño de ataque cura a los aliados adyacentes.",
     "MIMIKYU": "Cuando es golpeado por debajo del 50% de HP, Mimikyu cambia a su forma descubierta, ganando 10 ATK y PROTECT durante 2 segundos.",
     "MIMIKYU_BUSTED": "Tiene el cuello roto. Mimikyu nunca olvidará a la persona que dañó su trapo mientras esté vivo.",
     "HUNGER_SWITCH": "$t(pkm.MORPEKO) alterna entre su forma normal y Voraz. \nLos ataques triples en forma normal infligen PARALYSIS durante 2 segundos. \nLos ataques triples en forma voraz infligen WOUND durante 4 segundos.",
