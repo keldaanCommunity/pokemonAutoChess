@@ -58,8 +58,8 @@ export default function AvailableRoomMenu() {
           }
         )
         localStore.set(
-          LocalStoreKeys.RECONNECTION_TOKEN,
-          room.reconnectionToken,
+          LocalStoreKeys.RECONNECTION_PREPARATION,
+          { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
           30
         )
         if (lobby.connection.isOpen) {
@@ -109,8 +109,8 @@ export default function AvailableRoomMenu() {
             }
           )
           localStore.set(
-            LocalStoreKeys.RECONNECTION_TOKEN,
-            room.reconnectionToken,
+            LocalStoreKeys.RECONNECTION_PREPARATION,
+            { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
             30
           )
           if (lobby.connection.isOpen) {
@@ -129,14 +129,14 @@ export default function AvailableRoomMenu() {
   }, 1000)
 
   const quickPlay = throttle(async function quickPlay() {
-    const reconnectToken: string = localStore.get(LocalStoreKeys.RECONNECTION_TOKEN)
+    const reconnectToken: string = localStore.get(LocalStoreKeys.RECONNECTION_PREPARATION)?.reconnectionToken
     if (reconnectToken) {
       try {
         const room: Room<PreparationState> = await client.reconnect(reconnectToken)
         if (room.name === "preparation" && room.state.gameMode === GameMode.QUICKPLAY) {
           localStore.set(
-            LocalStoreKeys.RECONNECTION_TOKEN,
-            room.reconnectionToken,
+            LocalStoreKeys.RECONNECTION_PREPARATION,
+            { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
             30
           )
           if (room.connection.isOpen) {
@@ -148,7 +148,7 @@ export default function AvailableRoomMenu() {
           room.connection.close()
         }
       } catch (error) {
-        localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
+        localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
       }
     }
 

@@ -66,7 +66,7 @@ export default function Lobby() {
 
   const [profileRetries, setProfileRetries] = useState<number>(0)
   const [gameToReconnect, setGameToReconnect] = useState<string | null>(
-    localStore.get(LocalStoreKeys.RECONNECTION_GAME)
+    localStore.get(LocalStoreKeys.RECONNECTION_GAME)?.roomId
   )
   const networkError = useAppSelector(state => state.network.error)
   const gameRooms: RoomAvailable[] = useAppSelector(
@@ -242,7 +242,7 @@ export async function joinLobbyRoom(
           const token = await user.getIdToken()
 
           let lobby: Room<ICustomLobbyState> | undefined
-          const reconnectToken: string = localStore.get(LocalStoreKeys.RECONNECTION_TOKEN)
+          const reconnectToken: string = localStore.get(LocalStoreKeys.RECONNECTION_LOBBY)?.reconnectionToken
           if (reconnectToken) {
             try {
               const lobbyRoom: Room<ICustomLobbyState> = await client.reconnect(reconnectToken)
@@ -253,7 +253,7 @@ export async function joinLobbyRoom(
               }
             } catch (error) {
               logger.log(error)
-              localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
+              localStore.delete(LocalStoreKeys.RECONNECTION_LOBBY)
             }
           }
           const room: Room<ICustomLobbyState> = lobby ?? await client.join("lobby", {

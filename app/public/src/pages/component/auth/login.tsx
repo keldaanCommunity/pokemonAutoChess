@@ -35,7 +35,7 @@ export default function Login() {
           const room = await client.join("lobby", {
             idToken: token
           })
-          localStore.set(LocalStoreKeys.RECONNECTION_TOKEN, room.reconnectionToken, 30)
+          localStore.set(LocalStoreKeys.RECONNECTION_LOBBY, { reconnectionToken: room.reconnectionToken, roomId: room.roomId }, 30)
           if (room.connection.isOpen) {
             room.connection.close()
           }
