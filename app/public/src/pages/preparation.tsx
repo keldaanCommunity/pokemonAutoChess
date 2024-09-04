@@ -172,7 +172,6 @@ export default function Preparation() {
           "elo",
           "uid",
           "isBot",
-          "map",
           "name",
           "role",
           "title",

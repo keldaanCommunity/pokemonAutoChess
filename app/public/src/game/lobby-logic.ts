@@ -272,11 +272,8 @@ export async function joinLobbyRoom(
 
   promise.catch((err) => {
     logger.error(err)
-    const errorMessage = CloseCodesMessages[err] ?? "UNKNOWN_ERROR"
-    if (errorMessage) {
-      dispatch(
-        setErrorAlertMessage(t(`errors.${errorMessage}`, { error: err }))
-      )
+    if (err.message) {
+      dispatch(setErrorAlertMessage(err.message))
     }
     navigate("/")
   })
