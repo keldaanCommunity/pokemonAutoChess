@@ -12709,7 +12709,7 @@ export class Bruxish extends Pokemon {
 }
 
 export class Corsola extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ROCK])
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.AQUATIC])
   rarity = Rarity.EPIC
   stars = 1
   hp = 125
@@ -12729,7 +12729,7 @@ export class Corsola extends Pokemon {
 }
 
 export class GalarCorsola extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ROCK, Synergy.GHOST])
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.AQUATIC, Synergy.GHOST])
   evolution = Pkm.CURSOLA
   rarity = Rarity.EPIC
   stars = 2
@@ -12745,7 +12745,7 @@ export class GalarCorsola extends Pokemon {
 }
 
 export class Cursola extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ROCK, Synergy.GHOST])
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.AQUATIC, Synergy.GHOST])
   rarity = Rarity.EPIC
   stars = 3
   hp = 300
