@@ -176,7 +176,7 @@ export default class GameRoom extends Room<GameState> {
         //logger.debug(`init player`, user)
         if (user.isBot) {
           const player = new Player(
-            user.id,
+            user.uid,
             user.name,
             user.elo,
             user.avatar,
@@ -187,7 +187,7 @@ export default class GameRoom extends Room<GameState> {
             Role.BOT,
             this.state
           )
-          this.state.players.set(user.id, player)
+          this.state.players.set(user.uid, player)
           this.state.botManager.addBot(player)
           //this.state.shop.assignShop(player)
         } else {
@@ -974,21 +974,17 @@ export default class GameRoom extends Room<GameState> {
     player.pokemonsProposition.clear()
 
     if (AdditionalPicksStages.includes(this.state.stageLevel)) {
-      this.state.additionalPokemons.push(pkm as Pkm)
-      this.state.shop.addAdditionalPokemon(pkm)
-      if (pkm in PkmRegionalVariants) {
-        const variants: Pkm[] = PkmRegionalVariants[pkm]
-        for (const variant of variants) {
-          if (
-            PokemonClasses[variant].prototype.isInRegion(
-              variant,
-              player.map,
-              this.state
-            )
-          ) {
-            player.regionalPokemons.push(variant)
-          }
-        }
+      // If player picked their regional variant, we need to add the base pokemon to the shop pool
+      if (pokemonsObtained[0]?.regional) {
+        const basePkm = (Object.keys(PkmRegionalVariants).find((p) =>
+          PkmRegionalVariants[p].includes(pokemonsObtained[0].name)
+        ) ?? pokemonsObtained[0].name) as Pkm
+        this.state.additionalPokemons.push(basePkm)
+        this.state.shop.addAdditionalPokemon(basePkm)
+        player.regionalPokemons.push(pkm as Pkm)
+      } else {
+        this.state.additionalPokemons.push(pkm as Pkm)
+        this.state.shop.addAdditionalPokemon(pkm)
       }
 
       if (

@@ -3,7 +3,7 @@ import { logger } from "../utils/logger"
 import { nanoid } from "nanoid"
 import Count from "../models/colyseus-models/count"
 import Player from "../models/colyseus-models/player"
-import { Pokemon } from "../models/colyseus-models/pokemon"
+import { isOnBench, Pokemon } from "../models/colyseus-models/pokemon"
 import Status from "../models/colyseus-models/status"
 import PokemonFactory from "../models/pokemon-factory"
 import { getSellPrice } from "../models/shop"
@@ -629,7 +629,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         })
         if (this.name === Pkm.MINIOR_KERNEL_BLUE) {
           t.handleDamage({
-            damage: physicalDamage,
+            damage: Math.ceil(physicalDamage * (1 + this.ap / 100)),
             board,
             attackType: AttackType.SPECIAL,
             attacker: this,
@@ -638,7 +638,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         }
         if (this.name === Pkm.MINIOR_KERNEL_RED) {
           t.handleDamage({
-            damage: Math.ceil(physicalDamage * 1.5),
+            damage: Math.ceil(physicalDamage * 1.5 * (1 + this.ap / 100)),
             board,
             attackType: AttackType.PHYSICAL,
             attacker: this,
@@ -647,7 +647,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         }
         if (this.name === Pkm.MINIOR_KERNEL_ORANGE) {
           t.handleDamage({
-            damage: Math.ceil(physicalDamage * 0.5),
+            damage: Math.ceil(physicalDamage * 0.5 * (1 + this.ap / 100)),
             board,
             attackType: AttackType.TRUE,
             attacker: this,
@@ -658,7 +658,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (this.name === Pkm.MINIOR_KERNEL_GREEN) {
         cells.forEach((v) => {
           if (v && v.value && v.value.team === this.team) {
-            v.value.handleHeal(physicalDamage, this, 0, false)
+            v.value.handleHeal(physicalDamage, this, 1, false)
           }
         })
       }
@@ -804,7 +804,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.name === Pkm.MINIOR) {
-      this.addAttackSpeed(4, this, 1, false)
+      this.addAttackSpeed(5, this, 1, false)
     }
 
     if (this.name === Pkm.MORPEKO) {
@@ -1542,6 +1542,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         const koAllies = values(this.player.board).filter(
           (p) =>
             p.id !== this.refToBoardPokemon.id &&
+            !isOnBench(p) &&
             alliesAlive.includes(p.id) === false
         )
 

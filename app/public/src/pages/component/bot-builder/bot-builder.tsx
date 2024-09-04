@@ -1,22 +1,19 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
-import { Navigate, useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import {
   IBot,
   IDetailledPokemon
 } from "../../../../../models/mongo-models/bot-v2"
-import { ModalMode, PkmWithConfig, Role } from "../../../../../types"
+import { PkmWithConfig, Role } from "../../../../../types"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { logger } from "../../../../../utils/logger"
 import { max, min } from "../../../../../utils/number"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import store from "../../../stores"
-import { requestBotData, requestBotList } from "../../../stores/NetworkStore"
 import { getAvatarString } from "../../../utils"
-import { joinLobbyRoom } from "../../lobby"
 import DiscordButton from "../buttons/discord-button"
-import "./bot-builder.css"
 import {
   DEFAULT_BOT_STATE,
   MAX_BOTS_STAGE,
@@ -28,9 +25,14 @@ import {
   rewriteBotRoundsRequiredto1,
   validateBoard
 } from "./bot-logic"
-import ImportExportBotModal from "./import-export-bot-modal"
+import ImportBotModal from "./import-bot-modal"
+import ExportBotModal from "./export-bot-modal"
 import ScoreIndicator from "./score-indicator"
 import TeamBuilder from "./team-builder"
+import { joinLobbyRoom } from "../../../game/lobby-logic"
+import "./bot-builder.css"
+import { CloseCodesMessages } from "../../../../../types/enum/CloseCodes"
+import { setErrorAlertMessage } from "../../../stores/NetworkStore"
 
 export default function BotBuilder() {
   const { t } = useTranslation()
@@ -39,15 +41,9 @@ export default function BotBuilder() {
   const [queryParams, setQueryParams] = useSearchParams()
   const [currentStage, setStage] = useState<number>(1)
   const [bot, setBot] = useState<IBot>(DEFAULT_BOT_STATE)
-  const [modalMode, setModalMode] = useState<ModalMode>(ModalMode.IMPORT)
-  const [modalVisible, setModalVisible] = useState<boolean>(false)
+  const [currentModal, setCurrentModal] = useState<"import" | "export" | null>(null)
   const [violation, setViolation] = useState<string>()
-
-  const pastebinUrl: string = useAppSelector((state) => state.lobby.pastebinUrl)
-  const botData: IBot = useAppSelector((state) => state.lobby.botData)
-  const bots = useAppSelector((state) => state.lobby.botList)
-  const displayName = useAppSelector((state) => state.lobby.user?.name)
-  const lobby = useAppSelector((state) => state.lobby)
+  const user = useAppSelector((state) => state.network.profile)
 
   useEffect(() => {
     const onKey = (ev: KeyboardEvent) => {
@@ -60,37 +56,25 @@ export default function BotBuilder() {
     }
   })
 
-  const [toAuth, setToAuth] = useState<boolean>(false)
   const lobbyJoined = useRef<boolean>(false)
   useEffect(() => {
-    const client = store.getState().network.client
     if (!lobbyJoined.current) {
-      joinLobbyRoom(dispatch, client).catch((err) => {
-        logger.error(err)
-        setToAuth(true)
-      })
+      joinLobbyRoom(dispatch, navigate)
       lobbyJoined.current = true
     }
-  }, [lobbyJoined, dispatch])
+  }, [lobbyJoined])
 
   useEffect(() => {
     const botId = queryParams.get("bot")
-    if (botId && lobby) {
-      if (botData && botData.id === botId) {
-        // import by query param
+    if (botId && (!bot || bot.id !== botId)) {
+      logger.debug(`loading bot ${botId}`)
+      // query param but no matching bot data, so we request it
+      fetch(`/bots/${botId}`).then(r => r.json()).then(botData => {
         setBot(rewriteBotRoundsRequiredto1(structuredClone(botData)))
         logger.debug(`bot ${botId} imported`)
-      } else if (!modalVisible) {
-        logger.debug(`loading bot ${botId}`)
-        // query param but no matching bot data, so we request it
-        dispatch(requestBotData(botId))
-      }
+      })
     }
-  }, [lobby, queryParams, botData])
-
-  if (toAuth) {
-    return <Navigate to={"/"} />
-  }
+  }, [queryParams, bot])
 
   const prevStep = useCallback(
     () => setStage(min(1)(currentStage - 1)),
@@ -110,19 +94,13 @@ export default function BotBuilder() {
       // automatically copy from last step
       updateStep(structuredClone(bot.steps[currentStage - 1].board))
     }
-  }, [currentStage])
-
-  useEffect(() => {
-    if (lobby && bots.length === 0) {
-      dispatch(requestBotList())
-    }
-  }, [bots, lobby])
+  }, [currentStage, bot.steps])
 
   function importBot(text: string) {
     try {
       const b: IBot = JSON.parse(text)
       setBot(rewriteBotRoundsRequiredto1(b))
-      setModalVisible(false)
+      setCurrentModal(null)
       setQueryParams({ bot: b.id })
     } catch (e) {
       alert(e)
@@ -143,7 +121,7 @@ export default function BotBuilder() {
     }
     setBot({
       ...bot,
-      author: displayName ?? "Anonymous",
+      author: user?.displayName ?? "Anonymous",
       elo: estimateElo(bot)
     })
   }
@@ -168,10 +146,8 @@ export default function BotBuilder() {
   const powerScore = useMemo(() => getPowerScore(board), [board])
   const powerEvaluation = useMemo(
     () => getPowerEvaluation(powerScore, currentStage),
-    [board, currentStage]
+    [powerScore, currentStage]
   )
-
-  const user = useAppSelector((state) => state.lobby.user)
 
   useEffect(() => {
     setViolation(undefined)
@@ -194,15 +170,12 @@ export default function BotBuilder() {
         {(user?.role === Role.ADMIN ||
           user?.role === Role.MODERATOR ||
           user?.role === Role.BOT_MANAGER) && (
-          <button onClick={() => navigate("/bot-admin")} className="bubbly red">
-            {t("bot_admin")}
-          </button>
-        )}
+            <button onClick={() => navigate("/bot-admin")} className="bubbly red">
+              {t("bot_admin")}
+            </button>
+          )}
         <button
-          onClick={() => {
-            setModalMode(ModalMode.IMPORT)
-            setModalVisible(true)
-          }}
+          onClick={() => { setCurrentModal("import") }}
           className="bubbly orange"
         >
           {t("import")}/{t("load")}
@@ -210,14 +183,13 @@ export default function BotBuilder() {
         <button
           onClick={() => {
             completeBotInfo()
-            setModalMode(ModalMode.EXPORT)
-            setModalVisible(true)
+            setCurrentModal("export")
           }}
           className="bubbly orange"
         >
           {t("export")}
         </button>
-        <DiscordButton channel="bot-creation" />
+        <DiscordButton url={"https://discord.com/channels/737230355039387749/914503292875325461"} />
       </header>
       <div className="step-info my-container">
         <div className="step-control">
@@ -254,15 +226,17 @@ export default function BotBuilder() {
         error={violation}
       />
 
-      <ImportExportBotModal
-        visible={modalVisible}
+      <ImportBotModal
+        visible={currentModal === "import"}
         bot={bot}
-        hideModal={() => {
-          setModalVisible(false)
-        }}
-        modalMode={modalMode}
+        hideModal={() => { setCurrentModal(null) }}
         importBot={importBot}
-        pasteBinUrl={pastebinUrl}
+      />
+
+      <ExportBotModal
+        visible={currentModal === "export"}
+        bot={bot}
+        hideModal={() => { setCurrentModal(null) }}
       />
     </div>
   )

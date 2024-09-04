@@ -20,13 +20,8 @@ import Board, { Cell } from "./board"
 import { PokemonEntity } from "./pokemon-entity"
 
 export default class PokemonState {
-  attack(
-    pokemon: PokemonEntity,
-    board: Board,
-    coordinates: { x: number; y: number }
-  ) {
-    const target = board.getValue(coordinates.x, coordinates.y)
-    if (target) {
+  attack(pokemon: PokemonEntity, board: Board, target: PokemonEntity) {
+    if (target.life > 0) {
       let damage = pokemon.atk
       let physicalDamage = 0
       let specialDamage = 0
@@ -293,11 +288,15 @@ export default class PokemonState {
       return { death: false, takenDamage: 0 }
     }
 
+    if (pokemon.life <= 0 || pokemon.status.resurecting) {
+      return { death: false, takenDamage: 0 }
+    }
+
     if (attacker && attacker.status.enraged) {
       damage *= 2
     }
 
-    if (pokemon.life == 0) {
+    if (pokemon.life === 0) {
       death = true
     } else if (pokemon.status.protect || pokemon.status.skydiving) {
       death = false

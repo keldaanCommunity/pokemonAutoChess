@@ -1,26 +1,24 @@
 import dotenv from "dotenv"
 import { connect } from "mongoose"
 import { nanoid } from "nanoid"
-import { PastebinAPI } from "pastebin-ts/dist/api"
 import { BotV2 } from "../app/models/mongo-models/bot-v2"
+import { pastebinService } from "../app/services/pastebin"
 import { logger } from "../app/utils/logger"
 const args = process.argv.slice(2)
 
 async function main() {
   dotenv.config()
 
-  const pastebin = new PastebinAPI({
-    api_dev_key: process.env.PASTEBIN_API_DEV_KEY!,
-    api_user_name: process.env.PASTEBIN_API_USERNAME!,
-    api_user_password: process.env.PASTEBIN_API_PASSWORD!
-  })
-
   const url = args[0]
   const id = url.slice(21)
   logger.debug(`retrieving id : ${id} ...`)
 
   logger.debug("retrieving data ...")
-  const data = await pastebin.getPaste(id, false)
+  const data = await pastebinService.getPaste(id, false)
+  if (data == null) {
+    logger.error("No data found for this pastebin url")
+    return
+  }
   logger.debug("parsing JSON data ...")
   try {
     const json = JSON.parse(data)

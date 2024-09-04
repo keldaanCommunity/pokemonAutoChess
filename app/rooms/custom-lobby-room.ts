@@ -7,25 +7,28 @@ import {
   subscribeLobby
 } from "colyseus"
 import { CronJob } from "cron"
-import { WebhookClient } from "discord.js"
 import admin from "firebase-admin"
-import { PastebinAPI } from "pastebin-ts/dist/api"
 import Message from "../models/colyseus-models/message"
 import { TournamentSchema } from "../models/colyseus-models/tournament"
-import BannedUser from "../models/mongo-models/banned-user"
 import { IBot } from "../models/mongo-models/bot-v2"
 import ChatV2 from "../models/mongo-models/chat-v2"
 import Tournament from "../models/mongo-models/tournament"
-import UserMetadata from "../models/mongo-models/user-metadata"
-import { createBotList } from "../services/bots"
+import BannedUser from "../models/mongo-models/banned-user"
+import UserMetadata, {
+  IUserMetadata
+} from "../models/mongo-models/user-metadata"
 import { Emotion, IPlayer, Role, Title, Transfer } from "../types"
 import {
   GREATBALL_RANKED_LOBBY_CRON,
+  INACTIVITY_TIMEOUT,
+  MAX_CONCURRENT_PLAYERS_ON_LOBBY,
+  MAX_CONCURRENT_PLAYERS_ON_SERVER,
   SCRIBBLE_LOBBY_CRON,
   TOURNAMENT_CLEANUP_DELAY,
   TOURNAMENT_REGISTRATION_TIME,
   ULTRABALL_RANKED_LOBBY_CRON
 } from "../types/Config"
+import { CloseCodes } from "../types/enum/CloseCodes"
 import { EloRank } from "../types/enum/EloRank"
 import { GameMode } from "../types/enum/Game"
 import { Language } from "../types/enum/Language"
@@ -47,7 +50,6 @@ import {
   GiveRoleCommand,
   GiveTitleCommand,
   NextTournamentStageCommand,
-  OnBotUploadCommand,
   OnCreateTournamentCommand,
   OnJoinCommand,
   OnLeaveCommand,
@@ -64,49 +66,18 @@ import {
 } from "./commands/lobby-commands"
 import LobbyState from "./states/lobby-state"
 
-const MAX_CCU = 700
-
 export default class CustomLobbyRoom extends Room<LobbyState> {
-  discordWebhook: WebhookClient | undefined
-  discordBanWebhook: WebhookClient | undefined
-  bots: Map<string, IBot>
-  pastebin: PastebinAPI | undefined = undefined
+  bots: Map<string, IBot> = new Map<string, IBot>()
   unsubscribeLobby: (() => void) | undefined
   rooms: RoomListingData<any>[] | undefined
   dispatcher: Dispatcher<this>
-  tournamentCronJobs: Map<string, CronJob>
+  tournamentCronJobs: Map<string, CronJob> = new Map<string, CronJob>()
   cleanUpCronJobs: CronJob[] = []
+  users: Map<string, IUserMetadata> = new Map<string, IUserMetadata>()
 
   constructor() {
     super()
-    this.maxClients = 50
-    if (
-      process.env.PASTEBIN_API_DEV_KEY &&
-      process.env.PASTEBIN_API_USERNAME &&
-      process.env.PASTEBIN_API_DEV_KEY
-    ) {
-      this.pastebin = new PastebinAPI({
-        api_dev_key: process.env.PASTEBIN_API_DEV_KEY!,
-        api_user_name: process.env.PASTEBIN_API_USERNAME!,
-        api_user_password: process.env.PASTEBIN_API_PASSWORD!
-      })
-    }
-
-    if (process.env.DISCORD_WEBHOOK_URL) {
-      this.discordWebhook = new WebhookClient({
-        url: process.env.DISCORD_WEBHOOK_URL
-      })
-    }
-
-    if (process.env.DISCORD_BAN_WEBHOOK_URL) {
-      this.discordBanWebhook = new WebhookClient({
-        url: process.env.DISCORD_BAN_WEBHOOK_URL
-      })
-    }
-
     this.dispatcher = new Dispatcher(this)
-    this.bots = new Map<string, IBot>()
-    this.tournamentCronJobs = new Map<string, CronJob>()
   }
 
   removeRoom(index: number, roomId: string) {
@@ -180,8 +151,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       this.dispatcher.dispatch(new DeleteBotCommand(), { client, message })
     })
 
-    this.onMessage(Transfer.ADD_BOT_DATABASE, async (client, message) => {
-      this.dispatcher.dispatch(new AddBotCommand(), { client, message })
+    this.onMessage(Transfer.ADD_BOT_DATABASE, async (client, url) => {
+      this.dispatcher.dispatch(new AddBotCommand(), { client, url })
     })
 
     this.onMessage(
@@ -295,33 +266,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         this.dispatcher.dispatch(new GiveRoleCommand(), { client, uid, role })
       }
     )
-
-    this.onMessage(Transfer.BOT_CREATION, (client, { bot }: { bot: IBot }) => {
-      this.dispatcher.dispatch(new OnBotUploadCommand(), { client, bot })
-    })
-
-    this.onMessage(
-      Transfer.REQUEST_BOT_LIST,
-      (client, options?: { withSteps: boolean }) => {
-        try {
-          client.send(
-            Transfer.REQUEST_BOT_LIST,
-            createBotList(this.bots, options)
-          )
-        } catch (error) {
-          logger.error(error)
-        }
-      }
-    )
-
-    this.onMessage(Transfer.REQUEST_BOT_DATA, (client, bot) => {
-      try {
-        const botData = this.bots.get(bot)
-        client.send(Transfer.REQUEST_BOT_DATA, botData)
-      } catch (error) {
-        logger.error(error)
-      }
-    })
 
     this.onMessage(Transfer.OPEN_BOOSTER, (client) => {
       this.dispatcher.dispatch(new OpenBoosterCommand(), { client })
@@ -471,28 +415,15 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       super.onAuth(client, options, request)
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
-      const isBanned = await BannedUser.findOne({ uid: user.uid })
-      const userProfile = await UserMetadata.findOne({ uid: user.uid })
-      client.send(Transfer.USER_PROFILE, userProfile)
 
       if (!user.displayName) {
         logger.error("No display name for this account", user.uid)
         throw new Error(
           "No display name for this account. Please report this error."
         )
-      } else if (isBanned) {
-        throw new Error("Account banned")
-      } else if (
-        this.state.ccu > MAX_CCU &&
-        userProfile?.role !== Role.ADMIN &&
-        userProfile?.role !== Role.MODERATOR
-      ) {
-        throw new Error(
-          "The servers are currently at maximum capacity. Please try again later."
-        )
-      } else {
-        return user
       }
+
+      return user
     } catch (error) {
       //logger.info(error)
       // biome-ignore lint/complexity/noUselessCatch: <explanation>
@@ -500,17 +431,44 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     }
   }
 
-  onJoin(client: Client, options: any, auth: any) {
-    this.dispatcher.dispatch(new OnJoinCommand(), {
-      client,
-      options,
-      auth,
-      rooms: this.rooms
-    })
+  async onJoin(client: Client, options: any, auth: any) {
+    const user = await UserMetadata.findOne({ uid: client.auth.uid })
+    const isBanned = await BannedUser.findOne({ uid: client.auth.uid })
+
+    try {
+      if (isBanned) {
+        throw new Error("Account banned")
+      } else if (
+        (this.state.ccu > MAX_CONCURRENT_PLAYERS_ON_SERVER ||
+          this.clients.length > MAX_CONCURRENT_PLAYERS_ON_LOBBY) &&
+        user?.role !== Role.ADMIN &&
+        user?.role !== Role.MODERATOR
+      ) {
+        throw new Error(
+          "This server is currently at maximum capacity. Please try again later or join another server."
+        )
+      }
+    } catch (error) {
+      //logger.info(error)
+      // biome-ignore lint/complexity/noUselessCatch: keep the option to log the error if needed
+      throw error // https://docs.colyseus.io/community/deny-player-join-a-room/
+    }
+
+    this.dispatcher.dispatch(new OnJoinCommand(), { client, user })
   }
 
-  onLeave(client: Client) {
-    this.dispatcher.dispatch(new OnLeaveCommand(), { client })
+  async onLeave(client: Client, consented: boolean) {
+    try {
+      if (consented) {
+        throw new Error("consented leave")
+      }
+      await this.allowReconnection(client, 30)
+      // if reconnected, dispatch the same event as if the user had joined to send them the initial data
+      const user = this.users.get(client.auth.uid) ?? null
+      this.dispatcher.dispatch(new OnJoinCommand(), { client, user })
+    } catch (error) {
+      this.dispatcher.dispatch(new OnLeaveCommand(), { client })
+    }
   }
 
   onDispose() {
@@ -670,7 +628,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     })
     this.cleanUpCronJobs.push(scribbleLobbyJob)
 
-    if (process.env.NODE_APP_INSTANCE) {
+    if (process.env.NODE_APP_INSTANCE || process.env.MODE === "dev") {
       const staleJob = CronJob.from({
         cronTime: "*/1 * * * *", // every minute
         timeZone: "Europe/Paris",
@@ -714,13 +672,14 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         cronTime: "*/1 * * * *", // every minute
         timeZone: "Europe/Paris",
         onTick: async () => {
+          logger.debug("checking inactive users")
           this.clients.forEach((c) => {
             if (
               c.userData.joinedAt &&
-              c.userData.joinedAt < Date.now() - 60000
+              c.userData.joinedAt < Date.now() - INACTIVITY_TIMEOUT
             ) {
-              //logger.info("force deconnection of user", c.id)
-              c.leave()
+              //logger.info("disconnected user for inactivity", c.id)
+              c.leave(CloseCodes.USER_INACTIVE)
             }
           })
         },

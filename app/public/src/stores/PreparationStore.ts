@@ -15,7 +15,6 @@ export interface IUserPreparationState {
   password: string | null
   noElo: boolean
   user: GameUser | undefined
-  botsList: IBot[] | null
   gameMode: GameMode
   whitelist: string[]
   blacklist: string[]
@@ -31,7 +30,6 @@ const initialState: IUserPreparationState = {
   user: undefined,
   password: null,
   noElo: false,
-  botsList: null,
   gameMode: GameMode.NORMAL,
   whitelist: [],
   blacklist: []
@@ -42,7 +40,7 @@ export const preparationSlice = createSlice({
   initialState: initialState,
   reducers: {
     setUser: (state, action: PayloadAction<GameUser>) => {
-      const u: GameUser = JSON.parse(JSON.stringify(action.payload))
+      const u: GameUser = structuredClone(action.payload)
       state.user = u
     },
     pushMessage: (state, action: PayloadAction<Message>) => {
@@ -54,20 +52,20 @@ export const preparationSlice = createSlice({
       )
     },
     addUser: (state, action: PayloadAction<IGameUser>) => {
-      const u: IGameUser = JSON.parse(JSON.stringify(action.payload))
+      const u: IGameUser = structuredClone(action.payload)
       state.users.push(u)
     },
     changeUser: (
       state,
       action: PayloadAction<{ id: string; field: string; value: any }>
     ) => {
-      state.users[state.users.findIndex((u) => u.id == action.payload.id)][
+      state.users[state.users.findIndex((u) => u.uid == action.payload.id)][
         action.payload.field
       ] = action.payload.value
     },
     removeUser: (state, action: PayloadAction<string>) => {
       state.users.splice(
-        state.users.findIndex((u) => u.id == action.payload),
+        state.users.findIndex((u) => u.uid == action.payload),
         1
       )
     },
@@ -93,9 +91,6 @@ export const preparationSlice = createSlice({
       state.gameMode = action.payload
     },
     leavePreparation: () => initialState,
-    setBotsList: (state, action: PayloadAction<IBot[] | null>) => {
-      state.botsList = action.payload
-    },
     setWhiteList: (state, action: PayloadAction<string[]>) => {
       state.whitelist = action.payload
     },
@@ -108,7 +103,6 @@ export const preparationSlice = createSlice({
 export const {
   setUser,
   setName,
-  setBotsList,
   pushMessage,
   removeMessage,
   addUser,

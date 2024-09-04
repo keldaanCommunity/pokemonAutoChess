@@ -122,7 +122,9 @@ FIREBASE_CLIENT_EMAIL=<client_email>
 FIREBASE_PRIVATE_KEY=<private_key>
 ```
 
-For some reasons, `npm run assetpack` during build phase does not work on Heroku. To work around this issue, you'll need to:
+### If the assetpack task is failing / you don't see some icons and sprites
+
+For some reasons, `npm run assetpack` during build phase does not work on Heroku and Render. To work around this issue, you'll need to:
 
  - Install the game locally. Steps are detailled in the readme. If you want the same environment than your production branch, you can copy all the required environment variables to your local .env.
  - `npm run build` 

@@ -2624,7 +2624,7 @@ export class Snorunt extends Pokemon {
   stars = 1
   evolution = Pkm.GLALIE
   hp = 90
-  atk = 8
+  atk = 10
   def = 2
   speDef = 2
   maxPP = 100
@@ -2639,10 +2639,10 @@ export class Glalie extends Pokemon {
   stars = 2
   evolution = Pkm.FROSLASS
   hp = 170
-  atk = 17
-  def = 2
-  speDef = 2
-  maxPP = 100
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 90
   range = 3
   skill = Ability.ICY_WIND
   attackSprite = AttackSprite.GHOST_RANGE
@@ -2652,11 +2652,11 @@ export class Froslass extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ICE])
   rarity = Rarity.EPIC
   stars = 3
-  hp = 350
-  atk = 28
-  def = 2
-  speDef = 2
-  maxPP = 100
+  hp = 320
+  atk = 36
+  def = 4
+  speDef = 4
+  maxPP = 80
   range = 3
   skill = Ability.ICY_WIND
   attackSprite = AttackSprite.GHOST_RANGE
@@ -2830,7 +2830,7 @@ export class AlolanRaichu extends Pokemon {
   atk = 20
   def = 6
   speDef = 6
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.NUZZLE
   passive = Passive.SURGE_SURFER
@@ -3810,8 +3810,8 @@ export class Slowking extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.PSYCHIC])
   rarity = Rarity.UNCOMMON
   stars = 3
-  hp = 260
-  atk = 24
+  hp = 200
+  atk = 18
   def = 6
   speDef = 4
   maxPP = 100
@@ -3910,9 +3910,15 @@ export class Bellsprout extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROOT
-  passive = Passive.BELLSPROUT
-  additional = true
   attackSprite = AttackSprite.GRASS_MELEE
+  regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      regionSynergies.includes(Synergy.GRASS) ||
+      regionSynergies.includes(Synergy.FLORA)
+    )
+  }
 }
 
 export class Weepinbell extends Pokemon {
@@ -3920,7 +3926,6 @@ export class Weepinbell extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.VICTREEBEL
-  evolutionRule = new ItemEvolutionRule(Berries)
   hp = 160
   atk = 12
   def = 2
@@ -3928,9 +3933,15 @@ export class Weepinbell extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROOT
-  passive = Passive.BELLSPROUT
-  additional = true
   attackSprite = AttackSprite.GRASS_MELEE
+  regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      regionSynergies.includes(Synergy.GRASS) ||
+      regionSynergies.includes(Synergy.FLORA)
+    )
+  }
 }
 
 export class Victreebel extends Pokemon {
@@ -3944,8 +3955,15 @@ export class Victreebel extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROOT
-  additional = true
   attackSprite = AttackSprite.GRASS_MELEE
+  regional = true
+  isInRegion(pkm: Pkm, map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      regionSynergies.includes(Synergy.GRASS) ||
+      regionSynergies.includes(Synergy.FLORA)
+    )
+  }
 }
 
 export class Pikipek extends Pokemon {
@@ -5897,7 +5915,7 @@ export class Lapras extends Pokemon {
   atk = 12
   def = 5
   speDef = 6
-  maxPP = 100
+  maxPP = 120
   range = 1
   skill = Ability.DIVE
   attackSprite = AttackSprite.WATER_MELEE
@@ -6727,7 +6745,7 @@ export class Gligar extends Pokemon {
     Synergy.FLYING
   ])
   rarity = Rarity.UNIQUE
-  stars = 3
+  stars = 2
   evolution = Pkm.GLISCOR
   evolutionRule = new ItemEvolutionRule([Item.RAZOR_FANG])
   hp = 150
@@ -6748,7 +6766,7 @@ export class Gliscor extends Pokemon {
     Synergy.FLYING
   ])
   rarity = Rarity.UNIQUE
-  stars = 4
+  stars = 3
   hp = 170
   atk = 18
   def = 4
@@ -12691,7 +12709,7 @@ export class Bruxish extends Pokemon {
 }
 
 export class Corsola extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ROCK])
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.AQUATIC])
   rarity = Rarity.EPIC
   stars = 1
   hp = 125
@@ -12711,7 +12729,7 @@ export class Corsola extends Pokemon {
 }
 
 export class GalarCorsola extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ROCK, Synergy.GHOST])
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.AQUATIC, Synergy.GHOST])
   evolution = Pkm.CURSOLA
   rarity = Rarity.EPIC
   stars = 2
@@ -12727,7 +12745,7 @@ export class GalarCorsola extends Pokemon {
 }
 
 export class Cursola extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ROCK, Synergy.GHOST])
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.AQUATIC, Synergy.GHOST])
   rarity = Rarity.EPIC
   stars = 3
   hp = 300
@@ -13367,10 +13385,10 @@ export class Lunala extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 250
+  hp = 300
   atk = 25
-  def = 5
-  speDef = 5
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 4
   skill = Ability.MOONGEIST_BEAM
@@ -13725,7 +13743,7 @@ export class Clodsire extends Pokemon {
   ])
   rarity = Rarity.RARE
   stars = 2
-  hp = 230
+  hp = 190
   atk = 10
   def = 5
   speDef = 8
@@ -13753,7 +13771,7 @@ export class Tangela extends Pokemon {
   range = 1
   skill = Ability.POWER_WHIP
   attackSprite = AttackSprite.GRASS_MELEE
-  regional = true
+  additional = true
 }
 
 export class Tangrowth extends Pokemon {
@@ -13772,7 +13790,7 @@ export class Tangrowth extends Pokemon {
   range = 1
   skill = Ability.POWER_WHIP
   attackSprite = AttackSprite.GRASS_MELEE
-  regional = true
+  additional = true
 }
 
 export class Phanpy extends Pokemon {

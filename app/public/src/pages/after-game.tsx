@@ -39,8 +39,8 @@ export default function AfterGame() {
           dispatch(logIn(user))
           try {
             const cachedReconnectionToken = localStore.get(
-              LocalStoreKeys.RECONNECTION_TOKEN
-            )
+              LocalStoreKeys.RECONNECTION_AFTER_GAME
+            )?.reconnectionToken
             if (cachedReconnectionToken) {
               const r: Room<AfterGameState> = await client.reconnect(
                 cachedReconnectionToken
@@ -53,8 +53,8 @@ export default function AfterGame() {
           } catch (error) {
             setTimeout(async () => {
               const cachedReconnectionToken = localStore.get(
-                LocalStoreKeys.RECONNECTION_TOKEN
-              )
+                LocalStoreKeys.RECONNECTION_AFTER_GAME
+              )?.reconnectionToken
               if (cachedReconnectionToken) {
                 const r: Room<AfterGameState> = await client.reconnect(
                   cachedReconnectionToken
@@ -74,7 +74,7 @@ export default function AfterGame() {
 
     const initialize = async (r: Room<AfterGameState>) => {
       localStore.delete(LocalStoreKeys.RECONNECTION_GAME)
-      localStore.set(LocalStoreKeys.RECONNECTION_TOKEN, r.reconnectionToken, 30)
+      localStore.set(LocalStoreKeys.RECONNECTION_AFTER_GAME, { reconnectionToken: r.reconnectionToken, roomId: r.roomId }, 30)
       r.state.players.onAdd((player) => {
         dispatch(addPlayer(player))
         if (player.id === currentPlayerId) {
@@ -106,11 +106,11 @@ export default function AfterGame() {
           className="bubbly blue"
           style={{ margin: "10px 0 0 10px" }}
           onClick={() => {
-            if (room) {
+            if (room?.connection.isOpen) {
               room.connection.close()
             }
             dispatch(leaveAfter())
-            localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
+            localStore.delete(LocalStoreKeys.RECONNECTION_AFTER_GAME)
             setToLobby(true)
           }}
         >

@@ -1,13 +1,12 @@
 import { Dispatcher } from "@colyseus/command"
 import { Client, Room, updateLobby } from "colyseus"
 import admin from "firebase-admin"
-import { components } from "../api-v1/openapi"
-import { GameUser } from "../models/colyseus-models/game-user"
 import BannedUser from "../models/mongo-models/banned-user"
 import { IBot } from "../models/mongo-models/bot-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { IPreparationMetadata, Transfer } from "../types"
 import { EloRank, MAX_PLAYERS_PER_GAME } from "../types/Config"
+import { CloseCodes } from "../types/enum/CloseCodes"
 import { BotDifficulty, GameMode } from "../types/enum/Game"
 import { logger } from "../utils/logger"
 import { values } from "../utils/schemas"
@@ -18,7 +17,6 @@ import {
   OnJoinCommand,
   OnKickPlayerCommand,
   OnLeaveCommand,
-  OnListBotsCommand,
   OnNewMessageCommand,
   OnRemoveBotCommand,
   OnRoomNameCommand,
@@ -120,14 +118,13 @@ export default class PreparationRoom extends Room<PreparationState> {
               tournamentId: this.metadata?.tournamentId,
               bracketId: this.metadata?.bracketId,
               players: values(this.state.users).map((p) => ({
-                id: p.id,
+                id: p.uid,
                 rank: 1
               }))
             })
           }
 
-          this.broadcast(Transfer.KICK)
-          this.disconnect()
+          this.disconnect(CloseCodes.ROOM_EMPTY)
         } else {
           this.dispatcher.dispatch(new OnGameStartRequestCommand())
         }
@@ -292,18 +289,6 @@ export default class PreparationRoom extends Room<PreparationState> {
         logger.error(error)
       }
     })
-    this.onMessage(Transfer.REQUEST_BOT_LIST, (client: Client) => {
-      logger.info(Transfer.REQUEST_BOT_LIST, this.roomName)
-      try {
-        const user = this.state.users.get(client.auth.uid)
-
-        this.dispatcher.dispatch(new OnListBotsCommand(), {
-          user: user
-        })
-      } catch (error) {
-        logger.error(error)
-      }
-    })
 
     this.onServerAnnouncement = this.onServerAnnouncement.bind(this)
     this.presence.subscribe("server-announcement", this.onServerAnnouncement)
@@ -325,7 +310,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       const numberOfHumanPlayers = values(this.state.users).filter(
         (u) => !u.isBot
       ).length
-      if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME) {
+      if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME && !isAlreadyInRoom) {
         throw "Room is full"
       } else if (this.state.gameStartedAt != null) {
         throw "Game already started"
@@ -335,8 +320,6 @@ export default class PreparationRoom extends Room<PreparationState> {
         throw "User banned"
       } else if (this.metadata.blacklist.includes(user.uid)) {
         throw "User previously kicked"
-      } else if (isAlreadyInRoom) {
-        throw "User already in room"
       } else {
         return user
       }
@@ -364,8 +347,8 @@ export default class PreparationRoom extends Room<PreparationState> {
       if (consented) {
         throw new Error("consented leave")
       }
-      // allow disconnected client to reconnect into this room until 3 seconds
-      await this.allowReconnection(client, 3)
+      // allow disconnected client to reconnect into this room until 10 seconds
+      await this.allowReconnection(client, 10)
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
         /*logger.info(
@@ -401,25 +384,6 @@ export default class PreparationRoom extends Room<PreparationState> {
       this.setGameStarted(new Date().toISOString())
       //logger.debug("game start", game.roomId)
       this.broadcast(Transfer.GAME_START, gameId)
-    }
-  }
-
-  status() {
-    const players = new Array<components["schemas"]["Player"]>()
-    this.state.users.forEach((user: GameUser) => {
-      if (!user.isBot) {
-        players.push({
-          id: user.id,
-          avatar: user.avatar,
-          name: user.name,
-          elo: user.elo
-        })
-      }
-    })
-    return {
-      players: players,
-      name: this.state.name,
-      id: this.roomId
     }
   }
 

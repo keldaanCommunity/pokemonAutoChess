@@ -40,12 +40,16 @@ export function GameRoomsMenu() {
                     }
                 )
                 localStore.set(
-                    LocalStoreKeys.RECONNECTION_TOKEN,
-                    game.reconnectionToken,
+                    LocalStoreKeys.RECONNECTION_GAME,
+                    { reconnectionToken: game.reconnectionToken, roomId: game.roomId },
                     30
                 )
-                await lobby.leave()
-                game.connection.close()
+                if (lobby.connection.isOpen) {
+                    await lobby.leave(false)
+                }
+                if (game.connection.isOpen) {
+                    game.connection.close()
+                }
                 dispatch(leaveLobby())
                 navigate("/game")
             }

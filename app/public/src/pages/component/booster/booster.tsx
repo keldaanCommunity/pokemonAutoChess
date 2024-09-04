@@ -11,11 +11,8 @@ import "./booster.css"
 export default function Booster() {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
-  const { user, boosterContent } = useAppSelector((state) => ({
-    user: state.lobby.user,
-    boosterContent: state.lobby.boosterContent
-  }))
-
+  const user = useAppSelector((state) => state.network.profile)
+  const boosterContent = useAppSelector((state) => state.lobby.boosterContent)
   const numberOfBooster = user ? user.booster : 0
 
   // reset current boosters on close

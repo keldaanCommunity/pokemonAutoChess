@@ -14,6 +14,7 @@ import {
   IDragDropCombineMessage,
   IDragDropItemMessage,
   IDragDropMessage,
+  IExperienceManager,
   IPlayer,
   ISimplePlayer,
   Role,
@@ -39,7 +40,7 @@ import {
   removeDpsMeter,
   removePlayer,
   setAdditionalPokemons,
-  setExperienceManager,
+  updateExperienceManager,
   setInterest,
   setItemsProposition,
   setLife,
@@ -115,8 +116,8 @@ export default function Game() {
         `connectToGame attempt ${attempts} / ${MAX_ATTEMPS_RECONNECT}`
       )
       const cachedReconnectionToken = localStore.get(
-        LocalStoreKeys.RECONNECTION_TOKEN
-      )
+        LocalStoreKeys.RECONNECTION_GAME
+      )?.reconnectionToken
       if (cachedReconnectionToken) {
         connecting.current = true
         const statusMessage = document.querySelector("#status-message")
@@ -129,11 +130,10 @@ export default function Game() {
           .then((room: Room) => {
             // store game token for 1 hour
             localStore.set(
-              LocalStoreKeys.RECONNECTION_TOKEN,
-              room.reconnectionToken,
+              LocalStoreKeys.RECONNECTION_GAME,
+              { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
               60 * 60
             )
-            localStore.set(LocalStoreKeys.RECONNECTION_GAME, room.id, 60 * 60)
             dispatch(joinGame(room))
             connected.current = true
             connecting.current = false
@@ -215,8 +215,10 @@ export default function Game() {
       elligibleToXP,
       elligibleToELO
     })
-    localStore.set(LocalStoreKeys.RECONNECTION_TOKEN, r.reconnectionToken, 30)
-    r.connection.close()
+    localStore.set(LocalStoreKeys.RECONNECTION_AFTER_GAME, { reconnectionToken: r.reconnectionToken, roomId: r.roomId }, 30)
+    if (r.connection.isOpen) {
+      r.connection.close()
+    }
     dispatch(leaveGame())
     navigate("/after")
 
@@ -231,7 +233,7 @@ export default function Game() {
     // create a history entry to prevent back button switching page immediately, and leave game properly instead
     window.history.pushState(null, "", window.location.href);
     const confirmLeave = () => {
-      if(confirm("Do you want to leave game ?")){
+      if (confirm("Do you want to leave game ?")) {
         leave()
       } else {
         // push again another entry to prevent back button from switching page, effectively canceling the back action
@@ -243,7 +245,7 @@ export default function Game() {
     return () => {
       window.removeEventListener("popstate", confirmLeave)
     }
-  },[])
+  }, [])
 
   useEffect(() => {
     const connect = () => {
@@ -312,7 +314,7 @@ export default function Game() {
       })
       room.onMessage(Transfer.SHOW_EMOTE, (message) => {
         const g = getGameScene()
-        if ( g?.minigameManager?.pokemons?.size && g.minigameManager.pokemons.size > 0) {
+        if (g?.minigameManager?.pokemons?.size && g.minigameManager.pokemons.size > 0) {
           // early return here to prevent showing animation twice
           return g.minigameManager?.showEmote(message.id, message?.emote)
         }
@@ -440,7 +442,7 @@ export default function Game() {
       })
 
       room.state.additionalPokemons.onAdd(() => {
-        dispatch(setAdditionalPokemons(room.state.additionalPokemons.map(p=>p)))
+        dispatch(setAdditionalPokemons([...room.state.additionalPokemons]))
       })
 
       room.state.simulations.onRemove(() => {
@@ -532,9 +534,19 @@ export default function Game() {
             setFinalRankVisible(true)
           }
         })
-        player.listen("experienceManager", (value) => {
+        player.listen("experienceManager", (experienceManager) => {
           if (player.id === uid) {
-            dispatch(setExperienceManager(value))
+            dispatch(updateExperienceManager(experienceManager))
+            const fields: NonFunctionPropNames<IExperienceManager>[] = [
+              "experience",
+              "expNeeded",
+              "level"
+            ]
+            fields.forEach((field) => {
+              experienceManager.listen(field, (value) => {
+                dispatch(updateExperienceManager({ ...experienceManager, [field]: value } as IExperienceManager))
+              })
+            })
           }
         })
         player.listen("loadingProgress", (value) => {
@@ -623,12 +635,12 @@ export default function Game() {
 
         player.pokemonsProposition.onAdd(() => {
           if (player.id == uid) {
-            dispatch(setPokemonProposition(player.pokemonsProposition.map(p=>p)))
+            dispatch(setPokemonProposition(player.pokemonsProposition.map(p => p)))
           }
         })
         player.pokemonsProposition.onRemove(() => {
           if (player.id == uid) {
-            dispatch(setPokemonProposition(player.pokemonsProposition.map(p=>p)))
+            dispatch(setPokemonProposition(player.pokemonsProposition.map(p => p)))
           }
         })
       })
