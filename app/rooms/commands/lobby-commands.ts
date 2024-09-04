@@ -64,25 +64,18 @@ export class OnJoinCommand extends Command<
   {
     client: Client
     user: IUserMetadata | null
-    options: any
-    auth: any
-    rooms: RoomListingData<any>[] | undefined
   }
 > {
   async execute({
     client,
-    user,
-    rooms = []
+    user
   }: {
     client: Client
     user: IUserMetadata | null
-    options: any
-    auth: any
-    rooms: RoomListingData<any>[] | undefined
   }) {
     try {
       //logger.info(`${client.auth.displayName} ${client.id} join lobby room`)
-      client.send(Transfer.ROOMS, rooms)
+      client.send(Transfer.ROOMS, this.room.rooms)
       client.userData = { joinedAt: Date.now() }
 
       if (user) {

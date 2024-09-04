@@ -454,13 +454,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       throw error // https://docs.colyseus.io/community/deny-player-join-a-room/
     }
 
-    this.dispatcher.dispatch(new OnJoinCommand(), {
-      client,
-      user,
-      options,
-      auth,
-      rooms: this.rooms
-    })
+    this.dispatcher.dispatch(new OnJoinCommand(), { client, user })
   }
 
   async onLeave(client: Client, consented: boolean) {
@@ -469,8 +463,9 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         throw new Error("consented leave")
       }
       await this.allowReconnection(client, 30)
-      const userProfile = this.users.get(client.auth.uid)
-      client.send(Transfer.USER_PROFILE, userProfile)
+      // if reconnected, dispatch the same event as if the user had joined to send them the initial data
+      const user = this.users.get(client.auth.uid) ?? null
+      this.dispatcher.dispatch(new OnJoinCommand(), { client, user })
     } catch (error) {
       this.dispatcher.dispatch(new OnLeaveCommand(), { client })
     }
