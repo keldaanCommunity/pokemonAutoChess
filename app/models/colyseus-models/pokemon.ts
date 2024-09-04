@@ -2624,7 +2624,7 @@ export class Snorunt extends Pokemon {
   stars = 1
   evolution = Pkm.GLALIE
   hp = 90
-  atk = 8
+  atk = 10
   def = 2
   speDef = 2
   maxPP = 100
@@ -2639,10 +2639,10 @@ export class Glalie extends Pokemon {
   stars = 2
   evolution = Pkm.FROSLASS
   hp = 170
-  atk = 17
-  def = 2
-  speDef = 2
-  maxPP = 100
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 90
   range = 3
   skill = Ability.ICY_WIND
   attackSprite = AttackSprite.GHOST_RANGE
@@ -2652,11 +2652,11 @@ export class Froslass extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ICE])
   rarity = Rarity.EPIC
   stars = 3
-  hp = 350
-  atk = 28
-  def = 2
-  speDef = 2
-  maxPP = 100
+  hp = 320
+  atk = 36
+  def = 4
+  speDef = 4
+  maxPP = 80
   range = 3
   skill = Ability.ICY_WIND
   attackSprite = AttackSprite.GHOST_RANGE
@@ -2830,7 +2830,7 @@ export class AlolanRaichu extends Pokemon {
   atk = 20
   def = 6
   speDef = 6
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.NUZZLE
   passive = Passive.SURGE_SURFER
@@ -12709,7 +12709,7 @@ export class Bruxish extends Pokemon {
 }
 
 export class Corsola extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ROCK])
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.AQUATIC])
   rarity = Rarity.EPIC
   stars = 1
   hp = 125
@@ -12729,7 +12729,7 @@ export class Corsola extends Pokemon {
 }
 
 export class GalarCorsola extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ROCK, Synergy.GHOST])
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.AQUATIC, Synergy.GHOST])
   evolution = Pkm.CURSOLA
   rarity = Rarity.EPIC
   stars = 2
@@ -12745,7 +12745,7 @@ export class GalarCorsola extends Pokemon {
 }
 
 export class Cursola extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ROCK, Synergy.GHOST])
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.AQUATIC, Synergy.GHOST])
   rarity = Rarity.EPIC
   stars = 3
   hp = 300
