@@ -15,7 +15,8 @@ import BannedUser from "../../models/mongo-models/banned-user"
 import { BotV2 } from "../../models/mongo-models/bot-v2"
 import { Tournament } from "../../models/mongo-models/tournament"
 import UserMetadata, {
-  IPokemonConfig
+  IPokemonConfig,
+  IUserMetadata
 } from "../../models/mongo-models/user-metadata"
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../models/precomputed/precomputed-emotions"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
@@ -62,41 +63,37 @@ export class OnJoinCommand extends Command<
   CustomLobbyRoom,
   {
     client: Client
-    options: any
-    auth: any
-    rooms: RoomListingData<any>[] | undefined
+    user: IUserMetadata | null
   }
 > {
   async execute({
     client,
-    rooms = []
+    user
   }: {
     client: Client
-    options: any
-    auth: any
-    rooms: RoomListingData<any>[] | undefined
+    user: IUserMetadata | null
   }) {
     try {
       //logger.info(`${client.auth.displayName} ${client.id} join lobby room`)
-      client.send(Transfer.ROOMS, rooms)
+      client.send(Transfer.ROOMS, this.room.rooms)
       client.userData = { joinedAt: Date.now() }
-      const user = await UserMetadata.findOne({ uid: client.auth.uid })
 
       if (user) {
         // load existing account
         this.room.users.set(client.auth.uid, user)
+        client.send(Transfer.USER_PROFILE, user)
       } else {
         // create new user account
         const starterBoosters = 3
         const starterAvatar = pickRandomIn(StarterAvatars)
-        UserMetadata.create({
+        await UserMetadata.create({
           uid: client.auth.uid,
           displayName: client.auth.displayName,
           avatar: starterAvatar,
           booster: starterBoosters,
           pokemonCollection: new Map<string, IPokemonConfig>()
         })
-        this.room.users.set(client.auth.uid, {
+        const newUser: IUserMetadata = {
           uid: client.auth.uid,
           displayName: client.auth.displayName,
           language: client.auth.metadata.language,
@@ -110,7 +107,9 @@ export class OnJoinCommand extends Command<
           titles: [],
           title: "",
           role: Role.BASIC
-        })
+        }
+        this.room.users.set(client.auth.uid, newUser)
+        client.send(Transfer.USER_PROFILE, newUser)
       }
     } catch (error) {
       logger.error(error)

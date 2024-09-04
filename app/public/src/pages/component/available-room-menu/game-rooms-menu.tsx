@@ -45,7 +45,7 @@ export function GameRoomsMenu() {
                     30
                 )
                 if (lobby.connection.isOpen) {
-                    await lobby.leave()
+                    await lobby.leave(false)
                 }
                 if (game.connection.isOpen) {
                     game.connection.close()

@@ -10,10 +10,10 @@ import { CronJob } from "cron"
 import admin from "firebase-admin"
 import Message from "../models/colyseus-models/message"
 import { TournamentSchema } from "../models/colyseus-models/tournament"
-import BannedUser from "../models/mongo-models/banned-user"
 import { IBot } from "../models/mongo-models/bot-v2"
 import ChatV2 from "../models/mongo-models/chat-v2"
 import Tournament from "../models/mongo-models/tournament"
+import BannedUser from "../models/mongo-models/banned-user"
 import UserMetadata, {
   IUserMetadata
 } from "../models/mongo-models/user-metadata"
@@ -415,29 +415,15 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       super.onAuth(client, options, request)
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
-      const isBanned = await BannedUser.findOne({ uid: user.uid })
-      const userProfile = await UserMetadata.findOne({ uid: user.uid })
-      client.send(Transfer.USER_PROFILE, userProfile)
 
       if (!user.displayName) {
         logger.error("No display name for this account", user.uid)
         throw new Error(
           "No display name for this account. Please report this error."
         )
-      } else if (isBanned) {
-        throw new Error("Account banned")
-      } else if (
-        (this.state.ccu > MAX_CONCURRENT_PLAYERS_ON_SERVER ||
-          this.clients.length > MAX_CONCURRENT_PLAYERS_ON_LOBBY) &&
-        userProfile?.role !== Role.ADMIN &&
-        userProfile?.role !== Role.MODERATOR
-      ) {
-        throw new Error(
-          "This server is currently at maximum capacity. Please try again later or join another server."
-        )
-      } else {
-        return user
       }
+
+      return user
     } catch (error) {
       //logger.info(error)
       // biome-ignore lint/complexity/noUselessCatch: <explanation>
@@ -445,13 +431,30 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     }
   }
 
-  onJoin(client: Client, options: any, auth: any) {
-    this.dispatcher.dispatch(new OnJoinCommand(), {
-      client,
-      options,
-      auth,
-      rooms: this.rooms
-    })
+  async onJoin(client: Client, options: any, auth: any) {
+    const user = await UserMetadata.findOne({ uid: client.auth.uid })
+    const isBanned = await BannedUser.findOne({ uid: client.auth.uid })
+
+    try {
+      if (isBanned) {
+        throw new Error("Account banned")
+      } else if (
+        (this.state.ccu > MAX_CONCURRENT_PLAYERS_ON_SERVER ||
+          this.clients.length > MAX_CONCURRENT_PLAYERS_ON_LOBBY) &&
+        user?.role !== Role.ADMIN &&
+        user?.role !== Role.MODERATOR
+      ) {
+        throw new Error(
+          "This server is currently at maximum capacity. Please try again later or join another server."
+        )
+      }
+    } catch (error) {
+      //logger.info(error)
+      // biome-ignore lint/complexity/noUselessCatch: keep the option to log the error if needed
+      throw error // https://docs.colyseus.io/community/deny-player-join-a-room/
+    }
+
+    this.dispatcher.dispatch(new OnJoinCommand(), { client, user })
   }
 
   async onLeave(client: Client, consented: boolean) {
@@ -459,12 +462,10 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       if (consented) {
         throw new Error("consented leave")
       }
-      const userProfile = this.users.get(client.auth.uid)
-      if (!userProfile) {
-        throw new Error("Missing User Profile.")
-      }
       await this.allowReconnection(client, 30)
-      client.send(Transfer.USER_PROFILE, userProfile)
+      // if reconnected, dispatch the same event as if the user had joined to send them the initial data
+      const user = this.users.get(client.auth.uid) ?? null
+      this.dispatcher.dispatch(new OnJoinCommand(), { client, user })
     } catch (error) {
       this.dispatcher.dispatch(new OnLeaveCommand(), { client })
     }

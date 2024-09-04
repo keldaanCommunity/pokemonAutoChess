@@ -1,35 +1,25 @@
 import React, { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Navigate, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
-import { logger } from "../../../../../utils/logger"
+import { joinLobbyRoom } from "../../../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import store from "../../../stores"
 import { addBotDatabase, deleteBotDatabase } from "../../../stores/NetworkStore"
 import { getAvatarSrc } from "../../../utils"
-import { joinLobbyRoom } from "../../lobby"
 import { rewriteBotRoundsRequiredto1, validateBot } from "./bot-logic"
 import "./bot-manager-panel.css"
 
 export function BotManagerPanel() {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
-  const [toAuth, setToAuth] = useState<boolean>(false)
   const lobbyJoined = useRef<boolean>(false)
   useEffect(() => {
-    const client = store.getState().network.client
     if (!lobbyJoined.current) {
-      joinLobbyRoom(dispatch, client).catch((err) => {
-        logger.error(err)
-        setToAuth(true)
-      })
+      joinLobbyRoom(dispatch, navigate)
       lobbyJoined.current = true
     }
-  }, [lobbyJoined, dispatch])
-
-  if (toAuth) {
-    return <Navigate to={"/"} />
-  }
+  }, [lobbyJoined])
 
   return (
     <div id="bot-manager-panel">

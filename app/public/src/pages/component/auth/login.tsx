@@ -4,15 +4,12 @@ import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { logIn, logOut, setErrorAlertMessage } from "../../../stores/NetworkStore"
-import { CloseCodesMessages } from "../../../../../types/enum/CloseCodes"
+import { joinLobbyRoom } from "../../../game/lobby-logic"
+import { logIn, logOut } from "../../../stores/NetworkStore"
 import { FIREBASE_CONFIG } from "../../utils/utils"
 //import AnonymousButton from "./anonymous-button"
 import { StyledFirebaseAuth } from "./styled-firebase-auth"
-import { logger } from "../../../../../utils/logger"
-import store from "../../../stores"
 import { throttle } from "../../../../../utils/function"
-import { LocalStoreKeys, localStore } from "../../utils/store"
 
 import "firebaseui/dist/firebaseui.css"
 import "./login.css"
@@ -27,29 +24,9 @@ export default function Login() {
 
   const preJoinLobby = throttle(async function prejoin() {
     setPrejoining(true)
-    firebase.auth().onAuthStateChanged(async (user) => {
-      if (user) {
-        const client = store.getState().network.client
-        try {
-          const token = await user.getIdToken()
-          const room = await client.join("lobby", {
-            idToken: token
-          })
-          localStore.set(LocalStoreKeys.RECONNECTION_LOBBY, { reconnectionToken: room.reconnectionToken, roomId: room.roomId }, 30)
-          if (room.connection.isOpen) {
-            room.connection.close()
-          }
-          navigate("/lobby")
-        } catch (err) {
-          logger.error(err)
-          const errorMessage = CloseCodesMessages[err] ?? "UNKNOWN_ERROR"
-          if (errorMessage) {
-            dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`, { error: err })))
-          }
-          setPrejoining(false)
-        }
-      }
-    })
+    return joinLobbyRoom(dispatch, navigate)
+      .then(() => navigate("/lobby"))
+      .catch(() => setPrejoining(false))
   }, 1000)
 
   const uiConfig = {
