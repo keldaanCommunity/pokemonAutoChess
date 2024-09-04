@@ -46,3 +46,13 @@ The Pokémon Auto Chess League (PACL) is a league that runs events and tournamen
 - location: Thailand
 
 First Thai Public Server with many Thai Pokemon Auto Chess Member. We have daily minigames with booster packs give away 🎴
+
+# PokeChessBR
+
+- url: https://pokechess.com.br/
+- logo: https://i.ibb.co/GM3Q55w/logo-pokechessbr.jpg
+- creator: Dog e Bronzato
+- discord: https://discord.gg/55R8bHxCJg
+- location: Brazil - São Paulo (South America)
+
+O servidor PokeChessBR é a casa da comunidade brasileira dos amantes de Auto Chess e Pokémon. Sinta-se bem-vindo a participar de nossa comunidade. Seja um jogador experiente ou um jogador iniciante buscando ajuda, seu lugar é aqui!

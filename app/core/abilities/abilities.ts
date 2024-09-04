@@ -586,7 +586,7 @@ export class PsychicStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [50, 100, 200][pokemon.stars - 1] ?? 200
+    const damage = [40, 80, 160][pokemon.stars - 1] ?? 160
     const cells = board.getAdjacentCells(
       target.positionX,
       target.positionY,
@@ -7169,7 +7169,7 @@ export class MagicPowderStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
-    const silenceDuration = [2000, 4000, 6000][pokemon.stars - 1] ?? 6000
+    const silenceDuration = [2000, 3000, 4000][pokemon.stars - 1] ?? 4000
     pokemon.addShield(shield, pokemon, 1, crit)
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
@@ -9394,7 +9394,7 @@ export class DrainPunchStrategy extends AbilityStrategy {
       crit,
       true
     )
-    pokemon.handleHeal(result.takenDamage * 4, pokemon, 1, crit)
+    pokemon.handleHeal(result.takenDamage * 4, pokemon, 0, false)
   }
 }
 
