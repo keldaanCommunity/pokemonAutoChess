@@ -40,7 +40,7 @@ The Pokémon Auto Chess League (PACL) is a league that runs events and tournamen
 # Penumbra Auto Chess
 
 - url: https://www.penumbra-autochess.com/
-- logo: https://www.penumbra-autochess.com/assets/ui/pokemon_autochess_final.svg
+- logo: https://i.imgur.com/wclOp6U.png
 - creator: Kone
 - discord: https://discord.gg/jnwUBxKSqZ
 - location: Thailand
