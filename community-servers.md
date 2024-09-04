@@ -11,7 +11,7 @@ The official server maintained by the creators of Pokemon Auto Chess
 # Dark’s Auto Chess
 
 - url: https://pokemon.darkatek7.com
-- logo: https://i.ibb.co/PtQj13y/logo-dark.png
+- logo: https://darkatek7.com/content/images/2024/09/Darks-s-auto-chess-1.jpg
 - creator: Darkatek7
 - discord: https://discord.gg/kGkUfRqMVJ
 - location: Austria/Europe
@@ -56,3 +56,12 @@ First Thai Public Server with many Thai Pokemon Auto Chess Member. We have daily
 - location: Brazil - São Paulo (South America)
 
 O servidor PokeChessBR é a casa da comunidade brasileira dos amantes de Auto Chess e Pokémon. Sinta-se bem-vindo a participar de nossa comunidade. Seja um jogador experiente ou um jogador iniciante buscando ajuda, seu lugar é aqui!
+
+#  UW Online POC
+
+- url: https://uruwhy.online/
+- logo: https://i.imgur.com/HA3p47P.png
+- creator: Gate
+- location: Brazil
+
+UW POC es un servidor apuntado para la comunidad latina de PokemonAutoChess, el servidor se mantendra actualizado con el ultimo release oficial.
