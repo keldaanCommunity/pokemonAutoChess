@@ -23,7 +23,7 @@ export default function Lobby() {
   const lobby = useAppSelector((state) => state.network.lobby)
 
   const [gameToReconnect, setGameToReconnect] = useState<string | null>(
-    localStore.get(LocalStoreKeys.RECONNECTION_GAME)
+    localStore.get(LocalStoreKeys.RECONNECTION_GAME)?.roomId
   )
   const networkError = useAppSelector(state => state.network.error)
   const gameRooms: RoomAvailable[] = useAppSelector(

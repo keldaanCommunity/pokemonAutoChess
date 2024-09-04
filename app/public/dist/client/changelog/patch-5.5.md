@@ -11,6 +11,13 @@
 - Bellsprout line is now regional in Grass/Flora regions, and Weepinbell no longer evolve with berries
 - Tangela is now additional and no longer regional
 - Changed Lunala: HP 250 → 300, Def/SpeDef 5/5 → 3/3
+- Nerf Drain Punch (Mienshao): percentage of HP healed no longer scales with AP
+- Nerf Magic Powder (Hatenna): silence duration 2/4/6 → 2/3/4
+- Buff Minior: attack speed gain on attack 4→5% ; added AP scaling on all core forms effects
+- Nerf Alolan Raichu: PP 80 → 100
+- Changed Corsola line: now Rock/Aquatic/Ghost instead of Water/Rock/Ghost
+- Nerf Psychic (Solosis): 50/100/200 → 40/80/160 special damage
+- Buff Snorunt line: Attack 8/17/28 → 10/20/36, def/spdef 2/2/2 → 2/3/4, PP 100/100/100 → 100/90/80
 
 # Changes to Synergies
 

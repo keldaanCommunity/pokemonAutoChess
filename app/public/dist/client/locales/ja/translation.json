@@ -915,7 +915,7 @@
     "STEAM_ERUPTION": "ターゲットと隣接する敵全員に[80,SP]のSPECIALを与え、3秒間炎上させる",
     "APPLE_ACID": "前方の対象に[15,30,60,SP]のSPECIALを与え、DEFとSPE_DEFを[5,SP]ポイント下げる。",
     "SACRED_SWORD": "対象に[100,SP]TRUEを与える",
-    "PSYCHIC": "[50,100,200,SP] SPECIAL を与え、ターゲットと隣接する敵に 15 PP を燃焼します",
+    "PSYCHIC": "[40,80,160,SP] SPECIAL を与え、ターゲットと隣接する敵に 15 PP を燃焼します",
     "DIVE": "水中に潜って[10,20,40,SP] SHIELDを獲得し、敵チームの中央に再出現し、隣接するすべてのユニットに[10,20,40,SP] SPECIALとFREEZEを1秒間与える",
     "SPIKE_ARMOR": "[3,5,10]秒間、このポケモンを近接攻撃したターゲットは傷を受け、現在のDEFの[100,SP]%に等しいSPECIALを受ける。",
     "FUTURE_SIGHT": "敵5体に[15,30,60,SP]SPECIALを与える",
