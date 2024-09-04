@@ -11,7 +11,7 @@ The official server maintained by the creators of Pokemon Auto Chess
 # Dark’s Auto Chess
 
 - url: https://pokemon.darkatek7.com
-- logo: https://darkatek7.com/content/images/2024/09/Darks-s-auto-chess-1.jpg
+- logo: https://i.imgur.com/77xRt6G.png
 - creator: Darkatek7
 - discord: https://discord.gg/kGkUfRqMVJ
 - location: Austria/Europe
