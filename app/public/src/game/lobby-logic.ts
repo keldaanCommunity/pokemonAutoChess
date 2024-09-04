@@ -87,13 +87,14 @@ export async function joinLobbyRoom(
             // otherwise, connect to the lobby room
             const idToken = await user.getIdToken()
             room = await client.join("lobby", { idToken })
-            // store reconnection token for 5 minutes ; server may kick the inactive users before that
-            localStore.set(
-              LocalStoreKeys.RECONNECTION_LOBBY,
-              room.reconnectionToken,
-              60 * 5
-            )
           }
+
+          // store reconnection token for 5 minutes ; server may kick the inactive users before that
+          localStore.set(
+            LocalStoreKeys.RECONNECTION_LOBBY,
+            room.reconnectionToken,
+            60 * 5
+          )
 
           // setup event listeners for the lobby room
 
