@@ -1309,7 +1309,7 @@
     "STEAM_ERUPTION": "Deals [80,SP] SPECIAL to the target and all adjacent enemies, and BURN them for 3 seconds",
     "APPLE_ACID": "Deals [15,30,60,SP] SPECIAL to the 3 targets in front, and lower their DEF and SPE_DEF by [5,SP] points",
     "SACRED_SWORD": "Deals [100,SP] TRUE to the target",
-    "PSYCHIC": "Deals [50,100,200,SP] SPECIAL and burn 15 PP to the target and adjacent enemies",
+    "PSYCHIC": "Deals [40,80,160,SP] SPECIAL and burn 15 PP to the target and adjacent enemies",
     "PSYBEAM": "Deal [25,50,100,SP] special damage to all enemy Pokémon behind the target with 50% chance to make them CONFUSION for 4 seconds",
     "DIVE": "Dives underwater and gain [10,20,40,SP] SHIELD, then reappears in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL and FREEZE all adjacent units for 1 second",
     "SPIKE_ARMOR": "For [3,5,10] seconds, targets that melee attack this Pokémon receive WOUND and take SPECIAL equal to [100,SP]% of current DEF",

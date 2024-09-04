@@ -1308,7 +1308,7 @@
     "STEAM_ERUPTION": "Fügt dem Ziel und allen angrenzenden Feinden [80,SP] SPECIAL zu und BURN sie 3 Sekunden lang",
     "APPLE_ACID": "Fügt dem Ziel [15,30,60,SP] SPECIAL an den Zielen vor dir und senkt seine DEF und SPE_DEF um [5,SP] Punkte",
     "SACRED_SWORD": "Fügt dem Ziel [100,SP] TRUE zu",
-    "PSYCHIC": "Verursacht [50,100,200,SP] SPECIAL und verbrennt das Ziel und angrenzenden Feinden 15 PP",
+    "PSYCHIC": "Verursacht [40,80,160,SP] SPECIAL und verbrennt das Ziel und angrenzenden Feinden 15 PP",
     "PSYBEAM": "Füge allen gegnerischen Pokémon hinter dem Ziel [25,50,100,SP] Spezialschaden zu, mit einer Chance von 50%, sie 4 Sekunden lang in CONFUSION zu versetzen",
     "DIVE": "Taucht unter Wasser und erhält [10,20,40,SP] SHIELD, taucht dann wieder in der Mitte des gegnerischen Teams auf und fügt allen benachbarten Einheiten [10,20,40,SP] SPECIAL und 1 Sekunden lang FREEZE zu",
     "SPIKE_ARMOR": "Für [3,5,10] Sekunden erhalten Ziele, die dieses Pokémon im Nahkampf angreifen, eine WOUND und erhalten ein SPECIAL in Höhe von [100,SP] % der aktuellen DEF",

@@ -16,6 +16,7 @@
 - Buff Minior: attack speed gain on attack 4→5% ; added AP scaling on all core forms effects
 - Nerf Alolan Raichu: PP 80 → 100
 - Changed Corsola line: now Rock/Aquatic/Ghost instead of Water/Rock/Ghost
+- Nerf Psychic (Solosis): 50/100/200 → 40/80/160 special damage
 
 # Changes to Synergies
 
