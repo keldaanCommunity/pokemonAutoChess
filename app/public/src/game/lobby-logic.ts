@@ -100,11 +100,17 @@ export async function joinLobbyRoom(
 
           room.onLeave((code: number) => {
             logger.info(`left lobby with code ${code}`)
-            const errorMessage = CloseCodesMessages[code]
-            if (errorMessage) {
-              dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
+            const shouldGoToLoginPage =
+              code === CloseCodes.USER_INACTIVE ||
+              code === CloseCodes.USER_BANNED ||
+              code === CloseCodes.USER_NOT_AUTHENTICATED
+            if (shouldGoToLoginPage) {
+              const errorMessage = CloseCodesMessages[code]
+              if (errorMessage) {
+                dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
+              }
+              navigate("/")
             }
-            navigate("/")
           })
 
           room.state.messages.onAdd((m) => {
