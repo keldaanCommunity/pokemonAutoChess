@@ -2041,6 +2041,7 @@
     "MAGIKARP": "8 Magikarp évoluent en Léviator",
     "FEEBAS": "6 $t(pkm.FEEBAS) évoluent en $t(pkm.MILOTIC)",
     "GIRATINA": "Giratina bascule entre sa forme altérée et sa forme d'origine en fonction de sa position sur le plateau",
+    "MELOETTA": "Meloetta bascule entre sa forme Danse et sa forme Chant en fonction de sa position sur le plateau",
     "UNOWN": "Zarbi ne peut pas tenir d'objets et disparaît après un combat ou après avoir lancé sa capacité",
     "GLIGAR": "Gligar recherche un RAZOR_FANG. Si le Pokémon souffre du POISONNED, il gagnera des HP au lieu de subir des dégâts.",
     "POISON_HEAL": "Si le Pokémon souffre du POISONNED, il gagnera des HP au lieu de subir des dégâts",

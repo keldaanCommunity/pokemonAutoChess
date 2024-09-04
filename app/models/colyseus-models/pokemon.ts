@@ -4760,6 +4760,7 @@ export class Meloetta extends Pokemon {
   range = 4
   skill = Ability.RELIC_SONG
   attackSprite = AttackSprite.SOUND_RANGE
+  passive = Passive.MELOETTA
 
   onChangePosition(x: number, y: number, player: Player) {
     if (y === 3) {
@@ -4784,6 +4785,7 @@ export class PirouetteMeloetta extends Pokemon {
   range = 1
   skill = Ability.U_TURN
   attackSprite = AttackSprite.FIGHTING_MELEE
+  passive = Passive.MELOETTA
 
   onChangePosition(x: number, y: number, player: Player) {
     if (y !== 3) {
