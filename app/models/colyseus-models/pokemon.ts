@@ -7968,6 +7968,37 @@ export class Persian extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class AlolanMeowth extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.DARK])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.PERSIAN
+  hp = 80
+  atk = 8
+  def = 3
+  speDef = 3
+  maxPP = 90
+  range = 1
+  skill = Ability.PICKUP
+  regional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class AlolanPersian extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.DARK])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 200
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 90
+  range = 1
+  skill = Ability.PICKUP
+  regional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
 export class Hoothoot extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.NORMAL,
@@ -14775,6 +14806,8 @@ export const PokemonClasses: Record<
   [Pkm.PRIMAL_GROUDON]: PrimalGroudon,
   [Pkm.MEOWTH]: Meowth,
   [Pkm.PERSIAN]: Persian,
+  [Pkm.ALOLAN_MEOWTH]: AlolanMeowth,
+  [Pkm.ALOLAN_PERSIAN]: AlolanPersian,
   [Pkm.DEINO]: Deino,
   [Pkm.ZWEILOUS]: Zweilous,
   [Pkm.HYDREIGON]: Hydreigon,

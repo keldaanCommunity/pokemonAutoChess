@@ -188,7 +188,7 @@ export class PaydayStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 2 ? 60 : pokemon.stars === 3 ? 120 : 30
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 30
 
     const { death } = target.handleSpecialDamage(
       damage,
@@ -199,8 +199,42 @@ export class PaydayStrategy extends AbilityStrategy {
     )
     if (death && pokemon.player) {
       pokemon.player.money += pokemon.stars
-      pokemon.count.moneyCount++
+      pokemon.count.moneyCount += pokemon.stars
     }
+  }
+}
+
+export class PickupStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 30
+
+    if (target.items.size > 0 && pokemon.items.size < 3) {
+      const item = target.items.values().next().value
+      target.items.delete(item)
+      if (item === Item.MAX_REVIVE && target.status.resurection) {
+        target.status.resurection = false
+      }
+      pokemon.items.add(item)
+      pokemon.simulation.applyItemEffect(pokemon, item)
+    } else {
+      if (target.player) {
+        const moneyStolen = max(target.player.money)(pokemon.stars)
+        target.player.money -= moneyStolen
+        if (pokemon.player) {
+          pokemon.player.money += moneyStolen
+          pokemon.count.moneyCount += moneyStolen
+        }
+      }
+    }
+
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 
@@ -9667,6 +9701,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PSYCHIC_SURGE]: new PsychicSurgeStrategy(),
   [Ability.MIND_BLOWN]: new MindBlownStrategy(),
   [Ability.PAYDAY]: new PaydayStrategy(),
+  [Ability.PICKUP]: new PickupStrategy(),
   [Ability.BEAT_UP]: new BeatUpStrategy(),
   [Ability.BLUE_FLARE]: new BlueFlareStrategy(),
   [Ability.FUSION_BOLT]: new FusionBoltStrategy(),

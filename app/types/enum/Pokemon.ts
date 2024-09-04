@@ -272,6 +272,8 @@ export enum Pkm {
   PRIMAL_GROUDON = "PRIMAL_GROUDON",
   MEOWTH = "MEOWTH",
   PERSIAN = "PERSIAN",
+  ALOLAN_MEOWTH = "ALOLAN_MEOWTH",
+  ALOLAN_PERSIAN = "ALOLAN_PERSIAN",
   DEINO = "DEINO",
   ZWEILOUS = "ZWEILOUS",
   HYDREIGON = "HYDREIGON",
@@ -1096,6 +1098,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.PRIMAL_GROUDON]: "0383-0001",
   [Pkm.MEOWTH]: "0052",
   [Pkm.PERSIAN]: "0053",
+  [Pkm.ALOLAN_MEOWTH]: "0052-0001",
+  [Pkm.ALOLAN_PERSIAN]: "0053-0001",
   [Pkm.DEINO]: "0633",
   [Pkm.ZWEILOUS]: "0634",
   [Pkm.HYDREIGON]: "0635",
@@ -1917,6 +1921,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SPEAROW]: Pkm.SPEAROW,
   [Pkm.MEOWTH]: Pkm.MEOWTH,
   [Pkm.PERSIAN]: Pkm.MEOWTH,
+  [Pkm.ALOLAN_MEOWTH]: Pkm.ALOLAN_MEOWTH,
+  [Pkm.ALOLAN_PERSIAN]: Pkm.ALOLAN_MEOWTH,
   [Pkm.DEINO]: Pkm.DEINO,
   [Pkm.ZWEILOUS]: Pkm.DEINO,
   [Pkm.HYDREIGON]: Pkm.DEINO,
@@ -2481,7 +2487,8 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.ZORUA]: [Pkm.HISUI_ZORUA],
   [Pkm.GRIMER]: [Pkm.ALOLAN_GRIMER],
   [Pkm.NIDORANF]: [Pkm.NIDORANM],
-  [Pkm.SNEASEL]: [Pkm.HISUI_SNEASEL]
+  [Pkm.SNEASEL]: [Pkm.HISUI_SNEASEL],
+  [Pkm.MEOWTH]: [Pkm.ALOLAN_MEOWTH]
 } as const
 
 export enum PkmDuo {
@@ -3940,6 +3947,16 @@ export const AnimationConfig: {
     emote: AnimationType.DeepBreath
   },
   [Pkm.PERSIAN]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.ALOLAN_MEOWTH]: {
+    attack: AnimationType.MultiStrike,
+    ability: AnimationType.Pose,
+    emote: AnimationType.DeepBreath
+  },
+  [Pkm.ALOLAN_PERSIAN]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Attack,
     emote: AnimationType.Shoot

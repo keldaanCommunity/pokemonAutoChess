@@ -1,5 +1,6 @@
 # New Pokemons:
-- 
+- Alolan Meowth
+- Alolan Persian
 
 # Changes to Pokemon & Abilities
 
