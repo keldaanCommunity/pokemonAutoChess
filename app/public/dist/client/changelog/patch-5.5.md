@@ -23,7 +23,7 @@
 
 # Changes to Synergies
 
-
+- Fire: chance to burn no longer increased after fire 2 ; Fire 8: get a fire shard after each round
 
 # Changes to Items
 

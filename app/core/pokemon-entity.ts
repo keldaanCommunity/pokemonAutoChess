@@ -878,13 +878,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (this.effects.has(Effect.BLAZE)) {
         burnChance = 0.3
       } else if (this.effects.has(Effect.VICTORY_STAR)) {
-        burnChance = 0.4
+        burnChance = 0.3
         this.addAttack(1, this, 0, false)
       } else if (this.effects.has(Effect.DROUGHT)) {
-        burnChance = 0.5
+        burnChance = 0.3
         this.addAttack(2, this, 0, false)
       } else if (this.effects.has(Effect.DESOLATE_LAND)) {
-        burnChance = 1
+        burnChance = 0.3
         this.addAttack(3, this, 0, false)
       }
       if (chance(burnChance)) {

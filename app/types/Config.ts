@@ -689,7 +689,8 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.SMOOTH_ROCK]: {},
   [Item.BLACK_AUGURITE]: {},
   [Item.POKERUS_VIAL]: {},
-  [Item.ROTOM_PHONE]: {}
+  [Item.ROTOM_PHONE]: {},
+  [Item.FIRE_SHARD]: {}
 }
 
 export type TilesetExchangeFile = {
