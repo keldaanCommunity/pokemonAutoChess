@@ -4,12 +4,14 @@ import {
 } from "../types/interfaces/LeaderboardInfo"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { fetchBots } from "./bots"
+import { logger } from "../utils/logger"
 
 let leaderboard = new Array<ILeaderboardInfo>()
 let levelLeaderboard = new Array<ILeaderboardInfo>()
 let botLeaderboard = new Array<ILeaderboardBotInfo>()
 
 export function fetchLeaderboards() {
+  logger.info("Refreshing leaderboards...")
   return Promise.all([
     fetchUserLeaderboard(),
     fetchBotsLeaderboard(),
