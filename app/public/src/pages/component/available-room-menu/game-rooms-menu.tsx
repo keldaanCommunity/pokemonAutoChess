@@ -48,7 +48,7 @@ export function GameRoomsMenu() {
                     await lobby.leave(false)
                 }
                 if (game.connection.isOpen) {
-                    game.connection.close()
+                    await game.leave(false)
                 }
                 dispatch(leaveLobby())
                 navigate("/game")

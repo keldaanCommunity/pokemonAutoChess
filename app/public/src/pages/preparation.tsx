@@ -221,7 +221,7 @@ export default function Preparation() {
             await r.leave()
           }
           if (game.connection.isOpen) {
-            game.connection.close()
+            await game.leave(false)
           }
           dispatch(leavePreparation())
           navigate("/game")

@@ -107,7 +107,7 @@ export default function AfterGame() {
           style={{ margin: "10px 0 0 10px" }}
           onClick={() => {
             if (room?.connection.isOpen) {
-              room.connection.close()
+              room.leave()
             }
             dispatch(leaveAfter())
             localStore.delete(LocalStoreKeys.RECONNECTION_AFTER_GAME)
