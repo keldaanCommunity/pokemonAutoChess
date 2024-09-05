@@ -4760,20 +4760,38 @@ export class Meloetta extends Pokemon {
   range = 4
   skill = Ability.RELIC_SONG
   attackSprite = AttackSprite.SOUND_RANGE
+  passive = Passive.MELOETTA
+
+  onChangePosition(x: number, y: number, player: Player) {
+    if (y === 3) {
+      player.transformPokemon(this, Pkm.PIROUETTE_MELOETTA)
+    }
+  }
 }
 
 export class PirouetteMeloetta extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.SOUND])
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.SOUND,
+    Synergy.FIGHTING
+  ])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 300
-  atk = 30
+  atk = 25
   def = 5
   speDef = 5
-  maxPP = 120
-  range = 4
-  skill = Ability.DEFAULT
-  attackSprite = AttackSprite.SOUND_RANGE
+  maxPP = 60
+  range = 1
+  skill = Ability.U_TURN
+  attackSprite = AttackSprite.FIGHTING_MELEE
+  passive = Passive.MELOETTA
+
+  onChangePosition(x: number, y: number, player: Player) {
+    if (y !== 3) {
+      player.transformPokemon(this, Pkm.MELOETTA)
+    }
+  }
 }
 
 export class Lugia extends Pokemon {
@@ -7965,6 +7983,37 @@ export class Persian extends Pokemon {
   range = 1
   skill = Ability.PAYDAY
   additional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class AlolanMeowth extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.DARK])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.PERSIAN
+  hp = 80
+  atk = 8
+  def = 3
+  speDef = 3
+  maxPP = 90
+  range = 1
+  skill = Ability.PICKUP
+  regional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class AlolanPersian extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.DARK])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 200
+  atk = 20
+  def = 3
+  speDef = 3
+  maxPP = 90
+  range = 1
+  skill = Ability.PICKUP
+  regional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -14775,6 +14824,8 @@ export const PokemonClasses: Record<
   [Pkm.PRIMAL_GROUDON]: PrimalGroudon,
   [Pkm.MEOWTH]: Meowth,
   [Pkm.PERSIAN]: Persian,
+  [Pkm.ALOLAN_MEOWTH]: AlolanMeowth,
+  [Pkm.ALOLAN_PERSIAN]: AlolanPersian,
   [Pkm.DEINO]: Deino,
   [Pkm.ZWEILOUS]: Zweilous,
   [Pkm.HYDREIGON]: Hydreigon,
@@ -14854,6 +14905,7 @@ export const PokemonClasses: Record<
   [Pkm.HAKAMO_O]: HakamoO,
   [Pkm.KOMMO_O]: KommoO,
   [Pkm.MELOETTA]: Meloetta,
+  [Pkm.PIROUETTE_MELOETTA]: PirouetteMeloetta,
   [Pkm.ALTARIA]: Altaria,
   [Pkm.MEGA_ALTARIA]: MegaAltaria,
   [Pkm.CASTFORM]: Castform,
@@ -15048,7 +15100,6 @@ export const PokemonClasses: Record<
   [Pkm.MIME_JR]: MimeJr,
   [Pkm.MR_MIME]: MrMime,
   [Pkm.ORIGIN_GIRATINA]: OriginGiratina,
-  [Pkm.PIROUETTE_MELOETTA]: PirouetteMeloetta,
   [Pkm.MELMETAL]: Melmetal,
   [Pkm.HOOPA]: Hoopa,
   [Pkm.HOOPA_UNBOUND]: HoopaUnbound,

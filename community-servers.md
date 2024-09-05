@@ -11,7 +11,7 @@ The official server maintained by the creators of Pokemon Auto Chess
 # Dark’s Auto Chess
 
 - url: https://pokemon.darkatek7.com
-- logo: https://i.ibb.co/PtQj13y/logo-dark.png
+- logo: https://i.imgur.com/77xRt6G.png
 - creator: Darkatek7
 - discord: https://discord.gg/kGkUfRqMVJ
 - location: Austria/Europe
@@ -40,7 +40,7 @@ The Pokémon Auto Chess League (PACL) is a league that runs events and tournamen
 # Penumbra Auto Chess
 
 - url: https://www.penumbra-autochess.com/
-- logo: https://www.penumbra-autochess.com/assets/ui/pokemon_autochess_final.svg
+- logo: https://i.imgur.com/wclOp6U.png
 - creator: Kone
 - discord: https://discord.gg/jnwUBxKSqZ
 - location: Thailand
@@ -56,3 +56,12 @@ First Thai Public Server with many Thai Pokemon Auto Chess Member. We have daily
 - location: Brazil - São Paulo (South America)
 
 O servidor PokeChessBR é a casa da comunidade brasileira dos amantes de Auto Chess e Pokémon. Sinta-se bem-vindo a participar de nossa comunidade. Seja um jogador experiente ou um jogador iniciante buscando ajuda, seu lugar é aqui!
+
+#  UW Online POC
+
+- url: https://uruwhy.online/
+- logo: https://i.imgur.com/HA3p47P.png
+- creator: Gate
+- location: Brazil
+
+UW POC es un servidor apuntado para la comunidad latina de PokemonAutoChess, el servidor se mantendra actualizado con el ultimo release oficial.

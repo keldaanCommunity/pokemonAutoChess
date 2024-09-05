@@ -52,7 +52,7 @@ MONGO_URI=mongodb://localhost:27017/dev
 
 ### Firebase
 
-Pokemon Auto Chess use the Firebase authentication module to let players create accounts and login to the game.
+Pokemon Auto Chess uses the Firebase authentication module to let players create accounts and login to the game.
 
 First create an account and a firebase project at [https://console.firebase.google.com/](https://console.firebase.google.com/).
 
