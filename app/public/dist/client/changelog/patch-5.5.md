@@ -41,6 +41,7 @@
 # Bugfix
 
 - Fixed a bug that would lead to some pokemons being unkillable/uninnteractable after resurecting (thanks to Defenestrator for the analysis)
+- Fixed resurection not taking into account permanent bonus max HP
 
 # Misc
 

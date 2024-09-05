@@ -1516,17 +1516,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   resurrect() {
-    const cloneForStatsReference = PokemonFactory.createPokemonFromName(
-      this.name
-    )
-    this.life = cloneForStatsReference.hp
+    this.life = this.refToBoardPokemon.hp
     this.shield = 0
     this.pp = 0
     this.ap = 0
-    this.atk = cloneForStatsReference.atk
-    this.def = cloneForStatsReference.def
-    this.speDef = cloneForStatsReference.speDef
-    this.atkSpeed = cloneForStatsReference.atkSpeed
+    this.atk = this.refToBoardPokemon.atk
+    this.def = this.refToBoardPokemon.def
+    this.speDef = this.refToBoardPokemon.speDef
+    this.atkSpeed = this.refToBoardPokemon.atkSpeed
     this.critChance = DEFAULT_CRIT_CHANCE
     this.critPower = DEFAULT_CRIT_POWER
     this.count = new Count()
