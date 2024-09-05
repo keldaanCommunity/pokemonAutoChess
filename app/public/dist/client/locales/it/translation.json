@@ -1998,7 +1998,16 @@
     "SHINY_STONE": "Aumenta di 2 la sinergia LIGHT ed evoca un altro punto luminoso sulla cella del possessore",
     "RARE_CANDY": "Dopo ogni round, se il possessore può evolversi, evocane una coppia con 1 STAR nella tua panchina (Tranne i Pokèmon Unici, Leggendari o Schiusi)",
     "EVIOLITE": "Può essere equipaggiato solo da Pokèmon non evoluti. Previene il possessore dall'evolversi.",
-    "WHITE_FLUTE": "Evoca 3 Pokèmon WILD attorno al possessore all'inizio del combattimento. La loro rarità e tier aumenta a seconda del livello e turno"
+    "WHITE_FLUTE": "Evoca 3 Pokèmon WILD attorno al possessore all'inizio del combattimento. La loro rarità e tier aumenta a seconda del livello e turno",
+    "GOLD_BOTTLE_CAP": "Ottieni 1% di CRIT_CHANCE e di CRIT_POWER per ogni GOLD che possiedi. Ottieni 1 GOLD per ogni KO fatto dal possessore, e un jackpot di 5 GOLD se ha eliminato l'ultimo nemico.",
+    "ABSORB_BULB": "Tutte le riduzioni del danno vengono assorbite dal bulbo. Una volta sotto il 50% di HP, il bulbo esplode, infliggendo tutto il danno assorbito ai nemci adiacenti come SPECIAL.",
+    "SACRED_ASH": "Ottieni RESURECTION. Dopo essere risorti, fino a 3 alleati KO vengono rianimati, però senza oggetti",
+    "COMET_SHARD": "Inizia il combattimento andando in picchiata come una cometa su un nemico nella parte opposta del terreno, infliggendogli il 300% dell'ATK come SPECIAL e ottenendo PROTECT per 3 secondi.",
+    "DAMP_ROCK": "Il possessore riceve la sinergia WATER e conta per 3 verso RAIN. Può essere usato solo su Pokèmon ROCK",
+    "ICY_ROCK": "Il possessore riceve la sinergia ICE e conta per 3 verso SNOW. Può essere usato solo su Pokèmon ROCK",
+    "HEAT_ROCK": "Il possessore riceve la sinergia FIRE e conta per 3 verso SUN. Può essere usato solo su Pokèmon ROCK",
+    "SMOOTH_ROCK": "Il possessore riceve la sinergia GROUND e conta per 3 verso SANDSTORM. Può essere usato solo da Pokèmon ROCK.",
+    "BLACK_AUGURITE": "Il possessore riceve la sinergia DARK e conta per 3 verso NIGHT. Può essere usato solo da Pokèmon ROCK"
   },
   "passive_description": {
     "NONE": "Nessun passivo",
