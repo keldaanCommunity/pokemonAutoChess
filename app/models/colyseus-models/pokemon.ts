@@ -3810,8 +3810,8 @@ export class Slowking extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.AQUATIC])
   rarity = Rarity.UNCOMMON
   stars = 3
-  hp = 200
-  atk = 18
+  hp = 260
+  atk = 24
   def = 6
   speDef = 4
   maxPP = 100
