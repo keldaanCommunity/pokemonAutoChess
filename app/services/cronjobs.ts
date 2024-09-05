@@ -3,7 +3,6 @@ import dayjs from "dayjs"
 import admin from "firebase-admin"
 import { UserRecord } from "firebase-admin/lib/auth/user-record"
 import { logger } from "../utils/logger"
-import { fetchLeaderboards } from "./leaderboard"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
 import TitleStatistic from "../models/mongo-models/title-statistic"
@@ -17,35 +16,27 @@ import {
 
 export function initCronJobs() {
   logger.debug("init cron jobs")
-  CronJob.from({
-    cronTime: "0 0/10 * * * *", // every 10 minutes
-    timeZone: "Europe/Paris",
-    onTick: () => {
-      fetchLeaderboards()
-    },
-    start: true
-  })
 
   CronJob.from({
-    cronTime: "0 8 * * *", // every day at 8am
+    cronTime: "0 22 * * *", // every day at 8am
     timeZone: "Europe/Paris",
     onTick: () => deleteOldAnonymousAccounts(),
     start: true
   })
   CronJob.from({
-    cronTime: "5 8 * * *", // every day at 8:05am
+    cronTime: "5 22 * * *", // every day at 8:05am
     timeZone: "Europe/Paris",
     onTick: () => deleteOldHistory(),
     start: true
   })
   CronJob.from({
-    cronTime: "10 8 * * *", // every day at 8:10am
+    cronTime: "10 22 * * *", // every day at 8:10am
     timeZone: "Europe/Paris",
     onTick: () => eloDecay(),
     start: true
   })
   CronJob.from({
-    cronTime: "15 8 * * *", // every day at 8:15am
+    cronTime: "15 22 * * *", // every day at 8:15am
     timeZone: "Europe/Paris",
     onTick: () => titleStats(),
     start: true
@@ -62,7 +53,7 @@ async function deleteOldAnonymousAccounts() {
   async function listAllUsers(nextPageToken?: string) {
     // List batch of users, 1000 at a time.
     const listUsersResult = await admin.auth().listUsers(1000, nextPageToken)
-    console.log(nextPageToken)
+    //logger.debug(nextPageToken)
     listUsersResult.users.forEach((userRecord) => {
       const lastSignInDate = dayjs(userRecord.metadata.lastSignInTime)
       if (
