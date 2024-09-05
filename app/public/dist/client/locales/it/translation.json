@@ -1984,7 +1984,21 @@
     "HARD_STONE": "Il possessore riceve la sinergia ROCK",
     "BIG_NUGGET": "Il possessore riceve la sinergia GROUND. Se il possessore è ancora vivo dopo 15 secondi ed ha ottenuto 5 stack della sinergia GROUND, ottieni 3 GOLD",
     "INCENSE": "Previene l'apparizione di Pokèmon WILD nel negozio se equipaggiato. Invece, ogni Pokèmon nel negozio ha un probabilità del 5% di avere in comune una sinergia del possessore.",
-    "EXP_SHARE": "Ottieni i migliori valori di ATK, DEF e SPE_DEF dai alleati adiacenti nella stessa riga"
+    "EXP_SHARE": "Ottieni i migliori valori di ATK, DEF e SPE_DEF dai alleati adiacenti nella stessa riga",
+    "POKERUS_VIAL": "Infetta il possessore con il POKERUS, guadagnando ogni 2 secondi 1 ATK e 10 AP e può trasmetterlo agli alleati",
+    "ROTOM_PHONE": "Il possessore riceve la sinergia GHOST. Evoca un Rotom Drone affianco al possessore",
+    "METEORITE": "Un meteorite che sembra interagisca con Deoxys. Continua a rilasciare un luce fioca ed è tiepido al tocco.",
+    "BERRY_JUICE": "Viene consumata una volta al di sotto del 50% di HP, recupera tutti i HP",
+    "TRASH": "I rimasugli di un oggetto artificiale. Non fa nulla.",
+    "OLD_ROD": "Dopo ogni combattimento PvP, pesca un Pokèmon che viene aggiunto alla tua panchina. Può pescare Pokèmon WATER di rarità comune, non comune e Magikarp.",
+    "GOOD_ROD": "Dopo ogni combattimento PvP, pesca un Pokèmon che viene aggiunto alla tua panchina. Può pescare Pokèmon WATER di rarità rara e Feebas.",
+    "SUPER_ROD": "Dopo ogni combattimento PvP, pesca un Pokèmon che viene aggiunto alla tua panchina. Può pescare Pokèmon WATER di rarità epica e Wishiwashi.",
+    "DYNAMAX_BAND": "All'inizio del combattimento, aumenta i HP massimi del 300%.",
+    "GOLDEN_ROD": "Dopo ogni combattimento PvP, pesca un Pokèmon che viene aggiunto alla tua panchina. Può pescare Pokèmon unici o Pokèmon che hanno in comune la tua sinergia con valore più alto. Quando equipaggiato ad un Pokèmon, riottieni tutti gli oggetti equipaggiati al tuo inventario",
+    "SHINY_STONE": "Aumenta di 2 la sinergia LIGHT ed evoca un altro punto luminoso sulla cella del possessore",
+    "RARE_CANDY": "Dopo ogni round, se il possessore può evolversi, evocane una coppia con 1 STAR nella tua panchina (Tranne i Pokèmon Unici, Leggendari o Schiusi)",
+    "EVIOLITE": "Può essere equipaggiato solo da Pokèmon non evoluti. Previene il possessore dall'evolversi.",
+    "WHITE_FLUTE": "Evoca 3 Pokèmon WILD attorno al possessore all'inizio del combattimento. La loro rarità e tier aumenta a seconda del livello e turno"
   },
   "passive_description": {
     "NONE": "Nessun passivo",
