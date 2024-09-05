@@ -77,18 +77,6 @@ export default function Preparation() {
                   r = await client.reconnect(
                     cachedReconnectionToken
                   )
-                  if (r.name === "game") {
-                    if (r.connection.isOpen) {
-                      r.connection.close()
-                    }
-                    navigate("/game")
-                    return
-                  } else if (r.name !== "preparation") {
-                    if (r.connection.isOpen) {
-                      r.connection.close()
-                    }
-                    throw new Error("Preparation: Wrong room type.")
-                  }
                 } catch (error) {
                   logger.log(error)
                   localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
