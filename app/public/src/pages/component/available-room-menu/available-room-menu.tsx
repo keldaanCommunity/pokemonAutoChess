@@ -11,7 +11,7 @@ import {
 } from "../../../../../types"
 import { MAX_PLAYERS_PER_GAME } from "../../../../../types/Config"
 import { GameMode } from "../../../../../types/enum/Game"
-import { throttle } from "../../../../../utils/function"
+import { throttle, resolveIf } from "../../../../../utils/function"
 import { logger } from "../../../../../utils/logger"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { leaveLobby } from "../../../stores/LobbyStore"
@@ -62,7 +62,10 @@ export default function AvailableRoomMenu() {
           { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
           30
         )
-        await Promise.allSettled([lobby.leave(false), room.leave(false)])
+        await Promise.allSettled([
+          lobby.connection.isOpen && lobby.leave(false),
+          room.connection.isOpen && room.leave(false)
+        ])
         dispatch(leaveLobby())
         navigate("/preparation")
       }
