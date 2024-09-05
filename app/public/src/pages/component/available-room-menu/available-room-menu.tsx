@@ -133,7 +133,7 @@ export default function AvailableRoomMenu() {
     if (reconnectToken) {
       try {
         const room: Room<PreparationState> = await client.reconnect(reconnectToken)
-        if (room.name === "preparation" && room.state.gameMode === GameMode.QUICKPLAY) {
+        if (room.state.gameMode === GameMode.QUICKPLAY) {
           localStore.set(
             LocalStoreKeys.RECONNECTION_PREPARATION,
             { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
