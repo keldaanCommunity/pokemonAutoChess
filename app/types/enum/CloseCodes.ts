@@ -1,6 +1,9 @@
 // see https://github.com/Luka967/websocket-close-codes#websocket-close-codes
 export enum CloseCodes {
   NORMAL_CLOSURE = 1000,
+  NO_STATUS_RECEIVED = 1005,
+  ABNORMAL_CLOSURE = 1006,
+  TIMEOUT = 3008,
   USER_INACTIVE = 4001,
   USER_KICKED = 4002,
   USER_BANNED = 4003,
