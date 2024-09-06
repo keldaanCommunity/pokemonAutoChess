@@ -823,7 +823,9 @@ export enum Pkm {
   WISHIWASHI_SCHOOL = "WISHIWASHI_SCHOOL",
   PAWMI = "PAWMI",
   PAWMO = "PAWMO",
-  PAWMOT = "PAWMOT"
+  PAWMOT = "PAWMOT",
+  GOLDEEN = "GOLDEEN",
+  SEAKING = "SEAKING"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1649,7 +1651,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.WISHIWASHI_SCHOOL]: "0746-0001",
   [Pkm.PAWMI]: "0921",
   [Pkm.PAWMO]: "0922",
-  [Pkm.PAWMOT]: "0923"
+  [Pkm.PAWMOT]: "0923",
+  [Pkm.GOLDEEN]: "0118",
+  [Pkm.SEAKING]: "0119"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2475,7 +2479,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.WISHIWASHI_SCHOOL]: Pkm.WISHIWASHI,
   [Pkm.PAWMI]: Pkm.PAWMI,
   [Pkm.PAWMO]: Pkm.PAWMI,
-  [Pkm.PAWMOT]: Pkm.PAWMI
+  [Pkm.PAWMOT]: Pkm.PAWMI,
+  [Pkm.GOLDEEN]: Pkm.GOLDEEN,
+  [Pkm.SEAKING]: Pkm.GOLDEEN
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -6756,5 +6762,15 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Rumble
+  },
+  [Pkm.GOLDEEN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.RearUp,
+    emote: AnimationType.RearUp
+  },
+  [Pkm.SEAKING]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.RearUp,
+    emote: AnimationType.RearUp
   }
 }

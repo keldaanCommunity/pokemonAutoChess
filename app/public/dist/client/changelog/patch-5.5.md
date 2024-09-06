@@ -2,6 +2,8 @@
 - Alolan Meowth
 - Alolan Persian
 - Meloetta Pirouette
+- Goldeen
+- Seaking
 
 # Changes to Pokemon & Abilities
 

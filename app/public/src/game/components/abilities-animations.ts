@@ -1269,7 +1269,7 @@ export function displayAbility(
       break
 
     case Ability.WATERFALL:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+      addAbilitySprite(skill, coordinates, true).setScale(2).setDepth(1)
       break
 
     case Ability.HELPING_HAND:
