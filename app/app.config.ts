@@ -139,10 +139,6 @@ export default config({
       res.send(Pkm)
     })
 
-    app.get("/title-names", (req, res) => {
-      res.send(Title)
-    })
-
     app.get("/pokemons-index", (req, res) => {
       res.send(PkmIndex)
     })
