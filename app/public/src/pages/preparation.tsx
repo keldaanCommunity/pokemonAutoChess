@@ -217,12 +217,10 @@ export default function Preparation() {
             { reconnectionToken: game.reconnectionToken, roomId: game.roomId },
             5 * 60
           ) // 5 minutes allowed to start game
-          if (r.connection.isOpen) {
-            await r.leave()
-          }
-          if (game.connection.isOpen) {
-            await game.leave(false)
-          }
+          await Promise.allSettled([
+            r.connection.isOpen && r.leave(),
+            game.connection.isOpen && game.leave(false)
+          ])
           dispatch(leavePreparation())
           navigate("/game")
         }
