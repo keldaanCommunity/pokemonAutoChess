@@ -1685,9 +1685,9 @@
     "GROWTH": "Restore 15 HP every 2 seconds. Get another berry tree.",
     "SPORE": "Restore 30 HP every 2 seconds. Get a third berry tree.",
     "BLAZE": "30% chance to BURN",
-    "VICTORY_STAR": "40% chance to BURN, +1 ATK after every hit",
-    "DROUGHT": "50% chance to BURN, +2 ATK after every hit",
-    "DESOLATE_LAND": "100% chance to BURN, +3 ATK after every hit",
+    "VICTORY_STAR": "+1 ATK after every hit",
+    "DROUGHT": "+2 ATK after every hit",
+    "DESOLATE_LAND": "+3 ATK after every hit. After every round, get a FIRE_SHARD (max 1)",
     "RAIN_DANCE": "+4 PP per second. Get an Old Rod.",
     "DRIZZLE": "+7 PP per second. Get a Good Rod.",
     "PRIMORDIAL_SEA": "+10 PP per second. Get a Super Rod.",
@@ -1906,7 +1906,8 @@
     "ICY_ROCK": "Icy Rock",
     "HEAT_ROCK": "Heat Rock",
     "SMOOTH_ROCK": "Smooth Rock",
-    "BLACK_AUGURITE": "Black Augurite"
+    "BLACK_AUGURITE": "Black Augurite",
+    "FIRE_SHARD": "Fire Shard"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -2018,7 +2019,8 @@
     "ICY_ROCK": "Gives ICE synergy and counts for 3 towards SNOW. Can only be used on ROCK Pokémon",
     "HEAT_ROCK": "Gives FIRE synergy and counts for 3 towards SUN. Can only be used on ROCK Pokémon",
     "SMOOTH_ROCK": "Gives GROUND synergy and counts for 3 towards SANDSTORM. Can only be used on ROCK Pokémon",
-    "BLACK_AUGURITE": "Gives DARK synergy and counts for 3 towards NIGHT. Can only be used on ROCK Pokémon"
+    "BLACK_AUGURITE": "Gives DARK synergy and counts for 3 towards NIGHT. Can only be used on ROCK Pokémon",
+    "FIRE_SHARD": "Sacrifice 2 player HP to give permanently +2 ATK to a FIRE Pokémon. Immediately consumed when given."
   },
   "passive_description": {
     "NONE": "No passive",

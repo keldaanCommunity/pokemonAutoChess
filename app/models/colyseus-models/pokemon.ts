@@ -14019,20 +14019,9 @@ export class Trubbish extends Pokemon {
   attackSprite = AttackSprite.POISON_MELEE
   additional = true
 
-  defaultValues = {
-    [Stat.HP]: this.hp,
-    [Stat.ATK]: this.atk,
-    [Stat.DEF]: this.def,
-    [Stat.SPE_DEF]: this.speDef
-  }
-
   statIncreases = {
-    [Stat.HP]: 0,
-    [Stat.ATK]: 0,
     [Stat.ATK_SPEED]: 0,
     [Stat.AP]: 0,
-    [Stat.DEF]: 0,
-    [Stat.SPE_DEF]: 0,
     [Stat.CRIT_CHANCE]: 0,
     [Stat.PP]: 0,
     [Stat.SHIELD]: 0
@@ -14041,24 +14030,28 @@ export class Trubbish extends Pokemon {
   beforeSimulationStart({ player }: { player: Player }) {
     values(this.items).forEach((item) => {
       if (Berries.includes(item)) {
-        this.statIncreases[Stat.HP] += 10
+        this.hp += 10
         this.items.delete(item)
       }
       if (ItemComponents.includes(item)) {
-        this.statIncreases[Stat.HP] += 25
+        this.hp += 25
         if (ItemStats[item]) {
-          Object.entries(ItemStats[item]).forEach(
-            ([stat, value]) => (this.statIncreases[stat as Stat] += value)
-          )
+          Object.entries(ItemStats[item]).forEach(([stat, value]) => {
+            if (stat in this.statIncreases) {
+              this.statIncreases[stat as Stat] += value
+            }
+          })
         }
         this.items.delete(item)
       }
       if (ArtificialItems.includes(item)) {
-        this.statIncreases[Stat.HP] += 50
+        this.hp += 50
         if (ItemStats[item]) {
-          Object.entries(ItemStats[item]).forEach(
-            ([stat, value]) => (this.statIncreases[stat as Stat] += value)
-          )
+          Object.entries(ItemStats[item]).forEach(([stat, value]) => {
+            if (stat in this.statIncreases) {
+              this.statIncreases[stat as Stat] += value
+            }
+          })
         }
         this.items.delete(item)
 
@@ -14067,13 +14060,6 @@ export class Trubbish extends Pokemon {
         player.items.push(player.artificialItems[itemIndex])
       }
     })
-
-    // Update permanent stats
-    this.hp = this.defaultValues[Stat.HP] + this.statIncreases[Stat.HP]
-    this.atk = this.defaultValues[Stat.ATK] + this.statIncreases[Stat.ATK]
-    this.def = this.defaultValues[Stat.DEF] + this.statIncreases[Stat.DEF]
-    this.speDef =
-      this.defaultValues[Stat.SPE_DEF] + this.statIncreases[Stat.SPE_DEF]
   }
 
   afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
@@ -14095,12 +14081,8 @@ export class Trubbish extends Pokemon {
     // Carry over the stats gained with passive
     const garbodor = garbodorObj as Garbodor
     garbodor.statIncreases = {
-      [Stat.HP]: 0,
-      [Stat.ATK]: 0,
       [Stat.ATK_SPEED]: 0,
       [Stat.AP]: 0,
-      [Stat.DEF]: 0,
-      [Stat.SPE_DEF]: 0,
       [Stat.CRIT_CHANCE]: 0,
       [Stat.PP]: 0,
       [Stat.SHIELD]: 0
@@ -14112,11 +14094,6 @@ export class Trubbish extends Pokemon {
         garbodor.statIncreases[key] += trubbish.statIncreases[key]
       }
     })
-
-    garbodor.hp += garbodor.statIncreases[Stat.HP]
-    garbodor.atk += garbodor.statIncreases[Stat.ATK]
-    garbodor.def += garbodor.statIncreases[Stat.DEF]
-    garbodor.speDef += garbodor.statIncreases[Stat.SPE_DEF]
   }
 }
 
@@ -14136,12 +14113,8 @@ export class Garbodor extends Pokemon {
   additional = true
 
   statIncreases = {
-    [Stat.HP]: 0,
-    [Stat.ATK]: 0,
     [Stat.ATK_SPEED]: 0,
     [Stat.AP]: 0,
-    [Stat.DEF]: 0,
-    [Stat.SPE_DEF]: 0,
     [Stat.CRIT_CHANCE]: 0,
     [Stat.PP]: 0,
     [Stat.SHIELD]: 0
