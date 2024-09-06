@@ -73,7 +73,7 @@ import {
 } from "../../utils/board"
 import { repeat } from "../../utils/function"
 import { logger } from "../../utils/logger"
-import { max } from "../../utils/number"
+import { max, min } from "../../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { getWeather } from "../../utils/weather"
@@ -422,6 +422,16 @@ export class OnDragDropItemCommand extends Command<
         } else if (pokemon.name === Pkm.DEOXYS_SPEED) {
           player.transformPokemon(pokemon, Pkm.DEOXYS)
         }
+      }
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
+
+    if (item === Item.FIRE_SHARD) {
+      if (pokemon.types.has(Synergy.FIRE)) {
+        pokemon.atk += 2
+        player.life = min(1)(player.life - 2)
+        removeInArray(player.items, item)
       }
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
@@ -1079,6 +1089,18 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     const commands = new Array<Command>()
 
     this.state.players.forEach((player: Player) => {
+      const fireLevel = player.synergies.get(Synergy.FIRE) ?? 0
+      const fireSynergLevel = SynergyTriggers[Synergy.FIRE].filter(
+        (n) => n <= fireLevel
+      ).length
+      if (
+        fireSynergLevel === 4 &&
+        player.items.includes(Item.FIRE_SHARD) === false &&
+        player.life > 2
+      ) {
+        player.items.push(Item.FIRE_SHARD)
+      }
+
       const bestRod = FishingRods.find((rod) => player.items.includes(rod))
 
       if (bestRod && getFreeSpaceOnBench(player.board) > 0 && !isAfterPVE) {

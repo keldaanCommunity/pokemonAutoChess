@@ -17,9 +17,9 @@ import { initCronJobs } from "./services/cronjobs"
 import { fetchLeaderboards } from "./services/leaderboard"
 
 async function main() {
-  initCronJobs()
   fetchLeaderboards()
-  
+  setInterval(() => fetchLeaderboards(), 1000 * 60 * 10) // refresh every 10 minutes
+
   if (process.env.NODE_APP_INSTANCE) {
     const processNumber = Number(process.env.NODE_APP_INSTANCE || "0")
     initializeMetrics()
@@ -27,10 +27,12 @@ async function main() {
     if (processNumber === 0) {
       await matchMaker.createRoom("lobby", {})
       initializeLobby()
+      initCronJobs()
     }
   } else {
     await listen(app, process.env.PORT ? parseInt(process.env.PORT) : 9000)
     await matchMaker.createRoom("lobby", {})
+    initCronJobs()
   }
 }
 

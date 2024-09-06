@@ -62,12 +62,10 @@ export default function AvailableRoomMenu() {
           { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
           30
         )
-        if (lobby.connection.isOpen) {
-          await lobby.leave(false)
-        }
-        if (room.connection.isOpen) {
-          await room.leave(false)
-        }
+        await Promise.allSettled([
+          lobby.connection.isOpen && lobby.leave(false),
+          room.connection.isOpen && room.leave(false)
+        ])
         dispatch(leaveLobby())
         navigate("/preparation")
       }
@@ -113,12 +111,10 @@ export default function AvailableRoomMenu() {
             { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
             30
           )
-          if (lobby.connection.isOpen) {
-            await lobby.leave(false)
-          }
-          if (room.connection.isOpen) {
-            await room.leave(false)
-          }
+          await Promise.allSettled([
+            lobby.connection.isOpen && lobby.leave(false),
+            room.connection.isOpen && room.leave(false)
+          ])
           dispatch(leaveLobby())
           navigate("/preparation")
         } catch (error) {

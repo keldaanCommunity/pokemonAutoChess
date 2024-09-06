@@ -689,7 +689,8 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.SMOOTH_ROCK]: {},
   [Item.BLACK_AUGURITE]: {},
   [Item.POKERUS_VIAL]: {},
-  [Item.ROTOM_PHONE]: {}
+  [Item.ROTOM_PHONE]: {},
+  [Item.FIRE_SHARD]: {}
 }
 
 export type TilesetExchangeFile = {
@@ -740,5 +741,9 @@ export const TOURNAMENT_REGISTRATION_TIME = 60 * 60 * 1000 // 1 hour
 export const TOURNAMENT_CLEANUP_DELAY = 24 * 60 * 60 * 1000 // 1 day
 
 export const MAX_SIMULATION_DELTA_TIME = 50 // milliseconds
+
+export const CRON_ELO_DECAY_DELAY = 86400 * 1000 * 10 // 10 days
+export const CRON_ELO_DECAY_MINIMUM_ELO = 1100
+export const CRON_HISTORY_CLEANUP_DELAY = 86400 * 1000 * 30 // 30 days
 
 export { EloRank }
