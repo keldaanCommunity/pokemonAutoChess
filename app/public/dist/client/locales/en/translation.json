@@ -1518,7 +1518,7 @@
     "FACADE": "Deals [20,40,80,SP] SPECIAL. Doubles damage if the caster has a negative status",
     "DREAM_EATER": "If an enemy is SLEEP, jump next to it, deals [45,90,SP] SPECIAL and restores the same amount of HP. Otherwise, puts the target SLEEP for [2.5,5] seconds",
     "SPARK": "The Pokémon fires a spark charged with electricity at the target, inflicting [40,80,SP] SPECIAL. The spark can bounce up to 4 times between adjacent enemies. Each rebound halves the SPECIAL",
-    "CRUNCH": "Deal [150,SP] SPECIAL. If it kills the target, heal for 50% of target's max HP",
+    "CRUNCH": "Deal [40,80,150,SP] SPECIAL. If it kills the target, heal for 50% of target's max HP",
     "CROSS_POISON": "Deal [30,60,120,SP] SPECIAL to target and enemies adjacent to it, and POISONNED them for 3 seconds",
     "DOUBLE_EDGE": "Deal [55,110,220,SP] PHYSICAL to target. The user hurts itself for [20,40,60,SP] PHYSICAL.",
     "FIRE_FANG": "Deal [30,60,120,SP] SPECIAL and inflicts BURN for 2 seconds",

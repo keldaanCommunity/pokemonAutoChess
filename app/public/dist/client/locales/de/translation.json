@@ -1509,7 +1509,7 @@
     "FACADE": "Verursacht [20,40,80,SP] SPECIAL. Verdoppelt den Schaden, wenn der Zaubernde einen negativen Status hat.",
     "DREAM_EATER": "Wenn ein Gegner SLEEP ist, springt er neben ihn, verursacht [45,90,SP] SPECIAL und stellt die gleiche Menge an HP wieder her. Andernfalls versetzt er das Ziel für [2,5,5] Sekunden in SLEEP.",
     "SPARK": "Das Pokémon feuert einen mit Elektrizität geladenen Funken auf das Ziel ab und fügt ihm [40,80,SP] SPECIAL zu. Der Funke kann bis zu 4 Mal zwischen benachbarten Gegnern hin- und herspringen. Jeder Rückprall halbiert die SPECIAL",
-    "CRUNCH": "Verursacht [150,SP] SPECIAL. Wenn es das Ziel tötet, heilt es um 50% der maximalen HP des Ziels.",
+    "CRUNCH": "Verursacht [40,80,150,SP] SPECIAL. Wenn es das Ziel tötet, heilt es um 50% der maximalen HP des Ziels.",
     "CROSS_POISON": "Verursacht [30,60,120,SP] SPECIAL an Ziel und benachbarten Gegnern und POISONNED sie 3 Sekunden lang",
     "DOUBLE_EDGE": "Fügt dem Ziel [55,110,220,SP] PHYSICAL zu. Der Anwender verletzt sich selbst für [20,40,60,SP] PHYSICAL.",
     "FIRE_FANG": "Verursacht [30,60,120,SP] SPECIAL und fügt 2 Sekunden lang BURN zu",

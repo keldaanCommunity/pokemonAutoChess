@@ -1509,7 +1509,7 @@
     "FACADE": "Hace [20,40,80,SP] SPECIAL. Duplica su daño si el emisor tiene un estado negativo.",
     "DREAM_EATER": "Si un enemigo esta SLEEP, salta junto a él, le hace [45,90,SP] SPECIAL y restaura la misma cantidad de HP. Si no, pone al objetivo a dormir por [2.5,5] segundos",
     "SPARK": "El pokémon dispara una chispa cargada con electricidad al objetivo, infligiendo [40,80,SP] SPECIAL. La chispa puede rebotar hasta 4 veces entre enemigos adyacentes. Cada rebote reduce a la mitad el SPECIAL",
-    "CRUNCH": "Hace [150,SP] SPECIAL. Si mata al objetivo, se cura un 50% de la HP máxima del objetivo",
+    "CRUNCH": "Hace [40,80,150,SP] SPECIAL. Si mata al objetivo, se cura un 50% de la HP máxima del objetivo",
     "CROSS_POISON": "Hace [30,60,120,SP] SPECIAL al objetivo y a enemigos que se encuentren adyacentes a este, y los POISONNED por 3 segundos",
     "DOUBLE_EDGE": "Inflige [55,110,220,SP] PHYSICAL al objetivo. El usuario se autoinflige [20,40,60,SP] PHYSICAL.",
     "FIRE_FANG": "Inflige [30,60,120,SP] SPECIAL y BURN durante 2 segundos",
