@@ -62,13 +62,13 @@ export const networkSlice = createSlice({
     logOut: (state) => {
       state.client = new Client(endpoint)
       state.uid = ""
-      state.preparation?.connection.close()
+      state.preparation?.leave()
       state.preparation = undefined
-      state.lobby?.connection.close()
+      state.lobby?.leave()
       state.lobby = undefined
-      state.game?.connection.close()
+      state.game?.leave()
       state.game = undefined
-      state.after?.connection.close()
+      state.after?.leave()
       state.after = undefined
     },
     setProfile: (state, action: PayloadAction<IUserMetadata>) => {

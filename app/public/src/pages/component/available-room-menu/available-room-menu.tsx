@@ -62,12 +62,10 @@ export default function AvailableRoomMenu() {
           { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
           30
         )
-        if (lobby.connection.isOpen) {
-          await lobby.leave(false)
-        }
-        if (room.connection.isOpen) {
-          room.connection.close()
-        }
+        await Promise.allSettled([
+          lobby.connection.isOpen && lobby.leave(false),
+          room.connection.isOpen && room.leave(false)
+        ])
         dispatch(leaveLobby())
         navigate("/preparation")
       }
@@ -113,12 +111,10 @@ export default function AvailableRoomMenu() {
             { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
             30
           )
-          if (lobby.connection.isOpen) {
-            await lobby.leave(false)
-          }
-          if (room.connection.isOpen) {
-            room.connection.close()
-          }
+          await Promise.allSettled([
+            lobby.connection.isOpen && lobby.leave(false),
+            room.connection.isOpen && room.leave(false)
+          ])
           dispatch(leaveLobby())
           navigate("/preparation")
         } catch (error) {
@@ -140,12 +136,12 @@ export default function AvailableRoomMenu() {
             30
           )
           if (room.connection.isOpen) {
-            room.connection.close()
+            await room.leave(false)
           }
           navigate("/preparation")
           return
         } else if (room.connection.isOpen) {
-          room.connection.close()
+          await room.leave(false)
         }
       } catch (error) {
         localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)

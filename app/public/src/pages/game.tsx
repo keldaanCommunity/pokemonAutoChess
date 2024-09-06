@@ -217,15 +217,12 @@ export default function Game() {
     })
     localStore.set(LocalStoreKeys.RECONNECTION_AFTER_GAME, { reconnectionToken: r.reconnectionToken, roomId: r.roomId }, 30)
     if (r.connection.isOpen) {
-      r.connection.close()
+      await r.leave(false)
     }
     dispatch(leaveGame())
     navigate("/after")
-
-    try {
-      await room?.leave()
-    } catch (error) {
-      logger.warn("Room already closed")
+    if (room?.connection.isOpen) {
+      room.leave()
     }
   }, [client, dispatch, room])
 

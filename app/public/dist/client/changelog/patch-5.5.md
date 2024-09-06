@@ -7,7 +7,7 @@
 
 - Gligar is now tier 2, Gliscor is now tier 3
 - Nerf Lapras: PP 100 → 120
-- Nerf Slowking: HP 260 → 200, Attack 24 → 18
+- Slowpoke line is now Psychic/Aquatic instead of Water/Psychic
 - Nerf Closdire: HP 230 → 190
 - Changed Root (Bellsprout): All adjacent enemies are Locked for 4 seconds and take 10/20/40 special damage whereas user and adjacent allies are healed by 10/20/40 HP
 - Bellsprout line is now regional in Grass/Flora regions, and Weepinbell no longer evolve with berries
@@ -23,7 +23,7 @@
 
 # Changes to Synergies
 
-
+- Fire: chance to burn no longer increased after fire 2 ; Fire 8: get a fire shard after each round
 
 # Changes to Items
 
@@ -41,6 +41,7 @@
 # Bugfix
 
 - Fixed a bug that would lead to some pokemons being unkillable/uninnteractable after resurecting (thanks to Defenestrator for the analysis)
+- Fixed resurection not taking into account permanent bonus max HP
 
 # Misc
 

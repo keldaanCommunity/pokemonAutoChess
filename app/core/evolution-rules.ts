@@ -1,11 +1,12 @@
 import Player from "../models/colyseus-models/player"
-import { Pokemon } from "../models/colyseus-models/pokemon"
+import { Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
 import { EvolutionTime } from "../types/Config"
 import { PokemonActionState } from "../types/enum/Game"
 import { ItemComponents, Item, ShinyItems } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
+import { sum } from "../utils/array"
 import { logger } from "../utils/logger"
 import { pickRandomIn, shuffleArray } from "../utils/random"
 import { values } from "../utils/schemas"
@@ -136,6 +137,20 @@ export class CountEvolutionRule extends EvolutionRule {
       pokemonEvolutionName,
       player
     )
+
+    // carry over the permanent stat buffs
+    const permanentBuffStats = ["hp", "atk", "def", "speDef"] as const
+    for (const stat of permanentBuffStats) {
+      const statStacked = sum(
+        pokemonsBeforeEvolution.map(
+          (p) => p[stat] - new PokemonClasses[p.name]()[stat]
+        )
+      )
+      if (statStacked > 0) {
+        pokemonEvolved[stat] += statStacked
+      }
+    }
+
     if (pokemon.onEvolve) {
       pokemon.onEvolve({ pokemonEvolved, pokemonsBeforeEvolution, player })
     }

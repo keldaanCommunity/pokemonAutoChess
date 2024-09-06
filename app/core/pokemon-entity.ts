@@ -878,13 +878,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (this.effects.has(Effect.BLAZE)) {
         burnChance = 0.3
       } else if (this.effects.has(Effect.VICTORY_STAR)) {
-        burnChance = 0.4
+        burnChance = 0.3
         this.addAttack(1, this, 0, false)
       } else if (this.effects.has(Effect.DROUGHT)) {
-        burnChance = 0.5
+        burnChance = 0.3
         this.addAttack(2, this, 0, false)
       } else if (this.effects.has(Effect.DESOLATE_LAND)) {
-        burnChance = 1
+        burnChance = 0.3
         this.addAttack(3, this, 0, false)
       }
       if (chance(burnChance)) {
@@ -1516,17 +1516,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   resurrect() {
-    const cloneForStatsReference = PokemonFactory.createPokemonFromName(
-      this.name
-    )
-    this.life = cloneForStatsReference.hp
+    this.life = this.refToBoardPokemon.hp
     this.shield = 0
     this.pp = 0
     this.ap = 0
-    this.atk = cloneForStatsReference.atk
-    this.def = cloneForStatsReference.def
-    this.speDef = cloneForStatsReference.speDef
-    this.atkSpeed = cloneForStatsReference.atkSpeed
+    this.atk = this.refToBoardPokemon.atk
+    this.def = this.refToBoardPokemon.def
+    this.speDef = this.refToBoardPokemon.speDef
+    this.atkSpeed = this.refToBoardPokemon.atkSpeed
     this.critChance = DEFAULT_CRIT_CHANCE
     this.critPower = DEFAULT_CRIT_POWER
     this.count = new Count()

@@ -44,12 +44,10 @@ export function GameRoomsMenu() {
                     { reconnectionToken: game.reconnectionToken, roomId: game.roomId },
                     30
                 )
-                if (lobby.connection.isOpen) {
-                    await lobby.leave(false)
-                }
-                if (game.connection.isOpen) {
-                    game.connection.close()
-                }
+                await Promise.allSettled([
+                    lobby.connection.isOpen && lobby.leave(false),
+                    game.connection.isOpen && game.leave(false)
+                ])
                 dispatch(leaveLobby())
                 navigate("/game")
             }
