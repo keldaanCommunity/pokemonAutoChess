@@ -7,6 +7,7 @@
 - Galarian Ponyta
 - Galarian Rapidash
 - Luvdisc
+- Audino
 
 # Changes to Pokemon & Abilities
 

@@ -375,7 +375,8 @@
     "GULP_MISSILE": "Gulp Missile",
     "SCHOOLING": "Schooling",
     "DOUBLE_SHOCK": "Double Shock",
-    "CHARM": "Charm"
+    "CHARM": "Charm",
+    "ENTRAINMENT": "Entrainment"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1206,7 +1207,8 @@
     "PAWMOT": "Pawmot",
     "GOLDEEN": "Goldeen",
     "SEAKING": "Seaking",
-    "LUVDISC": "Luvdisc"
+    "LUVDISC": "Luvdisc",
+    "AUDINO": "Audino"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1562,7 +1564,8 @@
     "SCHOOLING": "Deals [10,SP]% of its max HP as SPECIAL to the target and adjacent enemies. If a Wishiwashi is on the bench, it joins the school and gives 50 permanent HP to the user.",
     "DOUBLE_SHOCK": "The user emits a powerful electric shock, dealing [50,100,200,SP] SPECIAL. The user is PARALYSIS for 3 seconds.",
     "PURIFY": "Clear negative status and heal the user for [15,30,60,SP] HP.",
-    "CHARM": "Inflicts CHARM to the target for 3 seconds and reduces its ATK by [2,3,4,SP] (min 1)"
+    "CHARM": "Inflicts CHARM to the target for 3 seconds and reduces its ATK by [2,3,4,SP] (min 1)",
+    "ENTRAINMENT": "Dances to a strange rhythm, regaining [10,SP] PP and forcing the target to imitate them, which replace their ability by Entrainment. If target is already entrained, pick another enemy nearby."
   },
   "effect": {
     "INGRAIN": "Ingrain",

@@ -2082,6 +2082,14 @@ export function displayAbility(
       hiddenPowerAnimation(scene, skill, positionX, positionY, flip)
       break
 
+    case Ability.ENTRAINMENT: {
+      const target = pokemonsOnBoard.find(
+        (pkmUI) => pkmUI.positionX === targetX && pkmUI.positionY === targetY
+      )
+      if (target) target.emoteAnimation()
+      break
+    }
+
     case Ability.TEETER_DANCE:
       pokemonsOnBoard.forEach((pkmUI) => {
         const coordinates = transformAttackCoordinate(
@@ -2355,12 +2363,12 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
-    case "FIELD_DEATH":
-      addAbilitySprite("FIELD_DEATH", coordinates, true).setScale(2)
-      break
-
     case Ability.EARTHQUAKE:
       addAbilitySprite(skill, coordinates, true).setScale(3)
+      break
+
+    case "FIELD_DEATH":
+      addAbilitySprite("FIELD_DEATH", coordinates, true).setScale(2)
       break
 
     case "GROUND_GROW":

@@ -9676,6 +9676,41 @@ export class CharmStrategy extends AbilityStrategy {
   }
 }
 
+export class EntrainmentStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const ppGained = 10
+    pokemon.addPP(ppGained, pokemon, 1, crit)
+    if (target.skill !== Ability.ENTRAINMENT) {
+      target.skill = Ability.ENTRAINMENT
+    } else {
+      const potentialTargets: { x: number; y: number; value: PokemonEntity }[] =
+        []
+      board.forEach(
+        (x: number, y: number, value: PokemonEntity | undefined) => {
+          if (value && value.team === pokemon.team && value.life > 0) {
+            potentialTargets.push({ x, y, value })
+          }
+        }
+      )
+      potentialTargets.sort(
+        (a, b) =>
+          distanceC(pokemon.positionX, pokemon.positionY, a.x, a.y) -
+          distanceC(pokemon.positionX, pokemon.positionY, b.x, b.y)
+      )
+      if (potentialTargets.length > 0) {
+        target.skill = Ability.ENTRAINMENT
+      }
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -10033,5 +10068,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SCHOOLING]: new SchoolingStrategy(),
   [Ability.DOUBLE_SHOCK]: new DoubleShockStrategy(),
   [Ability.PASTEL_VEIL]: new PastelVeilStrategy(),
-  [Ability.CHARM]: new CharmStrategy()
+  [Ability.CHARM]: new CharmStrategy(),
+  [Ability.ENTRAINMENT]: new EntrainmentStrategy()
 }

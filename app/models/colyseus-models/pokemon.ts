@@ -14605,6 +14605,20 @@ export class Luvdisc extends Pokemon {
   passive = Passive.LUVDISC
 }
 
+export class Audino extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.SOUND])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 16
+  def = 2
+  speDef = 3
+  maxPP = 80
+  range = 2
+  skill = Ability.ENTRAINMENT
+  attackSprite = AttackSprite.SOUND_RANGE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -15439,5 +15453,6 @@ export const PokemonClasses: Record<
   [Pkm.PAWMOT]: Pawmot,
   [Pkm.GOLDEEN]: Goldeen,
   [Pkm.SEAKING]: Seaking,
-  [Pkm.LUVDISC]: Luvdisc
+  [Pkm.LUVDISC]: Luvdisc,
+  [Pkm.AUDINO]: Audino
 }

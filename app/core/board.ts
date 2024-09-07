@@ -266,10 +266,11 @@ export default class Board {
     }
     return cells
   }
-  getAllPokemonCoordinates(board: Board): { x: number; y: number }[] {
+
+  getAllPokemonCoordinates(): { x: number; y: number }[] {
     const pokemonCoordinates: { x: number; y: number }[] = []
 
-    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
+    this.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value !== undefined) {
         // Add coordinates of all Pokémon to the list
         pokemonCoordinates.push({ x, y })
