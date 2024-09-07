@@ -51,9 +51,6 @@ export default class MinigameManager {
     this.animationManager = animationManager
     this.buildPokemons(avatars)
     this.buildItems(items)
-    this.scene.room?.onMessage(Transfer.NPC_DIALOG, (message) =>
-      this.onNpcDialog(message)
-    )
   }
 
   initialize() {

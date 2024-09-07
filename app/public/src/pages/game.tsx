@@ -25,6 +25,7 @@ import { DungeonDetails } from "../../../types/enum/Dungeon"
 import { Team } from "../../../types/enum/Game"
 import { Pkm } from "../../../types/enum/Pokemon"
 import { getFreeSpaceOnBench } from "../../../utils/board"
+import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
 import { logger } from "../../../utils/logger"
 import { addWanderingPokemon } from "../game/components/pokemon"
 import GameContainer from "../game/game-container"
@@ -108,7 +109,7 @@ export default function Game() {
   const [finalRankVisible, setFinalRankVisible] = useState<boolean>(false)
   const container = useRef<HTMLDivElement>(null)
 
-  const MAX_ATTEMPS_RECONNECT = 3
+  const MAX_ATTEMPS_RECONNECT = 10
 
   const connectToGame = useCallback(
     async (attempts = 1) => {
@@ -134,6 +135,25 @@ export default function Game() {
               { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
               60 * 60
             )
+
+            // replace original send method with a method that has a built-in connection check
+            const originalSend = room.send
+            room.send = function send<T = any>(type: string | number, message?: T): void {
+              if (this.connection.isOpen) {
+                originalSend.apply(this, [type, message])
+              } else {
+                logger.log("message failed", { type, message })
+              }
+            }
+
+            // if reconnecting, fix references and re-add all event handlers
+            if (initialized.current) {
+              gameContainer.room = room
+              gameContainer.gameScene!.room = room
+              startEventListeners(room)
+              gameContainer.initializeEvents()
+            }
+
             dispatch(joinGame(room))
             connected.current = true
             connecting.current = false
@@ -289,366 +309,12 @@ export default function Game() {
         gameContainer.onDragDropCombine(event)
       }) as EventListener)
 
-      room.onMessage(Transfer.LOADING_COMPLETE, () => {
-        setLoaded(true)
-      })
-      room.onMessage(Transfer.FINAL_RANK, (finalRank) => {
-        setFinalRank(finalRank)
-        setFinalRankVisible(true)
-      })
-      room.onMessage(Transfer.PRELOAD_MAPS, async (maps) => {
-        logger.info("preloading maps", maps)
-        const gameScene = getGameScene()
-        if (gameScene) {
-          gameScene.load.reset()
-          await gameScene.preloadMaps(maps)
-          gameScene.load.once("complete", () => {
-            const gc = getGameContainer()
-            gc && gc.player && gameScene.setMap(gc.player.map)
-          })
-          gameScene.load.start()
-        }
-      })
-      room.onMessage(Transfer.SHOW_EMOTE, (message) => {
-        const g = getGameScene()
-        if (g?.minigameManager?.pokemons?.size && g.minigameManager.pokemons.size > 0) {
-          // early return here to prevent showing animation twice
-          return g.minigameManager?.showEmote(message.id, message?.emote)
-        }
+      startEventListeners(room)
 
-        if (g && g.board) {
-          g.board.showEmote(message.id, message?.emote)
-        }
-      })
-
-      room.onMessage(Transfer.POKEMON_DAMAGE, (message) => {
-        gameContainer.handleDisplayDamage(message)
-      })
-
-      room.onMessage(Transfer.ABILITY, (message) => {
-        gameContainer.handleDisplayAbility(message)
-      })
-
-      room.onMessage(Transfer.POKEMON_HEAL, (message) => {
-        gameContainer.handleDisplayHeal(message)
-      })
-
-      room.onMessage(Transfer.PLAYER_DAMAGE, (value) => {
-        toast(
-          <div className="toast-player-damage">
-            <span style={{ verticalAlign: "middle" }}>-{value}</span>
-            <img className="icon-life" src="/assets/ui/heart.png" alt="❤" />
-          </div>,
-          { containerId: "toast-life" }
-        )
-      })
-
-      room.onMessage(Transfer.PLAYER_INCOME, (value) => {
-        toast(
-          <div className="toast-player-income">
-            <span style={{ verticalAlign: "middle" }}>+{value}</span>
-            <img className="icon-money" src="/assets/icons/money.svg" alt="$" />
-          </div>,
-          { containerId: "toast-money" }
-        )
-      })
-
-      room.onMessage(Transfer.UNOWN_WANDERING, () => {
-        if (gameContainer.game) {
-          const g = getGameScene()
-          if (g && g.unownManager) {
-            g.unownManager.addWanderingUnown()
-          }
-        }
-      })
-
-      room.onMessage(Transfer.POKEMON_WANDERING, (pokemon: Pkm) => {
-        const scene = getGameScene()
-        if (scene) {
-          addWanderingPokemon(scene, pokemon, (sprite, pointer, tween) => {
-            if (
-              scene.board &&
-              getFreeSpaceOnBench(scene.board.player.board) > 0
-            ) {
-              room.send(Transfer.POKEMON_WANDERING, pokemon)
-              sprite.destroy()
-              tween.destroy()
-            } else if (scene.board) {
-              scene.board.displayText(pointer.x, pointer.y, t("full"))
-            }
-          })
-        }
-      })
-
-      room.onMessage(Transfer.BOARD_EVENT, (event: IBoardEvent) => {
-        if (gameContainer.game) {
-          const g = getGameScene()
-          if (g?.battle?.simulation?.id === event.simulationId) {
-            g.battle.displayBoardEvent(event)
-          }
-        }
-      })
-
-      room.onMessage(
-        Transfer.CLEAR_BOARD,
-        (event: { simulationId: string }) => {
-          if (gameContainer.game) {
-            const g = getGameScene()
-            if (g?.battle?.simulation?.id === event.simulationId) {
-              g.battle.clearBoardEvents()
-            }
-          }
-        }
-      )
-
-      room.onMessage(Transfer.SIMULATION_STOP, () => {
-        if (gameContainer.game) {
-          const g = getGameScene()
-          if (g && g.battle) {
-            g.battle.clear()
-          }
-        }
-      })
-
-      room.onMessage(Transfer.GAME_END, leave)
-
-      room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
-        dispatch(setProfile(user))
-      })
-
-      room.state.listen("roundTime", (value) => {
-        dispatch(setRoundTime(value))
-      })
-
-      room.state.listen("phase", (newPhase, previousPhase) => {
-        if (gameContainer.game) {
-          const g = getGameScene()
-          if (g) {
-            g.updatePhase(newPhase, previousPhase)
-          }
-        }
-        dispatch(setPhase(newPhase))
-      })
-
-      room.state.listen("stageLevel", (value) => {
-        dispatch(setStageLevel(value))
-      })
-
-      room.state.listen("noElo", (value) => {
-        dispatch(setNoELO(value))
-      })
-
-      room.state.additionalPokemons.onAdd(() => {
-        dispatch(setAdditionalPokemons([...room.state.additionalPokemons]))
-      })
-
-      room.state.simulations.onRemove(() => {
-        gameContainer.resetSimulation()
-      })
-
-      room.state.simulations.onAdd((simulation) => {
-        gameContainer.initializeSimulation(simulation)
-
-        simulation.listen("weather", (value) => {
-          dispatch(setWeather({ id: simulation.id, value: value }))
-        })
-
-        const teams = [Team.BLUE_TEAM, Team.RED_TEAM]
-        teams.forEach((team) => {
-          const dpsMeter =
-            team === Team.BLUE_TEAM
-              ? simulation.blueDpsMeter
-              : simulation.redDpsMeter
-          dpsMeter.onAdd((dps) => {
-            dispatch(addDpsMeter({ value: dps, id: simulation.id, team }))
-            const fields: NonFunctionPropNames<IDps>[] = [
-              "id",
-              "name",
-              "physicalDamage",
-              "specialDamage",
-              "trueDamage",
-              "heal",
-              "shield",
-              "physicalDamageReduced",
-              "specialDamageReduced",
-              "shieldDamageTaken"
-            ]
-            fields.forEach((field) => {
-              dps.listen(field, (value) => {
-                dispatch(
-                  changeDpsMeter({
-                    id: dps.id,
-                    team,
-                    field: field,
-                    value: value,
-                    simulationId: simulation.id
-                  })
-                )
-              })
-            })
-          })
-
-          dpsMeter.onRemove(() => {
-            dispatch(removeDpsMeter({ simulationId: simulation.id, team }))
-          })
-        })
-      })
-
-      room.state.players.onAdd((player) => {
-        gameContainer.initializePlayer(player)
-        dispatch(addPlayer(player))
-
-        if (player.id == uid) {
-          dispatch(setInterest(player.interest))
-          dispatch(setStreak(player.streak))
-          dispatch(setShopLocked(player.shopLocked))
-          dispatch(setPokemonCollection(player.pokemonCollection))
-
-          player.listen("interest", (value) => {
-            dispatch(setInterest(value))
-          })
-          player.listen("shop", (value) => {
-            dispatch(setShop(value))
-          })
-          player.listen("shopLocked", (value) => {
-            dispatch(setShopLocked(value))
-          })
-          player.listen("money", (value) => {
-            dispatch(setMoney(value))
-          })
-          player.listen("streak", (value) => {
-            dispatch(setStreak(value))
-          })
-        }
-        player.listen("life", (value, previousValue) => {
-          dispatch(setLife({ id: player.id, value: value }))
-          if (
-            value <= 0 &&
-            value !== previousValue &&
-            player.id === uid &&
-            !spectate
-          ) {
-            setFinalRankVisible(true)
-          }
-        })
-        player.listen("experienceManager", (experienceManager) => {
-          if (player.id === uid) {
-            dispatch(updateExperienceManager(experienceManager))
-            const fields: NonFunctionPropNames<IExperienceManager>[] = [
-              "experience",
-              "expNeeded",
-              "level"
-            ]
-            fields.forEach((field) => {
-              experienceManager.listen(field, (value) => {
-                dispatch(updateExperienceManager({ ...experienceManager, [field]: value } as IExperienceManager))
-              })
-            })
-          }
-        })
-        player.listen("loadingProgress", (value) => {
-          dispatch(setLoadingProgress({ id: player.id, value: value }))
-        })
-        player.listen("map", (newMap) => {
-          if (player.id === store.getState().game.currentPlayerId) {
-            const gameScene = getGameScene()
-            if (gameScene) {
-              gameScene.setMap(newMap)
-              const alreadyLoading = gameScene.load.isLoading()
-              if (!alreadyLoading) {
-                gameScene.load.reset()
-              }
-              preloadMusic(gameScene, DungeonDetails[newMap].music)
-              gameScene.load.once("complete", () =>
-                playMusic(gameScene, DungeonDetails[newMap].music)
-              )
-              if (!alreadyLoading) {
-                gameScene.load.start()
-              }
-            }
-          }
-          dispatch(changePlayer({ id: player.id, field: "map", value: newMap }))
-        })
-
-        player.listen("spectatedPlayerId", (spectatedPlayerId) => {
-          if (room?.state?.players) {
-            const spectatedPlayer = room?.state?.players.get(spectatedPlayerId)
-            const gameContainer = getGameContainer()
-            if (spectatedPlayer && player.id === uid) {
-              gameContainer.setPlayer(spectatedPlayer)
-
-              const simulation = room.state.simulations.get(
-                spectatedPlayer.simulationId
-              )
-              if (simulation) {
-                gameContainer.setSimulation(simulation)
-              }
-            }
-
-            gameContainer.gameScene?.board?.updateScoutingAvatars()
-          }
-        })
-
-        const fields: NonFunctionPropNames<IPlayer>[] = [
-          "name",
-          "avatar",
-          "boardSize",
-          "experienceManager",
-          "money",
-          "history",
-          "life",
-          "opponentId",
-          "opponentName",
-          "opponentAvatar",
-          "opponentTitle",
-          "rank",
-          "regionalPokemons",
-          "streak",
-          "title"
-        ]
-
-        fields.forEach((field) => {
-          player.listen(field, (value) => {
-            dispatch(
-              changePlayer({ id: player.id, field: field, value: value })
-            )
-          })
-        })
-
-        player.synergies.onChange(() => {
-          dispatch(setSynergies({ id: player.id, value: player.synergies }))
-        })
-
-        player.itemsProposition.onAdd(() => {
-          if (player.id == uid) {
-            dispatch(setItemsProposition(player.itemsProposition))
-          }
-        })
-        player.itemsProposition.onRemove(() => {
-          if (player.id == uid) {
-            dispatch(setItemsProposition(player.itemsProposition))
-          }
-        })
-
-        player.pokemonsProposition.onAdd(() => {
-          if (player.id == uid) {
-            dispatch(setPokemonProposition(player.pokemonsProposition.map(p => p)))
-          }
-        })
-        player.pokemonsProposition.onRemove(() => {
-          if (player.id == uid) {
-            dispatch(setPokemonProposition(player.pokemonsProposition.map(p => p)))
-          }
-        })
-      })
-
-      room.state.players.onRemove((player) => {
-        dispatch(removePlayer(player))
-      })
-
-      room.state.spectators.onAdd((uid) => {
-        gameContainer.initializeSpectactor(uid)
-      })
+      // test code
+      setTimeout(() => {
+        room.connection.close(CloseCodes.TIMEOUT)
+      }, 5000)
     }
   }, [
     connected,
@@ -662,6 +328,396 @@ export default function Game() {
     connectToGame,
     leave
   ])
+
+  const startEventListeners = (room: Room<GameState>) => {
+    if (!room) {
+      return
+    }
+
+    room.onLeave((code) => {
+      const shouldReconnect = code === CloseCodes.ABNORMAL_CLOSURE || code === CloseCodes.TIMEOUT
+      logger.info(`left game room with code ${code}`, { shouldReconnect })
+      if (shouldReconnect) {
+        logger.log("Connection closed unexpectedly or timed out. Attempting reconnect.")
+        connected.current = false
+        dispatch(leaveGame())
+        connectToGame()
+      }
+    })
+
+    room.onMessage(Transfer.LOADING_COMPLETE, () => {
+      setLoaded(true)
+    })
+    room.onMessage(Transfer.FINAL_RANK, (finalRank) => {
+      setFinalRank(finalRank)
+      setFinalRankVisible(true)
+    })
+    room.onMessage(Transfer.PRELOAD_MAPS, async (maps) => {
+      logger.info("preloading maps", maps)
+      const gameScene = getGameScene()
+      if (gameScene) {
+        gameScene.load.reset()
+        await gameScene.preloadMaps(maps)
+        gameScene.load.once("complete", () => {
+          const gc = getGameContainer()
+          gc && gc.player && gameScene.setMap(gc.player.map)
+        })
+        gameScene.load.start()
+      }
+    })
+    room.onMessage(Transfer.SHOW_EMOTE, (message) => {
+      const g = getGameScene()
+      if (g?.minigameManager?.pokemons?.size && g.minigameManager.pokemons.size > 0) {
+        // early return here to prevent showing animation twice
+        return g.minigameManager?.showEmote(message.id, message?.emote)
+      }
+
+      if (g && g.board) {
+        g.board.showEmote(message.id, message?.emote)
+      }
+    })
+
+    room.onMessage(Transfer.POKEMON_DAMAGE, (message) => {
+      gameContainer.handleDisplayDamage(message)
+    })
+
+    room.onMessage(Transfer.ABILITY, (message) => {
+      gameContainer.handleDisplayAbility(message)
+    })
+
+    room.onMessage(Transfer.POKEMON_HEAL, (message) => {
+      gameContainer.handleDisplayHeal(message)
+    })
+
+    room.onMessage(Transfer.PLAYER_DAMAGE, (value) => {
+      toast(
+        <div className="toast-player-damage">
+          <span style={{ verticalAlign: "middle" }}>-{value}</span>
+          <img className="icon-life" src="/assets/ui/heart.png" alt="❤" />
+        </div>,
+        { containerId: "toast-life" }
+      )
+    })
+
+    room.onMessage(Transfer.PLAYER_INCOME, (value) => {
+      toast(
+        <div className="toast-player-income">
+          <span style={{ verticalAlign: "middle" }}>+{value}</span>
+          <img className="icon-money" src="/assets/icons/money.svg" alt="$" />
+        </div>,
+        { containerId: "toast-money" }
+      )
+    })
+
+    room.onMessage(Transfer.UNOWN_WANDERING, () => {
+      if (gameContainer.game) {
+        const g = getGameScene()
+        if (g && g.unownManager) {
+          g.unownManager.addWanderingUnown()
+        }
+      }
+    })
+
+    room.onMessage(Transfer.POKEMON_WANDERING, (pokemon: Pkm) => {
+      const scene = getGameScene()
+      if (scene) {
+        addWanderingPokemon(scene, pokemon, (sprite, pointer, tween) => {
+          if (
+            scene.board &&
+            getFreeSpaceOnBench(scene.board.player.board) > 0
+          ) {
+            room.send(Transfer.POKEMON_WANDERING, pokemon)
+            sprite.destroy()
+            tween.destroy()
+          } else if (scene.board) {
+            scene.board.displayText(pointer.x, pointer.y, t("full"))
+          }
+        })
+      }
+    })
+
+    room.onMessage(Transfer.BOARD_EVENT, (event: IBoardEvent) => {
+      if (gameContainer.game) {
+        const g = getGameScene()
+        if (g?.battle?.simulation?.id === event.simulationId) {
+          g.battle.displayBoardEvent(event)
+        }
+      }
+    })
+
+    room.onMessage(
+      Transfer.CLEAR_BOARD,
+      (event: { simulationId: string }) => {
+        if (gameContainer.game) {
+          const g = getGameScene()
+          if (g?.battle?.simulation?.id === event.simulationId) {
+            g.battle.clearBoardEvents()
+          }
+        }
+      }
+    )
+
+    room.onMessage(Transfer.SIMULATION_STOP, () => {
+      if (gameContainer.game) {
+        const g = getGameScene()
+        if (g && g.battle) {
+          g.battle.clear()
+        }
+      }
+    })
+
+    room.onMessage(Transfer.GAME_END, leave)
+
+    room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
+      dispatch(setProfile(user))
+    })
+
+    room.state.listen("roundTime", (value) => {
+      dispatch(setRoundTime(value))
+    })
+
+    room.state.listen("phase", (newPhase, previousPhase) => {
+      if (gameContainer.game) {
+        const g = getGameScene()
+        if (g) {
+          g.updatePhase(newPhase, previousPhase)
+        }
+      }
+      dispatch(setPhase(newPhase))
+    })
+
+    room.state.listen("stageLevel", (value) => {
+      dispatch(setStageLevel(value))
+    })
+
+    room.state.listen("noElo", (value) => {
+      dispatch(setNoELO(value))
+    })
+
+    room.state.additionalPokemons.onAdd(() => {
+      dispatch(setAdditionalPokemons([...room.state.additionalPokemons]))
+    })
+
+    room.state.simulations.onRemove(() => {
+      gameContainer.resetSimulation()
+    })
+
+    room.state.simulations.onAdd((simulation) => {
+      gameContainer.initializeSimulation(simulation)
+
+      simulation.listen("weather", (value) => {
+        dispatch(setWeather({ id: simulation.id, value: value }))
+      })
+
+      const teams = [Team.BLUE_TEAM, Team.RED_TEAM]
+      teams.forEach((team) => {
+        const dpsMeter =
+          team === Team.BLUE_TEAM
+            ? simulation.blueDpsMeter
+            : simulation.redDpsMeter
+        dpsMeter.onAdd((dps) => {
+          dispatch(addDpsMeter({ value: dps, id: simulation.id, team }))
+          const fields: NonFunctionPropNames<IDps>[] = [
+            "id",
+            "name",
+            "physicalDamage",
+            "specialDamage",
+            "trueDamage",
+            "heal",
+            "shield",
+            "physicalDamageReduced",
+            "specialDamageReduced",
+            "shieldDamageTaken"
+          ]
+          fields.forEach((field) => {
+            dps.listen(field, (value) => {
+              dispatch(
+                changeDpsMeter({
+                  id: dps.id,
+                  team,
+                  field: field,
+                  value: value,
+                  simulationId: simulation.id
+                })
+              )
+            })
+          })
+        })
+
+        dpsMeter.onRemove(() => {
+          dispatch(removeDpsMeter({ simulationId: simulation.id, team }))
+        })
+      })
+    })
+
+    room.state.players.onAdd((player) => {
+      gameContainer.initializePlayer(player)
+      dispatch(addPlayer(player))
+
+      if (player.id == uid) {
+        dispatch(setInterest(player.interest))
+        dispatch(setStreak(player.streak))
+        dispatch(setShopLocked(player.shopLocked))
+        dispatch(setPokemonCollection(player.pokemonCollection))
+
+        player.listen("interest", (value) => {
+          dispatch(setInterest(value))
+        })
+        player.listen("shop", (value) => {
+          dispatch(setShop(value))
+        })
+        player.listen("shopLocked", (value) => {
+          dispatch(setShopLocked(value))
+        })
+        player.listen("money", (value) => {
+          dispatch(setMoney(value))
+        })
+        player.listen("streak", (value) => {
+          dispatch(setStreak(value))
+        })
+      }
+      player.listen("life", (value, previousValue) => {
+        dispatch(setLife({ id: player.id, value: value }))
+        if (
+          value <= 0 &&
+          value !== previousValue &&
+          player.id === uid &&
+          !spectate
+        ) {
+          setFinalRankVisible(true)
+        }
+      })
+      player.listen("experienceManager", (experienceManager) => {
+        if (player.id === uid) {
+          dispatch(updateExperienceManager(experienceManager))
+          const fields: NonFunctionPropNames<IExperienceManager>[] = [
+            "experience",
+            "expNeeded",
+            "level"
+          ]
+          fields.forEach((field) => {
+            experienceManager.listen(field, (value) => {
+              dispatch(updateExperienceManager({ ...experienceManager, [field]: value } as IExperienceManager))
+            })
+          })
+        }
+      })
+      player.listen("loadingProgress", (value) => {
+        dispatch(setLoadingProgress({ id: player.id, value: value }))
+      })
+      player.listen("map", (newMap) => {
+        if (player.id === store.getState().game.currentPlayerId) {
+          const gameScene = getGameScene()
+          if (gameScene) {
+            gameScene.setMap(newMap)
+            const alreadyLoading = gameScene.load.isLoading()
+            if (!alreadyLoading) {
+              gameScene.load.reset()
+            }
+            preloadMusic(gameScene, DungeonDetails[newMap].music)
+            gameScene.load.once("complete", () =>
+              playMusic(gameScene, DungeonDetails[newMap].music)
+            )
+            if (!alreadyLoading) {
+              gameScene.load.start()
+            }
+          }
+        }
+        dispatch(changePlayer({ id: player.id, field: "map", value: newMap }))
+      })
+
+      player.listen("spectatedPlayerId", (spectatedPlayerId) => {
+        if (room?.state?.players) {
+          const spectatedPlayer = room?.state?.players.get(spectatedPlayerId)
+          const gameContainer = getGameContainer()
+          if (spectatedPlayer && player.id === uid) {
+            gameContainer.setPlayer(spectatedPlayer)
+
+            const simulation = room.state.simulations.get(
+              spectatedPlayer.simulationId
+            )
+            if (simulation) {
+              gameContainer.setSimulation(simulation)
+            }
+          }
+
+          gameContainer.gameScene?.board?.updateScoutingAvatars()
+        }
+      })
+
+      const fields: NonFunctionPropNames<IPlayer>[] = [
+        "name",
+        "avatar",
+        "boardSize",
+        "experienceManager",
+        "money",
+        "history",
+        "life",
+        "opponentId",
+        "opponentName",
+        "opponentAvatar",
+        "opponentTitle",
+        "rank",
+        "regionalPokemons",
+        "streak",
+        "title"
+      ]
+
+      fields.forEach((field) => {
+        player.listen(field, (value) => {
+          dispatch(
+            changePlayer({ id: player.id, field: field, value: value })
+          )
+        })
+      })
+
+      player.synergies.onChange(() => {
+        dispatch(setSynergies({ id: player.id, value: player.synergies }))
+      })
+
+      player.itemsProposition.onAdd(() => {
+        if (player.id == uid) {
+          dispatch(setItemsProposition(player.itemsProposition))
+        }
+      })
+      player.itemsProposition.onRemove(() => {
+        if (player.id == uid) {
+          dispatch(setItemsProposition(player.itemsProposition))
+        }
+      })
+
+      player.pokemonsProposition.onAdd(() => {
+        if (player.id == uid) {
+          dispatch(setPokemonProposition(player.pokemonsProposition.map(p => p)))
+        }
+      })
+      player.pokemonsProposition.onRemove(() => {
+        if (player.id == uid) {
+          dispatch(setPokemonProposition(player.pokemonsProposition.map(p => p)))
+        }
+      })
+    })
+
+    room.state.players.onRemove((player) => {
+      dispatch(removePlayer(player))
+    })
+
+    room.state.spectators.onAdd((uid) => {
+      gameContainer.initializeSpectactor(uid)
+    })
+
+    room.onMessage(Transfer.LOADING_COMPLETE, () => {
+      const gameScene = getGameScene()
+      if (gameScene && !gameScene.started) {
+        gameScene.started = true
+        gameScene.startGame()
+      }
+    })
+
+    room.onMessage(Transfer.NPC_DIALOG, (message) =>
+      getGameScene()?.minigameManager?.onNpcDialog(message)
+    )
+  }
 
   return (
     <main id="game-wrapper">
