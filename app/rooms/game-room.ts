@@ -65,7 +65,7 @@ import {
 } from "../utils/board"
 import { logger } from "../utils/logger"
 import { shuffleArray } from "../utils/random"
-import { keys, values } from "../utils/schemas"
+import { values } from "../utils/schemas"
 import {
   OnDragDropCombineCommand,
   OnDragDropCommand,
@@ -519,24 +519,30 @@ export default class GameRoom extends Room<GameState> {
       super.onAuth(client, options, request)
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
-      const isBanned = await BannedUser.findOne({ uid: user.uid })
-      const userProfile = await UserMetadata.findOne({ uid: user.uid })
-      client.send(Transfer.USER_PROFILE, userProfile)
 
       if (!user.displayName) {
-        throw "No display name"
-      } else if (isBanned) {
-        throw "User banned"
-      } else {
-        return user
+        logger.error("No display name for this account", user.uid)
+        throw new Error(
+          "No display name for this account. Please report this error."
+        )
       }
+
+      return user
     } catch (error) {
       logger.error(error)
     }
   }
 
-  onJoin(client: Client, options, auth) {
-    this.dispatcher.dispatch(new OnJoinCommand(), { client, options, auth })
+  async onJoin(client: Client) {
+    const isBanned = await BannedUser.findOne({ uid: client.auth.uid })
+
+    if (isBanned) {
+      throw "Account banned"
+    }
+
+    const userProfile = await UserMetadata.findOne({ uid: client.auth.uid })
+    client.send(Transfer.USER_PROFILE, userProfile)
+    this.dispatcher.dispatch(new OnJoinCommand(), { client })
   }
 
   async onLeave(client: Client, consented: boolean) {
@@ -550,6 +556,9 @@ export default class GameRoom extends Room<GameState> {
 
       // allow disconnected client to reconnect into this room until 3 minutes
       await this.allowReconnection(client, 180)
+      const userProfile = await UserMetadata.findOne({ uid: client.auth.uid })
+      client.send(Transfer.USER_PROFILE, userProfile)
+      this.dispatcher.dispatch(new OnJoinCommand(), { client })
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
         //logger.info(`${client.auth.displayName} left game`)

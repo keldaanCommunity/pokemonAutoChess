@@ -692,21 +692,12 @@ export class OnPickBerryCommand extends Command<
   }
 }
 
-export class OnJoinCommand extends Command<
-  GameRoom,
-  {
-    client: Client
-    options: { spectate?: boolean }
-    auth
-  }
-> {
-  async execute({ client, options, auth }) {
+export class OnJoinCommand extends Command<GameRoom, { client: Client }> {
+  async execute({ client }) {
     try {
       //logger.debug("onJoin", client.auth.uid)
       const players = values(this.state.players)
-      if (options.spectate === true) {
-        this.state.spectators.add(client.auth.uid)
-      } else if (players.some((p) => p.id === auth.uid)) {
+      if (players.some((p) => p.id === client.auth.uid)) {
         /*logger.info(
           `${client.auth.displayName} (${client.id}) joined game room ${this.room.roomId}`
         )*/
@@ -717,10 +708,7 @@ export class OnJoinCommand extends Command<
           }
         }
       } else {
-        logger.warn(`player not in this game players list tried to join game`, {
-          userId: client.auth.uid,
-          roomId: this.room.roomId
-        })
+        this.state.spectators.add(client.auth.uid)
       }
     } catch (error) {
       logger.error(error)

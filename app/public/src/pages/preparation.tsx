@@ -80,6 +80,7 @@ export default function Preparation() {
                 } catch (error) {
                   logger.log(error)
                   localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
+                  dispatch(leavePreparation())
                   navigate("/lobby")
                   return
                 }
@@ -191,7 +192,8 @@ export default function Preparation() {
 
       r.onLeave((code) => {
         const shouldGoToLobby = (code === CloseCodes.USER_KICKED || code === CloseCodes.ROOM_DELETED || code === CloseCodes.ROOM_FULL || code === CloseCodes.ROOM_EMPTY || code === CloseCodes.USER_BANNED || code === CloseCodes.USER_RANK_TOO_LOW)
-        logger.info(`left preparation room with code ${code}`, { shouldGoToLobby })
+        const shouldReconnect = code === CloseCodes.ABNORMAL_CLOSURE || code === CloseCodes.TIMEOUT
+        logger.info(`left preparation room with code ${code}`, { shouldGoToLobby, shouldReconnect })
         if (shouldGoToLobby) {
           const errorMessage = CloseCodesMessages[code]
           if (errorMessage) {
@@ -201,6 +203,18 @@ export default function Preparation() {
           dispatch(leavePreparation())
           navigate("/lobby")
           playSound(SOUNDS.LEAVE_ROOM)
+        } else if (shouldReconnect) {
+          logger.log("Connection closed unexpectedly or timed out. Attempting reconnect.")
+          // Restart the expiry timer of the reconnection token for reconnect
+          localStore.set(
+            LocalStoreKeys.RECONNECTION_PREPARATION,
+            { reconnectionToken: r.reconnectionToken, roomId: r.roomId },
+            30
+          )
+          // clearing state variables to re-initialize
+          dispatch(leavePreparation())
+          initialized.current = false
+          reconnect()
         }
       })
 
