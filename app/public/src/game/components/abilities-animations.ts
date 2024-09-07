@@ -1269,7 +1269,7 @@ export function displayAbility(
       break
 
     case Ability.WATERFALL:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+      addAbilitySprite(skill, coordinates, true).setScale(2).setDepth(1)
       break
 
     case Ability.HELPING_HAND:
@@ -1278,10 +1278,6 @@ export function displayAbility(
 
     case Ability.MUD_BUBBLE:
       addAbilitySprite(skill, coordinates, true).setScale(2)
-      break
-
-    case Ability.PURIFY:
-      addAbilitySprite(Ability.MUD_BUBBLE, coordinates, true).setScale(4)
       break
 
     case Ability.ERUPTION: {

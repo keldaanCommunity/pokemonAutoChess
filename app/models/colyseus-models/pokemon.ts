@@ -4079,9 +4079,9 @@ export class Totodile extends Pokemon {
   atk = 7
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 120
   range = 1
-  skill = Ability.WATERFALL
+  skill = Ability.CRUNCH
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -4098,9 +4098,9 @@ export class Croconaw extends Pokemon {
   atk = 15
   def = 3
   speDef = 3
-  maxPP = 100
+  maxPP = 120
   range = 1
-  skill = Ability.WATERFALL
+  skill = Ability.CRUNCH
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -4116,9 +4116,9 @@ export class Feraligatr extends Pokemon {
   atk = 28
   def = 5
   speDef = 5
-  maxPP = 100
+  maxPP = 120
   range = 1
-  skill = Ability.WATERFALL
+  skill = Ability.CRUNCH
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -14520,6 +14520,37 @@ export class Pyukumuku extends Pokemon {
   attackSprite = AttackSprite.WATER_MELEE
 }
 
+export class Goldeen extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.NORMAL])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.SEAKING
+  hp = 90
+  atk = 8
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.WATERFALL
+  additional = true
+  attackSprite = AttackSprite.WATER_MELEE
+}
+
+export class Seaking extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.NORMAL])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 200
+  atk = 16
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.WATERFALL
+  additional = true
+  attackSprite = AttackSprite.WATER_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -15349,5 +15380,7 @@ export const PokemonClasses: Record<
   [Pkm.WISHIWASHI_SCHOOL]: WishiwashiSchool,
   [Pkm.PAWMI]: Pawmi,
   [Pkm.PAWMO]: Pawmo,
-  [Pkm.PAWMOT]: Pawmot
+  [Pkm.PAWMOT]: Pawmot,
+  [Pkm.GOLDEEN]: Goldeen,
+  [Pkm.SEAKING]: Seaking
 }
