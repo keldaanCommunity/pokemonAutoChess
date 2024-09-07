@@ -128,12 +128,27 @@ export function displayAbility(
     case Ability.FLAME_CHARGE:
       addAbilitySprite(skill, coordinates, true)
         .setScale(2)
+        .setDepth(1)
+        .setOrigin(1, 1)
         .setRotation(
           Math.atan2(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
-          ) -
+          ) +
             Math.PI / 2
+        )
+      break
+
+    case Ability.PASTEL_VEIL:
+      addAbilitySprite(skill, coordinates, true)
+        .setScale(2)
+        .setDepth(1)
+        .setOrigin(1, 1)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) + Math.PI
         )
       break
 

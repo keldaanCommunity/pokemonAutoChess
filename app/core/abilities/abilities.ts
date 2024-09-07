@@ -1014,14 +1014,9 @@ export class FlameChargeStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
-    let damage = 20
-    if (pokemon.stars === 2) {
-      damage = 40
-    }
-    if (pokemon.stars === 3) {
-      damage = 80
-    }
+    super.process(pokemon, state, board, target, crit, true)
+
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     if (farthestCoordinate) {
@@ -1043,6 +1038,15 @@ export class FlameChargeStrategy extends AbilityStrategy {
         }
       })
 
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: pokemon.skill,
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: farthestCoordinate.x,
+        targetY: farthestCoordinate.y,
+        orientation: pokemon.orientation
+      })
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
   }
@@ -9614,6 +9618,49 @@ export class PurifyStrategy extends AbilityStrategy {
   }
 }
 
+export class PastelVeilStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+
+    const shield = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const farthestCoordinate = board.getFarthestTargetCoordinateAvailablePlace(
+      pokemon,
+      true
+    )
+    if (farthestCoordinate) {
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team === pokemon.team) {
+          cell.value.status.clearNegativeStatus()
+          cell.value.addShield(shield, pokemon, 1, crit)
+        }
+      })
+
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: pokemon.skill,
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: farthestCoordinate.x,
+        targetY: farthestCoordinate.y,
+        orientation: pokemon.orientation
+      })
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -9969,5 +10016,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FELL_STINGER]: new FellStingerStrategy(),
   [Ability.GULP_MISSILE]: new GulpMissileStrategy(),
   [Ability.SCHOOLING]: new SchoolingStrategy(),
-  [Ability.DOUBLE_SHOCK]: new DoubleShockStrategy()
+  [Ability.DOUBLE_SHOCK]: new DoubleShockStrategy(),
+  [Ability.PASTEL_VEIL]: new PastelVeilStrategy()
 }

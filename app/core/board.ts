@@ -164,24 +164,28 @@ export default class Board {
     return cells
   }
 
-  getOuterRangeCells(cellX: number, cellY: number, range = 1, includesCenter = false) {
-    const cells = new Array<Cell>();
+  getOuterRangeCells(
+    cellX: number,
+    cellY: number,
+    range = 1,
+    includesCenter = false
+  ) {
+    const cells = new Array<Cell>()
 
     // Loop through all cells in the range
     for (let y = cellY - range; y <= cellY + range; y++) {
-        for (let x = cellX - range; x <= cellX + range; x++) {
-            // Skip the center if not included
-            if (x == cellX && y == cellY && !includesCenter) continue;
-            // Ensure coordinates are within grid bounds
-            if (y >= 0 && y < this.rows && x >= 0 && x < this.columns) {
-                cells.push({ x, y, value: this.cells[this.columns * y + x] });
-            }
+      for (let x = cellX - range; x <= cellX + range; x++) {
+        // Skip the center if not included
+        if (x == cellX && y == cellY && !includesCenter) continue
+        // Ensure coordinates are within grid bounds
+        if (y >= 0 && y < this.rows && x >= 0 && x < this.columns) {
+          cells.push({ x, y, value: this.cells[this.columns * y + x] })
         }
+      }
     }
 
-    return cells;
-}
-
+    return cells
+  }
 
   getCellsInFront(
     pokemon: PokemonEntity,
@@ -263,16 +267,16 @@ export default class Board {
     return cells
   }
   getAllPokemonCoordinates(board: Board): { x: number; y: number }[] {
-    let pokemonCoordinates: { x: number; y: number }[] = [];
-  
+    const pokemonCoordinates: { x: number; y: number }[] = []
+
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value !== undefined) {
         // Add coordinates of all Pokémon to the list
-        pokemonCoordinates.push({ x, y });
+        pokemonCoordinates.push({ x, y })
       }
-    });
-  
-    return pokemonCoordinates;
+    })
+
+    return pokemonCoordinates
   }
 
   getCellsBetween(x0: number, y0: number, x1: number, y1: number) {
@@ -364,7 +368,8 @@ export default class Board {
   }
 
   getFarthestTargetCoordinateAvailablePlace(
-    pokemon: IPokemonEntity
+    pokemon: IPokemonEntity,
+    targetAlly: boolean = false
   ):
     | { x: number; y: number; distance: number; target: PokemonEntity }
     | undefined {
@@ -378,7 +383,9 @@ export default class Board {
     this.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (
         value !== undefined &&
-        value.team !== pokemon.team &&
+        (targetAlly
+          ? value.team === pokemon.team
+          : value.team !== pokemon.team) &&
         value.isTargettable
       ) {
         candidateCells.push(

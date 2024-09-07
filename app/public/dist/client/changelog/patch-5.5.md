@@ -4,6 +4,8 @@
 - Meloetta Pirouette
 - Goldeen
 - Seaking
+- Galarian Ponyta
+- Galarian Rapidash
 
 # Changes to Pokemon & Abilities
 

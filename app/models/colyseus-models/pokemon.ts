@@ -7796,6 +7796,45 @@ export class Rapidash extends Pokemon {
   additional = true
   attackSprite = AttackSprite.FIRE_MELEE
 }
+
+export class GalarianPonyta extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FAIRY,
+    Synergy.PSYCHIC,
+    Synergy.LIGHT
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.GALARIAN_RAPIDASH
+  hp = 90
+  atk = 12
+  def = 3
+  speDef = 3
+  maxPP = 55
+  range = 1
+  skill = Ability.PASTEL_VEIL
+  regional = true
+  attackSprite = AttackSprite.FAIRY_MELEE
+}
+export class GalarianRapidash extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FAIRY,
+    Synergy.PSYCHIC,
+    Synergy.LIGHT
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 220
+  atk = 24
+  def = 5
+  speDef = 5
+  maxPP = 55
+  range = 1
+  skill = Ability.PASTEL_VEIL
+  regional = true
+  attackSprite = AttackSprite.FAIRY_MELEE
+}
+
 export class Makuhita extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.MONSTER])
   rarity = Rarity.RARE
@@ -14936,6 +14975,8 @@ export const PokemonClasses: Record<
   [Pkm.ETERNATUS]: Eternatus,
   [Pkm.PONYTA]: Ponyta,
   [Pkm.RAPIDASH]: Rapidash,
+  [Pkm.GALARIAN_PONYTA]: GalarianPonyta,
+  [Pkm.GALARIAN_RAPIDASH]: GalarianRapidash,
   [Pkm.NINCADA]: Nincada,
   [Pkm.NINJASK]: Ninjask,
   [Pkm.SHEDINJA]: Shedinja,
