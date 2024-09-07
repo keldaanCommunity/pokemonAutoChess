@@ -2863,6 +2863,7 @@
   "game-reconnect-modal-body": "You left a game in progress. Do you want to reconnect to your previous game ?",
   "toggle_locked": "Show locked",
   "creator": "Creator",
+  "switch_server": "Switch to this server",
   "version": "Version",
   "location": "Location",
   "ping": "Ping",
