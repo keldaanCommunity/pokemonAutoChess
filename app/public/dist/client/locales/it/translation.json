@@ -1263,6 +1263,7 @@
     "DRAGON_TAIL": "Infliggi [30,60,100,SP] SPECIAL e potenzia la DEF e SPE_DEF dell'utilizzatore di [1,2,3,SP].",
     "DRAGON_BREATH": "Infligge [25,50,100,SP] TRUE a tutti i Pokèmon nemici dietro il bersaglio.",
     "ICICLE_CRASH": "Infligge [20,40,80,SP] SPECIAL in un'area attorno al bersaglio.",
+    "ROOT": "Tutti i nemici adiacenti subiscono LOCKED per 4 secondi e gli vengono inflitti [10,20,40,SP] SPECIAL ogni volta che l'utilizzatore e gli alleati adiacenti vengono curati di [10,20,40,SP] HP",
     "TORMENT": "Potenzia l' ATK_SPEED del [20,40,60,SP]%.",
     "STOMP": "Infligge SPECIAL uguale a [3,4,5,SP] moltiplicato per l' ATK  dell'utilizzatore.",
     "PAYBACK": "Infligge [15,30,60,SP] SPECIAL. Il danno raddoppia se l'utilizzatore ha meno della metà dei suoi punti salute.",
@@ -1305,6 +1306,7 @@
     "PSYCHIC_SURGE": "Aumenta i AP di tutti i Pokémon PSYCHIC del [5,SP]%, tranne l'utilizzatore.",
     "MIND_BLOWN": "Infliggi il [50,SP]% dei HP attuali del bersaglio come SPECIAL.",
     "PAYDAY": "Infliggi [30,60,120,SP] SPECIAL. Se il bersaglio va KO, il giocatore riceve [1,2,3] GOLD.",
+    "PICKUP": "Infliggi [30,60,120,SP] SPECIAL e ruba uno degli oggetti equipaggiati dal bersaglio. Se non ha oggetti, ruba invece [1,2,3] GOLD",
     "BEAT_UP": "Evoca [1,2,3] Houndour ([100,SP]% HP, nessun oggetto)",
     "BLUE_FLARE": "Infliggi [50,SP] SPECIAL + 20 per ogni livello di sinergia FIRE al bersaglio ed a Pokèmon nemici adiacenti.",
     "FUSION_BOLT": "Infligge [50,SP] SPECIAL + 40 per ogni livello di sinergia ELECTRIC al bersaglio ed a Pokèmon nemici adiacenti.",
@@ -1469,6 +1471,8 @@
     "KNOCK_OFF": "Infliggi [90,SP] SPECIAL. Se il bersaglio ha equipaggiato oggetti, gli vengono rimossi e gli vengono inflitti [30,SP] SPECIAL per ogni oggetto rimosso.",
     "FISHIOUS_REND": "Infliggi [80,SP] SPECIAL. Il danno raddopia se l'attacante ha più ATK_SPEED del bersaglio.",
     "RECOVER": "Curati del [25,SP]% dei HP massimi.",
+    "CURSE": "Causa CURSE al nemico con più HP ed andrà KO dopo [12,8,4,SP=-0.2] secondi.",
+    "DOOM_DESIRE": "Dopo 2 secondi, infliggi [150,SP] SPECIAL al bersaglio. Recupera 60 PP se il bersaglio è andato KO prima di essere colpito dall'abilità.",
     "TIME_TRAVEL": "Torna indietro nel tempo per recuperare le forze. A tutti gli alleati gli vengono rimossi gli status alterati e vengono curati di [25,SP] HP.",
     "POLTERGEIST": "Infliggi [30,60,120,SP] SPECIAL più [20,SP] SPECIAL addizionali per ogni oggetto equipaggiato dal bersaglio ([40,SP] se l'oggetto è ARTIFICIAL).",
     "GOLD_RUSH": "Infliggi [20,SP] più l'ammontare di GOLD come SPECIAL poi guadagni 2 GOLD.",
@@ -1904,7 +1908,8 @@
     "ICY_ROCK": "Rocciafredda",
     "HEAT_ROCK": "Rocciacalda",
     "SMOOTH_ROCK": "Roccialiscia",
-    "BLACK_AUGURITE": "Augite Nera"
+    "BLACK_AUGURITE": "Augite Nera",
+    "FIRE_SHARD": "Coccio di Fuoco"
   },
   "item_description": {
     "FOSSIL_STONE": "Un fossile di un Pokémon vissuto in epoca preistorica",
