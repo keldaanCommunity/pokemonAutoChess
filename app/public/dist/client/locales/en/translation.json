@@ -374,7 +374,8 @@
     "FELL_STINGER": "Fell Stinger",
     "GULP_MISSILE": "Gulp Missile",
     "SCHOOLING": "Schooling",
-    "DOUBLE_SHOCK": "Double Shock"
+    "DOUBLE_SHOCK": "Double Shock",
+    "CHARM": "Charm"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1204,7 +1205,8 @@
     "PAWMO": "Pawmo",
     "PAWMOT": "Pawmot",
     "GOLDEEN": "Goldeen",
-    "SEAKING": "Seaking"
+    "SEAKING": "Seaking",
+    "LUVDISC": "Luvdisc"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1559,7 +1561,8 @@
     "GULP_MISSILE": "Shoot an $t(pkm.ARROKUDA) with full PP at the target, dealing [55,SP] SPECIAL to the target and adjacent enemies. There is a 1 in 3 chance a $t(pkm.PIKACHU) will be fired instead.",
     "SCHOOLING": "Deals [10,SP]% of its max HP as SPECIAL to the target and adjacent enemies. If a Wishiwashi is on the bench, it joins the school and gives 50 permanent HP to the user.",
     "DOUBLE_SHOCK": "The user emits a powerful electric shock, dealing [50,100,200,SP] SPECIAL. The user is PARALYSIS for 3 seconds.",
-    "PURIFY": "Clear negative status and heal the user for [15,30,60,SP] HP."
+    "PURIFY": "Clear negative status and heal the user for [15,30,60,SP] HP.",
+    "CHARM": "Inflicts CHARM to the target for 3 seconds and reduces its ATK by [2,3,4,SP] (min 1)"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2002,7 +2005,7 @@
     "HARD_STONE": "Gives ROCK synergy",
     "BIG_NUGGET": "Gives GROUND synergy. If the holder is alive after 15 seconds and gets 5 stacks of GROUND, gain 3 GOLD.",
     "INCENSE": "Prevent WILD Pokémon encounter in shop when held. Instead, each Pokémon in shop has an additional 5% chance to share a common synergy with the holder.",
-    "EXP_SHARE": "Get the best ATK, DEF and SPE_DEF values of adjacent allies in the same row",
+    "EXP_SHARE": "Get the best ATK, AP, DEF and SPE_DEF values of adjacent allies in the same row",
     "POKERUS_VIAL": "Infects the holder with POKERUS, gaining 1 ATK and 10 AP every 2 seconds and transmitting to allies",
     "ROTOM_PHONE": "Gives GHOST synergy. Summons Rotom Drone near the holder",
     "METEORITE": "A meteorite that seems to interact with Deoxys. It continues to give off a faint glow and is slightly warm to the touch.",
@@ -2130,7 +2133,8 @@
     "SLOW_START": "Starts at 0.5 ATK_SPEED. After first ability cast, gains 30% ATK_SPEED and 10 ATK",
     "STONJOURNER": "Does not move or attack until PP bar is full. Its power spot gives 50 AP to all adjacent allies at the start of the fight",
     "POISON_PIN": "Poipole will evolve into Naganadel after stacking 200 HP",
-    "PYUKUMUKU": "When this pokemon is KO, it explodes dealing [100,SP] SPECIAL to adjacent enemies."
+    "PYUKUMUKU": "When this pokemon is KO, it explodes dealing [100,SP] SPECIAL to adjacent enemies.",
+    "LUVDISC": "The allies on its left and on its right fall in love, and share the best value of their respective ATK, AP, DEF and SPE_DEF at the start of the fight"
   },
   "stat": {
     "ATK": "Attack",

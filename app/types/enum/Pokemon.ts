@@ -827,7 +827,8 @@ export enum Pkm {
   PAWMO = "PAWMO",
   PAWMOT = "PAWMOT",
   GOLDEEN = "GOLDEEN",
-  SEAKING = "SEAKING"
+  SEAKING = "SEAKING",
+  LUVDISC = "LUVDISC"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1657,7 +1658,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.PAWMO]: "0922",
   [Pkm.PAWMOT]: "0923",
   [Pkm.GOLDEEN]: "0118",
-  [Pkm.SEAKING]: "0119"
+  [Pkm.SEAKING]: "0119",
+  [Pkm.LUVDISC]: "0370"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2487,7 +2489,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.PAWMO]: Pkm.PAWMI,
   [Pkm.PAWMOT]: Pkm.PAWMI,
   [Pkm.GOLDEEN]: Pkm.GOLDEEN,
-  [Pkm.SEAKING]: Pkm.GOLDEEN
+  [Pkm.SEAKING]: Pkm.GOLDEEN,
+  [Pkm.LUVDISC]: Pkm.LUVDISC
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -6789,5 +6792,10 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.RearUp,
     emote: AnimationType.RearUp
+  },
+  [Pkm.LUVDISC]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Twirl
   }
 }

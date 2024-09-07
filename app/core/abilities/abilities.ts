@@ -9661,6 +9661,21 @@ export class PastelVeilStrategy extends AbilityStrategy {
   }
 }
 
+export class CharmStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const attackReduce = [2, 3, 4][pokemon.stars - 1] ?? 4
+    target.addAttack(-attackReduce, pokemon, 1, crit)
+    target.status.triggerCharm(3000, target, pokemon, false)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -10017,5 +10032,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.GULP_MISSILE]: new GulpMissileStrategy(),
   [Ability.SCHOOLING]: new SchoolingStrategy(),
   [Ability.DOUBLE_SHOCK]: new DoubleShockStrategy(),
-  [Ability.PASTEL_VEIL]: new PastelVeilStrategy()
+  [Ability.PASTEL_VEIL]: new PastelVeilStrategy(),
+  [Ability.CHARM]: new CharmStrategy()
 }

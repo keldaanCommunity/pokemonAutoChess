@@ -1770,7 +1770,7 @@
     "HARD_STONE": "Dá sinergia ao ROCK",
     "BIG_NUGGET": "Dá sinergia ao GROUND. Se quem segura estiver vivo após 15 segundos e conseguir 5 stacks de GROUND, ganha 3 OURO.",
     "INCENSE": "Impedir o encontro de Pokémon WILD na loja quando segurado. Em vez disso, cada Pokémon na loja tem 5% de chance adicional de compartilhar uma sinergia comum com o quem segura.",
-    "EXP_SHARE": "Obtenha os melhores valores de ATK, DEF e SPE_DEF de aliados adjacentes na mesma linha",
+    "EXP_SHARE": "Obtenha os melhores valores de ATK, AP, DEF e SPE_DEF de aliados adjacentes na mesma linha",
     "POKERUS_VIAL": "Infecta o titular com POKERUS, ganhando 1 ATK e 10 AP a cada 2 segundos e transmitindo para aliados",
     "ROTOM_PHONE": "Dá sinergia ao GHOST. Invoca Rotom Drone perto de quem segura",
     "METEORITE": "Um meteorito que parece interagir com Deoxys. Ele continua emitindo um leve brilho e é ligeiramente quente ao toque.",

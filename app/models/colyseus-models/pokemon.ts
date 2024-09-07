@@ -7776,7 +7776,7 @@ export class Ponyta extends Pokemon {
   atk = 12
   def = 3
   speDef = 3
-  maxPP = 55
+  maxPP = 60
   range = 1
   skill = Ability.FLAME_CHARGE
   additional = true
@@ -7790,7 +7790,7 @@ export class Rapidash extends Pokemon {
   atk = 24
   def = 5
   speDef = 5
-  maxPP = 55
+  maxPP = 60
   range = 1
   skill = Ability.FLAME_CHARGE
   additional = true
@@ -7810,7 +7810,7 @@ export class GalarianPonyta extends Pokemon {
   atk = 12
   def = 3
   speDef = 3
-  maxPP = 55
+  maxPP = 60
   range = 1
   skill = Ability.PASTEL_VEIL
   regional = true
@@ -7828,7 +7828,7 @@ export class GalarianRapidash extends Pokemon {
   atk = 24
   def = 5
   speDef = 5
-  maxPP = 55
+  maxPP = 60
   range = 1
   skill = Ability.PASTEL_VEIL
   regional = true
@@ -14590,6 +14590,21 @@ export class Seaking extends Pokemon {
   attackSprite = AttackSprite.WATER_MELEE
 }
 
+export class Luvdisc extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.AQUATIC])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 150
+  atk = 11
+  def = 3
+  speDef = 5
+  maxPP = 60
+  range = 3
+  skill = Ability.CHARM
+  attackSprite = AttackSprite.WATER_RANGE
+  passive = Passive.LUVDISC
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -15423,5 +15438,6 @@ export const PokemonClasses: Record<
   [Pkm.PAWMO]: Pawmo,
   [Pkm.PAWMOT]: Pawmot,
   [Pkm.GOLDEEN]: Goldeen,
-  [Pkm.SEAKING]: Seaking
+  [Pkm.SEAKING]: Seaking,
+  [Pkm.LUVDISC]: Luvdisc
 }
