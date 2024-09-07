@@ -12,6 +12,7 @@ button {
   border: var(--border-thin);
   text-shadow: 2px 2px 2px #00000040;
   box-shadow: inset -6px -6px 0px 0px #cfcfcf, var(--shadow-clickable);
+  text-decoration: none;
 }
 
 .bubbly:not([disabled]):hover {

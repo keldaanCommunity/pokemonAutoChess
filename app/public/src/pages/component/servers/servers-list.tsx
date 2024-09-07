@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { CONTENT_AS_HTML, markdownToConfig } from "markdown-to-config"
-import "./servers-list.css"
 import DiscordButton from "../buttons/discord-button"
+import { cc } from "../../utils/jsx"
+import "./servers-list.css"
 
 interface ServerInfo {
     name: string
@@ -49,18 +50,17 @@ export default function ServersList() {
             {servers.length === 0 && <p>{t("loading")}</p>}
             <ul>
                 {servers.map((server) => (
-                    <li key={server.name} className="server my-box">
-                        <ServerInfo server={server} />
-                    </li>
+                    <ServerInfo key={server.name} server={server} />
                 ))}
             </ul>
-        </div>
+        </div >
     )
 }
 
 export function ServerInfo(props: { server: ServerInfo }) {
     const { t } = useTranslation()
     const server = props.server
+    const isCurrentServer = server.url?.startsWith(window.location.origin)
     const [serverStatus, setServerStatus] = useState<ServerStatus>({ status: "checking...", ccu: 0, maxCcu: 0, version: "unknown", ping: "" })
     useEffect(() => {
         if (!server.url) {
@@ -91,10 +91,11 @@ export function ServerInfo(props: { server: ServerInfo }) {
             })
     }, [server.url])
 
-    return <>
+    return <li className={cc("server my-box", { current: isCurrentServer })} >
         <header>
             <img className="logo" src={server.logo} alt={server.name} />
             <h2>{server.name}{server.url && <> - <a href={server.url}>{server.url}</a></>}</h2>
+            {!isCurrentServer && <a className="bubbly blue" href={server.url}>{t("switch_server")}</a>}
             {server.discord && <DiscordButton url={server.discord} />}
         </header>
         <dl>
@@ -114,5 +115,5 @@ export function ServerInfo(props: { server: ServerInfo }) {
             </>}
         </dl>
         <div dangerouslySetInnerHTML={{ __html: server.description }} className="description" />
-    </>
+    </li>
 }

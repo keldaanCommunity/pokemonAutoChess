@@ -7,18 +7,23 @@
     margin-bottom: 1em;
 }
 
-#servers-list .logo {
-    width: 64px;
-    height: 64px;
-    margin-right: 1em;
-    flex: 0;
-    object-fit: contain;
-}
-
 #servers-list .server header {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    gap: 0.5em;
+}
+
+#servers-list  .server .logo {
+    width: 64px;
+    height: 64px;
+    flex: 0;
+    object-fit: contain;
+}
+
+
+#servers-list .server.current {
+    background-color: var(--color-bg-accent);
 }
 
 #servers-list .server h2 {
@@ -43,16 +48,6 @@
 #servers-list .server dd {
     flex: 1;
     margin-left: .5em;
-}
-
-#servers-list .server .links {
-    float: right;
-    margin-top: -.5em;
-}
-
-#servers-list .server .links a {
-    text-decoration: none;
-    margin-left: 0.5em;
 }
 
 #servers-list .server .description {
