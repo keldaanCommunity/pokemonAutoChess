@@ -1,5 +1,6 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
+import { NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import Player from "../../../../models/colyseus-models/player"
 import { isOnBench } from "../../../../models/colyseus-models/pokemon"
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
@@ -11,7 +12,8 @@ import {
   GameMode,
   GamePhaseState,
   Orientation,
-  PokemonActionState
+  PokemonActionState,
+  Stat
 } from "../../../../types/enum/Game"
 import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
@@ -569,13 +571,18 @@ export default class BoardManager {
     }
   }
 
-  changePokemon(pokemon: IPokemon, field: string, value) {
+  changePokemon<F extends NonFunctionPropNames<IPokemon>>(
+    pokemon: IPokemon,
+    field: F,
+    value: IPokemon[F],
+    previousValue: IPokemon[F]
+  ) {
     const pokemonUI = this.pokemons.get(pokemon.id)
     let coordinates: number[]
     if (pokemonUI) {
       switch (field) {
         case "positionX":
-          pokemonUI.positionX = value
+          pokemonUI.positionX = value as IPokemon["positionX"]
           pokemonUI.positionY = pokemon.positionY
           coordinates = transformCoordinate(
             pokemon.positionX,
@@ -586,7 +593,7 @@ export default class BoardManager {
           break
 
         case "positionY":
-          pokemonUI.positionY = value
+          pokemonUI.positionY = value as IPokemon["positionY"]
           pokemonUI.positionX = pokemon.positionX
           coordinates = transformCoordinate(
             pokemon.positionX,
@@ -601,27 +608,29 @@ export default class BoardManager {
           break
 
         case "action":
-          this.animationManager.animatePokemon(pokemonUI, value, false)
+          this.animationManager.animatePokemon(
+            pokemonUI,
+            value as IPokemon["action"],
+            false
+          )
           break
 
         case "hp": {
           const baseHP = getPokemonData(pokemon.name).hp
           const sizeBuff = (pokemon.hp - baseHP) / baseHP
           pokemonUI.sprite.setScale(2 + sizeBuff)
-          pokemonUI.hp = value
+          pokemonUI.hp = value as IPokemon["hp"]
           break
         }
 
         case "atk":
-          pokemonUI.atk = value
+          pokemonUI.atk = value as IPokemon["atk"]
+          if (value > previousValue) this.displayBoost(Stat.ATK, pokemonUI)
           break
 
         case "ap":
-          pokemonUI.ap = value
-          break
-
-        default:
-          pokemonUI[field] = value
+          pokemonUI.ap = value as IPokemon["ap"]
+          if (value > previousValue) this.displayBoost(Stat.AP, pokemonUI)
           break
       }
     }
@@ -676,5 +685,26 @@ export default class BoardManager {
       t(`scribble_description.${this.specialGameRule}`),
       t(`scribble.${this.specialGameRule}`)
     )
+  }
+
+  displayBoost(stat: Stat, pokemon: PokemonSprite) {
+    pokemon.emoteAnimation()
+    const coordinates = transformCoordinate(
+      pokemon.positionX,
+      pokemon.positionY
+    )
+    const boost = this.scene.add
+      .sprite(
+        coordinates[0],
+        coordinates[1] - 10,
+        "boosts",
+        `BOOST_${stat}/000.png`
+      )
+      .setDepth(7)
+      .setScale(2, 2)
+    boost.anims.play(`BOOST_${stat}`)
+    boost.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      boost.destroy()
+    })
   }
 }

@@ -374,11 +374,10 @@ class GameContainer {
 
     const listenForPokemonChanges = (pokemon: Pokemon) => {
       pokemon.onChange(() => {
-        const fields: NonFunctionPropNames<Pokemon>[] = [
+        const fields: NonFunctionPropNames<IPokemon>[] = [
           "positionX",
           "positionY",
           "action",
-          "types",
           "hp",
           "atk",
           "ap"
@@ -386,7 +385,12 @@ class GameContainer {
         fields.forEach((field) => {
           pokemon.listen(field, (value, previousValue) => {
             if (field && player.id === this.spectatedPlayerId) {
-              this.gameScene?.board?.changePokemon(pokemon, field, value)
+              this.gameScene?.board?.changePokemon(
+                pokemon,
+                field,
+                value as IPokemon[typeof field],
+                previousValue as IPokemon[typeof field]
+              )
             }
           })
         })
