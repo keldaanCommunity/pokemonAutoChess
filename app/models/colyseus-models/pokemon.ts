@@ -14611,8 +14611,8 @@ export class Audino extends Pokemon {
   stars = 3
   hp = 200
   atk = 16
-  def = 2
-  speDef = 3
+  def = 4
+  speDef = 4
   maxPP = 80
   range = 2
   skill = Ability.ENTRAINMENT
