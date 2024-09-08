@@ -32,6 +32,7 @@ import { values } from "../utils/schemas"
 import Board from "./board"
 import Dps from "./dps"
 import { PokemonEntity, getStrongestUnit, getUnitScore } from "./pokemon-entity"
+import { DelayedCommand } from "./simulation-command"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -468,7 +469,7 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     if (item === Item.DYNAMAX_BAND) {
-      pokemon.addMaxHP(3 * pokemon.hp, pokemon, 0, false)
+      pokemon.addMaxHP(2.5 * pokemon.hp, pokemon, 0, false)
     }
 
     if (item === Item.GOLD_BOTTLE_CAP && pokemon.player) {
@@ -694,43 +695,62 @@ export default class Simulation extends Schema implements ISimulation {
         }
 
         if (pokemon.items.has(Item.COMET_SHARD)) {
-          setTimeout(() => {
-            const farthestCoordinate =
-              this.board.getFarthestTargetCoordinateAvailablePlace(pokemon)
-            if (farthestCoordinate) {
-              const target = farthestCoordinate.target as PokemonEntity
-              pokemon.skydiveTo(
-                farthestCoordinate.x,
-                farthestCoordinate.y,
-                this.board
-              )
-              pokemon.targetX = target.positionX
-              pokemon.targetY = target.positionY
-              pokemon.status.triggerProtect(3000)
-              setTimeout(() => {
-                pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-                  id: pokemon.simulation.id,
-                  skill: "COMET_CRASH",
-                  positionX: farthestCoordinate.x,
-                  positionY: farthestCoordinate.y,
-                  targetX: target.positionX,
-                  targetY: target.positionY
-                })
-              }, 500)
+          pokemon.commands.push(
+            new DelayedCommand(() => {
+              const farthestCoordinate =
+                this.board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+              if (farthestCoordinate) {
+                const target = farthestCoordinate.target as PokemonEntity
+                pokemon.skydiveTo(
+                  farthestCoordinate.x,
+                  farthestCoordinate.y,
+                  this.board
+                )
+                pokemon.targetX = target.positionX
+                pokemon.targetY = target.positionY
+                pokemon.status.triggerProtect(3000)
+                pokemon.commands.push(
+                  new DelayedCommand(() => {
+                    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+                      id: pokemon.simulation.id,
+                      skill: "COMET_CRASH",
+                      positionX: farthestCoordinate.x,
+                      positionY: farthestCoordinate.y,
+                      targetX: target.positionX,
+                      targetY: target.positionY
+                    })
+                  }, 500)
+                )
 
-              setTimeout(() => {
-                if (target?.life > 0) {
-                  target.handleSpecialDamage(
-                    3 * pokemon.atk,
-                    this.board,
-                    AttackType.SPECIAL,
-                    pokemon as PokemonEntity,
-                    false
-                  )
-                }
-              }, 1000)
-            }
-          }, 100)
+                pokemon.commands.push(
+                  new DelayedCommand(() => {
+                    if (target?.life > 0) {
+                      target.handleSpecialDamage(
+                        3 * pokemon.atk,
+                        this.board,
+                        AttackType.SPECIAL,
+                        pokemon as PokemonEntity,
+                        false
+                      )
+                      this.board
+                        .getAdjacentCells(target.positionX, target.positionY)
+                        .forEach((cell) => {
+                          if (cell.value && cell.value.team !== pokemon.team) {
+                            cell.value.handleSpecialDamage(
+                              pokemon.atk,
+                              this.board,
+                              AttackType.SPECIAL,
+                              pokemon as PokemonEntity,
+                              false
+                            )
+                          }
+                        })
+                    }
+                  }, 1000)
+                )
+              }
+            }, 100)
+          )
         }
 
         if (pokemon.passive === Passive.SPOT_PANDA) {

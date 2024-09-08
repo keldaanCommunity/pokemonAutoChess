@@ -683,7 +683,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   },
   [Item.GOLD_BOTTLE_CAP]: {},
   [Item.SACRED_ASH]: {},
-  [Item.COMET_SHARD]: { [Stat.ATK]: 10 },
+  [Item.COMET_SHARD]: { [Stat.ATK]: 12 },
   [Item.ABSORB_BULB]: { [Stat.DEF]: 8, [Stat.SPE_DEF]: 8 },
   [Item.WHITE_FLUTE]: {},
   [Item.DAMP_ROCK]: {},

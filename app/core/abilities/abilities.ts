@@ -65,7 +65,7 @@ import {
   shuffleArray
 } from "../../utils/random"
 import { values } from "../../utils/schemas"
-import { AbilityCommand } from "../simulation-command"
+import { DelayedCommand } from "../simulation-command"
 import { isOnBench } from "../../models/colyseus-models/pokemon"
 
 export class BlueFlareStrategy extends AbilityStrategy {
@@ -4403,7 +4403,7 @@ export class SkyAttackStrategy extends AbilityStrategy {
     if (destination) {
       pokemon.skydiveTo(destination.x, destination.y, board)
       pokemon.commands.push(
-        new AbilityCommand(() => {
+        new DelayedCommand(() => {
           pokemon.simulation.room.broadcast(Transfer.ABILITY, {
             id: pokemon.simulation.id,
             skill: Ability.SKY_ATTACK,
@@ -4416,7 +4416,7 @@ export class SkyAttackStrategy extends AbilityStrategy {
       )
 
       pokemon.commands.push(
-        new AbilityCommand(() => {
+        new DelayedCommand(() => {
           if (destination.target?.life > 0) {
             const damage = 120
             destination.target.handleSpecialDamage(
@@ -4446,7 +4446,7 @@ export class FlyingPressStrategy extends AbilityStrategy {
     if (destination) {
       pokemon.skydiveTo(destination.x, destination.y, board)
       pokemon.commands.push(
-        new AbilityCommand(() => {
+        new DelayedCommand(() => {
           pokemon.simulation.room.broadcast(Transfer.ABILITY, {
             id: pokemon.simulation.id,
             skill: Ability.FLYING_PRESS,
@@ -4459,7 +4459,7 @@ export class FlyingPressStrategy extends AbilityStrategy {
       )
 
       pokemon.commands.push(
-        new AbilityCommand(() => {
+        new DelayedCommand(() => {
           if (destination.target && destination.target.life > 0) {
             const damage = 0.3 * pokemon.hp
             destination.target.handleSpecialDamage(
@@ -5366,7 +5366,7 @@ export class EruptionStrategy extends AbilityStrategy {
 
     for (let i = 0; i < numberOfProjectiles; i++) {
       pokemon.commands.push(
-        new AbilityCommand(() => {
+        new DelayedCommand(() => {
           const x = randomBetween(0, BOARD_WIDTH - 1)
           const y = randomBetween(0, BOARD_HEIGHT - 1)
           const value = board.getValue(x, y)
@@ -5480,7 +5480,7 @@ export class MistBallStrategy extends AbilityStrategy {
     })
 
     pokemon.commands.push(
-      new AbilityCommand(() => {
+      new DelayedCommand(() => {
         effectInLine(board, pokemon, target, (targetInLine) => {
           if (targetInLine != null && targetInLine.team !== pokemon.team) {
             targetInLine.handleSpecialDamage(
@@ -5532,7 +5532,7 @@ export class LusterPurgeStrategy extends AbilityStrategy {
     })
 
     pokemon.commands.push(
-      new AbilityCommand(() => {
+      new DelayedCommand(() => {
         effectInLine(board, pokemon, target, (targetInLine) => {
           if (targetInLine != null && targetInLine.team !== pokemon.team) {
             targetInLine.handleSpecialDamage(
@@ -5584,7 +5584,7 @@ export class LinkCableStrategy extends AbilityStrategy {
     }
 
     pokemon.commands.push(
-      new AbilityCommand(() => {
+      new DelayedCommand(() => {
         if (pokemon.life <= 0) return
         const partner = board.find(
           (x, y, entity) =>
@@ -5786,7 +5786,7 @@ export class AstralBarrageStrategy extends AbilityStrategy {
     for (let i = 0; i < nbGhosts; i++) {
       const randomTarget = pickRandomIn(enemies)
       pokemon.commands.push(
-        new AbilityCommand(() => {
+        new DelayedCommand(() => {
           pokemon.simulation.room.broadcast(Transfer.ABILITY, {
             id: pokemon.simulation.id,
             skill: Ability.ASTRAL_BARRAGE,
@@ -7441,7 +7441,7 @@ export class DoomDesireStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit, true)
     pokemon.commands.push(
-      new AbilityCommand(() => {
+      new DelayedCommand(() => {
         if (target && target.life > 0) {
           pokemon.simulation.room.broadcast(Transfer.ABILITY, {
             id: pokemon.simulation.id,
@@ -8203,7 +8203,7 @@ export class SunsteelStrikeStrategy extends AbilityStrategy {
         board
       )
       pokemon.commands.push(
-        new AbilityCommand(() => {
+        new DelayedCommand(() => {
           pokemon.simulation.room.broadcast(Transfer.ABILITY, {
             id: pokemon.simulation.id,
             skill: Ability.SUNSTEEL_STRIKE,
@@ -8216,7 +8216,7 @@ export class SunsteelStrikeStrategy extends AbilityStrategy {
       )
 
       pokemon.commands.push(
-        new AbilityCommand(() => {
+        new DelayedCommand(() => {
           const cells = board.getAdjacentCells(
             mostSurroundedCoordinate.x,
             mostSurroundedCoordinate.y
@@ -9166,7 +9166,7 @@ export class BounceStrategy extends AbilityStrategy {
     )
     for (let i = 0; i < nbBounces; i++) {
       pokemon.commands.push(
-        new AbilityCommand(() => {
+        new DelayedCommand(() => {
           const destination =
             board.getFarthestTargetCoordinateAvailablePlace(pokemon)
           if (destination && pokemon.hp > 0) {
@@ -9538,7 +9538,7 @@ export class GulpMissileStrategy extends AbilityStrategy {
     )
 
     pokemon.commands.push(
-      new AbilityCommand(
+      new DelayedCommand(
         () => {
           const coord = state.getNearestAvailablePlaceCoordinates(target, board)
           if (coord) {

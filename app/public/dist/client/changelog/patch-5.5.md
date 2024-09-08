@@ -45,6 +45,8 @@
 
 - Nerf Star dust: now gives 50% of max PP as SHIELD instead of 60%
 - Buff Exp. Share: now also takes the best value of AP
+- Buff Comet shard: Atk 10→12, comet now also hits adjacent enemies
+- Nerf Dynamax Band: max HP gain: 300% → 250%
 
 # Gameplay
 
