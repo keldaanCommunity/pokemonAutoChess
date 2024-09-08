@@ -7426,8 +7426,7 @@ export class CurseStrategy extends AbilityStrategy {
     enemies.sort((a, b) => (a.status.curse ? +1 : b.hp - a.hp))
     const enemyWithHighestHP = enemies[0]
     const curseDelay =
-      ([12000, 8000, 4000][pokemon.stars - 1] ?? 4000) *
-      (1 - (0.2 * pokemon.ap) / 100)
+      ([8000, 4000][pokemon.stars - 1] ?? 4000) * (1 - (0.2 * pokemon.ap) / 100)
     enemyWithHighestHP.status.triggerCurse(curseDelay)
   }
 }

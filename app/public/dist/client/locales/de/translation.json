@@ -1462,7 +1462,7 @@
     "KNOCK_OFF": "Verursacht [90,SP] SPECIAL. Wenn das Ziel Gegenstände in der Hand hält, werden diese entfernt und pro Gegenstand wird zusätzlich [30,SP] SPECIAL zugefügt.",
     "FISHIOUS_REND": "Verursacht [80,SP] SPECIAL. Verdoppelt den Schaden, wenn der Angreifer mehr ATK_SPEED als das Ziel hat.",
     "RECOVER": "Heilung um [25,SP]% der Maximal-HP",
-    "CURSE": "Fügt dem Gegner mit den höchsten HP einen Fluch zu, der ihn nach [12,8,4,SP=-0.2] Sekunden KO macht.",
+    "CURSE": "Fügt dem Gegner mit den höchsten HP einen Fluch zu, der ihn nach [8,4,SP=-0.2] Sekunden KO macht.",
     "DOOM_DESIRE": "Füge dem Ziel nach 2 Sekunden [150,SP] SPECIAL zu. Erhalte 60 PP zurück, wenn das Ziel in der Zwischenzeit KO ist.",
     "TIME_TRAVEL": "Gehen Sie in der Zeit zurück, um die verlorene Gesundheit wiederzuerlangen. Der negative Status aller Verbündeten wird gelöscht und sie werden um [25,SP] HP geheilt.",
     "POLTERGEIST": "Verursacht [30,60,120,SP] SPECIAL + [20,SP] SPECIAL für jeden Gegenstand in der Hand des Ziels ([40,SP] wenn der Gegenstand ARTIFICIAL ist)",
