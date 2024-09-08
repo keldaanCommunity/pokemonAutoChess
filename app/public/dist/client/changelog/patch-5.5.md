@@ -27,6 +27,8 @@
 # Changes to Synergies
 
 - Fire: chance to burn no longer increased after fire 2 ; Fire 8: get a fire shard after each round
+- Water pokemons no longer have dodge chance
+- Ghost pokemons now have 25% dodge chance
 
 # Changes to Items
 
