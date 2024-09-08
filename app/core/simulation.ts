@@ -608,8 +608,29 @@ export default class Simulation extends Schema implements ISimulation {
               if (value.atk > pokemon.atk) pokemon.atk = value.atk
               if (value.def > pokemon.def) pokemon.def = value.def
               if (value.speDef > pokemon.speDef) pokemon.speDef = value.speDef
+              if (value.ap > pokemon.ap) pokemon.ap = value.ap
             }
           })
+        }
+
+        if (pokemon.passive === Passive.LUVDISC) {
+          const lovers = [-1, 1].map((offset) =>
+            this.board.getValue(pokemon.positionX + offset, pokemon.positionY)
+          )
+          if (lovers[0] && lovers[1]) {
+            const bestAtk = Math.max(lovers[0].atk, lovers[1].atk)
+            const bestDef = Math.max(lovers[0].def, lovers[1].def)
+            const bestSpeDef = Math.max(lovers[0].speDef, lovers[1].speDef)
+            const bestAP = Math.max(lovers[0].ap, lovers[1].ap)
+            lovers[0].atk = bestAtk
+            lovers[1].atk = bestAtk
+            lovers[0].def = bestDef
+            lovers[1].def = bestDef
+            lovers[0].speDef = bestSpeDef
+            lovers[1].speDef = bestSpeDef
+            lovers[0].ap = bestAP
+            lovers[1].ap = bestAP
+          }
         }
 
         if (pokemon.items.has(Item.WHITE_FLUTE)) {

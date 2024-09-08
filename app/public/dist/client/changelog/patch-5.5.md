@@ -4,6 +4,10 @@
 - Meloetta Pirouette
 - Goldeen
 - Seaking
+- Galarian Ponyta
+- Galarian Rapidash
+- Luvdisc
+- Audino
 
 # Changes to Pokemon & Abilities
 
@@ -31,6 +35,7 @@
 # Changes to Items
 
 - Nerf Star dust: now gives 50% of max PP as SHIELD instead of 60%
+- Buff Exp. Share: now also takes the best value of AP
 
 # Gameplay
 

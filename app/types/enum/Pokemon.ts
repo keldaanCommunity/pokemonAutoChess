@@ -381,6 +381,8 @@ export enum Pkm {
   ETERNATUS = "ETERNATUS",
   PONYTA = "PONYTA",
   RAPIDASH = "RAPIDASH",
+  GALARIAN_PONYTA = "GALARIAN_PONYTA",
+  GALARIAN_RAPIDASH = "GALARIAN_RAPIDASH",
   NINCADA = "NINCADA",
   NINJASK = "NINJASK",
   SHEDINJA = "SHEDINJA",
@@ -825,7 +827,9 @@ export enum Pkm {
   PAWMO = "PAWMO",
   PAWMOT = "PAWMOT",
   GOLDEEN = "GOLDEEN",
-  SEAKING = "SEAKING"
+  SEAKING = "SEAKING",
+  LUVDISC = "LUVDISC",
+  AUDINO = "AUDINO"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1218,6 +1222,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SHEDINJA]: "0292",
   [Pkm.PONYTA]: "0077",
   [Pkm.RAPIDASH]: "0078",
+  [Pkm.GALARIAN_PONYTA]: "0077-0001",
+  [Pkm.GALARIAN_RAPIDASH]: "0078-0001",
   [Pkm.CACNEA]: "0331",
   [Pkm.CACTURNE]: "0332",
   [Pkm.TAUROS]: "0128",
@@ -1653,7 +1659,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.PAWMO]: "0922",
   [Pkm.PAWMOT]: "0923",
   [Pkm.GOLDEEN]: "0118",
-  [Pkm.SEAKING]: "0119"
+  [Pkm.SEAKING]: "0119",
+  [Pkm.LUVDISC]: "0370",
+  [Pkm.AUDINO]: "0531"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2022,6 +2030,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SHEDINJA]: Pkm.SHEDINJA,
   [Pkm.PONYTA]: Pkm.PONYTA,
   [Pkm.RAPIDASH]: Pkm.PONYTA,
+  [Pkm.GALARIAN_PONYTA]: Pkm.GALARIAN_PONYTA,
+  [Pkm.GALARIAN_RAPIDASH]: Pkm.GALARIAN_PONYTA,
   [Pkm.GENESECT]: Pkm.GENESECT,
   [Pkm.RELICANTH]: Pkm.RELICANTH,
   [Pkm.HATENNA]: Pkm.HATENNA,
@@ -2481,7 +2491,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.PAWMO]: Pkm.PAWMI,
   [Pkm.PAWMOT]: Pkm.PAWMI,
   [Pkm.GOLDEEN]: Pkm.GOLDEEN,
-  [Pkm.SEAKING]: Pkm.GOLDEEN
+  [Pkm.SEAKING]: Pkm.GOLDEEN,
+  [Pkm.LUVDISC]: Pkm.LUVDISC,
+  [Pkm.AUDINO]: Pkm.AUDINO
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -2494,7 +2506,8 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.GRIMER]: [Pkm.ALOLAN_GRIMER],
   [Pkm.NIDORANF]: [Pkm.NIDORANM],
   [Pkm.SNEASEL]: [Pkm.HISUI_SNEASEL],
-  [Pkm.MEOWTH]: [Pkm.ALOLAN_MEOWTH]
+  [Pkm.MEOWTH]: [Pkm.ALOLAN_MEOWTH],
+  [Pkm.PONYTA]: [Pkm.GALARIAN_PONYTA]
 } as const
 
 export enum PkmDuo {
@@ -4506,6 +4519,16 @@ export const AnimationConfig: {
     emote: AnimationType.RearUp
   },
   [Pkm.RAPIDASH]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Walk,
+    emote: AnimationType.RearUp
+  },
+  [Pkm.GALARIAN_PONYTA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Walk,
+    emote: AnimationType.RearUp
+  },
+  [Pkm.GALARIAN_RAPIDASH]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Walk,
     emote: AnimationType.RearUp
@@ -6772,5 +6795,15 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.RearUp,
     emote: AnimationType.RearUp
+  },
+  [Pkm.LUVDISC]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Twirl
+  },
+  [Pkm.AUDINO]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Pose,
+    emote: AnimationType.Pose
   }
 }

@@ -1988,7 +1988,7 @@
     "HARD_STONE": "Das Pokémon erhält den ROCK-Typ",
     "BIG_NUGGET": "Verleiht GROUND Synergie. Wenn der Besitzer nach 15 Sekunden noch am Leben ist und 5 Stapel GROUND erhält, erhält er 3 GOLD.",
     "INCENSE": "Verhindert, dass WILD Pokémon im Shop auftauchen, wenn sie gehalten werden. Stattdessen hat jedes Pokémon im Shop eine zusätzliche Chance von 5%, eine gemeinsame Synergie mit dem Besitzer zu teilen.",
-    "EXP_SHARE": "Ermittelt die besten ATK, DEF- und SPE_DEF Werte benachbarter Verbündeter in derselben Reihe",
+    "EXP_SHARE": "Ermittelt die besten ATK, AP, DEF- und SPE_DEF Werte benachbarter Verbündeter in derselben Reihe",
     "POKERUS_VIAL": "Infiziert den Träger mit POKERUS, gewinnt alle 2 Sekunden 1 ATK und 10 AP und überträgt sich auf Verbündete",
     "ROTOM_PHONE": "Verleiht GHOST Synergie. Beschwört Rotom Drohne in der Nähe des Halters",
     "METEORITE": "Ein Meteorit, der mit Deoxys zu interagieren scheint. Er strahlt weiterhin ein schwaches Leuchten aus und fühlt sich leicht warm an.",
