@@ -27,7 +27,12 @@ import { Synergy } from "../types/enum/Synergy"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
 import { IPokemonData } from "../types/interfaces/PokemonData"
 import { logger } from "../utils/logger"
-import { pickRandomIn, randomBetween, shuffleArray } from "../utils/random"
+import {
+  chance,
+  pickRandomIn,
+  randomBetween,
+  shuffleArray
+} from "../utils/random"
 import { values } from "../utils/schemas"
 import Board from "./board"
 import Dps from "./dps"
@@ -725,12 +730,13 @@ export default class Simulation extends Schema implements ISimulation {
                 pokemon.commands.push(
                   new DelayedCommand(() => {
                     if (target?.life > 0) {
+                      const crit = chance(pokemon.critChance / 100)
                       target.handleSpecialDamage(
                         3 * pokemon.atk,
                         this.board,
                         AttackType.SPECIAL,
                         pokemon as PokemonEntity,
-                        false
+                        crit
                       )
                       this.board
                         .getAdjacentCells(target.positionX, target.positionY)
@@ -741,7 +747,7 @@ export default class Simulation extends Schema implements ISimulation {
                               this.board,
                               AttackType.SPECIAL,
                               pokemon as PokemonEntity,
-                              false
+                              crit
                             )
                           }
                         })

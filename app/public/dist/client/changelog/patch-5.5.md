@@ -45,7 +45,7 @@
 
 - Nerf Star dust: now gives 50% of max PP as SHIELD instead of 60%
 - Buff Exp. Share: now also takes the best value of AP
-- Buff Comet shard: Atk 10→12, comet now also hits adjacent enemies
+- Buff Comet shard: Atk 10→12, comet drop now can crit and hits adjacent enemies
 - Nerf Dynamax Band: max HP gain: 300% → 250%
 - Buff Gold Bottle Cap: added base stats 20% crit chance and 40% crit power
 - Buff Rare Candy: item is now dropped when pokemon reaches final evolution stage
