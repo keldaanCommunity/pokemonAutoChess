@@ -109,7 +109,7 @@ export default function Game() {
   const [finalRankVisible, setFinalRankVisible] = useState<boolean>(false)
   const container = useRef<HTMLDivElement>(null)
 
-  const MAX_ATTEMPS_RECONNECT = 10
+  const MAX_ATTEMPS_RECONNECT = 3
 
   const connectToGame = useCallback(
     async (attempts = 1) => {
