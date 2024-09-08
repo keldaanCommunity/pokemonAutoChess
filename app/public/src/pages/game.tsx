@@ -25,7 +25,7 @@ import { DungeonDetails } from "../../../types/enum/Dungeon"
 import { Team } from "../../../types/enum/Game"
 import { Pkm } from "../../../types/enum/Pokemon"
 import { getFreeSpaceOnBench } from "../../../utils/board"
-import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
+import { CloseCodes } from "../../../types/enum/CloseCodes"
 import { logger } from "../../../utils/logger"
 import { addWanderingPokemon } from "../game/components/pokemon"
 import GameContainer from "../game/game-container"
@@ -136,22 +136,28 @@ export default function Game() {
               60 * 60
             )
 
-            // replace original send method with a method that has a built-in connection check
+            // wrap send method with a connection check
             const originalSend = room.send
             room.send = function send<T = any>(type: string | number, message?: T): void {
               if (this.connection.isOpen) {
                 originalSend.apply(this, [type, message])
-              } else {
+              } else if (type !== Transfer.LOADING_PROGRESS) {
                 logger.log("message failed", { type, message })
               }
             }
 
-            // if reconnecting, fix references and re-add all event handlers
+            // if reconnecting, fix stale references and restart all event listeners
             if (initialized.current) {
               gameContainer.room = room
-              gameContainer.gameScene!.room = room
-              startEventListeners(room)
+              const gameScene: GameScene | undefined = gameContainer.gameScene
+              if (gameScene) {
+                gameScene.room = room
+                if (gameScene.started) {
+                  gameScene.resetDragState()
+                }
+              }
               gameContainer.initializeEvents()
+              startEventListeners(room)
             }
 
             dispatch(joinGame(room))
@@ -175,8 +181,13 @@ export default function Game() {
       } else {
         navigate("/") // no reconnection token, login again
       }
-    },
-    [client, dispatch]
+    }, [
+      client,
+      dispatch,
+      currentPlayerId,
+      room,
+      uid
+    ]
   )
 
   function playerClick(id: string) {
@@ -310,11 +321,6 @@ export default function Game() {
       }) as EventListener)
 
       startEventListeners(room)
-
-      // test code
-      setTimeout(() => {
-        room.connection.close(CloseCodes.TIMEOUT)
-      }, 5000)
     }
   }, [
     connected,
@@ -330,10 +336,6 @@ export default function Game() {
   ])
 
   const startEventListeners = (room: Room<GameState>) => {
-    if (!room) {
-      return
-    }
-
     room.onLeave((code) => {
       const shouldReconnect = code === CloseCodes.ABNORMAL_CLOSURE || code === CloseCodes.TIMEOUT
       logger.info(`left game room with code ${code}`, { shouldReconnect })
@@ -347,6 +349,11 @@ export default function Game() {
 
     room.onMessage(Transfer.LOADING_COMPLETE, () => {
       setLoaded(true)
+      const gameScene = getGameScene()
+      if (gameScene && !gameScene.started) {
+        gameScene.started = true
+        gameScene.startGame()
+      }
     })
     room.onMessage(Transfer.FINAL_RANK, (finalRank) => {
       setFinalRank(finalRank)
@@ -704,14 +711,6 @@ export default function Game() {
 
     room.state.spectators.onAdd((uid) => {
       gameContainer.initializeSpectactor(uid)
-    })
-
-    room.onMessage(Transfer.LOADING_COMPLETE, () => {
-      const gameScene = getGameScene()
-      if (gameScene && !gameScene.started) {
-        gameScene.started = true
-        gameScene.startGame()
-      }
     })
 
     room.onMessage(Transfer.NPC_DIALOG, (message) =>

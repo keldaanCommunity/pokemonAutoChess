@@ -549,7 +549,7 @@ export default class BoardManager {
   }
 
   setPlayer(player: Player) {
-    if (player.id != this.player.id) {
+    if (player !== this.player) {
       this.player = player
       this.renderBoard()
       this.updatePlayerAvatar()
