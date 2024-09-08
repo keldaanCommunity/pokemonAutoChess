@@ -12,6 +12,7 @@
 # Changes to Pokemon & Abilities
 
 - Gligar is now tier 2, Gliscor is now tier 3
+- Galarian Corsola is now tier 1, Cursola is now tier 2. Adjusted Curse ability to keep the same curse delay.
 - Nerf Lapras: PP 100 → 120
 - Slowpoke line is now Psychic/Aquatic instead of Water/Psychic
 - Nerf Closdire: HP 230 → 190
