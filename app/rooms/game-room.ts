@@ -902,6 +902,11 @@ export default class GameRoom extends Room<GameState> {
           hasEvolved = true
           // check item evolution rule after count evolution (example: Clefairy)
           this.checkEvolutionsAfterItemAcquired(playerId, pokemonEvolved)
+
+          if (pokemonEvolved.items.has(Item.RARE_CANDY)) {
+            player.items.push(Item.RARE_CANDY)
+            pokemonEvolved.items.delete(Item.RARE_CANDY)
+          }
         }
       }
     })

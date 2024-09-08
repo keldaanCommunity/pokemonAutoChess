@@ -2000,7 +2000,7 @@
     "DYNAMAX_BAND": "Al comienzo de la pelea, aumenta el HP máximo en un 250%.",
     "GOLDEN_ROD": "Después de cada ronda JcJ, pesca un Pokémon que luego se agrega a un espacio libre en tu banco. Puedes atrapar Pokémon únicos o Pokémon que coincidan con tu sinergia principal. Cuando se usa en un Pokémon, recupera todos los objetos que tiene en tu inventario de jugador.",
     "SHINY_STONE": "Da +2 a la sinergia LIGHT y genera un segundo punto de luz en la celda del pokémon.",
-    "RARE_CANDY": "Después de cada ronda, si el poseedor puede evolucionar, genera una copia 1 STAR en el banco (excepto Único y Legendary y Eclosionado)",
+    "RARE_CANDY": "Después de cada ronda, genera una copia 1 STAR en el banco (excepto Único y Legendary y Eclosionado). Impide que el titular evolucione.",
     "EVIOLITE": "Sólo lo pueden tener Pokémon que no estén completamente evolucionados. Impide que el titular evolucione.",
     "WHITE_FLUTE": "Genera 3 Pokémon WILD alrededor del poseedor al comienzo de la pelea. La rareza y el nivel aumentan con el nivel del escenario.",
     "GOLD_BOTTLE_CAP": "+1% CRIT_CHANCE y CRIT_POWER por GOLD que tengas. Obtén 1 GOLD por KO, y un premio de 5 GOLD si elimina al ultimo enemigo.",
