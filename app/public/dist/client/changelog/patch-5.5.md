@@ -8,6 +8,12 @@
 - Galarian Rapidash
 - Luvdisc
 - Audino
+- Petilil
+- Liligant
+- Mantyke
+- Mantine
+- Remoraid
+- Octillery
 
 # Changes to Pokemon & Abilities
 

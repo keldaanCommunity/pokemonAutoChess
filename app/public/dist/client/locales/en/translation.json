@@ -376,7 +376,8 @@
     "SCHOOLING": "Schooling",
     "DOUBLE_SHOCK": "Double Shock",
     "CHARM": "Charm",
-    "ENTRAINMENT": "Entrainment"
+    "ENTRAINMENT": "Entrainment",
+    "OKTZOOKA": "Oktzooka"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1208,7 +1209,13 @@
     "GOLDEEN": "Goldeen",
     "SEAKING": "Seaking",
     "LUVDISC": "Luvdisc",
-    "AUDINO": "Audino"
+    "AUDINO": "Audino",
+    "PETILIL": "Petilil",
+    "LILIGANT": "Liligant",
+    "MANTYKE": "Mantyke",
+    "MANTINE": "Mantine",
+    "REMORAID": "Remoraid",
+    "OCTILLERY": "Octillery"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1565,7 +1572,8 @@
     "DOUBLE_SHOCK": "The user emits a powerful electric shock, dealing [50,100,200,SP] SPECIAL. The user is PARALYSIS for 3 seconds.",
     "PURIFY": "Clear negative status and heal the user for [15,30,60,SP] HP.",
     "CHARM": "Inflicts CHARM to the target for 3 seconds and reduces its ATK by [2,3,4,SP] (min 1)",
-    "ENTRAINMENT": "Dances to a strange rhythm, regaining [10,SP] PP and forcing the target to imitate them, which replace their ability by Entrainment. If target is already entrained, pick another enemy nearby."
+    "ENTRAINMENT": "Dances to a strange rhythm, regaining [10,SP] PP and forcing the target to imitate them, which replace their ability by Entrainment. If target is already entrained, pick another enemy nearby.",
+    "OKTZOOKA": "Shoots a projectile that deals [150,SP]% of the user's ATK as SPECIAL and leave an ink cloud that reduce's the target's accuracy"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2137,7 +2145,9 @@
     "STONJOURNER": "Does not move or attack until PP bar is full. Its power spot gives 50 AP to all adjacent allies at the start of the fight",
     "POISON_PIN": "Poipole will evolve into Naganadel after stacking 200 HP",
     "PYUKUMUKU": "When this pokemon is KO, it explodes dealing [100,SP] SPECIAL to adjacent enemies.",
-    "LUVDISC": "The allies on its left and on its right fall in love, and share the best value of their respective ATK, AP, DEF and SPE_DEF at the start of the fight"
+    "LUVDISC": "The allies on its left and on its right fall in love, and share the best value of their respective ATK, AP, DEF and SPE_DEF at the start of the fight",
+    "MANTYKE": "When Mantyke is on board, gain 25% chance to fish a Remoraid with your fishing rod. Evolves into Mantine if a Remoraid is next to it.",
+    "MANTINE": "When Mantine is on board, gain 25% chance to fish a Remoraid with your fishing rod."
   },
   "stat": {
     "ATK": "Attack",

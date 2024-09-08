@@ -49,7 +49,7 @@ import { Synergy, SynergyEffects } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { sum } from "../../utils/array"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
-import { distanceM } from "../../utils/distance"
+import { distanceC, distanceM } from "../../utils/distance"
 import { pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import PokemonFactory from "../pokemon-factory"
@@ -14619,6 +14619,120 @@ export class Audino extends Pokemon {
   attackSprite = AttackSprite.SOUND_RANGE
 }
 
+export class Petilil extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA, Synergy.HUMAN])
+  rarity = Rarity.UNCOMMON
+  evolution = Pkm.LILIGANT
+  stars = 1
+  hp = 85
+  atk = 5
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.AROMATHERAPY
+  attackSprite = AttackSprite.GRASS_MELEE
+  additional = true
+}
+
+export class Liligant extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA, Synergy.HUMAN])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 180
+  atk = 10
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.AROMATHERAPY
+  attackSprite = AttackSprite.GRASS_MELEE
+  additional = true
+}
+
+export class Mantyke extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BABY, Synergy.WATER, Synergy.FLYING])
+  rarity = Rarity.UNIQUE
+  evolution = Pkm.MANTINE
+  evolutionRule = new ConditionBasedEvolutionRule(() => false)
+  stars = 2
+  hp = 160
+  atk = 6
+  def = 3
+  speDef = 6
+  maxPP = 100
+  range = 2
+  skill = Ability.BOUNCE
+  attackSprite = AttackSprite.WATER_RANGE
+  passive = Passive.MANTYKE
+
+  onChangePosition(x: number, y: number, player: Player) {
+    for (const pokemon of player.board.values()) {
+      if (
+        pokemon.name === Pkm.REMORAID &&
+        distanceC(x, y, pokemon.positionX, pokemon.positionY) === 1
+      ) {
+        player.transformPokemon(this, Pkm.MANTINE)
+      }
+    }
+  }
+}
+
+export class Mantine extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FLYING])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 230
+  atk = 12
+  def = 4
+  speDef = 8
+  maxPP = 100
+  range = 2
+  skill = Ability.BOUNCE
+  attackSprite = AttackSprite.WATER_RANGE
+  passive = Passive.MANTINE
+}
+
+export class Remoraid extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.WILD])
+  rarity = Rarity.SPECIAL
+  evolution = Pkm.OCTILLERY
+  stars = 1
+  hp = 60
+  atk = 12
+  def = 2
+  speDef = 1
+  maxPP = 80
+  range = 1
+  skill = Ability.AQUA_JET
+  attackSprite = AttackSprite.WATER_MELEE
+
+  onChangePosition(x: number, y: number, player: Player) {
+    for (const pokemon of player.board.values()) {
+      if (
+        pokemon.name === Pkm.MANTYKE &&
+        distanceC(x, y, pokemon.positionX, pokemon.positionY) === 1
+      ) {
+        player.transformPokemon(pokemon, Pkm.MANTINE)
+      }
+    }
+  }
+}
+
+export class Octillery extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.WILD])
+  rarity = Rarity.SPECIAL
+  stars = 2
+  hp = 150
+  atk = 24
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.OKTZOOKA
+  attackSprite = AttackSprite.WATER_RANGE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -15454,5 +15568,11 @@ export const PokemonClasses: Record<
   [Pkm.GOLDEEN]: Goldeen,
   [Pkm.SEAKING]: Seaking,
   [Pkm.LUVDISC]: Luvdisc,
-  [Pkm.AUDINO]: Audino
+  [Pkm.AUDINO]: Audino,
+  [Pkm.PETILIL]: Petilil,
+  [Pkm.LILIGANT]: Liligant,
+  [Pkm.MANTYKE]: Mantyke,
+  [Pkm.MANTINE]: Mantine,
+  [Pkm.REMORAID]: Remoraid,
+  [Pkm.OCTILLERY]: Octillery
 }
