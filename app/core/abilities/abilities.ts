@@ -9711,6 +9711,40 @@ export class EntrainmentStrategy extends AbilityStrategy {
   }
 }
 
+export class OktzookaStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = Math.ceil(pokemon.atk * 1.5)
+
+    pokemon.count.attackCount++ // trigger attack animation
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      false
+    )
+    target.effects.add(Effect.GAS)
+
+    const index = target.positionY * board.columns + target.positionX
+    if (board.effects[index] !== Effect.GAS) {
+      board.effects[index] = Effect.GAS
+      pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
+        simulationId: pokemon.simulation.id,
+        type: BoardEvent.GAS,
+        x: target.positionX,
+        y: target.positionY
+      })
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -10069,5 +10103,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DOUBLE_SHOCK]: new DoubleShockStrategy(),
   [Ability.PASTEL_VEIL]: new PastelVeilStrategy(),
   [Ability.CHARM]: new CharmStrategy(),
-  [Ability.ENTRAINMENT]: new EntrainmentStrategy()
+  [Ability.ENTRAINMENT]: new EntrainmentStrategy(),
+  [Ability.OKTZOOKA]: new OktzookaStrategy()
 }

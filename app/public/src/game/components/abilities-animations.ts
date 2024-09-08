@@ -2367,6 +2367,12 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(3)
       break
 
+    case Ability.OKTZOOKA:
+      addAbilitySprite(Ability.SMOKE_SCREEN, coordinatesTarget, true).setScale(
+        3
+      )
+      break
+
     case "FIELD_DEATH":
       addAbilitySprite("FIELD_DEATH", coordinates, true).setScale(2)
       break
