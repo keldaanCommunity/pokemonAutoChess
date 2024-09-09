@@ -1,4 +1,4 @@
-import { Client, Room } from "colyseus.js"
+import { Client, Protocol, Room } from "colyseus.js"
 import { WebSocketTransport } from "colyseus.js/lib/transport/WebSocketTransport"
 import { logger } from "../../../utils/logger"
 import { CloseCodes } from "../../../types/enum/CloseCodes"
@@ -68,13 +68,18 @@ export function enableAutoReconnect<T = any>(client: Client, room: Room<T>, reco
   }
 
   // update to new reconnection token after reconnecting
-  (room as any).onJoin(() => {
-    localStore.set(
-      reconnectStoreKey,
-      { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
-      tokenExpirationTime
-    )
-  })
+  const originalOnmessage: (event: any) => any = transport.ws.onmessage as any
+  transport.ws.onmessage = room.connection.events.onmessage = function onmessage(messageEvent: MessageEvent) {
+    originalOnmessage(messageEvent)
+    const code = Array.from(new Uint8Array(messageEvent.data))[0]
+    if (code == Protocol.JOIN_ROOM) {
+      localStore.set(
+        reconnectStoreKey,
+        { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
+        tokenExpirationTime
+      )
+    }
+  }
 
   // wrap send method with a connection check
   const originalSend = room.send
