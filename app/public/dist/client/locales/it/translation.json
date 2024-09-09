@@ -2879,5 +2879,27 @@
   "location": "Posizione",
   "ping": "Ping",
   "key": "Chiave",
-  "action": "Azione"
+  "action": "Azione",
+  "key_desc_buy_xp": "Compra esperienza",
+  "key_desc_refresh": "Aggiorna negozio",
+  "key_desc_avatar_anim": "Esegui animazioni dell'avatar",
+  "jukebox": "Jukebox",
+  "gadgets": "Gadget",
+  "gadgets_unlocked": "Gadget sbloccati",
+  "gadget": {
+    "trainer_card": "Carta Allenatore",
+    "trainer_card_desc": "Ti dà la possibilità di cambiare il tuo nome, l'avatar ed il titolo",
+    "bag": "Borsa",
+    "bag_desc": "Viene usata per contenere la tua collezione e i frammenti",
+    "team_planner": "Team Planner",
+    "team_planner_desc": "Prepara le tue squadre in anticipo",
+    "bot_builder": "Bot Builder",
+    "bot_builder_desc": "Crea i tuoi bot e presentali per avere una chance ad averli inclusi nel gioco",
+    "jukebox": "Jukebox",
+    "jukebox_desc": "Scegli la tua musica in gioco"
+  },
+  "level_required": "Livello richiesto",
+  "map": {
+    "random": "Mappa casuale"
+  }
 }
