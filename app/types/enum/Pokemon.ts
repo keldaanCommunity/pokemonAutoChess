@@ -1842,7 +1842,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MEGA_STEELIX]: Pkm.ONIX,
   [Pkm.SCYTHER]: Pkm.SCYTHER,
   [Pkm.SCIZOR]: Pkm.SCYTHER,
-  [Pkm.KLEAVOR]: Pkm.KLEAVOR,
+  [Pkm.KLEAVOR]: Pkm.SCYTHER,
   [Pkm.RIOLU]: Pkm.RIOLU,
   [Pkm.LUCARIO]: Pkm.RIOLU,
   [Pkm.EEVEE]: Pkm.EEVEE,
