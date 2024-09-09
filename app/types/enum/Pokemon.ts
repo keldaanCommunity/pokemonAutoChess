@@ -829,7 +829,13 @@ export enum Pkm {
   GOLDEEN = "GOLDEEN",
   SEAKING = "SEAKING",
   LUVDISC = "LUVDISC",
-  AUDINO = "AUDINO"
+  AUDINO = "AUDINO",
+  PETILIL = "PETILIL",
+  LILIGANT = "LILIGANT",
+  MANTYKE = "MANTYKE",
+  MANTINE = "MANTINE",
+  REMORAID = "REMORAID",
+  OCTILLERY = "OCTILLERY"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1177,6 +1183,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SEWADDLE]: "0540",
   [Pkm.SWADLOON]: "0541",
   [Pkm.LEAVANNY]: "0542",
+  [Pkm.PETILIL]: "0548",
+  [Pkm.LILIGANT]: "0549",
   [Pkm.PIKIPEK]: "0731",
   [Pkm.TRUMBEAK]: "0732",
   [Pkm.TOUCANNON]: "0733",
@@ -1661,7 +1669,11 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GOLDEEN]: "0118",
   [Pkm.SEAKING]: "0119",
   [Pkm.LUVDISC]: "0370",
-  [Pkm.AUDINO]: "0531"
+  [Pkm.AUDINO]: "0531",
+  [Pkm.MANTYKE]: "0458",
+  [Pkm.MANTINE]: "0226",
+  [Pkm.REMORAID]: "0223",
+  [Pkm.OCTILLERY]: "0224"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2493,7 +2505,13 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GOLDEEN]: Pkm.GOLDEEN,
   [Pkm.SEAKING]: Pkm.GOLDEEN,
   [Pkm.LUVDISC]: Pkm.LUVDISC,
-  [Pkm.AUDINO]: Pkm.AUDINO
+  [Pkm.AUDINO]: Pkm.AUDINO,
+  [Pkm.PETILIL]: Pkm.PETILIL,
+  [Pkm.LILIGANT]: Pkm.PETILIL,
+  [Pkm.MANTYKE]: Pkm.MANTYKE,
+  [Pkm.MANTINE]: Pkm.MANTYKE,
+  [Pkm.REMORAID]: Pkm.REMORAID,
+  [Pkm.OCTILLERY]: Pkm.REMORAID
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -6805,5 +6823,35 @@ export const AnimationConfig: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Pose,
     emote: AnimationType.Pose
+  },
+  [Pkm.PETILIL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Pose
+  },
+  [Pkm.LILIGANT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.Pose
+  },
+  [Pkm.MANTYKE]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Hover,
+    emote: AnimationType.Strike
+  },
+  [Pkm.MANTINE]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Hover,
+    emote: AnimationType.Strike
+  },
+  [Pkm.REMORAID]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.RearUp
+  },
+  [Pkm.OCTILLERY]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
+    emote: AnimationType.RearUp
   }
 }

@@ -7,6 +7,7 @@ import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
 import admin from "firebase-admin"
 import { connect } from "mongoose"
+import pkg from "../package.json"
 import { initTilemap } from "./core/design"
 import { GameRecord } from "./models/colyseus-models/game-record"
 import DetailledStatistic from "./models/mongo-models/detailled-statistic-v2"
@@ -19,6 +20,10 @@ import AfterGameRoom from "./rooms/after-game-room"
 import CustomLobbyRoom from "./rooms/custom-lobby-room"
 import GameRoom from "./rooms/game-room"
 import PreparationRoom from "./rooms/preparation-room"
+import { getBotData, getBotsList } from "./services/bots"
+import { discordService } from "./services/discord"
+import { getLeaderboard } from "./services/leaderboard"
+import { pastebinService } from "./services/pastebin"
 import { Title } from "./types"
 import {
   MAX_CONCURRENT_PLAYERS_ON_SERVER,
@@ -27,12 +32,7 @@ import {
 import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Item } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
-import { getLeaderboard } from "./services/leaderboard"
-import { getBotData, getBotsList } from "./services/bots"
-import { discordService } from "./services/discord"
-import { pastebinService } from "./services/pastebin"
 import { logger } from "./utils/logger"
-import pkg from "../package.json"
 
 const clientSrc = __dirname.includes("server")
   ? path.join(__dirname, "..", "..", "client")
@@ -47,7 +47,7 @@ let gameOptions: ServerOptions = {}
 
 if (process.env.NODE_APP_INSTANCE) {
   const processNumber = Number(process.env.NODE_APP_INSTANCE || "0")
-  const port = 2567 + processNumber
+  const port = (Number(process.env.PORT) || 2567) + processNumber
   gameOptions = {
     presence: new RedisPresence(process.env.REDIS_URI),
     driver: new RedisDriver(process.env.REDIS_URI),
@@ -68,6 +68,8 @@ if (process.env.NODE_APP_INSTANCE) {
     }
   }
 }
+
+
 
 export default config({
   options: gameOptions,
@@ -281,7 +283,10 @@ export default config({
     /**
      * Before before gameServer.listen() is called.
      */
-    connect(process.env.MONGO_URI!)
+    connect(process.env.MONGO_URI!, {
+      maxPoolSize: 25,
+      socketTimeoutMS: 45000
+    })
     admin.initializeApp({
       credential: admin.credential.cert({
         projectId: process.env.FIREBASE_PROJECT_ID!,

@@ -376,7 +376,8 @@
     "SCHOOLING": "Schooling",
     "DOUBLE_SHOCK": "Double Shock",
     "CHARM": "Charm",
-    "ENTRAINMENT": "Entrainment"
+    "ENTRAINMENT": "Entrainment",
+    "OKTZOOKA": "Oktzooka"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1208,7 +1209,13 @@
     "GOLDEEN": "Goldeen",
     "SEAKING": "Seaking",
     "LUVDISC": "Luvdisc",
-    "AUDINO": "Audino"
+    "AUDINO": "Audino",
+    "PETILIL": "Petilil",
+    "LILIGANT": "Liligant",
+    "MANTYKE": "Mantyke",
+    "MANTINE": "Mantine",
+    "REMORAID": "Remoraid",
+    "OCTILLERY": "Octillery"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1479,7 +1486,7 @@
     "KNOCK_OFF": "Deals [90,SP] SPECIAL. If target is holding items, they are removed and an additional [30,SP] SPECIAL is dealt per item",
     "FISHIOUS_REND": "Deals [80,SP] SPECIAL. Double damage if attacker has more ATK_SPEED than target.",
     "RECOVER": "Heal for [25,SP]% of max HP",
-    "CURSE": "Inflicts CURSE to the enemy with highest HP that will KO after [12,8,4,SP=-0.2] seconds",
+    "CURSE": "Inflicts CURSE to the enemy with highest HP that will KO after [8,4,SP=-0.2] seconds",
     "DOOM_DESIRE": "After 2 seconds, deal [150,SP] SPECIAL to target. Regain 60 PP if target is KO in the mean time.",
     "TIME_TRAVEL": "Go back in time to retrieve the lost health. All allies have their negative status cleared and are healed by [25,SP] HP.",
     "POLTERGEIST": "Deals [30,60,120,SP] SPECIAL + [20,SP] SPECIAL for each item held by the target ([40,SP] if item is ARTIFICIAL)",
@@ -1565,7 +1572,8 @@
     "DOUBLE_SHOCK": "The user emits a powerful electric shock, dealing [50,100,200,SP] SPECIAL. The user is PARALYSIS for 3 seconds.",
     "PURIFY": "Clear negative status and heal the user for [15,30,60,SP] HP.",
     "CHARM": "Inflicts CHARM to the target for 3 seconds and reduces its ATK by [2,3,4,SP] (min 1)",
-    "ENTRAINMENT": "Dances to a strange rhythm, regaining [10,SP] PP and forcing the target to imitate them, which replace their ability by Entrainment. If target is already entrained, pick another enemy nearby."
+    "ENTRAINMENT": "Dances to a strange rhythm, regaining [10,SP] PP and forcing the target to imitate them, which replace their ability by Entrainment. If target is already entrained, pick another enemy nearby.",
+    "OKTZOOKA": "Shoots a projectile that deals [150,SP]% of the user's ATK as SPECIAL and leave an ink cloud that reduce's the target's accuracy"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2017,16 +2025,16 @@
     "OLD_ROD": "After each PvP round, fish a Pokémon that is then added to a free slot on your bench. Can catch common and uncommon WATER Pokémons as well as Magikarp.",
     "GOOD_ROD": "After each PvP round, fish a Pokémon that is then added to a free slot on your bench. Can catch rare WATER Pokémons and Feebas.",
     "SUPER_ROD": "After each PvP round, fish a Pokémon that is then added to a free slot on your bench. Can catch epic WATER Pokémons and Wishiwashi.",
-    "DYNAMAX_BAND": "At the start of the fight, raise max HP by 300%.",
+    "DYNAMAX_BAND": "At the start of the fight, raise max HP by 250%.",
     "GOLDEN_ROD": "After each PvP round, fish a Pokémon that is then added to a free slot on your bench. Can catch unique Pokémons or Pokémons that matches your top synergy. When used on a Pokémon, get back all held items in your player inventory.",
     "SHINY_STONE": "Gives +2 to LIGHT synergy and spawn a second light spot on the holder's cell",
-    "RARE_CANDY": "After each round, if holder can evolve, spawn a 1 STAR copy of it on bench (except Unique, Legendary and Hatch)",
-    "EVIOLITE": "Can only be held by non-fully evolved Pokémon. Prevents the holder from evolving.",
+    "RARE_CANDY": "After each round, spawn a 1 STAR copy of it on bench (except Unique, Legendary and Hatch). Can only be held by non-fully evolved Pokémon.",
+    "EVIOLITE": "Holder gets a bunch of stats, but can no longer evolve. Can only be held by non-fully evolved Pokémon.",
     "WHITE_FLUTE": "Spawn 3 WILD Pokémons around the holder at the start of the fight. Rarity and tier increase with stage level.",
     "GOLD_BOTTLE_CAP": "+1% CRIT_CHANCE and CRIT_POWER per GOLD you have. Gain 1 GOLD per KO, and a 5 GOLD jackpot if eliminating the last enemy.",
     "ABSORB_BULB": "All the damage reduction is absorbed by the bulb. Once under 50% HP, bulb explodes, dealing all damage absorbed to adjacent enemy units as SPECIAL.",
     "SACRED_ASH": "Gives RESURECTION. After resurecting, up to 3 allies KO are resurected as well, but without items.",
-    "COMET_SHARD": "Starts the round by diving like a comet on an enemy at the opposite side of the board, dealing 300% ATK as SPECIAL and gaining PROTECT for 3 seconds.",
+    "COMET_SHARD": "Starts the round by diving like a comet on an enemy at the opposite side of the board, dealing 300% ATK as SPECIAL to target and adjacent enemies, while gaining PROTECT for 3 seconds.",
     "DAMP_ROCK": "Gives WATER synergy and counts for 3 towards RAIN. Can only be used on ROCK Pokémon",
     "ICY_ROCK": "Gives ICE synergy and counts for 3 towards SNOW. Can only be used on ROCK Pokémon",
     "HEAT_ROCK": "Gives FIRE synergy and counts for 3 towards SUN. Can only be used on ROCK Pokémon",
@@ -2137,7 +2145,9 @@
     "STONJOURNER": "Does not move or attack until PP bar is full. Its power spot gives 50 AP to all adjacent allies at the start of the fight",
     "POISON_PIN": "Poipole will evolve into Naganadel after stacking 200 HP",
     "PYUKUMUKU": "When this pokemon is KO, it explodes dealing [100,SP] SPECIAL to adjacent enemies.",
-    "LUVDISC": "The allies on its left and on its right fall in love, and share the best value of their respective ATK, AP, DEF and SPE_DEF at the start of the fight"
+    "LUVDISC": "The allies on its left and on its right fall in love, and share the best value of their respective ATK, AP, DEF and SPE_DEF at the start of the fight",
+    "MANTYKE": "When Mantyke is on board, gain 25% chance to fish a Remoraid with your fishing rod. Evolves into Mantine if a Remoraid is next to it.",
+    "MANTINE": "When Mantine is on board, gain 25% chance to fish a Remoraid with your fishing rod."
   },
   "stat": {
     "ATK": "Attack",
