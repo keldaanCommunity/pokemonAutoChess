@@ -47,7 +47,7 @@ let gameOptions: ServerOptions = {}
 
 if (process.env.NODE_APP_INSTANCE) {
   const processNumber = Number(process.env.NODE_APP_INSTANCE || "0")
-  const port = 2567 + processNumber
+  const port = (Number(process.env.PORT) || 2567) + processNumber
   gameOptions = {
     presence: new RedisPresence(process.env.REDIS_URI),
     driver: new RedisDriver(process.env.REDIS_URI),
@@ -68,6 +68,8 @@ if (process.env.NODE_APP_INSTANCE) {
     }
   }
 }
+
+
 
 export default config({
   options: gameOptions,
@@ -282,7 +284,7 @@ export default config({
      * Before before gameServer.listen() is called.
      */
     connect(process.env.MONGO_URI!, {
-      maxPoolSize: 100,
+      maxPoolSize: 25,
       socketTimeoutMS: 45000
     })
     admin.initializeApp({
