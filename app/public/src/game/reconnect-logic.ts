@@ -72,7 +72,7 @@ export function enableAutoReconnect<T = any>(client: Client, room: Room<T>, reco
   transport.ws.onmessage = room.connection.events.onmessage = function onmessage(messageEvent: MessageEvent) {
     originalOnmessage(messageEvent)
     const code = Array.from(new Uint8Array(messageEvent.data))[0]
-    if (code == Protocol.JOIN_ROOM) {
+    if (code === Protocol.JOIN_ROOM) {
       localStore.set(
         reconnectStoreKey,
         { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
