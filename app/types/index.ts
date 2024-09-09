@@ -418,6 +418,13 @@ export interface ISimulation {
   redPlayerId: string
 }
 
+export interface ISimulationCommand {
+  delay: number
+  executed: boolean
+  update(dt: number): void
+  execute(): void
+}
+
 export interface IDps {
   update(
     physicalDamage: number,
@@ -571,6 +578,7 @@ export interface IPokemonEntity {
   emotion: Emotion
   baseAtk: number
   isClone: boolean
+  commands: ISimulationCommand[]
 }
 
 export interface IStatus {

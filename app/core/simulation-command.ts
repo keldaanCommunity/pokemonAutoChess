@@ -1,10 +1,10 @@
-import { Transfer } from "../types"
+import { ISimulationCommand, Transfer } from "../types"
 import { Effect } from "../types/enum/Effect"
 import { AttackType } from "../types/enum/Game"
 import Board from "./board"
 import { PokemonEntity } from "./pokemon-entity"
 
-export abstract class SimulationCommand {
+export abstract class SimulationCommand implements ISimulationCommand {
   delay: number
   executed = false
 
@@ -21,7 +21,7 @@ export abstract class SimulationCommand {
   }
 }
 
-export class AbilityCommand extends SimulationCommand {
+export class DelayedCommand extends SimulationCommand {
   delayedFunction: () => void
   constructor(delayedFunction: () => void, delay: number) {
     super(delay)
