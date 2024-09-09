@@ -58,7 +58,7 @@ export function getOrientation(x1: number, y1: number, x2: number, y2: number) {
   }
 }
 
-export function getPath(pokemon: IPokemonEntity | IPokemon) {
+export function getPortraitPath(pokemon: IPokemonEntity | IPokemon) {
   let pokemonPath = ""
   const index = pokemon.index
   pokemonPath += index + "/"

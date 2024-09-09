@@ -1,8 +1,8 @@
 import { MapSchema, Schema, type } from "@colyseus/schema"
-import SimplePlayer from "../../models/colyseus-models/simple-player"
+import AfterGamePlayer from "../../models/colyseus-models/after-game-player"
 
 export default class AfterGameState extends Schema {
-  @type({ map: SimplePlayer }) players = new MapSchema<SimplePlayer>()
+  @type({ map: AfterGamePlayer }) players = new MapSchema<AfterGamePlayer>()
   @type("boolean") elligibleToELO = false
   @type("boolean") elligibleToXP = false
 

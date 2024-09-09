@@ -1,14 +1,14 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import SimplePlayer from "../../../models/colyseus-models/simple-player"
+import { IAfterGamePlayer } from "../../../types"
 
 export interface IUserAfterState {
-  players: SimplePlayer[]
+  players: IAfterGamePlayer[]
   elligibleToXP: boolean
   elligibleToELO: boolean
 }
 
 const initialState: IUserAfterState = {
-  players: new Array<SimplePlayer>(),
+  players: new Array<IAfterGamePlayer>(),
   elligibleToXP: false,
   elligibleToELO: false
 }
@@ -17,8 +17,8 @@ export const afterSlice = createSlice({
   name: "after",
   initialState: initialState,
   reducers: {
-    addPlayer: (state, action: PayloadAction<SimplePlayer>) => {
-      state.players.push(JSON.parse(JSON.stringify(action.payload)))
+    addPlayer: (state, action: PayloadAction<IAfterGamePlayer>) => {
+      state.players.push(action.payload)
     },
     leaveAfter: () => initialState,
     setElligibilityToXP: (state, action: PayloadAction<boolean>) => {

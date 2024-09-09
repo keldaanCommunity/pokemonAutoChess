@@ -281,6 +281,12 @@ export interface ISimplePlayer {
     | ArraySchema<{ name: Synergy; value: number }>
 }
 
+export interface IAfterGamePlayer extends ISimplePlayer {
+  moneyEarned: number
+  playerDamageDealt: number
+  rerollCount: number
+}
+
 export interface IGameHistorySimplePlayer extends ISimplePlayer {
   pokemons: IGameHistoryPokemonRecord[]
 }
