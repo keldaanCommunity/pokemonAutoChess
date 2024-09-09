@@ -12,7 +12,7 @@ const MAX_RECONNECT_TRIES = 3
  * @param client The colyseus.js client-side Client.
  * @param room The colyseus.js client-side Room.
  * @param reconnectStoreKey The localStorage key string to save the reconnection token.
- * @param tokenExpirationTime The expiration time in seconds for the localStorage key expiration.
+ * @param tokenExpirationTime The expiration time in seconds for the localStorage key.
  */
 export function enableAutoReconnect<T = any>(client: Client, room: Room<T>, reconnectStoreKey: LocalStoreKeys, tokenExpirationTime: number) {
 
