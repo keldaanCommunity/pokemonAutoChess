@@ -1,6 +1,6 @@
 > Sep 11, 2024
 
-# Patch 5.5: Paris
+# Patch 5.5: Lumiose
 
 ## Fire Shard
 
