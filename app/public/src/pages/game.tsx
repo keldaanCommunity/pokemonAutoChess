@@ -73,6 +73,7 @@ import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { playMusic, preloadMusic } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import { FIREBASE_CONFIG } from "./utils/utils"
+import { enableAutoReconnect } from "../game/reconnect-logic"
 
 let gameContainer: GameContainer
 
@@ -134,6 +135,7 @@ export default function Game() {
               { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
               60 * 60
             )
+            enableAutoReconnect(client, room, LocalStoreKeys.RECONNECTION_GAME, 60 * 60)
             dispatch(joinGame(room))
             connected.current = true
             connecting.current = false
