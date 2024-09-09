@@ -57,7 +57,7 @@
 
 # UI
 
-- 
+- Added list of community servers with live status on homepage
 
 # Bugfix
 

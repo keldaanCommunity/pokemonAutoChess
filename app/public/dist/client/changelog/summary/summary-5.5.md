@@ -2,13 +2,9 @@
 
 # Patch 5.5: Lumiose
 
-## Fire Shard
+##  At the crossroads
 
-The chance to burn no longer increased after fire 2. With Fire 8, you'll receive a fire shard after each round
-
-## Invisisble Ghosts
-
-Ghost pokemons now have 25% dodge chance
+A list of community servers with live status is now available on the homepage
 
 ## Newcomers in 5.5
 
@@ -28,6 +24,12 @@ Ghost pokemons now have 25% dodge chance
 ![Remoraid](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0223/Normal.png)
 ![Octillery](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0224/Normal.png)
 
+## Playing with fire
 
+With ![Fire](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/3c11a620df1707e68b30743b29cf900c0dd0c87e/app/public/src/assets/types/FIRE.svg) Fire 8, you now receive a fire shard after each round that trades permanent Attack buff for player HP
+
+## Intangible Ghosts
+
+![Ghost](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/3c11a620df1707e68b30743b29cf900c0dd0c87e/app/public/src/assets/types/GHOST.svg) Ghost pokemons now have 25% dodge chance (was previously for Water pokemons)
 
 Check out the full changelog on Discord !
