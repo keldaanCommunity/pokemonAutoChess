@@ -662,7 +662,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
     [Stat.DEF]: 5,
     [Stat.SPE_DEF]: 5
   },
-  [Item.INCENSE]: { [Stat.SPE_DEF]: 5 },
+  [Item.INCENSE]: { [Stat.SPE_DEF]: 5, [Stat.AP]: 30 },
   [Item.EXP_SHARE]: {},
   [Item.METEORITE]: {},
   [Item.BERRY_JUICE]: {},

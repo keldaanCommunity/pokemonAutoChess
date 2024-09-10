@@ -60,6 +60,7 @@
 - Nerf Dynamax Band: max HP gain: 300% → 250%
 - Buff Gold Bottle Cap: added base stats 20% crit chance and 40% crit power
 - Buff Rare Candy: item is now dropped when pokemon reaches final evolution stage
+- Changed Incense: now gives 30% AP and no longer prevent wild pokemon to show up in the shop
 
 # Gameplay
 
