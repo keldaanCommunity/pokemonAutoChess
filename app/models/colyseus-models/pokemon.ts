@@ -10740,7 +10740,7 @@ export class Sharpedo extends Pokemon {
   rarity = Rarity.RARE
   stars = 2
   hp = 170
-  atk = 24
+  atk = 28
   def = 2
   speDef = 3
   maxPP = 100
