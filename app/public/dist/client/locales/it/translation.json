@@ -3105,6 +3105,51 @@
     "BUYER_FEVER": "Le evoluzioni nel negozio sono gratis",
     "TECHNOLOGIC": "Scegli tra 3 artefatti al livello 3 e al livello 15",
     "SIX_PACK": "Puoi mettere al massimo 6 unità sul terreno, il livello non importa.",
-    "NINE_LIVES": "Vieni eliminato se perdi 9 round."
+    "NINE_LIVES": "Vieni eliminato se perdi 9 round.",
+    "CROWDED": "Il massimo di unità sul terreno viene aumentato di 3.",
+    "KECLEONS_SHOP": "I caroselli vengono sostituiti dal negozio di Kecleon, che propone 6 oggetti per 10 GOLD ognuno",
+    "FREE_MARKET": "Pokèmon sono comprati e venduti per 0 GOLD",
+    "SHINY_HUNTER": "Tutti i Pokèmon dei round  PvE saranno Shiny."
+  },
+  "loading_hints": {
+    "tab_out": "Non cambiare finestra! Il caricamento è in pausa quando la finestra del browser è inattiva.",
+    "max_loading_time": "La partita inizierà dopo 5 minuti di caricamento, qualunque cosa accada...",
+    "disconnection_time": "I giocatori disconnessi per più di 3 minuti sono cacciati dalla partita. Se capita prima del livello 6, non perderanno Elo.",
+    "translation_project": "Le traduzioni sono gestite dalla community! Controlla Discord se vuoi contribuire.",
+    "discord": "Entra nel nostro Discord per conoscere la community! Il link è nel menù a lato.",
+    "bug_report": "Hai trovato un bug! Vai su Discord e reportalo nel canale  #bug-report.",
+    "moderation": "Se sei testimone di cattivi comportamenti in gioco, prendi uno screenshot e reportalo ad un moderatore su Discord.",
+    "berry_tree": "Stai giocando la sinergia Erba? Non dimenticare di prendere le bacche dagli alberi, sono affianco al tuo personaggio.",
+    "spriters": "Molte delle animazioni del gioco sono frutto del lavoro di artisti indipendenti. Alcuni di loro fanno commissioni, può supportarli! Più info su Discord.",
+    "wiki": "Il gioco ha una wiki completa accessibile dal menù a lato, non dimenticartene!",
+    "avatar": "Se vuoi cambiare il tuo avatar, gioca per ottenere XP e aumentare di livello. Ogni livello ti da un booster che se aperto ti da frammenti che possono essere spesi nel menù Collezione per comprare nuovi avatar."
+  },
+  "wiki": {
+    "data_description": "Vari dati sul gioco per gli smanettoni",
+    "tiers_by_level_title": "Tier per livello",
+    "tiers_by_level_description": "Le probabilità di ottenere una certa rarità di Pokèmon nel tuo negozio dipende dal tuo livello in gioco. Più è alto il livello, più è alta la rarità e il costo nel negozio.",
+    "experience_by_rank": "Esperienza by posizione",
+    "experience_by_rank_description": "Ottieni punti esperienza alla fine di ogni partita in base al tua posizione. Ogni 1000 XP, aumenti di livello ed ottieni un booster.",
+    "booster_rarity_probability": "Probabilità di rare nei Booster",
+    "booster_rarity_probability_description": "La probabilità di trovare un Pokèmon dentro un booster dipende dalla sua rarità.",
+    "special_pokemons_rate": "Pokèmon Speciali",
+    "ditto_rate": "Probabilità di trovare Ditto nel negozio",
+    "kecleon_rate": "Probabilità di trovare Kecleon tra le scelte del livello 10",
+    "arceus_rate": "Probabilità di trovare Arceus tra le scelte del livello 20",
+    "fishing_rarity_rate": "Qualità pesca basata sulla qualità dell'amo",
+    "fishing_rarity_rate_description": "La qualità dell'amo che usi per pescare influenza la rarità dei Pokèmon che puoi catturare",
+    "pool_size_per_category": "Dimensione dell'insieme per categoria",
+    "pool_size_per_category_description": "I Pokèmon che puoi trovare nei negozi sono presi da un insieme condiviso da tutti i giocatori. Il numero degli esemplari di ogni Pokèmon dentro questo insieme dipende dalla sua rarità e dal numero dei suoi stadi di evoluzione."
+  },
+  "errors": {
+    "USER_INACTIVE": "Sei stato cacciato per inattività per risparmiare risorse del server",
+    "USER_KICKED": "Sei stato cacciato da questa lobby",
+    "USER_BANNED": "Il tuo account è stato bandito",
+    "USER_RANK_TOO_LOW": "Il tuo rango non è alto abbastanza per partecipare a questa lobby",
+    "USER_NOT_AUTHENTICATED": "Per favore, riprova ad autenticati",
+    "ROOM_FULL": "La stanza è piena",
+    "ROOM_EMPTY": "La stanza è stata rimossa per la mancanza di giocatori",
+    "ROOM_DELETED": "La stanza è stata eliminata",
+    "UNKNOWN_ERROR": "Un errore inaspettato si è verificato: {{error}}"
   }
 }
