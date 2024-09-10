@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { AdditionalPicksStages } from "../../../../../types/Config"
+import { ShinyItems } from "../../../../../types/enum/Item"
 import { Pkm, PkmDuo, PkmDuos } from "../../../../../types/enum/Pokemon"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { pokemonPropositionClick } from "../../../stores/NetworkStore"
@@ -67,7 +68,7 @@ export default function GamePokemonsPropositions() {
                       pokemon={proposition as Pkm}
                     />
                   )}
-                  {item && (
+                  {item && ShinyItems.includes(item) === false && (
                     <div className="additional-pick-item ">
                       <span
                         style={{

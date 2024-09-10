@@ -1508,8 +1508,10 @@ export default class Simulation extends Schema implements ISimulation {
       )
 
       if (this.winnerId === this.redPlayerId) {
-        this.redPlayer.money += 1
-        client?.send(Transfer.PLAYER_INCOME, 1)
+        if (this.bluePlayerId !== "pve") {
+          this.redPlayer.money += 1
+          client?.send(Transfer.PLAYER_INCOME, 1)
+        }
       } else {
         const playerDamage = this.room.computeRoundDamage(
           this.blueTeam,
@@ -1543,8 +1545,10 @@ export default class Simulation extends Schema implements ISimulation {
       )
 
       if (this.winnerId === this.bluePlayerId) {
-        this.bluePlayer.money += 1
-        client?.send(Transfer.PLAYER_INCOME, 1)
+        if (this.redPlayerId !== "pve") {
+          this.bluePlayer.money += 1
+          client?.send(Transfer.PLAYER_INCOME, 1)
+        }
       } else {
         const playerDamage = this.room.computeRoundDamage(
           this.redTeam,
