@@ -3962,7 +3962,7 @@ export class TakeHeartStrategy extends AbilityStrategy {
     pokemon.addAttack(8, pokemon, 1, crit)
     pokemon.addSpecialDefense(4, pokemon, 1, crit)
     pokemon.status.clearNegativeStatus()
-    pokemon.cooldown = 250
+    pokemon.cooldown = 100
   }
 }
 

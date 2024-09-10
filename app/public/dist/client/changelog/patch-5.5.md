@@ -37,6 +37,7 @@
 - Piplup line is now Water/Ice/Steel instead of Water/Steel/Flying
 - Nerf Hisuan Sneasel line: PP 40 → 50
 - Buff Overheat (Moltres): damage 30 → 40
+- Buff Take Heart (Manaphy): cooldown 250ms → 100ms
 
 # Changes to Synergies
 
