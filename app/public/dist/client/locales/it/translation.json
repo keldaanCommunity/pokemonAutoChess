@@ -376,7 +376,8 @@
     "SCHOOLING": "Banco",
     "DOUBLE_SHOCK": "Doppiolampo",
     "CHARM": "Fascino",
-    "ENTRAINMENT": "Saltamicizia"
+    "ENTRAINMENT": "Saltamicizia",
+    "OKTZOOKA": "Octazooka"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1208,7 +1209,13 @@
     "GOLDEEN": "Goldeen",
     "SEAKING": "Seaking",
     "LUVDISC": "Luvdisc",
-    "AUDINO": "Audino"
+    "AUDINO": "Audino",
+    "PETILIL": "Petilil",
+    "LILIGANT": "Lilligant",
+    "MANTYKE": "Mantyke",
+    "MANTINE": "Mantine",
+    "REMORAID": "Remoraid",
+    "OCTILLERY": "Octillery"
   },
   "ability_description": {
     "SOFT_BOILED": "Cura tutti gli effetti di stato e garantisce [20,40,80,SP] SHIELD ad ogni Pokèmon alleato",
@@ -1565,7 +1572,8 @@
     "DOUBLE_SHOCK": "L'utilizzatore emette un forte scossa elettrica, infliggendo [50,100,200,SP] SPECIAL. L'utilizzatore subisce PARALYSIS per 3 secondi.",
     "PURIFY": "Cura l'utilizzatore degli status alterati e di [15,30,60,SP] HP.",
     "CHARM": "Infliggi CHARM al bersaglio per 3 secondi, e riducigli l'ATK di [2,3,4,SP] (minimo 1)",
-    "ENTRAINMENT": "Danza ad un ritmo strambo, recuperando [10,SP] PP e forzando il bersaglio ad imitarti, di conseguenza sostituisci la sua abilità con Saltamicizia. Se il bersaglio ha già questa abilità, bersaglia un altro nemico vicino."
+    "ENTRAINMENT": "Danza ad un ritmo strambo, recuperando [10,SP] PP e forzando il bersaglio ad imitarti, di conseguenza sostituisci la sua abilità con Saltamicizia. Se il bersaglio ha già questa abilità, bersaglia un altro nemico vicino.",
+    "OKTZOOKA": "Spara un proiettile che infligge il [150,SP]% dell'ATK dell'utilizzatore come SPECIAL e lasca una nuvola di inchiostro che riduce la precisione del bersaglio"
   },
   "effect": {
     "INGRAIN": "Radicamento",
@@ -2137,7 +2145,9 @@
     "STONJOURNER": "Non si muove o attacca finchè la barra PP è piena. La sua fonte energetica da 50 AP a tutti gli alleati adiacenti all'inizio del combattimento.",
     "POISON_PIN": "Poipole si evolve in Naganadel dopo aver stackato 200 HP.",
     "PYUKUMUKU": "Se il Pokèmon va KO, esplode infliggendo [100,SP] SPECIAL ai nemici adiacenti.",
-    "LUVDISC": "Gli alleati alla sua destra e sinistra si innamorano, e condividono tra loro il valore più alto del loro ATK, AP, DEF e SPE_DEF all'inizio del combattimento."
+    "LUVDISC": "Gli alleati alla sua destra e sinistra si innamorano, e condividono tra loro il valore più alto del loro ATK, AP, DEF e SPE_DEF all'inizio del combattimento.",
+    "MANTYKE": "Quando Mantyke è sul terreno, ottieni il 25% di possibilità di pescare un Remoraid con il tuo amo. Si evolve in Mantine se un Remoraid è affianco.",
+    "MANTINE": "Se Mantine è sul terreno, ottieni il 25% di possibilità di pescare un Remoraid con il tuo amo."
   },
   "stat": {
     "ATK": "Attacco",
@@ -2550,6 +2560,10 @@
   "ability_label": "Capacità",
   "rank": "Rango",
   "player": "Giocatore",
+  "stats": "Statistiche",
+  "total_money_earned": "Totale dell'oro ottenuto durante la partita",
+  "total_player_damage_dealt": "Danni totali inflitti agli altri giocatori",
+  "total_reroll_count": "Numero totale di reroll del negozio",
   "team": "Squadra",
   "synergies": "Sinergie",
   "join_as_guest": "Partecipa come ospite",
