@@ -60,6 +60,7 @@ export default function AfterMenu() {
             <tr>
               <th>{t("rank")}</th>
               <th>{t("player")}</th>
+              <th>{t("stats")}</th>
               <th>{t("team")}</th>
               <th>{t("synergies")}</th>
             </tr>
@@ -77,6 +78,11 @@ export default function AfterMenu() {
                       title={v.title}
                       role={v.role}
                     />
+                  </td>
+                  <td>
+                    <p title={t("total_money_earned")}><img src="assets/icons/money.svg" alt="$" style={{ width: "24px", height: "24px" }} /> {v.moneyEarned}</p>
+                    <p title={t("total_player_damage_dealt")}><img src="assets/icons/ATK.png" alt="✊" style={{ width: "24px", height: "24px" }} />{v.playerDamageDealt}</p>
+                    <p title={t("total_reroll_count")}><img src="assets/ui/refresh.svg" alt="↻" style={{ width: "24px", height: "24px" }} /> {v.rerollCount}</p>
                   </td>
                   <td>
                     <Team team={v.pokemons} />

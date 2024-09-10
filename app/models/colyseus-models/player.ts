@@ -82,6 +82,9 @@ export default class Player extends Schema implements IPlayer {
   @type("string") map: DungeonPMDO
   @type({ set: "string" }) effects: Effects = new Effects()
   @type(["string"]) regionalPokemons = new ArraySchema<Pkm>()
+  @type("uint8") rerollCount: number = 0
+  @type("uint8") totalMoneyEarned: number = 0
+  @type("uint8") totalPlayerDamageDealt: number = 0
   commonRegionalPool: Pkm[] = new Array<Pkm>()
   uncommonRegionalPool: Pkm[] = new Array<Pkm>()
   rareRegionalPool: Pkm[] = new Array<Pkm>()
@@ -90,7 +93,6 @@ export default class Player extends Schema implements IPlayer {
   isBot: boolean
   opponents: Map<string, number> = new Map<string, number>()
   titles: Set<Title> = new Set<Title>()
-  rerollCount: number = 0
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
   weatherRocks: Item[] = pickNRandomIn(WeatherRocks, 3)
   randomComponentsGiven: Item[] = []

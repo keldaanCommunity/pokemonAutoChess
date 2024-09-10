@@ -58,6 +58,7 @@
 # UI
 
 - Added list of community servers with live status on homepage
+- Added more information on after game screen: total money earned, total damage dealt to players, total shop reroll count
 
 # Bugfix
 

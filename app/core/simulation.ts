@@ -5,7 +5,7 @@ import ItemFactory from "../models/item-factory"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../models/precomputed/precomputed-types"
-import { getPath } from "../public/src/pages/utils/utils"
+import { getPortraitPath } from "../public/src/pages/utils/utils"
 import GameRoom from "../rooms/game-room"
 import { IPokemon, IPokemonEntity, ISimulation, Transfer } from "../types"
 import { BOARD_HEIGHT, BOARD_WIDTH, ItemStats } from "../types/Config"
@@ -287,12 +287,12 @@ export default class Simulation extends Schema implements ISimulation {
     )
 
     if (team == Team.BLUE_TEAM) {
-      const dps = new Dps(pokemonEntity.id, getPath(pokemonEntity))
+      const dps = new Dps(pokemonEntity.id, getPortraitPath(pokemonEntity))
       this.blueTeam.set(pokemonEntity.id, pokemonEntity)
       this.blueDpsMeter.set(pokemonEntity.id, dps)
     }
     if (team == Team.RED_TEAM) {
-      const dps = new Dps(pokemonEntity.id, getPath(pokemonEntity))
+      const dps = new Dps(pokemonEntity.id, getPortraitPath(pokemonEntity))
       this.redTeam.set(pokemonEntity.id, pokemonEntity)
       this.redDpsMeter.set(pokemonEntity.id, dps)
     }
@@ -1519,6 +1519,9 @@ export default class Simulation extends Schema implements ISimulation {
         if (playerDamage > 0) {
           client?.send(Transfer.PLAYER_DAMAGE, playerDamage)
         }
+        if (this.bluePlayer) {
+          this.bluePlayer.totalPlayerDamageDealt += playerDamage
+        }
       }
     }
 
@@ -1550,6 +1553,9 @@ export default class Simulation extends Schema implements ISimulation {
         this.bluePlayer.life -= playerDamage
         if (playerDamage > 0) {
           client?.send(Transfer.PLAYER_DAMAGE, playerDamage)
+        }
+        if (this.redPlayer) {
+          this.redPlayer.totalPlayerDamageDealt += playerDamage
         }
       }
     }

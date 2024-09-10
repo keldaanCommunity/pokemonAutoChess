@@ -207,6 +207,12 @@ export default class GameRoom extends Room<GameState> {
               this.state
             )
 
+            player.listen("money", (value: number, previousValue = 0) => {
+              if (value > previousValue) {
+                player.totalMoneyEarned += value - previousValue
+              }
+            })
+
             this.state.players.set(user.uid, player)
             this.state.shop.assignShop(player, false, this.state)
 
