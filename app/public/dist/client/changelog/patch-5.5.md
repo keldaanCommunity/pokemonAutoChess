@@ -34,6 +34,7 @@
 - Nerf Psychic (Solosis): 50/100/200 → 40/80/160 special damage
 - Buff Snorunt line: Attack 8/17/28 → 10/20/36, def/spdef 2/2/2 → 2/3/4, PP 100/100/100 → 100/90/80
 - New ability for Totodile line: Crunch
+- Piplup line is now Water/Ice/Steel instead of Water/Steel/Flying
 
 # Changes to Synergies
 

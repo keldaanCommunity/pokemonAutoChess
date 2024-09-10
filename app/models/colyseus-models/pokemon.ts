@@ -3441,7 +3441,7 @@ export class Machamp extends Pokemon {
 }
 
 export class Piplup extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FLYING, Synergy.STEEL])
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ICE, Synergy.STEEL])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.PRINPLUP
@@ -3456,7 +3456,7 @@ export class Piplup extends Pokemon {
 }
 
 export class Prinplup extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FLYING, Synergy.STEEL])
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ICE, Synergy.STEEL])
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.EMPOLEON
@@ -3471,7 +3471,7 @@ export class Prinplup extends Pokemon {
 }
 
 export class Empoleon extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FLYING, Synergy.STEEL])
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ICE, Synergy.STEEL])
   rarity = Rarity.UNCOMMON
   stars = 3
   hp = 240
