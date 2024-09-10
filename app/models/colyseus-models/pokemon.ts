@@ -2908,8 +2908,8 @@ export class Jigglypuff extends Pokemon {
   evolution = Pkm.WIGGLYTUFF
   hp = 120
   atk = 9
-  def = 1
-  speDef = 1
+  def = 2
+  speDef = 2
   maxPP = 90
   range = 2
   skill = Ability.SLEEP
@@ -2922,8 +2922,8 @@ export class Wigglytuff extends Pokemon {
   stars = 3
   hp = 210
   atk = 18
-  def = 2
-  speDef = 2
+  def = 3
+  speDef = 3
   maxPP = 90
   range = 2
   skill = Ability.SLEEP
@@ -3441,7 +3441,7 @@ export class Machamp extends Pokemon {
 }
 
 export class Piplup extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FLYING, Synergy.STEEL])
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ICE, Synergy.STEEL])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.PRINPLUP
@@ -3456,7 +3456,7 @@ export class Piplup extends Pokemon {
 }
 
 export class Prinplup extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FLYING, Synergy.STEEL])
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ICE, Synergy.STEEL])
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.EMPOLEON
@@ -3471,7 +3471,7 @@ export class Prinplup extends Pokemon {
 }
 
 export class Empoleon extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FLYING, Synergy.STEEL])
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ICE, Synergy.STEEL])
   rarity = Rarity.UNCOMMON
   stars = 3
   hp = 240
@@ -8512,7 +8512,7 @@ export class HisuiSneasel extends Pokemon {
   atk = 9
   def = 1
   speDef = 3
-  maxPP = 40
+  maxPP = 50
   range = 1
   skill = Ability.DIRE_CLAW
   regional = true
@@ -8539,7 +8539,7 @@ export class Sneasler extends Pokemon {
   atk = 22
   def = 2
   speDef = 3
-  maxPP = 40
+  maxPP = 50
   range = 1
   skill = Ability.DIRE_CLAW
   regional = true
@@ -8699,7 +8699,7 @@ export class Bronzor extends Pokemon {
   atk = 5
   def = 6
   speDef = 3
-  maxPP = 85
+  maxPP = 80
   range = 1
   skill = Ability.DEFENSE_CURL
   additional = true
@@ -8718,7 +8718,7 @@ export class Bronzong extends Pokemon {
   atk = 11
   def = 9
   speDef = 7
-  maxPP = 85
+  maxPP = 80
   range = 1
   skill = Ability.DEFENSE_CURL
   additional = true
@@ -10740,7 +10740,7 @@ export class Sharpedo extends Pokemon {
   rarity = Rarity.RARE
   stars = 2
   hp = 170
-  atk = 24
+  atk = 28
   def = 2
   speDef = 3
   maxPP = 100
@@ -11883,8 +11883,8 @@ export class Illumise extends Pokemon {
   stars = 3
   hp = 130
   atk = 13
-  def = 3
-  speDef = 3
+  def = 2
+  speDef = 2
   maxPP = 90
   range = 1
   skill = Ability.STRUGGLE_BUG
@@ -11898,8 +11898,8 @@ export class Volbeat extends Pokemon {
   stars = 3
   hp = 130
   atk = 13
-  def = 3
-  speDef = 3
+  def = 2
+  speDef = 2
   maxPP = 90
   range = 1
   skill = Ability.TAIL_GLOW
@@ -12102,7 +12102,7 @@ export class Kricketot extends Pokemon {
   atk = 7
   def = 2
   speDef = 2
-  maxPP = 70
+  maxPP = 60
   range = 1
   skill = Ability.SCREECH
   additional = true
@@ -12117,7 +12117,7 @@ export class Kricketune extends Pokemon {
   atk = 18
   def = 4
   speDef = 4
-  maxPP = 70
+  maxPP = 60
   range = 1
   skill = Ability.SCREECH
   additional = true

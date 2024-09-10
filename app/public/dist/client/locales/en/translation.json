@@ -2015,7 +2015,7 @@
     "SWIFT_WING": "Gives FLYING synergy. Gain 10% chance to dodge attacks.",
     "HARD_STONE": "Gives ROCK synergy",
     "BIG_NUGGET": "Gives GROUND synergy. If the holder is alive after 15 seconds and gets 5 stacks of GROUND, gain 3 GOLD.",
-    "INCENSE": "Prevent WILD Pokémon encounter in shop when held. Instead, each Pokémon in shop has an additional 5% chance to share a common synergy with the holder.",
+    "INCENSE": "Each Pokémon in shop has an additional 5% chance to share a common synergy with the holder.",
     "EXP_SHARE": "Get the best ATK, AP, DEF and SPE_DEF values of adjacent allies in the same row",
     "POKERUS_VIAL": "Infects the holder with POKERUS, gaining 1 ATK and 10 AP every 2 seconds and transmitting to allies",
     "ROTOM_PHONE": "Gives GHOST synergy. Summons Rotom Drone near the holder",

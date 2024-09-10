@@ -2015,7 +2015,7 @@
     "SWIFT_WING": "Il possessore riceve la sinergia FLYING e la possibilità del 10% di schivare attacchi",
     "HARD_STONE": "Il possessore riceve la sinergia ROCK",
     "BIG_NUGGET": "Il possessore riceve la sinergia GROUND. Se il possessore è ancora vivo dopo 15 secondi ed ha ottenuto 5 stack della sinergia GROUND, ottieni 3 GOLD",
-    "INCENSE": "Previene l'apparizione di Pokèmon WILD nel negozio se equipaggiato. Invece, ogni Pokèmon nel negozio ha un probabilità del 5% di avere in comune una sinergia del possessore.",
+    "INCENSE": "Ogni Pokèmon nel negozio ha un probabilità del 5% di avere in comune una sinergia del possessore.",
     "EXP_SHARE": "Ottieni i migliori valori di ATK, AP, DEF e SPE_DEF dagli alleati adiacenti nella stessa riga",
     "POKERUS_VIAL": "Infetta il possessore con il POKERUS, guadagnando ogni 2 secondi 1 ATK e 10 AP e può trasmetterlo agli alleati",
     "ROTOM_PHONE": "Il possessore riceve la sinergia GHOST. Evoca un Rotom Drone affianco al possessore",
