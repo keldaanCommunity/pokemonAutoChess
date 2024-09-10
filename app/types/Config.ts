@@ -352,13 +352,14 @@ export const FishRarityProbability: {
   }
 }
 
+export const MAX_POOL_CONNECTIONS_SIZE = 16
 export const MAX_CONCURRENT_PLAYERS_ON_SERVER = 700
 export const MAX_CONCURRENT_PLAYERS_ON_LOBBY = 50
 export const MAX_PLAYERS_PER_GAME = 8
 export const MIN_HUMAN_PLAYERS = process.env.MIN_HUMAN_PLAYERS
   ? parseInt(process.env.MIN_HUMAN_PLAYERS)
   : 1
-export const INACTIVITY_TIMEOUT = 60 * 1000
+export const INACTIVITY_TIMEOUT = 60 * 1000 * 10
 
 export const DEFAULT_ATK_SPEED = 0.75
 export const DEFAULT_CRIT_CHANCE = 10
