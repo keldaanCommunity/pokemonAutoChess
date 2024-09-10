@@ -12102,7 +12102,7 @@ export class Kricketot extends Pokemon {
   atk = 7
   def = 2
   speDef = 2
-  maxPP = 70
+  maxPP = 60
   range = 1
   skill = Ability.SCREECH
   additional = true
@@ -12117,7 +12117,7 @@ export class Kricketune extends Pokemon {
   atk = 18
   def = 4
   speDef = 4
-  maxPP = 70
+  maxPP = 60
   range = 1
   skill = Ability.SCREECH
   additional = true

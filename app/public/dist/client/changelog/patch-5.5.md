@@ -39,6 +39,7 @@
 - Buff Overheat (Moltres): damage 30 → 40
 - Buff Take Heart (Manaphy): cooldown 250ms → 100ms
 - Buff Sharperdo: Attack 24 → 28
+- Buff Kricketot line: PP 70 → 60
 
 # Changes to Synergies
 
