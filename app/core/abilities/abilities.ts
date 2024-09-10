@@ -1209,7 +1209,7 @@ export class OverheatStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
-        let damage = 30
+        let damage = 40
         if (tg.status.burn) {
           damage = Math.round(damage * 1.3)
         }

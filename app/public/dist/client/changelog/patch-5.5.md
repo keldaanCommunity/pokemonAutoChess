@@ -35,6 +35,8 @@
 - Buff Snorunt line: Attack 8/17/28 → 10/20/36, def/spdef 2/2/2 → 2/3/4, PP 100/100/100 → 100/90/80
 - New ability for Totodile line: Crunch
 - Piplup line is now Water/Ice/Steel instead of Water/Steel/Flying
+- Nerf Hisuan Sneasel line: PP 40 → 50
+- Buff Overheat (Moltres): damage 30 → 40
 
 # Changes to Synergies
 

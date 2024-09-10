@@ -8512,7 +8512,7 @@ export class HisuiSneasel extends Pokemon {
   atk = 9
   def = 1
   speDef = 3
-  maxPP = 40
+  maxPP = 50
   range = 1
   skill = Ability.DIRE_CLAW
   regional = true
@@ -8539,7 +8539,7 @@ export class Sneasler extends Pokemon {
   atk = 22
   def = 2
   speDef = 3
-  maxPP = 40
+  maxPP = 50
   range = 1
   skill = Ability.DIRE_CLAW
   regional = true

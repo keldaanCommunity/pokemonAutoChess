@@ -2222,7 +2222,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MIME_JR]: Pkm.MIME_JR,
   [Pkm.MR_MIME]: Pkm.MIME_JR,
   [Pkm.ORIGIN_GIRATINA]: Pkm.ORIGIN_GIRATINA,
-  [Pkm.PIROUETTE_MELOETTA]: Pkm.PIROUETTE_MELOETTA,
+  [Pkm.PIROUETTE_MELOETTA]: Pkm.MELOETTA,
   [Pkm.MELMETAL]: Pkm.MELMETAL,
   [Pkm.HOOPA]: Pkm.HOOPA,
   [Pkm.HOOPA_UNBOUND]: Pkm.HOOPA,
