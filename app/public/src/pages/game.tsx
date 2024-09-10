@@ -18,7 +18,6 @@ import {
   IDragDropMessage,
   IExperienceManager,
   IPlayer,
-  ISimplePlayer,
   Role,
   Transfer
 } from "../../../types"
@@ -33,6 +32,7 @@ import { addWanderingPokemon } from "../game/components/pokemon"
 import GameContainer from "../game/game-container"
 import GameScene from "../game/scenes/game-scene"
 import { selectCurrentPlayer, useAppDispatch, useAppSelector } from "../hooks"
+import { loadPreferences } from "../preferences"
 import store from "../stores"
 import {
   addDpsMeter,
@@ -300,6 +300,7 @@ export default function Game() {
 
     if (!connected.current) {
       connect()
+      enterFullScreen()
     } else if (
       !initialized.current &&
       room != undefined &&
@@ -727,4 +728,10 @@ export default function Game() {
       <div id="game" ref={container}></div>
     </main>
   )
+}
+
+function enterFullScreen() {
+  if (document.fullscreenEnabled && loadPreferences().fullscreen) {
+    document.getElementById("game-wrapper")?.requestFullscreen()
+  }
 }
