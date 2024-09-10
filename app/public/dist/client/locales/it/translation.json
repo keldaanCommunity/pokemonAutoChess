@@ -3049,5 +3049,62 @@
     "ZeroIsleEast4": "Isola Zero Est 4",
     "ZeroIsleSouth1": "Isola Zero Sud 1",
     "ZeroIsleSouth2": "Isola Zero Sud 2"
+  },
+  "held_items": "Oggetti tenuti",
+  "by_average_held_items": "in media Oggetti tenuti",
+  "role": {
+    "ADMIN": "Admin",
+    "MODERATOR": "Mod",
+    "BASIC": "Base",
+    "BOT": "Bot",
+    "BOT_MANAGER": "Manager Bot"
+  },
+  "elorank": {
+    "BEGINNER": "Principiante",
+    "POKEBALL": "Pokè Ball",
+    "GREATBALL": "Mega Ball",
+    "ULTRABALL": "Ultra Ball",
+    "MASTERBALL": "Master Ball"
+  },
+  "game_full": "Questo gruppo è pieno",
+  "game_already_started": "La partita è già iniziata",
+  "min_rank_not_reached": "Il tuo rango non è alto abbastanza per giocare questa partita classificata",
+  "not_whitelisted": "Questa partita è ristretta ad un certo gruppo di giocatori",
+  "blacklisted": "Sei stato cacciato da questa partita",
+  "ranked_match": "Partita classificata",
+  "kecleon_dialog": {
+    "welcome": "Benvenuto al negozio di Kecleon!",
+    "tell_price": "10 GOLD ad ognuno!",
+    "thank_you": "GRAZIE MILLE!"
+  },
+  "scribble": {
+    "EVERYONE_IS_HERE": "Tutti sono qui!",
+    "UNIQUE_STARTER": "Starter Unico",
+    "OMELETTE_COOK": "Cuoco d'Omelette",
+    "SYNERGY_WHEEL": "Ruota delle Sinergie",
+    "DITTO_PARTY": "Party di Ditto",
+    "RARE_IS_EXPENSIVE": "Raro è Costoso",
+    "GOTTA_CATCH_EM_ALL": "Catturali tutti!",
+    "BUYER_FEVER": "Febbre dello spendaccione",
+    "TECHNOLOGIC": "Tecnologica",
+    "SIX_PACK": "Falange",
+    "NINE_LIVES": "Nove Vite",
+    "CROWDED": "Terreno Affollato",
+    "KECLEONS_SHOP": "Negozio di Kecleon",
+    "FREE_MARKET": "Mercato Gratis",
+    "SHINY_HUNTER": "Cacciatore di Shiny"
+  },
+  "scribble_description": {
+    "EVERYONE_IS_HERE": "Tutte i Pokèmon Addizionali sono disponibili immediatamente",
+    "UNIQUE_STARTER": "Ottieni un Pokèmon Unico casuale al livello 1.",
+    "OMELETTE_COOK": "Ottieni un Uovo Pokèmon dopo il livello 1,2 e 3.",
+    "SYNERGY_WHEEL": "I caroselli ora prongono solo pietre evolutive",
+    "DITTO_PARTY": "Inizia la partita con 5 Ditto nella tua panchina. I Ditto non possono essere trovati nel negozio e non possono essere venduti.",
+    "RARE_IS_EXPENSIVE": "Comprare XP ora costa 8 invece che 4. Le unità sono comprabili e vendibili per 1 oro in meno",
+    "GOTTA_CATCH_EM_ALL": "Alcuni Pokèmon possono essere catturati prima di ogni round PvE",
+    "BUYER_FEVER": "Le evoluzioni nel negozio sono gratis",
+    "TECHNOLOGIC": "Scegli tra 3 artefatti al livello 3 e al livello 15",
+    "SIX_PACK": "Puoi mettere al massimo 6 unità sul terreno, il livello non importa.",
+    "NINE_LIVES": "Vieni eliminato se perdi 9 round."
   }
 }
