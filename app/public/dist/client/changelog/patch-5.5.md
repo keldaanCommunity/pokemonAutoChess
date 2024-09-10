@@ -42,6 +42,7 @@
 - Buff Kricketot line: PP 70 → 60
 - Buff Bronzong line: PP 85 → 80
 - Buff Jigglypuff: Def/SpeDef 2/2 → 3/3 and Wigglytuff: Def/SpeDef 2/2 → 3/3
+- Nerf Illumise & Volbeat: Def/SpeDef 3/3 → 2/2
 
 # Changes to Synergies
 
@@ -52,6 +53,8 @@
 # Changes to Items
 
 - Nerf Star dust: now gives 50% of max PP as SHIELD instead of 60%
+- Buff Flame Orb: 15 → 30 shield
+- Buff Reaper Cloth: 15 → 20% crit chance
 - Buff Exp. Share: now also takes the best value of AP
 - Buff Comet shard: Atk 10→12, comet drop now can crit and hits adjacent enemies
 - Nerf Dynamax Band: max HP gain: 300% → 250%
