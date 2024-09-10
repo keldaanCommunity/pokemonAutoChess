@@ -2908,8 +2908,8 @@ export class Jigglypuff extends Pokemon {
   evolution = Pkm.WIGGLYTUFF
   hp = 120
   atk = 9
-  def = 1
-  speDef = 1
+  def = 2
+  speDef = 2
   maxPP = 90
   range = 2
   skill = Ability.SLEEP
@@ -2922,8 +2922,8 @@ export class Wigglytuff extends Pokemon {
   stars = 3
   hp = 210
   atk = 18
-  def = 2
-  speDef = 2
+  def = 3
+  speDef = 3
   maxPP = 90
   range = 2
   skill = Ability.SLEEP

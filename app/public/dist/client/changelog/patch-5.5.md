@@ -41,6 +41,7 @@
 - Buff Sharperdo: Attack 24 → 28
 - Buff Kricketot line: PP 70 → 60
 - Buff Bronzong line: PP 85 → 80
+- Buff Jigglypuff: Def/SpeDef 2/2 → 3/3 and Wigglytuff: Def/SpeDef 2/2 → 3/3
 
 # Changes to Synergies
 
