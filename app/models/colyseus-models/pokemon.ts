@@ -8699,7 +8699,7 @@ export class Bronzor extends Pokemon {
   atk = 5
   def = 6
   speDef = 3
-  maxPP = 85
+  maxPP = 80
   range = 1
   skill = Ability.DEFENSE_CURL
   additional = true
@@ -8718,7 +8718,7 @@ export class Bronzong extends Pokemon {
   atk = 11
   def = 9
   speDef = 7
-  maxPP = 85
+  maxPP = 80
   range = 1
   skill = Ability.DEFENSE_CURL
   additional = true

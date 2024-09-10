@@ -40,6 +40,7 @@
 - Buff Take Heart (Manaphy): cooldown 250ms → 100ms
 - Buff Sharperdo: Attack 24 → 28
 - Buff Kricketot line: PP 70 → 60
+- Buff Bronzong line: PP 85 → 80
 
 # Changes to Synergies
 
