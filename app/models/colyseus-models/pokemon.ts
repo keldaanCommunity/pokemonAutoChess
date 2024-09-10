@@ -11883,8 +11883,8 @@ export class Illumise extends Pokemon {
   stars = 3
   hp = 130
   atk = 13
-  def = 3
-  speDef = 3
+  def = 2
+  speDef = 2
   maxPP = 90
   range = 1
   skill = Ability.STRUGGLE_BUG
@@ -11898,8 +11898,8 @@ export class Volbeat extends Pokemon {
   stars = 3
   hp = 130
   atk = 13
-  def = 3
-  speDef = 3
+  def = 2
+  speDef = 2
   maxPP = 90
   range = 1
   skill = Ability.TAIL_GLOW
