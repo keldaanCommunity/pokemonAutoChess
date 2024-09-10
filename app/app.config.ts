@@ -27,6 +27,7 @@ import { pastebinService } from "./services/pastebin"
 import { Title } from "./types"
 import {
   MAX_CONCURRENT_PLAYERS_ON_SERVER,
+  MAX_POOL_CONNECTIONS_SIZE,
   SynergyTriggers
 } from "./types/Config"
 import { DungeonPMDO } from "./types/enum/Dungeon"
@@ -68,8 +69,6 @@ if (process.env.NODE_APP_INSTANCE) {
     }
   }
 }
-
-
 
 export default config({
   options: gameOptions,
@@ -284,7 +283,7 @@ export default config({
      * Before before gameServer.listen() is called.
      */
     connect(process.env.MONGO_URI!, {
-      maxPoolSize: 25,
+      maxPoolSize: MAX_POOL_CONNECTIONS_SIZE,
       socketTimeoutMS: 45000
     })
     admin.initializeApp({
