@@ -181,7 +181,7 @@ export class HiddenPowerGStrategy extends HiddenPowerStrategy {
   ) {
     super.process(unown, state, board, target, crit)
     if (unown.player) {
-      unown.player.money += 5
+      unown.player.addMoney(5)
     }
   }
 }
