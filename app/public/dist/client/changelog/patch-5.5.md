@@ -34,6 +34,15 @@
 - Nerf Psychic (Solosis): 50/100/200 → 40/80/160 special damage
 - Buff Snorunt line: Attack 8/17/28 → 10/20/36, def/spdef 2/2/2 → 2/3/4, PP 100/100/100 → 100/90/80
 - New ability for Totodile line: Crunch
+- Piplup line is now Water/Ice/Steel instead of Water/Steel/Flying
+- Nerf Hisuan Sneasel line: PP 40 → 50
+- Buff Overheat (Moltres): damage 30 → 40
+- Buff Take Heart (Manaphy): cooldown 250ms → 100ms
+- Buff Sharperdo: Attack 24 → 28
+- Buff Kricketot line: PP 70 → 60
+- Buff Bronzong line: PP 85 → 80
+- Buff Jigglypuff: Def/SpeDef 2/2 → 3/3 and Wigglytuff: Def/SpeDef 2/2 → 3/3
+- Nerf Illumise & Volbeat: Def/SpeDef 3/3 → 2/2
 
 # Changes to Synergies
 
@@ -44,11 +53,14 @@
 # Changes to Items
 
 - Nerf Star dust: now gives 50% of max PP as SHIELD instead of 60%
+- Buff Flame Orb: 15 → 30 shield
+- Buff Reaper Cloth: 15 → 20% crit chance
 - Buff Exp. Share: now also takes the best value of AP
 - Buff Comet shard: Atk 10→12, comet drop now can crit and hits adjacent enemies
 - Nerf Dynamax Band: max HP gain: 300% → 250%
 - Buff Gold Bottle Cap: added base stats 20% crit chance and 40% crit power
 - Buff Rare Candy: item is now dropped when pokemon reaches final evolution stage
+- Changed Incense: now gives 30% AP and no longer prevent wild pokemon to show up in the shop
 
 # Gameplay
 

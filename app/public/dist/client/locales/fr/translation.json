@@ -1975,7 +1975,7 @@
     "SWIFT_WING": "Le porteur gagne le type FLYING et 10% de chance d'esquiver les attaques.",
     "HARD_STONE": "Le porteur gagne le type ROCK",
     "BIG_NUGGET": "Le porteur gagne le type GROUND. Après 15 secondes et 5 effets de GROUND, vous gagnez 3 GOLD.",
-    "INCENSE": "Lorsque cet objet est porté, vous ne trouvez plus naturellement de Pokémons WILD dans le magasin. À la place, chaque Pokémon du magasin a 5% de chances en plus de partager une synergie commune avec le porteur.",
+    "INCENSE": "Chaque Pokémon du magasin a 5% de chances en plus de partager une synergie commune avec le porteur.",
     "EXP_SHARE": "Copie la plus haute valeur d'ATK, de AP, de DEF et de SPE_DEF des alliés adjacents sur la même ligne",
     "POKERUS_VIAL": "Infecte le porteur avec le POKERUS, qui fait gagner 1 ATK et 10 AP toutes les 2 secondes et infecte les alliés",
     "ROTOM_PHONE": "Donne la synergie GHOST. Invoque Motismart près du porteur",

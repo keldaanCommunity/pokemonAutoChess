@@ -1980,7 +1980,7 @@
     "SWIFT_WING": "FLYING 시너지 부여 및 회피율 10% 상승",
     "HARD_STONE": "ROCK 시너지 부여",
     "BIG_NUGGET": "GROUND 시너지 부여. 소지자 15초간 생존 및 GROUND 효과 5번 중첩 시 3 GOLD 획득",
-    "INCENSE": "소지 시 상점에서 WILD 포켓몬 출현 방지. 대신, 상점의 각 포켓몬이 소지자와 같은 시너지를 공유할 확률 5% 상승 ",
+    "INCENSE": "상점에 있는 포켓몬은 각각 주인과 공통된 시너지를 공유할 확률이 5% 증가합니다",
     "EXP_SHARE": "같은 열 근접한 포켓몬의 가장 높은 ATK, AP, DEF, 그리고 SPE_DEF를 획득 ",
     "POKERUS_VIAL": "POKERUS 소지자를 감염, ATK 1 과 매 2초 마다 AP 10% 획득, 그리고 동료에게 전송 ",
     "ROTOM_PHONE": "GHOST 시너지 부여, 소지자 주변에 로토무 드론 소환 ",
