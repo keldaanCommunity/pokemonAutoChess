@@ -22,7 +22,7 @@ module.exports = {
       "ref": "origin/prod",
       "repo": "https://github.com/keldaanCommunity/pokemonAutoChess.git",
       "path": "/home/deploy",
-      "post-deploy": "npm install && npm run assetpack && npm run build && pm2 delete all && pm2 update"
+      "post-deploy": "npm install && npm run assetpack && npm run build"
     }
   }
 }
