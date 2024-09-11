@@ -1261,7 +1261,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.AMULET_COIN) && this.player) {
-      this.player.money += 1
+      this.player.addMoney(1)
       this.count.moneyCount += 1
       this.count.amuletCoinCount += 1
     }
@@ -1270,8 +1270,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       const isLastEnemy =
         board.cells.some((p) => p && p.team !== this.team && p.life > 0) ===
         false
-      this.player.money += isLastEnemy ? 5 : 1
-      this.count.moneyCount += isLastEnemy ? 5 : 1
+      const moneyGained = isLastEnemy ? 5 : 1
+      this.player.addMoney(moneyGained)
+      this.count.moneyCount += moneyGained
     }
 
     if (

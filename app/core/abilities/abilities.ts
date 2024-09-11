@@ -198,7 +198,7 @@ export class PaydayStrategy extends AbilityStrategy {
       crit
     )
     if (death && pokemon.player) {
-      pokemon.player.money += pokemon.stars
+      pokemon.player.addMoney(pokemon.stars)
       pokemon.count.moneyCount += pokemon.stars
     }
   }
@@ -228,7 +228,7 @@ export class PickupStrategy extends AbilityStrategy {
         const moneyStolen = max(target.player.money)(pokemon.stars)
         target.player.money -= moneyStolen
         if (pokemon.player) {
-          pokemon.player.money += moneyStolen
+          pokemon.player.addMoney(moneyStolen)
           pokemon.count.moneyCount += moneyStolen
         }
       }
@@ -7362,7 +7362,7 @@ export class GoldRushStrategy extends AbilityStrategy {
     const goldDamage = pokemon.player?.money ? pokemon.player?.money : 0
     const damage = 20 + goldDamage
     if (pokemon.player) {
-      pokemon.player.money += 2
+      pokemon.player.addMoney(2)
     }
     target.handleSpecialDamage(
       damage,
