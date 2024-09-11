@@ -25,9 +25,10 @@ export function GameRoomsMenu() {
     )
 
     const joinGame = throttle(async function joinGame(selectedRoom: RoomAvailable<IGameMetadata>) {
-        if (lobby && !isJoining) {
+        const token = await firebase.auth().currentUser?.getIdToken()
+        if (lobby && !isJoining && token) {
             setJoining(true)
-            const game: Room<GameState> = await client.joinById(selectedRoom.roomId)
+            const game: Room<GameState> = await client.joinById(selectedRoom.roomId, { idToken: token })
             localStore.set(
                 LocalStoreKeys.RECONNECTION_GAME,
                 { reconnectionToken: game.reconnectionToken, roomId: game.roomId },
