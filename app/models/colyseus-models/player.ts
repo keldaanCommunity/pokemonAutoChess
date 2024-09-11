@@ -176,6 +176,11 @@ export default class Player extends Schema implements IPlayer {
     }
   }
 
+  addMoney(value: number) {
+    this.money += value
+    this.totalMoneyEarned += value
+  }
+
   addBattleResult(
     id: string,
     name: string,

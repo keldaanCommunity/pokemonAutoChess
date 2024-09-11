@@ -604,11 +604,12 @@ export class OnSellDropCommand extends Command<
 
       if (pokemon) {
         this.state.shop.releasePokemon(pokemon.name, player)
-        player.money += getSellPrice(
+        const sellPrice = getSellPrice(
           pokemon.name,
           pokemon.shiny,
           this.state.specialGameRule
         )
+        player.addMoney(sellPrice)
         pokemon.items.forEach((it) => {
           player.items.push(it)
         })
@@ -979,7 +980,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         income += player.interest
         income += max(5)(player.streak)
         income += 5
-        player.money += income
+        player.addMoney(income)
         if (income > 0) {
           const client = this.room.clients.find(
             (cli) => cli.auth.uid === player.id
