@@ -3564,7 +3564,7 @@ export class Mudkip extends Pokemon {
   atk = 5
   def = 2
   speDef = 2
-  maxPP = 50
+  maxPP = 60
   range = 1
   skill = Ability.MUD_BUBBLE
   passive = Passive.WATER_SPRING
@@ -3580,7 +3580,7 @@ export class Marshtomp extends Pokemon {
   atk = 9
   def = 3
   speDef = 3
-  maxPP = 50
+  maxPP = 60
   range = 1
   skill = Ability.MUD_BUBBLE
   passive = Passive.WATER_SPRING
@@ -3595,7 +3595,7 @@ export class Swampert extends Pokemon {
   atk = 20
   def = 5
   speDef = 5
-  maxPP = 50
+  maxPP = 60
   range = 1
   skill = Ability.MUD_BUBBLE
   passive = Passive.WATER_SPRING
@@ -4806,7 +4806,7 @@ export class Lugia extends Pokemon {
   atk = 30
   def = 6
   speDef = 6
-  maxPP = 60
+  maxPP = 80
   range = 1
   skill = Ability.SKY_ATTACK
   passive = Passive.WINDY
