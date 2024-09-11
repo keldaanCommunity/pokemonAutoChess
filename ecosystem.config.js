@@ -18,19 +18,11 @@ module.exports = {
   deploy: {
     production: {
       "user": "root",
-      "host": ["146.190.113.96"],
-      "ref": "origin/prod",
-      "repo": "git@github.com:keldaanCommunity/pokemonAutoChess.git",
-      "path": "/home/deploy",
-      "post-deploy": "npm install && npm run build"
-    },
-    test: {
-      "user": "root",
-      "host": ["143.198.101.153", "164.92.98.9"],
+      "host": ["146.190.113.96", "143.198.101.153", "164.92.98.9"],
       "ref": "origin/prod",
       "repo": "https://github.com/keldaanCommunity/pokemonAutoChess.git",
       "path": "/home/deploy",
-      "post-deploy": "npm install && npm run build && npm run colyseus-post-deploy"
+      "post-deploy": "npm install && npm run assetpack && npm run build && pm2 delete all && pm2 update"
     }
   }
 }
