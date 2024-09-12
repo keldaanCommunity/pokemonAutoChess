@@ -375,7 +375,8 @@
     "GULP_MISSILE": "Tragamisil",
     "SCHOOLING": "Banco",
     "DOUBLE_SHOCK": "Electropalmas",
-    "CHARM": "Encanto"
+    "CHARM": "Encanto",
+    "ENTRAINMENT": "Danza Amiga"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
