@@ -10,6 +10,7 @@ import {
   giveBooster,
   giveRole,
   giveTitle,
+  heapSnapshot,
   searchName,
   unban
 } from "../../../stores/NetworkStore"
@@ -49,7 +50,9 @@ export default function Profile() {
   return (
     <div className="profile-modal">
       <div className="profile-box">
-        <h2>{profile?.displayName ?? ""} {t("profile")}</h2>
+        <h2>
+          {profile?.displayName ?? ""} {t("profile")}
+        </h2>
         {profile && <PlayerBox user={profile} history={gameHistory} />}
       </div>
 
@@ -119,6 +122,18 @@ function OtherProfileActions({ resetSearch }) {
         }}
       >
         <p style={{ margin: "0px" }}>{t("give_boosters")}</p>
+      </button>
+    ) : null
+
+  const heapSnapshotButton =
+    user && role && role === Role.ADMIN ? (
+      <button
+        className="bubbly red"
+        onClick={() => {
+          dispatch(heapSnapshot())
+        }}
+      >
+        <p style={{ margin: "0px" }}>{t("heap_snapshot")}</p>
       </button>
     ) : null
 
@@ -204,6 +219,7 @@ function OtherProfileActions({ resetSearch }) {
   return role === Role.ADMIN || role === Role.MODERATOR ? (
     <>
       {giveButton}
+      {heapSnapshotButton}
       {roleButton}
       {titleButton}
       {banButton}
