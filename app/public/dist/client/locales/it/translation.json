@@ -2368,7 +2368,7 @@
     "WILD": "Selvatico",
     "GLUTTON": "Ingordo",
     "STARGAZER": "Osservatore Stellare",
-    "BLOODY": "Sanguinoso",
+    "BLOODY": "Sanguinante",
     "ETERNAL": "Eterno"
   },
   "title_description": {
@@ -2442,7 +2442,7 @@
     "CHOSEN_ONE": "Ottieni la sinergia al massimo con il tipo Luce in una partita",
     "VANQUISHER": "Vinci una partita classificata",
     "OUTSIDER": "Vinci una partita classificata con 8 giocatori essendo il giocatore con l'Elo più basso di tutti",
-    "GLUTTON": "Ottieni uno Snorlax con più di 750 PS base",
+    "GLUTTON": "Ottieni uno Snorlax con più di 750 HP base",
     "STARGAZER": "Ottieni Solgaleo o Lunala",
     "BLOODY": "Ottieni Ursaluna Luna Cremisi",
     "ETERNAL": "Incontra Arceus allo stage 40"
