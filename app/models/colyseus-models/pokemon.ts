@@ -8029,7 +8029,7 @@ export class AlolanMeowth extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.DARK])
   rarity = Rarity.RARE
   stars = 1
-  evolution = Pkm.PERSIAN
+  evolution = Pkm.ALOLAN_PERSIAN
   hp = 80
   atk = 8
   def = 3
