@@ -1214,9 +1214,9 @@
     "OCTILLERY": "Octillery"
   },
   "ability_description": {
-    "SOFT_BOILED": "Cura todos los efectos de estado y otorga [20,40,80,SP] SHIELD para cada aliado",
-    "EARTHQUAKE": "Inflige [120,SP] de SPECIAL a todas las unidades enemigas en la misma columna del atacante",
-    "SONG_OF_DESIRE": "Deja CHARM a 2 oponentes en la línea de fondo durante 3 segundos y reduce su ATK en [3,SP]",
+    "SOFT_BOILED": "Cura todos los efectos de estado y otorga [20,40,80,SP] ESCUDO a cada aliado",
+    "EARTHQUAKE": "Inflinge [120,SP] de SP ATQ a todas las unidades enemigas en la misma columna del atacante",
+    "SONG_OF_DESIRE": "Deja ENCANTADO a 2 oponentes en la línea de fondo durante 3 segundos y reduce su ATQ en [3,SP]",
     "CONFUSING_MIND": "Deja CONFUSION a 2 oponentes en la línea de fondo durante [3,SP] segundos",
     "KNOWLEDGE_THIEF": "Lanza la habilidad del objetivo. El jugador gana 1 XP.",
     "KING_SHIELD": "Otorga PROTECT al usuario durante 1.5 segundos, otorga [10,20,30,SP] SHIELD e intercambia su posición con la del enemigo más lejano",
