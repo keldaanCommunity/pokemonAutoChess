@@ -131,7 +131,8 @@ export enum Transfer {
   USER_PROFILE = "USER_PROFILE",
   PICK_BERRY = "PICK_BERRY",
   PRELOAD_MAPS = "PRELOAD_MAPS",
-  NPC_DIALOG = "NPC_DIALOG"
+  NPC_DIALOG = "NPC_DIALOG",
+  HEAP_SNAPSHOT = "HEAP_SNAPSHOT"
 }
 
 export enum AttackSprite {
