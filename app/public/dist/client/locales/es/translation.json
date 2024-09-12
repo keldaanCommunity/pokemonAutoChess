@@ -374,7 +374,8 @@
     "FELL_STINGER": "Aguijón Letal",
     "GULP_MISSILE": "Tragamisil",
     "SCHOOLING": "Banco",
-    "DOUBLE_SHOCK": "Electropalmas"
+    "DOUBLE_SHOCK": "Electropalmas",
+    "CHARM": "Encanto"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
