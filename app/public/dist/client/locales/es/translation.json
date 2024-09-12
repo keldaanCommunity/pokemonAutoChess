@@ -1264,7 +1264,7 @@
     "SOAK": "Inflige [20,40,80,SP] de SPECIAL y restaura 10 PP a los Pokémon aliados",
     "ORIGIN_PULSE": "Una ola viaja horizontalmente por el campo de batalla infligiendo [100,SP] de SPECIAL",
     "SEED_FLARE": "El cuerpo de Shaymin emite una onda de choque que inflige [30,SP] de SPECIAL a todos los enemigos y reduce su SPE_DEF en 2",
-    "IRON_TAIL": "Ataque de daño de un objetivo que inflige [20,40,80,SP] de SPECIAL. Aumenta DEF por [1,3,5] puntos",
+    "IRON_TAIL": "Ataque de daño de un objetivo que inflige [20,40,80,SP] de SPECIAL. Aumenta la DEF en [1,3,5] puntos",
     "BLAST_BURN": "Ataque de área de efecto que inflige [30,60,120,SP] de SPECIAL",
     "CHARGE": "Mejora el ATK de todos los Pokémon aliados ELECTRIC en [25,SP] %",
     "DISCHARGE": "Golpea a los enemigos cercanos [25,50,75,SP] de SPECIAL y los deja PARALYSIS durante 5 segundos",
