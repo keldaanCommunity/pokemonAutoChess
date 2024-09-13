@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { Language } from "../../../../../types/enum/Language"
-import { LanguageNames } from "../../../../dist/client/locales"
+import { LanguageNames } from "../../../locales"
 import { useAppDispatch } from "../../../hooks"
 import {
   IPreferencesState,

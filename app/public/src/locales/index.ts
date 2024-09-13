@@ -1,4 +1,4 @@
-import { Language } from "../../../../types/enum/Language"
+import { Language } from "../../../types/enum/Language"
 
 export const LanguageNames: { [key in Language]: string } = {
   [Language.en]: "English",

@@ -23,7 +23,18 @@ i18n
     fallbackLng: "en",
     debug: process.env.NODE_ENV !== "production",
     backend: {
-      loadPath: "locales/{{lng}}/{{ns}}.json"
+      loadPath(lngs, namespaces) {
+        const indexJS = Array.from(document.scripts)
+          .map((s) => s.getAttribute("src") ?? "")
+          .find((s) => s.includes("index-"))
+
+        if (indexJS) {
+          const hash = indexJS.replace("index-", "").replace(".js", "")
+          return `locales/{{lng}}/{{ns}}-${hash}.json`
+        } else {
+          return `locales/{{lng}}/{{ns}}.json`
+        }
+      }
     },
     interpolation: {
       escapeValue: false // not needed for react as it escapes by default

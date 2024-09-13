@@ -13,6 +13,7 @@ app/public/dist/client/index*.js.map
 app/public/dist/client/index*.css
 app/public/dist/client/index*.css.map
 app/public/dist/client/assets
+app/public/dist/client/locales
 app/public/src/assets/musics
 *.code-workspace
 /app/public/dist/index.js.LICENSE.txt

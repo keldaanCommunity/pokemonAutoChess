@@ -83,8 +83,8 @@ export function getGameContainer(): GameContainer {
   return gameContainer
 }
 
-export function getGameScene(): GameScene | undefined {
-  return gameContainer?.game?.scene?.getScene<GameScene>("gameScene")
+export function getGameScene(): GameScene | null {
+  return gameContainer?.game?.scene?.getScene("gameScene") as GameScene ?? null
 }
 
 export default function Game() {

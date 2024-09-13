@@ -21,6 +21,14 @@ let hashIndexPlugin = {
           fs.unlinkSync(`app/public/dist/client/${file}`)
         }
       })
+
+      const translations = fs.globSync(
+        `app/public/dist/client/locales/*/*.json`
+      )
+      translations.forEach((file) => {
+        // remove old files
+        fs.unlinkSync(file)
+      })
     })
     build.onEnd((result) => {
       if (result.errors.length > 0) {
@@ -51,7 +59,7 @@ context({
     "process.env.FIREBASE_MESSAGING_SENDER_ID": `"${process.env.FIREBASE_MESSAGING_SENDER_ID}"`,
     "process.env.FIREBASE_APP_ID": `"${process.env.FIREBASE_APP_ID}"`,
     "process.env.DISCORD_SERVER": `"${process.env.DISCORD_SERVER}"`,
-    "process.env.MIN_HUMAN_PLAYERS": `"${process.env.MIN_HUMAN_PLAYERS}"`,
+    "process.env.MIN_HUMAN_PLAYERS": `"${process.env.MIN_HUMAN_PLAYERS}"`
   }
 })
   .then((context) => {
@@ -111,6 +119,26 @@ function updateHashedFilesInIndex() {
 
     // Write the updated HTML back to the file
     fs.writeFileSync(htmlOutputFile, htmlContent, "utf8")
+
+    // Cache burst translation files with index.js hash
+    const hash = scriptFile.split(".").at(-2).replace("index-", "")
+    const sourceDir = "app/public/src"
+    const targetDir = "app/public/dist/client"
+
+    const newTranslations = fs
+      .globSync(`${sourceDir}/locales/*/translation.json`)
+      .map((path) => path.replaceAll("\\", "/"))
+
+    for (const file of newTranslations) {
+      const targetFilename = `${file.replace(sourceDir, "").replace(".json", "")}-${hash}.json`
+      // copy and create folder if needed
+      const targetDirPath = path.dirname(`${targetDir}/${targetFilename}`)
+      if (!fs.existsSync(targetDirPath)) {
+        fs.mkdirSync(targetDirPath, { recursive: true })
+      }
+      fs.copyFileSync(file, `${targetDir}/${targetFilename}`)
+      console.log(`Copied and hashed ${file} to ${targetFilename}`)
+    }
   } else {
     console.error("Hashed entry files not found.")
   }

@@ -14,7 +14,7 @@ export enum DungeonMusic {
   BOSS_BATTLE = "Boss Battle!",
   BOULDER_QUARRY = "Boulder Quarry",
   BRINE_CAVE = "Brine Cave",
-  BURIED_RELIC = "Burned Relic",
+  BURIED_RELIC = "Buried Relic",
   CAVE_AND_SIDE_PATH = "Cave and Side Path",
   CHASM_CAVE = "Chasm Cave",
   CONCEALED_RUINS = "Concealed Ruins",
