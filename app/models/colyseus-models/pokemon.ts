@@ -12847,7 +12847,7 @@ export class GalarCorsola extends Pokemon {
   skill = Ability.CURSE
   attackSprite = AttackSprite.WATER_MELEE
   regional = true
-  isInRegion(pkm: Pkm, map: DungeonPMDO, state?: GameState) {
+  isInRegion(map: DungeonPMDO, state?: GameState) {
     return false // only base form is in region
   }
 }
@@ -12865,7 +12865,7 @@ export class Cursola extends Pokemon {
   skill = Ability.CURSE
   attackSprite = AttackSprite.WATER_MELEE
   regional = true
-  isInRegion(pkm: Pkm, map: DungeonPMDO, state?: GameState) {
+  isInRegion(map: DungeonPMDO, state?: GameState) {
     return false // only base form is in region
   }
 }
