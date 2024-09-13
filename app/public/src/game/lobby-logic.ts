@@ -101,9 +101,10 @@ export async function joinLobbyRoom(
           room.onLeave((code: number) => {
             logger.info(`left lobby with code ${code}`)
             const shouldGoToLoginPage =
-              code === CloseCodes.USER_INACTIVE ||
-              code === CloseCodes.USER_BANNED ||
-              code === CloseCodes.USER_NOT_AUTHENTICATED
+              window.location.pathname === "/lobby" &&
+              (code === CloseCodes.USER_INACTIVE ||
+                code === CloseCodes.USER_BANNED ||
+                code === CloseCodes.USER_NOT_AUTHENTICATED)
             if (shouldGoToLoginPage) {
               const errorMessage = CloseCodesMessages[code]
               if (errorMessage) {
