@@ -1,13 +1,13 @@
 import { XMLParser } from "fast-xml-parser"
 import fs from "fs"
 import gracefulFs from "graceful-fs"
-import Jimp from "jimp"
+import { Jimp } from "jimp"
 import { AnimationType } from "../app/types/Animation"
 import { PokemonTint, SpriteType } from "../app/types/enum/Game"
 import { AnimationConfig, Pkm, PkmIndex } from "../app/types/enum/Pokemon"
 import { logger } from "../app/utils/logger"
-import * as pathlib from 'path'
-import * as os from 'os'
+import * as pathlib from "path"
+import * as os from "os"
 
 gracefulFs.gracefulify(fs)
 const args = process.argv.slice(2)
@@ -15,12 +15,11 @@ const path = args[0]
 const specificIndexToSplit = args[1]
 
 function expandHomeDir(filePath: string): string {
-  if (filePath.startsWith('~')) {
-    return pathlib.join(os.homedir(), filePath.slice(1));
+  if (filePath.startsWith("~")) {
+    return pathlib.join(os.homedir(), filePath.slice(1))
   }
-  return filePath;
+  return filePath
 }
-
 
 interface IPMDCollab {
   AnimData: IAnimData
@@ -73,8 +72,7 @@ async function splitAll() {
 
     logger.debug(
       `${i}/${pkmaIndexes.length - 1} (${(
-        (i * 100) /
-        (pkmaIndexes.length - 1)
+        (i * 100) / (pkmaIndexes.length - 1)
       ).toFixed(2)}%) #${index} ${mapName.get(index)}`
     )
 
@@ -97,10 +95,7 @@ export function loadDurationsFile() {
 
 export function loadDelaysFile() {
   try {
-    const rawdata = fs.readFileSync(
-      "../app/types/delays.json",
-      "utf8"
-    )
+    const rawdata = fs.readFileSync("../app/types/delays.json", "utf8")
     Object.assign(delays, JSON.parse(rawdata))
     logger.debug(
       `Loaded delays file, ${
@@ -201,7 +196,9 @@ async function splitIndex(index: string) {
     const pad = allPads[j]
     try {
       const shiny = pathIndex == pad ? PokemonTint.NORMAL : PokemonTint.SHINY
-      const xmlFile = fs.readFileSync(expandHomeDir(`${path}/sprite/${pad}/AnimData.xml`))
+      const xmlFile = fs.readFileSync(
+        expandHomeDir(`${path}/sprite/${pad}/AnimData.xml`)
+      )
       const parser = new XMLParser()
       const xmlData = <IPMDCollab>parser.parse(xmlFile)
       const attackMetadata = xmlData.AnimData.Anims.Anim.find(
@@ -255,7 +252,9 @@ async function splitIndex(index: string) {
             if (metadata) {
               if (metadata.CopyOf) {
                 img = await Jimp.read(
-                  expandHomeDir(`${path}/sprite/${pad}/${metadata.CopyOf}-${anim}.png`)
+                  expandHomeDir(
+                    `${path}/sprite/${pad}/${metadata.CopyOf}-${anim}.png`
+                  )
                 )
                 metadata = xmlData.AnimData.Anims.Anim.find(
                   (m) => m.Name == metadata?.CopyOf

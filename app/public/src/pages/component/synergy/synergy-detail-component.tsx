@@ -87,7 +87,7 @@ export default function SynergyDetailComponent(props: {
   if (props.type === Synergy.WILD && currentPlayer) {
     const isPVE = stageLevel in PVEStages
     const wildChance = values(currentPlayer.board)
-      .filter((p) => p.types.has(Synergy.WILD) && !isOnBench(p))
+      .filter((p) => p.types.has(Synergy.WILD))
       .reduce((total, p) => total + p.stars, 0) + (isPVE ? 5 : 0)
     additionalInfo = t('synergy_description.WILD_ADDITIONAL', { wildChance })
   }
