@@ -13,9 +13,9 @@ export default function WikiRegions() {
   const [pokemonsPerRegion, setPokemonsPerRegion] = useState<{ [key in DungeonPMDO]?: Pkm[] }>({})
   useEffect(() => {
     const timer = setTimeout(() => {
-      setPokemonsPerRegion(Object.keys(DungeonPMDO).reduce((o, dungeon) => {
+      setPokemonsPerRegion(Object.keys(DungeonPMDO).reduce((o, region) => {
         const regionalMons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
-          PokemonClasses[p].prototype.isInRegion(p, dungeon)
+          new PokemonClasses[p]().isInRegion(region as DungeonPMDO)
         )
           .filter(
             (pkm, index, array) =>
@@ -23,7 +23,7 @@ export default function WikiRegions() {
                 (p) => PkmFamily[p] === PkmFamily[pkm]
               ) === index // dedup same family
           )
-        o[dungeon as DungeonPMDO] = regionalMons
+        o[region as DungeonPMDO] = regionalMons
         return o
       }, {}))
     }, 100)
