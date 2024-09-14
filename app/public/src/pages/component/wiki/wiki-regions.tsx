@@ -7,7 +7,7 @@ import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
 
-export function WikiDungeon() {
+export default function WikiRegions() {
   const { t } = useTranslation()
 
   const [pokemonsPerRegion, setPokemonsPerRegion] = useState<{ [key in DungeonPMDO]?: Pkm[] }>({})
@@ -32,7 +32,11 @@ export function WikiDungeon() {
   }, [])
 
   return (
-    <div id="wiki-dungeon">
+    <div id="wiki-regions">
+      <div className="my-box" style={{ marginBottom: "0.5em" }}>
+        <p>{t("region_hint1")}</p>
+        <p>{t("region_hint2")}</p>
+      </div>
       <ul>
         {(Object.keys(DungeonPMDO) as DungeonPMDO[])
           .sort((a, b) => t(`map.${a}`).localeCompare(t(`map.${b}`)))
@@ -57,7 +61,7 @@ export function WikiDungeon() {
                   loading="lazy"
                   alt={dungeon}
                 />
-                <div className="wiki-dungeon-regional-mons">
+                <div className="wiki-regional-mons">
                   {(pokemonsPerRegion[dungeon] ?? []).map((pkm) => (
                     <img
                       key={pkm}
