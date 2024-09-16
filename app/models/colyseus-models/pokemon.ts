@@ -14756,6 +14756,24 @@ export class Octillery extends Pokemon {
   attackSprite = AttackSprite.WATER_RANGE
 }
 
+export class Sigilyph extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.FLYING,
+    Synergy.FOSSIL
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 16
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 3
+  skill = Ability.SKILL_SWAP
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -15597,5 +15615,6 @@ export const PokemonClasses: Record<
   [Pkm.MANTYKE]: Mantyke,
   [Pkm.MANTINE]: Mantine,
   [Pkm.REMORAID]: Remoraid,
-  [Pkm.OCTILLERY]: Octillery
+  [Pkm.OCTILLERY]: Octillery,
+  [Pkm.SIGILYPH]: Sigilyph
 }

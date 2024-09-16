@@ -835,7 +835,8 @@ export enum Pkm {
   MANTYKE = "MANTYKE",
   MANTINE = "MANTINE",
   REMORAID = "REMORAID",
-  OCTILLERY = "OCTILLERY"
+  OCTILLERY = "OCTILLERY",
+  SIGILYPH = "SIGILYPH"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1673,7 +1674,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MANTYKE]: "0458",
   [Pkm.MANTINE]: "0226",
   [Pkm.REMORAID]: "0223",
-  [Pkm.OCTILLERY]: "0224"
+  [Pkm.OCTILLERY]: "0224",
+  [Pkm.SIGILYPH]: "0561"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2511,7 +2513,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MANTYKE]: Pkm.MANTYKE,
   [Pkm.MANTINE]: Pkm.MANTYKE,
   [Pkm.REMORAID]: Pkm.REMORAID,
-  [Pkm.OCTILLERY]: Pkm.REMORAID
+  [Pkm.OCTILLERY]: Pkm.REMORAID,
+  [Pkm.SIGILYPH]: Pkm.SIGILYPH
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -6853,5 +6856,10 @@ export const AnimationConfig: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Attack,
     emote: AnimationType.RearUp
+  },
+  [Pkm.SIGILYPH]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge
   }
 }
