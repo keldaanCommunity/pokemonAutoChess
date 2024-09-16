@@ -2497,46 +2497,51 @@ export function displayAbility(
       addAbilitySprite(Ability.MUD_BUBBLE, coordinates, true).setScale(1)
       break
 
-    case Ability.PSYCHO_SHIFT: {
-      const pkmSprite = addAbilitySprite(Ability.PRESENT, coordinates).setScale(
-        2
-      )
-
-      if (targetX !== undefined && targetY !== undefined) {
-        const targetSprite = addAbilitySprite(
+    case Ability.PSYCHO_SHIFT:
+      {
+        const pkmSprite = addAbilitySprite(
           Ability.PRESENT,
-          coordinatesTarget
+          coordinates
         ).setScale(2)
 
-        scene.tweens.add({
-          targets: pkmSprite,
-          x: coordinatesTarget[0],
-          y: coordinatesTarget[1],
-          ease: "linear",
-          duration: 300,
-          repeat: 1,
-          yoyo: true,
-          onComplete: () => {
-            pkmSprite.destroy()
-          }
-        })
+        if (targetX !== undefined && targetY !== undefined) {
+          const targetSprite = addAbilitySprite(
+            Ability.PRESENT,
+            coordinatesTarget
+          ).setScale(2)
 
-        scene.tweens.add({
-          targets: targetSprite,
-          x: coordinates[0],
-          y: coordinates[1],
-          ease: "linear",
-          duration: 300,
-          repeat: 1,
-          yoyo: true,
-          onComplete: () => {
-            targetSprite.destroy()
-          }
-        })
+          scene.tweens.add({
+            targets: pkmSprite,
+            x: coordinatesTarget[0],
+            y: coordinatesTarget[1],
+            ease: "linear",
+            duration: 300,
+            repeat: 1,
+            yoyo: true,
+            onComplete: () => {
+              pkmSprite.destroy()
+            }
+          })
+
+          scene.tweens.add({
+            targets: targetSprite,
+            x: coordinates[0],
+            y: coordinates[1],
+            ease: "linear",
+            duration: 300,
+            repeat: 1,
+            yoyo: true,
+            onComplete: () => {
+              targetSprite.destroy()
+            }
+          })
+        }
       }
-
       break
-    }
+
+    case Ability.GLAIVE_RUSH:
+      addAbilitySprite(Ability.ICE_HAMMER, coordinatesTarget, true).setScale(2)
+      break
 
     default:
       break

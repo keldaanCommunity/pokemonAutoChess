@@ -9787,6 +9787,43 @@ export class PsychoShiftStrategy extends AbilityStrategy {
   }
 }
 
+export class GlaiveRushStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const damage = pokemon.stars === 3 ? 150 : pokemon.stars === 2 ? 80 : 40
+    pokemon.status.triggerArmorReduction(6000, pokemon)
+
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.PHYSICAL,
+      pokemon,
+      crit
+    )
+
+    const availablePlacesAroundTarget = board
+      .getAdjacentCells(target.positionX, target.positionY, false)
+      .filter((cell) => cell.value === undefined)
+      .sort(
+        (a, b) =>
+          distanceM(b.x, b.y, pokemon.positionX, pokemon.positionY) -
+          distanceM(a.x, a.y, pokemon.positionX, pokemon.positionY)
+      )
+    if (availablePlacesAroundTarget.length > 0) {
+      const behindTargetPlace = availablePlacesAroundTarget[0]
+      if (behindTargetPlace) {
+        pokemon.moveTo(behindTargetPlace.x, behindTargetPlace.y, board)
+      }
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -10147,5 +10184,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.CHARM]: new CharmStrategy(),
   [Ability.ENTRAINMENT]: new EntrainmentStrategy(),
   [Ability.OKTZOOKA]: new OktzookaStrategy(),
-  [Ability.PSYCHO_SHIFT]: new PsychoShiftStrategy()
+  [Ability.PSYCHO_SHIFT]: new PsychoShiftStrategy(),
+  [Ability.GLAIVE_RUSH]: new GlaiveRushStrategy()
 }
