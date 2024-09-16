@@ -9749,6 +9749,44 @@ export class OktzookaStrategy extends AbilityStrategy {
   }
 }
 
+export class SkillSwapStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const farthestEnnemy = state.getFarthestTarget(pokemon, board)
+
+    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+      id: pokemon.simulation.id,
+      skill: Ability.SKILL_SWAP,
+      positionX: target.positionX,
+      positionY: target.positionY,
+      targetX: farthestEnnemy?.positionX,
+      targetY: farthestEnnemy?.positionY
+    })
+
+    if (farthestEnnemy && farthestEnnemy.id !== target.id) {
+      const x = farthestEnnemy.positionX
+      const y = farthestEnnemy.positionY
+      farthestEnnemy.moveTo(target.positionX, target.positionY, board)
+      target.moveTo(x, y, board)
+      farthestEnnemy.handleSpecialDamage(
+        70,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    }
+
+    target.handleSpecialDamage(70, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -10108,5 +10146,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PASTEL_VEIL]: new PastelVeilStrategy(),
   [Ability.CHARM]: new CharmStrategy(),
   [Ability.ENTRAINMENT]: new EntrainmentStrategy(),
-  [Ability.OKTZOOKA]: new OktzookaStrategy()
+  [Ability.OKTZOOKA]: new OktzookaStrategy(),
+  [Ability.SKILL_SWAP]: new SkillSwapStrategy()
 }

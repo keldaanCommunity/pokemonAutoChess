@@ -377,7 +377,8 @@
     "DOUBLE_SHOCK": "Double Shock",
     "CHARM": "Charm",
     "ENTRAINMENT": "Entrainment",
-    "OKTZOOKA": "Oktzooka"
+    "OKTZOOKA": "Oktzooka",
+    "SKILL_SWAP": "Skill Swap"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1215,7 +1216,8 @@
     "MANTYKE": "Mantyke",
     "MANTINE": "Mantine",
     "REMORAID": "Remoraid",
-    "OCTILLERY": "Octillery"
+    "OCTILLERY": "Octillery",
+    "SIGILYPH": "Sigilyph"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1573,7 +1575,8 @@
     "PURIFY": "Clear negative status and heal the user for [15,30,60,SP] HP.",
     "CHARM": "Inflicts CHARM to the target for 3 seconds and reduces its ATK by [2,3,4,SP] (min 1)",
     "ENTRAINMENT": "Dances to a strange rhythm, regaining [10,SP] PP and forcing the target to imitate them, which replace their ability by Entrainment. If target is already entrained, pick another enemy nearby.",
-    "OKTZOOKA": "Shoots a projectile that deals [150,SP]% of the user's ATK as SPECIAL and leave an ink cloud that reduce's the target's accuracy"
+    "OKTZOOKA": "Shoots a projectile that deals [150,SP]% of the user's ATK as SPECIAL and leave an ink cloud that reduce's the target's accuracy",
+    "SKILL_SWAP": "Exchanges position of target and farthest enemy, dealing [70,SP] SPECIAL to both."
   },
   "effect": {
     "INGRAIN": "Ingrain",
