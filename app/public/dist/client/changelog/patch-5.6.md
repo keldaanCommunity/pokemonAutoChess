@@ -1,6 +1,9 @@
 # New Pokemons:
 
 - Sigilyph
+- Frigibax
+- Arctibax
+- Baxcalibur
 
 # Changes to Pokemon & Abilities
 

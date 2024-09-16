@@ -378,7 +378,8 @@
     "CHARM": "Charm",
     "ENTRAINMENT": "Entrainment",
     "OKTZOOKA": "Oktzooka",
-    "PSYCHO_SHIFT": "Psycho Shift"
+    "PSYCHO_SHIFT": "Psycho Shift",
+    "GLAIVE_RUSH": "Glaive Rush"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1217,7 +1218,10 @@
     "MANTINE": "Mantine",
     "REMORAID": "Remoraid",
     "OCTILLERY": "Octillery",
-    "SIGILYPH": "Sigilyph"
+    "SIGILYPH": "Sigilyph",
+    "FRIGIBAX": "Frigibax",
+    "ARCTIBAX": "Arctibax",
+    "BAXCALIBUR": "Baxcalibur"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1576,7 +1580,8 @@
     "CHARM": "Inflicts CHARM to the target for 3 seconds and reduces its ATK by [2,3,4,SP] (min 1)",
     "ENTRAINMENT": "Dances to a strange rhythm, regaining [10,SP] PP and forcing the target to imitate them, which replace their ability by Entrainment. If target is already entrained, pick another enemy nearby.",
     "OKTZOOKA": "Shoots a projectile that deals [150,SP]% of the user's ATK as SPECIAL and leave an ink cloud that reduce's the target's accuracy",
-    "PSYCHO_SHIFT": "Exchanges position of target and farthest enemy, dealing [70,SP] SPECIAL to both"
+    "PSYCHO_SHIFT": "Exchanges position of target and farthest enemy, dealing [70,SP] SPECIAL to both",
+    "GLAIVE_RUSH": "The caster throws its entire body into a reckless charge. Dash behind the target, dealing it [40,80,150,SP] PHYSICAL and ARMOR_REDUCTION itself for 6s"
   },
   "effect": {
     "INGRAIN": "Ingrain",

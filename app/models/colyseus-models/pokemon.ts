@@ -14774,6 +14774,53 @@ export class Sigilyph extends Pokemon {
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
+export class Frigibax extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.ICE])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.ARCTIBAX
+  hp = 70
+  atk = 6
+  def = 2
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.GLAIVE_RUSH
+  attackSprite = AttackSprite.DRAGON_MELEE
+  regional = true
+}
+
+export class Arctibax extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.ICE])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.BAXCALIBUR
+  hp = 140
+  atk = 12
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.GLAIVE_RUSH
+  attackSprite = AttackSprite.DRAGON_MELEE
+  regional = true
+}
+
+export class Baxcalibur extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.ICE])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  hp = 230
+  atk = 24
+  def = 3
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.GLAIVE_RUSH
+  attackSprite = AttackSprite.DRAGON_MELEE
+  regional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -15616,5 +15663,8 @@ export const PokemonClasses: Record<
   [Pkm.MANTINE]: Mantine,
   [Pkm.REMORAID]: Remoraid,
   [Pkm.OCTILLERY]: Octillery,
-  [Pkm.SIGILYPH]: Sigilyph
+  [Pkm.SIGILYPH]: Sigilyph,
+  [Pkm.FRIGIBAX]: Frigibax,
+  [Pkm.ARCTIBAX]: Arctibax,
+  [Pkm.BAXCALIBUR]: Baxcalibur
 }
