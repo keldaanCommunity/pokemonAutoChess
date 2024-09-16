@@ -378,7 +378,7 @@
     "CHARM": "Charm",
     "ENTRAINMENT": "Entrainment",
     "OKTZOOKA": "Oktzooka",
-    "SKILL_SWAP": "Skill Swap"
+    "PSYCHO_SHIFT": "Psycho Shift"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1576,7 +1576,7 @@
     "CHARM": "Inflicts CHARM to the target for 3 seconds and reduces its ATK by [2,3,4,SP] (min 1)",
     "ENTRAINMENT": "Dances to a strange rhythm, regaining [10,SP] PP and forcing the target to imitate them, which replace their ability by Entrainment. If target is already entrained, pick another enemy nearby.",
     "OKTZOOKA": "Shoots a projectile that deals [150,SP]% of the user's ATK as SPECIAL and leave an ink cloud that reduce's the target's accuracy",
-    "SKILL_SWAP": "Exchanges position of target and farthest enemy, dealing [70,SP] SPECIAL to both."
+    "PSYCHO_SHIFT": "Exchanges position of target and farthest enemy, dealing [70,SP] SPECIAL to both"
   },
   "effect": {
     "INGRAIN": "Ingrain",

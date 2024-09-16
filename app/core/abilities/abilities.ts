@@ -9749,7 +9749,7 @@ export class OktzookaStrategy extends AbilityStrategy {
   }
 }
 
-export class SkillSwapStrategy extends AbilityStrategy {
+export class PsychoShiftStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -9762,7 +9762,7 @@ export class SkillSwapStrategy extends AbilityStrategy {
 
     pokemon.simulation.room.broadcast(Transfer.ABILITY, {
       id: pokemon.simulation.id,
-      skill: Ability.SKILL_SWAP,
+      skill: Ability.PSYCHO_SHIFT,
       positionX: target.positionX,
       positionY: target.positionY,
       targetX: farthestEnnemy?.positionX,
@@ -10147,5 +10147,5 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.CHARM]: new CharmStrategy(),
   [Ability.ENTRAINMENT]: new EntrainmentStrategy(),
   [Ability.OKTZOOKA]: new OktzookaStrategy(),
-  [Ability.SKILL_SWAP]: new SkillSwapStrategy()
+  [Ability.PSYCHO_SHIFT]: new PsychoShiftStrategy()
 }

@@ -14770,7 +14770,7 @@ export class Sigilyph extends Pokemon {
   speDef = 3
   maxPP = 100
   range = 3
-  skill = Ability.SKILL_SWAP
+  skill = Ability.PSYCHO_SHIFT
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 

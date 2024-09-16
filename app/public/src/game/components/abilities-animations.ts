@@ -2497,7 +2497,7 @@ export function displayAbility(
       addAbilitySprite(Ability.MUD_BUBBLE, coordinates, true).setScale(1)
       break
 
-    case Ability.SKILL_SWAP: {
+    case Ability.PSYCHO_SHIFT: {
       const pkmSprite = addAbilitySprite(Ability.PRESENT, coordinates).setScale(
         2
       )
