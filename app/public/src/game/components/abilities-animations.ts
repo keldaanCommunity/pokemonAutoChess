@@ -2543,6 +2543,10 @@ export function displayAbility(
       addAbilitySprite(Ability.ICE_HAMMER, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.FOUL_PLAY:
+      addAbilitySprite(Ability.NIGHT_SLASH, coordinatesTarget, true).setScale(2)
+      break
+
     default:
       break
   }

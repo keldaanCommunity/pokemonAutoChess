@@ -9824,6 +9824,25 @@ export class GlaiveRushStrategy extends AbilityStrategy {
   }
 }
 
+export class FoulPlayStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage =
+      pokemon.stars === 3
+        ? target.atk * 6
+        : pokemon.stars === 2
+          ? target.atk * 4
+          : target.atk * 2
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -10185,5 +10204,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ENTRAINMENT]: new EntrainmentStrategy(),
   [Ability.OKTZOOKA]: new OktzookaStrategy(),
   [Ability.PSYCHO_SHIFT]: new PsychoShiftStrategy(),
-  [Ability.GLAIVE_RUSH]: new GlaiveRushStrategy()
+  [Ability.GLAIVE_RUSH]: new GlaiveRushStrategy(),
+  [Ability.FOUL_PLAY]: new FoulPlayStrategy()
 }
