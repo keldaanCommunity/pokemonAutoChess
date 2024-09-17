@@ -176,6 +176,11 @@ export default class Player extends Schema implements IPlayer {
     }
   }
 
+  addMoney(value: number) {
+    this.money += value
+    this.totalMoneyEarned += value
+  }
+
   addBattleResult(
     id: string,
     name: string,
@@ -418,7 +423,7 @@ export default class Player extends Schema implements IPlayer {
 
   updateRegionalPool(state: GameState) {
     const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
-      PokemonClasses[p].prototype.isInRegion(p, this.map, state)
+      new PokemonClasses[p]().isInRegion(this.map, state)
     )
 
     state.shop.resetRegionalPool(this)

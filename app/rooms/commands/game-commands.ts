@@ -604,11 +604,12 @@ export class OnSellDropCommand extends Command<
 
       if (pokemon) {
         this.state.shop.releasePokemon(pokemon.name, player)
-        player.money += getSellPrice(
+        const sellPrice = getSellPrice(
           pokemon.name,
           pokemon.shiny,
           this.state.specialGameRule
         )
+        player.addMoney(sellPrice)
         pokemon.items.forEach((it) => {
           player.items.push(it)
         })
@@ -979,7 +980,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         income += player.interest
         income += max(5)(player.streak)
         income += 5
-        player.money += income
+        player.addMoney(income)
         if (income > 0) {
           const client = this.room.clients.find(
             (cli) => cli.auth.uid === player.id
@@ -1049,8 +1050,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               // If the Pokemon has a regional variant in the player's region, show that instead of the base form.
               // Base form will still be added to the pool for all players
               const regionalVariants = (PkmRegionalVariants[p] ?? []).filter(
-                (pkm) =>
-                  PokemonClasses[pkm].prototype.isInRegion(pkm, player.map)
+                (pkm) => new PokemonClasses[pkm]().isInRegion(player.map)
               )
               if (regionalVariants.length > 0) {
                 player.pokemonsProposition.push(pickRandomIn(regionalVariants))

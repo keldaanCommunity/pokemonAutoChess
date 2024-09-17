@@ -10,10 +10,10 @@ import { CronJob } from "cron"
 import admin from "firebase-admin"
 import Message from "../models/colyseus-models/message"
 import { TournamentSchema } from "../models/colyseus-models/tournament"
+import BannedUser from "../models/mongo-models/banned-user"
 import { IBot } from "../models/mongo-models/bot-v2"
 import ChatV2 from "../models/mongo-models/chat-v2"
 import Tournament from "../models/mongo-models/tournament"
-import BannedUser from "../models/mongo-models/banned-user"
 import UserMetadata, {
   IUserMetadata
 } from "../models/mongo-models/user-metadata"
@@ -49,6 +49,7 @@ import {
   GiveBoostersCommand,
   GiveRoleCommand,
   GiveTitleCommand,
+  HeapSnapshotCommand,
   NextTournamentStageCommand,
   OnCreateTournamentCommand,
   OnJoinCommand,
@@ -252,6 +253,10 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         })
       }
     )
+
+    this.onMessage(Transfer.HEAP_SNAPSHOT, (client) => {
+      this.dispatcher.dispatch(new HeapSnapshotCommand())
+    })
 
     this.onMessage(
       Transfer.GIVE_TITLE,

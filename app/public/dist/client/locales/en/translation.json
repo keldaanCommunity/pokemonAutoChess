@@ -377,7 +377,10 @@
     "DOUBLE_SHOCK": "Double Shock",
     "CHARM": "Charm",
     "ENTRAINMENT": "Entrainment",
-    "OKTZOOKA": "Oktzooka"
+    "OKTZOOKA": "Oktzooka",
+    "PSYCHO_SHIFT": "Psycho Shift",
+    "GLAIVE_RUSH": "Glaive Rush",
+    "FOUL_PLAY": "Foul Play"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1046,7 +1049,7 @@
     "ILLUMISE": "Illumise",
     "NECROZMA": "Necrozma",
     "ULTRA_NECROZMA": "Ultra Necrozma",
-    "CHERRUBI": "Cherrubi",
+    "CHERRUBI": "Cherubi",
     "CHERRIM": "Cherrim",
     "CHERRIM_SUNLIGHT": "Cherrim Sunlight",
     "MISDREAVUS": "Misdreavus",
@@ -1083,6 +1086,7 @@
     "LINOONE": "Linoone",
     "PHEROMOSA": "Pheromosa",
     "SABLEYE": "Sableye",
+    "MEGA_SABLEYE": "Mega Sableye",
     "DRACOVISH": "Dracovish",
     "CORSOLA": "Corsola",
     "GALAR_CORSOLA": "Galarian Corsola",
@@ -1215,7 +1219,11 @@
     "MANTYKE": "Mantyke",
     "MANTINE": "Mantine",
     "REMORAID": "Remoraid",
-    "OCTILLERY": "Octillery"
+    "OCTILLERY": "Octillery",
+    "SIGILYPH": "Sigilyph",
+    "FRIGIBAX": "Frigibax",
+    "ARCTIBAX": "Arctibax",
+    "BAXCALIBUR": "Baxcalibur"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1341,7 +1349,7 @@
     "SPARKLING_ARIA": "Deals [15,30,60,SP] SPECIAL to the target and adjacent enemies. If adjacent allies are BURN, the burn is healed.",
     "DRAGON_DARTS": "Throws 3 darts that deals [10,20,40,SP] SPECIAL each to the target. If the target is KO, regain 40 PP.",
     "GRASSY_SURGE": "Increase ATK of all GRASS Pokémons by [5,SP]",
-    "MISTY_SURGE": "All FAIRY allies recover [30,SP] HP and [30,SP] PP.",
+    "MISTY_SURGE": "All FAIRY allies (except the caster) recover [30,SP] HP and [30,SP] PP.",
     "SKY_ATTACK": "Rises in the air and fall on the farthest target after one second, dealing [120,SP] SPECIAL",
     "FLYING_PRESS": "Dives down onto the farthest target from the sky, dealing [30,SP]% of user's max HP as SPECIAL",
     "ILLUSION": "User recovers [30,50,70,SP=0.5] HP points and copies the form as well as the ATK,DEF, SPE_DEF, and RANGE of the targeted Pokemon",
@@ -1380,7 +1388,7 @@
     "SPLASH": "Just flops and splashes around to no effect at all...",
     "PECK": "Deals [10,20,30,SP] SPECIAL to the target",
     "COUNTER": "Pokemon lashes out at adjacent enemies dealing [100,SP]% of its missing HP as SPECIAL",
-    "COSMIC_POWER": "Buff your team AP by [20,SP]",
+    "COSMIC_POWER": "Buff your team (except the caster) AP by [20,SP]",
     "ENTANGLING_THREAD": "Deals [10,20,40,SP] SPECIAL and PARALYSIS the target and adjacent enemies for 4 seconds",
     "SILVER_WIND": "Dash into the enemy backline, dealing [30,60,120,SP] SPECIAL to every enemy on the path. Then gain 1 ATK, 1 DEF, 1 SPE_DEF, 10 AP and 10% ATK_SPEED",
     "POISON_POWDER": "Dash into the enemy backline, dealing [30,60,120,SP] SPECIAL and applying POISONNED for 5 seconds to every enemy on the path",
@@ -1573,7 +1581,10 @@
     "PURIFY": "Clear negative status and heal the user for [15,30,60,SP] HP.",
     "CHARM": "Inflicts CHARM to the target for 3 seconds and reduces its ATK by [2,3,4,SP] (min 1)",
     "ENTRAINMENT": "Dances to a strange rhythm, regaining [10,SP] PP and forcing the target to imitate them, which replace their ability by Entrainment. If target is already entrained, pick another enemy nearby.",
-    "OKTZOOKA": "Shoots a projectile that deals [150,SP]% of the user's ATK as SPECIAL and leave an ink cloud that reduce's the target's accuracy"
+    "OKTZOOKA": "Shoots a projectile that deals [150,SP]% of the user's ATK as SPECIAL and leave an ink cloud that reduce's the target's accuracy",
+    "PSYCHO_SHIFT": "Exchanges position of target and farthest enemy, dealing [70,SP] SPECIAL to both",
+    "GLAIVE_RUSH": "The caster throws its entire body into a reckless charge. Dash behind the target, dealing it [40,80,150,SP] PHYSICAL and ARMOR_REDUCTION itself for 6s",
+    "FOUL_PLAY": "Deals [2,4,6,SP] x target's ATK as SPECIAL"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2147,7 +2158,9 @@
     "PYUKUMUKU": "When this pokemon is KO, it explodes dealing [100,SP] SPECIAL to adjacent enemies.",
     "LUVDISC": "The allies on its left and on its right fall in love, and share the best value of their respective ATK, AP, DEF and SPE_DEF at the start of the fight",
     "MANTYKE": "When Mantyke is on board, gain 25% chance to fish a Remoraid with your fishing rod. Evolves into Mantine if a Remoraid is next to it.",
-    "MANTINE": "When Mantine is on board, gain 25% chance to fish a Remoraid with your fishing rod."
+    "MANTINE": "When Mantine is on board, gain 25% chance to fish a Remoraid with your fishing rod.",
+    "SABLEYE": "Sableye is looking for a FIRE_GEM",
+    "MEGA_SABLEYE": "Mega Sableye gains RUNE_PROTECT for the entire fight"
   },
   "stat": {
     "ATK": "Attack",
@@ -2758,6 +2771,7 @@
   "name": "Name",
   "anonymous_users_name_hint": "Anonymous users cannot change their name.",
   "give_boosters": "Give boosters",
+  "heap_snapshot": "Write heap snapshot",
   "ban_user": "Ban User",
   "unban_user": "Unban User",
   "set_moderator": "Set Moderator",
@@ -2834,6 +2848,8 @@
   "all": "All",
   "weather_dominant_hint": "The dominant type of Pokémons on the board during a battle can influence the weather. The weather has various effects on all of your team's and opponent's Pokémons.",
   "weather_dominant_hint2": "It will require a certain number of Pokémons of this type on the board to change the weather. Some powerful Pokémons also have the ability to change weather by their own.",
+  "region_hint1": "Some Pokémons can only be found in certain regions, or have regional variations that replace their base form.",
+  "region_hint2": "You can travel to a different region by taking a portal at stages 10 and 20. The portal symbols will influence the destination.",
   "how_to_play": "How to play ?",
   "abilities_label": "Abilities",
   "weather_label": "Weather",

@@ -1,6 +1,7 @@
 import { Command } from "@colyseus/command"
 import { Client, RoomListingData, matchMaker } from "colyseus"
 import { nanoid } from "nanoid"
+import { writeHeapSnapshot } from "v8"
 import {
   getRemainingPlayers,
   getTournamentStage,
@@ -45,13 +46,13 @@ import {
   DUST_PER_SHINY,
   getEmotionCost
 } from "../../types/Config"
+import { CloseCodes } from "../../types/enum/CloseCodes"
 import { EloRank } from "../../types/enum/EloRank"
 import { GameMode, Rarity } from "../../types/enum/Game"
 import { Language } from "../../types/enum/Language"
 import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { StarterAvatars } from "../../types/enum/Starters"
 import { ITournamentPlayer } from "../../types/interfaces/Tournament"
-import { CloseCodes } from "../../types/enum/CloseCodes"
 import { sum } from "../../utils/array"
 import { logger } from "../../utils/logger"
 import { cleanProfanity } from "../../utils/profanity-filter"
@@ -164,6 +165,13 @@ export class GiveTitleCommand extends Command<
     } catch (error) {
       logger.error(error)
     }
+  }
+}
+
+export class HeapSnapshotCommand extends Command<CustomLobbyRoom> {
+  execute() {
+    logger.info("writing heap snapshot")
+    writeHeapSnapshot()
   }
 }
 

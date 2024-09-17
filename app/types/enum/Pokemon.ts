@@ -701,6 +701,7 @@ export enum Pkm {
   LINOONE = "LINOONE",
   PHEROMOSA = "PHEROMOSA",
   SABLEYE = "SABLEYE",
+  MEGA_SABLEYE = "MEGA_SABLEYE",
   DRACOVISH = "DRACOVISH",
   CORSOLA = "CORSOLA",
   GALAR_CORSOLA = "GALAR_CORSOLA",
@@ -835,7 +836,11 @@ export enum Pkm {
   MANTYKE = "MANTYKE",
   MANTINE = "MANTINE",
   REMORAID = "REMORAID",
-  OCTILLERY = "OCTILLERY"
+  OCTILLERY = "OCTILLERY",
+  SIGILYPH = "SIGILYPH",
+  FRIGIBAX = "FRIGIBAX",
+  ARCTIBAX = "ARCTIBAX",
+  BAXCALIBUR = "BAXCALIBUR"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1518,6 +1523,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.LINOONE]: "0264",
   [Pkm.PHEROMOSA]: "0795",
   [Pkm.SABLEYE]: "0302",
+  [Pkm.MEGA_SABLEYE]: "0302-0001",
   [Pkm.DRACOVISH]: "0882",
   [Pkm.CORSOLA]: "0222",
   [Pkm.GALAR_CORSOLA]: "0222-0001",
@@ -1673,7 +1679,11 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MANTYKE]: "0458",
   [Pkm.MANTINE]: "0226",
   [Pkm.REMORAID]: "0223",
-  [Pkm.OCTILLERY]: "0224"
+  [Pkm.OCTILLERY]: "0224",
+  [Pkm.SIGILYPH]: "0561",
+  [Pkm.FRIGIBAX]: "0996",
+  [Pkm.ARCTIBAX]: "0997",
+  [Pkm.BAXCALIBUR]: "0998"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2356,6 +2366,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.LINOONE]: Pkm.ZIGZAGOON,
   [Pkm.PHEROMOSA]: Pkm.PHEROMOSA,
   [Pkm.SABLEYE]: Pkm.SABLEYE,
+  [Pkm.MEGA_SABLEYE]: Pkm.SABLEYE,
   [Pkm.DRACOVISH]: Pkm.DRACOVISH,
   [Pkm.CORSOLA]: Pkm.CORSOLA,
   [Pkm.GALAR_CORSOLA]: Pkm.CORSOLA,
@@ -2511,7 +2522,11 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MANTYKE]: Pkm.MANTYKE,
   [Pkm.MANTINE]: Pkm.MANTYKE,
   [Pkm.REMORAID]: Pkm.REMORAID,
-  [Pkm.OCTILLERY]: Pkm.REMORAID
+  [Pkm.OCTILLERY]: Pkm.REMORAID,
+  [Pkm.SIGILYPH]: Pkm.SIGILYPH,
+  [Pkm.FRIGIBAX]: Pkm.FRIGIBAX,
+  [Pkm.ARCTIBAX]: Pkm.FRIGIBAX,
+  [Pkm.BAXCALIBUR]: Pkm.FRIGIBAX
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -4015,18 +4030,17 @@ export const AnimationConfig: {
   },
   [Pkm.SANDILE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot,
+    ability: AnimationType.Charge,
     emote: AnimationType.Shoot
   },
   [Pkm.KROKOROK]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
-    emote: AnimationType.Shoot,
-    shinyUnavailable: true
+    ability: AnimationType.Charge,
+    emote: AnimationType.RearUp
   },
   [Pkm.KROOKODILE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
+    ability: AnimationType.Charge,
     emote: AnimationType.Shoot
   },
   [Pkm.SOLOSIS]: {
@@ -6060,6 +6074,11 @@ export const AnimationConfig: {
     ability: AnimationType.SpAttack,
     emote: AnimationType.Charge
   },
+  [Pkm.MEGA_SABLEYE]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge
+  },
   [Pkm.DRACOVISH]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Attack,
@@ -6853,5 +6872,25 @@ export const AnimationConfig: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Attack,
     emote: AnimationType.RearUp
+  },
+  [Pkm.SIGILYPH]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge
+  },
+  [Pkm.FRIGIBAX]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.ARCTIBAX]: {
+    attack: AnimationType.Scratch,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.BAXCALIBUR]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
   }
 }

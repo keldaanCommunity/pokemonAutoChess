@@ -207,12 +207,6 @@ export default class GameRoom extends Room<GameState> {
               this.state
             )
 
-            player.listen("money", (value: number, previousValue = 0) => {
-              if (value > previousValue) {
-                player.totalMoneyEarned += value - previousValue
-              }
-            })
-
             this.state.players.set(user.uid, player)
             this.state.shop.assignShop(player, false, this.state)
 
@@ -906,16 +900,20 @@ export default class GameRoom extends Room<GameState> {
         )
         if (pokemonEvolved) {
           hasEvolved = true
-          // check item evolution rule after count evolution (example: Clefairy)
-          this.checkEvolutionsAfterItemAcquired(playerId, pokemonEvolved)
 
+          // Drop Rare Candy if no further count based evo
           if (
             pokemonEvolved.items.has(Item.RARE_CANDY) &&
-            pokemonEvolved.evolution === Pkm.DEFAULT
+            (pokemonEvolved.evolution === Pkm.DEFAULT ||
+              (pokemonEvolved.evolutionRule &&
+                !(pokemonEvolved.evolutionRule instanceof CountEvolutionRule)))
           ) {
             player.items.push(Item.RARE_CANDY)
             pokemonEvolved.items.delete(Item.RARE_CANDY)
           }
+
+          // check item evolution rule after count evolution (example: Porygon-2)
+          this.checkEvolutionsAfterItemAcquired(playerId, pokemonEvolved)
         }
       }
     })
