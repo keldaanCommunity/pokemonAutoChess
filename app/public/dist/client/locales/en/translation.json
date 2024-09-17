@@ -1086,6 +1086,7 @@
     "LINOONE": "Linoone",
     "PHEROMOSA": "Pheromosa",
     "SABLEYE": "Sableye",
+    "MEGA_SABLEYE": "Mega Sableye",
     "DRACOVISH": "Dracovish",
     "CORSOLA": "Corsola",
     "GALAR_CORSOLA": "Galarian Corsola",
@@ -2157,7 +2158,9 @@
     "PYUKUMUKU": "When this pokemon is KO, it explodes dealing [100,SP] SPECIAL to adjacent enemies.",
     "LUVDISC": "The allies on its left and on its right fall in love, and share the best value of their respective ATK, AP, DEF and SPE_DEF at the start of the fight",
     "MANTYKE": "When Mantyke is on board, gain 25% chance to fish a Remoraid with your fishing rod. Evolves into Mantine if a Remoraid is next to it.",
-    "MANTINE": "When Mantine is on board, gain 25% chance to fish a Remoraid with your fishing rod."
+    "MANTINE": "When Mantine is on board, gain 25% chance to fish a Remoraid with your fishing rod.",
+    "SABLEYE": "Sableye is looking for a FIRE_GEM",
+    "MEGA_SABLEYE": "Mega Sableye gains RUNE_PROTECT for the entire fight"
   },
   "stat": {
     "ATK": "Attack",

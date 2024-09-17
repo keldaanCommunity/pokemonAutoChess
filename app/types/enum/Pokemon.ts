@@ -701,6 +701,7 @@ export enum Pkm {
   LINOONE = "LINOONE",
   PHEROMOSA = "PHEROMOSA",
   SABLEYE = "SABLEYE",
+  MEGA_SABLEYE = "MEGA_SABLEYE",
   DRACOVISH = "DRACOVISH",
   CORSOLA = "CORSOLA",
   GALAR_CORSOLA = "GALAR_CORSOLA",
@@ -1522,6 +1523,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.LINOONE]: "0264",
   [Pkm.PHEROMOSA]: "0795",
   [Pkm.SABLEYE]: "0302",
+  [Pkm.MEGA_SABLEYE]: "0302-0001",
   [Pkm.DRACOVISH]: "0882",
   [Pkm.CORSOLA]: "0222",
   [Pkm.GALAR_CORSOLA]: "0222-0001",
@@ -2364,6 +2366,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.LINOONE]: Pkm.ZIGZAGOON,
   [Pkm.PHEROMOSA]: Pkm.PHEROMOSA,
   [Pkm.SABLEYE]: Pkm.SABLEYE,
+  [Pkm.MEGA_SABLEYE]: Pkm.SABLEYE,
   [Pkm.DRACOVISH]: Pkm.DRACOVISH,
   [Pkm.CORSOLA]: Pkm.CORSOLA,
   [Pkm.GALAR_CORSOLA]: Pkm.CORSOLA,
@@ -6068,6 +6071,11 @@ export const AnimationConfig: {
   },
   [Pkm.SABLEYE]: {
     attack: AnimationType.MultiStrike,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge
+  },
+  [Pkm.MEGA_SABLEYE]: {
+    attack: AnimationType.Strike,
     ability: AnimationType.SpAttack,
     emote: AnimationType.Charge
   },

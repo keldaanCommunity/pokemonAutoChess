@@ -7,6 +7,7 @@
 - Sandile
 - Krokorok
 - Krookodile
+- Mega Sableye
 
 # Changes to Pokemon & Abilities
 
