@@ -8,6 +8,7 @@
 - Krokorok
 - Krookodile
 - Mega Sableye
+- XD001
 
 # Changes to Pokemon & Abilities
 

@@ -4774,6 +4774,8 @@ export class Lugia extends Pokemon {
     Synergy.PSYCHIC
   ])
   rarity = Rarity.LEGENDARY
+  evolution = Pkm.SHADOW_LUGIA
+  evolutionRule = new ItemEvolutionRule([Item.DUSK_STONE])
   stars = 3
   hp = 300
   atk = 30
@@ -4782,7 +4784,27 @@ export class Lugia extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.SKY_ATTACK
-  passive = Passive.WINDY
+  passive = Passive.LUGIA
+  attackSprite = AttackSprite.FLYING_MELEE
+}
+
+export class ShadowLugia extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.AQUATIC,
+    Synergy.FLYING,
+    Synergy.PSYCHIC,
+    Synergy.DARK
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 4
+  hp = 300
+  atk = 30
+  def = 6
+  speDef = 6
+  maxPP = 80
+  range = 1
+  skill = Ability.SKY_ATTACK
+  passive = Passive.NIGHT
   attackSprite = AttackSprite.FLYING_MELEE
 }
 
@@ -15046,6 +15068,7 @@ export const PokemonClasses: Record<
   [Pkm.FEAROW]: Fearow,
   [Pkm.GYARADOS]: Gyarados,
   [Pkm.LUGIA]: Lugia,
+  [Pkm.SHADOW_LUGIA]: ShadowLugia,
   [Pkm.ZAPDOS]: Zapdos,
   [Pkm.MOLTRES]: Moltres,
   [Pkm.ARTICUNO]: Articuno,
