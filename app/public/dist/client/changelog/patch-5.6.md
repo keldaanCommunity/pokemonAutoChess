@@ -4,8 +4,13 @@
 - Frigibax
 - Arctibax
 - Baxcalibur
+- Sandile
+- Krokorok
+- Krookodile
 
 # Changes to Pokemon & Abilities
+
+- Nerf Gotitelle: Psychic Dark Human -> Psychic Human
 
 # Changes to Synergies
 

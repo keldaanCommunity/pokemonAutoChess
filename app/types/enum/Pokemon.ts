@@ -4027,18 +4027,17 @@ export const AnimationConfig: {
   },
   [Pkm.SANDILE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot,
+    ability: AnimationType.Charge,
     emote: AnimationType.Shoot
   },
   [Pkm.KROKOROK]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
-    emote: AnimationType.Shoot,
-    shinyUnavailable: true
+    ability: AnimationType.Charge,
+    emote: AnimationType.RearUp
   },
   [Pkm.KROOKODILE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
+    ability: AnimationType.Charge,
     emote: AnimationType.Shoot
   },
   [Pkm.SOLOSIS]: {
