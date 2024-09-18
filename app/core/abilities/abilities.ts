@@ -9698,18 +9698,19 @@ export class EntrainmentStrategy extends AbilityStrategy {
         []
       board.forEach(
         (x: number, y: number, value: PokemonEntity | undefined) => {
-          if (value && value.team === pokemon.team && value.life > 0) {
+          if (value && value.team === target.team && value.skill !== Ability.ENTRAINMENT && value.life > 0) {
             potentialTargets.push({ x, y, value })
           }
         }
       )
-      potentialTargets.sort(
-        (a, b) =>
-          distanceC(pokemon.positionX, pokemon.positionY, a.x, a.y) -
-          distanceC(pokemon.positionX, pokemon.positionY, b.x, b.y)
-      )
       if (potentialTargets.length > 0) {
-        target.skill = Ability.ENTRAINMENT
+        potentialTargets.sort(
+          (a, b) =>
+            distanceC(target.positionX, target.positionY, a.x, a.y) -
+            distanceC(target.positionX, target.positionY, b.x, b.y)
+        )
+        potentialTargets[0].value.skill = Ability.ENTRAINMENT
+        //--> target.skill = Ability.ENTRAINMENT
       }
     }
   }
