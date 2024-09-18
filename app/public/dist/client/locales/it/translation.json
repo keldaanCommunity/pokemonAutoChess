@@ -377,7 +377,11 @@
     "DOUBLE_SHOCK": "Doppiolampo",
     "CHARM": "Fascino",
     "ENTRAINMENT": "Saltamicizia",
-    "OKTZOOKA": "Octazooka"
+    "OKTZOOKA": "Octazooka",
+    "PSYCHO_SHIFT": "Psicotransfer",
+    "GLAIVE_RUSH": "Spadoncarica",
+    "FOUL_PLAY": "Ripicca",
+    "DOUBLE_IRON_BASH": "Pugni Corazzati"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -557,6 +561,7 @@
     "FEAROW": "Fearow",
     "GYARADOS": "Gyarados",
     "LUGIA": "Lugia",
+    "SHADOW_LUGIA": "XD001",
     "GIRATINA": "Giratina",
     "ZAPDOS": "Zapdos",
     "MOLTRES": "Moltres",
@@ -1083,6 +1088,7 @@
     "LINOONE": "Linoone",
     "PHEROMOSA": "Pheromosa",
     "SABLEYE": "Sableye",
+    "MEGA_SABLEYE": "Mega Sableye",
     "DRACOVISH": "Dracovish",
     "CORSOLA": "Corsola",
     "GALAR_CORSOLA": "Corsola di Galar",
@@ -1215,7 +1221,11 @@
     "MANTYKE": "Mantyke",
     "MANTINE": "Mantine",
     "REMORAID": "Remoraid",
-    "OCTILLERY": "Octillery"
+    "OCTILLERY": "Octillery",
+    "SIGILYPH": "Sigilyph",
+    "FRIGIBAX": "Frigibax",
+    "ARCTIBAX": "Arctibax",
+    "BAXCALIBUR": "Baxaclibur"
   },
   "ability_description": {
     "SOFT_BOILED": "Cura tutti gli effetti di stato e garantisce [20,40,80,SP] SHIELD ad ogni Pokèmon alleato",
@@ -1573,7 +1583,11 @@
     "PURIFY": "Cura l'utilizzatore degli status alterati e di [15,30,60,SP] HP.",
     "CHARM": "Infliggi CHARM al bersaglio per 3 secondi, e riducigli l'ATK di [2,3,4,SP] (minimo 1)",
     "ENTRAINMENT": "Danza ad un ritmo strambo, recuperando [10,SP] PP e forzando il bersaglio ad imitarti, di conseguenza sostituisci la sua abilità con Saltamicizia. Se il bersaglio ha già questa abilità, bersaglia un altro nemico vicino.",
-    "OKTZOOKA": "Spara un proiettile che infligge il [150,SP]% dell'ATK dell'utilizzatore come SPECIAL e lasca una nuvola di inchiostro che riduce la precisione del bersaglio"
+    "OKTZOOKA": "Spara un proiettile che infligge il [150,SP]% dell'ATK dell'utilizzatore come SPECIAL e lasca una nuvola di inchiostro che riduce la precisione del bersaglio",
+    "PSYCHO_SHIFT": "Scambia posizione del bersaglio e il nemico più lontano, infliggendo ad entrambi [70,SP] SPECIAL.",
+    "GLAIVE_RUSH": "L'utilizzatore si butta di corpo in una carica molto rischiosa. Scatta verso il bersaglio, infliggendo [40,80,150,SP] PHYSICAL e causa a se stesso ARMOR_REDUCTION per 6 secondi.",
+    "FOUL_PLAY": "Infliggi [2,4,6,SP] SPECIAL moltiplicati per l' ATK del bersaglio",
+    "DOUBLE_IRON_BASH": "L'utilizzatore rotea su sè stesso, poi colpisce con le sue braccia due volte infliggendo il [150,SP] % del suo ATK entrambe le volte. Causa al bersaglio FLINCH per 3 secondi."
   },
   "effect": {
     "INGRAIN": "Radicamento",
@@ -2075,6 +2089,7 @@
     "STORM": "Cambia il tempo in STORM",
     "NIGHT": "Cambia il tempo in NIGHT",
     "WINDY": "Cambia il tempo in WINDY",
+    "LUGIA": "Lugia cambia il tempo in WINDY e sta cercando una DUSK_STONE",
     "AIRLOCK": "Neutralizza gli effetti meteorologici, tornando a NEUTRAL",
     "HYDRATATION": "La sinergia GRASS cura 5 HP aggiuntivi al secondo sotto la RAIN",
     "SHARED_VISION": "Visione condivisa: tutti i Pokèmon con visione condivisa attaccheranno lo stesso bersaglio, se a distanza",
@@ -2147,7 +2162,10 @@
     "PYUKUMUKU": "Se il Pokèmon va KO, esplode infliggendo [100,SP] SPECIAL ai nemici adiacenti.",
     "LUVDISC": "Gli alleati alla sua destra e sinistra si innamorano, e condividono tra loro il valore più alto del loro ATK, AP, DEF e SPE_DEF all'inizio del combattimento.",
     "MANTYKE": "Quando Mantyke è sul terreno, ottieni il 25% di possibilità di pescare un Remoraid con il tuo amo. Si evolve in Mantine se un Remoraid è affianco.",
-    "MANTINE": "Se Mantine è sul terreno, ottieni il 25% di possibilità di pescare un Remoraid con il tuo amo."
+    "MANTINE": "Se Mantine è sul terreno, ottieni il 25% di possibilità di pescare un Remoraid con il tuo amo.",
+    "SABLEYE": "Sableye sta cercando per un FIRE_GEM",
+    "MEGA_SABLEYE": "Mega Sableye ottiene RUNE_PROTECT per l'intero combattimento",
+    "MELMETAL": "Melmetal non può ottenere ATK_SPEED. La ATK_SPEED ottenuta viene convertita in ATK (il 10% della ATK_SPEED diviso per 3 di ATK)."
   },
   "stat": {
     "ATK": "Attacco",
@@ -2758,6 +2776,7 @@
   "name": "Nome",
   "anonymous_users_name_hint": "Gli utenti anonimi non possono modificare il proprio nome.",
   "give_boosters": "Dai booster",
+  "heap_snapshot": "Scrivo un heap snapshot",
   "ban_user": "Escludi utente",
   "unban_user": "Sblocca utente",
   "set_moderator": "Imposta Moderatore",
@@ -2834,6 +2853,8 @@
   "all": "Tutte le",
   "weather_dominant_hint": "Il tipo dominante di Pokèmon sul tabellone durante una battaglia può influenzare il meteo. Il meteo ha vari effetti su tutti i Pokèmon della tua squadra e dell'avversario.",
   "weather_dominant_hint2": "Richiede un certo numero di Pokèmon di un certo tipo sul tabellone per cambiare il meteo. Alcuni Pokèmon potenti hanno anche la capacità di cambiare il tempo da soli.",
+  "region_hint1": "Alcuni Pokèmon possono essere trovati solo in alcune regioni, o è possibile che delle varianti regionali rimpiazzino la loro forma base.",
+  "region_hint2": "Puoi viaggiare in diverse regioni prendendo un portale nei livelli 10 e 20. I simboli delle sinergie sui portali influenzeranno la destinazione.",
   "how_to_play": "COME GIOCARE ?",
   "abilities_label": "ABILITÀ",
   "weather_label": "METEO",
