@@ -596,9 +596,9 @@ export class BuyEmotionCommand extends Command<
 
       if (!mongoUser.titles.includes(Title.DUKE)){
         let countProfile = 0
-		    mongoUser.pokemonCollection.forEach((c) => {
-	    	  countProfile += c.emotions.length + c.shinyEmotions.length
-		    })
+	mongoUser.pokemonCollection.forEach((c) => {
+	countProfile += c.emotions.length + c.shinyEmotions.length
+	})
         if(countProfile >= 30){
           mongoUser.titles.push(Title.DUKE)
         }
