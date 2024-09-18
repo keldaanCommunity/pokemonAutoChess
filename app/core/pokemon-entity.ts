@@ -485,15 +485,21 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     apBoost: number,
     crit: boolean
   ) {
-    value =
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    const currentAtkSpeedBonus = 100 * (this.atkSpeed / 0.75 - 1)
-    const atkSpeedBonus = currentAtkSpeedBonus + value
-    this.atkSpeed = clamp(
-      roundTo2Digits(0.75 * (1 + atkSpeedBonus / 100)),
-      0.4,
-      2.5
-    )
+    if (this.passive === Passive.MELMETAL) {
+      this.addAttack(value * 0.3, caster, apBoost, crit)
+    } else {
+      value =
+        value *
+        (1 + (apBoost * caster.ap) / 100) *
+        (crit ? caster.critPower : 1)
+      const currentAtkSpeedBonus = 100 * (this.atkSpeed / 0.75 - 1)
+      const atkSpeedBonus = currentAtkSpeedBonus + value
+      this.atkSpeed = clamp(
+        roundTo2Digits(0.75 * (1 + atkSpeedBonus / 100)),
+        0.4,
+        2.5
+      )
+    }
   }
 
   addPsychicField() {

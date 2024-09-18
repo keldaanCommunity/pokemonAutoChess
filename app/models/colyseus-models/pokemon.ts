@@ -5000,14 +5000,15 @@ export class Melmetal extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 300
-  atk = 30
-  def = 5
-  speDef = 5
-  maxPP = 150
+  hp = 350
+  atk = 32
+  def = 7
+  speDef = 3
+  maxPP = 100
   range = 1
-  skill = Ability.DEFAULT
+  skill = Ability.DOUBLE_IRON_BASH
   attackSprite = AttackSprite.DRAGON_MELEE
+  passive = Passive.MELMETAL
 }
 
 export class Suicune extends Pokemon {

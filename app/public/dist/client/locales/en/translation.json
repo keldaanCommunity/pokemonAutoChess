@@ -380,7 +380,8 @@
     "OKTZOOKA": "Oktzooka",
     "PSYCHO_SHIFT": "Psycho Shift",
     "GLAIVE_RUSH": "Glaive Rush",
-    "FOUL_PLAY": "Foul Play"
+    "FOUL_PLAY": "Foul Play",
+    "DOUBLE_IRON_BASH": "Double Iron Bash"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1585,7 +1586,8 @@
     "OKTZOOKA": "Shoots a projectile that deals [150,SP]% of the user's ATK as SPECIAL and leave an ink cloud that reduce's the target's accuracy",
     "PSYCHO_SHIFT": "Exchanges position of target and farthest enemy, dealing [70,SP] SPECIAL to both",
     "GLAIVE_RUSH": "The caster throws its entire body into a reckless charge. Dash behind the target, dealing it [40,80,150,SP] PHYSICAL and ARMOR_REDUCTION itself for 6s",
-    "FOUL_PLAY": "Deals [2,4,6,SP] x target's ATK as SPECIAL"
+    "FOUL_PLAY": "Deals [2,4,6,SP] x target's ATK as SPECIAL",
+    "DOUBLE_IRON_BASH": "The user rotates, centering the hex nut in its chest, and then strikes with its arms twice in a row with [150,SP] % of its ATK. This make the target FLINCH for 3s"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2162,7 +2164,8 @@
     "MANTYKE": "When Mantyke is on board, gain 25% chance to fish a Remoraid with your fishing rod. Evolves into Mantine if a Remoraid is next to it.",
     "MANTINE": "When Mantine is on board, gain 25% chance to fish a Remoraid with your fishing rod.",
     "SABLEYE": "Sableye is looking for a FIRE_GEM",
-    "MEGA_SABLEYE": "Mega Sableye gains RUNE_PROTECT for the entire fight"
+    "MEGA_SABLEYE": "Mega Sableye gains RUNE_PROTECT for the entire fight",
+    "MELMETAL": "Melmetal can't gain ATK_SPEED. Bonus ATK_SPEED is converted into ATK (10% ATK_SPEED: 3 ATK)"
   },
   "stat": {
     "ATK": "Attack",

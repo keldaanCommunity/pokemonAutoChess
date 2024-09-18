@@ -110,5 +110,6 @@ export enum Passive {
   MANTINE = "MANTINE",
   SABLEYE = "SABLEYE",
   MEGA_SABLEYE = "MEGA_SABLEYE",
-  LUGIA = "LUGIA"
+  LUGIA = "LUGIA",
+  MELMETAL = "MELMETAL"
 }

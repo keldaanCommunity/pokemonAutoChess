@@ -5417,10 +5417,9 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.MELMETAL]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
-    emote: AnimationType.Shoot,
-    shinyUnavailable: true
+    attack: AnimationType.Strike,
+    ability: AnimationType.Punch,
+    emote: AnimationType.Charge
   },
   [Pkm.HOOPA]: {
     attack: AnimationType.Attack,

@@ -9843,6 +9843,34 @@ export class FoulPlayStrategy extends AbilityStrategy {
   }
 }
 
+export class DoubleIronBashStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = Math.round(pokemon.atk * 1.5)
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.PHYSICAL,
+      pokemon,
+      crit
+    )
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.PHYSICAL,
+      pokemon,
+      crit
+    )
+    target.status.triggerFlinch(3000, pokemon)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -10205,5 +10233,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.OKTZOOKA]: new OktzookaStrategy(),
   [Ability.PSYCHO_SHIFT]: new PsychoShiftStrategy(),
   [Ability.GLAIVE_RUSH]: new GlaiveRushStrategy(),
-  [Ability.FOUL_PLAY]: new FoulPlayStrategy()
+  [Ability.FOUL_PLAY]: new FoulPlayStrategy(),
+  [Ability.DOUBLE_IRON_BASH]: new DoubleIronBashStrategy()
 }
