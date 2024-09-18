@@ -496,17 +496,17 @@ export default class Shop {
 
     if (rod === Item.GOLDEN_ROD) {
       let topSynergies: Synergy[] = Array.from(player.synergies
-      // sort synergies by count in descending order
-      ).sort(
-        (a, b) => b[1] - a[1]
       // filter only active synergies
       ).filter(
         ([s,v]) => player.synergies.isActiveSynergy(s, v)
+      // sort synergies by count in descending order
+      ).sort(
+      (a, b) => b[1] - a[1]
       // filter only synergies which have a value
       // equal to the top synergy
       ).filter((current, _, array) => {
         const highestValue = array[0][1]
-        return element[1] === highestValue
+        return current[1] === highestValue
       }
       // return only the synergy
       ).map(
