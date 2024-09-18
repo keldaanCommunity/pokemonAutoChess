@@ -4803,7 +4803,7 @@ export class ShadowLugia extends Pokemon {
   speDef = 6
   maxPP = 80
   range = 1
-  skill = Ability.SKY_ATTACK
+  skill = Ability.SKY_ATTACK_SHADOW
   passive = Passive.NIGHT
   attackSprite = AttackSprite.FLYING_MELEE
 }
