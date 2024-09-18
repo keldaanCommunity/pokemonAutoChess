@@ -178,6 +178,7 @@ export enum Pkm {
   FEAROW = "FEAROW",
   GYARADOS = "GYARADOS",
   LUGIA = "LUGIA",
+  SHADOW_LUGIA = "SHADOW_LUGIA",
   GIRATINA = "GIRATINA",
   ZAPDOS = "ZAPDOS",
   MOLTRES = "MOLTRES",
@@ -1024,6 +1025,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.FEAROW]: "0022",
   [Pkm.GYARADOS]: "0130",
   [Pkm.LUGIA]: "0249",
+  [Pkm.SHADOW_LUGIA]: "0249-0001",
   [Pkm.GIRATINA]: "0487",
   [Pkm.ZAPDOS]: "0145",
   [Pkm.MOLTRES]: "0146",
@@ -1947,6 +1949,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.RATICATE]: Pkm.RATTATA,
   [Pkm.ALOLAN_RATICATE]: Pkm.ALOLAN_RATTATA,
   [Pkm.LUGIA]: Pkm.LUGIA,
+  [Pkm.SHADOW_LUGIA]: Pkm.LUGIA,
   [Pkm.CARVANHA]: Pkm.CARVANHA,
   [Pkm.SWABLU]: Pkm.SWABLU,
   [Pkm.PRIMAL_GROUDON]: Pkm.GROUDON,
@@ -3549,6 +3552,12 @@ export const AnimationConfig: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Hover,
     emote: AnimationType.Shoot
+  },
+  [Pkm.SHADOW_LUGIA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Dance,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
   },
   [Pkm.GIRATINA]: {
     attack: AnimationType.Attack,
@@ -5408,10 +5417,9 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.MELMETAL]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
-    emote: AnimationType.Shoot,
-    shinyUnavailable: true
+    attack: AnimationType.Strike,
+    ability: AnimationType.Punch,
+    emote: AnimationType.Charge
   },
   [Pkm.HOOPA]: {
     attack: AnimationType.Attack,
