@@ -4997,10 +4997,10 @@ export class Palkia extends Pokemon {
 }
 
 export class Melmetal extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.STEEL])
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.AMORPHOUS])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 350
+  hp = 320
   atk = 32
   def = 7
   speDef = 3

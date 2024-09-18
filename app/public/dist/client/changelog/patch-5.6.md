@@ -9,6 +9,7 @@
 - Krookodile
 - Mega Sableye
 - XD001
+- Melmetal
 
 # Changes to Pokemon & Abilities
 
