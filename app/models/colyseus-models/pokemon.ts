@@ -14896,6 +14896,37 @@ export class Krookodile extends Pokemon {
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
+export class Binacle extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.WATER])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.BARBARACLE
+  hp = 80
+  atk = 9
+  def = 4
+  speDef = 2
+  maxPP = 65
+  range = 1
+  skill = Ability.STONE_EDGE
+  additional = true
+  attackSprite = AttackSprite.ROCK_MELEE
+}
+
+export class Barbaracle extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.WATER])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 200
+  atk = 21
+  def = 8
+  speDef = 4
+  maxPP = 65
+  range = 1
+  skill = Ability.STONE_EDGE
+  additional = true
+  attackSprite = AttackSprite.ROCK_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -15743,5 +15774,7 @@ export const PokemonClasses: Record<
   [Pkm.SIGILYPH]: Sigilyph,
   [Pkm.FRIGIBAX]: Frigibax,
   [Pkm.ARCTIBAX]: Arctibax,
-  [Pkm.BAXCALIBUR]: Baxcalibur
+  [Pkm.BAXCALIBUR]: Baxcalibur,
+  [Pkm.BINACLE]: Binacle,
+  [Pkm.BARBARACLE]: Barbaracle
 }
