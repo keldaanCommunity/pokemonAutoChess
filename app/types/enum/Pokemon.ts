@@ -2535,7 +2535,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ARCTIBAX]: Pkm.FRIGIBAX,
   [Pkm.BAXCALIBUR]: Pkm.FRIGIBAX,
   [Pkm.BINACLE]: Pkm.BINACLE,
-  [Pkm.BARBARACLE]: Pkm.BARBARACLE
+  [Pkm.BARBARACLE]: Pkm.BINACLE
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
