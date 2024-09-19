@@ -841,7 +841,9 @@ export enum Pkm {
   SIGILYPH = "SIGILYPH",
   FRIGIBAX = "FRIGIBAX",
   ARCTIBAX = "ARCTIBAX",
-  BAXCALIBUR = "BAXCALIBUR"
+  BAXCALIBUR = "BAXCALIBUR",
+  BINACLE = "BINACLE",
+  BARBARACLE = "BARBARACLE"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1685,7 +1687,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SIGILYPH]: "0561",
   [Pkm.FRIGIBAX]: "0996",
   [Pkm.ARCTIBAX]: "0997",
-  [Pkm.BAXCALIBUR]: "0998"
+  [Pkm.BAXCALIBUR]: "0998",
+  [Pkm.BINACLE]: "0688",
+  [Pkm.BARBARACLE]: "0689"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2529,7 +2533,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SIGILYPH]: Pkm.SIGILYPH,
   [Pkm.FRIGIBAX]: Pkm.FRIGIBAX,
   [Pkm.ARCTIBAX]: Pkm.FRIGIBAX,
-  [Pkm.BAXCALIBUR]: Pkm.FRIGIBAX
+  [Pkm.BAXCALIBUR]: Pkm.FRIGIBAX,
+  [Pkm.BINACLE]: Pkm.BINACLE,
+  [Pkm.BARBARACLE]: Pkm.BARBARACLE
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -6898,6 +6904,16 @@ export const AnimationConfig: {
   },
   [Pkm.BAXCALIBUR]: {
     attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.BINACLE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Charge
+  },
+  [Pkm.BARBARACLE]: {
+    attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
   }

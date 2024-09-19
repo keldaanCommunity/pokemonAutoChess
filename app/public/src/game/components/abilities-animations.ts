@@ -2569,6 +2569,10 @@ export function displayAbility(
       addAbilitySprite(Ability.DRAIN_PUNCH, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.STONE_EDGE:
+      addAbilitySprite(Ability.TORMENT, coordinates, true).setScale(2)
+      break
+
     default:
       break
   }

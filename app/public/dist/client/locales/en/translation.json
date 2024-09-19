@@ -382,7 +382,8 @@
     "PSYCHO_SHIFT": "Psycho Shift",
     "GLAIVE_RUSH": "Glaive Rush",
     "FOUL_PLAY": "Foul Play",
-    "DOUBLE_IRON_BASH": "Double Iron Bash"
+    "DOUBLE_IRON_BASH": "Double Iron Bash",
+    "STONE_EDGE": "Stone Edge"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1226,7 +1227,9 @@
     "SIGILYPH": "Sigilyph",
     "FRIGIBAX": "Frigibax",
     "ARCTIBAX": "Arctibax",
-    "BAXCALIBUR": "Baxcalibur"
+    "BAXCALIBUR": "Baxcalibur",
+    "BINACLE": "Binacle",
+    "BARBARACLE": "Barbaracle"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1589,8 +1592,9 @@
     "PSYCHO_SHIFT": "Exchanges position of target and farthest enemy, dealing [70,SP] SPECIAL to both",
     "GLAIVE_RUSH": "The caster throws its entire body into a reckless charge. Dash behind the target, dealing it [40,80,150,SP] PHYSICAL and ARMOR_REDUCTION itself for 6s",
     "FOUL_PLAY": "Deals [2,4,6,SP] x target's ATK as SPECIAL",
-    "DOUBLE_IRON_BASH": "The user rotates, centering the hex nut in its chest, and then strikes with its arms twice in a row with [150,SP] % of its ATK. This make the target FLINCH for 3s"
-  },
+    "DOUBLE_IRON_BASH": "The user rotates, centering the hex nut in its chest, and then strikes with its arms twice in a row with [150,SP] % of its ATK. This make the target FLINCH for 3s",
+    "STONE_EDGE": "For [5,8] s, the caster SILENCE itself, gains 2 RANGE, [10,20,SP] CRIT_CHANCE and apply 100% of its DEF as PHYSICAL on attacks"
+},
   "effect": {
     "INGRAIN": "Ingrain",
     "GROWTH": "Growth",

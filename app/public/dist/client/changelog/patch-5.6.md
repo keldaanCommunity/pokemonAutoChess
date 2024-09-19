@@ -10,6 +10,8 @@
 - Mega Sableye
 - XD001
 - Melmetal
+- Binacle
+- Barbaracle
 
 # Changes to Pokemon & Abilities
 
