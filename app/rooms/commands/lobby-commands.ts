@@ -594,12 +594,16 @@ export class BuyEmotionCommand extends Command<
         }
       }
 
-      if (
-        !mongoUser.titles.includes(Title.DUKE) &&
-        mongoUser.pokemonCollection.size >= 30
-      ) {
-        mongoUser.titles.push(Title.DUKE)
+      if (!mongoUser.titles.includes(Title.DUKE)){
+        let countProfile = 0
+	mongoUser.pokemonCollection.forEach((c) => {
+	countProfile += c.emotions.length + c.shinyEmotions.length
+	})
+        if(countProfile >= 30){
+          mongoUser.titles.push(Title.DUKE)
+        }
       }
+      
       if (
         emotion === Emotion.ANGRY &&
         index === PkmIndex[Pkm.ARBOK] &&
