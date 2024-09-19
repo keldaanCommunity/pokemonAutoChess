@@ -14089,7 +14089,10 @@ export class Trubbish extends Pokemon {
     [Stat.AP]: 0,
     [Stat.CRIT_CHANCE]: 0,
     [Stat.PP]: 0,
-    [Stat.SHIELD]: 0
+    [Stat.SHIELD]: 0,
+    [Stat.ATK]: 0,
+    [Stat.SPE_DEF]: 0,
+    [Stat.DEF]: 0
   }
 
   beforeSimulationStart({ player }: { player: Player }) {
@@ -14134,6 +14137,9 @@ export class Trubbish extends Pokemon {
     entity.addCritChance(this.statIncreases[Stat.CRIT_CHANCE], entity, 0, false)
     entity.addPP(this.statIncreases[Stat.PP], entity, 0, false)
     entity.addAttackSpeed(this.statIncreases[Stat.ATK_SPEED], entity, 0, false)
+    entity.addAttack(this.statIncreases[Stat.ATK], entity, 0, false)
+    entity.addSpecialDefense(this.statIncreases[Stat.SPE_DEF], entity, 0, false)
+    entity.addDefense(this.statIncreases[Stat.DEF], entity, 0, false)
   }
 
   onEvolve({
@@ -14150,7 +14156,10 @@ export class Trubbish extends Pokemon {
       [Stat.AP]: 0,
       [Stat.CRIT_CHANCE]: 0,
       [Stat.PP]: 0,
-      [Stat.SHIELD]: 0
+      [Stat.SHIELD]: 0,
+      [Stat.ATK]: 0,
+      [Stat.SPE_DEF]: 0,
+      [Stat.DEF]: 0
     }
 
     trubbishes.forEach((trubbishObj) => {
@@ -14182,7 +14191,10 @@ export class Garbodor extends Pokemon {
     [Stat.AP]: 0,
     [Stat.CRIT_CHANCE]: 0,
     [Stat.PP]: 0,
-    [Stat.SHIELD]: 0
+    [Stat.SHIELD]: 0,
+    [Stat.ATK]: 0,
+    [Stat.SPE_DEF]: 0,
+    [Stat.DEF]: 0
   }
 
   defaultValues = {
