@@ -9965,7 +9965,7 @@ export class RoarStrategy extends AbilityStrategy {
         }
       },
       (x, y) => {
-        target.moveTo(x, y, board)
+        board.swapValue(target.positionX, target.positionY, x, y)
       }
     )
   }
