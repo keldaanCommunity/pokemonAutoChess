@@ -15,7 +15,8 @@ import {
   IPlayer,
   IPokemon,
   IPokemonEntity,
-  Title
+  Title,
+  Transfer
 } from "../../types"
 import {
   DEFAULT_ATK_SPEED,
@@ -29,6 +30,7 @@ import { Ability } from "../../types/enum/Ability"
 import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
 import {
   AttackType,
+  BoardEvent,
   PokemonActionState,
   Rarity,
   Stat
@@ -55,10 +57,12 @@ import { Weather } from "../../types/enum/Weather"
 import { sum } from "../../utils/array"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { distanceC, distanceM } from "../../utils/distance"
-import { pickRandomIn } from "../../utils/random"
+import { chance, pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
+import { Effect } from "../../types/enum/Effect"
+import { DelayedCommand } from "../../core/simulation-command"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -14927,6 +14931,60 @@ export class Barbaracle extends Pokemon {
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
+export class Skarmory extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FLYING])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 190
+  atk = 16
+  def = 8
+  speDef = 2
+  maxPP = 80
+  range = 1
+  skill = Ability.ROAR
+  attackSprite = AttackSprite.STEEL_MELEE
+  passive = Passive.SKARMORY
+
+  afterSimulationStart(params: {
+    player: IPlayer
+    simulation: Simulation
+    team: MapSchema<IPokemonEntity>
+    entity: IPokemonEntity
+  }) {
+    params.entity.commands.push(
+      new DelayedCommand(() => {
+        const board = params.simulation.board
+        const simulation = params.simulation
+        const entity = params.entity
+
+        board.forEach((x, y, tg) => {
+          const index = y * board.columns + x
+          if (!tg && chance(0.3)) {
+            if (board.effects[index] !== Effect.SPIKES) {
+              board.effects[index] = Effect.SPIKES
+              simulation.room.broadcast(Transfer.BOARD_EVENT, {
+                simulationId: simulation.id,
+                type: BoardEvent.SPIKES,
+                x: x,
+                y: y
+              })
+            }
+
+            simulation.room.broadcast(Transfer.ABILITY, {
+              id: simulation.id,
+              skill: Ability.SPIKES,
+              positionX: entity.positionX,
+              positionY: entity.positionY,
+              targetX: x,
+              targetY: y
+            })
+          }
+        })
+      }, 300)
+    )
+  }
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -15776,5 +15834,6 @@ export const PokemonClasses: Record<
   [Pkm.ARCTIBAX]: Arctibax,
   [Pkm.BAXCALIBUR]: Baxcalibur,
   [Pkm.BINACLE]: Binacle,
-  [Pkm.BARBARACLE]: Barbaracle
+  [Pkm.BARBARACLE]: Barbaracle,
+  [Pkm.SKARMORY]: Skarmory
 }
