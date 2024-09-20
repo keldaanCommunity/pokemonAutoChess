@@ -1680,7 +1680,7 @@ export default class Simulation extends Schema implements ISimulation {
             if (cell.team === Team.RED_TEAM) {
               cell.status.clearNegativeStatus()
               if (cell.types.has(Synergy.AQUATIC)) {
-                cell.handleHeal(waveLevel * 0.05 * cell.hp, cell, 0, false)
+                cell.handleHeal(waveLevel * 0.1 * cell.hp, cell, 0, false)
               }
             } else {
               cell.handleDamage({
