@@ -28,7 +28,8 @@ export function effectInLine(
   board: Board,
   pokemon: PokemonEntity,
   target: PokemonEntity | Orientation,
-  effect: (target: PokemonEntity) => void
+  effect: (target: PokemonEntity) => void,
+  emptyEffect?: (x: number, y: number) => void
 ) {
   const orientation: Orientation =
     target instanceof PokemonEntity
@@ -49,6 +50,8 @@ export function effectInLine(
     if (targetInLine != null) {
       effect(targetInLine)
       targetsHit.add(targetInLine)
+    } else {
+      emptyEffect?.(x, y)
     }
   }
 

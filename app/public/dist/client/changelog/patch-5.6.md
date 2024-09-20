@@ -12,6 +12,7 @@
 - Melmetal
 - Binacle
 - Barbaracle
+- Skarmory
 
 # Changes to Pokemon & Abilities
 

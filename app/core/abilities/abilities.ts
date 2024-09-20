@@ -9929,6 +9929,48 @@ export class DoubleIronBashStrategy extends AbilityStrategy {
   }
 }
 
+export class RoarStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
+
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    effectInLine(
+      board,
+      pokemon,
+      target,
+      (targetInLine) => {
+        if (targetInLine != null && target.id !== targetInLine.id) {
+          if (targetInLine.team !== pokemon.team) {
+            targetInLine.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+          board.swapValue(
+            target.positionX,
+            target.positionY,
+            targetInLine.positionX,
+            targetInLine.positionY
+          )
+        }
+      },
+      (x, y) => {
+        board.swapValue(target.positionX, target.positionY, x, y)
+      }
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -10294,5 +10336,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.GLAIVE_RUSH]: new GlaiveRushStrategy(),
   [Ability.FOUL_PLAY]: new FoulPlayStrategy(),
   [Ability.DOUBLE_IRON_BASH]: new DoubleIronBashStrategy(),
-  [Ability.STONE_EDGE]: new StoneEdgeStrategy()
+  [Ability.STONE_EDGE]: new StoneEdgeStrategy(),
+  [Ability.ROAR]: new RoarStrategy()
 }
