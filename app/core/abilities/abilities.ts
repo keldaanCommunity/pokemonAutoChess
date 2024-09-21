@@ -9566,6 +9566,75 @@ export class GravityStrategy extends AbilityStrategy {
   }
 }
 
+export class InfestationStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const numberOfAllies = board.cells.filter(
+      (entity) => entity && entity.team === pokemon.team
+    ).length
+    const damage = numberOfAllies * 10
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+      id: pokemon.simulation.id,
+      skill: Ability.INFESTATION,
+      targetX: target.positionX,
+      targetY: target.positionY
+    })
+
+    if (pokemon.player && pokemon.count.ult === 1) {
+      const bugsOnBenchByPower = Array.from(pokemon.player?.board)
+        .filter(([id, p]) => p && p.types.has(Synergy.BUG) && p.positionY === 0)
+        .sort((a, b) => b[1].stars - a[1].stars)
+      const mostPowerfulBug = bugsOnBenchByPower[0]
+        ? bugsOnBenchByPower[0][1]
+        : null
+      if (mostPowerfulBug) {
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.INFESTATION,
+          positionX: mostPowerfulBug.positionX,
+          positionY: pokemon.team === Team.RED_TEAM ? 8 : 0,
+          targetX: pokemon.positionX,
+          targetY: pokemon.positionY
+        })
+        pokemon.commands.push(
+          new DelayedCommand(
+            () => {
+              const coord = state.getNearestAvailablePlaceCoordinates(
+                pokemon,
+                board
+              )
+              if (coord) {
+                pokemon.simulation.addPokemon(
+                  mostPowerfulBug,
+                  coord.x,
+                  coord.y,
+                  pokemon.team,
+                  true
+                )
+              }
+            },
+            distanceM(
+              pokemon.positionX,
+              pokemon.positionY,
+              mostPowerfulBug.positionX,
+              mostPowerfulBug.positionY
+            ) *
+              150 -
+              30
+          )
+        )
+      }
+    }
+  }
+}
+
 export class GulpMissileStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -10337,5 +10406,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FOUL_PLAY]: new FoulPlayStrategy(),
   [Ability.DOUBLE_IRON_BASH]: new DoubleIronBashStrategy(),
   [Ability.STONE_EDGE]: new StoneEdgeStrategy(),
-  [Ability.ROAR]: new RoarStrategy()
+  [Ability.ROAR]: new RoarStrategy(),
+  [Ability.INFESTATION]: new InfestationStrategy()
 }

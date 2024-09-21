@@ -844,7 +844,8 @@ export enum Pkm {
   BAXCALIBUR = "BAXCALIBUR",
   BINACLE = "BINACLE",
   BARBARACLE = "BARBARACLE",
-  SKARMORY = "SKARMORY"
+  SKARMORY = "SKARMORY",
+  DURANT = "DURANT"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1691,7 +1692,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.BAXCALIBUR]: "0998",
   [Pkm.BINACLE]: "0688",
   [Pkm.BARBARACLE]: "0689",
-  [Pkm.SKARMORY]: "0227"
+  [Pkm.SKARMORY]: "0227",
+  [Pkm.DURANT]: "0632"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2538,7 +2540,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.BAXCALIBUR]: Pkm.FRIGIBAX,
   [Pkm.BINACLE]: Pkm.BINACLE,
   [Pkm.BARBARACLE]: Pkm.BINACLE,
-  [Pkm.SKARMORY]: Pkm.SKARMORY
+  [Pkm.SKARMORY]: Pkm.SKARMORY,
+  [Pkm.DURANT]: Pkm.DURANT
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -6924,5 +6927,11 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
+  },
+  [Pkm.DURANT]: {
+    attack: AnimationType.Bite,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
   }
 }

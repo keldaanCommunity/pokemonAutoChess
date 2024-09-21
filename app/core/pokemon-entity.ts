@@ -628,6 +628,23 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
+    if (this.passive === Passive.DURANT) {
+      const bugAllies =
+        board.cells.filter(
+          (entity) =>
+            entity && entity.team === this.team && entity.types.has(Synergy.BUG)
+        ).length - 1
+      if (bugAllies > 0) {
+        target.handleDamage({
+          damage: bugAllies,
+          board,
+          attackType: AttackType.TRUE,
+          attacker: this,
+          shouldTargetGainMana: true
+        })
+      }
+    }
+
     if (
       this.name === Pkm.MINIOR_KERNEL_BLUE ||
       this.name === Pkm.MINIOR_KERNEL_GREEN ||

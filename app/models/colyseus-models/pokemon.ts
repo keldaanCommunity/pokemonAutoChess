@@ -14496,6 +14496,21 @@ export class Arrokuda extends Pokemon {
   attackSprite = AttackSprite.WATER_MELEE
 }
 
+export class Durant extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.BUG])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 190
+  atk = 22
+  def = 6
+  speDef = 2
+  maxPP = 90
+  range = 1
+  skill = Ability.INFESTATION
+  attackSprite = AttackSprite.BUG_MELEE
+  passive = Passive.DURANT
+}
+
 export class Wishiwashi extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER])
   rarity = Rarity.SPECIAL
@@ -15835,5 +15850,6 @@ export const PokemonClasses: Record<
   [Pkm.BAXCALIBUR]: Baxcalibur,
   [Pkm.BINACLE]: Binacle,
   [Pkm.BARBARACLE]: Barbaracle,
-  [Pkm.SKARMORY]: Skarmory
+  [Pkm.SKARMORY]: Skarmory,
+  [Pkm.DURANT]: Durant
 }
