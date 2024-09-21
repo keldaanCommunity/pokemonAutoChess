@@ -2416,6 +2416,34 @@ export function displayAbility(
       )
       break
 
+    case Ability.INFESTATION:
+      {
+        if (positionX !== undefined && positionY !== undefined) {
+          const duration =
+            distanceM(positionX, positionY, targetX, targetY) * 150
+          const projectile = addAbilitySprite(
+            "HEAL_ORDER",
+            coordinates,
+            true
+          ).setScale(3)
+
+          scene.tweens.add({
+            targets: projectile,
+            x: coordinatesTarget[0],
+            y: coordinatesTarget[1],
+            ease: "linear",
+            yoyo: false,
+            duration: duration,
+            onComplete: () => {
+              projectile.destroy()
+            }
+          })
+        } else {
+          addAbilitySprite("ATTACK_ORDER", coordinatesTarget, true).setScale(2)
+        }
+      }
+      break
+
     case "FIELD_DEATH":
       addAbilitySprite("FIELD_DEATH", coordinates, true).setScale(2)
       break

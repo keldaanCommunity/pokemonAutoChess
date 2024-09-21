@@ -13,6 +13,7 @@
 - Binacle
 - Barbaracle
 - Skarmory
+- Durant
 
 # Changes to Pokemon & Abilities
 

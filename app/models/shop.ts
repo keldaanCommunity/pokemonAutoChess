@@ -285,7 +285,11 @@ export default class Shop {
   assignShop(player: Player, manualRefresh: boolean, state: GameState) {
     player.shop.forEach((pkm) => this.releasePokemon(pkm, player))
 
-    if (player.effects.has(Effect.EERIE_SPELL) && !manualRefresh && !player.shopLocked) {
+    if (
+      player.effects.has(Effect.EERIE_SPELL) &&
+      !manualRefresh &&
+      !player.shopLocked
+    ) {
       const unowns = getUnownsPoolPerStage(state.stageLevel)
       for (let i = 0; i < SHOP_SIZE; i++) {
         player.shop[i] = pickRandomIn(unowns)
