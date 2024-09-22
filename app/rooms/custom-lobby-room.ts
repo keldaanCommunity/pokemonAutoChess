@@ -661,10 +661,14 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
             ) {
               this.presence.hdel("roomcaches", room.roomId)
               this.removeRoom(roomIndex, room.roomId)
-              //   // Attempt to see if the room exit. If it exist, disconnect it
-              //   const disconnection = await matchMaker.remoteRoomCall(
-              //     room.roomId,
-              //     "disconnect"
+            }
+            if (
+              type === "game" &&
+              gameStartedAt != null &&
+              new Date(gameStartedAt).getTime() < Date.now() - 86400000
+            ) {
+              this.presence.hdel("roomcaches", room.roomId)
+              this.removeRoom(roomIndex, room.roomId)
             }
           })
         },
