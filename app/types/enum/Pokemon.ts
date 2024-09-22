@@ -1684,10 +1684,10 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.REMORAID]: "0223",
   [Pkm.OCTILLERY]: "0224",
   [Pkm.SIGILYPH]: "0561",
-  [Pkm.IRON_HANDS]: "0092",
   [Pkm.FRIGIBAX]: "0996",
   [Pkm.ARCTIBAX]: "0997",
-  [Pkm.BAXCALIBUR]: "0998"
+  [Pkm.BAXCALIBUR]: "0998",
+  [Pkm.IRON_HANDS]: "0992"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {

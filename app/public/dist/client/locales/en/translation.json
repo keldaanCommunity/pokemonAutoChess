@@ -1590,7 +1590,7 @@
     "GLAIVE_RUSH": "The caster throws its entire body into a reckless charge. Dash behind the target, dealing it [40,80,150,SP] PHYSICAL and ARMOR_REDUCTION itself for 6s",
     "FOUL_PLAY": "Deals [2,4,6,SP] x target's ATK as SPECIAL",
     "DOUBLE_IRON_BASH": "The user rotates, centering the hex nut in its chest, and then strikes with its arms twice in a row with [150,SP] % of its ATK. This make the target FLINCH for 3s",
-    "FORCE_PALM": "The user deals [60,SP] + 10% of target max HP as SPECIAL and paralyse it for 6 secs. If it was already paralysed, deals an additionnal 40 SPECIAL and push it away."
+    "FORCE_PALM": "The user deals [60,SP] + 10% of target max HP as SPECIAL and paralyse it for 6 secs. If it was already paralysed, deals an additional 40 SPECIAL and push it away."
   },
   "effect": {
     "INGRAIN": "Ingrain",
