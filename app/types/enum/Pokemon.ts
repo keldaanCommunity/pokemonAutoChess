@@ -7007,7 +7007,7 @@ export const AnimationConfig: {
   },
   [Pkm.IRON_HANDS]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot,
-    emote: AnimationType.Charge
+    ability: AnimationType.Strike,
+    emote: AnimationType.Hop
   }
 }
