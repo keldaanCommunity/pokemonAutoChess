@@ -845,7 +845,15 @@ export enum Pkm {
   BINACLE = "BINACLE",
   BARBARACLE = "BARBARACLE",
   SKARMORY = "SKARMORY",
-  DURANT = "DURANT"
+  DURANT = "DURANT",
+  OGERPON_TEAL = "OGERPON_TEAL",
+  OGERPON_TEAL_MASK = "OGERPON_TEAL_MASK",
+  OGERPON_WELLSPRING = "OGERPON_WELLSPRING",
+  OGERPON_WELLSPRING_MASK = "OGERPON_WELLSPRING_MASK",
+  OGERPON_HEARTHFLAME = "OGERPON_HEARTHFLAME",
+  OGERPON_HEARTHFLAME_MASK = "OGERPON_HEARTHFLAME_MASK",
+  OGERPON_CORNERSTONE = "OGERPON_CORNERSTONE",
+  OGERPON_CORNERSTONE_MASK = "OGERPON_CORNERSTONE_MASK"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1693,7 +1701,15 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.BINACLE]: "0688",
   [Pkm.BARBARACLE]: "0689",
   [Pkm.SKARMORY]: "0227",
-  [Pkm.DURANT]: "0632"
+  [Pkm.DURANT]: "0632",
+  [Pkm.OGERPON_TEAL]: "1017",
+  [Pkm.OGERPON_TEAL_MASK]: "1017-0001",
+  [Pkm.OGERPON_WELLSPRING]: "1017-0002",
+  [Pkm.OGERPON_WELLSPRING_MASK]: "1017-0003",
+  [Pkm.OGERPON_HEARTHFLAME]: "1017-0004",
+  [Pkm.OGERPON_HEARTHFLAME_MASK]: "1017-0005",
+  [Pkm.OGERPON_CORNERSTONE]: "1017-0006",
+  [Pkm.OGERPON_CORNERSTONE_MASK]: "1017-0007"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2541,7 +2557,15 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.BINACLE]: Pkm.BINACLE,
   [Pkm.BARBARACLE]: Pkm.BINACLE,
   [Pkm.SKARMORY]: Pkm.SKARMORY,
-  [Pkm.DURANT]: Pkm.DURANT
+  [Pkm.DURANT]: Pkm.DURANT,
+  [Pkm.OGERPON_TEAL]: Pkm.OGERPON_TEAL,
+  [Pkm.OGERPON_TEAL_MASK]: Pkm.OGERPON_TEAL,
+  [Pkm.OGERPON_WELLSPRING]: Pkm.OGERPON_TEAL,
+  [Pkm.OGERPON_WELLSPRING_MASK]: Pkm.OGERPON_TEAL,
+  [Pkm.OGERPON_HEARTHFLAME]: Pkm.OGERPON_TEAL,
+  [Pkm.OGERPON_HEARTHFLAME_MASK]: Pkm.OGERPON_TEAL,
+  [Pkm.OGERPON_CORNERSTONE]: Pkm.OGERPON_TEAL,
+  [Pkm.OGERPON_CORNERSTONE_MASK]: Pkm.OGERPON_TEAL
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -6930,6 +6954,50 @@ export const AnimationConfig: {
   },
   [Pkm.DURANT]: {
     attack: AnimationType.Bite,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
+  },
+  [Pkm.OGERPON_TEAL]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.OGERPON_TEAL_MASK]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
+  },
+  [Pkm.OGERPON_WELLSPRING]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.OGERPON_WELLSPRING_MASK]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
+  },
+  [Pkm.OGERPON_HEARTHFLAME]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.OGERPON_HEARTHFLAME_MASK]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
+  },
+  [Pkm.OGERPON_CORNERSTONE]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.OGERPON_CORNERSTONE_MASK]: {
+    attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
     shinyUnavailable: true

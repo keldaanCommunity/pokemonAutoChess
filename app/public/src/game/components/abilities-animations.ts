@@ -1120,6 +1120,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.IVY_CUDGEL:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
     case Ability.PSYCHO_BOOST:
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break

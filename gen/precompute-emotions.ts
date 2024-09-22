@@ -15,7 +15,7 @@ export function precomputeEmotions() {
     const metadata =
       pathIndex.length == 1
         ? tracker[pokemon.index]
-        : tracker[pathIndex[0]].subgroups[pathIndex[1]]
+        : tracker[pathIndex[0]]?.subgroups[pathIndex[1]]
 
     data.set(
       pokemon.index,

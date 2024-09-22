@@ -54,7 +54,7 @@ import {
 } from "../../types/enum/Pokemon"
 import { Synergy, SynergyEffects } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
-import { sum } from "../../utils/array"
+import { removeInArray, sum } from "../../utils/array"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { distanceC, distanceM } from "../../utils/distance"
 import { chance, pickRandomIn } from "../../utils/random"
@@ -15000,6 +15000,165 @@ export class Skarmory extends Pokemon {
   }
 }
 
+function ogerponOnAcquired(
+  player: Player,
+  currentMask:
+    | Item.WELLSPRING_MASK
+    | Item.CORNERSTONE_MASK
+    | Item.HEARTHFLAME_MASK
+    | Item.TEAL_MASK
+    | null
+) {
+  ;[
+    Item.WELLSPRING_MASK,
+    Item.CORNERSTONE_MASK,
+    Item.HEARTHFLAME_MASK,
+    Item.TEAL_MASK
+  ].forEach((mask) => {
+    if (!player.items.includes(mask) && mask !== currentMask) {
+      player.items.push(mask)
+    }
+  })
+  if (currentMask && player.items.includes(currentMask)) {
+    removeInArray(player.items, currentMask)
+  }
+}
+
+export class OgerponTeal extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 2
+  speDef = 2
+  maxPP = 80
+  range = 1
+  skill = Ability.IVY_CUDGEL
+  attackSprite = AttackSprite.GRASS_MELEE
+  onAcquired = (player: Player) => ogerponOnAcquired(player, null)
+  passive = Passive.OGERPON_TEAL
+}
+
+export class OgerponTealMask extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 4
+  speDef = 4
+  maxPP = 80
+  range = 1
+  skill = Ability.IVY_CUDGEL
+  attackSprite = AttackSprite.GRASS_MELEE
+  shiny = false
+  onAcquired = (player: Player) => ogerponOnAcquired(player, Item.TEAL_MASK)
+  passive = Passive.OGERPON_TEAL
+}
+
+export class OgerponWellspring extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.AQUATIC])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.IVY_CUDGEL
+  attackSprite = AttackSprite.GRASS_MELEE
+  onAcquired = (player: Player) => ogerponOnAcquired(player, null)
+  passive = Passive.OGERPON_WELLSPRING
+}
+
+export class OgerponWellspringMask extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.AQUATIC])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 4
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.IVY_CUDGEL
+  attackSprite = AttackSprite.GRASS_MELEE
+  shiny = false
+  onAcquired = (player: Player) =>
+    ogerponOnAcquired(player, Item.WELLSPRING_MASK)
+  passive = Passive.OGERPON_WELLSPRING
+}
+
+export class OgerponHearthflame extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIRE])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 24
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.IVY_CUDGEL
+  attackSprite = AttackSprite.GRASS_MELEE
+  onAcquired = (player: Player) => ogerponOnAcquired(player, null)
+  passive = Passive.OGERPON_HEARTHFLAME
+}
+
+export class OgerponHearthflameMask extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIRE])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 24
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.IVY_CUDGEL
+  attackSprite = AttackSprite.GRASS_MELEE
+  shiny = false
+  onAcquired = (player: Player) =>
+    ogerponOnAcquired(player, Item.HEARTHFLAME_MASK)
+  passive = Passive.OGERPON_HEARTHFLAME
+}
+
+export class OgerponCornerstone extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.ROCK])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.IVY_CUDGEL
+  attackSprite = AttackSprite.GRASS_MELEE
+  onAcquired = (player: Player) => ogerponOnAcquired(player, null)
+  passive = Passive.OGERPON_CORNERSTONE
+}
+
+export class OgerponCornerstoneMask extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.ROCK])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 8
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.IVY_CUDGEL
+  attackSprite = AttackSprite.GRASS_MELEE
+  shiny = false
+  onAcquired = (player: Player) =>
+    ogerponOnAcquired(player, Item.CORNERSTONE_MASK)
+  passive = Passive.OGERPON_CORNERSTONE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -15851,5 +16010,13 @@ export const PokemonClasses: Record<
   [Pkm.BINACLE]: Binacle,
   [Pkm.BARBARACLE]: Barbaracle,
   [Pkm.SKARMORY]: Skarmory,
-  [Pkm.DURANT]: Durant
+  [Pkm.DURANT]: Durant,
+  [Pkm.OGERPON_TEAL]: OgerponTeal,
+  [Pkm.OGERPON_TEAL_MASK]: OgerponTealMask,
+  [Pkm.OGERPON_WELLSPRING]: OgerponWellspring,
+  [Pkm.OGERPON_WELLSPRING_MASK]: OgerponWellspringMask,
+  [Pkm.OGERPON_HEARTHFLAME]: OgerponHearthflame,
+  [Pkm.OGERPON_HEARTHFLAME_MASK]: OgerponHearthflameMask,
+  [Pkm.OGERPON_CORNERSTONE]: OgerponCornerstone,
+  [Pkm.OGERPON_CORNERSTONE_MASK]: OgerponCornerstoneMask
 }
