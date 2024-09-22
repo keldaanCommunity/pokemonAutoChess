@@ -10,6 +10,7 @@
 - Mega Sableye
 - XD001
 - Melmetal
+- Iron Hands
 
 # Changes to Pokemon & Abilities
 

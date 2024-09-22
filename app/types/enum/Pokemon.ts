@@ -841,7 +841,8 @@ export enum Pkm {
   SIGILYPH = "SIGILYPH",
   FRIGIBAX = "FRIGIBAX",
   ARCTIBAX = "ARCTIBAX",
-  BAXCALIBUR = "BAXCALIBUR"
+  BAXCALIBUR = "BAXCALIBUR",
+  IRON_HANDS = "IRON_HANDS"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1683,6 +1684,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.REMORAID]: "0223",
   [Pkm.OCTILLERY]: "0224",
   [Pkm.SIGILYPH]: "0561",
+  [Pkm.IRON_HANDS]: "0092",
   [Pkm.FRIGIBAX]: "0996",
   [Pkm.ARCTIBAX]: "0997",
   [Pkm.BAXCALIBUR]: "0998"
@@ -2529,7 +2531,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SIGILYPH]: Pkm.SIGILYPH,
   [Pkm.FRIGIBAX]: Pkm.FRIGIBAX,
   [Pkm.ARCTIBAX]: Pkm.FRIGIBAX,
-  [Pkm.BAXCALIBUR]: Pkm.FRIGIBAX
+  [Pkm.BAXCALIBUR]: Pkm.FRIGIBAX,
+  [Pkm.IRON_HANDS]: Pkm.IRON_HANDS
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -6897,6 +6900,11 @@ export const AnimationConfig: {
     emote: AnimationType.Charge
   },
   [Pkm.BAXCALIBUR]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.IRON_HANDS]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge

@@ -381,7 +381,8 @@
     "PSYCHO_SHIFT": "Psycho Shift",
     "GLAIVE_RUSH": "Glaive Rush",
     "FOUL_PLAY": "Foul Play",
-    "DOUBLE_IRON_BASH": "Double Iron Bash"
+    "DOUBLE_IRON_BASH": "Double Iron Bash",
+    "FORCE_PALM": "Force Palm"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1225,7 +1226,8 @@
     "SIGILYPH": "Sigilyph",
     "FRIGIBAX": "Frigibax",
     "ARCTIBAX": "Arctibax",
-    "BAXCALIBUR": "Baxcalibur"
+    "BAXCALIBUR": "Baxcalibur",
+    "IRON_HANDS": "Iron Hands"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1587,7 +1589,8 @@
     "PSYCHO_SHIFT": "Exchanges position of target and farthest enemy, dealing [70,SP] SPECIAL to both",
     "GLAIVE_RUSH": "The caster throws its entire body into a reckless charge. Dash behind the target, dealing it [40,80,150,SP] PHYSICAL and ARMOR_REDUCTION itself for 6s",
     "FOUL_PLAY": "Deals [2,4,6,SP] x target's ATK as SPECIAL",
-    "DOUBLE_IRON_BASH": "The user rotates, centering the hex nut in its chest, and then strikes with its arms twice in a row with [150,SP] % of its ATK. This make the target FLINCH for 3s"
+    "DOUBLE_IRON_BASH": "The user rotates, centering the hex nut in its chest, and then strikes with its arms twice in a row with [150,SP] % of its ATK. This make the target FLINCH for 3s",
+    "FORCE_PALM": "The user deals [60,SP] + 10% of target max HP as SPECIAL and paralyse it for 6 secs. If it was already paralysed, deals an additionnal 40 SPECIAL and push it away."
   },
   "effect": {
     "INGRAIN": "Ingrain",

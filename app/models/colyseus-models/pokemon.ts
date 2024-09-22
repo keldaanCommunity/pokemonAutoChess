@@ -14884,6 +14884,24 @@ export class Krookodile extends Pokemon {
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
+export class IronHands extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FIGHTING,
+    Synergy.ARTIFICIAL,
+    Synergy.ELECTRIC
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 230
+  atk = 19
+  def = 4
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.FORCE_PALM
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -15731,5 +15749,6 @@ export const PokemonClasses: Record<
   [Pkm.SIGILYPH]: Sigilyph,
   [Pkm.FRIGIBAX]: Frigibax,
   [Pkm.ARCTIBAX]: Arctibax,
-  [Pkm.BAXCALIBUR]: Baxcalibur
+  [Pkm.BAXCALIBUR]: Baxcalibur,
+  [Pkm.IRON_HANDS]: IronHands
 }
