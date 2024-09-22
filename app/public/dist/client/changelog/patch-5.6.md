@@ -15,6 +15,7 @@
 - Skarmory
 - Durant
 - Ogerpon (Teal, Wellspring, Hearthflame, Cornerstone) and their unmasked counterparts
+- Iron Hands (by @HametAK)
 
 # Changes to Pokemon & Abilities
 

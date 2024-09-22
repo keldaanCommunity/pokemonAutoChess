@@ -14932,6 +14932,24 @@ export class Binacle extends Pokemon {
 }
 
 export class Barbaracle extends Pokemon {
+export class IronHands extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FIGHTING,
+    Synergy.ARTIFICIAL,
+    Synergy.ELECTRIC
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 230
+  atk = 19
+  def = 4
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.FORCE_PALM
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
+
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.WATER])
   rarity = Rarity.RARE
   stars = 2
@@ -15157,6 +15175,24 @@ export class OgerponCornerstoneMask extends Pokemon {
   onAcquired = (player: Player) =>
     ogerponOnAcquired(player, Item.CORNERSTONE_MASK)
   passive = Passive.OGERPON_CORNERSTONE
+}
+
+export class IronHands extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FIGHTING,
+    Synergy.ARTIFICIAL,
+    Synergy.ELECTRIC
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 230
+  atk = 19
+  def = 4
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.FORCE_PALM
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export const PokemonClasses: Record<
@@ -16018,5 +16054,6 @@ export const PokemonClasses: Record<
   [Pkm.OGERPON_HEARTHFLAME]: OgerponHearthflame,
   [Pkm.OGERPON_HEARTHFLAME_MASK]: OgerponHearthflameMask,
   [Pkm.OGERPON_CORNERSTONE]: OgerponCornerstone,
-  [Pkm.OGERPON_CORNERSTONE_MASK]: OgerponCornerstoneMask
+  [Pkm.OGERPON_CORNERSTONE_MASK]: OgerponCornerstoneMask,
+  [Pkm.IRON_HANDS]: IronHands
 }
