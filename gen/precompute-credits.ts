@@ -15,7 +15,7 @@ export function precomputeCredits() {
     const metadata =
       pathIndex.length == 1
         ? tracker[pokemon.index]
-        : tracker[pathIndex[0]].subgroups[pathIndex[1]]
+        : tracker[pathIndex[0]]?.subgroups[pathIndex[1]]
     if (metadata) {
       data.set(pokemon.index, {
         portrait_credit: metadata.portrait_credit,

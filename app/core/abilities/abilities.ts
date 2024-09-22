@@ -67,6 +67,7 @@ import {
 } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { DelayedCommand } from "../simulation-command"
+import { Passive } from "../../types/enum/Passive"
 
 export class BlueFlareStrategy extends AbilityStrategy {
   process(
@@ -10040,6 +10041,53 @@ export class RoarStrategy extends AbilityStrategy {
   }
 }
 
+export class IvyCudgelStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 100
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    if (pokemon.passive === Passive.OGERPON_TEAL) {
+      board
+        .getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
+        .forEach((cell) => {
+          if (cell.value && cell.value.team === pokemon.team) {
+            cell.value.handleHeal(20, pokemon, 1, crit)
+          }
+        })
+    } else if (pokemon.passive === Passive.OGERPON_WELLSPRING) {
+      board
+        .getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
+        .forEach((cell) => {
+          if (cell.value && cell.value.team === pokemon.team) {
+            cell.value.addPP(10, pokemon, 0, crit)
+          }
+        })
+    } else if (pokemon.passive === Passive.OGERPON_HEARTHFLAME) {
+      board
+        .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
+        .forEach((cell) => {
+          if (cell.value && cell.value.team !== pokemon.team) {
+            cell.value.status.triggerBurn(2000, pokemon, cell.value)
+          }
+        })
+    } else if (pokemon.passive === Passive.OGERPON_CORNERSTONE) {
+      board
+        .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
+        .forEach((cell) => {
+          if (cell.value && cell.value.team !== pokemon.team) {
+            cell.value.status.triggerFlinch(6000, pokemon, cell.value)
+          }
+        })
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -10407,5 +10455,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DOUBLE_IRON_BASH]: new DoubleIronBashStrategy(),
   [Ability.STONE_EDGE]: new StoneEdgeStrategy(),
   [Ability.ROAR]: new RoarStrategy(),
-  [Ability.INFESTATION]: new InfestationStrategy()
+  [Ability.INFESTATION]: new InfestationStrategy(),
+  [Ability.IVY_CUDGEL]: new IvyCudgelStrategy()
 }

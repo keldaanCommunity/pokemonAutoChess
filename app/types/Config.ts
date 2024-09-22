@@ -261,7 +261,12 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.AUDINO,
   Pkm.MANTYKE,
   Pkm.DURANT,
-  Pkm.SKARMORY
+  Pkm.SKARMORY,
+  Pkm.SIGILYPH,
+  Pkm.OGERPON_TEAL,
+  Pkm.OGERPON_WELLSPRING,
+  Pkm.OGERPON_HEARTHFLAME,
+  Pkm.OGERPON_CORNERSTONE
 )
 
 export const LegendaryShop = new Array<PkmProposition>(
@@ -697,7 +702,11 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.BLACK_AUGURITE]: {},
   [Item.POKERUS_VIAL]: {},
   [Item.ROTOM_PHONE]: {},
-  [Item.FIRE_SHARD]: {}
+  [Item.FIRE_SHARD]: {},
+  [Item.TEAL_MASK]: { [Stat.SHIELD]: 50 },
+  [Item.WELLSPRING_MASK]: { [Stat.SHIELD]: 50 },
+  [Item.CORNERSTONE_MASK]: { [Stat.SHIELD]: 50 },
+  [Item.HEARTHFLAME_MASK]: { [Stat.SHIELD]: 50 }
 }
 
 export type TilesetExchangeFile = {

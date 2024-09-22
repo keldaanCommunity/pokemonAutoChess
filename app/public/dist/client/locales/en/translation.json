@@ -385,7 +385,8 @@
     "DOUBLE_IRON_BASH": "Double Iron Bash",
     "STONE_EDGE": "Stone Edge",
     "ROAR": "Roar",
-    "INFESTATION": "Infestation"
+    "INFESTATION": "Infestation",
+    "IVY_CUDGEL": "Ivy Cudgel"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1233,7 +1234,15 @@
     "BINACLE": "Binacle",
     "BARBARACLE": "Barbaracle",
     "SKARMORY": "Skarmory",
-    "DURANT": "Durant"
+    "DURANT": "Durant",
+    "OGERPON_TEAL": "Ogerpon Teal",
+    "OGERPON_TEAL_MASK": "Ogerpon Teal Mask",
+    "OGERPON_WELLSPRING": "Ogerpon Wellspring",
+    "OGERPON_WELLSPRING_MASK": "Ogerpon Wellspring Mask",
+    "OGERPON_HEARTHFLAME": "Ogerpon Hearthflame",
+    "OGERPON_HEARTHFLAME_MASK": "Ogerpon Hearthflame Mask",
+    "OGERPON_CORNERSTONE": "Ogerpon Cornerstone",
+    "OGERPON_CORNERSTONE_MASK": "Ogerpon Cornerstone Mask"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1599,7 +1608,8 @@
     "DOUBLE_IRON_BASH": "The user rotates, centering the hex nut in its chest, and then strikes with its arms twice in a row with [150,SP] % of its ATK. This make the target FLINCH for 3s",
     "STONE_EDGE": "For [5,8] s, the caster SILENCE itself, gains 2 RANGE, [10,20,SP] CRIT_CHANCE and apply 100% of its DEF as PHYSICAL on attacks",
     "ROAR": "Blow away the target. If the blown target hits a wall, it suffers [10,20,40,SP] SPECIAL. If it hits another pokémon, both pokémons suffer SPECIAL",
-    "INFESTATION": "Deals [10,SP] SPECIAL to the target for each allied BUG and places your most powerful BUG on your bench in the fight"
+    "INFESTATION": "Deals [10,SP] SPECIAL to the target for each allied BUG and places your most powerful BUG on your bench in the fight",
+    "IVY_CUDGEL": "Deals [100,SP] SPECIAL to the target"
 },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1953,7 +1963,11 @@
     "HEAT_ROCK": "Heat Rock",
     "SMOOTH_ROCK": "Smooth Rock",
     "BLACK_AUGURITE": "Black Augurite",
-    "FIRE_SHARD": "Fire Shard"
+    "FIRE_SHARD": "Fire Shard",
+    "TEAL_MASK": "Teal Mask",
+    "WELLSPRING_MASK": "Whirlpool Mask",
+    "CORNERSTONE_MASK": "Cornerstone Mask",
+    "HEARTHFLAME_MASK": "Hearthflame Mask"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -2066,7 +2080,11 @@
     "HEAT_ROCK": "Gives FIRE synergy and counts for 3 towards SUN. Can only be used on ROCK Pokémon",
     "SMOOTH_ROCK": "Gives GROUND synergy and counts for 3 towards SANDSTORM. Can only be used on ROCK Pokémon",
     "BLACK_AUGURITE": "Gives DARK synergy and counts for 3 towards NIGHT. Can only be used on ROCK Pokémon",
-    "FIRE_SHARD": "Sacrifice 2 player HP to give permanently +2 ATK to a FIRE Pokémon. Immediately consumed when given."
+    "FIRE_SHARD": "Sacrifice 2 player HP to give permanently +2 ATK to a FIRE Pokémon. Immediately consumed when given.",
+    "TEAL_MASK": "This carved wooden mask is adorned with crystals, grants 50 SHIELD and allows Ogerpon and  wield the FLORA type during battle.",
+    "WELLSPRING_MASK": "This carved wooden mask is adorned with crystals, grants 50 SHIELD and allows Ogerpon to wield the WATER type during battle.",
+    "HEARTHFLAME_MASK": "This carved wooden mask is adorned with crystals, grants 50 SHIELD and allows Ogerpon to wield the FIRE type during battle.",
+    "CORNERSTONE_MASK": "This carved wooden mask is adorned with crystals, grants 50 SHIELD and allows Ogerpon to wield the ROCK type during battle."
   },
   "passive_description": {
     "NONE": "No passive",
@@ -2179,7 +2197,11 @@
     "MEGA_SABLEYE": "Mega Sableye gains RUNE_PROTECT for the entire fight",
     "MELMETAL": "Melmetal can't gain ATK_SPEED. Bonus ATK_SPEED is converted into ATK (10% ATK_SPEED: 3 ATK)",
     "SKARMORY": "At the start of the fight, Skarmory scatters spikes around the field. The spikes stay on field, dealing 10 TRUE per second and ARMOR_REDUCTION to Pokémons that walk on it, if not FLYING.",
-    "DURANT": "Durant basic attacks deals 1 extra TRUE for each BUG ally on your board"
+    "DURANT": "Durant basic attacks deals 1 extra TRUE for each BUG ally on your board",
+    "OGERPON_TEAL": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, restores [20,SP] HP to adjacent allies",
+    "OGERPON_WELLSPRING": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, gives 10 PP to adjacent allies",
+    "OGERPON_HEARTHFLAME": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, BURN adjacent enemies for 2s",    
+    "OGERPON_CORNERSTONE": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, FLINCH adajcent enemies for 5s"
   },
   "stat": {
     "ATK": "Attack",
