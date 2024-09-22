@@ -1696,7 +1696,6 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.REMORAID]: "0223",
   [Pkm.OCTILLERY]: "0224",
   [Pkm.SIGILYPH]: "0561",
-  [Pkm.IRON_HANDS]: "0092",
   [Pkm.FRIGIBAX]: "0996",
   [Pkm.ARCTIBAX]: "0997",
   [Pkm.BAXCALIBUR]: "0998",
@@ -1711,7 +1710,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.OGERPON_HEARTHFLAME]: "1017-0004",
   [Pkm.OGERPON_HEARTHFLAME_MASK]: "1017-0005",
   [Pkm.OGERPON_CORNERSTONE]: "1017-0006",
-  [Pkm.OGERPON_CORNERSTONE_MASK]: "1017-0007"
+  [Pkm.OGERPON_CORNERSTONE_MASK]: "1017-0007",
+  [Pkm.IRON_HANDS]: "0992"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {

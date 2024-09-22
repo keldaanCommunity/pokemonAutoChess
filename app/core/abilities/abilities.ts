@@ -10088,6 +10088,29 @@ export class IvyCudgelStrategy extends AbilityStrategy {
   }
 }
 
+export class ForcePalmStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const additionalDamage = target.status.paralysis ? 40 : 0
+    const damage = Math.round((60 + target.hp * 0.1) + additionalDamage)
+
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+    target.status.triggerParalysis(6000, pokemon)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -10456,5 +10479,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.STONE_EDGE]: new StoneEdgeStrategy(),
   [Ability.ROAR]: new RoarStrategy(),
   [Ability.INFESTATION]: new InfestationStrategy(),
-  [Ability.IVY_CUDGEL]: new IvyCudgelStrategy()
+  [Ability.IVY_CUDGEL]: new IvyCudgelStrategy(),
+  [Ability.FORCE_PALM]: new ForcePalmStrategy()
 }
