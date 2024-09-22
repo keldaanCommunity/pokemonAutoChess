@@ -1565,7 +1565,7 @@
     "POWER_WHIP": "Lock on to the farthest enemy and unleash a giant vine towards it, dealing [30,60,SP] SPECIAL to any enemies hit",
     "DARK_HARVEST": "The Pokémon teleports into the largest group of enemies. For the next 3 seconds, the Pokémon suffers SILENCE and drains the HP of adjacent enemies, inflicting [5,10,20,SP] SPECIAL per second and healing HP for 30% of the SPECIAL inflicted",
     "PSYSHOCK": "Burn [20,40,80,SP] PP from target and gain it as SHIELD. If the target has not enough PP, the remainder is dealt as SPECIAL.",
-    "HEAVY_SLAM": "Slams the ground, dealing [10,20,40,SP] SPECIAL and granting himself [10,20,40] SHIELD. The more the user outweighs the target in max HP, the greater the move's power.",
+    "HEAVY_SLAM": "Slams the ground, dealing [10,20,40,SP] SPECIAL and granting himself [10,20,40,SP] SHIELD. The more the user outweighs the target in max HP, the greater the move's power.",
     "RAPID_SPIN": "Deal [20,50,SP] SPECIAL then gain [20,30,SP]% of ATK as DEF and SPE_DEF",
     "BOUNCE": "Bounce [1,2,3,SP] times to the farthest target, dealing [10,SP] SPECIAL to all adjacent enemies for each bounce",
     "BLOOD_MOON": "Concentrates all his energy in the blood-red moon on his forehead and projects it in a line, dealing [200,SP]% of ATK as SPECIAL and WOUND for 3 seconds all enemies hit",
