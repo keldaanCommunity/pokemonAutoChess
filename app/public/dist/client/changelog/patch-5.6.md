@@ -1,3 +1,5 @@
+@HametAk made its first contribution to the project.
+
 # New Pokemons:
 
 - Sigilyph
@@ -15,6 +17,7 @@
 - Skarmory
 - Durant
 - Ogerpon (Teal, Wellspring, Hearthflame, Cornerstone) and their unmasked counterparts
+- Iron Hands
 
 # Changes to Pokemon & Abilities
 

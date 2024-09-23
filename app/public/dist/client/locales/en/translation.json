@@ -386,7 +386,8 @@
     "STONE_EDGE": "Stone Edge",
     "ROAR": "Roar",
     "INFESTATION": "Infestation",
-    "IVY_CUDGEL": "Ivy Cudgel"
+    "IVY_CUDGEL": "Ivy Cudgel",
+    "FORCE_PALM": "Force Palm"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1242,7 +1243,8 @@
     "OGERPON_HEARTHFLAME": "Ogerpon Hearthflame",
     "OGERPON_HEARTHFLAME_MASK": "Ogerpon Hearthflame Mask",
     "OGERPON_CORNERSTONE": "Ogerpon Cornerstone",
-    "OGERPON_CORNERSTONE_MASK": "Ogerpon Cornerstone Mask"
+    "OGERPON_CORNERSTONE_MASK": "Ogerpon Cornerstone Mask",
+    "IRON_HANDS": "Iron Hands"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1609,7 +1611,8 @@
     "STONE_EDGE": "For [5,8] s, the caster SILENCE itself, gains 2 RANGE, [10,20,SP] CRIT_CHANCE and apply 100% of its DEF as PHYSICAL on attacks",
     "ROAR": "Blow away the target. If the blown target hits a wall, it suffers [10,20,40,SP] SPECIAL. If it hits another pokémon, both pokémons suffer SPECIAL",
     "INFESTATION": "Deals [10,SP] SPECIAL to the target for each allied BUG and places your most powerful BUG on your bench in the fight",
-    "IVY_CUDGEL": "Deals [100,SP] SPECIAL to the target"
+    "IVY_CUDGEL": "Deals [100,SP] SPECIAL to the target",
+    "FORCE_PALM": "The user deals [60,SP] + 10% of target max HP as SPECIAL and PARALYSIS for 6 secs. If it was PARALYSIS, deals an additionnal [40,SP] SPECIAL and push it away."
 },
   "effect": {
     "INGRAIN": "Ingrain",
