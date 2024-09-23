@@ -2198,7 +2198,13 @@
     "MANTINE": "Se Mantine è sul terreno, ottieni il 25% di possibilità di pescare un Remoraid con il tuo amo.",
     "SABLEYE": "Sableye sta cercando per un FIRE_GEM",
     "MEGA_SABLEYE": "Mega Sableye ottiene RUNE_PROTECT per l'intero combattimento",
-    "MELMETAL": "Melmetal non può ottenere ATK_SPEED. La ATK_SPEED ottenuta viene convertita in ATK (il 10% della ATK_SPEED diviso per 3 di ATK)."
+    "MELMETAL": "Melmetal non può ottenere ATK_SPEED. La ATK_SPEED ottenuta viene convertita in ATK (il 10% della ATK_SPEED diviso per 3 di ATK).",
+    "SKARMORY": "All'inizio del combattimento, Skarmory disperde punte sul terreno. Le punte rimangono sul terreno, infliggendo 10 TRUE al secondo e causano ARMOR_REDUCTION ai Pokèmon che ci camminano sopra, tranne ai Pokèmon FLYING.",
+    "DURANT": "Gli attacchi base di Durant infliggono 1 danno puro extra per ogni alleato BUG sul tuo terreno.",
+    "OGERPON_TEAL": "Ogerpon può equipaggiare la TEAL_MASK, la HEARTHFLAME_MASK, la WELLSPRING_MASK e la CORNERSTONE_MASK per cambiare la sua forma. Quando Ogerpon lancia la sua abilità, cura [20,SP] HP agli alleati adiacenti.",
+    "OGERPON_WELLSPRING": "Ogerpon può equipaggiare la TEAL_MASK, la HEARTHFLAME_MASK, la WELLSPRING_MASK e la CORNERSTONE_MASK per cambiare la sua forma. Quando Ogerpon lancia la sua abilità, dai 10 PP agli alleati adiacenti",
+    "OGERPON_HEARTHFLAME": "Ogerpon può equipaggiare la TEAL_MASK, la HEARTHFLAME_MASK, la WELLSPRING_MASK e la CORNERSTONE_MASK per cambiare la sua forma. Quando Ogerpon lancia la sua abilità, infliggi BURN ai nemici adiacenti per 2 secondi.",
+    "OGERPON_CORNERSTONE": "Ogerpon può equipaggiare la TEAL_MASK, la HEARTHFLAME_MASK, la WELLSPRING_MASK e la CORNERSTONE_MASK per cambiare la sua forma. Quando Ogerpon lancia la sua abilità, causa FLINCH ai nemici adiacenti per 5 secondi."
   },
   "stat": {
     "ATK": "Attacco",
