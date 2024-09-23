@@ -1302,6 +1302,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.FORCE_PALM:
+      addAbilitySprite(Ability.ANCHOR_SHOT, coordinatesTarget, true).setScale(2)
+      break
+
     case Ability.HYPERSPACE_FURY: {
       const nbHits = Number(orientation) // orientation field is used to pass the number of hits for hyperspace fury
       for (let i = 0; i < nbHits; i++) {

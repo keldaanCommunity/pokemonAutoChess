@@ -10098,16 +10098,29 @@ export class ForcePalmStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const additionalDamage = target.status.paralysis ? 40 : 0
-    const damage = Math.round((60 + target.hp * 0.1) + additionalDamage)
+    const damage = Math.round(60 + target.hp * 0.1 + additionalDamage)
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
 
-    target.handleSpecialDamage(
-      damage,
-      board,
-      AttackType.SPECIAL,
-      pokemon,
-      crit
-    )
-    target.status.triggerParalysis(6000, pokemon)
+    if (target.status.paralysis) {
+      target.handleSpecialDamage(
+        additionalDamage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+      effectInLine(
+        board,
+        pokemon,
+        target,
+        (targetInLine) => {},
+        (x, y) => {
+          target.moveTo(x, y, board)
+        }
+      )
+    } else {
+      target.status.triggerParalysis(6000, pokemon)
+    }
   }
 }
 

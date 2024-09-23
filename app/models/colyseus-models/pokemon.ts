@@ -14932,24 +14932,6 @@ export class Binacle extends Pokemon {
 }
 
 export class Barbaracle extends Pokemon {
-export class IronHands extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.FIGHTING,
-    Synergy.ARTIFICIAL,
-    Synergy.ELECTRIC
-  ])
-  rarity = Rarity.UNIQUE
-  stars = 3
-  hp = 230
-  atk = 19
-  def = 4
-  speDef = 3
-  maxPP = 100
-  range = 1
-  skill = Ability.FORCE_PALM
-  attackSprite = AttackSprite.FIGHTING_MELEE
-}
-
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.WATER])
   rarity = Rarity.RARE
   stars = 2

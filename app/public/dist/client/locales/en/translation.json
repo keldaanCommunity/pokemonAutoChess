@@ -1612,7 +1612,7 @@
     "ROAR": "Blow away the target. If the blown target hits a wall, it suffers [10,20,40,SP] SPECIAL. If it hits another pokémon, both pokémons suffer SPECIAL",
     "INFESTATION": "Deals [10,SP] SPECIAL to the target for each allied BUG and places your most powerful BUG on your bench in the fight",
     "IVY_CUDGEL": "Deals [100,SP] SPECIAL to the target",
-    "FORCE_PALM": "The user deals [60,SP] + 10% of target max HP as SPECIAL and PARALYSIS for 6 secs. If it was PARALYSIS, deals an additionnal 40 SPECIAL and push it away."
+    "FORCE_PALM": "The user deals [60,SP] + 10% of target max HP as SPECIAL and PARALYSIS for 6 secs. If it was PARALYSIS, deals an additionnal [40,SP] SPECIAL and push it away."
 },
   "effect": {
     "INGRAIN": "Ingrain",
