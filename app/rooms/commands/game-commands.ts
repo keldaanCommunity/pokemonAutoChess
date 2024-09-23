@@ -1112,6 +1112,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           this.state.shop.addAdditionalPokemon(p)
         }
       })
+
+      // update regional pokemons in case some regional variants of add picks are now available
+      this.state.players.forEach((p) => p.updateRegionalPool(this.state, false))
     }
 
     const isAfterPVE = this.state.stageLevel - 1 in PVEStages

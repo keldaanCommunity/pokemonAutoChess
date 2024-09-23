@@ -129,7 +129,7 @@ export default class Player extends Schema implements IPlayer {
     this.lightX = state.lightX
     this.lightY = state.lightY
     this.map = pickRandomIn(DungeonPMDO)
-    this.updateRegionalPool(state)
+    this.updateRegionalPool(state, true)
 
     if (isBot) {
       this.loadingProgress = 100
@@ -421,20 +421,22 @@ export default class Player extends Schema implements IPlayer {
       this.items.push(Item.SUPER_ROD)
   }
 
-  updateRegionalPool(state: GameState) {
+  updateRegionalPool(state: GameState, mapChanged: boolean) {
     const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
       new PokemonClasses[p]().isInRegion(this.map, state)
     )
 
-    state.shop.resetRegionalPool(this)
-    newRegionalPokemons.forEach((p) => {
-      const isVariant = Object.values(PkmRegionalVariants).some((variants) =>
-        variants.includes(p)
-      )
-      if (getPokemonData(p).stars === 1 && !isVariant) {
-        state.shop.addRegionalPokemon(p, this)
-      }
-    })
+    if (mapChanged) {
+      state.shop.resetRegionalPool(this)
+      newRegionalPokemons.forEach((p) => {
+        const isVariant = Object.values(PkmRegionalVariants).some((variants) =>
+          variants.includes(p)
+        )
+        if (getPokemonData(p).stars === 1 && !isVariant) {
+          state.shop.addRegionalPokemon(p, this)
+        }
+      })
+    }
 
     resetArraySchema(
       this.regionalPokemons,
