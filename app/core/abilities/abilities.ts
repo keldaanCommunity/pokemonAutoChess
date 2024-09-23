@@ -9891,6 +9891,28 @@ export class ForcePalmStrategy extends AbilityStrategy {
       crit
     )
     target.status.triggerParalysis(6000, pokemon)
+
+    if (target.team === Team.RED_TEAM) {
+      let newY = target.positionY
+      for (let row = newY; row < board.rows - 1; row++) {
+        if (board.getValue(target.positionY, row + 1) === undefined) {
+          newY += 1
+          continue
+        }
+        return
+      }
+      target.moveTo(target.positionX, newY, board)
+    } else {
+      let newY = target.positionY
+      for (let row = newY; row > 0; row--) {
+        if (board.getValue(target.positionX, row - 1) === undefined) {
+          newY -= 1
+          continue
+        }
+        return
+      }
+      target.moveTo(target.positionX, newY, board)
+    }
   }
 }
 
