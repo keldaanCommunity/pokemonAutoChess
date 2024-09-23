@@ -841,7 +841,20 @@ export enum Pkm {
   SIGILYPH = "SIGILYPH",
   FRIGIBAX = "FRIGIBAX",
   ARCTIBAX = "ARCTIBAX",
-  BAXCALIBUR = "BAXCALIBUR"
+  BAXCALIBUR = "BAXCALIBUR",
+  BINACLE = "BINACLE",
+  BARBARACLE = "BARBARACLE",
+  SKARMORY = "SKARMORY",
+  DURANT = "DURANT",
+  OGERPON_TEAL = "OGERPON_TEAL",
+  OGERPON_TEAL_MASK = "OGERPON_TEAL_MASK",
+  OGERPON_WELLSPRING = "OGERPON_WELLSPRING",
+  OGERPON_WELLSPRING_MASK = "OGERPON_WELLSPRING_MASK",
+  OGERPON_HEARTHFLAME = "OGERPON_HEARTHFLAME",
+  OGERPON_HEARTHFLAME_MASK = "OGERPON_HEARTHFLAME_MASK",
+  OGERPON_CORNERSTONE = "OGERPON_CORNERSTONE",
+  OGERPON_CORNERSTONE_MASK = "OGERPON_CORNERSTONE_MASK",
+  IRON_HANDS = "IRON_HANDS"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1685,7 +1698,20 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SIGILYPH]: "0561",
   [Pkm.FRIGIBAX]: "0996",
   [Pkm.ARCTIBAX]: "0997",
-  [Pkm.BAXCALIBUR]: "0998"
+  [Pkm.BAXCALIBUR]: "0998",
+  [Pkm.BINACLE]: "0688",
+  [Pkm.BARBARACLE]: "0689",
+  [Pkm.SKARMORY]: "0227",
+  [Pkm.DURANT]: "0632",
+  [Pkm.OGERPON_TEAL]: "1017",
+  [Pkm.OGERPON_TEAL_MASK]: "1017-0001",
+  [Pkm.OGERPON_WELLSPRING]: "1017-0002",
+  [Pkm.OGERPON_WELLSPRING_MASK]: "1017-0003",
+  [Pkm.OGERPON_HEARTHFLAME]: "1017-0004",
+  [Pkm.OGERPON_HEARTHFLAME_MASK]: "1017-0005",
+  [Pkm.OGERPON_CORNERSTONE]: "1017-0006",
+  [Pkm.OGERPON_CORNERSTONE_MASK]: "1017-0007",
+  [Pkm.IRON_HANDS]: "0992"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2529,7 +2555,20 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SIGILYPH]: Pkm.SIGILYPH,
   [Pkm.FRIGIBAX]: Pkm.FRIGIBAX,
   [Pkm.ARCTIBAX]: Pkm.FRIGIBAX,
-  [Pkm.BAXCALIBUR]: Pkm.FRIGIBAX
+  [Pkm.BAXCALIBUR]: Pkm.FRIGIBAX,
+  [Pkm.BINACLE]: Pkm.BINACLE,
+  [Pkm.BARBARACLE]: Pkm.BINACLE,
+  [Pkm.SKARMORY]: Pkm.SKARMORY,
+  [Pkm.DURANT]: Pkm.DURANT,
+  [Pkm.OGERPON_TEAL]: Pkm.OGERPON_TEAL,
+  [Pkm.OGERPON_TEAL_MASK]: Pkm.OGERPON_TEAL,
+  [Pkm.OGERPON_WELLSPRING]: Pkm.OGERPON_TEAL,
+  [Pkm.OGERPON_WELLSPRING_MASK]: Pkm.OGERPON_TEAL,
+  [Pkm.OGERPON_HEARTHFLAME]: Pkm.OGERPON_TEAL,
+  [Pkm.OGERPON_HEARTHFLAME_MASK]: Pkm.OGERPON_TEAL,
+  [Pkm.OGERPON_CORNERSTONE]: Pkm.OGERPON_TEAL,
+  [Pkm.OGERPON_CORNERSTONE_MASK]: Pkm.OGERPON_TEAL,
+  [Pkm.IRON_HANDS]: Pkm.IRON_HANDS
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -6900,5 +6939,75 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
+  },
+  [Pkm.BINACLE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Charge
+  },
+  [Pkm.BARBARACLE]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.SKARMORY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.DURANT]: {
+    attack: AnimationType.Bite,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
+  },
+  [Pkm.OGERPON_TEAL]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.OGERPON_TEAL_MASK]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
+  },
+  [Pkm.OGERPON_WELLSPRING]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.OGERPON_WELLSPRING_MASK]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
+  },
+  [Pkm.OGERPON_HEARTHFLAME]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.OGERPON_HEARTHFLAME_MASK]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
+  },
+  [Pkm.OGERPON_CORNERSTONE]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.OGERPON_CORNERSTONE_MASK]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
+  },
+  [Pkm.IRON_HANDS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Strike,
+    emote: AnimationType.Hop
   }
 }

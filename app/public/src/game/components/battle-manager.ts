@@ -1125,7 +1125,7 @@ export default class BattleManager {
         "SPIKES/001.png"
       )
       sprite.setDepth(1)
-      sprite.setScale(1, 1)
+      sprite.setScale(0, 0)
       this.boardEventSprites[index] = sprite
       this.group.add(sprite)
 
@@ -1133,7 +1133,9 @@ export default class BattleManager {
         targets: sprite,
         alpha: 1,
         duration: 200,
-        delay: 500
+        delay: 500,
+        scaleX: 1,
+        scaleY: 1
       })
     }
 

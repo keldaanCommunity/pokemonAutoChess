@@ -88,6 +88,8 @@ export default class Status extends Schema implements IStatus {
   darkHarvest = false
   darkHarvestCooldown = 0
   darkHarvestDamageCooldown = 0
+  stoneEdge = false
+  stoneEdgeCooldown = 0
 
   clearNegativeStatus() {
     this.burnCooldown = 0
@@ -237,24 +239,15 @@ export default class Status extends Schema implements IStatus {
       this.updateRage(dt, pokemon)
     }
 
-    if (
-      pokemon.status.curseVulnerability &&
-      !pokemon.status.flinch
-    ) {
+    if (pokemon.status.curseVulnerability && !pokemon.status.flinch) {
       this.triggerFlinch(30000, pokemon)
     }
 
-    if (
-      pokemon.status.curseWeakness &&
-      !pokemon.status.paralysis
-    ) {
+    if (pokemon.status.curseWeakness && !pokemon.status.paralysis) {
       this.triggerParalysis(30000, pokemon)
     }
 
-    if (
-      pokemon.status.curseTorment &&
-      !pokemon.status.silence
-    ) {
+    if (pokemon.status.curseTorment && !pokemon.status.silence) {
       this.triggerSilence(30000, pokemon)
     }
 
@@ -348,6 +341,25 @@ export default class Status extends Schema implements IStatus {
       pkm.addAttackSpeed(2, pkm, 0, false)
     } else {
       this.clearWingCooldown -= dt
+    }
+  }
+
+  triggerStoneEdge(timer: number, pkm: PokemonEntity) {
+    if (!this.stoneEdge) {
+      this.stoneEdge = true
+      this.stoneEdgeCooldown = timer
+      pkm.addCritChance(20, pkm, 1, false)
+      pkm.range = 3
+    }
+  }
+
+  updateStoneEdge(dt: number, pkm: PokemonEntity) {
+    if (this.stoneEdgeCooldown - dt <= 0) {
+      this.stoneEdge = false
+      pkm.addCritChance(-20, pkm, 1, false)
+      pkm.range = pkm.baseRange
+    } else {
+      this.stoneEdgeCooldown -= dt
     }
   }
 

@@ -285,7 +285,11 @@ export default class Shop {
   assignShop(player: Player, manualRefresh: boolean, state: GameState) {
     player.shop.forEach((pkm) => this.releasePokemon(pkm, player))
 
-    if (player.effects.has(Effect.EERIE_SPELL) && !manualRefresh) {
+    if (
+      player.effects.has(Effect.EERIE_SPELL) &&
+      !manualRefresh &&
+      !player.shopLocked
+    ) {
       const unowns = getUnownsPoolPerStage(state.stageLevel)
       for (let i = 0; i < SHOP_SIZE; i++) {
         player.shop[i] = pickRandomIn(unowns)
@@ -324,6 +328,9 @@ export default class Shop {
         if (pkm === Pkm.TAPU_FINI) return synergy === Synergy.FAIRY
         if (pkm === Pkm.TAPU_KOKO) return synergy === Synergy.ELECTRIC
         if (pkm === Pkm.TAPU_LELE) return synergy === Synergy.PSYCHIC
+        if (pkm === Pkm.OGERPON_CORNERSTONE) return synergy === Synergy.ROCK
+        if (pkm === Pkm.OGERPON_HEARTHFLAME) return synergy === Synergy.FIRE
+        if (pkm === Pkm.OGERPON_WELLSPRING) return synergy === Synergy.AQUATIC
 
         return getPokemonData(pkm).types.includes(synergy)
       })
@@ -495,16 +502,27 @@ export default class Shop {
     }
 
     if (rod === Item.GOLDEN_ROD) {
-      let topSynergies: Synergy[] = []
-      let maxSynergyCount = 0
-      player.synergies.forEach((count, synergy) => {
-        if (count > maxSynergyCount) {
-          maxSynergyCount = count
-          topSynergies = [synergy]
-        } else if (count === maxSynergyCount) {
-          topSynergies.push(synergy)
-        }
-      })
+      const topSynergies: Synergy[] = Array.from(
+        player.synergies
+        // filter only active synergies
+      )
+        .filter(
+          ([s, v]) => player.synergies.isActiveSynergy(s, v)
+          // sort synergies by count in descending order
+        )
+        .sort(
+          (a, b) => b[1] - a[1]
+          // filter only synergies which have a value
+          // equal to the top synergy
+        )
+        .filter(
+          (current, _, array) => {
+            const highestValue = array[0][1]
+            return current[1] === highestValue
+          }
+          // return only the synergy
+        )
+        .map(([s]) => s)
       const typeWanted = pickRandomIn(topSynergies)
 
       if (rarity === Rarity.SPECIAL) {

@@ -1,3 +1,5 @@
+@HametAk made its first contribution to the project.
+
 # New Pokemons:
 
 - Sigilyph
@@ -9,6 +11,13 @@
 - Krookodile
 - Mega Sableye
 - XD001
+- Melmetal
+- Binacle
+- Barbaracle
+- Skarmory
+- Durant
+- Ogerpon (Teal, Wellspring, Hearthflame, Cornerstone) and their unmasked counterparts
+- Iron Hands
 
 # Changes to Pokemon & Abilities
 

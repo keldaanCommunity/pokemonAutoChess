@@ -600,6 +600,31 @@ export function displayAbility(
       break
     }
 
+    case Ability.ROAR: {
+      const [dx, dy] = OrientationVector[orientation]
+      const finalCoordinates = transformAttackCoordinate(
+        positionX + dx * 8,
+        positionY + dy * 8,
+        flip
+      )
+      const specialProjectile = addAbilitySprite(
+        Ability.WHIRLWIND,
+        coordinates
+      ).setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: finalCoordinates[0],
+        y: finalCoordinates[1],
+        ease: "linear",
+        yoyo: false,
+        duration: 1000,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.FLEUR_CANNON: {
       const [dx, dy] = OrientationVector[orientation]
       const finalCoordinates = transformAttackCoordinate(
@@ -754,6 +779,24 @@ export function displayAbility(
     }
 
     case Ability.SKY_ATTACK: {
+      const startCoords = transformAttackCoordinate(targetX, 9, false)
+      const specialProjectile = addAbilitySprite(skill, startCoords).setScale(
+        1.5
+      )
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 500,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
+    case Ability.SKY_ATTACK_SHADOW: {
       const startCoords = transformAttackCoordinate(targetX, 9, false)
       const specialProjectile = addAbilitySprite(skill, startCoords).setScale(
         1.5
@@ -1077,6 +1120,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.IVY_CUDGEL:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
     case Ability.PSYCHO_BOOST:
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
@@ -1253,6 +1300,10 @@ export function displayAbility(
 
     case Ability.ANCHOR_SHOT:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
+    case Ability.FORCE_PALM:
+      addAbilitySprite(Ability.ANCHOR_SHOT, coordinatesTarget, true).setScale(2)
       break
 
     case Ability.HYPERSPACE_FURY: {
@@ -2373,6 +2424,34 @@ export function displayAbility(
       )
       break
 
+    case Ability.INFESTATION:
+      {
+        if (positionX !== undefined && positionY !== undefined) {
+          const duration =
+            distanceM(positionX, positionY, targetX, targetY) * 150
+          const projectile = addAbilitySprite(
+            "HEAL_ORDER",
+            coordinates,
+            true
+          ).setScale(3)
+
+          scene.tweens.add({
+            targets: projectile,
+            x: coordinatesTarget[0],
+            y: coordinatesTarget[1],
+            ease: "linear",
+            yoyo: false,
+            duration: duration,
+            onComplete: () => {
+              projectile.destroy()
+            }
+          })
+        } else {
+          addAbilitySprite("ATTACK_ORDER", coordinatesTarget, true).setScale(2)
+        }
+      }
+      break
+
     case "FIELD_DEATH":
       addAbilitySprite("FIELD_DEATH", coordinates, true).setScale(2)
       break
@@ -2549,6 +2628,10 @@ export function displayAbility(
 
     case Ability.DOUBLE_IRON_BASH:
       addAbilitySprite(Ability.DRAIN_PUNCH, coordinatesTarget, true).setScale(2)
+      break
+
+    case Ability.STONE_EDGE:
+      addAbilitySprite(Ability.TORMENT, coordinates, true).setScale(2)
       break
 
     default:
