@@ -1539,7 +1539,7 @@
     "POWER_WHIP": "Fija al enemigo más lejano y lanza una enredadera gigante hacia él. Inflige [30,60,SP] SPECIAL a cualquier enemigo golpeado por la enredadera.",
     "DARK_HARVEST": "El Pokémon se teletransporta al grupo más grande de enemigos. Durante los siguientes 3 segundos, el pokémon sufre SILENCE y drena los HP de los enemigos adyacentes, infligiendo [5,10,20,SP] SPECIAL por segundo y curando su HP un 30% del SPECIAL infligido.",
     "PSYSHOCK": "Quema [20,40,80,SP] PP del objetivo y lo obtiene como SHIELD. Si el objetivo no tiene suficientes PP, el resto se inflige como SPECIAL.",
-    "HEAVY_SLAM": "Golpea el suelo causando [10,20,40,SP] SPECIAL y otorgándose [10,20,40] SHIELD. Cuanto más supere el usuario al objetivo en HP máximo, mayor será el poder del movimiento.",
+    "HEAVY_SLAM": "Golpea el suelo causando [10,20,40,SP] SPECIAL y otorgándose [10,20,40,SP] SHIELD. Cuanto más supere el usuario al objetivo en HP máximo, mayor será el poder del movimiento.",
     "RAPID_SPIN": "Este pokémon inflige [20,50] SPECIAL y luego gana [20,30,SP]% de ATK como DEF y SPE_DEF",
     "BOUNCE": "Rebota [1,2,3,SP] veces hacia el objetivo más lejano, causando [10,SP] SPECIAL a todos los enemigos adyacentes por cada rebote.",
     "BLOOD_MOON": "Concentra toda su energía en la luna roja sangrienta en su frente y la proyecta en una línea, causando [200,SP]% de ATK como SPECIAL y WOUND durante 3 segundos a todos los enemigos golpeados",
