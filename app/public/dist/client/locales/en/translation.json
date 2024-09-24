@@ -1612,8 +1612,8 @@
     "ROAR": "Blow away the target. If the blown target hits a wall, it suffers [10,20,40,SP] SPECIAL. If it hits another pokémon, both pokémons suffer SPECIAL",
     "INFESTATION": "Deals [10,SP] SPECIAL to the target for each allied BUG and places your most powerful BUG on your bench in the fight",
     "IVY_CUDGEL": "Deals [100,SP] SPECIAL to the target",
-    "FORCE_PALM": "The user deals [60,SP] + 10% of target max HP as SPECIAL and PARALYSIS for 6 secs. If it was PARALYSIS, deals an additionnal [40,SP] SPECIAL and push it away."
-},
+    "FORCE_PALM": "The user deals [60,SP] + 10% of target max HP as SPECIAL and PARALYSIS for 6 secs. If it was PARALYSIS, deals an additional [40,SP] SPECIAL and push it away."
+  },
   "effect": {
     "INGRAIN": "Ingrain",
     "GROWTH": "Growth",
@@ -2084,7 +2084,7 @@
     "SMOOTH_ROCK": "Gives GROUND synergy and counts for 3 towards SANDSTORM. Can only be used on ROCK Pokémon",
     "BLACK_AUGURITE": "Gives DARK synergy and counts for 3 towards NIGHT. Can only be used on ROCK Pokémon",
     "FIRE_SHARD": "Sacrifice 2 player HP to give permanently +2 ATK to a FIRE Pokémon. Immediately consumed when given.",
-    "TEAL_MASK": "This carved wooden mask is adorned with crystals, grants 50 SHIELD and allows Ogerpon and  wield the FIGHTING type during battle.",
+    "TEAL_MASK": "This carved wooden mask is adorned with crystals, grants 50 SHIELD and allows Ogerpon to wield the FIGHTING type during battle.",
     "WELLSPRING_MASK": "This carved wooden mask is adorned with crystals, grants 50 SHIELD and allows Ogerpon to wield the AQUATIC type during battle.",
     "HEARTHFLAME_MASK": "This carved wooden mask is adorned with crystals, grants 50 SHIELD and allows Ogerpon to wield the FIRE type during battle.",
     "CORNERSTONE_MASK": "This carved wooden mask is adorned with crystals, grants 50 SHIELD and allows Ogerpon to wield the ROCK type during battle."
@@ -2203,7 +2203,7 @@
     "DURANT": "Durant basic attacks deals 1 extra TRUE for each BUG ally on your board",
     "OGERPON_TEAL": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, restores [20,SP] HP to adjacent allies",
     "OGERPON_WELLSPRING": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, gives 10 PP to adjacent allies",
-    "OGERPON_HEARTHFLAME": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, BURN adjacent enemies for 2s",    
+    "OGERPON_HEARTHFLAME": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, BURN adjacent enemies for 2s",
     "OGERPON_CORNERSTONE": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, FLINCH adajcent enemies for 5s"
   },
   "stat": {

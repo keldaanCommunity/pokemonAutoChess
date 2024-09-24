@@ -146,6 +146,7 @@
     "GRASSY_SURGE": "Erbogenesi",
     "MISTY_SURGE": "Nebbiogenesi",
     "SKY_ATTACK": "Aeroattacco",
+    "SKY_ATTACK_SHADOW": "Aeroattacco",
     "ILLUSION": "Illusione",
     "SHELTER": "Barricata",
     "SMOG": "Smog",
@@ -381,7 +382,12 @@
     "PSYCHO_SHIFT": "Psicotransfer",
     "GLAIVE_RUSH": "Spadoncarica",
     "FOUL_PLAY": "Ripicca",
-    "DOUBLE_IRON_BASH": "Pugni Corazzati"
+    "DOUBLE_IRON_BASH": "Pugni Corazzati",
+    "STONE_EDGE": "Pietrataglio",
+    "ROAR": "Boato",
+    "INFESTATION": "Assillo",
+    "IVY_CUDGEL": "Clava di Liane",
+    "FORCE_PALM": "Palmoforza"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1225,7 +1231,20 @@
     "SIGILYPH": "Sigilyph",
     "FRIGIBAX": "Frigibax",
     "ARCTIBAX": "Arctibax",
-    "BAXCALIBUR": "Baxaclibur"
+    "BAXCALIBUR": "Baxcalibur",
+    "BINACLE": "Binacle",
+    "BARBARACLE": "Barbaracle",
+    "SKARMORY": "Skarmory",
+    "DURANT": "Durant",
+    "OGERPON_TEAL": "Ogerpon Turchese",
+    "OGERPON_TEAL_MASK": "Ogerpon Maschera Turchese",
+    "OGERPON_WELLSPRING": "Ogerpon Pozzo",
+    "OGERPON_WELLSPRING_MASK": "Ogerpon Maschera Pozzo",
+    "OGERPON_HEARTHFLAME": "Ogerpon Focolare",
+    "OGERPON_HEARTHFLAME_MASK": "Ogerpon Maschera Focolare",
+    "OGERPON_CORNERSTONE": "Ogerpon Fondamenta",
+    "OGERPON_CORNERSTONE_MASK": "Ogerpon Maschera Fondamenta",
+    "IRON_HANDS": "Manoferrea"
   },
   "ability_description": {
     "SOFT_BOILED": "Cura tutti gli effetti di stato e garantisce [20,40,80,SP] SHIELD ad ogni Pokèmon alleato",
@@ -1353,6 +1372,7 @@
     "GRASSY_SURGE": "Potenzia l'ATK di tutti i Pokémon GRASS di [5,SP].",
     "MISTY_SURGE": "Tutti gli alleati FAIRY recuperano [30,SP] HP e [30,SP] PP.",
     "SKY_ATTACK": "Spicca il volo e piomba sul bersaglio più lontano dopo un secondo, infliggendogli [120,SP] SPECIAL.",
+    "SKY_ATTACK_SHADOW": "Spicca il volo e, dopo un secondo, piomba sul nemico più lontano infliggendogli [120,SP] SPECIAL.",
     "FLYING_PRESS": "Piomba dal cielo sul bersaglio più lontano, infliggendogli [30,SP]% dei HP dell'utilizzatore come SPECIAL.",
     "ILLUSION": "L'utilizzatore recupera [30,50,70,SP=0.5] HP e copia la forma, ATK, DEF, SPE_DEF e RANGE del Pokèmon bersaglio dell'abilità.",
     "SLUDGE": "Lancia spazzatura nelle tre celle di fronte, la quale applica [2,3,4] istanze di POISONNED per [3,SP] secondi.",
@@ -1390,7 +1410,7 @@
     "SPLASH": "Solo flop e spruzzi senza alcun effetto...",
     "PECK": "Infligge [10,20,30,SP] SPECIAL al bersaglio",
     "COUNTER": "L'utilizzatore si scaglia contro i nemici adiacenti infliggendo SPECIAL pari ai suoi HP mancanti (Scala con AP)",
-    "COSMIC_POWER": "Aumenta i AP della tua squadra di [20,SP]",
+    "COSMIC_POWER": "Aumenta i AP della tua squadra di [20,SP], tranne all'utilizzatore.",
     "ENTANGLING_THREAD": "Infligge [10,20,40,SP] SPECIAL e PARALYSIS al bersaglio e ai nemici adiacenti per 4 secondi",
     "SILVER_WIND": "Scatta nelle retrovie nemiche, infliggendo [30,60,120,SP] SPECIAL a tutti i nemici sul percorso. Inoltre ottieni 1 ATK, 1 DEF, 1 SPE_DEF, 10 AP e 10% ATK_SPEED.",
     "POISON_POWDER": "Scatta nelle retrovie nemiche, infliggendo [30,60,120,SP] SPECIAL e applicando POISONNED per 5 secondi a ogni nemico nella traiettoria.",
@@ -1587,7 +1607,12 @@
     "PSYCHO_SHIFT": "Scambia posizione del bersaglio e il nemico più lontano, infliggendo ad entrambi [70,SP] SPECIAL.",
     "GLAIVE_RUSH": "L'utilizzatore si butta di corpo in una carica molto rischiosa. Scatta verso il bersaglio, infliggendo [40,80,150,SP] PHYSICAL e causa a se stesso ARMOR_REDUCTION per 6 secondi.",
     "FOUL_PLAY": "Infliggi [2,4,6,SP] SPECIAL moltiplicati per l' ATK del bersaglio",
-    "DOUBLE_IRON_BASH": "L'utilizzatore rotea su sè stesso, poi colpisce con le sue braccia due volte infliggendo il [150,SP] % del suo ATK entrambe le volte. Causa al bersaglio FLINCH per 3 secondi."
+    "DOUBLE_IRON_BASH": "L'utilizzatore rotea su sè stesso, poi colpisce con le sue braccia due volte infliggendo il [150,SP] % del suo ATK entrambe le volte. Causa al bersaglio FLINCH per 3 secondi.",
+    "STONE_EDGE": "Per [5,8] secondi, l'utilizzatore si autoinfligge SILENCE, ottiene 2 di RANGE, [10,20,SP] di CRIT_CHANCE e applica il 100% della sua DEF come PHYSICAL agli attacchi.",
+    "ROAR": "Spazza via il bersaglio. Se il bersaglio colpisce un muro, gli vengono inflitti [10,20,40,SP] SPECIAL. Se colpisce un altro Pokèmon, entrambi subiscono SPECIAL.",
+    "INFESTATION": "Infliggi [10,SP] SPECIAL al bersaglio per ogni Pokèmon BUG alleato e piazza il BUG più forte nella panchina durante il combattimento.",
+    "IVY_CUDGEL": "Infliggi [100,SP] SPECIAL al bersaglio.",
+    "FORCE_PALM": "L'utilizzatore infligge [60,SP] + il 10% dei HP massimi come SPECIAL e causa PARALYSIS per 6 secondi. Se era già sotto PARALYSIS, infliggi [40,SP] SPECIAL bonus e spingilo via."
   },
   "effect": {
     "INGRAIN": "Radicamento",
@@ -1941,7 +1966,11 @@
     "HEAT_ROCK": "Rocciacalda",
     "SMOOTH_ROCK": "Roccialiscia",
     "BLACK_AUGURITE": "Augite Nera",
-    "FIRE_SHARD": "Coccio di Fuoco"
+    "FIRE_SHARD": "Coccio di Fuoco",
+    "TEAL_MASK": "Maschera Turchese",
+    "WELLSPRING_MASK": "Maschera Pozzo",
+    "CORNERSTONE_MASK": "Maschera Focolare",
+    "HEARTHFLAME_MASK": "Maschera Fondamenta"
   },
   "item_description": {
     "FOSSIL_STONE": "Un fossile di un Pokémon vissuto in epoca preistorica",
@@ -2054,7 +2083,11 @@
     "HEAT_ROCK": "Il possessore riceve la sinergia FIRE e conta per 3 verso SUN. Può essere usato solo su Pokèmon ROCK",
     "SMOOTH_ROCK": "Il possessore riceve la sinergia GROUND e conta per 3 verso SANDSTORM. Può essere usato solo da Pokèmon ROCK.",
     "BLACK_AUGURITE": "Il possessore riceve la sinergia DARK e conta per 3 verso NIGHT. Può essere usato solo da Pokèmon ROCK",
-    "FIRE_SHARD": "Sacrifica 2 HP del giocatore per dare permanentemente 2 di ATK ad un Pokèmon FIRE. L'oggetto viene consumato quando equipaggiato."
+    "FIRE_SHARD": "Sacrifica 2 HP del giocatore per dare permanentemente 2 di ATK ad un Pokèmon FIRE. L'oggetto viene consumato quando equipaggiato.",
+    "TEAL_MASK": "Questa maschera scolpita nel legno è adornata da cristalli, ottieni 50 di SHIELD e permetti ad Ogerpon di avere la sinergia FIGHTING durante il combattimento.",
+    "WELLSPRING_MASK": "Questa maschera scolpita nel legno è adornata da cristalli, ottieni 50 di SHIELD e permetti ad Ogerpon di avere la sinergia AQUATIC durante il combattimento.",
+    "HEARTHFLAME_MASK": "Questa maschera scolpita nel legno è adornata da cristalli, ottieni 50 di SHIELD e permetti ad Ogerpon di avere la sinergia FIRE durante il combattimento.",
+    "CORNERSTONE_MASK": "Questa maschera scolpita nel legno è adornata da cristalli, ottieni 50 di SHIELD e permetti ad Ogerpon di avere la sinergia ROCK durante il combattimento."
   },
   "passive_description": {
     "NONE": "Nessuna passiva",
@@ -2165,7 +2198,13 @@
     "MANTINE": "Se Mantine è sul terreno, ottieni il 25% di possibilità di pescare un Remoraid con il tuo amo.",
     "SABLEYE": "Sableye sta cercando per un FIRE_GEM",
     "MEGA_SABLEYE": "Mega Sableye ottiene RUNE_PROTECT per l'intero combattimento",
-    "MELMETAL": "Melmetal non può ottenere ATK_SPEED. La ATK_SPEED ottenuta viene convertita in ATK (il 10% della ATK_SPEED diviso per 3 di ATK)."
+    "MELMETAL": "Melmetal non può ottenere ATK_SPEED. La ATK_SPEED ottenuta viene convertita in ATK (il 10% della ATK_SPEED diviso per 3 di ATK).",
+    "SKARMORY": "All'inizio del combattimento, Skarmory disperde punte sul terreno. Le punte rimangono sul terreno, infliggendo 10 TRUE al secondo e causano ARMOR_REDUCTION ai Pokèmon che ci camminano sopra, tranne ai Pokèmon FLYING.",
+    "DURANT": "Gli attacchi base di Durant infliggono 1 danno puro extra per ogni alleato BUG sul tuo terreno.",
+    "OGERPON_TEAL": "Ogerpon può equipaggiare la TEAL_MASK, la HEARTHFLAME_MASK, la WELLSPRING_MASK e la CORNERSTONE_MASK per cambiare la sua forma. Quando Ogerpon lancia la sua abilità, cura [20,SP] HP agli alleati adiacenti.",
+    "OGERPON_WELLSPRING": "Ogerpon può equipaggiare la TEAL_MASK, la HEARTHFLAME_MASK, la WELLSPRING_MASK e la CORNERSTONE_MASK per cambiare la sua forma. Quando Ogerpon lancia la sua abilità, dai 10 PP agli alleati adiacenti",
+    "OGERPON_HEARTHFLAME": "Ogerpon può equipaggiare la TEAL_MASK, la HEARTHFLAME_MASK, la WELLSPRING_MASK e la CORNERSTONE_MASK per cambiare la sua forma. Quando Ogerpon lancia la sua abilità, infliggi BURN ai nemici adiacenti per 2 secondi.",
+    "OGERPON_CORNERSTONE": "Ogerpon può equipaggiare la TEAL_MASK, la HEARTHFLAME_MASK, la WELLSPRING_MASK e la CORNERSTONE_MASK per cambiare la sua forma. Quando Ogerpon lancia la sua abilità, causa FLINCH ai nemici adiacenti per 5 secondi."
   },
   "stat": {
     "ATK": "Attacco",
