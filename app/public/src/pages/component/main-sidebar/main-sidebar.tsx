@@ -7,6 +7,7 @@ import { GADGETS } from "../../../../../core/gadgets"
 import { Role } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { setSearchedUser } from "../../../stores/LobbyStore"
+import { toggleFullScreen } from "../../utils/fullscreen"
 import { cc } from "../../utils/jsx"
 import Booster from "../booster/booster"
 import TeamBuilderModal from "../bot-builder/team-builder-modal"
@@ -204,6 +205,13 @@ export function MainSidebar(props: MainSidebarProps) {
         <NavLink svg="options" location="options" handleClick={changeModal}>
           {t("options")}
         </NavLink>
+
+        {page === "game" && document.fullscreenEnabled && <NavLink
+          svg="fullscreen"
+          onClick={toggleFullScreen}
+        >
+          {t("toggle_fullscreen")}
+        </NavLink>}
 
         <div className="spacer"></div>
 

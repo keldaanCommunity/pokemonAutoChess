@@ -32,7 +32,6 @@ import { addWanderingPokemon } from "../game/components/pokemon"
 import GameContainer from "../game/game-container"
 import GameScene from "../game/scenes/game-scene"
 import { selectCurrentPlayer, useAppDispatch, useAppSelector } from "../hooks"
-import { loadPreferences } from "../preferences"
 import store from "../stores"
 import {
   addDpsMeter,
@@ -76,6 +75,7 @@ import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { playMusic, preloadMusic } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import { FIREBASE_CONFIG, getPortraitPath } from "./utils/utils"
+import { enterFullScreen, exitFullScreen } from "./utils/fullscreen"
 
 let gameContainer: GameContainer
 
@@ -752,14 +752,3 @@ export default function Game() {
   )
 }
 
-function enterFullScreen() {
-  if (document.fullscreenEnabled && loadPreferences().fullscreen) {
-    document.body.requestFullscreen()
-  }
-}
-
-function exitFullScreen() {
-  if (document.fullscreenEnabled) {
-    document.exitFullscreen()
-  }
-}
