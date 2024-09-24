@@ -33,4 +33,6 @@
 
 # Bugfix
 
+- fix regional variants of additional pokemons not being immediately available after the additional pokemon being picked
+
 # Misc
