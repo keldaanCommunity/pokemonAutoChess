@@ -3,6 +3,7 @@ import { initReactI18next } from "react-i18next"
 
 import LanguageDetector from "i18next-browser-languagedetector"
 import Backend from "i18next-http-backend"
+import pkg from "../../../package.json"
 // don't want to use this?
 // have a look at the Quick start guide
 // for passing in lng and translations on init
@@ -23,7 +24,9 @@ i18n
     fallbackLng: "en",
     debug: process.env.NODE_ENV !== "production",
     backend: {
-      loadPath: "locales/{{lng}}/{{ns}}.json"
+      loadPath(lngs, namespaces) {
+        return `locales/{{lng}}/{{ns}}.json?v=${pkg.version}`
+      }
     },
     interpolation: {
       escapeValue: false // not needed for react as it escapes by default
