@@ -17,7 +17,10 @@
     "url": "https://github.com/keldaanCommunity/pokemonAutoChess/issues"
   },
   "author": "keldaan-ag",
-  "contributors": ["ogus", "sylvainpolletvillard"],
+  "contributors": [
+    "ogus",
+    "sylvainpolletvillard"
+  ],
   "main": "public/dist/server/app/index.js",
   "scripts": {
     "reset": "rimraf -rf node_modules/",
@@ -27,7 +30,7 @@
     "lint": "npx @biomejs/biome lint app/",
     "build-client": "node esbuild.js --build",
     "build-server": "tsc",
-    "download-music": "rimraf -rf ./app/public/src/assets/musics && git clone https://github.com/keldaanCommunity/pokemonAutoChessMusic ./app/public/src/assets/musics",
+    "download-music": "rimraf -rf ./app/public/src/assets/musics && degit https://github.com/keldaanCommunity/pokemonAutoChessMusic ./app/public/src/assets/musics",
     "build": "npm run build-client && npm run build-server",
     "start": "node ./app/public/dist/server/app/index.js",
     "add-bot": "node ./app/public/dist/server/db-commands/populate-bot.js",
@@ -109,6 +112,7 @@
     "@types/node-fetch": "^2.6.11",
     "@types/react-dom": "^18.2.17",
     "csv-writer": "^1.6.0",
+    "degit": "^2.8.4",
     "esbuild": "^0.23.0",
     "npm-run-all": "^4.1.5",
     "openapi-typescript": "^7.1.2",
