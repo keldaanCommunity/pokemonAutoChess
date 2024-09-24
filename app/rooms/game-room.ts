@@ -108,6 +108,7 @@ export default class GameRoom extends Room<GameState> {
     noElo: boolean
     gameMode: GameMode
     minRank: EloRank | null
+    maxRank: EloRank | null
     tournamentId: string | null
     bracketId: string | null
   }) {
@@ -134,7 +135,8 @@ export default class GameRoom extends Room<GameState> {
         options.name,
         options.noElo,
         options.gameMode,
-        options.minRank
+        options.minRank,
+        options.maxRank
       )
     )
     this.miniGame.create(

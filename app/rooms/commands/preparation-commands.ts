@@ -19,6 +19,7 @@ import { pickRandomIn } from "../../utils/random"
 import { entries, values } from "../../utils/schemas"
 import PreparationRoom from "../preparation-room"
 import { CloseCodes } from "../../types/enum/CloseCodes"
+import { getRank } from "../../utils/elo"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -37,7 +38,10 @@ export class OnJoinCommand extends Command<
         client.leave(CloseCodes.ROOM_FULL)
         return
       }
-      if (this.state.ownerId == "" && this.state.gameMode === GameMode.NORMAL) {
+      if (
+        this.state.ownerId == "" &&
+        this.state.gameMode === GameMode.CUSTOM_LOBBY
+      ) {
         this.state.ownerId = auth.uid
       }
       if (this.state.users.has(auth.uid)) {
@@ -67,6 +71,16 @@ export class OnJoinCommand extends Command<
             return
           }
 
+          if (
+            this.state.maxRank != null &&
+            u.elo &&
+            EloRankThreshold[getRank(u.elo)] >
+              EloRankThreshold[this.state.maxRank]
+          ) {
+            client.leave(CloseCodes.USER_RANK_TOO_HIGH)
+            return
+          }
+
           this.state.users.set(
             client.auth.uid,
             new GameUser(
@@ -91,7 +105,7 @@ export class OnJoinCommand extends Command<
             })
           }
 
-          if (this.state.gameMode !== GameMode.NORMAL) {
+          if (this.state.gameMode !== GameMode.CUSTOM_LOBBY) {
             this.clock.setTimeout(() => {
               if (
                 this.state.users.has(u.uid) &&
@@ -176,7 +190,7 @@ export class OnGameStartRequestCommand extends Command<
         return
       }
 
-      if (!allUsersReady && this.state.gameMode === GameMode.NORMAL) {
+      if (!allUsersReady && this.state.gameMode === GameMode.CUSTOM_LOBBY) {
         this.state.addMessage({
           authorId: "Server",
           payload: `Not all players are ready.`,
@@ -499,7 +513,8 @@ export class OnToggleReadyCommand extends Command<
   execute({ client, ready }) {
     try {
       // cannot toggle ready in quick play / ranked / tournament game mode
-      if (this.room.state.gameMode !== GameMode.NORMAL && ready !== true) return
+      if (this.room.state.gameMode !== GameMode.CUSTOM_LOBBY && ready !== true)
+        return
 
       // logger.debug(this.state.users.get(client.auth.uid).ready);
       if (client.auth?.uid && this.state.users.has(client.auth.uid)) {
@@ -514,7 +529,7 @@ export class OnToggleReadyCommand extends Command<
           : MAX_PLAYERS_PER_GAME
 
       if (
-        this.state.gameMode !== GameMode.NORMAL &&
+        this.state.gameMode !== GameMode.CUSTOM_LOBBY &&
         this.state.users.size === nbExpectedPlayers &&
         values(this.state.users).every((user) => user.ready)
       ) {

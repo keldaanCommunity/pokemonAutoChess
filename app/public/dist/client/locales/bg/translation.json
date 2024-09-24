@@ -1788,7 +1788,7 @@
   "private": "Частно",
   "available_rooms": "Свободни стаи",
   "in_game": "В игра",
-  "create_custom_room": "Създаване на стая",
+  "custom_room": "Създаване на стая",
   "loading": "Зареждане...",
   "leaderboard": "класация",
   "rooms": "Стаи",

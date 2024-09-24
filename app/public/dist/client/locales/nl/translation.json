@@ -1755,7 +1755,7 @@
   "private": "Privaat",
   "available_rooms": "Beschikbare kamers",
   "in_game": "In het spel",
-  "create_custom_room": "Ruimte creëren",
+  "custom_room": "Ruimte creëren",
   "loading": "Bezig met laden...",
   "leaderboard": "Scorebord",
   "rooms": "Kamers",

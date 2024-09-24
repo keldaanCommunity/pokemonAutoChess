@@ -80,7 +80,7 @@ export default function PreparationMenu() {
   }, [nbUsersReady, users.length, allUsersReady])
 
   useEffect(() => {
-    if (gameMode !== GameMode.NORMAL) {
+    if (gameMode !== GameMode.CUSTOM_LOBBY) {
       dispatch(toggleReady(true)) // automatically set users ready in non-classic game mode
     }
   }, [gameMode, dispatch])
@@ -173,13 +173,13 @@ export default function PreparationMenu() {
         <p>{t("not_elligible_elo_hint")}</p>
       ) : null}
 
-      {gameMode === GameMode.NORMAL && users.length === 1 && (
+      {gameMode === GameMode.CUSTOM_LOBBY && users.length === 1 && (
         <p>{t("add_bot_or_wait_hint")}</p>
       )}
     </>
   )
 
-  const roomPrivateButton = gameMode === GameMode.NORMAL &&
+  const roomPrivateButton = gameMode === GameMode.CUSTOM_LOBBY &&
     (isOwner || isAdmin) && (
       <button
         className="bubbly blue"
@@ -192,7 +192,7 @@ export default function PreparationMenu() {
       </button>
     )
 
-  const roomEloButton = gameMode === GameMode.NORMAL &&
+  const roomEloButton = gameMode === GameMode.CUSTOM_LOBBY &&
     (isOwner || isAdmin) && (
       <button
         className="bubbly blue"
@@ -203,7 +203,7 @@ export default function PreparationMenu() {
       </button>
     )
 
-  const roomNameInput = gameMode === GameMode.NORMAL &&
+  const roomNameInput = gameMode === GameMode.CUSTOM_LOBBY &&
     (isOwner || isModerator || isAdmin) &&
     user &&
     !user.anonymous && (
@@ -227,7 +227,7 @@ export default function PreparationMenu() {
       </div>
     )
 
-  const botControls = gameMode === GameMode.NORMAL && (isOwner || isAdmin) && (
+  const botControls = gameMode === GameMode.CUSTOM_LOBBY && (isOwner || isAdmin) && (
     <div className="my-input-group">
       <button
         className="bubbly blue"
@@ -257,7 +257,7 @@ export default function PreparationMenu() {
     </div>
   )
 
-  const roomInfo = gameMode === GameMode.NORMAL && (
+  const roomInfo = gameMode === GameMode.CUSTOM_LOBBY && (
     <p className="room-info">
       {t("room_leader")}: {ownerName}{" "}
       {password && (
@@ -269,7 +269,7 @@ export default function PreparationMenu() {
     </p>
   )
 
-  const readyButton = (gameMode === GameMode.NORMAL || !isReady) && users.length > 0 && (
+  const readyButton = (gameMode === GameMode.CUSTOM_LOBBY || !isReady) && users.length > 0 && (
     <button
       className={cc("bubbly", "ready-button", isReady ? "green" : "orange")}
       onClick={() => {

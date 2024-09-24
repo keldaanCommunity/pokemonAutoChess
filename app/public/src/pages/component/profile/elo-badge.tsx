@@ -1,7 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { EloRankThreshold } from "../../../../../types/Config"
-import { EloRank } from "../../../../../types/enum/EloRank"
+import { getRank } from "../../../../../utils/elo"
 import "./elo-badge.css"
 
 export function EloBadge(props: { elo: number }) {
@@ -17,14 +16,4 @@ export function EloBadge(props: { elo: number }) {
       <p style={{ margin: 0 }}>{props.elo}</p>
     </div>
   )
-}
-
-function getRank(elo: number) {
-  let rank = EloRank.BEGINNER
-  ;(Object.keys(EloRankThreshold) as EloRank[]).forEach((e) => {
-    if (elo > EloRankThreshold[e]) {
-      rank = e
-    }
-  })
-  return rank
 }

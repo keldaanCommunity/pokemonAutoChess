@@ -50,6 +50,7 @@ import {
   GiveRoleCommand,
   GiveTitleCommand,
   HeapSnapshotCommand,
+  JoinOrOpenRoomCommand,
   NextTournamentStageCommand,
   OnCreateTournamentCommand,
   OnJoinCommand,
@@ -58,7 +59,6 @@ import {
   OnSearchByIdCommand,
   OnSearchCommand,
   OpenBoosterCommand,
-  OpenSpecialGameCommand,
   ParticipateInTournamentCommand,
   RemoveMessageCommand,
   RemoveTournamentCommand,
@@ -121,7 +121,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
   async onCreate(): Promise<void> {
     logger.info("create lobby", this.roomId)
     this.setState(new LobbyState())
-    this.state.getNextSpecialGame()
     this.autoDispose = false
     this.listing.unlisted = true
 
@@ -155,6 +154,16 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     this.onMessage(Transfer.ADD_BOT_DATABASE, async (client, url) => {
       this.dispatcher.dispatch(new AddBotCommand(), { client, url })
     })
+
+    this.onMessage(
+      Transfer.REQUEST_ROOM,
+      async (client, gameMode: GameMode) => {
+        this.dispatcher.dispatch(new JoinOrOpenRoomCommand(), {
+          client,
+          gameMode
+        })
+      }
+    )
 
     this.onMessage(
       Transfer.SELECT_LANGUAGE,
@@ -389,23 +398,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       }
     )
 
-    this.presence.subscribe(
-      "lobby-full",
-      (params: {
-        gameMode: GameMode
-        minRank: EloRank | null
-        noElo?: boolean
-      }) => {
-        // open another special lobby when the previous one is full
-        if (
-          params.gameMode === GameMode.RANKED ||
-          params.gameMode === GameMode.SCRIBBLE
-        ) {
-          this.dispatcher.dispatch(new OpenSpecialGameCommand(), params)
-        }
-      }
-    )
-
     this.presence.subscribe("server-announcement", (message: string) => {
       this.state.addAnnouncement(message)
     })
@@ -594,44 +586,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
   initCronJobs() {
     logger.debug("init lobby cron jobs")
-    const greatBallRankedLobbyJob = CronJob.from({
-      cronTime: GREATBALL_RANKED_LOBBY_CRON,
-      timeZone: "Europe/Paris",
-      onTick: () => {
-        this.dispatcher.dispatch(new OpenSpecialGameCommand(), {
-          gameMode: GameMode.RANKED,
-          minRank: EloRank.GREATBALL
-        })
-      },
-      start: true
-    })
-    this.cleanUpCronJobs.push(greatBallRankedLobbyJob)
-
-    const ultraBallRankedLobbyJob = CronJob.from({
-      cronTime: ULTRABALL_RANKED_LOBBY_CRON,
-      timeZone: "Europe/Paris",
-      onTick: () => {
-        this.dispatcher.dispatch(new OpenSpecialGameCommand(), {
-          gameMode: GameMode.RANKED,
-          minRank: EloRank.ULTRABALL
-        })
-      },
-      start: true
-    })
-    this.cleanUpCronJobs.push(ultraBallRankedLobbyJob)
-
-    const scribbleLobbyJob = CronJob.from({
-      cronTime: SCRIBBLE_LOBBY_CRON,
-      timeZone: "Europe/Paris",
-      onTick: () => {
-        this.dispatcher.dispatch(new OpenSpecialGameCommand(), {
-          gameMode: GameMode.SCRIBBLE,
-          noElo: true
-        })
-      },
-      start: true
-    })
-    this.cleanUpCronJobs.push(scribbleLobbyJob)
 
     if (process.env.NODE_APP_INSTANCE || process.env.MODE === "dev") {
       const staleJob = CronJob.from({

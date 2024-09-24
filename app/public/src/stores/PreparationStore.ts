@@ -30,7 +30,7 @@ const initialState: IUserPreparationState = {
   user: undefined,
   password: null,
   noElo: false,
-  gameMode: GameMode.NORMAL,
+  gameMode: GameMode.CUSTOM_LOBBY,
   whitelist: [],
   blacklist: []
 }
