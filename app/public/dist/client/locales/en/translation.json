@@ -2861,7 +2861,6 @@
   "patch_notes": "Patch Notes",
   "remove_bot": "Remove Bot",
   "kick_user": "Kick User",
-  "enter_password": "Enter a password for the room",
   "delete_room": "Delete room",
   "no_elo_hint": "This game is just for fun, no Elo gain/loss !",
   "elligible_elo_hint": "✔ This game is elligible for Elo gain/loss.",

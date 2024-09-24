@@ -2724,7 +2724,6 @@
   "patch_notes": "Notes de patch",
   "remove_bot": "Supprimer le bot",
   "kick_user": "Expulser l'utilisateur",
-  "enter_password": "Entrez un mot de passe pour le salon",
   "delete_room": "Supprimer le salon",
   "no_elo_hint": "Ce jeu est juste pour le plaisir, pas de gain/perte d'ELO !",
   "elligible_elo_hint": "✔ Ce jeu est éligible au gain/perte ELO.",

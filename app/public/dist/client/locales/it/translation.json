@@ -2854,7 +2854,6 @@
   "patch_notes": "Note della Patch",
   "remove_bot": "Rimuovi Bot",
   "kick_user": "Caccia l'utente",
-  "enter_password": "Inserisci una password per la stanza",
   "delete_room": "Elimina stanza",
   "no_elo_hint": "Questo gioco è solo per divertimento, nessun guadagno/perdita ELO!",
   "elligible_elo_hint": "✔ Questo gioco è idoneo per guadagni/perdite ELO.",

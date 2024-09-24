@@ -2773,7 +2773,6 @@
   "patch_notes": "Notas del Parche",
   "remove_bot": "Quitar Bot",
   "kick_user": "Expulsar al usuario",
-  "enter_password": "Introduce una contraseña para la Sala.",
   "delete_room": "Eliminar sala",
   "no_elo_hint": "¡Este juego es solo por diversión, sin ganancia/pérdida de ELO!",
   "elligible_elo_hint": "✔ Este juego es elegible para ganancia/pérdida de ELO.",

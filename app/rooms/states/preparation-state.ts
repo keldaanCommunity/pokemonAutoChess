@@ -40,6 +40,7 @@ export default class PreparationState
     minRank?: EloRank
     maxRank?: EloRank
     noElo?: boolean
+    password?: string
     gameMode: GameMode
     whitelist?: string[]
     blacklist?: string[]
@@ -50,7 +51,7 @@ export default class PreparationState
     this.name = params.roomName
     this.gameStartedAt = null
     this.ownerName = ""
-    this.password = null
+    this.password = params.password ?? null
     this.noElo = params.noElo ?? false
     this.minRank = params.minRank ?? null
     this.maxRank = params.maxRank ?? null

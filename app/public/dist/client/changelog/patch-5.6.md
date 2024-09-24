@@ -29,6 +29,11 @@
 
 # Gameplay
 
+- Ranked matches and Smeargle's Scribble can now be created at anytime from the New game menu
+- Ranked matches are now restricted to players of your current rank: not below, not above. They no longer give additional booster rewards to the winner.
+- Private lobbies passwords are now automatically generated and no longer customizable
+- Custom lobbies are now private by default
+
 # UI
 
 # Bugfix

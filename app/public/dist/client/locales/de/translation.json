@@ -2756,7 +2756,6 @@
   "patch_notes": "Hinweise zum Patch",
   "remove_bot": "Bot entfernen",
   "kick_user": "Benutzer rausschmeißen",
-  "enter_password": "Geben Sie ein Passwort für den Raum ein",
   "delete_room": "Raum löschen",
   "no_elo_hint": "Dieses Spiel dient nur zum Spaß, kein ELO-Gewinn/-Verlust!",
   "elligible_elo_hint": "✔ Dieses Spiel ist für ELO-Gewinne/-Verluste berechtigt.",

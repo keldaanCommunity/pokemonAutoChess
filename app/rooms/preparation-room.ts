@@ -70,6 +70,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     maxRank?: EloRank
     gameMode: GameMode
     noElo?: boolean
+    password?: string
     autoStartDelayInSeconds?: number
     whitelist?: string[]
     blacklist?: string[]
@@ -99,7 +100,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       tournamentId: options.tournamentId ?? null,
       bracketId: options.bracketId ?? null,
       gameStartedAt: null,
-      password: null,
+      password: options.password ?? null,
       type: "preparation"
     })
     this.maxClients = 8

@@ -2406,7 +2406,6 @@
   "patch_notes": "Anotações do Patch",
   "remove_bot": "Remover bot",
   "kick_user": "Expulsar usuário",
-  "enter_password": "Digite uma senha para a sala",
   "delete_room": "Excluir quarto",
   "no_elo_hint": "Este jogo é apenas para diversão, sem ganho/perda ELO!",
   "elligible_elo_hint": "✔ Este jogo é elegível para ganho/perda ELO.",

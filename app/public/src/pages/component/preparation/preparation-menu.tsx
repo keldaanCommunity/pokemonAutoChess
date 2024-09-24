@@ -94,7 +94,11 @@ export default function PreparationMenu() {
 
   function makePrivate() {
     if (password === null) {
-      const newPassword = prompt(t("enter_password"))
+      // generate a random password made of 4 characters
+      const newPassword = Math.random()
+        .toString(36)
+        .substring(2, 6)
+        .toUpperCase()
       dispatch(changeRoomPassword(newPassword))
     } else {
       dispatch(changeRoomPassword(null))

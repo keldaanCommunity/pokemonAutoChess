@@ -1025,6 +1025,7 @@ export class OpenGameCommand extends Command<
     let minRank: EloRank | null = null
     let maxRank: EloRank | null = null
     let noElo: boolean = false
+    let password: string | null = null
     let ownerId: string | null = null
 
     if (gameMode === GameMode.RANKED) {
@@ -1037,6 +1038,7 @@ export class OpenGameCommand extends Command<
       noElo = true
     } else if (gameMode === GameMode.CUSTOM_LOBBY) {
       ownerId = user.uid
+      password = Math.random().toString(36).substring(2, 6).toUpperCase()
     } else if (gameMode === GameMode.QUICKPLAY) {
       roomName = "Quick play"
     }
@@ -1046,6 +1048,7 @@ export class OpenGameCommand extends Command<
       minRank,
       maxRank,
       noElo,
+      password,
       ownerId,
       roomName
     })
