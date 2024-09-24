@@ -15025,7 +15025,7 @@ function ogerponOnAcquired(
 }
 
 export class OgerponTeal extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
@@ -15041,7 +15041,7 @@ export class OgerponTeal extends Pokemon {
 }
 
 export class OgerponTealMask extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
