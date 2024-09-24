@@ -52,7 +52,7 @@ if (process.env.NODE_APP_INSTANCE) {
   gameOptions = {
     presence: new RedisPresence(process.env.REDIS_URI),
     driver: new RedisDriver(process.env.REDIS_URI),
-    publicAddress: `${process.env.SERVER_NAME}/${port}`,
+    publicAddress: `${port}.${process.env.SERVER_NAME}`,
     selectProcessIdToCreateRoom: async function (
       roomName: string,
       clientOptions: any

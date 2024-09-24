@@ -259,7 +259,15 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.POIPOLE,
   Pkm.LUVDISC,
   Pkm.AUDINO,
-  Pkm.MANTYKE
+  Pkm.MANTYKE,
+  Pkm.DURANT,
+  Pkm.SKARMORY,
+  Pkm.SIGILYPH,
+  Pkm.OGERPON_TEAL,
+  Pkm.OGERPON_WELLSPRING,
+  Pkm.OGERPON_HEARTHFLAME,
+  Pkm.OGERPON_CORNERSTONE,
+  Pkm.IRON_HANDS
 )
 
 export const LegendaryShop = new Array<PkmProposition>(
@@ -310,7 +318,8 @@ export const LegendaryShop = new Array<PkmProposition>(
   Pkm.THUNDURUS,
   Pkm.LANDORUS,
   Pkm.ENAMORUS,
-  Pkm.MAGEARNA
+  Pkm.MAGEARNA,
+  Pkm.MELMETAL
 )
 
 export const NB_UNIQUE_PROPOSITIONS = 6
@@ -354,7 +363,7 @@ export const FishRarityProbability: {
 
 export const MAX_POOL_CONNECTIONS_SIZE = 16
 export const MAX_CONCURRENT_PLAYERS_ON_SERVER = 700
-export const MAX_CONCURRENT_PLAYERS_ON_LOBBY = 50
+export const MAX_CONCURRENT_PLAYERS_ON_LOBBY = 75
 export const MAX_PLAYERS_PER_GAME = 8
 export const MIN_HUMAN_PLAYERS = process.env.MIN_HUMAN_PLAYERS
   ? parseInt(process.env.MIN_HUMAN_PLAYERS)
@@ -694,7 +703,11 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.BLACK_AUGURITE]: {},
   [Item.POKERUS_VIAL]: {},
   [Item.ROTOM_PHONE]: {},
-  [Item.FIRE_SHARD]: {}
+  [Item.FIRE_SHARD]: {},
+  [Item.TEAL_MASK]: { [Stat.SHIELD]: 50 },
+  [Item.WELLSPRING_MASK]: { [Stat.SHIELD]: 50 },
+  [Item.CORNERSTONE_MASK]: { [Stat.SHIELD]: 50 },
+  [Item.HEARTHFLAME_MASK]: { [Stat.SHIELD]: 50 }
 }
 
 export type TilesetExchangeFile = {

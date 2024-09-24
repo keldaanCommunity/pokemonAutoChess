@@ -1,6 +1,6 @@
 # Pokemon Auto Chess
 
-- url: https://pokemon-auto-chess.com/
+- url: https://pokemon-auto-chess.com
 - logo: https://pokemon-auto-chess.com/assets/ui/pokemon_autochess_final.svg
 - creator: Keldaan
 - discord: https://discord.gg/6JMS7tr
@@ -20,7 +20,7 @@ German Community for Pokemon Auto Chess
 
 # Eternara PAC
 
-- url: https://eternara.site/
+- url: https://eternara.site
 - logo: https://i.ibb.co/FK0LzVB/pac-shiny-icon.png
 - creator: Nocifer shiroe
 - discord: https://discord.gg/GBaDes7kxX
@@ -39,7 +39,7 @@ The Pokémon Auto Chess League (PACL) is a league that runs events and tournamen
 
 # Penumbra Auto Chess
 
-- url: https://www.penumbra-autochess.com/
+- url: https://www.penumbra-autochess.com
 - logo: https://i.imgur.com/wclOp6U.png
 - creator: Kone
 - discord: https://discord.gg/jnwUBxKSqZ
@@ -49,7 +49,7 @@ First Thai Public Server with many Thai Pokemon Auto Chess Member. We have daily
 
 # PokeChessBR
 
-- url: https://pokechess.com.br/
+- url: https://pokechess.com.br
 - logo: https://i.ibb.co/GM3Q55w/logo-pokechessbr.jpg
 - creator: Dog e Bronzato
 - discord: https://discord.gg/55R8bHxCJg
@@ -59,7 +59,7 @@ O servidor PokeChessBR é a casa da comunidade brasileira dos amantes de Auto Ch
 
 #  UW Online POC
 
-- url: https://uruwhy.online/
+- url: https://uruwhy.online
 - logo: https://i.imgur.com/HA3p47P.png
 - creator: Gate
 - location: Brazil

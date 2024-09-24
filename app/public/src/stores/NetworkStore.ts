@@ -241,6 +241,9 @@ export const networkSlice = createSlice({
     ) => {
       state.lobby?.send(Transfer.GIVE_BOOSTER, action.payload)
     },
+    heapSnapshot: (state) => {
+      state.lobby?.send(Transfer.HEAP_SNAPSHOT)
+    },
     giveRole: (state, action: PayloadAction<{ uid: string; role: Role }>) => {
       state.lobby?.send(Transfer.SET_ROLE, action.payload)
     },
@@ -284,6 +287,7 @@ export const networkSlice = createSlice({
 })
 
 export const {
+  heapSnapshot,
   selectLanguage,
   unban,
   deleteBotDatabase,

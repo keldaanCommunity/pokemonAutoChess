@@ -84,7 +84,9 @@ export function getGameContainer(): GameContainer {
 }
 
 export function getGameScene(): GameScene | undefined {
-  return gameContainer?.game?.scene?.getScene<GameScene>("gameScene")
+  return gameContainer?.game?.scene?.getScene<GameScene>("gameScene") as
+    | GameScene
+    | undefined
 }
 
 export default function Game() {
@@ -134,7 +136,10 @@ export default function Game() {
             // store game token for 1 hour
             localStore.set(
               LocalStoreKeys.RECONNECTION_GAME,
-              { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
+              {
+                reconnectionToken: room.reconnectionToken,
+                roomId: room.roomId
+              },
               60 * 60
             )
             dispatch(joinGame(room))
@@ -253,7 +258,11 @@ export default function Game() {
       elligibleToXP,
       elligibleToELO
     })
-    localStore.set(LocalStoreKeys.RECONNECTION_AFTER_GAME, { reconnectionToken: r.reconnectionToken, roomId: r.roomId }, 30)
+    localStore.set(
+      LocalStoreKeys.RECONNECTION_AFTER_GAME,
+      { reconnectionToken: r.reconnectionToken, roomId: r.roomId },
+      30
+    )
     if (r.connection.isOpen) {
       await r.leave(false)
     }
@@ -266,13 +275,13 @@ export default function Game() {
 
   useEffect(() => {
     // create a history entry to prevent back button switching page immediately, and leave game properly instead
-    window.history.pushState(null, "", window.location.href);
+    window.history.pushState(null, "", window.location.href)
     const confirmLeave = () => {
       if (confirm("Do you want to leave game ?")) {
         leave()
       } else {
         // push again another entry to prevent back button from switching page, effectively canceling the back action
-        window.history.pushState(null, "", window.location.href);
+        window.history.pushState(null, "", window.location.href)
       }
     }
     // when pressing back button, properly leave game
@@ -350,7 +359,10 @@ export default function Game() {
       })
       room.onMessage(Transfer.SHOW_EMOTE, (message) => {
         const g = getGameScene()
-        if (g?.minigameManager?.pokemons?.size && g.minigameManager.pokemons.size > 0) {
+        if (
+          g?.minigameManager?.pokemons?.size &&
+          g.minigameManager.pokemons.size > 0
+        ) {
           // early return here to prevent showing animation twice
           return g.minigameManager?.showEmote(message.id, message?.emote)
         }
@@ -580,7 +592,12 @@ export default function Game() {
             ]
             fields.forEach((field) => {
               experienceManager.listen(field, (value) => {
-                dispatch(updateExperienceManager({ ...experienceManager, [field]: value } as IExperienceManager))
+                dispatch(
+                  updateExperienceManager({
+                    ...experienceManager,
+                    [field]: value
+                  } as IExperienceManager)
+                )
               })
             })
           }
@@ -671,12 +688,16 @@ export default function Game() {
 
         player.pokemonsProposition.onAdd(() => {
           if (player.id == uid) {
-            dispatch(setPokemonProposition(player.pokemonsProposition.map(p => p)))
+            dispatch(
+              setPokemonProposition(player.pokemonsProposition.map((p) => p))
+            )
           }
         })
         player.pokemonsProposition.onRemove(() => {
           if (player.id == uid) {
-            dispatch(setPokemonProposition(player.pokemonsProposition.map(p => p)))
+            dispatch(
+              setPokemonProposition(player.pokemonsProposition.map((p) => p))
+            )
           }
         })
       })

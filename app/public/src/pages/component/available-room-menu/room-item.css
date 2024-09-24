@@ -14,7 +14,9 @@
 .room-item .icon {
   width: 2em;
   height: 2em;
-  &.noelo, &.scribble, &.quickplay {
+  &.noelo,
+  &.scribble,
+  &.quickplay {
     border-radius: 50%;
   }
 }

@@ -1,5 +1,5 @@
 import { NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
-import { RoomAvailable, Room } from "colyseus.js"
+import { RoomAvailable, Room, Client } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import { t } from "i18next"
 import { NavigateFunction } from "react-router-dom"
@@ -9,6 +9,7 @@ import {
   TournamentBracketSchema
 } from "../../../models/colyseus-models/tournament"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
+import PreparationState from "../../../rooms/states/preparation-state"
 import {
   ICustomLobbyState,
   Transfer,
@@ -30,13 +31,13 @@ import {
   addTournamentBracket,
   changeTournamentBracket,
   removeTournamentBracket,
-  setNextSpecialGame,
   pushBotLog,
   addRoom,
   removeRoom,
   setSearchedUser,
   setBoosterContent,
-  setSuggestions
+  setSuggestions,
+  leaveLobby
 } from "../stores/LobbyStore"
 import {
   logIn,
@@ -101,9 +102,10 @@ export async function joinLobbyRoom(
           room.onLeave((code: number) => {
             logger.info(`left lobby with code ${code}`)
             const shouldGoToLoginPage =
-              code === CloseCodes.USER_INACTIVE ||
-              code === CloseCodes.USER_BANNED ||
-              code === CloseCodes.USER_NOT_AUTHENTICATED
+              window.location.pathname === "/lobby" &&
+              (code === CloseCodes.USER_INACTIVE ||
+                code === CloseCodes.USER_BANNED ||
+                code === CloseCodes.USER_NOT_AUTHENTICATED)
             if (shouldGoToLoginPage) {
               const errorMessage = CloseCodesMessages[code]
               if (errorMessage) {
@@ -219,10 +221,6 @@ export async function joinLobbyRoom(
             dispatch(removeTournament(tournament))
           })
 
-          room.state.listen("nextSpecialGame", (specialGame) => {
-            dispatch(setNextSpecialGame(specialGame))
-          })
-
           room.onMessage(Transfer.BANNED, (message) => {
             alert(message)
           })
@@ -233,6 +231,16 @@ export async function joinLobbyRoom(
 
           room.onMessage(Transfer.ROOMS, (rooms: RoomAvailable[]) => {
             rooms.forEach((room) => dispatch(addRoom(room)))
+          })
+
+          room.onMessage(Transfer.REQUEST_ROOM, async (roomId: string) => {
+            joinExistingPreparationRoom(
+              roomId,
+              client,
+              lobby,
+              dispatch,
+              navigate
+            )
           })
 
           room.onMessage(Transfer.ADD_ROOM, ([, room]) => {
@@ -286,4 +294,37 @@ export async function joinLobbyRoom(
   })
 
   return promise
+}
+
+export async function joinExistingPreparationRoom(
+  roomId: string,
+  client: Client,
+  lobby: Room<ICustomLobbyState> | undefined,
+  dispatch: AppDispatch,
+  navigate: NavigateFunction
+) {
+  try {
+    const token = await firebase.auth().currentUser?.getIdToken()
+    if (token) {
+      const room: Room<PreparationState> = await client.joinById(roomId, {
+        idToken: token
+      })
+      localStore.set(
+        LocalStoreKeys.RECONNECTION_PREPARATION,
+        {
+          reconnectionToken: room.reconnectionToken,
+          roomId: room.roomId
+        },
+        30
+      )
+      await Promise.allSettled([
+        lobby?.connection.isOpen && lobby.leave(false),
+        room.connection.isOpen && room.leave(false)
+      ])
+      dispatch(leaveLobby())
+      navigate("/preparation")
+    }
+  } catch (error) {
+    logger.error(error)
+  }
 }

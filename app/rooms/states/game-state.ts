@@ -20,7 +20,7 @@ import {
 } from "../../types/Config"
 import { GameMode, GamePhaseState } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
-import { Pkm, PkmProposition } from "../../types/enum/Pokemon"
+import { Pkm } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Weather } from "../../types/enum/Weather"
 import { pickRandomIn, randomBetween } from "../../utils/random"
@@ -39,7 +39,7 @@ export default class GameState extends Schema {
   @type("uint8") stageLevel = 1
   @type("string") weather: Weather
   @type("boolean") noElo = false
-  @type("string") gameMode: GameMode = GameMode.NORMAL
+  @type("string") gameMode: GameMode = GameMode.CUSTOM_LOBBY
   @type({ set: "string" }) spectators = new SetSchema<string>()
   @type({ map: Simulation }) simulations = new MapSchema<Simulation>()
   @type("uint8") lightX = randomBetween(0, BOARD_WIDTH - 1)
@@ -60,13 +60,15 @@ export default class GameState extends Schema {
   pveRewards: Item[] = []
   pveRewardsPropositions: Item[] = []
   minRank: EloRank | null = null
+  maxRank: EloRank | null = null
 
   constructor(
     preparationId: string,
     name: string,
     noElo: boolean,
     gameMode: GameMode,
-    minRank: EloRank | null
+    minRank: EloRank | null,
+    maxRank: EloRank | null
   ) {
     super()
     this.preparationId = preparationId
@@ -75,6 +77,7 @@ export default class GameState extends Schema {
     this.noElo = noElo
     this.gameMode = gameMode
     this.minRank = minRank
+    this.maxRank = maxRank
     this.weather = Weather.NEUTRAL
 
     if (gameMode === GameMode.SCRIBBLE) {

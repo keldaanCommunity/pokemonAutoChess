@@ -1,13 +1,14 @@
 import { XMLParser } from "fast-xml-parser"
 import fs from "fs"
 import gracefulFs from "graceful-fs"
-import Jimp from "jimp"
+import { Jimp } from "jimp"
 import { AnimationType } from "../app/types/Animation"
 import { PokemonTint, SpriteType } from "../app/types/enum/Game"
 import { AnimationConfig, Pkm, PkmIndex } from "../app/types/enum/Pokemon"
 import { logger } from "../app/utils/logger"
-import * as pathlib from 'path'
-import * as os from 'os'
+import * as pathlib from "path"
+import * as os from "os"
+import { ensureDir } from "fs-extra"
 
 gracefulFs.gracefulify(fs)
 const args = process.argv.slice(2)
@@ -15,12 +16,11 @@ const path = args[0]
 const specificIndexToSplit = args[1]
 
 function expandHomeDir(filePath: string): string {
-  if (filePath.startsWith('~')) {
-    return pathlib.join(os.homedir(), filePath.slice(1));
+  if (filePath.startsWith("~")) {
+    return pathlib.join(os.homedir(), filePath.slice(1))
   }
-  return filePath;
+  return filePath
 }
-
 
 interface IPMDCollab {
   AnimData: IAnimData
@@ -73,8 +73,7 @@ async function splitAll() {
 
     logger.debug(
       `${i}/${pkmaIndexes.length - 1} (${(
-        (i * 100) /
-        (pkmaIndexes.length - 1)
+        (i * 100) / (pkmaIndexes.length - 1)
       ).toFixed(2)}%) #${index} ${mapName.get(index)}`
     )
 
@@ -97,10 +96,7 @@ export function loadDurationsFile() {
 
 export function loadDelaysFile() {
   try {
-    const rawdata = fs.readFileSync(
-      "../app/types/delays.json",
-      "utf8"
-    )
+    const rawdata = fs.readFileSync("../app/types/delays.json", "utf8")
     Object.assign(delays, JSON.parse(rawdata))
     logger.debug(
       `Loaded delays file, ${
@@ -201,7 +197,9 @@ async function splitIndex(index: string) {
     const pad = allPads[j]
     try {
       const shiny = pathIndex == pad ? PokemonTint.NORMAL : PokemonTint.SHINY
-      const xmlFile = fs.readFileSync(expandHomeDir(`${path}/sprite/${pad}/AnimData.xml`))
+      const xmlFile = fs.readFileSync(
+        expandHomeDir(`${path}/sprite/${pad}/AnimData.xml`)
+      )
       const parser = new XMLParser()
       const xmlData = <IPMDCollab>parser.parse(xmlFile)
       const attackMetadata = xmlData.AnimData.Anims.Anim.find(
@@ -248,75 +246,80 @@ async function splitIndex(index: string) {
         for (let l = 0; l < actions.length; l++) {
           const action = actions[l]
           try {
-            let img
             let metadata = xmlData.AnimData.Anims.Anim.find(
               (m) => m.Name == action
             )
-            if (metadata) {
-              if (metadata.CopyOf) {
-                img = await Jimp.read(
-                  expandHomeDir(`${path}/sprite/${pad}/${metadata.CopyOf}-${anim}.png`)
-                )
-                metadata = xmlData.AnimData.Anims.Anim.find(
-                  (m) => m.Name == metadata?.CopyOf
-                )
-              } else {
-                img = await Jimp.read(
-                  expandHomeDir(`${path}/sprite/${pad}/${action}-${anim}.png`)
-                )
-              }
-
-              durations[`${index}/${shiny}/${action}/${anim}`] =
-                metadata?.Durations.Duration.length !== undefined
-                  ? [...metadata?.Durations.Duration]
-                  : [metadata?.Durations.Duration]
-              const frameHeight = metadata?.FrameHeight
-              const frameWidth = metadata?.FrameWidth
-
-              if (frameWidth && frameHeight) {
-                const width = img.getWidth() / frameWidth
-                const height = img.getHeight() / frameHeight
-                // logger.debug('img', index, 'action', action, 'frame height', metadata.FrameHeight, 'frame width', metadata.FrameWidth, 'width', img.getWidth(), 'height', img.getHeight(), ':', width, height);
-                for (let x = 0; x < width; x++) {
-                  for (let y = 0; y < height; y++) {
-                    const cropImg = img.clone()
-
-                    if (anim == SpriteType.SHADOW) {
-                      const shadow = xmlData.AnimData.ShadowSize
-                      if (shadow == 0) {
-                        removeRed(cropImg)
-                        removeBlue(cropImg)
-                      } else if (shadow == 1) {
-                        removeBlue(cropImg)
-                      }
-                      // transform to black
-                      cropImg.scan(
-                        0,
-                        0,
-                        cropImg.bitmap.width,
-                        cropImg.bitmap.height,
-                        (x, y, idx) => {
-                          if (cropImg.bitmap.data[idx + 3] != 0) {
-                            cropImg.bitmap.data[idx] = 0
-                            cropImg.bitmap.data[idx + 1] = 0
-                            cropImg.bitmap.data[idx + 2] = 0
-                          }
-                        }
-                      )
-                    }
-
-                    cropImg.crop(
-                      x * frameWidth,
-                      y * frameHeight,
-                      frameWidth,
-                      frameHeight
+            const img =
+              metadata && metadata.CopyOf
+                ? await Jimp.read(
+                    expandHomeDir(
+                      `${path}/sprite/${pad}/${metadata.CopyOf}-${anim}.png`
                     )
+                  )
+                : await Jimp.read(
+                    expandHomeDir(`${path}/sprite/${pad}/${action}-${anim}.png`)
+                  )
 
-                    const writePath = `split/${index}/${shiny}/${action}/${anim}/${y}/${zeroPad(
+            if (metadata && metadata.CopyOf) {
+              metadata = xmlData.AnimData.Anims.Anim.find(
+                (m) => m.Name == metadata?.CopyOf
+              )
+            }
+
+            durations[`${index}/${shiny}/${action}/${anim}`] =
+              metadata?.Durations.Duration.length !== undefined
+                ? [...metadata?.Durations.Duration]
+                : [metadata?.Durations.Duration]
+            const frameHeight = metadata?.FrameHeight
+            const frameWidth = metadata?.FrameWidth
+
+            if (frameWidth && frameHeight) {
+              const width = img.width / frameWidth
+              const height = img.height / frameHeight
+              // logger.debug('img', index, 'action', action, 'frame height', metadata.FrameHeight, 'frame width', metadata.FrameWidth, 'width', img.getWidth(), 'height', img.getHeight(), ':', width, height);
+              for (let x = 0; x < width; x++) {
+                for (let y = 0; y < height; y++) {
+                  const cropImg = img.clone()
+
+                  if (anim == SpriteType.SHADOW) {
+                    const shadow = xmlData.AnimData.ShadowSize
+                    if (shadow == 0) {
+                      removeRed(cropImg)
+                      removeBlue(cropImg)
+                    } else if (shadow == 1) {
+                      removeBlue(cropImg)
+                    }
+                    // transform to black
+                    cropImg.scan(
+                      0,
+                      0,
+                      cropImg.bitmap.width,
+                      cropImg.bitmap.height,
+                      (x, y, idx) => {
+                        if (cropImg.bitmap.data[idx + 3] != 0) {
+                          cropImg.bitmap.data[idx] = 0
+                          cropImg.bitmap.data[idx + 1] = 0
+                          cropImg.bitmap.data[idx + 2] = 0
+                        }
+                      }
+                    )
+                  }
+
+                  cropImg.crop({
+                    x: x * frameWidth,
+                    y: y * frameHeight,
+                    w: frameWidth,
+                    h: frameHeight
+                  })
+
+                  await ensureDir(
+                    `split/${index}/${shiny}/${action}/${anim}/${y}`
+                  )
+                  await cropImg.write(
+                    `split/${index}/${shiny}/${action}/${anim}/${y}/${zeroPad(
                       x
                     )}.png`
-                    await cropImg.writeAsync(writePath)
-                  }
+                  )
                 }
               }
             }

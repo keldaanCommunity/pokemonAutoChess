@@ -485,15 +485,21 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     apBoost: number,
     crit: boolean
   ) {
-    value =
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    const currentAtkSpeedBonus = 100 * (this.atkSpeed / 0.75 - 1)
-    const atkSpeedBonus = currentAtkSpeedBonus + value
-    this.atkSpeed = clamp(
-      roundTo2Digits(0.75 * (1 + atkSpeedBonus / 100)),
-      0.4,
-      2.5
-    )
+    if (this.passive === Passive.MELMETAL) {
+      this.addAttack(value * 0.3, caster, apBoost, crit)
+    } else {
+      value =
+        value *
+        (1 + (apBoost * caster.ap) / 100) *
+        (crit ? caster.critPower : 1)
+      const currentAtkSpeedBonus = 100 * (this.atkSpeed / 0.75 - 1)
+      const atkSpeedBonus = currentAtkSpeedBonus + value
+      this.atkSpeed = clamp(
+        roundTo2Digits(0.75 * (1 + atkSpeedBonus / 100)),
+        0.4,
+        2.5
+      )
+    }
   }
 
   addPsychicField() {
@@ -606,6 +612,36 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             break
           }
         }
+      }
+    }
+
+    if (this.status.stoneEdge) {
+      const tg = board.getValue(target.positionX, target.positionY)
+      if (tg) {
+        tg.handleDamage({
+          damage: Math.round(this.def * (1 + this.ap / 100)),
+          board,
+          attackType: AttackType.SPECIAL,
+          attacker: this,
+          shouldTargetGainMana: true
+        })
+      }
+    }
+
+    if (this.passive === Passive.DURANT) {
+      const bugAllies =
+        board.cells.filter(
+          (entity) =>
+            entity && entity.team === this.team && entity.types.has(Synergy.BUG)
+        ).length - 1
+      if (bugAllies > 0) {
+        target.handleDamage({
+          damage: bugAllies,
+          board,
+          attackType: AttackType.TRUE,
+          attacker: this,
+          shouldTargetGainMana: true
+        })
       }
     }
 
@@ -860,13 +896,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.types.has(Synergy.ICE)) {
       let freezeChance = 0
       if (this.effects.has(Effect.CHILLY)) {
-        freezeChance = 0.1
-      } else if (this.effects.has(Effect.FROSTY)) {
         freezeChance = 0.2
-      } else if (this.effects.has(Effect.FREEZING)) {
+      } else if (this.effects.has(Effect.FROSTY)) {
         freezeChance = 0.3
-      } else if (this.effects.has(Effect.SHEER_COLD)) {
+      } else if (this.effects.has(Effect.FREEZING)) {
         freezeChance = 0.4
+      } else if (this.effects.has(Effect.SHEER_COLD)) {
+        freezeChance = 0.5
       }
       if (chance(freezeChance)) {
         target.status.triggerFreeze(2000, target)
@@ -1261,7 +1297,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.AMULET_COIN) && this.player) {
-      this.player.money += 1
+      this.player.addMoney(1)
       this.count.moneyCount += 1
       this.count.amuletCoinCount += 1
     }
@@ -1270,8 +1306,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       const isLastEnemy =
         board.cells.some((p) => p && p.team !== this.team && p.life > 0) ===
         false
-      this.player.money += isLastEnemy ? 5 : 1
-      this.count.moneyCount += isLastEnemy ? 5 : 1
+      const moneyGained = isLastEnemy ? 5 : 1
+      this.player.addMoney(moneyGained)
+      this.count.moneyCount += moneyGained
     }
 
     if (

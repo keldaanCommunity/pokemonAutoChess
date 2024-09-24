@@ -50,7 +50,12 @@ export default function TournamentItem(props: {
   return (
     <div className="tournament-item my-box">
       <span className="tournament-name">
-        <img width="32" height="32" src="assets/ui/tournament.svg" style={{ marginRight: "0.5em", verticalAlign: "text-bottom" }} />
+        <img
+          width="32"
+          height="32"
+          src="assets/ui/tournament.svg"
+          style={{ marginRight: "0.5em", verticalAlign: "text-bottom" }}
+        />
         {props.tournament.name}
       </span>
       {tournamentFinished ? (
