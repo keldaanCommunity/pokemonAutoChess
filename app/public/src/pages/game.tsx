@@ -267,6 +267,7 @@ export default function Game() {
       await r.leave(false)
     }
     dispatch(leaveGame())
+    exitFullScreen()
     navigate("/after")
     if (room?.connection.isOpen) {
       room.leave()
@@ -753,6 +754,12 @@ export default function Game() {
 
 function enterFullScreen() {
   if (document.fullscreenEnabled && loadPreferences().fullscreen) {
-    document.getElementById("game-wrapper")?.requestFullscreen()
+    document.body.requestFullscreen()
+  }
+}
+
+function exitFullScreen() {
+  if (document.fullscreenEnabled) {
+    document.exitFullscreen()
   }
 }
