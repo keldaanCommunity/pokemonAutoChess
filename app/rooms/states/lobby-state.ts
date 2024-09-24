@@ -1,26 +1,13 @@
 import { ArraySchema, Schema, type } from "@colyseus/schema"
-import { CronTime } from "cron"
 import { nanoid } from "nanoid"
-import { SpecialGamePlannedSchema } from "../../models/colyseus-models/lobby"
 import Message from "../../models/colyseus-models/message"
 import { TournamentSchema } from "../../models/colyseus-models/tournament"
 import chatV2 from "../../models/mongo-models/chat-v2"
 import tournament from "../../models/mongo-models/tournament"
-import {
-  GREATBALL_RANKED_LOBBY_CRON,
-  SCRIBBLE_LOBBY_CRON,
-  ULTRABALL_RANKED_LOBBY_CRON
-} from "../../types/Config"
-import { EloRank } from "../../types/enum/EloRank"
-import { GameMode } from "../../types/enum/Game"
-import { ISpecialGamePlanned } from "../../types/interfaces/Lobby"
 import { logger } from "../../utils/logger"
 
 export default class LobbyState extends Schema {
   @type([Message]) messages = new ArraySchema<Message>()
-
-  @type(SpecialGamePlannedSchema) nextSpecialGame: ISpecialGamePlanned | null =
-    null
   @type([TournamentSchema]) tournaments = new ArraySchema<TournamentSchema>()
   @type("number") ccu = 0
 
@@ -69,41 +56,6 @@ export default class LobbyState extends Schema {
 
   addAnnouncement(message: string) {
     this.addMessage(message, "server", "Server Announcement", "0294/Joyous")
-  }
-
-  getNextSpecialGame() {
-    const getNextDate = (t: string) =>
-      new CronTime(t, "Europe/Paris").sendAt().toUnixInteger()
-    const nextGreatballRanked = getNextDate(GREATBALL_RANKED_LOBBY_CRON)
-    const nextUltraballRanked = getNextDate(ULTRABALL_RANKED_LOBBY_CRON)
-    const nextScribble = getNextDate(SCRIBBLE_LOBBY_CRON)
-    const nextSpecialGameDateInt = Math.min(
-      nextGreatballRanked,
-      nextUltraballRanked,
-      nextScribble
-    )
-    const nextSpecialGameDate = new Date(
-      nextSpecialGameDateInt * 1000
-    ).toISOString()
-
-    if (nextSpecialGameDateInt === nextGreatballRanked) {
-      this.nextSpecialGame = new SpecialGamePlannedSchema(
-        GameMode.RANKED,
-        nextSpecialGameDate,
-        EloRank.GREATBALL
-      )
-    } else if (nextSpecialGameDateInt === nextUltraballRanked) {
-      this.nextSpecialGame = new SpecialGamePlannedSchema(
-        GameMode.RANKED,
-        nextSpecialGameDate,
-        EloRank.ULTRABALL
-      )
-    } else if (nextSpecialGameDateInt === nextScribble) {
-      this.nextSpecialGame = new SpecialGamePlannedSchema(
-        GameMode.SCRIBBLE,
-        nextSpecialGameDate
-      )
-    }
   }
 
   async createTournament(name: string, startDate: string) {
