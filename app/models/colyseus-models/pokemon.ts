@@ -14636,7 +14636,7 @@ export class Seaking extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.NORMAL])
   rarity = Rarity.RARE
   stars = 2
-  hp = 200
+  hp = 250
   atk = 16
   def = 4
   speDef = 4

@@ -1463,7 +1463,7 @@
     "SHELL_SMASH": "Infliggi [15, 30,SP] SPECIAL ai nemici adiacenti; potenzi di 2 l' ATK, del 20% i AP e  di 20% l'ATK_SPEED e  riduci di 1 la DEF e di 1  la SPE_DEF.",
     "HELPING_HAND": "Dona [30,60,100,SP] SHIELD ai 2 alleati più vicini e raddoppia i danni della prossima abilità.",
     "ASTRAL_BARRAGE": "Manda all'attacco [3, SP=2] piccoli fantasmi a Pokémon avversari casuali. Ognuno di loro infligge 20 SPECIAL.",
-    "WATERFALL": "Provoca [30,60,120,SP] SHIELD  a se stesso, curati degli status negativi ed elimina l'effetto della cella occupata sul campo.",
+    "WATERFALL": "Provoca [50,100,150,SP] SHIELD  a se stesso, curati degli status negativi ed elimina l'effetto della cella occupata sul campo.",
     "PYRO_BALL": "L'utilizzatore attacca accendendo una piccola pietra e lanciandola come una palla infuocata contro il bersaglio più lontano, infliggendo [10,20,40,SP] SPECIAL e BURN per 2 secondi tutto ciò che incontra nel tragitto.",
     "WHIRLPOOL": "Punta sul nemico più lontano e scatena 4 mulinelli verso di lui. Ciascuno infligge il [125,SP]% ATK SPECIAL al primo nemico colpito.",
     "SMOKE_SCREEN": "Scava sottoterra e riappari al centro della squadra avversaria, infliggendo [10,20,40,SP] SPECIAL a tutte le unità adiacenti e riempi di fumo le retrovie, riducendo la loro precisione del 50%.",
