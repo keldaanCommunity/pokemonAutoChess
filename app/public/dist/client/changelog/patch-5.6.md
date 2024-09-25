@@ -25,6 +25,7 @@
 - Nerf High Jump Kick (Buneary, Bounsweet): steal ~~all PP~~ up to 70 PP from target
 - Buff Kyogre: PP 120 → 100, Primal Kyogre: PP 100 → 90
 - Buff Doom Desire (Jirachi): regain ~~60~~ 100 PP if target is KO in the mean time
+- Buff Luvdisc: Attack 11 → 15
 
 # Changes to Synergies
 

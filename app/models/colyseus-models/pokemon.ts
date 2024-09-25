@@ -14652,7 +14652,7 @@ export class Luvdisc extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 150
-  atk = 11
+  atk = 15
   def = 3
   speDef = 5
   maxPP = 60
