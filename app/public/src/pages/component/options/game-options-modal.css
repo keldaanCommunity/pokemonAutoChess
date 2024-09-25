@@ -1,15 +1,18 @@
-.game-options-modal{
-    width: min(95vw, 500px);
+.game-options-modal {
+  width: min(95vw, 500px);
 }
 
 .game-options-modal .modal-body {
-    line-height: 1.5;
+  line-height: 1.5;
 }
 
 .game-options-modal .modal-body p {
-    margin-bottom: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 .game-options-modal .modal-body p.info {
-    font-style: italic;
+  font-style: italic;
+  font-size: 80%;
+  line-height: 1.1;
+  margin: 0.5em 0;
 }

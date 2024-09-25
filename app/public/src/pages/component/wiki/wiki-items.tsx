@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import {
@@ -95,7 +94,7 @@ export default function WikiItems() {
         </table>
       </article>
       <article>
-        <h2 style={{ display: "flex", alignItems: "center" }}>
+        <h2>
           <SynergyIcon type={Synergy.GRASS} /> {t("berries")}
         </h2>
         <ul className="berries">
@@ -116,7 +115,7 @@ export default function WikiItems() {
         </ul>
       </article>
       <article>
-        <h2 style={{ display: "flex", alignItems: "center" }}>
+        <h2>
           <SynergyIcon type={Synergy.ARTIFICIAL} /> {t("artificial_items")}
         </h2>
         <ul className="artificial">
@@ -131,7 +130,7 @@ export default function WikiItems() {
           ))}
         </ul>
 
-        <h2 style={{ display: "flex", alignItems: "center" }}>
+        <h2>
           <SynergyIcon type={Synergy.ROCK} /> {t("weather_rocks")}
         </h2>
         <ul className="weather-rocks">

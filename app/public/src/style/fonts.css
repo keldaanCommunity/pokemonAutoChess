@@ -1,28 +1,24 @@
 @font-face {
-  font-family: BrandonGrotesqueBlack;
-  src: url("assets/ui/BrandonGrotesque-Black.woff2") format("opentype");
-}
-
-@font-face {
-  font-family: BrandonGrotesqueBold;
-  src: url("assets/ui/BrandonGrotesque-Bold.woff2") format("opentype");
+  font-family: Jost;
+  src: url("assets/ui/Jost-VF.ttf") format("truetype");
 }
 
 html {
-  --font-bold: BrandonGrotesqueBold;
-  --font-black: BrandonGrotesqueBlack;
+  font-family: Jost, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
 }
 
-html[lang="vi"]{
-  --font-bold: system-ui;
-  --font-black: system-ui;
+html[lang="vi"] {
+  font-family: system-ui;
 }
 
-body {
-  font-family: var(--font-black);
-  font-size: 18px;
+p,
+label,
+dt {
+  font-weight: normal;
 }
 
-p {
-  font-family: var(--font-bold);
+button {
+  font-weight: 600;
 }

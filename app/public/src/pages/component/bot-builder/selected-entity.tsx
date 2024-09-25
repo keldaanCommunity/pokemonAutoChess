@@ -43,7 +43,7 @@ export default function SelectedEntity(props: {
             isDark
           />
           <label>
-            {t("emotion_label")}:
+            {t("emotion_label")}:&nbsp;
             <select
               value={detailledPkm.emotion}
               onChange={(e) => {
