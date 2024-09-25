@@ -1514,7 +1514,7 @@
     "THUNDER_FANG": "[30,60,120,SP] SPECIAL을 입히고 3초 동안 PARALYSIS 를 부여한다.",
     "TAIL_WHIP": "타겟의 DEF 를 [30,SP]% 감소시킨다.",
     "PSYSHIELD_BASH": "적의 후방으로 돌진하여 경로상의 모든 적에게 [60,SP]의 SPECIAL 을 입히고 자신에게 1초 동안 PROTECT 를 건다.",
-    "QUIVER_DANCE": "ATK [5,SP], SPE_DEF [5,SP], ATK_SPEED  [20,SP]%,  와 AP 20%를 획득한다.",
+    "QUIVER_DANCE": "ATK [5,SP], SPE_DEF [5,SP], ATK_SPEED [10,SP]%, 와 AP 20%를 획득한다.",
     "TORCH_SONG": "[1,2,3]명의 가장 강한 적에게 맹렬한 불꽃을 뿜는다. 각 불꽃은 타겟과 인접한 적에게  [10,20,30,SP] SPECIAL을 입힌다. 적중 당한 적 중 BURN, CURSE 또는 SILENCE 상태 를 가진 적 한명당 10 AP를 얻는다.",
     "POWER_WHIP": "가장 먼 적을 목표로 거대한 덩굴을 풀어서 맞는 모든 적에게 [30,60,SP] SPECIAL를 입힌다.",
     "DARK_HARVEST": "포켓몬은 가장 큰 적 무리로  순간 이동한다. 다음 3초 동안 포켓몬은 SILENCE 에 빠지지만 초당 [5,10,20,SP]의 SPECIAL을 입히고, 입힌SPECIAL의 30%만큼 HP를 회복한다.",

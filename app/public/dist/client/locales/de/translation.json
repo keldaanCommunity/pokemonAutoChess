@@ -1517,7 +1517,7 @@
     "THUNDER_FANG": "Verursacht [30,60,120,SP] SPECIAL und fügt 3 Sekunden lang PARALYSIS zu",
     "TAIL_WHIP": "Verringert die DEF des Ziels um [30,SP] %.",
     "PSYSHIELD_BASH": "Rennt in den Rücken des Feindes und fügt allen Gegnern im Weg [60,SP] SPECIAL zu und PROTECT den Zaubernden 1 Sekunde lang",
-    "QUIVER_DANCE": "Erhält [5,SP] ATK, [5,SP] SPE_DEF, [20,SP]% ATK_SPEED und 20 AP",
+    "QUIVER_DANCE": "Erhält [5,SP] ATK, [5,SP] SPE_DEF, [10,SP]% ATK_SPEED und 20 AP",
     "TORCH_SONG": "Stößt wütende Flammen auf die [1,2,3] stärksten Gegner aus. Jede Flamme versengt das Ziel und benachbarte Einheiten für [10,20,30,SP] SPECIAL. Erhält 10 AP für jede getroffene Einheit mit dem Status BURN, CURSE oder SILENCE",
     "POWER_WHIP": "Erfasst den am weitesten entfernten Gegner und entfesselt eine riesige Ranke, die allen getroffenen Feinden [30,60,SP] SPECIAL zufügt.",
     "DARK_HARVEST": "Das Pokémon teleportiert sich in die größte Gruppe von Gegnern. Für die nächsten 3 Sekunden erleidet das Pokémon SILENCE und entzieht benachbarten Gegnern HP, fügt [5,10,20,SP] SPECIAL pro Sekunde zu und heilt HP für 30% der zugefügten SPECIAL",

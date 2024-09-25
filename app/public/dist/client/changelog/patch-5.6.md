@@ -31,6 +31,8 @@
 - Buff Wailmer line: PP 110 → 100
 - Nerf Doduo line: PP 70 → 80
 - Buff Seaking: HP 200 → 250 ; buff Waterfall: shield 30/60/120 → 50/100/150
+- Buff Carvanha line: PP 100 → 80
+- Nerf Quiver dance (Burmy): Attack speed buff 20% → 10%
 
 # Changes to Synergies
 

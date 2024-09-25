@@ -10728,7 +10728,7 @@ export class Carvanha extends Pokemon {
   atk = 12
   def = 1
   speDef = 2
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.BITE
   additional = true
@@ -10743,7 +10743,7 @@ export class Sharpedo extends Pokemon {
   atk = 28
   def = 2
   speDef = 3
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.BITE
   additional = true
