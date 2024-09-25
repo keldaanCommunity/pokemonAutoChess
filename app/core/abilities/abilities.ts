@@ -7510,7 +7510,7 @@ export class DoomDesireStrategy extends AbilityStrategy {
             true
           )
         } else {
-          pokemon.addPP(60, pokemon, 0, false)
+          pokemon.addPP(100, pokemon, 0, false)
         }
       }, 2000)
     )

@@ -1517,7 +1517,7 @@
     "FISHIOUS_REND": "Infliggi [80,SP] SPECIAL. Il danno raddopia se l'attacante ha più ATK_SPEED del bersaglio.",
     "RECOVER": "Curati del [25,SP]% dei HP massimi.",
     "CURSE": "Causa CURSE al nemico con più HP ed andrà KO dopo [8,4,SP=-0.2] secondi.",
-    "DOOM_DESIRE": "Dopo 2 secondi, infliggi [150,SP] SPECIAL al bersaglio. Recupera 60 PP se il bersaglio è andato KO prima di essere colpito dall'abilità.",
+    "DOOM_DESIRE": "Dopo 2 secondi, infliggi [150,SP] SPECIAL al bersaglio. Recupera 100 PP se il bersaglio è andato KO prima di essere colpito dall'abilità.",
     "TIME_TRAVEL": "Torna indietro nel tempo per recuperare le forze. A tutti gli alleati gli vengono rimossi gli status alterati e vengono curati di [25,SP] HP.",
     "POLTERGEIST": "Infliggi [30,60,120,SP] SPECIAL più [20,SP] SPECIAL addizionali per ogni oggetto equipaggiato dal bersaglio ([40,SP] se l'oggetto è ARTIFICIAL).",
     "GOLD_RUSH": "Infliggi [20,SP] più l'ammontare di GOLD come SPECIAL poi guadagni 2 GOLD.",
