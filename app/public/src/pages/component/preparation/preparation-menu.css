@@ -26,7 +26,9 @@
   height: 2em;
   margin-right: 0.5em;
 
-  &.noelo, &.scribble, &.quickplay {
+  &.noelo,
+  &.scribble,
+  &.quickplay {
     border-radius: 50%;
   }
 }
@@ -59,14 +61,10 @@
 
 .preparation-menu .room-info {
   color: white;
-  font-size: 140%;
   text-shadow: 2px 2px 2px black;
   margin: 0 0.5em;
   text-align: left;
-}
-
-.preparation-menu select {
-  font-size: 140%;
+  font-weight: 600;
 }
 
 @media (width <= 640px) {

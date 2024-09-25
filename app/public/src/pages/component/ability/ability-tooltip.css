@@ -17,7 +17,6 @@
 .description-icon > img,
 img.description-icon {
   display: inline-block;
-  vertical-align: -0.5em;
   width: 1.5em;
   height: 1.5em;
   margin-right: 3px;
@@ -41,6 +40,7 @@ h2 .description-icon > img {
 
 .ability-value {
   color: rgb(171, 171, 171);
+  font-weight: 500;
 }
 
 .ability-value .active {
@@ -58,12 +58,15 @@ h2 .description-icon > img {
 .stat-label {
   color: rgb(171, 171, 171);
   white-space: normal;
+  font-weight: 500;
 }
 
 .status-label {
   color: rgb(210, 190, 150);
+  font-weight: 500;
 }
 
 .item-label {
   color: rgb(190, 190, 190);
+  font-weight: 500;
 }
