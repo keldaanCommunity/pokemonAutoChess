@@ -1601,8 +1601,9 @@ export class HighJumpKickStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = [50, 100, 200][pokemon.stars - 1] ?? 200
-    pokemon.addPP(target.pp, pokemon, 0, false)
-    target.addPP(-target.pp, pokemon, 0, false)
+    const ppStolen = max(70)(target.pp)
+    pokemon.addPP(ppStolen, pokemon, 0, false)
+    target.addPP(-ppStolen, pokemon, 0, false)
     target.count.manaBurnCount++
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }

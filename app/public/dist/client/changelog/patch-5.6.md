@@ -22,6 +22,7 @@
 # Changes to Pokemon & Abilities
 
 - Nerf Gotitelle: Psychic Dark Human -> Psychic Human
+- Nerf High Jump Kick (Buneary, Bounsweet): steal ~~all PP~~ up to 70 PP from target
 
 # Changes to Synergies
 
