@@ -26,7 +26,8 @@
 - Buff Kyogre: PP 120 → 100, Primal Kyogre: PP 100 → 90
 - Buff Doom Desire (Jirachi): regain ~~60~~ 100 PP if target is KO in the mean time
 - Buff Luvdisc: Attack 11 → 15
-- Change Remoraid fishing chance with Mantyke: 20 → 30%
+- Increase Remoraid fishing chance with Mantyke: 20 → 30%
+- Buff Wingull line: Attack: 8/20→10/24, PP: 75→70
 
 # Changes to Synergies
 

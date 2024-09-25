@@ -12187,10 +12187,10 @@ export class Wingull extends Pokemon {
   stars = 1
   evolution = Pkm.PELIPPER
   hp = 90
-  atk = 8
+  atk = 10
   def = 5
   speDef = 3
-  maxPP = 75
+  maxPP = 70
   range = 2
   skill = Ability.WHIRLWIND
   additional = true
@@ -12203,10 +12203,10 @@ export class Pelipper extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 200
-  atk = 20
+  atk = 24
   def = 7
   speDef = 4
-  maxPP = 75
+  maxPP = 70
   range = 2
   skill = Ability.WHIRLWIND
   additional = true
