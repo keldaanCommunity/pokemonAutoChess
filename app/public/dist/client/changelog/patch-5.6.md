@@ -28,6 +28,7 @@
 - Buff Luvdisc: Attack 11 → 15
 - Increase Remoraid fishing chance with Mantyke: 20 → 30%
 - Buff Wingull line: Attack: 8/20→10/24, PP: 75→70
+- Buff Wailmer line: PP 110 → 100
 
 # Changes to Synergies
 

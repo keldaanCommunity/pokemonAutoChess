@@ -9448,7 +9448,7 @@ export class Wailmer extends Pokemon {
   atk = 6
   def = 2
   speDef = 2
-  maxPP = 110
+  maxPP = 100
   range = 1
   skill = Ability.DIVE
   additional = true
@@ -9463,7 +9463,7 @@ export class Wailord extends Pokemon {
   atk = 11
   def = 3
   speDef = 3
-  maxPP = 110
+  maxPP = 100
   range = 1
   skill = Ability.DIVE
   additional = true
