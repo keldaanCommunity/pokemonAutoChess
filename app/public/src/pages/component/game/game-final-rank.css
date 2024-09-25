@@ -1,35 +1,36 @@
 .game-final-rank {
-    position: fixed;
-    z-index: 10;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: grid;
-    justify-content: center;
-    align-content: center;
-    text-align: center;
-    color: white;
-    background-color: rgba(0,0,0,0.25);
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
 .game-final-rank .my-container {
-    position: relative;
-    top: -10vh;
-    padding: 1em;
+  position: relative;
+  top: -10vh;
+  padding: 1em;
 }
 
 .game-final-rank .rank {
-    font-size: 3em;
-    text-shadow: .05em .05em .1em black;
+  font-size: 3em;
+  font-weight: 700;
+  text-shadow: .05em .05em .1em black;
 }
 
 .game-final-rank .waiting {
-    font-size: 1em;
+  font-size: 1em;
 }
 
 .game-final-rank .actions {
-    display: flex;
-    gap: 1em;
-    justify-content: center;
+  display: flex;
+  gap: 1em;
+  justify-content: center;
 }

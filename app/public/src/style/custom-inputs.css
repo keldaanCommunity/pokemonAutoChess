@@ -1,4 +1,6 @@
-input, select, textarea {
+input,
+select,
+textarea {
   font-family: inherit;
   font-size: 1em;
 }
@@ -116,7 +118,7 @@ input[type="range"]:focus::-ms-fill-upper {
 select {
   border-radius: 12px;
   border: var(--border-thin);
-  padding: 8px 36px 8px 16px;
+  padding: 4px 24px 4px 8px;
   background: none;
   background-color: var(--color-bg-secondary);
   color: white;
@@ -154,8 +156,7 @@ input[type="checkbox"] {
 input[type="checkbox"] + span {
   position: relative;
   cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC)
-      14 0,
-    pointer;
+    14 0, pointer;
 }
 
 input[type="checkbox"] + span::before,
@@ -171,7 +172,8 @@ input[type="checkbox"] + span::before {
   width: 2px;
   height: 2px;
   color: #212529;
-  box-shadow: 2px 2px, 4px 2px, 6px 2px, 8px 2px, 10px 2px, 12px 2px, 14px 2px,
+  box-shadow:
+    2px 2px, 4px 2px, 6px 2px, 8px 2px, 10px 2px, 12px 2px, 14px 2px,
     16px 2px, 2px 4px, 16px 4px, 2px 6px, 16px 6px, 2px 8px, 16px 8px, 2px 10px,
     16px 10px, 2px 12px, 16px 12px, 2px 14px, 16px 14px, 2px 16px, 4px 16px,
     6px 16px, 8px 16px, 10px 16px, 12px 16px, 14px 16px, 16px 16px;
@@ -182,7 +184,8 @@ input[type="checkbox"]:focus + span::before {
   width: 2px;
   height: 2px;
   color: #adafbc;
-  box-shadow: 2px 2px, 4px 2px, 6px 2px, 8px 2px, 10px 2px, 12px 2px, 14px 2px,
+  box-shadow:
+    2px 2px, 4px 2px, 6px 2px, 8px 2px, 10px 2px, 12px 2px, 14px 2px,
     16px 2px, 2px 4px, 16px 4px, 2px 6px, 16px 6px, 2px 8px, 16px 8px, 2px 10px,
     16px 10px, 2px 12px, 16px 12px, 2px 14px, 16px 14px, 2px 16px, 4px 16px,
     6px 16px, 8px 16px, 10px 16px, 12px 16px, 14px 16px, 16px 16px;
@@ -192,7 +195,8 @@ input[type="checkbox"]:checked + span::before {
   width: 2px;
   height: 2px;
   color: #212529;
-  box-shadow: 2px 2px, 4px 2px, 6px 2px, 8px 2px, 10px 2px, 12px 2px, 14px 2px,
+  box-shadow:
+    2px 2px, 4px 2px, 6px 2px, 8px 2px, 10px 2px, 12px 2px, 14px 2px,
     18px 2px, 20px 2px, 2px 4px, 16px 4px, 18px 4px, 20px 4px, 2px 6px, 14px 6px,
     16px 6px, 2px 8px, 4px 8px, 12px 8px, 14px 8px, 2px 10px, 4px 10px, 6px 10px,
     10px 10px, 12px 10px, 16px 10px, 2px 12px, 6px 12px, 8px 12px, 10px 12px,
@@ -204,7 +208,8 @@ input[type="checkbox"]:checked:focus + span::before {
   width: 2px;
   height: 2px;
   color: #adafbc;
-  box-shadow: 2px 2px, 4px 2px, 6px 2px, 8px 2px, 10px 2px, 12px 2px, 14px 2px,
+  box-shadow:
+    2px 2px, 4px 2px, 6px 2px, 8px 2px, 10px 2px, 12px 2px, 14px 2px,
     18px 2px #212529, 20px 2px #212529, 2px 4px, 16px 4px #212529,
     18px 4px #212529, 20px 4px #212529, 2px 6px #212529, 14px 6px #212529,
     16px 6px #212529, 2px 8px #212529, 4px 8px #212529, 12px 8px #212529,
@@ -228,7 +233,8 @@ input[type="checkbox"].is-dark:checked + span::before {
   width: 2px;
   height: 2px;
   color: #adafbc;
-  box-shadow: 2px 2px, 4px 2px, 6px 2px, 8px 2px, 10px 2px, 12px 2px, 14px 2px,
+  box-shadow:
+    2px 2px, 4px 2px, 6px 2px, 8px 2px, 10px 2px, 12px 2px, 14px 2px,
     18px 2px #fff, 20px 2px #fff, 2px 4px, 16px 4px #fff, 18px 4px #fff,
     20px 4px #fff, 2px 6px #fff, 14px 6px #fff, 16px 6px #fff, 2px 8px #fff,
     4px 8px #fff, 12px 8px #fff, 14px 8px #fff, 2px 10px, 4px 10px #fff,
@@ -243,7 +249,8 @@ input[type="checkbox"].is-dark:checked:focus + span::before {
   width: 2px;
   height: 2px;
   color: #adafbc;
-  box-shadow: 2px 2px, 4px 2px, 6px 2px, 8px 2px, 10px 2px, 12px 2px, 14px 2px,
+  box-shadow:
+    2px 2px, 4px 2px, 6px 2px, 8px 2px, 10px 2px, 12px 2px, 14px 2px,
     18px 2px #fff, 20px 2px #fff, 2px 4px, 16px 4px #fff, 18px 4px #fff,
     20px 4px #fff, 2px 6px #fff, 14px 6px #fff, 16px 6px #fff, 2px 8px #fff,
     4px 8px #fff, 12px 8px #fff, 14px 8px #fff, 2px 10px, 4px 10px #fff,
@@ -253,7 +260,6 @@ input[type="checkbox"].is-dark:checked:focus + span::before {
     12px 16px, 14px 16px, 16px 16px;
   color: #fff;
 }
-
 
 .my-input-group {
   display: inline-flex;

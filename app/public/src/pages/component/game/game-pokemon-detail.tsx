@@ -111,9 +111,7 @@ export function GamePokemonDetail(props: {
 
       {pokemon.skill !== Ability.DEFAULT && (
         <div className="game-pokemon-detail-ult">
-          <div className="ability-name">
-            <p>{t(`ability.${pokemon.skill}`)}</p>
-          </div>
+          <div className="ability-name">{t(`ability.${pokemon.skill}`)}</div>
           <div>
             <AbilityTooltip
               ability={pokemon.skill}

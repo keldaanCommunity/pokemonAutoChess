@@ -28,6 +28,7 @@
   grid-area: name;
   margin: 0;
   white-space: nowrap;
+  font-weight: 500;
 }
 
 .game-item-detail-stats {

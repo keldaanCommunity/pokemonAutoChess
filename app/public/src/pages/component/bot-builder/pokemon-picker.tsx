@@ -99,10 +99,10 @@ function PokemonPickerTab(props: {
           ] as Rarity[]
         ).map((rarity) => (
           <React.Fragment key={rarity}>
-            <dt style={{ color: RarityColor[rarity] }}>
+            <dt style={{ color: RarityColor[rarity], textTransform: "uppercase", fontWeight: "500", fontSize: "80%" }}>
               {t(`rarity.${rarity}`)}
             </dt>
-            <dd style={{ display: "flex", flexWrap: "wrap" }}>
+            <dd style={{ display: "flex", flexWrap: "wrap", gap: "1px" }}>
               {(pokemonsPerRarity[rarity] ?? []).map((p) => (
                 <div
                   className={cc("pokemon-portrait", {

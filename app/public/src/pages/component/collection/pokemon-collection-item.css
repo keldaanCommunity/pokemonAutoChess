@@ -26,6 +26,8 @@
   text-align: center;
   line-height: 1em;
   border-radius: 0 0 8px 8px;
+  font-weight: 500;
+  font-size: 90%;
 }
 
 .pokemon-collection-item p > * {

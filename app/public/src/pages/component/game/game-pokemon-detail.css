@@ -33,10 +33,12 @@
 .game-pokemon-detail-entry-name {
   text-transform: capitalize;
   font-size: 1.2em;
+  font-weight: 600;
 }
 
 .game-pokemon-detail-entry-rarity {
-  font-variant: small-caps;
+  text-transform: uppercase;
+  font-size: 90%;
 }
 
 .game-pokemon-detail-portrait {
@@ -89,6 +91,8 @@
 .game-pokemon-detail-stats img + p {
   display: inline-block;
   vertical-align: middle;
+  font-weight: 500;
+  font-size: 90%;
 }
 
 .game-pokemon-detail-stats .negative {
@@ -103,7 +107,7 @@
   background-color: #4f5160;
   text-transform: capitalize;
   font-variant: small-caps;
-  padding: 0.25em 0.5em;
+  padding: 0.25em 5px;
   margin: 0 -5px 4px -5px;
   font-size: 1.2em;
   box-shadow: 0 -1px 2px rgb(0 0 0 / 50%);
@@ -119,7 +123,7 @@
   grid-area: passive;
   font-style: italic;
   background-color: #4f5160;
-  padding: 0.25em 0.5em;
+  padding: 0.25em 5px;
   margin: 0 -5px -5px -5px;
   font-size: 1em;
   box-shadow: 0 -1px 1px rgb(0 0 0 / 50%);

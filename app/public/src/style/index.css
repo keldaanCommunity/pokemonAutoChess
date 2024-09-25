@@ -18,7 +18,9 @@
   --shadow-clickable: #2d334b 2px 2px 0px;
 }
 
-*, ::after, ::before {
+*,
+::after,
+::before {
   box-sizing: border-box;
 }
 
@@ -27,8 +29,23 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: rgb(104,130,158);
-  background-image: linear-gradient(45deg, rgb(80,81,96) 25%, transparent 25%, transparent 74.9%, rgb(80,81,96) 75%, rgb(80,81,96)), linear-gradient(45deg, rgb(80,81,96) 25%, transparent 25%, transparent 74.9%, rgb(80,81,96) 75%, rgb(80,81,96));
+  background-color: rgb(104, 130, 158);
+  background-image: linear-gradient(
+      45deg,
+      rgb(80, 81, 96) 25%,
+      transparent 25%,
+      transparent 74.9%,
+      rgb(80, 81, 96) 75%,
+      rgb(80, 81, 96)
+    ),
+    linear-gradient(
+      45deg,
+      rgb(80, 81, 96) 25%,
+      transparent 25%,
+      transparent 74.9%,
+      rgb(80, 81, 96) 75%,
+      rgb(80, 81, 96)
+    );
   background-size: 240px 240px;
   background-position: 0 0, 120px 120px;
 }
@@ -38,9 +55,14 @@ a {
   color: #7bbbff;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0.5em 0;
-  
+
   &:first-child {
     margin-top: 0;
   }
@@ -59,7 +81,9 @@ table {
   border-collapse: collapse;
 }
 
-dl, ol, ul {
+dl,
+ol,
+ul {
   margin-top: 0;
   margin-bottom: 1rem;
 }
@@ -220,11 +244,11 @@ p:last-child {
 
 @media (width >= 2500px) {
   body {
-    font-size: 24px;
+    font-size: 22px;
   }
 }
 
-@media (2000px <= width <= 2500px) {
+@media (2000px <= width <=2500px) {
   body {
     font-size: 20px;
   }
@@ -280,8 +304,8 @@ p:last-child {
   width: 12px;
   font-size: 14px;
   color: black;
-  text-shadow: 1px 1px 1px white, -1px 1px 1px white, 1px -1px 1px white,
-    -1px -1px 1px white;
+  text-shadow: 1px 1px 1px white, -1px 1px 1px white, 1px -1px 1px white, -1px
+    -1px 1px white;
 }
 
 .pokemon-portrait.acquired::before {
@@ -293,6 +317,6 @@ p:last-child {
   width: 12px;
   font-size: 14px;
   color: black;
-  text-shadow: 1px 1px 1px white, -1px 1px 1px white, 1px -1px 1px white,
-    -1px -1px 1px white;
+  text-shadow: 1px 1px 1px white, -1px 1px 1px white, 1px -1px 1px white, -1px
+    -1px 1px white;
 }

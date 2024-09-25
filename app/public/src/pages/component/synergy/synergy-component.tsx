@@ -129,7 +129,7 @@ export default function SynergyComponent(props: {
             )
           })}
         </div>
-        <p style={{ margin: "0px", textAlign: "center" }}>
+        <p style={{ margin: "0px", textAlign: "center", fontWeight: "500" }}>
           {t(`synergy.${props.type}`)}
         </p>
       </div>

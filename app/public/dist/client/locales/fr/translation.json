@@ -1221,7 +1221,7 @@
     "CONFUSION": "Rend la cible CONFUSION et SILENCE pendant [3,5,7] secondes. Si la cible a déjà CONFUSION, inflige [75,150,300,SP] SPECIAL à la place",
     "FIRE_BLAST": "Lance une explosion de feu infligeant [30,60,120,SP] SPECIAL",
     "WHEEL_OF_FIRE": "Envoie une roue de feu qui fait un aller-retour en faisant [10,20,30,SP] SPECIAL",
-    "SEISMIC_TOSS": "Attaque à cible unique qui inflige [7,14,28,SP] TRUE multiplié par le nombre de Pokémon dans votre équipe",
+    "SEISMIC_TOSS": "Inflige à la cible [5,10,20,SP] TRUE multiplié par votre niveau de dresseur",
     "GUILLOTINE": "Attaque à cible unique qui inflige [1,2,3,SP] x ATK SPECIAL. Restaure la moitié du PP si la cible est KO",
     "ROCK_SLIDE": "Attaque à cible unique qui inflige [30,60,120,SP] SPECIAL. Double les dégâts si la cible est de type FLYING.",
     "HEAT_WAVE": "Attaque à effet de zone qui inflige [20,40,80,SP] SPECIAL à tous les ennemis en ligne derrière la cible.",

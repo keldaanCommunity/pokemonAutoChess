@@ -20,15 +20,16 @@
   padding: 0.5em;
   margin: 0;
   text-align: center;
+  font-size: 2rem;
 }
 
-@media (aspect-ratio < 4/3) {
+@media (aspect-ratio < 4 / 3) {
   #game-wrapper .synergies-container {
     max-height: 70%;
   }
 }
 
-@media(width <= 1280px) {
+@media (width <= 1280px) {
   #game-wrapper .synergies-container {
     transform: scale(0.8);
     transform-origin: top left;

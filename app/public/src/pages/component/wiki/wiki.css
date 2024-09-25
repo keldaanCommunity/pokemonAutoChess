@@ -4,6 +4,12 @@
   max-width: 100%;
 }
 
+#wiki-page h2 {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 #wiki-page ul {
   padding: 0;
 }
@@ -50,7 +56,7 @@
 #wiki-page .wiki-pokemons .pokemon-typeahead {
   float: right;
   font-size: 80%;
-  padding: 0px 36px 0px 16px;
+  padding: 0px 16px 0px 8px;
 }
 
 #wiki-page p.description {
@@ -86,6 +92,10 @@
   font-size: 2rem;
 }
 
+#wiki-page .wiki-stat h2 {
+  margin: 0;
+}
+
 #wiki-page .wiki-stat li {
   list-style: none;
   display: grid;
@@ -105,11 +115,6 @@
 
 #wiki-page .wiki-status li .status-label {
   white-space: initial;
-}
-
-#wiki-page .wiki-stat p:first-of-type {
-  font-size: 120%;
-  margin: 0.25em 0;
 }
 
 #wiki-page .wiki-tutorials ul {

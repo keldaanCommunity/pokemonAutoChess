@@ -115,7 +115,7 @@ export const RequiredStageLevelForXpElligibility = 10
 export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 50]
 
 export const RarityColor: { [key in Rarity]: string } = {
-  [Rarity.COMMON]: "#9f9f9f",
+  [Rarity.COMMON]: "#a0a0a0",
   [Rarity.UNCOMMON]: "#3bc95e",
   [Rarity.RARE]: "#41bfcc",
   [Rarity.EPIC]: "#ca6cee",
