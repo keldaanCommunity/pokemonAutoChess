@@ -29,6 +29,7 @@
 - Increase Remoraid fishing chance with Mantyke: 20 → 30%
 - Buff Wingull line: Attack: 8/20→10/24, PP: 75→70
 - Buff Wailmer line: PP 110 → 100
+- Nerf Doduo line: PP 70 → 80
 
 # Changes to Synergies
 

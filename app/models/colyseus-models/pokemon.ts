@@ -12095,7 +12095,7 @@ export class Doduo extends Pokemon {
   atk = 12
   def = 3
   speDef = 2
-  maxPP = 70
+  maxPP = 80
   range = 1
   skill = Ability.AGILITY
   attackSprite = AttackSprite.FLYING_MELEE
@@ -12110,7 +12110,7 @@ export class Dodrio extends Pokemon {
   atk = 28
   def = 5
   speDef = 3
-  maxPP = 70
+  maxPP = 80
   range = 1
   skill = Ability.AGILITY
   attackSprite = AttackSprite.FLYING_MELEE
