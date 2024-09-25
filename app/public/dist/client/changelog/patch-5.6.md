@@ -23,6 +23,7 @@
 
 - Nerf Gotitelle: Psychic Dark Human -> Psychic Human
 - Nerf High Jump Kick (Buneary, Bounsweet): steal ~~all PP~~ up to 70 PP from target
+- Buff Kyogre: PP 120 → 100, Primal Kyogre: PP 100 → 90
 
 # Changes to Synergies
 

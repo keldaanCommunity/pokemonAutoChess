@@ -5220,7 +5220,7 @@ export class Kyogre extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 120
+  maxPP = 100
   range = 3
   skill = Ability.ORIGIN_PULSE
   passive = Passive.PRIMAL
@@ -6399,7 +6399,7 @@ export class PrimalKyogre extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 100
+  maxPP = 90
   range = 3
   skill = Ability.ORIGIN_PULSE
   passive = Passive.RAIN
