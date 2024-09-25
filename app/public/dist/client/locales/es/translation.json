@@ -1247,7 +1247,7 @@
     "CONFUSION": "Aplica CONFUSION y SILENCE al objetivo durante [3,5,7] segundos. Si el objetivo ya está CONFUSION, inflige [75,150,300,SP] de SPECIAL en su lugar",
     "FIRE_BLAST": "Lanza una ráfaga de fuego que inflige [30,60,120,SP] de SPECIAL",
     "WHEEL_OF_FIRE": "El usuario se envuelve en llamas, rodando hacia los enemigos a la ida y a la vuelta. Inflige el doble [10,20,30,SP] de SPECIAL a todos los Pokémon enemigos que golpea",
-    "SEISMIC_TOSS": "Ataque de objetivo único que inflige [7,14,28,SP] de TRUE multiplicado por la cantidad de Pokémon en tu equipo",
+    "SEISMIC_TOSS": "Inflige [5,10,20,SP] TRUE al objetivo multiplicado por tu nivel de jugador.",
     "GUILLOTINE": "Ataque de un solo objetivo que inflige [1,2,3,SP] x ATK SPECIAL. Restaura la mitad de PP si el objetivo queda KO",
     "ROCK_SLIDE": "Ataque de un solo objetivo que inflige [30,60,120,SP] de SPECIAL. Duplica el daño si el objetivo es FLYING.",
     "HEAT_WAVE": "Ataque en área que inflige [20,40,80,SP] de SPECIAL a todos los enemigos que se encuentren detrás del objetivo",

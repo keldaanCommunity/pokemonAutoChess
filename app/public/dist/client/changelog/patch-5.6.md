@@ -22,6 +22,7 @@
 # Changes to Pokemon & Abilities
 
 - Nerf Gotitelle: Psychic Dark Human -> Psychic Human
+- Changed Seismic Toss (Cobalion): ~~deals 7/14/28 true damage to the target multiplied by the number of Pokémon in your team~~ deals 5/10/20 true damage multiplied by your player level
 
 # Changes to Synergies
 

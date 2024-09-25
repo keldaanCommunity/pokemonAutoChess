@@ -2464,20 +2464,9 @@ export class SeismicTossStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 7
-    if (pokemon.stars === 2) {
-      damage = 14
-    }
-    if (pokemon.stars === 3) {
-      damage = 28
-    }
-
-    let totalDamage = 0
-    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value && pokemon.team == value.team) {
-        totalDamage += damage
-      }
-    })
+    const damage = [5, 10, 20][pokemon.stars - 1] ?? 20
+    const totalDamage =
+      damage * (pokemon.player ? pokemon.player.experienceManager.level : 5)
     target.handleSpecialDamage(
       totalDamage,
       board,

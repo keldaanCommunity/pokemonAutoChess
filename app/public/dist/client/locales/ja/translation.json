@@ -842,7 +842,7 @@
     "CONFUSION": "対象は[3,5,7]秒間、CONFUSIONとSILENCE状態になる。すでにCONFUSIONの場合、代わりに[75,150,300,SP]のSPECIALを与える。",
     "FIRE_BLAST": "ファイアブラストを[30,60,120,SP] SPECIAL投げる",
     "WHEEL_OF_FIRE": "[10,20,30,SP]SPECIALで往復する火車を飛ばす",
-    "SEISMIC_TOSS": "[7,14,28,SP]TRUE×チーム内のポケモンの数を与える単対象攻撃",
+    "SEISMIC_TOSS": "対象にプレイヤーレベル×[5,10,20,SP] TRUEを与える",
     "GUILLOTINE": "[1,2,3,SP]×ATK SPECIALを与える単体対象攻撃。ターゲットがKOされた場合、MANAの半分を回復",
     "ROCK_SLIDE": "[30,60,120,SP]SPECIALを与える単対象攻撃。対象が飛行タイプの場合、ダメージが2倍になる。",
     "HEAT_WAVE": "対象の後ろ一列の敵全員に[20,40,80,SP]のSPECIALを与える範囲攻撃。",

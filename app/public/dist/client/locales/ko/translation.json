@@ -1227,7 +1227,7 @@
     "CONFUSION": "대상을 [3,5,7]초간 CONFUSION 및 SILENCE 상태로 만든다. 이미 대상이 CONFUSION 상태일 경우, 대신 [75,150,300,SP] SPECIAL 을 가한다.",
     "FIRE_BLAST": "불대문자를 발사한다. 대상에게 [30,60,120,SP] SPECIAL 을 가한다.",
     "WHEEL_OF_FIRE": "되돌아오는 화염자동차를 발사한다. 맞은 적 포켓몬들에게 [10,20,30,SP] SPECIAL 을 두번 가한다.",
-    "SEISMIC_TOSS": "대상에게 [7,14,28,SP]의 TRUE 를 가한다. 이 대미지는 자신의 팀에 있는 포켓몬의 마릿수만큼 곱해진다.",
+    "SEISMIC_TOSS": "플레이어 레벨을 곱하여 대상에게 [5,10,20,SP] TRUE를 적용합니다.",
     "GUILLOTINE": "대상에 [1,2,3,SP] x ATK SPECIAL 을 가한다. 대상이 기절한 경우 사용자는 절반의 PP를 회복한다.",
     "ROCK_SLIDE": "대상에 [30,60,120,SP] SPECIAL 을 가한다. 대상이 FLYING 일 경우 대미지가 두배가 된다.",
     "HEAT_WAVE": "대상의 뒤에 있는 모든 적포켓몬들에게 [20,40,80,SP] SPECIAL 을 가한다.",
