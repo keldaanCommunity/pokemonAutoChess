@@ -7,6 +7,8 @@ import { PokemonEntity } from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 
 export class IdleState extends PokemonState {
+  name = "idle"
+
   update(
     pokemon: PokemonEntity,
     dt: number,
@@ -41,8 +43,10 @@ export class IdleState extends PokemonState {
       pokemon.action = PokemonActionState.IDLE
     } else if (pokemon.status.resurecting) {
       pokemon.action = PokemonActionState.HURT
-    } else {
+    } else if (pokemon.status.sleep || pokemon.status.freeze) {
       pokemon.action = PokemonActionState.SLEEP
+    } else {
+      pokemon.action = PokemonActionState.IDLE
     }
     pokemon.cooldown = 0
   }

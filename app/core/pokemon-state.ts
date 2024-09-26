@@ -19,7 +19,9 @@ import { chance, pickRandomIn } from "../utils/random"
 import Board, { Cell } from "./board"
 import { PokemonEntity } from "./pokemon-entity"
 
-export default class PokemonState {
+export default abstract class PokemonState {
+  name: string = ""
+
   attack(pokemon: PokemonEntity, board: Board, target: PokemonEntity) {
     if (target.life > 0) {
       let damage = pokemon.atk
@@ -592,14 +594,10 @@ export default class PokemonState {
     pokemon.status.updateAllStatus(dt, pokemon, board)
 
     if (
-      pokemon.status.resurecting &&
-      pokemon.action !== PokemonActionState.HURT
-    ) {
-      pokemon.toIdleState()
-    }
-    if (
-      (pokemon.status.freeze || pokemon.status.sleep) &&
-      pokemon.action !== PokemonActionState.SLEEP
+      (pokemon.status.resurecting ||
+        pokemon.status.freeze ||
+        pokemon.status.sleep) &&
+      pokemon.state.name !== "idle"
     ) {
       pokemon.toIdleState()
     }

@@ -12,6 +12,8 @@ import { AttackCommand } from "./simulation-command"
 import { getAttackTimings } from "../public/src/game/animation-manager"
 
 export default class AttackingState extends PokemonState {
+  name = "attacking"
+
   update(
     pokemon: PokemonEntity,
     dt: number,
