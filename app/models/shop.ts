@@ -501,39 +501,7 @@ export default class Shop {
       }
     }
 
-    if (rod === Item.GOLDEN_ROD) {
-      const topSynergies: Synergy[] = Array.from(
-        player.synergies
-        // filter only active synergies
-      )
-        .filter(
-          ([s, v]) => player.synergies.isActiveSynergy(s, v)
-          // sort synergies by count in descending order
-        )
-        .sort(
-          (a, b) => b[1] - a[1]
-          // filter only synergies which have a value
-          // equal to the top synergy
-        )
-        .filter(
-          (current, _, array) => {
-            const highestValue = array[0][1]
-            return current[1] === highestValue
-          }
-          // return only the synergy
-        )
-        .map(([s]) => s)
-      const typeWanted = pickRandomIn(topSynergies)
-
-      if (rarity === Rarity.SPECIAL) {
-        const uniques = UniqueShop.filter(
-          (p) => p in PkmDuos === false
-        ) as Pkm[]
-        fish = pickRandomIn(uniques)
-      } else {
-        fish = this.getRandomPokemonFromPool(rarity, player, finals, typeWanted)
-      }
-    } else if (rarity === Rarity.SPECIAL) {
+    if (rarity === Rarity.SPECIAL) {
       if (rod === Item.OLD_ROD) fish = Pkm.MAGIKARP
       if (rod === Item.GOOD_ROD) fish = Pkm.FEEBAS
       if (rod === Item.SUPER_ROD) fish = Pkm.WISHIWASHI

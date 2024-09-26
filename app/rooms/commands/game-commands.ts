@@ -487,29 +487,6 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
-    if (item === Item.GOLDEN_ROD) {
-      let needsRecomputingSynergiesAgain = false
-      pokemon?.items.forEach((item) => {
-        pokemon.items.delete(item)
-        player.items.push(item)
-        if (item in SynergyGivenByItem) {
-          const type = SynergyGivenByItem[item]
-          const nativeTypes = getPokemonData(pokemon.name).types
-          if (nativeTypes.includes(type) === false) {
-            pokemon.types.delete(type)
-            if (!isOnBench(pokemon)) {
-              needsRecomputingSynergiesAgain = true
-            }
-          }
-        }
-      })
-      if (needsRecomputingSynergiesAgain) {
-        player.updateSynergies()
-      }
-      client.send(Transfer.DRAG_DROP_FAILED, message)
-      return
-    }
-
     if (!pokemon.canHoldItems) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return

@@ -350,14 +350,6 @@ export const FishRarityProbability: {
     [Rarity.UNCOMMON]: 0.25,
     [Rarity.RARE]: 0.25,
     [Rarity.EPIC]: 0.1
-  },
-  [Item.GOLDEN_ROD]: {
-    [Rarity.SPECIAL]: 0.1,
-    [Rarity.COMMON]: 0.2,
-    [Rarity.UNCOMMON]: 0.25,
-    [Rarity.RARE]: 0.25,
-    [Rarity.EPIC]: 0.15,
-    [Rarity.ULTRA]: 0.05
   }
 }
 
@@ -682,7 +674,6 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.OLD_ROD]: {},
   [Item.GOOD_ROD]: {},
   [Item.SUPER_ROD]: {},
-  [Item.GOLDEN_ROD]: {},
   [Item.RARE_CANDY]: {},
   [Item.EVIOLITE]: {
     [Stat.HP]: 100,
