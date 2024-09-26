@@ -132,6 +132,16 @@ export default function GameOptionsModal(props: {
           <p>
             <Checkbox
               isDark
+              checked={preferences.fullscreen}
+              onToggle={(checked) =>
+                changePreference("fullscreen", checked)
+              }
+              label={t("enter_fullscreen_on_game_start")}
+            />
+          </p>
+          <p>
+            <Checkbox
+              isDark
               checked={preferences.showDetailsOnHover}
               onToggle={(checked) =>
                 changePreference("showDetailsOnHover", checked)

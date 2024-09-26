@@ -48,8 +48,11 @@
 
 # UI
 
+- Add a new "Fullscreen" button in the sidebar
+- The game now automatically enters fullscreen when starting a game if supported by the browser. You can disable this in Options > Interface
+
 # Bugfix
 
-- fix regional variants of additional pokemons not being immediately available after the additional pokemon being picked
+- Fix regional variants of additional pokemons not being immediately available after the additional pokemon being picked
 
 # Misc

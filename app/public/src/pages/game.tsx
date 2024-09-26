@@ -18,7 +18,6 @@ import {
   IDragDropMessage,
   IExperienceManager,
   IPlayer,
-  ISimplePlayer,
   Role,
   Transfer
 } from "../../../types"
@@ -76,6 +75,7 @@ import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { playMusic, preloadMusic } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import { FIREBASE_CONFIG, getPortraitPath } from "./utils/utils"
+import { enterFullScreen, exitFullScreen } from "./utils/fullscreen"
 
 let gameContainer: GameContainer
 
@@ -267,6 +267,7 @@ export default function Game() {
       await r.leave(false)
     }
     dispatch(leaveGame())
+    exitFullScreen()
     navigate("/after")
     if (room?.connection.isOpen) {
       room.leave()
@@ -309,6 +310,7 @@ export default function Game() {
 
     if (!connected.current) {
       connect()
+      enterFullScreen()
     } else if (
       !initialized.current &&
       room != undefined &&
@@ -749,3 +751,4 @@ export default function Game() {
     </main>
   )
 }
+
