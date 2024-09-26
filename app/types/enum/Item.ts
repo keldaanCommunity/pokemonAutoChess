@@ -105,6 +105,7 @@ export enum Item {
   ABSORB_BULB = "ABSORB_BULB",
   SACRED_ASH = "SACRED_ASH",
   COMET_SHARD = "COMET_SHARD",
+  REPEAT_BALL = "REPEAT_BALL",
   DAMP_ROCK = "DAMP_ROCK",
   ICY_ROCK = "ICY_ROCK",
   HEAT_ROCK = "HEAT_ROCK",
@@ -252,7 +253,8 @@ export const ShinyItems: Item[] = [
   Item.GOLD_BOTTLE_CAP,
   Item.ABSORB_BULB,
   Item.SACRED_ASH,
-  Item.COMET_SHARD
+  Item.COMET_SHARD,
+  Item.REPEAT_BALL
 ]
 
 export const WeatherRocks: Item[] = [

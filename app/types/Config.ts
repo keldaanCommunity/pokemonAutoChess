@@ -675,8 +675,8 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.GOOD_ROD]: {},
   [Item.SUPER_ROD]: {},
   [Item.RARE_CANDY]: {
-    [Stat.AP]: -30,
-    [Stat.ATK_SPEED]: -20
+    [Stat.ATK_SPEED]: -20,
+    [Stat.AP]: -30
   },
   [Item.EVIOLITE]: {
     [Stat.HP]: 100,
@@ -690,6 +690,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.COMET_SHARD]: { [Stat.ATK]: 12 },
   [Item.ABSORB_BULB]: { [Stat.DEF]: 8, [Stat.SPE_DEF]: 8 },
   [Item.WHITE_FLUTE]: {},
+  [Item.REPEAT_BALL]: {},
   [Item.DAMP_ROCK]: {},
   [Item.ICY_ROCK]: {},
   [Item.HEAT_ROCK]: {},

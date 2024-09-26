@@ -1,3 +1,4 @@
+import { index } from "d3"
 import GameState from "../rooms/states/game-state"
 import { IPokemon, IPokemonEntity } from "../types"
 import {
@@ -276,11 +277,11 @@ export default class Shop {
 
   refillShop(player: Player, state: GameState) {
     // No need to release pokemons since they won't be changed
-    const PkmList = player.shop.map((pokemon) => {
+    const PkmList = player.shop.map((pokemon, i) => {
       if (pokemon != Pkm.MAGIKARP && pokemon != Pkm.DEFAULT) {
         return pokemon
       }
-      return this.pickPokemon(player, state)
+      return this.pickPokemon(player, state, i)
     })
 
     for (let i = 0; i < SHOP_SIZE; i++) {
@@ -302,7 +303,7 @@ export default class Shop {
       }
     } else {
       for (let i = 0; i < SHOP_SIZE; i++) {
-        player.shop[i] = this.pickPokemon(player, state)
+        player.shop[i] = this.pickPokemon(player, state, i)
       }
     }
   }
@@ -367,7 +368,7 @@ export default class Shop {
     rarity: Rarity,
     player: Player,
     finals: Set<Pkm> = new Set(),
-    specificTypeWanted?: Synergy
+    specificTypesWanted?: Synergy[]
   ): Pkm {
     let pkm = Pkm.MAGIKARP
     const candidates = (this.getPool(rarity) ?? [])
@@ -383,8 +384,10 @@ export default class Shop {
       })
       .filter((pkm) => {
         const types = getPokemonData(pkm).types
-        const isOfTypeWanted = specificTypeWanted
-          ? types.includes(specificTypeWanted)
+        const isOfTypeWanted = specificTypesWanted
+          ? specificTypesWanted.some((specificTypeWanted) =>
+              types.includes(specificTypeWanted)
+            )
           : types.includes(Synergy.WILD) === false
 
         return isOfTypeWanted && !finals.has(pkm)
@@ -392,9 +395,12 @@ export default class Shop {
 
     if (candidates.length > 0) {
       pkm = pickRandomIn(candidates)
-    } else if (specificTypeWanted === Synergy.WATER) {
+    } else if (
+      specificTypesWanted &&
+      specificTypesWanted.includes(Synergy.WATER)
+    ) {
       return Pkm.MAGIKARP // if no more water in pool, return magikarp
-    } else if (specificTypeWanted) {
+    } else if (specificTypesWanted) {
       return this.getRandomPokemonFromPool(rarity, player, finals) // could not find of specific type, return another type
     }
 
@@ -412,7 +418,7 @@ export default class Shop {
     return pkm
   }
 
-  pickPokemon(player: Player, state: GameState) {
+  pickPokemon(player: Player, state: GameState, shopIndex: number = -1) {
     if (
       state.specialGameRule !== SpecialGameRule.DITTO_PARTY &&
       chance(DITTO_RATE) &&
@@ -440,15 +446,15 @@ export default class Shop {
         .map((pokemon) => PkmFamily[pokemon.name])
     )
 
-    let specificTypeWanted: Synergy | undefined = undefined
+    let specificTypesWanted: Synergy[] | undefined = undefined
 
     const incenseHolder = values(player.board).find((p) =>
       p.items.has(Item.INCENSE)
     )
     if (incenseHolder && chance(5 / 100)) {
-      specificTypeWanted = pickRandomIn(values(incenseHolder.types))
+      specificTypesWanted = values(incenseHolder.types)
     } else if (wildChance > 0 && chance(wildChance)) {
-      specificTypeWanted = Synergy.WILD
+      specificTypesWanted = [Synergy.WILD]
     }
 
     const probas = RarityProbabilityPerLevel[player.experienceManager.level]
@@ -459,7 +465,7 @@ export default class Shop {
       threshold += probas[i]
       i++
     }
-    const rarity = [
+    let rarity = [
       Rarity.COMMON,
       Rarity.UNCOMMON,
       Rarity.RARE,
@@ -474,11 +480,50 @@ export default class Shop {
       return Pkm.MAGIKARP
     }
 
+    const repeatBalls = values(player.board).filter((p) =>
+      p.items.has(Item.REPEAT_BALL)
+    )
+    if (
+      shopIndex >= 0 &&
+      shopIndex < repeatBalls.length &&
+      player.rerollCount % 2 === 0
+    ) {
+      specificTypesWanted = values(repeatBalls[shopIndex].types)
+      rarity =
+        [
+          Rarity.COMMON,
+          Rarity.UNCOMMON,
+          Rarity.RARE,
+          Rarity.EPIC,
+          Rarity.ULTRA
+        ][Math.floor(player.rerollCount / 30)] ?? Rarity.ULTRA
+      if (player.rerollCount >= 150 && player.rerollCount % 10 === 0) {
+        const legendaryCandidates = LegendaryShop.filter(
+          (p) =>
+            !(p in PkmDuos) &&
+            getPokemonData(p as Pkm).types.some((type) =>
+              specificTypesWanted?.includes(type)
+            )
+        )
+        if (legendaryCandidates.length > 0)
+          return pickRandomIn(legendaryCandidates)
+      } else if (player.rerollCount >= 100 && player.rerollCount % 10 === 0) {
+        const uniqueCandidates = UniqueShop.filter(
+          (p) =>
+            !(p in PkmDuos) &&
+            getPokemonData(p as Pkm).types.some((type) =>
+              specificTypesWanted?.includes(type)
+            )
+        )
+        if (uniqueCandidates.length > 0) return pickRandomIn(uniqueCandidates)
+      }
+    }
+
     return this.getRandomPokemonFromPool(
       rarity,
       player,
       finals,
-      specificTypeWanted
+      specificTypesWanted
     )
   }
 
@@ -512,12 +557,9 @@ export default class Shop {
       if (rod === Item.GOOD_ROD) fish = Pkm.FEEBAS
       if (rod === Item.SUPER_ROD) fish = Pkm.WISHIWASHI
     } else {
-      fish = this.getRandomPokemonFromPool(
-        rarity,
-        player,
-        finals,
+      fish = this.getRandomPokemonFromPool(rarity, player, finals, [
         Synergy.WATER
-      )
+      ])
     }
 
     return fish

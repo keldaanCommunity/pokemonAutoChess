@@ -40,6 +40,7 @@
 # Changes to Items
 
 - Golden Rod has been removed
+- New Shiny Item: Repeat Ball: Every 2 shop rerolls, gain +1% AP and find a mon in shop that shares a synergy with the holder. Their rarity increases with the total number of shop refreshes done during the game.
 - Rare Candy has been reverted to its original proposition in 5.2, with a few changes: it is now holdable and takes an item slot ; it reduces the sell price of its holder to its previous tier ; it gives -20% Attack Speed and -30% AP. Easy on the sugar !
 
 # Gameplay
