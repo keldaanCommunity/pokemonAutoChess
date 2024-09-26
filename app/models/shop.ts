@@ -1,4 +1,3 @@
-import { index } from "d3"
 import GameState from "../rooms/states/game-state"
 import { IPokemon, IPokemonEntity } from "../types"
 import {
@@ -418,7 +417,7 @@ export default class Shop {
     return pkm
   }
 
-  pickPokemon(player: Player, state: GameState, shopIndex: number = -1) {
+  pickPokemon(player: Player, state: GameState, shopIndex: number = -1): Pkm {
     if (
       state.specialGameRule !== SpecialGameRule.DITTO_PARTY &&
       chance(DITTO_RATE) &&
@@ -498,8 +497,8 @@ export default class Shop {
           Rarity.ULTRA
         ][Math.floor(player.rerollCount / 30)] ?? Rarity.ULTRA
       if (player.rerollCount >= 150 && player.rerollCount % 10 === 0) {
-        const legendaryCandidates = LegendaryShop.filter(
-          (p) =>
+        const legendaryCandidates: Pkm[] = LegendaryShop.filter<Pkm>(
+          (p): p is Pkm =>
             !(p in PkmDuos) &&
             getPokemonData(p as Pkm).types.some((type) =>
               specificTypesWanted?.includes(type)
@@ -508,8 +507,8 @@ export default class Shop {
         if (legendaryCandidates.length > 0)
           return pickRandomIn(legendaryCandidates)
       } else if (player.rerollCount >= 100 && player.rerollCount % 10 === 0) {
-        const uniqueCandidates = UniqueShop.filter(
-          (p) =>
+        const uniqueCandidates: Pkm[] = UniqueShop.filter<Pkm>(
+          (p): p is Pkm =>
             !(p in PkmDuos) &&
             getPokemonData(p as Pkm).types.some((type) =>
               specificTypesWanted?.includes(type)
