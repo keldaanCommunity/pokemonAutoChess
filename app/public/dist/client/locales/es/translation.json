@@ -2573,6 +2573,7 @@
   "enable_elo_hint": "Habilitar ganancia o pérdida de Elo para este juego",
   "disable_elo_hint": "Desactiva la ganancia o pérdida de Elo para este juego.",
   "minimum_rank": "Rango mínimo",
+  "ranked_match": "Partida Clasificatoria",
   "smeargle_scribble": "Bocetos de Smeargle",
   "smeargle_scribble_hint": "Smeargle dibuja una nueva regla aleatoria que se aplica durante todo el juego.",
   "quick_play": "Partida Rápida",
@@ -3053,7 +3054,6 @@
   "min_rank_not_reached": "Tu rango no es lo suficientemente alto para jugar esta partida clasificatoria.",
   "not_whitelisted": "Este partido está restringido a una lista blanca de jugadores.",
   "blacklisted": "Has sido expulsado de esta Partida.",
-  "ranked_match": "Partida Clasificatoria",
   "kecleon_dialog": {
     "welcome": "¡Bienvenido a la tienda de Kecleon!",
     "tell_price": "10 GOLD cada uno!",

@@ -1154,6 +1154,7 @@
   "enable_elo_hint": "เปิดการเล่นใช้ Elo ในเกมนี้",
   "disable_elo_hint": "ปิดการเล่นใช้ Elo ในเกมนี้",
   "minimum_rank": "แรงค์ขั้นต่ำ",
+  "ranked_match": "ห้องจำกัดแรงค์",
   "smeargle_scribble": "ห้องหรรษาของ Smeargle",
   "smeargle_scribble_hint": "ห้องหรรษาของ Smeargle จะมีกฏใหม่ทุกครั้งในการเล่นเกม.",
   "quick_play": "ห้องเล่นด่วน",
@@ -1469,7 +1470,6 @@
   "min_rank_not_reached": "แรงค์ของคุณไม่สูงพอที่จะเล่นห้องนี้ได้",
   "not_whitelisted": "ห้องนี้เฉพาะผู้ที่มีสิทธิเท่านั้น",
   "blacklisted": "เสียใจด้วย คุณถูกเตะออกจากห้อง",
-  "ranked_match": "ห้องจำกัดแรงค์",
   "kecleon_dialog": {
     "welcome": "อย่างละ 10 GOLD !",
     "thank_you": "ขอบคุณมาก !"
