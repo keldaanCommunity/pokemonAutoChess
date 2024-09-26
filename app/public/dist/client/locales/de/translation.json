@@ -2555,6 +2555,7 @@
   "enable_elo_hint": "Elo-Gewinn oder -Verlust für dieses Spiel aktivieren",
   "disable_elo_hint": "Elo-Gewinn oder -Verlust für dieses Spiel deaktivieren",
   "minimum_rank": "Mindestrang",
+  "ranked_match": "Rangmatch",
   "smeargle_scribble": "Farbeagle´s Gekritzel",
   "smeargle_scribble_hint": "Farbeagle kritzelt eine neue Zufallsregel, die während des gesamten Spiels gilt.",
   "quick_play": "Treten Sie einer Lobby bei",
@@ -3035,7 +3036,6 @@
   "min_rank_not_reached": "Dein Rang ist nicht hoch genug, um an diesen Rangmatch teilzunehmen",
   "not_whitelisted": "Dieses Spiel ist auf eine Whitelist von Spielern beschränkt",
   "blacklisted": "Du wurdest von diesem match gekickt",
-  "ranked_match": "Rangmatch",
   "kecleon_dialog": {
     "welcome": "Willkommen bei Kecleons Shop!",
     "tell_price": "10 GOLD pro!",

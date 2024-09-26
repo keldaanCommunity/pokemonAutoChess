@@ -2249,6 +2249,7 @@
   "reconnect": "Reconectar",
   "no_elo": "Apenas por diversão",
   "minimum_rank": "Rank mínimo",
+  "ranked_match": "Jogo Rankeado",
   "smeargle_scribble": "Garabato do Smeargle",
   "smeargle_scribble_hint": "Smeargle deixa um garabato com uma norma aleatória que será aplicada para o resto do jogo",
   "quick_play": "Junte-se a um lobby",
@@ -2554,7 +2555,6 @@
   "game_already_started": "O jogo já foi iniciado",
   "min_rank_not_reached": "Seu rank não é alto o suficiente para participar neste jogo rankeado",
   "not_whitelisted": "Este jogo está limitado a uma lista determinada de jogadores",
-  "ranked_match": "Jogo Rankeado",
   "kecleon_dialog": {
     "welcome": "Bem-vindo à loja de Kecleon !",
     "tell_price": "10 GOLD para cada !",

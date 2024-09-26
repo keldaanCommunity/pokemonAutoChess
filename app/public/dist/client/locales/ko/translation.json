@@ -2522,6 +2522,7 @@
   "disable_elo": "Elo 미적용",
   "enable_elo_hint": "이 게임에 Elo 획득이나 손실을 적용시킵니다.",
   "disable_elo_hint": "이 게임에 Elo 획득이나 손실을 적용시키지 않습니다.",
+  "ranked_match": "랭크매치",
   "smeargle_scribble": "루브도의 낙서",
   "smeargle_scribble_hint": "매 게임마다 루브도가 게임내내 무작위 경기규칙을 적용시킵니다.",
   "quick_play": "자동매칭",
@@ -2936,7 +2937,6 @@
   "min_rank_not_reached": "이 랭크매치를 하기 위해선 랭크가 더 높아야 합니다.",
   "not_whitelisted": "이 게임은 허용된 플레이어만 참가가능합니다.",
   "blacklisted": "이 경기에서 추방당했습니다.",
-  "ranked_match": "랭크매치",
   "kecleon_dialog": {
     "welcome": "켈리몬의 상점에 어서와요!",
     "tell_price": "각각 10골드입니다!",

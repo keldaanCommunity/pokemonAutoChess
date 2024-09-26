@@ -2532,6 +2532,7 @@
   "enable_elo_hint": "Active les gains et pertes d'Elo pour cette partie",
   "disable_elo_hint": "Désactive les gains et pertes d'Elo pour cette partie",
   "minimum_rank": "Rang minimum",
+  "ranked_match": "Match Classé",
   "smeargle_scribble": "Gribouilles de Queulorior",
   "smeargle_scribble_hint": "Queulorior gribouille une nouvelle règle aléatoire appliquée pendant toute la partie",
   "quick_play": "Partie rapide",
@@ -3003,7 +3004,6 @@
   "min_rank_not_reached": "Votre rang n'est pas assez élevé pour jouer ce match classé",
   "not_whitelisted": "Cette partie est réservée à une liste blanche de joueurs",
   "blacklisted": "Vous avez été expulsé de ce match",
-  "ranked_match": "Match Classé",
   "kecleon_dialog": {
     "welcome": "Bienvenue au magasin Kecleon !",
     "tell_price": "C'est 10 GOLD pièce !",
