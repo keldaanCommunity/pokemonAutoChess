@@ -25,8 +25,8 @@ export default function GameItem(props: { item: Item }) {
         style={{ width: "4rem", height: "4rem", imageRendering: "pixelated" }}
         src={"assets/item/" + props.item + ".png"}
       ></img>
-      <h3>{t(`item.${props.item}`)}</h3>
-      <p>{addIconsToDescription(t(`item_description.${props.item}`))}</p>
+      <h3 style={{ margin: "0.25em 0" }}>{t(`item.${props.item}`)}</h3>
+      <p style={{ marginBottom: "0.5em" }}>{addIconsToDescription(t(`item_description.${props.item}`))}</p>
       <button
         onClick={() => {
           dispatch(itemClick(props.item))

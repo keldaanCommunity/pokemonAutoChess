@@ -1986,7 +1986,7 @@
     "SUPER_ROD": "Après chaque tour PvP, pêche un Pokémon qui est ajouté à un emplacement libre de votre banc. Peut attraper des Pokémons WATER épiques ainsi que des Froussardine.",
     "DYNAMAX_BAND": "Au début du combat, augmente les HP max du porteur de 250%",
     "SHINY_STONE": "Donne +2 à la synergie LIGHT et invoque un second spot de lumière sur la case du porteur",
-    "RARE_CANDY": "Après chaque tour, invoque une copie 1 STAR de celui-ci sur votre banc (sauf Unique, Légendaire et éclos). Peut seulement être porté par un Pokémon pouvant évoluer.",
+    "RARE_CANDY": "Fait évoluer immédiatement un Pokémon. Peut seulement être porté par un Pokémon pouvant évoluer, et réduit son prix de vente à son niveau précédent.",
     "EVIOLITE": "Le lanceur gagne beaucoup de statistiques mais son espèce ne peut plus évoluer. Peut seulement être porté par un Pokémon pouvant évoluer.",
     "WHITE_FLUTE": "Invoque 3 Pokémons WILD autour du porteur au début du combat. La rareté et le niveau augmentent de tour en tour.",
     "GOLD_BOTTLE_CAP": "+1% CRIT_CHANCE et CRIT_POWER par GOLD en votre possession. Gagnez 1 GOLD par KO, et un jackpot de 5 GOLD si le porteur élimine le dernier ennemi.",

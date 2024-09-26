@@ -39,6 +39,9 @@
 
 # Changes to Items
 
+- Golden Rod has been removed
+- Rare Candy has been reverted to its original proposition in 5.2, with a few changes: it is now holdable and takes an item slot ; it reduces the sell price of its holder to its previous tier ; it gives -20% Attack Speed and -30% AP. Easy on the sugar !
+
 # Gameplay
 
 - Ranked matches and Smeargle's Scribble can now be created at anytime from the New game menu

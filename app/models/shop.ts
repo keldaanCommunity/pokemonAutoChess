@@ -1,4 +1,5 @@
 import GameState from "../rooms/states/game-state"
+import { IPokemon, IPokemonEntity } from "../types"
 import {
   ARCEUS_RATE,
   DITTO_RATE,
@@ -67,20 +68,25 @@ export function getAdditionalsTier1(pokemons: Pkm[]) {
 }
 
 export function getSellPrice(
-  name: Pkm,
-  shiny: boolean,
+  pokemon: IPokemon | IPokemonEntity,
   specialGameRule?: SpecialGameRule | null
 ): number {
+  const name = pokemon.name
+
   if (specialGameRule === SpecialGameRule.FREE_MARKET && name !== Pkm.EGG)
     return 0
 
-  const pokemonData = getPokemonData(name)
   const duo = Object.entries(PkmDuos).find(([key, duo]) => duo.includes(name))
 
   let price = 1
+  let stars = pokemon.stars
+
+  if (pokemon.items && pokemon.items.has(Item.RARE_CANDY)) {
+    stars = min(1)(stars - 1)
+  }
 
   if (name === Pkm.EGG) {
-    price = shiny ? 10 : 2
+    price = pokemon.shiny ? 10 : 2
   } else if (name == Pkm.DITTO) {
     price = 5
   } else if (name === Pkm.MAGIKARP) {
@@ -97,18 +103,18 @@ export function getSellPrice(
     price = 10
   } else if (Unowns.includes(name)) {
     price = 1
-  } else if (pokemonData.rarity === Rarity.HATCH) {
-    price = [3, 4, 5][pokemonData.stars - 1] ?? 5
-  } else if (pokemonData.rarity === Rarity.UNIQUE) {
+  } else if (pokemon.rarity === Rarity.HATCH) {
+    price = [3, 4, 5][stars - 1] ?? 5
+  } else if (pokemon.rarity === Rarity.UNIQUE) {
     price = duo ? 8 : 15
-  } else if (pokemonData.rarity === Rarity.LEGENDARY) {
+  } else if (pokemon.rarity === Rarity.LEGENDARY) {
     price = duo ? 10 : 20
   } else if (PokemonFactory.getPokemonBaseEvolution(name) == Pkm.EEVEE) {
-    price = RarityCost[pokemonData.rarity]
+    price = RarityCost[pokemon.rarity]
   } else if (duo) {
-    price = Math.ceil((RarityCost[pokemonData.rarity] * pokemonData.stars) / 2)
+    price = Math.ceil((RarityCost[pokemon.rarity] * stars) / 2)
   } else {
-    price = RarityCost[pokemonData.rarity] * pokemonData.stars
+    price = RarityCost[pokemon.rarity] * stars
   }
 
   if (

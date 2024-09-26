@@ -2069,7 +2069,7 @@
     "SUPER_ROD": "After each PvP round, fish a Pokémon that is then added to a free slot on your bench. Can catch epic WATER Pokémons and Wishiwashi.",
     "DYNAMAX_BAND": "At the start of the fight, raise max HP by 250%.",
     "SHINY_STONE": "Gives +2 to LIGHT synergy and spawn a second light spot on the holder's cell",
-    "RARE_CANDY": "After each round, spawn a 1 STAR copy of it on bench (except Unique, Legendary and Hatch). Can only be held by non-fully evolved Pokémon.",
+    "RARE_CANDY": "Immediately make a Pokémon evolve. Can only be held by non-fully evolved Pokémon, and reduce its sell price to its previous tier.",
     "EVIOLITE": "Holder gets a bunch of stats, but can no longer evolve. Can only be held by non-fully evolved Pokémon.",
     "WHITE_FLUTE": "Spawn 3 WILD Pokémons around the holder at the start of the fight. Rarity and tier increase with stage level.",
     "GOLD_BOTTLE_CAP": "+1% CRIT_CHANCE and CRIT_POWER per GOLD you have. Gain 1 GOLD per KO, and a 5 GOLD jackpot if eliminating the last enemy.",

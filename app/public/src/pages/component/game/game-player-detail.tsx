@@ -64,14 +64,14 @@ export default function GamePlayerDetail(props: {
                     record.result === BattleResult.WIN
                       ? "4px solid #4aa52e"
                       : record.result === BattleResult.DRAW
-                      ? "4px solid #cc6a28"
-                      : "4px solid #8c2022",
+                        ? "4px solid #cc6a28"
+                        : "4px solid #8c2022",
                   marginLeft: "6px",
                   borderRadius: "12px"
                 }}
                 src={getAvatarSrc(record.avatar)}
               />
-              <p>
+              <p style={{ fontSize: "80%" }}>
                 {(record.id === "pve" ? t(record.name) : record.name).slice(
                   0,
                   5
