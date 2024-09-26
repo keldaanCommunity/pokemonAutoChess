@@ -54,9 +54,11 @@
 
 - Add a new "Fullscreen" button in the sidebar
 - The game now automatically enters fullscreen when starting a game if supported by the browser. You can disable this in Options > Interface
+- Show total money earned, total damage dealt and total reroll count in the player detail tooltip ingame
 
 # Bugfix
 
 - Fix regional variants of additional pokemons not being immediately available after the additional pokemon being picked
+- Fix total money earned not being correctly updated sometimes
 
 # Misc

@@ -1,29 +1,20 @@
-import { ArraySchema } from "@colyseus/schema"
 import React, { useMemo } from "react"
 import { useTranslation } from "react-i18next"
-import HistoryItem from "../../../../../models/colyseus-models/history-item"
-import Synergies from "../../../../../models/colyseus-models/synergies"
+import { IPlayer } from "../../../../../types"
 import { SynergyTriggers } from "../../../../../types/Config"
 import { BattleResult } from "../../../../../types/enum/Game"
 import { getAvatarSrc } from "../../../utils"
 import { Life } from "../icons/life"
 import { Money } from "../icons/money"
 
-export default function GamePlayerDetail(props: {
-  name: string
-  life: number
-  money: number
-  level: number
-  history: ArraySchema<HistoryItem>
-  synergies: Synergies
-}) {
+export default function GamePlayerDetail(props: { player: IPlayer }) {
   const { t } = useTranslation()
   const synergyList = useMemo(
     () =>
-      Object.entries(props.synergies)
+      Object.entries(props.player.synergies)
         .filter(([syn, val]) => val >= SynergyTriggers[syn][0])
         .map(([syn]) => syn),
-    [props.synergies]
+    [props.player.synergies]
   )
 
   return (
@@ -35,19 +26,19 @@ export default function GamePlayerDetail(props: {
           alignItems: "center"
         }}
       >
-        <span className="player-name">{props.name}</span>
+        <span className="player-name">{props.player.name}</span>
         <span>
-          {t("lvl")} {props.level}
+          {t("lvl")} {props.player.experienceManager.level}
         </span>
         <span>
-          <Life value={props.life} />
+          <Life value={props.player.life} />
         </span>
         <span>
-          <Money value={props.money} />
+          <Money value={props.player.money} />
         </span>
       </div>
       <div style={{ display: "flex", justifyContent: "start" }}>
-        {props.history.slice(-5).map((record, i) => {
+        {props.player.history.slice(-5).map((record, i) => {
           return (
             <div
               key={`${record.name}${i}_game-player-detail`}
@@ -85,7 +76,7 @@ export default function GamePlayerDetail(props: {
         {synergyList.map((synergy, i) => {
           return (
             <div
-              key={`${props.name}_${synergy}${i}_game-player-detail`}
+              key={`${props.player.name}_${synergy}${i}_game-player-detail`}
               style={{
                 display: "flex",
                 justifyContent: "space-around",
@@ -102,6 +93,12 @@ export default function GamePlayerDetail(props: {
             </div>
           )
         })}
+      </div>
+      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+        <span>{t("total")}</span>
+        <span title={t("total_money_earned")}><img src="assets/icons/money.svg" alt="$" style={{ width: "24px", height: "24px" }} /> {props.player.totalMoneyEarned}</span>
+        <span title={t("total_player_damage_dealt")}><img src="assets/icons/ATK.png" alt="✊" style={{ width: "24px", height: "24px" }} />{props.player.totalPlayerDamageDealt}</span>
+        <span title={t("total_reroll_count")}><img src="assets/ui/refresh.svg" alt="↻" style={{ width: "24px", height: "24px" }} /> {props.player.rerollCount}</span>
       </div>
     </div>
   )

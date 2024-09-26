@@ -354,7 +354,6 @@ export interface IPlayer {
   role: Role
   itemsProposition: ArraySchema<Item>
   pokemonsProposition: ArraySchema<PkmProposition>
-  rerollCount: number
   loadingProgress: number
   effects: Effects
   isBot: boolean
@@ -367,6 +366,9 @@ export interface IPlayer {
   ultraRegionalPool: Pkm[]
   opponents: Map<string, number>
   ghost: boolean
+  rerollCount: number
+  totalMoneyEarned: number
+  totalPlayerDamageDealt: number
 }
 
 export interface IPokemon {

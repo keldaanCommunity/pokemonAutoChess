@@ -625,7 +625,7 @@ export class OnSellDropCommand extends Command<
       if (pokemon) {
         this.state.shop.releasePokemon(pokemon.name, player)
         const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
-        player.addMoney(sellPrice)
+        player.addMoney(sellPrice, false)
         pokemon.items.forEach((it) => {
           player.items.push(it)
         })
