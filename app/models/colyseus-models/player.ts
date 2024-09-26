@@ -401,23 +401,11 @@ export default class Player extends Schema implements IPlayer {
     if (this.items.includes(Item.SUPER_ROD) && fishingLevel !== 3)
       removeInArray<Item>(this.items, Item.SUPER_ROD)
 
-    if (
-      this.items.includes(Item.OLD_ROD) === false &&
-      this.items.includes(Item.GOLDEN_ROD) === false &&
-      fishingLevel === 1
-    )
+    if (this.items.includes(Item.OLD_ROD) === false && fishingLevel === 1)
       this.items.push(Item.OLD_ROD)
-    if (
-      this.items.includes(Item.GOOD_ROD) === false &&
-      this.items.includes(Item.GOLDEN_ROD) === false &&
-      fishingLevel === 2
-    )
+    if (this.items.includes(Item.GOOD_ROD) === false && fishingLevel === 2)
       this.items.push(Item.GOOD_ROD)
-    if (
-      this.items.includes(Item.SUPER_ROD) === false &&
-      this.items.includes(Item.GOLDEN_ROD) === false &&
-      fishingLevel === 3
-    )
+    if (this.items.includes(Item.SUPER_ROD) === false && fishingLevel === 3)
       this.items.push(Item.SUPER_ROD)
   }
 

@@ -62,7 +62,7 @@ export default function GamePlayerDetail(props: { player: IPlayer }) {
                 }}
                 src={getAvatarSrc(record.avatar)}
               />
-              <p>
+              <p style={{ fontSize: "80%" }}>
                 {(record.id === "pve" ? t(record.name) : record.name).slice(
                   0,
                   5

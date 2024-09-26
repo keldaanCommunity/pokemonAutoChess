@@ -482,6 +482,15 @@ export default class Simulation extends Schema implements ISimulation {
       pokemon.addCritPower(pokemon.player.money / 100, pokemon, 0, false)
     }
 
+    if (item === Item.REPEAT_BALL && pokemon.player) {
+      pokemon.addAbilityPower(
+        Math.floor(pokemon.player.rerollCount / 2),
+        pokemon,
+        0,
+        false
+      )
+    }
+
     if (item === Item.SACRED_ASH) {
       pokemon.status.resurection = true
     }

@@ -405,7 +405,7 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
-    const pokemon = player.getPokemonAt(x, y)
+    let pokemon = player.getPokemonAt(x, y)
     if (pokemon === undefined) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
@@ -487,46 +487,12 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
-    if (item === Item.GOLDEN_ROD) {
-      let needsRecomputingSynergiesAgain = false
-      pokemon?.items.forEach((item) => {
-        pokemon.items.delete(item)
-        player.items.push(item)
-        if (item in SynergyGivenByItem) {
-          const type = SynergyGivenByItem[item]
-          const nativeTypes = getPokemonData(pokemon.name).types
-          if (nativeTypes.includes(type) === false) {
-            pokemon.types.delete(type)
-            if (!isOnBench(pokemon)) {
-              needsRecomputingSynergiesAgain = true
-            }
-          }
-        }
-      })
-      if (needsRecomputingSynergiesAgain) {
-        player.updateSynergies()
-      }
-      client.send(Transfer.DRAG_DROP_FAILED, message)
-      return
-    }
-
     if (!pokemon.canHoldItems) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
     }
 
     if (item === Item.EVIOLITE && pokemon.evolution === Pkm.DEFAULT) {
-      client.send(Transfer.DRAG_DROP_FAILED, message)
-      return
-    }
-
-    if (
-      item === Item.RARE_CANDY &&
-      (pokemon.evolution === Pkm.DEFAULT ||
-        pokemon.rarity === Rarity.UNIQUE ||
-        pokemon.rarity === Rarity.LEGENDARY ||
-        pokemon.rarity === Rarity.HATCH)
-    ) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
     }
@@ -571,6 +537,19 @@ export class OnDragDropItemCommand extends Command<
       // prevent adding twitce the same completed item
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
+    }
+
+    if (item === Item.RARE_CANDY) {
+      const evolution = pokemon?.evolution
+      if (
+        !evolution ||
+        evolution === Pkm.DEFAULT ||
+        pokemon.items.has(Item.EVIOLITE)
+      ) {
+        client.send(Transfer.DRAG_DROP_FAILED, message)
+        return
+      }
+      pokemon = player.transformPokemon(pokemon, evolution)
     }
 
     if (isBasicItem && existingBasicItemToCombine) {
@@ -645,11 +624,7 @@ export class OnSellDropCommand extends Command<
 
       if (pokemon) {
         this.state.shop.releasePokemon(pokemon.name, player)
-        const sellPrice = getSellPrice(
-          pokemon.name,
-          pokemon.shiny,
-          this.state.specialGameRule
-        )
+        const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
         player.addMoney(sellPrice, false)
         pokemon.items.forEach((it) => {
           player.items.push(it)
@@ -1147,15 +1122,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       for (let i = 0; i < nbTrees; i++) {
         player.berryTreesStage[i] = max(3)(player.berryTreesStage[i] + 1)
       }
-
-      player.board.forEach((pokemon) => {
-        if (
-          pokemon.items.has(Item.RARE_CANDY) &&
-          pokemon.evolution !== Pkm.DEFAULT
-        ) {
-          this.room.spawnOnBench(player, PkmFamily[pokemon.name])
-        }
-      })
     })
 
     this.spawnWanderingPokemons()

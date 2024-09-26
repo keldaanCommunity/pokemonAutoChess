@@ -5,7 +5,7 @@ export function Money(props: { value?: number | string }) {
   return (
     <>
       {props.value != null && (
-        <span style={{ verticalAlign: "middle", flex: "1", fontWeight: "500" }}>
+        <span style={{ verticalAlign: "middle", flex: "1", fontWeight: "600" }}>
           {props.value}
         </span>
       )}
