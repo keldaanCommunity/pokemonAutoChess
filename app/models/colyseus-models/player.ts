@@ -176,9 +176,9 @@ export default class Player extends Schema implements IPlayer {
     }
   }
 
-  addMoney(value: number) {
+  addMoney(value: number, countTotalEarned = true) {
     this.money += value
-    this.totalMoneyEarned += value
+    if (countTotalEarned && value > 0) this.totalMoneyEarned += value
   }
 
   addBattleResult(
