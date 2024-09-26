@@ -47,14 +47,7 @@ export default function GamePlayer(props: {
         place="left"
         data-tooltip-offset={{ left: 30, bottom: props.index === 0 ? 50 : 0 }}
       >
-        <GamePlayerDetail
-          name={props.player.name}
-          life={props.player.life}
-          money={props.player.money}
-          level={props.player.experienceManager.level}
-          history={props.player.history}
-          synergies={props.player.synergies}
-        />
+        <GamePlayerDetail player={props.player} />
       </Tooltip>
     </div>
   )

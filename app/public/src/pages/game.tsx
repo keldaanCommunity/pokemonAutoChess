@@ -661,7 +661,10 @@ export default function Game() {
           "rank",
           "regionalPokemons",
           "streak",
-          "title"
+          "title",
+          "rerollCount",
+          "totalMoneyEarned",
+          "totalPlayerDamageDealt"
         ]
 
         fields.forEach((field) => {

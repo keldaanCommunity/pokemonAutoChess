@@ -650,7 +650,7 @@ export class OnSellDropCommand extends Command<
           pokemon.shiny,
           this.state.specialGameRule
         )
-        player.addMoney(sellPrice)
+        player.addMoney(sellPrice, false)
         pokemon.items.forEach((it) => {
           player.items.push(it)
         })
