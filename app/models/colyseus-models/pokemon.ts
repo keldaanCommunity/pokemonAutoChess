@@ -14225,6 +14225,7 @@ export class Grubbin extends Pokemon {
   maxPP = 80
   range = 3
   skill = Ability.ZAP_CANNON
+  passive = Passive.HATCH
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -14241,6 +14242,7 @@ export class Charjabug extends Pokemon {
   maxPP = 80
   range = 3
   skill = Ability.ZAP_CANNON
+  passive = Passive.HATCH
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
