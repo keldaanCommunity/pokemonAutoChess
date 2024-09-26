@@ -1601,8 +1601,9 @@ export class HighJumpKickStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = [50, 100, 200][pokemon.stars - 1] ?? 200
-    pokemon.addPP(target.pp, pokemon, 0, false)
-    target.addPP(-target.pp, pokemon, 0, false)
+    const ppStolen = max(70)(target.pp)
+    pokemon.addPP(ppStolen, pokemon, 0, false)
+    target.addPP(-ppStolen, pokemon, 0, false)
     target.count.manaBurnCount++
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
@@ -3449,7 +3450,7 @@ export class WaterfallStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const shield = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
+    const shield = [50, 100, 150][pokemon.stars - 1] ?? 150
     pokemon.addShield(shield, pokemon, 1, crit)
     pokemon.status.clearNegativeStatus()
     board.effects[pokemon.positionY * board.columns + pokemon.positionX] =
@@ -6711,7 +6712,7 @@ export class QuiverDanceStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     pokemon.addAttack(5, pokemon, 1, crit)
     pokemon.addSpecialDefense(5, pokemon, 1, crit)
-    pokemon.addAttackSpeed(20, pokemon, 1, crit)
+    pokemon.addAttackSpeed(10, pokemon, 1, crit)
     pokemon.addAbilityPower(20, pokemon, 0, false)
   }
 }
@@ -7498,7 +7499,7 @@ export class DoomDesireStrategy extends AbilityStrategy {
             true
           )
         } else {
-          pokemon.addPP(60, pokemon, 0, false)
+          pokemon.addPP(100, pokemon, 0, false)
         }
       }, 2000)
     )

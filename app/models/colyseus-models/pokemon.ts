@@ -5220,7 +5220,7 @@ export class Kyogre extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 120
+  maxPP = 100
   range = 3
   skill = Ability.ORIGIN_PULSE
   passive = Passive.PRIMAL
@@ -6399,7 +6399,7 @@ export class PrimalKyogre extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 100
+  maxPP = 90
   range = 3
   skill = Ability.ORIGIN_PULSE
   passive = Passive.RAIN
@@ -9448,7 +9448,7 @@ export class Wailmer extends Pokemon {
   atk = 6
   def = 2
   speDef = 2
-  maxPP = 110
+  maxPP = 100
   range = 1
   skill = Ability.DIVE
   additional = true
@@ -9463,7 +9463,7 @@ export class Wailord extends Pokemon {
   atk = 11
   def = 3
   speDef = 3
-  maxPP = 110
+  maxPP = 100
   range = 1
   skill = Ability.DIVE
   additional = true
@@ -10728,7 +10728,7 @@ export class Carvanha extends Pokemon {
   atk = 12
   def = 1
   speDef = 2
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.BITE
   additional = true
@@ -10743,7 +10743,7 @@ export class Sharpedo extends Pokemon {
   atk = 28
   def = 2
   speDef = 3
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.BITE
   additional = true
@@ -12095,7 +12095,7 @@ export class Doduo extends Pokemon {
   atk = 12
   def = 3
   speDef = 2
-  maxPP = 70
+  maxPP = 80
   range = 1
   skill = Ability.AGILITY
   attackSprite = AttackSprite.FLYING_MELEE
@@ -12110,7 +12110,7 @@ export class Dodrio extends Pokemon {
   atk = 28
   def = 5
   speDef = 3
-  maxPP = 70
+  maxPP = 80
   range = 1
   skill = Ability.AGILITY
   attackSprite = AttackSprite.FLYING_MELEE
@@ -12187,10 +12187,10 @@ export class Wingull extends Pokemon {
   stars = 1
   evolution = Pkm.PELIPPER
   hp = 90
-  atk = 8
+  atk = 10
   def = 5
   speDef = 3
-  maxPP = 75
+  maxPP = 70
   range = 2
   skill = Ability.WHIRLWIND
   additional = true
@@ -12203,10 +12203,10 @@ export class Pelipper extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 200
-  atk = 20
+  atk = 24
   def = 7
   speDef = 4
-  maxPP = 75
+  maxPP = 70
   range = 2
   skill = Ability.WHIRLWIND
   additional = true
@@ -14636,7 +14636,7 @@ export class Seaking extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.NORMAL])
   rarity = Rarity.RARE
   stars = 2
-  hp = 200
+  hp = 250
   atk = 16
   def = 4
   speDef = 4
@@ -14652,7 +14652,7 @@ export class Luvdisc extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 150
-  atk = 11
+  atk = 15
   def = 3
   speDef = 5
   maxPP = 60

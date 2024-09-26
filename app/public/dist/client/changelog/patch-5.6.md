@@ -22,6 +22,17 @@
 # Changes to Pokemon & Abilities
 
 - Nerf Gotitelle: Psychic Dark Human -> Psychic Human
+- Nerf High Jump Kick (Buneary, Bounsweet): steal ~~all PP~~ up to 70 PP from target
+- Buff Kyogre: PP 120 → 100, Primal Kyogre: PP 100 → 90
+- Buff Doom Desire (Jirachi): regain ~~60~~ 100 PP if target is KO in the mean time
+- Buff Luvdisc: Attack 11 → 15
+- Increase Remoraid fishing chance with Mantyke: 20 → 30%
+- Buff Wingull line: Attack: 8/20→10/24, PP: 75→70
+- Buff Wailmer line: PP 110 → 100
+- Nerf Doduo line: PP 70 → 80
+- Buff Seaking: HP 200 → 250 ; buff Waterfall: shield 30/60/120 → 50/100/150
+- Buff Carvanha line: PP 100 → 80
+- Nerf Quiver dance (Burmy): Attack speed buff 20% → 10%
 - Changed Seismic Toss (Cobalion): ~~deals 7/14/28 true damage to the target multiplied by the number of Pokémon in your team~~ deals 5/10/20 true damage multiplied by your player level
 
 # Changes to Synergies
