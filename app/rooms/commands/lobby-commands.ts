@@ -1,7 +1,7 @@
 import { Command } from "@colyseus/command"
 import { Client, RoomListingData, matchMaker } from "colyseus"
 import { nanoid } from "nanoid"
-import { writeHeapSnapshot } from "v8"
+import { getHeapSnapshot } from "v8"
 import {
   getRemainingPlayers,
   getTournamentStage,
@@ -59,6 +59,8 @@ import { cleanProfanity } from "../../utils/profanity-filter"
 import { chance, pickRandomIn } from "../../utils/random"
 import { convertSchemaToRawObject, values } from "../../utils/schemas"
 import CustomLobbyRoom from "../custom-lobby-room"
+import path from "path"
+import { createWriteStream } from "fs-extra"
 
 export class OnJoinCommand extends Command<
   CustomLobbyRoom,
@@ -169,9 +171,39 @@ export class GiveTitleCommand extends Command<
 }
 
 export class HeapSnapshotCommand extends Command<CustomLobbyRoom> {
-  execute() {
-    logger.info("writing heap snapshot")
-    writeHeapSnapshot()
+  async execute() {
+    const timestamp = new Date().toISOString().replace(/[:.]/g, "-")
+    const filename = path.join(
+      process.cwd(),
+      `heap-snapshot-${timestamp}.heapsnapshot`
+    )
+
+    logger.info(`Starting heap snapshot stream to ${filename}`)
+
+    try {
+      const snapshotStream = getHeapSnapshot()
+      const fileStream = createWriteStream(filename)
+
+      snapshotStream.pipe(fileStream)
+
+      snapshotStream.on("end", () => {
+        logger.info(`Heap snapshot successfully streamed to ${filename}`)
+
+        // Dunno if needed, but we need to expose garbage collection if wanted
+        if (global.gc) {
+          logger.info("Forcing garbage collection")
+          global.gc()
+        }
+      })
+    } catch (error) {
+      logger.error("Error while streaming heap snapshot:", error)
+    }
+
+    // Dunno if needed to force manually, but why not
+    if (global.gc) {
+      logger.info("Forcing garbage collection")
+      global.gc()
+    }
   }
 }
 
