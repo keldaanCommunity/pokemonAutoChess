@@ -1287,7 +1287,7 @@
     "TWISTING_NETHER": "Inflige [80,SP] SPECIAL aux ennemis adjacents à la cible dans un rayon de 2 cases, et les téléporte à un endroit aléatoire sur le plateau",
     "WONDER_GUARD": "Inflige [30,60,120,SP] SPECIAL et rend tous les ennemis adjacents PARALYSIS pendant 3 secondes",
     "ELECTRIC_SURGE": "Augmente la ATK_SPEED de tous les pokémons ELECTRIC de [10,SP] %",
-    "PSYCHIC_SURGE": "Augmente la AP de tous les pokémons PSYCHIC de [5,SP]%, excepté le lanceur",
+    "PSYCHIC_SURGE": "Augmente la AP de tous les pokémons PSYCHIC de [10,SP]%, excepté le lanceur",
     "MIND_BLOWN": "Inflige [50,SP] % des HP actuels de la cible en tant que SPECIAL",
     "PAYDAY": "Inflige [30,60,120,SP] SPECIAL. Si la cible est KO, le joueur reçoit [1,2,3] pièces",
     "PICKUP": "Inflige [30,60,120,SP] SPECIAL et vole un objet de la cible. Si pas d'objet, vole [1,2,3] GOLD à son propriétaire.",

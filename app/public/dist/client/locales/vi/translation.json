@@ -1294,7 +1294,7 @@
     "TWISTING_NETHER": "Gây [80,SP] SPECIAL lên toàn bộ đối thủ ở gần trong bán kính 2 ô, sau đó dịch chuyển chúng đến một nơi ngẫu nhiên trên chiến trường",
     "WONDER_GUARD": "Gây [30,60,120,SP] SPECIAL lên toàn bộ đối thủ ở gần, sau đó PARALYSIS chúng trong 3 giây",
     "ELECTRIC_SURGE": "Tăng [10,SP]% ATK_SPEED cho toàn bộ Pokémon hệ ELECTRIC",
-    "PSYCHIC_SURGE": "Tăng [5,SP] AP cho toàn bộ Pokémon hệ PSYCHIC trừ Pokémon thi triển",
+    "PSYCHIC_SURGE": "Tăng [10,SP] AP cho toàn bộ Pokémon hệ PSYCHIC trừ Pokémon thi triển",
     "MIND_BLOWN": "Gây SPECIAL tương đương với [50,SP] % HP hiện tại của mục tiêu",
     "PAYDAY": "Gây [30,60,120,SP] SPECIAL. Nếu mục tiêu bị hạ gục, người chơi nhận được [1,2,3] GOLD",
     "BEAT_UP": "Triệu hồi [1,2,3] Houndour ([100,SP]% HP, không có trang bị)",

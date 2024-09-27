@@ -1347,7 +1347,7 @@
     "TWISTING_NETHER": "Deals [80,SP] SPECIAL to all enemies adjacent to the target in a 2-cell radius, then teleport them randomly across the battlefield",
     "WONDER_GUARD": "Deal [30,60,120,SP] SPECIAL to all adjacent enemy Pokémon and make them PARALYSIS for 3 seconds",
     "ELECTRIC_SURGE": "Buff the ATK_SPEED of all ELECTRIC Pokémons by [10,SP]%",
-    "PSYCHIC_SURGE": "Increase AP of all PSYCHIC Pokémons by [5,SP]%, except the caster",
+    "PSYCHIC_SURGE": "Increase AP of all PSYCHIC Pokémons by [10,SP]%, except the caster",
     "MIND_BLOWN": "Deals [50,SP] % of target current HP as SPECIAL",
     "PAYDAY": "Deals [30,60,120,SP] SPECIAL. If the target is KO, the player receive [1,2,3] GOLD",
     "PICKUP": "Deals [30,60,120,SP] SPECIAL and steal one item from the target. If no item, steal [1,2,3] GOLD from its owner.",

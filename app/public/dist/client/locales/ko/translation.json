@@ -1292,7 +1292,7 @@
     "TWISTING_NETHER": "대상으로부터 반경 2의 범위에 있는 모든 적들에게 [80,SP] SPECIAL 을 가한 후, 그들을 전장 내의 아무 장소로 보내버린다.",
     "WONDER_GUARD": "인접한 적 포켓몬들에게 [30,60,120,SP] SPECIAL 와 3초간의 PARALYSIS 상태를 가한다.",
     "ELECTRIC_SURGE": "모든 ELECTRIC 포켓몬의 ATK_SPEED 를 [10,SP]% 증가시킨다.",
-    "PSYCHIC_SURGE": "시전자를 제외한 모든 PSYCHIC 포켓몬의 AP 를 [5,SP]% 증가시킨다.",
+    "PSYCHIC_SURGE": "시전자를 제외한 모든 PSYCHIC 포켓몬의 AP 를 [10,SP]% 증가시킨다.",
     "MIND_BLOWN": "대상의 현재체력의 [50,SP] %만큼 SPECIAL 로 가한다.",
     "PAYDAY": "대상에 [30,60,120,SP] SPECIAL 를 가한다. 대상이 기절할 경우, 플레이어는 [1,2,3] GOLD 를 획득한다.",
     "BEAT_UP": "[100,SP]% 의 HP, 도구를 지니지 않은 델빌 [1,2,3] 마리를 소환한다.",

@@ -35,6 +35,7 @@
 - Nerf Quiver dance (Burmy): Attack speed buff 20% → 10%
 - Buff Phione line: PP 100 → 90
 - Revert 5.4 Tapu Fini buff: PP 80 → 100
+- Buff Psychic surge (Tapu Lele)): AP buff 5 → 10%
 - Changed Seismic Toss (Cobalion): ~~deals 7/14/28 true damage to the target multiplied by the number of Pokémon in your team~~ deals 5/10/20 true damage multiplied by your player level
 
 # Changes to Synergies

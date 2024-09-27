@@ -560,7 +560,7 @@ export class PsychicSurgeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const buff = 5
+    const buff = 10
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (
         ally &&

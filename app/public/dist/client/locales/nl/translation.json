@@ -901,7 +901,7 @@
     "TWISTING_NETHER": "Breng [80,SP] SPECIAL aan alle vijanden naast het doelwit in een straal van 2 cellen en teleporteert ze vervolgens willekeurig over het slagveld.",
     "WONDER_GUARD": "Breng [30,60,120,SP] SPECIAL toe aan alle aangrenzende vijandelijke Pokémon en pas de PARALYSIS status toe aan hen voor 3 seconden",
     "ELECTRIC_SURGE": "Verhoog ATK_SPEED van alle ELECTRIC pokemons met [10,SP]%",
-    "PSYCHIC_SURGE": "Verhoog AP van alle PSYCHIC Pokemons met [5,SP]%, behalve de caster",
+    "PSYCHIC_SURGE": "Verhoog AP van alle PSYCHIC Pokemons met [10,SP]%, behalve de caster",
     "MIND_BLOWN": "Biedt [50,SP] % van de beoogde huidige HP aan als SPECIAL",
     "PAYDAY": "Aanbiedingen [30,60,120,SP] SPECIAL. Als het doelwit KO is, ontvangt de speler [1,2,3] goud",
     "BEAT_UP": "Roep [1,2,3] Houndour op ([100,SP]% HP, geen items)",

@@ -1244,7 +1244,7 @@
     "TWISTING_NETHER": "Inflige [80,SP] SPECIAL a todos os inimigos adjacentes ao alvo num raio de 2 células, depois teletransporta-os aleatoriamente pelo campo de batalha",
     "WONDER_GUARD": "Inflige [30,60,120,SP] SPECIAL e deixa todos os inimigos adjacentes PARALYSIS por 3 segundos",
     "ELECTRIC_SURGE": "Aumente a ATK_SPEED de todos os Pokémon ELECTRIC em [10,SP]%",
-    "PSYCHIC_SURGE": "Aumente o AP de todos os pokémons PSYCHIC em [5,SP]%, exceto o lançador",
+    "PSYCHIC_SURGE": "Aumente o AP de todos os pokémons PSYCHIC em [10,SP]%, exceto o lançador",
     "MIND_BLOWN": "Distribui [50,SP] % do HP alvo atual como SPECIAL",
     "PAYDAY": "Inflige [30,60,120,SP] SPECIAL. Se o alvo for KO, o jogador recebe [1,2,3] ouro",
     "BEAT_UP": "Summon [1,2,3] Houndour ([100,SP]% HP, sem itens)",
