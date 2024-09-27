@@ -3420,6 +3420,20 @@ export class SacredSwordStrategy extends AbilityStrategy {
   }
 }
 
+export class MetalBurstStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = Math.floor(30 + 3 * pokemon.count.fightingBlockCount)
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
+  }
+}
+
 export class LeafBladeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -10483,5 +10497,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ROAR]: new RoarStrategy(),
   [Ability.INFESTATION]: new InfestationStrategy(),
   [Ability.IVY_CUDGEL]: new IvyCudgelStrategy(),
-  [Ability.FORCE_PALM]: new ForcePalmStrategy()
+  [Ability.FORCE_PALM]: new ForcePalmStrategy(),
+  [Ability.METAL_BURST]: new MetalBurstStrategy()
 }

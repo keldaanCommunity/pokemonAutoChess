@@ -1410,6 +1410,10 @@ export function displayAbility(
         .setRotation(Math.PI)
       break
 
+    case Ability.METAL_BURST:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
     case Ability.JUDGEMENT:
       addAbilitySprite(skill, coordinatesTarget, true)
         .setOrigin(0.5, 1)

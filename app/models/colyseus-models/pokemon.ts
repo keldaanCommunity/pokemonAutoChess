@@ -5768,7 +5768,7 @@ export class Cobalion extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.SEISMIC_TOSS
+  skill = Ability.METAL_BURST
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
