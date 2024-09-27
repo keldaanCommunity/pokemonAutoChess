@@ -192,12 +192,6 @@ export class HeapSnapshotCommand extends Command<CustomLobbyRoom> {
     } catch (error) {
       logger.error("Error while streaming heap snapshot:", error)
     }
-
-    // Dunno if needed to force manually, but why not
-    if (global.gc) {
-      logger.info("Forcing garbage collection")
-      global.gc()
-    }
   }
 }
 
