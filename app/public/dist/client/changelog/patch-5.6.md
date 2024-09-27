@@ -38,6 +38,7 @@
 - Buff Psychic surge (Tapu Lele)): AP buff 5 → 10%
 - New ability for Cobalion: Metal Burst: Deal 30 true damage to the target. Increase damage by 10% for each attack blocked by user fighting
 - Change Nightmare (Ghastly): buffed damage: 25/50/100 → 40/80/150, reduced silence duration 2/3/8 → 1.5/3/6 seconds.
+- Nerf Misdreavus line: PP 95 → 100
 
 # Changes to Synergies
 

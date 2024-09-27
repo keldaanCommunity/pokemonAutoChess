@@ -12060,7 +12060,7 @@ export class Misdreavus extends Pokemon {
   atk = 8
   def = 2
   speDef = 3
-  maxPP = 95
+  maxPP = 100
   range = 3
   skill = Ability.NIGHT_SHADE
   additional = true
@@ -12079,7 +12079,7 @@ export class Mismagius extends Pokemon {
   atk = 23
   def = 2
   speDef = 4
-  maxPP = 95
+  maxPP = 100
   range = 3
   skill = Ability.NIGHT_SHADE
   additional = true
