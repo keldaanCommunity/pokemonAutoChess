@@ -76,7 +76,6 @@ import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { playMusic, preloadMusic } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import { FIREBASE_CONFIG, getPortraitPath } from "./utils/utils"
-import { Game } from "phaser"
 
 let gameContainer: GameContainer
 
@@ -84,11 +83,10 @@ export function getGameContainer(): GameContainer {
   return gameContainer
 }
 
-export function getGameScene(): GameScene | undefined | null {
+export function getGameScene(): GameScene | undefined {
   return gameContainer?.game?.scene?.getScene<GameScene>("gameScene") as
     | GameScene
     | undefined
-    | null
 }
 
 export default function Game() {
