@@ -69,7 +69,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("uint8") attackType: AttackType
   @type("uint16") life: number
   @type("uint16") shield = 0
-  @type("uint8") team: number
+  @type("uint8") team: Team
   @type("uint8") range: number
   @type("float32") atkSpeed: number
   @type("int8") targetX = -1
@@ -1297,7 +1297,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.AMULET_COIN) && this.player) {
-      this.player.addMoney(1)
+      this.player.addMoney(1, true, this)
       this.count.moneyCount += 1
       this.count.amuletCoinCount += 1
     }
@@ -1307,7 +1307,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         board.cells.some((p) => p && p.team !== this.team && p.life > 0) ===
         false
       const moneyGained = isLastEnemy ? 5 : 1
-      this.player.addMoney(moneyGained)
+      this.player.addMoney(moneyGained, true, this)
       this.count.moneyCount += moneyGained
     }
 

@@ -27,7 +27,8 @@ import {
   Orientation,
   PokemonActionState,
   Rarity,
-  Stat
+  Stat,
+  Team
 } from "./enum/Game"
 import { Item } from "./enum/Item"
 import { Passive } from "./enum/Passive"
@@ -331,7 +332,7 @@ export interface IPlayer {
   board: MapSchema<Pokemon>
   shop: ArraySchema<Pkm>
   simulationId: string
-  simulationTeamIndex: number
+  team: Team
   experienceManager: ExperienceManager
   synergies: Synergies
   money: number
