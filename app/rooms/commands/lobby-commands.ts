@@ -1,5 +1,7 @@
+import path from "path"
 import { Command } from "@colyseus/command"
 import { Client, RoomListingData, matchMaker } from "colyseus"
+import { createWriteStream } from "fs-extra"
 import { nanoid } from "nanoid"
 import { getHeapSnapshot } from "v8"
 import {
@@ -59,8 +61,6 @@ import { cleanProfanity } from "../../utils/profanity-filter"
 import { chance, pickRandomIn } from "../../utils/random"
 import { convertSchemaToRawObject, values } from "../../utils/schemas"
 import CustomLobbyRoom from "../custom-lobby-room"
-import path from "path"
-import { createWriteStream } from "fs-extra"
 
 export class OnJoinCommand extends Command<
   CustomLobbyRoom,
@@ -184,7 +184,7 @@ export class HeapSnapshotCommand extends Command<CustomLobbyRoom> {
       const snapshotStream = getHeapSnapshot()
       const fileStream = createWriteStream(filename)
 
-      snapshotStream.pipe(fileStream)
+      snapshotStream.pipe(fileStream as any)
 
       snapshotStream.on("end", () => {
         logger.info(`Heap snapshot successfully streamed to ${filename}`)
