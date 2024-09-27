@@ -188,12 +188,6 @@ export class HeapSnapshotCommand extends Command<CustomLobbyRoom> {
 
       snapshotStream.on("end", () => {
         logger.info(`Heap snapshot successfully streamed to ${filename}`)
-
-        // Dunno if needed, but we need to expose garbage collection if wanted
-        if (global.gc) {
-          logger.info("Forcing garbage collection")
-          global.gc()
-        }
       })
     } catch (error) {
       logger.error("Error while streaming heap snapshot:", error)
