@@ -60,5 +60,6 @@
 
 - Fix regional variants of additional pokemons not being immediately available after the additional pokemon being picked
 - Fix total money earned not being correctly updated sometimes
+- Fix some pokemons passives not working properly when played in ghost matchups (ghost = copy of a player to ensure every player has an opponent)
 
 # Misc
