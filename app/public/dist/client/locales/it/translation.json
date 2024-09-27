@@ -1255,7 +1255,7 @@
     "KING_SHIELD": "Infligge PROTECT all'utilizzatore per 1.5 secondi, garantisce [10,20,30,SP] SHIELD e scambia la sua posizione con il Pokèmon nemico più lontano",
     "U_TURN": "Ottieni [15,30,50,SP] di SHIELD, scambia posizione con il bersaglio ed infliggi CHARM per 1 secondo",
     "EXPLOSION": "Infligge [50,100,200 SP] SPECIAL a tutti i Pokèmon nemici adiacenti. Danneggia anche l'utilizzatore.",
-    "NIGHTMARE": "Infligge SILENCE a tutti i Pokèmon nemici per [1.5,3,8] secondi. Qualsiasi Pokèmon avversario con già gli status SLEEP o FLINCH o SILENCE prende [25,50,100,SP] SPECIAL.",
+    "NIGHTMARE": "Infligge SILENCE a tutti i Pokèmon nemici per [1.5,3,6,ND=1] secondi. Qualsiasi Pokèmon avversario con già gli status SLEEP o FLINCH o SILENCE prende [40,80,150,SP] SPECIAL.",
     "CLANGOROUS_SOUL": "Se stesso e gli alleati adiacenti ricevono un buff all' ATK, DEF e SPE_DEF di [1,2,4,SP] ",
     "BONEMERANG": "Lancia un osso boomerang attraverso la squadra Pokèmon nemica, infliggendo [30,60,120,SP] SPECIAL ad ogni nemico Pokèmon che colpisce.",
     "GROWL": "Infligge FLINCH a i Pokèmon nemici adiacenti per 3 secondi e riduce il loro ATK di [3,5,7,SP]",

@@ -1154,7 +1154,7 @@
     "KNOWLEDGE_THIEF": "Lançar o máximo do alvo. O jogador ganha 1 XP.",
     "KING_SHIELD": "PROTECT o usuário por [1,2,3] segundos, concede [10,20,30,SP] SHIELD e troque sua posição com o inimigo mais distante",
     "EXPLOSION": "Inflige [50,100,200,SP] SPECIAL a todos os inimigos adjacentes. Também danifica o usuário.",
-    "NIGHTMARE": "SILENCE todo o time inimigo por [1.5,3,8] segundos. Qualquer oponente SLEEP ou FLINCH ou SILENCE recebe [25,50,100,SP] SPECIAL.",
+    "NIGHTMARE": "SILENCE todo o time inimigo por [1.5,3,6,ND=1] segundos. Qualquer oponente SLEEP ou FLINCH ou SILENCE recebe [40,80,150,SP] SPECIAL.",
     "CLANGOROUS_SOUL": "Aumenta o ATK, DEF e SPE_DEF de si mesmo e dos aliados adjacentes em [1,2,4,SP]",
     "BONEMERANG": "Jogue um osso de bumerangue no time inimigo, causando [30,60,120,SP] SPECIAL no caminho",
     "GROWL": "FLINCH inimigos adjacentes por 3 segundos e reduz seu ATK em [3,5,7,SP]",

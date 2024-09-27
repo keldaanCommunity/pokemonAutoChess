@@ -60,8 +60,8 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
               token === Damage.PHYSICAL
                 ? "damage-physical"
                 : token === Damage.SPECIAL
-                ? "damage-special"
-                : "damage-true"
+                  ? "damage-special"
+                  : "damage-true"
             }
           >
             {t(`damage.${token}`)}
@@ -114,6 +114,10 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
       } else if (/\[[^\]]+\]/.test(token)) {
         const array = token.slice(1, -1).split(",")
         let scale = 0
+        let nbdecimals = 0
+        if (array.at(-1)?.includes("ND")) {
+          nbdecimals = Number(array.pop()?.replace("ND=", "")) || 0
+        }
         if (array.at(-1)?.includes("SP")) {
           scale = Number(array.pop()?.replace("SP=", "")) || 1
         }
@@ -131,7 +135,7 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
             )}
             {array.map((v, j) => {
               const separator = j < array.length - 1 ? "/" : ""
-              const value = Math.round(Number(v) * (1 + (scale * ap) / 100))
+              const value = Math.round(Number(v) * (1 + (scale * ap) / 100) * Math.pow(10, nbdecimals)) / Math.pow(10, nbdecimals)
               const active =
                 tier === undefined ||
                 array.length === 1 ||

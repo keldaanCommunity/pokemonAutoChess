@@ -1202,7 +1202,7 @@
     "KNOWLEDGE_THIEF": "대상의 능력을 가져와서 사용합니다. 플레이어는 1XP를 획득한다.",
     "KING_SHIELD": "1.5초간 시전포켓몬이 PROTECT 상태가 되며, [10,20,30,SP]의 실드를 부여받으면서 가장 멀리 있는 적과 위치를 바꿉니다.",
     "EXPLOSION": "시전자 및 인접한 적포켓몬(들)에게 [50,100,200,SP] SPECIAL 를 가한다.",
-    "NIGHTMARE": "[1.5,3,8]초간 모든 상대포켓몬을 SILENCE 상태로 만든다. SLEEP, FLINCH, 혹은 이미 SILENCE 상태에 있었던 포켓몬에게는 [25,50,100,SP] SPECIAL를 가한다.",
+    "NIGHTMARE": "[1.5,3,6,ND=1]초간 모든 상대포켓몬을 SILENCE 상태로 만든다. SLEEP, FLINCH, 혹은 이미 SILENCE 상태에 있었던 포켓몬에게는 [40,80,150,SP] SPECIAL를 가한다.",
     "CLANGOROUS_SOUL": "시전포켓몬 및 인접한 아군포켓몬에게 ATK, DEF, SPE_DEF 을 [1,2,4,SP]만큼 올린다.",
     "BONEMERANG": "적팀을 향해 뼈를 부메랑처럼 던진다. 맞는 적 포켓몬들에게 [30,60,90,SP] SPECIAL를 가한다.",
     "GROWL": "3초간 인접한 적에게 FLINCH 를 부여하며 [3,5,7,SP]의 ATK 을 낮춘다.",

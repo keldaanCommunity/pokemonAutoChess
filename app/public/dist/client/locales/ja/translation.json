@@ -819,7 +819,7 @@
     "KNOWLEDGE_THIEF": "ターゲットの能力を使用します。プレイヤーは 1 XP を獲得します。",
     "KING_SHIELD": "ユーザーを1.5秒間 PROTECT し、[10,20,30,SP] SHIELD を獲得し、最も遠い敵ポケモンと位置を交換します",
     "EXPLOSION": "隣接する敵全員に[50,100,200,SP]SPECIALを与える。使用者にも損害を与えます。",
-    "NIGHTMARE": "[1.5,3,8]秒間、敵チーム全体にSILENCEを与える。SLEEP、FLINCH、または既にSILENCE状態の相手には、[25,50,100,SP]の特殊ダメージを与える。",
+    "NIGHTMARE": "[1.5,3,6,ND=1]秒間、敵チーム全体にSILENCEを与える。SLEEP、FLINCH、または既にSILENCE状態の相手には、[40,80,150,SP]の特殊ダメージを与える。",
     "CLANGOROUS_SOUL": "自身と隣接する味方のATK、DEF、SPE_DEFを[1,2,4,SP]バフする。",
     "BONEMERANG": "敵チームにブーメランの骨を投げ、途中で [30,60,120,SP] SPECIAL を与えます",
     "GROWL": "隣接する敵を3秒間FLINCHし、ATKを[3,5,7,SP]減少させる。",
