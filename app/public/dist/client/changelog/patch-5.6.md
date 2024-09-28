@@ -60,6 +60,6 @@
 
 - Fix regional variants of additional pokemons not being immediately available after the additional pokemon being picked
 - Fix total money earned not being correctly updated sometimes
-- Fix Spike Armor ability not applying Pokenomicon burn and not being able to crit
+- Fix Spike Armor ability: it was not dealing damage to ranged pokemons at melee contact, was not being able to crit and was not applying Pokenomicon burn
 
 # Misc

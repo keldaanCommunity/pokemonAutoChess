@@ -970,7 +970,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     // Ability effects on hit
-    if (target.status.spikeArmor && this.range === 1) {
+    if (
+      target.status.spikeArmor &&
+      distanceC(
+        this.positionX,
+        this.positionY,
+        target.positionX,
+        target.positionY
+      ) === 1
+    ) {
       const damage = Math.round(target.def * (1 + target.ap / 100))
       const crit =
         target.items.has(Item.REAPER_CLOTH) && chance(target.critChance)
