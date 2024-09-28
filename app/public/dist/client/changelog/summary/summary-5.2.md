@@ -23,7 +23,7 @@ Rock Pokémons gain DEF and better resist to critical damage. At each stage, get
 Shiny items, as exclusive rewards when encountering a shiny wild Pokémon during PvE rounds.
 
 ![Dynamax Band](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/DYNAMAX_BAND.png)
-![Golden Rod](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/GOLDEN_ROD.png)
+![Golden Rod](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/68e8b77af4abf23dc4de9921d2321d2cf69ee536/app/public/src/assets/item%7Btps%7D/GOLDEN_ROD.png)
 ![Shiny Stone](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/SHINY_STONE.png)
 ![White Flute](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/WHITE_FLUTE.png)
 ![Rare Candy](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/RARE_CANDY.png)

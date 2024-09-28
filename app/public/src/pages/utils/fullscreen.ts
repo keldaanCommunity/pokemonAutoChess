@@ -2,13 +2,21 @@ import { loadPreferences } from "../../preferences"
 
 export function enterFullScreen() {
   if (document.fullscreenEnabled && loadPreferences().fullscreen) {
-    document.documentElement.requestFullscreen()
+    try {
+      document.documentElement.requestFullscreen()
+    } catch (e) {
+      console.info(e)
+    }
   }
 }
 
 export function exitFullScreen() {
   if (document.fullscreenEnabled) {
-    document.exitFullscreen()
+    try {
+      document.exitFullscreen()
+    } catch (e) {
+      console.info(e)
+    }
   }
 }
 
