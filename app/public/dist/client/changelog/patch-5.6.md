@@ -33,7 +33,12 @@
 - Buff Seaking: HP 200 → 250 ; buff Waterfall: shield 30/60/120 → 50/100/150
 - Buff Carvanha line: PP 100 → 80
 - Nerf Quiver dance (Burmy): Attack speed buff 20% → 10%
-- Changed Seismic Toss (Cobalion): ~~deals 7/14/28 true damage to the target multiplied by the number of Pokémon in your team~~ deals 5/10/20 true damage multiplied by your player level
+- Buff Phione line: PP 100 → 90
+- Revert 5.4 Tapu Fini buff: PP 80 → 100
+- Buff Psychic surge (Tapu Lele)): AP buff 5 → 10%
+- New ability for Cobalion: Metal Burst: Deal 30 true damage to the target. Increase damage by 10% for each attack blocked by user fighting
+- Change Nightmare (Ghastly): buffed damage: 25/50/100 → 40/80/150, reduced silence duration 2/3/8 → 1.5/3/6 seconds.
+- Nerf Misdreavus line: PP 95 → 100
 
 # Changes to Synergies
 

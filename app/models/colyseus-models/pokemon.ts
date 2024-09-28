@@ -5768,7 +5768,7 @@ export class Cobalion extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.SEISMIC_TOSS
+  skill = Ability.METAL_BURST
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -5804,7 +5804,7 @@ export class Phione extends Pokemon {
   atk = 15
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 90
   range = 3
   skill = Ability.TAKE_HEART
   passive = Passive.PHIONE
@@ -5823,7 +5823,7 @@ export class Manaphy extends Pokemon {
   atk = 17
   def = 4
   speDef = 4
-  maxPP = 100
+  maxPP = 90
   range = 3
   skill = Ability.TAKE_HEART
   attackSprite = AttackSprite.PSYCHIC_RANGE
@@ -7475,7 +7475,7 @@ export class TapuFini extends Pokemon {
   atk = 17
   def = 3
   speDef = 3
-  maxPP = 80
+  maxPP = 100
   range = 3
   skill = Ability.MISTY_SURGE
   passive = Passive.MISTY_TERRAIN
@@ -12060,7 +12060,7 @@ export class Misdreavus extends Pokemon {
   atk = 8
   def = 2
   speDef = 3
-  maxPP = 95
+  maxPP = 100
   range = 3
   skill = Ability.NIGHT_SHADE
   additional = true
@@ -12079,7 +12079,7 @@ export class Mismagius extends Pokemon {
   atk = 23
   def = 2
   speDef = 4
-  maxPP = 95
+  maxPP = 100
   range = 3
   skill = Ability.NIGHT_SHADE
   additional = true

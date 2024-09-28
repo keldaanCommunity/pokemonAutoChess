@@ -560,7 +560,7 @@ export class PsychicSurgeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const buff = 5
+    const buff = 10
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (
         ally &&
@@ -2211,7 +2211,7 @@ export class NightmareStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const duration = [1500, 3000, 8000][pokemon.stars - 1] ?? 8000
+    const duration = [1500, 3000, 6000][pokemon.stars - 1] ?? 6000
     const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
 
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
@@ -3416,6 +3416,20 @@ export class SacredSwordStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = 100
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
+  }
+}
+
+export class MetalBurstStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = Math.floor(30 + 3 * pokemon.count.fightingBlockCount)
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
   }
 }
@@ -10483,5 +10497,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ROAR]: new RoarStrategy(),
   [Ability.INFESTATION]: new InfestationStrategy(),
   [Ability.IVY_CUDGEL]: new IvyCudgelStrategy(),
-  [Ability.FORCE_PALM]: new ForcePalmStrategy()
+  [Ability.FORCE_PALM]: new ForcePalmStrategy(),
+  [Ability.METAL_BURST]: new MetalBurstStrategy()
 }
