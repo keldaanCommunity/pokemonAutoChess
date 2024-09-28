@@ -70,7 +70,7 @@
 
 - Fix regional variants of additional pokemons not being immediately available after the additional pokemon being picked
 - Fix total money earned not being correctly updated sometimes
+- Fix Spike Armor ability: it was not dealing damage to ranged pokemons at melee contact, was not being able to crit and was not applying Pokenomicon burn
 - Fix some pokemons passives not working properly when played in ghost matchups (ghost = copy of a player to ensure every player has an opponent)
-- Fix Spike Armor ability not applying Pokenomicon burn and not being able to crit
 
 # Misc
