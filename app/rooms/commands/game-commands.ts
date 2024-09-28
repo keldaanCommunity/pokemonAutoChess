@@ -15,7 +15,6 @@ import Player from "../../models/colyseus-models/player"
 import { isOnBench, PokemonClasses } from "../../models/colyseus-models/pokemon"
 import { createRandomEgg } from "../../models/egg-factory"
 import PokemonFactory from "../../models/pokemon-factory"
-import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"
 import { getAvatarString } from "../../public/src/utils"
@@ -40,7 +39,7 @@ import {
   SynergyTriggers
 } from "../../types/Config"
 import { Effect } from "../../types/enum/Effect"
-import { BattleResult, GamePhaseState, Rarity } from "../../types/enum/Game"
+import { BattleResult, GamePhaseState, Team } from "../../types/enum/Game"
 import {
   ArtificialItems,
   Berries,
@@ -56,7 +55,6 @@ import {
 import { Passive } from "../../types/enum/Passive"
 import {
   Pkm,
-  PkmFamily,
   PkmIndex,
   PkmRegionalVariants,
   Unowns
@@ -625,7 +623,7 @@ export class OnSellDropCommand extends Command<
       if (pokemon) {
         this.state.shop.releasePokemon(pokemon.name, player)
         const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
-        player.addMoney(sellPrice, false)
+        player.addMoney(sellPrice, false, null)
         pokemon.items.forEach((it) => {
           player.items.push(it)
         })
@@ -996,7 +994,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         income += player.interest
         income += max(5)(player.streak)
         income += 5
-        player.addMoney(income)
+        player.addMoney(income, true, null)
         if (income > 0) {
           const client = this.room.clients.find(
             (cli) => cli.auth.uid === player.id
@@ -1374,7 +1372,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             weather
           )
           player.simulationId = simulation.id
-          player.simulationTeamIndex = 0
+          player.team = Team.BLUE_TEAM
           this.state.simulations.set(simulation.id, simulation)
         }
       })
@@ -1382,42 +1380,44 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       const matchups = selectMatchups(this.state)
 
       matchups.forEach((matchup) => {
-        const playerA = matchup.a,
-          playerB = matchup.b
-        const weather = getWeather(playerA.board, playerB.board)
+        const { bluePlayer, redPlayer } = matchup
+        const weather = getWeather(bluePlayer.board, redPlayer.board)
         const simulationId = nanoid()
         const simulation = new Simulation(
           simulationId,
           this.room,
-          playerA.board,
-          playerB.board,
-          playerA as Player,
-          playerB as Player,
+          bluePlayer.board,
+          redPlayer.board,
+          bluePlayer,
+          redPlayer,
           this.state.stageLevel,
-          weather
+          weather,
+          matchup.ghost
         )
-        playerA.simulationId = simulationId
-        playerA.simulationTeamIndex = 0
-        playerA.opponents.set(
-          playerB.id,
-          (playerA.opponents.get(playerB.id) ?? 0) + 1
+        bluePlayer.simulationId = simulationId
+        bluePlayer.team = Team.BLUE_TEAM
+        bluePlayer.opponents.set(
+          redPlayer.id,
+          (bluePlayer.opponents.get(redPlayer.id) ?? 0) + 1
         )
-        playerA.opponentId = playerB.id
-        playerA.opponentName = playerB.name
-        playerA.opponentAvatar = playerB.avatar
-        playerA.opponentTitle = playerB.title ?? ""
+        bluePlayer.opponentId = redPlayer.id
+        bluePlayer.opponentName = matchup.ghost
+          ? `Ghost of ${redPlayer.name}`
+          : redPlayer.name
+        bluePlayer.opponentAvatar = redPlayer.avatar
+        bluePlayer.opponentTitle = redPlayer.title ?? ""
 
         if (!matchup.ghost) {
-          playerB.simulationId = simulationId
-          playerB.simulationTeamIndex = 1
-          playerB.opponents.set(
-            playerA.id,
-            (playerB.opponents.get(playerA.id) ?? 0) + 1
+          redPlayer.simulationId = simulationId
+          redPlayer.team = Team.RED_TEAM
+          redPlayer.opponents.set(
+            bluePlayer.id,
+            (redPlayer.opponents.get(bluePlayer.id) ?? 0) + 1
           )
-          playerB.opponentId = playerA.id
-          playerB.opponentName = playerA.name
-          playerB.opponentAvatar = playerA.avatar
-          playerB.opponentTitle = playerA.title ?? ""
+          redPlayer.opponentId = bluePlayer.id
+          redPlayer.opponentName = bluePlayer.name
+          redPlayer.opponentAvatar = bluePlayer.avatar
+          redPlayer.opponentTitle = bluePlayer.title ?? ""
         }
 
         this.state.simulations.set(simulation.id, simulation)

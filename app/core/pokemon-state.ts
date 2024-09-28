@@ -635,7 +635,7 @@ export default abstract class PokemonState {
           pokemon.count.growGroundCount === 5 &&
           player
         ) {
-          player.addMoney(3)
+          player.addMoney(3, true, pokemon)
           pokemon.count.moneyCount += 3
         }
       }

@@ -1,9 +1,10 @@
 import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
+import { PokemonEntity } from "../../core/pokemon-entity"
 import type GameState from "../../rooms/states/game-state"
 import type { IPlayer, Role, Title } from "../../types"
 import { SynergyTriggers, UniqueShop } from "../../types/Config"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
-import { BattleResult, Rarity } from "../../types/enum/Game"
+import { BattleResult, Rarity, Team } from "../../types/enum/Game"
 import {
   ArtificialItems,
   Berries,
@@ -42,7 +43,7 @@ import Synergies, { computeSynergies } from "./synergies"
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
   @type("string") simulationId = ""
-  @type("number") simulationTeamIndex: number = 0
+  @type("number") team: Team = Team.BLUE_TEAM
   @type("string") name: string
   @type("string") avatar: string
   @type({ map: Pokemon }) board = new MapSchema<Pokemon>()
@@ -176,7 +177,18 @@ export default class Player extends Schema implements IPlayer {
     }
   }
 
-  addMoney(value: number, countTotalEarned = true) {
+  addMoney(
+    value: number,
+    countTotalEarned: boolean,
+    origin: PokemonEntity | null
+  ) {
+    if (
+      origin &&
+      origin.simulation.isGhostBattle &&
+      origin.player?.team === Team.RED_TEAM
+    ) {
+      return // do not count money earned by pokemons from a ghost player
+    }
     this.money += value
     if (countTotalEarned && value > 0) this.totalMoneyEarned += value
   }

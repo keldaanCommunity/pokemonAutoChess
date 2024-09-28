@@ -3906,7 +3906,7 @@ export const AnimationConfig: {
   },
   [Pkm.COBALION]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Swing,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.MANAPHY]: {
