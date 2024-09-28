@@ -43,7 +43,8 @@ self.addEventListener("fetch", async (event) => {
   if (
     event.request.method === "GET" &&
     (url.includes("/assets/") ||
-      url.includes("/SpriteCollab/"))
+      url.includes("/SpriteCollab/")) ||
+      url.includes("/pokemonAutoChessMusic/")
   )
     cacheFirst(event)
 })
