@@ -40,6 +40,7 @@
 - Change Nightmare (Ghastly): buffed damage: 25/50/100 → 40/80/150, reduced silence duration 2/3/8 → 1.5/3/6 seconds.
 - Nerf Misdreavus line: PP 95 → 100
 - Landorus, Thundurus, Tornadus and Enamorus now change weather based on your dominant synergy between FLYING and ICE, ELECTRIC, GROUND or FAIRY
+- Change Head smash: Recoil damage 5/10/15 true damage → 10/20/40 physical damage
 
 # Changes to Synergies
 
@@ -48,6 +49,10 @@
 - Golden Rod has been removed
 - New Shiny Item: Repeat Ball: Every 2 shop rerolls, gain +1% AP and find a mon in shop that shares a synergy with the holder. Their rarity increases with the total number of shop refreshes done during the game.
 - Rare Candy has been reverted to its original proposition in 5.2, with a few changes: it is now holdable and takes an item slot ; it reduces the sell price of its holder to its previous tier ; it gives -20% Attack Speed and -30% AP. Easy on the sugar !
+- Soothe Bell has been removed
+- New item: Protective pads (Charcoal + Miracle Seed): +80 Shield, +6 Attack ; Attacks deal double damage on shield. User is protected from recoil and retaliation damage.
+- Switch recipes of Max Revive (now Heart Scale + Miracle Seed, +15 Shield +2 Defense) and Flame Orb (now Charcoal + Heart Scale, +5 Attack +2 Defense)
+- Fire Gem has been renamed Punching Glove, and no longer has the double damage against shield effect
 
 # Gameplay
 
