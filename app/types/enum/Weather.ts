@@ -16,20 +16,17 @@ export enum Weather {
   NEUTRAL = "NEUTRAL"
 }
 
-export const WeatherPassives: Map<Passive, Weather> = new Map([
-  [Passive.SUN, Weather.SUN],
-  [Passive.RAIN, Weather.RAIN],
-  [Passive.SANDSTORM, Weather.SANDSTORM],
-  [Passive.MISTY, Weather.MISTY],
-  [Passive.SNOW, Weather.SNOW],
-  [Passive.STORM, Weather.STORM],
-  [Passive.NIGHT, Weather.NIGHT],
-  [Passive.WINDY, Weather.WINDY],
-  [Passive.LUGIA, Weather.WINDY],
-  [Passive.AIRLOCK, Weather.NEUTRAL]
+export const PassivesAssociatedToWeather: Map<Weather, Passive[]> = new Map([
+  [Weather.SUN, [Passive.SUN]],
+  [Weather.RAIN, [Passive.RAIN]],
+  [Weather.SANDSTORM, [Passive.SANDSTORM]],
+  [Weather.MISTY, [Passive.MISTY]],
+  [Weather.SNOW, [Passive.SNOW]],
+  [Weather.STORM, [Passive.STORM]],
+  [Weather.NIGHT, [Passive.NIGHT]],
+  [Weather.WINDY, [Passive.WINDY, Passive.LUGIA]],
+  [Weather.NEUTRAL, [Passive.AIRLOCK]]
 ])
-
-export const PassiveAssociatedToWeather = reverseMap(WeatherPassives)
 
 export const WeatherAssociatedToSynergy: Map<Synergy, Weather> = new Map([
   [Synergy.FIRE, Weather.SUN],
