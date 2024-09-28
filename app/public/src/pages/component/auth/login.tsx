@@ -1,7 +1,7 @@
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
 import React, { useEffect, useState } from "react"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../../node_modules/react-i18next"
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { joinLobbyRoom } from "../../../game/lobby-logic"

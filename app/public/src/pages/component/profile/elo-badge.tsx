@@ -1,5 +1,5 @@
 import React from "react"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../../node_modules/react-i18next"
 import { getRank } from "../../../../../utils/elo"
 import "./elo-badge.css"
 

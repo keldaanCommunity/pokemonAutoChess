@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../../node_modules/react-i18next"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   createTournament,

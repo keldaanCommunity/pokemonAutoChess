@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import ReactDOM from "react-dom"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../../node_modules/react-i18next"
 import { Tooltip } from "react-tooltip"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_ABILITY } from "../../../../../models/precomputed/precomputed-ability"

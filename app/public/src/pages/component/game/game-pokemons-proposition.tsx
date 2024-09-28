@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../../node_modules/react-i18next"
 import { AdditionalPicksStages } from "../../../../../types/Config"
 import { ShinyItems } from "../../../../../types/enum/Item"
 import { Pkm, PkmDuo, PkmDuos } from "../../../../../types/enum/Pokemon"

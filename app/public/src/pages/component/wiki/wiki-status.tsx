@@ -1,5 +1,5 @@
 import React from "react"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../../node_modules/react-i18next"
 import { Status } from "../../../../../types/enum/Status"
 import { addIconsToDescription } from "../../utils/descriptions"
 

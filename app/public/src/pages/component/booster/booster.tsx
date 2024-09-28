@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../../node_modules/react-i18next"
 import { DUST_PER_BOOSTER, DUST_PER_SHINY } from "../../../../../types/Config"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { setBoosterContent } from "../../../stores/LobbyStore"

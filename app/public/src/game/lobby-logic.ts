@@ -1,4 +1,4 @@
-import { NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
+import { NonFunctionPropNames } from "../../../../node_modules/@colyseus/schema/lib/types/HelperTypes"
 import { RoomAvailable, Room, Client } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import { t } from "i18next"

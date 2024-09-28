@@ -1,6 +1,6 @@
 import CSS from "csstype"
 import React from "react"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../../node_modules/react-i18next"
 import { Item } from "../../../../../types/enum/Item"
 import { useAppDispatch } from "../../../hooks"
 import { itemClick } from "../../../stores/NetworkStore"

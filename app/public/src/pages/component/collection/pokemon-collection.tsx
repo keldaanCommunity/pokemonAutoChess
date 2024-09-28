@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState, Dispatch, SetStateAction, useCallback } from "react"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../../node_modules/react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { localStore, LocalStoreKeys } from "../../utils/store"
 import { Synergy } from "../../../../../types/enum/Synergy"

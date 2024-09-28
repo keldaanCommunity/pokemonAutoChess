@@ -1,5 +1,5 @@
 import { MapSchema, SetSchema } from "@colyseus/schema"
-import { isOnBench, Pokemon } from "../models/colyseus-models/pokemon"
+import { isOnBench, Pokemon } from "./colyseus-models/pokemon"
 import { SynergyTriggers } from "../types/Config"
 import { Ability } from "../types/enum/Ability"
 import { Effect } from "../types/enum/Effect"

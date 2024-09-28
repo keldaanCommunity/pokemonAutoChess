@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../../node_modules/react-i18next"
 import {
   ITitleStatistic,
   fetchTitles

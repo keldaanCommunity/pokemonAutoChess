@@ -1,7 +1,7 @@
 import { GameObjects } from "phaser"
 import React, { useMemo } from "react"
 import ReactDOM from "react-dom/client"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../node_modules/react-i18next"
 import { Tooltip } from "react-tooltip"
 import { ItemStats } from "../../../../types/Config"
 import { Stat } from "../../../../types/enum/Game"

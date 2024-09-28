@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../../node_modules/react-i18next"
 import { PokemonClasses } from "../../../../../models/colyseus-models/pokemon"
 import { PRECOMPUTED_REGIONAL_MONS } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { DungeonDetails, DungeonPMDO } from "../../../../../types/enum/Dungeon"

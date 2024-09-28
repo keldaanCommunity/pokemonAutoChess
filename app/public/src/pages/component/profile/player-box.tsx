@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../../node_modules/react-i18next"
 import { IGameRecord } from "../../../../../models/colyseus-models/game-record"
 import { IUserMetadata } from "../../../../../models/mongo-models/user-metadata"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"

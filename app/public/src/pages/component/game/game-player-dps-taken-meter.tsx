@@ -1,5 +1,5 @@
 import React, { useMemo } from "react"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../../node_modules/react-i18next"
 import { IDps } from "../../../../../types"
 import GameDpsTaken from "./game-dps-taken"
 

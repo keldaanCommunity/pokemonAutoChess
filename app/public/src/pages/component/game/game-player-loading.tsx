@@ -1,7 +1,7 @@
 import React from "react"
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar"
 import "react-circular-progressbar/dist/styles.css"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../../node_modules/react-i18next"
 import { IPlayer } from "../../../../../types"
 import { getAvatarSrc } from "../../../utils"
 import { getGameScene } from "../../game"

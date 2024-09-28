@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from "react"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../../node_modules/react-i18next"
 import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed/precomputed-emotions"
 import { Emotion } from "../../../../../types"

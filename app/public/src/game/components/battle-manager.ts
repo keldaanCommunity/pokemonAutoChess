@@ -1,4 +1,4 @@
-import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
+import { type NonFunctionPropNames } from "../../../../../node_modules/@colyseus/schema/lib/types/HelperTypes"
 import { GameObjects } from "phaser"
 import { getMoveSpeed } from "../../../../core/pokemon-entity"
 import Simulation from "../../../../core/simulation"

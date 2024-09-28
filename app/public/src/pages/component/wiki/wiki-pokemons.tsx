@@ -1,7 +1,7 @@
 import { t } from "i18next"
 import React, { useEffect, useState, useMemo } from "react"
 import ReactDOM from "react-dom"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../../node_modules/react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { Tooltip } from "react-tooltip"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"

@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../../node_modules/react-i18next"
 import { DungeonMusic } from "../../../../../types/enum/Dungeon"
 import { preferences, savePreferences } from "../../../preferences"
 import { getGameScene } from "../../game"

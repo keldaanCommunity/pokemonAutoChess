@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react"
 import ReactDOM from "react-dom"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../../node_modules/react-i18next"
 import { cc } from "../../utils/jsx"
 import "./modal.css"
 

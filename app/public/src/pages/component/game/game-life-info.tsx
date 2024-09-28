@@ -1,5 +1,5 @@
 import React from "react"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../../node_modules/react-i18next"
 import { Tooltip } from "react-tooltip"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { Life } from "../icons/life"

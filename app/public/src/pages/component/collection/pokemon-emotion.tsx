@@ -1,5 +1,5 @@
 import React from "react"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../../node_modules/react-i18next"
 import { AvatarEmotions, Emotion } from "../../../../../types"
 import { getEmotionCost } from "../../../../../types/Config"
 import { getPortraitSrc } from "../../../utils"

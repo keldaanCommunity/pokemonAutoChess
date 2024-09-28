@@ -1,5 +1,5 @@
 import React from "react"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "../../../../../../node_modules/react-i18next"
 import { ARCEUS_RATE, BoosterRarityProbability, DITTO_RATE, ExpPlace, FishRarityProbability, KECLEON_RATE, PoolSize, RarityColor, RarityProbabilityPerLevel } from "../../../../../types/Config"
 import { Rarity } from "../../../../../types/enum/Game"
 import { getRankLabel } from "../../../../../types/strings/Strings"
