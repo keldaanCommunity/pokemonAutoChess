@@ -1275,7 +1275,7 @@
     "ROAR_OF_TIME": "RESURECTION và [20,SP]% ATK_SPEED cho đồng minh mạnh nhất (Thứ tự ưu tiên: trang bị > số sao > độ hiếm)",
     "ROCK_TOMB": "Gây [30,60,120,SP] SPECIAL lên mục tiêu và giảm [10,20,40]% ATK_SPEED của chúng",
     "ROCK_SMASH": "Gây [20,40,80,SP] SPECIAL lên mục tiêu và SILENCE chúng trong [3,6,9] giây",
-    "HEAD_SMASH": "Bản thân hi sinh [5,10,15,SP] HP và gây [40,80,150,SP] SPECIAL lên mục tiêu. Loại bỏ trực tiếp mục tiêu nếu mục tiêu đang SLEEP hoặc FREEZE",
+    "HEAD_SMASH": "Bản thân hi sinh [10,20,40,SP] PHYSICAL và gây [40,80,150,SP] SPECIAL lên mục tiêu. Loại bỏ trực tiếp mục tiêu nếu mục tiêu đang SLEEP hoặc FREEZE",
     "ROCK_HEAD": "Gây [120,SP]% ATK + DEF như SPECIAL",
     "CORRUPTED_NATURE": "Gây WOUND Pokémon đối thủ ở gần trong 5 giây và gây [20,40,80,SP] SPECIAL lên chúng. Hồi phục lượng HP bằng lượng sát thương gây ra",
     "CRABHAMMER": "Gây [40,80,120,SP] SPECIAL lên mục tiêu với khả năng cao ra đòn chí mạng. Tiêu diệt mục tiêu nếu lượng HP của nó dưới 30%",
