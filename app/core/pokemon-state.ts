@@ -45,7 +45,7 @@ export default abstract class PokemonState {
         pokemon.onCriticalAttack({ target, board, damage })
       }
 
-      if (pokemon.items.has(Item.FIRE_GEM)) {
+      if (pokemon.items.has(Item.PUNCHING_GLOVE)) {
         damage = Math.round(damage + target.hp * 0.08)
       }
 
@@ -419,7 +419,7 @@ export default abstract class PokemonState {
           damageOnShield = reducedDamage
           residualDamage = 0
         }
-        if (attacker && attacker.items.has(Item.FIRE_GEM)) {
+        if (attacker && attacker.items.has(Item.PROTECTIVE_PADS)) {
           damageOnShield *= 2 // double damage on shield
         }
         if (damageOnShield > pokemon.shield) {
