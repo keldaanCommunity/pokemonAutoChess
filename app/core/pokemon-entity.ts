@@ -971,14 +971,18 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     // Ability effects on hit
     if (target.status.spikeArmor && this.range === 1) {
+      const damage = Math.round(target.def * (1 + target.ap / 100))
+      const crit =
+        target.items.has(Item.REAPER_CLOTH) && chance(target.critChance)
       this.status.triggerWound(2000, this, target)
-      this.handleDamage({
-        damage: Math.round(target.def * (1 + target.ap / 100)),
+      this.handleSpecialDamage(
+        damage,
         board,
-        attackType: AttackType.SPECIAL,
-        attacker: target,
-        shouldTargetGainMana: true
-      })
+        AttackType.SPECIAL,
+        target,
+        crit,
+        true
+      )
     }
 
     if (target.effects.has(Effect.SHELL_TRAP) && physicalDamage > 0) {
