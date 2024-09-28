@@ -114,8 +114,8 @@ export enum Damage {
 }
 
 export enum Team {
-  BLUE_TEAM,
-  RED_TEAM
+  BLUE_TEAM = 0,
+  RED_TEAM = 1
 }
 
 export enum BoardEvent {

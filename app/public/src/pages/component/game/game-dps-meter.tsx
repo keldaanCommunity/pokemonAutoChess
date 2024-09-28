@@ -7,18 +7,19 @@ import { getAvatarSrc } from "../../../utils"
 import GamePlayerDpsMeter from "./game-player-dps-meter"
 import GamePlayerDpsTakenMeter from "./game-player-dps-taken-meter"
 import GamePlayerHpsMeter from "./game-player-hps-meter"
+import { Team } from "../../../../../types/enum/Game"
 import "./game-dps-meter.css"
 
 export default function GameDpsMeter() {
   const { t } = useTranslation()
   const currentPlayer = useAppSelector(selectCurrentPlayer)
-  const teamIndex = useAppSelector(
-    (state) => state.game.currentSimulationTeamIndex
+  const team = useAppSelector(
+    (state) => state.game.currentTeam
   )
   const blueDpsMeter = useAppSelector((state) => state.game.blueDpsMeter)
   const redDpsMeter = useAppSelector((state) => state.game.redDpsMeter)
-  const myDpsMeter = teamIndex === 0 ? blueDpsMeter : redDpsMeter
-  const opponentDpsMeter = teamIndex === 0 ? redDpsMeter : blueDpsMeter
+  const myDpsMeter = team === Team.BLUE_TEAM ? blueDpsMeter : redDpsMeter
+  const opponentDpsMeter = team === Team.BLUE_TEAM ? redDpsMeter : blueDpsMeter
 
   const [isOpen, setOpen] = useState(preferences.showDpsMeter)
 
