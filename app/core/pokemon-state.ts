@@ -393,6 +393,10 @@ export default abstract class PokemonState {
         pokemon.physicalDamageReduced += min(0)(damage - reducedDamage)
       } else if (attackType === AttackType.SPECIAL) {
         pokemon.specialDamageReduced += min(0)(damage - reducedDamage)
+
+        if (attacker && attacker.items.has(Item.POKEMONOMICON)) {
+          pokemon.status.triggerBurn(3000, pokemon, attacker)
+        }
       }
 
       if (isNaN(reducedDamage)) {
