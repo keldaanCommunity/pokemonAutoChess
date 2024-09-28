@@ -1573,7 +1573,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
         const spawns = pickNRandomIn(koAllies, 3)
         spawns.forEach((spawn) => {
-          const mon = PokemonFactory.createPokemonFromName(spawn.name)
+          const mon = PokemonFactory.createPokemonFromName(spawn.name,
+            {
+              selectedEmotion: spawn.emotion,
+              selectedShiny: spawn.shiny,
+            })
           const coord =
             this.simulation.getClosestAvailablePlaceOnBoardToPokemon(
               this,
