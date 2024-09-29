@@ -10154,6 +10154,33 @@ export class ForcePalmStrategy extends AbilityStrategy {
   }
 }
 
+export class BideStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    pokemon.toIdleState()
+
+    board
+      .getAdjacentCells(target.positionX, target.positionY, true)
+      .forEach((cell) => {
+        if (cell.value && pokemon.team != cell.value.team) {
+          cell.value.handleSpecialDamage(
+            10,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -10524,5 +10551,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.INFESTATION]: new InfestationStrategy(),
   [Ability.IVY_CUDGEL]: new IvyCudgelStrategy(),
   [Ability.FORCE_PALM]: new ForcePalmStrategy(),
-  [Ability.METAL_BURST]: new MetalBurstStrategy()
+  [Ability.METAL_BURST]: new MetalBurstStrategy(),
+  [Ability.BIDE]: new BideStrategy(),
 }

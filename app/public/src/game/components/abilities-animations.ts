@@ -2638,6 +2638,10 @@ export function displayAbility(
       addAbilitySprite(Ability.TORMENT, coordinates, true).setScale(2)
       break
 
+    case Ability.BIDE:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(3)
+      break
+
     default:
       break
   }

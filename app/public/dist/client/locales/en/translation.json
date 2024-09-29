@@ -388,7 +388,8 @@
     "ROAR": "Roar",
     "INFESTATION": "Infestation",
     "IVY_CUDGEL": "Ivy Cudgel",
-    "FORCE_PALM": "Force Palm"
+    "FORCE_PALM": "Force Palm",
+    "BIDE": "Bide"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1614,7 +1615,8 @@
     "ROAR": "Blow away the target. If the blown target hits a wall, it suffers [10,20,40,SP] SPECIAL. If it hits another pokémon, both pokémons suffer SPECIAL",
     "INFESTATION": "Deals [10,SP] SPECIAL to the target for each allied BUG and places your most powerful BUG on your bench in the fight",
     "IVY_CUDGEL": "Deals [100,SP] SPECIAL to the target",
-    "FORCE_PALM": "The user deals [60,SP] + 10% of target max HP as SPECIAL and PARALYSIS for 6 secs. If it was PARALYSIS, deals an additional [40,SP] SPECIAL and push it away."
+    "FORCE_PALM": "The user deals [60,SP] + 10% of target max HP as SPECIAL and PARALYSIS for 6 secs. If it was PARALYSIS, deals an additional [40,SP] SPECIAL and push it away.",
+    "BIDE": "The user is unable to move for 3 secs. Bide will do SPECIAL damage equal to twice the damage received during the idling period around the user."
   },
   "effect": {
     "INGRAIN": "Ingrain",
