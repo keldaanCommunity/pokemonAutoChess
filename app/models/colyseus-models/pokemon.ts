@@ -5667,7 +5667,7 @@ export class Landorus extends Pokemon {
   maxPP = 80
   range = 3
   skill = Ability.SANDSEAR_STORM
-  passive = Passive.SANDSTORM
+  passive = Passive.LANDORUS
   attackSprite = AttackSprite.FLYING_RANGE
 }
 
@@ -5682,7 +5682,7 @@ export class Thundurus extends Pokemon {
   maxPP = 80
   range = 3
   skill = Ability.WILDBOLT_STORM
-  passive = Passive.STORM
+  passive = Passive.THUNDURUS
   attackSprite = AttackSprite.FLYING_RANGE
 }
 
@@ -5697,7 +5697,7 @@ export class Tornadus extends Pokemon {
   maxPP = 80
   range = 3
   skill = Ability.BLEAKWIND_STORM
-  passive = Passive.WINDY
+  passive = Passive.TORNADUS
   attackSprite = AttackSprite.FLYING_RANGE
 }
 
@@ -5712,7 +5712,7 @@ export class Enamorus extends Pokemon {
   maxPP = 80
   range = 3
   skill = Ability.SPRINGTIDE_STORM
-  passive = Passive.MISTY
+  passive = Passive.ENAMORUS
   attackSprite = AttackSprite.FLYING_RANGE
 }
 

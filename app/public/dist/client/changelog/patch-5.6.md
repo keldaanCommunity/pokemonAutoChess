@@ -39,6 +39,7 @@
 - New ability for Cobalion: Metal Burst: Deal 30 true damage to the target. Increase damage by 10% for each attack blocked by user fighting
 - Change Nightmare (Ghastly): buffed damage: 25/50/100 → 40/80/150, reduced silence duration 2/3/8 → 1.5/3/6 seconds.
 - Nerf Misdreavus line: PP 95 → 100
+- Landorus, Thundurus, Tornadus and Enamorus now change weather based on your dominant synergy between FLYING and ICE, ELECTRIC, GROUND or FAIRY
 - Change Head smash: Recoil damage 5/10/15 true damage → 10/20/40 physical damage
 - Nerf Pirouette Meloetta: PP 80 → 90
 - Buff Aria Meloetta: Relic song first two notes now give 10 SHIELD to all allies
@@ -61,6 +62,7 @@
 - Ranked matches are now restricted to players of your current rank: not below, not above. They no longer give additional booster rewards to the winner.
 - Private lobbies passwords are now automatically generated and no longer customizable
 - Custom lobbies are now private by default
+- Snow, Storm and Blood Moon weathers now are triggered at 8 mons of the associated synergy
 
 # UI
 
