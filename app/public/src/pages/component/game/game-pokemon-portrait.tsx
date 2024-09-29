@@ -24,7 +24,8 @@ export default function GamePokemonPortrait(props: {
   pokemon: Pokemon | Pkm | undefined
   click?: React.MouseEventHandler<HTMLDivElement>
   onMouseEnter?: React.MouseEventHandler<HTMLDivElement>
-  onMouseLeave?: React.MouseEventHandler<HTMLDivElement>
+  onMouseLeave?: React.MouseEventHandler<HTMLDivElement>,
+  inPlanner?: boolean
 }) {
   const pokemon = useMemo(
     () =>
@@ -132,7 +133,8 @@ export default function GamePokemonPortrait(props: {
     <div
       className={cc("my-box", "clickable", "game-pokemon-portrait", {
         shimmer: shouldShimmer,
-        disabled: !canBuy && props.origin === "shop"
+        disabled: !canBuy && props.origin === "shop",
+        planned: props.inPlanner ?? false
       })}
       style={{
         backgroundColor: rarityColor,
@@ -178,6 +180,13 @@ export default function GamePokemonPortrait(props: {
             className="game-pokemon-portrait-evolution-icon"
           />
         </div>
+      )}
+      {props.inPlanner && (!willEvolve || !pokemonEvolution) && (
+        <img
+          src="/assets/ui/planned.png"
+          alt=""
+          className="game-pokemon-portrait-planned-icon"
+        />
       )}
       {props.origin === "shop" && (
         <div className="game-pokemon-portrait-cost">
