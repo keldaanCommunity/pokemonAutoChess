@@ -1346,6 +1346,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             pveStage.emotion
           )
           player.opponentTitle = "WILD"
+          player.team = Team.BLUE_TEAM
 
           const rewards = pveStage.getRewards?.(player) ?? ([] as Item[])
           resetArraySchema(player.pveRewards, rewards)
@@ -1372,7 +1373,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             weather
           )
           player.simulationId = simulation.id
-          player.team = Team.BLUE_TEAM
           this.state.simulations.set(simulation.id, simulation)
         }
       })

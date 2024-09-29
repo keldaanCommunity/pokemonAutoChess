@@ -184,11 +184,12 @@ export default class Simulation extends Schema implements ISimulation {
                 bugTeam[i].name,
                 player
               )
+              const teamIndex = team === blueTeam ? 0 : 1 // WARN: do not use player.team here because it can be a ghost opponent
               const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
                 bugTeam[i],
-                player.team
+                teamIndex
               )
-              this.addPokemon(bug, coord.x, coord.y, player.team, true)
+              this.addPokemon(bug, coord.x, coord.y, teamIndex, true)
             }
           }
 
@@ -206,15 +207,16 @@ export default class Simulation extends Schema implements ISimulation {
             }
 
             if (pokemon.items.has(Item.ROTOM_PHONE)) {
+              const teamIndex = team === blueTeam ? 0 : 1 // WARN: do not use player.team here because it can be a ghost opponent
               const rotomDrone = PokemonFactory.createPokemonFromName(
                 Pkm.ROTOM_DRONE,
                 player
               )
               const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
                 pokemon,
-                player.team
+                teamIndex
               )
-              this.addPokemon(rotomDrone, coord.x, coord.y, player.team, true)
+              this.addPokemon(rotomDrone, coord.x, coord.y, teamIndex, true)
             }
           })
         }
