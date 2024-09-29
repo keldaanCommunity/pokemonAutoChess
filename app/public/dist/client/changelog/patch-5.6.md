@@ -40,6 +40,8 @@
 - Change Nightmare (Ghastly): buffed damage: 25/50/100 → 40/80/150, reduced silence duration 2/3/8 → 1.5/3/6 seconds.
 - Nerf Misdreavus line: PP 95 → 100
 - Change Head smash: Recoil damage 5/10/15 true damage → 10/20/40 physical damage
+- Nerf Pirouette Meloetta: PP 80 → 90
+- Buff Aria Meloetta: Relic song first two notes now give 10 SHIELD to all allies
 
 # Changes to Synergies
 

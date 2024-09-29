@@ -1540,6 +1540,12 @@ export class RelicSongStrategy extends AbilityStrategy {
           })
         }
       })
+    } else {
+      board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+        if (tg && pokemon.team === tg.team) {
+          tg.addShield(10, pokemon, 1, crit)
+        }
+      })
     }
   }
 }

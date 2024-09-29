@@ -4758,7 +4758,7 @@ export class PirouetteMeloetta extends Pokemon {
   atk = 25
   def = 5
   speDef = 5
-  maxPP = 80
+  maxPP = 90
   range = 1
   skill = Ability.U_TURN
   attackSprite = AttackSprite.FIGHTING_MELEE

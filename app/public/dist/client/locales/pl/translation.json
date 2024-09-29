@@ -762,7 +762,6 @@
     "CLANGOROUS_SOUL": "Wzmocnij siebie i sąsiadujących sojuszników ATK, DEF i SPE_DEF o [1,2,4,SP]",
     "BONEMERANG": "Rzuć kość jak bumerang przez wrogą drużynę, zadając [30,60,90,SP] SPECIAL każdemu wrogiemu Pokémonowi, którego trafi",
     "GROWL": "FLINCH sąsiadujących wrogów na 3 sekundy i zmniejsza ich ATK o [3,5,7,SP]",
-    "RELIC_SONG": "Emituje notatkę. Po trzeciej nucie UŚPIJ całą drużynę wroga na [2,SP=0,5] sekundy",
     "FAIRY_WIND": "Daj [5,10,20,SP] PP wszystkim sojuszniczym Pokémonom, z wyjątkiem użytkownika"
   }
 }
