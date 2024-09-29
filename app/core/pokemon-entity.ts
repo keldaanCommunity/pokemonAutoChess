@@ -296,13 +296,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         specialDamage = Math.round(specialDamage * attacker.critPower)
       }
       if (
-        attacker &&
-        attacker.items.has(Item.POKEMONOMICON) &&
-        attackType === AttackType.SPECIAL
-      ) {
-        this.status.triggerBurn(3000, this, attacker)
-      }
-      if (
         this.items.has(Item.POWER_LENS) &&
         specialDamage >= 1 &&
         attacker &&
