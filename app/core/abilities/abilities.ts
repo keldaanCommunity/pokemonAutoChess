@@ -10243,6 +10243,33 @@ export class SteelWingStrategy extends AbilityStrategy {
   }
 }
 
+export class BideStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    pokemon.toIdleState()
+
+    board
+      .getAdjacentCells(target.positionX, target.positionY, true)
+      .forEach((cell) => {
+        if (cell.value && pokemon.team != cell.value.team) {
+          cell.value.handleSpecialDamage(
+            10,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+  }
+}
+
 export class YawnStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -10645,5 +10672,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.HEADBUTT]: new HeadbuttStrategy(),
   [Ability.STEEL_WING]: new SteelWingStrategy(),
   [Ability.YAWN]: new YawnStrategy(),
-  [Ability.FIERY_DANCE]: new FieryDanceStrategy()
+  [Ability.FIERY_DANCE]: new FieryDanceStrategy(),
+  [Ability.BIDE]: new BideStrategy()
 }

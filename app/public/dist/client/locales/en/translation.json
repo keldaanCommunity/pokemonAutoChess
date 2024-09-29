@@ -393,7 +393,8 @@
     "HEADBUTT": "Headbutt",
     "STEEL_WING": "Steel Wing",
     "YAWN": "Yawn",
-    "FIERY_DANCE": "Fiery Dance"
+    "FIERY_DANCE": "Fiery Dance",
+    "BIDE": "Bide"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1629,7 +1630,8 @@
     "HEADBUTT": "Deals [20,40,80,SP] SPECIAL to the target and inflicts FLINCH for 5 seconds. Double damage if target has a SHIELD.",
     "STEEL_WING": "Dash into the enemy team's backline, dealing [10,20,40,SP] SPECIAL + 3x DEF as SPECIAL and stealing 1 DEF to all enemy Pokémon hit.",
     "YAWN": "Gain [20,40,80,SP] SHIELD. Opponents targeting this unit are FATIGUE for 4 seconds and lose 30% AP.",
-    "FIERY_DANCE": "Cloaked in flames, the user dances and flaps its wings dealing [25,50,100,SP] SPECIAL to the target. Then raise the caster's AP by 30."
+    "FIERY_DANCE": "Cloaked in flames, the user dances and flaps its wings dealing [25,50,100,SP] SPECIAL to the target. Then raise the caster's AP by 30.",
+    "BIDE": "The user is unable to move for 3 secs. Bide will do SPECIAL damage equal to twice the damage received during the idling period around the user."
   },
   "effect": {
     "INGRAIN": "Ingrain",

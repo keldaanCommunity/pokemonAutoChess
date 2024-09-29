@@ -2658,6 +2658,10 @@ export function displayAbility(
       )
       break
 
+    case Ability.BIDE:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(3)
+      break
+
     default:
       break
   }

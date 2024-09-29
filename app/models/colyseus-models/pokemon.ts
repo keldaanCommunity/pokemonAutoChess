@@ -11058,7 +11058,7 @@ export class Shuckle extends Pokemon {
   speDef = 15
   maxPP = 100
   range = 1
-  skill = Ability.SHELL_TRAP
+  skill = Ability.BIDE
   passive = Passive.SHUCKLE
   attackSprite = AttackSprite.ROCK_MELEE
 }
