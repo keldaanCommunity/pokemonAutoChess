@@ -37,6 +37,9 @@ export abstract class Store<Key extends string> {
   ) {
     const expirationDate = Date.now() + expirationTimeInSeconds * 1000
     this.setter(key, { expirationDate, value })
+    // On localStoage.setItem, the storage event is only triggered on other tabs and windows.
+    // So we manually dispatch a storage event to trigger the subscribe function on the current window as well.
+    window.dispatchEvent(new StorageEvent("storage", { key, newValue: value }))
   }
 
   delete(key: Key) {

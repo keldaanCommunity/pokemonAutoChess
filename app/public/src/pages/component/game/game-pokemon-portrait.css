@@ -40,8 +40,8 @@
 
 .game-pokemon-portrait-cost > span {
   font-size: 1.2em;
-  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
-    1px 1px 0 #fff;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0
+    #fff;
   margin: 0 2px 0 0;
 }
 
@@ -61,7 +61,8 @@
   display: block;
 }
 
-.game-pokemon-portrait-evolution {
+.game-pokemon-portrait-evolution,
+.game-pokemon-portrait-planned-icon {
   position: absolute;
   top: 4px;
   left: 4px;
@@ -82,6 +83,11 @@
   border: 1px solid white;
   border-radius: 4px;
   image-rendering: pixelated;
+}
+
+.game-pokemon-portrait-planned-icon {
+  width: 1.4vw;
+  height: 1.4vw;
 }
 
 .game-pokemon-portrait-duo-part {
