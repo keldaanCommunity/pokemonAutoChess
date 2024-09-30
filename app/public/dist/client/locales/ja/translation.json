@@ -1263,7 +1263,6 @@
     "XRAY_VISION": "XRayビジョン",
     "RAZOR_FANG": "カミソリの牙",
     "CHOICE_SCARF": "チョイススカーフ",
-    "PUNCHING_GLOVE": "パンチグローブ",
     "DEFENSIVE_RIBBON": "ディフェンスリボン",
     "WONDER_BOX": "ワンダーボックス",
     "CLEANSE_TAG": "きよめのおふだ",
@@ -1278,7 +1277,8 @@
     "POKE_DOLL": "ポケドール",
     "RED_ORB": "レッドオーブ",
     "MAX_REVIVE": "マックスリバイブ",
-    "ROCKY_HELMET": "ロッキーヘルメット"
+    "ROCKY_HELMET": "ロッキーヘルメット",
+    "PUNCHING_GLOVE": "パンチグローブ"
   },
   "item_description": {
     "FOSSIL_STONE": "先史時代に生きていたポケモンの化石",
