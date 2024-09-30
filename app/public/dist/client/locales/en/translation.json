@@ -1546,7 +1546,7 @@
     "TICKLE": "Reduce ATK and DEF of the [1,2] closest targets by [3,SP]",
     "AROMATHERAPY": "Clear negative status alterations and heal [20,40,80,SP] HP of adjacent allies",
     "DETECT": "PROTECT adjacent allies for [500,SP] ms mutiplied by the number of adjacent enemies",
-    "SPACIAL_REND": "Reverse the position of the enemy team, then deals [100,SP] SPECIAL to all enemies in a row",
+    "SPACIAL_REND": "Reverse the position of the enemy team, then deals [100,SP] SPECIAL to all enemies in the row of the target",
     "MULTI_ATTACK": "Inflicts [15,SP] SPECIAL to surounding enemies, multiplied by the synergy level of current $t(pkm.SILVALLY) form",
     "STICKY_WEB": "Inflicts [20,35,70,SP] SPECIAL on the target and projects a web around it. Pokémon walking on the web are PARALYSIS for 2 seconds.",
     "ACCELEROCK": "Jumps next to the farthest enemy and attack it immediately, dealing [100,SP]% of ATK as SPECIAL. In the process, lose up to [5,SP] DEF and gain 5% ATK_SPEED for each DEF point lost.",
