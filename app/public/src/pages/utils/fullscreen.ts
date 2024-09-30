@@ -1,7 +1,5 @@
-import { loadPreferences } from "../../preferences"
-
 export function enterFullScreen() {
-  if (document.fullscreenEnabled && loadPreferences().fullscreen) {
+  if (document.fullscreenEnabled) {
     try {
       document.documentElement.requestFullscreen()
     } catch (e) {

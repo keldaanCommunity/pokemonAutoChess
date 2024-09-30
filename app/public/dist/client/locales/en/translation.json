@@ -2789,7 +2789,6 @@
   "music_volume": "Music Volume",
   "sfx_volume": "SFX Volume",
   "toggle_fullscreen": "Toggle fullscreen",
-  "enter_fullscreen_on_game_start": "Enter fullscreen on game start",
   "show_details_on_hover": "Show details on hover instead of right click",
   "show_damage_numbers": "Show damage numbers",
   "disable_animated_tilemap": "Disable background animations",
