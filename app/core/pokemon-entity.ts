@@ -296,6 +296,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         specialDamage = Math.round(specialDamage * attacker.critPower)
       }
       if (
+        attacker &&
+        attacker.items.has(Item.POKEMONOMICON) &&
+        attackType === AttackType.SPECIAL
+      ) {
+        this.status.triggerBurn(3000, this, attacker)
+      }
+      if (
         this.items.has(Item.POWER_LENS) &&
         specialDamage >= 1 &&
         attacker &&
@@ -1243,7 +1250,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         target.positionY
       )
 
-      if (distance <= 1) {
+      if (distance <= 1 && this.items.has(Item.PROTECTIVE_PADS) === false) {
         // melee range
         this.handleSpecialDamage(
           shockDamage,
@@ -1566,11 +1573,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
         const spawns = pickNRandomIn(koAllies, 3)
         spawns.forEach((spawn) => {
-          const mon = PokemonFactory.createPokemonFromName(spawn.name,
-            {
-              selectedEmotion: spawn.emotion,
-              selectedShiny: spawn.shiny,
-            })
+          const mon = PokemonFactory.createPokemonFromName(spawn.name, {
+            selectedEmotion: spawn.emotion,
+            selectedShiny: spawn.shiny
+          })
           const coord =
             this.simulation.getClosestAvailablePlaceOnBoardToPokemon(
               this,
