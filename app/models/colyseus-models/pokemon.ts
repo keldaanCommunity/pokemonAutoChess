@@ -13755,15 +13755,15 @@ export class WormadamPlant extends Pokemon {
     pokemonEvolved: Pokemon
     pokemonsBeforeEvolution: Pokemon[]
   }) {
-    const preEvolve = wormadam.pop() ?? Pokemon
-    switch (preEvolve?.name) {
-      case 'WORMADAM_SANDY':
-        mothim.types.add(Synergy.GROUND)
-        break
-      case 'WORMADAM_TRASH':
+    const preEvolve = wormadam.pop()
+    switch (true) {
+      case preEvolve instanceof WormadamTrash:
         mothim.types.add(Synergy.ARTIFICIAL)
         break
-      case 'WORMADAM_PLANT':
+      case preEvolve instanceof WormadamSandy:
+        mothim.types.add(Synergy.GROUND)
+        break
+      case preEvolve instanceof WormadamPlant:
         mothim.types.add(Synergy.GRASS)
         break
     }
