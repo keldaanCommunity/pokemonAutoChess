@@ -18,7 +18,7 @@ import {
   HiddenPowerNStrategy,
   HiddenPowerOStrategy,
   HiddenPowerPStrategy,
-  HiddenPowerQMStrategy,
+  HiddenPowerQMStrategy, 
   HiddenPowerQStrategy,
   HiddenPowerRStrategy,
   HiddenPowerSStrategy,
@@ -7563,7 +7563,7 @@ export class DoomDesireStrategy extends AbilityStrategy {
         if (target && target.life > 0) {
           pokemon.simulation.room.broadcast(Transfer.ABILITY, {
             id: pokemon.simulation.id,
-            skill: Ability.JUDGEMENT,
+            skill: Ability.DOOM_DESIRE,
             positionX: pokemon.positionX,
             positionY: pokemon.positionY,
             targetX: target.positionX,
@@ -10252,21 +10252,35 @@ export class BideStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    pokemon.status.bideCooldown = 3000
+    const startingHealth = pokemon.life
     pokemon.toIdleState()
-
-    board
-      .getAdjacentCells(target.positionX, target.positionY, true)
-      .forEach((cell) => {
-        if (cell.value && pokemon.team != cell.value.team) {
-          cell.value.handleSpecialDamage(
-            10,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
-        }
-      })
+    
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.BIDE,
+          positionX: pokemon.positionX,
+          positionY: pokemon.positionY,
+          targetX: target.positionX,
+          targetY: target.positionY
+        })
+        board
+        .getAdjacentCells(target.positionX, target.positionY, true)
+        .forEach((cell) => {
+          if (cell.value && pokemon.team != cell.value.team) {
+            cell.value.handleSpecialDamage(
+              (startingHealth - pokemon.life) * 5,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+        })
+      }, 3000)
+    )
   }
 }
 
