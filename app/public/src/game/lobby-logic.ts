@@ -37,7 +37,7 @@ import {
   setSearchedUser,
   setBoosterContent,
   setSuggestions,
-  leaveLobby
+  resetLobby
 } from "../stores/LobbyStore"
 import {
   logIn,
@@ -47,6 +47,7 @@ import {
   joinLobby,
   setErrorAlertMessage
 } from "../stores/NetworkStore"
+import { resetPreparation } from "../stores/PreparationStore"
 
 export async function joinLobbyRoom(
   dispatch: AppDispatch,
@@ -306,6 +307,7 @@ export async function joinExistingPreparationRoom(
   try {
     const token = await firebase.auth().currentUser?.getIdToken()
     if (token) {
+      dispatch(resetPreparation())
       const room: Room<PreparationState> = await client.joinById(roomId, {
         idToken: token
       })
@@ -321,7 +323,7 @@ export async function joinExistingPreparationRoom(
         lobby?.connection.isOpen && lobby.leave(false),
         room.connection.isOpen && room.leave(false)
       ])
-      dispatch(leaveLobby())
+      dispatch(resetLobby())
       navigate("/preparation")
     }
   } catch (error) {
