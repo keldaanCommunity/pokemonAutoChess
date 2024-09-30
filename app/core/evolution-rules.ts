@@ -43,8 +43,8 @@ export abstract class EvolutionRule {
   }
 
   afterEvolve(pokemonEvolved: Pokemon, player: Player, stageLevel: number) {
-    player.updateSynergies()
     pokemonEvolved.onAcquired(player)
+    player.updateSynergies()
     player.board.forEach((pokemon) => {
       if (
         (pokemon.passive === Passive.COSMOG ||
