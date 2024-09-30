@@ -14,7 +14,8 @@
     "pl",
     "pt",
     "th",
-    "vi"
+    "vi",
+    "zh"
   ],
   "modules": [
     "https://cdn.jsdelivr.net/npm/@inlang/plugin-i18next@latest/dist/index.js",
@@ -24,9 +25,6 @@
   ],
   "plugin.inlang.i18next": {
     "pathPattern": "./app/public/dist/client/locales/{languageTag}/translation.json",
-    "variableReferencePattern": [
-      "{{",
-      "}}"
-    ]
+    "variableReferencePattern": ["{{", "}}"]
   }
 }
