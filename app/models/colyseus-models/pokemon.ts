@@ -8928,6 +8928,23 @@ const rksSystemOnChangePosition = function (
   }
 }
 
+const evolveMothim = function (params: {
+  this: Pokemon,
+  pokemonEvolved: Pokemon,
+  pokemonsBeforeEvolution: Pokemon[],
+  player: Player,
+  }
+) {
+  const preEvolve = params.pokemonsBeforeEvolution.at(-1)
+  if (preEvolve instanceof WormadamTrash) {
+    params.pokemonEvolved.types.add(Synergy.ARTIFICIAL)
+  } else if (preEvolve instanceof WormadamSandy) {
+    params.pokemonEvolved.types.add(Synergy.GROUND)
+  } else if (preEvolve instanceof WormadamPlant) {
+    params.pokemonEvolved.types.add(Synergy.GRASS)
+  }
+}
+
 export class TypeNull extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ARTIFICIAL])
   rarity = Rarity.UNIQUE
@@ -13743,30 +13760,10 @@ export class WormadamPlant extends Pokemon {
   passive = Passive.ENVIRONMENTAL_ADAPTATION
   stages = 3
   regional = true
+  onEvolve = evolveMothim
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.GRASS)
-  }
-
-  onEvolve({
-    pokemonEvolved: mothim,
-    pokemonsBeforeEvolution: wormadam
-  }: {
-    pokemonEvolved: Pokemon
-    pokemonsBeforeEvolution: Pokemon[]
-  }) {
-    const preEvolve = wormadam.pop()
-    switch (true) {
-      case preEvolve instanceof WormadamTrash:
-        mothim.types.add(Synergy.ARTIFICIAL)
-        break
-      case preEvolve instanceof WormadamSandy:
-        mothim.types.add(Synergy.GROUND)
-        break
-      case preEvolve instanceof WormadamPlant:
-        mothim.types.add(Synergy.GRASS)
-        break
-    }
   }
 }
 
@@ -13786,33 +13783,13 @@ export class WormadamSandy extends Pokemon {
   passive = Passive.ENVIRONMENTAL_ADAPTATION
   stages = 3
   regional = true
+  onEvolve = evolveMothim
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
       regionSynergies.includes(Synergy.GROUND) &&
       !regionSynergies.includes(Synergy.GRASS)
     )
-  }
-
-  onEvolve({
-    pokemonEvolved: mothim,
-    pokemonsBeforeEvolution: wormadam
-  }: {
-    pokemonEvolved: Pokemon
-    pokemonsBeforeEvolution: Pokemon[]
-  }) {
-    const preEvolve = wormadam.pop()
-    switch (true) {
-      case preEvolve instanceof WormadamTrash:
-        mothim.types.add(Synergy.ARTIFICIAL)
-        break
-      case preEvolve instanceof WormadamSandy:
-        mothim.types.add(Synergy.GROUND)
-        break
-      case preEvolve instanceof WormadamPlant:
-        mothim.types.add(Synergy.GRASS)
-        break
-    }
   }
 }
 
@@ -13832,6 +13809,7 @@ export class WormadamTrash extends Pokemon {
   passive = Passive.ENVIRONMENTAL_ADAPTATION
   stages = 3
   regional = true
+  onEvolve = evolveMothim
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -13839,27 +13817,6 @@ export class WormadamTrash extends Pokemon {
       !regionSynergies.includes(Synergy.GROUND) &&
       !regionSynergies.includes(Synergy.GRASS)
     )
-  }
-
-  onEvolve({
-    pokemonEvolved: mothim,
-    pokemonsBeforeEvolution: wormadam
-  }: {
-    pokemonEvolved: Pokemon
-    pokemonsBeforeEvolution: Pokemon[]
-  }) {
-    const preEvolve = wormadam.pop()
-    switch (true) {
-      case preEvolve instanceof WormadamTrash:
-        mothim.types.add(Synergy.ARTIFICIAL)
-        break
-      case preEvolve instanceof WormadamSandy:
-        mothim.types.add(Synergy.GROUND)
-        break
-      case preEvolve instanceof WormadamPlant:
-        mothim.types.add(Synergy.GRASS)
-        break
-    }
   }
 }
 
