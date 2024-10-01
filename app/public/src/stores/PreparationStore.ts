@@ -89,7 +89,7 @@ export const preparationSlice = createSlice({
     setGameMode: (state, action: PayloadAction<GameMode>) => {
       state.gameMode = action.payload
     },
-    leavePreparation: () => initialState,
+    resetPreparation: () => initialState,
     setWhiteList: (state, action: PayloadAction<string[]>) => {
       state.whitelist = action.payload
     },
@@ -115,7 +115,7 @@ export const {
   setWhiteList,
   setBlackList,
   setGameMode,
-  leavePreparation
+  resetPreparation
 } = preparationSlice.actions
 
 export default preparationSlice.reducer
