@@ -13747,6 +13747,27 @@ export class WormadamPlant extends Pokemon {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.GRASS)
   }
+
+  onEvolve({
+    pokemonEvolved: mothim,
+    pokemonsBeforeEvolution: wormadam
+  }: {
+    pokemonEvolved: Pokemon
+    pokemonsBeforeEvolution: Pokemon[]
+  }) {
+    const preEvolve = wormadam.pop()
+    switch (true) {
+      case preEvolve instanceof WormadamTrash:
+        mothim.types.add(Synergy.ARTIFICIAL)
+        break
+      case preEvolve instanceof WormadamSandy:
+        mothim.types.add(Synergy.GROUND)
+        break
+      case preEvolve instanceof WormadamPlant:
+        mothim.types.add(Synergy.GRASS)
+        break
+    }
+  }
 }
 
 export class WormadamSandy extends Pokemon {
@@ -13771,6 +13792,27 @@ export class WormadamSandy extends Pokemon {
       regionSynergies.includes(Synergy.GROUND) &&
       !regionSynergies.includes(Synergy.GRASS)
     )
+  }
+
+  onEvolve({
+    pokemonEvolved: mothim,
+    pokemonsBeforeEvolution: wormadam
+  }: {
+    pokemonEvolved: Pokemon
+    pokemonsBeforeEvolution: Pokemon[]
+  }) {
+    const preEvolve = wormadam.pop()
+    switch (true) {
+      case preEvolve instanceof WormadamTrash:
+        mothim.types.add(Synergy.ARTIFICIAL)
+        break
+      case preEvolve instanceof WormadamSandy:
+        mothim.types.add(Synergy.GROUND)
+        break
+      case preEvolve instanceof WormadamPlant:
+        mothim.types.add(Synergy.GRASS)
+        break
+    }
   }
 }
 
@@ -13798,6 +13840,27 @@ export class WormadamTrash extends Pokemon {
       !regionSynergies.includes(Synergy.GRASS)
     )
   }
+
+  onEvolve({
+    pokemonEvolved: mothim,
+    pokemonsBeforeEvolution: wormadam
+  }: {
+    pokemonEvolved: Pokemon
+    pokemonsBeforeEvolution: Pokemon[]
+  }) {
+    const preEvolve = wormadam.pop()
+    switch (true) {
+      case preEvolve instanceof WormadamTrash:
+        mothim.types.add(Synergy.ARTIFICIAL)
+        break
+      case preEvolve instanceof WormadamSandy:
+        mothim.types.add(Synergy.GROUND)
+        break
+      case preEvolve instanceof WormadamPlant:
+        mothim.types.add(Synergy.GRASS)
+        break
+    }
+  }
 }
 
 export class Mothim extends Pokemon {
@@ -13819,17 +13882,6 @@ export class Mothim extends Pokemon {
     // always hide mothim to avoid showing duplicated with other burmy forms
     // this does not impact the evolution of wormadam
     return false
-  }
-  onAcquired(player: Player) {
-    if (player.regionalPokemons.includes(Pkm.BURMY_PLANT)) {
-      this.types.add(Synergy.GRASS)
-    }
-    if (player.regionalPokemons.includes(Pkm.BURMY_SANDY)) {
-      this.types.add(Synergy.GROUND)
-    }
-    if (player.regionalPokemons.includes(Pkm.BURMY_TRASH)) {
-      this.types.add(Synergy.ARTIFICIAL)
-    }
   }
 }
 
