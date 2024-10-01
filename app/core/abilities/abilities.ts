@@ -8170,6 +8170,7 @@ export class SpacialRendStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = 100
+    const rowToTarget = target.positionY
     const enemies = board.cells.filter((p) => p && p.team !== pokemon.team)
     const n = enemies.length
     for (let i = 0; i < Math.floor(n / 2); i++) {
@@ -8181,9 +8182,8 @@ export class SpacialRendStrategy extends AbilityStrategy {
       )
     }
 
-    const y = clamp(target.positionY, 2, BOARD_HEIGHT - 2)
     for (let x = 0; x < BOARD_WIDTH; x++) {
-      const targetHit = board.getValue(x, y)
+      const targetHit = board.getValue(x, rowToTarget)
       if (targetHit && targetHit.team !== pokemon.team) {
         targetHit.handleSpecialDamage(
           damage,

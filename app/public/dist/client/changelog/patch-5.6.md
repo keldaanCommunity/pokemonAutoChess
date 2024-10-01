@@ -43,6 +43,8 @@
 - Change Head smash: Recoil damage 5/10/15 true damage → 10/20/40 physical damage
 - Nerf Pirouette Meloetta: PP 80 → 90
 - Buff Aria Meloetta: Relic song first two notes now give 10 SHIELD to all allies
+- Buff Sobble line: PP 100/100/70 → 80/80/80
+- Fixed Spacial Rend (Palkia) targeting: now correctly deals damage to all enemies in the target row
 
 # Changes to Synergies
 
