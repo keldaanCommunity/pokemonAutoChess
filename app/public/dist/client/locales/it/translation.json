@@ -2789,7 +2789,6 @@
   "music_volume": "Volume della musica",
   "sfx_volume": "Volume SFX",
   "toggle_fullscreen": "Attiva schermo intero",
-  "enter_fullscreen_on_game_start": "Attiva schermo intero ad inizio partita",
   "show_details_on_hover": "Mostra i dettagli al passaggio del mouse invece che con il clic destro",
   "show_damage_numbers": "Mostra valore dei danni",
   "disable_animated_tilemap": "Disabilita animazioni in background",

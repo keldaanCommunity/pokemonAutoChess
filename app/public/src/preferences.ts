@@ -14,7 +14,6 @@ export interface IPreferencesState {
   showDetailsOnHover: boolean
   showDamageNumbers: boolean
   disableAnimatedTilemap: boolean
-  fullscreen: boolean
   keybindings: Keybindings
   renderer: number
 }
@@ -26,7 +25,6 @@ const defaultPreferences: IPreferencesState = {
   showDetailsOnHover: false,
   showDamageNumbers: true,
   disableAnimatedTilemap: false,
-  fullscreen: true,
   renderer: Phaser.AUTO,
   keybindings: {
     sell: "E",
