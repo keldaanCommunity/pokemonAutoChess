@@ -60,8 +60,6 @@
 
 - Ranked matches and Smeargle's Scribble can now be created at anytime from the New game menu
 - Ranked matches are now restricted to players of your current rank: not below, not above. They no longer give additional booster rewards to the winner.
-- Private lobbies passwords are now automatically generated and no longer customizable
-- Custom lobbies are now private by default
 - Snow, Storm and Blood Moon weathers now are triggered at 8 mons of the associated synergy
 
 # UI
@@ -79,3 +77,7 @@
 - Fix some pokemons passives not working properly when played in ghost matchups (ghost = copy of a player to ensure every player has an opponent)
 
 # Misc
+
+- Room name is no longer customizable (too many stupid people)
+- Private lobbies passwords are now automatically generated and no longer customizable
+- Custom lobbies are now private by default

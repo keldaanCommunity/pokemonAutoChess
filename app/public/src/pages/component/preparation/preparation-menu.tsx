@@ -208,7 +208,7 @@ export default function PreparationMenu() {
     )
 
   const roomNameInput = gameMode === GameMode.CUSTOM_LOBBY &&
-    (isOwner || isModerator || isAdmin) &&
+    (isModerator || isAdmin) &&
     user &&
     !user.anonymous && (
       <div className="my-input-group">
@@ -320,13 +320,13 @@ export default function PreparationMenu() {
       </div>
 
       <div className="actions">
-        {botControls}
+        {roomNameInput}
         <div className="spacer"></div>
         {deleteRoomButton}
       </div>
 
       <div className="actions">
-        {roomNameInput}
+        {botControls}
         <div className="spacer"></div>
         {roomPrivateButton}
         {roomEloButton}
