@@ -8929,12 +8929,11 @@ const rksSystemOnChangePosition = function (
 }
 
 const evolveMothim = function (params: {
-  this: Pokemon,
-  pokemonEvolved: Pokemon,
-  pokemonsBeforeEvolution: Pokemon[],
-  player: Player,
-  }
-) {
+  this: Pokemon
+  pokemonEvolved: Pokemon
+  pokemonsBeforeEvolution: Pokemon[]
+  player: Player
+}) {
   const preEvolve = params.pokemonsBeforeEvolution.at(-1)
   if (preEvolve instanceof WormadamTrash) {
     params.pokemonEvolved.types.add(Synergy.ARTIFICIAL)
@@ -13765,27 +13764,6 @@ export class WormadamPlant extends Pokemon {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.GRASS)
   }
-
-  onEvolve({
-    pokemonEvolved: mothim,
-    pokemonsBeforeEvolution: wormadam
-  }: {
-    pokemonEvolved: Pokemon
-    pokemonsBeforeEvolution: Pokemon[]
-  }) {
-    const preEvolve = wormadam.pop()
-    switch (true) {
-      case preEvolve instanceof WormadamTrash:
-        mothim.types.add(Synergy.ARTIFICIAL)
-        break
-      case preEvolve instanceof WormadamSandy:
-        mothim.types.add(Synergy.GROUND)
-        break
-      case preEvolve instanceof WormadamPlant:
-        mothim.types.add(Synergy.GRASS)
-        break
-    }
-  }
 }
 
 export class WormadamSandy extends Pokemon {
@@ -13811,27 +13789,6 @@ export class WormadamSandy extends Pokemon {
       regionSynergies.includes(Synergy.GROUND) &&
       !regionSynergies.includes(Synergy.GRASS)
     )
-  }
-
-  onEvolve({
-    pokemonEvolved: mothim,
-    pokemonsBeforeEvolution: wormadam
-  }: {
-    pokemonEvolved: Pokemon
-    pokemonsBeforeEvolution: Pokemon[]
-  }) {
-    const preEvolve = wormadam.pop()
-    switch (true) {
-      case preEvolve instanceof WormadamTrash:
-        mothim.types.add(Synergy.ARTIFICIAL)
-        break
-      case preEvolve instanceof WormadamSandy:
-        mothim.types.add(Synergy.GROUND)
-        break
-      case preEvolve instanceof WormadamPlant:
-        mothim.types.add(Synergy.GRASS)
-        break
-    }
   }
 }
 
@@ -13859,27 +13816,6 @@ export class WormadamTrash extends Pokemon {
       !regionSynergies.includes(Synergy.GROUND) &&
       !regionSynergies.includes(Synergy.GRASS)
     )
-  }
-
-  onEvolve({
-    pokemonEvolved: mothim,
-    pokemonsBeforeEvolution: wormadam
-  }: {
-    pokemonEvolved: Pokemon
-    pokemonsBeforeEvolution: Pokemon[]
-  }) {
-    const preEvolve = wormadam.pop()
-    switch (true) {
-      case preEvolve instanceof WormadamTrash:
-        mothim.types.add(Synergy.ARTIFICIAL)
-        break
-      case preEvolve instanceof WormadamSandy:
-        mothim.types.add(Synergy.GROUND)
-        break
-      case preEvolve instanceof WormadamPlant:
-        mothim.types.add(Synergy.GRASS)
-        break
-    }
   }
 }
 
