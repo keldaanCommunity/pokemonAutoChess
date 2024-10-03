@@ -298,7 +298,8 @@ export class OpenBoosterCommand extends Command<
 
       const mongoUser = await UserMetadata.findOneAndUpdate(
         { uid: client.auth.uid, booster: { $gt: 0 } },
-        { $inc: { booster: -1 } }
+        { $inc: { booster: -1 } },
+        { new: true }
       )
       if (!mongoUser) return
 
@@ -341,13 +342,20 @@ export class OpenBoosterCommand extends Command<
         if (pokemonConfig) {
           pokemonConfig.dust = mongoPokemonConfig.dust
         } else {
-          const newConfig = new PokemonConfig(index)
-          newConfig.dust = mongoPokemonConfig.dust
+          const newConfig: IPokemonConfig = {
+            dust: mongoPokemonConfig.dust,
+            id: mongoPokemonConfig.id,
+            emotions: mongoPokemonConfig.emotions.map((e) => e),
+            shinyEmotions: mongoPokemonConfig.shinyEmotions.map((e) => e),
+            selectedEmotion: mongoPokemonConfig.selectedEmotion,
+            selectedShiny: mongoPokemonConfig.selectedShiny
+          }
           user.pokemonCollection.set(index, newConfig)
         }
       })
 
       client.send(Transfer.BOOSTER_CONTENT, boosterContent)
+      client.send(Transfer.USER_PROFILE, mongoUser)
     } catch (error) {
       logger.error(error)
     }
@@ -500,8 +508,10 @@ export class ChangeAvatarCommand extends Command<
   }) {
     try {
       const user = this.room.users.get(client.auth.uid)
+      const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
       if (!user) return
-      const config = user.pokemonCollection.get(index)
+      if (!mongoUser) return
+      const config = mongoUser.pokemonCollection.get(index)
       if (config) {
         const emotionsToCheck = shiny ? config.shinyEmotions : config.emotions
         if (emotionsToCheck.includes(emotion)) {
@@ -509,11 +519,8 @@ export class ChangeAvatarCommand extends Command<
             .replace(CDN_PORTRAIT_URL, "")
             .replace(".png", "")
           user.avatar = portrait
-          const u = await UserMetadata.findOne({ uid: client.auth.uid })
-          if (u) {
-            u.avatar = portrait
-            u.save()
-          }
+          mongoUser.avatar = portrait
+          mongoUser.save()
         }
       }
     } catch (error) {
