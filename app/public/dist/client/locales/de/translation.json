@@ -2057,7 +2057,7 @@
     "BEAST_BOOST_ATK": "Bei einem Kill, erhält das Pokemon +5 ATK.",
     "BEAST_BOOST_AP": "Bei einem Kill, erhält das Pokemon +10 AP.",
     "CHINGLING": "Klingplim sucht nach einem STAR_DUST",
-    "CHIMECHO": "Resoniert mit den Rufen von Verbündeten im Umkreis von 2 Feldern, wodurch deren Ruf verdoppelt wird, solange Palimpalim auf dem Feld ist.",
+    "CHIMECHO": "Resoniert mit den Rufen von benachbarter Verbündeten, wodurch deren Ruf verdoppelt wird, solange Palimpalim auf dem Feld ist.",
     "SURGE_SURFER": "Das ATK_SPEED von Alola-Raichu erhöht sich im ELECTRIC_FIELD oder PSYCHIC_FIELD um 30%.",
     "MEGA_LAUNCHER": "Die Fähigkeit des Pokemon erzeugt 3 SOUND-Rufe statt einem.",
     "CLEAR_WING": "Gewinnt jede Sekunde 2% Bonus ATK_SPEED",

@@ -2076,7 +2076,7 @@
     "BEAST_BOOST_ATK": "Al matar, el pokémon gana 5 ATK.",
     "BEAST_BOOST_AP": "Al matar, el pokémon gana un 10% de AP",
     "CHINGLING": "$t(pkm.CHINGLING) está buscando un STAR_DUST",
-    "CHIMECHO": "Resuena con los sonidos de los aliados dentro de un radio de 2 celdas, lo que duplica su grito mientras $t(pkm.CHIMECHO) está vivo.",
+    "CHIMECHO": "Resuena con los sonidos de los aliados adyacentes, lo que duplica su grito mientras $t(pkm.CHIMECHO) está vivo.",
     "SURGE_SURFER": "El surfista gana +30% ATK_SPEED cuando está en ELECTRIC_FIELD o PSYCHIC_FIELD",
     "MEGA_LAUNCHER": "Esta habilidad pokémon emite 3 gritos SOUND en lugar de uno.",
     "CLEAR_WING": "Obtiene una bonificación de 2% ATK_SPEED cada segundo",
