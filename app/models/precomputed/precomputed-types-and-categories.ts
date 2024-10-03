@@ -1,4 +1,3 @@
-import { RarityCost } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { Rarity } from "../../types/enum/Game"
 import { Passive } from "../../types/enum/Passive"
@@ -45,21 +44,22 @@ precomputedPokemons
       } else if (pokemon.rarity === Rarity.SPECIAL) {
         data[type]!.specialPokemons.push(pokemon.name)
       } else if (pokemon.additional) {
-        if (!data[type]!.additionalPokemons.includes(PkmFamily[pokemon.name])) {
+        if (
+          !data[type]!.additionalPokemons.some(
+            (p) => PkmFamily[p] === PkmFamily[pokemon.name]
+          )
+        ) {
           data[type]!.additionalPokemons.push(pokemon.name)
         }
-      } else if (!data[type]!.pokemons.includes(PkmFamily[pokemon.name])) {
+      } else if (
+        !data[type]!.pokemons.some(
+          (p) => PkmFamily[p] === PkmFamily[pokemon.name]
+        )
+      ) {
         data[type]!.pokemons.push(pokemon.name)
       }
     })
   })
-
-const sortByRarity = (a, b) => RarityCost[a.rarity] - RarityCost[b.rarity]
-
-Object.keys(data).forEach((type) => {
-  data[type].pokemons.sort(sortByRarity)
-  data[type].additionalPokemons.sort(sortByRarity)
-})
 
 export const PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY = data as {
   [key in Synergy]: {

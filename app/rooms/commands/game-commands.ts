@@ -1212,26 +1212,32 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           }
         }
 
-        let eggChance = 0,
-          shinyChance = 0,
-          nbMaxEggs = 0
-        if (
-          player.history.at(-1)?.result === BattleResult.DEFEAT &&
-          (player.effects.has(Effect.BREEDER) ||
-            player.effects.has(Effect.GOLDEN_EGGS))
-        ) {
-          eggChance = 1
-          nbMaxEggs = 8
-          shinyChance = player.effects.has(Effect.GOLDEN_EGGS)
-            ? 0.25 * (player.streak + 1)
-            : 0
-        }
-        if (
-          player.history.at(-1)?.result === BattleResult.DEFEAT &&
-          player.effects.has(Effect.HATCHER)
-        ) {
-          eggChance = 0.25 * (player.streak + 1)
-          nbMaxEggs = 1
+        let eggChance = 0
+        let shinyChance = 0
+        const hasBabyActive =
+          player.effects.has(Effect.HATCHER) ||
+          player.effects.has(Effect.BREEDER) ||
+          player.effects.has(Effect.GOLDEN_EGGS)
+        const hasLostLastBattle =
+          player.history.at(-1)?.result === BattleResult.DEFEAT
+
+        if (hasLostLastBattle && hasBabyActive) {
+          if (player.effects.has(Effect.HATCHER)) {
+            eggChance = player.eggChance
+            shinyChance = 0
+          }
+          if (player.effects.has(Effect.BREEDER)) {
+            eggChance = 1
+            shinyChance = 0
+          }
+          if (player.effects.has(Effect.GOLDEN_EGGS)) {
+            eggChance = 1
+            shinyChance = player.eggChance
+          }
+
+          player.eggChance = max(1)(player.eggChance + 0.25)
+        } else {
+          player.eggChance = 0
         }
 
         if (
@@ -1239,26 +1245,21 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           [1, 2, 3].includes(this.state.stageLevel)
         ) {
           eggChance = 1
-          nbMaxEggs = 8
         }
 
         const eggsOnBench = values(player.board).filter(
           (p) => p.name === Pkm.EGG
         )
-        const nbOfEggs = eggsOnBench.length
         const nbOfShinyEggs = eggsOnBench.filter((p) => p.shiny).length
 
-        if (
-          chance(eggChance) &&
-          getFreeSpaceOnBench(player.board) > 0 &&
-          nbOfEggs < nbMaxEggs
-        ) {
+        if (chance(eggChance) && getFreeSpaceOnBench(player.board) > 0) {
           const shiny = chance(shinyChance) && nbOfShinyEggs === 0
           const egg = createRandomEgg(shiny, player)
           const x = getFirstAvailablePositionInBench(player.board)
           egg.positionX = x !== undefined ? x : -1
           egg.positionY = 0
           player.board.set(egg.id, egg)
+          player.eggChance = 0
         }
 
         if (!player.isBot) {
