@@ -12,7 +12,10 @@ export function AvatarTab() {
   const pokemonCollectionMap = useAppSelector(
     (state) => state.network.profile?.pokemonCollection
   )
-  const pokemonCollection = pokemonCollectionMap ? [...pokemonCollectionMap.values()] : []
+
+  const pokemonCollection = pokemonCollectionMap
+    ? [...pokemonCollectionMap.values()]
+    : []
   const [selectedPkm, setSelectedPkm] = useState<Pkm | "">("")
 
   return (
