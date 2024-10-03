@@ -53,6 +53,7 @@
 # Changes to Synergies
 
 - Nerf Fighting 8: damage blocked 15 → 13
+- Buff Ice 8: frozen enemies now take 20% additional damage
 
 # Changes to Items
 

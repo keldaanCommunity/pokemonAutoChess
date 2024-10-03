@@ -1788,7 +1788,7 @@
     "CHILLY": "+2 SPE_DEF, 20% 확률로 FREZZE",
     "FROSTY": "+6 SPE_DEF, 30% 확률로 FREEZE",
     "FREEZING": "+20 SPE_DEF, 40% 확률로 FREEZE",
-    "SHEER_COLD": "+30 SPE_DEF, 50% 확률로 FREEZE",
+    "SHEER_COLD": "+30 SPE_DEF, 50% 확률로 FREEZE, 얼어붙은 적은 20%의 추가 피해를 입습니다.",
     "ANCIENT_POWER": "40%의 HP와 30% 증가된 ATK로 부활",
     "ELDER_POWER": "80%의 HP와 60% 증가된 ATK로 부활",
     "FORGOTTEN_POWER": "100%의 HP와 100% 증가된 ATK로 부활",

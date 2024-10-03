@@ -1574,7 +1574,7 @@
     "CHILLY": "+2 SPE_DEF, 20% de chance de FREEZE",
     "FROSTY": "+6 SPE_DEF, 30% de chance de FREEZE",
     "FREEZING": "+20 SPE_DEF, 40% de chance de FREEZE",
-    "SHEER_COLD": "+30 SPE_DEF, 50% de chance de FREEZE",
+    "SHEER_COLD": "+30 SPE_DEF, 50% de chance de FREEZE, inimigos congelados recebem 20% de dano adicional",
     "ANCIENT_POWER": "Revive com 40% HP e +30% ATK",
     "ELDER_POWER": "Revive com 80% HP e +60% ATK.",
     "FORGOTTEN_POWER": "Revive com 100% HP e +100% ATK.",

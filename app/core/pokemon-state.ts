@@ -342,6 +342,14 @@ export default abstract class PokemonState {
         damage = Math.ceil(damage * 1.2)
       }
 
+      if (
+        pokemon.status.freeze &&
+        attacker &&
+        attacker.effects.has(Effect.SHEER_COLD)
+      ) {
+        damage = Math.ceil(damage * 1.2)
+      }
+
       const def = pokemon.status.armorReduction
         ? Math.round(pokemon.def / 2)
         : pokemon.def
