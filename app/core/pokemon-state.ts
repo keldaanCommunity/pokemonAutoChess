@@ -371,7 +371,7 @@ export default abstract class PokemonState {
           pokemon.effects.has(Effect.JUSTIFIED)
         ) {
           const damageBlocked = pokemon.effects.has(Effect.JUSTIFIED)
-            ? 15
+            ? 13
             : pokemon.effects.has(Effect.DEFIANT)
               ? 10
               : pokemon.effects.has(Effect.STURDY)

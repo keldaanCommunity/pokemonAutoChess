@@ -52,6 +52,8 @@
 
 # Changes to Synergies
 
+- Nerf Fighting 8: damage blocked 15 → 13
+
 # Changes to Items
 
 - Golden Rod has been removed
