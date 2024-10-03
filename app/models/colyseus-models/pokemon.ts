@@ -14421,7 +14421,7 @@ export class Klefki extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 200
+  hp = 150
   atk = 16
   def = 4
   speDef = 3
