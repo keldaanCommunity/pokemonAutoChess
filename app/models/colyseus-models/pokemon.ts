@@ -13500,8 +13500,8 @@ export class Solgaleo extends Pokemon {
   stars = 3
   hp = 300
   atk = 25
-  def = 8
-  speDef = 8
+  def = 6
+  speDef = 4
   maxPP = 120
   range = 1
   skill = Ability.SUNSTEEL_STRIKE

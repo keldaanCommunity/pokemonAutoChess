@@ -45,6 +45,7 @@
 - Buff Aria Meloetta: Relic song first two notes now give 10 SHIELD to all allies
 - Buff Sobble line: PP 100/100/70 → 80/80/80
 - Fixed Spacial Rend (Palkia) targeting: now correctly deals damage to all enemies in the target row
+- Nerf Solgaleo: Def: 8 → 6, SpeDef: 8 → 4
 
 # Changes to Synergies
 
@@ -69,6 +70,7 @@
 - Add a new "Toggle Fullscreen" button in the sidebar
 - Show total money earned, total damage dealt and total reroll count in the player detail tooltip ingame
 - Units in your team planner are highlighted with a dedicated icon in the shop
+- Changed the font to Jost
 
 # Bugfix
 
