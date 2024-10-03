@@ -5066,7 +5066,7 @@ export class CounterStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = Math.max(0, pokemon.hp - pokemon.life)
+    const damage = Math.max(1, Math.round((pokemon.hp - pokemon.life) * 0.5))
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
     cells.forEach((cell) => {

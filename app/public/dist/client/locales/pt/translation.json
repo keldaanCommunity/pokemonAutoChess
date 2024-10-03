@@ -1304,7 +1304,7 @@
     "SEARING_SHOT": "Um inferno de chamas escarlates incendeia tudo ao redor do usuário. Inflige [40,SP] SPECIAL e BURN por 3 segundos todos os inimigos a 2 quadrados de Victini.",
     "SPLASH": "Apenas flops e salpicos sem nenhum efeito...",
     "PECK": "Inflige [10,20,30,SP] SPECIAL para o alvo",
-    "COUNTER": "O Pokémon ataca os inimigos adjacentes, causando SPECIAL igual ao HP perdido (escala com AP)",
+    "COUNTER": "Ataca inimigos adjacentes, causando [50,SP]% de seu HP perdido como SPECIAL",
     "COSMIC_POWER": "Aumente o AP da sua equipe em [20,SP]",
     "ENTANGLING_THREAD": "Inflige [10,20,40,SP] SPECIAL e PARALYSIS o alvo e os inimigos adjacentes por 4 segundos",
     "SILVER_WIND": "Corra para a retaguarda inimiga, causando [30,60,120,SP] SPECIAL a todos os inimigos no caminho. Em seguida, ganhe 1 ATK, 1 DEF, 1 SPE_DEF, 10 AP e 10% ATK_SPEED",

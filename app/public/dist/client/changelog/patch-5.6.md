@@ -49,6 +49,7 @@
 - Nerf Chimecho passive: Resonates to the sounds of allies ~~within a radius of 2 cells~~ adjacent to the holder
 - Nerf Galarian Ponyta line: Attack : 12/24 → 9/20, PP: 60 → 80
 - Nerf Klefki: HP 200 → 150
+- Nerf Counter (Wobbuffet): 100% → 50% of missing HP as special damage
 
 # Changes to Synergies
 

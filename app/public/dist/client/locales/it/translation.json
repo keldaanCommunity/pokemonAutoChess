@@ -1411,7 +1411,7 @@
     "SEARING_SHOT": "Un inferno di fiamme scarlatte incendia tutto ciò che circonda l'utilizzatore. Infligge [40,SP] SPECIAL e BURN per 3 secondi a tutti i nemici entro 2 caselle da Victini.",
     "SPLASH": "Solo flop e spruzzi senza alcun effetto...",
     "PECK": "Infligge [10,20,30,SP] SPECIAL al bersaglio",
-    "COUNTER": "L'utilizzatore si scaglia contro i nemici adiacenti infliggendo SPECIAL pari ai suoi HP mancanti (Scala con AP)",
+    "COUNTER": "Si scaglia contro i nemici adiacenti infliggendo [50,SP]% dei suoi HP mancanti come SPECIAL",
     "COSMIC_POWER": "Aumenta i AP della tua squadra di [20,SP], tranne all'utilizzatore.",
     "ENTANGLING_THREAD": "Infligge [10,20,40,SP] SPECIAL e PARALYSIS al bersaglio e ai nemici adiacenti per 4 secondi",
     "SILVER_WIND": "Scatta nelle retrovie nemiche, infliggendo [30,60,120,SP] SPECIAL a tutti i nemici sul percorso. Inoltre ottieni 1 ATK, 1 DEF, 1 SPE_DEF, 10 AP e 10% ATK_SPEED.",
