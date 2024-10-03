@@ -526,8 +526,10 @@ export class ChangeAvatarCommand extends Command<
   }) {
     try {
       const user = this.room.users.get(client.auth.uid)
+      const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
       if (!user) return
-      const config = user.pokemonCollection.get(index)
+      if (!mongoUser) return
+      const config = mongoUser.pokemonCollection.get(index)
       if (config) {
         const emotionsToCheck = shiny ? config.shinyEmotions : config.emotions
         if (emotionsToCheck.includes(emotion)) {
@@ -535,11 +537,8 @@ export class ChangeAvatarCommand extends Command<
             .replace(CDN_PORTRAIT_URL, "")
             .replace(".png", "")
           user.avatar = portrait
-          const u = await UserMetadata.findOne({ uid: client.auth.uid })
-          if (u) {
-            u.avatar = portrait
-            u.save()
-          }
+          mongoUser.avatar = portrait
+          mongoUser.save()
         }
       }
     } catch (error) {
