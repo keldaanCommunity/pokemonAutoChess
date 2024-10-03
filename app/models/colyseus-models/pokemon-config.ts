@@ -19,7 +19,6 @@ export default class PokemonConfig extends Schema implements IPokemonConfig {
       p.shinyEmotions.forEach((e) => this.shinyEmotions.push(e))
       this.selectedEmotion = p.selectedEmotion
       this.selectedShiny = p.selectedShiny
-      this
     } else {
       this.dust = 0
       this.selectedEmotion = Emotion.NORMAL
