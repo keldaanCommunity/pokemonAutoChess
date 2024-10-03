@@ -47,6 +47,7 @@
 - Fixed Spacial Rend (Palkia) targeting: now correctly deals damage to all enemies in the target row
 - Nerf Solgaleo: Def: 8 → 6, SpeDef: 8 → 4
 - Nerf Chimecho passive: Resonates to the sounds of allies ~~within a radius of 2 cells~~ adjacent to the holder
+- Nerf Galarian Ponyta line: Attack : 12/24 → 9/20, PP: 60 → 80
 
 # Changes to Synergies
 

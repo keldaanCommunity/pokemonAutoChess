@@ -7807,10 +7807,10 @@ export class GalarianPonyta extends Pokemon {
   stars = 1
   evolution = Pkm.GALARIAN_RAPIDASH
   hp = 90
-  atk = 12
+  atk = 9
   def = 3
   speDef = 3
-  maxPP = 60
+  maxPP = 80
   range = 1
   skill = Ability.PASTEL_VEIL
   regional = true
@@ -7825,10 +7825,10 @@ export class GalarianRapidash extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 220
-  atk = 24
+  atk = 20
   def = 5
   speDef = 5
-  maxPP = 60
+  maxPP = 80
   range = 1
   skill = Ability.PASTEL_VEIL
   regional = true
