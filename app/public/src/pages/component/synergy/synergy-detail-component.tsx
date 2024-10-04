@@ -93,15 +93,12 @@ export default function SynergyDetailComponent(props: {
   }
 
   if (props.type === Synergy.BABY && currentPlayer) {
-    const lastResult = currentPlayer.history.at(-1)?.result ?? null
     if (levelReached === SynergyTriggers[Synergy.BABY][0]) {
-      const eggChance = lastResult === BattleResult.DEFEAT ? max(100)(25 * (currentPlayer.streak + 1)) : 0
-      additionalInfo = t('synergy_description.BABY_EGG_CHANCE', { eggChance })
+      additionalInfo = t('synergy_description.BABY_EGG_CHANCE', { eggChance: currentPlayer.eggChance * 100 })
     } else if (levelReached === SynergyTriggers[Synergy.BABY][1]) {
       additionalInfo = t('synergy_description.BABY_EGG_CHANCE', { eggChance: 100 })
     } else if (SynergyTriggers[Synergy.BABY][2]) {
-      const eggChance = lastResult === BattleResult.DEFEAT ? max(100)(25 * (currentPlayer.streak + 1)) : 0
-      additionalInfo = t('synergy_description.BABY_GOLDEN_EGG_CHANCE', { eggChance })
+      additionalInfo = t('synergy_description.BABY_GOLDEN_EGG_CHANCE', { eggChance: currentPlayer.eggChance * 100 })
     }
   }
 

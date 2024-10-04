@@ -666,7 +666,8 @@ export default function Game() {
           "title",
           "rerollCount",
           "totalMoneyEarned",
-          "totalPlayerDamageDealt"
+          "totalPlayerDamageDealt",
+          "eggChance"
         ]
 
         fields.forEach((field) => {
