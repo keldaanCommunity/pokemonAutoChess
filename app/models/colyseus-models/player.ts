@@ -86,6 +86,7 @@ export default class Player extends Schema implements IPlayer {
   @type("uint8") rerollCount: number = 0
   @type("uint8") totalMoneyEarned: number = 0
   @type("uint8") totalPlayerDamageDealt: number = 0
+  @type("float32") eggChance: number = 0
   commonRegionalPool: Pkm[] = new Array<Pkm>()
   uncommonRegionalPool: Pkm[] = new Array<Pkm>()
   rareRegionalPool: Pkm[] = new Array<Pkm>()

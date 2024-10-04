@@ -4717,8 +4717,8 @@ export class Fearow extends Pokemon {
   stars = 2
   hp = 120
   atk = 9
-  def = 1
-  speDef = 1
+  def = 2
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.PECK
@@ -7807,10 +7807,10 @@ export class GalarianPonyta extends Pokemon {
   stars = 1
   evolution = Pkm.GALARIAN_RAPIDASH
   hp = 90
-  atk = 12
+  atk = 9
   def = 3
   speDef = 3
-  maxPP = 60
+  maxPP = 80
   range = 1
   skill = Ability.PASTEL_VEIL
   regional = true
@@ -7825,10 +7825,10 @@ export class GalarianRapidash extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 220
-  atk = 24
+  atk = 20
   def = 5
   speDef = 5
-  maxPP = 60
+  maxPP = 80
   range = 1
   skill = Ability.PASTEL_VEIL
   regional = true
@@ -9973,7 +9973,7 @@ export class UnownA extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 90
   range = 9
   skill = Ability.HIDDEN_POWER_A
   passive = Passive.UNOWN
@@ -10020,7 +10020,7 @@ export class UnownD extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 150
+  maxPP = 100
   range = 9
   skill = Ability.HIDDEN_POWER_D
   passive = Passive.UNOWN
@@ -10116,7 +10116,7 @@ export class UnownJ extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 90
   range = 9
   skill = Ability.HIDDEN_POWER_J
   passive = Passive.UNOWN
@@ -10132,7 +10132,7 @@ export class UnownK extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 90
   range = 9
   skill = Ability.HIDDEN_POWER_K
   passive = Passive.UNOWN
@@ -10148,7 +10148,7 @@ export class UnownL extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 60
   range = 9
   skill = Ability.HIDDEN_POWER_L
   passive = Passive.UNOWN
@@ -10196,7 +10196,7 @@ export class UnownO extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 50
   range = 9
   skill = Ability.HIDDEN_POWER_O
   passive = Passive.UNOWN
@@ -10244,7 +10244,7 @@ export class UnownR extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 90
   range = 9
   skill = Ability.HIDDEN_POWER_R
   passive = Passive.UNOWN
@@ -10308,7 +10308,7 @@ export class UnownV extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 90
   range = 9
   skill = Ability.HIDDEN_POWER_V
   passive = Passive.UNOWN
@@ -10340,7 +10340,7 @@ export class UnownX extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 60
   range = 9
   skill = Ability.HIDDEN_POWER_X
   passive = Passive.UNOWN
@@ -10372,7 +10372,7 @@ export class UnownZ extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 90
   range = 9
   skill = Ability.HIDDEN_POWER_Z
   passive = Passive.UNOWN
@@ -10403,7 +10403,7 @@ export class UnownExclamation extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 60
   range = 9
   skill = Ability.HIDDEN_POWER_EM
   passive = Passive.UNOWN
@@ -13500,8 +13500,8 @@ export class Solgaleo extends Pokemon {
   stars = 3
   hp = 300
   atk = 25
-  def = 8
-  speDef = 8
+  def = 6
+  speDef = 4
   maxPP = 120
   range = 1
   skill = Ability.SUNSTEEL_STRIKE
@@ -14421,7 +14421,7 @@ export class Klefki extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 200
+  hp = 150
   atk = 16
   def = 4
   speDef = 3

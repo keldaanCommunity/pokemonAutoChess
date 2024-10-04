@@ -45,8 +45,21 @@
 - Buff Aria Meloetta: Relic song first two notes now give 10 SHIELD to all allies
 - Buff Sobble line: PP 100/100/70 → 80/80/80
 - Fixed Spacial Rend (Palkia) targeting: now correctly deals damage to all enemies in the target row
+- Nerf Solgaleo: Def: 8 → 6, SpeDef: 8 → 4
+- Nerf Chimecho passive: Resonates to the sounds of allies ~~within a radius of 2 cells~~ adjacent to the holder
+- Nerf Galarian Ponyta line: Attack : 12/24 → 9/20, PP: 60 → 80
+- Nerf Klefki: HP 200 → 150
+- Nerf Counter (Wobbuffet): 100% → 50% of missing HP as special damage
+- Buff Stun Spore (Chikorita, Oddish): damage 10/20/40 → 15/30/60
+- Buff Fearow: Def/SpeDef: 1/1 → 2/2 ; buff Peck: 10/20/30 → 10/30/50 damage
+- Buff Unown-A: PP 100 → 90, Unown-D: PP 150 → 100, Unown-J: PP 100 → 90, Unown-K: PP 100 → 90, Unown-L: PP 100 → 60, Unown-O: PP 100 → 50, Unown-R: PP 100 → 90, Unown-V: PP 100 → 90, Unown-X: PP 100 → 60, Unown-Z: PP 100 → 90, Unown-!: PP 100 → 60
+- Change Unown-N: team gains 50 shield and cast Explosion
 
 # Changes to Synergies
+
+- Nerf Fighting 8: damage blocked 15 → 13
+- Buff Ice 8: frozen enemies now take 20% additional damage
+- Baby 3 egg chance now increase with loss streaks only when baby synergy is active, and resets to zero once an egg is obtained. Same for shiny egg chance at Baby 7. Removed max limit for eggs on bench.
 
 # Changes to Items
 
@@ -54,7 +67,7 @@
 - New Shiny Item: Repeat Ball: Every 2 shop rerolls, gain +1% AP and find a mon in shop that shares a synergy with the holder. Their rarity increases with the total number of shop refreshes done during the game.
 - Rare Candy has been reverted to its original proposition in 5.2, with a few changes: it is now holdable and takes an item slot ; it reduces the sell price of its holder to its previous tier ; it gives -20% Attack Speed and -30% AP. Easy on the sugar !
 - Soothe Bell has been removed
-- New item: Protective pads (Charcoal + Miracle Seed): +80 Shield, +6 Attack ; Attacks deal double damage on shield. User is protected from recoil and retaliation damage.
+- New item: Protective pads (Charcoal + Miracle Seed): +60 Shield, +6 Attack ; Attacks deal double damage on shield. User is protected from recoil and retaliation damage.
 - Switch recipes of Max Revive (now Heart Scale + Miracle Seed, +15 Shield +2 Defense) and Flame Orb (now Charcoal + Heart Scale, +5 Attack +2 Defense)
 - Fire Gem has been renamed Punching Glove, and no longer has the double damage against shield effect
 
@@ -69,6 +82,7 @@
 - Add a new "Toggle Fullscreen" button in the sidebar
 - Show total money earned, total damage dealt and total reroll count in the player detail tooltip ingame
 - Units in your team planner are highlighted with a dedicated icon in the shop
+- Changed the font to Jost
 
 # Bugfix
 

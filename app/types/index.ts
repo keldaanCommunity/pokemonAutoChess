@@ -370,6 +370,7 @@ export interface IPlayer {
   rerollCount: number
   totalMoneyEarned: number
   totalPlayerDamageDealt: number
+  eggChance: number
 }
 
 export interface IPokemon {
