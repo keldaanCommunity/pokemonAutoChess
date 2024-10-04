@@ -1321,7 +1321,7 @@
     "NASTY_PLOT": "Potenzia l'ATK dell'utilizzatore di [10,SP].",
     "TAKE_HEART": "L'utilizzatore incanala il suo coraggio per curare i suoi status negativi e potenziare il suo ATK di [8,SP] e la sua SPE_DEF di [4,SP]",
     "THIEF": "Ruba tutti gli oggetti del bersaglio che l'utilizzatore può trasportare e infligge [15,30,60,SP] SPECIAL.",
-    "STUN_SPORE": "Infliggi [10,20,40,SP] SPECIAL e causa PARALYSIS per 5 secondi al bersaglio ed ai Pokèmon nemici adiacenti.",
+    "STUN_SPORE": "Infliggi [15,30,60,SP] SPECIAL e causa PARALYSIS per 5 secondi al bersaglio ed ai Pokèmon nemici adiacenti.",
     "METEOR_MASH": "Infliggi [15,30,60,SP] SPECIAL al bersaglio 3 volte  e potenzia l'ATK dell'utilizzatore di [2,SP].",
     "HURRICANE": "Infliggi [25,50,100,SP] SPECIAL a tutti i Pokèmon nemici dietro il bersaglio e infliggi loro PARALYSIS per 4 secondi.",
     "HEAL_BLOCK": "Infliggi [20,40,80,SP] SPECIAL e applica WOUND a tutti i Pokèmon nemici adiacenti per 5 secondi.",

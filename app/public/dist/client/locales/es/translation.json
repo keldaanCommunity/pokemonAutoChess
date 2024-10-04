@@ -1286,7 +1286,7 @@
     "NASTY_PLOT": "Mejora el ATK del Pokémon en [10,SP] puntos",
     "TAKE_HEART": "El usuario usa su valentía para curar sus efectos de estado e incrementar su ATK en [8,SP] y su SPE_DEF en [4,SP]",
     "THIEF": "Roba tantos objetos como pueda al objetivo y le causa [15,30,60,SP] de SPECIAL",
-    "STUN_SPORE": "Inflige [10,20,40,SP] de SPECIAL y deja PARALYSIS durante 5 segundos a los enemigos adyacentes",
+    "STUN_SPORE": "Inflige [15,30,60,SP] de SPECIAL y deja PARALYSIS durante 5 segundos a los enemigos adyacentes",
     "METEOR_MASH": "Inflige 3 veces [15,30,60,SP] SPECIAL al objetivo y mejora el ATK del usuario en [2,SP]",
     "HURRICANE": "Ataque de área de efecto que inflige [25,50,100,SP] de SPECIAL alrededor del objetivo y los deja PARALYSIS durante 4 segundos",
     "HEAL_BLOCK": "Inflige [20,40,80,SP] de SPECIAL y deja WOUND a todos los enemigos adyacentes durante 5 segundos",

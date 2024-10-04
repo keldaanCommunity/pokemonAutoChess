@@ -1311,7 +1311,7 @@
     "NASTY_PLOT": "시전자의 ATK 를 [10,SP] 만큼 증가시킨다.",
     "TAKE_HEART": "시전자는 질병에 해당하는 상태를 회복하며 [8,SP] 의 ATK 와 [4,SP] 의 SPE_DEF 를 증가시킨다.",
     "THIEF": "가능한 만큼의 대상의 도구를 훔쳐오며, 대상에 [15,30,60,SP] SPECIAL 을 가한다.",
-    "STUN_SPORE": "대상 및 그 주변의 적들에게 [10,20,40,SP] SPECIAL 및 5초간의 PARALYSIS 상태를 가한다.",
+    "STUN_SPORE": "대상 및 그 주변의 적들에게 [15,30,60,SP] SPECIAL 및 5초간의 PARALYSIS 상태를 가한다.",
     "METEOR_MASH": "대상에 [15,30,60,SP] SPECIAL 을 3번 가하며 시전자의 ATK [2,SP] 증가시킨다. ",
     "HURRICANE": "대상 뒤에 있는 모든 적포켓몬들에게 [25,50,100,SP] SPECIAL 및 4초간 PARALYSIS 상태를 가한다.",
     "HEAL_BLOCK": "인접한 적 포켓몬들에게 [20,40,80,SP] SPECIAL 및 5초간 WOUND 상태를 가한다.",

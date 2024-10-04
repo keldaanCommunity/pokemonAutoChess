@@ -1268,7 +1268,7 @@
     "NASTY_PLOT": "Tăng [10,SP] ATK cho bản thân",
     "TAKE_HEART": "Pokemon vận chiêu sử dụng sức mạnh tinh thần để thoát khỏi khống chế, tăng [8,SP] ATK và [4,SP] SPE_DEF",
     "THIEF": "Nhét vừa túi trang bị của mục tiêu và gây [15,30,60,SP] SPECIAL",
-    "STUN_SPORE": "Gây [10,20,40,SP] SPECIAL và gây thêm hiệu ứng PARALYSIS lên mục tiêu và đối thủ gần nó trong 5 giây",
+    "STUN_SPORE": "Gây [15,30,60,SP] SPECIAL và gây thêm hiệu ứng PARALYSIS lên mục tiêu và đối thủ gần nó trong 5 giây",
     "METEOR_MASH": "Gây 3 lần sát thương [15,30,60,SP] SPECIAL lên mục tiêu và tăng [2,SP] chỉ số ATK của đứa vận chiêu",
     "HURRICANE": "Gây [25,50,100,SP] SPECIAL lên toàn bộ Pokémon đối thủ ở sau mục tiêu và khiến chúng PARALYSIS trong 4 giây",
     "HEAL_BLOCK": "Gây [20,40,80,SP] SPECIAL và hiệu ứng WOUND cho tất cả Pokémon đối thủ gần nó trong 5 giây",

@@ -1261,7 +1261,7 @@
     "NASTY_PLOT": "Augmente l'ATK des pokémons de [10,SP] points",
     "TAKE_HEART": "Le lanceur fait preuve de bravoure pour soigner ses altérations de statut et augmenter son ATK de [8,SP] et sa SPE_DEF de [4,SP]",
     "THIEF": "Vole tous les objets de la cible que le porteur peut porter et inflige [15,30,60,SP] SPECIAL",
-    "STUN_SPORE": "Inflige [10,20,40,SP] SPECIAL et PARALYSIS pendant 5 secondes aux ennemis adjacents",
+    "STUN_SPORE": "Inflige [15,30,60,SP] SPECIAL et PARALYSIS pendant 5 secondes aux ennemis adjacents",
     "METEOR_MASH": "Inflige 3 fois [15,30,60,SP] SPECIAL à la cible et augmente l'ATK du lanceur de [2,SP]",
     "HURRICANE": "Attaque à effet de zone qui inflige [25,50,100,SP] SPECIAL dans une ligne derrière la cible et rend la PARALYSIS pendant 4 secondes",
     "HEAL_BLOCK": "Inflige [20,40,80,SP] SPECIAL et WOUND pendant 5 secondes à tous les ennemis adjacents",

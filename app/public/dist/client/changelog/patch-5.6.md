@@ -50,6 +50,7 @@
 - Nerf Galarian Ponyta line: Attack : 12/24 → 9/20, PP: 60 → 80
 - Nerf Klefki: HP 200 → 150
 - Nerf Counter (Wobbuffet): 100% → 50% of missing HP as special damage
+- Buff Stun Spore (Chikorita, Oddish): damage 10/20/40 → 15/30/60
 
 # Changes to Synergies
 
