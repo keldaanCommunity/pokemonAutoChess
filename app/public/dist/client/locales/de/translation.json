@@ -1390,7 +1390,7 @@
     "HIDDEN_POWER_K": "Spawne Hitmonlee mit einer roten Kugel und maximalem PP",
     "HIDDEN_POWER_L": "Das gegnerische Team ist 5 Sekunden lang LOCKED",
     "HIDDEN_POWER_M": "Ihr gesamtes Team erhält maximales PP",
-    "HIDDEN_POWER_N": "Ihr gesamtes Team hat $t(ability.EXPLOSION) gewirkt",
+    "HIDDEN_POWER_N": "Ihr gesamtes Team erhält 50 SHIELD und hat $t(ability.EXPLOSION) gewirkt",
     "HIDDEN_POWER_O": "Geben Sie Ihrem gesamten Team ORAN_BERRY. Der Gegenstand wird am Ende des Kampfes entfernt.",
     "HIDDEN_POWER_P": "Bringe 5 zufällige BUG STAR Pokémon",
     "HIDDEN_POWER_Q": "Beendet den Kampf sofort mit einem Unentschieden",

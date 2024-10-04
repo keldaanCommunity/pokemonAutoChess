@@ -215,7 +215,7 @@
     "HIDDEN_POWER_K": "เรียก Hitmonlee ที่มีไอเทม RED_ORB พร้อม PP เต็ม",
     "HIDDEN_POWER_L": "โปเกมอนทีมศัตรูติดสถานะ LOCKED เป็นเวลา 5 วินาที",
     "HIDDEN_POWER_M": "โปเกมอนในทีมคุณได้รับการฟื้นฟู PP จนเต็ม",
-    "HIDDEN_POWER_N": "โปเกมอนในทีมของคุณทุกตัวใช้ท่าโจมตี $t(ability.EXPLOSION)",
+    "HIDDEN_POWER_N": "ทีมทั้งหมดของคุณได้รับ 50 SHIELD และใช้คาถา $t(ability.EXPLOSION)",
     "HIDDEN_POWER_O": "มอบ ORAN_BERRY ให้แก่โปเกมอนทุกตัวในทีมของคุณ. ไอเทมที่เพิ่มเข้ามาจะถูกลบออกเมื่อจบรอบ.",
     "HIDDEN_POWER_P": "เรียกโปเกมอนประเภท BUG ระดับ STAR ออกมา 5 ตัวแบบสุ่ม",
     "HIDDEN_POWER_Q": "จบการต่อสู้รอบนั้นทันทีด้วยผลเสมอ",

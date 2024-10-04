@@ -987,7 +987,7 @@
     "HIDDEN_POWER_K": "Spawn Hitmonlee met een Red Orb en max PP",
     "HIDDEN_POWER_L": "Het vijandelijke team is LOCKED gedurende 5 seconden",
     "HIDDEN_POWER_M": "Je hele team krijgt maximale PP",
-    "HIDDEN_POWER_N": "Je hele team cast $t(ability.EXPLOSION)",
+    "HIDDEN_POWER_N": "Je hele team krijgt 50 SHIELD en cast $t(ability.EXPLOSION)",
     "HIDDEN_POWER_O": "Geef Oran Berry aan je hele team. Het item wordt aan het einde van het gevecht verwijderd.",
     "HIDDEN_POWER_P": "Spawn 5 willekeurige BUG STAR pokemon",
     "HIDDEN_POWER_Q": "Beëindigt het gevecht onmiddellijk met een gelijkspel",

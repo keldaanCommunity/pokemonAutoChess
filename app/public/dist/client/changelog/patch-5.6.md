@@ -52,6 +52,8 @@
 - Nerf Counter (Wobbuffet): 100% → 50% of missing HP as special damage
 - Buff Stun Spore (Chikorita, Oddish): damage 10/20/40 → 15/30/60
 - Buff Fearow: Def/SpeDef: 1/1 → 2/2 ; buff Peck: 10/20/30 → 10/30/50 damage
+- Buff Unown-A: PP 100 → 90, Unown-D: PP 150 → 100, Unown-J: PP 100 → 90, Unown-K: PP 100 → 90, Unown-L: PP 100 → 60, Unown-O: PP 100 → 50, Unown-R: PP 100 → 90, Unown-V: PP 100 → 90, Unown-X: PP 100 → 60, Unown-Z: PP 100 → 90, Unown-!: PP 100 → 60
+- Change Unown-N: team gains 50 shield and cast Explosion
 
 # Changes to Synergies
 

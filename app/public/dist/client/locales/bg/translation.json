@@ -1003,7 +1003,7 @@
     "HIDDEN_POWER_K": "Създайте Hitmonlee с червено кълбо и максимална PP",
     "HIDDEN_POWER_L": "Вражеският отбор е LOCKED за 5 секунди",
     "HIDDEN_POWER_M": "Целият ви екип получава максимална PP",
-    "HIDDEN_POWER_N": "Целият ви екип изпълни $t(способност.EXPLOSION)",
+    "HIDDEN_POWER_N": "Целият ви екип печели 50 SHIELD и хвърля $t(ability.EXPLOSION)",
     "HIDDEN_POWER_O": "Дайте Оран Бери на целия си екип. Елементът се премахва в края на битката.",
     "HIDDEN_POWER_P": "Създайте 5 произволни BUG STAR покемона",
     "HIDDEN_POWER_Q": "Веднага завършва битката с равенство",

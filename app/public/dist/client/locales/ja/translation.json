@@ -988,7 +988,7 @@
     "HIDDEN_POWER_K": "レッドオーブと最大MANAを持ったヒットモンリーをスポーンする",
     "HIDDEN_POWER_L": "敵チームは5秒間 LOCKED になります",
     "HIDDEN_POWER_M": "チーム全体が最大の PP を獲得します",
-    "HIDDEN_POWER_N": "チーム全員で $t(ability.EXPLOSION) をキャストします",
+    "HIDDEN_POWER_N": "チーム全体が 50 SHIELD を獲得し、$t(ability.EXPLOSION) をキャストします。",
     "HIDDEN_POWER_O": "オランベリーをチーム全員に与えましょう。アイテムは戦闘終了時に削除されます。",
     "HIDDEN_POWER_P": "ランダムな BUG STAR ポケモンを 5 匹出現させる",
     "HIDDEN_POWER_Q": "引き分けですぐに試合を終了する",

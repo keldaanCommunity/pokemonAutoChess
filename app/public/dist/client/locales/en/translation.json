@@ -1446,7 +1446,7 @@
     "HIDDEN_POWER_K": "Spawn Hitmonlee with a RED_ORB and max PP",
     "HIDDEN_POWER_L": "The enemy team is LOCKED for 5 seconds",
     "HIDDEN_POWER_M": "Your whole team gets max PP",
-    "HIDDEN_POWER_N": "Your whole team cast $t(ability.EXPLOSION)",
+    "HIDDEN_POWER_N": "Your whole team gain 50 SHIELD and cast $t(ability.EXPLOSION)",
     "HIDDEN_POWER_O": "Give ORAN_BERRY to your whole team. The item is removed at the end of the fight.",
     "HIDDEN_POWER_P": "Spawn 5 random STAR BUG Pokémons",
     "HIDDEN_POWER_Q": "Immediately ends the fight with a draw",

@@ -1339,7 +1339,7 @@
     "HIDDEN_POWER_K": "Gere Hitmonlee com um Red Orb e max PP",
     "HIDDEN_POWER_L": "O time inimigo fica LOCKED por 5 segundos",
     "HIDDEN_POWER_M": "Toda a sua equipe obtém PP máximo",
-    "HIDDEN_POWER_N": "Toda a sua equipe lançou $t(ability.EXPLOSION)",
+    "HIDDEN_POWER_N": "Toda a sua equipe ganha 50 SHIELD e lançou $t(ability.EXPLOSION)",
     "HIDDEN_POWER_O": "Dê Oran Berry para toda a sua equipe. O item é removido no final da luta.",
     "HIDDEN_POWER_P": "Gere 5 pokémons BUG STAR aleatórios",
     "HIDDEN_POWER_Q": "Termina imediatamente a luta com um empate",

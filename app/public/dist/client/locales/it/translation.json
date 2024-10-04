@@ -1446,7 +1446,7 @@
     "HIDDEN_POWER_K": "Evoca Hitmonlee con equipaggiata una RED_ORB e i PP al massimo.",
     "HIDDEN_POWER_L": "Infliggi alla squadra nemica LOCKED per 5 secondi.",
     "HIDDEN_POWER_M": "Porta i PP al massimo a tutta la tua squadra.",
-    "HIDDEN_POWER_N": "Tutta la tua squadra lancia l'abilità $t(ability.EXPLOSION)",
+    "HIDDEN_POWER_N": "Tutta la tua squadra ottiene 50 SHIELD e lancia l'abilità $t(ability.EXPLOSION)",
     "HIDDEN_POWER_O": "Equipaggia una ORAN_BERRY a tutta la tua squadra. L'oggetto viene rimosso alla fine del combattimento.",
     "HIDDEN_POWER_P": "Evoca 5 Pokèmon STAR BUG casuali.",
     "HIDDEN_POWER_Q": "Termina immediatamente il combattimento con un pareggio",

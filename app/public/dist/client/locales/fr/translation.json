@@ -1383,7 +1383,7 @@
     "HIDDEN_POWER_K": "Invoque 2 Kicklee avec un orbe rouge et PP au maximum",
     "HIDDEN_POWER_L": "L'équipe ennemie est LOCKED pendant 5 secondes",
     "HIDDEN_POWER_M": "Toute votre équipe obtient leur maximum de PP",
-    "HIDDEN_POWER_N": "Toute votre équipe lance la capacité $t(ability.EXPLOSION)",
+    "HIDDEN_POWER_N": "Toute votre équipe gagne 50 SHIELD etlance la capacité $t(ability.EXPLOSION)",
     "HIDDEN_POWER_O": "Donne une Baie Oran à toute votre équipe. Les objets sont retirés à la fin du combat.",
     "HIDDEN_POWER_P": "Invoque 5 pokémons BUG STAR aléatoires",
     "HIDDEN_POWER_Q": "Termine immédiatement le combat par un match nul",
