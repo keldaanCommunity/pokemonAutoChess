@@ -45,8 +45,11 @@
 - Buff Aria Meloetta: Relic song first two notes now give 10 SHIELD to all allies
 - Buff Sobble line: PP 100/100/70 → 80/80/80
 - Fixed Spacial Rend (Palkia) targeting: now correctly deals damage to all enemies in the target row
+- Change Unown-R: ROLL: gives 6 free shop rerolls
 
 # Changes to Synergies
+
+- Unown Shop of Psychic 6 can now be skipped by rerolling shop for free
 
 # Changes to Items
 
