@@ -1396,7 +1396,7 @@
     "FIRE_SPIN": "대상 주위에 [20,40,80,SP] SPECIAL를 가하며 3초간 BURN상태로 만드는 범위공격이다.",
     "SEARING_SHOT": "사용자 주변의 모든 것을 불태우는 진홍색 지옥불을 내뿜는다. 비크티니와 거리가 2타일 이내인 모든 적에게 [40,SP] SPECIAL와 3초간 BURN상태를 부여한다.",
     "SPLASH": "그냥 튀어오를뿐 아무런 효과가 없습니다...",
-    "PECK": "대상에 [10,20,30,SP] SPECIAL를 가한다.",
+    "PECK": "대상에 [10,30,50,SP] SPECIAL를 가한다.",
     "COUNTER": "포케몬은 주변 포케몬들에게 자신이 잃은 체력의 [50,SP]% 만큼 SPECIAL를 가한다.",
     "COSMIC_POWER": "모든 아군의 AP 를 [20,SP] 만큼 올린다.",
     "ENTANGLING_THREAD": "타겟에게 [10,20,40,SP] SPECIAL를 가하고 4초 동안 마비를 부여한다",

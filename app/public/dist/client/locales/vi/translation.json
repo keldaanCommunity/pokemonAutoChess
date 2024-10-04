@@ -1347,7 +1347,7 @@
     "GROWTH": "Tăng HP tối đa thêm [30,40,50,SP] và ATK thêm [3,4,5,SP]. Tăng gấp đôi nếu thời tiết là SUN",
     "HEAL_ORDER": "Gây [25,45,65,SP] SPECIAL lên đối thủ ở gần và hồi [25,45,65,SP] cho đồng minh ở gần",
     "DIG": "Đào dưới đất và xuất hiện ở vị trí kẻ thù xa nhất, gây [10,20,40,SP] SPECIAL lên toàn bộ đối thủ trên đường đi",
-    "PECK": "Gây [10,20,30,SP] SPECIAL lên mục tiêu",
+    "PECK": "Gây [10,30,50,SP] SPECIAL lên mục tiêu",
     "COUNTER": "Pokémon tấn công đối thủ ở gần, gây ra SPECIAL bằng [50,SP]% lượng HP bị mất",
     "COSMIC_POWER": "Tăng [20,SP] AP cho tất cả đồng minh",
     "ENTANGLING_THREAD": "Gây [10,20,40,SP] SPECIAL và gây hiệu ứng PARALYSIS lên mục tiêu và kẻ thù ở gần trong 4 giây",

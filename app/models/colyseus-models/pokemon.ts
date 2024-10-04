@@ -4717,8 +4717,8 @@ export class Fearow extends Pokemon {
   stars = 2
   hp = 120
   atk = 9
-  def = 1
-  speDef = 1
+  def = 2
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.PECK

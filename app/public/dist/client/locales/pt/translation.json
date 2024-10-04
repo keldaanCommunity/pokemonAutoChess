@@ -1303,7 +1303,7 @@
     "FIRE_SPIN": "Ataque de área de efeito que causa [20,40,80,SP] SPECIAL ao redor do alvo e BURN todos os inimigos atingidos por 3 segundos",
     "SEARING_SHOT": "Um inferno de chamas escarlates incendeia tudo ao redor do usuário. Inflige [40,SP] SPECIAL e BURN por 3 segundos todos os inimigos a 2 quadrados de Victini.",
     "SPLASH": "Apenas flops e salpicos sem nenhum efeito...",
-    "PECK": "Inflige [10,20,30,SP] SPECIAL para o alvo",
+    "PECK": "Inflige [10,30,50,SP] SPECIAL para o alvo",
     "COUNTER": "Ataca inimigos adjacentes, causando [50,SP]% de seu HP perdido como SPECIAL",
     "COSMIC_POWER": "Aumente o AP da sua equipe em [20,SP]",
     "ENTANGLING_THREAD": "Inflige [10,20,40,SP] SPECIAL e PARALYSIS o alvo e os inimigos adjacentes por 4 segundos",

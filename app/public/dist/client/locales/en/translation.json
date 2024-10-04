@@ -1410,7 +1410,7 @@
     "FIRE_SPIN": "Area of effect attack that deals [20,40,80,SP] SPECIAL around the target and BURN all enemies hit for 3 seconds",
     "SEARING_SHOT": "An inferno of scarlet flames torches everything around the user. Deals [40,SP] SPECIAL and BURN for 3 seconds all enemies within 2 tiles of Victini.",
     "SPLASH": "Just flops and splashes around to no effect at all...",
-    "PECK": "Deals [10,20,30,SP] SPECIAL to the target",
+    "PECK": "Deals [10,30,50,SP] SPECIAL to the target",
     "COUNTER": "Pokemon lashes out at adjacent enemies dealing [50,SP]% of its missing HP as SPECIAL",
     "COSMIC_POWER": "Buff your team (except the caster) AP by [20,SP]",
     "ENTANGLING_THREAD": "Deals [10,20,40,SP] SPECIAL and PARALYSIS the target and adjacent enemies for 4 seconds",

@@ -5039,7 +5039,7 @@ export class PeckStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [10, 20, 30][pokemon.stars - 1] ?? 30
+    const damage = [10, 30, 50][pokemon.stars - 1] ?? 50
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
