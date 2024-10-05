@@ -3226,6 +3226,8 @@
     "arceus_rate": "Chance to find Arceus in stage 20 propositions",
     "fishing_rarity_rate": "Fishing rarity by rod quality",
     "fishing_rarity_rate_description": "The quality of the rod you use to fish influences the rarity of the Pokémon you can catch.",
+    "round_damage_calculation": "Round damage calculation",
+    "round_damage_calculation_description": "The damage inflicted to player after losing a round is computed like this: Round damage = (stage level / 2) + (number of opponents alive) ; rounded up, clones/spawns do not count",
     "pool_size_per_category": "Pool size per category",
     "pool_size_per_category_description": "The pokemons you find in shops are taken from a pool shared by all players. The number of specimens of each Pokémon in the pool depends on its rarity and its number of evolution stages."
   },
