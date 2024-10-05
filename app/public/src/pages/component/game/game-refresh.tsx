@@ -1,20 +1,24 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
+import { useAppSelector } from "../../../hooks"
 import { getGameScene } from "../../game"
+import { cc } from "../../utils/jsx"
 import { Money } from "../icons/money"
 
 export default function GameRefresh() {
   const { t } = useTranslation()
+  const shopFreeRolls = useAppSelector((state) => state.game.shopFreeRolls)
+  const cost = shopFreeRolls > 0 ? 0 : 1
   return (
     <button
-      className="bubbly blue refresh-button"
+      className={cc("bubbly blue refresh-button", { shimmer: shopFreeRolls > 0 })}
       title={t("refresh_gold_hint")}
       onClick={() => {
         getGameScene()?.refreshShop()
       }}
     >
       <img src={`/assets/ui/refresh.svg`} />
-      <Money value={t("refresh") + " 1"} />
+      {cost > 0 ? <Money value={`${t("refresh")} ${cost}`} /> : `${t("refresh")} (${shopFreeRolls})`}
     </button>
   )
 }
