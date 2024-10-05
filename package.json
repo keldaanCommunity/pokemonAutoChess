@@ -17,10 +17,7 @@
     "url": "https://github.com/keldaanCommunity/pokemonAutoChess/issues"
   },
   "author": "keldaan-ag",
-  "contributors": [
-    "ogus",
-    "sylvainpolletvillard"
-  ],
+  "contributors": ["ogus", "sylvainpolletvillard"],
   "main": "public/dist/server/app/index.js",
   "scripts": {
     "reset": "rimraf -rf node_modules/",
@@ -102,7 +99,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.25.2",
     "@babel/preset-react": "^7.23.3",
-    "@biomejs/biome": "1.9.0",
+    "@biomejs/biome": "^1.9.0",
     "@types/cors": "^2.8.17",
     "@types/d3": "^7.4.3",
     "@types/elo-rank": "^1.0.3",
