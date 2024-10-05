@@ -161,6 +161,7 @@ export class OnRemoveFromShopCommand extends Command<
     const cost = getBuyPrice(name, this.state.specialGameRule)
     if (player.money >= cost) {
       player.shop = player.shop.with(index, Pkm.DEFAULT)
+      player.shopLocked = true
       this.state.shop.releasePokemon(name, player)
     }
   }
