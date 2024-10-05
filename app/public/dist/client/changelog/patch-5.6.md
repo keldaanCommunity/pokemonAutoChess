@@ -96,3 +96,4 @@
 - Room name is no longer customizable (too many stupid people)
 - Private lobbies passwords are now automatically generated and no longer customizable
 - Custom lobbies are now private by default
+- Enabling/disabling ELO in a custom lobby now resets all players ready status
