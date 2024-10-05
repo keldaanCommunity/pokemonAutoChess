@@ -57,6 +57,7 @@
 - Change Unown-R: ROLL: gives 6 free shop rerolls
 - Nerf Scyzor: XScissor damage 10/20/40/80 → 10/20/40/60
 - Change Charge (Zapdos): buff Attack and Attack speed of ~~Electric~~ all allies by ~~25~~ 20%
+- Buff Morpeko: reduce ability cooldown to 100 ms
 
 # Changes to Synergies
 
