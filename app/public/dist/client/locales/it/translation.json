@@ -1300,7 +1300,7 @@
     "SEED_FLARE": "Il corpo di Shaymin emette un'onda d'urto, infliggendo [30,SP] SPECIAL a tutti i Pokèmon nemici in un raggio di 5 celle e diminuendo la loro SPE_DEF di 2.",
     "IRON_TAIL": "Infligge [20,40,80,SP] SPECIAL al bersaglio e potenzia la DEF  dell'utilizzatore di [1,3,5].",
     "BLAST_BURN": "Infligge [30,60,120,SP] SPECIAL in un'area attorno all'utilizzatore.",
-    "CHARGE": "Aumenta l'ATK e ATK_SPEED di tutti i Pokémon alleati ELECTRIC del [25,SP]%.",
+    "CHARGE": "Aumenta l'ATK e ATK_SPEED di tutti i Pokémon alleati del [20,SP]%.",
     "DISCHARGE": "Infliggi [25,50,75,SP] SPECIAL a Pokèmon nemici adiacenti e infliggili PARALYSIS per 5 secondi.",
     "BITE": "Infligge [40,80,120,SP] SPECIAL, guarisce l'utilizzatore per il 30% del danno inflitto e provoca al bersaglio FLINCH per 5 secondi",
     "AQUA_TAIL": "Infliggi [30,60,100,SP] SPECIAL e ricevi [30,60,100,SP] SHIELD.",
