@@ -1391,7 +1391,7 @@
     "TRIPLE_KICK": "Infliggi [60 SP] SPECIAL ad un massimo di 3 Pokèmon nemici adiacenti.",
     "MAWASHI_GERI": "Infliggi [60,SP] SPECIAL. Il danno raddoppia se l'attaccante ha un ATK migliore del bersaglio.",
     "FORECAST": "Dà [10,SP] SHIELD alla tua squadra e un bonus aggiuntivo a seconda del tempo atmosferico:\n Sole: dà anche [3,SP] ATK\n Pioggia: dà anche [5,SP] PP\n Neve: dà anche [2,SP] DEF e SPE_DEF",
-    "X_SCISSOR": "Infliggi [10,20,40,80,SP] TRUE due volte.",
+    "X_SCISSOR": "Infliggi [10,20,40,60,SP] TRUE due volte.",
     "MANTIS_BLADES": "Sfodera tre lame, ognuna infligge [30,60,120,SP] con un tipo di danno diverso: PHYSICAL, SPECIAL e TRUE.",
     "PLASMA_FIST": "Infligge [120,SP] SPECIAL e cura l'utilizzatore del 25% del danno inflitto.",
     "SPECTRAL_THIEF": "Scompare e riappare infliggendo [50,SP] SPECIAL, rubando tutti i potenziamenti alle statistiche del bersaglio.",

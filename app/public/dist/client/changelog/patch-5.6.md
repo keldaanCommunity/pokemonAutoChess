@@ -55,6 +55,7 @@
 - Buff Unown-A: PP 100 → 90, Unown-D: PP 150 → 100, Unown-J: PP 100 → 90, Unown-K: PP 100 → 90, Unown-L: PP 100 → 60, Unown-O: PP 100 → 50, Unown-R: PP 100 → 90, Unown-V: PP 100 → 90, Unown-X: PP 100 → 60, Unown-Z: PP 100 → 90, Unown-!: PP 100 → 60
 - Change Unown-N: team gains 50 shield and cast Explosion
 - Change Unown-R: ROLL: gives 6 free shop rerolls
+- Nerf Scyzor: XScissor damage 10/20/40/80 → 10/20/40/60
 
 # Changes to Synergies
 

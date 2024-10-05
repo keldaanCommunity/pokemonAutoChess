@@ -1334,7 +1334,7 @@
     "TRIPLE_KICK": "Gây [60,SP] SPECIAL lên đến 3 đối thủ ở gần",
     "MAWASHI_GERI": "Gây [60,SP] SPECIAL. Gấp đôi sát thương nếu Pokémon tấn công có chỉ số ATK cao hơn mục tiêu",
     "FORECAST": "Tặng [10,SP] SHIELD cho đồng đội, thêm các chỉ số khác phụ thuộc thời tiết:\nNắng: nhận thêm [3,SP] ATK \nMưa: nhận thêm [5,SP] PP \nTuyết rơi: nhận thêm [2,SP] DEF / SPE_DEF",
-    "X_SCISSOR": "Gây [10,20,40,80,SP] TRUE 2 lần",
+    "X_SCISSOR": "Gây [10,20,40,60,SP] TRUE 2 lần",
     "MANTIS_BLADES": "Phóng ra ba lưỡi kiếm vào mục tiêu, mỗi lưỡi kiếm gây ra [30,60,120,SP] một loại sát thương riêng biệt: PHYSICAL, SPECIAL and TRUE",
     "GEOMANCY": "Tăng [15,SP] ATK, [5,SP] SPE_DEF và 20% ATK_SPEED",
     "DEATH_WING": "Gây [150,SP] SPECIAL và hồi phục một lượng bằng 75% lượng sát thương lên mục tiêu",

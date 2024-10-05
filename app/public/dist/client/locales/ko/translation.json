@@ -1377,7 +1377,7 @@
     "TRIPLE_KICK": "최대 3마리의 인접한 적에게 [60,SP] SPECIAL를 가한다.",
     "MAWASHI_GERI": "대상에 [60,SP] SPECIAL를 가한다. 시전자의 ATK 가 대상보다 높을 경우 두배의 대미지를 가한다.",
     "FORECAST": "팀에 [10,SP]의 SHIELD 와 함께 날씨에 따른 보너스를 부여한다: \n화창 : [3,SP] 의 ATK 증가\n비: [5,SP] 의 PP 증가\n눈: [2,SP] 의 DEF 및 SPE_DEF 증가",
-    "X_SCISSOR": "대상에 [10,20,40,80,SP] 의 TRUE 를 두번 가한다.",
+    "X_SCISSOR": "대상에 [10,20,40,60,SP] 의 TRUE 를 두번 가한다.",
     "MANTIS_BLADES": "대상을 향해 [30,60,120,SP] 의 피해를 각각 PHYSICAL, SPECIAL, TRUE 로 가하는 세개의 날을 휘두른다.",
     "PLASMA_FIST": "대상에 [120,SP] SPECIAL를 가하며 25% 만큼 흡혈한다.",
     "SPECTRAL_THIEF": "대상에 사라진 후 재등장하며 [50,SP] SPECIAL를 가하며 기술로 인한 대상의 능력치 증가량을 훔친다.",
