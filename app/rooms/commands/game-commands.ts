@@ -224,8 +224,7 @@ export class OnDragDropCommand extends Command<
       message.updateItems = false
       const pokemon = player.board.get(detail.id)
       if (pokemon) {
-        const x = parseInt(detail.x)
-        const y = parseInt(detail.y)
+        const { x, y } = detail
         const dropOnBench = y == 0
         const dropFromBench = isOnBench(pokemon)
 
@@ -304,6 +303,53 @@ export class OnDragDropCommand extends Command<
     if (commands.length > 0) {
       return commands
     }
+  }
+}
+
+export class OnSwitchBenchAndBoardCommand extends Command<
+  GameRoom,
+  {
+    client: Client
+    pokemonId: string
+  }
+> {
+  execute({ client, pokemonId }) {
+    const playerId = client.auth.uid
+    const player = this.room.state.players.get(playerId)
+    if (!player) return
+
+    const pokemon = player.board.get(pokemonId)
+    if (!pokemon) return
+
+    if (this.state.phase !== GamePhaseState.PICK) return // can't switch pokemons if not in pick phase
+
+    if (pokemon.positionY === 0) {
+      // pokemon is on bench, switch to board
+      const teamSize = this.room.getTeamSize(player.board)
+      const isBoardFull =
+        teamSize >=
+        getMaxTeamSize(
+          player.experienceManager.level,
+          this.room.state.specialGameRule
+        )
+      const destination = getFirstAvailablePositionOnBoard(player.board)
+      if (pokemon.canBePlaced && destination && !isBoardFull) {
+        const [dx, dy] = destination
+
+        this.room.swap(player, pokemon, dx, dy)
+        pokemon.onChangePosition(dx, dy, player)
+      }
+    } else {
+      // pokemon is on board, switch to bench
+      const dx = getFirstAvailablePositionInBench(player.board)
+      if (dx !== undefined) {
+        this.room.swap(player, pokemon, dx, 0)
+        pokemon.onChangePosition(dx, 0, player)
+      }
+    }
+
+    player.updateSynergies()
+    player.boardSize = this.room.getTeamSize(player.board)
   }
 }
 

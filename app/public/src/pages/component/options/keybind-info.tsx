@@ -13,10 +13,13 @@ export default function KeybindInfo() {
 
   function onKeydown(e: KeyboardEvent) {
     if (keyRemapped === null) return
-    const key = e.key.toUpperCase()
+    let key = e.key.toUpperCase()
     if (key === "ESCAPE") {
       setKeyRemapped(null)
       return
+    }
+    if (key === " ") {
+      key = "SPACE"
     }
     preferences.keybindings[keyRemapped] = key
     savePreferences({ keybindings: preferences.keybindings })
@@ -34,51 +37,54 @@ export default function KeybindInfo() {
     }
   }, [onKeydown])
 
+  const keys = Object.keys(preferences.keybindings)
+  const conflictingKeys = keys.filter((key, i) => keys.some((otherKey, otherIndex) => i !== otherIndex && preferences.keybindings[key] === preferences.keybindings[otherKey]))
+
+  const RemappableKey = ({ keyId }: { keyId: string }) => {
+    return (
+      <kbd
+        className={cc("remappable", {
+          remapping: keyRemapped === keyId,
+          conflict: conflictingKeys.includes(keyId)
+        })}
+        onClick={() => setKeyRemapped(keyId)}
+      >
+        {keyRemapped === keyId ? "?" : preferences.keybindings[keyId]}
+      </kbd>
+    )
+  }
+
   return (
     <div className="keybind-container">
       <h2>{t("key_bindings")}</h2>
       <dl>
         <dt>
-          <kbd
-            className={cc("remappable", { remapping: keyRemapped === "sell" })}
-            onClick={() => setKeyRemapped("sell")}
-          >
-            {keyRemapped === "sell" ? "?" : preferences.keybindings.sell}
-          </kbd>
+          <RemappableKey keyId="sell" />
         </dt>
         <dd>{t("key_desc_sell")}</dd>
 
         <dt>
-          <kbd
-            className={cc("remappable", {
-              remapping: keyRemapped === "buy_xp"
-            })}
-            onClick={() => setKeyRemapped("buy_xp")}
-          >
-            {keyRemapped === "buy_xp" ? "?" : preferences.keybindings.buy_xp}
-          </kbd>
+          <RemappableKey keyId="buy_xp" />
         </dt>
         <dd>{t("key_desc_buy_xp")}</dd>
 
         <dt>
-          <kbd
-            className={cc("remappable", {
-              remapping: keyRemapped === "refresh"
-            })}
-            onClick={() => setKeyRemapped("refresh")}
-          >
-            {keyRemapped === "refresh" ? "?" : preferences.keybindings.refresh}
-          </kbd>
+          <RemappableKey keyId="refresh" />
         </dt>
         <dd>{t("key_desc_refresh")}</dd>
 
         <dt>
-          <kbd
-            className={cc("remappable", { remapping: keyRemapped === "emote" })}
-            onClick={() => setKeyRemapped("emote")}
-          >
-            {keyRemapped === "emote" ? "?" : preferences.keybindings.emote}
-          </kbd>
+          <RemappableKey keyId="lock" />
+        </dt>
+        <dd>{t("key_desc_lock")}</dd>
+
+        <dt>
+          <RemappableKey keyId="switch" />
+        </dt>
+        <dd>{t("key_desc_switch")}</dd>
+
+        <dt>
+          <RemappableKey keyId="emote" />
         </dt>
         <dd>{t("key_desc_avatar_anim")}</dd>
 
