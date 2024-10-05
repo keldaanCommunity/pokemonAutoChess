@@ -4464,6 +4464,7 @@ export class SkyAttackShadowStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
+    crit = crit || chance(pokemon.critChance / 100)
     const destination = board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     if (destination) {
       pokemon.skydiveTo(destination.x, destination.y, board)
