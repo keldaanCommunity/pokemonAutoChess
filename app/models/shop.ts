@@ -276,16 +276,11 @@ export default class Shop {
 
   refillShop(player: Player, state: GameState) {
     // No need to release pokemons since they won't be changed
-    const PkmList = player.shop.map((pokemon, i) => {
-      if (pokemon != Pkm.MAGIKARP && pokemon != Pkm.DEFAULT) {
-        return pokemon
+    player.shop.forEach((pokemon, i) => {
+      if (pokemon === Pkm.MAGIKARP || pokemon === Pkm.DEFAULT) {
+        player.shop[i] = this.pickPokemon(player, state, i)
       }
-      return this.pickPokemon(player, state, i)
     })
-
-    for (let i = 0; i < SHOP_SIZE; i++) {
-      player.shop[i] = PkmList[i]
-    }
   }
 
   assignShop(player: Player, manualRefresh: boolean, state: GameState) {
@@ -296,6 +291,8 @@ export default class Shop {
       !manualRefresh &&
       !player.shopLocked
     ) {
+      // Unown shop
+      player.shopFreeRolls += 1
       const unowns = getUnownsPoolPerStage(state.stageLevel)
       for (let i = 0; i < SHOP_SIZE; i++) {
         player.shop[i] = pickRandomIn(unowns)

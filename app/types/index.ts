@@ -339,6 +339,7 @@ export interface IPlayer {
   money: number
   life: number
   shopLocked: boolean
+  shopFreeRolls: number
   streak: number
   interest: number
   opponentId: string

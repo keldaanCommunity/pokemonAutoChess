@@ -54,12 +54,14 @@
 - Buff Fearow: Def/SpeDef: 1/1 → 2/2 ; buff Peck: 10/20/30 → 10/30/50 damage
 - Buff Unown-A: PP 100 → 90, Unown-D: PP 150 → 100, Unown-J: PP 100 → 90, Unown-K: PP 100 → 90, Unown-L: PP 100 → 60, Unown-O: PP 100 → 50, Unown-R: PP 100 → 90, Unown-V: PP 100 → 90, Unown-X: PP 100 → 60, Unown-Z: PP 100 → 90, Unown-!: PP 100 → 60
 - Change Unown-N: team gains 50 shield and cast Explosion
+- Change Unown-R: ROLL: gives 6 free shop rerolls
 
 # Changes to Synergies
 
 - Nerf Fighting 8: damage blocked 15 → 13
 - Buff Ice 8: frozen enemies now take 20% additional damage
 - Baby 3 egg chance now increase with loss streaks only when baby synergy is active, and resets to zero once an egg is obtained. Same for shiny egg chance at Baby 7. Removed max limit for eggs on bench.
+- Unown Shop of Psychic 6 can now be skipped by rerolling shop for free
 
 # Changes to Items
 
@@ -99,3 +101,4 @@
 - Private lobbies passwords are now automatically generated and no longer customizable
 - Custom lobbies are now private by default
 - Shop is now automatically locked if you use the sell key shortcut to empty one slot
+- Enabling/disabling ELO in a custom lobby now resets all players ready status

@@ -126,11 +126,11 @@ export class OnShopCommand extends Command<
 
     if (
       pokemon.passive === Passive.UNOWN &&
-      player.effects.has(Effect.EERIE_SPELL) &&
       player.shop.every((p) => Unowns.includes(p))
     ) {
       // reset shop after picking in a unown shop
       this.state.shop.assignShop(player, true, this.state)
+      player.shopFreeRolls -= 1
     } else {
       player.shop = player.shop.with(index, Pkm.DEFAULT)
     }
@@ -687,10 +687,13 @@ export class OnSellDropCommand extends Command<
 export class OnRefreshCommand extends Command<GameRoom, string> {
   execute(id) {
     const player = this.state.players.get(id)
-    if (player && player.money >= 1 && player.alive) {
+    if (!player) return
+    const rollCost = player.shopFreeRolls > 0 ? 0 : 1
+    if (player.money >= rollCost && player.alive) {
       this.state.shop.assignShop(player, true, this.state)
-      player.money -= 1
+      player.money -= rollCost
       player.rerollCount++
+      if (player.shopFreeRolls > 0) player.shopFreeRolls--
     }
   }
 }
@@ -1309,15 +1312,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           player.eggChance = 0
         }
 
-        if (!player.isBot) {
-          if (!player.shopLocked) {
-            this.state.shop.assignShop(player, false, this.state)
-          } else {
-            this.state.shop.refillShop(player, this.state)
-            player.shopLocked = false
-          }
-        }
-
         player.board.forEach((pokemon, key) => {
           if (pokemon.evolutionRule) {
             if (pokemon.evolutionRule instanceof HatchEvolutionRule) {
@@ -1339,14 +1333,26 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             // remove after one fight
             player.board.delete(key)
             player.board.delete(pokemon.id)
-            player.updateSynergies()
-            if (!player.shopLocked) {
-              this.state.shop.assignShop(player, false, this.state) // refresh unown shop in case player lost psychic 6
-            }
           }
         })
-        // Refreshes effects (like tapu Terrains)
+
+        // Refreshes effects (Tapu Terrains, or if player lost Psychic 6 after Unown diseappeared)
         player.updateSynergies()
+
+        // Refreshes shop
+        if (!player.isBot) {
+          if (!player.shopLocked) {
+            if (player.shop.every((p) => Unowns.includes(p))) {
+              // player stayed on unown shop and did nothing, so we remove its free roll
+              player.shopFreeRolls -= 1
+            }
+
+            this.state.shop.assignShop(player, false, this.state)
+          } else {
+            this.state.shop.refillShop(player, this.state)
+            player.shopLocked = false
+          }
+        }
       }
     })
 
