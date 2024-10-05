@@ -2205,12 +2205,12 @@
     "SABLEYE": "Sableye is looking for a RED_ORB",
     "MEGA_SABLEYE": "Mega Sableye gains RUNE_PROTECT for the entire fight",
     "MELMETAL": "Melmetal can't gain ATK_SPEED. Bonus ATK_SPEED is converted into ATK (10% ATK_SPEED: 3 ATK)",
-    "SKARMORY": "At the start of the fight, Skarmory scatters spikes around the field. The spikes stay on field, dealing 10 TRUE per second and ARMOR_REDUCTION to Pokémons that walk on it, if not FLYING.",
+    "SKARMORY": "At the start of the fight, Skarmory scatters spikes around the field. The spikes deal 10 TRUE per second and ARMOR_REDUCTION to Pokémons that walk on it, if not FLYING.",
     "DURANT": "Durant basic attacks deals 1 extra TRUE for each BUG ally on your board",
     "OGERPON_TEAL": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, restores [20,SP] HP to adjacent allies",
     "OGERPON_WELLSPRING": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, gives 10 PP to adjacent allies",
-    "OGERPON_HEARTHFLAME": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, BURN adjacent enemies for 2s",
-    "OGERPON_CORNERSTONE": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, FLINCH adajcent enemies for 5s"
+    "OGERPON_HEARTHFLAME": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, BURN adjacent enemies for 2 seconds",
+    "OGERPON_CORNERSTONE": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, FLINCH adajcent enemies for 5 seconds"
   },
   "stat": {
     "ATK": "Attack",
