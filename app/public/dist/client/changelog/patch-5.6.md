@@ -59,6 +59,8 @@
 - Change Charge (Zapdos): buff Attack and Attack speed of ~~Electric~~ all allies by ~~25~~ 20%
 - Buff Morpeko: reduce ability cooldown to 100 ms
 - Buff Close Combat (Heracross): reduce user Def/SpeDef by ~~2~~ 1
+- Buff Pawmot: Attack 27 → 35, HP: 230 → 240
+- Zeraora is now Electric/Wild instead of Electric/Fighting
 
 # Changes to Synergies
 
