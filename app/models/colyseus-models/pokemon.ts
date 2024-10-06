@@ -10903,7 +10903,7 @@ export class Hitmonlee extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 180
+  hp = 200
   atk = 30
   def = 3
   speDef = 3
@@ -10917,7 +10917,7 @@ export class Hitmonchan extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 180
+  hp = 200
   atk = 20
   def = 7
   speDef = 7

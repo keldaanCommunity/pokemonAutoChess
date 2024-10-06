@@ -61,6 +61,12 @@
 - Buff Close Combat (Heracross): reduce user Def/SpeDef by ~~2~~ 1
 - Buff Pawmot: Attack 27 → 35, HP: 230 → 240
 - Zeraora is now Electric/Wild instead of Electric/Fighting
+- New ability for Regieleki: Thunder Cage: Traps target and adjacent enemies in an electric prison that deals 60 special damage and inflicts Locked and Paralysis for 3 seconds.
+- New ability for Kangaskhan: Headbutt: Deals 20/40/80 special damage to the target and inflicts Flinch for 5 seconds. Double damage if target has a shield.
+- Buff Hitmonchan: HP: 180 → 200
+- Buff Hitmonlee: HP: 180 → 200
+- Change Rolling Kick (Hitmonlee): now also push target away
+
 
 # Changes to Synergies
 

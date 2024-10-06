@@ -1391,7 +1391,7 @@
     "MACH_PUNCH": "Inflige [50,SP] SPECIAL et attaque immédiatement après",
     "UPPERCUT": "Inflige [60,SP] SPECIAL. Dégâts doublés si l'attaquant a une meilleure DEF que la cible",
     "TRIPLE_KICK": "Inflige [60,SP] SPECIAL à jusqu'à 3 ennemis adjacents",
-    "MAWASHI_GERI": "Inflige [60,SP] SPECIAL. Dégâts doublés si l'attaquant a une meilleure ATK que la cible",
+    "MAWASHI_GERI": "Inflige [60,SP] SPECIAL à la cible et la projette au loin. Dégâts doublés si l'attaquant a une meilleure ATK que la cible",
     "FORECAST": "Donne [10,SP] SHIELD à votre équipe, plus un bonus supplémentaire en fonction de la météo :\n Soleil : donne également [3,SP] ATK\n Pluie : donne également [5,SP] PP\n Neige : donne également [2,SP] DEF / SPE_DEF",
     "X_SCISSOR": "Inflige [10,20,40,60,SP] TRUE deux fois",
     "MANTIS_BLADES": "Trois lames s'abattent sur la cible, chacune infligeant [30,60,120,SP] avec un type de dégâts distinct: PHYSICAL, SPECIAL et TRUE",
