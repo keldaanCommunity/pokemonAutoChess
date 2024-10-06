@@ -85,6 +85,8 @@
 - Show total money earned, total damage dealt and total reroll count in the player detail tooltip ingame
 - Units in your team planner are highlighted with a dedicated icon in the shop
 - Changed the font to Jost
+- Add a key shortcut to switch between bench and board
+- Add a key shortcut to lock/unlock the shop
 
 # Bugfix
 
@@ -99,4 +101,5 @@
 - Room name is no longer customizable (too many stupid people)
 - Private lobbies passwords are now automatically generated and no longer customizable
 - Custom lobbies are now private by default
+- Shop is now automatically locked if you use the sell key shortcut to empty one slot
 - Enabling/disabling ELO in a custom lobby now resets all players ready status
