@@ -1377,7 +1377,7 @@
     "MISTY_SURGE": "Tous les alliés FAIRY récupèrent [30,SP] HP et [30,SP] PP.",
     "SKY_ATTACK": "S'élève dans les airs et tombe sur la cible la plus éloignée au bout d'une seconde, infligeant [120,SP] SPECIAL.",
     "SKY_ATTACK_SHADOW": "Décolle dans les airs et plonge sur la cible la plus lointaine après une seconde, infligeant [120,SP] SPECIAL. Peut infliger un coup critique.",
-    "FLYING_PRESS": "Plonge depuis le ciel jusqu'à la cible la plus éloignée, infligeant [30,SP]% des HP max du lanceur en SPECIAL",
+    "FLYING_PRESS": "Plonge depuis le ciel jusqu'à la cible la plus éloignée, infligeant [50,SP]% des HP max du lanceur en SPECIAL",
     "ILLUSION": "L'utilisateur récupère [30,50,70,SP = 0,5] points HP et copie le formulaire ainsi que l'ATK, la DEF, la SPE_DEF et la RANGE du Pokémon ciblé",
     "SLUDGE": "Jette des détritus sur 3 cases devant, ce qui inflige [2,3,4] cumuls de POISONNED pendant [3,SP] secondes",
     "SLUDGE_WAVE": "Envoie une vague de déchets sur l'ennemi avec le plus de HP, infligeant [10,20,30,SP] SPECIAL et POISON pendant [2,4,6] secondes à tous les adversaires sur le chemin",

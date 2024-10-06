@@ -66,6 +66,7 @@
 - Buff Hitmonchan: HP: 180 → 200
 - Buff Hitmonlee: HP: 180 → 200
 - Change Rolling Kick (Hitmonlee): now also push target away
+- Buff Flying Press (Hawlucha): deal ~~30%~~ 50% of user's max HP as SPECIAL
 
 
 # Changes to Synergies
