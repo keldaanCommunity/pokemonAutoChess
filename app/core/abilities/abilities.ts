@@ -18,7 +18,7 @@ import {
   HiddenPowerNStrategy,
   HiddenPowerOStrategy,
   HiddenPowerPStrategy,
-  HiddenPowerQMStrategy, 
+  HiddenPowerQMStrategy,
   HiddenPowerQStrategy,
   HiddenPowerRStrategy,
   HiddenPowerSStrategy,
