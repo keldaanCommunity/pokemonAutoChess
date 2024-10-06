@@ -3050,13 +3050,9 @@ export class ChargeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const buff = 0.25
+    const buff = 0.2
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
-      if (
-        ally &&
-        pokemon.team == ally.team &&
-        ally.types.has(Synergy.ELECTRIC)
-      ) {
+      if (ally && pokemon.team == ally.team) {
         ally.addAttack(ally.baseAtk * buff, pokemon, 1, crit)
         ally.addAttackSpeed(buff * 100, pokemon, 1, crit)
       }
@@ -3503,7 +3499,7 @@ export class XScissorStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [10, 20, 40, 80][pokemon.stars - 1] ?? 80
+    const damage = [10, 20, 40, 60][pokemon.stars - 1] ?? 60
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit) // twice
   }
@@ -4468,6 +4464,7 @@ export class SkyAttackShadowStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
+    crit = crit || chance(pokemon.critChance / 100)
     const destination = board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     if (destination) {
       pokemon.skydiveTo(destination.x, destination.y, board)
@@ -6007,7 +6004,7 @@ export class AnchorShotStrategy extends AbilityStrategy {
         pokemon,
         crit
       )
-      farthestTarget.cooldown = min(500)(farthestTarget.cooldown)
+      farthestTarget.cooldown = min(750)(farthestTarget.cooldown)
     }
   }
 }
@@ -6272,8 +6269,8 @@ export class CloseCombatStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     if (pokemon.items.has(Item.PROTECTIVE_PADS) === false) {
-      pokemon.addDefense(-3, pokemon, 0, false)
-      pokemon.addSpecialDefense(-3, pokemon, 0, false)
+      pokemon.addDefense(-1, pokemon, 0, false)
+      pokemon.addSpecialDefense(-1, pokemon, 0, false)
     }
     target.handleSpecialDamage(130, board, AttackType.SPECIAL, pokemon, crit)
   }
@@ -8030,6 +8027,8 @@ export class AuraWheelStrategy extends AbilityStrategy {
       crit,
       true
     )
+
+    pokemon.cooldown = 100
   }
 }
 

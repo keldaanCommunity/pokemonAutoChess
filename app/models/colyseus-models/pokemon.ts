@@ -4874,7 +4874,7 @@ export class Zapdos extends Pokemon {
 }
 
 export class Zeraora extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIGHTING])
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.WILD])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
@@ -5804,7 +5804,7 @@ export class Phione extends Pokemon {
   atk = 15
   def = 2
   speDef = 2
-  maxPP = 90
+  maxPP = 80
   range = 3
   skill = Ability.TAKE_HEART
   passive = Passive.PHIONE
@@ -5823,7 +5823,7 @@ export class Manaphy extends Pokemon {
   atk = 17
   def = 4
   speDef = 4
-  maxPP = 90
+  maxPP = 80
   range = 3
   skill = Ability.TAKE_HEART
   attackSprite = AttackSprite.PSYCHIC_RANGE
@@ -14596,8 +14596,8 @@ export class Pawmot extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIGHTING])
   rarity = Rarity.RARE
   stars = 3
-  hp = 230
-  atk = 27
+  hp = 240
+  atk = 35
   def = 5
   speDef = 5
   maxPP = 100
