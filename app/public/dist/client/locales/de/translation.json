@@ -1424,7 +1424,7 @@
     "PARABOLIC_CHARGE": "Heilt [25,50] HP und fügt dem Ziel [25,50,100,SP] SPECIAL Schaden zu. Überschüssige HP werden in SPECIAL umgewandelt.",
     "SUPER_FANG": "Verursacht [30,60,90,SP] SPECIAL. Doppelter Schaden bei GRASS Pokémon",
     "TEETER_DANCE": "Erhalte [20,SP]% ATK_SPEED. Alle anderen Pokémon sind 3 Sekunden lang CONFUSION, Verbündete und Feinde gleichermaßen.",
-    "CLOSE_COMBAT": "Verursacht [130,SP] SPECIAL und reduziert DEF und SPE_DEF des Zauberers um 2",
+    "CLOSE_COMBAT": "Verursacht [130,SP] SPECIAL und reduziert DEF und SPE_DEF des Zauberers um 1",
     "AQUA_RING": "Taucht in die Mitte des verbündeten Teams und erzeugt einen Wasserring, der negativen Status beseitigt und [20,30,50,SP] HP heilt",
     "POISON_GAS": "Eine Wolke stinkenden Gases wird allen Gegnern in der Nähe ins Gesicht geschleudert und fügt [15,30,60,SP] SPECIAL und 3 Sekunden lang POISONNED zu.",
     "ASSIST": "Kopiert und benutzt die Fähigkeit von einem Zufälligen verbündeten Pokémon",

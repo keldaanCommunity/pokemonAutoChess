@@ -6269,8 +6269,8 @@ export class CloseCombatStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     if (pokemon.items.has(Item.PROTECTIVE_PADS) === false) {
-      pokemon.addDefense(-3, pokemon, 0, false)
-      pokemon.addSpecialDefense(-3, pokemon, 0, false)
+      pokemon.addDefense(-1, pokemon, 0, false)
+      pokemon.addSpecialDefense(-1, pokemon, 0, false)
     }
     target.handleSpecialDamage(130, board, AttackType.SPECIAL, pokemon, crit)
   }

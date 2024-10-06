@@ -58,6 +58,7 @@
 - Nerf Scyzor: XScissor damage 10/20/40/80 → 10/20/40/60
 - Change Charge (Zapdos): buff Attack and Attack speed of ~~Electric~~ all allies by ~~25~~ 20%
 - Buff Morpeko: reduce ability cooldown to 100 ms
+- Buff Close Combat (Heracross): reduce user Def/SpeDef by ~~2~~ 1
 
 # Changes to Synergies
 

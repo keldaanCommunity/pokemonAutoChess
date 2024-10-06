@@ -1441,7 +1441,7 @@
     "PARABOLIC_CHARGE": "Recupera [25,50] HP y causa [25,50,100,SP] de SPECIAL al objetivo. El exceso de HP es convertido en SPECIAL",
     "SUPER_FANG": "Inflige [30,60,90,SP] de SPECIAL. El daño se duplica sobre pokémon GRASS",
     "TEETER_DANCE": "Ganar [20,SP]% ATK_SPEED. El resto de pokémon quedan CONFUSION por 3 segundos, tanto aliados como enemigos.",
-    "CLOSE_COMBAT": "Inflige [130,SP] de SPECIAL y reduce la DEF y SPE_DEF del atacante en 2",
+    "CLOSE_COMBAT": "Inflige [130,SP] de SPECIAL y reduce la DEF y SPE_DEF del atacante en 1",
     "AQUA_RING": "Bucea al medio del equipo aliado, creando un aro de agua que elimina el estado negativo y recupera [20,30,50,SP] HP",
     "POISON_GAS": "Una nube de gas pestilente es arrojado en la cara de los pokémon enemigos adyacentes, infligiendo [15,30,60,SP] de SPECIAL, dejándolos POISONNED por 3 segundos",
     "ASSIST": "Copia y utiliza una habilidad de un pokémon aliado aleatoriamente",

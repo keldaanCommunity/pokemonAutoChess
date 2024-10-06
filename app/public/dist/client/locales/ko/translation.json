@@ -1466,7 +1466,7 @@
     "PARABOLIC_CHARGE": "[25,50]의 HP를 회복하고 적에게 [25,50,100,SP]의 SPECIAL 을 입힌다. 초과 HP는 SPECIAL로 전환된다.",
     "SUPER_FANG": "현재 대상에게 [30,60,90,SP] SPECIAL. GRASS 에게는 두배의 데미지",
     "TEETER_DANCE": "[20,SP]%의 공격속도를 얻는다. 팀 상관없이 모든 포켓몬은 3초 동안 CONFUSION 상태에 빠진다.",
-    "CLOSE_COMBAT": "[130,SP] SPECIAL을 가하고 시전자의 DEF와 SPE_DEF를 2만큼 감소 시킨다.",
+    "CLOSE_COMBAT": "[130,SP] SPECIAL을 가하고 시전자의 DEF와 SPE_DEF를 1만큼 감소 시킨다.",
     "AQUA_RING": "아군팀 중앙으로 돌진하여 상태 이상을 해제하는 HP를 [20,30,50,SP] 만큼 회복시키는 물의 고리를 생성한다.",
     "POISON_GAS": "인접한 모든 적의 얼굴에 악취가 나는 가스 구름을 뿌려 [15,30,60,SP] SPECIAL 을 주고 POISONNED 을 부여한다.",
     "ASSIST": "무작위로 선택한 아군의 능력을 복사하여 시전한다.",

@@ -1480,7 +1480,7 @@
     "PARABOLIC_CHARGE": "Cura [25,50] HP ed infliggi [25,50,100,SP] SPECIAL. HP curati in eccesso si convertono in SPECIAL.",
     "SUPER_FANG": "Infliggi [30,60,90,SP] SPECIAL. Il danno raddoppia sui Pokèmon GRASS.",
     "TEETER_DANCE": "Potenzia la ATK_SPEED del [20,SP]%. Tutti gli altri Pokèmon, sia della tua squadra che quella avversaria, sono afflitti da CONFUSION per 3 secondi.",
-    "CLOSE_COMBAT": "Infliggi [130,SP] SPECIAL e riduci la DEF e la SPE_DEF dell'utilizzatore di 2.",
+    "CLOSE_COMBAT": "Infliggi [130,SP] SPECIAL e riduci la DEF e la SPE_DEF dell'utilizzatore di 1.",
     "AQUA_RING": "Tuffati al centro della tua squadra, creando un anello d'acqua che cura di [20,30,50,SP] HP e degli status negativi.",
     "POISON_GAS": "Lancia una nuvola di gas puzzolente a tutti i nemici adiacenti, infliggendo [15,30,60,SP] SPECIAL e POISONNED per 3 secondi.",
     "ASSIST": "Copia e usa un'abilità casuale di un Pokèmon alleato.",
