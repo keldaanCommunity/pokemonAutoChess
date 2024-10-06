@@ -1416,7 +1416,7 @@
     "HEX": "Deals [20,40,80,SP] SPECIAL to the target. Double damage if target suffers from a negative status.",
     "GROWTH": "Increase max HP by [10,20,30,SP] and ATK by [3,4,5,SP]. Grows twice as fast if weather is SUN",
     "HEAL_ORDER": "Deals [25,45,65,SP] SPECIAL to adjacent enemies and heal [25,45,65,SP] to adjacent allies",
-    "SHELL_TRAP": "After the next PHYSICAL received, the trap explodes and deal [100,SP] SPECIAL to adjacent enemies",
+    "SHELL_TRAP": "The shield of the Pokemon explodes, dealing [50,SP] SPECIAL + current SHIELD around it. If it's not shielded, gains [75,SP] SHIELD instead.",
     "DIG": "Digs underground and reappears next to the farthest enemy, dealing [10,20,40,SP] SPECIAL to all enemies on the way",
     "FIRE_SPIN": "Area of effect attack that deals [20,40,80,SP] SPECIAL around the target and BURN all enemies hit for 3 seconds",
     "SEARING_SHOT": "An inferno of scarlet flames torches everything around the user. Deals [50,SP] SPECIAL and BURN for 3 seconds all enemies within 2 tiles of Victini.",

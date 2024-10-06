@@ -4984,7 +4984,26 @@ export class ShellTrapStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    pokemon.effects.add(Effect.SHELL_TRAP)
+    if (pokemon.shield > 0) {
+      const damage = 50 + pokemon.shield
+      board
+        .getAdjacentCells(target.positionX, target.positionY, true)
+        .forEach((cell) => {
+          if (cell.value && pokemon.team != cell.value.team) {
+            cell.value.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+        })
+      pokemon.shield = 0
+    } else {
+      const shield = 75
+      pokemon.addShield(shield, pokemon, 1, crit)
+    }
   }
 }
 
@@ -10271,7 +10290,7 @@ export class BideStrategy extends AbilityStrategy {
         .forEach((cell) => {
           if (cell.value && pokemon.team != cell.value.team) {
             cell.value.handleSpecialDamage(
-              (startingHealth - pokemon.life) * 5,
+              (startingHealth - pokemon.life) * 2,
               board,
               AttackType.SPECIAL,
               pokemon,
