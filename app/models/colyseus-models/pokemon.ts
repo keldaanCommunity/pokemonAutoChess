@@ -11376,10 +11376,10 @@ export class Sableye extends Pokemon {
   evolution = Pkm.MEGA_SABLEYE
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 220
+  hp = 200
   atk = 12
-  def = 5
-  speDef = 5
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.KNOCK_OFF
