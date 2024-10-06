@@ -35,8 +35,9 @@ export default class Terrain {
   }
 
   newRandom(seed: number) {
+    let s: string
     try {
-      var s = seed.toString()
+      s = seed.toString()
     } catch (_) {
       s = (new Date().getTime() + Math.random()).toString()
     }

@@ -29,6 +29,7 @@ export interface GameStateStore {
   money: number
   interest: number
   streak: number
+  shopFreeRolls: number
   shopLocked: boolean
   experienceManager: IExperienceManager
   shop: Pkm[]
@@ -58,6 +59,7 @@ const initialState: GameStateStore = {
   money: 5,
   interest: 0,
   streak: 0,
+  shopFreeRolls: 0,
   shopLocked: false,
   experienceManager: new ExperienceManager(),
   shop: new Array<Pkm>(),
@@ -107,6 +109,9 @@ export const gameSlice = createSlice({
     },
     setShopLocked: (state, action: PayloadAction<boolean>) => {
       state.shopLocked = action.payload
+    },
+    setShopFreeRolls: (state, action: PayloadAction<number>) => {
+      state.shopFreeRolls = action.payload
     },
     updateExperienceManager: (
       state,
@@ -284,6 +289,7 @@ export const {
   setStreak,
   setInterest,
   setMoney,
+  setShopFreeRolls,
   setShopLocked,
   changePlayer,
   setShop,

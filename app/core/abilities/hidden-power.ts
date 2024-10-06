@@ -326,6 +326,7 @@ export class HiddenPowerNStrategy extends HiddenPowerStrategy {
         if (pokemon && unown.team === pokemon.team) {
           const target = board.getValue(pokemon.targetX, pokemon.targetY)
           if (target) {
+            pokemon.addShield(50, unown, 0, false)
             AbilityStrategies[Ability.EXPLOSION].process(
               pokemon,
               pokemon.state,
@@ -424,47 +425,9 @@ export class HiddenPowerRStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    let coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemon(
-      unown,
-      unown.team
-    )
-    const geodude = unown.simulation.addPokemon(
-      PokemonFactory.createPokemonFromName(Pkm.GEODUDE, unown.player),
-      coord.x,
-      coord.y,
-      unown.team,
-      false
-    )
-    geodude.items.add(Item.ROCKY_HELMET)
-    geodude.simulation.applyItemsEffects(geodude)
-
-    coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemon(
-      unown,
-      unown.team
-    )
-    const graveler = unown.simulation.addPokemon(
-      PokemonFactory.createPokemonFromName(Pkm.GRAVELER, unown.player),
-      coord.x,
-      coord.y,
-      unown.team,
-      false
-    )
-    graveler.items.add(Item.ROCKY_HELMET)
-    graveler.simulation.applyItemsEffects(graveler)
-
-    coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemon(
-      unown,
-      unown.team
-    )
-    const golem = unown.simulation.addPokemon(
-      PokemonFactory.createPokemonFromName(Pkm.GOLEM, unown.player),
-      coord.x,
-      coord.y,
-      unown.team,
-      false
-    )
-    golem.items.add(Item.ROCKY_HELMET)
-    golem.simulation.applyItemsEffects(golem)
+    if (unown.player) {
+      unown.player.shopFreeRolls += 6
+    }
   }
 }
 

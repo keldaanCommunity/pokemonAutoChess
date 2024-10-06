@@ -144,7 +144,7 @@ export const lobbySlice = createSlice({
     setSuggestions: (state, action: PayloadAction<ISuggestionUser[]>) => {
       state.suggestions = action.payload
     },
-    leaveLobby: () => initialState,
+    resetLobby: () => initialState,
     addTournament: (state, action: PayloadAction<TournamentSchema>) => {
       // remove previous potential duplicate
       state.tournaments = state.tournaments.filter(
@@ -255,7 +255,7 @@ export const {
   removeRoom,
   setCcu,
   setSearchedUser,
-  leaveLobby,
+  resetLobby,
   setSuggestions,
   pushBotLog,
   addTournament,

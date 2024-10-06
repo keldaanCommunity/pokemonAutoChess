@@ -21,7 +21,7 @@ import {
 import {
   addUser,
   changeUser,
-  leavePreparation,
+  resetPreparation,
   pushMessage,
   removeMessage,
   removeUser,
@@ -80,7 +80,7 @@ export default function Preparation() {
                 } catch (error) {
                   logger.log(error)
                   localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
-                  dispatch(leavePreparation())
+                  dispatch(resetPreparation())
                   navigate("/lobby")
                   return
                 }
@@ -200,7 +200,7 @@ export default function Preparation() {
             dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
           }
           localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
-          dispatch(leavePreparation())
+          dispatch(resetPreparation())
           navigate("/lobby")
           playSound(SOUNDS.LEAVE_ROOM)
         } else if (shouldReconnect) {
@@ -212,7 +212,7 @@ export default function Preparation() {
             30
           )
           // clearing state variables to re-initialize
-          dispatch(leavePreparation())
+          dispatch(resetPreparation())
           initialized.current = false
           reconnect()
         }
@@ -235,7 +235,7 @@ export default function Preparation() {
             r.connection.isOpen && r.leave(),
             game.connection.isOpen && game.leave(false)
           ])
-          dispatch(leavePreparation())
+          dispatch(resetPreparation())
           navigate("/game")
         }
       })
@@ -260,7 +260,7 @@ export default function Preparation() {
             await room.leave(true)
           }
           localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
-          dispatch(leavePreparation())
+          dispatch(resetPreparation())
           navigate("/lobby")
           playSound(SOUNDS.LEAVE_ROOM)
         }}

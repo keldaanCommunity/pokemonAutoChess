@@ -53,6 +53,7 @@ export default class Player extends Schema implements IPlayer {
   @type("uint16") money = process.env.MODE == "dev" ? 999 : 5
   @type("int8") life = 100
   @type("boolean") shopLocked: boolean = false
+  @type("uint8") shopFreeRolls: number = 0
   @type("uint8") streak: number = 0
   @type("uint8") interest: number = 0
   @type("string") opponentId: string = ""
@@ -86,6 +87,7 @@ export default class Player extends Schema implements IPlayer {
   @type("uint8") rerollCount: number = 0
   @type("uint8") totalMoneyEarned: number = 0
   @type("uint8") totalPlayerDamageDealt: number = 0
+  @type("float32") eggChance: number = 0
   commonRegionalPool: Pkm[] = new Array<Pkm>()
   uncommonRegionalPool: Pkm[] = new Array<Pkm>()
   rareRegionalPool: Pkm[] = new Array<Pkm>()

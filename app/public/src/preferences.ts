@@ -5,6 +5,8 @@ export type Keybindings = {
   sell: string
   buy_xp: string
   refresh: string
+  lock: string
+  switch: string
   emote: string
 }
 export interface IPreferencesState {
@@ -14,7 +16,6 @@ export interface IPreferencesState {
   showDetailsOnHover: boolean
   showDamageNumbers: boolean
   disableAnimatedTilemap: boolean
-  fullscreen: boolean
   keybindings: Keybindings
   renderer: number
 }
@@ -26,12 +27,13 @@ const defaultPreferences: IPreferencesState = {
   showDetailsOnHover: false,
   showDamageNumbers: true,
   disableAnimatedTilemap: false,
-  fullscreen: true,
   renderer: Phaser.AUTO,
   keybindings: {
     sell: "E",
     buy_xp: "F",
     refresh: "D",
+    lock: "R",
+    switch: "Space",
     emote: "A"
   }
 }
@@ -42,7 +44,11 @@ export function loadPreferences(): IPreferencesState {
   if (localStore.has(LocalStoreKeys.PREFERENCES)) {
     return {
       ...defaultPreferences,
-      ...localStore.get(LocalStoreKeys.PREFERENCES)
+      ...localStore.get(LocalStoreKeys.PREFERENCES),
+      keybindings: {
+        ...defaultPreferences.keybindings,
+        ...localStore.get(LocalStoreKeys.PREFERENCES)?.keybindings
+      }
     }
   } else {
     return defaultPreferences

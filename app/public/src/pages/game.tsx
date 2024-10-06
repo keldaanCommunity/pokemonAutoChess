@@ -54,6 +54,7 @@ import {
   setPokemonProposition,
   setRoundTime,
   setShop,
+  setShopFreeRolls,
   setShopLocked,
   setStageLevel,
   setStreak,
@@ -75,7 +76,6 @@ import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { playMusic, preloadMusic } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import { FIREBASE_CONFIG, getPortraitPath } from "./utils/utils"
-import { enterFullScreen, exitFullScreen } from "./utils/fullscreen"
 
 let gameContainer: GameContainer
 
@@ -267,7 +267,6 @@ export default function Game() {
       await r.leave(false)
     }
     dispatch(leaveGame())
-    exitFullScreen()
     navigate("/after")
     if (room?.connection.isOpen) {
       room.leave()
@@ -310,7 +309,6 @@ export default function Game() {
 
     if (!connected.current) {
       connect()
-      enterFullScreen()
     } else if (
       !initialized.current &&
       room != undefined &&
@@ -554,6 +552,7 @@ export default function Game() {
           dispatch(setInterest(player.interest))
           dispatch(setStreak(player.streak))
           dispatch(setShopLocked(player.shopLocked))
+          dispatch(setShopFreeRolls(player.shopFreeRolls))
           dispatch(setPokemonCollection(player.pokemonCollection))
 
           player.listen("interest", (value) => {
@@ -564,6 +563,9 @@ export default function Game() {
           })
           player.listen("shopLocked", (value) => {
             dispatch(setShopLocked(value))
+          })
+          player.listen("shopFreeRolls", (value) => {
+            dispatch(setShopFreeRolls(value))
           })
           player.listen("money", (value) => {
             dispatch(setMoney(value))
@@ -664,7 +666,8 @@ export default function Game() {
           "title",
           "rerollCount",
           "totalMoneyEarned",
-          "totalPlayerDamageDealt"
+          "totalPlayerDamageDealt",
+          "eggChance"
         ]
 
         fields.forEach((field) => {

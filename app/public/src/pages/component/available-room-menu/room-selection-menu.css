@@ -1,7 +1,7 @@
 .room-selection-menu ul {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0.5em;
   display: flex;
   gap: 1em;
 }

@@ -3050,13 +3050,9 @@ export class ChargeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const buff = 0.25
+    const buff = 0.2
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
-      if (
-        ally &&
-        pokemon.team == ally.team &&
-        ally.types.has(Synergy.ELECTRIC)
-      ) {
+      if (ally && pokemon.team == ally.team) {
         ally.addAttack(ally.baseAtk * buff, pokemon, 1, crit)
         ally.addAttackSpeed(buff * 100, pokemon, 1, crit)
       }
@@ -3503,7 +3499,7 @@ export class XScissorStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [10, 20, 40, 80][pokemon.stars - 1] ?? 80
+    const damage = [10, 20, 40, 60][pokemon.stars - 1] ?? 60
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit) // twice
   }
@@ -4096,7 +4092,7 @@ export class StunSporeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [10, 20, 40][pokemon.stars - 1] ?? 20
+    const damage = [15, 30, 60][pokemon.stars - 1] ?? 20
     board
       .getAdjacentCells(target.positionX, target.positionY, true)
       .forEach((cell) => {
@@ -4468,6 +4464,7 @@ export class SkyAttackShadowStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
+    crit = crit || chance(pokemon.critChance / 100)
     const destination = board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     if (destination) {
       pokemon.skydiveTo(destination.x, destination.y, board)
@@ -5058,7 +5055,7 @@ export class PeckStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [10, 20, 30][pokemon.stars - 1] ?? 30
+    const damage = [10, 30, 50][pokemon.stars - 1] ?? 50
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -5085,7 +5082,7 @@ export class CounterStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = Math.max(0, pokemon.hp - pokemon.life)
+    const damage = Math.max(1, Math.round((pokemon.hp - pokemon.life) * 0.5))
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
     cells.forEach((cell) => {
@@ -6026,7 +6023,7 @@ export class AnchorShotStrategy extends AbilityStrategy {
         pokemon,
         crit
       )
-      farthestTarget.cooldown = min(500)(farthestTarget.cooldown)
+      farthestTarget.cooldown = min(750)(farthestTarget.cooldown)
     }
   }
 }
@@ -6291,8 +6288,8 @@ export class CloseCombatStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     if (pokemon.items.has(Item.PROTECTIVE_PADS) === false) {
-      pokemon.addDefense(-3, pokemon, 0, false)
-      pokemon.addSpecialDefense(-3, pokemon, 0, false)
+      pokemon.addDefense(-1, pokemon, 0, false)
+      pokemon.addSpecialDefense(-1, pokemon, 0, false)
     }
     target.handleSpecialDamage(130, board, AttackType.SPECIAL, pokemon, crit)
   }
@@ -8049,6 +8046,8 @@ export class AuraWheelStrategy extends AbilityStrategy {
       crit,
       true
     )
+
+    pokemon.cooldown = 100
   }
 }
 
@@ -8189,6 +8188,7 @@ export class SpacialRendStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = 100
+    const rowToTarget = target.positionY
     const enemies = board.cells.filter((p) => p && p.team !== pokemon.team)
     const n = enemies.length
     for (let i = 0; i < Math.floor(n / 2); i++) {
@@ -8200,9 +8200,8 @@ export class SpacialRendStrategy extends AbilityStrategy {
       )
     }
 
-    const y = clamp(target.positionY, 2, BOARD_HEIGHT - 2)
     for (let x = 0; x < BOARD_WIDTH; x++) {
-      const targetHit = board.getValue(x, y)
+      const targetHit = board.getValue(x, rowToTarget)
       if (targetHit && targetHit.team !== pokemon.team) {
         targetHit.handleSpecialDamage(
           damage,

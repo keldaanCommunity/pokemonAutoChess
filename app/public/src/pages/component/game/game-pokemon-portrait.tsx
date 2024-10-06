@@ -194,7 +194,7 @@ export default function GamePokemonPortrait(props: {
         </div>
       )}
       <ul className="game-pokemon-portrait-types">
-        {Array.from(pokemon.types.values()).map((type) => {
+        {Array.from(pokemonInPortrait.types.values()).map((type) => {
           return (
             <li key={type}>
               <SynergyIcon type={type} />

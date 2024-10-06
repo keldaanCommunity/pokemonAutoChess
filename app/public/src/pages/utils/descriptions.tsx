@@ -154,9 +154,7 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
     }
 
     return (
-      <React.Fragment key={i}>
-        {d} {f}
-      </React.Fragment>
+      <React.Fragment key={i}>{d}{f}</React.Fragment>
     )
   })
 }

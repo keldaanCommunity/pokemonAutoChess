@@ -80,6 +80,7 @@ import {
   OnSellDropCommand,
   OnShopCommand,
   OnSpectateCommand,
+  OnSwitchBenchAndBoardCommand,
   OnUpdateCommand
 } from "./commands/game-commands"
 import GameState from "./states/game-state"
@@ -385,6 +386,22 @@ export default class GameRoom extends Room<GameState> {
         }
       }
     })
+
+    this.onMessage(
+      Transfer.SWITCH_BENCH_AND_BOARD,
+      (client, pokemonId: string) => {
+        if (!this.state.gameFinished && client.auth) {
+          try {
+            this.dispatcher.dispatch(new OnSwitchBenchAndBoardCommand(), {
+              client,
+              pokemonId
+            })
+          } catch (error) {
+            logger.error("sell drop error", pokemonId)
+          }
+        }
+      }
+    )
 
     this.onMessage(Transfer.SPECTATE, (client, spectatedPlayerId: string) => {
       if (client.auth) {

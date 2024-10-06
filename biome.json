@@ -1,7 +1,8 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.0/schema.json",
   "files": {
-    "ignore": ["node_modules/**/*"]
+    "ignore": ["node_modules/**/*", "app/public/dist/server/**/*"],
+    "maxSize": 10000000
   },
   "formatter": {
     "enabled": true,
@@ -73,7 +74,7 @@
         "noImportAssign": "error",
         "noMisleadingCharacterClass": "error",
         "noMisleadingInstantiator": "error",
-        "noPrototypeBuiltins": "error",
+        "noPrototypeBuiltins": "off",
         "noRedeclare": "error",
         "noShadowRestrictedNames": "error",
         "noUnsafeDeclarationMerging": "error",

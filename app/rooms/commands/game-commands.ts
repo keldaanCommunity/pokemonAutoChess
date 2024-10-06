@@ -126,11 +126,11 @@ export class OnShopCommand extends Command<
 
     if (
       pokemon.passive === Passive.UNOWN &&
-      player.effects.has(Effect.EERIE_SPELL) &&
       player.shop.every((p) => Unowns.includes(p))
     ) {
       // reset shop after picking in a unown shop
       this.state.shop.assignShop(player, true, this.state)
+      player.shopFreeRolls -= 1
     } else {
       player.shop = player.shop.with(index, Pkm.DEFAULT)
     }
@@ -161,6 +161,7 @@ export class OnRemoveFromShopCommand extends Command<
     const cost = getBuyPrice(name, this.state.specialGameRule)
     if (player.money >= cost) {
       player.shop = player.shop.with(index, Pkm.DEFAULT)
+      player.shopLocked = true
       this.state.shop.releasePokemon(name, player)
     }
   }
@@ -224,8 +225,7 @@ export class OnDragDropCommand extends Command<
       message.updateItems = false
       const pokemon = player.board.get(detail.id)
       if (pokemon) {
-        const x = parseInt(detail.x)
-        const y = parseInt(detail.y)
+        const { x, y } = detail
         const dropOnBench = y == 0
         const dropFromBench = isOnBench(pokemon)
 
@@ -304,6 +304,53 @@ export class OnDragDropCommand extends Command<
     if (commands.length > 0) {
       return commands
     }
+  }
+}
+
+export class OnSwitchBenchAndBoardCommand extends Command<
+  GameRoom,
+  {
+    client: Client
+    pokemonId: string
+  }
+> {
+  execute({ client, pokemonId }) {
+    const playerId = client.auth.uid
+    const player = this.room.state.players.get(playerId)
+    if (!player) return
+
+    const pokemon = player.board.get(pokemonId)
+    if (!pokemon) return
+
+    if (this.state.phase !== GamePhaseState.PICK) return // can't switch pokemons if not in pick phase
+
+    if (pokemon.positionY === 0) {
+      // pokemon is on bench, switch to board
+      const teamSize = this.room.getTeamSize(player.board)
+      const isBoardFull =
+        teamSize >=
+        getMaxTeamSize(
+          player.experienceManager.level,
+          this.room.state.specialGameRule
+        )
+      const destination = getFirstAvailablePositionOnBoard(player.board)
+      if (pokemon.canBePlaced && destination && !isBoardFull) {
+        const [dx, dy] = destination
+
+        this.room.swap(player, pokemon, dx, dy)
+        pokemon.onChangePosition(dx, dy, player)
+      }
+    } else {
+      // pokemon is on board, switch to bench
+      const dx = getFirstAvailablePositionInBench(player.board)
+      if (dx !== undefined) {
+        this.room.swap(player, pokemon, dx, 0)
+        pokemon.onChangePosition(dx, 0, player)
+      }
+    }
+
+    player.updateSynergies()
+    player.boardSize = this.room.getTeamSize(player.board)
   }
 }
 
@@ -640,10 +687,13 @@ export class OnSellDropCommand extends Command<
 export class OnRefreshCommand extends Command<GameRoom, string> {
   execute(id) {
     const player = this.state.players.get(id)
-    if (player && player.money >= 1 && player.alive) {
+    if (!player) return
+    const rollCost = player.shopFreeRolls > 0 ? 0 : 1
+    if (player.money >= rollCost && player.alive) {
       this.state.shop.assignShop(player, true, this.state)
-      player.money -= 1
+      player.money -= rollCost
       player.rerollCount++
+      if (player.shopFreeRolls > 0) player.shopFreeRolls--
     }
   }
 }
@@ -1212,26 +1262,32 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           }
         }
 
-        let eggChance = 0,
-          shinyChance = 0,
-          nbMaxEggs = 0
-        if (
-          player.history.at(-1)?.result === BattleResult.DEFEAT &&
-          (player.effects.has(Effect.BREEDER) ||
-            player.effects.has(Effect.GOLDEN_EGGS))
-        ) {
-          eggChance = 1
-          nbMaxEggs = 8
-          shinyChance = player.effects.has(Effect.GOLDEN_EGGS)
-            ? 0.25 * (player.streak + 1)
-            : 0
-        }
-        if (
-          player.history.at(-1)?.result === BattleResult.DEFEAT &&
-          player.effects.has(Effect.HATCHER)
-        ) {
-          eggChance = 0.25 * (player.streak + 1)
-          nbMaxEggs = 1
+        let eggChance = 0
+        let shinyChance = 0
+        const hasBabyActive =
+          player.effects.has(Effect.HATCHER) ||
+          player.effects.has(Effect.BREEDER) ||
+          player.effects.has(Effect.GOLDEN_EGGS)
+        const hasLostLastBattle =
+          player.history.at(-1)?.result === BattleResult.DEFEAT
+
+        if (hasLostLastBattle && hasBabyActive) {
+          if (player.effects.has(Effect.HATCHER)) {
+            eggChance = player.eggChance
+            shinyChance = 0
+          }
+          if (player.effects.has(Effect.BREEDER)) {
+            eggChance = 1
+            shinyChance = 0
+          }
+          if (player.effects.has(Effect.GOLDEN_EGGS)) {
+            eggChance = 1
+            shinyChance = player.eggChance
+          }
+
+          player.eggChance = max(1)(player.eggChance + 0.25)
+        } else {
+          player.eggChance = 0
         }
 
         if (
@@ -1239,35 +1295,21 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           [1, 2, 3].includes(this.state.stageLevel)
         ) {
           eggChance = 1
-          nbMaxEggs = 8
         }
 
         const eggsOnBench = values(player.board).filter(
           (p) => p.name === Pkm.EGG
         )
-        const nbOfEggs = eggsOnBench.length
         const nbOfShinyEggs = eggsOnBench.filter((p) => p.shiny).length
 
-        if (
-          chance(eggChance) &&
-          getFreeSpaceOnBench(player.board) > 0 &&
-          nbOfEggs < nbMaxEggs
-        ) {
+        if (chance(eggChance) && getFreeSpaceOnBench(player.board) > 0) {
           const shiny = chance(shinyChance) && nbOfShinyEggs === 0
           const egg = createRandomEgg(shiny, player)
           const x = getFirstAvailablePositionInBench(player.board)
           egg.positionX = x !== undefined ? x : -1
           egg.positionY = 0
           player.board.set(egg.id, egg)
-        }
-
-        if (!player.isBot) {
-          if (!player.shopLocked) {
-            this.state.shop.assignShop(player, false, this.state)
-          } else {
-            this.state.shop.refillShop(player, this.state)
-            player.shopLocked = false
-          }
+          player.eggChance = 0
         }
 
         player.board.forEach((pokemon, key) => {
@@ -1291,14 +1333,26 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             // remove after one fight
             player.board.delete(key)
             player.board.delete(pokemon.id)
-            player.updateSynergies()
-            if (!player.shopLocked) {
-              this.state.shop.assignShop(player, false, this.state) // refresh unown shop in case player lost psychic 6
-            }
           }
         })
-        // Refreshes effects (like tapu Terrains)
+
+        // Refreshes effects (Tapu Terrains, or if player lost Psychic 6 after Unown diseappeared)
         player.updateSynergies()
+
+        // Refreshes shop
+        if (!player.isBot) {
+          if (!player.shopLocked) {
+            if (player.shop.every((p) => Unowns.includes(p))) {
+              // player stayed on unown shop and did nothing, so we remove its free roll
+              player.shopFreeRolls -= 1
+            }
+
+            this.state.shop.assignShop(player, false, this.state)
+          } else {
+            this.state.shop.refillShop(player, this.state)
+            player.shopLocked = false
+          }
+        }
       }
     })
 

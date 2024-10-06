@@ -379,8 +379,12 @@ export class OnToggleEloCommand extends Command<
           authorId: "server",
           payload: `Room leader ${
             noElo ? "disabled" : "enabled"
-          } ELO gain for this game.`,
+          } ELO gain for this game. Players need to ready again.`,
           avatar: leader?.avatar
+        })
+
+        this.state.users.forEach((user) => {
+          user.ready = false
         })
       }
     } catch (error) {

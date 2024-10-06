@@ -7,7 +7,7 @@ import GameState from "../../../../../rooms/states/game-state"
 import { ICustomLobbyState, IGameMetadata } from "../../../../../types"
 import { throttle } from "../../../../../utils/function"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { leaveLobby } from "../../../stores/LobbyStore"
+import { resetLobby } from "../../../stores/LobbyStore"
 import { localStore, LocalStoreKeys } from "../../utils/store"
 import GameRoomItem from "./game-room-item"
 
@@ -42,7 +42,7 @@ export function GameRoomsMenu() {
         lobby.connection.isOpen && lobby.leave(false),
         game.connection.isOpen && game.leave(false)
       ])
-      dispatch(leaveLobby())
+      dispatch(resetLobby())
       navigate("/game")
     }
   }, 1000)

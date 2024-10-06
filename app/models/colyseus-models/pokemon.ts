@@ -4717,8 +4717,8 @@ export class Fearow extends Pokemon {
   stars = 2
   hp = 120
   atk = 9
-  def = 1
-  speDef = 1
+  def = 2
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.PECK
@@ -4874,7 +4874,7 @@ export class Zapdos extends Pokemon {
 }
 
 export class Zeraora extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIGHTING])
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.WILD])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
@@ -5804,7 +5804,7 @@ export class Phione extends Pokemon {
   atk = 15
   def = 2
   speDef = 2
-  maxPP = 90
+  maxPP = 80
   range = 3
   skill = Ability.TAKE_HEART
   passive = Passive.PHIONE
@@ -5823,7 +5823,7 @@ export class Manaphy extends Pokemon {
   atk = 17
   def = 4
   speDef = 4
-  maxPP = 90
+  maxPP = 80
   range = 3
   skill = Ability.TAKE_HEART
   attackSprite = AttackSprite.PSYCHIC_RANGE
@@ -7807,10 +7807,10 @@ export class GalarianPonyta extends Pokemon {
   stars = 1
   evolution = Pkm.GALARIAN_RAPIDASH
   hp = 90
-  atk = 12
+  atk = 9
   def = 3
   speDef = 3
-  maxPP = 60
+  maxPP = 80
   range = 1
   skill = Ability.PASTEL_VEIL
   regional = true
@@ -7825,10 +7825,10 @@ export class GalarianRapidash extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 220
-  atk = 24
+  atk = 20
   def = 5
   speDef = 5
-  maxPP = 60
+  maxPP = 80
   range = 1
   skill = Ability.PASTEL_VEIL
   regional = true
@@ -8928,6 +8928,22 @@ const rksSystemOnChangePosition = function (
   }
 }
 
+const evolveMothim = function (params: {
+  this: Pokemon
+  pokemonEvolved: Pokemon
+  pokemonsBeforeEvolution: Pokemon[]
+  player: Player
+}) {
+  const preEvolve = params.pokemonsBeforeEvolution.at(-1)
+  if (preEvolve instanceof WormadamTrash) {
+    params.pokemonEvolved.types.add(Synergy.ARTIFICIAL)
+  } else if (preEvolve instanceof WormadamSandy) {
+    params.pokemonEvolved.types.add(Synergy.GROUND)
+  } else if (preEvolve instanceof WormadamPlant) {
+    params.pokemonEvolved.types.add(Synergy.GRASS)
+  }
+}
+
 export class TypeNull extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ARTIFICIAL])
   rarity = Rarity.UNIQUE
@@ -9957,7 +9973,7 @@ export class UnownA extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 90
   range = 9
   skill = Ability.HIDDEN_POWER_A
   passive = Passive.UNOWN
@@ -10004,7 +10020,7 @@ export class UnownD extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 150
+  maxPP = 100
   range = 9
   skill = Ability.HIDDEN_POWER_D
   passive = Passive.UNOWN
@@ -10100,7 +10116,7 @@ export class UnownJ extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 90
   range = 9
   skill = Ability.HIDDEN_POWER_J
   passive = Passive.UNOWN
@@ -10116,7 +10132,7 @@ export class UnownK extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 90
   range = 9
   skill = Ability.HIDDEN_POWER_K
   passive = Passive.UNOWN
@@ -10132,7 +10148,7 @@ export class UnownL extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 60
   range = 9
   skill = Ability.HIDDEN_POWER_L
   passive = Passive.UNOWN
@@ -10180,7 +10196,7 @@ export class UnownO extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 50
   range = 9
   skill = Ability.HIDDEN_POWER_O
   passive = Passive.UNOWN
@@ -10228,7 +10244,7 @@ export class UnownR extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 90
   range = 9
   skill = Ability.HIDDEN_POWER_R
   passive = Passive.UNOWN
@@ -10292,7 +10308,7 @@ export class UnownV extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 90
   range = 9
   skill = Ability.HIDDEN_POWER_V
   passive = Passive.UNOWN
@@ -10324,7 +10340,7 @@ export class UnownX extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 60
   range = 9
   skill = Ability.HIDDEN_POWER_X
   passive = Passive.UNOWN
@@ -10356,7 +10372,7 @@ export class UnownZ extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 90
   range = 9
   skill = Ability.HIDDEN_POWER_Z
   passive = Passive.UNOWN
@@ -10387,7 +10403,7 @@ export class UnownExclamation extends Pokemon {
   atk = 1
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 60
   range = 9
   skill = Ability.HIDDEN_POWER_EM
   passive = Passive.UNOWN
@@ -12601,7 +12617,7 @@ export class Sobble extends Pokemon {
   atk = 14
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 80
   range = 3
   skill = Ability.SNIPE_SHOT
   attackSprite = AttackSprite.WATER_RANGE
@@ -12616,7 +12632,7 @@ export class Drizzile extends Pokemon {
   atk = 26
   def = 4
   speDef = 4
-  maxPP = 100
+  maxPP = 80
   range = 3
   skill = Ability.SNIPE_SHOT
   attackSprite = AttackSprite.WATER_RANGE
@@ -12630,7 +12646,7 @@ export class Inteleon extends Pokemon {
   atk = 40
   def = 6
   speDef = 6
-  maxPP = 70
+  maxPP = 80
   range = 3
   skill = Ability.SNIPE_SHOT
   attackSprite = AttackSprite.WATER_RANGE
@@ -13484,8 +13500,8 @@ export class Solgaleo extends Pokemon {
   stars = 3
   hp = 300
   atk = 25
-  def = 8
-  speDef = 8
+  def = 6
+  speDef = 4
   maxPP = 120
   range = 1
   skill = Ability.SUNSTEEL_STRIKE
@@ -13743,6 +13759,7 @@ export class WormadamPlant extends Pokemon {
   passive = Passive.ENVIRONMENTAL_ADAPTATION
   stages = 3
   regional = true
+  onEvolve = evolveMothim
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.GRASS)
@@ -13765,6 +13782,7 @@ export class WormadamSandy extends Pokemon {
   passive = Passive.ENVIRONMENTAL_ADAPTATION
   stages = 3
   regional = true
+  onEvolve = evolveMothim
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -13790,6 +13808,7 @@ export class WormadamTrash extends Pokemon {
   passive = Passive.ENVIRONMENTAL_ADAPTATION
   stages = 3
   regional = true
+  onEvolve = evolveMothim
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -13819,17 +13838,6 @@ export class Mothim extends Pokemon {
     // always hide mothim to avoid showing duplicated with other burmy forms
     // this does not impact the evolution of wormadam
     return false
-  }
-  onAcquired(player: Player) {
-    if (player.regionalPokemons.includes(Pkm.BURMY_PLANT)) {
-      this.types.add(Synergy.GRASS)
-    }
-    if (player.regionalPokemons.includes(Pkm.BURMY_SANDY)) {
-      this.types.add(Synergy.GROUND)
-    }
-    if (player.regionalPokemons.includes(Pkm.BURMY_TRASH)) {
-      this.types.add(Synergy.ARTIFICIAL)
-    }
   }
 }
 
@@ -14413,7 +14421,7 @@ export class Klefki extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 200
+  hp = 150
   atk = 16
   def = 4
   speDef = 3
@@ -14588,8 +14596,8 @@ export class Pawmot extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIGHTING])
   rarity = Rarity.RARE
   stars = 3
-  hp = 230
-  atk = 27
+  hp = 240
+  atk = 35
   def = 5
   speDef = 5
   maxPP = 100

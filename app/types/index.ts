@@ -60,6 +60,7 @@ export enum Transfer {
   DRAG_DROP = "DRAG_DROP",
   DRAG_DROP_COMBINE = "DRAG_DROP_COMBINE",
   DRAG_DROP_ITEM = "DRAG_DROP_ITEM",
+  SWITCH_BENCH_AND_BOARD = "SWITCH_BENCH_AND_BOARD",
   SELL_POKEMON = "SELL_POKEMON",
   REMOVE_FROM_SHOP = "REMOVE_FROM_SHOP",
   CHANGE_SELECTED_EMOTION = "CHANGE_SELECTED_EMOTION",
@@ -338,6 +339,7 @@ export interface IPlayer {
   money: number
   life: number
   shopLocked: boolean
+  shopFreeRolls: number
   streak: number
   interest: number
   opponentId: string
@@ -370,6 +372,7 @@ export interface IPlayer {
   rerollCount: number
   totalMoneyEarned: number
   totalPlayerDamageDealt: number
+  eggChance: number
 }
 
 export interface IPokemon {

@@ -27,3 +27,7 @@ kbd.remappable {
 kbd.remapping {
   background-color: var(--color-bg-accent);
 }
+
+kbd.conflict {
+  background-color: red;
+}

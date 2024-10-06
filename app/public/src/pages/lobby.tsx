@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import { leaveLobby } from "../stores/LobbyStore"
+import { resetLobby } from "../stores/LobbyStore"
 import { logOut, setErrorAlertMessage } from "../stores/NetworkStore"
 import { Announcements } from "./component/announcements/announcements"
 import AvailableRoomMenu from "./component/available-room-menu/available-room-menu"
@@ -48,7 +48,7 @@ export default function Lobby() {
       await lobby.leave()
     }
     await firebase.auth().signOut()
-    dispatch(leaveLobby())
+    dispatch(resetLobby())
     dispatch(logOut())
     navigate("/")
   }, [dispatch, lobby])

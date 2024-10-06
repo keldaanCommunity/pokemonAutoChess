@@ -5,12 +5,12 @@ module.exports = {
   apps: [{
     name: "colyseus",
     script: "./app/public/dist/server/app/index.js", // your entrypoint file
-    node_args: "--max-old-space-size=1024",
     instances: os.cpus().length,
     exec_mode: "fork",         // IMPORTANT: do not use cluster mode.
     watch: false,
     time: true,
     wait_ready: true,
+    max_memory_restart: "1300M",
     env_production: {
       NODE_ENV: "production"
     },
@@ -19,11 +19,11 @@ module.exports = {
   deploy: {
     production: {
       "user": "root",
-      "host": ["146.190.113.96", "143.198.101.153", "164.92.98.9"],
+      "host": ["64.23.193.77", "143.198.101.153", "164.92.98.9", "161.35.234.200"],
       "ref": "origin/prod",
       "repo": "https://github.com/keldaanCommunity/pokemonAutoChess.git",
       "path": "/home/deploy",
-      "post-deploy": "npm install && npm run build"
+      "post-deploy": "npm install && npm run assetpack && npm run build"
     }
   }
 }
