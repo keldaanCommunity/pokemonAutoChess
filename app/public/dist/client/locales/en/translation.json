@@ -388,7 +388,9 @@
     "ROAR": "Roar",
     "INFESTATION": "Infestation",
     "IVY_CUDGEL": "Ivy Cudgel",
-    "FORCE_PALM": "Force Palm"
+    "FORCE_PALM": "Force Palm",
+    "THUNDER_CAGE": "Thunder Cage",
+    "HEADBUTT": "Headbutt"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1614,7 +1616,9 @@
     "ROAR": "Blow away the target. If it hits a wall, it suffers [10,20,40,SP] SPECIAL. If it hits another pokémon, both pokémons suffer SPECIAL.",
     "INFESTATION": "Deals [10,SP] SPECIAL to the target for each allied BUG on board and places your most powerful BUG on your bench in the fight",
     "IVY_CUDGEL": "Deals [100,SP] SPECIAL to the target",
-    "FORCE_PALM": "Deals [60,SP] + 10% of target max HP as SPECIAL and PARALYSIS for 6 seconds. If it was PARALYSIS, deals an additional [40,SP] SPECIAL and push it away."
+    "FORCE_PALM": "Deals [60,SP] + 10% of target max HP as SPECIAL and PARALYSIS for 6 seconds. If it was PARALYSIS, deals an additional [40,SP] SPECIAL and push it away.",
+    "THUNDER_CAGE": "Traps target and adjacent enemies in an electric prison that deals [60,SP] SPECIAL and inflicts LOCKED and PARALYSIS for 3 seconds.",
+    "HEADBUTT": "Deals [20,40,80,SP] SPECIAL to the target and inflicts FLINCH for 5 seconds. Double damage if target has a SHIELD."
   },
   "effect": {
     "INGRAIN": "Ingrain",

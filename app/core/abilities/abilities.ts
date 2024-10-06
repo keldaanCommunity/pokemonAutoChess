@@ -3446,6 +3446,33 @@ export class MetalBurstStrategy extends AbilityStrategy {
   }
 }
 
+export class ThunderCageStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    board
+      .getAdjacentCells(target.positionX, target.positionY, true)
+      .forEach((cell) => {
+        if (cell.value && cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            60,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          cell.value.status.triggerLocked(3000, cell.value)
+          cell.value.status.triggerParalysis(3000, cell.value)
+        }
+      })
+  }
+}
+
 export class LeafBladeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -4752,6 +4779,24 @@ export class MawashiGeriStrategy extends AbilityStrategy {
     let damage = 60
     if (pokemon.atk > target.atk) damage *= 2
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
+export class HeadbuttStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    if (target.shield > 0) {
+      damage *= 2
+    }
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.status.triggerFlinch(5000, target, pokemon)
   }
 }
 
@@ -10523,5 +10568,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.INFESTATION]: new InfestationStrategy(),
   [Ability.IVY_CUDGEL]: new IvyCudgelStrategy(),
   [Ability.FORCE_PALM]: new ForcePalmStrategy(),
-  [Ability.METAL_BURST]: new MetalBurstStrategy()
+  [Ability.METAL_BURST]: new MetalBurstStrategy(),
+  [Ability.THUNDER_CAGE]: new ThunderCageStrategy(),
+  [Ability.HEADBUTT]: new HeadbuttStrategy()
 }

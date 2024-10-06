@@ -7268,7 +7268,7 @@ export class Regieleki extends Pokemon {
   speDef = 3
   maxPP = 100
   range = 2
-  skill = Ability.VOLT_SWITCH
+  skill = Ability.THUNDER_CAGE
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 export class Regidrago extends Pokemon {
@@ -13134,7 +13134,7 @@ export class Kangaskhan extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.UPPERCUT
+  skill = Ability.HEADBUTT
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
