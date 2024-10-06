@@ -15179,6 +15179,23 @@ export class IronHands extends Pokemon {
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
+export class Turtonator extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.FIRE
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 13
+  def = 7
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.SHELL_TRAP
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -16039,5 +16056,6 @@ export const PokemonClasses: Record<
   [Pkm.OGERPON_HEARTHFLAME_MASK]: OgerponHearthflameMask,
   [Pkm.OGERPON_CORNERSTONE]: OgerponCornerstone,
   [Pkm.OGERPON_CORNERSTONE_MASK]: OgerponCornerstoneMask,
-  [Pkm.IRON_HANDS]: IronHands
+  [Pkm.IRON_HANDS]: IronHands,
+  [Pkm.TURTONATOR]: Turtonator
 }
