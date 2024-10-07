@@ -1319,7 +1319,7 @@
     "GRASSY_SURGE": "Erhöhe die ATK aller GRASS Pokémon um [5,SP]",
     "MISTY_SURGE": "Alle FAIRY Verbündeten erholen sich von [30,SP] HP und [30,SP] PP.",
     "SKY_ATTACK": "Erhebt sich in die Luft und fällt nach einer Sekunde auf das am weitesten entfernte Ziel und verursacht [120,SP] SPECIAL",
-    "FLYING_PRESS": "Stürzt sich vom Himmel auf das am weitesten entfernte Ziel und verursacht [30,SP]% der maximalen HP des Anwenders als SPECIAL",
+    "FLYING_PRESS": "Stürzt sich vom Himmel auf das am weitesten entfernte Ziel und verursacht [50,SP]% der maximalen HP des Anwenders als SPECIAL",
     "ILLUSION": "Der Benutzer gewinnt [30,50,70,SP=0,5] HP-Punkte zurück und kopiert die Form sowie die ATK, DEF, SPE_DEF und RANGE des Ziel-Pokémon",
     "SLUDGE": "Wirft Müll auf die 3 Felder vor sich, was [2,3,4] Stapel von POISONNED für [3,SP] Sekunden verursacht",
     "SLUDGE_WAVE": "Wirf einen Sprühstrahl aus Abfall auf den Gegner mit den meisten HP, der allen Gegnern im Weg [10,20,30,SP] SPECIAL und POISON für [2,4,6] Sekunden zufügt",

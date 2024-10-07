@@ -1375,7 +1375,7 @@
     "MISTY_SURGE": "Tutti gli alleati FAIRY recuperano [30,SP] HP e [30,SP] PP.",
     "SKY_ATTACK": "Spicca il volo e piomba sul bersaglio più lontano dopo un secondo, infliggendogli [120,SP] SPECIAL.",
     "SKY_ATTACK_SHADOW": "Spicca il volo e, dopo un secondo, piomba sul nemico più lontano infliggendogli [120,SP] SPECIAL. Può criticare.",
-    "FLYING_PRESS": "Piomba dal cielo sul bersaglio più lontano, infliggendogli [30,SP]% dei HP dell'utilizzatore come SPECIAL.",
+    "FLYING_PRESS": "Piomba dal cielo sul bersaglio più lontano, infliggendogli [50,SP]% dei HP dell'utilizzatore come SPECIAL.",
     "ILLUSION": "L'utilizzatore recupera [30,50,70,SP=0.5] HP e copia la forma, ATK, DEF, SPE_DEF e RANGE del Pokèmon bersaglio dell'abilità.",
     "SLUDGE": "Lancia spazzatura nelle tre celle di fronte, la quale applica [2,3,4] istanze di POISONNED per [3,SP] secondi.",
     "SLUDGE_WAVE": "Lancia uno spruzzo di sporcizia al Pokèmon nemico con più HP, infliggendogli [10,20,30,SP] SPECIAL e POISONNED per [2,4,6] secondi a tutti i Pokèmon nemici nel tragitto.",

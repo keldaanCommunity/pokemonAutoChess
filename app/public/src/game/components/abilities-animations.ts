@@ -2468,6 +2468,12 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.HEADBUTT:
+      addAbilitySprite("FIGHTING_KNOCKBACK", coordinatesTarget, true).setScale(
+        2
+      )
+      break
+
     case "FAIRY_CRIT":
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
@@ -2640,6 +2646,12 @@ export function displayAbility(
 
     case Ability.BIDE:
       addAbilitySprite(Ability.COUNTER, coordinates, true).setScale(3)
+      break
+
+    case Ability.THUNDER_CAGE:
+      addAbilitySprite(Ability.THUNDER_CAGE, coordinatesTarget, true).setScale(
+        2
+      )
       break
 
     default:

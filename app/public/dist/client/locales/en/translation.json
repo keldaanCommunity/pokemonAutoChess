@@ -389,7 +389,9 @@
     "INFESTATION": "Infestation",
     "IVY_CUDGEL": "Ivy Cudgel",
     "FORCE_PALM": "Force Palm",
-    "BIDE": "Bide"
+    "BIDE": "Bide",
+    "THUNDER_CAGE": "Thunder Cage",
+    "HEADBUTT": "Headbutt"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1332,7 +1334,7 @@
     "HEAD_SMASH": "The user hurts itself for [10,20,40,SP] PHYSICAL and deals [40,80,150,SP] SPECIAL to the target. Execute the target if they are SLEEP or FREEZE",
     "ROCK_HEAD": "Deal [120,SP]% of ATK + DEF as SPECIAL",
     "CORRUPTED_NATURE": "WOUND adjacent enemy Pokémon for 5 seconds and deal [20,40,80,SP] SPECIAL to them. Restores HP for the amount of damage dealt",
-    "CRABHAMMER": "Deal [40,80,120,SP] SPECIAL to the target with a high chance to deal a critical hit. Execute the target if they are below 30% HP",
+    "CRABHAMMER": "Deal [40,80,120,SP] SPECIAL to the target. Execute the target if they are below 30% HP. Can crit by default with a 30% increased CRIT_CHANCE.",
     "DIAMOND_STORM": "Deal [200,SP]% of the user's DEF as SPECIAL to all adjacent enemy Pokémon",
     "DRACO_ENERGY": "Deal [100,SP]% of the user's HP as SPECIAL to the target",
     "DYNAMAX_CANNON": "Shoot a Dynamax beam in a straight line. Enemy Pokémon hit take [50,SP]% of their max HP as SPECIAL",
@@ -1376,7 +1378,7 @@
     "MISTY_SURGE": "All FAIRY allies (except the caster) recover [30,SP] HP and [30,SP] PP.",
     "SKY_ATTACK": "Rises in the air and fall on the farthest target after one second, dealing [120,SP] SPECIAL",
     "SKY_ATTACK_SHADOW": "Rises in the air and fall on the farthest target after one second, dealing [120,SP] SPECIAL. Can crit by default.",
-    "FLYING_PRESS": "Dives down onto the farthest target from the sky, dealing [30,SP]% of user's max HP as SPECIAL",
+    "FLYING_PRESS": "Dives down onto the farthest target from the sky, dealing [50,SP]% of user's max HP as SPECIAL",
     "ILLUSION": "User recovers [30,50,70,SP=0.5] HP points and copies the form as well as the ATK,DEF, SPE_DEF, and RANGE of the targeted Pokemon",
     "SLUDGE": "Throws trash onto the 3 squares in front, which inflicts [2,3,4] stacks of POISONNED for [3,SP] seconds",
     "SLUDGE_WAVE": "Throw a spray of waste at the enemy with the most HP, inflicting [10,20,30,SP] SPECIAL and POISONNED for [2,4,6] seconds on all opponents in the path",
@@ -1390,7 +1392,7 @@
     "MACH_PUNCH": "Deals [50,SP] SPECIAL and attacks immediately after",
     "UPPERCUT": "Deals [60,SP] SPECIAL. Double damage if attacker has a better DEF than target",
     "TRIPLE_KICK": "Deals [60,SP] SPECIAL to up to 3 adjacent enemies",
-    "MAWASHI_GERI": "Deals [60,SP] SPECIAL. Double damage if attacker has a better ATK than target",
+    "MAWASHI_GERI": "Deals [60,SP] SPECIAL to target and push it away. Double damage if attacker has a better ATK than target",
     "FORECAST": "Gives [10,SP] SHIELD to your team, plus additional bonus depending on the weather: \n Sun: also gives [3,SP] ATK \n Rain: also gives [5,SP] PP \n Snow: also gives [2,SP] DEF / SPE_DEF",
     "X_SCISSOR": "Deals [10,20,40,60,SP] TRUE twice",
     "MANTIS_BLADES": "Unleashes a trio of blades upon the target, each inflicting [30,60,120,SP] with a distinct damage type: PHYSICAL, SPECIAL and TRUE",
@@ -1513,7 +1515,7 @@
     "MAGIC_POWDER": "Gain [10,20,40,SP] SHIELD and SILENCE adjacent enemies for [2,3,4] seconds",
     "INFERNAL_PARADE": "Shoot a returning Flame Wheel, 50% chance to BURN for 3s and dealing twice [30, SP] SPECIAL to all enemy Pokémon hit",
     "RETALIATE": "Deals [15,30,60,SP] SPECIAL to the target + [10,15,25,SP] additional SPECIAL per fallen ally",
-    "SLASH": "Deals [10,20,40,SP] SPECIAL with a [30,60,90]% increased CRIT_CHANCE ratio",
+    "SLASH": "Deals [10,20,40,SP] SPECIAL with a [30,60,90]% increased CRIT_CHANCE ratio. Can crit by default.",
     "OUTRAGE": "The Pokémon is CONFUSION for 2 seconds and deals [100,150,200,SP]% ATK as SPECIAL to the target and adjacent enemies",
     "LUNGE": "Jumps to the opponent with the highest ATK, deals [50,SP] SPECIAL and reduce its ATK by [5,SP]",
     "KNOCK_OFF": "Deals [90,SP] SPECIAL. If target is holding items, they are removed and an additional [30,SP] SPECIAL is dealt per item",
@@ -1616,7 +1618,9 @@
     "INFESTATION": "Deals [10,SP] SPECIAL to the target for each allied BUG on board and places your most powerful BUG on your bench in the fight",
     "IVY_CUDGEL": "Deals [100,SP] SPECIAL to the target",
     "FORCE_PALM": "The user deals [60,SP] + 10% of target max HP as SPECIAL and PARALYSIS for 6 secs. If it was PARALYSIS, deals an additional [40,SP] SPECIAL and push it away.",
-    "BIDE": "The user is unable to move for 3 secs. Bide will do SPECIAL damage equal to twice the damage received during the idling period around the user."
+    "BIDE": "The user is unable to move for 3 secs. Bide will do SPECIAL damage equal to twice the damage received during the idling period around the user.",
+    "THUNDER_CAGE": "Traps target and adjacent enemies in an electric prison that deals [60,SP] SPECIAL and inflicts LOCKED and PARALYSIS for 3 seconds.",
+    "HEADBUTT": "Deals [20,40,80,SP] SPECIAL to the target and inflicts FLINCH for 5 seconds. Double damage if target has a SHIELD."
   },
   "effect": {
     "INGRAIN": "Ingrain",

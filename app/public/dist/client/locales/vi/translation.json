@@ -1318,7 +1318,7 @@
     "GRASSY_SURGE": "Tăng [5,SP] chỉ số ATK của toàn bộ Pokémon hệ GRASS",
     "MISTY_SURGE": "Toàn bộ đồng minh hệ FAIRY hồi phục [30,SP] HP và [30,SP] PP",
     "SKY_ATTACK": "Bay lên trên không trung và sau đó bổ nhào xuống mục tiêu xa nhất trong 1 giây, gây [120,SP] SPECIAL",
-    "FLYING_PRESS": "Bổ nhào xuống mục tiêu xa nhất, gây [30,SP]% SPECIAL tương đương với chỉ số HP của pkm vận chiêu",
+    "FLYING_PRESS": "Bổ nhào xuống mục tiêu xa nhất, gây [50,SP]% SPECIAL tương đương với chỉ số HP của pkm vận chiêu",
     "ILLUSION": "Bản thân hồi phục [30,50,70,SP=0.5] HP, sao chép hình dáng và các chỉ số ATK,DEF, SPE_DEF, RANGE của mục tiêu",
     "SLUDGE": "Ném rác vào 3 ô vuông phía trước, tích [2,3,4] tầng POISONNED trong [3,SP] giây",
     "SLUDGE_WAVE": "Ném một luồng chất thải vào kẻ địch có nhiều HP nhất, gây [10,20,30,SP] SPECIAL và POISON trong [2,4,6] giây cho tất cả kẻ địch trên đường đi",
