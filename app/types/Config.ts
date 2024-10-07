@@ -355,7 +355,7 @@ export const FishRarityProbability: {
 
 export const MAX_POOL_CONNECTIONS_SIZE = 16
 export const MAX_CONCURRENT_PLAYERS_ON_SERVER = 1000
-export const MAX_CONCURRENT_PLAYERS_ON_LOBBY = 75
+export const MAX_CONCURRENT_PLAYERS_ON_LOBBY = 100
 export const MAX_PLAYERS_PER_GAME = 8
 export const MIN_HUMAN_PLAYERS = process.env.MIN_HUMAN_PLAYERS
   ? parseInt(process.env.MIN_HUMAN_PLAYERS)
