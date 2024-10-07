@@ -121,10 +121,11 @@ export default function WikiPokemonDetail(props: { pokemon: Pkm }) {
           <>
             <dt>{t("passive")}</dt>
             <dd>
-              <br />
-              {addIconsToDescription(
-                t(`passive_description.${pokemonData.passive}`)
-              )}
+              <p>
+                {addIconsToDescription(
+                  t(`passive_description.${pokemonData.passive}`)
+                )}
+              </p>
             </dd>
           </>
         )}

@@ -4874,7 +4874,7 @@ export class Zapdos extends Pokemon {
 }
 
 export class Zeraora extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIGHTING])
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.WILD])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
@@ -5804,7 +5804,7 @@ export class Phione extends Pokemon {
   atk = 15
   def = 2
   speDef = 2
-  maxPP = 90
+  maxPP = 80
   range = 3
   skill = Ability.TAKE_HEART
   passive = Passive.PHIONE
@@ -5823,7 +5823,7 @@ export class Manaphy extends Pokemon {
   atk = 17
   def = 4
   speDef = 4
-  maxPP = 90
+  maxPP = 80
   range = 3
   skill = Ability.TAKE_HEART
   attackSprite = AttackSprite.PSYCHIC_RANGE
@@ -7268,7 +7268,7 @@ export class Regieleki extends Pokemon {
   speDef = 3
   maxPP = 100
   range = 2
-  skill = Ability.VOLT_SWITCH
+  skill = Ability.THUNDER_CAGE
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 export class Regidrago extends Pokemon {
@@ -10903,7 +10903,7 @@ export class Hitmonlee extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 180
+  hp = 200
   atk = 30
   def = 3
   speDef = 3
@@ -10917,7 +10917,7 @@ export class Hitmonchan extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 180
+  hp = 200
   atk = 20
   def = 7
   speDef = 7
@@ -11376,10 +11376,10 @@ export class Sableye extends Pokemon {
   evolution = Pkm.MEGA_SABLEYE
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 220
+  hp = 200
   atk = 12
-  def = 5
-  speDef = 5
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.KNOCK_OFF
@@ -13134,7 +13134,7 @@ export class Kangaskhan extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.UPPERCUT
+  skill = Ability.HEADBUTT
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -14596,8 +14596,8 @@ export class Pawmot extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIGHTING])
   rarity = Rarity.RARE
   stars = 3
-  hp = 230
-  atk = 27
+  hp = 240
+  atk = 35
   def = 5
   speDef = 5
   maxPP = 100

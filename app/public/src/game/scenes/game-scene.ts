@@ -181,6 +181,10 @@ export default class GameScene extends Scene {
       }
     )
 
+    this.input.keyboard!.on("keydown-" + preferences.keybindings.lock, () => {
+      this.room?.send(Transfer.LOCK)
+    })
+
     this.input.keyboard!.on("keydown-" + preferences.keybindings.buy_xp, () => {
       this.buyExperience()
     })
@@ -190,6 +194,12 @@ export default class GameScene extends Scene {
         this.sellPokemon(this.pokemonHovered)
       } else if (this.shopIndexHovered !== null) {
         this.removeFromShop(this.shopIndexHovered)
+      }
+    })
+
+    this.input.keyboard!.on("keydown-" + preferences.keybindings.switch, () => {
+      if (this.pokemonHovered) {
+        this.switchBetweenBenchAndBoard(this.pokemonHovered)
       }
     })
   }
@@ -218,6 +228,11 @@ export default class GameScene extends Scene {
 
   removeFromShop(index: number) {
     this.room?.send(Transfer.REMOVE_FROM_SHOP, index)
+  }
+
+  switchBetweenBenchAndBoard(pokemon: PokemonSprite) {
+    if (!pokemon) return
+    this.room?.send(Transfer.SWITCH_BENCH_AND_BOARD, pokemon.id)
   }
 
   updatePhase(newPhase: GamePhaseState, previousPhase: GamePhaseState) {

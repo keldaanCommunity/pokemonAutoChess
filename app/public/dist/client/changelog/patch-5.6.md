@@ -33,7 +33,7 @@
 - Buff Seaking: HP 200 → 250 ; buff Waterfall: shield 30/60/120 → 50/100/150
 - Buff Carvanha line: PP 100 → 80
 - Nerf Quiver dance (Burmy): Attack speed buff 20% → 10%
-- Buff Phione line: PP 100 → 90
+- Buff Phione line: PP 100 → 80
 - Revert 5.4 Tapu Fini buff: PP 80 → 100
 - Buff Psychic surge (Tapu Lele)): AP buff 5 → 10%
 - New ability for Cobalion: Metal Burst: Deal 30 true damage to the target. Increase damage by 10% for each attack blocked by user fighting
@@ -55,6 +55,20 @@
 - Buff Unown-A: PP 100 → 90, Unown-D: PP 150 → 100, Unown-J: PP 100 → 90, Unown-K: PP 100 → 90, Unown-L: PP 100 → 60, Unown-O: PP 100 → 50, Unown-R: PP 100 → 90, Unown-V: PP 100 → 90, Unown-X: PP 100 → 60, Unown-Z: PP 100 → 90, Unown-!: PP 100 → 60
 - Change Unown-N: team gains 50 shield and cast Explosion
 - Change Unown-R: ROLL: gives 6 free shop rerolls
+- Nerf Scyzor: XScissor damage 10/20/40/80 → 10/20/40/60
+- Change Charge (Zapdos): buff Attack and Attack speed of ~~Electric~~ all allies by ~~25~~ 20%
+- Buff Morpeko: reduce ability cooldown to 100 ms
+- Buff Close Combat (Heracross): reduce user Def/SpeDef by ~~2~~ 1
+- Buff Pawmot: Attack 27 → 35, HP: 230 → 240
+- Zeraora is now Electric/Wild instead of Electric/Fighting
+- New ability for Regieleki: Thunder Cage: Traps target and adjacent enemies in an electric prison that deals 60 special damage and inflicts Locked and Paralysis for 3 seconds.
+- New ability for Kangaskhan: Headbutt: Deals 20/40/80 special damage to the target and inflicts Flinch for 5 seconds. Double damage if target has a shield.
+- Buff Hitmonchan: HP: 180 → 200
+- Buff Hitmonlee: HP: 180 → 200
+- Change Rolling Kick (Hitmonlee): now also push target away
+- Buff Flying Press (Hawlucha): deal ~~30%~~ 50% of user's max HP as SPECIAL
+- Nerf Sableye: HP 220 → 200, Def/SpeDef 5/5 → 4/4
+- Change Crabhammer (Poliwrath, Corphish): can now crit by default with a 30% increased crit chance
 
 # Changes to Synergies
 
@@ -85,6 +99,8 @@
 - Show total money earned, total damage dealt and total reroll count in the player detail tooltip ingame
 - Units in your team planner are highlighted with a dedicated icon in the shop
 - Changed the font to Jost
+- Add a key shortcut to switch between bench and board
+- Add a key shortcut to lock/unlock the shop
 
 # Bugfix
 
@@ -92,10 +108,12 @@
 - Fix total money earned not being correctly updated sometimes
 - Fix Spike Armor ability: it was not dealing damage to ranged pokemons at melee contact, was not being able to crit and was not applying Pokenomicon burn
 - Fix some pokemons passives not working properly when played in ghost matchups (ghost = copy of a player to ensure every player has an opponent)
+- Fix evolutions in shop not showing the evolution synergies
 
 # Misc
 
 - Room name is no longer customizable (too many stupid people)
 - Private lobbies passwords are now automatically generated and no longer customizable
 - Custom lobbies are now private by default
+- Shop is now automatically locked if you use the sell key shortcut to empty one slot
 - Enabling/disabling ELO in a custom lobby now resets all players ready status

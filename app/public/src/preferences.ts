@@ -5,6 +5,8 @@ export type Keybindings = {
   sell: string
   buy_xp: string
   refresh: string
+  lock: string
+  switch: string
   emote: string
 }
 export interface IPreferencesState {
@@ -30,6 +32,8 @@ const defaultPreferences: IPreferencesState = {
     sell: "E",
     buy_xp: "F",
     refresh: "D",
+    lock: "R",
+    switch: "Space",
     emote: "A"
   }
 }
@@ -40,7 +44,11 @@ export function loadPreferences(): IPreferencesState {
   if (localStore.has(LocalStoreKeys.PREFERENCES)) {
     return {
       ...defaultPreferences,
-      ...localStore.get(LocalStoreKeys.PREFERENCES)
+      ...localStore.get(LocalStoreKeys.PREFERENCES),
+      keybindings: {
+        ...defaultPreferences.keybindings,
+        ...localStore.get(LocalStoreKeys.PREFERENCES)?.keybindings
+      }
     }
   } else {
     return defaultPreferences

@@ -6264,7 +6264,7 @@ export const AnimationConfig: {
   },
   [Pkm.KANGASKHAN]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Attack,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.TEDDIURSA]: {
