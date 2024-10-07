@@ -123,6 +123,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     this.setState(new LobbyState())
     this.autoDispose = false
     this.listing.unlisted = true
+    this.maxClients = MAX_CONCURRENT_PLAYERS_ON_LOBBY
 
     this.clock.setInterval(async () => {
       const ccu = await matchMaker.stats.getGlobalCCU()
