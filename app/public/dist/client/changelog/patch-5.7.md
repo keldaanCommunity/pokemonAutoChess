@@ -5,6 +5,7 @@
 - Corviknight
 - Murkrow
 - Honchkrow
+- Turtonator
 
 # Gameplay
 
@@ -24,6 +25,8 @@
 - Buff Volcanion: Def 2 → 4, Spedef 2 → 3
 - Buff Delphox: PP 100 → 90
 - New ability for Larvesta: Fiery Dance
+- Rework Shell Trap ability
+- New ability for Shuckle: Bide
 
 # Changes to Synergies
 
