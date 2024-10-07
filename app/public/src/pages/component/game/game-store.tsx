@@ -36,7 +36,7 @@ export default function GameStore() {
               origin="shop"
               index={index}
               pokemon={pokemon}
-              inPlanner={teamPlanner.some(p => p.name === pokemon)}
+              inPlanner={teamPlanner?.some(p => p.name === pokemon) ?? false}
               onMouseEnter={() => {
                 if (scene) scene.shopIndexHovered = index
               }}
