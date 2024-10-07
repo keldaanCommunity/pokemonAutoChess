@@ -854,7 +854,8 @@ export enum Pkm {
   OGERPON_HEARTHFLAME_MASK = "OGERPON_HEARTHFLAME_MASK",
   OGERPON_CORNERSTONE = "OGERPON_CORNERSTONE",
   OGERPON_CORNERSTONE_MASK = "OGERPON_CORNERSTONE_MASK",
-  IRON_HANDS = "IRON_HANDS"
+  IRON_HANDS = "IRON_HANDS",
+  TURTONATOR = "TURTONATOR"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1711,7 +1712,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.OGERPON_HEARTHFLAME_MASK]: "1017-0005",
   [Pkm.OGERPON_CORNERSTONE]: "1017-0006",
   [Pkm.OGERPON_CORNERSTONE_MASK]: "1017-0007",
-  [Pkm.IRON_HANDS]: "0992"
+  [Pkm.IRON_HANDS]: "0992",
+  [Pkm.TURTONATOR]: "0776"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2568,7 +2570,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.OGERPON_HEARTHFLAME_MASK]: Pkm.OGERPON_TEAL,
   [Pkm.OGERPON_CORNERSTONE]: Pkm.OGERPON_TEAL,
   [Pkm.OGERPON_CORNERSTONE_MASK]: Pkm.OGERPON_TEAL,
-  [Pkm.IRON_HANDS]: Pkm.IRON_HANDS
+  [Pkm.IRON_HANDS]: Pkm.IRON_HANDS,
+  [Pkm.TURTONATOR]: Pkm.TURTONATOR
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7009,5 +7012,10 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Strike,
     emote: AnimationType.Hop
+  },
+  [Pkm.TURTONATOR]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Idle
   }
 }

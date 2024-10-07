@@ -971,32 +971,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         true
       )
     }
-
-    if (target.effects.has(Effect.SHELL_TRAP) && physicalDamage > 0) {
-      const cells = board.getAdjacentCells(target.positionX, target.positionY)
-      const crit =
-        target.items.has(Item.REAPER_CLOTH) && chance(target.critChance)
-      target.effects.delete(Effect.SHELL_TRAP)
-      this.simulation.room.broadcast(Transfer.ABILITY, {
-        id: this.simulation.id,
-        skill: "SHELL_TRAP_trigger",
-        positionX: target.positionX,
-        positionY: target.positionX,
-        orientation: target.orientation
-      })
-      cells.forEach((cell) => {
-        if (cell.value && cell.value.team !== target.team) {
-          cell.value.handleSpecialDamage(
-            100,
-            board,
-            AttackType.SPECIAL,
-            target,
-            crit,
-            true
-          )
-        }
-      })
-    }
   }
 
   // called whenever the unit deals damage, by basic attack or ability

@@ -4973,7 +4973,26 @@ export class ShellTrapStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    pokemon.effects.add(Effect.SHELL_TRAP)
+    if (pokemon.shield > 0) {
+      const damage = 50 + pokemon.shield
+      board
+        .getAdjacentCells(target.positionX, target.positionY, true)
+        .forEach((cell) => {
+          if (cell.value && pokemon.team != cell.value.team) {
+            cell.value.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+        })
+      pokemon.shield = 0
+    } else {
+      const shield = 75
+      pokemon.addShield(shield, pokemon, 1, crit)
+    }
   }
 }
 
@@ -7554,7 +7573,7 @@ export class DoomDesireStrategy extends AbilityStrategy {
         if (target && target.life > 0) {
           pokemon.simulation.room.broadcast(Transfer.ABILITY, {
             id: pokemon.simulation.id,
-            skill: Ability.JUDGEMENT,
+            skill: Ability.DOOM_DESIRE,
             positionX: pokemon.positionX,
             positionY: pokemon.positionY,
             targetX: target.positionX,
@@ -10190,6 +10209,47 @@ export class ForcePalmStrategy extends AbilityStrategy {
   }
 }
 
+export class BideStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    pokemon.status.bideCooldown = 3000
+    const startingHealth = pokemon.life
+    pokemon.toIdleState()
+    
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.BIDE,
+          positionX: pokemon.positionX,
+          positionY: pokemon.positionY,
+          targetX: target.positionX,
+          targetY: target.positionY
+        })
+        board
+        .getAdjacentCells(target.positionX, target.positionY, true)
+        .forEach((cell) => {
+          if (cell.value && pokemon.team != cell.value.team) {
+            cell.value.handleSpecialDamage(
+              (startingHealth - pokemon.life) * 2,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+        })
+      }, 3000)
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -10561,6 +10621,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.IVY_CUDGEL]: new IvyCudgelStrategy(),
   [Ability.FORCE_PALM]: new ForcePalmStrategy(),
   [Ability.METAL_BURST]: new MetalBurstStrategy(),
+  [Ability.BIDE]: new BideStrategy(),
   [Ability.THUNDER_CAGE]: new ThunderCageStrategy(),
   [Ability.HEADBUTT]: new HeadbuttStrategy()
 }

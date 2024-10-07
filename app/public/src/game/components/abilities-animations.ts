@@ -1501,12 +1501,12 @@ export function displayAbility(
       ).setScale(2)
       break
 
-    case "SHELL_TRAP_trigger":
-      addAbilitySprite(Ability.SHELL_TRAP, coordinates, true).setScale(2)
+    case Ability.SHELL_TRAP:
+      addAbilitySprite(Ability.COUNTER, coordinates, true).setScale(2)
       break
 
     case Ability.SHELL_SMASH:
-      addAbilitySprite(Ability.SHELL_TRAP, coordinates, true).setScale(2)
+      addAbilitySprite(Ability.SHELL_SMASH, coordinates, true).setScale(2)
       break
 
     case Ability.TRI_ATTACK: {
@@ -2642,6 +2642,10 @@ export function displayAbility(
 
     case Ability.STONE_EDGE:
       addAbilitySprite(Ability.TORMENT, coordinates, true).setScale(2)
+      break
+
+    case Ability.BIDE:
+      addAbilitySprite(Ability.COUNTER, coordinates, true).setScale(3)
       break
 
     case Ability.THUNDER_CAGE:
