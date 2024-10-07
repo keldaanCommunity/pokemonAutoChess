@@ -710,15 +710,8 @@ export class CrabHammerStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 40
-    if (pokemon.stars == 2) {
-      damage = 80
-    } else if (pokemon.stars == 3) {
-      damage = 120
-    }
-    if (pokemon.items.has(Item.REAPER_CLOTH)) {
-      crit = chance((3 * pokemon.critChance) / 100)
-    }
+    let damage = [40, 80, 120][pokemon.stars - 1] ?? 120
+    crit = chance((pokemon.critChance + 30) / 100) // can crit by default with a 30% increased crit chance
     let attackType = AttackType.SPECIAL
     if (target.life / target.hp < 0.3) {
       damage = target.life
@@ -7399,21 +7392,10 @@ export class SlashStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
-    const increasedCrit = crit
-      ? crit
-      : pokemon.stars === 3
-        ? chance(0.9)
-        : pokemon.stars === 2
-          ? chance(0.6)
-          : chance(0.3)
-    target.handleSpecialDamage(
-      damage,
-      board,
-      AttackType.SPECIAL,
-      pokemon,
-      increasedCrit
-    )
+    const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
+    const increasedCrit = [30, 60, 90][pokemon.stars - 1] ?? 90
+    crit = chance((pokemon.critChance + increasedCrit) / 100) // can crit by default
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 

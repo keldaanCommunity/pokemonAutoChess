@@ -97,8 +97,6 @@
     "react-tooltip": "5.21.5"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.25.2",
-    "@babel/preset-react": "^7.23.3",
     "@biomejs/biome": "^1.9.0",
     "@types/cors": "^2.8.17",
     "@types/d3": "^7.4.3",

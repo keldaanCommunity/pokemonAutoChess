@@ -68,6 +68,7 @@
 - Change Rolling Kick (Hitmonlee): now also push target away
 - Buff Flying Press (Hawlucha): deal ~~30%~~ 50% of user's max HP as SPECIAL
 - Nerf Sableye: HP 220 → 200, Def/SpeDef 5/5 → 4/4
+- Change Crabhammer (Poliwrath, Corphish): can now crit by default with a 30% increased crit chance
 
 # Changes to Synergies
 
