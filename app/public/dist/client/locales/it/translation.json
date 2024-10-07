@@ -388,7 +388,9 @@
     "ROAR": "Boato",
     "INFESTATION": "Assillo",
     "IVY_CUDGEL": "Clava di Liane",
-    "FORCE_PALM": "Palmoforza"
+    "FORCE_PALM": "Palmoforza",
+    "THUNDER_CAGE": "Elettrogabbia",
+    "HEADBUTT": "Bottintesta"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1614,7 +1616,9 @@
     "ROAR": "Spazza via il bersaglio. Se il bersaglio colpisce un muro, gli vengono inflitti [10,20,40,SP] SPECIAL. Se colpisce un altro Pokèmon, entrambi subiscono SPECIAL.",
     "INFESTATION": "Infliggi [10,SP] SPECIAL al bersaglio per ogni Pokèmon BUG alleato e piazza il BUG più forte nella panchina durante il combattimento.",
     "IVY_CUDGEL": "Infliggi [100,SP] SPECIAL al bersaglio.",
-    "FORCE_PALM": "L'utilizzatore infligge [60,SP] + il 10% dei HP massimi come SPECIAL e causa PARALYSIS per 6 secondi. Se era già sotto PARALYSIS, infliggi [40,SP] SPECIAL bonus e spingilo via."
+    "FORCE_PALM": "L'utilizzatore infligge [60,SP] + il 10% dei HP massimi come SPECIAL e causa PARALYSIS per 6 secondi. Se era già sotto PARALYSIS, infliggi [40,SP] SPECIAL bonus e spingilo via.",
+    "THUNDER_CAGE": "Intrappola il bersaglio e i nemici adiacenti in una gabbia elettrica che infligge [60,SP] SPECIAL e causa LOCKED e PARALYSIS per 3 secondi.",
+    "HEADBUTT": "Infliggi [20,40,80,SP] SPECIAL al bersaglio e causa FLINCH per 5 secondi. Raddoppia il danno se il bersaglio ha uno SHIELD."
   },
   "effect": {
     "INGRAIN": "Radicamento",
@@ -2969,6 +2973,8 @@
   "key_desc_sell": "Vendi Pokèmon puntato col mouse",
   "key_desc_buy_xp": "Compra esperienza",
   "key_desc_refresh": "Aggiorna negozio",
+  "key_desc_lock": "Blocca/sblocca negozio",
+  "key_desc_switch": "Cambia tra panchina e terreno",
   "key_desc_avatar_anim": "Esegui animazioni dell'avatar",
   "key_desc_avatar_emotes": "Mostra menù emote",
   "key_desc_avatar_show_emote": "Usa emote",
@@ -3224,6 +3230,8 @@
     "arceus_rate": "Probabilità di trovare Arceus tra le scelte del livello 20",
     "fishing_rarity_rate": "Qualità pesca basata sulla qualità dell'amo",
     "fishing_rarity_rate_description": "La qualità dell'amo che usi per pescare influenza la rarità dei Pokèmon che puoi catturare",
+    "round_damage_calculation": "Calcolo dei danni del round",
+    "round_damage_calculation_description": "Il danno inflitto ai giocatori dopo aver perso un round è calcolato così: Danni del round = (livello dello stage/2) + (numero di Pokèmon nemici rimasti vivi); il risultato poi viene arrotondato, i cloni e i Pokèmon evocati durante il combattimento non contano nella formula.",
     "pool_size_per_category": "Dimensione dell'insieme per categoria",
     "pool_size_per_category_description": "I Pokèmon che puoi trovare nei negozi sono presi da un insieme condiviso da tutti i giocatori. Il numero degli esemplari di ogni Pokèmon dentro questo insieme dipende dalla sua rarità e dal numero dei suoi stadi di evoluzione."
   },
