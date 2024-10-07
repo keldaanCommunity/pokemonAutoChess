@@ -61,6 +61,7 @@
 - Buff Close Combat (Heracross): reduce user Def/SpeDef by ~~2~~ 1
 - Buff Pawmot: Attack 27 → 35, HP: 230 → 240
 - Zeraora is now Electric/Wild instead of Electric/Fighting
+- Change Crabhammer (Poliwrath, Corphish): can now crit by default with a 30% increased crit chance
 
 # Changes to Synergies
 
