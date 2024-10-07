@@ -1309,7 +1309,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           egg.positionX = x !== undefined ? x : -1
           egg.positionY = 0
           player.board.set(egg.id, egg)
-          player.eggChance = 0
+          if (
+            player.effects.has(Effect.HATCHER) ||
+            (player.effects.has(Effect.GOLDEN_EGGS) && shiny)
+          ) {
+            player.eggChance = 0
+          }
         }
 
         player.board.forEach((pokemon, key) => {
