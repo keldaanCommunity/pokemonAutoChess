@@ -7268,7 +7268,7 @@ export class Regieleki extends Pokemon {
   speDef = 3
   maxPP = 100
   range = 2
-  skill = Ability.VOLT_SWITCH
+  skill = Ability.THUNDER_CAGE
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 export class Regidrago extends Pokemon {
@@ -10903,7 +10903,7 @@ export class Hitmonlee extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 180
+  hp = 200
   atk = 30
   def = 3
   speDef = 3
@@ -10917,7 +10917,7 @@ export class Hitmonchan extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 180
+  hp = 200
   atk = 20
   def = 7
   speDef = 7
@@ -11376,10 +11376,10 @@ export class Sableye extends Pokemon {
   evolution = Pkm.MEGA_SABLEYE
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 220
+  hp = 200
   atk = 12
-  def = 5
-  speDef = 5
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.KNOCK_OFF
@@ -13134,7 +13134,7 @@ export class Kangaskhan extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.UPPERCUT
+  skill = Ability.HEADBUTT
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
