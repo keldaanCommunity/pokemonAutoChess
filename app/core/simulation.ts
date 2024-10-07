@@ -1525,7 +1525,8 @@ export default class Simulation extends Schema implements ISimulation {
           this.redPlayer.addMoney(1, true, null)
           client?.send(Transfer.PLAYER_INCOME, 1)
         }
-      } else {
+      } else if (!this.isGhostBattle) {
+        // if blue player won against ghost, do not make red player take damage
         const playerDamage = this.room.computeRoundDamage(
           this.blueTeam,
           this.stageLevel
