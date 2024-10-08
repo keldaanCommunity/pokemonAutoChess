@@ -65,3 +65,12 @@ O servidor PokeChessBR é a casa da comunidade brasileira dos amantes de Auto Ch
 - location: Brazil
 
 UW POC es un servidor apuntado para la comunidad latina de PokemonAutoChess, el servidor se mantendra actualizado con el ultimo release oficial.
+
+# Koala PAC
+
+- url: https://koala-pac.com
+- logo: https://i.ibb.co/4NjRMp5/logo.png
+- creator: RhysK
+- location: Australia
+
+Australian Community Server for Pokemon Auto Chess
