@@ -1290,7 +1290,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           }
 
           player.eggChance = max(1)(player.eggChance + 0.25)
-        } else {
+        } else if(!isPVE){
           player.eggChance = 0
         }
 
