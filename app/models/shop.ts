@@ -80,8 +80,9 @@ export function getSellPrice(
 
   let price = 1
   let stars = pokemon.stars
+  const hasRareCandy = pokemon.items && pokemon.items.has(Item.RARE_CANDY)
 
-  if (pokemon.items && pokemon.items.has(Item.RARE_CANDY)) {
+  if (hasRareCandy) {
     stars = min(1)(stars - 1)
   }
 
@@ -95,12 +96,12 @@ export function getSellPrice(
     price = 1
   } else if (name === Pkm.WISHIWASHI) {
     price = 3
-  } else if (
-    name === Pkm.GYARADOS ||
-    name === Pkm.MILOTIC ||
-    name === Pkm.WISHIWASHI_SCHOOL
-  ) {
-    price = 10
+  } else if (name === Pkm.GYARADOS) {
+    price = hasRareCandy ? 0 : 10
+  } else if (name === Pkm.MILOTIC) {
+    price = hasRareCandy ? 1 : 10
+  } else if (name === Pkm.WISHIWASHI_SCHOOL) {
+    price = hasRareCandy ? 3 : 10
   } else if (Unowns.includes(name)) {
     price = 1
   } else if (pokemon.rarity === Rarity.HATCH) {
