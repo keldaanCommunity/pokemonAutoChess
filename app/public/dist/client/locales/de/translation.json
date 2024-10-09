@@ -1222,7 +1222,17 @@
     "SEAKING": "Golking",
     "LUVDISC": "Liebiskus",
     "AUDINO": "Ohrdoch",
-    "PETILIL": "Lilminip"
+    "PETILIL": "Lilminip",
+    "LILIGANT": "Dressella",
+    "MANTYKE": "Mantirps",
+    "MANTINE": "Mantax",
+    "REMORAID": "Remoraid",
+    "OCTILLERY": "Octillery",
+    "SIGILYPH": "Symvolara",
+    "FRIGIBAX": "Frospino",
+    "ARCTIBAX": "Cryospino",
+    "BAXCALIBUR": "Espinodon",
+    "BINACLE": "Bithora"
   },
   "ability_description": {
     "SOFT_BOILED": "Heilt alle Statuseffekte und gewährt jedem Verbündeten [20,40,80,SP] SHIELD.",
