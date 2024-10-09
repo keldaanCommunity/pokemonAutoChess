@@ -1000,6 +1000,7 @@ export class JoinOrOpenRoomCommand extends Command<
       case GameMode.SCRIBBLE: {
         const existingScribble = this.room.rooms?.find(
           (room) =>
+            room.name === "preparation" &&
             room.metadata?.gameMode === GameMode.SCRIBBLE &&
             room.clients < MAX_PLAYERS_PER_GAME
         )
