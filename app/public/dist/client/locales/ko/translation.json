@@ -2040,7 +2040,7 @@
     "CHERI_BERRY": "HP이 50% 이하 시 혹은 PARALYSIS 상태 후 소비, HP 20 회복, 공격 10 상승, 그리고 전투종료까지 PARALYSIS 상태 면역 ",
     "CHESTO_BERRY": "HP이 50% 이하 시 혹은 SLEEP 상태 후 소비, HP 20 회복, AP 15% 상승, 그리고 전투종료까지 SLEEP 상태 면역 ",
     "GANLON_BERRY": "HP이 50% 이하 시 소비, HP 20 회복 그리고 DEF 20 상승",
-    "JABOCA_BERRY": "HP이 50% 이하 시 소비, HP 20 회복 그리고 10초 간 cast $t(ability.SPIKE_ARMOR) 생성",
+    "JABOCA_BERRY": "HP이 50% 이하 시 소비, HP 20 회복 그리고 10초 간 $t(ability.SPIKE_ARMOR) 효과 적용",
     "LANSAT_BERRY": "HP이 50% 이하 시 소비, HP 20 회복 그리고 CRIT_CHANCE 50% 상승",
     "LEPPA_BERRY": "HP이 50% 이하 시 혹은 기술 사용 후 소비, HP 20 회복 그리고 50 PP 한 회에 한하여 회복 ",
     "LIECHI_BERRY": "HP이 50% 이하 시 소비, HP 20 회복 그리고 ATK 상승 ",
