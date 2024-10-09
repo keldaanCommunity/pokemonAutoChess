@@ -3143,7 +3143,7 @@
     "ZeroIsleSouth2": "제로의 섬 남부 2"
   },
   "held_items": "지닌 도구들",
-  "by_average_held_items": "지닌 도구들 평균 ",
+  "by_average_held_items": "도구를 지닌 갯수들의 평균",
   "role": {
     "ADMIN": "제작자",
     "MODERATOR": "관리자",
