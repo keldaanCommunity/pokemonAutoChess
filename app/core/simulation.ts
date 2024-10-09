@@ -49,6 +49,7 @@ export default class Simulation extends Schema implements ISimulation {
   @type("string") id: string
   @type("string") bluePlayerId: string
   @type("string") redPlayerId: string
+  @type("boolean") isGhostBattle: boolean
   room: GameRoom
   blueEffects = new Set<Effect>()
   redEffects = new Set<Effect>()
@@ -60,7 +61,6 @@ export default class Simulation extends Schema implements ISimulation {
   redPlayer: Player | undefined
   stormLightningTimer = 0
   tidalwaveTimer = 0
-  isGhostBattle: boolean
 
   constructor(
     id: string,
