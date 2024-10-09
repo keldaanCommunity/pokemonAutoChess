@@ -378,7 +378,17 @@
     "SCHOOLING": "Fischschwarm",
     "DOUBLE_SHOCK": "Zweifachladung",
     "CHARM": "Charme",
-    "ENTRAINMENT": "Zwango"
+    "ENTRAINMENT": "Zwango",
+    "PSYCHO_SHIFT": "Psybann",
+    "GLAIVE_RUSH": "Großklingenstoß",
+    "FOUL_PLAY": "Schmarotzer",
+    "DOUBLE_IRON_BASH": "Panzerfäuste",
+    "STONE_EDGE": "Steinkante",
+    "ROAR": "Brüller",
+    "INFESTATION": "Plage",
+    "IVY_CUDGEL": "Rankenkeule",
+    "FORCE_PALM": "Kraftwelle",
+    "THUNDER_CAGE": "Blitzgefängnis"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
