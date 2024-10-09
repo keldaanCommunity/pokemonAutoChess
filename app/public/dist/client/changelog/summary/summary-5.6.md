@@ -4,7 +4,7 @@
 
 ## New item: Protective pads
 
-(Charcoal + Miracle Seed): +80 Shield, +6 Attack ; Attacks deal double damage on shield. User is protected from recoil and retaliation damage.
+(Charcoal + Miracle Seed): +60 Shield, +6 Attack ; Attacks deal double damage on shield. User is protected from recoil and retaliation damage.
 
 ![Protective pads](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/refs/heads/master/app/public/src/assets/item%7Btps%7D/PROTECTIVE_PADS.png)
 
