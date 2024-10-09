@@ -1,7 +1,7 @@
 import { Client, Room } from "colyseus.js"
 import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import firebase from "firebase/compat/app"
-import React, { useEffect, useRef } from "react"
+import React, { useCallback, useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { GameUser } from "../../../models/colyseus-models/game-user"
@@ -96,6 +96,8 @@ export default function Preparation() {
                 )
                 await initialize(r, user.uid)
                 dispatch(joinPreparation(r))
+              } else {
+                navigate("/lobby")
               }
             }
           } catch (error) {
@@ -199,16 +201,8 @@ export default function Preparation() {
         const shouldGoToLobby = (code === CloseCodes.USER_KICKED || code === CloseCodes.ROOM_DELETED || code === CloseCodes.ROOM_FULL || code === CloseCodes.ROOM_EMPTY || code === CloseCodes.USER_BANNED || code === CloseCodes.USER_RANK_TOO_LOW)
         const shouldReconnect = code === CloseCodes.ABNORMAL_CLOSURE || code === CloseCodes.TIMEOUT
         logger.info(`left preparation room with code ${code}`, { shouldGoToLobby, shouldReconnect })
-        if (shouldGoToLobby) {
-          const errorMessage = CloseCodesMessages[code]
-          if (errorMessage) {
-            dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
-          }
-          localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
-          dispatch(resetPreparation())
-          navigate("/lobby")
-          playSound(SOUNDS.LEAVE_ROOM)
-        } else if (shouldReconnect) {
+
+        if (shouldReconnect) {
           logger.log("Connection closed unexpectedly or timed out. Attempting reconnect.")
           // Restart the expiry timer of the reconnection token for reconnect
           localStore.set(
@@ -220,6 +214,17 @@ export default function Preparation() {
           dispatch(resetPreparation())
           initialized.current = false
           reconnect()
+        } else {
+          localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
+          dispatch(resetPreparation())
+          if (shouldGoToLobby) {
+            const errorMessage = CloseCodesMessages[code]
+            if (errorMessage) {
+              dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
+            }
+            navigate("/lobby")
+            playSound(SOUNDS.LEAVE_ROOM)
+          }
         }
       })
 
@@ -253,9 +258,9 @@ export default function Preparation() {
     if (!initialized.current) {
       reconnect()
     }
-  })
+  }, [initialized])
 
-  const leavePreparationRoom = async () => {
+  const leavePreparationRoom = useCallback(async () => {
     if (room?.connection.isOpen) {
       await room.leave(true)
     }
@@ -263,7 +268,7 @@ export default function Preparation() {
     dispatch(resetPreparation())
     navigate("/lobby")
     playSound(SOUNDS.LEAVE_ROOM)
-  }
+  }, [room])
 
   return (
     <div className="preparation-page">
