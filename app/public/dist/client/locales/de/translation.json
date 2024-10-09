@@ -2898,6 +2898,10 @@
   "game-reconnect-modal-title": "Stellen Sie die Verbindung zum Spiel wieder her",
   "game-reconnect-modal-body": "Sie haben ein laufendes Spiel verlassen. Möchten Sie die Verbindung zu Ihrem vorherigen Spiel wiederherstellen?",
   "toggle_locked": "Gesperrte Titel anzeigen",
+  "switch_server": "Zu diesem Server wechseln",
+  "version": "Version",
+  "location": "Standort",
+  "ping": "Ping",
   "key": "Schlüssel",
   "action": "Aktion",
   "key_desc_sell": "Verkaufe mit Mausrüberhoverndes Pokémon",
@@ -3089,6 +3093,7 @@
   "game_full": "Raum ist voll",
   "game_already_started": "Spiel hat bereits begonnen",
   "min_rank_not_reached": "Dein Rang ist nicht hoch genug, um an diesen Rangmatch teilzunehmen",
+  "max_rank_not_reached": "Dein Rang ist zu hoch, um an diesem Ranglistenspiel teilzunehmen",
   "not_whitelisted": "Dieses Spiel ist auf eine Whitelist von Spielern beschränkt",
   "blacklisted": "Du wurdest von diesem match gekickt",
   "kecleon_dialog": {
@@ -3157,7 +3162,20 @@
     "arceus_rate": "Chance, Arceus in den Picks der Ebene 20 zu finden",
     "fishing_rarity_rate": "Angelrarität nach Rutenqualität",
     "fishing_rarity_rate_description": "Die Qualität der Angelrute, beeinflusst die Seltenheit der Pokémon, die Sie fangen können.",
+    "round_damage_calculation": "Berechnung des Rundenschadens",
+    "round_damage_calculation_description": "Der Schaden, der dem Spieler nach einer verlorenen Runde zugefügt wird, wird folgendermaßen berechnet: Rundenschaden = (Levelstufe / 2) + (Anzahl der lebenden Gegner); aufgerundet, Klone/Spawns zählen nicht",
     "pool_size_per_category": "Poolgröße je Kategorie",
     "pool_size_per_category_description": "Die Pokémon, die du im Shop findest, stammen aus einem Pool, der von allen Spielern gemeinsam genutzt wird. Die Anzahl der Exemplare jedes Pokémon im Pool hängt von seiner Seltenheit und der Anzahl seiner Evolutionsstufen ab."
+  },
+  "errors": {
+    "USER_INACTIVE": "Du wurden wegen Inaktivität rausgeworfen, um Serverressourcen zu sparen",
+    "USER_KICKED": "Du wurdest aus dieser Lobby geworfen",
+    "USER_BANNED": "Ihr Konto wurde gesperrt",
+    "USER_RANK_TOO_LOW": "Ihr Spielerrang ist nicht hoch genug, um an dieser Lobby teilzunehmen",
+    "USER_NOT_AUTHENTICATED": "Bitte authentifizieren Sie sich erneut",
+    "ROOM_FULL": "Dieser Raum ist voll",
+    "ROOM_EMPTY": "Dieser Raum wurde aufgrund von Spielermangel entfernt",
+    "ROOM_DELETED": "Dieses Zimmer wurde gelöscht",
+    "UNKNOWN_ERROR": "Ein unerwarteter Fehler ist aufgetreten: {{error}}"
   }
 }
