@@ -326,7 +326,14 @@
     "ZAP_CANNON": "でんじほう",
     "PSYCHO_BOOST": "サイコブースト",
     "ICE_HAMMER": "アイスハンマー",
-    "POLLEN_PUFF": "かふんだんご"
+    "POLLEN_PUFF": "かふんだんご",
+    "PSYSTRIKE": "サイコブレイク",
+    "FACADE": "からげんき",
+    "DREAM_EATER": "ゆめくい",
+    "SPARK": "スパーク",
+    "CRUNCH": "かみくだく",
+    "CROSS_POISON": "クロスポイズン",
+    "DOUBLE_EDGE": "すてみタックル"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
