@@ -388,7 +388,8 @@
     "INFESTATION": "Plage",
     "IVY_CUDGEL": "Rankenkeule",
     "FORCE_PALM": "Kraftwelle",
-    "THUNDER_CAGE": "Blitzgefängnis"
+    "THUNDER_CAGE": "Blitzgefängnis",
+    "HEADBUTT": "Kopfnuss"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -568,6 +569,7 @@
     "FEAROW": "Ibitak",
     "GYARADOS": "Garados",
     "LUGIA": "Lugia",
+    "SHADOW_LUGIA": "Extradunkel 001",
     "GIRATINA": "Giratina",
     "ZAPDOS": "Zapdos",
     "MOLTRES": "Lavados",
@@ -662,6 +664,8 @@
     "PRIMAL_GROUDON": "Proto-Groudon",
     "MEOWTH": "Mauzi",
     "PERSIAN": "Snobilikat",
+    "ALOLAN_MEOWTH": "Alola-Mauzi",
+    "ALOLAN_PERSIAN": "Alola-Snobilika",
     "DEINO": "Kapuno",
     "ZWEILOUS": "Duodino",
     "HYDREIGON": "Trikephalo",
@@ -769,6 +773,7 @@
     "ETERNATUS": "Endynalos",
     "PONYTA": "Ponita",
     "RAPIDASH": "Gallopa",
+    "GALARIAN_PONYTA": "Galar-Ponita",
     "NINCADA": "Nincada",
     "NINJASK": "Ninjask",
     "SHEDINJA": "Ninjatom",
@@ -1212,7 +1217,12 @@
     "WISHIWASHI_SCHOOL": "Lusardin (Schwarmform)",
     "PAWMI": "Pamo",
     "PAWMO": "Pamamo",
-    "PAWMOT": "Pamomamo"
+    "PAWMOT": "Pamomamo",
+    "GOLDEEN": "Goldini",
+    "SEAKING": "Golking",
+    "LUVDISC": "Liebiskus",
+    "AUDINO": "Ohrdoch",
+    "PETILIL": "Lilminip"
   },
   "ability_description": {
     "SOFT_BOILED": "Heilt alle Statuseffekte und gewährt jedem Verbündeten [20,40,80,SP] SHIELD.",
