@@ -1866,6 +1866,7 @@
     "SMOKE_BALL": "Rauchball",
     "XRAY_VISION": "Röntgenbrille",
     "RAZOR_FANG": "Scharfzahn",
+    "PROTECTIVE_PADS": "Schutzpolster",
     "CHOICE_SCARF": "Wahlschal",
     "PUNCHING_GLOVE": "Boxhandschuh",
     "DEFENSIVE_RIBBON": "Muskelband",
@@ -1934,11 +1935,16 @@
     "ABSORB_BULB": "Knolle",
     "SACRED_ASH": "Zauberasche",
     "COMET_SHARD": "Kometstück",
+    "REPEAT_BALL": "Wiederball",
     "DAMP_ROCK": "Nassbrocken",
     "ICY_ROCK": "Eisbrocken",
     "HEAT_ROCK": "Heißbrocken",
     "SMOOTH_ROCK": "Glattbrocken",
-    "BLACK_AUGURITE": "Schwarzaugit"
+    "BLACK_AUGURITE": "Schwarzaugit",
+    "TEAL_MASK": "Türkisgrüne Maske",
+    "WELLSPRING_MASK": "Brunnenmaske",
+    "CORNERSTONE_MASK": "Fundamentmaske",
+    "HEARTHFLAME_MASK": "Ofenmaske"
   },
   "item_description": {
     "FOSSIL_STONE": "Ein Fossil eines Pokémon, das in prähistorischen Zeiten lebte",
@@ -2563,6 +2569,7 @@
   "ability_label": "Fähigkeit",
   "rank": "Rang",
   "player": "Spieler",
+  "stats": "Statuswerte",
   "team": "Team",
   "synergies": "Synergien",
   "join_as_guest": "Treten Sie als Gast bei",
