@@ -2089,7 +2089,7 @@
     "HEAT_ROCK": "FIRE 시너지를 부여하고 SUN 에 3만큼 기여한다. ROCK 포켓몬만 착용할 수 있다.",
     "SMOOTH_ROCK": "GROUND 시너지를 부여하고 SANDSTORM 에 3만큼 기여한다. ROCK 포켓몬만 착용할 수 있다.",
     "BLACK_AUGURITE": "DARK 시너지를 부여하고 NIGHT 에 3만큼 기여한다. ROCK 포켓몬만 착용할 수 있다.",
-    "FIRE_SHARD": "플레이어의 HP 를 2 희생하여 하나의 FIRE 포켓몬에게 +2 ATK 부여. 착용 시 즉시 소모",
+    "FIRE_SHARD": "플레이어 HP 2를 소모하여 영구적으로 해당 포켓몬의 ATK +2. 장착 즉시 소비되며 FIRE 포켓몬만 소비할 수 있다.",
     "TEAL_MASK": "오거폰에게 50 SHIELD 및 FLORA 부여",
     "WELLSPRING_MASK": "오거폰에게 50 SHIELD 및 AQUATIC 부여",
     "HEARTHFLAME_MASK": "오거폰에게 50 SHIELD 및 FIRE 부여",
