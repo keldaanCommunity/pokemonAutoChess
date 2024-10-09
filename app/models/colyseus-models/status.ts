@@ -1054,13 +1054,15 @@ export default class Status extends Schema implements IStatus {
       this.locked = true
       this.lockedCooldown = Math.round(duration)
       pkm.range = 1
+      pkm.toMovingState() // force retargetting
     }
   }
 
   updateLocked(dt: number, pokemon: PokemonEntity) {
     if (this.lockedCooldown - dt <= 0) {
       this.locked = false
-      pokemon.range = pokemon.baseRange
+      pokemon.range =
+        pokemon.baseRange + (pokemon.items.has(Item.WIDE_LENS) ? 2 : 0)
     } else {
       this.lockedCooldown -= dt
     }
