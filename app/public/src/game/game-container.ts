@@ -70,7 +70,7 @@ class GameContainer {
   initializeSimulation(simulation: Simulation) {
     if (
       simulation.bluePlayerId === this.player?.id ||
-      simulation.redPlayerId === this.player?.id
+      (simulation.redPlayerId === this.player?.id && !simulation.isGhostBattle)
     ) {
       this.setSimulation(simulation)
     }

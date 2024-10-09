@@ -226,19 +226,6 @@ export default class Simulation extends Schema implements ISimulation {
     this.applyPostEffects()
   }
 
-  getCurrentBattleResult(playerId: string) {
-    if (this.blueTeam.size === 0 && this.redTeam.size > 0) {
-      return playerId === this.bluePlayer?.id
-        ? BattleResult.DEFEAT
-        : BattleResult.WIN
-    } else if (this.redTeam.size === 0 && this.blueTeam.size > 0) {
-      return playerId === this.redPlayer?.id
-        ? BattleResult.DEFEAT
-        : BattleResult.WIN
-    }
-    return BattleResult.DRAW
-  }
-
   getEffects(playerId: string) {
     return playerId === this.bluePlayer?.id
       ? this.blueEffects
@@ -1503,7 +1490,11 @@ export default class Simulation extends Schema implements ISimulation {
       })
     }
 
-    if (this.redPlayer && this.id === this.redPlayer.simulationId) {
+    if (
+      this.redPlayer &&
+      this.id === this.redPlayer.simulationId &&
+      !this.isGhostBattle
+    ) {
       this.redPlayer.addBattleResult(
         this.redPlayer.opponentId,
         this.redPlayer.opponentName,
@@ -1521,12 +1512,9 @@ export default class Simulation extends Schema implements ISimulation {
       )
 
       if (this.winnerId === this.redPlayerId) {
-        if (this.bluePlayerId !== "pve" && !this.isGhostBattle) {
-          this.redPlayer.addMoney(1, true, null)
-          client?.send(Transfer.PLAYER_INCOME, 1)
-        }
-      } else if (!this.isGhostBattle) {
-        // if blue player won against ghost, do not make red player take damage
+        this.redPlayer.addMoney(1, true, null)
+        client?.send(Transfer.PLAYER_INCOME, 1)
+      } else {
         const playerDamage = this.room.computeRoundDamage(
           this.blueTeam,
           this.stageLevel
