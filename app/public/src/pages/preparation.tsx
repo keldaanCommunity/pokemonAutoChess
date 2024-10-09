@@ -77,8 +77,13 @@ export default function Preparation() {
                   r = await client.reconnect(
                     cachedReconnectionToken
                   )
+                  if (r.name !== "preparation") {
+                    throw new Error(
+                      `Expected to join a preparation room but joined ${r.name} instead`
+                    )
+                  }
                 } catch (error) {
-                  logger.log(error)
+                  logger.error(error)
                   localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
                   dispatch(resetPreparation())
                   navigate("/lobby")
@@ -250,20 +255,22 @@ export default function Preparation() {
     }
   })
 
+  const leavePreparationRoom = async () => {
+    if (room?.connection.isOpen) {
+      await room.leave(true)
+    }
+    localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
+    dispatch(resetPreparation())
+    navigate("/lobby")
+    playSound(SOUNDS.LEAVE_ROOM)
+  }
+
   return (
     <div className="preparation-page">
       <MainSidebar
         page="preparation"
         leaveLabel={t("leave_room")}
-        leave={async () => {
-          if (room?.connection.isOpen) {
-            await room.leave(true)
-          }
-          localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
-          dispatch(resetPreparation())
-          navigate("/lobby")
-          playSound(SOUNDS.LEAVE_ROOM)
-        }}
+        leave={leavePreparationRoom}
       />
       <main>
         <PreparationMenu />

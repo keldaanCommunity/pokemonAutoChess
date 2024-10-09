@@ -311,6 +311,12 @@ export async function joinExistingPreparationRoom(
       const room: Room<PreparationState> = await client.joinById(roomId, {
         idToken: token
       })
+      if (room.name !== "preparation") {
+        room.connection.isOpen && room.leave(false)
+        throw new Error(
+          `Expected to join a preparation room but joined ${room.name} instead`
+        )
+      }
       localStore.set(
         LocalStoreKeys.RECONNECTION_PREPARATION,
         {

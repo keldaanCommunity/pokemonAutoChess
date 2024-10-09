@@ -968,6 +968,7 @@ export class JoinOrOpenRoomCommand extends Command<
       case GameMode.QUICKPLAY: {
         const existingQuickplay = this.room.rooms?.find(
           (room) =>
+            room.name === "preparation" &&
             room.metadata?.gameMode === GameMode.QUICKPLAY &&
             room.clients < MAX_PLAYERS_PER_GAME
         )
@@ -983,6 +984,7 @@ export class JoinOrOpenRoomCommand extends Command<
         const userRank = getRank(user.elo)
         const existingRanked = this.room.rooms?.find(
           (room) =>
+            room.name === "preparation" &&
             room.metadata?.gameMode === GameMode.RANKED &&
             room.metadata?.minRank === userRank &&
             room.clients < MAX_PLAYERS_PER_GAME
