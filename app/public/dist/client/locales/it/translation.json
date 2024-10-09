@@ -388,7 +388,9 @@
     "ROAR": "Boato",
     "INFESTATION": "Assillo",
     "IVY_CUDGEL": "Clava di Liane",
-    "FORCE_PALM": "Palmoforza"
+    "FORCE_PALM": "Palmoforza",
+    "THUNDER_CAGE": "Elettrogabbia",
+    "HEADBUTT": "Bottintesta"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1614,7 +1616,9 @@
     "ROAR": "Spazza via il bersaglio. Se il bersaglio colpisce un muro, gli vengono inflitti [10,20,40,SP] SPECIAL. Se colpisce un altro Pokèmon, entrambi subiscono SPECIAL.",
     "INFESTATION": "Infliggi [10,SP] SPECIAL al bersaglio per ogni Pokèmon BUG alleato e piazza il BUG più forte nella panchina durante il combattimento.",
     "IVY_CUDGEL": "Infliggi [100,SP] SPECIAL al bersaglio.",
-    "FORCE_PALM": "L'utilizzatore infligge [60,SP] + il 10% dei HP massimi come SPECIAL e causa PARALYSIS per 6 secondi. Se era già sotto PARALYSIS, infliggi [40,SP] SPECIAL bonus e spingilo via."
+    "FORCE_PALM": "L'utilizzatore infligge [60,SP] + il 10% dei HP massimi come SPECIAL e causa PARALYSIS per 6 secondi. Se era già sotto PARALYSIS, infliggi [40,SP] SPECIAL bonus e spingilo via.",
+    "THUNDER_CAGE": "Intrappola il bersaglio e i nemici adiacenti in una gabbia elettrica che infligge [60,SP] SPECIAL e causa LOCKED e PARALYSIS per 3 secondi.",
+    "HEADBUTT": "Infliggi [20,40,80,SP] SPECIAL al bersaglio e causa FLINCH per 5 secondi. Raddoppia il danno se il bersaglio ha uno SHIELD."
   },
   "effect": {
     "INGRAIN": "Radicamento",
@@ -2349,9 +2353,9 @@
     "FOSSIL": "Al loro primo KO, i Pokèmon FOSSIL tornano in vita con un aumento dell'ATK",
     "SOUND": "I Pokèmon SOUND emettono un verso quando usano le loro abilità, svegliando gli alleati addormentati e dando loro statistiche bonus",
     "ARTIFICIAL": "I Pokèmon ARTIFICIAL forniscono oggetti unici e guadagnano ATK, AP e SHIELD quando tengono gli oggetti.",
-    "BABY": "I BABY possono portarti uova di Pokèmon per confortarti dopo una sconfitta {{additionalInfo}}",
-    "BABY_EGG_CHANCE": "\nPossibilità attuale di trovare un Uovo dopo una sconfitta: {{eggChance}}%",
-    "BABY_GOLDEN_EGG_CHANCE": "\nPossibilità attuale di trovare un Uovo Dorato dopo una sconfitta: {{eggChance}}%",
+    "BABY": "I BABY possono portarti uova di Pokèmon per confortarti dopo una sconfitta{{additionalInfo}}",
+    "BABY_EGG_CHANCE": "\n\nPossibilità attuale di trovare un Uovo dopo una sconfitta: {{eggChance}}%",
+    "BABY_GOLDEN_EGG_CHANCE": "\n\nPossibilità attuale di trovare un Uovo Dorato dopo una sconfitta: {{eggChance}}%",
     "LIGHT": "La LIGHT rivela un punto di luce sul campo di battaglia. L'unità sotto questa luce all'inizio del combattimento ottiene bonus unici.",
     "WILD": "I Pokémon WILD ricevono ATK incrementato, si muovono più velocemente, e hanno il 25% di possibilità di infliggere WOUND al bersaglio. Per ogni STAR di ogni Pokémon WILD sul campo, ottieni +1% di possibilità di trovare un WILD nel tuo negozio + 5% di possibilità durante i round PvE {{additionalInfo}}",
     "WILD_ADDITIONAL": "\nPossibilità attuale di trovare un Pokèmon WILD: {{wildChance}}%",
@@ -2901,7 +2905,7 @@
   "others": "Altri",
   "thanks_to": "Grazie a",
   "tutorial_work": "per il suo lavoro sui video tutorial!",
-  "all": "Tutte le",
+  "all": "Tutte le sinergie",
   "weather_dominant_hint": "Il tipo dominante di Pokèmon sul tabellone durante una battaglia può influenzare il meteo. Il meteo ha vari effetti su tutti i Pokèmon della tua squadra e dell'avversario.",
   "weather_dominant_hint2": "Richiede un certo numero di Pokèmon di un certo tipo sul tabellone per cambiare il meteo. Alcuni Pokèmon potenti hanno anche la capacità di cambiare il tempo da soli.",
   "region_hint1": "Alcuni Pokèmon possono essere trovati solo in alcune regioni, o è possibile che delle varianti regionali rimpiazzino la loro forma base.",
@@ -2969,6 +2973,8 @@
   "key_desc_sell": "Vendi Pokèmon puntato col mouse",
   "key_desc_buy_xp": "Compra esperienza",
   "key_desc_refresh": "Aggiorna negozio",
+  "key_desc_lock": "Blocca/sblocca negozio",
+  "key_desc_switch": "Cambia tra panchina e terreno",
   "key_desc_avatar_anim": "Esegui animazioni dell'avatar",
   "key_desc_avatar_emotes": "Mostra menù emote",
   "key_desc_avatar_show_emote": "Usa emote",
@@ -3224,6 +3230,8 @@
     "arceus_rate": "Probabilità di trovare Arceus tra le scelte del livello 20",
     "fishing_rarity_rate": "Qualità pesca basata sulla qualità dell'amo",
     "fishing_rarity_rate_description": "La qualità dell'amo che usi per pescare influenza la rarità dei Pokèmon che puoi catturare",
+    "round_damage_calculation": "Calcolo dei danni del round",
+    "round_damage_calculation_description": "Il danno inflitto ai giocatori dopo aver perso un round è calcolato così: Danni del round = (livello dello stage/2) + (numero di Pokèmon nemici rimasti vivi); il risultato poi viene arrotondato, i cloni e i Pokèmon evocati durante il combattimento non contano nella formula.",
     "pool_size_per_category": "Dimensione dell'insieme per categoria",
     "pool_size_per_category_description": "I Pokèmon che puoi trovare nei negozi sono presi da un insieme condiviso da tutti i giocatori. Il numero degli esemplari di ogni Pokèmon dentro questo insieme dipende dalla sua rarità e dal numero dei suoi stadi di evoluzione."
   },
