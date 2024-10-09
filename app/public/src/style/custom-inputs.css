@@ -123,6 +123,7 @@ select {
   background-color: var(--color-bg-secondary);
   color: white;
   cursor: var(--cursor-hover);
+  box-shadow: inset -6px -6px 0px 0px #00000030, var(--shadow-clickable);
 }
 
 select.is-light {
