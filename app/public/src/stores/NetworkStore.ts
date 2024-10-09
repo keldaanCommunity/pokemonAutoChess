@@ -81,7 +81,7 @@ export const networkSlice = createSlice({
       state.lobby = action.payload
       state.preparation?.connection.isOpen && state.preparation?.leave(true)
       state.preparation = undefined
-      state.game?.connection.isOpen && state.game?.leave(true)
+      state.game?.connection.close() // still allow to reconnect if left by mistake
       state.game = undefined
       state.after?.connection.isOpen && state.after?.leave(true)
       state.after = undefined
@@ -90,7 +90,7 @@ export const networkSlice = createSlice({
       state.preparation = action.payload
       state.lobby?.connection.isOpen && state.lobby?.leave(true)
       state.lobby = undefined
-      state.game?.connection.isOpen && state.game?.leave(true)
+      state.game?.connection.close() // still allow to reconnect if left by mistake
       state.game = undefined
       state.after?.connection.isOpen && state.after?.leave(true)
       state.after = undefined
@@ -106,7 +106,7 @@ export const networkSlice = createSlice({
     },
     joinAfter: (state, action: PayloadAction<Room<AfterGameState>>) => {
       state.after = action.payload
-      state.game?.connection.isOpen && state.game?.leave(true)
+      state.game?.connection.close() // still allow to reconnect if left by mistake
       state.game = undefined
       state.lobby?.connection.isOpen && state.lobby?.leave(true)
       state.lobby = undefined
