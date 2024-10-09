@@ -1232,7 +1232,11 @@
     "FRIGIBAX": "Frospino",
     "ARCTIBAX": "Cryospino",
     "BAXCALIBUR": "Espinodon",
-    "BINACLE": "Bithora"
+    "BINACLE": "Bithora",
+    "BARBARACLE": "Thanathora",
+    "SKARMORY": "Panzaeron",
+    "DURANT": "Fermicula",
+    "IRON_HANDS": "Eisenhand"
   },
   "ability_description": {
     "SOFT_BOILED": "Heilt alle Statuseffekte und gewährt jedem Verbündeten [20,40,80,SP] SHIELD.",
