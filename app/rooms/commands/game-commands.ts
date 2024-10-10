@@ -634,6 +634,10 @@ export class OnDragDropItemCommand extends Command<
       removeInArray(player.items, item)
     }
 
+    if (pokemon.items.has(Item.SHINY_CHARM)) {
+      pokemon.shiny = true
+    }
+
     this.room.checkEvolutionsAfterItemAcquired(playerId, pokemon)
 
     player.updateSynergies()

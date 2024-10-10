@@ -16,3 +16,5 @@
 - Fixed a bug where the player was not able to refresh the shop if they have free shop rerolls but zero gold
 
 # Misc
+
+- Pokemons become shiny when given Shiny Charm
