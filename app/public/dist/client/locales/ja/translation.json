@@ -11,6 +11,11 @@
     "HATCH": "ハッチ",
     "SPECIAL": "スペシャル"
   },
+  "pool": {
+    "regular": "標準",
+    "additional": "追加",
+    "regional": "リージョン"
+  },
   "damage": {
     "SPECIAL": "特殊ダメージ",
     "PHYSICAL": "物理ダメージ",
