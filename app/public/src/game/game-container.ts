@@ -161,6 +161,7 @@ class GameContainer {
         "targetY",
         "team",
         "index",
+        "shiny",
         "skill",
         "stars",
         "types"
@@ -378,7 +379,8 @@ class GameContainer {
           "action",
           "hp",
           "atk",
-          "ap"
+          "ap",
+          "shiny"
         ]
         fields.forEach((field) => {
           pokemon.listen(field, (value, previousValue) => {

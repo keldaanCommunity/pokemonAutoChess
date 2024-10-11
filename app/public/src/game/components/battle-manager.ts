@@ -768,6 +768,16 @@ export default class BattleManager {
             false
           )
         }
+      } else if (field === "shiny") {
+        if (pkm.shiny !== value) {
+          pkm.shiny = value as IPokemonEntity["shiny"]
+          this.animationManager.animatePokemon(
+            pkm,
+            PokemonActionState.IDLE,
+            this.flip,
+            false
+          )
+        }
       } else if (field === "skill") {
         pkm.skill = value as IPokemonEntity["skill"]
         if (pkm.detail && pkm.detail instanceof PokemonDetail) {
