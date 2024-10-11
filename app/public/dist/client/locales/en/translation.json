@@ -1746,7 +1746,7 @@
     "STRENGTH": "Gain 25 SHIELD",
     "ENDURE": "Gain 35 SHIELD",
     "PURE_POWER": "Gain 50 SHIELD",
-    "INGRAIN": "Restore 8 HP every 2 seconds. Get a berry tree.",
+    "INGRAIN": "Restore 7 HP every 2 seconds. Get a berry tree.",
     "GROWTH": "Restore 15 HP every 2 seconds. Get another berry tree.",
     "SPORE": "Restore 30 HP every 2 seconds. Get a third berry tree.",
     "BLAZE": "30% chance to BURN",

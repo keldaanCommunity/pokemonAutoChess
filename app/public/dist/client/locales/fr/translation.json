@@ -1746,7 +1746,7 @@
     "STRENGTH": "Gagne 25 SHIELD",
     "ENDURE": "Gagne 35 SHIELD",
     "PURE_POWER": "Gagne 50 SHIELD",
-    "INGRAIN": "Restaure 8 HP toutes les 2 secondes. Un arbre à baies apparaît.",
+    "INGRAIN": "Restaure 7 HP toutes les 2 secondes. Un arbre à baies apparaît.",
     "GROWTH": "Restaure 15 HP toutes les 2 secondes. Deux arbres à baies sont disponibles.",
     "SPORE": "Restaure 30 HP toutes les 2 secondes. Trois arbres à baies sont disponibles.",
     "BLAZE": "30 % de chances de BURN",
