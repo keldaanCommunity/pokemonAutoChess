@@ -42,15 +42,3 @@ export const WeatherAssociatedToSynergy: Map<Synergy, Weather> = new Map([
 ])
 
 export const SynergyAssociatedToWeather = reverseMap(WeatherAssociatedToSynergy)
-
-export const WeatherEffects: Map<Weather, Effect> = new Map([
-  [Weather.SUN, Effect.SUN],
-  [Weather.RAIN, Effect.RAIN],
-  [Weather.SANDSTORM, Effect.SANDSTORM],
-  [Weather.MISTY, Effect.MISTY],
-  [Weather.SNOW, Effect.SNOW],
-  [Weather.STORM, Effect.STORM],
-  [Weather.NIGHT, Effect.NIGHT],
-  [Weather.WINDY, Effect.WINDY],
-  [Weather.BLOODMOON, Effect.BLOODMOON]
-])

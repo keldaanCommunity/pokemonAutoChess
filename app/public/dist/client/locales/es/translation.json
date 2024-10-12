@@ -2033,12 +2033,7 @@
     "GOLD_BOTTLE_CAP": "+1% CRIT_CHANCE y CRIT_POWER por GOLD que tengas. Obtén 1 GOLD por KO, y un premio de 5 GOLD si elimina al ultimo enemigo.",
     "ABSORB_BULB": "Toda la reducción de daño es absorbida por el tubérculo. Una vez pasados los 50% HP, el tubérculo explota, infligiendo todo el daño absorbido a las unidades enemigas adyacentes como SPECIAL.",
     "SACRED_ASH": "Da RESURECTION. Después de revivir, hasta 3 aliados ya noqueados son revividos también, pero sin objetos.",
-    "COMET_SHARD": "Empieza la ronda lanzándose como un cometa sobre un enemigo en el lado opuesto del tablero, infligiendo 300% ATK como SPECIAL al objetivo y a los enemigos adyacentes, y obteniendo PROTECT por 3 segundos.",
-    "DAMP_ROCK": "Da sinergia WATER y cuenta por 3 para RAIN. Sólo se puede usar en Pokémon ROCK",
-    "ICY_ROCK": "Da sinergia ICE y cuenta por 3 para SNOW. Sólo se puede usar en Pokémon ROCK",
-    "HEAT_ROCK": "Da sinergia FIRE y cuenta por 3 para SUN. Sólo se puede usar en Pokémon ROCK",
-    "SMOOTH_ROCK": "Da sinergia GROUND y cuenta por 3 para SANDSTORM. Sólo se puede usar en Pokémon ROCK",
-    "BLACK_AUGURITE": "Da sinergia DARK y cuenta por 3 para NIGHT. Sólo se puede usar en Pokémon ROCK"
+    "COMET_SHARD": "Empieza la ronda lanzándose como un cometa sobre un enemigo en el lado opuesto del tablero, infligiendo 300% ATK como SPECIAL al objetivo y a los enemigos adyacentes, y obteniendo PROTECT por 3 segundos."
   },
   "passive_description": {
     "NONE": "sin pasivo",

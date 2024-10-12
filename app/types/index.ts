@@ -373,6 +373,8 @@ export interface IPlayer {
   totalMoneyEarned: number
   totalPlayerDamageDealt: number
   eggChance: number
+  lightX: number
+  lightY: number
 }
 
 export interface IPokemon {
@@ -469,6 +471,7 @@ export function instanceofPokemonEntity(
 export interface IPokemonEntity {
   simulation: ISimulation
   refToBoardPokemon: IPokemon
+  get player(): IPlayer | undefined
   applyStat(stat: Stat, value: number): void
   addAbilityPower(
     value: number,

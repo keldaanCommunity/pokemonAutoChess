@@ -2048,12 +2048,7 @@
     "GOLD_BOTTLE_CAP": "+1% CRIT_CHANCE und CRIT_POWER pro GOLD, das Sie haben. Gewinnen Sie 1 GOLD pro KO und einen Jackpot von 5 GOLD, wenn Sie den letzten Feind eliminieren.",
     "ABSORB_BULB": "Die gesamte Schadensreduzierung wird von der Glühbirne absorbiert. Sobald die Glühbirne unter 50 % HP fällt, explodiert sie und fügt benachbarten gegnerischen Einheiten den gesamten absorbierten Schaden als SPECIAL zu.",
     "SACRED_ASH": "Ermöglicht RESURECTION. Nach der Wiederbelebung werden bis zu 3 Verbündete KO wiederbelebt, jedoch ohne Gegenstände.",
-    "COMET_SHARD": "Beginnt die Runde, indem es wie ein Komet auf einen Feind auf der gegenüberliegenden Seite des Spielfelds herabstößt und dem Ziel und benachbarten Feinden 300 % ATK als SPECIAL zufügt, während es 3 Sekunden lang PROTECT erhält.",
-    "DAMP_ROCK": "Verleiht WATER Synergie und zählt für 3 gegen RAIN. Kann nur bei ROCK Pokémon eingesetzt werden.",
-    "ICY_ROCK": "Verleiht ICE Synergie und zählt 3 Punkte für SNOW. Kann nur bei ROCK Pokémon eingesetzt werden.",
-    "HEAT_ROCK": "Verleiht FIRE Synergie und zählt 3 Punkte für SUN. Kann nur bei ROCK Pokémon eingesetzt werden.",
-    "SMOOTH_ROCK": "Verleiht GROUND Synergie und zählt 3 Punkte für SANDSTORM. Kann nur bei ROCK Pokémon eingesetzt werden.",
-    "BLACK_AUGURITE": "Verleiht DARK Synergie und zählt 3 für NIGHT. Kann nur bei ROCK Pokémon eingesetzt werden."
+    "COMET_SHARD": "Beginnt die Runde, indem es wie ein Komet auf einen Feind auf der gegenüberliegenden Seite des Spielfelds herabstößt und dem Ziel und benachbarten Feinden 300 % ATK als SPECIAL zufügt, während es 3 Sekunden lang PROTECT erhält."
   },
   "passive_description": {
     "NONE": "Keine Passive",

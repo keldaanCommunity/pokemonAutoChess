@@ -8,7 +8,12 @@ import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../models/precomputed/precomputed
 import { getPortraitPath } from "../public/src/pages/utils/utils"
 import GameRoom from "../rooms/game-room"
 import { IPokemon, IPokemonEntity, ISimulation, Transfer } from "../types"
-import { BOARD_HEIGHT, BOARD_WIDTH, ItemStats } from "../types/Config"
+import {
+  BOARD_HEIGHT,
+  BOARD_WIDTH,
+  ItemStats,
+  SynergyTriggers
+} from "../types/Config"
 import { Effect } from "../types/enum/Effect"
 import {
   AttackType,
@@ -20,12 +25,18 @@ import {
   Stat,
   Team
 } from "../types/enum/Game"
-import { Berries, CraftableItems, Item } from "../types/enum/Item"
+import {
+  Berries,
+  CraftableItems,
+  Item,
+  WeatherRocksByWeather
+} from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
-import { Weather, WeatherEffects } from "../types/enum/Weather"
+import { Weather } from "../types/enum/Weather"
 import { IPokemonData } from "../types/interfaces/PokemonData"
+import { count } from "../utils/array"
 import { logger } from "../utils/logger"
 import {
   chance,
@@ -94,7 +105,6 @@ export default class Simulation extends Schema implements ISimulation {
       })
     })
 
-    // update effects after castform transformation
     bluePlayer.effects.forEach((e) => this.blueEffects.add(e))
     redPlayer?.effects.forEach((e) => this.redEffects.add(e))
 
@@ -123,107 +133,28 @@ export default class Simulation extends Schema implements ISimulation {
         }
       })
     }
-    ;[
-      {
-        team: blueTeam,
-        entityTeam: this.blueTeam,
-        effects: this.blueEffects,
-        player: bluePlayer
-      },
-      {
-        team: redTeam,
-        entityTeam: this.redTeam,
-        effects: this.redEffects,
-        player: redPlayer
-      }
-    ].forEach(
-      ({
-        team,
-        entityTeam,
-        effects,
-        player
-      }: {
-        team: MapSchema<Pokemon>
-        entityTeam: MapSchema<IPokemonEntity>
-        effects: Set<Effect>
-        player: Player | undefined
-      }) => {
-        if (player) {
-          if (
-            [
-              Effect.COCOON,
-              Effect.INFESTATION,
-              Effect.HORDE,
-              Effect.HEART_OF_THE_SWARM
-            ].some((e) => effects.has(e))
-          ) {
-            const bugTeam = new Array<IPokemon>()
-            team.forEach((pkm) => {
-              if (pkm.types.has(Synergy.BUG) && pkm.positionY != 0) {
-                bugTeam.push(pkm)
-              }
-            })
-            bugTeam.sort((a, b) => getUnitScore(b) - getUnitScore(a))
-
-            let numberToSpawn = 0
-            if (effects.has(Effect.COCOON)) {
-              numberToSpawn = 1
-            }
-            if (effects.has(Effect.INFESTATION)) {
-              numberToSpawn = 2
-            }
-            if (effects.has(Effect.HORDE)) {
-              numberToSpawn = 3
-            }
-            if (effects.has(Effect.HEART_OF_THE_SWARM)) {
-              numberToSpawn = 5
-            }
-
-            for (let i = 0; i < numberToSpawn; i++) {
-              const bug = PokemonFactory.createPokemonFromName(
-                bugTeam[i].name,
-                player
-              )
-              const teamIndex = team === blueTeam ? 0 : 1 // WARN: do not use player.team here because it can be a ghost opponent
-              const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
-                bugTeam[i],
-                teamIndex
-              )
-              this.addPokemon(bug, coord.x, coord.y, teamIndex, true)
-            }
-          }
-
-          player.board.forEach((pokemon) => {
-            const entity = values(entityTeam).find(
-              (p) => p.refToBoardPokemon === pokemon
-            )
-            if (entity) {
-              pokemon.afterSimulationStart({
-                simulation: this,
-                player,
-                team: entityTeam,
-                entity
-              })
-            }
-
-            if (pokemon.items.has(Item.ROTOM_PHONE)) {
-              const teamIndex = team === blueTeam ? 0 : 1 // WARN: do not use player.team here because it can be a ghost opponent
-              const rotomDrone = PokemonFactory.createPokemonFromName(
-                Pkm.ROTOM_DRONE,
-                player
-              )
-              const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
-                pokemon,
-                teamIndex
-              )
-              this.addPokemon(rotomDrone, coord.x, coord.y, teamIndex, true)
-            }
-          })
-        }
-      }
-    )
 
     this.applyPostEffects()
+
+    for (const player of [this.bluePlayer, this.redPlayer]) {
+      if (player) {
+        const entityTeam =
+          player.team === Team.BLUE_TEAM ? this.blueTeam : this.redTeam
+        player.board.forEach((pokemon) => {
+          const entity = values(entityTeam).find(
+            (p) => p.refToBoardPokemon === pokemon
+          )
+          if (entity) {
+            pokemon.afterSimulationStart({
+              simulation: this,
+              player,
+              team: entityTeam,
+              entity
+            })
+          }
+        })
+      }
+    }
   }
 
   getEffects(playerId: string) {
@@ -269,7 +200,6 @@ export default class Simulation extends Schema implements ISimulation {
     pokemonEntity.isClone = isClone
     this.applySynergyEffects(pokemonEntity)
     this.applyItemsEffects(pokemonEntity)
-    this.applyWeatherEffects(pokemonEntity)
     this.board.setValue(
       pokemonEntity.positionX,
       pokemonEntity.positionY,
@@ -509,28 +439,171 @@ export default class Simulation extends Schema implements ISimulation {
     }
   }
 
-  applyWeatherEffects(pokemon: PokemonEntity) {
-    const weatherEffect = WeatherEffects.get(this.weather)
-    if (weatherEffect) {
-      switch (weatherEffect) {
-        case Effect.WINDY:
-          pokemon.addDodgeChance(
-            pokemon.types.has(Synergy.FLYING) ? 0.2 : 0.1,
-            pokemon,
-            0,
-            false
-          )
-          break
-        case Effect.NIGHT:
-          pokemon.addCritChance(10, pokemon, 0, false)
-          break
+  applyWeatherEffects(pokemon: IPokemonEntity) {
+    if (this.weather === Weather.WINDY) {
+      const nbFloatStones = pokemon.player
+        ? count(pokemon.player.items, Item.FLOAT_STONE)
+        : 0
+      pokemon.addDodgeChance(
+        (pokemon.types.has(Synergy.FLYING) ? 0.2 : 0.1) + nbFloatStones * 0.05,
+        pokemon,
+        0,
+        false
+      )
+    } else if (this.weather === Weather.NIGHT) {
+      const nbBlackAugurite = pokemon.player
+        ? count(pokemon.player.items, Item.BLACK_AUGURITE)
+        : 0
+
+      pokemon.addCritChance(10 + 5 * nbBlackAugurite, pokemon, 0, false)
+    } else if (this.weather === Weather.MISTY) {
+      const nbMistStones = pokemon.player
+        ? count(pokemon.player.items, Item.MIST_STONE)
+        : 0
+      if (nbMistStones > 0) {
+        pokemon.addSpecialDefense(2 * nbMistStones, pokemon, 0, false)
       }
-      pokemon.effects.add(weatherEffect)
     }
   }
 
   applyPostEffects() {
-    ;[this.blueTeam, this.redTeam].forEach((team) => {
+    /*
+  in order:
+  - spawns (bug, rotom, white flute, etc)
+  - synergy effects (dragon, normal, etc)
+  - weather effects
+  - support items effects (exp share, gracidea etc)
+  - target selection effects (ghost curse, comet shard etc)
+  */
+
+    // SPAWNS (bug, rotom, white flute, etc)
+    for (const team of [this.blueTeam, this.redTeam]) {
+      const teamIndex = team === this.blueTeam ? 0 : 1
+      const player = team === this.blueTeam ? this.bluePlayer : this.redPlayer
+      const effects =
+        team === this.blueTeam ? this.blueEffects : this.redEffects
+
+      if (
+        [
+          Effect.COCOON,
+          Effect.INFESTATION,
+          Effect.HORDE,
+          Effect.HEART_OF_THE_SWARM
+        ].some((e) => effects.has(e))
+      ) {
+        const bugTeam = new Array<IPokemonEntity>()
+        team.forEach((pkm) => {
+          if (pkm.types.has(Synergy.BUG) && pkm.positionY != 0) {
+            bugTeam.push(pkm)
+          }
+        })
+        bugTeam.sort((a, b) => getUnitScore(b) - getUnitScore(a))
+
+        let numberToSpawn = 0
+        if (effects.has(Effect.COCOON)) {
+          numberToSpawn = 1
+        }
+        if (effects.has(Effect.INFESTATION)) {
+          numberToSpawn = 2
+        }
+        if (effects.has(Effect.HORDE)) {
+          numberToSpawn = 3
+        }
+        if (effects.has(Effect.HEART_OF_THE_SWARM)) {
+          numberToSpawn = 5
+        }
+
+        for (let i = 0; i < numberToSpawn; i++) {
+          const bug = PokemonFactory.createPokemonFromName(
+            bugTeam[i].name,
+            player
+          )
+          const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
+            bugTeam[i],
+            teamIndex
+          )
+          this.addPokemon(bug, coord.x, coord.y, teamIndex, true)
+        }
+      }
+
+      team.forEach((pokemon) => {
+        if (pokemon.items.has(Item.ROTOM_PHONE)) {
+          const teamIndex = team === this.blueTeam ? 0 : 1 // WARN: do not use player.team here because it can be a ghost opponent
+          const rotomDrone = PokemonFactory.createPokemonFromName(
+            Pkm.ROTOM_DRONE,
+            pokemon.player
+          )
+          const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
+            pokemon,
+            teamIndex
+          )
+          this.addPokemon(rotomDrone, coord.x, coord.y, teamIndex, true)
+        }
+
+        if (pokemon.items.has(Item.WHITE_FLUTE)) {
+          const wilds = PRECOMPUTED_POKEMONS_PER_TYPE[Synergy.WILD].map((p) =>
+            getPokemonData(p)
+          )
+          const spawns: IPokemonData[] = []
+          const pickWild = (rarity: Rarity, tier: number) => {
+            const randomWild = pickRandomIn(
+              wilds.filter((p) => p.rarity === rarity && p.stars === tier)
+            )
+            if (randomWild) {
+              spawns.push(randomWild)
+            } else {
+              logger.info("no pokemon found for white flute call", rarity, tier)
+            }
+          }
+
+          if (this.stageLevel <= 5) {
+            pickWild(Rarity.COMMON, 1)
+            pickWild(Rarity.COMMON, 1)
+            pickWild(Rarity.UNCOMMON, 1)
+          } else if (this.stageLevel <= 10) {
+            pickWild(Rarity.COMMON, 2)
+            pickWild(Rarity.COMMON, 1)
+            pickWild(Rarity.UNCOMMON, 1)
+          } else if (this.stageLevel <= 15) {
+            pickWild(Rarity.UNCOMMON, 1)
+            pickWild(Rarity.COMMON, 2)
+            pickWild(Rarity.RARE, 1)
+          } else if (this.stageLevel <= 20) {
+            pickWild(Rarity.UNCOMMON, 2)
+            pickWild(Rarity.RARE, 1)
+            pickWild(Rarity.EPIC, 1)
+          } else if (this.stageLevel <= 25) {
+            pickWild(Rarity.UNCOMMON, 2)
+            pickWild(Rarity.RARE, 2)
+            pickWild(Rarity.EPIC, 1)
+          } else if (this.stageLevel <= 30) {
+            pickWild(Rarity.RARE, 2)
+            pickWild(Rarity.EPIC, 1)
+            pickWild(Rarity.EPIC, 2)
+          } else if (this.stageLevel <= 35) {
+            pickWild(Rarity.RARE, 2)
+            pickWild(Rarity.EPIC, 2)
+            pickWild(Rarity.UNIQUE, 3)
+          } else {
+            pickWild(Rarity.EPIC, 2)
+            pickWild(Rarity.UNIQUE, 3)
+            pickWild(Rarity.ULTRA, 2)
+          }
+
+          spawns.forEach((spawn) => {
+            const mon = PokemonFactory.createPokemonFromName(spawn.name)
+            const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
+              pokemon,
+              pokemon.team
+            )
+            this.addPokemon(mon, coord.x, coord.y, pokemon.team, true)
+          })
+        }
+      })
+    }
+
+    // SYNERGY EFFECTS (dragon, normal, etc)
+    for (const team of [this.blueTeam, this.redTeam]) {
       team.forEach((pokemon) => {
         if (
           pokemon.effects.has(Effect.DRAGON_SCALES) ||
@@ -568,6 +641,21 @@ export default class Simulation extends Schema implements ISimulation {
             }
           })
         }
+      })
+    }
+
+    // WEATHER EFFECTS
+    if (this.weather !== Weather.NEUTRAL) {
+      for (const team of [this.blueTeam, this.redTeam]) {
+        team.forEach((pokemon) => {
+          this.applyWeatherEffects(pokemon)
+        })
+      }
+    }
+
+    // SUPPORT ITEMS EFFECTS (exp share, gracidea etc)
+    for (const team of [this.blueTeam, this.redTeam]) {
+      team.forEach((pokemon) => {
         if (pokemon.items.has(Item.LUCKY_EGG)) {
           ;[-1, 0, 1].forEach((offset) => {
             const ally = this.board.getValue(
@@ -638,67 +726,12 @@ export default class Simulation extends Schema implements ISimulation {
             lovers[1].ap = bestAP
           }
         }
+      })
+    }
 
-        if (pokemon.items.has(Item.WHITE_FLUTE)) {
-          const wilds = PRECOMPUTED_POKEMONS_PER_TYPE[Synergy.WILD].map((p) =>
-            getPokemonData(p)
-          )
-          const spawns: IPokemonData[] = []
-          const pickWild = (rarity: Rarity, tier: number) => {
-            const randomWild = pickRandomIn(
-              wilds.filter((p) => p.rarity === rarity && p.stars === tier)
-            )
-            if (randomWild) {
-              spawns.push(randomWild)
-            } else {
-              logger.info("no pokemon found for white flute call", rarity, tier)
-            }
-          }
-
-          if (this.stageLevel <= 5) {
-            pickWild(Rarity.COMMON, 1)
-            pickWild(Rarity.COMMON, 1)
-            pickWild(Rarity.UNCOMMON, 1)
-          } else if (this.stageLevel <= 10) {
-            pickWild(Rarity.COMMON, 2)
-            pickWild(Rarity.COMMON, 1)
-            pickWild(Rarity.UNCOMMON, 1)
-          } else if (this.stageLevel <= 15) {
-            pickWild(Rarity.UNCOMMON, 1)
-            pickWild(Rarity.COMMON, 2)
-            pickWild(Rarity.RARE, 1)
-          } else if (this.stageLevel <= 20) {
-            pickWild(Rarity.UNCOMMON, 2)
-            pickWild(Rarity.RARE, 1)
-            pickWild(Rarity.EPIC, 1)
-          } else if (this.stageLevel <= 25) {
-            pickWild(Rarity.UNCOMMON, 2)
-            pickWild(Rarity.RARE, 2)
-            pickWild(Rarity.EPIC, 1)
-          } else if (this.stageLevel <= 30) {
-            pickWild(Rarity.RARE, 2)
-            pickWild(Rarity.EPIC, 1)
-            pickWild(Rarity.EPIC, 2)
-          } else if (this.stageLevel <= 35) {
-            pickWild(Rarity.RARE, 2)
-            pickWild(Rarity.EPIC, 2)
-            pickWild(Rarity.UNIQUE, 3)
-          } else {
-            pickWild(Rarity.EPIC, 2)
-            pickWild(Rarity.UNIQUE, 3)
-            pickWild(Rarity.ULTRA, 2)
-          }
-
-          spawns.forEach((spawn) => {
-            const mon = PokemonFactory.createPokemonFromName(spawn.name)
-            const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
-              pokemon,
-              pokemon.team
-            )
-            this.addPokemon(mon, coord.x, coord.y, pokemon.team, true)
-          })
-        }
-
+    // TARGET SELECTION EFFECTS (ghost curse, comet shard etc)
+    for (const team of [this.blueTeam, this.redTeam]) {
+      team.forEach((pokemon) => {
         if (pokemon.items.has(Item.COMET_SHARD)) {
           pokemon.commands.push(
             new DelayedCommand(() => {
@@ -758,10 +791,6 @@ export default class Simulation extends Schema implements ISimulation {
             }, 100)
           )
         }
-
-        if (pokemon.passive === Passive.SPOT_PANDA) {
-          pokemon.effects.add(Effect.IMMUNITY_CONFUSION)
-        }
       })
 
       const teamEffects =
@@ -796,7 +825,7 @@ export default class Simulation extends Schema implements ISimulation {
       if (teamEffects.has(Effect.CURSE_OF_FATE)) {
         this.applyCurse(Effect.CURSE_OF_FATE, opponentTeam)
       }
-    })
+    }
   }
 
   applyEffects(
@@ -1417,23 +1446,33 @@ export default class Simulation extends Schema implements ISimulation {
     if (this.weather === Weather.STORM) {
       this.stormLightningTimer -= dt
       if (this.stormLightningTimer <= 0 && !this.finished) {
-        this.stormLightningTimer = randomBetween(4000, 8000)
+        this.stormLightningTimer = randomBetween(3000, 6000)
         // trigger lightning
         const x = randomBetween(0, this.board.columns - 1)
         const y = randomBetween(0, this.board.rows - 1)
         //logger.debug('lightning at ' + x + ' ' + y)
         const pokemonOnCell = this.board.getValue(x, y)
-        if (
-          pokemonOnCell &&
-          pokemonOnCell.types.has(Synergy.ELECTRIC) === false
-        ) {
-          pokemonOnCell.handleDamage({
-            damage: 100,
-            board: this.board,
-            attackType: AttackType.SPECIAL,
-            attacker: null,
-            shouldTargetGainMana: false
-          })
+        if (pokemonOnCell) {
+          const nbElectricQuartz = pokemonOnCell.player
+            ? count(pokemonOnCell.player.items, Item.ELECTRIC_QUARTZ)
+            : 0
+          if (nbElectricQuartz > 0) {
+            pokemonOnCell.addShield(
+              50 * nbElectricQuartz,
+              pokemonOnCell,
+              0,
+              false
+            )
+          }
+          if (pokemonOnCell.types.has(Synergy.ELECTRIC) === false) {
+            pokemonOnCell.handleDamage({
+              damage: 100,
+              board: this.board,
+              attackType: AttackType.SPECIAL,
+              attacker: null,
+              shouldTargetGainMana: false
+            })
+          }
         }
         this.room.broadcast(Transfer.BOARD_EVENT, {
           simulationId: this.id,
@@ -1527,6 +1566,21 @@ export default class Simulation extends Schema implements ISimulation {
           this.bluePlayer.totalPlayerDamageDealt += playerDamage
         }
       }
+
+      if (
+        this.weather !== Weather.NEUTRAL &&
+        (this.redPlayer.synergies.get(Synergy.ROCK) ?? 0) >=
+          SynergyTriggers[Synergy.ROCK][0]
+      ) {
+        const rockCollected = WeatherRocksByWeather.get(this.weather)
+        if (rockCollected) {
+          this.redPlayer.weatherRocks.push(rockCollected)
+          if (this.redPlayer.weatherRocks.length > 3) {
+            this.redPlayer.weatherRocks.shift()
+          }
+          this.redPlayer.updateWeatherRocks()
+        }
+      }
     }
 
     if (this.bluePlayer && this.id === this.bluePlayer.simulationId) {
@@ -1562,6 +1616,21 @@ export default class Simulation extends Schema implements ISimulation {
         }
         if (this.redPlayer) {
           this.redPlayer.totalPlayerDamageDealt += playerDamage
+        }
+      }
+
+      if (
+        this.weather !== Weather.NEUTRAL &&
+        (this.bluePlayer.synergies.get(Synergy.ROCK) ?? 0) >=
+          SynergyTriggers[Synergy.ROCK][0]
+      ) {
+        const rockCollected = WeatherRocksByWeather.get(this.weather)
+        if (rockCollected) {
+          this.bluePlayer.weatherRocks.push(rockCollected)
+          if (this.bluePlayer.weatherRocks.length > 3) {
+            this.bluePlayer.weatherRocks.shift()
+          }
+          this.bluePlayer.updateWeatherRocks()
         }
       }
     }

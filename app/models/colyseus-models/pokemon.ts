@@ -11699,6 +11699,9 @@ export class Spinda extends Pokemon {
   skill = Ability.TEETER_DANCE
   passive = Passive.SPOT_PANDA
   attackSprite = AttackSprite.NORMAL_MELEE
+  afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
+    entity.effects.add(Effect.IMMUNITY_CONFUSION)
+  }
 }
 
 export class Baltoy extends Pokemon {

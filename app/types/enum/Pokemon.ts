@@ -4157,7 +4157,7 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.ARCHEN]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Attack,
     ability: AnimationType.FlapAround,
     emote: AnimationType.Shoot
   },

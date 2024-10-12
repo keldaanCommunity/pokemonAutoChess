@@ -51,6 +51,7 @@ import MovingState from "./moving-state"
 import PokemonState from "./pokemon-state"
 import Simulation from "./simulation"
 import { SimulationCommand } from "./simulation-command"
+import { count } from "../utils/array"
 
 export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -871,7 +872,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     // Synergy effects on hit
 
-    if (this.types.has(Synergy.ICE)) {
+    const nbIcyRocks =
+      this.player && this.simulation.weather === Weather.SNOW
+        ? count(this.player.items, Item.ICY_ROCK)
+        : 0
+    if (this.types.has(Synergy.ICE) || nbIcyRocks > 0) {
       let freezeChance = 0
       if (this.effects.has(Effect.CHILLY)) {
         freezeChance = 0.2
@@ -882,6 +887,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       } else if (this.effects.has(Effect.SHEER_COLD)) {
         freezeChance = 0.5
       }
+      freezeChance += nbIcyRocks * 0.05
       if (chance(freezeChance)) {
         target.status.triggerFreeze(2000, target)
       }
@@ -1015,6 +1021,18 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.items.has(Item.SHELL_BELL)) {
       this.handleHeal(Math.ceil(0.33 * damage), this, 0, false)
+    }
+
+    if (
+      this.simulation.weather === Weather.BLOODMOON &&
+      target.status.wound &&
+      this.player &&
+      this.player.items.includes(Item.BLOOD_STONE)
+    ) {
+      const nbBloodStones = count(this.player.items, Item.BLOOD_STONE)
+      if (nbBloodStones > 0) {
+        this.handleHeal(Math.ceil(0.2 * damage), this, 0, false)
+      }
     }
   }
 
@@ -1592,7 +1610,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     this.simulation.applySynergyEffects(this)
     this.simulation.applyItemsEffects(this)
-    this.simulation.applyWeatherEffects(this)
     this.status.resurection = false // prevent reapplying max revive again
     this.shield = 0 // prevent reapplying shield again
     this.flyingProtection = 0 // prevent flying effects twice
@@ -1747,7 +1764,7 @@ export function getStrongestUnit(pokemons: PokemonEntity[]): PokemonEntity {
   return strongest
 }
 
-export function getUnitScore(pokemon: PokemonEntity | IPokemon) {
+export function getUnitScore(pokemon: IPokemonEntity | IPokemon) {
   let score = 0
   score += 100 * pokemon.items.size
   score += 10 * pokemon.stars

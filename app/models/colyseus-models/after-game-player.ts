@@ -30,9 +30,9 @@ export default class AfterGamePlayer
     name: Synergy
     value: number
   }>()
-  @type("uint8") moneyEarned: number
-  @type("uint8") playerDamageDealt: number
-  @type("uint8") rerollCount: number
+  @type("uint16") moneyEarned: number
+  @type("uint16") playerDamageDealt: number
+  @type("uint16") rerollCount: number
 
   constructor(
     id: string,

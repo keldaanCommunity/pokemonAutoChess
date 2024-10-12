@@ -8,6 +8,7 @@ import { AttackType } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Weather } from "../../types/enum/Weather"
+import { count } from "../../utils/array"
 import { max } from "../../utils/number"
 import { chance } from "../../utils/random"
 
@@ -511,19 +512,25 @@ export default class Status extends Schema implements IStatus {
   updateBurn(dt: number, pkm: PokemonEntity, board: Board) {
     if (this.burnDamageCooldown - dt <= 0) {
       if (this.burnOrigin) {
-        let burnDamage = Math.ceil(pkm.hp * 0.05)
+        let burnDamage = pkm.hp * 0.05
         if (pkm.simulation.weather === Weather.SUN) {
-          burnDamage = Math.round(burnDamage * 1.3)
+          burnDamage *= 1.3
+          const nbHeatRocks = pkm.player
+            ? count(pkm.player.items, Item.HEAT_ROCK)
+            : 0
+          if (nbHeatRocks > 0) {
+            burnDamage *= 1 - 0.2 * nbHeatRocks
+          }
         } else if (pkm.simulation.weather === Weather.RAIN) {
-          burnDamage = Math.round(burnDamage * 0.7)
+          burnDamage *= 0.7
         }
 
         if (pkm.items.has(Item.ASSAULT_VEST)) {
-          burnDamage = Math.round(burnDamage * 0.5)
+          burnDamage *= 0.5
         }
 
         pkm.handleDamage({
-          damage: burnDamage,
+          damage: Math.round(burnDamage),
           board,
           attackType: AttackType.TRUE,
           attacker: this.burnOrigin,
@@ -679,6 +686,12 @@ export default class Status extends Schema implements IStatus {
     ) {
       if (pkm.simulation.weather === Weather.SNOW) {
         duration *= 1.3
+        const nbIcyRocks = pkm.player
+          ? count(pkm.player.items, Item.ICY_ROCK)
+          : 0
+        if (nbIcyRocks > 0) {
+          duration *= 1 - 0.2 * nbIcyRocks
+        }
       } else if (pkm.simulation.weather === Weather.SUN) {
         duration *= 0.7
       }
@@ -860,6 +873,12 @@ export default class Status extends Schema implements IStatus {
       }
       if (pkm.simulation.weather === Weather.STORM) {
         duration *= 1.3
+        const nbElectricQuartz = pkm.player
+          ? count(pkm.player.items, Item.ELECTRIC_QUARTZ)
+          : 0
+        if (nbElectricQuartz > 0) {
+          duration *= 1 - 0.2 * nbElectricQuartz
+        }
       }
 
       duration = this.applyAquaticReduction(duration, pkm)
