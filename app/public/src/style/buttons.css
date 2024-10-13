@@ -57,7 +57,7 @@ button {
 
 .bubbly.red {
   background: #e76e55;
-  box-shadow: inset -6px -6px 0px 0px #8c2022, var(--shadow-clickable);
+  box-shadow: inset -6px -6px 0px 0px #a43436, var(--shadow-clickable);
   color: white;
 }
 
@@ -67,7 +67,7 @@ button {
 
 .bubbly.red:not([disabled]):active {
   background: #761c1e;
-  box-shadow: inset 6px 6px 0px 0px #8c2022, var(--shadow-clickable);
+  box-shadow: inset 6px 6px 0px 0px #a43436, var(--shadow-clickable);
 }
 
 .bubbly.blue {

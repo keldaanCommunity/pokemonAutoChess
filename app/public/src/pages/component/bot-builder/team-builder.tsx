@@ -16,6 +16,11 @@ import PokemonPicker from "./pokemon-picker"
 import SelectedEntity from "./selected-entity"
 import TeamEditor from "./team-editor"
 import "./team-builder.css"
+import { useTranslation } from "react-i18next"
+import { useLocation } from "react-router-dom"
+import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
+import { isOnBench } from "../../../../../models/colyseus-models/pokemon"
+import { values } from "../../../../../utils/schemas"
 
 export default function TeamBuilder(props: {
   bot?: IBot
@@ -24,13 +29,18 @@ export default function TeamBuilder(props: {
   updateBoard: (board: IDetailledPokemon[]) => void
   error?: string
 }) {
+  const { t } = useTranslation()
   const [selection, setSelection] = useState<Item | PkmWithConfig>({
     name: Pkm.MAGIKARP,
     shiny: false,
     emotion: Emotion.NORMAL
   })
 
+  const ingame = useLocation().pathname === "/game"
+  const currentPlayer = useAppSelector(selectCurrentPlayer)
   const [board, setBoard] = useState<IDetailledPokemon[]>(props.board ?? [])
+
+
   useEffect(() => {
     if (props.board) setBoard(props.board) // keep local state in sync with parent prop
   }, [props.board])
@@ -171,9 +181,71 @@ export default function TeamBuilder(props: {
     }
   }
 
+  function snapshot() {
+    try {
+      if (!currentPlayer) return;
+      updateBoard(values(currentPlayer.board).filter(pokemon => !isOnBench(pokemon)).map(p => {
+        return {
+          name: p.name,
+          emotion: p.emotion,
+          shiny: p.shiny,
+          items: values(p.items),
+          x: p.positionX,
+          y: p.positionY
+        }
+      }))
+    } catch (e) {
+      console.error("Failed to snapshot board:", e)
+    }
+  }
+
+  function reset() {
+    updateBoard([])
+  }
+
+  function saveFile() {
+    // save board to local JSON file    
+    const blob = new Blob([JSON.stringify(board)], { type: "application/json" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = "board.json"
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  function loadFile() {
+    // load from local JSON file
+    const input = document.createElement("input")
+    input.type = "file"
+    input.accept = "application/json"
+    input.addEventListener("change", async (e) => {
+      if (!input.files) return
+      const file = input.files![0]
+      const reader = new FileReader()
+      reader.onload = async (e) => {
+        if (!e.target) return
+        const data = JSON.parse(e.target.result as string)
+        if (data.length == 0) {
+          alert("Invalid file")
+        } else {
+          updateBoard(data)
+        }
+      }
+      reader.readAsText(file)
+    })
+    input.click()
+  }
+
   return (
     <div id="team-builder">
       <Synergies synergies={synergies} tooltipPortal={false} />
+      <div className="actions">
+        {ingame && <button className="bubbly blue" onClick={snapshot}><img src="assets/ui/photo.svg" /> {t("snapshot")}</button>}
+        <button className="bubbly dark" onClick={saveFile}><img src="assets/ui/save.svg" /> {t("save")}</button>
+        <button className="bubbly dark" onClick={loadFile}><img src="assets/ui/load.svg" /> {t("load")}</button>
+        <button className="bubbly red" onClick={reset}><img src="assets/ui/trash.svg" /> {t("reset")}</button>
+      </div>
       <TeamEditor
         board={board}
         handleEditorClick={handleEditorClick}

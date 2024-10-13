@@ -29,8 +29,6 @@ export default function Synergies(props: { synergies: [string, number][], toolti
       return s && s[1] > 0
     })
 
-  if (synergies.length === 0) return null;
-
   return (
     <div className="synergies-container my-container">
       <h2 className="synergies-header">{t("synergies")}</h2>
