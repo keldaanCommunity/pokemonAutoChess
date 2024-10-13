@@ -663,7 +663,7 @@ export default abstract class PokemonState {
           ? 30
           : pokemon.effects.has(Effect.GROWTH)
             ? 15
-            : 8
+            : 7
         if (
           pokemon.effects.has(Effect.HYDRATATION) &&
           pokemon.simulation.weather === Weather.RAIN

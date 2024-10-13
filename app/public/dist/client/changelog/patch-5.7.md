@@ -4,6 +4,8 @@
 
 # Changes to Synergies
 
+- Nerf Grass 3: HP healed every 2 seconds: 8 → 7
+
 # Changes to Items
 
 # Gameplay
