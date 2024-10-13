@@ -5,6 +5,7 @@
 # Changes to Synergies
 
 - Rock: weather rocks are no longer immediately available, they are collected after fighting in a certain weather
+- Nerf Grass 3: HP healed every 2 seconds: 8 → 7
 
 # Changes to Items
 
@@ -15,6 +16,8 @@
 
 # UI
 
+- New features for the team planner: snapshot current board, quick reset, save/load local file
+
 # Bugfix
 
 - Locked status now correctly triggers retargetting, and reapply wide lens effect after restoring range
@@ -24,3 +27,4 @@
 # Misc
 
 - Pokemons become shiny when given Shiny Charm
+- Thanks to all the contributors who helped with the translations! 3zukiDOT, Darkatek7, danGuinzo, logannoir, ph8ndstne, Zeleos753, RambonL and more

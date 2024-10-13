@@ -178,7 +178,7 @@ export default function BotBuilder() {
           onClick={() => { setCurrentModal("import") }}
           className="bubbly orange"
         >
-          {t("import")}/{t("load")}
+          {t("import")}
         </button>
         <button
           onClick={() => {
