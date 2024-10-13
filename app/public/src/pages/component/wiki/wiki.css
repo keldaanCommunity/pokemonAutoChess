@@ -260,8 +260,14 @@
 }
 
 #wiki-items {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr auto;
   justify-content: space-evenly;
+}
+
+#wiki-items article {
+  padding: 1em;
 }
 
 #wiki-items ul {
@@ -269,18 +275,20 @@
   flex-wrap: wrap;
   gap: 0;
   padding: 0;
+  margin: 0;
+}
+
+#wiki-items .craftable table {
+  margin: 1em;
 }
 
 #wiki-items .berries {
-  display: grid;
-  grid-template-columns: repeat(5, min-content);
+  grid-column: 1 / 3;
 }
 
 #wiki-items .artificial,
-#wiki-items .weather-rocks,
-#wiki-items .shiny,
-#wiki-items .special {
-  max-width: 520px;
+#wiki-items .weather-rocks {
+  grid-column: 1 / 3;
 }
 
 #wiki-items img.item {
@@ -293,7 +301,7 @@
 #wiki-items img.tree {
   image-rendering: pixelated;
   width: 50px;
-  margin: -8px 8px 30px 8px;
+  margin: -8px 8px 0 8px;
 }
 
 #wiki-items th,

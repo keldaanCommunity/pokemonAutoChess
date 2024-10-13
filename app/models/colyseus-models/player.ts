@@ -97,7 +97,7 @@ export default class Player extends Schema implements IPlayer {
   opponents: Map<string, number> = new Map<string, number>()
   titles: Set<Title> = new Set<Title>()
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
-  weatherRocks: Item[] = pickNRandomIn(WeatherRocks, 3)
+  weatherRocks: Item[] = []
   randomComponentsGiven: Item[] = []
   randomEggsGiven: Pkm[] = []
   lightX: number
@@ -242,21 +242,12 @@ export default class Player extends Schema implements IPlayer {
     const pokemons: Pokemon[] = values(this.board)
     let updatedSynergies = computeSynergies(pokemons)
 
-    this.updateFishingRods(updatedSynergies)
     const artifNeedsRecomputing = this.updateArtificialItems(updatedSynergies)
     if (artifNeedsRecomputing) {
       /* NOTE: computing twice is costly in performance but the safest way to get the synergies
       right after losing an artificial item, since many edgecases may need to be adressed when 
       losing a type (Axew double dragon + artif item for example) ; it's not as easy as just 
       decrementing by 1 in updatedSynergies map count
-      */
-      updatedSynergies = computeSynergies(pokemons)
-    }
-
-    const rockNeedsRecomputing = this.updateWeatherRocks(updatedSynergies)
-    if (rockNeedsRecomputing) {
-      /* NOTE: in some edge cases like losing Hard Rock artif item, we may need to compute synergies
-        3 times in a row to get the right synergies, since losing a weather rock item may lead to losing a type
       */
       updatedSynergies = computeSynergies(pokemons)
     }
@@ -273,6 +264,9 @@ export default class Player extends Schema implements IPlayer {
     )
 
     if (lightChanged) this.onLightChange()
+
+    this.updateFishingRods()
+    this.updateWeatherRocks()
 
     this.effects.update(this.synergies, this.board)
     this.wildChance =
@@ -350,62 +344,22 @@ export default class Player extends Schema implements IPlayer {
     return needsRecomputingSynergiesAgain
   }
 
-  updateWeatherRocks(updatedSynergies: Map<Synergy, number>): boolean {
-    let needsRecomputingSynergiesAgain = false
-    const previousNbRockItems = SynergyTriggers[Synergy.ROCK].filter(
+  updateWeatherRocks() {
+    const nbWeatherRocks = SynergyTriggers[Synergy.ROCK].filter(
       (n) => (this.synergies.get(Synergy.ROCK) ?? 0) >= n
     ).length
-
-    const newNbRockItems = SynergyTriggers[Synergy.ROCK].filter(
-      (n) => (updatedSynergies.get(Synergy.ROCK) ?? 0) >= n
-    ).length
-
-    if (newNbRockItems > previousNbRockItems) {
-      // some weather rocks are gained
-      const gainedWeatherRocks = this.weatherRocks.slice(
-        previousNbRockItems,
-        newNbRockItems
-      )
-      gainedWeatherRocks.forEach((item) => {
-        this.items.push(item)
-      })
-    } else if (newNbRockItems < previousNbRockItems) {
-      // some weather rocks are lost
-      const lostWeatherRocks = this.weatherRocks.slice(
-        newNbRockItems,
-        previousNbRockItems
-      )
-
-      this.board.forEach((pokemon) => {
-        lostWeatherRocks.forEach((item) => {
-          if (pokemon.items.has(item)) {
-            pokemon.items.delete(item)
-
-            if (item in SynergyGivenByItem) {
-              const type = SynergyGivenByItem[item]
-              const nativeTypes = getPokemonData(pokemon.name).types
-              if (nativeTypes.includes(type) === false) {
-                pokemon.types.delete(type)
-                if (!isOnBench(pokemon)) {
-                  needsRecomputingSynergiesAgain = true
-                }
-              }
-            }
-          }
-        })
-      })
-
-      lostWeatherRocks.forEach((item) => {
-        removeInArray<Item>(this.items, item)
-      })
-    }
-
-    return needsRecomputingSynergiesAgain
+    const rocksCollected = this.weatherRocks.slice(-nbWeatherRocks)
+    this.items.forEach((item, index) => {
+      if (WeatherRocks.includes(item)) {
+        this.items.splice(index, 1)
+      }
+    })
+    this.items.push(...rocksCollected)
   }
 
-  updateFishingRods(updatedSynergies: Map<Synergy, number>) {
+  updateFishingRods() {
     const fishingLevel = SynergyTriggers[Synergy.WATER].filter(
-      (n) => (updatedSynergies.get(Synergy.WATER) ?? 0) >= n
+      (n) => (this.synergies.get(Synergy.WATER) ?? 0) >= n
     ).length
 
     if (this.items.includes(Item.OLD_ROD) && fishingLevel !== 1)

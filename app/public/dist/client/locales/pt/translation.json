@@ -1780,12 +1780,7 @@
     "WHITE_FLUTE": "Gere 3 Pokémons SELVAGENS ao redor do titular no início da luta. A raridade e o nível aumentam com o nível do estágio.",
     "GOLD_BOTTLE_CAP": "+1% de CRIT_CHANCE e CRIT_POWER por GOLD que você possui. Ganhe 1 OURO por nocaute e um jackpot de 5 OURO se eliminar o último inimigo.",
     "SACRED_ASH": "Dá RESSURREIÇÃO. Após a ressurreição, até 3 aliados nocauteados também são ressuscitados, mas sem itens.",
-    "COMET_SHARD": "Começa a rodada mergulhando como um cometa em um inimigo no lado oposto do tabuleiro, causando 300% de ATK como SPECIAL ao alvo e aos inimigos adjacentes, e ganhando PROTECT por 3 segundos.",
-    "DAMP_ROCK": "Dá sinergia à ÁGUA e conta 3 para a CHUVA. Só pode ser usado em Pokémon ROCK",
-    "ICY_ROCK": "Dá sinergia ICE e conta 3 para NEVE. Só pode ser usado em Pokémon ROCK",
-    "HEAT_ROCK": "Dá sinergia FIRE e conta 3 para SUN. Só pode ser usado em Pokémon ROCK",
-    "SMOOTH_ROCK": "Dá sinergia ao GROUND e conta 3 para SANDSTORM. Só pode ser usado em Pokémon ROCK",
-    "BLACK_AUGURITE": "Dá sinergia DARK e conta 3 para NOITE. Só pode ser usado em Pokémon ROCK"
+    "COMET_SHARD": "Começa a rodada mergulhando como um cometa em um inimigo no lado oposto do tabuleiro, causando 300% de ATK como SPECIAL ao alvo e aos inimigos adjacentes, e ganhando PROTECT por 3 segundos."
   },
   "passive_description": {
     "NONE": "sem passivo",

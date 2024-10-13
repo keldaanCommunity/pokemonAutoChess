@@ -47,10 +47,10 @@ import {
   Item,
   ItemComponents,
   ItemRecipe,
+  NonHoldableItems,
   ShinyItems,
   SynergyGivenByItem,
-  SynergyItems,
-  WeatherRocks
+  SynergyItems
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import {
@@ -523,21 +523,18 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
-    if (
-      item === Item.OLD_ROD ||
-      item === Item.GOOD_ROD ||
-      item === Item.SUPER_ROD
-    ) {
-      client.send(Transfer.DRAG_DROP_FAILED, message)
-      return
-    }
-
-    if (!pokemon.canHoldItems) {
-      client.send(Transfer.DRAG_DROP_FAILED, message)
-      return
-    }
-
     if (item === Item.EVIOLITE && pokemon.evolution === Pkm.DEFAULT) {
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
+
+    if (item === Item.BLACK_AUGURITE && pokemon.passive === Passive.SCYTHER) {
+      pokemon.items.add(item) // add the item just in time for the evolution
+      pokemon.evolutionRule.tryEvolve(pokemon, player, this.state.stageLevel)
+      pokemon.items.delete(item) // retrieve the item, black augurite is not a held item
+    }
+
+    if (NonHoldableItems.includes(item) || !pokemon.canHoldItems) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
     }
@@ -564,18 +561,6 @@ export class OnDragDropItemCommand extends Command<
       // prevent adding a synergy stone on a pokemon that already has this synergy
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
-    }
-
-    if (
-      WeatherRocks.includes(item) &&
-      (!pokemon.types.has(Synergy.ROCK) ||
-        pokemon.types.has(SynergyGivenByItem[item]))
-    ) {
-      if (item !== Item.BLACK_AUGURITE || pokemon.passive !== Passive.SCYTHER) {
-        // prevent adding weather rocks to non-rock pokemon, or to those with the synergy already
-        client.send(Transfer.DRAG_DROP_FAILED, message)
-        return
-      }
     }
 
     if (!isBasicItem && pokemon.items.has(item)) {
@@ -1290,7 +1275,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           }
 
           player.eggChance = max(1)(player.eggChance + 0.25)
-        } else if(!isPVE){
+        } else if (!isPVE) {
           player.eggChance = 0
         }
 
@@ -1424,7 +1409,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             pveStage,
             this.state.shinyEncounter
           )
-          const weather = getWeather(player.board, pveBoard)
+          const weather = getWeather(player, null, pveBoard)
           const simulation = new Simulation(
             nanoid(),
             this.room,
@@ -1444,7 +1429,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
       matchups.forEach((matchup) => {
         const { bluePlayer, redPlayer } = matchup
-        const weather = getWeather(bluePlayer.board, redPlayer.board)
+        const weather = getWeather(bluePlayer, redPlayer, redPlayer.board)
         const simulationId = nanoid()
         const simulation = new Simulation(
           simulationId,

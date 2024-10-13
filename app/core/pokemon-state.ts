@@ -12,6 +12,7 @@ import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
+import { count } from "../utils/array"
 import { distanceC, distanceM } from "../utils/distance"
 import { logger } from "../utils/logger"
 import { max, min } from "../utils/number"
@@ -40,7 +41,11 @@ export default abstract class PokemonState {
           } else if (target.effects.has(Effect.DIAMOND_STORM)) {
             opponentCritPower -= 0.7
           }
-          damage = Math.round(damage * opponentCritPower)
+          const nbBlackAugurite = target.player
+            ? count(target.player.items, Item.BLACK_AUGURITE)
+            : 0
+          opponentCritPower -= 0.1 * nbBlackAugurite
+          damage = min(0)(Math.round(damage * opponentCritPower))
         }
         pokemon.onCriticalAttack({ target, board, damage })
       }
@@ -192,10 +197,27 @@ export default abstract class PokemonState {
     apBoost: number,
     crit: boolean
   ): void {
+    if (pokemon.status.wound) {
+      if (
+        pokemon.simulation.weather === Weather.BLOODMOON &&
+        pokemon.player &&
+        pokemon.player.items.includes(Item.BLOOD_STONE)
+      ) {
+        const nbBloodStones = count(pokemon.player.items, Item.BLOOD_STONE)
+        if (nbBloodStones > 0) {
+          pokemon.addShield(
+            Math.round(0.3 * nbBloodStones * heal),
+            pokemon,
+            apBoost,
+            crit
+          )
+        }
+      }
+      return
+    }
     if (
       pokemon.life > 0 &&
       pokemon.life < pokemon.hp &&
-      !pokemon.status.wound &&
       !pokemon.status.protect
     ) {
       if (apBoost > 0) {
@@ -690,7 +712,12 @@ export default abstract class PokemonState {
       pokemon.sandstormDamageTimer -= dt
       if (pokemon.sandstormDamageTimer <= 0 && !pokemon.simulation.finished) {
         pokemon.sandstormDamageTimer = 1000
-        const sandstormDamage = 5
+        let sandstormDamage = 5
+        const nbSmoothRocks = player ? count(player.items, Item.SMOOTH_ROCK) : 0
+        if (nbSmoothRocks > 0) {
+          sandstormDamage -= nbSmoothRocks
+          pokemon.addAttackSpeed(nbSmoothRocks, pokemon, 0, false)
+        }
         pokemon.handleDamage({
           damage: sandstormDamage,
           board,
@@ -702,7 +729,7 @@ export default abstract class PokemonState {
     }
 
     if (pokemon.oneSecondCooldown <= 0) {
-      this.updateEachSecond(pokemon, board, weather, player)
+      this.updateEachSecond(pokemon, board)
       pokemon.oneSecondCooldown = 1000
     } else {
       pokemon.oneSecondCooldown = min(0)(pokemon.oneSecondCooldown - dt)
@@ -729,12 +756,7 @@ export default abstract class PokemonState {
     }
   }
 
-  updateEachSecond(
-    pokemon: PokemonEntity,
-    board: Board,
-    weather: Weather,
-    player: Player | undefined
-  ) {
+  updateEachSecond(pokemon: PokemonEntity, board: Board) {
     pokemon.addPP(10, pokemon, 0, false)
     if (pokemon.effects.has(Effect.RAIN_DANCE)) {
       pokemon.addPP(4, pokemon, 0, false)
@@ -747,6 +769,12 @@ export default abstract class PokemonState {
     }
     if (pokemon.simulation.weather === Weather.RAIN) {
       pokemon.addPP(3, pokemon, 0, false)
+      const nbDampRocks = pokemon.player
+        ? count(pokemon.player.items, Item.DAMP_ROCK)
+        : 0
+      if (nbDampRocks > 0) {
+        pokemon.addPP(2 * nbDampRocks, pokemon, 0, false)
+      }
     }
 
     if (pokemon.passive === Passive.ILLUMISE_VOLBEAT) {

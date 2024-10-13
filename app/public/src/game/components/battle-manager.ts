@@ -648,8 +648,9 @@ export default class BattleManager {
           pkm.detail.critPower.textContent = pokemon.critPower.toFixed(2)
         }
       } else if (field === "ap") {
-        value > previousValue &&
+        if (value && value > (previousValue ?? 0)) {
           this.displayBoost(Stat.AP, pkm.positionX, pkm.positionY)
+        }
         pkm.ap = pokemon.ap
         if (pkm.detail && pkm.detail instanceof PokemonDetail) {
           pkm.detail.updateValue(
@@ -667,8 +668,9 @@ export default class BattleManager {
           }
         }
       } else if (field === "atkSpeed") {
-        value > previousValue &&
+        if (value && value > (previousValue ?? 0)) {
           this.displayBoost(Stat.ATK_SPEED, pkm.positionX, pkm.positionY)
+        }
         pkm.atkSpeed = pokemon.atkSpeed
         if (pkm.detail && pkm.detail instanceof PokemonDetail) {
           pkm.detail.atkSpeed.textContent = pokemon.atkSpeed.toFixed(2)
@@ -685,8 +687,9 @@ export default class BattleManager {
         }
       } else if (field === "shield") {
         if (pokemon.shield >= 0) {
-          value > previousValue &&
+          if (value && value > (previousValue ?? 0)) {
             this.displayBoost(Stat.SHIELD, pkm.positionX, pkm.positionY)
+          }
           pkm.shield = pokemon.shield
           pkm.lifebar?.setShieldAmount(pkm.shield)
         }
@@ -701,8 +704,9 @@ export default class BattleManager {
           )
         }
       } else if (field === "atk") {
-        value > previousValue &&
+        if (value && value > (previousValue ?? 0)) {
           this.displayBoost(Stat.ATK, pkm.positionX, pkm.positionY)
+        }
         pkm.atk = pokemon.atk
         if (pkm.detail && pkm.detail instanceof PokemonDetail) {
           pkm.detail.updateValue(
@@ -712,8 +716,9 @@ export default class BattleManager {
           )
         }
       } else if (field === "def") {
-        value > previousValue &&
+        if (value && value > (previousValue ?? 0)) {
           this.displayBoost(Stat.DEF, pkm.positionX, pkm.positionY)
+        }
         pkm.def = pokemon.def
         if (pkm.detail && pkm.detail instanceof PokemonDetail) {
           pkm.detail.updateValue(
@@ -723,8 +728,9 @@ export default class BattleManager {
           )
         }
       } else if (field === "speDef") {
-        value > previousValue &&
+        if (value && value > (previousValue ?? 0)) {
           this.displayBoost(Stat.SPE_DEF, pkm.positionX, pkm.positionY)
+        }
         pkm.speDef = pokemon.speDef
         if (pkm.detail && pkm.detail instanceof PokemonDetail) {
           pkm.detail.updateValue(
