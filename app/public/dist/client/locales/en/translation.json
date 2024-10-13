@@ -2797,6 +2797,8 @@
   "show_damage_numbers": "Show damage numbers",
   "disable_animated_tilemap": "Disable background animations",
   "save": "Save",
+  "reset": "Reset",
+  "snapshot": "Snapshot",
   "passive": "Passive",
   "pick_additional_pokemon_hint": "Pick an additional Pokemon. It will be available to everyone.",
   "free_slot_hint": "You must have one free slot on the bench, or two for Duos",

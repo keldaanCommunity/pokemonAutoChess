@@ -10,6 +10,8 @@
 
 # UI
 
+- New features for the team planner: snapshot current board, quick reset, save/load local file
+
 # Bugfix
 
 - Locked status now correctly triggers retargetting, and reapply wide lens effect after restoring range

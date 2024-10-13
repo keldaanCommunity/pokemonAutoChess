@@ -1,9 +1,9 @@
 #team-builder {
   width: 100%;
   display: grid;
-  grid-template-areas: "synergies board selected" "synergies pokemons items";
+  grid-template-areas: "synergies actions selected" "synergies board selected" "pokemons pokemons items";
   grid-template-columns: 250px 1fr 330px;
-  grid-template-rows: 1fr 420px;
+  grid-template-rows: min-content 1fr 420px;
   min-width: 1400px;
   gap: 5px;
   padding: 5px;
@@ -14,7 +14,6 @@
 
 .team-builder-modal .modal-body {
   padding: 0;
-
 }
 
 .modal-body > #team-builder {
@@ -25,9 +24,15 @@
 
 #team-builder .synergies-container {
   grid-area: synergies;
-  overflow: visible;
   background-color: var(--color-bg-secondary);
   border: var(--border-thin);
+}
+
+#team-builder .actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  gap: 1em;
 }
 
 #team-editor {
