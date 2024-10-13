@@ -127,6 +127,10 @@ aside.sidebar {
   background: #444ebe;
 }
 
+.menu-item.community-servers a.ps-menu-button:hover {
+  background: #ee2097;
+}
+
 .menu-item.tipeee a.ps-menu-button:hover {
   background: #b13c49;
 }
