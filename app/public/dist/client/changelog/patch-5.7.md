@@ -18,3 +18,4 @@
 # Misc
 
 - Pokemons become shiny when given Shiny Charm
+- Thanks to all the contributors who helped with the translations! 3zukiDOT, Darkatek7, danGuinzo, logannoir, ph8ndstne, Zeleos753, RambonL and more
