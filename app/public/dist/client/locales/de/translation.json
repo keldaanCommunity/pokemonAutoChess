@@ -1404,7 +1404,7 @@
     "OVERHEAT": "Fügt allen Feinden [30,SP] SPECIAL zu. +30 % Schaden wenn das Ziel BURN ist",
     "HYPNOSIS": "Platziere SLEEP 1 Feind für [2,3,5,6,SP=0,5] Sekunden in den hinteren Reihen",
     "MIMIC": "Kopiert die Fähigkeit des aktuellen Ziels",
-    "HEX": "Fügt dem Ziel [20,40,80,SP] SPECIAL zu. Verdoppelt den Schaden, wenn das Ziel BURN, CONFUSION, FREEZE, PARALYSIS, POISONNED, SILENCE, SLEEP oder WOUND ist",
+    "HEX": "Fügt dem Ziel [20,40,80,SP] SPECIAL zu. Doppelter Schaden, wenn das Ziel unter einem negativen Status leidet.",
     "GROWTH": "Erhöhe die maximalen HP um [10,20,30,SP] und ATK um [3,4,5,SP]. Wächst bei SUN Wetter doppelt so schnell",
     "HEAL_ORDER": "Fügt benachbarten Feinden [25,45,65,SP] SPECIAL zu und heilt benachbarte Verbündete um [25,45,65,SP].",
     "SHELL_TRAP": "Nach dem nächsten empfangenen PHYSICAL explodiert die Falle und fügt benachbarten Feinden [100,SP] SPECIAL zu",

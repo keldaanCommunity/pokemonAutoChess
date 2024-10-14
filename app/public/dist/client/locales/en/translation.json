@@ -1408,7 +1408,7 @@
     "OVERHEAT": "Deals [30,SP] SPECIAL to all enemies. +30% damage if target is BURN",
     "HYPNOSIS": "Put SLEEP 1 enemy in the back lines for [2,3.5,6,SP=0.5] seconds",
     "MIMIC": "Copies the ability of the current target",
-    "HEX": "Deals [20,40,80,SP] SPECIAL to the target. Doubles damage if target is BURN, CONFUSION, FREEZE, PARALYSIS, POISONNED, SILENCE, SLEEP, FLINCH, CHARM, ARMOR_REDUCTION, WOUND or LOCKED",
+    "HEX": "Deals [20,40,80,SP] SPECIAL to the target. Double damage if target suffers from a negative status.",
     "GROWTH": "Increase max HP by [10,20,30,SP] and ATK by [3,4,5,SP]. Grows twice as fast if weather is SUN",
     "HEAL_ORDER": "Deals [25,45,65,SP] SPECIAL to adjacent enemies and heal [25,45,65,SP] to adjacent allies",
     "SHELL_TRAP": "After the next PHYSICAL received, the trap explodes and deal [100,SP] SPECIAL to adjacent enemies",

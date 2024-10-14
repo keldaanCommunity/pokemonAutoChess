@@ -1295,7 +1295,7 @@
     "OVERHEAT": "Oferece [30,SP] SPECIAL a todos os inimigos. Dano +30% se o alvo for BURN",
     "HYPNOSIS": "Coloque SLEEP 1 inimigo nas linhas de trás por [2,3.5,6,SP=0.5] segundos",
     "MIMIC": "Copia a habilidade do alvo atual",
-    "HEX": "Distribui [20,40,80,SP] SPECIAL ao alvo. Dobra o dano se o alvo for BURN, CONFUSION, FREEZE, PARALYSIS, POISONNED, SILENCE, SLEEP ou WOUND",
+    "HEX": "Causa [20,40,80,SP] SPECIAL ao alvo. Dano dobrado se o alvo sofrer de um status negativo.",
     "GROWTH": "Aumente o HP máximo em [10,20,30,SP] e o ATK em [3,4,5,SP]. Cresce duas vezes mais rápido se o clima for SUN",
     "HEAL_ORDER": "Oferece [25,45,65,SP] SPECIAL a inimigos adjacentes e cura [25,45,65,SP] a aliados adjacentes",
     "SHELL_TRAP": "Após o próximo PHYSICAL recebido, a armadilha explode e distribui [100,SP] SPECIAL para inimigos adjacentes",
