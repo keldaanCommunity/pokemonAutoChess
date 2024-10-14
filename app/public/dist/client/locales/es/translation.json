@@ -1396,7 +1396,7 @@
     "SILVER_WIND": "Se cuela en la retaguardia enemiga y causa [30,60,120,SP] de SPECIAL a todos los enemigos en el camino. Luego gana 1 ATK, 1 DEF, 1 SPE_DEF, 10 AP y 10% ATK_SPEED",
     "POISON_POWDER": "Se cuela en la retaguardia enemiga, inflige [30,60,120,SP] y aplica POISONNED por 5 segundos a todos los enemigos en el camino",
     "ICY_WIND": "Inflige [30,60,120,SP] de SPECIAL a todos los objetivos de una línea y reduce su ATK_SPEED un [10,20,40]%",
-    "GIGATON_HAMMER": "Inflige [100,200,400,SP] de SPECIAL pero deja SILENCE al usuario por 6 segundos",
+    "GIGATON_HAMMER": "Inflige [100,200,400,SP] de SPECIAL pero deja FATIGUE al usuario por 6 segundos",
     "ACROBATICS": "Inflige [20,40,80,SP] de SPECIAL. Causa el doble de daño si el atacante no tiene objetos equipados.",
     "ABSORB": "Inflige [30,60,120,SP] de SPECIAL y cura [3,6,12,SP] a los aliados adyacentes",
     "ROLLOUT": "Mejora la DEF en [1,3,5,SP] e inflige 5 veces la DEF como SPECIAL",

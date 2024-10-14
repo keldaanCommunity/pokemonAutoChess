@@ -960,7 +960,7 @@
     "SILVER_WIND": "Stort je in de achterlijn van de vijand en deel [30,60,120,SP] SPECIAL uit aan elke vijand op het pad. Krijg dan 1 ATK, 1 DEF, 1 SPE_DEF, 10 AP en 10% ATK_SPEED",
     "POISON_POWDER": "Stort je in de achterlijn van de vijand, deel [30,60,120,SP] en breng gedurende 5 seconden POISONNED aan op elke vijand op het pad",
     "ICY_WIND": "Verdeelt [30,60,120,SP] SPECIAL naar alle doelwitten in een lijn en verlaagt hun ATK_SPEED met [10,20,40]%.",
-    "GIGATON_HAMMER": "Biedt [100,200,400,SP] SPECIAL aan, maar SILENCE zelf gedurende 6 seconden",
+    "GIGATON_HAMMER": "Biedt [100,200,400,SP] SPECIAL aan, maar FATIGUE zelf gedurende 6 seconden",
     "ACROBATICS": "Aanbiedingen [20,40,80,SP] SPECIAL. Dubbele schade als caster geen vastgehouden items heeft.",
     "ABSORB": "Biedt [30,60,120,SP] SPECIAL en geneest [3,6,12,SP] aan aangrenzende bondgenoten",
     "ROLLOUT": "Buff de DEF met [1,3,5,SP] en deelt 5x de DEF uit als SPECIAL",

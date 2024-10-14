@@ -1419,7 +1419,7 @@
     "SILVER_WIND": "Scatta nelle retrovie nemiche, infliggendo [30,60,120,SP] SPECIAL a tutti i nemici sul percorso. Inoltre ottieni 1 ATK, 1 DEF, 1 SPE_DEF, 10 AP e 10% ATK_SPEED.",
     "POISON_POWDER": "Scatta nelle retrovie nemiche, infliggendo [30,60,120,SP] SPECIAL e applicando POISONNED per 5 secondi a ogni nemico nella traiettoria.",
     "ICY_WIND": "Infligge [30,60,120,SP] SPECIAL a tutti i bersagli in una linea retta e diminuisce il loro ATK_SPEED del [10,20,40]%.",
-    "GIGATON_HAMMER": "Infligge [100,200,400,SP] SPECIAL ma provoca a se stesso SILENCE per 6 secondi.",
+    "GIGATON_HAMMER": "Infligge [100,200,400,SP] SPECIAL ma provoca a se stesso FATIGUE per 6 secondi.",
     "ACROBATICS": "Infliggi [20,40,80,SP] SPECIAL. Il danno raddoppia se l'utilizzatore non ha oggetti equipaggiati.",
     "ABSORB": "Infligge [30,60,120,SP] SPECIAL e cura di [3,6,12,SP] gli alleati adiacenti.",
     "ROLLOUT": "Potenzia la DEF di [1,3,5,SP] e infligge 5 volte la DEF come SPECIAL.",

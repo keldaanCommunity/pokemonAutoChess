@@ -1419,7 +1419,7 @@
     "SILVER_WIND": "Fonce dans la ligne de fond ennemie, infligeant [30,60,120,SP] SPECIAL à chaque ennemi sur le chemin. Puis gagne 1 ATK, 1 DEF, 1 SPE_DEF, 10 AP et 10% ATK_SPEED",
     "POISON_POWDER": "Fonce dans la ligne de fond ennemie, infligeant [30,60,120,SP] et appliquant POISONNED pendant 5 secondes à chaque ennemi sur le chemin",
     "ICY_WIND": "Inflige [30,60,120,SP] SPECIAL en ligne droite derrière la cible et diminue la ATK_SPEED de tous les ennemis touchés de [10,20,40] %",
-    "GIGATON_HAMMER": "Inflige [100,200,400,SP] SPECIAL mais se SILENCE pendant 6 secondes",
+    "GIGATON_HAMMER": "Inflige [100,200,400,SP] SPECIAL mais se FATIGUE pendant 6 secondes",
     "ACROBATICS": "Inflige [20,40,80,SP] SPECIAL. Dégâts doublés si le lanceur ne tient aucun objet.",
     "ABSORB": "Inflige [30,60,120,SP] SPECIAL et soigne [3,6,12,SP] aux alliés adjacents",
     "ROLLOUT": "Augmente la DEF de [1,3,5,SP] et inflige 5x la DEF en SPECIAL",

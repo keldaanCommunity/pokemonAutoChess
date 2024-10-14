@@ -5269,9 +5269,7 @@ export class GigatonHammerStrategy extends AbilityStrategy {
     if (pokemon.stars === 3) {
       damage = 400
     }
-    if (pokemon.items.has(Item.PROTECTIVE_PADS) === false) {
-      pokemon.status.triggerSilence(6000, pokemon, pokemon)
-    }
+    pokemon.status.triggerFatigue(6000, pokemon)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }

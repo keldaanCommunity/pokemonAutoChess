@@ -1419,7 +1419,7 @@
     "SILVER_WIND": "적 라인 뒤쪽으로 돌진하여 가는 길에 있는 모든 적에게 [30,60,120,SP] SPECIAL 를 가하고 1 ATK, 1 DEF, 1 SPE_DEF, 10 AP, 10% ATK_SPEED 를 획득한다. ",
     "POISON_POWDER": "적 후방에 돌진하며, 경로상의 모든 적들에 [30,60,120,SP] SPECIAL 및 5초간 POISONNED 상태를 가한다.",
     "ICY_WIND": "줄에 있는 모든 적에게 [30,60,120,SP] SPECIAL 를 가하고 ATK_SPEED 를 [10,20,40]% 만큼 줄인다.",
-    "GIGATON_HAMMER": "시전자가 6초간 SILENCE상태가 되는 대신 대상에 [100,200,400,SP] SPECIAL을 가한다.",
+    "GIGATON_HAMMER": "시전자가 6초간 FATIGUE상태가 되는 대신 대상에 [100,200,400,SP] SPECIAL을 가한다.",
     "ACROBATICS": "대상에 [20,40,80,SP] SPECIAL 을 가한다. 시전자가 도구를 지니지 않았을 경우 두배의 피해를 준다.",
     "ABSORB": "대상에 [30,60,120,SP] SPECIAL를 가하고 인접한 아군을 [3,6,12,SP] 만큼 회복시킨다.",
     "ROLLOUT": " DEF 를 [1,3,5,SP] 만큼 올리고 DEF 의 5배 만큼의 SPECIAL을 가한다.",
