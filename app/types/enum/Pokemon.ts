@@ -3765,19 +3765,19 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.SLOWPOKE]: {
-    attack: AnimationType.Charge,
-    ability: AnimationType.Swing,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
     emote: AnimationType.Shoot
   },
   [Pkm.SLOWBRO]: {
-    attack: AnimationType.Charge,
-    ability: AnimationType.Shake,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shake
   },
   [Pkm.SLOWKING]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.RearUp,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.RearUp
   },
   [Pkm.BELLSPROUT]: {
     attack: AnimationType.Strike,
