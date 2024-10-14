@@ -275,7 +275,7 @@ export class SoftBoiledStrategy extends AbilityStrategy {
           id: pokemon.simulation.id,
           skill: pokemon.skill,
           positionX: tg.positionX,
-          positionY: tg.positionX,
+          positionY: tg.positionY,
           orientation: pokemon.orientation
         })
         tg.addShield(shield, pokemon, 1, crit)
@@ -301,7 +301,7 @@ export class TeaTimeStrategy extends AbilityStrategy {
           id: pokemon.simulation.id,
           skill: pokemon.skill,
           positionX: tg.positionX,
-          positionY: tg.positionX,
+          positionY: tg.positionY,
           orientation: pokemon.orientation
         })
         tg.handleHeal(heal, pokemon, 1, crit)
@@ -1530,7 +1530,7 @@ export class RelicSongStrategy extends AbilityStrategy {
             id: pokemon.simulation.id,
             skill: pokemon.skill,
             positionX: tg.positionX,
-            positionY: tg.positionX,
+            positionY: tg.positionY,
             orientation: tg.orientation
           })
         }
@@ -10191,6 +10191,51 @@ export class ForcePalmStrategy extends AbilityStrategy {
   }
 }
 
+export class SteelWingStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const damage = [10, 20, 40][pokemon.stars - 1] ?? 40 + 3 * pokemon.def
+    const farthestCoordinate =
+      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+
+    if (farthestCoordinate) {
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team != pokemon.team) {
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: Ability.STEEL_WING,
+            positionX: cell.value.positionX,
+            positionY: cell.value.positionY
+          })
+          pokemon.addDefense(1, pokemon, 0, false)
+          cell.value.addDefense(-1, pokemon, 0, false)
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -10563,5 +10608,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FORCE_PALM]: new ForcePalmStrategy(),
   [Ability.METAL_BURST]: new MetalBurstStrategy(),
   [Ability.THUNDER_CAGE]: new ThunderCageStrategy(),
-  [Ability.HEADBUTT]: new HeadbuttStrategy()
+  [Ability.HEADBUTT]: new HeadbuttStrategy(),
+  [Ability.STEEL_WING]: new SteelWingStrategy()
 }
