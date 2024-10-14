@@ -367,7 +367,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addPP(value: number, caster: IPokemonEntity, apBoost: number, crit: boolean) {
     value = Math.round(
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
+      value *
+        (1 + (apBoost * caster.ap) / 100) *
+        (crit ? caster.critPower : 1) *
+        (this.status.fatigue ? 0.5 : 1)
     )
 
     if (

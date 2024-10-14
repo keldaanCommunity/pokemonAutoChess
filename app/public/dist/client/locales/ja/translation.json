@@ -1359,7 +1359,7 @@
     "MAX_MELTDOWN": "ATKの120%をTRUEとして与える",
     "CURSE_OF_VULNERABILITY": "最も高いDEF + SPE_DEFを持つ敵は、DEF + SPE_DEFの5を失い、FLINCHになります。",
     "CURSE_OF_WEAKNESS": "また、最も高いATKを持つ敵はATKの30%を失い、PARALYSISになります。",
-    "CURSE_OF_TORMENT": "また、最もAPの高い敵はAPの50%を失い、SILENCEになります。",
+    "CURSE_OF_TORMENT": "また、最もAPの高い敵はAPの50%を失い、FATIGUEになります。",
     "CURSE_OF_FATE": "また、最も強い相手ユニットはCURSEとなり、6秒後にKOされる。",
     "AROMATIC_MIST": "攻撃とショックに15%の追加SPECIAL",
     "FAIRY_WIND": "攻撃とショックに30%の追加SPECIAL",

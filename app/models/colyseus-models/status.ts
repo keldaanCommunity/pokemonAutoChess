@@ -15,6 +15,7 @@ import { chance } from "../../utils/random"
 export default class Status extends Schema implements IStatus {
   @type("boolean") burn = false
   @type("boolean") silence = false
+  @type("boolean") fatigue = false
   @type("number") poisonStacks = 0
   @type("boolean") freeze = false
   @type("boolean") protect = false
@@ -59,6 +60,7 @@ export default class Status extends Schema implements IStatus {
   burnCooldown = 0
   burnDamageCooldown = 1000
   silenceCooldown = 0
+  fatigueCooldown = 0
   poisonCooldown = 0
   poisonDamageCooldown = 1000
   freezeCooldown = 0
@@ -95,6 +97,7 @@ export default class Status extends Schema implements IStatus {
   clearNegativeStatus() {
     this.burnCooldown = 0
     this.silenceCooldown = 0
+    this.fatigueCooldown = 0
     this.poisonCooldown = 0
     this.freezeCooldown = 0
     this.sleepCooldown = 0
@@ -113,6 +116,7 @@ export default class Status extends Schema implements IStatus {
     return (
       this.burn ||
       this.silence ||
+      this.fatigue ||
       this.poisonStacks > 0 ||
       this.freeze ||
       this.sleep ||
@@ -154,6 +158,10 @@ export default class Status extends Schema implements IStatus {
 
     if (this.silence) {
       this.updateSilence(dt)
+    }
+
+    if (this.fatigue) {
+      this.updateFatigue(dt)
     }
 
     if (this.protect) {
@@ -579,6 +587,25 @@ export default class Status extends Schema implements IStatus {
       this.silenceOrigin = undefined
     } else {
       this.silenceCooldown -= dt
+    }
+  }
+
+  triggerFatigue(duration: number, pkm: PokemonEntity) {
+    if (!this.runeProtect) {
+      duration = this.applyAquaticReduction(duration, pkm)
+
+      this.fatigue = true
+      if (duration > this.fatigueCooldown) {
+        this.fatigueCooldown = duration
+      }
+    }
+  }
+
+  updateFatigue(dt: number) {
+    if (this.fatigueCooldown - dt <= 0) {
+      this.fatigue = false
+    } else {
+      this.fatigueCooldown -= dt
     }
   }
 

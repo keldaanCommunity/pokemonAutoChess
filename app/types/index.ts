@@ -600,6 +600,7 @@ export interface IStatus {
   magmaStorm: boolean
   burn: boolean
   silence: boolean
+  fatigue: boolean
   poisonStacks: number
   freeze: boolean
   protect: boolean

@@ -1812,7 +1812,7 @@
     "MAX_MELTDOWN": "ATK의 120%만큼 TRUE",
     "CURSE_OF_VULNERABILITY": "DEF+SPE_DEF가 가장 높은 적은 그것들을 5씩 잃으며 FLINCH상태가 됨",
     "CURSE_OF_WEAKNESS": "추가로 ATK가 가장 높은 적은 그것이 30% 감소하며 PARALYSIS상태가 됨",
-    "CURSE_OF_TORMENT": "추가로 AP가 가장 높은 적은 그것이 50% 감소하며 SILENCE 상태가 됨",
+    "CURSE_OF_TORMENT": "추가로 AP가 가장 높은 적은 그것이 50% 감소하며 FATIGUE 상태가 됨",
     "CURSE_OF_FATE": "추가로 가장 강한 적은 CURSE상태가 되어 6초 후에 기절함",
     "AROMATIC_MIST": "공격과 충격파에 15% 추가 SPECIAL",
     "FAIRY_WIND": "공격과 충격파에 30% 추가 SPECIAL",

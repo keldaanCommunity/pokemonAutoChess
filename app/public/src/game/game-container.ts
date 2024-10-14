@@ -109,6 +109,7 @@ class GameContainer {
       "curseFate",
       "electricField",
       "fairyField",
+      "fatigue",
       "flinch",
       "freeze",
       "grassField",

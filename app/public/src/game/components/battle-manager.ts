@@ -175,6 +175,12 @@ export default class BattleManager {
         } else {
           pkm.removeSilence()
         }
+      } else if (field === "fatigue") {
+        if (pokemon.status.fatigue) {
+          pkm.addFatigue()
+        } else {
+          pkm.removeFatigue()
+        }
       } else if (field === "confusion") {
         if (pokemon.status.confusion) {
           pkm.addConfusion()

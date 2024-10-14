@@ -1812,7 +1812,7 @@
     "MAX_MELTDOWN": "Deal 120% of ATK as TRUE",
     "CURSE_OF_VULNERABILITY": "The enemy with the highest DEF + SPE_DEF lose 5 of it and is FLINCH",
     "CURSE_OF_WEAKNESS": "Also, the enemy with the highest ATK lose 30% of it and is PARALYSIS",
-    "CURSE_OF_TORMENT": "Also, the enemy with the highest AP lose 50% of it and is SILENCE",
+    "CURSE_OF_TORMENT": "Also, the enemy with the highest AP lose 50% of it and is FATIGUE",
     "CURSE_OF_FATE": "Also, the strongest enemy is CURSE and will be KO after 6 seconds",
     "AROMATIC_MIST": "15% additional SPECIAL to attacks and shocks",
     "FAIRY_WIND": "30% additional SPECIAL to attacks and shocks",
@@ -2257,6 +2257,7 @@
   "status": {
     "BURN": "Burn",
     "SILENCE": "Silence",
+    "FATIGUE": "Fatigue",
     "POISONNED": "Poison",
     "FREEZE": "Freeze",
     "PROTECT": "Protect",
@@ -2281,6 +2282,7 @@
   "status_description": {
     "BURN": "Deals 5% of max HP as TRUE every second. Reduce healing by 50%.",
     "SILENCE": "Prevents casting abilities and gaining PP",
+    "FATIGUE": "Reduce PP gain from all sources by 50%",
     "POISONNED": "Deals 5% of max HP per stack as TRUE every second. Can stack up to 3 times by default.",
     "FREEZE": "Prevents moving, dodging or attacking",
     "PROTECT": "Protects from any source of damage, but prevents healing and PP gain. Enemies will avoid targeting a protected unit.",

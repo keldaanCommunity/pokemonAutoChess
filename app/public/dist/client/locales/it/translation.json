@@ -1812,7 +1812,7 @@
     "MAX_MELTDOWN": "Infliggi il 120% dell' ATK come TRUE",
     "CURSE_OF_VULNERABILITY": "L'unità avversaria con il DEF + SPE_DEF più alta ne perde 5 e subisce FLINCH",
     "CURSE_OF_WEAKNESS": "Inoltre, l'unità avversaria con l'ATK più alto ne perde il 30% ed è sotto PARALYSIS",
-    "CURSE_OF_TORMENT": "Inoltre, l'unità avversaria con i AP più alti ne perde il 50% e subisce SILENCE",
+    "CURSE_OF_TORMENT": "Inoltre, l'unità avversaria con i AP più alti ne perde il 50% e subisce FATIGUE",
     "CURSE_OF_FATE": "Inoltre, l'unità avversaria più forte subisce CURSE e sarà KO dopo 6 secondi.",
     "AROMATIC_MIST": "Aggiungi il 15% di SPECIAL agli attacchi e mettili sotto shock",
     "FAIRY_WIND": "Aggiungi il 30% di SPECIAL agli attacchi e mettili sotto shock",
