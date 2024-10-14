@@ -619,19 +619,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    if (this.status.stoneEdge) {
-      const tg = board.getValue(target.positionX, target.positionY)
-      if (tg) {
-        tg.handleDamage({
-          damage: Math.round(this.def * (1 + this.ap / 100)),
-          board,
-          attackType: AttackType.SPECIAL,
-          attacker: this,
-          shouldTargetGainMana: true
-        })
-      }
-    }
-
     if (this.passive === Passive.DURANT) {
       const bugAllies =
         board.cells.filter(

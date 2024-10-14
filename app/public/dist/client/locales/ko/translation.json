@@ -1612,7 +1612,7 @@
     "GLAIVE_RUSH": "시전자가 무모하게 돌진한다. 대상의 후방으로 이동하여 [40,80,150,SP]의 PHYSICAL 를 입히고 6초 동안 자신에게 ARMOR_REDUCTION을 부여한다.",
     "FOUL_PLAY": "대상 ATK 의 [2,4,6,SP] 배만큼 SPECIAL 를 가한다.",
     "DOUBLE_IRON_BASH": "시전자가 회전하여 ATK 의 [150,SP]% 를 두 번 가격한다. 대상은 3초 동안 FLINCH 이 된다.",
-    "STONE_EDGE": "[5,8] 초 동안 시전자가 SILENCE 상태가 되고, 2 RANGE 와 [10,20,SP] CRIT_CHANCE 를 획득하고 기본공격 시 DEF 의 100%를 PHYSICAL 로 입힌다.",
+    "STONE_EDGE": "[5,8] 초 동안 시전자가 SILENCE 상태가 되고, 2 RANGE 와 [20,SP] CRIT_CHANCE 를 획득하고 기본공격 시 DEF 의 [100,SP]%를 PHYSICAL 로 입힌다.",
     "ROAR": "대상을 날려버린다. 벽에 부딪히면 [10,20,40,SP] SPECIAL 을 입는다. 다른 포켓몬에게 부딪히면 둘 다 SPECIAL 을 입는다.",
     "INFESTATION": "필드에 있는 아군 BUG 수만큼 [10,SP] SPECIAL 을 대상에게 가하고, 대기석의 가장 강한 BUG 를 전투에 참여시킨다.",
     "IVY_CUDGEL": "대상에게 [100,SP]의 SPECIAL 를 입힌다.",
