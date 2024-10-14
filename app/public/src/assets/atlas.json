@@ -1,5 +1,5 @@
 {
-  "version": "5.6.0.332",
+  "version": "5.6.0.333",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -246,6 +246,7 @@
         "STAR_DUST": { "frames": 19 },
         "STEALTH_ROCKS": { "frames": 14 },
         "STEAM_ERUPTION": { "frames": 11 },
+        "STEEL_WING": { "frames": 38 },
         "STICKY_WEB": { "frames": 7, "repeat": -1, "fps": 7 },
         "STOMP": { "frames": 10 },
         "STONE_AXE": { "frames": 4 },
@@ -356,6 +357,7 @@
         "CURSE_EFFECT": { "frames": 11 },
         "ELECTRIC_FIELD": { "frames": 7, "repeat": -1, "fps": 8 },
         "FAIRY_FIELD": { "frames": 3, "repeat": -1, "fps": 4 },
+        "FATIGUE": { "frames": 13, "repeat": -1, "fps": 16 },
         "FLINCH": { "frames": 9, "repeat": -1, "fps": 10 },
         "FREEZE": { "frames": 6, "repeat": -1 },
         "GRASSY_FIELD": { "frames": 8, "repeat": -1, "fps": 8 },
