@@ -990,7 +990,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         id: this.simulation.id,
         skill: "SHELL_TRAP_trigger",
         positionX: target.positionX,
-        positionY: target.positionX,
+        positionY: target.positionY,
         orientation: target.orientation
       })
       cells.forEach((cell) => {

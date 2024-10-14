@@ -4329,7 +4329,7 @@ export class FakeTearsStrategy extends AbilityStrategy {
           id: pokemon.simulation.id,
           skill: pokemon.skill,
           positionX: value.positionX,
-          positionY: value.positionX,
+          positionY: value.positionY,
           orientation: value.orientation
         })
         value.handleSpecialDamage(
@@ -8029,7 +8029,7 @@ export class ShieldsUpStrategy extends AbilityStrategy {
       id: pokemon.simulation.id,
       skill: Ability.SHIELDS_UP,
       positionX: pokemon.positionX,
-      positionY: pokemon.positionX
+      positionY: pokemon.positionY
     })
     pokemon.index = PkmIndex[Pkm.MINIOR]
     pokemon.name = Pkm.MINIOR
