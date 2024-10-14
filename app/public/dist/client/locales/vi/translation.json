@@ -1357,7 +1357,7 @@
     "GIGATON_HAMMER": "Gây [100,200,400,SP] SPECIAL nhưng bản thân bị SILENCE trong 6 giây",
     "ACROBATICS": "Gây [20,40,80,SP] SPECIAL. Gấp đôi sát thương nếu Pokémon thi triển không có trang bị nào",
     "ABSORB": "Gây [30,60,120,SP] SPECIAL và hồi [3,6,12,SP] cho đồng minh ở gần",
-    "ROLLOUT": "Tăng [5,SP] DEF và gây SPECIAL bằng 5 lần chỉ số DEF",
+    "ROLLOUT": "Tăng [1,3,5,SP] DEF và gây SPECIAL bằng 5 lần chỉ số DEF",
     "THRASH": "Tăng [100,SP]% ATK nhưng bị CONFUSION trong 3 giây",
     "SOLAR_BEAM": "Gây [30,60,120,SP] SPECIAL thẳng hàng sau mục tiêu. Nếu thời tiết là SUN, mục tiêu bị BURN trong 3 giây và hồi phục 40 PP",
     "MAGMA_STORM": "Mục tiêu bị nhốt trong lốc xoáy lửa. Lốc xoáy lửa gây [80,SP] SPECIAL trước khi di chuyển đến một mục tiêu gần nó",

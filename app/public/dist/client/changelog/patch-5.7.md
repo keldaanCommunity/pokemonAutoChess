@@ -2,6 +2,9 @@
 
 # Changes to Pokemon & Abilities
 
+- New ability for Sandshrew: Rollout
+- Change Detect (Patrat): now detects opponents in a 2-cell radius
+
 # Changes to Synergies
 
 - Rock: weather rocks are no longer immediately available, they are collected after fighting in a certain weather

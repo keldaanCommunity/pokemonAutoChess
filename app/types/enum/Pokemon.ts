@@ -5101,12 +5101,12 @@ export const AnimationConfig: {
   },
   [Pkm.SANDSHREW]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Withdraw,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Attack,
+    emote: AnimationType.LostBalance
   },
   [Pkm.SANDSLASH]: {
     attack: AnimationType.Strike,
-    ability: AnimationType.Withdraw,
+    ability: AnimationType.Attack,
     emote: AnimationType.DeepBreath
   },
   [Pkm.FARFETCH_D]: {

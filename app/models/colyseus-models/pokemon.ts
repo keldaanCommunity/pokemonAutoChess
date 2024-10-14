@@ -9844,7 +9844,7 @@ export class Sandshrew extends Pokemon {
   speDef = 3
   maxPP = 80
   range = 1
-  skill = Ability.SPIKE_ARMOR
+  skill = Ability.ROLLOUT
   additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
@@ -9859,7 +9859,7 @@ export class Sandslash extends Pokemon {
   speDef = 5
   maxPP = 80
   range = 1
-  skill = Ability.SPIKE_ARMOR
+  skill = Ability.ROLLOUT
   additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }

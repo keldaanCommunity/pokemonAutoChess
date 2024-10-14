@@ -5340,7 +5340,7 @@ export class RolloutStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const multiplier = 5
-    const defenseBoost = 5
+    const defenseBoost = [1, 3, 5][pokemon.stars - 1] ?? 5
 
     pokemon.addDefense(defenseBoost, pokemon, 1, crit)
     target.handleSpecialDamage(
@@ -8178,21 +8178,20 @@ export class DetectStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let nbAdjacentEnemies = 0
-    const adjacentAllies: PokemonEntity[] = []
-    board
+    const adjacentAllies: PokemonEntity[] = board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
-      .forEach((cell) => {
-        if (cell.value && cell.value.team !== pokemon.team) {
-          nbAdjacentEnemies++
-        } else if (cell.value && cell.value.team === pokemon.team) {
-          adjacentAllies.push(cell.value)
-        }
-      })
+      .filter<Cell & { value: PokemonEntity }>(
+        (cell): cell is Cell & { value: PokemonEntity } =>
+          cell.value != null && cell.value.team === pokemon.team
+      )
+      .map((cell) => cell.value)
+    const nbEnemiesDetected = board
+      .getCellsInRange(pokemon.positionX, pokemon.positionY, 2)
+      .filter((cell) => cell.value && cell.value.team !== pokemon.team).length
 
     adjacentAllies.forEach((ally) =>
       ally.status.triggerProtect(
-        Math.round(500 * nbAdjacentEnemies * (1 + pokemon.ap / 100))
+        Math.round(500 * nbEnemiesDetected * (1 + pokemon.ap / 100))
       )
     )
   }
