@@ -275,7 +275,7 @@ export class SoftBoiledStrategy extends AbilityStrategy {
           id: pokemon.simulation.id,
           skill: pokemon.skill,
           positionX: tg.positionX,
-          positionY: tg.positionX,
+          positionY: tg.positionY,
           orientation: pokemon.orientation
         })
         tg.addShield(shield, pokemon, 1, crit)
@@ -301,7 +301,7 @@ export class TeaTimeStrategy extends AbilityStrategy {
           id: pokemon.simulation.id,
           skill: pokemon.skill,
           positionX: tg.positionX,
-          positionY: tg.positionX,
+          positionY: tg.positionY,
           orientation: pokemon.orientation
         })
         tg.handleHeal(heal, pokemon, 1, crit)
@@ -1530,7 +1530,7 @@ export class RelicSongStrategy extends AbilityStrategy {
             id: pokemon.simulation.id,
             skill: pokemon.skill,
             positionX: tg.positionX,
-            positionY: tg.positionX,
+            positionY: tg.positionY,
             orientation: tg.orientation
           })
         }
@@ -5340,7 +5340,7 @@ export class RolloutStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const multiplier = 5
-    const defenseBoost = 5
+    const defenseBoost = [1, 3, 5][pokemon.stars - 1] ?? 5
 
     pokemon.addDefense(defenseBoost, pokemon, 1, crit)
     target.handleSpecialDamage(
@@ -8178,21 +8178,20 @@ export class DetectStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let nbAdjacentEnemies = 0
-    const adjacentAllies: PokemonEntity[] = []
-    board
+    const adjacentAllies: PokemonEntity[] = board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
-      .forEach((cell) => {
-        if (cell.value && cell.value.team !== pokemon.team) {
-          nbAdjacentEnemies++
-        } else if (cell.value && cell.value.team === pokemon.team) {
-          adjacentAllies.push(cell.value)
-        }
-      })
+      .filter<Cell & { value: PokemonEntity }>(
+        (cell): cell is Cell & { value: PokemonEntity } =>
+          cell.value != null && cell.value.team === pokemon.team
+      )
+      .map((cell) => cell.value)
+    const nbEnemiesDetected = board
+      .getCellsInRange(pokemon.positionX, pokemon.positionY, 2)
+      .filter((cell) => cell.value && cell.value.team !== pokemon.team).length
 
     adjacentAllies.forEach((ally) =>
       ally.status.triggerProtect(
-        Math.round(500 * nbAdjacentEnemies * (1 + pokemon.ap / 100))
+        Math.round(500 * nbEnemiesDetected * (1 + pokemon.ap / 100))
       )
     )
   }
@@ -10192,6 +10191,51 @@ export class ForcePalmStrategy extends AbilityStrategy {
   }
 }
 
+export class SteelWingStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const damage = [10, 20, 40][pokemon.stars - 1] ?? 40 + 3 * pokemon.def
+    const farthestCoordinate =
+      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+
+    if (farthestCoordinate) {
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team != pokemon.team) {
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: Ability.STEEL_WING,
+            positionX: cell.value.positionX,
+            positionY: cell.value.positionY
+          })
+          pokemon.addDefense(1, pokemon, 0, false)
+          cell.value.addDefense(-1, pokemon, 0, false)
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
+    }
+  }
+}
+
 export class YawnStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -10591,6 +10635,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FORCE_PALM]: new ForcePalmStrategy(),
   [Ability.METAL_BURST]: new MetalBurstStrategy(),
   [Ability.THUNDER_CAGE]: new ThunderCageStrategy(),
+  [Ability.HEADBUTT]: new HeadbuttStrategy(),
+  [Ability.STEEL_WING]: new SteelWingStrategy()
   [Ability.HEADBUTT]: new HeadbuttStrategy(),
   [Ability.YAWN]: new YawnStrategy()
 }

@@ -175,7 +175,7 @@ class GameContainer {
             pokemon,
             field,
             value,
-            previousValue
+            previousValue || value
           )
         })
       })

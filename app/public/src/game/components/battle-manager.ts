@@ -654,7 +654,7 @@ export default class BattleManager {
           pkm.detail.critPower.textContent = pokemon.critPower.toFixed(2)
         }
       } else if (field === "ap") {
-        if (value && value > (previousValue ?? 0)) {
+        if (value && value > (previousValue || 0)) {
           this.displayBoost(Stat.AP, pkm.positionX, pkm.positionY)
         }
         pkm.ap = pokemon.ap
@@ -674,7 +674,7 @@ export default class BattleManager {
           }
         }
       } else if (field === "atkSpeed") {
-        if (value && value > (previousValue ?? 0)) {
+        if (value && value > (previousValue || 0)) {
           this.displayBoost(Stat.ATK_SPEED, pkm.positionX, pkm.positionY)
         }
         pkm.atkSpeed = pokemon.atkSpeed
@@ -693,7 +693,7 @@ export default class BattleManager {
         }
       } else if (field === "shield") {
         if (pokemon.shield >= 0) {
-          if (value && value > (previousValue ?? 0)) {
+          if (value && value > (previousValue || 0)) {
             this.displayBoost(Stat.SHIELD, pkm.positionX, pkm.positionY)
           }
           pkm.shield = pokemon.shield
@@ -710,7 +710,7 @@ export default class BattleManager {
           )
         }
       } else if (field === "atk") {
-        if (value && value > (previousValue ?? 0)) {
+        if (value && value > (previousValue || 0)) {
           this.displayBoost(Stat.ATK, pkm.positionX, pkm.positionY)
         }
         pkm.atk = pokemon.atk
@@ -722,7 +722,7 @@ export default class BattleManager {
           )
         }
       } else if (field === "def") {
-        if (value && value > (previousValue ?? 0)) {
+        if (value && value > (previousValue || 0)) {
           this.displayBoost(Stat.DEF, pkm.positionX, pkm.positionY)
         }
         pkm.def = pokemon.def
@@ -734,7 +734,7 @@ export default class BattleManager {
           )
         }
       } else if (field === "speDef") {
-        if (value && value > (previousValue ?? 0)) {
+        if (value && value > (previousValue || 0)) {
           this.displayBoost(Stat.SPE_DEF, pkm.positionX, pkm.positionY)
         }
         pkm.speDef = pokemon.speDef

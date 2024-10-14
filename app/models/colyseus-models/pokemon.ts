@@ -8,6 +8,7 @@ import {
   ItemEvolutionRule
 } from "../../core/evolution-rules"
 import Simulation from "../../core/simulation"
+import { DelayedCommand } from "../../core/simulation-command"
 import GameState from "../../rooms/states/game-state"
 import {
   AttackSprite,
@@ -28,6 +29,7 @@ import {
 } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
+import { Effect } from "../../types/enum/Effect"
 import {
   AttackType,
   BoardEvent,
@@ -61,8 +63,6 @@ import { chance, pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
-import { Effect } from "../../types/enum/Effect"
-import { DelayedCommand } from "../../core/simulation-command"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -9844,7 +9844,7 @@ export class Sandshrew extends Pokemon {
   speDef = 3
   maxPP = 80
   range = 1
-  skill = Ability.SPIKE_ARMOR
+  skill = Ability.ROLLOUT
   additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
@@ -9859,7 +9859,7 @@ export class Sandslash extends Pokemon {
   speDef = 5
   maxPP = 80
   range = 1
-  skill = Ability.SPIKE_ARMOR
+  skill = Ability.ROLLOUT
   additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
@@ -15190,6 +15190,53 @@ export class IronHands extends Pokemon {
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
+export class Rookidee extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FLYING])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.CORVISQUIRE
+  hp = 80
+  atk = 6
+  def = 4
+  speDef = 2
+  maxPP = 90
+  range = 1
+  skill = Ability.STEEL_WING
+  attackSprite = AttackSprite.FLYING_MELEE
+  regional = true
+}
+
+export class Corvisquire extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FLYING])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.CORVIKNIGHT
+  hp = 130
+  atk = 10
+  def = 6
+  speDef = 3
+  maxPP = 90
+  range = 1
+  skill = Ability.STEEL_WING
+  attackSprite = AttackSprite.FLYING_MELEE
+  regional = true
+}
+
+export class Corviknight extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FLYING])
+  rarity = Rarity.RARE
+  stars = 3
+  hp = 220
+  atk = 20
+  def = 8
+  speDef = 4
+  maxPP = 90
+  range = 1
+  skill = Ability.STEEL_WING
+  attackSprite = AttackSprite.FLYING_MELEE
+  regional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -16050,5 +16097,8 @@ export const PokemonClasses: Record<
   [Pkm.OGERPON_HEARTHFLAME_MASK]: OgerponHearthflameMask,
   [Pkm.OGERPON_CORNERSTONE]: OgerponCornerstone,
   [Pkm.OGERPON_CORNERSTONE_MASK]: OgerponCornerstoneMask,
-  [Pkm.IRON_HANDS]: IronHands
+  [Pkm.IRON_HANDS]: IronHands,
+  [Pkm.ROOKIDEE]: Rookidee,
+  [Pkm.CORVISQUIRE]: Corvisquire,
+  [Pkm.CORVIKNIGHT]: Corviknight
 }
