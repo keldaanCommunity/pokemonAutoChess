@@ -1201,7 +1201,7 @@
     "MAX_MELTDOWN": "Раздайте 120% от ATK като TRUE",
     "CURSE_OF_VULNERABILITY": "Врагът с най-висок DEF + SPE_DEF губи 5 от него и е FLINCH",
     "CURSE_OF_WEAKNESS": "Също така, врагът с най-висока ATK губи 30% от нея и е PARALYSIS",
-    "CURSE_OF_TORMENT": "Също така, врагът с най-висок AP губи 50% от него и е SILENCE",
+    "CURSE_OF_TORMENT": "Също така, врагът с най-висок AP губи 50% от него и е FATIGUE",
     "CURSE_OF_FATE": "Също така, най-силната противникова единица е CURSE и ще бъде нокаутирана след 6 секунди",
     "AROMATIC_MIST": "15% допълнителни SPECIAL за атаки и шокове",
     "FAIRY_WIND": "30% допълнителни SPECIAL за атаки и шокове",

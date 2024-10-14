@@ -1188,7 +1188,7 @@
     "MAX_MELTDOWN": "Behandel 120% van ATK als TRUE",
     "CURSE_OF_VULNERABILITY": "De vijand met de hoogste DEF + SPE_DEF verliest er 5 en is FLINCH",
     "CURSE_OF_WEAKNESS": "Ook verliest de vijand met de hoogste ATK 30% ervan en is PARALYSIS",
-    "CURSE_OF_TORMENT": "Ook verliest de vijand met de hoogste AP 50% ervan en is SILENCE",
+    "CURSE_OF_TORMENT": "Ook verliest de vijand met de hoogste AP 50% ervan en is FATIGUE",
     "CURSE_OF_FATE": "De sterkste eenheid van de tegenstander is CURSE en wordt KO na 6 seconden.",
     "AROMATIC_MIST": "15% extra SPECIAL voor aanvallen en schokken",
     "FAIRY_WIND": "30% extra SPECIAL voor aanvallen en schokken",

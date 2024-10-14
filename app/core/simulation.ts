@@ -1702,11 +1702,7 @@ export default class Simulation extends Schema implements ISimulation {
         enemyWithHighestAP = enemyWithHighestAP as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
         enemyWithHighestAP.addAbilityPower(-50, enemyWithHighestAP, 0, false)
         enemyWithHighestAP.status.curseTorment = true
-        enemyWithHighestAP.status.triggerSilence(
-          30000,
-          enemyWithHighestAP,
-          undefined
-        )
+        enemyWithHighestAP.status.triggerFatigue(30000, enemyWithHighestAP)
       }
     }
 

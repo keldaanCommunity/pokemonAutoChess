@@ -216,7 +216,7 @@ export function MainSidebar(props: MainSidebarProps) {
 
         <div className="spacer"></div>
 
-        {(
+        {page !== "game" && (
           <NavLink
             svg="players"
             className="community-servers"

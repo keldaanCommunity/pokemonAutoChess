@@ -10234,6 +10234,33 @@ export class SteelWingStrategy extends AbilityStrategy {
   }
 }
 
+export class YawnStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const opponentsTargetingMe = board.cells.filter<PokemonEntity>(
+      (entity): entity is PokemonEntity =>
+        entity != null &&
+        entity.team !== pokemon.team &&
+        entity.targetX === pokemon.positionX &&
+        entity.targetY === pokemon.positionY
+    )
+
+    opponentsTargetingMe.forEach((opponent) => {
+      opponent.status.triggerFatigue(4000, pokemon)
+      opponent.addAbilityPower(-30, pokemon, 0, false)
+    })
+
+    const shield = [20, 40, 80][pokemon.stars - 1] ?? 80
+    pokemon.addShield(shield, pokemon, 1, true)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -10607,5 +10634,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.METAL_BURST]: new MetalBurstStrategy(),
   [Ability.THUNDER_CAGE]: new ThunderCageStrategy(),
   [Ability.HEADBUTT]: new HeadbuttStrategy(),
-  [Ability.STEEL_WING]: new SteelWingStrategy()
+  [Ability.STEEL_WING]: new SteelWingStrategy(),
+  [Ability.YAWN]: new YawnStrategy()
 }
