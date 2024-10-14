@@ -10636,7 +10636,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.METAL_BURST]: new MetalBurstStrategy(),
   [Ability.THUNDER_CAGE]: new ThunderCageStrategy(),
   [Ability.HEADBUTT]: new HeadbuttStrategy(),
-  [Ability.STEEL_WING]: new SteelWingStrategy()
-  [Ability.HEADBUTT]: new HeadbuttStrategy(),
+  [Ability.STEEL_WING]: new SteelWingStrategy(),
   [Ability.YAWN]: new YawnStrategy()
 }
