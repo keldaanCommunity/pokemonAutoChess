@@ -20,6 +20,7 @@ export default function WikiStatus() {
     Status.RESURECTION,
     Status.RUNE_PROTECT,
     Status.SILENCE,
+    Status.FATIGUE,
     Status.SLEEP,
     Status.WOUND,
     Status.RAGE,

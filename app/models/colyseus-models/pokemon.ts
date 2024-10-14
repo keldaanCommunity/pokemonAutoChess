@@ -3762,7 +3762,7 @@ export class Slowpoke extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 1
-  skill = Ability.SOAK
+  skill = Ability.YAWN
   attackSprite = AttackSprite.WATER_MELEE
   regional = true
 }
@@ -3778,7 +3778,7 @@ export class Slowbro extends Pokemon {
   speDef = 3
   maxPP = 100
   range = 1
-  skill = Ability.SOAK
+  skill = Ability.YAWN
   attackSprite = AttackSprite.WATER_MELEE
   regional = true
 }
@@ -3793,7 +3793,7 @@ export class Slowking extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.SOAK
+  skill = Ability.YAWN
   attackSprite = AttackSprite.WATER_MELEE
   regional = true
 }

@@ -1564,7 +1564,7 @@
     "MAX_MELTDOWN": "Lidar com 120% do ATK como TRUE",
     "CURSE_OF_VULNERABILITY": "A unidade adversária com maior DEF + SPE_DEF perde 5 e é FLINCH",
     "CURSE_OF_WEAKNESS": "Além disso, a unidade adversária com o maior ATK perde 30% dele e fica PARALYSIS",
-    "CURSE_OF_TORMENT": "Além disso, a unidade adversária com o maior AP perde 50% dele e é SILENCE",
+    "CURSE_OF_TORMENT": "Além disso, a unidade adversária com o maior AP perde 50% dele e é FATIGUE",
     "CURSE_OF_FATE": "Além disso, a unidade adversária mais forte é CURSE e será KO após 6 segundos",
     "AROMATIC_MIST": "15% SPECIAL adicional para ataques e choques",
     "FAIRY_WIND": "30% SPECIAL adicional para ataques e choques",
