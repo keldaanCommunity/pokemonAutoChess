@@ -1,5 +1,9 @@
 # New Pokemons:
 
+- Rookidee
+- Corvisquire
+- Corviknight
+
 # Changes to Pokemon & Abilities
 
 - New ability for Sandshrew: Rollout

@@ -2632,6 +2632,10 @@ export function displayAbility(
       addAbilitySprite(Ability.ICE_HAMMER, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.STEEL_WING:
+      addAbilitySprite(Ability.STEEL_WING, coordinates, true).setScale(2)
+      break
+
     case Ability.FOUL_PLAY:
       addAbilitySprite(Ability.NIGHT_SLASH, coordinatesTarget, true).setScale(2)
       break
