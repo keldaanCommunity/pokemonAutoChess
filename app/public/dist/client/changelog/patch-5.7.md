@@ -1,6 +1,12 @@
 # New Pokemons:
 
+# Gameplay
+
+- New status: Fatigue: reduce all PP gain from all sources by 50%
+
 # Changes to Pokemon & Abilities
+
+- New ability for Slowpoke line: Yawn: Gain 20/40/80 SHIELD. Adjacent opponents are fatigued for 4 seconds and lose 30% AP.
 
 # Changes to Synergies
 
@@ -13,9 +19,6 @@
 - Weather rocks are no longer held items and no longer give synergies. Instead, they give bonuses to your team when in a certain weather.
 - Added 4 new weather rocks: Electric Quartz, Float Stone, Blood Stone, Mist Stone
 
-# Gameplay
-
-- New status: Fatigue: reduce all PP gain from all sources by 50%
 
 # UI
 
