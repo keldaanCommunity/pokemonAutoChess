@@ -2108,7 +2108,7 @@
     "FLOAT_STONE": "WINDY +3. WINDY 날씨일 때, 5%의 추가 회피율을 획득.",
     "ELECTRIC_QUARTZ": "STORM +3. STORM 날씨일 때, 아군이 번개에 피격 시 50 SHIELD 를 획득하고 PARALYSIS 로부터 20% 빠르게 회복함.",
     "MIST_STONE": "MISTY +3. MISTY 날씨일 때, 아군이 2 SPE_DEF 획득.",
-    "BLOOD_STONE": "BLOOD_MOON +3. BLOOD_MOON 날씨일 때, WOUND 상태의 아군은 체력 회복량의 30%를 SHIELD 로 얻고 WOUND 상태인 적에게 입히는 피해량의 20%를 회복함."
+    "BLOOD_STONE": "BLOODMOON +3. BLOODMOON 날씨일 때, WOUND 상태의 아군은 체력 회복량의 30%를 SHIELD 로 얻고 WOUND 상태인 적에게 입히는 피해량의 20%를 회복함."
   },
   "passive_description": {
     "NONE": "아무런 효과가 없습니다.",
