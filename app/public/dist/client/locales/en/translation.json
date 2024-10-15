@@ -1415,7 +1415,7 @@
     "SHELL_TRAP": "After the next PHYSICAL received, the trap explodes and deal [100,SP] SPECIAL to adjacent enemies",
     "DIG": "Digs underground and reappears next to the farthest enemy, dealing [10,20,40,SP] SPECIAL to all enemies on the way",
     "FIRE_SPIN": "Area of effect attack that deals [20,40,80,SP] SPECIAL around the target and BURN all enemies hit for 3 seconds",
-    "SEARING_SHOT": "An inferno of scarlet flames torches everything around the user. Deals [40,SP] SPECIAL and BURN for 3 seconds all enemies within 2 tiles of Victini.",
+    "SEARING_SHOT": "An inferno of scarlet flames torches everything around the user. Deals [50,SP] SPECIAL and BURN for 3 seconds all enemies within 2 tiles of Victini.",
     "SPLASH": "Just flops and splashes around to no effect at all...",
     "PECK": "Deals [10,30,50,SP] SPECIAL to the target",
     "COUNTER": "Pokemon lashes out at adjacent enemies dealing [50,SP]% of its missing HP as SPECIAL",
@@ -2229,7 +2229,8 @@
     "OGERPON_TEAL": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, restores [20,SP] HP to adjacent allies",
     "OGERPON_WELLSPRING": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, gives 10 PP to adjacent allies",
     "OGERPON_HEARTHFLAME": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, BURN adjacent enemies for 2 seconds",
-    "OGERPON_CORNERSTONE": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, FLINCH adajcent enemies for 5 seconds"
+    "OGERPON_CORNERSTONE": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, FLINCH adajcent enemies for 5 seconds",
+    "VICTINI": "Increases the accuracy of the team. Allies can no longer miss their attacks."
   },
   "stat": {
     "ATK": "Attack",

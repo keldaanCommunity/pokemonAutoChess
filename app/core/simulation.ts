@@ -140,6 +140,8 @@ export default class Simulation extends Schema implements ISimulation {
       if (player) {
         const entityTeam =
           player.team === Team.BLUE_TEAM ? this.blueTeam : this.redTeam
+        const opponentTeam =
+          player.team === Team.BLUE_TEAM ? this.redTeam : this.blueTeam
         player.board.forEach((pokemon) => {
           const entity = values(entityTeam).find(
             (p) => p.refToBoardPokemon === pokemon
@@ -149,6 +151,7 @@ export default class Simulation extends Schema implements ISimulation {
               simulation: this,
               player,
               team: entityTeam,
+              opponentTeam,
               entity
             })
           }

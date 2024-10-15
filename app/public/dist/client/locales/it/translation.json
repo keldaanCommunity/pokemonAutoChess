@@ -1410,7 +1410,7 @@
     "SHELL_TRAP": "Ai prossimi PHYSICAL subiti, la trappola esplode e infligge [100,SP] SPECIAL ai Pokèmon nemici adiacenti.",
     "DIG": "Scava sottoterra e riappare accanto al nemico più lontano, infliggendo [10,20,40,SP] SPECIAL a tutti i nemici lungo il tragitto.",
     "FIRE_SPIN": "Infliggi [20,40,80,SP] SPECIAL ai Pokèmon nemici intorno al bersaglio e causa BURN a tutti i nemici colpiti per 3 secondi.",
-    "SEARING_SHOT": "Un inferno di fiamme scarlatte incendia tutto ciò che circonda l'utilizzatore. Infligge [40,SP] SPECIAL e BURN per 3 secondi a tutti i nemici entro 2 caselle da Victini.",
+    "SEARING_SHOT": "Un inferno di fiamme scarlatte incendia tutto ciò che circonda l'utilizzatore. Infligge [50,SP] SPECIAL e BURN per 3 secondi a tutti i nemici entro 2 caselle da Victini.",
     "SPLASH": "Solo flop e spruzzi senza alcun effetto...",
     "PECK": "Infligge [10,30,50,SP] SPECIAL al bersaglio",
     "COUNTER": "Si scaglia contro i nemici adiacenti infliggendo [50,SP]% dei suoi HP mancanti come SPECIAL",

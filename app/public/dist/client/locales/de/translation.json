@@ -1410,7 +1410,7 @@
     "SHELL_TRAP": "Nach dem nächsten empfangenen PHYSICAL explodiert die Falle und fügt benachbarten Feinden [100,SP] SPECIAL zu",
     "DIG": "Gräbt sich unter der Erde und taucht neben dem am weitesten entfernten Feind wieder auf, wobei er allen Feinden auf dem Weg [10,20,40,SP] Spezialschaden zufügt",
     "FIRE_SPIN": "Flächenangriff, der [20,40,80,SP] SPECIAL um das Ziel herum verursacht und alle getroffenen Feinde 3 Sekunden lang BURN",
-    "SEARING_SHOT": "Ein Inferno aus scharlachroten Flammen verbrennt alles um den Benutzer herum. Verursacht [40,SP] SPECIAL und VERBRENNT 3 Sekunden lang alle Gegner innerhalb von 2 Feldern um Victini.",
+    "SEARING_SHOT": "Ein Inferno aus scharlachroten Flammen verbrennt alles um den Benutzer herum. Verursacht [50,SP] SPECIAL und VERBRENNT 3 Sekunden lang alle Gegner innerhalb von 2 Feldern um Victini.",
     "SPLASH": "Es flattert und spritzt einfach herum, ohne jegliche Wirkung ...",
     "PECK": "Fügt dem Ziel [10,30,50,SP] SPECIAL zu",
     "COUNTER": "Das Pokémon schlägt auf benachbarte Gegner ein und verursacht [50,SP]% seiner fehlenden HP als SPECIAL",

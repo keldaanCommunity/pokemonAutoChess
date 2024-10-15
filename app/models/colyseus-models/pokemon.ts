@@ -7,8 +7,10 @@ import {
   HatchEvolutionRule,
   ItemEvolutionRule
 } from "../../core/evolution-rules"
+import { PokemonEntity } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
 import { DelayedCommand } from "../../core/simulation-command"
+import { OnUpdatePhaseCommand } from "../../rooms/commands/game-commands"
 import GameState from "../../rooms/states/game-state"
 import {
   AttackSprite,
@@ -160,6 +162,7 @@ export class Pokemon extends Schema implements IPokemon {
     player: IPlayer
     simulation: Simulation
     team: MapSchema<IPokemonEntity>
+    opponentTeam: MapSchema<IPokemonEntity>
     entity: IPokemonEntity
   }) {
     // called at simulation start after entities are generated
@@ -5432,8 +5435,8 @@ export class Volcanion extends Pokemon {
   stars = 3
   hp = 300
   atk = 20
-  def = 2
-  speDef = 2
+  def = 4
+  speDef = 3
   maxPP = 90
   range = 2
   skill = Ability.STEAM_ERUPTION
@@ -6131,7 +6134,15 @@ export class Victini extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SEARING_SHOT
+  passive = Passive.VICTINI
   attackSprite = AttackSprite.FIRE_MELEE
+  afterSimulationStart({
+    opponentTeam
+  }: { opponentTeam: MapSchema<IPokemonEntity> }) {
+    opponentTeam.forEach((pokemon) => {
+      pokemon.addDodgeChance(-1, pokemon, 0, false)
+    })
+  }
 }
 
 export class Jirachi extends Pokemon {
