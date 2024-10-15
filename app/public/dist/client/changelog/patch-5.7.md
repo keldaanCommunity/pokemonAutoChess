@@ -36,6 +36,7 @@
 - Locked status now correctly triggers retargetting, and reapply wide lens effect after restoring range
 - Fixed a bug where the player was not able to refresh the shop if they have free shop rerolls but zero gold
 - Items giving a synergy are now also taken into account for weather election
+- Fix many bugs related to Stone Edge ability
 
 # Misc
 

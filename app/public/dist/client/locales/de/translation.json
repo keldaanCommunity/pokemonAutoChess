@@ -1612,7 +1612,7 @@
     "GLAIVE_RUSH": "Der Angreifer stürmt mit seinem gesamten Körper rücksichtslos los. Springt hinter das Ziel und fügt ihm 6 Sekunden lang [40,80,150,SP] PHYSICAL und ARMOR_REDUCTION zu.",
     "FOUL_PLAY": "Fügt [2,4,6,SP,ND=1] x ATK des Ziels als SPEZIAL zu",
     "DOUBLE_IRON_BASH": "Der Benutzer dreht sich, zentriert die Sechskantmutter in seiner Brust und schlägt dann zweimal hintereinander mit den Armen zu, wobei er [150,SP] % seines ATK einsetzt. Dadurch FLINCH das Ziel 3 Sekunden lang zusammen.",
-    "STONE_EDGE": "Für [5,8] Sekunden SILENCE selbst, erhält 2 RANGE, [10,20,SP] CRIT_CHANCE und wendet 100% seiner DEF als PHYSICAL auf Angriffe an",
+    "STONE_EDGE": "Für [5,8] Sekunden SILENCE selbst, erhält 2 RANGE, [20,SP] CRIT_CHANCE und wendet [100,SP]% seiner DEF als PHYSICAL auf Angriffe an",
     "ROAR": "Puste das Ziel weg. Wenn es gegen eine Wand prallt, erleidet es [10,20,40,SP] SPEZIAL. Wenn es ein anderes Pokémon trifft, erleiden beide Pokémon SPEZIAL.",
     "INFESTATION": "Fügt dem Ziel [10,SP] SPECIAL für jeden verbündeten BUG an Bord zu und platziert deinen stärksten BUG im Kampf auf deiner Bank",
     "IVY_CUDGEL": "Fügt dem Ziel [100,SP] SPECIAL zu",

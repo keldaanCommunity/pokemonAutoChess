@@ -14941,7 +14941,7 @@ export class Binacle extends Pokemon {
   range = 1
   skill = Ability.STONE_EDGE
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE
+  attackSprite = AttackSprite.ROCK_RANGE
 }
 
 export class Barbaracle extends Pokemon {
@@ -14956,7 +14956,7 @@ export class Barbaracle extends Pokemon {
   range = 1
   skill = Ability.STONE_EDGE
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE
+  attackSprite = AttackSprite.ROCK_RANGE
 }
 
 export class Skarmory extends Pokemon {

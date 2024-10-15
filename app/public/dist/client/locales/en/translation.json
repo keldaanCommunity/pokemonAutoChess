@@ -1617,7 +1617,7 @@
     "GLAIVE_RUSH": "The caster throws its entire body into a reckless charge. Dash behind the target, dealing it [40,80,150,SP] PHYSICAL and ARMOR_REDUCTION itself for 6 seconds",
     "FOUL_PLAY": "Deals [2,4,6,SP,ND=1] x target's ATK as SPECIAL",
     "DOUBLE_IRON_BASH": "The user rotates, centering the hex nut in its chest, and then strikes with its arms twice in a row with [150,SP] % of its ATK. This make the target FLINCH for 3 seconds.",
-    "STONE_EDGE": "For [5,8] seconds, the caster SILENCE itself, gains 2 RANGE, [10,20,SP] CRIT_CHANCE and apply 100% of its DEF as PHYSICAL on attacks",
+    "STONE_EDGE": "For [5,8] seconds, the caster SILENCE itself, gains 2 RANGE, [20,SP] CRIT_CHANCE and apply [100,SP]% of its DEF as PHYSICAL on attacks",
     "ROAR": "Blow away the target. If it hits a wall, it suffers [10,20,40,SP] SPECIAL. If it hits another pokémon, both pokémons suffer SPECIAL.",
     "INFESTATION": "Deals [10,SP] SPECIAL to the target for each allied BUG on board and places your most powerful BUG on your bench in the fight",
     "IVY_CUDGEL": "Deals [100,SP] SPECIAL to the target",

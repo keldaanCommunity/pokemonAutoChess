@@ -1612,7 +1612,7 @@
     "GLAIVE_RUSH": "L'utilizzatore si butta di corpo in una carica molto rischiosa. Scatta verso il bersaglio, infliggendo [40,80,150,SP] PHYSICAL e causa a se stesso ARMOR_REDUCTION per 6 secondi.",
     "FOUL_PLAY": "Infliggi [2,4,6,SP] SPECIAL moltiplicati per l' ATK del bersaglio",
     "DOUBLE_IRON_BASH": "L'utilizzatore rotea su sè stesso, poi colpisce con le sue braccia due volte infliggendo il [150,SP] % del suo ATK entrambe le volte. Causa al bersaglio FLINCH per 3 secondi.",
-    "STONE_EDGE": "Per [5,8] secondi, l'utilizzatore si autoinfligge SILENCE, ottiene 2 di RANGE, [10,20,SP] di CRIT_CHANCE e applica il 100% della sua DEF come PHYSICAL agli attacchi.",
+    "STONE_EDGE": "Per [5,8] secondi, l'utilizzatore si autoinfligge SILENCE, ottiene 2 di RANGE, [20,SP] di CRIT_CHANCE e applica il [100,SP]% della sua DEF come PHYSICAL agli attacchi.",
     "ROAR": "Spazza via il bersaglio. Se il bersaglio colpisce un muro, gli vengono inflitti [10,20,40,SP] SPECIAL. Se colpisce un altro Pokèmon, entrambi subiscono SPECIAL.",
     "INFESTATION": "Infliggi [10,SP] SPECIAL al bersaglio per ogni Pokèmon BUG alleato e piazza il BUG più forte nella panchina durante il combattimento.",
     "IVY_CUDGEL": "Infliggi [100,SP] SPECIAL al bersaglio.",

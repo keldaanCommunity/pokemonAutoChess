@@ -62,6 +62,10 @@ export default abstract class PokemonState {
         damage = Math.ceil(damage * (1 + pokemon.ap / 100))
       }
 
+      if (pokemon.status.stoneEdge) {
+        damage += Math.round(pokemon.def * (1 + pokemon.ap / 100))
+      }
+
       let trueDamagePart = 0
       if (pokemon.effects.has(Effect.STEEL_SURGE)) {
         trueDamagePart += 0.33
