@@ -21,6 +21,7 @@
 - Nerf Grass 3: HP healed every 2 seconds: 8 → 7
 - Nerf Light 3: PP per second 10 → 8
 - Change Ghost 6: cursed opponent is ~~Silenced~~ Fatigued
+- Change Fire shard: give ~~+2~~ +3 ATK for ~~2~~ 3 player HP
 
 # Changes to Items
 

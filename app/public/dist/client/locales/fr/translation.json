@@ -2093,7 +2093,7 @@
     "FLOAT_STONE": "Counts for 3 towards WINDY. Under WINDY, gain 5% additional dodge chance.",
     "MIST_STONE": "Counts for 3 towards MISTY. Under MISTY, your team gains 2 SPE_DEF.",
     "BLOOD_STONE": "Counts for 3 towards BLOOD_MOON. Under BLOODMOON, your team gets 30% of incoming healing as SHIELD when WOUND, and heal for 20% of damage dealt if target is WOUND.",
-    "FIRE_SHARD": "Sacrifie 2 HP du joueur pour donner de façon permanente +2 ATK à un de vos Pokémons FIRE. Immédiatement consommé.",
+    "FIRE_SHARD": "Sacrifie 3 HP du joueur pour donner de façon permanente +3 ATK à un de vos Pokémons FIRE. Immédiatement consommé.",
     "TEAL_MASK": "Ce masque en bois sculpté est orné de cristaux, confère 50 BOUCLIER et permet à Ogerpon d'utiliser le type FLORA pendant la bataille.",
     "WELLSPRING_MASK": "Ce masque en bois sculpté est orné de cristaux, confère 50 BOUCLIER et permet à Ogerpon d'utiliser le type AQUATIC pendant la bataille.",
     "HEARTHFLAME_MASK": "Ce masque en bois sculpté est orné de cristaux, confère 50 BOUCLIER et permet à Ogerpon d'utiliser le type FIRE pendant la bataille.",
