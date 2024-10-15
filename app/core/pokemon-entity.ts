@@ -207,8 +207,19 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     )
   }
 
-  get isTargettable(): boolean {
-    return !this.status.resurecting
+  isTargettableBy(
+    attacker: IPokemonEntity,
+    targetEnemies = true,
+    targetAllies = false
+  ): boolean {
+    return (
+      !this.status.resurecting &&
+      ((targetAllies && this.team === attacker.team) ||
+        (targetEnemies && this.team !== attacker.team) ||
+        (attacker.effects.has(Effect.MERCILESS) &&
+          attacker.id !== this.id &&
+          this.life <= 0.15 * this.hp))
+    )
   }
 
   get player(): Player | undefined {
@@ -916,14 +927,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.hasSynergyEffect(Synergy.MONSTER)) {
-      let flinchChance = 0
-      if (this.effects.has(Effect.PURSUIT)) {
-        flinchChance = 0.3
-      } else if (this.effects.has(Effect.BRUTAL_SWING)) {
-        flinchChance = 0.4
-      } else if (this.effects.has(Effect.POWER_TRIP)) {
-        flinchChance = 0.5
-      }
+      const flinchChance = 0.3
       if (chance(flinchChance)) {
         target.status.triggerFlinch(3000, target, this)
       }
@@ -1323,37 +1327,32 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.count.moneyCount += moneyGained
     }
 
-    if (
-      this.effects.has(Effect.PURSUIT) ||
-      this.effects.has(Effect.BRUTAL_SWING) ||
-      this.effects.has(Effect.POWER_TRIP)
-    ) {
+    if (this.hasSynergyEffect(Synergy.MONSTER)) {
       const isPursuit = this.effects.has(Effect.PURSUIT)
       const isBrutalSwing = this.effects.has(Effect.BRUTAL_SWING)
       const isPowerTrip = this.effects.has(Effect.POWER_TRIP)
+      const isMerciless = this.effects.has(Effect.MERCILESS)
 
-      if (isPursuit || isBrutalSwing || isPowerTrip) {
-        let lifeBoost = 0,
-          attackBoost = 0,
-          apBoost = 0
-        if (isPursuit) {
-          lifeBoost = 30
-          attackBoost = 3
-          apBoost = 10
-        } else if (isBrutalSwing) {
-          lifeBoost = 60
-          attackBoost = 6
-          apBoost = 20
-        } else if (isPowerTrip) {
-          lifeBoost = 100
-          attackBoost = 10
-          apBoost = 30
-        }
-        if (this.life > 0) {
-          this.addMaxHP(lifeBoost, this, 0, false)
-          this.addAttack(attackBoost, this, 0, false)
-          this.addAbilityPower(apBoost, this, 0, false)
-        }
+      let lifeBoost = 0,
+        attackBoost = 0,
+        apBoost = 0
+      if (isPursuit) {
+        lifeBoost = Math.round(0.2 * target.hp)
+        attackBoost = 3
+        apBoost = 10
+      } else if (isBrutalSwing) {
+        lifeBoost = Math.round(0.4 * target.hp)
+        attackBoost = 6
+        apBoost = 20
+      } else if (isPowerTrip || isMerciless) {
+        lifeBoost = Math.round(0.6 * target.hp)
+        attackBoost = 10
+        apBoost = 30
+      }
+      if (this.life > 0) {
+        this.addMaxHP(lifeBoost, this, 0, false)
+        this.addAttack(attackBoost, this, 0, false)
+        this.addAbilityPower(apBoost, this, 0, false)
       }
     }
 

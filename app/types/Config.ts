@@ -91,7 +91,7 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.POISON]: [3, 5, 7],
   [Synergy.DRAGON]: [3, 5, 7],
   [Synergy.FIELD]: [3, 6, 9],
-  [Synergy.MONSTER]: [2, 4, 6],
+  [Synergy.MONSTER]: [2, 4, 6, 9],
   [Synergy.HUMAN]: [2, 4, 6],
   [Synergy.AQUATIC]: [2, 4, 6],
   [Synergy.BUG]: [2, 4, 6, 8],

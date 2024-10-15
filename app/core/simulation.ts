@@ -997,20 +997,11 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.PURSUIT:
-          if (types.has(Synergy.MONSTER)) {
-            pokemon.effects.add(Effect.PURSUIT)
-          }
-          break
-
         case Effect.BRUTAL_SWING:
-          if (types.has(Synergy.MONSTER)) {
-            pokemon.effects.add(Effect.BRUTAL_SWING)
-          }
-          break
-
         case Effect.POWER_TRIP:
+        case Effect.MERCILESS:
           if (types.has(Synergy.MONSTER)) {
-            pokemon.effects.add(Effect.POWER_TRIP)
+            pokemon.effects.add(effect)
           }
           break
 

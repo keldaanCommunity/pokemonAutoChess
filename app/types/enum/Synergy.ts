@@ -80,7 +80,12 @@ export const SynergyEffects: { [key in Synergy]: Effect[] } = Object.freeze({
     Effect.DRAGON_DANCE
   ],
   [Synergy.FIELD]: [Effect.BULK_UP, Effect.RAGE, Effect.ANGER_POINT],
-  [Synergy.MONSTER]: [Effect.PURSUIT, Effect.BRUTAL_SWING, Effect.POWER_TRIP],
+  [Synergy.MONSTER]: [
+    Effect.PURSUIT,
+    Effect.BRUTAL_SWING,
+    Effect.POWER_TRIP,
+    Effect.MERCILESS
+  ],
   [Synergy.HUMAN]: [Effect.MEDITATE, Effect.FOCUS_ENERGY, Effect.CALM_MIND],
   [Synergy.AQUATIC]: [Effect.SWIFT_SWIM, Effect.HYDRATION, Effect.WATER_VEIL],
   [Synergy.BUG]: [

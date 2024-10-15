@@ -875,11 +875,7 @@ export default abstract class PokemonState {
         y++
       ) {
         const value = board.getValue(x, y)
-        if (
-          value !== undefined &&
-          value.team !== pokemon.team &&
-          value.isTargettable
-        ) {
+        if (value && value.isTargettableBy(pokemon)) {
           const candidateDistance = distanceC(
             pokemon.positionX,
             pokemon.positionY,
@@ -913,11 +909,7 @@ export default abstract class PokemonState {
     }>()
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (
-        value !== undefined &&
-        value.team !== pokemon.team &&
-        value.isTargettable
-      ) {
+      if (value && value.isTargettableBy(pokemon)) {
         const candidateDistance = distanceM(
           pokemon.positionX,
           pokemon.positionY,
@@ -948,7 +940,7 @@ export default abstract class PokemonState {
     let maxDistance = 0
 
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
-      if (enemy && enemy.team !== pokemon.team && enemy.isTargettable) {
+      if (enemy && enemy.isTargettableBy(pokemon)) {
         const distance = distanceM(pokemon.positionX, pokemon.positionY, x, y)
         if (distance > maxDistance) {
           farthestTarget = enemy
@@ -1034,9 +1026,9 @@ export default abstract class PokemonState {
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (
-        value !== undefined &&
+        value &&
         value.id !== pokemon.id &&
-        value.isTargettable
+        value.isTargettableBy(pokemon, true, true)
       ) {
         const candidateDistance = distanceM(
           pokemon.positionX,

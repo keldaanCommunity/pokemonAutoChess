@@ -885,7 +885,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           case Effect.ANGER_POINT:
             player.titles.add(Title.CAMPER)
             break
-          case Effect.POWER_TRIP:
+          case Effect.MERCILESS:
             player.titles.add(Title.MYTH_TRAINER)
             break
           case Effect.CALM_MIND:

@@ -20,6 +20,12 @@
 - Rock: weather rocks are no longer immediately available, they are collected after fighting in a certain weather
 - Nerf Grass 3: HP healed every 2 seconds: 8 → 7
 - Change Ghost 6: cursed opponent is ~~Silenced~~ Fatigued
+- Monsters now have 30% chance to flinch with their attacks at all levels (unlocked when activating the first level of synergy)
+- Monter changes:
+    - (2) Pursuit: When knocking down its target, gain 3 Attack , 10% Ability Power and ~~30 max HP~~ **20% of its max HP**
+    - (4) Brutal Swing: When knocking down its target, gain 6 Attack , 20% Ability Power and ~~60 max HP~~ **40% of its max HP**
+    - (6) Power Trip:  When knocking down its target, gain 10 Attack , 30% Ability Power and ~~100 max HP~~ **60% of its max HP**
+    - **New** (9) Merciless: Monsters can target allies with less than 15% of their max HP
 
 # Changes to Items
 
