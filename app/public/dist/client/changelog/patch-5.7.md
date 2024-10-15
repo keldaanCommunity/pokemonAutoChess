@@ -14,6 +14,7 @@
 - Change Detect (Patrat): now detects opponents in a 2-cell radius
 - New ability for Slowpoke line: Yawn: Gain 20/40/80 SHIELD. Adjacent opponents are fatigued for 4 seconds and lose 30% AP.
 - Change Gigaton hammer (Tinkatink line): ~~Silence~~ Fatigue self for 6 seconds
+- Buff Clefable: PP 100 → 80
 
 # Changes to Synergies
 

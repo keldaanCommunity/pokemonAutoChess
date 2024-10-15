@@ -4311,7 +4311,7 @@ export class Clefable extends Pokemon {
   atk = 18
   def = 4
   speDef = 4
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.METRONOME
   attackSprite = AttackSprite.FAIRY_MELEE
