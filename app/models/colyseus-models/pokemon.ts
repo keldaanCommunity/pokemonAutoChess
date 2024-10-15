@@ -507,7 +507,7 @@ export class Scyther extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 190
+  hp = 170
   atk = 19
   def = 5
   speDef = 5
@@ -533,7 +533,7 @@ export class Scizor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING, Synergy.STEEL])
   rarity = Rarity.UNIQUE
   stars = 4
-  hp = 190
+  hp = 170
   atk = 25
   def = 7
   speDef = 5
@@ -547,7 +547,7 @@ export class Kleavor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ROCK, Synergy.DARK])
   rarity = Rarity.UNIQUE
   stars = 4
-  hp = 190
+  hp = 170
   atk = 25
   def = 7
   speDef = 5

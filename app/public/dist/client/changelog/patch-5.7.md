@@ -16,6 +16,7 @@
 - Change Gigaton hammer (Tinkatink line): ~~Silence~~ Fatigue self for 6 seconds
 - Buff Clefable: PP 100 → 80
 - Deerling line is now Normal/Grass instead of Wild/Grass
+- Nerf Scyther, Scizor, Kleavor: HP 190 → 170
 
 # Changes to Synergies
 
@@ -29,7 +30,7 @@
 
 - Weather rocks are no longer held items and no longer give synergies. Instead, they give bonuses to your team when in a certain weather.
 - Added 4 new weather rocks: Electric Quartz, Float Stone, Blood Stone, Mist Stone
-
+- Nerf Electirizer: Attack speed 50 → 30%
 
 # UI
 

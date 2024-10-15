@@ -651,7 +651,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.SALAC_BERRY]: {},
   [Item.SITRUS_BERRY]: {},
   [Item.COMFEY]: {},
-  [Item.ELECTIRIZER]: { [Stat.ATK_SPEED]: 50 },
+  [Item.ELECTIRIZER]: { [Stat.ATK_SPEED]: 30 },
   [Item.MAGMARIZER]: { [Stat.ATK]: 5 },
   [Item.MACHO_BRACE]: { [Stat.ATK]: 15, [Stat.ATK_SPEED]: -15 },
   [Item.LIGHT_BALL]: { [Stat.AP]: 75 },
