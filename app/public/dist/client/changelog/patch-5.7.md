@@ -15,6 +15,7 @@
 - New ability for Slowpoke line: Yawn: Gain 20/40/80 SHIELD. Adjacent opponents are fatigued for 4 seconds and lose 30% AP.
 - Change Gigaton hammer (Tinkatink line): ~~Silence~~ Fatigue self for 6 seconds
 - Buff Clefable: PP 100 → 80
+- Deerling line is now Normal/Grass instead of Wild/Grass
 
 # Changes to Synergies
 

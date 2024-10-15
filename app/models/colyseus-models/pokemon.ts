@@ -13249,7 +13249,7 @@ export class Ambipom extends Pokemon {
 }
 
 export class Deerling extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GRASS])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS])
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.SAWSBUCK
@@ -13264,7 +13264,7 @@ export class Deerling extends Pokemon {
 }
 
 export class Sawsbuck extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GRASS])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS])
   rarity = Rarity.RARE
   stars = 2
   hp = 180
