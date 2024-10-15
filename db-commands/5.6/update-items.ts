@@ -1,6 +1,7 @@
 import dotenv from "dotenv"
 import { connect } from "mongoose"
 import { BotV2 } from "../../app/models/mongo-models/bot-v2"
+import DetailledStatistic from "../../app/models/mongo-models/detailled-statistic-v2"
 import { ItemsStatistics } from "../../app/models/mongo-models/items-statistic"
 import { Item } from "../../app/types/enum/Item"
 import { logger } from "../../app/utils/logger"
@@ -60,6 +61,27 @@ async function main() {
       if (modified) {
         itemStat.markModified("name")
         await itemStat.save()
+      }
+    }
+
+    const stats = await DetailledStatistic.find({}, ["pokemons"])
+    for (let i = 0; i < stats.length; i++) {
+      const record = stats[i]
+      let modified = false
+      record.pokemons.forEach((p) => {
+        itemsToReplace.forEach((replacement, itemToReplace) => {
+          if (p.items.includes(itemToReplace)) {
+            logger.debug(
+              `ItemStat: Replacing item ${itemToReplace} by ${replacement}`
+            )
+            p.items.splice(p.items.indexOf(itemToReplace), 1, replacement)
+            modified = true
+          }
+        })
+      })
+      if (modified) {
+        record.markModified("pokemons")
+        await record.save()
       }
     }
 
