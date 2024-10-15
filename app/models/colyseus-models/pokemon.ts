@@ -14798,7 +14798,7 @@ export class Octillery extends Pokemon {
   def = 3
   speDef = 3
   maxPP = 100
-  range = 2
+  range = 3
   skill = Ability.OKTZOOKA
   attackSprite = AttackSprite.WATER_RANGE
 }

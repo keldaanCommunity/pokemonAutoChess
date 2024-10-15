@@ -17,6 +17,7 @@
 - Buff Clefable: PP 100 → 80
 - Deerling line is now Normal/Grass instead of Wild/Grass
 - Nerf Scyther, Scizor, Kleavor: HP 190 → 170
+- Buff Octillery: Range 2 → 3, PP 100 → 80
 
 # Changes to Synergies
 
