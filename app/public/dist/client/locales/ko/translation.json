@@ -390,7 +390,9 @@
     "IVY_CUDGEL": "덩굴방망이",
     "FORCE_PALM": "발경",
     "THUNDER_CAGE": "썬더프리즌",
-    "HEADBUTT": "박치기"
+    "HEADBUTT": "박치기",
+    "YAWN": "하품",
+    "STEEL_WING": "강철날개"
   },
   "pkm": {
     "DEFAULT": "미싱노",
@@ -1247,11 +1249,14 @@
     "OGERPON_HEARTHFLAME_MASK": "오거폰 화덕의 가면",
     "OGERPON_CORNERSTONE": "오거폰 주춧돌",
     "OGERPON_CORNERSTONE_MASK": "오거폰 주춧돌의 가면",
-    "IRON_HANDS": "무쇠손"
+    "IRON_HANDS": "무쇠손",
+    "ROOKIDEE": "파라꼬",
+    "CORVISQUIRE": "파크로우",
+    "CORVIKNIGHT": "아머까오"
   },
   "ability_description": {
     "SOFT_BOILED": "모든 아군 포켓몬의 상태이상효과를 회복하며 [20,40,80,SP] 만큼의 SHIELD를 부여한다.",
-    "EARTHQUAKE": "시전자와 같은 세로줄에 있는 모든 적포켓몬에게 [120,SP] SPECIAL 를 가한다.",
+    "EARTHQUAKE": "시전자와 동일한 세로줄 혹은 가로줄에 있는 모든 적포켓몬에게 [120,SP] SPECIAL 를 가한다.",
     "SONG_OF_DESIRE": "뒤쪽의 상대 포켓몬 2마리를 3초간 CHARM 상태로 만들며, ATK 을 [3,SP]만큼 감소시킨다.",
     "CONFUSING_MIND": "뒤쪽의 상대 포켓몬 2마리를 [3,SP]초동안 CONFUSION 상태로 만든다.",
     "KNOWLEDGE_THIEF": "대상의 능력을 가져와서 사용합니다. 플레이어는 1XP를 획득한다.",
@@ -1618,7 +1623,9 @@
     "IVY_CUDGEL": "대상에게 [100,SP]의 SPECIAL 를 입힌다.",
     "FORCE_PALM": "[60,SP] + 대상 최대 HP 의 10%를 SPECIAL 로 가하고 PARALYSIS 상태로 6초 동안 만든다. 대상이 이미 PARALYSIS 상태라면 [40,SP] SPECIAL 을 추가로 입히고 밀어낸다.",
     "THUNDER_CAGE": "대상과 주변의 적을 전기 감옥에 가두어 [60,SP]의 SPECIAL 를 입히고 3초 동안 LOCKED 와 PARALYSIS 상태로 만든다.",
-    "HEADBUTT": "대상에게 [20,40,80,SP]의 SPECIAL 를 입히고 5초 동안 FLINCH 이 되게 한다. 대상이 SHIELD 이 있다면 두 배의 피해를 입힌다."
+    "HEADBUTT": "대상에게 [20,40,80,SP]의 SPECIAL 를 입히고 5초 동안 FLINCH 이 되게 한다. 대상이 SHIELD 이 있다면 두 배의 피해를 입힌다.",
+    "YAWN": "[20,40,80,SP] SHIELD 를 획득한다. 이 포켓몬을 공격하는 적은 4초 동안 FATIGUE 상태에 빠지고 30% AP 가 감소한다.",
+    "STEEL_WING": "적의 후방으로 돌진하여 부딪히는 모든 적에게 [10,20,40,SP] + 3X DEF SPECIAL 를 입히고 1 DEF 를 훔친다."
   },
   "effect": {
     "INGRAIN": "뿌리박기",
@@ -1746,9 +1753,9 @@
     "STRENGTH": "25 SHIELD 획득",
     "ENDURE": "35 SHIELD 획득",
     "PURE_POWER": "50 SHIELD 획득",
-    "INGRAIN": "2초당 7HP 회복. 열매나무 1개 획득.",
-    "GROWTH": "2초당 15HP 회복. 열매나무 2개 획득.",
-    "SPORE": "2초당 30HP 회복. 열매나무 3개 획득",
+    "INGRAIN": "2초당 7 HP 회복. 열매나무 1개 획득.",
+    "GROWTH": "2초당 15 HP 회복. 열매나무 2개 획득.",
+    "SPORE": "2초당 30 HP 회복. 열매나무 3개 획득",
     "BLAZE": "30% 확률로 BURN",
     "VICTORY_STAR": "타격 성공시마다 +1 ATK",
     "DROUGHT": "타격 성공시마다 +2 ATK",
@@ -1803,9 +1810,9 @@
     "GLOOM_FLOWER": "냄새꼬 생성",
     "VILE_FLOWER": "라플레시아 생성",
     "SUN_FLOWER": "아르코 생성",
-    "BATTLE_ARMOR": "5 DEF 증가, 치명타 대미지 30% 감소. 날씨돌 1개 획득",
+    "BATTLE_ARMOR": "5 DEF 증가, 치명타 대미지 30% 감소. 날씨 변화 시 날씨돌 1개 획득",
     "MOUTAIN_RESISTANCE": "15 DEF 증가, 치명타 대미지 50% 감소. 2번째 날씨돌 획득",
-    "DIAMOND_STORM": "30 DEF 증가, 치명타 대미지 70% 감소. 마지막 날씨돌 획득",
+    "DIAMOND_STORM": "30 DEF 증가, 치명타 대미지 70% 감소. 3번째 날씨돌 획득",
     "STEEL_SURGE": "ATK의 33%만큼 TRUE",
     "STEEL_SPIKE": "ATK의 66%만큼 TRUE",
     "CORKSCREW_CRASH": "ATK의 100%만큼 TRUE",
@@ -1972,6 +1979,10 @@
     "HEAT_ROCK": "뜨거운바위",
     "SMOOTH_ROCK": "보송보송바위",
     "BLACK_AUGURITE": "검은휘석",
+    "FLOAT_STONE": "가벼운돌",
+    "ELECTRIC_QUARTZ": "전기석영",
+    "MIST_STONE": "안개의돌",
+    "BLOOD_STONE": "혈석",
     "FIRE_SHARD": "불꽃 조각",
     "TEAL_MASK": "벽록의 가면",
     "WELLSPRING_MASK": "우물의 가면",
@@ -2088,7 +2099,16 @@
     "TEAL_MASK": "오거폰에게 50 SHIELD 및 FLORA 부여",
     "WELLSPRING_MASK": "오거폰에게 50 SHIELD 및 AQUATIC 부여",
     "HEARTHFLAME_MASK": "오거폰에게 50 SHIELD 및 FIRE 부여",
-    "CORNERSTONE_MASK": "오거폰에게 50 SHIELD 및 ROCK 부여"
+    "CORNERSTONE_MASK": "오거폰에게 50 SHIELD 및 ROCK 부여",
+    "DAMP_ROCK": "RAIN +3. RAIN 날씨일 때, 아군이 매초 2 PP 회복.",
+    "ICY_ROCK": "SNOW +3. SNOW 날씨일 때, 아군이 FREEZE 으로부터 20% 빠르게 회복하고 기본 공격에 5% 확률로 적에게 FREEZE 을 가함.",
+    "HEAT_ROCK": "SUN +3. SUN 날씨일 때, 아군이 입는 BURN 피해가 20% 감소하고 기본 공격에 5% 확률로 적에게 BURN 을 가함.",
+    "SMOOTH_ROCK": "SANDSTORM +3. SANDSTORM 날씨일 때, 아군이 입는 모래폭풍 피해가 20% 감소하고 매초 1% ATK_SPEED 를 획득.",
+    "BLACK_AUGURITE": "NIGHT +3. NIGHT 날씨일 때, 아군이 입는 치명타 피해가 5% 감소하고 5% CRIT_CHANCE 을 획득.",
+    "FLOAT_STONE": "WINDY +3. WINDY 날씨일 때, 5%의 추가 회피율을 획득.",
+    "ELECTRIC_QUARTZ": "STORM +3. STORM 날씨일 때, 아군이 번개에 피격 시 50 SHIELD 를 획득하고 PARALYSIS 로부터 20% 빠르게 회복함.",
+    "MIST_STONE": "MISTY +3. MISTY 날씨일 때, 아군이 2 SPE_DEF 획득.",
+    "BLOOD_STONE": "BLOODMOON +3. BLOODMOON 날씨일 때, WOUND 상태의 아군은 체력 회복량의 30%를 SHIELD 로 얻고 WOUND 상태인 적에게 입히는 피해량의 20%를 회복함."
   },
   "passive_description": {
     "NONE": "아무런 효과가 없습니다.",
@@ -2263,7 +2283,8 @@
     "ELECTRIC_FIELD": "일렉트릭필드",
     "PSYCHIC_FIELD": "사이코필드",
     "GRASS_FIELD": "그래스필드",
-    "FAIRY_FIELD": "미스트필드"
+    "FAIRY_FIELD": "미스트필드",
+    "FATIGUE": "피로"
   },
   "status_description": {
     "BURN": "최대 체력의 5%에 해당하는 TRUE를 매 초 받습니다. 회복량이 50% 감소합니다.",
@@ -2287,7 +2308,8 @@
     "ELECTRIC_FIELD": "가하는 데미지가 20% 증가합니다(ELECTRIC 한정)",
     "PSYCHIC_FIELD": "가하는 데미지가 20% 증가합니다(PSYCHIC 한정)",
     "GRASS_FIELD": "가하는 데미지가 20% 증가합니다(GRASS 한정)",
-    "FAIRY_FIELD": "가하는 데미지가 20% 증가합니다(FAIRY 한정)"
+    "FAIRY_FIELD": "가하는 데미지가 20% 증가합니다(FAIRY 한정)",
+    "FATIGUE": "모든 PP 획득량이 50% 감소합니다."
   },
   "synergy": {
     "NORMAL": "노말",
@@ -2341,7 +2363,7 @@
     "BUG": "전투 시작 시, 가장 강한 아군 BUG 포켓몬이 복제됩니다.",
     "FLYING": "FLYING 포켓몬은 PARALYSIS, FREEZE 또는 SLEEP 상태가 아닐 경우 HP가 일정량 이하로 내려갈 시 멀리 날아갑니다.",
     "FLORA": "처음 FLORA 포켓몬이 기절했을 경우, 꽃이 피어납니다. 소환된 포켓몬은 아군 FLORA 포켓몬이 기절할 때마다 랜덤한 도구를 지급받습니다.",
-    "ROCK": "ROCK 포켓몬은 추가 DEF를 획득하며 급소 데미지를 경감합니다. 시너지가 강화될 때마다, 랜덤한 날씨 바위를 받습니다.",
+    "ROCK": "ROCK 포켓몬은 추가 DEF를 획득하며 급소 데미지를 경감하고, 날씨에 적응할 수 있습니다.",
     "GHOST": "GHOST 포켓몬은 공격을 피할 확률이 25%이고, 적중 시 SILENCE를 얻고, 상대방에게 다양한 저주를 적용합니다.",
     "FAIRY": "FAIRY 포켓몬의 공격은 추가적인 SPECIAL을 주며, 급소에 맞을 때마다 충격파를 방출합니다.",
     "ICE": "ICE 포켓몬은 매 공격의 명중 이후 상대를 2초 동안 FREEZE 상태로 만들며, 아군 전체에게 추가 SPE_DEF를 부여합니다.",
@@ -2862,6 +2884,12 @@
   "weather_rocks": "날씨 돌",
   "special_items": "특별한 도구",
   "shiny_items": "빛나는 도구",
+  "craftable_items_description": "두 재료 아이템을 조합하여 강력한 완성 아이템을 제작하세요!",
+  "berries_description": "GRASS 시너지 활성화 시 아바타 옆의 나무들을 클릭하여 열매를 수확할 수 있습니다.",
+  "artificial_items_description": "ARTIFICIAL 시너지 활성화 시 전용 아이템들을 획득합니다. 게임 시작 시, 각 플레이어마다 세 가지 아이템이 랜덤하게 결정됩니다.",
+  "weather_rocks_description": "ROCK 시너지 활성화 시, 각각의 날씨마다 전투 후에 날씨 돌을 획득합니다. 날씨 돌은 해당 날씨가 활성화된 경우 아군 전체에게 추가 효과를 부여합니다. 날씨 돌의 효과는 중첩될 수 있습니다.",
+  "special_items_description": "이 아이템들은 특정 포켓몬들 전용입니다.",
+  "shiny_items_description": "PvE 스테이지에서 색이 다른 야생 포켓몬을 만나거나 황금알을 발견하는 경우, 보상으로 빛나는 도구를 획득할 수 있습니다.",
   "item_recipes": "도구 조합법",
   "news": "소식",
   "patch_notes": "패치노트",
