@@ -794,7 +794,7 @@ export default abstract class PokemonState {
       pokemon.effects.has(Effect.ETERNAL_LIGHT) ||
       pokemon.effects.has(Effect.MAX_ILLUMINATION)
     ) {
-      pokemon.addPP(10, pokemon, 0, false)
+      pokemon.addPP(8, pokemon, 0, false)
     }
 
     if (pokemon.items.has(Item.METRONOME)) {

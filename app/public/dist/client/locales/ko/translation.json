@@ -1857,7 +1857,7 @@
     "HYDRATATION": "RAIN 상태일시 GRASS 포켓몬들은 초당 5HP 회복",
     "POISON_GAS": "매 초마다 POISONNED 상태를 가함",
     "SHINING_RAY": "AP, ATK 20% 증가",
-    "LIGHT_PULSE": "추가로 초당 PP 10증가",
+    "LIGHT_PULSE": "추가로 초당 PP 8증가",
     "ETERNAL_LIGHT": "추가로 DEF, SPE_DEF 50% 증가 및 10초간 RUNE_PROTECT 부여",
     "MAX_ILLUMINATION": "추가로 100 SHIELD 및 RESURECTION 부여",
     "QUICK_FEET": "ATK, 이동속도 +30%",

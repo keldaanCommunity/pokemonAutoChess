@@ -19,6 +19,7 @@
 
 - Rock: weather rocks are no longer immediately available, they are collected after fighting in a certain weather
 - Nerf Grass 3: HP healed every 2 seconds: 8 → 7
+- Nerf Light 3: PP per second 10 → 8
 - Change Ghost 6: cursed opponent is ~~Silenced~~ Fatigued
 
 # Changes to Items

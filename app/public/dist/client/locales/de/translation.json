@@ -1850,7 +1850,7 @@
     "HYDRATATION": "Die GRASS Synergie heilt unter dem RAIN 5 zusätzliche HP pro Sekunde",
     "POISON_GAS": "Verursacht POISONNED jede Sekunde",
     "SHINING_RAY": "Erhöht",
-    "LIGHT_PULSE": "Gibt außerdem +10 PP pro Sekunde",
+    "LIGHT_PULSE": "Gibt außerdem +8 PP pro Sekunde",
     "ETERNAL_LIGHT": "Erhöht außerdem DEF und SPE_DEF um 50% und verleiht RUNE_PROTECT für 10 Sekunden",
     "MAX_ILLUMINATION": "Gibt auch 100 SHIELD und RESURECTION",
     "QUICK_FEET": "+30% ATK und Bewegungstempo",

@@ -491,7 +491,7 @@
     "HYDRATATION": "ผสานประเภท GRASS จะฟื้นฟูเพิ่มขึ้นอีก 5 หน่วย HP ต่อวินาทีในสภาพอากาศ RAIN",
     "POISON_GAS": "มอบสถานะ POISONNED ในทุกๆ วินาที",
     "SHINING_RAY": "เพิ่ม AP และ ATK จำนวน 20%",
-    "LIGHT_PULSE": "นอกจากนั้นยังได้รับ +10 PP ต่อวินาที",
+    "LIGHT_PULSE": "นอกจากนั้นยังได้รับ +8 PP ต่อวินาที",
     "ETERNAL_LIGHT": "และเพิ่ม DEF และ SPE_DEF ทั้งหมด 50% และมอบสถานะ RUNE_PROTECT เป็นเวลา 10 วินาที",
     "MAX_ILLUMINATION": "และมอบ 100 SHIELD และ สถานะ RESURECTION",
     "QUICK_FEET": "+30% ATK และ ความเร็วการเคลื่อนที่",
