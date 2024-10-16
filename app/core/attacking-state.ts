@@ -38,8 +38,7 @@ export default class AttackingState extends PokemonState {
       } else if (
         !(
           target &&
-          target.team !== pokemon.team &&
-          target.isTargettable &&
+          target.isTargettableBy(pokemon) &&
           distanceC(
             pokemon.positionX,
             pokemon.positionY,

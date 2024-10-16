@@ -20,6 +20,7 @@ img.description-icon {
   width: 1.5em;
   height: 1.5em;
   margin-right: 3px;
+  vertical-align: bottom;
 }
 
 h2 .description-icon > img {
