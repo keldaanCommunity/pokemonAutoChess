@@ -5472,9 +5472,9 @@ export class Larvesta extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 3
-  skill = Ability.FIRE_BLAST
+  skill = Ability.FIERY_DANCE
   additional = true
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Volcarona extends Pokemon {
@@ -5487,9 +5487,9 @@ export class Volcarona extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 3
-  skill = Ability.FIRE_BLAST
+  skill = Ability.FIERY_DANCE
   additional = true
-  attackSprite = AttackSprite.PSYCHIC_RANGE
+  attackSprite = AttackSprite.FIRE_RANGE
 }
 
 export class Chatot extends Pokemon {

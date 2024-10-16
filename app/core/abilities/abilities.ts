@@ -2456,13 +2456,22 @@ export class FireBlastStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 30
-    if (pokemon.stars === 2) {
-      damage = 60
-    }
-    if (pokemon.stars === 3) {
-      damage = 120
-    }
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
+export class FieryDanceStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
+    pokemon.addAbilityPower(30, pokemon, 0, crit)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -10635,5 +10644,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.THUNDER_CAGE]: new ThunderCageStrategy(),
   [Ability.HEADBUTT]: new HeadbuttStrategy(),
   [Ability.STEEL_WING]: new SteelWingStrategy(),
-  [Ability.YAWN]: new YawnStrategy()
+  [Ability.YAWN]: new YawnStrategy(),
+  [Ability.FIERY_DANCE]: new FieryDanceStrategy()
 }
