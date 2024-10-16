@@ -323,9 +323,11 @@ export class OnRoomNameCommand extends Command<
   execute({ client, message: roomName }) {
     roomName = cleanProfanity(roomName)
     try {
+      const user = this.state.users.get(client.auth?.uid)
       if (
-        client.auth?.uid == this.state.ownerId &&
-        this.state.name != roomName
+        this.state.name != roomName &&
+        (client.auth?.uid == this.state.ownerId ||
+          (user && [Role.ADMIN, Role.MODERATOR].includes(user.role)))
       ) {
         this.room.setName(roomName)
         this.state.name = roomName
