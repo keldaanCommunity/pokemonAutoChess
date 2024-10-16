@@ -14,18 +14,27 @@
 - Change Detect (Patrat): now detects opponents in a 2-cell radius
 - New ability for Slowpoke line: Yawn: Gain 20/40/80 SHIELD. Adjacent opponents are fatigued for 4 seconds and lose 30% AP.
 - Change Gigaton hammer (Tinkatink line): ~~Silence~~ Fatigue self for 6 seconds
+- Buff Clefable: PP 100 → 80
+- Deerling line is now Normal/Grass instead of Wild/Grass
+- Nerf Scyther, Scizor, Kleavor: HP 190 → 170
+- Buff Octillery: Range 2 → 3, PP 100 → 80
+- Buff Searing shot (Victini): 40 → 50 special damage ; new passive: Increases the accuracy of the team. Allies can can no longer miss their attacks.
+- Buff Volcanion: Def 2 → 4, Spedef 2 → 3
+- Buff Delphox: PP 100 → 90
 
 # Changes to Synergies
 
 - Rock: weather rocks are no longer immediately available, they are collected after fighting in a certain weather
 - Nerf Grass 3: HP healed every 2 seconds: 8 → 7
+- Nerf Light 3: PP per second 10 → 8
 - Change Ghost 6: cursed opponent is ~~Silenced~~ Fatigued
+- Change Fire shard: give ~~+2~~ +3 ATK for ~~2~~ 3 player HP
 
 # Changes to Items
 
 - Weather rocks are no longer held items and no longer give synergies. Instead, they give bonuses to your team when in a certain weather.
 - Added 4 new weather rocks: Electric Quartz, Float Stone, Blood Stone, Mist Stone
-
+- Nerf Electirizer: Attack speed 50 → 30%
 
 # UI
 

@@ -370,7 +370,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       value *
         (1 + (apBoost * caster.ap) / 100) *
         (crit ? caster.critPower : 1) *
-        (this.status.fatigue ? 0.5 : 1)
+        (this.status.fatigue && value > 0 ? 0.5 : 1)
     )
 
     if (
