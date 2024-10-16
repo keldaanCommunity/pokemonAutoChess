@@ -1252,7 +1252,9 @@
     "IRON_HANDS": "Iron Hands",
     "ROOKIDEE": "Rookidee",
     "CORVISQUIRE": "Corvisquire",
-    "CORVIKNIGHT": "Corviknight"
+    "CORVIKNIGHT": "Corviknight",
+    "MURKROW": "Murkrow",
+    "HONCHKROW": "Honchkrow"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
