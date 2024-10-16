@@ -371,5 +371,6 @@ export enum Ability {
   HEADBUTT = "HEADBUTT",
   STEEL_WING = "STEEL_WING",
   YAWN = "YAWN",
-  FIERY_DANCE = "FIERY_DANCE"
+  FIERY_DANCE = "FIERY_DANCE",
+  BIDE = "BIDE"
 }
