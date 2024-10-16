@@ -1596,15 +1596,15 @@
     "SPIKES": "3칸 반경 내에 최대 [6, SP]개의 철압정을 앞으로 던지며 [25,50, SP]의 SPECIAL를 가한다. 철압정은 필드에 남아서 그 위를 걷는 모든 포켓몬(FLYING 은 제외)에게 초당 10 TRUE 와 ARMOR_REDUCTION 을 가한다.",
     "SHADOW_PUNCH": "HP가 가장 낮은 타겟을 향해 날아간다. 다음 공격은 추가적으로 [30,60,120,SP] SPECIAL을 입힌다.",
     "GUNK_SHOT": "타겟에게 [50,100,SP] SPECIAL을 입히며 [2,4,SP]초 동안 POISONNED 상태를 부여한다.",
-    "MAGNET_BOMB": "자석 폭탄은 타겟에게 [20,40,80,SP] SPECIAL을 입히며, 인접한 적에게 [10,20,40,SP] SPECIAL을 입히며 먼 적을 끌어들인다.",
+    "MAGNET_BOMB": "마그넷봄은 타겟에게 [20,40,80,SP] SPECIAL을 입히며, 인접한 적에게 [10,20,40,SP] SPECIAL을 입히며 먼 적을 끌어들인다.",
     "MUDDY_WATER": "앞에 있는 최대 3마리에게 진흙탕 물을 뿜어내어[40,80,SP]SPECIAL 을 입히고 4초 동안 WOUND 및 ARMOR_REDUCTION 을 부여한다.",
     "ANCIENT_POWER": "타겟에게 바위를 발사하여 [50,100,SP]의 SPECIAL를 입힌다. 사용자의 AP를 [25,SP]%만큼 증가시킨다.",
-    "MOON_DREAM": "타겟은 [3,6,9]초 동안 SLEEP 에 빠지고 가장 가까운 아군 3명에게 [10,20,30,SP]의 SHIELD 를 부여한다.",
+    "MOON_DREAM": "대상을 [3,6,9]초 동안 SLEEP 상태로 만들며 대상과 가장 가까운 아군 3명에게 [10,20,30,SP]의 SHIELD 를 부여한다.",
     "STONE_AXE": "[50,SP] TRUE를 입힌다. 대상 주변에 날카로운 돌들을 놓으며 이 돌들은 필드에 남아 초당 10의 PHYSICAL 을 입힌다.다만 ROCK 또는 FLYING은 데미지를 입지 않는다.",
     "CAMERA_FLASH": "대상을 [2,SP] 초간 PARALYSIS 상태로 만든다.",
     "CRUSH_CLAW": "타겟의 DEF 를 [3,5]만큼 감소시킨 후, ATK 의 [100,SP]%만큼을 PHYSICAL 로 입히는 빠른 공격을 두 번 수행한다.",
     "FIRE_LASH": "타겟에게 [120,SP] SPECIAL을 입히고 4초 동안 ARMOR_REDUCTION을 부여한다.",
-    "FAIRY_LOCK": "타겟과 인접한 적에게 [90,SP] SPECIAL을 고르게 입힌다. 대상은 5초 동안 LOCKED를 부여받는다.",
+    "FAIRY_LOCK": "대상 및 인접한 적에게 총합 [90,SP] SPECIAL을 인원수만큼 나눠서 가한다. 대상은 5초 동안 LOCKED을 부여받는다.",
     "DRAIN_PUNCH": " 다음 공격은 [100,SP]% 만큼의 추가 SPECIAL을 입히고, 부여한 피해의 200%만큼 HP를 회복한다.",
     "GRAVITY": "적팀을 [2,SP]초간 LOCKED상태로 만든다.",
     "FAKE_OUT": "대상에게 [50,100,150,SP] SPECIAL을 입히고, 자신은 AP를 30% 잃는다. 사용자 AP가 음수인 경우를 제외하고 대상은 3초 동안 FLINCH 에 빠진다.",
@@ -1629,7 +1629,7 @@
     "HEADBUTT": "대상에게 [20,40,80,SP]의 SPECIAL 를 입히고 5초 동안 FLINCH 이 되게 한다. 대상이 SHIELD 이 있다면 두 배의 피해를 입힌다.",
     "STEEL_WING": "적의 후방으로 돌진하여 부딪히는 모든 적에게 [10,20,40,SP] + 3X DEF SPECIAL 를 입히고 1 DEF 를 훔친다.",
     "YAWN": "[20,40,80,SP] SHIELD 를 획득한다. 이 포켓몬을 공격하는 적은 4초 동안 FATIGUE 상태에 빠지고 30% AP 가 감소한다.",
-    "FIERY_DANCE": "불꽃속에 숨어서 시전자는 춤을 추며 날개를 펄럭이며 [25,50,100,SP]의 SPECIAL을 가한다. 또한 시전자의 AP를 30 증가시킨다."
+    "FIERY_DANCE": "불꽃을 두르며 시전자가 춤을 추며 날개를 펄럭이며 [25,50,100,SP]의 SPECIAL을 가한다. 또한 시전자의 AP를 30 증가시킨다."
   },
   "effect": {
     "INGRAIN": "뿌리박기",
