@@ -23,6 +23,7 @@
 - Buff Searing shot (Victini): 40 → 50 special damage ; new passive: Increases the accuracy of the team. Allies can can no longer miss their attacks.
 - Buff Volcanion: Def 2 → 4, Spedef 2 → 3
 - Buff Delphox: PP 100 → 90
+- New ability for Larvesta: Fiery Dance
 
 # Changes to Synergies
 

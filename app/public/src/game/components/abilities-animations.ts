@@ -55,6 +55,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.FIERY_DANCE:
+      addAbilitySprite(Ability.FIRE_BLAST, coordinatesTarget, true).setScale(2)
+      break
+
     case Ability.FIRE_SPIN:
       addAbilitySprite(Ability.FIRE_BLAST, coordinatesTarget, true).setScale(3)
       break
