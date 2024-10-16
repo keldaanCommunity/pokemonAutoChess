@@ -857,7 +857,9 @@ export enum Pkm {
   IRON_HANDS = "IRON_HANDS",
   ROOKIDEE = "ROOKIDEE",
   CORVISQUIRE = "CORVISQUIRE",
-  CORVIKNIGHT = "CORVIKNIGHT"
+  CORVIKNIGHT = "CORVIKNIGHT",
+  MURKROW = "MURKROW",
+  HONCHKROW = "HONCHKROW"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1717,7 +1719,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.IRON_HANDS]: "0992",
   [Pkm.ROOKIDEE]: "0821",
   [Pkm.CORVISQUIRE]: "0822",
-  [Pkm.CORVIKNIGHT]: "0823"
+  [Pkm.CORVIKNIGHT]: "0823",
+  [Pkm.MURKROW]: "0198",
+  [Pkm.HONCHKROW]: "0430"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2577,7 +2581,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.IRON_HANDS]: Pkm.IRON_HANDS,
   [Pkm.ROOKIDEE]: Pkm.ROOKIDEE,
   [Pkm.CORVISQUIRE]: Pkm.ROOKIDEE,
-  [Pkm.CORVIKNIGHT]: Pkm.ROOKIDEE
+  [Pkm.CORVIKNIGHT]: Pkm.ROOKIDEE,
+  [Pkm.MURKROW]: Pkm.MURKROW,
+  [Pkm.HONCHKROW]: Pkm.MURKROW
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7035,5 +7041,15 @@ export const AnimationConfig: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
     shinyUnavailable: true
+  },
+  [Pkm.MURKROW]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.HONCHKROW]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
   }
 }

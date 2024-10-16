@@ -12244,6 +12244,37 @@ export class Pelipper extends Pokemon {
   passive = Passive.DRIZZLE
 }
 
+export class Murkrow extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FLYING])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.HONCHKROW
+  hp = 110
+  atk = 9
+  def = 6
+  speDef = 3
+  maxPP = 70
+  range = 1
+  skill = Ability.FOUL_PLAY
+  additional = true
+  attackSprite = AttackSprite.DARK_MELEE
+}
+
+export class Honchkrow extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FLYING])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 220
+  atk = 24
+  def = 8
+  speDef = 5
+  maxPP = 70
+  range = 1
+  skill = Ability.FOUL_PLAY
+  additional = true
+  attackSprite = AttackSprite.DARK_MELEE
+}
+
 export class Zigzagoon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIELD])
   rarity = Rarity.RARE
@@ -16111,5 +16142,7 @@ export const PokemonClasses: Record<
   [Pkm.IRON_HANDS]: IronHands,
   [Pkm.ROOKIDEE]: Rookidee,
   [Pkm.CORVISQUIRE]: Corvisquire,
-  [Pkm.CORVIKNIGHT]: Corviknight
+  [Pkm.CORVIKNIGHT]: Corviknight,
+  [Pkm.MURKROW]: Murkrow,
+  [Pkm.HONCHKROW]: Honchkrow
 }

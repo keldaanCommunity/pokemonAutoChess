@@ -3,6 +3,8 @@
 - Rookidee
 - Corvisquire
 - Corviknight
+- Murkrow
+- Honchkrow
 
 # Gameplay
 
