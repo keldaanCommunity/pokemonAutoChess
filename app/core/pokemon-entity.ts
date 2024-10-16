@@ -381,7 +381,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       value *
         (1 + (apBoost * caster.ap) / 100) *
         (crit ? caster.critPower : 1) *
-        (this.status.fatigue ? 0.5 : 1)
+        (this.status.fatigue && value > 0 ? 0.5 : 1)
     )
 
     if (
@@ -630,19 +630,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             break
           }
         }
-      }
-    }
-
-    if (this.status.stoneEdge) {
-      const tg = board.getValue(target.positionX, target.positionY)
-      if (tg) {
-        tg.handleDamage({
-          damage: Math.round(this.def * (1 + this.ap / 100)),
-          board,
-          attackType: AttackType.SPECIAL,
-          attacker: this,
-          shouldTargetGainMana: true
-        })
       }
     }
 
@@ -994,7 +981,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         id: this.simulation.id,
         skill: "SHELL_TRAP_trigger",
         positionX: target.positionX,
-        positionY: target.positionX,
+        positionY: target.positionY,
         orientation: target.orientation
       })
       cells.forEach((cell) => {

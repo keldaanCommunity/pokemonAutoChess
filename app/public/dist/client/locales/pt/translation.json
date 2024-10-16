@@ -1301,7 +1301,7 @@
     "SHELL_TRAP": "Após o próximo PHYSICAL recebido, a armadilha explode e distribui [100,SP] SPECIAL para inimigos adjacentes",
     "DIG": "Cava no subsolo e reaparece ao lado do inimigo mais distante, causando [10,20,40,SP] SPECIAL a todos os inimigos no caminho",
     "FIRE_SPIN": "Ataque de área de efeito que causa [20,40,80,SP] SPECIAL ao redor do alvo e BURN todos os inimigos atingidos por 3 segundos",
-    "SEARING_SHOT": "Um inferno de chamas escarlates incendeia tudo ao redor do usuário. Inflige [40,SP] SPECIAL e BURN por 3 segundos todos os inimigos a 2 quadrados de Victini.",
+    "SEARING_SHOT": "Um inferno de chamas escarlates incendeia tudo ao redor do usuário. Inflige [50,SP] SPECIAL e BURN por 3 segundos todos os inimigos a 2 quadrados de Victini.",
     "SPLASH": "Apenas flops e salpicos sem nenhum efeito...",
     "PECK": "Inflige [10,30,50,SP] SPECIAL para o alvo",
     "COUNTER": "Ataca inimigos adjacentes, causando [50,SP]% de seu HP perdido como SPECIAL",

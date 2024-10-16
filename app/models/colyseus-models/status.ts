@@ -9,7 +9,7 @@ import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Weather } from "../../types/enum/Weather"
 import { count } from "../../utils/array"
-import { max } from "../../utils/number"
+import { max, min } from "../../utils/number"
 import { chance } from "../../utils/random"
 
 export default class Status extends Schema implements IStatus {
@@ -358,7 +358,7 @@ export default class Status extends Schema implements IStatus {
       this.stoneEdge = true
       this.stoneEdgeCooldown = timer
       pkm.addCritChance(20, pkm, 1, false)
-      pkm.range = 3
+      pkm.range += 2
     }
   }
 
@@ -366,7 +366,7 @@ export default class Status extends Schema implements IStatus {
     if (this.stoneEdgeCooldown - dt <= 0) {
       this.stoneEdge = false
       pkm.addCritChance(-20, pkm, 1, false)
-      pkm.range = pkm.baseRange
+      pkm.range = min(pkm.baseRange)(pkm.range - 2)
     } else {
       this.stoneEdgeCooldown -= dt
     }
