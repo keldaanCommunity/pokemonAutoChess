@@ -8,6 +8,8 @@
 - Turtonator
 - Sandygast
 - Palossand
+- Skorupi
+- Drapion
 
 # Gameplay
 
