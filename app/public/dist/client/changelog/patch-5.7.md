@@ -10,6 +10,7 @@
 - Palossand
 - Skorupi
 - Drapion
+- Aegislash Blade Form
 
 # Gameplay
 

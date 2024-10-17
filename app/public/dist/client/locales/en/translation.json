@@ -731,7 +731,8 @@
     "MEGA_BANETTE": "Mega Banette",
     "HONEDGE": "Honedge",
     "DOUBLADE": "Doublade",
-    "AEGISLASH": "Aegislash",
+    "AEGISLASH": "Aegislash (Shield)",
+    "AEGISLASH_BLADE": "Aegislash (Blade)",
     "CUBONE": "Cubone",
     "MAROWAK": "Marowak",
     "ALOLAN_MAROWAK": "Alolan Marowak",
@@ -2246,7 +2247,8 @@
     "OGERPON_WELLSPRING": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, gives 10 PP to adjacent allies",
     "OGERPON_HEARTHFLAME": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, BURN adjacent enemies for 2 seconds",
     "OGERPON_CORNERSTONE": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, FLINCH adajcent enemies for 5 seconds",
-    "VICTINI": "Increases the accuracy of the team. Allies can no longer miss their attacks."
+    "VICTINI": "Increases the accuracy of the team. Allies can no longer miss their attacks.",
+    "AEGISLASH": "Alternates between Shield Forme and Blade Forme when casting ability"
   },
   "stat": {
     "ATK": "Attack",

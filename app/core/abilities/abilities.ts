@@ -1254,6 +1254,27 @@ export class KingShieldStrategy extends AbilityStrategy {
     if (farthestTarget) {
       pokemon.moveTo(farthestTarget.positionX, farthestTarget.positionY, board)
     }
+    if (pokemon.name === Pkm.AEGISLASH) {
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          pokemon.addAttack(10, pokemon, 1, crit)
+          pokemon.addDefense(-5, pokemon, 1, crit)
+          pokemon.addSpecialDefense(-5, pokemon, 1, crit)
+          pokemon.name = Pkm.AEGISLASH_BLADE
+          pokemon.index = PkmIndex[Pkm.AEGISLASH_BLADE]
+        }, 1500)
+      )
+    } else if (pokemon.name === Pkm.AEGISLASH_BLADE) {
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          pokemon.addAttack(-10, pokemon, 1, crit)
+          pokemon.addDefense(5, pokemon, 1, crit)
+          pokemon.addSpecialDefense(5, pokemon, 1, crit)
+          pokemon.name = Pkm.AEGISLASH
+          pokemon.index = PkmIndex[Pkm.AEGISLASH]
+        }, 1500)
+      )
+    }
   }
 }
 

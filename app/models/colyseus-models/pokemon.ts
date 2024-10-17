@@ -1260,7 +1260,7 @@ export class Honedge extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.KING_SHIELD
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.STEEL_MELEE
 }
 
 export class Doublade extends Pokemon {
@@ -1279,7 +1279,7 @@ export class Doublade extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.KING_SHIELD
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.STEEL_MELEE
 }
 
 export class Aegislash extends Pokemon {
@@ -1294,10 +1294,30 @@ export class Aegislash extends Pokemon {
   atk = 23
   def = 7
   speDef = 7
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.KING_SHIELD
-  attackSprite = AttackSprite.DRAGON_MELEE
+  passive = Passive.AEGISLASH
+  attackSprite = AttackSprite.STEEL_MELEE
+}
+
+export class AegislashBlade extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GHOST,
+    Synergy.STEEL,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.RARE
+  stars = 3
+  hp = 230
+  atk = 33
+  def = 2
+  speDef = 2
+  maxPP = 80
+  range = 1
+  skill = Ability.KING_SHIELD
+  passive = Passive.AEGISLASH
+  attackSprite = AttackSprite.STEEL_MELEE
 }
 
 export class Oshawott extends Pokemon {
@@ -15699,6 +15719,7 @@ export const PokemonClasses: Record<
   [Pkm.HONEDGE]: Honedge,
   [Pkm.DOUBLADE]: Doublade,
   [Pkm.AEGISLASH]: Aegislash,
+  [Pkm.AEGISLASH_BLADE]: AegislashBlade,
   [Pkm.CUBONE]: Cubone,
   [Pkm.MAROWAK]: Marowak,
   [Pkm.ALOLAN_MAROWAK]: AlolanMarowak,
