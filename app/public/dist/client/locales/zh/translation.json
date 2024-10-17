@@ -231,6 +231,16 @@
     "HIDDEN_POWER_Y": "覺醒力量 (YOGA)",
     "HIDDEN_POWER_Z": "覺醒力量 (ZZZZ)",
     "HIDDEN_POWER_QM": "覺醒力量 (?)",
-    "HIDDEN_POWER_EM": "覺醒力量 (!)"
+    "HIDDEN_POWER_EM": "覺醒力量 (!)",
+    "POISON_JAB": "毒突",
+    "SHELL_SMASH": "破壳",
+    "HELPING_HAND": "帮助",
+    "ASTRAL_BARRAGE": "星碎",
+    "WATERFALL": "攀瀑",
+    "PYRO_BALL": "火焰球",
+    "WHIRLPOOL": "潮旋",
+    "PRESENT": "礼物",
+    "LEAF_BLADE": "叶刃",
+    "ANCHOR_SHOT": "掷锚"
   }
 }
