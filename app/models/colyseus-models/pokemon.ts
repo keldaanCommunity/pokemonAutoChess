@@ -15324,7 +15324,7 @@ export class Palossand extends Pokemon {
   atk = 12
   def = 6
   speDef = 5
-  maxPP = 80
+  maxPP = 90
   range = 1
   skill = Ability.SHORE_UP
   additional = true

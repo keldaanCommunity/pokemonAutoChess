@@ -10274,7 +10274,7 @@ export class BideStrategy extends AbilityStrategy {
     pokemon.status.bideCooldown = 3000
     const startingHealth = pokemon.life
     pokemon.toIdleState()
-    
+
     pokemon.commands.push(
       new DelayedCommand(() => {
         pokemon.simulation.room.broadcast(Transfer.ABILITY, {
@@ -10286,18 +10286,18 @@ export class BideStrategy extends AbilityStrategy {
           targetY: target.positionY
         })
         board
-        .getAdjacentCells(target.positionX, target.positionY, true)
-        .forEach((cell) => {
-          if (cell.value && pokemon.team != cell.value.team) {
-            cell.value.handleSpecialDamage(
-              (startingHealth - pokemon.life) * 2,
-              board,
-              AttackType.SPECIAL,
-              pokemon,
-              crit
-            )
-          }
-        })
+          .getAdjacentCells(target.positionX, target.positionY, true)
+          .forEach((cell) => {
+            if (cell.value && pokemon.team != cell.value.team) {
+              cell.value.handleSpecialDamage(
+                (startingHealth - pokemon.life) * 2,
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                crit
+              )
+            }
+          })
       }, 3000)
     )
   }
@@ -10341,10 +10341,6 @@ export class ShoreUpStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const heal = [0.2, 0.25][pokemon.stars - 1] ?? 0.25
     pokemon.handleHeal(heal * pokemon.hp, pokemon, 1, crit)
-    if (pokemon.simulation.weather === Weather.RAIN) {
-      const manaRainGain = [10, 15][pokemon.stars - 1] ?? 15
-      pokemon.addPP(manaRainGain, pokemon, 0, false)
-    }
     if (pokemon.simulation.weather === Weather.SANDSTORM) {
       pokemon.handleHeal(0.1 * pokemon.hp, pokemon, 1, crit)
     }
