@@ -1254,6 +1254,27 @@ export class KingShieldStrategy extends AbilityStrategy {
     if (farthestTarget) {
       pokemon.moveTo(farthestTarget.positionX, farthestTarget.positionY, board)
     }
+    if (pokemon.name === Pkm.AEGISLASH) {
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          pokemon.addAttack(10, pokemon, 1, crit)
+          pokemon.addDefense(-5, pokemon, 1, crit)
+          pokemon.addSpecialDefense(-5, pokemon, 1, crit)
+          pokemon.name = Pkm.AEGISLASH_BLADE
+          pokemon.index = PkmIndex[Pkm.AEGISLASH_BLADE]
+        }, 1500)
+      )
+    } else if (pokemon.name === Pkm.AEGISLASH_BLADE) {
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          pokemon.addAttack(-10, pokemon, 1, crit)
+          pokemon.addDefense(5, pokemon, 1, crit)
+          pokemon.addSpecialDefense(5, pokemon, 1, crit)
+          pokemon.name = Pkm.AEGISLASH
+          pokemon.index = PkmIndex[Pkm.AEGISLASH]
+        }, 1500)
+      )
+    }
   }
 }
 
@@ -3886,7 +3907,7 @@ export class EntanglingThreadStrategy extends AbilityStrategy {
   }
 }
 
-export class PoisonStingStrategy extends AbilityStrategy {
+export class VenoshockStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -10347,6 +10368,45 @@ export class ShoreUpStrategy extends AbilityStrategy {
   }
 }
 
+export class PoisonStingStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let maxStacks = 3
+    if (pokemon.effects.has(Effect.VENOMOUS)) {
+      maxStacks = 4
+    }
+    if (pokemon.effects.has(Effect.TOXIC)) {
+      maxStacks = 5
+    }
+
+    const nbStacksToApply = [2, 3, 4][pokemon.stars - 1] ?? 4
+    const currentStacks = target.status.poisonStacks
+    const extraDamage =
+      currentStacks + nbStacksToApply > maxStacks
+        ? (currentStacks + nbStacksToApply - maxStacks) *
+          ([25, 50, 100][pokemon.stars - 1] ?? 100)
+        : 0
+    for (let i = 0; i < nbStacksToApply; i++) {
+      target.status.triggerPoison(4000, target, pokemon)
+    }
+    if (extraDamage > 0) {
+      target.handleSpecialDamage(
+        extraDamage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -10409,7 +10469,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BUG_BUZZ]: new BugBuzzStrategy(),
   [Ability.STRING_SHOT]: new StringShotStrategy(),
   [Ability.ENTANGLING_THREAD]: new EntanglingThreadStrategy(),
-  [Ability.VENOSHOCK]: new PoisonStingStrategy(),
+  [Ability.VENOSHOCK]: new VenoshockStrategy(),
   [Ability.LEECH_LIFE]: new LeechLifeStrategy(),
   [Ability.HAPPY_HOUR]: new HappyHourStrategy(),
   [Ability.TELEPORT]: new TeleportStrategy(),
@@ -10724,5 +10784,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.YAWN]: new YawnStrategy(),
   [Ability.FIERY_DANCE]: new FieryDanceStrategy(),
   [Ability.BIDE]: new BideStrategy(),
-  [Ability.SHORE_UP]: new ShoreUpStrategy()
+  [Ability.SHORE_UP]: new ShoreUpStrategy(),
+  [Ability.POISON_STING]: new PoisonStingStrategy()
 }
