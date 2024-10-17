@@ -5,6 +5,9 @@
 - Corviknight
 - Murkrow
 - Honchkrow
+- Turtonator
+- Sandygast
+- Palossand
 
 # Gameplay
 
@@ -24,6 +27,8 @@
 - Buff Volcanion: Def 2 → 4, Spedef 2 → 3
 - Buff Delphox: PP 100 → 90
 - New ability for Larvesta: Fiery Dance
+- Rework Shell Trap ability: The shield of the Pokemon explodes, dealing 50 special damage + current shield around it. If it's not shielded, gains 75 shield instead
+- New ability for Shuckle: Bide: The user is unable to move for 3 secs. Bide will do SPECIAL damage equal to twice the damage received during the idling period around the user.
 
 # Changes to Synergies
 
@@ -60,3 +65,4 @@
 
 - Pokemons become shiny when given Shiny Charm
 - Thanks to all the contributors who helped with the translations! 3zukiDOT, Darkatek7, danGuinzo, logannoir, ph8ndstne, Zeleos753, RambonL, Tok1013-8 and more
+- New scribble rule: Desperate moves

@@ -51,7 +51,7 @@ export default class Player extends Schema implements IPlayer {
   @type(ExperienceManager) experienceManager = new ExperienceManager()
   @type({ map: "uint8" }) synergies = new Synergies()
   @type("uint16") money = process.env.MODE == "dev" ? 999 : 5
-  @type("int8") life = 100
+  @type("int16") life = 100
   @type("boolean") shopLocked: boolean = false
   @type("uint8") shopFreeRolls: number = 0
   @type("uint8") streak: number = 0
@@ -143,6 +143,8 @@ export default class Player extends Schema implements IPlayer {
     if (state.specialGameRule === SpecialGameRule.NINE_LIVES) {
       this.life = 9
       this.canRegainLife = false
+    } else if (state.specialGameRule === SpecialGameRule.DESPERATE_MOVES) {
+      this.life = 150
     }
 
     const randomStarter = state.shop.getRandomPokemonFromPool(

@@ -20,6 +20,7 @@ import {
 import { GamePhaseState } from "../../../../types/enum/Game"
 import { Item, ItemRecipe } from "../../../../types/enum/Item"
 import { Pkm } from "../../../../types/enum/Pokemon"
+import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { logger } from "../../../../utils/logger"
 import { values } from "../../../../utils/schemas"
 import { clearTitleNotificationIcon } from "../../../../utils/window"
@@ -206,10 +207,14 @@ export default class GameScene extends Scene {
 
   refreshShop() {
     const player = this.room?.state.players.get(this.uid!)
+    const rollCostType =
+      this.room?.state.specialGameRule === SpecialGameRule.DESPERATE_MOVES
+        ? "life"
+        : "money"
     if (
       player &&
       player.alive &&
-      (player.money >= 1 || player.shopFreeRolls > 0) &&
+      (player[rollCostType] >= 1 || player.shopFreeRolls > 0) &&
       player === this.board?.player
     ) {
       this.room?.send(Transfer.REFRESH)

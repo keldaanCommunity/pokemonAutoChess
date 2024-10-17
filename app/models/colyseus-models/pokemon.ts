@@ -11058,7 +11058,7 @@ export class Shuckle extends Pokemon {
   speDef = 15
   maxPP = 100
   range = 1
-  skill = Ability.SHELL_TRAP
+  skill = Ability.BIDE
   passive = Passive.SHUCKLE
   attackSprite = AttackSprite.ROCK_MELEE
 }
@@ -15278,6 +15278,58 @@ export class Corviknight extends Pokemon {
   attackSprite = AttackSprite.FLYING_MELEE
   regional = true
 }
+export class Turtonator extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FIRE])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 13
+  def = 7
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.SHELL_TRAP
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
+
+export class Sandygast extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GHOST,
+    Synergy.GROUND,
+    Synergy.AMORPHOUS
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.PALOSSAND
+  hp = 90
+  atk = 5
+  def = 3
+  speDef = 2
+  maxPP = 90
+  range = 1
+  skill = Ability.SHORE_UP
+  additional = true
+  attackSprite = AttackSprite.WATER_MELEE
+}
+
+export class Palossand extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GHOST,
+    Synergy.GROUND,
+    Synergy.AMORPHOUS
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 180
+  atk = 12
+  def = 6
+  speDef = 5
+  maxPP = 90
+  range = 1
+  skill = Ability.SHORE_UP
+  additional = true
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export const PokemonClasses: Record<
   Pkm,
@@ -16144,5 +16196,8 @@ export const PokemonClasses: Record<
   [Pkm.CORVISQUIRE]: Corvisquire,
   [Pkm.CORVIKNIGHT]: Corviknight,
   [Pkm.MURKROW]: Murkrow,
-  [Pkm.HONCHKROW]: Honchkrow
+  [Pkm.HONCHKROW]: Honchkrow,
+  [Pkm.TURTONATOR]: Turtonator,
+  [Pkm.SANDYGAST]: Sandygast,
+  [Pkm.PALOSSAND]: Palossand
 }

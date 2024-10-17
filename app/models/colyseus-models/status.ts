@@ -93,6 +93,7 @@ export default class Status extends Schema implements IStatus {
   darkHarvestDamageCooldown = 0
   stoneEdge = false
   stoneEdgeCooldown = 0
+  bideCooldown = 0
 
   clearNegativeStatus() {
     this.burnCooldown = 0
