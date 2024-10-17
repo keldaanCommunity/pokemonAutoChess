@@ -394,7 +394,8 @@
     "STEEL_WING": "Steel Wing",
     "YAWN": "Yawn",
     "FIERY_DANCE": "Fiery Dance",
-    "BIDE": "Bide"
+    "BIDE": "Bide",
+    "SHORE_UP": "Shore Up"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1256,7 +1257,9 @@
     "CORVISQUIRE": "Corvisquire",
     "CORVIKNIGHT": "Corviknight",
     "MURKROW": "Murkrow",
-    "HONCHKROW": "Honchkrow"
+    "HONCHKROW": "Honchkrow",
+    "SANDYGAST": "Sandygast",
+    "PALOSSAND": "Palossand"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1631,7 +1634,8 @@
     "STEEL_WING": "Dash into the enemy team's backline, dealing [10,20,40,SP] SPECIAL + 3x DEF as SPECIAL and stealing 1 DEF to all enemy Pokémon hit.",
     "YAWN": "Gain [20,40,80,SP] SHIELD. Opponents targeting this unit are FATIGUE for 4 seconds and lose 30% AP.",
     "FIERY_DANCE": "Cloaked in flames, the user dances and flaps its wings dealing [25,50,100,SP] SPECIAL to the target. Then raise the caster's AP by 30.",
-    "BIDE": "The user is unable to move for 3 secs. Bide will do SPECIAL damage equal to twice the damage received during the idling period around the user."
+    "BIDE": "The user is unable to move for 3 secs. Bide will do SPECIAL damage equal to twice the damage received during the idling period around the user.",
+    "SHORE_UP": "Heals the caster for [20,25,SP] % HP. If the weather is a SANDSTORM, increases  to [30,35,SP] % HP. If it's RAIN, gains [10,15] PP"
   },
   "effect": {
     "INGRAIN": "Ingrain",

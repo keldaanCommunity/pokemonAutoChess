@@ -6,6 +6,8 @@
 - Murkrow
 - Honchkrow
 - Turtonator
+- Sandygast
+- Palossand
 
 # Gameplay
 

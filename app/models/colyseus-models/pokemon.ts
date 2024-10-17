@@ -15292,6 +15292,45 @@ export class Turtonator extends Pokemon {
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
+export class Sandygast extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GHOST,
+    Synergy.GROUND,
+    Synergy.AMORPHOUS
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.PALOSSAND
+  hp = 90
+  atk = 5
+  def = 3
+  speDef = 2
+  maxPP = 90
+  range = 1
+  skill = Ability.SHORE_UP
+  additional = true
+  attackSprite = AttackSprite.WATER_MELEE
+}
+
+export class Palossand extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GHOST,
+    Synergy.GROUND,
+    Synergy.AMORPHOUS
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 180
+  atk = 12
+  def = 6
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.SHORE_UP
+  additional = true
+  attackSprite = AttackSprite.WATER_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -16158,5 +16197,7 @@ export const PokemonClasses: Record<
   [Pkm.CORVIKNIGHT]: Corviknight,
   [Pkm.MURKROW]: Murkrow,
   [Pkm.HONCHKROW]: Honchkrow,
-  [Pkm.TURTONATOR]: Turtonator
+  [Pkm.TURTONATOR]: Turtonator,
+  [Pkm.SANDYGAST]: Sandygast,
+  [Pkm.PALOSSAND]: Palossand
 }

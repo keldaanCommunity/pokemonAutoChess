@@ -10330,6 +10330,27 @@ export class YawnStrategy extends AbilityStrategy {
   }
 }
 
+export class ShoreUpStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const heal = [0.2, 0.25][pokemon.stars - 1] ?? 0.25
+    pokemon.handleHeal(heal * pokemon.hp, pokemon, 1, crit)
+    if (pokemon.simulation.weather === Weather.RAIN) {
+      const manaRainGain = [10, 15][pokemon.stars - 1] ?? 15
+      pokemon.addPP(manaRainGain, pokemon, 0, false)
+    }
+    if (pokemon.simulation.weather === Weather.SANDSTORM) {
+      pokemon.handleHeal(0.1 * pokemon.hp, pokemon, 1, crit)
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -10706,5 +10727,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.STEEL_WING]: new SteelWingStrategy(),
   [Ability.YAWN]: new YawnStrategy(),
   [Ability.FIERY_DANCE]: new FieryDanceStrategy(),
-  [Ability.BIDE]: new BideStrategy()
+  [Ability.BIDE]: new BideStrategy(),
+  [Ability.SHORE_UP]: new ShoreUpStrategy()
 }
