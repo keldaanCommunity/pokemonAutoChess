@@ -10274,7 +10274,7 @@ export class BideStrategy extends AbilityStrategy {
     pokemon.status.bideCooldown = 3000
     const startingHealth = pokemon.life
     pokemon.toIdleState()
-    
+
     pokemon.commands.push(
       new DelayedCommand(() => {
         pokemon.simulation.room.broadcast(Transfer.ABILITY, {
@@ -10286,18 +10286,18 @@ export class BideStrategy extends AbilityStrategy {
           targetY: target.positionY
         })
         board
-        .getAdjacentCells(target.positionX, target.positionY, true)
-        .forEach((cell) => {
-          if (cell.value && pokemon.team != cell.value.team) {
-            cell.value.handleSpecialDamage(
-              (startingHealth - pokemon.life) * 2,
-              board,
-              AttackType.SPECIAL,
-              pokemon,
-              crit
-            )
-          }
-        })
+          .getAdjacentCells(target.positionX, target.positionY, true)
+          .forEach((cell) => {
+            if (cell.value && pokemon.team != cell.value.team) {
+              cell.value.handleSpecialDamage(
+                (startingHealth - pokemon.life) * 2,
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                crit
+              )
+            }
+          })
       }, 3000)
     )
   }
@@ -10327,6 +10327,23 @@ export class YawnStrategy extends AbilityStrategy {
 
     const shield = [20, 40, 80][pokemon.stars - 1] ?? 80
     pokemon.addShield(shield, pokemon, 1, true)
+  }
+}
+
+export class ShoreUpStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const heal = [0.2, 0.25][pokemon.stars - 1] ?? 0.25
+    pokemon.handleHeal(heal * pokemon.hp, pokemon, 1, crit)
+    if (pokemon.simulation.weather === Weather.SANDSTORM) {
+      pokemon.handleHeal(0.1 * pokemon.hp, pokemon, 1, crit)
+    }
   }
 }
 
@@ -10706,5 +10723,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.STEEL_WING]: new SteelWingStrategy(),
   [Ability.YAWN]: new YawnStrategy(),
   [Ability.FIERY_DANCE]: new FieryDanceStrategy(),
-  [Ability.BIDE]: new BideStrategy()
+  [Ability.BIDE]: new BideStrategy(),
+  [Ability.SHORE_UP]: new ShoreUpStrategy()
 }

@@ -2662,6 +2662,10 @@ export function displayAbility(
       addAbilitySprite(Ability.COUNTER, coordinates, true).setScale(3)
       break
 
+    case Ability.SHORE_UP:
+      addAbilitySprite(Ability.EARTHQUAKE, coordinates, true).setScale(2)
+      break
+
     default:
       break
   }
