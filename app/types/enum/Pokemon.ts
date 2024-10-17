@@ -862,7 +862,9 @@ export enum Pkm {
   HONCHKROW = "HONCHKROW",
   SANDYGAST = "SANDYGAST",
   PALOSSAND = "PALOSSAND",
-  TURTONATOR = "TURTONATOR"
+  TURTONATOR = "TURTONATOR",
+  SKORUPI = "SKORUPI",
+  DRAPION = "DRAPION"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1727,7 +1729,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.HONCHKROW]: "0430",
   [Pkm.SANDYGAST]: "0769",
   [Pkm.PALOSSAND]: "0770",
-  [Pkm.TURTONATOR]: "0776"
+  [Pkm.TURTONATOR]: "0776",
+  [Pkm.SKORUPI]: "0451",
+  [Pkm.DRAPION]: "0452"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2592,7 +2596,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.HONCHKROW]: Pkm.MURKROW,
   [Pkm.SANDYGAST]: Pkm.SANDYGAST,
   [Pkm.PALOSSAND]: Pkm.SANDYGAST,
-  [Pkm.TURTONATOR]: Pkm.TURTONATOR
+  [Pkm.TURTONATOR]: Pkm.TURTONATOR,
+  [Pkm.SKORUPI]: Pkm.SKORUPI,
+  [Pkm.DRAPION]: Pkm.DRAPION
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7075,5 +7081,15 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Idle
+  },
+  [Pkm.SKORUPI]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Jab,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.DRAPION]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Jab,
+    emote: AnimationType.Shoot
   }
 }

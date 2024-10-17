@@ -395,7 +395,8 @@
     "YAWN": "Yawn",
     "FIERY_DANCE": "Fiery Dance",
     "BIDE": "Bide",
-    "SHORE_UP": "Shore Up"
+    "SHORE_UP": "Shore Up",
+    "POISON_STING": "Poison Sting"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1259,7 +1260,9 @@
     "MURKROW": "Murkrow",
     "HONCHKROW": "Honchkrow",
     "SANDYGAST": "Sandygast",
-    "PALOSSAND": "Palossand"
+    "PALOSSAND": "Palossand",
+    "SKORUPI": "Skorupi",
+    "DRAPION": "Drapion"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1635,7 +1638,8 @@
     "YAWN": "Gain [20,40,80,SP] SHIELD. Opponents targeting this unit are FATIGUE for 4 seconds and lose 30% AP.",
     "FIERY_DANCE": "Cloaked in flames, the user dances and flaps its wings dealing [25,50,100,SP] SPECIAL to the target. Then raise the caster's AP by 30.",
     "BIDE": "The user is unable to move for 3 secs. Bide will do SPECIAL damage equal to twice the damage received during the idling period around the user.",
-    "SHORE_UP": "Heals the caster for [20,25,SP] % HP. If the weather is a SANDSTORM, increases  to [30,35,SP] % HP."
+    "SHORE_UP": "Heals the caster for [20,25,SP] % HP. If the weather is a SANDSTORM, increases  to [30,35,SP] % HP.",
+    "POISON_STING": "Inflicts [2,3,4] stacks of POISON to target. Every stack over the max deals immediately [25,50,100,SP] SPECIAL."
   },
   "effect": {
     "INGRAIN": "Ingrain",
