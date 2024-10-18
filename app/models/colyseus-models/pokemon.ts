@@ -1260,7 +1260,7 @@ export class Honedge extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.KING_SHIELD
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.STEEL_MELEE
 }
 
 export class Doublade extends Pokemon {
@@ -1279,7 +1279,7 @@ export class Doublade extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.KING_SHIELD
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.STEEL_MELEE
 }
 
 export class Aegislash extends Pokemon {
@@ -1294,10 +1294,30 @@ export class Aegislash extends Pokemon {
   atk = 23
   def = 7
   speDef = 7
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.KING_SHIELD
-  attackSprite = AttackSprite.DRAGON_MELEE
+  passive = Passive.AEGISLASH
+  attackSprite = AttackSprite.STEEL_MELEE
+}
+
+export class AegislashBlade extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GHOST,
+    Synergy.STEEL,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.RARE
+  stars = 3
+  hp = 230
+  atk = 33
+  def = 2
+  speDef = 2
+  maxPP = 80
+  range = 1
+  skill = Ability.KING_SHIELD
+  passive = Passive.AEGISLASH
+  attackSprite = AttackSprite.STEEL_MELEE
 }
 
 export class Oshawott extends Pokemon {
@@ -15301,10 +15321,10 @@ export class Sandygast extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.PALOSSAND
-  hp = 90
+  hp = 60
   atk = 5
   def = 3
-  speDef = 2
+  speDef = 1
   maxPP = 90
   range = 1
   skill = Ability.SHORE_UP
@@ -15320,15 +15340,46 @@ export class Palossand extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 180
-  atk = 12
-  def = 6
-  speDef = 5
+  hp = 150
+  atk = 10
+  def = 4
+  speDef = 2
   maxPP = 90
   range = 1
   skill = Ability.SHORE_UP
   additional = true
   attackSprite = AttackSprite.WATER_MELEE
+}
+
+export class Skorupi extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.DRAPION
+  hp = 90
+  atk = 8
+  def = 4
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.POISON_STING
+  additional = true
+  attackSprite = AttackSprite.BUG_MELEE
+}
+
+export class Drapion extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON, Synergy.DARK])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 180
+  atk = 16
+  def = 6
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.POISON_STING
+  additional = true
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export const PokemonClasses: Record<
@@ -15668,6 +15719,7 @@ export const PokemonClasses: Record<
   [Pkm.HONEDGE]: Honedge,
   [Pkm.DOUBLADE]: Doublade,
   [Pkm.AEGISLASH]: Aegislash,
+  [Pkm.AEGISLASH_BLADE]: AegislashBlade,
   [Pkm.CUBONE]: Cubone,
   [Pkm.MAROWAK]: Marowak,
   [Pkm.ALOLAN_MAROWAK]: AlolanMarowak,
@@ -16199,5 +16251,7 @@ export const PokemonClasses: Record<
   [Pkm.HONCHKROW]: Honchkrow,
   [Pkm.TURTONATOR]: Turtonator,
   [Pkm.SANDYGAST]: Sandygast,
-  [Pkm.PALOSSAND]: Palossand
+  [Pkm.PALOSSAND]: Palossand,
+  [Pkm.SKORUPI]: Skorupi,
+  [Pkm.DRAPION]: Drapion
 }
