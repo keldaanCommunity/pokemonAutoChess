@@ -7569,6 +7569,20 @@ export class RecoverStrategy extends AbilityStrategy {
   }
 }
 
+export class TranseStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    pokemon.skill = Ability.HEADBUTT
+    pokemon.effects.delete(Effect.ZEN_MODE)
+  }
+}
+
 export class CurseStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -10785,5 +10799,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FIERY_DANCE]: new FieryDanceStrategy(),
   [Ability.BIDE]: new BideStrategy(),
   [Ability.SHORE_UP]: new ShoreUpStrategy(),
-  [Ability.POISON_STING]: new PoisonStingStrategy()
+  [Ability.POISON_STING]: new PoisonStingStrategy(),
+  [Ability.TRANSE]: new TranseStrategy()
 }

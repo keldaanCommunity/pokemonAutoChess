@@ -773,6 +773,7 @@ export default class BattleManager {
       } else if (field === "index") {
         if (pkm.index !== value) {
           pkm.index = value as IPokemonEntity["index"]
+          pkm.displayAnimation("EVOLUTION")
           this.animationManager.animatePokemon(
             pkm,
             PokemonActionState.IDLE,

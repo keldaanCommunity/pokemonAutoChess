@@ -342,7 +342,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   handleHeal(
     heal: number,
-    caster: IPokemonEntity,
+    caster: PokemonEntity,
     apBoost: number,
     crit: boolean
   ) {
@@ -1228,6 +1228,25 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.passive = Passive.MIMIKYU_BUSTED
       this.addAttack(10, this, 0, false)
       this.status.triggerProtect(2000)
+    }
+
+    if (this.passive === Passive.DARMANITAN && this.life < 0.5 * this.hp) {
+      this.index = PkmIndex[Pkm.DARMANITAN_ZEN]
+      this.name = Pkm.DARMANITAN_ZEN
+      this.passive = Passive.DARMANITAN_ZEN
+      this.skill = Ability.TRANSE
+      this.pp = 0
+      this.effects.add(Effect.ZEN_MODE)
+      const destination = board.getTeleportationCell(
+        this.positionX,
+        this.positionY
+      )
+      if (destination) this.moveTo(destination.x, destination.y, board)
+      this.status.tree = true
+      this.toIdleState()
+      this.addAttack(-10, this, 0, false)
+      this.addDefense(5, this, 0, false)
+      this.addSpecialDefense(5, this, 0, false)
     }
   }
 

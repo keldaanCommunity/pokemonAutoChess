@@ -547,6 +547,7 @@ export interface IPokemonEntity {
   ): void
   skydiveTo(x: number, y: number, board: Board): void
   toIdleState(): void
+  toMovingState(): void
   physicalDamage: number
   specialDamage: number
   trueDamage: number

@@ -1,6 +1,7 @@
 import Player from "../models/colyseus-models/player"
 import { IPokemonEntity, Transfer } from "../types"
 import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../types/Config"
+import { Ability } from "../types/enum/Ability"
 import { Effect } from "../types/enum/Effect"
 import {
   AttackType,
@@ -10,6 +11,7 @@ import {
 } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
+import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
 import { count } from "../utils/array"
@@ -195,9 +197,9 @@ export default abstract class PokemonState {
   }
 
   handleHeal(
-    pokemon: IPokemonEntity,
+    pokemon: PokemonEntity,
     heal: number,
-    caster: IPokemonEntity,
+    caster: PokemonEntity,
     apBoost: number,
     crit: boolean
   ): void {
@@ -852,6 +854,24 @@ export default abstract class PokemonState {
       })
       pokemon.status.triggerFreeze(1000, pokemon)
       pokemon.effects.delete(Effect.HAIL)
+    }
+
+    if (pokemon.effects.has(Effect.ZEN_MODE)) {
+      const crit =
+        pokemon.items.has(Item.REAPER_CLOTH) && chance(pokemon.critChance)
+      pokemon.handleHeal(10, pokemon, 1, crit)
+      if (pokemon.life >= pokemon.hp) {
+        pokemon.index = PkmIndex[Pkm.DARMANITAN]
+        pokemon.name = Pkm.DARMANITAN
+        pokemon.passive = Passive.DARMANITAN
+        pokemon.skill = Ability.HEADBUTT
+        pokemon.pp = 0
+        pokemon.status.tree = false
+        pokemon.toMovingState()
+        pokemon.addAttack(10, pokemon, 0, false)
+        pokemon.addDefense(-5, pokemon, 0, false)
+        pokemon.addSpecialDefense(-5, pokemon, 0, false)
+      }
     }
   }
 
