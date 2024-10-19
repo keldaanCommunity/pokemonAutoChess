@@ -396,7 +396,8 @@
     "FIERY_DANCE": "Fiery Dance",
     "BIDE": "Bide",
     "SHORE_UP": "Shore Up",
-    "POISON_STING": "Poison Sting"
+    "POISON_STING": "Poison Sting",
+    "TRANSE": "Transe"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1263,7 +1264,10 @@
     "SANDYGAST": "Sandygast",
     "PALOSSAND": "Palossand",
     "SKORUPI": "Skorupi",
-    "DRAPION": "Drapion"
+    "DRAPION": "Drapion",
+    "DARUMAKA": "Darumaka",
+    "DARMANITAN": "Darmanitan",
+    "DARMANITAN_ZEN": "Darmanitan (Zen)"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
@@ -1640,7 +1644,8 @@
     "FIERY_DANCE": "Cloaked in flames, the user dances and flaps its wings dealing [25,50,100,SP] SPECIAL to the target. Then raise the caster's AP by 30.",
     "BIDE": "The user is unable to move for 3 secs. Bide will do SPECIAL damage equal to twice the damage received during the idling period around the user.",
     "SHORE_UP": "Heals the caster for [20,25,SP] % HP. If the weather is a SANDSTORM, increases  to [30,35,SP] % HP.",
-    "POISON_STING": "Inflicts [2,3,4] stacks of POISON to target. Every stack over the max deals immediately [25,50,100,SP] SPECIAL."
+    "POISON_STING": "Inflicts [2,3,4] stacks of POISON to target. Every stack over the max deals immediately [25,50,100,SP] SPECIAL.",
+    "TRANSE": "Starts attacking and moving again, but stops passively healing."
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2104,8 +2109,8 @@
     "SUPER_ROD": "After each PvP round, fish a Pokémon that is then added to a free slot on your bench. Can catch epic WATER Pokémons and Wishiwashi.",
     "DYNAMAX_BAND": "At the start of the fight, raise max HP by 250%.",
     "SHINY_STONE": "Gives +2 to LIGHT synergy and spawn a second light spot on the holder's cell",
-    "RARE_CANDY": "Immediately make a Pokémon evolve. Can only be held by non-fully evolved Pokémon, and reduce its sell price to its previous tier.",
-    "EVIOLITE": "Holder gets a bunch of stats, but can no longer evolve. Can only be held by non-fully evolved Pokémon.",
+    "RARE_CANDY": "Immediately make a Pokémon evolve. Can only be given to non-fully evolved Pokémon, and reduce its sell price to its previous tier.",
+    "EVIOLITE": "Holder gets a bunch of stats, but can no longer evolve. Can only be given to non-fully evolved Pokémon.",
     "WHITE_FLUTE": "Spawn 3 WILD Pokémons around the holder at the start of the fight. Rarity and tier increase with stage level.",
     "GOLD_BOTTLE_CAP": "+1% CRIT_CHANCE and CRIT_POWER per GOLD you have. Gain 1 GOLD per KO, and a 5 GOLD jackpot if eliminating the last enemy.",
     "ABSORB_BULB": "All the damage reduction is absorbed by the bulb. Once under 50% HP, bulb explodes, dealing all damage absorbed to adjacent enemy units as SPECIAL.",
@@ -2248,7 +2253,9 @@
     "OGERPON_HEARTHFLAME": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, BURN adjacent enemies for 2 seconds",
     "OGERPON_CORNERSTONE": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, FLINCH adajcent enemies for 5 seconds",
     "VICTINI": "Increases the accuracy of the team. Allies can no longer miss their attacks.",
-    "AEGISLASH": "Alternates between Shield Forme and Blade Forme when casting ability"
+    "AEGISLASH": "Alternates between Shield Forme and Blade Forme when casting ability",
+    "DARMANITAN": "When below 50% HP, jumps to a safe place and turns into Zen Mode.",
+    "DARMANITAN_ZEN": "Can no longer move or attack, but regain [10,SP] HP per second. Transforms back into Standard Mode when fully healed."
   },
   "stat": {
     "ATK": "Attack",

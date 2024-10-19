@@ -11,6 +11,8 @@
 - Skorupi
 - Drapion
 - Aegislash Blade Form
+- Darumaka
+- Darmanitan
 
 # Gameplay
 

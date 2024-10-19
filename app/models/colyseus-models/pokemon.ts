@@ -4897,7 +4897,7 @@ export class Zapdos extends Pokemon {
 }
 
 export class Zeraora extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.WILD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ELECTRIC])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
@@ -13985,7 +13985,7 @@ export class Tangrowth extends Pokemon {
 }
 
 export class Phanpy extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.WILD, Synergy.BABY])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND, Synergy.BABY])
   rarity = Rarity.RARE
   evolution = Pkm.DONPHAN
   stars = 1
@@ -14000,7 +14000,7 @@ export class Phanpy extends Pokemon {
 }
 
 export class Donphan extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.WILD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND])
   rarity = Rarity.RARE
   stars = 2
   hp = 180
@@ -14448,7 +14448,7 @@ export class GastrodonEastSea extends Pokemon {
 }
 
 export class Rufflet extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.WILD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FLYING])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.BRAVIARY
@@ -14464,7 +14464,7 @@ export class Rufflet extends Pokemon {
 }
 
 export class Braviary extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.WILD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FLYING])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 160
@@ -14826,7 +14826,7 @@ export class Mantine extends Pokemon {
 }
 
 export class Remoraid extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.WILD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.WATER])
   rarity = Rarity.SPECIAL
   evolution = Pkm.OCTILLERY
   stars = 1
@@ -14852,7 +14852,7 @@ export class Remoraid extends Pokemon {
 }
 
 export class Octillery extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.WILD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.WATER])
   rarity = Rarity.SPECIAL
   stars = 2
   hp = 150
@@ -15380,6 +15380,51 @@ export class Drapion extends Pokemon {
   skill = Ability.POISON_STING
   additional = true
   attackSprite = AttackSprite.BUG_MELEE
+}
+
+export class Darumaka extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIRE, Synergy.PSYCHIC])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.DARMANITAN
+  hp = 80
+  atk = 12
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.HEADBUTT
+  attackSprite = AttackSprite.FIRE_MELEE
+}
+
+export class Darmanitan extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIRE, Synergy.PSYCHIC])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 220
+  atk = 26
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.HEADBUTT
+  passive = Passive.DARMANITAN
+  attackSprite = AttackSprite.FIRE_MELEE
+}
+
+export class DarmanitanZen extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIRE, Synergy.PSYCHIC])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 220
+  atk = 16
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.TRANSE
+  passive = Passive.DARMANITAN_ZEN
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export const PokemonClasses: Record<
@@ -16253,5 +16298,8 @@ export const PokemonClasses: Record<
   [Pkm.SANDYGAST]: Sandygast,
   [Pkm.PALOSSAND]: Palossand,
   [Pkm.SKORUPI]: Skorupi,
-  [Pkm.DRAPION]: Drapion
+  [Pkm.DRAPION]: Drapion,
+  [Pkm.DARUMAKA]: Darumaka,
+  [Pkm.DARMANITAN]: Darmanitan,
+  [Pkm.DARMANITAN_ZEN]: DarmanitanZen
 }

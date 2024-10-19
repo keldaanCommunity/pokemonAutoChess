@@ -865,7 +865,10 @@ export enum Pkm {
   PALOSSAND = "PALOSSAND",
   TURTONATOR = "TURTONATOR",
   SKORUPI = "SKORUPI",
-  DRAPION = "DRAPION"
+  DRAPION = "DRAPION",
+  DARUMAKA = "DARUMAKA",
+  DARMANITAN = "DARMANITAN",
+  DARMANITAN_ZEN = "DARMANITAN_ZEN"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1733,7 +1736,10 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.PALOSSAND]: "0770",
   [Pkm.TURTONATOR]: "0776",
   [Pkm.SKORUPI]: "0451",
-  [Pkm.DRAPION]: "0452"
+  [Pkm.DRAPION]: "0452",
+  [Pkm.DARUMAKA]: "0554",
+  [Pkm.DARMANITAN]: "0555",
+  [Pkm.DARMANITAN_ZEN]: "0555-0001"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2601,7 +2607,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.PALOSSAND]: Pkm.SANDYGAST,
   [Pkm.TURTONATOR]: Pkm.TURTONATOR,
   [Pkm.SKORUPI]: Pkm.SKORUPI,
-  [Pkm.DRAPION]: Pkm.DRAPION
+  [Pkm.DRAPION]: Pkm.DRAPION,
+  [Pkm.DARUMAKA]: Pkm.DARUMAKA,
+  [Pkm.DARMANITAN]: Pkm.DARUMAKA,
+  [Pkm.DARMANITAN_ZEN]: Pkm.DARUMAKA
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7099,5 +7108,21 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Jab,
     emote: AnimationType.Shoot
+  },
+  [Pkm.DARUMAKA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Dance
+  },
+  [Pkm.DARMANITAN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.QuickStrike,
+    emote: AnimationType.Rumble
+  },
+  [Pkm.DARMANITAN_ZEN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
   }
 }

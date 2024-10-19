@@ -134,5 +134,6 @@ export enum Effect {
   HAIL = "HAIL",
   FLUID = "FLUID",
   SHAPELESS = "SHAPELESS",
-  ETHEREAL = "ETHEREAL"
+  ETHEREAL = "ETHEREAL",
+  ZEN_MODE = "ZEN_MODE"
 }
