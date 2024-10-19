@@ -53,7 +53,7 @@ export default class GameScene extends Scene {
   weatherManager: WeatherManager | undefined
   unownManager?: UnownManager
   music: Phaser.Sound.WebAudioSound | undefined
-  pokemonHovered: PokemonSprite | undefined
+  pokemonHovered: PokemonSprite | null = null
   pokemonDragged: PokemonSprite | null = null
   shopIndexHovered: number | null = null
   itemDragged: ItemContainer | null = null
@@ -112,7 +112,7 @@ export default class GameScene extends Scene {
       ) as Player
 
       this.setMap(player.map)
-      this.initializeDragAndDrop()
+      this.setupMouseEvents()
       this.battleGroup = this.add.group()
       this.animationManager = new AnimationManager(this)
       this.minigameManager = new MinigameManager(
@@ -190,11 +190,22 @@ export default class GameScene extends Scene {
       this.buyExperience()
     })
 
-    this.input.keyboard!.on("keydown-" + preferences.keybindings.sell, () => {
-      if (this.pokemonHovered) {
-        this.sellPokemon(this.pokemonHovered)
-      } else if (this.shopIndexHovered !== null) {
+    this.input.keyboard!.on("keydown-" + preferences.keybindings.sell, (e) => {
+      if (this.pokemonDragged != null) return
+      if (this.shopIndexHovered !== null) {
         this.removeFromShop(this.shopIndexHovered)
+        this.shopIndexHovered = null
+      } else if (
+        this.pokemonHovered &&
+        this.pokemonHovered.sprite
+          .getBounds()
+          .contains(
+            this.game.input.activePointer.x,
+            this.game.input.activePointer.y
+          )
+      ) {
+        this.sellPokemon(this.pokemonHovered)
+        this.pokemonHovered = null
       }
     })
 
@@ -323,7 +334,7 @@ export default class GameScene extends Scene {
     this.input.setDragState(this.input.pointer1, 0)
   }
 
-  initializeDragAndDrop() {
+  setupMouseEvents() {
     this.sellZone = new SellZone(this)
     this.dropSpots = []
 
@@ -381,21 +392,7 @@ export default class GameScene extends Scene {
       Phaser.Input.Events.GAMEOBJECT_OVER,
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
         if (gameObject instanceof PokemonSprite && gameObject.draggable) {
-          const outline = <OutlinePlugin>this.plugins.get("rexOutline")
-          const previouslyHovered = this.pokemonHovered
-          this.pokemonHovered = gameObject
-          if (previouslyHovered && previouslyHovered !== gameObject) {
-            outline.remove(previouslyHovered.sprite)
-          }
-
-          const thickness = Math.round(
-            1 + Math.log(gameObject.def + gameObject.speDef)
-          )
-          this.pokemonHovered = gameObject
-          outline.add(gameObject.sprite, {
-            thickness,
-            outlineColor: 0xffffff
-          })
+          this.setHovered(gameObject)
         }
       }
     )
@@ -404,9 +401,8 @@ export default class GameScene extends Scene {
       Phaser.Input.Events.GAMEOBJECT_OUT,
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
         if (this.pokemonHovered === gameObject) {
-          const outline = <OutlinePlugin>this.plugins.get("rexOutline")
-          outline.remove(this.pokemonHovered.sprite)
-          this.pokemonHovered = undefined
+          this.clearHovered(this.pokemonHovered)
+          this.pokemonHovered = null
         }
       }
     )
@@ -634,19 +630,24 @@ export default class GameScene extends Scene {
       this
     )
   }
-}
 
-// if (item && item.name && item != gameObject) {
-//   Object.keys(ItemRecipe).forEach((recipeName)=>{
-//     const recipe = ItemRecipe[recipeName];
-//     if ((recipe[0] == item.name && recipe[1] == gameObject.name) || (recipe[1] == item.name && recipe[0] == gameObject.name)) {
-//       item.detailDisabled = true;
-//       item.detail.setScale(0, 0);
-//       gameObject.sprite.setTexture('item', recipeName);
-//       gameObject.remove(gameObject.detail, true);
-//       gameObject.detail = new ItemDetail(this, 30, -100, recipeName);
-//       gameObject.detail.setScale(1, 1);
-//       gameObject.add(gameObject.detail);
-//     }
-//   });
-// }
+  setHovered(gameObject: PokemonSprite) {
+    const outline = <OutlinePlugin>this.plugins.get("rexOutline")
+    if (this.pokemonHovered != null) this.clearHovered(this.pokemonHovered)
+    this.pokemonHovered = gameObject
+
+    const thickness = Math.round(
+      1 + Math.log(gameObject.def + gameObject.speDef)
+    )
+    this.pokemonHovered = gameObject
+    outline.add(gameObject.sprite, {
+      thickness,
+      outlineColor: 0xffffff
+    })
+  }
+
+  clearHovered(gameObject: PokemonSprite) {
+    const outline = <OutlinePlugin>this.plugins.get("rexOutline")
+    outline.remove(gameObject.sprite)
+  }
+}
