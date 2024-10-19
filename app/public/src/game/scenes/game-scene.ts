@@ -191,6 +191,7 @@ export default class GameScene extends Scene {
     })
 
     this.input.keyboard!.on("keydown-" + preferences.keybindings.sell, (e) => {
+      if (this.pokemonDragged != null) return
       if (this.shopIndexHovered !== null) {
         this.removeFromShop(this.shopIndexHovered)
         this.shopIndexHovered = null
