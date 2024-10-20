@@ -405,7 +405,7 @@
     "DEFIANT": "ป้องกันความเสียหาย 10",
     "JUSTIFIED": "ป้องกันความเสียหาย 13",
     "AMNESIA": "+50 AP",
-    "LIGHT_SCREEN": "+100 AP. มีโอกาส 5% ที่จะเจอ Unowns ในร้านค้า.",
+    "LIGHT_SCREEN": "+100 AP. Unown จะปรากฏทุกๆ 3 ร้านค้า.",
     "EERIE_SPELL": "+150 AP. หลังจากจบการต่อสู้จะเจอกับร้านค้า Unown แทนร้านปกติก่อนร้านค้าปกติ.",
     "HONE_CLAWS": "รับ +30% CRIT_CHANCE และ +60% CRIT_POWER",
     "ASSURANCE": "รับ +40% CRIT_CHANCE และ +80% CRIT_POWER",

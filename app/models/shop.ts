@@ -424,11 +424,10 @@ export default class Shop {
       return Pkm.DITTO
     }
 
-    const UNOWN_RATE = 0.05
     if (
-      (player.effects.has(Effect.LIGHT_SCREEN) ||
-        player.effects.has(Effect.EERIE_SPELL)) &&
-      chance(UNOWN_RATE)
+      player.effects.has(Effect.LIGHT_SCREEN) &&
+      shopIndex === 0 &&
+      player.rerollCount % 5 === 0
     ) {
       const unowns = getUnownsPoolPerStage(state.stageLevel)
       return pickRandomIn(unowns)

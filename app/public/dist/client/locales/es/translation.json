@@ -1727,7 +1727,7 @@
     "DEFIANT": "Bloquea 10 de daño",
     "JUSTIFIED": "Bloquea 13 de daño",
     "AMNESIA": "+50 AP",
-    "LIGHT_SCREEN": "+100 AP. Los Unowns tienen un 5% de posibilidades de aparecer en la tienda.",
+    "LIGHT_SCREEN": "+100 AP. Aparece un Unown cada 3 tiendas.",
     "EERIE_SPELL": "+150 AP. Después de una pelea, consigue una tienda Unown.",
     "HONE_CLAWS": "Gana +30% CRIT_CHANCE y +60% CRIT_POWER",
     "ASSURANCE": "Gana +40% CRIT_CHANCE y +80% CRIT_POWER",

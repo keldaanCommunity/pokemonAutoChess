@@ -55,6 +55,7 @@
     - (3) Hatcher: each baby has 10% chance (increased with luck) to find an Egg 
     - (5) Breeder: guaranteed to get at least one egg after each defeat
     - (7) Golden Eggs: each baby has 4% chance (increased with luck) to find a golden Egg 
+- Changed Psychic 4: ~~Unowns have 5% chance to appear in shops~~ An Unown appears every 3 shops
 
 # Changes to Items
 
