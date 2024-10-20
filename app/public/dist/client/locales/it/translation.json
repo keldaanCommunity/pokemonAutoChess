@@ -390,7 +390,14 @@
     "IVY_CUDGEL": "Clava di Liane",
     "FORCE_PALM": "Palmoforza",
     "THUNDER_CAGE": "Elettrogabbia",
-    "HEADBUTT": "Bottintesta"
+    "HEADBUTT": "Bottintesta",
+    "STEEL_WING": "Alacciaio",
+    "YAWN": "Sbadiglio",
+    "FIERY_DANCE": "Voldifuoco",
+    "BIDE": "Pazienza",
+    "SHORE_UP": "Sabbiaccumulo",
+    "POISON_STING": "Velenospina",
+    "TRANSE": "Stato Zen"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -726,6 +733,7 @@
     "HONEDGE": "Honedge",
     "DOUBLADE": "Doublade",
     "AEGISLASH": "Aegislash",
+    "AEGISLASH_BLADE": "Aegislash (Spada)",
     "CUBONE": "Cubone",
     "MAROWAK": "Marowak",
     "ALOLAN_MAROWAK": "Marowak di Alola",
@@ -1247,7 +1255,19 @@
     "OGERPON_HEARTHFLAME_MASK": "Ogerpon Maschera Focolare",
     "OGERPON_CORNERSTONE": "Ogerpon Fondamenta",
     "OGERPON_CORNERSTONE_MASK": "Ogerpon Maschera Fondamenta",
-    "IRON_HANDS": "Manoferrea"
+    "IRON_HANDS": "Manoferrea",
+    "ROOKIDEE": "Rookidee",
+    "CORVISQUIRE": "Corvisquire",
+    "CORVIKNIGHT": "Corviknight",
+    "MURKROW": "Murkrow",
+    "HONCHKROW": "Honchkrow",
+    "SANDYGAST": "Sandygast",
+    "PALOSSAND": "Palossand",
+    "SKORUPI": "Skorupi",
+    "DRAPION": "Drapion",
+    "DARUMAKA": "Darumaka",
+    "DARMANITAN": "Darmanitan",
+    "DARMANITAN_ZEN": "Darmanitan (Zen)"
   },
   "ability_description": {
     "SOFT_BOILED": "Cura tutti gli effetti di stato e garantisce [20,40,80,SP] SHIELD ad ogni Pokèmon alleato",
@@ -1618,7 +1638,11 @@
     "IVY_CUDGEL": "Infliggi [100,SP] SPECIAL al bersaglio.",
     "FORCE_PALM": "L'utilizzatore infligge [60,SP] + il 10% dei HP massimi come SPECIAL e causa PARALYSIS per 6 secondi. Se era già sotto PARALYSIS, infliggi [40,SP] SPECIAL bonus e spingilo via.",
     "THUNDER_CAGE": "Intrappola il bersaglio e i nemici adiacenti in una gabbia elettrica che infligge [60,SP] SPECIAL e causa LOCKED e PARALYSIS per 3 secondi.",
-    "HEADBUTT": "Infliggi [20,40,80,SP] SPECIAL al bersaglio e causa FLINCH per 5 secondi. Raddoppia il danno se il bersaglio ha uno SHIELD."
+    "HEADBUTT": "Infliggi [20,40,80,SP] SPECIAL al bersaglio e causa FLINCH per 5 secondi. Raddoppia il danno se il bersaglio ha uno SHIELD.",
+    "STEEL_WING": "Scatta verso le retrovie nemiche, infliggendo [10,20,40,SP] SPECIAL + 3 volte la DEF come SPECIAL e ruba 1 di DEF a tutti i Pokèmon nemici colpiti nella traiettoria.",
+    "YAWN": "Ottieni [20,40,80,SP] SHIELD. Gli avversari che bersagliano questa unità subiscono FATIGUE per 4 secondi e perdono il 30% di AP.",
+    "FIERY_DANCE": "Avvolto dalle fiamme, l'utilizzatore danza e muove le sue ali infliggendo [25,50,100,SP] SPECIAL to the target. Aumenta gli AP dell'utilizzatore di 30.",
+    "BIDE": "L'utilizzatore non può muoversi per 3 secondi. Pazienza farà SPECIAL ai nemici attorno all'utilizzatore pari al doppio del danno subito durante il periodo in cui non poteva muoversi."
   },
   "effect": {
     "INGRAIN": "Radicamento",
