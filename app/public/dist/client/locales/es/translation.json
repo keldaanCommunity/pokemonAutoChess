@@ -1489,7 +1489,7 @@
     "BODY_SLAM": "Inflige [30,SP]% del HP máximo del usuaio como SPECIAL",
     "BARB_BARRAGE": "Bucea en medio del equipo enemigo, causando [15,30,60,SP] de SPECIAL y dejando POISONNED a todos los pokémon adyacentes por 3 segundos",
     "MAGIC_POWDER": "Gana [10,20,40,SP] de SHIELD y deja SILENCE a los enemigos adyacentes por [2,3,4] segundos",
-    "INFERNAL_PARADE": "Lanza una rueda flamígera de ida y vuelta con 50% chance de dejar BURN por 3 segundos y causando [30, SP] de SPECIAL 2 veces a los Pokémon con los que choca",
+    "INFERNAL_PARADE": "Lanza una rueda flamígera de ida y vuelta con [50,LK]% chance de dejar BURN por 3 segundos y causando [30, SP] de SPECIAL 2 veces a los Pokémon con los que choca",
     "RETALIATE": "Inflige [15,30,60,SP] de SPECIAL al objetivo + [10,15,25,SP] de SPECIAL adicional por aliado caido",
     "SLASH": "Inflige [10,20,40,SP] de SPECIAL con un [30,60,90]% aumentado de CRIT_CHANCE. Puede hacer daño critico por defecto.",
     "OUTRAGE": "El Pokémon queda CONFUSION por 2 segundos e inflige [100,150,200,SP]% ATK como SPECIAL al objetivo y enemigos adyacentes",

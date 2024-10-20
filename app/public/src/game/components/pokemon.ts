@@ -30,7 +30,7 @@ import type { Passive } from "../../../../types/enum/Passive"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import type { Synergy } from "../../../../types/enum/Synergy"
 import { clamp, min } from "../../../../utils/number"
-import { coinflip } from "../../../../utils/random"
+import { chance } from "../../../../utils/random"
 import { values } from "../../../../utils/schemas"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
 import { preferences } from "../../preferences"
@@ -1100,7 +1100,7 @@ export function addWanderingPokemon(
     tween: Phaser.Tweens.Tween
   ) => void
 ) {
-  const fromLeft = coinflip()
+  const fromLeft = chance(1 / 2)
   const [startX, endX] = fromLeft
     ? [-100, +window.innerWidth + 100]
     : [+window.innerWidth + 100, -100]

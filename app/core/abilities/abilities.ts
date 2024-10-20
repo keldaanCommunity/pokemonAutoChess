@@ -2641,7 +2641,7 @@ export class InfernalParadeStrategy extends AbilityStrategy {
           positionY: enemy.positionY
         })
 
-        if (Math.random() > 0.5) {
+        if (chance(0.5, pokemon)) {
           enemy.status.triggerBurn(3000, cell.value, pokemon)
         }
 
@@ -3425,7 +3425,7 @@ export class PresentStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const chance = Math.random()
+    const chance = Math.random() * (1 + pokemon.luck / 100)
     /* 80 damage: 40%
        150 damage: 30%
        300 damage: 20%
@@ -7251,7 +7251,7 @@ export class EggsplosionStrategy extends AbilityStrategy {
       pokemon,
       crit
     )
-    if (kill.death && Math.random() < 0.3) {
+    if (kill.death && chance(0.3, pokemon)) {
       const egg = createRandomEgg(false)
       const player = pokemon.player
       if (player) {

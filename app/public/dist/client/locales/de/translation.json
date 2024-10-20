@@ -1512,7 +1512,7 @@
     "BODY_SLAM": "Verursacht [30,SP]% der maximalen HP des Anwenders als SPECIAL",
     "BARB_BARRAGE": "Stürzt sich in die Mitte des gegnerischen Teams und fügt allen angrenzenden Einheiten 3 Sekunden lang [15,30,60,SP] SPECIAL und POISONNED zu",
     "MAGIC_POWDER": "Erlangt [10,20,40,SP] SHIELD und SILENCE benachbarter Feinde für [2,3,4] Sekunden",
-    "INFERNAL_PARADE": "Schieße ein zurückkehrendes Flammenrad ab, das eine Chance von 50% hat, 3s lang zu BURN und allen getroffenen gegnerischen Pokémon zweimal [30, SP] SPECIAL zuzufügen",
+    "INFERNAL_PARADE": "Schieße ein zurückkehrendes Flammenrad ab, das eine Chance von [50,LK]% hat, 3s lang zu BURN und allen getroffenen gegnerischen Pokémon zweimal [30, SP] SPECIAL zuzufügen",
     "RETALIATE": "Fügt dem Ziel [15,30,60,SP] SPECIAL zu + [10,15,25,SP] zusätzliche SPECIAL pro gefallenem Verbündeten",
     "SLASH": "Verursacht [10,20,40,SP] SPECIAL mit einem [30,60,90]% erhöhten CRIT_CHANCE Verhältnis",
     "OUTRAGE": "Das Pokémon ist 2 Sekunden lang CONFUSION und fügt dem Ziel und benachbarten Gegnern [100,150,200,SP]% ATK als SPECIAL zu",

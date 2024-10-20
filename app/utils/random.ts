@@ -7,10 +7,6 @@ export function chance(
   return Math.random() < probability * (1 + (pokemon?.luck ?? 0) / 100)
 }
 
-export function coinflip(): boolean {
-  return Math.random() < 0.5
-}
-
 export function randomBetween(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }

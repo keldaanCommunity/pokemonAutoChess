@@ -1520,7 +1520,7 @@
     "BODY_SLAM": "자신의 최대 HP의 [30,SP]% 만큼 SPECIAL을 준다.",
     "BARB_BARRAGE": "적 팀 중앙으로 돌진하여 모든 인접한 적에게 [15,30,60,SP] SPECIAL 과 3초 동안 POISONNED 효과를 부여한다.",
     "MAGIC_POWDER": "자신에게 [10,20,40,SP]의 SHIELD 를 부여하고 적에게 [2,3,4]초 동안 SILENCE 를 부여한다.",
-    "INFERNAL_PARADE": "되돌아오는 화염 바퀴를 발사해 50% 확률로 3초 동안 BURN 를 부여하고 적중당한 모든 적에게 [30, SP] SPECIAL 를 두 번 입힌다.",
+    "INFERNAL_PARADE": "되돌아오는 화염 바퀴를 발사해 [50,LK]% 확률로 3초 동안 BURN 를 부여하고 적중당한 모든 적에게 [30,SP] SPECIAL 를 두 번 입힌다.",
     "RETALIATE": "적에게 [15,30,60,SP]의 SPECIAL을 입히며, 쓰러진 아군 한 명당 [10,15,25,SP]의 추가 SPECIAL을 얻는다.",
     "SLASH": "[30,60,90]%의 CRIT_CHANCE 를 가지고 [10,20,40,SP] SPECIAL을 입힌다.",
     "OUTRAGE": "포켓몬은 2초 동안 CONFUSION 에 빠지고 대상과 인접한 적에게 [100,150,200,SP]% ATK 만큼 SPECIAL을 입힌다.",

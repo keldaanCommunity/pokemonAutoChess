@@ -1532,7 +1532,7 @@
     "BODY_SLAM": "Deals [30,SP]% of user max HP as SPECIAL",
     "BARB_BARRAGE": "Dives into the middle of the enemy team, inflicting [15,30,60,SP] SPECIAL and POISONNED all adjacent units for 3 seconds",
     "MAGIC_POWDER": "Gain [10,20,40,SP] SHIELD and SILENCE adjacent enemies for [2,3,4] seconds",
-    "INFERNAL_PARADE": "Shoot a returning Flame Wheel, 50% chance to BURN for 3s and dealing twice [30, SP] SPECIAL to all enemy Pokémon hit",
+    "INFERNAL_PARADE": "Shoot a returning Flame Wheel, [50,LK]% chance to BURN for 3s and dealing twice [30, SP] SPECIAL to all enemy Pokémon hit",
     "RETALIATE": "Deals [15,30,60,SP] SPECIAL to the target + [10,15,25,SP] additional SPECIAL per fallen ally",
     "SLASH": "Deals [10,20,40,SP] SPECIAL with a [30,60,90]% increased CRIT_CHANCE ratio. Can crit by default.",
     "OUTRAGE": "The Pokémon is CONFUSION for 2 seconds and deals [100,150,200,SP]% ATK as SPECIAL to the target and adjacent enemies",

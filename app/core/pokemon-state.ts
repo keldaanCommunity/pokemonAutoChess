@@ -33,7 +33,7 @@ export default abstract class PokemonState {
       let trueDamage = 0
       let totalTakenDamage = 0
 
-      if (Math.random() * 100 < pokemon.critChance) {
+      if (chance(pokemon.critChance / 100, pokemon)) {
         if (target.items.has(Item.ROCKY_HELMET) === false) {
           let opponentCritPower = pokemon.critPower
           if (target.effects.has(Effect.BATTLE_ARMOR)) {

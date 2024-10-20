@@ -1512,7 +1512,7 @@
     "BODY_SLAM": "Inflige [30,SP]% des HP max du lanceur en SPECIAL",
     "BARB_BARRAGE": "Plonge au milieu de l'équipe adverse, infligeant [15,30,60,SP] SPECIAL et POISONNED à tous les ennemis adjacents pendant 3 secondes",
     "MAGIC_POWDER": "Gagne [10,20,40,SP] SHIELD et SILENCE les ennemis adjacents pendant [2,3,4] secondes",
-    "INFERNAL_PARADE": "Envoie une Roue de Feu en boomerang, ayant 50% de chance de BURN pendant 3 secondes et infligeant 2 fois [30,SP] SPECIAL à tous les pokémons adverses touchés.",
+    "INFERNAL_PARADE": "Envoie une Roue de Feu en boomerang, ayant [50,LK]% de chance de BURN pendant 3 secondes et infligeant 2 fois [30,SP] SPECIAL à tous les pokémons adverses touchés.",
     "RETALIATE": "Inflige [15,30,60,SP] SPECIAL à la cible + [10,15,25,SP] SPECIAL additionels par allié KO",
     "SLASH": "Inflige [10,20,40,SP] SPECIAL à la cible. Peut infliger un coup critique par défaut avec [30,60,90]% de CRIT_CHANCE augmentée",
     "OUTRAGE": "Le pokémon est CONFUSION pendant 2 secondes et inflige [100,150,200,SP]% ATK en SPECIAL à la cible et aux ennemis adjacents",
