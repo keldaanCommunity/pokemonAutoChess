@@ -1268,7 +1268,7 @@
     "HYDRO_PUMP": "Ataque de área que causa [25,50,100,SP] de SPECIAL a todos los Pokémon enemigos que se encuentren detrás del objetivo",
     "DRACO_METEOR": "Inflige [50,SP] de SPECIAL a todos los Pokémon enemigos",
     "BLAZE_KICK": "Inflige [30,60,120,SP] de SPECIAL y causa BURN al objetivo por 2 segundos. Si ya tiene BURN, inflige un +30% de daño",
-    "WISH": "Restaura [50,SP] de HP a [1,2,3] Pokémon aliado",
+    "WISH": "Restaura [50,SP] de HP y otorga [20,SP] LUCK a [1,2,3] Pokémon aliado",
     "LUNAR_BLESSING": "Cura al usuario y a todos sus aliados un [25,SP]% de su vida máxima y remueve problemas de estado",
     "CALM_MIND": "Mejora el ATK del usuario en un [100,SP]%",
     "DEFENSE_CURL": "Mejora la DEF y la SPE_DEF del usuario en [3,6,12,SP]",

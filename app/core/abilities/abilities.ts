@@ -2851,6 +2851,7 @@ export class WishStrategy extends AbilityStrategy {
         ally.life < ally.hp
       ) {
         ally.handleHeal(heal, pokemon, 1, crit)
+        ally.addLuck(20, pokemon, 1, crit)
         count -= 1
       }
     })

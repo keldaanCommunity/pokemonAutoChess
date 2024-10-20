@@ -1237,7 +1237,7 @@
     "HYDRO_PUMP": "Gây [20,40,80,SP] SPECIAL đến tất cả Pokémon đối thủ phía sau mục tiêu",
     "DRACO_METEOR": "Gây [50,SP] SPECIAL tới tất cả Pokémon đối thủ",
     "BLAZE_KICK": "Gây [30,60,120,SP] SPECIAL và BURN mục tiêu trong 2 giây. Nếu đối thủ đã bị BURN, gây +30% sát thương",
-    "WISH": "Hồi phục [50,SP] HP cho [1,2,3] Pokémon đồng minh",
+    "WISH": "Hồi phục [50,SP] HP và cung cấp [20,SP] LUCK cho [1,2,3] Pokémon đồng minh",
     "LUNAR_BLESSING": "Hồi phục cho bản thân và toàn bộ đồng minh [25,SP]% max HP và xóa toàn bộ hiệu ứng xấu",
     "CALM_MIND": "Tăng [100,SP]% ATK cho bản thân",
     "DEFENSE_CURL": "Tăng [3,6,12,SP] DEF và SPE_DEF cho bản thân\"",

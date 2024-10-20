@@ -35,6 +35,7 @@
 - New ability for Larvesta: Fiery Dance
 - Rework Shell Trap ability: The shield of the Pokemon explodes, dealing 50 special damage + current shield around it. If it's not shielded, gains 75 shield instead
 - New ability for Shuckle: Bide: The user is unable to move for 3 secs. Bide will do SPECIAL damage equal to twice the damage received during the idling period around the user.
+- Buff Wish (Togepi line): now also increases luck of selected allies by 20%
 
 # Changes to Synergies
 
