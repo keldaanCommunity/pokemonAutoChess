@@ -61,6 +61,7 @@
 - Weather rocks are no longer held items and no longer give synergies. Instead, they give bonuses to your team when in a certain weather.
 - Added 4 new weather rocks: Electric Quartz, Float Stone, Blood Stone, Mist Stone
 - Nerf Electirizer: Attack speed 50 → 30%
+- Changed Gold Bottle Cap base stats ~~20% Crit chance 40% Crit damage~~ → 50% Luck
 
 # UI
 

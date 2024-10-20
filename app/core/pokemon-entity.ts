@@ -463,6 +463,17 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.ap = min(-100)(this.ap + value)
   }
 
+  addLuck(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ) {
+    value =
+      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
+    this.luck = min(-100)(this.luck + value)
+  }
+
   addDefense(
     value: number,
     caster: IPokemonEntity,
@@ -1567,6 +1578,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       case Stat.HP:
         this.addMaxHP(value, this, 0, false)
         break
+      case Stat.LUCK:
+        this.addLuck(value, this, 0, false)
     }
   }
 

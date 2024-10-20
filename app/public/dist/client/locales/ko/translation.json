@@ -2021,7 +2021,7 @@
     "POKEMONOMICON": "장착한 포켓몬이 SPECIAL 을 가할 경우, 대상을 3초 동안 BURN 상태 만듬",
     "POWER_LENS": "장착 시 SPE_DEF 에 의해 감소된 SPECIAL 만큼 공격자에게 반사",
     "SHELL_BELL": "가한 데미지의 33%만큼 회복",
-    "LUCKY_EGG": "장착자 및 같은 가로줄의 인접한 아군에게 AP +40% 부여",
+    "LUCKY_EGG": "보유자의 LUCK 을 50% 증가시킵니다",
     "AQUA_EGG": "장착 시 시작 PP 가 50 증가, 기술을 사용할때마다 20 PP 회복",
     "BLUE_ORB": "장착한 포켓몬의 3번째 공격마다 10 SPECIAL 와 20 PP 를 소멸시키는 체인 라이트닝을 공격대상 주위의 적 두마리를 향해 방출",
     "SCOPE_LENS": "장착 후 치명타가 나올 경우 대상에게서 15 PP 를 탈취",

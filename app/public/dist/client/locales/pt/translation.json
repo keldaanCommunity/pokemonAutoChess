@@ -1722,7 +1722,7 @@
     "POKEMONOMICON": "Quando o titular dá SPECIAL, eles BURN o alvo por 3 segundos",
     "POWER_LENS": "A quantidade de SPECIAL reduzida por SPE_DEF é infligida de volta ao atacante",
     "SHELL_BELL": "Titular cura 33% de todos os danos infligidos",
-    "LUCKY_EGG": "+40 AP para titular e aliados adjacentes na mesma linha",
+    "LUCKY_EGG": "Aumenta o LUCK do titular em 50%",
     "AQUA_EGG": "O detentor ganha +50 de PP inicial e recupera 20 de PP após lançar sua habilidade",
     "BLUE_ORB": "Cada terceiro ataque do titular libera uma corrente de raios que atinge os 2 inimigos que se aproximam, causando 10 SPECIAL e queimando 20 PP",
     "SCOPE_LENS": "Acertos críticos roubam 15 de PP do alvo.",
