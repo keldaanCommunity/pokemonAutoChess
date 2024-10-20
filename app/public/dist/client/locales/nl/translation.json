@@ -1198,7 +1198,7 @@
     "CHILLY": "+2 SPE_DEF, 20% kans om te FREEZE",
     "FROSTY": "+6 SPE_DEF, 30% kans om te FREEZE",
     "FREEZING": "+20 SPE_DEF, 40% kans om te FREEZE",
-    "SHEER_COLD": "+30 SPE_DEF, 50% kans om te FREEZE, bevroren vijanden krijgen 20% extra schade",
+    "SHEER_COLD": "+30 SPE_DEF, bevroren vijanden krijgen 30% extra schade",
     "ANCIENT_POWER": "Herleef met 40% HP en +30% ATK",
     "ELDER_POWER": "Herleef met 80% HP en +60% ATK.",
     "FORGOTTEN_POWER": "Herleef met 100% HP en +100% ATK.",

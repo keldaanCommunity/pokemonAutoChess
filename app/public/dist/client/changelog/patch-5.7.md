@@ -56,6 +56,7 @@
     - (5) Breeder: guaranteed to get at least one egg after each defeat
     - (7) Golden Eggs: each baby has 4% chance (increased with luck) to find a golden Egg 
 - Changed Psychic 4: ~~Unowns have 5% chance to appear in shops~~ An Unown appears every 3 shops
+- Change Ice 8: freeze chance ~~50~~ 40%, increased damage to frozen enemies: ~~20~~ 30%
 
 # Changes to Items
 

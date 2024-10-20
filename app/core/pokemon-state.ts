@@ -375,7 +375,7 @@ export default abstract class PokemonState {
         attacker &&
         attacker.effects.has(Effect.SHEER_COLD)
       ) {
-        damage = Math.ceil(damage * 1.2)
+        damage = Math.ceil(damage * 1.3)
       }
 
       const def = pokemon.status.armorReduction

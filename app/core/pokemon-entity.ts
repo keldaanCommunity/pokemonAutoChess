@@ -895,7 +895,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       } else if (this.effects.has(Effect.FREEZING)) {
         freezeChance = 0.4
       } else if (this.effects.has(Effect.SHEER_COLD)) {
-        freezeChance = 0.5
+        freezeChance = 0.4
       }
       freezeChance += nbIcyRocks * 0.05
       if (chance(freezeChance, this)) {

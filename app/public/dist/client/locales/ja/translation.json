@@ -1369,7 +1369,7 @@
     "CHILLY": "+2 SPE_DEF、20% の確率でフリーズ",
     "FROSTY": "+6 SPE_DEF、30% の確率でフリーズ",
     "FREEZING": "+20 SPE_DEF、40% の確率でフリーズ",
-    "SHEER_COLD": "+30 SPE_DEF、50% の確率でフリーズ、凍った敵は20%の追加ダメージを受ける",
+    "SHEER_COLD": "+30 SPE_DEF、凍った敵は30%の追加ダメージを受ける",
     "ANCIENT_POWER": "HP40%、攻撃力+30%で復活",
     "ELDER_POWER": "HP 80%、攻撃力 +60% で復活します。",
     "FORGOTTEN_POWER": "HP 100%、攻撃力 +100% で復活します。",

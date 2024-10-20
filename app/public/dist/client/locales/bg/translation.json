@@ -1211,7 +1211,7 @@
     "CHILLY": "+2 SPE_DEF, 20% шанс за FREEZE",
     "FROSTY": "+6 SPE_DEF, 30% шанс за FREEZE",
     "FREEZING": "+20 SPE_DEF, 40% шанс за FREEZE",
-    "SHEER_COLD": "+30 SPE_DEF, 50% шанс за FREEZE, замразените врагове поемат 20% допълнителни щети",
+    "SHEER_COLD": "+30 SPE_DEF, замразените врагове поемат 30% допълнителни щети",
     "ANCIENT_POWER": "Съживете с 40% HP и +30% ATK",
     "ELDER_POWER": "Съживете с 80% HP и +60% ATK.",
     "FORGOTTEN_POWER": "Съживете със 100% HP и +100% ATK.",

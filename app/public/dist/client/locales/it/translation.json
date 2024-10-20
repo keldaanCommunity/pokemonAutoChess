@@ -1822,7 +1822,7 @@
     "CHILLY": "+2 SPE_DEF, gli attacchi hanno il 20% di possibilità di infliggere FREEZE",
     "FROSTY": "+6 SPE_DEF, gli attacchi hanno il 30% di possibilità di infliggere FREEZE",
     "FREEZING": "+20 SPE_DEF, gli attacchi hanno il 40% di possibilità di infliggere FREEZE",
-    "SHEER_COLD": "+30 SPE_DEF, 50% di possibilità di infliggere FREEZE, i nemici congelati subiscono il 20% di danni aggiuntivi",
+    "SHEER_COLD": "+30 SPE_DEF, i nemici congelati subiscono il 30% di danni aggiuntivi",
     "ANCIENT_POWER": "Rianima con il 40% di HP e il 30% in più di ATK",
     "ELDER_POWER": "Rianima con il 80% di HP e il 60% in più di ATK",
     "FORGOTTEN_POWER": "Rianima con il 100% di HP e il 100% in più di ATK",
