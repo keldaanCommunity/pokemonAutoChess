@@ -8166,8 +8166,8 @@ export class FurySwipesStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const nbAttacks = randomBetween(
-      Math.round(2 * (1 + pokemon.ap / 100)),
-      Math.round(5 * (1 + pokemon.ap / 100))
+      Math.round(2 * (1 + pokemon.ap / 100) * (1 + pokemon.luck / 100)),
+      Math.round(5 * (1 + pokemon.ap / 100) * (1 + pokemon.luck / 100))
     )
     for (let n = 0; n < nbAttacks; n++) {
       target.handleSpecialDamage(
