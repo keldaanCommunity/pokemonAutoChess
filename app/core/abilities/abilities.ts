@@ -662,7 +662,7 @@ export class ChatterStrategy extends AbilityStrategy {
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-        if (chance(confusionChance)) {
+        if (chance(confusionChance, pokemon)) {
           tg.status.triggerConfusion(1000, tg)
         }
       }
@@ -711,7 +711,7 @@ export class CrabHammerStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     let damage = [40, 80, 120][pokemon.stars - 1] ?? 120
-    crit = chance((pokemon.critChance + 30) / 100) // can crit by default with a 30% increased crit chance
+    crit = chance((pokemon.critChance + 30) / 100, pokemon) // can crit by default with a 30% increased crit chance
     let attackType = AttackType.SPECIAL
     if (target.life / target.hp < 0.3) {
       damage = target.life
@@ -1504,7 +1504,7 @@ export class AuroraBeamStrategy extends AbilityStrategy {
         } else if (pokemon.effects.has(Effect.SHEER_COLD)) {
           freezeChance = 1.0
         }
-        if (chance(freezeChance)) {
+        if (chance(freezeChance, pokemon)) {
           cell.value.status.triggerFreeze(2000, target)
         }
       }
@@ -3408,7 +3408,7 @@ export class PsybeamStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        if (chance(0.5)) {
+        if (chance(0.5, pokemon)) {
           cell.value.status.triggerConfusion(4000, cell.value)
         }
       }
@@ -4516,7 +4516,7 @@ export class SkyAttackShadowStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    crit = crit || chance(pokemon.critChance / 100)
+    crit = crit || chance(pokemon.critChance / 100, pokemon)
     const destination = board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     if (destination) {
       pokemon.skydiveTo(destination.x, destination.y, board)
@@ -7443,7 +7443,7 @@ export class SlashStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
     const increasedCrit = [30, 60, 90][pokemon.stars - 1] ?? 90
-    crit = chance((pokemon.critChance + increasedCrit) / 100) // can crit by default
+    crit = chance((pokemon.critChance + increasedCrit) / 100, pokemon) // can crit by default
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -8018,7 +8018,7 @@ export class NightSlashStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
-    crit = crit || chance(pokemon.critChance / 100)
+    crit = crit || chance(pokemon.critChance / 100, pokemon)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -8031,7 +8031,7 @@ export class KowtowCleaveStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    crit = chance(pokemon.critChance / 100) // can crit by default
+    crit = chance(pokemon.critChance / 100, pokemon) // can crit by default
     super.process(pokemon, state, board, target, crit)
     const nbAllies =
       board.cells.filter((p) => p && p.team === pokemon.team).length - 1
@@ -8548,16 +8548,15 @@ export class SheerColdStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     let executeChance = clamp(
+      0.3 + min(0)((pokemon.life - target.life) / target.life),
       0,
-      0.3 * (1 + pokemon.ap / 100) +
-        min(0)((pokemon.life - target.life) / target.life),
       1
     )
     if (target.types.has(Synergy.ICE)) executeChance = 0
     else if (target.status.freeze) executeChance = 1
 
     let damage = [50, 100, 200][pokemon.stars - 1] ?? 200
-    if (chance(executeChance)) damage = 9999
+    if (chance(executeChance, pokemon)) damage = 9999
     target.handleSpecialDamage(
       damage,
       board,
@@ -9775,7 +9774,7 @@ export class GulpMissileStrategy extends AbilityStrategy {
 
     const damage = 55
 
-    if (chance(0.3)) {
+    if (chance(0.33, pokemon)) {
       missilePkm = Pkm.PIKACHU
       missilePkmString = "pikachu"
     }

@@ -132,6 +132,12 @@ export class Pokemon extends Schema implements IPokemon {
     )
   }
 
+  get luck(): number {
+    let luck = 0
+    if (this.items.has(Item.LUCKY_EGG)) luck += 50
+    return luck
+  }
+
   onChangePosition(x: number, y: number, player: Player) {
     // called after manually changing position of the pokemon on board
   }
@@ -15049,7 +15055,7 @@ export class Skarmory extends Pokemon {
 
         board.forEach((x, y, tg) => {
           const index = y * board.columns + x
-          if (!tg && chance(0.3)) {
+          if (!tg && chance(0.3, entity)) {
             if (board.effects[index] !== Effect.SPIKES) {
               board.effects[index] = Effect.SPIKES
               simulation.room.broadcast(Transfer.BOARD_EVENT, {

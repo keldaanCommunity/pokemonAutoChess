@@ -115,7 +115,7 @@ export function GamePokemonDetail(props: {
           <div>
             <AbilityTooltip
               ability={pokemon.skill}
-              tier={pokemon.stars}
+              stats={pokemon}
               key={pokemon.id}
             />
           </div>

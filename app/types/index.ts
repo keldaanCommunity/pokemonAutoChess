@@ -397,6 +397,7 @@ export interface IPokemon {
   range: number
   stars: number
   maxPP: number
+  luck: number
   ap: number
   skill: Ability
   passive: Passive
@@ -568,6 +569,7 @@ export interface IPokemonEntity {
   atk: number
   def: number
   speDef: number
+  luck: number
   attackType: AttackType
   life: number
   shield: number

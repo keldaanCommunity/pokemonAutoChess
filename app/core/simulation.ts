@@ -766,7 +766,7 @@ export default class Simulation extends Schema implements ISimulation {
                 pokemon.commands.push(
                   new DelayedCommand(() => {
                     if (target?.life > 0) {
-                      const crit = chance(pokemon.critChance / 100)
+                      const crit = chance(pokemon.critChance / 100, pokemon)
                       target.handleSpecialDamage(
                         3 * pokemon.atk,
                         this.board,

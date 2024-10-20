@@ -105,7 +105,7 @@ export default abstract class PokemonState {
       dodgeChance = max(0.9)(dodgeChance)
 
       if (
-        chance(dodgeChance) &&
+        chance(dodgeChance, target) &&
         !pokemon.items.has(Item.XRAY_VISION) &&
         !pokemon.effects.has(Effect.LOCK_ON) &&
         !target.status.paralysis &&
@@ -858,7 +858,8 @@ export default abstract class PokemonState {
 
     if (pokemon.effects.has(Effect.ZEN_MODE)) {
       const crit =
-        pokemon.items.has(Item.REAPER_CLOTH) && chance(pokemon.critChance)
+        pokemon.items.has(Item.REAPER_CLOTH) &&
+        chance(pokemon.critChance / 100, pokemon)
       pokemon.handleHeal(10, pokemon, 1, crit)
       if (pokemon.life >= pokemon.hp) {
         pokemon.index = PkmIndex[Pkm.DARMANITAN]

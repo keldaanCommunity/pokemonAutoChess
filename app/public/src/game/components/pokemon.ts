@@ -82,6 +82,7 @@ export default class PokemonSprite extends DraggableObject {
   detail: PokemonDetail | PokemonSpecialDetail | null = null
   pp: number | undefined
   maxPP: number
+  luck: number
   powerbar: PowerBar | undefined
   sprite: GameObjects.Sprite
   shadow: GameObjects.Sprite
@@ -165,6 +166,7 @@ export default class PokemonSprite extends DraggableObject {
     this.positionY = pokemon.positionY
     this.attackSprite = pokemon.attackSprite
     this.ap = pokemon.ap
+    this.luck = pokemon.luck
     if (this.range > 1) {
       this.rangeType = "range"
     } else {
@@ -331,6 +333,7 @@ export default class PokemonSprite extends DraggableObject {
       this.critPower,
       this.ap,
       this.pp || this.maxPP,
+      this.luck,
       this.types,
       this.skill,
       this.passive,
