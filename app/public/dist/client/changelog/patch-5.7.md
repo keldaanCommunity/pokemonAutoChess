@@ -17,6 +17,7 @@
 # Gameplay
 
 - New status: Fatigue: reduce all PP gain from all sources by 50%
+- New stat: Luck: luck is a multiplying factor applied on all all random draws (critical hit, dodge chance, chance to apply status on attack, wild chance, egg chance etc.)
 
 # Changes to Pokemon & Abilities
 
@@ -48,9 +49,15 @@
     - (6) Power Trip:  When knocking down its target, gain 10 Attack , 30% Ability Power and ~~100 max HP~~ **60% of its max HP**
     - **New** (9) Merciless: Monsters can target allies with less than 15% of their max HP
 - Change Fire shard: give ~~+2~~ +3 ATK for ~~2~~ 3 player HP
+- Wild chance is now influenced by the luck stat of each of your wild pokémons
+- Baby egg chance is now influenced by the luck stat of your baby pokémons. With enough luck, you can find several eggs in one turn:
+    - (3) Hatcher: each baby has 10% chance (increased with luck) to find an Egg 
+    - (5) Breeder: guaranteed to get at least one egg after each defeat
+    - (7) Golden Eggs: each baby has 4% chance (increased with luck) to find a golden Egg 
 
 # Changes to Items
 
+- Rework Lucky Egg: AP +60, Defense +6 ; Increase Luck by 50%
 - Weather rocks are no longer held items and no longer give synergies. Instead, they give bonuses to your team when in a certain weather.
 - Added 4 new weather rocks: Electric Quartz, Float Stone, Blood Stone, Mist Stone
 - Nerf Electirizer: Attack speed 50 → 30%
