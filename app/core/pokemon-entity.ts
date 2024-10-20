@@ -180,10 +180,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     pokemon.types.forEach((type) => {
       this.types.add(type)
     })
-
-    if (this.passive === Passive.SLOW_START) {
-      this.atkSpeed -= 0.25
-    }
   }
 
   update(

@@ -480,6 +480,12 @@ export interface IPokemonEntity {
     apBoost: number,
     crit: boolean
   ): void
+  addLuck(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
   addPP(
     value: number,
     caster: IPokemonEntity,

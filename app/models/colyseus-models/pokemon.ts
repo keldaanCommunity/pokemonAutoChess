@@ -5237,6 +5237,10 @@ export class Regigigas extends Pokemon {
   skill = Ability.CRUSH_GRIP
   passive = Passive.SLOW_START
   attackSprite = AttackSprite.DRAGON_MELEE
+
+  afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
+    entity.addAttackSpeed(-25, entity, 0, false)
+  }
 }
 
 export class Kyogre extends Pokemon {
@@ -6182,7 +6186,13 @@ export class Jirachi extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.DOOM_DESIRE
+  passive = Passive.GOOD_LUCK
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  afterSimulationStart({ team }: { team: MapSchema<IPokemonEntity> }) {
+    team.forEach((pokemon) => {
+      pokemon.addLuck(20, pokemon, 0, false)
+    })
+  }
 }
 
 export class Arceus extends Pokemon {
@@ -12282,8 +12292,16 @@ export class Murkrow extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.FOUL_PLAY
+  passive = Passive.BAD_LUCK
   additional = true
   attackSprite = AttackSprite.DARK_MELEE
+  afterSimulationStart({
+    opponentTeam
+  }: { opponentTeam: MapSchema<IPokemonEntity> }) {
+    opponentTeam.forEach((pokemon) => {
+      pokemon.addLuck(-20, pokemon, 0, false)
+    })
+  }
 }
 
 export class Honchkrow extends Pokemon {
@@ -12297,8 +12315,16 @@ export class Honchkrow extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.FOUL_PLAY
+  passive = Passive.BAD_LUCK
   additional = true
   attackSprite = AttackSprite.DARK_MELEE
+  afterSimulationStart({
+    opponentTeam
+  }: { opponentTeam: MapSchema<IPokemonEntity> }) {
+    opponentTeam.forEach((pokemon) => {
+      pokemon.addLuck(-20, pokemon, 0, false)
+    })
+  }
 }
 
 export class Zigzagoon extends Pokemon {
