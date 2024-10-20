@@ -2250,7 +2250,11 @@
     "OGERPON_TEAL": "Ogerpon può equipaggiare la TEAL_MASK, la HEARTHFLAME_MASK, la WELLSPRING_MASK e la CORNERSTONE_MASK per cambiare la sua forma. Quando Ogerpon lancia la sua abilità, cura [20,SP] HP agli alleati adiacenti.",
     "OGERPON_WELLSPRING": "Ogerpon può equipaggiare la TEAL_MASK, la HEARTHFLAME_MASK, la WELLSPRING_MASK e la CORNERSTONE_MASK per cambiare la sua forma. Quando Ogerpon lancia la sua abilità, dai 10 PP agli alleati adiacenti",
     "OGERPON_HEARTHFLAME": "Ogerpon può equipaggiare la TEAL_MASK, la HEARTHFLAME_MASK, la WELLSPRING_MASK e la CORNERSTONE_MASK per cambiare la sua forma. Quando Ogerpon lancia la sua abilità, infliggi BURN ai nemici adiacenti per 2 secondi.",
-    "OGERPON_CORNERSTONE": "Ogerpon può equipaggiare la TEAL_MASK, la HEARTHFLAME_MASK, la WELLSPRING_MASK e la CORNERSTONE_MASK per cambiare la sua forma. Quando Ogerpon lancia la sua abilità, causa FLINCH ai nemici adiacenti per 5 secondi."
+    "OGERPON_CORNERSTONE": "Ogerpon può equipaggiare la TEAL_MASK, la HEARTHFLAME_MASK, la WELLSPRING_MASK e la CORNERSTONE_MASK per cambiare la sua forma. Quando Ogerpon lancia la sua abilità, causa FLINCH ai nemici adiacenti per 5 secondi.",
+    "VICTINI": "Gli attacchi degli alleati non possono più mancare.",
+    "AEGISLASH": "Alternati tra la Forma Scudo e la Forma Spada quando l'abilità viene usata.",
+    "DARMANITAN": "Quando va sotto il 50% di HP, salta verso un punto sicuro e trasformati nello Stato Zen.",
+    "DARMANITAN_ZEN": "Non può più attaccare o muoversi, però curati di [10,SP] HP al secondo. Trasformati nello Stato Normale quando vieni curato completamente."
   },
   "stat": {
     "ATK": "Attacco",
@@ -2285,6 +2289,7 @@
   "status": {
     "BURN": "Scottatura",
     "SILENCE": "Silenzio",
+    "FATIGUE": "Affaticamento",
     "POISONNED": "Veleno",
     "FREEZE": "Congelamento",
     "PROTECT": "Protezione",
@@ -2309,6 +2314,7 @@
   "status_description": {
     "BURN": "Infligge il 5% degli HP massimi come TRUE ogni secondo. Riduce le cure del 50%.",
     "SILENCE": "Impedisce di usare abilità e guadagnare PP",
+    "FATIGUE": "Riduci l'aumento di PP da tutte le fonti del 50%.",
     "POISONNED": "Infligge il 5% dei HP massimi per stack come TRUE ogni secondo. Può essere stackato fino a 3 volte di default.",
     "FREEZE": "Impedisce di muoversi, schivare o attaccare",
     "PROTECT": "Protegge da qualsiasi fonte di danno, ma impedisce il guadagno di PP. I nemici cercheranno di evitare di colpire un' unità protetta.",
@@ -2833,6 +2839,8 @@
   "show_damage_numbers": "Mostra valore dei danni",
   "disable_animated_tilemap": "Disabilita animazioni in background",
   "save": "Salva",
+  "reset": "Reset",
+  "snapshot": "Snapshot",
   "passive": "Passiva",
   "pick_additional_pokemon_hint": "Scegli un Pokèmon aggiuntivo. Sarà disponibile per tutti.",
   "free_slot_hint": "Devi avere uno slot libero in panchina o due per Duo",
@@ -2903,6 +2911,12 @@
   "weather_rocks": "Rocce Meteo",
   "special_items": "Oggetti speciali",
   "shiny_items": "Oggetti Shiny",
+  "craftable_items_description": "Combina due componenti per creare oggetti molto potenti!",
+  "berries_description": "Quando la sinergia GRASS è attiva, puoi raccogliere bacche cliccando sull'alberello di bacche affianco al tuo avatar.",
+  "artificial_items_description": "La sinergia ARTIFICIAL ti dà oggetti esclusivi quando è attiva. 3 di loro sono scelti casualmente per ogni giocatore all'inizio della partita.",
+  "weather_rocks_description": "Le rocce meteo si possono trovare dopo aver combattuto sotto condizioni atmosferiche con la sinergia ROCK attiva, le rocce danno dei bonus all'intera squadra quando il meteo inerente alla roccia equipaggiata è presente. I loro effetti possono essere cumulativi.",
+  "special_items_description": "Questi oggetti sono esclusivi ad alcuni Pokèmon, e non possono essere ottenuti in altro modo.",
+  "shiny_items_description": "Se sei fortunato abbastanza da combattere contro Pokèmon Shiny duranti i round PvE o di trovare un uovo dorato, otterrai un oggetto shiny come ricompensa.",
   "item_recipes": "Ricetta degli Oggetti",
   "news": "Notizie",
   "patch_notes": "Note della Patch",
@@ -3220,7 +3234,8 @@
     "CROWDED": "Terreno Affollato",
     "KECLEONS_SHOP": "Negozio di Kecleon",
     "FREE_MARKET": "Mercato Gratis",
-    "SHINY_HUNTER": "Cacciatore di Shiny"
+    "SHINY_HUNTER": "Cacciatore di Shiny",
+    "DESPERATE_MOVES": "Mosse Disperate"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "Tutte i Pokèmon Addizionali sono disponibili immediatamente",
@@ -3237,7 +3252,8 @@
     "CROWDED": "Il massimo di unità sul terreno viene aumentato di 3.",
     "KECLEONS_SHOP": "I caroselli vengono sostituiti dal negozio di Kecleon, che propone 6 oggetti per 10 GOLD ognuno",
     "FREE_MARKET": "Pokèmon sono comprati e venduti per 0 GOLD",
-    "SHINY_HUNTER": "Tutti i Pokèmon dei round  PvE saranno Shiny."
+    "SHINY_HUNTER": "Tutti i Pokèmon dei round  PvE saranno Shiny.",
+    "DESPERATE_MOVES": "I giocatori iniziano con 150 HP. Ricaricare il negozio costa HP invece che GOLD."
   },
   "loading_hints": {
     "tab_out": "Non cambiare finestra! Il caricamento è in pausa quando la finestra del browser è inattiva.",
