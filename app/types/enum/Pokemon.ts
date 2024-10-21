@@ -3952,8 +3952,8 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.MANAPHY]: {
-    attack: AnimationType.RearUp,
-    ability: AnimationType.Double,
+    attack: AnimationType.Shoot,
+    ability: AnimationType.RearUp,
     emote: AnimationType.Shoot
   },
   [Pkm.ROTOM]: {
@@ -5568,8 +5568,8 @@ export const AnimationConfig: {
     emote: AnimationType.Charge
   },
   [Pkm.PHIONE]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Charge,
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Twirl,
     emote: AnimationType.Shoot
   },
   [Pkm.COMBEE]: {
