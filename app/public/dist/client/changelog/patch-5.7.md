@@ -17,6 +17,7 @@
 # Gameplay
 
 - New status: Fatigue: reduce all PP gain from all sources by 50%
+- New stat: Luck: luck is a multiplying factor applied on all all random draws (critical hit, dodge chance, chance to apply status on attack, wild chance, egg chance etc.)
 
 # Changes to Pokemon & Abilities
 
@@ -35,6 +36,7 @@
 - Rework Shell Trap ability: The shield of the Pokemon explodes, dealing 50 special damage + current shield around it. If it's not shielded, gains 75 shield instead
 - New ability for Shuckle: Bide: The user is unable to move for 3 secs. Bide will do SPECIAL damage equal to twice the damage received during the idling period around the user.
 - All Silvally forms have been merged into one. Multi Attack: multiplied by ~~the synergy level of current Silvally form~~ the sum of levels of all Silvally additional synergies.
+- Buff Wish (Togepi line): now also increases luck of selected allies by 20%
 
 # Changes to Synergies
 
@@ -49,12 +51,21 @@
     - (6) Power Trip:  When knocking down its target, gain 10 Attack , 30% Ability Power and ~~100 max HP~~ **60% of its max HP**
     - **New** (9) Merciless: Monsters can target allies with less than 15% of their max HP
 - Change Fire shard: give ~~+2~~ +3 ATK for ~~2~~ 3 player HP
+- Wild chance is now influenced by the luck stat of each of your wild pokémons
+- Baby egg chance is now influenced by the luck stat of your baby pokémons. With enough luck, you can find several eggs in one turn:
+    - (3) Hatcher: each baby has 10% chance (increased with luck) to find an Egg 
+    - (5) Breeder: guaranteed to get at least one egg after each defeat
+    - (7) Golden Eggs: each baby has 4% chance (increased with luck) to find a golden Egg 
+- Changed Psychic 4: ~~Unowns have 5% chance to appear in shops~~ An Unown appears every 3 shops
+- Change Ice 8: freeze chance ~~50~~ 40%, increased damage to frozen enemies: ~~20~~ 30%
 
 # Changes to Items
 
+- Rework Lucky Egg: AP +60, Defense +6 ; Increase Luck by 50%
 - Weather rocks are no longer held items and no longer give synergies. Instead, they give bonuses to your team when in a certain weather.
 - Added 4 new weather rocks: Electric Quartz, Float Stone, Blood Stone, Mist Stone
 - Nerf Electirizer: Attack speed 50 → 30%
+- Changed Gold Bottle Cap base stats ~~20% Crit chance 40% Crit damage~~ → 50% Luck
 
 # UI
 
@@ -62,6 +73,7 @@
 
 # Bugfix
 
+- Mouse coordinates are now double checked when using the sell hotkey, to prevent accidental selling of the wrong pokemon
 - Locked status now correctly triggers retargetting, and reapply wide lens effect after restoring range
 - Fixed a bug where the player was not able to refresh the shop if they have free shop rerolls but zero gold
 - Items giving a synergy are now also taken into account for weather election

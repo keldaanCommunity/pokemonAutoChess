@@ -56,6 +56,14 @@ h2 .description-icon > img {
   color: #d172ff;
 }
 
+.scales-luck .ability-value {
+  color: #07c552;
+}
+
+.scales-luck .ability-value .active {
+  color: #2aed72;
+}
+
 .stat-label {
   color: rgb(171, 171, 171);
   white-space: normal;

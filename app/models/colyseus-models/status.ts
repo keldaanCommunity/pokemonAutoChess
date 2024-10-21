@@ -451,7 +451,7 @@ export default class Status extends Schema implements IStatus {
         positionY: pkm.positionY
       })
       const crit = pkm.items.has(Item.REAPER_CLOTH)
-        ? chance(pkm.critChance)
+        ? chance(pkm.critChance, pkm)
         : false
       board.getAdjacentCells(pkm.positionX, pkm.positionY).forEach((cell) => {
         if (cell?.value && cell.value.team !== pkm.team) {

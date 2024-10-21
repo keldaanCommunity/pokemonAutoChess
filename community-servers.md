@@ -77,7 +77,7 @@ Australian Community Server for Pokemon Auto Chess
 
 # PACKR
 
-- url: https://krpac.onrender.com
+- url: https://packr.site
 - logo: https://i.imgur.com/wiTEHk5.png
 - creator: Camerupt
 - location: South Korea

@@ -659,17 +659,6 @@ export default class Simulation extends Schema implements ISimulation {
     // SUPPORT ITEMS EFFECTS (exp share, gracidea etc)
     for (const team of [this.blueTeam, this.redTeam]) {
       team.forEach((pokemon) => {
-        if (pokemon.items.has(Item.LUCKY_EGG)) {
-          ;[-1, 0, 1].forEach((offset) => {
-            const ally = this.board.getValue(
-              pokemon.positionX + offset,
-              pokemon.positionY
-            )
-            if (ally && ally.team === pokemon.team) {
-              ally.addAbilityPower(40, pokemon, 0, false)
-            }
-          })
-        }
         if (pokemon.items.has(Item.CLEANSE_TAG)) {
           ;[-1, 0, 1].forEach((offset) => {
             const ally = this.board.getValue(
@@ -766,7 +755,7 @@ export default class Simulation extends Schema implements ISimulation {
                 pokemon.commands.push(
                   new DelayedCommand(() => {
                     if (target?.life > 0) {
-                      const crit = chance(pokemon.critChance / 100)
+                      const crit = chance(pokemon.critChance / 100, pokemon)
                       target.handleSpecialDamage(
                         3 * pokemon.atk,
                         this.board,
