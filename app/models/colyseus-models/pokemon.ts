@@ -132,6 +132,12 @@ export class Pokemon extends Schema implements IPokemon {
     )
   }
 
+  get luck(): number {
+    let luck = 0
+    if (this.items.has(Item.LUCKY_EGG)) luck += 50
+    return luck
+  }
+
   onChangePosition(x: number, y: number, player: Player) {
     // called after manually changing position of the pokemon on board
   }
@@ -1260,7 +1266,7 @@ export class Honedge extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.KING_SHIELD
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.STEEL_MELEE
 }
 
 export class Doublade extends Pokemon {
@@ -1279,7 +1285,7 @@ export class Doublade extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.KING_SHIELD
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.STEEL_MELEE
 }
 
 export class Aegislash extends Pokemon {
@@ -1294,10 +1300,30 @@ export class Aegislash extends Pokemon {
   atk = 23
   def = 7
   speDef = 7
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.KING_SHIELD
-  attackSprite = AttackSprite.DRAGON_MELEE
+  passive = Passive.AEGISLASH
+  attackSprite = AttackSprite.STEEL_MELEE
+}
+
+export class AegislashBlade extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GHOST,
+    Synergy.STEEL,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.RARE
+  stars = 3
+  hp = 230
+  atk = 33
+  def = 2
+  speDef = 2
+  maxPP = 80
+  range = 1
+  skill = Ability.KING_SHIELD
+  passive = Passive.AEGISLASH
+  attackSprite = AttackSprite.STEEL_MELEE
 }
 
 export class Oshawott extends Pokemon {
@@ -4877,7 +4903,7 @@ export class Zapdos extends Pokemon {
 }
 
 export class Zeraora extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.WILD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ELECTRIC])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
@@ -5211,6 +5237,10 @@ export class Regigigas extends Pokemon {
   skill = Ability.CRUSH_GRIP
   passive = Passive.SLOW_START
   attackSprite = AttackSprite.DRAGON_MELEE
+
+  afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
+    entity.addAttackSpeed(-25, entity, 0, false)
+  }
 }
 
 export class Kyogre extends Pokemon {
@@ -6156,7 +6186,13 @@ export class Jirachi extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.DOOM_DESIRE
+  passive = Passive.GOOD_LUCK
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  afterSimulationStart({ team }: { team: MapSchema<IPokemonEntity> }) {
+    team.forEach((pokemon) => {
+      pokemon.addLuck(20, pokemon, 0, false)
+    })
+  }
 }
 
 export class Arceus extends Pokemon {
@@ -12256,8 +12292,16 @@ export class Murkrow extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.FOUL_PLAY
+  passive = Passive.BAD_LUCK
   additional = true
   attackSprite = AttackSprite.DARK_MELEE
+  afterSimulationStart({
+    opponentTeam
+  }: { opponentTeam: MapSchema<IPokemonEntity> }) {
+    opponentTeam.forEach((pokemon) => {
+      pokemon.addLuck(-20, pokemon, 0, false)
+    })
+  }
 }
 
 export class Honchkrow extends Pokemon {
@@ -12271,8 +12315,16 @@ export class Honchkrow extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.FOUL_PLAY
+  passive = Passive.BAD_LUCK
   additional = true
   attackSprite = AttackSprite.DARK_MELEE
+  afterSimulationStart({
+    opponentTeam
+  }: { opponentTeam: MapSchema<IPokemonEntity> }) {
+    opponentTeam.forEach((pokemon) => {
+      pokemon.addLuck(-20, pokemon, 0, false)
+    })
+  }
 }
 
 export class Zigzagoon extends Pokemon {
@@ -13965,7 +14017,7 @@ export class Tangrowth extends Pokemon {
 }
 
 export class Phanpy extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.WILD, Synergy.BABY])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND, Synergy.BABY])
   rarity = Rarity.RARE
   evolution = Pkm.DONPHAN
   stars = 1
@@ -13980,7 +14032,7 @@ export class Phanpy extends Pokemon {
 }
 
 export class Donphan extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.WILD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND])
   rarity = Rarity.RARE
   stars = 2
   hp = 180
@@ -14428,7 +14480,7 @@ export class GastrodonEastSea extends Pokemon {
 }
 
 export class Rufflet extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.WILD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FLYING])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.BRAVIARY
@@ -14444,7 +14496,7 @@ export class Rufflet extends Pokemon {
 }
 
 export class Braviary extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.WILD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FLYING])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 160
@@ -14806,7 +14858,7 @@ export class Mantine extends Pokemon {
 }
 
 export class Remoraid extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.WILD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.WATER])
   rarity = Rarity.SPECIAL
   evolution = Pkm.OCTILLERY
   stars = 1
@@ -14832,7 +14884,7 @@ export class Remoraid extends Pokemon {
 }
 
 export class Octillery extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.WILD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.WATER])
   rarity = Rarity.SPECIAL
   stars = 2
   hp = 150
@@ -15029,7 +15081,7 @@ export class Skarmory extends Pokemon {
 
         board.forEach((x, y, tg) => {
           const index = y * board.columns + x
-          if (!tg && chance(0.3)) {
+          if (!tg && chance(0.3, entity)) {
             if (board.effects[index] !== Effect.SPIKES) {
               board.effects[index] = Effect.SPIKES
               simulation.room.broadcast(Transfer.BOARD_EVENT, {
@@ -15301,10 +15353,10 @@ export class Sandygast extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.PALOSSAND
-  hp = 90
+  hp = 60
   atk = 5
   def = 3
-  speDef = 2
+  speDef = 1
   maxPP = 90
   range = 1
   skill = Ability.SHORE_UP
@@ -15320,15 +15372,91 @@ export class Palossand extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 180
-  atk = 12
-  def = 6
-  speDef = 5
+  hp = 150
+  atk = 10
+  def = 4
+  speDef = 2
   maxPP = 90
   range = 1
   skill = Ability.SHORE_UP
   additional = true
   attackSprite = AttackSprite.WATER_MELEE
+}
+
+export class Skorupi extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.DRAPION
+  hp = 90
+  atk = 8
+  def = 4
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.POISON_STING
+  additional = true
+  attackSprite = AttackSprite.BUG_MELEE
+}
+
+export class Drapion extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON, Synergy.DARK])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 180
+  atk = 16
+  def = 6
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.POISON_STING
+  additional = true
+  attackSprite = AttackSprite.BUG_MELEE
+}
+
+export class Darumaka extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIRE, Synergy.PSYCHIC])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.DARMANITAN
+  hp = 80
+  atk = 12
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.HEADBUTT
+  attackSprite = AttackSprite.FIRE_MELEE
+}
+
+export class Darmanitan extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIRE, Synergy.PSYCHIC])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 220
+  atk = 26
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.HEADBUTT
+  passive = Passive.DARMANITAN
+  attackSprite = AttackSprite.FIRE_MELEE
+}
+
+export class DarmanitanZen extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIRE, Synergy.PSYCHIC])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 220
+  atk = 16
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.TRANSE
+  passive = Passive.DARMANITAN_ZEN
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export const PokemonClasses: Record<
@@ -15668,6 +15796,7 @@ export const PokemonClasses: Record<
   [Pkm.HONEDGE]: Honedge,
   [Pkm.DOUBLADE]: Doublade,
   [Pkm.AEGISLASH]: Aegislash,
+  [Pkm.AEGISLASH_BLADE]: AegislashBlade,
   [Pkm.CUBONE]: Cubone,
   [Pkm.MAROWAK]: Marowak,
   [Pkm.ALOLAN_MAROWAK]: AlolanMarowak,
@@ -16199,5 +16328,10 @@ export const PokemonClasses: Record<
   [Pkm.HONCHKROW]: Honchkrow,
   [Pkm.TURTONATOR]: Turtonator,
   [Pkm.SANDYGAST]: Sandygast,
-  [Pkm.PALOSSAND]: Palossand
+  [Pkm.PALOSSAND]: Palossand,
+  [Pkm.SKORUPI]: Skorupi,
+  [Pkm.DRAPION]: Drapion,
+  [Pkm.DARUMAKA]: Darumaka,
+  [Pkm.DARMANITAN]: Darmanitan,
+  [Pkm.DARMANITAN_ZEN]: DarmanitanZen
 }

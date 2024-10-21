@@ -1,6 +1,7 @@
 import Player from "../models/colyseus-models/player"
 import { IPokemonEntity, Transfer } from "../types"
 import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../types/Config"
+import { Ability } from "../types/enum/Ability"
 import { Effect } from "../types/enum/Effect"
 import {
   AttackType,
@@ -10,6 +11,7 @@ import {
 } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
+import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
 import { count } from "../utils/array"
@@ -31,7 +33,7 @@ export default abstract class PokemonState {
       let trueDamage = 0
       let totalTakenDamage = 0
 
-      if (Math.random() * 100 < pokemon.critChance) {
+      if (chance(pokemon.critChance / 100, pokemon)) {
         if (target.items.has(Item.ROCKY_HELMET) === false) {
           let opponentCritPower = pokemon.critPower
           if (target.effects.has(Effect.BATTLE_ARMOR)) {
@@ -103,7 +105,7 @@ export default abstract class PokemonState {
       dodgeChance = max(0.9)(dodgeChance)
 
       if (
-        chance(dodgeChance) &&
+        chance(dodgeChance, target) &&
         !pokemon.items.has(Item.XRAY_VISION) &&
         !pokemon.effects.has(Effect.LOCK_ON) &&
         !target.status.paralysis &&
@@ -195,9 +197,9 @@ export default abstract class PokemonState {
   }
 
   handleHeal(
-    pokemon: IPokemonEntity,
+    pokemon: PokemonEntity,
     heal: number,
-    caster: IPokemonEntity,
+    caster: PokemonEntity,
     apBoost: number,
     crit: boolean
   ): void {
@@ -373,7 +375,7 @@ export default abstract class PokemonState {
         attacker &&
         attacker.effects.has(Effect.SHEER_COLD)
       ) {
-        damage = Math.ceil(damage * 1.2)
+        damage = Math.ceil(damage * 1.3)
       }
 
       const def = pokemon.status.armorReduction
@@ -852,6 +854,25 @@ export default abstract class PokemonState {
       })
       pokemon.status.triggerFreeze(1000, pokemon)
       pokemon.effects.delete(Effect.HAIL)
+    }
+
+    if (pokemon.effects.has(Effect.ZEN_MODE)) {
+      const crit =
+        pokemon.items.has(Item.REAPER_CLOTH) &&
+        chance(pokemon.critChance / 100, pokemon)
+      pokemon.handleHeal(10, pokemon, 1, crit)
+      if (pokemon.life >= pokemon.hp) {
+        pokemon.index = PkmIndex[Pkm.DARMANITAN]
+        pokemon.name = Pkm.DARMANITAN
+        pokemon.passive = Passive.DARMANITAN
+        pokemon.skill = Ability.HEADBUTT
+        pokemon.pp = 0
+        pokemon.status.tree = false
+        pokemon.toMovingState()
+        pokemon.addAttack(10, pokemon, 0, false)
+        pokemon.addDefense(-5, pokemon, 0, false)
+        pokemon.addSpecialDefense(-5, pokemon, 0, false)
+      }
     }
   }
 

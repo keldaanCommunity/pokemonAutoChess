@@ -664,13 +664,17 @@ export default class BattleManager {
             previousValue as IPokemonEntity["ap"],
             value as IPokemonEntity["ap"]
           )
-          pkm.detail.updateAbilityDescription(pkm.skill, pkm.stars, pkm.ap)
+          pkm.detail.updateAbilityDescription(pkm)
           if (pokemon.passive != Passive.NONE) {
-            pkm.detail.updatePassiveDescription(
-              pokemon.passive,
-              pkm.stars,
-              pkm.ap
-            )
+            pkm.detail.updatePassiveDescription(pokemon)
+          }
+        }
+      } else if (field === "luck") {
+        pkm.luck = pokemon.luck
+        if (pkm.detail && pkm.detail instanceof PokemonDetail) {
+          pkm.detail.updateAbilityDescription(pkm)
+          if (pokemon.passive != Passive.NONE) {
+            pkm.detail.updatePassiveDescription(pokemon)
           }
         }
       } else if (field === "atkSpeed") {
@@ -773,6 +777,7 @@ export default class BattleManager {
       } else if (field === "index") {
         if (pkm.index !== value) {
           pkm.index = value as IPokemonEntity["index"]
+          pkm.displayAnimation("EVOLUTION")
           this.animationManager.animatePokemon(
             pkm,
             PokemonActionState.IDLE,
@@ -793,12 +798,12 @@ export default class BattleManager {
       } else if (field === "skill") {
         pkm.skill = value as IPokemonEntity["skill"]
         if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-          pkm.detail.updateAbilityDescription(pkm.skill, pkm.stars, pkm.ap)
+          pkm.detail.updateAbilityDescription(pkm)
         }
       } else if (field === "stars") {
         pkm.stars = value as IPokemonEntity["stars"]
         if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-          pkm.detail.updateAbilityDescription(pkm.skill, pkm.stars, pkm.ap)
+          pkm.detail.updateAbilityDescription(pkm)
         }
       }
     }

@@ -38,7 +38,11 @@ export default function GameStore() {
               pokemon={pokemon}
               inPlanner={teamPlanner?.some(p => p.name === pokemon) ?? false}
               onMouseEnter={() => {
-                if (scene) scene.shopIndexHovered = index
+                if (scene) {
+                  if (scene.pokemonHovered) scene.clearHovered(scene.pokemonHovered)
+                  scene.pokemonHovered = null
+                  scene.shopIndexHovered = index
+                }
               }}
               onMouseLeave={() => {
                 if (scene) scene.shopIndexHovered = null

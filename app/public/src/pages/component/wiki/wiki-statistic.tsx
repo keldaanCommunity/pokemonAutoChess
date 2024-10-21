@@ -87,6 +87,13 @@ export default function WikiStatistic() {
           {addIconsToDescription(t("stat_description.CRIT_POWER"))}
         </p>
       </li>
+      <li className="my-box">
+        <img style={imgStyle} src="assets/icons/LUCK.png"></img>
+        <h2>{t("stat.LUCK")}</h2>
+        <p className="description">
+          {addIconsToDescription(t("stat_description.LUCK"))}
+        </p>
+      </li>
     </ul>
   )
 }

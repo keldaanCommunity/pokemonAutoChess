@@ -46,6 +46,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     critPower: number,
     ap: number,
     pp: number,
+    luck: number,
     types: Set<Synergy>,
     skill: Ability,
     passive: Passive,
@@ -182,7 +183,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
       this.passiveDescription = document.createElement("div")
       this.passiveDescription.className = "game-pokemon-detail-passive"
       this.passiveDescriptionRoot = ReactDOM.createRoot(this.passiveDescription)
-      this.updatePassiveDescription(passive, stars, ap)
+      this.updatePassiveDescription({ passive, stars, ap, luck })
       wrap.appendChild(this.passiveDescription)
     }
 
@@ -190,7 +191,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
       const abilityDiv = document.createElement("div")
       abilityDiv.className = "game-pokemon-detail-ult"
       this.abilityRoot = ReactDOM.createRoot(abilityDiv)
-      this.updateAbilityDescription(skill, stars, ap)
+      this.updateAbilityDescription({ skill, stars, ap, luck })
       wrap.appendChild(abilityDiv)
     }
 
@@ -203,23 +204,20 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     el.classList.toggle("negative", value < 0)
   }
 
-  updateAbilityDescription(skill: Ability, abilityTier: number, ap: number) {
+  updateAbilityDescription({ skill, stars, ap, luck }: { skill: Ability, stars: number, ap: number, luck: number }) {
     this.abilityRoot?.render(
       <>
         <div className="ability-name">{t(`ability.${skill}`)}</div>
-        <AbilityTooltip ability={skill} tier={abilityTier} ap={ap} />
+        <AbilityTooltip ability={skill} stats={{ stars, ap, luck }} />
       </>
     )
   }
 
-  updatePassiveDescription(passive: Passive, abilityTier: number, ap: number) {
+  updatePassiveDescription({ passive, stars, ap, luck }: { passive: Passive, stars: number, ap: number, luck: number }) {
     this.passiveDescriptionRoot?.render(
       <p>
         {addIconsToDescription(
-          t(`passive_description.${passive}`),
-          abilityTier,
-          ap
-        )}
+          t(`passive_description.${passive}`), { stars, ap, luck })}
       </p>
     )
   }

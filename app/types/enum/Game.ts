@@ -104,7 +104,8 @@ export enum Stat {
   CRIT_CHANCE = "CRIT_CHANCE",
   CRIT_POWER = "CRIT_POWER",
   AP = "AP",
-  SHIELD = "SHIELD"
+  SHIELD = "SHIELD",
+  LUCK = "LUCK"
 }
 
 export enum Damage {

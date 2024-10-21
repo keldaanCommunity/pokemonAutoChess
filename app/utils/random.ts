@@ -1,9 +1,10 @@
-export function chance(probability: number): boolean {
-  return Math.random() < probability
-}
+import { IPokemon, IPokemonEntity } from "../types"
 
-export function coinflip(): boolean {
-  return Math.random() < 0.5
+export function chance(
+  probability: number,
+  pokemon?: IPokemonEntity | IPokemon
+): boolean {
+  return Math.random() < probability * (1 + (pokemon?.luck ?? 0) / 100)
 }
 
 export function randomBetween(min: number, max: number): number {

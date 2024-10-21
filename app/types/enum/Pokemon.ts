@@ -334,6 +334,7 @@ export enum Pkm {
   HONEDGE = "HONEDGE",
   DOUBLADE = "DOUBLADE",
   AEGISLASH = "AEGISLASH",
+  AEGISLASH_BLADE = "AEGISLASH_BLADE",
   CUBONE = "CUBONE",
   MAROWAK = "MAROWAK",
   ALOLAN_MAROWAK = "ALOLAN_MAROWAK",
@@ -862,7 +863,12 @@ export enum Pkm {
   HONCHKROW = "HONCHKROW",
   SANDYGAST = "SANDYGAST",
   PALOSSAND = "PALOSSAND",
-  TURTONATOR = "TURTONATOR"
+  TURTONATOR = "TURTONATOR",
+  SKORUPI = "SKORUPI",
+  DRAPION = "DRAPION",
+  DARUMAKA = "DARUMAKA",
+  DARMANITAN = "DARMANITAN",
+  DARMANITAN_ZEN = "DARMANITAN_ZEN"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1199,6 +1205,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.HONEDGE]: "0679",
   [Pkm.DOUBLADE]: "0680",
   [Pkm.AEGISLASH]: "0681",
+  [Pkm.AEGISLASH_BLADE]: "0681-0001",
   [Pkm.CUBONE]: "0104",
   [Pkm.MAROWAK]: "0105",
   [Pkm.ALOLAN_MAROWAK]: "0105-0001",
@@ -1727,7 +1734,12 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.HONCHKROW]: "0430",
   [Pkm.SANDYGAST]: "0769",
   [Pkm.PALOSSAND]: "0770",
-  [Pkm.TURTONATOR]: "0776"
+  [Pkm.TURTONATOR]: "0776",
+  [Pkm.SKORUPI]: "0451",
+  [Pkm.DRAPION]: "0452",
+  [Pkm.DARUMAKA]: "0554",
+  [Pkm.DARMANITAN]: "0555",
+  [Pkm.DARMANITAN_ZEN]: "0555-0001"
 }
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
@@ -2059,6 +2071,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.HONEDGE]: Pkm.HONEDGE,
   [Pkm.DOUBLADE]: Pkm.HONEDGE,
   [Pkm.AEGISLASH]: Pkm.HONEDGE,
+  [Pkm.AEGISLASH_BLADE]: Pkm.HONEDGE,
   [Pkm.CUBONE]: Pkm.CUBONE,
   [Pkm.MAROWAK]: Pkm.CUBONE,
   [Pkm.ALOLAN_MAROWAK]: Pkm.CUBONE,
@@ -2592,7 +2605,12 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.HONCHKROW]: Pkm.MURKROW,
   [Pkm.SANDYGAST]: Pkm.SANDYGAST,
   [Pkm.PALOSSAND]: Pkm.SANDYGAST,
-  [Pkm.TURTONATOR]: Pkm.TURTONATOR
+  [Pkm.TURTONATOR]: Pkm.TURTONATOR,
+  [Pkm.SKORUPI]: Pkm.SKORUPI,
+  [Pkm.DRAPION]: Pkm.DRAPION,
+  [Pkm.DARUMAKA]: Pkm.DARUMAKA,
+  [Pkm.DARMANITAN]: Pkm.DARUMAKA,
+  [Pkm.DARMANITAN_ZEN]: Pkm.DARUMAKA
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -4378,7 +4396,12 @@ export const AnimationConfig: {
   },
   [Pkm.AEGISLASH]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge,
+    ability: AnimationType.Special0,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.AEGISLASH_BLADE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Special0,
     emote: AnimationType.Shoot
   },
   [Pkm.CUBONE]: {
@@ -7075,5 +7098,31 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Idle
+  },
+  [Pkm.SKORUPI]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Jab,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.DRAPION]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Jab,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.DARUMAKA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Dance
+  },
+  [Pkm.DARMANITAN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.QuickStrike,
+    emote: AnimationType.Rumble
+  },
+  [Pkm.DARMANITAN_ZEN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
   }
 }

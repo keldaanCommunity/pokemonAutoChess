@@ -397,6 +397,7 @@ export interface IPokemon {
   range: number
   stars: number
   maxPP: number
+  luck: number
   ap: number
   skill: Ability
   passive: Passive
@@ -479,6 +480,12 @@ export interface IPokemonEntity {
     apBoost: number,
     crit: boolean
   ): void
+  addLuck(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
   addPP(
     value: number,
     caster: IPokemonEntity,
@@ -547,6 +554,7 @@ export interface IPokemonEntity {
   ): void
   skydiveTo(x: number, y: number, board: Board): void
   toIdleState(): void
+  toMovingState(): void
   physicalDamage: number
   specialDamage: number
   trueDamage: number
@@ -567,6 +575,7 @@ export interface IPokemonEntity {
   atk: number
   def: number
   speDef: number
+  luck: number
   attackType: AttackType
   life: number
   shield: number

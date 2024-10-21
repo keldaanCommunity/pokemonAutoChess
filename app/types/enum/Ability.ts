@@ -373,5 +373,7 @@ export enum Ability {
   YAWN = "YAWN",
   FIERY_DANCE = "FIERY_DANCE",
   BIDE = "BIDE",
-  SHORE_UP = "SHORE_UP"
+  SHORE_UP = "SHORE_UP",
+  POISON_STING = "POISON_STING",
+  TRANSE = "TRANSE"
 }
