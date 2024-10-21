@@ -92,6 +92,8 @@ export enum Item {
   EXP_SHARE = "EXP_SHARE",
   POKERUS_VIAL = "POKERUS_VIAL",
   ROTOM_PHONE = "ROTOM_PHONE",
+  SILK_SCARF = "SILK_SCARF",
+  TINY_MUSHROOM = "TINY_MUSHROOM",
   METEORITE = "METEORITE",
   BERRY_JUICE = "BERRY_JUICE",
   TRASH = "TRASH",
@@ -234,9 +236,9 @@ export const Berries: Item[] = [
 ]
 
 export const ArtificialItems: Item[] = [
+  Item.EXP_SHARE,
   Item.ELECTIRIZER,
   Item.MAGMARIZER,
-  Item.EXP_SHARE,
   Item.LIGHT_BALL,
   Item.TOXIC_ORB,
   Item.HARD_STONE,
@@ -247,7 +249,9 @@ export const ArtificialItems: Item[] = [
   Item.METRONOME,
   Item.BIG_NUGGET,
   Item.POKERUS_VIAL,
-  Item.ROTOM_PHONE
+  Item.ROTOM_PHONE,
+  Item.SILK_SCARF,
+  Item.TINY_MUSHROOM
 ]
 
 export const ShinyItems: Item[] = [
@@ -326,7 +330,9 @@ export const SynergyItems = [
   Item.HARD_STONE,
   Item.BIG_NUGGET,
   Item.ROTOM_PHONE,
-  Item.SHINY_STONE
+  Item.SHINY_STONE,
+  Item.SILK_SCARF,
+  Item.TINY_MUSHROOM
 ] as const
 
 export const SynergyGivenByItem: Record<
@@ -351,7 +357,9 @@ export const SynergyGivenByItem: Record<
   [Item.HARD_STONE]: Synergy.ROCK,
   [Item.BIG_NUGGET]: Synergy.GROUND,
   [Item.ROTOM_PHONE]: Synergy.GHOST,
-  [Item.SHINY_STONE]: Synergy.LIGHT
+  [Item.SHINY_STONE]: Synergy.LIGHT,
+  [Item.SILK_SCARF]: Synergy.NORMAL,
+  [Item.TINY_MUSHROOM]: Synergy.BUG
 }
 
 export const NonSpecialItemComponents: Item[] = [

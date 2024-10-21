@@ -702,6 +702,8 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.FLOAT_STONE]: {},
   [Item.POKERUS_VIAL]: {},
   [Item.ROTOM_PHONE]: {},
+  [Item.SILK_SCARF]: {},
+  [Item.TINY_MUSHROOM]: {},
   [Item.FIRE_SHARD]: {},
   [Item.TEAL_MASK]: { [Stat.SHIELD]: 50 },
   [Item.WELLSPRING_MASK]: { [Stat.SHIELD]: 50 },

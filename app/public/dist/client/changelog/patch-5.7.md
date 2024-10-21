@@ -53,6 +53,8 @@
 
 - Weather rocks are no longer held items and no longer give synergies. Instead, they give bonuses to your team when in a certain weather.
 - Added 4 new weather rocks: Electric Quartz, Float Stone, Blood Stone, Mist Stone
+- New Artificial Item: Silk Scarf: Give Normal synergy and increase shield from all sources by 30%
+- New Artificial Item: Tiny Mushroom: Give Bug synergy, reduce max HP by 50%
 - Nerf Electirizer: Attack speed 50 → 30%
 
 # UI
