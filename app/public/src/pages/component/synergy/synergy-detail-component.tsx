@@ -1,6 +1,5 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { isOnBench } from "../../../../../models/colyseus-models/pokemon"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../../../../models/precomputed/precomputed-types-and-categories"
 import { PVEStages } from "../../../../../models/pve-stages"
@@ -10,11 +9,10 @@ import {
   RarityCost,
   SynergyTriggers
 } from "../../../../../types/Config"
-import { BattleResult } from "../../../../../types/enum/Game"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
 import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
-import { max } from "../../../../../utils/number"
+import { roundToNDigits } from "../../../../../utils/number"
 import { values } from "../../../../../utils/schemas"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../utils"
@@ -88,18 +86,12 @@ export default function SynergyDetailComponent(props: {
     const isPVE = stageLevel in PVEStages
     const wildChance = values(currentPlayer.board)
       .filter((p) => p.types.has(Synergy.WILD))
-      .reduce((total, p) => total + p.stars, 0) + (isPVE ? 5 : 0)
-    additionalInfo = t('synergy_description.WILD_ADDITIONAL', { wildChance })
+      .reduce((total, p) => total + p.stars * (1 + p.luck / 100), 0) + (isPVE ? 5 : 0)
+    additionalInfo = t('synergy_description.WILD_ADDITIONAL', { wildChance: roundToNDigits(wildChance, 1) })
   }
 
   if (props.type === Synergy.BABY && currentPlayer) {
-    if (levelReached === SynergyTriggers[Synergy.BABY][0]) {
-      additionalInfo = t('synergy_description.BABY_EGG_CHANCE', { eggChance: currentPlayer.eggChance * 100 })
-    } else if (levelReached === SynergyTriggers[Synergy.BABY][1]) {
-      additionalInfo = t('synergy_description.BABY_EGG_CHANCE', { eggChance: 100 })
-    } else if (SynergyTriggers[Synergy.BABY][2]) {
-      additionalInfo = t('synergy_description.BABY_GOLDEN_EGG_CHANCE', { eggChance: currentPlayer.eggChance * 100 })
-    }
+    additionalInfo = t('synergy_description.BABY_CHANCE_STACKED', { eggChance: roundToNDigits(currentPlayer.eggChance * 100, 1) })
   }
 
   return (

@@ -1255,58 +1255,90 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           }
         }
 
-        let eggChance = 0
-        let shinyChance = 0
         const hasBabyActive =
           player.effects.has(Effect.HATCHER) ||
           player.effects.has(Effect.BREEDER) ||
           player.effects.has(Effect.GOLDEN_EGGS)
         const hasLostLastBattle =
           player.history.at(-1)?.result === BattleResult.DEFEAT
+        const eggsOnBench = values(player.board).filter(
+          (p) => p.name === Pkm.EGG
+        )
+        const nbOfGoldenEggsOnBench = eggsOnBench.filter((p) => p.shiny).length
+        let nbEggsFound = 0
+        let goldenEggFound = false
 
         if (hasLostLastBattle && hasBabyActive) {
-          if (player.effects.has(Effect.HATCHER)) {
-            eggChance = player.eggChance
-            shinyChance = 0
-          }
-          if (player.effects.has(Effect.BREEDER)) {
-            eggChance = 1
-            shinyChance = 0
-          }
-          if (player.effects.has(Effect.GOLDEN_EGGS)) {
-            eggChance = 1
-            shinyChance = player.eggChance
+          const EGG_CHANCE = 0.1
+          const GOLDEN_EGG_CHANCE = 0.04
+          const playerEggChanceStacked = player.eggChance
+          const babies = values(player.board).filter(
+            (p) => !isOnBench(p) && p.types.has(Synergy.BABY)
+          )
+
+          for (const baby of babies) {
+            if (
+              player.effects.has(Effect.GOLDEN_EGGS) &&
+              nbOfGoldenEggsOnBench === 0 &&
+              chance(GOLDEN_EGG_CHANCE, baby)
+            ) {
+              nbEggsFound++
+              goldenEggFound = true
+            } else if (chance(EGG_CHANCE, baby)) {
+              nbEggsFound++
+            }
+            if (player.effects.has(Effect.GOLDEN_EGGS) && !goldenEggFound) {
+              player.eggChance += GOLDEN_EGG_CHANCE * (1 + baby.luck / 100)
+            } else if (
+              player.effects.has(Effect.HATCHER) &&
+              nbEggsFound === 0
+            ) {
+              player.eggChance += EGG_CHANCE * (1 + baby.luck / 100)
+            }
           }
 
-          player.eggChance = max(1)(player.eggChance + 0.25)
+          // Second chance with chance stacked after lose streaks
+          if (
+            nbEggsFound === 0 &&
+            (player.effects.has(Effect.BREEDER) ||
+              player.effects.has(Effect.GOLDEN_EGGS) ||
+              chance(playerEggChanceStacked))
+          ) {
+            nbEggsFound = 1 // baby >= 5 guarantees at least 1 egg after a defeat
+          }
+          if (
+            goldenEggFound === false &&
+            player.effects.has(Effect.GOLDEN_EGGS) &&
+            nbOfGoldenEggsOnBench === 0 &&
+            chance(playerEggChanceStacked)
+          ) {
+            goldenEggFound = true
+          }
         } else if (!isPVE) {
-          player.eggChance = 0
+          player.eggChance = 0 // winning a PvP fight resets the stacked egg chance
         }
 
         if (
           this.state.specialGameRule === SpecialGameRule.OMELETTE_COOK &&
           [1, 2, 3].includes(this.state.stageLevel)
         ) {
-          eggChance = 1
+          nbEggsFound = 1
         }
 
-        const eggsOnBench = values(player.board).filter(
-          (p) => p.name === Pkm.EGG
-        )
-        const nbOfShinyEggs = eggsOnBench.filter((p) => p.shiny).length
-
-        if (chance(eggChance) && getFreeSpaceOnBench(player.board) > 0) {
-          const shiny = chance(shinyChance) && nbOfShinyEggs === 0
-          const egg = createRandomEgg(shiny, player)
+        for (let i = 0; i < nbEggsFound; i++) {
+          if (getFreeSpaceOnBench(player.board) === 0) continue
+          const isGoldenEgg =
+            goldenEggFound && i === 0 && nbOfGoldenEggsOnBench === 0
+          const egg = createRandomEgg(isGoldenEgg, player)
           const x = getFirstAvailablePositionInBench(player.board)
           egg.positionX = x !== undefined ? x : -1
           egg.positionY = 0
           player.board.set(egg.id, egg)
           if (
             player.effects.has(Effect.HATCHER) ||
-            (player.effects.has(Effect.GOLDEN_EGGS) && shiny)
+            (player.effects.has(Effect.GOLDEN_EGGS) && isGoldenEgg)
           ) {
-            player.eggChance = 0
+            player.eggChance = 0 // getting an egg resets the stacked egg chance
           }
         }
 

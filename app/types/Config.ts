@@ -597,7 +597,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.POKEMONOMICON]: { [Stat.AP]: 10, [Stat.SHIELD]: 15 },
   [Item.POWER_LENS]: { [Stat.AP]: 10, [Stat.SPE_DEF]: 5 },
   [Item.SHELL_BELL]: { [Stat.AP]: 10, [Stat.ATK]: 3 },
-  [Item.LUCKY_EGG]: { [Stat.AP]: 10, [Stat.DEF]: 2 },
+  [Item.LUCKY_EGG]: { [Stat.AP]: 60, [Stat.DEF]: 6, [Stat.LUCK]: 50 },
   [Item.AQUA_EGG]: { [Stat.PP]: 50 },
   [Item.BLUE_ORB]: { [Stat.PP]: 15, [Stat.ATK_SPEED]: 10 },
   [Item.SCOPE_LENS]: { [Stat.PP]: 15, [Stat.CRIT_CHANCE]: 25 },
@@ -685,7 +685,9 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
     [Stat.DEF]: 5,
     [Stat.SPE_DEF]: 5
   },
-  [Item.GOLD_BOTTLE_CAP]: { [Stat.CRIT_CHANCE]: 20, [Stat.CRIT_POWER]: 0.4 },
+  [Item.GOLD_BOTTLE_CAP]: {
+    [Stat.LUCK]: 50
+  },
   [Item.SACRED_ASH]: {},
   [Item.COMET_SHARD]: { [Stat.ATK]: 12 },
   [Item.ABSORB_BULB]: { [Stat.DEF]: 8, [Stat.SPE_DEF]: 8 },

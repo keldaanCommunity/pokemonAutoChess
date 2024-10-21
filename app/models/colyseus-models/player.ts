@@ -274,7 +274,7 @@ export default class Player extends Schema implements IPlayer {
     this.wildChance =
       pokemons
         .filter((p) => p.types.has(Synergy.WILD))
-        .reduce((total, p) => total + p.stars, 0) / 100
+        .reduce((total, p) => total + p.stars * (1 + p.luck / 100), 0) / 100
   }
 
   updateArtificialItems(updatedSynergies: Map<Synergy, number>): boolean {

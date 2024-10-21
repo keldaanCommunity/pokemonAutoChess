@@ -397,6 +397,7 @@ export interface IPokemon {
   range: number
   stars: number
   maxPP: number
+  luck: number
   ap: number
   skill: Ability
   passive: Passive
@@ -474,6 +475,12 @@ export interface IPokemonEntity {
   get player(): IPlayer | undefined
   applyStat(stat: Stat, value: number): void
   addAbilityPower(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ): void
+  addLuck(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
@@ -568,6 +575,7 @@ export interface IPokemonEntity {
   atk: number
   def: number
   speDef: number
+  luck: number
   attackType: AttackType
   life: number
   shield: number

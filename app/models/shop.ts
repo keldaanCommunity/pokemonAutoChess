@@ -424,11 +424,10 @@ export default class Shop {
       return Pkm.DITTO
     }
 
-    const UNOWN_RATE = 0.05
     if (
-      (player.effects.has(Effect.LIGHT_SCREEN) ||
-        player.effects.has(Effect.EERIE_SPELL)) &&
-      chance(UNOWN_RATE)
+      player.effects.has(Effect.LIGHT_SCREEN) &&
+      shopIndex === 0 &&
+      player.rerollCount % 5 === 0
     ) {
       const unowns = getUnownsPoolPerStage(state.stageLevel)
       return pickRandomIn(unowns)
@@ -448,7 +447,7 @@ export default class Shop {
     const incenseHolder = values(player.board).find((p) =>
       p.items.has(Item.INCENSE)
     )
-    if (incenseHolder && chance(5 / 100)) {
+    if (incenseHolder && chance(5 / 100, incenseHolder)) {
       specificTypesWanted = values(incenseHolder.types)
     } else if (wildChance > 0 && chance(wildChance)) {
       specificTypesWanted = [Synergy.WILD]
@@ -525,10 +524,10 @@ export default class Shop {
   }
 
   pickFish(player: Player, rod: FishingRod): Pkm {
-    const hasMantyke = values(player.board).some(
+    const mantine = values(player.board).find(
       (p) => p.name === Pkm.MANTYKE || p.name === Pkm.MANTINE
     )
-    if (hasMantyke && chance(0.3)) return Pkm.REMORAID
+    if (mantine && chance(0.3, mantine)) return Pkm.REMORAID
 
     const rarityProbability = FishRarityProbability[rod]
     const rarity_seed = Math.random()

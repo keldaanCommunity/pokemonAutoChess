@@ -132,6 +132,12 @@ export class Pokemon extends Schema implements IPokemon {
     )
   }
 
+  get luck(): number {
+    let luck = 0
+    if (this.items.has(Item.LUCKY_EGG)) luck += 50
+    return luck
+  }
+
   onChangePosition(x: number, y: number, player: Player) {
     // called after manually changing position of the pokemon on board
   }
@@ -5231,6 +5237,10 @@ export class Regigigas extends Pokemon {
   skill = Ability.CRUSH_GRIP
   passive = Passive.SLOW_START
   attackSprite = AttackSprite.DRAGON_MELEE
+
+  afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
+    entity.addAttackSpeed(-25, entity, 0, false)
+  }
 }
 
 export class Kyogre extends Pokemon {
@@ -6176,7 +6186,13 @@ export class Jirachi extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.DOOM_DESIRE
+  passive = Passive.GOOD_LUCK
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  afterSimulationStart({ team }: { team: MapSchema<IPokemonEntity> }) {
+    team.forEach((pokemon) => {
+      pokemon.addLuck(20, pokemon, 0, false)
+    })
+  }
 }
 
 export class Arceus extends Pokemon {
@@ -12276,8 +12292,16 @@ export class Murkrow extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.FOUL_PLAY
+  passive = Passive.BAD_LUCK
   additional = true
   attackSprite = AttackSprite.DARK_MELEE
+  afterSimulationStart({
+    opponentTeam
+  }: { opponentTeam: MapSchema<IPokemonEntity> }) {
+    opponentTeam.forEach((pokemon) => {
+      pokemon.addLuck(-20, pokemon, 0, false)
+    })
+  }
 }
 
 export class Honchkrow extends Pokemon {
@@ -12291,8 +12315,16 @@ export class Honchkrow extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.FOUL_PLAY
+  passive = Passive.BAD_LUCK
   additional = true
   attackSprite = AttackSprite.DARK_MELEE
+  afterSimulationStart({
+    opponentTeam
+  }: { opponentTeam: MapSchema<IPokemonEntity> }) {
+    opponentTeam.forEach((pokemon) => {
+      pokemon.addLuck(-20, pokemon, 0, false)
+    })
+  }
 }
 
 export class Zigzagoon extends Pokemon {
@@ -15049,7 +15081,7 @@ export class Skarmory extends Pokemon {
 
         board.forEach((x, y, tg) => {
           const index = y * board.columns + x
-          if (!tg && chance(0.3)) {
+          if (!tg && chance(0.3, entity)) {
             if (board.effects[index] !== Effect.SPIKES) {
               board.effects[index] = Effect.SPIKES
               simulation.room.broadcast(Transfer.BOARD_EVENT, {

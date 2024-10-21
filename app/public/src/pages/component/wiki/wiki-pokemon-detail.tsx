@@ -112,7 +112,7 @@ export default function WikiPokemonDetail(props: { pokemon: Pkm }) {
               {t(`ability.${pokemon.skill}`)}
               <AbilityTooltip
                 ability={pokemonData.skill}
-                tier={pokemonData.stars}
+                stats={{ ap: 0, luck: 0, stars: pokemonData.stars }}
               />
             </dd>
           </>

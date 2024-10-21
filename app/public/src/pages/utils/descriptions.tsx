@@ -5,6 +5,7 @@ import { Item } from "../../../../types/enum/Item"
 import { Status } from "../../../../types/enum/Status"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { Weather } from "../../../../types/enum/Weather"
+import { roundToNDigits } from "../../../../utils/number"
 import SynergyIcon from "../component/icons/synergy-icon"
 import { cc } from "./jsx"
 
@@ -29,7 +30,7 @@ export const iconRegExp = new RegExp(
   "g"
 )
 
-export function addIconsToDescription(description: string, tier = 0, ap = 0) {
+export function addIconsToDescription(description: string, stats?: { ap: number, luck: number, stars: number }) {
   const matchIcon = description.match(iconRegExp)
   if (matchIcon === null) return description
   const descriptionParts = description.split(iconRegExp)
@@ -113,29 +114,46 @@ export function addIconsToDescription(description: string, tier = 0, ap = 0) {
         )
       } else if (/\[[^\]]+\]/.test(token)) {
         const array = token.slice(1, -1).split(",")
-        let scale = 0
-        let nbdecimals = 0
+        let scaleType: "AP" | "LUCK" | null = null
+        let scaleFactor = 1
+        let nbDigits = 0
         if (array.at(-1)?.includes("ND")) {
-          nbdecimals = Number(array.pop()?.replace("ND=", "")) || 0
+          nbDigits = Number(array.pop()?.replace("ND=", "")) || 0
         }
         if (array.at(-1)?.includes("SP")) {
-          scale = Number(array.pop()?.replace("SP=", "")) || 1
+          scaleType = "AP"
+          scaleFactor = Number(array.pop()?.replace("SP=", "")) || 1
+        }
+        if (array.at(-1)?.includes("LK")) {
+          scaleType = "LUCK"
+          scaleFactor = Number(array.pop()?.replace("LK=", "")) || 1
         }
 
         d = (
           <span
-            className={cc("description-icon", { "scales-ap": scale !== 0 })}
+            className={cc("description-icon", { "scales-ap": scaleType === "AP", "scales-luck": scaleType === "LUCK" })}
           >
-            {scale > 0 && (
+            {scaleType === "AP" && (
               <img
                 src="assets/icons/AP.png"
                 alt="Ability Power"
                 title="Scales with Ability Power"
               ></img>
             )}
+            {scaleType === "LUCK" && (
+              <img
+                src="assets/icons/LUCK.png"
+                alt="Luck"
+                title="Scales with Luck"
+              ></img>
+            )}
             {array.map((v, j) => {
               const separator = j < array.length - 1 ? "/" : ""
-              const value = Math.round(Number(v) * (1 + (scale * ap) / 100) * Math.pow(10, nbdecimals)) / Math.pow(10, nbdecimals)
+              let scaleValue = 1
+              if (scaleType === "AP") scaleValue = stats?.ap ?? 0
+              if (scaleType === "LUCK") scaleValue = stats?.luck ?? 0
+              const value = roundToNDigits(Number(v) * (1 + scaleValue * scaleFactor / 100), nbDigits)
+              const tier = stats?.stars
               const active =
                 tier === undefined ||
                 array.length === 1 ||
