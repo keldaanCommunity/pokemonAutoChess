@@ -375,5 +375,6 @@ export enum Ability {
   BIDE = "BIDE",
   SHORE_UP = "SHORE_UP",
   POISON_STING = "POISON_STING",
-  TRANSE = "TRANSE"
+  TRANSE = "TRANSE",
+  GLACIATE = "GLACIATE"
 }

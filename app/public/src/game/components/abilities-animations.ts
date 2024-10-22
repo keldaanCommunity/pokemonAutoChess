@@ -253,7 +253,23 @@ export function displayAbility(
     }
 
     case Ability.BLUE_FLARE: {
-      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(2)
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(3)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        yoyo: false,
+        duration: 1000,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
+    case Ability.GLACIATE: {
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(3)
       scene.tweens.add({
         targets: specialProjectile,
         x: coordinatesTarget[0],
@@ -285,7 +301,7 @@ export function displayAbility(
     }
 
     case Ability.FUSION_BOLT: {
-      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(2)
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(3)
       scene.tweens.add({
         targets: specialProjectile,
         x: coordinatesTarget[0],

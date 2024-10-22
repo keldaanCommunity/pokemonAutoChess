@@ -3962,9 +3962,9 @@ export const AnimationConfig: {
     emote: AnimationType.Pose
   },
   [Pkm.KYUREM]: {
-    attack: AnimationType.Attack,
+    attack: AnimationType.Shoot,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Charge
   },
   [Pkm.RESHIRAM]: {
     attack: AnimationType.Attack,

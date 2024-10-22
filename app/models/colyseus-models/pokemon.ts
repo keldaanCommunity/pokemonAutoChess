@@ -6095,15 +6095,14 @@ export class Kyurem extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.ICE])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 300
+  hp = 200
   atk = 30
-  def = 5
-  speDef = 5
+  def = 3
+  speDef = 6
   maxPP = 100
   range = 3
-  skill = Ability.DEFAULT //Ability.BLIZZARD
-  passive = Passive.NONE // Passive.SNOW
-  attackSprite = AttackSprite.FIRE_RANGE
+  skill = Ability.GLACIATE
+  attackSprite = AttackSprite.ICE_RANGE
 }
 
 export class Reshiram extends Pokemon {
