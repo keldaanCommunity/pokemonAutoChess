@@ -401,6 +401,10 @@ export default class Simulation extends Schema implements ISimulation {
       pokemon.addMaxHP(2.5 * pokemon.hp, pokemon, 0, false)
     }
 
+    if (item === Item.TINY_MUSHROOM) {
+      pokemon.addMaxHP(-0.5 * pokemon.hp, pokemon, 0, false)
+    }
+
     if (item === Item.GOLD_BOTTLE_CAP && pokemon.player) {
       pokemon.addCritChance(pokemon.player.money, pokemon, 0, false)
       pokemon.addCritPower(pokemon.player.money / 100, pokemon, 0, false)
@@ -521,11 +525,21 @@ export default class Simulation extends Schema implements ISimulation {
             bugTeam[i].name,
             player
           )
+
           const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
             bugTeam[i],
             teamIndex
           )
-          this.addPokemon(bug, coord.x, coord.y, teamIndex, true)
+          const cloneEntity = this.addPokemon(
+            bug,
+            coord.x,
+            coord.y,
+            teamIndex,
+            true
+          )
+          if (bugTeam[i].items.has(Item.TINY_MUSHROOM)) {
+            cloneEntity.addMaxHP(-0.5 * bug.hp, cloneEntity, 0, false)
+          }
         }
       }
 

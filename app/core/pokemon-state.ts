@@ -274,6 +274,7 @@ export default abstract class PokemonState {
       if (apBoost > 0) shield *= 1 + (caster.ap * apBoost) / 100
       if (crit) shield *= caster.critPower
       if (pokemon.status.enraged) shield *= 0.5
+      if (pokemon.items.has(Item.SILK_SCARF)) shield *= 1.3
 
       shield = Math.round(shield)
       pokemon.shield += shield
