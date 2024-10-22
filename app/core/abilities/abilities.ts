@@ -8305,15 +8305,17 @@ export class MultiAttackStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const silvallyType = values(pokemon.types).at(-1)
+    let synergyLevelsCount = 0
     const synergies = pokemon.player?.synergies
-    let synergyLevelCount = 0
-
-    if (synergies && silvallyType && synergies.has(silvallyType)) {
-      synergyLevelCount = synergies.get(silvallyType)!
+    if (synergies) {
+      pokemon.types.forEach((type) => {
+        if (type !== Synergy.ARTIFICIAL) {
+          synergyLevelsCount += synergies.get(type) ?? 0
+        }
+      })
     }
-    const damage = 15 * synergyLevelCount
 
+    const damage = 15 * synergyLevelsCount
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .map((v) => v.value)

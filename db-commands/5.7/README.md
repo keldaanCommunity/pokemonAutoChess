@@ -1,0 +1,1 @@
+run merge-silvally to merge all Silvally forms from bots, statistics, game histories and meta report
