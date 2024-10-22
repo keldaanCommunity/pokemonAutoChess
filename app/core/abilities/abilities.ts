@@ -91,22 +91,26 @@ export class BlueFlareStrategy extends AbilityStrategy {
     }
     damage += multiplier * 20
 
-    const cells = board.getAdjacentCells(
-      target.positionX,
-      target.positionY,
-      true
-    )
-    cells.forEach((cell) => {
-      if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        const cells = board.getAdjacentCells(
+          target.positionX,
+          target.positionY,
+          true
         )
-      }
-    })
+        cells.forEach((cell) => {
+          if (cell.value && cell.value.team !== pokemon.team) {
+            cell.value.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+        })
+      }, 1000)
+    )
   }
 }
 
@@ -130,22 +134,71 @@ export class FusionBoltStrategy extends AbilityStrategy {
     }
     damage += multiplier * 40
 
-    const cells = board.getAdjacentCells(
-      target.positionX,
-      target.positionY,
-      true
-    )
-    cells.forEach((cell) => {
-      if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        const cells = board.getAdjacentCells(
+          target.positionX,
+          target.positionY,
+          true
         )
-      }
-    })
+        cells.forEach((cell) => {
+          if (cell.value && cell.value.team !== pokemon.team) {
+            cell.value.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+        })
+      }, 1000)
+    )
+  }
+}
+
+export class GlaciateStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let damage = 50
+    let multiplier = 0
+    if (pokemon.effects.has(Effect.CHILLY)) {
+      multiplier = 1
+    } else if (pokemon.effects.has(Effect.FROSTY)) {
+      multiplier = 2
+    } else if (pokemon.effects.has(Effect.FREEZING)) {
+      multiplier = 3
+    } else if (pokemon.effects.has(Effect.SHEER_COLD)) {
+      multiplier = 4
+    }
+    damage += multiplier * 20
+
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        const cells = board.getAdjacentCells(
+          target.positionX,
+          target.positionY,
+          true
+        )
+        cells.forEach((cell) => {
+          if (cell.value && cell.value.team !== pokemon.team) {
+            cell.value.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+        })
+      }, 1000)
+    )
   }
 }
 
@@ -10802,5 +10855,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BIDE]: new BideStrategy(),
   [Ability.SHORE_UP]: new ShoreUpStrategy(),
   [Ability.POISON_STING]: new PoisonStingStrategy(),
-  [Ability.TRANSE]: new TranseStrategy()
+  [Ability.TRANSE]: new TranseStrategy(),
+  [Ability.GLACIATE]: new GlaciateStrategy()
 }
