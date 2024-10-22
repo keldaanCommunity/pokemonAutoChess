@@ -13,6 +13,7 @@
 - Aegislash Blade Form
 - Darumaka
 - Darmanitan
+- Kyurem
 
 # Gameplay
 
