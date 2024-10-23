@@ -48,8 +48,6 @@
 # Changes to Synergies
 
 - Rock: weather rocks are no longer immediately available, they are collected after fighting in a certain weather
-- Nerf Grass 3: HP healed every 2 seconds: 8 → 7
-- Nerf Light 3: PP per second 10 → 8
 - Change Ghost 6: cursed opponent is ~~Silenced~~ Fatigued
 - Monsters now have 30% chance to flinch with their attacks at all levels (unlocked when activating the first level of synergy)
 - Monter changes:
@@ -65,6 +63,9 @@
     - (7) Golden Eggs: each baby has 4% chance (increased with luck) to find a golden Egg 
 - Changed Psychic 4: ~~Unowns have 5% chance to appear in shops~~ An Unown appears every 3 shops
 - Change Ice 8: freeze chance ~~50~~ 40%, increased damage to frozen enemies: ~~20~~ 30%
+- Buff Sound 2: +1 → +2 attack every time a sound pokemon casts its ability
+- Nerf Grass 3: HP healed every 2 seconds: 8 → 7
+- Nerf Light 3: PP per second 10 → 8
 
 # Changes to Items
 

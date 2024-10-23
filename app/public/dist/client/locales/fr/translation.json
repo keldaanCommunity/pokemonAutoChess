@@ -1809,7 +1809,7 @@
     "ANCIENT_POWER": "Revient à la vie avec 40% HP et +30% ATK",
     "ELDER_POWER": "Revient à la vie avec 80% HP et +60% ATK.",
     "FORGOTTEN_POWER": "Revient à la vie avec 100% HP et +100% ATK.",
-    "LARGO": "L'équipe alliée gagne +1 ATK",
+    "LARGO": "L'équipe alliée gagne +2 ATK",
     "ALLEGRO": "L'équipe alliée gagne +1 ATK et +5 % ATK_SPEED",
     "PRESTO": "L'équipe alliée gagne +1 ATK, +5% ATK_SPEED et 3 PP",
     "DUBIOUS_DISC": "Obtenez un objet artificiel. Il est retiré lors de la perte de la synergie.",

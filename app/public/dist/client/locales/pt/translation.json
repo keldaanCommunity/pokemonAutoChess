@@ -1576,7 +1576,7 @@
     "ANCIENT_POWER": "Revive com 40% HP e +30% ATK",
     "ELDER_POWER": "Revive com 80% HP e +60% ATK.",
     "FORGOTTEN_POWER": "Revive com 100% HP e +100% ATK.",
-    "LARGO": "Equipe aliada ganha +1 de ATK",
+    "LARGO": "Equipe aliada ganha +2 de ATK",
     "ALLEGRO": "Equipe aliada ganha +1 ATK e +5% ATK_SPEED",
     "PRESTO": "Equipe aliada ganha +1 ATK, +5% ATK_SPEED e 3 PP",
     "DUBIOUS_DISC": "Obtém um item artificial. É removido quando se perde a sinergia.",

@@ -1839,7 +1839,7 @@
     "ANCIENT_POWER": "Revive with 40% HP and +30% ATK",
     "ELDER_POWER": "Revive with 80% HP and +60% ATK.",
     "FORGOTTEN_POWER": "Revive with 100% HP and +100% ATK.",
-    "LARGO": "Ally team gains +1 ATK",
+    "LARGO": "Ally team gains +2 ATK",
     "ALLEGRO": "Ally team gains +1 ATK and +5% ATK_SPEED",
     "PRESTO": "Ally team gains +1 ATK, +5% ATK_SPEED and 3 PP",
     "DUBIOUS_DISC": "Get an artificial item. It is removed when losing the synergy.",

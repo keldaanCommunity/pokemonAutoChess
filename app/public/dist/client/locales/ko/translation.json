@@ -1820,7 +1820,7 @@
     "ANCIENT_POWER": "40%의 HP와 30% 증가된 ATK로 부활",
     "ELDER_POWER": "80%의 HP와 60% 증가된 ATK로 부활",
     "FORGOTTEN_POWER": "100%의 HP와 100% 증가된 ATK로 부활",
-    "LARGO": "아군에게 +1 ATK",
+    "LARGO": "아군에게 +2 ATK",
     "ALLEGRO": "아군에게 +1 ATK, +5 ATK_SPEED",
     "PRESTO": "아군에게 +1 ATK, +5 ATK_SPEED, +3 PP",
     "DUBIOUS_DISC": "인공물 도구 1개 획득. 시너지 제거시 사라짐",

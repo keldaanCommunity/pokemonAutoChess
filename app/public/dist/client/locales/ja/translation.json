@@ -1371,7 +1371,7 @@
     "ANCIENT_POWER": "HP40%、攻撃力+30%で復活",
     "ELDER_POWER": "HP 80%、攻撃力 +60% で復活します。",
     "FORGOTTEN_POWER": "HP 100%、攻撃力 +100% で復活します。",
-    "LARGO": "味方チームのATKが+1される",
+    "LARGO": "味方チームのATKが+2される",
     "ALLEGRO": "味方チームのATKが+1、ATK_SPEEDが+5%増加",
     "PRESTO": "味方チームのATKが+1、ATK_SPEEDが+5%、MANAが3増加",
     "DUBIOUS_DISC": "人工アイテムを入手する。シナジーを失うと削除される。",
