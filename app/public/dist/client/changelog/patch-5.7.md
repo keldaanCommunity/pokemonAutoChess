@@ -39,6 +39,7 @@
 - All Silvally forms have been merged into one. Multi Attack: multiplied by ~~the synergy level of current Silvally form~~ the sum of levels of all Silvally additional synergies.
 - Buff Wish (Togepi line): now also increases luck of selected allies by 20%
 - Remoraid is now sold for 3 gold, and Octillery for 10 gold
+- Nerf Voltorb line: PP 80 → 100
 
 # Changes to Synergies
 

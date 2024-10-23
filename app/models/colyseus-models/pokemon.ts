@@ -8453,7 +8453,7 @@ export class Voltorb extends Pokemon {
   atk = 9
   def = 1
   speDef = 1
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.EXPLOSION
   additional = true
@@ -8468,7 +8468,7 @@ export class Electrode extends Pokemon {
   atk = 18
   def = 3
   speDef = 3
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.EXPLOSION
   additional = true
