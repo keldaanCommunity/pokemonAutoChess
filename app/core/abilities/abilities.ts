@@ -5936,10 +5936,8 @@ export class ShellSmashStrategy extends AbilityStrategy {
     pokemon.addAbilityPower(20, pokemon, 0, false)
     pokemon.addAttack(2, pokemon, 0, false)
     pokemon.addAttackSpeed(20, pokemon, 0, false)
-    if (pokemon.items.has(Item.PROTECTIVE_PADS) === false) {
-      pokemon.addDefense(-1, pokemon, 0, false)
-      pokemon.addSpecialDefense(-1, pokemon, 0, false)
-    }
+    pokemon.addDefense(-1, pokemon, 0, false)
+    pokemon.addSpecialDefense(-1, pokemon, 0, false)
   }
 }
 
@@ -6419,10 +6417,8 @@ export class CloseCombatStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    if (pokemon.items.has(Item.PROTECTIVE_PADS) === false) {
-      pokemon.addDefense(-1, pokemon, 0, false)
-      pokemon.addSpecialDefense(-1, pokemon, 0, false)
-    }
+    pokemon.addDefense(-1, pokemon, 0, false)
+    pokemon.addSpecialDefense(-1, pokemon, 0, false)
     target.handleSpecialDamage(130, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -8668,9 +8664,7 @@ export class IceHammerStrategy extends AbilityStrategy {
       true
     )
     target.status.triggerFreeze(3000, target)
-    if (pokemon.items.has(Item.PROTECTIVE_PADS) === false) {
-      pokemon.status.triggerParalysis(3000, pokemon)
-    }
+    pokemon.status.triggerParalysis(3000, pokemon)
   }
 }
 
@@ -10104,9 +10098,7 @@ export class GlaiveRushStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit, true)
     const damage = pokemon.stars === 3 ? 150 : pokemon.stars === 2 ? 80 : 40
-    if (pokemon.items.has(Item.PROTECTIVE_PADS) === false) {
-      pokemon.status.triggerArmorReduction(6000, pokemon)
-    }
+    pokemon.status.triggerArmorReduction(6000, pokemon)
 
     target.handleSpecialDamage(
       damage,

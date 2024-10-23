@@ -1996,7 +1996,7 @@
     "SMOKE_BALL": "Sobald die maximale HP unter 33 % liegt, lassen Sie die Rauchkugel fallen und springen Sie in eine Zelle weiter entfernt. Jeder benachbarte Feind ist 3 Sekunden lang PARALYSIS und der Rauch verringert die Präzision aller darin befindlichen Pokémon um 50 %.",
     "XRAY_VISION": "+50% ATK_SPEED. Die Angriffe des Pokémons können nicht mehr verfehlen.",
     "RAZOR_FANG": "+100% CRIT_POWER. Kritische Treffer verursachen 4 Sekunden lang ARMOR_REDUCTION.",
-    "PROTECTIVE_PADS": "Angriffe verursachen doppelten Schaden gegen SHIELD. Der Benutzer ist vor Rückstoß und Vergeltungseffekten geschützt.",
+    "PROTECTIVE_PADS": "Angriffe verursachen doppelten Schaden gegen SHIELD. Der Benutzer ist vor Rückstoßschäden und Vergeltungseffekten geschützt.",
     "CHOICE_SCARF": "Jeder Treffer fügt einem angrenzenden Gegner 50% Basisangriffs Schaden zu",
     "PUNCHING_GLOVE": "Angriffe verursachen 8% der max. HP des Ziels als zusätzlichen Schaden",
     "DEFENSIVE_RIBBON": "Wenn der Träger Schaden erleidet, erhältst du 1 Stapel. Alle 2 Stapel erhält der Besitzer +1 DEF, +1 ATK und +5 % ATK_SPEED (maximal 20 Stapel).",

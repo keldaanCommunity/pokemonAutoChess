@@ -2033,7 +2033,7 @@
     "SMOKE_BALL": "Once below 33% max HP, drop the smoke ball and jump to a cell away. Every adjacent enemy is PARALYSIS for 3 seconds, and the smoke reduce the precision of all Pokémons inside by 50%.",
     "XRAY_VISION": "+50% ATK_SPEED. The holder attacks can no longer miss.",
     "RAZOR_FANG": "+100% CRIT_POWER. Critical hits apply ARMOR_REDUCTION for 4 seconds.",
-    "PROTECTIVE_PADS": "Attacks deal double damage against SHIELD. User is protected from recoil and retaliation effects.",
+    "PROTECTIVE_PADS": "Attacks deal double damage against SHIELD. User is protected from recoil damage and retaliation effects.",
     "CHOICE_SCARF": "On hit deal 50% basic attack damage to an adjacent enemy",
     "PUNCHING_GLOVE": "Attacks deal 8 % of target max HP as additional PHYSICAL",
     "DEFENSIVE_RIBBON": "When the holder takes damage, gain 1 stack. Every 2 stacks, the holder gains +1 DEF, +1 ATK and +5% ATK_SPEED (max 20 stacks)",
