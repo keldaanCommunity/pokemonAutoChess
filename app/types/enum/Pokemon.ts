@@ -5512,8 +5512,8 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.SUDOWOODO]: {
-    attack: AnimationType.Slam,
-    ability: AnimationType.Attack,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Slam,
     emote: AnimationType.Charge
   },
   [Pkm.PHIONE]: {

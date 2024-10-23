@@ -398,7 +398,8 @@
     "SHORE_UP": "Shore Up",
     "POISON_STING": "Poison Sting",
     "TRANSE": "Transe",
-    "GLACIATE": "Glaciate"
+    "GLACIATE": "Glaciate",
+    "WOOD_HAMMER": "Wood Hammer"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1629,7 +1630,8 @@
     "BIDE": "The user is unable to move for 3 secs. Bide will do SPECIAL damage equal to twice the damage received during the idling period around the user.",
     "SHORE_UP": "Heals the caster for [20,25,SP] % HP. If the weather is a SANDSTORM, increases  to [30,35,SP] % HP.",
     "POISON_STING": "Inflicts [2,3,4] stacks of POISONNED to target. Every stack over the max deals immediately [25,50,100,SP] SPECIAL.",
-    "TRANSE": "Starts attacking and moving again, but stops passively healing."
+    "TRANSE": "Starts attacking and moving again, but stops passively healing.",
+    "WOOD_HAMMER": "Deals [300,SP]% of ATK as SPECIAL to the target, and receive recoil damage equal to 33% of the damage done"
   },
   "effect": {
     "INGRAIN": "Ingrain",

@@ -2652,6 +2652,12 @@ export function displayAbility(
       addAbilitySprite(Ability.ICE_HAMMER, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.WOOD_HAMMER:
+      addAbilitySprite(Ability.WOOD_HAMMER, coordinatesTarget, true)
+        .setScale(1)
+        .setOrigin(0.5, 1)
+      break
+
     case Ability.STEEL_WING:
       addAbilitySprite(Ability.STEEL_WING, coordinates, true).setScale(2)
       break

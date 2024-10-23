@@ -10668,7 +10668,7 @@ export class Bonsley extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 1
-  skill = Ability.MIMIC
+  skill = Ability.WOOD_HAMMER
   passive = Passive.SUDOWOODO
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
@@ -10688,7 +10688,7 @@ export class Sudowoodo extends Pokemon {
   speDef = 3
   maxPP = 100
   range = 1
-  skill = Ability.MIMIC
+  skill = Ability.WOOD_HAMMER
   passive = Passive.SUDOWOODO
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE

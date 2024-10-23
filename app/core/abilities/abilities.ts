@@ -10468,6 +10468,42 @@ export class PoisonStingStrategy extends AbilityStrategy {
   }
 }
 
+export class WoodHammerStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 3 * pokemon.atk
+    const recoil = pokemon.atk
+
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        target.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+
+        if (pokemon.items.has(Item.PROTECTIVE_PADS) === false) {
+          pokemon.handleSpecialDamage(
+            recoil,
+            board,
+            AttackType.PHYSICAL,
+            pokemon,
+            crit
+          )
+        }
+      }, 500)
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -10848,5 +10884,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SHORE_UP]: new ShoreUpStrategy(),
   [Ability.POISON_STING]: new PoisonStingStrategy(),
   [Ability.TRANSE]: new TranseStrategy(),
-  [Ability.GLACIATE]: new GlaciateStrategy()
+  [Ability.GLACIATE]: new GlaciateStrategy(),
+  [Ability.WOOD_HAMMER]: new WoodHammerStrategy()
 }
