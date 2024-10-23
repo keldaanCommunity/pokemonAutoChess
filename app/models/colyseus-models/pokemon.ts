@@ -4980,7 +4980,7 @@ export class Pinsir extends Pokemon {
   atk = 21
   def = 3
   speDef = 3
-  maxPP = 85
+  maxPP = 100
   range = 1
   skill = Ability.GUILLOTINE
   attackSprite = AttackSprite.NORMAL_MELEE

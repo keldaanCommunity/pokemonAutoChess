@@ -42,6 +42,7 @@
 - Nerf Voltorb line: PP 80 → 100
 - Nincada is no longer Flying. Buffed stats HP: 100 → 130, Attack 10 → 13
 - Buff Volcarona: Attack 20 → 24
+- Nerf Pinsir PP: 85 → 100
 
 # Changes to Synergies
 
