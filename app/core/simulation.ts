@@ -1374,7 +1374,7 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.ETHEREAL: {
           pokemon.effects.add(Effect.ETHEREAL)
-          pokemon.addAttackSpeed(5 * activeSynergies, pokemon, 0, false)
+          pokemon.addAttackSpeed(6 * activeSynergies, pokemon, 0, false)
           pokemon.addMaxHP(12 * activeSynergies, pokemon, 0, false)
           break
         }

@@ -1870,7 +1870,7 @@
     "BERSERK": "+100% all'ATK e alla velocità di movimento, lo status RAGE avviene 5 secondi prima",
     "FLUID": "La propria squadra ottiene in più 1% di ATK_SPEED e 4 HP per ogni sinergia attiva",
     "SHAPELESS": "La propria squadra ottiene in più 3% di ATK_SPEED e 8 HP per ogni sinergia attiva",
-    "ETHEREAL": "La propria squadra ottiene in più 5% di ATK_SPEED e 12 HP per ogni sinergia attiva"
+    "ETHEREAL": "La propria squadra ottiene in più 6% di ATK_SPEED e 12 HP per ogni sinergia attiva"
   },
   "item": {
     "FOSSIL_STONE": "Pietra Fossile",

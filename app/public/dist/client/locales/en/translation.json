@@ -1872,7 +1872,7 @@
     "BERSERK": "+100% ATK and move speed, RAGE 5 seconds sooner",
     "FLUID": "Ally team gains 1% ATK_SPEED and 4 HP per unique active synergy",
     "SHAPELESS": "Ally team gains 3% ATK_SPEED and 8 HP per unique active synergy",
-    "ETHEREAL": "Ally team gains 5% ATK_SPEED and 12 HP per unique active synergy"
+    "ETHEREAL": "Ally team gains 6% ATK_SPEED and 12 HP per unique active synergy"
   },
   "item": {
     "FOSSIL_STONE": "Fossil Stone",

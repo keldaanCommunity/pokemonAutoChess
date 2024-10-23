@@ -1842,7 +1842,7 @@
     "BERSERK": "+100% ATK et vitesse de déplacement. Vos pokémons deviennent RAGE 5 secondes plus tôt.",
     "FLUID": "L'équipe gagne 1% ATK_SPEED et 4 HP par synergie unique active",
     "SHAPELESS": "L'équipe gagne 3% ATK_SPEED et 8 HP par synergie unique active",
-    "ETHEREAL": "L'équipe gagne 5% ATK_SPEED et 12 HP par synergie unique active"
+    "ETHEREAL": "L'équipe gagne 6% ATK_SPEED et 12 HP par synergie unique active"
   },
   "item": {
     "FOSSIL_STONE": "Fossile Dome",

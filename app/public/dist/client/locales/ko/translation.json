@@ -1853,7 +1853,7 @@
     "BERSERK": "ATK, 이동속도 +100%, 5초 일찍 RAGE상태가 됨",
     "FLUID": "활성화된 시너지 한가지당 아군 전체의 ATK_SPEED 1% 및 HP 4 증가",
     "SHAPELESS": "활성화된 시너지 한가지당 아군 전체의 ATK_SPEED 3% 및 HP 8 증가",
-    "ETHEREAL": "활성화된 시너지 한가지당 아군 전체의 ATK_SPEED 5% 및 HP 12 증가"
+    "ETHEREAL": "활성화된 시너지 한가지당 아군 전체의 ATK_SPEED 6% 및 HP 12 증가"
   },
   "item": {
     "FOSSIL_STONE": "화석의 돌",

@@ -1841,7 +1841,7 @@
     "BERSERK": "+100% ATK und Bewegungstempo, und 20% Chance auf WILD Pokémon im Shop. RAGE 5 Sekunden früher",
     "FLUID": "Verbündetes Team erhält 1% ATK_SPEED und 4 HP pro einzigartiger aktiver Synergie",
     "SHAPELESS": "Verbündetes Team erhält 3% ATK_SPEED und 8 HP pro einzigartiger aktiver Synergie",
-    "ETHEREAL": "Verbündetes Team erhält 5% ATK_SPEED und 12 HP pro einzigartiger aktiver Synergie"
+    "ETHEREAL": "Verbündetes Team erhält 6% ATK_SPEED und 12 HP pro einzigartiger aktiver Synergie"
   },
   "item": {
     "FOSSIL_STONE": "Fossil",
