@@ -47,6 +47,7 @@
 - Mew is now Psychic/Amorphous instead of Wild/Psychic
 - New ability for Snobull line: Roar: Blow away the target. If it hits a wall, it suffers Ability Power 20/40/80 special damage. If it hits another pokémon, both pokémons suffer special damage.
 - New ability for Sudowoodo line: Wood Hammer: Deals 300% of attack as special damage to the target, and receive recoil damage equal to 33% of the damage done
+- New ability for Pumpkaboo line: Trick or Treat: The target must give one of its held items to the user. If the target has no held item, it receives a curse whose power increases with user AP.
 
 # Changes to Synergies
 

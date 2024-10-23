@@ -104,7 +104,6 @@
     "ROCK_SMASH": "Rock Smash",
     "HEAD_SMASH": "Head Smash",
     "ROCK_HEAD": "Rock Head",
-    "CORRUPTED_NATURE": "Corrupted Nature",
     "CRABHAMMER": "Crabhammer",
     "DIAMOND_STORM": "Diamond Storm",
     "DRACO_ENERGY": "Draco Energy",
@@ -399,7 +398,8 @@
     "POISON_STING": "Poison Sting",
     "TRANSE": "Transe",
     "GLACIATE": "Glaciate",
-    "WOOD_HAMMER": "Wood Hammer"
+    "WOOD_HAMMER": "Wood Hammer",
+    "TRICK_OR_TREAT": "Trick-or-Treat"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1336,7 +1336,6 @@
     "ROCK_SMASH": "Deal [20,40,80,SP] SPECIAL to the target and SILENCE them for [3,6,9] seconds",
     "HEAD_SMASH": "The user hurts itself for [10,20,40,SP] PHYSICAL and deals [40,80,150,SP] SPECIAL to the target. Execute the target if they are SLEEP or FREEZE",
     "ROCK_HEAD": "Deal [120,SP]% of ATK + DEF as SPECIAL",
-    "CORRUPTED_NATURE": "WOUND adjacent enemy Pokémon for 5 seconds and deal [20,40,80,SP] SPECIAL to them. Restores HP for the amount of damage dealt",
     "CRABHAMMER": "Deal [40,80,120,SP] SPECIAL to the target. Execute the target if they are below 30% HP. Can crit by default with a [30,LK]% increased CRIT_CHANCE.",
     "DIAMOND_STORM": "Deal [200,SP]% of the user's DEF as SPECIAL to all adjacent enemy Pokémon",
     "DRACO_ENERGY": "Deal [100,SP]% of the user's HP as SPECIAL to the target",
@@ -1631,7 +1630,8 @@
     "SHORE_UP": "Heals the caster for [20,25,SP] % HP. If the weather is a SANDSTORM, increases  to [30,35,SP] % HP.",
     "POISON_STING": "Inflicts [2,3,4] stacks of POISONNED to target. Every stack over the max deals immediately [25,50,100,SP] SPECIAL.",
     "TRANSE": "Starts attacking and moving again, but stops passively healing.",
-    "WOOD_HAMMER": "Deals [300,SP]% of ATK as SPECIAL to the target, and receive recoil damage equal to 33% of the damage done"
+    "WOOD_HAMMER": "Deals [300,SP]% of ATK as SPECIAL to the target, and receive recoil damage equal to 33% of the damage done",
+    "TRICK_OR_TREAT": "The target must give one of its held items to the user. If it has no held item, it receives a curse whose power increases with user AP."
   },
   "effect": {
     "INGRAIN": "Ingrain",

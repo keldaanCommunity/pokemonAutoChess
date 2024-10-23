@@ -7657,7 +7657,7 @@ export class Pumpkaboo extends Pokemon {
   speDef = 3
   maxPP = 80
   range = 1
-  skill = Ability.CORRUPTED_NATURE
+  skill = Ability.TRICK_OR_TREAT
   additional = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
@@ -7671,7 +7671,7 @@ export class Gourgeist extends Pokemon {
   speDef = 5
   maxPP = 80
   range = 1
-  skill = Ability.CORRUPTED_NATURE
+  skill = Ability.TRICK_OR_TREAT
   additional = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
