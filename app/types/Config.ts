@@ -675,10 +675,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.OLD_ROD]: {},
   [Item.GOOD_ROD]: {},
   [Item.SUPER_ROD]: {},
-  [Item.RARE_CANDY]: {
-    [Stat.ATK_SPEED]: -20,
-    [Stat.AP]: -30
-  },
+  [Item.RARE_CANDY]: {},
   [Item.EVIOLITE]: {
     [Stat.HP]: 100,
     [Stat.ATK]: 10,
