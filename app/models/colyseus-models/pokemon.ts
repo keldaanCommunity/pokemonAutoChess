@@ -14703,9 +14703,9 @@ export class Skarmory extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 190
-  atk = 16
+  atk = 18
   def = 8
-  speDef = 2
+  speDef = 4
   maxPP = 80
   range = 1
   skill = Ability.ROAR

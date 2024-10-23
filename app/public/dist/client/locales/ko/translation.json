@@ -1602,7 +1602,7 @@
     "FOUL_PLAY": "대상 ATK 의 [2,4,6,SP] 배만큼 SPECIAL 를 가한다.",
     "DOUBLE_IRON_BASH": "시전자가 회전하여 ATK 의 [150,SP]% 를 두 번 가격한다. 대상은 3초 동안 FLINCH 이 된다.",
     "STONE_EDGE": "[5,8] 초 동안 시전자가 SILENCE 상태가 되고, 2 RANGE 와 [20,SP] CRIT_CHANCE 를 획득하고 기본공격 시 DEF 의 [100,SP]%를 PHYSICAL 로 입힌다.",
-    "ROAR": "대상을 날려버린다. 벽에 부딪히면 [10,20,40,SP] SPECIAL 을 입는다. 다른 포켓몬에게 부딪히면 둘 다 SPECIAL 을 입는다.",
+    "ROAR": "대상을 날려버린다. 벽에 부딪히면 [20,40,80,SP] SPECIAL 을 입는다. 다른 포켓몬에게 부딪히면 둘 다 SPECIAL 을 입는다.",
     "INFESTATION": "필드에 있는 아군 BUG 수만큼 [10,SP] SPECIAL 을 대상에게 가하고, 대기석의 가장 강한 BUG 를 전투에 참여시킨다.",
     "IVY_CUDGEL": "대상에게 [100,SP]의 SPECIAL 를 입힌다.",
     "FORCE_PALM": "[60,SP] + 대상 최대 HP 의 10%를 SPECIAL 로 가하고 PARALYSIS 상태로 6초 동안 만든다. 대상이 이미 PARALYSIS 상태라면 [40,SP] SPECIAL 을 추가로 입히고 밀어낸다.",

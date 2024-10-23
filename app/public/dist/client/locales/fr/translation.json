@@ -1595,7 +1595,7 @@
     "FOUL_PLAY": "Inflige [2,4,6,SP,ND=1] x l'ATK de la cible en SPECIAL",
     "DOUBLE_IRON_BASH": "Le lanceur pivote, centre l'écrou hexagonal sur sa poitrine, puis frappe avec ses bras deux fois de suite avec [150,SP] % de son ATK. Cela inflige FLINCH à la cible pendant 3 secondes.",
     "STONE_EDGE": "Pendant [5,8] secondes, le lanceur s'auto-inflige SILENCE, gagne 2 RANGE, [20,SP] CRIT_CHANCE et inflige [100,SP]% de sa DEF en PHYSICAL avec ses attaques.",
-    "ROAR": "Souffle sur la cible, ce qui la projette en arrière. Si elle heurte un mur, elle subit [10,20,40,SP] SPECIAL. Si elle heurte un autre Pokémon, les deux Pokémon subissent les dégâts.",
+    "ROAR": "Souffle sur la cible, ce qui la projette en arrière. Si elle heurte un mur, elle subit [20,40,80,SP] SPECIAL. Si elle heurte un autre Pokémon, les deux Pokémon subissent les dégâts.",
     "INFESTATION": "Inflige [10,SP] SPECIAL à la cible pour chaque allié BUG sur le plateau, et amène au combat votre Pokémon BUG le plus puissant sur votre banc",
     "IVY_CUDGEL": "Inflige [100,SP] SPECIAL à la cible",
     "FORCE_PALM": "Inflige [60,SP] + 10% des HP max de la cible en SPECIAL et PARALYSIS pendant 6 secondes. Si la cible est déjà PARALYSIS, inflige [40,SP] SPECIAL supplémentaires et repousse la cible en arrière.",
