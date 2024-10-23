@@ -45,6 +45,7 @@
 - Nerf Pinsir PP: 85 → 100
 - Buff Skarmory: Attack 16 → 18, Spe def 2 → 4 ; Roar damage: 10/20/40 → 20/40/80
 - Mew is now Psychic/Amorphous instead of Wild/Psychic
+- New ability for Snobull line: Roar: Blow away the target. If it hits a wall, it suffers Ability Power 20/40/80 special damage. If it hits another pokémon, both pokémons suffer special damage.
 
 # Changes to Synergies
 

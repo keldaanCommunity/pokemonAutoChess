@@ -8890,7 +8890,7 @@ export class Snubull extends Pokemon {
   speDef = 2
   maxPP = 70
   range = 1
-  skill = Ability.BITE
+  skill = Ability.ROAR
   additional = true
   attackSprite = AttackSprite.FAIRY_MELEE
 }
@@ -8905,7 +8905,7 @@ export class Granbull extends Pokemon {
   speDef = 3
   maxPP = 70
   range = 1
-  skill = Ability.BITE
+  skill = Ability.ROAR
   additional = true
   attackSprite = AttackSprite.FAIRY_MELEE
 }
