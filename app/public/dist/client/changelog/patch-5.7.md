@@ -87,3 +87,5 @@
 - Pokemons become shiny when given Shiny Charm
 - Thanks to all the contributors who helped with the translations! 3zukiDOT, Darkatek7, danGuinzo, logannoir, ph8ndstne, Zeleos753, RambonL, Tok1013-8, mokers-creater and more
 - New scribble rule: Desperate moves
+- Remove Glitch trainer title. Too many annoying bug reports.
+- Remove Backer title to be up to date with the new tipee.
