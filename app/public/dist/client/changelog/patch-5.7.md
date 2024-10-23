@@ -79,6 +79,7 @@
 - Nerf Electirizer: Attack speed 50 → 30%
 - Changed Gold Bottle Cap base stats ~~20% Crit chance 40% Crit damage~~ → 50% Luck
 - Clarify Protective Pads only preventing recoil ***damage** and not status effects like confusion
+- Buff Repeat Ball: reduce the cost of Unique/Legendaries in shop, and the number of rerolls required to get them
 
 # UI
 

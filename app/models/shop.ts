@@ -497,7 +497,7 @@ export default class Shop {
           Rarity.EPIC,
           Rarity.ULTRA
         ][Math.floor(player.rerollCount / 30)] ?? Rarity.ULTRA
-      if (player.rerollCount >= 150 && player.rerollCount % 10 === 0) {
+      if (player.rerollCount >= 130 && player.rerollCount % 10 === 0) {
         const legendaryCandidates: Pkm[] = LegendaryShop.filter<Pkm>(
           (p): p is Pkm =>
             !(p in PkmDuos) &&
@@ -507,7 +507,7 @@ export default class Shop {
         )
         if (legendaryCandidates.length > 0)
           return pickRandomIn(legendaryCandidates)
-      } else if (player.rerollCount >= 100 && player.rerollCount % 10 === 0) {
+      } else if (player.rerollCount >= 90 && player.rerollCount % 10 === 0) {
         const uniqueCandidates: Pkm[] = UniqueShop.filter<Pkm>(
           (p): p is Pkm =>
             !(p in PkmDuos) &&
