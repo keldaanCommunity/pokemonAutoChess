@@ -7367,12 +7367,12 @@ export class Eternatus extends Pokemon {
 }
 
 export class Nincada extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING])
+  types = new SetSchema<Synergy>([Synergy.BUG])
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.NINJASK
-  hp = 100
-  atk = 10
+  hp = 130
+  atk = 13
   def = 5
   speDef = 2
   maxPP = 100

@@ -40,6 +40,7 @@
 - Buff Wish (Togepi line): now also increases luck of selected allies by 20%
 - Remoraid is now sold for 3 gold, and Octillery for 10 gold
 - Nerf Voltorb line: PP 80 → 100
+- Nincada is no longer Flying. Buffed stats HP: 100 → 130, Attack 10 → 13
 
 # Changes to Synergies
 
