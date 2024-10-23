@@ -38,6 +38,7 @@
 - New ability for Shuckle: Bide: The user is unable to move for 3 secs. Bide will do SPECIAL damage equal to twice the damage received during the idling period around the user.
 - All Silvally forms have been merged into one. Multi Attack: multiplied by ~~the synergy level of current Silvally form~~ the sum of levels of all Silvally additional synergies.
 - Buff Wish (Togepi line): now also increases luck of selected allies by 20%
+- Remoraid is now sold for 3 gold, and Octillery for 10 gold
 
 # Changes to Synergies
 

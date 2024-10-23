@@ -96,6 +96,10 @@ export function getSellPrice(
     price = 1
   } else if (name === Pkm.WISHIWASHI) {
     price = 3
+  } else if (name === Pkm.REMORAID) {
+    price = 3
+  } else if (name === Pkm.OCTILLERY) {
+    price = 10
   } else if (name === Pkm.GYARADOS) {
     price = hasRareCandy ? 0 : 10
   } else if (name === Pkm.MILOTIC) {
