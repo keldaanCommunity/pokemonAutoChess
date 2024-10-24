@@ -51,7 +51,6 @@ import Board, { Cell } from "../board"
 import { PokemonEntity, getStrongestUnit } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 
-import { isOnBench } from "../../models/colyseus-models/pokemon"
 import { Passive } from "../../types/enum/Passive"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { distanceC, distanceM } from "../../utils/distance"
@@ -993,7 +992,7 @@ export class SchoolingStrategy extends AbilityStrategy {
 
     if (pokemon.player) {
       pokemon.player.board.forEach((ally, id) => {
-        if (ally && ally.name === Pkm.WISHIWASHI && isOnBench(ally)) {
+        if (ally && ally.name === Pkm.WISHIWASHI && ally.isOnBench) {
           pokemon.addMaxHP(50, pokemon, 0, false)
           pokemon.refToBoardPokemon.hp += 50
           pokemon.player!.board.delete(id)
