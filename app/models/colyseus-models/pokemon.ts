@@ -174,6 +174,13 @@ export class Pokemon extends Schema implements IPokemon {
     // called at simulation start after entities are generated
   }
 
+  onSpawn(params: {
+    entity: IPokemonEntity
+    simulation: Simulation
+  }) {
+    // called after entity is added, either at simulation start or when cloned/spawned
+  }
+
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     const basePkm = PkmFamily[this.name]
@@ -5238,7 +5245,7 @@ export class Regigigas extends Pokemon {
   passive = Passive.SLOW_START
   attackSprite = AttackSprite.DRAGON_MELEE
 
-  afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
+  onSpawn({ entity }: { entity: IPokemonEntity }) {
     entity.addAttackSpeed(-25, entity, 0, false)
   }
 }
@@ -6704,7 +6711,7 @@ export class Wynaut extends Pokemon {
   passive = Passive.WOBBUFFET
   additional = true
   attackSprite = AttackSprite.FIGHTING_MELEE
-  afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
+  onSpawn({ entity }: { entity: IPokemonEntity }) {
     entity.status.tree = true
     entity.toIdleState()
   }
@@ -6724,7 +6731,7 @@ export class Wobbuffet extends Pokemon {
   passive = Passive.WOBBUFFET
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
-  afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
+  onSpawn({ entity }: { entity: IPokemonEntity }) {
     entity.status.tree = true
     entity.toIdleState()
   }
@@ -10672,7 +10679,7 @@ export class Bonsley extends Pokemon {
   passive = Passive.SUDOWOODO
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
-  afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
+  onSpawn({ entity }: { entity: IPokemonEntity }) {
     entity.status.tree = true
     entity.toIdleState()
   }
@@ -10692,7 +10699,7 @@ export class Sudowoodo extends Pokemon {
   passive = Passive.SUDOWOODO
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
-  afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
+  onSpawn({ entity }: { entity: IPokemonEntity }) {
     entity.status.tree = true
     entity.toIdleState()
   }
@@ -11092,10 +11099,7 @@ export class MegaSableye extends Pokemon {
   skill = Ability.KNOCK_OFF
   attackSprite = AttackSprite.DARK_MELEE
   passive = Passive.MEGA_SABLEYE
-  afterSimulationStart({
-    entity,
-    player
-  }: { entity: IPokemonEntity; player: IPlayer }) {
+  onSpawn({ entity }: { entity: IPokemonEntity }) {
     entity.status.triggerRuneProtect(60000)
   }
 }
@@ -11187,7 +11191,7 @@ export class Yanma extends Pokemon {
   passive = Passive.CLEAR_WING
   additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
+  onSpawn({ entity }: { entity: IPokemonEntity }) {
     entity.status.triggerClearWing(1000)
   }
 }
@@ -11206,7 +11210,7 @@ export class Yanmega extends Pokemon {
   passive = Passive.CLEAR_WING
   additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
+  onSpawn({ entity }: { entity: IPokemonEntity }) {
     entity.status.triggerClearWing(1000)
   }
 }
@@ -11230,7 +11234,7 @@ export class Helioptile extends Pokemon {
   passive = Passive.DRY_SKIN
   additional = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
-  afterSimulationStart({
+  onSpawn({
     entity,
     simulation
   }: { entity: IPokemonEntity; simulation: Simulation }) {
@@ -11391,7 +11395,7 @@ export class Spinda extends Pokemon {
   skill = Ability.TEETER_DANCE
   passive = Passive.SPOT_PANDA
   attackSprite = AttackSprite.NORMAL_MELEE
-  afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
+  onSpawn({ entity }: { entity: IPokemonEntity }) {
     entity.effects.add(Effect.IMMUNITY_CONFUSION)
   }
 }
@@ -12337,11 +12341,8 @@ export class Gholdengo extends Pokemon {
   skill = Ability.MAKE_IT_RAIN
   attackSprite = AttackSprite.DRAGON_MELEE
   passive = Passive.GHOLDENGO
-  afterSimulationStart({
-    entity,
-    player
-  }: { entity: IPokemonEntity; player: IPlayer }) {
-    if (player.money >= 50) {
+  onSpawn({ entity }: { entity: IPokemonEntity }) {
+    if (entity.player && entity.player.money >= 50) {
       entity.status.triggerRuneProtect(60000)
     }
   }
@@ -12648,15 +12649,17 @@ export class Smeargle extends Pokemon {
   skill = Ability.SKETCH
   attackSprite = AttackSprite.NORMAL_MELEE
 
-  afterSimulationStart({ player, entity }) {
-    const allyOnTheLeft = player.getPokemonAt(
-      this.positionX - 1,
-      this.positionY
-    )
-    if (allyOnTheLeft) {
-      entity.maxPP = allyOnTheLeft.maxPP
-      entity.skill = allyOnTheLeft.skill
-      entity.stars = allyOnTheLeft.stars
+  onSpawn({ entity }) {
+    if (entity.player) {
+      const allyOnTheLeft = entity.player.getPokemonAt(
+        this.positionX - 1,
+        this.positionY
+      )
+      if (allyOnTheLeft) {
+        entity.maxPP = allyOnTheLeft.maxPP
+        entity.skill = allyOnTheLeft.skill
+        entity.stars = allyOnTheLeft.stars
+      }
     }
   }
 }
@@ -14712,10 +14715,9 @@ export class Skarmory extends Pokemon {
   attackSprite = AttackSprite.STEEL_MELEE
   passive = Passive.SKARMORY
 
-  afterSimulationStart(params: {
+  onSpawn(params: {
     player: IPlayer
     simulation: Simulation
-    team: MapSchema<IPokemonEntity>
     entity: IPokemonEntity
   }) {
     params.entity.commands.push(

@@ -193,7 +193,7 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   addPokemon(
-    pokemon: IPokemon,
+    pokemon: Pokemon,
     x: number,
     y: number,
     team: Team,
@@ -219,6 +219,8 @@ export default class Simulation extends Schema implements ISimulation {
       this.redTeam.set(pokemonEntity.id, pokemonEntity)
       this.redDpsMeter.set(pokemonEntity.id, dps)
     }
+
+    pokemon.onSpawn({ entity: pokemonEntity, simulation: this })
     return pokemonEntity
   }
 
