@@ -14617,8 +14617,8 @@ export class Sandile extends Pokemon {
   stars = 1
   evolution = Pkm.KROKOROK
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
-  hp = 100
-  atk = 10
+  hp = 80
+  atk = 6
   def = 2
   speDef = 2
   maxPP = 80
@@ -14638,8 +14638,8 @@ export class Krokorok extends Pokemon {
   stars = 2
   evolution = Pkm.KROOKODILE
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
-  hp = 180
-  atk = 18
+  hp = 150
+  atk = 13
   def = 3
   speDef = 3
   maxPP = 80
@@ -14657,10 +14657,10 @@ export class Krookodile extends Pokemon {
   ])
   rarity = Rarity.HATCH
   stars = 3
-  hp = 240
-  atk = 24
-  def = 5
-  speDef = 5
+  hp = 220
+  atk = 22
+  def = 4
+  speDef = 4
   maxPP = 80
   range = 1
   skill = Ability.FOUL_PLAY
