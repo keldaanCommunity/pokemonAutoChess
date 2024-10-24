@@ -8,7 +8,7 @@ export function GadgetsTab() {
   const { t } = useTranslation()
   const user = useAppSelector((state) => state.network.profile)
   const level = user?.level ?? 0
-  const gadgets = Object.values(GADGETS)
+  const gadgets = Object.values(GADGETS).filter((g) => !g.disabled)
   const nbGadgetsUnlocked = gadgets.filter(
     (g) => g.levelRequired <= level
   ).length

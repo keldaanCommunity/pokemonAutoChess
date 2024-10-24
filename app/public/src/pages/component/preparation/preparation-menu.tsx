@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next"
 import { IGameUser } from "../../../../../models/colyseus-models/game-user"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import { Role } from "../../../../../types"
-import { MAX_PLAYERS_PER_GAME } from "../../../../../types/Config"
+import { BOTS_ENABLED, MAX_PLAYERS_PER_GAME } from "../../../../../types/Config"
 import { BotDifficulty, GameMode } from "../../../../../types/enum/Game"
 import { throttle } from "../../../../../utils/function"
 import { max } from "../../../../../utils/number"
@@ -178,7 +178,7 @@ export default function PreparationMenu() {
       ) : null}
 
       {gameMode === GameMode.CUSTOM_LOBBY && users.length === 1 && (
-        <p>{t("add_bot_or_wait_hint")}</p>
+        <p>{BOTS_ENABLED ? t("add_bot_or_wait_hint") : t("wait_for_players_hint")}</p>
       )}
     </>
   )
@@ -231,7 +231,7 @@ export default function PreparationMenu() {
       </div>
     )
 
-  const botControls = gameMode === GameMode.CUSTOM_LOBBY && (isOwner || isAdmin) && (
+  const botControls = gameMode === GameMode.CUSTOM_LOBBY && BOTS_ENABLED && (isOwner || isAdmin) && (
     <div className="my-input-group">
       <button
         className="bubbly blue"
