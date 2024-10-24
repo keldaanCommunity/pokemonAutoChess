@@ -4980,7 +4980,7 @@ export class Pinsir extends Pokemon {
   atk = 21
   def = 3
   speDef = 3
-  maxPP = 85
+  maxPP = 100
   range = 1
   skill = Ability.GUILLOTINE
   attackSprite = AttackSprite.NORMAL_MELEE
@@ -6045,7 +6045,7 @@ export class Azelf extends Pokemon {
 }
 
 export class Mew extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.PSYCHIC])
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.AMORPHOUS])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
@@ -7367,12 +7367,12 @@ export class Eternatus extends Pokemon {
 }
 
 export class Nincada extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING])
+  types = new SetSchema<Synergy>([Synergy.BUG])
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.NINJASK
-  hp = 100
-  atk = 10
+  hp = 130
+  atk = 13
   def = 5
   speDef = 2
   maxPP = 100
@@ -7657,7 +7657,7 @@ export class Pumpkaboo extends Pokemon {
   speDef = 3
   maxPP = 80
   range = 1
-  skill = Ability.CORRUPTED_NATURE
+  skill = Ability.TRICK_OR_TREAT
   additional = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
@@ -7671,7 +7671,7 @@ export class Gourgeist extends Pokemon {
   speDef = 5
   maxPP = 80
   range = 1
-  skill = Ability.CORRUPTED_NATURE
+  skill = Ability.TRICK_OR_TREAT
   additional = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
@@ -8453,7 +8453,7 @@ export class Voltorb extends Pokemon {
   atk = 9
   def = 1
   speDef = 1
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.EXPLOSION
   additional = true
@@ -8468,7 +8468,7 @@ export class Electrode extends Pokemon {
   atk = 18
   def = 3
   speDef = 3
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.EXPLOSION
   additional = true
@@ -8890,7 +8890,7 @@ export class Snubull extends Pokemon {
   speDef = 2
   maxPP = 70
   range = 1
-  skill = Ability.BITE
+  skill = Ability.ROAR
   additional = true
   attackSprite = AttackSprite.FAIRY_MELEE
 }
@@ -8905,7 +8905,7 @@ export class Granbull extends Pokemon {
   speDef = 3
   maxPP = 70
   range = 1
-  skill = Ability.BITE
+  skill = Ability.ROAR
   additional = true
   attackSprite = AttackSprite.FAIRY_MELEE
 }
@@ -10668,7 +10668,7 @@ export class Bonsley extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 1
-  skill = Ability.MIMIC
+  skill = Ability.WOOD_HAMMER
   passive = Passive.SUDOWOODO
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
@@ -10688,7 +10688,7 @@ export class Sudowoodo extends Pokemon {
   speDef = 3
   maxPP = 100
   range = 1
-  skill = Ability.MIMIC
+  skill = Ability.WOOD_HAMMER
   passive = Passive.SUDOWOODO
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
@@ -14617,8 +14617,8 @@ export class Sandile extends Pokemon {
   stars = 1
   evolution = Pkm.KROKOROK
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
-  hp = 100
-  atk = 10
+  hp = 80
+  atk = 6
   def = 2
   speDef = 2
   maxPP = 80
@@ -14638,8 +14638,8 @@ export class Krokorok extends Pokemon {
   stars = 2
   evolution = Pkm.KROOKODILE
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
-  hp = 180
-  atk = 18
+  hp = 150
+  atk = 13
   def = 3
   speDef = 3
   maxPP = 80
@@ -14657,10 +14657,10 @@ export class Krookodile extends Pokemon {
   ])
   rarity = Rarity.HATCH
   stars = 3
-  hp = 240
-  atk = 24
-  def = 5
-  speDef = 5
+  hp = 220
+  atk = 22
+  def = 4
+  speDef = 4
   maxPP = 80
   range = 1
   skill = Ability.FOUL_PLAY
@@ -14703,9 +14703,9 @@ export class Skarmory extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 190
-  atk = 16
+  atk = 18
   def = 8
-  speDef = 2
+  speDef = 4
   maxPP = 80
   range = 1
   skill = Ability.ROAR

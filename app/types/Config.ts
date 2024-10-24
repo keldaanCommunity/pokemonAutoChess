@@ -33,9 +33,9 @@ export const RarityCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.RARE]: 3,
   [Rarity.EPIC]: 4,
   [Rarity.ULTRA]: 5,
-  [Rarity.UNIQUE]: 15,
-  [Rarity.LEGENDARY]: 20,
-  [Rarity.HATCH]: 11
+  [Rarity.HATCH]: 9,
+  [Rarity.UNIQUE]: 10,
+  [Rarity.LEGENDARY]: 20
 })
 
 export const EmotionCost: { [key in Emotion]: number } = {
@@ -675,10 +675,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.OLD_ROD]: {},
   [Item.GOOD_ROD]: {},
   [Item.SUPER_ROD]: {},
-  [Item.RARE_CANDY]: {
-    [Stat.ATK_SPEED]: -20,
-    [Stat.AP]: -30
-  },
+  [Item.RARE_CANDY]: {},
   [Item.EVIOLITE]: {
     [Stat.HP]: 100,
     [Stat.ATK]: 10,

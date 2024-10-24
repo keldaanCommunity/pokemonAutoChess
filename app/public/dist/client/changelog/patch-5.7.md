@@ -38,12 +38,21 @@
 - New ability for Shuckle: Bide: The user is unable to move for 3 secs. Bide will do SPECIAL damage equal to twice the damage received during the idling period around the user.
 - All Silvally forms have been merged into one. Multi Attack: multiplied by ~~the synergy level of current Silvally form~~ the sum of levels of all Silvally additional synergies.
 - Buff Wish (Togepi line): now also increases luck of selected allies by 20%
+- Remoraid is now sold for 3 gold, and Octillery for 10 gold
+- Nerf Voltorb line: PP 80 → 100
+- Nincada is no longer Flying. Buffed stats HP: 100 → 130, Attack 10 → 13
+- Nerf Pinsir PP: 85 → 100
+- Buff Skarmory: Attack 16 → 18, Spe def 2 → 4 ; Roar damage: 10/20/40 → 20/40/80
+- Mew is now Psychic/Amorphous instead of Wild/Psychic
+- New ability for Snobull line: Roar: Blow away the target. If it hits a wall, it suffers Ability Power 20/40/80 special damage. If it hits another pokémon, both pokémons suffer special damage.
+- New ability for Sudowoodo line: Wood Hammer: Deals 300% of attack as special damage to the target, and receive recoil damage equal to 33% of the damage done
+- New ability for Pumpkaboo line: Trick or Treat: The target must give one of its held items to the user. If the target has no held item, it receives a curse whose power increases with user AP.
+- Change Fire Blast (Volcarona, Macargo): now hit in a star-shaped area of effect, damage 30/60/120 → 20/50/80
+- Nerf Sandile line: HP 100/180/240 → 80/150/220, Attack : 10/18/24 → 6/13/22, Def: 2/3/5 → 2/3/4, Spe Def: 2/3/5 → 2/3/4
 
 # Changes to Synergies
 
 - Rock: weather rocks are no longer immediately available, they are collected after fighting in a certain weather
-- Nerf Grass 3: HP healed every 2 seconds: 8 → 7
-- Nerf Light 3: PP per second 10 → 8
 - Change Ghost 6: cursed opponent is ~~Silenced~~ Fatigued
 - Monsters now have 30% chance to flinch with their attacks at all levels (unlocked when activating the first level of synergy)
 - Monter changes:
@@ -59,6 +68,10 @@
     - (7) Golden Eggs: each baby has 4% chance (increased with luck) to find a golden Egg 
 - Changed Psychic 4: ~~Unowns have 5% chance to appear in shops~~ An Unown appears every 3 shops
 - Change Ice 8: freeze chance ~~50~~ 40%, increased damage to frozen enemies: ~~20~~ 30%
+- Buff Sound 2: +1 → +2 attack every time a sound pokemon casts its ability
+- Nerf Grass 3: HP healed every 2 seconds: 8 → 7
+- Nerf Light 3: PP per second 10 → 8
+- Buff Amorphous 7: 5 → 6% Attack Speed per unique synergy
 
 # Changes to Items
 
@@ -69,6 +82,9 @@
 - New Artificial Item: Tiny Mushroom: Give Bug synergy, reduce max HP by 50%
 - Nerf Electirizer: Attack speed 50 → 30%
 - Changed Gold Bottle Cap base stats ~~20% Crit chance 40% Crit damage~~ → 50% Luck
+- Clarify Protective Pads only preventing recoil ***damage** and not status effects like confusion
+- Buff Repeat Ball: reduce the cost of Unique/Legendaries in shop, and the number of rerolls required to get them
+- Buff Rare Candy for Halloween: remove stat maluses
 
 # UI
 

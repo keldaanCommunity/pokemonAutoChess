@@ -63,10 +63,6 @@ export function displayAbility(
       addAbilitySprite(Ability.FIRE_BLAST, coordinatesTarget, true).setScale(3)
       break
 
-    case Ability.CORRUPTED_NATURE:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
-      break
-
     case Ability.CRABHAMMER:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
@@ -2446,6 +2442,18 @@ export function displayAbility(
       addAbilitySprite(Ability.SMOKE_SCREEN, coordinatesTarget, true).setScale(
         3
       )
+      break
+
+    case Ability.WOOD_HAMMER:
+      addAbilitySprite(skill, coordinatesTarget, true)
+        .setScale(1)
+        .setOrigin(0.5, 1)
+      break
+
+    case Ability.TRICK_OR_TREAT:
+      addAbilitySprite(skill, coordinatesTarget, true)
+        .setScale(2)
+        .setOrigin(0.5, 1)
       break
 
     case Ability.INFESTATION:
