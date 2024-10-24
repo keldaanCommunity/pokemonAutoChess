@@ -12,7 +12,7 @@ import { canSell } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import Player from "../../models/colyseus-models/player"
-import { isOnBench, PokemonClasses } from "../../models/colyseus-models/pokemon"
+import { PokemonClasses } from "../../models/colyseus-models/pokemon"
 import { createRandomEgg } from "../../models/egg-factory"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
@@ -227,7 +227,7 @@ export class OnDragDropCommand extends Command<
       if (pokemon) {
         const { x, y } = detail
         const dropOnBench = y == 0
-        const dropFromBench = isOnBench(pokemon)
+        const dropFromBench = pokemon.isOnBench
 
         if (
           pokemon.name === Pkm.DITTO &&
@@ -643,7 +643,7 @@ export class OnSellDropCommand extends Command<
       const pokemon = player.board.get(pokemonId)
       if (
         pokemon &&
-        !isOnBench(pokemon) &&
+        !pokemon.isOnBench &&
         this.state.phase === GamePhaseState.FIGHT
       ) {
         return // can't sell a pokemon currently fighting
@@ -1182,7 +1182,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         const numberOfPokemonsToMove = maxTeamSize - teamSize
         for (let i = 0; i < numberOfPokemonsToMove; i++) {
           const pokemon = values(player.board).find(
-            (p) => isOnBench(p) && p.canBePlaced
+            (p) => p.isOnBench && p.canBePlaced
           )
           const coordinate = getFirstAvailablePositionOnBoard(player.board)
           if (coordinate && pokemon) {
@@ -1273,7 +1273,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           const GOLDEN_EGG_CHANCE = 0.04
           const playerEggChanceStacked = player.eggChance
           const babies = values(player.board).filter(
-            (p) => !isOnBench(p) && p.types.has(Synergy.BABY)
+            (p) => !p.isOnBench && p.types.has(Synergy.BABY)
           )
 
           for (const baby of babies) {
@@ -1359,7 +1359,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               )
             }
           }
-          if (pokemon.passive === Passive.UNOWN && !isOnBench(pokemon)) {
+          if (pokemon.passive === Passive.UNOWN && !pokemon.isOnBench) {
             // remove after one fight
             player.board.delete(key)
             player.board.delete(pokemon.id)

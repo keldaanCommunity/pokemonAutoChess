@@ -35,7 +35,7 @@ import {
 } from "../precomputed/precomputed-pokemon-data"
 import ExperienceManager from "./experience-manager"
 import HistoryItem from "./history-item"
-import { Pokemon, PokemonClasses, isOnBench } from "./pokemon"
+import { Pokemon, PokemonClasses } from "./pokemon"
 import PokemonCollection from "./pokemon-collection"
 import PokemonConfig from "./pokemon-config"
 import Synergies, { computeSynergies } from "./synergies"
@@ -323,7 +323,7 @@ export default class Player extends Schema implements IPlayer {
                 const nativeTypes = getPokemonData(pokemon.name).types
                 if (nativeTypes.includes(type) === false) {
                   pokemon.types.delete(type)
-                  if (!isOnBench(pokemon)) {
+                  if (!pokemon.isOnBench) {
                     needsRecomputingSynergiesAgain = true
                   }
                 }

@@ -3,7 +3,7 @@ import { logger } from "../utils/logger"
 import { nanoid } from "nanoid"
 import Count from "../models/colyseus-models/count"
 import Player from "../models/colyseus-models/player"
-import { isOnBench, Pokemon } from "../models/colyseus-models/pokemon"
+import { Pokemon } from "../models/colyseus-models/pokemon"
 import Status from "../models/colyseus-models/status"
 import PokemonFactory from "../models/pokemon-factory"
 import { getSellPrice } from "../models/shop"
@@ -202,6 +202,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       !this.status.resurecting &&
       !this.status.locked
     )
+  }
+
+  get isOnBench(): boolean {
+    return this.positionY === 0
   }
 
   isTargettableBy(
@@ -1603,7 +1607,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         const koAllies = values(this.player.board).filter(
           (p) =>
             p.id !== this.refToBoardPokemon.id &&
-            !isOnBench(p) &&
+            !p.isOnBench &&
             alliesAlive.includes(p.id) === false
         )
 

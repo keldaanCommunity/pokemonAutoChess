@@ -123,6 +123,10 @@ export class Pokemon extends Schema implements IPokemon {
     return ![Pkm.EGG].includes(this.name)
   }
 
+  get isOnBench(): boolean {
+    return this.positionY === 0
+  }
+
   get canBeCloned(): boolean {
     return (
       this.rarity !== Rarity.UNIQUE &&
@@ -190,10 +194,6 @@ export class Pokemon extends Schema implements IPokemon {
         state.additionalPokemons.includes(variantOf))
     )
   }
-}
-
-export function isOnBench(pokemon: Pokemon): boolean {
-  return pokemon.positionY === 0
 }
 
 export class Ditto extends Pokemon {
