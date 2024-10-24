@@ -389,7 +389,12 @@
     "IVY_CUDGEL": "Massue Liane",
     "FORCE_PALM": "Forte-Paume",
     "THUNDER_CAGE": "Voltageôle",
-    "HEADBUTT": "Coup d'Boule"
+    "HEADBUTT": "Coup d'Boule",
+    "STEEL_WING": "Ailes d'acier",
+    "YAWN": "Bâillement",
+    "FIERY_DANCE": "Danse du Feu",
+    "BIDE": "Patience",
+    "POISON_STING": "Dard-Venin"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1228,7 +1233,10 @@
     "OGERPON_HEARTHFLAME_MASK": "Ogerpon au Masque du Fourneau",
     "OGERPON_CORNERSTONE": "Ogerpon de la Pierre",
     "OGERPON_CORNERSTONE_MASK": "Ogerpon au Masque de la Pierre",
-    "IRON_HANDS": "Paume-de-Fer"
+    "IRON_HANDS": "Paume-de-Fer",
+    "CORVISQUIRE": "Bleuseille",
+    "CORVIKNIGHT": "Corvaillus",
+    "MURKROW": "Cornèbre"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
