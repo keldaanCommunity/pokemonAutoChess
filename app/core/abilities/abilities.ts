@@ -2500,8 +2500,27 @@ export class FireBlastStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    const damage = [20, 50, 80][pokemon.stars - 1] ?? 80
+    const cellsHit = [
+      { x: target.positionX, y: target.positionY },
+      { x: target.positionX - 1, y: target.positionY },
+      { x: target.positionX + 1, y: target.positionY },
+      { x: target.positionX, y: target.positionY + 1 },
+      { x: target.positionX - 1, y: target.positionY - 1 },
+      { x: target.positionX + 1, y: target.positionY - 1 }
+    ]
+    for (const cell of cellsHit) {
+      const entityOnCell = board.getValue(cell.x, cell.y)
+      if (entityOnCell && entityOnCell.team !== pokemon.team) {
+        target.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    }
   }
 }
 

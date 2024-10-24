@@ -1239,7 +1239,6 @@
     "PROTECT": "Garantiza PROTECT al usuario, volviéndose invulnerable por [1,3,5,SP=0.5] segundos",
     "BLIZZARD": "Aplica FREEZE a todos los Pokémon enemigos durante 2 segundos e inflige [5,10,15,SP] de SPECIAL. Causa el doble de daño si el enemigo ya está FREEZE",
     "CONFUSION": "Aplica CONFUSION y SILENCE al objetivo durante [3,5,7] segundos. Si el objetivo ya está CONFUSION, inflige [75,150,300,SP] de SPECIAL en su lugar",
-    "FIRE_BLAST": "Lanza una ráfaga de fuego que inflige [30,60,120,SP] de SPECIAL",
     "WHEEL_OF_FIRE": "El usuario se envuelve en llamas, rodando hacia los enemigos de ida y vuelta. Inflige [10,20,30,SP] de SPECIAL dos veces a todos los Pokémon enemigos que golpea",
     "SEISMIC_TOSS": "Inflige [5,10,20,SP] de TRUE al objetivo multiplicado por tu nivel de jugador",
     "GUILLOTINE": "Inflige [1,2,3,SP] x ATK SPECIAL a un objetivo. Restaura la mitad de PP si el objetivo queda KO",

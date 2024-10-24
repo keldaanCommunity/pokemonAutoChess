@@ -41,13 +41,13 @@
 - Remoraid is now sold for 3 gold, and Octillery for 10 gold
 - Nerf Voltorb line: PP 80 → 100
 - Nincada is no longer Flying. Buffed stats HP: 100 → 130, Attack 10 → 13
-- Buff Volcarona: Attack 20 → 24
 - Nerf Pinsir PP: 85 → 100
 - Buff Skarmory: Attack 16 → 18, Spe def 2 → 4 ; Roar damage: 10/20/40 → 20/40/80
 - Mew is now Psychic/Amorphous instead of Wild/Psychic
 - New ability for Snobull line: Roar: Blow away the target. If it hits a wall, it suffers Ability Power 20/40/80 special damage. If it hits another pokémon, both pokémons suffer special damage.
 - New ability for Sudowoodo line: Wood Hammer: Deals 300% of attack as special damage to the target, and receive recoil damage equal to 33% of the damage done
 - New ability for Pumpkaboo line: Trick or Treat: The target must give one of its held items to the user. If the target has no held item, it receives a curse whose power increases with user AP.
+- Change Fire Blast (Volcarona, Macargo): now hit in a star-shaped area of effect, damage 30/60/120 → 20/50/80
 
 # Changes to Synergies
 

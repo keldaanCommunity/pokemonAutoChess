@@ -5512,7 +5512,7 @@ export class Volcarona extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 200
-  atk = 24
+  atk = 20
   def = 2
   speDef = 2
   maxPP = 100

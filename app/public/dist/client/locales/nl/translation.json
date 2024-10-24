@@ -838,7 +838,6 @@
     "PROTECT": "PROTECT de gebruiker en word [1,3,5,SP=0,5] seconden onkwetsbaar",
     "BLIZZARD": "FREEZE alle vijandelijke Pokémon gedurende 2 seconden en deel [5,10,15,SP] SPECIAL. Dubbele schade als de vijand al FREEZE is",
     "CONFUSION": "Het doelwit is CONFUSION en SILENCE voor [3,5,7] seconden. Als het al CONFUSION is, deel dan [75,150,300,SP] SPECIAL uit.",
-    "FIRE_BLAST": "Schiet een Vuurschot en richt [30,60,120,SP] SPECIAL toe aan het doelwit",
     "WHEEL_OF_FIRE": "Schiet een terugkerende Vlamwiel. Elke vijandelijke Pokémon die geraakt wordt neemt [10,20,30,SP] SPECIAL",
     "SEISMIC_TOSS": "Brengt [5,10,20,SP] TRUE toe aan het doel, vermenigvuldigd met je spelersniveau",
     "GUILLOTINE": "Breng [1,2,3,SP] x ATK SPECIAL toe aan het doelwit. Herstel de helft van de gebruiker's PP als het doelwit KO'd is",

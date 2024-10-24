@@ -1208,7 +1208,6 @@
     "PROTECT": "PROTECT người chơi, trở nên bất khả xâm phạm trong [1,3,5,SP=0.5] giây",
     "BLIZZARD": "FREEZE tất cả Pokémon đối thủ trong 2 giây và gây [5,10,15,SP] SPECIAL. Gấp đôi sát thương nếu kẻ địch đã FREEZE",
     "CONFUSION": "Mục tiêu bị CONFUSION và SILENCE trong [3,5,7] giây. Nếu đã CONFUSION, gây [75,150,300,SP] SPECIAL",
-    "FIRE_BLAST": "Sử dụng Fire Blast gây [30,60,120,SP] SPECIAL tới mục tiêu",
     "WHEEL_OF_FIRE": "Bắn ra vòng xoáy lửa, gây 2 lần [10,20,30,SP] SPECIAL cho tất cả pokemon bị trúng đòn",
     "SEISMIC_TOSS": "Gây [5,10,20,SP] TRUE lên mục tiêu nhân với cấp độ người chơi của bạn",
     "GUILLOTINE": "Gây [1,2,3,SP] x ATK SPECIAL lên mục tiêu. Hồi phục một nửa PP nếu đối thủ bị tiêu diệt",
