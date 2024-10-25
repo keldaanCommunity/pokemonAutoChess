@@ -105,3 +105,4 @@
 - New scribble rule: Desperate moves
 - Remove Glitch trainer title. Too many annoying bug reports.
 - Remove Backer title to be up to date with the new tipee.
+- Changed account experience reward by rank: 700/500/400/300/200/150/100/50 → 700/400/350/300/250/200/200/200

@@ -112,7 +112,7 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
 
 export const RequiredStageLevelForXpElligibility = 10
 
-export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 50]
+export const ExpPlace = [700, 400, 350, 300, 250, 200, 200, 200]
 
 export const RarityColor: { [key in Rarity]: string } = {
   [Rarity.COMMON]: "#a0a0a0",
