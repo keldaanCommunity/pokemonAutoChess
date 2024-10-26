@@ -34,7 +34,9 @@ import {
   setPassword,
   setUser,
   setWhiteList,
-  setBlackList
+  setBlackList,
+  setMinRank,
+  setMaxRank
 } from "../stores/PreparationStore"
 import Chat from "./component/chat/chat"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
@@ -139,6 +141,14 @@ export default function Preparation() {
 
       r.state.listen("noElo", (value, previousValue) => {
         dispatch(setNoELO(value))
+      })
+
+      r.state.listen("minRank", (value, previousValue) => {
+        dispatch(setMinRank(value))
+      })
+
+      r.state.listen("maxRank", (value, previousValue) => {
+        dispatch(setMaxRank(value))
       })
 
       r.state.listen("whitelist", (value, previousValue) => {

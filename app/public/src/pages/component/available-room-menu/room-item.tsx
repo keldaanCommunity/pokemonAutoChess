@@ -3,11 +3,12 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import { IPreparationMetadata } from "../../../../../types"
 import {
+  EloRank,
   EloRankThreshold,
   MAX_PLAYERS_PER_GAME
 } from "../../../../../types/Config"
 import { GameMode } from "../../../../../types/enum/Game"
-import { getRank } from "../../../../../utils/elo"
+import { formatMinMaxRanks, getRank } from "../../../../../utils/elo"
 import { useAppSelector } from "../../../hooks"
 import { cc } from "../../utils/jsx"
 import "./room-item.css"
@@ -67,6 +68,7 @@ export default function RoomItem(props: {
   return (
     <div className="room-item my-box">
       <span className="room-name" title={title}>
+        {props.room.metadata?.gameMode === GameMode.CUSTOM_LOBBY && (formatMinMaxRanks(props.room.metadata?.minRank as EloRank | null, props.room.metadata?.maxRank as EloRank | null) + " ")}
         {props.room.metadata?.name}
       </span>
       {props.room.metadata?.password && (

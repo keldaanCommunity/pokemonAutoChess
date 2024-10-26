@@ -86,10 +86,7 @@
 - Clarify Protective Pads only preventing recoil ***damage** and not status effects like confusion
 - Buff Repeat Ball: reduce the cost of Unique/Legendaries in shop, and the number of rerolls required to get them
 - Buff Rare Candy for Halloween: remove stat maluses
-
-# UI
-
-- New features for the team planner: snapshot current board, quick reset, save/load local file
+- Pokemons become shiny when given Shiny Charm
 
 # Bugfix
 
@@ -102,8 +99,10 @@
 
 # Misc
 
-- Pokemons become shiny when given Shiny Charm
-- Thanks to all the contributors who helped with the translations! 3zukiDOT, Darkatek7, danGuinzo, logannoir, ph8ndstne, Zeleos753, RambonL, Tok1013-8, mokers-creater and more
+- Changed account experience reward by rank: 700/500/400/300/200/150/100/50 → 700/400/350/300/250/200/200/200
+- Allow to specify minimum and maximum rank allowed in custom lobbies. These are shown in the room name.
+- New features for the team planner: snapshot current board, quick reset, save/load local file
 - New scribble rule: Desperate moves
 - Remove Glitch trainer title. Too many annoying bug reports.
 - Remove Backer title to be up to date with the new tipee.
+- Thanks to all the contributors who helped with the translations! 3zukiDOT, Darkatek7, danGuinzo, logannoir, ph8ndstne, Zeleos753, RambonL, Tok1013-8, mokers-creater, SeaCello, Maogee, PierreBhs and more

@@ -19,6 +19,7 @@ import {
   OnLeaveCommand,
   OnNewMessageCommand,
   OnRemoveBotCommand,
+  OnRoomChangeRankCommand,
   OnRoomNameCommand,
   OnRoomPasswordCommand,
   OnToggleEloCommand,
@@ -55,6 +56,14 @@ export default class PreparationRoom extends Room<PreparationState> {
   async toggleElo(noElo: boolean) {
     await this.setMetadata(<IPreparationMetadata>{
       noElo: noElo
+    })
+    updateLobby(this)
+  }
+
+  async setMinMaxRanks(minRank: EloRank, maxRank: EloRank) {
+    await this.setMetadata(<IPreparationMetadata>{
+      minRank: minRank,
+      maxRank: maxRank
     })
     updateLobby(this)
   }
@@ -206,6 +215,22 @@ export default class PreparationRoom extends Room<PreparationState> {
         logger.error(error)
       }
     })
+
+    this.onMessage(
+      Transfer.CHANGE_ROOM_RANKS,
+      (client, { minRank, maxRank }) => {
+        logger.info(Transfer.CHANGE_ROOM_RANKS, this.roomName, minRank, maxRank)
+        try {
+          this.dispatcher.dispatch(new OnRoomChangeRankCommand(), {
+            client,
+            minRank,
+            maxRank
+          })
+        } catch (error) {
+          logger.error(error)
+        }
+      }
+    )
 
     this.onMessage(Transfer.TOGGLE_NO_ELO, (client, message) => {
       logger.info(Transfer.TOGGLE_NO_ELO, this.roomName)

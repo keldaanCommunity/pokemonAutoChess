@@ -5,8 +5,9 @@ import { FilterQuery } from "mongoose"
 import { GameUser, IGameUser } from "../../models/colyseus-models/game-user"
 import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
 import UserMetadata from "../../models/mongo-models/user-metadata"
-import { Role, Transfer } from "../../types"
+import { Role } from "../../types"
 import {
+  EloRank,
   EloRankThreshold,
   MAX_PLAYERS_PER_GAME,
   MIN_HUMAN_PLAYERS
@@ -353,6 +354,35 @@ export class OnRoomPasswordCommand extends Command<
       ) {
         this.room.setPassword(password)
         this.state.password = password
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
+
+export class OnRoomChangeRankCommand extends Command<
+  PreparationRoom,
+  {
+    client: Client
+    minRank: EloRank | null
+    maxRank: EloRank | null
+  }
+> {
+  execute({ client, minRank, maxRank }) {
+    try {
+      if (
+        client.auth?.uid == this.state.ownerId &&
+        (minRank !== this.state.minRank || maxRank !== this.state.maxRank)
+      ) {
+        if (EloRankThreshold[minRank] > EloRankThreshold[maxRank]) {
+          if (minRank !== this.state.minRank) maxRank = minRank
+          else minRank = maxRank
+        }
+
+        this.room.setMinMaxRanks(minRank, maxRank)
+        this.state.minRank = minRank
+        this.state.maxRank = maxRank
       }
     } catch (error) {
       logger.error(error)
