@@ -53,8 +53,9 @@ export abstract class EvolutionRule {
         pokemonEvolved.passive !== Passive.COSMOEM
       ) {
         pokemon.hp += 10
-        pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
       }
+      // check evolutions again if it can evolve twice in a row
+      pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
     })
   }
 }

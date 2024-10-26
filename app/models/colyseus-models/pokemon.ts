@@ -92,6 +92,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("boolean") shiny: boolean
   @type("string") emotion: Emotion
   @type("string") action: PokemonActionState = PokemonActionState.IDLE
+  deathCount: number = 0
   evolutionRule: EvolutionRule = new CountEvolutionRule(3)
   additional = false
   regional = false
@@ -12593,7 +12594,7 @@ export class Corsola extends Pokemon {
   passive = Passive.CORSOLA
   evolution = Pkm.GALAR_CORSOLA
   evolutionRule = new ConditionBasedEvolutionRule(
-    (pokemon, player, stageLevel) => stageLevel >= 99 // natural death
+    (pokemon) => pokemon.deathCount > 0
   )
   regional = true
 }

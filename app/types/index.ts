@@ -410,6 +410,7 @@ export interface IPokemon {
   canBePlaced: boolean
   canBeCloned: boolean
   canHoldItems: boolean
+  deathCount: number
 }
 
 export interface IExperienceManager {
