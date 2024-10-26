@@ -6645,10 +6645,33 @@ export class Primeape extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIGHTING])
   rarity = Rarity.EPIC
   stars = 2
+  evolution = Pkm.ANNIHILAPE
+  evolutionRule = new ConditionBasedEvolutionRule(
+    (pokemon) => pokemon.atk >= 30
+  )
   hp = 240
   atk = 21
   def = 6
   speDef = 2
+  maxPP = 90
+  range = 1
+  skill = Ability.THRASH
+  passive = Passive.PRIMEAPE
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
+
+export class Annihilape extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.FIGHTING,
+    Synergy.GHOST
+  ])
+  rarity = Rarity.EPIC
+  stars = 3
+  hp = 320
+  atk = 30
+  def = 6
+  speDef = 7
   maxPP = 90
   range = 1
   skill = Ability.THRASH
@@ -15697,6 +15720,7 @@ export const PokemonClasses: Record<
   [Pkm.MILTANK]: Miltank,
   [Pkm.MANKEY]: Mankey,
   [Pkm.PRIMEAPE]: Primeape,
+  [Pkm.ANNIHILAPE]: Annihilape,
   [Pkm.SUNKERN]: Sunkern,
   [Pkm.SUNFLORA]: Sunflora,
   [Pkm.MARACTUS]: Maractus,

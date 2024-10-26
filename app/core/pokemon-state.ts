@@ -562,6 +562,10 @@ export default abstract class PokemonState {
         } else {
           death = true
         }
+
+        if (pokemon.passive === Passive.PRIMEAPE) {
+          pokemon.refToBoardPokemon.atk += 1
+        }
       }
 
       if (death) {
