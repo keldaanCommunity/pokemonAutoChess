@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { GameUser, IGameUser } from "../../../models/colyseus-models/game-user"
 import Message from "../../../models/colyseus-models/message"
 import { IChatV2 } from "../../../types"
+import { EloRank } from "../../../types/enum/EloRank"
 import { GameMode } from "../../../types/enum/Game"
 
 export interface IUserPreparationState {
@@ -13,6 +14,8 @@ export interface IUserPreparationState {
   name: string
   password: string | null
   noElo: boolean
+  minRank: EloRank | null
+  maxRank: EloRank | null
   user: GameUser | undefined
   gameMode: GameMode
   whitelist: string[]
@@ -29,6 +32,8 @@ const initialState: IUserPreparationState = {
   user: undefined,
   password: null,
   noElo: false,
+  minRank: null,
+  maxRank: null,
   gameMode: GameMode.CUSTOM_LOBBY,
   whitelist: [],
   blacklist: []
@@ -86,6 +91,12 @@ export const preparationSlice = createSlice({
     setNoELO: (state, action: PayloadAction<boolean>) => {
       state.noElo = action.payload
     },
+    setMinRank: (state, action: PayloadAction<EloRank | null>) => {
+      state.minRank = action.payload
+    },
+    setMaxRank: (state, action: PayloadAction<EloRank | null>) => {
+      state.maxRank = action.payload
+    },
     setGameMode: (state, action: PayloadAction<GameMode>) => {
       state.gameMode = action.payload
     },
@@ -112,6 +123,8 @@ export const {
   setOwnerName,
   setPassword,
   setNoELO,
+  setMinRank,
+  setMaxRank,
   setWhiteList,
   setBlackList,
   setGameMode,

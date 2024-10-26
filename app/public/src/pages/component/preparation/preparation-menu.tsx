@@ -5,14 +5,16 @@ import { useTranslation } from "react-i18next"
 import { IGameUser } from "../../../../../models/colyseus-models/game-user"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import { Role } from "../../../../../types"
-import { BOTS_ENABLED, MAX_PLAYERS_PER_GAME } from "../../../../../types/Config"
+import { BOTS_ENABLED, EloRank, EloRankThreshold, MAX_PLAYERS_PER_GAME } from "../../../../../types/Config"
 import { BotDifficulty, GameMode } from "../../../../../types/enum/Game"
+import { formatMinMaxRanks } from "../../../../../utils/elo"
 import { throttle } from "../../../../../utils/function"
 import { max } from "../../../../../utils/number"
 import { setTitleNotificationIcon } from "../../../../../utils/window"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   addBot,
+  changeRoomMinMaxRanks,
   changeRoomName,
   changeRoomPassword,
   deleteRoom,
@@ -31,15 +33,14 @@ export default function PreparationMenu() {
   const [inputValue, setInputValue] = useState<string>("")
   const users: IGameUser[] = useAppSelector((state) => state.preparation.users)
   const user = useAppSelector((state) => state.preparation.user)
-  const ownerName: string = useAppSelector(
-    (state) => state.preparation.ownerName
-  )
   const name: string = useAppSelector((state) => state.preparation.name)
   const ownerId: string = useAppSelector((state) => state.preparation.ownerId)
   const password: string | null = useAppSelector(
     (state) => state.preparation.password
   )
   const noElo: boolean = useAppSelector((state) => state.preparation.noElo)
+  const minRank = useAppSelector((state) => state.preparation.minRank)
+  const maxRank = useAppSelector((state) => state.preparation.maxRank)
   const [showBotSelectModal, setShowBotSelectModal] = useState(false)
   const uid: string = useAppSelector((state) => state.network.uid)
   const isOwner: boolean = useAppSelector(
@@ -129,6 +130,20 @@ export default function PreparationMenu() {
     </button>
   )
 
+  const changeMinRank = (newMinRank: EloRank) => {
+    dispatch(changeRoomMinMaxRanks({
+      minRank: newMinRank,
+      maxRank: maxRank
+    }))
+  }
+
+  const changeMaxRank = (newMaxRank: EloRank) => {
+    dispatch(changeRoomMinMaxRanks({
+      minRank: minRank,
+      maxRank: newMaxRank
+    }))
+  }
+
   const headerMessage = (
     <>
       {gameMode === GameMode.RANKED && <p>{t("ranked_game_hint")}</p>}
@@ -207,6 +222,13 @@ export default function PreparationMenu() {
       </button>
     )
 
+  const minMaxRanks = gameMode === GameMode.CUSTOM_LOBBY && isOwner && !noElo && (
+    <>
+      <RankSelect label={t("minimum_rank")} value={minRank ?? EloRank.BEGINNER} onChange={changeMinRank} />
+      <RankSelect label={t("maximum_rank")} value={maxRank ?? EloRank.MASTERBALL} onChange={changeMaxRank} />
+    </>
+  )
+
   const roomNameInput = gameMode === GameMode.CUSTOM_LOBBY &&
     (isModerator || isAdmin) &&
     user &&
@@ -231,7 +253,7 @@ export default function PreparationMenu() {
       </div>
     )
 
-  const botControls = gameMode === GameMode.CUSTOM_LOBBY && BOTS_ENABLED && (isOwner || isAdmin) && (
+  const botControls = gameMode === GameMode.CUSTOM_LOBBY && (isOwner || isAdmin) && (
     <div className="my-input-group">
       <button
         className="bubbly blue"
@@ -263,13 +285,7 @@ export default function PreparationMenu() {
 
   const roomInfo = gameMode === GameMode.CUSTOM_LOBBY && (
     <p className="room-info">
-      {t("room_leader")}: {ownerName}{" "}
-      {password && (
-        <>
-          {" - "}
-          {t("room_password")}: {password}
-        </>
-      )}
+      {password && <>{t("room_password")}: <b>{password}</b></>}
     </p>
   )
 
@@ -301,7 +317,7 @@ export default function PreparationMenu() {
     <div className="preparation-menu my-container is-centered custom-bg">
       <header>
         <h1>
-          {name}: {users.length}/{nbExpectedPlayers}
+          {formatMinMaxRanks(minRank, maxRank)} {name}: {users.length}/{nbExpectedPlayers}
         </h1>
         {headerMessage}
       </header>
@@ -325,14 +341,18 @@ export default function PreparationMenu() {
         {deleteRoomButton}
       </div>
 
-      <div className="actions">
+      {(BOTS_ENABLED || isAdmin) && <div className="actions">
         {botControls}
-        <div className="spacer"></div>
-        {roomPrivateButton}
+      </div>}
+
+      <div className="actions">
         {roomEloButton}
+        {minMaxRanks}
+        <div className="spacer" />
       </div>
 
       <div className="actions">
+        {roomPrivateButton}
         {roomInfo}
         <div className="spacer" />
         {readyButton}
@@ -342,4 +362,18 @@ export default function PreparationMenu() {
       {isOwner && showBotSelectModal && <BotSelectModal botsSelected={users.filter((u) => u.isBot).map(u => u.uid)} close={() => setShowBotSelectModal(false)} />}
     </div>
   )
+}
+
+export function RankSelect(props: { label: string; value: EloRank; onChange: (rank: EloRank) => void }) {
+  const { t } = useTranslation()
+  return <label>
+    {props.label}
+    <select value={props.value} onChange={e => props.onChange(e.target.value as EloRank)} style={{ marginLeft: '0.5em' }}>
+      {Object.values(EloRank).map((rank) => (
+        <option key={rank} value={rank}>
+          {t("elorank." + rank)} ({EloRankThreshold[rank]})
+        </option>
+      ))}
+    </select>
+  </label>
 }
