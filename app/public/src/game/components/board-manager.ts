@@ -2,7 +2,6 @@ import { t } from "i18next"
 import { GameObjects } from "phaser"
 import { NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import Player from "../../../../models/colyseus-models/player"
-import { isOnBench } from "../../../../models/colyseus-models/pokemon"
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import GameState from "../../../../rooms/states/game-state"
@@ -201,7 +200,7 @@ export default class BoardManager {
     }
 
     this.player.board.forEach((pokemon) => {
-      if (this.mode === BoardMode.PICK || isOnBench(pokemon)) {
+      if (this.mode === BoardMode.PICK || pokemon.isOnBench) {
         this.addPokemonSprite(pokemon)
       }
     })

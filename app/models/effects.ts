@@ -1,5 +1,5 @@
 import { MapSchema, SetSchema } from "@colyseus/schema"
-import { isOnBench, Pokemon } from "../models/colyseus-models/pokemon"
+import { Pokemon } from "../models/colyseus-models/pokemon"
 import { SynergyTriggers } from "../types/Config"
 import { Ability } from "../types/enum/Ability"
 import { Effect } from "../types/enum/Effect"
@@ -22,7 +22,7 @@ export class Effects extends SetSchema<Effect> {
     })
 
     board.forEach((p) => {
-      if (!isOnBench(p)) {
+      if (!p.isOnBench) {
         if (p.skill === Ability.GRASSY_SURGE) {
           this.add(Effect.GRASSY_TERRAIN)
         }

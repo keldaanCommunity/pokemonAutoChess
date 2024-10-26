@@ -19,7 +19,6 @@ import "./team-builder.css"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
-import { isOnBench } from "../../../../../models/colyseus-models/pokemon"
 import { values } from "../../../../../utils/schemas"
 
 export default function TeamBuilder(props: {
@@ -184,7 +183,7 @@ export default function TeamBuilder(props: {
   function snapshot() {
     try {
       if (!currentPlayer) return;
-      updateBoard(values(currentPlayer.board).filter(pokemon => !isOnBench(pokemon)).map(p => {
+      updateBoard(values(currentPlayer.board).filter(pokemon => !pokemon.isOnBench).map(p => {
         return {
           name: p.name,
           emotion: p.emotion,
