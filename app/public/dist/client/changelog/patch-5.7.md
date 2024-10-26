@@ -98,7 +98,7 @@
 # Misc
 
 - Changed account experience reward by rank: 700/500/400/300/200/150/100/50 → 700/400/350/300/250/200/200/200
-- Allow to specify minimum and maxiumm rank allowed in custom lobbies. These are shown in the room name.
+- Allow to specify minimum and maximum rank allowed in custom lobbies. These are shown in the room name.
 - New features for the team planner: snapshot current board, quick reset, save/load local file
 - New scribble rule: Desperate moves
 - Remove Glitch trainer title. Too many annoying bug reports.
