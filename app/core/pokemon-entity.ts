@@ -1460,6 +1460,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   // called after death (does not proc if resurection)
   onDeath({ board }: { board: Board }) {
+    this.refToBoardPokemon.deathCount++
     const isWorkUp = this.effects.has(Effect.BULK_UP)
     const isRage = this.effects.has(Effect.RAGE)
     const isAngerPoint = this.effects.has(Effect.ANGER_POINT)
@@ -1522,20 +1523,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           )
         }
       })
-    }
-
-    const player = this.player
-    if (this.passive === Passive.CORSOLA && player instanceof Player) {
-      const galarCorsola = this.refToBoardPokemon.evolutionRule.evolve(
-        this.refToBoardPokemon as Pokemon,
-        player,
-        this.simulation.stageLevel
-      )
-      galarCorsola.evolutionRule.tryEvolve(
-        galarCorsola,
-        player,
-        this.simulation.stageLevel
-      )
     }
   }
 

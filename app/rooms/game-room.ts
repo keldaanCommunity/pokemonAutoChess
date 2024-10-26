@@ -923,9 +923,6 @@ export default class GameRoom extends Room<GameState> {
         )
         if (pokemonEvolved) {
           hasEvolved = true
-
-          // check item evolution rule after count evolution (example: Porygon-2)
-          this.checkEvolutionsAfterItemAcquired(playerId, pokemonEvolved)
         }
       }
     })
@@ -947,10 +944,6 @@ export default class GameRoom extends Room<GameState> {
         player,
         this.state.stageLevel
       )
-      if (pokemonEvolved) {
-        // check additional item evolution rules. Not used yet in the game but we never know
-        this.checkEvolutionsAfterItemAcquired(playerId, pokemonEvolved)
-      }
     }
   }
 

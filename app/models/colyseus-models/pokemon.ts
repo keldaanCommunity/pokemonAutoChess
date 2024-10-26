@@ -92,6 +92,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("boolean") shiny: boolean
   @type("string") emotion: Emotion
   @type("string") action: PokemonActionState = PokemonActionState.IDLE
+  deathCount: number = 0
   evolutionRule: EvolutionRule = new CountEvolutionRule(3)
   additional = false
   regional = false
@@ -6644,10 +6645,33 @@ export class Primeape extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIGHTING])
   rarity = Rarity.EPIC
   stars = 2
+  evolution = Pkm.ANNIHILAPE
+  evolutionRule = new ConditionBasedEvolutionRule(
+    (pokemon) => pokemon.atk >= 30
+  )
   hp = 240
   atk = 21
   def = 6
   speDef = 2
+  maxPP = 90
+  range = 1
+  skill = Ability.THRASH
+  passive = Passive.PRIMEAPE
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
+
+export class Annihilape extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.FIGHTING,
+    Synergy.GHOST
+  ])
+  rarity = Rarity.EPIC
+  stars = 3
+  hp = 320
+  atk = 30
+  def = 6
+  speDef = 7
   maxPP = 90
   range = 1
   skill = Ability.THRASH
@@ -12593,7 +12617,7 @@ export class Corsola extends Pokemon {
   passive = Passive.CORSOLA
   evolution = Pkm.GALAR_CORSOLA
   evolutionRule = new ConditionBasedEvolutionRule(
-    (pokemon, player, stageLevel) => stageLevel >= 99 // natural death
+    (pokemon) => pokemon.deathCount > 0
   )
   regional = true
 }
@@ -15696,6 +15720,7 @@ export const PokemonClasses: Record<
   [Pkm.MILTANK]: Miltank,
   [Pkm.MANKEY]: Mankey,
   [Pkm.PRIMEAPE]: Primeape,
+  [Pkm.ANNIHILAPE]: Annihilape,
   [Pkm.SUNKERN]: Sunkern,
   [Pkm.SUNFLORA]: Sunflora,
   [Pkm.MARACTUS]: Maractus,
