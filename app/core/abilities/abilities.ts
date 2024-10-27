@@ -8453,7 +8453,6 @@ export class SunsteelStrikeStrategy extends AbilityStrategy {
                 pokemon,
                 crit
               )
-              cell.value.status.triggerBurn(3000, cell.value, pokemon)
             }
           })
         }, 1000)

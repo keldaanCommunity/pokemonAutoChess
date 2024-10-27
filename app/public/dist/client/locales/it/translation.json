@@ -1552,7 +1552,7 @@
     "STICKY_WEB": "Infliggi [20,35,70,SP] SPECIAL e proietta una ragnatela attorno al bersaglio. I Pokèmon che ci camminano sopra sono sotto PARALYSIS per 2 secondi.",
     "ACCELEROCK": "Salta verso il nemico più lontano ed attaccalo immediatamente, infliggendogli [100,SP]% dell'ATK come SPECIAL. Perdi fino a [5,SP] di DEF e guadagna 5% di ATK_SPEED per ogni punto di DEF perso.",
     "PETAL_BLIZZARD": "Infliggi [30,SP] SPECIAL ai nemici adiacenti e guadagna 10 AP",
-    "SUNSTEEL_STRIKE": "Piomba nel mezzo della squadra nemica col il potere di un meteorite, infliggendo [80,SP] SPECIAL ai nemici adiacenti e causa loro BURN per 3 secondi.",
+    "SUNSTEEL_STRIKE": "Piomba nel mezzo della squadra nemica col il potere di un meteorite, infliggendo [80,SP] SPECIAL ai nemici adiacenti",
     "MOONGEIST_BEAM": "Infliggi [100,SP] SPECIAL a tutti i Pokèmon nemici in una linea retta e causa loro PARALYSIS per 3 secondi. I Pokèmon alleati dentro il raggio ottengono [100,SP] SHIELD.",
     "FLEUR_CANNON": "Scaglia un laser devastante che infligge [120,SP] SPECIAL a tutti i nemici nel raggio laser. Riduci i AP dell'utilizzatore di 20.",
     "SPIRIT_BREAK": "Infliggi [20,40,80,SP] SPECIAL e riduci gli AP del bersaglio di [20,SP].",

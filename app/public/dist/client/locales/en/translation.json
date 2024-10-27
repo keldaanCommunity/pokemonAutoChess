@@ -1558,7 +1558,7 @@
     "STICKY_WEB": "Inflicts [20,35,70,SP] SPECIAL on the target and projects a web around it. Pokémon walking on the web are PARALYSIS for 2 seconds.",
     "ACCELEROCK": "Jumps next to the farthest enemy and attack it immediately, dealing [100,SP]% of ATK as SPECIAL. In the process, lose up to [5,SP] DEF and gain 5% ATK_SPEED for each DEF point lost.",
     "PETAL_BLIZZARD": "Deals [30,SP] SPECIAL to surounding enemies and gain 10 AP",
-    "SUNSTEEL_STRIKE": "Jumps and lands in the middle of the enemy team with the power of a meteor, inflicting [80,SP] SPECIAL to adjacent enemies and BURN for 3 seconds",
+    "SUNSTEEL_STRIKE": "Jumps and lands in the middle of the enemy team with the power of a meteor, inflicting [80,SP] SPECIAL to adjacent enemies",
     "MOONGEIST_BEAM": "Deals [100,SP] SPECIAL to all enemy Pokémon in a straight line and make them PARALYSIS for 3 seconds. Allies in the beam gain [100,SP] SHIELD.",
     "FLEUR_CANNON": "Sends a devastating laser beam that inflicts [120,SP] SPECIAL on all enemies in the beam. Reduces the AP of the caster by 20",
     "SPIRIT_BREAK": "Deals [20,40,80,SP] SPECIAL and lowers the target's AP by [20,SP]",

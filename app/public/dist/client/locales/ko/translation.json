@@ -1539,7 +1539,7 @@
     "STICKY_WEB": "타겟에게 [20,35,70,SP] SPECIAL을 입히고 대상 주위에 거미줄을 설치한다. 거미줄 위를 걷는 포켓몬은 2초 동안 PARALYSIS에 빠진다.",
     "ACCELEROCK": "가장 먼 적 옆으로 점프하여 즉시 공격하며 ATK 의 [100,SP]%만큼을 SPECIAL로 입힌다. 이 과정에서 최대 [5,SP]의 DEF 를 잃고, 잃은 1  DEF 포인트당 ATK_SPEED가 5% 증가한다.",
     "PETAL_BLIZZARD": "주변 적에게 [30,SP] SPECIAL 를 가하고 10 AP를 얻는다.",
-    "SUNSTEEL_STRIKE": "운석의 힘으로 적팀 중앙에 점프하여 착지하며 인접한 적에게 [80,SP] SPECIAL을 입히고 3초간 BURN 을 부여한다.",
+    "SUNSTEEL_STRIKE": "운석의 힘으로 적팀 중앙에 점프하여 착지하며 인접한 적에게 [80,SP] SPECIAL을 입히고",
     "MOONGEIST_BEAM": "직선상의 모든 적 포켓몬에게 [100,SP]의 SPECIAL 를 입히고 3초 동안 PARALYSIS 로 만든다. 빔 범위 안의 아군은 [100,SP]의 SHIELD를 얻는다.",
     "FLEUR_CANNON": " 범위 내의 모든 적에게 [120, SP]의 SPECIAL 을 입히는 레이저 빔을 발사한다. 자신의 AP를 20만큼 감소시킨다.",
     "SPIRIT_BREAK": "[20,40,80,SP] SPECIAL을 입히고 타겟의 AP를 [20,SP]만큼 낮춘다.",
