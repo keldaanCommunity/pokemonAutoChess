@@ -1361,6 +1361,7 @@
     "BEAT_UP": "Invoquer [1,2,3] Houndour ([100,SP]% HP, aucun objet)",
     "BLUE_FLARE": "Inflige [50,SP] SPECIAL + 20 par niveau de synergie FIRE à la cible et aux ennemis adjacents",
     "FUSION_BOLT": "Inflige [50,SP] SPECIAL + 40 par niveau de synergie ELECTRIC à la cible et aux ennemis adjacents",
+    "GLACIATE": "Inflige [50,SP] SPECIAL + 20 par niveau de synergie ICE à la cible et aux ennemis adjacents",
     "AURORA_VEIL": "Tous les alliés reçoivent [5,10,15,SP] SHIELD et RUNE_PROTECT pendant 0.5 secondes",
     "AQUA_JET": "Fonce dans la ligne de fond ennemie, infligeant [30,60,120,SP] SPECIAL à tous les ennemis sur le chemin",
     "JUDGEMENT": "Inflige [10,SP] SPECIAL à la cible, multipliés par la somme des niveaux de synergies d'Arceus",
@@ -1622,7 +1623,16 @@
     "IVY_CUDGEL": "Inflige [100,SP] SPECIAL à la cible",
     "FORCE_PALM": "Inflige [60,SP] + 10% des HP max de la cible en SPECIAL et PARALYSIS pendant 6 secondes. Si la cible est déjà PARALYSIS, inflige [40,SP] SPECIAL supplémentaires et repousse la cible en arrière.",
     "THUNDER_CAGE": "Piège la cible et les adversaires adjacents dans une prison électrique qui inflige [60,SP] SPECIAL et LOCKED et PARALYSIS pendant 3 secondes.",
-    "HEADBUTT": "Inflige [20,40,80,SP] SPECIAL à la cible et inflige FLINCH pendant 5 secondes. Double les dégâts si la cible a un SHIELD."
+    "HEADBUTT": "Inflige [20,40,80,SP] SPECIAL à la cible et inflige FLINCH pendant 5 secondes. Double les dégâts si la cible a un SHIELD.",
+    "STEEL_WING": "Saute vers la ligne arrière adverse, infligeant [10,20,40,SP] SPECIAL + 3x DEF en SPECIAL et volant 1 DEF à tous les adversaires touchés.",
+    "YAWN": "Gagne [20,40,80,SP] SHIELD. Les adversaires qui ciblent le lanceur subissent FATIGUE pendant 4 secondes et perdent 30% AP.",
+    "FIERY_DANCE": "Enveloppé de flammes, le lanceur danse et bat des ailes, infligeant [25,50,100,SP] SPECIAL à la cible. Augmente ensuite la AP du lanceur de 30.",
+    "BIDE": "Le lanceur est incapable de bouger pendant 3 secondes, puis inflige en SPECIAL aux adversaires adjacents le double des dégâts reçus pendant ce délai.",
+    "SHORE_UP": "Soigne le lanceur de [20,25,SP]% des HP max. Si la météo est SANDSTORM, le soin augmente à [30,35,SP]% des HP max.",
+    "POISON_STING": "Inflige [2,3,4] cumuls de POISONNED à la cible. Chaque cumul au delà du maximum inflige immédiatement [25,50,100,SP] SPECIAL.",
+    "TRANSE": "Sort de sa méditation et recommence à attaquer et se déplacer, mais ne se soigne plus passivement.",
+    "WOOD_HAMMER": "Inflige [300,SP]% de l'ATK en SPECIAL à la cible",
+    "TRICK_OR_TREAT": "La cible doit céder au lanceur l'un de ses objets. Si elle n'en a pas, elle reçoit un maléfice dont l'effet varie selon la AP du lanceur."
   },
   "effect": {
     "INGRAIN": "Enraciné",
