@@ -3228,7 +3228,8 @@
     "CROWDED": "Plateau encombré",
     "KECLEONS_SHOP": "Magasin de Kecleon",
     "FREE_MARKET": "Marché libre",
-    "SHINY_HUNTER": "Chasseur de Shiny"
+    "SHINY_HUNTER": "Chasseur de Shiny",
+    "DESPERATE_MOVES": "Relances désespérées"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "Tous les Pokémons additionnels sont disponibles immédiatement",
@@ -3245,7 +3246,8 @@
     "CROWDED": "+3 unités maximum sur le plateau",
     "KECLEONS_SHOP": "Les carousels d'objets sont remplacés par le magasin de Kecleon qui vous propose 6 objets pour 10 GOLD pièce",
     "FREE_MARKET": "Les Pokémons s'achètent et se vendent pour 0 GOLD",
-    "SHINY_HUNTER": "Toutes les rencontres PvE sont des shiny"
+    "SHINY_HUNTER": "Toutes les rencontres PvE sont des shiny",
+    "DESPERATE_MOVES": "Les joueurs commencent à 150 HP. Les relances du magasin coutent des HP au lieu de GOLD."
   },
   "loading_hints": {
     "tab_out": "Ne changez pas d'onglet ! Le chargement est mis en pause si cette fenêtre est inactive.",
@@ -3274,6 +3276,8 @@
     "arceus_rate": "Chance de trouver $t(pkm.ARCEUS) dans les propositions du tour 20",
     "fishing_rarity_rate": "Rareté des Pokémons péchés en fonction de la canne à pêche",
     "fishing_rarity_rate_description": "La qualité de la canne à pêche influence la rareté des Pokémons que vous pouvez attraper.",
+    "round_damage_calculation": "Calcul des dégâts d'une manche perdue",
+    "round_damage_calculation_description": "Les dégâts infligés au joueur après avoir perdu une manche sont calculés ainsi: Dégâts = (tour / 2) + (nombre d'unités adverses en vie)",
     "pool_size_per_category": "Nombre de spécimens dans la pioche par catégorie",
     "pool_size_per_category_description": "Les Pokémons que vous trouvez dans vos magasins sont tirés d'une pioche partagée par tous les joueurs. Le nombre de spécimens de chaque espèce dans cette pioche dépend de la rareté et du nombre d'étapes d'évolutions de cette espèce."
   },
