@@ -13,6 +13,7 @@ import {
   Title,
   Transfer
 } from "../../../types"
+import { EloRank } from "../../../types/Config"
 import { BotDifficulty } from "../../../types/enum/Game"
 import { Item } from "../../../types/enum/Item"
 import { Language } from "../../../types/enum/Language"
@@ -186,6 +187,15 @@ export const networkSlice = createSlice({
     changeRoomPassword: (state, action: PayloadAction<string | null>) => {
       state.preparation?.send(Transfer.CHANGE_ROOM_PASSWORD, action.payload)
     },
+    changeRoomMinMaxRanks: (
+      state,
+      action: PayloadAction<{
+        minRank: EloRank | null
+        maxRank: EloRank | null
+      }>
+    ) => {
+      state.preparation?.send(Transfer.CHANGE_ROOM_RANKS, action.payload)
+    },
     changeSelectedEmotion: (
       state,
       action: PayloadAction<{ index: string; emotion: Emotion; shiny: boolean }>
@@ -308,6 +318,7 @@ export const {
   buyBooster,
   changeRoomName,
   changeRoomPassword,
+  changeRoomMinMaxRanks,
   gameStartRequest,
   logIn,
   logOut,

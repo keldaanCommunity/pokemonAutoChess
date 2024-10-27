@@ -33,9 +33,9 @@ export const RarityCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.RARE]: 3,
   [Rarity.EPIC]: 4,
   [Rarity.ULTRA]: 5,
-  [Rarity.UNIQUE]: 15,
-  [Rarity.LEGENDARY]: 20,
-  [Rarity.HATCH]: 11
+  [Rarity.HATCH]: 9,
+  [Rarity.UNIQUE]: 10,
+  [Rarity.LEGENDARY]: 20
 })
 
 export const EmotionCost: { [key in Emotion]: number } = {
@@ -112,7 +112,7 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
 
 export const RequiredStageLevelForXpElligibility = 10
 
-export const ExpPlace = [700, 500, 400, 300, 200, 150, 100, 50]
+export const ExpPlace = [700, 400, 350, 300, 250, 200, 200, 200]
 
 export const RarityColor: { [key in Rarity]: string } = {
   [Rarity.COMMON]: "#a0a0a0",
@@ -675,10 +675,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.OLD_ROD]: {},
   [Item.GOOD_ROD]: {},
   [Item.SUPER_ROD]: {},
-  [Item.RARE_CANDY]: {
-    [Stat.ATK_SPEED]: -20,
-    [Stat.AP]: -30
-  },
+  [Item.RARE_CANDY]: {},
   [Item.EVIOLITE]: {
     [Stat.HP]: 100,
     [Stat.ATK]: 10,
@@ -766,5 +763,7 @@ export const MAX_SIMULATION_DELTA_TIME = 50 // milliseconds
 export const CRON_ELO_DECAY_DELAY = 86400 * 1000 * 10 // 10 days
 export const CRON_ELO_DECAY_MINIMUM_ELO = 1100
 export const CRON_HISTORY_CLEANUP_DELAY = 86400 * 1000 * 30 // 30 days
+
+export const BOTS_ENABLED = false
 
 export { EloRank }

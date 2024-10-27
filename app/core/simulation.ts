@@ -546,7 +546,7 @@ export default class Simulation extends Schema implements ISimulation {
       }
 
       team.forEach((pokemon) => {
-        if (pokemon.items.has(Item.ROTOM_PHONE)) {
+        if (pokemon.items.has(Item.ROTOM_PHONE) && !pokemon.isOnBench) {
           const teamIndex = team === this.blueTeam ? 0 : 1 // WARN: do not use player.team here because it can be a ghost opponent
           const rotomDrone = PokemonFactory.createPokemonFromName(
             Pkm.ROTOM_DRONE,
@@ -1376,7 +1376,7 @@ export default class Simulation extends Schema implements ISimulation {
 
         case Effect.ETHEREAL: {
           pokemon.effects.add(Effect.ETHEREAL)
-          pokemon.addAttackSpeed(5 * activeSynergies, pokemon, 0, false)
+          pokemon.addAttackSpeed(6 * activeSynergies, pokemon, 0, false)
           pokemon.addMaxHP(12 * activeSynergies, pokemon, 0, false)
           break
         }

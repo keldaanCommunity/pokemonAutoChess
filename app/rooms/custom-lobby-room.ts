@@ -19,17 +19,13 @@ import UserMetadata, {
 } from "../models/mongo-models/user-metadata"
 import { Emotion, IPlayer, Role, Title, Transfer } from "../types"
 import {
-  GREATBALL_RANKED_LOBBY_CRON,
   INACTIVITY_TIMEOUT,
   MAX_CONCURRENT_PLAYERS_ON_LOBBY,
   MAX_CONCURRENT_PLAYERS_ON_SERVER,
-  SCRIBBLE_LOBBY_CRON,
   TOURNAMENT_CLEANUP_DELAY,
-  TOURNAMENT_REGISTRATION_TIME,
-  ULTRABALL_RANKED_LOBBY_CRON
+  TOURNAMENT_REGISTRATION_TIME
 } from "../types/Config"
 import { CloseCodes } from "../types/enum/CloseCodes"
-import { EloRank } from "../types/enum/EloRank"
 import { GameMode } from "../types/enum/Game"
 import { Language } from "../types/enum/Language"
 import { ITournament } from "../types/interfaces/Tournament"

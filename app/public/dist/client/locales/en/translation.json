@@ -104,7 +104,6 @@
     "ROCK_SMASH": "Rock Smash",
     "HEAD_SMASH": "Head Smash",
     "ROCK_HEAD": "Rock Head",
-    "CORRUPTED_NATURE": "Corrupted Nature",
     "CRABHAMMER": "Crabhammer",
     "DIAMOND_STORM": "Diamond Storm",
     "DRACO_ENERGY": "Draco Energy",
@@ -398,7 +397,9 @@
     "SHORE_UP": "Shore Up",
     "POISON_STING": "Poison Sting",
     "TRANSE": "Transe",
-    "GLACIATE": "Glaciate"
+    "GLACIATE": "Glaciate",
+    "WOOD_HAMMER": "Wood Hammer",
+    "TRICK_OR_TREAT": "Trick-or-Treat"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -994,6 +995,7 @@
     "MILTANK": "Miltank",
     "MANKEY": "Mankey",
     "PRIMEAPE": "Primeape",
+    "ANNIHILAPE": "Annihilape",
     "SUNKERN": "Sunkern",
     "SUNFLORA": "Sunflora",
     "MARACTUS": "Maractus",
@@ -1284,7 +1286,7 @@
     "PROTECT": "PROTECT the user, becoming invulnerable for [1,3,5,SP=0.5] seconds",
     "BLIZZARD": "FREEZE all enemy Pokémon for 2 seconds and deal [5,10,15,SP] SPECIAL. Double damage if enemy is already FREEZE",
     "CONFUSION": "The target is CONFUSION and SILENCE for [3,5,7] seconds. If already CONFUSION, deal [75,150,300,SP] SPECIAL instead",
-    "FIRE_BLAST": "Shoot a Fire Blast, dealing [30,60,120,SP] SPECIAL to the target",
+    "FIRE_BLAST": "Shoot a Fire Blast in a star-shaped area of effect, dealing [20,50,80,SP] SPECIAL to all opponents hit",
     "WHEEL_OF_FIRE": "Shoot a returning Flame Wheel, dealing twice [10,20,30,SP] SPECIAL to all enemy Pokémon hit",
     "SEISMIC_TOSS": "Deal [5,10,20,SP] multiplied by your player level TRUE to the target",
     "GUILLOTINE": "Deal [1,2,3,SP] x ATK SPECIAL to the target. Restore half the user's PP if the target is KO'd",
@@ -1335,7 +1337,6 @@
     "ROCK_SMASH": "Deal [20,40,80,SP] SPECIAL to the target and SILENCE them for [3,6,9] seconds",
     "HEAD_SMASH": "The user hurts itself for [10,20,40,SP] PHYSICAL and deals [40,80,150,SP] SPECIAL to the target. Execute the target if they are SLEEP or FREEZE",
     "ROCK_HEAD": "Deal [120,SP]% of ATK + DEF as SPECIAL",
-    "CORRUPTED_NATURE": "WOUND adjacent enemy Pokémon for 5 seconds and deal [20,40,80,SP] SPECIAL to them. Restores HP for the amount of damage dealt",
     "CRABHAMMER": "Deal [40,80,120,SP] SPECIAL to the target. Execute the target if they are below 30% HP. Can crit by default with a [30,LK]% increased CRIT_CHANCE.",
     "DIAMOND_STORM": "Deal [200,SP]% of the user's DEF as SPECIAL to all adjacent enemy Pokémon",
     "DRACO_ENERGY": "Deal [100,SP]% of the user's HP as SPECIAL to the target",
@@ -1617,7 +1618,7 @@
     "FOUL_PLAY": "Deals [2,4,6,SP,ND=1] x target's ATK as SPECIAL",
     "DOUBLE_IRON_BASH": "The user rotates, centering the hex nut in its chest, and then strikes with its arms twice in a row with [150,SP] % of its ATK. This make the target FLINCH for 3 seconds.",
     "STONE_EDGE": "For [5,8] seconds, the caster SILENCE itself, gains 2 RANGE, [20,SP] CRIT_CHANCE and apply [100,SP]% of its DEF as PHYSICAL on attacks",
-    "ROAR": "Blow away the target. If it hits a wall, it suffers [10,20,40,SP] SPECIAL. If it hits another pokémon, both pokémons suffer SPECIAL.",
+    "ROAR": "Blow away the target. If it hits a wall, it suffers [20,40,80,SP] SPECIAL. If it hits another pokémon, both pokémons suffer SPECIAL.",
     "INFESTATION": "Deals [10,SP] SPECIAL to the target for each allied BUG on board and places your most powerful BUG on your bench in the fight",
     "IVY_CUDGEL": "Deals [100,SP] SPECIAL to the target",
     "FORCE_PALM": "Deals [60,SP] + 10% of target max HP as SPECIAL and PARALYSIS for 6 seconds. If it was PARALYSIS, deals an additional [40,SP] SPECIAL and push it away.",
@@ -1626,10 +1627,12 @@
     "STEEL_WING": "Dash into the enemy team's backline, dealing [10,20,40,SP] SPECIAL + 3x DEF as SPECIAL and stealing 1 DEF to all enemy Pokémon hit.",
     "YAWN": "Gain [20,40,80,SP] SHIELD. Opponents targeting this unit are FATIGUE for 4 seconds and lose 30% AP.",
     "FIERY_DANCE": "Cloaked in flames, the user dances and flaps its wings dealing [25,50,100,SP] SPECIAL to the target. Then raise the caster's AP by 30.",
-    "BIDE": "The user is unable to move for 3 secs. Bide will do SPECIAL damage equal to twice the damage received during the idling period around the user.",
+    "BIDE": "The user is unable to move for 3 seconds. Bide will do SPECIAL damage equal to twice the damage received during the idling period around the user.",
     "SHORE_UP": "Heals the caster for [20,25,SP] % HP. If the weather is a SANDSTORM, increases  to [30,35,SP] % HP.",
     "POISON_STING": "Inflicts [2,3,4] stacks of POISONNED to target. Every stack over the max deals immediately [25,50,100,SP] SPECIAL.",
-    "TRANSE": "Starts attacking and moving again, but stops passively healing."
+    "TRANSE": "Starts attacking and moving again, but stops passively healing.",
+    "WOOD_HAMMER": "Deals [300,SP]% of ATK as SPECIAL to the target, and receive recoil damage equal to 33% of the damage done",
+    "TRICK_OR_TREAT": "The target must give one of its held items to the user. If it has no held item, it receives a curse whose power increases with user AP."
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1839,7 +1842,7 @@
     "ANCIENT_POWER": "Revive with 40% HP and +30% ATK",
     "ELDER_POWER": "Revive with 80% HP and +60% ATK.",
     "FORGOTTEN_POWER": "Revive with 100% HP and +100% ATK.",
-    "LARGO": "Ally team gains +1 ATK",
+    "LARGO": "Ally team gains +2 ATK",
     "ALLEGRO": "Ally team gains +1 ATK and +5% ATK_SPEED",
     "PRESTO": "Ally team gains +1 ATK, +5% ATK_SPEED and 3 PP",
     "DUBIOUS_DISC": "Get an artificial item. It is removed when losing the synergy.",
@@ -1872,7 +1875,7 @@
     "BERSERK": "+100% ATK and move speed, RAGE 5 seconds sooner",
     "FLUID": "Ally team gains 1% ATK_SPEED and 4 HP per unique active synergy",
     "SHAPELESS": "Ally team gains 3% ATK_SPEED and 8 HP per unique active synergy",
-    "ETHEREAL": "Ally team gains 5% ATK_SPEED and 12 HP per unique active synergy"
+    "ETHEREAL": "Ally team gains 6% ATK_SPEED and 12 HP per unique active synergy"
   },
   "item": {
     "FOSSIL_STONE": "Fossil Stone",
@@ -2033,7 +2036,7 @@
     "SMOKE_BALL": "Once below 33% max HP, drop the smoke ball and jump to a cell away. Every adjacent enemy is PARALYSIS for 3 seconds, and the smoke reduce the precision of all Pokémons inside by 50%.",
     "XRAY_VISION": "+50% ATK_SPEED. The holder attacks can no longer miss.",
     "RAZOR_FANG": "+100% CRIT_POWER. Critical hits apply ARMOR_REDUCTION for 4 seconds.",
-    "PROTECTIVE_PADS": "Attacks deal double damage against SHIELD. User is protected from recoil and retaliation effects.",
+    "PROTECTIVE_PADS": "Attacks deal double damage against SHIELD. User is protected from recoil damage and retaliation effects.",
     "CHOICE_SCARF": "On hit deal 50% basic attack damage to an adjacent enemy",
     "PUNCHING_GLOVE": "Attacks deal 8 % of target max HP as additional PHYSICAL",
     "DEFENSIVE_RIBBON": "When the holder takes damage, gain 1 stack. Every 2 stacks, the holder gains +1 DEF, +1 ATK and +5% ATK_SPEED (max 20 stacks)",
@@ -2245,7 +2248,8 @@
     "DARMANITAN": "When below 50% HP, jumps to a safe place and turns into Zen Mode.",
     "DARMANITAN_ZEN": "Can no longer move or attack, but regain [10,SP] HP per second. Transforms back into Standard Mode when fully healed.",
     "BAD_LUCK": "Reduce all opponents LUCK by 20%",
-    "GOOD_LUCK": "Increase the LUCK of all allies by 20%"
+    "GOOD_LUCK": "Increase the LUCK of all allies by 20%",
+    "PRIMEAPE": "Primape becomes angrier when KO, gaining 1 permanent ATK. After Primape is knocked out 10 times, evolves into Annihilape."
   },
   "stat": {
     "ATK": "Attack",
@@ -2692,6 +2696,7 @@
   "enable_elo_hint": "Enable Elo gain or loss for this game",
   "disable_elo_hint": "Disable Elo gain or loss for this game",
   "minimum_rank": "Minimum rank",
+  "maximum_rank": "Maximum rank",
   "ranked_match": "Ranked Match",
   "ranked_match_description": "For competitors\n8 players, Elo enabled, restricted to players of your current rank",
   "ranked_game_hint": "This game is rectricted to players of your current rank",
@@ -2917,6 +2922,7 @@
   "GLHF": "GLHF",
   "not_elligible_elo_hint": "❌Games with bots only are not elligible for Elo gain/loss.",
   "add_bot_or_wait_hint": "Add bots or wait for more players to join your room",
+  "wait_for_players_hint": "Wait for more players to join your room",
   "private_game": "Private game",
   "make_room_private": "Make room private",
   "make_room_public": "Make room public",
@@ -2930,7 +2936,7 @@
   "extreme_bot": "Extreme (>1400)",
   "custom_bot": "Custom",
   "room_leader": "Room leader",
-  "room_password": "Room password",
+  "room_password": "This room is private, password",
   "ready": "Ready",
   "start_game": "Start Game",
   "select_bots_for_this_game": "Select bots for this game",

@@ -166,7 +166,7 @@ export function MainSidebar(props: MainSidebarProps) {
           </NavLink>
         )}
 
-        {page !== "game" && profileLevel >= GADGETS.BOT_BUILDER.levelRequired && (
+        {page !== "game" && ((!GADGETS.BOT_BUILDER.disabled && profileLevel >= GADGETS.BOT_BUILDER.levelRequired) || profile?.role === Role.ADMIN) && (
           <NavLink svg="bot" onClick={() => navigate("/bot-builder")}>
             {t("bot_builder")}
           </NavLink>

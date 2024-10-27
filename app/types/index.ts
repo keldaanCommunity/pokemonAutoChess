@@ -86,6 +86,7 @@ export enum Transfer {
   GAME_END = "GAME_END",
   CHANGE_ROOM_NAME = "CHANGE_ROOM_NAME",
   CHANGE_ROOM_PASSWORD = "CHANGE_ROOM_PASSWORD",
+  CHANGE_ROOM_RANKS = "CHANGE_ROOM_RANKS",
   BUY_EMOTION = "BUY_EMOTION",
   BOOSTER_CONTENT = "BOOSTER_CONTENT",
   USER = "USER",
@@ -410,6 +411,7 @@ export interface IPokemon {
   canBePlaced: boolean
   canBeCloned: boolean
   canHoldItems: boolean
+  deathCount: number
 }
 
 export interface IExperienceManager {
@@ -603,6 +605,7 @@ export interface IPokemonEntity {
   baseAtk: number
   isClone: boolean
   commands: ISimulationCommand[]
+  readonly isOnBench: boolean
 }
 
 export interface IStatus {

@@ -14,11 +14,15 @@
   text-shadow: 2px 2px 2px black;
 }
 
-.preparation-menu header p {
+.preparation-menu p,
+.preparation-menu label {
   color: white;
-  margin-bottom: 0.5em;
   text-shadow: 2px 2px 2px black;
+}
+
+.preparation-menu header p {
   text-align: center;
+  margin-bottom: 0.5em;
 }
 
 .preparation-menu header img {
@@ -57,14 +61,6 @@
 .preparation-menu .actions span {
   color: white;
   text-shadow: 1px 1px 2px black;
-}
-
-.preparation-menu .room-info {
-  color: white;
-  text-shadow: 2px 2px 2px black;
-  margin: 0 0.5em;
-  text-align: left;
-  font-weight: 600;
 }
 
 @media (width <= 640px) {
