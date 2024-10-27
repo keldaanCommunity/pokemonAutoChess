@@ -53,6 +53,7 @@
 - Nerf Groudon line: Attack 30 → 20; Nerf Earthquake (Groudon): 120 → 100 special damage
 - Nerf Sunsteel Strike (Solgaleo): remove Burn effect
 - Nerf Manectric line PP: 60 → 65
+- Nerf Marshadow: HP 250 → 220
 
 # Changes to Synergies
 
