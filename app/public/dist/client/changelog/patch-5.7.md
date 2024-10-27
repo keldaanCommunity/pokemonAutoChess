@@ -52,6 +52,7 @@
 - Nerf Sandile line: HP 100/180/240 → 80/150/220, Attack : 10/18/24 → 6/13/22, Def: 2/3/5 → 2/3/4, Spe Def: 2/3/5 → 2/3/4
 - Nerf Groudon line: Attack 30 → 20; Nerf Earthquake (Groudon): 120 → 100 special damage
 - Nerf Sunsteel Strike (Solgaleo): remove Burn effect
+- Nerf Manectric line PP: 60 → 65
 
 # Changes to Synergies
 
