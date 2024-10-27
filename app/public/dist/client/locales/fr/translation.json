@@ -1256,7 +1256,7 @@
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
-    "EARTHQUAKE": "Inflige [120,SP] SPECIAL à tous les ennemis présents sur la même ligne/colonne que l'attaquant",
+    "EARTHQUAKE": "Inflige [100,SP] SPECIAL à tous les ennemis présents sur la même ligne/colonne que l'attaquant",
     "SONG_OF_DESIRE": "Rend 2 adversaires CHARM dans la ligne du fond pendant 3 secondes, et réduit leur ATK de [3,SP]",
     "CONFUSING_MIND": "Rend 2 adversaires CONFUSION dans la ligne du fond pendant [3,SP] secondes",
     "KNOWLEDGE_THIEF": "Utilise la capacité de la cible. Le joueur gagne 1 XP.",

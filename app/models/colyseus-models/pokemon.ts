@@ -5268,7 +5268,7 @@ export class Groudon extends Pokemon {
   evolution = Pkm.PRIMAL_GROUDON
   evolutionRule = new ItemEvolutionRule([Item.RED_ORB])
   hp = 300
-  atk = 30
+  atk = 20
   def = 5
   speDef = 3
   maxPP = 100
@@ -6421,7 +6421,7 @@ export class PrimalGroudon extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 4
   hp = 400
-  atk = 30
+  atk = 20
   def = 6
   speDef = 3
   maxPP = 100

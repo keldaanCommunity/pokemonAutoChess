@@ -376,7 +376,7 @@ export class EarthquakeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 120
+    const damage = 100
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (
         (tg && pokemon.team !== tg.team && pokemon.positionY === y) ||

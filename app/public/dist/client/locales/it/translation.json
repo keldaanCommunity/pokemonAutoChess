@@ -1252,7 +1252,7 @@
   },
   "ability_description": {
     "SOFT_BOILED": "Cura tutti gli effetti di stato e garantisce [20,40,80,SP] SHIELD ad ogni Pokèmon alleato",
-    "EARTHQUAKE": "Infligge danno [120,SP] SPECIAL a tutti i Pokèmon nemici nella stessa colonna dell'utilizzatore",
+    "EARTHQUAKE": "Infligge danno [100,SP] SPECIAL a tutti i Pokèmon nemici nella stessa colonna dell'utilizzatore",
     "SONG_OF_DESIRE": "Infligge CHARM a 2 avversari nelle retrovie per [3,SP] secondi e riduci il loro ATK di [3,SP]",
     "CONFUSING_MIND": "Infligge CONFUSION a 2 avversari nelle retrovie per [3,SP] secondi",
     "KNOWLEDGE_THIEF": "Usa l'abilità del bersaglio. Il giocatore guadagna 1 XP.",

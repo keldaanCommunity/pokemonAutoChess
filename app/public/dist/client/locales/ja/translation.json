@@ -980,7 +980,7 @@
   },
   "ability_description": {
     "SOFT_BOILED": "すべての状態異常を治し、味方全員に[20,40,80,SP]のSHIELDを与える",
-    "EARTHQUAKE": "攻撃側と同じ列/列の敵ユニット全員に[120,SP]SPECIALダメージを与える",
+    "EARTHQUAKE": "攻撃側と同じ列/列の敵ユニット全員に[100,SP]SPECIALダメージを与える",
     "SONG_OF_DESIRE": "後衛の敵2人を3秒間CHARM状態にし、ATKを[3,SP]減少させる",
     "CONFUSING_MIND": "CONFUSION [3,SP] 秒間、後衛の対戦相手 2 人に",
     "KNOWLEDGE_THIEF": "ターゲットの能力を使用します。プレイヤーは 1 XP を獲得します。",

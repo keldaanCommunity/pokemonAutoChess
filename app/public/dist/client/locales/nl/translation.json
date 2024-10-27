@@ -811,7 +811,7 @@
   },
   "ability_description": {
     "SOFT_BOILED": "Geneest alle status effecten en geeft [20,40,80,SP] SHIELD aan elke vriendelijke Pokémon",
-    "EARTHQUAKE": "Breng [120,SP] SPECIAL toe aan alle vijandelijke Pokémon in dezelfde kolom als de gebruiker",
+    "EARTHQUAKE": "Breng [100,SP] SPECIAL toe aan alle vijandelijke Pokémon in dezelfde kolom als de gebruiker",
     "SONG_OF_DESIRE": "CHARM 2 tegenstanders in de achterlijn gedurende 3 seconden en verminder hun ATK met [3,SP]",
     "CONFUSING_MIND": "CONFUSION 2 tegenstanders in de achterlijn gedurende [3,SP] seconden",
     "KNOWLEDGE_THIEF": "Gebruik de vaardigheid van het doelwit. Speler krijgt 1 XP.",

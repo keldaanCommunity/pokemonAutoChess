@@ -1240,7 +1240,7 @@
   },
   "ability_description": {
     "SOFT_BOILED": "모든 아군 포켓몬의 상태이상효과를 회복하며 [20,40,80,SP] 만큼의 SHIELD를 부여한다.",
-    "EARTHQUAKE": "시전자와 동일한 세로줄 혹은 가로줄에 있는 모든 적포켓몬에게 [120,SP] SPECIAL 를 가한다.",
+    "EARTHQUAKE": "시전자와 동일한 세로줄 혹은 가로줄에 있는 모든 적포켓몬에게 [100,SP] SPECIAL 를 가한다.",
     "SONG_OF_DESIRE": "뒤쪽의 상대 포켓몬 2마리를 3초간 CHARM 상태로 만들며, ATK 을 [3,SP]만큼 감소시킨다.",
     "CONFUSING_MIND": "뒤쪽의 상대 포켓몬 2마리를 [3,SP]초동안 CONFUSION 상태로 만든다.",
     "KNOWLEDGE_THIEF": "대상의 능력을 가져와서 사용합니다. 플레이어는 1XP를 획득한다.",

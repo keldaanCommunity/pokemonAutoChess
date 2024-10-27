@@ -1209,7 +1209,7 @@
   },
   "ability_description": {
     "SOFT_BOILED": "Cura todos los efectos de estado y otorga [20,40,80,SP] SHIELD a cada aliado",
-    "EARTHQUAKE": "Inflige [120,SP] de SPECIAL a todas las unidades enemigas en la misma columna del atacante",
+    "EARTHQUAKE": "Inflige [100,SP] de SPECIAL a todas las unidades enemigas en la misma columna del atacante",
     "SONG_OF_DESIRE": "Deja CHARM a 2 oponentes en la ultima línea durante 3 segundos y reduce su ATK en [3,SP]",
     "CONFUSING_MIND": "Deja CONFUSION a 2 oponentes en la última línea durante [3,SP] segundos",
     "KNOWLEDGE_THIEF": "Usa la habilidad del objetivo. El jugador gana 1 XP.",

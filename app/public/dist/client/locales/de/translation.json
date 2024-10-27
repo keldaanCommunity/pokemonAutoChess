@@ -1232,7 +1232,7 @@
   },
   "ability_description": {
     "SOFT_BOILED": "Heilt alle Statuseffekte und gewährt jedem Verbündeten [20,40,80,SP] SHIELD.",
-    "EARTHQUAKE": "Fügt allen Gegnern in der Spalte [120,SP] SPECIAL zu.",
+    "EARTHQUAKE": "Fügt allen Gegnern in der Spalte [100,SP] SPECIAL zu.",
     "SONG_OF_DESIRE": "2 Pokemon in der Backline des Gegners werden für 3 Sekunden CHARM und reduzieren Sie ihren ATK um [3,SP]",
     "CONFUSING_MIND": "Verursacht [3,SP] Sekunden lang CONFUSION bei 2 Gegnern in der Backline.",
     "KNOWLEDGE_THIEF": "Setze die Fähigkeit des Ziels ein. Der Spieler erhält 1 XP.",

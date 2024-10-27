@@ -50,6 +50,7 @@
 - New ability for Pumpkaboo line: Trick or Treat: The target must give one of its held items to the user. If the target has no held item, it receives a curse whose power increases with user AP.
 - Change Fire Blast (Volcarona, Macargo): now hit in a star-shaped area of effect, damage 30/60/120 → 20/50/80
 - Nerf Sandile line: HP 100/180/240 → 80/150/220, Attack : 10/18/24 → 6/13/22, Def: 2/3/5 → 2/3/4, Spe Def: 2/3/5 → 2/3/4
+- Nerf Groudon line: Attack 30 → 20; Nerf Earthquake (Groudon): 120 → 100 special damage
 
 # Changes to Synergies
 
