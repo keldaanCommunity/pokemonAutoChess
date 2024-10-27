@@ -394,7 +394,12 @@
     "YAWN": "Bâillement",
     "FIERY_DANCE": "Danse du Feu",
     "BIDE": "Patience",
-    "POISON_STING": "Dard-Venin"
+    "SHORE_UP": "Amass'Sable",
+    "POISON_STING": "Dard-Venin",
+    "TRANSE": "Transe",
+    "GLACIATE": "Ère Glaciaire",
+    "WOOD_HAMMER": "Martobois",
+    "TRICK_OR_TREAT": "Halloween"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -730,6 +735,7 @@
     "HONEDGE": "Monorpale",
     "DOUBLADE": "Dimoclès",
     "AEGISLASH": "Exagide",
+    "AEGISLASH_BLADE": "Exagide (Assaut)",
     "CUBONE": "Osselait",
     "MAROWAK": "Ossatueur",
     "ALOLAN_MAROWAK": "Ossatueur d'Alola",
@@ -1235,9 +1241,18 @@
     "OGERPON_CORNERSTONE": "Ogerpon de la Pierre",
     "OGERPON_CORNERSTONE_MASK": "Ogerpon au Masque de la Pierre",
     "IRON_HANDS": "Paume-de-Fer",
+    "ROOKIDEE": "Minisange",
     "CORVISQUIRE": "Bleuseille",
     "CORVIKNIGHT": "Corvaillus",
-    "MURKROW": "Cornèbre"
+    "MURKROW": "Cornèbre",
+    "HONCHKROW": "Corboss",
+    "SANDYGAST": "Bacabouh",
+    "PALOSSAND": "Trépassable",
+    "SKORUPI": "Rapion",
+    "DRAPION": "Drascore",
+    "DARUMAKA": "Darumarond",
+    "DARMANITAN": "Darumacho",
+    "DARMANITAN_ZEN": "Darumacho (Zen)"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
