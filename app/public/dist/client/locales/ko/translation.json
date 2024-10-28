@@ -392,7 +392,14 @@
     "HEADBUTT": "박치기",
     "STEEL_WING": "강철날개",
     "YAWN": "하품",
-    "FIERY_DANCE": "불꽃춤"
+    "FIERY_DANCE": "불꽃춤",
+    "BIDE": "참기",
+    "SHORE_UP": "모래모으기",
+    "POISON_STING": "독침",
+    "TRANSE": "무아지경",
+    "GLACIATE": "얼어붙은세계",
+    "WOOD_HAMMER": "우드해머",
+    "TRICK_OR_TREAT": "핼러윈"
   },
   "pkm": {
     "DEFAULT": "미싱노",
@@ -440,7 +447,7 @@
     "SEEDOT": "도토링",
     "NUZLEAF": "잎새코",
     "SHIFTRY": "다탱구",
-    "STARLY": "콩둘기",
+    "STARLY": "찌르꼬",
     "STARAVIA": "찌르버드",
     "STARAPTOR": "찌르호크",
     "CHIKORITA": "치코리타",
@@ -727,7 +734,8 @@
     "MEGA_BANETTE": "메가다크펫",
     "HONEDGE": "단칼빙",
     "DOUBLADE": "쌍검킬",
-    "AEGISLASH": "킬가르도",
+    "AEGISLASH": "킬가르도(실드폼)",
+    "AEGISLASH_BLADE": "킬가르도(블레이드폼)",
     "CUBONE": "탕구리",
     "MAROWAK": "텅구리",
     "ALOLAN_MAROWAK": "알로라텅구리",
@@ -987,6 +995,7 @@
     "MILTANK": "밀탱크",
     "MANKEY": "망키",
     "PRIMEAPE": "성원숭",
+    "ANNIHILAPE": "저승갓숭",
     "SUNKERN": "해너츠",
     "SUNFLORA": "해루미",
     "MARACTUS": "마라카치",
@@ -1236,7 +1245,15 @@
     "CORVISQUIRE": "파크로우",
     "CORVIKNIGHT": "아머까오",
     "MURKROW": "니로우",
-    "HONCHKROW": "돈크로우"
+    "HONCHKROW": "돈크로우",
+    "SANDYGAST": "모래꿍",
+    "PALOSSAND": "모래성이당",
+    "SKORUPI": "스콜피",
+    "DRAPION": "드래피온",
+    "DARUMAKA": "달막화",
+    "DARMANITAN": "불비달마",
+    "DARMANITAN_ZEN": "불비달마(달마모드)",
+    "TURTONATOR": "폭거북스"
   },
   "ability_description": {
     "SOFT_BOILED": "모든 아군 포켓몬의 상태이상효과를 회복하며 [20,40,80,SP] 만큼의 SHIELD를 부여한다.",
@@ -1270,6 +1287,7 @@
     "PROTECT": "시전자가 PROTECT 상태가 되며, [1,3,5,SP=0.5]초간 무적상태가 된다.",
     "BLIZZARD": "모든 적포켓몬들에 [5,10,15,SP] SPECIAL 및 2초간의 FREEZE를 가한다. FREEZE 상태의 포켓몬에게는 두배의 대미지를 가한다.",
     "CONFUSION": "대상을 [3,5,7]초간 CONFUSION 및 SILENCE 상태로 만든다. 이미 대상이 CONFUSION 상태일 경우, 대신 [75,150,300,SP] SPECIAL 을 가한다.",
+    "FIRE_BLAST": "大 모양의 화염을 발사하여 적중한 모든 적에게 [20,50,80,SP] SPECIAL 를 가한다.",
     "WHEEL_OF_FIRE": "되돌아오는 화염자동차를 발사한다. 맞은 적 포켓몬들에게 [10,20,30,SP] SPECIAL 을 두번 가한다.",
     "SEISMIC_TOSS": "대상에게 [5,10,20,SP]에 플레이어 레벨을 곱한 만큼의 TRUE 을 가한다.",
     "GUILLOTINE": "대상에 [1,2,3,SP] x ATK SPECIAL 을 가한다. 대상이 기절한 경우 사용자는 절반의 PP를 회복한다.",
@@ -1342,8 +1360,9 @@
     "PAYDAY": "대상에 [30,60,120,SP] SPECIAL 를 가한다. 대상이 기절할 경우, 플레이어는 [1,2,3] GOLD 를 획득한다.",
     "PICKUP": "[30,60,120,SP] SPECIAL 를 가하고 대상으로부터 도구 하나를 훔친다. 도구가 없다면, 플레이어로부터 [1,2,3] GOLD 를 훔친다.",
     "BEAT_UP": "[100,SP]% 의 HP, 도구를 지니지 않은 델빌 [1,2,3] 마리를 소환한다.",
-    "BLUE_FLARE": "대상 및 인접한 적들에게 [50,SP] + FIRE 시너지의 단계x20 만큼의 SPECIAL 을 가한다.",
-    "FUSION_BOLT": "대상 및 인접한 적들에게 [50,SP] + ELECTRIC 시너지의 단계x40 만큼의 SPECIAL 을 가한다.",
+    "BLUE_FLARE": "대상 및 인접한 적들에게 [50,SP] + FIRE 시너지의 단계x20 만큼의 SPECIAL 를 가한다.",
+    "FUSION_BOLT": "대상 및 인접한 적들에게 [50,SP] + ELECTRIC 시너지의 단계x40 만큼의 SPECIAL 를 가한다.",
+    "GLACIATE": "대상 및 인접한 적들에게 [50,SP] + ICE 시너지의 단계X20 만큼의 SPECIAL 를 가한다.",
     "AURORA_VEIL": "모든 아군에 [5,10,15,SP] 의 SHIELD 와 0.5초간 RUNE_PROTECT 를 부여한다.",
     "AQUA_JET": "적의 후방에 돌진하며 부딪힌 적들에게 [30,60,120,SP] 의 SPECIAL 을 가한다.",
     "JUDGEMENT": "대상에 [10,SP] 의 SPECIAL 을 가한다. 이 값은 아르세우스의 시너지 레벨들의 합만큼 곱해진다.",
@@ -1536,6 +1555,7 @@
     "AROMATHERAPY": "모든 부정적인 상태이상을 해제 하고 인접한 아군의 HP를 [20,40,80,SP] 만큼 회복한다.",
     "DETECT": "2셀 반경 내에 감지된 적의 수에 곱한 [500,SP]ms 동안 인접한 아군을 보호합니다.",
     "SPACIAL_REND": "적팀의 위치를 역전시킨 후, 일직선 상의 모든 적에게 [100,SP] SPECIAL을 입힌다.",
+    "MULTI_ATTACK": "주변 적에게 $t(pkm.SILVALLY) 의 모든 추가 시너지 단계만큼 [15,SP] SPECIAL 를 가한다.",
     "STICKY_WEB": "타겟에게 [20,35,70,SP] SPECIAL을 입히고 대상 주위에 거미줄을 설치한다. 거미줄 위를 걷는 포켓몬은 2초 동안 PARALYSIS에 빠진다.",
     "ACCELEROCK": "가장 먼 적 옆으로 점프하여 즉시 공격하며 ATK 의 [100,SP]%만큼을 SPECIAL로 입힌다. 이 과정에서 최대 [5,SP]의 DEF 를 잃고, 잃은 1  DEF 포인트당 ATK_SPEED가 5% 증가한다.",
     "PETAL_BLIZZARD": "주변 적에게 [30,SP] SPECIAL 를 가하고 10 AP를 얻는다.",
@@ -1607,7 +1627,13 @@
     "HEADBUTT": "대상에게 [20,40,80,SP]의 SPECIAL 를 입히고 5초 동안 FLINCH 이 되게 한다. 대상이 SHIELD 이 있다면 두 배의 피해를 입힌다.",
     "STEEL_WING": "적의 후방으로 돌진하여 부딪히는 모든 적에게 [10,20,40,SP] + 3X DEF SPECIAL 를 입히고 1 DEF 를 훔친다.",
     "YAWN": "[20,40,80,SP] SHIELD 를 획득한다. 이 포켓몬을 공격하는 적은 4초 동안 FATIGUE 상태에 빠지고 30% AP 가 감소한다.",
-    "FIERY_DANCE": "불꽃을 두르며 시전자가 춤을 추며 날개를 펄럭이며 [25,50,100,SP]의 SPECIAL을 가한다. 또한 시전자의 AP를 30 증가시킨다."
+    "FIERY_DANCE": "불꽃을 두르며 시전자가 춤을 추며 날개를 펄럭이며 [25,50,100,SP]의 SPECIAL을 가한다. 또한 시전자의 AP를 30 증가시킨다.",
+    "BIDE": "시전자는 3초 동안 움직일 수 없게 된다. 이 동안 받은 피해의 2배를 주변에 SPECIAL 로 가한다.",
+    "SHORE_UP": "시전자의 HP 를 [20,25,SP] % 회복한다. 날씨가 SANDSTORM 이라면 [30,35,SP] % HP 을 회복한다.",
+    "POISON_STING": "대상에게 POISONNED 을 [2,3,4] 중첩 가한다. 최대 중첩을 넘어서는 중첩은 각각 즉시 [25,50,100,SP] SPECIAL 를 가한다.",
+    "TRANSE": "회복을 중지하고 공격과 이동을 재개한다.",
+    "WOOD_HAMMER": "ATK의 [300,SP] % 의 SPECIAL 를 대상에게 가하고, 피해량의 33%를 반동 피해로 입는다.",
+    "TRICK_OR_TREAT": "대상은 지닌 도구 중 하나를 시전자에게 넘겨준다. 지닌 도구가 없다면 시전자의 AP 에 비례하는 저주를 받는다."
   },
   "effect": {
     "INGRAIN": "뿌리박기",
@@ -1824,8 +1850,8 @@
     "LINK_CABLE": "지닌 도구 갯수당 8%의 기본ATK, AP 증가 및 최대 HP의 비율만큼 SHIELD 획득. 두번째 인공물 도구 획득.",
     "GOOGLE_SPECS": "지닌 도구 갯수당 15%의 기본ATK, AP 증가 및 최대 HP의 비율만큼 SHIELD 획득. 세번째 인공물 도구 획득.",
     "HATCHER": "각 BABY는 [10,LK]% 확률로 알을 찾을 수 있습니다.",
-    "BREEDER": "플레이어와의 전투에서 패배시 알획득",
-    "GOLDEN_EGGS": "각 BABY는 [4,LK]% 확률로 황금 알을 찾을 수 있습니다, 대기석에 황금알 최대 1개까지 가능. 황금알은 10 GOLD 에 팔거나 부화시 빛나는 도구 획득 가능",
+    "BREEDER": "플레이어와의 전투에서 패배시 알 획득",
+    "GOLDEN_EGGS": "각 BABY는 [4,LK]% 확률로 황금 알을 찾을 수 있습니다, 대기석에 황금알 최대 1개까지 가능. 황금알은 10 GOLD 에 판매하거나 부화 시 빛나는 도구 획득 가능",
     "GRASSY_TERRAIN": "가하는 대미지 20% 증가 (풀타입한정) ",
     "PSYCHIC_TERRAIN": "가하는 대미지 20% 증가 (에스퍼한정)",
     "ELECTRIC_TERRAIN": "가하는 대미지 20% 증가 (전기한정)",
@@ -1942,6 +1968,8 @@
     "EXP_SHARE": "학습장",
     "POKERUS_VIAL": "포켓러스시험관",
     "ROTOM_PHONE": "스마트로토무",
+    "SILK_SCARF": "실크스카프",
+    "TINY_MUSHROOM": "작은버섯",
     "METEORITE": "운석",
     "BERRY_JUICE": "나무열매쥬스",
     "TRASH": "쓰레기",
@@ -1970,8 +1998,8 @@
     "FIRE_SHARD": "불꽃 조각",
     "TEAL_MASK": "벽록의 가면",
     "WELLSPRING_MASK": "우물의 가면",
-    "CORNERSTONE_MASK": "화덕의 가면",
-    "HEARTHFLAME_MASK": "주춧돌의 가면"
+    "CORNERSTONE_MASK": "주춧돌의 가면",
+    "HEARTHFLAME_MASK": "화덕의 가면"
   },
   "item_description": {
     "FOSSIL_STONE": "선사시대에 살았던 포켓몬의 화석",
@@ -2063,9 +2091,11 @@
     "EXP_SHARE": "같은 열 근접한 포켓몬의 가장 높은 ATK, AP, DEF, 그리고 SPE_DEF를 획득 ",
     "POKERUS_VIAL": "POKERUS 소지자를 감염, ATK 1 과 매 2초 마다 AP 10% 획득, 그리고 동료에게 전송 ",
     "ROTOM_PHONE": "GHOST 시너지 부여, 소지자 주변에 로토무 드론 소환 ",
+    "SILK_SCARF": "NORMAL 시너지 부여, 받는 모든 SHIELD 30% 증가",
+    "TINY_MUSHROOM": "BUG 시너지 부여, 최대 HP 50% 감소",
     "METEORITE": "테오키스와 상호작용 하는 것으로 보이는 유성. 희미한 광채를 지속적으로 발산하며 약간의 온기가 느껴진다. ",
     "BERRY_JUICE": "HP이 50% 이하 시 섭취, 최대 HP로 회복 ",
-    "TRASH": "\bARTIFICIAL 아이템의 남은 부분. 아무 효과 없음",
+    "TRASH": "ARTIFICIAL 아이템의 남은 부분. 아무 효과 없음",
     "OLD_ROD": "플레이어 전투 이후 대기석의 빈자리에 포켓몬을 낚아 올린다. 커먼과 언커먼 WATER 포켓몬 및 잉어킹을 낚을 수 있다.",
     "GOOD_ROD": "플레이어 전투 이후 대기석의 빈자리에 포켓몬을 낚아 올린다. 레어 WATER 포켓몬 및 빈티나를 낚을 수 있다.",
     "SUPER_ROD": "플레이어 전투 이후 대기석의 빈자리에 포켓몬을 낚아 올린다. 에픽 WATER 포켓몬 및 약어리를 낚을 수 있다.",
@@ -2102,7 +2132,7 @@
     "CASTFORM": "팀에서 FIRE WATER ICE 셋중 어떤 시너지를 가장 많이 지녔나에 따라 캐스퐁은 폼체인지하며 날씨도 SUN, RAIN, SNOW로 바꿉니다.",
     "PHIONE": "피오네는 AQUA_EGG를 찾아 헤매고 있습니다.",
     "SCYTHER": "$t(pkm.SCYTHER)은 METAL_COAT 혹은 BLACK_AUGURITE를 찾아 헤매고 있습니다.",
-    "PRIMAL": "이 포켓몬들의 고대의 힘을 해방시킬 수 있다는 전설이 있습니다.",
+    "PRIMAL": "이 포켓몬의 고대의 힘을 해방시킬 수 있다는 전설이 있습니다.",
     "WONDER_GUARD": "피격시 받는 피해량이 20 감소합니다.",
     "ELECTRIC_TERRAIN": "자신의 ELECTRIC 포켓몬들의 대미지를 20% 증가시키는  ELECTRIC_FIELD를 부여합니다.",
     "GRASSY_TERRAIN": "자신의 GRASS 포켓몬들의 대미지를 20% 증가시키는  GRASS_FIELD를 부여합니다.",
@@ -2186,7 +2216,7 @@
     "LYCANROC": "$t(pkm.LYCANROC_DUSK)은 NIGHT동안 밤폼으로, SUN동안 낮폼으로 바뀝니다.",
     "COSMOG": "$t(pkm.COSMOG)은 별의 에너지를 먹고 자랍니다. 포켓몬을 진화시킬때마다 영구적으로 최대HP 10 증가합니다. 10회 후 진화합니다.",
     "COSMOEM": "$t(pkm.COSMOEM)은 별의 에너지를 먹고 자랍니다. 포켓몬을 진화시킬때마다 영구적으로 최대HP 10 증가합니다. 10회 후 진화하며 그때 스포트라이트를 받고 있을 경우 $t(pkm.SOLGALEO)로, 그렇지 않다면 $t(pkm.LUNALA)로 진화합니다.",
-    "SOUL_HEART": "시전자가 적을 기절시킬시 10AP와 10PP를 얻습니다.",
+    "SOUL_HEART": "시전자가 적을 기절시킬시 10 AP 과 10 PP 를 얻습니다.",
     "ALIEN_DNA": "$t(pkm.DEOXYS)는 METEORITE와 반응하여 모습을 바꿉니다.",
     "BERRY_EATER": "나무열매를 지닌 대상 공격시 빼앗아 먹습니다.",
     "TOXIC_BOOST": "독 대미지를 50% 적게 받으며 POISONNED 동안 10ATK 증가합니다.",
@@ -2214,7 +2244,13 @@
     "OGERPON_WELLSPRING": "오거폰은 TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK 그리고 CORNERSTONE_MASK 을 착용하여 외형을 변환할 수 있습니다.\n 시전 시, 주변 아군에게 10 PP 회복",
     "OGERPON_HEARTHFLAME": "오거폰은 TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK 그리고 CORNERSTONE_MASK 을 착용하여 외형을 변환할 수 있습니다.\n 시전 시, 주변 적에게 2초 동안 BURN",
     "OGERPON_CORNERSTONE": "오거폰은 TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK 그리고 CORNERSTONE_MASK 을 착용하여 외형을 변환할 수 있습니다.\n 시전 시, 주변 적에게 5초 동안 FLINCH",
-    "VICTINI": "팀의 명중률을 올린다. 아군의 공격은 더이상 빗나가지 않는다."
+    "VICTINI": "팀의 명중률을 올린다. 아군의 공격은 더이상 빗나가지 않는다.",
+    "AEGISLASH": "기술을 시전할 때 실드폼과 블레이드폼 사이에 전환한다.",
+    "DARMANITAN": "HP 가 50% 미만이 되면 안전한 장소로 이동하여 달마모드로 전환한다.",
+    "DARMANITAN_ZEN": "공격과 이동을 할 수 없게 되지만, 매초 [10,SP] HP 을 회복한다. 완전히 회복되면 노말모드로 전환한다.",
+    "BAD_LUCK": "모든 적의 LUCK 을 20% 감소시킨다.",
+    "GOOD_LUCK": "모든 아군의 LUCK 을 20% 증가시킨다.",
+    "PRIMEAPE": "성원숭은 기절할 때마다 분노하여 ATK 을 영구적으로 1 획득한다. 10번 기절한 후에는 저승갓숭으로 진화한다."
   },
   "stat": {
     "ATK": "공격력",
@@ -2230,7 +2266,8 @@
     "POWER_POINTS": "PP(마나)",
     "MAX_PP": "최대 PP",
     "AP": "주문력",
-    "SHIELD": "실드"
+    "SHIELD": "실드",
+    "LUCK": "행운"
   },
   "stat_description": {
     "ATK": "기본공격으로 가해지는 피해량입니다.",
@@ -2244,7 +2281,8 @@
     "PP": "파워포인트",
     "MAX_PP": "기술을 사용하기 위해 필요한 PP양입니다. 시간이 지나면서 PP를 얻을 수 있으며(초당 10), 공격할때(5) 및 피해를 입을 때(받은 피해량의 10%)에도 얻습니다.",
     "AP": "SPECIAL와 능력의 효과를 다양한 방식으로 향상시킵니다.",
-    "SHIELD": "일시적인 체력입니다. 회복될 수 없습니다."
+    "SHIELD": "일시적인 체력입니다. 회복될 수 없습니다.",
+    "LUCK": "무작위성이 있는 효과의 확률을 증가시킵니다."
   },
   "status": {
     "BURN": "화상",
@@ -2355,7 +2393,8 @@
     "FOSSIL": "FOSSIL 포켓몬이 처음 기절했을 경우, 추가 ATK를 획득한 상태로 부활합니다.",
     "SOUND": "SOUND 포켓몬은 기술을 사용할 시, 아군에게 추가 능력치를 부여하고 잠듦 상태를 해제하는 울음소리를 냅니다.  ",
     "ARTIFICIAL": "ARTIFICIAL 포켓몬은 고유 아이템을 얻으며 아이템을 장착할 시, 추가 ATK, AP과 SHIELD를 획득합니다.",
-    "BABY": "BABY 포켓몬은 패배 이후 위로의 표시로 포켓몬의 알을 가져옵니다.{{additionalInfo}}",
+    "BABY": "BABY 포켓몬은 패배 이후 위로의 표시로 포켓몬의 알을 가져옵니다. 연패에 따라 확률이 증가합니다.{{additionalInfo}}",
+    "BABY_CHANCE_STACKED": "\n확률 증가: {{eggChance}}%",
     "LIGHT": "LIGHT 포켓몬은 전장에 스포트라이트를 비춥니다. 스포트라이트 위에 서 있는 포켓몬은 전투 시작 시, 특수한 효과를 얻습니다.",
     "WILD": "WILD 포켓몬은 추가 ATK를 획득하고 이동속도가 빨라지며, 25%의 확률로 적을 WOUND 상태로 만듭니다. 필드 위의 WILD 포켓몬의 총 STAR 갯수에 따라 WILD 포켓몬이 상점에서 등장할 확률이 1% 증가하며, PvE 라운드에서는 5% 증가합니다.{{additionalInfo}}",
     "WILD_ADDITIONAL": "\n현재 WILD 포켓몬이 등장할 확률: {{wildChance}}%",
@@ -2626,7 +2665,7 @@
   "stats": "스탯",
   "total_money_earned": "휙득한 총 재화",
   "total_player_damage_dealt": "다른 유저에 가한 총 데미지",
-  "total_reroll_count": "총 리롤 가능 횟수",
+  "total_reroll_count": "총 리롤 횟수",
   "team": "팀",
   "synergies": "시너지",
   "join_as_guest": "게스트로 입장",
@@ -2639,7 +2678,7 @@
   "open_source": "오픈소스",
   "copyright": "모든 저작권은 Pokemon Company®에 귀속되어 있습니다.",
   "stage": "스테이지",
-  "spectate": "참관",
+  "spectate": "참관하기",
   "join": "입장하기",
   "reconnect": "재접속",
   "participate": "참가하기",
@@ -2658,6 +2697,7 @@
   "enable_elo_hint": "이 게임에 Elo 획득이나 손실을 적용시킵니다.",
   "disable_elo_hint": "이 게임에 Elo 획득이나 손실을 적용시키지 않습니다.",
   "minimum_rank": "최소 랭크",
+  "maximum_rank": "최대 랭크",
   "ranked_match": "랭크매치",
   "ranked_match_description": "8 플레이어, Elo 활성화, 동일 랭크로 제한",
   "ranked_game_hint": "이 게임은 당신의 현재 랭크에 해당하는 플레이어들로 제한됩니다.",
@@ -2883,6 +2923,7 @@
   "GLHF": "환영합니다",
   "not_elligible_elo_hint": "❌봇만으로 구성된 게임은 Elo를 얻거나 잃지 않습니다.",
   "add_bot_or_wait_hint": "봇을 추가하거나 사람들이 더 오기를 기다리세요.",
+  "wait_for_players_hint": "사람들이 더 오기를 기다리세요.",
   "private_game": "비공개 게임",
   "make_room_private": "비공개방으로 설정하기",
   "make_room_public": "공개방으로 설정하기",
@@ -3188,7 +3229,8 @@
     "CROWDED": "북적이는 보드",
     "KECLEONS_SHOP": "켈리몬의 가게",
     "FREE_MARKET": "모든 것이 거저",
-    "SHINY_HUNTER": "희귀품 사냥꾼"
+    "SHINY_HUNTER": "이로치 헌터",
+    "DESPERATE_MOVES": "절박한 행동"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "모든 선택 포켓몬이 시작과 동시에 구매가 가능해집니다.",
@@ -3205,7 +3247,8 @@
     "CROWDED": "보드에 놓을 수 있는 최대 포켓몬 마릿수 +3",
     "KECLEONS_SHOP": "아이템초밥집이 켈리몬의 상점으로 대체됩니다. 켈리몬은 6개의 아이템을 각각 10골드씩에 판매합니다.",
     "FREE_MARKET": "0골드에 포켓몬을 사고 팔 수 있습니다.",
-    "SHINY_HUNTER": "PVE에서 만나는 모든 야생포켓몬들이 모두 이로치가 됩니다."
+    "SHINY_HUNTER": "PVE에서 만나는 모든 야생 포켓몬들이 모두 이로치가 됩니다.",
+    "DESPERATE_MOVES": "플레이어들은 150 HP 로 시작합니다. GOLD 대신 HP 를 소모하여 상점을 새로고침합니다."
   },
   "loading_hints": {
     "tab_out": "로딩 화면 밖으로 나가지 마세요! 브라우저가 비활성화 되면 로딩이 멈춥니다. ",
