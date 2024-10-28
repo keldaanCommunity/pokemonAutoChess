@@ -981,7 +981,8 @@ export class JoinOrOpenRoomCommand extends Command<
       }
 
       case GameMode.RANKED: {
-        const userRank = getRank(user.elo)
+        let userRank = getRank(user.elo)
+        if (userRank === EloRank.MASTERBALL) userRank = EloRank.ULTRABALL
         const existingRanked = this.room.rooms?.find(
           (room) =>
             room.name === "preparation" &&
@@ -1039,10 +1040,16 @@ export class OpenGameCommand extends Command<
     let ownerId: string | null = null
 
     if (gameMode === GameMode.RANKED) {
-      const rank = getRank(user.elo)
-      minRank = rank
-      maxRank = rank
-      roomName = `${rank} Ranked Match`
+      let rank = getRank(user.elo)
+      if (rank === EloRank.MASTERBALL || rank === EloRank.ULTRABALL) {
+        rank = EloRank.ULTRABALL
+        minRank = EloRank.ULTRABALL
+        maxRank = EloRank.MASTERBALL
+      } else {
+        minRank = rank
+        maxRank = rank
+      }
+      roomName = "Ranked Match"
     } else if (gameMode === GameMode.SCRIBBLE) {
       roomName = "Smeargle's Scribble"
       noElo = true
