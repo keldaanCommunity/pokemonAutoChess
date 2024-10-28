@@ -5230,13 +5230,7 @@ export class PoisonPowderStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 30
-    if (pokemon.stars === 2) {
-      damage = 60
-    }
-    if (pokemon.stars === 3) {
-      damage = 120
-    }
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
 
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
@@ -5276,14 +5270,7 @@ export class SilverWindStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
 
-    let damage = 30
-    if (pokemon.stars === 2) {
-      damage = 60
-    }
-    if (pokemon.stars === 3) {
-      damage = 120
-    }
-
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
 

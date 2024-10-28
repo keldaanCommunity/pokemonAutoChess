@@ -54,6 +54,8 @@
 - Nerf Sunsteel Strike (Solgaleo): remove Burn effect
 - Nerf Manectric line PP: 60 → 65
 - Nerf Marshadow: HP 250 → 220
+- Nerf Silver wind (Beautifly): 30/60/120 → 20/40/80 special damage
+- Nerf Poison Powder (Dustox): 30/60/120 → 20/40/80 special damage
 
 # Changes to Synergies
 
