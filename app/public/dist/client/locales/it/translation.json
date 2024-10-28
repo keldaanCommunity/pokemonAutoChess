@@ -396,7 +396,10 @@
     "BIDE": "Pazienza",
     "SHORE_UP": "Sabbiaccumulo",
     "POISON_STING": "Velenospina",
-    "TRANSE": "Stato Zen"
+    "TRANSE": "Stato Zen",
+    "GLACIATE": "Gelamondo",
+    "WOOD_HAMMER": "Mazzuolegno",
+    "TRICK_OR_TREAT": "Halloween"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -992,6 +995,7 @@
     "MILTANK": "Miltank",
     "MANKEY": "Mankey",
     "PRIMEAPE": "Primeape",
+    "ANNIHILAPE": "Annihilape",
     "SUNKERN": "Sunkern",
     "SUNFLORA": "Sunflora",
     "MARACTUS": "Maractus",
@@ -1282,6 +1286,7 @@
     "PROTECT": "Garantisce PROTECT all'utilizzatore, diventando invulnerabile per [1,3,5,SP=0.5] secondi.",
     "BLIZZARD": "Infligge FREEZE a tutti i Pokémon nemici per 2 secondi e infliggi [5,10,15,SP] SPECIAL. Subiscono il doppio del danno se il nemico ha già lo status FREEZE.",
     "CONFUSION": "Infliggi CONFUSION e SILENCE al bersaglio per [3,5,7] secondi. Se il bersaglio è già con lo status CONFUSION, infligge invece [75.150.300 SP] SPECIAL.",
+    "FIRE_BLAST": "Spara una Fuocobomba in un'area a forma di stella, infliggendo [20,50,80,SP] SPECIAL a tutti gli avversari colpiti.",
     "WHEEL_OF_FIRE": "Lancia un Ruotafuoco ritornante che infligge [10,20,30,SP] SPECIAL a tutti i Pokèmon nemici nel suo tragitto.",
     "SEISMIC_TOSS": "Infligge al bersaglio [5,10,20,SP] TRUE moltiplicati per il tuo livello giocatore",
     "GUILLOTINE": "Infligge al bersaglio [1,2,3,SP] per ATK SPECIAL. Ripristina metà PP all'utilizzatore se il bersaglio è andato KO.",
@@ -1356,6 +1361,7 @@
     "BEAT_UP": "Evoca [1,2,3] Houndour ([100,SP]% HP, nessun oggetto)",
     "BLUE_FLARE": "Infliggi [50,SP] SPECIAL + 20 per ogni livello di sinergia FIRE al bersaglio ed a Pokèmon nemici adiacenti.",
     "FUSION_BOLT": "Infligge [50,SP] SPECIAL + 40 per ogni livello di sinergia ELECTRIC al bersaglio ed a Pokèmon nemici adiacenti.",
+    "GLACIATE": "Infliggi [50,SP] SPECIAL + 20 per ogni livello della sinergia ICE al bersaglio ed ai nemici adiacenti.",
     "AURORA_VEIL": "Tutti i Pokèmon alleati ricevono [5,10,15,SP] SHIELD e RUNE_PROTECT per 0.5 secondi.",
     "AQUA_JET": "Scatta nelle retrovie nemiche, infliggendo [30,60,120,SP] SPECIAL a tutti i Pokèmon nemici colpiti nel tragitto.",
     "JUDGEMENT": "Infliggi [10,SP] danni speciali al bersaglio, moltiplicati per la somma dei livelli di sinergia di Arceus.",
@@ -1624,7 +1630,9 @@
     "BIDE": "L'utilizzatore non può muoversi per 3 secondi. Pazienza farà SPECIAL ai nemici attorno all'utilizzatore pari al doppio del danno subito durante il periodo in cui non poteva muoversi.",
     "SHORE_UP": "Cura l'utilizzatore del [20,25,SP] % dei HP. Se il meteo è SANDSTORM, aumenta la cura al [30,35,SP] % dei HP.",
     "POISON_STING": "Infliggi [2,3,4] istanze di POISONNED al bersaglio. Ogni istanza sopra al massimo infligge immediatamente [25,50,100,SP] SPECIAL.",
-    "TRANSE": "Comincia a muoversi ed attaccare di nuovo, ma smette di curarsi passivamente."
+    "TRANSE": "Comincia a muoversi ed attaccare di nuovo, ma smette di curarsi passivamente.",
+    "WOOD_HAMMER": "Infliggi [300,SP]% dell'ATK come SPECIAL al bersaglio, e subisci danno da contraccolpo pari al 33% del danno inflitto.",
+    "TRICK_OR_TREAT": "Il bersaglio deve dare uno dei suoi oggetti equipaggiati all'utilizzatore. Se non ne ha, riceve una maledizione la quale potenza aumenta con la AP dell'utilizzatore."
   },
   "effect": {
     "INGRAIN": "Radicamento",
@@ -1959,6 +1967,8 @@
     "EXP_SHARE": "Condividi Esperienza",
     "POKERUS_VIAL": "Fiala di Pokèrus",
     "ROTOM_PHONE": "Smart Rotom",
+    "SILK_SCARF": "Sciarpa Seta",
+    "TINY_MUSHROOM": "Minifungo",
     "METEORITE": "Meteorite",
     "BERRY_JUICE": "Succo di Bacca",
     "TRASH": "Spazzatura",
@@ -2080,6 +2090,8 @@
     "EXP_SHARE": "Ottieni i migliori valori di ATK, AP, DEF e SPE_DEF dagli alleati adiacenti nella stessa riga",
     "POKERUS_VIAL": "Infetta il possessore con il POKERUS, guadagnando ogni 2 secondi 1 ATK e 10 AP e può trasmetterlo agli alleati",
     "ROTOM_PHONE": "Il possessore riceve la sinergia GHOST. Evoca un Rotom Drone affianco al possessore",
+    "SILK_SCARF": "Dai la sinergia NORMAL e aumenta lo SHIELD da tutte le fonti del 30%.",
+    "TINY_MUSHROOM": "Dai la sinergia BUG ma riduci i HP massimi del 50%.",
     "METEORITE": "Un meteorite che sembra interagisca con Deoxys. Continua a rilasciare un luce fioca ed è tiepido al tocco.",
     "BERRY_JUICE": "Viene consumata una volta al di sotto del 50% di HP, recupera tutti i HP",
     "TRASH": "I rimasugli di un oggetto artificiale. Non fa nulla.",
@@ -2104,6 +2116,7 @@
     "ELECTRIC_QUARTZ": "Conta per 3 verso STORM. Sotto STORM, la tua squadra ottiene 50 di SHIELD quando colpito dai fulmini e si curano da PARALYSIS il 20% più velocemente.",
     "FLOAT_STONE": "Conta per 3 verso WINDY. Sotto WINDY, ottieni il 5% in più di possibilità di schivare gli attacchi.",
     "MIST_STONE": "Conta per 3 verso MISTY. Sotto la MISTY, la tua squadra ottiene 2 SPE_DEF.",
+    "BLOOD_STONE": "Conta per 3 verso BLOODMOON. Sotto la BLOODMOON, la tua squadra ottiene il 30% delle cure ricevute come SHIELD quando infligge WOUND e cura il 20% dei danni inflitti se il bersaglio ha lo status WOUND.",
     "FIRE_SHARD": "Sacrifica 3 HP del giocatore per dare permanentemente 3 di ATK ad un Pokèmon FIRE. L'oggetto viene consumato quando equipaggiato.",
     "TEAL_MASK": "Questa maschera scolpita nel legno è adornata da cristalli, ottieni 50 di SHIELD e permetti ad Ogerpon di avere la sinergia FIGHTING durante il combattimento.",
     "WELLSPRING_MASK": "Questa maschera scolpita nel legno è adornata da cristalli, ottieni 50 di SHIELD e permetti ad Ogerpon di avere la sinergia AQUATIC durante il combattimento.",
@@ -2233,7 +2246,10 @@
     "VICTINI": "Gli attacchi degli alleati non possono più mancare.",
     "AEGISLASH": "Alternati tra la Forma Scudo e la Forma Spada quando l'abilità viene usata.",
     "DARMANITAN": "Quando va sotto il 50% di HP, salta verso un punto sicuro e trasformati nello Stato Zen.",
-    "DARMANITAN_ZEN": "Non può più attaccare o muoversi, però curati di [10,SP] HP al secondo. Trasformati nello Stato Normale quando vieni curato completamente."
+    "DARMANITAN_ZEN": "Non può più attaccare o muoversi, però curati di [10,SP] HP al secondo. Trasformati nello Stato Normale quando vieni curato completamente.",
+    "BAD_LUCK": "Riduce la LUCK dei nemici del 20%.",
+    "GOOD_LUCK": "Aumenta la LUCK di tutti gli alleati del 20%.",
+    "PRIMEAPE": "Primeape diventa più arrabbiato quando va KO, ottenendo 1 di ATK permanentemente. Dopo che Primeape è andato KO 10 volte, si evolve in Annihilape."
   },
   "stat": {
     "ATK": "Attacco",
@@ -2249,7 +2265,8 @@
     "POWER_POINTS": "Punti Potenza (PP)",
     "MAX_PP": "Punti Potenza massimi",
     "AP": "Potenza dell'abilità",
-    "SHIELD": "Scudo"
+    "SHIELD": "Scudo",
+    "LUCK": "Fortuna"
   },
   "stat_description": {
     "ATK": "Danni inflitti ad ogni attacco base",
@@ -2263,7 +2280,8 @@
     "PP": "Punti Potenza",
     "MAX_PP": "Quantità di Punti Potenza richiesti per lanciare l'abilità. I Pokèmon ricevono Punti Potenza con il tempo (10 al secondo), quando attaccano (5 per attacco) e quando ricevono danno (10% del danno in arrivo)",
     "AP": "Aumenta i SPECIAL e influenza le abilità in vari modi.",
-    "SHIELD": "Punti salute temporanei, non possono essere curati."
+    "SHIELD": "Punti salute temporanei, non possono essere curati.",
+    "LUCK": "Moltiplicatore per effetti casuali."
   },
   "status": {
     "BURN": "Scottatura",
@@ -2375,6 +2393,7 @@
     "SOUND": "I Pokèmon SOUND emettono un verso quando usano le loro abilità, svegliando gli alleati addormentati e dando loro statistiche bonus",
     "ARTIFICIAL": "I Pokèmon ARTIFICIAL forniscono oggetti unici e guadagnano ATK, AP e SHIELD quando tengono gli oggetti.",
     "BABY": "I BABY possono portarti uova di Pokèmon per confortarti dopo una sconfitta. La possibilità aumenta con le serie di sconfitte.{{additionalInfo}}",
+    "BABY_CHANCE_STACKED": "Possibilità di avere un uovo: {{eggChance}}% ",
     "LIGHT": "La LIGHT rivela un punto di luce sul campo di battaglia. L'unità sotto questa luce all'inizio del combattimento ottiene bonus unici.",
     "WILD": "I Pokémon WILD ricevono ATK incrementato, si muovono più velocemente, e hanno il 25% di possibilità di infliggere WOUND al bersaglio. Per ogni STAR di ogni Pokémon WILD sul campo, ottieni +1% di possibilità di trovare un WILD nel tuo negozio + 5% di possibilità durante i round PvE {{additionalInfo}}",
     "WILD_ADDITIONAL": "\nPossibilità attuale di trovare un Pokèmon WILD: {{wildChance}}%",
@@ -2677,6 +2696,7 @@
   "enable_elo_hint": "Abilita guadagno o perdita di Elo per questa partita",
   "disable_elo_hint": "Disabilita guadagno o perdita di Elo per questa partita",
   "minimum_rank": "Rango minimo",
+  "maximum_rank": "Rango massimo",
   "ranked_match": "Partita classificata",
   "ranked_match_description": "Per giocatori competitivi.\n8 giocatori, sistema Elo attivo, possono entrare solo giocatori del tuo stesso rango.",
   "ranked_game_hint": "Questa partita è accessibile solo a giocatori con il tuo stesso rango.",
@@ -2902,6 +2922,7 @@
   "GLHF": "GLHF",
   "not_elligible_elo_hint": "❌Le partite con soli bot non sono idonee per il guadagno/perdita ELO.",
   "add_bot_or_wait_hint": "Aggiungi bots o attendi che altri giocatori si uniscano alla tua stanza",
+  "wait_for_players_hint": "Aspetta per altri giocatori di entrare la tua lobby",
   "private_game": "Lobby privata",
   "make_room_private": "Rendi la stanza privata",
   "make_room_public": "Rendi la stanza pubblica",

@@ -2249,7 +2249,7 @@
     "DARMANITAN_ZEN": "Can no longer move or attack, but regain [10,SP] HP per second. Transforms back into Standard Mode when fully healed.",
     "BAD_LUCK": "Reduce all opponents LUCK by 20%",
     "GOOD_LUCK": "Increase the LUCK of all allies by 20%",
-    "PRIMEAPE": "Primape becomes angrier when KO, gaining 1 permanent ATK. After Primape is knocked out 10 times, evolves into Annihilape."
+    "PRIMEAPE": "Primeape becomes angrier when KO, gaining 1 permanent ATK. After Primeape is knocked out 10 times, evolves into Annihilape."
   },
   "stat": {
     "ATK": "Attack",
