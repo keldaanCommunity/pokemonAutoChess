@@ -259,7 +259,7 @@ export class Electrike extends Pokemon {
   atk = 15
   def = 5
   speDef = 5
-  maxPP = 60
+  maxPP = 65
   range = 1
   skill = Ability.VOLT_SWITCH
   attackSprite = AttackSprite.ELECTRIC_MELEE
@@ -274,7 +274,7 @@ export class Manectric extends Pokemon {
   atk = 30
   def = 6
   speDef = 6
-  maxPP = 60
+  maxPP = 65
   range = 1
   skill = Ability.VOLT_SWITCH
   attackSprite = AttackSprite.ELECTRIC_MELEE
@@ -288,7 +288,7 @@ export class MegaManectric extends Pokemon {
   atk = 48
   def = 7
   speDef = 7
-  maxPP = 60
+  maxPP = 65
   range = 1
   skill = Ability.VOLT_SWITCH
   attackSprite = AttackSprite.ELECTRIC_MELEE
@@ -5275,7 +5275,7 @@ export class Groudon extends Pokemon {
   evolution = Pkm.PRIMAL_GROUDON
   evolutionRule = new ItemEvolutionRule([Item.RED_ORB])
   hp = 300
-  atk = 30
+  atk = 20
   def = 5
   speDef = 3
   maxPP = 100
@@ -6089,7 +6089,7 @@ export class Marshadow extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FIGHTING])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 250
+  hp = 220
   atk = 28
   def = 5
   speDef = 5
@@ -6428,7 +6428,7 @@ export class PrimalGroudon extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 4
   hp = 400
-  atk = 30
+  atk = 20
   def = 6
   speDef = 3
   maxPP = 100

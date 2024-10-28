@@ -376,7 +376,7 @@ export class EarthquakeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 120
+    const damage = 100
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (
         (tg && pokemon.team !== tg.team && pokemon.positionY === y) ||
@@ -5230,13 +5230,7 @@ export class PoisonPowderStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 30
-    if (pokemon.stars === 2) {
-      damage = 60
-    }
-    if (pokemon.stars === 3) {
-      damage = 120
-    }
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
 
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
@@ -5276,14 +5270,7 @@ export class SilverWindStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
 
-    let damage = 30
-    if (pokemon.stars === 2) {
-      damage = 60
-    }
-    if (pokemon.stars === 3) {
-      damage = 120
-    }
-
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
 
@@ -8453,7 +8440,6 @@ export class SunsteelStrikeStrategy extends AbilityStrategy {
                 pokemon,
                 crit
               )
-              cell.value.status.triggerBurn(3000, cell.value, pokemon)
             }
           })
         }, 1000)
