@@ -3229,7 +3229,7 @@
     "CROWDED": "북적이는 보드",
     "KECLEONS_SHOP": "켈리몬의 가게",
     "FREE_MARKET": "모든 것이 거저",
-    "SHINY_HUNTER": "희귀품 사냥꾼",
+    "SHINY_HUNTER": "이로치 헌터",
     "DESPERATE_MOVES": "절박한 행동"
   },
   "scribble_description": {
@@ -3247,7 +3247,7 @@
     "CROWDED": "보드에 놓을 수 있는 최대 포켓몬 마릿수 +3",
     "KECLEONS_SHOP": "아이템초밥집이 켈리몬의 상점으로 대체됩니다. 켈리몬은 6개의 아이템을 각각 10골드씩에 판매합니다.",
     "FREE_MARKET": "0골드에 포켓몬을 사고 팔 수 있습니다.",
-    "SHINY_HUNTER": "PVE에서 만나는 모든 야생포켓몬들이 모두 이로치가 됩니다.",
+    "SHINY_HUNTER": "PVE에서 만나는 모든 야생 포켓몬들이 모두 이로치가 됩니다.",
     "DESPERATE_MOVES": "플레이어들은 150 HP 로 시작합니다. GOLD 대신 HP 를 소모하여 상점을 새로고침합니다."
   },
   "loading_hints": {
