@@ -82,7 +82,10 @@ function texturePackAtlas() {
           let packName = packPath.split("/").pop()
 
           if (packPath in atlas.packs === false) {
-            atlas.packs[packPath] = { name: packName }
+            atlas.packs[packPath] = {
+              name: packName,
+              path: `${packPath}-${pkg.version.replaceAll(".", "_")}.json`
+            }
           }
 
           // declare automatically anims if it matches 000.png, 001.png etc.
@@ -110,6 +113,28 @@ function texturePackAtlas() {
         }
       }
       walk(tree)
+
+      for (const packName in atlas.packs) {
+        console.log(
+          `Renaming ${packName} pack to ${packName}-${pkg.version.replaceAll(".", "_")}.json`
+        )
+        const newName = `${packName}-${pkg.version.replaceAll(".", "_")}`
+        fs.moveSync(
+          `../../app/public/dist/client/assets/${packName}/${packName}.png`,
+          `../../app/public/dist/client/assets/${packName}/${newName}.png`
+        )
+        const json = fs.readJSONSync(
+          `../../app/public/dist/client/assets/${packName}/${packName}.json`
+        )
+        json.textures[0].image = `${newName}.png`
+        fs.writeJSONSync(
+          `../../app/public/dist/client/assets/${packName}/${newName}.json`,
+          json
+        )
+        fs.removeSync(
+          `../../app/public/dist/client/assets/${packName}/${packName}.json`
+        )
+      }
 
       //fs.writeJSONSync("tree.json", tree)
       fs.writeJSONSync(atlasPath, atlas)

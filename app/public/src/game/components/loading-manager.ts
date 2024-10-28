@@ -1,6 +1,7 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
 import AnimatedTiles from "phaser-animated-tiles-phaser3.5/dist/AnimatedTiles.min.js"
+import pkg from "../../../../../package.json"
 import { DungeonDetails } from "../../../../types/enum/Dungeon"
 import { values } from "../../../../utils/schemas"
 import indexList from "../../../src/assets/pokemons/indexList.json"
@@ -83,7 +84,7 @@ export default class LoadingManager {
     for (const pack in atlas.packs) {
       scene.load.multiatlas(
         atlas.packs[pack].name,
-        `/assets/${pack}/${atlas.packs[pack].name}.json`,
+        `/assets/${pack}/${atlas.packs[pack].name}-${pkg.version.replaceAll(".", "_")}.json`,
         `/assets/${pack}/`
       )
     }
