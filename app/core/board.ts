@@ -1,5 +1,5 @@
-import { IPokemonEntity } from "../types"
-import { Effect } from "../types/enum/Effect"
+import { IPokemonEntity, Transfer } from "../types"
+import { BoardEffect, Effect } from "../types/enum/Effect"
 import { Orientation } from "../types/enum/Game"
 import { Passive } from "../types/enum/Passive"
 import { distanceC, distanceM } from "../utils/distance"
@@ -7,6 +7,7 @@ import { logger } from "../utils/logger"
 import { OrientationArray, OrientationVector } from "../utils/orientation"
 import { pickRandomIn } from "../utils/random"
 import { PokemonEntity } from "./pokemon-entity"
+import Simulation from "./simulation"
 
 export type Cell = {
   x: number
@@ -403,5 +404,47 @@ export default class Board {
 
     candidateCells.sort((a, b) => b.distance - a.distance)
     return candidateCells[0]
+  }
+
+  addBoardEffect(
+    x: number,
+    y: number,
+    effect: BoardEffect,
+    simulation: Simulation
+  ) {
+    const previousEffect = this.effects[y * this.columns + x]
+    const entityOnCell = this.getValue(x, y)
+    if (entityOnCell) {
+      entityOnCell.effects.add(effect)
+    }
+    this.effects[y * this.columns + x] = effect
+
+    if (previousEffect !== effect) {
+      // show anim effect client side
+      simulation.room.broadcast(Transfer.BOARD_EVENT, {
+        simulationId: simulation.id,
+        effect,
+        x,
+        y
+      })
+    }
+  }
+
+  clearBoardEffect(x: number, y: number, simulation: Simulation) {
+    const effect = this.effects[y * this.columns + x]
+    const entityOnCell = this.getValue(x, y)
+    if (effect && entityOnCell) {
+      entityOnCell.effects.delete(effect)
+    }
+    if (effect) {
+      // clean effect anim client side
+      simulation.room.broadcast(Transfer.BOARD_EVENT, {
+        simulationId: simulation.id,
+        effect: null,
+        x,
+        y
+      })
+    }
+    this.effects[y * this.columns + x] = undefined
   }
 }

@@ -18,7 +18,6 @@ import { Effect } from "../types/enum/Effect"
 import {
   AttackType,
   BattleResult,
-  BoardEvent,
   Orientation,
   PokemonActionState,
   Rarity,
@@ -1475,7 +1474,7 @@ export default class Simulation extends Schema implements ISimulation {
         }
         this.room.broadcast(Transfer.BOARD_EVENT, {
           simulationId: this.id,
-          type: BoardEvent.LIGHTNING,
+          effect: Effect.LIGHTNING_STRIKE,
           x,
           y
         })

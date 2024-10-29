@@ -27,7 +27,6 @@ import { Ability } from "../types/enum/Ability"
 import { Effect } from "../types/enum/Effect"
 import {
   AttackType,
-  BoardEvent,
   Orientation,
   PokemonActionState,
   Rarity,
@@ -1069,21 +1068,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       const cells = board.getAdjacentCells(this.positionX, this.positionY)
       cells.forEach((cell) => {
-        const index = cell.y * board.columns + cell.x
-        if (board.effects[index] !== Effect.GAS) {
-          board.effects[index] = Effect.GAS
-          this.simulation.room.broadcast(Transfer.BOARD_EVENT, {
-            simulationId: this.simulation.id,
-            type: BoardEvent.GAS,
-            x: cell.x,
-            y: cell.y
-          })
-        }
-        if (cell.value) {
-          cell.value.effects.add(Effect.GAS)
-          if (cell.value.team !== this.team) {
-            cell.value.status.triggerParalysis(3000, cell.value)
-          }
+        board.addBoardEffect(cell.x, cell.y, Effect.GAS, this.simulation)
+        if (cell.value && cell.value.team !== this.team) {
+          cell.value.status.triggerParalysis(3000, cell.value)
         }
       })
       this.items.delete(Item.SMOKE_BALL)
