@@ -8214,7 +8214,9 @@ export class SpacialRendStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = 100
     const rowToTarget = target.positionY
-    const enemies = board.cells.filter((p) => p && p.team !== pokemon.team)
+    const enemies = board.cells.filter(
+      (p) => p && p.team !== pokemon.team && !p.status.skydiving
+    )
     const n = enemies.length
     for (let i = 0; i < Math.floor(n / 2); i++) {
       board.swapValue(
