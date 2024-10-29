@@ -1252,7 +1252,8 @@
     "DRAPION": "Drapion",
     "DARUMAKA": "Darumaka",
     "DARMANITAN": "Darmanitan",
-    "DARMANITAN_ZEN": "Darmanitan (Zen)"
+    "DARMANITAN_ZEN": "Darmanitan (Zen)",
+    "TURTONATOR": "Turtonator"
   },
   "ability_description": {
     "SOFT_BOILED": "Cures all status effects and grants [20,40,80,SP] SHIELD to every allied Pokémon",
