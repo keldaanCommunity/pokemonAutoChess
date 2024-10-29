@@ -18,11 +18,10 @@ import GameRoom from "../rooms/game-room"
 import { ILeaderboardInfo } from "../types/interfaces/LeaderboardInfo"
 import { Ability } from "./enum/Ability"
 import { DungeonPMDO } from "./enum/Dungeon"
-import { Effect } from "./enum/Effect"
+import { BoardEffect, Effect } from "./enum/Effect"
 import { Emotion } from "./enum/Emotion"
 import {
   AttackType,
-  BoardEvent,
   GameMode,
   Orientation,
   PokemonActionState,
@@ -773,7 +772,7 @@ export enum Title {
 
 export interface IBoardEvent {
   simulationId: string
-  type: BoardEvent
+  effect: BoardEffect
   x: number
   y: number
 }

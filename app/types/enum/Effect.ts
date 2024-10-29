@@ -135,5 +135,18 @@ export enum Effect {
   FLUID = "FLUID",
   SHAPELESS = "SHAPELESS",
   ETHEREAL = "ETHEREAL",
-  ZEN_MODE = "ZEN_MODE"
+  ZEN_MODE = "ZEN_MODE",
+  LIGHTNING_STRIKE = "LIGHTNING_STRIKE"
 }
+
+export const BoardEffects = [
+  Effect.LIGHTNING_STRIKE,
+  Effect.GAS,
+  Effect.POISON_GAS,
+  Effect.STEALTH_ROCKS,
+  Effect.SPIKES,
+  Effect.STICKY_WEB,
+  Effect.HAIL
+] as const
+
+export type BoardEffect = (typeof BoardEffects)[number]
