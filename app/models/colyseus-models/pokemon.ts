@@ -34,7 +34,6 @@ import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
 import { Effect } from "../../types/enum/Effect"
 import {
   AttackType,
-  BoardEvent,
   PokemonActionState,
   Rarity,
   Stat
@@ -14751,18 +14750,8 @@ export class Skarmory extends Pokemon {
         const entity = params.entity
 
         board.forEach((x, y, tg) => {
-          const index = y * board.columns + x
           if (!tg && chance(0.3, entity)) {
-            if (board.effects[index] !== Effect.SPIKES) {
-              board.effects[index] = Effect.SPIKES
-              simulation.room.broadcast(Transfer.BOARD_EVENT, {
-                simulationId: simulation.id,
-                type: BoardEvent.SPIKES,
-                x: x,
-                y: y
-              })
-            }
-
+            board.addBoardEffect(x, y, Effect.SPIKES, simulation)
             simulation.room.broadcast(Transfer.ABILITY, {
               id: simulation.id,
               skill: Ability.SPIKES,

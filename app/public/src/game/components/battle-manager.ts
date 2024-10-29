@@ -12,7 +12,6 @@ import { Ability } from "../../../../types/enum/Ability"
 import { Effect } from "../../../../types/enum/Effect"
 import {
   AttackType,
-  BoardEvent,
   HealType,
   Orientation,
   PokemonActionState,
@@ -1064,7 +1063,7 @@ export default class BattleManager {
       this.boardEventSprites[index] = null
     }
 
-    if (event.type === BoardEvent.LIGHTNING) {
+    if (event.effect === Effect.LIGHTNING_STRIKE) {
       const thunderSprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
@@ -1079,7 +1078,7 @@ export default class BattleManager {
       })
     }
 
-    if (event.type === BoardEvent.GAS) {
+    if (event.effect === Effect.GAS) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
@@ -1100,7 +1099,7 @@ export default class BattleManager {
       })
     }
 
-    if (event.type === BoardEvent.POISON_GAS) {
+    if (event.effect === Effect.POISON_GAS) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
@@ -1124,7 +1123,7 @@ export default class BattleManager {
       })
     }
 
-    if (event.type === BoardEvent.STEALTH_ROCKS) {
+    if (event.effect === Effect.STEALTH_ROCKS) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
@@ -1144,7 +1143,7 @@ export default class BattleManager {
       })
     }
 
-    if (event.type === BoardEvent.SPIKES) {
+    if (event.effect === Effect.SPIKES) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
@@ -1166,7 +1165,7 @@ export default class BattleManager {
       })
     }
 
-    if (event.type === BoardEvent.STICKY_WEB) {
+    if (event.effect === Effect.STICKY_WEB) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
@@ -1188,7 +1187,7 @@ export default class BattleManager {
       })
     }
 
-    if (event.type === BoardEvent.HAIL) {
+    if (event.effect === Effect.HAIL) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],

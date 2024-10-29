@@ -39,7 +39,7 @@ import {
   EvolutionTime
 } from "../../types/Config"
 import { Effect } from "../../types/enum/Effect"
-import { AttackType, BoardEvent, Team } from "../../types/enum/Game"
+import { AttackType, Team } from "../../types/enum/Game"
 import { ArtificialItems, Berries, Item } from "../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
@@ -3361,21 +3361,7 @@ export class SmokeScreenStrategy extends AbilityStrategy {
       )
 
       smokeCells.forEach(([x, y]) => {
-        const index = y * board.columns + x
-        if (board.effects[index] !== Effect.GAS) {
-          board.effects[index] = Effect.GAS
-          pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
-            simulationId: pokemon.simulation.id,
-            type: BoardEvent.GAS,
-            x,
-            y
-          })
-        }
-
-        const enemy = board.getValue(x, y)
-        if (enemy) {
-          enemy.effects.add(Effect.GAS)
-        }
+        board.addBoardEffect(x, y, Effect.GAS, pokemon.simulation)
       })
     }
   }
@@ -3573,14 +3559,11 @@ export class WaterfallStrategy extends AbilityStrategy {
     const shield = [50, 100, 150][pokemon.stars - 1] ?? 150
     pokemon.addShield(shield, pokemon, 1, crit)
     pokemon.status.clearNegativeStatus()
-    board.effects[pokemon.positionY * board.columns + pokemon.positionX] =
-      undefined
-    pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
-      simulationId: pokemon.simulation.id,
-      type: "clear",
-      x: pokemon.positionX,
-      y: pokemon.positionY
-    })
+    board.clearBoardEffect(
+      pokemon.positionX,
+      pokemon.positionY,
+      pokemon.simulation
+    )
   }
 }
 
@@ -5626,16 +5609,7 @@ export class HailStrategy extends AbilityStrategy {
         targetY: y
       })
 
-      const index = y * board.columns + x
-      if (board.effects[index] !== Effect.HAIL) {
-        board.effects[index] = Effect.HAIL
-        pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
-          simulationId: pokemon.simulation.id,
-          type: BoardEvent.HAIL,
-          x,
-          y
-        })
-      }
+      board.addBoardEffect(x, y, Effect.HAIL, pokemon.simulation)
     }
   }
 }
@@ -6146,28 +6120,15 @@ export class SmogStrategy extends AbilityStrategy {
     const damage = pokemon.stars === 1 ? 10 : pokemon.stars === 2 ? 20 : 40
 
     cells.forEach((cell) => {
-      const index = cell.y * board.columns + cell.x
-      if (board.effects[index] !== Effect.GAS) {
-        board.effects[index] = Effect.GAS
-        pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
-          simulationId: pokemon.simulation.id,
-          type: BoardEvent.GAS,
-          x: cell.x,
-          y: cell.y
-        })
-      }
-
-      if (cell.value) {
-        cell.value.effects.add(Effect.GAS)
-        if (cell.value.team !== pokemon.team) {
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
-        }
+      board.addBoardEffect(cell.x, cell.y, Effect.GAS, pokemon.simulation)
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
       }
     })
   }
@@ -6186,20 +6147,7 @@ export class ShelterStrategy extends AbilityStrategy {
     pokemon.addDefense(defGain, pokemon, 1, crit)
     const cells = board.getCellsInFront(pokemon, target)
     cells.forEach((cell) => {
-      const index = cell.y * board.columns + cell.x
-      if (board.effects[index] !== Effect.GAS) {
-        board.effects[index] = Effect.GAS
-        pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
-          simulationId: pokemon.simulation.id,
-          type: BoardEvent.GAS,
-          x: cell.x,
-          y: cell.y
-        })
-      }
-
-      if (cell.value) {
-        cell.value.effects.add(Effect.GAS)
-      }
+      board.addBoardEffect(cell.x, cell.y, Effect.GAS, pokemon.simulation)
     })
   }
 }
@@ -6594,29 +6542,22 @@ export class PoisonGasStrategy extends AbilityStrategy {
 
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
     cells.forEach((cell) => {
-      const index = cell.y * board.columns + cell.x
-      if (board.effects[index] !== Effect.POISON_GAS) {
-        board.effects[index] = Effect.POISON_GAS
-        pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
-          simulationId: pokemon.simulation.id,
-          type: BoardEvent.POISON_GAS,
-          x: cell.x,
-          y: cell.y
-        })
-      }
+      board.addBoardEffect(
+        cell.x,
+        cell.y,
+        Effect.POISON_GAS,
+        pokemon.simulation
+      )
 
-      if (cell.value) {
-        cell.value.effects.add(Effect.POISON_GAS)
-        if (cell.value.team !== pokemon.team) {
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
-          cell.value.status.triggerPoison(3000, cell.value, pokemon)
-        }
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        cell.value.status.triggerPoison(3000, cell.value, pokemon)
       }
     })
   }
@@ -6701,17 +6642,12 @@ export class StealthRocksStrategy extends AbilityStrategy {
     const damage = 50
 
     cells.forEach((cell) => {
-      const index = cell.y * board.columns + cell.x
-      if (board.effects[index] !== Effect.STEALTH_ROCKS) {
-        board.effects[index] = Effect.STEALTH_ROCKS
-        pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
-          simulationId: pokemon.simulation.id,
-          type: BoardEvent.STEALTH_ROCKS,
-          x: cell.x,
-          y: cell.y
-        })
-      }
-
+      board.addBoardEffect(
+        cell.x,
+        cell.y,
+        Effect.STEALTH_ROCKS,
+        pokemon.simulation
+      )
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
         id: pokemon.simulation.id,
         skill: Ability.STEALTH_ROCKS,
@@ -6720,7 +6656,6 @@ export class StealthRocksStrategy extends AbilityStrategy {
       })
 
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.effects.add(Effect.STEALTH_ROCKS)
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -6750,16 +6685,7 @@ export class SpikesStrategy extends AbilityStrategy {
     const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
 
     cells.forEach((cell) => {
-      const index = cell.y * board.columns + cell.x
-      if (board.effects[index] !== Effect.SPIKES) {
-        board.effects[index] = Effect.SPIKES
-        pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
-          simulationId: pokemon.simulation.id,
-          type: BoardEvent.SPIKES,
-          x: cell.x,
-          y: cell.y
-        })
-      }
+      board.addBoardEffect(cell.x, cell.y, Effect.SPIKES, pokemon.simulation)
 
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
         id: pokemon.simulation.id,
@@ -6771,7 +6697,6 @@ export class SpikesStrategy extends AbilityStrategy {
       })
 
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.effects.add(Effect.SPIKES)
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -6797,16 +6722,12 @@ export class StickyWebStrategy extends AbilityStrategy {
     const damage = pokemon.stars === 3 ? 70 : pokemon.stars === 2 ? 35 : 20
 
     cells.forEach((cell) => {
-      const index = cell.y * board.columns + cell.x
-      if (board.effects[index] !== Effect.STICKY_WEB) {
-        board.effects[index] = Effect.STICKY_WEB
-        pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
-          simulationId: pokemon.simulation.id,
-          type: BoardEvent.STICKY_WEB,
-          x: cell.x,
-          y: cell.y
-        })
-      }
+      board.addBoardEffect(
+        cell.x,
+        cell.y,
+        Effect.STICKY_WEB,
+        pokemon.simulation
+      )
 
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
         id: pokemon.simulation.id,
@@ -6816,7 +6737,6 @@ export class StickyWebStrategy extends AbilityStrategy {
       })
 
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.effects.add(Effect.STICKY_WEB)
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -9536,16 +9456,12 @@ export class StoneAxeStrategy extends AbilityStrategy {
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
 
     cells.forEach((cell) => {
-      const index = cell.y * board.columns + cell.x
-      if (board.effects[index] !== Effect.STEALTH_ROCKS) {
-        board.effects[index] = Effect.STEALTH_ROCKS
-        pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
-          simulationId: pokemon.simulation.id,
-          type: BoardEvent.STEALTH_ROCKS,
-          x: cell.x,
-          y: cell.y
-        })
-      }
+      board.addBoardEffect(
+        cell.x,
+        cell.y,
+        Effect.STEALTH_ROCKS,
+        pokemon.simulation
+      )
 
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
         id: pokemon.simulation.id,
@@ -9553,10 +9469,6 @@ export class StoneAxeStrategy extends AbilityStrategy {
         positionX: cell.x,
         positionY: cell.y
       })
-
-      if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.effects.add(Effect.STEALTH_ROCKS)
-      }
     })
   }
 }
@@ -10009,18 +9921,13 @@ export class OktzookaStrategy extends AbilityStrategy {
       pokemon,
       false
     )
-    target.effects.add(Effect.GAS)
 
-    const index = target.positionY * board.columns + target.positionX
-    if (board.effects[index] !== Effect.GAS) {
-      board.effects[index] = Effect.GAS
-      pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
-        simulationId: pokemon.simulation.id,
-        type: BoardEvent.GAS,
-        x: target.positionX,
-        y: target.positionY
-      })
-    }
+    board.addBoardEffect(
+      target.positionX,
+      target.positionY,
+      Effect.GAS,
+      pokemon.simulation
+    )
   }
 }
 

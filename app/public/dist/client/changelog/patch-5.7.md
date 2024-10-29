@@ -103,6 +103,7 @@
 - Fix many bugs related to Stone Edge ability
 - Fix several passives not properly applied on spawns/clones happening during the fight
 - Fix duplication bugs related to Corsola evolution
+- Fix board effects not applying or not clearing sometimes when unit is already in the cell when the effect is applied
 
 # Misc
 
