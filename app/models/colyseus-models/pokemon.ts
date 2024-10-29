@@ -45,6 +45,7 @@ import {
   Item,
   ItemComponents,
   ItemRecipe,
+  OgerponMasks,
   SynergyItems
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
@@ -14775,12 +14776,7 @@ function ogerponOnAcquired(
     | Item.TEAL_MASK
     | null
 ) {
-  ;[
-    Item.WELLSPRING_MASK,
-    Item.CORNERSTONE_MASK,
-    Item.HEARTHFLAME_MASK,
-    Item.TEAL_MASK
-  ].forEach((mask) => {
+  OgerponMasks.forEach((mask) => {
     if (!player.items.includes(mask) && mask !== currentMask) {
       player.items.push(mask)
     }
