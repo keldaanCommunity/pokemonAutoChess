@@ -570,7 +570,7 @@ export class OnDragDropItemCommand extends Command<
     }
 
     if (item === Item.RARE_CANDY) {
-      const evolution = pokemon?.evolution
+      const evolution = pokemon.evolutionRule?.getEvolution(pokemon, player)
       if (
         !evolution ||
         evolution === Pkm.DEFAULT ||
