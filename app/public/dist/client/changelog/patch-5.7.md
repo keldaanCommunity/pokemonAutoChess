@@ -58,6 +58,7 @@
 - Nerf Poison Powder (Dustox): 30/60/120 → 20/40/80 special damage
 - Nerf Buizel line PP: 50 → 65
 - Buff Vulpix line: PP 100 → 85
+- Buff Hoothoot line: PP 100 → 90
 
 # Changes to Synergies
 

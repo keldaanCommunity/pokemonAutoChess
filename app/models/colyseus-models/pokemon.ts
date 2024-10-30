@@ -8144,7 +8144,7 @@ export class Hoothoot extends Pokemon {
   atk = 5
   def = 2
   speDef = 3
-  maxPP = 100
+  maxPP = 90
   range = 1
   skill = Ability.HYPNOSIS
   additional = true
@@ -8163,7 +8163,7 @@ export class Noctowl extends Pokemon {
   atk = 10
   def = 3
   speDef = 5
-  maxPP = 100
+  maxPP = 90
   range = 1
   skill = Ability.HYPNOSIS
   additional = true
