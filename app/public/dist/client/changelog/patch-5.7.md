@@ -117,3 +117,4 @@
 - Remove Glitch trainer title. Too many annoying bug reports.
 - Remove Backer title to be up to date with the new tipee.
 - Thanks to all the contributors who helped with the translations! 3zukiDOT, Darkatek7, danGuinzo, logannoir, ph8ndstne, Zeleos753, RambonL, Tok1013-8, mokers-creater, SeaCello, Maogee, PierreBhs and more
+- Remove t-SNE and DBSCAN synergy map due to github action computation time limit issue (>360 minutes). I don't have a better hosting plan for now.

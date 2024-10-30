@@ -14,19 +14,20 @@ export default function MetaReport() {
     <div id="meta-report">
       <Tabs>
         <TabList>
-          <Tab key="team-comps">{t("meta_report")}</Tab>
-          <Tab key="items">{t("item_report")}</Tab>
+          {/* <Tab key="team-comps">{t("meta_report")}</Tab> */}
+
           <Tab key="pokemons">{t("pokemon_report")}</Tab>
+          <Tab key="items">{t("item_report")}</Tab>
         </TabList>
 
-        <TabPanel key="team-comps-panel">
+        {/* <TabPanel key="team-comps-panel">
           <CompositionReport />
+        </TabPanel> */}
+        <TabPanel>
+          <PokemonReport />
         </TabPanel>
         <TabPanel>
           <ItemReport />
-        </TabPanel>
-        <TabPanel>
-          <PokemonReport />
         </TabPanel>
       </Tabs>
     </div>
