@@ -59,6 +59,7 @@
 - Nerf Buizel line PP: 50 → 65
 - Buff Vulpix line: PP 100 → 85
 - Buff Hoothoot line: PP 100 → 90
+- Buff Popplio line: PP 80 → 70
 
 # Changes to Synergies
 
