@@ -105,6 +105,7 @@
 - Fix duplication bugs related to Corsola evolution
 - Fix board effects not applying or not clearing sometimes when unit is already in the cell when the effect is applied
 - Prevent skydiving units from being moved by Palkia's Spacial Rend
+- Fix Rare candy not working with divergent evolutions
 
 # Misc
 

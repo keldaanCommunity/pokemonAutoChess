@@ -48,6 +48,7 @@ import {
   ItemComponents,
   ItemRecipe,
   NonHoldableItems,
+  OgerponMasks,
   ShinyItems,
   SynergyGivenByItem,
   SynergyItems
@@ -472,26 +473,22 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
-    if (
-      item === Item.TEAL_MASK ||
-      item === Item.WELLSPRING_MASK ||
-      item === Item.HEARTHFLAME_MASK ||
-      item === Item.CORNERSTONE_MASK
-    ) {
+    if (OgerponMasks.includes(item)) {
       if (
         pokemon.passive === Passive.OGERPON_TEAL ||
         pokemon.passive === Passive.OGERPON_WELLSPRING ||
         pokemon.passive === Passive.OGERPON_HEARTHFLAME ||
         pokemon.passive === Passive.OGERPON_CORNERSTONE
       ) {
-        if (pokemon.passive === Passive.OGERPON_TEAL) {
-          pokemon.items.delete(Item.TEAL_MASK)
-        } else if (pokemon.passive === Passive.OGERPON_WELLSPRING) {
-          pokemon.items.delete(Item.WELLSPRING_MASK)
-        } else if (pokemon.passive === Passive.OGERPON_HEARTHFLAME) {
-          pokemon.items.delete(Item.HEARTHFLAME_MASK)
-        } else if (pokemon.passive === Passive.OGERPON_CORNERSTONE) {
-          pokemon.items.delete(Item.CORNERSTONE_MASK)
+        const currentMask = values(pokemon.items).find((i) =>
+          OgerponMasks.includes(i)
+        )
+        if (currentMask) {
+          pokemon.items.delete(currentMask)
+        } else if (pokemon.items.size >= 3) {
+          // full, can't hold mask
+          client.send(Transfer.DRAG_DROP_FAILED, message)
+          return
         }
 
         if (item === Item.TEAL_MASK) {
@@ -570,7 +567,7 @@ export class OnDragDropItemCommand extends Command<
     }
 
     if (item === Item.RARE_CANDY) {
-      const evolution = pokemon?.evolution
+      const evolution = pokemon.evolutionRule?.getEvolution(pokemon, player)
       if (
         !evolution ||
         evolution === Pkm.DEFAULT ||
