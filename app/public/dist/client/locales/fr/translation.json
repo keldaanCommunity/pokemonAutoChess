@@ -1867,7 +1867,7 @@
     "POISON_GAS": "Inflige POISONNED chaque seconde",
     "SHINING_RAY": "Augmente la AP et l'ATK de 20%",
     "LIGHT_PULSE": "Donne également +8 PP par seconde",
-    "ETERNAL_LIGHT": "Augmente également la DEF et SPE_DEF de 50% et donne RUNE_PROTECT pendant 10 secondes",
+    "ETERNAL_LIGHT": "Augmente également la DEF et SPE_DEF de 50% et donne RUNE_PROTECT pendant 8 secondes",
     "MAX_ILLUMINATION": "Donne également 100 SHIELD et RESURECTION",
     "QUICK_FEET": "+30% ATK et vitesse de déplacement",
     "RUN_AWAY": "+50% ATK et vitesse de déplacement",

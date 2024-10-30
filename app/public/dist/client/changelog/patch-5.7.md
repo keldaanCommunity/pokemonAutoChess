@@ -82,7 +82,7 @@
 - Change Ice 8: freeze chance ~~50~~ 40%, increased damage to frozen enemies: ~~20~~ 30%
 - Buff Sound 2: +1 → +2 attack every time a sound pokemon casts its ability
 - Nerf Grass 3: HP healed every 2 seconds: 8 → 7
-- Nerf Light 3: PP per second 10 → 8
+- Nerf Light 3: PP per second 10 → 8, Light 4: Rune protect duration 10 → 8 seconds
 - Buff Amorphous 7: 5 → 6% Attack Speed per unique synergy
 
 # Changes to Items

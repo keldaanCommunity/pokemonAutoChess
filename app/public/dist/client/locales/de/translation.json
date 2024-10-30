@@ -1830,7 +1830,7 @@
     "POISON_GAS": "Verursacht POISONNED jede Sekunde",
     "SHINING_RAY": "Erhöht",
     "LIGHT_PULSE": "Gibt außerdem +8 PP pro Sekunde",
-    "ETERNAL_LIGHT": "Erhöht außerdem DEF und SPE_DEF um 50% und verleiht RUNE_PROTECT für 10 Sekunden",
+    "ETERNAL_LIGHT": "Erhöht außerdem DEF und SPE_DEF um 50% und verleiht RUNE_PROTECT für 8 Sekunden",
     "MAX_ILLUMINATION": "Gibt auch 100 SHIELD und RESURECTION",
     "QUICK_FEET": "+30% ATK und Bewegungstempo",
     "RUN_AWAY": "+50% ATK und Bewegungstempo, und 10% Chance auf WILD Pokémon im Shop",
