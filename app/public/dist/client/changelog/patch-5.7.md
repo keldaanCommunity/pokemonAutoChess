@@ -56,6 +56,7 @@
 - Nerf Marshadow: HP 250 → 220
 - Nerf Silver wind (Beautifly): 30/60/120 → 20/40/80 special damage
 - Nerf Poison Powder (Dustox): 30/60/120 → 20/40/80 special damage
+- Nerf Buizel line PP: 50 → 65
 
 # Changes to Synergies
 
