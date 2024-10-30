@@ -971,7 +971,7 @@ export class Tympole extends Pokemon {
   atk = 7
   def = 3
   speDef = 3
-  maxPP = 90
+  maxPP = 70
   range = 1
   skill = Ability.SLUDGE_WAVE
   passive = Passive.HATCH
@@ -992,7 +992,7 @@ export class Palpitoad extends Pokemon {
   atk = 17
   def = 4
   speDef = 4
-  maxPP = 90
+  maxPP = 70
   range = 1
   skill = Ability.SLUDGE_WAVE
   passive = Passive.HATCH
@@ -1011,7 +1011,7 @@ export class Seismitoad extends Pokemon {
   atk = 22
   def = 6
   speDef = 6
-  maxPP = 90
+  maxPP = 70
   range = 1
   skill = Ability.SLUDGE_WAVE
   attackSprite = AttackSprite.WATER_MELEE

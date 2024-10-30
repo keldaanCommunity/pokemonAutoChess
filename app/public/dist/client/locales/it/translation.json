@@ -1385,7 +1385,7 @@
     "FLYING_PRESS": "Piomba dal cielo sul bersaglio più lontano, infliggendogli [50,SP]% dei HP dell'utilizzatore come SPECIAL.",
     "ILLUSION": "L'utilizzatore recupera [30,50,70,SP=0.5] HP e copia la forma, ATK, DEF, SPE_DEF e RANGE del Pokèmon bersaglio dell'abilità.",
     "SLUDGE": "Lancia spazzatura nelle tre celle di fronte, la quale applica [2,3,4] istanze di POISONNED per [3,SP] secondi.",
-    "SLUDGE_WAVE": "Lancia uno spruzzo di sporcizia al Pokèmon nemico con più HP, infliggendogli [10,20,30,SP] SPECIAL e POISONNED per [2,4,6] secondi a tutti i Pokèmon nemici nel tragitto.",
+    "SLUDGE_WAVE": "Lancia uno spruzzo di rifiuti sul bersaglio e sui nemici adiacenti, infliggendo [10,20,30,SP] SPECIAL e POISONNED per [2,3,4,SP] secondi",
     "SMOG": "Proietta una nuova di gas puzzolente nelle tre celle di fronte, infliggendo [10,20,40,SP] SPECIAL. Il gas rimane sul campo fino alla fine del combattimento e riduce la precisione dei Pokèmon del 50%. ",
     "SHELTER": "Aumenta la DEF di [3,6,12,SP] e proietta un muro di fumo nelle 3 celle di fronte. Il fumo rimane sul campo fino alla fine del combattimento e riduce la precisione dei Pokèmon del 50%. ",
     "AURORA_BEAM": "Spara un raggio in linea retta. Tutti i bersagli colpiti prendono [25,50,100,SP] SPECIAL e possono subire lo status FREEZE (probabilità basata sull'attuale livello di sinergia di ghiaccio).",

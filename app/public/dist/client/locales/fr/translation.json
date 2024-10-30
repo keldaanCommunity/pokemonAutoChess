@@ -1385,7 +1385,7 @@
     "FLYING_PRESS": "Plonge depuis le ciel jusqu'à la cible la plus éloignée, infligeant [50,SP]% des HP max du lanceur en SPECIAL",
     "ILLUSION": "L'utilisateur récupère [30,50,70,SP = 0,5] points HP et copie le formulaire ainsi que l'ATK, la DEF, la SPE_DEF et la RANGE du Pokémon ciblé",
     "SLUDGE": "Jette des détritus sur 3 cases devant, ce qui inflige [2,3,4] cumuls de POISONNED pendant [3,SP] secondes",
-    "SLUDGE_WAVE": "Envoie une vague de déchets sur l'ennemi avec le plus de HP, infligeant [10,20,30,SP] SPECIAL et POISON pendant [2,4,6] secondes à tous les adversaires sur le chemin",
+    "SLUDGE_WAVE": "Envoie une vague de déchets sur la cible et les adversaires adjacents, infligeant [10,20,30,SP] SPECIAL et POISON pendant [2,3,4,SP] secondes",
     "SMOG": "Projette un nuage de gaz puant sur 3 cases devant, infligeant [10,20,40,SP] SPECIAL. Le gaz reste sur le plateau jusqu'à la fin du combat et réduit la précision des unités à l'intérieur de 50%.",
     "SHELTER": "Gagne [3,6,12,SP] DEF et projette un écran de fumée sur les 3 cases en face. La fumée reste sur le terrain jusqu'à la fin du combat et réduit la précision des Pokémons à l'intérieur de 50%.",
     "AURORA_BEAM": "Tire un faisceau en ligne. Toutes les cibles touchées prennent [25,50,100,SP] SPECIAL et peuvent subir FREEZE (basé sur la LUCK et le niveau de synergie ICE).",

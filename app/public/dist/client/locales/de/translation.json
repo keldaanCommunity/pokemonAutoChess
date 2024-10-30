@@ -1359,7 +1359,7 @@
     "FLYING_PRESS": "Stürzt sich vom Himmel auf das am weitesten entfernte Ziel und verursacht [50,SP]% der maximalen HP des Anwenders als SPECIAL",
     "ILLUSION": "Der Benutzer gewinnt [30,50,70,SP=0,5] HP-Punkte zurück und kopiert die Form sowie die ATK, DEF, SPE_DEF und RANGE des Ziel-Pokémon",
     "SLUDGE": "Wirft Müll auf die 3 Felder vor sich, was [2,3,4] Stapel von POISONNED für [3,SP] Sekunden verursacht",
-    "SLUDGE_WAVE": "Wirf einen Sprühstrahl aus Abfall auf den Gegner mit den meisten HP, der allen Gegnern im Weg [10,20,30,SP] SPECIAL und POISON für [2,4,6] Sekunden zufügt",
+    "SLUDGE_WAVE": "Wirft einen Abfallstrahl auf das Ziel und benachbarte Feinde und fügt ihnen [10,20,30,SP] SPECIAL und POISONNED für [2,3,4,SP] Sekunden zu.",
     "SMOG": "Projiziert eine Wolke stinkenden Gases auf 3 Felder vor sich und verursacht [10,20,40,SP] SPECIAL. Das Gas bleibt bis zum Ende des Kampfes an Bord und reduziert die Genauigkeit der Pokémons im Inneren um 50%.",
     "SHELTER": "Erhält [3,6,12,SP] DEF und projiziert eine Rauchwand auf 3 Felder vor sich. Der Rauch bleibt bis zum Ende des Kampfes an Bord und reduziert die Genauigkeit der Pokémons darin um 50%.",
     "AURORA_BEAM": "Feuert einen Strahl in einer Linie ab. Alle getroffenen Ziele erhalten [25,50,100,SP] SPECIAL und können eingefroren werden (Chance basiert auf der aktuellen Eissynergie).",

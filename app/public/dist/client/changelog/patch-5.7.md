@@ -60,6 +60,7 @@
 - Buff Vulpix line: PP 100 → 85
 - Buff Hoothoot line: PP 100 → 90
 - Buff Popplio line: PP 80 → 70
+- Change Sludge Wave (Tympole): PP 90 → 70; now targets the current target and adjacent enemies, poison duration: 2/4/6 → 2/3/4 seconds, poison duration now scales with AP
 
 # Changes to Synergies
 

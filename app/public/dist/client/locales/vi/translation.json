@@ -1299,7 +1299,6 @@
     "FLYING_PRESS": "Bổ nhào xuống mục tiêu xa nhất, gây [50,SP]% SPECIAL tương đương với chỉ số HP của pkm vận chiêu",
     "ILLUSION": "Bản thân hồi phục [30,50,70,SP=0.5] HP, sao chép hình dáng và các chỉ số ATK,DEF, SPE_DEF, RANGE của mục tiêu",
     "SLUDGE": "Ném rác vào 3 ô vuông phía trước, tích [2,3,4] tầng POISONNED trong [3,SP] giây",
-    "SLUDGE_WAVE": "Ném một luồng chất thải vào kẻ địch có nhiều HP nhất, gây [10,20,30,SP] SPECIAL và POISON trong [2,4,6] giây cho tất cả kẻ địch trên đường đi",
     "SMOG": "Đánh rắm lên 3 ô phía trước, gây [10,20,40,SP] SPECIAL. Hơi rắm sẽ ở lại trên chiến trường cho đến khi kết thúc trận chiến và giảm 50% chính xác của Pokémon ở trong",
     "SHELTER": "Nhận thêm [3,6,12,SP] chỉ số DEF và tạo ra đám khói lên 3 ô phía trước. Đám khói này sẽ ở lại trên chiến trường cho đến hết trận đấu và làm giảm 50% độ chính xác của Pokemon dính phải",
     "AURORA_BEAM": "Bắn ra một tia sáng theo chiều dọc. Tất cả mục tiêu trúng đòn nhận [25,50,100,SP] SPECIAL và có thể bị FREEZE  (cơ hội dựa trên số lượng pkm hệ băng hiện có)",
