@@ -1357,7 +1357,7 @@
     "DEATH_WING": "Inflige [150,SP] de SPECIAL y cura el 75 % del daño causado al objetivo",
     "SLACK_OFF": "Cura todos los estados negativos, [30,40,50,SP=0.5] % del HP máximo y deja al usuario SLEEP por 5 segundos",
     "DARK_VOID": "Causa [30,SP] de SPECIAL a todos los enemigos. Si uno de los objetivos afectados se encuentra SILENCE, lo deja SLEEP por 2 segundos",
-    "OVERHEAT": "Inflige [30,SP] de SPECIAL a todos los enemigos. Aumenta el daño en +30% si el objetivo está BURN",
+    "OVERHEAT": "Inflige [40,SP] de SPECIAL a todos los enemigos. Aumenta el daño en +30% si el objetivo está BURN",
     "HYPNOSIS": "Deja SLEEP a 1 enemigo en la retaguardia por [2,3,5,6,SP=0,5] segundos",
     "MIMIC": "Copia la habilidad del objetivo actual",
     "HEX": "Inflige [20,40,80,SP] SPECIAL al objetivo. Daño doble si el objetivo sufre un estado negativo.",
