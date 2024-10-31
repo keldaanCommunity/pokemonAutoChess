@@ -176,7 +176,7 @@ export class OnGameStartRequestCommand extends Command<
       if (nbHumanPlayers < MIN_HUMAN_PLAYERS && process.env.MODE !== "dev") {
         this.state.addMessage({
           authorId: "Server",
-          payload: `Due to the current high traffic on the game, to limit the resources used server side, only games with a minimum of 8 players are authorized.`,
+          payload: `Due to the current high traffic on the game, to limit the resources used server side, only games with a minimum of ${MIN_HUMAN_PLAYERS} players are authorized.`,
           avatar: "0054/Surprised"
         })
         return

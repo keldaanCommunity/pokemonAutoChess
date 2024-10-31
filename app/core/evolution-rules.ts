@@ -14,7 +14,7 @@ import { values } from "../utils/schemas"
 type DivergentEvolution = (
   pokemon: Pokemon,
   player: Player,
-  ...aditionalArgs: unknown[]
+  ...additionalArgs: unknown[]
 ) => Pkm
 
 export abstract class EvolutionRule {
@@ -28,6 +28,17 @@ export abstract class EvolutionRule {
 
   constructor(divergentEvolution?: DivergentEvolution) {
     if (divergentEvolution) this.divergentEvolution = divergentEvolution
+  }
+
+  getEvolution(
+    pokemon: Pokemon,
+    player: Player,
+    ...additionalArgs: unknown[]
+  ): Pkm {
+    if (this.divergentEvolution) {
+      return this.divergentEvolution(pokemon, player, ...additionalArgs)
+    }
+    return pokemon.evolution
   }
 
   tryEvolve(
@@ -94,11 +105,7 @@ export class CountEvolutionRule extends EvolutionRule {
   }
 
   evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
-    let pokemonEvolutionName = pokemon.evolution
-    if (this.divergentEvolution) {
-      pokemonEvolutionName = this.divergentEvolution(pokemon, player)
-    }
-
+    const pokemonEvolutionName = this.getEvolution(pokemon, player, stageLevel)
     let coord: { x: number; y: number } | undefined
     const itemsToAdd = new Array<Item>()
     const itemComponentsToAdd = new Array<Item>()
@@ -207,31 +214,23 @@ export class ItemEvolutionRule extends EvolutionRule {
       this.itemsTriggeringEvolution.includes(item)
     )
 
-    let pokemonEvolutionName = pokemon.evolution
-    if (this.divergentEvolution && itemEvolution) {
-      pokemonEvolutionName = this.divergentEvolution(
-        pokemon,
-        player,
-        itemEvolution
-      )
-    }
-
+    const pokemonEvolutionName = this.getEvolution(
+      pokemon,
+      player,
+      itemEvolution
+    )
     return itemEvolution != null && pokemonEvolutionName !== pokemon.name
   }
 
   evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
-    let pokemonEvolutionName = pokemon.evolution
-    if (this.divergentEvolution) {
-      const itemEvolution = values(pokemon.items).find((item) =>
-        this.itemsTriggeringEvolution.includes(item)
-      )
-      pokemonEvolutionName = this.divergentEvolution(
-        pokemon,
-        player,
-        itemEvolution
-      )
-    }
-
+    const itemEvolution = values(pokemon.items).find((item) =>
+      this.itemsTriggeringEvolution.includes(item)
+    )
+    const pokemonEvolutionName = this.getEvolution(
+      pokemon,
+      player,
+      itemEvolution
+    )
     const pokemonEvolved = player.transformPokemon(
       pokemon,
       pokemonEvolutionName
@@ -277,10 +276,7 @@ export class HatchEvolutionRule extends EvolutionRule {
   }
 
   evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
-    let pokemonEvolutionName = pokemon.evolution
-    if (this.divergentEvolution) {
-      pokemonEvolutionName = this.divergentEvolution(pokemon, player)
-    }
+    const pokemonEvolutionName = this.getEvolution(pokemon, player, stageLevel)
     const pokemonEvolved = player.transformPokemon(
       pokemon,
       pokemonEvolutionName
@@ -311,10 +307,7 @@ export class ConditionBasedEvolutionRule extends EvolutionRule {
   }
 
   evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
-    let pokemonEvolutionName = pokemon.evolution
-    if (this.divergentEvolution) {
-      pokemonEvolutionName = this.divergentEvolution(pokemon, player)
-    }
+    const pokemonEvolutionName = this.getEvolution(pokemon, player, stageLevel)
     const pokemonEvolved = player.transformPokemon(
       pokemon,
       pokemonEvolutionName

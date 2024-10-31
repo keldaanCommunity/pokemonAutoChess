@@ -382,3 +382,10 @@ export const NonHoldableItems: Item[] = [
   Item.METEORITE,
   Item.FIRE_SHARD
 ]
+
+export const OgerponMasks: Item[] = [
+  Item.TEAL_MASK,
+  Item.WELLSPRING_MASK,
+  Item.CORNERSTONE_MASK,
+  Item.HEARTHFLAME_MASK
+]

@@ -105,6 +105,8 @@
 - Fix several passives not properly applied on spawns/clones happening during the fight
 - Fix duplication bugs related to Corsola evolution
 - Fix board effects not applying or not clearing sometimes when unit is already in the cell when the effect is applied
+- Prevent skydiving units from being moved by Palkia's Spacial Rend
+- Fix Rare candy not working with divergent evolutions
 
 # Misc
 
@@ -115,4 +117,5 @@
 - New scribble rule: Desperate moves
 - Remove Glitch trainer title. Too many annoying bug reports.
 - Remove Backer title to be up to date with the new Tipeee.
+- Remove the synergy map on meta report (the t-SNE and DBSCAN algorithms were taking too much time to compute with the current amount of games played per day)
 - Thanks to all the contributors who helped with the translations! 3zukiDOT, Darkatek7, danGuinzo, logannoir, ph8ndstne, Zeleos753, RambonL, Tok1013-8, mokers-creater, SeaCello, Maogee, PierreBhs and more
