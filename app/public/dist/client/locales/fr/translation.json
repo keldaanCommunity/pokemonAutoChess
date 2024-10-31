@@ -1252,7 +1252,8 @@
     "DRAPION": "Drascore",
     "DARUMAKA": "Darumarond",
     "DARMANITAN": "Darumacho",
-    "DARMANITAN_ZEN": "Darumacho (Zen)"
+    "DARMANITAN_ZEN": "Darumacho (Zen)",
+    "TURTONATOR": "Boumata"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
