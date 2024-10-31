@@ -408,7 +408,8 @@ export const WeatherThreshold: { [weather in Weather]: number } = {
   [Weather.SNOW]: 8,
   [Weather.STORM]: 8,
   [Weather.SUN]: 8,
-  [Weather.WINDY]: 8
+  [Weather.WINDY]: 8,
+  [Weather.SMOG]: 8
 }
 
 // 4  A  1
@@ -700,6 +701,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.ELECTRIC_QUARTZ]: {},
   [Item.BLOOD_STONE]: {},
   [Item.FLOAT_STONE]: {},
+  [Item.SMELLY_CLAY]: {},
   [Item.POKERUS_VIAL]: {},
   [Item.ROTOM_PHONE]: {},
   [Item.SILK_SCARF]: {},

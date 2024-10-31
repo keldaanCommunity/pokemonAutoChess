@@ -59,6 +59,7 @@ export default class LoadingManager {
     scene.load.image("rain", "/assets/ui/rain.png")
     scene.load.image("sand", "/assets/ui/sand.png")
     scene.load.image("wind", "/assets/ui/wind.png")
+    scene.load.image("smog", "/assets/ui/smog.png")
     scene.load.image("sun", "/assets/ui/sun.png")
     scene.load.image("clouds", "/assets/ui/clouds.png")
     scene.load.multiatlas(

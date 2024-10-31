@@ -20,6 +20,7 @@
 
 - New status: Fatigue: reduce all PP gain from all sources by 50%
 - New stat: Luck: luck is a multiplying factor applied on all all random draws (critical hit, dodge chance, chance to apply status on attack, wild chance, egg chance etc.)
+- New weather: Smog, unlocked when 8 poison mons are on the board. -15% accuracy, +30% Poison duration
 
 # Changes to Pokemon & Abilities
 
@@ -84,7 +85,7 @@
 
 - Rework Lucky Egg: AP +60, Defense +6 ; Increase Luck by 50%
 - Weather rocks are no longer held items and no longer give synergies. Instead, they give bonuses to your team when in a certain weather.
-- Added 4 new weather rocks: Electric Quartz, Float Stone, Blood Stone, Mist Stone
+- Added 5 new weather rocks: Electric Quartz, Float Stone, Blood Stone, Mist Stone, Smelly Clay
 - New Artificial Item: Silk Scarf: Give Normal synergy and increase shield from all sources by 30%
 - New Artificial Item: Tiny Mushroom: Give Bug synergy, reduce max HP by 50%
 - Nerf Electirizer: Attack speed 50 → 30%
@@ -113,5 +114,5 @@
 - New features for the team planner: snapshot current board, quick reset, save/load local file
 - New scribble rule: Desperate moves
 - Remove Glitch trainer title. Too many annoying bug reports.
-- Remove Backer title to be up to date with the new tipee.
+- Remove Backer title to be up to date with the new Tipeee.
 - Thanks to all the contributors who helped with the translations! 3zukiDOT, Darkatek7, danGuinzo, logannoir, ph8ndstne, Zeleos753, RambonL, Tok1013-8, mokers-creater, SeaCello, Maogee, PierreBhs and more
