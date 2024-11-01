@@ -351,11 +351,17 @@ export default class Player extends Schema implements IPlayer {
       (n) => (this.synergies.get(Synergy.ROCK) ?? 0) >= n
     ).length
     const rocksCollected = this.weatherRocks.slice(-nbWeatherRocks)
-    this.items.forEach((item, index) => {
-      if (WeatherRocks.includes(item)) {
-        this.items.splice(index, 1)
+
+    let weatherRockInInventory
+    do {
+      weatherRockInInventory = this.items.findIndex((item, index) =>
+        WeatherRocks.includes(item)
+      )
+      if (weatherRockInInventory != -1) {
+        this.items.splice(weatherRockInInventory, 1)
       }
-    })
+    } while (weatherRockInInventory != -1)
+
     this.items.push(...rocksCollected)
   }
 
