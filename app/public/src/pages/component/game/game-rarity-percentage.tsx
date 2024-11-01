@@ -40,7 +40,7 @@ export default function GameRarityPercentage() {
                   {t(`rarity.${rarity}`)}
                 </td>
                 <td>
-                  {Math.ceil(RarityProbabilityPerLevel[level][index] * 100)}%
+                  {Math.round(RarityProbabilityPerLevel[level][index] * 100)}%
                 </td>
               </tr>
             ))}
