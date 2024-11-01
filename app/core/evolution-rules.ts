@@ -276,6 +276,7 @@ export class HatchEvolutionRule extends EvolutionRule {
   }
 
   evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
+    this.evolutionTimer = EvolutionTime.EVOLVE_HATCH // prevent trying to evolve twice in a row
     const pokemonEvolutionName = this.getEvolution(pokemon, player, stageLevel)
     const pokemonEvolved = player.transformPokemon(
       pokemon,
