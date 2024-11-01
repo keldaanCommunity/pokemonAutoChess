@@ -3160,31 +3160,14 @@ export class SludgeWaveStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit, true)
-    const duration =
-      pokemon.stars === 3 ? 6000 : pokemon.stars === 2 ? 4000 : 2000
-    const damage = pokemon.stars === 3 ? 30 : pokemon.stars === 2 ? 20 : 10
-    const potentials = board.cells
-      .filter((p) => p && p.team !== pokemon.team)
-      .sort((a, b) => b!.life - a!.life)
-    const mostHpEnnemy = potentials[0]
-    if (mostHpEnnemy) {
-      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-        id: pokemon.simulation.id,
-        skill: pokemon.skill,
-        positionX: pokemon.positionX,
-        positionY: pokemon.positionY,
-        targetX: mostHpEnnemy.positionX,
-        targetY: mostHpEnnemy.positionY,
-        orientation: pokemon.orientation
-      })
-      const cells = board.getCellsBetween(
-        pokemon.positionX,
-        pokemon.positionY,
-        mostHpEnnemy.positionX,
-        mostHpEnnemy.positionY
-      )
-      cells.forEach((cell) => {
+    super.process(pokemon, state, board, target, crit)
+    const duration = Math.round(
+      ([2000, 3000, 4000][pokemon.stars - 1] ?? 4000) * (1 + pokemon.ap / 100)
+    )
+    const damage = [10, 20, 40][pokemon.stars - 1] ?? 60
+    board
+      .getAdjacentCells(target.positionX, target.positionY, true)
+      .forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
           cell.value.status.triggerPoison(duration, cell.value, pokemon)
           cell.value.handleSpecialDamage(
@@ -3196,7 +3179,6 @@ export class SludgeWaveStrategy extends AbilityStrategy {
           )
         }
       })
-    }
   }
 }
 

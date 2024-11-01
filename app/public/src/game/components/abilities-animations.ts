@@ -1578,6 +1578,10 @@ export function displayAbility(
         scale: 2,
         onComplete: () => {
           specialProjectile.destroy()
+          addAbilitySprite(Ability.DIVE, coordinatesTarget, true)
+            .setTint(0xf060a0)
+            .setScale(3)
+            .setDepth(1)
         }
       })
       break

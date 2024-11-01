@@ -57,6 +57,11 @@
 - Nerf Marshadow: HP 250 → 220
 - Nerf Silver wind (Beautifly): 30/60/120 → 20/40/80 special damage
 - Nerf Poison Powder (Dustox): 30/60/120 → 20/40/80 special damage
+- Nerf Buizel line PP: 50 → 65
+- Buff Vulpix line: PP 100 → 85
+- Buff Hoothoot line: PP 100 → 90
+- Buff Popplio line: PP 80 → 70
+- Change Sludge Wave (Tympole): PP 90 → 70; now targets the current target and adjacent enemies, poison duration: 2/4/6 → 2/3/4 seconds, poison duration now scales with AP
 
 # Changes to Synergies
 
@@ -78,7 +83,7 @@
 - Change Ice 8: freeze chance ~~50~~ 40%, increased damage to frozen enemies: ~~20~~ 30%
 - Buff Sound 2: +1 → +2 attack every time a sound pokemon casts its ability
 - Nerf Grass 3: HP healed every 2 seconds: 8 → 7
-- Nerf Light 3: PP per second 10 → 8
+- Nerf Light 3: PP per second 10 → 8, Light 4: Rune protect duration 10 → 8 seconds
 - Buff Amorphous 7: 5 → 6% Attack Speed per unique synergy
 
 # Changes to Items

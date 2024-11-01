@@ -972,7 +972,7 @@ export class Tympole extends Pokemon {
   atk = 7
   def = 3
   speDef = 3
-  maxPP = 90
+  maxPP = 70
   range = 1
   skill = Ability.SLUDGE_WAVE
   passive = Passive.HATCH
@@ -993,7 +993,7 @@ export class Palpitoad extends Pokemon {
   atk = 17
   def = 4
   speDef = 4
-  maxPP = 90
+  maxPP = 70
   range = 1
   skill = Ability.SLUDGE_WAVE
   passive = Passive.HATCH
@@ -1012,7 +1012,7 @@ export class Seismitoad extends Pokemon {
   atk = 22
   def = 6
   speDef = 6
-  maxPP = 90
+  maxPP = 70
   range = 1
   skill = Ability.SLUDGE_WAVE
   attackSprite = AttackSprite.WATER_MELEE
@@ -7818,7 +7818,7 @@ export class Buizel extends Pokemon {
   atk = 9
   def = 3
   speDef = 3
-  maxPP = 50
+  maxPP = 65
   range = 1
   skill = Ability.AQUA_JET
   additional = true
@@ -7836,7 +7836,7 @@ export class Floatzel extends Pokemon {
   atk = 24
   def = 5
   speDef = 5
-  maxPP = 50
+  maxPP = 65
   range = 1
   skill = Ability.AQUA_JET
   additional = true
@@ -8145,7 +8145,7 @@ export class Hoothoot extends Pokemon {
   atk = 5
   def = 2
   speDef = 3
-  maxPP = 100
+  maxPP = 90
   range = 1
   skill = Ability.HYPNOSIS
   additional = true
@@ -8164,7 +8164,7 @@ export class Noctowl extends Pokemon {
   atk = 10
   def = 3
   speDef = 5
-  maxPP = 100
+  maxPP = 90
   range = 1
   skill = Ability.HYPNOSIS
   additional = true
@@ -9077,7 +9077,7 @@ export class Vulpix extends Pokemon {
   atk = 7
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 85
   range = 2
   skill = Ability.FIRE_SPIN
   attackSprite = AttackSprite.FIRE_RANGE
@@ -9092,7 +9092,7 @@ export class Ninetales extends Pokemon {
   atk = 20
   def = 3
   speDef = 5
-  maxPP = 100
+  maxPP = 85
   range = 2
   skill = Ability.FIRE_SPIN
   attackSprite = AttackSprite.FIRE_RANGE
@@ -9469,7 +9469,7 @@ export class Popplio extends Pokemon {
   atk = 5
   def = 2
   speDef = 2
-  maxPP = 80
+  maxPP = 70
   range = 3
   skill = Ability.SPARKLING_ARIA
   passive = Passive.HATCH
@@ -9486,7 +9486,7 @@ export class Brionne extends Pokemon {
   atk = 10
   def = 2
   speDef = 3
-  maxPP = 80
+  maxPP = 70
   range = 3
   skill = Ability.SPARKLING_ARIA
   passive = Passive.HATCH
@@ -9501,7 +9501,7 @@ export class Primarina extends Pokemon {
   atk = 20
   def = 2
   speDef = 4
-  maxPP = 80
+  maxPP = 70
   range = 3
   skill = Ability.SPARKLING_ARIA
   attackSprite = AttackSprite.PSYCHIC_RANGE
