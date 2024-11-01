@@ -1553,7 +1553,7 @@
     "FURY_SWIPES": "대상에 [2,SP] ~ [5,SP] 회만큼의 공격을 PHYSICAL로 가한다.",
     "TICKLE": "가장 가까운 [1,2] 대상의 ATK 과 DEF 를 [3,SP]만큼 감소시킨다.",
     "AROMATHERAPY": "모든 부정적인 상태이상을 해제 하고 인접한 아군의 HP를 [20,40,80,SP] 만큼 회복한다.",
-    "DETECT": " 2칸 반경에 있는 적 포켓몬 마릿수 X [500,SP]ms 동안 인접한 아군을 보호합니다.",
+    "DETECT": " 2칸 반경에 있는 적 포켓몬 마릿수 X [500,SP] ms 동안 인접한 아군을 보호합니다.",
     "SPACIAL_REND": "적팀의 위치를 역전시킨 후, 일직선 상의 모든 적에게 [100,SP] SPECIAL을 입힌다.",
     "MULTI_ATTACK": "주변 적에게 $t(pkm.SILVALLY) 의 모든 추가 시너지 단계만큼 [15,SP] SPECIAL 를 가한다.",
     "STICKY_WEB": "타겟에게 [20,35,70,SP] SPECIAL을 입히고 대상 주위에 거미줄을 설치한다. 거미줄 위를 걷는 포켓몬은 2초 동안 PARALYSIS에 빠진다.",
