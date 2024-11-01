@@ -2559,7 +2559,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.PALOSSAND]: Pkm.SANDYGAST,
   [Pkm.TURTONATOR]: Pkm.TURTONATOR,
   [Pkm.SKORUPI]: Pkm.SKORUPI,
-  [Pkm.DRAPION]: Pkm.DRAPION,
+  [Pkm.DRAPION]: Pkm.SKORUPI,
   [Pkm.DARUMAKA]: Pkm.DARUMAKA,
   [Pkm.DARMANITAN]: Pkm.DARUMAKA,
   [Pkm.DARMANITAN_ZEN]: Pkm.DARUMAKA
