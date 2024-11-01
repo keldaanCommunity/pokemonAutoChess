@@ -447,27 +447,32 @@ export default class Simulation extends Schema implements ISimulation {
     }
   }
 
-  applyWeatherEffects(pokemon: IPokemonEntity) {
+  applyWeatherEffects(
+    pokemon: IPokemonEntity,
+    player: Player | undefined,
+    opponentPlayer: Player | undefined
+  ) {
     if (this.weather === Weather.WINDY) {
-      const nbFloatStones = pokemon.player
-        ? count(pokemon.player.items, Item.FLOAT_STONE)
-        : 0
-      pokemon.addDodgeChance(
-        (pokemon.types.has(Synergy.FLYING) ? 0.2 : 0.1) + nbFloatStones * 0.05,
+      const nbFloatStones = player ? count(player.items, Item.FLOAT_STONE) : 0
+      pokemon.addAttackSpeed(
+        (pokemon.types.has(Synergy.FLYING) ? 10 : 0) + nbFloatStones * 5,
         pokemon,
         0,
         false
       )
+    } else if (this.weather === Weather.SMOG) {
+      const nbSmellyClays = opponentPlayer
+        ? count(opponentPlayer.items, Item.SMELLY_CLAY)
+        : 0
+      pokemon.addDodgeChance(0.15 - 0.05 * nbSmellyClays, pokemon, 0, false)
     } else if (this.weather === Weather.NIGHT) {
-      const nbBlackAugurite = pokemon.player
-        ? count(pokemon.player.items, Item.BLACK_AUGURITE)
+      const nbBlackAugurite = player
+        ? count(player.items, Item.BLACK_AUGURITE)
         : 0
 
       pokemon.addCritChance(10 + 5 * nbBlackAugurite, pokemon, 0, false)
     } else if (this.weather === Weather.MISTY) {
-      const nbMistStones = pokemon.player
-        ? count(pokemon.player.items, Item.MIST_STONE)
-        : 0
+      const nbMistStones = player ? count(player.items, Item.MIST_STONE) : 0
       if (nbMistStones > 0) {
         pokemon.addSpecialDefense(2 * nbMistStones, pokemon, 0, false)
       }
@@ -520,6 +525,7 @@ export default class Simulation extends Schema implements ISimulation {
         if (effects.has(Effect.HEART_OF_THE_SWARM)) {
           numberToSpawn = 5
         }
+        numberToSpawn = Math.min(numberToSpawn, bugTeam.length)
 
         for (let i = 0; i < numberToSpawn; i++) {
           const bug = PokemonFactory.createPokemonFromName(
@@ -666,7 +672,11 @@ export default class Simulation extends Schema implements ISimulation {
     if (this.weather !== Weather.NEUTRAL) {
       for (const team of [this.blueTeam, this.redTeam]) {
         team.forEach((pokemon) => {
-          this.applyWeatherEffects(pokemon)
+          const player =
+            team === this.blueTeam ? this.bluePlayer : this.redPlayer
+          const opponentPlayer =
+            team === this.blueTeam ? this.redPlayer : this.bluePlayer
+          this.applyWeatherEffects(pokemon, player, opponentPlayer)
         })
       }
     }

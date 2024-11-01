@@ -444,9 +444,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     apBoost: number,
     crit: boolean
   ) {
-    value = Math.round(
+    value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    )
     this.dodge = max(0.9)(this.dodge + value)
   }
 
@@ -943,6 +942,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
     if (this.effects.has(Effect.TOXIC)) {
       poisonChance = 1.0
+    }
+    if (target.player) {
+      const nbSmellyClays = count(target.player.items, Item.SMELLY_CLAY)
+      poisonChance -= nbSmellyClays * 0.1
     }
     if (poisonChance > 0 && chance(poisonChance, this)) {
       target.status.triggerPoison(4000, target, this)
@@ -1786,6 +1789,8 @@ export function getMoveSpeed(
   let moveSpeed = 1
   if (weather === Weather.SNOW) {
     moveSpeed -= 0.25
+  } else if (weather === Weather.WINDY) {
+    moveSpeed += 0.2
   }
   if (pokemon.status.paralysis) {
     moveSpeed -= 0.4

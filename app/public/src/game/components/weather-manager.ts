@@ -284,6 +284,86 @@ export default class WeatherManager {
     )
   }
 
+  addSmog() {
+    this.image = this.scene.add.existing(
+      new Phaser.GameObjects.Image(this.scene, 1000, 500, "clouds")
+        .setTint(0x508050)
+        .setScale(3, 2)
+        .setOrigin(0.5)
+        .setDepth(8)
+        .setAlpha(0.5)
+    )
+    this.colorFilter = this.scene.add.existing(
+      new Phaser.GameObjects.Rectangle(
+        this.scene,
+        1500,
+        1000,
+        3000,
+        2000,
+        0x6e994c,
+        0.15
+      ).setDepth(8)
+    )
+
+    const leftScreenSource = {
+      x: { min: -200, max: -100 },
+      y: { min: 0, max: 1000 }
+    }
+    const rightScreenSource = {
+      x: { min: 2100, max: 2200 },
+      y: { min: 0, max: 1000 }
+    }
+    const deathZoneSource = new Phaser.Geom.Rectangle(-250, 0, 2500, 4000)
+
+    this.particlesEmitters.push(
+      this.scene.add.particles(0, 0, "smog", {
+        ...leftScreenSource,
+        deathZone: { source: deathZoneSource, type: "onLeave" },
+        frequency: 400,
+        speedX: { min: 100, max: 160 },
+        speedY: { min: 0, max: 0 },
+        lifespan: 14000,
+        scale: 1
+      })
+    )
+
+    this.particlesEmitters.push(
+      this.scene.add.particles(0, 0, "smog", {
+        ...leftScreenSource,
+        deathZone: { source: deathZoneSource, type: "onLeave" },
+        frequency: 600,
+        speedX: { min: 80, max: 140 },
+        speedY: { min: 0, max: 0 },
+        lifespan: 14000,
+        scale: 2
+      })
+    )
+
+    this.particlesEmitters.push(
+      this.scene.add.particles(0, 0, "smog", {
+        ...rightScreenSource,
+        deathZone: { source: deathZoneSource, type: "onLeave" },
+        frequency: 400,
+        speedX: { min: -160, max: -100 },
+        speedY: { min: 0, max: 0 },
+        lifespan: 15000,
+        scale: 1
+      })
+    )
+
+    this.particlesEmitters.push(
+      this.scene.add.particles(0, 0, "smog", {
+        ...rightScreenSource,
+        deathZone: { source: deathZoneSource, type: "onLeave" },
+        frequency: 600,
+        speedX: { min: -140, max: -80 },
+        speedY: { min: 0, max: 0 },
+        lifespan: 15000,
+        scale: 2
+      })
+    )
+  }
+
   addMist() {
     const offscreenSource = {
       x: { min: 0, max: 2000 },
@@ -291,7 +371,7 @@ export default class WeatherManager {
     }
     this.image = this.scene.add.existing(
       new Phaser.GameObjects.Image(this.scene, 1000, 500, "clouds")
-        .setScale(2, 2)
+        .setScale(3, 2)
         .setOrigin(0.5)
         .setDepth(8)
         .setAlpha(0.4)
