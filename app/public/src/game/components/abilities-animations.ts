@@ -1522,7 +1522,7 @@ export function displayAbility(
       break
 
     case Ability.SHELL_SMASH:
-      addAbilitySprite(Ability.SHELL_SMASH, coordinates, true).setScale(2)
+      addAbilitySprite(Ability.COUNTER, coordinates, true).setScale(2)
       break
 
     case Ability.TRI_ATTACK: {
