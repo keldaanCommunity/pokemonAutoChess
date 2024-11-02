@@ -2459,7 +2459,12 @@
     "GLUTTON": "Glutton",
     "STARGAZER": "Stargazer",
     "BLOODY": "Bloody",
-    "ETERNAL": "Eternal"
+    "ETERNAL": "Eternal",
+    "DOG": "Dog",
+    "ARQUITETO1": "Arquiteto Primordial",
+    "FIRST_1100": "First 1100",
+    "FIRST_1200": "First 1200",
+    "FIRST_1300": "First 1300"
   },
   "title_description": {
     "NOVICE": "Play your first game",
@@ -2533,7 +2538,12 @@
     "GLUTTON": "Get a Snorlax with more than 750 base HP",
     "STARGAZER": "Get Solgaleo or Lunala",
     "BLOODY": "Get Bloodmoon Ursaluna",
-    "ETERNAL": "Meet Arceus at stage 40"
+    "ETERNAL": "Meet Arceus at stage 40",
+    "DOG": "Apenas o melhor amigo do homem",
+    "ARQUITETO1": "O Criador original, cujas mãos moldaram o alicerce de todas as coisas",
+    "FIRST_1100": "Primeiro a conseguir o elo de 1100 do servidor",
+    "FIRST_1200": "Primeiro a conseguir o elo de 1200 do servidor",
+    "FIRST_1300": "Primeiro a conseguir o elo de 1300 do servidor"
   },
   "weather": {
     "NEUTRAL": "Calm weather",

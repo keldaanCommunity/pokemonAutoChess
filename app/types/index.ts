@@ -767,7 +767,12 @@ export enum Title {
   GLUTTON = "GLUTTON",
   STARGAZER = "STARGAZER",
   BLOODY = "BLOODY",
-  ETERNAL = "ETERNAL"
+  ETERNAL = "ETERNAL",
+  DOG = "DOG",
+  ARQUITETO1 = "ARQUITETO1",
+  FIRST_1100 = "FIRST_1100",
+  FIRST_1200 = "FIRST_1200",
+  FIRST_1300 = "FIRST_1300"
 }
 
 export interface IBoardEvent {
