@@ -27,7 +27,6 @@ import { Ability } from "../types/enum/Ability"
 import { Effect } from "../types/enum/Effect"
 import {
   AttackType,
-  BoardEvent,
   Orientation,
   PokemonActionState,
   Rarity,
@@ -445,9 +444,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     apBoost: number,
     crit: boolean
   ) {
-    value = Math.round(
+    value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    )
     this.dodge = max(0.9)(this.dodge + value)
   }
 
@@ -945,6 +943,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.effects.has(Effect.TOXIC)) {
       poisonChance = 1.0
     }
+    if (target.player) {
+      const nbSmellyClays = count(target.player.items, Item.SMELLY_CLAY)
+      poisonChance -= nbSmellyClays * 0.1
+    }
     if (poisonChance > 0 && chance(poisonChance, this)) {
       target.status.triggerPoison(4000, target, this)
     }
@@ -1069,21 +1071,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       const cells = board.getAdjacentCells(this.positionX, this.positionY)
       cells.forEach((cell) => {
-        const index = cell.y * board.columns + cell.x
-        if (board.effects[index] !== Effect.GAS) {
-          board.effects[index] = Effect.GAS
-          this.simulation.room.broadcast(Transfer.BOARD_EVENT, {
-            simulationId: this.simulation.id,
-            type: BoardEvent.GAS,
-            x: cell.x,
-            y: cell.y
-          })
-        }
-        if (cell.value) {
-          cell.value.effects.add(Effect.GAS)
-          if (cell.value.team !== this.team) {
-            cell.value.status.triggerParalysis(3000, cell.value)
-          }
+        board.addBoardEffect(cell.x, cell.y, Effect.GAS, this.simulation)
+        if (cell.value && cell.value.team !== this.team) {
+          cell.value.status.triggerParalysis(3000, cell.value)
         }
       })
       this.items.delete(Item.SMOKE_BALL)
@@ -1799,6 +1789,8 @@ export function getMoveSpeed(
   let moveSpeed = 1
   if (weather === Weather.SNOW) {
     moveSpeed -= 0.25
+  } else if (weather === Weather.WINDY) {
+    moveSpeed += 0.2
   }
   if (pokemon.status.paralysis) {
     moveSpeed -= 0.4

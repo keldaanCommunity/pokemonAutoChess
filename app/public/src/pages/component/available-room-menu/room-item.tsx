@@ -68,7 +68,7 @@ export default function RoomItem(props: {
   return (
     <div className="room-item my-box">
       <span className="room-name" title={title}>
-        {props.room.metadata?.gameMode === GameMode.CUSTOM_LOBBY && (formatMinMaxRanks(props.room.metadata?.minRank as EloRank | null, props.room.metadata?.maxRank as EloRank | null) + " ")}
+        {formatMinMaxRanks(props.room.metadata?.minRank as EloRank | null, props.room.metadata?.maxRank as EloRank | null) + " "}
         {props.room.metadata?.name}
       </span>
       {props.room.metadata?.password && (

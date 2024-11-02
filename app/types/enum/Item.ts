@@ -119,6 +119,7 @@ export enum Item {
   MIST_STONE = "MIST_STONE",
   ELECTRIC_QUARTZ = "ELECTRIC_QUARTZ",
   BLOOD_STONE = "BLOOD_STONE",
+  SMELLY_CLAY = "SMELLY_CLAY",
   FIRE_SHARD = "FIRE_SHARD",
   TEAL_MASK = "TEAL_MASK",
   WELLSPRING_MASK = "WELLSPRING_MASK",
@@ -276,7 +277,8 @@ export const WeatherRocks: Item[] = [
   Item.FLOAT_STONE,
   Item.ELECTRIC_QUARTZ,
   Item.MIST_STONE,
-  Item.BLOOD_STONE
+  Item.BLOOD_STONE,
+  Item.SMELLY_CLAY
 ]
 
 export const WeatherRocksByWeather: Map<
@@ -290,6 +292,7 @@ export const WeatherRocksByWeather: Map<
   [Weather.STORM, Item.ELECTRIC_QUARTZ],
   [Weather.MISTY, Item.MIST_STONE],
   [Weather.WINDY, Item.FLOAT_STONE],
+  [Weather.SMOG, Item.SMELLY_CLAY],
   [Weather.NIGHT, Item.BLACK_AUGURITE],
   [Weather.BLOODMOON, Item.BLOOD_STONE],
   [Weather.NEUTRAL, null]
@@ -378,4 +381,11 @@ export const NonHoldableItems: Item[] = [
   ...FishingRods,
   Item.METEORITE,
   Item.FIRE_SHARD
+]
+
+export const OgerponMasks: Item[] = [
+  Item.TEAL_MASK,
+  Item.WELLSPRING_MASK,
+  Item.CORNERSTONE_MASK,
+  Item.HEARTHFLAME_MASK
 ]

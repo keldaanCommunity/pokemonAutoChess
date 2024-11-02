@@ -1,7 +1,6 @@
 import Player from "../models/colyseus-models/player"
-import { Transfer } from "../types"
 import { Effect } from "../types/enum/Effect"
-import { BoardEvent, PokemonActionState } from "../types/enum/Game"
+import { PokemonActionState } from "../types/enum/Game"
 import { Passive } from "../types/enum/Passive"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
@@ -91,14 +90,12 @@ export default class MovingState extends PokemonState {
             .getCellsBetween(x, y, pokemon.positionX, pokemon.positionY)
             .forEach((cell) => {
               if (cell.x !== x || cell.y !== y) {
-                pokemon.simulation.room.broadcast(Transfer.BOARD_EVENT, {
-                  simulationId: pokemon.simulation.id,
-                  type: BoardEvent.POISON_GAS,
-                  x: cell.x,
-                  y: cell.y
-                })
-                board.effects[board.columns * cell.y + cell.x] =
-                  Effect.POISON_GAS
+                board.addBoardEffect(
+                  cell.x,
+                  cell.y,
+                  Effect.POISON_GAS,
+                  pokemon.simulation
+                )
               }
             })
         }

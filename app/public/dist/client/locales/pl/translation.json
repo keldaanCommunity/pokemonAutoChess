@@ -751,7 +751,7 @@
   },
   "ability_description": {
     "SOFT_BOILED": "Leczy wszystkie efekty statusu i zapewnia [20,40,80,SP] SHIELD każdemu sojuszniczemu Pokémonowi",
-    "EARTHQUAKE": "Zadaj [120,SP] OBRAŻEŃ SPECIAL wszystkim wrogim Pokémonom w tej samej kolumnie, co użytkownik",
+    "EARTHQUAKE": "Zadaj [100,SP] OBRAŻEŃ SPECIAL wszystkim wrogim Pokémonom w tej samej kolumnie, co użytkownik",
     "SONG_OF_DESIRE": "2 przeciwników w tylnej linii staje sie CHARM na 3 sekund i zmniejsz ich ATK o [3,SP]",
     "CONFUSING_MIND": "Make 2 opponents in the backline CONFUSION for [3,SP] seconds",
     "KNOWLEDGE_THIEF": "Użyj zdolności celu. Gracz otrzymuje 1 XP.",

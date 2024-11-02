@@ -32,7 +32,7 @@ export default function History(props: { uid: string, onUpdate?: (history: IGame
     try {
       setLoading(true)
 
-      const response = await fetch(`/game-history/${uid}?page=${page}`)
+      const response = await fetch(`/game-history/${uid}?page=${page}&t=${Date.now()}`)
       const data: IGameRecord[] = await response.json()
       if (props.uid !== uid) return // ignore response if uid changed in the meantime
 

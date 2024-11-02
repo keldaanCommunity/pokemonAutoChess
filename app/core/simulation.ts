@@ -18,7 +18,6 @@ import { Effect } from "../types/enum/Effect"
 import {
   AttackType,
   BattleResult,
-  BoardEvent,
   Orientation,
   PokemonActionState,
   Rarity,
@@ -134,7 +133,7 @@ export default class Simulation extends Schema implements ISimulation {
       })
     }
 
-    this.applyPostEffects()
+    this.applyPostEffects(blueTeam, redTeam)
 
     for (const player of [this.bluePlayer, this.redPlayer]) {
       if (player) {
@@ -448,49 +447,53 @@ export default class Simulation extends Schema implements ISimulation {
     }
   }
 
-  applyWeatherEffects(pokemon: IPokemonEntity) {
+  applyWeatherEffects(
+    pokemon: IPokemonEntity,
+    player: Player | undefined,
+    opponentPlayer: Player | undefined
+  ) {
     if (this.weather === Weather.WINDY) {
-      const nbFloatStones = pokemon.player
-        ? count(pokemon.player.items, Item.FLOAT_STONE)
-        : 0
-      pokemon.addDodgeChance(
-        (pokemon.types.has(Synergy.FLYING) ? 0.2 : 0.1) + nbFloatStones * 0.05,
+      const nbFloatStones = player ? count(player.items, Item.FLOAT_STONE) : 0
+      pokemon.addAttackSpeed(
+        (pokemon.types.has(Synergy.FLYING) ? 10 : 0) + nbFloatStones * 5,
         pokemon,
         0,
         false
       )
+    } else if (this.weather === Weather.SMOG) {
+      const nbSmellyClays = opponentPlayer
+        ? count(opponentPlayer.items, Item.SMELLY_CLAY)
+        : 0
+      pokemon.addDodgeChance(0.15 - 0.05 * nbSmellyClays, pokemon, 0, false)
     } else if (this.weather === Weather.NIGHT) {
-      const nbBlackAugurite = pokemon.player
-        ? count(pokemon.player.items, Item.BLACK_AUGURITE)
+      const nbBlackAugurite = player
+        ? count(player.items, Item.BLACK_AUGURITE)
         : 0
 
       pokemon.addCritChance(10 + 5 * nbBlackAugurite, pokemon, 0, false)
     } else if (this.weather === Weather.MISTY) {
-      const nbMistStones = pokemon.player
-        ? count(pokemon.player.items, Item.MIST_STONE)
-        : 0
+      const nbMistStones = player ? count(player.items, Item.MIST_STONE) : 0
       if (nbMistStones > 0) {
         pokemon.addSpecialDefense(2 * nbMistStones, pokemon, 0, false)
       }
     }
   }
 
-  applyPostEffects() {
+  applyPostEffects(blueTeam: MapSchema<Pokemon>, redTeam: MapSchema<Pokemon>) {
     /*
-  in order:
-  - spawns (bug, rotom, white flute, etc)
-  - synergy effects (dragon, normal, etc)
-  - weather effects
-  - support items effects (exp share, gracidea etc)
-  - target selection effects (ghost curse, comet shard etc)
-  */
+    in order:
+    - spawns (bug, rotom, white flute, etc)
+    - synergy effects (dragon, normal, etc)
+    - weather effects
+    - support items effects (exp share, gracidea etc)
+    - target selection effects (ghost curse, comet shard etc)
+    */
 
     // SPAWNS (bug, rotom, white flute, etc)
-    for (const team of [this.blueTeam, this.redTeam]) {
-      const teamIndex = team === this.blueTeam ? 0 : 1
-      const player = team === this.blueTeam ? this.bluePlayer : this.redPlayer
-      const effects =
-        team === this.blueTeam ? this.blueEffects : this.redEffects
+    for (const team of [blueTeam, redTeam]) {
+      const teamIndex = team === blueTeam ? Team.BLUE_TEAM : Team.RED_TEAM
+      const player = team === blueTeam ? this.bluePlayer : this.redPlayer
+      const effects = team === blueTeam ? this.blueEffects : this.redEffects
 
       if (
         [
@@ -500,7 +503,7 @@ export default class Simulation extends Schema implements ISimulation {
           Effect.HEART_OF_THE_SWARM
         ].some((e) => effects.has(e))
       ) {
-        const bugTeam = new Array<IPokemonEntity>()
+        const bugTeam = new Array<IPokemon>()
         team.forEach((pkm) => {
           if (pkm.types.has(Synergy.BUG) && pkm.positionY != 0) {
             bugTeam.push(pkm)
@@ -521,6 +524,7 @@ export default class Simulation extends Schema implements ISimulation {
         if (effects.has(Effect.HEART_OF_THE_SWARM)) {
           numberToSpawn = 5
         }
+        numberToSpawn = Math.min(numberToSpawn, bugTeam.length)
 
         for (let i = 0; i < numberToSpawn; i++) {
           const bug = PokemonFactory.createPokemonFromName(
@@ -547,10 +551,10 @@ export default class Simulation extends Schema implements ISimulation {
 
       team.forEach((pokemon) => {
         if (pokemon.items.has(Item.ROTOM_PHONE) && !pokemon.isOnBench) {
-          const teamIndex = team === this.blueTeam ? 0 : 1 // WARN: do not use player.team here because it can be a ghost opponent
+          const player = team === blueTeam ? this.bluePlayer : this.redPlayer
           const rotomDrone = PokemonFactory.createPokemonFromName(
             Pkm.ROTOM_DRONE,
-            pokemon.player
+            player
           )
           const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
             pokemon,
@@ -613,9 +617,9 @@ export default class Simulation extends Schema implements ISimulation {
             const mon = PokemonFactory.createPokemonFromName(spawn.name)
             const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
               pokemon,
-              pokemon.team
+              teamIndex
             )
-            this.addPokemon(mon, coord.x, coord.y, pokemon.team, true)
+            this.addPokemon(mon, coord.x, coord.y, teamIndex, true)
           })
         }
       })
@@ -667,7 +671,11 @@ export default class Simulation extends Schema implements ISimulation {
     if (this.weather !== Weather.NEUTRAL) {
       for (const team of [this.blueTeam, this.redTeam]) {
         team.forEach((pokemon) => {
-          this.applyWeatherEffects(pokemon)
+          const player =
+            team === this.blueTeam ? this.bluePlayer : this.redPlayer
+          const opponentPlayer =
+            team === this.blueTeam ? this.redPlayer : this.bluePlayer
+          this.applyWeatherEffects(pokemon, player, opponentPlayer)
         })
       }
     }
@@ -1282,7 +1290,7 @@ export default class Simulation extends Schema implements ISimulation {
             pokemon.effects.add(Effect.ETERNAL_LIGHT)
             pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
             pokemon.addAbilityPower(20, pokemon, 0, false)
-            pokemon.status.triggerRuneProtect(10000)
+            pokemon.status.triggerRuneProtect(8000)
             pokemon.addDefense(0.5 * pokemon.baseDef, pokemon, 0, false)
             pokemon.addSpecialDefense(
               0.5 * pokemon.baseSpeDef,
@@ -1475,7 +1483,7 @@ export default class Simulation extends Schema implements ISimulation {
         }
         this.room.broadcast(Transfer.BOARD_EVENT, {
           simulationId: this.id,
-          type: BoardEvent.LIGHTNING,
+          effect: Effect.LIGHTNING_STRIKE,
           x,
           y
         })

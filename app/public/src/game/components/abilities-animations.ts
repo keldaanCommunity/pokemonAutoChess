@@ -1522,7 +1522,7 @@ export function displayAbility(
       break
 
     case Ability.SHELL_SMASH:
-      addAbilitySprite(Ability.SHELL_SMASH, coordinates, true).setScale(2)
+      addAbilitySprite(Ability.COUNTER, coordinates, true).setScale(2)
       break
 
     case Ability.TRI_ATTACK: {
@@ -1578,6 +1578,10 @@ export function displayAbility(
         scale: 2,
         onComplete: () => {
           specialProjectile.destroy()
+          addAbilitySprite(Ability.DIVE, coordinatesTarget, true)
+            .setTint(0xf060a0)
+            .setScale(3)
+            .setDepth(1)
         }
       })
       break

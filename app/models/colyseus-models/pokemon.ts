@@ -34,7 +34,6 @@ import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
 import { Effect } from "../../types/enum/Effect"
 import {
   AttackType,
-  BoardEvent,
   PokemonActionState,
   Rarity,
   Stat
@@ -46,7 +45,7 @@ import {
   Item,
   ItemComponents,
   ItemRecipe,
-  SynergyGivenByItem,
+  OgerponMasks,
   SynergyItems
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
@@ -259,7 +258,7 @@ export class Electrike extends Pokemon {
   atk = 15
   def = 5
   speDef = 5
-  maxPP = 60
+  maxPP = 65
   range = 1
   skill = Ability.VOLT_SWITCH
   attackSprite = AttackSprite.ELECTRIC_MELEE
@@ -274,7 +273,7 @@ export class Manectric extends Pokemon {
   atk = 30
   def = 6
   speDef = 6
-  maxPP = 60
+  maxPP = 65
   range = 1
   skill = Ability.VOLT_SWITCH
   attackSprite = AttackSprite.ELECTRIC_MELEE
@@ -288,7 +287,7 @@ export class MegaManectric extends Pokemon {
   atk = 48
   def = 7
   speDef = 7
-  maxPP = 60
+  maxPP = 65
   range = 1
   skill = Ability.VOLT_SWITCH
   attackSprite = AttackSprite.ELECTRIC_MELEE
@@ -973,7 +972,7 @@ export class Tympole extends Pokemon {
   atk = 7
   def = 3
   speDef = 3
-  maxPP = 90
+  maxPP = 70
   range = 1
   skill = Ability.SLUDGE_WAVE
   passive = Passive.HATCH
@@ -994,7 +993,7 @@ export class Palpitoad extends Pokemon {
   atk = 17
   def = 4
   speDef = 4
-  maxPP = 90
+  maxPP = 70
   range = 1
   skill = Ability.SLUDGE_WAVE
   passive = Passive.HATCH
@@ -1013,7 +1012,7 @@ export class Seismitoad extends Pokemon {
   atk = 22
   def = 6
   speDef = 6
-  maxPP = 90
+  maxPP = 70
   range = 1
   skill = Ability.SLUDGE_WAVE
   attackSprite = AttackSprite.WATER_MELEE
@@ -5275,7 +5274,7 @@ export class Groudon extends Pokemon {
   evolution = Pkm.PRIMAL_GROUDON
   evolutionRule = new ItemEvolutionRule([Item.RED_ORB])
   hp = 300
-  atk = 30
+  atk = 20
   def = 5
   speDef = 3
   maxPP = 100
@@ -6089,7 +6088,7 @@ export class Marshadow extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FIGHTING])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 250
+  hp = 220
   atk = 28
   def = 5
   speDef = 5
@@ -6428,7 +6427,7 @@ export class PrimalGroudon extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 4
   hp = 400
-  atk = 30
+  atk = 20
   def = 6
   speDef = 3
   maxPP = 100
@@ -7819,7 +7818,7 @@ export class Buizel extends Pokemon {
   atk = 9
   def = 3
   speDef = 3
-  maxPP = 50
+  maxPP = 65
   range = 1
   skill = Ability.AQUA_JET
   additional = true
@@ -7837,7 +7836,7 @@ export class Floatzel extends Pokemon {
   atk = 24
   def = 5
   speDef = 5
-  maxPP = 50
+  maxPP = 65
   range = 1
   skill = Ability.AQUA_JET
   additional = true
@@ -8146,7 +8145,7 @@ export class Hoothoot extends Pokemon {
   atk = 5
   def = 2
   speDef = 3
-  maxPP = 100
+  maxPP = 90
   range = 1
   skill = Ability.HYPNOSIS
   additional = true
@@ -8165,7 +8164,7 @@ export class Noctowl extends Pokemon {
   atk = 10
   def = 3
   speDef = 5
-  maxPP = 100
+  maxPP = 90
   range = 1
   skill = Ability.HYPNOSIS
   additional = true
@@ -9078,7 +9077,7 @@ export class Vulpix extends Pokemon {
   atk = 7
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 85
   range = 2
   skill = Ability.FIRE_SPIN
   attackSprite = AttackSprite.FIRE_RANGE
@@ -9093,7 +9092,7 @@ export class Ninetales extends Pokemon {
   atk = 20
   def = 3
   speDef = 5
-  maxPP = 100
+  maxPP = 85
   range = 2
   skill = Ability.FIRE_SPIN
   attackSprite = AttackSprite.FIRE_RANGE
@@ -9470,7 +9469,7 @@ export class Popplio extends Pokemon {
   atk = 5
   def = 2
   speDef = 2
-  maxPP = 80
+  maxPP = 70
   range = 3
   skill = Ability.SPARKLING_ARIA
   passive = Passive.HATCH
@@ -9487,7 +9486,7 @@ export class Brionne extends Pokemon {
   atk = 10
   def = 2
   speDef = 3
-  maxPP = 80
+  maxPP = 70
   range = 3
   skill = Ability.SPARKLING_ARIA
   passive = Passive.HATCH
@@ -9502,7 +9501,7 @@ export class Primarina extends Pokemon {
   atk = 20
   def = 2
   speDef = 4
-  maxPP = 80
+  maxPP = 70
   range = 3
   skill = Ability.SPARKLING_ARIA
   attackSprite = AttackSprite.PSYCHIC_RANGE
@@ -13017,6 +13016,7 @@ export class Ambipom extends Pokemon {
 export class Deerling extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS])
   rarity = Rarity.RARE
+  additional = true
   stars = 1
   evolution = Pkm.SAWSBUCK
   hp = 80
@@ -13032,6 +13032,7 @@ export class Deerling extends Pokemon {
 export class Sawsbuck extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS])
   rarity = Rarity.RARE
+  additional = true
   stars = 2
   hp = 180
   atk = 14
@@ -14751,18 +14752,8 @@ export class Skarmory extends Pokemon {
         const entity = params.entity
 
         board.forEach((x, y, tg) => {
-          const index = y * board.columns + x
           if (!tg && chance(0.3, entity)) {
-            if (board.effects[index] !== Effect.SPIKES) {
-              board.effects[index] = Effect.SPIKES
-              simulation.room.broadcast(Transfer.BOARD_EVENT, {
-                simulationId: simulation.id,
-                type: BoardEvent.SPIKES,
-                x: x,
-                y: y
-              })
-            }
-
+            board.addBoardEffect(x, y, Effect.SPIKES, simulation)
             simulation.room.broadcast(Transfer.ABILITY, {
               id: simulation.id,
               skill: Ability.SPIKES,
@@ -14787,12 +14778,7 @@ function ogerponOnAcquired(
     | Item.TEAL_MASK
     | null
 ) {
-  ;[
-    Item.WELLSPRING_MASK,
-    Item.CORNERSTONE_MASK,
-    Item.HEARTHFLAME_MASK,
-    Item.TEAL_MASK
-  ].forEach((mask) => {
+  OgerponMasks.forEach((mask) => {
     if (!player.items.includes(mask) && mask !== currentMask) {
       player.items.push(mask)
     }

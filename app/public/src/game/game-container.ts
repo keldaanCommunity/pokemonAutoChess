@@ -505,6 +505,8 @@ class GameContainer {
           this.gameScene.weatherManager.addStorm()
         } else if (value === Weather.MISTY) {
           this.gameScene.weatherManager.addMist()
+        } else if (value === Weather.SMOG) {
+          this.gameScene.weatherManager.addSmog()
         }
       }
     }
