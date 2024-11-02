@@ -1615,13 +1615,13 @@
     "NEUTRAL": "Normaal weer. Geen effecten.",
     "SUN": "BURN schade +30%\nFREEZE duur -30%",
     "WINDY": "+20% bewegingssnelheid\n+10% ATK_SPEED indien FLYING",
-    "SMOG": "-15% nauwkeurigheid\n+30% POISONNED duur",
     "RAIN": "+3 PP per seconde\n-30% BURN en POISONNED schade",
     "NIGHT": "+10% CRIT_CHANCE\n+30% SLAAPduur",
     "STORM": "Bliksem slaat willekeurig op het bord en deelt 100 SPECIAL (ELECTRIC is immuun)\n+30% duur van de verlamming",
     "MISTY": "+20% SPECIAL\n+30% SILENCE duur",
     "SNOW": "-25% bewegingssnelheid\n+30% FREEZE duur",
-    "SANDSTORM": "5SPECIAL per seconde (GROUND is immuun)\n CONFUSION duur +30%"
+    "SANDSTORM": "5SPECIAL per seconde (GROUND is immuun)\n CONFUSION duur +30%",
+    "SMOG": "-15% nauwkeurigheid\n+30% POISONNED duur"
   },
   "emotion": {
     "Normal": "Normaal",
