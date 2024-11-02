@@ -23,7 +23,7 @@ import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { removeInArray } from "../../utils/array"
-import { getFirstAvailablePositionInBench } from "../../utils/board"
+import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { Effects } from "../effects"
@@ -323,7 +323,7 @@ export default class Player extends Schema implements IPlayer {
                 const nativeTypes = getPokemonData(pokemon.name).types
                 if (nativeTypes.includes(type) === false) {
                   pokemon.types.delete(type)
-                  if (!pokemon.isOnBench) {
+                  if (!isOnBench(pokemon)) {
                     needsRecomputingSynergiesAgain = true
                   }
                 }

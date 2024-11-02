@@ -604,7 +604,6 @@ export interface IPokemonEntity {
   baseAtk: number
   isClone: boolean
   commands: ISimulationCommand[]
-  readonly isOnBench: boolean
 }
 
 export interface IStatus {
