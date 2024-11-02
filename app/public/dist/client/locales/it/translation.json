@@ -2725,7 +2725,7 @@
   "edit": "Modifica",
   "delete": "Elimina",
   "load_bot_with_url": "Carica il bot con l'URL",
-  "load": "Carico",
+  "load": "Carica",
   "url_created": "URL creato",
   "export_hint": " Puoi esportare il tuo lavoro attuale copiando e incollando i seguenti dati. È quindi possibile importare i dati del bot in un secondo momento.",
   "bot_ready_submission": "Se ritieni che il tuo bot sia pronto, puoi inviarlo alla community discord. Il tuo bot verrà esaminato nel canale discord #bot-creation.",
