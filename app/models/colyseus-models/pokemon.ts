@@ -6653,7 +6653,7 @@ export class Primeape extends Pokemon {
   stars = 2
   evolution = Pkm.ANNIHILAPE
   evolutionRule = new ConditionBasedEvolutionRule(
-    (pokemon) => pokemon.atk >= 30
+    (pokemon) => pokemon.atk > 30
   )
   hp = 240
   atk = 21
