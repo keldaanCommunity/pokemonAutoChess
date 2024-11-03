@@ -1255,6 +1255,20 @@
     "DARMANITAN_ZEN": "达摩狒狒（达摩模式）",
     "TURTONATOR": "爆焰龟兽"
   },
+  "ability_description": {
+    "SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得 [20,40,80,SP] 点 SHIELD 。",
+    "EARTHQUAKE": "对与使用者处于同一横排或纵列上的所有敌方宝可梦造成 [100,SP] 点 SPECIAL 伤害。",
+    "SONG_OF_DESIRE": "使敌方后排的两只宝可梦陷入 CHARM 3秒，并 降低其 ATK  [3,SP] 点。",
+    "CONFUSING_MIND": "使后排的两只敌方宝可梦陷入 CONFUSION [3,SP] 秒。",
+    "KNOWLEDGE_THIEF": "使用目标的招式。玩家获得 1 点 XP 。",
+    "KING_SHIELD": "使用者进入 PROTECT 1.5秒，获得 [10,20,30,SP] 点 SHIELD ， 并和最远的敌方宝可梦交换位置。",
+    "U_TURN": "获得 [15,30,50,SP] 点 SHIELD ，并和1秒内对此施加过 CHARM 的目标交换位置。",
+    "EXPLOSION": "对所有相邻敌方宝可梦造成 [50,100,200,SP] 点 SPECIAL 。也对使用者自身造成伤害。",
+    "NIGHTMARE": "对所有敌方宝可梦施加 SILENCE ，持续 [1.5,3,6,ND=1] 秒。已经处于 SLEEP ， FLINCH 或 SILENCE 影响下的目标还会受到 [40,80,150,SP] 点 SPECIAL 。",
+    "CLANGOROUS_SOUL": "使自身和相邻的我方宝可梦增加 [1,2,4,SP] 点 ATK ， DEF 和 SPE_DEF 。",
+    "BONEMERANG": "投掷一块像回旋镖一样穿过敌方全队的骨头，对所有其命中的敌方宝可梦造成 [30,60,90,SP] 点 SPECIAL 。",
+    "RELIC_SONG": "发射一枚音符。前两枚音符使全体我方宝可梦获得 [10,SP] 点 SHIELD ，第三枚使敌方全队陷入 SLEEP [2,SP=0.5] 秒。"
+  },
   "effect": {
     "INGRAIN": "扎根（招式）",
     "GROWTH": "生长（招式）",
