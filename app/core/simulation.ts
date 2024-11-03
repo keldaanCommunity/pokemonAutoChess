@@ -483,7 +483,10 @@ export default class Simulation extends Schema implements ISimulation {
     }
   }
 
-  applyPostEffects(blueTeam: MapSchema<Pokemon>, redTeam: MapSchema<Pokemon>) {
+  applyPostEffects(
+    blueBoard: MapSchema<Pokemon>,
+    redBoard: MapSchema<Pokemon>
+  ) {
     /*
     in order:
     - spawns (bug, rotom, white flute, etc)
@@ -494,10 +497,10 @@ export default class Simulation extends Schema implements ISimulation {
     */
 
     // SPAWNS (bug, rotom, white flute, etc)
-    for (const team of [blueTeam, redTeam]) {
-      const teamIndex = team === blueTeam ? Team.BLUE_TEAM : Team.RED_TEAM
-      const player = team === blueTeam ? this.bluePlayer : this.redPlayer
-      const effects = team === blueTeam ? this.blueEffects : this.redEffects
+    for (const board of [blueBoard, redBoard]) {
+      const teamIndex = board === blueBoard ? Team.BLUE_TEAM : Team.RED_TEAM
+      const player = board === blueBoard ? this.bluePlayer : this.redPlayer
+      const effects = board === blueBoard ? this.blueEffects : this.redEffects
 
       if (
         [
@@ -508,7 +511,7 @@ export default class Simulation extends Schema implements ISimulation {
         ].some((e) => effects.has(e))
       ) {
         const bugTeam = new Array<IPokemon>()
-        team.forEach((pkm) => {
+        board.forEach((pkm) => {
           if (pkm.types.has(Synergy.BUG) && pkm.positionY != 0) {
             bugTeam.push(pkm)
           }
@@ -553,9 +556,9 @@ export default class Simulation extends Schema implements ISimulation {
         }
       }
 
-      team.forEach((pokemon) => {
+      board.forEach((pokemon) => {
         if (pokemon.items.has(Item.ROTOM_PHONE) && !pokemon.isOnBench) {
-          const player = team === blueTeam ? this.bluePlayer : this.redPlayer
+          const player = board === blueBoard ? this.bluePlayer : this.redPlayer
           const rotomDrone = PokemonFactory.createPokemonFromName(
             Pkm.ROTOM_DRONE,
             player
