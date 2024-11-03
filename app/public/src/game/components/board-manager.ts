@@ -17,6 +17,7 @@ import {
 import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../../types/enum/Synergy"
+import { isOnBench } from "../../../../utils/board"
 import { values } from "../../../../utils/schemas"
 import { transformCoordinate } from "../../pages/utils/utils"
 import store from "../../stores"
@@ -200,7 +201,7 @@ export default class BoardManager {
     }
 
     this.player.board.forEach((pokemon) => {
-      if (this.mode === BoardMode.PICK || pokemon.isOnBench) {
+      if (this.mode === BoardMode.PICK || isOnBench(pokemon)) {
         this.addPokemonSprite(pokemon)
       }
     })
@@ -499,7 +500,7 @@ export default class BoardManager {
     this.mode = BoardMode.BATTLE
     this.hideLightCell()
     this.pokemons.forEach((pokemon) => {
-      if (!pokemon.isOnBench) {
+      if (!isOnBench(pokemon)) {
         pokemon.destroy()
         this.pokemons.delete(pokemon.id)
       }
@@ -600,7 +601,7 @@ export default class BoardManager {
           )
           pokemonUI.x = coordinates[0]
           pokemonUI.y = coordinates[1]
-          if (this.mode === BoardMode.BATTLE && !pokemonUI.isOnBench) {
+          if (this.mode === BoardMode.BATTLE && !isOnBench(pokemonUI)) {
             pokemonUI.destroy()
             this.pokemons.delete(pokemonUI.id)
           }
@@ -659,7 +660,7 @@ export default class BoardManager {
     let benchSize = 0
 
     this.pokemons.forEach((pokemon) => {
-      if (pokemon.isOnBench) {
+      if (isOnBench(pokemon)) {
         benchSize++
       }
     })

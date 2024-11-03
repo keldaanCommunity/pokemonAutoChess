@@ -39,6 +39,8 @@ import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
+import { count } from "../utils/array"
+import { isOnBench } from "../utils/board"
 import { distanceC, distanceM } from "../utils/distance"
 import { clamp, max, min, roundToNDigits } from "../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
@@ -50,7 +52,6 @@ import MovingState from "./moving-state"
 import PokemonState from "./pokemon-state"
 import Simulation from "./simulation"
 import { DelayedCommand, SimulationCommand } from "./simulation-command"
-import { count } from "../utils/array"
 
 export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -201,10 +202,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       !this.status.resurecting &&
       !this.status.locked
     )
-  }
-
-  get isOnBench(): boolean {
-    return this.positionY === 0
   }
 
   isTargettableBy(
@@ -1584,7 +1581,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         const koAllies = values(this.player.board).filter(
           (p) =>
             p.id !== this.refToBoardPokemon.id &&
-            !p.isOnBench &&
+            !isOnBench(p) &&
             alliesAlive.includes(p.id) === false
         )
 
