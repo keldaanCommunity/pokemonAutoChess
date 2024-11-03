@@ -269,10 +269,6 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
-  get isOnBench(): boolean {
-    return this.positionY === 0
-  }
-
   updateTooltipPosition() {
     if (this.detail) {
       if (this.input && preferences.showDetailsOnHover) {
