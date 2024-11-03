@@ -257,8 +257,8 @@ export default class Status extends Schema implements IStatus {
       this.triggerParalysis(30000, pokemon)
     }
 
-    if (pokemon.status.curseTorment && !pokemon.status.silence) {
-      this.triggerSilence(30000, pokemon)
+    if (pokemon.status.curseTorment && !pokemon.status.fatigue) {
+      this.triggerFatigue(30000, pokemon)
     }
 
     if (pokemon.status.curseFate && !pokemon.status.curse) {
