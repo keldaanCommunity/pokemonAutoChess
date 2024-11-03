@@ -372,6 +372,7 @@ export interface IPlayer {
   rerollCount: number
   totalMoneyEarned: number
   totalPlayerDamageDealt: number
+  wildChance: number
   eggChance: number
   lightX: number
   lightY: number
