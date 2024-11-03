@@ -10272,8 +10272,9 @@ export class YawnStrategy extends AbilityStrategy {
       opponent.addAbilityPower(-30, pokemon, 0, false)
     })
 
-    const shield = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
     pokemon.addShield(shield, pokemon, 1, true)
+    pokemon.cooldown = 1500
   }
 }
 

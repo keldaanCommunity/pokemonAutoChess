@@ -1625,7 +1625,7 @@
     "THUNDER_CAGE": "대상과 주변의 적을 전기 감옥에 가두어 [60,SP]의 SPECIAL 를 입히고 3초 동안 LOCKED 와 PARALYSIS 상태로 만든다.",
     "HEADBUTT": "대상에게 [20,40,80,SP]의 SPECIAL 를 입히고 5초 동안 FLINCH 이 되게 한다. SHIELD가 있는 대상에게는 두 배의 피해를 입힌다.",
     "STEEL_WING": "적의 후방으로 돌진하여 부딪히는 모든 적에게 [10,20,40,SP] + 3X DEF SPECIAL 를 입히고 1 DEF 를 훔친다.",
-    "YAWN": "[20,40,80,SP] SHIELD 를 획득한다. 이 포켓몬을 공격하는 적은 4초 동안 FATIGUE 상태에 빠지고 30% AP 이 감소한다.",
+    "YAWN": "[10,20,40,SP] SHIELD 를 획득한다. 이 포켓몬을 공격하는 적은 4초 동안 FATIGUE 상태에 빠지고 30% AP 이 감소한다.",
     "FIERY_DANCE": "불꽃을 두르며 시전자가 춤을 추며 날개를 펄럭이며 [25,50,100,SP]의 SPECIAL을 가한다. 또한 시전자의 AP를 30 증가시킨다.",
     "BIDE": "시전자는 3초 동안 움직일 수 없게 된다. 이후 이 동안 받은 피해의 2배를 주변에 SPECIAL 로 가한다.",
     "SHORE_UP": "시전자의 HP 를 [20,25,SP] % 회복한다. 날씨가 SANDSTORM 이라면 [30,35,SP] % HP 을 회복한다.",
