@@ -2548,14 +2548,14 @@
     "NEUTRAL": "Tempo normale. Nessun effetto.",
     "SUN": "Danno da BURN +30%\n-30% alla durata del FREEZE",
     "WINDY": "+20% velocità di movimento\n+10% ATK_SPEED se FLYING",
-    "SMOG": "-15% precisione\n+30% durata POISONNED",
     "RAIN": "+3 PP al secondo\n-30% danni da BURN e POISONNED",
     "NIGHT": "+10% CRIT_CHANCE\n+30% durata SLEEP",
     "STORM": "I fulmini colpiscono casualmente il tabellone, infliggendo 100 SPECIAL (ELECTRIC sono immuni)\n+30% alla durata della PARALYSIS",
     "MISTY": "+20% SPECIAL\n+30% alla durata del CHARM",
     "SNOW": "-25% velocità di movimento\n+30% alla durata del FREEZE",
     "SANDSTORM": "5 SPECIAL al secondo (GROUND sono immuni)\n +30% durata CONFUSION",
-    "BLOODMOON": "+20% PHYSICAL\n+30% durata di WOUND"
+    "BLOODMOON": "+20% PHYSICAL\n+30% durata di WOUND",
+    "SMOG": "-15% precisione\n+30% durata POISONNED"
   },
   "emotion": {
     "Normal": "Normale",

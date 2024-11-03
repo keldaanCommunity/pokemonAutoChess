@@ -2414,14 +2414,14 @@
     "NEUTRAL": "Clima normal. Sin efectos.",
     "SUN": "Daño por BURN +30%\n-30% de duración de FREEZE",
     "WINDY": "+20 % de velocidad de movimiento\n+10% de ATK_SPEED si FLYING",
-    "SMOG": "-15 % de precisión\n+30% de duración de POISONNED",
     "RAIN": "+3 PP por segundo\n-30% de daño por BURN y POISONNED",
     "NIGHT": "+10% CRIT_CHANCE\n+30% de duración del SLEEP",
     "STORM": "Un rayo cae aleatoriamente en el tablero y daña 100 de SPECIAL (ELECTRIC es inmune)\n+30% de duración de la PARALYSIS",
     "MISTY": "+20%SPECIAL\n+30% de duración del SILENCE",
     "SNOW": "-25% de velocidad de movimiento\n+30% de duración de FREEZE",
     "SANDSTORM": "5 SPECIAL por segundo (GROUND son inmunes)\n+30% de duración de CONFUSION",
-    "BLOODMOON": "+20% PHYSICAL\nDuración de WOUND +30% "
+    "BLOODMOON": "+20% PHYSICAL\nDuración de WOUND +30% ",
+    "SMOG": "-15 % de precisión\n+30% de duración de POISONNED"
   },
   "emotion": {
     "Normal": "Normal",
