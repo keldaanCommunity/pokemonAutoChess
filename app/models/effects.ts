@@ -5,6 +5,7 @@ import { Ability } from "../types/enum/Ability"
 import { Effect } from "../types/enum/Effect"
 import { Passive } from "../types/enum/Passive"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
+import { isOnBench } from "../utils/board"
 import Synergies from "./colyseus-models/synergies"
 
 export class Effects extends SetSchema<Effect> {
@@ -22,7 +23,7 @@ export class Effects extends SetSchema<Effect> {
     })
 
     board.forEach((p) => {
-      if (!p.isOnBench) {
+      if (!isOnBench(p)) {
         if (p.skill === Ability.GRASSY_SURGE) {
           this.add(Effect.GRASSY_TERRAIN)
         }

@@ -123,10 +123,6 @@ export class Pokemon extends Schema implements IPokemon {
     return ![Pkm.EGG].includes(this.name)
   }
 
-  get isOnBench(): boolean {
-    return this.positionY === 0
-  }
-
   get canBeCloned(): boolean {
     return (
       this.rarity !== Rarity.UNIQUE &&

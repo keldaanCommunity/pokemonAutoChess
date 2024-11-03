@@ -20,6 +20,7 @@ import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { values } from "../../../../../utils/schemas"
+import { isOnBench } from "../../../../../utils/board"
 
 export default function TeamBuilder(props: {
   bot?: IBot
@@ -183,7 +184,7 @@ export default function TeamBuilder(props: {
   function snapshot() {
     try {
       if (!currentPlayer) return;
-      updateBoard(values(currentPlayer.board).filter(pokemon => !pokemon.isOnBench).map(p => {
+      updateBoard(values(currentPlayer.board).filter(pokemon => !isOnBench(pokemon)).map(p => {
         return {
           name: p.name,
           emotion: p.emotion,
