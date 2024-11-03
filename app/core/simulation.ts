@@ -38,7 +38,6 @@ import { IPokemonData } from "../types/interfaces/PokemonData"
 import { count } from "../utils/array"
 import { isOnBench } from "../utils/board"
 import { logger } from "../utils/logger"
-import { isOnBench } from "../utils/board"
 import {
   chance,
   pickRandomIn,
