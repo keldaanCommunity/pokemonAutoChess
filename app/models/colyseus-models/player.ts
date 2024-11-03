@@ -88,6 +88,7 @@ export default class Player extends Schema implements IPlayer {
   @type("uint16") totalMoneyEarned: number = 0
   @type("uint16") totalPlayerDamageDealt: number = 0
   @type("float32") eggChance: number = 0
+  @type("float32") wildChance: number = 0
   commonRegionalPool: Pkm[] = new Array<Pkm>()
   uncommonRegionalPool: Pkm[] = new Array<Pkm>()
   rareRegionalPool: Pkm[] = new Array<Pkm>()
@@ -103,7 +104,6 @@ export default class Player extends Schema implements IPlayer {
   lightX: number
   lightY: number
   canRegainLife: boolean = true
-  wildChance: number = 0
   ghost: boolean = false
 
   constructor(
@@ -269,12 +269,8 @@ export default class Player extends Schema implements IPlayer {
 
     this.updateFishingRods()
     this.updateWeatherRocks()
-
+    this.updateWildChance()
     this.effects.update(this.synergies, this.board)
-    this.wildChance =
-      pokemons
-        .filter((p) => p.types.has(Synergy.WILD))
-        .reduce((total, p) => total + p.stars * (1 + p.luck / 100), 0) / 100
   }
 
   updateArtificialItems(updatedSynergies: Map<Synergy, number>): boolean {
@@ -383,6 +379,13 @@ export default class Player extends Schema implements IPlayer {
       this.items.push(Item.GOOD_ROD)
     if (this.items.includes(Item.SUPER_ROD) === false && fishingLevel === 3)
       this.items.push(Item.SUPER_ROD)
+  }
+
+  updateWildChance() {
+    this.wildChance =
+      values(this.board)
+        .filter((p) => p.types.has(Synergy.WILD))
+        .reduce((total, p) => total + p.stars * (1 + p.luck / 100), 0) / 100
   }
 
   updateRegionalPool(state: GameState, mapChanged: boolean) {
