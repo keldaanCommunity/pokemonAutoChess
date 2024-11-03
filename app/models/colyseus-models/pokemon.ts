@@ -7,10 +7,8 @@ import {
   HatchEvolutionRule,
   ItemEvolutionRule
 } from "../../core/evolution-rules"
-import { PokemonEntity } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
 import { DelayedCommand } from "../../core/simulation-command"
-import { OnUpdatePhaseCommand } from "../../rooms/commands/game-commands"
 import GameState from "../../rooms/states/game-state"
 import {
   AttackSprite,
@@ -59,7 +57,7 @@ import { Synergy, SynergyEffects } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { removeInArray, sum } from "../../utils/array"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
-import { distanceC, distanceM } from "../../utils/distance"
+import { distanceC, distanceE } from "../../utils/distance"
 import { chance, pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import PokemonFactory from "../pokemon-factory"
@@ -12447,13 +12445,13 @@ export class Comfey extends Pokemon {
     if (alliesWithFreeSlots.length > 0) {
       alliesWithFreeSlots.sort(
         (a, b) =>
-          distanceM(
+          distanceE(
             a.positionX,
             a.positionY,
             entity.positionX,
             entity.positionY
           ) -
-          distanceM(
+          distanceE(
             b.positionX,
             b.positionY,
             entity.positionX,
