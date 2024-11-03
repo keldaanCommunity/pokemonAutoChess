@@ -38,6 +38,7 @@ import { IPokemonData } from "../types/interfaces/PokemonData"
 import { count } from "../utils/array"
 import { isOnBench } from "../utils/board"
 import { logger } from "../utils/logger"
+import { isOnBench } from "../utils/board"
 import {
   chance,
   pickRandomIn,
@@ -76,8 +77,8 @@ export default class Simulation extends Schema implements ISimulation {
   constructor(
     id: string,
     room: GameRoom,
-    blueTeam: MapSchema<Pokemon>,
-    redTeam: MapSchema<Pokemon>,
+    blueBoard: MapSchema<Pokemon>,
+    redBoard: MapSchema<Pokemon>,
     bluePlayer: Player,
     redPlayer: Player | undefined,
     stageLevel: number,
@@ -97,13 +98,14 @@ export default class Simulation extends Schema implements ISimulation {
 
     this.board = new Board(BOARD_HEIGHT, BOARD_WIDTH)
 
-    // logger.debug({ blueEffects, redEffects })
-    ;[this.bluePlayer, this.redPlayer].forEach((player) => {
-      if (!player) return
-      player.board.forEach((pokemon, id) => {
-        pokemon.beforeSimulationStart({ weather: this.weather, player })
-      })
-    })
+    // beforeSimulationStart hooks
+    for (const player of [this.bluePlayer, this.redPlayer]) {
+      if (player) {
+        player.board.forEach((pokemon, id) => {
+          pokemon.beforeSimulationStart({ weather: this.weather, player })
+        })
+      }
+    }
 
     bluePlayer.effects.forEach((e) => this.blueEffects.add(e))
     redPlayer?.effects.forEach((e) => this.redEffects.add(e))
@@ -113,29 +115,31 @@ export default class Simulation extends Schema implements ISimulation {
     this.flowerSpawn = [false, false]
     this.stormLightningTimer = randomBetween(4000, 8000)
 
-    if (blueTeam) {
-      blueTeam.forEach((pokemon) => {
-        if (pokemon.positionY != 0) {
-          this.addPokemon(pokemon, pokemon.positionX, pokemon.positionY - 1, 0)
-        }
-      })
-    }
+    blueBoard.forEach((pokemon) => {
+      if (!isOnBench(pokemon)) {
+        this.addPokemon(
+          pokemon,
+          pokemon.positionX,
+          pokemon.positionY - 1,
+          Team.BLUE_TEAM
+        )
+      }
+    })
 
-    if (redTeam) {
-      redTeam.forEach((pokemon) => {
-        if (pokemon.positionY != 0) {
-          this.addPokemon(
-            pokemon,
-            pokemon.positionX,
-            5 - (pokemon.positionY - 1),
-            1
-          )
-        }
-      })
-    }
+    redBoard.forEach((pokemon) => {
+      if (!isOnBench(pokemon)) {
+        this.addPokemon(
+          pokemon,
+          pokemon.positionX,
+          5 - (pokemon.positionY - 1),
+          Team.RED_TEAM
+        )
+      }
+    })
 
-    this.applyPostEffects(blueTeam, redTeam)
+    this.applyPostEffects(blueBoard, redBoard)
 
+    // afterSimulationStart hooks
     for (const player of [this.bluePlayer, this.redPlayer]) {
       if (player) {
         const entityTeam =
@@ -480,7 +484,10 @@ export default class Simulation extends Schema implements ISimulation {
     }
   }
 
-  applyPostEffects(blueTeam: MapSchema<Pokemon>, redTeam: MapSchema<Pokemon>) {
+  applyPostEffects(
+    blueBoard: MapSchema<Pokemon>,
+    redBoard: MapSchema<Pokemon>
+  ) {
     /*
     in order:
     - spawns (bug, rotom, white flute, etc)
@@ -491,10 +498,10 @@ export default class Simulation extends Schema implements ISimulation {
     */
 
     // SPAWNS (bug, rotom, white flute, etc)
-    for (const team of [blueTeam, redTeam]) {
-      const teamIndex = team === blueTeam ? Team.BLUE_TEAM : Team.RED_TEAM
-      const player = team === blueTeam ? this.bluePlayer : this.redPlayer
-      const effects = team === blueTeam ? this.blueEffects : this.redEffects
+    for (const board of [blueBoard, redBoard]) {
+      const teamIndex = board === blueBoard ? Team.BLUE_TEAM : Team.RED_TEAM
+      const player = board === blueBoard ? this.bluePlayer : this.redPlayer
+      const effects = board === blueBoard ? this.blueEffects : this.redEffects
 
       if (
         [
@@ -505,7 +512,7 @@ export default class Simulation extends Schema implements ISimulation {
         ].some((e) => effects.has(e))
       ) {
         const bugTeam = new Array<IPokemon>()
-        team.forEach((pkm) => {
+        board.forEach((pkm) => {
           if (pkm.types.has(Synergy.BUG) && pkm.positionY != 0) {
             bugTeam.push(pkm)
           }
@@ -550,9 +557,9 @@ export default class Simulation extends Schema implements ISimulation {
         }
       }
 
-      team.forEach((pokemon) => {
+      board.forEach((pokemon) => {
         if (pokemon.items.has(Item.ROTOM_PHONE) && !isOnBench(pokemon)) {
-          const player = team === blueTeam ? this.bluePlayer : this.redPlayer
+          const player = board === blueBoard ? this.bluePlayer : this.redPlayer
           const rotomDrone = PokemonFactory.createPokemonFromName(
             Pkm.ROTOM_DRONE,
             player
