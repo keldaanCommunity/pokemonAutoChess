@@ -14226,6 +14226,10 @@ export class Stonjourner extends Pokemon {
   skill = Ability.GRAVITY
   passive = Passive.STONJOURNER
   attackSprite = AttackSprite.ROCK_MELEE
+  onSpawn({ entity }: { entity: IPokemonEntity }) {
+    entity.status.tree = true
+    entity.toIdleState()
+  }
   afterSimulationStart({
     entity,
     simulation
@@ -14237,8 +14241,6 @@ export class Stonjourner extends Pokemon {
           cell.value.addAbilityPower(50, cell.value, 0, false)
         }
       })
-    entity.status.tree = true
-    entity.toIdleState()
   }
 }
 

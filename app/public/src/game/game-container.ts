@@ -130,7 +130,8 @@ class GameContainer {
       "wound",
       "enraged",
       "locked",
-      "magicBounce"
+      "magicBounce",
+      "tree"
     ]
 
     fields.forEach((field) => {
