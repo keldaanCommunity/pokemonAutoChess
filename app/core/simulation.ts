@@ -671,11 +671,10 @@ export default class Simulation extends Schema implements ISimulation {
     // WEATHER EFFECTS
     if (this.weather !== Weather.NEUTRAL) {
       for (const team of [this.blueTeam, this.redTeam]) {
+        const player = team === this.blueTeam ? this.bluePlayer : this.redPlayer
+        const opponentPlayer =
+          team === this.blueTeam ? this.redPlayer : this.bluePlayer
         team.forEach((pokemon) => {
-          const player =
-            team === this.blueTeam ? this.bluePlayer : this.redPlayer
-          const opponentPlayer =
-            team === this.blueTeam ? this.redPlayer : this.bluePlayer
           this.applyWeatherEffects(pokemon, player, opponentPlayer)
         })
       }
