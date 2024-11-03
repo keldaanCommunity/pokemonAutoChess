@@ -68,6 +68,7 @@ import {
   getFirstAvailablePositionOnBoard,
   getFreeSpaceOnBench,
   getMaxTeamSize,
+  isOnBench,
   isPositionEmpty
 } from "../../utils/board"
 import { repeat } from "../../utils/function"
@@ -228,7 +229,7 @@ export class OnDragDropCommand extends Command<
       if (pokemon) {
         const { x, y } = detail
         const dropOnBench = y == 0
-        const dropFromBench = pokemon.isOnBench
+        const dropFromBench = isOnBench(pokemon)
 
         if (
           pokemon.name === Pkm.DITTO &&
@@ -640,7 +641,7 @@ export class OnSellDropCommand extends Command<
       const pokemon = player.board.get(pokemonId)
       if (
         pokemon &&
-        !pokemon.isOnBench &&
+        !isOnBench(pokemon) &&
         this.state.phase === GamePhaseState.FIGHT
       ) {
         return // can't sell a pokemon currently fighting
@@ -1179,7 +1180,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         const numberOfPokemonsToMove = maxTeamSize - teamSize
         for (let i = 0; i < numberOfPokemonsToMove; i++) {
           const pokemon = values(player.board).find(
-            (p) => p.isOnBench && p.canBePlaced
+            (p) => isOnBench(p) && p.canBePlaced
           )
           const coordinate = getFirstAvailablePositionOnBoard(player.board)
           if (coordinate && pokemon) {
@@ -1270,7 +1271,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           const GOLDEN_EGG_CHANCE = 0.04
           const playerEggChanceStacked = player.eggChance
           const babies = values(player.board).filter(
-            (p) => !p.isOnBench && p.types.has(Synergy.BABY)
+            (p) => !isOnBench(p) && p.types.has(Synergy.BABY)
           )
 
           for (const baby of babies) {
@@ -1356,7 +1357,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               )
             }
           }
-          if (pokemon.passive === Passive.UNOWN && !pokemon.isOnBench) {
+          if (pokemon.passive === Passive.UNOWN && !isOnBench(pokemon)) {
             // remove after one fight
             player.board.delete(key)
             player.board.delete(pokemon.id)

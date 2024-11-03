@@ -372,6 +372,7 @@ export interface IPlayer {
   rerollCount: number
   totalMoneyEarned: number
   totalPlayerDamageDealt: number
+  wildChance: number
   eggChance: number
   lightX: number
   lightY: number
@@ -604,7 +605,6 @@ export interface IPokemonEntity {
   baseAtk: number
   isClone: boolean
   commands: ISimulationCommand[]
-  readonly isOnBench: boolean
 }
 
 export interface IStatus {

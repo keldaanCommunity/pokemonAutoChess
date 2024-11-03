@@ -1,5 +1,6 @@
 import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import { GameObjects } from "phaser"
+import { getAttackTimings } from "../../../../core/attacking-state"
 import { getMoveSpeed } from "../../../../core/pokemon-entity"
 import Simulation from "../../../../core/simulation"
 import Count from "../../../../models/colyseus-models/count"
@@ -22,7 +23,7 @@ import { Passive } from "../../../../types/enum/Passive"
 import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
 import { max } from "../../../../utils/number"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
-import AnimationManager, { getAttackTimings } from "../animation-manager"
+import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import { displayAbility } from "./abilities-animations"
 import PokemonSprite from "./pokemon"
@@ -90,7 +91,7 @@ export default class BattleManager {
       )
       this.animationManager.animatePokemon(
         pokemonUI,
-        PokemonActionState.WALK,
+        pokemon.status.tree ? PokemonActionState.IDLE : PokemonActionState.WALK,
         this.flip
       )
       this.group.add(pokemonUI)

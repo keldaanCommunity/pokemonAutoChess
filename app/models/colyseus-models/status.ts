@@ -45,6 +45,7 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") curseFate = false
   @type("boolean") enraged = false
   @type("boolean") skydiving = false
+  @type("boolean") tree = false
   magmaStorm = false
   soulDew = false
   clearWing = false
@@ -79,7 +80,6 @@ export default class Status extends Schema implements IStatus {
   synchroCooldown = 3000
   magmaStormCooldown = 0
   synchro = false
-  tree = false
   resurectingCooldown = 0
   doubleDamage = false
   drySkin = false
@@ -257,8 +257,8 @@ export default class Status extends Schema implements IStatus {
       this.triggerParalysis(30000, pokemon)
     }
 
-    if (pokemon.status.curseTorment && !pokemon.status.silence) {
-      this.triggerSilence(30000, pokemon)
+    if (pokemon.status.curseTorment && !pokemon.status.fatigue) {
+      this.triggerFatigue(30000, pokemon)
     }
 
     if (pokemon.status.curseFate && !pokemon.status.curse) {
