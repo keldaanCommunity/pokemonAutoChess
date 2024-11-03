@@ -2551,14 +2551,14 @@
     "NEUTRAL": "Temps normal. Aucun effet.",
     "SUN": "Dégâts de BURN +30%\nDurée de FREEZE -30%",
     "WINDY": "+20% de vitesse de déplacement\n+10% de ATK_SPEED si de type FLYING",
-    "SMOG": "-15% de précision\n+30% de durée de POISONNED",
     "RAIN": "+3 PP par seconde\n-30% de dégâts de BURN et POISONNED",
     "NIGHT": "+10% CRIT_CHANCE\n+30% de durée de SLEEP",
     "STORM": "La foudre frappe au hasard sur le plateau, infligeant 100 SPECIAL (les ELECTRIC sont immunisés)\n+30% de durée de PARALYSIS",
     "MISTY": "+20% SPECIAL\n+30% de durée de CHARM",
     "SNOW": "-25% de vitesse de déplacement\n+30% de durée de FREEZE",
     "SANDSTORM": "Inflige 5 SPECIAL par seconde (les GROUND sont immunisés)\n Durée CONFUSION +30%",
-    "BLOODMOON": "+20% PHYSICAL\n+30% durée de WOUND"
+    "BLOODMOON": "+20% PHYSICAL\n+30% durée de WOUND",
+    "SMOG": "-15% de précision\n+30% de durée de POISONNED"
   },
   "emotion": {
     "Normal": "Normal",

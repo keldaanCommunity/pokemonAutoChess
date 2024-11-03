@@ -2487,14 +2487,14 @@
     "NEUTRAL": "Normales Wetter. Keine Auswirkungen.",
     "SUN": "+30% Schaden durch BURN\n-30% Dauer von FREEZE",
     "WINDY": "+20% Bewegungsgeschwindigkeit\n+10% ATK_SPEED beim FLYING",
-    "SMOG": "-15 % Genauigkeit\n+30 % Dauer der POISONNED",
     "RAIN": "+3 PP pro Sekunde\n-30% Schaden durch BURN und POISONNED",
     "NIGHT": "+10% CRIT_CHANCE\n+30% Dauer von SLEEP",
     "STORM": "Blitze schlagen zufällig auf das Feld ein und verursachen 100 SPECIAL (ELECTRIC sind immun)\n+30% Dauer von PARALYSIS",
     "MISTY": "+20% SPECIAL\n+30% Dauer von CHARM",
     "SNOW": "-25% Bewegungsgeschwindigkeit\n+30% Dauer von FREEZE",
     "SANDSTORM": "Verursacht 5 SPECIAL pro Sekunde (GROUND sind immun)\n+30% Dauer von CONFUSION",
-    "BLOODMOON": "+20% PHYSISCH\n+30% WOUND Dauer"
+    "BLOODMOON": "+20% PHYSISCH\n+30% WOUND Dauer",
+    "SMOG": "-15 % Genauigkeit\n+30 % Dauer der POISONNED"
   },
   "emotion": {
     "Normal": "Normal",
