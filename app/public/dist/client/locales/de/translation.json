@@ -1720,7 +1720,7 @@
     "INGRAIN": "Stellt alle 2 Sekunden 7 HP wieder her. Holen Sie sich einen Beerenbaum.",
     "GROWTH": "Stellt alle 2 Sekunden 15 HP wieder her. Holen Sie sich einen anderen Beerenbaum.",
     "SPORE": "Stellt alle 2 Sekunden 30 HP wieder her. Holen Sie sich einen dritten Beerenbaum.",
-    "BLAZE": "30% Chance, zu BURN",
+    "BLAZE": "[30,LK]% Chance, zu BURN",
     "VICTORY_STAR": "+1 ATK nach jedem Treffer",
     "DROUGHT": "+2 ATK nach jedem Treffer",
     "DESOLATE_LAND": "+3 ATK nach jedem Treffer. Holen Sie sich einen FIRE_SHARD.",
