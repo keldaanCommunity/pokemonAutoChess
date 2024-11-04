@@ -570,7 +570,7 @@ export default class Simulation extends Schema implements ISimulation {
           this.addPokemon(rotomDrone, coord.x, coord.y, teamIndex, true)
         }
 
-        if (pokemon.items.has(Item.WHITE_FLUTE)) {
+        if (pokemon.items.has(Item.WHITE_FLUTE) && !isOnBench(pokemon)) {
           const wilds = PRECOMPUTED_POKEMONS_PER_TYPE[Synergy.WILD].map((p) =>
             getPokemonData(p)
           )
