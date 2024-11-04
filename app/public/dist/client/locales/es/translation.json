@@ -1462,7 +1462,7 @@
     "HYPERSPACE_FURY": "Usando sus multiples brazos, desata una ráfaga de [4,SP] ataques. Cada uno reduce la DEF del objetivo en 1.",
     "SNIPE_SHOT": "Lanza un disparo con la punta de sus dedos al enemigo mas lejano, causando [50,100,200,SP] de SPECIAL a todos los oponentes en el camino",
     "AIR_SLASH": "Causa [25,50,100,SP] de SPECIAL y deja al enemigo FLINCH por 7 segundos",
-    "EGGSPLOSION": "Lanza un huevo explosivo al objetivo, infligiendo [40,80,140,SP] de SPECIAL y aplicando ARMOR_REDUCTION por 4 segundos a todos los enemigos adyacentes. Si el objetivo queda KO, tienes un 30% de recibir un huevo en tu banco.",
+    "EGGSPLOSION": "Lanza un huevo explosivo al objetivo, infligiendo [40,80,140,SP] de SPECIAL y aplicando ARMOR_REDUCTION por 4 segundos a todos los enemigos adyacentes. Si el objetivo queda KO, tienes un [30,LK]% de recibir un huevo en tu banco.",
     "FLORAL_HEALING": "Cura HP equivalente al PP máximo que posea el portador de Comfey o del propio Comfey si no es llevado por nadie",
     "VINE_WHIP": "Causa [100,SP] de SPECIAL, causando FLINCH a todos los pokémon adyacentes por 3 segundos",
     "BODY_SLAM": "Inflige [30,SP]% del HP máximo del usuaio como SPECIAL",

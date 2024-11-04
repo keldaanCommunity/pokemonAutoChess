@@ -1485,7 +1485,7 @@
     "HYPERSPACE_FURY": "Entfesselt mit seinen vielen Armen ein Sperrfeuer von [4,SP] Angriffen. Jeder Angriff senkt die DEF des Ziels um 1",
     "SNIPE_SHOT": "Feuert einen Wasserstrahl aus seinen Zeigefingerspitzen auf den am weitesten entfernten Gegner, der allen Gegnern im Weg [50,100,200,SP] SPECIAL zufügt",
     "AIR_SLASH": "Verursacht [25,50,100,SP] SPECIAL und fügt 7 Sekunden lang FLINCH zu",
-    "EGGSPLOSION": "Schleudert ein explosives Ei auf sein Ziel, das [40,80,140,SP] SPECIAL verursacht und 4 Sekunden lang ARMOR_REDUCTION auf alle benachbarten Gegner anwendet. Wenn das Ziel KO ist, hast du eine 30%ige Chance, ein Ei auf deiner Bank zu bekommen.",
+    "EGGSPLOSION": "Schleudert ein explosives Ei auf sein Ziel, das [40,80,140,SP] SPECIAL verursacht und 4 Sekunden lang ARMOR_REDUCTION auf alle benachbarten Gegner anwendet. Wenn das Ziel KO ist, hast du eine [30,LK]%ige Chance, ein Ei auf deiner Bank zu bekommen.",
     "FLORAL_HEALING": "Heilt so viele HP wie die maximalen PP des Comfey-Trägers oder Comfey selbst, wenn es nicht gehalten wird",
     "VINE_WHIP": "Verursacht [100,SP] SPECIAL, wodurch er und alle benachbarten Feinde 3 Sekunden lang FLINCH werden",
     "BODY_SLAM": "Verursacht [30,SP]% der maximalen HP des Anwenders als SPECIAL",
