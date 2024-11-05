@@ -1465,17 +1465,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         const { bluePlayer, redPlayer } = matchup
         const weather = getWeather(bluePlayer, redPlayer, redPlayer.board)
         const simulationId = nanoid()
-        const simulation = new Simulation(
-          simulationId,
-          this.room,
-          bluePlayer.board,
-          redPlayer.board,
-          bluePlayer,
-          redPlayer,
-          this.state.stageLevel,
-          weather,
-          matchup.ghost
-        )
+
         bluePlayer.simulationId = simulationId
         bluePlayer.team = Team.BLUE_TEAM
         bluePlayer.opponents.set(
@@ -1501,6 +1491,18 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           redPlayer.opponentAvatar = bluePlayer.avatar
           redPlayer.opponentTitle = bluePlayer.title ?? ""
         }
+
+        const simulation = new Simulation(
+          simulationId,
+          this.room,
+          bluePlayer.board,
+          redPlayer.board,
+          bluePlayer,
+          redPlayer,
+          this.state.stageLevel,
+          weather,
+          matchup.ghost
+        )
 
         this.state.simulations.set(simulation.id, simulation)
       })
