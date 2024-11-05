@@ -1313,7 +1313,22 @@
     "BITE": "对目标造成[40,80,120,SP]点SPECIAL，使用者自身恢复所造成伤害的30%，并使目标陷入FLINCH 5秒。",
     "AQUA_TAIL": "对目标造成[30,60,100,SP]点SPECIAL，并获得[30,60,100,SP]点SHIELD。",
     "DRAGON_TAIL": "对目标造成[30,60,100,SP]点SPECIAL，并提升使用者[1,2,3,SP]点DEF和SPE_DEF。",
-    "DRAGON_BREATH": "对目标身后的所有敌方宝可梦造成[25,50,100,SP]点TRUE。"
+    "DRAGON_BREATH": "对目标身后的所有敌方宝可梦造成[25,50,100,SP]点TRUE。",
+    "ICICLE_CRASH": "对目标周围的一片区域造成[20,40,80,SP]点SPECIAL。",
+    "ROOT": "使所有相邻敌方宝可梦陷入LOCKED 4秒，并受到[10,20,40,SP]点SPECIAL。使用者及所有相邻我方宝可梦则恢复[10,20,40,SP]点HP。",
+    "TORMENT": "提升[20,40,60,SP]%ATK_SPEED。",
+    "STOMP": "对目标造成[3,4,5,SP]乘以ATK点SPECIAL。",
+    "PAYBACK": "对目标造成[15,30,60,SP]点SPECIAL。若使用者生命不足一半，造成的伤害翻倍。",
+    "SHADOW_BALL": "对目标造成[40,60,100,SP]点SPECIAL，并降低全部敌方宝可梦的SPE_DEF 1点。",
+    "BUG_BUZZ": "对目标造成[20,40,80,SP]点SPECIAL。若目标处于PARALYSIS，造成的伤害翻倍。",
+    "STRING_SHOT": "对目标造成[10,20,50,SP]点SPECIAL，并使其陷入PARALYSIS 5秒。",
+    "VENOSHOCK": "对目标造成[30,60,120,SP]点SPECIAL。若目标处于POISONNED，造成的伤害翻倍。",
+    "LEECH_LIFE": "对目标造成[20,40,80,SP]点SPECIAL，并为使用者恢复等量生命。",
+    "HAPPY_HOUR": "提升所有我方宝可梦[2,5,8,SP]点ATK。",
+    "TELEPORT": "将使用者传送至战场的一个角落。使用者下一次攻击额外造成[15,30,60,SP]点SPECIAL。",
+    "NASTY_PLOT": "提升使用者[10,SP]点ATK。",
+    "TAKE_HEART": "使用者以勇气治疗自身的异常状态，并提升[8,SP]点ATK以及[4,SP]点SPE_DEF。",
+    "THIEF": "尽可能多的偷取目标的道具（至使用者拿不下为止），并对其造成[15,30,60,SP]点SPECIAL。"
   },
   "effect": {
     "INGRAIN": "扎根（招式）",
