@@ -72,6 +72,7 @@ export default class GameScene extends Scene {
       key: "gameScene",
       active: false
     })
+    this.sound.pauseOnBlur = false;
   }
 
   init(data: { room: Room<GameState>; spectate: boolean }) {
