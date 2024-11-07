@@ -231,6 +231,26 @@
     "HIDDEN_POWER_Y": "覺醒力量 (YOGA)",
     "HIDDEN_POWER_Z": "覺醒力量 (ZZZZ)",
     "HIDDEN_POWER_QM": "覺醒力量 (?)",
-    "HIDDEN_POWER_EM": "覺醒力量 (!)"
+    "HIDDEN_POWER_EM": "覺醒力量 (!)",
+    "POISON_JAB": "毒擊",
+    "SHELL_SMASH": "破殼",
+    "HELPING_HAND": "幫助",
+    "ASTRAL_BARRAGE": "星碎",
+    "WATERFALL": "攀瀑",
+    "PYRO_BALL": "火焰球",
+    "WHIRLPOOL": "潮旋",
+    "SMOKE_SCREEN": "煙幕",
+    "PRESENT": "禮物",
+    "LEAF_BLADE": "葉刃",
+    "ANCHOR_SHOT": "擲錨",
+    "PSYCHIC": "精神強念",
+    "PSYBEAM": "幻象光線",
+    "MAGNET_RISE": "電磁飄浮",
+    "ATTRACT": "迷人",
+    "WATER_PULSE": "水之波動",
+    "PLAY_ROUGH": "嬉鬧",
+    "AERIAL_ACE": "燕返",
+    "PARABOLIC_CHARGE": "拋物面充電",
+    "SUPER_FANG": "憤怒門牙"
   }
 }
