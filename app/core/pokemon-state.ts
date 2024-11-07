@@ -716,10 +716,7 @@ export default abstract class PokemonState {
       }
     }
 
-    if (
-      pokemon.simulation.weather === Weather.SANDSTORM &&
-      pokemon.types.has(Synergy.GROUND) === false
-    ) {
+    if (pokemon.simulation.weather === Weather.SANDSTORM) {
       pokemon.sandstormDamageTimer -= dt
       if (pokemon.sandstormDamageTimer <= 0 && !pokemon.simulation.finished) {
         pokemon.sandstormDamageTimer = 1000
@@ -729,13 +726,15 @@ export default abstract class PokemonState {
           sandstormDamage -= nbSmoothRocks
           pokemon.addAttackSpeed(nbSmoothRocks, pokemon, 0, false)
         }
-        pokemon.handleDamage({
-          damage: sandstormDamage,
-          board,
-          attackType: AttackType.SPECIAL,
-          attacker: null,
-          shouldTargetGainMana: false
-        })
+        if (pokemon.types.has(Synergy.GROUND) === false) {
+          pokemon.handleDamage({
+            damage: sandstormDamage,
+            board,
+            attackType: AttackType.SPECIAL,
+            attacker: null,
+            shouldTargetGainMana: false
+          })
+        }
       }
     }
 
