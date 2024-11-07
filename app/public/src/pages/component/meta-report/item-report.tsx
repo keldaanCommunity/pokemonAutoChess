@@ -39,7 +39,6 @@ export function ItemReport() {
       key: "artificial_items",
       items: ArtificialItems
     },
-    { label: t("weather_rocks"), key: "weather_rocks", items: WeatherRocks },
     { label: t("shiny_items"), key: "shiny_items", items: ShinyItems }
   ]
 

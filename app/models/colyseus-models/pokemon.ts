@@ -56,7 +56,7 @@ import {
 import { Synergy, SynergyEffects } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { removeInArray, sum } from "../../utils/array"
-import { getFirstAvailablePositionInBench } from "../../utils/board"
+import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { distanceC, distanceE } from "../../utils/distance"
 import { chance, pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
@@ -6646,9 +6646,7 @@ export class Primeape extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.ANNIHILAPE
-  evolutionRule = new ConditionBasedEvolutionRule(
-    (pokemon) => pokemon.atk > 30
-  )
+  evolutionRule = new ConditionBasedEvolutionRule((pokemon) => pokemon.atk > 30)
   hp = 240
   atk = 21
   def = 6
@@ -14487,7 +14485,26 @@ export class Mantyke extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BABY, Synergy.WATER, Synergy.FLYING])
   rarity = Rarity.UNIQUE
   evolution = Pkm.MANTINE
-  evolutionRule = new ConditionBasedEvolutionRule(() => false)
+  evolutionRule = new ConditionBasedEvolutionRule(
+    (pokemon: Pokemon, player: Player) => {
+      for (const p of player.board.values()) {
+        if (
+          p.name === Pkm.REMORAID &&
+          !isOnBench(p) &&
+          !isOnBench(this) &&
+          distanceC(
+            this.positionX,
+            this.positionY,
+            p.positionX,
+            p.positionY
+          ) === 1
+        ) {
+          return true
+        }
+      }
+      return false
+    }
+  )
   stars = 2
   hp = 160
   atk = 6
@@ -14500,14 +14517,7 @@ export class Mantyke extends Pokemon {
   passive = Passive.MANTYKE
 
   onChangePosition(x: number, y: number, player: Player) {
-    for (const pokemon of player.board.values()) {
-      if (
-        pokemon.name === Pkm.REMORAID &&
-        distanceC(x, y, pokemon.positionX, pokemon.positionY) === 1
-      ) {
-        player.transformPokemon(this, Pkm.MANTINE)
-      }
-    }
+    this.evolutionRule.tryEvolve(this, player, 0)
   }
 }
 

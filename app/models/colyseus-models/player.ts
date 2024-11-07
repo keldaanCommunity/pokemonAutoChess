@@ -346,7 +346,6 @@ export default class Player extends Schema implements IPlayer {
     const nbWeatherRocks = SynergyTriggers[Synergy.ROCK].filter(
       (n) => (this.synergies.get(Synergy.ROCK) ?? 0) >= n
     ).length
-    const rocksCollected = this.weatherRocks.slice(-nbWeatherRocks)
 
     let weatherRockInInventory
     do {
@@ -358,7 +357,10 @@ export default class Player extends Schema implements IPlayer {
       }
     } while (weatherRockInInventory != -1)
 
-    this.items.push(...rocksCollected)
+    if (nbWeatherRocks > 0) {
+      const rocksCollected = this.weatherRocks.slice(-nbWeatherRocks)
+      this.items.push(...rocksCollected)
+    }
   }
 
   updateFishingRods() {
