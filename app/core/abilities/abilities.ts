@@ -10173,7 +10173,7 @@ export class SteelWingStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const damage = [10, 20, 40][pokemon.stars - 1] ?? 40 + 3 * pokemon.def
+    const damage = ([10, 20, 40][pokemon.stars - 1] ?? 40) + 3 * pokemon.def
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
 
