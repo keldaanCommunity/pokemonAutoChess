@@ -76,6 +76,7 @@ export function playMusic(scene: SceneWithMusic, name: string) {
   scene.music = scene.sound.add("music_" + name, {
     loop: true
   }) as Phaser.Sound.WebAudioSound
+  scene.sound.pauseOnBlur = !preferences.playInBackground;
   const musicVolume = preferences.musicVolume / 100
   try {
     scene.music.play({ volume: musicVolume, loop: true })
