@@ -95,6 +95,16 @@ export default function GameOptionsModal(props: {
               }
             ></input>
           </label>
+          <p>
+            <Checkbox
+              isDark
+              checked={preferences.playInBackground}
+              onToggle={(checked) =>
+                changePreference("playInBackground", checked)
+              }
+              label={t("play_music_in_background")}
+            />
+          </p>
         </TabPanel>
 
         <TabPanel>
