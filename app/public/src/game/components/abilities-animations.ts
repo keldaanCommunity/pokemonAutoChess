@@ -89,6 +89,19 @@ export function displayAbility(
         )
       break
 
+    case Ability.FREEZING_GLARE:
+      addAbilitySprite(skill, [coordinates[0], coordinates[1] - 50], true)
+        .setScale(2)
+        .setOrigin(0.5, 0.98)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) +
+            Math.PI / 2
+        )
+      break
+
     case Ability.BLOOD_MOON: {
       const [dx, dy] = OrientationVector[orientation]
       const finalCoordinates = [
@@ -407,6 +420,12 @@ export function displayAbility(
             coordinatesTarget[0] - coordinates[0]
           )
         )
+      break
+
+    case Ability.FIERY_WRATH:
+      addAbilitySprite(Ability.HEAT_WAVE, coordinates, true)
+        .setScale(2)
+        .setTint(0xc000c0)
       break
 
     case Ability.PSYBEAM:
@@ -1894,7 +1913,8 @@ export function displayAbility(
       break
     }
 
-    case Ability.MAWASHI_GERI: {
+    case Ability.MAWASHI_GERI:
+    case Ability.THUNDEROUS_KICK: {
       const specialProjectile = addAbilitySprite(
         "FIGHTING/FOOT",
         coordinatesTarget

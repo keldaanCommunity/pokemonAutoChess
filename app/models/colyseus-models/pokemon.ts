@@ -4903,6 +4903,20 @@ export class Zapdos extends Pokemon {
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
+export class GalarianZapdos extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.FLYING])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 300
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.THUNDEROUS_KICK
+  attackSprite = AttackSprite.FLYING_MELEE
+}
+
 export class Zeraora extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ELECTRIC])
   rarity = Rarity.UNIQUE
@@ -4973,6 +4987,20 @@ export class Moltres extends Pokemon {
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
+export class GalarianMoltres extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FLYING])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 300
+  atk = 30
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 3
+  skill = Ability.FIERY_WRATH
+  attackSprite = AttackSprite.FIRE_RANGE
+}
+
 export class Pinsir extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.BUG])
   rarity = Rarity.UNIQUE
@@ -4999,6 +5027,20 @@ export class Articuno extends Pokemon {
   range = 2
   skill = Ability.BLIZZARD
   passive = Passive.SNOW
+  attackSprite = AttackSprite.FLYING_RANGE
+}
+
+export class GalarianArticuno extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FLYING])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 300
+  atk = 30
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 2
+  skill = Ability.FREEZING_GLARE
   attackSprite = AttackSprite.FLYING_RANGE
 }
 
@@ -15311,6 +15353,9 @@ export const PokemonClasses: Record<
   [Pkm.ZAPDOS]: Zapdos,
   [Pkm.MOLTRES]: Moltres,
   [Pkm.ARTICUNO]: Articuno,
+  [Pkm.GALARIAN_ARTICUNO]: GalarianArticuno,
+  [Pkm.GALARIAN_ZAPDOS]: GalarianZapdos,
+  [Pkm.GALARIAN_MOLTRES]: GalarianMoltres,
   [Pkm.DIALGA]: Dialga,
   [Pkm.PALKIA]: Palkia,
   [Pkm.SUICUNE]: Suicune,

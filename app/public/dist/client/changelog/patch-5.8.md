@@ -1,6 +1,8 @@
 # New Pokemons:
 
--
+- Galarian Articuno
+- Galarian Zapdos
+- Galarian Moltres
 
 # Gameplay
 

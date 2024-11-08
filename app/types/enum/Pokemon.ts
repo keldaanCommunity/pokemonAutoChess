@@ -157,7 +157,7 @@ export enum Pkm {
   CYNDAQUIL = "CYNDAQUIL",
   DARKRAI = "DARKRAI",
   DARMANITAN = "DARMANITAN",
-  DARMANITAN_ZEN = "DARMANITAN_ZEN"
+  DARMANITAN_ZEN = "DARMANITAN_ZEN",
   DARTIX = "DARTIX",
   DARUMAKA = "DARUMAKA",
   DECIDUEYE = "DECIDUEYE",
@@ -245,6 +245,9 @@ export enum Pkm {
   FURRET = "FURRET",
   GABITE = "GABITE",
   GALAR_CORSOLA = "GALAR_CORSOLA",
+  GALARIAN_ARTICUNO = "GALARIAN_ARTICUNO",
+  GALARIAN_ZAPDOS = "GALARIAN_ZAPDOS",
+  GALARIAN_MOLTRES = "GALARIAN_MOLTRES",
   GALARIAN_PONYTA = "GALARIAN_PONYTA",
   GALARIAN_RAPIDASH = "GALARIAN_RAPIDASH",
   GALVANTULA = "GALVANTULA",
@@ -852,7 +855,7 @@ export enum Pkm {
   ZOROARK = "ZOROARK",
   ZORUA = "ZORUA",
   ZUBAT = "ZUBAT",
-  ZWEILOUS = "ZWEILOUS",
+  ZWEILOUS = "ZWEILOUS"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1026,8 +1029,11 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.AERODACTYL]: "0142",
   [Pkm.SNORLAX]: "0143",
   [Pkm.ARTICUNO]: "0144",
+  [Pkm.GALARIAN_ARTICUNO]: "0144-0001",
   [Pkm.ZAPDOS]: "0145",
+  [Pkm.GALARIAN_ZAPDOS]: "0145-0001",
   [Pkm.MOLTRES]: "0146",
+  [Pkm.GALARIAN_MOLTRES]: "0146-0001",
   [Pkm.DRATINI]: "0147",
   [Pkm.DRAGONAIR]: "0148",
   [Pkm.DRAGONITE]: "0149",
@@ -2239,8 +2245,11 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.REGISTEEL]: Pkm.REGISTEEL,
   [Pkm.REGIROCK]: Pkm.REGIROCK,
   [Pkm.ARTICUNO]: Pkm.ARTICUNO,
+  [Pkm.GALARIAN_ARTICUNO]: Pkm.GALARIAN_ARTICUNO,
   [Pkm.ZAPDOS]: Pkm.ZAPDOS,
+  [Pkm.GALARIAN_ZAPDOS]: Pkm.GALARIAN_ZAPDOS,
   [Pkm.MOLTRES]: Pkm.MOLTRES,
+  [Pkm.GALARIAN_MOLTRES]: Pkm.GALARIAN_MOLTRES,
   [Pkm.AERODACTYL]: Pkm.AERODACTYL,
   [Pkm.GROUDON]: Pkm.GROUDON,
   [Pkm.KYOGRE]: Pkm.KYOGRE,
@@ -3889,7 +3898,7 @@ export const AnimationConfig: {
   [Pkm.ZAPDOS]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Emit,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Emit
   },
   [Pkm.MOLTRES]: {
     attack: AnimationType.Shoot,
@@ -3900,6 +3909,21 @@ export const AnimationConfig: {
     attack: AnimationType.Shoot,
     ability: AnimationType.RearUp,
     emote: AnimationType.Pose
+  },
+  [Pkm.GALARIAN_ZAPDOS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.GALARIAN_MOLTRES]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Charge
+  },
+  [Pkm.GALARIAN_ARTICUNO]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.RearUp
   },
   [Pkm.DIALGA]: {
     attack: AnimationType.RearUp,

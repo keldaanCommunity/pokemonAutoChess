@@ -431,7 +431,7 @@ export default class Shop {
     if (
       player.effects.has(Effect.LIGHT_SCREEN) &&
       shopIndex === 0 &&
-      player.rerollCount % 5 === 0
+      player.rerollCount % 3 === 0
     ) {
       const unowns = getUnownsPoolPerStage(state.stageLevel)
       return pickRandomIn(unowns)
