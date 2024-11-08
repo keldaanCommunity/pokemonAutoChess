@@ -157,7 +157,7 @@ export enum Pkm {
   CYNDAQUIL = "CYNDAQUIL",
   DARKRAI = "DARKRAI",
   DARMANITAN = "DARMANITAN",
-  DARMANITAN_ZEN = "DARMANITAN_ZEN"
+  DARMANITAN_ZEN = "DARMANITAN_ZEN",
   DARTIX = "DARTIX",
   DARUMAKA = "DARUMAKA",
   DECIDUEYE = "DECIDUEYE",
@@ -852,7 +852,7 @@ export enum Pkm {
   ZOROARK = "ZOROARK",
   ZORUA = "ZORUA",
   ZUBAT = "ZUBAT",
-  ZWEILOUS = "ZWEILOUS",
+  ZWEILOUS = "ZWEILOUS"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
