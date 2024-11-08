@@ -14466,7 +14466,7 @@ export class Petilil extends Pokemon {
   additional = true
 }
 
-export class Liligant extends Pokemon {
+export class Lilligant extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA, Synergy.HUMAN])
   rarity = Rarity.UNCOMMON
   stars = 2
@@ -15946,7 +15946,7 @@ export const PokemonClasses: Record<
   [Pkm.LUVDISC]: Luvdisc,
   [Pkm.AUDINO]: Audino,
   [Pkm.PETILIL]: Petilil,
-  [Pkm.LILIGANT]: Liligant,
+  [Pkm.LILIGANT]: Lilligant,
   [Pkm.MANTYKE]: Mantyke,
   [Pkm.MANTINE]: Mantine,
   [Pkm.REMORAID]: Remoraid,
