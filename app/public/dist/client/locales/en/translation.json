@@ -399,7 +399,10 @@
     "TRANSE": "Transe",
     "GLACIATE": "Glaciate",
     "WOOD_HAMMER": "Wood Hammer",
-    "TRICK_OR_TREAT": "Trick-or-Treat"
+    "TRICK_OR_TREAT": "Trick-or-Treat",
+    "FREEZING_GLARE": "Freezing Glare",
+    "THUNDEROUS_KICK": "Thunderous Kick",
+    "FIERY_WRATH": "Fiery Wrath"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -584,6 +587,9 @@
     "ZAPDOS": "Zapdos",
     "MOLTRES": "Moltres",
     "ARTICUNO": "Articuno",
+    "GALARIAN_ZAPDOS": "Galarian Zapdos",
+    "GALARIAN_MOLTRES": "Galarian Moltres",
+    "GALARIAN_ARTICUNO": "Galarian Articuno",
     "DIALGA": "Dialga",
     "PALKIA": "Palkia",
     "SUICUNE": "Suicune",
@@ -1633,7 +1639,10 @@
     "POISON_STING": "Inflict the target with [2,3,4] stacks of POISONNED. Every stack over the max immediately deals [25,50,100,SP] SPECIAL.",
     "TRANSE": "Start attacking and moving again, but stops passively healing.",
     "WOOD_HAMMER": "Deal [300,SP]% of ATK as SPECIAL to the target and receive recoil damage equal to 33% of the damage done.",
-    "TRICK_OR_TREAT": "The target must give one of its held items to the user. If it has no held item, it receives a curse whose power increases with user AP."
+    "TRICK_OR_TREAT": "The target must give one of its held items to the user. If it has no held item, it receives a curse whose power increases with user AP.",
+    "FREEZING_GLARE": "Deal [20,40,80,SP] SPECIAL to all enemies in a line, with a [50,LK]% chance to FREEZE for 3 seconds",
+    "THUNDEROUS_KICK": "Target is pushed away. It and all enemies on the path are FLINCH for 4 seconds, lose [5,SP] DEF and take [20,40,60,SP] PHYSICAL.",
+    "FIERY_WRATH": "Deal [40,SP] SPECIAL to all enemy Pokémon, with [50,LK]% chance to apply FLINCH for 4 seconds."
   },
   "effect": {
     "INGRAIN": "Ingrain",

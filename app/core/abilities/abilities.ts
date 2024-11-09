@@ -10434,6 +10434,120 @@ export class TrickOrTreatStrategy extends AbilityStrategy {
   }
 }
 
+export class FreezingGlareStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    effectInLine(board, pokemon, target, (cell) => {
+      if (cell.value != null && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          80,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        if (chance(0.5, pokemon)) {
+          cell.value.status.triggerFreeze(3000, pokemon)
+        }
+      }
+    })
+  }
+}
+
+export class ThunderousKickStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [20, 40, 60][pokemon.stars - 1] ?? 60
+
+    target.status.triggerFlinch(4000, pokemon)
+    target.addDefense(-5, pokemon, 1, crit)
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.PHYSICAL,
+      pokemon,
+      crit
+    )
+    let farthestEmptyCell: Cell | null = null
+    effectInLine(board, pokemon, target, (cell) => {
+      if (cell.value != null && target.id !== cell.value.id) {
+        if (cell.value.team !== pokemon.team) {
+          cell.value.status.triggerFlinch(4000, pokemon)
+          cell.value.addDefense(-5, pokemon, 1, crit)
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.PHYSICAL,
+            pokemon,
+            crit
+          )
+        }
+        board.swapValue(
+          target.positionX,
+          target.positionY,
+          cell.value.positionX,
+          cell.value.positionY
+        )
+      }
+      if (!cell.value) {
+        farthestEmptyCell = cell
+      }
+    })
+
+    if (farthestEmptyCell) {
+      const { x, y } = farthestEmptyCell as Cell
+      board.swapValue(target.positionX, target.positionY, x, y)
+    }
+  }
+}
+
+export class FieryWrathStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const damage = 40
+
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
+      if (value && pokemon.team != value.team) {
+        if (chance(0.5, pokemon)) {
+          value.status.triggerFlinch(4000, value)
+        }
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: pokemon.skill,
+          positionX: value.positionX,
+          positionY: value.positionY,
+          orientation: value.orientation
+        })
+        value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -10815,5 +10929,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.TRANSE]: new TranseStrategy(),
   [Ability.GLACIATE]: new GlaciateStrategy(),
   [Ability.WOOD_HAMMER]: new WoodHammerStrategy(),
-  [Ability.TRICK_OR_TREAT]: new TrickOrTreatStrategy()
+  [Ability.TRICK_OR_TREAT]: new TrickOrTreatStrategy(),
+  [Ability.FREEZING_GLARE]: new FreezingGlareStrategy(),
+  [Ability.THUNDEROUS_KICK]: new ThunderousKickStrategy(),
+  [Ability.FIERY_WRATH]: new FieryWrathStrategy()
 }
