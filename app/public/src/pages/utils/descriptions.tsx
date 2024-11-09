@@ -149,7 +149,7 @@ export function addIconsToDescription(description: string, stats?: { ap: number,
             )}
             {array.map((v, j) => {
               const separator = j < array.length - 1 ? "/" : ""
-              let scaleValue = 1
+              let scaleValue = 0
               if (scaleType === "AP") scaleValue = stats?.ap ?? 0
               if (scaleType === "LUCK") scaleValue = stats?.luck ?? 0
               const value = roundToNDigits(Number(v) * (1 + scaleValue * scaleFactor / 100), nbDigits)
