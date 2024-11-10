@@ -1577,7 +1577,7 @@
     "POLLEN_PUFF": "Give the lowest HP allied Pokémon a pollen puff that heals them for [30,60,120,SP] HP.",
     "PSYSTRIKE": "Materialize a strange psychic wave toward the farthest enemy Pokémon, dealing [100,SP] PHYSICAL to them and teleporting all Pokémon in its path.",
     "FACADE": "Deal [20,40,80,SP] SPECIAL, doubled if the user suffers from a negative status condition.",
-    "DREAM_EATER": "Jump next to an enemy suffering from SLEEP, deal [45,90,SP] SPECIAL and heal for the same amount of HP. If no enemy Pokémon suffer from SLEEP, put the target to SLEEP for [2.5,5] seconds.",
+    "DREAM_EATER": "Jump next to an enemy suffering from SLEEP, deal [45,90,SP] SPECIAL and heal for the same amount of HP. If no enemy Pokémon suffer from SLEEP, put the target to SLEEP for [2.5,5,ND=1] seconds.",
     "SPARK": "Fire a spark charged with electricity at the target, dealing [40,80,SP] SPECIAL. The spark can bounce up to 4 times between adjacent enemy Pokémon. Each rebound halves the SPECIAL.",
     "CRUNCH": "Deal [40,80,150,SP] SPECIAL to the target. If it kills the target, heal for 50% of the target's max HP.",
     "CROSS_POISON": "Deal [30,60,120,SP] SPECIAL to the target and enemy Pokémon adjacent to them and inflict them with POISONNED for 3 seconds.",

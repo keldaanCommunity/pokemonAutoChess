@@ -1521,7 +1521,7 @@
     "POLLEN_PUFF": "El aliado con menor HP recibe una bola de polen que restaura [30,60,120,SP] HP",
     "PSYSTRIKE": "El emisor materializa una extraña onda psíquica hacía el enemigo más lejano, infligiendo [100,SP] de PHYSICAL y teletransportando a todo en su camino",
     "FACADE": "Inflige [20,40,80,SP] de SPECIAL. Duplica el daño si el emisor tiene un estado negativo.",
-    "DREAM_EATER": "Si un enemigo esta SLEEP, salta junto a él, hace [45,90,SP] de SPECIAL y restaura la misma cantidad de HP. Si no, pone al objetivo a dormir por [2.5,5] segundos",
+    "DREAM_EATER": "Si un enemigo esta SLEEP, salta junto a él, hace [45,90,SP] de SPECIAL y restaura la misma cantidad de HP. Si no, pone al objetivo a dormir por [2.5,5,ND=1] segundos",
     "SPARK": "El Pokémon dispara una chispa cargada con electricidad al objetivo, infligiendo [40,80,SP] de SPECIAL. La chispa puede rebotar hasta 4 veces entre enemigos adyacentes. Cada rebote reduce la mitad del daño SPECIAL",
     "CRUNCH": "Inflige [40,80,150,SP] de SPECIAL. Si mata al objetivo, cura un 50% de su HP máximo",
     "CROSS_POISON": "Inflige [30,60,120,SP] de SPECIAL al objetivo y a enemigos adyacentes a este, los deja POISONNED por 3 segundos",

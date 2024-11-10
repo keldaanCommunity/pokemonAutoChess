@@ -1571,7 +1571,7 @@
     "POLLEN_PUFF": "Donne à l'allié aux plus faibles HP une bouffée de pollen qui restaure [30,60,120,SP] HP",
     "PSYSTRIKE": "Matérialise une vague psychique vers l'ennemi le plus lointain, infligeant [100,SP] PHYSICAL et téléportant toutes les unités sur son chemin",
     "FACADE": "Inflige [20,40,80,SP] SPECIAL. Double les dégâts si le lanceur a un statut négatif.",
-    "DREAM_EATER": "Si un ennemi est SLEEP, saute jusqu'à lui et inflige [45,90,SP] SPECIAL en se soignant du même montant. Sinon, rend la cible SLEEP pendant [2.5,5] secondes.",
+    "DREAM_EATER": "Si un ennemi est SLEEP, saute jusqu'à lui et inflige [45,90,SP] SPECIAL en se soignant du même montant. Sinon, rend la cible SLEEP pendant [2.5,5,ND=1] secondes.",
     "SPARK": "Lance une étincelle vers la cible, infligeant [40,80,SP] SPECIAL. L'étincelle peut rebondir jusqu'à 4 fois vers un ennemi adjacent, chaque rebond diminuant de moitié les SPECIAL.",
     "CRUNCH": "Inflige [40,80,150,SP] SPECIAL. Si la cible est KO, se soigne à hauteur de 50% des HP max de la cible.",
     "CROSS_POISON": "Inflige [30,60,120,SP] SPECIAL et POISONNED pendant 3 secondes à la cible et aux ennemis adjacents",
