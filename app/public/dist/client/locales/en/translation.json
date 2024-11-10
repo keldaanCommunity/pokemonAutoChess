@@ -1580,7 +1580,7 @@
     "DREAM_EATER": "Jump next to an enemy suffering from SLEEP, deal [45,90,SP] SPECIAL and heal for the same amount of HP. If no enemy Pokémon suffer from SLEEP, put the target to SLEEP for [2.5,5,ND=1] seconds.",
     "SPARK": "Fire a spark charged with electricity at the target, dealing [40,80,SP] SPECIAL. The spark can bounce up to 4 times between adjacent enemy Pokémon. Each rebound halves the SPECIAL.",
     "CRUNCH": "Deal [40,80,150,SP] SPECIAL to the target. If it kills the target, heal for 50% of the target's max HP.",
-    "CROSS_POISON": "Deal [30,60,120,SP] SPECIAL to the target and enemy Pokémon adjacent to them and inflict them with POISONNED for 3 seconds.",
+    "CROSS_POISON": "Deal [30,60,120,SP] SPECIAL to the target and enemy Pokémon adjacent to them and inflict them with POISONNED for 2 seconds.",
     "DOUBLE_EDGE": "Deal [55,110,220,SP] PHYSICAL to target. The user hurts itself for [20,40,60,SP] PHYSICAL.",
     "FIRE_FANG": "Deal [30,60,120,SP] SPECIAL to the target and apply BURN for 2 seconds.",
     "ICE_FANG": "Deal [30,60,120,SP] SPECIAL and apply FREEZE for 1 second.",

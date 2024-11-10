@@ -1574,7 +1574,7 @@
     "DREAM_EATER": "Se il bersaglio è SLEEP, saltaci affianco ed infliggi [45,90,SP] SPECIAL e recupera HP pari al danno inflitto. Se non ha lo status, causa lo status SLEEP per [2.5,5,ND=1] secondi.",
     "SPARK": "Il Pokèmon spara una scintilla carica d'elettricità al bersaglio, infliggendo [40,80,SP] SPECIAL. La scintilla può rimbalzare per 4 volte ai nemici adiacenti. Ogni rimbalzo dimezza il SPECIAL.",
     "CRUNCH": "Infliggi [40,80,150,SP] SPECIAL. Se uccidi il bersaglio, curati del 50% dei HP massimi del bersaglio.",
-    "CROSS_POISON": "Infliggi [30,60,120,SP] SPECIAL al bersaglio e ai nemici adiacenti, e causa POISONNED per 3 secondi.",
+    "CROSS_POISON": "Infliggi [30,60,120,SP] SPECIAL al bersaglio e ai nemici adiacenti, e causa POISONNED per 2 secondi.",
     "DOUBLE_EDGE": "Infliggi [55,110,220,SP] PHYSICAL. L'utilizzatore subisce il contraccolpo pari a [20,40,60,SP] PHYSICAL.",
     "FIRE_FANG": "Infliggi [30,60,120,SP] SPECIAL e causa BURN per 2 secondi.",
     "ICE_FANG": "Infliggi [30,60,120,SP] SPECIAL e causa FREEZE per 1 secondo.",

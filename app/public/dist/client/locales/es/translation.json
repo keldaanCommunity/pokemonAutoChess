@@ -1524,7 +1524,7 @@
     "DREAM_EATER": "Si un enemigo esta SLEEP, salta junto a él, hace [45,90,SP] de SPECIAL y restaura la misma cantidad de HP. Si no, pone al objetivo a dormir por [2.5,5,ND=1] segundos",
     "SPARK": "El Pokémon dispara una chispa cargada con electricidad al objetivo, infligiendo [40,80,SP] de SPECIAL. La chispa puede rebotar hasta 4 veces entre enemigos adyacentes. Cada rebote reduce la mitad del daño SPECIAL",
     "CRUNCH": "Inflige [40,80,150,SP] de SPECIAL. Si mata al objetivo, cura un 50% de su HP máximo",
-    "CROSS_POISON": "Inflige [30,60,120,SP] de SPECIAL al objetivo y a enemigos adyacentes a este, los deja POISONNED por 3 segundos",
+    "CROSS_POISON": "Inflige [30,60,120,SP] de SPECIAL al objetivo y a enemigos adyacentes a este, los deja POISONNED por 2 segundos",
     "DOUBLE_EDGE": "Inflige [55,110,220,SP] de PHYSICAL al objetivo. El usuario se autoinflige [20,40,60,SP] de PHYSICAL.",
     "FIRE_FANG": "Inflige [30,60,120,SP] de SPECIAL y BURN por 2 segundos",
     "ICE_FANG": "Inflige [30,60,120,SP] de SPECIAL y FREEZE por 1 segundo",

@@ -1574,7 +1574,7 @@
     "DREAM_EATER": "若有敌人处于SLEEP，跳至其身边，对其造成[45,90,SP]点SPECIAL，并为使用者恢复等量HP。否则，使目标陷入SLEEP [2.5,5,ND=1]秒。",
     "SPARK": "对目标发射一道电光，造成[40,80,SP]点SPECIAL。这道电光可以弹射至相邻敌方宝可梦身上，至多弹射4次，每次使伤害减半。",
     "CRUNCH": "对目标造成[40,80,150,SP]点SPECIAL。若目标因此倒下，为使用者恢复HP，数值相当于目标最大HP的50%。",
-    "CROSS_POISON": "对目标和其相邻敌方宝可梦造成[30,60,120,SP]点SPECIAL，并使他们陷入POISONNED 3秒。",
+    "CROSS_POISON": "对目标和其相邻敌方宝可梦造成[30,60,120,SP]点SPECIAL，并使他们陷入POISONNED 2秒。",
     "DOUBLE_EDGE": "对目标造成[55,110,220,SP]点PHYSICAL，使用者自己受到[20,40,60,SP]点PHYSICAL。",
     "FIRE_FANG": "对目标造成[30,60,120,SP]点SPECIAL，并使其陷入BURN 2秒。",
     "ICE_FANG": "对目标造成[30,60,120,SP]点SPECIAL，并使其陷入FREEZE 1秒。",
