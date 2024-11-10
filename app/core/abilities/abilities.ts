@@ -1316,20 +1316,11 @@ export class PoisonJabStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     const damage = [30, 60, 90][pokemon.stars - 1] ?? 30
-    const farthestTarget = state.getFarthestTarget(pokemon, board) ?? target
-    super.process(pokemon, state, board, farthestTarget, crit)
-    if (farthestTarget) {
-      farthestTarget.handleSpecialDamage(
-        damage,
-        board,
-        AttackType.SPECIAL,
-        pokemon,
-        crit
-      )
-      farthestTarget.status.triggerPoison(3000, farthestTarget, pokemon)
-      pokemon.status.triggerPoison(3000, pokemon, pokemon)
-      pokemon.moveTo(farthestTarget.positionX, farthestTarget.positionY, board)
-    }
+    super.process(pokemon, state, board, target, crit)
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.status.triggerPoison(3000, target, pokemon)
+    pokemon.status.triggerPoison(3000, pokemon, pokemon)
+    pokemon.moveTo(target.positionX, target.positionY, board)
   }
 }
 

@@ -26,6 +26,7 @@
 - Fix Eruption not applying Burn status
 - Fix Mist Ball damage amount to match description
 - Fixed Unown F and Unown S ability descriptions
+- Fix poison jab targeting the farthest enemy instead of the current target
 
 # Changes to Synergies
 
