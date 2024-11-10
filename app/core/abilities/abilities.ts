@@ -8666,12 +8666,8 @@ export class PollenPuffStrategy extends AbilityStrategy {
     ).sort((a, b) => a.life - b.life)[0]
 
     if (lowestHealthAlly) {
-      lowestHealthAlly.handleHeal(
-        pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30,
-        pokemon,
-        1,
-        crit
-      )
+      const heal = [30, 60, 120][pokemon.stars - 1] ?? 120
+      lowestHealthAlly.handleHeal(heal, pokemon, 1, crit)
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
         id: pokemon.simulation.id,
         skill: Ability.POLLEN_PUFF,

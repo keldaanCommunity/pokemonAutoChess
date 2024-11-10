@@ -1568,7 +1568,7 @@
     "ZAP_CANNON": "Lance une décharge électrique avec la force d'un canon pour infliger [25,50,100,SP] SPECIAL, PARALYSIS et ARMOR_REDUCTION pendant [1,2,4] secondes",
     "PSYCHO_BOOST": "Tranche horizontalement autour de la cible avec la force de l'esprit, infligeant [140,SP] SPECIAL à tous les ennemis touchés. Réduit la AP du lanceur de 20 pour chaque Pokémon touché.",
     "ICE_HAMMER": "Inflige [50,100,SP] SPECIAL à la cible et FREEZE pendant 3 secondes. Le lanceur subit PARALYSIS pendant 3 secondes.",
-    "POLLEN_PUFF": "Donne à l'allié aux plus faibles HP une bouffée de pollen qui restaure [20,40,80,SP] HP",
+    "POLLEN_PUFF": "Donne à l'allié aux plus faibles HP une bouffée de pollen qui restaure [30,60,120,SP] HP",
     "PSYSTRIKE": "Matérialise une vague psychique vers l'ennemi le plus lointain, infligeant [100,SP] PHYSICAL et téléportant toutes les unités sur son chemin",
     "FACADE": "Inflige [20,40,80,SP] SPECIAL. Double les dégâts si le lanceur a un statut négatif.",
     "DREAM_EATER": "Si un ennemi est SLEEP, saute jusqu'à lui et inflige [45,90,SP] SPECIAL en se soignant du même montant. Sinon, rend la cible SLEEP pendant [2.5,5] secondes.",

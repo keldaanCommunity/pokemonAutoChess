@@ -1518,7 +1518,7 @@
     "ZAP_CANNON": "El emisor da un disparo eléctrico como un cañón para infligir [25,50,100,SP] de SPECIAL y causar PARALYSIS junto a ARMOR_REDUCTION por [1,2,4] segundos",
     "PSYCHO_BOOST": "Traza un corte horizontal alrededor del enemigo, haciendo [140,SP] de SPECIAL a todos los enemigos golpeados. Reduce el AP del emisor en 20 por cada Pokémon golpeado.",
     "ICE_HAMMER": "Inflige [50,100,SP] de SPECIAL al objetivo, causando FREEZE por 3 segundos. PARALYSIS al emisor por 3 segundos.",
-    "POLLEN_PUFF": "El aliado con menor HP recibe una bola de polen que restaura [20,40,80,SP] HP",
+    "POLLEN_PUFF": "El aliado con menor HP recibe una bola de polen que restaura [30,60,120,SP] HP",
     "PSYSTRIKE": "El emisor materializa una extraña onda psíquica hacía el enemigo más lejano, infligiendo [100,SP] de PHYSICAL y teletransportando a todo en su camino",
     "FACADE": "Inflige [20,40,80,SP] de SPECIAL. Duplica el daño si el emisor tiene un estado negativo.",
     "DREAM_EATER": "Si un enemigo esta SLEEP, salta junto a él, hace [45,90,SP] de SPECIAL y restaura la misma cantidad de HP. Si no, pone al objetivo a dormir por [2.5,5] segundos",

@@ -1568,7 +1568,7 @@
     "ZAP_CANNON": "시전자는 대포처럼 전기를 발사시켜 [25,50,100,SP] SPECIAL 를 입히고 [1,2,4]초 동안 PARALYSIS 와 ARMOR_REDUCTION를 부여한다.",
     "PSYCHO_BOOST": "타겟 주변을 수평으로 베어서 적중당한 모든 적에게 [140,SP]의 SPECIAL 를 입힌다. 적중당한 포켓몬 한 마리당 자신의 AP를 20씩 감소시킨다.",
     "ICE_HAMMER": "타겟에게 [50,100,SP]의 SPECIAL 를 입히며 3초 동안 FREEZE 를 부여한다. 자신 또한 3초 동안 PARALYSIS 된다.",
-    "POLLEN_PUFF": "HP가 가장 낮은 아군에게 [20,40,80,SP]의 HP를 회복시키는 꽃가루를 준다.",
+    "POLLEN_PUFF": "HP가 가장 낮은 아군에게 [30,60,120,SP]의 HP를 회복시키는 꽃가루를 준다.",
     "PSYSTRIKE": "가장 먼 적에게 사이킥 웨이브를 실체화하여 보내 [100,SP]의 PHYSICAL 를 입히고 경로상의 모든 것을 순간이동시킨다.",
     "FACADE": "[20,40,80,SP] SPECIAL를 입힌다. 자신이 상태이상에 걸려있을 경우  데미지는 두 배가 된다.",
     "DREAM_EATER": "적이 SLEEP 상태이면 그 옆으로 점프하여 [45,90,SP]의 SPECIAL 를 입히고 같은 양의 HP를 회복한다. 그렇지 않으면 대상에게 [2.5,5]초 동안 SLEEP 을 부여한다.",

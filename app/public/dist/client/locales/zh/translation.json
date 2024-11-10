@@ -1568,7 +1568,7 @@
     "ZAP_CANNON": "发射大炮一样的电流，对目标造成[25,50,100,SP]点SPECIAL，并使目标陷入PARALYSIS和ARMOR_REDUCTION [1,2,4]秒。",
     "PSYCHO_BOOST": "在目标周围横向斩击，对所有击中的敌方宝可梦造成[140,SP]点SPECIAL。每击中一个目标，使用者降低20点AP。",
     "ICE_HAMMER": "对目标造成[50,100,SP]点SPECIAL，并使其陷入FREEZE 3秒。使用者自身则陷入PARALYSIS 3秒。",
-    "POLLEN_PUFF": "使HP最低的我方宝可梦获得一个能恢复[20,40,80,SP]点HP的花粉团。",
+    "POLLEN_PUFF": "使HP最低的我方宝可梦获得一个能恢复[30,60,120,SP]点HP的花粉团。",
     "PSYSTRIKE": "将神奇的念波实体化攻击最远的敌方宝可梦，对击中的所有目标造成[100,SP]点PHYSICAL并将他们随机传送至其他位置。",
     "FACADE": "对目标造成[20,40,80,SP]点SPECIAL。若使用者处于负面状态下，造成的伤害翻倍。",
     "DREAM_EATER": "若有敌人处于SLEEP，跳至其身边，对其造成[45,90,SP]点SPECIAL，并为使用者恢复等量HP。否则，使目标陷入SLEEP [2.5,5]秒。",

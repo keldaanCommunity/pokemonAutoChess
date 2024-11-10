@@ -1541,7 +1541,7 @@
     "ZAP_CANNON": "Der Zaubernde feuert eine elektrische Explosion wie eine Kanone ab, die [25,50,100,SP] SPECIAL verursacht und für [1,2,4] Sekunden PARALYSIS und ARMOR_REDUCTION bewirkt.",
     "PSYCHO_BOOST": "Schneidet einen horizontalen Schnitt um das Ziel herum und fügt allen getroffenen Gegnern [140,SP] SPECIAL zu. Verringert die AP des Zaubernden um 20 für jedes getroffene Pokémon.",
     "ICE_HAMMER": "Fügt dem Ziel [50,100,SP] SPECIAL zu und lässt es 3 Sekunden lang FREEZE. PARALYSIS den Zaubernden für 3 Sekunden.",
-    "POLLEN_PUFF": "Gib dem Verbündeten mit den niedrigsten HP einen Pollenstoß, der [20,40,80,SP] HP wiederherstellt",
+    "POLLEN_PUFF": "Gib dem Verbündeten mit den niedrigsten HP einen Pollenstoß, der [30,60,120,SP] HP wiederherstellt",
     "PSYSTRIKE": "Der Zaubernde materialisiert eine seltsame psychische Welle in Richtung des am weitesten entfernten Gegners, die ihm [100,SP] PHYSICAL zufügt und alles in ihrem Weg teleportiert",
     "FACADE": "Verursacht [20,40,80,SP] SPECIAL. Verdoppelt den Schaden, wenn der Zaubernde einen negativen Status hat.",
     "DREAM_EATER": "Wenn ein Gegner SLEEP ist, springt er neben ihn, verursacht [45,90,SP] SPECIAL und stellt die gleiche Menge an HP wieder her. Andernfalls versetzt er das Ziel für [2,5,5] Sekunden in SLEEP.",

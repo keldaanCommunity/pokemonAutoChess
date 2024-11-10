@@ -1574,7 +1574,7 @@
     "ZAP_CANNON": "Fire an electric blast like a cannon, dealing [25,50,100,SP] SPECIAL to the target and inflicting them with PARALYSIS and ARMOR_REDUCTION for [1,2,4] seconds.",
     "PSYCHO_BOOST": "Cut a slash horizontally around the target, dealing [140,SP] SPECIAL to all enemy Pokémon hit. Reduce the user's AP by 20 for each Pokémon hit.",
     "ICE_HAMMER": "Deal [50,100,SP] SPECIAL to the target, applying FREEZE for 3 seconds. The user is inflicted with PARALYSIS for 3 seconds.",
-    "POLLEN_PUFF": "Give the lowest HP allied Pokémon a pollen puff that heals them for [20,40,80,SP] HP.",
+    "POLLEN_PUFF": "Give the lowest HP allied Pokémon a pollen puff that heals them for [30,60,120,SP] HP.",
     "PSYSTRIKE": "Materialize a strange psychic wave toward the farthest enemy Pokémon, dealing [100,SP] PHYSICAL to them and teleporting all Pokémon in its path.",
     "FACADE": "Deal [20,40,80,SP] SPECIAL, doubled if the user suffers from a negative status condition.",
     "DREAM_EATER": "Jump next to an enemy suffering from SLEEP, deal [45,90,SP] SPECIAL and heal for the same amount of HP. If no enemy Pokémon suffer from SLEEP, put the target to SLEEP for [2.5,5] seconds.",

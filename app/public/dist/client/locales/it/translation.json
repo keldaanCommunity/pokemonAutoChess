@@ -1568,7 +1568,7 @@
     "ZAP_CANNON": "Scaglia una sfera elettrica che infligge [25,50,100,SP] SPECIAL e causa PARALYSIS e ARMOR_REDUCTION per [1,2,4] secondi.",
     "PSYCHO_BOOST": "Tagliuzza i nemici affianco i nemici affianco al bersaglio, infliggendo [140,SP] SPECIAL a tutti i nemici colpiti. Riduci i AP dell'utilizzatore di 20 per ogni Pokèmon colpito.",
     "ICE_HAMMER": "Infliggi [50,100,SP] SPECIAL e causa FREEZE per 3 secondi. Causa PARALYSIS all'utilizzatore per 3 secondi.",
-    "POLLEN_PUFF": "Cura l'alleato con meno HP di [20,40,80,SP].",
+    "POLLEN_PUFF": "Cura l'alleato con meno HP di [30,60,120,SP].",
     "PSYSTRIKE": "L'utilizzatore materializza un onda psichica in direzione del nemico più lontano, infliggendogli  [100,SP] PHYSICAL e teletrasporta tutto ciò che viene colpito nella traiettoria.",
     "FACADE": "Infligge [20,40,80,SP] SPECIAL. Il danno raddoppia se l'utilizzatore ha uno status negativo.",
     "DREAM_EATER": "Se il bersaglio è SLEEP, saltaci affianco ed infliggi [45,90,SP] SPECIAL e recupera HP pari al danno inflitto. Se non ha lo status, causa lo status SLEEP per [2.5,5] secondi.",
