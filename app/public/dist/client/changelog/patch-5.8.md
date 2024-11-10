@@ -22,6 +22,7 @@
 
 # Bugfix
 
+- Prevent Celebi to regain player HP when in a ghost matchup
 
 # Misc
 
