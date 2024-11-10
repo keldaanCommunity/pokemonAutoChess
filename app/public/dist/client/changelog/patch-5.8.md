@@ -17,6 +17,7 @@
 - Fix Blizzard applying double damage on all units not just frozen ones
 - Fix Guillotine restoring to 100% PP on KO instead of 50%
 - Fix Lunar Blessing using caster max HP instead of target max HP
+- Change Dragon Breath: fix targeting and apply special damage instead of true damage ; changed animation
 
 # Changes to Synergies
 

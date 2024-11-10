@@ -1313,7 +1313,7 @@
     "BITE": "Infligge [40,80,120,SP] SPECIAL, guarisce l'utilizzatore per il 30% del danno inflitto e provoca al bersaglio FLINCH per 5 secondi",
     "AQUA_TAIL": "Infliggi [30,60,100,SP] SPECIAL e ricevi [30,60,100,SP] SHIELD.",
     "DRAGON_TAIL": "Infliggi [30,60,100,SP] SPECIAL e potenzia la DEF e SPE_DEF dell'utilizzatore di [1,2,3,SP].",
-    "DRAGON_BREATH": "Infligge [25,50,100,SP] TRUE a tutti i Pokèmon nemici dietro il bersaglio.",
+    "DRAGON_BREATH": "Infligge [25,50,100,SP] SPECIAL a tutti i Pokèmon nemici dietro il bersaglio.",
     "ICICLE_CRASH": "Infligge [20,40,80,SP] SPECIAL in un'area attorno al bersaglio.",
     "ROOT": "Tutti i nemici adiacenti subiscono LOCKED per 4 secondi e gli vengono inflitti [10,20,40,SP] SPECIAL ogni volta che l'utilizzatore e gli alleati adiacenti vengono curati di [10,20,40,SP] HP",
     "TORMENT": "Potenzia l' ATK_SPEED del [20,40,60,SP]%.",

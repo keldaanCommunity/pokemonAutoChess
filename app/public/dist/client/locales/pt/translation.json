@@ -1199,7 +1199,7 @@
     "BITE": "Inflige [40,80,120,SP] de SPECIAL ao alvo e cura 30% do dano. FLINCH alvo por 5 segundos",
     "AQUA_TAIL": "Causa [30,60,100,SP] SPECIAL no alvo e ganha [30,60,100,SP] de ESCUDO",
     "DRAGON_TAIL": "Ataque de alvo mono que causa [30,60,100,SP] SPECIAL e buff DEF e SPE_DEF em [1,2,3,SP]",
-    "DRAGON_BREATH": "Área de ataque de efeito que causa [25,50,100,SP] TRUE em uma linha atrás do alvo",
+    "DRAGON_BREATH": "Área de ataque de efeito que causa [25,50,100,SP] SPECIAL em uma linha atrás do alvo",
     "ICICLE_CRASH": "Ataque de área de efeito que causa [20,40,80,SP] SPECIAL ao redor do alvo",
     "TORMENT": "Aumente ATK_SPEED em [20,40,60,SP] %",
     "STOMP": "Alvo mono que lida [3,4,5,SP] x ATK SPECIAL",

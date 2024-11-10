@@ -1264,7 +1264,7 @@
     "BITE": "Inflige [40,80,120,SP] de SPECIAL al objetivo y cura al usuario el 30% del daño. Deja FLINCH al objetivo por 5 segundos",
     "AQUA_TAIL": "Inflige [30,60,100,SP] SPECIAL al objetivo y gana [30,60,100,SP] de SHIELD",
     "DRAGON_TAIL": "Inflige [30,60,100,SP] de SPECIAL al objetivo y aumenta la DEF y SPE_DEF del usuario en [1,2,3,SP]",
-    "DRAGON_BREATH": "Inflige [25,50,100,SP] de TRUE a todos los enemigos detrás del objetivo",
+    "DRAGON_BREATH": "Inflige [25,50,100,SP] de SPECIAL a todos los enemigos detrás del objetivo",
     "ICICLE_CRASH": "Inflige [20,40,80,SP] de SPECIAL alrededor del objetivo",
     "ROOT": "Todos los enemigos adyacentes quedan LOCKED por 4 segundos y reciben [10,20,40,SP] de especial mientras el usuario y aliados adyacentes se curan [10,20,40,SP] de HP",
     "TORMENT": "Aumenta la ATK_SPEED en [20,40,60,SP] %",

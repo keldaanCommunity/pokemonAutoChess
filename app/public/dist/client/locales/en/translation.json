@@ -1319,7 +1319,7 @@
     "BITE": "Deal [40,80,120,SP] SPECIAL to the target and heal the user for 30% of the damage dealt. Cause the target to FLINCH for 5 seconds.",
     "AQUA_TAIL": "Deal [30,60,100,SP] SPECIAL to the target and gain [30,60,100,SP] SHIELD.",
     "DRAGON_TAIL": "Deal [30,60,100,SP] SPECIAL to the target and increase the user's DEF and SPE_DEF by [1,2,3,SP].",
-    "DRAGON_BREATH": "Deal [25,50,100,SP] TRUE to all enemy Pokémon behind the target.",
+    "DRAGON_BREATH": "Deal [25,50,100,SP] SPECIAL to target and an enemy directly behind it.",
     "ICICLE_CRASH": "Deal [20,40,80,SP] SPECIAL in an area around the target.",
     "ROOT": "Deal [10,20,40,SP] SPECIAL to all adjacent enemy Pokémon and make them LOCKED for 4 seconds. Heal the user and adjacent allied Pokémon for [10,20,40,SP] HP.",
     "TORMENT": "Increase the user's ATK_SPEED by [20,40,60,SP]%.",

@@ -3611,6 +3611,23 @@ export class DragonBreathStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
+
+    effectInLine(board, pokemon, target, (cell) => {
+      if (
+        cell.value != null &&
+        cell.value.team !== pokemon.team &&
+        distanceC(pokemon.positionX, pokemon.positionY, cell.x, cell.y) <= 2
+      ) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
+
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
     const secondTarget = board.getValue(target.positionX, target.positionY + 1)
     if (secondTarget && secondTarget != pokemon) {
@@ -8081,7 +8098,7 @@ export class LickStrategy extends AbilityStrategy {
       true
     )
     target.status.triggerConfusion(3000, target, pokemon)
-    target.status.triggerParalysis(3000, target, pokemon)
+    target.status.triggerParalysis(3000, target)
   }
 }
 

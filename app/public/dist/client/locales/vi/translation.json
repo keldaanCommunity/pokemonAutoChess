@@ -1233,7 +1233,7 @@
     "BITE": "Gây [40,80,120,SP] SPECIAL lên mục tiêu và hồi phục cho bản thân lượng máu bằng 30% sát thương đã gây ra. FLINCH mục tiêu trong 5 giây",
     "AQUA_TAIL": "Gây [30,60,100,SP] SPECIAL lên mục tiêu và có thêm [30,60,100,SP] SHIELD",
     "DRAGON_TAIL": "Gây [30,60,100,SP] SPECIAL lên mục tiêu và tăng [1,2,3,SP] chỉ số DEF và SPE_DEF cho bản thân",
-    "DRAGON_BREATH": "Gây [25,50,100,SP] TRUE lên tất cả Pokémon đối thủ đằng sau mục tiêu",
+    "DRAGON_BREATH": "Gây [25,50,100,SP] SPECIAL lên tất cả Pokémon đối thủ đằng sau mục tiêu",
     "ICICLE_CRASH": "Gây [20,40,80,SP] SPECIAL lên khu vực xung quanh mục tiêu",
     "TORMENT": "Tăng [20,40,60,SP]% ATK_SPEED",
     "STOMP": "Gây SPECIAL tương đương với [3,4,5,SP] x ATK chỉ số của mục tiêu",

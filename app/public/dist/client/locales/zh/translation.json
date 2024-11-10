@@ -1313,7 +1313,7 @@
     "BITE": "对目标造成[40,80,120,SP]点SPECIAL，使用者自身恢复所造成伤害的30%，并使目标陷入FLINCH 5秒。",
     "AQUA_TAIL": "对目标造成[30,60,100,SP]点SPECIAL，并获得[30,60,100,SP]点SHIELD。",
     "DRAGON_TAIL": "对目标造成[30,60,100,SP]点SPECIAL，并提升使用者[1,2,3,SP]点DEF和SPE_DEF。",
-    "DRAGON_BREATH": "对目标身后的所有敌方宝可梦造成[25,50,100,SP]点TRUE。",
+    "DRAGON_BREATH": "对目标身后的所有敌方宝可梦造成[25,50,100,SP]点SPECIAL。",
     "ICICLE_CRASH": "对目标周围的一片区域造成[20,40,80,SP]点SPECIAL。",
     "ROOT": "使所有相邻敌方宝可梦陷入LOCKED 4秒，并受到[10,20,40,SP]点SPECIAL。使用者及所有相邻我方宝可梦则恢复[10,20,40,SP]点HP。",
     "TORMENT": "提升[20,40,60,SP]%ATK_SPEED。",
