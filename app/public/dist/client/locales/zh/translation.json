@@ -2541,7 +2541,7 @@
     "GOLDEN": "获得赛富豪。",
     "CHOSEN_ONE": "在一局游戏中，将聚光共鸣提升到最大等级。",
     "VANQUISHER": "取得一场排位赛的胜利。",
-    "OUTSIDER": "在自身的Elo为全场最低的情况下，取得一场8人排位赛的胜利。",
+    "OUTSIDER": "在自身的Elo分数全场最低的情况下，取得一场8人排位赛的胜利。",
     "GLUTTON": "将一只卡比兽的最大生命值提升至超过750。",
     "STARGAZER": "获得索尔伽雷欧或露奈雅拉。",
     "BLOODY": "获得赫月月月熊。",
@@ -2561,7 +2561,7 @@
     "SMOG": "毒雾"
   },
   "weather_description": {
-    "NEUTRAL": "一般的天气，没有额外效果。",
+    "NEUTRAL": "一般的天气，没有额外效果",
     "SUN": "+30% BURN伤害\n-30% FREEZE持续时间",
     "WINDY": "+20% 移动速度\n+10% ATK_SPEED（仅FLYING宝可梦）",
     "RAIN": "每秒恢复3点PP\n-30% BURN或POISONNED伤害",
