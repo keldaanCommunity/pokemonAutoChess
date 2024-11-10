@@ -4104,7 +4104,6 @@ export class ThiefStrategy extends AbilityStrategy {
       damage = 60
     }
 
-    const l = target.items.size
     target.items.forEach((item) => {
       if (pokemon.items.size < 3) {
         pokemon.items.add(item)
@@ -6203,7 +6202,7 @@ export class WaterPulseStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [75, 150][pokemon.stars - 1] ?? 75
+    const damage = [75, 150][pokemon.stars - 1] ?? 150
     board
       .getAdjacentCells(target.positionX, target.positionY)
       .map((v) => v.value)
@@ -8532,7 +8531,7 @@ export class IceHammerStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 2 ? 100 : 50
+    const damage = [50, 100][pokemon.stars - 1] ?? 100
     target.handleSpecialDamage(
       damage,
       board,
@@ -9256,8 +9255,8 @@ export class RapidSpinStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 2 ? 50 : 20
-    const statBuff = pokemon.stars === 2 ? 0.3 : 0.2
+    const damage = [20, 50][pokemon.stars - 1] ?? 50
+    const statBuff = [0.2, 0.3][pokemon.stars - 1] ?? 0.3
     const buffAmount = Math.round(statBuff * pokemon.atk)
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
@@ -9324,8 +9323,8 @@ export class GunkShotStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 2 ? 100 : 50
-    const baseDuration = pokemon.stars === 2 ? 4000 : 2000
+    const damage = [50, 100][pokemon.stars - 1] ?? 100
+    const baseDuration = [2000, 4000][pokemon.stars - 1] ?? 4000
     const duration = Math.round(baseDuration * (1 + pokemon.ap / 100))
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
@@ -9342,7 +9341,7 @@ export class AncientPowerStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 2 ? 80 : 40
+    const damage = [40, 80][pokemon.stars - 1] ?? 80
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     pokemon.addAbilityPower(25, pokemon, 1, crit)
   }
@@ -9358,7 +9357,7 @@ export class MuddyWaterStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit, true)
     const cells = board.getCellsInFront(pokemon, target)
-    const damage = pokemon.stars === 2 ? 80 : 40
+    const damage = [40, 80][pokemon.stars - 1] ?? 80
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
         pokemon.simulation.room.broadcast(Transfer.ABILITY, {
