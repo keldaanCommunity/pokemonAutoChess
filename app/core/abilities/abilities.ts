@@ -4065,7 +4065,7 @@ export class SpectralThiefStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
-    const damage = 80
+    const damage = 50
     if (farthestCoordinate) {
       target.handleSpecialDamage(
         damage,
