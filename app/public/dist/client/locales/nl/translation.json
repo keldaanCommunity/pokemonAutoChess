@@ -844,7 +844,7 @@
     "ROCK_SLIDE": "Breng [30,60,120,SP] SPECIAL toe aan het doelwit. De schade verdubbelt als het doelwit een FLYING Pokémon is",
     "HEAT_WAVE": "Breng [20,40,80,SP] SPECIAL toe aan alle vijandelijke Pokémon achter het doelwit",
     "THUNDER": "Breng [30,60,120,SP] SPECIAL aan",
-    "HYDRO_PUMP": "Breng [20,40,80,SP] SPECIAL toe aan alle vijandelijke Pokémon achter het doelwit",
+    "HYDRO_PUMP": "Breng [25,50,100,SP] SPECIAL toe aan alle vijandelijke Pokémon achter het doelwit",
     "DRACO_METEOR": "Breng [50,SP] SPECIAL toe aan alle vijandelijke Pokémon",
     "BLAZE_KICK": "Breng [30,60,120,SP] SPECIAL en BURN het doelwit gedurende 2 seconden. Als het doelwit al BURN heeft, wordt er +30% schade toegebracht.",
     "WISH": "Herstelt [50,SP] HP en geeft [20,SP] LUCK aan [1,2,3] vriendelijke Pokémon",

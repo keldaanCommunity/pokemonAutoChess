@@ -1300,7 +1300,7 @@
     "ROCK_SLIDE": "Deal [30,60,120,SP] SPECIAL to the target. The damage is doubled if the target is FLYING.",
     "HEAT_WAVE": "Deal [20,40,80,SP] SPECIAL to all enemy Pokémon behind the target.",
     "THUNDER": "Deal [30,60,120,SP] SPECIAL to the target.",
-    "HYDRO_PUMP": "Deal [20,40,80,SP] SPECIAL to all enemy Pokémon behind the target.",
+    "HYDRO_PUMP": "Deal [25,50,100,SP] SPECIAL to all enemy Pokémon behind the target.",
     "DRACO_METEOR": "Deal [50,SP] SPECIAL to all enemy Pokémon.",
     "BLAZE_KICK": "Deal [30,60,120,SP] SPECIAL and BURN the target for 2 seconds. If it already has BURN, deal +30% damage.",
     "WISH": "Heal [50,SP] HP and grant [20,SP] LUCK to [1,2,3] allied Pokémon.",

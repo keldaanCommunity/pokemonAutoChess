@@ -1294,7 +1294,7 @@
     "ROCK_SLIDE": "대상에 [30,60,120,SP] SPECIAL 을 가한다. 대상이 FLYING 일 경우 대미지가 두배가 된다.",
     "HEAT_WAVE": "대상의 뒤에 있는 모든 적포켓몬들에게 [20,40,80,SP] SPECIAL 을 가한다.",
     "THUNDER": "[30,60,120,SP] SPECIAL 을 가한다.",
-    "HYDRO_PUMP": "대상의 뒤에 있는 모든 적포켓몬들에게 [20,40,80,SP] SPECIAL 을 가한다.",
+    "HYDRO_PUMP": "대상의 뒤에 있는 모든 적포켓몬들에게 [25,50,100,SP] SPECIAL 을 가한다.",
     "DRACO_METEOR": "모든 적포켓몬들에게 [50,SP] SPECIAL 을 가한다.",
     "BLAZE_KICK": "대상에게 [30,60,120,SP] SPECIAL 을 가하며 2초간 BURN 상태로 만든다. BURN 상태의 포켓몬에게는 30%의 추가피해를 가한다.",
     "WISH": "[1,2,3]마리의 아군 포켓몬에게 HP를 [50,SP] 회복시키고, [20,SP] LUCK을 부여합니다.",

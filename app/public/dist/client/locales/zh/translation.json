@@ -1294,7 +1294,7 @@
     "ROCK_SLIDE": "对目标造成[30,60,120,SP]点SPECIAL。对FLYING宝可梦伤害翻倍。",
     "HEAT_WAVE": "对目标身后的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL。",
     "THUNDER": "造成[30,60,120,SP]点SPECIAL。",
-    "HYDRO_PUMP": "对目标身后的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL。",
+    "HYDRO_PUMP": "对目标身后的所有敌方宝可梦造成[25,50,100,SP]点SPECIAL。",
     "DRACO_METEOR": "对所有敌方宝可梦造成[50,SP]点SPECIAL。",
     "BLAZE_KICK": "对目标造成[30,60,120,SP]点SPECIAL，并使其陷入BURN 2秒。若已经处于BURN，则造成的伤害增加30%。",
     "WISH": "为[1,2,3]只我方宝可梦恢复[50,SP]点HP，并使他们的LUCK提升[20,SP]。",

@@ -1214,7 +1214,7 @@
     "ROCK_SLIDE": "Gây [30,60,120,SP] SPECIAL tới mục tiêu, gấp đôi sát thương nếu mục tiêu đang trúng hiệu ứng FLYING",
     "HEAT_WAVE": "Gây [20,40,80,SP] SPECIAL cho tất cả Pokémon phía sau mục tiêu",
     "THUNDER": "Gây [30,60,120,SP] SPECIAL",
-    "HYDRO_PUMP": "Gây [20,40,80,SP] SPECIAL đến tất cả Pokémon đối thủ phía sau mục tiêu",
+    "HYDRO_PUMP": "Gây [25,50,100,SP] SPECIAL đến tất cả Pokémon đối thủ phía sau mục tiêu",
     "DRACO_METEOR": "Gây [50,SP] SPECIAL tới tất cả Pokémon đối thủ",
     "BLAZE_KICK": "Gây [30,60,120,SP] SPECIAL và BURN mục tiêu trong 2 giây. Nếu đối thủ đã bị BURN, gây +30% sát thương",
     "WISH": "Hồi phục [50,SP] HP và cung cấp [20,SP] LUCK cho [1,2,3] Pokémon đồng minh",
