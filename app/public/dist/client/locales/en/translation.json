@@ -1264,7 +1264,7 @@
   "ability_description": {
     "SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
     "EARTHQUAKE": "Deal [100,SP] SPECIAL to all enemy Pokémon in the same row or column as the user.",
-    "SONG_OF_DESIRE": "Inflict 2 targets on the back line with CHARM for 3 seconds and reduce their ATK by [3,SP].",
+    "SONG_OF_DESIRE": "Inflict 2 targets on the back line with CHARM for [3,SP] seconds and reduce their ATK by [3,SP].",
     "CONFUSING_MIND": "Inflict 2 opponents on the back line with CONFUSION for [3,SP] seconds.",
     "KNOWLEDGE_THIEF": "Use the target's ability. The allied player gains 1 XP.",
     "KING_SHIELD": "PROTECT the user for 1.5 seconds, gain [10,20,30,SP] SHIELD and swap positions with the farthest enemy Pokémon.",

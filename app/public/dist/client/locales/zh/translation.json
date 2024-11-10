@@ -1258,7 +1258,7 @@
   "ability_description": {
     "SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
     "EARTHQUAKE": "对与使用者处于同一横排或纵列上的所有敌方宝可梦造成[100,SP]点SPECIAL。",
-    "SONG_OF_DESIRE": "使敌方后排的两只宝可梦陷入CHARM 3秒，并降低其[3,SP]点ATK。",
+    "SONG_OF_DESIRE": "使敌方后排的两只宝可梦陷入CHARM [3,SP]秒，并降低其[3,SP]点ATK。",
     "CONFUSING_MIND": "使敌方后排的两只宝可梦陷入CONFUSION [3,SP]秒。",
     "KNOWLEDGE_THIEF": "使用目标的招式。玩家获得1点XP。",
     "KING_SHIELD": "使用者进入PROTECT 1.5秒，获得[10,20,30,SP]点SHIELD，并和最远的敌方宝可梦交换位置。",

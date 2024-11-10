@@ -1146,7 +1146,7 @@
   "ability_description": {
     "SOFT_BOILED": "Cura todos os efeitos de status e concede [20,40,80,SP] SHIELD para cada aliado",
     "EARTHQUAKE": "Inflige dano [100,SP] SPECIAL a todas as unidades inimigas na mesma coluna/linha do atacante",
-    "SONG_OF_DESIRE": "CHARM 2 oponentes na linha de fundo por 3 segundos e reduza seu ATK em [3,SP]",
+    "SONG_OF_DESIRE": "CHARM 2 oponentes na linha de fundo por [3,SP] segundos e reduza seu ATK em [3,SP]",
     "CONFUSING_MIND": "CONFUSION 2 oponentes na linha de fundo por [3,SP] segundos",
     "KNOWLEDGE_THIEF": "Lançar o máximo do alvo. O jogador ganha 1 XP.",
     "KING_SHIELD": "PROTECT o usuário por [1,2,3] segundos, concede [10,20,30,SP] SHIELD e troque sua posição com o inimigo mais distante",
