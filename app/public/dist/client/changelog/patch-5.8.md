@@ -34,6 +34,7 @@
 - Fix Spring Tide Storm charm duration to match description
 - Fix Spark halving damage beginning only after the second target hit
 - Fix Ancient Power AP scaling and description
+- Fix Drain Punch healing 4x the amount of damage dealt instead of 2x
 
 # Changes to Synergies
 

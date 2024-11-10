@@ -1603,7 +1603,7 @@
     "CRUSH_CLAW": "Réduit la DEF de la cible par [3,6] puis déclenche deux attaques rapides infligeant chacune [100,SP]% de son ATK en PHYSICAL",
     "FIRE_LASH": "Inflige [120,SP] SPECIAL à la cible et ARMOR_REDUCTION pendant 4 secondes",
     "FAIRY_LOCK": "Répartit [90,SP] SPECIAL uniformément entre la cible et les ennemis adjacents. La cible est LOCKED pendant 5 secondes.",
-    "DRAIN_PUNCH": "La prochaine attaque inflige [100,SP]% de SPECIAL additionnels et restaure 200% des dégâts infligés en HP.",
+    "DRAIN_PUNCH": "Inflige [200,SP]% de l'ATK en SPECIAL et restaure 200% des dégâts infligés en HP.",
     "GRAVITY": "L'équipe ennemie est LOCKED pendant [2,SP] secondes",
     "FAKE_OUT": "Inflige [50,100,150,SP] SPECIAL à la cible, puis le lanceur perd 30% de AP. La cible est FLINCH pendant 3 secondes sauf si la AP du lanceur était négative.",
     "FELL_STINGER": "Inflige [20,40,70,SP] SPECIAL à la cible. SI la cible est KO, gagne de façon permanente +1 ATK, +5 AP et +10 HP.",

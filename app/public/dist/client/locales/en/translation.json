@@ -1609,7 +1609,7 @@
     "CRUSH_CLAW": "Reduce the target's DEF by [3,6] then perform two quick attacks, each dealing [100,SP]% of ATK as PHYSICAL.",
     "FIRE_LASH": "Deal [120,SP] SPECIAL to the target and apply ARMOR_REDUCTION for 4 seconds.",
     "FAIRY_LOCK": "Spread [90,SP] SPECIAL evenly across the target and adjacent enemy Pokémon. The target is LOCKED for 5 seconds.",
-    "DRAIN_PUNCH": " The next attack deals [100,SP]% additional SPECIAL and heals for 200% of the damage dealt.",
+    "DRAIN_PUNCH": " Deal [200,SP]% of ATK as SPECIAL and heal for 200% of the damage dealt.",
     "GRAVITY": "All enemy Pokémon are LOCKED for [2,SP] seconds.",
     "FAKE_OUT": "Deal [50,100,150,SP] SPECIAL to the target and reduce the user's AP by 30. Inflict the target with FLINCH for 3 seconds unless the user's AP was negative.",
     "FELL_STINGER": "Deal [20,40,70,SP] SPECIAL to the target. If it kills the target, permanently gain 1 ATK, 5 AP and 10 HP.",

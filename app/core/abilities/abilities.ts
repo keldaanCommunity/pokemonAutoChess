@@ -9549,7 +9549,7 @@ export class DrainPunchStrategy extends AbilityStrategy {
       crit,
       true
     )
-    pokemon.handleHeal(result.takenDamage * 4, pokemon, 0, false)
+    pokemon.handleHeal(result.takenDamage * 2, pokemon, 0, false)
   }
 }
 
