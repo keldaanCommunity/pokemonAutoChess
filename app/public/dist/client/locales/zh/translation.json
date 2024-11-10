@@ -2114,7 +2114,7 @@
     "ELECTRIC_QUARTZ": "计为3只生成STORM所需的宝可梦。在STORM中，我方所有宝可梦被雷击时获得50点SHIELD，且解除PARALYSIS耗时减少20%。",
     "FLOAT_STONE": "计为3只生成WINDY所需的宝可梦。在WINDY中，我方所有宝可梦提升5%的ATK_SPEED。",
     "MIST_STONE": "计为3只生成MISTY所需的宝可梦。在MISTY中，我方所有宝可梦提升2点SPE_DEF。",
-    "BLOOD_STONE": "计为3只生成BLOODMOON所需的宝可梦。在BLOODMOON中，我方所有宝可梦在WOUND下受到的治疗的30%会转化为SHIELD，且攻击处于WOUND的敌方宝可梦时恢复所造成伤害额的20%。",
+    "BLOOD_STONE": "计为3只生成BLOODMOON所需的宝可梦。在BLOODMOON中，我方所有宝可梦在WOUND下本应受到的治疗的30%会转化为SHIELD，且攻击处于WOUND的敌方宝可梦时恢复所造成伤害额的20%。",
     "SMELLY_CLAY": "计为3只生成SMOG所需的宝可梦。在SMOG中，我方所有宝可梦提升5%的命中率且陷入POISONNED的概率降低10%。",
     "FIRE_SHARD": "扣除3点玩家HP，使一只FIRE宝可梦永久提升3点ATK。携带后立即消耗。",
     "TEAL_MASK": "用结晶装饰的木雕面具。使厄鬼椪视作FLORA宝可梦，且获得50点SHIELD。",
