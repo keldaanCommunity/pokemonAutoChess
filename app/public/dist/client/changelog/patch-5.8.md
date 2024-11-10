@@ -15,6 +15,7 @@
 - Fix Nightmare damage amount to match description
 - Fix Hyper voice damage amount to match description
 - Fix Blizzard applying double damage on all units not just frozen ones
+- Fix Guillotine restoring to 100% PP on KO instead of 50%
 
 # Changes to Synergies
 

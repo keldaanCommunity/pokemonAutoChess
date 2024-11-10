@@ -2583,7 +2583,7 @@ export class GuillotineStrategy extends AbilityStrategy {
       crit
     )
     if (death) {
-      pokemon.addPP(pokemon.maxPP, pokemon, 0, false)
+      pokemon.addPP(pokemon.maxPP * 0.5, pokemon, 0, false)
     }
   }
 }
