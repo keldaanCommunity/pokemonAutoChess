@@ -721,7 +721,7 @@ export class ChatterStrategy extends AbilityStrategy {
       if (tg && pokemon.team != tg.team) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
         if (chance(confusionChance, pokemon)) {
-          tg.status.triggerConfusion(1000, tg)
+          tg.status.triggerConfusion(1000, tg, pokemon)
         }
       }
     })
@@ -834,7 +834,7 @@ export class DynamicPunchStrategy extends AbilityStrategy {
       damage = 80
       duration = 6000
     }
-    target.status.triggerConfusion(duration, target)
+    target.status.triggerConfusion(duration, target, pokemon)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -1859,13 +1859,13 @@ export class HyperVoiceStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
 
-    const damage = [40, 80, 200][pokemon.stars - 1] ?? 200
+    const damage = [30, 60, 150][pokemon.stars - 1] ?? 200
     const confusionDuration = [1000, 2000, 3000][pokemon.stars - 1] ?? 3
 
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team && target.positionY == y) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-        tg.status.triggerConfusion(confusionDuration, tg)
+        tg.status.triggerConfusion(confusionDuration, tg, pokemon)
       }
     })
   }
@@ -2490,7 +2490,7 @@ export class ConfusionStrategy extends AbilityStrategy {
       )
     } else {
       target.status.triggerSilence(timer, target, pokemon)
-      target.status.triggerConfusion(timer, target)
+      target.status.triggerConfusion(timer, target, pokemon)
     }
   }
 }
@@ -3424,7 +3424,7 @@ export class PsybeamStrategy extends AbilityStrategy {
           crit
         )
         if (chance(0.5, pokemon)) {
-          cell.value.status.triggerConfusion(4000, cell.value)
+          cell.value.status.triggerConfusion(4000, cell.value, pokemon)
         }
       }
     })
@@ -5408,7 +5408,7 @@ export class ThrashStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     pokemon.addAttack(pokemon.baseAtk, pokemon, 1, crit)
-    pokemon.status.triggerConfusion(3000, pokemon)
+    pokemon.status.triggerConfusion(3000, pokemon, pokemon)
   }
 }
 
@@ -6215,7 +6215,7 @@ export class WaterPulseStrategy extends AbilityStrategy {
       .concat(target)
       .forEach((v) => {
         if (v) {
-          v.status.triggerConfusion(2000, v)
+          v.status.triggerConfusion(2000, v, pokemon)
           v.handleSpecialDamage(
             damage,
             board,
@@ -6313,7 +6313,7 @@ export class TeeterDanceStrategy extends AbilityStrategy {
     pokemon.addAttackSpeed(20, pokemon, 1, crit)
     board.cells
       .filter((v) => v !== undefined)
-      .forEach((v) => v && v.status.triggerConfusion(3000, v))
+      .forEach((v) => v && v.status.triggerConfusion(3000, v, pokemon))
   }
 }
 
@@ -7388,7 +7388,7 @@ export class OutrageStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    pokemon.status.triggerConfusion(2000, pokemon)
+    pokemon.status.triggerConfusion(2000, pokemon, pokemon)
     const damage = Math.round(
       ([1, 1.5, 2][pokemon.stars - 1] ?? 2) * pokemon.atk
     )
@@ -8081,8 +8081,8 @@ export class LickStrategy extends AbilityStrategy {
       crit,
       true
     )
-    target.status.triggerConfusion(3000, target)
-    target.status.triggerParalysis(3000, target)
+    target.status.triggerConfusion(3000, target, pokemon)
+    target.status.triggerParalysis(3000, target, pokemon)
   }
 }
 

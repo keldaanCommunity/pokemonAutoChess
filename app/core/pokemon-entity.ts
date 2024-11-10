@@ -824,7 +824,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (target.passive === Passive.PSYDUCK && chance(0.1, this)) {
-      target.status.triggerConfusion(3000, target)
+      target.status.triggerConfusion(3000, target, target)
     }
 
     if (this.name === Pkm.MINIOR) {
@@ -1620,7 +1620,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     switch (berry) {
       case Item.AGUAV_BERRY:
         this.handleHeal(this.hp - this.life, this, 0, false)
-        this.status.triggerConfusion(3000, this)
+        this.status.triggerConfusion(3000, this, this)
         break
       case Item.APICOT_BERRY:
         this.handleHeal(20, this, 0, false)
