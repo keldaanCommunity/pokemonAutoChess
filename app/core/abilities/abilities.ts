@@ -7621,6 +7621,7 @@ export class AuraSphereStrategy extends AbilityStrategy {
 }
 
 export class SketchStrategy extends AbilityStrategy {
+  copyable = false
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
