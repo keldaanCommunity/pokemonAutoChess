@@ -1483,7 +1483,7 @@
     "PYRO_BALL": "The user attacks by igniting a small stone and launching it as a fiery ball at the farthest enemy Pokémon, dealing [10,20,40,SP] SPECIAL and applying BURN for 2 seconds to all enemy Pokémon in its path.",
     "WHIRLPOOL": "Unleash a hail of 4 whirlpools toward the farthest enemy Pokémon, each dealing [125,SP]% ATK SPECIAL to the first enemy Pokémon in their path.",
     "SMOKE_SCREEN": "Channel undergound and reappear in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL to all adjacent enemy Pokémon and applying smoke to the back row, reducing accuracy by 50%.",
-    "PRESENT": "Either deal [80,SP], [150,SP] or [300,SP] SPECIAL to the target, or heal them for 80 HP.",
+    "PRESENT": "Either deal [80,SP], [150,SP] or [300,SP] SPECIAL to the target, or heal them for 50 HP.",
     "LEAF_BLADE": "The user's next attack is a guaranteed critical hit dealing [100,SP]% of ATK as TRUE.",
     "ANCHOR_SHOT": "Grab the farthest enemy Pokémon and deal [20,40,80,SP] SPECIAL.",
     "MAGNET_RISE": "Grant PROTECT for 2 seconds and [10,SP]% dodge chance to the user and [2,4,6] adjacent allied Pokémon.",

@@ -1450,7 +1450,7 @@
     "PYRO_BALL": "Der Benutzer greift an, indem er einen kleinen Stein entzündet und ihn als feurige Kugel auf das am weitesten entfernte Ziel schleudert, wodurch er alles, was ihm in den Weg kommt, [10,20,40,SP] SPECIAL und BURN für 2 Sekunden zufügt",
     "WHIRLPOOL": "Erfassen Sie den am weitesten entfernten Feind und entfesseln Sie einen Hagel von 4 Strudeln auf ihn. Jeder Angriff fügt dem ersten getroffenen Gegner [125,SP]% ATK SPECIAL zu",
     "SMOKE_SCREEN": "Kanalisiert den Untergrund und erscheint wieder in der Mitte des gegnerischen Teams, fügt allen benachbarten Einheiten [10,20,40,SP] SPECIAL zu und räubert die hintere Reihe aus, um ihre Genauigkeit zu verringern",
-    "PRESENT": "Verursacht entweder [80,SP], [150,SP], [300,SP] SPECIAL oder heilt 80 HP des Ziels",
+    "PRESENT": "Verursacht entweder [80,SP], [150,SP], [300,SP] SPECIAL oder heilt 50 HP des Ziels",
     "LEAF_BLADE": "Der nächste Angriff ist ein Kritischer Treffer der [100,SP]% ATK als TRUE verursacht.",
     "ANCHOR_SHOT": "Schnapp dir das am weitesten entfernte Pokémon und teile [20,40,80,SP] SPECIAL aus",
     "MAGNET_RISE": "Gewährt dem Anwender und [2,4,6] benachbarten verbündeten Pokémon 2 Sekunden lang SCHUTZ und [10,SP]% Ausweichchance",

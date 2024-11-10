@@ -1427,7 +1427,7 @@
     "PYRO_BALL": "El usuario ataca encendiendo una pequeña piedra y lanzándola como una bola de fuego al objetivo más lejano, infligiendo [10,20,40,SP] de SPECIAL y dejando BURN durante 2 segundos todo lo que encuentre en su camino.",
     "WHIRLPOOL": "Fija al enemigo más lejano y desata una lluvia de 4 remolinos hacia él. Cada uno inflige [125,SP] % de ATK SPECIAL al primer enemigo que alcance",
     "SMOKE_SCREEN": "Se esconde bajo tierra y reaparece en medio del equipo enemigo, causando [10,20,40,SP] de SPECIAL a todas las unidades adyacentes y fumigando la fila trasera para reducir su precisión en 50%",
-    "PRESENT": "Puede infligir [80,SP], [150,SP], [300,SP] de SPECIAL o curar 80 HP al objetivo",
+    "PRESENT": "Puede infligir [80,SP], [150,SP], [300,SP] de SPECIAL o curar 50 HP al objetivo",
     "LEAF_BLADE": "El siguiente ataque hará daño crítico asegurado que inflige [100,SP]% de ATK como TRUE",
     "ANCHOR_SHOT": "Agarra al pokémon mas lejano para infligirle [20,40,80,SP] de SPECIAL",
     "MAGNET_RISE": "Otorga PROTECT durante 2 segundos y [10,SP]% de probabilidad de esquivar al usuario y a [2,4,6] Pokémon aliados adyacentes",
