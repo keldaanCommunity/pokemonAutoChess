@@ -888,7 +888,7 @@ export class TimeTravelStrategy extends AbilityStrategy {
       }
     })
 
-    if (pokemon.player && pokemon.player.canRegainLife) {
+    if (pokemon.player && pokemon.player.canRegainLife && pokemon.passive == Passive.CELEBI) {
       pokemon.player.life = max(100)(pokemon.player.life + 1)
     }
   }
