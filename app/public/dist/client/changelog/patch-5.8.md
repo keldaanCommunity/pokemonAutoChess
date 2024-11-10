@@ -22,6 +22,7 @@
 - Fix Diamong Storm AP scaling being applied twice
 - Fix Flame Charge damage amount to match description
 - Fix Spectral Thief damage amount to match description
+- Fix Growth attack buff amount to match description
 
 # Changes to Synergies
 

@@ -4966,7 +4966,7 @@ export class GrowthStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
 
-    let attackBuff = 5
+    let attackBuff = [3, 4, 5][pokemon.stars - 1] ?? 5
     let hpBuff = [10, 20, 30][pokemon.stars - 1] ?? 30
     if (pokemon.simulation.weather === Weather.SUN) {
       attackBuff *= 2 // grows twice as fast if sunny weather
