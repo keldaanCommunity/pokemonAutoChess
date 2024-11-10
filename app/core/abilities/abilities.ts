@@ -752,7 +752,7 @@ export class DiamondStormStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = Math.round(2 * pokemon.def * (1 + pokemon.ap / 100))
+    const damage = 2 * pokemon.def
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
@@ -761,8 +761,7 @@ export class DiamondStormStrategy extends AbilityStrategy {
           board,
           AttackType.SPECIAL,
           pokemon,
-          crit,
-          false
+          crit
         )
       }
     })
