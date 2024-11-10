@@ -7162,34 +7162,33 @@ export class EggsplosionStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 3 ? 140 : pokemon.stars === 2 ? 80 : 40
-    const kill = target.handleSpecialDamage(
-      damage,
-      board,
-      AttackType.SPECIAL,
-      pokemon,
-      crit
-    )
-    if (kill.death && chance(0.3, pokemon)) {
-      const egg = createRandomEgg(false)
-      const player = pokemon.player
-      if (player) {
-        const x = getFirstAvailablePositionInBench(player.board)
-        if (x !== undefined) {
-          egg.positionX = x
-          egg.positionY = 0
-          egg.evolutionRule.evolutionTimer = EvolutionTime.EGG_HATCH
-          player.board.set(egg.id, egg)
-        }
-      }
-    }
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
     board
-      .getAdjacentCells(target.positionX, target.positionY)
+      .getAdjacentCells(target.positionX, target.positionY, true)
       .map((v) => v.value)
       .filter((v) => v?.team === target.team)
-      .concat(target)
       .forEach((v) => {
         if (v) {
+          const kill = target.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          if (kill.death && chance(0.25, pokemon)) {
+            const egg = createRandomEgg(false)
+            const player = pokemon.player
+            if (player) {
+              const x = getFirstAvailablePositionInBench(player.board)
+              if (x !== undefined) {
+                egg.positionX = x
+                egg.positionY = 0
+                egg.evolutionRule.evolutionTimer = EvolutionTime.EGG_HATCH
+                player.board.set(egg.id, egg)
+              }
+            }
+          }
           v.status.triggerArmorReduction(4000, v)
         }
       })

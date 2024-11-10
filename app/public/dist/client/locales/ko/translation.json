@@ -1512,7 +1512,7 @@
     "HYPERSPACE_FURY": "수많은 팔을 이용해 [4,SP]의 연타 공격을 퍼붓는다. 각 공격은 대상의 DEF 를 1씩 낮춘다.",
     "SNIPE_SHOT": "가장 멀리 있는 상대에게 집게손가락 끝에서 물보라를 발사하여 경로상의 모든 적에게 [50,100,200,SP] 의 SPECIAL 을 입힌다.",
     "AIR_SLASH": "[25,50,100,SP] SPECIAL을 입히고 7초 동안 FLINCH를 부여한다.",
-    "EGGSPLOSION": "대상에게 폭발하는 알을 발사하여 [40,80,140,SP] SPECIAL을 입히고 인접한 모든 적에게 4초 동안 ARMOR_REDUCTION을 부여한다. 대상이 기절할 경우 [30,LK]% 확률로 벤치에 알이 놓인다.",
+    "EGGSPLOSION": "대상에게 폭발하는 알을 발사하여 [30,60,120,SP] SPECIAL을 입히고 인접한 모든 적에게 4초 동안 ARMOR_REDUCTION을 부여한다. 대상이 기절할 경우 [25,LK]% 확률로 벤치에 알이 놓인다.",
     "FLORAL_HEALING": "자신이 붙어있는 포케몬을 최대 PP만큼 HP를 회복한다. 다만, 붙어있지 않은 경우 자신의 HP를 회복한다.",
     "VINE_WHIP": "[100, SP]의 SPECIAL를 입히며 주변 적군과 자신을  3초 동안 FLINCH 가 되게 한다.",
     "BODY_SLAM": "자신의 최대 HP의 [30,SP]% 만큼 SPECIAL을 준다.",

@@ -29,6 +29,7 @@
 - Fix poison jab targeting the farthest enemy instead of the current target
 - Fix Whirlwind not scaling damage with AP
 - Fix Hyperspace Fury damage scaling with AP twice
+- Fix Eggsplosion not applying damage and egg chance to adjacent enemies. Reduce egg chance to 25% and damage to 30/60/120
 
 # Changes to Synergies
 

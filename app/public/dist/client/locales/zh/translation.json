@@ -1512,7 +1512,7 @@
     "HYPERSPACE_FURY": "使用许多手臂发动[4,SP]次攻击，每次造成15点SPECIAL并降低目标1点DEF。",
     "SNIPE_SHOT": "从指尖向最远的敌方宝可梦发射一枚水弹，对所有击中的敌方宝可梦造成[50,100,200,SP]点SPECIAL。",
     "AIR_SLASH": "对目标造成[25,50,100,SP]点SPECIAL，并使其陷入FLINCH 7秒。",
-    "EGGSPLOSION": "朝目标投掷一枚爆炸的蛋，对其造成[40,80,140,SP]点SPECIAL并使所有相邻敌方宝可梦陷入ARMOR_REDUCTION 4秒。若目标因此倒下，有30%的概率将一枚蛋加入我方备战区。",
+    "EGGSPLOSION": "朝目标投掷一枚爆炸的蛋，对其造成[30,60,120,SP]点SPECIAL并使所有相邻敌方宝可梦陷入ARMOR_REDUCTION 4秒。若目标因此倒下，有25%的概率将一枚蛋加入我方备战区。",
     "FLORAL_HEALING": "为花疗环环的持有者（若未被持有，改为为花疗环环自己）恢复HP，数值相当于目标的最大PP。",
     "VINE_WHIP": "对目标造成[100,SP]点SPECIAL，并使其和所有相邻敌方宝可梦陷入FLINCH 3秒。",
     "BODY_SLAM": "对目标造成SPECIAL，数值相当于使用者最大HP的[30,SP]%。",
