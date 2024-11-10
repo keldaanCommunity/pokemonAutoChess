@@ -10272,11 +10272,11 @@ export class ShoreUpStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const heal = [0.2, 0.25][pokemon.stars - 1] ?? 0.25
-    pokemon.handleHeal(heal * pokemon.hp, pokemon, 1, crit)
+    let healFactor = [0.2, 0.25][pokemon.stars - 1] ?? 0.25
     if (pokemon.simulation.weather === Weather.SANDSTORM) {
-      pokemon.handleHeal(0.1 * pokemon.hp, pokemon, 1, crit)
+      healFactor += 0.1
     }
+    pokemon.handleHeal(healFactor * pokemon.hp, pokemon, 1, crit)
   }
 }
 
