@@ -5499,7 +5499,6 @@ export class FellStingerStrategy extends AbilityStrategy {
       pokemon.addAbilityPower(5, pokemon, 0, false)
       pokemon.addAttack(1, pokemon, 0, false)
       pokemon.addMaxHP(10, pokemon, 0, false)
-      pokemon.handleHeal(10, pokemon, 0, false)
       pokemon.refToBoardPokemon.atk += 1
       pokemon.refToBoardPokemon.ap += 5
       pokemon.refToBoardPokemon.hp += 10
