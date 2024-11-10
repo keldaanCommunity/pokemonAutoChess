@@ -1596,7 +1596,7 @@
     "GUNK_SHOT": "Inflige [50,100,SP] SPECIAL à la cible et POISONNED pendant [2,4,SP] secondes",
     "MAGNET_BOMB": "Une bombe magnétique inflige [20,40,80,SP] SPECIAL à la cible, [10,20,40,SP] SPECIAL aux ennemis adjacents et attire les ennemis les plus distants.",
     "MUDDY_WATER": "Projette une eau boueuse sur jusqu'à 3 cibles devant, infligeant [40,80,SP] SPECIAL, WOUND et ARMOR_REDUCTION pendant 4 secondes",
-    "ANCIENT_POWER": "Lance des rochers sur la cible, infligeant [50,100,SP] SPECIAL. Augmente l'AP du lanceur de [25,SP] %",
+    "ANCIENT_POWER": "Lance des rochers sur la cible, infligeant [40,80,120,SP] SPECIAL. Augmente l'AP du lanceur de 25%.",
     "MOON_DREAM": "La cible tombe SLEEP pendant [3,6,9] secondes et les 3 alliés les plus proches de celle-ci gagnent [10,20,30,SP] SHIELD",
     "STONE_AXE": "Inflige [50,SP] TRUE. Des pierres pointues tombent autour de la cible et restent sur le terrain, infligeant 10 PHYSICAL par seconde et WOUND aux Pokémons qui marchent dessus, excepté si ROCK ou FLYING",
     "CAMERA_FLASH": "La cible est paralysée pendant [2,SP] secondes",

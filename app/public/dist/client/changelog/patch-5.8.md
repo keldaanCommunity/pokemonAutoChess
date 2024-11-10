@@ -26,13 +26,14 @@
 - Fix Eruption not applying Burn status
 - Fix Mist Ball damage amount to match description
 - Fixed Unown F and Unown S ability descriptions
-- Fix poison jab targeting the farthest enemy instead of the current target
+- Fix Poison Jab targeting the farthest enemy instead of the current target
 - Fix Whirlwind not scaling damage with AP
 - Fix Hyperspace Fury damage scaling with AP twice
 - Fix Eggsplosion not applying damage and egg chance to adjacent enemies. Reduce egg chance to 25% and damage to 30/60/120
 - Fix Crush Grip bonus damage; it was using user HP instead of target HP for computation
 - Fix Spring Tide Storm charm duration to match description
 - Fix Spark halving damage beginning only after the second target hit
+- Fix Ancient Power AP scaling and description
 
 # Changes to Synergies
 

@@ -1602,7 +1602,7 @@
     "GUNK_SHOT": "Deal [50,100,SP] SPECIAL to the target and inflict POISONNED for [2,4,SP] seconds.",
     "MAGNET_BOMB": "Launch a magnetic bomb dealing [20,40,80,SP] SPECIAL to target, [10,20,40,SP] SPECIAL to adjacent enemy Pokémon and attracting distant enemy Pokémon.",
     "MUDDY_WATER": "Spurt muddy water at up to 3 enemy Pokémon in front of the user, dealing [40,80,SP] SPECIAL and applying WOUND and ARMOR_REDUCTION for 4 seconds.",
-    "ANCIENT_POWER": "Launch rocks at the target, dealing [50,100,SP] SPECIAL. Raise the user's AP by [25,SP]%.",
+    "ANCIENT_POWER": "Launch rocks at the target, dealing [40,80,120,SP] SPECIAL. Raise the user's AP by 25%.",
     "MOON_DREAM": "Put the target to SLEEP for [3,6,9] seconds and grant [10,20,30,SP] SHIELD to the 3 allied Pokémon closest to the target.",
     "STONE_AXE": "Deal [50,SP] TRUE to the target and lay sharp stones around them. The stones stay on the battlefield, dealing 10 PHYSICAL per second and applying WOUND to non ROCK or FLYING Pokémon that walk on it.",
     "CAMERA_FLASH": "Inflict the target with PARALYSIS for [2,SP] seconds.",

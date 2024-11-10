@@ -1596,7 +1596,7 @@
     "GUNK_SHOT": "对目标造成[50,100,SP]点SPECIAL，并使其陷入POISONNED [2,4,SP]秒。",
     "MAGNET_BOMB": "发射一枚磁铁炸弹，对目标造成[20,40,80,SP]点SPECIAL，相邻的敌方宝可梦造成[10,20,40,SP]点SPECIAL，并将更远的敌方宝可梦拉过来。",
     "MUDDY_WATER": "对前方至多3个目标喷射污浊的水，对他们造成[40,80,SP]点SPECIAL，并使他们陷入WOUND和ARMOR_REDUCTION 4秒。",
-    "ANCIENT_POWER": "朝目标发射石块，造成[50,100,SP]点SPECIAL，并提升使用者[25,SP]%的AP。",
+    "ANCIENT_POWER": "朝目标发射石块，造成[40,80,120,SP]点SPECIAL，并提升使用者25%的AP。",
     "MOON_DREAM": "使目标陷入SLEEP [3,6,9]秒，并使离其最近的3个我方宝可梦获得[10,20,30,SP]点SHIELD。",
     "STONE_AXE": "造成[50,SP]点TRUE，并在目标周围设下尖锐的岩石。这些岩石会留在场上，对在其中移动的非ROCK、非FLYING宝可梦每秒造成10点PHYSICAL，并使其陷入WOUND。",
     "CAMERA_FLASH": "使目标陷入PARALYSIS [2,SP]秒。",

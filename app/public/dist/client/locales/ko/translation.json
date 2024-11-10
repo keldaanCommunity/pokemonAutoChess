@@ -1596,7 +1596,7 @@
     "GUNK_SHOT": "타겟에게 [50,100,SP] SPECIAL을 입히며 [2,4,SP]초 동안 POISONNED 상태를 부여한다.",
     "MAGNET_BOMB": "마그넷봄은 타겟에게 [20,40,80,SP] SPECIAL을 입히며, 인접한 적에게 [10,20,40,SP] SPECIAL을 입히며 먼 적을 끌어들인다.",
     "MUDDY_WATER": "앞에 있는 최대 3마리에게 진흙탕 물을 뿜어내어[40,80,SP]SPECIAL 을 입히고 4초 동안 WOUND 및 ARMOR_REDUCTION 을 부여한다.",
-    "ANCIENT_POWER": "타겟에게 바위를 발사하여 [50,100,SP]의 SPECIAL를 입힌다. 사용자의 AP를 [25,SP]%만큼 증가시킨다.",
+    "ANCIENT_POWER": "타겟에게 바위를 발사하여 [40,80,120,SP]의 SPECIAL를 입힌다. 사용자의 AP를 25%만큼 증가시킨다.",
     "MOON_DREAM": "대상을 [3,6,9]초 동안 SLEEP 상태로 만들며 대상과 가장 가까운 아군 3명에게 [10,20,30,SP]의 SHIELD 를 부여한다.",
     "STONE_AXE": "[50,SP] TRUE를 입힌다. 대상 주변에 날카로운 돌들을 놓으며 이 돌들은 필드에 남아 초당 10의 PHYSICAL 을 입힌다.다만 ROCK 또는 FLYING은 데미지를 입지 않는다.",
     "CAMERA_FLASH": "대상을 [2,SP] 초간 PARALYSIS 상태로 만든다.",

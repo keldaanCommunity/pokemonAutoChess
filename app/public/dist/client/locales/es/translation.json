@@ -1546,7 +1546,7 @@
     "GUNK_SHOT": "Inflige [50,100,SP] SPECIAL al objetivo, infligiendo POISONNED durante [2,4,SP] segundos",
     "MAGNET_BOMB": "Una bomba magnética que inflige [20,40,80,SP] SPECIAL al objetivo, [10,20,40,SP] SPECIAL a enemigos adyacentes y atrae a enemigos distantes.",
     "MUDDY_WATER": "Lanza agua fangosa hacia 3 objetivos frente a él, causando [40,80,SP] SPECIAL, WOUND y ARMOR_REDUCTION durante 4 segundos.",
-    "ANCIENT_POWER": "Lanza piedras al objetivo, causando [50,100,SP] SPECIAL. Aumenta el AP del usuario en [25,SP]",
+    "ANCIENT_POWER": "Lanza piedras al objetivo, causando [40,80,120,SP] SPECIAL. Aumenta el AP del usuario en 25.",
     "MOON_DREAM": "El objetivo cae SLEEP durante [3,6,9] segundos y otorga [10,20,30,SP] SHIELD a los 3 aliados más cercanos a él.",
     "STONE_AXE": "Causa [50,SP] TRUE. Coloca piedras afiladas alrededor del objetivo. Las piedras permanecen en el campo causando 10 PHYSICAL por segundo y WOUND a los oponentes que caminan sobre él, si no son ROCK o FLYING",
     "CAMERA_FLASH": "El objetivo es PARALYSIS por [2,SP] segundos",

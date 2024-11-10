@@ -1596,7 +1596,7 @@
     "GUNK_SHOT": "Infliggi [50,100,SP] SPECIAL e causa POISONNED per [2,4,SP] secondi.",
     "MAGNET_BOMB": "Lancia una bomba magnetica che infligge [20,40,80,SP] SPECIAL al bersaglio e [10,20,40,SP] SPECIAL ai nemici adiacenti e attrae i nemici più distanti.",
     "MUDDY_WATER": "Spruzza acqua fangosa ad un massimo di 3 bersagli di fronte all'utilizzatore, infliggendo [40,80,SP] SPECIAL e causando WOUND e ARMOR_REDUCTION per 4 secondi.",
-    "ANCIENT_POWER": "Lancia rocce al bersaglio, infliggendo [50,100,SP] SPECIAL. Aumenta i AP dell'utilizzatore del [25,SP]%.",
+    "ANCIENT_POWER": "Lancia rocce al bersaglio, infliggendo [40,80,120,SP] SPECIAL. Aumenta i AP dell'utilizzatore del 25%.",
     "MOON_DREAM": "Il bersaglio subisce lo status SLEEP per [3,6,9] secondi ed ai 3 alleati più vicini al bersaglio gli viene dato [10,20,30,SP] di SHIELD.",
     "STONE_AXE": "Infliggi [50,SP] TRUE. Spargi rocce appuntite attorno al bersaglio. Le rocce rimangono sul terreno, infliggendo 10 PHYSICAL al secondo e causando WOUND a tutti i Pokèmon che ci camminano sopra, tranne ai tipi ROCK e FLYING.",
     "CAMERA_FLASH": "Causa PARALYSIS per [2,SP] secondi.",

@@ -9335,9 +9335,9 @@ export class AncientPowerStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [40, 80][pokemon.stars - 1] ?? 80
+    const damage = [40, 80, 120][pokemon.stars - 1] ?? 120
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    pokemon.addAbilityPower(25, pokemon, 1, crit)
+    pokemon.addAbilityPower(25, pokemon, 0, false)
   }
 }
 
