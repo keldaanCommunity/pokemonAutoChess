@@ -4104,7 +4104,6 @@ export class ThiefStrategy extends AbilityStrategy {
       damage = 60
     }
 
-    const l = target.items.size
     target.items.forEach((item) => {
       if (pokemon.items.size < 3) {
         pokemon.items.add(item)
