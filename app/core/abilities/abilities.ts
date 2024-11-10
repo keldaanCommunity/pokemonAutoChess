@@ -8830,6 +8830,7 @@ export class SparkStrategy extends AbilityStrategy {
           positionY: previousTarget.positionY,
           delay: n
         })
+        damage /= 2
         bounceTarget.handleSpecialDamage(
           damage,
           board,
@@ -8839,7 +8840,6 @@ export class SparkStrategy extends AbilityStrategy {
           true
         )
         previousTarget = bounceTarget
-        damage /= 2
         n++
       } else {
         n = 999

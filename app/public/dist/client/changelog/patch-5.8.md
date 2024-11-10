@@ -32,6 +32,7 @@
 - Fix Eggsplosion not applying damage and egg chance to adjacent enemies. Reduce egg chance to 25% and damage to 30/60/120
 - Fix Crush Grip bonus damage; it was using user HP instead of target HP for computation
 - Fix Spring Tide Storm charm duration to match description
+- Fix Spark halving damage beginning only after the second target hit
 
 # Changes to Synergies
 
