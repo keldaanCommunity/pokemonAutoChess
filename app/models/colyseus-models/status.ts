@@ -795,12 +795,19 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerConfusion(duration: number, pkm: PokemonEntity) {
+  triggerConfusion(
+    duration: number,
+    pkm: PokemonEntity,
+    origin: PokemonEntity,
+    apBoost = false
+  ) {
     if (
       !this.confusion &&
       !this.runeProtect &&
       !pkm.effects.has(Effect.IMMUNITY_CONFUSION)
     ) {
+      const boost = apBoost && origin ? (duration * origin.ap) / 100 : 0
+      duration = duration + boost
       if (pkm.simulation.weather === Weather.SANDSTORM) {
         duration *= 1.3
       }

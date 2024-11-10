@@ -476,7 +476,12 @@ export class ConfusingMindStrategy extends AbilityStrategy {
     for (let i = 0; i < count; i++) {
       const targetConfused = rank[i]
       if (targetConfused) {
-        targetConfused.status.triggerConfusion(duration, targetConfused)
+        targetConfused.status.triggerConfusion(
+          duration,
+          targetConfused,
+          pokemon,
+          true
+        )
       }
     }
   }
