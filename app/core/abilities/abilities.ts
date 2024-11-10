@@ -10394,13 +10394,13 @@ export class TrickOrTreatStrategy extends AbilityStrategy {
       target.hp = Math.floor(target.hp * lifeReduction)
       target.status.triggerFlinch(3000, target, pokemon)
     } else if (pokemon.ap <= 100) {
-      // 51-100 AP: transforms the unit in magikarp during X seconds, replacing its ability with splash
+      // 51-100 AP: transforms the unit into magikarp for X seconds, replacing its ability with splash
       const originalAbility = target.skill
       const originalAttack = target.atk
       const originalDefense = target.def
       const originalSpecialDefense = target.speDef
       const originalIndex = target.index
-      const duration = Math.round(3000 * (1 - pokemon.ap / 100))
+      const duration = Math.round(3000 * (1 + pokemon.ap / 100))
       target.index = PkmIndex[Pkm.MAGIKARP]
       target.skill = Ability.SPLASH
       target.atk = 1
