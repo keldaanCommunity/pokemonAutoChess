@@ -1042,7 +1042,7 @@ export class FlameChargeStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit, true)
 
-    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     if (farthestCoordinate) {

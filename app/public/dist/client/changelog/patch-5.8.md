@@ -20,6 +20,7 @@
 - Fix Lunar Blessing using caster max HP instead of target max HP
 - Change Dragon Breath: fix targeting and apply special damage instead of true damage ; changed animation
 - Fix Diamong Storm AP scaling being applied twice
+- Fix Flame Charge damage amount to match description
 
 # Changes to Synergies
 
