@@ -1116,15 +1116,8 @@ export class PsychUpStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 10
-    let duration = 2000
-    if (pokemon.stars == 2) {
-      damage = 20
-      duration = 4000
-    } else if (pokemon.stars == 3) {
-      damage = 80
-      duration = 8000
-    }
+    const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
+    const duration = [2000, 4000, 8000][pokemon.stars - 1] ?? 8000
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     const cells = board.getAdjacentCells(
       target.positionX,
