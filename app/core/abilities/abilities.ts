@@ -9612,10 +9612,11 @@ export class InfestationStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const numberOfAllies = board.cells.filter(
-      (entity) => entity && entity.team === pokemon.team
+    const numberOfBugAllies = board.cells.filter(
+      (entity) =>
+        entity && entity.team === pokemon.team && entity.types.has(Synergy.BUG)
     ).length
-    const damage = numberOfAllies * 10
+    const damage = numberOfBugAllies * 10
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     pokemon.simulation.room.broadcast(Transfer.ABILITY, {
       id: pokemon.simulation.id,
@@ -9625,12 +9626,10 @@ export class InfestationStrategy extends AbilityStrategy {
     })
 
     if (pokemon.player && pokemon.count.ult === 1) {
-      const bugsOnBenchByPower = Array.from(pokemon.player?.board)
-        .filter(([id, p]) => p && p.types.has(Synergy.BUG) && p.positionY === 0)
-        .sort((a, b) => b[1].stars - a[1].stars)
-      const mostPowerfulBug = bugsOnBenchByPower[0]
-        ? bugsOnBenchByPower[0][1]
-        : null
+      const bugsOnBench = values(pokemon.player?.board).filter(
+        (p) => p && p.types.has(Synergy.BUG) && isOnBench(p)
+      )
+      const mostPowerfulBug = getStrongestUnit(bugsOnBench)
       if (mostPowerfulBug) {
         pokemon.simulation.room.broadcast(Transfer.ABILITY, {
           id: pokemon.simulation.id,

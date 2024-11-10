@@ -10,7 +10,19 @@
 
 # Changes to Pokemon & Abilities
 
-- Thanks to Exeatop, many bugs have been fixed in the abilities and abilities descriptions:
+- Change Dragon Breath: fix targeting and apply special damage instead of true damage ; new animation
+
+# Changes to Synergies
+
+- 
+
+# Changes to Items
+
+- 
+
+# Bugfix
+
+Thanks to Exeatop, many bugs have been fixed in the abilities and abilities descriptions:
 - Fix Steel Wing damage not applying defense bonus damage
 - Fix Soft Boiled shield amount to match description
 - Fix Nightmare damage amount to match description
@@ -18,7 +30,6 @@
 - Fix Blizzard applying double damage on all units not just frozen ones
 - Fix Guillotine restoring to 100% PP on KO instead of 50%
 - Fix Lunar Blessing using caster max HP instead of target max HP
-- Change Dragon Breath: fix targeting and apply special damage instead of true damage ; changed animation
 - Fix Diamong Storm AP scaling being applied twice
 - Fix Flame Charge damage amount to match description
 - Fix Spectral Thief damage amount to match description
@@ -36,17 +47,7 @@
 - Fix Ancient Power AP scaling and description
 - Fix Drain Punch healing 4x the amount of damage dealt instead of 2x
 - Fix Fell Stringer healing twice 10 HP instead of once
-
-# Changes to Synergies
-
-- 
-
-# Changes to Items
-
-- 
-
-# Bugfix
-
+- Fix Infestation not checking bug type when computing damage and not sending benched bug with most items in priority
 
 # Misc
 
