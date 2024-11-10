@@ -1591,7 +1591,7 @@
     "BOUNCE": "向最远的目标弹跳[1,2,3,SP]次，每次对所有相邻敌方宝可梦造成[10,SP]点SPECIAL。",
     "BLOOD_MOON": "从赤红如血的满月发射出全部的气势，对一条直线上的所有敌方宝可梦造成SPECIAL，数值相当于[200,SP]%的ATK。所有被击中的目标还会陷入WOUND 3秒。",
     "TEA_TIME": "为所有我方宝可梦恢复[20,40,80,SP]点HP。任何持有树果的宝可梦立即食用之。",
-    "SPIKES": "对前方3格半径内的区域投掷至多[6, SP]枚金属菱，对击中的目标造成[25,50,SP]点SPECIAL。菱刺会留在地上，对走到此处的非FLYING宝可梦每秒造成10点TRUE，并使其陷入ARMOR_REDUCTION。",
+    "SPIKES": "对前方3格半径内的区域投掷至多[6, SP]枚金属菱，对击中的目标造成[25,50,100,SP]点SPECIAL。菱刺会留在地上，对走到此处的非FLYING宝可梦每秒造成10点TRUE，并使其陷入ARMOR_REDUCTION。",
     "SHADOW_PUNCH": "飞向HP最低的目标。下一次攻击额外造成[30,60,120,SP]点SPECIAL。",
     "GUNK_SHOT": "对目标造成[50,100,SP]点SPECIAL，并使其陷入POISONNED [2,4,SP]秒。",
     "MAGNET_BOMB": "发射一枚磁铁炸弹，对目标造成[20,40,80,SP]点SPECIAL，相邻的敌方宝可梦造成[10,20,40,SP]点SPECIAL，并将更远的敌方宝可梦拉过来。",

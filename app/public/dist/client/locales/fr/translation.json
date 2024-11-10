@@ -1591,7 +1591,7 @@
     "BOUNCE": "Rebondit [1,2,3,SP] fois jusqu'à la cible la plus lointaine, infligeant [10,SP] SPECIAL à tous les adversaires adjacents à chaque rebond",
     "BLOOD_MOON": "Concentre toute son énergie dans la lune rouge sang sur son front, puis la projette en un rayon qui inflige à tous les ennemis touchés [200,SP]% de son ATK en SPECIAL et WOUND pendant 3 secondes",
     "TEA_TIME": "Soigne les alliés de [20, 40, 80, SP] HP. Tous les Pokémons tenant une Baie la consomment immédiatement.",
-    "SPIKES": "Projette jusqu'à [6, SP] picots dans un rayon de 3 cases devant, infligeant [25,50, SP] SPECIAL. Les picots restent sur le terrain, infligeant 10 TRUE par seconde et ARMOR_REDUCTION aux Pokémons qui marchent dessus, excepté si FLYING",
+    "SPIKES": "Projette jusqu'à [6, SP] picots dans un rayon de 3 cases devant, infligeant [25,50,100,SP] SPECIAL. Les picots restent sur le terrain, infligeant 10 TRUE par seconde et ARMOR_REDUCTION aux Pokémons qui marchent dessus, excepté si FLYING",
     "SHADOW_PUNCH": "Vole jusqu'à la cible aux plus bas HP. La prochaine attaque inflige [30,60,120,SP] SPECIAL additionnels.",
     "GUNK_SHOT": "Inflige [50,100,SP] SPECIAL à la cible et POISONNED pendant [2,4,SP] secondes",
     "MAGNET_BOMB": "Une bombe magnétique inflige [20,40,80,SP] SPECIAL à la cible, [10,20,40,SP] SPECIAL aux ennemis adjacents et attire les ennemis les plus distants.",

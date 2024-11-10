@@ -1597,7 +1597,7 @@
     "BOUNCE": "Bounce [1,2,3,SP] times to the farthest enemy Pokémon, dealing [10,SP] SPECIAL to all adjacent enemy Pokémon each time.",
     "BLOOD_MOON": "Ursaluna concentrates all their energy in the blood-red moon on their forehead and projects it in a line, dealing [200,SP]% of ATK as SPECIAL to all enemy Pokémon in the path and applying WOUND for 3 seconds.",
     "TEA_TIME": "Heal all allied Pokémon for [20,40,80,SP] HP. All Pokémon holding a berry eat it immediately.",
-    "SPIKES": "Throw up to [6, SP] metal spikes within a 3 tile sector in front of the user, dealing [25,50,SP] SPECIAL to any enemy Pokémon in the area. The spikes remain on the battlefield, dealing 10 TRUE per second and and inflicting ARMOR_REDUCTION onto non FLYING Pokémon that walk on it.",
+    "SPIKES": "Throw up to [6, SP] metal spikes within a 3 tile sector in front of the user, dealing [25,50,100,SP] SPECIAL to any enemy Pokémon in the area. The spikes remain on the battlefield, dealing 10 TRUE per second and and inflicting ARMOR_REDUCTION onto non FLYING Pokémon that walk on it.",
     "SHADOW_PUNCH": "Fly towards the target with the lowest HP. The next attack deals additional [30,60,120,SP] SPECIAL.",
     "GUNK_SHOT": "Deal [50,100,SP] SPECIAL to the target and inflict POISONNED for [2,4,SP] seconds.",
     "MAGNET_BOMB": "Launch a magnetic bomb dealing [20,40,80,SP] SPECIAL to target, [10,20,40,SP] SPECIAL to adjacent enemy Pokémon and attracting distant enemy Pokémon.",

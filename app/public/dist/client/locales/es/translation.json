@@ -1541,7 +1541,7 @@
     "BOUNCE": "Rebota [1,2,3,SP] veces hacia el objetivo más lejano, causando [10,SP] de SPECIAL a todos los enemigos adyacentes por cada rebote",
     "BLOOD_MOON": "Concentra toda su energía en la luna roja sangrienta en su frente y la proyecta en una línea, causando [200,SP]% de ATK como SPECIAL y dejando WOUND por 3 segundos a todos los enemigos golpeados",
     "TEA_TIME": "Cura a los aliados [20,40,80,SP] HP. Todos los Pokémon que tengan una baya se la comen inmediatamente.",
-    "SPIKES": "Lanza hasta [6, SP] púas de metal dentro de un radio de 3 celdas por delante, causando [25,50,SP] de SPECIAL. Los púas permanecen en el campo, causando 10 de TRUE por segundo y ARMOR_REDUCTION a los oponentes que caminan sobre ellos, si no son FLYING",
+    "SPIKES": "Lanza hasta [6, SP] púas de metal dentro de un radio de 3 celdas por delante, causando [25,50,100,SP] de SPECIAL. Los púas permanecen en el campo, causando 10 de TRUE por segundo y ARMOR_REDUCTION a los oponentes que caminan sobre ellos, si no son FLYING",
     "SHADOW_PUNCH": "Vuela hacia el objetivo con el HP más bajo. El siguiente ataque inflige [30,60,120,SP] SPECIAL adicional.",
     "GUNK_SHOT": "Inflige [50,100,SP] SPECIAL al objetivo, infligiendo POISONNED durante [2,4,SP] segundos",
     "MAGNET_BOMB": "Una bomba magnética que inflige [20,40,80,SP] SPECIAL al objetivo, [10,20,40,SP] SPECIAL a enemigos adyacentes y atrae a enemigos distantes.",

@@ -1564,7 +1564,7 @@
     "BOUNCE": "Springt [1,2,3,SP] Mal zum am weitesten entfernten Ziel und fügt allen benachbarten Feinden bei jedem Sprung [10,SP] SPECIAL zu",
     "BLOOD_MOON": "Konzentriert all seine Energie in den blutroten Mond auf seiner Stirn und projiziert sie in einer Linie, die [200,SP]% der ATK als SPECIAL und WOUND für 3 Sekunden allen getroffenen Feinden zufügt",
     "TEA_TIME": "Heilt Verbündete [20,40,80,SP] HP. Alle Pokémons, die eine Beere halten, fressen sie sofort.",
-    "SPIKES": "Wirft bis zu [6, SP] Metallstacheln in einem 3-Zellen-Radius nach vorne und verursacht [25,50,SP] SPECIAL. Die Stacheln bleiben auf dem Feld und fügen Pokémons, die darauf laufen, 10 WAHR pro Sekunde und ARMOR_REDUCTION zu, sofern sie nicht FLYING.",
+    "SPIKES": "Wirft bis zu [6, SP] Metallstacheln in einem 3-Zellen-Radius nach vorne und verursacht [25,50,100,SP] SPECIAL. Die Stacheln bleiben auf dem Feld und fügen Pokémons, die darauf laufen, 10 WAHR pro Sekunde und ARMOR_REDUCTION zu, sofern sie nicht FLYING.",
     "SHADOW_PUNCH": "Fliege auf das Ziel mit den niedrigsten HP zu. Der nächste Angriff verursacht zusätzliche [30,60,120,SP] SPECIAL.",
     "GUNK_SHOT": "Füge dem Ziel [50,100,SP] SPECIAL zu und verursache für [2,4,SP] Sekunden POISONNED",
     "MAGNET_BOMB": "Eine magnetische Bombe, die [20,40,80,SP] SPECIAL auf das Ziel, [10,20,40,SP] SPECIAL auf benachbarte Feinde und die Anziehung entfernter Feinde verursacht",

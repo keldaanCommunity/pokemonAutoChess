@@ -1591,7 +1591,7 @@
     "BOUNCE": "Rimbalza [1,2,3,SP] volte verso il bersaglio più lontano, infliggendo [10,SP] SPECIAL a tutti i nemici adiacenti ad ogni rimbalzo.",
     "BLOOD_MOON": "Concentra tutta la sua energia nella luna cremisi sulla sua fronte e la proietta in una linea retta, infliggendo il [200,SP]% dell'ATK come SPECIAL e causa WOUND a tutti i nemici colpiti per 3 secondi.",
     "TEA_TIME": "Cura gli alleati di [20,40,80,SP] HP. Tutti i Pokèmon che hanno equipaggiata una bacca la mangiano immediatamente.",
-    "SPIKES": "Lancia fino a [6, SP] punte metalliche dentro in raggio di 3 celle di fronte all'utilizzatore, infliggendo [25,50,SP] SPECIAL. Le punti rimangono sul terreno, infliggendo 10 TRUE al secondo e causando ARMOR_REDUCTION a tutti i Pokèmon che ci camminano sopra, tranne se sono del tipo FLYING.",
+    "SPIKES": "Lancia fino a [6, SP] punte metalliche dentro in raggio di 3 celle di fronte all'utilizzatore, infliggendo [25,50,100,SP] SPECIAL. Le punti rimangono sul terreno, infliggendo 10 TRUE al secondo e causando ARMOR_REDUCTION a tutti i Pokèmon che ci camminano sopra, tranne se sono del tipo FLYING.",
     "SHADOW_PUNCH": "Tuffati verso il nemico con meno HP. Il prossimo attacco infligge [30,60,120,SP] SPECIAL aggiuntivi.",
     "GUNK_SHOT": "Infliggi [50,100,SP] SPECIAL e causa POISONNED per [2,4,SP] secondi.",
     "MAGNET_BOMB": "Lancia una bomba magnetica che infligge [20,40,80,SP] SPECIAL al bersaglio e [10,20,40,SP] SPECIAL ai nemici adiacenti e attrae i nemici più distanti.",
