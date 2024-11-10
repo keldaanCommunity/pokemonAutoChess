@@ -1459,7 +1459,7 @@
     "HIDDEN_POWER_P": "随机召唤5只STAR的BUG宝可梦。",
     "HIDDEN_POWER_Q": "立刻结束当前战斗，本场视为平局。",
     "HIDDEN_POWER_R": "获得6次免费的商店刷新次数。",
-    "HIDDEN_POWER_S": "使所有敌方宝可梦陷入FREEZE 4秒。",
+    "HIDDEN_POWER_S": "使所有敌方宝可梦陷入FREEZE 2秒。",
     "HIDDEN_POWER_T": "随机获得3枚树果。",
     "HIDDEN_POWER_U": "召唤一只携带AQUA_EGG且PP已满的由克希。",
     "HIDDEN_POWER_V": "对所有敌方宝可梦各释放一次$t(ability.THUNDER)。",

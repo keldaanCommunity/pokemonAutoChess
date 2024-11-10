@@ -1459,7 +1459,7 @@
     "HIDDEN_POWER_P": "Invoque 5 pokémons BUG STAR aléatoires",
     "HIDDEN_POWER_Q": "Termine immédiatement le combat par un match nul",
     "HIDDEN_POWER_R": "Gagnez 6 relances du magasin gratuites",
-    "HIDDEN_POWER_S": "FREEZE l'équipe adverse pendant 4 secondes",
+    "HIDDEN_POWER_S": "FREEZE l'équipe adverse pendant 2 secondes",
     "HIDDEN_POWER_T": "Gagnez 3 baies aléatoires",
     "HIDDEN_POWER_U": "Invoque $t(pkm.UXIE) avec un AQUA_EGG et PP au max",
     "HIDDEN_POWER_V": "Lance $t(ability.THUNDER) sur toute l'équipe ennemie",

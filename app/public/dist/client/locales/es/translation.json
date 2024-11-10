@@ -1409,7 +1409,7 @@
     "HIDDEN_POWER_P": "Invoca 5 Pokémon BUG STAR aleatorios",
     "HIDDEN_POWER_Q": "Inmediatamente termina la pelea con un empate",
     "HIDDEN_POWER_R": "Obtén 6 rerolls de tienda gratis",
-    "HIDDEN_POWER_S": "Deja FREEZE al equipo oponente por 4 segundos",
+    "HIDDEN_POWER_S": "Deja FREEZE al equipo oponente por 2 segundos",
     "HIDDEN_POWER_T": "Consigue 3 bayas al azar",
     "HIDDEN_POWER_U": "Invoca Uxie con AQUA_EGG y el máximo de PP",
     "HIDDEN_POWER_V": "Lanza $t(ability.THUNDER) en todo el equipo enemigo",

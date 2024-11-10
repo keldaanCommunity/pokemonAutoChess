@@ -1465,7 +1465,7 @@
     "HIDDEN_POWER_P": "Summon 5 random STAR BUG Pokémon.",
     "HIDDEN_POWER_Q": "Immediately end the fight with a draw.",
     "HIDDEN_POWER_R": "The allied player gets 6 free shop rerolls.",
-    "HIDDEN_POWER_S": "FREEZE all enemy Pokémon for 4 seconds.",
+    "HIDDEN_POWER_S": "FREEZE all enemy Pokémon for 2 seconds.",
     "HIDDEN_POWER_T": "The allied player gets 3 random berries.",
     "HIDDEN_POWER_U": "Summon Uxie with AQUA_EGG and max PP.",
     "HIDDEN_POWER_V": "Cast $t(ability.THUNDER) on all enemy Pokémon.",

@@ -25,6 +25,7 @@
 - Fix Growth attack buff amount to match description
 - Fix Eruption not applying Burn status
 - Fix Mist Ball damage amount to match description
+- Fixed Unown F and Unown S ability descriptions
 
 # Changes to Synergies
 

@@ -1191,7 +1191,7 @@
     "HIDDEN_POWER_P": "ランダムな BUG STAR ポケモンを 5 匹出現させる",
     "HIDDEN_POWER_Q": "引き分けですぐに試合を終了する",
     "HIDDEN_POWER_R": "ショップの再ロールを6回無料でゲット",
-    "HIDDEN_POWER_S": "相手チームを4秒間フリーズさせる",
+    "HIDDEN_POWER_S": "相手チームを2秒間フリーズさせる",
     "HIDDEN_POWER_T": "ランダムでベリーを3個入手",
     "HIDDEN_POWER_U": "アクアエッグと最大MANAでユクシーを生成する",
     "HIDDEN_POWER_V": "敵チーム全員に $t(ability.THUNDER) をキャストする",
