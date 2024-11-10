@@ -14,7 +14,7 @@
 
 # Changes to Synergies
 
-- Fix Psy 5 Light Screen Unown shop found every 5 shops instead of 3
+- Fix Psy 4 Light Screen Unown shop found every 5 shops instead of 3
 
 # Changes to Items
 
