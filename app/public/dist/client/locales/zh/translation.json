@@ -2467,9 +2467,9 @@
   },
   "weather_description": {
     "NEUTRAL": "一般的天气，没有额外效果。",
-    "SUN": "+30% BURN伤害，\n-30% FREEZE持续时间。",
-    "WINDY": "+20% 移动速度，\n+10% ATK_SPEED（仅FLYING宝可梦）",
-    "RAIN": "每秒恢复3点PP，\n-30% BURN或POISONNED伤害。",
+    "SUN": "+30% BURN伤害\n-30% FREEZE持续时间",
+    "WINDY": "+20% 移动速度\n+10% ATK_SPEED（仅FLYING宝可梦）",
+    "RAIN": "每秒恢复3点PP\n-30% BURN或POISONNED伤害",
     "NIGHT": "+10% CRIT_CHANCE\n+30% SLEEP持续时间",
     "STORM": "闪电随机轰击场地，对击中的非ELECTRIC宝可梦造成100点SPECIAL。\n+30% PARALYSIS持续时间",
     "MISTY": "+20% 造成的SPECIAL\n+30% CHARM持续时间",
