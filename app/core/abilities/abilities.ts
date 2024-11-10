@@ -5543,6 +5543,7 @@ export class EruptionStrategy extends AbilityStrategy {
               pokemon,
               crit
             )
+            value.status.triggerBurn(5000, value, pokemon)
           }
           pokemon.simulation.room.broadcast(Transfer.ABILITY, {
             id: pokemon.simulation.id,

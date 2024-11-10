@@ -23,6 +23,7 @@
 - Fix Flame Charge damage amount to match description
 - Fix Spectral Thief damage amount to match description
 - Fix Growth attack buff amount to match description
+- Fix Eruption not applying Burn status
 
 # Changes to Synergies
 
