@@ -1533,7 +1533,7 @@
     "GOLD_RUSH": "对目标造成SPECIAL，数值相当于[20,SP]加你当前的GOLD持有量，然后获得2 GOLD。",
     "MAKE_IT_RAIN": "对目标造成SPECIAL，数值相当于[100,SP]加你当前的GOLD持有量。",
     "CRUSH_GRIP": "用骇人的力量捏碎目标，对其造成[20,SP]至[200,SP]点PHYSICAL。目标剩余的HP越多，伤害越高。",
-    "AURASPHERE": "向一条直线发射波导能量，对击中的所有敌方宝可梦造成[25,50,SP]点SPECIAL，并使他们陷入SILENCE 3秒。",
+    "AURASPHERE": "向一条直线发射波导能量，对击中的所有敌方宝可梦造成[25,50,100,SP]点SPECIAL，并使他们陷入SILENCE 3秒。",
     "SKETCH": "战斗开始时，复制使用者左侧的我方宝可梦的招式，最大PP和STAR。",
     "OVERDRIVE": "奏响电吉他，释放出发出巨响的剧烈震动攻击3格半径内的目标，对他们造成SPECIAL，数值相当于使用者[120,SP]%的ATK。每格距离使伤害衰减20%。",
     "LOVELY_KISS": "用恐怖的脸强吻目标，使其陷入SLEEP [2,4,6,SP]秒。若其已经处于SLEEP，改为造成[50,100,150,SP]点SPECIAL。",

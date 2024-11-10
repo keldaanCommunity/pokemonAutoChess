@@ -1533,7 +1533,7 @@
     "GOLD_RUSH": "Infliggi [20,SP] più l'ammontare di GOLD come SPECIAL poi guadagni 2 GOLD.",
     "MAKE_IT_RAIN": "Infliggi [100,SP] più l'ammontare di GOLD come SPECIAL.",
     "CRUSH_GRIP": "Il bersaglio viene schiacciato con grande forza. Più HP gli rimangono, maggiore è il danno: tra [20,SP] e [200,SP] PHYSICAL.",
-    "AURASPHERE": "Emana un'aura e proietta energia in una linea, infliggendo [25,50,SP] SPECIAL e causando SILENCE ad ogni Pokèmon nemico colpito per 3 secondi.",
+    "AURASPHERE": "Emana un'aura e proietta energia in una linea, infliggendo [25,50,100,SP] SPECIAL e causando SILENCE ad ogni Pokèmon nemico colpito per 3 secondi.",
     "SKETCH": "Copia l'abilità, i PP massimi e STAR dell'alleato alla sinistra dell'utilizzatore all'inizio del combattimento.",
     "OVERDRIVE": "Infliggi [120,SP]% dell'ATK come SPECIAL dentro un raggio di 3 celle, facendosi vibrare come una chitarra elettrica, causando un forte eco. Il danno si riduce a seconda di quanto si è più lontani dal raggio d'azione, il 20% per cella.",
     "LOVELY_KISS": "Bacia il nemico con un espressione spaventosa. Causa SLEEP al nemico per [2,4,6,SP] secondi. Se il bersaglio è già SLEEP, infliggigli invece [50,100,150,SP] SPECIAL.",

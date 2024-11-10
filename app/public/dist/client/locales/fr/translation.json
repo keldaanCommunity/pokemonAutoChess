@@ -1533,7 +1533,7 @@
     "GOLD_RUSH": "Inflige [20,SP] + votre quantité de GOLD en banque en SPECIAL, puis gagne 2 GOLD",
     "MAKE_IT_RAIN": "Inflige [100,SP] + votre quantité de GOLD en banque en SPECIAL",
     "CRUSH_GRIP": "La cible est écrasée avec une grande force. Plus elle a de HP restants, plus les dégâts sont élevés, entre [20,SP] et [200,SP] PHYSICAL.",
-    "AURASPHERE": "Dégage une aura et projette de l'énergie en ligne droite, infligeant [25,50,SP] SPECIAL et SILENCE pendant 3 secondes aux adversaires touchés",
+    "AURASPHERE": "Dégage une aura et projette de l'énergie en ligne droite, infligeant [25,50,100,SP] SPECIAL et SILENCE pendant 3 secondes aux adversaires touchés",
     "SKETCH": "Copie la capacité, les STAR et les PP max de l'allié à sa gauche au début du combat",
     "OVERDRIVE": "Inflige [120,SP]% de l'ATK en SPECIAL dans un cercle de 3 cases de rayon en faisant vibrer une guitare électrique, ce qui cause une forte vibration. Les dégâts sont réduits avec la distance, de 20% par case.",
     "LOVELY_KISS": "Le lanceur fait un bisou à l'ennemi en prenant une mine effrayante, ce qui le rend SLEEP pendant [2,4,6,SP] secondes. S'il est déjà endormi, inflige [50,100,150,SP] SPECIAL.",

@@ -1370,7 +1370,7 @@
     "TEETER_DANCE": "Ganhe [20,SP]% ATK_SPEED. Todos os outros Pokémon ficam com CONFUSÃO por 3 segundos, tanto aliados quanto inimigos.",
     "CLOSE_COMBAT": "Causa [130,SP] ESPECIAL e reduz a DEF e SPE_DEF do lançador em 1",
     "AQUA_RING": "Mergulha no meio da equipe aliada, criando um anel aquático que limpa os status negativos e cura [20,30,50,SP] HP",
-    "AURASPHERE": "Exala uma aura e projecta energia numa linha, causando [25,50,SP] de SPECIAL e SILENCE a cada oponente atingido durante 3 segundos"
+    "AURASPHERE": "Exala uma aura e projecta energia numa linha, causando [25,50,100,SP] de SPECIAL e SILENCE a cada oponente atingido durante 3 segundos"
   },
   "effect": {
     "INGRAIN": "Inerente",

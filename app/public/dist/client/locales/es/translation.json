@@ -1483,7 +1483,7 @@
     "GOLD_RUSH": "Inflige [20,SP] + tu cantidad de GOLD como SPECIAL, luego gana 2 GOLD",
     "MAKE_IT_RAIN": "Inflige [100,SP] + tu cantidad de GOLD como SPECIAL",
     "CRUSH_GRIP": "El objetivo es aplastado con gran fuerza. Cuanto más HP le quede al objetivo, mayor será el daño: entre [20,SP] y [200,SP] de PHYSICAL.",
-    "AURASPHERE": "Exuda un aura y proyecta energía en una línea, infligiendo [25,50,SP] de SPECIAL y dejando SILENCE a cada enemigo golpeado por 3 segundos.",
+    "AURASPHERE": "Exuda un aura y proyecta energía en una línea, infligiendo [25,50,100,SP] de SPECIAL y dejando SILENCE a cada enemigo golpeado por 3 segundos.",
     "SKETCH": "Copia la habilidad, los PP máximos y STAR del aliado a su izquierda al comienzo de la pelea.",
     "OVERDRIVE": "Toca una guitarra eléctrica que inflige [120,SP]% de ATK como SPECIAL dentro de un radio de 3 celdas, provocando un gran eco y una fuerte vibración. El daño se reduce con la distancia, un 20% por celda.",
     "LOVELY_KISS": "Besa al enemigo con una expresión aterradora. Deja al enemigo SLEEP por [2,4,SP] segundos. Si ya está dormido, inflige [50,100,150,SP] de SPECIAL en su lugar.",

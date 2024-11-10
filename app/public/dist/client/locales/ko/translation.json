@@ -1533,7 +1533,7 @@
     "GOLD_RUSH": "[20,SP] + GOLD 보유량 만큼 SPECIAL을 입히며 능력을 사용 후 2 GOLD를 획득한다.",
     "MAKE_IT_RAIN": " [100, SP] + GOLD 보유량 만큼을 SPECIAL을 입힌다.",
     "CRUSH_GRIP": "대상을 강력한 힘으로 짓누른다. 대상의 HP가 많을수록 데미지가 증가한다: [20,SP] ~ [200,SP]의 PHYSICAL.",
-    "AURASPHERE": "오라를 발산하고 직선상으로 에너지를 투사하여 적중한 모든 적에게 [25,50,SP]의 SPECIAL 을 입히고 3초 동안 SILENCE 를 부여한다.",
+    "AURASPHERE": "오라를 발산하고 직선상으로 에너지를 투사하여 적중한 모든 적에게 [25,50,100,SP]의 SPECIAL 을 입히고 3초 동안 SILENCE 를 부여한다.",
     "SKETCH": "전투 시작 시 왼쪽에 있는 아군의 능력, 최대 PP, STAR을 복사한다.",
     "OVERDRIVE": "전기 기타를 쳐서 큰 에코와 강한 진동을 발생시켜 3셀 반경 적에게 ATK의 [120,SP]%만큼의 SPECIAL을 입힌다. 거리에 따라 피해가 감소하며 셀당 20%씩 감소한다.",
     "LOVELY_KISS": "적에게 무서운 표정으로 키스를 하여 적을 [2,4,SP]초 동안 SLEEP 로 만든다.",

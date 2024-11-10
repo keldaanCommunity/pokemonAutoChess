@@ -1539,7 +1539,7 @@
     "GOLD_RUSH": "Deal  [20,SP] + the allied player's GOLD value as SPECIAL, then the allied player earns 2 GOLD.",
     "MAKE_IT_RAIN": "Deal [100,SP] + the allied player's GOLD value as SPECIAL.",
     "CRUSH_GRIP": "The target is crushed with great force. The more HP the target has left, the greater the damage: between [20,SP] and [200,SP] PHYSICAL.",
-    "AURASPHERE": "Exude an aura and project energy in a line, dealing [25,50,SP] SPECIAL and inflicting all enemy Pokémon hit with SILENCE for 3 seconds.",
+    "AURASPHERE": "Exude an aura and project energy in a line, dealing [25,50,100,SP] SPECIAL and inflicting all enemy Pokémon hit with SILENCE for 3 seconds.",
     "SKETCH": "Copy the ability, max PP and STAR of the allied Pokémon on the user's left at the start of the fight.",
     "OVERDRIVE": "Twang an electric guitar, causing a huge echo and strong vibration. Deal [120,SP]% of ATK as SPECIAL within a 3 tile radius of the user, -20% damage per tile from the user.",
     "LOVELY_KISS": "Kiss the enemy Pokémon with a frightening expression. Put the target to SLEEP for [2,4,6,SP] seconds. If the target is already suffering from SLEEP, deal [50,100,150,SP] SPECIAL instead.",
