@@ -940,7 +940,7 @@
     "SLACK_OFF": "Wis alle negatieve status, genees [30,40,50,SP=0.5] % van max HP en zet de caster SLEEP gedurende 5 seconden",
     "DARK_VOID": "Biedt [30,SP] SPECIAL aan alle vijanden. Als een van de getroffen doelen SILENCE was, worden ze 2 seconden in SLEEP gezet",
     "OVERHEAT": "Biedt [40,SP] SPECIAL aan alle vijanden. +30% schade als doelwit BURN is",
-    "HYPNOSIS": "Zet SLEEP 1 vijand in de achterste linies voor [2,3.5,6,SP=0.5] seconden",
+    "HYPNOSIS": "Zet SLEEP 1 vijand in de achterste linies voor [2,4,6,SP=0.5] seconden",
     "MIMIC": "Kopieert het vermogen van het huidige doelwit",
     "HEX": "Deals [20,40,80,SP] SPECIAL aan het doelwit. Dubbele schade als het doelwit lijdt aan een negatieve status.",
     "GROWTH": "Verhoog max HP met [10,20,30,SP] en ​xATK met [3,4,5,SP]. Groeit twee keer zo snel als het SUN weer is",

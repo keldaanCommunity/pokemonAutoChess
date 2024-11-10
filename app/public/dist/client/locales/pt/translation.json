@@ -1288,7 +1288,7 @@
     "SLACK_OFF": "Limpe todos os status negativos, cure [30,40,50,SP=0,5]% do HP máximo e coloque o lançador SLEEP por 5 segundos",
     "DARK_VOID": "Oferece [30,SP] SPECIAL a todos os inimigos. Se algum alvo afetado foi SILENCE, ele é colocado em SLEEP por 2 segundos",
     "OVERHEAT": "Oferece [40,SP] SPECIAL a todos os inimigos. Dano +30% se o alvo for BURN",
-    "HYPNOSIS": "Coloque SLEEP 1 inimigo nas linhas de trás por [2,3.5,6,SP=0.5] segundos",
+    "HYPNOSIS": "Coloque SLEEP 1 inimigo nas linhas de trás por [2,4,6,SP=0.5] segundos",
     "MIMIC": "Copia a habilidade do alvo atual",
     "HEX": "Causa [20,40,80,SP] SPECIAL ao alvo. Dano dobrado se o alvo sofrer de um status negativo.",
     "GROWTH": "Aumente o HP máximo em [10,20,30,SP] e o ATK em [3,4,5,SP]. Cresce duas vezes mais rápido se o clima for SUN",

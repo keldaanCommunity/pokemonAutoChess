@@ -1408,7 +1408,7 @@
     "SLACK_OFF": "Cura l'utilizzatore di tutti gli status negativi, guarisci il [30,40,50,SP=0.5]% dei HP massimi e subisci lo status SLEEP per 5 secondi.",
     "DARK_VOID": "Infliggi [30 SP] SPECIAL a tutti i nemici. Se uno dei bersagli è afflitto da SILENCE, viene SLEEP per 2 secondi.",
     "OVERHEAT": "Infliggi [40 SP] SPECIAL a tutti i nemici. Il danno  aumenta del 30% se il bersaglio è afflitto da BURN.",
-    "HYPNOSIS": "Infliggi lo status SLEEP  ad 1 nemico nelle retrovie per [2,3.5,6,SP=0.5] secondi.",
+    "HYPNOSIS": "Infliggi lo status SLEEP  ad 1 nemico nelle retrovie per [2,4,6,SP=0.5] secondi.",
     "MIMIC": "Copia l'abilità del bersaglio attuale",
     "HEX": "Infliggi [20,40,80,SP] SPECIAL. Raddoppia i danni se il bersaglio soffre di uno stato negativo.",
     "GROWTH": "Aumenta i HP massimi di [10,20,30,SP] e l'ATK di [3,4,5,SP].  La crescita è raddoppiata se il tempo atmosferico è SUN.",

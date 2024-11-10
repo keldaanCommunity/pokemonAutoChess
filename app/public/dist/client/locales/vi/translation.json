@@ -1318,7 +1318,7 @@
     "SLACK_OFF": "Giải trừ toàn bộ hiệu ứng xấu, hồi phục [30,40,50,SP=0.5] % tương đương với chỉ số HP cao nhất và khiến Pokémon thi triển SLEEP trong 5 giây",
     "DARK_VOID": "Gây [30,SP] SPECIAL lên toàn bộ đối thủ. Đối với Pokémon đang SILENCE, chúng trúng thêm hiệu ứng SLEEP trong 2 giây",
     "OVERHEAT": "Gây [40,SP] SPECIAL lên toàn bộ đối thủ. Thêm 30% sát thương nếu mục tiêu đang trúng hiệu ứng BURN",
-    "HYPNOSIS": "Khiến 1 đối thủ ở hậu tuyến SLEEP trong [2,3.5,6,SP=0.5] giây",
+    "HYPNOSIS": "Khiến 1 đối thủ ở hậu tuyến SLEEP trong [2,4,6,SP=0.5] giây",
     "MIMIC": "Sao chép chiêu thức của mục tiêu hiện tại",
     "HEX": "Gây [20,40,80,SP] SPECIAL cho mục tiêu. Gây gấp đôi sát thương nếu mục tiêu chịu trạng thái tiêu cực.",
     "GROWTH": "Tăng HP tối đa thêm [30,40,50,SP] và ATK thêm [3,4,5,SP]. Tăng gấp đôi nếu thời tiết là SUN",

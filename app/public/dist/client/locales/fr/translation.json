@@ -1408,7 +1408,7 @@
     "SLACK_OFF": "Retire tous les statuts négatifs, soigne [30,40,50,SP=0.5] % des HP max et rend le lanceur SLEEP pendant 5 secondes",
     "DARK_VOID": "Inflige [30,SP] SPECIAL à tous les ennemis. Si une cible affectée était SILENCE, elle subit SLEEP pendant 2 secondes",
     "OVERHEAT": "Inflige [40,SP] SPECIAL à tous les ennemis. Dégâts +30% si la cible a BURN",
-    "HYPNOSIS": "Rend SLEEP 1 ennemi dans les lignes arrières pendant [2,3.5,6,SP=0.5] secondes",
+    "HYPNOSIS": "Rend SLEEP 1 ennemi dans les lignes arrières pendant [2,4,6,SP=0.5] secondes",
     "MIMIC": "Copie la capacité de la cible actuelle",
     "HEX": "Inflige [20,40,80,SP] SPECIAL à la cible. Double les dégâts si la cible souffre d'une altération de statut.",
     "GROWTH": "Augmente les HP max du lanceur de [10,20,30,SP] et son ATK de [3,4,5,SP]. Pousse deux fois plus vite si la météo est SUN",
