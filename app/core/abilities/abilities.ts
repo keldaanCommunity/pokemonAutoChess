@@ -761,7 +761,8 @@ export class DiamondStormStrategy extends AbilityStrategy {
           board,
           AttackType.SPECIAL,
           pokemon,
-          crit
+          crit,
+          false
         )
       }
     })
@@ -6850,7 +6851,7 @@ export class NightShadeStrategy extends AbilityStrategy {
         target.hp *
         (1 + (0.5 * pokemon.ap) / 100)
     )
-    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit, false)
   }
 }
 
@@ -10388,7 +10389,7 @@ export class TrickOrTreatStrategy extends AbilityStrategy {
       }
     } else if (pokemon.ap <= 50) {
       // 0-50 AP: shrink unit size and HP
-      const lifeReduction = 0.4 * (1 + pokemon.ap / 100)
+      const lifeReduction = 0.4 * (1 - pokemon.ap / 100)
       target.life = Math.floor(target.life * lifeReduction)
       target.hp = Math.floor(target.hp * lifeReduction)
       target.status.triggerFlinch(3000, target, pokemon)
@@ -10399,7 +10400,7 @@ export class TrickOrTreatStrategy extends AbilityStrategy {
       const originalDefense = target.def
       const originalSpecialDefense = target.speDef
       const originalIndex = target.index
-      const duration = Math.round(3000 * (1 + pokemon.ap / 100))
+      const duration = Math.round(3000 * (1 - pokemon.ap / 100))
       target.index = PkmIndex[Pkm.MAGIKARP]
       target.skill = Ability.SPLASH
       target.atk = 1
