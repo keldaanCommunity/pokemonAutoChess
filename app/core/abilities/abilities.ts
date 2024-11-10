@@ -6203,7 +6203,7 @@ export class WaterPulseStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [75, 150][pokemon.stars - 1] ?? 75
+    const damage = [75, 150][pokemon.stars - 1] ?? 150
     board
       .getAdjacentCells(target.positionX, target.positionY)
       .map((v) => v.value)
