@@ -1480,7 +1480,7 @@
     "SCREECH": "Reduziert die DEF aller angrenzenden Gegner um [1,2,4,SP]",
     "SAND_TOMB": "Verursacht [10,20,40,SP] SPECIAL und fügt SILENCE und PARALYSIS für [3,5,8] Sekunden zu",
     "WHIRLWIND": "Verursacht [40,80,120,SP] SPECIAL und lässt das Ziel wegfliegen",
-    "EMPTY_LIGHT": "Spuckt Gift direkt auf einen Gegner, fügt ihm [33,SP] SPECIAL zu und reduziert seinen SPE_DEF um 3. Die Fähigkeit prallt dann auf ein anderes Pokémon mit einem niedrigeren SPE_DEF zurück. (maximal 5 Abpraller)",
+    "EMPTY_LIGHT": "Spuckt Gift direkt auf einen Gegner, fügt ihm [33,SP] SPECIAL zu und reduziert seinen SPE_DEF um 3. Die Fähigkeit prallt dann auf ein anderes Pokémon zurück (maximal 5 Abpraller).",
     "UNBOUND": "Entfesselt sich, um Hoopas wahre Form anzunehmen und eine gewaltige Menge an Kraft zu erhalten",
     "HYPERSPACE_FURY": "Entfesselt mit seinen vielen Armen ein Sperrfeuer von [4,SP] Angriffen. Jeder Angriff senkt die DEF des Ziels um 1",
     "SNIPE_SHOT": "Feuert einen Wasserstrahl aus seinen Zeigefingerspitzen auf den am weitesten entfernten Gegner, der allen Gegnern im Weg [50,100,200,SP] SPECIAL zufügt",
