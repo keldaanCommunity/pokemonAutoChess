@@ -2870,9 +2870,8 @@ export class BlazeKickStrategy extends AbilityStrategy {
     let damage = [30, 60, 120][pokemon.stars - 1] ?? 120
     if (target.status.burn) {
       damage = Math.round(damage * 1.3)
-    } else {
-      target.status.triggerBurn(2000, target, pokemon)
     }
+    target.status.triggerBurn(2000, target, pokemon)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
