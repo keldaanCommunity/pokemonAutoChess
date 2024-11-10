@@ -2390,7 +2390,6 @@ export class BlizzardStrategy extends AbilityStrategy {
     const damage = [5, 10, 15][pokemon.stars - 1] ?? 15
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && pokemon.team != enemy.team) {
-        enemy.status.triggerFreeze(freezeDuration, enemy)
         enemy.handleSpecialDamage(
           enemy.status.freeze ? damage * 2 : damage,
           board,
@@ -2398,6 +2397,7 @@ export class BlizzardStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
+        enemy.status.triggerFreeze(freezeDuration, enemy)
       }
     })
   }

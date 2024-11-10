@@ -14,6 +14,7 @@
 - Fix Soft Boiled shield amount to match description
 - Fix Nightmare damage amount to match description
 - Fix Hyper voice damage amount to match description
+- Fix Blizzard applying double damage on all units not just frozen ones
 
 # Changes to Synergies
 
