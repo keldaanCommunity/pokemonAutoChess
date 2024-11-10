@@ -10389,7 +10389,7 @@ export class TrickOrTreatStrategy extends AbilityStrategy {
       }
     } else if (pokemon.ap <= 50) {
       // 0-50 AP: shrink unit size and HP
-      const lifeReduction = 0.4 * (1 - pokemon.ap / 100)
+      const lifeReduction = 0.4 / (1 + pokemon.ap / 100)
       target.life = Math.floor(target.life * lifeReduction)
       target.hp = Math.floor(target.hp * lifeReduction)
       target.status.triggerFlinch(3000, target, pokemon)
