@@ -1550,7 +1550,7 @@
     "MOON_DREAM": "El objetivo cae SLEEP durante [3,6,9] segundos y otorga [10,20,30,SP] SHIELD a los 3 aliados más cercanos a él.",
     "STONE_AXE": "Causa [50,SP] TRUE. Coloca piedras afiladas alrededor del objetivo. Las piedras permanecen en el campo causando 10 PHYSICAL por segundo y WOUND a los oponentes que caminan sobre él, si no son ROCK o FLYING",
     "CAMERA_FLASH": "El objetivo es PARALYSIS por [2,SP] segundos",
-    "CRUSH_CLAW": "Reduce la DEF del objetivo en [3,5] y luego realiza dos ataques rápidos infligiendo [100,SP]% del ATK como PHYSICAL cada uno",
+    "CRUSH_CLAW": "Reduce la DEF del objetivo en [3,6] y luego realiza dos ataques rápidos infligiendo [100,SP]% del ATK como PHYSICAL cada uno",
     "FIRE_LASH": "Hace [120,SP] SPECIAL y aplica ARMOR_REDUCTION por 4 segundos",
     "FAIRY_LOCK": "Esparce [90,SP] SPECIAL equitativamente entre el objetivo y los enemigos adyacentes. El objetivo es LOCKED por 5 segundos",
     "DRAIN_PUNCH": "El próximo ataque inflige [100,SP]% de SPECIAL adicional y restaura 200% HP del daño infligido.",

@@ -1573,7 +1573,7 @@
     "MOON_DREAM": "Das Ziel fällt für [3,6,9] Sekunden in SLEEP und gewährt den 3 Verbündeten, die dem Ziel am nächsten sind, [10,20,30,SP] SHIELD",
     "STONE_AXE": "Geben [50,SP] TRUE. Legt scharfe Steine um das Ziel herum. Die Steine bleiben auf dem Spielfeld liegen und fügen Pokémons, die darauf laufen, 10 PHYSICAL pro Sekunde zu und WOUND sie, wenn sie nicht ROCK oder FLYING.",
     "CAMERA_FLASH": "Das Ziel ist PARALYSIS für [2,SP] Sekunden",
-    "CRUSH_CLAW": "Verringere die DEF des Ziels um [3,5] und führe dann zwei schnelle Angriffe aus, die jeweils [100,SP]% der ATK als PHYSICAL verursachen",
+    "CRUSH_CLAW": "Verringere die DEF des Ziels um [3,6] und führe dann zwei schnelle Angriffe aus, die jeweils [100,SP]% der ATK als PHYSICAL verursachen",
     "FIRE_LASH": "Fügt dem Ziel [120,SP] SPECIAL zu und wendet 4 Sekunden lang ARMOR_REDUCTION an",
     "FAIRY_LOCK": "Verteilt [90,SP] SPECIAL gleichmäßig auf das Ziel und benachbarte Gegner. Das Ziel ist für 5 Sekunden LOCKED.",
     "DRAIN_PUNCH": " Der nächste Angriff fügt [100,SP]% zusätzliche SPECIAL zu und stellt 200% HP des zugefügten Schadens wieder her.",

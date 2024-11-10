@@ -1606,7 +1606,7 @@
     "MOON_DREAM": "Put the target to SLEEP for [3,6,9] seconds and grant [10,20,30,SP] SHIELD to the 3 allied Pokémon closest to the target.",
     "STONE_AXE": "Deal [50,SP] TRUE to the target and lay sharp stones around them. The stones stay on the battlefield, dealing 10 PHYSICAL per second and applying WOUND to non ROCK or FLYING Pokémon that walk on it.",
     "CAMERA_FLASH": "Inflict the target with PARALYSIS for [2,SP] seconds.",
-    "CRUSH_CLAW": "Reduce the target's DEF by [3,5] then perform two quick attacks, each dealing [100,SP]% of ATK as PHYSICAL.",
+    "CRUSH_CLAW": "Reduce the target's DEF by [3,6] then perform two quick attacks, each dealing [100,SP]% of ATK as PHYSICAL.",
     "FIRE_LASH": "Deal [120,SP] SPECIAL to the target and apply ARMOR_REDUCTION for 4 seconds.",
     "FAIRY_LOCK": "Spread [90,SP] SPECIAL evenly across the target and adjacent enemy Pokémon. The target is LOCKED for 5 seconds.",
     "DRAIN_PUNCH": " The next attack deals [100,SP]% additional SPECIAL and heals for 200% of the damage dealt.",
