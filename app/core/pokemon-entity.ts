@@ -832,7 +832,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.name === Pkm.MORPEKO) {
-      target.status.triggerParalysis(2000, target)
+      target.status.triggerParalysis(2000, target, this)
     }
 
     if (this.name === Pkm.MORPEKO_HANGRY) {
@@ -876,7 +876,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.items.has(Item.ELECTIRIZER) && this.count.attackCount % 3 === 0) {
       target.addPP(-15, this, 0, false)
       target.count.manaBurnCount++
-      target.status.triggerParalysis(2000, target)
+      target.status.triggerParalysis(2000, target, this)
     }
 
     // Synergy effects on hit
@@ -1070,7 +1070,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       cells.forEach((cell) => {
         board.addBoardEffect(cell.x, cell.y, Effect.GAS, this.simulation)
         if (cell.value && cell.value.team !== this.team) {
-          cell.value.status.triggerParalysis(3000, cell.value)
+          cell.value.status.triggerParalysis(3000, cell.value, this)
         }
       })
       this.items.delete(Item.SMOKE_BALL)

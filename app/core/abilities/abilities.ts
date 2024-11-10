@@ -532,7 +532,7 @@ export class WonderGuardStrategy extends AbilityStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.status.triggerParalysis(3000, cell.value)
+        cell.value.status.triggerParalysis(3000, cell.value, pokemon)
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -1150,7 +1150,7 @@ export class RazorWindStrategy extends AbilityStrategy {
     )
     cells.forEach((cell) => {
       if (cell && cell.value && cell.value.team !== pokemon.team) {
-        cell.value.status.triggerParalysis(7000, cell.value)
+        cell.value.status.triggerParalysis(7000, cell.value, pokemon)
       }
     })
   }
@@ -1687,7 +1687,7 @@ export class TriAttackStrategy extends AbilityStrategy {
         target.status.triggerBurn(5000, target, pokemon)
         break
       case 3:
-        target.status.triggerParalysis(5000, target)
+        target.status.triggerParalysis(5000, target, pokemon)
         break
     }
   }
@@ -1987,7 +1987,7 @@ export class NuzzleStrategy extends AbilityStrategy {
         crit,
         true
       )
-      farthestTarget.status.triggerParalysis(duration, farthestTarget)
+      farthestTarget.status.triggerParalysis(duration, farthestTarget, pokemon)
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
   }
@@ -3199,7 +3199,7 @@ export class DischargeStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        cell.value.status.triggerParalysis(5000, cell.value)
+        cell.value.status.triggerParalysis(5000, cell.value, pokemon)
       }
     })
   }
@@ -3483,7 +3483,7 @@ export class ThunderCageStrategy extends AbilityStrategy {
             crit
           )
           cell.value.status.triggerLocked(3000, cell.value)
-          cell.value.status.triggerParalysis(3000, cell.value)
+          cell.value.status.triggerParalysis(3000, cell.value, pokemon)
         }
       })
   }
@@ -3863,7 +3863,7 @@ export class StringShotStrategy extends AbilityStrategy {
     }
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerParalysis(5000, target)
+    target.status.triggerParalysis(5000, target, pokemon)
   }
 }
 
@@ -3899,7 +3899,7 @@ export class EntanglingThreadStrategy extends AbilityStrategy {
     )
     cells.forEach((cell) => {
       if (cell.value && pokemon.team !== cell.value.team) {
-        cell.value.status.triggerParalysis(4000, target)
+        cell.value.status.triggerParalysis(4000, target, pokemon)
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -4160,7 +4160,7 @@ export class StunSporeStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
-          cell.value.status.triggerParalysis(5000, cell.value)
+          cell.value.status.triggerParalysis(5000, cell.value, pokemon)
         }
       })
   }
@@ -4210,7 +4210,7 @@ export class HurricaneStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        cell.value.status.triggerParalysis(4000, cell.value)
+        cell.value.status.triggerParalysis(4000, cell.value, pokemon)
       }
     })
   }
@@ -4287,7 +4287,7 @@ export class WildboltStormStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        cell.value.status.triggerParalysis(4000, cell.value)
+        cell.value.status.triggerParalysis(4000, cell.value, pokemon)
       }
     })
   }
@@ -5456,7 +5456,7 @@ export class DireClawStrategy extends AbilityStrategy {
         target.status.triggerSleep(3000, target)
         break
       case "paralysis":
-        target.status.triggerParalysis(3000, target)
+        target.status.triggerParalysis(3000, target, pokemon)
         break
     }
   }
@@ -6971,7 +6971,8 @@ export class SandTombStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     target.status.triggerParalysis(
       pokemon.stars === 3 ? 8000 : pokemon.stars === 2 ? 5000 : 3000,
-      target
+      target,
+      pokemon
     )
     target.status.triggerSilence(
       pokemon.stars === 3 ? 8000 : pokemon.stars === 2 ? 5000 : 3000,
@@ -8070,7 +8071,7 @@ export class LickStrategy extends AbilityStrategy {
       true
     )
     target.status.triggerConfusion(3000, target, pokemon)
-    target.status.triggerParalysis(3000, target)
+    target.status.triggerParalysis(3000, target, pokemon)
   }
 }
 
@@ -8368,7 +8369,7 @@ export class MoongeistBeamStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
-          cell.value.status.triggerParalysis(3000, cell.value)
+          cell.value.status.triggerParalysis(3000, cell.value, pokemon)
         } else {
           cell.value.addShield(100, pokemon, 1, crit)
         }
@@ -8516,7 +8517,7 @@ export class ZapCannonStrategy extends AbilityStrategy {
       true
     )
     target.status.triggerArmorReduction(duration, target)
-    target.status.triggerParalysis(duration, target)
+    target.status.triggerParalysis(duration, target, pokemon)
   }
 }
 
@@ -8539,7 +8540,7 @@ export class IceHammerStrategy extends AbilityStrategy {
       true
     )
     target.status.triggerFreeze(3000, target)
-    pokemon.status.triggerParalysis(3000, pokemon)
+    pokemon.status.triggerParalysis(3000, pokemon, pokemon)
   }
 }
 
@@ -8962,7 +8963,7 @@ export class ThunderFangStrategy extends AbilityStrategy {
       crit,
       true
     )
-    target.status.triggerParalysis(3000, target)
+    target.status.triggerParalysis(3000, target, pokemon)
   }
 }
 
@@ -9460,7 +9461,7 @@ export class CameraFlashStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
 
-    target.status.triggerParalysis(2000, target)
+    target.status.triggerParalysis(2000, target, pokemon, true)
   }
 }
 
@@ -9767,7 +9768,7 @@ export class DoubleShockStrategy extends AbilityStrategy {
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
 
-    pokemon.status.triggerParalysis(3000, pokemon)
+    pokemon.status.triggerParalysis(3000, pokemon, pokemon)
   }
 }
 
@@ -10152,7 +10153,7 @@ export class ForcePalmStrategy extends AbilityStrategy {
         target.moveTo(x, y, board)
       }
     } else {
-      target.status.triggerParalysis(6000, pokemon)
+      target.status.triggerParalysis(6000, target, pokemon)
     }
   }
 }
