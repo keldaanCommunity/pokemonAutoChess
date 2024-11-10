@@ -4522,7 +4522,7 @@ export class SkyAttackShadowStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    crit = crit || chance(pokemon.critChance / 100, pokemon)
+    crit = chance(pokemon.critChance / 100, pokemon)
     const destination = board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     if (destination) {
       pokemon.skydiveTo(destination.x, destination.y, board)
@@ -7944,7 +7944,7 @@ export class NightSlashStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
-    crit = crit || chance(pokemon.critChance / 100, pokemon)
+    crit = chance(pokemon.critChance / 100, pokemon)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
