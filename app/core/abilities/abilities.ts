@@ -5612,7 +5612,7 @@ export class MistBallStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 30
+    const damage = 25
 
     effectInLine(board, pokemon, target, (cell) => {
       if (

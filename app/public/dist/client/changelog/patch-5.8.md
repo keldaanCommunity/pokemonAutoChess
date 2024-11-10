@@ -24,6 +24,7 @@
 - Fix Spectral Thief damage amount to match description
 - Fix Growth attack buff amount to match description
 - Fix Eruption not applying Burn status
+- Fix Mist Ball damage amount to match description
 
 # Changes to Synergies
 
