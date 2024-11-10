@@ -28,6 +28,7 @@
 - Fixed Unown F and Unown S ability descriptions
 - Fix poison jab targeting the farthest enemy instead of the current target
 - Fix Whirlwind not scaling damage with AP
+- Fix Hyperspace Fury damage scaling with AP twice
 
 # Changes to Synergies
 

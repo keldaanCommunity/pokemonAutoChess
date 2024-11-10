@@ -7071,7 +7071,7 @@ export class UnboundStrategy extends AbilityStrategy {
   }
 }
 
-export class HyperSpaceFury extends AbilityStrategy {
+export class HyperspaceFuryStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -7089,7 +7089,7 @@ export class HyperSpaceFury extends AbilityStrategy {
         AttackType.SPECIAL,
         pokemon,
         crit,
-        true
+        false
       )
     }
     pokemon.simulation.room.broadcast(Transfer.ABILITY, {
@@ -10789,7 +10789,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.WHIRLWIND]: new WhirlwindStrategy(),
   [Ability.EMPTY_LIGHT]: new EmptyLightStrategy(),
   [Ability.UNBOUND]: new UnboundStrategy(),
-  [Ability.HYPERSPACE_FURY]: new HyperSpaceFury(),
+  [Ability.HYPERSPACE_FURY]: new HyperspaceFuryStrategy(),
   [Ability.SNIPE_SHOT]: new SnipeShotStrategy(),
   [Ability.AIR_SLASH]: new AirSlashStrategy(),
   [Ability.EGGSPLOSION]: new EggsplosionStrategy(),
