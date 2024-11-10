@@ -1436,7 +1436,7 @@
     "ABSORB": "Deal [30,60,120,SP] SPECIAL to the target and heal adjacent allied Pokémon for [3,6,12,SP] HP.",
     "ROLLOUT": "Increase the user's DEF by [1,3,5,SP] and deal SPECIAL equal to 5x the user's DEF.",
     "THRASH": "Increase ATK by [100,SP]% and inflict the user with CONFUSION for 3 seconds.",
-    "SOLAR_BEAM": "Deal [30,60,120,SP] SPECIAL to all enemy Pokémon in a line behind the target. If the weather is SUN, BURN them for 3 seconds and restore 40 PP.",
+    "SOLAR_BEAM": "Deal [30,60,120,SP] SPECIAL to all enemy Pokémon in a line behind the target. If the weather is SUN, BURN them for 3 seconds, double damage and restore 40 PP.",
     "MAGMA_STORM": "A maelstrom of fire traps the target, dealing [80,SP] SPECIAL before moving to an adjacent enemy Pokémon.",
     "DIRE_CLAW": "Deal [15,30,60,SP] SPECIAL to the target and inflict either POISONNED, SLEEP or PARALYSIS for 3 seconds.",
     "SLASHING_CLAW": "Deal [15,30,60,SP] SPECIAL to the target and WOUND them for 5 seconds, +30% if the target already suffers from WOUND.",

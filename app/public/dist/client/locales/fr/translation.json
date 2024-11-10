@@ -1430,7 +1430,7 @@
     "ABSORB": "Inflige [30,60,120,SP] SPECIAL et soigne [3,6,12,SP] aux alliés adjacents",
     "ROLLOUT": "Augmente la DEF de [1,3,5,SP] et inflige 5x la DEF en SPECIAL",
     "THRASH": "Augmente l'ATK de [100,SP]% et inflige CONFUSION au porteur pendant 3 secondes",
-    "SOLAR_BEAM": "Inflige [30,60,120,SP] SPECIAL en ligne droite derrière la cible. Si le temps est SUN, les cibles sont BURN pendant 3 secondes et restaurent 40 PP",
+    "SOLAR_BEAM": "Inflige [30,60,120,SP] SPECIAL en ligne droite derrière la cible. Si le temps est SUN, les dégâts sont doublés, les cibles sont BURN pendant 3 secondes et 40 PP sont restaurés au lanceur.",
     "MAGMA_STORM": "La cible est piégée dans un maelström de feu qui inflige [80,SP] SPECIAL avant de se déplacer vers une cible adjacente",
     "DIRE_CLAW": "Inflige [15,30,60,SP] SPECIAL à la cible, ainsi qu'une affliction aléatoire parmi POISON, SLEEP et PARALYSIS pendant 3 secondes.",
     "SLASHING_CLAW": "Inflige [15,30,60,SP] à la cible et la WOUND pendant 5 secondes. Si la cible a déjà WOUND, inflige 30 % de bonus SPECIAL",
