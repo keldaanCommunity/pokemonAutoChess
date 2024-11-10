@@ -1087,15 +1087,8 @@ export class LeechSeedStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let duration = 3000
-    let heal = 20
-    if (pokemon.stars == 2) {
-      duration = 6000
-      heal = 40
-    } else if (pokemon.stars == 3) {
-      duration = 6000
-      heal = 80
-    }
+    const duration = [3000, 6000, 12000][pokemon.stars - 1] ?? 12000
+    const heal = [20, 40, 80][pokemon.stars - 1] ?? 80
     pokemon.handleHeal(heal, pokemon, 1, crit)
     target.status.triggerPoison(duration, target, pokemon)
   }
