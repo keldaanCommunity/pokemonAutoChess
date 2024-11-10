@@ -1628,7 +1628,7 @@
     "ROAR": "Blow away the target. If they hit a wall, deal [20,40,80,SP] SPECIAL. If they hit another Pokémon, both are dealt SPECIAL.",
     "INFESTATION": "Deal [10,SP] SPECIAL to the target for each allied BUG Pokémon on the battlefield and move the most powerful BUG Pokémon on the allied player's bench to the battlefield.",
     "IVY_CUDGEL": "Deal [100,SP] SPECIAL to the target.",
-    "FORCE_PALM": "Deal [60,SP] + 10% of the target's max HP as SPECIAL to the target and inflict them with PARALYSIS for 6 seconds, +[40,SP] SPECIAL and push the target away if they were already suffering from PARALYSIS.",
+    "FORCE_PALM": "Deal [60,SP] + [10,SP]% of the target's max HP as SPECIAL to the target and inflict them with PARALYSIS for 6 seconds, +[40,SP] SPECIAL and push the target away if they were already suffering from PARALYSIS.",
     "THUNDER_CAGE": "Trap the target and adjacent enemy Pokémon in an electric prison, dealing [60,SP] SPECIAL and inflicting LOCKED and PARALYSIS for 3 seconds.",
     "HEADBUTT": "Deal [20,40,80,SP] SPECIAL to the target and inflict them with FLINCH for 5 seconds. The damage is doubled if the target has a SHIELD.",
     "STEEL_WING": "Dash into the enemy team's back line, dealing [10,20,40,SP] SPECIAL + 3x DEF as SPECIAL and stealing 1 DEF to all enemy Pokémon in the path.",

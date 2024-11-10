@@ -48,6 +48,7 @@ Thanks to Exeatop, many bugs have been fixed in the abilities and abilities desc
 - Fix Drain Punch healing 4x the amount of damage dealt instead of 2x
 - Fix Fell Stringer healing twice 10 HP instead of once
 - Fix Infestation not checking bug type when computing damage and not sending benched bug with most items in priority
+- Fix Force Palm additional damage when target is paralyzed being applied twice instead of once
 
 # Misc
 

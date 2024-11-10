@@ -1595,7 +1595,7 @@
     "ROAR": "Puste das Ziel weg. Wenn es gegen eine Wand prallt, erleidet es [20,40,80,SP] SPECIAL. Wenn es ein anderes Pokémon trifft, erleiden beide Pokémon SPECIAL.",
     "INFESTATION": "Fügt dem Ziel [10,SP] SPECIAL für jeden verbündeten BUG an Bord zu und platziert deinen stärksten BUG im Kampf auf deiner Bank",
     "IVY_CUDGEL": "Fügt dem Ziel [100,SP] SPECIAL zu",
-    "FORCE_PALM": "Verursacht [60,SP] + 10 % der maximalen HP des Ziels als SPECIAL und PARALYSIS für 6 Sekunden. Wenn es PARALYSIS war, verursacht es zusätzlich [40,SP] SPECIAL und stößt es weg.",
+    "FORCE_PALM": "Verursacht [60,SP] + [10,SP] % der maximalen HP des Ziels als SPECIAL und PARALYSIS für 6 Sekunden. Wenn es PARALYSIS war, verursacht es zusätzlich [40,SP] SPECIAL und stößt es weg.",
     "THUNDER_CAGE": "Setzt das Ziel und benachbarte Feinde in einem elektrischen Gefängnis fest, das [60,SP] SPECIAL verursacht und 3 Sekunden lang LOCKED und PARALYSIS zufügt.",
     "HEADBUTT": "Fügt dem Ziel [20,40,80,SP] SPECIAL zu und verursacht 5 Sekunden lang FLINCH. Doppelter Schaden, wenn das Ziel einen SHIELD hat."
   },

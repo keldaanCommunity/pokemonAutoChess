@@ -1622,7 +1622,7 @@
     "ROAR": "Souffle sur la cible, ce qui la projette en arrière. Si elle heurte un mur, elle subit [20,40,80,SP] SPECIAL. Si elle heurte un autre Pokémon, les deux Pokémon subissent les dégâts.",
     "INFESTATION": "Inflige [10,SP] SPECIAL à la cible pour chaque allié BUG sur le plateau, et amène au combat votre Pokémon BUG le plus puissant sur votre banc",
     "IVY_CUDGEL": "Inflige [100,SP] SPECIAL à la cible",
-    "FORCE_PALM": "Inflige [60,SP] + 10% des HP max de la cible en SPECIAL et PARALYSIS pendant 6 secondes. Si la cible est déjà PARALYSIS, inflige [40,SP] SPECIAL supplémentaires et repousse la cible en arrière.",
+    "FORCE_PALM": "Inflige [60,SP] + [10,SP]% des HP max de la cible en SPECIAL et PARALYSIS pendant 6 secondes. Si la cible est déjà PARALYSIS, inflige [40,SP] SPECIAL supplémentaires et repousse la cible en arrière.",
     "THUNDER_CAGE": "Piège la cible et les adversaires adjacents dans une prison électrique qui inflige [60,SP] SPECIAL et LOCKED et PARALYSIS pendant 3 secondes.",
     "HEADBUTT": "Inflige [20,40,80,SP] SPECIAL à la cible et inflige FLINCH pendant 5 secondes. Double les dégâts si la cible a un SHIELD.",
     "STEEL_WING": "Saute vers la ligne arrière adverse, infligeant [10,20,40,SP] SPECIAL + 3x DEF en SPECIAL et volant 1 DEF à tous les adversaires touchés.",

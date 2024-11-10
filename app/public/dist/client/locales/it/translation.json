@@ -1622,7 +1622,7 @@
     "ROAR": "Spazza via il bersaglio. Se il bersaglio colpisce un muro, gli vengono inflitti [20,40,80,SP] SPECIAL. Se colpisce un altro Pokèmon, entrambi subiscono SPECIAL.",
     "INFESTATION": "Infliggi [10,SP] SPECIAL al bersaglio per ogni Pokèmon BUG alleato e piazza il BUG più forte nella panchina durante il combattimento.",
     "IVY_CUDGEL": "Infliggi [100,SP] SPECIAL al bersaglio.",
-    "FORCE_PALM": "L'utilizzatore infligge [60,SP] + il 10% dei HP massimi come SPECIAL e causa PARALYSIS per 6 secondi. Se era già sotto PARALYSIS, infliggi [40,SP] SPECIAL bonus e spingilo via.",
+    "FORCE_PALM": "L'utilizzatore infligge [60,SP] + il [10,SP]% dei HP massimi come SPECIAL e causa PARALYSIS per 6 secondi. Se era già sotto PARALYSIS, infliggi [40,SP] SPECIAL bonus e spingilo via.",
     "THUNDER_CAGE": "Intrappola il bersaglio e i nemici adiacenti in una gabbia elettrica che infligge [60,SP] SPECIAL e causa LOCKED e PARALYSIS per 3 secondi.",
     "HEADBUTT": "Infliggi [20,40,80,SP] SPECIAL al bersaglio e causa FLINCH per 5 secondi. Raddoppia il danno se il bersaglio ha uno SHIELD.",
     "STEEL_WING": "Scatta verso le retrovie nemiche, infliggendo [10,20,40,SP] SPECIAL + 3 volte la DEF come SPECIAL e ruba 1 di DEF a tutti i Pokèmon nemici colpiti nella traiettoria.",

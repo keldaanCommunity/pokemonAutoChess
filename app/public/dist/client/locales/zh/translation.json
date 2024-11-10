@@ -1622,7 +1622,7 @@
     "ROAR": "吹飞目标。若其撞上墙壁，受到[20,40,80,SP]点SPECIAL；若撞上其他宝可梦，双方一起受到此伤害。",
     "INFESTATION": "对目标造成SPECIAL，数值相当于[10,SP]乘以场上的我方BUG宝可梦数量。从我方备战区将最强的BUG宝可梦加入战场。",
     "IVY_CUDGEL": "对目标造成[100,SP]点SPECIAL。",
-    "FORCE_PALM": "对目标造成SPECIAL，数值相当于[60,SP]加其最大HP的10%，并使其陷入PARALYSIS 6秒。若其已经处于PARALYSIS，额外造成[40,SP]点SPECIAL，并将其推开。",
+    "FORCE_PALM": "对目标造成SPECIAL，数值相当于[60,SP]加其最大HP的[10,SP]%，并使其陷入PARALYSIS 6秒。若其已经处于PARALYSIS，额外造成[40,SP]点SPECIAL，并将其推开。",
     "THUNDER_CAGE": "将目标和相邻敌方宝可梦困在雷电囚笼中，对他们造成[60,SP]点SPECIAL，并使他们陷入LOCKED和PARALYSIS 3秒。",
     "HEADBUTT": "对目标造成[20,40,80,SP]点SPECIAL，并使其陷入FLINCH 5秒。若目标有SHIELD，造成的伤害翻倍。",
     "STEEL_WING": "突进至敌方队伍的后排，造成SPECIAL，数值相当于[10,20,40,SP]加使用者的DEF的3倍。从每只击中的敌方宝可梦身上偷取1点DEF。",

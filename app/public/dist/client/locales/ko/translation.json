@@ -1622,7 +1622,7 @@
     "ROAR": "대상을 날려버린다. 벽에 부딪히면 [20,40,80,SP] SPECIAL 을 입는다. 다른 포켓몬에게 부딪히면 둘 다 SPECIAL 을 입는다.",
     "INFESTATION": "필드에 있는 아군 BUG 수만큼 [10,SP] SPECIAL 을 대상에게 가하고, 대기석의 가장 강한 BUG 를 전투에 참여시킨다.",
     "IVY_CUDGEL": "대상에게 [100,SP]의 SPECIAL 를 입힌다.",
-    "FORCE_PALM": "[60,SP] + 대상 최대 HP 의 10%를 SPECIAL 로 가하고 PARALYSIS 상태로 6초 동안 만든다. 이미 PARALYSIS 상태였던 대상에게는 [40,SP] SPECIAL 을 추가로 입히고 밀어낸다.",
+    "FORCE_PALM": "[60,SP] + 대상 최대 HP 의 [10,SP]%를 SPECIAL 로 가하고 PARALYSIS 상태로 6초 동안 만든다. 이미 PARALYSIS 상태였던 대상에게는 [40,SP] SPECIAL 을 추가로 입히고 밀어낸다.",
     "THUNDER_CAGE": "대상과 주변의 적을 전기 감옥에 가두어 [60,SP]의 SPECIAL 를 입히고 3초 동안 LOCKED 와 PARALYSIS 상태로 만든다.",
     "HEADBUTT": "대상에게 [20,40,80,SP]의 SPECIAL 를 입히고 5초 동안 FLINCH 이 되게 한다. SHIELD가 있는 대상에게는 두 배의 피해를 입힌다.",
     "STEEL_WING": "적의 후방으로 돌진하여 부딪히는 모든 적에게 [10,20,40,SP] + 3X DEF SPECIAL 를 입히고 1 DEF 를 훔친다.",

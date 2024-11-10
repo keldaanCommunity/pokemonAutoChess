@@ -10133,13 +10133,6 @@ export class ForcePalmStrategy extends AbilityStrategy {
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
 
     if (target.status.paralysis) {
-      target.handleSpecialDamage(
-        additionalDamage,
-        board,
-        AttackType.SPECIAL,
-        pokemon,
-        crit
-      )
       let farthestEmptyCell: Cell | null = null
       effectInLine(board, pokemon, target, (cell) => {
         if (!cell.value) {
