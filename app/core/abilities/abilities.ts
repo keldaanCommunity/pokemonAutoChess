@@ -2914,7 +2914,7 @@ export class LunarBlessingStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team && ally.life < ally.hp) {
-        ally.handleHeal(0.25 * pokemon.hp, pokemon, 1, crit)
+        ally.handleHeal(0.25 * ally.hp, pokemon, 1, crit)
         ally.status.clearNegativeStatus()
       }
     })
