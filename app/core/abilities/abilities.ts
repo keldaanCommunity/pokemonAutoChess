@@ -4339,7 +4339,7 @@ export class SpringtideStormStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        cell.value.status.triggerCharm(4000, cell.value, pokemon)
+        cell.value.status.triggerCharm(2000, cell.value, pokemon)
       }
     })
   }
