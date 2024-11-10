@@ -1280,7 +1280,7 @@
     "BLUE_FLARE": "Gây [50,SP] SPECIAL + 20 cho từng cấp bậc hiệu ứng hệ FIRE lên mục tiêu và đối thủ gần nó",
     "FUSION_BOLT": "Gây [50,SP] SPECIAL + 40 cho từng cấp bậc hiệu ứng hệ ELECTRIC lên mục tiêu và đối thủ gần nó",
     "AURORA_VEIL": "Toàn bộ đồng minh nhận [5,10,15,SP] SHIELD và RUNE_PROTECT trong 0.5 giây",
-    "AQUA_JET": "Tốc biến đến hậu tuyến đối thủ, gây [30,60,120,SP] SPECIAL lên toàn bộ đối thủ trúng phải",
+    "AQUA_JET": "Tốc biến đến hậu tuyến đối thủ, gây [20,40,80,SP] SPECIAL lên toàn bộ đối thủ trúng phải",
     "CHATTER": "Gây [20,SP] SPECIAL lên toàn bộ đối thủ. Đối thủ có [50,LK]% khả năng trúng hiệu ứng CONFUSION trong 1 giây",
     "STEAM_ERUPTION": "Gây [100,SP] TRUE lên mục tiêu",
     "APPLE_ACID": "Gây [15,30,60,SP] SPECIAL lên 3 mục tiêu ở bên cạnh, và làm giảm [5,SP] chỉ số DEF lẫn SPE_DEF ",
