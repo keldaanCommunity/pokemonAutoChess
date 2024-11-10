@@ -10,6 +10,7 @@
 
 # Changes to Pokemon & Abilities
 
+- Thanks to Exeatop, many bugs have been fixed in the abilities and abilities descriptions:
 - Fix Steel Wing damage not applying defense bonus damage
 - Fix Soft Boiled shield amount to match description
 - Fix Nightmare damage amount to match description
@@ -18,6 +19,7 @@
 - Fix Guillotine restoring to 100% PP on KO instead of 50%
 - Fix Lunar Blessing using caster max HP instead of target max HP
 - Change Dragon Breath: fix targeting and apply special damage instead of true damage ; changed animation
+- Fix Diamong Storm AP scaling being applied twice
 
 # Changes to Synergies
 
