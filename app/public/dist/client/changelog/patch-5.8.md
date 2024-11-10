@@ -11,6 +11,7 @@
 # Changes to Pokemon & Abilities
 
 - Fix Steel Wing damage not applying defense bonus damage
+- Fix Soft Boiled shield amount to match description
 
 # Changes to Synergies
 
