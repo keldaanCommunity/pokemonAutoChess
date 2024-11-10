@@ -7000,6 +7000,7 @@ export class WhirlwindStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit, true)
     const x = target.positionX
     const y = target.positionY
+    const damage = [40, 80, 120][pokemon.stars - 1] ?? 120
     target.flyAway(board)
     pokemon.simulation.room.broadcast(Transfer.ABILITY, {
       id: pokemon.simulation.id,
@@ -7009,14 +7010,7 @@ export class WhirlwindStrategy extends AbilityStrategy {
       targetX: target.positionX,
       targetY: target.positionY
     })
-    target.handleSpecialDamage(
-      pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 80 : 40,
-      board,
-      AttackType.SPECIAL,
-      pokemon,
-      crit,
-      false
-    )
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 

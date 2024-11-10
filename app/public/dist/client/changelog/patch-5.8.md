@@ -27,6 +27,7 @@
 - Fix Mist Ball damage amount to match description
 - Fixed Unown F and Unown S ability descriptions
 - Fix poison jab targeting the farthest enemy instead of the current target
+- Fix Whirlwind not scaling damage with AP
 
 # Changes to Synergies
 
