@@ -1446,7 +1446,7 @@
     "HIDDEN_POWER_C": "Donne une AMULET_COIN à toute votre équipe. Les objets sont retirés à la fin du combat.",
     "HIDDEN_POWER_D": "Invoque un $t(pkm.METAMORPH) dans votre banc",
     "HIDDEN_POWER_E": "Invoque un œuf Pokémon sur votre banc. Il éclot au tour suivant",
-    "HIDDEN_POWER_F": "Pêche 2 Pokémons WATER au hasard au niveau de pêche maximum",
+    "HIDDEN_POWER_F": "Pêche 3 Pokémons WATER au hasard au niveau de pêche maximum",
     "HIDDEN_POWER_G": "Gagnez 5 pièces",
     "HIDDEN_POWER_H": "Soigne votre équipe au max de leurs HP",
     "HIDDEN_POWER_I": "Gagnez un composant d'objet aléatoire",
