@@ -2170,7 +2170,7 @@
     "GIRATINA": "骑拉帝纳会根据其所在位置在别种形态和起源形态之间切换。",
     "MELOETTA": "美洛耶塔会根据其所在位置在舞步形态和歌声形态之间切换。",
     "UNOWN": "未知图腾不能携带道具，且会在一场战斗或释放招式后消失。",
-    "GLIGAR": "若此宝可梦陷入POISONNED，其不会受伤，而是恢复HP。此外，天蝎似乎需要一枚RAZOR_FANG……",
+    "GLIGAR": "若此宝可梦陷入POISONNED，其不会受伤，而是恢复HP。天蝎似乎需要一枚RAZOR_FANG……",
     "POISON_HEAL": "若此宝可梦陷入POISONNED，其不会受伤，而是恢复HP。",
     "GRIM_NEIGH": "此宝可梦击倒敌方宝可梦时，会用恐怖的声音嘶鸣，提升自身30点AP。",
     "SHAYMIN": "谢米似乎需要一朵GRACIDEA_FLOWER……",
@@ -2453,15 +2453,29 @@
     "GAMBLER": "赌徒"
   },
   "weather": {
-    "NEUTRAL": "正常天气",
-    "SUN": "晴朗",
-    "WINDY": "刮风",
+    "NEUTRAL": "无天气",
+    "SUN": "大晴天",
+    "WINDY": "强风",
     "RAIN": "下雨",
     "NIGHT": "夜晚",
-    "STORM": "暴风雨",
-    "MISTY": "小霞",
+    "STORM": "雷暴",
+    "MISTY": "薄雾",
     "SNOW": "下雪",
     "SANDSTORM": "沙暴",
-    "BLOODMOON": "血月"
+    "BLOODMOON": "血月",
+    "SMOG": "毒雾"
+  },
+  "weather_description": {
+    "NEUTRAL": "一般的天气，没有额外效果。",
+    "SUN": "+30% BURN伤害，\n-30% FREEZE持续时间。",
+    "WINDY": "+20% 移动速度，\n+10% ATK_SPEED（仅FLYING宝可梦）",
+    "RAIN": "每秒恢复3点PP，\n-30% BURN或POISONNED伤害。",
+    "NIGHT": "+10% CRIT_CHANCE\n+30% SLEEP持续时间",
+    "STORM": "闪电随机轰击场地，对击中的非ELECTRIC宝可梦造成100点SPECIAL。\n+30% PARALYSIS持续时间",
+    "MISTY": "+20% 造成的SPECIAL\n+30% CHARM持续时间",
+    "SNOW": "-25% 移动速度\n+30% FREEZE持续时间",
+    "SANDSTORM": "每秒对非GROUND宝可梦造成5点SPECIAL。\n+30% CONFUSION持续时间",
+    "BLOODMOON": "+20% 造成的PHYSICAL\n+30% WOUND持续时间",
+    "SMOG": "-15% 命中率\n+30% POISONNED持续时间"
   }
 }
