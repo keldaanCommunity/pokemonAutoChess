@@ -7304,7 +7304,10 @@ export class FloralHealingStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    // we explicitely not trigger super.process() so that the pokemon doesn't get twice the oncast effects
+    if (pokemon.items.has(Item.COMFEY) === false) {
+      // if comfey is hold item, we explicitely not trigger super.process() so that the pokemon doesn't get twice the oncast effects
+      super.process(pokemon, state, board, target, crit)
+    }
     pokemon.handleHeal(pokemon.maxPP, pokemon, 0, false)
   }
 }
