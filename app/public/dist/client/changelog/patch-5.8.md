@@ -29,6 +29,7 @@ Gen 1 is now complete !
 
 # Bugfix
 
+- Prevent Celebi to regain player HP when in a ghost matchup
 Thanks to Exeatop, many bugs have been fixed in the abilities and abilities descriptions:
 - Fix Steel Wing damage not applying defense bonus damage
 - Fix Soft Boiled shield amount to match description
