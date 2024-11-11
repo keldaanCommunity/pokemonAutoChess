@@ -363,11 +363,13 @@ export enum Pkm {
   KILOWATTREL = "KILOWATTREL",
   KINGAMBIT = "KINGAMBIT",
   KINGDRA = "KINGDRA",
+  KINGLER = "KINGLER",
   KIRLIA = "KIRLIA",
   KLEAVOR = "KLEAVOR",
   KLEFKI = "KLEFKI",
   KOFFING = "KOFFING",
   KOMMO_O = "KOMMO_O",
+  KRABBY = "KRABBY",
   KRICKETOT = "KRICKETOT",
   KRICKETUNE = "KRICKETUNE",
   KROKOROK = "KROKOROK",
@@ -980,8 +982,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ONIX]: "0095",
   [Pkm.DROWZEE]: "0096",
   [Pkm.HYPNO]: "0097",
-  //[Pkm.KRABBY]: "0098",
-  //[Pkm.KINGLER]: "0099",
+  [Pkm.KRABBY]: "0098",
+  [Pkm.KINGLER]: "0099",
   [Pkm.VOLTORB]: "0100",
   [Pkm.ELECTRODE]: "0101",
   [Pkm.EXEGGCUTE]: "0102",
@@ -2860,7 +2862,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.DRAPION]: Pkm.SKORUPI,
   [Pkm.DARUMAKA]: Pkm.DARUMAKA,
   [Pkm.DARMANITAN]: Pkm.DARUMAKA,
-  [Pkm.DARMANITAN_ZEN]: Pkm.DARUMAKA
+  [Pkm.DARMANITAN_ZEN]: Pkm.DARUMAKA,
+  [Pkm.KRABBY]: Pkm.KRABBY,
+  [Pkm.KINGLER]: Pkm.KRABBY
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7309,5 +7313,15 @@ export const AnimationConfig: {
     ability: AnimationType.Charge,
     emote: AnimationType.Charge,
     shinyUnavailable: true
+  },
+  [Pkm.KRABBY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Slam,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.KINGLER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Strike,
+    emote: AnimationType.Shoot
   }
 }
