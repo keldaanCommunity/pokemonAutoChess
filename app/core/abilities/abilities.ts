@@ -10533,6 +10533,22 @@ export class FieryWrathStrategy extends AbilityStrategy {
   }
 }
 
+export class ViseGripStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const damage = [30, 60, 100][pokemon.stars - 1] ?? 100
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.status.triggerLocked(4000, pokemon)
+    pokemon.status.triggerLocked(4000, pokemon)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -10917,5 +10933,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.TRICK_OR_TREAT]: new TrickOrTreatStrategy(),
   [Ability.FREEZING_GLARE]: new FreezingGlareStrategy(),
   [Ability.THUNDEROUS_KICK]: new ThunderousKickStrategy(),
-  [Ability.FIERY_WRATH]: new FieryWrathStrategy()
+  [Ability.FIERY_WRATH]: new FieryWrathStrategy(),
+  [Ability.VISE_GRIP]: new ViseGripStrategy()
 }
