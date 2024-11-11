@@ -548,9 +548,36 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
-    case Ability.DRAGON_BREATH:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+    case Ability.DRAGON_BREATH: {
+      const specialProjectile = addAbilitySprite(skill, coordinates)
+        .setScale(2)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) -
+            Math.PI / 2
+        )
+      const [dx, dy] = OrientationVector[orientation]
+      const finalCoordinates = transformAttackCoordinate(
+        positionX + dx * 1.5,
+        positionY + dy * 1.5,
+        flip
+      )
+
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: finalCoordinates[0],
+        y: finalCoordinates[1],
+        ease: "linear",
+        yoyo: false,
+        duration: 500,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
       break
+    }
 
     case Ability.ICICLE_CRASH:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(3)
