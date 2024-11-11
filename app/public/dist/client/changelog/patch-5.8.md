@@ -21,7 +21,7 @@ Gen 1 is now complete !
 
 # Changes to Synergies
 
-- 
+- Fix Psy 4 Light Screen Unown shop found every 5 shops instead of 3
 
 # Changes to Items
 
@@ -29,6 +29,7 @@ Gen 1 is now complete !
 
 # Bugfix
 
+- Fix Comfey sometimes not losing PP after casting
 - Prevent Celebi to regain player HP when in a ghost matchup
 Thanks to Exeatop, many bugs have been fixed in the abilities and abilities descriptions:
 - Fix Steel Wing damage not applying defense bonus damage
