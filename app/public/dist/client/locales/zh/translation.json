@@ -402,7 +402,8 @@
     "TRICK_OR_TREAT": "万圣夜",
     "FREEZING_GLARE": "冰冷凝视",
     "THUNDEROUS_KICK": "雷电踢",
-    "FIERY_WRATH": "火之怒"
+    "FIERY_WRATH": "火之怒",
+    "VISE_GRIP": "夹住"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1259,7 +1260,9 @@
     "DARUMAKA": "火红不倒翁",
     "DARMANITAN": "达摩狒狒",
     "DARMANITAN_ZEN": "达摩狒狒（达摩模式）",
-    "TURTONATOR": "爆焰龟兽"
+    "TURTONATOR": "爆焰龟兽",
+    "KRABBY": "大钳蟹",
+    "KINGLER": "巨钳蟹"
   },
   "ability_description": {
     "SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1642,7 +1645,8 @@
     "TRICK_OR_TREAT": "目标必须将一件携带道具交给使用者。若没有，则其受到诅咒，诅咒强度随使用者AP增加而增加。",
     "FREEZING_GLARE": "对一条直线上的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL。并有[50,LK]%的概率使他们陷入FREEZE 3秒。",
     "THUNDEROUS_KICK": "将目标击退。其和所有击退路径上的敌方宝可梦陷入FLINCH 4秒，降低[5,SP]点DEF，并受到[20,40,60,SP]点PHYSICAL。",
-    "FIERY_WRATH": "对所有敌方宝可梦造成[40,SP]点SPECIAL，并有[50,LK]%的概率使他们陷入FLINCH 4秒。"
+    "FIERY_WRATH": "对所有敌方宝可梦造成[40,SP]点SPECIAL，并有[50,LK]%的概率使他们陷入FLINCH 4秒。",
+    "VISE_GRIP": "将目标从两侧夹住，对其造成[30,60,100,SP]点SPECIAL。使用者与目标均陷入LOCKED 4秒。"
   },
   "effect": {
     "INGRAIN": "扎根",
@@ -2575,5 +2579,27 @@
     "SANDSTORM": "每秒对非GROUND宝可梦造成5点SPECIAL。\n+30% CONFUSION持续时间",
     "BLOODMOON": "+20% 造成的PHYSICAL\n+30% WOUND持续时间",
     "SMOG": "-15% 命中率\n+30% POISONNED持续时间"
+  },
+  "emotion": {
+    "Normal": "平常",
+    "Happy": "开心",
+    "Pain": "痛苦",
+    "Angry": "愤怒",
+    "Worried": "担忧",
+    "Sad": "悲伤",
+    "Crying": "哭泣",
+    "Shouting": "大叫",
+    "Teary-Eyed": "泪眼",
+    "Determined": "坚定",
+    "Joyous": "快乐",
+    "Inspired": "激励",
+    "Surprised": "惊讶",
+    "Dizzy": "晕眩",
+    "Special0": "特殊0",
+    "Special1": "特殊1",
+    "Sigh": "叹气",
+    "Stunned": "震惊",
+    "Special2": "特殊2",
+    "Special3": "特殊3"
   }
 }
