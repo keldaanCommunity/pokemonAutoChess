@@ -36,7 +36,6 @@ import { Synergy } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
 import { IPokemonData } from "../types/interfaces/PokemonData"
 import { count } from "../utils/array"
-import { isOnBench } from "../utils/board"
 import { logger } from "../utils/logger"
 import { isOnBench } from "../utils/board"
 import {
@@ -1699,7 +1698,11 @@ export default class Simulation extends Schema implements ISimulation {
           false
         )
         enemyWithHighestAtk.status.curseWeakness = true
-        enemyWithHighestAtk.status.triggerParalysis(30000, enemyWithHighestAtk)
+        enemyWithHighestAtk.status.triggerParalysis(
+          30000,
+          enemyWithHighestAtk,
+          null
+        )
       }
     }
 

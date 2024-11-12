@@ -3786,9 +3786,9 @@ export class Slowpoke extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.SLOWBRO
-  hp = 85
+  hp = 80
   atk = 6
-  def = 2
+  def = 3
   speDef = 2
   maxPP = 100
   range = 1
@@ -3802,8 +3802,8 @@ export class Slowbro extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.SLOWKING
-  hp = 180
-  atk = 13
+  hp = 160
+  atk = 11
   def = 5
   speDef = 3
   maxPP = 100
@@ -15164,6 +15164,37 @@ export class DarmanitanZen extends Pokemon {
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
+export class Krabby extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.NORMAL])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.KINGLER
+  hp = 80
+  atk = 6
+  def = 4
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.VISE_GRIP
+  additional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Kingler extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.NORMAL])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 150
+  atk = 15
+  def = 6
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.VISE_GRIP
+  additional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -16025,5 +16056,7 @@ export const PokemonClasses: Record<
   [Pkm.DRAPION]: Drapion,
   [Pkm.DARUMAKA]: Darumaka,
   [Pkm.DARMANITAN]: Darmanitan,
-  [Pkm.DARMANITAN_ZEN]: DarmanitanZen
+  [Pkm.DARMANITAN_ZEN]: DarmanitanZen,
+  [Pkm.KRABBY]: Krabby,
+  [Pkm.KINGLER]: Kingler
 }

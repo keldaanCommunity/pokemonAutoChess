@@ -824,7 +824,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (target.passive === Passive.PSYDUCK && chance(0.1, this)) {
-      target.status.triggerConfusion(3000, target)
+      target.status.triggerConfusion(3000, target, target)
     }
 
     if (this.name === Pkm.MINIOR) {
@@ -832,7 +832,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.name === Pkm.MORPEKO) {
-      target.status.triggerParalysis(2000, target)
+      target.status.triggerParalysis(2000, target, this)
     }
 
     if (this.name === Pkm.MORPEKO_HANGRY) {
@@ -876,7 +876,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.items.has(Item.ELECTIRIZER) && this.count.attackCount % 3 === 0) {
       target.addPP(-15, this, 0, false)
       target.count.manaBurnCount++
-      target.status.triggerParalysis(2000, target)
+      target.status.triggerParalysis(2000, target, this)
     }
 
     // Synergy effects on hit
@@ -1070,7 +1070,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       cells.forEach((cell) => {
         board.addBoardEffect(cell.x, cell.y, Effect.GAS, this.simulation)
         if (cell.value && cell.value.team !== this.team) {
-          cell.value.status.triggerParalysis(3000, cell.value)
+          cell.value.status.triggerParalysis(3000, cell.value, this)
         }
       })
       this.items.delete(Item.SMOKE_BALL)
@@ -1620,7 +1620,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     switch (berry) {
       case Item.AGUAV_BERRY:
         this.handleHeal(this.hp - this.life, this, 0, false)
-        this.status.triggerConfusion(3000, this)
+        this.status.triggerConfusion(3000, this, this)
         break
       case Item.APICOT_BERRY:
         this.handleHeal(20, this, 0, false)
@@ -1741,7 +1741,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 }
 
-export function getStrongestUnit(pokemons: PokemonEntity[]): PokemonEntity {
+export function getStrongestUnit<T extends Pokemon | PokemonEntity>(
+  pokemons: T[]
+): T {
   /*
     strongest is defined as:
     1) number of items
