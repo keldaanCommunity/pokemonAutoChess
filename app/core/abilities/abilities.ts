@@ -6851,7 +6851,7 @@ export class NightShadeStrategy extends AbilityStrategy {
         target.hp *
         (1 + (0.5 * pokemon.ap) / 100)
     )
-    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit, false)
   }
 }
 
@@ -10380,12 +10380,12 @@ export class TrickOrTreatStrategy extends AbilityStrategy {
       }
     } else if (pokemon.ap <= 50) {
       // 0-50 AP: shrink unit size and HP
-      const lifeReduction = 0.4 * (1 + pokemon.ap / 100)
+      const lifeReduction = 0.4 / (1 + pokemon.ap / 100)
       target.life = Math.floor(target.life * lifeReduction)
       target.hp = Math.floor(target.hp * lifeReduction)
       target.status.triggerFlinch(3000, target, pokemon)
     } else if (pokemon.ap <= 100) {
-      // 51-100 AP: transforms the unit in magikarp during X seconds, replacing its ability with splash
+      // 51-100 AP: transforms the unit into magikarp for X seconds, replacing its ability with splash
       const originalAbility = target.skill
       const originalAttack = target.atk
       const originalDefense = target.def
