@@ -30,7 +30,7 @@ Gen 1 is now complete !
 # Bugfix
 
 - Fix Comfey sometimes not losing PP after casting
-- Prevent Celebi to regain player HP when in a ghost matchup
+
 Thanks to Exeatop, many bugs have been fixed in the abilities and abilities descriptions:
 - Fix Steel Wing damage not applying defense bonus damage
 - Fix Soft Boiled shield amount to match description
@@ -58,9 +58,10 @@ Thanks to Exeatop, many bugs have been fixed in the abilities and abilities desc
 - Fix Fell Stringer healing twice 10 HP instead of once
 - Fix Infestation not checking bug type when computing damage and not sending benched bug with most items in priority
 - Fix Force Palm additional damage when target is paralyzed being applied twice instead of once
-- Fix Celebi not healing player HP when fighting against a ghost player
-- Fix Pickup taking money from ghost players
-- Fix Knowledge thief providing XP when fighting as a ghost player
+- Prevent Celebi to regain player HP when in a ghost matchup
+- Prevent Pickup to take up money from ghost players
+- Prevent Knowledge thief to give XP when fighting as a ghost player
+- Prevent Eggsplosion to get an egg when fighting as a ghost player
 
 # Misc
 

@@ -969,7 +969,7 @@ export class SchoolingStrategy extends AbilityStrategy {
       }
     })
 
-    if (pokemon.player) {
+    if (pokemon.player && !pokemon.isGhostOpponent) {
       pokemon.player.board.forEach((ally, id) => {
         if (ally && ally.name === Pkm.WISHIWASHI && isOnBench(ally)) {
           pokemon.addMaxHP(50, pokemon, 0, false)
@@ -7180,7 +7180,7 @@ export class EggsplosionStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
-          if (kill.death && chance(0.25, pokemon)) {
+          if (kill.death && !pokemon.isGhostOpponent && chance(0.25, pokemon)) {
             const egg = createRandomEgg(false)
             const player = pokemon.player
             if (player) {
