@@ -1761,12 +1761,12 @@
     "FLUID": "圆润",
     "SHAPELESS": "无形",
     "ETHEREAL": "飘渺",
-    "SANDSTORM": "沙暴（招式）",
-    "SNOW": "下雪（状态）",
-    "SUN": "太阳",
-    "RAIN": "下雨（天气）",
-    "MISTY": "小霞",
-    "WINDY": "强风（天气）"
+    "SANDSTORM": "沙暴",
+    "SNOW": "下雪",
+    "SUN": "大晴天",
+    "RAIN": "下雨",
+    "MISTY": "薄雾",
+    "WINDY": "强风"
   },
   "effect_description": {
     "STAMINA": "获得15点SHIELD。",
@@ -2844,5 +2844,22 @@
     "GREATBALL": "超级球",
     "ULTRABALL": "高级球",
     "MASTERBALL": "大师球"
+  },
+  "game_full": "本房间已满员",
+  "game_already_started": "游戏已经开始",
+  "min_rank_not_reached": "你的段位过低，无法参与这场排位赛",
+  "max_rank_not_reached": "你的段位过高，无法参与这场排位赛",
+  "not_whitelisted": "只有房主允许的玩家才能参与这场比赛",
+  "blacklisted": "你已被房主踢出房间",
+  "errors": {
+    "USER_INACTIVE": "由于你长时间挂机，系统已将你踢出来节约服务器资源。",
+    "USER_KICKED": "你已被踢出此大厅。",
+    "USER_BANNED": "你的账号已被封禁。",
+    "USER_RANK_TOO_LOW": "你的段位过低，无法加入此大厅。",
+    "USER_NOT_AUTHENTICATED": "请重新验证。",
+    "ROOM_FULL": "这个房间已经满员",
+    "ROOM_EMPTY": "这个房间缺少玩家，已被自动移除",
+    "ROOM_DELETED": "这个房间已被删除",
+    "UNKNOWN_ERROR": "发生错误。异常代码：{{error}}"
   }
 }
