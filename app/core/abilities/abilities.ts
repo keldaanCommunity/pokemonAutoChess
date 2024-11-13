@@ -251,7 +251,11 @@ export class PaydayStrategy extends AbilityStrategy {
       pokemon,
       crit
     )
-    if (death && pokemon.player) {
+    if (
+      death && 
+      pokemon.player &&
+      !pokemon.simulation.isGhostBattle
+    ) {
       pokemon.player.addMoney(pokemon.stars, true, pokemon)
       pokemon.count.moneyCount += pokemon.stars
     }
@@ -280,8 +284,13 @@ export class PickupStrategy extends AbilityStrategy {
     } else {
       if (target.player) {
         const moneyStolen = max(target.player.money)(pokemon.stars)
-        target.player.money -= moneyStolen
-        if (pokemon.player) {
+        if (!target.simulation.isGhostBattle) {
+          target.player.money -= moneyStolen 
+        }
+        if (
+          pokemon.player &&
+          !pokemon.simulation.isGhostBattle
+        ) {
           pokemon.player.addMoney(moneyStolen, true, pokemon)
           pokemon.count.moneyCount += moneyStolen
         }
@@ -506,7 +515,10 @@ export class KnowledgeThiefStrategy extends AbilityStrategy {
         crit
       )
     }
-    if (pokemon.player) {
+    if (
+      pokemon.player &&
+      !pokemon.simulation.isGhostBattle
+    ) {
       pokemon.player.experienceManager.addExperience(1)
     }
   }
@@ -7183,7 +7195,10 @@ export class EggsplosionStrategy extends AbilityStrategy {
           if (kill.death && chance(0.25, pokemon)) {
             const egg = createRandomEgg(false)
             const player = pokemon.player
-            if (player) {
+            if (
+              player &&
+              !pokemon.simulation.isGhostBattle
+            ) {
               const x = getFirstAvailablePositionInBench(player.board)
               if (x !== undefined) {
                 egg.positionX = x
@@ -7444,7 +7459,10 @@ export class GoldRushStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit, true)
     const goldDamage = pokemon.player?.money ? pokemon.player?.money : 0
     const damage = 20 + goldDamage
-    if (pokemon.player) {
+    if (
+      pokemon.player &&
+      !pokemon.simulation.isGhostBattle
+    ) {
       pokemon.player.addMoney(2, true, pokemon)
     }
     target.handleSpecialDamage(
