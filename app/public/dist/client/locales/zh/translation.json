@@ -2254,5 +2254,8 @@
     "SNOW": "下雪",
     "SANDSTORM": "沙暴",
     "BLOODMOON": "血月"
-  }
+  },
+  "loading": "加载中...",
+  "loading_asset": "正在加载资产：",
+  "loading_complete": "加载完成，等待其他玩家..."
 }
