@@ -2831,6 +2831,8 @@
     "ZeroIsleSouth1": "零岛南部 1",
     "ZeroIsleSouth2": "零岛南部 2"
   },
+  "held_items": "携带道具",
+  "by_average_held_items": "平均携带",
   "role": {
     "ADMIN": "作者",
     "MODERATOR": "管理员",
