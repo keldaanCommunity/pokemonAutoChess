@@ -280,7 +280,7 @@ export class PickupStrategy extends AbilityStrategy {
     } else {
       if (target.player) {
         const moneyStolen = max(target.player.money)(pokemon.stars)
-        target.player.money -= moneyStolen
+        target.player.addMoney(-moneyStolen, false, target)
         if (pokemon.player) {
           pokemon.player.addMoney(moneyStolen, true, pokemon)
           pokemon.count.moneyCount += moneyStolen
@@ -506,7 +506,7 @@ export class KnowledgeThiefStrategy extends AbilityStrategy {
         crit
       )
     }
-    if (pokemon.player) {
+    if (pokemon.player && !pokemon.isGhostOpponent) {
       pokemon.player.experienceManager.addExperience(1)
     }
   }
@@ -896,7 +896,7 @@ export class TimeTravelStrategy extends AbilityStrategy {
     if (
       pokemon.player &&
       pokemon.player.canRegainLife &&
-      !pokemon.simulation.isGhostBattle
+      !pokemon.isGhostOpponent
     ) {
       pokemon.player.life = max(100)(pokemon.player.life + 1)
     }

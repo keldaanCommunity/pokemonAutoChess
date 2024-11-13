@@ -58,6 +58,9 @@ Thanks to Exeatop, many bugs have been fixed in the abilities and abilities desc
 - Fix Fell Stringer healing twice 10 HP instead of once
 - Fix Infestation not checking bug type when computing damage and not sending benched bug with most items in priority
 - Fix Force Palm additional damage when target is paralyzed being applied twice instead of once
+- Fix Celebi not healing player HP when fighting against a ghost player
+- Fix Pickup taking money from ghost players
+- Fix Knowledge thief providing XP when fighting as a ghost player
 
 # Misc
 
