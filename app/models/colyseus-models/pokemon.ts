@@ -1925,12 +1925,12 @@ export class Magby extends Pokemon {
   stars = 1
   evolution = Pkm.MAGMAR
   hp = 80
-  atk = 5
+  atk = 6
   def = 1
-  speDef = 1
+  speDef = 2
   maxPP = 80
   range = 2
-  skill = Ability.HEAT_WAVE
+  skill = Ability.FLAMETHROWER
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -1940,12 +1940,12 @@ export class Magmar extends Pokemon {
   stars = 2
   evolution = Pkm.MAGMORTAR
   hp = 140
-  atk = 14
+  atk = 16
   def = 2
-  speDef = 2
+  speDef = 3
   maxPP = 80
   range = 2
-  skill = Ability.HEAT_WAVE
+  skill = Ability.FLAMETHROWER
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -1954,12 +1954,12 @@ export class Magmortar extends Pokemon {
   rarity = Rarity.RARE
   stars = 3
   hp = 280
-  atk = 26
+  atk = 30
   def = 3
-  speDef = 3
+  speDef = 4
   maxPP = 80
   range = 2
-  skill = Ability.HEAT_WAVE
+  skill = Ability.FLAMETHROWER
   attackSprite = AttackSprite.FIRE_RANGE
 }
 

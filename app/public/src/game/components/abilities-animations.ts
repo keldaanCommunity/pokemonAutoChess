@@ -411,14 +411,16 @@ export function displayAbility(
         .setOrigin(0.5, 0.9)
       break
 
-    case Ability.HEAT_WAVE:
-      addAbilitySprite(skill, coordinatesTarget, true)
+    case Ability.FLAMETHROWER:
+      addAbilitySprite(skill, coordinates, true)
+        .setOrigin(0.5, 1)
         .setScale(2)
         .setRotation(
           Math.atan2(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
-          )
+          ) +
+            Math.PI / 2
         )
       break
 

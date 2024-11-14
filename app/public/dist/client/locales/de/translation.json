@@ -1266,7 +1266,6 @@
     "SEISMIC_TOSS": "Fügt dem Ziel [5,10,20,SP] TRUE multipliziert mit Ihrer Spielerstufe zu",
     "GUILLOTINE": "Attacke, die [1,2,3,SP] x ATK SPECIAL am Ziel verursacht. Stellt die Hälfte von PP wieder her, wenn das Ziel KO ist",
     "ROCK_SLIDE": "Attacke, die [30,60,120,SP] SPECIAL am Ziel verursacht. Verdoppelt den Schaden, wenn das Ziel FLYING ist.",
-    "HEAT_WAVE": "Flächenangriff, der allen Feinden in einer Linie hinter dem Ziel [20,40,80,SP] SPECIAL zufügt.",
     "THUNDER": "Attacke, die [30,60,120,SP] SPECIAL am Ziel verursacht.",
     "HYDRO_PUMP": "Flächenangriff, der allen Feinden in einer Linie hinter dem Ziel [25,50,100,SP] SPECIAL zufügt.",
     "DRACO_METEOR": "Flächenangriff, der allen Feinden [50,SP] SPECIAL zufügt",

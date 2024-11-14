@@ -842,7 +842,6 @@
     "SEISMIC_TOSS": "Brengt [5,10,20,SP] TRUE toe aan het doel, vermenigvuldigd met je spelersniveau",
     "GUILLOTINE": "Breng [1,2,3,SP] x ATK SPECIAL toe aan het doelwit. Herstel de helft van de gebruiker's PP als het doelwit KO'd is",
     "ROCK_SLIDE": "Breng [30,60,120,SP] SPECIAL toe aan het doelwit. De schade verdubbelt als het doelwit een FLYING Pokémon is",
-    "HEAT_WAVE": "Breng [20,40,80,SP] SPECIAL toe aan alle vijandelijke Pokémon achter het doelwit",
     "THUNDER": "Breng [30,60,120,SP] SPECIAL aan",
     "HYDRO_PUMP": "Breng [25,50,100,SP] SPECIAL toe aan alle vijandelijke Pokémon achter het doelwit",
     "DRACO_METEOR": "Breng [50,SP] SPECIAL toe aan alle vijandelijke Pokémon",

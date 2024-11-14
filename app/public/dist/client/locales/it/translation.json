@@ -1292,7 +1292,6 @@
     "SEISMIC_TOSS": "Infligge al bersaglio [5,10,20,SP] TRUE moltiplicati per il tuo livello giocatore",
     "GUILLOTINE": "Infligge al bersaglio [1,2,3,SP] per ATK SPECIAL. Ripristina metà PP all'utilizzatore se il bersaglio è andato KO.",
     "ROCK_SLIDE": "Infligge [30,60,120,SP] SPECIAL al bersaglio. Raddoppia i danni se il bersaglio è di tipo FLYING.",
-    "HEAT_WAVE": "Infligge [20,40,80,SP] SPECIAL a tutti i Pokèmon nemici dietro al bersaglio.",
     "THUNDER": "Infligge [30,60,120,SP] SPECIAL.",
     "HYDRO_PUMP": "Infligge [25,50,100,SP] SPECIAL a tutti i Pokèmon nemici dietro al bersaglio.",
     "DRACO_METEOR": "Infligge [50,SP] SPECIAL a tutti i Pokèmon nemici.",

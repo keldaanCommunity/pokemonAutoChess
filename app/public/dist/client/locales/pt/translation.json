@@ -1178,7 +1178,6 @@
     "SEISMIC_TOSS": "Inflige [5,10,20,SP] TRUE no alvo multiplicado pelo seu nível de jogador",
     "GUILLOTINE": "Ataque de alvo mono que causa [1,2,3,SP] x ATK SPECIAL. Restaura metade do PP se o alvo for nocauteado",
     "ROCK_SLIDE": "Ataque de alvo mono que causa [30,60,120,SP] SPECIAL. Dobra o dano se o alvo for do tipo FLYING.",
-    "HEAT_WAVE": "Ataque em área de efeito que causa [20,40,80,SP] SPECIAL a todos os inimigos em uma linha atrás do alvo.",
     "THUNDER": "Dano de alvo mono que causa [30,60,120,SP] SPECIAL.",
     "HYDRO_PUMP": "Ataque em área de efeito que causa [25,50,100,SP] SPECIAL a todos os inimigos em uma linha atrás do alvo.",
     "DRACO_METEOR": "Área de ataque de efeito que causa [50,SP] SPECIAL a todos os inimigos",

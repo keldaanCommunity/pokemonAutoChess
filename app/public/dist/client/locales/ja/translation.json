@@ -1044,7 +1044,6 @@
     "SEISMIC_TOSS": "対象にプレイヤーレベル×[5,10,20,SP] TRUEを与える",
     "GUILLOTINE": "[1,2,3,SP]×ATK SPECIALを与える単体対象攻撃。ターゲットがKOされた場合、MANAの半分を回復",
     "ROCK_SLIDE": "[30,60,120,SP]SPECIALを与える単対象攻撃。対象が飛行タイプの場合、ダメージが2倍になる。",
-    "HEAT_WAVE": "対象の後ろ一列の敵全員に[20,40,80,SP]のSPECIALを与える範囲攻撃。",
     "THUNDER": "[30,60,120,SP] SPECIALを与える単一ターゲットダメージ。",
     "HYDRO_PUMP": "対象の後ろ一列の敵全員に[25,50,100,SP]のSPECIALを与える範囲攻撃。",
     "DRACO_METEOR": "敵全体に範囲攻撃[50,SP]SPECIAL",

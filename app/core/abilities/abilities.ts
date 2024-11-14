@@ -2695,23 +2695,43 @@ export class HeatWaveStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 0
-    switch (pokemon.stars) {
-      case 1:
-        damage = 20
-        break
-      case 2:
-        damage = 40
-        break
-      case 3:
-        damage = 80
-        break
-      default:
-        break
-    }
+    const damage = [10, 20, 30][pokemon.stars - 1] ?? 30
+
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
+      if (value && pokemon.team != value.team) {
+        value.status.freezeCooldown = 0
+        if (chance(0.1, pokemon)) {
+          value.status.triggerBurn(3000, value, pokemon)
+        }
+        value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
+  }
+}
+
+export class FlameThrowerStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
 
     effectInLine(board, pokemon, target, (cell) => {
-      if (cell.value != null && cell.value.team != pokemon.team) {
+      if (
+        cell.value != null &&
+        cell.value.team != pokemon.team &&
+        distanceC(cell.x, cell.y, pokemon.positionX, pokemon.positionY) <= 3
+      ) {
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -6851,7 +6871,14 @@ export class NightShadeStrategy extends AbilityStrategy {
         target.hp *
         (1 + (0.5 * pokemon.ap) / 100)
     )
-    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit, false)
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.TRUE,
+      pokemon,
+      crit,
+      false
+    )
   }
 }
 
@@ -10589,6 +10616,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.GUILLOTINE]: new GuillotineStrategy(),
   [Ability.ROCK_SLIDE]: new RockSlideStrategy(),
   [Ability.HEAT_WAVE]: new HeatWaveStrategy(),
+  [Ability.FLAMETHROWER]: new FlameThrowerStrategy(),
   [Ability.THUNDER]: new ThunderStrategy(),
   [Ability.HYDRO_PUMP]: new HydroPumpStrategy(),
   [Ability.DRACO_METEOR]: new DracoMeteorStrategy(),

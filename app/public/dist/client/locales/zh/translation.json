@@ -1301,7 +1301,6 @@
     "SEISMIC_TOSS": "对目标造成[5,10,20,SP]再乘以玩家等级的TRUE。",
     "GUILLOTINE": "对目标造成SPECIAL，数值相当于[1,2,3,SP]乘以ATK。若目标因此倒下，恢复使用者一半的PP。",
     "ROCK_SLIDE": "对目标造成[30,60,120,SP]点SPECIAL。对FLYING宝可梦伤害翻倍。",
-    "HEAT_WAVE": "对目标身后的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL。",
     "THUNDER": "造成[30,60,120,SP]点SPECIAL。",
     "HYDRO_PUMP": "对目标身后的所有敌方宝可梦造成[25,50,100,SP]点SPECIAL。",
     "DRACO_METEOR": "对所有敌方宝可梦造成[50,SP]点SPECIAL。",

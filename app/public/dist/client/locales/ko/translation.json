@@ -1292,7 +1292,6 @@
     "SEISMIC_TOSS": "대상에게 [5,10,20,SP]에 플레이어 레벨을 곱한 만큼의 TRUE 을 가한다.",
     "GUILLOTINE": "대상에 [1,2,3,SP] x ATK SPECIAL 을 가한다. 대상이 기절한 경우 사용자는 절반의 PP를 회복한다.",
     "ROCK_SLIDE": "대상에 [30,60,120,SP] SPECIAL 을 가한다. 대상이 FLYING 일 경우 대미지가 두배가 된다.",
-    "HEAT_WAVE": "대상의 뒤에 있는 모든 적포켓몬들에게 [20,40,80,SP] SPECIAL 을 가한다.",
     "THUNDER": "[30,60,120,SP] SPECIAL 을 가한다.",
     "HYDRO_PUMP": "대상의 뒤에 있는 모든 적포켓몬들에게 [25,50,100,SP] SPECIAL 을 가한다.",
     "DRACO_METEOR": "모든 적포켓몬들에게 [50,SP] SPECIAL 을 가한다.",

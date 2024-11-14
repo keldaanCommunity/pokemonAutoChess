@@ -1243,7 +1243,6 @@
     "SEISMIC_TOSS": "Inflige [5,10,20,SP] de TRUE al objetivo multiplicado por tu nivel de jugador",
     "GUILLOTINE": "Inflige [1,2,3,SP] x ATK SPECIAL a un objetivo. Restaura la mitad de PP si el objetivo queda KO",
     "ROCK_SLIDE": "Inflige [30,60,120,SP] de SPECIAL a un objetivo, duplica el daño si el objetivo es FLYING",
-    "HEAT_WAVE": "Ataque en área que inflige [20,40,80,SP] de SPECIAL a todos los enemigos que se encuentren detrás del objetivo",
     "THUNDER": "Inflige [30,60,120,SP] de SPECIAL",
     "HYDRO_PUMP": "Ataque de área que causa [25,50,100,SP] de SPECIAL a todos los Pokémon enemigos que se encuentren detrás del objetivo",
     "DRACO_METEOR": "Inflige [50,SP] de SPECIAL a todos los Pokémon enemigos",
