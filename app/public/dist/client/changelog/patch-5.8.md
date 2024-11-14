@@ -21,6 +21,8 @@ Gen 1 is now complete !
 
 # Changes to Synergies
 
+- Buff Water: 4/7/10 → 4/8/12 PP per second
+- Buff Fairy: 15/30/50/70 → 20/40/60/80% additional special damage
 - Fix Psy 4 Light Screen Unown shop found every 5 shops instead of 3
 
 # Changes to Items
