@@ -447,7 +447,7 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     if (pokemon.types.has(Synergy.GHOST)) {
-      pokemon.addDodgeChance(0.25, pokemon, 0, false)
+      pokemon.addDodgeChance(0.2, pokemon, 0, false)
     }
   }
 
@@ -1727,7 +1727,7 @@ export default class Simulation extends Schema implements ISimulation {
       const strongestEnemy = getStrongestUnit(opponentsCursable)
       if (strongestEnemy) {
         strongestEnemy.status.curseFate = true
-        strongestEnemy.status.triggerCurse(6000)
+        strongestEnemy.status.triggerCurse(7000)
       }
     }
   }

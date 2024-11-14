@@ -24,6 +24,7 @@ Gen 1 is now complete !
 
 - Buff Water: 4/7/10 → 4/8/12 PP per second
 - Buff Fairy: 15/30/50/70 → 20/40/60/80% additional special damage
+- Nerf Ghost: dodge chance ~~25%~~ 20% ; Nerf Ghost 8: Curse duration: ~~6~~ 7 seconds
 - Fix Psy 4 Light Screen Unown shop found every 5 shops instead of 3
 
 # Changes to Items
