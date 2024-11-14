@@ -1147,12 +1147,11 @@ export default class BattleManager {
     if (event.effect === Effect.SPIKES) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
-        coordinates[1],
+        coordinates[1]+16,
         "abilities",
         "SPIKES/001.png"
       )
-      sprite.setDepth(1)
-      sprite.setScale(0, 0)
+      sprite.setDepth(1).setOrigin(0.5, 0.5).setScale(0, 0)
       this.boardEventSprites[index] = sprite
       this.group.add(sprite)
 

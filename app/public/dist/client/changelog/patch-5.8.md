@@ -21,6 +21,7 @@ Gen 1 is now complete !
 - Buff Darmanitan: go in Transe Mode when under ~~50%~~ 30% HP, heal ~~10~~ 15 HP per second when in Transe mode
 - Rework Magby line: Attack: 5/14/26 → 6/16/30, SpeDef: 1/2/3 → 2/3/4 ; rename Heat Wave to Flamethrower, buff damage: 20/40/80 → 30/60/120, reduce range to 3 cells, now inflicts Burn for 4 seconds, animation tweaked
 - Magma Storm (Heatran): reduce initial delay from 500ms to 100ms
+- Changed Skarmory: the number of spikes is now fixed to 12 instead of random, and spikes are spread only on the enemy side of the field
 
 # Changes to Synergies
 
