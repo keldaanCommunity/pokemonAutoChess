@@ -21,7 +21,7 @@ Gen 1 is now complete !
 - Buff Darmanitan: go in Transe Mode when under ~~50%~~ 30% HP, heal ~~10~~ 15 HP per second when in Transe mode
 - Rework Magby line: Attack: 5/14/26 → 6/16/30, SpeDef: 1/2/3 → 2/3/4 ; New ability: Flamethrower
 - Magma Storm (Heatran): reduce initial delay from 500ms to 100ms
-- Changed Skarmory: the number of spikes is now fixed to 12 instead of random, and spikes are spread only on the enemy side of the field
+- Change Skarmory: the number of spikes is now fixed to 12 instead of random, and spikes are spread only on the enemy side of the field
 - New ability for Ho-Oh: Fire Blast; buffed damage: 20/50/80 → 30/60/110
 
 # Changes to Synergies

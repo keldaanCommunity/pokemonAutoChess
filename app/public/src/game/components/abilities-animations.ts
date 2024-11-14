@@ -52,7 +52,7 @@ export function displayAbility(
 
   switch (skill) {
     case Ability.FIRE_BLAST:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(3)
       break
 
     case Ability.FIERY_DANCE:
@@ -60,7 +60,7 @@ export function displayAbility(
       break
 
     case Ability.FIRE_SPIN:
-      addAbilitySprite(Ability.FIRE_BLAST, coordinatesTarget, true).setScale(3)
+      addAbilitySprite(Ability.MAGMA_STORM, coordinatesTarget, true).setScale(2)
       break
 
     case Ability.CRABHAMMER:
@@ -1435,7 +1435,7 @@ export function displayAbility(
       break
 
     case Ability.MAGMA_STORM:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(1)
       break
 
     case Ability.THRASH:
