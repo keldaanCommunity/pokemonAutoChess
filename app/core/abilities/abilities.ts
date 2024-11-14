@@ -2485,7 +2485,7 @@ export class FireBlastStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [20, 50, 80][pokemon.stars - 1] ?? 80
+    const damage = [30, 60, 110][pokemon.stars - 1] ?? 110
     const cellsHit = [
       { x: target.positionX, y: target.positionY },
       { x: target.positionX - 1, y: target.positionY },

@@ -1297,7 +1297,7 @@
     "PROTECT": "PROTECT the user, becoming invulnerable for [1,3,5,SP=0.5] seconds.",
     "BLIZZARD": "FREEZE all enemy Pokémon for 2 seconds and deal [5,10,15,SP] SPECIAL. The damage is doubled if the target already suffers from FREEZE.",
     "CONFUSION": "Inflict CONFUSION and SILENCE onto the target for [3,5,7] seconds. If the target is already suffering from CONFUSION, deal [75,150,300,SP] SPECIAL instead.",
-    "FIRE_BLAST": "Shoot a Fire Blast in a star-shaped area of effect, dealing [20,50,80,SP] SPECIAL to all enemy Pokémon hit.",
+    "FIRE_BLAST": "Shoot a Fire Blast in a star-shaped area of effect, dealing [30,60,110,SP] SPECIAL to all enemy Pokémon hit.",
     "WHEEL_OF_FIRE": "Shoot a returning Flame Wheel and deal [10,20,30,SP] SPECIAL twice to all enemy Pokémon in its path.",
     "SEISMIC_TOSS": "Deal [5,10,20,SP] multiplied by the allied player's level TRUE to the target.",
     "GUILLOTINE": "Deal [1,2,3,SP] x ATK SPECIAL to the target. Restore half of the user's PP if the target is KO'd.",

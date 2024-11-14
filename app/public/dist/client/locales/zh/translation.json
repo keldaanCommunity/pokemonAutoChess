@@ -1296,7 +1296,7 @@
     "PROTECT": "使用者进入PROTECT，在[1,3,5,SP=0.5]内无敌。",
     "BLIZZARD": "使所有敌方宝可梦陷入FREEZE 2秒，并对其造成[5,10,15,SP]点SPECIAL。 已经处于FREEZE的敌人受到伤害翻倍。",
     "CONFUSION": "使目标陷入CONFUSION及SILENCE[3,5,7]秒。若已经处于CONFUSION，改为造成[75,150,300,SP]点SPECIAL。",
-    "FIRE_BLAST": "发射一道对星形区域造成伤害的火焰，对击中的所有敌方宝可梦造成[20,50,80,SP]点SPECIAL。",
+    "FIRE_BLAST": "发射一道对星形区域造成伤害的火焰，对击中的所有敌方宝可梦造成[30,60,110,SP]点SPECIAL。",
     "WHEEL_OF_FIRE": "发射一个会返回的火焰轮，对击中的所有敌方宝可梦造成[10,20,30,SP]点SPECIAL两次。",
     "SEISMIC_TOSS": "对目标造成[5,10,20,SP]再乘以玩家等级的TRUE。",
     "GUILLOTINE": "对目标造成SPECIAL，数值相当于[1,2,3,SP]乘以ATK。若目标因此倒下，恢复使用者一半的PP。",
