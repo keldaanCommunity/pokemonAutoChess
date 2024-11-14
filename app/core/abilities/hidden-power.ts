@@ -457,9 +457,12 @@ export class HiddenPowerTStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    pickNRandomIn(Berries, 3).forEach((item) => {
-      unown.player && unown.player.items.push(item)
-    })
+    if (unown.player && !unown.isGhostOpponent) {
+      const player = unown.player
+      pickNRandomIn(Berries, 3).forEach((item) => {
+        player.items.push(item)
+      })
+    }
   }
 }
 
