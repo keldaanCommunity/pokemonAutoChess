@@ -864,7 +864,7 @@ export default abstract class PokemonState {
       const crit =
         pokemon.items.has(Item.REAPER_CLOTH) &&
         chance(pokemon.critChance / 100, pokemon)
-      pokemon.handleHeal(10, pokemon, 1, crit)
+      pokemon.handleHeal(15, pokemon, 1, crit)
       if (pokemon.life >= pokemon.hp) {
         pokemon.index = PkmIndex[Pkm.DARMANITAN]
         pokemon.name = Pkm.DARMANITAN

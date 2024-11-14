@@ -2232,8 +2232,8 @@
     "OGERPON_CORNERSTONE": "Ogerpon peut porter TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK et CORNERSTONE_MASK pour changer son apparence. Quand il lance sa capacité, il inflige FLINCH aux ennemis adjacents pendant 5 secondes",
     "VICTINI": "Augmente la précision de l'équipe. Les alliés ne peuvent plus rater leurs attaques.",
     "AEGISLASH": "Alterne entre la forme Parade et la forme Assaut au lancement de la compétence spéciale.",
-    "DARMANITAN": "Lorsqu'il tombe sous les 50% de HP max, saute vers un endroit sûr et rentre en Mode Transe.",
-    "DARMANITAN_ZEN": "En transe, ne peut plus attaquer ou se déplacer, mais regagne [10,SP] HP par seconde. Retourne en forme Standard une fois totalement soigné.",
+    "DARMANITAN": "Lorsqu'il tombe sous les 30% de HP max, saute vers un endroit sûr et rentre en Mode Transe.",
+    "DARMANITAN_ZEN": "En transe, ne peut plus attaquer ou se déplacer, mais regagne [15,SP] HP par seconde. Retourne en forme Standard une fois totalement soigné.",
     "BAD_LUCK": "Réduit la LUCK de toute l'équipe adverse de 20%",
     "GOOD_LUCK": "Augmente la LUCK de toute l'équipe de 20%",
     "PRIMEAPE": "A chaque KO subi, Colossinge se met encore plus en colère et gagne 1 ATK de façon permanente. Après 10 KO, évolue en Courroussinge."

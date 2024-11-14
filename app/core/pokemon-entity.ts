@@ -1229,7 +1229,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.status.triggerProtect(2000)
     }
 
-    if (this.passive === Passive.DARMANITAN && this.life < 0.5 * this.hp) {
+    if (this.passive === Passive.DARMANITAN && this.life < 0.3 * this.hp) {
       this.index = PkmIndex[Pkm.DARMANITAN_ZEN]
       this.name = Pkm.DARMANITAN_ZEN
       this.passive = Passive.DARMANITAN_ZEN

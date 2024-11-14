@@ -2232,8 +2232,8 @@
     "OGERPON_CORNERSTONE": "오거폰은 TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK 그리고 CORNERSTONE_MASK 을 착용하여 외형을 변환할 수 있습니다.\n 시전 시, 주변 적에게 5초 동안 FLINCH",
     "VICTINI": "팀의 명중률을 올린다. 아군의 공격은 더이상 빗나가지 않는다.",
     "AEGISLASH": "기술을 시전할 때 실드폼과 블레이드폼 사이에 전환한다.",
-    "DARMANITAN": "HP 가 50% 미만이 되면 안전한 장소로 이동하여 달마모드로 전환한다.",
-    "DARMANITAN_ZEN": "공격과 이동을 할 수 없게 되지만, 매초 [10,SP] HP 을 회복한다. 완전히 회복되면 노말모드로 전환한다.",
+    "DARMANITAN": "HP 가 30% 미만이 되면 안전한 장소로 이동하여 달마모드로 전환한다.",
+    "DARMANITAN_ZEN": "공격과 이동을 할 수 없게 되지만, 매초 [15,SP] HP 을 회복한다. 완전히 회복되면 노말모드로 전환한다.",
     "BAD_LUCK": "모든 적의 LUCK 을 20% 감소시킨다.",
     "GOOD_LUCK": "모든 아군의 LUCK 을 20% 증가시킨다.",
     "PRIMEAPE": "성원숭은 기절할 때마다 분노하여 ATK 을 영구적으로 1 획득한다. 10번 기절한 후에는 저승갓숭으로 진화한다."

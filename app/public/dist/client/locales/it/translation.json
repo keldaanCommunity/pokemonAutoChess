@@ -2232,8 +2232,8 @@
     "OGERPON_CORNERSTONE": "Ogerpon può equipaggiare la TEAL_MASK, la HEARTHFLAME_MASK, la WELLSPRING_MASK e la CORNERSTONE_MASK per cambiare la sua forma. Quando Ogerpon lancia la sua abilità, causa FLINCH ai nemici adiacenti per 5 secondi.",
     "VICTINI": "Gli attacchi degli alleati non possono più mancare.",
     "AEGISLASH": "Alternati tra la Forma Scudo e la Forma Spada quando l'abilità viene usata.",
-    "DARMANITAN": "Quando va sotto il 50% di HP, salta verso un punto sicuro e trasformati nello Stato Zen.",
-    "DARMANITAN_ZEN": "Non può più attaccare o muoversi, però curati di [10,SP] HP al secondo. Trasformati nello Stato Normale quando vieni curato completamente.",
+    "DARMANITAN": "Quando va sotto il 30% di HP, salta verso un punto sicuro e trasformati nello Stato Zen.",
+    "DARMANITAN_ZEN": "Non può più attaccare o muoversi, però curati di [15,SP] HP al secondo. Trasformati nello Stato Normale quando vieni curato completamente.",
     "BAD_LUCK": "Riduce la LUCK dei nemici del 20%.",
     "GOOD_LUCK": "Aumenta la LUCK di tutti gli alleati del 20%.",
     "PRIMEAPE": "Primeape diventa più arrabbiato quando va KO, ottenendo 1 di ATK permanentemente. Dopo che Primeape è andato KO 10 volte, si evolve in Annihilape."

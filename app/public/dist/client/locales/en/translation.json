@@ -2245,8 +2245,8 @@
     "OGERPON_CORNERSTONE": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, FLINCH adajcent enemies for 5 seconds",
     "VICTINI": "Increases the accuracy of the team. Allies can no longer miss their attacks.",
     "AEGISLASH": "Alternates between Shield Forme and Blade Forme when casting ability",
-    "DARMANITAN": "When below 50% HP, jumps to a safe place and turns into Zen Mode.",
-    "DARMANITAN_ZEN": "Can no longer move or attack, but regain [10,SP] HP per second. Transforms back into Standard Mode when fully healed.",
+    "DARMANITAN": "When below 30% HP, jumps to a safe place and turns into Zen Mode.",
+    "DARMANITAN_ZEN": "Can no longer move or attack, but regain [15,SP] HP per second. Transforms back into Standard Mode when fully healed.",
     "BAD_LUCK": "Reduce all opponents LUCK by 20%",
     "GOOD_LUCK": "Increase the LUCK of all allies by 20%",
     "PRIMEAPE": "Primeape becomes angrier when KO, gaining 1 permanent ATK. After Primeape is knocked out 10 times, evolves into Annihilape."

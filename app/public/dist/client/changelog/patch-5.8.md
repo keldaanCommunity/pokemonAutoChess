@@ -18,6 +18,7 @@ Gen 1 is now complete !
 - Slowpoke: Def 2 → 3, HP 85 → 80
 - Slowbro: HP 180 → 160, Attack 13 → 11
 - Change Dragon Breath: fix targeting and apply special damage instead of true damage ; new animation
+- Buff Darmanitan: go in Transe Mode when under ~~50%~~ 30% HP, heal ~~10~~ 15 HP per second when in Transe mode
 
 # Changes to Synergies
 

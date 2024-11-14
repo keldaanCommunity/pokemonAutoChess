@@ -2251,8 +2251,8 @@
     "OGERPON_CORNERSTONE": "厄鬼椪可以佩戴TEAL_MASK、HEARTHFLAME_MASK，WELLSPRING_MASK或CORNERSTONE_MASK来改变其外貌。在此形态下释放招式时，使相邻敌方宝可梦陷入FLINCH 5秒。",
     "VICTINI": "提升所有我方宝可梦的命中率。我方宝可梦的攻击不会打空。",
     "AEGISLASH": "释放招式时会在盾牌形态和刀剑形态之间切换。",
-    "DARMANITAN": "HP低于50%时，跳至一个安全的位置，并进入达摩模式。",
-    "DARMANITAN_ZEN": "无法移动或攻击，但每秒恢复[10,SP]点HP。恢复至满后回到普通模式。",
+    "DARMANITAN": "HP低于30%时，跳至一个安全的位置，并进入达摩模式。",
+    "DARMANITAN_ZEN": "无法移动或攻击，但每秒恢复[15,SP]点HP。恢复至满后回到普通模式。",
     "BAD_LUCK": "降低所有敌方宝可梦20%的LUCK。",
     "GOOD_LUCK": "提升所有我方宝可梦20%的LUCK。",
     "PRIMEAPE": "火爆猴每次被击倒都会变得更愤怒，永久提升1点ATK。被击倒10次后进化为弃世猴。"
