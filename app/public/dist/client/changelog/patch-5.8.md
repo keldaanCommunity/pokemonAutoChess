@@ -19,7 +19,8 @@ Gen 1 is now complete !
 - Slowbro: HP 180 → 160, Attack 13 → 11
 - Change Dragon Breath: fix targeting and apply special damage instead of true damage ; new animation
 - Buff Darmanitan: go in Transe Mode when under ~~50%~~ 30% HP, heal ~~10~~ 15 HP per second when in Transe mode
-- Buff Magby line: Attack: 5/14/26 → 6/16/30, SpeDef: 1/2/3 → 2/3/4 ; rename Heat Wave to Flamethrower, buff damage: 20/40/80 → 30/60/120, reduce range to 3 cells, now inflicts Burn for 4 seconds, animation tweaked
+- Rework Magby line: Attack: 5/14/26 → 6/16/30, SpeDef: 1/2/3 → 2/3/4 ; rename Heat Wave to Flamethrower, buff damage: 20/40/80 → 30/60/120, reduce range to 3 cells, now inflicts Burn for 4 seconds, animation tweaked
+- Magma Storm (Heatran): reduce initial delay from 500ms to 100ms
 
 # Changes to Synergies
 

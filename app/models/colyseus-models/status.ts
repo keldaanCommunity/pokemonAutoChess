@@ -266,10 +266,10 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerMagmaStorm(pkm: PokemonEntity, origin: PokemonEntity | null) {
+  triggerMagmaStorm(delay: number, origin: PokemonEntity | null) {
     if (!this.magmaStorm && origin) {
       this.magmaStorm = true
-      this.magmaStormCooldown = 500
+      this.magmaStormCooldown = delay
       this.magmaStormOrigin = origin
     }
   }
@@ -281,7 +281,7 @@ export default class Status extends Schema implements IStatus {
       for (let i = 0; i < adjacentCells.length; i++) {
         const cell = adjacentCells[i]
         if (cell && cell.value && cell.value.team === pkm.team) {
-          cell.value.status.triggerMagmaStorm(cell.value, this.magmaStormOrigin)
+          cell.value.status.triggerMagmaStorm(500, this.magmaStormOrigin)
           break
         }
       }

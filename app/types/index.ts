@@ -608,7 +608,6 @@ export interface IPokemonEntity {
 }
 
 export interface IStatus {
-  magmaStorm: boolean
   burn: boolean
   silence: boolean
   fatigue: boolean
