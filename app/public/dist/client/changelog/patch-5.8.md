@@ -62,6 +62,7 @@ Thanks to Exeatop, many bugs have been fixed in the abilities and abilities desc
 - Prevent Pickup to take up money from ghost players
 - Prevent Knowledge thief to give XP when fighting as a ghost player
 - Prevent Eggsplosion to get an egg when fighting as a ghost player
+- Prevent Unowns to give player bonuses when fighting as a ghost player
 
 # Misc
 
