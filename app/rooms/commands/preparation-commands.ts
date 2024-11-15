@@ -106,18 +106,6 @@ export class OnJoinCommand extends Command<
             })
           }
 
-          if (this.state.gameMode !== GameMode.CUSTOM_LOBBY) {
-            this.clock.setTimeout(() => {
-              if (
-                this.state.users.has(u.uid) &&
-                !this.state.users.get(u.uid)!.ready
-              ) {
-                this.state.users.delete(u.uid)
-                client.leave(CloseCodes.USER_KICKED) // kick clients that can't auto-ready in time. Still investigating why this happens for some people
-              }
-            }, 10000)
-          }
-
           this.state.addMessage({
             authorId: "server",
             payload: `${u.displayName} joined.`,
@@ -143,6 +131,9 @@ export class OnJoinCommand extends Command<
             `There is more than 8 players in the lobby which was not supposed to happen`
           )
         }
+      }
+      if (this.room.state.gameMode !== GameMode.CUSTOM_LOBBY) {
+        this.room.dispatcher.dispatch(new OnToggleReadyCommand(), {client, ready: true})
       }
     } catch (error) {
       logger.error(error)
@@ -549,6 +540,7 @@ export class OnToggleReadyCommand extends Command<
   execute({ client, ready }) {
     try {
       // cannot toggle ready in quick play / ranked / tournament game mode
+      if (this.room.state.gameMode !== GameMode.CUSTOM_LOBBY && ready !== true && ready !== undefined)
       if (this.room.state.gameMode !== GameMode.CUSTOM_LOBBY && ready !== true)
         return
 
