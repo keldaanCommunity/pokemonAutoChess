@@ -540,7 +540,6 @@ export class OnToggleReadyCommand extends Command<
   execute({ client, ready }) {
     try {
       // cannot toggle ready in quick play / ranked / tournament game mode
-      if (this.room.state.gameMode !== GameMode.CUSTOM_LOBBY && ready !== true && ready !== undefined)
       if (this.room.state.gameMode !== GameMode.CUSTOM_LOBBY && ready !== true)
         return
 
