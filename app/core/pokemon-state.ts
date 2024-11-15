@@ -88,13 +88,13 @@ export default abstract class PokemonState {
 
       let additionalSpecialDamagePart = 0
       if (pokemon.effects.has(Effect.AROMATIC_MIST)) {
-        additionalSpecialDamagePart += 0.15
+        additionalSpecialDamagePart += 0.2
       } else if (pokemon.effects.has(Effect.FAIRY_WIND)) {
-        additionalSpecialDamagePart += 0.3
+        additionalSpecialDamagePart += 0.4
       } else if (pokemon.effects.has(Effect.STRANGE_STEAM)) {
-        additionalSpecialDamagePart += 0.5
+        additionalSpecialDamagePart += 0.6
       } else if (pokemon.effects.has(Effect.MOON_FORCE)) {
-        additionalSpecialDamagePart += 0.7
+        additionalSpecialDamagePart += 0.8
       }
 
       let isAttackSuccessful = true
@@ -772,10 +772,10 @@ export default abstract class PokemonState {
       pokemon.addPP(4, pokemon, 0, false)
     }
     if (pokemon.effects.has(Effect.DRIZZLE)) {
-      pokemon.addPP(7, pokemon, 0, false)
+      pokemon.addPP(8, pokemon, 0, false)
     }
     if (pokemon.effects.has(Effect.PRIMORDIAL_SEA)) {
-      pokemon.addPP(10, pokemon, 0, false)
+      pokemon.addPP(12, pokemon, 0, false)
     }
     if (pokemon.simulation.weather === Weather.RAIN) {
       pokemon.addPP(3, pokemon, 0, false)
@@ -860,11 +860,22 @@ export default abstract class PokemonState {
       pokemon.effects.delete(Effect.HAIL)
     }
 
+    if (pokemon.effects.has(Effect.LAVA) && !pokemon.types.has(Synergy.FIRE)) {
+      pokemon.handleDamage({
+        damage: 10,
+        board,
+        attackType: AttackType.SPECIAL,
+        attacker: null,
+        shouldTargetGainMana: true
+      })
+      pokemon.status.triggerBurn(1100, pokemon, undefined)
+    }
+
     if (pokemon.effects.has(Effect.ZEN_MODE)) {
       const crit =
         pokemon.items.has(Item.REAPER_CLOTH) &&
         chance(pokemon.critChance / 100, pokemon)
-      pokemon.handleHeal(10, pokemon, 1, crit)
+      pokemon.handleHeal(15, pokemon, 1, crit)
       if (pokemon.life >= pokemon.hp) {
         pokemon.index = PkmIndex[Pkm.DARMANITAN]
         pokemon.name = Pkm.DARMANITAN

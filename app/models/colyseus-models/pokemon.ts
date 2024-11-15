@@ -1925,12 +1925,12 @@ export class Magby extends Pokemon {
   stars = 1
   evolution = Pkm.MAGMAR
   hp = 80
-  atk = 5
+  atk = 6
   def = 1
-  speDef = 1
+  speDef = 2
   maxPP = 80
   range = 2
-  skill = Ability.HEAT_WAVE
+  skill = Ability.FLAMETHROWER
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -1940,12 +1940,12 @@ export class Magmar extends Pokemon {
   stars = 2
   evolution = Pkm.MAGMORTAR
   hp = 140
-  atk = 14
+  atk = 16
   def = 2
-  speDef = 2
+  speDef = 3
   maxPP = 80
   range = 2
-  skill = Ability.HEAT_WAVE
+  skill = Ability.FLAMETHROWER
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -1954,12 +1954,12 @@ export class Magmortar extends Pokemon {
   rarity = Rarity.RARE
   stars = 3
   hp = 280
-  atk = 26
+  atk = 30
   def = 3
-  speDef = 3
+  speDef = 4
   maxPP = 80
   range = 2
-  skill = Ability.HEAT_WAVE
+  skill = Ability.FLAMETHROWER
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -8549,14 +8549,14 @@ export class Slugma extends Pokemon {
   stars = 1
   evolution = Pkm.MAGCARGO
   hp = 70
-  atk = 7
-  def = 3
-  speDef = 1
-  maxPP = 90
-  range = 2
-  skill = Ability.FIRE_BLAST
+  atk = 6
+  def = 4
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.LAVA_PLUME
   additional = true
-  attackSprite = AttackSprite.FIRE_RANGE
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Magcargo extends Pokemon {
@@ -8568,14 +8568,14 @@ export class Magcargo extends Pokemon {
   rarity = Rarity.RARE
   stars = 2
   hp = 180
-  atk = 16
-  def = 6
-  speDef = 2
-  maxPP = 90
-  range = 2
-  skill = Ability.FIRE_BLAST
+  atk = 14
+  def = 8
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.LAVA_PLUME
   additional = true
-  attackSprite = AttackSprite.FIRE_RANGE
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Sneasel extends Pokemon {
@@ -14799,19 +14799,27 @@ export class Skarmory extends Pokemon {
         const simulation = params.simulation
         const entity = params.entity
 
-        board.forEach((x, y, tg) => {
-          if (!tg && chance(0.3, entity)) {
-            board.addBoardEffect(x, y, Effect.SPIKES, simulation)
-            simulation.room.broadcast(Transfer.ABILITY, {
-              id: simulation.id,
-              skill: Ability.SPIKES,
-              positionX: entity.positionX,
-              positionY: entity.positionY,
-              targetX: x,
-              targetY: y
-            })
-          }
-        })
+        const nbSpikes = 12
+        const positions = new Set<string>()
+        
+        for (let i = 0; i < nbSpikes; i++) {
+          let x,y
+          do {
+          x = Math.floor(Math.random() * board.columns)
+          y = Math.floor(Math.random() * board.rows / 2) + (entity.positionY < 4 ? 4 : 0)
+          } while (positions.has(`${x},${y}`));
+          positions.add(`${x},${y}`)
+
+          board.addBoardEffect(x, y, Effect.SPIKES, simulation)
+          simulation.room.broadcast(Transfer.ABILITY, {
+            id: simulation.id,
+            skill: Ability.SPIKES,
+            positionX: entity.positionX,
+            positionY: entity.positionY,
+            targetX: x,
+            targetY: y
+          })
+        }
       }, 300)
     )
   }

@@ -2485,7 +2485,7 @@ export class FireBlastStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [20, 50, 80][pokemon.stars - 1] ?? 80
+    const damage = [30, 60, 110][pokemon.stars - 1] ?? 110
     const cellsHit = [
       { x: target.positionX, y: target.positionY },
       { x: target.positionX - 1, y: target.positionY },
@@ -2695,23 +2695,43 @@ export class HeatWaveStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 0
-    switch (pokemon.stars) {
-      case 1:
-        damage = 20
-        break
-      case 2:
-        damage = 40
-        break
-      case 3:
-        damage = 80
-        break
-      default:
-        break
-    }
+    const damage = [10, 20, 30][pokemon.stars - 1] ?? 30
+
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
+      if (value && pokemon.team != value.team) {
+        value.status.freezeCooldown = 0
+        if (chance(0.1, pokemon)) {
+          value.status.triggerBurn(3000, value, pokemon)
+        }
+        value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
+  }
+}
+
+export class FlameThrowerStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
 
     effectInLine(board, pokemon, target, (cell) => {
-      if (cell.value != null && cell.value.team != pokemon.team) {
+      if (
+        cell.value != null &&
+        cell.value.team != pokemon.team &&
+        distanceC(cell.x, cell.y, pokemon.positionX, pokemon.positionY) <= 3
+      ) {
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -5418,7 +5438,7 @@ export class MagmaStormStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    target.status.triggerMagmaStorm(target, pokemon)
+    target.status.triggerMagmaStorm(100, pokemon)
   }
 }
 
@@ -6112,6 +6132,41 @@ export class SmogStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
+      }
+    })
+  }
+}
+
+export class LavaPlumeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const cells = board.getCellsInFront(pokemon, target)
+    const damage = [20,40,80][pokemon.stars - 1] ?? 80
+
+    cells.forEach((cell) => {
+      board.addBoardEffect(cell.x, cell.y, Effect.LAVA, pokemon.simulation)
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.LAVA_PLUME,
+          positionX: pokemon.positionX,
+          positionY: pokemon.positionY,
+          targetX: cell.x,
+          targetY: cell.y
+        })
       }
     })
   }
@@ -6851,7 +6906,14 @@ export class NightShadeStrategy extends AbilityStrategy {
         target.hp *
         (1 + (0.5 * pokemon.ap) / 100)
     )
-    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit, false)
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.TRUE,
+      pokemon,
+      crit,
+      false
+    )
   }
 }
 
@@ -10589,6 +10651,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.GUILLOTINE]: new GuillotineStrategy(),
   [Ability.ROCK_SLIDE]: new RockSlideStrategy(),
   [Ability.HEAT_WAVE]: new HeatWaveStrategy(),
+  [Ability.FLAMETHROWER]: new FlameThrowerStrategy(),
   [Ability.THUNDER]: new ThunderStrategy(),
   [Ability.HYDRO_PUMP]: new HydroPumpStrategy(),
   [Ability.DRACO_METEOR]: new DracoMeteorStrategy(),
@@ -10941,5 +11004,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FREEZING_GLARE]: new FreezingGlareStrategy(),
   [Ability.THUNDEROUS_KICK]: new ThunderousKickStrategy(),
   [Ability.FIERY_WRATH]: new FieryWrathStrategy(),
-  [Ability.VISE_GRIP]: new ViseGripStrategy()
+  [Ability.VISE_GRIP]: new ViseGripStrategy(),
+  [Ability.LAVA_PLUME]: new LavaPlumeStrategy(),
 }

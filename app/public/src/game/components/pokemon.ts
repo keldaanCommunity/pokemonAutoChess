@@ -100,7 +100,6 @@ export default class PokemonSprite extends DraggableObject {
   charm: GameObjects.Sprite | undefined
   flinch: GameObjects.Sprite | undefined
   curse: GameObjects.Sprite | undefined
-  magmaStorm: GameObjects.Sprite | undefined
   poison: GameObjects.Sprite | undefined
   protect: GameObjects.Sprite | undefined
   resurection: GameObjects.Sprite | undefined

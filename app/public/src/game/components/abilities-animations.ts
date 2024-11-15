@@ -52,7 +52,7 @@ export function displayAbility(
 
   switch (skill) {
     case Ability.FIRE_BLAST:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(3)
       break
 
     case Ability.FIERY_DANCE:
@@ -60,7 +60,7 @@ export function displayAbility(
       break
 
     case Ability.FIRE_SPIN:
-      addAbilitySprite(Ability.FIRE_BLAST, coordinatesTarget, true).setScale(3)
+      addAbilitySprite(Ability.MAGMA_STORM, coordinatesTarget, true).setScale(2)
       break
 
     case Ability.CRABHAMMER:
@@ -411,14 +411,16 @@ export function displayAbility(
         .setOrigin(0.5, 0.9)
       break
 
-    case Ability.HEAT_WAVE:
-      addAbilitySprite(skill, coordinatesTarget, true)
+    case Ability.FLAMETHROWER:
+      addAbilitySprite(skill, coordinates, true)
+        .setOrigin(0.5, 1)
         .setScale(2)
         .setRotation(
           Math.atan2(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
-          )
+          ) +
+            Math.PI / 2
         )
       break
 
@@ -1433,7 +1435,7 @@ export function displayAbility(
       break
 
     case Ability.MAGMA_STORM:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(1)
       break
 
     case Ability.THRASH:
@@ -1628,6 +1630,22 @@ export function displayAbility(
             .setTint(0xf060a0)
             .setScale(3)
             .setDepth(1)
+        }
+      })
+      break
+    }
+
+    case Ability.LAVA_PLUME: {
+      const specialProjectile = addAbilitySprite(Ability.SLUDGE_WAVE, coordinates).setScale(1).setTint(0xffc020)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        duration: 800,
+        scale: 2,
+        onComplete: () => {
+          specialProjectile.destroy()
+          addAbilitySprite("FLAME_HIT", coordinatesTarget, true).setScale(2)
         }
       })
       break

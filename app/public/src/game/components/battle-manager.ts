@@ -1147,12 +1147,11 @@ export default class BattleManager {
     if (event.effect === Effect.SPIKES) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
-        coordinates[1],
+        coordinates[1]+16,
         "abilities",
         "SPIKES/001.png"
       )
-      sprite.setDepth(1)
-      sprite.setScale(0, 0)
+      sprite.setDepth(1).setOrigin(0.5, 0.5).setScale(0, 0)
       this.boardEventSprites[index] = sprite
       this.group.add(sprite)
 
@@ -1195,8 +1194,28 @@ export default class BattleManager {
         "abilities",
         `${Effect.HAIL}/000.png`
       )
-      sprite.setDepth(7).setScale(1).setAlpha(0)
+      sprite.setDepth(1).setScale(1).setAlpha(0)
       sprite.anims.play(Effect.HAIL)
+      this.boardEventSprites[index] = sprite
+      this.group.add(sprite)
+
+      this.scene.tweens.add({
+        targets: sprite,
+        alpha: 1,
+        duration: 200,
+        delay: 800
+      })
+    }
+
+    if (event.effect === Effect.LAVA) {
+      const sprite = this.scene.add.sprite(
+        coordinates[0],
+        coordinates[1]+12,
+        "abilities",
+        `${Effect.LAVA}/000.png`
+      )
+      sprite.setDepth(1).setScale(2).setAlpha(0)
+      sprite.anims.play(Effect.LAVA)
       this.boardEventSprites[index] = sprite
       this.group.add(sprite)
 

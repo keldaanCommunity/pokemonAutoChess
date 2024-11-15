@@ -1212,7 +1212,6 @@
     "SEISMIC_TOSS": "Gây [5,10,20,SP] TRUE lên mục tiêu nhân với cấp độ người chơi của bạn",
     "GUILLOTINE": "Gây [1,2,3,SP] x ATK SPECIAL lên mục tiêu. Hồi phục một nửa PP nếu đối thủ bị tiêu diệt",
     "ROCK_SLIDE": "Gây [30,60,120,SP] SPECIAL tới mục tiêu, gấp đôi sát thương nếu mục tiêu đang trúng hiệu ứng FLYING",
-    "HEAT_WAVE": "Gây [20,40,80,SP] SPECIAL cho tất cả Pokémon phía sau mục tiêu",
     "THUNDER": "Gây [30,60,120,SP] SPECIAL",
     "HYDRO_PUMP": "Gây [25,50,100,SP] SPECIAL đến tất cả Pokémon đối thủ phía sau mục tiêu",
     "DRACO_METEOR": "Gây [50,SP] SPECIAL tới tất cả Pokémon đối thủ",

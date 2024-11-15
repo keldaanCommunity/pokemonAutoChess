@@ -132,6 +132,7 @@ export enum Effect {
   BERSERK = "BERSERK",
   STICKY_WEB = "STICKY_WEB",
   HAIL = "HAIL",
+  LAVA = "LAVA",
   FLUID = "FLUID",
   SHAPELESS = "SHAPELESS",
   ETHEREAL = "ETHEREAL",
@@ -146,7 +147,8 @@ export const BoardEffects = [
   Effect.STEALTH_ROCKS,
   Effect.SPIKES,
   Effect.STICKY_WEB,
-  Effect.HAIL
+  Effect.HAIL,
+  Effect.LAVA
 ] as const
 
 export type BoardEffect = (typeof BoardEffects)[number]
