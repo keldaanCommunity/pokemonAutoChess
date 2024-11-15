@@ -5,7 +5,7 @@ import { FilterQuery } from "mongoose"
 import { GameUser, IGameUser } from "../../models/colyseus-models/game-user"
 import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
 import UserMetadata from "../../models/mongo-models/user-metadata"
-import { Role } from "../../types"
+import { Role, Transfer } from "../../types"
 import {
   EloRank,
   EloRankThreshold,
@@ -132,8 +132,38 @@ export class OnJoinCommand extends Command<
           )
         }
       }
+
       if (this.room.state.gameMode !== GameMode.CUSTOM_LOBBY) {
-        this.room.dispatcher.dispatch(new OnToggleReadyCommand(), {client, ready: true})
+        const timeout = 10000
+        const interval = 250
+
+        const heartbeat = this.clock.setInterval(
+          (maxAttempts, attempts) => {
+            if (attempts >= maxAttempts) { return }
+
+            client.send(Transfer.TOGGLE_READY)
+            attempts++
+          },
+          interval,
+          [timeout / interval - 1, 1]
+        )
+
+        client.userData.heartbeat = heartbeat
+
+        client.userData.kickTimer = this.clock.setTimeout(() => {
+            if (
+              this.state.users.has(auth.uid) &&
+              !this.state.users.get(auth.uid)!.ready
+            ) {
+              this.state.users.delete(auth.uid)
+              client.leave(CloseCodes.USER_KICKED) // kick clients that don't respond in time
+            }
+
+            heartbeat.clear()
+          },
+          timeout
+        )
+
       }
     } catch (error) {
       logger.error(error)
@@ -540,8 +570,12 @@ export class OnToggleReadyCommand extends Command<
   execute({ client, ready }) {
     try {
       // cannot toggle ready in quick play / ranked / tournament game mode
-      if (this.room.state.gameMode !== GameMode.CUSTOM_LOBBY && ready !== true)
-        return
+      if (this.room.state.gameMode !== GameMode.CUSTOM_LOBBY) {
+        client.userData?.heartbeat.clear()
+        client.userData?.kickTimer.clear()
+        if (ready !== true)
+          return
+      }
 
       // logger.debug(this.state.users.get(client.auth.uid).ready);
       if (client.auth?.uid && this.state.users.has(client.auth.uid)) {

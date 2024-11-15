@@ -358,6 +358,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       /*logger.info(
         `${client.auth.displayName} ${client.id} join preparation room`
       )*/
+      client.userData = {}
       this.dispatcher.dispatch(new OnJoinCommand(), { client, options, auth })
     }
   }

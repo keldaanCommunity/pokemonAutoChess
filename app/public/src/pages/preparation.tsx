@@ -16,7 +16,8 @@ import {
   joinPreparation,
   logIn,
   setErrorAlertMessage,
-  setProfile
+  setProfile,
+  toggleReady
 } from "../stores/NetworkStore"
 import {
   addUser,
@@ -237,6 +238,8 @@ export default function Preparation() {
           }
         }
       })
+      
+      r.onMessage(Transfer.TOGGLE_READY, () => dispatch(toggleReady(true)))
 
       r.onMessage(Transfer.GAME_START, async (roomId) => {
         const token = await firebase.auth().currentUser?.getIdToken()
