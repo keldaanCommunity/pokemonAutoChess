@@ -1635,6 +1635,22 @@ export function displayAbility(
       break
     }
 
+    case Ability.LAVA_PLUME: {
+      const specialProjectile = addAbilitySprite(Ability.SLUDGE_WAVE, coordinates).setScale(1).setTint(0xffc020)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        duration: 800,
+        scale: 2,
+        onComplete: () => {
+          specialProjectile.destroy()
+          addAbilitySprite("FLAME_HIT", coordinatesTarget, true).setScale(2)
+        }
+      })
+      break
+    }
+
     case Ability.WHIRLPOOL: {
       for (let i = 0; i < 4; i++) {
         const whirlpool = addAbilitySprite(skill, coordinates)

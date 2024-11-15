@@ -860,6 +860,17 @@ export default abstract class PokemonState {
       pokemon.effects.delete(Effect.HAIL)
     }
 
+    if (pokemon.effects.has(Effect.LAVA) && !pokemon.types.has(Synergy.FIRE)) {
+      pokemon.handleDamage({
+        damage: 10,
+        board,
+        attackType: AttackType.SPECIAL,
+        attacker: null,
+        shouldTargetGainMana: true
+      })
+      pokemon.status.triggerBurn(1100, pokemon, undefined)
+    }
+
     if (pokemon.effects.has(Effect.ZEN_MODE)) {
       const crit =
         pokemon.items.has(Item.REAPER_CLOTH) &&

@@ -6137,6 +6137,41 @@ export class SmogStrategy extends AbilityStrategy {
   }
 }
 
+export class LavaPlumeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const cells = board.getCellsInFront(pokemon, target)
+    const damage = [20,40,80][pokemon.stars - 1] ?? 80
+
+    cells.forEach((cell) => {
+      board.addBoardEffect(cell.x, cell.y, Effect.LAVA, pokemon.simulation)
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.LAVA_PLUME,
+          positionX: pokemon.positionX,
+          positionY: pokemon.positionY,
+          targetX: cell.x,
+          targetY: cell.y
+        })
+      }
+    })
+  }
+}
+
 export class ShelterStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -10969,5 +11004,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FREEZING_GLARE]: new FreezingGlareStrategy(),
   [Ability.THUNDEROUS_KICK]: new ThunderousKickStrategy(),
   [Ability.FIERY_WRATH]: new FieryWrathStrategy(),
-  [Ability.VISE_GRIP]: new ViseGripStrategy()
+  [Ability.VISE_GRIP]: new ViseGripStrategy(),
+  [Ability.LAVA_PLUME]: new LavaPlumeStrategy(),
 }

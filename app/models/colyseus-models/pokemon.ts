@@ -8549,14 +8549,14 @@ export class Slugma extends Pokemon {
   stars = 1
   evolution = Pkm.MAGCARGO
   hp = 70
-  atk = 7
-  def = 3
-  speDef = 1
-  maxPP = 90
-  range = 2
-  skill = Ability.FIRE_BLAST
+  atk = 6
+  def = 4
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.LAVA_PLUME
   additional = true
-  attackSprite = AttackSprite.FIRE_RANGE
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Magcargo extends Pokemon {
@@ -8568,14 +8568,14 @@ export class Magcargo extends Pokemon {
   rarity = Rarity.RARE
   stars = 2
   hp = 180
-  atk = 16
-  def = 6
-  speDef = 2
-  maxPP = 90
-  range = 2
-  skill = Ability.FIRE_BLAST
+  atk = 14
+  def = 8
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.LAVA_PLUME
   additional = true
-  attackSprite = AttackSprite.FIRE_RANGE
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export class Sneasel extends Pokemon {

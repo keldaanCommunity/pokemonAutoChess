@@ -23,6 +23,7 @@ Gen 1 is now complete !
 - Magma Storm (Heatran): reduce initial delay from 500ms to 100ms
 - Change Skarmory: the number of spikes is now fixed to 12 instead of random, and spikes are spread only on the enemy side of the field
 - New ability for Ho-Oh: Fire Blast; buffed damage: 20/50/80 → 30/60/110
+- Rework Slugma line: Range 2 → 1, Attack 7/16 → 6/14, Def: 3/6 → 4/8, SpeDef: 1/2 → 3/5 ; PP 90 → 100 ; new ability: Lava Plume
 
 # Changes to Synergies
 
