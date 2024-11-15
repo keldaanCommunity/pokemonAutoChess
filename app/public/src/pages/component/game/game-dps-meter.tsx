@@ -62,7 +62,7 @@ export default function GameDpsMeter() {
             <img src={getAvatarSrc(avatar)} className="pokemon-portrait"></img>
             <p>{name}</p>
           </div>
-          <h2>Vs</h2>
+          <h2>vs</h2>
           <div>
             <img
               src={getAvatarSrc(opponentAvatar)}
