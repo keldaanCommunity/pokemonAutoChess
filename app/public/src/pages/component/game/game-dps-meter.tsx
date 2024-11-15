@@ -9,6 +9,7 @@ import GamePlayerDpsTakenMeter from "./game-player-dps-taken-meter"
 import GamePlayerHpsMeter from "./game-player-hps-meter"
 import { Team } from "../../../../../types/enum/Game"
 import "./game-dps-meter.css"
+import { PVEStages } from "../../../../../models/pve-stages"
 
 export default function GameDpsMeter() {
   const { t } = useTranslation()
@@ -16,6 +17,8 @@ export default function GameDpsMeter() {
   const team = useAppSelector(
     (state) => state.game.currentTeam
   )
+  const stageLevel = useAppSelector((state) => state.game.stageLevel)
+
   const blueDpsMeter = useAppSelector((state) => state.game.blueDpsMeter)
   const redDpsMeter = useAppSelector((state) => state.game.redDpsMeter)
   const myDpsMeter = team === Team.BLUE_TEAM ? blueDpsMeter : redDpsMeter
@@ -24,6 +27,8 @@ export default function GameDpsMeter() {
   const [isOpen, setOpen] = useState(preferences.showDpsMeter)
 
   if (!currentPlayer) return null
+
+  const isPVE = stageLevel in PVEStages
 
   const name = currentPlayer.name
   const avatar = currentPlayer.avatar
@@ -63,7 +68,7 @@ export default function GameDpsMeter() {
               src={getAvatarSrc(opponentAvatar)}
               className="pokemon-portrait"
             ></img>
-            <p>{t(opponentName)}</p>
+            <p>{isPVE ? t(opponentName) : opponentName}</p>
           </div>
         </header>
         <Tabs>
