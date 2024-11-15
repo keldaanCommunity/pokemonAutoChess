@@ -204,6 +204,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     )
   }
 
+  get isGhostOpponent(): boolean {
+    return this.simulation.isGhostBattle && this.player?.team === Team.RED_TEAM
+  }
+
   isTargettableBy(
     attacker: IPokemonEntity,
     targetEnemies = true,

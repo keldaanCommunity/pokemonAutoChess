@@ -112,7 +112,7 @@ export class HiddenPowerDStrategy extends HiddenPowerStrategy {
   ) {
     super.process(unown, state, board, target, crit)
     const player = unown.player
-    if (player) {
+    if (player && !unown.isGhostOpponent) {
       const x = getFirstAvailablePositionInBench(player.board)
       if (x !== undefined) {
         const ditto = PokemonFactory.createPokemonFromName(Pkm.DITTO, player)
@@ -135,7 +135,7 @@ export class HiddenPowerEStrategy extends HiddenPowerStrategy {
     super.process(unown, state, board, target, crit)
     const egg = createRandomEgg(false)
     const player = unown.player
-    if (player) {
+    if (player && !unown.isGhostOpponent) {
       const x = getFirstAvailablePositionInBench(player.board)
       if (x !== undefined) {
         egg.positionX = x
@@ -159,7 +159,7 @@ export class HiddenPowerFStrategy extends HiddenPowerStrategy {
     const nbFishes = 3
     const player = unown.player
 
-    if (player) {
+    if (player && !unown.isGhostOpponent) {
       for (let i = 0; i < nbFishes; i++) {
         const fish = unown.simulation.room.state.shop.pickFish(
           player,
@@ -180,7 +180,7 @@ export class HiddenPowerGStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    if (unown.player) {
+    if (unown.player && !unown.isGhostOpponent) {
       unown.player.addMoney(5, true, unown)
     }
   }
@@ -214,7 +214,7 @@ export class HiddenPowerIStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    if (unown.player) {
+    if (unown.player && !unown.isGhostOpponent) {
       unown.player.items.push(pickRandomIn(ItemComponents))
     }
   }
@@ -425,7 +425,7 @@ export class HiddenPowerRStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    if (unown.player) {
+    if (unown.player && !unown.isGhostOpponent) {
       unown.player.shopFreeRolls += 6
     }
   }
@@ -457,9 +457,12 @@ export class HiddenPowerTStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    pickNRandomIn(Berries, 3).forEach((item) => {
-      unown.player && unown.player.items.push(item)
-    })
+    if (unown.player && !unown.isGhostOpponent) {
+      const player = unown.player
+      pickNRandomIn(Berries, 3).forEach((item) => {
+        player.items.push(item)
+      })
+    }
   }
 }
 
@@ -531,7 +534,7 @@ export class HiddenPowerWStrategy extends HiddenPowerStrategy {
   ) {
     super.process(unown, state, board, target, crit)
     const player = unown.player
-    if (player) {
+    if (player && !unown.isGhostOpponent) {
       const x = getFirstAvailablePositionInBench(player.board)
       if (x !== undefined) {
         const synergiesSortedByLevel = Array.from(player.synergies).sort(
@@ -643,7 +646,7 @@ export class HiddenPowerQMStrategy extends HiddenPowerStrategy {
   ) {
     super.process(unown, state, board, target, crit)
     const player = unown.player
-    if (player) {
+    if (player && !unown.isGhostOpponent) {
       const stageLevel = unown.simulation.stageLevel
       const candidates = getUnownsPoolPerStage(stageLevel).filter(
         (u) => u !== Pkm.UNOWN_QUESTION
@@ -672,34 +675,34 @@ export class HiddenPowerEMStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const player = pokemon.player!
-    if (player) {
-      const corners = [
-        [0, 0],
-        [board.columns - 1, 0],
-        [0, board.rows - 1],
-        [board.columns - 1, board.rows - 1]
-      ]
-      const stageLevel = pokemon.simulation.stageLevel
-      const candidates = getUnownsPoolPerStage(stageLevel).filter(
-        (u) => u !== Pkm.UNOWN_EXCLAMATION
+    const corners = [
+      [0, 0],
+      [board.columns - 1, 0],
+      [0, board.rows - 1],
+      [board.columns - 1, board.rows - 1]
+    ]
+    const stageLevel = pokemon.simulation.stageLevel
+    const candidates = getUnownsPoolPerStage(stageLevel).filter(
+      (u) => u !== Pkm.UNOWN_EXCLAMATION
+    )
+    corners.forEach(([x, y]) => {
+      const unownName = pickRandomIn(candidates)
+      const unown = PokemonFactory.createPokemonFromName(
+        unownName,
+        pokemon.player
       )
-      corners.forEach(([x, y]) => {
-        const unownName = pickRandomIn(candidates)
-        const unown = PokemonFactory.createPokemonFromName(unownName, player)
-        const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardTo(
-          x,
-          y,
-          pokemon.team
-        )
-        pokemon.simulation.addPokemon(
-          unown,
-          coord.x,
-          coord.y,
-          pokemon.team,
-          false
-        )
-      })
-    }
+      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardTo(
+        x,
+        y,
+        pokemon.team
+      )
+      pokemon.simulation.addPokemon(
+        unown,
+        coord.x,
+        coord.y,
+        pokemon.team,
+        false
+      )
+    })
   }
 }

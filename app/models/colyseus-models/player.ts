@@ -186,11 +186,7 @@ export default class Player extends Schema implements IPlayer {
     countTotalEarned: boolean,
     origin: PokemonEntity | null
   ) {
-    if (
-      origin &&
-      origin.simulation.isGhostBattle &&
-      origin.player?.team === Team.RED_TEAM
-    ) {
+    if (origin?.isGhostOpponent) {
       return // do not count money earned by pokemons from a ghost player
     }
     this.money += value
