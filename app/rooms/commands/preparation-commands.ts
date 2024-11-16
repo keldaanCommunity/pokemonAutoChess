@@ -114,6 +114,22 @@ export class OnJoinCommand extends Command<
         }
       }
 
+      const timeout = 10000
+
+      client.userData.kickTimer = this.clock.setTimeout(() => {
+          if (
+            this.state.users.has(auth.uid) &&
+            !this.state.users.get(auth.uid)!.ready
+          ) {
+            this.state.users.delete(auth.uid)
+            client.leave(CloseCodes.USER_KICKED) // kick clients that don't respond in time
+          }
+
+          client.userData?.heartbeat?.clear()
+        },
+        timeout
+      )
+
       while (this.state.users.size > MAX_PLAYERS_PER_GAME) {
         // delete a random bot to make room
         const users = entries(this.state.users)
@@ -134,10 +150,9 @@ export class OnJoinCommand extends Command<
       }
 
       if (this.room.state.gameMode !== GameMode.CUSTOM_LOBBY) {
-        const timeout = 10000
         const interval = 250
 
-        const heartbeat = this.clock.setInterval(
+        client.userData.heartbeat = this.clock.setInterval(
           (maxAttempts, attempts) => {
             if (attempts >= maxAttempts) { return }
 
@@ -147,23 +162,6 @@ export class OnJoinCommand extends Command<
           interval,
           [timeout / interval - 1, 1]
         )
-
-        client.userData.heartbeat = heartbeat
-
-        client.userData.kickTimer = this.clock.setTimeout(() => {
-            if (
-              this.state.users.has(auth.uid) &&
-              !this.state.users.get(auth.uid)!.ready
-            ) {
-              this.state.users.delete(auth.uid)
-              client.leave(CloseCodes.USER_KICKED) // kick clients that don't respond in time
-            }
-
-            heartbeat.clear()
-          },
-          timeout
-        )
-
       }
     } catch (error) {
       logger.error(error)
