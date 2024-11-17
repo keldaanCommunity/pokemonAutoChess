@@ -5,6 +5,9 @@
 - Galarian Moltres
 - Krabby
 - Kingler
+- Zygarde (10% Form)
+- Zygarde (50% Form)
+- Zygarde (100% Form)
 
 Gen 1 is now complete !
 

@@ -14,6 +14,7 @@ import { DebugScene } from "../scenes/debug-scene"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
 import { UNOWNS_PER_ABILITY } from "./unown-manager"
+import { BOARD_HEIGHT } from "../../../../types/Config"
 
 export function displayAbility(
   scene: GameScene | DebugScene,
@@ -193,6 +194,22 @@ export function displayAbility(
 
     case "POWER_WHIP/hit":
       addAbilitySprite("POWER_WHIP/hit", coordinates, true).setScale(3)
+      break
+
+    case Ability.LANDS_WRATH:
+      addAbilitySprite(skill, coordinates, true).setScale(1)
+      break
+  
+    case "LANDS_WRATH/hit":
+      addAbilitySprite("LANDS_WRATH/hit", coordinates, true).setScale(2)
+      break
+
+    case Ability.CORE_ENFORCER:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+  
+    case "CORE_ENFORCER/hit":
+      addAbilitySprite("CORE_ENFORCER/hit", coordinates, true).setScale(3)
       break
 
     case Ability.LEECH_SEED:
@@ -1423,6 +1440,21 @@ export function displayAbility(
         y: coordinatesTarget[1],
         ease: "linear",
         duration: 500,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
+    case Ability.THOUSAND_ARROWS: {
+      const specialProjectile = addAbilitySprite(skill, [coordinatesTarget[0],BOARD_HEIGHT-1]).setScale(4)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 300,
         onComplete: () => {
           specialProjectile.destroy()
         }

@@ -339,6 +339,8 @@ export default class Shop {
         if (pkm === Pkm.OGERPON_CORNERSTONE) return synergy === Synergy.ROCK
         if (pkm === Pkm.OGERPON_HEARTHFLAME) return synergy === Synergy.FIRE
         if (pkm === Pkm.OGERPON_WELLSPRING) return synergy === Synergy.AQUATIC
+        if (pkm === Pkm.ZYGARDE_50 && synergy === Synergy.DRAGON) return synergy === Synergy.DRAGON
+        if (pkm === Pkm.ZYGARDE_50) return synergy === Synergy.GROUND
 
         return getPokemonData(pkm).types.includes(synergy)
       })

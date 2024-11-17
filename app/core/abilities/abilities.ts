@@ -10618,6 +10618,101 @@ export class ViseGripStrategy extends AbilityStrategy {
   }
 }
 
+export class LandsWrathStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    let atkDamage = Math.round(pokemon.atk * (1 + pokemon.ap / 100))
+    let cells = board.getAdjacentCells(target.positionX, target.positionY, true)
+
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team){
+        cell.value.handleSpecialDamage(40 + atkDamage, board, AttackType.PHYSICAL, pokemon, crit, false)
+        cell.value.addDefense(-4, pokemon, 0.5, crit)
+        cell.value.addSpecialDefense(-4, pokemon, 0.5, crit)
+
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: "LANDS_WRATH/hit",
+          positionX: cell.value.positionX,
+          positionY: cell.value.positionY
+        })
+      }
+    })
+
+  }
+}
+
+export class ThousandArrowsStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 60
+    const numberOfProjectiles = 33
+
+    for (let i = 0; i < numberOfProjectiles; i++) {
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          const x = randomBetween(0, BOARD_WIDTH - 1)
+          const y = randomBetween(0, BOARD_HEIGHT - 1)
+          const value = board.getValue(x, y)
+          if (value && value.team !== pokemon.team) {
+            value.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+            value.status.triggerLocked(1000, value)
+          }
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: Ability.THOUSAND_ARROWS,
+            positionX: x,
+            positionY: BOARD_HEIGHT-1,
+            targetX: x,
+            targetY: y
+          })
+        }, i * 100)
+      )
+    }
+  }
+}
+
+export class CoreEnforcerStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    
+    target.handleSpecialDamage(150, board, AttackType.SPECIAL, pokemon, crit, true)
+    target.status.triggerLocked(3000, target)
+    target.status.triggerSilence(3000, target)
+
+    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+      id: pokemon.simulation.id,
+      skill: "CORE_ENFORCER/hit",
+      positionX: target.positionX,
+      positionY: target.positionY
+    })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -11006,4 +11101,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FIERY_WRATH]: new FieryWrathStrategy(),
   [Ability.VISE_GRIP]: new ViseGripStrategy(),
   [Ability.LAVA_PLUME]: new LavaPlumeStrategy(),
+  [Ability.LANDS_WRATH]: new LandsWrathStrategy(),
+  [Ability.THOUSAND_ARROWS]: new ThousandArrowsStrategy(),
+  [Ability.CORE_ENFORCER]: new CoreEnforcerStrategy()
 }

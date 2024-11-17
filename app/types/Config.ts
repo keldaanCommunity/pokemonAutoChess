@@ -324,7 +324,8 @@ export const LegendaryShop = new Array<PkmProposition>(
   Pkm.LANDORUS,
   Pkm.ENAMORUS,
   Pkm.MAGEARNA,
-  Pkm.MELMETAL
+  Pkm.MELMETAL,
+  Pkm.ZYGARDE_50
 )
 
 export const NB_UNIQUE_PROPOSITIONS = 6
@@ -673,6 +674,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.INCENSE]: { [Stat.SPE_DEF]: 5, [Stat.AP]: 30 },
   [Item.EXP_SHARE]: {},
   [Item.METEORITE]: {},
+  [Item.ZYGARDE_CUBE]: {},
   [Item.BERRY_JUICE]: {},
   [Item.TRASH]: {},
   [Item.DYNAMAX_BAND]: {},
