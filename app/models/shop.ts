@@ -32,7 +32,7 @@ import { Synergy } from "../types/enum/Synergy"
 import { removeInArray } from "../utils/array"
 import { logger } from "../utils/logger"
 import { clamp, min } from "../utils/number"
-import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
+import { chance, pickNRandomIn, pickRandomIn, shuffleArray } from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
 import PokemonFactory from "./pokemon-factory"
@@ -330,7 +330,7 @@ export default class Shop {
 
     for (let i = 0; i < NB_UNIQUE_PROPOSITIONS; i++) {
       const synergy = synergies[i]
-      const candidates = propositions.filter((m) => {
+      let candidates = propositions.filter((m) => {
         const pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
         if (pkm === Pkm.TAPU_BULU) return synergy === Synergy.GRASS
         if (pkm === Pkm.TAPU_FINI) return synergy === Synergy.FAIRY
@@ -342,6 +342,9 @@ export default class Shop {
 
         return getPokemonData(pkm).types.includes(synergy)
       })
+      shuffleArray(candidates)
+      candidates = candidates.filter((p, index) => candidates.findIndex((p2) => PkmFamily[p2] === PkmFamily[p]) === index)
+
       let selectedProposition = pickRandomIn(
         candidates.length > 0 ? candidates : propositions
       )
@@ -498,23 +501,28 @@ export default class Shop {
           Rarity.ULTRA
         ][Math.floor(player.rerollCount / 30)] ?? Rarity.ULTRA
       if (player.rerollCount >= 130 && player.rerollCount % 10 === 0) {
-        const legendaryCandidates: Pkm[] = LegendaryShop.filter<Pkm>(
+        let legendaryCandidates: Pkm[] = LegendaryShop.filter<Pkm>(
           (p): p is Pkm =>
             !(p in PkmDuos) &&
             getPokemonData(p as Pkm).types.some((type) =>
               specificTypesWanted?.includes(type)
             )
         )
+        shuffleArray(legendaryCandidates)
+        legendaryCandidates = legendaryCandidates.filter((p, index) => legendaryCandidates.findIndex((p2) => PkmFamily[p2] === PkmFamily[p]) === index)
         if (legendaryCandidates.length > 0)
           return pickRandomIn(legendaryCandidates)
       } else if (player.rerollCount >= 90 && player.rerollCount % 10 === 0) {
-        const uniqueCandidates: Pkm[] = UniqueShop.filter<Pkm>(
+        let uniqueCandidates: Pkm[] = UniqueShop.filter<Pkm>(
           (p): p is Pkm =>
             !(p in PkmDuos) &&
             getPokemonData(p as Pkm).types.some((type) =>
               specificTypesWanted?.includes(type)
             )
         )
+        shuffleArray(uniqueCandidates)
+        uniqueCandidates = uniqueCandidates.filter((p, index) => uniqueCandidates.findIndex((p2) => PkmFamily[p2] === PkmFamily[p]) === index)
+        console.log({ uniqueCandidates})
         if (uniqueCandidates.length > 0) return pickRandomIn(uniqueCandidates)
       }
     }
