@@ -543,7 +543,7 @@ export class OnToggleReadyCommand extends Command<
   PreparationRoom,
   {
     client: Client
-    ready: boolean | undefined
+    ready: boolean
   }
 > {
   execute({ client, ready }) {

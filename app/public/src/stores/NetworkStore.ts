@@ -155,7 +155,7 @@ export const networkSlice = createSlice({
     removeBot: (state, action: PayloadAction<string>) => {
       state.preparation?.send(Transfer.REMOVE_BOT, action.payload)
     },
-    toggleReady: (state, action: PayloadAction<boolean | undefined>) => {
+    toggleReady: (state, action: PayloadAction<boolean>) => {
       state.preparation?.send(Transfer.TOGGLE_READY, action.payload)
     },
     toggleEloRoom: (state, action: PayloadAction<boolean>) => {

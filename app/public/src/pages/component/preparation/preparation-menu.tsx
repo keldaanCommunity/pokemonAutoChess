@@ -293,7 +293,7 @@ export default function PreparationMenu() {
     <button
       className={cc("bubbly", "ready-button", isReady ? "green" : "orange")}
       onClick={() => {
-        dispatch(toggleReady())
+        dispatch(toggleReady(!isReady))
       }}
     >
       {t("ready")} {isReady ? "✔" : "?"}
