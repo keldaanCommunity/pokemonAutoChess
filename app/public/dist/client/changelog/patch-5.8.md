@@ -10,7 +10,7 @@ Gen 1 is now complete !
 
 # Gameplay
 
-- 
+- Remove additional PP gain from damage taken in shield
 
 # Changes to Pokemon & Abilities
 
