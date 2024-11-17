@@ -1507,7 +1507,7 @@
     "POLTERGEIST": "Verursacht [30,60,120,SP] SPECIAL + [20,SP] SPECIAL für jeden Gegenstand in der Hand des Ziels ([40,SP] wenn der Gegenstand ARTIFICIAL ist)",
     "GOLD_RUSH": "Verursacht [20,SP] + Ihre Menge an GOLD als SPECIAL Schaden aus. Erhalte dann 2 GOLD",
     "MAKE_IT_RAIN": "Verursache [100,SP] + Ihre Menge GOLD als SPECIAL Schaden zu",
-    "CRUSH_GRIP": "Das Ziel wird mit großer Kraft zerquetscht. Je mehr HP das Ziel noch hat, desto größer ist der Schaden: zwischen [20,SP] und [200,SP] PHYSICAL.",
+    "CRUSH_GRIP": "Das Ziel wird mit großer Kraft zerquetscht. Je mehr HP das Ziel noch hat, desto größer ist der Schaden: zwischen [50,SP] und [250,SP] PHYSICAL.",
     "AURASPHERE": "Verströmt eine Aura und projiziert Energie in einer Linie, die jedem getroffenen Gegner 3 Sekunden lang [25,50,100,SP] SPECIAL und SILENCE zufügt",
     "SKETCH": "Kopiert die Fähigkeit, die maximalen PP und den STAR des Verbündeten zu seiner Linken zu Beginn des Kampfes",
     "OVERDRIVE": "Verursacht [120,SP]% der ATK als SPECIAL in einem Radius von 3 Zellen, indem er eine E-Gitarre zupft und ein großes Echo und starke Vibrationen verursacht. Der Schaden wird mit der Entfernung reduziert, 20% pro Zelle.",

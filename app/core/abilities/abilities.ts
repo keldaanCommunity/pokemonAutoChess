@@ -7652,7 +7652,7 @@ export class CrushGripStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = Math.round(20 + (target.life / target.hp) * 180)
+    const damage = Math.round(50 + (target.life / target.hp) * 200)
     target.handleSpecialDamage(
       damage,
       board,

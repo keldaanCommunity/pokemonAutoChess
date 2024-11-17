@@ -1545,7 +1545,7 @@
     "POLTERGEIST": "对目标造成[30,60,120,SP]点SPECIAL。目标每携带一件道具，造成的伤害增加[20,SP]（若为ARTIFICIAL类，改为增加[40,SP]）。",
     "GOLD_RUSH": "对目标造成SPECIAL，数值相当于[20,SP]加你当前的GOLD持有量，然后获得2 GOLD。",
     "MAKE_IT_RAIN": "对目标造成SPECIAL，数值相当于[100,SP]加你当前的GOLD持有量。",
-    "CRUSH_GRIP": "用骇人的力量捏碎目标，对其造成[20,SP]至[200,SP]点PHYSICAL。目标剩余的HP越多，伤害越高。",
+    "CRUSH_GRIP": "用骇人的力量捏碎目标，对其造成[50,SP]至[250,SP]点PHYSICAL。目标剩余的HP越多，伤害越高。",
     "AURASPHERE": "向一条直线发射波导能量，对击中的所有敌方宝可梦造成[25,50,100,SP]点SPECIAL，并使他们陷入SILENCE 3秒。",
     "SKETCH": "战斗开始时，复制使用者左侧的我方宝可梦的招式，最大PP和STAR。",
     "OVERDRIVE": "奏响电吉他，释放出发出巨响的剧烈震动攻击3格半径内的目标，对他们造成SPECIAL，数值相当于使用者[120,SP]%的ATK。每格距离使伤害衰减20%。",

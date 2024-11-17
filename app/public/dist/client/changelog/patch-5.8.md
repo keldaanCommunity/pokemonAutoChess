@@ -10,7 +10,7 @@ Gen 1 is now complete !
 
 # Gameplay
 
-- Remove additional PP gain from damage taken in shield
+- Before, units gained 10% of damage received as PP. Now, this only applies to remaining damage after defenses and shield have been applied.
 
 # Changes to Pokemon & Abilities
 
@@ -24,6 +24,9 @@ Gen 1 is now complete !
 - Change Skarmory: the number of spikes is now fixed to 12 instead of random, and spikes are spread only on the enemy side of the field
 - New ability for Ho-Oh: Fire Blast; buffed damage: 20/50/80 → 30/60/110
 - Rework Slugma line: Range 2 → 1, Attack 7/16 → 6/14, Def: 3/6 → 4/8, SpeDef: 1/2 → 3/5 ; PP 90 → 100 ; new ability: Lava Plume
+- Happiny line: PP 130 → 120 as a compensation for removed PP on shield damage
+- Slakoth line: PP 120 → 100 as a compensation for removed PP on shield damage
+- Buff Crush Grip (Regigigas): between ~~20~~ 50 and ~~200~~ 250 physical damage.
 
 # Changes to Synergies
 

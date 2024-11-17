@@ -1484,7 +1484,7 @@
     "POLTERGEIST": "Inflige [30,60,120,SP] de SPECIAL + [20, SP] de SPECIAL por cada objeto equipado del oponente ([40,SP] si es un objeto ARTIFICIAL)",
     "GOLD_RUSH": "Inflige [20,SP] + tu cantidad de GOLD como SPECIAL, luego gana 2 GOLD",
     "MAKE_IT_RAIN": "Inflige [100,SP] + tu cantidad de GOLD como SPECIAL",
-    "CRUSH_GRIP": "El objetivo es aplastado con gran fuerza. Cuanto más HP le quede al objetivo, mayor será el daño: entre [20,SP] y [200,SP] de PHYSICAL.",
+    "CRUSH_GRIP": "El objetivo es aplastado con gran fuerza. Cuanto más HP le quede al objetivo, mayor será el daño: entre [50,SP] y [250,SP] de PHYSICAL.",
     "AURASPHERE": "Exuda un aura y proyecta energía en una línea, infligiendo [25,50,100,SP] de SPECIAL y dejando SILENCE a cada enemigo golpeado por 3 segundos.",
     "SKETCH": "Copia la habilidad, los PP máximos y STAR del aliado a su izquierda al comienzo de la pelea.",
     "OVERDRIVE": "Toca una guitarra eléctrica que inflige [120,SP]% de ATK como SPECIAL dentro de un radio de 3 celdas, provocando un gran eco y una fuerte vibración. El daño se reduce con la distancia, un 20% por celda.",

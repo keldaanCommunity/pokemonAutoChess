@@ -1545,7 +1545,7 @@
     "POLTERGEIST": "Deal [30,60,120,SP] SPECIAL to the target, +[20,SP] SPECIAL for each item held by the target ([40,SP] for ARTIFICIAL items).",
     "GOLD_RUSH": "Deal  [20,SP] + the allied player's GOLD value as SPECIAL, then the allied player earns 2 GOLD.",
     "MAKE_IT_RAIN": "Deal [100,SP] + the allied player's GOLD value as SPECIAL.",
-    "CRUSH_GRIP": "The target is crushed with great force. The more HP the target has left, the greater the damage: between [20,SP] and [200,SP] PHYSICAL.",
+    "CRUSH_GRIP": "The target is crushed with great force. The more HP the target has left, the greater the damage: between [50,SP] and [250,SP] PHYSICAL.",
     "AURASPHERE": "Exude an aura and project energy in a line, dealing [25,50,100,SP] SPECIAL and inflicting all enemy Pokémon hit with SILENCE for 3 seconds.",
     "SKETCH": "Copy the ability, max PP and STAR of the allied Pokémon on the user's left at the start of the fight.",
     "OVERDRIVE": "Twang an electric guitar, causing a huge echo and strong vibration. Deal [120,SP]% of ATK as SPECIAL within a 3 tile radius of the user, -20% damage per tile from the user.",
