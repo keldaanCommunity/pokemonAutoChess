@@ -1104,6 +1104,7 @@ export default class Status extends Schema implements IStatus {
   triggerLocked(duration: number, pkm: PokemonEntity) {
     if (
       !this.locked && // lock cannot be stacked
+      !this.skydiving &&
       !this.runeProtect
     ) {
       if (pkm.status.enraged) {
