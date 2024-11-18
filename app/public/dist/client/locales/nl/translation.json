@@ -833,7 +833,7 @@
     "VOLT_SWITCH": "Ren naar de achterkant van het vijandelijke team en breng [30,60,120,SP] SPECIAL toe aan alle geraakte vijandelijke Pokémon",
     "LIQUIDATION": "Breng [20,40,80,SP] SPECIAL toe en verlaag de DEF van het doelwit met [2,4,8,SP]",
     "BURN": "Pas de BURN status toe op alle vijandelijke Pokémon voor [5,10,20] seconden",
-    "POISON": "Pas de POISONNED status toe op de [1,2,3] dichtstbijzijnde vijandelijke Pokémon voor [3,6,9,SP=0,5] seconden",
+    "POISON": "Pas de POISONNED status toe op de [1,2,3] dichtstbijzijnde vijandelijke Pokémon voor [3,6,9,SP=0.5] seconden",
     "SLEEP": "Maak [1,2,3] vijandige Pokémon in de backline SLAAP gedurende [2,SP] seconden",
     "PROTECT": "PROTECT de gebruiker en word [1,3,5,SP=0,5] seconden onkwetsbaar",
     "BLIZZARD": "FREEZE alle vijandelijke Pokémon gedurende 2 seconden en deel [5,10,15,SP] SPECIAL. Dubbele schade als de vijand al FREEZE is",

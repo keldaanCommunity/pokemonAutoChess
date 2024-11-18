@@ -1169,7 +1169,7 @@
     "NUZZLE": "Corre ao inimigo mais longe, causando [30,60,120,SP] SPECIAL e causando PARALISIA por [3,4,5] segundos",
     "LIQUIDATION": "Inflige [20,40,80,SP] SPECIAL e remove [2,4,8,SP] DEF do alvo",
     "BURN": "QUEIME todo o time inimigo por [5,10,20] segundos",
-    "POISON": "Aplique POISONNED em [1,2,3] oponentes mais próximos por [3,6,9,SP=0,5] segundos",
+    "POISON": "Aplique POISONNED em [1,2,3] oponentes mais próximos por [3,6,9,SP=0.5] segundos",
     "SLEEP": "Faça com que [1,2,3] Pokémon inimigos na linha de fundo SLEEP por [2,SP] segundos",
     "PROTECT": "PROTECT o usuário, tornando-se invulnerável por [1,3,5,SP=0,5] segundos.",
     "BLIZZARD": "FREEZE todos os Pokémon inimigos por 2 segundos e dê [5,10,15,SP] SPECIAL. Dano dobrado se o inimigo já estiver FREEZE",
