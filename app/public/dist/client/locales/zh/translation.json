@@ -1485,7 +1485,7 @@
     "POISON_JAB": "对目标造成[30,60,90,SP]点SPECIAL，并与其交换位置。使用者和目标均陷入POISONNED 3秒。",
     "SHELL_SMASH": "对相邻敌方宝可梦造成[15,30,SP]点SPECIAL。使用者提升2点ATK，20点AP和20%的ATK_SPEED，但降低1点DEF和1点SPE_DEF。",
     "HELPING_HAND": "使最近的2只我方宝可梦获得[30,60,100,SP]点SHIELD，且其下一个招式的伤害翻倍。",
-    "ASTRAL_BARRAGE": "向随机敌方宝可梦发射[3,SP=2]只小幽灵，每只造成20点SPECIAL。",
+    "ASTRAL_BARRAGE": "向随机敌方宝可梦发射[7,SP]只小幽灵，每只造成20点SPECIAL。",
     "WATERFALL": "获得[50,100,150,SP]点SHIELD，移除全部负面状态，并移除滞留在战场上的效果。",
     "PYRO_BALL": "点燃小石子，形成火球攻击最远的目标，对击中的所有宝可梦造成[10,20,40,SP]点SPECIAL，并使他们陷入BURN 2秒。",
     "WHIRLPOOL": "锁定最远的敌方宝可梦，向其释放4道潮旋，每道潮旋分别对其击中的第一个敌方宝可梦造成SPECIAL，数值相当于[125,SP]%的ATK。",

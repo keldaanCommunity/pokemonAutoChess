@@ -1485,7 +1485,7 @@
     "POISON_JAB": "Deal [30,60,90,SP] SPECIAL, swap places with the target, and inflict both the target and the caster with POISONNED for 3 seconds.",
     "SHELL_SMASH": "Deal [15,30,SP] SPECIAL to adjacent enemy Pokémon. Gain 2 ATK, 20 AP and 20% ATK_SPEED and lose 1 DEF and 1 SPE_DEF.",
     "HELPING_HAND": "Grant [30,60,100,SP] SHIELD to the 2 nearest allied Pokémon and double the damage of their next ability.",
-    "ASTRAL_BARRAGE": "Send [3,SP=2] small ghosts toward random enemy Pokémon, each dealing 20 SPECIAL.",
+    "ASTRAL_BARRAGE": "Send [7,SP] small ghosts toward random enemy Pokémon, each dealing 20 SPECIAL.",
     "WATERFALL": "Gain [50,100,150,SP] SHIELD, cure any negative status conditions and clear the tile.",
     "PYRO_BALL": "The user attacks by igniting a small stone and launching it as a fiery ball at the farthest enemy Pokémon, dealing [10,20,40,SP] SPECIAL and applying BURN for 2 seconds to all enemy Pokémon in its path.",
     "WHIRLPOOL": "Unleash a hail of 4 whirlpools toward the farthest enemy Pokémon, each dealing [125,SP]% ATK SPECIAL to the first enemy Pokémon in their path.",

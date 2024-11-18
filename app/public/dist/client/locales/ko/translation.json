@@ -1474,7 +1474,7 @@
     "POISON_JAB": "[30,60,90,SP] SPECIAL을 주고 대상과 자리를 바꾸며 3초 동안 대상과 시전자 모두를 POISONNED 로 만든다.",
     "SHELL_SMASH": "인접한 적에게 [15,30,SP]의 SPECIAL을 주고 2 ATK, 20 AP 와 20% ATK_SPEED를 얻고,  1 DEF, 1 SPE_DEF을 잃는다.",
     "HELPING_HAND": "가장 가까운 아군 2명에게 [30,60,100,SP]의 SHIELD를 부여하고 다음 능력의 데미지를 두 배로 증폭시킨다.",
-    "ASTRAL_BARRAGE": "무작위 적 포켓몬에게 20 SPECIAL을 입히는 [3,SP=2]개의 작은 유령을 보낸다.",
+    "ASTRAL_BARRAGE": "무작위 적 포켓몬에게 20 SPECIAL을 입히는 [7,SP]개의 작은 유령을 보낸다.",
     "WATERFALL": "[50,100,150,SP] SHIELD를 얻고, 모든 부정적 상태를 해제하고 보드를 정리한다.",
     "PYRO_BALL": "사용자는 작은 돌을 점화하여 가장 먼 타겟에게 불타는 공처럼 발사하여  경로상의 모든 대상에게 [10,20,40,SP] SPECIAL를 가하고 2초 동안 BURN 효과를 부여한다.",
     "WHIRLPOOL": "가장 먼 적을 목표 삼아 그쪽으로 4개의 소용돌이를 보내 맞은 적에게 [125,SP]% ATK SPECIAL을 가한다.",

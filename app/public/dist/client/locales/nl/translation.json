@@ -1001,7 +1001,7 @@
     "POISON_JAB": "Deals [30,60,120,SP] SPECIAL, ruilen van plaats met het doelwit en POISONNED zowel het doelwit als de caster voor 3s",
     "SHELL_SMASH": "Biedt [15,30,SP] SPECIAL aan aangrenzende vijanden; geeft 2 ATK, 20 AP en 20% ATK_SPEED, en verlies 1 DEF, 1 SPE_DEF",
     "HELPING_HAND": "Geeft [30,60,100,SP] SHIELD aan de 2 dichtstbijzijnde bondgenoten en verdubbel de schade van de volgende vaardigheid.",
-    "ASTRAL_BARRAGE": "Stuurt [3,SP=2] kleine geesten naar willekeurige vijandige Pokémon. Elk van hen deelt 20 SPECIAL uit",
+    "ASTRAL_BARRAGE": "Stuurt [7,SP] kleine geesten naar willekeurige vijandige Pokémon. Elk van hen deelt 20 SPECIAL uit",
     "WATERFALL": "SHIELD zelf voor [50,100,150,SP], duidelijke negatieve status en bestuursceleffect",
     "PYRO_BALL": "De gebruiker valt aan door een kleine steen aan te steken en deze als een vurige bal naar het verste doelwit te lanceren, waarbij hij [10,20,40,SP] SPECIAL uitdeelt en 2 seconden lang alles onderweg verbrandt",
     "WHIRLPOOL": "Richt je op de verste vijand en laat een hagel van 4 draaikolken op hen los. Elk deelt [125,SP]% ATK SPECIAL uit aan de eerste vijandelijke treffer",

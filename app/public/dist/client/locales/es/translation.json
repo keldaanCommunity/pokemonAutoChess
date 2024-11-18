@@ -1424,7 +1424,7 @@
     "POISON_JAB": "Inflige [30,60,90,SP] de SPECIAL, cambia de lugar con el objetivo y deja POISONNED tanto al objetivo como al usuario por 3 segundos",
     "SHELL_SMASH": "Causa [15,30,SP] de SPECIAL a los enemigos adyacentes; gana 2 ATK, 20 AP y 20% ATK_SPEED, y pierde 1 DEF, 1 SPE_DEF",
     "HELPING_HAND": "Da [30,60,100,SP] SHIELD a los 2 aliados más cercanos y dobla el daño de la siguiente habilidad",
-    "ASTRAL_BARRAGE": "Envía [3,SP=2] pequeños fantasmas a Pokémon enemigos aleatorios. Cada uno de ellos causa 20 de SPECIAL",
+    "ASTRAL_BARRAGE": "Envía [7,SP] pequeños fantasmas a Pokémon enemigos aleatorios. Cada uno de ellos causa 20 de SPECIAL",
     "WATERFALL": "Obtiene [50,100,150,SP] de SHIELD, cura cualquier estado negativo y limpia la casilla",
     "PYRO_BALL": "El usuario ataca encendiendo una pequeña piedra y lanzándola como una bola de fuego al objetivo más lejano, infligiendo [10,20,40,SP] de SPECIAL y dejando BURN durante 2 segundos todo lo que encuentre en su camino.",
     "WHIRLPOOL": "Fija al enemigo más lejano y desata una lluvia de 4 remolinos hacia él. Cada uno inflige [125,SP] % de ATK SPECIAL al primer enemigo que alcance",

@@ -5953,7 +5953,7 @@ export class AstralBarrageStrategy extends AbilityStrategy {
       }
     })
 
-    const nbGhosts = 3 * (1 + (2 * pokemon.ap) / 100)
+    const nbGhosts = 7 * (1 + (pokemon.ap / 100))
     for (let i = 0; i < nbGhosts; i++) {
       const randomTarget = pickRandomIn(enemies)
       pokemon.commands.push(
@@ -5973,7 +5973,8 @@ export class AstralBarrageStrategy extends AbilityStrategy {
               board,
               AttackType.SPECIAL,
               pokemon,
-              crit
+              crit,
+              false
             )
           }
         }, 100 * i)
