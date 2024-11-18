@@ -31,6 +31,7 @@ Gen 1 is now complete !
 - Buff Fairy: 15/30/50/70 → 20/40/60/80% additional special damage
 - Nerf Ghost: dodge chance ~~25%~~ 20% ; Nerf Ghost 8: Curse duration: ~~6~~ 7 seconds
 - Fix Psy 4 Light Screen Unown shop found every 5 shops instead of 3
+- Dark 1-range Pokémon with Wide lens no longer jump to the farthest enemy
 
 # Changes to Items
 
