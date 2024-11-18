@@ -80,12 +80,6 @@ export default function PreparationMenu() {
     }
   }, [nbUsersReady, users.length, allUsersReady])
 
-  useEffect(() => {
-    if (gameMode !== GameMode.CUSTOM_LOBBY && room?.connection.isOpen) {
-      dispatch(toggleReady(true)) // automatically set users ready in non-classic game mode
-    }
-  }, [gameMode, dispatch, room?.connection.isOpen])
-
   const humans = users.filter((u) => !u.isBot)
   const isElligibleForELO =
     gameMode === GameMode.QUICKPLAY || users.filter((u) => !u.isBot).length >= 2

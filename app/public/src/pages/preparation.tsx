@@ -10,13 +10,15 @@ import GameState from "../../../rooms/states/game-state"
 import PreparationState from "../../../rooms/states/preparation-state"
 import { Transfer } from "../../../types"
 import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
+import { GameMode } from "../../../types/enum/Game"
 import { logger } from "../../../utils/logger"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import {
   joinPreparation,
   logIn,
   setErrorAlertMessage,
-  setProfile
+  setProfile,
+  toggleReady
 } from "../stores/NetworkStore"
 import {
   addUser,
@@ -168,6 +170,9 @@ export default function Preparation() {
 
         if (u.uid === uid) {
           dispatch(setUser(u))
+          if (r.state.gameMode !== GameMode.CUSTOM_LOBBY) {
+            dispatch(toggleReady(true)) // automatically set users ready in non-classic game mode
+          }
         } else if (!u.isBot) {
           playSound(SOUNDS.JOIN_ROOM)
         }
