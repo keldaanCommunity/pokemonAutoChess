@@ -417,7 +417,7 @@ export default class Simulation extends Schema implements ISimulation {
 
     if (item === Item.REPEAT_BALL && pokemon.player) {
       pokemon.addAbilityPower(
-        Math.floor(pokemon.player.rerollCount / 2),
+        Math.floor((pokemon.player.rerollCount + pokemon.simulation.stageLevel) / 2),
         pokemon,
         0,
         false

@@ -34,7 +34,7 @@ Gen 1 is now complete !
 
 # Changes to Items
 
-- 
+- Repeat Ball now also take into account automatic shop rerolls after each stage. Raised the number of rerolls required to get Unique/Legendary
 
 # Bugfix
 

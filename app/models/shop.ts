@@ -434,7 +434,7 @@ export default class Shop {
     if (
       player.effects.has(Effect.LIGHT_SCREEN) &&
       shopIndex === 0 &&
-      player.rerollCount % 3 === 0
+      (player.rerollCount + state.stageLevel) % 3 === 0
     ) {
       const unowns = getUnownsPoolPerStage(state.stageLevel)
       return pickRandomIn(unowns)
@@ -486,10 +486,11 @@ export default class Shop {
     const repeatBalls = values(player.board).filter((p) =>
       p.items.has(Item.REPEAT_BALL)
     )
+    const totalRerolls = player.rerollCount + state.stageLevel
     if (
       shopIndex >= 0 &&
       shopIndex < repeatBalls.length &&
-      player.rerollCount % 2 === 0
+      totalRerolls % 2 === 0
     ) {
       specificTypesWanted = values(repeatBalls[shopIndex].types)
       rarity =
@@ -499,8 +500,8 @@ export default class Shop {
           Rarity.RARE,
           Rarity.EPIC,
           Rarity.ULTRA
-        ][Math.floor(player.rerollCount / 30)] ?? Rarity.ULTRA
-      if (player.rerollCount >= 130 && player.rerollCount % 10 === 0) {
+        ][Math.floor(totalRerolls / 30)] ?? Rarity.ULTRA
+      if (totalRerolls >= 140 && totalRerolls % 10 === 0) {
         let legendaryCandidates: Pkm[] = LegendaryShop.filter<Pkm>(
           (p): p is Pkm =>
             !(p in PkmDuos) &&
@@ -512,7 +513,7 @@ export default class Shop {
         legendaryCandidates = legendaryCandidates.filter((p, index) => legendaryCandidates.findIndex((p2) => PkmFamily[p2] === PkmFamily[p]) === index)
         if (legendaryCandidates.length > 0)
           return pickRandomIn(legendaryCandidates)
-      } else if (player.rerollCount >= 90 && player.rerollCount % 10 === 0) {
+      } else if (totalRerolls >= 100 && totalRerolls % 10 === 0) {
         let uniqueCandidates: Pkm[] = UniqueShop.filter<Pkm>(
           (p): p is Pkm =>
             !(p in PkmDuos) &&
@@ -522,7 +523,6 @@ export default class Shop {
         )
         shuffleArray(uniqueCandidates)
         uniqueCandidates = uniqueCandidates.filter((p, index) => uniqueCandidates.findIndex((p2) => PkmFamily[p2] === PkmFamily[p]) === index)
-        console.log({ uniqueCandidates})
         if (uniqueCandidates.length > 0) return pickRandomIn(uniqueCandidates)
       }
     }
