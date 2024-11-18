@@ -75,5 +75,5 @@ Thanks to Exeatop, many bugs have been fixed in the abilities and abilities desc
 
 # Misc
 
-
 - Thanks to all the contributors who helped with the translations!
+- Elo is now displayed in end game screen
