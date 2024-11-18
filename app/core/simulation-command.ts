@@ -83,6 +83,7 @@ export class AttackCommand extends SimulationCommand {
                     this.board,
                     AttackType.SPECIAL,
                     this.pokemon,
+                    false,
                     false
                   )
                   this.pokemon.simulation.room.broadcast(Transfer.ABILITY, {
