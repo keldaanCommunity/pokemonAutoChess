@@ -3759,12 +3759,12 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.SLOWPOKE]: {
-    attack: AnimationType.Attack,
+    attack: AnimationType.Shoot,
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot
   },
   [Pkm.SLOWBRO]: {
-    attack: AnimationType.Attack,
+    attack: AnimationType.Shake,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shake
   },
