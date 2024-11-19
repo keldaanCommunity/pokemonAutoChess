@@ -554,7 +554,7 @@ export class IllusionStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const heal = pokemon.stars === 3 ? 70 : pokemon.stars === 2 ? 50 : 30
+    const heal = [30, 50, 70][pokemon.stars - 1] ?? 70
     pokemon.handleHeal(heal, pokemon, 0.5, crit)
     if (target) {
       pokemon.index = target.index
@@ -6147,7 +6147,7 @@ export class LavaPlumeStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit, true)
     const cells = board.getCellsInFront(pokemon, target)
-    const damage = [20,40,80][pokemon.stars - 1] ?? 80
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
 
     cells.forEach((cell) => {
       board.addBoardEffect(cell.x, cell.y, Effect.LAVA, pokemon.simulation)
@@ -11005,5 +11005,5 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.THUNDEROUS_KICK]: new ThunderousKickStrategy(),
   [Ability.FIERY_WRATH]: new FieryWrathStrategy(),
   [Ability.VISE_GRIP]: new ViseGripStrategy(),
-  [Ability.LAVA_PLUME]: new LavaPlumeStrategy(),
+  [Ability.LAVA_PLUME]: new LavaPlumeStrategy()
 }

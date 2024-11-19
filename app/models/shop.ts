@@ -32,7 +32,12 @@ import { Synergy } from "../types/enum/Synergy"
 import { removeInArray } from "../utils/array"
 import { logger } from "../utils/logger"
 import { clamp, min } from "../utils/number"
-import { chance, pickNRandomIn, pickRandomIn, shuffleArray } from "../utils/random"
+import {
+  chance,
+  pickNRandomIn,
+  pickRandomIn,
+  shuffleArray
+} from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
 import PokemonFactory from "./pokemon-factory"
@@ -343,7 +348,10 @@ export default class Shop {
         return getPokemonData(pkm).types.includes(synergy)
       })
       shuffleArray(candidates)
-      candidates = candidates.filter((p, index) => candidates.findIndex((p2) => PkmFamily[p2] === PkmFamily[p]) === index)
+      candidates = candidates.filter(
+        (p, index) =>
+          candidates.findIndex((p2) => PkmFamily[p2] === PkmFamily[p]) === index
+      )
 
       let selectedProposition = pickRandomIn(
         candidates.length > 0 ? candidates : propositions
@@ -509,7 +517,12 @@ export default class Shop {
             )
         )
         shuffleArray(legendaryCandidates)
-        legendaryCandidates = legendaryCandidates.filter((p, index) => legendaryCandidates.findIndex((p2) => PkmFamily[p2] === PkmFamily[p]) === index)
+        legendaryCandidates = legendaryCandidates.filter(
+          (p, index) =>
+            legendaryCandidates.findIndex(
+              (p2) => PkmFamily[p2] === PkmFamily[p]
+            ) === index
+        )
         if (legendaryCandidates.length > 0)
           return pickRandomIn(legendaryCandidates)
       } else if (player.rerollCount >= 90 && player.rerollCount % 10 === 0) {
@@ -521,8 +534,12 @@ export default class Shop {
             )
         )
         shuffleArray(uniqueCandidates)
-        uniqueCandidates = uniqueCandidates.filter((p, index) => uniqueCandidates.findIndex((p2) => PkmFamily[p2] === PkmFamily[p]) === index)
-        console.log({ uniqueCandidates})
+        uniqueCandidates = uniqueCandidates.filter(
+          (p, index) =>
+            uniqueCandidates.findIndex(
+              (p2) => PkmFamily[p2] === PkmFamily[p]
+            ) === index
+        )
         if (uniqueCandidates.length > 0) return pickRandomIn(uniqueCandidates)
       }
     }
