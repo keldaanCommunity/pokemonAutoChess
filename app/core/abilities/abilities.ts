@@ -5953,7 +5953,7 @@ export class AstralBarrageStrategy extends AbilityStrategy {
       }
     })
 
-    const nbGhosts = 3 * (1 + (2 * pokemon.ap) / 100)
+    const nbGhosts = 7 * (1 + (pokemon.ap / 100))
     for (let i = 0; i < nbGhosts; i++) {
       const randomTarget = pickRandomIn(enemies)
       pokemon.commands.push(
@@ -5973,7 +5973,8 @@ export class AstralBarrageStrategy extends AbilityStrategy {
               board,
               AttackType.SPECIAL,
               pokemon,
-              crit
+              crit,
+              false
             )
           }
         }, 100 * i)
@@ -7652,7 +7653,7 @@ export class CrushGripStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = Math.round(20 + (target.life / target.hp) * 180)
+    const damage = Math.round(50 + (target.life / target.hp) * 200)
     target.handleSpecialDamage(
       damage,
       board,
