@@ -54,6 +54,9 @@ export default class PokemonFactory {
       case Pkm.WORMADAM_TRASH:
         return Pkm.BURMY_TRASH
       default:
+        if (PkmFamily[name] == Pkm.UNOWN_A) {
+          return name
+        }
         return PkmFamily[name]
     }
   }

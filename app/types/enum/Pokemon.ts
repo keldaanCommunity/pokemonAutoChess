@@ -2007,6 +2007,10 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.OGERPON_CORNERSTONE_MASK]: "1017-0007"
 }
 
+export const PkmByIndex: { [index: string]: Pkm } = Object.fromEntries(
+  Object.entries(PkmIndex).map(([pkm, index]) => [index, pkm as Pkm])
+)
+
 export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.EGG]: Pkm.EGG,
   [Pkm.BULBASAUR]: Pkm.BULBASAUR,
