@@ -10,6 +10,7 @@ import {
   ArtificialItems,
   Berries,
   Item,
+  ItemComponents,
   SynergyGivenByItem,
   WeatherRocks
 } from "../../types/enum/Item"
@@ -208,6 +209,10 @@ export default class Player extends Schema implements IPlayer {
       pokemon.positionY = 0
       this.board.set(pokemon.id, pokemon)
       pokemon.onAcquired(this)
+    }
+
+    if (state.specialGameRule === SpecialGameRule.SLAMINGO) {
+      for (let i = 0; i < 4; i++) this.items.push(pickRandomIn(ItemComponents))
     }
   }
 

@@ -3241,7 +3241,8 @@
     "SHINY_HUNTER": "Shiny Hunter",
     "DESPERATE_MOVES": "Desperate Moves",
     "DO_IT_ALL_YOURSELF": "Do it all yourself !",
-    "FIRST_PARTNER": "First Partner"
+    "FIRST_PARTNER": "First Partner",
+    "SLAMINGO": "Slamingo"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "All the additional picks are available immediately",
@@ -3260,7 +3261,8 @@
     "SHINY_HUNTER": "All the Wild PvE encounters are shiny",
     "DESPERATE_MOVES": "Players start with 150 HP. Rerolling shop costs HP instead of GOLD.",
     "DO_IT_ALL_YOURSELF": "Start with a copy of you avatar with +100 max HP and more gold if your avatar is of a lower rarity",
-    "FIRST_PARTNER": "Choose your starter Pokémon. You get a copy of this unit every stage up to stage 10."
+    "FIRST_PARTNER": "Choose your starter Pokémon. You get a copy of this unit every stage up to stage 10.",
+    "SLAMINGO": "All items are dropped when Pokémon is put on bench. Starts with 4 random components"
   },
   "loading_hints": {
     "tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",

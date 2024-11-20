@@ -44,6 +44,7 @@ import {
   ItemComponents,
   ItemRecipe,
   OgerponMasks,
+  SynergyGivenByItem,
   SynergyItems
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
@@ -58,10 +59,11 @@ import { Weather } from "../../types/enum/Weather"
 import { removeInArray, sum } from "../../utils/array"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { distanceC, distanceE } from "../../utils/distance"
-import { chance, pickRandomIn } from "../../utils/random"
+import { pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
+import { onItemRemoved } from "../../core/items"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -194,6 +196,11 @@ export class Pokemon extends Schema implements IPokemon {
         !state ||
         state.additionalPokemons.includes(variantOf))
     )
+  }
+
+  removeItem(item: Item) {
+    this.items.delete(item)
+    onItemRemoved(item, this)
   }
 }
 
@@ -14801,13 +14808,15 @@ export class Skarmory extends Pokemon {
 
         const nbSpikes = 12
         const positions = new Set<string>()
-        
+
         for (let i = 0; i < nbSpikes; i++) {
-          let x,y
+          let x, y
           do {
-          x = Math.floor(Math.random() * board.columns)
-          y = Math.floor(Math.random() * board.rows / 2) + (entity.positionY < 4 ? 4 : 0)
-          } while (positions.has(`${x},${y}`));
+            x = Math.floor(Math.random() * board.columns)
+            y =
+              Math.floor((Math.random() * board.rows) / 2) +
+              (entity.positionY < 4 ? 4 : 0)
+          } while (positions.has(`${x},${y}`))
           positions.add(`${x},${y}`)
 
           board.addBoardEffect(x, y, Effect.SPIKES, simulation)
