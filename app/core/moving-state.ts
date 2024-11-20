@@ -73,7 +73,7 @@ export default class MovingState extends PokemonState {
 
     if (
       pokemon.types.has(Synergy.DARK) &&
-      pokemon.baseRange === 1 &&
+      pokemon.range === 1 &&
       pokemon.passive !== Passive.GUZZLORD &&
       !pokemon.status.locked
     ) {
