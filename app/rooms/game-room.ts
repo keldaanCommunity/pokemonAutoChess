@@ -891,18 +891,18 @@ export default class GameRoom extends Room<GameState> {
   }
 
   spawnOnBench(player: Player, pkm: Pkm, anim: "fishing" | "spawn" = "spawn") {
-    const fish = PokemonFactory.createPokemonFromName(pkm, player)
+    const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
     const x = getFirstAvailablePositionInBench(player.board)
     if (x !== undefined) {
-      fish.positionX = x
-      fish.positionY = 0
+      pokemon.positionX = x
+      pokemon.positionY = 0
       if (anim === "fishing") {
-        fish.action = PokemonActionState.FISH
+        pokemon.action = PokemonActionState.FISH
       }
 
-      player.board.set(fish.id, fish)
+      player.board.set(pokemon.id, pokemon)
       this.clock.setTimeout(() => {
-        fish.action = PokemonActionState.IDLE
+        pokemon.action = PokemonActionState.IDLE
         this.checkEvolutionsAfterPokemonAcquired(player.id)
       }, 1000)
     }
@@ -1025,6 +1025,13 @@ export default class GameRoom extends Room<GameState> {
         player.items.push(player.itemsProposition[selectedIndex])
         player.itemsProposition.clear()
       }
+    }
+
+    if (
+      this.state.specialGameRule === SpecialGameRule.FIRST_PARTNER &&
+      this.state.stageLevel === 1
+    ) {
+      player.firstPartner = pokemonsObtained[0].name
     }
 
     pokemonsObtained.forEach((pokemon) => {

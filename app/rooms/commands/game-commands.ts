@@ -1161,6 +1161,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       for (let i = 0; i < nbTrees; i++) {
         player.berryTreesStage[i] = max(3)(player.berryTreesStage[i] + 1)
       }
+
+      if (
+        this.state.specialGameRule === SpecialGameRule.FIRST_PARTNER &&
+        this.state.stageLevel < 10
+      ) {
+        this.room.spawnOnBench(player, player.firstPartner, "spawn")
+      }
     })
 
     this.spawnWanderingPokemons()

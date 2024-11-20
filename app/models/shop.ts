@@ -49,7 +49,7 @@ export function getPoolSize(rarity: Rarity, maxStars: number): number {
   return PoolSize[rarity][clamp(maxStars, 1, 3) - 1]
 }
 
-function getRegularsTier1(pokemons: Pkm[]) {
+export function getRegularsTier1(pokemons: Pkm[]) {
   return pokemons.filter((p) => {
     const pokemonData = getPokemonData(p)
     return (

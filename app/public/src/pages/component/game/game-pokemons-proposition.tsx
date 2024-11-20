@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next"
 import { AdditionalPicksStages } from "../../../../../types/Config"
 import { ShinyItems } from "../../../../../types/enum/Item"
 import { Pkm, PkmDuo, PkmDuos } from "../../../../../types/enum/Pokemon"
+import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { pokemonPropositionClick } from "../../../stores/NetworkStore"
 import { getGameScene } from "../../game"
@@ -22,6 +23,7 @@ export default function GamePokemonsPropositions() {
     (state) => state.game.itemsProposition
   )
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
+  const specialGameRule = getGameScene()?.room?.state.specialGameRule
 
   const board = getGameScene()?.board
   const isBenchFull =
@@ -41,6 +43,7 @@ export default function GamePokemonsPropositions() {
           {AdditionalPicksStages.includes(stageLevel) && (
             <h2>{t("pick_additional_pokemon_hint")}</h2>
           )}
+          {stageLevel === 1 && specialGameRule === SpecialGameRule.FIRST_PARTNER && <h2>{t("pick_first_partner_hint")}</h2>}
           <div className="game-pokemons-proposition-list">
             {pokemonsProposition.map((proposition, index) => {
               const item = itemsProposition[index]
@@ -109,7 +112,7 @@ export default function GamePokemonsPropositions() {
             {visible ? t("hide") : t("show")}
           </button>
         </div>
-      </div>
+      </div >
     )
   } else {
     return null

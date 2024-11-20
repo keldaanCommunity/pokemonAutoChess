@@ -2846,6 +2846,7 @@
   "snapshot": "Snapshot",
   "passive": "Passive",
   "pick_additional_pokemon_hint": "Pick an additional Pokemon. It will be available to everyone.",
+  "pick_first_partner_hint": "Pick your starter. You will get a copy of it every stage up to stage 10",
   "free_slot_hint": "You must have one free slot on the bench, or two for Duos",
   "hide": "Hide",
   "show": "Show",
@@ -3239,7 +3240,8 @@
     "FREE_MARKET": "Free Market",
     "SHINY_HUNTER": "Shiny Hunter",
     "DESPERATE_MOVES": "Desperate Moves",
-    "DO_IT_ALL_YOURSELF": "Do it all yourself !"
+    "DO_IT_ALL_YOURSELF": "Do it all yourself !",
+    "FIRST_PARTNER": "First Partner"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "All the additional picks are available immediately",
@@ -3257,7 +3259,8 @@
     "FREE_MARKET": "Pokemons are bought and sold for 0 GOLD",
     "SHINY_HUNTER": "All the Wild PvE encounters are shiny",
     "DESPERATE_MOVES": "Players start with 150 HP. Rerolling shop costs HP instead of GOLD.",
-    "DO_IT_ALL_YOURSELF": "Start with a copy of you avatar with +100 max HP and more gold if your avatar is of a lower rarity"
+    "DO_IT_ALL_YOURSELF": "Start with a copy of you avatar with +100 max HP and more gold if your avatar is of a lower rarity",
+    "FIRST_PARTNER": "Choose your starter Pokémon. You get a copy of this unit every stage up to stage 10."
   },
   "loading_hints": {
     "tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",

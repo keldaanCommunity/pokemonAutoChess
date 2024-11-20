@@ -35,7 +35,8 @@ import {
   PRECOMPUTED_REGIONAL_MONS,
   getPokemonData
 } from "../precomputed/precomputed-pokemon-data"
-import { getBuyPrice } from "../shop"
+import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../precomputed/precomputed-rarity"
+import { getBuyPrice, getRegularsTier1 } from "../shop"
 import ExperienceManager from "./experience-manager"
 import HistoryItem from "./history-item"
 import { Pokemon, PokemonClasses } from "./pokemon"
@@ -108,6 +109,7 @@ export default class Player extends Schema implements IPlayer {
   lightY: number
   canRegainLife: boolean = true
   ghost: boolean = false
+  firstPartner: Pkm
 
   constructor(
     id: string,
@@ -150,29 +152,6 @@ export default class Player extends Schema implements IPlayer {
       this.life = 150
     }
 
-    const randomStarter = state.shop.getRandomPokemonFromPool(
-      Rarity.COMMON,
-      this
-    )
-    const pokemon = PokemonFactory.createPokemonFromName(randomStarter, this)
-    pokemon.positionX = getFirstAvailablePositionInBench(this.board) ?? 0
-    pokemon.positionY = 0
-    this.board.set(pokemon.id, pokemon)
-    pokemon.onAcquired(this)
-
-    if (state.specialGameRule === SpecialGameRule.UNIQUE_STARTER) {
-      const randomUnique = pickRandomIn(UniqueShop)
-      const pokemonsObtained: Pokemon[] = (
-        randomUnique in PkmDuos ? PkmDuos[randomUnique] : [randomUnique]
-      ).map((p) => PokemonFactory.createPokemonFromName(p, this))
-      pokemonsObtained.forEach((pokemon) => {
-        pokemon.positionX = getFirstAvailablePositionInBench(this.board) ?? 0
-        pokemon.positionY = 0
-        this.board.set(pokemon.id, pokemon)
-        pokemon.onAcquired(this)
-      })
-    }
-
     if (state.specialGameRule === SpecialGameRule.DITTO_PARTY) {
       for (let i = 0; i < 5; i++) {
         const ditto = PokemonFactory.createPokemonFromName(Pkm.DITTO, this)
@@ -183,9 +162,22 @@ export default class Player extends Schema implements IPlayer {
       }
     }
 
-    if (state.specialGameRule === SpecialGameRule.DO_IT_ALL_YOURSELF) {
+    if (state.specialGameRule === SpecialGameRule.UNIQUE_STARTER) {
+      const randomUnique = pickRandomIn(UniqueShop)
+      const pokemonsObtained: Pokemon[] = (
+        randomUnique in PkmDuos ? PkmDuos[randomUnique] : [randomUnique]
+      ).map((p) => PokemonFactory.createPokemonFromName(p, this))
+      this.firstPartner = pokemonsObtained[0].name
+      pokemonsObtained.forEach((pokemon) => {
+        pokemon.positionX = getFirstAvailablePositionInBench(this.board) ?? 0
+        pokemon.positionY = 0
+        this.board.set(pokemon.id, pokemon)
+        pokemon.onAcquired(this)
+      })
+    } else if (state.specialGameRule === SpecialGameRule.DO_IT_ALL_YOURSELF) {
       const { index, emotion, shiny } = getPokemonConfigFromAvatar(this.avatar)
-      const avatar = PokemonFactory.createPokemonFromName(PkmByIndex[index], {
+      this.firstPartner = PkmByIndex[index]
+      const avatar = PokemonFactory.createPokemonFromName(this.firstPartner, {
         selectedEmotion: emotion,
         selectedShiny: shiny
       })
@@ -195,6 +187,27 @@ export default class Player extends Schema implements IPlayer {
       this.board.set(avatar.id, avatar)
       avatar.onAcquired(this)
       this.money += 20 - getBuyPrice(avatar.name)
+    } else if (state.specialGameRule === SpecialGameRule.FIRST_PARTNER) {
+      const randomCommons = pickNRandomIn(
+        getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.COMMON).filter(
+          (p) => getPokemonData(p).stages === 3
+        ),
+        3
+      )
+      this.pokemonsProposition.push(...randomCommons)
+    } else {
+      this.firstPartner = state.shop.getRandomPokemonFromPool(
+        Rarity.COMMON,
+        this
+      )
+      const pokemon = PokemonFactory.createPokemonFromName(
+        this.firstPartner,
+        this
+      )
+      pokemon.positionX = getFirstAvailablePositionInBench(this.board) ?? 0
+      pokemon.positionY = 0
+      this.board.set(pokemon.id, pokemon)
+      pokemon.onAcquired(this)
     }
   }
 
