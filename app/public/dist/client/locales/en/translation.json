@@ -3238,7 +3238,8 @@
     "KECLEONS_SHOP": "Kecleon's Shop",
     "FREE_MARKET": "Free Market",
     "SHINY_HUNTER": "Shiny Hunter",
-    "DESPERATE_MOVES": "Desperate Moves"
+    "DESPERATE_MOVES": "Desperate Moves",
+    "DO_IT_ALL_YOURSELF": "Do it all yourself !"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "All the additional picks are available immediately",
@@ -3255,7 +3256,8 @@
     "KECLEONS_SHOP": "Item carousels are replaced by Kecleon's shop, that propose 6 items for 10 GOLD each",
     "FREE_MARKET": "Pokemons are bought and sold for 0 GOLD",
     "SHINY_HUNTER": "All the Wild PvE encounters are shiny",
-    "DESPERATE_MOVES": "Players start with 150 HP. Rerolling shop costs HP instead of GOLD."
+    "DESPERATE_MOVES": "Players start with 150 HP. Rerolling shop costs HP instead of GOLD.",
+    "DO_IT_ALL_YOURSELF": "Start with a copy of you avatar with +100 max HP and more gold if your avatar is of a lower rarity"
   },
   "loading_hints": {
     "tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",

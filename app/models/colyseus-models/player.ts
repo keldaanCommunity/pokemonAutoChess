@@ -1,5 +1,6 @@
 import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
 import { PokemonEntity } from "../../core/pokemon-entity"
+import { getPokemonConfigFromAvatar } from "../../public/src/utils"
 import type GameState from "../../rooms/states/game-state"
 import type { IPlayer, Role, Title } from "../../types"
 import { SynergyTriggers, UniqueShop } from "../../types/Config"
@@ -14,6 +15,7 @@ import {
 } from "../../types/enum/Item"
 import {
   Pkm,
+  PkmByIndex,
   PkmDuos,
   PkmFamily,
   PkmRegionalVariants,
@@ -33,6 +35,7 @@ import {
   PRECOMPUTED_REGIONAL_MONS,
   getPokemonData
 } from "../precomputed/precomputed-pokemon-data"
+import { getBuyPrice } from "../shop"
 import ExperienceManager from "./experience-manager"
 import HistoryItem from "./history-item"
 import { Pokemon, PokemonClasses } from "./pokemon"
@@ -178,6 +181,20 @@ export default class Player extends Schema implements IPlayer {
         this.board.set(ditto.id, ditto)
         ditto.onAcquired(this)
       }
+    }
+
+    if (state.specialGameRule === SpecialGameRule.DO_IT_ALL_YOURSELF) {
+      const { index, emotion, shiny } = getPokemonConfigFromAvatar(this.avatar)
+      const avatar = PokemonFactory.createPokemonFromName(PkmByIndex[index], {
+        selectedEmotion: emotion,
+        selectedShiny: shiny
+      })
+      avatar.positionX = getFirstAvailablePositionInBench(this.board) ?? 0
+      avatar.positionY = 0
+      avatar.hp += 100
+      this.board.set(avatar.id, avatar)
+      avatar.onAcquired(this)
+      this.money += 20 - getBuyPrice(avatar.name)
     }
   }
 
