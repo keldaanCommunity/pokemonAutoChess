@@ -83,3 +83,5 @@ Thanks to Exeatop, many bugs have been fixed in the abilities and abilities desc
 
 - Thanks to all the contributors who helped with the translations!
 - Elo is now displayed in end game screen
+- Allow to pick a custom Smeargle's Scribble in custom lobbies
+- Removed Rare is Expensive Scribble

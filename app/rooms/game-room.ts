@@ -8,7 +8,7 @@ import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
 import { MiniGame } from "../core/matter/mini-game"
 import { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
-import { Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
+import { Pokemon } from "../models/colyseus-models/pokemon"
 import BannedUser from "../models/mongo-models/banned-user"
 import { BotV2 } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
@@ -108,6 +108,7 @@ export default class GameRoom extends Room<GameState> {
     ownerName: string
     noElo: boolean
     gameMode: GameMode
+    specialGameRule: SpecialGameRule | null
     minRank: EloRank | null
     maxRank: EloRank | null
     tournamentId: string | null
@@ -137,7 +138,8 @@ export default class GameRoom extends Room<GameState> {
         options.noElo,
         options.gameMode,
         options.minRank,
-        options.maxRank
+        options.maxRank,
+        options.specialGameRule
       )
     )
     this.miniGame.create(

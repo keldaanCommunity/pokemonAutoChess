@@ -127,13 +127,6 @@ export function getSellPrice(
     price = RarityCost[pokemon.rarity] * stars
   }
 
-  if (
-    specialGameRule === SpecialGameRule.RARE_IS_EXPENSIVE &&
-    name !== Pkm.EGG
-  ) {
-    price = min(0)(price - 1)
-  }
-
   return price
 }
 
@@ -151,10 +144,6 @@ export function getBuyPrice(
     price = 1
   } else {
     price = RarityCost[getPokemonData(name).rarity]
-  }
-
-  if (specialGameRule === SpecialGameRule.RARE_IS_EXPENSIVE) {
-    price = min(0)(price - 1)
   }
 
   return price
