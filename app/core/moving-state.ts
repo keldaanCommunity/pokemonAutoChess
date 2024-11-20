@@ -57,6 +57,10 @@ export default class MovingState extends PokemonState {
       pokemon.cooldown = Math.max(0, pokemon.cooldown - dt)
       if (pokemon.status.skydiving && pokemon.cooldown <= 0) {
         pokemon.status.skydiving = false
+        if (pokemon.status.queuedLockDuration !== 0) {
+          pokemon.status.triggerLocked(pokemon.status.queuedLockDuration, pokemon)
+          pokemon.status.queuedLockDuration = 0
+        }
       }
     }
   }

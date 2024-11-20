@@ -47,6 +47,7 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") skydiving = false
   @type("boolean") tree = false
   magmaStorm = false
+  queuedLockDuration = 0
   soulDew = false
   clearWing = false
   guts = false
@@ -1102,11 +1103,13 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerLocked(duration: number, pkm: PokemonEntity) {
-    if (
-      !this.locked && // lock cannot be stacked
-      !this.skydiving &&
-      !this.runeProtect
-    ) {
+    if (this.locked) { // lock cannot be stacked
+      return
+    }
+    else if (this.skydiving) {
+      this.queuedLockDuration = duration
+    }
+    else if (!this.runeProtect) {
       if (pkm.status.enraged) {
         duration = duration / 2
       }
