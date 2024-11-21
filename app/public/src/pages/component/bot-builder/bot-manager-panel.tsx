@@ -5,7 +5,7 @@ import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { joinLobbyRoom } from "../../../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { addBotDatabase, deleteBotDatabase } from "../../../stores/NetworkStore"
-import { getAvatarSrc } from "../../../utils"
+import { getAvatarSrc } from "../../../../../utils/avatar"
 import { rewriteBotRoundsRequiredto1, validateBot } from "./bot-logic"
 import "./bot-manager-panel.css"
 
