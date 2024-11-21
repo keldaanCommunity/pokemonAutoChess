@@ -417,7 +417,9 @@ export default class Simulation extends Schema implements ISimulation {
 
     if (item === Item.REPEAT_BALL && pokemon.player) {
       pokemon.addAbilityPower(
-        Math.floor((pokemon.player.rerollCount + pokemon.simulation.stageLevel) / 2),
+        Math.floor(
+          (pokemon.player.rerollCount + pokemon.simulation.stageLevel) / 2
+        ),
         pokemon,
         0,
         false
@@ -634,16 +636,21 @@ export default class Simulation extends Schema implements ISimulation {
 
     // SYNERGY EFFECTS (dragon, normal, etc)
     for (const team of [this.blueTeam, this.redTeam]) {
+      const dragonLevel = values(team).reduce(
+        (acc, pokemon) =>
+          acc + (pokemon.types.has(Synergy.DRAGON) ? pokemon.stars : 0),
+        0
+      )
       team.forEach((pokemon) => {
         if (
           pokemon.effects.has(Effect.DRAGON_SCALES) ||
           pokemon.effects.has(Effect.DRAGON_DANCE)
         ) {
-          pokemon.addShield(30 * pokemon.stars, pokemon, 0, false)
+          pokemon.addShield(dragonLevel * 5, pokemon, 0, false)
         }
         if (pokemon.effects.has(Effect.DRAGON_DANCE)) {
-          pokemon.addAbilityPower(10 * pokemon.stars, pokemon, 0, false)
-          pokemon.addAttackSpeed(10 * pokemon.stars, pokemon, 0, false)
+          pokemon.addAbilityPower(dragonLevel, pokemon, 0, false)
+          pokemon.addAttackSpeed(dragonLevel, pokemon, 0, false)
         }
         let shieldBonus = 0
         if (pokemon.effects.has(Effect.STAMINA)) {

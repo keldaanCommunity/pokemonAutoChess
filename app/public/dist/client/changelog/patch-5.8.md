@@ -39,7 +39,8 @@ Gen 1 is now complete !
 - Fix Psy 4 Light Screen Unown shop found every 5 shops instead of 3
 - Dark 1-range Pokémon with Wide lens no longer jump to the farthest enemy
 - Nerf Ground: Ground bonuses now can go up to 5 stacks max
-
+- Change Dragon 5: Dragons gain ~~30 Shield per ⭐~~ 5 shield for each ⭐ of all your dragon units on board
+- Change Dragon 7: Dragons gain ~~10% Attack Speed and 10% Ability Power per ⭐~~ 1% Attack Speed and 1% Ability Power for each ⭐ of all your dragon units on board
 
 # Changes to Items
 
