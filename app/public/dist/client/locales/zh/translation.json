@@ -405,7 +405,8 @@
     "FREEZING_GLARE": "冰冷凝视",
     "THUNDEROUS_KICK": "雷电踢",
     "FIERY_WRATH": "火之怒",
-    "VISE_GRIP": "夹住"
+    "VISE_GRIP": "夹住",
+    "BURN_UP": "燃尽"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1264,7 +1265,9 @@
     "DARMANITAN_ZEN": "达摩狒狒（达摩模式）",
     "TURTONATOR": "爆焰龟兽",
     "KRABBY": "大钳蟹",
-    "KINGLER": "巨钳蟹"
+    "KINGLER": "巨钳蟹",
+    "SIZZLIPEDE": "烧火蚣",
+    "CENTISKORCH": "焚焰蚣"
   },
   "ability_description": {
     "SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1650,7 +1653,8 @@
     "FREEZING_GLARE": "对一条直线上的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL。并有[50,LK]%的概率使他们陷入FREEZE 3秒。",
     "THUNDEROUS_KICK": "将目标击退。其和所有击退路径上的敌方宝可梦陷入FLINCH 4秒，降低[5,SP]点DEF，并受到[20,40,60,SP]点PHYSICAL。",
     "FIERY_WRATH": "对所有敌方宝可梦造成[40,SP]点SPECIAL，并有[50,LK]%的概率使他们陷入FLINCH 4秒。",
-    "VISE_GRIP": "将目标从两侧夹住，对其造成[30,60,100,SP]点SPECIAL。使用者与目标均陷入LOCKED 4秒。"
+    "VISE_GRIP": "将目标从两侧夹住，对其造成[30,60,100,SP]点SPECIAL。使用者与目标均陷入LOCKED 4秒。",
+    "BURN_UP": "使用者自身陷入BURN 3秒，并对目标造成[50,100,200,SP]点SPECIAL。"
   },
   "effect": {
     "INGRAIN": "扎根",
