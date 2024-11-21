@@ -5,6 +5,8 @@
 - Galarian Moltres
 - Krabby
 - Kingler
+- Sizzlipede
+- Centiskorch
 
 Gen 1 is now complete !
 

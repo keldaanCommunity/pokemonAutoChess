@@ -7,6 +7,7 @@ import {
   HatchEvolutionRule,
   ItemEvolutionRule
 } from "../../core/evolution-rules"
+import { onItemRemoved } from "../../core/items"
 import Simulation from "../../core/simulation"
 import { DelayedCommand } from "../../core/simulation-command"
 import GameState from "../../rooms/states/game-state"
@@ -63,7 +64,6 @@ import { pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
-import { onItemRemoved } from "../../core/items"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -15212,6 +15212,37 @@ export class Kingler extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class Sizzlipede extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.BUG])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.CENTISKORCH
+  hp = 75
+  atk = 9
+  def = 1
+  speDef = 3
+  maxPP = 90
+  range = 1
+  skill = Ability.BURN_UP
+  regional = true
+  attackSprite = AttackSprite.FIRE_MELEE
+}
+
+export class Centiskorch extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.BUG])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 140
+  atk = 18
+  def = 1
+  speDef = 4
+  maxPP = 90
+  range = 1
+  skill = Ability.BURN_UP
+  regional = true
+  attackSprite = AttackSprite.FIRE_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -16075,5 +16106,7 @@ export const PokemonClasses: Record<
   [Pkm.DARMANITAN]: Darmanitan,
   [Pkm.DARMANITAN_ZEN]: DarmanitanZen,
   [Pkm.KRABBY]: Krabby,
-  [Pkm.KINGLER]: Kingler
+  [Pkm.KINGLER]: Kingler,
+  [Pkm.SIZZLIPEDE]: Sizzlipede,
+  [Pkm.CENTISKORCH]: Centiskorch
 }
