@@ -38,6 +38,8 @@ Gen 1 is now complete !
 - Nerf Ghost: dodge chance ~~25%~~ 20% ; Nerf Ghost 8: Curse duration: ~~6~~ 7 seconds
 - Fix Psy 4 Light Screen Unown shop found every 5 shops instead of 3
 - Dark 1-range Pokémon with Wide lens no longer jump to the farthest enemy
+- Nerf Ground: Ground bonuses now can go up to 5 stacks max
+
 
 # Changes to Items
 

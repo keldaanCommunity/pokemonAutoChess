@@ -654,7 +654,7 @@ export default abstract class PokemonState {
       pokemon.effects.has(Effect.DEEP_MINER)
     ) {
       pokemon.growGroundTimer -= dt
-      if (pokemon.growGroundTimer <= 0) {
+      if (pokemon.growGroundTimer <= 0 && pokemon.count.growGroundCount < 5) {
         pokemon.growGroundTimer = 3000
         pokemon.count.growGroundCount += 1
         if (pokemon.effects.has(Effect.TILLER)) {

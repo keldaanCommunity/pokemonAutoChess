@@ -2383,7 +2383,7 @@
     "PSYCHIC": "PSYCHIC Pokémons gain additional AP and attract Unowns",
     "DARK": "DARK Pokémons critical hits are more powerful and more frequent. Melee Dark Pokémons jump to the farthest target reachable",
     "STEEL": "STEEL Pokémons deal a percentage of their damage as TRUE",
-    "GROUND": "GROUND Pokémons gain bonus ATK, DEF and SPE_DEF every 3 seconds.",
+    "GROUND": "GROUND Pokémons gain bonus ATK, DEF and SPE_DEF every 3 seconds, up to 5 times.",
     "POISON": "POISON Pokémons have a chance to POISONNED their target for 4 seconds with their basic attacks. Poison inflicts TRUE over time",
     "DRAGON": "DRAGON amplify synergies and gains more stats when fully evolved.",
     "FIELD": "When a FIELD Pokémon is KO, all the other FIELD Pokémons are healed and gain ATK_SPEED",

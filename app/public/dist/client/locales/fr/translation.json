@@ -2368,7 +2368,7 @@
     "PSYCHIC": "Les pokémons PSYCHIC gagnent des AP supplémentaires et attirent les Zarbi",
     "DARK": "Les coups critiques des pokémons DARK sont plus puissants et plus fréquents. Les pokémons DARK de mêlée sautent vers la cible la plus éloignée atteignable.",
     "STEEL": "Les pokémons STEEL infligent un pourcentage de leurs dégâts en TRUE",
-    "GROUND": "Les pokémons GROUND gagnent un bonus d'ATK, de DEF et de SPE_DEF toutes les 3 secondes",
+    "GROUND": "Les pokémons GROUND gagnent un bonus d'ATK, de DEF et de SPE_DEF toutes les 3 secondes, jusqu'à 5 fois",
     "POISON": "Les pokémons POISON ont une chance d'infliger POISONNED à leur cible pendant 4 secondes avec leurs attaques de base. Le poison inflige des TRUE sur la durée.",
     "DRAGON": "Les pokémons DRAGON amplifient leurs synergies et gagnent plus de statistiques lorsqu'ils sont complètement évolués.",
     "FIELD": "Lorsqu'un pokémon FIELD meurt, tous les autres pokémons FIELD sont soignés et gagnent en ATK_SPEED",
