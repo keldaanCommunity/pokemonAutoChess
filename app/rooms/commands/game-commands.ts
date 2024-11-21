@@ -128,7 +128,8 @@ export class OnShopCommand extends Command<
 
     if (
       pokemon.passive === Passive.UNOWN &&
-      player.shop.every((p) => Unowns.includes(p))
+      player.shopFreeRolls > 0 &&
+      player.shop.every((p) => Unowns.includes(p) || p === Pkm.DEFAULT)
     ) {
       // reset shop after picking in a unown shop
       this.state.shop.assignShop(player, true, this.state)
