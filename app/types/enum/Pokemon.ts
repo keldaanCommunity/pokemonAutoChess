@@ -748,6 +748,8 @@ export enum Pkm {
   TOXEL = "TOXEL",
   TOXICROAK = "TOXICROAK",
   TOXTRICITY = "TOXTRICITY",
+  SIZZLIPEDE = "SIZZLIPEDE",
+  CENTISKORCH = "CENTISKORCH",
   TRAPINCH = "TRAPINCH",
   TREECKO = "TREECKO",
   TREVENANT = "TREVENANT",
@@ -1832,8 +1834,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.BARRASKEWDA]: "0847",
   [Pkm.TOXEL]: "0848",
   [Pkm.TOXTRICITY]: "0849",
-  //[Pkm.SIZZLIPEDE]: "0850",
-  //[Pkm.CENTISKORCH]: "0851",
+  [Pkm.SIZZLIPEDE]: "0850",
+  [Pkm.CENTISKORCH]: "0851",
   //[Pkm.CLOBBOPUS]: "0852",
   //[Pkm.GRAPPLOCT]: "0853",
   [Pkm.SINISTEA]: "0854",
@@ -2868,7 +2870,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.DARMANITAN]: Pkm.DARUMAKA,
   [Pkm.DARMANITAN_ZEN]: Pkm.DARUMAKA,
   [Pkm.KRABBY]: Pkm.KRABBY,
-  [Pkm.KINGLER]: Pkm.KRABBY
+  [Pkm.KINGLER]: Pkm.KRABBY,
+  [Pkm.SIZZLIPEDE]: Pkm.SIZZLIPEDE,
+  [Pkm.CENTISKORCH]: Pkm.SIZZLIPEDE
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7327,5 +7331,17 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Strike,
     emote: AnimationType.Shoot
+  },
+  [Pkm.SIZZLIPEDE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
+  },
+  [Pkm.CENTISKORCH]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
   }
 }
