@@ -2,7 +2,7 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import { AvatarEmotions, Emotion } from "../../../../../types"
 import { getEmotionCost } from "../../../../../types/Config"
-import { getPortraitSrc } from "../../../utils"
+import { getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
 import "./pokemon-emotion.css"
 

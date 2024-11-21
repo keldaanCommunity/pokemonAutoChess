@@ -4,7 +4,7 @@ import { Tooltip } from "react-tooltip"
 
 import { IPlayer } from "../../../../../types"
 import { useAppSelector } from "../../../hooks"
-import { getAvatarSrc } from "../../../utils"
+import { getAvatarSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
 import GamePlayerDetail from "./game-player-detail"
 

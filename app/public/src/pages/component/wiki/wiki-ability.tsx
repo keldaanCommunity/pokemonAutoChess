@@ -6,7 +6,7 @@ import { getPokemonData } from "../../../../../models/precomputed/precomputed-po
 import { PRECOMPUTED_POKEMONS_PER_ABILITY } from "../../../../../models/precomputed/precomputed-ability"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Pkm } from "../../../../../types/enum/Pokemon"
-import { getPortraitSrc } from "../../../utils"
+import { getPortraitSrc } from "../../../../../utils/avatar"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"

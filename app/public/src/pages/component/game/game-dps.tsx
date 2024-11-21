@@ -1,14 +1,15 @@
 import React from "react"
 import { IDps } from "../../../../../types"
-import { getAvatarSrc } from "../../../utils"
+import { getAvatarString } from "../../../../../utils/avatar"
 import { useTranslation } from "react-i18next"
 import ProgressBar from "../progress-bar/progress-bar"
+import { PkmIndex } from "../../../../../types/enum/Pokemon"
 
 export default function GameDps(props: { maxDamage: number; dps: IDps }) {
   const { t } = useTranslation()
   return (
     <div className="game-dps-bar">
-      <img className="pokemon-portrait" src={getAvatarSrc(props.dps.name)} />
+      <img className="pokemon-portrait" src={getAvatarString(PkmIndex[props.dps.name], props.dps.shiny, props.dps.emotion)} />
       <div className="game-dps-progress-wrapper">
         <p>
           {props.dps.physicalDamage +

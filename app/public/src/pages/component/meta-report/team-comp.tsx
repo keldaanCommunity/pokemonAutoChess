@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { IMeta } from "../../../../../models/mongo-models/meta"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import { getPortraitSrc } from "../../../utils"
+import { getPortraitSrc } from "../../../../../utils/avatar"
 import SynergyIcon from "../icons/synergy-icon"
 
 export function rankType(

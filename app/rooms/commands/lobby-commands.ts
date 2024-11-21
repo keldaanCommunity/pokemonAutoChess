@@ -21,7 +21,7 @@ import UserMetadata, {
 } from "../../models/mongo-models/user-metadata"
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../models/precomputed/precomputed-emotions"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
-import { getPortraitSrc } from "../../public/src/utils"
+import { getPortraitSrc } from "../../utils/avatar"
 import {
   addBotToDatabase,
   deleteBotFromDatabase,

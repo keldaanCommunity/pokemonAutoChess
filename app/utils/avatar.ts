@@ -1,5 +1,5 @@
-import { CDN_PORTRAIT_URL, Emotion } from "../../types"
-import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
+import { CDN_PORTRAIT_URL, Emotion } from "../types"
+import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 
 export function getPortraitSrc(
   index?: string,

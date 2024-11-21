@@ -12,7 +12,7 @@ import {
   PkmIndex
 } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import { getPortraitSrc } from "../../../utils"
+import { getPortraitSrc } from "../../../../../utils/avatar"
 
 export default function PokemonStatistic(props: {
   pokemons: IPokemonsStatistic[]

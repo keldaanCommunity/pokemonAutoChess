@@ -1,7 +1,7 @@
 import { WebhookClient, EmbedBuilder } from "discord.js"
 import { IBot } from "../models/mongo-models/bot-v2"
 import { IUserMetadata } from "../models/mongo-models/user-metadata"
-import { getAvatarSrc } from "../public/src/utils"
+import { getAvatarSrc } from "../utils/avatar"
 import { logger } from "../utils/logger"
 
 let discordWebhook: WebhookClient | undefined

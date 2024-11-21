@@ -8,7 +8,7 @@ import {
   SynergyAssociatedToWeather,
   Weather
 } from "../../../../../types/enum/Weather"
-import { getPortraitSrc } from "../../../utils"
+import { getPortraitSrc } from "../../../../../utils/avatar"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"

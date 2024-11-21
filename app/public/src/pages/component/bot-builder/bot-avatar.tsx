@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { Emotion, PkmWithConfig } from "../../../../../types"
 import { Pkm } from "../../../../../types/enum/Pokemon"
-import { getAvatarSrc } from "../../../utils"
+import { getAvatarSrc } from "../../../../../utils/avatar"
 import { validateBot } from "./bot-logic"
 
 export default function BotAvatar(props: {

@@ -4,7 +4,7 @@ import { PokemonClasses } from "../../../../../models/colyseus-models/pokemon"
 import { PRECOMPUTED_REGIONAL_MONS } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { DungeonDetails, DungeonPMDO } from "../../../../../types/enum/Dungeon"
 import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { getPortraitSrc } from "../../../utils"
+import { getPortraitSrc } from "../../../../../utils/avatar"
 import SynergyIcon from "../icons/synergy-icon"
 
 export default function WikiRegions() {

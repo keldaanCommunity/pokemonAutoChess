@@ -15,7 +15,7 @@ import {
   changeAvatar,
   changeSelectedEmotion
 } from "../../../stores/NetworkStore"
-import { getAvatarSrc, getPortraitSrc } from "../../../utils"
+import { getAvatarSrc, getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
 import { Modal } from "../modal/modal"
 import PokemonEmotion from "./pokemon-emotion"

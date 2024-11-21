@@ -8,7 +8,7 @@ import { AvatarEmotions, Emotion } from "../../../../types/enum/Emotion"
 import { logger } from "../../../../utils/logger"
 import { cc } from "../../pages/utils/jsx"
 import store from "../../stores"
-import { getPortraitSrc } from "../../utils"
+import { getPortraitSrc } from "../../../../utils/avatar"
 import GameScene from "../scenes/game-scene"
 import "./emote-menu.css"
 

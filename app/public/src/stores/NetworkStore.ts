@@ -20,7 +20,7 @@ import { Language } from "../../../types/enum/Language"
 import { PkmProposition } from "../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../types/enum/SpecialGameRule"
 import { logger } from "../../../utils/logger"
-import { getAvatarString } from "../utils"
+import { getAvatarString } from "../../../utils/avatar"
 
 export interface INetwork {
   client: Client

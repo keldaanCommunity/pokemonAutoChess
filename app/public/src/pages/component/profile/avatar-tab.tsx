@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { changeAvatar } from "../../../stores/NetworkStore"
-import { getPortraitSrc } from "../../../utils"
+import { getPortraitSrc } from "../../../../../utils/avatar"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 
 export function AvatarTab() {

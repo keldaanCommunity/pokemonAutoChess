@@ -62,6 +62,7 @@ import {
   setWeather
 } from "../stores/GameStore"
 import { joinGame, logIn, setProfile } from "../stores/NetworkStore"
+import { getAvatarString } from "../../../utils/avatar"
 import GameDpsMeter from "./component/game/game-dps-meter"
 import GameFinalRank from "./component/game/game-final-rank"
 import GameItemsProposition from "./component/game/game-items-proposition"
@@ -75,7 +76,7 @@ import GameToasts from "./component/game/game-toasts"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { playMusic, preloadMusic } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
-import { FIREBASE_CONFIG, getPortraitPath } from "./utils/utils"
+import { FIREBASE_CONFIG } from "./utils/utils"
 
 let gameContainer: GameContainer
 
@@ -232,7 +233,7 @@ export default function Game() {
           p.board.forEach((pokemon) => {
             if (pokemon.positionY != 0) {
               afterPlayer.pokemons.push({
-                avatar: getPortraitPath(pokemon),
+                avatar: getAvatarString(pokemon.index, pokemon.shiny, pokemon.emotion),
                 items: pokemon.items.toArray(),
                 name: pokemon.name
               })

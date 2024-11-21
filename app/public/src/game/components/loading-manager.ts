@@ -7,7 +7,7 @@ import { values } from "../../../../utils/schemas"
 import indexList from "../../../src/assets/pokemons/indexList.json"
 import atlas from "../../assets/atlas.json"
 import { preloadMusic } from "../../pages/utils/audio"
-import { getPortraitSrc } from "../../utils"
+import { getPortraitSrc } from "../../../../utils/avatar"
 import GameScene from "../scenes/game-scene"
 
 export default class LoadingManager {

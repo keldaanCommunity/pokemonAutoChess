@@ -11,7 +11,7 @@ import { Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { AbilityTooltip } from "../../pages/component/ability/ability-tooltip"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
-import { getPortraitSrc } from "../../utils"
+import { getPortraitSrc } from "../../../../utils/avatar"
 
 export default class PokemonDetail extends GameObjects.DOMElement {
   dom: HTMLDivElement

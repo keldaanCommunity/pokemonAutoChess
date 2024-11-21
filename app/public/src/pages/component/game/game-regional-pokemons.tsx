@@ -7,7 +7,7 @@ import { RarityColor } from "../../../../../types/Config"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
-import { getPortraitSrc } from "../../../utils"
+import { getPortraitSrc } from "../../../../../utils/avatar"
 import { getGameScene } from "../../game"
 import SynergyIcon from "../icons/synergy-icon"
 
@@ -35,7 +35,7 @@ export function GameRegionalPokemons() {
   const { t } = useTranslation()
   const currentPlayer = useAppSelector(selectCurrentPlayer)
   const specialGameRule = getGameScene()?.room?.state.specialGameRule
-  const regionalPokemons: Pkm[] = currentPlayer?.regionalPokemons.map(p=>p) ?? new Array<Pkm>()
+  const regionalPokemons: Pkm[] = currentPlayer?.regionalPokemons.map(p => p) ?? new Array<Pkm>()
   const pokemonCollection = useAppSelector(
     (state) => state.game.pokemonCollection
   )

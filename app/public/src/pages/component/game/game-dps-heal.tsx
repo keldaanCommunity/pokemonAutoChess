@@ -1,7 +1,7 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { IDps } from "../../../../../types"
-import { getAvatarSrc } from "../../../utils"
+import { getAvatarSrc } from "../../../../../utils/avatar"
 import ProgressBar from "../progress-bar/progress-bar"
 
 export default function GameDpsHeal(props: {
