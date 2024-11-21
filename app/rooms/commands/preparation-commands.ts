@@ -555,7 +555,7 @@ export class OnToggleReadyCommand extends Command<
       // logger.debug(this.state.users.get(client.auth.uid).ready);
       if (client.auth?.uid && this.state.users.has(client.auth.uid)) {
         const user = this.state.users.get(client.auth.uid)!
-        user.ready = ready !== undefined ? ready : !user.ready
+        user.ready = ready
       }
 
       const nbExpectedPlayers =

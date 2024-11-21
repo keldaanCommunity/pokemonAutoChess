@@ -250,7 +250,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       }
     })
 
-    this.onMessage(Transfer.TOGGLE_READY, (client, ready?: boolean) => {
+    this.onMessage(Transfer.TOGGLE_READY, (client, ready: boolean) => {
       logger.info(Transfer.TOGGLE_READY, this.roomName)
       try {
         this.dispatcher.dispatch(new OnToggleReadyCommand(), { client, ready })
