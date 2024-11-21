@@ -2170,8 +2170,8 @@ export class Haxorus extends Pokemon {
 export class Dratini extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
-    Synergy.AQUATIC,
-    Synergy.FLYING
+    Synergy.FLYING,
+    Synergy.AQUATIC
   ])
   rarity = Rarity.RARE
   stars = 1
@@ -2189,8 +2189,8 @@ export class Dratini extends Pokemon {
 export class Dragonair extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
-    Synergy.AQUATIC,
-    Synergy.FLYING
+    Synergy.FLYING,
+    Synergy.AQUATIC
   ])
   rarity = Rarity.RARE
   stars = 2
@@ -2208,8 +2208,8 @@ export class Dragonair extends Pokemon {
 export class Dragonite extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
-    Synergy.AQUATIC,
-    Synergy.FLYING
+    Synergy.FLYING,
+    Synergy.AQUATIC
   ])
   rarity = Rarity.RARE
   stars = 3
