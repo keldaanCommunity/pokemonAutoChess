@@ -7,9 +7,9 @@ import { getAvatarSrc } from "../../../../../utils/avatar"
 import GamePlayerDpsMeter from "./game-player-dps-meter"
 import GamePlayerDpsTakenMeter from "./game-player-dps-taken-meter"
 import GamePlayerHpsMeter from "./game-player-hps-meter"
-import { Team } from "../../../../../types/enum/Game"
-import "./game-dps-meter.css"
+import { GamePhaseState, Team } from "../../../../../types/enum/Game"
 import { PVEStages } from "../../../../../models/pve-stages"
+import "./game-dps-meter.css"
 
 export default function GameDpsMeter() {
   const { t } = useTranslation()
@@ -18,6 +18,7 @@ export default function GameDpsMeter() {
     (state) => state.game.currentTeam
   )
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
+  const phase = useAppSelector((state) => state.game.phase)
 
   const blueDpsMeter = useAppSelector((state) => state.game.blueDpsMeter)
   const redDpsMeter = useAppSelector((state) => state.game.redDpsMeter)
@@ -28,7 +29,7 @@ export default function GameDpsMeter() {
 
   if (!currentPlayer) return null
 
-  const isPVE = stageLevel in PVEStages
+  const isPVE = phase === GamePhaseState.FIGHT ? stageLevel in PVEStages : (stageLevel - 1) in PVEStages
 
   const name = currentPlayer.name
   const avatar = currentPlayer.avatar
