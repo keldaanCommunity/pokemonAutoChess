@@ -405,7 +405,8 @@
     "FREEZING_GLARE": "Freezing Glare",
     "THUNDEROUS_KICK": "Thunderous Kick",
     "FIERY_WRATH": "Fiery Wrath",
-    "VISE_GRIP": "Vise Grip"
+    "VISE_GRIP": "Vise Grip",
+    "BURN_UP": "Burn Up"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1264,7 +1265,9 @@
     "DARMANITAN_ZEN": "Darmanitan (Zen)",
     "TURTONATOR": "Turtonator",
     "KRABBY": "Krabby",
-    "KINGLER": "Kingler"
+    "KINGLER": "Kingler",
+    "SIZZLIPEDE": "Sizzlipede",
+    "CENTISKORCH": "Centiskorch"
   },
   "ability_description": {
     "SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1650,7 +1653,8 @@
     "FREEZING_GLARE": "Deal [20,40,80,SP] SPECIAL to all enemies in a line, with a [50,LK]% chance to FREEZE for 3 seconds",
     "THUNDEROUS_KICK": "Target is pushed away. It and all enemies on the path are FLINCH for 4 seconds, lose [5,SP] DEF and take [20,40,60,SP] PHYSICAL.",
     "FIERY_WRATH": "Deal [40,SP] SPECIAL to all enemy Pokémon, with [50,LK]% chance to apply FLINCH for 4 seconds.",
-    "VISE_GRIP": "Grip the target with powerful pincers, dealing [30,60,100,SP] SPECIAL to the target. Both the user and the target are LOCKED for 4 seconds."
+    "VISE_GRIP": "Grip the target with powerful pincers, dealing [30,60,100,SP] SPECIAL to the target. Both the user and the target are LOCKED for 4 seconds.",
+    "BURN_UP": "BURN itself for 3 seconds to inflict [50,100,200,SP] SPECIAL."
   },
   "effect": {
     "INGRAIN": "Ingrain",

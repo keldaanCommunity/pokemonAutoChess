@@ -51,6 +51,7 @@ import Board, { Cell } from "../board"
 import { PokemonEntity, getStrongestUnit } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 
+import { t } from "i18next"
 import { Passive } from "../../types/enum/Passive"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { distanceC, distanceM } from "../../utils/distance"
@@ -67,7 +68,6 @@ import {
 } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { DelayedCommand } from "../simulation-command"
-import { t } from "i18next"
 
 export class BlueFlareStrategy extends AbilityStrategy {
   process(
@@ -5953,7 +5953,7 @@ export class AstralBarrageStrategy extends AbilityStrategy {
       }
     })
 
-    const nbGhosts = 7 * (1 + (pokemon.ap / 100))
+    const nbGhosts = 7 * (1 + pokemon.ap / 100)
     for (let i = 0; i < nbGhosts; i++) {
       const randomTarget = pickRandomIn(enemies)
       pokemon.commands.push(
@@ -10619,6 +10619,21 @@ export class ViseGripStrategy extends AbilityStrategy {
   }
 }
 
+export class BurnUpStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [50, 100, 200][pokemon.stars - 1] ?? 200
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    pokemon.status.triggerBurn(3000, pokemon, pokemon)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -11006,5 +11021,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.THUNDEROUS_KICK]: new ThunderousKickStrategy(),
   [Ability.FIERY_WRATH]: new FieryWrathStrategy(),
   [Ability.VISE_GRIP]: new ViseGripStrategy(),
-  [Ability.LAVA_PLUME]: new LavaPlumeStrategy()
+  [Ability.LAVA_PLUME]: new LavaPlumeStrategy(),
+  [Ability.BURN_UP]: new BurnUpStrategy()
 }
