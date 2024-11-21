@@ -2709,6 +2709,9 @@
   "smeargle_scribble": "Smeargle's Scribble",
   "smeargle_scribble_description": "Play for fun, no Elo gain/loss !\nA new special rule is added for this game.",
   "smeargle_scribble_hint": "Smeargle scribbles a new random rule applied during the entire game.",
+  "no_rule": "No special rule",
+  "enable_scribble": "Enable Smeargle's Scribble",
+  "disable_scribble": "Disable Smeargle's Scribble",
   "quick_play": "Quick play",
   "quick_play_description": "The classic PAC Experience !\n8 players, Elo enabled, open to everyone.",
   "quick_play_hint": "The game will automatically start when 8 players joined",
@@ -2843,6 +2846,7 @@
   "snapshot": "Snapshot",
   "passive": "Passive",
   "pick_additional_pokemon_hint": "Pick an additional Pokemon. It will be available to everyone.",
+  "pick_first_partner_hint": "Pick your starter. You will get a copy of it every stage up to stage 10",
   "free_slot_hint": "You must have one free slot on the bench, or two for Duos",
   "hide": "Hide",
   "show": "Show",
@@ -3226,7 +3230,6 @@
     "OMELETTE_COOK": "Omelette Cook",
     "SYNERGY_WHEEL": "Synergy Wheel",
     "DITTO_PARTY": "Ditto Party",
-    "RARE_IS_EXPENSIVE": "Rare is Expensive",
     "GOTTA_CATCH_EM_ALL": "Gotta catch'em all !",
     "BUYER_FEVER": "Buyer fever",
     "TECHNOLOGIC": "Technologic",
@@ -3236,7 +3239,10 @@
     "KECLEONS_SHOP": "Kecleon's Shop",
     "FREE_MARKET": "Free Market",
     "SHINY_HUNTER": "Shiny Hunter",
-    "DESPERATE_MOVES": "Desperate Moves"
+    "DESPERATE_MOVES": "Desperate Moves",
+    "DO_IT_ALL_YOURSELF": "Do it all yourself !",
+    "FIRST_PARTNER": "First Partner",
+    "SLAMINGO": "Slamingo"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "All the additional picks are available immediately",
@@ -3244,7 +3250,6 @@
     "OMELETTE_COOK": "Get a Pokemon Egg after stage 1, 2 and 3",
     "SYNERGY_WHEEL": "Carousels now only propose Synergy stones",
     "DITTO_PARTY": "Start with 5 Ditto on your bench. Dittos cannot be found in the shop and cannot be sold.",
-    "RARE_IS_EXPENSIVE": "Buying XP now costs 8 instead of 4. Units are bought and sold for 1 gold less.",
     "GOTTA_CATCH_EM_ALL": "Some Pokémons can be caught before each PvE round",
     "BUYER_FEVER": "Evolutions in shop are free",
     "TECHNOLOGIC": "Choose between 3 artifacts at stage 3 and 15",
@@ -3254,7 +3259,10 @@
     "KECLEONS_SHOP": "Item carousels are replaced by Kecleon's shop, that propose 6 items for 10 GOLD each",
     "FREE_MARKET": "Pokemons are bought and sold for 0 GOLD",
     "SHINY_HUNTER": "All the Wild PvE encounters are shiny",
-    "DESPERATE_MOVES": "Players start with 150 HP. Rerolling shop costs HP instead of GOLD."
+    "DESPERATE_MOVES": "Players start with 150 HP. Rerolling shop costs HP instead of GOLD.",
+    "DO_IT_ALL_YOURSELF": "Start with a copy of you avatar with +100 max HP and more gold if your avatar is of a lower rarity",
+    "FIRST_PARTNER": "Choose your starter Pokémon. You get a copy of this unit every stage up to stage 10.",
+    "SLAMINGO": "All items are dropped when Pokémon is put on bench. Starts with 4 random components"
   },
   "loading_hints": {
     "tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",

@@ -281,6 +281,12 @@ export class OnDragDropCommand extends Command<
             this.room.swap(player, pokemon, x, y)
             pokemon.onChangePosition(x, y, player)
             success = true
+            if (this.state.specialGameRule === SpecialGameRule.SLAMINGO) {
+              pokemon.items.forEach((item) => {
+                player.items.push(item)
+                pokemon.removeItem(item)
+              })
+            }
           } else if (
             pokemon.canBePlaced &&
             !(dropFromBench && dropToEmptyPlace && isBoardFull)
@@ -1160,6 +1166,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       ).length
       for (let i = 0; i < nbTrees; i++) {
         player.berryTreesStage[i] = max(3)(player.berryTreesStage[i] + 1)
+      }
+
+      if (
+        this.state.specialGameRule === SpecialGameRule.FIRST_PARTNER &&
+        this.state.stageLevel < 10
+      ) {
+        this.room.spawnOnBench(player, player.firstPartner, "spawn")
       }
     })
 

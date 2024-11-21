@@ -7,9 +7,11 @@ import PreparationState from "../../../../../rooms/states/preparation-state"
 import { Role } from "../../../../../types"
 import { BOTS_ENABLED, EloRank, EloRankThreshold, MAX_PLAYERS_PER_GAME } from "../../../../../types/Config"
 import { BotDifficulty, GameMode } from "../../../../../types/enum/Game"
+import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { formatMinMaxRanks } from "../../../../../utils/elo"
 import { throttle } from "../../../../../utils/function"
 import { max } from "../../../../../utils/number"
+import { pickRandomIn } from "../../../../../utils/random"
 import { setTitleNotificationIcon } from "../../../../../utils/window"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
@@ -19,6 +21,7 @@ import {
   changeRoomPassword,
   deleteRoom,
   gameStartRequest,
+  setSpecialRule,
   toggleEloRoom,
   toggleReady
 } from "../../../stores/NetworkStore"
@@ -39,6 +42,7 @@ export default function PreparationMenu() {
     (state) => state.preparation.password
   )
   const noElo: boolean = useAppSelector((state) => state.preparation.noElo)
+  const specialGameRule: SpecialGameRule | null = useAppSelector((state) => state.preparation.specialGameRule)
   const minRank = useAppSelector((state) => state.preparation.minRank)
   const maxRank = useAppSelector((state) => state.preparation.maxRank)
   const [showBotSelectModal, setShowBotSelectModal] = useState(false)
@@ -138,11 +142,15 @@ export default function PreparationMenu() {
     }))
   }
 
+  const changeSpecialRule = (rule: SpecialGameRule | "none") => {
+    dispatch(setSpecialRule(rule === "none" ? null : rule))
+  }
+
   const headerMessage = (
     <>
       {gameMode === GameMode.RANKED && <p>{t("ranked_game_hint")}</p>}
 
-      {gameMode === GameMode.SCRIBBLE && (
+      {(gameMode === GameMode.SCRIBBLE || specialGameRule != null) && (
         <p>
           <img
             alt={t("smeargle_scribble")}
@@ -222,6 +230,27 @@ export default function PreparationMenu() {
       <RankSelect label={t("maximum_rank")} value={maxRank ?? EloRank.MASTERBALL} onChange={changeMaxRank} />
     </>
   )
+
+  const scribbleRule = gameMode === GameMode.CUSTOM_LOBBY && isOwner && noElo && <>
+    <button
+      className="bubbly blue"
+      onClick={() => changeSpecialRule(specialGameRule ? "none" : pickRandomIn(Object.values(SpecialGameRule)))}
+      title={t("smeargle_scribble_hint")}
+    >
+      {specialGameRule ? t("disable_scribble") : t("enable_scribble")}
+    </button>
+    {(isModerator || isAdmin) && <label>
+      {t("smeargle_scribble")}
+      <select onChange={e => changeSpecialRule(e.target.value as SpecialGameRule)} value={specialGameRule ?? "none"}>
+        <option value="none">{t("no_rule")}</option>
+        {Object.values(SpecialGameRule).map((rule) => (
+          <option key={rule} value={rule}>
+            {t("scribble." + rule)}
+          </option>
+        ))}
+      </select>
+    </label>}
+  </>
 
   const roomNameInput = gameMode === GameMode.CUSTOM_LOBBY &&
     (isModerator || isAdmin) &&
@@ -342,6 +371,7 @@ export default function PreparationMenu() {
       <div className="actions">
         {roomEloButton}
         {minMaxRanks}
+        {scribbleRule}
         <div className="spacer" />
       </div>
 

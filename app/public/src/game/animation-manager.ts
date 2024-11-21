@@ -7,12 +7,7 @@ import {
   SpriteType
 } from "../../../types/enum/Game"
 import { Berries } from "../../../types/enum/Item"
-import {
-  AnimationConfig,
-  Pkm,
-  PkmByIndex,
-  PkmIndex
-} from "../../../types/enum/Pokemon"
+import { AnimationConfig, Pkm, PkmByIndex } from "../../../types/enum/Pokemon"
 import { logger } from "../../../utils/logger"
 import { fpsToDuration } from "../../../utils/number"
 import atlas from "../assets/atlas.json"
@@ -41,9 +36,7 @@ export default class AnimationManager {
           AnimationType.Hurt
         ]
 
-        const conf = (Object.keys(PkmIndex) as Pkm[]).find(
-          (p) => index === PkmIndex[p]
-        )
+        const conf = PkmByIndex[index]
 
         if (conf && AnimationConfig[conf]) {
           if (

@@ -8,7 +8,7 @@ import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
 import { MiniGame } from "../core/matter/mini-game"
 import { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
-import { Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
+import { Pokemon } from "../models/colyseus-models/pokemon"
 import BannedUser from "../models/mongo-models/banned-user"
 import { BotV2 } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
@@ -108,6 +108,7 @@ export default class GameRoom extends Room<GameState> {
     ownerName: string
     noElo: boolean
     gameMode: GameMode
+    specialGameRule: SpecialGameRule | null
     minRank: EloRank | null
     maxRank: EloRank | null
     tournamentId: string | null
@@ -137,7 +138,8 @@ export default class GameRoom extends Room<GameState> {
         options.noElo,
         options.gameMode,
         options.minRank,
-        options.maxRank
+        options.maxRank,
+        options.specialGameRule
       )
     )
     this.miniGame.create(
@@ -889,18 +891,18 @@ export default class GameRoom extends Room<GameState> {
   }
 
   spawnOnBench(player: Player, pkm: Pkm, anim: "fishing" | "spawn" = "spawn") {
-    const fish = PokemonFactory.createPokemonFromName(pkm, player)
+    const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
     const x = getFirstAvailablePositionInBench(player.board)
     if (x !== undefined) {
-      fish.positionX = x
-      fish.positionY = 0
+      pokemon.positionX = x
+      pokemon.positionY = 0
       if (anim === "fishing") {
-        fish.action = PokemonActionState.FISH
+        pokemon.action = PokemonActionState.FISH
       }
 
-      player.board.set(fish.id, fish)
+      player.board.set(pokemon.id, pokemon)
       this.clock.setTimeout(() => {
-        fish.action = PokemonActionState.IDLE
+        pokemon.action = PokemonActionState.IDLE
         this.checkEvolutionsAfterPokemonAcquired(player.id)
       }, 1000)
     }
@@ -1023,6 +1025,13 @@ export default class GameRoom extends Room<GameState> {
         player.items.push(player.itemsProposition[selectedIndex])
         player.itemsProposition.clear()
       }
+    }
+
+    if (
+      this.state.specialGameRule === SpecialGameRule.FIRST_PARTNER &&
+      this.state.stageLevel === 1
+    ) {
+      player.firstPartner = pokemonsObtained[0].name
     }
 
     pokemonsObtained.forEach((pokemon) => {

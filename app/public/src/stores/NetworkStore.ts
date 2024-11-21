@@ -18,6 +18,7 @@ import { BotDifficulty } from "../../../types/enum/Game"
 import { Item } from "../../../types/enum/Item"
 import { Language } from "../../../types/enum/Language"
 import { PkmProposition } from "../../../types/enum/Pokemon"
+import { SpecialGameRule } from "../../../types/enum/SpecialGameRule"
 import { logger } from "../../../utils/logger"
 import { getAvatarString } from "../utils"
 
@@ -196,6 +197,9 @@ export const networkSlice = createSlice({
     ) => {
       state.preparation?.send(Transfer.CHANGE_ROOM_RANKS, action.payload)
     },
+    setSpecialRule: (state, action: PayloadAction<SpecialGameRule | null>) => {
+      state.preparation?.send(Transfer.CHANGE_SPECIAL_RULE, action.payload)
+    },
     changeSelectedEmotion: (
       state,
       action: PayloadAction<{ index: string; emotion: Emotion; shiny: boolean }>
@@ -319,6 +323,7 @@ export const {
   changeRoomName,
   changeRoomPassword,
   changeRoomMinMaxRanks,
+  setSpecialRule,
   gameStartRequest,
   logIn,
   logOut,

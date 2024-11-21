@@ -21,6 +21,7 @@ import { entries, values } from "../../utils/schemas"
 import PreparationRoom from "../preparation-room"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import { getRank } from "../../utils/elo"
+import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -254,6 +255,7 @@ export class OnGameStartRequestCommand extends Command<
           preparationId: this.room.roomId,
           noElo: this.state.noElo,
           gameMode: this.state.gameMode,
+          specialGameRule: this.state.specialGameRule,
           tournamentId: this.room.metadata?.tournamentId,
           bracketId: this.room.metadata?.bracketId,
           minRank: this.state.minRank
@@ -383,6 +385,37 @@ export class OnRoomChangeRankCommand extends Command<
         this.room.setMinMaxRanks(minRank, maxRank)
         this.state.minRank = minRank
         this.state.maxRank = maxRank
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
+
+export class OnRoomChangeSpecialRule extends Command<
+  PreparationRoom,
+  {
+    client: Client
+    specialRule: SpecialGameRule | null
+  }
+> {
+  execute({ client, specialRule }) {
+    try {
+      if (client.auth?.uid == this.state.ownerId) {
+        this.state.specialGameRule = specialRule
+        const leader = this.state.users.get(client.auth.uid)
+        this.room.state.addMessage({
+          author: "Server",
+          authorId: "server",
+          payload: `Room leader ${
+            specialRule ? "enabled" : "disabled"
+          } Smeargle's Scribble for this game. Players need to ready again.`,
+          avatar: leader?.avatar
+        })
+
+        this.state.users.forEach((user) => {
+          user.ready = false
+        })
       }
     } catch (error) {
       logger.error(error)
