@@ -1252,19 +1252,23 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.addSpecialDefense(5, this, 0, false)
     }
 
-    if ((this.passive === Passive.ZYGARDE10 || this.passive === Passive.ZYGARDE50) && this.life < 0.5 * this.hp) {
-
-      if (this.passive === Passive.ZYGARDE10){
+    if (
+      (this.passive === Passive.ZYGARDE10 ||
+        this.passive === Passive.ZYGARDE50) &&
+      this.life < 0.3 * this.hp
+    ) {
+      this.handleHeal(0.2 * this.hp, this, 0, false)
+      this.addAttackSpeed(-25, this, 0, false)
+      if (this.passive === Passive.ZYGARDE10) {
         this.addDefense(1, this, 0, false)
         this.addSpecialDefense(1, this, 0, false)
-        this.addPP(20, this, 0, false)
         this.addMaxHP(50, this, 0, false)
       } else {
         this.addAttack(5, this, 0, false)
         this.addDefense(2, this, 0, false)
         this.addSpecialDefense(2, this, 0, false)
         this.addMaxHP(80, this, 0, false)
-        this.range = 1
+        this.range = min(1)(this.range - 1)
       }
 
       this.index = PkmIndex[Pkm.ZYGARDE_100]

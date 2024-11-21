@@ -2269,8 +2269,8 @@
     "BAD_LUCK": "Reduce all opponents LUCK by 20%",
     "GOOD_LUCK": "Increase the LUCK of all allies by 20%",
     "PRIMEAPE": "Primeape becomes angrier when KO, gaining 1 permanent ATK. After Primeape is knocked out 10 times, evolves into Annihilape.",
-    "ZYGARDE10": "Zygarde will absorb its cells, transforming into another form. At 50% HP, it absorbs all of its cells, taking its complete form.",
-    "ZYGARDE50": "Zygarde will absorb its cells, transforming into another form. At 50% HP, it absorbs all of its cells, taking its complete form."
+    "ZYGARDE10": "Zygarde will absorb its cells, transforming into another form. Once below 30% max HP, it absorbs all of its cells, taking its complete form.",
+    "ZYGARDE50": "Zygarde will absorb its cells, transforming into another form. Once below 30% max HP, it absorbs all of its cells, taking its complete form."
   },
   "stat": {
     "ATK": "Attack",

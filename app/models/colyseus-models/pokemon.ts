@@ -15264,11 +15264,6 @@ export class Zygarde100 extends Pokemon {
   range = 1
   skill = Ability.CORE_ENFORCER
   attackSprite = AttackSprite.DRAGON_MELEE
-  onAcquired(player: Player) {
-    if (player.items.includes(Item.ZYGARDE_CUBE) === false) {
-      player.items.push(Item.ZYGARDE_CUBE)
-    }
-  }
 }
 
 export class Sizzlipede extends Pokemon {

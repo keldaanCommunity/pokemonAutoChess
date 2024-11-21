@@ -10628,12 +10628,23 @@ export class LandsWrathStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let atkDamage = Math.round(pokemon.atk * (1 + pokemon.ap / 100))
-    let cells = board.getAdjacentCells(target.positionX, target.positionY, true)
+    const atkDamage = Math.round(pokemon.atk * (1 + pokemon.ap / 100))
+    const cells = board.getAdjacentCells(
+      target.positionX,
+      target.positionY,
+      true
+    )
 
     cells.forEach((cell) => {
-      if (cell.value && cell.value.team !== pokemon.team){
-        cell.value.handleSpecialDamage(40 + atkDamage, board, AttackType.PHYSICAL, pokemon, crit, false)
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          40 + atkDamage,
+          board,
+          AttackType.PHYSICAL,
+          pokemon,
+          crit,
+          false
+        )
         cell.value.addDefense(-4, pokemon, 0.5, crit)
         cell.value.addSpecialDefense(-4, pokemon, 0.5, crit)
 
@@ -10645,7 +10656,6 @@ export class LandsWrathStrategy extends AbilityStrategy {
         })
       }
     })
-
   }
 }
 
@@ -10681,7 +10691,7 @@ export class ThousandArrowsStrategy extends AbilityStrategy {
             id: pokemon.simulation.id,
             skill: Ability.THOUSAND_ARROWS,
             positionX: x,
-            positionY: BOARD_HEIGHT-1,
+            positionY: BOARD_HEIGHT - 1,
             targetX: x,
             targetY: y
           })
@@ -10700,8 +10710,15 @@ export class CoreEnforcerStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    
-    target.handleSpecialDamage(150, board, AttackType.SPECIAL, pokemon, crit, true)
+
+    target.handleSpecialDamage(
+      150,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
     target.status.triggerLocked(3000, target)
     target.status.triggerSilence(3000, target)
 

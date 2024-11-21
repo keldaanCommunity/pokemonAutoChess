@@ -5,7 +5,7 @@ import type MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import {
-  type AttackSprite,
+  AttackSprite,
   AttackSpriteScale,
   type Emotion,
   type IPokemon,
@@ -404,6 +404,13 @@ export default class PokemonSprite extends DraggableObject {
     const startX = isRange ? this.positionX : targetX
     const startY = isRange ? this.positionY : targetY
     const LATENCY_COMPENSATION = 20
+    let attackSprite = this.attackSprite
+    let tint = 0xffffff
+
+    if (attackSprite === AttackSprite.DRAGON_GREEN_RANGE) {
+      attackSprite = AttackSprite.DRAGON_RANGE
+      tint = 0x80ff80
+    }
 
     if (startX != null && startY != null) {
       const coordinates = transformAttackCoordinate(startX, startY, this.flip)
@@ -411,14 +418,18 @@ export default class PokemonSprite extends DraggableObject {
         coordinates[0],
         coordinates[1],
         "attacks",
-        `${this.attackSprite}/000.png`
+        `${attackSprite}/000.png`
       )
-      const scale = AttackSpriteScale[this.attackSprite]
-      projectile.setScale(scale[0], scale[1]).setDepth(6).setVisible(false)
+      const scale = AttackSpriteScale[attackSprite]
+      projectile
+        .setScale(scale[0], scale[1])
+        .setTint(tint)
+        .setDepth(6)
+        .setVisible(false)
 
       if (!isRange) {
         projectile.anims.play({
-          key: this.attackSprite,
+          key: attackSprite,
           showOnStart: true,
           delay: delayBeforeShoot - LATENCY_COMPENSATION
         })
@@ -426,7 +437,7 @@ export default class PokemonSprite extends DraggableObject {
           projectile.destroy()
         )
       } else {
-        projectile.anims.play({ key: this.attackSprite })
+        projectile.anims.play({ key: attackSprite })
         const coordinatesTarget = transformAttackCoordinate(
           targetX,
           targetY,
