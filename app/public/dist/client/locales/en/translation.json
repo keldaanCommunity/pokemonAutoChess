@@ -1268,9 +1268,9 @@
     "TURTONATOR": "Turtonator",
     "KRABBY": "Krabby",
     "KINGLER": "Kingler",
-    "ZYGARDE_10": "Zygarde (10% Form)",
-    "ZYGARDE_50": "Zygarde (50% Form)",
-    "ZYGARDE_100": "Zygarde (100% Form)"
+    "ZYGARDE_10": "Zygarde (10% Forme)",
+    "ZYGARDE_50": "Zygarde (50% Forme)",
+    "ZYGARDE_100": "Zygarde (100% Forme)"
   },
   "ability_description": {
     "SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1657,7 +1657,7 @@
     "THUNDEROUS_KICK": "Target is pushed away. It and all enemies on the path are FLINCH for 4 seconds, lose [5,SP] DEF and take [20,40,60,SP] PHYSICAL.",
     "FIERY_WRATH": "Deal [40,SP] SPECIAL to all enemy Pokémon, with [50,LK]% chance to apply FLINCH for 4 seconds.",
     "VISE_GRIP": "Grip the target with powerful pincers, dealing [30,60,100,SP] SPECIAL to the target. Both the user and the target are LOCKED for 4 seconds.",
-    "LANDS_WRATH": "The ground erupts, dealing 40 + [100,SP]% ATK as PHYSICAL to the target and adjacent enemies, then lower their DEF and SPE_DEF by [4,SP].",
+    "LANDS_WRATH": "The ground erupts, dealing 40 + [100,SP]% ATK as PHYSICAL to the target and adjacent enemies, then lower their DEF and SPE_DEF by [4,SP=0.5].",
     "THOUSAND_ARROWS": "33 energy arrows rain down on random tiles, dealing [60,SP] SPECIAL each. All enemies hit are LOCKED for 1 second.",
     "CORE_ENFORCER": "Deal [150,SP] SPECIAL to the target. The target is LOCKED and SILENCE for 3 seconds."
   },
@@ -2265,7 +2265,8 @@
     "BAD_LUCK": "Reduce all opponents LUCK by 20%",
     "GOOD_LUCK": "Increase the LUCK of all allies by 20%",
     "PRIMEAPE": "Primeape becomes angrier when KO, gaining 1 permanent ATK. After Primeape is knocked out 10 times, evolves into Annihilape.",
-    "ZYGARDE": "Zygarde will absorb its cells, transforming into one of three formes."
+    "ZYGARDE10": "Zygarde will absorb its cells, transforming into another form. At 50% HP, it absorbs all of its cells, taking its complete form.",
+    "ZYGARDE50": "Zygarde will absorb its cells, transforming into another form. At 50% HP, it absorbs all of its cells, taking its complete form."
   },
   "stat": {
     "ATK": "Attack",

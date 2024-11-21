@@ -15204,9 +15204,9 @@ export class Kingler extends Pokemon {
 }
 
 export class Zygarde10 extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GROUND, Synergy.WILD])
-  rarity = Rarity.LEGENDARY
-  stars = 3
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GROUND])
+  rarity = Rarity.COMMON
+  stars = 1
   hp = 250
   atk = 30
   def = 4
@@ -15215,7 +15215,7 @@ export class Zygarde10 extends Pokemon {
   range = 1
   skill = Ability.LANDS_WRATH
   attackSprite = AttackSprite.DRAGON_MELEE
-  passive = Passive.ZYGARDE
+  passive = Passive.ZYGARDE10
   onAcquired(player: Player) {
     if (player.items.includes(Item.ZYGARDE_CUBE) === false) {
       player.items.push(Item.ZYGARDE_CUBE)
@@ -15224,7 +15224,7 @@ export class Zygarde10 extends Pokemon {
 }
 
 export class Zygarde50 extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GROUND, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GROUND])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 220
@@ -15235,7 +15235,7 @@ export class Zygarde50 extends Pokemon {
   range = 2
   skill = Ability.THOUSAND_ARROWS
   attackSprite = AttackSprite.DRAGON_GREEN_RANGE
-  passive = Passive.ZYGARDE
+  passive = Passive.ZYGARDE50
   onAcquired(player: Player) {
     if (player.items.includes(Item.ZYGARDE_CUBE) === false) {
       player.items.push(Item.ZYGARDE_CUBE)
@@ -15244,7 +15244,7 @@ export class Zygarde50 extends Pokemon {
 }
 
 export class Zygarde100 extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GROUND, Synergy.HUMAN])
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GROUND])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 300
@@ -15255,7 +15255,6 @@ export class Zygarde100 extends Pokemon {
   range = 1
   skill = Ability.CORE_ENFORCER
   attackSprite = AttackSprite.DRAGON_MELEE
-  passive = Passive.ZYGARDE
   onAcquired(player: Player) {
     if (player.items.includes(Item.ZYGARDE_CUBE) === false) {
       player.items.push(Item.ZYGARDE_CUBE)
