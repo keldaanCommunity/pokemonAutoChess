@@ -15205,8 +15205,8 @@ export class Kingler extends Pokemon {
 
 export class Zygarde10 extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GROUND])
-  rarity = Rarity.COMMON
-  stars = 1
+  rarity = Rarity.LEGENDARY
+  stars = 3
   hp = 250
   atk = 30
   def = 4
@@ -15246,7 +15246,7 @@ export class Zygarde50 extends Pokemon {
 export class Zygarde100 extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GROUND])
   rarity = Rarity.LEGENDARY
-  stars = 3
+  stars = 4
   hp = 300
   atk = 30
   def = 5
