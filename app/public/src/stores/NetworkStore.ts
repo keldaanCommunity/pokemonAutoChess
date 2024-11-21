@@ -18,6 +18,7 @@ import { BotDifficulty } from "../../../types/enum/Game"
 import { Item } from "../../../types/enum/Item"
 import { Language } from "../../../types/enum/Language"
 import { PkmProposition } from "../../../types/enum/Pokemon"
+import { SpecialGameRule } from "../../../types/enum/SpecialGameRule"
 import { logger } from "../../../utils/logger"
 import { getAvatarString } from "../utils"
 
@@ -155,7 +156,7 @@ export const networkSlice = createSlice({
     removeBot: (state, action: PayloadAction<string>) => {
       state.preparation?.send(Transfer.REMOVE_BOT, action.payload)
     },
-    toggleReady: (state, action: PayloadAction<boolean | undefined>) => {
+    toggleReady: (state, action: PayloadAction<boolean>) => {
       state.preparation?.send(Transfer.TOGGLE_READY, action.payload)
     },
     toggleEloRoom: (state, action: PayloadAction<boolean>) => {
@@ -195,6 +196,9 @@ export const networkSlice = createSlice({
       }>
     ) => {
       state.preparation?.send(Transfer.CHANGE_ROOM_RANKS, action.payload)
+    },
+    setSpecialRule: (state, action: PayloadAction<SpecialGameRule | null>) => {
+      state.preparation?.send(Transfer.CHANGE_SPECIAL_RULE, action.payload)
     },
     changeSelectedEmotion: (
       state,
@@ -319,6 +323,7 @@ export const {
   changeRoomName,
   changeRoomPassword,
   changeRoomMinMaxRanks,
+  setSpecialRule,
   gameStartRequest,
   logIn,
   logOut,

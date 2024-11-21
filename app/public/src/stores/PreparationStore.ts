@@ -4,6 +4,7 @@ import Message from "../../../models/colyseus-models/message"
 import { IChatV2 } from "../../../types"
 import { EloRank } from "../../../types/enum/EloRank"
 import { GameMode } from "../../../types/enum/Game"
+import { SpecialGameRule } from "../../../types/enum/SpecialGameRule"
 
 export interface IUserPreparationState {
   users: IGameUser[]
@@ -18,6 +19,7 @@ export interface IUserPreparationState {
   maxRank: EloRank | null
   user: GameUser | undefined
   gameMode: GameMode
+  specialGameRule: SpecialGameRule | null
   whitelist: string[]
   blacklist: string[]
 }
@@ -35,6 +37,7 @@ const initialState: IUserPreparationState = {
   minRank: null,
   maxRank: null,
   gameMode: GameMode.CUSTOM_LOBBY,
+  specialGameRule: null,
   whitelist: [],
   blacklist: []
 }
@@ -91,6 +94,12 @@ export const preparationSlice = createSlice({
     setNoELO: (state, action: PayloadAction<boolean>) => {
       state.noElo = action.payload
     },
+    setSpecialGameRule: (
+      state,
+      action: PayloadAction<SpecialGameRule | null>
+    ) => {
+      state.specialGameRule = action.payload
+    },
     setMinRank: (state, action: PayloadAction<EloRank | null>) => {
       state.minRank = action.payload
     },
@@ -128,6 +137,7 @@ export const {
   setWhiteList,
   setBlackList,
   setGameMode,
+  setSpecialGameRule,
   resetPreparation
 } = preparationSlice.actions
 

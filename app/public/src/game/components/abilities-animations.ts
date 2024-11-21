@@ -1201,6 +1201,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.BURN_UP:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
     case Ability.IVY_CUDGEL:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
@@ -1668,7 +1672,12 @@ export function displayAbility(
     }
 
     case Ability.LAVA_PLUME: {
-      const specialProjectile = addAbilitySprite(Ability.SLUDGE_WAVE, coordinates).setScale(1).setTint(0xffc020)
+      const specialProjectile = addAbilitySprite(
+        Ability.SLUDGE_WAVE,
+        coordinates
+      )
+        .setScale(1)
+        .setTint(0xffc020)
       scene.tweens.add({
         targets: specialProjectile,
         x: coordinatesTarget[0],

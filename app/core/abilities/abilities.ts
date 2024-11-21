@@ -51,6 +51,7 @@ import Board, { Cell } from "../board"
 import { PokemonEntity, getStrongestUnit } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 
+import { t } from "i18next"
 import { Passive } from "../../types/enum/Passive"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { distanceC, distanceM } from "../../utils/distance"
@@ -67,7 +68,6 @@ import {
 } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { DelayedCommand } from "../simulation-command"
-import { t } from "i18next"
 
 export class BlueFlareStrategy extends AbilityStrategy {
   process(
@@ -554,7 +554,7 @@ export class IllusionStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const heal = pokemon.stars === 3 ? 70 : pokemon.stars === 2 ? 50 : 30
+    const heal = [30, 50, 70][pokemon.stars - 1] ?? 70
     pokemon.handleHeal(heal, pokemon, 0.5, crit)
     if (target) {
       pokemon.index = target.index
@@ -5953,7 +5953,7 @@ export class AstralBarrageStrategy extends AbilityStrategy {
       }
     })
 
-    const nbGhosts = 3 * (1 + (2 * pokemon.ap) / 100)
+    const nbGhosts = 7 * (1 + pokemon.ap / 100)
     for (let i = 0; i < nbGhosts; i++) {
       const randomTarget = pickRandomIn(enemies)
       pokemon.commands.push(
@@ -5973,7 +5973,8 @@ export class AstralBarrageStrategy extends AbilityStrategy {
               board,
               AttackType.SPECIAL,
               pokemon,
-              crit
+              crit,
+              false
             )
           }
         }, 100 * i)
@@ -6147,7 +6148,7 @@ export class LavaPlumeStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit, true)
     const cells = board.getCellsInFront(pokemon, target)
-    const damage = [20,40,80][pokemon.stars - 1] ?? 80
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
 
     cells.forEach((cell) => {
       board.addBoardEffect(cell.x, cell.y, Effect.LAVA, pokemon.simulation)
@@ -7652,7 +7653,7 @@ export class CrushGripStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = Math.round(20 + (target.life / target.hp) * 180)
+    const damage = Math.round(50 + (target.life / target.hp) * 200)
     target.handleSpecialDamage(
       damage,
       board,
@@ -10713,6 +10714,21 @@ export class CoreEnforcerStrategy extends AbilityStrategy {
   }
 }
 
+export class BurnUpStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [50, 100, 200][pokemon.stars - 1] ?? 200
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    pokemon.status.triggerBurn(3000, pokemon, pokemon)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -11104,4 +11120,5 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.LANDS_WRATH]: new LandsWrathStrategy(),
   [Ability.THOUSAND_ARROWS]: new ThousandArrowsStrategy(),
   [Ability.CORE_ENFORCER]: new CoreEnforcerStrategy()
+  [Ability.BURN_UP]: new BurnUpStrategy()
 }

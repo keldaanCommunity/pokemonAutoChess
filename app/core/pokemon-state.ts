@@ -491,7 +491,7 @@ export default abstract class PokemonState {
       // logger.debug(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
 
       if (shouldTargetGainMana) {
-        pokemon.addPP(Math.ceil(damage / 10), pokemon, 0, false)
+        pokemon.addPP(Math.ceil(residualDamage / 10), pokemon, 0, false)
       }
 
       if (takenDamage > 0) {

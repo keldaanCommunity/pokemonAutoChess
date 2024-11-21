@@ -7,6 +7,7 @@ import {
   HatchEvolutionRule,
   ItemEvolutionRule
 } from "../../core/evolution-rules"
+import { onItemRemoved } from "../../core/items"
 import Simulation from "../../core/simulation"
 import { DelayedCommand } from "../../core/simulation-command"
 import GameState from "../../rooms/states/game-state"
@@ -44,6 +45,7 @@ import {
   ItemComponents,
   ItemRecipe,
   OgerponMasks,
+  SynergyGivenByItem,
   SynergyItems
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
@@ -58,7 +60,7 @@ import { Weather } from "../../types/enum/Weather"
 import { removeInArray, sum } from "../../utils/array"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { distanceC, distanceE } from "../../utils/distance"
-import { chance, pickRandomIn } from "../../utils/random"
+import { pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
@@ -194,6 +196,11 @@ export class Pokemon extends Schema implements IPokemon {
         !state ||
         state.additionalPokemons.includes(variantOf))
     )
+  }
+
+  removeItem(item: Item) {
+    this.items.delete(item)
+    onItemRemoved(item, this)
   }
 }
 
@@ -1213,7 +1220,7 @@ export class Slakoth extends Pokemon {
   atk = 6
   def = 5
   speDef = 4
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.SLACK_OFF
   attackSprite = AttackSprite.NORMAL_MELEE
@@ -1229,7 +1236,7 @@ export class Vigoroth extends Pokemon {
   atk = 18
   def = 5
   speDef = 4
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.SLACK_OFF
   attackSprite = AttackSprite.NORMAL_MELEE
@@ -1244,7 +1251,7 @@ export class Slaking extends Pokemon {
   atk = 34
   def = 7
   speDef = 5
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.SLACK_OFF
   attackSprite = AttackSprite.NORMAL_MELEE
@@ -7497,7 +7504,7 @@ export class Happiny extends Pokemon {
   atk = 8
   def = 5
   speDef = 5
-  maxPP = 130
+  maxPP = 120
   range = 1
   skill = Ability.SOFT_BOILED
   attackSprite = AttackSprite.FAIRY_MELEE
@@ -7512,7 +7519,7 @@ export class Chansey extends Pokemon {
   atk = 20
   def = 6
   speDef = 10
-  maxPP = 130
+  maxPP = 120
   range = 1
   skill = Ability.SOFT_BOILED
   attackSprite = AttackSprite.FAIRY_MELEE
@@ -7526,7 +7533,7 @@ export class Blissey extends Pokemon {
   atk = 25
   def = 10
   speDef = 15
-  maxPP = 130
+  maxPP = 120
   range = 1
   skill = Ability.SOFT_BOILED
   attackSprite = AttackSprite.FAIRY_MELEE
@@ -14801,13 +14808,15 @@ export class Skarmory extends Pokemon {
 
         const nbSpikes = 12
         const positions = new Set<string>()
-        
+
         for (let i = 0; i < nbSpikes; i++) {
-          let x,y
+          let x, y
           do {
-          x = Math.floor(Math.random() * board.columns)
-          y = Math.floor(Math.random() * board.rows / 2) + (entity.positionY < 4 ? 4 : 0)
-          } while (positions.has(`${x},${y}`));
+            x = Math.floor(Math.random() * board.columns)
+            y =
+              Math.floor((Math.random() * board.rows) / 2) +
+              (entity.positionY < 4 ? 4 : 0)
+          } while (positions.has(`${x},${y}`))
           positions.add(`${x},${y}`)
 
           board.addBoardEffect(x, y, Effect.SPIKES, simulation)
@@ -15260,6 +15269,37 @@ export class Zygarde100 extends Pokemon {
       player.items.push(Item.ZYGARDE_CUBE)
     }
   }
+}
+
+export class Sizzlipede extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.BUG])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.CENTISKORCH
+  hp = 75
+  atk = 9
+  def = 1
+  speDef = 3
+  maxPP = 90
+  range = 1
+  skill = Ability.BURN_UP
+  regional = true
+  attackSprite = AttackSprite.FIRE_MELEE
+}
+
+export class Centiskorch extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.BUG])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 140
+  atk = 18
+  def = 1
+  speDef = 4
+  maxPP = 90
+  range = 1
+  skill = Ability.BURN_UP
+  regional = true
+  attackSprite = AttackSprite.FIRE_MELEE
 }
 
 export const PokemonClasses: Record<
@@ -16128,5 +16168,7 @@ export const PokemonClasses: Record<
   [Pkm.KINGLER]: Kingler,
   [Pkm.ZYGARDE_10]: Zygarde10,
   [Pkm.ZYGARDE_50]: Zygarde50,
-  [Pkm.ZYGARDE_100]: Zygarde100
+  [Pkm.ZYGARDE_100]: Zygarde100,
+  [Pkm.SIZZLIPEDE]: Sizzlipede,
+  [Pkm.CENTISKORCH]: Centiskorch
 }

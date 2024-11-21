@@ -10,13 +10,15 @@ import GameState from "../../../rooms/states/game-state"
 import PreparationState from "../../../rooms/states/preparation-state"
 import { Transfer } from "../../../types"
 import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
+import { GameMode } from "../../../types/enum/Game"
 import { logger } from "../../../utils/logger"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import {
   joinPreparation,
   logIn,
   setErrorAlertMessage,
-  setProfile
+  setProfile,
+  toggleReady
 } from "../stores/NetworkStore"
 import {
   addUser,
@@ -36,7 +38,8 @@ import {
   setWhiteList,
   setBlackList,
   setMinRank,
-  setMaxRank
+  setMaxRank,
+  setSpecialGameRule
 } from "../stores/PreparationStore"
 import Chat from "./component/chat/chat"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
@@ -163,11 +166,18 @@ export default function Preparation() {
         dispatch(setGameMode(value))
       })
 
+      r.state.listen("specialGameRule", (value, previousValue) => {
+        dispatch(setSpecialGameRule(value))
+      })
+
       r.state.users.onAdd((u) => {
         dispatch(addUser(u))
 
         if (u.uid === uid) {
           dispatch(setUser(u))
+          if (r.state.gameMode !== GameMode.CUSTOM_LOBBY) {
+            dispatch(toggleReady(true)) // automatically set users ready in non-classic game mode
+          }
         } else if (!u.isBot) {
           playSound(SOUNDS.JOIN_ROOM)
         }

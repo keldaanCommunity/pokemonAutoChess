@@ -15,12 +15,12 @@ import ItemPicker from "./item-picker"
 import PokemonPicker from "./pokemon-picker"
 import SelectedEntity from "./selected-entity"
 import TeamEditor from "./team-editor"
-import "./team-builder.css"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { values } from "../../../../../utils/schemas"
 import { isOnBench } from "../../../../../utils/board"
+import "./team-builder.css"
 
 export default function TeamBuilder(props: {
   bot?: IBot

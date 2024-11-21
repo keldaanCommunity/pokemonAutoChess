@@ -74,7 +74,7 @@ export default function AfterMenu() {
                     <Avatar
                       avatar={v.avatar}
                       name={v.name}
-                      elo={undefined}
+                      elo={v.elo}
                       title={v.title}
                       role={v.role}
                     />

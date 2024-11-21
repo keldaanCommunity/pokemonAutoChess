@@ -8,12 +8,14 @@
 - Zygarde (10% Form)
 - Zygarde (50% Form)
 - Zygarde (100% Form)
+- Sizzlipede
+- Centiskorch
 
 Gen 1 is now complete !
 
 # Gameplay
 
-- 
+- Before, units gained 10% of damage received as PP. Now, this only applies to remaining damage after defenses and shield have been applied.
 
 # Changes to Pokemon & Abilities
 
@@ -27,6 +29,10 @@ Gen 1 is now complete !
 - Change Skarmory: the number of spikes is now fixed to 12 instead of random, and spikes are spread only on the enemy side of the field
 - New ability for Ho-Oh: Fire Blast; buffed damage: 20/50/80 → 30/60/110
 - Rework Slugma line: Range 2 → 1, Attack 7/16 → 6/14, Def: 3/6 → 4/8, SpeDef: 1/2 → 3/5 ; PP 90 → 100 ; new ability: Lava Plume
+- Happiny line: PP 130 → 120 as a compensation for removed PP on shield damage
+- Slakoth line: PP 120 → 100 as a compensation for removed PP on shield damage
+- Buff Crush Grip (Regigigas): between ~~20~~ 50 and ~~200~~ 250 physical damage.
+- Change Astral Barrage (Spectrier): Number of ghosts 3 → 7, AP scaling 2 → 1, ghost damage no longer scales with AP
 
 # Changes to Synergies
 
@@ -34,14 +40,16 @@ Gen 1 is now complete !
 - Buff Fairy: 15/30/50/70 → 20/40/60/80% additional special damage
 - Nerf Ghost: dodge chance ~~25%~~ 20% ; Nerf Ghost 8: Curse duration: ~~6~~ 7 seconds
 - Fix Psy 4 Light Screen Unown shop found every 5 shops instead of 3
+- Dark 1-range Pokémon with Wide lens no longer jump to the farthest enemy
 
 # Changes to Items
 
-- 
+- Repeat Ball now also take into account automatic shop rerolls after each stage. Raised the number of rerolls required to get Unique/Legendary
 
 # Bugfix
 
 - Fix Comfey sometimes not losing PP after casting
+- Fix permanent stat buffs not carrying over for hatch, item-based and condition-based evolution rules
 
 Thanks to Exeatop, many bugs have been fixed in the abilities and abilities descriptions:
 - Fix Steel Wing damage not applying defense bonus damage
@@ -78,5 +86,8 @@ Thanks to Exeatop, many bugs have been fixed in the abilities and abilities desc
 
 # Misc
 
-
 - Thanks to all the contributors who helped with the translations!
+- Elo is now displayed in end game screen
+- Allow to pick a custom Smeargle's Scribble in custom lobbies
+- Removed Rare is Expensive Scribble
+- Added 3 new Scribble rules

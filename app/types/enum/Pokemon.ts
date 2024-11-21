@@ -748,6 +748,8 @@ export enum Pkm {
   TOXEL = "TOXEL",
   TOXICROAK = "TOXICROAK",
   TOXTRICITY = "TOXTRICITY",
+  SIZZLIPEDE = "SIZZLIPEDE",
+  CENTISKORCH = "CENTISKORCH",
   TRAPINCH = "TRAPINCH",
   TREECKO = "TREECKO",
   TREVENANT = "TREVENANT",
@@ -1837,8 +1839,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.BARRASKEWDA]: "0847",
   [Pkm.TOXEL]: "0848",
   [Pkm.TOXTRICITY]: "0849",
-  //[Pkm.SIZZLIPEDE]: "0850",
-  //[Pkm.CENTISKORCH]: "0851",
+  [Pkm.SIZZLIPEDE]: "0850",
+  [Pkm.CENTISKORCH]: "0851",
   //[Pkm.CLOBBOPUS]: "0852",
   //[Pkm.GRAPPLOCT]: "0853",
   [Pkm.SINISTEA]: "0854",
@@ -2011,6 +2013,10 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.OGERPON_CORNERSTONE]: "1017-0006",
   [Pkm.OGERPON_CORNERSTONE_MASK]: "1017-0007"
 }
+
+export const PkmByIndex: { [index: string]: Pkm } = Object.fromEntries(
+  Object.entries(PkmIndex).map(([pkm, index]) => [index, pkm as Pkm])
+)
 
 export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.EGG]: Pkm.EGG,
@@ -2870,6 +2876,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.DARMANITAN_ZEN]: Pkm.DARUMAKA,
   [Pkm.KRABBY]: Pkm.KRABBY,
   [Pkm.KINGLER]: Pkm.KRABBY,
+  [Pkm.SIZZLIPEDE]: Pkm.SIZZLIPEDE,
+  [Pkm.CENTISKORCH]: Pkm.SIZZLIPEDE,
   [Pkm.ZYGARDE_10]: Pkm.ZYGARDE_10,
   [Pkm.ZYGARDE_50]: Pkm.ZYGARDE_50,
   [Pkm.ZYGARDE_100]: Pkm.ZYGARDE_100
@@ -7347,6 +7355,18 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Emit,
     emote: AnimationType.Emit,
+    shinyUnavailable: true
+  },
+  [Pkm.SIZZLIPEDE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
+  },
+  [Pkm.CENTISKORCH]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
     shinyUnavailable: true
   }
 }

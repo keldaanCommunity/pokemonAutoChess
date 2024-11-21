@@ -1,7 +1,7 @@
 import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
-import ItemFactory from "../models/item-factory"
+import { getWonderboxItems } from "./items"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../models/precomputed/precomputed-types"
@@ -332,7 +332,7 @@ export default class Simulation extends Schema implements ISimulation {
     // wonderbox should be applied first so that wonderbox items effects can be applied after
     if (pokemon.items.has(Item.WONDER_BOX)) {
       pokemon.items.delete(Item.WONDER_BOX)
-      const randomItems = ItemFactory.createWonderboxItems(pokemon.items)
+      const randomItems = getWonderboxItems(pokemon.items)
       randomItems.forEach((item) => {
         if (pokemon.items.size < 3) {
           pokemon.items.add(item)
@@ -417,7 +417,7 @@ export default class Simulation extends Schema implements ISimulation {
 
     if (item === Item.REPEAT_BALL && pokemon.player) {
       pokemon.addAbilityPower(
-        Math.floor(pokemon.player.rerollCount / 2),
+        Math.floor((pokemon.player.rerollCount + pokemon.simulation.stageLevel) / 2),
         pokemon,
         0,
         false
@@ -1313,7 +1313,7 @@ export default class Simulation extends Schema implements ISimulation {
             pokemon.effects.add(Effect.MAX_ILLUMINATION)
             pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
             pokemon.addAbilityPower(20, pokemon, 0, false)
-            pokemon.status.triggerRuneProtect(10000)
+            pokemon.status.triggerRuneProtect(8000)
             pokemon.addDefense(0.5 * pokemon.baseDef, pokemon, 0, false)
             pokemon.addSpecialDefense(
               0.5 * pokemon.baseSpeDef,
