@@ -1820,7 +1820,7 @@
     "CALM_MIND": "Heal for 60% HP of the damage",
     "SWIFT_SWIM": "-30% negative status duration. Wave heals 10% HP and deal 5% TRUE.",
     "HYDRATION": "-60% negative status duration. Wave heals 20% HP and deal 10% TRUE.",
-    "WATER_VEIL": "-90% negative status duration. Wave heals 30% HP and deal 15% TRUE.",
+    "WATER_VEIL": "-90% negative status duration. Wave heals 30% HP and deal 15% TRUE. A second wave hits after 16 seconds.",
     "COCOON": "Copy 1 BUG Pokémon",
     "INFESTATION": "Copy 2 BUG Pokémon",
     "HORDE": "Copy 3 BUG Pokémons",

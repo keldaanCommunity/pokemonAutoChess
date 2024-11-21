@@ -1764,7 +1764,7 @@
     "CALM_MIND": "Heile dich um 60 % HP des Schadens",
     "SWIFT_SWIM": "-30% negative Statusdauer. Die Welle heilt 10 % HP und verursacht 5 % TRUE.",
     "HYDRATION": "-60% negative Statusdauer. Die Welle heilt 20 % HP und verursacht 10 % TRUE.",
-    "WATER_VEIL": "-90% negative Statusdauer. Die Welle heilt 30 % HP und verursacht 15 % TRUE.",
+    "WATER_VEIL": "-90% negative Statusdauer. Die Welle heilt 30 % HP und verursacht 15 % TRUE. Nach 16 Sekunden trifft eine zweite Welle ein.",
     "COCOON": "Kopiere 1 BUG Pokémon",
     "INFESTATION": "Kopiere 2 BUG Pokémon",
     "HORDE": "Kopiere 3 BUG Pokemons",

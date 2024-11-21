@@ -1805,7 +1805,7 @@
     "CALM_MIND": "Soigne d'un montant équivalent à 60 % des dégâts infligés",
     "SWIFT_SWIM": "-30% de durée des statuts négatifs. La vague soigne 10 % des HP et inflige 5 % de TRUE.",
     "HYDRATION": "-60% de durée des statuts négatifs. La vague soigne 20 % des HP et inflige 10 % de TRUE.",
-    "WATER_VEIL": "-90% de durée des statuts négatifs. La vague soigne 30 % des HP et inflige 15 % de TRUE.",
+    "WATER_VEIL": "-90% de durée des statuts négatifs. La vague soigne 30 % des HP et inflige 15 % de TRUE. Une seconde vague frappe après 16 secondes.",
     "COCOON": "Copie 1 pokémon BUG",
     "INFESTATION": "Copie 2 pokémon BUG",
     "HORDE": "Copie 3 pokémons BUG",

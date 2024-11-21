@@ -1154,7 +1154,7 @@
     "CALM_MIND": "Genees voor 60% HP van de schade",
     "SWIFT_SWIM": "-30% negatieve statusduur. De golf geneest 10% HP en deelt 5% TRUE.",
     "HYDRATION": "-60% negatieve statusduur. De golf geneest 20% HP en deelt 10% TRUE.",
-    "WATER_VEIL": "-90% negatieve statusduur. De golf geneest 30% HP en deelt 15% TRUE.",
+    "WATER_VEIL": "-90% negatieve statusduur. De golf geneest 30% HP en deelt 15% TRUE. Na 16 seconden volgt een tweede golf.",
     "COCOON": "Kopieer 1 BUG pokemon",
     "INFESTATION": "Kopieer 2 BUG pokemon",
     "HORDE": "Kopieer 3 BUG pokemons",

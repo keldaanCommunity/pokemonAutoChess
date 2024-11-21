@@ -41,6 +41,7 @@ Gen 1 is now complete !
 - Nerf Ground: Ground bonuses now can go up to 5 stacks max
 - Change Dragon 5: Dragons gain ~~30 Shield per ⭐~~ 5 shield for each ⭐ of all your dragon units on board
 - Change Dragon 7: Dragons gain ~~10% Attack Speed and 10% Ability Power per ⭐~~ 1% Attack Speed and 1% Ability Power for each ⭐ of all your dragon units on board
+- Buff Aquatic 6: a second wave hits after 16 seconds
 
 # Changes to Items
 

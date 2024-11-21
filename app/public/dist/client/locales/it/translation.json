@@ -1816,7 +1816,7 @@
     "CALM_MIND": "Cura HP pari al 60% del danno inflitto.",
     "SWIFT_SWIM": "-30% della durata dello status alterato. L'onda cura il 10% dei HP e infligge il 5% di TRUE.",
     "HYDRATION": "-60% della durata dello status alterato. L'onda cura il 20% dei HP e infligge il 10% di TRUE.",
-    "WATER_VEIL": "-90% della durata dello status alterato. L'onda cura il 30% dei HP e infligge il 15% di TRUE.",
+    "WATER_VEIL": "-90% della durata dello status alterato. L'onda cura il 30% dei HP e infligge il 15% di TRUE. Una seconda ondata colpisce dopo 16 secondi.",
     "COCOON": "Copia 1 Pokèmon BUG",
     "INFESTATION": "Copia 2 Pokèmon BUG",
     "HORDE": "Copia 3 Pokèmon BUG",

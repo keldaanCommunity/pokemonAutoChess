@@ -71,7 +71,8 @@ export default class Simulation extends Schema implements ISimulation {
   bluePlayer: Player | undefined
   redPlayer: Player | undefined
   stormLightningTimer = 0
-  tidalwaveTimer = 0
+  tidalWaveTimer = 0
+  tidalWaveCounter = 0
 
   constructor(
     id: string,
@@ -1099,7 +1100,7 @@ export default class Simulation extends Schema implements ISimulation {
         case Effect.HYDRATION:
         case Effect.WATER_VEIL:
           pokemon.effects.add(effect)
-          this.tidalwaveTimer = 8000
+          this.tidalWaveTimer = 8000
           break
 
         case Effect.ODD_FLOWER:
@@ -1503,10 +1504,14 @@ export default class Simulation extends Schema implements ISimulation {
       }
     }
 
-    if (this.tidalwaveTimer > 0) {
-      this.tidalwaveTimer -= dt
-      if (this.tidalwaveTimer <= 0) {
+    if (this.tidalWaveTimer > 0) {
+      this.tidalWaveTimer -= dt
+      if (this.tidalWaveTimer <= 0) {
+        this.tidalWaveCounter++
         this.triggerTidalWave()
+        if (this.tidalWaveCounter < 2) {
+          this.tidalWaveTimer = 8000
+        }
       }
     }
   }
@@ -1740,23 +1745,25 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   triggerTidalWave() {
+    const redWaterLevel = this.redEffects.has(Effect.WATER_VEIL)
+      ? 3
+      : this.redEffects.has(Effect.HYDRATION)
+        ? 2
+        : this.redEffects.has(Effect.SWIFT_SWIM)
+          ? 1
+          : 0
+
     if (
-      this.redEffects.has(Effect.SWIFT_SWIM) ||
-      this.redEffects.has(Effect.HYDRATION) ||
-      this.redEffects.has(Effect.WATER_VEIL)
+      (redWaterLevel > 0 && this.tidalWaveCounter === 1) ||
+      (redWaterLevel === 3 && this.tidalWaveCounter === 2)
     ) {
-      const waveLevel = this.redEffects.has(Effect.WATER_VEIL)
-        ? 3
-        : this.redEffects.has(Effect.HYDRATION)
-          ? 2
-          : 1
       this.room.broadcast(Transfer.ABILITY, {
         id: this.id,
         skill: "TIDAL_WAVE",
         positionX: 0,
         positionY: 0,
         targetX: 0,
-        targetY: waveLevel - 1,
+        targetY: redWaterLevel - 1,
         orientation: Orientation.DOWN
       })
       this.room.broadcast(Transfer.CLEAR_BOARD, {
@@ -1771,11 +1778,11 @@ export default class Simulation extends Schema implements ISimulation {
             if (cell.team === Team.RED_TEAM) {
               cell.status.clearNegativeStatus()
               if (cell.types.has(Synergy.AQUATIC)) {
-                cell.handleHeal(waveLevel * 0.1 * cell.hp, cell, 0, false)
+                cell.handleHeal(redWaterLevel * 0.1 * cell.hp, cell, 0, false)
               }
             } else {
               cell.handleDamage({
-                damage: waveLevel * 0.05 * cell.hp,
+                damage: redWaterLevel * 0.05 * cell.hp,
                 board: this.board,
                 attackType: AttackType.TRUE,
                 attacker: null,
@@ -1798,23 +1805,24 @@ export default class Simulation extends Schema implements ISimulation {
       }
     }
 
+    const blueWaterLevel = this.blueEffects.has(Effect.WATER_VEIL)
+      ? 3
+      : this.blueEffects.has(Effect.HYDRATION)
+        ? 2
+        : this.blueEffects.has(Effect.SWIFT_SWIM)
+          ? 1
+          : 0
     if (
-      this.blueEffects.has(Effect.SWIFT_SWIM) ||
-      this.blueEffects.has(Effect.HYDRATION) ||
-      this.blueEffects.has(Effect.WATER_VEIL)
+      (blueWaterLevel > 0 && this.tidalWaveCounter === 1) ||
+      (blueWaterLevel === 3 && this.tidalWaveCounter === 2)
     ) {
-      const waveLevel = this.blueEffects.has(Effect.WATER_VEIL)
-        ? 3
-        : this.blueEffects.has(Effect.HYDRATION)
-          ? 2
-          : 1
       this.room.broadcast(Transfer.ABILITY, {
         id: this.id,
         skill: "TIDAL_WAVE",
         positionX: 0,
         positionY: 0,
         targetX: 0,
-        targetY: waveLevel - 1,
+        targetY: blueWaterLevel - 1,
         orientation: Orientation.UP
       })
       this.room.broadcast(Transfer.CLEAR_BOARD, {
@@ -1829,11 +1837,11 @@ export default class Simulation extends Schema implements ISimulation {
             if (cell.team === Team.BLUE_TEAM) {
               cell.status.clearNegativeStatus()
               if (cell.types.has(Synergy.AQUATIC)) {
-                cell.handleHeal(waveLevel * 0.1 * cell.hp, cell, 0, false)
+                cell.handleHeal(blueWaterLevel * 0.1 * cell.hp, cell, 0, false)
               }
             } else {
               cell.handleDamage({
-                damage: waveLevel * 0.05 * cell.hp,
+                damage: blueWaterLevel * 0.05 * cell.hp,
                 board: this.board,
                 attackType: AttackType.TRUE,
                 attacker: null,

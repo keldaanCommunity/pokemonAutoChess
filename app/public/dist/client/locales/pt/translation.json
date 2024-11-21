@@ -1528,7 +1528,7 @@
     "CALM_MIND": "Cure 60% do HP do dano",
     "SWIFT_SWIM": "-30% de duração do estado negativo. A onda cura 10% do HP e causa 5% de TRUE.",
     "HYDRATION": "-60% de duração do estado negativo. A onda cura 20% do HP e causa 10% de TRUE.",
-    "WATER_VEIL": "-90% de duração do estado negativo. A onda cura 30% do HP e causa 15% de TRUE.",
+    "WATER_VEIL": "-90% de duração do estado negativo. A onda cura 30% do HP e causa 15% de TRUE. Uma segunda onda chega após 16 segundos.",
     "COCOON": "Copie 1 pokémon BUG",
     "INFESTATION": "Copie 2 pokémon BUG",
     "HORDE": "Copie 3 pokémons BUG",
