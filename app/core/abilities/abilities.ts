@@ -11119,6 +11119,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.LAVA_PLUME]: new LavaPlumeStrategy(),
   [Ability.LANDS_WRATH]: new LandsWrathStrategy(),
   [Ability.THOUSAND_ARROWS]: new ThousandArrowsStrategy(),
-  [Ability.CORE_ENFORCER]: new CoreEnforcerStrategy()
+  [Ability.CORE_ENFORCER]: new CoreEnforcerStrategy(),
   [Ability.BURN_UP]: new BurnUpStrategy()
 }
