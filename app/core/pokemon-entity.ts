@@ -1329,8 +1329,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.items.has(Item.GOLD_BOTTLE_CAP) && this.player) {
       const isLastEnemy =
-        board.cells.some((p) => p && p.team !== this.team && p.life > 0) ===
-        false
+        board.cells.some(
+          (p) =>
+            p && p.team !== this.team && (p.life > 0 || p.status.resurecting)
+        ) === false
       const moneyGained = isLastEnemy ? 5 : 1
       this.player.addMoney(moneyGained, true, this)
       this.count.moneyCount += moneyGained
