@@ -11134,7 +11134,7 @@ export class Carnivine extends Pokemon {
 }
 
 export class Sableye extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.ROCK, Synergy.GHOST])
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
   evolutionRule = new ItemEvolutionRule([Item.RED_ORB])
   evolution = Pkm.MEGA_SABLEYE
   rarity = Rarity.UNIQUE
@@ -11151,7 +11151,7 @@ export class Sableye extends Pokemon {
 }
 
 export class MegaSableye extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.ROCK, Synergy.GHOST])
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
   rarity = Rarity.UNIQUE
   stars = 4
   hp = 230

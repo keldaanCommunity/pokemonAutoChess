@@ -30,6 +30,7 @@ Gen 1 is now complete !
 - Slakoth line: PP 120 → 100 as a compensation for removed PP on shield damage
 - Buff Crush Grip (Regigigas): between ~~20~~ 50 and ~~200~~ 250 physical damage.
 - Change Astral Barrage (Spectrier): Number of ghosts 3 → 7, AP scaling 2 → 1, ghost damage no longer scales with AP
+- Sableye and Mega-Sableye: removed Rock synergy
 
 # Changes to Synergies
 
