@@ -124,7 +124,8 @@ export enum Item {
   TEAL_MASK = "TEAL_MASK",
   WELLSPRING_MASK = "WELLSPRING_MASK",
   CORNERSTONE_MASK = "CORNERSTONE_MASK",
-  HEARTHFLAME_MASK = "HEARTHFLAME_MASK"
+  HEARTHFLAME_MASK = "HEARTHFLAME_MASK",
+  ZYGARDE_CUBE = "ZYGARDE_CUBE"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -137,12 +138,13 @@ export const SpecialItems: Item[] = [
   Item.WELLSPRING_MASK,
   Item.CORNERSTONE_MASK,
   Item.HEARTHFLAME_MASK,
+  Item.ZYGARDE_CUBE,
   Item.BERRY_JUICE,
   Item.FIRE_SHARD,
   Item.OLD_ROD,
   Item.GOOD_ROD,
   Item.SUPER_ROD,
-  Item.TRASH
+  Item.TRASH,
 ]
 
 export const FishingRods = [
@@ -380,6 +382,7 @@ export const NonHoldableItems: Item[] = [
   ...WeatherRocks,
   ...FishingRods,
   Item.METEORITE,
+  Item.ZYGARDE_CUBE,
   Item.FIRE_SHARD
 ]
 

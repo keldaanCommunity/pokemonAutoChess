@@ -15212,6 +15212,60 @@ export class Kingler extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class Zygarde10 extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GROUND])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 250
+  atk = 30
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.LANDS_WRATH
+  attackSprite = AttackSprite.DRAGON_MELEE
+  passive = Passive.ZYGARDE10
+  onAcquired(player: Player) {
+    if (player.items.includes(Item.ZYGARDE_CUBE) === false) {
+      player.items.push(Item.ZYGARDE_CUBE)
+    }
+  }
+}
+
+export class Zygarde50 extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GROUND])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 220
+  atk = 25
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.THOUSAND_ARROWS
+  attackSprite = AttackSprite.DRAGON_GREEN_RANGE
+  passive = Passive.ZYGARDE50
+  onAcquired(player: Player) {
+    if (player.items.includes(Item.ZYGARDE_CUBE) === false) {
+      player.items.push(Item.ZYGARDE_CUBE)
+    }
+  }
+}
+
+export class Zygarde100 extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GROUND])
+  rarity = Rarity.LEGENDARY
+  stars = 4
+  hp = 300
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 120
+  range = 1
+  skill = Ability.CORE_ENFORCER
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
+
 export class Sizzlipede extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.BUG])
   rarity = Rarity.UNCOMMON
@@ -16107,6 +16161,9 @@ export const PokemonClasses: Record<
   [Pkm.DARMANITAN_ZEN]: DarmanitanZen,
   [Pkm.KRABBY]: Krabby,
   [Pkm.KINGLER]: Kingler,
+  [Pkm.ZYGARDE_10]: Zygarde10,
+  [Pkm.ZYGARDE_50]: Zygarde50,
+  [Pkm.ZYGARDE_100]: Zygarde100,
   [Pkm.SIZZLIPEDE]: Sizzlipede,
   [Pkm.CENTISKORCH]: Centiskorch
 }

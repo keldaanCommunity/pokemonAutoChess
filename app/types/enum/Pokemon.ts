@@ -859,7 +859,10 @@ export enum Pkm {
   ZOROARK = "ZOROARK",
   ZORUA = "ZORUA",
   ZUBAT = "ZUBAT",
-  ZWEILOUS = "ZWEILOUS"
+  ZWEILOUS = "ZWEILOUS",
+  ZYGARDE_10 = "ZYGARDE_10",
+  ZYGARDE_50 = "ZYGARDE_50",
+  ZYGARDE_100 = "ZYGARDE_100"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1689,7 +1692,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.NOIVERN]: "0715",
   [Pkm.XERNEAS]: "0716",
   [Pkm.YVELTAL]: "0717",
-  //[Pkm.ZYGARDE]: "0718",
+  [Pkm.ZYGARDE_10]: "0718-0002",
+  [Pkm.ZYGARDE_50]: "0718",
+  [Pkm.ZYGARDE_100]: "0718-0001",
   [Pkm.DIANCIE]: "0719",
   [Pkm.HOOPA]: "0720",
   [Pkm.HOOPA_UNBOUND]: "0720-0001",
@@ -2872,7 +2877,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.KRABBY]: Pkm.KRABBY,
   [Pkm.KINGLER]: Pkm.KRABBY,
   [Pkm.SIZZLIPEDE]: Pkm.SIZZLIPEDE,
-  [Pkm.CENTISKORCH]: Pkm.SIZZLIPEDE
+  [Pkm.CENTISKORCH]: Pkm.SIZZLIPEDE,
+  [Pkm.ZYGARDE_10]: Pkm.ZYGARDE_10,
+  [Pkm.ZYGARDE_50]: Pkm.ZYGARDE_50,
+  [Pkm.ZYGARDE_100]: Pkm.ZYGARDE_100
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7331,6 +7339,23 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Strike,
     emote: AnimationType.Shoot
+  },
+  [Pkm.ZYGARDE_10]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp
+  },
+  [Pkm.ZYGARDE_50]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
+  },
+  [Pkm.ZYGARDE_100]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Emit,
+    emote: AnimationType.Emit,
+    shinyUnavailable: true
   },
   [Pkm.SIZZLIPEDE]: {
     attack: AnimationType.Attack,

@@ -406,7 +406,10 @@
     "THUNDEROUS_KICK": "Thunderous Kick",
     "FIERY_WRATH": "Fiery Wrath",
     "VISE_GRIP": "Vise Grip",
-    "BURN_UP": "Burn Up"
+    "BURN_UP": "Burn Up",
+    "LANDS_WRATH": "Land's Wrath",
+    "THOUSAND_ARROWS": "Thousand Arrows",
+    "CORE_ENFORCER": "Core Enforcer"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1267,7 +1270,10 @@
     "KRABBY": "Krabby",
     "KINGLER": "Kingler",
     "SIZZLIPEDE": "Sizzlipede",
-    "CENTISKORCH": "Centiskorch"
+    "CENTISKORCH": "Centiskorch",
+    "ZYGARDE_10": "Zygarde (10% Forme)",
+    "ZYGARDE_50": "Zygarde (50% Forme)",
+    "ZYGARDE_100": "Zygarde (100% Forme)"
   },
   "ability_description": {
     "SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1654,7 +1660,10 @@
     "THUNDEROUS_KICK": "Target is pushed away. It and all enemies on the path are FLINCH for 4 seconds, lose [5,SP] DEF and take [20,40,60,SP] PHYSICAL.",
     "FIERY_WRATH": "Deal [40,SP] SPECIAL to all enemy Pokémon, with [50,LK]% chance to apply FLINCH for 4 seconds.",
     "VISE_GRIP": "Grip the target with powerful pincers, dealing [30,60,100,SP] SPECIAL to the target. Both the user and the target are LOCKED for 4 seconds.",
-    "BURN_UP": "BURN itself for 3 seconds to inflict [50,100,200,SP] SPECIAL."
+    "BURN_UP": "BURN itself for 3 seconds to inflict [50,100,200,SP] SPECIAL.",
+    "LANDS_WRATH": "The ground erupts, dealing 40 + [100,SP]% ATK as PHYSICAL to the target and adjacent enemies, then lower their DEF and SPE_DEF by [4,SP=0.5].",
+    "THOUSAND_ARROWS": "33 energy arrows rain down on random tiles, dealing [60,SP] SPECIAL each. All enemies hit are LOCKED for 1 second.",
+    "CORE_ENFORCER": "Deal [150,SP] SPECIAL to the target. The target is LOCKED and SILENCE for 3 seconds."
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2005,7 +2014,8 @@
     "TEAL_MASK": "Teal Mask",
     "WELLSPRING_MASK": "Wellspring Mask",
     "CORNERSTONE_MASK": "Cornerstone Mask",
-    "HEARTHFLAME_MASK": "Hearthflame Mask"
+    "HEARTHFLAME_MASK": "Hearthflame Mask",
+    "ZYGARDE_CUBE": "Zygarde Cube"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -2129,7 +2139,8 @@
     "TEAL_MASK": "This carved wooden mask is adorned with crystals, grants 50 SHIELD and allows Ogerpon to wield the FLORA type during battle.",
     "WELLSPRING_MASK": "This carved wooden mask is adorned with crystals, grants 50 SHIELD and allows Ogerpon to wield the AQUATIC type during battle.",
     "HEARTHFLAME_MASK": "This carved wooden mask is adorned with crystals, grants 50 SHIELD and allows Ogerpon to wield the FIRE type during battle.",
-    "CORNERSTONE_MASK": "This carved wooden mask is adorned with crystals, grants 50 SHIELD and allows Ogerpon to wield the ROCK type during battle."
+    "CORNERSTONE_MASK": "This carved wooden mask is adorned with crystals, grants 50 SHIELD and allows Ogerpon to wield the ROCK type during battle.",
+    "ZYGARDE_CUBE": "Contains cells of the Order Pokemon, Zygarde. It will cause a transformation into one of its alternate formes."
   },
   "passive_description": {
     "NONE": "No passive",
@@ -2257,7 +2268,9 @@
     "DARMANITAN_ZEN": "Can no longer move or attack, but regain [15,SP] HP per second. Transforms back into Standard Mode when fully healed.",
     "BAD_LUCK": "Reduce all opponents LUCK by 20%",
     "GOOD_LUCK": "Increase the LUCK of all allies by 20%",
-    "PRIMEAPE": "Primeape becomes angrier when KO, gaining 1 permanent ATK. After Primeape is knocked out 10 times, evolves into Annihilape."
+    "PRIMEAPE": "Primeape becomes angrier when KO, gaining 1 permanent ATK. After Primeape is knocked out 10 times, evolves into Annihilape.",
+    "ZYGARDE10": "Zygarde will absorb its cells, transforming into another form. Once below 30% max HP, it absorbs all of its cells, taking its complete form.",
+    "ZYGARDE50": "Zygarde will absorb its cells, transforming into another form. Once below 30% max HP, it absorbs all of its cells, taking its complete form."
   },
   "stat": {
     "ATK": "Attack",

@@ -480,6 +480,18 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
+    if (item === Item.ZYGARDE_CUBE) {
+      if (pokemon?.passive === Passive.ZYGARDE10 || pokemon?.passive === Passive.ZYGARDE50) {
+        if (pokemon.name === Pkm.ZYGARDE_10) {
+          player.transformPokemon(pokemon, Pkm.ZYGARDE_50)
+        } else if (pokemon.name === Pkm.ZYGARDE_50) {
+          player.transformPokemon(pokemon, Pkm.ZYGARDE_10)
+        }
+      }
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
+
     if (OgerponMasks.includes(item)) {
       if (
         pokemon.passive === Passive.OGERPON_TEAL ||
