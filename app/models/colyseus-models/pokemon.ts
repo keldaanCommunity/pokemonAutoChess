@@ -2170,8 +2170,8 @@ export class Haxorus extends Pokemon {
 export class Dratini extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
-    Synergy.AQUATIC,
-    Synergy.FLYING
+    Synergy.FLYING,
+    Synergy.AQUATIC
   ])
   rarity = Rarity.RARE
   stars = 1
@@ -2189,8 +2189,8 @@ export class Dratini extends Pokemon {
 export class Dragonair extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
-    Synergy.AQUATIC,
-    Synergy.FLYING
+    Synergy.FLYING,
+    Synergy.AQUATIC
   ])
   rarity = Rarity.RARE
   stars = 2
@@ -2208,8 +2208,8 @@ export class Dragonair extends Pokemon {
 export class Dragonite extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
-    Synergy.AQUATIC,
-    Synergy.FLYING
+    Synergy.FLYING,
+    Synergy.AQUATIC
   ])
   rarity = Rarity.RARE
   stars = 3
@@ -11134,7 +11134,7 @@ export class Carnivine extends Pokemon {
 }
 
 export class Sableye extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.ROCK, Synergy.GHOST])
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
   evolutionRule = new ItemEvolutionRule([Item.RED_ORB])
   evolution = Pkm.MEGA_SABLEYE
   rarity = Rarity.UNIQUE
@@ -11151,7 +11151,7 @@ export class Sableye extends Pokemon {
 }
 
 export class MegaSableye extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.ROCK, Synergy.GHOST])
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
   rarity = Rarity.UNIQUE
   stars = 4
   hp = 230
