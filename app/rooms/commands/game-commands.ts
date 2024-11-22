@@ -17,7 +17,7 @@ import { createRandomEgg } from "../../models/egg-factory"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"
-import { getAvatarString } from "../../public/src/utils"
+import { getAvatarString } from "../../utils/avatar"
 import {
   IClient,
   IDragDropCombineMessage,
@@ -128,7 +128,8 @@ export class OnShopCommand extends Command<
 
     if (
       pokemon.passive === Passive.UNOWN &&
-      player.shop.every((p) => Unowns.includes(p))
+      player.shopFreeRolls > 0 &&
+      player.shop.every((p) => Unowns.includes(p) || p === Pkm.DEFAULT)
     ) {
       // reset shop after picking in a unown shop
       this.state.shop.assignShop(player, true, this.state)
@@ -474,6 +475,18 @@ export class OnDragDropItemCommand extends Command<
           player.transformPokemon(pokemon, Pkm.DEOXYS_SPEED)
         } else if (pokemon.name === Pkm.DEOXYS_SPEED) {
           player.transformPokemon(pokemon, Pkm.DEOXYS)
+        }
+      }
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
+
+    if (item === Item.ZYGARDE_CUBE) {
+      if (pokemon?.passive === Passive.ZYGARDE10 || pokemon?.passive === Passive.ZYGARDE50) {
+        if (pokemon.name === Pkm.ZYGARDE_10) {
+          player.transformPokemon(pokemon, Pkm.ZYGARDE_50)
+        } else if (pokemon.name === Pkm.ZYGARDE_50) {
+          player.transformPokemon(pokemon, Pkm.ZYGARDE_10)
         }
       }
       client.send(Transfer.DRAG_DROP_FAILED, message)

@@ -1,6 +1,6 @@
 import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
 import { PokemonEntity } from "../../core/pokemon-entity"
-import { getPokemonConfigFromAvatar } from "../../public/src/utils"
+import { getPokemonConfigFromAvatar } from "../../utils/avatar"
 import type GameState from "../../rooms/states/game-state"
 import type { IPlayer, Role, Title } from "../../types"
 import { SynergyTriggers, UniqueShop } from "../../types/Config"

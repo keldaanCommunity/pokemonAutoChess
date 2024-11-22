@@ -1,6 +1,6 @@
 import React from "react"
 import { IDps } from "../../../../../types"
-import { getAvatarSrc } from "../../../utils"
+import { getAvatarSrc } from "../../../../../utils/avatar"
 import { useTranslation } from "react-i18next"
 import ProgressBar from "../progress-bar/progress-bar"
 
