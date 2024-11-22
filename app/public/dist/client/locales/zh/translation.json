@@ -406,7 +406,11 @@
     "THUNDEROUS_KICK": "雷电踢",
     "FIERY_WRATH": "火之怒",
     "VISE_GRIP": "夹住",
-    "BURN_UP": "燃尽"
+    "BURN_UP": "燃尽",
+    "LANDS_WRATH": "大地神力",
+    "THOUSAND_ARROWS": "千箭齐发",
+    "CORE_ENFORCER": "核心惩罚者",
+    "POWER_HUG": "强力拥抱"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1267,7 +1271,12 @@
     "KRABBY": "大钳蟹",
     "KINGLER": "巨钳蟹",
     "SIZZLIPEDE": "烧火蚣",
-    "CENTISKORCH": "焚焰蚣"
+    "CENTISKORCH": "焚焰蚣",
+    "ZYGARDE_10": "基格尔德（10%形态）",
+    "ZYGARDE_50": "基格尔德（50%形态）",
+    "ZYGARDE_100": "基格尔德（完全体形态）",
+    "STUFFUL": "童偶熊",
+    "BEWEAR": "穿着熊"
   },
   "ability_description": {
     "SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1654,7 +1663,11 @@
     "THUNDEROUS_KICK": "将目标击退。其和所有击退路径上的敌方宝可梦陷入FLINCH 4秒，降低[5,SP]点DEF，并受到[20,40,60,SP]点PHYSICAL。",
     "FIERY_WRATH": "对所有敌方宝可梦造成[40,SP]点SPECIAL，并有[50,LK]%的概率使他们陷入FLINCH 4秒。",
     "VISE_GRIP": "将目标从两侧夹住，对其造成[30,60,100,SP]点SPECIAL。使用者与目标均陷入LOCKED 4秒。",
-    "BURN_UP": "使用者自身陷入BURN 3秒，并对目标造成[50,100,200,SP]点SPECIAL。"
+    "BURN_UP": "使用者自身陷入BURN 3秒，并对目标造成[50,100,200,SP]点SPECIAL。",
+    "LANDS_WRATH": "大地破裂，对目标和相邻敌方宝可梦造成PHYSICAL，数值相当于[100,SP]%的ATK加40，然后降低他们[4,SP=0.5]点 DEF和SPE_DEF。",
+    "THOUSAND_ARROWS": "发射33支攻击随机格子的能量箭，对击中的目标造成[60,SP]点SPECIAL。被击中的敌人还会陷入LOCKED 1秒。",
+    "CORE_ENFORCER": "对目标造成[150,SP]点SPECIAL，并使其陷入LOCKED和SILENCE 3秒。",
+    "POWER_HUG": "对目标造成[40,80,SP]点SPECIAL，并使其陷入LOCKED和PARALYSIS 3秒。"
   },
   "effect": {
     "INGRAIN": "扎根",
@@ -2011,7 +2024,8 @@
     "TEAL_MASK": "碧草面具",
     "WELLSPRING_MASK": "水井面具",
     "CORNERSTONE_MASK": "础石面具",
-    "HEARTHFLAME_MASK": "火灶面具"
+    "HEARTHFLAME_MASK": "火灶面具",
+    "ZYGARDE_CUBE": "基格尔德多面体"
   },
   "item_description": {
     "FOSSIL_STONE": "某只远古时代生活着的宝可梦的化石。",
@@ -2135,7 +2149,8 @@
     "TEAL_MASK": "用结晶装饰的木雕面具。使厄鬼椪视作FLORA宝可梦，且获得50点SHIELD。",
     "WELLSPRING_MASK": "用结晶装饰的木雕面具。使厄鬼椪视作AQUATIC宝可梦，且获得50点SHIELD。",
     "HEARTHFLAME_MASK": "用结晶装饰的木雕面具。使厄鬼椪视作FIRE宝可梦，且获得50点SHIELD。",
-    "CORNERSTONE_MASK": "用结晶装饰的木雕面具。使厄鬼椪视作ROCK宝可梦，且获得50点SHIELD。"
+    "CORNERSTONE_MASK": "用结晶装饰的木雕面具。使厄鬼椪视作ROCK宝可梦，且获得50点SHIELD。",
+    "ZYGARDE_CUBE": "这个道具中存放着秩序宝可梦基格尔德的细胞。可以改变基格尔德的样子。"
   },
   "passive_description": {
     "NONE": "无被动能力",
@@ -2263,7 +2278,9 @@
     "DARMANITAN_ZEN": "无法移动或攻击，但每秒恢复[15,SP]点HP。恢复至满后回到普通模式。",
     "BAD_LUCK": "降低所有敌方宝可梦20%的LUCK。",
     "GOOD_LUCK": "提升所有我方宝可梦20%的LUCK。",
-    "PRIMEAPE": "火爆猴每次被击倒都会变得更愤怒，永久提升1点ATK。被击倒10次后进化为弃世猴。"
+    "PRIMEAPE": "火爆猴每次被击倒都会变得更愤怒，永久提升1点ATK。被击倒10次后进化为弃世猴。",
+    "ZYGARDE10": "基格尔德能够吸收细胞进行变形。在HP低于最大值的30%时，他会吸收全部细胞，变形为完全体形态。",
+    "ZYGARDE50": "基格尔德能够吸收细胞进行变形。在HP低于最大值的30%时，他会吸收全部细胞，变形为完全体形态。"
   },
   "stat": {
     "ATK": "攻击",
