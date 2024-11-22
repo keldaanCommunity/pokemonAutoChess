@@ -6,7 +6,7 @@ import { getPokemonData } from "../../../../../models/precomputed/precomputed-po
 import { RarityColor } from "../../../../../types/Config"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { useAppSelector } from "../../../hooks"
-import { getPortraitSrc } from "../../../utils"
+import { getPortraitSrc } from "../../../../../utils/avatar"
 import { getGameScene } from "../../game"
 import SynergyIcon from "../icons/synergy-icon"
 

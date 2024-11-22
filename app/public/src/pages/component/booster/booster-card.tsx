@@ -4,7 +4,7 @@ import { getPokemonData } from "../../../../../models/precomputed/precomputed-po
 import { PkmWithConfig } from "../../../../../types"
 import { RarityColor } from "../../../../../types/Config"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
-import { getPortraitSrc } from "../../../utils"
+import { getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
 import "./booster-card.css"
 

@@ -1,7 +1,7 @@
 import React from "react"
 import { IDetailledPokemon } from "../../../../../models/mongo-models/bot-v2"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
-import { getPortraitSrc } from "../../../utils"
+import { getPortraitSrc } from "../../../../../utils/avatar"
 
 export default function TeamEditor(props: {
   board: IDetailledPokemon[]
@@ -19,11 +19,13 @@ export default function TeamEditor(props: {
 
   function handleOnDragOver(e: React.DragEvent) {
     e.preventDefault()
-    ;(e.target as HTMLElement).classList.add("dragover")
+    const target = e.target as HTMLElement
+    target.classList.add("dragover")
   }
 
   function handleOnDragEnd(e: React.DragEvent) {
-    ;(e.target as HTMLElement).classList.remove("dragover")
+    const target = e.target as HTMLElement
+    target.classList.remove("dragover")
   }
 
   return (

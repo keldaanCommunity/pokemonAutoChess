@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { IPlayer } from "../../../../../types"
 import { SynergyTriggers } from "../../../../../types/Config"
 import { BattleResult } from "../../../../../types/enum/Game"
-import { getAvatarSrc } from "../../../utils"
+import { getAvatarSrc } from "../../../../../utils/avatar"
 import { Life } from "../icons/life"
 import { Money } from "../icons/money"
 

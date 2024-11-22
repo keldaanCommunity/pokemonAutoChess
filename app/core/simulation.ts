@@ -5,7 +5,6 @@ import { getWonderboxItems } from "./items"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../models/precomputed/precomputed-types"
-import { getPortraitPath } from "../public/src/pages/utils/utils"
 import GameRoom from "../rooms/game-room"
 import { IPokemon, IPokemonEntity, ISimulation, Transfer } from "../types"
 import {
@@ -49,6 +48,7 @@ import Board from "./board"
 import Dps from "./dps"
 import { PokemonEntity, getStrongestUnit, getUnitScore } from "./pokemon-entity"
 import { DelayedCommand } from "./simulation-command"
+import { getAvatarString } from "../utils/avatar"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -212,13 +212,19 @@ export default class Simulation extends Schema implements ISimulation {
       pokemonEntity
     )
 
+    const dps = new Dps(
+      pokemonEntity.id,
+      getAvatarString(
+        pokemonEntity.index,
+        pokemonEntity.shiny,
+        pokemonEntity.emotion
+      )
+    )
     if (team == Team.BLUE_TEAM) {
-      const dps = new Dps(pokemonEntity.id, getPortraitPath(pokemonEntity))
       this.blueTeam.set(pokemonEntity.id, pokemonEntity)
       this.blueDpsMeter.set(pokemonEntity.id, dps)
     }
     if (team == Team.RED_TEAM) {
-      const dps = new Dps(pokemonEntity.id, getPortraitPath(pokemonEntity))
       this.redTeam.set(pokemonEntity.id, pokemonEntity)
       this.redDpsMeter.set(pokemonEntity.id, dps)
     }
@@ -417,7 +423,9 @@ export default class Simulation extends Schema implements ISimulation {
 
     if (item === Item.REPEAT_BALL && pokemon.player) {
       pokemon.addAbilityPower(
-        Math.floor((pokemon.player.rerollCount + pokemon.simulation.stageLevel) / 2),
+        Math.floor(
+          (pokemon.player.rerollCount + pokemon.simulation.stageLevel) / 2
+        ),
         pokemon,
         0,
         false

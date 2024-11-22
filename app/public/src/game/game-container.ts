@@ -42,7 +42,7 @@ import { transformCoordinate } from "../pages/utils/utils"
 import { loadPreferences, preferences } from "../preferences"
 import store from "../stores"
 import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
-import { getPortraitSrc } from "../utils"
+import { getPortraitSrc } from "../../../utils/avatar"
 import { BoardMode } from "./components/board-manager"
 import GameScene from "./scenes/game-scene"
 

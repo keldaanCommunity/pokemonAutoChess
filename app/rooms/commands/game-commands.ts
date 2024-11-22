@@ -17,7 +17,7 @@ import { createRandomEgg } from "../../models/egg-factory"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"
-import { getAvatarString } from "../../public/src/utils"
+import { getAvatarString } from "../../utils/avatar"
 import {
   IClient,
   IDragDropCombineMessage,
