@@ -17,7 +17,6 @@ import { createRandomEgg } from "../../models/egg-factory"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"
-import { getAvatarString } from "../../utils/avatar"
 import {
   IClient,
   IDragDropCombineMessage,
@@ -63,6 +62,7 @@ import {
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { removeInArray } from "../../utils/array"
+import { getAvatarString } from "../../utils/avatar"
 import {
   getFirstAvailablePositionInBench,
   getFirstAvailablePositionOnBoard,
@@ -482,7 +482,10 @@ export class OnDragDropItemCommand extends Command<
     }
 
     if (item === Item.ZYGARDE_CUBE) {
-      if (pokemon?.passive === Passive.ZYGARDE10 || pokemon?.passive === Passive.ZYGARDE50) {
+      if (
+        pokemon?.passive === Passive.ZYGARDE10 ||
+        pokemon?.passive === Passive.ZYGARDE50
+      ) {
         if (pokemon.name === Pkm.ZYGARDE_10) {
           player.transformPokemon(pokemon, Pkm.ZYGARDE_50)
         } else if (pokemon.name === Pkm.ZYGARDE_50) {
@@ -1183,7 +1186,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
       if (
         this.state.specialGameRule === SpecialGameRule.FIRST_PARTNER &&
-        this.state.stageLevel < 10
+        this.state.stageLevel < 10 &&
+        player.firstPartner
       ) {
         this.room.spawnOnBench(player, player.firstPartner, "spawn")
       }

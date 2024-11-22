@@ -15297,6 +15297,37 @@ export class Centiskorch extends Pokemon {
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
+export class Stufful extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIGHTING])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.BEWEAR
+  hp = 100
+  atk = 8
+  def = 3
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.POWER_HUG
+  additional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Bewear extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIGHTING])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 260
+  atk = 25
+  def = 6
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.POWER_HUG
+  additional = true
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -16165,5 +16196,7 @@ export const PokemonClasses: Record<
   [Pkm.ZYGARDE_50]: Zygarde50,
   [Pkm.ZYGARDE_100]: Zygarde100,
   [Pkm.SIZZLIPEDE]: Sizzlipede,
-  [Pkm.CENTISKORCH]: Centiskorch
+  [Pkm.CENTISKORCH]: Centiskorch,
+  [Pkm.STUFFUL]: Stufful,
+  [Pkm.BEWEAR]: Bewear
 }
