@@ -6,7 +6,7 @@ import {
 } from "../../../../../types/interfaces/LeaderboardInfo"
 import { useAppDispatch } from "../../../hooks"
 import { searchById } from "../../../stores/NetworkStore"
-import { getAvatarSrc } from "../../../utils"
+import { getAvatarSrc } from "../../../../../utils/avatar"
 import { EloBadge } from "../profile/elo-badge"
 
 export default function LeaderboardItem(props: {

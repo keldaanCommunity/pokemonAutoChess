@@ -1,6 +1,5 @@
 import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
 import { PokemonEntity } from "../../core/pokemon-entity"
-import { getPokemonConfigFromAvatar } from "../../public/src/utils"
 import type GameState from "../../rooms/states/game-state"
 import type { IPlayer, Role, Title } from "../../types"
 import { SynergyTriggers, UniqueShop } from "../../types/Config"
@@ -19,13 +18,14 @@ import {
   PkmByIndex,
   PkmDuos,
   PkmFamily,
-  PkmRegionalVariants,
-  type PkmProposition
+  type PkmProposition,
+  PkmRegionalVariants
 } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { removeInArray } from "../../utils/array"
+import { getPokemonConfigFromAvatar } from "../../utils/avatar"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
@@ -110,7 +110,7 @@ export default class Player extends Schema implements IPlayer {
   lightY: number
   canRegainLife: boolean = true
   ghost: boolean = false
-  firstPartner: Pkm
+  firstPartner: Pkm | undefined
 
   constructor(
     id: string,

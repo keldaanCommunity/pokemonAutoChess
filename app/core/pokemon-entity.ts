@@ -1251,6 +1251,33 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.addDefense(5, this, 0, false)
       this.addSpecialDefense(5, this, 0, false)
     }
+
+    if (
+      (this.passive === Passive.ZYGARDE10 ||
+        this.passive === Passive.ZYGARDE50) &&
+      this.life < 0.3 * this.hp
+    ) {
+      this.handleHeal(0.2 * this.hp, this, 0, false)
+      this.addAttackSpeed(-25, this, 0, false)
+      if (this.passive === Passive.ZYGARDE10) {
+        this.addDefense(1, this, 0, false)
+        this.addSpecialDefense(1, this, 0, false)
+        this.addMaxHP(50, this, 0, false)
+      } else {
+        this.addAttack(5, this, 0, false)
+        this.addDefense(2, this, 0, false)
+        this.addSpecialDefense(2, this, 0, false)
+        this.addMaxHP(80, this, 0, false)
+        this.range = min(1)(this.range - 1)
+      }
+
+      this.index = PkmIndex[Pkm.ZYGARDE_100]
+      this.name = Pkm.ZYGARDE_100
+      this.passive = Passive.NONE
+      this.skill = Ability.CORE_ENFORCER
+      this.pp = 0
+      this.maxPP = 120
+    }
   }
 
   onCriticalAttack({
@@ -1329,8 +1356,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.items.has(Item.GOLD_BOTTLE_CAP) && this.player) {
       const isLastEnemy =
-        board.cells.some((p) => p && p.team !== this.team && p.life > 0) ===
-        false
+        board.cells.some(
+          (p) =>
+            p && p.team !== this.team && (p.life > 0 || p.status.resurecting)
+        ) === false
       const moneyGained = isLastEnemy ? 5 : 1
       this.player.addMoney(moneyGained, true, this)
       this.count.moneyCount += moneyGained

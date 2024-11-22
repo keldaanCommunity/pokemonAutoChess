@@ -5,8 +5,13 @@
 - Galarian Moltres
 - Krabby
 - Kingler
+- Zygarde (10% Form)
+- Zygarde (50% Form)
+- Zygarde (100% Form)
 - Sizzlipede
 - Centiskorch
+- Stufful
+- Bewear
 
 Gen 1 is now complete !
 
@@ -20,6 +25,7 @@ Gen 1 is now complete !
 - Slowpoke: Def 2 → 3, HP 85 → 80
 - Slowbro: HP 180 → 160, Attack 13 → 11
 - Change Dragon Breath: fix targeting and apply special damage instead of true damage ; new animation
+- Dratini line is now Dragon/Flying/Aquatic instead of Dragon/Aquatic/Flying
 - Buff Darmanitan: go in Transe Mode when under ~~50%~~ 30% HP, heal ~~10~~ 15 HP per second when in Transe mode
 - Rework Magby line: Attack: 5/14/26 → 6/16/30, SpeDef: 1/2/3 → 2/3/4 ; New ability: Flamethrower
 - Magma Storm (Heatran): reduce initial delay from 500ms to 100ms
@@ -30,6 +36,7 @@ Gen 1 is now complete !
 - Slakoth line: PP 120 → 100 as a compensation for removed PP on shield damage
 - Buff Crush Grip (Regigigas): between ~~20~~ 50 and ~~200~~ 250 physical damage.
 - Change Astral Barrage (Spectrier): Number of ghosts 3 → 7, AP scaling 2 → 1, ghost damage no longer scales with AP
+- Sableye and Mega-Sableye: removed Rock synergy
 
 # Changes to Synergies
 
@@ -38,6 +45,10 @@ Gen 1 is now complete !
 - Nerf Ghost: dodge chance ~~25%~~ 20% ; Nerf Ghost 8: Curse duration: ~~6~~ 7 seconds
 - Fix Psy 4 Light Screen Unown shop found every 5 shops instead of 3
 - Dark 1-range Pokémon with Wide lens no longer jump to the farthest enemy
+- Nerf Ground: Ground bonuses now can go up to 5 stacks max
+- Change Dragon 5: Dragons gain ~~30 Shield per ⭐~~ 5 shield for each ⭐ of all your dragon units on board
+- Change Dragon 7: Dragons gain ~~10% Attack Speed and 10% Ability Power per ⭐~~ 1% Attack Speed and 1% Ability Power for each ⭐ of all your dragon units on board
+- Buff Aquatic 6: a second wave hits after 16 seconds
 
 # Changes to Items
 

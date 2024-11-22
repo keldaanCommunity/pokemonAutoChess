@@ -11,8 +11,7 @@ import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { logger } from "../../../../../utils/logger"
 import { max, min } from "../../../../../utils/number"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import store from "../../../stores"
-import { getAvatarString } from "../../../utils"
+import { getAvatarString } from "../../../../../utils/avatar"
 import DiscordButton from "../buttons/discord-button"
 import {
   DEFAULT_BOT_STATE,
@@ -31,8 +30,6 @@ import ScoreIndicator from "./score-indicator"
 import TeamBuilder from "./team-builder"
 import { joinLobbyRoom } from "../../../game/lobby-logic"
 import "./bot-builder.css"
-import { CloseCodesMessages } from "../../../../../types/enum/CloseCodes"
-import { setErrorAlertMessage } from "../../../stores/NetworkStore"
 
 export default function BotBuilder() {
   const { t } = useTranslation()

@@ -23,7 +23,7 @@ import {
 } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getAdditionalsTier1 } from "../models/shop"
-import { getAvatarString } from "../public/src/utils"
+import { getAvatarString } from "../utils/avatar"
 import {
   Emotion,
   IDragDropCombineMessage,

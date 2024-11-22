@@ -1,6 +1,6 @@
 import { Schema, type } from "@colyseus/schema"
 import { Constraint } from "matter-js"
-import { getPokemonConfigFromAvatar } from "../../public/src/utils"
+import { getPokemonConfigFromAvatar } from "../../utils/avatar"
 import { IPokemonAvatar } from "../../types"
 import { Orientation, PokemonActionState } from "../../types/enum/Game"
 import { Pkm, PkmByIndex } from "../../types/enum/Pokemon"
