@@ -20,8 +20,10 @@ export default function WikiData() {
       <p>{t("wiki.tiers_by_level_description")}</p>
       <table id="wiki-data-tiers-by-level">
         <thead>
-          <th>{t("level")}</th>
-          {rarities.map((r, i) => <th style={{ color: RarityColor[rarities[i]] }}>{t("rarity." + r)}</th>)}
+          <tr>
+            <th>{t("level")}</th>
+            {rarities.map((r, i) => <th style={{ color: RarityColor[rarities[i]] }}>{t("rarity." + r)}</th>)}
+          </tr>
         </thead>
         <tbody>
           {Object.entries(RarityProbabilityPerLevel).map(([level, odds], i) => <tr>
@@ -64,8 +66,10 @@ export default function WikiData() {
       <p>{t("wiki.experience_by_rank_description")}</p>
       <table id="wiki-data-experience-by-rank">
         <thead>
-          <th>{t("rank")}</th>
-          {[1, 2, 3, 4, 5, 6, 7, 8].map(rank => <th>{getRankLabel(rank)}</th>)}
+          <tr>
+            <th>{t("rank")}</th>
+            {[1, 2, 3, 4, 5, 6, 7, 8].map(rank => <th>{getRankLabel(rank)}</th>)}
+          </tr>
         </thead>
         <tbody>
           <tr>
@@ -79,7 +83,9 @@ export default function WikiData() {
       <p>{t("wiki.booster_rarity_probability_description")}</p>
       <table id="wiki-data-booster-rarity-probability">
         <thead>
-          {rarities_all.map((r, i) => <th style={{ color: RarityColor[rarities_all[i]] }}>{t("rarity." + r)}</th>)}
+          <tr>
+            {rarities_all.map((r, i) => <th style={{ color: RarityColor[rarities_all[i]] }}>{t("rarity." + r)}</th>)}
+          </tr>
         </thead>
         <tbody>
           <tr>
@@ -92,8 +98,10 @@ export default function WikiData() {
       <p>{t("wiki.fishing_rarity_rate_description")}</p>
       <table id="wiki-data-fishing-rarity-rate">
         <thead>
-          <th></th>
-          {rarities_with_special.map((r, i) => <th style={{ color: RarityColor[rarities_with_special[i]] }}>{t("rarity." + r)}</th>)}
+          <tr>
+            <th></th>
+            {rarities_with_special.map((r, i) => <th style={{ color: RarityColor[rarities_with_special[i]] }}>{t("rarity." + r)}</th>)}
+          </tr>
         </thead>
         <tbody>
           {[...FishingRods].reverse().map((rod, i) => <tr>
