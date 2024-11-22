@@ -7382,6 +7382,7 @@ export const AnimationConfig: {
   [Pkm.BEWEAR]: {
     attack: AnimationType.Slap,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Charge
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
   }
 }
