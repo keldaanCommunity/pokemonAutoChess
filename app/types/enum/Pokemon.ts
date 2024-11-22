@@ -617,6 +617,8 @@ export enum Pkm {
   SALAMENCE = "SALAMENCE",
   SALANDIT = "SALANDIT",
   SALAZZLE = "SALAZZLE",
+  STUFFUL = "STUFFUL",
+  BEWEAR = "BEWEAR",
   SAMUROTT = "SAMUROTT",
   SANDILE = "SANDILE",
   SANDSHREW = "SANDSHREW",
@@ -1739,8 +1741,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.SHIINOTIC]: "0756",
   [Pkm.SALANDIT]: "0757",
   [Pkm.SALAZZLE]: "0758",
-  //[Pkm.STUFFUL]: "0759",
-  //[Pkm.BEWEAR]: "0760",
+  [Pkm.STUFFUL]: "0759",
+  [Pkm.BEWEAR]: "0760",
   [Pkm.BOUNSWEET]: "0761",
   [Pkm.STEENEE]: "0762",
   [Pkm.TSAREENA]: "0763",
@@ -2880,7 +2882,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.CENTISKORCH]: Pkm.SIZZLIPEDE,
   [Pkm.ZYGARDE_10]: Pkm.ZYGARDE_10,
   [Pkm.ZYGARDE_50]: Pkm.ZYGARDE_50,
-  [Pkm.ZYGARDE_100]: Pkm.ZYGARDE_100
+  [Pkm.ZYGARDE_100]: Pkm.ZYGARDE_100,
+  [Pkm.STUFFUL]: Pkm.STUFFUL,
+  [Pkm.BEWEAR]: Pkm.STUFFUL
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7368,5 +7372,15 @@ export const AnimationConfig: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
     shinyUnavailable: true
+  },
+  [Pkm.STUFFUL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge
+  },
+  [Pkm.BEWEAR]: {
+    attack: AnimationType.Slap,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
   }
 }
