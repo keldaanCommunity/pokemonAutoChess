@@ -10746,6 +10746,22 @@ export class BurnUpStrategy extends AbilityStrategy {
   }
 }
 
+export class PowerHugStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [40, 80][pokemon.stars - 1] ?? 80
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.status.triggerLocked(3000, target)
+    target.status.triggerParalysis(3000, target, pokemon)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -11137,5 +11153,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.LANDS_WRATH]: new LandsWrathStrategy(),
   [Ability.THOUSAND_ARROWS]: new ThousandArrowsStrategy(),
   [Ability.CORE_ENFORCER]: new CoreEnforcerStrategy(),
-  [Ability.BURN_UP]: new BurnUpStrategy()
+  [Ability.BURN_UP]: new BurnUpStrategy(),
+  [Ability.POWER_HUG]: new PowerHugStrategy()
 }

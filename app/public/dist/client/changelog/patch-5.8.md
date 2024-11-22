@@ -10,6 +10,8 @@
 - Zygarde (100% Form)
 - Sizzlipede
 - Centiskorch
+- Stufful
+- Bewear
 
 Gen 1 is now complete !
 

@@ -1,6 +1,7 @@
 import { Geom } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { AttackSprite } from "../../../../types"
+import { BOARD_HEIGHT } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
 import { distanceE, distanceM } from "../../../../utils/distance"
@@ -14,7 +15,6 @@ import { DebugScene } from "../scenes/debug-scene"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
 import { UNOWNS_PER_ABILITY } from "./unown-manager"
-import { BOARD_HEIGHT } from "../../../../types/Config"
 
 export function displayAbility(
   scene: GameScene | DebugScene,
@@ -1199,6 +1199,10 @@ export function displayAbility(
 
     case Ability.APPLE_ACID:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
+    case Ability.POWER_HUG:
+      addAbilitySprite(Ability.ANCHOR_SHOT, coordinatesTarget, true).setScale(2)
       break
 
     case Ability.BURN_UP:
