@@ -10771,7 +10771,7 @@ export class MortalSpinStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [20, 30, 40][pokemon.stars - 1] ?? 30
+    const damage = [20, 30, 40][pokemon.stars - 1] ?? 40
 
     const cells = board.getAdjacentCells(
       pokemon.positionX, 
