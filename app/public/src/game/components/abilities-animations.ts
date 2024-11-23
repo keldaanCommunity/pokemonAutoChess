@@ -2192,6 +2192,31 @@ export function displayAbility(
       break
     }
 
+    case "TOXIC_SPIKES": {
+      const specialProjectile = addAbilitySprite(skill, coordinates)
+        .setScale(2)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) -
+            Math.PI / 2
+        )
+
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        yoyo: false,
+        duration: 500,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case "LINK_CABLE_link": {
       const distance = distanceE(positionX, positionY, targetX, targetY)
       addAbilitySprite(Ability.LINK_CABLE, coordinates, true)

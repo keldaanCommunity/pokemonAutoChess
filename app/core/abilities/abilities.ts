@@ -10762,6 +10762,67 @@ export class PowerHugStrategy extends AbilityStrategy {
   }
 }
 
+export class MortalSpinStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [20, 30, 40][pokemon.stars - 1] ?? 30
+
+    const cells = board.getAdjacentCells(
+      pokemon.positionX, 
+      pokemon.positionY, 
+      false
+    )
+    
+    // Find all enemies targeting this unit
+    cells.forEach((cell) => {
+      if (
+        cell.value && 
+        cell.value.team !== pokemon.team
+      ) {
+        let abilityTarget = cell.value
+        
+        let enemyTarget = board.getValue(
+          abilityTarget.targetX, 
+          abilityTarget.targetY
+        )
+
+        if (enemyTarget === pokemon) {
+
+          abilityTarget.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+          abilityTarget.status.triggerPoison(4000, abilityTarget, pokemon)
+          
+          // Push targets back 1 tile
+          let newY = -1
+          if (pokemon.team === Team.BLUE_TEAM &&
+            abilityTarget.positionY + 1 < BOARD_HEIGHT
+          ) {
+            newY = abilityTarget.positionY + 1
+          } else if (abilityTarget.positionY - 1 > 0) {
+            newY = abilityTarget.positionY - 1
+          }
+          
+          if (
+            newY !== -1 &&
+            board.getValue(
+              abilityTarget.positionX, 
+              abilityTarget.positionY + 1 
+            ) === undefined
+          ) {
+            abilityTarget.moveTo(abilityTarget.positionX, newY, board)
+            abilityTarget.cooldown = 500
+          }
+        }
+      }
+    })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -11154,5 +11215,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.THOUSAND_ARROWS]: new ThousandArrowsStrategy(),
   [Ability.CORE_ENFORCER]: new CoreEnforcerStrategy(),
   [Ability.BURN_UP]: new BurnUpStrategy(),
-  [Ability.POWER_HUG]: new PowerHugStrategy()
+  [Ability.POWER_HUG]: new PowerHugStrategy(),
+  [Ability.MORTAL_SPIN]: new MortalSpinStrategy()
 }

@@ -17,6 +17,8 @@ import {
 } from "../types"
 import {
   ARMOR_FACTOR,
+  BOARD_HEIGHT,
+  BOARD_WIDTH,
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER,
   MANA_SCARF_MANA,
@@ -46,7 +48,7 @@ import { clamp, max, min, roundToNDigits } from "../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import AttackingState from "./attacking-state"
-import Board from "./board"
+import Board, { Cell } from "./board"
 import { IdleState } from "./idle-state"
 import MovingState from "./moving-state"
 import PokemonState from "./pokemon-state"
@@ -1277,6 +1279,66 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.skill = Ability.CORE_ENFORCER
       this.pp = 0
       this.maxPP = 120
+    }
+
+    if (
+      this.passive === Passive.GLIMMORA &&
+      this.life < 0.5 * this.hp
+    ) {
+      this.passive = Passive.NONE
+
+      const cells = new Array<Cell>()
+      
+      let startY = 1
+      let endY = 3
+      if (this.team === Team.RED_TEAM) {
+        startY = -2
+        endY = 0
+      }
+
+      for (let x = -1; x < 2; x++) {
+        for (let y = startY; y < endY; y++) {
+
+          if (
+            !(this.positionX + x < 0 ||
+            this.positionX + x > BOARD_WIDTH ||
+            this.positionY + y < 0 ||
+            this.positionY + y > BOARD_HEIGHT
+          )) {
+
+            cells.push(
+              {
+                x: this.positionX + x, 
+                y: this.positionY + y, 
+                value: board.cells[board.columns * this.positionY + y + this.positionX + x]
+              }
+            )
+          }
+        }
+      }
+      
+      cells.forEach((cell) => {
+        board.addBoardEffect(cell.x, cell.y, Effect.TOXIC_SPIKES, this.simulation)
+  
+        this.simulation.room.broadcast(Transfer.ABILITY, {
+          id: this.simulation.id,
+          skill: "TOXIC_SPIKES",
+          positionX: this.positionX,
+          positionY: this.positionY,
+          targetX: cell.x,
+          targetY: cell.y
+        })
+  
+        if (cell.value && cell.value.team !== this.team) {
+          cell.value.handleSpecialDamage(
+            20,
+            board,
+            AttackType.SPECIAL,
+            this,
+            false
+          )
+        }
+      })
     }
   }
 

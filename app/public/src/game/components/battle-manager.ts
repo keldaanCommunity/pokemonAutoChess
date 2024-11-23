@@ -28,6 +28,7 @@ import GameScene from "../scenes/game-scene"
 import { displayAbility } from "./abilities-animations"
 import PokemonSprite from "./pokemon"
 import PokemonDetail from "./pokemon-detail"
+import { pickRandomIn } from "../../../../utils/random"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -1162,6 +1163,28 @@ export default class BattleManager {
         delay: 500,
         scaleX: 1,
         scaleY: 1
+      })
+    }
+
+    if (event.effect === Effect.TOXIC_SPIKES) {
+      const spriteNumber = pickRandomIn([0, 1, 2]).toString()
+      const sprite = this.scene.add.sprite(
+        coordinates[0],
+        coordinates[1]+16,
+        "abilities",
+        "TOXIC_SPIKES/00" + spriteNumber + ".png"
+      )
+      sprite.setDepth(1).setOrigin(0.5, 0.5).setScale(0, 0)
+      this.boardEventSprites[index] = sprite
+      this.group.add(sprite)
+
+      this.scene.tweens.add({
+        targets: sprite,
+        alpha: 1,
+        duration: 200,
+        delay: 500,
+        scaleX: 2,
+        scaleY: 2
       })
     }
 

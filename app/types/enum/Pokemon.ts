@@ -268,6 +268,8 @@ export enum Pkm {
   GLALIE = "GLALIE",
   GLIGAR = "GLIGAR",
   GLISCOR = "GLISCOR",
+  GLIMMET = "GLIMMET",
+  GLIMMORA = "GLIMMORA",
   GLOOM = "GLOOM",
   GOLBAT = "GOLBAT",
   GOLDEEN = "GOLDEEN",
@@ -1973,8 +1975,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.REVAVROOM]: "0966",
   [Pkm.CYCLIZAR]: "0967",
   //[Pkm.ORTHWOEM]: "0968",
-  //[Pkm.GLIMMET]: "0969",
-  //[Pkm.GLIMMORA]: "0970",
+  [Pkm.GLIMMET]: "0969",
+  [Pkm.GLIMMORA]: "0970",
   //[Pkm.GREAVARD]: "0971",
   //[Pkm.HOUNDSTONE]: "0972",
   //[Pkm.FLAMIGO]: "0973",
@@ -2884,7 +2886,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ZYGARDE_50]: Pkm.ZYGARDE_50,
   [Pkm.ZYGARDE_100]: Pkm.ZYGARDE_100,
   [Pkm.STUFFUL]: Pkm.STUFFUL,
-  [Pkm.BEWEAR]: Pkm.STUFFUL
+  [Pkm.BEWEAR]: Pkm.STUFFUL,
+  [Pkm.GLIMMET]: Pkm.GLIMMET,
+  [Pkm.GLIMMORA]: Pkm.GLIMMET
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7380,6 +7384,16 @@ export const AnimationConfig: {
   },
   [Pkm.BEWEAR]: {
     attack: AnimationType.Slap,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.GLIMMET]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Charge
+  },
+  [Pkm.GLIMMORA]: {
+    attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
   }
