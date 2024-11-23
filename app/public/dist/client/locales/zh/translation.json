@@ -406,7 +406,11 @@
     "THUNDEROUS_KICK": "雷电踢",
     "FIERY_WRATH": "火之怒",
     "VISE_GRIP": "夹住",
-    "BURN_UP": "燃尽"
+    "BURN_UP": "燃尽",
+    "LANDS_WRATH": "大地神力",
+    "THOUSAND_ARROWS": "千箭齐发",
+    "CORE_ENFORCER": "核心惩罚者",
+    "POWER_HUG": "强力拥抱"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1267,7 +1271,12 @@
     "KRABBY": "大钳蟹",
     "KINGLER": "巨钳蟹",
     "SIZZLIPEDE": "烧火蚣",
-    "CENTISKORCH": "焚焰蚣"
+    "CENTISKORCH": "焚焰蚣",
+    "ZYGARDE_10": "基格尔德（10%形态）",
+    "ZYGARDE_50": "基格尔德（50%形态）",
+    "ZYGARDE_100": "基格尔德（完全体形态）",
+    "STUFFUL": "童偶熊",
+    "BEWEAR": "穿着熊"
   },
   "ability_description": {
     "SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1654,7 +1663,11 @@
     "THUNDEROUS_KICK": "将目标击退。其和所有击退路径上的敌方宝可梦陷入FLINCH 4秒，降低[5,SP]点DEF，并受到[20,40,60,SP]点PHYSICAL。",
     "FIERY_WRATH": "对所有敌方宝可梦造成[40,SP]点SPECIAL，并有[50,LK]%的概率使他们陷入FLINCH 4秒。",
     "VISE_GRIP": "将目标从两侧夹住，对其造成[30,60,100,SP]点SPECIAL。使用者与目标均陷入LOCKED 4秒。",
-    "BURN_UP": "使用者自身陷入BURN 3秒，并对目标造成[50,100,200,SP]点SPECIAL。"
+    "BURN_UP": "使用者自身陷入BURN 3秒，并对目标造成[50,100,200,SP]点SPECIAL。",
+    "LANDS_WRATH": "大地破裂，对目标和相邻敌方宝可梦造成PHYSICAL，数值相当于[100,SP]%的ATK加40，然后降低他们[4,SP=0.5]点 DEF和SPE_DEF。",
+    "THOUSAND_ARROWS": "发射33支攻击随机格子的能量箭，对击中的目标造成[60,SP]点SPECIAL。被击中的敌人还会陷入LOCKED 1秒。",
+    "CORE_ENFORCER": "对目标造成[150,SP]点SPECIAL，并使其陷入LOCKED和SILENCE 3秒。",
+    "POWER_HUG": "对目标造成[40,80,SP]点SPECIAL，并使其陷入LOCKED和PARALYSIS 3秒。"
   },
   "effect": {
     "INGRAIN": "扎根",
@@ -1812,8 +1825,8 @@
     "VENOMOUS": "[60,LK]%使目标陷入POISONNED。POISONNED的最大层数增加1层。",
     "TOXIC": "[100,LK]%使目标陷入POISONNED。POISONNED的最大层数增加2层。",
     "DRAGON_ENERGY": "每只龙属性宝可梦的第二项共鸣计为2只宝可梦。",
-    "DRAGON_SCALES": "每颗STAR使龙属性宝可梦获得5点SHIELD。",
-    "DRAGON_DANCE": "每颗STAR使龙属性宝可梦提升1%的ATK_SPEED和1点AP。",
+    "DRAGON_SCALES": "龙属性宝可梦的每颗STAR使全体我方龙属性宝可梦获得5点SHIELD。",
+    "DRAGON_DANCE": "龙属性宝可梦的每颗STAR使全体我方龙属性宝可梦提升1%的ATK_SPEED和1点AP。",
     "BULK_UP": "恢复30点HP，提升20%的ATK_SPEED。",
     "RAGE": "恢复30点HP，提升25%的ATK_SPEED。",
     "ANGER_POINT": "恢复30点HP，提升30%的ATK_SPEED。",
@@ -1826,7 +1839,7 @@
     "CALM_MIND": "恢复所造成伤害值60%的HP。",
     "SWIFT_SWIM": "负面状态持续时间减少30%。海浪恢复10%的HP，造成5%的TRUE。",
     "HYDRATION": "负面状态持续时间减少60%。海浪恢复20%的HP，造成10%的TRUE。",
-    "WATER_VEIL": "负面状态持续时间减少90%。海浪恢复30%的HP，造成15%的TRUE。第二波攻击在 16 秒后袭来。",
+    "WATER_VEIL": "负面状态持续时间减少90%。海浪恢复30%的HP，造成15%的TRUE。此外，在16秒后还会有第二道海浪再次冲刷战场。",
     "COCOON": "复制1只BUG宝可梦。",
     "INFESTATION": "复制2只BUG宝可梦。",
     "HORDE": "复制3只BUG宝可梦。",
@@ -2011,7 +2024,8 @@
     "TEAL_MASK": "碧草面具",
     "WELLSPRING_MASK": "水井面具",
     "CORNERSTONE_MASK": "础石面具",
-    "HEARTHFLAME_MASK": "火灶面具"
+    "HEARTHFLAME_MASK": "火灶面具",
+    "ZYGARDE_CUBE": "基格尔德多面体"
   },
   "item_description": {
     "FOSSIL_STONE": "某只远古时代生活着的宝可梦的化石。",
@@ -2135,7 +2149,8 @@
     "TEAL_MASK": "用结晶装饰的木雕面具。使厄鬼椪视作FLORA宝可梦，且获得50点SHIELD。",
     "WELLSPRING_MASK": "用结晶装饰的木雕面具。使厄鬼椪视作AQUATIC宝可梦，且获得50点SHIELD。",
     "HEARTHFLAME_MASK": "用结晶装饰的木雕面具。使厄鬼椪视作FIRE宝可梦，且获得50点SHIELD。",
-    "CORNERSTONE_MASK": "用结晶装饰的木雕面具。使厄鬼椪视作ROCK宝可梦，且获得50点SHIELD。"
+    "CORNERSTONE_MASK": "用结晶装饰的木雕面具。使厄鬼椪视作ROCK宝可梦，且获得50点SHIELD。",
+    "ZYGARDE_CUBE": "这个道具中存放着秩序宝可梦基格尔德的细胞。可以改变基格尔德的样子。"
   },
   "passive_description": {
     "NONE": "无被动能力",
@@ -2263,7 +2278,9 @@
     "DARMANITAN_ZEN": "无法移动或攻击，但每秒恢复[15,SP]点HP。恢复至满后回到普通模式。",
     "BAD_LUCK": "降低所有敌方宝可梦20%的LUCK。",
     "GOOD_LUCK": "提升所有我方宝可梦20%的LUCK。",
-    "PRIMEAPE": "火爆猴每次被击倒都会变得更愤怒，永久提升1点ATK。被击倒10次后进化为弃世猴。"
+    "PRIMEAPE": "火爆猴每次被击倒都会变得更愤怒，永久提升1点ATK。被击倒10次后进化为弃世猴。",
+    "ZYGARDE10": "基格尔德能够吸收细胞进行变形。在HP低于最大值的30%时，他会吸收全部细胞，变形为完全体形态。",
+    "ZYGARDE50": "基格尔德能够吸收细胞进行变形。在HP低于最大值的30%时，他会吸收全部细胞，变形为完全体形态。"
   },
   "stat": {
     "ATK": "攻击",
@@ -2389,20 +2406,20 @@
     "PSYCHIC": "PSYCHIC宝可梦能提升AP，还能吸引未知图腾。",
     "DARK": "DARK宝可梦更容易打出暴击，暴击本身也更为强力。近战的DARK宝可梦会跳至可抵达的最远敌方目标。",
     "STEEL": "STEEL宝可梦造成伤害的一定百分比会转化为TRUE。",
-    "GROUND": "GROUND宝可梦每3秒能提升自己的ATK，DEF和SPE_DEF。",
+    "GROUND": "GROUND宝可梦每3秒能提升自己的ATK，DEF和SPE_DEF，至多提升5次。",
     "POISON": "POISON宝可梦能用普通攻击使目标陷入POISONNED 4秒，对其造成TRUE。",
     "DRAGON": "DRAGON强化其他的共鸣，也能在完全进化时获得更高的数值。",
     "FIELD": "有FIELD宝可梦倒下时，所有其他FIELD宝可梦恢复HP，且提升ATK_SPEED。",
     "MONSTER": "MONSTER宝可梦的攻击可以使敌方宝可梦陷入FLINCH 3秒。每当他们击倒目标时，他们能提升数值，恢复生命，变得更大。",
     "HUMAN": "HUMAN宝可梦希望能维持站立。所有我方宝可梦均能在用攻击和招式造成伤害时按一定百分比恢复HP。",
-    "AQUATIC": "AQUATIC宝可梦能降低所有我方宝可梦受到状态异常影响的时间。开战8秒后，会有一道海浪清除负面状态和场地效果，治疗我方AQUATIC宝可梦，并击退敌方宝可梦且对他们造成伤害。",
+    "AQUATIC": "AQUATIC宝可梦能降低所有我方宝可梦受到状态异常影响的时间。开战8秒后，会有一道席卷全场的海浪清除负面状态和场地效果，治疗我方AQUATIC宝可梦，并击退敌方宝可梦且对他们造成伤害。",
     "BUG": "战斗开始时，复制我方最强的BUG宝可梦。",
     "FLYING": "FLYING宝可梦在HP低于阈值时会飞离，除非他们处于PARALYSIS，FREEZE或SLEEP。",
     "FLORA": "当第一只FLORA宝可梦倒下时，会开出一朵花。其会随后从每个倒下的我方FLORA宝可梦处各获得一个随机道具。",
     "ROCK": "ROCK宝可梦能提升DEF，抵抗暴击以及适应天气。",
     "GHOST": "GHOST宝可梦有20%的概率闪避攻击，击中目标时能使其陷入SILENCE，也能向敌方宝可梦施加多种多样的诅咒。",
     "FAIRY": "FAIRY宝可梦的攻击能额外造成SPECIAL，且受到暴击时会触发振荡，反击30%所受的伤害。",
-    "ICE": "ICE宝可梦受到攻击时有概率使敌方宝可梦陷入FREEZE 2秒，并为全队提升SPE_DEF。",
+    "ICE": "ICE宝可梦攻击时有概率使敌方宝可梦陷入FREEZE 2秒，并为全队提升SPE_DEF。",
     "FOSSIL": "在第一次被击倒时，FOSSIL宝可梦将会复活并提升ATK。",
     "SOUND": "SOUND宝可梦释放招式时会发出叫声，叫醒处于SLEEP的我方宝可梦并为我方宝可梦提升数值。",
     "ARTIFICIAL": "ARTIFICIAL宝可梦持有道具时能额外提升ATK，AP以及获得SHIELD，且能提供独特的道具。",
