@@ -34,14 +34,17 @@ Gen 1 is now complete !
 - Rework Slugma line: Range 2 → 1, Attack 7/16 → 6/14, Def: 3/6 → 4/8, SpeDef: 1/2 → 3/5 ; PP 90 → 100 ; new ability: Lava Plume
 - Happiny line: PP 130 → 120 as a compensation for removed PP on shield damage
 - Slakoth line: PP 120 → 100 as a compensation for removed PP on shield damage
+- Shuppet line: PP 125 → 120 as a compensation for removed PP on shield damage
 - Buff Crush Grip (Regigigas): between ~~20~~ 50 and ~~200~~ 250 physical damage.
 - Change Astral Barrage (Spectrier): Number of ghosts 3 → 7, AP scaling 2 → 1, ghost damage no longer scales with AP
 - Sableye and Mega-Sableye: removed Rock synergy
+- Buff Kangashkan: PP 100 → 90
 
 # Changes to Synergies
 
 - Buff Water: 4/7/10 → 4/8/12 PP per second
 - Buff Fairy: 15/30/50/70 → 20/40/60/80% additional special damage
+- Buff Field: HP healed 30/30/30 → 30/35/40
 - Nerf Ghost: dodge chance ~~25%~~ 20% ; Nerf Ghost 8: Curse duration: ~~6~~ 7 seconds
 - Fix Psy 4 Light Screen Unown shop found every 5 shops instead of 3
 - Dark 1-range Pokémon with Wide lens no longer jump to the farthest enemy

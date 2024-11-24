@@ -303,7 +303,7 @@ export class Shuppet extends Pokemon {
   atk = 10
   def = 3
   speDef = 4
-  maxPP = 125
+  maxPP = 120
   range = 1
   skill = Ability.SHADOW_CLONE
   attackSprite = AttackSprite.DRAGON_MELEE
@@ -318,7 +318,7 @@ export class Banette extends Pokemon {
   atk = 20
   def = 4
   speDef = 5
-  maxPP = 125
+  maxPP = 120
   range = 1
   skill = Ability.SHADOW_CLONE
   attackSprite = AttackSprite.DRAGON_MELEE
