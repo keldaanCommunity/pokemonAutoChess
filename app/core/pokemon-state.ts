@@ -83,7 +83,6 @@ export default abstract class PokemonState {
       }
       if (pokemon.effects.has(Effect.LOCK_ON) && target) {
         trueDamagePart += 2.0 * (1 + pokemon.ap / 100)
-        pokemon.effects.delete(Effect.LOCK_ON)
       }
 
       let additionalSpecialDamagePart = 0
@@ -104,10 +103,11 @@ export default abstract class PokemonState {
       }
       dodgeChance = max(0.9)(dodgeChance)
 
-      if (
+      if (pokemon.effects.has(Effect.LOCK_ON)) {
+        pokemon.effects.delete(Effect.LOCK_ON)
+      } else if (
         chance(dodgeChance, target) &&
         !pokemon.items.has(Item.XRAY_VISION) &&
-        !pokemon.effects.has(Effect.LOCK_ON) &&
         !target.status.paralysis &&
         !target.status.sleep &&
         !target.status.freeze
@@ -116,6 +116,7 @@ export default abstract class PokemonState {
         damage = 0
         target.count.dodgeCount += 1
       }
+
       if (target.status.protect || target.status.skydiving) {
         isAttackSuccessful = false
         damage = 0
