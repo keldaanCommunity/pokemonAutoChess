@@ -68,23 +68,6 @@ export default abstract class PokemonState {
         damage += Math.round(pokemon.def * (1 + pokemon.ap / 100))
       }
 
-      let trueDamagePart = 0
-      if (pokemon.effects.has(Effect.STEEL_SURGE)) {
-        trueDamagePart += 0.33
-      } else if (pokemon.effects.has(Effect.STEEL_SPIKE)) {
-        trueDamagePart += 0.66
-      } else if (pokemon.effects.has(Effect.CORKSCREW_CRASH)) {
-        trueDamagePart += 1.0
-      } else if (pokemon.effects.has(Effect.MAX_MELTDOWN)) {
-        trueDamagePart += 1.2
-      }
-      if (pokemon.items.has(Item.RED_ORB) && target) {
-        trueDamagePart += 0.25
-      }
-      if (pokemon.effects.has(Effect.LOCK_ON) && target) {
-        trueDamagePart += 2.0 * (1 + pokemon.ap / 100)
-      }
-
       let additionalSpecialDamagePart = 0
       if (pokemon.effects.has(Effect.AROMATIC_MIST)) {
         additionalSpecialDamagePart += 0.15
@@ -103,11 +86,10 @@ export default abstract class PokemonState {
       }
       dodgeChance = max(0.9)(dodgeChance)
 
-      if (pokemon.effects.has(Effect.LOCK_ON)) {
-        pokemon.effects.delete(Effect.LOCK_ON)
-      } else if (
+      if (
         chance(dodgeChance, target) &&
         !pokemon.items.has(Item.XRAY_VISION) &&
+        !pokemon.effects.has(Effect.LOCK_ON) &&
         !target.status.paralysis &&
         !target.status.sleep &&
         !target.status.freeze
@@ -116,10 +98,27 @@ export default abstract class PokemonState {
         damage = 0
         target.count.dodgeCount += 1
       }
-
       if (target.status.protect || target.status.skydiving) {
         isAttackSuccessful = false
         damage = 0
+      }
+
+      let trueDamagePart = 0
+      if (pokemon.effects.has(Effect.STEEL_SURGE)) {
+        trueDamagePart += 0.33
+      } else if (pokemon.effects.has(Effect.STEEL_SPIKE)) {
+        trueDamagePart += 0.66
+      } else if (pokemon.effects.has(Effect.CORKSCREW_CRASH)) {
+        trueDamagePart += 1.0
+      } else if (pokemon.effects.has(Effect.MAX_MELTDOWN)) {
+        trueDamagePart += 1.2
+      }
+      if (pokemon.items.has(Item.RED_ORB) && target) {
+        trueDamagePart += 0.25
+      }
+      if (pokemon.effects.has(Effect.LOCK_ON) && target) {
+        trueDamagePart += 2.0 * (1 + pokemon.ap / 100)
+        pokemon.effects.delete(Effect.LOCK_ON)
       }
 
       if (trueDamagePart > 0) {
