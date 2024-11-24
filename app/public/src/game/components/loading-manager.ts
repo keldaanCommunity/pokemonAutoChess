@@ -41,13 +41,88 @@ export default class LoadingManager {
       "animatedTiles",
       "animatedTiles"
     )
+    scene.load.json("pokemons-atlas", `/assets/pokemons.json?v=${pkg.version}`)
+    scene.load.once(
+      "filecomplete-json-pokemons-atlas",
+      (key, type, compressedAtlas) => {
+        for (const image in compressedAtlas) {
+          const data = compressedAtlas[image]
+
+          function traverse(obj: any, path: string, frames) {
+            if (Array.isArray(obj)) {
+              const [
+                sourceSizew,
+                sourceSizeh,
+                spriteSourceSizex,
+                spriteSourceSizey,
+                spriteSourceSizew,
+                spriteSourceSizeh,
+                framex,
+                framey,
+                framew,
+                frameh
+              ] = obj
+              frames.push({
+                filename: path,
+                rotated: false,
+                trimmed: true,
+                sourceSize: {
+                  w: sourceSizew,
+                  h: sourceSizeh
+                },
+                spriteSourceSize: {
+                  x: spriteSourceSizex,
+                  y: spriteSourceSizey,
+                  w: spriteSourceSizew,
+                  h: spriteSourceSizeh
+                },
+                frame: {
+                  x: framex,
+                  y: framey,
+                  w: framew,
+                  h: frameh
+                }
+              })
+            } else if (obj instanceof Object) {
+              for (const key in obj) {
+                traverse(obj[key], path ? path + "/" + key : key, frames)
+              }
+            }
+          }
+          const frames = []
+
+          traverse(data.a, "", frames)
+
+          const multiatlas = {
+            textures: [
+              {
+                image: image,
+                format: "RGBA8888",
+                size: {
+                  w: data.s[0],
+                  h: data.s[1]
+                },
+                scale: data.s[2] ?? 1,
+                frames
+              }
+            ]
+          }
+
+          const index = image.replace(".png", "")
+          //console.log("load multiatlas " + index)
+          // @ts-ignore: there is an error in phaser types, the second parameter can be an object
+          scene.load.multiatlas(index, multiatlas, "/assets/pokemons")
+        }
+      }
+    )
+
     indexList.forEach((id) => {
       scene.load.image(`portrait-${id}`, getPortraitSrc(id))
-      scene.load.multiatlas(
+      /*scene.load.multiatlas(
         id,
         `/assets/pokemons/${id}.json`,
         "/assets/pokemons"
-      )
+      )*/
     })
 
     if (scene instanceof GameScene) {
@@ -85,7 +160,7 @@ export default class LoadingManager {
     for (const pack in atlas.packs) {
       scene.load.multiatlas(
         atlas.packs[pack].name,
-        `/assets/${pack}/${atlas.packs[pack].name}-${pkg.version.replaceAll(".", "_")}.json`,
+        `/assets/${pack}/${atlas.packs[pack].name}.json?v=${pkg.version}`,
         `/assets/${pack}/`
       )
     }

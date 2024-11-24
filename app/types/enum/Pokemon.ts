@@ -3947,7 +3947,8 @@ export const AnimationConfig: {
   [Pkm.GALARIAN_ARTICUNO]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.SpAttack,
-    emote: AnimationType.RearUp
+    emote: AnimationType.RearUp,
+    shinyUnavailable: true
   },
   [Pkm.DIALGA]: {
     attack: AnimationType.RearUp,
@@ -7381,6 +7382,7 @@ export const AnimationConfig: {
   [Pkm.BEWEAR]: {
     attack: AnimationType.Slap,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Charge
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
   }
 }
