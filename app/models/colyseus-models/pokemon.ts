@@ -8971,7 +8971,7 @@ export class Granbull extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 265
-  atk = 24
+  atk = 28
   def = 6
   speDef = 3
   maxPP = 70

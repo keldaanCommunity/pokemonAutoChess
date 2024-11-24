@@ -39,6 +39,7 @@ Gen 1 is now complete !
 - Change Astral Barrage (Spectrier): Number of ghosts 3 → 7, AP scaling 2 → 1, ghost damage no longer scales with AP
 - Sableye and Mega-Sableye: removed Rock synergy
 - Buff Kangashkan: PP 100 → 90
+- Buff Granbull: Attack 24 → 28
 
 # Changes to Synergies
 
