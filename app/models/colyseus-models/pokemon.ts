@@ -5278,7 +5278,7 @@ export class Regigigas extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 300
+  hp = 350
   atk = 30
   def = 5
   speDef = 5
