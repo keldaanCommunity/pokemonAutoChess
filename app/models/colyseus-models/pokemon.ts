@@ -303,7 +303,7 @@ export class Shuppet extends Pokemon {
   atk = 10
   def = 3
   speDef = 4
-  maxPP = 125
+  maxPP = 120
   range = 1
   skill = Ability.SHADOW_CLONE
   attackSprite = AttackSprite.DRAGON_MELEE
@@ -318,7 +318,7 @@ export class Banette extends Pokemon {
   atk = 20
   def = 4
   speDef = 5
-  maxPP = 125
+  maxPP = 120
   range = 1
   skill = Ability.SHADOW_CLONE
   attackSprite = AttackSprite.DRAGON_MELEE
@@ -5278,7 +5278,7 @@ export class Regigigas extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 300
+  hp = 350
   atk = 30
   def = 5
   speDef = 5
@@ -8971,7 +8971,7 @@ export class Granbull extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 265
-  atk = 24
+  atk = 28
   def = 6
   speDef = 3
   maxPP = 70

@@ -1486,13 +1486,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     const isAngerPoint = this.effects.has(Effect.ANGER_POINT)
 
     if (isWorkUp || isRage || isAngerPoint) {
-      const heal = 30
+      let heal = 0
       let speedBoost = 0
       if (isWorkUp) {
+        heal = 30
         speedBoost = 20
       } else if (isRage) {
+        heal = 35
         speedBoost = 25
       } else if (isAngerPoint) {
+        heal = 40
         speedBoost = 30
       }
       const _pokemon = this // beware of closure vars
