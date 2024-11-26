@@ -8158,7 +8158,7 @@ export class FurySwipesStrategy extends AbilityStrategy {
     const max = Math.round(5 * (1 + pokemon.ap / 100))
     const nbAttacks = clamp(
       Math.floor(
-        Math.random() * (1 + pokemon.luck / 100) * (max - min + 1) + min
+        Math.random() * (1 + pokemon.luck / 100) * (max - min) + min
       ),
       min,
       max
