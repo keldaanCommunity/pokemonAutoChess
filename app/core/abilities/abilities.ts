@@ -48,7 +48,7 @@ import { Weather } from "../../types/enum/Weather"
 import { createRandomEgg } from "../../models/egg-factory"
 import PokemonFactory from "../../models/pokemon-factory"
 import Board, { Cell } from "../board"
-import { PokemonEntity, getStrongestUnit } from "../pokemon-entity"
+import { PokemonEntity, getStrongestUnit, getUnitScore } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 
 import { t } from "i18next"
@@ -9116,7 +9116,7 @@ export class TorchSongStrategy extends AbilityStrategy {
       (p) => p && p.team !== pokemon.team
     ) as PokemonEntity[]
     const enemiesHit = enemies
-      .sort((a, b) => b.items.size - a.items.size)
+      .sort((a, b) => getUnitScore(b) - getUnitScore(a))
       .slice(0, count) as PokemonEntity[]
 
     enemiesHit.forEach((enemy) => {
