@@ -7454,8 +7454,7 @@ export class OutrageStrategy extends AbilityStrategy {
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .map((v) => v.value)
-      .filter((v) => v?.team === target.team)
-      .concat(target)
+      .filter((v) => (v?.team === target.team) || (v?.id === target.id))
       .forEach((v) => {
         if (v) {
           pokemon.simulation.room.broadcast(Transfer.ABILITY, {
@@ -9131,7 +9130,6 @@ export class TorchSongStrategy extends AbilityStrategy {
       })
       const cells = board
         .getAdjacentCells(enemy.positionX, enemy.positionY, true)
-        .concat({ x: enemy.positionX, y: enemy.positionY, value: enemy })
       cells.forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
           pokemon.simulation.room.broadcast(Transfer.ABILITY, {
