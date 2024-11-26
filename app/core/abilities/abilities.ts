@@ -7454,7 +7454,8 @@ export class OutrageStrategy extends AbilityStrategy {
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .map((v) => v.value)
-      .filter((v) => (v?.team === target.team) || (v?.id === target.id))
+      .filter((v) => (v?.team === target.team) && (v?.id !== target.id))
+      .concat(target)
       .forEach((v) => {
         if (v) {
           pokemon.simulation.room.broadcast(Transfer.ABILITY, {
