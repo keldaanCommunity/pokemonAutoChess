@@ -15328,6 +15328,39 @@ export class Bewear extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class Glimmet extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.ROCK, Synergy.FLORA])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.GLIMMORA
+  hp = 80
+  atk = 6
+  def = 4
+  speDef = 4
+  maxPP = 70
+  range = 1
+  skill = Ability.MORTAL_SPIN
+  additional = true
+  attackSprite = AttackSprite.POISON_MELEE
+  passive = Passive.GLIMMORA
+}
+
+export class Glimmora extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.ROCK, Synergy.FLORA])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 180
+  atk = 12
+  def = 6
+  speDef = 6
+  maxPP = 70
+  range = 1
+  skill = Ability.MORTAL_SPIN
+  additional = true
+  attackSprite = AttackSprite.POISON_MELEE
+  passive = Passive.GLIMMORA
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -16198,5 +16231,7 @@ export const PokemonClasses: Record<
   [Pkm.SIZZLIPEDE]: Sizzlipede,
   [Pkm.CENTISKORCH]: Centiskorch,
   [Pkm.STUFFUL]: Stufful,
-  [Pkm.BEWEAR]: Bewear
+  [Pkm.BEWEAR]: Bewear,
+  [Pkm.GLIMMET]: Glimmet,
+  [Pkm.GLIMMORA]: Glimmora
 }

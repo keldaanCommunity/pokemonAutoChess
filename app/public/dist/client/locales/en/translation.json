@@ -410,7 +410,8 @@
     "LANDS_WRATH": "Land's Wrath",
     "THOUSAND_ARROWS": "Thousand Arrows",
     "CORE_ENFORCER": "Core Enforcer",
-    "POWER_HUG": "Power Hug"
+    "POWER_HUG": "Power Hug",
+    "MORTAL_SPIN": "Mortal Spin"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1276,7 +1277,9 @@
     "ZYGARDE_50": "Zygarde (50% Forme)",
     "ZYGARDE_100": "Zygarde (100% Forme)",
     "STUFFUL": "Stufful",
-    "BEWEAR": "Bewear"
+    "BEWEAR": "Bewear",
+    "GLIMMET": "Glimmet",
+    "GLIMMORA": "Glimmora"
   },
   "ability_description": {
     "SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1667,7 +1670,8 @@
     "LANDS_WRATH": "The ground erupts, dealing 40 + [100,SP]% ATK as PHYSICAL to the target and adjacent enemies, then lower their DEF and SPE_DEF by [4,SP=0.5].",
     "THOUSAND_ARROWS": "33 energy arrows rain down on random tiles, dealing [60,SP] SPECIAL each. All enemies hit are LOCKED for 1 second.",
     "CORE_ENFORCER": "Deal [150,SP] SPECIAL to the target. The target is LOCKED and SILENCE for 3 seconds.",
-    "POWER_HUG": "Deal [40,80,SP] SPECIAL to the target. Inflict LOCKED and PARALYSIS for 3 seconds."
+    "POWER_HUG": "Deal [40,80,SP] SPECIAL to the target. Inflict LOCKED and PARALYSIS for 3 seconds.",
+    "MORTAL_SPIN": "Knock back any Pokemon targeting the user in melee range. Deal [20,30,40,SP] SPECIAL to any enemies hit, and apply POISONNED for 4 seconds"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2274,7 +2278,8 @@
     "GOOD_LUCK": "Increase the LUCK of all allies by 20%",
     "PRIMEAPE": "Primeape becomes angrier when KO, gaining 1 permanent ATK. After Primeape is knocked out 10 times, evolves into Annihilape.",
     "ZYGARDE10": "Zygarde will absorb its cells, transforming into another form. Once below 30% max HP, it absorbs all of its cells, taking its complete form.",
-    "ZYGARDE50": "Zygarde will absorb its cells, transforming into another form. Once below 30% max HP, it absorbs all of its cells, taking its complete form."
+    "ZYGARDE50": "Zygarde will absorb its cells, transforming into another form. Once below 30% max HP, it absorbs all of its cells, taking its complete form.",
+    "GLIMMORA": "Once below 50% max HP, this unit throws toxic spikes in a 2x3 rectangle in front of itself, dealing 20 damage. Toxic spikes apply POISONNED to Pokémon, unless they are POISON."
   },
   "stat": {
     "ATK": "Attack",

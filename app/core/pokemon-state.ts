@@ -848,6 +848,13 @@ export default abstract class PokemonState {
       pokemon.status.triggerArmorReduction(1000, pokemon)
     }
 
+    if (
+      pokemon.effects.has(Effect.TOXIC_SPIKES) &&
+      !pokemon.types.has(Synergy.POISON)
+    ) {
+      pokemon.status.triggerPoison(1000, pokemon, undefined)
+    }
+
     if (pokemon.effects.has(Effect.HAIL) && !pokemon.types.has(Synergy.ICE)) {
       pokemon.handleDamage({
         damage: 10,

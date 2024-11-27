@@ -12,6 +12,8 @@
 - Centiskorch
 - Stufful
 - Bewear
+- Glimmet
+- Glimmora
 
 Gen 1 is now complete !
 
