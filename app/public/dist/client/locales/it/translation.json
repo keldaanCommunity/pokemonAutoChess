@@ -1670,7 +1670,8 @@
     "LANDS_WRATH": "La terra esplode, infliggendo 40 + [100,SP]% dell'ATK come PHYSICAL al bersaglio ed ai nemici adiacenti, inoltre diminuisce la loro DEF e SPE_DEF di [4,SP=0.5].",
     "THOUSAND_ARROWS": "33 frecce d'energia piombano su spazi casuali, infliggendo ognuna [60,SP] SPECIAL. Tutti i nemici colpiti subiscono LOCKED per 1 secondo.",
     "CORE_ENFORCER": "Infliggi [150,SP] SPECIAL al bersaglio e causa LOCKED e SILENCE per 3 secondi.",
-    "POWER_HUG": "Infliggi [40,80,SP] SPECIAL al bersaglio e causa LOCKED e PARALYSIS per 3 secondi."
+    "POWER_HUG": "Infliggi [40,80,SP] SPECIAL al bersaglio e causa LOCKED e PARALYSIS per 3 secondi.",
+    "MORTAL_SPIN": "Spingi via ogni Pokèmon adiacente che ha come bersaglio l'utilizzatore. Infliggi [20,30,40,SP] SPECIAL ad ogni nemico colpito e causa POISONNED per 4 secondi."
   },
   "effect": {
     "INGRAIN": "Radicamento",
@@ -2021,7 +2022,8 @@
     "TEAL_MASK": "Maschera Turchese",
     "WELLSPRING_MASK": "Maschera Pozzo",
     "CORNERSTONE_MASK": "Maschera Focolare",
-    "HEARTHFLAME_MASK": "Maschera Fondamenta"
+    "HEARTHFLAME_MASK": "Maschera Fondamenta",
+    "ZYGARDE_CUBE": "Teca Zygarde"
   },
   "item_description": {
     "FOSSIL_STONE": "Un fossile di un Pokémon vissuto in epoca preistorica",
@@ -2145,7 +2147,8 @@
     "TEAL_MASK": "Questa maschera scolpita nel legno è adornata da cristalli, ottieni 50 di SHIELD e permetti ad Ogerpon di avere la sinergia FIGHTING durante il combattimento.",
     "WELLSPRING_MASK": "Questa maschera scolpita nel legno è adornata da cristalli, ottieni 50 di SHIELD e permetti ad Ogerpon di avere la sinergia AQUATIC durante il combattimento.",
     "HEARTHFLAME_MASK": "Questa maschera scolpita nel legno è adornata da cristalli, ottieni 50 di SHIELD e permetti ad Ogerpon di avere la sinergia FIRE durante il combattimento.",
-    "CORNERSTONE_MASK": "Questa maschera scolpita nel legno è adornata da cristalli, ottieni 50 di SHIELD e permetti ad Ogerpon di avere la sinergia ROCK durante il combattimento."
+    "CORNERSTONE_MASK": "Questa maschera scolpita nel legno è adornata da cristalli, ottieni 50 di SHIELD e permetti ad Ogerpon di avere la sinergia ROCK durante il combattimento.",
+    "ZYGARDE_CUBE": "Contiene cellule del Pokèmon Equilibrio, Zygarde. Causa la trasformazione in una delle sue forme alternative."
   },
   "passive_description": {
     "NONE": "Nessuna passiva",
@@ -2273,7 +2276,10 @@
     "DARMANITAN_ZEN": "Non può più attaccare o muoversi, però curati di [15,SP] HP al secondo. Trasformati nello Stato Normale quando vieni curato completamente.",
     "BAD_LUCK": "Riduce la LUCK dei nemici del 20%.",
     "GOOD_LUCK": "Aumenta la LUCK di tutti gli alleati del 20%.",
-    "PRIMEAPE": "Primeape diventa più arrabbiato quando va KO, ottenendo 1 di ATK permanentemente. Dopo che Primeape è andato KO 10 volte, si evolve in Annihilape."
+    "PRIMEAPE": "Primeape diventa più arrabbiato quando va KO, ottenendo 1 di ATK permanentemente. Dopo che Primeape è andato KO 10 volte, si evolve in Annihilape.",
+    "ZYGARDE10": "Zygarde assorbirà le sue cellule, trasformandolo in un'altra forma. Una volta sotto il 30% di HP massimi, assorbirà tutte le sue cellule, tramutandosi nella sua forma completa.",
+    "ZYGARDE50": "Zygarde assorbirà le sue cellule, trasformandolo in un'altra forma. Una volta sotto il 30% di HP massimi, assorbirà tutte le sue cellule, tramutandosi nella sua forma completa.",
+    "GLIMMORA": "Una volta sotto il 50% di HP massimi, questa unità lancia davanti a sè delle Fielepunte in un rettangolo 2x3, infliggendo 20 danni. Le Fielepunte causano POISONNED a tutti i Pokèmon che ci camminano sopra, tranne ai tipi POISON."
   },
   "stat": {
     "ATK": "Attacco",
@@ -2729,6 +2735,9 @@
   "smeargle_scribble": "Scarabocchi di Smeargle",
   "smeargle_scribble_description": "Gioca per divertirti, non perdi/guadagni Elo!\nUna nuova regola speciale viene aggiunta alla partita.",
   "smeargle_scribble_hint": "Smeargle scarabocchia una nuova regola casuale che viene applicata per tutta la partita",
+  "no_rule": "Nessuna regola speciale",
+  "enable_scribble": "Abilità Scarabocchi di Smeargle",
+  "disable_scribble": "Disabilità Scarabocchi di Smeargle",
   "quick_play": "Unisciti ad una lobby",
   "quick_play_description": "La classica esperienza di PAC!\n8 giocatori, sistema Elo attivo, aperta a tutti.",
   "quick_play_hint": "La partita inizierà automaticamente quando 8 giocatori si uniranno",
@@ -2863,6 +2872,7 @@
   "snapshot": "Snapshot",
   "passive": "Passiva",
   "pick_additional_pokemon_hint": "Scegli un Pokèmon aggiuntivo. Sarà disponibile per tutti.",
+  "pick_first_partner_hint": "Seleziona il tuo starter. Ne otterrai una copia ogni livello fino al livello 10.",
   "free_slot_hint": "Devi avere uno slot libero in panchina o due per Duo",
   "hide": "Nascondi",
   "show": "Mostra",
@@ -3255,7 +3265,10 @@
     "KECLEONS_SHOP": "Negozio di Kecleon",
     "FREE_MARKET": "Mercato Gratis",
     "SHINY_HUNTER": "Cacciatore di Shiny",
-    "DESPERATE_MOVES": "Mosse Disperate"
+    "DESPERATE_MOVES": "Mosse Disperate",
+    "DO_IT_ALL_YOURSELF": "Arrangiati!",
+    "FIRST_PARTNER": "Primo Partner",
+    "SLAMINGO": "Buttafuori"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "Tutte i Pokèmon Addizionali sono disponibili immediatamente",
@@ -3272,7 +3285,10 @@
     "KECLEONS_SHOP": "I caroselli vengono sostituiti dal negozio di Kecleon, che propone 6 oggetti per 10 GOLD ognuno",
     "FREE_MARKET": "Pokèmon sono comprati e venduti per 0 GOLD",
     "SHINY_HUNTER": "Tutti i Pokèmon dei round  PvE saranno Shiny.",
-    "DESPERATE_MOVES": "I giocatori iniziano con 150 HP. Ricaricare il negozio costa HP invece che GOLD."
+    "DESPERATE_MOVES": "I giocatori iniziano con 150 HP. Ricaricare il negozio costa HP invece che GOLD.",
+    "DO_IT_ALL_YOURSELF": "Inizia con una copia del tuo avatar con +100 di HP massimi e più oro se il tuo avatar è di una rarità bassa.",
+    "FIRST_PARTNER": "Scegli il tuo Pokèmon starter. Ne otterrai una copia ogni livello fino al livello 10.",
+    "SLAMINGO": "Tutti gli oggetti vengono rimossi dal Pokèmon se viene messo in panchina. Inizia con 4 componenti casuali."
   },
   "loading_hints": {
     "tab_out": "Non cambiare finestra! Il caricamento è in pausa quando la finestra del browser è inattiva.",
