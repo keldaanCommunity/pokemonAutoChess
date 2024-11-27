@@ -1671,7 +1671,7 @@
     "THOUSAND_ARROWS": "发射33支攻击随机格子的能量箭，对击中的目标造成[60,SP]点SPECIAL。被击中的敌人还会陷入LOCKED 1秒。",
     "CORE_ENFORCER": "对目标造成[150,SP]点SPECIAL，并使其陷入LOCKED和SILENCE 3秒。",
     "POWER_HUG": "对目标造成[40,80,SP]点SPECIAL，并使其陷入LOCKED和PARALYSIS 3秒。",
-    "MORTAL_SPIN": "击退任何正在近战攻击使用者的近战宝可梦，对他们造成[20,30,40,SP]点SPECIAL，并使他们陷入POISONNED 4秒。"
+    "MORTAL_SPIN": "击退任何正在攻击使用者且与之距离不超过1的宝可梦，对他们造成[20,30,40,SP]点SPECIAL，并使他们陷入POISONNED 4秒。"
   },
   "effect": {
     "INGRAIN": "扎根",
