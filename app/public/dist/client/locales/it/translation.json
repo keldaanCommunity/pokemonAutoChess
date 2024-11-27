@@ -405,7 +405,13 @@
     "FREEZING_GLARE": "Sguardo Gelido",
     "THUNDEROUS_KICK": "Calcio Tonante",
     "FIERY_WRATH": "Furia Ardente",
-    "VISE_GRIP": "Presa"
+    "VISE_GRIP": "Presa",
+    "BURN_UP": "Ultima Fiamma",
+    "LANDS_WRATH": "Forza Tellurica",
+    "THOUSAND_ARROWS": "Mille Frecce",
+    "CORE_ENFORCER": "Nucleocastigo",
+    "POWER_HUG": "Abbraccio Morsa",
+    "MORTAL_SPIN": "Glitturbine"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1264,7 +1270,16 @@
     "DARMANITAN_ZEN": "Darmanitan (Zen)",
     "TURTONATOR": "Turtonator",
     "KRABBY": "Krabby",
-    "KINGLER": "Kingler"
+    "KINGLER": "Kingler",
+    "SIZZLIPEDE": "Sizzlipede",
+    "CENTISKORCH": "Centiskorch",
+    "ZYGARDE_10": "Zygarde (Forma 10%)",
+    "ZYGARDE_50": "Zygarde (Forma 50%)",
+    "ZYGARDE_100": "Zygarde (Forma Perfetta)",
+    "STUFFUL": "Stufful",
+    "BEWEAR": "Bewear",
+    "GLIMMET": "Glimmet",
+    "GLIMMORA": "Glimmora"
   },
   "ability_description": {
     "SOFT_BOILED": "Cura tutti gli effetti di stato e garantisce [20,40,80,SP] SHIELD ad ogni Pokèmon alleato",
@@ -1650,7 +1665,12 @@
     "FREEZING_GLARE": "Infliggi [20,40,80,SP] SPECIAL a tutti i nemici in linea retta, con il [50,LK]% di possibilità di causare FREEZE per 3 secondi.",
     "THUNDEROUS_KICK": "Il bersaglio viene scaraventato via. Tutti i nemici nella traiettoria e il bersaglio subiscono FLINCH per 4 secondi, perdono [5,SP]  di DEF e gli vengono inflitti [20,40,60,SP] PHYSICAL.",
     "FIERY_WRATH": "Infligge [40,SP] SPECIAL a tutti i Pokèmon nemici, con il [50,LK]% di possibilità di causare FLINCH per 4 secondi.",
-    "VISE_GRIP": "Afferra il bersaglio con delle potenti chele, infliggendo [30,60,100,SP] SPECIAL al bersaglio. Sia l'utilizzatore che il bersaglio subiscono LOCKED per 4 secondi."
+    "VISE_GRIP": "Afferra il bersaglio con delle potenti chele, infliggendo [30,60,100,SP] SPECIAL al bersaglio. Sia l'utilizzatore che il bersaglio subiscono LOCKED per 4 secondi.",
+    "BURN_UP": "Causa a se stesso BURN per 3 secondi per infliggere [50,100,200,SP] SPECIAL.",
+    "LANDS_WRATH": "La terra esplode, infliggendo 40 + [100,SP]% dell'ATK come PHYSICAL al bersaglio ed ai nemici adiacenti, inoltre diminuisce la loro DEF e SPE_DEF di [4,SP=0.5].",
+    "THOUSAND_ARROWS": "33 frecce d'energia piombano su spazi casuali, infliggendo ognuna [60,SP] SPECIAL. Tutti i nemici colpiti subiscono LOCKED per 1 secondo.",
+    "CORE_ENFORCER": "Infliggi [150,SP] SPECIAL al bersaglio e causa LOCKED e SILENCE per 3 secondi.",
+    "POWER_HUG": "Infliggi [40,80,SP] SPECIAL al bersaglio e causa LOCKED e PARALYSIS per 3 secondi."
   },
   "effect": {
     "INGRAIN": "Radicamento",
