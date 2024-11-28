@@ -47,6 +47,7 @@ Gen 1 is now complete !
 - Nerf Grassy Surge (Tapu Bulu): 5 → 4 attack
 - Buff Shuckle: Def/SpeDef: 15 → 20
 - Buff Larversta line: Attack 10/20 → 12/24
+- Buff Screech (Kricketot): reduce defense of enemies in a ~~1-range~~ 2-range area around
 
 # Changes to Synergies
 

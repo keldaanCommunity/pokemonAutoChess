@@ -1532,7 +1532,7 @@
     "NIGHT_SHADE": "Deal [25,33,50,SP=0.5]% of target's max HP as TRUE.",
     "CHARGE_BEAM": "Fire a concentrated bundle of electricity that propagates to a maximum of 3 adjacent enemy Pokémon, dealing [15,30,60,SP] SPECIAL to each.",
     "POPULATION_BOMB": "Deal 10 SPECIAL [4,8,12,16,SP] times to the target.",
-    "SCREECH": "Reduce DEF of all adjacent enemy Pokémon by [1,2,4,SP].",
+    "SCREECH": "Reduce DEF of all enemies in a 2-range radius by [1,2,4,SP].",
     "SAND_TOMB": "Deal [10,20,40,SP] SPECIAL to the target and inflict them with SILENCE and PARALYSIS for [3,5,8] seconds.",
     "WHIRLWIND": "Deal [40,80,120,SP] SPECIAL to the target and make them fly away.",
     "EMPTY_LIGHT": "Spit poison directly at an enemy Pokémon, dealing [33,SP] SPECIAL and reducing their SPE_DEF by 3. The ability then rebounds to another adjacent enemy (5 bounces max).",

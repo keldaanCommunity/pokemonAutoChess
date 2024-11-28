@@ -245,6 +245,7 @@ export default class Board {
   }
 
   getCellsInRadius(cellX: number, cellY: number, radius: number) {
+    // see https://i.imgur.com/jPzf35e.png
     const cells = new Array<Cell>()
     radius = Math.floor(Math.abs(radius)) + 0.5
     const radiusSquared = radius * radius

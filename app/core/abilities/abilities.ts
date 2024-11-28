@@ -7012,11 +7012,11 @@ export class ScreechStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const debuff = pokemon.stars === 3 ? -4 : pokemon.stars === 2 ? -2 : -1
-    const cells = board.getAdjacentCells(
+    const debuff = [-1, -2, -4][pokemon.stars - 1] ?? -4
+    const cells = board.getCellsInRadius(
       pokemon.positionX,
       pokemon.positionY,
-      true
+      2
     )
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
