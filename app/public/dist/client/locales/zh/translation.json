@@ -410,7 +410,8 @@
     "LANDS_WRATH": "大地神力",
     "THOUSAND_ARROWS": "千箭齐发",
     "CORE_ENFORCER": "核心惩罚者",
-    "POWER_HUG": "强力拥抱"
+    "POWER_HUG": "强力拥抱",
+    "MORTAL_SPIN": "晶光转转"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -969,7 +970,7 @@
     "ARBOK": "阿柏怪",
     "MIME_JR": "魔尼尼",
     "MR_MIME": "魔墙人偶",
-    "ORIGIN_GIRATINA": "原始骑拉帝纳",
+    "ORIGIN_GIRATINA": "骑拉帝纳（起源形态）",
     "PIROUETTE_MELOETTA": "美洛耶塔（舞步形态）",
     "MELMETAL": "美录梅塔",
     "HOOPA": "胡帕",
@@ -1276,7 +1277,9 @@
     "ZYGARDE_50": "基格尔德（50%形态）",
     "ZYGARDE_100": "基格尔德（完全体形态）",
     "STUFFUL": "童偶熊",
-    "BEWEAR": "穿着熊"
+    "BEWEAR": "穿着熊",
+    "GLIMMET": "晶光芽",
+    "GLIMMORA": "晶光花"
   },
   "ability_description": {
     "SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1667,7 +1670,8 @@
     "LANDS_WRATH": "大地破裂，对目标和相邻敌方宝可梦造成PHYSICAL，数值相当于[100,SP]%的ATK加40，然后降低他们[4,SP=0.5]点 DEF和SPE_DEF。",
     "THOUSAND_ARROWS": "发射33支攻击随机格子的能量箭，对击中的目标造成[60,SP]点SPECIAL。被击中的敌人还会陷入LOCKED 1秒。",
     "CORE_ENFORCER": "对目标造成[150,SP]点SPECIAL，并使其陷入LOCKED和SILENCE 3秒。",
-    "POWER_HUG": "对目标造成[40,80,SP]点SPECIAL，并使其陷入LOCKED和PARALYSIS 3秒。"
+    "POWER_HUG": "对目标造成[40,80,SP]点SPECIAL，并使其陷入LOCKED和PARALYSIS 3秒。",
+    "MORTAL_SPIN": "击退任何正在攻击使用者且与之距离不超过1的宝可梦，对他们造成[20,30,40,SP]点SPECIAL，并使他们陷入POISONNED 4秒。"
   },
   "effect": {
     "INGRAIN": "扎根",
@@ -2280,7 +2284,8 @@
     "GOOD_LUCK": "提升所有我方宝可梦20%的LUCK。",
     "PRIMEAPE": "火爆猴每次被击倒都会变得更愤怒，永久提升1点ATK。被击倒10次后进化为弃世猴。",
     "ZYGARDE10": "基格尔德能够吸收细胞进行变形。在HP低于最大值的30%时，他会吸收全部细胞，变形为完全体形态。",
-    "ZYGARDE50": "基格尔德能够吸收细胞进行变形。在HP低于最大值的30%时，他会吸收全部细胞，变形为完全体形态。"
+    "ZYGARDE50": "基格尔德能够吸收细胞进行变形。在HP低于最大值的30%时，他会吸收全部细胞，变形为完全体形态。",
+    "GLIMMORA": "HP首次低于最大值的50%时，此宝可梦会向前方2x3的矩形投放毒菱，造成20点伤害。毒菱使走到其上的非POISON宝可梦陷入POISONNED。"
   },
   "stat": {
     "ATK": "攻击",
@@ -2839,7 +2844,7 @@
   "lose_game_hint": "当你生命值归零后，你就输掉了本场游戏",
   "unlock": "解锁",
   "lock": "锁定",
-  "current_shop_for_next_turn": "下一回合商店预告",
+  "current_shop_for_next_turn": "当前商店至下回合开始",
   "leave_game": "离开游戏",
   "leave_room": "离开房间",
   "passive_income_hint": "每轮结束后，获得5 GOLD，胜利的情况下额外奖励1 GOLD。",
