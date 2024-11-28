@@ -11181,7 +11181,7 @@ export class Koffing extends Pokemon {
   atk = 5
   def = 3
   speDef = 3
-  maxPP = 40
+  maxPP = 60
   range = 1
   skill = Ability.SMOG
   additional = true
@@ -11200,7 +11200,7 @@ export class Weezing extends Pokemon {
   atk = 10
   def = 5
   speDef = 5
-  maxPP = 40
+  maxPP = 60
   range = 1
   skill = Ability.SMOG
   additional = true

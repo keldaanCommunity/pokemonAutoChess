@@ -42,6 +42,7 @@ Gen 1 is now complete !
 - Sableye and Mega-Sableye: removed Rock synergy
 - Buff Kangashkan: PP 100 → 90
 - Buff Granbull: Attack 24 → 28
+- Nerf Weezing line PP 40 → 60
 
 # Changes to Synergies
 
