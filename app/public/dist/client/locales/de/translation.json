@@ -1355,7 +1355,7 @@
     "FAKE_TEARS": "Fügt dem gesamten gegnerischen Team [3,6,9,SP] SPECIAL zu und löst 3 Sekunden lang ARMOR_REDUCTION aus",
     "SPARKLING_ARIA": "Fügt dem Ziel und angrenzenden Feinden [15,30,60,SP] SPECIAL zu. Wenn benachbarte Verbündete BURN, wird die Verbrennung geheilt.",
     "DRAGON_DARTS": "Wirft 3 Pfeile, die dem Ziel jeweils [10,20,40,SP] SPECIAL zufügen. Wenn das Ziel stirbt, erhältst du 40 PP zurück.",
-    "GRASSY_SURGE": "Erhöhe die ATK aller GRASS Pokémon um [5,SP]",
+    "GRASSY_SURGE": "Erhöhe die ATK aller GRASS Pokémon um [4,SP]",
     "MISTY_SURGE": "Alle FAIRY Verbündeten erholen sich von [30,SP] HP und [30,SP] PP.",
     "SKY_ATTACK": "Erhebt sich in die Luft und fällt nach einer Sekunde auf das am weitesten entfernte Ziel und verursacht [120,SP] SPECIAL",
     "SKY_ATTACK_SHADOW": "Steigt in die Luft und fällt nach einer Sekunde auf das am weitesten entfernte Ziel und verursacht [120,SP] SPECIAL. Kann standardmäßig kritisch treffen.",

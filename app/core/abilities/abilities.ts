@@ -670,7 +670,7 @@ export class GrassySurgeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const buff = 5
+    const buff = 4
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team && ally.types.has(Synergy.GRASS)) {
         ally.addAttack(buff, pokemon, 1, crit)

@@ -44,6 +44,7 @@ Gen 1 is now complete !
 - Buff Granbull: Attack 24 → 28
 - Nerf Weezing line: PP 40 → 60
 - Nerf Psycho Shift (Sigilyph): 70 → 60 special damage
+- Nerf Grassy Surge (Tapu Bulu): 5 → 4 attack
 
 # Changes to Synergies
 

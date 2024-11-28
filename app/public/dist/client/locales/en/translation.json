@@ -1406,7 +1406,7 @@
     "FAKE_TEARS": "Deal [3,6,9,SP] SPECIAL to all enemy Pokémon and inflict them with ARMOR_REDUCTION for 3 seconds.",
     "SPARKLING_ARIA": "Deal [15,30,60,SP] SPECIAL to the target and adjacent enemy Pokémon. Cure BURN from all adjacent allied Pokémon.",
     "DRAGON_DARTS": "Throw 3 darts that deals [10,20,40,SP] SPECIAL each to the target. If the target is KO'd, restore 40 PP.",
-    "GRASSY_SURGE": "Increase ATK of all GRASS Pokémon by [5,SP].",
+    "GRASSY_SURGE": "Increase ATK of all GRASS Pokémon by [4,SP].",
     "MISTY_SURGE": "Restore [30,SP] HP and [30,SP] PP to all allied FAIRY Pokémon other than the user.",
     "SKY_ATTACK": "Rise in the air and fall on the farthest target after 1 second, dealing [120,SP] SPECIAL.",
     "SKY_ATTACK_SHADOW": "Rise in the air and fall on the farthest target after 1 second, dealing [120,SP] SPECIAL. Can crit by default.",
