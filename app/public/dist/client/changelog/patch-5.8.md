@@ -46,6 +46,7 @@ Gen 1 is now complete !
 - Nerf Psycho Shift (Sigilyph): 70 → 60 special damage
 - Nerf Grassy Surge (Tapu Bulu): 5 → 4 attack
 - Buff Shuckle: Def/SpeDef: 15 → 20
+- Buff Larversta line: Attack 10/20 → 12/24
 
 # Changes to Synergies
 

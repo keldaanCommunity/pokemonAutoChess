@@ -5547,7 +5547,7 @@ export class Larvesta extends Pokemon {
   stars = 1
   evolution = Pkm.VOLCARONA
   hp = 100
-  atk = 10
+  atk = 12
   def = 2
   speDef = 2
   maxPP = 100
@@ -5562,7 +5562,7 @@ export class Volcarona extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 200
-  atk = 20
+  atk = 24
   def = 2
   speDef = 2
   maxPP = 100
