@@ -1634,7 +1634,7 @@
     "STEEL_WING": "Saute vers la ligne arrière adverse, infligeant [10,20,40,SP] SPECIAL + 3x DEF en SPECIAL et volant 1 DEF à tous les adversaires touchés.",
     "YAWN": "Gagne [10,20,40,SP] SHIELD. Les adversaires qui ciblent le lanceur subissent FATIGUE pendant 4 secondes et perdent 30% AP.",
     "FIERY_DANCE": "Enveloppé de flammes, le lanceur danse et bat des ailes, infligeant [25,50,100,SP] SPECIAL à la cible. Augmente ensuite la AP du lanceur de 30.",
-    "BIDE": "Le lanceur est incapable de bouger pendant 3 secondes, puis inflige en SPECIAL aux adversaires adjacents le double des dégâts reçus pendant ce délai.",
+    "BIDE": "Le lanceur est incapable de bouger pendant 3 secondes, puis inflige en SPECIAL aux adversaires adjacents [200,SP]% des dégâts reçus pendant ce délai.",
     "SHORE_UP": "Soigne le lanceur de [20,25,SP]% des HP max. Si la météo est SANDSTORM, le soin augmente à [30,35,SP]% des HP max.",
     "POISON_STING": "Inflige [2,3,4] cumuls de POISONNED à la cible. Chaque cumul au delà du maximum inflige immédiatement [25,50,100,SP] SPECIAL.",
     "TRANSE": "Sort de sa méditation et recommence à attaquer et se déplacer, mais ne se soigne plus passivement.",

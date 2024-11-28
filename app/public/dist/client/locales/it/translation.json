@@ -1656,7 +1656,7 @@
     "STEEL_WING": "Scatta verso le retrovie nemiche, infliggendo [10,20,40,SP] SPECIAL + 3 volte la DEF come SPECIAL e ruba 1 di DEF a tutti i Pokèmon nemici colpiti nella traiettoria.",
     "YAWN": "Ottieni [10,20,40,SP] SHIELD. Gli avversari che bersagliano questa unità subiscono FATIGUE per 4 secondi e perdono il 30% di AP.",
     "FIERY_DANCE": "Avvolto dalle fiamme, l'utilizzatore danza e muove le sue ali infliggendo [25,50,100,SP] SPECIAL to the target. Aumenta gli AP dell'utilizzatore di 30.",
-    "BIDE": "L'utilizzatore non può muoversi per 3 secondi. Pazienza farà SPECIAL ai nemici attorno all'utilizzatore pari al doppio del danno subito durante il periodo in cui non poteva muoversi.",
+    "BIDE": "L'utilizzatore non può muoversi per 3 secondi. Pazienza farà SPECIAL ai nemici attorno all'utilizzatore pari [200,SP]% del danno subito durante il periodo in cui non poteva muoversi.",
     "SHORE_UP": "Cura l'utilizzatore del [20,25,SP] % dei HP. Se il meteo è SANDSTORM, aumenta la cura al [30,35,SP] % dei HP.",
     "POISON_STING": "Infliggi [2,3,4] istanze di POISONNED al bersaglio. Ogni istanza sopra al massimo infligge immediatamente [25,50,100,SP] SPECIAL.",
     "TRANSE": "Comincia a muoversi ed attaccare di nuovo, ma smette di curarsi passivamente.",
