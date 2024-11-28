@@ -11,6 +11,7 @@ import Game from "./pages/game"
 import Lobby from "./pages/lobby"
 import Preparation from "./pages/preparation"
 import { SpriteDebug } from "./pages/sprite-viewer"
+import { Gameboy } from "./pages/gameboy"
 import { loadPreferences } from "./preferences"
 import store from "./stores/index"
 
@@ -36,6 +37,7 @@ root.render(
             <Route path="/bot-admin" element={<BotManagerPanel />} />
             <Route path="/sprite-viewer" element={<SpriteDebug />} />
             <Route path="/map-viewer" element={<MapViewer />} />
+            <Route path="/gameboy" element={<Gameboy />} />
           </Routes>
         </BrowserRouter>
       </Suspense>

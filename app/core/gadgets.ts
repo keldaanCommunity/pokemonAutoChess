@@ -44,10 +44,18 @@ const BOT_BUILDER: Gadget = {
   disabled: !BOTS_ENABLED
 }
 
+const GAMEBOY: Gadget = {
+  name: "gadget.gameboy",
+  description: "gadget.gameboy_desc",
+  icon: "gameboy",
+  levelRequired: 30
+}
+
 export const GADGETS = {
   TRAINER_CARD,
   BAG,
   TEAM_PLANNER,
   JUKEBOX,
-  BOT_BUILDER
+  BOT_BUILDER,
+  GAMEBOY
 } as const

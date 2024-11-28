@@ -172,6 +172,12 @@ export function MainSidebar(props: MainSidebarProps) {
           </NavLink>
         )}
 
+        {page !== "game" && ((!GADGETS.GAMEBOY.disabled && profileLevel >= GADGETS.GAMEBOY.levelRequired) || profile?.role === Role.ADMIN) && (
+          <NavLink svg="gameboy" onClick={() => navigate("/gameboy")}>
+            {t("gadget.gameboy")}
+          </NavLink>
+        )}
+
         {page !== "game" && profile?.role === Role.ADMIN && (
           <>
             <NavLink
