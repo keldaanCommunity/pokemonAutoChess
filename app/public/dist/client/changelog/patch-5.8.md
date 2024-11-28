@@ -42,7 +42,8 @@ Gen 1 is now complete !
 - Sableye and Mega-Sableye: removed Rock synergy
 - Buff Kangashkan: PP 100 → 90
 - Buff Granbull: Attack 24 → 28
-- Nerf Weezing line PP 40 → 60
+- Nerf Weezing line: PP 40 → 60
+- Nerf Psycho Shift (Sigilyph): 70 → 60 special damage
 
 # Changes to Synergies
 

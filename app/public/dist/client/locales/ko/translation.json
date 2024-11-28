@@ -1616,7 +1616,7 @@
     "CHARM": "대상에게 3초 동안 CHARM 을 부여하고 ATK 을 [2,3,4,SP] 낮춥니다. (최소 1)",
     "ENTRAINMENT": "이상한 리듬에 춤을 춰 [10,SP]PP를 회복하고 대상의 기술을 동료만들기로 교체한다. 대상의 기술이 이미 교체되었다면 근처의 다른 적에게 시전한다.",
     "OKTZOOKA": "시전자의 ATK 의 [150,SP]% 를 SPECIAL 로 가하는 투사체를 발사하고 대상의 명중률을 낮추는 먹물 구름을 남긴다.",
-    "PSYCHO_SHIFT": "가장 먼 적과 대상의 위치를 바꾸고 둘 다에게 [70,SP] SPECIAL 를 입힌다.",
+    "PSYCHO_SHIFT": "가장 먼 적과 대상의 위치를 바꾸고 둘 다에게 [60,SP] SPECIAL 를 입힌다.",
     "GLAIVE_RUSH": "시전자가 무모하게 돌진한다. 대상의 후방으로 이동하여 [40,80,150,SP]의 PHYSICAL 를 입히고 6초 동안 자신에게 ARMOR_REDUCTION을 부여한다.",
     "FOUL_PLAY": "대상 ATK 의 [2,4,6,SP] 배만큼 SPECIAL 를 가한다.",
     "DOUBLE_IRON_BASH": "시전자가 회전하여 ATK 의 [150,SP]% 를 두 번 가격한다. 대상은 3초 동안 FLINCH 이 된다.",

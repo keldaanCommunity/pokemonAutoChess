@@ -1642,7 +1642,7 @@
     "CHARM": "Infliggi CHARM al bersaglio per 3 secondi, e riducigli l'ATK di [2,3,4,SP] (minimo 1)",
     "ENTRAINMENT": "Danza ad un ritmo strambo, recuperando [10,SP] PP e forzando il bersaglio ad imitarti, di conseguenza sostituisci la sua abilità con Saltamicizia. Se il bersaglio ha già questa abilità, bersaglia un altro nemico vicino.",
     "OKTZOOKA": "Spara un proiettile che infligge il [150,SP]% dell'ATK dell'utilizzatore come SPECIAL e lasca una nuvola di inchiostro che riduce la precisione del bersaglio",
-    "PSYCHO_SHIFT": "Scambia posizione del bersaglio e il nemico più lontano, infliggendo ad entrambi [70,SP] SPECIAL.",
+    "PSYCHO_SHIFT": "Scambia posizione del bersaglio e il nemico più lontano, infliggendo ad entrambi [60,SP] SPECIAL.",
     "GLAIVE_RUSH": "L'utilizzatore si butta di corpo in una carica molto rischiosa. Scatta verso il bersaglio, infliggendo [40,80,150,SP] PHYSICAL e causa a se stesso ARMOR_REDUCTION per 6 secondi.",
     "FOUL_PLAY": "Infliggi [2,4,6,SP] SPECIAL moltiplicati per l' ATK del bersaglio",
     "DOUBLE_IRON_BASH": "L'utilizzatore rotea su sè stesso, poi colpisce con le sue braccia due volte infliggendo il [150,SP] % del suo ATK entrambe le volte. Causa al bersaglio FLINCH per 3 secondi.",

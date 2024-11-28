@@ -48,7 +48,11 @@ import { Weather } from "../../types/enum/Weather"
 import { createRandomEgg } from "../../models/egg-factory"
 import PokemonFactory from "../../models/pokemon-factory"
 import Board, { Cell } from "../board"
-import { PokemonEntity, getStrongestUnit, getUnitScore } from "../pokemon-entity"
+import {
+  PokemonEntity,
+  getStrongestUnit,
+  getUnitScore
+} from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 
 import { t } from "i18next"
@@ -5523,7 +5527,7 @@ export class FellStingerStrategy extends AbilityStrategy {
       pokemon.addAbilityPower(5, pokemon, 0, false)
       pokemon.addAttack(1, pokemon, 0, false)
       pokemon.addMaxHP(10, pokemon, 0, false)
-      if(!pokemon.isGhostOpponent){
+      if (!pokemon.isGhostOpponent) {
         pokemon.refToBoardPokemon.atk += 1
         pokemon.refToBoardPokemon.ap += 5
         pokemon.refToBoardPokemon.hp += 10
@@ -7454,7 +7458,7 @@ export class OutrageStrategy extends AbilityStrategy {
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .map((v) => v.value)
-      .filter((v) => (v?.team === target.team) && (v?.id !== target.id))
+      .filter((v) => v?.team === target.team && v?.id !== target.id)
       .concat(target)
       .forEach((v) => {
         if (v) {
@@ -9129,8 +9133,11 @@ export class TorchSongStrategy extends AbilityStrategy {
         targetX: enemy.positionX,
         targetY: enemy.positionY
       })
-      const cells = board
-        .getAdjacentCells(enemy.positionX, enemy.positionY, true)
+      const cells = board.getAdjacentCells(
+        enemy.positionX,
+        enemy.positionY,
+        true
+      )
       cells.forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
           pokemon.simulation.room.broadcast(Transfer.ABILITY, {
@@ -10004,7 +10011,7 @@ export class PsychoShiftStrategy extends AbilityStrategy {
       farthestEnnemy.moveTo(target.positionX, target.positionY, board)
       target.moveTo(x, y, board)
       farthestEnnemy.handleSpecialDamage(
-        70,
+        60,
         board,
         AttackType.SPECIAL,
         pokemon,
@@ -10012,7 +10019,7 @@ export class PsychoShiftStrategy extends AbilityStrategy {
       )
     }
 
-    target.handleSpecialDamage(70, board, AttackType.SPECIAL, pokemon, crit)
+    target.handleSpecialDamage(60, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 
@@ -10775,44 +10782,47 @@ export class MortalSpinStrategy extends AbilityStrategy {
     const damage = [20, 30, 40][pokemon.stars - 1] ?? 40
 
     const cells = board.getAdjacentCells(
-      pokemon.positionX, 
-      pokemon.positionY, 
+      pokemon.positionX,
+      pokemon.positionY,
       false
     )
-    
+
     // Find all enemies targeting this unit
     cells.forEach((cell) => {
-      if (
-        cell.value && 
-        cell.value.team !== pokemon.team
-      ) {
+      if (cell.value && cell.value.team !== pokemon.team) {
         let abilityTarget = cell.value
-        
+
         let enemyTarget = board.getValue(
-          abilityTarget.targetX, 
+          abilityTarget.targetX,
           abilityTarget.targetY
         )
 
         if (enemyTarget === pokemon) {
-
-          abilityTarget.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+          abilityTarget.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
           abilityTarget.status.triggerPoison(4000, abilityTarget, pokemon)
-          
+
           // Push targets back 1 tile
           let newY = -1
-          if (pokemon.team === Team.BLUE_TEAM &&
+          if (
+            pokemon.team === Team.BLUE_TEAM &&
             abilityTarget.positionY + 1 < BOARD_HEIGHT
           ) {
             newY = abilityTarget.positionY + 1
           } else if (abilityTarget.positionY - 1 > 0) {
             newY = abilityTarget.positionY - 1
           }
-          
+
           if (
             newY !== -1 &&
             board.getValue(
-              abilityTarget.positionX, 
-              abilityTarget.positionY + 1 
+              abilityTarget.positionX,
+              abilityTarget.positionY + 1
             ) === undefined
           ) {
             abilityTarget.moveTo(abilityTarget.positionX, newY, board)
