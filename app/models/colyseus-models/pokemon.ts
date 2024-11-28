@@ -10806,8 +10806,8 @@ export class Shuckle extends Pokemon {
   stars = 3
   hp = 150
   atk = 4
-  def = 15
-  speDef = 15
+  def = 20
+  speDef = 20
   maxPP = 100
   range = 1
   skill = Ability.BIDE
