@@ -48,6 +48,7 @@ Gen 1 is now complete !
 - Buff Shuckle: Def/SpeDef: 15 → 20
 - Buff Larversta line: Attack 10/20 → 12/24
 - Buff Screech (Kricketot): reduce defense of enemies in a ~~1-range~~ 2-range area around
+- Nerf Yawn (Slowpoke): Fatigue duration 4 → 3 seconds, AP reduction 30% → 20%
 
 # Changes to Synergies
 
