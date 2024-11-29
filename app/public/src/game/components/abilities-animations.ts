@@ -2832,6 +2832,10 @@ export function displayAbility(
       addAbilitySprite(Ability.EARTHQUAKE, coordinates, true).setScale(2)
       break
 
+    case Ability.METAL_CLAW:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
     default:
       break
   }
