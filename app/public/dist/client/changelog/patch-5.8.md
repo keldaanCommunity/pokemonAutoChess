@@ -42,6 +42,15 @@ Gen 1 is now complete !
 - Sableye and Mega-Sableye: removed Rock synergy
 - Buff Kangashkan: PP 100 → 90
 - Buff Granbull: Attack 24 → 28
+- Nerf Weezing line: PP 40 → 60
+- Nerf Psycho Shift (Sigilyph): 70 → 60 special damage
+- Nerf Grassy Surge (Tapu Bulu): 5 → 4 attack
+- Buff Shuckle: Def/SpeDef: 15 → 20
+- Buff Larversta line: Attack 10/20 → 12/24
+- Buff Screech (Kricketot): reduce defense of enemies in a ~~1-range~~ 2-range area around
+- Nerf Yawn (Slowpoke): Fatigue duration 4 → 3 seconds, AP reduction 30% → 20%
+- New ability for Piplup line: Metal Claw: Deal 10/20/40 true damage and raise Attack by 2/4/6
+- Nerf Fairy Wind (Flabébé): AP Scaling 1 → 0.5
 
 # Changes to Synergies
 

@@ -3465,7 +3465,7 @@ export class Piplup extends Pokemon {
   speDef = 3
   maxPP = 100
   range = 1
-  skill = Ability.IRON_TAIL
+  skill = Ability.METAL_CLAW
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -3480,7 +3480,7 @@ export class Prinplup extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.IRON_TAIL
+  skill = Ability.METAL_CLAW
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -3494,7 +3494,7 @@ export class Empoleon extends Pokemon {
   speDef = 5
   maxPP = 100
   range = 1
-  skill = Ability.IRON_TAIL
+  skill = Ability.METAL_CLAW
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -5547,7 +5547,7 @@ export class Larvesta extends Pokemon {
   stars = 1
   evolution = Pkm.VOLCARONA
   hp = 100
-  atk = 10
+  atk = 12
   def = 2
   speDef = 2
   maxPP = 100
@@ -5562,7 +5562,7 @@ export class Volcarona extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 200
-  atk = 20
+  atk = 24
   def = 2
   speDef = 2
   maxPP = 100
@@ -10806,8 +10806,8 @@ export class Shuckle extends Pokemon {
   stars = 3
   hp = 150
   atk = 4
-  def = 15
-  speDef = 15
+  def = 20
+  speDef = 20
   maxPP = 100
   range = 1
   skill = Ability.BIDE
@@ -11181,7 +11181,7 @@ export class Koffing extends Pokemon {
   atk = 5
   def = 3
   speDef = 3
-  maxPP = 40
+  maxPP = 60
   range = 1
   skill = Ability.SMOG
   additional = true
@@ -11200,7 +11200,7 @@ export class Weezing extends Pokemon {
   atk = 10
   def = 5
   speDef = 5
-  maxPP = 40
+  maxPP = 60
   range = 1
   skill = Ability.SMOG
   additional = true
