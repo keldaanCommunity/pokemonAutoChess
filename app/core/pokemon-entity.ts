@@ -325,8 +325,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         !attacker.items.has(Item.PROTECTIVE_PADS) &&
         attackType === AttackType.SPECIAL
       ) {
+        const damageAfterReduction = damage / (1 + ARMOR_FACTOR * this.speDef)
+        const damageBlocked = min(0)(specialDamage - damageAfterReduction)
         attacker.handleDamage({
-          damage: Math.round(specialDamage / (1 + ARMOR_FACTOR * this.speDef)),
+          damage: Math.round(damageBlocked),
           board,
           attackType: AttackType.SPECIAL,
           attacker: this,
@@ -1281,14 +1283,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.maxPP = 120
     }
 
-    if (
-      this.passive === Passive.GLIMMORA &&
-      this.life < 0.5 * this.hp
-    ) {
+    if (this.passive === Passive.GLIMMORA && this.life < 0.5 * this.hp) {
       this.passive = Passive.NONE
 
       const cells = new Array<Cell>()
-      
+
       let startY = 1
       let endY = 3
       if (this.team === Team.RED_TEAM) {
@@ -1298,28 +1297,34 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
       for (let x = -1; x < 2; x++) {
         for (let y = startY; y < endY; y++) {
-
           if (
-            !(this.positionX + x < 0 ||
-            this.positionX + x > BOARD_WIDTH ||
-            this.positionY + y < 0 ||
-            this.positionY + y > BOARD_HEIGHT
-          )) {
-
-            cells.push(
-              {
-                x: this.positionX + x, 
-                y: this.positionY + y, 
-                value: board.cells[board.columns * this.positionY + y + this.positionX + x]
-              }
+            !(
+              this.positionX + x < 0 ||
+              this.positionX + x > BOARD_WIDTH ||
+              this.positionY + y < 0 ||
+              this.positionY + y > BOARD_HEIGHT
             )
+          ) {
+            cells.push({
+              x: this.positionX + x,
+              y: this.positionY + y,
+              value:
+                board.cells[
+                  board.columns * this.positionY + y + this.positionX + x
+                ]
+            })
           }
         }
       }
-      
+
       cells.forEach((cell) => {
-        board.addBoardEffect(cell.x, cell.y, Effect.TOXIC_SPIKES, this.simulation)
-  
+        board.addBoardEffect(
+          cell.x,
+          cell.y,
+          Effect.TOXIC_SPIKES,
+          this.simulation
+        )
+
         this.simulation.room.broadcast(Transfer.ABILITY, {
           id: this.simulation.id,
           skill: "TOXIC_SPIKES",
@@ -1328,7 +1333,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           targetX: cell.x,
           targetY: cell.y
         })
-  
+
         if (cell.value && cell.value.team !== this.team) {
           cell.value.handleSpecialDamage(
             20,

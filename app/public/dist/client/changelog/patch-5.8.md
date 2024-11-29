@@ -58,6 +58,7 @@ Gen 1 is now complete !
 
 # Changes to Items
 
+- Fix Power lens damage computation formula and clarified item description. The more special defense the holder has, the more damage it deals.
 - Repeat Ball now also take into account automatic shop rerolls after each stage. Raised the number of rerolls required to get Unique/Legendary
 
 # Bugfix
