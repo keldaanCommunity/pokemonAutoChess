@@ -49,6 +49,7 @@ import Dps from "./dps"
 import { PokemonEntity, getStrongestUnit, getUnitScore } from "./pokemon-entity"
 import { DelayedCommand } from "./simulation-command"
 import { getAvatarString } from "../utils/avatar"
+import { max } from "../utils/number"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -1230,7 +1231,7 @@ export default class Simulation extends Schema implements ISimulation {
         case Effect.GOOGLE_SPECS:
           if (types.has(Synergy.ARTIFICIAL) && pokemon.items.size > 0) {
             const nbItems =
-              pokemon.items.size + (pokemon.items.has(Item.WONDER_BOX) ? 1 : 0)
+              max(3)(pokemon.items.size + (pokemon.items.has(Item.WONDER_BOX) ? 1 : 0))
             const attackBoost = {
               [Effect.DUBIOUS_DISC]: 0,
               [Effect.LINK_CABLE]: (8 / 100) * pokemon.baseAtk,
