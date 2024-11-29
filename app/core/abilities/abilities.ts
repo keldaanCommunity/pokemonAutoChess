@@ -10790,9 +10790,9 @@ export class MortalSpinStrategy extends AbilityStrategy {
     // Find all enemies targeting this unit
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
-        let abilityTarget = cell.value
+        const abilityTarget = cell.value
 
-        let enemyTarget = board.getValue(
+        const enemyTarget = board.getValue(
           abilityTarget.targetX,
           abilityTarget.targetY
         )
@@ -10831,6 +10831,22 @@ export class MortalSpinStrategy extends AbilityStrategy {
         }
       }
     })
+  }
+}
+
+export class MetalClawStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
+    const atkBuff = [2, 4, 6][pokemon.stars - 1] ?? 6
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
+    pokemon.addAttack(atkBuff, pokemon, 1, crit)
   }
 }
 
@@ -11227,5 +11243,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.CORE_ENFORCER]: new CoreEnforcerStrategy(),
   [Ability.BURN_UP]: new BurnUpStrategy(),
   [Ability.POWER_HUG]: new PowerHugStrategy(),
-  [Ability.MORTAL_SPIN]: new MortalSpinStrategy()
+  [Ability.MORTAL_SPIN]: new MortalSpinStrategy(),
+  [Ability.METAL_CLAW]: new MetalClawStrategy()
 }

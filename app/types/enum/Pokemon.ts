@@ -3393,17 +3393,17 @@ export const AnimationConfig: {
   },
   [Pkm.PIPLUP]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Swing,
+    ability: AnimationType.Strike,
     emote: AnimationType.Shoot
   },
   [Pkm.PRINPLUP]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Swing,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.EMPOLEON]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Swing,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.NIDORANF]: {

@@ -411,7 +411,8 @@
     "THOUSAND_ARROWS": "Thousand Arrows",
     "CORE_ENFORCER": "Core Enforcer",
     "POWER_HUG": "Power Hug",
-    "MORTAL_SPIN": "Mortal Spin"
+    "MORTAL_SPIN": "Mortal Spin",
+    "METAL_CLAW": "Metal Claw"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1671,7 +1672,8 @@
     "THOUSAND_ARROWS": "33 energy arrows rain down on random tiles, dealing [60,SP] SPECIAL each. All enemies hit are LOCKED for 1 second.",
     "CORE_ENFORCER": "Deal [150,SP] SPECIAL to the target. The target is LOCKED and SILENCE for 3 seconds.",
     "POWER_HUG": "Deal [40,80,SP] SPECIAL to the target. Inflict LOCKED and PARALYSIS for 3 seconds.",
-    "MORTAL_SPIN": "Knock back any Pokemon targeting the user in melee range. Deal [20,30,40,SP] SPECIAL to any enemies hit, and apply POISONNED for 4 seconds"
+    "MORTAL_SPIN": "Knock back any Pokemon targeting the user in melee range. Deal [20,30,40,SP] SPECIAL to any enemies hit, and apply POISONNED for 4 seconds",
+    "METAL_CLAW": "Deal [10,20,40,SP] TRUE to the target and raise the user's ATK by [2,4,6]."
   },
   "effect": {
     "INGRAIN": "Ingrain",

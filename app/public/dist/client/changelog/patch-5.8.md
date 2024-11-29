@@ -49,6 +49,7 @@ Gen 1 is now complete !
 - Buff Larversta line: Attack 10/20 → 12/24
 - Buff Screech (Kricketot): reduce defense of enemies in a ~~1-range~~ 2-range area around
 - Nerf Yawn (Slowpoke): Fatigue duration 4 → 3 seconds, AP reduction 30% → 20%
+- New ability for Piplup line: Metal Claw: Deal 10/20/40 true damage and raise Attack by 2/4/6
 
 # Changes to Synergies
 

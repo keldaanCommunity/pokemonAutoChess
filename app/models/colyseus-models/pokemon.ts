@@ -3465,7 +3465,7 @@ export class Piplup extends Pokemon {
   speDef = 3
   maxPP = 100
   range = 1
-  skill = Ability.IRON_TAIL
+  skill = Ability.METAL_CLAW
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -3480,7 +3480,7 @@ export class Prinplup extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.IRON_TAIL
+  skill = Ability.METAL_CLAW
   attackSprite = AttackSprite.WATER_MELEE
 }
 
@@ -3494,7 +3494,7 @@ export class Empoleon extends Pokemon {
   speDef = 5
   maxPP = 100
   range = 1
-  skill = Ability.IRON_TAIL
+  skill = Ability.METAL_CLAW
   attackSprite = AttackSprite.WATER_MELEE
 }
 
