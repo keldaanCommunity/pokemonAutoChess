@@ -1177,7 +1177,7 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.CHILLY:
-          pokemon.effects.add(Effect.FROSTY)
+          pokemon.effects.add(Effect.CHILLY)
           pokemon.addSpecialDefense(2, pokemon, 0, false)
           break
 
@@ -1187,7 +1187,7 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.FREEZING:
-          pokemon.effects.add(Effect.FROSTY)
+          pokemon.effects.add(Effect.FREEZING)
           pokemon.addSpecialDefense(20, pokemon, 0, false)
           break
 
