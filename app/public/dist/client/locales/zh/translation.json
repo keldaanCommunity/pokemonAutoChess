@@ -3078,7 +3078,9 @@
     "bot_builder": "机器人制作器",
     "bot_builder_desc": "制造自己的机器人，提交之后还有可能被吸纳进游戏中",
     "jukebox": "八音盒",
-    "jukebox_desc": "选择游戏内播放的音乐"
+    "jukebox_desc": "选择游戏内播放的音乐",
+    "gameboy": "Gameboy游戏机",
+    "gameboy_desc": "玩这个游戏的GB移植版（实验性版本）"
   },
   "level_required": "等级需求",
   "map": {
