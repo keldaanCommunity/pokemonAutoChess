@@ -115,3 +115,4 @@ Thanks to Exeatop, many bugs have been fixed in the abilities and abilities desc
 - Removed Rare is Expensive Scribble
 - Added 3 new Scribble rules
 - Added Gameboy gadget unlocked at level 30
+- With player attendance having stabilized, we can reactivate the bots and start tournaments again 🎉
