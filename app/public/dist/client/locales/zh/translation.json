@@ -411,7 +411,8 @@
     "THOUSAND_ARROWS": "千箭齐发",
     "CORE_ENFORCER": "核心惩罚者",
     "POWER_HUG": "强力拥抱",
-    "MORTAL_SPIN": "晶光转转"
+    "MORTAL_SPIN": "晶光转转",
+    "METAL_CLAW": "金属爪"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1532,7 +1533,7 @@
     "NIGHT_SHADE": "对目标造成TRUE，数值相当于其最大HP的[25,33,50,SP=0.5]%。",
     "CHARGE_BEAM": "发射一道电力集束，弹射至多3个相邻的敌方宝可梦，对每个命击中的目标造成[15,30,60,SP]点SPECIAL。",
     "POPULATION_BOMB": "对目标造成10点SPECIAL [4,8,12,16,SP]次。",
-    "SCREECH": "所有相邻敌方宝可梦降低[1,2,4,SP]点DEF。",
+    "SCREECH": "所有半径2格之内的敌方宝可梦降低[1,2,4,SP]点DEF。",
     "SAND_TOMB": "对目标造成[10,20,40,SP]点SPECIAL，并使其陷入SILENCE和PARALYSIS [3,5,8]秒。",
     "WHIRLWIND": "对目标造成[40,80,120,SP]点SPECIAL，并将其吹飞。",
     "EMPTY_LIGHT": "朝目标喷吐毒液，对其造成[33,SP]点SPECIAL并降低其3点SPE_DEF。毒液随后会弹射到相邻的另一只宝可梦上再次造成伤害和减防，至多弹射5次。",
@@ -1656,7 +1657,7 @@
     "STEEL_WING": "突进至敌方队伍的后排，造成SPECIAL，数值相当于[10,20,40,SP]加使用者的DEF的3倍。从每只击中的敌方宝可梦身上偷取1点DEF。",
     "YAWN": "获得[10,20,40,SP]点SHIELD。以使用者为目标的敌方宝可梦会陷入FATIGUE 3秒，并被扣除20% AP。",
     "FIERY_DANCE": "让火焰覆盖全身，振翅攻击目标，对其造成[25,50,100,SP]点SPECIAL，然后提升使用者30点AP。",
-    "BIDE": "使用者在3秒内无法移动，随后对周围造成SPECIAL，数值相当于在此期间所受伤害的两倍。",
+    "BIDE": "使用者在3秒内无法移动，随后对周围造成SPECIAL，数值相当于在此期间所受伤害的[200,SP]%。",
     "SHORE_UP": "使用者恢复[20,25,SP]%的HP。若天气为SANDSTORM，增加到[30,35,SP]%。",
     "POISON_STING": "使目标陷入[2,3,4]层的POISONNED。溢出的层数改为立刻对目标造成[25,50,100,SP]点SPECIAL。",
     "TRANSE": "恢复攻击和移动，但不再被动回复HP。",
@@ -1671,7 +1672,8 @@
     "THOUSAND_ARROWS": "发射33支攻击随机格子的能量箭，对击中的目标造成[60,SP]点SPECIAL。被击中的敌人还会陷入LOCKED 1秒。",
     "CORE_ENFORCER": "对目标造成[150,SP]点SPECIAL，并使其陷入LOCKED和SILENCE 3秒。",
     "POWER_HUG": "对目标造成[40,80,SP]点SPECIAL，并使其陷入LOCKED和PARALYSIS 3秒。",
-    "MORTAL_SPIN": "击退任何正在攻击使用者且与之距离不超过1的宝可梦，对他们造成[20,30,40,SP]点SPECIAL，并使他们陷入POISONNED 4秒。"
+    "MORTAL_SPIN": "击退任何正在攻击使用者且与之距离不超过1的宝可梦，对他们造成[20,30,40,SP]点SPECIAL，并使他们陷入POISONNED 4秒。",
+    "METAL_CLAW": "对目标造成[10,20,40,SP]点TRUE，并提升使用者[2,4,6]点ATK。"
   },
   "effect": {
     "INGRAIN": "扎根",
@@ -2068,7 +2070,7 @@
     "XRAY_VISION": "携带者提升50%的ATK_SPEED，且攻击不会落空。",
     "RAZOR_FANG": "提升100%的CRIT_POWER。暴击会使目标陷入ARMOR_REDUCTION 4秒。",
     "PROTECTIVE_PADS": "携带者的攻击对SHIELD造成的伤害翻倍。携带者免疫反冲伤害和反击类效果。",
-    "CHOICE_SCARF": "击中目标时，也对一个相邻敌方宝可梦造成50%的普通攻击伤害。",
+    "CHOICE_SCARF": "击中目标时，也对生命最低的相邻敌方宝可梦造成50%的普通攻击伤害。",
     "PUNCHING_GLOVE": "攻击额外造成PHYSICAL，数值相当于目标最大HP的8%。",
     "DEFENSIVE_RIBBON": "携带者受到伤害时，获得1层“借力”（最多叠加20层）。每两层“借力”提升携带者1点DEF，1点ATK以及5%的ATK_SPEED。",
     "WONDER_BOX": "每场战斗开始时，将WONDER_BOX替换为2件临时的随机道具（携带道具总数不会超过3）。",
