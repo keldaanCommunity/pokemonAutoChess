@@ -73,6 +73,7 @@ Gen 1 is now complete !
 
 - Fix Comfey sometimes not losing PP after casting
 - Fix permanent stat buffs not carrying over for hatch, item-based and condition-based evolution rules
+- Fix extra wild chance for automatic shop rolls being applied on the wrong stage level 
 
 Thanks to Exeatop, many bugs have been fixed in the abilities and abilities descriptions:
 - Fix Steel Wing damage not applying defense bonus damage
