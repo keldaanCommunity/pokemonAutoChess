@@ -162,6 +162,9 @@ export default class MovingState extends PokemonState {
   }
 
   onExit(pokemon: PokemonEntity) {
+    if (pokemon.status.skydiving) {
+      pokemon.status.skydiving = false
+    }
     super.onExit(pokemon)
   }
 }
