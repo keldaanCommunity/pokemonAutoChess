@@ -67,12 +67,15 @@ Gen 1 is now complete !
 
 # Changes to Items
 
+- Fix Power lens damage computation formula and clarified item description. The more special defense the holder has, the more damage it deals.
 - Repeat Ball now also take into account automatic shop rerolls after each stage. Raised the number of rerolls required to get Unique/Legendary
 
 # Bugfix
 
 - Fix Comfey sometimes not losing PP after casting
 - Fix permanent stat buffs not carrying over for hatch, item-based and condition-based evolution rules
+- Fix Ice synergy freeze chance that was incorrect at levels 4 and 6
+- Fix artificial synergy applying 4 items buffs when wonderbox was equipped as third item
 - Fix extra wild chance for automatic shop rolls being applied on the wrong stage level 
 
 Thanks to Exeatop, many bugs have been fixed in the abilities and abilities descriptions:
