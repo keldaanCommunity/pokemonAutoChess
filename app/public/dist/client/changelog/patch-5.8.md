@@ -42,6 +42,15 @@ Gen 1 is now complete !
 - Sableye and Mega-Sableye: removed Rock synergy
 - Buff Kangashkan: PP 100 → 90
 - Buff Granbull: Attack 24 → 28
+- Nerf Weezing line: PP 40 → 60
+- Nerf Psycho Shift (Sigilyph): 70 → 60 special damage
+- Nerf Grassy Surge (Tapu Bulu): 5 → 4 attack
+- Buff Shuckle: Def/SpeDef: 15 → 20
+- Buff Larversta line: Attack 10/20 → 12/24
+- Buff Screech (Kricketot): reduce defense of enemies in a ~~1-range~~ 2-range area around
+- Nerf Yawn (Slowpoke): Fatigue duration 4 → 3 seconds, AP reduction 30% → 20%
+- New ability for Piplup line: Metal Claw: Deal 10/20/40 true damage and raise Attack by 2/4/6
+- Nerf Fairy Wind (Flabébé): AP Scaling 1 → 0.5
 
 # Changes to Synergies
 
@@ -67,6 +76,7 @@ Gen 1 is now complete !
 - Fix permanent stat buffs not carrying over for hatch, item-based and condition-based evolution rules
 - Fix Ice synergy freeze chance that was incorrect at levels 4 and 6
 - Fix artificial synergy applying 4 items buffs when wonderbox was equipped as third item
+- Fix extra wild chance for automatic shop rolls being applied on the wrong stage level 
 
 Thanks to Exeatop, many bugs have been fixed in the abilities and abilities descriptions:
 - Fix Steel Wing damage not applying defense bonus damage
@@ -109,3 +119,4 @@ Thanks to Exeatop, many bugs have been fixed in the abilities and abilities desc
 - Removed Rare is Expensive Scribble
 - Added 3 new Scribble rules
 - Added Gameboy gadget unlocked at level 30
+- With player attendance having stabilized, we can reactivate the bots and start tournaments again 🎉
