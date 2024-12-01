@@ -977,7 +977,7 @@ export class SchoolingStrategy extends AbilityStrategy {
       pokemon.player.board.forEach((ally, id) => {
         if (ally && ally.name === Pkm.WISHIWASHI && isOnBench(ally)) {
           pokemon.addMaxHP(50, pokemon, 0, false)
-          pokemon.refToBoardPokemon.hp += 50
+          pokemon.addPermanentStats("hp", 50)
           pokemon.player!.board.delete(id)
         }
       })
@@ -5527,11 +5527,9 @@ export class FellStingerStrategy extends AbilityStrategy {
       pokemon.addAbilityPower(5, pokemon, 0, false)
       pokemon.addAttack(1, pokemon, 0, false)
       pokemon.addMaxHP(10, pokemon, 0, false)
-      if (!pokemon.isGhostOpponent) {
-        pokemon.refToBoardPokemon.atk += 1
-        pokemon.refToBoardPokemon.ap += 5
-        pokemon.refToBoardPokemon.hp += 10
-      }
+      pokemon.addPermanentStats("atk", 1)
+      pokemon.addPermanentStats("ap", 5)
+      pokemon.addPermanentStats("hp", 10)
     }
   }
 }
