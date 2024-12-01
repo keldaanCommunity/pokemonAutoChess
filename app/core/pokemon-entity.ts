@@ -287,9 +287,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           (this.items.has(Item.REAPER_CLOTH) && chance(this.critChance, this))
         const bounceDamage = Math.round(
           ([0.5, 1][this.stars - 1] ?? 1) *
-            damage *
-            (1 + this.ap / 100) *
-            (bounceCrit ? this.critPower : 1)
+          damage *
+          (1 + this.ap / 100) *
+          (bounceCrit ? this.critPower : 1)
         )
         // not handleSpecialDamage to not trigger infinite loop between two magic bounces
         attacker.handleDamage({
@@ -385,9 +385,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   addPP(value: number, caster: IPokemonEntity, apBoost: number, crit: boolean) {
     value = Math.round(
       value *
-        (1 + (apBoost * caster.ap) / 100) *
-        (crit ? caster.critPower : 1) *
-        (this.status.fatigue && value > 0 ? 0.5 : 1)
+      (1 + (apBoost * caster.ap) / 100) *
+      (crit ? caster.critPower : 1) *
+      (this.status.fatigue && value > 0 ? 0.5 : 1)
     )
 
     if (
@@ -535,27 +535,19 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       )
     }
   }
-  
-  addPermanentStats(
-    stat: { [K in keyof IPokemon]:
-      IPokemon[K] extends number ? K : never
-      }[keyof IPokemon],
-    value: number
-  ) {
-    if(this.isGhostOpponent) return
-    this.refToBoardPokemon[stat] += value
-  }
 
   addPermanentItem(
-    item: Item,
-    remove = false
-  ){
-    if(this.isGhostOpponent) return
-    if(remove){
-      this.refToBoardPokemon.items.delete(item)
-    } else {
-      this.refToBoardPokemon.items.add(item)
-    }
+    item: Item
+  ) {
+    if (this.isGhostOpponent) return
+    this.refToBoardPokemon.items.add(item)
+  }
+
+  removePermanentItem(
+    item: Item
+  ) {
+    if (this.isGhostOpponent) return
+    this.refToBoardPokemon.items.delete(item)
   }
 
   addPsychicField() {
@@ -1211,7 +1203,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.count.fightingBlockCount > 0 &&
       this.count.fightingBlockCount % 10 === 0 &&
       distanceC(this.positionX, this.positionY, this.targetX, this.targetY) ===
-        1
+      1
     ) {
       const targetAtContact = board.getValue(this.targetX, this.targetY)
       const destination = this.state.getNearestAvailablePlaceCoordinates(
@@ -1332,7 +1324,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
               y: this.positionY + y,
               value:
                 board.cells[
-                  board.columns * this.positionY + y + this.positionX + x
+                board.columns * this.positionY + y + this.positionX + x
                 ]
             })
           }
@@ -1426,7 +1418,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       target.status.triggerProtect(2000)
       target.handleHeal(20, target, 0, false)
       target.items.delete(Item.BABIRI_BERRY)
-      target.addPermanentItem(Item.BABIRI_BERRY, true)
+      target.removePermanentItem(Item.BABIRI_BERRY)
     }
   }
 
@@ -1569,7 +1561,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   // called after death (does not proc if resurection)
   onDeath({ board }: { board: Board }) {
-    this.addPermanentStats("deathCount", 1)
+    if (!this.isGhostOpponent) {
+      this.refToBoardPokemon.deathCount++
+    }
     const isWorkUp = this.effects.has(Effect.BULK_UP)
     const isRage = this.effects.has(Effect.RAGE)
     const isAngerPoint = this.effects.has(Effect.ANGER_POINT)
@@ -1645,40 +1639,47 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  applyStat(stat: Stat, value: number) {
-    switch (stat) {
-      case Stat.ATK:
-        this.addAttack(value, this, 0, false)
-        break
-      case Stat.DEF:
-        this.addDefense(value, this, 0, false)
-        break
-      case Stat.SPE_DEF:
-        this.addSpecialDefense(value, this, 0, false)
-        break
-      case Stat.AP:
-        this.addAbilityPower(value, this, 0, false)
-        break
-      case Stat.PP:
-        this.addPP(value, this, 0, false)
-        break
-      case Stat.ATK_SPEED:
-        this.addAttackSpeed(value, this, 0, false)
-        break
-      case Stat.CRIT_CHANCE:
-        this.addCritChance(value, this, 0, false)
-        break
-      case Stat.CRIT_POWER:
-        this.addCritPower(value, this, 0, false)
-        break
-      case Stat.SHIELD:
-        this.addShield(value, this, 0, false)
-        break
-      case Stat.HP:
-        this.addMaxHP(value, this, 0, false)
-        break
-      case Stat.LUCK:
-        this.addLuck(value, this, 0, false)
+  applyStat(stat: Stat, value: number, permanent = false) {
+
+    const tempStatMap: ReadonlyMap<Stat, (
+      value: number,
+      caster: IPokemonEntity,
+      apBoost: number,
+      crit: boolean
+    ) => void> = new Map([
+      [Stat.ATK, this.addAttack],
+      [Stat.DEF, this.addDefense],
+      [Stat.SPE_DEF, this.addSpecialDefense],
+      [Stat.AP, this.addAbilityPower],
+      [Stat.PP, this.addPP],
+      [Stat.ATK_SPEED, this.addAttackSpeed],
+      [Stat.CRIT_CHANCE, this.addCritChance],
+      [Stat.CRIT_POWER, this.addCritPower],
+      [Stat.SHIELD, this.addShield],
+      [Stat.HP, this.addMaxHP],
+      [Stat.LUCK, this.addLuck]
+    ])
+
+    const permStatMap: ReadonlyMap<Stat, string> = new Map([
+      [Stat.ATK, "atk"],
+      [Stat.DEF, "def"],
+      [Stat.SPE_DEF, "speDef"],
+      [Stat.AP, "ap"],
+      [Stat.ATK_SPEED, "atkSpeed"],
+      [Stat.HP, "hp"],
+      [Stat.LUCK, "luck"]
+    ])
+
+    if (!permanent) {
+      tempStatMap[stat](value, this, 0, false)
+    } else {
+      if (this.isGhostOpponent) return
+      const permStat = permStatMap[stat]
+      if (!permStat) {
+        logger.debug(`${stat} can't be added as permanent stat`)
+        return
+      }
+      this.refToBoardPokemon[stat] += value
     }
   }
 
@@ -1843,14 +1844,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (stealedFrom) {
       stealedFrom.items.delete(berry)
-      stealedFrom.addPermanentItem(berry, true)
+      stealedFrom.removePermanentItem(berry)
     } else {
       this.items.delete(berry)
-      this.addPermanentItem(berry, true)
+      this.removePermanentItem(berry)
     }
 
     if (this.passive === Passive.GLUTTON) {
-      this.addPermanentStats("hp", 20)
+      this.applyStat(Stat.HP, 20, true)
       if (this.refToBoardPokemon.hp > 750) {
         this.player?.titles.add(Title.GLUTTON)
       }
