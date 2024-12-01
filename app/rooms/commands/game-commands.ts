@@ -698,11 +698,17 @@ export class OnRefreshCommand extends Command<GameRoom, string> {
     const player = this.state.players.get(id)
     if (!player) return
     const rollCost = player.shopFreeRolls > 0 ? 0 : 1
+
     const rollCostType =
       this.state.specialGameRule === SpecialGameRule.DESPERATE_MOVES
         ? "life"
         : "money"
-    if (player[rollCostType] >= rollCost && player.alive) {
+    const canRoll =
+      rollCostType === "life"
+        ? (player?.life ?? 0) >= rollCost + 1
+        : (player?.money ?? 0) >= rollCost
+
+    if (canRoll && player.alive) {
       this.state.shop.assignShop(player, true, this.state)
       player[rollCostType] -= rollCost
       player.rerollCount++
