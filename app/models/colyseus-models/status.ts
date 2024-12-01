@@ -262,7 +262,7 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (pokemon.status.curseFate && !pokemon.status.curse) {
-      this.triggerCurse(5000) //Intentionally at 5s to account for status update delay
+      this.triggerCurse(6500) //Intentionally a bit less than 7 seconds to account for status update delay
     }
   }
 

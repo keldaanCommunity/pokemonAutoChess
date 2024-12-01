@@ -4,15 +4,14 @@ import { Tooltip } from "react-tooltip"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { getMaxTeamSize } from "../../../../../utils/board"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
-import { getGameScene } from "../../game"
 
 export function GameTeamInfo() {
   const { t } = useTranslation()
   const currentPlayer = useAppSelector(selectCurrentPlayer)
+  const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
 
   if (!currentPlayer) return null
 
-  const specialGameRule = getGameScene()?.room?.state.specialGameRule
   const maxTeamSize = getMaxTeamSize(currentPlayer.experienceManager.level, specialGameRule)
 
   return (

@@ -68,14 +68,7 @@ export function getWeather(
           }
         }
 
-        const types = [
-          ...values(pkm.types),
-          ...values(pkm.items)
-            .filter((item) => item in SynergyGivenByItem)
-            .map((item) => SynergyGivenByItem[item])
-        ]
-
-        types.forEach((type) => {
+        pkm.types.forEach((type) => {
           if (WeatherAssociatedToSynergy.has(type)) {
             const weather = WeatherAssociatedToSynergy.get(type)!
             boardWeatherScore.set(

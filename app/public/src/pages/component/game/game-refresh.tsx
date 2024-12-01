@@ -10,7 +10,7 @@ import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 export default function GameRefresh() {
   const { t } = useTranslation()
   const shopFreeRolls = useAppSelector((state) => state.game.shopFreeRolls)
-  const specialGameRule = getGameScene()?.room?.state.specialGameRule
+  const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
   const cost = shopFreeRolls > 0 ? 0 : 1
   return (
     <button

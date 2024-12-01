@@ -999,7 +999,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     }
   }
 
-  checkEndGame() {
+  checkEndGame(): boolean {
     const playersAlive = values(this.state.players).filter((p) => p.alive)
 
     if (playersAlive.length <= 1) {
@@ -1021,7 +1021,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         this.room.broadcast(Transfer.GAME_END)
         this.room.disconnect()
       }, 30 * 1000)
+
+      return true
     }
+
+    return false
   }
 
   computeStreak(isPVE: boolean) {
@@ -1258,164 +1262,85 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.computeAchievements()
     this.computeStreak(isPVE)
     this.checkDeath()
-    this.computeIncome()
+    const isGameFinished = this.checkEndGame()
 
-    this.state.players.forEach((player: Player) => {
-      if (player.alive) {
-        if (player.isBot) {
-          player.experienceManager.level = max(9)(
-            Math.round(this.state.stageLevel / 2)
-          )
-        }
-
-        if (isPVE && player.history.at(-1)?.result === BattleResult.WIN) {
-          while (player.pveRewards.length > 0) {
-            const reward = player.pveRewards.pop()!
-            player.items.push(reward)
-          }
-
-          if (player.pveRewardsPropositions.length > 0) {
-            resetArraySchema(
-              player.itemsProposition,
-              player.pveRewardsPropositions
+    if (!isGameFinished) {
+      this.state.stageLevel += 1
+      this.computeIncome()
+      this.state.players.forEach((player: Player) => {
+        if (player.alive) {
+          // Fake bots XP bar
+          if (player.isBot) {
+            player.experienceManager.level = max(9)(
+              Math.round(this.state.stageLevel / 2)
             )
-            player.pveRewardsPropositions.clear()
           }
-        }
 
-        const hasBabyActive =
-          player.effects.has(Effect.HATCHER) ||
-          player.effects.has(Effect.BREEDER) ||
-          player.effects.has(Effect.GOLDEN_EGGS)
-        const hasLostLastBattle =
-          player.history.at(-1)?.result === BattleResult.DEFEAT
-        const eggsOnBench = values(player.board).filter(
-          (p) => p.name === Pkm.EGG
-        )
-        const nbOfGoldenEggsOnBench = eggsOnBench.filter((p) => p.shiny).length
-        let nbEggsFound = 0
-        let goldenEggFound = false
-
-        if (hasLostLastBattle && hasBabyActive) {
-          const EGG_CHANCE = 0.1
-          const GOLDEN_EGG_CHANCE = 0.04
-          const playerEggChanceStacked = player.eggChance
-          const babies = values(player.board).filter(
-            (p) => !isOnBench(p) && p.types.has(Synergy.BABY)
-          )
-
-          for (const baby of babies) {
-            if (
-              player.effects.has(Effect.GOLDEN_EGGS) &&
-              nbOfGoldenEggsOnBench === 0 &&
-              chance(GOLDEN_EGG_CHANCE, baby)
-            ) {
-              nbEggsFound++
-              goldenEggFound = true
-            } else if (chance(EGG_CHANCE, baby)) {
-              nbEggsFound++
+          // Give PVE rewards to players
+          if (isPVE && player.history.at(-1)?.result === BattleResult.WIN) {
+            while (player.pveRewards.length > 0) {
+              const reward = player.pveRewards.pop()!
+              player.items.push(reward)
             }
-            if (player.effects.has(Effect.GOLDEN_EGGS) && !goldenEggFound) {
-              player.eggChance += GOLDEN_EGG_CHANCE * (1 + baby.luck / 100)
-            } else if (
-              player.effects.has(Effect.HATCHER) &&
-              nbEggsFound === 0
-            ) {
-              player.eggChance += EGG_CHANCE * (1 + baby.luck / 100)
-            }
-          }
 
-          // Second chance with chance stacked after lose streaks
-          if (
-            nbEggsFound === 0 &&
-            (player.effects.has(Effect.BREEDER) ||
-              player.effects.has(Effect.GOLDEN_EGGS) ||
-              chance(playerEggChanceStacked))
-          ) {
-            nbEggsFound = 1 // baby >= 5 guarantees at least 1 egg after a defeat
-          }
-          if (
-            goldenEggFound === false &&
-            player.effects.has(Effect.GOLDEN_EGGS) &&
-            nbOfGoldenEggsOnBench === 0 &&
-            chance(playerEggChanceStacked)
-          ) {
-            goldenEggFound = true
-          }
-        } else if (!isPVE) {
-          player.eggChance = 0 // winning a PvP fight resets the stacked egg chance
-        }
-
-        if (
-          this.state.specialGameRule === SpecialGameRule.OMELETTE_COOK &&
-          [1, 2, 3].includes(this.state.stageLevel)
-        ) {
-          nbEggsFound = 1
-        }
-
-        for (let i = 0; i < nbEggsFound; i++) {
-          if (getFreeSpaceOnBench(player.board) === 0) continue
-          const isGoldenEgg =
-            goldenEggFound && i === 0 && nbOfGoldenEggsOnBench === 0
-          const egg = createRandomEgg(isGoldenEgg, player)
-          const x = getFirstAvailablePositionInBench(player.board)
-          egg.positionX = x !== undefined ? x : -1
-          egg.positionY = 0
-          player.board.set(egg.id, egg)
-          if (
-            player.effects.has(Effect.HATCHER) ||
-            (player.effects.has(Effect.GOLDEN_EGGS) && isGoldenEgg)
-          ) {
-            player.eggChance = 0 // getting an egg resets the stacked egg chance
-          }
-        }
-
-        player.board.forEach((pokemon, key) => {
-          if (pokemon.evolutionRule) {
-            if (pokemon.evolutionRule instanceof HatchEvolutionRule) {
-              pokemon.evolutionRule.updateHatch(
-                pokemon,
-                player,
-                this.state.stageLevel
+            if (player.pveRewardsPropositions.length > 0) {
+              resetArraySchema(
+                player.itemsProposition,
+                player.pveRewardsPropositions
               )
-            }
-            if (pokemon.evolutionRule instanceof ConditionBasedEvolutionRule) {
-              pokemon.evolutionRule.tryEvolve(
-                pokemon,
-                player,
-                this.state.stageLevel
-              )
+              player.pveRewardsPropositions.clear()
             }
           }
-          if (pokemon.passive === Passive.UNOWN && !isOnBench(pokemon)) {
-            // remove after one fight
-            player.board.delete(key)
-            player.board.delete(pokemon.id)
-          }
-        })
 
-        // Refreshes effects (Tapu Terrains, or if player lost Psychic 6 after Unown diseappeared)
-        player.updateSynergies()
+          this.spawnBabyEggs(player, isPVE)
 
-        // Refreshes shop
-        if (!player.isBot) {
-          if (!player.shopLocked) {
-            if (player.shop.every((p) => Unowns.includes(p))) {
-              // player stayed on unown shop and did nothing, so we remove its free roll
-              player.shopFreeRolls -= 1
+          // Update automatic evolutions and remove Unowns
+          player.board.forEach((pokemon, key) => {
+            if (pokemon.evolutionRule) {
+              if (pokemon.evolutionRule instanceof HatchEvolutionRule) {
+                pokemon.evolutionRule.updateHatch(
+                  pokemon,
+                  player,
+                  this.state.stageLevel
+                )
+              }
+              if (
+                pokemon.evolutionRule instanceof ConditionBasedEvolutionRule
+              ) {
+                pokemon.evolutionRule.tryEvolve(
+                  pokemon,
+                  player,
+                  this.state.stageLevel
+                )
+              }
             }
+            if (pokemon.passive === Passive.UNOWN && !isOnBench(pokemon)) {
+              // remove after one fight
+              player.board.delete(key)
+              player.board.delete(pokemon.id)
+            }
+          })
 
-            this.state.shop.assignShop(player, false, this.state)
-          } else {
-            this.state.shop.refillShop(player, this.state)
-            player.shopLocked = false
+          // Refreshes effects (Tapu Terrains, or if player lost Psychic 6 after Unown diseappeared)
+          player.updateSynergies()
+
+          // Refreshes shop
+          if (!player.isBot) {
+            if (!player.shopLocked) {
+              if (player.shop.every((p) => Unowns.includes(p))) {
+                // player stayed on unown shop and did nothing, so we remove its free roll
+                player.shopFreeRolls -= 1
+              }
+
+              this.state.shop.assignShop(player, false, this.state)
+            } else {
+              this.state.shop.refillShop(player, this.state)
+              player.shopLocked = false
+            }
           }
         }
-      }
-    })
-
-    this.state.stageLevel += 1
-    this.checkEndGame()
+      })
+    }
   }
 
   initializeMinigamePhase() {
@@ -1576,5 +1501,89 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         }
       }
     })
+  }
+
+  spawnBabyEggs(player: Player, isPVE: boolean) {
+    const hasBabyActive =
+      player.effects.has(Effect.HATCHER) ||
+      player.effects.has(Effect.BREEDER) ||
+      player.effects.has(Effect.GOLDEN_EGGS)
+    const hasLostLastBattle =
+      player.history.at(-1)?.result === BattleResult.DEFEAT
+    const eggsOnBench = values(player.board).filter((p) => p.name === Pkm.EGG)
+    const nbOfGoldenEggsOnBench = eggsOnBench.filter((p) => p.shiny).length
+    let nbEggsFound = 0
+    let goldenEggFound = false
+
+    if (hasLostLastBattle && hasBabyActive) {
+      const EGG_CHANCE = 0.1
+      const GOLDEN_EGG_CHANCE = 0.04
+      const playerEggChanceStacked = player.eggChance
+      const babies = values(player.board).filter(
+        (p) => !isOnBench(p) && p.types.has(Synergy.BABY)
+      )
+
+      for (const baby of babies) {
+        if (
+          player.effects.has(Effect.GOLDEN_EGGS) &&
+          nbOfGoldenEggsOnBench === 0 &&
+          chance(GOLDEN_EGG_CHANCE, baby)
+        ) {
+          nbEggsFound++
+          goldenEggFound = true
+        } else if (chance(EGG_CHANCE, baby)) {
+          nbEggsFound++
+        }
+        if (player.effects.has(Effect.GOLDEN_EGGS) && !goldenEggFound) {
+          player.eggChance += GOLDEN_EGG_CHANCE * (1 + baby.luck / 100)
+        } else if (player.effects.has(Effect.HATCHER) && nbEggsFound === 0) {
+          player.eggChance += EGG_CHANCE * (1 + baby.luck / 100)
+        }
+      }
+
+      // Second chance with chance stacked after lose streaks
+      if (
+        nbEggsFound === 0 &&
+        (player.effects.has(Effect.BREEDER) ||
+          player.effects.has(Effect.GOLDEN_EGGS) ||
+          chance(playerEggChanceStacked))
+      ) {
+        nbEggsFound = 1 // baby >= 5 guarantees at least 1 egg after a defeat
+      }
+      if (
+        goldenEggFound === false &&
+        player.effects.has(Effect.GOLDEN_EGGS) &&
+        nbOfGoldenEggsOnBench === 0 &&
+        chance(playerEggChanceStacked)
+      ) {
+        goldenEggFound = true
+      }
+    } else if (!isPVE) {
+      player.eggChance = 0 // winning a PvP fight resets the stacked egg chance
+    }
+
+    if (
+      this.state.specialGameRule === SpecialGameRule.OMELETTE_COOK &&
+      [2, 3, 4].includes(this.state.stageLevel)
+    ) {
+      nbEggsFound = 1
+    }
+
+    for (let i = 0; i < nbEggsFound; i++) {
+      if (getFreeSpaceOnBench(player.board) === 0) continue
+      const isGoldenEgg =
+        goldenEggFound && i === 0 && nbOfGoldenEggsOnBench === 0
+      const egg = createRandomEgg(isGoldenEgg, player)
+      const x = getFirstAvailablePositionInBench(player.board)
+      egg.positionX = x !== undefined ? x : -1
+      egg.positionY = 0
+      player.board.set(egg.id, egg)
+      if (
+        player.effects.has(Effect.HATCHER) ||
+        (player.effects.has(Effect.GOLDEN_EGGS) && isGoldenEgg)
+      ) {
+        player.eggChance = 0 // getting an egg resets the stacked egg chance
+      }
+    }
   }
 }

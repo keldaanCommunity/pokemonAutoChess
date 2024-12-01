@@ -202,19 +202,30 @@ async function splitIndex(index: string) {
       )
       const parser = new XMLParser()
       const xmlData = <IPMDCollab>parser.parse(xmlFile)
-      const attackMetadata = xmlData.AnimData.Anims.Anim.find(
+      let attackMetadata = xmlData.AnimData.Anims.Anim.find(
         (m) => m.Name === AnimationConfig[mapName.get(index) as Pkm].attack
       )
       if (attackMetadata) {
-        const attackDurations: number[] =
-          attackMetadata.Durations.Duration.length !== undefined
-            ? [...attackMetadata.Durations.Duration]
-            : [attackMetadata.Durations.Duration]
-        delays[index] = {
-          d: attackDurations
-            .slice(0, attackMetadata.HitFrame)
-            .reduce((prev, curr) => prev + curr, 0),
-          t: attackDurations.reduce((prev, curr) => prev + curr, 0)
+        if (attackMetadata && attackMetadata.CopyOf) {
+          attackMetadata =
+            xmlData.AnimData.Anims.Anim.find(
+              (m) => m.Name == attackMetadata?.CopyOf
+            ) ?? attackMetadata
+        }
+
+        if (!attackMetadata?.Durations?.Duration) {
+          logger.error("no duration found for attack metadata", attackMetadata)
+        } else {
+          const attackDurations: number[] =
+            attackMetadata.Durations.Duration.length !== undefined
+              ? [...attackMetadata.Durations.Duration]
+              : [attackMetadata.Durations.Duration]
+          delays[index] = {
+            d: attackDurations
+              .slice(0, attackMetadata.HitFrame)
+              .reduce((prev, curr) => prev + curr, 0),
+            t: attackDurations.reduce((prev, curr) => prev + curr, 0)
+          }
         }
       }
       for (let k = 0; k < Object.values(SpriteType).length; k++) {
@@ -260,66 +271,70 @@ async function splitIndex(index: string) {
                     expandHomeDir(`${path}/sprite/${pad}/${action}-${anim}.png`)
                   )
 
-            if (metadata && metadata.CopyOf) {
+            if (metadata?.CopyOf) {
               metadata = xmlData.AnimData.Anims.Anim.find(
                 (m) => m.Name == metadata?.CopyOf
               )
             }
 
-            durations[`${index}/${shiny}/${action}/${anim}`] =
-              metadata?.Durations.Duration.length !== undefined
-                ? [...metadata?.Durations.Duration]
-                : [metadata?.Durations.Duration]
-            const frameHeight = metadata?.FrameHeight
-            const frameWidth = metadata?.FrameWidth
+            if (!metadata?.Durations?.Duration) {
+              logger.error("no duration found for metadata", metadata)
+            } else {
+              durations[`${index}/${shiny}/${action}/${anim}`] =
+                metadata?.Durations.Duration.length !== undefined
+                  ? [...metadata.Durations.Duration]
+                  : [metadata.Durations.Duration]
+              const frameHeight = metadata?.FrameHeight
+              const frameWidth = metadata?.FrameWidth
 
-            if (frameWidth && frameHeight) {
-              const width = img.width / frameWidth
-              const height = img.height / frameHeight
-              // logger.debug('img', index, 'action', action, 'frame height', metadata.FrameHeight, 'frame width', metadata.FrameWidth, 'width', img.getWidth(), 'height', img.getHeight(), ':', width, height);
-              for (let x = 0; x < width; x++) {
-                for (let y = 0; y < height; y++) {
-                  const cropImg = img.clone()
+              if (frameWidth && frameHeight) {
+                const width = img.width / frameWidth
+                const height = img.height / frameHeight
+                // logger.debug('img', index, 'action', action, 'frame height', metadata.FrameHeight, 'frame width', metadata.FrameWidth, 'width', img.getWidth(), 'height', img.getHeight(), ':', width, height);
+                for (let x = 0; x < width; x++) {
+                  for (let y = 0; y < height; y++) {
+                    const cropImg = img.clone()
 
-                  if (anim == SpriteType.SHADOW) {
-                    const shadow = xmlData.AnimData.ShadowSize
-                    if (shadow == 0) {
-                      removeRed(cropImg)
-                      removeBlue(cropImg)
-                    } else if (shadow == 1) {
-                      removeBlue(cropImg)
-                    }
-                    // transform to black
-                    cropImg.scan(
-                      0,
-                      0,
-                      cropImg.bitmap.width,
-                      cropImg.bitmap.height,
-                      (x, y, idx) => {
-                        if (cropImg.bitmap.data[idx + 3] != 0) {
-                          cropImg.bitmap.data[idx] = 0
-                          cropImg.bitmap.data[idx + 1] = 0
-                          cropImg.bitmap.data[idx + 2] = 0
-                        }
+                    if (anim == SpriteType.SHADOW) {
+                      const shadow = xmlData.AnimData.ShadowSize
+                      if (shadow == 0) {
+                        removeRed(cropImg)
+                        removeBlue(cropImg)
+                      } else if (shadow == 1) {
+                        removeBlue(cropImg)
                       }
+                      // transform to black
+                      cropImg.scan(
+                        0,
+                        0,
+                        cropImg.bitmap.width,
+                        cropImg.bitmap.height,
+                        (x, y, idx) => {
+                          if (cropImg.bitmap.data[idx + 3] != 0) {
+                            cropImg.bitmap.data[idx] = 0
+                            cropImg.bitmap.data[idx + 1] = 0
+                            cropImg.bitmap.data[idx + 2] = 0
+                          }
+                        }
+                      )
+                    }
+
+                    cropImg.crop({
+                      x: x * frameWidth,
+                      y: y * frameHeight,
+                      w: frameWidth,
+                      h: frameHeight
+                    })
+
+                    await ensureDir(
+                      `split/${index}/${shiny}/${action}/${anim}/${y}`
+                    )
+                    await cropImg.write(
+                      `split/${index}/${shiny}/${action}/${anim}/${y}/${zeroPad(
+                        x
+                      )}.png`
                     )
                   }
-
-                  cropImg.crop({
-                    x: x * frameWidth,
-                    y: y * frameHeight,
-                    w: frameWidth,
-                    h: frameHeight
-                  })
-
-                  await ensureDir(
-                    `split/${index}/${shiny}/${action}/${anim}/${y}`
-                  )
-                  await cropImg.write(
-                    `split/${index}/${shiny}/${action}/${anim}/${y}/${zeroPad(
-                      x
-                    )}.png`
-                  )
                 }
               }
             }
@@ -343,7 +358,8 @@ async function splitIndex(index: string) {
         "not found",
         mapName.get(index),
         "path: ",
-        `${path}/sprite/${pad}/AnimData.xml`
+        `${path}/sprite/${pad}/AnimData.xml`,
+        error
       )
       missing += `${mapName.get(index)},${pad}/AnimData.xml\n`
     }

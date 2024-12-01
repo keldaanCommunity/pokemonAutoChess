@@ -58,7 +58,7 @@ Gen 1 is now complete !
 - Buff Fairy: 15/30/50/70 → 20/40/60/80% additional special damage
 - Buff Field: HP healed 30/30/30 → 30/35/40
 - Nerf Ghost: dodge chance ~~25%~~ 20% ; Nerf Ghost 8: Curse duration: ~~6~~ 7 seconds
-- Fix Psy 4 Light Screen Unown shop found every 5 shops instead of 3
+- Fix Psy 4 Light Screen Unown shop found every 5 shops instead of 3 ; Unown will now appear on the last shop card to not overlap with Unique/Legendary from repeat balls
 - Dark 1-range Pokémon with Wide lens no longer jump to the farthest enemy
 - Nerf Ground: Ground bonuses now can go up to 5 stacks max
 - Change Dragon 5: Dragons gain ~~30 Shield per ⭐~~ 5 shield for each ⭐ of all your dragon units on board
@@ -67,12 +67,16 @@ Gen 1 is now complete !
 
 # Changes to Items
 
+- Fix Power lens damage computation formula and clarified item description. The more special defense the holder has, the more damage it deals.
 - Repeat Ball now also take into account automatic shop rerolls after each stage. Raised the number of rerolls required to get Unique/Legendary
 
 # Bugfix
 
 - Fix Comfey sometimes not losing PP after casting
 - Fix permanent stat buffs not carrying over for hatch, item-based and condition-based evolution rules
+- Fix Ice synergy freeze chance that was incorrect at levels 4 and 6
+- Fix artificial synergy applying 4 items buffs when wonderbox was equipped as third item
+- Fix extra wild chance for automatic shop rolls being applied on the wrong stage level 
 
 Thanks to Exeatop, many bugs have been fixed in the abilities and abilities descriptions:
 - Fix Steel Wing damage not applying defense bonus damage
@@ -115,3 +119,4 @@ Thanks to Exeatop, many bugs have been fixed in the abilities and abilities desc
 - Removed Rare is Expensive Scribble
 - Added 3 new Scribble rules
 - Added Gameboy gadget unlocked at level 30
+- With player attendance having stabilized, we can reactivate the bots and start tournaments again 🎉
