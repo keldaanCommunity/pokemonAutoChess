@@ -3980,7 +3980,7 @@ export class Victreebel extends Pokemon {
   }
 }
 
-export class Pikipek extends Pokemon {
+/*export class Pikipek extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.NORMAL,
     Synergy.FLYING,
@@ -4034,7 +4034,7 @@ export class Toucannon extends Pokemon {
   range = 1
   skill = Ability.DEFAULT
   attackSprite = AttackSprite.NORMAL_MELEE
-}
+}*/
 
 export class Geodude extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ROCK])
@@ -6975,7 +6975,7 @@ export class Mienshao extends Pokemon {
   additional = true
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
-
+/*
 export class Tirtouga extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.WATER])
   rarity = Rarity.UNCOMMON
@@ -7005,7 +7005,7 @@ export class Carracosta extends Pokemon {
   skill = Ability.DEFAULT
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
-}
+}*/
 
 export class Lileep extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.GRASS, Synergy.FLORA])
@@ -11108,7 +11108,7 @@ export class Tropius extends Pokemon {
     const berry = pickRandomIn(Berries)
     if (entity.items.size < 3) {
       entity.items.add(berry)
-      entity.refToBoardPokemon.items.add(berry)
+      entity.addPermanentItem(berry)
     } else {
       player.items.push(berry)
     }
@@ -15665,8 +15665,8 @@ export const PokemonClasses: Record<
   [Pkm.ARCHEOPS]: Archeops,
   [Pkm.SHIELDON]: Shieldon,
   [Pkm.BASTIODON]: Bastiodon,
-  [Pkm.TIRTOUGA]: Tirtouga,
-  [Pkm.CARRACOSTA]: Carracosta,
+  //[Pkm.TIRTOUGA]: Tirtouga,
+  //[Pkm.CARRACOSTA]: Carracosta,
   [Pkm.LILEEP]: Lileep,
   [Pkm.CRADILY]: Cradily,
   [Pkm.OMANYTE]: Omanyte,
@@ -15714,9 +15714,9 @@ export const PokemonClasses: Record<
   [Pkm.SEWADDLE]: Sewaddle,
   [Pkm.SWADLOON]: Swadloon,
   [Pkm.LEAVANNY]: Leavanny,
-  [Pkm.PIKIPEK]: Pikipek,
-  [Pkm.TRUMBEAK]: Trumbeak,
-  [Pkm.TOUCANNON]: Toucannon,
+  //[Pkm.PIKIPEK]: Pikipek,
+  //[Pkm.TRUMBEAK]: Trumbeak,
+  //[Pkm.TOUCANNON]: Toucannon,
   [Pkm.FLABEBE]: Flabebe,
   [Pkm.FLOETTE]: Floette,
   [Pkm.FLORGES]: Florges,
