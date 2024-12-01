@@ -39,7 +39,7 @@ import {
   EvolutionTime
 } from "../../types/Config"
 import { Effect } from "../../types/enum/Effect"
-import { AttackType, Team } from "../../types/enum/Game"
+import { AttackType, Stat, Team } from "../../types/enum/Game"
 import { ArtificialItems, Berries, Item } from "../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
@@ -977,7 +977,7 @@ export class SchoolingStrategy extends AbilityStrategy {
       pokemon.player.board.forEach((ally, id) => {
         if (ally && ally.name === Pkm.WISHIWASHI && isOnBench(ally)) {
           pokemon.addMaxHP(50, pokemon, 0, false)
-          pokemon.addPermanentStats("hp", 50)
+          pokemon.applyStat(Stat.HP, 50, true)
           pokemon.player!.board.delete(id)
         }
       })
@@ -5527,9 +5527,9 @@ export class FellStingerStrategy extends AbilityStrategy {
       pokemon.addAbilityPower(5, pokemon, 0, false)
       pokemon.addAttack(1, pokemon, 0, false)
       pokemon.addMaxHP(10, pokemon, 0, false)
-      pokemon.addPermanentStats("atk", 1)
-      pokemon.addPermanentStats("ap", 5)
-      pokemon.addPermanentStats("hp", 10)
+      pokemon.applyStat(Stat.ATK, 1, true)
+      pokemon.applyStat(Stat.AP, 5, true)
+      pokemon.applyStat(Stat.HP, 10, true)
     }
   }
 }
