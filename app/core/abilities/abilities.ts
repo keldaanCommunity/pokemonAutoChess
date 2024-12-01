@@ -3632,18 +3632,6 @@ export class DragonBreathStrategy extends AbilityStrategy {
         )
       }
     })
-
-    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
-    const secondTarget = board.getValue(target.positionX, target.positionY + 1)
-    if (secondTarget && secondTarget != pokemon) {
-      secondTarget.handleSpecialDamage(
-        damage,
-        board,
-        AttackType.TRUE,
-        pokemon,
-        crit
-      )
-    }
   }
 }
 
