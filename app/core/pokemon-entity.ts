@@ -435,11 +435,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
+    permanent = false
   ) {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    this.hp = min(1)(this.hp + value)
+    const target = permanent? this.refToBoardPokemon : this
+    target.hp = min(1)(target.hp + value)
+    if(permanent) return
     this.life = max(this.hp)(this.life + value)
   }
 
@@ -458,22 +461,26 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
+    permanent = false
   ) {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-    this.ap = min(-100)(this.ap + value)
+    const target = permanent ? this.refToBoardPokemon : this
+    target.ap = min(-100)(target.ap + value)
   }
 
   addLuck(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
+    permanent = false
   ) {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
+    const target = permanent ? this.refToBoardPokemon : this
     this.luck = min(-100)(this.luck + value)
   }
 
@@ -481,54 +488,63 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
+    permanent = false
   ) {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-    this.def = min(0)(this.def + value)
+    const target = permanent ? this.refToBoardPokemon : this
+    target.def = min(0)(target.def + value)
   }
 
   addSpecialDefense(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
+    permanent = false
   ) {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-    this.speDef = min(0)(this.speDef + value)
+    const target = permanent ? this.refToBoardPokemon : this
+    target.speDef = min(0)(target.speDef + value)
   }
 
   addAttack(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
+    permanent = false
   ) {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-    this.atk = min(1)(this.atk + value)
+    const target = permanent ? this.refToBoardPokemon : this
+    target.atk = min(1)(target.atk + value)
+
   }
 
   addAttackSpeed(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
+    permanent = false
   ) {
+    const target = permanent ? this.refToBoardPokemon : this
     if (this.passive === Passive.MELMETAL) {
-      this.addAttack(value * 0.3, caster, apBoost, crit)
+      this.addAttack(value * 0.3, caster, apBoost, crit, permanent)
     } else {
       value =
         value *
         (1 + (apBoost * caster.ap) / 100) *
         (crit ? caster.critPower : 1)
-      const currentAtkSpeedBonus = 100 * (this.atkSpeed / 0.75 - 1)
+      const currentAtkSpeedBonus = 100 * (target.atkSpeed / 0.75 - 1)
       const atkSpeedBonus = currentAtkSpeedBonus + value
-      this.atkSpeed = clamp(
+      target.atkSpeed = clamp(
         roundToNDigits(0.75 * (1 + atkSpeedBonus / 100), 2),
         0.4,
         2.5
@@ -1641,11 +1657,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   applyStat(stat: Stat, value: number, permanent = false) {
 
-    const tempStatMap: ReadonlyMap<Stat, (
+    const statMap: ReadonlyMap<Stat, (
       value: number,
       caster: IPokemonEntity,
       apBoost: number,
-      crit: boolean
+      crit: boolean,
+      permanent: boolean
     ) => void> = new Map([
       [Stat.ATK, this.addAttack],
       [Stat.DEF, this.addDefense],
@@ -1660,27 +1677,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       [Stat.LUCK, this.addLuck]
     ])
 
-    const permStatMap: ReadonlyMap<Stat, string> = new Map([
-      [Stat.ATK, "atk"],
-      [Stat.DEF, "def"],
-      [Stat.SPE_DEF, "speDef"],
-      [Stat.AP, "ap"],
-      [Stat.ATK_SPEED, "atkSpeed"],
-      [Stat.HP, "hp"],
-      [Stat.LUCK, "luck"]
+    const invalidPermanentStats: ReadonlySet<Stat> = new Set([
+      Stat.PP, Stat.CRIT_CHANCE, Stat.CRIT_POWER, Stat.SHIELD
     ])
-
-    if (!permanent) {
-      tempStatMap[stat](value, this, 0, false)
-    } else {
-      if (this.isGhostOpponent) return
-      const permStat = permStatMap[stat]
-      if (!permStat) {
-        logger.debug(`${stat} can't be added as permanent stat`)
-        return
-      }
-      this.refToBoardPokemon[stat] += value
+    if (permanent && invalidPermanentStats.has(stat)){
+      logger.debug(`${stat} cannot be added permanently`)
+      return
     }
+    statMap[stat](value, this, 0, false, permanent)
   }
 
   resurrect() {
