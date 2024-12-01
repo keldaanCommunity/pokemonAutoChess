@@ -551,15 +551,11 @@ export interface IPokemonEntity {
     apBoost: number,
     crit: boolean
   ): void
-  addPermanentStats(
-    stat: { [K in keyof IPokemon]:
-      IPokemon[K] extends number ? K : never
-      }[keyof IPokemon],
-    value: number
-  )
   addPermanentItem(
-    item: Item,
-    remove?: boolean
+    item: Item
+  ): void
+  removePermanentItem(
+    item: Item
   ): void
   update(
     dt: number,
