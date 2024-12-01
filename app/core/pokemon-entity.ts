@@ -1674,9 +1674,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     const invalidPermanentStats: ReadonlySet<Stat> = new Set([
       Stat.PP, Stat.CRIT_CHANCE, Stat.CRIT_POWER, Stat.SHIELD
     ])
-    if (permanent && invalidPermanentStats.has(stat)){
-      logger.debug(`${stat} cannot be added permanently`)
-      return
+    if (invalidPermanentStats.has(stat)){
+      if(permanent){
+        logger.debug(`${stat} cannot be added permanently`)
+        return
+      }
+      statMap[stat](value, this, 0, false)
     }
     statMap[stat](value, this, 0, false, permanent)
   }
