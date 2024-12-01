@@ -6428,7 +6428,7 @@ export class HooH extends Pokemon {
   speDef = 3
   maxPP = 100
   range = 2
-  skill = Ability.FIRE_SPIN
+  skill = Ability.FIRE_BLAST
   passive = Passive.SUN
   attackSprite = AttackSprite.FIRE_RANGE
 }
