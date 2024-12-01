@@ -1680,6 +1680,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         return
       }
       statMap[stat](value, this, 0, false)
+      return
     }
     statMap[stat](value, this, 0, false, permanent)
   }
