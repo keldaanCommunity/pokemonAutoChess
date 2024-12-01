@@ -438,6 +438,10 @@ export default class Player extends Schema implements IPlayer {
       })
     }
 
+    newRegionalPokemons.sort(
+      (a, b) => getPokemonData(a).stars - getPokemonData(b).stars
+    )
+
     resetArraySchema(
       this.regionalPokemons,
       newRegionalPokemons.filter(
