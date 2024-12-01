@@ -442,7 +442,7 @@ export function displayAbility(
       break
 
     case Ability.FIERY_WRATH:
-      addAbilitySprite(Ability.HEAT_WAVE, coordinates, true)
+      addAbilitySprite(Ability.FLAMETHROWER, coordinates, true)
         .setScale(2)
         .setTint(0xc000c0)
       break
