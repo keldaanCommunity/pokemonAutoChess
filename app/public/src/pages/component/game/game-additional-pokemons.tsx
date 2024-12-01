@@ -7,7 +7,6 @@ import { RarityColor } from "../../../../../types/Config"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../../../utils/avatar"
-import { getGameScene } from "../../game"
 import SynergyIcon from "../icons/synergy-icon"
 
 export function GameAdditionalPokemonsIcon() {
@@ -32,7 +31,8 @@ export function GameAdditionalPokemonsIcon() {
 
 export function GameAdditionalPokemons() {
   const { t } = useTranslation()
-  const specialGameRule = getGameScene()?.room?.state.specialGameRule
+
+  const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
   const additionalPokemons = useAppSelector(
     (state) => state.game.additionalPokemons
   )
