@@ -551,6 +551,16 @@ export interface IPokemonEntity {
     apBoost: number,
     crit: boolean
   ): void
+  addPermanentStats(
+    stat: { [K in keyof IPokemon]:
+      IPokemon[K] extends number ? K : never
+      }[keyof IPokemon],
+    value: number
+  )
+  addPermanentItem(
+    item: Item,
+    remove?: boolean
+  ): void
   update(
     dt: number,
     board: Board,
