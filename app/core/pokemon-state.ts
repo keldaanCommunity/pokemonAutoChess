@@ -564,7 +564,7 @@ export default abstract class PokemonState {
         }
 
         if (pokemon.passive === Passive.PRIMEAPE) {
-          pokemon.refToBoardPokemon.atk += 1
+          pokemon.addPermanentStats("atk", 1)
         }
       }
 
