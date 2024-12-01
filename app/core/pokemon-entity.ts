@@ -1657,13 +1657,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   applyStat(stat: Stat, value: number, permanent = false) {
 
-    const statMap: ReadonlyMap<Stat, (
-      value: number,
-      caster: IPokemonEntity,
-      apBoost: number,
-      crit: boolean,
-      permanent: boolean
-    ) => void> = new Map([
+    const statMap: ReadonlyMap<Stat, (...args) => void> = new Map([
       [Stat.ATK, this.addAttack],
       [Stat.DEF, this.addDefense],
       [Stat.SPE_DEF, this.addSpecialDefense],
