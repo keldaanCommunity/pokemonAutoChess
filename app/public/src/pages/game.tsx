@@ -59,7 +59,8 @@ import {
   setStageLevel,
   setStreak,
   setSynergies,
-  setWeather
+  setWeather,
+  setSpecialGameRule
 } from "../stores/GameStore"
 import { joinGame, logIn, setProfile } from "../stores/NetworkStore"
 import { getAvatarString } from "../../../utils/avatar"
@@ -487,6 +488,10 @@ export default function Game() {
 
       room.state.listen("noElo", (value) => {
         dispatch(setNoELO(value))
+      })
+
+      room.state.listen("specialGameRule", (value) => {
+        dispatch(setSpecialGameRule(value))
       })
 
       room.state.additionalPokemons.onAdd(() => {

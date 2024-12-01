@@ -430,7 +430,7 @@ export default class Shop {
 
     if (
       player.effects.has(Effect.LIGHT_SCREEN) &&
-      shopIndex === 0 &&
+      shopIndex === 5 &&
       (player.rerollCount + state.stageLevel) % 3 === 0
     ) {
       const unowns = getUnownsPoolPerStage(state.stageLevel)

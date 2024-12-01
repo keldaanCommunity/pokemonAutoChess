@@ -58,7 +58,7 @@ Gen 1 is now complete !
 - Buff Fairy: 15/30/50/70 → 20/40/60/80% additional special damage
 - Buff Field: HP healed 30/30/30 → 30/35/40
 - Nerf Ghost: dodge chance ~~25%~~ 20% ; Nerf Ghost 8: Curse duration: ~~6~~ 7 seconds
-- Fix Psy 4 Light Screen Unown shop found every 5 shops instead of 3
+- Fix Psy 4 Light Screen Unown shop found every 5 shops instead of 3 ; Unown will now appear on the last shop card to not overlap with Unique/Legendary from repeat balls
 - Dark 1-range Pokémon with Wide lens no longer jump to the farthest enemy
 - Nerf Ground: Ground bonuses now can go up to 5 stacks max
 - Change Dragon 5: Dragons gain ~~30 Shield per ⭐~~ 5 shield for each ⭐ of all your dragon units on board

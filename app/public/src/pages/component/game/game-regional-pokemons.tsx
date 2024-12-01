@@ -8,7 +8,6 @@ import { Pkm } from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../../../utils/avatar"
-import { getGameScene } from "../../game"
 import SynergyIcon from "../icons/synergy-icon"
 
 export function GameRegionalPokemonsIcon() {
@@ -34,19 +33,12 @@ export function GameRegionalPokemonsIcon() {
 export function GameRegionalPokemons() {
   const { t } = useTranslation()
   const currentPlayer = useAppSelector(selectCurrentPlayer)
-  const specialGameRule = getGameScene()?.room?.state.specialGameRule
   const regionalPokemons: Pkm[] = currentPlayer?.regionalPokemons.map(p => p) ?? new Array<Pkm>()
   const pokemonCollection = useAppSelector(
     (state) => state.game.pokemonCollection
   )
 
-  if (specialGameRule === SpecialGameRule.EVERYONE_IS_HERE) {
-    return (
-      <div className="game-additional-pokemons">
-        <p>{t("scribble.EVERYONE_IS_HERE")}</p>
-      </div>
-    )
-  } else if (!regionalPokemons || regionalPokemons.length === 0) {
+  if (!regionalPokemons || regionalPokemons.length === 0) {
     return (
       <div className="game-regional-pokemons">
         <p className="help">{t("regional_pokemon_hint")}</p>

@@ -11,7 +11,6 @@ import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../../../utils/avatar"
-import { getGameScene } from "../../game"
 import { cc } from "../../utils/jsx"
 import { Money } from "../icons/money"
 import SynergyIcon from "../icons/synergy-icon"
@@ -48,6 +47,8 @@ export default function GamePokemonPortrait(props: {
   const board = useAppSelector(
     (state) => state.game.players.find((p) => p.id === uid)?.board
   )
+  const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
+
   const isOnAnotherBoard = currentPlayerId !== uid
 
   const [count, setCount] = useState(0)
@@ -116,7 +117,6 @@ export default function GamePokemonPortrait(props: {
       : pokemon
   const pokemonInPortraitConfig = pokemonCollection.get(pokemonInPortrait.index)
 
-  const specialGameRule = getGameScene()?.room?.state.specialGameRule
   let cost = getBuyPrice(pokemon.name, specialGameRule)
 
   if (

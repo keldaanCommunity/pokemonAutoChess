@@ -23,7 +23,7 @@ export default function GamePokemonsPropositions() {
     (state) => state.game.itemsProposition
   )
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
-  const specialGameRule = getGameScene()?.room?.state.specialGameRule
+  const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
 
   const board = getGameScene()?.board
   const isBenchFull =
