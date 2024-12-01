@@ -481,7 +481,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     const target = permanent ? this.refToBoardPokemon : this
-    this.luck = min(-100)(this.luck + value)
+    target.luck = min(-100)(target.luck + value)
   }
 
   addDefense(
