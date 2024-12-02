@@ -39,7 +39,7 @@ import {
   EvolutionTime
 } from "../../types/Config"
 import { Effect } from "../../types/enum/Effect"
-import { AttackType, Stat, Team } from "../../types/enum/Game"
+import { AttackType, Team } from "../../types/enum/Game"
 import { ArtificialItems, Berries, Item } from "../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
@@ -976,8 +976,7 @@ export class SchoolingStrategy extends AbilityStrategy {
     if (pokemon.player && !pokemon.isGhostOpponent) {
       pokemon.player.board.forEach((ally, id) => {
         if (ally && ally.name === Pkm.WISHIWASHI && isOnBench(ally)) {
-          pokemon.addMaxHP(50, pokemon, 0, false)
-          pokemon.applyStat(Stat.HP, 50, true)
+          pokemon.addMaxHP(50, pokemon, 0, false, true)
           pokemon.player!.board.delete(id)
         }
       })
@@ -5524,12 +5523,9 @@ export class FellStingerStrategy extends AbilityStrategy {
       crit
     )
     if (victim.death && !pokemon.isClone) {
-      pokemon.addAbilityPower(5, pokemon, 0, false)
-      pokemon.addAttack(1, pokemon, 0, false)
-      pokemon.addMaxHP(10, pokemon, 0, false)
-      pokemon.applyStat(Stat.ATK, 1, true)
-      pokemon.applyStat(Stat.AP, 5, true)
-      pokemon.applyStat(Stat.HP, 10, true)
+      pokemon.addAbilityPower(5, pokemon, 0, false, true)
+      pokemon.addAttack(1, pokemon, 0, false, true)
+      pokemon.addMaxHP(10, pokemon, 0, false, true)
     }
   }
 }
