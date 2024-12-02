@@ -30,6 +30,7 @@ import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { Effects } from "../effects"
+import { createRandomEgg } from "../egg-factory"
 import type { IPokemonConfig } from "../mongo-models/user-metadata"
 import PokemonFactory from "../pokemon-factory"
 import {
@@ -37,7 +38,7 @@ import {
   getPokemonData
 } from "../precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../precomputed/precomputed-rarity"
-import { getBuyPrice, getRegularsTier1 } from "../shop"
+import { getRegularsTier1, getSellPrice } from "../shop"
 import ExperienceManager from "./experience-manager"
 import HistoryItem from "./history-item"
 import { Pokemon, PokemonClasses } from "./pokemon"
@@ -178,16 +179,22 @@ export default class Player extends Schema implements IPlayer {
     } else if (state.specialGameRule === SpecialGameRule.DO_IT_ALL_YOURSELF) {
       const { index, emotion, shiny } = getPokemonConfigFromAvatar(this.avatar)
       this.firstPartner = PkmByIndex[index]
-      const avatar = PokemonFactory.createPokemonFromName(this.firstPartner, {
-        selectedEmotion: emotion,
-        selectedShiny: shiny
-      })
+      let avatar: Pokemon
+      if (this.firstPartner === Pkm.EGG) {
+        avatar = createRandomEgg(shiny, this)
+      } else {
+        avatar = PokemonFactory.createPokemonFromName(this.firstPartner, {
+          selectedEmotion: emotion,
+          selectedShiny: shiny
+        })
+      }
+
       avatar.positionX = getFirstAvailablePositionInBench(this.board) ?? 0
       avatar.positionY = 0
       avatar.hp += 100
       this.board.set(avatar.id, avatar)
       avatar.onAcquired(this)
-      this.money += 20 - getBuyPrice(avatar.name)
+      this.money += 40 - 2 * getSellPrice(avatar, state.specialGameRule)
     } else if (state.specialGameRule === SpecialGameRule.FIRST_PARTNER) {
       const randomCommons = pickNRandomIn(
         getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.COMMON).filter(
