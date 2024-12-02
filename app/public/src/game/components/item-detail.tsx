@@ -40,7 +40,12 @@ export function ItemDetailTooltip({
   return (
     <div className="game-item-detail">
       <img className="game-item-detail-icon" src={`assets/item/${item}.png`} />
-      <p className="game-item-detail-name">{t(`item.${item}`)}</p>
+      <p className="game-item-detail-name">
+        {ItemRecipe[item] && (<div className="game-item-recipe">
+          {ItemRecipe[item]?.map((item, i) => <><img className="game-item-detail-icon" src={`assets/item/${item}.png`} />{i === 0 && ' + '}</>)}
+        </div>)}
+        {t(`item.${item}`)}
+      </p>
       <div className="game-item-detail-stats">
         {Object.entries(ItemStats[item] ?? {}).map(([stat, value]) => (
           <div key={stat}>

@@ -31,6 +31,17 @@
   font-weight: 500;
 }
 
+.game-item-recipe {
+  float: right;
+}
+
+.game-item-recipe img {
+  width: 22.5px;
+  height: 22.5px;
+  image-rendering: pixelated;
+  object-fit: contain;
+}
+
 .game-item-detail-stats {
   grid-area: stats;
   display: flex;

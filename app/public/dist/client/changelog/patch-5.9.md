@@ -12,6 +12,8 @@
 
 # UI
 
+- Added item components recipe on craftable items tooltip
+
 # Bugfix
 
 # Misc
