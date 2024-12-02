@@ -440,10 +440,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   ) {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    const target = permanent ? this.refToBoardPokemon : this
-    target.hp = min(1)(target.hp + value)
-    if(permanent) return
+    const update = (target: {hp: number}) => {
+      target.hp = min(1)(target.hp + value)
+    }
+    update(this)
     this.life = max(this.hp)(this.life + value)
+    if(permanent && !this.isGhostOpponent) {
+      update(this.refToBoardPokemon)
+    }
+    
   }
 
   addDodgeChance(
@@ -467,8 +472,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-    const target = permanent ? this.refToBoardPokemon : this
-    target.ap = min(-100)(target.ap + value)
+    const update = (target: {ap: number}) => {
+      target.ap = min(-100)(target.ap + value)
+    }
+    update(this)
+    if(permanent && !this.isGhostOpponent){
+      update(this.refToBoardPokemon)
+    }
   }
 
   addLuck(
@@ -480,8 +490,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   ) {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    const target = permanent ? this.refToBoardPokemon : this
-    target.luck = min(-100)(target.luck + value)
+    const update = (target: {luck: number}) => {
+      target.luck = min(-100)(target.luck + value)
+    }
+    update(this)
+    if (permanent && !this.isGhostOpponent){
+      update(this.refToBoardPokemon)
+    }
   }
 
   addDefense(
@@ -494,8 +509,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-    const target = permanent ? this.refToBoardPokemon : this
-    target.def = min(0)(target.def + value)
+    const update = (target: {def: number}) => {
+      target.def = min(0)(target.def + value)
+    }
+    update(this)
+    if (permanent && !this.isGhostOpponent){
+      update(this.refToBoardPokemon)
+    }
   }
 
   addSpecialDefense(
@@ -508,8 +528,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-    const target = permanent ? this.refToBoardPokemon : this
-    target.speDef = min(0)(target.speDef + value)
+    const update = (target: {speDef: number}) => {
+      target.speDef = min(0)(target.speDef + value)
+    }
+    update(this)
+    if (permanent && !this.isGhostOpponent){
+      update(this.refToBoardPokemon)
+    }
   }
 
   addAttack(
@@ -522,9 +547,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-    const target = permanent ? this.refToBoardPokemon : this
-    target.atk = min(1)(target.atk + value)
-
+    const update = (target: {atk: number}) => {
+      target.atk = min(1)(target.atk + value)
+    }
+    update(this)
+    if (permanent && !this.isGhostOpponent){
+      update(this.refToBoardPokemon)
+    }
   }
 
   addAttackSpeed(
@@ -534,7 +563,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean,
     permanent = false
   ) {
-    const target = permanent ? this.refToBoardPokemon : this
     if (this.passive === Passive.MELMETAL) {
       this.addAttack(value * 0.3, caster, apBoost, crit, permanent)
     } else {
@@ -542,13 +570,19 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         value *
         (1 + (apBoost * caster.ap) / 100) *
         (crit ? caster.critPower : 1)
-      const currentAtkSpeedBonus = 100 * (target.atkSpeed / 0.75 - 1)
-      const atkSpeedBonus = currentAtkSpeedBonus + value
-      target.atkSpeed = clamp(
-        roundToNDigits(0.75 * (1 + atkSpeedBonus / 100), 2),
-        0.4,
-        2.5
-      )
+      const update = (target: {atkSpeed: number}) => {
+        const currentAtkSpeedBonus = 100 * (target.atkSpeed / 0.75 - 1)
+        const atkSpeedBonus = currentAtkSpeedBonus + value
+        target.atkSpeed = clamp(
+          roundToNDigits(0.75 * (1 + atkSpeedBonus / 100), 2),
+          0.4,
+          2.5
+        )
+      }
+      update(this)
+      if(permanent && !this.isGhostOpponent){
+        update(this.refToBoardPokemon)
+      }
     }
   }
 
@@ -1677,7 +1711,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (invalidPermanentStats.has(stat)){
       if(permanent){
         logger.debug(`${stat} cannot be added permanently`)
-        return
       }
       statMap[stat](value, this, 0, false)
       return
