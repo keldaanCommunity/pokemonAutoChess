@@ -1,11 +1,10 @@
 import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
-import ItemFactory from "../models/item-factory"
+import { getWonderboxItems } from "./items"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../models/precomputed/precomputed-types"
-import { getPortraitPath } from "../public/src/pages/utils/utils"
 import GameRoom from "../rooms/game-room"
 import { IPokemon, IPokemonEntity, ISimulation, Transfer } from "../types"
 import {
@@ -36,8 +35,8 @@ import { Synergy } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
 import { IPokemonData } from "../types/interfaces/PokemonData"
 import { count } from "../utils/array"
-import { isOnBench } from "../utils/board"
 import { logger } from "../utils/logger"
+import { isOnBench } from "../utils/board"
 import {
   chance,
   pickRandomIn,
@@ -49,6 +48,8 @@ import Board from "./board"
 import Dps from "./dps"
 import { PokemonEntity, getStrongestUnit, getUnitScore } from "./pokemon-entity"
 import { DelayedCommand } from "./simulation-command"
+import { getAvatarString } from "../utils/avatar"
+import { max } from "../utils/number"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -71,7 +72,8 @@ export default class Simulation extends Schema implements ISimulation {
   bluePlayer: Player | undefined
   redPlayer: Player | undefined
   stormLightningTimer = 0
-  tidalwaveTimer = 0
+  tidalWaveTimer = 0
+  tidalWaveCounter = 0
 
   constructor(
     id: string,
@@ -212,13 +214,19 @@ export default class Simulation extends Schema implements ISimulation {
       pokemonEntity
     )
 
+    const dps = new Dps(
+      pokemonEntity.id,
+      getAvatarString(
+        pokemonEntity.index,
+        pokemonEntity.shiny,
+        pokemonEntity.emotion
+      )
+    )
     if (team == Team.BLUE_TEAM) {
-      const dps = new Dps(pokemonEntity.id, getPortraitPath(pokemonEntity))
       this.blueTeam.set(pokemonEntity.id, pokemonEntity)
       this.blueDpsMeter.set(pokemonEntity.id, dps)
     }
     if (team == Team.RED_TEAM) {
-      const dps = new Dps(pokemonEntity.id, getPortraitPath(pokemonEntity))
       this.redTeam.set(pokemonEntity.id, pokemonEntity)
       this.redDpsMeter.set(pokemonEntity.id, dps)
     }
@@ -332,7 +340,7 @@ export default class Simulation extends Schema implements ISimulation {
     // wonderbox should be applied first so that wonderbox items effects can be applied after
     if (pokemon.items.has(Item.WONDER_BOX)) {
       pokemon.items.delete(Item.WONDER_BOX)
-      const randomItems = ItemFactory.createWonderboxItems(pokemon.items)
+      const randomItems = getWonderboxItems(pokemon.items)
       randomItems.forEach((item) => {
         if (pokemon.items.size < 3) {
           pokemon.items.add(item)
@@ -417,7 +425,9 @@ export default class Simulation extends Schema implements ISimulation {
 
     if (item === Item.REPEAT_BALL && pokemon.player) {
       pokemon.addAbilityPower(
-        Math.floor(pokemon.player.rerollCount / 2),
+        Math.floor(
+          (pokemon.player.rerollCount + pokemon.simulation.stageLevel) / 2
+        ),
         pokemon,
         0,
         false
@@ -447,7 +457,7 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     if (pokemon.types.has(Synergy.GHOST)) {
-      pokemon.addDodgeChance(0.25, pokemon, 0, false)
+      pokemon.addDodgeChance(0.2, pokemon, 0, false)
     }
   }
 
@@ -634,16 +644,21 @@ export default class Simulation extends Schema implements ISimulation {
 
     // SYNERGY EFFECTS (dragon, normal, etc)
     for (const team of [this.blueTeam, this.redTeam]) {
+      const dragonLevel = values(team).reduce(
+        (acc, pokemon) =>
+          acc + (pokemon.types.has(Synergy.DRAGON) ? pokemon.stars : 0),
+        0
+      )
       team.forEach((pokemon) => {
         if (
           pokemon.effects.has(Effect.DRAGON_SCALES) ||
           pokemon.effects.has(Effect.DRAGON_DANCE)
         ) {
-          pokemon.addShield(30 * pokemon.stars, pokemon, 0, false)
+          pokemon.addShield(dragonLevel * 5, pokemon, 0, false)
         }
         if (pokemon.effects.has(Effect.DRAGON_DANCE)) {
-          pokemon.addAbilityPower(10 * pokemon.stars, pokemon, 0, false)
-          pokemon.addAttackSpeed(10 * pokemon.stars, pokemon, 0, false)
+          pokemon.addAbilityPower(dragonLevel, pokemon, 0, false)
+          pokemon.addAttackSpeed(dragonLevel, pokemon, 0, false)
         }
         let shieldBonus = 0
         if (pokemon.effects.has(Effect.STAMINA)) {
@@ -1092,7 +1107,7 @@ export default class Simulation extends Schema implements ISimulation {
         case Effect.HYDRATION:
         case Effect.WATER_VEIL:
           pokemon.effects.add(effect)
-          this.tidalwaveTimer = 8000
+          this.tidalWaveTimer = 8000
           break
 
         case Effect.ODD_FLOWER:
@@ -1157,13 +1172,8 @@ export default class Simulation extends Schema implements ISimulation {
           }
           break
 
-        case Effect.COOL_BREEZE:
-          pokemon.effects.add(Effect.COOL_BREEZE)
-          pokemon.addSpecialDefense(2, pokemon, 0, false)
-          break
-
         case Effect.CHILLY:
-          pokemon.effects.add(Effect.FROSTY)
+          pokemon.effects.add(Effect.CHILLY)
           pokemon.addSpecialDefense(2, pokemon, 0, false)
           break
 
@@ -1173,7 +1183,7 @@ export default class Simulation extends Schema implements ISimulation {
           break
 
         case Effect.FREEZING:
-          pokemon.effects.add(Effect.FROSTY)
+          pokemon.effects.add(Effect.FREEZING)
           pokemon.addSpecialDefense(20, pokemon, 0, false)
           break
 
@@ -1221,7 +1231,7 @@ export default class Simulation extends Schema implements ISimulation {
         case Effect.GOOGLE_SPECS:
           if (types.has(Synergy.ARTIFICIAL) && pokemon.items.size > 0) {
             const nbItems =
-              pokemon.items.size + (pokemon.items.has(Item.WONDER_BOX) ? 1 : 0)
+              max(3)(pokemon.items.size + (pokemon.items.has(Item.WONDER_BOX) ? 1 : 0))
             const attackBoost = {
               [Effect.DUBIOUS_DISC]: 0,
               [Effect.LINK_CABLE]: (8 / 100) * pokemon.baseAtk,
@@ -1313,7 +1323,7 @@ export default class Simulation extends Schema implements ISimulation {
             pokemon.effects.add(Effect.MAX_ILLUMINATION)
             pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
             pokemon.addAbilityPower(20, pokemon, 0, false)
-            pokemon.status.triggerRuneProtect(10000)
+            pokemon.status.triggerRuneProtect(8000)
             pokemon.addDefense(0.5 * pokemon.baseDef, pokemon, 0, false)
             pokemon.addSpecialDefense(
               0.5 * pokemon.baseSpeDef,
@@ -1496,10 +1506,14 @@ export default class Simulation extends Schema implements ISimulation {
       }
     }
 
-    if (this.tidalwaveTimer > 0) {
-      this.tidalwaveTimer -= dt
-      if (this.tidalwaveTimer <= 0) {
+    if (this.tidalWaveTimer > 0) {
+      this.tidalWaveTimer -= dt
+      if (this.tidalWaveTimer <= 0) {
+        this.tidalWaveCounter++
         this.triggerTidalWave()
+        if (this.tidalWaveCounter < 2) {
+          this.tidalWaveTimer = 8000
+        }
       }
     }
   }
@@ -1698,7 +1712,11 @@ export default class Simulation extends Schema implements ISimulation {
           false
         )
         enemyWithHighestAtk.status.curseWeakness = true
-        enemyWithHighestAtk.status.triggerParalysis(30000, enemyWithHighestAtk)
+        enemyWithHighestAtk.status.triggerParalysis(
+          30000,
+          enemyWithHighestAtk,
+          null
+        )
       }
     }
 
@@ -1723,29 +1741,31 @@ export default class Simulation extends Schema implements ISimulation {
       const strongestEnemy = getStrongestUnit(opponentsCursable)
       if (strongestEnemy) {
         strongestEnemy.status.curseFate = true
-        strongestEnemy.status.triggerCurse(6000)
+        strongestEnemy.status.triggerCurse(7000)
       }
     }
   }
 
   triggerTidalWave() {
+    const redWaterLevel = this.redEffects.has(Effect.WATER_VEIL)
+      ? 3
+      : this.redEffects.has(Effect.HYDRATION)
+        ? 2
+        : this.redEffects.has(Effect.SWIFT_SWIM)
+          ? 1
+          : 0
+
     if (
-      this.redEffects.has(Effect.SWIFT_SWIM) ||
-      this.redEffects.has(Effect.HYDRATION) ||
-      this.redEffects.has(Effect.WATER_VEIL)
+      (redWaterLevel > 0 && this.tidalWaveCounter === 1) ||
+      (redWaterLevel === 3 && this.tidalWaveCounter === 2)
     ) {
-      const waveLevel = this.redEffects.has(Effect.WATER_VEIL)
-        ? 3
-        : this.redEffects.has(Effect.HYDRATION)
-          ? 2
-          : 1
       this.room.broadcast(Transfer.ABILITY, {
         id: this.id,
         skill: "TIDAL_WAVE",
         positionX: 0,
         positionY: 0,
         targetX: 0,
-        targetY: waveLevel - 1,
+        targetY: redWaterLevel - 1,
         orientation: Orientation.DOWN
       })
       this.room.broadcast(Transfer.CLEAR_BOARD, {
@@ -1760,11 +1780,11 @@ export default class Simulation extends Schema implements ISimulation {
             if (cell.team === Team.RED_TEAM) {
               cell.status.clearNegativeStatus()
               if (cell.types.has(Synergy.AQUATIC)) {
-                cell.handleHeal(waveLevel * 0.1 * cell.hp, cell, 0, false)
+                cell.handleHeal(redWaterLevel * 0.1 * cell.hp, cell, 0, false)
               }
             } else {
               cell.handleDamage({
-                damage: waveLevel * 0.05 * cell.hp,
+                damage: redWaterLevel * 0.05 * cell.hp,
                 board: this.board,
                 attackType: AttackType.TRUE,
                 attacker: null,
@@ -1787,23 +1807,24 @@ export default class Simulation extends Schema implements ISimulation {
       }
     }
 
+    const blueWaterLevel = this.blueEffects.has(Effect.WATER_VEIL)
+      ? 3
+      : this.blueEffects.has(Effect.HYDRATION)
+        ? 2
+        : this.blueEffects.has(Effect.SWIFT_SWIM)
+          ? 1
+          : 0
     if (
-      this.blueEffects.has(Effect.SWIFT_SWIM) ||
-      this.blueEffects.has(Effect.HYDRATION) ||
-      this.blueEffects.has(Effect.WATER_VEIL)
+      (blueWaterLevel > 0 && this.tidalWaveCounter === 1) ||
+      (blueWaterLevel === 3 && this.tidalWaveCounter === 2)
     ) {
-      const waveLevel = this.blueEffects.has(Effect.WATER_VEIL)
-        ? 3
-        : this.blueEffects.has(Effect.HYDRATION)
-          ? 2
-          : 1
       this.room.broadcast(Transfer.ABILITY, {
         id: this.id,
         skill: "TIDAL_WAVE",
         positionX: 0,
         positionY: 0,
         targetX: 0,
-        targetY: waveLevel - 1,
+        targetY: blueWaterLevel - 1,
         orientation: Orientation.UP
       })
       this.room.broadcast(Transfer.CLEAR_BOARD, {
@@ -1818,11 +1839,11 @@ export default class Simulation extends Schema implements ISimulation {
             if (cell.team === Team.BLUE_TEAM) {
               cell.status.clearNegativeStatus()
               if (cell.types.has(Synergy.AQUATIC)) {
-                cell.handleHeal(waveLevel * 0.1 * cell.hp, cell, 0, false)
+                cell.handleHeal(blueWaterLevel * 0.1 * cell.hp, cell, 0, false)
               }
             } else {
               cell.handleDamage({
-                damage: waveLevel * 0.05 * cell.hp,
+                damage: blueWaterLevel * 0.05 * cell.hp,
                 board: this.board,
                 attackType: AttackType.TRUE,
                 attacker: null,

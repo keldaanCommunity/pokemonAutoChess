@@ -146,19 +146,8 @@ export class CountEvolutionRule extends EvolutionRule {
       player
     )
 
-    // carry over the permanent stat buffs
-    const permanentBuffStats = ["hp", "atk", "def", "speDef"] as const
-    for (const stat of permanentBuffStats) {
-      const statStacked = sum(
-        pokemonsBeforeEvolution.map(
-          (p) => p[stat] - new PokemonClasses[p.name]()[stat]
-        )
-      )
-      if (statStacked > 0) {
-        pokemonEvolved[stat] += statStacked
-      }
-    }
-
+    carryOverPermanentStats(pokemonEvolved, pokemonsBeforeEvolution)
+  
     if (pokemon.onEvolve) {
       pokemon.onEvolve({ pokemonEvolved, pokemonsBeforeEvolution, player })
     }
@@ -235,6 +224,7 @@ export class ItemEvolutionRule extends EvolutionRule {
       pokemon,
       pokemonEvolutionName
     )
+    carryOverPermanentStats(pokemonEvolved, [pokemon])
     return pokemonEvolved
   }
 }
@@ -282,6 +272,7 @@ export class HatchEvolutionRule extends EvolutionRule {
       pokemon,
       pokemonEvolutionName
     )
+    carryOverPermanentStats(pokemonEvolved, [pokemon])
     return pokemonEvolved
   }
 }
@@ -313,6 +304,23 @@ export class ConditionBasedEvolutionRule extends EvolutionRule {
       pokemon,
       pokemonEvolutionName
     )
+    carryOverPermanentStats(pokemonEvolved, [pokemon])
     return pokemonEvolved
   }
 }
+function carryOverPermanentStats(pokemonEvolved: Pokemon, pokemonsBeforeEvolution: Pokemon[]) {
+    // carry over the permanent stat buffs
+    const permanentBuffStats = ["hp", "atk", "def", "speDef"] as const
+    for (const stat of permanentBuffStats) {
+      const statStacked = sum(
+        pokemonsBeforeEvolution.map(
+          (p) => p[stat] - new PokemonClasses[p.name]()[stat]
+        )
+      )
+      if (statStacked > 0) {
+        pokemonEvolved[stat] += statStacked
+      }
+    }
+
+}
+

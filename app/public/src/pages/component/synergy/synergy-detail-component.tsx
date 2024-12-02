@@ -15,11 +15,12 @@ import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { roundToNDigits } from "../../../../../utils/number"
 import { values } from "../../../../../utils/schemas"
 import { useAppSelector } from "../../../hooks"
-import { getPortraitSrc } from "../../../utils"
+import { getPortraitSrc } from "../../../../../utils/avatar"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import SynergyIcon from "../icons/synergy-icon"
 import { EffectDescriptionComponent } from "./effect-description"
+import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 
 export default function SynergyDetailComponent(props: {
   type: Synergy
@@ -33,6 +34,7 @@ export default function SynergyDetailComponent(props: {
   const currentPlayer = useAppSelector((state) =>
     state.game.players.find((p) => p.id === state.game.currentPlayerId)
   )
+  const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
 
   const levelReached = SynergyTriggers[props.type]
     .filter((n) => n <= props.value)
@@ -50,7 +52,7 @@ export default function SynergyDetailComponent(props: {
   const additionals = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
     props.type
   ].additionalPokemons
-    .filter((p) => additionalPokemons.includes(PkmFamily[p]))
+    .filter((p) => additionalPokemons.includes(PkmFamily[p]) || specialGameRule === SpecialGameRule.EVERYONE_IS_HERE)
     .filter(
       (p, i, arr) => arr.findIndex((x) => PkmFamily[x] === PkmFamily[p]) === i // remove duplicates of same family
     )

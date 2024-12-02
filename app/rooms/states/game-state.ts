@@ -68,7 +68,8 @@ export default class GameState extends Schema {
     noElo: boolean,
     gameMode: GameMode,
     minRank: EloRank | null,
-    maxRank: EloRank | null
+    maxRank: EloRank | null,
+    specialGameRule: SpecialGameRule | null
   ) {
     super()
     this.preparationId = preparationId
@@ -82,6 +83,8 @@ export default class GameState extends Schema {
 
     if (gameMode === GameMode.SCRIBBLE) {
       this.specialGameRule = pickRandomIn(Object.values(SpecialGameRule))
+    } else {
+      this.specialGameRule = specialGameRule
     }
   }
 }

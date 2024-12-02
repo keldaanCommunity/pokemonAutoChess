@@ -138,7 +138,7 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (pokemon.effects.has(Effect.STICKY_WEB) && !this.paralysis) {
-      this.triggerParalysis(2000, pokemon)
+      this.triggerParalysis(2000, pokemon, null)
     }
 
     if (pokemon.status.runeProtect) {
@@ -254,7 +254,7 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (pokemon.status.curseWeakness && !pokemon.status.paralysis) {
-      this.triggerParalysis(30000, pokemon)
+      this.triggerParalysis(30000, pokemon, null)
     }
 
     if (pokemon.status.curseTorment && !pokemon.status.fatigue) {
@@ -262,14 +262,14 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (pokemon.status.curseFate && !pokemon.status.curse) {
-      this.triggerCurse(5000) //Intentionally at 5s to account for status update delay
+      this.triggerCurse(6500) //Intentionally a bit less than 7 seconds to account for status update delay
     }
   }
 
-  triggerMagmaStorm(pkm: PokemonEntity, origin: PokemonEntity | null) {
+  triggerMagmaStorm(delay: number, origin: PokemonEntity | null) {
     if (!this.magmaStorm && origin) {
       this.magmaStorm = true
-      this.magmaStormCooldown = 500
+      this.magmaStormCooldown = delay
       this.magmaStormOrigin = origin
     }
   }
@@ -281,7 +281,7 @@ export default class Status extends Schema implements IStatus {
       for (let i = 0; i < adjacentCells.length; i++) {
         const cell = adjacentCells[i]
         if (cell && cell.value && cell.value.team === pkm.team) {
-          cell.value.status.triggerMagmaStorm(cell.value, this.magmaStormOrigin)
+          cell.value.status.triggerMagmaStorm(500, this.magmaStormOrigin)
           break
         }
       }
@@ -795,12 +795,19 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerConfusion(duration: number, pkm: PokemonEntity) {
+  triggerConfusion(
+    duration: number,
+    pkm: PokemonEntity,
+    origin: PokemonEntity,
+    apBoost = false
+  ) {
     if (
       !this.confusion &&
       !this.runeProtect &&
       !pkm.effects.has(Effect.IMMUNITY_CONFUSION)
     ) {
+      const boost = apBoost && origin ? (duration * origin.ap) / 100 : 0
+      duration = duration + boost
       if (pkm.simulation.weather === Weather.SANDSTORM) {
         duration *= 1.3
       }
@@ -893,12 +900,19 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerParalysis(duration: number, pkm: PokemonEntity) {
+  triggerParalysis(
+    duration: number,
+    pkm: PokemonEntity,
+    origin: PokemonEntity | null,
+    apBoost = false
+  ) {
     if (!this.runeProtect && !pkm.effects.has(Effect.IMMUNITY_PARALYSIS)) {
       if (!this.paralysis) {
         this.paralysis = true
         pkm.addAttackSpeed(-40, pkm, 0, false)
       }
+      const boost = apBoost && origin ? (duration * origin.ap) / 100 : 0
+      duration = duration + boost
       if (pkm.simulation.weather === Weather.STORM) {
         duration *= 1.3
         const nbElectricQuartz = pkm.player
@@ -1090,6 +1104,7 @@ export default class Status extends Schema implements IStatus {
   triggerLocked(duration: number, pkm: PokemonEntity) {
     if (
       !this.locked && // lock cannot be stacked
+      !this.skydiving &&
       !this.runeProtect
     ) {
       if (pkm.status.enraged) {

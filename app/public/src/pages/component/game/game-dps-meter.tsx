@@ -3,11 +3,12 @@ import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { preferences, savePreferences } from "../../../preferences"
-import { getAvatarSrc } from "../../../utils"
+import { getAvatarSrc } from "../../../../../utils/avatar"
 import GamePlayerDpsMeter from "./game-player-dps-meter"
 import GamePlayerDpsTakenMeter from "./game-player-dps-taken-meter"
 import GamePlayerHpsMeter from "./game-player-hps-meter"
-import { Team } from "../../../../../types/enum/Game"
+import { GamePhaseState, Team } from "../../../../../types/enum/Game"
+import { PVEStages } from "../../../../../models/pve-stages"
 import "./game-dps-meter.css"
 
 export default function GameDpsMeter() {
@@ -16,6 +17,9 @@ export default function GameDpsMeter() {
   const team = useAppSelector(
     (state) => state.game.currentTeam
   )
+  const stageLevel = useAppSelector((state) => state.game.stageLevel)
+  const phase = useAppSelector((state) => state.game.phase)
+
   const blueDpsMeter = useAppSelector((state) => state.game.blueDpsMeter)
   const redDpsMeter = useAppSelector((state) => state.game.redDpsMeter)
   const myDpsMeter = team === Team.BLUE_TEAM ? blueDpsMeter : redDpsMeter
@@ -24,6 +28,8 @@ export default function GameDpsMeter() {
   const [isOpen, setOpen] = useState(preferences.showDpsMeter)
 
   if (!currentPlayer) return null
+
+  const isPVE = phase === GamePhaseState.FIGHT ? stageLevel in PVEStages : (stageLevel - 1) in PVEStages
 
   const name = currentPlayer.name
   const avatar = currentPlayer.avatar
@@ -57,13 +63,13 @@ export default function GameDpsMeter() {
             <img src={getAvatarSrc(avatar)} className="pokemon-portrait"></img>
             <p>{name}</p>
           </div>
-          <h2>Vs</h2>
+          <h2>vs</h2>
           <div>
             <img
               src={getAvatarSrc(opponentAvatar)}
               className="pokemon-portrait"
             ></img>
-            <p>{t(opponentName)}</p>
+            <p>{isPVE ? t(opponentName) : opponentName}</p>
           </div>
         </header>
         <Tabs>

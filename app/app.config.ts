@@ -136,6 +136,10 @@ export default config({
       res.sendFile(viewsSrc)
     })
 
+    app.get("/gameboy", (req, res) => {
+      res.sendFile(viewsSrc)
+    })
+
     app.get("/pokemons", (req, res) => {
       res.send(Pkm)
     })

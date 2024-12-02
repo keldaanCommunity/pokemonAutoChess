@@ -20,6 +20,7 @@ import {
   OnNewMessageCommand,
   OnRemoveBotCommand,
   OnRoomChangeRankCommand,
+  OnRoomChangeSpecialRule,
   OnRoomNameCommand,
   OnRoomPasswordCommand,
   OnToggleEloCommand,
@@ -232,6 +233,18 @@ export default class PreparationRoom extends Room<PreparationState> {
       }
     )
 
+    this.onMessage(Transfer.CHANGE_SPECIAL_RULE, (client, specialRule) => {
+      logger.info(Transfer.CHANGE_SPECIAL_RULE, this.roomName, specialRule)
+      try {
+        this.dispatcher.dispatch(new OnRoomChangeSpecialRule(), {
+          client,
+          specialRule
+        })
+      } catch (error) {
+        logger.error(error)
+      }
+    })
+
     this.onMessage(Transfer.TOGGLE_NO_ELO, (client, message) => {
       logger.info(Transfer.TOGGLE_NO_ELO, this.roomName)
       try {
@@ -250,7 +263,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       }
     })
 
-    this.onMessage(Transfer.TOGGLE_READY, (client, ready?: boolean) => {
+    this.onMessage(Transfer.TOGGLE_READY, (client, ready: boolean) => {
       logger.info(Transfer.TOGGLE_READY, this.roomName)
       try {
         this.dispatcher.dispatch(new OnToggleReadyCommand(), { client, ready })

@@ -86,6 +86,7 @@ export enum Transfer {
   CHANGE_ROOM_NAME = "CHANGE_ROOM_NAME",
   CHANGE_ROOM_PASSWORD = "CHANGE_ROOM_PASSWORD",
   CHANGE_ROOM_RANKS = "CHANGE_ROOM_RANKS",
+  CHANGE_SPECIAL_RULE = "CHANGE_SPECIAL_RULE",
   BUY_EMOTION = "BUY_EMOTION",
   BOOSTER_CONTENT = "BOOSTER_CONTENT",
   USER = "USER",
@@ -144,6 +145,7 @@ export enum AttackSprite {
   DARK_RANGE = "DARK/range",
   DRAGON_MELEE = "DRAGON/melee",
   DRAGON_RANGE = "DRAGON/range",
+  DRAGON_GREEN_RANGE = "DRAGON_GREEN/range",
   ELECTRIC_MELEE = "ELECTRIC/melee",
   ELECTRIC_RANGE = "ELECTRIC/range",
   FAIRY_MELEE = "FAIRY/melee",
@@ -180,6 +182,7 @@ export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
     "DARK/range": [1.5, 1.5],
     "DRAGON/melee": [2, 2],
     "DRAGON/range": [2, 2],
+    "DRAGON_GREEN/range": [2, 2],
     "ELECTRIC/melee": [1.5, 1.5],
     "ELECTRIC/range": [2, 2],
     "FAIRY/melee": [2, 2],
@@ -608,7 +611,6 @@ export interface IPokemonEntity {
 }
 
 export interface IStatus {
-  magmaStorm: boolean
   burn: boolean
   silence: boolean
   fatigue: boolean

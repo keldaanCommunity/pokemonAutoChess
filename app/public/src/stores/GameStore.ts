@@ -10,6 +10,7 @@ import { StageDuration } from "../../../types/Config"
 import { GamePhaseState, Team } from "../../../types/enum/Game"
 import { Item } from "../../../types/enum/Item"
 import { Pkm, PkmProposition } from "../../../types/enum/Pokemon"
+import { SpecialGameRule } from "../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
 import { getGameScene } from "../pages/game"
@@ -23,6 +24,7 @@ export interface GameStateStore {
   simulations: ISimulation[]
   stageLevel: number
   noElo: boolean
+  specialGameRule: SpecialGameRule | null
   currentPlayerId: string
   currentSimulationId: string
   currentTeam: Team
@@ -69,7 +71,8 @@ const initialState: GameStateStore = {
   blueDpsMeter: new Array<IDps>(),
   redDpsMeter: new Array<IDps>(),
   pokemonCollection: new MapSchema<IPokemonConfig>(),
-  additionalPokemons: new Array<Pkm>()
+  additionalPokemons: new Array<Pkm>(),
+  specialGameRule: null
 }
 
 export const gameSlice = createSlice({
@@ -91,6 +94,12 @@ export const gameSlice = createSlice({
     },
     setNoELO: (state, action: PayloadAction<boolean>) => {
       state.noElo = action.payload
+    },
+    setSpecialGameRule: (
+      state,
+      action: PayloadAction<SpecialGameRule | null>
+    ) => {
+      state.specialGameRule = action.payload
     },
     addPlayer: (state, action: PayloadAction<IPlayer>) => {
       state.players.push(JSON.parse(JSON.stringify(action.payload)))
@@ -283,6 +292,7 @@ export const {
   setStageLevel,
   setWeather,
   setNoELO,
+  setSpecialGameRule,
   addPlayer,
   removePlayer,
   updateExperienceManager,

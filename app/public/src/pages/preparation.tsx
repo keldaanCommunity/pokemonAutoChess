@@ -38,7 +38,8 @@ import {
   setWhiteList,
   setBlackList,
   setMinRank,
-  setMaxRank
+  setMaxRank,
+  setSpecialGameRule
 } from "../stores/PreparationStore"
 import Chat from "./component/chat/chat"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
@@ -163,6 +164,10 @@ export default function Preparation() {
 
       r.state.listen("gameMode", (value, previousValue) => {
         dispatch(setGameMode(value))
+      })
+
+      r.state.listen("specialGameRule", (value, previousValue) => {
+        dispatch(setSpecialGameRule(value))
       })
 
       r.state.users.onAdd((u) => {

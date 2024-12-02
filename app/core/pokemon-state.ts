@@ -68,33 +68,15 @@ export default abstract class PokemonState {
         damage += Math.round(pokemon.def * (1 + pokemon.ap / 100))
       }
 
-      let trueDamagePart = 0
-      if (pokemon.effects.has(Effect.STEEL_SURGE)) {
-        trueDamagePart += 0.33
-      } else if (pokemon.effects.has(Effect.STEEL_SPIKE)) {
-        trueDamagePart += 0.66
-      } else if (pokemon.effects.has(Effect.CORKSCREW_CRASH)) {
-        trueDamagePart += 1.0
-      } else if (pokemon.effects.has(Effect.MAX_MELTDOWN)) {
-        trueDamagePart += 1.2
-      }
-      if (pokemon.items.has(Item.RED_ORB) && target) {
-        trueDamagePart += 0.25
-      }
-      if (pokemon.effects.has(Effect.LOCK_ON) && target) {
-        trueDamagePart += 2.0 * (1 + pokemon.ap / 100)
-        pokemon.effects.delete(Effect.LOCK_ON)
-      }
-
       let additionalSpecialDamagePart = 0
       if (pokemon.effects.has(Effect.AROMATIC_MIST)) {
-        additionalSpecialDamagePart += 0.15
+        additionalSpecialDamagePart += 0.2
       } else if (pokemon.effects.has(Effect.FAIRY_WIND)) {
-        additionalSpecialDamagePart += 0.3
+        additionalSpecialDamagePart += 0.4
       } else if (pokemon.effects.has(Effect.STRANGE_STEAM)) {
-        additionalSpecialDamagePart += 0.5
+        additionalSpecialDamagePart += 0.6
       } else if (pokemon.effects.has(Effect.MOON_FORCE)) {
-        additionalSpecialDamagePart += 0.7
+        additionalSpecialDamagePart += 0.8
       }
 
       let isAttackSuccessful = true
@@ -119,6 +101,24 @@ export default abstract class PokemonState {
       if (target.status.protect || target.status.skydiving) {
         isAttackSuccessful = false
         damage = 0
+      }
+
+      let trueDamagePart = 0
+      if (pokemon.effects.has(Effect.STEEL_SURGE)) {
+        trueDamagePart += 0.33
+      } else if (pokemon.effects.has(Effect.STEEL_SPIKE)) {
+        trueDamagePart += 0.66
+      } else if (pokemon.effects.has(Effect.CORKSCREW_CRASH)) {
+        trueDamagePart += 1.0
+      } else if (pokemon.effects.has(Effect.MAX_MELTDOWN)) {
+        trueDamagePart += 1.2
+      }
+      if (pokemon.items.has(Item.RED_ORB) && target) {
+        trueDamagePart += 0.25
+      }
+      if (pokemon.effects.has(Effect.LOCK_ON) && target) {
+        trueDamagePart += 2.0 * (1 + pokemon.ap / 100)
+        pokemon.effects.delete(Effect.LOCK_ON)
       }
 
       if (trueDamagePart > 0) {
@@ -491,7 +491,7 @@ export default abstract class PokemonState {
       // logger.debug(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
 
       if (shouldTargetGainMana) {
-        pokemon.addPP(Math.ceil(damage / 10), pokemon, 0, false)
+        pokemon.addPP(Math.ceil(residualDamage / 10), pokemon, 0, false)
       }
 
       if (takenDamage > 0) {
@@ -654,7 +654,7 @@ export default abstract class PokemonState {
       pokemon.effects.has(Effect.DEEP_MINER)
     ) {
       pokemon.growGroundTimer -= dt
-      if (pokemon.growGroundTimer <= 0) {
+      if (pokemon.growGroundTimer <= 0 && pokemon.count.growGroundCount < 5) {
         pokemon.growGroundTimer = 3000
         pokemon.count.growGroundCount += 1
         if (pokemon.effects.has(Effect.TILLER)) {
@@ -772,10 +772,10 @@ export default abstract class PokemonState {
       pokemon.addPP(4, pokemon, 0, false)
     }
     if (pokemon.effects.has(Effect.DRIZZLE)) {
-      pokemon.addPP(7, pokemon, 0, false)
+      pokemon.addPP(8, pokemon, 0, false)
     }
     if (pokemon.effects.has(Effect.PRIMORDIAL_SEA)) {
-      pokemon.addPP(10, pokemon, 0, false)
+      pokemon.addPP(12, pokemon, 0, false)
     }
     if (pokemon.simulation.weather === Weather.RAIN) {
       pokemon.addPP(3, pokemon, 0, false)
@@ -848,6 +848,13 @@ export default abstract class PokemonState {
       pokemon.status.triggerArmorReduction(1000, pokemon)
     }
 
+    if (
+      pokemon.effects.has(Effect.TOXIC_SPIKES) &&
+      !pokemon.types.has(Synergy.POISON)
+    ) {
+      pokemon.status.triggerPoison(1000, pokemon, undefined)
+    }
+
     if (pokemon.effects.has(Effect.HAIL) && !pokemon.types.has(Synergy.ICE)) {
       pokemon.handleDamage({
         damage: 10,
@@ -860,11 +867,22 @@ export default abstract class PokemonState {
       pokemon.effects.delete(Effect.HAIL)
     }
 
+    if (pokemon.effects.has(Effect.LAVA) && !pokemon.types.has(Synergy.FIRE)) {
+      pokemon.handleDamage({
+        damage: 10,
+        board,
+        attackType: AttackType.SPECIAL,
+        attacker: null,
+        shouldTargetGainMana: true
+      })
+      pokemon.status.triggerBurn(1100, pokemon, undefined)
+    }
+
     if (pokemon.effects.has(Effect.ZEN_MODE)) {
       const crit =
         pokemon.items.has(Item.REAPER_CLOTH) &&
         chance(pokemon.critChance / 100, pokemon)
-      pokemon.handleHeal(10, pokemon, 1, crit)
+      pokemon.handleHeal(15, pokemon, 1, crit)
       if (pokemon.life >= pokemon.hp) {
         pokemon.index = PkmIndex[Pkm.DARMANITAN]
         pokemon.name = Pkm.DARMANITAN

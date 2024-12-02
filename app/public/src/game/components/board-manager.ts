@@ -206,7 +206,7 @@ export default class BoardManager {
       }
     })
 
-    if (this.gameMode === GameMode.SCRIBBLE) {
+    if (this.specialGameRule != null) {
       if (this.smeargle) {
         this.smeargle.destroy()
         this.smeargle = null

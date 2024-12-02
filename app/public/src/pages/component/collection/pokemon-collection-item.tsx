@@ -4,7 +4,7 @@ import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/pr
 import { getEmotionCost } from "../../../../../types/Config"
 import { Emotion } from "../../../../../types/enum/Emotion"
 import { Pkm } from "../../../../../types/enum/Pokemon"
-import { getPortraitSrc } from "../../../utils"
+import { getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
 import "./pokemon-collection-item.css"
 

@@ -32,21 +32,10 @@ export default function ItemPicker(props: {
     { label: t("berries"), key: "berries", items: Berries },
 
     { label: t("artificial_items"), key: "artificial", items: ArtificialItems },
-
-    {
-      label: t("weather_rocks"),
-      key: "weather_rocks",
-      items: WeatherRocks
-    },
     {
       label: t("shiny_items"),
       key: "shiny_items",
       items: ShinyItems
-    },
-    {
-      label: t("special_items"),
-      key: "special_items",
-      items: SpecialItems
     }
   ]
 

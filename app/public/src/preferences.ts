@@ -12,6 +12,7 @@ export type Keybindings = {
 export interface IPreferencesState {
   musicVolume: number
   sfxVolume: number
+  playInBackground: boolean
   showDpsMeter: boolean
   showDetailsOnHover: boolean
   showDamageNumbers: boolean
@@ -23,6 +24,7 @@ export interface IPreferencesState {
 const defaultPreferences: IPreferencesState = {
   musicVolume: 30,
   sfxVolume: 30,
+  playInBackground: false,
   showDpsMeter: false,
   showDetailsOnHover: false,
   showDamageNumbers: true,

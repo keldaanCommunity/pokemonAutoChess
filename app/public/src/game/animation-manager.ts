@@ -7,7 +7,7 @@ import {
   SpriteType
 } from "../../../types/enum/Game"
 import { Berries } from "../../../types/enum/Item"
-import { AnimationConfig, Pkm, PkmIndex } from "../../../types/enum/Pokemon"
+import { AnimationConfig, Pkm, PkmByIndex } from "../../../types/enum/Pokemon"
 import { logger } from "../../../utils/logger"
 import { fpsToDuration } from "../../../utils/number"
 import atlas from "../assets/atlas.json"
@@ -36,9 +36,7 @@ export default class AnimationManager {
           AnimationType.Hurt
         ]
 
-        const conf = (Object.keys(PkmIndex) as Pkm[]).find(
-          (p) => index === PkmIndex[p]
-        )
+        const conf = PkmByIndex[index]
 
         if (conf && AnimationConfig[conf]) {
           if (
@@ -237,9 +235,9 @@ export default class AnimationManager {
       case PokemonActionState.WALK:
         return AnimationType.Walk
       case PokemonActionState.ATTACK:
-        return AnimationConfig[entity.name as Pkm].attack
+        return AnimationConfig[PkmByIndex[entity.index]].attack
       case PokemonActionState.EMOTE:
-        return AnimationConfig[entity.name as Pkm].emote
+        return AnimationConfig[PkmByIndex[entity.index]].emote
       case PokemonActionState.IDLE:
       default:
         return AnimationType.Idle
@@ -303,7 +301,8 @@ export default class AnimationManager {
         ? entity.index
         : "0000"
     const tint =
-      entity.shiny && !AnimationConfig[entity.name].shinyUnavailable
+      entity.shiny &&
+      !AnimationConfig[PkmByIndex[entity.index]].shinyUnavailable
         ? PokemonTint.SHINY
         : PokemonTint.NORMAL
     const animKey = `${textureIndex}/${tint}/${animation}/${SpriteType.ANIM}/${orientationCorrected}`

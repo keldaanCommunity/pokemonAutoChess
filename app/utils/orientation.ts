@@ -124,3 +124,31 @@ export function effectInLine(
     effect({ x: target.positionX, y: target.positionY, value: target })
   }
 }
+
+export function getOrientation(x1: number, y1: number, x2: number, y2: number) {
+  let angle = Math.atan2(y2 - y1, x2 - x1)
+  if (angle < 0) {
+    angle += 2 * Math.PI
+  }
+  const quarterPi = Math.PI / 4
+  // logger.debug(angle);
+  if (angle < quarterPi) {
+    return Orientation.RIGHT
+  } else if (angle < 2 * quarterPi) {
+    return Orientation.DOWNRIGHT
+  } else if (angle < 3 * quarterPi) {
+    return Orientation.DOWN
+  } else if (angle < 4 * quarterPi) {
+    return Orientation.DOWNLEFT
+  } else if (angle < 5 * quarterPi) {
+    return Orientation.LEFT
+  } else if (angle < 6 * quarterPi) {
+    return Orientation.UPLEFT
+  } else if (angle < 7 * quarterPi) {
+    return Orientation.UP
+  } else if (angle < 8 * quarterPi) {
+    return Orientation.UPRIGHT
+  } else {
+    return Orientation.RIGHT
+  }
+}

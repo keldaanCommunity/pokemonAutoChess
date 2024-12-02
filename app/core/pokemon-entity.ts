@@ -17,6 +17,8 @@ import {
 } from "../types"
 import {
   ARMOR_FACTOR,
+  BOARD_HEIGHT,
+  BOARD_WIDTH,
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER,
   MANA_SCARF_MANA,
@@ -46,7 +48,7 @@ import { clamp, max, min, roundToNDigits } from "../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import AttackingState from "./attacking-state"
-import Board from "./board"
+import Board, { Cell } from "./board"
 import { IdleState } from "./idle-state"
 import MovingState from "./moving-state"
 import PokemonState from "./pokemon-state"
@@ -204,6 +206,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     )
   }
 
+  get isGhostOpponent(): boolean {
+    return this.simulation.isGhostBattle && this.player?.team === Team.RED_TEAM
+  }
+
   isTargettableBy(
     attacker: IPokemonEntity,
     targetEnemies = true,
@@ -319,8 +325,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         !attacker.items.has(Item.PROTECTIVE_PADS) &&
         attackType === AttackType.SPECIAL
       ) {
+        const damageAfterReduction = damage / (1 + ARMOR_FACTOR * this.speDef)
+        const damageBlocked = min(0)(specialDamage - damageAfterReduction)
         attacker.handleDamage({
-          damage: Math.round(specialDamage / (1 + ARMOR_FACTOR * this.speDef)),
+          damage: Math.round(damageBlocked),
           board,
           attackType: AttackType.SPECIAL,
           attacker: this,
@@ -824,7 +832,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (target.passive === Passive.PSYDUCK && chance(0.1, this)) {
-      target.status.triggerConfusion(3000, target)
+      target.status.triggerConfusion(3000, target, target)
     }
 
     if (this.name === Pkm.MINIOR) {
@@ -832,7 +840,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.name === Pkm.MORPEKO) {
-      target.status.triggerParalysis(2000, target)
+      target.status.triggerParalysis(2000, target, this)
     }
 
     if (this.name === Pkm.MORPEKO_HANGRY) {
@@ -876,7 +884,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.items.has(Item.ELECTIRIZER) && this.count.attackCount % 3 === 0) {
       target.addPP(-15, this, 0, false)
       target.count.manaBurnCount++
-      target.status.triggerParalysis(2000, target)
+      target.status.triggerParalysis(2000, target, this)
     }
 
     // Synergy effects on hit
@@ -1070,7 +1078,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       cells.forEach((cell) => {
         board.addBoardEffect(cell.x, cell.y, Effect.GAS, this.simulation)
         if (cell.value && cell.value.team !== this.team) {
-          cell.value.status.triggerParalysis(3000, cell.value)
+          cell.value.status.triggerParalysis(3000, cell.value, this)
         }
       })
       this.items.delete(Item.SMOKE_BALL)
@@ -1229,7 +1237,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.status.triggerProtect(2000)
     }
 
-    if (this.passive === Passive.DARMANITAN && this.life < 0.5 * this.hp) {
+    if (this.passive === Passive.DARMANITAN && this.life < 0.3 * this.hp) {
       this.index = PkmIndex[Pkm.DARMANITAN_ZEN]
       this.name = Pkm.DARMANITAN_ZEN
       this.passive = Passive.DARMANITAN_ZEN
@@ -1246,6 +1254,96 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.addAttack(-10, this, 0, false)
       this.addDefense(5, this, 0, false)
       this.addSpecialDefense(5, this, 0, false)
+    }
+
+    if (
+      (this.passive === Passive.ZYGARDE10 ||
+        this.passive === Passive.ZYGARDE50) &&
+      this.life < 0.3 * this.hp
+    ) {
+      this.handleHeal(0.2 * this.hp, this, 0, false)
+      this.addAttackSpeed(-25, this, 0, false)
+      if (this.passive === Passive.ZYGARDE10) {
+        this.addDefense(1, this, 0, false)
+        this.addSpecialDefense(1, this, 0, false)
+        this.addMaxHP(50, this, 0, false)
+      } else {
+        this.addAttack(5, this, 0, false)
+        this.addDefense(2, this, 0, false)
+        this.addSpecialDefense(2, this, 0, false)
+        this.addMaxHP(80, this, 0, false)
+        this.range = min(1)(this.range - 1)
+      }
+
+      this.index = PkmIndex[Pkm.ZYGARDE_100]
+      this.name = Pkm.ZYGARDE_100
+      this.passive = Passive.NONE
+      this.skill = Ability.CORE_ENFORCER
+      this.pp = 0
+      this.maxPP = 120
+    }
+
+    if (this.passive === Passive.GLIMMORA && this.life < 0.5 * this.hp) {
+      this.passive = Passive.NONE
+
+      const cells = new Array<Cell>()
+
+      let startY = 1
+      let endY = 3
+      if (this.team === Team.RED_TEAM) {
+        startY = -2
+        endY = 0
+      }
+
+      for (let x = -1; x < 2; x++) {
+        for (let y = startY; y < endY; y++) {
+          if (
+            !(
+              this.positionX + x < 0 ||
+              this.positionX + x > BOARD_WIDTH ||
+              this.positionY + y < 0 ||
+              this.positionY + y > BOARD_HEIGHT
+            )
+          ) {
+            cells.push({
+              x: this.positionX + x,
+              y: this.positionY + y,
+              value:
+                board.cells[
+                  board.columns * this.positionY + y + this.positionX + x
+                ]
+            })
+          }
+        }
+      }
+
+      cells.forEach((cell) => {
+        board.addBoardEffect(
+          cell.x,
+          cell.y,
+          Effect.TOXIC_SPIKES,
+          this.simulation
+        )
+
+        this.simulation.room.broadcast(Transfer.ABILITY, {
+          id: this.simulation.id,
+          skill: "TOXIC_SPIKES",
+          positionX: this.positionX,
+          positionY: this.positionY,
+          targetX: cell.x,
+          targetY: cell.y
+        })
+
+        if (cell.value && cell.value.team !== this.team) {
+          cell.value.handleSpecialDamage(
+            20,
+            board,
+            AttackType.SPECIAL,
+            this,
+            false
+          )
+        }
+      })
     }
   }
 
@@ -1325,8 +1423,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.items.has(Item.GOLD_BOTTLE_CAP) && this.player) {
       const isLastEnemy =
-        board.cells.some((p) => p && p.team !== this.team && p.life > 0) ===
-        false
+        board.cells.some(
+          (p) =>
+            p && p.team !== this.team && (p.life > 0 || p.status.resurecting)
+        ) === false
       const moneyGained = isLastEnemy ? 5 : 1
       this.player.addMoney(moneyGained, true, this)
       this.count.moneyCount += moneyGained
@@ -1453,13 +1553,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     const isAngerPoint = this.effects.has(Effect.ANGER_POINT)
 
     if (isWorkUp || isRage || isAngerPoint) {
-      const heal = 30
+      let heal = 0
       let speedBoost = 0
       if (isWorkUp) {
+        heal = 30
         speedBoost = 20
       } else if (isRage) {
+        heal = 35
         speedBoost = 25
       } else if (isAngerPoint) {
+        heal = 40
         speedBoost = 30
       }
       const _pokemon = this // beware of closure vars
@@ -1620,7 +1723,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     switch (berry) {
       case Item.AGUAV_BERRY:
         this.handleHeal(this.hp - this.life, this, 0, false)
-        this.status.triggerConfusion(3000, this)
+        this.status.triggerConfusion(3000, this, this)
         break
       case Item.APICOT_BERRY:
         this.handleHeal(20, this, 0, false)
@@ -1741,7 +1844,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 }
 
-export function getStrongestUnit(pokemons: PokemonEntity[]): PokemonEntity {
+export function getStrongestUnit<T extends Pokemon | PokemonEntity>(
+  pokemons: T[]
+): T {
   /*
     strongest is defined as:
     1) number of items
