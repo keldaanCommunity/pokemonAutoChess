@@ -30,6 +30,7 @@ import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { Effects } from "../effects"
+import { createRandomEgg } from "../egg-factory"
 import type { IPokemonConfig } from "../mongo-models/user-metadata"
 import PokemonFactory from "../pokemon-factory"
 import {
@@ -178,10 +179,16 @@ export default class Player extends Schema implements IPlayer {
     } else if (state.specialGameRule === SpecialGameRule.DO_IT_ALL_YOURSELF) {
       const { index, emotion, shiny } = getPokemonConfigFromAvatar(this.avatar)
       this.firstPartner = PkmByIndex[index]
-      const avatar = PokemonFactory.createPokemonFromName(this.firstPartner, {
-        selectedEmotion: emotion,
-        selectedShiny: shiny
-      })
+      let avatar: Pokemon
+      if (this.firstPartner === Pkm.EGG) {
+        avatar = createRandomEgg(shiny, this)
+      } else {
+        avatar = PokemonFactory.createPokemonFromName(this.firstPartner, {
+          selectedEmotion: emotion,
+          selectedShiny: shiny
+        })
+      }
+
       avatar.positionX = getFirstAvailablePositionInBench(this.board) ?? 0
       avatar.positionY = 0
       avatar.hp += 100
