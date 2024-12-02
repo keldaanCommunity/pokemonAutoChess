@@ -11108,7 +11108,7 @@ export class Tropius extends Pokemon {
     const berry = pickRandomIn(Berries)
     if (entity.items.size < 3) {
       entity.items.add(berry)
-      entity.refToBoardPokemon.items.add(berry)
+      entity.addPermanentItem(berry)
     } else {
       player.items.push(berry)
     }

@@ -435,12 +435,20 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
+    permanent = false
   ) {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    this.hp = min(1)(this.hp + value)
+    const update = (target: {hp: number}) => {
+      target.hp = min(1)(target.hp + value)
+    }
+    update(this)
     this.life = max(this.hp)(this.life + value)
+    if(permanent && !this.isGhostOpponent) {
+      update(this.refToBoardPokemon)
+    }
+    
   }
 
   addDodgeChance(
@@ -458,82 +466,138 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
+    permanent = false
   ) {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-    this.ap = min(-100)(this.ap + value)
+    const update = (target: {ap: number}) => {
+      target.ap = min(-100)(target.ap + value)
+    }
+    update(this)
+    if(permanent && !this.isGhostOpponent){
+      update(this.refToBoardPokemon)
+    }
   }
 
   addLuck(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
+    permanent = false
   ) {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    this.luck = min(-100)(this.luck + value)
+    const update = (target: {luck: number}) => {
+      target.luck = min(-100)(target.luck + value)
+    }
+    update(this)
+    if (permanent && !this.isGhostOpponent){
+      update(this.refToBoardPokemon)
+    }
   }
 
   addDefense(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
+    permanent = false
   ) {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-    this.def = min(0)(this.def + value)
+    const update = (target: {def: number}) => {
+      target.def = min(0)(target.def + value)
+    }
+    update(this)
+    if (permanent && !this.isGhostOpponent){
+      update(this.refToBoardPokemon)
+    }
   }
 
   addSpecialDefense(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
+    permanent = false
   ) {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-    this.speDef = min(0)(this.speDef + value)
+    const update = (target: {speDef: number}) => {
+      target.speDef = min(0)(target.speDef + value)
+    }
+    update(this)
+    if (permanent && !this.isGhostOpponent){
+      update(this.refToBoardPokemon)
+    }
   }
 
   addAttack(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
+    permanent = false
   ) {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-    this.atk = min(1)(this.atk + value)
+    const update = (target: {atk: number}) => {
+      target.atk = min(1)(target.atk + value)
+    }
+    update(this)
+    if (permanent && !this.isGhostOpponent){
+      update(this.refToBoardPokemon)
+    }
   }
 
   addAttackSpeed(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
+    permanent = false
   ) {
     if (this.passive === Passive.MELMETAL) {
-      this.addAttack(value * 0.3, caster, apBoost, crit)
+      this.addAttack(value * 0.3, caster, apBoost, crit, permanent)
     } else {
       value =
         value *
         (1 + (apBoost * caster.ap) / 100) *
         (crit ? caster.critPower : 1)
-      const currentAtkSpeedBonus = 100 * (this.atkSpeed / 0.75 - 1)
-      const atkSpeedBonus = currentAtkSpeedBonus + value
-      this.atkSpeed = clamp(
-        roundToNDigits(0.75 * (1 + atkSpeedBonus / 100), 2),
-        0.4,
-        2.5
-      )
+      const update = (target: {atkSpeed: number}) => {
+        const currentAtkSpeedBonus = 100 * (target.atkSpeed / 0.75 - 1)
+        const atkSpeedBonus = currentAtkSpeedBonus + value
+        target.atkSpeed = clamp(
+          roundToNDigits(0.75 * (1 + atkSpeedBonus / 100), 2),
+          0.4,
+          2.5
+        )
+      }
+      update(this)
+      if(permanent && !this.isGhostOpponent){
+        update(this.refToBoardPokemon)
+      }
     }
+  }
+
+  addPermanentItem(
+    item: Item
+  ) {
+    if (this.isGhostOpponent) return
+    this.refToBoardPokemon.items.add(item)
+  }
+
+  removePermanentItem(
+    item: Item
+  ) {
+    if (this.isGhostOpponent) return
+    this.refToBoardPokemon.items.delete(item)
   }
 
   addPsychicField() {
@@ -1404,7 +1468,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       target.status.triggerProtect(2000)
       target.handleHeal(20, target, 0, false)
       target.items.delete(Item.BABIRI_BERRY)
-      target.refToBoardPokemon.items.delete(Item.BABIRI_BERRY)
+      target.removePermanentItem(Item.BABIRI_BERRY)
     }
   }
 
@@ -1547,7 +1611,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   // called after death (does not proc if resurection)
   onDeath({ board }: { board: Board }) {
-    this.refToBoardPokemon.deathCount++
+    if (!this.isGhostOpponent) {
+      this.refToBoardPokemon.deathCount++
+    }
     const isWorkUp = this.effects.has(Effect.BULK_UP)
     const isRage = this.effects.has(Effect.RAGE)
     const isAngerPoint = this.effects.has(Effect.ANGER_POINT)
@@ -1623,41 +1689,33 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  applyStat(stat: Stat, value: number) {
-    switch (stat) {
-      case Stat.ATK:
-        this.addAttack(value, this, 0, false)
-        break
-      case Stat.DEF:
-        this.addDefense(value, this, 0, false)
-        break
-      case Stat.SPE_DEF:
-        this.addSpecialDefense(value, this, 0, false)
-        break
-      case Stat.AP:
-        this.addAbilityPower(value, this, 0, false)
-        break
-      case Stat.PP:
-        this.addPP(value, this, 0, false)
-        break
-      case Stat.ATK_SPEED:
-        this.addAttackSpeed(value, this, 0, false)
-        break
-      case Stat.CRIT_CHANCE:
-        this.addCritChance(value, this, 0, false)
-        break
-      case Stat.CRIT_POWER:
-        this.addCritPower(value, this, 0, false)
-        break
-      case Stat.SHIELD:
-        this.addShield(value, this, 0, false)
-        break
-      case Stat.HP:
-        this.addMaxHP(value, this, 0, false)
-        break
-      case Stat.LUCK:
-        this.addLuck(value, this, 0, false)
+  applyStat(stat: Stat, value: number, permanent = false) {
+
+    const statMap: ReadonlyMap<Stat, (...args) => void> = new Map([
+      [Stat.ATK, this.addAttack],
+      [Stat.DEF, this.addDefense],
+      [Stat.SPE_DEF, this.addSpecialDefense],
+      [Stat.AP, this.addAbilityPower],
+      [Stat.PP, this.addPP],
+      [Stat.ATK_SPEED, this.addAttackSpeed],
+      [Stat.CRIT_CHANCE, this.addCritChance],
+      [Stat.CRIT_POWER, this.addCritPower],
+      [Stat.SHIELD, this.addShield],
+      [Stat.HP, this.addMaxHP],
+      [Stat.LUCK, this.addLuck]
+    ])
+
+    const invalidPermanentStats: ReadonlySet<Stat> = new Set([
+      Stat.PP, Stat.CRIT_CHANCE, Stat.CRIT_POWER, Stat.SHIELD
+    ])
+    if (invalidPermanentStats.has(stat)){
+      if(permanent){
+        logger.debug(`${stat} cannot be added permanently`)
+      }
+      statMap[stat](value, this, 0, false)
+      return
     }
+    statMap[stat](value, this, 0, false, permanent)
   }
 
   resurrect() {
@@ -1821,14 +1879,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (stealedFrom) {
       stealedFrom.items.delete(berry)
-      stealedFrom.refToBoardPokemon.items.delete(berry)
+      stealedFrom.removePermanentItem(berry)
     } else {
       this.items.delete(berry)
-      this.refToBoardPokemon.items.delete(berry)
+      this.removePermanentItem(berry)
     }
 
     if (this.passive === Passive.GLUTTON) {
-      this.refToBoardPokemon.hp += 20
+      this.applyStat(Stat.HP, 20, true)
       if (this.refToBoardPokemon.hp > 750) {
         this.player?.titles.add(Title.GLUTTON)
       }

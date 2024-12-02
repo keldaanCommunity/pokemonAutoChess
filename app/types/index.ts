@@ -483,13 +483,15 @@ export interface IPokemonEntity {
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
+    permanent?: boolean
   ): void
   addLuck(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
+    permanent?: boolean
   ): void
   addPP(
     value: number,
@@ -501,19 +503,22 @@ export interface IPokemonEntity {
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
+    permanent?: boolean
   ): void
   addAttackSpeed(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
+    permanent?: boolean
   ): void
   addMaxHP(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
+    permanent?: boolean
   ): void
   addShield(
     value: number,
@@ -525,13 +530,15 @@ export interface IPokemonEntity {
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
+    permanent?: boolean
   ): void
   addSpecialDefense(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
-    crit: boolean
+    crit: boolean,
+    permanent?: boolean
   ): void
   addCritChance(
     value: number,
@@ -550,6 +557,12 @@ export interface IPokemonEntity {
     caster: IPokemonEntity,
     apBoost: number,
     crit: boolean
+  ): void
+  addPermanentItem(
+    item: Item
+  ): void
+  removePermanentItem(
+    item: Item
   ): void
   update(
     dt: number,
