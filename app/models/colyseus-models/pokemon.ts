@@ -5608,7 +5608,7 @@ export class Kecleon extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.ILLUSION
   passive = Passive.PROTEAN2
