@@ -21,7 +21,7 @@ import {
   Role,
   Transfer
 } from "../../../types"
-import { RequiredStageLevelForXpElligibility } from "../../../types/Config"
+import { MinStageLevelForGameToCount } from "../../../types/Config"
 import { DungeonDetails } from "../../../types/enum/Dungeon"
 import { Team } from "../../../types/enum/Game"
 import { Pkm } from "../../../types/enum/Pokemon"
@@ -248,11 +248,11 @@ export default function Game() {
 
     const elligibleToXP =
       nbPlayers >= 2 &&
-      (room?.state.stageLevel ?? 0) >= RequiredStageLevelForXpElligibility
+      (room?.state.stageLevel ?? 0) >= MinStageLevelForGameToCount
     const elligibleToELO =
       elligibleToXP &&
       !room?.state.noElo &&
-      afterPlayers.filter((p) => p.role !== Role.BOT).length >= 4
+      afterPlayers.filter((p) => p.role !== Role.BOT).length >= 2
 
     const r: Room<AfterGameState> = await client.create("after-game", {
       players: afterPlayers,
