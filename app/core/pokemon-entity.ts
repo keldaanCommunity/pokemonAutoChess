@@ -1685,41 +1685,42 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   applyStat(stat: Stat, value: number, permanent = false) {
-    switch (stat) {
-      case Stat.ATK:
-        this.addAttack(value, this, 0, false, permanent)
-        break
-      case Stat.DEF:
-        this.addDefense(value, this, 0, false, permanent)
-        break
-      case Stat.SPE_DEF:
-        this.addSpecialDefense(value, this, 0, false, permanent)
-        break
-      case Stat.AP:
-        this.addAbilityPower(value, this, 0, false, permanent)
-        break
-      case Stat.PP:
-        this.addPP(value, this, 0, false)
-        break
-      case Stat.ATK_SPEED:
-        this.addAttackSpeed(value, this, 0, false, permanent)
-        break
-      case Stat.CRIT_CHANCE:
-        this.addCritChance(value, this, 0, false)
-        break
-      case Stat.CRIT_POWER:
-        this.addCritPower(value, this, 0, false)
-        break
-      case Stat.SHIELD:
-        this.addShield(value, this, 0, false)
-        break
-      case Stat.HP:
-        this.addMaxHP(value, this, 0, false, permanent)
-        break
-      case Stat.LUCK:
-        this.addLuck(value, this, 0, false, permanent)
-        break
+
+    const statMap: ReadonlyMap<Stat, (
+      value: number,
+      caster: PokemonEntity,
+      apBoost: number,
+      crit: boolean,
+      permanent?: boolean) => void> = new Map([
+      [Stat.ATK, this.addAttack],
+      [Stat.DEF, this.addDefense],
+      [Stat.SPE_DEF, this.addSpecialDefense],
+      [Stat.AP, this.addAbilityPower],
+      [Stat.PP, this.addPP],
+      [Stat.ATK_SPEED, this.addAttackSpeed],
+      [Stat.CRIT_CHANCE, this.addCritChance],
+      [Stat.CRIT_POWER, this.addCritPower],
+      [Stat.SHIELD, this.addShield],
+      [Stat.HP, this.addMaxHP],
+      [Stat.LUCK, this.addLuck]
+    ])
+
+    const invalidPermanentStats: ReadonlySet<Stat> = new Set([
+      Stat.PP, Stat.CRIT_CHANCE, Stat.CRIT_POWER, Stat.SHIELD
+    ])
+    const handler = statMap.get(stat)
+    if(!handler){
+      logger.debug(`${stat} does not exist in applyStat.statMap`)
+      return
     }
+    if (invalidPermanentStats.has(stat)){
+      if(permanent){
+        logger.debug(`${stat} cannot be added permanently`)
+      }
+      handler(value, this, 0, false)
+      return
+    }
+    handler(value, this, 0, false, permanent)
   }
 
   resurrect() {
