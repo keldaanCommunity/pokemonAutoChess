@@ -14808,14 +14808,13 @@ export class Skarmory extends Pokemon {
 
         const nbSpikes = 12
         const positions = new Set<string>()
-
         for (let i = 0; i < nbSpikes; i++) {
           let x, y
           do {
             x = Math.floor(Math.random() * board.columns)
             y =
               Math.floor((Math.random() * board.rows) / 2) +
-              (entity.positionY < 4 ? 4 : 0)
+              (entity.positionY < 3 ? 3 : 0)
           } while (positions.has(`${x},${y}`))
           positions.add(`${x},${y}`)
 
