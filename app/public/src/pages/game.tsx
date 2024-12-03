@@ -112,7 +112,8 @@ export default function Game() {
   const [loaded, setLoaded] = useState<boolean>(false)
   const [connectError, setConnectError] = useState<string>("")
   const [finalRank, setFinalRank] = useState<number>(0)
-  const [finalRankVisible, setFinalRankVisible] = useState<boolean>(false)
+  enum FinalRankVisibility { HIDDEN, VISIBLE, CLOSED }
+  const [finalRankVisibility, setFinalRankVisibility] = useState<FinalRankVisibility>(FinalRankVisibility.HIDDEN)
   const container = useRef<HTMLDivElement>(null)
 
   const MAX_ATTEMPS_RECONNECT = 3
@@ -343,7 +344,7 @@ export default function Game() {
       })
       room.onMessage(Transfer.FINAL_RANK, (finalRank) => {
         setFinalRank(finalRank)
-        setFinalRankVisible(true)
+        setFinalRankVisibility(FinalRankVisibility.VISIBLE)
       })
       room.onMessage(Transfer.PRELOAD_MAPS, async (maps) => {
         logger.info("preloading maps", maps)
@@ -587,8 +588,9 @@ export default function Game() {
             value !== previousValue &&
             player.id === uid &&
             !spectate
+            && finalRankVisibility === FinalRankVisibility.HIDDEN
           ) {
-            setFinalRankVisible(true)
+            setFinalRankVisibility(FinalRankVisibility.VISIBLE)
           }
         })
         player.listen("experienceManager", (experienceManager) => {
@@ -744,9 +746,9 @@ export default function Game() {
           <MainSidebar page="game" leave={leave} leaveLabel={t("leave_game")} />
           <GameFinalRank
             rank={finalRank}
-            hide={() => setFinalRankVisible(false)}
+            hide={() => setFinalRankVisibility(FinalRankVisibility.CLOSED)}
             leave={leave}
-            visible={finalRankVisible}
+            visible={finalRankVisibility === FinalRankVisibility.VISIBLE}
           />
           {!spectate && <GameShop />}
           <GameStageInfo />
