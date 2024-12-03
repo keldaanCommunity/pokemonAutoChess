@@ -6428,7 +6428,7 @@ export class HooH extends Pokemon {
   speDef = 3
   maxPP = 100
   range = 2
-  skill = Ability.FIRE_SPIN
+  skill = Ability.FIRE_BLAST
   passive = Passive.SUN
   attackSprite = AttackSprite.FIRE_RANGE
 }
@@ -13290,6 +13290,9 @@ export class Cosmoem extends Pokemon {
       else return Pkm.LUNALA
     }
   )
+  onAcquired(player: Player) {
+    this.hp = 200 // cancel hp buffs of cosmog
+  }
   hp = 200
   atk = 5
   def = 8
@@ -13318,6 +13321,7 @@ export class Solgaleo extends Pokemon {
   skill = Ability.SUNSTEEL_STRIKE
   attackSprite = AttackSprite.STEEL_MELEE
   onAcquired(player: Player) {
+    this.hp = 300 // cancel hp buffs of cosmoem
     player.titles.add(Title.STARGAZER)
   }
 }
@@ -13339,6 +13343,7 @@ export class Lunala extends Pokemon {
   skill = Ability.MOONGEIST_BEAM
   attackSprite = AttackSprite.STEEL_MELEE
   onAcquired(player: Player) {
+    this.hp = 300 // cancel hp buffs of cosmoem
     player.titles.add(Title.STARGAZER)
   }
 }
