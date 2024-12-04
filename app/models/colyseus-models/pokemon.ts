@@ -10156,6 +10156,7 @@ export class UnownQuestion extends Pokemon {
   skill = Ability.HIDDEN_POWER_QM
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownExclamation extends Pokemon {
@@ -10171,6 +10172,7 @@ export class UnownExclamation extends Pokemon {
   skill = Ability.HIDDEN_POWER_EM
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class Diglett extends Pokemon {
