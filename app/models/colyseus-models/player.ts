@@ -38,7 +38,7 @@ import {
   getPokemonData
 } from "../precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../precomputed/precomputed-rarity"
-import { getBuyPrice, getRegularsTier1 } from "../shop"
+import { getRegularsTier1, getSellPrice } from "../shop"
 import ExperienceManager from "./experience-manager"
 import HistoryItem from "./history-item"
 import { Pokemon, PokemonClasses } from "./pokemon"
@@ -194,7 +194,7 @@ export default class Player extends Schema implements IPlayer {
       avatar.hp += 100
       this.board.set(avatar.id, avatar)
       avatar.onAcquired(this)
-      this.money += 20 - getBuyPrice(avatar.name)
+      this.money += 40 - 2 * getSellPrice(avatar, state.specialGameRule)
     } else if (state.specialGameRule === SpecialGameRule.FIRST_PARTNER) {
       const randomCommons = pickNRandomIn(
         getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.COMMON).filter(
@@ -444,6 +444,10 @@ export default class Player extends Schema implements IPlayer {
         }
       })
     }
+
+    newRegionalPokemons.sort(
+      (a, b) => getPokemonData(a).stars - getPokemonData(b).stars
+    )
 
     resetArraySchema(
       this.regionalPokemons,

@@ -7,6 +7,7 @@ import {
   AttackType,
   HealType,
   PokemonActionState,
+  Stat,
   Team
 } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
@@ -564,7 +565,7 @@ export default abstract class PokemonState {
         }
 
         if (pokemon.passive === Passive.PRIMEAPE) {
-          pokemon.refToBoardPokemon.atk += 1
+          pokemon.applyStat(Stat.ATK, 1, true)
         }
       }
 

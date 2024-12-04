@@ -59,6 +59,7 @@
     "GUILLOTINE": "가위자르기",
     "ROCK_SLIDE": "스톤샤워",
     "HEAT_WAVE": "열풍",
+    "FLAMETHROWER": "화염방사",
     "THUNDER": "번개",
     "HYDRO_PUMP": "하이드로펌프",
     "DRACO_METEOR": "용성군",
@@ -149,6 +150,7 @@
     "SKY_ATTACK_SHADOW": "불새",
     "ILLUSION": "일루전",
     "SHELTER": "농성",
+    "LAVA_PLUME": "분연",
     "SMOG": "스모그",
     "SLUDGE": "오물공격",
     "SLUDGE_WAVE": "오물웨이브",
@@ -399,7 +401,18 @@
     "TRANSE": "무아지경",
     "GLACIATE": "얼어붙은세계",
     "WOOD_HAMMER": "우드해머",
-    "TRICK_OR_TREAT": "핼러윈"
+    "TRICK_OR_TREAT": "핼러윈",
+    "FREEZING_GLARE": "얼어붙는시선",
+    "THUNDEROUS_KICK": "천둥차기",
+    "FIERY_WRATH": "타오르는분노",
+    "VISE_GRIP": "찝기",
+    "BURN_UP": "불사르기",
+    "LANDS_WRATH": "그라운드포스",
+    "THOUSAND_ARROWS": "사우전드애로",
+    "CORE_ENFORCER": "코어퍼니셔",
+    "POWER_HUG": "파워허그",
+    "MORTAL_SPIN": "킬러스핀",
+    "METAL_CLAW": "메탈클로"
   },
   "pkm": {
     "DEFAULT": "미싱노",
@@ -1256,7 +1269,18 @@
     "DARUMAKA": "달막화",
     "DARMANITAN": "불비달마",
     "DARMANITAN_ZEN": "불비달마(달마모드)",
-    "TURTONATOR": "폭거북스"
+    "TURTONATOR": "폭거북스",
+    "KRABBY": "크랩",
+    "KINGLER": "킹크랩",
+    "SIZZLIPEDE": "태우지네",
+    "CENTISKORCH": "다태우지네",
+    "ZYGARDE_10": "지가르데 (10% 폼)",
+    "ZYGARDE_50": "지가르데 (50% 폼)",
+    "ZYGARDE_100": "지가르데 (100% 폼)",
+    "STUFFUL": "포곰곰",
+    "BEWEAR": "이븐곰",
+    "GLIMMET": "초롱순",
+    "GLIMMORA": "킬라플로르"
   },
   "ability_description": {
     "SOFT_BOILED": "모든 아군 포켓몬의 상태이상효과를 회복하며 [20,40,80,SP] 만큼의 SHIELD를 부여한다.",
@@ -1295,6 +1319,8 @@
     "SEISMIC_TOSS": "대상에게 [5,10,20,SP]에 플레이어 레벨을 곱한 만큼의 TRUE 을 가한다.",
     "GUILLOTINE": "대상에 [1,2,3,SP] x ATK SPECIAL 을 가한다. 대상이 기절한 경우 사용자는 절반의 PP를 회복한다.",
     "ROCK_SLIDE": "대상에 [30,60,120,SP] SPECIAL 을 가한다. 대상이 FLYING 일 경우 대미지가 두배가 된다.",
+    "HEAT_WAVE": "모든 적에게 [10,20,30,SP] SPECIAL 를 가한다. [20,LK]% 확률로 BURN 을 3초간 가한다. 모든 FREEZE 포켓몬을 해동한다.",
+    "FLAMETHROWER": "3칸 이내의 한 방향으로 모든 적에게 [30,60,120,SP] SPECIAL 를 입히고 4초간 BURN 을 가한다.",
     "THUNDER": "[30,60,120,SP] SPECIAL 을 가한다.",
     "HYDRO_PUMP": "대상의 뒤에 있는 모든 적포켓몬들에게 [25,50,100,SP] SPECIAL 을 가한다.",
     "DRACO_METEOR": "모든 적포켓몬들에게 [50,SP] SPECIAL 을 가한다.",
@@ -1390,6 +1416,7 @@
     "SLUDGE": "전방 3칸에 [3,SP] 초동안 [2,3,4] 중첩의 POISONNED 상태로 만드는 쓰레기를 던진다.",
     "SLUDGE_WAVE": "대상과 주변 적에게 오물을 투척하여 [10,20,40,SP] SPECIAL 를 입히고 [2,3,4,SP] 초 동안 POISONNED 상태를 가한다.",
     "SMOG": "전방 3칸에 [10,20,40,SP] 의 SPECIAL 을 가하는 악취구름을 만든다. 가스는 전투 종료까지 보드판에 남으며 그 속의 포켓몬들의 명중률을 50% 저하시킨다.",
+    "LAVA_PLUME": "시전자 전방 3칸에 용암을 투사하여 [20,40,80,SP] SPECIAL 를 가한다. 용암은 필드에 잔류하여 그 위를 지나는 FIRE 타입이 아닌 포켓몬에게 10 SPECIAL 와 BURN 을 가한다.",
     "SHELTER": "시전자는 [3,6,12,SP] 의 DEF 를 얻은 후 전방 3칸에 연막을 만든다. 연막은 전투 종료까지 남으며 그 속의 포켓몬들의 명중률을 50% 저하시킨다.",
     "AURORA_BEAM": "일렬로 광선을 발사한다. 광선에 맞은 모든 대상은 [25,50,100,SP] 의 SPECIAL 을 입으며 FREEZE 상태가 될 수 있다. (확률은 현재 ICE 시너지에 좌우된다.)",
     "AGILITY": "ATK_SPEED 를 [10,20,30,SP] %만큼 올린다. (중첩가능)",
@@ -1635,7 +1662,18 @@
     "POISON_STING": "대상에게 POISONNED 을 [2,3,4] 중첩 가한다. 최대 중첩을 넘어서는 중첩은 각각 즉시 [25,50,100,SP] SPECIAL 를 가한다.",
     "TRANSE": "회복을 중지하고 공격과 이동을 재개한다.",
     "WOOD_HAMMER": "ATK의 [300,SP] % 의 SPECIAL 를 대상에게 가하고, 피해량의 33%를 반동 피해로 입는다.",
-    "TRICK_OR_TREAT": "대상은 지닌 도구 중 하나를 시전자에게 넘겨준다. 지닌 도구가 없다면 시전자의 AP 에 따라 강해지는 저주를 받는다."
+    "TRICK_OR_TREAT": "대상은 지닌 도구 중 하나를 시전자에게 넘겨준다. 지닌 도구가 없다면 시전자의 AP 에 따라 강해지는 저주를 받는다.",
+    "FREEZING_GLARE": "직선상의 모든 적에게 [20,40,80,SP] SPECIAL 를 입히고, [50,LK]% 확률로 3초간 FREEZE 을 가한다.",
+    "THUNDEROUS_KICK": "대상을 밀어낸다. 대상과 경로상의 모든 적에게 4초간 FLINCH 및 [20,40,60,SP] PHYSICAL 를 가하고, [5,SP] DEF 을 감소시킨다.",
+    "FIERY_WRATH": "모든 적에게 [40,SP] SPECIAL 를 입히고, [50,LK]% 확률로 4초간 FLINCH 을 가한다.",
+    "VISE_GRIP": "대상에게 [30,60,100,SP] SPECIAL 를 입힌다. 시전자와 대상은 4초간 LOCKED 된다.",
+    "BURN_UP": "[50,100,200,SP] SPECIAL 를 입히고 3초간 시전자는 BURN 을 입는다.",
+    "LANDS_WRATH": "대상과 주변 적에게 40 + [100,SP]% ATK PHYSICAL 를 입히고, DEF 과 SPE_DEF 를 [4,SP=0.5] 감소시킨다.",
+    "THOUSAND_ARROWS": "33개의 에너지 화살을 무작위 지점에 발사하여 각자 [60,SP] SPECIAL 를 입힌다. 적중당한 모든 적은 1초간 LOCKED 된다.",
+    "CORE_ENFORCER": "대상에게 [150,SP] SPECIAL 를 입힌다. 대상은 3초간 LOCKED 및 SILENCE 된다.",
+    "POWER_HUG": "대상에게 [40,80,SP] SPECIAL 를 입힌다 3촌간 LOCKED 및 PARALYSIS 를 가한다.",
+    "MORTAL_SPIN": "근접 거리에서 시전자를 공격하는 모든 적을 밀어내 [20,30,40,SP] SPECIAL 를 입히고, 4초간 POISONNED 을 가한다.",
+    "METAL_CLAW": "대상에게 [10,20,40,SP] TRUE 를 입히고 시전자의 ATK 을 [2,4,6] 증가시킨다."
   },
   "effect": {
     "INGRAIN": "뿌리박기",
@@ -1986,7 +2024,8 @@
     "TEAL_MASK": "벽록의 가면",
     "WELLSPRING_MASK": "우물의 가면",
     "CORNERSTONE_MASK": "주춧돌의 가면",
-    "HEARTHFLAME_MASK": "화덕의 가면"
+    "HEARTHFLAME_MASK": "화덕의 가면",
+    "ZYGARDE_CUBE": "지가르데큐브"
   },
   "item_description": {
     "FOSSIL_STONE": "선사시대에 살았던 포켓몬의 화석",
@@ -2110,7 +2149,8 @@
     "TEAL_MASK": "오거폰에게 50 SHIELD 및 FLORA 부여",
     "WELLSPRING_MASK": "오거폰에게 50 SHIELD 및 AQUATIC 부여",
     "HEARTHFLAME_MASK": "오거폰에게 50 SHIELD 및 FIRE 부여",
-    "CORNERSTONE_MASK": "오거폰에게 50 SHIELD 및 ROCK 부여"
+    "CORNERSTONE_MASK": "오거폰에게 50 SHIELD 및 ROCK 부여",
+    "ZYGARDE_CUBE": "지가르데를 폼 체인지"
   },
   "passive_description": {
     "NONE": "아무런 효과가 없습니다.",
@@ -2238,7 +2278,10 @@
     "DARMANITAN_ZEN": "공격과 이동을 할 수 없게 되지만, 매초 [15,SP] HP 을 회복한다. 완전히 회복되면 노말모드로 전환한다.",
     "BAD_LUCK": "모든 적의 LUCK 을 20% 감소시킨다.",
     "GOOD_LUCK": "모든 아군의 LUCK 을 20% 증가시킨다.",
-    "PRIMEAPE": "성원숭은 기절할 때마다 분노하여 ATK 을 영구적으로 1 획득한다. 10번 기절한 후에는 저승갓숭으로 진화한다."
+    "PRIMEAPE": "성원숭은 기절할 때마다 분노하여 ATK 을 영구적으로 1 획득한다. 10번 기절한 후에는 저승갓숭으로 진화한다.",
+    "ZYGARDE10": "최대 HP 의 30% 이하일 때, 모든 세포를 흡수하여 완전체 폼이 된다.",
+    "ZYGARDE50": "최대 HP 의 30% 이하일 때, 모든 세포를 흡수하여 완전체 폼이 된다.",
+    "GLIMMORA": "최대 HP의 50% 이하일 때, 전방의 2x3 칸에 독압정을 뿌려 20 피해를 입힌다. 독압정은 POISON 타입이 아닌 포켓몬에게 POISONNED 을 가한다."
   },
   "stat": {
     "ATK": "공격력",
@@ -2694,6 +2737,9 @@
   "smeargle_scribble": "루브도의 낙서",
   "smeargle_scribble_description": "재미를 위한 플레이, Elo 비활성화 !\n이 게임에는 새로운 특별한 룰이 적용됩니다.",
   "smeargle_scribble_hint": "매 게임마다 루브도가 게임내내 무작위 경기규칙을 적용시킵니다.",
+  "no_rule": "특별한 규칙 없음",
+  "enable_scribble": "루브도의 낙서 활성화",
+  "disable_scribble": "루브도의 낙서 비활성화",
   "quick_play": "자동매칭",
   "quick_play_description": "클래식한 PAC 경험 !\n8 플레이어, Elo 활성화, 누구나 참여 가능.",
   "quick_play_hint": "참가자 8명이 모이면 자동으로 시작합니다.",
@@ -2817,6 +2863,7 @@
   "renderer": "렌더링할 언어",
   "renderer_info": "webGL은 빠르지만 일부 기기에선 시각적으로 버그가 발생할 수 있습니다. Canvas는 느리지만 보다 더 다양한 기기에서 호환됩니다.",
   "music_volume": "소리 볼륨",
+  "play_music_in_background": "백그라운드에서 음악 재생",
   "sfx_volume": "SFX 볼륨",
   "toggle_fullscreen": "전체 화면",
   "show_details_on_hover": "우클릭 없이도 세부상태 확인",
@@ -2827,6 +2874,7 @@
   "snapshot": "스냅샷",
   "passive": "패시브",
   "pick_additional_pokemon_hint": "추가되는 기물을 고릅니다. 모두에게 해금됩니다.",
+  "pick_first_partner_hint": "스타터를 고릅니다. 10 스테이지까지 매스테이지에 해당 스타터를 획득합니다.",
   "free_slot_hint": "대기석에 한자리(두마리 세트의 경우 두자리)가 비어있어야 합니다.",
   "hide": "숨기기",
   "show": "보기",
@@ -3026,7 +3074,9 @@
     "bot_builder": "봇 제작기구",
     "bot_builder_desc": "이곳에서 당신의 봇을 제작해서 제출하면 실제 게임에 나올 수 있게 됩니다.",
     "jukebox": "주크박스",
-    "jukebox_desc": "인게임에서의 음악을 선택할 수 있습니다."
+    "jukebox_desc": "인게임에서의 음악을 선택할 수 있습니다.",
+    "gameboy": "게임보이",
+    "gamebody_desc": "게임보이 프로토타입을 플레이합니다."
   },
   "level_required": "레벨 요구됨",
   "map": {
@@ -3219,7 +3269,10 @@
     "KECLEONS_SHOP": "켈리몬의 가게",
     "FREE_MARKET": "모든 것이 거저",
     "SHINY_HUNTER": "이로치 헌터",
-    "DESPERATE_MOVES": "필사적 움직임"
+    "DESPERATE_MOVES": "필사적 움직임",
+    "DO_IT_ALL_YOURSELF": "전부 직접 하세요!",
+    "FIRST_PARTNER": "첫 파트너",
+    "SLAMINGO": "슬래밍고"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "모든 선택 포켓몬이 시작과 동시에 구매가 가능해집니다.",
@@ -3236,7 +3289,10 @@
     "KECLEONS_SHOP": "아이템초밥집이 켈리몬의 상점으로 대체됩니다. 켈리몬은 6개의 아이템을 각각 10골드씩에 판매합니다.",
     "FREE_MARKET": "0골드에 포켓몬을 사고 팔 수 있습니다.",
     "SHINY_HUNTER": "PVE에서 만나는 모든 야생 포켓몬들이 모두 이로치가 됩니다.",
-    "DESPERATE_MOVES": "플레이어들은 150 HP 로 시작합니다. GOLD 대신 HP 를 소모하여 상점을 새로고침합니다."
+    "DESPERATE_MOVES": "플레이어들은 150 HP 로 시작합니다. GOLD 대신 HP 를 소모하여 상점을 새로고침합니다.",
+    "DO_IT_ALL_YOURSELF": "최대 HP +100 의 아바타를 가지고 시작합니다. 아바타가 낮은 레어도라면 추가 골드를 획득합니다.",
+    "FIRST_PARTNER": "스타터 포켓몬을 고릅니다. 10 스테이지까지 매 스테이지에 이 유닛을 획득합니다.",
+    "SLAMINGO": "포켓몬을 대기석에 놓으면 모든 아이템을 장착 해제합니다. 4개의 무작위 조합 아이템을 획득합니다."
   },
   "loading_hints": {
     "tab_out": "로딩 화면 밖으로 나가지 마세요! 브라우저가 비활성화 되면 로딩이 멈춥니다. ",
