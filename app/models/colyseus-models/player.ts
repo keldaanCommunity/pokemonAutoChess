@@ -112,6 +112,7 @@ export default class Player extends Schema implements IPlayer {
   canRegainLife: boolean = true
   ghost: boolean = false
   firstPartner: Pkm | undefined
+  hasLeftGame: boolean = false
 
   constructor(
     id: string,
