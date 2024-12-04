@@ -480,16 +480,16 @@ export default class Shop {
       return Pkm.MAGIKARP
     }
 
-    const repeatBalls = values(player.board).filter((p) =>
+    const repeatBallHolders = values(player.board).filter((p) =>
       p.items.has(Item.REPEAT_BALL)
     )
     const totalRerolls = player.rerollCount + state.stageLevel
     if (
       shopIndex >= 0 &&
-      shopIndex < repeatBalls.length &&
+      shopIndex < repeatBallHolders.length &&
       totalRerolls % 2 === 0
     ) {
-      specificTypesWanted = values(repeatBalls[shopIndex].types)
+      specificTypesWanted = values(repeatBallHolders[shopIndex].types)
       rarity =
         [
           Rarity.COMMON,
