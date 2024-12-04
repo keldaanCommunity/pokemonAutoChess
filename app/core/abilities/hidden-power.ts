@@ -93,8 +93,7 @@ export class HiddenPowerCStrategy extends HiddenPowerStrategy {
       (x: number, y: number, pokemon: PokemonEntity | undefined) => {
         if (pokemon && unown.team === pokemon.team) {
           if (pokemon.items.size < 3) {
-            pokemon.items.add(Item.AMULET_COIN)
-            pokemon.simulation.applyItemEffect(pokemon, Item.AMULET_COIN)
+            pokemon.addItem(Item.AMULET_COIN)
           }
         }
       }
@@ -242,8 +241,7 @@ export class HiddenPowerJStrategy extends HiddenPowerStrategy {
         unown.team,
         false
       )
-      sharpedo.items.add(Item.RAZOR_CLAW)
-      sharpedo.simulation.applyItemsEffects(sharpedo)
+      sharpedo.addItem(Item.RAZOR_CLAW)
     }
   }
 }
@@ -268,8 +266,7 @@ export class HiddenPowerKStrategy extends HiddenPowerStrategy {
       unown.team,
       false
     )
-    hitmonlee.items.add(Item.RED_ORB)
-    hitmonlee.simulation.applyItemsEffects(hitmonlee)
+    hitmonlee.addItem(Item.RED_ORB)
     hitmonlee.pp = hitmonlee.maxPP - 1
   }
 }
@@ -362,8 +359,7 @@ export class HiddenPowerOStrategy extends HiddenPowerStrategy {
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team === value.team) {
         if (value.items.size < 3) {
-          value.items.add(Item.ORAN_BERRY)
-          value.simulation.applyItemEffect(value, Item.ORAN_BERRY)
+          value.addItem(Item.ORAN_BERRY)
         }
       }
     })
@@ -486,8 +482,7 @@ export class HiddenPowerUStrategy extends HiddenPowerStrategy {
       unown.team,
       false
     )
-    uxie.items.add(Item.AQUA_EGG)
-    uxie.simulation.applyItemsEffects(uxie)
+    uxie.addItem(Item.AQUA_EGG)
     uxie.pp = uxie.maxPP - 1
   }
 }
@@ -582,8 +577,7 @@ export class HiddenPowerXStrategy extends HiddenPowerStrategy {
       (x: number, y: number, pokemon: PokemonEntity | undefined) => {
         if (pokemon && unown.team === pokemon.team) {
           if (pokemon.items.size < 3) {
-            pokemon.items.add(Item.XRAY_VISION)
-            pokemon.simulation.applyItemEffect(pokemon, Item.XRAY_VISION)
+            pokemon.addItem(Item.XRAY_VISION)
           }
         }
       }
@@ -613,8 +607,7 @@ export class HiddenPowerYStrategy extends HiddenPowerStrategy {
         unown.team,
         false
       )
-      meditite.items.add(Item.SOUL_DEW)
-      meditite.simulation.applyItemsEffects(meditite)
+      meditite.addItem(Item.SOUL_DEW)
     }
   }
 }

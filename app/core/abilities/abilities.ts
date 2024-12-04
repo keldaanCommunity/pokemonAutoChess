@@ -275,12 +275,11 @@ export class PickupStrategy extends AbilityStrategy {
 
     if (target.items.size > 0 && pokemon.items.size < 3) {
       const item = target.items.values().next().value
-      target.items.delete(item)
+      target.removeItem(item)
       if (item === Item.MAX_REVIVE && target.status.resurection) {
         target.status.resurection = false
       }
-      pokemon.items.add(item)
-      pokemon.simulation.applyItemEffect(pokemon, item)
+      pokemon.addItem(item)
     } else {
       if (target.player) {
         const moneyStolen = max(target.player.money)(pokemon.stars)
@@ -1871,7 +1870,7 @@ export class ShadowCloneStrategy extends AbilityStrategy {
       if (pokemon.items.size > 0) {
         const itemGiven = pickRandomIn(values(pokemon.items))
         p.items.add(itemGiven)
-        pokemon.items.delete(itemGiven)
+        pokemon.removeItem(itemGiven)
         if (itemGiven === Item.MAX_REVIVE && pokemon.status.resurection) {
           pokemon.status.resurection = false
         }
@@ -4119,10 +4118,9 @@ export class ThiefStrategy extends AbilityStrategy {
 
     target.items.forEach((item) => {
       if (pokemon.items.size < 3) {
-        pokemon.items.add(item)
-        pokemon.simulation.applyItemEffect(pokemon, item)
+        pokemon.addItem(item)
       }
-      target.items.delete(item)
+      target.removeItem(item)
       if (item === Item.MAX_REVIVE && target.status.resurection) {
         target.status.resurection = false
       }
@@ -4144,7 +4142,7 @@ export class KnockOffStrategy extends AbilityStrategy {
     const damage = 90 + target.items.size * 30
 
     target.items.forEach((item) => {
-      target.items.delete(item)
+      target.removeItem(item)
       if (item === Item.MAX_REVIVE && target.status.resurection) {
         target.status.resurection = false
       }
@@ -10427,9 +10425,9 @@ export class TrickOrTreatStrategy extends AbilityStrategy {
 
     if (target.items.size > 0) {
       const item = values(target.items)[0]!
-      target.items.delete(item)
+      target.removeItem(item)
       if (pokemon.items.size < 3) {
-        pokemon.items.add(item)
+        pokemon.addItem(item)
       }
     } else if (pokemon.ap <= 50) {
       // 0-50 AP: shrink unit size and HP
