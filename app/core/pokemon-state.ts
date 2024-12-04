@@ -484,7 +484,7 @@ export default abstract class PokemonState {
         takenDamage = 0
         residualDamage = 0
         pokemon.status.triggerProtect(2000)
-        pokemon.items.delete(Item.SHINY_CHARM)
+        pokemon.removeItem(Item.SHINY_CHARM)
       }
 
       pokemon.life = Math.max(0, pokemon.life - residualDamage)
