@@ -440,15 +440,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   ) {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    const update = (target: {hp: number}) => {
+    const update = (target: { hp: number }) => {
       target.hp = min(1)(target.hp + value)
     }
     update(this)
     this.life = max(this.hp)(this.life + value)
-    if(permanent && !this.isGhostOpponent) {
+    if (permanent && !this.isGhostOpponent) {
       update(this.refToBoardPokemon)
     }
-    
   }
 
   addDodgeChance(
@@ -472,11 +471,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-    const update = (target: {ap: number}) => {
+    const update = (target: { ap: number }) => {
       target.ap = min(-100)(target.ap + value)
     }
     update(this)
-    if(permanent && !this.isGhostOpponent){
+    if (permanent && !this.isGhostOpponent) {
       update(this.refToBoardPokemon)
     }
   }
@@ -490,11 +489,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   ) {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    const update = (target: {luck: number}) => {
+    const update = (target: { luck: number }) => {
       target.luck = min(-100)(target.luck + value)
     }
     update(this)
-    if (permanent && !this.isGhostOpponent){
+    if (permanent && !this.isGhostOpponent) {
       update(this.refToBoardPokemon)
     }
   }
@@ -509,11 +508,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-    const update = (target: {def: number}) => {
+    const update = (target: { def: number }) => {
       target.def = min(0)(target.def + value)
     }
     update(this)
-    if (permanent && !this.isGhostOpponent){
+    if (permanent && !this.isGhostOpponent) {
       update(this.refToBoardPokemon)
     }
   }
@@ -528,11 +527,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-    const update = (target: {speDef: number}) => {
+    const update = (target: { speDef: number }) => {
       target.speDef = min(0)(target.speDef + value)
     }
     update(this)
-    if (permanent && !this.isGhostOpponent){
+    if (permanent && !this.isGhostOpponent) {
       update(this.refToBoardPokemon)
     }
   }
@@ -547,11 +546,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-    const update = (target: {atk: number}) => {
+    const update = (target: { atk: number }) => {
       target.atk = min(1)(target.atk + value)
     }
     update(this)
-    if (permanent && !this.isGhostOpponent){
+    if (permanent && !this.isGhostOpponent) {
       update(this.refToBoardPokemon)
     }
   }
@@ -570,7 +569,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         value *
         (1 + (apBoost * caster.ap) / 100) *
         (crit ? caster.critPower : 1)
-      const update = (target: {atkSpeed: number}) => {
+      const update = (target: { atkSpeed: number }) => {
         const currentAtkSpeedBonus = 100 * (target.atkSpeed / 0.75 - 1)
         const atkSpeedBonus = currentAtkSpeedBonus + value
         target.atkSpeed = clamp(
@@ -580,24 +579,31 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         )
       }
       update(this)
-      if(permanent && !this.isGhostOpponent){
+      if (permanent && !this.isGhostOpponent) {
         update(this.refToBoardPokemon)
       }
     }
   }
 
-  addPermanentItem(
-    item: Item
+  addItem(
+    item: Item,
+    permanent = false
   ) {
-    if (this.isGhostOpponent) return
-    this.refToBoardPokemon.items.add(item)
+    this.items.add(item)
+    this.simulation.applyItemEffect(this, item)
+    if (permanent && !this.isGhostOpponent){
+      this.refToBoardPokemon.items.add(item)
+    }
   }
 
-  removePermanentItem(
-    item: Item
+  removeItem(
+    item: Item,
+    permanent = false
   ) {
-    if (this.isGhostOpponent) return
-    this.refToBoardPokemon.items.delete(item)
+    this.items.delete(item)
+    if (permanent && !this.isGhostOpponent){
+      this.refToBoardPokemon.items.delete(item)
+    }
   }
 
   addPsychicField() {
@@ -1145,7 +1151,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           cell.value.status.triggerParalysis(3000, cell.value, this)
         }
       })
-      this.items.delete(Item.SMOKE_BALL)
+      this.removeItem(Item.SMOKE_BALL)
       this.flyAway(board)
     }
 
@@ -1169,7 +1175,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           )
         }
       })
-      this.items.delete(Item.ABSORB_BULB)
+      this.removeItem(Item.ABSORB_BULB)
     }
 
     // Flying protection
@@ -1465,10 +1471,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (target.items.has(Item.BABIRI_BERRY)) {
-      target.status.triggerProtect(2000)
-      target.handleHeal(20, target, 0, false)
-      target.items.delete(Item.BABIRI_BERRY)
-      target.removePermanentItem(Item.BABIRI_BERRY)
+      target.eatBerry(Item.BABIRI_BERRY)
     }
   }
 
@@ -1585,9 +1588,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         values(target.items).filter((item) => item !== Item.COMFEY)
       )
       if (floraSpawn && randomItem && floraSpawn.items.size < 3) {
-        floraSpawn.items.add(randomItem)
-        floraSpawn.simulation.applyItemEffect(floraSpawn, randomItem)
-        target.items.delete(randomItem)
+        floraSpawn.addItem(randomItem)
+        target.removeItem(randomItem)
       }
     }
 
@@ -1690,32 +1692,41 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   applyStat(stat: Stat, value: number, permanent = false) {
-
-    const statMap: ReadonlyMap<Stat, (...args) => void> = new Map([
-      [Stat.ATK, this.addAttack],
-      [Stat.DEF, this.addDefense],
-      [Stat.SPE_DEF, this.addSpecialDefense],
-      [Stat.AP, this.addAbilityPower],
-      [Stat.PP, this.addPP],
-      [Stat.ATK_SPEED, this.addAttackSpeed],
-      [Stat.CRIT_CHANCE, this.addCritChance],
-      [Stat.CRIT_POWER, this.addCritPower],
-      [Stat.SHIELD, this.addShield],
-      [Stat.HP, this.addMaxHP],
-      [Stat.LUCK, this.addLuck]
-    ])
-
-    const invalidPermanentStats: ReadonlySet<Stat> = new Set([
-      Stat.PP, Stat.CRIT_CHANCE, Stat.CRIT_POWER, Stat.SHIELD
-    ])
-    if (invalidPermanentStats.has(stat)){
-      if(permanent){
-        logger.debug(`${stat} cannot be added permanently`)
-      }
-      statMap[stat](value, this, 0, false)
-      return
+    switch (stat) {
+      case Stat.ATK:
+        this.addAttack(value, this, 0, false, permanent)
+        break
+      case Stat.DEF:
+        this.addDefense(value, this, 0, false, permanent)
+        break
+      case Stat.SPE_DEF:
+        this.addSpecialDefense(value, this, 0, false, permanent)
+        break
+      case Stat.AP:
+        this.addAbilityPower(value, this, 0, false, permanent)
+        break
+      case Stat.PP:
+        this.addPP(value, this, 0, false)
+        break
+      case Stat.ATK_SPEED:
+        this.addAttackSpeed(value, this, 0, false, permanent)
+        break
+      case Stat.CRIT_CHANCE:
+        this.addCritChance(value, this, 0, false)
+        break
+      case Stat.CRIT_POWER:
+        this.addCritPower(value, this, 0, false)
+        break
+      case Stat.SHIELD:
+        this.addShield(value, this, 0, false)
+        break
+      case Stat.HP:
+        this.addMaxHP(value, this, 0, false, permanent)
+        break
+      case Stat.LUCK:
+        this.addLuck(value, this, 0, false, permanent)
+        break
     }
-    statMap[stat](value, this, 0, false, permanent)
   }
 
   resurrect() {
@@ -1762,8 +1773,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    this.items.delete(Item.DYNAMAX_BAND)
-    this.items.delete(Item.SACRED_ASH)
+    this.removeItem(Item.DYNAMAX_BAND)
+    this.removeItem(Item.SACRED_ASH)
 
     this.simulation.applySynergyEffects(this)
     this.simulation.applyItemsEffects(this)
@@ -1875,14 +1886,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       case Item.BERRY_JUICE:
         this.handleHeal(this.hp - this.life, this, 0, false)
         break
+      case Item.BABIRI_BERRY:
+        this.status.triggerProtect(2000)
+        this.handleHeal(20, this, 0, false)
+        break
     }
 
     if (stealedFrom) {
-      stealedFrom.items.delete(berry)
-      stealedFrom.removePermanentItem(berry)
+      stealedFrom.removeItem(berry, true)
     } else {
-      this.items.delete(berry)
-      this.removePermanentItem(berry)
+      this.removeItem(berry, true)
     }
 
     if (this.passive === Passive.GLUTTON) {
