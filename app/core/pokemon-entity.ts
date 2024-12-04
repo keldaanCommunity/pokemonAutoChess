@@ -1460,10 +1460,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (target.items.has(Item.BABIRI_BERRY)) {
-      target.status.triggerProtect(2000)
-      target.handleHeal(20, target, 0, false)
-      target.items.delete(Item.BABIRI_BERRY)
-      target.removePermanentItem(Item.BABIRI_BERRY)
+      target.eatBerry(Item.BABIRI_BERRY)
     }
   }
 
@@ -1878,6 +1875,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         break
       case Item.BERRY_JUICE:
         this.handleHeal(this.hp - this.life, this, 0, false)
+        break
+      case Item.BABIRI_BERRY:
+        this.status.triggerProtect(2000)
+        this.handleHeal(20, this, 0, false)
         break
     }
 
