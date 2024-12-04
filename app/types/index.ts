@@ -558,11 +558,13 @@ export interface IPokemonEntity {
     apBoost: number,
     crit: boolean
   ): void
-  addPermanentItem(
-    item: Item
+  addItem(
+    item: Item,
+    permanent?: boolean
   ): void
-  removePermanentItem(
-    item: Item
+  removeItem(
+    item: Item,
+    permenent?: boolean
   ): void
   update(
     dt: number,
