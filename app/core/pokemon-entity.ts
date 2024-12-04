@@ -1773,8 +1773,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    this.removeItem(Item.DYNAMAX_BAND)
-    this.removeItem(Item.SACRED_ASH)
+    this.items.delete(Item.DYNAMAX_BAND)
+    this.items.delete(Item.SACRED_ASH)
 
     this.simulation.applySynergyEffects(this)
     this.simulation.applyItemsEffects(this)
