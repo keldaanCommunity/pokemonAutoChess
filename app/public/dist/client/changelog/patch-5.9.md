@@ -3,6 +3,8 @@
 # Changes to Pokemon & Abilities
 
 - Nerf Kecleon: PP 80 → 100
+- Changed Shadow Clone (Shuppet): instead of taking an item from original Shuppet, steal a random item from the current target
+- Changed Nightmare (Gastly): Silence duration 1.5/3/6 → 1.5/2.5/5 seconds; All Pokémon suffering from ~~Flinch/Silence/Sleep~~ a Ghost curse take 40/80/150 special damage
 
 # Changes to Synergies
 
