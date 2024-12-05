@@ -444,11 +444,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       target.hp = min(1)(target.hp + value)
     }
     update(this)
-    if (value > 0) {
-      this.life = max(this.hp)(this.life + value)
-    } else {
-      this.life = max(this.hp)(this.life)
-    }
+    this.life = clamp(this.life + value, 1, this.hp)
     if (permanent && !this.isGhostOpponent) {
       update(this.refToBoardPokemon)
     }
