@@ -444,7 +444,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       target.hp = min(1)(target.hp + value)
     }
     update(this)
-    this.life = max(this.hp)(this.life + value)
+    if (value > 0) {
+      this.life = max(this.hp)(this.life + value)
+    } else {
+      this.life = max(this.hp)(this.life)
+    }
     if (permanent && !this.isGhostOpponent) {
       update(this.refToBoardPokemon)
     }
@@ -458,7 +462,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   ) {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    this.dodge = max(0.9)(this.dodge + value)
+    this.dodge = clamp(this.dodge + value, 0, 0.9)
   }
 
   addAbilityPower(
