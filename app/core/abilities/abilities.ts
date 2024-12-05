@@ -9249,12 +9249,12 @@ export class PsyShockStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const ppBurn = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const ppBurn = ([20, 40, 80][pokemon.stars - 1] ?? 80) * (1 + (pokemon.ap) / 100)
     const ppStolen = max(target.pp)(ppBurn)
     const extraPP = ppBurn - ppStolen
 
-    target.addPP(-ppStolen, pokemon, 1, crit)
-    pokemon.addShield(ppBurn, pokemon, 1, crit)
+    target.addPP(-ppStolen, pokemon, 0, crit)
+    pokemon.addShield(ppBurn, pokemon, 0, crit)
     if (extraPP > 0) {
       target.handleSpecialDamage(
         extraPP,
