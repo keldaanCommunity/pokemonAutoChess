@@ -601,6 +601,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     permanent = false
   ) {
     this.items.delete(item)
+    this.simulation.removeItemEffect(this, item)
     if (permanent && !this.isGhostOpponent){
       this.refToBoardPokemon.items.delete(item)
     }
