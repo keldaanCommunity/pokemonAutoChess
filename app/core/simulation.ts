@@ -439,6 +439,14 @@ export default class Simulation extends Schema implements ISimulation {
     }
   }
 
+  removeItemEffect(pokemon: PokemonEntity, item: Item){
+    if (ItemStats[item]) {
+      Object.entries(ItemStats[item]).forEach(([stat, value]) =>
+        pokemon.applyStat(stat as Stat, -value)
+      )
+    }
+  }
+
   applySynergyEffects(pokemon: PokemonEntity) {
     if (pokemon.team === Team.BLUE_TEAM) {
       this.applyEffects(
