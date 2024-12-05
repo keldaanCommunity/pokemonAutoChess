@@ -585,14 +585,25 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  addPermanentItem(item: Item) {
-    if (this.isGhostOpponent) return
-    this.refToBoardPokemon.items.add(item)
+  addItem(
+    item: Item,
+    permanent = false
+  ) {
+    this.items.add(item)
+    this.simulation.applyItemEffect(this, item)
+    if (permanent && !this.isGhostOpponent){
+      this.refToBoardPokemon.items.add(item)
+    }
   }
 
-  removePermanentItem(item: Item) {
-    if (this.isGhostOpponent) return
-    this.refToBoardPokemon.items.delete(item)
+  removeItem(
+    item: Item,
+    permanent = false
+  ) {
+    this.items.delete(item)
+    if (permanent && !this.isGhostOpponent){
+      this.refToBoardPokemon.items.delete(item)
+    }
   }
 
   addPsychicField() {
@@ -1140,7 +1151,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           cell.value.status.triggerParalysis(3000, cell.value, this)
         }
       })
-      this.items.delete(Item.SMOKE_BALL)
+      this.removeItem(Item.SMOKE_BALL)
       this.flyAway(board)
     }
 
@@ -1164,7 +1175,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           )
         }
       })
-      this.items.delete(Item.ABSORB_BULB)
+      this.removeItem(Item.ABSORB_BULB)
     }
 
     // Flying protection
@@ -1460,10 +1471,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (target.items.has(Item.BABIRI_BERRY)) {
-      target.status.triggerProtect(2000)
-      target.handleHeal(20, target, 0, false)
-      target.items.delete(Item.BABIRI_BERRY)
-      target.removePermanentItem(Item.BABIRI_BERRY)
+      target.eatBerry(Item.BABIRI_BERRY)
     }
   }
 
@@ -1580,9 +1588,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         values(target.items).filter((item) => item !== Item.COMFEY)
       )
       if (floraSpawn && randomItem && floraSpawn.items.size < 3) {
-        floraSpawn.items.add(randomItem)
-        floraSpawn.simulation.applyItemEffect(floraSpawn, randomItem)
-        target.items.delete(randomItem)
+        floraSpawn.addItem(randomItem)
+        target.removeItem(randomItem)
       }
     }
 
@@ -1879,14 +1886,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       case Item.BERRY_JUICE:
         this.handleHeal(this.hp - this.life, this, 0, false)
         break
+      case Item.BABIRI_BERRY:
+        this.status.triggerProtect(2000)
+        this.handleHeal(20, this, 0, false)
+        break
     }
 
     if (stealedFrom) {
-      stealedFrom.items.delete(berry)
-      stealedFrom.removePermanentItem(berry)
+      stealedFrom.removeItem(berry, true)
     } else {
-      this.items.delete(berry)
-      this.removePermanentItem(berry)
+      this.removeItem(berry, true)
     }
 
     if (this.passive === Passive.GLUTTON) {

@@ -10156,6 +10156,7 @@ export class UnownQuestion extends Pokemon {
   skill = Ability.HIDDEN_POWER_QM
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class UnownExclamation extends Pokemon {
@@ -10171,6 +10172,7 @@ export class UnownExclamation extends Pokemon {
   skill = Ability.HIDDEN_POWER_EM
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  canHoldItems = false
 }
 
 export class Diglett extends Pokemon {
@@ -11107,8 +11109,7 @@ export class Tropius extends Pokemon {
   }) {
     const berry = pickRandomIn(Berries)
     if (entity.items.size < 3) {
-      entity.items.add(berry)
-      entity.addPermanentItem(berry)
+      entity.addItem(berry, true)
     } else {
       player.items.push(berry)
     }

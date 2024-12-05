@@ -300,12 +300,12 @@
     grid-row: 1 / 1;
   }
 
-  .game-shop .game-pokemon-portrait {
+  .game-shop .game-pokemons-store > .game-pokemon-portrait {
     width: 12.5vw;
     --container-height: 10vw;
   }
 
-  .game-shop .game-pokemon-portrait .synergy-icon {
+  .game-shop .game-pokemons-store > .game-pokemon-portrait .synergy-icon {
     width: 2.5vw;
     height: 2.5vw;
   }
