@@ -1303,8 +1303,6 @@
     "TRI_ATTACK": "造成[30,60,SP]点SPECIAL。目标可能陷入BURN，FREEZE或PARALYSIS之一。",
     "ECHO": "对所有敌方宝可梦造成[3,6,9,SP]点SPECIAL。使用者每次使用该招式时，造成的伤害增加[3,6,9,SP]点。",
     "PETAL_DANCE": "对[3,4,5]只最近的敌方宝可梦造成[20,30,50,SP]点SPECIAL。",
-    "HYPER_VOICE": "对目标以及与之位于同一横排的其他敌方宝可梦造成[30,60,150,SP]点SPECIAL，并使他们陷入CONFUSION [1,2,3]秒。",
-    "SHADOW_CLONE": "生成一只具有[50,SP]%的最大HP的克隆体，其获得该宝可梦的携带道具之一。",
     "VOLT_SWITCH": "突进至敌方队伍的后排，对击中的所有敌方宝可梦造成[30,60,120,SP]点SPECIAL。",
     "NUZZLE": "突进至最远的敌方宝可梦的位置，对其造成[30,60,120,SP]点SPECIAL，并使其陷入PARALYSIS [3,4,5]秒。",
     "LIQUIDATION": "造成[20,40,80,SP]点SPECIAL，并降低目标[2,4,8,SP]点DEF。",
