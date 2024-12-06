@@ -1287,7 +1287,7 @@
     "EARTHQUAKE": "对与使用者处于同一横排或纵列上的所有敌方宝可梦造成[100,SP]点SPECIAL。",
     "SONG_OF_DESIRE": "使敌方后排的两只宝可梦陷入CHARM [3,SP]秒，并降低其[3,SP]点ATK。",
     "CONFUSING_MIND": "使敌方后排的两只宝可梦陷入CONFUSION [3,SP]秒。",
-    "KNOWLEDGE_THIEF": "使用目标的招式。玩家获得1点XP。",
+    "KNOWLEDGE_THIEF": "使用目标的招式。玩家获得1点经验值。",
     "KING_SHIELD": "使用者进入PROTECT 1.5秒，获得[10,20,30,SP]点SHIELD，并和最远的敌方宝可梦交换位置。",
     "U_TURN": "获得[15,30,50,SP]点SHIELD，并和目标交换位置，其同时陷入CHARM 1秒。",
     "EXPLOSION": "对所有相邻敌方宝可梦造成[50,100,200,SP]点 SPECIAL。也对使用者自身造成伤害。",
