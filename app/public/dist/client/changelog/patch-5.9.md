@@ -1,4 +1,7 @@
 # New Pokemons:
+- Fletchling
+- Fletchinder
+- Talonflame
 
 # Changes to Pokemon & Abilities
 
