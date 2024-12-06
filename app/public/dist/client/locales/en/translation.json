@@ -412,7 +412,8 @@
     "CORE_ENFORCER": "Core Enforcer",
     "POWER_HUG": "Power Hug",
     "MORTAL_SPIN": "Mortal Spin",
-    "METAL_CLAW": "Metal Claw"
+    "METAL_CLAW": "Metal Claw",
+    "FIRESTARTER": "Firestarter"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1280,7 +1281,10 @@
     "STUFFUL": "Stufful",
     "BEWEAR": "Bewear",
     "GLIMMET": "Glimmet",
-    "GLIMMORA": "Glimmora"
+    "GLIMMORA": "Glimmora",
+    "FLETCHLING": "Fletchling",
+    "FLETCHINDER": "Fletchinder",
+    "TALONFLAME": "Talonflame"
   },
   "ability_description": {
     "SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1416,7 +1420,7 @@
     "SLUDGE": "Throw trash at the 3 enemy Pokémon in front of the user to inflict [2,3,4] stacks of POISONNED for [3,SP] seconds.",
     "SLUDGE_WAVE": "Throw a spray of waste on the target and adjacent enemy Pokémon, dealing [10,20,40,SP] SPECIAL and inflict POISONNED for [2,3,4,SP] seconds.",
     "SMOG": "Project a cloud of stinking gas onto the 3 tiles in front of the user, dealing [10,20,40,SP] SPECIAL. Gas stays on board until the end of the fight and reduces the accuracy of Pokémon inside by 50%.",
-    "LAVA_PLUME": "Project lava onto the 3 tiles in front of the user, dealing [20,40,80,SP] SPECIAL. Lava stay on the ground, dealing 10 SPECIAL and BURN non FIRE Pokémon that walk on it.",
+    "LAVA_PLUME": "Project lava onto the 3 tiles in front of the user, dealing [20,40,80,SP] SPECIAL. Lava stay on the ground, dealing 10 SPECIAL and BURN Pokémon that walk on it if not FLYING or FIRE.",
     "SHELTER": "Gain [3,6,12,SP] DEF and project a smoke screen onto the 3 tiles in front of the user. Smoke stays on board until the end of the fight and reduces the accuracy of Pokémon inside by 50%.",
     "AURORA_BEAM": "Fire a beam in a line. All enemy Pokémon hit take [25,50,100,SP] SPECIAL and may be inflicted with FREEZE (chance based on ICE synergy level and LUCK).",
     "AGILITY": "Increase ATK_SPEED by [10,20,30,SP] % (stacks).",
@@ -1673,7 +1677,8 @@
     "CORE_ENFORCER": "Deal [150,SP] SPECIAL to the target. The target is LOCKED and SILENCE for 3 seconds.",
     "POWER_HUG": "Deal [40,80,SP] SPECIAL to the target. Inflict LOCKED and PARALYSIS for 3 seconds.",
     "MORTAL_SPIN": "Knock back any Pokemon targeting the user in melee range. Deal [20,30,40,SP] SPECIAL to any enemies hit, and apply POISONNED for 4 seconds",
-    "METAL_CLAW": "Deal [10,20,40,SP] TRUE to the target and raise the user's ATK by [2,4,6]."
+    "METAL_CLAW": "Deal [10,20,40,SP] TRUE to the target and raise the user's ATK by [2,4,6].",
+    "FIRESTARTER": "Gain [10,20,40,SP]% ATK_SPEED and flies to the furthest ennemy, dropping embers on the cells in between. The embers inflict [20,40,80,SP] SPECIAL and remain on the ground, so any Pokémon that steps on them BURN and take 10 SPECIAL per second if not FLYING or FIRE."
   },
   "effect": {
     "INGRAIN": "Ingrain",

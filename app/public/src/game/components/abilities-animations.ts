@@ -2836,6 +2836,26 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.FIRESTARTER: {
+      const abilitySprite = addAbilitySprite(
+        skill,
+        [coordinatesTarget[0], coordinatesTarget[1] - 50],
+        true
+      ).setScale(2)
+      scene.tweens.add({
+        targets: abilitySprite,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 800,
+        repeat: 1,
+        onComplete: () => {
+          abilitySprite.destroy()
+        }
+      })
+      break
+    }
+
     default:
       break
   }

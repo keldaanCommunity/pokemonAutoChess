@@ -868,7 +868,10 @@ export default abstract class PokemonState {
       pokemon.effects.delete(Effect.HAIL)
     }
 
-    if (pokemon.effects.has(Effect.LAVA) && !pokemon.types.has(Synergy.FIRE)) {
+    if (
+      pokemon.effects.has(Effect.EMBER) &&
+      !(pokemon.types.has(Synergy.FIRE) || pokemon.types.has(Synergy.FLYING))
+    ) {
       pokemon.handleDamage({
         damage: 10,
         board,

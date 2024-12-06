@@ -6137,7 +6137,7 @@ export class LavaPlumeStrategy extends AbilityStrategy {
     const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
 
     cells.forEach((cell) => {
-      board.addBoardEffect(cell.x, cell.y, Effect.LAVA, pokemon.simulation)
+      board.addBoardEffect(cell.x, cell.y, Effect.EMBER, pokemon.simulation)
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
           damage,
@@ -10830,6 +10830,86 @@ export class MetalClawStrategy extends AbilityStrategy {
   }
 }
 
+export class FirestarterStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const atkSpeedBuff = [10, 20, 40][pokemon.stars - 1] ?? 40
+
+    const farthestCoordinate =
+      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+    if (farthestCoordinate) {
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
+      cells.forEach((cell, i) => {
+        if (
+          cell.x === farthestCoordinate.x &&
+          cell.y === farthestCoordinate.y
+        ) {
+          pokemon.commands.push(
+            new DelayedCommand(() => {
+              pokemon.addAttackSpeed(atkSpeedBuff, pokemon, 1, crit)
+            }, 500)
+          )
+        } else {
+          pokemon.commands.push(
+            new DelayedCommand(() => {
+              board.addBoardEffect(
+                cell.x,
+                cell.y,
+                Effect.EMBER,
+                pokemon.simulation
+              )
+              pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+                id: pokemon.simulation.id,
+                skill: Ability.FIRESTARTER,
+                positionX: pokemon.positionX,
+                positionY: pokemon.positionY,
+                targetX: cell.x,
+                targetY: cell.y
+              })
+
+              if (cell.value && cell.value.team != pokemon.team) {
+                cell.value.handleSpecialDamage(
+                  damage,
+                  board,
+                  AttackType.SPECIAL,
+                  pokemon,
+                  crit
+                )
+              }
+            }, i * 50)
+          )
+          pokemon.commands.push(
+            new DelayedCommand(
+              () => {
+                board.addBoardEffect(
+                  cell.x,
+                  cell.y,
+                  Effect.EMBER,
+                  pokemon.simulation
+                )
+              },
+              500 + i * 50
+            )
+          )
+        }
+      })
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -11224,5 +11304,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BURN_UP]: new BurnUpStrategy(),
   [Ability.POWER_HUG]: new PowerHugStrategy(),
   [Ability.MORTAL_SPIN]: new MortalSpinStrategy(),
-  [Ability.METAL_CLAW]: new MetalClawStrategy()
+  [Ability.METAL_CLAW]: new MetalClawStrategy(),
+  [Ability.FIRESTARTER]: new FirestarterStrategy()
 }

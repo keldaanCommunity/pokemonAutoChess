@@ -231,6 +231,8 @@ export enum Pkm {
   FLABEBE = "FLABEBE",
   FLAFFY = "FLAFFY",
   FLAREON = "FLAREON",
+  FLETCHINDER = "FLETCHINDER",
+  FLETCHLING = "FLETCHLING",
   FLOATZEL = "FLOATZEL",
   FLOETTE = "FLOETTE",
   FLORGES = "FLORGES",
@@ -723,6 +725,7 @@ export enum Pkm {
   SWINUB = "SWINUB",
   SWOOBAT = "SWOOBAT",
   SYLVEON = "SYLVEON",
+  TALONFLAME = "TALONFLAME",
   TANDEMAUS = "TANDEMAUS",
   TANGELA = "TANGELA",
   TANGROWTH = "TANGROWTH",
@@ -1636,9 +1639,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GRENINJA]: "0658",
   //[Pkm.BUNNELBY]: "0659",
   //[Pkm.DIGGERSBY]: "0660",
-  //[Pkm.FLETCHLING]: "0661",
-  //[Pkm.FLETCHINDER]: "0662",
-  //[Pkm.TALONFLAME]: "0663",
+  [Pkm.FLETCHLING]: "0661",
+  [Pkm.FLETCHINDER]: "0662",
+  [Pkm.TALONFLAME]: "0663",
   //[Pkm.SCATTERBUG]: "0664",
   //[Pkm.SPEWPA]: "0665",
   //[Pkm.VIVILLON]: "0666",
@@ -2888,7 +2891,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.STUFFUL]: Pkm.STUFFUL,
   [Pkm.BEWEAR]: Pkm.STUFFUL,
   [Pkm.GLIMMET]: Pkm.GLIMMET,
-  [Pkm.GLIMMORA]: Pkm.GLIMMET
+  [Pkm.GLIMMORA]: Pkm.GLIMMET,
+  [Pkm.FLETCHLING]: Pkm.FLETCHLING,
+  [Pkm.FLETCHINDER]: Pkm.FLETCHLING,
+  [Pkm.TALONFLAME]: Pkm.FLETCHLING
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7398,5 +7404,20 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
+  },
+  [Pkm.FLETCHLING]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.FLETCHINDER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Hover,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.TALONFLAME]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Hover,
+    emote: AnimationType.Shoot
   }
 }
