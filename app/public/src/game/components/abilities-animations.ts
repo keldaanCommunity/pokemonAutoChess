@@ -2839,13 +2839,13 @@ export function displayAbility(
     case Ability.FIRESTARTER: {
       const abilitySprite = addAbilitySprite(
         skill,
-        [coordinatesTarget[0], coordinatesTarget[1] - 50],
+        [coordinatesTarget[0], coordinatesTarget[1] - 25],
         true
       ).setScale(2)
       scene.tweens.add({
         targets: abilitySprite,
         x: coordinatesTarget[0],
-        y: coordinatesTarget[1],
+        y: coordinatesTarget[1] + 25,
         ease: "linear",
         duration: 800,
         repeat: 1,
