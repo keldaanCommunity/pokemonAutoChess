@@ -709,9 +709,9 @@ export class OnRefreshCommand extends Command<GameRoom, string> {
         : (player?.money ?? 0) >= rollCost
 
     if (canRoll && player.alive) {
-      this.state.shop.assignShop(player, true, this.state)
-      player[rollCostType] -= rollCost
       player.rerollCount++
+      player[rollCostType] -= rollCost
+      this.state.shop.assignShop(player, true, this.state)
       if (player.shopFreeRolls > 0) player.shopFreeRolls--
     }
   }
