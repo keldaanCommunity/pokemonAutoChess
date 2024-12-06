@@ -1,7 +1,7 @@
 import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
-import { getWonderboxItems, triggerItems } from "./items"
+import { getWonderboxItems, triggerItem } from "./items"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../models/precomputed/precomputed-types"
