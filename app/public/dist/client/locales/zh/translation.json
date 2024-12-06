@@ -412,7 +412,8 @@
     "CORE_ENFORCER": "核心惩罚者",
     "POWER_HUG": "强力拥抱",
     "MORTAL_SPIN": "晶光转转",
-    "METAL_CLAW": "金属爪"
+    "METAL_CLAW": "金属爪",
+    "FIRESTARTER": "起火"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1280,7 +1281,10 @@
     "STUFFUL": "童偶熊",
     "BEWEAR": "穿着熊",
     "GLIMMET": "晶光芽",
-    "GLIMMORA": "晶光花"
+    "GLIMMORA": "晶光花",
+    "FLETCHLING": "小箭雀",
+    "FLETCHINDER": "火箭雀",
+    "TALONFLAME": "烈箭鹰"
   },
   "ability_description": {
     "SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1291,7 +1295,7 @@
     "KING_SHIELD": "使用者进入PROTECT 1.5秒，获得[10,20,30,SP]点SHIELD，并和最远的敌方宝可梦交换位置。",
     "U_TURN": "获得[15,30,50,SP]点SHIELD，并和目标交换位置，其同时陷入CHARM 1秒。",
     "EXPLOSION": "对所有相邻敌方宝可梦造成[50,100,200,SP]点 SPECIAL。也对使用者自身造成伤害。",
-    "NIGHTMARE": "对所有敌方宝可梦施加SILENCE，持续[1.5,3,6,ND=1]秒。任何受到GHOST诅咒的敌人都会受到[40,80,150,SP]SPECIAL的伤害。",
+    "NIGHTMARE": "对所有敌方宝可梦施加SILENCE，持续[1.5,3,6,ND=1]秒。受到来自GHOST共鸣的诅咒影响的敌人也会受到[40,80,150,SP]点SPECIAL。",
     "CLANGOROUS_SOUL": "使自身和相邻的我方宝可梦提升[1,2,4,SP]点ATK，DEF和SPE_DEF。",
     "BONEMERANG": "投掷一块像回旋镖一样穿过敌方全队的骨头，对所有其击中的敌方宝可梦造成[30,60,90,SP]点SPECIAL。",
     "GROWL": "使相邻的敌方宝可梦陷入FLINCH 3秒，并降低其ATK [3,5,7,SP]点。",
@@ -1303,8 +1307,8 @@
     "TRI_ATTACK": "造成[30,60,SP]点SPECIAL。目标可能陷入BURN，FREEZE或PARALYSIS之一。",
     "ECHO": "对所有敌方宝可梦造成[3,6,9,SP]点SPECIAL。使用者每次使用该招式时，造成的伤害增加[3,6,9,SP]点。",
     "PETAL_DANCE": "对[3,4,5]只最近的敌方宝可梦造成[20,30,50,SP]点SPECIAL。",
-    "HYPER_VOICE": "对目标以及与之位于同一横排的其他敌方宝可梦造成[30,60,150,SP]点SPECIAL，并使他们陷入CONFUSION[1,2,3]秒。",
-    "SHADOW_CLONE": "生成一只具有[50,SP]%的最大HP的克隆体，克隆人会从当前目标处偷取一件随机物品。",
+    "HYPER_VOICE": "对目标以及与之位于同一横排的其他敌方宝可梦造成[30,60,150,SP]点SPECIAL，并使他们陷入CONFUSION [1,2,3]秒。",
+    "SHADOW_CLONE": "生成一只具有[50,SP]%的最大HP的克隆体，并令其从当前目标处偷取一件随机物品。",
     "VOLT_SWITCH": "突进至敌方队伍的后排，对击中的所有敌方宝可梦造成[30,60,120,SP]点SPECIAL。",
     "NUZZLE": "突进至最远的敌方宝可梦的位置，对其造成[30,60,120,SP]点SPECIAL，并使其陷入PARALYSIS [3,4,5]秒。",
     "LIQUIDATION": "造成[20,40,80,SP]点SPECIAL，并降低目标[2,4,8,SP]点DEF。",
@@ -1416,7 +1420,7 @@
     "SLUDGE": "向前方的3格投掷垃圾。这些垃圾会造成[2,3,4]层的POISONNED [3,SP]秒。",
     "SLUDGE_WAVE": "朝目标和相邻敌人喷射废料，对他们造成[10,20,40,SP]点SPECIAL，并使他们陷入POISONNED [2,3,4,SP]秒。",
     "SMOG": "向前方的3格喷发射一团臭气，对其内的敌人造成[10,20,40,SP]点SPECIAL。臭气云会停留在场上至本场战斗结束，其内的宝可梦的命中率降低50%。",
-    "LAVA_PLUME": "向使用者前方三格投射熔岩，对其内的目标造成[20,40,80,SP]点SPECIAL。熔岩会留在地上，对走到此处的非FIRE宝可梦每秒造成10点SPECIAL，并使其陷入BURN。",
+    "LAVA_PLUME": "向使用者前方三格投射熔岩，对其内的目标造成[20,40,80,SP]点SPECIAL。熔岩会留在地上，对走到此处的非FLYING、非FIRE宝可梦每秒造成10点SPECIAL，并使其陷入BURN。",
     "SHELTER": "提升[3,6,12,SP]点DEF，并向前方的3格发射一团烟幕。烟幕会停留在场上至本场战斗结束，其内的宝可梦的命中率降低50%。",
     "AURORA_BEAM": "直线发射一道光束。击中的所有目标受到[25,50,100,SP]点SPECIAL且可能陷入FREEZE，概率由ICE共鸣等级和LUCK决定。",
     "AGILITY": "提升[10,20,30,SP]%的ATK_SPEED（可以叠加）。",
@@ -1673,7 +1677,8 @@
     "CORE_ENFORCER": "对目标造成[150,SP]点SPECIAL，并使其陷入LOCKED和SILENCE 3秒。",
     "POWER_HUG": "对目标造成[40,80,SP]点SPECIAL，并使其陷入LOCKED和PARALYSIS 3秒。",
     "MORTAL_SPIN": "击退任何正在攻击使用者且与之距离不超过1的宝可梦，对他们造成[20,30,40,SP]点SPECIAL，并使他们陷入POISONNED 4秒。",
-    "METAL_CLAW": "对目标造成[10,20,40,SP]点TRUE，并提升使用者[2,4,6]点ATK。"
+    "METAL_CLAW": "对目标造成[10,20,40,SP]点TRUE，并提升使用者[2,4,6]点ATK。",
+    "FIRESTARTER": "提升[10,20,40,SP]%的ATK_SPEED，并飞到最远的敌方宝可梦的位置，沿途洒下烟灰。烟灰造成[20,40,80,SP]点SPECIAL且会留在地上，对位于此位置的非FLYING，非FIRE宝可梦每秒造成10点SPECIAL，并使之陷入BURN。"
   },
   "effect": {
     "INGRAIN": "扎根",
