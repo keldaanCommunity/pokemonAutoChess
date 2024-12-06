@@ -15366,6 +15366,50 @@ export class Glimmora extends Pokemon {
   passive = Passive.GLIMMORA
 }
 
+export class Fletchling extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.FIRE])
+  rarity = Rarity.ULTRA
+  stars = 1
+  evolution = Pkm.FLETCHINDER
+  hp = 120
+  atk = 15
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.FIRESTARTER
+  attackSprite = AttackSprite.FIRE_RANGE
+}
+
+export class Fletchinder extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.FIRE])
+  rarity = Rarity.ULTRA
+  stars = 2
+  evolution = Pkm.TALONFLAME
+  hp = 230
+  atk = 30
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 2
+  skill = Ability.FIRESTARTER
+  attackSprite = AttackSprite.FIRE_RANGE
+}
+
+export class Talonflame extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.FIRE])
+  rarity = Rarity.ULTRA
+  stars = 3
+  hp = 340
+  atk = 45
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 2
+  skill = Ability.FIRESTARTER
+  attackSprite = AttackSprite.FIRE_RANGE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -16238,5 +16282,8 @@ export const PokemonClasses: Record<
   [Pkm.STUFFUL]: Stufful,
   [Pkm.BEWEAR]: Bewear,
   [Pkm.GLIMMET]: Glimmet,
-  [Pkm.GLIMMORA]: Glimmora
+  [Pkm.GLIMMORA]: Glimmora,
+  [Pkm.FLETCHLING]: Fletchling,
+  [Pkm.FLETCHINDER]: Fletchinder,
+  [Pkm.TALONFLAME]: Talonflame
 }

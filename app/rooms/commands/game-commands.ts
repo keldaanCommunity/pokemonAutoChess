@@ -280,14 +280,14 @@ export class OnDragDropCommand extends Command<
           if (dropOnBench) {
             // From board to bench is always allowed (bench to bench is already handled)
             this.room.swap(player, pokemon, x, y)
-            pokemon.onChangePosition(x, y, player)
-            success = true
             if (this.state.specialGameRule === SpecialGameRule.SLAMINGO) {
               pokemon.items.forEach((item) => {
                 player.items.push(item)
                 pokemon.removeItem(item)
               })
             }
+            pokemon.onChangePosition(x, y, player)
+            success = true            
           } else if (
             pokemon.canBePlaced &&
             !(dropFromBench && dropToEmptyPlace && isBoardFull)
@@ -709,9 +709,9 @@ export class OnRefreshCommand extends Command<GameRoom, string> {
         : (player?.money ?? 0) >= rollCost
 
     if (canRoll && player.alive) {
-      this.state.shop.assignShop(player, true, this.state)
-      player[rollCostType] -= rollCost
       player.rerollCount++
+      player[rollCostType] -= rollCost
+      this.state.shop.assignShop(player, true, this.state)
       if (player.shopFreeRolls > 0) player.shopFreeRolls--
     }
   }
