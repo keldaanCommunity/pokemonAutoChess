@@ -54,6 +54,8 @@ import MovingState from "./moving-state"
 import PokemonState from "./pokemon-state"
 import Simulation from "./simulation"
 import { DelayedCommand, SimulationCommand } from "./simulation-command"
+import { EffectClass } from "../types/enum/EffectClass"
+import { triggerItem } from "./items"
 
 export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -587,7 +589,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addItem(item: Item, permanent = false) {
     this.items.add(item)
-    this.simulation.applyItemEffect(this, item)
+    triggerItem(EffectClass.APPLY, this, item)
     if (permanent && !this.isGhostOpponent) {
       this.refToBoardPokemon.items.add(item)
     }
