@@ -1862,29 +1862,29 @@ export class ShadowCloneStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const farthestCoordinate =
-      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+    const spawnPosition = board.getClosestAvailablePlace(
+      pokemon.positionX,
+      pokemon.positionY
+    )
 
-    if (farthestCoordinate) {
+    if (spawnPosition) {
       const p = PokemonFactory.createPokemonFromName(pokemon.name)
-      if (pokemon.items.size > 0) {
-        const itemGiven = pickRandomIn(values(pokemon.items))
-        p.items.add(itemGiven)
-        pokemon.removeItem(itemGiven)
-        if (itemGiven === Item.MAX_REVIVE && pokemon.status.resurection) {
-          pokemon.status.resurection = false
-        }
+      let itemStolen: Item | null = null
+      if (target.items.size > 0) {
+        itemStolen = pickRandomIn(values(target.items))
+        target.removeItem(itemStolen)
       }
 
       const clone = pokemon.simulation.addPokemon(
         p,
-        farthestCoordinate.x,
-        farthestCoordinate.y,
+        spawnPosition.x,
+        spawnPosition.y,
         pokemon.team
       )
       clone.hp = min(1)(Math.ceil(0.5 * pokemon.hp * (1 + pokemon.ap / 100)))
       clone.life = clone.hp
       clone.isClone = true
+      if (itemStolen) clone.addItem(itemStolen)
     }
   }
 }
@@ -2253,12 +2253,17 @@ export class NightmareStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const duration = [1500, 3000, 6000][pokemon.stars - 1] ?? 6000
+    const duration = [1500, 2500, 5000][pokemon.stars - 1] ?? 5000
     const damage = [40, 80, 150][pokemon.stars - 1] ?? 100
 
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && pokemon.team != enemy.team) {
-        if (enemy.status.flinch || enemy.status.sleep || enemy.status.silence) {
+        if (
+          enemy.status.curseFate ||
+          enemy.status.curseTorment ||
+          enemy.status.curseVulnerability ||
+          enemy.status.curseWeakness
+        ) {
           enemy.handleSpecialDamage(
             damage,
             board,
