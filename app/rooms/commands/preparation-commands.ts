@@ -22,13 +22,14 @@ import PreparationRoom from "../preparation-room"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import { getRank } from "../../utils/elo"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
+import { UserRecord } from "firebase-admin/lib/auth/user-record"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
   {
-    client: Client
+    client: Client<undefined, UserRecord>
     options: any
-    auth: any
+    auth: UserRecord
   }
 > {
   async execute({ client, options, auth }) {
@@ -543,6 +544,7 @@ export class OnLeaveCommand extends Command<
             avatar: user.avatar
           })
           this.state.users.delete(client.auth.uid)
+          this.state.uids.delete(client.auth.uid)
 
           if (client.auth.uid === this.state.ownerId) {
             const newOwner = values(this.state.users).find(
