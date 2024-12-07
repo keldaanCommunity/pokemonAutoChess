@@ -44,6 +44,27 @@ export function throttle<T extends (...args: any) => any>(
   }
 }
 
+export function block<T extends (...args: any) => any>(
+  fn: T
+): ThrottledFunction<T> {
+  let executing: boolean
+  let lastResult: ReturnType<T>
+  
+  return async function (this: any, ...args: any[]): Promise<ReturnType<T>> {
+    const context = this
+    
+    if (!executing) {
+      executing = true
+      const maybePromise: ReturnType<T> = fn.apply(context, args)
+      lastResult = await maybePromise
+    }
+
+    executing = false
+
+    return lastResult
+  }
+}
+
 // repeat fn several times
 export const repeat = (n: number) => (cb: (i: number) => void) => {
   for (let i = 0; i < n; i++) {
