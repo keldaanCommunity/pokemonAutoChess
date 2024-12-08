@@ -544,7 +544,6 @@ export class OnLeaveCommand extends Command<
             avatar: user.avatar
           })
           this.state.users.delete(client.auth.uid)
-          this.state.uids.delete(client.auth.uid)
 
           if (client.auth.uid === this.state.ownerId) {
             const newOwner = values(this.state.users).find(

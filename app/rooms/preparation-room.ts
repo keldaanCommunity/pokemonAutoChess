@@ -345,18 +345,15 @@ export default class PreparationRoom extends Room<PreparationState> {
       const userProfile = await UserMetadata.findOne({ uid: user.uid })
       client.send(Transfer.USER_PROFILE, userProfile)
 
+      const isAlreadyInRoom = this.state.users.has(user.uid)
       const numberOfHumanPlayers = values(this.state.users).filter(
         (u) => !u.isBot
       ).length
 
-      if (!this.state.uids.has(user.uid)) {
-        this.state.uids.add(user.uid)
-      } else {
-        throw "Already joined"
-      }
-      
       if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME) {
         throw "Room is full"
+      } else if (isAlreadyInRoom) {
+        throw "Already joined"
       } else if (this.state.gameStartedAt != null) {
         throw "Game already started"
       } else if (!user.displayName) {

@@ -35,7 +35,6 @@ export default class PreparationState
   @type("boolean") noElo: boolean
   @type(["string"]) whitelist: string[]
   @type(["string"]) blacklist: string[]
-  uids: Set<string> = new Set()
 
   constructor(params: {
     ownerId?: string
