@@ -63,9 +63,13 @@ if (process.env.NODE_APP_INSTANCE) {
           throw "Attempt to create one lobby"
         }
       }
-      return (await matchMaker.stats.fetchAll()).sort((p1, p2) =>
-        p1.ccu > p2.ccu ? 1 : -1
-      )[0].processId
+      const stats = await matchMaker.stats.fetchAll()
+      stats.sort((p1, p2) =>
+        p1.roomCount !== p2.roomCount
+          ? p1.roomCount - p2.roomCount
+          : p1.ccu - p2.ccu
+      )
+      return stats[0].processId
     }
   }
 }
