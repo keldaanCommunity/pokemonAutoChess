@@ -7390,7 +7390,9 @@ export class RetaliateStrategy extends AbilityStrategy {
     const nbAlliesAlive = board.cells.filter(
       (entity) => entity && entity.team === pokemon.team
     ).length
-    const meter = ["blueDpsMeter", "redDpsMeter"][pokemon.team]
+    const meter = pokemon.team === Team.BLUE_TEAM ?
+      "blueDpsMeter" :
+      "redDpsMeter"
     const nbFallenAllies =
       pokemon.simulation[meter].size - nbAlliesAlive
     const damage =
@@ -8011,7 +8013,9 @@ export class KowtowCleaveStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const nbAllies =
       board.cells.filter((p) => p && p.team === pokemon.team).length
-    const meter = ["blueDpsMeter", "redDpsMeter"][pokemon.team]
+    const meter = pokemon.team === Team.BLUE_TEAM ?
+      "blueDpsMeter" :
+      "redDpsMeter"
     const nbFallenAllies =
       pokemon.simulation[meter].size - nbAlliesAlive
     const damage = Math.round(
