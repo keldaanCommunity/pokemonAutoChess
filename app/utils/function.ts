@@ -57,9 +57,8 @@ export function block<T extends (...args: any) => any>(
       executing = true
       const maybePromise: ReturnType<T> = fn.apply(context, args)
       lastResult = await maybePromise
+      executing = false
     }
-
-    executing = false
 
     return lastResult
   }
