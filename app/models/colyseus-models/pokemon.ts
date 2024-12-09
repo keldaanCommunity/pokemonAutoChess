@@ -3771,11 +3771,11 @@ export class Typhlosion extends Pokemon {
 export class HisuianTyphlosion extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.GHOST])
   rarity = Rarity.UNCOMMON
-  stars = 4
+  stars = 3
   hp = 230
-  atk = 27
-  def = 4
-  speDef = 4
+  atk = 25
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 2
   skill = Ability.INFERNAL_PARADE
