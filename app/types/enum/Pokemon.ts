@@ -869,7 +869,9 @@ export enum Pkm {
   ZWEILOUS = "ZWEILOUS",
   ZYGARDE_10 = "ZYGARDE_10",
   ZYGARDE_50 = "ZYGARDE_50",
-  ZYGARDE_100 = "ZYGARDE_100"
+  ZYGARDE_100 = "ZYGARDE_100",
+  VULLABY = "VULLABY",
+  MANDIBUZZ = "MANDIBUZZ"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1603,8 +1605,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.BISHARP]: "0625",
   [Pkm.RUFFLET]: "0627",
   [Pkm.BRAVIARY]: "0628",
-  //[Pkm.VULLABY]: "0629",
-  //[Pkm.MANDIBUZZ]: "0630",
+  [Pkm.VULLABY]: "0629",
+  [Pkm.MANDIBUZZ]: "0630",
   [Pkm.HEATMOR]: "0631",
   [Pkm.DURANT]: "0632",
   [Pkm.DEINO]: "0633",
@@ -2894,7 +2896,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GLIMMORA]: Pkm.GLIMMET,
   [Pkm.FLETCHLING]: Pkm.FLETCHLING,
   [Pkm.FLETCHINDER]: Pkm.FLETCHLING,
-  [Pkm.TALONFLAME]: Pkm.FLETCHLING
+  [Pkm.TALONFLAME]: Pkm.FLETCHLING,
+  [Pkm.VULLABY]: Pkm.VULLABY,
+  [Pkm.MANDIBUZZ]: Pkm.VULLABY
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7419,5 +7423,16 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Hover,
     emote: AnimationType.Shoot
+  },
+  [Pkm.VULLABY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
+  },
+  [Pkm.MANDIBUZZ]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
   }
 }
