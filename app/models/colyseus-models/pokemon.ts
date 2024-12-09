@@ -15419,7 +15419,7 @@ export class Vullaby extends Pokemon {
   atk = 11
   def = 4
   speDef = 2
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.BONE_ARMOR
   additional = true
@@ -15434,7 +15434,7 @@ export class Mandibuzz extends Pokemon {
   atk = 20
   def = 6
   speDef = 4
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.BONE_ARMOR
   additional = true
