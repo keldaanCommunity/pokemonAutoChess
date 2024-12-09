@@ -14,6 +14,7 @@
 - Change Bonemerang (Marowak): ~~deal 30/60/90 special damage~~ deal 2 times 15/30/60 special damage
 - Hisuian Typlosion is now tier 3 ; adjusted stats to match Typhlosion's stats
 - Numel is now epic additional ; adjusted stats accordingly ; temporarely removed Mega Camerupt
+- Houndour is now epic additional ; HP 85/150 → 90/160 ; temporely removed Mega Houndoom
 
 # Changes to Synergies
 

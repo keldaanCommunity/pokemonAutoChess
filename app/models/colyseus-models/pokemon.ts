@@ -772,7 +772,6 @@ export class Meditite extends Pokemon {
   skill = Ability.CONFUSION
   attackSprite = AttackSprite.PSYCHIC_RANGE
   additional = true
-  stages = 2
 }
 
 export class Medicham extends Pokemon {
@@ -792,7 +791,6 @@ export class Medicham extends Pokemon {
   skill = Ability.CONFUSION
   attackSprite = AttackSprite.PSYCHIC_RANGE
   additional = true
-  stages = 2
 }
 
 export class Elekid extends Pokemon {
@@ -7651,7 +7649,7 @@ export class Houndour extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.HOUNDOOM
-  hp = 85
+  hp = 90
   atk = 8
   def = 4
   speDef = 4
@@ -7659,6 +7657,7 @@ export class Houndour extends Pokemon {
   range = 1
   skill = Ability.BEAT_UP
   attackSprite = AttackSprite.FIRE_MELEE
+  additional = true
 }
 
 export class Houndoom extends Pokemon {
@@ -7666,7 +7665,7 @@ export class Houndoom extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.MEGA_HOUNDOOM
-  hp = 150
+  hp = 160
   atk = 20
   def = 6
   speDef = 6
@@ -7674,6 +7673,7 @@ export class Houndoom extends Pokemon {
   range = 1
   skill = Ability.BEAT_UP
   attackSprite = AttackSprite.FIRE_MELEE
+  additional = true
 }
 
 export class MegaHoundoom extends Pokemon {
@@ -7686,8 +7686,9 @@ export class MegaHoundoom extends Pokemon {
   speDef = 8
   maxPP = 125
   range = 1
-  skill = Ability.BEAT_UP
+  skill = Ability.DEFAULT
   attackSprite = AttackSprite.FIRE_MELEE
+  additional = true
 }
 
 export class Cacnea extends Pokemon {
