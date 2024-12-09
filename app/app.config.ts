@@ -63,9 +63,13 @@ if (process.env.NODE_APP_INSTANCE) {
           throw "Attempt to create one lobby"
         }
       }
-      return (await matchMaker.stats.fetchAll()).sort((p1, p2) =>
-        p1.ccu > p2.ccu ? 1 : -1
-      )[0].processId
+      const stats = await matchMaker.stats.fetchAll()
+      stats.sort((p1, p2) =>
+        p1.roomCount !== p2.roomCount
+          ? p1.roomCount - p2.roomCount
+          : p1.ccu - p2.ccu
+      )
+      return stats[0].processId
     }
   }
 }
@@ -161,6 +165,7 @@ export default config({
     })
 
     app.get("/meta", async (req, res) => {
+      res.set("Cache-Control", "no-cache")
       res.send(
         await Meta.find({}, [
           "cluster_id",
@@ -181,10 +186,12 @@ export default config({
     })
 
     app.get("/meta/items", async (req, res) => {
+      res.set("Cache-Control", "no-cache")
       res.send(await ItemsStatistics.find())
     })
 
     app.get("/meta/pokemons", async (req, res) => {
+      res.set("Cache-Control", "no-cache")
       res.send(await PokemonsStatistics.find())
     })
 
@@ -194,10 +201,12 @@ export default config({
     })
 
     app.get("/leaderboards", async (req, res) => {
+      res.set("Cache-Control", "no-cache")
       res.send(getLeaderboard())
     })
 
     app.get("/game-history/:playerUid", async (req, res) => {
+      res.set("Cache-Control", "no-cache")
       const { playerUid } = req.params
       const { page = 1 } = req.query
       const limit = 10
