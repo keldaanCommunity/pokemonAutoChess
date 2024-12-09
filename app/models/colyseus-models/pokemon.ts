@@ -15421,7 +15421,7 @@ export class Vullaby extends Pokemon {
   speDef = 2
   maxPP = 80
   range = 1
-  skill = Ability.FOUL_PLAY
+  skill = Ability.BONE_ARMOR
   additional = true
   attackSprite = AttackSprite.DARK_MELEE
 }
@@ -15436,7 +15436,7 @@ export class Mandibuzz extends Pokemon {
   speDef = 4
   maxPP = 80
   range = 1
-  skill = Ability.FOUL_PLAY
+  skill = Ability.BONE_ARMOR
   additional = true
   attackSprite = AttackSprite.DARK_MELEE
 }

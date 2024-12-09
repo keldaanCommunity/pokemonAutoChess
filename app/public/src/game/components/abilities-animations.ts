@@ -2868,6 +2868,33 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.BONE_ARMOR: {
+      const startCoords = transformAttackCoordinate(targetX, targetY, flip)
+      Object.values(Orientation).forEach((o) => {
+        const [dx, dy] = OrientationVector[o]
+        const finalCoords = transformAttackCoordinate(
+          positionX + dx * 1,
+          positionY + dy * 1,
+          flip
+        )
+        const specialProjectile = addAbilitySprite(
+          Ability.BONEMERANG,
+          startCoords
+        ).setScale(2)
+        scene.tweens.add({
+          targets: specialProjectile,
+          x: finalCoords[0],
+          y: finalCoords[1],
+          yoyo: false,
+          duration: 1000,
+          onComplete: () => {
+            specialProjectile.destroy()
+          }
+        })
+      })
+      break
+    }
+
     case Ability.FIRESTARTER: {
       const abilitySprite = addAbilitySprite(
         skill,
