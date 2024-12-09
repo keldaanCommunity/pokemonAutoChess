@@ -2,6 +2,8 @@
 - Fletchling
 - Fletchinder
 - Talonflame
+- Vullaby
+- Mandibuzz
 
 # Changes to Pokemon & Abilities
 

@@ -15410,6 +15410,37 @@ export class Talonflame extends Pokemon {
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
+export class Vullaby extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FLYING])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.MANDIBUZZ
+  hp = 90
+  atk = 11
+  def = 4
+  speDef = 2
+  maxPP = 80
+  range = 1
+  skill = Ability.FOUL_PLAY
+  additional = true
+  attackSprite = AttackSprite.DARK_MELEE
+}
+
+export class Mandibuzz extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FLYING])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 210
+  atk = 20
+  def = 6
+  speDef = 4
+  maxPP = 80
+  range = 1
+  skill = Ability.FOUL_PLAY
+  additional = true
+  attackSprite = AttackSprite.DARK_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -16285,5 +16316,7 @@ export const PokemonClasses: Record<
   [Pkm.GLIMMORA]: Glimmora,
   [Pkm.FLETCHLING]: Fletchling,
   [Pkm.FLETCHINDER]: Fletchinder,
-  [Pkm.TALONFLAME]: Talonflame
+  [Pkm.TALONFLAME]: Talonflame,
+  [Pkm.VULLABY]: Vullaby,
+  [Pkm.MANDIBUZZ]: Mandibuzz
 }

@@ -1285,7 +1285,9 @@
     "GLIMMORA": "Glimmora",
     "FLETCHLING": "Fletchling",
     "FLETCHINDER": "Fletchinder",
-    "TALONFLAME": "Talonflame"
+    "TALONFLAME": "Talonflame",
+    "VULLABY": "Vullaby",
+    "MANDIBUZZ": "Mandibuzz"
   },
   "ability_description": {
     "SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
