@@ -10921,6 +10921,47 @@ export class FirestarterStrategy extends AbilityStrategy {
   }
 }
 
+export class BoneArmorStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const lowestHealthEnemy = (
+      board.cells.filter(
+        (cell) => cell && cell.team !== pokemon.team
+      ) as PokemonEntity[]
+    ).sort((a, b) => a.life / a.hp - b.life / b.hp)[0]
+
+    if (lowestHealthEnemy) {
+      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
+        lowestHealthEnemy,
+        (lowestHealthEnemy.team + 1) % 2
+      )
+      pokemon.moveTo(coord.x, coord.y, board)
+      const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+      const boost = [2, 4, 6][pokemon.stars - 1] ?? 6
+      const attack = target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+      if (attack.takenDamage > 0) {
+        pokemon.handleHeal(attack.takenDamage, pokemon, 1, crit)
+      }
+      if (attack.death) {
+        pokemon.addDefense(boost, pokemon, 1, crit)
+        pokemon.addSpecialDefense(boost, pokemon, 1, crit)
+      }
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -11317,5 +11358,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.POWER_HUG]: new PowerHugStrategy(),
   [Ability.MORTAL_SPIN]: new MortalSpinStrategy(),
   [Ability.METAL_CLAW]: new MetalClawStrategy(),
-  [Ability.FIRESTARTER]: new FirestarterStrategy()
+  [Ability.FIRESTARTER]: new FirestarterStrategy(),
+  [Ability.BONE_ARMOR]: new BoneArmorStrategy()
 }
