@@ -708,46 +708,50 @@ export class MegaSteelix extends Pokemon {
 
 export class Numel extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.GROUND])
-  rarity = Rarity.ULTRA
+  rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.CAMERUPT
-  hp = 130
+  hp = 120
   atk = 9
-  def = 5
-  speDef = 5
-  maxPP = 100
+  def = 3
+  speDef = 3
+  maxPP = 120
   range = 1
   skill = Ability.ERUPTION
   attackSprite = AttackSprite.FIRE_MELEE
+  additional = true
 }
 
 export class Camerupt extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.GROUND])
-  rarity = Rarity.ULTRA
+  rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.MEGA_CAMERUPT
-  hp = 220
+  hp = 210
   atk = 14
-  def = 10
-  speDef = 10
-  maxPP = 100
+  def = 7
+  speDef = 7
+  maxPP = 120
   range = 1
   skill = Ability.ERUPTION
   attackSprite = AttackSprite.FIRE_MELEE
+  additional = true
 }
 
 export class MegaCamerupt extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.GROUND])
-  rarity = Rarity.ULTRA
+  rarity = Rarity.EPIC
   stars = 3
   hp = 330
   atk = 22
-  def = 15
-  speDef = 15
-  maxPP = 100
+  def = 10
+  speDef = 10
+  maxPP = 120
   range = 1
-  skill = Ability.ERUPTION
+  skill = Ability.DEFAULT
+  //skill = Ability.ERUPTION
   attackSprite = AttackSprite.FIRE_MELEE
+  additional = true
 }
 
 export class Meditite extends Pokemon {

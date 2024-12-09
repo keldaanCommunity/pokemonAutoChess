@@ -13,6 +13,7 @@
 - Alolan Marowak is now tier 2 ; adjusted stats to match Marowak's stats ; new ability: Shadow Bone
 - Change Bonemerang (Marowak): ~~deal 30/60/90 special damage~~ deal 2 times 15/30/60 special damage
 - Hisuian Typlosion is now tier 3 ; adjusted stats to match Typhlosion's stats
+- Numel is now epic additional ; adjusted stats accordingly ; temporarely removed Mega Camerupt
 
 # Changes to Synergies
 
