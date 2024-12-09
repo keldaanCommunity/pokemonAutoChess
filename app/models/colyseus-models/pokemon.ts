@@ -15117,13 +15117,13 @@ export class Palossand extends Pokemon {
 
 export class Skorupi extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON])
-  rarity = Rarity.RARE
+  rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.DRAPION
   hp = 90
-  atk = 8
-  def = 4
-  speDef = 1
+  atk = 10
+  def = 5
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.POISON_STING
@@ -15133,12 +15133,12 @@ export class Skorupi extends Pokemon {
 
 export class Drapion extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON, Synergy.DARK])
-  rarity = Rarity.RARE
+  rarity = Rarity.EPIC
   stars = 2
   hp = 180
-  atk = 16
-  def = 6
-  speDef = 2
+  atk = 18
+  def = 8
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.POISON_STING

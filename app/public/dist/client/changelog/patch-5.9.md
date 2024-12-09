@@ -15,6 +15,7 @@
 - Hisuian Typlosion is now tier 3 ; adjusted stats to match Typhlosion's stats
 - Numel is now epic additional ; adjusted stats accordingly ; temporarely removed Mega Camerupt
 - Houndour is now epic additional ; HP 85/150 → 90/160 ; temporely removed Mega Houndoom
+- Skorupi is now epic additional ; adjusted stats accordingly
 
 # Changes to Synergies
 
