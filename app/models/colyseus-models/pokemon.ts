@@ -2100,14 +2100,14 @@ export class Marowak extends Pokemon {
 export class AlolanMarowak extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.FIRE, Synergy.GHOST])
   rarity = Rarity.EPIC
-  stars = 3
+  stars = 2
   hp = 250
-  atk = 26
-  def = 8
-  speDef = 6
+  atk = 20
+  def = 6
+  speDef = 5
   maxPP = 80
   range = 1
-  skill = Ability.BONEMERANG
+  skill = Ability.SHADOW_BONE
   regional = true
   attackSprite = AttackSprite.FIRE_MELEE
   isInRegion(map: DungeonPMDO, state?: GameState) {
