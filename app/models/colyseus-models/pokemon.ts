@@ -7344,7 +7344,7 @@ export class Fennekin extends Pokemon {
   speDef = 1
   maxPP = 90
   range = 2
-  skill = Ability.FIRE_TRICK
+  skill = Ability.MYSTICAL_FIRE
   attackSprite = AttackSprite.FIRE_RANGE
 }
 export class Braixen extends Pokemon {
@@ -7358,7 +7358,7 @@ export class Braixen extends Pokemon {
   speDef = 1
   maxPP = 90
   range = 2
-  skill = Ability.FIRE_TRICK
+  skill = Ability.MYSTICAL_FIRE
   attackSprite = AttackSprite.FIRE_RANGE
 }
 export class Delphox extends Pokemon {
@@ -7371,7 +7371,7 @@ export class Delphox extends Pokemon {
   speDef = 1
   maxPP = 90
   range = 2
-  skill = Ability.FIRE_TRICK
+  skill = Ability.MYSTICAL_FIRE
   attackSprite = AttackSprite.FIRE_RANGE
 }
 

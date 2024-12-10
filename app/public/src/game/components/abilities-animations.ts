@@ -135,8 +135,12 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
-    case Ability.FIRE_TRICK:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+    case Ability.MYSTICAL_FIRE:
+      addAbilitySprite(
+        skill,
+        [coordinatesTarget[0], coordinatesTarget[1] - 25],
+        true
+      ).setScale(2)
       break
 
     case Ability.FLAME_CHARGE:
