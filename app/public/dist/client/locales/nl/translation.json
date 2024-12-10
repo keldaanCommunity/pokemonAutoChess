@@ -1186,7 +1186,6 @@
     "PSYCHIC_TERRAIN": "Psychisch Terrein",
     "ELECTRIC_TERRAIN": "Elektrisch Terrein",
     "MISTY_TERRAIN": "Mistig terrein",
-    "HYDRATATION": "Hydratatie",
     "COOL_BREEZE": "Koel briesje"
   },
   "effect_description": {
@@ -1285,8 +1284,7 @@
     "GRASSY_TERRAIN": "Verhoog toegebrachte schade met 20% (alleen gras)",
     "PSYCHIC_TERRAIN": "Verhoog de toegebrachte schade met 20% (alleen paranormaal begaafd)",
     "ELECTRIC_TERRAIN": "Verhoog toegebrachte schade met 20% (alleen elektrisch)",
-    "MISTY_TERRAIN": "Verhoog toegebrachte schade met 20% (alleen Fairy)",
-    "HYDRATATION": "GRASS synergie geneest 5 extra HP per seconde onder de RAIN"
+    "MISTY_TERRAIN": "Verhoog toegebrachte schade met 20% (alleen Fairy)"
   },
   "item": {
     "FOSSIL_STONE": "Fossiele steen",
@@ -1427,7 +1425,6 @@
     "NIGHT": "Verander het weer in NACHT",
     "WINDY": "Verander het weer in WINDY",
     "AIRLOCK": "Neutraliseer weersinvloeden en keer terug naar NEUTRAL",
-    "HYDRATATION": "GRASS-synergie geneest 5 extra HP per seconde onder de RAIN",
     "SHARED_VISION": "Gedeelde visie: alle Pokemon met gedeelde visie zullen hetzelfde doelwit aanvallen, mits binnen bereik",
     "WATER_SPRING": "Wanneer een vijand zijn vaardigheid gebruikt, krijg je 5 PP",
     "MAGIKARP": "8 Magikarp evolueren in Gyarados",

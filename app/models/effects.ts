@@ -36,9 +36,6 @@ export class Effects extends SetSchema<Effect> {
         if (p.skill === Ability.PSYCHIC_SURGE) {
           this.add(Effect.PSYCHIC_TERRAIN)
         }
-        if (p.passive === Passive.HYDRATATION) {
-          this.add(Effect.HYDRATATION)
-        }
       }
     })
   }

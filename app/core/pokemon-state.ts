@@ -693,17 +693,11 @@ export default abstract class PokemonState {
       pokemon.effects.has(Effect.SPORE)
     ) {
       if (pokemon.grassHealCooldown - dt <= 0) {
-        let heal = pokemon.effects.has(Effect.SPORE)
+        const heal = pokemon.effects.has(Effect.SPORE)
           ? 30
           : pokemon.effects.has(Effect.GROWTH)
             ? 15
             : 7
-        if (
-          pokemon.effects.has(Effect.HYDRATATION) &&
-          pokemon.simulation.weather === Weather.RAIN
-        ) {
-          heal += 5
-        }
         pokemon.handleHeal(heal, pokemon, 0, false)
         pokemon.grassHealCooldown = 2000
         pokemon.simulation.room.broadcast(Transfer.ABILITY, {

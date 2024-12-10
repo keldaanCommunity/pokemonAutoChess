@@ -11005,17 +11005,16 @@ export class Tinkaton extends Pokemon {
 }
 
 export class Maractus extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.GROUND, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.SOUND, Synergy.FLORA])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
   atk = 16
   def = 6
   speDef = 4
-  maxPP = 85
+  maxPP = 90
   range = 1
   skill = Ability.SPIKE_ARMOR
-  passive = Passive.HYDRATATION
   attackSprite = AttackSprite.GRASS_MELEE
 }
 

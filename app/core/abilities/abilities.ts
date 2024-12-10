@@ -2185,7 +2185,31 @@ export class SpikeArmorStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    const shouldTriggerSpikeAnimation = pokemon.status.spikeArmor
+    super.process(
+      pokemon,
+      state,
+      board,
+      target,
+      crit,
+      !shouldTriggerSpikeAnimation
+    )
+    if (pokemon.status.spikeArmor) {
+      const damage = 30
+      OrientationArray.forEach((orientation) => {
+        effectInLine(board, pokemon, orientation, (cell) => {
+          if (cell.value != null && cell.value.team !== pokemon.team) {
+            cell.value.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+        })
+      })
+    }
     const duration =
       pokemon.stars === 3 ? 10000 : pokemon.stars === 2 ? 5000 : 3000
     pokemon.status.triggerSpikeArmor(duration)
@@ -4673,21 +4697,7 @@ export class WaterShurikenStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 0
-    switch (pokemon.stars) {
-      case 1:
-        damage = 20
-        break
-      case 2:
-        damage = 40
-        break
-      case 3:
-        damage = 60
-        break
-      default:
-        break
-    }
-
+    const damage = [20, 40, 60][pokemon.stars - 1] ?? 60
     pokemon.orientation = board.orientation(
       pokemon.positionX,
       pokemon.positionY,
