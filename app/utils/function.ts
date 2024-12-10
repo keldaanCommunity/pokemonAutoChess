@@ -44,19 +44,17 @@ export function throttle<T extends (...args: any) => any>(
   }
 }
 
-export function block<T extends (...args: any) => any>(
-  fn: T
-): ThrottledFunction<T> {
+// prevent concurrent execution of async fn
+export function block<T extends (...args: any) => Promise<any>>(fn: T) {
   let executing: boolean
   let lastResult: ReturnType<T>
-  
-  return async function (this: any, ...args: any[]): Promise<ReturnType<T>> {
+
+  return async function (this: any, ...args: any[]) {
     const context = this
-    
+
     if (!executing) {
       executing = true
-      const maybePromise: ReturnType<T> = fn.apply(context, args)
-      lastResult = await maybePromise
+      lastResult = await fn.apply(context, args)
       executing = false
     }
 
