@@ -1,5 +1,5 @@
 import { Dispatcher } from "@colyseus/command"
-import { Client, Room, updateLobby } from "colyseus"
+import { Client, ClientArray, Room, updateLobby } from "colyseus"
 import admin from "firebase-admin"
 import BannedUser from "../models/mongo-models/banned-user"
 import { IBot } from "../models/mongo-models/bot-v2"
@@ -28,9 +28,11 @@ import {
   RemoveMessageCommand
 } from "./commands/preparation-commands"
 import PreparationState from "./states/preparation-state"
+import { UserRecord } from "firebase-admin/lib/auth/user-record"
 
 export default class PreparationRoom extends Room<PreparationState> {
   dispatcher: Dispatcher<this>
+  clients!: ClientArray<undefined, UserRecord>
 
   constructor() {
     super()
@@ -337,7 +339,6 @@ export default class PreparationRoom extends Room<PreparationState> {
 
   async onAuth(client: Client, options: any, request: any) {
     try {
-      super.onAuth(client, options, request)
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
       const isBanned = await BannedUser.findOne({ uid: user.uid })
@@ -348,8 +349,11 @@ export default class PreparationRoom extends Room<PreparationState> {
       const numberOfHumanPlayers = values(this.state.users).filter(
         (u) => !u.isBot
       ).length
-      if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME && !isAlreadyInRoom) {
+
+      if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME) {
         throw "Room is full"
+      } else if (isAlreadyInRoom) {
+        throw "Already joined"
       } else if (this.state.gameStartedAt != null) {
         throw "Game already started"
       } else if (!user.displayName) {
@@ -366,17 +370,17 @@ export default class PreparationRoom extends Room<PreparationState> {
     }
   }
 
-  onJoin(client: Client, options: any, auth: any) {
-    if (client && client.auth && client.auth.displayName) {
+  async onJoin(client: Client<undefined, UserRecord>, options: any, auth: UserRecord | undefined) {
+    if (auth) {
       /*logger.info(
-        `${client.auth.displayName} ${client.id} join preparation room`
+        `${auth.displayName} ${client.id} join preparation room`
       )*/
-      this.dispatcher.dispatch(new OnJoinCommand(), { client, options, auth })
+      await this.dispatcher.dispatch(new OnJoinCommand(), { client, options, auth })
     }
   }
 
   async onLeave(client: Client, consented: boolean) {
-    if (client && client.auth && client.auth.displayName) {
+    if (client.auth && client.auth.displayName) {
       /*logger.info(
         `${client.auth.displayName} ${client.id} is leaving preparation room`
       )*/
@@ -388,7 +392,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       // allow disconnected client to reconnect into this room until 10 seconds
       await this.allowReconnection(client, 10)
     } catch (e) {
-      if (client && client.auth && client.auth.displayName) {
+      if (client.auth && client.auth.displayName) {
         /*logger.info(
           `${client.auth.displayName} ${client.id} leave preparation room`
         )*/
