@@ -4,6 +4,8 @@
 - Talonflame
 - Vullaby
 - Mandibuzz
+- Inkay
+- Malamar
 
 # Changes to Pokemon & Abilities
 

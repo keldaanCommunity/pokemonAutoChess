@@ -871,7 +871,9 @@ export enum Pkm {
   ZYGARDE_50 = "ZYGARDE_50",
   ZYGARDE_100 = "ZYGARDE_100",
   VULLABY = "VULLABY",
-  MANDIBUZZ = "MANDIBUZZ"
+  MANDIBUZZ = "MANDIBUZZ",
+  INKAY = "INKAY",
+  MALAMAR = "MALAMAR"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1667,8 +1669,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.AROMATISSE]: "0683",
   //[Pkm.SWIRLIX]: "0684",
   //[Pkm.SLURPUFF]: "0685",
-  //[Pkm.INKAY]: "0686",
-  //[Pkm.MALAMAR]: "0687",
+  [Pkm.INKAY]: "0686",
+  [Pkm.MALAMAR]: "0687",
   [Pkm.BINACLE]: "0688",
   [Pkm.BARBARACLE]: "0689",
   //[Pkm.SKRELP]: "0690",
@@ -2898,7 +2900,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.FLETCHINDER]: Pkm.FLETCHLING,
   [Pkm.TALONFLAME]: Pkm.FLETCHLING,
   [Pkm.VULLABY]: Pkm.VULLABY,
-  [Pkm.MANDIBUZZ]: Pkm.VULLABY
+  [Pkm.MANDIBUZZ]: Pkm.VULLABY,
+  [Pkm.INKAY]: Pkm.INKAY,
+  [Pkm.MALAMAR]: Pkm.INKAY
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7432,6 +7436,16 @@ export const AnimationConfig: {
   },
   [Pkm.MANDIBUZZ]: {
     attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.INKAY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Twirl
+  },
+  [Pkm.MALAMAR]: {
+    attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
   }
