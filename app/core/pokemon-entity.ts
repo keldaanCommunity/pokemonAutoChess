@@ -21,6 +21,7 @@ import {
   BOARD_WIDTH,
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER,
+  ItemStats,
   MANA_SCARF_MANA,
   ON_ATTACK_MANA,
   SCOPE_LENS_MANA
@@ -54,6 +55,8 @@ import MovingState from "./moving-state"
 import PokemonState from "./pokemon-state"
 import Simulation from "./simulation"
 import { DelayedCommand, SimulationCommand } from "./simulation-command"
+import { ItemEffects } from "./items"
+import { OnItemRemovedEffect } from "./effect"
 
 export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -597,9 +600,22 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   removeItem(item: Item, permanent = false) {
     this.items.delete(item)
+    this.removeItemEffect(item)
     if (permanent && !this.isGhostOpponent) {
       this.refToBoardPokemon.items.delete(item)
     }
+  }
+
+  removeItemEffect(item: Item) {
+    if (ItemStats[item]) {
+      Object.entries(ItemStats[item]).forEach(([stat, value]) =>
+        this.applyStat(stat as Stat, -value)
+      )
+    }
+
+    ItemEffects[item]
+      ?.filter((effect) => effect instanceof OnItemRemovedEffect)
+      ?.forEach((effect) => effect.apply(this))
   }
 
   addPsychicField() {
