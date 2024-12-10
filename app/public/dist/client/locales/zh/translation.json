@@ -33,6 +33,7 @@
     "NIGHTMARE": "恶梦",
     "CLANGOROUS_SOUL": "魂舞烈音爆",
     "BONEMERANG": "骨头回力镖",
+    "SHADOW_BONE": "暗影之骨",
     "GROWL": "叫声",
     "RELIC_SONG": "古老之歌",
     "DISARMING_VOICE": "魅惑之声",
@@ -413,7 +414,8 @@
     "POWER_HUG": "强力拥抱",
     "MORTAL_SPIN": "晶光转转",
     "METAL_CLAW": "金属爪",
-    "FIRESTARTER": "起火"
+    "FIRESTARTER": "起火",
+    "BONE_ARMOR": "骨质盔甲"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1284,7 +1286,9 @@
     "GLIMMORA": "晶光花",
     "FLETCHLING": "小箭雀",
     "FLETCHINDER": "火箭雀",
-    "TALONFLAME": "烈箭鹰"
+    "TALONFLAME": "烈箭鹰",
+    "VULLABY": "秃鹰丫头",
+    "MANDIBUZZ": "秃鹰娜"
   },
   "ability_description": {
     "SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1298,6 +1302,7 @@
     "NIGHTMARE": "对所有敌方宝可梦施加SILENCE，持续[1.5,3,6,ND=1]秒。受到来自GHOST共鸣的诅咒影响的敌人也会受到[40,80,150,SP]点SPECIAL。",
     "CLANGOROUS_SOUL": "使自身和相邻的我方宝可梦提升[1,2,4,SP]点ATK，DEF和SPE_DEF。",
     "BONEMERANG": "投掷一块像回旋镖一样穿过敌方全队的骨头，对所有其击中的敌方宝可梦造成[30,60,90,SP]点SPECIAL。",
+    "SHADOW_BONE": "投掷一枚含有灵魂的骨头，对路径上的所有敌方宝可梦造成[30,60,120,SP]点SPECIAL，并有[50,LK]%的概率降低他们[3,SP]点DEF。",
     "GROWL": "使相邻的敌方宝可梦陷入FLINCH 3秒，并降低其ATK [3,5,7,SP]点。",
     "RELIC_SONG": "发射一枚音符。前两枚音符使所有我方宝可梦获得[10,SP]点SHIELD，第三枚使所有敌方宝可梦陷入SLEEP [2,SP=0.5]秒。",
     "FAIRY_WIND": "使所有我方宝可梦（不包括使用者自身）获得[5,10,20,SP=0.5]点PP。",
@@ -1678,7 +1683,8 @@
     "POWER_HUG": "对目标造成[40,80,SP]点SPECIAL，并使其陷入LOCKED和PARALYSIS 3秒。",
     "MORTAL_SPIN": "击退任何正在攻击使用者且与之距离不超过1的宝可梦，对他们造成[20,30,40,SP]点SPECIAL，并使他们陷入POISONNED 4秒。",
     "METAL_CLAW": "对目标造成[10,20,40,SP]点TRUE，并提升使用者[2,4,6]点ATK。",
-    "FIRESTARTER": "提升[10,20,40,SP]%的ATK_SPEED，并飞到最远的敌方宝可梦的位置，沿途洒下烟灰。烟灰造成[20,40,80,SP]点SPECIAL且会留在地上，对位于此位置的非FLYING，非FIRE宝可梦每秒造成10点SPECIAL，并使之陷入BURN。"
+    "FIRESTARTER": "提升[10,20,40,SP]%的ATK_SPEED，并飞到最远的敌方宝可梦的位置，沿途洒下烟灰。烟灰造成[20,40,80,SP]点SPECIAL且会留在地上，对位于此位置的非FLYING，非FIRE宝可梦每秒造成10点SPECIAL，并使之陷入BURN。",
+    "BONE_ARMOR": "飞至最弱的敌方宝可梦的位置，对其造成[20,40,80]点SPECIAL，自身回复等量HP。若目标因此倒下，收集其骸骨来制造盔甲，从而提升使用者[2,4,6]点DEF和SPE_DEF。"
   },
   "effect": {
     "INGRAIN": "扎根",
