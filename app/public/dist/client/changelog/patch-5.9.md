@@ -14,6 +14,11 @@
 - Change Bonemerang (Marowak): ~~deal 30/60/90 special damage~~ deal 2 times 15/30/60 special damage
 - Rework Maractus: now Grass/Sound/Flora, removed passive, PP 85 → 90
 - Change Spike Armor (Onix, Maractus): when casting again before the end of the effect, throw spikes in all directions, dealing 30 special damage to all enemies hit
+- Hisuian Typlosion is now tier 3 ; adjusted stats to match Typhlosion's stats
+- Numel is now epic additional ; adjusted stats accordingly ; temporarely removed Mega Camerupt
+- Houndour is now epic additional ; HP 85/150 → 90/160 ; temporely removed Mega Houndoom
+- Skorupi is now epic additional ; adjusted stats accordingly
+- Change Fennekin ability: Mystical Fire: deal 20/40/80 special damage to the target and reduce its special attack by 10
 
 # Changes to Synergies
 

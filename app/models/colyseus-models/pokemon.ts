@@ -708,46 +708,50 @@ export class MegaSteelix extends Pokemon {
 
 export class Numel extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.GROUND])
-  rarity = Rarity.ULTRA
+  rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.CAMERUPT
-  hp = 130
+  hp = 120
   atk = 9
-  def = 5
-  speDef = 5
-  maxPP = 100
+  def = 3
+  speDef = 3
+  maxPP = 120
   range = 1
   skill = Ability.ERUPTION
   attackSprite = AttackSprite.FIRE_MELEE
+  additional = true
 }
 
 export class Camerupt extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.GROUND])
-  rarity = Rarity.ULTRA
+  rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.MEGA_CAMERUPT
-  hp = 220
+  hp = 210
   atk = 14
-  def = 10
-  speDef = 10
-  maxPP = 100
+  def = 7
+  speDef = 7
+  maxPP = 120
   range = 1
   skill = Ability.ERUPTION
   attackSprite = AttackSprite.FIRE_MELEE
+  additional = true
 }
 
 export class MegaCamerupt extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.GROUND])
-  rarity = Rarity.ULTRA
+  rarity = Rarity.EPIC
   stars = 3
   hp = 330
   atk = 22
-  def = 15
-  speDef = 15
-  maxPP = 100
+  def = 10
+  speDef = 10
+  maxPP = 120
   range = 1
-  skill = Ability.ERUPTION
+  skill = Ability.DEFAULT
+  //skill = Ability.ERUPTION
   attackSprite = AttackSprite.FIRE_MELEE
+  additional = true
 }
 
 export class Meditite extends Pokemon {
@@ -768,7 +772,6 @@ export class Meditite extends Pokemon {
   skill = Ability.CONFUSION
   attackSprite = AttackSprite.PSYCHIC_RANGE
   additional = true
-  stages = 2
 }
 
 export class Medicham extends Pokemon {
@@ -788,7 +791,6 @@ export class Medicham extends Pokemon {
   skill = Ability.CONFUSION
   attackSprite = AttackSprite.PSYCHIC_RANGE
   additional = true
-  stages = 2
 }
 
 export class Elekid extends Pokemon {
@@ -3771,11 +3773,11 @@ export class Typhlosion extends Pokemon {
 export class HisuianTyphlosion extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.GHOST])
   rarity = Rarity.UNCOMMON
-  stars = 4
+  stars = 3
   hp = 230
-  atk = 27
-  def = 4
-  speDef = 4
+  atk = 25
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 2
   skill = Ability.INFERNAL_PARADE
@@ -7344,7 +7346,7 @@ export class Fennekin extends Pokemon {
   speDef = 1
   maxPP = 90
   range = 2
-  skill = Ability.FIRE_TRICK
+  skill = Ability.MYSTICAL_FIRE
   attackSprite = AttackSprite.FIRE_RANGE
 }
 export class Braixen extends Pokemon {
@@ -7358,7 +7360,7 @@ export class Braixen extends Pokemon {
   speDef = 1
   maxPP = 90
   range = 2
-  skill = Ability.FIRE_TRICK
+  skill = Ability.MYSTICAL_FIRE
   attackSprite = AttackSprite.FIRE_RANGE
 }
 export class Delphox extends Pokemon {
@@ -7371,7 +7373,7 @@ export class Delphox extends Pokemon {
   speDef = 1
   maxPP = 90
   range = 2
-  skill = Ability.FIRE_TRICK
+  skill = Ability.MYSTICAL_FIRE
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
@@ -7647,7 +7649,7 @@ export class Houndour extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.HOUNDOOM
-  hp = 85
+  hp = 90
   atk = 8
   def = 4
   speDef = 4
@@ -7655,6 +7657,7 @@ export class Houndour extends Pokemon {
   range = 1
   skill = Ability.BEAT_UP
   attackSprite = AttackSprite.FIRE_MELEE
+  additional = true
 }
 
 export class Houndoom extends Pokemon {
@@ -7662,7 +7665,7 @@ export class Houndoom extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.MEGA_HOUNDOOM
-  hp = 150
+  hp = 160
   atk = 20
   def = 6
   speDef = 6
@@ -7670,6 +7673,7 @@ export class Houndoom extends Pokemon {
   range = 1
   skill = Ability.BEAT_UP
   attackSprite = AttackSprite.FIRE_MELEE
+  additional = true
 }
 
 export class MegaHoundoom extends Pokemon {
@@ -7682,8 +7686,9 @@ export class MegaHoundoom extends Pokemon {
   speDef = 8
   maxPP = 125
   range = 1
-  skill = Ability.BEAT_UP
+  skill = Ability.DEFAULT
   attackSprite = AttackSprite.FIRE_MELEE
+  additional = true
 }
 
 export class Cacnea extends Pokemon {
@@ -15111,13 +15116,13 @@ export class Palossand extends Pokemon {
 
 export class Skorupi extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON])
-  rarity = Rarity.RARE
+  rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.DRAPION
   hp = 90
-  atk = 8
-  def = 4
-  speDef = 1
+  atk = 10
+  def = 5
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.POISON_STING
@@ -15127,12 +15132,12 @@ export class Skorupi extends Pokemon {
 
 export class Drapion extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON, Synergy.DARK])
-  rarity = Rarity.RARE
+  rarity = Rarity.EPIC
   stars = 2
   hp = 180
-  atk = 16
-  def = 6
-  speDef = 2
+  atk = 18
+  def = 8
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.POISON_STING
