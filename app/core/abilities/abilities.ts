@@ -1012,7 +1012,7 @@ export class ElectroWebStrategy extends AbilityStrategy {
   }
 }
 
-export class FireTrickStrategy extends AbilityStrategy {
+export class MysticalFireStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1021,20 +1021,9 @@ export class FireTrickStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 20
-    if (pokemon.stars == 2) {
-      damage = 40
-    } else if (pokemon.stars == 3) {
-      damage = 80
-    }
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    const teleportationCell = board.getTeleportationCell(
-      target.positionX,
-      target.positionY
-    )
-    if (teleportationCell) {
-      target.moveTo(teleportationCell.x, teleportationCell.y, board)
-    }
+    target.addAbilityPower(-10, pokemon, 1, crit)
   }
 }
 
@@ -7400,8 +7389,11 @@ export class RetaliateStrategy extends AbilityStrategy {
     const nbAlliesAlive = board.cells.filter(
       (entity) => entity && entity.team === pokemon.team
     ).length
+    const meter = pokemon.team === Team.BLUE_TEAM ?
+      "blueDpsMeter" :
+      "redDpsMeter"
     const nbFallenAllies =
-      (pokemon.player?.boardSize ?? nbAlliesAlive) - nbAlliesAlive
+      pokemon.simulation[meter].size - nbAlliesAlive
     const damage =
       ([15, 30, 60][pokemon.stars - 1] ?? 60) +
       ([10, 15, 25][pokemon.stars - 1] ?? 15) * nbFallenAllies
@@ -8019,10 +8011,12 @@ export class KowtowCleaveStrategy extends AbilityStrategy {
     crit = chance(pokemon.critChance / 100, pokemon) // can crit by default
     super.process(pokemon, state, board, target, crit)
     const nbAllies =
-      board.cells.filter((p) => p && p.team === pokemon.team).length - 1
-    const nbFallenAllies = min(0)(
-      (pokemon.player?.experienceManager.level ?? 0) - nbAllies
-    )
+      board.cells.filter((p) => p && p.team === pokemon.team).length
+    const meter = pokemon.team === Team.BLUE_TEAM ?
+      "blueDpsMeter" :
+      "redDpsMeter"
+    const nbFallenAllies =
+      pokemon.simulation[meter].size - nbAlliesAlive
     const damage = Math.round(
       pokemon.atk * (1.5 + nbFallenAllies * 0.2 * (1 + pokemon.ap / 100))
     )
@@ -11055,7 +11049,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DYNAMIC_PUNCH]: new DynamicPunchStrategy(),
   [Ability.ELECTRO_BOOST]: new ElectroBoostStrategy(),
   [Ability.ELECTRO_WEB]: new ElectroWebStrategy(),
-  [Ability.FIRE_TRICK]: new FireTrickStrategy(),
+  [Ability.MYSTICAL_FIRE]: new MysticalFireStrategy(),
   [Ability.FLAME_CHARGE]: new FlameChargeStrategy(),
   [Ability.LEECH_SEED]: new LeechSeedStrategy(),
   [Ability.LOCK_ON]: new LockOnStrategy(),
