@@ -1719,8 +1719,13 @@ export function displayAbility(
     }
 
     case Ability.BONEMERANG: {
-      const startCoords = transformAttackCoordinate(targetX, 0, flip)
-      const finalCoords = transformAttackCoordinate(targetX, 6, flip)
+      const startCoords = transformAttackCoordinate(positionX, positionY, flip)
+      const [dx, dy] = OrientationVector[orientation]
+      const finalCoords = transformAttackCoordinate(
+        positionX + dx * 5,
+        positionY + dy * 5,
+        flip
+      )
       const specialProjectile = addAbilitySprite(skill, startCoords).setScale(2)
       scene.tweens.add({
         targets: specialProjectile,
@@ -1728,6 +1733,33 @@ export function displayAbility(
         y: finalCoords[1],
         ease: "Power2",
         yoyo: true,
+        duration: 1000,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
+    case Ability.SHADOW_BONE: {
+      const startCoords = transformAttackCoordinate(positionX, positionY, flip)
+      const [dx, dy] = OrientationVector[orientation]
+      const finalCoords = transformAttackCoordinate(
+        positionX + dx * 5,
+        positionY + dy * 5,
+        flip
+      )
+      const specialProjectile = addAbilitySprite(
+        Ability.BONEMERANG,
+        startCoords
+      )
+        .setTint(0x301030)
+        .setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: finalCoords[0],
+        y: finalCoords[1],
+        ease: "linear",
         duration: 1000,
         onComplete: () => {
           specialProjectile.destroy()
@@ -2835,6 +2867,33 @@ export function displayAbility(
     case Ability.METAL_CLAW:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
+
+    case Ability.BONE_ARMOR: {
+      const startCoords = transformAttackCoordinate(targetX, targetY, flip)
+      Object.values(Orientation).forEach((o) => {
+        const [dx, dy] = OrientationVector[o]
+        const finalCoords = transformAttackCoordinate(
+          positionX + dx * 1,
+          positionY + dy * 1,
+          flip
+        )
+        const specialProjectile = addAbilitySprite(
+          Ability.BONEMERANG,
+          startCoords
+        ).setScale(2)
+        scene.tweens.add({
+          targets: specialProjectile,
+          x: finalCoords[0],
+          y: finalCoords[1],
+          yoyo: false,
+          duration: 1000,
+          onComplete: () => {
+            specialProjectile.destroy()
+          }
+        })
+      })
+      break
+    }
 
     case Ability.FIRESTARTER: {
       const abilitySprite = addAbilitySprite(

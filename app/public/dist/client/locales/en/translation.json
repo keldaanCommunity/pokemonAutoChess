@@ -33,6 +33,7 @@
     "NIGHTMARE": "Nightmare",
     "CLANGOROUS_SOUL": "Clangorous Soul",
     "BONEMERANG": "Bonemerang",
+    "SHADOW_BONE": "Shadow Bone",
     "GROWL": "Growl",
     "RELIC_SONG": "Relic Song",
     "DISARMING_VOICE": "Disarming Voice",
@@ -413,7 +414,8 @@
     "POWER_HUG": "Power Hug",
     "MORTAL_SPIN": "Mortal Spin",
     "METAL_CLAW": "Metal Claw",
-    "FIRESTARTER": "Firestarter"
+    "FIRESTARTER": "Firestarter",
+    "BONE_ARMOR": "Bone Armor"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1284,7 +1286,9 @@
     "GLIMMORA": "Glimmora",
     "FLETCHLING": "Fletchling",
     "FLETCHINDER": "Fletchinder",
-    "TALONFLAME": "Talonflame"
+    "TALONFLAME": "Talonflame",
+    "VULLABY": "Vullaby",
+    "MANDIBUZZ": "Mandibuzz"
   },
   "ability_description": {
     "SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1297,7 +1301,8 @@
     "EXPLOSION": "Deal [50,100,200,SP] SPECIAL to all adjacent enemy Pokémon. Damages the user.",
     "NIGHTMARE": "SILENCE all enemy Pokémon for [1.5,2.5,5,ND=1] seconds. Any enemy suffering from a GHOST curse take [40,80,150,SP] SPECIAL.",
     "CLANGOROUS_SOUL": "Buff the user's and adjacent allied Pokémon's ATK, DEF and SPE_DEF by [1,2,4,SP].",
-    "BONEMERANG": "Throw a bone like a boomerang through the enemy team, dealing [30,60,90,SP] SPECIAL to every enemy Pokémon in its path.",
+    "BONEMERANG": "Throw a bone like a boomerang through the enemy team, dealing 2 times [15,30,60,SP] SPECIAL to every enemy Pokémon in its path.",
+    "SHADOW_BONE": "Throw a bone that contains a spirit, dealing [30,60,120,SP] SPECIAL to every enemy Pokémon in its path with [50,LK]% chance to reduce DEF by [3,SP].",
     "GROWL": "Cause adjacent enemy Pokémon to FLINCH for 3 seconds and reduce their ATK by [3,5,7,SP].",
     "RELIC_SONG": "Emit a note. The first two casts of this ability grant [10,SP] SHIELD to all allied Pokémon. The third cast puts all enemy Pokémon to SLEEP for [2,SP=0.5] seconds.",
     "FAIRY_WIND": "Restore [5,10,20,SP=0.5] PP to all allied Pokémon other than the user.",
@@ -1678,7 +1683,8 @@
     "POWER_HUG": "Deal [40,80,SP] SPECIAL to the target. Inflict LOCKED and PARALYSIS for 3 seconds.",
     "MORTAL_SPIN": "Knock back any Pokemon targeting the user in melee range. Deal [20,30,40,SP] SPECIAL to any enemies hit, and apply POISONNED for 4 seconds",
     "METAL_CLAW": "Deal [10,20,40,SP] TRUE to the target and raise the user's ATK by [2,4,6].",
-    "FIRESTARTER": "Gain [10,20,40,SP]% ATK_SPEED and flies to the furthest ennemy, dropping embers on the cells in between. The embers inflict [20,40,80,SP] SPECIAL and remain on the ground, so any Pokémon that steps on them BURN and take 10 SPECIAL per second if not FLYING or FIRE."
+    "FIRESTARTER": "Gain [10,20,40,SP]% ATK_SPEED and flies to the furthest ennemy, dropping embers on the cells in between. The embers inflict [20,40,80,SP] SPECIAL and remain on the ground, so any Pokémon that steps on them BURN and take 10 SPECIAL per second if not FLYING or FIRE.",
+    "BONE_ARMOR": "Flies to the weakest enemy inflicting [20,40,80] SPECIAL, healing for the damage dealt. If the target is KO'd, recover its bones to make armor, gaining [2,4,6] DEF and SPE_DEF."
   },
   "effect": {
     "INGRAIN": "Ingrain",

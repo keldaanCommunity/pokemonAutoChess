@@ -1228,7 +1228,7 @@
     "EXPLOSION": "Otorga [50,100,200,SP] de SPECIAL a todos los enemigos adyacentes. También daña al usuario",
     "NIGHTMARE": "Deja SILENCE a todo el equipo enemigo durante [1.5,2.5,5,ND=1] segundos. Cualquier enemigo que sufra una maldición GHOST recibe [40,80,150,SP] SPECIAL.",
     "CLANGOROUS_SOUL": "Se mejora a sí mismo y a los aliados adyacentes en ATK, DEF y SPE_DEF [1,2,4,SP]",
-    "BONEMERANG": "Lanza un boomerang de hueso a través del equipo enemigo, infligiendo [30,60,120,SP] de SPECIAL en su camino",
+    "BONEMERANG": "Lanza un boomerang de hueso a través del equipo enemigo, infligiendo 2x[15,30,60,SP] de SPECIAL en su camino",
     "GROWL": "Inflinge FLINCH a los enemigos adyacentes durante 3 segundos y reduce su ATK en [3,5,7,SP]",
     "RELIC_SONG": "Emite una nota. Las primeras dos notas otorgan [10,SP] SHIELD a todos los aliados. La tercera nota provoca SLEEP a todo el equipo enemigo durante [2,SP=0,5] segundos.",
     "FAIRY_WIND": "Otorga [5,10,20,SP=0.5] PP a todos los aliados excepto al usuario",

@@ -2100,14 +2100,14 @@ export class Marowak extends Pokemon {
 export class AlolanMarowak extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.FIRE, Synergy.GHOST])
   rarity = Rarity.EPIC
-  stars = 3
+  stars = 2
   hp = 250
-  atk = 26
-  def = 8
-  speDef = 6
+  atk = 20
+  def = 6
+  speDef = 5
   maxPP = 80
   range = 1
-  skill = Ability.BONEMERANG
+  skill = Ability.SHADOW_BONE
   regional = true
   attackSprite = AttackSprite.FIRE_MELEE
   isInRegion(map: DungeonPMDO, state?: GameState) {
@@ -15410,6 +15410,37 @@ export class Talonflame extends Pokemon {
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
+export class Vullaby extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FLYING])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.MANDIBUZZ
+  hp = 90
+  atk = 11
+  def = 4
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.BONE_ARMOR
+  additional = true
+  attackSprite = AttackSprite.DARK_MELEE
+}
+
+export class Mandibuzz extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FLYING])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 210
+  atk = 20
+  def = 6
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.BONE_ARMOR
+  additional = true
+  attackSprite = AttackSprite.DARK_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -16285,5 +16316,7 @@ export const PokemonClasses: Record<
   [Pkm.GLIMMORA]: Glimmora,
   [Pkm.FLETCHLING]: Fletchling,
   [Pkm.FLETCHINDER]: Fletchinder,
-  [Pkm.TALONFLAME]: Talonflame
+  [Pkm.TALONFLAME]: Talonflame,
+  [Pkm.VULLABY]: Vullaby,
+  [Pkm.MANDIBUZZ]: Mandibuzz
 }

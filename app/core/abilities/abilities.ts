@@ -1448,24 +1448,43 @@ export class BonemerangStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 0
-    switch (pokemon.stars) {
-      case 1:
-        damage = 30
-        break
-      case 2:
-        damage = 60
-        break
-      case 3:
-        damage = 90
-        break
-      default:
-        break
-    }
+    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
+
+    const hit = () =>
+      effectInLine(board, pokemon, target, (cell) => {
+        if (cell.value != null && cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+
+    hit()
+    pokemon.commands.push(new DelayedCommand(hit, 1000))
+  }
+}
+
+export class ShadowBoneStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
 
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team && x == target.positionX) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+        if (chance(0.5, pokemon)) {
+          tg.addDefense(-3, pokemon, 1, crit)
+        }
       }
     })
   }
@@ -1480,21 +1499,7 @@ export class AuroraBeamStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 0
-    switch (pokemon.stars) {
-      case 1:
-        damage = 25
-        break
-      case 2:
-        damage = 50
-        break
-      case 3:
-        damage = 100
-        break
-      default:
-        break
-    }
-
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
@@ -10916,6 +10921,47 @@ export class FirestarterStrategy extends AbilityStrategy {
   }
 }
 
+export class BoneArmorStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const lowestHealthEnemy = (
+      board.cells.filter(
+        (cell) => cell && cell.team !== pokemon.team
+      ) as PokemonEntity[]
+    ).sort((a, b) => a.life / a.hp - b.life / b.hp)[0]
+
+    if (lowestHealthEnemy) {
+      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
+        lowestHealthEnemy,
+        (lowestHealthEnemy.team + 1) % 2
+      )
+      pokemon.moveTo(coord.x, coord.y, board)
+      const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+      const boost = [2, 4, 6][pokemon.stars - 1] ?? 6
+      const attack = target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+      if (attack.takenDamage > 0) {
+        pokemon.handleHeal(attack.takenDamage, pokemon, 1, crit)
+      }
+      if (attack.death) {
+        pokemon.addDefense(boost, pokemon, 1, crit)
+        pokemon.addSpecialDefense(boost, pokemon, 1, crit)
+      }
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -10930,6 +10976,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.NIGHTMARE]: new NightmareStrategy(),
   [Ability.CLANGOROUS_SOUL]: new ClangorousSoulStrategy(),
   [Ability.BONEMERANG]: new BonemerangStrategy(),
+  [Ability.SHADOW_BONE]: new ShadowBoneStrategy(),
   [Ability.GROWL]: new GrowlStrategy(),
   [Ability.RELIC_SONG]: new RelicSongStrategy(),
   [Ability.FAIRY_WIND]: new FairyWindStrategy(),
@@ -11311,5 +11358,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.POWER_HUG]: new PowerHugStrategy(),
   [Ability.MORTAL_SPIN]: new MortalSpinStrategy(),
   [Ability.METAL_CLAW]: new MetalClawStrategy(),
-  [Ability.FIRESTARTER]: new FirestarterStrategy()
+  [Ability.FIRESTARTER]: new FirestarterStrategy(),
+  [Ability.BONE_ARMOR]: new BoneArmorStrategy()
 }
