@@ -1467,7 +1467,6 @@
     "PSYCHIC_TERRAIN": "Terreno Psíquico",
     "ELECTRIC_TERRAIN": "Terreno Elétrico",
     "MISTY_TERRAIN": "Terreno Nebuloso",
-    "HYDRATATION": "hidratação",
     "COOL_BREEZE": "Brisa fresca",
     "POISON_GAS": "Gás Venenoso",
     "GAS": "Gás",
@@ -1576,8 +1575,7 @@
     "GRASSY_TERRAIN": "Aumenta o dano causado em 20% (somente grama)",
     "PSYCHIC_TERRAIN": "Aumente o dano causado em 20% (somente psíquico)",
     "ELECTRIC_TERRAIN": "Aumente o dano causado em 20% (somente elétrico)",
-    "MISTY_TERRAIN": "Aumente o dano causado em 20% (somente Fada)",
-    "HYDRATATION": "A sinergia GRASS está curando 5 HP adicionais por segundo sob a RAIN"
+    "MISTY_TERRAIN": "Aumente o dano causado em 20% (somente Fada)"
   },
   "item": {
     "FOSSIL_STONE": "Pedra Fóssil",
@@ -1794,7 +1792,6 @@
     "NIGHT": "Alterar tempo para NIGHT",
     "WINDY": "Alterar tempo para WINDY",
     "AIRLOCK": "Neutralize os efeitos climáticos, voltando ao NORMAL",
-    "HYDRATATION": "A sinergia GRASS está curando 5 HP adicionais por segundo sob a RAIN",
     "SHARED_VISION": "Visão compartilhada: todos os Pokémon com visão compartilhada atacarão o mesmo alvo, se estiverem ao alcance",
     "WATER_SPRING": "Sempre que um inimigo usar sua habilidade, ganhe 5 PP",
     "MAGIKARP": "8 Magikarp evolui em Gyarados",

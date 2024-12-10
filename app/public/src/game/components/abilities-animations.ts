@@ -2019,6 +2019,34 @@ export function displayAbility(
       break
     }
 
+    case Ability.SPIKE_ARMOR:
+      OrientationArray.forEach((orientation) => {
+        const [dx, dy] = OrientationVector[orientation]
+        const finalCoordinates = transformAttackCoordinate(
+          positionX + dx * 8,
+          positionY + dy * 8,
+          flip
+        )
+        const spike = addAbilitySprite("SPIKE", coordinates).setRotation(
+          Math.atan2(
+            finalCoordinates[1] - coordinates[1],
+            finalCoordinates[0] - coordinates[0]
+          ) +
+            Math.PI / 2
+        )
+        scene.tweens.add({
+          targets: spike,
+          x: finalCoordinates[0],
+          y: finalCoordinates[1],
+          ease: "linear",
+          duration: 1000,
+          onComplete: () => {
+            spike.destroy()
+          }
+        })
+      })
+      break
+
     case Ability.MACH_PUNCH:
     case Ability.UPPERCUT: {
       const specialProjectile = addAbilitySprite(

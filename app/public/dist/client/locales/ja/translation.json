@@ -1416,7 +1416,6 @@
     "PSYCHIC_TERRAIN": "心霊地形",
     "ELECTRIC_TERRAIN": "電気地形",
     "MISTY_TERRAIN": "霧の地形",
-    "HYDRATATION": "水分補給",
     "COOL_BREEZE": "涼風"
   },
   "effect_description": {
@@ -1515,8 +1514,7 @@
     "GRASSY_TERRAIN": "与ダメージ20%アップ(草のみ)",
     "PSYCHIC_TERRAIN": "与ダメージ20%アップ(サイキックのみ)",
     "ELECTRIC_TERRAIN": "与ダメージ20%アップ(電気のみ)",
-    "MISTY_TERRAIN": "与ダメージ20%アップ(妖精のみ)",
-    "HYDRATATION": "GRASS シナジーは、雨の下で 1 秒あたり 5 追加の HP を回復します。"
+    "MISTY_TERRAIN": "与ダメージ20%アップ(妖精のみ)"
   },
   "item": {
     "FOSSIL_STONE": "化石石",
@@ -1721,7 +1719,6 @@
     "NIGHT": "天気を夜に変更します",
     "WINDY": "天気をWINDYに変更",
     "AIRLOCK": "天候の影響を中和し、NEUTRAL に戻します。",
-    "HYDRATATION": "GRASS シナジーは、雨の下で毎秒 5 追加の HP を回復します。",
     "SHARED_VISION": "共有ビジョン: 共有ビジョンを持つすべてのポケモンは、範囲内であれば同じターゲットを攻撃します。",
     "WATER_SPRING": "敵が能力を使用するたびに、5 PP を獲得",
     "MAGIKARP": "9 コイキングがギャラドスで進化",
