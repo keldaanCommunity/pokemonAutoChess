@@ -1012,7 +1012,7 @@ export class ElectroWebStrategy extends AbilityStrategy {
   }
 }
 
-export class FireTrickStrategy extends AbilityStrategy {
+export class MysticalFireStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -1021,20 +1021,9 @@ export class FireTrickStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 20
-    if (pokemon.stars == 2) {
-      damage = 40
-    } else if (pokemon.stars == 3) {
-      damage = 80
-    }
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    const teleportationCell = board.getTeleportationCell(
-      target.positionX,
-      target.positionY
-    )
-    if (teleportationCell) {
-      target.moveTo(teleportationCell.x, teleportationCell.y, board)
-    }
+    target.addAbilityPower(-10, pokemon, 1, crit)
   }
 }
 
@@ -11055,7 +11044,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DYNAMIC_PUNCH]: new DynamicPunchStrategy(),
   [Ability.ELECTRO_BOOST]: new ElectroBoostStrategy(),
   [Ability.ELECTRO_WEB]: new ElectroWebStrategy(),
-  [Ability.FIRE_TRICK]: new FireTrickStrategy(),
+  [Ability.MYSTICAL_FIRE]: new MysticalFireStrategy(),
   [Ability.FLAME_CHARGE]: new FlameChargeStrategy(),
   [Ability.LEECH_SEED]: new LeechSeedStrategy(),
   [Ability.LOCK_ON]: new LockOnStrategy(),
