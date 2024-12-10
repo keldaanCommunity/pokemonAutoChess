@@ -719,7 +719,7 @@ export class Numel extends Pokemon {
   range = 1
   skill = Ability.ERUPTION
   attackSprite = AttackSprite.FIRE_MELEE
-  additional = true
+  regional = true
 }
 
 export class Camerupt extends Pokemon {
@@ -735,7 +735,7 @@ export class Camerupt extends Pokemon {
   range = 1
   skill = Ability.ERUPTION
   attackSprite = AttackSprite.FIRE_MELEE
-  additional = true
+  regional = true
 }
 
 export class MegaCamerupt extends Pokemon {
@@ -751,7 +751,7 @@ export class MegaCamerupt extends Pokemon {
   skill = Ability.DEFAULT
   //skill = Ability.ERUPTION
   attackSprite = AttackSprite.FIRE_MELEE
-  additional = true
+  regional = true
 }
 
 export class Meditite extends Pokemon {

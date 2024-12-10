@@ -15,7 +15,7 @@
 - Alolan Marowak is now tier 2 ; adjusted stats to match Marowak's stats ; new ability: Shadow Bone
 - Change Bonemerang (Marowak): ~~deal 30/60/90 special damage~~ deal 2 times 15/30/60 special damage
 - Hisuian Typlosion is now tier 3 ; adjusted stats to match Typhlosion's stats
-- Numel is now epic additional ; adjusted stats accordingly ; temporarely removed Mega Camerupt
+- Numel is now epic regional ; adjusted stats accordingly ; temporarely removed Mega Camerupt
 - Houndour is now epic additional ; HP 85/150 → 90/160 ; temporely removed Mega Houndoom
 - Skorupi is now epic additional ; adjusted stats accordingly
 - Change Fennekin ability: Mystical Fire: deal 20/40/80 special damage to the target and reduce its special attack by 10
