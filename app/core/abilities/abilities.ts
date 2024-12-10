@@ -8011,7 +8011,7 @@ export class KowtowCleaveStrategy extends AbilityStrategy {
   ) {
     crit = chance(pokemon.critChance / 100, pokemon) // can crit by default
     super.process(pokemon, state, board, target, crit)
-    const nbAllies =
+    const nbAlliesAlive =
       board.cells.filter((p) => p && p.team === pokemon.team).length
     const meter = pokemon.team === Team.BLUE_TEAM ?
       "blueDpsMeter" :
