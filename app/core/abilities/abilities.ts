@@ -10951,6 +10951,42 @@ export class BoneArmorStrategy extends AbilityStrategy {
   }
 }
 
+export class TopsyTurvyStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [40, 80, 100][pokemon.stars - 1] ?? 100
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        target.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        if (target.atk > target.baseAtk) {
+          const d = target.atk - target.baseAtk
+          target.addAttack(-2 * d, pokemon, 0, false)
+        }
+        if (target.def > target.baseDef) {
+          const d = target.def - target.baseDef
+          target.addDefense(-2 * d, pokemon, 0, false)
+        }
+        if (target.speDef > target.baseSpeDef) {
+          const d = target.speDef - target.baseSpeDef
+          target.addSpecialDefense(-2 * d, pokemon, 0, false)
+        }
+      }, 500)
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -11348,5 +11384,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MORTAL_SPIN]: new MortalSpinStrategy(),
   [Ability.METAL_CLAW]: new MetalClawStrategy(),
   [Ability.FIRESTARTER]: new FirestarterStrategy(),
-  [Ability.BONE_ARMOR]: new BoneArmorStrategy()
+  [Ability.BONE_ARMOR]: new BoneArmorStrategy(),
+  [Ability.TOPSY_TURVY]: new TopsyTurvyStrategy()
 }
