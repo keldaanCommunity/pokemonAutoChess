@@ -84,17 +84,17 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   ],
   [Item.KINGS_ROCK]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.addShield(0.3 * pokemon.hp, pokemon, 0, false)
+      pokemon.addShield(0.3 * pokemon.baseHP, pokemon, 0, false)
     })
   ],
   [Item.DYNAMAX_BAND]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.addMaxHP(2.5 * pokemon.hp, pokemon, 0, false)
+      pokemon.addMaxHP(2.5 * pokemon.baseHP, pokemon, 0, false)
     })
   ],
   [Item.TINY_MUSHROOM]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.addMaxHP(-0.5 * pokemon.hp, pokemon, 0, false)
+      pokemon.addMaxHP(-0.5 * pokemon.baseHP, pokemon, 0, false)
     })
   ],
   [Item.GOLD_BOTTLE_CAP]: [
