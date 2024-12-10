@@ -16,6 +16,7 @@
 - Numel is now epic additional ; adjusted stats accordingly ; temporarely removed Mega Camerupt
 - Houndour is now epic additional ; HP 85/150 → 90/160 ; temporely removed Mega Houndoom
 - Skorupi is now epic additional ; adjusted stats accordingly
+- Change Fennekin ability: Mystical Fire: deal 20/40/80 special damage to the target and reduce its special attack by 10
 
 # Changes to Synergies
 
