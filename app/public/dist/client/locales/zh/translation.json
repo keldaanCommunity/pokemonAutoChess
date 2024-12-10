@@ -415,7 +415,8 @@
     "MORTAL_SPIN": "晶光转转",
     "METAL_CLAW": "金属爪",
     "FIRESTARTER": "起火",
-    "BONE_ARMOR": "骨质盔甲"
+    "BONE_ARMOR": "骨质盔甲",
+    "TOPSY_TURVY": "颠倒"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1288,7 +1289,9 @@
     "FLETCHINDER": "火箭雀",
     "TALONFLAME": "烈箭鹰",
     "VULLABY": "秃鹰丫头",
-    "MANDIBUZZ": "秃鹰娜"
+    "MANDIBUZZ": "秃鹰娜",
+    "INKAY": "好啦鱿",
+    "MALAMAR": "乌贼王"
   },
   "ability_description": {
     "SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1684,7 +1687,8 @@
     "MORTAL_SPIN": "击退任何正在攻击使用者且与之距离不超过1的宝可梦，对他们造成[20,30,40,SP]点SPECIAL，并使他们陷入POISONNED 4秒。",
     "METAL_CLAW": "对目标造成[10,20,40,SP]点TRUE，并提升使用者[2,4,6]点ATK。",
     "FIRESTARTER": "提升[10,20,40,SP]%的ATK_SPEED，并飞到最远的敌方宝可梦的位置，沿途洒下烟灰。烟灰造成[20,40,80,SP]点SPECIAL且会留在地上，对位于此位置的非FLYING，非FIRE宝可梦每秒造成10点SPECIAL，并使之陷入BURN。",
-    "BONE_ARMOR": "飞至最弱的敌方宝可梦的位置，对其造成[20,40,80]点SPECIAL，自身回复等量HP。若目标因此倒下，收集其骸骨来制造盔甲，从而提升使用者[2,4,6]点DEF和SPE_DEF。"
+    "BONE_ARMOR": "飞至最弱的敌方宝可梦的位置，对其造成[20,40,80]点SPECIAL，自身回复等量HP。若目标因此倒下，收集其骸骨来制造盔甲，从而提升使用者[2,4,6]点DEF和SPE_DEF。",
+    "TOPSY_TURVY": "对目标造成[40,80,100,SP]点SPECIAL，并反转其ATK，DEF和SPE_DEF的增幅。"
   },
   "effect": {
     "INGRAIN": "扎根",
