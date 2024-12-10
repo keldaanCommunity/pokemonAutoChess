@@ -719,7 +719,7 @@ export class Numel extends Pokemon {
   range = 1
   skill = Ability.ERUPTION
   attackSprite = AttackSprite.FIRE_MELEE
-  additional = true
+  regional = true
 }
 
 export class Camerupt extends Pokemon {
@@ -735,7 +735,7 @@ export class Camerupt extends Pokemon {
   range = 1
   skill = Ability.ERUPTION
   attackSprite = AttackSprite.FIRE_MELEE
-  additional = true
+  regional = true
 }
 
 export class MegaCamerupt extends Pokemon {
@@ -751,7 +751,7 @@ export class MegaCamerupt extends Pokemon {
   skill = Ability.DEFAULT
   //skill = Ability.ERUPTION
   attackSprite = AttackSprite.FIRE_MELEE
-  additional = true
+  regional = true
 }
 
 export class Meditite extends Pokemon {
@@ -15445,6 +15445,45 @@ export class Mandibuzz extends Pokemon {
   attackSprite = AttackSprite.DARK_MELEE
 }
 
+export class Inkay extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.DARK,
+    Synergy.PSYCHIC,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.MALAMAR
+  hp = 90
+  atk = 9
+  def = 3
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.TOPSY_TURVY
+  additional = true
+  attackSprite = AttackSprite.DARK_MELEE
+}
+
+export class Malamar extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.DARK,
+    Synergy.PSYCHIC,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 230
+  atk = 20
+  def = 5
+  speDef = 12
+  maxPP = 100
+  range = 1
+  skill = Ability.TOPSY_TURVY
+  additional = true
+  attackSprite = AttackSprite.DARK_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -16322,5 +16361,7 @@ export const PokemonClasses: Record<
   [Pkm.FLETCHINDER]: Fletchinder,
   [Pkm.TALONFLAME]: Talonflame,
   [Pkm.VULLABY]: Vullaby,
-  [Pkm.MANDIBUZZ]: Mandibuzz
+  [Pkm.MANDIBUZZ]: Mandibuzz,
+  [Pkm.INKAY]: Inkay,
+  [Pkm.MALAMAR]: Malamar
 }

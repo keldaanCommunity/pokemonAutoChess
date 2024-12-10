@@ -7399,8 +7399,11 @@ export class RetaliateStrategy extends AbilityStrategy {
     const nbAlliesAlive = board.cells.filter(
       (entity) => entity && entity.team === pokemon.team
     ).length
+    const meter = pokemon.team === Team.BLUE_TEAM ?
+      "blueDpsMeter" :
+      "redDpsMeter"
     const nbFallenAllies =
-      (pokemon.player?.boardSize ?? nbAlliesAlive) - nbAlliesAlive
+      pokemon.simulation[meter].size - nbAlliesAlive
     const damage =
       ([15, 30, 60][pokemon.stars - 1] ?? 60) +
       ([10, 15, 25][pokemon.stars - 1] ?? 15) * nbFallenAllies
@@ -8017,11 +8020,13 @@ export class KowtowCleaveStrategy extends AbilityStrategy {
   ) {
     crit = chance(pokemon.critChance / 100, pokemon) // can crit by default
     super.process(pokemon, state, board, target, crit)
-    const nbAllies =
-      board.cells.filter((p) => p && p.team === pokemon.team).length - 1
-    const nbFallenAllies = min(0)(
-      (pokemon.player?.experienceManager.level ?? 0) - nbAllies
-    )
+    const nbAlliesAlive =
+      board.cells.filter((p) => p && p.team === pokemon.team).length
+    const meter = pokemon.team === Team.BLUE_TEAM ?
+      "blueDpsMeter" :
+      "redDpsMeter"
+    const nbFallenAllies =
+      pokemon.simulation[meter].size - nbAlliesAlive
     const damage = Math.round(
       pokemon.atk * (1.5 + nbFallenAllies * 0.2 * (1 + pokemon.ap / 100))
     )
@@ -10961,6 +10966,42 @@ export class BoneArmorStrategy extends AbilityStrategy {
   }
 }
 
+export class TopsyTurvyStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [40, 80, 100][pokemon.stars - 1] ?? 100
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        target.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        if (target.atk > target.baseAtk) {
+          const d = target.atk - target.baseAtk
+          target.addAttack(-2 * d, pokemon, 0, false)
+        }
+        if (target.def > target.baseDef) {
+          const d = target.def - target.baseDef
+          target.addDefense(-2 * d, pokemon, 0, false)
+        }
+        if (target.speDef > target.baseSpeDef) {
+          const d = target.speDef - target.baseSpeDef
+          target.addSpecialDefense(-2 * d, pokemon, 0, false)
+        }
+      }, 500)
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -11358,5 +11399,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MORTAL_SPIN]: new MortalSpinStrategy(),
   [Ability.METAL_CLAW]: new MetalClawStrategy(),
   [Ability.FIRESTARTER]: new FirestarterStrategy(),
-  [Ability.BONE_ARMOR]: new BoneArmorStrategy()
+  [Ability.BONE_ARMOR]: new BoneArmorStrategy(),
+  [Ability.TOPSY_TURVY]: new TopsyTurvyStrategy()
 }
