@@ -120,7 +120,14 @@ export default class PreparationRoom extends Room<PreparationState> {
 
     if (options.autoStartDelayInSeconds) {
       this.clock.setTimeout(() => {
-        if (this.state.users.size < 2) {
+        if (this.state.gameStartedAt != null) {
+          // game has started but the prep room is still open
+          logger.debug(
+            "game has started but the prep room is still open, forcing close"
+          )
+          this.disconnect(CloseCodes.NORMAL_CLOSURE)
+          return
+        } else if (this.state.users.size < 2) {
           // automatically remove lobbies with zero or one players
           if (this.metadata?.tournamentId) {
             // automatically give rank 1 if solo in a tournament lobby
