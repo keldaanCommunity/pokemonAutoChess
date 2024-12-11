@@ -2778,21 +2778,7 @@ export class HydroPumpStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 0
-    switch (pokemon.stars) {
-      case 1:
-        damage = 25
-        break
-      case 2:
-        damage = 50
-        break
-      case 3:
-        damage = 100
-        break
-      default:
-        break
-    }
-
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
@@ -7399,11 +7385,9 @@ export class RetaliateStrategy extends AbilityStrategy {
     const nbAlliesAlive = board.cells.filter(
       (entity) => entity && entity.team === pokemon.team
     ).length
-    const meter = pokemon.team === Team.BLUE_TEAM ?
-      "blueDpsMeter" :
-      "redDpsMeter"
-    const nbFallenAllies =
-      pokemon.simulation[meter].size - nbAlliesAlive
+    const meter =
+      pokemon.team === Team.BLUE_TEAM ? "blueDpsMeter" : "redDpsMeter"
+    const nbFallenAllies = pokemon.simulation[meter].size - nbAlliesAlive
     const damage =
       ([15, 30, 60][pokemon.stars - 1] ?? 60) +
       ([10, 15, 25][pokemon.stars - 1] ?? 15) * nbFallenAllies
@@ -8020,13 +8004,12 @@ export class KowtowCleaveStrategy extends AbilityStrategy {
   ) {
     crit = chance(pokemon.critChance / 100, pokemon) // can crit by default
     super.process(pokemon, state, board, target, crit)
-    const nbAlliesAlive =
-      board.cells.filter((p) => p && p.team === pokemon.team).length
-    const meter = pokemon.team === Team.BLUE_TEAM ?
-      "blueDpsMeter" :
-      "redDpsMeter"
-    const nbFallenAllies =
-      pokemon.simulation[meter].size - nbAlliesAlive
+    const nbAlliesAlive = board.cells.filter(
+      (p) => p && p.team === pokemon.team
+    ).length
+    const meter =
+      pokemon.team === Team.BLUE_TEAM ? "blueDpsMeter" : "redDpsMeter"
+    const nbFallenAllies = pokemon.simulation[meter].size - nbAlliesAlive
     const damage = Math.round(
       pokemon.atk * (1.5 + nbFallenAllies * 0.2 * (1 + pokemon.ap / 100))
     )
