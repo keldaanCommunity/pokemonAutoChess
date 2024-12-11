@@ -9,3 +9,5 @@ export abstract class Effect {
 
 // item effect applied on fight start of after stealing/obtaining an item
 export class OnItemGainedEffect extends Effect {}
+
+export class OnItemRemovedEffect extends Effect {}
