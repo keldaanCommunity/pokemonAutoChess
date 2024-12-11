@@ -290,7 +290,7 @@ export function displayAbility(
         y: coordinatesTarget[1],
         ease: "linear",
         yoyo: false,
-        duration: 1000,
+        duration: 500,
         onComplete: () => {
           specialProjectile.destroy()
         }
@@ -306,7 +306,7 @@ export function displayAbility(
         y: coordinatesTarget[1],
         ease: "linear",
         yoyo: false,
-        duration: 1000,
+        duration: 1350,
         onComplete: () => {
           specialProjectile.destroy()
         }

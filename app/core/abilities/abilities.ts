@@ -82,18 +82,8 @@ export class BlueFlareStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 50
-    let multiplier = 0
-    if (pokemon.effects.has(Effect.BLAZE)) {
-      multiplier = 1
-    } else if (pokemon.effects.has(Effect.VICTORY_STAR)) {
-      multiplier = 2
-    } else if (pokemon.effects.has(Effect.DROUGHT)) {
-      multiplier = 3
-    } else if (pokemon.effects.has(Effect.DESOLATE_LAND)) {
-      multiplier = 4
-    }
-    damage += multiplier * 20
+    const fireLevel = pokemon.player?.synergies.get(Synergy.FIRE)
+    const damage = 50 + (fireLevel ?? 0) * 10
 
     pokemon.commands.push(
       new DelayedCommand(() => {
@@ -113,7 +103,7 @@ export class BlueFlareStrategy extends AbilityStrategy {
             )
           }
         })
-      }, 1000)
+      }, 250)
     )
   }
 }
@@ -127,17 +117,8 @@ export class FusionBoltStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 50
-    let multiplier = 0
-    if (pokemon.effects.has(Effect.RISING_VOLTAGE)) {
-      multiplier = 1
-    } else if (pokemon.effects.has(Effect.OVERDRIVE)) {
-      multiplier = 2
-    } else if (pokemon.effects.has(Effect.POWER_SURGE)) {
-      multiplier = 3
-    }
-    damage += multiplier * 40
-
+    const electricLevel = pokemon.player?.synergies.get(Synergy.ELECTRIC)
+    const damage = 50 + (electricLevel ?? 0) * 10
     pokemon.commands.push(
       new DelayedCommand(() => {
         const cells = board.getAdjacentCells(
@@ -156,7 +137,7 @@ export class FusionBoltStrategy extends AbilityStrategy {
             )
           }
         })
-      }, 1000)
+      }, 250)
     )
   }
 }
@@ -170,19 +151,8 @@ export class GlaciateStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 50
-    let multiplier = 0
-    if (pokemon.effects.has(Effect.CHILLY)) {
-      multiplier = 1
-    } else if (pokemon.effects.has(Effect.FROSTY)) {
-      multiplier = 2
-    } else if (pokemon.effects.has(Effect.FREEZING)) {
-      multiplier = 3
-    } else if (pokemon.effects.has(Effect.SHEER_COLD)) {
-      multiplier = 4
-    }
-    damage += multiplier * 20
-
+    const iceSynergyLevel = pokemon.player?.synergies.get(Synergy.ICE) ?? 0
+    const damage = 50 + iceSynergyLevel * 10
     pokemon.commands.push(
       new DelayedCommand(() => {
         const cells = board.getAdjacentCells(
@@ -201,7 +171,7 @@ export class GlaciateStrategy extends AbilityStrategy {
             )
           }
         })
-      }, 1000)
+      }, 250)
     )
   }
 }
@@ -7399,11 +7369,9 @@ export class RetaliateStrategy extends AbilityStrategy {
     const nbAlliesAlive = board.cells.filter(
       (entity) => entity && entity.team === pokemon.team
     ).length
-    const meter = pokemon.team === Team.BLUE_TEAM ?
-      "blueDpsMeter" :
-      "redDpsMeter"
-    const nbFallenAllies =
-      pokemon.simulation[meter].size - nbAlliesAlive
+    const meter =
+      pokemon.team === Team.BLUE_TEAM ? "blueDpsMeter" : "redDpsMeter"
+    const nbFallenAllies = pokemon.simulation[meter].size - nbAlliesAlive
     const damage =
       ([15, 30, 60][pokemon.stars - 1] ?? 60) +
       ([10, 15, 25][pokemon.stars - 1] ?? 15) * nbFallenAllies
@@ -8020,13 +7988,12 @@ export class KowtowCleaveStrategy extends AbilityStrategy {
   ) {
     crit = chance(pokemon.critChance / 100, pokemon) // can crit by default
     super.process(pokemon, state, board, target, crit)
-    const nbAlliesAlive =
-      board.cells.filter((p) => p && p.team === pokemon.team).length
-    const meter = pokemon.team === Team.BLUE_TEAM ?
-      "blueDpsMeter" :
-      "redDpsMeter"
-    const nbFallenAllies =
-      pokemon.simulation[meter].size - nbAlliesAlive
+    const nbAlliesAlive = board.cells.filter(
+      (p) => p && p.team === pokemon.team
+    ).length
+    const meter =
+      pokemon.team === Team.BLUE_TEAM ? "blueDpsMeter" : "redDpsMeter"
+    const nbFallenAllies = pokemon.simulation[meter].size - nbAlliesAlive
     const damage = Math.round(
       pokemon.atk * (1.5 + nbFallenAllies * 0.2 * (1 + pokemon.ap / 100))
     )
