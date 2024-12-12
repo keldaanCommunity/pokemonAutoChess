@@ -5,10 +5,11 @@ import {
   SynergyGivenByItem,
   SynergyStones
 } from "../types/enum/Item"
-import { Effect, OnItemGainedEffect } from "./effect"
+import { Effect, OnItemGainedEffect, OnItemRemovedEffect } from "./effect"
 import { pickRandomIn } from "../utils/random"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { PokemonEntity } from "./pokemon-entity"
+import { min } from "../utils/number"
 
 export function getWonderboxItems(existingItems: SetSchema<Item>): Item[] {
   const wonderboxItems: Item[] = []
@@ -35,21 +36,41 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.SOUL_DEW]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.status.triggerSoulDew(1000)
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      pokemon.status.soulDew = false
+      pokemon.status.soulDewCooldown = 0
+      pokemon.addAbilityPower(
+        -10 * pokemon.count.soulDewCount,
+        pokemon,
+        0,
+        false
+      )
+      pokemon.count.soulDewCount = 0
     })
   ],
   [Item.WIDE_LENS]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.range += 2
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      pokemon.range = min(1)(pokemon.range - 2)
     })
   ],
   [Item.MAX_REVIVE]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.status.resurection = true
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      pokemon.status.resurection = false
     })
   ],
   [Item.SWIFT_WING]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.addDodgeChance(0.1, pokemon, 0, false)
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      pokemon.addDodgeChance(-0.1, pokemon, 0, false)
     })
   ],
   [Item.FLAME_ORB]: [
@@ -60,6 +81,10 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
         pokemon as PokemonEntity,
         pokemon as PokemonEntity
       )
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      pokemon.addAttack(-pokemon.baseAtk, pokemon, 0, false)
+      pokemon.status.burnCooldown = 0
     })
   ],
   [Item.TOXIC_ORB]: [
@@ -70,6 +95,10 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
         pokemon as PokemonEntity,
         pokemon as PokemonEntity
       )
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      pokemon.addAttack(-pokemon.baseAtk, pokemon, 0, false)
+      pokemon.status.poisonCooldown = 0
     })
   ],
   [Item.POKERUS_VIAL]: [
@@ -80,16 +109,25 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.FLUFFY_TAIL]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.status.triggerRuneProtect(60000)
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      pokemon.status.runeProtectCooldown = 0
     })
   ],
   [Item.KINGS_ROCK]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.addShield(0.3 * pokemon.baseHP, pokemon, 0, false)
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      pokemon.addShield(-0.3 * pokemon.baseHP, pokemon, 0, false)
     })
   ],
   [Item.DYNAMAX_BAND]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.addMaxHP(2.5 * pokemon.baseHP, pokemon, 0, false)
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      pokemon.addMaxHP(-2.5 * pokemon.baseHP, pokemon, 0, false)
     })
   ],
   [Item.TINY_MUSHROOM]: [
@@ -102,6 +140,15 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addCritChance(pokemon.player?.money ?? 0, pokemon, 0, false)
       pokemon.addCritPower(
         (pokemon.player?.money ?? 0) / 100,
+        pokemon,
+        0,
+        false
+      )
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      pokemon.addCritChance(-(pokemon.player?.money ?? 0), pokemon, 0, false)
+      pokemon.addCritPower(
+        -(pokemon.player?.money ?? 0) / 100,
         pokemon,
         0,
         false
@@ -119,11 +166,25 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
         0,
         false
       )
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      pokemon.addAbilityPower(
+        -Math.floor(
+          ((pokemon.player?.rerollCount ?? 0) + pokemon.simulation.stageLevel) /
+            2
+        ),
+        pokemon,
+        0,
+        false
+      )
     })
   ],
   [Item.SACRED_ASH]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.status.resurection = true
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      pokemon.status.resurection = false
     })
   ]
 }
