@@ -372,23 +372,23 @@ export default class Simulation extends Schema implements ISimulation {
 
   applySynergyEffects(pokemon: PokemonEntity) {
     if (pokemon.team === Team.BLUE_TEAM) {
-      this.applyEffects(
-        pokemon,
-        pokemon.types,
-        this.blueEffects,
-        this.bluePlayer?.synergies.countActiveSynergies() || 0
-      )
+      this.blueEffects.forEach((effect) => {
+        this.applyEffect(
+          pokemon,
+          pokemon.types,
+          effect,
+          this.bluePlayer?.synergies.countActiveSynergies() || 0
+        )
+      })
     } else if (pokemon.team === Team.RED_TEAM) {
-      this.applyEffects(
-        pokemon,
-        pokemon.types,
-        this.redEffects,
-        this.redPlayer?.synergies.countActiveSynergies() || 0
-      )
-    }
-
-    if (pokemon.types.has(Synergy.GHOST)) {
-      pokemon.addDodgeChance(0.2, pokemon, 0, false)
+      this.redEffects.forEach((effect) => {
+        this.applyEffect(
+          pokemon,
+          pokemon.types,
+          effect,
+          this.redPlayer?.synergies.countActiveSynergies() || 0
+        )
+      })
     }
   }
 
@@ -796,13 +796,12 @@ export default class Simulation extends Schema implements ISimulation {
     }
   }
 
-  applyEffects(
+  applyEffect(
     pokemon: PokemonEntity,
     types: SetSchema<Synergy>,
-    allyEffects: Set<Effect>,
+    effect: Effect,
     activeSynergies: number
   ) {
-    allyEffects.forEach((effect) => {
       switch (effect) {
         case Effect.HONE_CLAWS:
           if (types.has(Synergy.DARK)) {
@@ -1340,7 +1339,6 @@ export default class Simulation extends Schema implements ISimulation {
         default:
           break
       }
-    })
   }
 
   update(dt: number) {
