@@ -21,6 +21,9 @@
 - Houndour is now epic additional ; HP 85/150 → 90/160 ; temporely removed Mega Houndoom
 - Skorupi is now epic additional ; adjusted stats accordingly
 - Change Fennekin ability: Mystical Fire: deal 20/40/80 special damage to the target and reduce its special attack by 10
+- Change Blue Flare (Reshiram): damage delay 1 second → 250ms, damage: ~~50 + 20 * fire synergy step~~ → 50 + 10 * fire synergy level
+- Change Glaciate (Kyurem): damage delay 1 second → 250ms, damage: ~~50 + 20 * ice synergy step~~ → 50 + 10 * ice synergy level
+- Change Fusion Bolt (Zekrom): damage delay 1 second → 250ms, damage: ~~50 + 40 * electric synergy step~~ → 50 + 10 * electric synergy level
 
 # Changes to Synergies
 
