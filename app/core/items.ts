@@ -49,6 +49,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.count.soulDewCount = 0
     })
   ],
+
   [Item.WIDE_LENS]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.range += 2
@@ -57,6 +58,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.range = min(1)(pokemon.range - 2)
     })
   ],
+
   [Item.MAX_REVIVE]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.status.resurection = true
@@ -65,6 +67,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.status.resurection = false
     })
   ],
+
   [Item.SWIFT_WING]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.addDodgeChance(0.1, pokemon, 0, false)
@@ -73,6 +76,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addDodgeChance(-0.1, pokemon, 0, false)
     })
   ],
+
   [Item.FLAME_ORB]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.addAttack(pokemon.baseAtk, pokemon, 0, false)
@@ -87,6 +91,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.status.burnCooldown = 0
     })
   ],
+
   [Item.TOXIC_ORB]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.addAttack(pokemon.baseAtk, pokemon, 0, false)
@@ -101,11 +106,14 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.status.poisonCooldown = 0
     })
   ],
+
   [Item.POKERUS_VIAL]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.status.triggerPokerus()
     })
+    // intentionally no item removal effect
   ],
+
   [Item.FLUFFY_TAIL]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.status.triggerRuneProtect(60000)
@@ -114,6 +122,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.status.runeProtectCooldown = 0
     })
   ],
+
   [Item.KINGS_ROCK]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.addShield(0.3 * pokemon.baseHP, pokemon, 0, false)
@@ -122,6 +131,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addShield(-0.3 * pokemon.baseHP, pokemon, 0, false)
     })
   ],
+
   [Item.DYNAMAX_BAND]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.addMaxHP(2.5 * pokemon.baseHP, pokemon, 0, false)
@@ -130,11 +140,14 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addMaxHP(-2.5 * pokemon.baseHP, pokemon, 0, false)
     })
   ],
+
   [Item.TINY_MUSHROOM]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.addMaxHP(-0.5 * pokemon.baseHP, pokemon, 0, false)
     })
+    // intentionally no item removal effect
   ],
+
   [Item.GOLD_BOTTLE_CAP]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.addCritChance(pokemon.player?.money ?? 0, pokemon, 0, false)
@@ -155,6 +168,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       )
     })
   ],
+
   [Item.REPEAT_BALL]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.addAbilityPower(
@@ -179,6 +193,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       )
     })
   ],
+  
   [Item.SACRED_ASH]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.status.resurection = true
