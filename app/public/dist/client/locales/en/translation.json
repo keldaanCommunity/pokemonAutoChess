@@ -1334,7 +1334,7 @@
     "HEAT_WAVE": "Deal [10,20,30,SP] SPECIAL to all enemies, with a [20,LK]% chance to BURN for 3 seconds. Unfreeze all FREEZE Pokémon.",
     "FLAMETHROWER": "Deal [30,60,120,SP] SPECIAL and BURN for 4 seconds to all enemy Pokémon in a direction in a 3 tile radius.",
     "THUNDER": "Deal [30,60,120,SP] SPECIAL to the target.",
-    "HYDRO_PUMP": "Deal [25,50,100,SP] SPECIAL to all enemy Pokémon behind the target.",
+    "HYDRO_PUMP": "Deal [25,50,100,SP] SPECIAL to all enemies in a line.",
     "DRACO_METEOR": "Deal [50,SP] SPECIAL to all enemy Pokémon.",
     "BLAZE_KICK": "Deal [30,60,120,SP] SPECIAL and BURN the target for 2 seconds. If it already has BURN, deal +30% damage.",
     "WISH": "Heal [50,SP] HP and grant [20,SP] LUCK to [1,2,3] allied Pokémon.",

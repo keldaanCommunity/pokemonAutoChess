@@ -470,7 +470,15 @@ export function displayAbility(
       break
 
     case Ability.HYDRO_PUMP:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      addAbilitySprite(skill, coordinatesTarget, true)
+        .setScale(2)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) +
+            Math.PI / 2
+        )
       break
 
     case Ability.DRACO_METEOR:
