@@ -282,12 +282,14 @@ export class OnDragDropCommand extends Command<
             this.room.swap(player, pokemon, x, y)
             if (this.state.specialGameRule === SpecialGameRule.SLAMINGO) {
               pokemon.items.forEach((item) => {
-                player.items.push(item)
-                pokemon.removeItem(item)
+                if (item !== Item.RARE_CANDY) {
+                  player.items.push(item)
+                  pokemon.removeItem(item)
+                }
               })
             }
             pokemon.onChangePosition(x, y, player)
-            success = true            
+            success = true
           } else if (
             pokemon.canBePlaced &&
             !(dropFromBench && dropToEmptyPlace && isBoardFull)
