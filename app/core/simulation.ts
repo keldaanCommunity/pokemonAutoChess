@@ -805,543 +805,543 @@ export default class Simulation extends Schema implements ISimulation {
     effect: Effect,
     activeSynergies: number
   ) {
-      switch (effect) {
-        case Effect.HONE_CLAWS:
-          if (types.has(Synergy.DARK)) {
-            pokemon.addCritChance(30, pokemon, 0, false)
-            pokemon.addCritPower(0.6, pokemon, 0, false)
-            pokemon.effects.add(Effect.HONE_CLAWS)
-          }
-          break
+    switch (effect) {
+      case Effect.HONE_CLAWS:
+        if (types.has(Synergy.DARK)) {
+          pokemon.addCritChance(30, pokemon, 0, false)
+          pokemon.addCritPower(0.6, pokemon, 0, false)
+          pokemon.effects.add(Effect.HONE_CLAWS)
+        }
+        break
 
-        case Effect.ASSURANCE:
-          if (types.has(Synergy.DARK)) {
-            pokemon.addCritChance(40, pokemon, 0, false)
-            pokemon.addCritPower(0.8, pokemon, 0, false)
-            pokemon.effects.add(Effect.ASSURANCE)
-          }
-          break
+      case Effect.ASSURANCE:
+        if (types.has(Synergy.DARK)) {
+          pokemon.addCritChance(40, pokemon, 0, false)
+          pokemon.addCritPower(0.8, pokemon, 0, false)
+          pokemon.effects.add(Effect.ASSURANCE)
+        }
+        break
 
-        case Effect.BEAT_UP:
-          if (types.has(Synergy.DARK)) {
-            pokemon.addCritChance(50, pokemon, 0, false)
-            pokemon.addCritPower(1.0, pokemon, 0, false)
-            pokemon.effects.add(Effect.BEAT_UP)
-          }
-          break
+      case Effect.BEAT_UP:
+        if (types.has(Synergy.DARK)) {
+          pokemon.addCritChance(50, pokemon, 0, false)
+          pokemon.addCritPower(1.0, pokemon, 0, false)
+          pokemon.effects.add(Effect.BEAT_UP)
+        }
+        break
 
-        case Effect.ANCIENT_POWER:
-        case Effect.ELDER_POWER:
-        case Effect.FORGOTTEN_POWER:
-          if (types.has(Synergy.FOSSIL)) {
-            pokemon.effects.add(effect)
-          }
-          break
-
-        case Effect.BLAZE:
-          if (types.has(Synergy.FIRE)) {
-            pokemon.effects.add(Effect.BLAZE)
-          }
-          break
-
-        case Effect.VICTORY_STAR:
-          if (types.has(Synergy.FIRE)) {
-            pokemon.effects.add(Effect.VICTORY_STAR)
-          }
-          break
-
-        case Effect.DROUGHT:
-          if (types.has(Synergy.FIRE)) {
-            pokemon.effects.add(Effect.DROUGHT)
-          }
-          break
-
-        case Effect.DESOLATE_LAND:
-          if (types.has(Synergy.FIRE)) {
-            pokemon.effects.add(Effect.DESOLATE_LAND)
-          }
-          break
-
-        case Effect.INGRAIN:
-          if (types.has(Synergy.GRASS)) {
-            pokemon.effects.add(Effect.INGRAIN)
-          }
-          break
-
-        case Effect.GROWTH:
-          if (types.has(Synergy.GRASS)) {
-            pokemon.effects.add(Effect.GROWTH)
-          }
-          break
-
-        case Effect.SPORE:
-          if (types.has(Synergy.GRASS)) {
-            pokemon.effects.add(Effect.SPORE)
-          }
-          break
-
-        case Effect.RAIN_DANCE:
-          if (types.has(Synergy.WATER)) {
-            pokemon.effects.add(Effect.RAIN_DANCE)
-          }
-          break
-
-        case Effect.DRIZZLE:
-          if (types.has(Synergy.WATER)) {
-            pokemon.effects.add(Effect.DRIZZLE)
-          }
-          break
-
-        case Effect.PRIMORDIAL_SEA:
-          if (types.has(Synergy.WATER)) {
-            pokemon.effects.add(Effect.PRIMORDIAL_SEA)
-          }
-          break
-
-        case Effect.STAMINA:
-          if (types.has(Synergy.NORMAL)) {
-            pokemon.effects.add(Effect.STAMINA)
-          }
-          break
-
-        case Effect.STRENGTH:
-          if (types.has(Synergy.NORMAL)) {
-            pokemon.effects.add(Effect.STRENGTH)
-          }
-          break
-
-        case Effect.ENDURE:
-          if (types.has(Synergy.NORMAL)) {
-            pokemon.effects.add(Effect.ENDURE)
-          }
-          break
-
-        case Effect.PURE_POWER:
-          if (types.has(Synergy.NORMAL)) {
-            pokemon.effects.add(Effect.PURE_POWER)
-          }
-          break
-
-        case Effect.RISING_VOLTAGE:
-        case Effect.OVERDRIVE:
-        case Effect.POWER_SURGE:
-          if (types.has(Synergy.ELECTRIC)) {
-            pokemon.effects.add(effect)
-          }
-          break
-
-        case Effect.GUTS:
-        case Effect.STURDY:
-        case Effect.DEFIANT:
-        case Effect.JUSTIFIED:
-          if (types.has(Synergy.FIGHTING)) {
-            pokemon.effects.add(effect)
-          }
-          break
-
-        case Effect.STEEL_SURGE:
-        case Effect.STEEL_SPIKE:
-        case Effect.CORKSCREW_CRASH:
-        case Effect.MAX_MELTDOWN:
-          if (types.has(Synergy.STEEL)) {
-            pokemon.effects.add(effect)
-          }
-          break
-
-        case Effect.BULK_UP:
-          if (types.has(Synergy.FIELD)) {
-            pokemon.effects.add(Effect.BULK_UP)
-          }
-          break
-
-        case Effect.RAGE:
-          if (types.has(Synergy.FIELD)) {
-            pokemon.effects.add(Effect.RAGE)
-          }
-          break
-
-        case Effect.ANGER_POINT:
-          if (types.has(Synergy.FIELD)) {
-            pokemon.effects.add(Effect.ANGER_POINT)
-          }
-          break
-
-        case Effect.PURSUIT:
-        case Effect.BRUTAL_SWING:
-        case Effect.POWER_TRIP:
-        case Effect.MERCILESS:
-          if (types.has(Synergy.MONSTER)) {
-            pokemon.effects.add(effect)
-          }
-          break
-
-        case Effect.AMNESIA:
-          if (types.has(Synergy.PSYCHIC)) {
-            pokemon.effects.add(Effect.AMNESIA)
-            pokemon.addAbilityPower(50, pokemon, 0, false)
-          }
-          break
-
-        case Effect.LIGHT_SCREEN:
-          if (types.has(Synergy.PSYCHIC)) {
-            pokemon.effects.add(Effect.LIGHT_SCREEN)
-            pokemon.addAbilityPower(100, pokemon, 0, false)
-          }
-          break
-
-        case Effect.EERIE_SPELL:
-          if (types.has(Synergy.PSYCHIC)) {
-            pokemon.effects.add(Effect.EERIE_SPELL)
-            pokemon.addAbilityPower(150, pokemon, 0, false)
-          }
-          break
-
-        case Effect.MEDITATE:
-          pokemon.effects.add(Effect.MEDITATE)
-          break
-
-        case Effect.FOCUS_ENERGY:
-          pokemon.effects.add(Effect.FOCUS_ENERGY)
-          break
-
-        case Effect.CALM_MIND:
-          pokemon.effects.add(Effect.CALM_MIND)
-          break
-
-        case Effect.TAILWIND:
-          if (types.has(Synergy.FLYING)) {
-            pokemon.flyingProtection = 1
-            pokemon.effects.add(Effect.TAILWIND)
-          }
-          break
-
-        case Effect.FEATHER_DANCE:
-          if (types.has(Synergy.FLYING)) {
-            pokemon.flyingProtection = 1
-            pokemon.effects.add(Effect.FEATHER_DANCE)
-          }
-          break
-
-        case Effect.MAX_AIRSTREAM:
-          if (types.has(Synergy.FLYING)) {
-            pokemon.flyingProtection = 2
-            pokemon.effects.add(Effect.MAX_AIRSTREAM)
-          }
-          break
-
-        case Effect.SKYDIVE:
-          if (types.has(Synergy.FLYING)) {
-            pokemon.flyingProtection = 2
-            pokemon.effects.add(Effect.SKYDIVE)
-          }
-          break
-
-        case Effect.SWIFT_SWIM:
-        case Effect.HYDRATION:
-        case Effect.WATER_VEIL:
+      case Effect.ANCIENT_POWER:
+      case Effect.ELDER_POWER:
+      case Effect.FORGOTTEN_POWER:
+        if (types.has(Synergy.FOSSIL)) {
           pokemon.effects.add(effect)
-          this.tidalWaveTimer = 8000
-          break
-
-        case Effect.ODD_FLOWER:
-          if (types.has(Synergy.FLORA)) {
-            pokemon.effects.add(Effect.ODD_FLOWER)
-          }
-          break
-
-        case Effect.GLOOM_FLOWER:
-          if (types.has(Synergy.FLORA)) {
-            pokemon.effects.add(Effect.GLOOM_FLOWER)
-          }
-          break
-
-        case Effect.VILE_FLOWER:
-          if (types.has(Synergy.FLORA)) {
-            pokemon.effects.add(Effect.VILE_FLOWER)
-          }
-          break
-
-        case Effect.SUN_FLOWER:
-          if (types.has(Synergy.FLORA)) {
-            pokemon.effects.add(Effect.SUN_FLOWER)
-          }
-          break
-
-        case Effect.BATTLE_ARMOR:
-          if (types.has(Synergy.ROCK)) {
-            pokemon.addDefense(5, pokemon, 0, false)
-            pokemon.effects.add(Effect.BATTLE_ARMOR)
-          }
-          break
-
-        case Effect.MOUTAIN_RESISTANCE:
-          if (types.has(Synergy.ROCK)) {
-            pokemon.addDefense(15, pokemon, 0, false)
-            pokemon.effects.add(Effect.MOUTAIN_RESISTANCE)
-          }
-          break
-
-        case Effect.DIAMOND_STORM:
-          if (types.has(Synergy.ROCK)) {
-            pokemon.addDefense(30, pokemon, 0, false)
-            pokemon.effects.add(Effect.DIAMOND_STORM)
-          }
-          break
-
-        case Effect.AROMATIC_MIST:
-        case Effect.FAIRY_WIND:
-        case Effect.STRANGE_STEAM:
-        case Effect.MOON_FORCE:
-          if (types.has(Synergy.FAIRY)) {
-            pokemon.effects.add(effect)
-          }
-          break
-
-        case Effect.DRAGON_ENERGY:
-        case Effect.DRAGON_SCALES:
-        case Effect.DRAGON_DANCE:
-          if (types.has(Synergy.DRAGON)) {
-            pokemon.effects.add(effect)
-          }
-          break
-
-        case Effect.CHILLY:
-          pokemon.effects.add(Effect.CHILLY)
-          pokemon.addSpecialDefense(2, pokemon, 0, false)
-          break
-
-        case Effect.FROSTY:
-          pokemon.effects.add(Effect.FROSTY)
-          pokemon.addSpecialDefense(6, pokemon, 0, false)
-          break
-
-        case Effect.FREEZING:
-          pokemon.effects.add(Effect.FREEZING)
-          pokemon.addSpecialDefense(20, pokemon, 0, false)
-          break
-
-        case Effect.SHEER_COLD:
-          pokemon.effects.add(Effect.SHEER_COLD)
-          pokemon.addSpecialDefense(30, pokemon, 0, false)
-          break
-
-        case Effect.POISONOUS:
-        case Effect.VENOMOUS:
-        case Effect.TOXIC:
-          if (types.has(Synergy.POISON)) {
-            pokemon.effects.add(effect)
-          }
-          break
-
-        case Effect.LARGO:
-        case Effect.ALLEGRO:
-        case Effect.PRESTO:
-          if (types.has(Synergy.SOUND)) {
-            pokemon.effects.add(effect)
-          }
-          break
-
-        case Effect.COCOON:
-        case Effect.INFESTATION:
-        case Effect.HORDE:
-        case Effect.HEART_OF_THE_SWARM:
-          if (types.has(Synergy.BUG)) {
-            pokemon.effects.add(effect)
-          }
-          break
-
-        case Effect.TILLER:
-        case Effect.DIGGER:
-        case Effect.DRILLER:
-        case Effect.DEEP_MINER:
-          if (types.has(Synergy.GROUND)) {
-            pokemon.effects.add(effect)
-          }
-          break
-
-        case Effect.DUBIOUS_DISC:
-        case Effect.LINK_CABLE:
-        case Effect.GOOGLE_SPECS:
-          if (types.has(Synergy.ARTIFICIAL) && pokemon.items.size > 0) {
-            const nbItems = max(3)(
-              pokemon.items.size + (pokemon.items.has(Item.WONDER_BOX) ? 1 : 0)
-            )
-            const attackBoost = {
-              [Effect.DUBIOUS_DISC]: 0,
-              [Effect.LINK_CABLE]: (8 / 100) * pokemon.baseAtk,
-              [Effect.GOOGLE_SPECS]: (15 / 100) * pokemon.baseAtk
-            }[effect]
-            const apBoost = {
-              [Effect.DUBIOUS_DISC]: 0,
-              [Effect.LINK_CABLE]: 8,
-              [Effect.GOOGLE_SPECS]: 15
-            }[effect]
-            const shieldBoost = {
-              [Effect.DUBIOUS_DISC]: 0,
-              [Effect.LINK_CABLE]: (8 / 100) * pokemon.hp,
-              [Effect.GOOGLE_SPECS]: (15 / 100) * pokemon.hp
-            }[effect]
-            pokemon.addAttack(attackBoost * nbItems, pokemon, 0, false)
-            pokemon.addAbilityPower(apBoost * nbItems, pokemon, 0, false)
-            pokemon.addShield(shieldBoost * nbItems, pokemon, 0, false)
-            pokemon.effects.add(Effect.GOOGLE_SPECS)
-          }
-          break
-
-        case Effect.GRASSY_TERRAIN:
-          if (types.has(Synergy.GRASS)) {
-            pokemon.status.grassField = true
-            pokemon.effects.add(Effect.GRASSY_TERRAIN)
-          }
-          break
-
-        case Effect.PSYCHIC_TERRAIN:
-          if (types.has(Synergy.PSYCHIC)) {
-            pokemon.addPsychicField()
-            pokemon.effects.add(Effect.PSYCHIC_TERRAIN)
-          }
-          break
-
-        case Effect.ELECTRIC_TERRAIN:
-          if (types.has(Synergy.ELECTRIC)) {
-            pokemon.addElectricField()
-            pokemon.effects.add(Effect.ELECTRIC_TERRAIN)
-          }
-          break
-
-        case Effect.MISTY_TERRAIN:
-          if (types.has(Synergy.FAIRY)) {
-            pokemon.status.fairyField = true
-            pokemon.effects.add(Effect.MISTY_TERRAIN)
-          }
-          break
-
-        case Effect.SHINING_RAY:
-          if (pokemon.inLightCell || pokemon.items.has(Item.SHINY_STONE)) {
-            pokemon.status.light = true
-            pokemon.effects.add(Effect.SHINING_RAY)
-            pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
-            pokemon.addAbilityPower(20, pokemon, 0, false)
-          }
-          break
-
-        case Effect.LIGHT_PULSE:
-          if (pokemon.inLightCell || pokemon.items.has(Item.SHINY_STONE)) {
-            pokemon.status.light = true
-            pokemon.effects.add(Effect.LIGHT_PULSE)
-            pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
-            pokemon.addAbilityPower(20, pokemon, 0, false)
-          }
-          break
-
-        case Effect.ETERNAL_LIGHT:
-          if (pokemon.inLightCell || pokemon.items.has(Item.SHINY_STONE)) {
-            pokemon.status.light = true
-            pokemon.effects.add(Effect.ETERNAL_LIGHT)
-            pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
-            pokemon.addAbilityPower(20, pokemon, 0, false)
-            pokemon.status.triggerRuneProtect(8000)
-            pokemon.addDefense(0.5 * pokemon.baseDef, pokemon, 0, false)
-            pokemon.addSpecialDefense(
-              0.5 * pokemon.baseSpeDef,
-              pokemon,
-              0,
-              false
-            )
-          }
-          break
-
-        case Effect.MAX_ILLUMINATION:
-          if (pokemon.inLightCell || pokemon.items.has(Item.SHINY_STONE)) {
-            pokemon.status.light = true
-            pokemon.effects.add(Effect.MAX_ILLUMINATION)
-            pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
-            pokemon.addAbilityPower(20, pokemon, 0, false)
-            pokemon.status.triggerRuneProtect(8000)
-            pokemon.addDefense(0.5 * pokemon.baseDef, pokemon, 0, false)
-            pokemon.addSpecialDefense(
-              0.5 * pokemon.baseSpeDef,
-              pokemon,
-              0,
-              false
-            )
-            pokemon.addShield(100, pokemon, 0, false)
-            pokemon.status.resurection = true
-          }
-          break
-
-        case Effect.QUICK_FEET:
-          if (types.has(Synergy.WILD)) {
-            pokemon.effects.add(Effect.QUICK_FEET)
-            pokemon.addAttack(
-              Math.ceil(0.3 * pokemon.baseAtk),
-              pokemon,
-              0,
-              false
-            )
-          }
-          break
-
-        case Effect.RUN_AWAY:
-          if (types.has(Synergy.WILD)) {
-            pokemon.effects.add(Effect.RUN_AWAY)
-            pokemon.addAttack(
-              Math.ceil(0.5 * pokemon.baseAtk),
-              pokemon,
-              0,
-              false
-            )
-          }
-          break
-
-        case Effect.HUSTLE:
-          if (types.has(Synergy.WILD)) {
-            pokemon.effects.add(Effect.HUSTLE)
-            pokemon.addAttack(
-              Math.ceil(0.8 * pokemon.baseAtk),
-              pokemon,
-              0,
-              false
-            )
-          }
-          break
-
-        case Effect.BERSERK:
-          if (types.has(Synergy.WILD)) {
-            pokemon.effects.add(Effect.BERSERK)
-            pokemon.addAttack(
-              Math.ceil(1.0 * pokemon.baseAtk),
-              pokemon,
-              0,
-              false
-            )
-            pokemon.status.enrageDelay -= 5000
-          }
-          break
-
-        case Effect.FLUID: {
-          pokemon.addAttackSpeed(1 * activeSynergies, pokemon, 0, false)
-          pokemon.addMaxHP(4 * activeSynergies, pokemon, 0, false)
-          break
         }
+        break
 
-        case Effect.SHAPELESS: {
-          pokemon.effects.add(Effect.SHAPELESS)
-          pokemon.addAttackSpeed(3 * activeSynergies, pokemon, 0, false)
-          pokemon.addMaxHP(8 * activeSynergies, pokemon, 0, false)
-          break
+      case Effect.BLAZE:
+        if (types.has(Synergy.FIRE)) {
+          pokemon.effects.add(Effect.BLAZE)
         }
+        break
 
-        case Effect.ETHEREAL: {
-          pokemon.effects.add(Effect.ETHEREAL)
-          pokemon.addAttackSpeed(6 * activeSynergies, pokemon, 0, false)
-          pokemon.addMaxHP(12 * activeSynergies, pokemon, 0, false)
-          break
+      case Effect.VICTORY_STAR:
+        if (types.has(Synergy.FIRE)) {
+          pokemon.effects.add(Effect.VICTORY_STAR)
         }
+        break
 
-        default:
-          break
+      case Effect.DROUGHT:
+        if (types.has(Synergy.FIRE)) {
+          pokemon.effects.add(Effect.DROUGHT)
+        }
+        break
+
+      case Effect.DESOLATE_LAND:
+        if (types.has(Synergy.FIRE)) {
+          pokemon.effects.add(Effect.DESOLATE_LAND)
+        }
+        break
+
+      case Effect.INGRAIN:
+        if (types.has(Synergy.GRASS)) {
+          pokemon.effects.add(Effect.INGRAIN)
+        }
+        break
+
+      case Effect.GROWTH:
+        if (types.has(Synergy.GRASS)) {
+          pokemon.effects.add(Effect.GROWTH)
+        }
+        break
+
+      case Effect.SPORE:
+        if (types.has(Synergy.GRASS)) {
+          pokemon.effects.add(Effect.SPORE)
+        }
+        break
+
+      case Effect.RAIN_DANCE:
+        if (types.has(Synergy.WATER)) {
+          pokemon.effects.add(Effect.RAIN_DANCE)
+        }
+        break
+
+      case Effect.DRIZZLE:
+        if (types.has(Synergy.WATER)) {
+          pokemon.effects.add(Effect.DRIZZLE)
+        }
+        break
+
+      case Effect.PRIMORDIAL_SEA:
+        if (types.has(Synergy.WATER)) {
+          pokemon.effects.add(Effect.PRIMORDIAL_SEA)
+        }
+        break
+
+      case Effect.STAMINA:
+        if (types.has(Synergy.NORMAL)) {
+          pokemon.effects.add(Effect.STAMINA)
+        }
+        break
+
+      case Effect.STRENGTH:
+        if (types.has(Synergy.NORMAL)) {
+          pokemon.effects.add(Effect.STRENGTH)
+        }
+        break
+
+      case Effect.ENDURE:
+        if (types.has(Synergy.NORMAL)) {
+          pokemon.effects.add(Effect.ENDURE)
+        }
+        break
+
+      case Effect.PURE_POWER:
+        if (types.has(Synergy.NORMAL)) {
+          pokemon.effects.add(Effect.PURE_POWER)
+        }
+        break
+
+      case Effect.RISING_VOLTAGE:
+      case Effect.OVERDRIVE:
+      case Effect.POWER_SURGE:
+        if (types.has(Synergy.ELECTRIC)) {
+          pokemon.effects.add(effect)
+        }
+        break
+
+      case Effect.GUTS:
+      case Effect.STURDY:
+      case Effect.DEFIANT:
+      case Effect.JUSTIFIED:
+        if (types.has(Synergy.FIGHTING)) {
+          pokemon.effects.add(effect)
+        }
+        break
+
+      case Effect.STEEL_SURGE:
+      case Effect.STEEL_SPIKE:
+      case Effect.CORKSCREW_CRASH:
+      case Effect.MAX_MELTDOWN:
+        if (types.has(Synergy.STEEL)) {
+          pokemon.effects.add(effect)
+        }
+        break
+
+      case Effect.BULK_UP:
+        if (types.has(Synergy.FIELD)) {
+          pokemon.effects.add(Effect.BULK_UP)
+        }
+        break
+
+      case Effect.RAGE:
+        if (types.has(Synergy.FIELD)) {
+          pokemon.effects.add(Effect.RAGE)
+        }
+        break
+
+      case Effect.ANGER_POINT:
+        if (types.has(Synergy.FIELD)) {
+          pokemon.effects.add(Effect.ANGER_POINT)
+        }
+        break
+
+      case Effect.PURSUIT:
+      case Effect.BRUTAL_SWING:
+      case Effect.POWER_TRIP:
+      case Effect.MERCILESS:
+        if (types.has(Synergy.MONSTER)) {
+          pokemon.effects.add(effect)
+        }
+        break
+
+      case Effect.AMNESIA:
+        if (types.has(Synergy.PSYCHIC)) {
+          pokemon.effects.add(Effect.AMNESIA)
+          pokemon.addAbilityPower(50, pokemon, 0, false)
+        }
+        break
+
+      case Effect.LIGHT_SCREEN:
+        if (types.has(Synergy.PSYCHIC)) {
+          pokemon.effects.add(Effect.LIGHT_SCREEN)
+          pokemon.addAbilityPower(100, pokemon, 0, false)
+        }
+        break
+
+      case Effect.EERIE_SPELL:
+        if (types.has(Synergy.PSYCHIC)) {
+          pokemon.effects.add(Effect.EERIE_SPELL)
+          pokemon.addAbilityPower(150, pokemon, 0, false)
+        }
+        break
+
+      case Effect.MEDITATE:
+        pokemon.effects.add(Effect.MEDITATE)
+        break
+
+      case Effect.FOCUS_ENERGY:
+        pokemon.effects.add(Effect.FOCUS_ENERGY)
+        break
+
+      case Effect.CALM_MIND:
+        pokemon.effects.add(Effect.CALM_MIND)
+        break
+
+      case Effect.TAILWIND:
+        if (types.has(Synergy.FLYING)) {
+          pokemon.flyingProtection = 1
+          pokemon.effects.add(Effect.TAILWIND)
+        }
+        break
+
+      case Effect.FEATHER_DANCE:
+        if (types.has(Synergy.FLYING)) {
+          pokemon.flyingProtection = 1
+          pokemon.effects.add(Effect.FEATHER_DANCE)
+        }
+        break
+
+      case Effect.MAX_AIRSTREAM:
+        if (types.has(Synergy.FLYING)) {
+          pokemon.flyingProtection = 2
+          pokemon.effects.add(Effect.MAX_AIRSTREAM)
+        }
+        break
+
+      case Effect.SKYDIVE:
+        if (types.has(Synergy.FLYING)) {
+          pokemon.flyingProtection = 2
+          pokemon.effects.add(Effect.SKYDIVE)
+        }
+        break
+
+      case Effect.SWIFT_SWIM:
+      case Effect.HYDRATION:
+      case Effect.WATER_VEIL:
+        pokemon.effects.add(effect)
+        this.tidalWaveTimer = 8000
+        break
+
+      case Effect.ODD_FLOWER:
+        if (types.has(Synergy.FLORA)) {
+          pokemon.effects.add(Effect.ODD_FLOWER)
+        }
+        break
+
+      case Effect.GLOOM_FLOWER:
+        if (types.has(Synergy.FLORA)) {
+          pokemon.effects.add(Effect.GLOOM_FLOWER)
+        }
+        break
+
+      case Effect.VILE_FLOWER:
+        if (types.has(Synergy.FLORA)) {
+          pokemon.effects.add(Effect.VILE_FLOWER)
+        }
+        break
+
+      case Effect.SUN_FLOWER:
+        if (types.has(Synergy.FLORA)) {
+          pokemon.effects.add(Effect.SUN_FLOWER)
+        }
+        break
+
+      case Effect.BATTLE_ARMOR:
+        if (types.has(Synergy.ROCK)) {
+          pokemon.addDefense(5, pokemon, 0, false)
+          pokemon.effects.add(Effect.BATTLE_ARMOR)
+        }
+        break
+
+      case Effect.MOUTAIN_RESISTANCE:
+        if (types.has(Synergy.ROCK)) {
+          pokemon.addDefense(15, pokemon, 0, false)
+          pokemon.effects.add(Effect.MOUTAIN_RESISTANCE)
+        }
+        break
+
+      case Effect.DIAMOND_STORM:
+        if (types.has(Synergy.ROCK)) {
+          pokemon.addDefense(30, pokemon, 0, false)
+          pokemon.effects.add(Effect.DIAMOND_STORM)
+        }
+        break
+
+      case Effect.AROMATIC_MIST:
+      case Effect.FAIRY_WIND:
+      case Effect.STRANGE_STEAM:
+      case Effect.MOON_FORCE:
+        if (types.has(Synergy.FAIRY)) {
+          pokemon.effects.add(effect)
+        }
+        break
+
+      case Effect.DRAGON_ENERGY:
+      case Effect.DRAGON_SCALES:
+      case Effect.DRAGON_DANCE:
+        if (types.has(Synergy.DRAGON)) {
+          pokemon.effects.add(effect)
+        }
+        break
+
+      case Effect.CHILLY:
+        pokemon.effects.add(Effect.CHILLY)
+        pokemon.addSpecialDefense(2, pokemon, 0, false)
+        break
+
+      case Effect.FROSTY:
+        pokemon.effects.add(Effect.FROSTY)
+        pokemon.addSpecialDefense(6, pokemon, 0, false)
+        break
+
+      case Effect.FREEZING:
+        pokemon.effects.add(Effect.FREEZING)
+        pokemon.addSpecialDefense(20, pokemon, 0, false)
+        break
+
+      case Effect.SHEER_COLD:
+        pokemon.effects.add(Effect.SHEER_COLD)
+        pokemon.addSpecialDefense(30, pokemon, 0, false)
+        break
+
+      case Effect.POISONOUS:
+      case Effect.VENOMOUS:
+      case Effect.TOXIC:
+        if (types.has(Synergy.POISON)) {
+          pokemon.effects.add(effect)
+        }
+        break
+
+      case Effect.LARGO:
+      case Effect.ALLEGRO:
+      case Effect.PRESTO:
+        if (types.has(Synergy.SOUND)) {
+          pokemon.effects.add(effect)
+        }
+        break
+
+      case Effect.COCOON:
+      case Effect.INFESTATION:
+      case Effect.HORDE:
+      case Effect.HEART_OF_THE_SWARM:
+        if (types.has(Synergy.BUG)) {
+          pokemon.effects.add(effect)
+        }
+        break
+
+      case Effect.TILLER:
+      case Effect.DIGGER:
+      case Effect.DRILLER:
+      case Effect.DEEP_MINER:
+        if (types.has(Synergy.GROUND)) {
+          pokemon.effects.add(effect)
+        }
+        break
+
+      case Effect.DUBIOUS_DISC:
+      case Effect.LINK_CABLE:
+      case Effect.GOOGLE_SPECS:
+        if (types.has(Synergy.ARTIFICIAL) && pokemon.items.size > 0) {
+          const nbItems = max(3)(
+            pokemon.items.size + (pokemon.items.has(Item.WONDER_BOX) ? 1 : 0)
+          )
+          const attackBoost = {
+            [Effect.DUBIOUS_DISC]: 0,
+            [Effect.LINK_CABLE]: (8 / 100) * pokemon.baseAtk,
+            [Effect.GOOGLE_SPECS]: (15 / 100) * pokemon.baseAtk
+          }[effect]
+          const apBoost = {
+            [Effect.DUBIOUS_DISC]: 0,
+            [Effect.LINK_CABLE]: 8,
+            [Effect.GOOGLE_SPECS]: 15
+          }[effect]
+          const shieldBoost = {
+            [Effect.DUBIOUS_DISC]: 0,
+            [Effect.LINK_CABLE]: (8 / 100) * pokemon.hp,
+            [Effect.GOOGLE_SPECS]: (15 / 100) * pokemon.hp
+          }[effect]
+          pokemon.addAttack(attackBoost * nbItems, pokemon, 0, false)
+          pokemon.addAbilityPower(apBoost * nbItems, pokemon, 0, false)
+          pokemon.addShield(shieldBoost * nbItems, pokemon, 0, false)
+          pokemon.effects.add(Effect.GOOGLE_SPECS)
+        }
+        break
+
+      case Effect.GRASSY_TERRAIN:
+        if (types.has(Synergy.GRASS)) {
+          pokemon.status.grassField = true
+          pokemon.effects.add(Effect.GRASSY_TERRAIN)
+        }
+        break
+
+      case Effect.PSYCHIC_TERRAIN:
+        if (types.has(Synergy.PSYCHIC)) {
+          pokemon.addPsychicField()
+          pokemon.effects.add(Effect.PSYCHIC_TERRAIN)
+        }
+        break
+
+      case Effect.ELECTRIC_TERRAIN:
+        if (types.has(Synergy.ELECTRIC)) {
+          pokemon.addElectricField()
+          pokemon.effects.add(Effect.ELECTRIC_TERRAIN)
+        }
+        break
+
+      case Effect.MISTY_TERRAIN:
+        if (types.has(Synergy.FAIRY)) {
+          pokemon.status.fairyField = true
+          pokemon.effects.add(Effect.MISTY_TERRAIN)
+        }
+        break
+
+      case Effect.SHINING_RAY:
+        if (pokemon.inLightCell || pokemon.items.has(Item.SHINY_STONE)) {
+          pokemon.status.light = true
+          pokemon.effects.add(Effect.SHINING_RAY)
+          pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
+          pokemon.addAbilityPower(20, pokemon, 0, false)
+        }
+        break
+
+      case Effect.LIGHT_PULSE:
+        if (pokemon.inLightCell || pokemon.items.has(Item.SHINY_STONE)) {
+          pokemon.status.light = true
+          pokemon.effects.add(Effect.LIGHT_PULSE)
+          pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
+          pokemon.addAbilityPower(20, pokemon, 0, false)
+        }
+        break
+
+      case Effect.ETERNAL_LIGHT:
+        if (pokemon.inLightCell || pokemon.items.has(Item.SHINY_STONE)) {
+          pokemon.status.light = true
+          pokemon.effects.add(Effect.ETERNAL_LIGHT)
+          pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
+          pokemon.addAbilityPower(20, pokemon, 0, false)
+          pokemon.status.triggerRuneProtect(8000)
+          pokemon.addDefense(0.5 * pokemon.baseDef, pokemon, 0, false)
+          pokemon.addSpecialDefense(
+            0.5 * pokemon.baseSpeDef,
+            pokemon,
+            0,
+            false
+          )
+        }
+        break
+
+      case Effect.MAX_ILLUMINATION:
+        if (pokemon.inLightCell || pokemon.items.has(Item.SHINY_STONE)) {
+          pokemon.status.light = true
+          pokemon.effects.add(Effect.MAX_ILLUMINATION)
+          pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
+          pokemon.addAbilityPower(20, pokemon, 0, false)
+          pokemon.status.triggerRuneProtect(8000)
+          pokemon.addDefense(0.5 * pokemon.baseDef, pokemon, 0, false)
+          pokemon.addSpecialDefense(
+            0.5 * pokemon.baseSpeDef,
+            pokemon,
+            0,
+            false
+          )
+          pokemon.addShield(100, pokemon, 0, false)
+          pokemon.status.resurection = true
+        }
+        break
+
+      case Effect.QUICK_FEET:
+        if (types.has(Synergy.WILD)) {
+          pokemon.effects.add(Effect.QUICK_FEET)
+          pokemon.addAttack(
+            Math.ceil(0.3 * pokemon.baseAtk),
+            pokemon,
+            0,
+            false
+          )
+        }
+        break
+
+      case Effect.RUN_AWAY:
+        if (types.has(Synergy.WILD)) {
+          pokemon.effects.add(Effect.RUN_AWAY)
+          pokemon.addAttack(
+            Math.ceil(0.5 * pokemon.baseAtk),
+            pokemon,
+            0,
+            false
+          )
+        }
+        break
+
+      case Effect.HUSTLE:
+        if (types.has(Synergy.WILD)) {
+          pokemon.effects.add(Effect.HUSTLE)
+          pokemon.addAttack(
+            Math.ceil(0.8 * pokemon.baseAtk),
+            pokemon,
+            0,
+            false
+          )
+        }
+        break
+
+      case Effect.BERSERK:
+        if (types.has(Synergy.WILD)) {
+          pokemon.effects.add(Effect.BERSERK)
+          pokemon.addAttack(
+            Math.ceil(1.0 * pokemon.baseAtk),
+            pokemon,
+            0,
+            false
+          )
+          pokemon.status.enrageDelay -= 5000
+        }
+        break
+
+      case Effect.FLUID: {
+        pokemon.addAttackSpeed(1 * activeSynergies, pokemon, 0, false)
+        pokemon.addMaxHP(4 * activeSynergies, pokemon, 0, false)
+        break
       }
+
+      case Effect.SHAPELESS: {
+        pokemon.effects.add(Effect.SHAPELESS)
+        pokemon.addAttackSpeed(3 * activeSynergies, pokemon, 0, false)
+        pokemon.addMaxHP(8 * activeSynergies, pokemon, 0, false)
+        break
+      }
+
+      case Effect.ETHEREAL: {
+        pokemon.effects.add(Effect.ETHEREAL)
+        pokemon.addAttackSpeed(6 * activeSynergies, pokemon, 0, false)
+        pokemon.addMaxHP(12 * activeSynergies, pokemon, 0, false)
+        break
+      }
+
+      default:
+        break
+    }
   }
 
   update(dt: number) {
