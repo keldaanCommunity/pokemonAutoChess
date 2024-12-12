@@ -276,9 +276,6 @@ export class PickupStrategy extends AbilityStrategy {
     if (target.items.size > 0 && pokemon.items.size < 3) {
       const item = target.items.values().next().value
       target.removeItem(item)
-      if (item === Item.MAX_REVIVE && target.status.resurection) {
-        target.status.resurection = false
-      }
       pokemon.addItem(item)
     } else {
       if (target.player) {
@@ -4144,9 +4141,6 @@ export class ThiefStrategy extends AbilityStrategy {
         pokemon.addItem(item)
       }
       target.removeItem(item)
-      if (item === Item.MAX_REVIVE && target.status.resurection) {
-        target.status.resurection = false
-      }
     })
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
@@ -4166,9 +4160,6 @@ export class KnockOffStrategy extends AbilityStrategy {
 
     target.items.forEach((item) => {
       target.removeItem(item)
-      if (item === Item.MAX_REVIVE && target.status.resurection) {
-        target.status.resurection = false
-      }
     })
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
