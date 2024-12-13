@@ -33,6 +33,7 @@
 # Changes to Synergies
 
 - Nerf Dark crit damage +60/80/100% → +30/40/50%
+- Buff Electric 9: Triple attacks deal ~~10~~ 20 special damage to adjacent enemies
 
 # Changes to Items
 

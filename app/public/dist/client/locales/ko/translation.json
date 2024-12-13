@@ -1806,7 +1806,7 @@
     "PRIMORDIAL_SEA": "초당 +12 PP, 대단한 낚싯대 획득",
     "RISING_VOLTAGE": "4번째 공격마다 3연속공격",
     "OVERDRIVE": "3번째 공격마다 3연속공격",
-    "POWER_SURGE": "3연속 공격시 대상에 인접한 적들에게 10 SPECIAL",
+    "POWER_SURGE": "3연속 공격시 대상에 인접한 적들에게 20 SPECIAL",
     "GUTS": "4대미지 감소",
     "STURDY": "7대미지 감소",
     "DEFIANT": "10대미지 감소",

@@ -1822,7 +1822,7 @@
     "PRIMORDIAL_SEA": "+12 PP per second. Get a Super Rod.",
     "RISING_VOLTAGE": "Every fourth attack is a triple attack",
     "OVERDRIVE": "Every third attack is a triple attack",
-    "POWER_SURGE": "Triple attacks also deal 10 SPECIAL to enemies adjacent to the target",
+    "POWER_SURGE": "Triple attacks also deal 20 SPECIAL to enemies adjacent to the target",
     "GUTS": "Blocks 4 damage",
     "STURDY": "Blocks 7 damage",
     "DEFIANT": "Blocks 10 damage",
