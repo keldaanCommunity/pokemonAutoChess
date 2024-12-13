@@ -201,5 +201,27 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
     new OnItemRemovedEffect((pokemon) => {
       pokemon.status.resurection = false
     })
+  ],
+
+  [Item.UPGRADE]: [
+    new OnItemRemovedEffect((pokemon) => {
+      pokemon.addAttackSpeed(
+        -5 * pokemon.count.upgradeCount,
+        pokemon,
+        0,
+        false
+      )
+      pokemon.count.upgradeCount = 0
+    })
+  ],
+
+  [Item.DEFENSIVE_RIBBON]: [
+    new OnItemRemovedEffect((pokemon) => {
+      const stacks = Math.floor(pokemon.count.defensiveRibbonCount / 2)
+      pokemon.addAttack(-stacks, pokemon, 0, false)
+      pokemon.addDefense(-stacks, pokemon, 0, false)
+      pokemon.addAttackSpeed(-5* stacks, pokemon, 0, false)
+      pokemon.count.defensiveRibbonCount = 0
+    })
   ]
 }
