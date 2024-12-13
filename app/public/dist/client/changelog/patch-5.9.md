@@ -29,6 +29,12 @@
 
 # Changes to Items
 
+- Max Revive is now consumed on use (stats are lost after resurrection)
+- Item effects are now updated when items are gained or lost in battle
+    - Stats and statuses are now lost when items are removed
+    - Synergy effects and types are now added and removed accordingly
+        - Stat increases from the synergy of an item are gained when added, but not lost when removed
+
 # Gameplay
 
 - ELO, XP and titles after game are now distributed immediately after the player is eliminated and leaves the game, instead of waiting for the game to end
