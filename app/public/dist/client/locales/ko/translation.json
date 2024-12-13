@@ -2117,7 +2117,7 @@
     "POKERUS_VIAL": "POKERUS 소지자를 감염, ATK 1 과 매 2초 마다 AP 10% 획득, 그리고 동료에게 전송 ",
     "ROTOM_PHONE": "GHOST 시너지 부여, 소지자 주변에 로토무 드론 소환 ",
     "SILK_SCARF": "NORMAL 시너지 부여, 받는 모든 SHIELD 30% 증가",
-    "TINY_MUSHROOM": "BUG 시너지 부여, 최대 HP 50% 감소",
+    "TINY_MUSHROOM": "BUG 시너지 부여, 최대 HP 50% 감소합니다",
     "METEORITE": "테오키스와 상호작용 하는 것으로 보이는 유성. 희미한 광채를 지속적으로 발산하며 약간의 온기가 느껴진다. ",
     "BERRY_JUICE": "HP이 50% 이하 시 섭취, 최대 HP로 회복 ",
     "TRASH": "ARTIFICIAL 아이템의 남은 부분. 아무 효과 없음",

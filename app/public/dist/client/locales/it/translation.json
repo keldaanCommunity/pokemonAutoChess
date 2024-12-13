@@ -2115,7 +2115,7 @@
     "POKERUS_VIAL": "Infetta il possessore con il POKERUS, guadagnando ogni 2 secondi 1 ATK e 10 AP e può trasmetterlo agli alleati",
     "ROTOM_PHONE": "Il possessore riceve la sinergia GHOST. Evoca un Rotom Drone affianco al possessore",
     "SILK_SCARF": "Dai la sinergia NORMAL e aumenta lo SHIELD da tutte le fonti del 30%.",
-    "TINY_MUSHROOM": "Dai la sinergia BUG ma riduci i HP massimi del 50%.",
+    "TINY_MUSHROOM": "Dai la sinergia BUG ma riduci i HP massimi del 50% quando clonato.",
     "METEORITE": "Un meteorite che sembra interagisca con Deoxys. Continua a rilasciare un luce fioca ed è tiepido al tocco.",
     "BERRY_JUICE": "Viene consumata una volta al di sotto del 50% di HP, recupera tutti i HP",
     "TRASH": "I rimasugli di un oggetto artificiale. Non fa nulla.",

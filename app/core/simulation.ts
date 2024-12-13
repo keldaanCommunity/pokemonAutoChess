@@ -478,13 +478,14 @@ export default class Simulation extends Schema implements ISimulation {
         numberToSpawn = Math.min(numberToSpawn, bugTeam.length)
 
         for (let i = 0; i < numberToSpawn; i++) {
+          const pokemonCloned = bugTeam[i]
           const bug = PokemonFactory.createPokemonFromName(
-            bugTeam[i].name,
+            pokemonCloned.name,
             player
           )
 
           const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
-            bugTeam[i],
+            pokemonCloned,
             teamIndex
           )
           const cloneEntity = this.addPokemon(
@@ -494,7 +495,21 @@ export default class Simulation extends Schema implements ISimulation {
             teamIndex,
             true
           )
-          if (bugTeam[i].items.has(Item.TINY_MUSHROOM)) {
+          if (pokemonCloned.items.has(Item.TINY_MUSHROOM)) {
+            const team =
+              teamIndex === Team.BLUE_TEAM ? this.blueTeam : this.redTeam
+            const clonedEntity = values(team).find(
+              (p) => p.refToBoardPokemon.id === pokemonCloned.id
+            )
+            if (clonedEntity) {
+              clonedEntity.addMaxHP(
+                -0.5 * pokemonCloned.hp,
+                clonedEntity,
+                0,
+                false
+              )
+            }
+
             cloneEntity.addMaxHP(-0.5 * bug.hp, cloneEntity, 0, false)
           }
         }
