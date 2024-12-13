@@ -220,7 +220,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       const stacks = Math.floor(pokemon.count.defensiveRibbonCount / 2)
       pokemon.addAttack(-stacks, pokemon, 0, false)
       pokemon.addDefense(-stacks, pokemon, 0, false)
-      pokemon.addAttackSpeed(-5* stacks, pokemon, 0, false)
+      pokemon.addAttackSpeed(-5 * stacks, pokemon, 0, false)
       pokemon.count.defensiveRibbonCount = 0
     })
   ]
