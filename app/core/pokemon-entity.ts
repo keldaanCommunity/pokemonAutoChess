@@ -36,7 +36,7 @@ import {
   Stat,
   Team
 } from "../types/enum/Game"
-import { Berries, Item } from "../types/enum/Item"
+import { Berries, Item, SynergyGivenByItem } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
@@ -591,10 +591,44 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   addItem(item: Item, permanent = false) {
+    const type = SynergyGivenByItem[item]
+    if (type && this.types.has(type)) {
+      return // prevent adding synergy items for existing types
+    }
+
     this.items.add(item)
     this.simulation.applyItemEffect(this, item)
     if (permanent && !this.isGhostOpponent) {
       this.refToBoardPokemon.items.add(item)
+    }
+
+    const addSynergyFromItem = () => {
+      this.types.add(type)
+      if (type === Synergy.GHOST) {
+        this.addDodgeChance(0.2, this, 0, false)
+      }
+
+      const teamEffects = this.team === Team.BLUE_TEAM ?
+        this.simulation.blueEffects :
+        this.simulation.redEffects
+      const teamPlayer = this.team === Team.BLUE_TEAM ?
+        this.simulation.bluePlayer :
+        this.simulation.redPlayer
+      const effect =
+        SynergyEffects[type].find((e) => teamEffects.has(e))
+
+      if (effect && !this.effects.has(effect)) {
+        this.simulation.applyEffect(
+          this,
+          this.types,
+          effect,
+          teamPlayer?.synergies.countActiveSynergies() || 0
+        )
+      }
+    }
+
+    if(type){
+      addSynergyFromItem()
     }
   }
 
@@ -611,6 +645,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       Object.entries(ItemStats[item]).forEach(([stat, value]) =>
         this.applyStat(stat as Stat, -value)
       )
+    }
+
+    const type = SynergyGivenByItem[item]
+    if (type) {
+      this.types.delete(type)
+      SynergyEffects[type].forEach((effect) => {
+        this.effects.delete(effect)
+      })
     }
 
     ItemEffects[item]
