@@ -1184,7 +1184,7 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.addAttack(attackBoost * nbItems, pokemon, 0, false)
           pokemon.addAbilityPower(apBoost * nbItems, pokemon, 0, false)
           pokemon.addShield(shieldBoost * nbItems, pokemon, 0, false)
-          pokemon.effects.add(Effect.GOOGLE_SPECS)
+          pokemon.effects.add(effect)
         }
         break
 
@@ -1320,6 +1320,7 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case Effect.FLUID: {
+        pokemon.effects.add(Effect.FLUID)
         pokemon.addAttackSpeed(1 * activeSynergies, pokemon, 0, false)
         pokemon.addMaxHP(4 * activeSynergies, pokemon, 0, false)
         break
