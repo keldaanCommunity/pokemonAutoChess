@@ -24,6 +24,10 @@
 - Change Blue Flare (Reshiram): damage delay 1 second → 250ms, damage: ~~50 + 20 * fire synergy step~~ → 50 + 10 * fire synergy level
 - Change Glaciate (Kyurem): damage delay 1 second → 250ms, damage: ~~50 + 20 * ice synergy step~~ → 50 + 10 * ice synergy level
 - Change Fusion Bolt (Zekrom): damage delay 1 second → 250ms, damage: ~~50 + 40 * electric synergy step~~ → 50 + 10 * electric synergy level
+- Buff Morgrem: Attack 11 → 12
+- Buff Grimmsnarl: Attack 20 → 24
+- Cosmic Power renamed to Cosmic Power (Moon)
+- New ability for Solrock: Cosmic Power (Sun)
 
 # Changes to Synergies
 

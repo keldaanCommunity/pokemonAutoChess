@@ -13394,7 +13394,7 @@ export class Morgrem extends Pokemon {
   stars = 2
   evolution = Pkm.GRIMMSNARL
   hp = 110
-  atk = 11
+  atk = 12
   def = 2
   speDef = 3
   maxPP = 70
@@ -13409,7 +13409,7 @@ export class Grimmsnarl extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 3
   hp = 200
-  atk = 20
+  atk = 24
   def = 3
   speDef = 4
   maxPP = 70
