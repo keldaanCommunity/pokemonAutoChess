@@ -809,7 +809,7 @@ export default class Simulation extends Schema implements ISimulation {
       case Effect.HONE_CLAWS:
         if (types.has(Synergy.DARK)) {
           pokemon.addCritChance(30, pokemon, 0, false)
-          pokemon.addCritPower(0.6, pokemon, 0, false)
+          pokemon.addCritPower(30, pokemon, 0, false)
           pokemon.effects.add(Effect.HONE_CLAWS)
         }
         break
@@ -817,7 +817,7 @@ export default class Simulation extends Schema implements ISimulation {
       case Effect.ASSURANCE:
         if (types.has(Synergy.DARK)) {
           pokemon.addCritChance(40, pokemon, 0, false)
-          pokemon.addCritPower(0.8, pokemon, 0, false)
+          pokemon.addCritPower(40, pokemon, 0, false)
           pokemon.effects.add(Effect.ASSURANCE)
         }
         break
@@ -825,7 +825,7 @@ export default class Simulation extends Schema implements ISimulation {
       case Effect.BEAT_UP:
         if (types.has(Synergy.DARK)) {
           pokemon.addCritChance(50, pokemon, 0, false)
-          pokemon.addCritPower(1.0, pokemon, 0, false)
+          pokemon.addCritPower(50, pokemon, 0, false)
           pokemon.effects.add(Effect.BEAT_UP)
         }
         break
@@ -1242,12 +1242,7 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.addAbilityPower(20, pokemon, 0, false)
           pokemon.status.triggerRuneProtect(8000)
           pokemon.addDefense(0.5 * pokemon.baseDef, pokemon, 0, false)
-          pokemon.addSpecialDefense(
-            0.5 * pokemon.baseSpeDef,
-            pokemon,
-            0,
-            false
-          )
+          pokemon.addSpecialDefense(0.5 * pokemon.baseSpeDef, pokemon, 0, false)
         }
         break
 
@@ -1259,12 +1254,7 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.addAbilityPower(20, pokemon, 0, false)
           pokemon.status.triggerRuneProtect(8000)
           pokemon.addDefense(0.5 * pokemon.baseDef, pokemon, 0, false)
-          pokemon.addSpecialDefense(
-            0.5 * pokemon.baseSpeDef,
-            pokemon,
-            0,
-            false
-          )
+          pokemon.addSpecialDefense(0.5 * pokemon.baseSpeDef, pokemon, 0, false)
           pokemon.addShield(100, pokemon, 0, false)
           pokemon.status.resurection = true
         }
@@ -1273,48 +1263,28 @@ export default class Simulation extends Schema implements ISimulation {
       case Effect.QUICK_FEET:
         if (types.has(Synergy.WILD)) {
           pokemon.effects.add(Effect.QUICK_FEET)
-          pokemon.addAttack(
-            Math.ceil(0.3 * pokemon.baseAtk),
-            pokemon,
-            0,
-            false
-          )
+          pokemon.addAttack(Math.ceil(0.3 * pokemon.baseAtk), pokemon, 0, false)
         }
         break
 
       case Effect.RUN_AWAY:
         if (types.has(Synergy.WILD)) {
           pokemon.effects.add(Effect.RUN_AWAY)
-          pokemon.addAttack(
-            Math.ceil(0.5 * pokemon.baseAtk),
-            pokemon,
-            0,
-            false
-          )
+          pokemon.addAttack(Math.ceil(0.5 * pokemon.baseAtk), pokemon, 0, false)
         }
         break
 
       case Effect.HUSTLE:
         if (types.has(Synergy.WILD)) {
           pokemon.effects.add(Effect.HUSTLE)
-          pokemon.addAttack(
-            Math.ceil(0.8 * pokemon.baseAtk),
-            pokemon,
-            0,
-            false
-          )
+          pokemon.addAttack(Math.ceil(0.8 * pokemon.baseAtk), pokemon, 0, false)
         }
         break
 
       case Effect.BERSERK:
         if (types.has(Synergy.WILD)) {
           pokemon.effects.add(Effect.BERSERK)
-          pokemon.addAttack(
-            Math.ceil(1.0 * pokemon.baseAtk),
-            pokemon,
-            0,
-            false
-          )
+          pokemon.addAttack(Math.ceil(1.0 * pokemon.baseAtk), pokemon, 0, false)
           pokemon.status.enrageDelay -= 5000
         }
         break

@@ -27,6 +27,8 @@
 
 # Changes to Synergies
 
+- Nerf Dark crit damage +60/80/100% → +30/40/50%
+
 # Changes to Items
 
 # Gameplay
