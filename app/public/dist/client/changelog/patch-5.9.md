@@ -24,6 +24,7 @@
 - Change Blue Flare (Reshiram): damage delay 1 second → 250ms, damage: ~~50 + 20 * fire synergy step~~ → 50 + 10 * fire synergy level
 - Change Glaciate (Kyurem): damage delay 1 second → 250ms, damage: ~~50 + 20 * ice synergy step~~ → 50 + 10 * ice synergy level
 - Change Fusion Bolt (Zekrom): damage delay 1 second → 250ms, damage: ~~50 + 40 * electric synergy step~~ → 50 + 10 * electric synergy level
+- New ability for Spheal line: Ice Ball: Buff the Special Defense by 5 then deal special damage equal to 10/20/30 + 100/200/300% of Special Defense
 
 # Changes to Synergies
 

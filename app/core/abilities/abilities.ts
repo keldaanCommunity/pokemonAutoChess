@@ -5360,6 +5360,30 @@ export class RolloutStrategy extends AbilityStrategy {
   }
 }
 
+export class IceBallStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const baseDamage = [10, 20, 30][pokemon.stars - 1] ?? 30
+    const multiplier = [1, 2, 3][pokemon.stars - 1] ?? 3
+    const speDefBoost = 5
+
+    pokemon.addSpecialDefense(speDefBoost, pokemon, 0, false)
+    target.handleSpecialDamage(
+      baseDamage + multiplier * pokemon.speDef,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+  }
+}
+
 export class ThrashStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -11116,6 +11140,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ACROBATICS]: new AcrobaticsStrategy(),
   [Ability.ABSORB]: new AbsorbStrategy(),
   [Ability.ROLLOUT]: new RolloutStrategy(),
+  [Ability.ICE_BALL]: new IceBallStrategy(),
   [Ability.THRASH]: new ThrashStrategy(),
   [Ability.SOLAR_BEAM]: new SolarBeamStrategy(),
   [Ability.MAGMA_STORM]: new MagmaStormStrategy(),

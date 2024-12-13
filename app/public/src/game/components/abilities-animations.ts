@@ -996,6 +996,21 @@ export function displayAbility(
       break
     }
 
+    case Ability.ICE_BALL: {
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: (8 * 1000) / 15,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.PRESENT: {
       const specialProjectile = addAbilitySprite(skill, coordinates).setScale(2)
       scene.tweens.add({

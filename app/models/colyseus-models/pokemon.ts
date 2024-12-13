@@ -3264,7 +3264,7 @@ export class Spheal extends Pokemon {
   speDef = 2
   maxPP = 90
   range = 1
-  skill = Ability.ICE_FANG
+  skill = Ability.ICE_BALL
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -3279,7 +3279,7 @@ export class Sealeo extends Pokemon {
   speDef = 2
   maxPP = 90
   range = 1
-  skill = Ability.ICE_FANG
+  skill = Ability.ICE_BALL
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -3293,7 +3293,7 @@ export class Walrein extends Pokemon {
   speDef = 3
   maxPP = 90
   range = 1
-  skill = Ability.ICE_FANG
+  skill = Ability.ICE_BALL
   attackSprite = AttackSprite.ICE_MELEE
 }
 
