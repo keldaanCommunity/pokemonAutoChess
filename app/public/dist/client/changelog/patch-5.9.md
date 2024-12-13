@@ -27,7 +27,8 @@
 - Buff Morgrem: Attack 11 → 12
 - Buff Grimmsnarl: Attack 20 → 24
 - Cosmic Power renamed to Cosmic Power (Moon)
-- New ability for Solrock: Cosmic Power (Sun)
+- New ability for Solrock: Cosmic Power (Sun): buff base attack of allies by 25%
+- New ability for Cosmoem: Teleport (same as Cosmog)
 
 # Changes to Synergies
 
