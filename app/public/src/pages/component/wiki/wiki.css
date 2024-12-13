@@ -232,6 +232,7 @@
 }
 
 #wiki-weather .my-box header .weather-icon {
+  aspect-ratio: 1 / 1;
   height: 40px;
 }
 
