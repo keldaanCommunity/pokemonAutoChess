@@ -38,6 +38,7 @@
   height: 75vh;
   padding: 0.5em 0 40px 0;
   overflow-y: auto;
+  scrollbar-gutter: stable;
 }
 
 #wiki-page .pokemon-name {
@@ -232,6 +233,7 @@
 }
 
 #wiki-weather .my-box header .weather-icon {
+  aspect-ratio: 1 / 1;
   height: 40px;
 }
 

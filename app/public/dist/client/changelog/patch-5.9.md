@@ -24,16 +24,27 @@
 - Change Blue Flare (Reshiram): damage delay 1 second → 250ms, damage: ~~50 + 20 * fire synergy step~~ → 50 + 10 * fire synergy level
 - Change Glaciate (Kyurem): damage delay 1 second → 250ms, damage: ~~50 + 20 * ice synergy step~~ → 50 + 10 * ice synergy level
 - Change Fusion Bolt (Zekrom): damage delay 1 second → 250ms, damage: ~~50 + 40 * electric synergy step~~ → 50 + 10 * electric synergy level
+- New ability for Spheal line: Ice Ball: Buff the Special Defense by 5 then deal special damage equal to 10/20/30 + 100/200/300% of Special Defense
+- Buff Morgrem: Attack 11 → 12
+- Buff Grimmsnarl: Attack 20 → 24
+- Cosmic Power renamed to Cosmic Power (Moon)
+- New ability for Solrock: Cosmic Power (Sun): buff base attack of allies by 25%
+- New ability for Cosmoem: Teleport (same as Cosmog)
 
 # Changes to Synergies
 
+- Nerf Dark crit damage +60/80/100% → +30/40/50%
+- Buff Electric 9: Triple attacks deal ~~10~~ 20 special damage to adjacent enemies
+
 # Changes to Items
 
+- Tiny mushroom now reduces health by 50% only if the holder is cloned
+- Pokemons can now hold artificial items and Shiny Stone even if they give one of their existing synergies
 - Max Revive is now consumed on use (stats are lost after resurrection)
 - Item effects are now updated when items are gained or lost in battle
     - Stats and statuses are now lost when items are removed
     - Synergy effects and types are now added and removed accordingly
-        - Stat increases from the synergy of an item are gained when added, but not lost when removed
+    - Stat increases from the synergy of an item are gained when added, but not lost when removed
 
 # Gameplay
 

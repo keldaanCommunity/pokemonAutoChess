@@ -3264,7 +3264,7 @@ export class Spheal extends Pokemon {
   speDef = 2
   maxPP = 90
   range = 1
-  skill = Ability.ICE_FANG
+  skill = Ability.ICE_BALL
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -3279,7 +3279,7 @@ export class Sealeo extends Pokemon {
   speDef = 2
   maxPP = 90
   range = 1
-  skill = Ability.ICE_FANG
+  skill = Ability.ICE_BALL
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -3293,7 +3293,7 @@ export class Walrein extends Pokemon {
   speDef = 3
   maxPP = 90
   range = 1
-  skill = Ability.ICE_FANG
+  skill = Ability.ICE_BALL
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -5180,7 +5180,7 @@ export class Lunatone extends Pokemon {
   speDef = 2
   maxPP = 90
   range = 2
-  skill = Ability.COSMIC_POWER
+  skill = Ability.COSMIC_POWER_MOON
   passive = Passive.NIGHT
   attackSprite = AttackSprite.DARK_RANGE
 }
@@ -5195,7 +5195,7 @@ export class Solrock extends Pokemon {
   speDef = 2
   maxPP = 90
   range = 2
-  skill = Ability.COSMIC_POWER
+  skill = Ability.COSMIC_POWER_SUN
   passive = Passive.SUN
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
@@ -13304,7 +13304,7 @@ export class Cosmoem extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 4
-  skill = Ability.COSMIC_POWER
+  skill = Ability.TELEPORT
   passive = Passive.COSMOEM
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
@@ -13394,7 +13394,7 @@ export class Morgrem extends Pokemon {
   stars = 2
   evolution = Pkm.GRIMMSNARL
   hp = 110
-  atk = 11
+  atk = 12
   def = 2
   speDef = 3
   maxPP = 70
@@ -13409,7 +13409,7 @@ export class Grimmsnarl extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 3
   hp = 200
-  atk = 20
+  atk = 24
   def = 3
   speDef = 4
   maxPP = 70
@@ -14612,10 +14612,9 @@ export class Remoraid extends Pokemon {
   onChangePosition(x: number, y: number, player: Player) {
     for (const pokemon of player.board.values()) {
       if (
-        pokemon.name === Pkm.MANTYKE &&
-        distanceC(x, y, pokemon.positionX, pokemon.positionY) === 1
+        pokemon.name === Pkm.MANTYKE
       ) {
-        player.transformPokemon(pokemon, Pkm.MANTINE)
+        pokemon.evolutionRule.tryEvolve(pokemon, player, 0)
       }
     }
   }

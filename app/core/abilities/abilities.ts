@@ -2950,7 +2950,7 @@ export class CalmMindStrategy extends AbilityStrategy {
   }
 }
 
-export class CosmicPowerStrategy extends AbilityStrategy {
+export class CosmicPowerMoonStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2963,6 +2963,24 @@ export class CosmicPowerStrategy extends AbilityStrategy {
     board.forEach((x, y, ally) => {
       if (ally && ally.id !== pokemon.id && ally.team === pokemon.team) {
         ally.addAbilityPower(apGain, pokemon, 1, crit)
+      }
+    })
+  }
+}
+
+export class CosmicPowerSunStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const atkBuffMultiplier = 0.25
+    board.forEach((x, y, ally) => {
+      if (ally && ally.id !== pokemon.id && ally.team === pokemon.team) {
+        ally.addAttack(atkBuffMultiplier * ally.baseAtk, pokemon, 1, crit)
       }
     })
   }
@@ -5352,6 +5370,30 @@ export class RolloutStrategy extends AbilityStrategy {
     pokemon.addDefense(defenseBoost, pokemon, 1, crit)
     target.handleSpecialDamage(
       multiplier * pokemon.def,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+  }
+}
+
+export class IceBallStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const baseDamage = [10, 20, 30][pokemon.stars - 1] ?? 30
+    const multiplier = [1, 2, 3][pokemon.stars - 1] ?? 3
+    const speDefBoost = 5
+
+    pokemon.addSpecialDefense(speDefBoost, pokemon, 0, false)
+    target.handleSpecialDamage(
+      baseDamage + multiplier * pokemon.speDef,
       board,
       AttackType.SPECIAL,
       pokemon,
@@ -11108,7 +11150,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PECK]: new PeckStrategy(),
   [Ability.SPLASH]: new SplashStrategy(),
   [Ability.COUNTER]: new CounterStrategy(),
-  [Ability.COSMIC_POWER]: new CosmicPowerStrategy(),
+  [Ability.COSMIC_POWER_MOON]: new CosmicPowerMoonStrategy(),
+  [Ability.COSMIC_POWER_SUN]: new CosmicPowerSunStrategy(),
   [Ability.POISON_POWDER]: new PoisonPowderStrategy(),
   [Ability.SILVER_WIND]: new SilverWindStrategy(),
   [Ability.ICY_WIND]: new IcyWindStrategy(),
@@ -11116,6 +11159,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ACROBATICS]: new AcrobaticsStrategy(),
   [Ability.ABSORB]: new AbsorbStrategy(),
   [Ability.ROLLOUT]: new RolloutStrategy(),
+  [Ability.ICE_BALL]: new IceBallStrategy(),
   [Ability.THRASH]: new ThrashStrategy(),
   [Ability.SOLAR_BEAM]: new SolarBeamStrategy(),
   [Ability.MAGMA_STORM]: new MagmaStormStrategy(),
