@@ -120,7 +120,7 @@ export function displayAbility(
           ) -
             Math.PI / 2
         )
-      addAbilitySprite(Ability.COSMIC_POWER, coordinates, true)
+      addAbilitySprite("COSMIC_POWER", coordinates, true)
         .setTint(0xff5060)
         .setOrigin(0.5, 1)
         .setScale(2)
@@ -510,8 +510,18 @@ export function displayAbility(
         .setDepth(0)
       break
 
-    case Ability.COSMIC_POWER:
-      addAbilitySprite(skill, coordinates, true).setOrigin(0.5, 1).setScale(2)
+    case Ability.COSMIC_POWER_MOON:
+      addAbilitySprite("COSMIC_POWER", coordinates, true)
+        .setTint(0xccb0ff)
+        .setOrigin(0.5, 1)
+        .setScale(2)
+      break
+
+    case Ability.COSMIC_POWER_SUN:
+      addAbilitySprite("COSMIC_POWER", coordinates, true)
+        .setTint(0xffffd0)
+        .setOrigin(0.5, 1)
+        .setScale(2)
       break
 
     case Ability.FORECAST:

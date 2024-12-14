@@ -141,13 +141,6 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
     })
   ],
 
-  [Item.TINY_MUSHROOM]: [
-    new OnItemGainedEffect((pokemon) => {
-      pokemon.addMaxHP(-0.5 * pokemon.baseHP, pokemon, 0, false)
-    })
-    // intentionally no item removal effect
-  ],
-
   [Item.GOLD_BOTTLE_CAP]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.addCritChance(pokemon.player?.money ?? 0, pokemon, 0, false)
@@ -193,13 +186,35 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       )
     })
   ],
-  
+
   [Item.SACRED_ASH]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.status.resurection = true
     }),
     new OnItemRemovedEffect((pokemon) => {
       pokemon.status.resurection = false
+    })
+  ],
+
+  [Item.UPGRADE]: [
+    new OnItemRemovedEffect((pokemon) => {
+      pokemon.addAttackSpeed(
+        -5 * pokemon.count.upgradeCount,
+        pokemon,
+        0,
+        false
+      )
+      pokemon.count.upgradeCount = 0
+    })
+  ],
+
+  [Item.DEFENSIVE_RIBBON]: [
+    new OnItemRemovedEffect((pokemon) => {
+      const stacks = Math.floor(pokemon.count.defensiveRibbonCount / 2)
+      pokemon.addAttack(-stacks, pokemon, 0, false)
+      pokemon.addDefense(-stacks, pokemon, 0, false)
+      pokemon.addAttackSpeed(-5 * stacks, pokemon, 0, false)
+      pokemon.count.defensiveRibbonCount = 0
     })
   ]
 }

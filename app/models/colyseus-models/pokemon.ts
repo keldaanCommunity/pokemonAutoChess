@@ -5180,7 +5180,7 @@ export class Lunatone extends Pokemon {
   speDef = 2
   maxPP = 90
   range = 2
-  skill = Ability.COSMIC_POWER
+  skill = Ability.COSMIC_POWER_MOON
   passive = Passive.NIGHT
   attackSprite = AttackSprite.DARK_RANGE
 }
@@ -5195,7 +5195,7 @@ export class Solrock extends Pokemon {
   speDef = 2
   maxPP = 90
   range = 2
-  skill = Ability.COSMIC_POWER
+  skill = Ability.COSMIC_POWER_SUN
   passive = Passive.SUN
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
@@ -13304,7 +13304,7 @@ export class Cosmoem extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 4
-  skill = Ability.COSMIC_POWER
+  skill = Ability.TELEPORT
   passive = Passive.COSMOEM
   attackSprite = AttackSprite.PSYCHIC_RANGE
 }
@@ -13394,7 +13394,7 @@ export class Morgrem extends Pokemon {
   stars = 2
   evolution = Pkm.GRIMMSNARL
   hp = 110
-  atk = 11
+  atk = 12
   def = 2
   speDef = 3
   maxPP = 70
@@ -13409,7 +13409,7 @@ export class Grimmsnarl extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 3
   hp = 200
-  atk = 20
+  atk = 24
   def = 3
   speDef = 4
   maxPP = 70
