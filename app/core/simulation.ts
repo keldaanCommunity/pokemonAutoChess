@@ -389,7 +389,7 @@ export default class Simulation extends Schema implements ISimulation {
     if(singleType){
       const effect = SynergyEffects[singleType]
         .find((e) => allyEffects.has(e))
-      if (effect){
+      if (effect && !pokemon.effects.has(effect)){
         apply(effect)
       }
     } else {
