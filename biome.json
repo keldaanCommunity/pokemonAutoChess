@@ -1,7 +1,7 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.0/schema.json",
   "files": {
-    "ignore": ["node_modules/**/*", "app/public/dist/server/**/*"],
+    "ignore": ["node_modules/**/*", "app/public/dist/server/**/*", "app/public/dist/client/pokechess"],
     "maxSize": 10000000
   },
   "formatter": {

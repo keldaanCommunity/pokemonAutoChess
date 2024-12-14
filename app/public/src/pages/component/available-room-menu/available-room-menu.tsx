@@ -10,7 +10,7 @@ import {
 } from "../../../../../types"
 import { MAX_PLAYERS_PER_GAME } from "../../../../../types/Config"
 import { GameMode } from "../../../../../types/enum/Game"
-import { throttle } from "../../../../../utils/function"
+import { block, throttle } from "../../../../../utils/function"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import RoomItem from "./room-item"
 import { RoomSelectionMenu } from "./room-selection-menu"
@@ -42,7 +42,7 @@ export default function AvailableRoomMenu() {
     }
   }, 1000)
 
-  const requestJoiningExistingRoom = throttle(async function join(
+  const requestJoiningExistingRoom = block(async function join(
     selectedRoom: RoomAvailable<IPreparationMetadata>
   ) {
     const { whitelist, blacklist, gameStartedAt, password } =
@@ -67,9 +67,9 @@ export default function AvailableRoomMenu() {
         }
       }
 
-      joinExistingPreparationRoom(selectedRoom.roomId, client, lobby, dispatch, navigate)
+      await joinExistingPreparationRoom(selectedRoom.roomId, client, lobby, dispatch, navigate)
     }
-  }, 1000)
+  })
 
   return (
     <div className="my-container room-menu custom-bg">

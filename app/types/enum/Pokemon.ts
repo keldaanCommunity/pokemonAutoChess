@@ -231,6 +231,8 @@ export enum Pkm {
   FLABEBE = "FLABEBE",
   FLAFFY = "FLAFFY",
   FLAREON = "FLAREON",
+  FLETCHINDER = "FLETCHINDER",
+  FLETCHLING = "FLETCHLING",
   FLOATZEL = "FLOATZEL",
   FLOETTE = "FLOETTE",
   FLORGES = "FLORGES",
@@ -723,6 +725,7 @@ export enum Pkm {
   SWINUB = "SWINUB",
   SWOOBAT = "SWOOBAT",
   SYLVEON = "SYLVEON",
+  TALONFLAME = "TALONFLAME",
   TANDEMAUS = "TANDEMAUS",
   TANGELA = "TANGELA",
   TANGROWTH = "TANGROWTH",
@@ -866,7 +869,11 @@ export enum Pkm {
   ZWEILOUS = "ZWEILOUS",
   ZYGARDE_10 = "ZYGARDE_10",
   ZYGARDE_50 = "ZYGARDE_50",
-  ZYGARDE_100 = "ZYGARDE_100"
+  ZYGARDE_100 = "ZYGARDE_100",
+  VULLABY = "VULLABY",
+  MANDIBUZZ = "MANDIBUZZ",
+  INKAY = "INKAY",
+  MALAMAR = "MALAMAR"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1600,8 +1607,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.BISHARP]: "0625",
   [Pkm.RUFFLET]: "0627",
   [Pkm.BRAVIARY]: "0628",
-  //[Pkm.VULLABY]: "0629",
-  //[Pkm.MANDIBUZZ]: "0630",
+  [Pkm.VULLABY]: "0629",
+  [Pkm.MANDIBUZZ]: "0630",
   [Pkm.HEATMOR]: "0631",
   [Pkm.DURANT]: "0632",
   [Pkm.DEINO]: "0633",
@@ -1636,9 +1643,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GRENINJA]: "0658",
   //[Pkm.BUNNELBY]: "0659",
   //[Pkm.DIGGERSBY]: "0660",
-  //[Pkm.FLETCHLING]: "0661",
-  //[Pkm.FLETCHINDER]: "0662",
-  //[Pkm.TALONFLAME]: "0663",
+  [Pkm.FLETCHLING]: "0661",
+  [Pkm.FLETCHINDER]: "0662",
+  [Pkm.TALONFLAME]: "0663",
   //[Pkm.SCATTERBUG]: "0664",
   //[Pkm.SPEWPA]: "0665",
   //[Pkm.VIVILLON]: "0666",
@@ -1662,8 +1669,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.AROMATISSE]: "0683",
   //[Pkm.SWIRLIX]: "0684",
   //[Pkm.SLURPUFF]: "0685",
-  //[Pkm.INKAY]: "0686",
-  //[Pkm.MALAMAR]: "0687",
+  [Pkm.INKAY]: "0686",
+  [Pkm.MALAMAR]: "0687",
   [Pkm.BINACLE]: "0688",
   [Pkm.BARBARACLE]: "0689",
   //[Pkm.SKRELP]: "0690",
@@ -2888,7 +2895,14 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.STUFFUL]: Pkm.STUFFUL,
   [Pkm.BEWEAR]: Pkm.STUFFUL,
   [Pkm.GLIMMET]: Pkm.GLIMMET,
-  [Pkm.GLIMMORA]: Pkm.GLIMMET
+  [Pkm.GLIMMORA]: Pkm.GLIMMET,
+  [Pkm.FLETCHLING]: Pkm.FLETCHLING,
+  [Pkm.FLETCHINDER]: Pkm.FLETCHLING,
+  [Pkm.TALONFLAME]: Pkm.FLETCHLING,
+  [Pkm.VULLABY]: Pkm.VULLABY,
+  [Pkm.MANDIBUZZ]: Pkm.VULLABY,
+  [Pkm.INKAY]: Pkm.INKAY,
+  [Pkm.MALAMAR]: Pkm.INKAY
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7396,6 +7410,42 @@ export const AnimationConfig: {
   },
   [Pkm.GLIMMORA]: {
     attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.FLETCHLING]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.FLETCHINDER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Hover,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.TALONFLAME]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Hover,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.VULLABY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
+  },
+  [Pkm.MANDIBUZZ]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.INKAY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Twirl
+  },
+  [Pkm.MALAMAR]: {
+    attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
   }

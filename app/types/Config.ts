@@ -110,7 +110,8 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.AMORPHOUS]: [3, 5, 7]
 }
 
-export const RequiredStageLevelForXpElligibility = 10
+// games that finish before level 10 are not counted for XP and ELO to avoid potential abuse
+export const MinStageLevelForGameToCount = 10
 
 export const ExpPlace = [700, 400, 350, 300, 250, 200, 200, 200]
 

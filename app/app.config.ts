@@ -165,6 +165,7 @@ export default config({
     })
 
     app.get("/meta", async (req, res) => {
+      res.set("Cache-Control", "no-cache")
       res.send(
         await Meta.find({}, [
           "cluster_id",
@@ -185,10 +186,12 @@ export default config({
     })
 
     app.get("/meta/items", async (req, res) => {
+      res.set("Cache-Control", "no-cache")
       res.send(await ItemsStatistics.find())
     })
 
     app.get("/meta/pokemons", async (req, res) => {
+      res.set("Cache-Control", "no-cache")
       res.send(await PokemonsStatistics.find())
     })
 
@@ -198,10 +201,12 @@ export default config({
     })
 
     app.get("/leaderboards", async (req, res) => {
+      res.set("Cache-Control", "no-cache")
       res.send(getLeaderboard())
     })
 
     app.get("/game-history/:playerUid", async (req, res) => {
+      res.set("Cache-Control", "no-cache")
       const { playerUid } = req.params
       const { page = 1 } = req.query
       const limit = 10
