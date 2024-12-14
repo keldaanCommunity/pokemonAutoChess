@@ -141,13 +141,6 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
     })
   ],
 
-  [Item.TINY_MUSHROOM]: [
-    new OnItemGainedEffect((pokemon) => {
-      pokemon.addMaxHP(-0.5 * pokemon.baseHP, pokemon, 0, false)
-    })
-    // intentionally no item removal effect
-  ],
-
   [Item.GOLD_BOTTLE_CAP]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.addCritChance(pokemon.player?.money ?? 0, pokemon, 0, false)
@@ -193,7 +186,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       )
     })
   ],
-  
+
   [Item.SACRED_ASH]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.status.resurection = true

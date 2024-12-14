@@ -431,7 +431,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean
   ) {
     value =
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
+      (value / 100) *
+      (1 + (apBoost * caster.ap) / 100) *
+      (crit ? caster.critPower : 1)
 
     this.critPower = min(0)(roundToNDigits(this.critPower + value, 2))
   }
@@ -1014,8 +1016,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.hasSynergyEffect(Synergy.GHOST)) {
-      const dodgeChance = 0.25
-      if (chance(dodgeChance, this)) {
+      const silenceChance = 0.2
+      if (chance(silenceChance, this)) {
         target.status.triggerSilence(2000, target, this)
       }
     }
