@@ -31,7 +31,7 @@ import {
 } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
-import { Synergy } from "../types/enum/Synergy"
+import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
 import { IPokemonData } from "../types/interfaces/PokemonData"
 import { count } from "../utils/array"
@@ -370,27 +370,38 @@ export default class Simulation extends Schema implements ISimulation {
       ?.forEach((effect) => effect.apply(pokemon))
   }
 
-  applySynergyEffects(pokemon: PokemonEntity) {
-    if (pokemon.team === Team.BLUE_TEAM) {
-      this.blueEffects.forEach((effect) => {
-        this.applyEffect(
-          pokemon,
-          pokemon.types,
-          effect,
-          this.bluePlayer?.synergies.countActiveSynergies() || 0
-        )
-      })
-    } else if (pokemon.team === Team.RED_TEAM) {
-      this.redEffects.forEach((effect) => {
-        this.applyEffect(
-          pokemon,
-          pokemon.types,
-          effect,
-          this.redPlayer?.synergies.countActiveSynergies() || 0
-        )
+  applySynergyEffects(pokemon: PokemonEntity, singleType?: Synergy) {
+    const allyEffects = pokemon.team === Team.BLUE_TEAM ?
+      this.blueEffects :
+      this.redEffects
+    const player = pokemon.team === Team.BLUE_TEAM ?
+      this.bluePlayer :
+      this.redPlayer
+    const apply = (effect) => {
+      this.applyEffect(
+        pokemon,
+        pokemon.types,
+        effect,
+        player?.synergies.countActiveSynergies() || 0
+      )
+    }
+
+    if(singleType){
+      const effect = SynergyEffects[singleType]
+        .find((e) => allyEffects.has(e))
+      if (effect){
+        apply(effect)
+      }
+    } else {
+      allyEffects.forEach((effect) => {
+        apply(effect)
       })
     }
-    if (pokemon.types.has(Synergy.GHOST)) {
+
+    if (
+      (singleType === Synergy.GHOST) ||
+      (!singleType && pokemon.types.has(Synergy.GHOST))
+    ) {
       pokemon.addDodgeChance(0.2, pokemon, 0, false)
     }
   }
