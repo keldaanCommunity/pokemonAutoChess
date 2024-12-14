@@ -14612,10 +14612,9 @@ export class Remoraid extends Pokemon {
   onChangePosition(x: number, y: number, player: Player) {
     for (const pokemon of player.board.values()) {
       if (
-        pokemon.name === Pkm.MANTYKE &&
-        distanceC(x, y, pokemon.positionX, pokemon.positionY) === 1
+        pokemon.name === Pkm.MANTYKE
       ) {
-        player.transformPokemon(pokemon, Pkm.MANTINE)
+        pokemon.evolutionRule.tryEvolve(pokemon, player, 0)
       }
     }
   }
