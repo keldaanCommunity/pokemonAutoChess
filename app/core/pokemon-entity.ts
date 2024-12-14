@@ -591,44 +591,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   addItem(item: Item, permanent = false) {
-    const type = SynergyGivenByItem[item]
-    if (type && this.types.has(type)) {
-      return // prevent adding synergy items for existing types
-    }
-
     this.items.add(item)
     this.simulation.applyItemEffect(this, item)
     if (permanent && !this.isGhostOpponent) {
       this.refToBoardPokemon.items.add(item)
     }
 
-    const addSynergyFromItem = () => {
+    const type = SynergyGivenByItem[item]
+    if(type && !this.types.has(type)){
       this.types.add(type)
-      if (type === Synergy.GHOST) {
-        this.addDodgeChance(0.2, this, 0, false)
-      }
-
-      const teamEffects = this.team === Team.BLUE_TEAM ?
-        this.simulation.blueEffects :
-        this.simulation.redEffects
-      const teamPlayer = this.team === Team.BLUE_TEAM ?
-        this.simulation.bluePlayer :
-        this.simulation.redPlayer
-      const effect =
-        SynergyEffects[type].find((e) => teamEffects.has(e))
-
-      if (effect && !this.effects.has(effect)) {
-        this.simulation.applyEffect(
-          this,
-          this.types,
-          effect,
-          teamPlayer?.synergies.countActiveSynergies() || 0
-        )
-      }
-    }
-
-    if(type){
-      addSynergyFromItem()
+      this.simulation.applySynergyEffects(this, type)
     }
   }
 
