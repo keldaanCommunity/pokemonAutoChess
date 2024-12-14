@@ -50,7 +50,7 @@ import {
   OgerponMasks,
   ShinyItems,
   SynergyGivenByItem,
-  SynergyItems
+  SynergyStones
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import {
@@ -287,7 +287,7 @@ export class OnDragDropCommand extends Command<
               })
             }
             pokemon.onChangePosition(x, y, player)
-            success = true            
+            success = true
           } else if (
             pokemon.canBePlaced &&
             !(dropFromBench && dropToEmptyPlace && isBoardFull)
@@ -574,9 +574,8 @@ export class OnDragDropItemCommand extends Command<
     }
 
     if (
-      SynergyItems.includes(item) &&
-      pokemon.types.has(SynergyGivenByItem[item]) &&
-      pokemon.passive !== Passive.RECYCLE
+      SynergyStones.includes(item) &&
+      pokemon.types.has(SynergyGivenByItem[item])
     ) {
       // prevent adding a synergy stone on a pokemon that already has this synergy
       client.send(Transfer.DRAG_DROP_FAILED, message)
@@ -617,7 +616,7 @@ export class OnDragDropItemCommand extends Command<
       const itemCombined = recipe[0] as Item
 
       if (
-        itemCombined in SynergyGivenByItem &&
+        SynergyStones.includes(itemCombined) &&
         pokemon.types.has(SynergyGivenByItem[itemCombined])
       ) {
         // prevent combining into a synergy stone on a pokemon that already has this synergy
