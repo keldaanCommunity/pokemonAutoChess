@@ -29,6 +29,8 @@
 
 # Changes to Items
 
+- Pokemons can now hold artificial items and Shiny Stone even if they give one of their existing synergies
+
 # Gameplay
 
 - ELO, XP and titles after game are now distributed immediately after the player is eliminated and leaves the game, instead of waiting for the game to end
