@@ -60,6 +60,7 @@ import { logger } from "../../utils/logger"
 import { cleanProfanity } from "../../utils/profanity-filter"
 import { chance, pickRandomIn } from "../../utils/random"
 import { convertSchemaToRawObject, values } from "../../utils/schemas"
+import { wait } from "../../utils/promise"
 import CustomLobbyRoom from "../custom-lobby-room"
 
 export class OnJoinCommand extends Command<
@@ -1249,6 +1250,7 @@ export class CreateTournamentLobbiesCommand extends Command<
           tournamentId,
           bracketId
         })
+        await wait(1000)
       }
 
       //save brackets to db
