@@ -50,7 +50,7 @@ import {
   OgerponMasks,
   ShinyItems,
   SynergyGivenByItem,
-  SynergyStones
+  SynergyItems
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import {
@@ -282,14 +282,12 @@ export class OnDragDropCommand extends Command<
             this.room.swap(player, pokemon, x, y)
             if (this.state.specialGameRule === SpecialGameRule.SLAMINGO) {
               pokemon.items.forEach((item) => {
-                if (item !== Item.RARE_CANDY) {
-                  player.items.push(item)
-                  pokemon.removeItem(item)
-                }
+                player.items.push(item)
+                pokemon.removeItem(item)
               })
             }
             pokemon.onChangePosition(x, y, player)
-            success = true
+            success = true            
           } else if (
             pokemon.canBePlaced &&
             !(dropFromBench && dropToEmptyPlace && isBoardFull)
@@ -576,8 +574,9 @@ export class OnDragDropItemCommand extends Command<
     }
 
     if (
-      SynergyStones.includes(item) &&
-      pokemon.types.has(SynergyGivenByItem[item])
+      SynergyItems.includes(item) &&
+      pokemon.types.has(SynergyGivenByItem[item]) &&
+      pokemon.passive !== Passive.RECYCLE
     ) {
       // prevent adding a synergy stone on a pokemon that already has this synergy
       client.send(Transfer.DRAG_DROP_FAILED, message)
@@ -618,7 +617,7 @@ export class OnDragDropItemCommand extends Command<
       const itemCombined = recipe[0] as Item
 
       if (
-        SynergyStones.includes(itemCombined) &&
+        itemCombined in SynergyGivenByItem &&
         pokemon.types.has(SynergyGivenByItem[itemCombined])
       ) {
         // prevent combining into a synergy stone on a pokemon that already has this synergy
@@ -699,7 +698,6 @@ export class OnRefreshCommand extends Command<GameRoom, string> {
     const player = this.state.players.get(id)
     if (!player) return
     const rollCost = player.shopFreeRolls > 0 ? 0 : 1
-
     const rollCostType =
       this.state.specialGameRule === SpecialGameRule.DESPERATE_MOVES
         ? "life"

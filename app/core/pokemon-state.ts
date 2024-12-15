@@ -7,7 +7,6 @@ import {
   AttackType,
   HealType,
   PokemonActionState,
-  Stat,
   Team
 } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
@@ -484,7 +483,7 @@ export default abstract class PokemonState {
         takenDamage = 0
         residualDamage = 0
         pokemon.status.triggerProtect(2000)
-        pokemon.removeItem(Item.SHINY_CHARM)
+        pokemon.items.delete(Item.SHINY_CHARM)
       }
 
       pokemon.life = Math.max(0, pokemon.life - residualDamage)
@@ -565,7 +564,7 @@ export default abstract class PokemonState {
         }
 
         if (pokemon.passive === Passive.PRIMEAPE) {
-          pokemon.applyStat(Stat.ATK, 1, true)
+          pokemon.refToBoardPokemon.atk += 1
         }
       }
 
@@ -693,11 +692,17 @@ export default abstract class PokemonState {
       pokemon.effects.has(Effect.SPORE)
     ) {
       if (pokemon.grassHealCooldown - dt <= 0) {
-        const heal = pokemon.effects.has(Effect.SPORE)
+        let heal = pokemon.effects.has(Effect.SPORE)
           ? 30
           : pokemon.effects.has(Effect.GROWTH)
             ? 15
             : 7
+        if (
+          pokemon.effects.has(Effect.HYDRATATION) &&
+          pokemon.simulation.weather === Weather.RAIN
+        ) {
+          heal += 5
+        }
         pokemon.handleHeal(heal, pokemon, 0, false)
         pokemon.grassHealCooldown = 2000
         pokemon.simulation.room.broadcast(Transfer.ABILITY, {
@@ -862,10 +867,7 @@ export default abstract class PokemonState {
       pokemon.effects.delete(Effect.HAIL)
     }
 
-    if (
-      pokemon.effects.has(Effect.EMBER) &&
-      !(pokemon.types.has(Synergy.FIRE) || pokemon.types.has(Synergy.FLYING))
-    ) {
+    if (pokemon.effects.has(Effect.LAVA) && !pokemon.types.has(Synergy.FIRE)) {
       pokemon.handleDamage({
         damage: 10,
         board,

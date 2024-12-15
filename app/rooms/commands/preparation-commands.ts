@@ -22,14 +22,13 @@ import PreparationRoom from "../preparation-room"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import { getRank } from "../../utils/elo"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
-import { UserRecord } from "firebase-admin/lib/auth/user-record"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
   {
-    client: Client<undefined, UserRecord>
+    client: Client
     options: any
-    auth: UserRecord
+    auth: any
   }
 > {
   async execute({ client, options, auth }) {

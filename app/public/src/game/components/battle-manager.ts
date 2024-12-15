@@ -1148,7 +1148,7 @@ export default class BattleManager {
     if (event.effect === Effect.SPIKES) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
-        coordinates[1] + 16,
+        coordinates[1]+16,
         "abilities",
         "SPIKES/001.png"
       )
@@ -1170,7 +1170,7 @@ export default class BattleManager {
       const spriteNumber = pickRandomIn([0, 1, 2]).toString()
       const sprite = this.scene.add.sprite(
         coordinates[0],
-        coordinates[1] + 16,
+        coordinates[1]+16,
         "abilities",
         "TOXIC_SPIKES/00" + spriteNumber + ".png"
       )
@@ -1230,15 +1230,15 @@ export default class BattleManager {
       })
     }
 
-    if (event.effect === Effect.EMBER) {
+    if (event.effect === Effect.LAVA) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
-        coordinates[1] + 12,
+        coordinates[1]+12,
         "abilities",
-        `${Effect.EMBER}/000.png`
+        `${Effect.LAVA}/000.png`
       )
       sprite.setDepth(1).setScale(2).setAlpha(0)
-      sprite.anims.play(Effect.EMBER)
+      sprite.anims.play(Effect.LAVA)
       this.boardEventSprites[index] = sprite
       this.group.add(sprite)
 

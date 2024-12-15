@@ -79,7 +79,7 @@ export class AttackCommand extends SimulationCommand {
                 const enemy = this.board.getValue(cell.x, cell.y)
                 if (enemy && this.pokemon.team !== enemy.team) {
                   enemy.handleSpecialDamage(
-                    20,
+                    10,
                     this.board,
                     AttackType.SPECIAL,
                     this.pokemon,
