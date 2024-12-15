@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { ItemStats } from "../../../../types/Config"
 import { Stat } from "../../../../types/enum/Game"
-import { Item, ItemRecipe } from "../../../../types/enum/Item"
+import { HMs, Item, ItemRecipe, TMs } from "../../../../types/enum/Item"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
 import "./item-detail.css"
 
@@ -37,9 +37,15 @@ export function ItemDetailTooltip({
     return output
   }
 
+  const getImageFilename = () => {
+    if ((TMs as unknown as Item[]).includes(item)) { return "TM" }
+    if ((HMs as unknown as Item[]).includes(item)) { return "HM" }
+    return item
+  }
+
   return (
     <div className="game-item-detail">
-      <img className="game-item-detail-icon" src={`assets/item/${item}.png`} />
+      <img className="game-item-detail-icon" src={`assets/item/${getImageFilename()}.png`} />
       <p className="game-item-detail-name">
         {ItemRecipe[item] && (<div className="game-item-recipe">
           {ItemRecipe[item]?.map((item, i) => <><img className="game-item-detail-icon" src={`assets/item/${item}.png`} />{i === 0 && ' + '}</>)}

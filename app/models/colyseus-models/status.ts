@@ -75,6 +75,7 @@ export default class Status extends Schema implements IStatus {
   runeProtectCooldown = 0
   charmCooldown = 0
   flinchCooldown = 0
+  enrageCooldown = 0
   spikeArmorCooldown = 0
   magicBounceCooldown = 0
   synchroCooldown = 3000
@@ -111,6 +112,7 @@ export default class Status extends Schema implements IStatus {
     this.curseCooldown = 0
     this.curse = false
     this.lockedCooldown = 0
+    this.enrageCooldown = 0
   }
 
   hasNegativeStatus() {
@@ -327,14 +329,29 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
+  triggerRage(duration: number, pokemon: PokemonEntity) {
+    this.enraged = true
+    this.protect = false
+    duration = this.applyAquaticReduction(duration, pokemon)
+    this.enrageCooldown = Math.round(duration)
+    pokemon.addAttackSpeed(100, pokemon, 0, false)
+  }
+
   updateRage(dt: number, pokemon: PokemonEntity) {
-    if (this.enrageDelay - dt <= 0 && !pokemon.simulation.finished) {
+    if (
+      !this.enraged &&
+      this.enrageDelay - dt <= 0 &&
+      !pokemon.simulation.finished
+    ) {
       this.enraged = true
       this.protect = false
       pokemon.addAttackSpeed(100, pokemon, 0, false)
-    } else {
-      this.enrageDelay -= dt
+    } else if (this.enrageCooldown - dt <= 0 && this.enrageDelay - dt > 0) {
+      this.enraged = false
+      pokemon.addAttackSpeed(-100, pokemon, 0, false)
     }
+
+    this.enrageDelay -= dt
   }
 
   triggerClearWing(timer: number) {

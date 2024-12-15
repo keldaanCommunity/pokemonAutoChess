@@ -8,9 +8,11 @@ import { BattleResult, Rarity, Team } from "../../types/enum/Game"
 import {
   ArtificialItems,
   Berries,
+  HMs,
   Item,
   ItemComponents,
   SynergyGivenByItem,
+  TMs,
   WeatherRocks
 } from "../../types/enum/Item"
 import {
@@ -104,6 +106,7 @@ export default class Player extends Schema implements IPlayer {
   opponents: Map<string, number> = new Map<string, number>()
   titles: Set<Title> = new Set<Title>()
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
+  tms: (Item | null)[] = pickRandomTMs()
   weatherRocks: Item[] = []
   randomComponentsGiven: Item[] = []
   randomEggsGiven: Pkm[] = []
@@ -306,8 +309,10 @@ export default class Player extends Schema implements IPlayer {
 
     if (lightChanged) this.onLightChange()
 
+    /* NOTE: should be optimized to update only when the corresponding synergy has changed */
     this.updateFishingRods()
     this.updateWeatherRocks()
+    this.updateTms()
     this.updateWildChance()
     this.effects.update(this.synergies, this.board)
   }
@@ -402,6 +407,29 @@ export default class Player extends Schema implements IPlayer {
     }
   }
 
+  updateTms() {
+    const nbTMs = SynergyTriggers[Synergy.HUMAN].filter(
+      (n) => (this.synergies.get(Synergy.HUMAN) ?? 0) >= n
+    ).length
+
+    let tmInInventory
+    do {
+      tmInInventory = this.items.findIndex((item, index) =>
+        (TMs as unknown as Item[]).includes(item)
+      )
+      if (tmInInventory != -1) {
+        this.items.splice(tmInInventory, 1)
+      }
+    } while (tmInInventory != -1)
+
+    if (nbTMs > 0) {
+      const tmsCollected = this.tms
+        .slice(0, nbTMs)
+        .filter((tm) => tm != null) as unknown as Item[]
+      this.items.push(...tmsCollected)
+    }
+  }
+
   updateFishingRods() {
     const fishingLevel = SynergyTriggers[Synergy.WATER].filter(
       (n) => (this.synergies.get(Synergy.WATER) ?? 0) >= n
@@ -472,4 +500,11 @@ export default class Player extends Schema implements IPlayer {
       }
     })
   }
+}
+
+function pickRandomTMs() {
+  const firstTM = pickRandomIn(TMs as unknown as Item[])
+  const secondTM = pickRandomIn(TMs.filter((tm) => tm !== firstTM))
+  const hm = pickRandomIn(HMs as unknown as Item[])
+  return [firstTM, secondTM, hm]
 }

@@ -1104,9 +1104,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.hasSynergyEffect(Synergy.HUMAN)) {
       let lifesteal = 0
       if (this.effects.has(Effect.MEDITATE)) {
-        lifesteal = 0.15
+        lifesteal = 0.25
       } else if (this.effects.has(Effect.FOCUS_ENERGY)) {
-        lifesteal = 0.3
+        lifesteal = 0.4
       } else if (this.effects.has(Effect.CALM_MIND)) {
         lifesteal = 0.6
       }

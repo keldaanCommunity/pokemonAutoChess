@@ -1,4 +1,5 @@
 import { reverseMap } from "../../utils/map"
+import { Ability } from "./Ability"
 import { Synergy } from "./Synergy"
 import { Weather } from "./Weather"
 
@@ -125,7 +126,17 @@ export enum Item {
   WELLSPRING_MASK = "WELLSPRING_MASK",
   CORNERSTONE_MASK = "CORNERSTONE_MASK",
   HEARTHFLAME_MASK = "HEARTHFLAME_MASK",
-  ZYGARDE_CUBE = "ZYGARDE_CUBE"
+  ZYGARDE_CUBE = "ZYGARDE_CUBE",
+  TM_RAGE = "TM_RAGE",
+  TM_BRICK_BREAK = "TM_BRICK_BREAK",
+  TM_TAUNT = "TM_TAUNT",
+  TM_BULK_UP = "TM_BULK_UP",
+  TM_BIDE = "TM_BIDE",
+  TM_PSYCH_UP = "TM_PSYCH_UP",
+  TM_RETALIATE = "TM_RETALIATE",
+  TM_SUBMISSION = "TM_SUBMISSION",
+  TM_PAYDAY = "TM_PAYDAY",
+  HM_STRENGTH = "HM_STRENGTH"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -144,7 +155,7 @@ export const SpecialItems: Item[] = [
   Item.OLD_ROD,
   Item.GOOD_ROD,
   Item.SUPER_ROD,
-  Item.TRASH,
+  Item.TRASH
 ]
 
 export const FishingRods = [
@@ -392,3 +403,33 @@ export const OgerponMasks: Item[] = [
   Item.CORNERSTONE_MASK,
   Item.HEARTHFLAME_MASK
 ]
+
+export const TMs = [
+  Item.TM_RAGE,
+  Item.TM_BRICK_BREAK,
+  Item.TM_TAUNT,
+  Item.TM_BULK_UP,
+  Item.TM_BIDE,
+  Item.TM_PSYCH_UP,
+  Item.TM_RETALIATE,
+  Item.TM_SUBMISSION,
+  Item.TM_PAYDAY
+] as const
+
+export const HMs = [Item.HM_STRENGTH] as const
+
+export const AbilityPerTM: Record<
+  (typeof TMs)[number] | (typeof HMs)[number],
+  Ability
+> = {
+  [Item.TM_RAGE]: Ability.RAGE,
+  [Item.TM_BRICK_BREAK]: Ability.BRICK_BREAK,
+  [Item.TM_TAUNT]: Ability.TAUNT,
+  [Item.TM_BULK_UP]: Ability.BULK_UP,
+  [Item.TM_BIDE]: Ability.BIDE,
+  [Item.TM_PSYCH_UP]: Ability.PSYCH_UP,
+  [Item.TM_RETALIATE]: Ability.RETALIATE,
+  [Item.TM_SUBMISSION]: Ability.SUBMISSION,
+  [Item.TM_PAYDAY]: Ability.PAYDAY,
+  [Item.HM_STRENGTH]: Ability.STRENGTH
+}

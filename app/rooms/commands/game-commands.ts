@@ -40,9 +40,11 @@ import {
 import { Effect } from "../../types/enum/Effect"
 import { BattleResult, GamePhaseState, Team } from "../../types/enum/Game"
 import {
+  AbilityPerTM,
   ArtificialItems,
   Berries,
   FishingRods,
+  HMs,
   Item,
   ItemComponents,
   ItemRecipe,
@@ -50,7 +52,8 @@ import {
   OgerponMasks,
   ShinyItems,
   SynergyGivenByItem,
-  SynergyStones
+  SynergyStones,
+  TMs
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import {
@@ -554,6 +557,21 @@ export class OnDragDropItemCommand extends Command<
       pokemon.items.add(item) // add the item just in time for the evolution
       pokemon.evolutionRule.tryEvolve(pokemon, player, this.state.stageLevel)
       pokemon.items.delete(item) // retrieve the item, black augurite is not a held item
+    }
+
+    if (TMs.includes(item) || HMs.includes(item)) {
+      if (pokemon.types.has(Synergy.HUMAN)) {
+        pokemon.skill = AbilityPerTM[item]
+        removeInArray(player.items, item)
+        const tmIndex = player.tms.findIndex((tm) => tm === item)
+        if (tmIndex !== -1) {
+          player.tms[tmIndex] = null
+        }
+        return
+      } else {
+        client.send(Transfer.DRAG_DROP_FAILED, message)
+        return
+      }
     }
 
     if (NonHoldableItems.includes(item) || !pokemon.canHoldItems) {

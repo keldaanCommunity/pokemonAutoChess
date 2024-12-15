@@ -10276,12 +10276,14 @@ export class BideStrategy extends AbilityStrategy {
           targetX: target.positionX,
           targetY: target.positionY
         })
+        const multiplier = [0.5, 1, 2][pokemon.stars - 1] ?? 2
+        const damage = (startingHealth - pokemon.life) * multiplier
         board
           .getAdjacentCells(target.positionX, target.positionY, true)
           .forEach((cell) => {
             if (cell.value && pokemon.team != cell.value.team) {
               cell.value.handleSpecialDamage(
-                (startingHealth - pokemon.life) * 2,
+                damage,
                 board,
                 AttackType.SPECIAL,
                 pokemon,
@@ -10988,6 +10990,106 @@ export class TopsyTurvyStrategy extends AbilityStrategy {
   }
 }
 
+export class RageStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const rageDuration =
+      3000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+    pokemon.status.triggerRage(rageDuration, pokemon)
+
+    //gain 1 attack for each 10% of max HP missing
+    const missingHp = pokemon.hp - pokemon.life
+    const atkBoost = Math.floor(missingHp / (pokemon.hp / 10))
+    pokemon.addAttack(atkBoost, pokemon, 0, false)
+  }
+}
+
+export class BrickBreakStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    // Deal 100% of Attack as true damage, and cause Armor Reduction for 4 seconds
+    const damage = pokemon.atk
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
+    target.status.triggerArmorReduction(4000, target)
+  }
+}
+
+export class TauntStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    // Gain 30% (AP scaling=0.5) of max HP as shield, and force adjacent enemies to choose you as target
+    const shield = 0.3 * pokemon.hp
+    pokemon.addShield(shield, pokemon, 0.5, crit)
+    const adjacentEnemies = board
+      .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
+      .filter((cell) => cell.value && cell.value.team !== pokemon.team)
+      .map((cell) => cell.value as PokemonEntity)
+    adjacentEnemies.forEach((enemy) => {
+      enemy.targetX = pokemon.positionX
+      enemy.targetY = pokemon.positionY
+    })
+  }
+}
+
+export class BulkUpStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    // Increase base Attack and base Defense by 40%
+    const atkBoost = Math.round(0.4 * pokemon.baseAtk)
+    const defBoost = Math.round(0.4 * pokemon.baseDef)
+    pokemon.addAttack(atkBoost, pokemon, 1, crit)
+    pokemon.addDefense(defBoost, pokemon, 1, crit)
+  }
+}
+
+export class SubmissionStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 3 * pokemon.atk
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
+    if (!pokemon.items.has(Item.PROTECTIVE_PADS)) {
+      const selfDamage = pokemon.atk
+      pokemon.handleSpecialDamage(
+        selfDamage,
+        board,
+        AttackType.PHYSICAL,
+        pokemon,
+        crit
+      )
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -11388,5 +11490,10 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.METAL_CLAW]: new MetalClawStrategy(),
   [Ability.FIRESTARTER]: new FirestarterStrategy(),
   [Ability.BONE_ARMOR]: new BoneArmorStrategy(),
-  [Ability.TOPSY_TURVY]: new TopsyTurvyStrategy()
+  [Ability.TOPSY_TURVY]: new TopsyTurvyStrategy(),
+  [Ability.RAGE]: new RageStrategy(),
+  [Ability.BRICK_BREAK]: new BrickBreakStrategy(),
+  [Ability.TAUNT]: new TauntStrategy(),
+  [Ability.BULK_UP]: new BulkUpStrategy(),
+  [Ability.SUBMISSION]: new SubmissionStrategy()
 }

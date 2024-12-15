@@ -641,6 +641,10 @@ export default class BoardManager {
             false
           )
           break
+
+        case "skill":
+          pokemonUI.skill = value as IPokemon["skill"]
+          break
       }
     }
   }
