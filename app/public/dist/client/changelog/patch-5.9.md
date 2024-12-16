@@ -43,6 +43,7 @@
 
 # Changes to Items
 
+- Removed Amulet coin base stats
 - Tiny mushroom now reduces health by 50% only if the holder is cloned
 - Pokemons can now hold artificial items and Shiny Stone even if they give one of their existing synergies
  
