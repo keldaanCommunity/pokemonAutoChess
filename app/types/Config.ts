@@ -397,12 +397,12 @@ export const AdditionalPicksStages = [5, 8, 11]
 export const PortalCarouselStages = [10, 20]
 
 export const EloRankThreshold: { [key in EloRank]: number } = {
-  [EloRank.LEVEL_BALL]: 850,
-  [EloRank.NET_BALL]: 900,
-  [EloRank.SAFARI_BALL]: 950,
-  [EloRank.LOVE_BALL]: 1000,
-  [EloRank.PREMIER_BALL]: 1050,
-  [EloRank.QUICK_BALL]: 1100,
+  [EloRank.LEVEL_BALL]: 0,
+  [EloRank.NET_BALL]: 1025,
+  [EloRank.SAFARI_BALL]: 1050,
+  [EloRank.LOVE_BALL]: 1075,
+  [EloRank.PREMIER_BALL]: 1100,
+  [EloRank.QUICK_BALL]: 1125,
   [EloRank.POKE_BALL]: 1150,
   [EloRank.SUPER_BALL]: 1200,
   [EloRank.ULTRA_BALL]: 1300,
