@@ -3259,17 +3259,17 @@
     "BOT_MANAGER": "机器人管理员"
   },
   "elorank": {
-    "LEVEL_BALL": "Level Ball",
-    "NET_BALL": "Net Ball",
-    "SAFARI_BALL": "Safari Ball",
-    "LOVE_BALL": "Love Ball",
-    "PREMIER_BALL": "Premier Ball",
-    "QUICK_BALL": "Quick Ball",
-    "POKE_BALL": "Poké Ball",
-    "SUPER_BALL": "Super Ball",
-    "ULTRA_BALL": "Ultra Ball",
-    "MASTER_BALL": "Master Ball",
-    "BEAST_BALL": "Beast Ball"
+    "LEVEL_BALL": "等级球",
+    "NET_BALL": "捕网球",
+    "SAFARI_BALL": "狩猎球",
+    "LOVE_BALL": "甜蜜球",
+    "PREMIER_BALL": "纪念球",
+    "QUICK_BALL": "先机球",
+    "POKE_BALL": "精灵球",
+    "SUPER_BALL": "超级球",
+    "ULTRA_BALL": "高级球",
+    "MASTER_BALL": "大师球",
+    "BEAST_BALL": "究极球"
   },
   "game_full": "本房间已满员",
   "game_already_started": "游戏已经开始",
