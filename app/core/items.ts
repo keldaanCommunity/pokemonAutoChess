@@ -10,6 +10,10 @@ import { pickRandomIn } from "../utils/random"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { PokemonEntity } from "./pokemon-entity"
 import { min } from "../utils/number"
+import { DEFAULT_ATK_SPEED, DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_POWER } from "../types/Config"
+import { Passive } from "../types/enum/Passive"
+import { Pkm } from "../types/enum/Pokemon"
+import PokemonFactory from "../models/pokemon-factory"
 
 export function getWonderboxItems(existingItems: SetSchema<Item>): Item[] {
   const wonderboxItems: Item[] = []
@@ -215,6 +219,92 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addDefense(-stacks, pokemon, 0, false)
       pokemon.addAttackSpeed(-5 * stacks, pokemon, 0, false)
       pokemon.count.defensiveRibbonCount = 0
+    })
+  ],
+
+  [Item.COMFEY]: [
+    new OnItemGainedEffect((pokemon) => {
+      const simulation = pokemon.simulation
+      const comfey = simulation.board.find(
+        (x, y, e) => e.passive === Passive.COMFEY && e.team === pokemon.team
+      )
+      if(!comfey){
+        pokemon.items.delete(Item.COMFEY)
+        return // can't steal comfey
+      }
+      pokemon.addAbilityPower(comfey.ap, comfey, 0, false)
+      pokemon.addAttack(comfey.atk, comfey, 0, false)
+      pokemon.addAttackSpeed(
+        comfey.atkSpeed - DEFAULT_ATK_SPEED,
+        comfey,
+        0,
+        false
+      )
+      pokemon.addShield(comfey.shield, comfey, 0, false)
+      pokemon.addMaxHP(comfey.hp, comfey, 0, false)
+      pokemon.addDefense(comfey.def, comfey, 0, false)
+      pokemon.addSpecialDefense(
+        comfey.speDef,
+        comfey,
+        0,
+        false
+      )
+      pokemon.addCritChance(
+        comfey.critChance - DEFAULT_CRIT_CHANCE,
+        comfey,
+        0,
+        false
+      )
+      pokemon.addCritPower(
+        comfey.critPower - DEFAULT_CRIT_POWER,
+        comfey,
+        0,
+        false
+      )
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      const board = pokemon.simulation.board
+      const nearestAvailableCoordinate =
+        pokemon.state.getNearestAvailablePlaceCoordinates(pokemon, board, 2)
+
+      if (!nearestAvailableCoordinate) return
+
+      const comfey = pokemon.simulation.addPokemon(
+        PokemonFactory.createPokemonFromName(Pkm.COMFEY, pokemon.player),
+        nearestAvailableCoordinate.x,
+        nearestAvailableCoordinate.y,
+        pokemon.team
+      )
+
+      pokemon.addAbilityPower(-comfey.ap, comfey, 0, false)
+      pokemon.addAttack(-comfey.atk, comfey, 0, false)
+      pokemon.addAttackSpeed(
+        -(comfey.atkSpeed - DEFAULT_ATK_SPEED),
+        comfey,
+        0,
+        false
+      )
+      pokemon.addShield(-comfey.shield, comfey, 0, false)
+      pokemon.addMaxHP(-comfey.hp, comfey, 0, false)
+      pokemon.addDefense(-comfey.def, comfey, 0, false)
+      pokemon.addSpecialDefense(
+        -comfey.speDef,
+        comfey,
+        0,
+        false
+      )
+      pokemon.addCritChance(
+        -(comfey.critChance - DEFAULT_CRIT_CHANCE),
+        comfey,
+        0,
+        false
+      )
+      pokemon.addCritPower(
+        -(comfey.critPower - DEFAULT_CRIT_POWER),
+        comfey,
+        0,
+        false
+      )
     })
   ]
 }
