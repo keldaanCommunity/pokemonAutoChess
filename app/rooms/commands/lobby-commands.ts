@@ -983,7 +983,8 @@ export class JoinOrOpenRoomCommand extends Command<
 
       case GameMode.RANKED: {
         let userRank = getRank(user.elo)
-        if (userRank === EloRank.BEAST_BALL) userRank = EloRank.MASTER_BALL
+        if (userRank === EloRank.BEAST_BALL || userRank === EloRank.MASTER_BALL)
+          userRank = EloRank.ULTRA_BALL
         const existingRanked = this.room.rooms?.find(
           (room) =>
             room.name === "preparation" &&

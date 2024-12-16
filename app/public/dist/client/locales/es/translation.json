@@ -3019,11 +3019,17 @@
     "BOT_MANAGER": "Administrador de Bots"
   },
   "elorank": {
-    "BEGINNER": "Principiante",
-    "POKEBALL": "Poké Ball",
-    "GREATBALL": "Super Ball",
-    "ULTRABALL": "Ultra Ball",
-    "MASTERBALL": "Master Ball"
+    "LEVEL_BALL": "Level Ball",
+    "NET_BALL": "Net Ball",
+    "SAFARI_BALL": "Safari Ball",
+    "LOVE_BALL": "Love Ball",
+    "PREMIER_BALL": "Premier Ball",
+    "QUICK_BALL": "Quick Ball",
+    "POKE_BALL": "Poké Ball",
+    "SUPER_BALL": "Super Ball",
+    "ULTRA_BALL": "Ultra Ball",
+    "MASTER_BALL": "Master Ball",
+    "BEAST_BALL": "Beast Ball"
   },
   "game_full": "El grupo esta completo",
   "game_already_started": "El juego ya empezó",
