@@ -9497,7 +9497,7 @@ export class FlashStrategy extends AbilityStrategy {
 
     const duration = [1500, 3000, 5000][pokemon.stars - 1] ?? 5000
     board
-      .getCellsInRadius(target.positionX, target.positionY, 2)
+      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 2)
       .forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
           cell.value.status.triggerBlinded(duration, cell.value)

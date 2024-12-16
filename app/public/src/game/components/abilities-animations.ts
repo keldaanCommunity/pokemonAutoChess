@@ -2999,6 +2999,7 @@ export function displayAbility(
     case Ability.BRICK_BREAK:
     case Ability.TAUNT:
     case Ability.BULK_UP:
+    case Ability.FLASH:
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
@@ -3007,7 +3008,6 @@ export function displayAbility(
       break
 
     case Ability.SUBMISSION:
-    case Ability.FLASH:
     case Ability.STRENGTH:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break

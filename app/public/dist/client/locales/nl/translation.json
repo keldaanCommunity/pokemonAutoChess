@@ -963,7 +963,7 @@
     "HEAL_BLOCK": "Breng [20,40,80,SP] SPECIAL en pas de WOUND status toe op alle aangrenzende vijandelijke Pokémon gedurende 5 seconden",
     "ROAR_OF_TIME": "Geef RESURECTION en [20,SP]% ATK_SPEED aan je sterkste bondgenoot (de meeste items > de meeste sterren > meest zeldzaam)",
     "ROCK_TOMB": "Breng [30,60,120,SP] SPECIAL toe aan het doelwit en verlaag hun ATK_SPEED met [10,20,40]%",
-    "ROCK_SMASH": "Breng [20,40,80,SP] SPECIAL toe aan het doelwit en pas de ARMOR_BREAK status toe voor [3,6,9] seconden",
+    "ROCK_SMASH": "Breng [20,40,80,SP] SPECIAL toe aan het doelwit en pas de ARMOR_REDUCTION status toe voor [3,6,9] seconden",
     "HEAD_SMASH": "De gebruiker's HP gaat [10,20,40,SP] omlaag en deelt [40,80,150,SP] SPECIAL uit aan het doelwit. Het doelwit wordt vernietigd als het doelwit de SLEEP of FREEZE status heeft",
     "CRABHAMMER": "Breng [40,80,120,SP] SPECIAL toe aan het doelwit met een hoge kans op een critical hit. Vernietig het doelwit als hun HP lager is dan 30%",
     "DIAMOND_STORM": "Breng [200,SP]% van de gebruiker's DEF als SPECIAL toe aan alle aangrenzende vijandelijke Pokémon",

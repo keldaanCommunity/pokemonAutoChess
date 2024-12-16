@@ -1314,7 +1314,7 @@
     "HEAL_BLOCK": "Füge allen umstehenden Feinden [10,20,40,SP] SPECIAL und 5 Sekunden lang WOUND zu",
     "ROAR_OF_TIME": "Gib deinem stärksten Verbündeten RESURECTION und [20,SP]% ATK_SPEED (die meisten Gegenstände > die meisten Sterne > die seltensten)",
     "ROCK_TOMB": "Attacke, die [30,60,120,SP] SPECIAL am Ziel verursacht und die ATK_SPEED des Ziels um [10,20,40] % verringert",
-    "ROCK_SMASH": "Attacke, die dem Ziel [3,6,9] Sekunden lang [20,40,80,SP] SPECIAL und ARMOR_BREAK zufügt",
+    "ROCK_SMASH": "Attacke, die dem Ziel [3,6,9] Sekunden lang [20,40,80,SP] SPECIAL und ARMOR_REDUCTION zufügt",
     "HEAD_SMASH": "Das Pokémon verletzt sich selbst für [10,20,40,SP] PHYSICAL und verursacht [40,80,150,SP] SPECIAL. Ausführen, wenn das Ziel SLEEP oder FREEZE ist",
     "ROCK_HEAD": "Teile [120,SP]% von ATK + DEF als SPECIAL aus.",
     "CRABHAMMER": "Angebote [40,80,120,SP] SPECIAL. Hohe Chance auf kritischen Treffer. Ziel ausführen, wenn unter 30 %",
