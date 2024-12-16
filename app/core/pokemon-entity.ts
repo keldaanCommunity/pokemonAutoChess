@@ -1160,7 +1160,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       const cells = board.getAdjacentCells(this.positionX, this.positionY)
       cells.forEach((cell) => {
-        board.addBoardEffect(cell.x, cell.y, Effect.GAS, this.simulation)
+        board.addBoardEffect(cell.x, cell.y, Effect.SMOKE, this.simulation)
         if (cell.value && cell.value.team !== this.team) {
           cell.value.status.triggerParalysis(3000, cell.value, this)
         }

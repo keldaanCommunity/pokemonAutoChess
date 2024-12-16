@@ -143,6 +143,10 @@ export default class Status extends Schema implements IStatus {
       this.triggerPoison(1500, pokemon, undefined)
     }
 
+    if (pokemon.effects.has(Effect.SMOKE) && !this.blinded) {
+      this.triggerBlinded(1000, pokemon)
+    }
+
     if (pokemon.effects.has(Effect.STICKY_WEB) && !this.paralysis) {
       this.triggerParalysis(2000, pokemon, null)
     }

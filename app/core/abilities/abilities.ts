@@ -3320,7 +3320,7 @@ export class SmokeScreenStrategy extends AbilityStrategy {
       )
 
       smokeCells.forEach(([x, y]) => {
-        board.addBoardEffect(x, y, Effect.GAS, pokemon.simulation)
+        board.addBoardEffect(x, y, Effect.SMOKE, pokemon.simulation)
       })
     }
   }
@@ -6084,7 +6084,7 @@ export class SmogStrategy extends AbilityStrategy {
     const damage = pokemon.stars === 1 ? 10 : pokemon.stars === 2 ? 20 : 40
 
     cells.forEach((cell) => {
-      board.addBoardEffect(cell.x, cell.y, Effect.GAS, pokemon.simulation)
+      board.addBoardEffect(cell.x, cell.y, Effect.SMOKE, pokemon.simulation)
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
           damage,
@@ -6146,7 +6146,7 @@ export class ShelterStrategy extends AbilityStrategy {
     pokemon.addDefense(defGain, pokemon, 1, crit)
     const cells = board.getCellsInFront(pokemon, target)
     cells.forEach((cell) => {
-      board.addBoardEffect(cell.x, cell.y, Effect.GAS, pokemon.simulation)
+      board.addBoardEffect(cell.x, cell.y, Effect.SMOKE, pokemon.simulation)
     })
   }
 }
@@ -9943,7 +9943,7 @@ export class OktzookaStrategy extends AbilityStrategy {
     board.addBoardEffect(
       target.positionX,
       target.positionY,
-      Effect.GAS,
+      Effect.SMOKE,
       pokemon.simulation
     )
   }
