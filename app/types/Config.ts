@@ -639,7 +639,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.PROTECTIVE_PADS]: { [Stat.SHIELD]: 60, [Stat.ATK]: 6 },
   [Item.MAX_REVIVE]: { [Stat.SHIELD]: 15, [Stat.DEF]: 2 },
   [Item.ASSAULT_VEST]: { [Stat.SPE_DEF]: 20 },
-  [Item.AMULET_COIN]: { [Stat.SPE_DEF]: 2, [Stat.ATK]: 3 },
+  [Item.AMULET_COIN]: {},
   [Item.POKE_DOLL]: { [Stat.SPE_DEF]: 2, [Stat.DEF]: 2 },
   [Item.RED_ORB]: { [Stat.ATK]: 10 },
   [Item.FLAME_ORB]: { [Stat.ATK]: 5, [Stat.DEF]: 2 },
