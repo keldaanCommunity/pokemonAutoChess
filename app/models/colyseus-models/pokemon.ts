@@ -11335,7 +11335,7 @@ export class Heliolisk extends Pokemon {
   passive = Passive.DRY_SKIN
   additional = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
-  afterSimulationStart({
+  onSpawn({
     entity,
     simulation
   }: { entity: IPokemonEntity; simulation: Simulation }) {
@@ -11554,7 +11554,7 @@ export class Barboach extends Pokemon {
   passive = Passive.AQUA_VEIL
   additional = true
   attackSprite = AttackSprite.WATER_MELEE
-  afterSimulationStart({
+  onSpawn({
     entity,
     simulation
   }: { entity: IPokemonEntity; simulation: Simulation }) {
@@ -11578,7 +11578,7 @@ export class Whiscash extends Pokemon {
   passive = Passive.AQUA_VEIL
   additional = true
   attackSprite = AttackSprite.WATER_MELEE
-  afterSimulationStart({
+  onSpawn({
     entity,
     simulation
   }: { entity: IPokemonEntity; simulation: Simulation }) {
@@ -12718,7 +12718,7 @@ export class Smeargle extends Pokemon {
   skill = Ability.SKETCH
   attackSprite = AttackSprite.NORMAL_MELEE
 
-  onSpawn({ entity }) {
+  afterSimulationStart({ entity }) {
     if (entity.player) {
       const allyOnTheLeft = entity.player.getPokemonAt(
         this.positionX - 1,
@@ -13963,7 +13963,7 @@ export class Trubbish extends Pokemon {
     })
   }
 
-  afterSimulationStart({ entity }: { entity: IPokemonEntity }) {
+  onSpawn({ entity }: { entity: IPokemonEntity }) {
     // Add non-permanent stats to Trubbish
     entity.addAbilityPower(this.statIncreases[Stat.AP], entity, 0, false)
     entity.addShield(this.statIncreases[Stat.SHIELD], entity, 0, false)
@@ -14038,7 +14038,7 @@ export class Garbodor extends Pokemon {
   }
 
   beforeSimulationStart = Trubbish.prototype.beforeSimulationStart
-  afterSimulationStart = Trubbish.prototype.afterSimulationStart
+  onSpawn = Trubbish.prototype.onSpawn
 }
 
 export class Grubbin extends Pokemon {
@@ -14804,7 +14804,7 @@ export class Skarmory extends Pokemon {
   attackSprite = AttackSprite.STEEL_MELEE
   passive = Passive.SKARMORY
 
-  onSpawn(params: {
+  afterSimulationStart(params: {
     player: IPlayer
     simulation: Simulation
     entity: IPokemonEntity
