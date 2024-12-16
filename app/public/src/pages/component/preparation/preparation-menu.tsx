@@ -5,7 +5,12 @@ import { useTranslation } from "react-i18next"
 import { IGameUser } from "../../../../../models/colyseus-models/game-user"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import { Role } from "../../../../../types"
-import { BOTS_ENABLED, EloRank, EloRankThreshold, MAX_PLAYERS_PER_GAME } from "../../../../../types/Config"
+import {
+  BOTS_ENABLED,
+  EloRank,
+  EloRankThreshold,
+  MAX_PLAYERS_PER_GAME
+} from "../../../../../types/Config"
 import { BotDifficulty, GameMode } from "../../../../../types/enum/Game"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { formatMinMaxRanks } from "../../../../../utils/elo"
@@ -42,7 +47,9 @@ export default function PreparationMenu() {
     (state) => state.preparation.password
   )
   const noElo: boolean = useAppSelector((state) => state.preparation.noElo)
-  const specialGameRule: SpecialGameRule | null = useAppSelector((state) => state.preparation.specialGameRule)
+  const specialGameRule: SpecialGameRule | null = useAppSelector(
+    (state) => state.preparation.specialGameRule
+  )
   const minRank = useAppSelector((state) => state.preparation.minRank)
   const maxRank = useAppSelector((state) => state.preparation.maxRank)
   const [showBotSelectModal, setShowBotSelectModal] = useState(false)
@@ -129,17 +136,21 @@ export default function PreparationMenu() {
   )
 
   const changeMinRank = (newMinRank: EloRank) => {
-    dispatch(changeRoomMinMaxRanks({
-      minRank: newMinRank,
-      maxRank: maxRank
-    }))
+    dispatch(
+      changeRoomMinMaxRanks({
+        minRank: newMinRank,
+        maxRank: maxRank
+      })
+    )
   }
 
   const changeMaxRank = (newMaxRank: EloRank) => {
-    dispatch(changeRoomMinMaxRanks({
-      minRank: minRank,
-      maxRank: newMaxRank
-    }))
+    dispatch(
+      changeRoomMinMaxRanks({
+        minRank: minRank,
+        maxRank: newMaxRank
+      })
+    )
   }
 
   const changeSpecialRule = (rule: SpecialGameRule | "none") => {
@@ -195,7 +206,11 @@ export default function PreparationMenu() {
       ) : null}
 
       {gameMode === GameMode.CUSTOM_LOBBY && users.length === 1 && (
-        <p>{BOTS_ENABLED ? t("add_bot_or_wait_hint") : t("wait_for_players_hint")}</p>
+        <p>
+          {BOTS_ENABLED
+            ? t("add_bot_or_wait_hint")
+            : t("wait_for_players_hint")}
+        </p>
       )}
     </>
   )
@@ -224,33 +239,60 @@ export default function PreparationMenu() {
       </button>
     )
 
-  const minMaxRanks = gameMode === GameMode.CUSTOM_LOBBY && isOwner && !noElo && (
-    <>
-      <RankSelect label={t("minimum_rank")} value={minRank ?? EloRank.BEGINNER} onChange={changeMinRank} />
-      <RankSelect label={t("maximum_rank")} value={maxRank ?? EloRank.MASTERBALL} onChange={changeMaxRank} />
-    </>
-  )
+  const minMaxRanks = gameMode === GameMode.CUSTOM_LOBBY &&
+    isOwner &&
+    !noElo && (
+      <>
+        <RankSelect
+          label={t("minimum_rank")}
+          value={minRank ?? EloRank.LEVEL_BALL}
+          onChange={changeMinRank}
+        />
+        <RankSelect
+          label={t("maximum_rank")}
+          value={maxRank ?? EloRank.BEAST_BALL}
+          onChange={changeMaxRank}
+        />
+      </>
+    )
 
-  const scribbleRule = gameMode === GameMode.CUSTOM_LOBBY && isOwner && noElo && <>
-    <button
-      className="bubbly blue"
-      onClick={() => changeSpecialRule(specialGameRule ? "none" : pickRandomIn(Object.values(SpecialGameRule)))}
-      title={t("smeargle_scribble_hint")}
-    >
-      {specialGameRule ? t("disable_scribble") : t("enable_scribble")}
-    </button>
-    {(isModerator || isAdmin) && <label>
-      {t("smeargle_scribble")}
-      <select onChange={e => changeSpecialRule(e.target.value as SpecialGameRule)} value={specialGameRule ?? "none"}>
-        <option value="none">{t("no_rule")}</option>
-        {Object.values(SpecialGameRule).map((rule) => (
-          <option key={rule} value={rule}>
-            {t("scribble." + rule)}
-          </option>
-        ))}
-      </select>
-    </label>}
-  </>
+  const scribbleRule = gameMode === GameMode.CUSTOM_LOBBY &&
+    isOwner &&
+    noElo && (
+      <>
+        <button
+          className="bubbly blue"
+          onClick={() =>
+            changeSpecialRule(
+              specialGameRule
+                ? "none"
+                : pickRandomIn(Object.values(SpecialGameRule))
+            )
+          }
+          title={t("smeargle_scribble_hint")}
+        >
+          {specialGameRule ? t("disable_scribble") : t("enable_scribble")}
+        </button>
+        {(isModerator || isAdmin) && (
+          <label>
+            {t("smeargle_scribble")}
+            <select
+              onChange={(e) =>
+                changeSpecialRule(e.target.value as SpecialGameRule)
+              }
+              value={specialGameRule ?? "none"}
+            >
+              <option value="none">{t("no_rule")}</option>
+              {Object.values(SpecialGameRule).map((rule) => (
+                <option key={rule} value={rule}>
+                  {t("scribble." + rule)}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
+      </>
+    )
 
   const roomNameInput = gameMode === GameMode.CUSTOM_LOBBY &&
     (isModerator || isAdmin) &&
@@ -276,52 +318,58 @@ export default function PreparationMenu() {
       </div>
     )
 
-  const botControls = gameMode === GameMode.CUSTOM_LOBBY && (isOwner || isAdmin) && (
-    <div className="my-input-group">
-      <button
-        className="bubbly blue"
-        onClick={() => {
-          if (botDifficulty === BotDifficulty.CUSTOM) {
-            setShowBotSelectModal(true)
-          } else {
-            dispatch(addBot(botDifficulty))
-          }
-        }}
-      >
-        {t("add_bot")}
-      </button>
+  const botControls = gameMode === GameMode.CUSTOM_LOBBY &&
+    (isOwner || isAdmin) && (
+      <div className="my-input-group">
+        <button
+          className="bubbly blue"
+          onClick={() => {
+            if (botDifficulty === BotDifficulty.CUSTOM) {
+              setShowBotSelectModal(true)
+            } else {
+              dispatch(addBot(botDifficulty))
+            }
+          }}
+        >
+          {t("add_bot")}
+        </button>
 
-      <select
-        defaultValue={botDifficulty}
-        onChange={(e) => {
-          setBotDifficulty(parseInt(e.target.value))
-        }}
-      >
-        <option value={BotDifficulty.EASY}>{t("easy_bot")}</option>
-        <option value={BotDifficulty.MEDIUM}>{t("normal_bot")}</option>
-        <option value={BotDifficulty.HARD}>{t("hard_bot")}</option>
-        <option value={BotDifficulty.EXTREME}>{t("extreme_bot")}</option>
-        <option value={BotDifficulty.CUSTOM}>{t("custom_bot")}</option>
-      </select>
-    </div>
-  )
+        <select
+          defaultValue={botDifficulty}
+          onChange={(e) => {
+            setBotDifficulty(parseInt(e.target.value))
+          }}
+        >
+          <option value={BotDifficulty.EASY}>{t("easy_bot")}</option>
+          <option value={BotDifficulty.MEDIUM}>{t("normal_bot")}</option>
+          <option value={BotDifficulty.HARD}>{t("hard_bot")}</option>
+          <option value={BotDifficulty.EXTREME}>{t("extreme_bot")}</option>
+          <option value={BotDifficulty.CUSTOM}>{t("custom_bot")}</option>
+        </select>
+      </div>
+    )
 
   const roomInfo = gameMode === GameMode.CUSTOM_LOBBY && (
     <p className="room-info">
-      {password && <>{t("room_password")}: <b>{password}</b></>}
+      {password && (
+        <>
+          {t("room_password")}: <b>{password}</b>
+        </>
+      )}
     </p>
   )
 
-  const readyButton = (gameMode === GameMode.CUSTOM_LOBBY || !isReady) && users.length > 0 && (
-    <button
-      className={cc("bubbly", "ready-button", isReady ? "green" : "orange")}
-      onClick={() => {
-        dispatch(toggleReady(!isReady))
-      }}
-    >
-      {t("ready")} {isReady ? "✔" : "?"}
-    </button>
-  )
+  const readyButton = (gameMode === GameMode.CUSTOM_LOBBY || !isReady) &&
+    users.length > 0 && (
+      <button
+        className={cc("bubbly", "ready-button", isReady ? "green" : "orange")}
+        onClick={() => {
+          dispatch(toggleReady(!isReady))
+        }}
+      >
+        {t("ready")} {isReady ? "✔" : "?"}
+      </button>
+    )
 
   const startGameButton = (isOwner || isAdmin) && (
     <button
@@ -340,7 +388,8 @@ export default function PreparationMenu() {
     <div className="preparation-menu my-container is-centered custom-bg">
       <header>
         <h1>
-          {formatMinMaxRanks(minRank, maxRank)} {name}: {users.length}/{nbExpectedPlayers}
+          {formatMinMaxRanks(minRank, maxRank)} {name}: {users.length}/
+          {nbExpectedPlayers}
         </h1>
         {headerMessage}
       </header>
@@ -364,9 +413,9 @@ export default function PreparationMenu() {
         {deleteRoomButton}
       </div>
 
-      {(BOTS_ENABLED || isAdmin) && <div className="actions">
-        {botControls}
-      </div>}
+      {(BOTS_ENABLED || isAdmin) && (
+        <div className="actions">{botControls}</div>
+      )}
 
       <div className="actions">
         {roomEloButton}
@@ -383,21 +432,36 @@ export default function PreparationMenu() {
         {startGameButton}
       </div>
 
-      {isOwner && showBotSelectModal && <BotSelectModal botsSelected={users.filter((u) => u.isBot).map(u => u.uid)} close={() => setShowBotSelectModal(false)} />}
+      {isOwner && showBotSelectModal && (
+        <BotSelectModal
+          botsSelected={users.filter((u) => u.isBot).map((u) => u.uid)}
+          close={() => setShowBotSelectModal(false)}
+        />
+      )}
     </div>
   )
 }
 
-export function RankSelect(props: { label: string; value: EloRank; onChange: (rank: EloRank) => void }) {
+export function RankSelect(props: {
+  label: string
+  value: EloRank
+  onChange: (rank: EloRank) => void
+}) {
   const { t } = useTranslation()
-  return <label>
-    {props.label}
-    <select value={props.value} onChange={e => props.onChange(e.target.value as EloRank)} style={{ marginLeft: '0.5em' }}>
-      {Object.values(EloRank).map((rank) => (
-        <option key={rank} value={rank}>
-          {t("elorank." + rank)} ({EloRankThreshold[rank]})
-        </option>
-      ))}
-    </select>
-  </label>
+  return (
+    <label>
+      {props.label}
+      <select
+        value={props.value}
+        onChange={(e) => props.onChange(e.target.value as EloRank)}
+        style={{ marginLeft: "0.5em" }}
+      >
+        {Object.values(EloRank).map((rank) => (
+          <option key={rank} value={rank}>
+            {t("elorank." + rank)} ({EloRankThreshold[rank]})
+          </option>
+        ))}
+      </select>
+    </label>
+  )
 }

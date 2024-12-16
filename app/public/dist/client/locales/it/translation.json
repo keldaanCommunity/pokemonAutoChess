@@ -3231,11 +3231,17 @@
     "BOT_MANAGER": "Manager Bot"
   },
   "elorank": {
-    "BEGINNER": "Principiante",
-    "POKEBALL": "Pokè Ball",
-    "GREATBALL": "Mega Ball",
-    "ULTRABALL": "Ultra Ball",
-    "MASTERBALL": "Master Ball"
+    "LEVEL_BALL": "Level Ball",
+    "NET_BALL": "Net Ball",
+    "SAFARI_BALL": "Safari Ball",
+    "LOVE_BALL": "Love Ball",
+    "PREMIER_BALL": "Premier Ball",
+    "QUICK_BALL": "Quick Ball",
+    "POKE_BALL": "Poké Ball",
+    "SUPER_BALL": "Super Ball",
+    "ULTRA_BALL": "Ultra Ball",
+    "MASTER_BALL": "Master Ball",
+    "BEAST_BALL": "Beast Ball"
   },
   "game_full": "Questo gruppo è pieno",
   "game_already_started": "La partita è già iniziata",
