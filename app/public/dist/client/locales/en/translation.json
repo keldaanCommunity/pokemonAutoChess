@@ -1692,7 +1692,7 @@
     "METAL_CLAW": "Deal [10,20,40,SP] TRUE to the target and raise the user's ATK by [2,4,6].",
     "FIRESTARTER": "Gain [10,20,40,SP]% ATK_SPEED and flies to the furthest ennemy, dropping embers on the cells in between. The embers inflict [20,40,80,SP] SPECIAL and remain on the ground, so any Pokémon that steps on them BURN and take 10 SPECIAL per second if not FLYING or FIRE.",
     "BONE_ARMOR": "Flies to the weakest enemy inflicting [20,40,80] SPECIAL, healing for the damage dealt. If the target is KO'd, recover its bones to make armor, gaining [2,4,6] DEF and SPE_DEF.",
-    "TOPSY_TURVY": "Deal [40,80,100,SP] SPECIAL and reverse all the targets ATK, DEF and SPE_DEF buffs"
+    "TOPSY_TURVY": "Deal [40,80,100,SP] SPECIAL to the target. All its ATK, DEF and SPE_DEF buffs become debuffs and vice versa."
   },
   "effect": {
     "INGRAIN": "Ingrain",
