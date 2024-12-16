@@ -92,9 +92,7 @@ export class HiddenPowerCStrategy extends HiddenPowerStrategy {
     board.forEach(
       (x: number, y: number, pokemon: PokemonEntity | undefined) => {
         if (pokemon && unown.team === pokemon.team) {
-          if (pokemon.items.size < 3) {
-            pokemon.addItem(Item.AMULET_COIN)
-          }
+          pokemon.addItem(Item.AMULET_COIN)
         }
       }
     )
@@ -358,9 +356,7 @@ export class HiddenPowerOStrategy extends HiddenPowerStrategy {
     super.process(pokemon, state, board, target, crit)
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team === value.team) {
-        if (value.items.size < 3) {
-          value.addItem(Item.ORAN_BERRY)
-        }
+        value.addItem(Item.ORAN_BERRY)
       }
     })
   }
@@ -576,9 +572,7 @@ export class HiddenPowerXStrategy extends HiddenPowerStrategy {
     board.forEach(
       (x: number, y: number, pokemon: PokemonEntity | undefined) => {
         if (pokemon && unown.team === pokemon.team) {
-          if (pokemon.items.size < 3) {
-            pokemon.addItem(Item.XRAY_VISION)
-          }
+          pokemon.addItem(Item.XRAY_VISION)
         }
       }
     )
