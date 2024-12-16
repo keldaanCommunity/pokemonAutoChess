@@ -9278,7 +9278,7 @@ export class HeavySlamStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
+    let damage = [15, 30, 60][pokemon.stars - 1] ?? 60
     if (pokemon.hp > target.hp) {
       damage = Math.round(
         damage * (1 + (0.5 * (pokemon.hp - target.hp)) / target.hp)
