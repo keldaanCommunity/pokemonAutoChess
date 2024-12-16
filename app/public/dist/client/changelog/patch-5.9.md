@@ -43,7 +43,18 @@
  
 # Gameplay
 
-- New rank system: 12 different ranks, each with a different icon (by @joinity).
+- New rank system: 12 different ranks, each with a different icon (by @joinity). Beast ball and Master ball players will create ranked games with Ultra ball.
+  - Level ball: 0 ELO
+  - Net ball: 1050 ELO
+  - Safari ball: 1100 ELO
+  - Love ball: 1150 ELO
+  - Premier ball: 1200 ELO
+  - Quick ball: 1250 ELO
+  - Poké ball: 1300 ELO
+  - Super ball: 1350 ELO
+  - Ultra ball: 1400 ELO
+  - Master ball: 1500 ELO
+  - Beast ball: 1700 ELO
 - ELO, XP and titles after game are now distributed immediately after the player is eliminated and leaves the game, instead of waiting for the game to end
 
 # UI
