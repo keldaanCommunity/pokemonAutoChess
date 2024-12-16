@@ -30,6 +30,10 @@
 - Cosmic Power renamed to Cosmic Power (Moon)
 - New ability for Solrock: Cosmic Power (Sun): buff base attack of allies by 25%
 - New ability for Cosmoem: Teleport (same as Cosmog)
+- Nerf Aggron: HP diff damage scaling 1 → 0.5
+- Nerf Ogerpon Teal mask: PP 80 → 100
+- Buff Ogerpon Wellspring: passive PP gain: 10 → 20. Added AP scaling for PP gain
+- Buff Ogerpon Hearthflame: passive burn duration 2 → 5 seconds
 
 # Changes to Synergies
 

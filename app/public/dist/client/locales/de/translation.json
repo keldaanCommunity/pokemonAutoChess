@@ -2177,8 +2177,8 @@
     "SKARMORY": "Zu Beginn des Kampfes verteilt Panzaeron Stacheln auf dem Feld. Die Stacheln verursachen 10 TRUE pro Sekunde und ARMOR_REDUCTION bei Pokémon, die darauf laufen, sofern sie nicht FLYING.",
     "DURANT": "Durant-Basisangriffe verursachen 1 zusätzlichen TRUE für jeden BUG Verbündeten auf deinem Brett.",
     "OGERPON_TEAL": "Ogerpon kann TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK und CORNERSTONE_MASK tragen, um sein Aussehen zu ändern\nBeim Anwenden werden [20,SP] HP bei benachbarten Verbündeten wiederhergestellt.",
-    "OGERPON_WELLSPRING": "Ogerpon kann TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK und CORNERSTONE_MASK tragen, um sein Aussehen zu ändern\nVerleiht beim Anwenden benachbarten Verbündeten 10 PP.",
-    "OGERPON_HEARTHFLAME": "Ogerpon kann TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK und CORNERSTONE_MASK tragen, um sein Aussehen zu ändern\nBeim Anwenden BURN man benachbarte Feinde für 2 Sekunden",
+    "OGERPON_WELLSPRING": "Ogerpon kann TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK und CORNERSTONE_MASK tragen, um sein Aussehen zu ändern\nVerleiht beim Anwenden benachbarten Verbündeten [20,SP] PP.",
+    "OGERPON_HEARTHFLAME": "Ogerpon kann TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK und CORNERSTONE_MASK tragen, um sein Aussehen zu ändern\nBeim Anwenden BURN man benachbarte Feinde für 5 Sekunden",
     "OGERPON_CORNERSTONE": "Ogerpon kann TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK und CORNERSTONE_MASK tragen, um sein Aussehen zu ändern\nBeim Anwenden ZUCKEN benachbarte Gegner 5 Sekunden lang zusammen"
   },
   "stat": {

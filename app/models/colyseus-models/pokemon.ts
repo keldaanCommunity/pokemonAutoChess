@@ -14611,9 +14611,7 @@ export class Remoraid extends Pokemon {
 
   onChangePosition(x: number, y: number, player: Player) {
     for (const pokemon of player.board.values()) {
-      if (
-        pokemon.name === Pkm.MANTYKE
-      ) {
+      if (pokemon.name === Pkm.MANTYKE) {
         pokemon.evolutionRule.tryEvolve(pokemon, player, 0)
       }
     }
@@ -14869,7 +14867,7 @@ export class OgerponTeal extends Pokemon {
   atk = 20
   def = 2
   speDef = 2
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
   attackSprite = AttackSprite.GRASS_MELEE
@@ -14885,7 +14883,7 @@ export class OgerponTealMask extends Pokemon {
   atk = 20
   def = 4
   speDef = 4
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
   attackSprite = AttackSprite.GRASS_MELEE

@@ -9280,7 +9280,9 @@ export class HeavySlamStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     let damage = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
     if (pokemon.hp > target.hp) {
-      damage = Math.round(damage * (1 + (pokemon.hp - target.hp) / target.hp))
+      damage = Math.round(
+        damage * (1 + (0.5 * (pokemon.hp - target.hp)) / target.hp)
+      )
     }
     pokemon.addShield(damage, pokemon, 1, crit)
     board
@@ -10155,7 +10157,7 @@ export class IvyCudgelStrategy extends AbilityStrategy {
         .getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
         .forEach((cell) => {
           if (cell.value && cell.value.team === pokemon.team) {
-            cell.value.addPP(10, pokemon, 0, crit)
+            cell.value.addPP(20, pokemon, 1, crit)
           }
         })
     } else if (pokemon.passive === Passive.OGERPON_HEARTHFLAME) {
@@ -10163,7 +10165,7 @@ export class IvyCudgelStrategy extends AbilityStrategy {
         .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
         .forEach((cell) => {
           if (cell.value && cell.value.team !== pokemon.team) {
-            cell.value.status.triggerBurn(2000, pokemon, cell.value)
+            cell.value.status.triggerBurn(5000, pokemon, cell.value)
           }
         })
     } else if (pokemon.passive === Passive.OGERPON_CORNERSTONE) {
@@ -10171,7 +10173,7 @@ export class IvyCudgelStrategy extends AbilityStrategy {
         .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
         .forEach((cell) => {
           if (cell.value && cell.value.team !== pokemon.team) {
-            cell.value.status.triggerFlinch(6000, pokemon, cell.value)
+            cell.value.status.triggerFlinch(5000, pokemon, cell.value)
           }
         })
     }
