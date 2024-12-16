@@ -396,12 +396,26 @@ export const ItemProposalStages = [3, 15]
 export const AdditionalPicksStages = [5, 8, 11]
 export const PortalCarouselStages = [10, 20]
 
+// export const EloRankThreshold: { [key in EloRank]: number } = {
+//   [EloRank.BEGINNER]: 0,
+//   [EloRank.POKEBALL]: 900,
+//   [EloRank.GREATBALL]: 1100,
+//   [EloRank.ULTRABALL]: 1250,
+//   [EloRank.MASTERBALL]: 1400
+// }
+
 export const EloRankThreshold: { [key in EloRank]: number } = {
-  [EloRank.BEGINNER]: 0,
-  [EloRank.POKEBALL]: 900,
-  [EloRank.GREATBALL]: 1100,
-  [EloRank.ULTRABALL]: 1250,
-  [EloRank.MASTERBALL]: 1400
+  [EloRank.LEVEL_BALL]: 850,
+  [EloRank.NET_BALL]: 900,
+  [EloRank.SAFARI_BALL]: 950,
+  [EloRank.LOVE_BALL]: 1000,
+  [EloRank.PREMIER_BALL]: 1050,
+  [EloRank.QUICK_BALL]: 1100,
+  [EloRank.POKE_BALL]: 1150,
+  [EloRank.SUPER_BALL]: 1200,
+  [EloRank.ULTRA_BALL]: 1300,
+  [EloRank.MASTER_BALL]: 1500,
+  [EloRank.BEAST_BALL]: 1700
 }
 
 export const WeatherThreshold: { [weather in Weather]: number } = {
