@@ -3111,13 +3111,6 @@
     "BOT": "Bot",
     "BOT_MANAGER": "Bot-Manager"
   },
-  "elorank": {
-    "BEGINNER": "Anfänger",
-    "POKEBALL": "Pokéball",
-    "GREATBALL": "Superball",
-    "ULTRABALL": "Hyperball",
-    "MASTERBALL": "Meisterball"
-  },
   "game_full": "Raum ist voll",
   "game_already_started": "Spiel hat bereits begonnen",
   "min_rank_not_reached": "Dein Rang ist nicht hoch genug, um an diesen Rangmatch teilzunehmen",
@@ -3203,5 +3196,12 @@
     "ROOM_EMPTY": "Dieser Raum wurde aufgrund von Spielermangel entfernt",
     "ROOM_DELETED": "Dieser Raum wurde gelöscht",
     "UNKNOWN_ERROR": "Ein unerwarteter Fehler ist aufgetreten: {{error}}"
+  },
+  "elorank": {
+    "BEGINNER": "Anfänger",
+    "POKEBALL": "Pokéball",
+    "GREATBALL": "Superball",
+    "ULTRABALL": "Hyperball",
+    "MASTERBALL": "Meisterball"
   }
 }
