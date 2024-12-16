@@ -12512,6 +12512,8 @@ export class Comfey extends Pokemon {
       )
       const nearestAllyWithFreeItemSlot = alliesWithFreeSlots[0]
 
+      nearestAllyWithFreeItemSlot.addItem(Item.COMFEY)
+
       // delete comfey
       team.delete(entity.id)
       simulation.board.setValue(entity.positionX, entity.positionY, undefined)
@@ -12521,39 +12523,6 @@ export class Comfey extends Pokemon {
       if (simulation.redDpsMeter.has(entity.id)) {
         simulation.redDpsMeter.delete(entity.id)
       }
-
-      nearestAllyWithFreeItemSlot.items.add(Item.COMFEY)
-
-      // apply comfey stats
-      nearestAllyWithFreeItemSlot.addAbilityPower(entity.ap, entity, 0, false)
-      nearestAllyWithFreeItemSlot.addAttack(entity.atk, entity, 0, false)
-      nearestAllyWithFreeItemSlot.addAttackSpeed(
-        entity.atkSpeed - DEFAULT_ATK_SPEED,
-        entity,
-        0,
-        false
-      )
-      nearestAllyWithFreeItemSlot.addShield(entity.shield, entity, 0, false)
-      nearestAllyWithFreeItemSlot.addMaxHP(entity.hp, entity, 0, false)
-      nearestAllyWithFreeItemSlot.addDefense(entity.def, entity, 0, false)
-      nearestAllyWithFreeItemSlot.addSpecialDefense(
-        entity.speDef,
-        entity,
-        0,
-        false
-      )
-      nearestAllyWithFreeItemSlot.addCritChance(
-        entity.critChance - DEFAULT_CRIT_CHANCE,
-        entity,
-        0,
-        false
-      )
-      nearestAllyWithFreeItemSlot.addCritPower(
-        entity.critPower - DEFAULT_CRIT_POWER,
-        entity,
-        0,
-        false
-      )
     }
   }
 }
