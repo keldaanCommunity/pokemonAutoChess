@@ -12,6 +12,10 @@
   padding: 1em 0.5em;
 }
 
+.room-selection-menu li > * {
+  user-select: none;
+}
+
 .room-selection-menu li:hover {
   background-color: var(--color-bg-accent);
   cursor: var(--cursor-hover);
