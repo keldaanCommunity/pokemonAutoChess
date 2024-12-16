@@ -1468,7 +1468,17 @@
   "held_items": "ไอเทมถือ",
   "by_average_held_items": "ตาม ค่าเฉลี่ยของไอเทมถือ",
   "elorank": {
-    "BEGINNER": "เทรนเนอร์หน้าใหม่"
+    "LEVEL_BALL": "Level Ball",
+    "NET_BALL": "Net Ball",
+    "SAFARI_BALL": "Safari Ball",
+    "LOVE_BALL": "Love Ball",
+    "PREMIER_BALL": "Premier Ball",
+    "QUICK_BALL": "Quick Ball",
+    "POKE_BALL": "Poké Ball",
+    "SUPER_BALL": "Super Ball",
+    "ULTRA_BALL": "Ultra Ball",
+    "MASTER_BALL": "Master Ball",
+    "BEAST_BALL": "Beast Ball"
   },
   "game_full": "ห้องนี้เต็มแล้ว",
   "game_already_started": "เกมนี้ได้เริ่มขึ้นแล้ว",

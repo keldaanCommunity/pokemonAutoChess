@@ -3235,11 +3235,17 @@
     "BOT_MANAGER": "봇 관리자"
   },
   "elorank": {
-    "BEGINNER": "초심자",
-    "POKEBALL": "포켓볼",
-    "GREATBALL": "수퍼볼",
-    "ULTRABALL": "하이퍼볼",
-    "MASTERBALL": "마스터볼"
+    "LEVEL_BALL": "Level Ball",
+    "NET_BALL": "Net Ball",
+    "SAFARI_BALL": "Safari Ball",
+    "LOVE_BALL": "Love Ball",
+    "PREMIER_BALL": "Premier Ball",
+    "QUICK_BALL": "Quick Ball",
+    "POKE_BALL": "Poké Ball",
+    "SUPER_BALL": "Super Ball",
+    "ULTRA_BALL": "Ultra Ball",
+    "MASTER_BALL": "Master Ball",
+    "BEAST_BALL": "Beast Ball"
   },
   "game_full": "방이 가득 찼습니다.",
   "game_already_started": "게임이 이미 시작했습니다.",
