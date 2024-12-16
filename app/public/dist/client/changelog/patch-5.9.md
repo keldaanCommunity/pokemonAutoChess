@@ -34,6 +34,7 @@
 - Nerf Ogerpon Teal mask: PP 80 → 100
 - Buff Ogerpon Wellspring: passive PP gain: 10 → 20. Added AP scaling for PP gain
 - Buff Ogerpon Hearthflame: passive burn duration 2 → 5 seconds
+- Nerf Morpeko: Aura wheel cooldown: 100ms → 200ms
 
 # Changes to Synergies
 

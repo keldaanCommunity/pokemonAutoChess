@@ -8103,7 +8103,7 @@ export class AuraWheelStrategy extends AbilityStrategy {
       true
     )
 
-    pokemon.cooldown = 100
+    pokemon.cooldown = 200
   }
 }
 
