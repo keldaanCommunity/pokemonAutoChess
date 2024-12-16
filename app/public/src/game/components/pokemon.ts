@@ -96,6 +96,7 @@ export default class PokemonSprite extends DraggableObject {
   paralysis: GameObjects.Sprite | undefined
   pokerus: GameObjects.Sprite | undefined
   locked: GameObjects.Sprite | undefined
+  blinded: GameObjects.Sprite | undefined
   armorReduction: GameObjects.Sprite | undefined
   charm: GameObjects.Sprite | undefined
   flinch: GameObjects.Sprite | undefined
@@ -761,6 +762,23 @@ export default class PokemonSprite extends DraggableObject {
     if (this.locked) {
       this.remove(this.locked, true)
       this.locked = undefined
+    }
+  }
+
+  addBlinded() {
+    if (!this.blinded) {
+      this.blinded = this.scene.add
+        .sprite(0, -30, "status", "BLINDED/000.png")
+        .setScale(2)
+      this.blinded.anims.play("BLINDED")
+      this.add(this.blinded)
+    }
+  }
+
+  removeBlinded() {
+    if (this.blinded) {
+      this.remove(this.blinded, true)
+      this.blinded = undefined
     }
   }
 

@@ -21,3 +21,7 @@ export const average = (...values: number[]): number => {
 export const fpsToDuration =
   (targetFramesPerSecond: number) => (nbFrames: number) =>
     Math.round(nbFrames * (1000 / targetFramesPerSecond))
+
+export function calcAngleDegrees(x: number, y: number) {
+  return (Math.atan2(y, x) * 180) / Math.PI
+}

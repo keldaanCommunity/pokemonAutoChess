@@ -242,6 +242,12 @@ export default class BattleManager {
         } else {
           pkm.removeLocked()
         }
+      } else if (field === "blinded") {
+        if (pokemon.status.blinded) {
+          pkm.addBlinded()
+        } else {
+          pkm.removeBlinded()
+        }
       } else if (field === "armorReduction") {
         if (pokemon.status.armorReduction) {
           pkm.addArmorReduction()

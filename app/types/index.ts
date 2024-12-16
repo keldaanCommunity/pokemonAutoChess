@@ -406,6 +406,7 @@ export interface IPokemon {
   skill: Ability
   passive: Passive
   items: SetSchema<Item>
+  tm: Ability | null
   shiny: boolean
   emotion: Emotion
   additional: boolean
@@ -558,14 +559,8 @@ export interface IPokemonEntity {
     apBoost: number,
     crit: boolean
   ): void
-  addItem(
-    item: Item,
-    permanent?: boolean
-  ): void
-  removeItem(
-    item: Item,
-    permenent?: boolean
-  ): void
+  addItem(item: Item, permanent?: boolean): void
+  removeItem(item: Item, permenent?: boolean): void
   update(
     dt: number,
     board: Board,
@@ -640,6 +635,7 @@ export interface IStatus {
   paralysis: boolean
   pokerus: boolean
   locked: boolean
+  blinded: boolean
   armorReduction: boolean
   runeProtect: boolean
   electricField: boolean

@@ -130,6 +130,7 @@ class GameContainer {
       "wound",
       "enraged",
       "locked",
+      "blinded",
       "magicBounce",
       "tree"
     ]

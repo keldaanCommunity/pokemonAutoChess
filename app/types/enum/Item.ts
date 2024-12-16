@@ -136,7 +136,13 @@ export enum Item {
   TM_RETALIATE = "TM_RETALIATE",
   TM_SUBMISSION = "TM_SUBMISSION",
   TM_PAYDAY = "TM_PAYDAY",
-  HM_STRENGTH = "HM_STRENGTH"
+  HM_CUT = "HM_CUT",
+  HM_FLY = "HM_FLY",
+  HM_SURF = "HM_SURF",
+  HM_STRENGTH = "HM_STRENGTH",
+  HM_FLASH = "HM_FLASH",
+  HM_WHIRLPOOL = "HM_WHIRLPOOL",
+  HM_WATERFALL = "HM_WATERFALL"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -414,14 +420,19 @@ export const TMs = [
   Item.TM_RETALIATE,
   Item.TM_SUBMISSION,
   Item.TM_PAYDAY
-] as const
+]
 
-export const HMs = [Item.HM_STRENGTH] as const
+export const HMs = [
+  Item.HM_CUT,
+  Item.HM_FLY,
+  Item.HM_SURF,
+  Item.HM_STRENGTH,
+  Item.HM_FLASH,
+  Item.HM_WHIRLPOOL,
+  Item.HM_WATERFALL
+]
 
-export const AbilityPerTM: Record<
-  (typeof TMs)[number] | (typeof HMs)[number],
-  Ability
-> = {
+export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.TM_RAGE]: Ability.RAGE,
   [Item.TM_BRICK_BREAK]: Ability.BRICK_BREAK,
   [Item.TM_TAUNT]: Ability.TAUNT,
@@ -431,5 +442,11 @@ export const AbilityPerTM: Record<
   [Item.TM_RETALIATE]: Ability.RETALIATE,
   [Item.TM_SUBMISSION]: Ability.SUBMISSION,
   [Item.TM_PAYDAY]: Ability.PAYDAY,
-  [Item.HM_STRENGTH]: Ability.STRENGTH
+  [Item.HM_CUT]: Ability.CUT,
+  [Item.HM_FLY]: Ability.FLY,
+  [Item.HM_SURF]: Ability.SURF,
+  [Item.HM_STRENGTH]: Ability.STRENGTH,
+  [Item.HM_FLASH]: Ability.FLASH,
+  [Item.HM_WHIRLPOOL]: Ability.WHIRLPOOL,
+  [Item.HM_WATERFALL]: Ability.WATERFALL
 }

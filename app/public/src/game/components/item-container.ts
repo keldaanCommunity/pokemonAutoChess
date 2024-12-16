@@ -52,9 +52,9 @@ export default class ItemContainer extends DraggableObject {
       )
     }
     this.add(this.circle)
-    const spriteName = (TMs as unknown as Item[]).includes(item)
+    const spriteName = TMs.includes(item)
       ? "TM"
-      : (HMs as unknown as Item[]).includes(item)
+      : HMs.includes(item)
         ? "HM"
         : item
     this.sprite = new GameObjects.Image(
@@ -77,6 +77,8 @@ export default class ItemContainer extends DraggableObject {
     if (ArtificialItems.includes(this.name)) return 3
     if (WeatherRocks.includes(this.name)) return 4
     if (SpecialItems.includes(this.name)) return 5
+    if (TMs.includes(this.name) || HMs.includes(this.name)) return 6
+    //if (Dishes.includes(this.name)) return 7
     return 0
   }
 

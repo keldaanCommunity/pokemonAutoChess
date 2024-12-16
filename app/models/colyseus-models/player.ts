@@ -414,9 +414,7 @@ export default class Player extends Schema implements IPlayer {
 
     let tmInInventory
     do {
-      tmInInventory = this.items.findIndex((item, index) =>
-        (TMs as unknown as Item[]).includes(item)
-      )
+      tmInInventory = this.items.findIndex((item, index) => TMs.includes(item))
       if (tmInInventory != -1) {
         this.items.splice(tmInInventory, 1)
       }
@@ -425,7 +423,7 @@ export default class Player extends Schema implements IPlayer {
     if (nbTMs > 0) {
       const tmsCollected = this.tms
         .slice(0, nbTMs)
-        .filter((tm) => tm != null) as unknown as Item[]
+        .filter<Item>((tm): tm is Item => tm != null)
       this.items.push(...tmsCollected)
     }
   }
@@ -503,8 +501,8 @@ export default class Player extends Schema implements IPlayer {
 }
 
 function pickRandomTMs() {
-  const firstTM = pickRandomIn(TMs as unknown as Item[])
+  const firstTM = pickRandomIn(TMs)
   const secondTM = pickRandomIn(TMs.filter((tm) => tm !== firstTM))
-  const hm = pickRandomIn(HMs as unknown as Item[])
+  const hm = pickRandomIn(HMs)
   return [firstTM, secondTM, hm]
 }

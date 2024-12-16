@@ -163,6 +163,7 @@ export class DebugScene extends Phaser.Scene {
       this.pokemon.removeParalysis()
       this.pokemon.removePokerus()
       this.pokemon.removeLocked()
+      this.pokemon.removeBlinded()
       this.pokemon.removeArmorReduction()
       this.pokemon.removeCharm()
       this.pokemon.removeRuneProtect()
@@ -234,6 +235,9 @@ export class DebugScene extends Phaser.Scene {
       }
       if (status == Status.LOCKED) {
         this.pokemon.addLocked()
+      }
+      if (status == Status.BLINDED) {
+        this.pokemon.addBlinded()
       }
       if (status == Status.SPIKE_ARMOR) {
         this.pokemon.addSpikeArmor()

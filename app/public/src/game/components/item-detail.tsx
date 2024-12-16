@@ -38,20 +38,20 @@ export function ItemDetailTooltip({
   }
 
   const getImageFilename = () => {
-    if ((TMs as unknown as Item[]).includes(item)) { return "TM" }
-    if ((HMs as unknown as Item[]).includes(item)) { return "HM" }
+    if (TMs.includes(item)) { return "TM" }
+    if (HMs.includes(item)) { return "HM" }
     return item
   }
 
   return (
     <div className="game-item-detail">
       <img className="game-item-detail-icon" src={`assets/item/${getImageFilename()}.png`} />
-      <p className="game-item-detail-name">
+      <div className="game-item-detail-name">
         {ItemRecipe[item] && (<div className="game-item-recipe">
           {ItemRecipe[item]?.map((item, i) => <><img className="game-item-detail-icon" src={`assets/item/${item}.png`} />{i === 0 && ' + '}</>)}
         </div>)}
         {t(`item.${item}`)}
-      </p>
+      </div>
       <div className="game-item-detail-stats">
         {Object.entries(ItemStats[item] ?? {}).map(([stat, value]) => (
           <div key={stat}>

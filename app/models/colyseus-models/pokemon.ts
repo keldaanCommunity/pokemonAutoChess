@@ -97,6 +97,7 @@ export class Pokemon extends Schema implements IPokemon {
   regional = false
   canHoldItems = true
   stages?: number
+  tm: Ability | null = null
 
   constructor(shiny = false, emotion = Emotion.NORMAL) {
     super()
@@ -5942,7 +5943,7 @@ export class RotomDrone extends Pokemon {
   speDef = 4
   maxPP = 50
   range = 3
-  skill = Ability.CAMERA_FLASH
+  skill = Ability.FLASH
   attackSprite = AttackSprite.GHOST_RANGE
 }
 

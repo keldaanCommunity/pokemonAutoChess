@@ -27,6 +27,7 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") paralysis = false
   @type("boolean") pokerus = false
   @type("boolean") locked = false
+  @type("boolean") blinded = false
   @type("boolean") armorReduction = false
   @type("boolean") runeProtect = false
   @type("boolean") charm = false
@@ -88,6 +89,7 @@ export default class Status extends Schema implements IStatus {
   curseCooldown = 0
   pokerusCooldown = 2000
   lockedCooldown = 0
+  blindCooldown = 0
   enrageDelay = 35000
   darkHarvest = false
   darkHarvestCooldown = 0
@@ -113,6 +115,7 @@ export default class Status extends Schema implements IStatus {
     this.curse = false
     this.lockedCooldown = 0
     this.enrageCooldown = 0
+    this.blindCooldown = 0
   }
 
   hasNegativeStatus() {
@@ -130,7 +133,8 @@ export default class Status extends Schema implements IStatus {
       this.flinch ||
       this.armorReduction ||
       this.curse ||
-      this.locked
+      this.locked ||
+      this.blinded
     )
   }
 
@@ -197,6 +201,10 @@ export default class Status extends Schema implements IStatus {
 
     if (this.locked) {
       this.updateLocked(dt, pokemon)
+    }
+
+    if (this.blinded) {
+      this.updateBlinded(dt)
     }
 
     if (this.pokerus) {
@@ -1144,6 +1152,27 @@ export default class Status extends Schema implements IStatus {
         pokemon.baseRange + (pokemon.items.has(Item.WIDE_LENS) ? 2 : 0)
     } else {
       this.lockedCooldown -= dt
+    }
+  }
+
+  triggerBlinded(duration: number, pkm: PokemonEntity) {
+    if (!this.blinded && !this.runeProtect) {
+      if (pkm.status.enraged) {
+        duration = duration / 2
+      }
+
+      duration = this.applyAquaticReduction(duration, pkm)
+
+      this.blinded = true
+      this.blindCooldown = Math.round(duration)
+    }
+  }
+
+  updateBlinded(dt: number) {
+    if (this.blindCooldown - dt <= 0) {
+      this.blinded = false
+    } else {
+      this.blindCooldown -= dt
     }
   }
 

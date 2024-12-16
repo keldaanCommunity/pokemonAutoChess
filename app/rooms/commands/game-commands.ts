@@ -561,7 +561,9 @@ export class OnDragDropItemCommand extends Command<
 
     if (TMs.includes(item) || HMs.includes(item)) {
       if (pokemon.types.has(Synergy.HUMAN)) {
+        pokemon.tm = AbilityPerTM[item]
         pokemon.skill = AbilityPerTM[item]
+        pokemon.maxPP = 100
         removeInArray(player.items, item)
         const tmIndex = player.tms.findIndex((tm) => tm === item)
         if (tmIndex !== -1) {

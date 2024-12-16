@@ -1,3 +1,4 @@
+import { xml } from "d3"
 import { Geom } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { AttackSprite } from "../../../../types"
@@ -632,6 +633,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
+    case Ability.RAGE:
+      addAbilitySprite(Ability.TORMENT, coordinates, true).setScale(2)
+      break
+
     case Ability.STOMP:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(3)
       break
@@ -802,6 +807,7 @@ export function displayAbility(
       break
 
     case Ability.FISHIOUS_REND:
+    case Ability.CUT:
       addAbilitySprite(skill, coordinates, true)
         .setScale(2)
         .setRotation(
@@ -2680,10 +2686,6 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
-    case Ability.CAMERA_FLASH:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
-      break
-
     case Ability.CRUSH_CLAW:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
@@ -2987,9 +2989,39 @@ export function displayAbility(
         y: coordinatesTarget[1] + 25,
         ease: "linear",
         duration: 800,
-        repeat: 1,
         onComplete: () => {
           abilitySprite.destroy()
+        }
+      })
+      break
+    }
+
+    case Ability.BRICK_BREAK:
+    case Ability.TAUNT:
+    case Ability.BULK_UP:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
+    case "TAUNT_HIT":
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
+    case Ability.SUBMISSION:
+    case Ability.FLASH:
+    case Ability.STRENGTH:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
+    case Ability.SURF: {
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 800,
+        onComplete: () => {
+          specialProjectile.destroy()
         }
       })
       break
