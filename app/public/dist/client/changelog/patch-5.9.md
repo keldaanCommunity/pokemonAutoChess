@@ -43,6 +43,7 @@
  
 # Gameplay
 
+- New rank system
 - ELO, XP and titles after game are now distributed immediately after the player is eliminated and leaves the game, instead of waiting for the game to end
 
 # UI

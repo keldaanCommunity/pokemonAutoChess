@@ -396,14 +396,6 @@ export const ItemProposalStages = [3, 15]
 export const AdditionalPicksStages = [5, 8, 11]
 export const PortalCarouselStages = [10, 20]
 
-// export const EloRankThreshold: { [key in EloRank]: number } = {
-//   [EloRank.BEGINNER]: 0,
-//   [EloRank.POKEBALL]: 900,
-//   [EloRank.GREATBALL]: 1100,
-//   [EloRank.ULTRABALL]: 1250,
-//   [EloRank.MASTERBALL]: 1400
-// }
-
 export const EloRankThreshold: { [key in EloRank]: number } = {
   [EloRank.LEVEL_BALL]: 850,
   [EloRank.NET_BALL]: 900,
