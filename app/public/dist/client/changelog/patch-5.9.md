@@ -31,6 +31,7 @@
 - New ability for Solrock: Cosmic Power (Sun): buff base attack of allies by 25%
 - New ability for Cosmoem: Teleport (same as Cosmog)
 - New ability for Rotom Drone: Flash: adjacent enemies are blinded for 1.5/3/5 seconds
+- Change Rock Smash (Anorith, Archen): inflict Armor Break instead of Silence
 
 # Changes to Synergies
 

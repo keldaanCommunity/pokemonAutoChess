@@ -1386,7 +1386,7 @@
     "HEAL_BLOCK": "Deal [20,40,80,SP] SPECIAL and WOUND all adjacent enemy Pokémon for 5 seconds.",
     "ROAR_OF_TIME": "Grant RESURECTION and [20,SP]% ATK_SPEED to the strongest allied Pokémon (most items > most stars > most rare).",
     "ROCK_TOMB": "Deal [30,60,120,SP] SPECIAL to the target and decrease their ATK_SPEED by [10,20,40]%.",
-    "ROCK_SMASH": "Deal [20,40,80,SP] SPECIAL to the target and SILENCE them for [3,6,9] seconds.",
+    "ROCK_SMASH": "Deal [20,40,80,SP] SPECIAL to the target and ARMOR_BREAK them for [3,6,9] seconds.",
     "HEAD_SMASH": "Deal [40,80,150,SP] SPECIAL to the target and [10,20,40,SP] PHYSICAL to the user. Execute the target if they suffer from SLEEP or FREEZE.",
     "ROCK_HEAD": "Deal [120,SP]% of ATK + DEF as SPECIAL to the target.",
     "CRABHAMMER": "Deal [40,80,120,SP] SPECIAL to the target. Execute the target if they are below 30% HP. Can crit by default with a [30,LK]% increased CRIT_CHANCE.",

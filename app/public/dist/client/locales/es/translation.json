@@ -1295,7 +1295,7 @@
     "HEAL_BLOCK": "Inflige [20,40,80,SP] de SPECIAL y deja WOUND a todos los enemigos adyacentes por 5 segundos",
     "ROAR_OF_TIME": "Otorga RESURECTION y [20,SP]% ATK_SPEED a tu aliado más fuerte (mayoría de objetos > mayoría de estrellas > más raro)",
     "ROCK_TOMB": "Inflige [30,60,120,SP] de SPECIAL al objetivo y reduce su ATK_SPEED en un [10,20,40] %",
-    "ROCK_SMASH": "Inflige [20,40,80,SP] de SPECIAL al objetivo y causa SILENCE por [3,6,9] segundos",
+    "ROCK_SMASH": "Inflige [20,40,80,SP] de SPECIAL al objetivo y causa ARMOR_BREAK por [3,6,9] segundos",
     "HEAD_SMASH": "El usuario se daña a sí mismo por [10,20,40,SP] PHYSICAL e inflige [40,80,150,SP] de SPECIAL al objetivo. Ejecuta si el objetivo se encuentra SLEEP o FREEZE",
     "ROCK_HEAD": "Inflige [120,SP]% del ATK + DEF como SPECIAL",
     "CRABHAMMER": "Inflige [40,80,120,SP] de SPECIAL al objetivo. Lo ejecuta si está por debajo del 30% de HP. Puede hacer daño crítico por defecto y tiene [30,LK]% más de CRIT_CHANCE.",

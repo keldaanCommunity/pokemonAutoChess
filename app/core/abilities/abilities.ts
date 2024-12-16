@@ -55,7 +55,6 @@ import {
 } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 
-import { t } from "i18next"
 import { Passive } from "../../types/enum/Passive"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { distanceC, distanceM } from "../../utils/distance"
@@ -2045,28 +2044,11 @@ export class RockSmashStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const armorBreakDuration = [3000, 6000, 9000][pokemon.stars - 1] ?? 9000
 
-    let d = 0
-    let s = 0
-    switch (pokemon.stars) {
-      case 1:
-        d = 20
-        s = 3000
-        break
-      case 2:
-        d = 40
-        s = 6000
-        break
-      case 3:
-        d = 80
-        s = 9000
-        break
-      default:
-        break
-    }
-
-    target.handleSpecialDamage(d, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerSilence(s, target, pokemon)
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.status.triggerArmorReduction(armorBreakDuration, target)
   }
 }
 

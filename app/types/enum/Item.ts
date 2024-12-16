@@ -141,6 +141,7 @@ export enum Item {
   HM_SURF = "HM_SURF",
   HM_STRENGTH = "HM_STRENGTH",
   HM_FLASH = "HM_FLASH",
+  HM_ROCK_SMASH = "HM_ROCK_SMASH",
   HM_WHIRLPOOL = "HM_WHIRLPOOL",
   HM_WATERFALL = "HM_WATERFALL"
 }
@@ -428,8 +429,9 @@ export const HMs = [
   Item.HM_SURF,
   Item.HM_STRENGTH,
   Item.HM_FLASH,
-  Item.HM_WHIRLPOOL,
-  Item.HM_WATERFALL
+  Item.HM_ROCK_SMASH,
+  Item.HM_WATERFALL,
+  Item.HM_WHIRLPOOL
 ]
 
 export const AbilityPerTM: { [item in Item]?: Ability } = {
@@ -447,6 +449,7 @@ export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.HM_SURF]: Ability.SURF,
   [Item.HM_STRENGTH]: Ability.STRENGTH,
   [Item.HM_FLASH]: Ability.FLASH,
-  [Item.HM_WHIRLPOOL]: Ability.WHIRLPOOL,
-  [Item.HM_WATERFALL]: Ability.WATERFALL
+  [Item.HM_ROCK_SMASH]: Ability.ROCK_SMASH,
+  [Item.HM_WATERFALL]: Ability.WATERFALL,
+  [Item.HM_WHIRLPOOL]: Ability.WHIRLPOOL
 }

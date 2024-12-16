@@ -1363,7 +1363,7 @@
     "HEAL_BLOCK": "Infliggi [20,40,80,SP] SPECIAL e applica WOUND a tutti i Pokèmon nemici adiacenti per 5 secondi.",
     "ROAR_OF_TIME": "Dai RESURECTION e [20,SP]% ATK_SPEED al tuo Pokèmon alleato più forte (chi ha più oggetti > chi ha più stelle > chi è il più raro).",
     "ROCK_TOMB": "Infliggi [30,60,120,SP] SPECIAL e riduce la ATK_SPEED al bersaglio del [10,20,40]%.",
-    "ROCK_SMASH": "Infliggi [20,40,80,SP] SPECIAL e infliggi SILENCE al bersaglio per [3,6,9] secondi.",
+    "ROCK_SMASH": "Infliggi [20,40,80,SP] SPECIAL e infliggi ARMOR_BREAK al bersaglio per [3,6,9] secondi.",
     "HEAD_SMASH": "L'utilizzatore si ferisce per [10,20,40,SP] PHYSICAL e infligge [40,80,150,SP] SPECIAL. Uccidi il bersaglio se ha lo status SLEEP o FREEZE.",
     "ROCK_HEAD": "Infliggi [120,SP]% della somma tra ATK e DEF come SPECIAL.",
     "CRABHAMMER": "Infliggi [40,80,120,SP] SPECIAL con un alta probabilità di critico. Uccidi il bersaglio se i suoi HP sono inferiori al 30%",
