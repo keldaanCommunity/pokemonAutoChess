@@ -4111,9 +4111,7 @@ export class ThiefStrategy extends AbilityStrategy {
     }
 
     target.items.forEach((item) => {
-      if (pokemon.items.size < 3) {
-        pokemon.addItem(item)
-      }
+      pokemon.addItem(item)
       target.removeItem(item)
     })
 
@@ -10427,9 +10425,7 @@ export class TrickOrTreatStrategy extends AbilityStrategy {
     if (target.items.size > 0) {
       const item = values(target.items)[0]!
       target.removeItem(item)
-      if (pokemon.items.size < 3) {
-        pokemon.addItem(item)
-      }
+      pokemon.addItem(item)
     } else if (pokemon.ap <= 50) {
       // 0-50 AP: shrink unit size and HP
       const lifeReduction = 0.4 / (1 + pokemon.ap / 100)
