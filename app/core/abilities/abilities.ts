@@ -11070,6 +11070,10 @@ export class CutStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
+    //Deal [30,SP]% of target max HP as special damage. Inflicts WOUND for 5 seconds
+    const damage = 0.3 * target.hp
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.status.triggerWound(5000, target, pokemon)
   }
 }
 
