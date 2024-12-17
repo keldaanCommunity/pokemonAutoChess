@@ -414,7 +414,9 @@ export default class Player extends Schema implements IPlayer {
 
     let tmInInventory
     do {
-      tmInInventory = this.items.findIndex((item, index) => TMs.includes(item))
+      tmInInventory = this.items.findIndex(
+        (item, index) => TMs.includes(item) || HMs.includes(item)
+      )
       if (tmInInventory != -1) {
         this.items.splice(tmInInventory, 1)
       }

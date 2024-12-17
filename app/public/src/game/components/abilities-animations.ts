@@ -226,7 +226,7 @@ export function displayAbility(
       break
 
     case Ability.PSYCH_UP:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
     case Ability.MAGIC_POWDER:
@@ -807,7 +807,6 @@ export function displayAbility(
       break
 
     case Ability.FISHIOUS_REND:
-    case Ability.CUT:
       addAbilitySprite(skill, coordinates, true)
         .setScale(2)
         .setRotation(
@@ -817,6 +816,19 @@ export function displayAbility(
           ) -
             Math.PI / 2
         )
+      break
+
+    case Ability.CUT:
+      addAbilitySprite(Ability.FISHIOUS_REND, coordinates, true)
+        .setScale(2)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) -
+            Math.PI / 2
+        )
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(3)
       break
 
     case Ability.GOLD_RUSH:
@@ -1171,6 +1183,7 @@ export function displayAbility(
 
     case Ability.PAYDAY:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      addAbilitySprite(Ability.FACADE, coordinatesTarget, true).setScale(1)
       break
 
     case Ability.AIR_SLASH:
@@ -2997,29 +3010,63 @@ export function displayAbility(
     }
 
     case Ability.BRICK_BREAK:
-    case Ability.TAUNT:
+
     case Ability.BULK_UP:
     case Ability.FLASH:
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
+    case Ability.TAUNT:
+      addAbilitySprite(
+        skill,
+        [coordinates[0], coordinates[1] - 30],
+        true
+      ).setScale(2)
+      break
+
     case "TAUNT_HIT":
+      addAbilitySprite(
+        skill,
+        [coordinatesTarget[0], coordinatesTarget[1] - 30],
+        true
+      ).setScale(2)
+      break
+
+    case Ability.RETALIATE:
+    case Ability.SUBMISSION:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
-    case Ability.SUBMISSION:
-    case Ability.STRENGTH:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+    case Ability.STRENGTH: {
+      const specialProjectile = addAbilitySprite(
+        skill,
+        [coordinatesTarget[0], coordinatesTarget[1] - 150],
+        true
+      ).setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        y: coordinatesTarget[1],
+        ease: Phaser.Math.Easing.Quadratic.In,
+        duration: 450
+      })
       break
+    }
 
     case Ability.SURF: {
-      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(2)
+      const angle = Math.atan2(
+        coordinatesTarget[1] - coordinates[1],
+        coordinatesTarget[0] - coordinates[0]
+      )
+      const specialProjectile = addAbilitySprite(skill, coordinates)
+        .setScale(2)
+        .setRotation(angle - (3 / 4) * Math.PI)
+
       scene.tweens.add({
         targets: specialProjectile,
         x: coordinatesTarget[0],
         y: coordinatesTarget[1],
         ease: "linear",
-        duration: 800,
+        duration: 600,
         onComplete: () => {
           specialProjectile.destroy()
         }

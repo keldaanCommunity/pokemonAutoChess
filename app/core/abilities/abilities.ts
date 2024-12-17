@@ -9940,12 +9940,7 @@ export class OktzookaStrategy extends AbilityStrategy {
       false
     )
 
-    board.addBoardEffect(
-      target.positionX,
-      target.positionY,
-      Effect.SMOKE,
-      pokemon.simulation
-    )
+    target.status.triggerBlinded(4000, target)
   }
 }
 
@@ -10982,14 +10977,14 @@ export class RageStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const rageDuration =
-      3000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+    const rageDuration = 3000
     pokemon.status.triggerRage(rageDuration, pokemon)
 
     //gain 1 attack for each 10% of max HP missing
     const missingHp = pokemon.hp - pokemon.life
-    const atkBoost = Math.floor(missingHp / (pokemon.hp / 10))
-    pokemon.addAttack(atkBoost, pokemon, 0, false)
+    const atkBoost =
+      pokemon.atk * 0.1 * Math.floor(missingHp / (pokemon.hp / 10))
+    pokemon.addAttack(atkBoost, pokemon, 1, true)
   }
 }
 
@@ -11021,11 +11016,11 @@ export class TauntStrategy extends AbilityStrategy {
     // Gain 30% (AP scaling=0.5) of max HP as shield, and force adjacent enemies to choose you as target
     const shield = 0.3 * pokemon.hp
     pokemon.addShield(shield, pokemon, 0.5, crit)
-    const adjacentEnemies = board
-      .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
+    const enemiesTaunted = board
+      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 2)
       .filter((cell) => cell.value && cell.value.team !== pokemon.team)
       .map((cell) => cell.value as PokemonEntity)
-    adjacentEnemies.forEach((enemy) => {
+    enemiesTaunted.forEach((enemy) => {
       enemy.targetX = pokemon.positionX
       enemy.targetY = pokemon.positionY
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
@@ -11050,8 +11045,8 @@ export class BulkUpStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     // Increase base Attack and base Defense by 40%
-    const atkBoost = Math.round(0.4 * pokemon.baseAtk)
-    const defBoost = Math.round(0.4 * pokemon.baseDef)
+    const atkBoost = Math.ceil(0.4 * pokemon.baseAtk)
+    const defBoost = Math.ceil(0.4 * pokemon.baseDef)
     pokemon.addAttack(atkBoost, pokemon, 1, crit)
     pokemon.addDefense(defBoost, pokemon, 1, crit)
   }
@@ -11153,7 +11148,7 @@ export class SurfStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit, false)
+    super.process(pokemon, state, board, target, crit, true)
     const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
@@ -11206,6 +11201,8 @@ export class SurfStrategy extends AbilityStrategy {
           }
         }
       })
+
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
   }
 }
@@ -11219,7 +11216,7 @@ export class StrengthStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 2 * (pokemon.atk + pokemon.def + pokemon.speDef + pokemon.ap)
+    const damage = 2 * (pokemon.atk + pokemon.def + pokemon.speDef) + pokemon.ap
     target.handleSpecialDamage(
       damage,
       board,
