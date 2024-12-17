@@ -4679,7 +4679,7 @@ export class Rattata extends Pokemon {
   speDef = 1
   maxPP = 100
   range = 1
-  skill = Ability.CUT
+  skill = Ability.AGILITY
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
