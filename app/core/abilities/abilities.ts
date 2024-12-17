@@ -11061,30 +11061,6 @@ export class BulkUpStrategy extends AbilityStrategy {
   }
 }
 
-export class SubmissionStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    state: PokemonState,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
-    super.process(pokemon, state, board, target, crit)
-    const damage = 3 * pokemon.atk
-    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
-    if (!pokemon.items.has(Item.PROTECTIVE_PADS)) {
-      const selfDamage = pokemon.atk
-      pokemon.handleSpecialDamage(
-        selfDamage,
-        board,
-        AttackType.PHYSICAL,
-        pokemon,
-        crit
-      )
-    }
-  }
-}
-
 export class CutStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
