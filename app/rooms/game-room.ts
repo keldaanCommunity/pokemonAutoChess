@@ -575,8 +575,12 @@ export default class GameRoom extends Room<GameState> {
         throw new Error("consented leave")
       }
 
+      if (!client.userData) client.userData = {}
+      client.userData.leavedGameAt = Date.now()
+      console.log("leavedGameAt", client.userData.leavedGameAt)
       // allow disconnected client to reconnect into this room until 3 minutes
       await this.allowReconnection(client, 180)
+      client.userData.leavedGameAt = null
       const userProfile = await UserMetadata.findOne({ uid: client.auth.uid })
       client.send(Transfer.USER_PROFILE, userProfile)
       this.dispatcher.dispatch(new OnJoinCommand(), { client })
@@ -584,7 +588,7 @@ export default class GameRoom extends Room<GameState> {
       if (client && client.auth && client.auth.displayName) {
         //logger.info(`${client.auth.displayName} left game`)
         const player = this.state.players.get(client.auth.uid)
-        if (player && this.state.stageLevel <= 5) {
+        if (player && this.state.stageLevel <= 5 && !consented) {
           /* 
           if player left game during the loading screen or before stage 6,
           we consider they didn't play the game and presume a technical issue
@@ -594,6 +598,7 @@ export default class GameRoom extends Room<GameState> {
           this.setMetadata({
             playerIds: removeInArray(this.metadata.playerIds, client.auth.uid)
           })
+
           /*logger.info(
             `${client.auth.displayName} has been removed from players list`
           )*/
