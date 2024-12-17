@@ -21,7 +21,6 @@ import UserMetadata, {
 } from "../../models/mongo-models/user-metadata"
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../models/precomputed/precomputed-emotions"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
-import { getPortraitSrc } from "../../utils/avatar"
 import {
   addBotToDatabase,
   deleteBotFromDatabase,
@@ -44,8 +43,8 @@ import {
   BoosterRarityProbability,
   DUST_PER_BOOSTER,
   DUST_PER_SHINY,
-  getEmotionCost,
-  MAX_PLAYERS_PER_GAME
+  MAX_PLAYERS_PER_GAME,
+  getEmotionCost
 } from "../../types/Config"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import { EloRank } from "../../types/enum/EloRank"
@@ -55,12 +54,13 @@ import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { StarterAvatars } from "../../types/enum/Starters"
 import { ITournamentPlayer } from "../../types/interfaces/Tournament"
 import { sum } from "../../utils/array"
+import { getPortraitSrc } from "../../utils/avatar"
 import { getRank } from "../../utils/elo"
 import { logger } from "../../utils/logger"
 import { cleanProfanity } from "../../utils/profanity-filter"
+import { wait } from "../../utils/promise"
 import { chance, pickRandomIn } from "../../utils/random"
 import { convertSchemaToRawObject, values } from "../../utils/schemas"
-import { wait } from "../../utils/promise"
 import CustomLobbyRoom from "../custom-lobby-room"
 
 export class OnJoinCommand extends Command<
@@ -983,7 +983,8 @@ export class JoinOrOpenRoomCommand extends Command<
 
       case GameMode.RANKED: {
         let userRank = getRank(user.elo)
-        if (userRank === EloRank.MASTERBALL) userRank = EloRank.ULTRABALL
+        if (userRank === EloRank.BEAST_BALL || userRank === EloRank.MASTER_BALL)
+          userRank = EloRank.ULTRA_BALL
         const existingRanked = this.room.rooms?.find(
           (room) =>
             room.name === "preparation" &&
@@ -1042,10 +1043,10 @@ export class OpenGameCommand extends Command<
 
     if (gameMode === GameMode.RANKED) {
       let rank = getRank(user.elo)
-      if (rank === EloRank.MASTERBALL || rank === EloRank.ULTRABALL) {
-        rank = EloRank.ULTRABALL
-        minRank = EloRank.ULTRABALL
-        maxRank = EloRank.MASTERBALL
+      if (rank === EloRank.BEAST_BALL || rank === EloRank.MASTER_BALL) {
+        rank = EloRank.ULTRA_BALL
+        minRank = EloRank.ULTRA_BALL
+        maxRank = EloRank.BEAST_BALL
       } else {
         minRank = rank
         maxRank = rank

@@ -2515,11 +2515,17 @@
     "BOT_MANAGER": "Controlador de Bot"
   },
   "elorank": {
-    "BEGINNER": "Iniciante",
-    "POKEBALL": "Pokébola",
-    "GREATBALL": "Greatball",
-    "ULTRABALL": "Últraball",
-    "MASTERBALL": "Máster Ball"
+    "LEVEL_BALL": "Level Ball",
+    "NET_BALL": "Net Ball",
+    "SAFARI_BALL": "Safari Ball",
+    "LOVE_BALL": "Love Ball",
+    "PREMIER_BALL": "Premier Ball",
+    "QUICK_BALL": "Quick Ball",
+    "POKE_BALL": "Poké Ball",
+    "SUPER_BALL": "Super Ball",
+    "ULTRA_BALL": "Ultra Ball",
+    "MASTER_BALL": "Master Ball",
+    "BEAST_BALL": "Beast Ball"
   },
   "game_full": "Esta sala está completa",
   "game_already_started": "O jogo já foi iniciado",

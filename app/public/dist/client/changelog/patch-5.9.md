@@ -33,6 +33,11 @@
 - New ability for Rotom Drone: Flash: adjacent enemies are blinded for 1.5/3/5 seconds
 - Change Rock Smash (Anorith, Archen): inflict Armor Break instead of Silence, damage: 20/40/80 → 25/50/100
 - New ability for Anorith line: Harden: gain 2/4/6 defense
+- Change Heavy Slam (Aggron): base damage 10/20/40 → 15/30/60 ; HP diff damage scaling 1 → 0.5
+- Nerf Ogerpon Teal mask: PP 80 → 100
+- Buff Ogerpon Wellspring: passive PP gain: 10 → 20. Added AP scaling for PP gain
+- Buff Ogerpon Hearthflame: passive burn duration 2 → 5 seconds
+- Nerf Morpeko: Aura wheel cooldown: 100ms → 200ms
 
 # Changes to Synergies
 
@@ -43,13 +48,26 @@
 # Changes to Items
 
 - Introducing Technical Machines (TM) and Hidden Machines (HM), that allow changing the ability of Human pokemons.
+- Removed Amulet coin base stats
 - Tiny mushroom now reduces health by 50% only if the holder is cloned
 - Pokemons can now hold artificial items and Shiny Stone even if they give one of their existing synergies
  
 # Gameplay
 
-- New status: Blinded: reduce accuracy of basic attacks by 50%. Replace the existing Smoke effect that was not considered a status.
+- New rank system: 12 different ranks, each with a different icon (by @joinity). Beast ball and Master ball players will create ranked games with Ultra ball.
+  - Level ball: 0 ELO
+  - Net ball: 1050 ELO
+  - Safari ball: 1100 ELO
+  - Love ball: 1150 ELO
+  - Premier ball: 1200 ELO
+  - Quick ball: 1250 ELO
+  - Poké ball: 1300 ELO
+  - Super ball: 1350 ELO
+  - Ultra ball: 1400 ELO
+  - Master ball: 1500 ELO
+  - Beast ball: 1700 ELO
 - ELO, XP and titles after game are now distributed immediately after the player is eliminated and leaves the game, instead of waiting for the game to end
+- New status: Blinded: reduce accuracy of basic attacks by 50%. Replace the existing Smoke effect that was not considered a status.
 
 # UI
 

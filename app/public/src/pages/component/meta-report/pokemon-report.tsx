@@ -10,8 +10,8 @@ import { EloRank } from "../../../../../types/enum/EloRank"
 import { Rarity } from "../../../../../types/enum/Game"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import PokemonStatistic from "./pokemon-statistic"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
+import PokemonStatistic from "./pokemon-statistic"
 import "./pokemon-report.css"
 
 export function PokemonReport() {
@@ -19,7 +19,7 @@ export function PokemonReport() {
   const [synergy, setSynergy] = useState<Synergy | "all">("all")
   const [rarity, setRarity] = useState<Rarity | "all">("all")
   const [loading, setLoading] = useState<boolean>(true)
-  const [eloThreshold, setEloTreshold] = useState<EloRank>(EloRank.BEGINNER)
+  const [eloThreshold, setEloTreshold] = useState<EloRank>(EloRank.LEVEL_BALL)
   const [selectedPkm, setSelectedPkm] = useState<Pkm | "">("")
 
   const [metaPokemons, setMetaPokemons] = useState<IPokemonsStatisticV2[]>([])

@@ -1640,7 +1640,7 @@
     "POWER_WHIP": "Unleash a giant vine toward the farthest enemy Pokémon, dealing [30,60,SP] SPECIAL to any enemy Pokémon in the path.",
     "DARK_HARVEST": "Teleport into the largest group of enemy Pokémon. Inflict the user with SILENCE for 3 seconds and drain the HP of adjacent enemy Pokémon, dealing [5,10,20,SP] SPECIAL per second and heal for 30% of the damage dealt.",
     "PSYSHOCK": "Burn [20,40,80,SP] PP from the target and gain SHIELD for the same amount. Excess damage is dealt as SPECIAL.",
-    "HEAVY_SLAM": "Slam the ground, dealing [10,20,40,SP] SPECIAL and gain [10,20,40,SP] SHIELD. The more max HP the user has than the target, the greater the ability's power.",
+    "HEAVY_SLAM": "Slam the ground, dealing [15,30,60,SP] SPECIAL to adjacent opponents and gain [10,20,40,SP] SHIELD. The more max HP the user has than the target, the greater the ability's power.",
     "RAPID_SPIN": "Deal [20,50,SP] SPECIAL and gain [20,30,SP]% of ATK as DEF and SPE_DEF",
     "BOUNCE": "Bounce [1,2,3,SP] times to the farthest enemy Pokémon, dealing [10,SP] SPECIAL to all adjacent enemy Pokémon each time.",
     "BLOOD_MOON": "Ursaluna concentrates all their energy in the blood-red moon on their forehead and projects it in a line, dealing [200,SP]% of ATK as SPECIAL to all enemy Pokémon in the path and applying WOUND for 3 seconds.",
@@ -1701,7 +1701,6 @@
     "METAL_CLAW": "Deal [10,20,40,SP] TRUE to the target and raise the user's ATK by [2,4,6].",
     "FIRESTARTER": "Gain [10,20,40,SP]% ATK_SPEED and flies to the furthest ennemy, dropping embers on the cells in between. The embers inflict [20,40,80,SP] SPECIAL and remain on the ground, so any Pokémon that steps on them BURN and take 10 SPECIAL per second if not FLYING or FIRE.",
     "BONE_ARMOR": "Flies to the weakest enemy inflicting [20,40,80] SPECIAL, healing for the damage dealt. If the target is KO'd, recover its bones to make armor, gaining [2,4,6] DEF and SPE_DEF.",
-    "TOPSY_TURVY": "Deal [40,80,100,SP] SPECIAL and reverse all the targets ATK, DEF and SPE_DEF buffs",
     "RAGE": "Get RAGE status for 3 seconds and gain [10,SP]% ATK for each 10% of max HP missing",
     "BRICK_BREAK": "Deal [150,SP]% of ATK as TRUE. Breaks target's PROTECT and Magic Bounce.",
     "TAUNT": "Gain [25,SP=0.5]% of max HP as SHIELD, and force enemies within a 2-tile radius to choose you as target",
@@ -1710,7 +1709,8 @@
     "FLY": "Rise in the air and fall on the farthest target after 1 second, dealing [400,SP]% of ATK as SPECIAL.",
     "SURF": "A wave pushes the user and enemies in the path into the enemy backline. All enemies hit take [20,40,80,SP] SPECIAL.",
     "STRENGTH": "Deal 2x(ATK + DEF + SPE_DEF) + AP as PHYSICAL",
-    "HARDEN": "Gain [2,4,6,SP] DEF"
+    "HARDEN": "Gain [2,4,6,SP] DEF",
+    "TOPSY_TURVY": "Deal [40,80,100,SP] SPECIAL to the target. All its ATK, DEF and SPE_DEF buffs become debuffs and vice versa."
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2336,8 +2336,8 @@
     "SKARMORY": "At the start of the fight, Skarmory scatters spikes around the field. The spikes deal 10 TRUE per second and ARMOR_REDUCTION to Pokémons that walk on it, if not FLYING.",
     "DURANT": "Durant basic attacks deals 1 extra TRUE for each BUG ally on your board",
     "OGERPON_TEAL": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, restores [20,SP] HP to adjacent allies",
-    "OGERPON_WELLSPRING": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, gives 10 PP to adjacent allies",
-    "OGERPON_HEARTHFLAME": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, BURN adjacent enemies for 2 seconds",
+    "OGERPON_WELLSPRING": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, gives 20 PP to adjacent allies",
+    "OGERPON_HEARTHFLAME": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, BURN adjacent enemies for 5 seconds",
     "OGERPON_CORNERSTONE": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, FLINCH adajcent enemies for 5 seconds",
     "VICTINI": "Increases the accuracy of the team. Allies can no longer miss their attacks.",
     "AEGISLASH": "Alternates between Shield Forme and Blade Forme when casting ability",
@@ -3308,11 +3308,17 @@
     "BOT_MANAGER": "Bot Manager"
   },
   "elorank": {
-    "BEGINNER": "Beginner",
-    "POKEBALL": "Poké Ball",
-    "GREATBALL": "Great Ball",
-    "ULTRABALL": "Ultra Ball",
-    "MASTERBALL": "Master Ball"
+    "LEVEL_BALL": "Level Ball",
+    "NET_BALL": "Net Ball",
+    "SAFARI_BALL": "Safari Ball",
+    "LOVE_BALL": "Love Ball",
+    "PREMIER_BALL": "Premier Ball",
+    "QUICK_BALL": "Quick Ball",
+    "POKE_BALL": "Poké Ball",
+    "SUPER_BALL": "Super Ball",
+    "ULTRA_BALL": "Ultra Ball",
+    "MASTER_BALL": "Master Ball",
+    "BEAST_BALL": "Beast Ball"
   },
   "game_full": "This group is full",
   "game_already_started": "Game has already started",

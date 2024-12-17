@@ -1545,7 +1545,7 @@
     "POWER_WHIP": "Fija al enemigo más lejano y lanza una enredadera gigante hacia él. Inflige [30,60,SP] de SPECIAL a cualquier enemigo golpeado por la enredadera.",
     "DARK_HARVEST": "El Pokémon se teletransporta al grupo más grande de enemigos. Durante los siguientes 3 segundos, el pokémon sufre SILENCE y drena el HP de los enemigos adyacentes, infligiendo [5,10,20,SP] de SPECIAL por segundo y curando su HP un 30% del SPECIAL infligido.",
     "PSYSHOCK": "Quema [20,40,80,SP] PP del objetivo y lo obtiene como SHIELD. Si el objetivo no tiene suficientes PP, el resto se inflige como SPECIAL.",
-    "HEAVY_SLAM": "Golpea el suelo causando [10,20,40,SP] de SPECIAL y otorgándose [10,20,40,SP] de SHIELD. Cuanto más supere el usuario al objetivo en HP máximo, mayor será el poder del movimiento.",
+    "HEAVY_SLAM": "Golpea el suelo causando [15,30,60,SP] de SPECIAL y otorgándose [10,20,40,SP] de SHIELD. Cuanto más supere el usuario al objetivo en HP máximo, mayor será el poder del movimiento.",
     "RAPID_SPIN": "Este Pokémon inflige [20,50] de SPECIAL y luego gana [20,30,SP]% de ATK como DEF y SPE_DEF",
     "BOUNCE": "Rebota [1,2,3,SP] veces hacia el objetivo más lejano, causando [10,SP] de SPECIAL a todos los enemigos adyacentes por cada rebote",
     "BLOOD_MOON": "Concentra toda su energía en la luna roja sangrienta en su frente y la proyecta en una línea, causando [200,SP]% de ATK como SPECIAL y dejando WOUND por 3 segundos a todos los enemigos golpeados",
@@ -3018,11 +3018,17 @@
     "BOT_MANAGER": "Administrador de Bots"
   },
   "elorank": {
-    "BEGINNER": "Principiante",
-    "POKEBALL": "Poké Ball",
-    "GREATBALL": "Super Ball",
-    "ULTRABALL": "Ultra Ball",
-    "MASTERBALL": "Master Ball"
+    "LEVEL_BALL": "Level Ball",
+    "NET_BALL": "Net Ball",
+    "SAFARI_BALL": "Safari Ball",
+    "LOVE_BALL": "Love Ball",
+    "PREMIER_BALL": "Premier Ball",
+    "QUICK_BALL": "Quick Ball",
+    "POKE_BALL": "Poké Ball",
+    "SUPER_BALL": "Super Ball",
+    "ULTRA_BALL": "Ultra Ball",
+    "MASTER_BALL": "Master Ball",
+    "BEAST_BALL": "Beast Ball"
   },
   "game_full": "El grupo esta completo",
   "game_already_started": "El juego ya empezó",

@@ -1564,7 +1564,7 @@
     "POWER_WHIP": "Erfasst den am weitesten entfernten Gegner und entfesselt eine riesige Ranke, die allen getroffenen Feinden [30,60,SP] SPECIAL zufügt.",
     "DARK_HARVEST": "Das Pokémon teleportiert sich in die größte Gruppe von Gegnern. Für die nächsten 3 Sekunden erleidet das Pokémon SILENCE und entzieht benachbarten Gegnern HP, fügt [5,10,20,SP] SPECIAL pro Sekunde zu und heilt HP für 30% der zugefügten SPECIAL",
     "PSYSHOCK": "Verbrenne [20,40,80,SP] PP vom Ziel und erhalte sie als SHIELD. Wenn das Ziel nicht genug PP hat, wird der Rest als SPECIAL ausgeteilt.",
-    "HEAVY_SLAM": "Schlägt auf den Boden, verursacht [10,20,40,SP] SPECIAL und gewährt sich selbst [10,20,40,SP] SHIELD. Je mehr der Anwender das Ziel an maximalen HP überwiegt, desto größer ist die Kraft des Moves.",
+    "HEAVY_SLAM": "Schlägt auf den Boden, verursacht [15,30,60,SP] SPECIAL und gewährt sich selbst [10,20,40,SP] SHIELD. Je mehr der Anwender das Ziel an maximalen HP überwiegt, desto größer ist die Kraft des Moves.",
     "RAPID_SPIN": "Verursache [20,50,SP] SPECIAL und erhalte [20,30,SP]% der ATK als DEF und SPE_DEF",
     "BOUNCE": "Springt [1,2,3,SP] Mal zum am weitesten entfernten Ziel und fügt allen benachbarten Feinden bei jedem Sprung [10,SP] SPECIAL zu",
     "BLOOD_MOON": "Konzentriert all seine Energie in den blutroten Mond auf seiner Stirn und projiziert sie in einer Linie, die [200,SP]% der ATK als SPECIAL und WOUND für 3 Sekunden allen getroffenen Feinden zufügt",
@@ -2177,8 +2177,8 @@
     "SKARMORY": "Zu Beginn des Kampfes verteilt Panzaeron Stacheln auf dem Feld. Die Stacheln verursachen 10 TRUE pro Sekunde und ARMOR_REDUCTION bei Pokémon, die darauf laufen, sofern sie nicht FLYING.",
     "DURANT": "Durant-Basisangriffe verursachen 1 zusätzlichen TRUE für jeden BUG Verbündeten auf deinem Brett.",
     "OGERPON_TEAL": "Ogerpon kann TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK und CORNERSTONE_MASK tragen, um sein Aussehen zu ändern\nBeim Anwenden werden [20,SP] HP bei benachbarten Verbündeten wiederhergestellt.",
-    "OGERPON_WELLSPRING": "Ogerpon kann TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK und CORNERSTONE_MASK tragen, um sein Aussehen zu ändern\nVerleiht beim Anwenden benachbarten Verbündeten 10 PP.",
-    "OGERPON_HEARTHFLAME": "Ogerpon kann TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK und CORNERSTONE_MASK tragen, um sein Aussehen zu ändern\nBeim Anwenden BURN man benachbarte Feinde für 2 Sekunden",
+    "OGERPON_WELLSPRING": "Ogerpon kann TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK und CORNERSTONE_MASK tragen, um sein Aussehen zu ändern\nVerleiht beim Anwenden benachbarten Verbündeten [20,SP] PP.",
+    "OGERPON_HEARTHFLAME": "Ogerpon kann TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK und CORNERSTONE_MASK tragen, um sein Aussehen zu ändern\nBeim Anwenden BURN man benachbarte Feinde für 5 Sekunden",
     "OGERPON_CORNERSTONE": "Ogerpon kann TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK und CORNERSTONE_MASK tragen, um sein Aussehen zu ändern\nBeim Anwenden ZUCKEN benachbarte Gegner 5 Sekunden lang zusammen"
   },
   "stat": {
@@ -3111,13 +3111,6 @@
     "BOT": "Bot",
     "BOT_MANAGER": "Bot-Manager"
   },
-  "elorank": {
-    "BEGINNER": "Anfänger",
-    "POKEBALL": "Pokéball",
-    "GREATBALL": "Superball",
-    "ULTRABALL": "Hyperball",
-    "MASTERBALL": "Meisterball"
-  },
   "game_full": "Raum ist voll",
   "game_already_started": "Spiel hat bereits begonnen",
   "min_rank_not_reached": "Dein Rang ist nicht hoch genug, um an diesen Rangmatch teilzunehmen",
@@ -3203,5 +3196,12 @@
     "ROOM_EMPTY": "Dieser Raum wurde aufgrund von Spielermangel entfernt",
     "ROOM_DELETED": "Dieser Raum wurde gelöscht",
     "UNKNOWN_ERROR": "Ein unerwarteter Fehler ist aufgetreten: {{error}}"
+  },
+  "elorank": {
+    "BEGINNER": "Anfänger",
+    "POKEBALL": "Pokéball",
+    "GREATBALL": "Superball",
+    "ULTRABALL": "Hyperball",
+    "MASTERBALL": "Meisterball"
   }
 }

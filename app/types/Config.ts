@@ -397,11 +397,17 @@ export const AdditionalPicksStages = [5, 8, 11]
 export const PortalCarouselStages = [10, 20]
 
 export const EloRankThreshold: { [key in EloRank]: number } = {
-  [EloRank.BEGINNER]: 0,
-  [EloRank.POKEBALL]: 900,
-  [EloRank.GREATBALL]: 1100,
-  [EloRank.ULTRABALL]: 1250,
-  [EloRank.MASTERBALL]: 1400
+  [EloRank.LEVEL_BALL]: 0,
+  [EloRank.NET_BALL]: 1050,
+  [EloRank.SAFARI_BALL]: 1100,
+  [EloRank.LOVE_BALL]: 1150,
+  [EloRank.PREMIER_BALL]: 1200,
+  [EloRank.QUICK_BALL]: 1250,
+  [EloRank.POKE_BALL]: 1300,
+  [EloRank.SUPER_BALL]: 1350,
+  [EloRank.ULTRA_BALL]: 1400,
+  [EloRank.MASTER_BALL]: 1500,
+  [EloRank.BEAST_BALL]: 1700
 }
 
 export const WeatherThreshold: { [weather in Weather]: number } = {
@@ -633,7 +639,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.PROTECTIVE_PADS]: { [Stat.SHIELD]: 60, [Stat.ATK]: 6 },
   [Item.MAX_REVIVE]: { [Stat.SHIELD]: 15, [Stat.DEF]: 2 },
   [Item.ASSAULT_VEST]: { [Stat.SPE_DEF]: 20 },
-  [Item.AMULET_COIN]: { [Stat.SPE_DEF]: 2, [Stat.ATK]: 3 },
+  [Item.AMULET_COIN]: {},
   [Item.POKE_DOLL]: { [Stat.SPE_DEF]: 2, [Stat.DEF]: 2 },
   [Item.RED_ORB]: { [Stat.ATK]: 10 },
   [Item.FLAME_ORB]: { [Stat.ATK]: 5, [Stat.DEF]: 2 },
