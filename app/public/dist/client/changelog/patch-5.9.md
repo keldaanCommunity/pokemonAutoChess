@@ -31,20 +31,24 @@
 - New ability for Solrock: Cosmic Power (Sun): buff base attack of allies by 25%
 - New ability for Cosmoem: Teleport (same as Cosmog)
 - New ability for Rotom Drone: Flash: adjacent enemies are blinded for 1.5/3/5 seconds
-- Change Rock Smash (Anorith, Archen): inflict Armor Break instead of Silence
+- Change Rock Smash (Anorith, Archen): inflict Armor Break instead of Silence, damage: 20/40/80 → 25/50/100
+- New ability for Anorith line: Harden: gain 2/4/6 defense
 
 # Changes to Synergies
 
+- Human rework: healing is now for Humans only, not for all allies ; healing: 15/30/60% → 25/40/60% ; Human 2 and 4 give a random TM, Human 6 gives a random HM
 - Nerf Dark crit damage +60/80/100% → +30/40/50%
 - Buff Electric 9: Triple attacks deal ~~10~~ 20 special damage to adjacent enemies
 
 # Changes to Items
 
+- Introducing Technical Machines (TM) and Hidden Machines (HM), that allow changing the ability of Human pokemons.
 - Tiny mushroom now reduces health by 50% only if the holder is cloned
 - Pokemons can now hold artificial items and Shiny Stone even if they give one of their existing synergies
  
 # Gameplay
 
+- New status: Blinded: reduce accuracy of basic attacks by 50%. Replace the existing Smoke effect that was not considered a status.
 - ELO, XP and titles after game are now distributed immediately after the player is eliminated and leaves the game, instead of waiting for the game to end
 
 # UI

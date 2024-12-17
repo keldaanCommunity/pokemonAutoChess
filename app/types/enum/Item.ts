@@ -134,7 +134,6 @@ export enum Item {
   TM_BIDE = "TM_BIDE",
   TM_PSYCH_UP = "TM_PSYCH_UP",
   TM_RETALIATE = "TM_RETALIATE",
-  TM_SUBMISSION = "TM_SUBMISSION",
   TM_PAYDAY = "TM_PAYDAY",
   HM_CUT = "HM_CUT",
   HM_FLY = "HM_FLY",
@@ -419,7 +418,6 @@ export const TMs = [
   Item.TM_BIDE,
   Item.TM_PSYCH_UP,
   Item.TM_RETALIATE,
-  Item.TM_SUBMISSION,
   Item.TM_PAYDAY
 ]
 
@@ -442,7 +440,6 @@ export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.TM_BIDE]: Ability.BIDE,
   [Item.TM_PSYCH_UP]: Ability.PSYCH_UP,
   [Item.TM_RETALIATE]: Ability.RETALIATE,
-  [Item.TM_SUBMISSION]: Ability.SUBMISSION,
   [Item.TM_PAYDAY]: Ability.PAYDAY,
   [Item.HM_CUT]: Ability.CUT,
   [Item.HM_FLY]: Ability.FLY,

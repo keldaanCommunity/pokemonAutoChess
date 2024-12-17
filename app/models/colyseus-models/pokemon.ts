@@ -4679,7 +4679,7 @@ export class Rattata extends Pokemon {
   speDef = 1
   maxPP = 100
   range = 1
-  skill = Ability.AGILITY
+  skill = Ability.CUT
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -6739,7 +6739,7 @@ export class Anorith extends Pokemon {
   speDef = 1
   maxPP = 80
   range = 1
-  skill = Ability.ROCK_SMASH
+  skill = Ability.HARDEN
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
@@ -6754,7 +6754,7 @@ export class Armaldo extends Pokemon {
   speDef = 2
   maxPP = 80
   range = 1
-  skill = Ability.ROCK_SMASH
+  skill = Ability.HARDEN
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }

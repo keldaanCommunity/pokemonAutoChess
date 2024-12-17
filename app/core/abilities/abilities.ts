@@ -1071,8 +1071,8 @@ export class PsychUpStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
-    const duration = [2000, 4000, 8000][pokemon.stars - 1] ?? 8000
+    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
+    const duration = [2000, 3000, 4000][pokemon.stars - 1] ?? 4000
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     const cells = board.getAdjacentCells(
       target.positionX,
@@ -10997,8 +10997,15 @@ export class BrickBreakStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    // Deal 100% of Attack as true damage, and cause Armor Reduction for 4 seconds
-    const damage = pokemon.atk
+    const damage = 1.5 * pokemon.atk
+    if (target.status.protect) {
+      target.status.protect = false
+      target.status.protectCooldown = 0
+    }
+    if (target.status.magicBounce) {
+      target.status.magicBounce = false
+      target.status.magicBounceCooldown = 0
+    }
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
     target.status.triggerArmorReduction(4000, target)
   }
@@ -11013,8 +11020,8 @@ export class TauntStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    // Gain 30% (AP scaling=0.5) of max HP as shield, and force adjacent enemies to choose you as target
-    const shield = 0.3 * pokemon.hp
+    // Gain 25% (AP scaling=0.5) of max HP as shield, and force adjacent enemies to choose you as target
+    const shield = 0.25 * pokemon.hp
     pokemon.addShield(shield, pokemon, 0.5, crit)
     const enemiesTaunted = board
       .getCellsInRadius(pokemon.positionX, pokemon.positionY, 2)
@@ -11225,6 +11232,20 @@ export class StrengthStrategy extends AbilityStrategy {
       crit,
       false
     )
+  }
+}
+
+export class HardenStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const defGain = [2, 4, 6][pokemon.stars - 1] ?? 6
+    pokemon.addDefense(defGain, pokemon, 1, crit)
   }
 }
 
@@ -11633,9 +11654,9 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BRICK_BREAK]: new BrickBreakStrategy(),
   [Ability.TAUNT]: new TauntStrategy(),
   [Ability.BULK_UP]: new BulkUpStrategy(),
-  [Ability.SUBMISSION]: new SubmissionStrategy(),
   [Ability.CUT]: new CutStrategy(),
   [Ability.FLY]: new FlyStrategy(),
   [Ability.SURF]: new SurfStrategy(),
-  [Ability.STRENGTH]: new StrengthStrategy()
+  [Ability.STRENGTH]: new StrengthStrategy(),
+  [Ability.HARDEN]: new HardenStrategy()
 }

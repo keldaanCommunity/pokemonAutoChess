@@ -400,10 +400,10 @@ export enum Ability {
   BRICK_BREAK = "BRICK_BREAK",
   TAUNT = "TAUNT",
   BULK_UP = "BULK_UP",
-  SUBMISSION = "SUBMISSION",
   CUT = "CUT",
   FLY = "FLY",
   SURF = "SURF",
   STRENGTH = "STRENGTH",
-  FLASH = "FLASH"
+  FLASH = "FLASH",
+  HARDEN = "HARDEN"
 }

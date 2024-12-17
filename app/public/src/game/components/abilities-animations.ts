@@ -3033,7 +3033,6 @@ export function displayAbility(
       break
 
     case Ability.RETALIATE:
-    case Ability.SUBMISSION:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
