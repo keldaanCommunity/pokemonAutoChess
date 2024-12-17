@@ -1,4 +1,3 @@
-import { xml } from "d3"
 import { Geom } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { AttackSprite } from "../../../../types"
