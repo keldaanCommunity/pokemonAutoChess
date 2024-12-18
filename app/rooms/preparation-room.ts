@@ -377,12 +377,20 @@ export default class PreparationRoom extends Room<PreparationState> {
     }
   }
 
-  async onJoin(client: Client<undefined, UserRecord>, options: any, auth: UserRecord | undefined) {
+  async onJoin(
+    client: Client<undefined, UserRecord>,
+    options: any,
+    auth: UserRecord | undefined
+  ) {
     if (auth) {
       /*logger.info(
         `${auth.displayName} ${client.id} join preparation room`
       )*/
-      await this.dispatcher.dispatch(new OnJoinCommand(), { client, options, auth })
+      await this.dispatcher.dispatch(new OnJoinCommand(), {
+        client,
+        options,
+        auth
+      })
     }
   }
 

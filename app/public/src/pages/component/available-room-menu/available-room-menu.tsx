@@ -32,13 +32,12 @@ export default function AvailableRoomMenu() {
   )
   const uid: string = useAppSelector((state) => state.network.uid)
   const user = useAppSelector((state) => state.network.profile)
-  const [isJoining, setJoining] = useState<boolean>(false)
   const [showRoomSelectionMenu, setShowRoomSelectionMenu] = useState<boolean>(false)
 
   const requestRoom = throttle(async function (gameMode: GameMode) {
-    if (lobby && !isJoining) {
-      setJoining(true)
+    if (lobby) {
       lobby.send(Transfer.REQUEST_ROOM, gameMode)
+      setShowRoomSelectionMenu(false)
     }
   }, 1000)
 
@@ -58,13 +57,11 @@ export default function AvailableRoomMenu() {
       return
     }
 
-    if (lobby && !isJoining) {
-      if (password) {
-        if (user && user.role === Role.BASIC) {
-          const password = prompt(`This room is private. Enter password`)
-          if (selectedRoom.metadata?.password != password)
-            return alert(`Wrong password !`)
-        }
+    if (lobby) {
+      if (password && user && user.role === Role.BASIC) {
+        const password = prompt(`This room is private. Enter password`)
+        if (selectedRoom.metadata?.password != password)
+          return alert(`Wrong password !`)
       }
 
       await joinExistingPreparationRoom(selectedRoom.roomId, client, lobby, dispatch, navigate)

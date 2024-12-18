@@ -36,7 +36,7 @@ import {
   Stat,
   Team
 } from "../types/enum/Game"
-import { Berries, Item } from "../types/enum/Item"
+import { Berries, Item, SynergyGivenByItem } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
@@ -57,6 +57,7 @@ import Simulation from "./simulation"
 import { DelayedCommand, SimulationCommand } from "./simulation-command"
 import { ItemEffects } from "./items"
 import { OnItemRemovedEffect } from "./effect"
+import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 
 export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -593,10 +594,19 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   addItem(item: Item, permanent = false) {
+    if (this.items.size >= 3) {
+      return
+    }
     this.items.add(item)
     this.simulation.applyItemEffect(this, item)
     if (permanent && !this.isGhostOpponent) {
       this.refToBoardPokemon.items.add(item)
+    }
+
+    const type = SynergyGivenByItem[item]
+    if(type && !this.types.has(type)){
+      this.types.add(type)
+      this.simulation.applySynergyEffects(this, type)
     }
   }
 
@@ -613,6 +623,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       Object.entries(ItemStats[item]).forEach(([stat, value]) =>
         this.applyStat(stat as Stat, -value)
       )
+    }
+
+    const type = SynergyGivenByItem[item]
+    const default_types = getPokemonData(this.name).types
+    if (type && !default_types.includes(type)) {
+      this.types.delete(type)
+      SynergyEffects[type].forEach((effect) => {
+        this.effects.delete(effect)
+      })
     }
 
     ItemEffects[item]

@@ -51,9 +51,15 @@
 - Removed Amulet coin base stats
 - Tiny mushroom now reduces health by 50% only if the holder is cloned
 - Pokemons can now hold artificial items and Shiny Stone even if they give one of their existing synergies
- 
+- Max Revive is now consumed on use (stats are lost after resurrection)
+- Item effects are now updated when items are gained or lost in battle
+    - Stats and statuses are now lost when items are removed
+    - Synergy effects and types are now added and removed accordingly
+    - Stat increases from the synergy of an item are gained when added, but not lost when removed
+
 # Gameplay
 
+- New status: Blinded: reduce accuracy of basic attacks by 50%. Replace the existing Smoke effect that was not considered a status.
 - New rank system: 12 different ranks, each with a different icon (by @joinity). Beast ball and Master ball players will create ranked games with Ultra ball.
   - Level ball: 0 ELO
   - Net ball: 1050 ELO
@@ -67,7 +73,7 @@
   - Master ball: 1500 ELO
   - Beast ball: 1700 ELO
 - ELO, XP and titles after game are now distributed immediately after the player is eliminated and leaves the game, instead of waiting for the game to end
-- New status: Blinded: reduce accuracy of basic attacks by 50%. Replace the existing Smoke effect that was not considered a status.
+- Due to an increase of cases of intentional leaves at the start of a game, we have to increase the penalties for early disconnections. Intentional disconnections before stage 6 are no longer protected against Elo loss. Unintentional disconnections without reconnection within the next 3 minutes before stage 6 remain protected against Elo loss, but players won't be able to join a new game within the next 5 minutes.
 
 # UI
 

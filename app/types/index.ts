@@ -560,7 +560,7 @@ export interface IPokemonEntity {
     crit: boolean
   ): void
   addItem(item: Item, permanent?: boolean): void
-  removeItem(item: Item, permenent?: boolean): void
+  removeItem(item: Item, permanent?: boolean): void
   update(
     dt: number,
     board: Board,

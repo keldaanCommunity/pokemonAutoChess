@@ -278,7 +278,7 @@ export default abstract class PokemonState {
       if (pokemon.items.has(Item.SILK_SCARF)) shield *= 1.3
 
       shield = Math.round(shield)
-      pokemon.shield += shield
+      pokemon.shield = min(0)(pokemon.shield + shield)
       if (caster && shield > 0) {
         if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {
           pokemon.simulation.room.broadcast(Transfer.POKEMON_HEAL, {
