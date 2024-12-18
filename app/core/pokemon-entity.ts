@@ -594,6 +594,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   addItem(item: Item, permanent = false) {
+    if (this.items.size >= 3) {
+      return
+    }
     this.items.add(item)
     this.simulation.applyItemEffect(this, item)
     if (permanent && !this.isGhostOpponent) {
