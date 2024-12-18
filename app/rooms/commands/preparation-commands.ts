@@ -34,6 +34,18 @@ export class OnJoinCommand extends Command<
 > {
   async execute({ client, options, auth }) {
     try {
+      const timeoutDateStr = await this.room.presence.hget(
+        client.auth.uid,
+        "user_timeout"
+      )
+      if (timeoutDateStr) {
+        const timeout = new Date(timeoutDateStr).getTime()
+        if (timeout > Date.now()) {
+          client.leave(CloseCodes.USER_TIMEOUT)
+          return
+        }
+      }
+
       const numberOfHumanPlayers = values(this.state.users).filter(
         (u) => !u.isBot
       ).length

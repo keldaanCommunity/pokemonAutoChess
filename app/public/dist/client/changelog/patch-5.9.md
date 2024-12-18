@@ -67,6 +67,7 @@
   - Master ball: 1500 ELO
   - Beast ball: 1700 ELO
 - ELO, XP and titles after game are now distributed immediately after the player is eliminated and leaves the game, instead of waiting for the game to end
+- Due to an increase of cases of intentional leaves at the start of a game, we have to increase the penalties for early disconnections. Intentional disconnections before stage 6 are no longer protected against Elo loss. Unintentional disconnections without reconnection within the next 3 minutes before stage 6 remain protected against Elo loss, but players won't be able to join a new game within the next 5 minutes.
 
 # UI
 

@@ -584,7 +584,19 @@ export default class GameRoom extends Room<GameState> {
       if (client && client.auth && client.auth.displayName) {
         //logger.info(`${client.auth.displayName} left game`)
         const player = this.state.players.get(client.auth.uid)
-        if (player && this.state.stageLevel <= 5) {
+        const hasLeftGameBeforeTheEnd =
+          player && player.life > 0 && !this.state.gameFinished
+        if (hasLeftGameBeforeTheEnd) {
+          /* if a user leaves a game before the end, 
+          they cannot join another in the next 5 minutes */
+          this.presence.hset(
+            client.auth.uid,
+            "user_timeout",
+            new Date(Date.now() + 1000 * 60 * 5).toISOString()
+          )
+        }
+
+        if (player && this.state.stageLevel <= 5 && !consented) {
           /* 
           if player left game during the loading screen or before stage 6,
           we consider they didn't play the game and presume a technical issue
@@ -594,6 +606,7 @@ export default class GameRoom extends Room<GameState> {
           this.setMetadata({
             playerIds: removeInArray(this.metadata.playerIds, client.auth.uid)
           })
+
           /*logger.info(
             `${client.auth.displayName} has been removed from players list`
           )*/

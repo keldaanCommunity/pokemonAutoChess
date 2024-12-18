@@ -218,7 +218,16 @@ export default function Preparation() {
       })
 
       r.onLeave((code) => {
-        const shouldGoToLobby = (code === CloseCodes.USER_KICKED || code === CloseCodes.ROOM_DELETED || code === CloseCodes.ROOM_FULL || code === CloseCodes.ROOM_EMPTY || code === CloseCodes.USER_BANNED || code === CloseCodes.USER_RANK_TOO_LOW)
+        const shouldGoToLobby = [
+          CloseCodes.USER_KICKED,
+          CloseCodes.ROOM_DELETED,
+          CloseCodes.ROOM_FULL,
+          CloseCodes.ROOM_EMPTY,
+          CloseCodes.USER_BANNED,
+          CloseCodes.USER_RANK_TOO_LOW,
+          CloseCodes.USER_TIMEOUT
+        ].includes(code)
+
         const shouldReconnect = code === CloseCodes.ABNORMAL_CLOSURE || code === CloseCodes.TIMEOUT
         logger.info(`left preparation room with code ${code}`, { shouldGoToLobby, shouldReconnect })
 
