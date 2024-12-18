@@ -36,7 +36,7 @@ import {
   Stat,
   Team
 } from "../types/enum/Game"
-import { Berries, Item } from "../types/enum/Item"
+import { Berries, Item, SynergyGivenByItem } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
@@ -598,6 +598,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (permanent && !this.isGhostOpponent) {
       this.refToBoardPokemon.items.add(item)
     }
+
+    const type = SynergyGivenByItem[item]
+    if(type && !this.types.has(type)){
+      this.types.add(type)
+      this.simulation.applySynergyEffects(this, type)
+    }
   }
 
   removeItem(item: Item, permanent = false) {
@@ -613,6 +619,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       Object.entries(ItemStats[item]).forEach(([stat, value]) =>
         this.applyStat(stat as Stat, -value)
       )
+    }
+
+    const type = SynergyGivenByItem[item]
+    if (type) {
+      this.types.delete(type)
+      SynergyEffects[type].forEach((effect) => {
+        this.effects.delete(effect)
+      })
     }
 
     ItemEffects[item]
