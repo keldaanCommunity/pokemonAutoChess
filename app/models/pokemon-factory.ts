@@ -23,17 +23,6 @@ export default class PokemonFactory {
     return pokemons
   }
 
-  // transforms a pokemon into another pokemon,
-  // transferring its items and position to
-  // the new pokemon
-  static transformPokemon(before: Pokemon, afterName: Pkm, player?: IPlayer) {
-    const transformation = this.createPokemonFromName(afterName, player)
-    transformation.positionX = before.positionX
-    transformation.positionY = before.positionY
-    transformation.items = before.items
-    return transformation
-  }
-
   static getPokemonBaseEvolution(name: Pkm) {
     switch (name) {
       case Pkm.VAPOREON:
