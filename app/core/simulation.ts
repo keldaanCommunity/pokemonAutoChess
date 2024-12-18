@@ -101,10 +101,19 @@ export default class Simulation extends Schema implements ISimulation {
     this.board = new Board(BOARD_HEIGHT, BOARD_WIDTH)
 
     // beforeSimulationStart hooks
-    for (const player of [this.bluePlayer, this.redPlayer]) {
+    const playerEffects: [Player | undefined, Set<Effect>, Set<Effect>][] = [
+      [this.bluePlayer, this.blueEffects, this.redEffects],
+      [this.redPlayer, this.redEffects, this.blueEffects]
+    ]
+    for (const [player, teamEffects, opponentEffects] of playerEffects) {
       if (player) {
         player.board.forEach((pokemon, id) => {
-          pokemon.beforeSimulationStart({ weather: this.weather, player })
+          pokemon.beforeSimulationStart({
+            weather: this.weather,
+            player,
+            teamEffects,
+            opponentEffects
+          })
         })
       }
     }
@@ -146,8 +155,6 @@ export default class Simulation extends Schema implements ISimulation {
       if (player) {
         const entityTeam =
           player.team === Team.BLUE_TEAM ? this.blueTeam : this.redTeam
-        const opponentTeam =
-          player.team === Team.BLUE_TEAM ? this.redTeam : this.blueTeam
         player.board.forEach((pokemon) => {
           const entity = values(entityTeam).find(
             (p) => p.refToBoardPokemon === pokemon
@@ -157,7 +164,6 @@ export default class Simulation extends Schema implements ISimulation {
               simulation: this,
               player,
               team: entityTeam,
-              opponentTeam,
               entity
             })
           }
@@ -1329,6 +1335,24 @@ export default class Simulation extends Schema implements ISimulation {
         pokemon.effects.add(Effect.ETHEREAL)
         pokemon.addAttackSpeed(6 * activeSynergies, pokemon, 0, false)
         pokemon.addMaxHP(12 * activeSynergies, pokemon, 0, false)
+        break
+      }
+
+      case Effect.VICTINI_PASSIVE: {
+        pokemon.effects.add(effect)
+        pokemon.addDodgeChance(-1, pokemon, 0, false)
+        break
+      }
+
+      case Effect.GOOD_LUCK: {
+        pokemon.effects.add(effect)
+        pokemon.addLuck(20, pokemon, 0, false)
+        break
+      }
+
+      case Effect.BAD_LUCK: {
+        pokemon.effects.add(effect)
+        pokemon.addLuck(-20, pokemon, 0, false)
         break
       }
 
