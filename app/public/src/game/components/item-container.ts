@@ -2,9 +2,11 @@ import { GameObjects } from "phaser"
 import {
   ArtificialItems,
   Berries,
+  HMs,
   Item,
   ShinyItems,
   SpecialItems,
+  TMs,
   WeatherRocks
 } from "../../../../types/enum/Item"
 import { getGameScene } from "../../pages/game"
@@ -50,12 +52,17 @@ export default class ItemContainer extends DraggableObject {
       )
     }
     this.add(this.circle)
+    const spriteName = TMs.includes(item)
+      ? "TM"
+      : HMs.includes(item)
+        ? "HM"
+        : item
     this.sprite = new GameObjects.Image(
       scene,
       0,
       0,
       "item",
-      item + ".png"
+      spriteName + ".png"
     ).setScale(pokemonId === null ? 0.5 : 0.25)
 
     this.add(this.sprite)
@@ -70,6 +77,8 @@ export default class ItemContainer extends DraggableObject {
     if (ArtificialItems.includes(this.name)) return 3
     if (WeatherRocks.includes(this.name)) return 4
     if (SpecialItems.includes(this.name)) return 5
+    if (TMs.includes(this.name) || HMs.includes(this.name)) return 6
+    //if (Dishes.includes(this.name)) return 7
     return 0
   }
 

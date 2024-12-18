@@ -130,6 +130,7 @@ class GameContainer {
       "wound",
       "enraged",
       "locked",
+      "blinded",
       "magicBounce",
       "tree"
     ]
@@ -383,7 +384,8 @@ class GameContainer {
           "hp",
           "atk",
           "ap",
-          "shiny"
+          "shiny",
+          "skill"
         ]
         fields.forEach((field) => {
           pokemon.listen(field, (value, previousValue) => {

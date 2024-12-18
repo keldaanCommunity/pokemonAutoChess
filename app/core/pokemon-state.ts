@@ -82,7 +82,7 @@ export default abstract class PokemonState {
 
       let isAttackSuccessful = true
       let dodgeChance = target.dodge
-      if (pokemon.effects.has(Effect.GAS)) {
+      if (pokemon.status.blinded) {
         dodgeChance += 0.5
       }
       dodgeChance = max(0.9)(dodgeChance)

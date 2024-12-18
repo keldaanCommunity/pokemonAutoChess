@@ -3,6 +3,7 @@
   max-width: 400px;
   color: white;
   display: grid;
+  font-size: 1.2rem;
   grid-template-columns: 55px 1fr;
   grid-template-areas:
     "icon name"
@@ -69,8 +70,9 @@
   box-shadow: 0 -1px 2px rgb(0 0 0 / 50%);
   padding: 0.25em 0.5em;
   margin: 0 -5px 4px -5px;
-  font-size: 80%;
+  font-size: 0.8em;
   z-index: 2;
+  white-space: pre-line;
 }
 
 .game-item-detail-description:last-child,

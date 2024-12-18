@@ -242,6 +242,12 @@ export default class BattleManager {
         } else {
           pkm.removeLocked()
         }
+      } else if (field === "blinded") {
+        if (pokemon.status.blinded) {
+          pkm.addBlinded()
+        } else {
+          pkm.removeBlinded()
+        }
       } else if (field === "armorReduction") {
         if (pokemon.status.armorReduction) {
           pkm.addArmorReduction()
@@ -1080,15 +1086,15 @@ export default class BattleManager {
       })
     }
 
-    if (event.effect === Effect.GAS) {
+    if (event.effect === Effect.SMOKE) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
         "abilities",
-        "GAS/000.png"
+        "SMOKE/000.png"
       )
       sprite.setDepth(7)
-      sprite.anims.play(Effect.GAS)
+      sprite.anims.play(Effect.SMOKE)
       sprite.setScale(3, 3)
       sprite.setAlpha(0)
       this.boardEventSprites[index] = sprite
@@ -1106,11 +1112,11 @@ export default class BattleManager {
         coordinates[0],
         coordinates[1],
         "abilities",
-        `${Effect.GAS}/000.png`
+        `${Effect.SMOKE}/000.png`
       )
       sprite.setDepth(7)
       sprite.setScale(3, 3)
-      sprite.anims.play(Effect.GAS)
+      sprite.anims.play(Effect.SMOKE)
       sprite.setTint(0xa0ff20)
       sprite.setFlipX(true)
       sprite.setAlpha(0)

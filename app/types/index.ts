@@ -406,6 +406,7 @@ export interface IPokemon {
   skill: Ability
   passive: Passive
   items: SetSchema<Item>
+  tm: Ability | null
   shiny: boolean
   emotion: Emotion
   additional: boolean
@@ -634,6 +635,7 @@ export interface IStatus {
   paralysis: boolean
   pokerus: boolean
   locked: boolean
+  blinded: boolean
   armorReduction: boolean
   runeProtect: boolean
   electricField: boolean

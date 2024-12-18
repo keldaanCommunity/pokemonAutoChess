@@ -723,7 +723,23 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.TEAL_MASK]: { [Stat.SHIELD]: 50 },
   [Item.WELLSPRING_MASK]: { [Stat.SHIELD]: 50 },
   [Item.CORNERSTONE_MASK]: { [Stat.SHIELD]: 50 },
-  [Item.HEARTHFLAME_MASK]: { [Stat.SHIELD]: 50 }
+  [Item.HEARTHFLAME_MASK]: { [Stat.SHIELD]: 50 },
+  [Item.TM_BIDE]: {},
+  [Item.TM_BRICK_BREAK]: {},
+  [Item.TM_BULK_UP]: {},
+  [Item.TM_PAYDAY]: {},
+  [Item.TM_PSYCH_UP]: {},
+  [Item.TM_RAGE]: {},
+  [Item.TM_RETALIATE]: {},
+  [Item.TM_TAUNT]: {},
+  [Item.HM_CUT]: {},
+  [Item.HM_FLY]: {},
+  [Item.HM_FLASH]: {},
+  [Item.HM_ROCK_SMASH]: {},
+  [Item.HM_STRENGTH]: {},
+  [Item.HM_SURF]: {},
+  [Item.HM_WATERFALL]: {},
+  [Item.HM_WHIRLPOOL]: {}
 }
 
 export type TilesetExchangeFile = {

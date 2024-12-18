@@ -1123,9 +1123,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.hasSynergyEffect(Synergy.HUMAN)) {
       let lifesteal = 0
       if (this.effects.has(Effect.MEDITATE)) {
-        lifesteal = 0.15
+        lifesteal = 0.25
       } else if (this.effects.has(Effect.FOCUS_ENERGY)) {
-        lifesteal = 0.3
+        lifesteal = 0.4
       } else if (this.effects.has(Effect.CALM_MIND)) {
         lifesteal = 0.6
       }
@@ -1179,7 +1179,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       const cells = board.getAdjacentCells(this.positionX, this.positionY)
       cells.forEach((cell) => {
-        board.addBoardEffect(cell.x, cell.y, Effect.GAS, this.simulation)
+        board.addBoardEffect(cell.x, cell.y, Effect.SMOKE, this.simulation)
         if (cell.value && cell.value.team !== this.team) {
           cell.value.status.triggerParalysis(3000, cell.value, this)
         }

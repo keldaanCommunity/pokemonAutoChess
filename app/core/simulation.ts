@@ -1023,15 +1023,11 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case Effect.MEDITATE:
-        pokemon.effects.add(Effect.MEDITATE)
-        break
-
       case Effect.FOCUS_ENERGY:
-        pokemon.effects.add(Effect.FOCUS_ENERGY)
-        break
-
       case Effect.CALM_MIND:
-        pokemon.effects.add(Effect.CALM_MIND)
+        if (types.has(Synergy.HUMAN)) {
+          pokemon.effects.add(effect)
+        }
         break
 
       case Effect.TAILWIND:

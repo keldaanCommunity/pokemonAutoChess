@@ -107,7 +107,7 @@ export enum Effect {
   NIGHT = "NIGHT",
   WINDY = "WINDY",
   BLOODMOON = "BLOODMOON",
-  GAS = "GAS",
+  SMOKE = "SMOKE",
   POISON_GAS = "POISON_GAS",
   SHINING_RAY = "SHINING_RAY",
   LIGHT_PULSE = "LIGHT_PULSE",
@@ -141,7 +141,7 @@ export enum Effect {
 
 export const BoardEffects = [
   Effect.LIGHTNING_STRIKE,
-  Effect.GAS,
+  Effect.SMOKE,
   Effect.POISON_GAS,
   Effect.STEALTH_ROCKS,
   Effect.SPIKES,

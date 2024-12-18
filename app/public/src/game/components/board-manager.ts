@@ -625,12 +625,14 @@ export default class BoardManager {
 
         case "atk":
           pokemonUI.atk = value as IPokemon["atk"]
-          if (value > previousValue) this.displayBoost(Stat.ATK, pokemonUI)
+          if ((value as IPokemon["atk"]) > (previousValue as IPokemon["atk"]))
+            this.displayBoost(Stat.ATK, pokemonUI)
           break
 
         case "ap":
           pokemonUI.ap = value as IPokemon["ap"]
-          if (value > previousValue) this.displayBoost(Stat.AP, pokemonUI)
+          if ((value as IPokemon["ap"]) > (previousValue as IPokemon["atk"]))
+            this.displayBoost(Stat.AP, pokemonUI)
           break
 
         case "shiny":
@@ -640,6 +642,13 @@ export default class BoardManager {
             pokemonUI.action,
             false
           )
+          break
+
+        case "skill":
+          if (pokemonUI.skill !== value) {
+            pokemonUI.skill = value as IPokemon["skill"]
+            pokemonUI.evolutionAnimation()
+          }
           break
       }
     }

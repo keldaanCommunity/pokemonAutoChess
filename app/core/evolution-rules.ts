@@ -2,6 +2,7 @@ import Player from "../models/colyseus-models/player"
 import { Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
 import { EvolutionTime } from "../types/Config"
+import { Ability } from "../types/enum/Ability"
 import { PokemonActionState } from "../types/enum/Game"
 import { ItemComponents, Item, ShinyItems } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
@@ -147,7 +148,7 @@ export class CountEvolutionRule extends EvolutionRule {
     )
 
     carryOverPermanentStats(pokemonEvolved, pokemonsBeforeEvolution)
-  
+
     if (pokemon.onEvolve) {
       pokemon.onEvolve({ pokemonEvolved, pokemonsBeforeEvolution, player })
     }
@@ -308,19 +309,29 @@ export class ConditionBasedEvolutionRule extends EvolutionRule {
     return pokemonEvolved
   }
 }
-function carryOverPermanentStats(pokemonEvolved: Pokemon, pokemonsBeforeEvolution: Pokemon[]) {
-    // carry over the permanent stat buffs
-    const permanentBuffStats = ["hp", "atk", "def", "speDef"] as const
-    for (const stat of permanentBuffStats) {
-      const statStacked = sum(
-        pokemonsBeforeEvolution.map(
-          (p) => p[stat] - new PokemonClasses[p.name]()[stat]
-        )
+function carryOverPermanentStats(
+  pokemonEvolved: Pokemon,
+  pokemonsBeforeEvolution: Pokemon[]
+) {
+  // carry over the permanent stat buffs
+  const permanentBuffStats = ["hp", "atk", "def", "speDef"] as const
+  for (const stat of permanentBuffStats) {
+    const statStacked = sum(
+      pokemonsBeforeEvolution.map(
+        (p) => p[stat] - new PokemonClasses[p.name]()[stat]
       )
-      if (statStacked > 0) {
-        pokemonEvolved[stat] += statStacked
-      }
+    )
+    if (statStacked > 0) {
+      pokemonEvolved[stat] += statStacked
     }
+  }
 
+  // carry over TM
+  const existingTms = pokemonsBeforeEvolution
+    .map((p) => p.tm)
+    .filter<Ability>((tm): tm is Ability => tm != null)
+  if (existingTms.length > 0) {
+    pokemonEvolved.tm = pickRandomIn(existingTms)
+    pokemonEvolved.skill = pokemonEvolved.tm
+  }
 }
-
