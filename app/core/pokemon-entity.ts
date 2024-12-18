@@ -57,6 +57,7 @@ import Simulation from "./simulation"
 import { DelayedCommand, SimulationCommand } from "./simulation-command"
 import { ItemEffects } from "./items"
 import { OnItemRemovedEffect } from "./effect"
+import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 
 export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -622,7 +623,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     const type = SynergyGivenByItem[item]
-    if (type) {
+    const default_types = getPokemonData(this.name).types
+    if (type && !default_types.includes(type)) {
       this.types.delete(type)
       SynergyEffects[type].forEach((effect) => {
         this.effects.delete(effect)
