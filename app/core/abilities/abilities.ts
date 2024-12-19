@@ -8802,7 +8802,7 @@ export class PsystrikeStrategy extends AbilityStrategy {
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
           cell.value.handleSpecialDamage(
-            100,
+            80,
             board,
             AttackType.PHYSICAL,
             pokemon,

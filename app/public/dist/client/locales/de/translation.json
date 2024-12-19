@@ -1545,7 +1545,7 @@
     "PSYCHO_BOOST": "Schneidet einen horizontalen Schnitt um das Ziel herum und fügt allen getroffenen Gegnern [140,SP] SPECIAL zu. Verringert die AP des Zaubernden um 20 für jedes getroffene Pokémon.",
     "ICE_HAMMER": "Fügt dem Ziel [50,100,SP] SPECIAL zu und lässt es 3 Sekunden lang FREEZE. PARALYSIS den Zaubernden für 3 Sekunden.",
     "POLLEN_PUFF": "Gib dem Verbündeten mit den niedrigsten HP einen Pollenstoß, der [30,60,120,SP] HP wiederherstellt",
-    "PSYSTRIKE": "Der Zaubernde materialisiert eine seltsame psychische Welle in Richtung des am weitesten entfernten Gegners, die ihm [100,SP] PHYSICAL zufügt und alles in ihrem Weg teleportiert",
+    "PSYSTRIKE": "Der Zaubernde materialisiert eine seltsame psychische Welle in Richtung des am weitesten entfernten Gegners, die ihm [80,SP] PHYSICAL zufügt und alles in ihrem Weg teleportiert",
     "FACADE": "Verursacht [20,40,80,SP] SPECIAL. Verdoppelt den Schaden, wenn der Zaubernde einen negativen Status hat.",
     "DREAM_EATER": "Wenn ein Gegner SLEEP ist, springt er neben ihn, verursacht [45,90,SP] SPECIAL und stellt die gleiche Menge an HP wieder her. Andernfalls versetzt er das Ziel für [2,5,5,ND=1] Sekunden in SLEEP.",
     "SPARK": "Das Pokémon feuert einen mit Elektrizität geladenen Funken auf das Ziel ab und fügt ihm [40,80,SP] SPECIAL zu. Der Funke kann bis zu 4 Mal zwischen benachbarten Gegnern hin- und herspringen. Jeder Rückprall halbiert die SPECIAL",

@@ -45,6 +45,7 @@
 - New ability for Virizion: Sacred Sword of the Grasslands
 - Keldeo range: 2 → 1 ; New ability: Secret Sword
 - Buff Mareep line: PP 110 → 100
+- Nerf Psystrike (Mewtwo): damage 100 → 80
 
 # Changes to Synergies
 
