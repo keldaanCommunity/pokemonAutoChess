@@ -1080,13 +1080,15 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     })
   }
 
-  computeIncome() {
+  computeIncome(isPVE: boolean) {
     this.state.players.forEach((player) => {
       let income = 0
       if (player.alive && !player.isBot) {
         player.interest = Math.min(Math.floor(player.money / 10), 5)
         income += player.interest
-        income += max(5)(player.streak)
+        if (!isPVE) {
+          income += max(5)(player.streak)
+        }
         income += 5
         player.addMoney(income, true, null)
         if (income > 0) {
@@ -1293,7 +1295,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
     if (!isGameFinished) {
       this.state.stageLevel += 1
-      this.computeIncome()
+      this.computeIncome(isPVE)
       this.state.players.forEach((player: Player) => {
         if (player.alive) {
           // Fake bots XP bar
