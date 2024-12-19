@@ -3373,7 +3373,7 @@
     "FREE_MARKET": "Pokemons are bought and sold for 0 GOLD",
     "SHINY_HUNTER": "All the Wild PvE encounters are shiny",
     "DESPERATE_MOVES": "Players start with 150 HP. Rerolling shop costs HP instead of GOLD.",
-    "DO_IT_ALL_YOURSELF": "Start with a copy of your avatar with +100 max HP and more gold if your avatar is of a lower rarity",
+    "DO_IT_ALL_YOURSELF": "Start with a copy of your avatar. Lower rarity avatars get additional max HP and starting gold.",
     "FIRST_PARTNER": "Choose your starter Pokémon. You get a copy of this unit every stage up to stage 10.",
     "SLAMINGO": "All items are dropped when a Pokémon is put on the bench. Starts with 4 random components"
   },

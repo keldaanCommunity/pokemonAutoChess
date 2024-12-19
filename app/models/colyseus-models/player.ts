@@ -48,6 +48,7 @@ import PokemonCollection from "./pokemon-collection"
 import PokemonConfig from "./pokemon-config"
 import Synergies, { computeSynergies } from "./synergies"
 import { carryOverPermanentStats } from "../../core/evolution-rules"
+import { getUnitPowerScore } from "../../public/src/pages/component/bot-builder/bot-logic"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
@@ -196,10 +197,22 @@ export default class Player extends Schema implements IPlayer {
 
       avatar.positionX = getFirstAvailablePositionInBench(this.board) ?? 0
       avatar.positionY = 0
-      avatar.hp += 100
+      let powerScore = getUnitPowerScore(avatar.name)
+      if (avatar.name === Pkm.EGG) {
+        powerScore = 5
+        if (avatar.shiny) {
+          this.money = 1
+        }
+      }
+      if (powerScore < 5) {
+        this.money += 55 - Math.round(10 * powerScore)
+      }
+      const bonusHP = 150 - powerScore * 25
+      if (bonusHP > 0) {
+        avatar.hp += bonusHP
+      }
       this.board.set(avatar.id, avatar)
       avatar.onAcquired(this)
-      this.money += 40 - 2 * getSellPrice(avatar, state.specialGameRule)
     } else if (state.specialGameRule === SpecialGameRule.FIRST_PARTNER) {
       const randomCommons = pickNRandomIn(
         getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.COMMON).filter(
