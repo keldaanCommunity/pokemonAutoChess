@@ -161,6 +161,8 @@ export class Pokemon extends Schema implements IPokemon {
   beforeSimulationStart(params: {
     weather: Weather
     player: Player
+    teamEffects: Set<Effect>
+    opponentEffects: Set<Effect>
   }) {
     // called at simulation start before entities are generated
   }
@@ -169,7 +171,6 @@ export class Pokemon extends Schema implements IPokemon {
     player: IPlayer
     simulation: Simulation
     team: MapSchema<IPokemonEntity>
-    opponentTeam: MapSchema<IPokemonEntity>
     entity: IPokemonEntity
   }) {
     // called at simulation start after entities are generated
@@ -6218,12 +6219,11 @@ export class Victini extends Pokemon {
   skill = Ability.SEARING_SHOT
   passive = Passive.VICTINI
   attackSprite = AttackSprite.FIRE_MELEE
-  afterSimulationStart({
-    opponentTeam
-  }: { opponentTeam: MapSchema<IPokemonEntity> }) {
-    opponentTeam.forEach((pokemon) => {
-      pokemon.addDodgeChance(-1, pokemon, 0, false)
-    })
+  beforeSimulationStart(
+    {opponentEffects}:
+    {opponentEffects: Set<Effect>}
+  ) {
+    opponentEffects.add(Effect.VICTINI_PASSIVE)
   }
 }
 
@@ -6240,10 +6240,11 @@ export class Jirachi extends Pokemon {
   skill = Ability.DOOM_DESIRE
   passive = Passive.GOOD_LUCK
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  afterSimulationStart({ team }: { team: MapSchema<IPokemonEntity> }) {
-    team.forEach((pokemon) => {
-      pokemon.addLuck(20, pokemon, 0, false)
-    })
+  beforeSimulationStart(
+    {teamEffects}:
+    {teamEffects: Set<Effect>}
+  ) {
+    teamEffects.add(Effect.GOOD_LUCK)
   }
 }
 
@@ -12014,12 +12015,11 @@ export class Murkrow extends Pokemon {
   passive = Passive.BAD_LUCK
   additional = true
   attackSprite = AttackSprite.DARK_MELEE
-  afterSimulationStart({
-    opponentTeam
-  }: { opponentTeam: MapSchema<IPokemonEntity> }) {
-    opponentTeam.forEach((pokemon) => {
-      pokemon.addLuck(-20, pokemon, 0, false)
-    })
+  beforeSimulationStart(
+    {opponentEffects}:
+    {opponentEffects: Set<Effect>}
+  ) {
+    opponentEffects.add(Effect.BAD_LUCK)
   }
 }
 
@@ -12037,12 +12037,11 @@ export class Honchkrow extends Pokemon {
   passive = Passive.BAD_LUCK
   additional = true
   attackSprite = AttackSprite.DARK_MELEE
-  afterSimulationStart({
-    opponentTeam
-  }: { opponentTeam: MapSchema<IPokemonEntity> }) {
-    opponentTeam.forEach((pokemon) => {
-      pokemon.addLuck(-20, pokemon, 0, false)
-    })
+  beforeSimulationStart(
+    {opponentEffects}:
+    {opponentEffects: Set<Effect>}
+  ) {
+    opponentEffects.add(Effect.BAD_LUCK)
   }
 }
 
