@@ -312,11 +312,10 @@ export function carryOverPermanentStats(
 ) {
   // carry over the permanent stat buffs
   const permanentBuffStats = ["hp", "atk", "def", "speDef"] as const
+  const baseData = new PokemonClasses[pokemonsBeforeEvolution[0].name]()
   for (const stat of permanentBuffStats) {
     const statStacked = sum(
-      pokemonsBeforeEvolution.map(
-        (p) => p[stat] - new PokemonClasses[p.name]()[stat]
-      )
+      pokemonsBeforeEvolution.map((p) => p[stat] - baseData[stat])
     )
     if (statStacked > 0) {
       pokemonEvolved[stat] += statStacked
