@@ -46,12 +46,15 @@
 - Keldeo range: 2 → 1 ; New ability: Secret Sword
 - Buff Mareep line: PP 110 → 100
 - Nerf Psystrike (Mewtwo): damage 100 → 80
+- Nerf Fiery Wrath (Galarian Moltres): damage 40 → 33
 
 # Changes to Synergies
 
 - Human rework: healing is now for Humans only, not for all allies ; healing: 15/30/60% → 25/40/60% ; Human 2 and 4 give a random TM, Human 6 gives a random HM
 - Nerf Dark crit damage +60/80/100% → +30/40/50%
 - Buff Electric 9: Triple attacks deal ~~10~~ 20 special damage to adjacent enemies
+- Nerf Ghost 2: def/spedef debuff 5 → 2
+- Nerf Ghost 4: atk debuff 30 → 25%
 
 # Changes to Items
 
