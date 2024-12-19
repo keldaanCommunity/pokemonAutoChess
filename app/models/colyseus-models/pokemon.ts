@@ -11155,7 +11155,7 @@ export class MegaSableye extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
   rarity = Rarity.UNIQUE
   stars = 4
-  hp = 230
+  hp = 200
   atk = 12
   def = 6
   speDef = 6

@@ -47,6 +47,7 @@
 - Buff Mareep line: PP 110 → 100
 - Nerf Psystrike (Mewtwo): damage 100 → 80
 - Nerf Fiery Wrath (Galarian Moltres): damage 40 → 33
+- Nerf Mega Sableye: HP 230 → 200
 
 # Changes to Synergies
 
