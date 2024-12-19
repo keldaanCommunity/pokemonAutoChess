@@ -3430,7 +3430,7 @@ export class PresentStrategy extends AbilityStrategy {
   }
 }
 
-export class SacredSwordStrategy extends AbilityStrategy {
+export class SacredSwordGrassStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3439,8 +3439,71 @@ export class SacredSwordStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = 100
+    const nbRemainingAllies = board.cells.filter(
+      (p) => p && p.team === pokemon.team
+    ).length
+    const damage = 80 + 10 * nbRemainingAllies
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
+  }
+}
+
+export class SacredSwordIronStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const nbAlliesAlive = board.cells.filter(
+      (p) => p && p.team === pokemon.team
+    ).length
+    const meter =
+      pokemon.team === Team.BLUE_TEAM ? "blueDpsMeter" : "redDpsMeter"
+    const nbFallenAllies = pokemon.simulation[meter].size - nbAlliesAlive
+    const damage = 80 + 15 * nbFallenAllies
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
+  }
+}
+
+export class SacredSwordCavernStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const numberOfEnemiesInOurSide = board.cells.filter(
+      (cell) =>
+        cell &&
+        cell.team !== pokemon.team &&
+        (pokemon.team === Team.BLUE_TEAM
+          ? cell.positionY < 3
+          : cell.positionY > 2)
+    ).length
+    const damage = 80 + 20 * numberOfEnemiesInOurSide
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
+  }
+}
+
+export class SecretSwordStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 150
+    const damageType =
+      pokemon.count.fightingBlockCount >= 20
+        ? AttackType.TRUE
+        : AttackType.PHYSICAL
+    target.handleSpecialDamage(damage, board, damageType, pokemon, crit)
   }
 }
 
@@ -11368,7 +11431,10 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.TRIPLE_KICK]: new TripleKickStrategy(),
   [Ability.MAWASHI_GERI]: new MawashiGeriStrategy(),
   [Ability.FORECAST]: new ForecastStrategy(),
-  [Ability.SACRED_SWORD]: new SacredSwordStrategy(),
+  [Ability.SACRED_SWORD_GRASS]: new SacredSwordGrassStrategy(),
+  [Ability.SACRED_SWORD_CAVERN]: new SacredSwordCavernStrategy(),
+  [Ability.SACRED_SWORD_IRON]: new SacredSwordIronStrategy(),
+  [Ability.SECRET_SWORD]: new SecretSwordStrategy(),
   [Ability.X_SCISSOR]: new XScissorStrategy(),
   [Ability.PLASMA_FIST]: new PlasmaFistStrategy(),
   [Ability.SPECTRAL_THIEF]: new SpectralThiefStrategy(),

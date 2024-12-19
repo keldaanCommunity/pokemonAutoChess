@@ -1580,12 +1580,45 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
-    case Ability.SACRED_SWORD:
-      addAbilitySprite(skill, coordinatesTarget, true)
+    case Ability.SACRED_SWORD_IRON:
+      addAbilitySprite("SACRED_SWORD", coordinatesTarget, true)
         .setScale(2)
         .setOrigin(0.5, 0.2)
         .setRotation(Math.PI)
       break
+
+    case Ability.SACRED_SWORD_GRASS:
+      addAbilitySprite("SACRED_SWORD", coordinatesTarget, true)
+        .setScale(2)
+        .setOrigin(0.5, 0.2)
+        .setRotation(Math.PI)
+        .setTint(0xb0ffa0)
+      break
+
+    case Ability.SACRED_SWORD_CAVERN:
+      addAbilitySprite("SACRED_SWORD", coordinatesTarget, true)
+        .setScale(2)
+        .setOrigin(0.5, 0.2)
+        .setRotation(Math.PI)
+        .setTint(0xe0c0a0)
+      break
+
+    case Ability.SECRET_SWORD: {
+      const specialProjectile = addAbilitySprite(
+        "SACRED_SWORD",
+        [coordinatesTarget[0], coordinatesTarget[1] - 30],
+        true
+      )
+        .setScale(2)
+        .setOrigin(0.5, 0.5)
+        .setTint(0xfff0b0)
+      scene.tweens.add({
+        targets: specialProjectile,
+        angle: 540,
+        duration: 400
+      })
+      break
+    }
 
     case Ability.METAL_BURST:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)

@@ -1,4 +1,6 @@
 # New Pokemons:
+
+- Terrakion
 - Fletchling
 - Fletchinder
 - Talonflame
@@ -38,6 +40,10 @@
 - Buff Ogerpon Wellspring: passive PP gain: 10 → 20. Added AP scaling for PP gain
 - Buff Ogerpon Hearthflame: passive burn duration 2 → 5 seconds
 - Nerf Morpeko: Aura wheel cooldown: 100ms → 200ms
+- Cobalion, Virizion and Keldeo are now Legendary ; adjusted stats accordingly.
+- New ability for Cobalion: Sacred Sword of the Iron Will
+- New ability for Virizion: Sacred Sword of the Grasslands
+- Keldeo range: 2 → 1 ; New ability: Secret Sword
 
 # Changes to Synergies
 

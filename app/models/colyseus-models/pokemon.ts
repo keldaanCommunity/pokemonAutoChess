@@ -5805,57 +5805,57 @@ export class Enamorus extends Pokemon {
 
 export class Keldeo extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIGHTING])
-  rarity = Rarity.UNIQUE
+  rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 200
-  atk = 20
-  def = 3
-  speDef = 3
+  hp = 300
+  atk = 30
+  def = 4
+  speDef = 4
   maxPP = 100
-  range = 2
-  skill = Ability.AQUA_JET
+  range = 1
+  skill = Ability.SECRET_SWORD
   attackSprite = AttackSprite.WATER_RANGE
 }
 
 export class Terrakion extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.FIGHTING])
-  rarity = Rarity.UNIQUE
+  rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 200
-  atk = 20
-  def = 6
-  speDef = 6
-  maxPP = 100
+  hp = 300
+  atk = 34
+  def = 4
+  speDef = 4
+  maxPP = 120
   range = 1
-  skill = Ability.DEFAULT
+  skill = Ability.SACRED_SWORD_CAVERN
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
 export class Virizion extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING])
-  rarity = Rarity.UNIQUE
+  rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 200
-  atk = 20
-  def = 6
-  speDef = 6
-  maxPP = 140
+  hp = 300
+  atk = 30
+  def = 4
+  speDef = 8
+  maxPP = 120
   range = 1
-  skill = Ability.SACRED_SWORD
+  skill = Ability.SACRED_SWORD_GRASS
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Cobalion extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FIGHTING])
-  rarity = Rarity.UNIQUE
+  rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 200
-  atk = 20
-  def = 6
-  speDef = 6
-  maxPP = 100
+  hp = 300
+  atk = 30
+  def = 8
+  speDef = 4
+  maxPP = 120
   range = 1
-  skill = Ability.METAL_BURST
+  skill = Ability.SACRED_SWORD_IRON
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 

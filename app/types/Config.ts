@@ -198,8 +198,6 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.SPIRITOMB,
   Pkm.ROTOM,
   Pkm.PHIONE,
-  Pkm.COBALION,
-  Pkm.KELDEO,
   Pkm.TAPU_KOKO,
   Pkm.TAPU_LELE,
   Pkm.SEVIPER,
@@ -213,7 +211,6 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.TAPU_FINI,
   Pkm.MIMIKYU,
   Pkm.TYROGUE,
-  Pkm.VIRIZION,
   Pkm.ZERAORA,
   Pkm.SHUCKLE,
   Pkm.LUNATONE,
@@ -326,7 +323,11 @@ export const LegendaryShop = new Array<PkmProposition>(
   Pkm.ENAMORUS,
   Pkm.MAGEARNA,
   Pkm.MELMETAL,
-  Pkm.ZYGARDE_50
+  Pkm.ZYGARDE_50,
+  Pkm.TERRAKION,
+  Pkm.VIRIZION,
+  Pkm.COBALION,
+  Pkm.KELDEO
 )
 
 export const NB_UNIQUE_PROPOSITIONS = 6

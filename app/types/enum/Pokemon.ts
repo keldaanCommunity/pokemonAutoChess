@@ -4245,14 +4245,14 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.TERRAKION]: {
-    attack: AnimationType.Attack,
+    attack: AnimationType.Strike,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    emote: AnimationType.RearUp
   },
   [Pkm.VIRIZION]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.RearUp,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp
   },
   [Pkm.COBALION]: {
     attack: AnimationType.Attack,
