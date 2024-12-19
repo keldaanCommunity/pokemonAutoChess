@@ -1483,7 +1483,7 @@
     "KNOCK_OFF": "Inflige [90,SP] de SPECIAL. Si el objetivo lleva algún objeto, estos son removidos e inflige un daño adicional de [30,SP] de SPECIAL por cada objeto eliminado",
     "FISHIOUS_REND": "Inflige [80,SP] de SPECIAL. Hace el doble de daño si el atacante tiene más ATK_SPEED que el objetivo",
     "RECOVER": "Recupera un [25,SP]% de la salud máxima",
-    "CURSE": "Inflige CURSE al enemigo con mayor HP, el cual quedara KO después de [8,4,SP=-0.2] segundos",
+    "CURSE": "Inflige CURSE al enemigo con mayor HP, el cual quedara KO después de [8,5,3,SP=-0.2] segundos",
     "DOOM_DESIRE": "Después de 2 segundos, inflige [150,SP] de SPECIAL al objetivo. Recupera 100 PP si el objetivo queda KO.",
     "TIME_TRAVEL": "Regresa en el tiempo para recuperar la salud perdida. Todos los aliados curan sus estados negativos y recuperan su HP en [25,SP].",
     "POLTERGEIST": "Inflige [30,60,120,SP] de SPECIAL + [20, SP] de SPECIAL por cada objeto equipado del oponente ([40,SP] si es un objeto ARTIFICIAL)",

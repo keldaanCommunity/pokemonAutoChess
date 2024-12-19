@@ -1586,7 +1586,7 @@
     "KNOCK_OFF": "对目标造成[90,SP]点SPECIAL。若其有携带道具，将所有道具移除，且每个道具使此招式伤害增加[30,SP]。",
     "FISHIOUS_REND": "对目标造成[80,SP]点SPECIAL。若使用者的ATK_SPEED高于目标，造成的伤害翻倍。",
     "RECOVER": "恢复最大HP的[25,SP]%。",
-    "CURSE": "使HP最高的敌方宝可梦陷入CURSE，其将在[8,4,SP=-0.2]秒后倒下。",
+    "CURSE": "使HP最高的敌方宝可梦陷入CURSE，其将在[8,5,3,SP=-0.2]秒后倒下。",
     "DOOM_DESIRE": "2秒后，对目标造成[150,SP]点SPECIAL。若目标在此期间已经倒下，恢复100点PP。",
     "TIME_TRAVEL": "回到过去找回损失的生命值。移除所有我方宝可梦的负面状态，并恢复他们[25,SP]点HP。",
     "POLTERGEIST": "对目标造成[30,60,120,SP]点SPECIAL。目标每携带一件道具，造成的伤害增加[20,SP]（若为ARTIFICIAL类，改为增加[40,SP]）。",
