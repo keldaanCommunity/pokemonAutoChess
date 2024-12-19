@@ -89,5 +89,6 @@
 # Bugfix
 
 - Pokemon with passives that apply persistent effects now apply properly to spawns and resurrected pokemon.
+- Weather effects now apply properly to spawns and resurrected pokemon.
 
 # Misc
