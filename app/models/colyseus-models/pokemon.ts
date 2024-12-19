@@ -614,7 +614,7 @@ export class Tsareena extends Pokemon {
   atk = 34
   def = 6
   speDef = 6
-  maxPP = 90
+  maxPP = 120
   range = 1
   skill = Ability.HIGH_JUMP_KICK
   attackSprite = AttackSprite.FIGHTING_MELEE

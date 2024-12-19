@@ -48,6 +48,7 @@
 - Nerf Psystrike (Mewtwo): damage 100 → 80
 - Nerf Fiery Wrath (Galarian Moltres): damage 40 → 33
 - Nerf Mega Sableye: HP 230 → 200
+- Nerf Tsareena: PP 90 → 120
 
 # Changes to Synergies
 
