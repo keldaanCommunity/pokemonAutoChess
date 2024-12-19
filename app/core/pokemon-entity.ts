@@ -246,11 +246,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   get inLightCell(): boolean {
     if (!this.player) return false
     const { lightX, lightY } = this.player
-    if (this.team === Team.BLUE_TEAM) {
-      return this.positionX === lightX && this.positionY === lightY - 1
-    } else {
-      return this.positionX === lightX && this.positionY === 5 - (lightY - 1)
-    }
+    const {positionX, positionY} = this.refToBoardPokemon
+    return positionX === lightX && positionY === lightY
   }
 
   hasSynergyEffect(synergy: Synergy): boolean {
