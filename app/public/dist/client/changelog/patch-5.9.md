@@ -44,6 +44,7 @@
 - New ability for Cobalion: Sacred Sword of the Iron Will
 - New ability for Virizion: Sacred Sword of the Grasslands
 - Keldeo range: 2 → 1 ; New ability: Secret Sword
+- Buff Mareep line: PP 110 → 100
 
 # Changes to Synergies
 
