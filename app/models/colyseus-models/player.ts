@@ -47,6 +47,7 @@ import { Pokemon, PokemonClasses } from "./pokemon"
 import PokemonCollection from "./pokemon-collection"
 import PokemonConfig from "./pokemon-config"
 import Synergies, { computeSynergies } from "./synergies"
+import { carryOverPermanentStats } from "../../core/evolution-rules"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
@@ -279,6 +280,7 @@ export default class Player extends Schema implements IPlayer {
     this.board.set(newPokemon.id, newPokemon)
     newPokemon.onAcquired(this)
     this.updateSynergies()
+    carryOverPermanentStats(newPokemon, [pokemon])
     return newPokemon
   }
 

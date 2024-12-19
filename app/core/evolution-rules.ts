@@ -225,7 +225,6 @@ export class ItemEvolutionRule extends EvolutionRule {
       pokemon,
       pokemonEvolutionName
     )
-    carryOverPermanentStats(pokemonEvolved, [pokemon])
     return pokemonEvolved
   }
 }
@@ -273,7 +272,6 @@ export class HatchEvolutionRule extends EvolutionRule {
       pokemon,
       pokemonEvolutionName
     )
-    carryOverPermanentStats(pokemonEvolved, [pokemon])
     return pokemonEvolved
   }
 }
@@ -305,11 +303,10 @@ export class ConditionBasedEvolutionRule extends EvolutionRule {
       pokemon,
       pokemonEvolutionName
     )
-    carryOverPermanentStats(pokemonEvolved, [pokemon])
     return pokemonEvolved
   }
 }
-function carryOverPermanentStats(
+export function carryOverPermanentStats(
   pokemonEvolved: Pokemon,
   pokemonsBeforeEvolution: Pokemon[]
 ) {
