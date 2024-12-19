@@ -27,7 +27,7 @@ import {
   deleteRoom,
   gameStartRequest,
   setSpecialRule,
-  toggleEloRoom,
+  toggleNoElo,
   toggleReady
 } from "../../../stores/NetworkStore"
 import { cc } from "../../utils/jsx"
@@ -112,7 +112,7 @@ export default function PreparationMenu() {
   }
 
   function toggleElo() {
-    dispatch(toggleEloRoom(!noElo))
+    dispatch(toggleNoElo(!noElo))
   }
 
   const startGame = throttle(async function startGame() {

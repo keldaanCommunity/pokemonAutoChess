@@ -23,7 +23,7 @@ import {
   OnRoomChangeSpecialRule,
   OnRoomNameCommand,
   OnRoomPasswordCommand,
-  OnToggleEloCommand,
+  OnToggleNoEloCommand,
   OnToggleReadyCommand,
   RemoveMessageCommand
 } from "./commands/preparation-commands"
@@ -56,10 +56,8 @@ export default class PreparationRoom extends Room<PreparationState> {
     updateLobby(this)
   }
 
-  async toggleElo(noElo: boolean) {
-    await this.setMetadata(<IPreparationMetadata>{
-      noElo: noElo
-    })
+  async toggleNoElo(noElo: boolean) {
+    await this.setMetadata(<IPreparationMetadata>{ noElo })
     updateLobby(this)
   }
 
@@ -257,7 +255,10 @@ export default class PreparationRoom extends Room<PreparationState> {
     this.onMessage(Transfer.TOGGLE_NO_ELO, (client, message) => {
       logger.info(Transfer.TOGGLE_NO_ELO, this.roomName)
       try {
-        this.dispatcher.dispatch(new OnToggleEloCommand(), { client, message })
+        this.dispatcher.dispatch(new OnToggleNoEloCommand(), {
+          client,
+          message
+        })
       } catch (error) {
         logger.error(error)
       }
