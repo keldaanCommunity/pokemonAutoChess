@@ -27,7 +27,7 @@ import {
   deleteRoom,
   gameStartRequest,
   setSpecialRule,
-  toggleNoElo,
+  setNoElo,
   toggleReady
 } from "../../../stores/NetworkStore"
 import { cc } from "../../utils/jsx"
@@ -111,8 +111,8 @@ export default function PreparationMenu() {
     }
   }
 
-  function toggleElo() {
-    dispatch(toggleNoElo(!noElo))
+  function toggleNoElo() {
+    dispatch(setNoElo(!noElo))
   }
 
   const startGame = throttle(async function startGame() {
@@ -232,7 +232,7 @@ export default function PreparationMenu() {
     (isOwner || isAdmin) && (
       <button
         className="bubbly blue"
-        onClick={toggleElo}
+        onClick={toggleNoElo}
         title={noElo ? t("enable_elo_hint") : t("disable_elo_hint")}
       >
         {noElo ? t("enable_elo") : t("disable_elo")}

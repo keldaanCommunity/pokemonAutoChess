@@ -418,7 +418,7 @@ export class OnRoomChangeSpecialRule extends Command<
         this.state.specialGameRule = specialRule
         if (specialRule != null) {
           this.state.noElo = true
-          this.room.toggleNoElo(true)
+          this.room.setNoElo(true)
         }
         const leader = this.state.users.get(client.auth.uid)
         this.room.state.addMessage({
@@ -440,7 +440,7 @@ export class OnRoomChangeSpecialRule extends Command<
   }
 }
 
-export class OnToggleNoEloCommand extends Command<
+export class OnChangeNoEloCommand extends Command<
   PreparationRoom,
   {
     client: Client
@@ -457,7 +457,7 @@ export class OnToggleNoEloCommand extends Command<
         if (noElo === false) {
           this.room.state.specialGameRule = null
         }
-        this.room.toggleNoElo(noElo)
+        this.room.setNoElo(noElo)
         const leader = this.state.users.get(client.auth.uid)
         this.room.state.addMessage({
           author: "Server",

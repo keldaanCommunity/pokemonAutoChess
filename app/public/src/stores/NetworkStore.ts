@@ -159,8 +159,8 @@ export const networkSlice = createSlice({
     toggleReady: (state, action: PayloadAction<boolean>) => {
       state.preparation?.send(Transfer.TOGGLE_READY, action.payload)
     },
-    toggleNoElo: (state, action: PayloadAction<boolean>) => {
-      state.preparation?.send(Transfer.TOGGLE_NO_ELO, action.payload)
+    setNoElo: (state, action: PayloadAction<boolean>) => {
+      state.preparation?.send(Transfer.CHANGE_NO_ELO, action.payload)
     },
     lockShop: (state) => {
       state.game?.send(Transfer.LOCK)
@@ -339,7 +339,7 @@ export const {
   addBot,
   removeBot,
   toggleReady,
-  toggleNoElo,
+  setNoElo,
   itemClick,
   shopClick,
   levelClick,
