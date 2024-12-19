@@ -416,6 +416,10 @@ export class OnRoomChangeSpecialRule extends Command<
     try {
       if (client.auth?.uid == this.state.ownerId) {
         this.state.specialGameRule = specialRule
+        if (specialRule != null) {
+          this.state.noElo = true
+          this.room.toggleElo(false)
+        }
         const leader = this.state.users.get(client.auth.uid)
         this.room.state.addMessage({
           author: "Server",
@@ -450,6 +454,9 @@ export class OnToggleEloCommand extends Command<
         this.state.noElo != noElo
       ) {
         this.state.noElo = noElo
+        if (noElo === false) {
+          this.room.state.specialGameRule = null
+        }
         this.room.toggleElo(noElo)
         const leader = this.state.users.get(client.auth.uid)
         this.room.state.addMessage({
