@@ -49,6 +49,7 @@ import PokemonConfig from "./pokemon-config"
 import Synergies, { computeSynergies } from "./synergies"
 import { carryOverPermanentStats } from "../../core/evolution-rules"
 import { getUnitPowerScore } from "../../public/src/pages/component/bot-builder/bot-logic"
+import { min } from "../../utils/number"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
@@ -207,10 +208,8 @@ export default class Player extends Schema implements IPlayer {
       if (powerScore < 5) {
         this.money += 55 - Math.round(10 * powerScore)
       }
-      const bonusHP = 150 - powerScore * 25
-      if (bonusHP > 0) {
-        avatar.hp += bonusHP
-      }
+      const bonusHP = Math.round(150 - powerScore * 25)
+      avatar.hp = min(10)(avatar.hp + bonusHP)
       this.board.set(avatar.id, avatar)
       avatar.onAcquired(this)
     } else if (state.specialGameRule === SpecialGameRule.FIRST_PARTNER) {
