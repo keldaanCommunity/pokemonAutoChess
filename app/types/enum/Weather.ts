@@ -1,4 +1,5 @@
 import { reverseMap } from "../../utils/map"
+import { Effect } from "./Effect"
 import { Passive } from "./Passive"
 import { Synergy } from "./Synergy"
 
@@ -15,6 +16,13 @@ export enum Weather {
   SMOG = "SMOG",
   NEUTRAL = "NEUTRAL"
 }
+
+export const WeatherEffects: ReadonlyMap<Weather, Effect> = new Map([
+  [Weather.WINDY, Effect.WINDY],
+  [Weather.SMOG, Effect.SMOG],
+  [Weather.NIGHT, Effect.NIGHT],
+  [Weather.MISTY, Effect.MISTY]
+])
 
 export const PassivesAssociatedToWeather: Map<Weather, Passive[]> = new Map([
   [Weather.SUN, [Passive.SUN]],

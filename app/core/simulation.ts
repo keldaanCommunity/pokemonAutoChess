@@ -32,7 +32,7 @@ import {
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
-import { Weather } from "../types/enum/Weather"
+import { Weather, WeatherEffects } from "../types/enum/Weather"
 import { IPokemonData } from "../types/interfaces/PokemonData"
 import { count } from "../utils/array"
 import { logger } from "../utils/logger"
@@ -116,6 +116,12 @@ export default class Simulation extends Schema implements ISimulation {
           })
         })
       }
+    }
+
+    const weatherEffect = WeatherEffects.get(this.weather)
+    if (weatherEffect) {
+      this.blueEffects.add(weatherEffect)
+      this.redEffects.add(weatherEffect)
     }
 
     bluePlayer.effects.forEach((e) => this.blueEffects.add(e))
@@ -412,38 +418,6 @@ export default class Simulation extends Schema implements ISimulation {
     }
   }
 
-  applyWeatherEffects(
-    pokemon: IPokemonEntity,
-    player: Player | undefined,
-    opponentPlayer: Player | undefined
-  ) {
-    if (this.weather === Weather.WINDY) {
-      const nbFloatStones = player ? count(player.items, Item.FLOAT_STONE) : 0
-      pokemon.addAttackSpeed(
-        (pokemon.types.has(Synergy.FLYING) ? 10 : 0) + nbFloatStones * 5,
-        pokemon,
-        0,
-        false
-      )
-    } else if (this.weather === Weather.SMOG) {
-      const nbSmellyClays = opponentPlayer
-        ? count(opponentPlayer.items, Item.SMELLY_CLAY)
-        : 0
-      pokemon.addDodgeChance(0.15 - 0.05 * nbSmellyClays, pokemon, 0, false)
-    } else if (this.weather === Weather.NIGHT) {
-      const nbBlackAugurite = player
-        ? count(player.items, Item.BLACK_AUGURITE)
-        : 0
-
-      pokemon.addCritChance(10 + 5 * nbBlackAugurite, pokemon, 0, false)
-    } else if (this.weather === Weather.MISTY) {
-      const nbMistStones = player ? count(player.items, Item.MIST_STONE) : 0
-      if (nbMistStones > 0) {
-        pokemon.addSpecialDefense(2 * nbMistStones, pokemon, 0, false)
-      }
-    }
-  }
-
   applyPostEffects(
     blueBoard: MapSchema<Pokemon>,
     redBoard: MapSchema<Pokemon>
@@ -452,7 +426,6 @@ export default class Simulation extends Schema implements ISimulation {
     in order:
     - spawns (bug, rotom, white flute, etc)
     - synergy effects (dragon, normal, etc)
-    - weather effects
     - support items effects (exp share, gracidea etc)
     - target selection effects (ghost curse, comet shard etc)
     */
@@ -653,18 +626,6 @@ export default class Simulation extends Schema implements ISimulation {
           })
         }
       })
-    }
-
-    // WEATHER EFFECTS
-    if (this.weather !== Weather.NEUTRAL) {
-      for (const team of [this.blueTeam, this.redTeam]) {
-        const player = team === this.blueTeam ? this.bluePlayer : this.redPlayer
-        const opponentPlayer =
-          team === this.blueTeam ? this.redPlayer : this.bluePlayer
-        team.forEach((pokemon) => {
-          this.applyWeatherEffects(pokemon, player, opponentPlayer)
-        })
-      }
     }
 
     // SUPPORT ITEMS EFFECTS (exp share, gracidea etc)
@@ -1353,6 +1314,48 @@ export default class Simulation extends Schema implements ISimulation {
       case Effect.BAD_LUCK: {
         pokemon.effects.add(effect)
         pokemon.addLuck(-20, pokemon, 0, false)
+        break
+      }
+
+      case Effect.WINDY: {
+        const player = pokemon.player
+        const nbFloatStones = player ? count(player.items, Item.FLOAT_STONE) : 0
+        pokemon.addAttackSpeed(
+          (pokemon.types.has(Synergy.FLYING) ? 10 : 0) + nbFloatStones * 5,
+          pokemon,
+          0,
+          false
+        )
+        break
+      }
+
+      case Effect.SMOG: {
+        const opponentPlayer = pokemon.team === Team.BLUE_TEAM
+          ? this.redPlayer
+          : this.bluePlayer
+        const nbSmellyClays = opponentPlayer
+          ? count(opponentPlayer.items, Item.SMELLY_CLAY)
+          : 0
+        pokemon.addDodgeChance(0.15 - 0.05 * nbSmellyClays, pokemon, 0, false)
+        break
+      }
+
+      case Effect.NIGHT: {
+        const player = pokemon.player
+        const nbBlackAugurite = player
+          ? count(player.items, Item.BLACK_AUGURITE)
+          : 0
+
+        pokemon.addCritChance(10 + 5 * nbBlackAugurite, pokemon, 0, false)
+        break
+      }
+
+      case Effect.MISTY: {
+        const player = pokemon.player
+        const nbMistStones = player ? count(player.items, Item.MIST_STONE) : 0
+        if (nbMistStones > 0) {
+          pokemon.addSpecialDefense(2 * nbMistStones, pokemon, 0, false)
+        }
         break
       }
 
