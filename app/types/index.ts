@@ -669,6 +669,7 @@ export interface ICount {
   healOrderCount: number
   attackOrderCount: number
   magmarizerCount: number
+  echo: number
 }
 
 export interface IPreparationMetadata {

@@ -1686,7 +1686,7 @@ export class EchoStrategy extends AbilityStrategy {
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
         tg.handleSpecialDamage(
-          damage + pokemon.echo * additional,
+          damage + pokemon.count.echo * additional,
           board,
           AttackType.SPECIAL,
           pokemon,
@@ -1695,7 +1695,7 @@ export class EchoStrategy extends AbilityStrategy {
       }
     })
 
-    pokemon.echo++
+    pokemon.count.echo++
   }
 }
 
