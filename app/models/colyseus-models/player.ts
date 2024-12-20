@@ -273,6 +273,9 @@ export default class Player extends Schema implements IPlayer {
     const newPokemon = PokemonFactory.createPokemonFromName(newEntry, this)
     pokemon.items.forEach((item) => {
       newPokemon.items.add(item)
+      if (item === Item.SHINY_CHARM) {
+        newPokemon.shiny = true
+      }
     })
     newPokemon.positionX = pokemon.positionX
     newPokemon.positionY = pokemon.positionY
