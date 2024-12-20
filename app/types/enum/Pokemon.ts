@@ -318,10 +318,12 @@ export enum Pkm {
   HIPPODOWN = "HIPPODOWN",
   HIPPOPOTAS = "HIPPOPOTAS",
   HISUI_ARCANINE = "HISUI_ARCANINE",
+  HISUI_ELECTRODE = "HISUI_ELECTRODE",
   HISUI_GOODRA = "HISUI_GOODRA",
   HISUI_GROWLITHE = "HISUI_GROWLITHE",
   HISUI_SLIGGOO = "HISUI_SLIGGOO",
   HISUI_SNEASEL = "HISUI_SNEASEL",
+  HISUI_VOLTORB = "HISUI_VOLTORB",
   HISUI_ZOROARK = "HISUI_ZOROARK",
   HISUI_ZORUA = "HISUI_ZORUA",
   HISUIAN_QWILFISH = "HISUIAN_QWILFISH",
@@ -1001,7 +1003,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.KRABBY]: "0098",
   [Pkm.KINGLER]: "0099",
   [Pkm.VOLTORB]: "0100",
+  [Pkm.HISUI_VOLTORB]: "0100-0001",
   [Pkm.ELECTRODE]: "0101",
+  [Pkm.HISUI_ELECTRODE]: "0101-0001",
   [Pkm.EXEGGCUTE]: "0102",
   [Pkm.EXEGGUTOR]: "0103",
   [Pkm.ALOLAN_EXEGGUTOR]: "0103-0001",
@@ -2443,7 +2447,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.VENONAT]: Pkm.VENONAT,
   [Pkm.VENOMOTH]: Pkm.VENONAT,
   [Pkm.VOLTORB]: Pkm.VOLTORB,
+  [Pkm.HISUI_VOLTORB]: Pkm.HISUI_VOLTORB,
   [Pkm.ELECTRODE]: Pkm.VOLTORB,
+  [Pkm.HISUI_ELECTRODE]: Pkm.HISUI_VOLTORB,
   [Pkm.SLUGMA]: Pkm.SLUGMA,
   [Pkm.MAGCARGO]: Pkm.SLUGMA,
   [Pkm.SNEASEL]: Pkm.SNEASEL,
@@ -2916,7 +2922,8 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.NIDORANF]: [Pkm.NIDORANM],
   [Pkm.SNEASEL]: [Pkm.HISUI_SNEASEL],
   [Pkm.MEOWTH]: [Pkm.ALOLAN_MEOWTH],
-  [Pkm.PONYTA]: [Pkm.GALARIAN_PONYTA]
+  [Pkm.PONYTA]: [Pkm.GALARIAN_PONYTA],
+  [Pkm.VOLTORB]: [Pkm.HISUI_VOLTORB]
 } as const
 
 export enum PkmDuo {
@@ -5122,6 +5129,17 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Hurt,
     emote: AnimationType.Twirl
+  },
+  [Pkm.HISUI_VOLTORB]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Pose,
+    emote: AnimationType.Twirl
+  },
+  [Pkm.HISUI_ELECTRODE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Hurt,
+    emote: AnimationType.Twirl,
+    shinyUnavailable: true
   },
   [Pkm.SLUGMA]: {
     attack: AnimationType.Shoot,

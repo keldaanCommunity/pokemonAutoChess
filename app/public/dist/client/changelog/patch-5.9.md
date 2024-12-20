@@ -8,6 +8,8 @@
 - Mandibuzz
 - Inkay
 - Malamar
+- Hisui Voltorb
+- Hisui Electrode
 
 # Changes to Pokemon & Abilities
 
