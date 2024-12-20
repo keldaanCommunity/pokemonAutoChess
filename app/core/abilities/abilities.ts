@@ -10304,7 +10304,7 @@ export class BideStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     pokemon.status.bideCooldown = 3000
-    const startingHealth = pokemon.life
+    const startingHealth = pokemon.life + pokemon.shield
     pokemon.toIdleState()
 
     pokemon.commands.push(
@@ -10318,7 +10318,8 @@ export class BideStrategy extends AbilityStrategy {
           targetY: target.positionY
         })
         const multiplier = [0.5, 1, 2][pokemon.stars - 1] ?? 2
-        const damage = (startingHealth - pokemon.life) * multiplier
+        const currentHealth = pokemon.life + pokemon.shield
+        const damage = (startingHealth - currentHealth) * multiplier
         board
           .getAdjacentCells(target.positionX, target.positionY, true)
           .forEach((cell) => {
