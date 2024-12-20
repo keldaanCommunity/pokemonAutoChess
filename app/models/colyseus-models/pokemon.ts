@@ -6219,10 +6219,7 @@ export class Victini extends Pokemon {
   skill = Ability.SEARING_SHOT
   passive = Passive.VICTINI
   attackSprite = AttackSprite.FIRE_MELEE
-  beforeSimulationStart(
-    {opponentEffects}:
-    {opponentEffects: Set<Effect>}
-  ) {
+  beforeSimulationStart({ opponentEffects }: { opponentEffects: Set<Effect> }) {
     opponentEffects.add(Effect.VICTINI_PASSIVE)
   }
 }
@@ -6240,10 +6237,7 @@ export class Jirachi extends Pokemon {
   skill = Ability.DOOM_DESIRE
   passive = Passive.GOOD_LUCK
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  beforeSimulationStart(
-    {teamEffects}:
-    {teamEffects: Set<Effect>}
-  ) {
+  beforeSimulationStart({ teamEffects }: { teamEffects: Set<Effect> }) {
     teamEffects.add(Effect.GOOD_LUCK)
   }
 }
@@ -8550,6 +8544,45 @@ export class Electrode extends Pokemon {
   range = 1
   skill = Ability.EXPLOSION
   additional = true
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
+
+export class HisuiVoltorb extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.GRASS,
+    Synergy.FOSSIL
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.ELECTRODE
+  hp = 60
+  atk = 9
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.CHLOROBLAST
+  regional = true
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
+
+export class HisuiElectrode extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.GRASS,
+    Synergy.FOSSIL
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 150
+  atk = 18
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.CHLOROBLAST
+  regional = true
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -12015,10 +12048,7 @@ export class Murkrow extends Pokemon {
   passive = Passive.BAD_LUCK
   additional = true
   attackSprite = AttackSprite.DARK_MELEE
-  beforeSimulationStart(
-    {opponentEffects}:
-    {opponentEffects: Set<Effect>}
-  ) {
+  beforeSimulationStart({ opponentEffects }: { opponentEffects: Set<Effect> }) {
     opponentEffects.add(Effect.BAD_LUCK)
   }
 }
@@ -12037,10 +12067,7 @@ export class Honchkrow extends Pokemon {
   passive = Passive.BAD_LUCK
   additional = true
   attackSprite = AttackSprite.DARK_MELEE
-  beforeSimulationStart(
-    {opponentEffects}:
-    {opponentEffects: Set<Effect>}
-  ) {
+  beforeSimulationStart({ opponentEffects }: { opponentEffects: Set<Effect> }) {
     opponentEffects.add(Effect.BAD_LUCK)
   }
 }
@@ -12673,7 +12700,7 @@ export class GalarCorsola extends Pokemon {
   evolution = Pkm.CURSOLA
   rarity = Rarity.EPIC
   stars = 1
-  hp = 150
+  hp = 125
   atk = 15
   def = 2
   speDef = 6
@@ -12691,7 +12718,7 @@ export class Cursola extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.AQUATIC, Synergy.GHOST])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 300
+  hp = 200
   atk = 25
   def = 3
   speDef = 8
@@ -16360,5 +16387,7 @@ export const PokemonClasses: Record<
   [Pkm.VULLABY]: Vullaby,
   [Pkm.MANDIBUZZ]: Mandibuzz,
   [Pkm.INKAY]: Inkay,
-  [Pkm.MALAMAR]: Malamar
+  [Pkm.MALAMAR]: Malamar,
+  [Pkm.HISUI_VOLTORB]: HisuiVoltorb,
+  [Pkm.HISUI_ELECTRODE]: HisuiElectrode
 }

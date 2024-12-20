@@ -1686,6 +1686,12 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
+    case Ability.CHLOROBLAST:
+      addAbilitySprite(Ability.EXPLOSION, coordinates, true)
+        .setScale(2)
+        .setTint(0x90ffd0)
+      break
+
     case Ability.CLANGOROUS_SOUL:
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
