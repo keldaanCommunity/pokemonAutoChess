@@ -29,4 +29,5 @@ export default class Count extends Schema implements ICount {
   @type("uint8") healOrderCount = 0
   @type("uint8") attackOrderCount = 0
   @type("uint8") magmarizerCount = 0
+  @type("uint8") echo = 0
 }

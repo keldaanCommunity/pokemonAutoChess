@@ -609,7 +609,6 @@ export interface IPokemonEntity {
   skill: Ability
   passive: Passive
   status: Status
-  count: Count
   critPower: number
   ap: number
   healDone: number
@@ -669,6 +668,7 @@ export interface ICount {
   healOrderCount: number
   attackOrderCount: number
   magmarizerCount: number
+  echo: number
 }
 
 export interface IPreparationMetadata {
