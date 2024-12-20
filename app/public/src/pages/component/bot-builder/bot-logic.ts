@@ -128,10 +128,11 @@ Object.values(Pkm).forEach((pkm) => {
 })
 
 export function getPowerScore(board: IDetailledPokemon[]): number {
-  return board.reduce((sum, pkm) => {
-    const category = getCategory(pkm.name)
-    return sum + (POWER_SCORE_BY_CATEGORY[category] ?? 1)
-  }, 0)
+  return board.reduce((sum, pkm) => sum + getUnitPowerScore(pkm.name), 0)
+}
+
+export function getUnitPowerScore(pkm: Pkm): number {
+  return POWER_SCORE_BY_CATEGORY[getCategory(pkm)] ?? 1
 }
 
 export function getPowerEvaluation(powerScore: number, stage: number) {

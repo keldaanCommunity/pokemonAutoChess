@@ -383,12 +383,10 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   applySynergyEffects(pokemon: PokemonEntity, singleType?: Synergy) {
-    const allyEffects = pokemon.team === Team.BLUE_TEAM ?
-      this.blueEffects :
-      this.redEffects
-    const player = pokemon.team === Team.BLUE_TEAM ?
-      this.bluePlayer :
-      this.redPlayer
+    const allyEffects =
+      pokemon.team === Team.BLUE_TEAM ? this.blueEffects : this.redEffects
+    const player =
+      pokemon.team === Team.BLUE_TEAM ? this.bluePlayer : this.redPlayer
     const apply = (effect) => {
       this.applyEffect(
         pokemon,
@@ -398,10 +396,9 @@ export default class Simulation extends Schema implements ISimulation {
       )
     }
 
-    if(singleType){
-      const effect = SynergyEffects[singleType]
-        .find((e) => allyEffects.has(e))
-      if (effect && !pokemon.effects.has(effect)){
+    if (singleType) {
+      const effect = SynergyEffects[singleType].find((e) => allyEffects.has(e))
+      if (effect && !pokemon.effects.has(effect)) {
         apply(effect)
       }
     } else {
@@ -411,7 +408,7 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     if (
-      (singleType === Synergy.GHOST) ||
+      singleType === Synergy.GHOST ||
       (!singleType && pokemon.types.has(Synergy.GHOST))
     ) {
       pokemon.addDodgeChance(0.2, pokemon, 0, false)
@@ -1636,8 +1633,8 @@ export default class Simulation extends Schema implements ISimulation {
       })
       if (enemyWithHighestDef) {
         enemyWithHighestDef = enemyWithHighestDef as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
-        enemyWithHighestDef.addDefense(-5, enemyWithHighestDef, 0, false)
-        enemyWithHighestDef.addSpecialDefense(-5, enemyWithHighestDef, 0, false)
+        enemyWithHighestDef.addDefense(-2, enemyWithHighestDef, 0, false)
+        enemyWithHighestDef.addSpecialDefense(-2, enemyWithHighestDef, 0, false)
         enemyWithHighestDef.status.curseVulnerability = true
         enemyWithHighestDef.status.triggerFlinch(
           30000,
