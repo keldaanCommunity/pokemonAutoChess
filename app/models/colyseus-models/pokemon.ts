@@ -12661,10 +12661,10 @@ export class GalarCorsola extends Pokemon {
   evolution = Pkm.CURSOLA
   rarity = Rarity.EPIC
   stars = 1
-  hp = 150
-  atk = 15
-  def = 2
-  speDef = 6
+  hp = 125
+  atk = 8
+  def = 1
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.CURSE
@@ -12679,7 +12679,7 @@ export class Cursola extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.AQUATIC, Synergy.GHOST])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 300
+  hp = 200
   atk = 25
   def = 3
   speDef = 8
