@@ -609,6 +609,7 @@ export interface IPokemonEntity {
   skill: Ability
   passive: Passive
   status: Status
+  count: Count
   critPower: number
   ap: number
   healDone: number
