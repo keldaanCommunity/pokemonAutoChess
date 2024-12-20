@@ -159,6 +159,9 @@ export class CountEvolutionRule extends EvolutionRule {
         player.items.push(item)
       } else {
         pokemonEvolved.items.add(item)
+        if (item === Item.SHINY_CHARM) {
+          pokemonEvolved.shiny = true
+        }
       }
     }
 
