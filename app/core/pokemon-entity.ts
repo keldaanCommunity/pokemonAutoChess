@@ -19,6 +19,7 @@ import {
   ARMOR_FACTOR,
   BOARD_HEIGHT,
   BOARD_WIDTH,
+  DEFAULT_ATK_SPEED,
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER,
   ItemStats,
@@ -1762,16 +1763,26 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.life = this.refToBoardPokemon.hp
     this.shield = 0
     this.pp = 0
-    this.ap = 0
+    this.ap = this.refToBoardPokemon.ap
     this.atk = this.refToBoardPokemon.atk
     this.def = this.refToBoardPokemon.def
     this.speDef = this.refToBoardPokemon.speDef
     this.atkSpeed = this.refToBoardPokemon.atkSpeed
     this.critChance = DEFAULT_CRIT_CHANCE
     this.critPower = DEFAULT_CRIT_POWER
+    this.atkSpeed = DEFAULT_ATK_SPEED
+    this.range = this.refToBoardPokemon.range
+    this.dodge = 0
+    this.luck = 0
     this.count = new Count()
-    this.status.clearNegativeStatus()
     this.effects.clear()
+    this.status = new Status({
+      enrageDelay: this.status.enrageDelay,
+      curseVulnerability: this.status.curseVulnerability,
+      curseWeakness: this.status.curseWeakness,
+      curseTorment: this.status.curseTorment,
+      curseFate: this.status.curseFate
+    })
 
     if (this.items.has(Item.SACRED_ASH) && this.player) {
       const team = this.simulation.getTeam(this.player.id)
@@ -1816,6 +1827,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) // prevent resurecting fossils twice
 
     // does not trigger postEffects (iron defense, normal shield, rune protect, focus band, delta orb, flame orb...)
+
+    this.refToBoardPokemon.onSpawn({
+      entity: this,
+      simulation: this.simulation
+    })
   }
 
   eatBerry(berry: Item, stealedFrom?: PokemonEntity) {

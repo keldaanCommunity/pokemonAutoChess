@@ -416,6 +416,11 @@ export interface IPokemon {
   canBeCloned: boolean
   canHoldItems: boolean
   deathCount: number
+
+  onSpawn(params: {
+    entity: IPokemonEntity
+    simulation: ISimulation
+  })
 }
 
 export interface IExperienceManager {
