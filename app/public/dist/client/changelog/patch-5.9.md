@@ -91,5 +91,7 @@
 - Pokemon with passives that apply persistent effects now apply properly to spawns and resurrected pokemon.
 - Weather effects now apply properly to spawns and resurrected pokemon.
 - Light effects are no longer erroneously applied to spawns and resurrected pokemon.
+- Echo ability damage is now reset on resurrection.
+- Fixed many bugs involving stats not being properly reset on resurrection.
 
 # Misc
