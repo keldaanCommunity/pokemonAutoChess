@@ -7608,7 +7608,8 @@ export class CurseStrategy extends AbilityStrategy {
     enemies.sort((a, b) => (a.status.curse ? +1 : b.hp - a.hp))
     const enemyWithHighestHP = enemies[0]
     const curseDelay =
-      ([8000, 4000][pokemon.stars - 1] ?? 4000) * (1 - (0.2 * pokemon.ap) / 100)
+      ([8000, 5000, 3000][pokemon.stars - 1] ?? 3000) *
+      (1 - (0.2 * pokemon.ap) / 100)
     enemyWithHighestHP.status.triggerCurse(curseDelay)
   }
 }
@@ -8802,7 +8803,7 @@ export class PsystrikeStrategy extends AbilityStrategy {
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
           cell.value.handleSpecialDamage(
-            100,
+            80,
             board,
             AttackType.PHYSICAL,
             pokemon,
@@ -10608,7 +10609,7 @@ export class FieryWrathStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const damage = 40
+    const damage = 33
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
