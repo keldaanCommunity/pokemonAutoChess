@@ -19,7 +19,6 @@ import {
   ARMOR_FACTOR,
   BOARD_HEIGHT,
   BOARD_WIDTH,
-  DEFAULT_ATK_SPEED,
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER,
   ItemStats,
@@ -1770,7 +1769,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.atkSpeed = this.refToBoardPokemon.atkSpeed
     this.critChance = DEFAULT_CRIT_CHANCE
     this.critPower = DEFAULT_CRIT_POWER
-    this.atkSpeed = DEFAULT_ATK_SPEED
     this.range = this.refToBoardPokemon.range
     this.dodge = 0
     this.luck = 0
@@ -1830,7 +1828,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     this.refToBoardPokemon.onSpawn({
       entity: this,
-      simulation: this.simulation
+      simulation: this.simulation,
+      resurrect: true
     })
   }
 

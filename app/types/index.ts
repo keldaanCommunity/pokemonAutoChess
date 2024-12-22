@@ -420,6 +420,7 @@ export interface IPokemon {
   onSpawn(params: {
     entity: IPokemonEntity
     simulation: ISimulation
+    resurrect?: boolean
   })
 }
 

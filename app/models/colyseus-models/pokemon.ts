@@ -179,6 +179,7 @@ export class Pokemon extends Schema implements IPokemon {
   onSpawn(params: {
     entity: IPokemonEntity
     simulation: Simulation
+    resurrect?: boolean
   }) {
     // called after entity is added, either at simulation start or when cloned/spawned
   }
@@ -6779,9 +6780,12 @@ export class Wynaut extends Pokemon {
   passive = Passive.WOBBUFFET
   additional = true
   attackSprite = AttackSprite.FIGHTING_MELEE
-  onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.status.tree = true
-    entity.toIdleState()
+  onSpawn({ entity, resurrect = false}:
+    { entity: IPokemonEntity, resurrect?: boolean}) {
+    if (!resurrect){
+      entity.status.tree = true
+      entity.toIdleState()
+    }
   }
 }
 
@@ -6799,9 +6803,12 @@ export class Wobbuffet extends Pokemon {
   passive = Passive.WOBBUFFET
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
-  onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.status.tree = true
-    entity.toIdleState()
+  onSpawn({ entity, resurrect = false}:
+    { entity: IPokemonEntity, resurrect?: boolean}) {
+    if (!resurrect){
+      entity.status.tree = true
+      entity.toIdleState()
+    }
   }
 }
 
@@ -10752,9 +10759,12 @@ export class Bonsley extends Pokemon {
   passive = Passive.SUDOWOODO
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
-  onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.status.tree = true
-    entity.toIdleState()
+  onSpawn({ entity, resurrect = false}:
+    { entity: IPokemonEntity, resurrect?: boolean}) {
+    if (!resurrect){
+      entity.status.tree = true
+      entity.toIdleState()
+    }
   }
 }
 
@@ -10772,9 +10782,12 @@ export class Sudowoodo extends Pokemon {
   passive = Passive.SUDOWOODO
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
-  onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.status.tree = true
-    entity.toIdleState()
+  onSpawn({ entity, resurrect = false}:
+    { entity: IPokemonEntity, resurrect?: boolean}) {
+    if (!resurrect){
+      entity.status.tree = true
+      entity.toIdleState()
+    }
   }
 }
 
@@ -14283,9 +14296,12 @@ export class Stonjourner extends Pokemon {
   skill = Ability.GRAVITY
   passive = Passive.STONJOURNER
   attackSprite = AttackSprite.ROCK_MELEE
-  onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.status.tree = true
-    entity.toIdleState()
+  onSpawn({ entity, resurrect = false}:
+    { entity: IPokemonEntity, resurrect?: boolean}) {
+    if (!resurrect){
+      entity.status.tree = true
+      entity.toIdleState()
+    }
   }
   afterSimulationStart({
     entity,
