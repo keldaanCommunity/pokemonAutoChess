@@ -6219,10 +6219,7 @@ export class Victini extends Pokemon {
   skill = Ability.SEARING_SHOT
   passive = Passive.VICTINI
   attackSprite = AttackSprite.FIRE_MELEE
-  beforeSimulationStart(
-    {opponentEffects}:
-    {opponentEffects: Set<Effect>}
-  ) {
+  beforeSimulationStart({ opponentEffects }: { opponentEffects: Set<Effect> }) {
     opponentEffects.add(Effect.VICTINI_PASSIVE)
   }
 }
@@ -6240,10 +6237,7 @@ export class Jirachi extends Pokemon {
   skill = Ability.DOOM_DESIRE
   passive = Passive.GOOD_LUCK
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  beforeSimulationStart(
-    {teamEffects}:
-    {teamEffects: Set<Effect>}
-  ) {
+  beforeSimulationStart({ teamEffects }: { teamEffects: Set<Effect> }) {
     teamEffects.add(Effect.GOOD_LUCK)
   }
 }
@@ -12015,10 +12009,7 @@ export class Murkrow extends Pokemon {
   passive = Passive.BAD_LUCK
   additional = true
   attackSprite = AttackSprite.DARK_MELEE
-  beforeSimulationStart(
-    {opponentEffects}:
-    {opponentEffects: Set<Effect>}
-  ) {
+  beforeSimulationStart({ opponentEffects }: { opponentEffects: Set<Effect> }) {
     opponentEffects.add(Effect.BAD_LUCK)
   }
 }
@@ -12037,10 +12028,7 @@ export class Honchkrow extends Pokemon {
   passive = Passive.BAD_LUCK
   additional = true
   attackSprite = AttackSprite.DARK_MELEE
-  beforeSimulationStart(
-    {opponentEffects}:
-    {opponentEffects: Set<Effect>}
-  ) {
+  beforeSimulationStart({ opponentEffects }: { opponentEffects: Set<Effect> }) {
     opponentEffects.add(Effect.BAD_LUCK)
   }
 }
@@ -12549,7 +12537,7 @@ export class Comfey extends Pokemon {
         false
       )
       nearestAllyWithFreeItemSlot.addCritPower(
-        entity.critPower - DEFAULT_CRIT_POWER,
+        (entity.critPower - DEFAULT_CRIT_POWER) * 100,
         entity,
         0,
         false
