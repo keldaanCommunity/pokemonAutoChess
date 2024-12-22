@@ -245,7 +245,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   get inLightCell(): boolean {
     if (!this.player) return false
     const { lightX, lightY } = this.player
-    const {positionX, positionY} = this.refToBoardPokemon
+    const { positionX, positionY } = this.refToBoardPokemon
     return positionX === lightX && positionY === lightY
   }
 
@@ -600,7 +600,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     const type = SynergyGivenByItem[item]
-    if(type && !this.types.has(type)){
+    if (type && !this.types.has(type)) {
       this.types.add(type)
       this.simulation.applySynergyEffects(this, type)
     }
@@ -1523,7 +1523,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           (p) =>
             p && p.team !== this.team && (p.life > 0 || p.status.resurecting)
         ) === false
-      const moneyGained = isLastEnemy ? 5 : 1
+      this.count.bottleCapCount++
+      const moneyGained = isLastEnemy ? this.count.bottleCapCount : 1
       this.player.addMoney(moneyGained, true, this)
       this.count.moneyCount += moneyGained
     }
