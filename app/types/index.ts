@@ -73,7 +73,7 @@ export enum Transfer {
   ADD_BOT = "ADD_BOT",
   REMOVE_BOT = "REMOVE_BOT",
   TOGGLE_READY = "TOGGLE_READY",
-  TOGGLE_NO_ELO = "TOGGLE_NO_ELO",
+  CHANGE_NO_ELO = "CHANGE_NO_ELO",
   REFRESH = "REFRESH",
   SPECTATE = "SPECTATE",
   LOCK = "LOCK",
@@ -669,6 +669,7 @@ export interface ICount {
   healOrderCount: number
   attackOrderCount: number
   magmarizerCount: number
+  echo: number
 }
 
 export interface IPreparationMetadata {

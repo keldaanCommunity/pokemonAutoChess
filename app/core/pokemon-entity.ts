@@ -120,7 +120,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   grassHealCooldown = 2000
   sandstormDamageTimer = 0
   fairySplashCooldown = 0
-  echo = 0
   isClone = false
   refToBoardPokemon: IPokemon
   commands = new Array<SimulationCommand>()

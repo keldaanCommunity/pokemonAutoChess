@@ -614,7 +614,7 @@ export class Tsareena extends Pokemon {
   atk = 34
   def = 6
   speDef = 6
-  maxPP = 90
+  maxPP = 120
   range = 1
   skill = Ability.HIGH_JUMP_KICK
   attackSprite = AttackSprite.FIGHTING_MELEE
@@ -4253,7 +4253,7 @@ export class Mareep extends Pokemon {
   atk = 5
   def = 1
   speDef = 1
-  maxPP = 110
+  maxPP = 100
   range = 2
   skill = Ability.THUNDER
   attackSprite = AttackSprite.ELECTRIC_RANGE
@@ -4272,7 +4272,7 @@ export class Flaffy extends Pokemon {
   atk = 9
   def = 1
   speDef = 1
-  maxPP = 110
+  maxPP = 100
   range = 2
   skill = Ability.THUNDER
   attackSprite = AttackSprite.ELECTRIC_RANGE
@@ -4290,7 +4290,7 @@ export class Ampharos extends Pokemon {
   atk = 18
   def = 1
   speDef = 1
-  maxPP = 110
+  maxPP = 100
   range = 2
   skill = Ability.THUNDER
   attackSprite = AttackSprite.ELECTRIC_RANGE
@@ -11194,7 +11194,7 @@ export class MegaSableye extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
   rarity = Rarity.UNIQUE
   stars = 4
-  hp = 230
+  hp = 200
   atk = 12
   def = 6
   speDef = 6
@@ -12701,9 +12701,9 @@ export class GalarCorsola extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   hp = 125
-  atk = 15
-  def = 2
-  speDef = 6
+  atk = 8
+  def = 1
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.CURSE

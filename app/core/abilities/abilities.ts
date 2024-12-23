@@ -1708,7 +1708,7 @@ export class EchoStrategy extends AbilityStrategy {
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
         tg.handleSpecialDamage(
-          damage + pokemon.echo * additional,
+          damage + pokemon.count.echo * additional,
           board,
           AttackType.SPECIAL,
           pokemon,
@@ -1717,7 +1717,7 @@ export class EchoStrategy extends AbilityStrategy {
       }
     })
 
-    pokemon.echo++
+    pokemon.count.echo++
   }
 }
 
@@ -7630,7 +7630,8 @@ export class CurseStrategy extends AbilityStrategy {
     enemies.sort((a, b) => (a.status.curse ? +1 : b.hp - a.hp))
     const enemyWithHighestHP = enemies[0]
     const curseDelay =
-      ([8000, 4000][pokemon.stars - 1] ?? 4000) * (1 - (0.2 * pokemon.ap) / 100)
+      ([8000, 5000, 3000][pokemon.stars - 1] ?? 3000) *
+      (1 - (0.2 * pokemon.ap) / 100)
     enemyWithHighestHP.status.triggerCurse(curseDelay)
   }
 }
@@ -8824,7 +8825,7 @@ export class PsystrikeStrategy extends AbilityStrategy {
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
           cell.value.handleSpecialDamage(
-            100,
+            80,
             board,
             AttackType.PHYSICAL,
             pokemon,
@@ -10326,7 +10327,7 @@ export class BideStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     pokemon.status.bideCooldown = 3000
-    const startingHealth = pokemon.life
+    const startingHealth = pokemon.life + pokemon.shield
     pokemon.toIdleState()
 
     pokemon.commands.push(
@@ -10340,7 +10341,8 @@ export class BideStrategy extends AbilityStrategy {
           targetY: target.positionY
         })
         const multiplier = [0.5, 1, 2][pokemon.stars - 1] ?? 2
-        const damage = (startingHealth - pokemon.life) * multiplier
+        const currentHealth = pokemon.life + pokemon.shield
+        const damage = (startingHealth - currentHealth) * multiplier
         board
           .getAdjacentCells(target.positionX, target.positionY, true)
           .forEach((cell) => {
@@ -10629,7 +10631,7 @@ export class FieryWrathStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const damage = 40
+    const damage = 33
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
