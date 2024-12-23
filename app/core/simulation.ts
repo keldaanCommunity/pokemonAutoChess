@@ -387,23 +387,6 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   applySynergyEffects(pokemon: PokemonEntity, singleType?: Synergy) {
-    // WORK IN PROGRESS: refactoring synergy effects using the new Effect class
-    const synergies = singleType ? [singleType] : values(pokemon.types)
-    for (const synergy of synergies) {
-      const effectName = SynergyEffects[synergy].find((e) => allyEffects.has(e))
-      if (effectName !== undefined) {
-        const effects = EffectsByName[effectName]
-        if (effects) {
-          for (const effect of effects) {
-            pokemon.effectsList.push(
-              effect instanceof EffectClass ? effect : effect()
-            )
-          }
-        }
-      }
-    }
-    // END OF WORK IN PROGRESS
-
     const allyEffects =
       pokemon.team === Team.BLUE_TEAM ? this.blueEffects : this.redEffects
     const player =
@@ -434,6 +417,23 @@ export default class Simulation extends Schema implements ISimulation {
     ) {
       pokemon.addDodgeChance(0.2, pokemon, 0, false)
     }
+
+    // WORK IN PROGRESS: refactoring synergy effects using the new Effect class
+    const synergies = singleType ? [singleType] : values(pokemon.types)
+    for (const synergy of synergies) {
+      const effectName = SynergyEffects[synergy].find((e) => allyEffects.has(e))
+      if (effectName !== undefined) {
+        const effects = EffectsByName[effectName]
+        if (effects) {
+          for (const effect of effects) {
+            pokemon.effectsList.push(
+              effect instanceof EffectClass ? effect : effect()
+            )
+          }
+        }
+      }
+    }
+    // END OF WORK IN PROGRESS
   }
 
   applyPostEffects(
