@@ -74,6 +74,7 @@
     - Stats and statuses are now lost when items are removed
     - Synergy effects and types are now added and removed accordingly
     - Stat increases from the synergy of an item are gained when added, but not lost when removed
+- Change Gold Bottle Cap: Jackpot now doubles the amount of gold earned during this round instead of giving 5 gold. Show the stacks next to the item icon.
 
 # Gameplay
 
