@@ -8547,6 +8547,45 @@ export class Electrode extends Pokemon {
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
+export class HisuiVoltorb extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.GRASS,
+    Synergy.FOSSIL
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.ELECTRODE
+  hp = 60
+  atk = 9
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.CHLOROBLAST
+  regional = true
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
+
+export class HisuiElectrode extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.GRASS,
+    Synergy.FOSSIL
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 150
+  atk = 18
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.CHLOROBLAST
+  regional = true
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
+
 export class Slugma extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.FIRE,
@@ -16348,5 +16387,7 @@ export const PokemonClasses: Record<
   [Pkm.VULLABY]: Vullaby,
   [Pkm.MANDIBUZZ]: Mandibuzz,
   [Pkm.INKAY]: Inkay,
-  [Pkm.MALAMAR]: Malamar
+  [Pkm.MALAMAR]: Malamar,
+  [Pkm.HISUI_VOLTORB]: HisuiVoltorb,
+  [Pkm.HISUI_ELECTRODE]: HisuiElectrode
 }
