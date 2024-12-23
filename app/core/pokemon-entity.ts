@@ -56,7 +56,7 @@ import PokemonState from "./pokemon-state"
 import Simulation from "./simulation"
 import { DelayedCommand, SimulationCommand } from "./simulation-command"
 import { ItemEffects } from "./items"
-import { OnItemRemovedEffect } from "./effect"
+import { OnItemRemovedEffect, Effect as EffectClass } from "./effect"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 
 export class PokemonEntity extends Schema implements IPokemonEntity {
@@ -116,13 +116,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   shieldDamageTaken: number
   shieldDone: number
   flyingProtection = 0
-  growGroundTimer = 3000
   grassHealCooldown = 2000
   sandstormDamageTimer = 0
   fairySplashCooldown = 0
   isClone = false
   refToBoardPokemon: IPokemon
   commands = new Array<SimulationCommand>()
+  effectsList = new Array<EffectClass>()
 
   constructor(
     pokemon: IPokemon,
@@ -245,7 +245,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   get inLightCell(): boolean {
     if (!this.player) return false
     const { lightX, lightY } = this.player
-    const {positionX, positionY} = this.refToBoardPokemon
+    const { positionX, positionY } = this.refToBoardPokemon
     return positionX === lightX && positionY === lightY
   }
 
@@ -600,7 +600,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     const type = SynergyGivenByItem[item]
-    if(type && !this.types.has(type)){
+    if (type && !this.types.has(type)) {
       this.types.add(type)
       this.simulation.applySynergyEffects(this, type)
     }
@@ -1942,6 +1942,18 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       this.player.items.push(Item.BERRY_JUICE)
     }
+  }
+
+  transferAbility(name: Ability | string) {
+    this.simulation.room.broadcast(Transfer.ABILITY, {
+      id: this.simulation.id,
+      skill: name,
+      positionX: this.positionX,
+      positionY: this.positionY,
+      targetX: this.targetX,
+      targetY: this.targetY,
+      orientation: this.orientation
+    })
   }
 }
 

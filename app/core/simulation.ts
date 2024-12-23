@@ -50,7 +50,11 @@ import { PokemonEntity, getStrongestUnit, getUnitScore } from "./pokemon-entity"
 import { DelayedCommand } from "./simulation-command"
 import { getAvatarString } from "../utils/avatar"
 import { max } from "../utils/number"
-import { OnItemGainedEffect } from "./effect"
+import {
+  Effect as EffectClass,
+  EffectsByName,
+  OnItemGainedEffect
+} from "./effect"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -383,6 +387,23 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   applySynergyEffects(pokemon: PokemonEntity, singleType?: Synergy) {
+    // WORK IN PROGRESS: refactoring synergy effects using the new Effect class
+    const synergies = singleType ? [singleType] : values(pokemon.types)
+    for (const synergy of synergies) {
+      const effectName = SynergyEffects[synergy].find((e) => allyEffects.has(e))
+      if (effectName !== undefined) {
+        const effects = EffectsByName[effectName]
+        if (effects) {
+          for (const effect of effects) {
+            pokemon.effectsList.push(
+              effect instanceof EffectClass ? effect : effect()
+            )
+          }
+        }
+      }
+    }
+    // END OF WORK IN PROGRESS
+
     const allyEffects =
       pokemon.team === Team.BLUE_TEAM ? this.blueEffects : this.redEffects
     const player =
@@ -1136,15 +1157,6 @@ export default class Simulation extends Schema implements ISimulation {
         }
         break
 
-      case Effect.TILLER:
-      case Effect.DIGGER:
-      case Effect.DRILLER:
-      case Effect.DEEP_MINER:
-        if (types.has(Synergy.GROUND)) {
-          pokemon.effects.add(effect)
-        }
-        break
-
       case Effect.DUBIOUS_DISC:
       case Effect.LINK_CABLE:
       case Effect.GOOGLE_SPECS:
@@ -1327,9 +1339,8 @@ export default class Simulation extends Schema implements ISimulation {
       }
 
       case Effect.SMOG: {
-        const opponentPlayer = pokemon.team === Team.BLUE_TEAM
-          ? this.redPlayer
-          : this.bluePlayer
+        const opponentPlayer =
+          pokemon.team === Team.BLUE_TEAM ? this.redPlayer : this.bluePlayer
         const nbSmellyClays = opponentPlayer
           ? count(opponentPlayer.items, Item.SMELLY_CLAY)
           : 0
