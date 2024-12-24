@@ -1,6 +1,7 @@
 import { PokemonEntity } from "./pokemon-entity"
 import { Item } from "../types/enum/Item"
 import { Effect as EffectEnum } from "../types/enum/Effect"
+import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 
 type EffectOrigin = EffectEnum | Item
 
@@ -45,12 +46,13 @@ export class PeriodicEffect extends Effect {
 }
 
 export class GrowGroundEffect extends PeriodicEffect {
-  constructor(groundSynergyStep: number, origin: EffectOrigin) {
+  constructor(effect: EffectEnum) {
+    const synergyLevel = SynergyEffects[Synergy.GROUND].indexOf(effect) + 1
     super(
       (pokemon) => {
-        pokemon.addDefense(groundSynergyStep, pokemon, 0, false)
-        pokemon.addSpecialDefense(groundSynergyStep, pokemon, 0, false)
-        pokemon.addAttack(groundSynergyStep, pokemon, 0, false)
+        pokemon.addDefense(synergyLevel, pokemon, 0, false)
+        pokemon.addSpecialDefense(synergyLevel, pokemon, 0, false)
+        pokemon.addAttack(synergyLevel, pokemon, 0, false)
         pokemon.transferAbility("GROUND_GROW")
         if (
           pokemon.items.has(Item.BIG_NUGGET) &&
@@ -62,7 +64,7 @@ export class GrowGroundEffect extends PeriodicEffect {
         }
       },
       3000,
-      origin
+      effect
     )
   }
 }

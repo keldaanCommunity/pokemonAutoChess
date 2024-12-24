@@ -1142,14 +1142,7 @@ export default class Simulation extends Schema implements ISimulation {
       case Effect.DEEP_MINER:
         if (types.has(Synergy.GROUND)) {
           pokemon.effects.add(effect)
-          const synergyLevel =
-            [
-              Effect.TILLER,
-              Effect.DIGGER,
-              Effect.DRILLER,
-              Effect.DEEP_MINER
-            ].indexOf(effect) + 1
-          pokemon.effectsSet.add(new GrowGroundEffect(synergyLevel, effect))
+          pokemon.effectsSet.add(new GrowGroundEffect(effect))
         }
         break
 
