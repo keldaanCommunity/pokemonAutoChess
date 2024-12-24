@@ -50,11 +50,7 @@ import { PokemonEntity, getStrongestUnit, getUnitScore } from "./pokemon-entity"
 import { DelayedCommand } from "./simulation-command"
 import { getAvatarString } from "../utils/avatar"
 import { max } from "../utils/number"
-import {
-  Effect as EffectClass,
-  EffectsByName,
-  OnItemGainedEffect
-} from "./effect"
+import { OnItemGainedEffect, GrowGroundEffect } from "./effect"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -417,23 +413,6 @@ export default class Simulation extends Schema implements ISimulation {
     ) {
       pokemon.addDodgeChance(0.2, pokemon, 0, false)
     }
-
-    // WORK IN PROGRESS: refactoring synergy effects using the new Effect class
-    const synergies = singleType ? [singleType] : values(pokemon.types)
-    for (const synergy of synergies) {
-      const effectName = SynergyEffects[synergy].find((e) => allyEffects.has(e))
-      if (effectName !== undefined) {
-        const effects = EffectsByName[effectName]
-        if (effects) {
-          for (const effect of effects) {
-            pokemon.effectsList.push(
-              effect instanceof EffectClass ? effect : effect()
-            )
-          }
-        }
-      }
-    }
-    // END OF WORK IN PROGRESS
   }
 
   applyPostEffects(
@@ -1154,6 +1133,23 @@ export default class Simulation extends Schema implements ISimulation {
       case Effect.HEART_OF_THE_SWARM:
         if (types.has(Synergy.BUG)) {
           pokemon.effects.add(effect)
+        }
+        break
+
+      case Effect.TILLER:
+      case Effect.DIGGER:
+      case Effect.DRILLER:
+      case Effect.DEEP_MINER:
+        if (types.has(Synergy.GROUND)) {
+          pokemon.effects.add(effect)
+          const synergyLevel =
+            [
+              Effect.TILLER,
+              Effect.DIGGER,
+              Effect.DRILLER,
+              Effect.DEEP_MINER
+            ].indexOf(effect) + 1
+          pokemon.effectsSet.add(new GrowGroundEffect(synergyLevel, effect))
         }
         break
 

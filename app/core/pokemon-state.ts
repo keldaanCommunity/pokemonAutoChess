@@ -640,7 +640,7 @@ export default abstract class PokemonState {
     this.updateCommands(pokemon, dt)
     pokemon.status.updateAllStatus(dt, pokemon, board)
 
-    pokemon.effectsList.forEach((effect) => {
+    pokemon.effectsSet.forEach((effect) => {
       if (effect instanceof PeriodicEffect) {
         effect.update(dt, pokemon)
       }

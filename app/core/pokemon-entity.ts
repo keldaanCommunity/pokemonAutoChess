@@ -122,7 +122,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   isClone = false
   refToBoardPokemon: IPokemon
   commands = new Array<SimulationCommand>()
-  effectsList = new Array<EffectClass>()
+  effectsSet = new Set<EffectClass>()
 
   constructor(
     pokemon: IPokemon,
@@ -625,8 +625,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     const default_types = getPokemonData(this.name).types
     if (type && !default_types.includes(type)) {
       this.types.delete(type)
-      SynergyEffects[type].forEach((effect) => {
-        this.effects.delete(effect)
+      SynergyEffects[type].forEach((effectName) => {
+        this.effects.delete(effectName)
+        this.effectsSet.forEach((effect) => {
+          if (effect.origin === effectName) this.effectsSet.delete(effect)
+        })
       })
     }
 
