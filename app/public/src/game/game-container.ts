@@ -206,6 +206,7 @@ class GameContainer {
       "manaBurnCount",
       "moneyCount",
       "amuletCoinCount",
+      "bottleCapCount",
       "attackCount",
       "tripleAttackCount",
       "upgradeCount",

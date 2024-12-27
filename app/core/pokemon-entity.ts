@@ -45,7 +45,7 @@ import { Weather } from "../types/enum/Weather"
 import { count } from "../utils/array"
 import { isOnBench } from "../utils/board"
 import { distanceC, distanceM } from "../utils/distance"
-import { clamp, max, min, roundToNDigits } from "../utils/number"
+import { clamp, min, roundToNDigits } from "../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import AttackingState from "./attacking-state"
@@ -56,7 +56,7 @@ import PokemonState from "./pokemon-state"
 import Simulation from "./simulation"
 import { DelayedCommand, SimulationCommand } from "./simulation-command"
 import { ItemEffects } from "./items"
-import { OnItemRemovedEffect, Effect as EffectClass } from "./effect"
+import { OnItemRemovedEffect, OnKillEffect, Effect as EffectClass } from "./effect"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 
 export class PokemonEntity extends Schema implements IPokemonEntity {
@@ -411,12 +411,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
 
-    // for every 5% crit chance > 100, +0.1 crit power
+    // for every 5% crit chance > 100, +10 crit power
     this.critChance += value
 
     if (this.critChance > 100) {
       const overCritChance = Math.round(this.critChance - 100)
-      this.addCritPower(overCritChance / 50, this, 0, false)
+      this.addCritPower(overCritChance * 2, this, 0, false)
       this.critChance = 100
     }
   }
@@ -1509,26 +1509,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   // called after killing an opponent (does not proc if resurection)
   onKill({ target, board }: { target: PokemonEntity; board: Board }) {
+    const itemEffects: OnKillEffect[] = values(this.items)
+      .flatMap((item) => ItemEffects[item] ?? [])
+      .filter((effect) => effect instanceof OnKillEffect)
+    itemEffects.forEach((effect) => {
+      effect.apply(this, target, board)
+    })
+
     if (this.passive === Passive.SOUL_HEART) {
       this.addPP(10, this, 0, false)
       this.addAbilityPower(10, this, 0, false)
-    }
-
-    if (this.items.has(Item.AMULET_COIN) && this.player) {
-      this.player.addMoney(1, true, this)
-      this.count.moneyCount += 1
-      this.count.amuletCoinCount += 1
-    }
-
-    if (this.items.has(Item.GOLD_BOTTLE_CAP) && this.player) {
-      const isLastEnemy =
-        board.cells.some(
-          (p) =>
-            p && p.team !== this.team && (p.life > 0 || p.status.resurecting)
-        ) === false
-      const moneyGained = isLastEnemy ? 5 : 1
-      this.player.addMoney(moneyGained, true, this)
-      this.count.moneyCount += moneyGained
     }
 
     if (this.hasSynergyEffect(Synergy.MONSTER)) {

@@ -1,3 +1,4 @@
+import Board from "./board"
 import { PokemonEntity } from "./pokemon-entity"
 import { Item } from "../types/enum/Item"
 import { Effect as EffectEnum } from "../types/enum/Effect"
@@ -7,8 +8,8 @@ type EffectOrigin = EffectEnum | Item
 
 export abstract class Effect {
   origin?: EffectOrigin
-  apply: (entity: PokemonEntity) => void
-  constructor(effect: (entity: PokemonEntity) => void, origin?: EffectOrigin) {
+  apply: (entity: PokemonEntity, ...others: any[]) => void
+  constructor(effect: (entity: PokemonEntity, ...others: any[]) => void, origin?: EffectOrigin) {
     this.apply = effect
     this.origin = origin
   }
@@ -66,5 +67,16 @@ export class GrowGroundEffect extends PeriodicEffect {
       3000,
       effect
     )
+  }
+}
+
+// applied after knocking out an enemy
+export class OnKillEffect extends Effect {
+  apply: (entity: PokemonEntity, target: PokemonEntity, board: Board) => void
+  constructor(
+    effect: (entity: PokemonEntity, target: PokemonEntity, board: Board) => void
+  ) {
+    super(effect)
+    this.apply = effect
   }
 }
