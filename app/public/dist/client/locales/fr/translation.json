@@ -3220,13 +3220,10 @@
     "GOTTA_CATCH_EM_ALL": "Attrapez-les tous !",
     "BUYER_FEVER": "Fièvre acheteuse",
     "TECHNOLOGIC": "Technologie",
-    "SIX_PACK": "Pack de six",
-    "NINE_LIVES": "Neuf Vies",
     "CROWDED": "Plateau encombré",
     "KECLEONS_SHOP": "Magasin de Kecleon",
     "FREE_MARKET": "Marché libre",
-    "SHINY_HUNTER": "Chasseur de Shiny",
-    "DESPERATE_MOVES": "Relances désespérées"
+    "SHINY_HUNTER": "Chasseur de Shiny"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "Tous les Pokémons additionnels sont disponibles immédiatement",
@@ -3237,13 +3234,10 @@
     "GOTTA_CATCH_EM_ALL": "Des Pokémons peuvent être attrapés avant chaque tour PvE",
     "BUYER_FEVER": "Les évolutions dans le magasin sont gratuites",
     "TECHNOLOGIC": "Choisissez entre 3 objets artificiels aux tours 3 et 15",
-    "SIX_PACK": "Vous pouvez mettre 6 unités maximum sur votre plateau, peu importe votre niveau",
-    "NINE_LIVES": "Vous êtes éliminés après avoir perdu 9 matchs",
     "CROWDED": "+3 unités maximum sur le plateau",
     "KECLEONS_SHOP": "Les carousels d'objets sont remplacés par le magasin de Kecleon qui vous propose 6 objets pour 10 GOLD pièce",
     "FREE_MARKET": "Les Pokémons s'achètent et se vendent pour 0 GOLD",
-    "SHINY_HUNTER": "Toutes les rencontres PvE sont des shiny",
-    "DESPERATE_MOVES": "Les joueurs commencent à 150 HP. Les relances du magasin coutent des HP au lieu de GOLD."
+    "SHINY_HUNTER": "Toutes les rencontres PvE sont des shiny"
   },
   "loading_hints": {
     "tab_out": "Ne changez pas d'onglet ! Le chargement est mis en pause si cette fenêtre est inactive.",

@@ -107,3 +107,5 @@
 - Light effects are no longer erroneously applied to spawns and resurrected pokemon.
 
 # Misc
+
+- Removed scribbles "Nine Lives", "Six Pack" and "Desperate Moves"
