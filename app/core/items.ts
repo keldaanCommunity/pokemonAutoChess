@@ -5,7 +5,12 @@ import {
   SynergyGivenByItem,
   SynergyStones
 } from "../types/enum/Item"
-import { Effect, OnItemGainedEffect, OnItemRemovedEffect } from "./effect"
+import {
+  Effect,
+  OnItemGainedEffect,
+  OnItemRemovedEffect,
+  OnKillEffect
+} from "./effect"
 import { pickRandomIn } from "../utils/random"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { PokemonEntity } from "./pokemon-entity"
@@ -144,21 +149,26 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.GOLD_BOTTLE_CAP]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.addCritChance(pokemon.player?.money ?? 0, pokemon, 0, false)
-      pokemon.addCritPower(
-        (pokemon.player?.money ?? 0) / 100,
-        pokemon,
-        0,
-        false
-      )
+      pokemon.addCritPower(pokemon.player?.money ?? 0, pokemon, 0, false)
     }),
     new OnItemRemovedEffect((pokemon) => {
       pokemon.addCritChance(-(pokemon.player?.money ?? 0), pokemon, 0, false)
-      pokemon.addCritPower(
-        -(pokemon.player?.money ?? 0) / 100,
-        pokemon,
-        0,
-        false
-      )
+      pokemon.addCritPower(-(pokemon.player?.money ?? 0), pokemon, 0, false)
+    }),
+    new OnKillEffect((pokemon, target, board) => {
+      if (pokemon.player) {
+        const isLastEnemy =
+          board.cells.some(
+            (p) =>
+              p &&
+              p.team !== pokemon.team &&
+              (p.life > 0 || p.status.resurecting)
+          ) === false
+        pokemon.count.bottleCapCount++
+        const moneyGained = isLastEnemy ? pokemon.count.bottleCapCount + 1 : 1
+        pokemon.player.addMoney(moneyGained, true, pokemon)
+        pokemon.count.moneyCount += moneyGained
+      }
     })
   ],
 
@@ -198,12 +208,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.UPGRADE]: [
     new OnItemRemovedEffect((pokemon) => {
-      pokemon.addAttackSpeed(
-        -5 * pokemon.count.upgradeCount,
-        pokemon,
-        0,
-        false
-      )
+      pokemon.addAttackSpeed(-5 * pokemon.count.upgradeCount, pokemon, 0, false)
       pokemon.count.upgradeCount = 0
     })
   ],
@@ -215,6 +220,16 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addDefense(-stacks, pokemon, 0, false)
       pokemon.addAttackSpeed(-5 * stacks, pokemon, 0, false)
       pokemon.count.defensiveRibbonCount = 0
+    })
+  ],
+
+  [Item.AMULET_COIN]: [
+    new OnKillEffect((pokemon) => {
+      if (pokemon.player) {
+        pokemon.player.addMoney(1, true, pokemon)
+        pokemon.count.moneyCount += 1
+        pokemon.count.amuletCoinCount += 1
+      }
     })
   ]
 }

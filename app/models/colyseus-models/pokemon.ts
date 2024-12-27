@@ -12576,7 +12576,7 @@ export class Comfey extends Pokemon {
         false
       )
       nearestAllyWithFreeItemSlot.addCritPower(
-        entity.critPower - DEFAULT_CRIT_POWER,
+        (entity.critPower - DEFAULT_CRIT_POWER) * 100,
         entity,
         0,
         false
