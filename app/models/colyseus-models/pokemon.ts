@@ -45,7 +45,6 @@ import {
   ItemComponents,
   ItemRecipe,
   OgerponMasks,
-  SynergyGivenByItem,
   SynergyItems
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
@@ -58,7 +57,11 @@ import {
 import { Synergy, SynergyEffects } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { removeInArray, sum } from "../../utils/array"
-import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
+import {
+  getFirstAvailablePositionInBench,
+  getFirstAvailablePositionOnBoard,
+  isOnBench
+} from "../../utils/board"
 import { distanceC, distanceE } from "../../utils/distance"
 import { pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
@@ -96,6 +99,8 @@ export class Pokemon extends Schema implements IPokemon {
   additional = false
   regional = false
   canHoldItems = true
+  canBeBenched = true
+  canBeSold = true
   stages?: number
   tm: Ability | null = null
 
@@ -129,8 +134,13 @@ export class Pokemon extends Schema implements IPokemon {
       this.rarity !== Rarity.UNIQUE &&
       this.rarity !== Rarity.LEGENDARY &&
       this.rarity !== Rarity.HATCH &&
+      this.passive !== Passive.INANIMATE &&
       ![Pkm.DITTO, Pkm.EGG].includes(this.name)
     )
+  }
+
+  get doesCountForTeamSize(): boolean {
+    return this.passive !== Passive.INANIMATE
   }
 
   get luck(): number {
@@ -147,14 +157,15 @@ export class Pokemon extends Schema implements IPokemon {
     // called after buying or picking the mon
   }
 
-  onEvolve(params: {
+  afterSell(player: Player) {
+    // called after selling the mon
+  }
+
+  afterEvolve(params: {
     pokemonEvolved: Pokemon
     pokemonsBeforeEvolution: Pokemon[]
     player: Player
   }) {
-    if (params.pokemonEvolved instanceof Garbodor) {
-      const garbodor: Garbodor = params.pokemonEvolved as Garbodor
-    }
     // called after evolving
   }
 
@@ -8228,18 +8239,6 @@ export class Munchlax extends Pokemon {
   passive = Passive.GLUTTON
   additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
-
-  onEvolve({
-    pokemonEvolved: snorlax,
-    pokemonsBeforeEvolution: munchlaxs
-  }: {
-    pokemonEvolved: Pokemon
-    pokemonsBeforeEvolution: Pokemon[]
-  }) {
-    // carry over the hp gained with passive
-    const hpStacked = sum(munchlaxs.map((m) => m.hp - 120))
-    snorlax.hp += hpStacked
-  }
 }
 
 export class Snorlax extends Pokemon {
@@ -8282,19 +8281,16 @@ export class Poipole extends Pokemon {
     (pokemon) => pokemon.hp >= 200
   )
 
-  onEvolve({
+  afterEvolve({
     pokemonEvolved: naganadel,
     pokemonsBeforeEvolution: poipoles
   }: {
     pokemonEvolved: Pokemon
     pokemonsBeforeEvolution: Pokemon[]
   }) {
-    // carry over the hp gained with passive
+    // carry over the AP gained with passive
     const apStacked = sum(poipoles.map((m) => m.ap))
     naganadel.ap += apStacked
-
-    const atkStacked = sum(poipoles.map((m) => m.atk))
-    naganadel.atk += atkStacked
   }
 }
 
@@ -13607,7 +13603,7 @@ export class WormadamPlant extends Pokemon {
   passive = Passive.ENVIRONMENTAL_ADAPTATION
   stages = 3
   regional = true
-  onEvolve = evolveMothim
+  afterEvolve = evolveMothim
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.GRASS)
@@ -13630,7 +13626,7 @@ export class WormadamSandy extends Pokemon {
   passive = Passive.ENVIRONMENTAL_ADAPTATION
   stages = 3
   regional = true
-  onEvolve = evolveMothim
+  afterEvolve = evolveMothim
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -13656,7 +13652,7 @@ export class WormadamTrash extends Pokemon {
   passive = Passive.ENVIRONMENTAL_ADAPTATION
   stages = 3
   regional = true
-  onEvolve = evolveMothim
+  afterEvolve = evolveMothim
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -14002,7 +13998,7 @@ export class Trubbish extends Pokemon {
     entity.addDefense(this.statIncreases[Stat.DEF], entity, 0, false)
   }
 
-  onEvolve({
+  afterEvolve({
     pokemonEvolved: garbodorObj,
     pokemonsBeforeEvolution: trubbishes
   }: {
@@ -15508,6 +15504,193 @@ export class Malamar extends Pokemon {
   attackSprite = AttackSprite.DARK_MELEE
 }
 
+const updatePillars = (player: Player, pkm: Pkm, pillarPkm: Pkm) => {
+  const pkmOnBoard = values(player.board).filter(
+    (p) => p.name === pkm && p.positionY > 0
+  )
+  const pillars = values(player.board).filter((p) => p.name === pillarPkm)
+  if (pillars.length < pkmOnBoard.length) {
+    for (let i = 0; i < pkmOnBoard.length - pillars.length; i++) {
+      const freeSpace = getFirstAvailablePositionOnBoard(player.board)
+      if (freeSpace) {
+        const pillar = PokemonFactory.createPokemonFromName(pillarPkm, player)
+        pillar.positionX = freeSpace[0]
+        pillar.positionY = freeSpace[1]
+        player.board.set(pillar.id, pillar)
+      }
+    }
+  } else if (pkmOnBoard.length < pillars.length) {
+    for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
+      player.board.delete(pillars[i].id)
+    }
+  }
+}
+
+const pillarEvolve =
+  (pillarToRemove: Pkm, pillarEvolution: Pkm) =>
+  (params: {
+    pokemonEvolved: Pokemon
+    pokemonsBeforeEvolution: Pokemon[]
+    player: Player
+  }) => {
+    const pkmOnBoard = values(params.player.board).filter(
+      (p) =>
+        p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
+    )
+    const pillars = values(params.player.board).filter(
+      (p) => p.name === pillarToRemove
+    )
+    for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
+      params.player.board.delete(pillars[i].id)
+    }
+    const coords =
+      pillars.length > 0
+        ? [pillars[0].positionX, pillars[0].positionY]
+        : getFirstAvailablePositionOnBoard(params.player.board)
+    if (coords && params.pokemonEvolved.positionY > 0) {
+      const pillar = PokemonFactory.createPokemonFromName(
+        pillarEvolution,
+        params.player
+      )
+      pillar.positionX = coords[0]
+      pillar.positionY = coords[1]
+      params.player.board.set(pillar.id, pillar)
+    }
+  }
+
+export class Timburr extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
+  rarity = Rarity.ULTRA
+  stars = 1
+  evolution = Pkm.GURDURR
+  hp = 140
+  atk = 14
+  def = 4
+  speDef = 2
+  maxPP = 120
+  range = 1
+  skill = Ability.COLUMN_CRUSH
+  passive = Passive.PILLAR
+  attackSprite = AttackSprite.FIGHTING_MELEE
+  onChangePosition(x, y, player) {
+    updatePillars(player, Pkm.TIMBURR, Pkm.PILLAR_WOOD)
+  }
+  afterSell(player) {
+    updatePillars(player, Pkm.TIMBURR, Pkm.PILLAR_WOOD)
+  }
+  afterEvolve = pillarEvolve(Pkm.PILLAR_WOOD, Pkm.PILLAR_IRON)
+}
+
+export class Gurdurr extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
+  rarity = Rarity.ULTRA
+  stars = 2
+  evolution = Pkm.CONKELDURR
+  hp = 280
+  atk = 24
+  def = 6
+  speDef = 3
+  maxPP = 120
+  range = 1
+  skill = Ability.COLUMN_CRUSH
+  passive = Passive.PILLAR
+  attackSprite = AttackSprite.FIGHTING_MELEE
+  onChangePosition(x, y, player) {
+    updatePillars(player, Pkm.GURDURR, Pkm.PILLAR_IRON)
+  }
+  afterSell(player) {
+    updatePillars(player, Pkm.GURDURR, Pkm.PILLAR_IRON)
+  }
+  afterEvolve = pillarEvolve(Pkm.PILLAR_IRON, Pkm.PILLAR_CONCRETE)
+}
+
+export class Conkeldurr extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
+  rarity = Rarity.ULTRA
+  stars = 3
+  hp = 400
+  atk = 34
+  def = 8
+  speDef = 4
+  maxPP = 120
+  range = 1
+  skill = Ability.COLUMN_CRUSH
+  passive = Passive.PILLAR
+  attackSprite = AttackSprite.FIGHTING_MELEE
+  onChangePosition(x, y, player) {
+    updatePillars(player, Pkm.CONKELDURR, Pkm.PILLAR_CONCRETE)
+  }
+  afterSell(player) {
+    updatePillars(player, Pkm.CONKELDURR, Pkm.PILLAR_CONCRETE)
+  }
+}
+
+export class PillarWood extends Pokemon {
+  types = new SetSchema<Synergy>([])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  hp = 100
+  atk = 0
+  def = 1
+  speDef = 1
+  maxPP = 0
+  range = 1
+  skill = Ability.DEFAULT
+  passive = Passive.INANIMATE
+  canHoldItems = false
+  canBeBenched = false
+  canBeSold = false
+  onSpawn({ entity }: { entity: IPokemonEntity }) {
+    entity.status.tree = true
+    entity.status.triggerRuneProtect(30000)
+    entity.toIdleState()
+  }
+}
+
+export class PillarIron extends Pokemon {
+  types = new SetSchema<Synergy>([])
+  rarity = Rarity.SPECIAL
+  stars = 2
+  hp = 200
+  atk = 0
+  def = 3
+  speDef = 3
+  maxPP = 0
+  range = 1
+  skill = Ability.DEFAULT
+  passive = Passive.INANIMATE
+  canHoldItems = false
+  canBeBenched = false
+  canBeSold = false
+  onSpawn({ entity }: { entity: IPokemonEntity }) {
+    entity.status.tree = true
+    entity.status.triggerRuneProtect(30000)
+    entity.toIdleState()
+  }
+}
+
+export class PillarConcrete extends Pokemon {
+  types = new SetSchema<Synergy>([])
+  rarity = Rarity.SPECIAL
+  stars = 3
+  hp = 300
+  atk = 0
+  def = 5
+  speDef = 5
+  maxPP = 0
+  range = 1
+  skill = Ability.DEFAULT
+  passive = Passive.INANIMATE
+  canHoldItems = false
+  canBeBenched = false
+  canBeSold = false
+  onSpawn({ entity }: { entity: IPokemonEntity }) {
+    entity.status.tree = true
+    entity.status.triggerRuneProtect(30000)
+    entity.toIdleState()
+  }
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -16389,5 +16572,11 @@ export const PokemonClasses: Record<
   [Pkm.INKAY]: Inkay,
   [Pkm.MALAMAR]: Malamar,
   [Pkm.HISUI_VOLTORB]: HisuiVoltorb,
-  [Pkm.HISUI_ELECTRODE]: HisuiElectrode
+  [Pkm.HISUI_ELECTRODE]: HisuiElectrode,
+  [Pkm.TIMBURR]: Timburr,
+  [Pkm.GURDURR]: Gurdurr,
+  [Pkm.CONKELDURR]: Conkeldurr,
+  [Pkm.PILLAR_WOOD]: PillarWood,
+  [Pkm.PILLAR_IRON]: PillarIron,
+  [Pkm.PILLAR_CONCRETE]: PillarConcrete
 }

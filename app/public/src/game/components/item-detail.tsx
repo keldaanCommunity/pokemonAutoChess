@@ -48,7 +48,7 @@ export function ItemDetailTooltip({
       <img className="game-item-detail-icon" src={`assets/item/${getImageFilename()}.png`} />
       <div className="game-item-detail-name">
         {ItemRecipe[item] && (<div className="game-item-recipe">
-          {ItemRecipe[item]?.map((item, i) => <><img className="game-item-detail-icon" src={`assets/item/${item}.png`} />{i === 0 && ' + '}</>)}
+          {ItemRecipe[item]?.map((item, i) => <><img className="game-item-detail-icon" src={`assets/item/${item}.png`} key={item} />{i === 0 && ' + '}</>)}
         </div>)}
         {t(`item.${item}`)}
       </div>

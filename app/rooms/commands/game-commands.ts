@@ -281,18 +281,20 @@ export class OnDragDropCommand extends Command<
           const dropToEmptyPlace = isPositionEmpty(x, y, player.board)
 
           if (dropOnBench) {
-            // From board to bench is always allowed (bench to bench is already handled)
-            this.room.swap(player, pokemon, x, y)
-            if (this.state.specialGameRule === SpecialGameRule.SLAMINGO) {
-              pokemon.items.forEach((item) => {
-                if (item !== Item.RARE_CANDY) {
-                  player.items.push(item)
-                  pokemon.removeItem(item)
-                }
-              })
+            if (pokemon.canBeBenched) {
+              // From board to bench (bench to bench is already handled)
+              this.room.swap(player, pokemon, x, y)
+              if (this.state.specialGameRule === SpecialGameRule.SLAMINGO) {
+                pokemon.items.forEach((item) => {
+                  if (item !== Item.RARE_CANDY) {
+                    player.items.push(item)
+                    pokemon.removeItem(item)
+                  }
+                })
+              }
+              pokemon.onChangePosition(x, y, player)
+              success = true
             }
-            pokemon.onChangePosition(x, y, player)
-            success = true
           } else if (
             pokemon.canBePlaced &&
             !(dropFromBench && dropToEmptyPlace && isBoardFull)
@@ -312,8 +314,10 @@ export class OnDragDropCommand extends Command<
         this.room.checkEvolutionsAfterPokemonAcquired(playerId)
       }
 
-      player.updateSynergies()
-      player.boardSize = this.room.getTeamSize(player.board)
+      if (success) {
+        player.updateSynergies()
+        player.boardSize = this.room.getTeamSize(player.board)
+      }
     }
     if (commands.length > 0) {
       return commands
@@ -709,6 +713,7 @@ export class OnSellDropCommand extends Command<
 
         player.updateSynergies()
         player.boardSize = this.room.getTeamSize(player.board)
+        pokemon.afterSell(player)
       }
     }
   }
@@ -1248,6 +1253,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           const coordinate = getFirstAvailablePositionOnBoard(player.board)
           if (coordinate && pokemon) {
             this.room.swap(player, pokemon, coordinate[0], coordinate[1])
+            pokemon.onChangePosition(coordinate[0], coordinate[1], player)
           }
         }
         if (numberOfPokemonsToMove > 0) {

@@ -117,13 +117,18 @@ export default class BattleManager {
       this.simulation?.id == simulationId &&
       this.pokemonSprites.has(pokemon.id)
     ) {
-      const pkm = this.pokemonSprites.get(pokemon.id)!
-      this.animationManager.animatePokemon(
-        pkm,
-        PokemonActionState.HURT,
-        this.flip
-      )
-      pkm.deathAnimation()
+      const pokemonSprite = this.pokemonSprites.get(pokemon.id)!
+      if (pokemon.passive === Passive.INANIMATE && pokemon.life > 0) {
+        // pillar is thrown, skip death animation
+        setTimeout(() => pokemonSprite.destroy(), 500)
+      } else {
+        this.animationManager.animatePokemon(
+          pokemonSprite,
+          PokemonActionState.HURT,
+          this.flip
+        )
+        pokemonSprite.deathAnimation()
+      }
     }
   }
 
@@ -142,6 +147,7 @@ export default class BattleManager {
     pokemon: IPokemonEntity,
     field: NonFunctionPropNames<Status>
   ) {
+    if (pokemon.passive === Passive.INANIMATE) return // No animation for statuses for inanimate pokemons
     if (
       this.simulation?.id == simulationId &&
       this.pokemonSprites.has(pokemon.id)
