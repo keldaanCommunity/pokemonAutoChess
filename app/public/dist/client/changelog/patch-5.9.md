@@ -60,6 +60,7 @@
 - Buff Sawsbuck: Attack 14 → 24
 - Buff Type Null: Attack 14 → 16
 - Buff Silvally: Attack 18 → 20, Def/Spedef 5 → 6
+- Reduce cooldown of Defense Curl (Bronzor, Registeel) to 250ms
 
 # Changes to Synergies
 
