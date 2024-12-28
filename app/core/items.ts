@@ -66,7 +66,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.MAX_REVIVE]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.status.resurection = true
+      pokemon.status.addResurrection(pokemon)
     }),
     new OnItemRemovedEffect((pokemon) => {
       pokemon.status.resurection = false
@@ -114,7 +114,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.POKERUS_VIAL]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.status.triggerPokerus()
+      pokemon.status.triggerPokerus(pokemon)
     })
     // intentionally no item removal effect
   ],
@@ -199,7 +199,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.SACRED_ASH]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.status.resurection = true
+      pokemon.status.addResurrection(pokemon)
     }),
     new OnItemRemovedEffect((pokemon) => {
       pokemon.status.resurection = false

@@ -15,6 +15,8 @@ import delays from "../../../types/delays.json"
 import durations from "../assets/pokemons/durations.json"
 import indexList from "../assets/pokemons/indexList.json"
 import PokemonSprite from "./components/pokemon"
+import { getPokemonData } from "../../../models/precomputed/precomputed-pokemon-data"
+import { Passive } from "../../../types/enum/Passive"
 
 const FPS_EFFECTS = 20
 const FPS_POKEMON_ANIMS = 36
@@ -30,28 +32,35 @@ export default class AnimationManager {
       tints.forEach((shiny) => {
         const actions: AnimationType[] = [
           AnimationType.Idle,
-          AnimationType.Walk,
-          AnimationType.Sleep,
-          AnimationType.Hop,
           AnimationType.Hurt
         ]
 
-        const conf = PkmByIndex[index]
+        const pkm = PkmByIndex[index]
+        const pokemonData = getPokemonData(pkm)
 
-        if (conf && AnimationConfig[conf]) {
+        if (pokemonData.passive !== Passive.INANIMATE) {
+          actions.push(
+            AnimationType.Walk,
+            AnimationType.Sleep,
+            AnimationType.Hop
+          )
+        }
+
+        if (pkm && AnimationConfig[pkm]) {
           if (
-            AnimationConfig[conf].shinyUnavailable &&
+            AnimationConfig[pkm].shinyUnavailable &&
             shiny === PokemonTint.SHINY
           )
             return
-          if (!actions.includes(AnimationConfig[conf as Pkm].attack)) {
-            actions.push(AnimationConfig[conf as Pkm].attack)
+          const config = AnimationConfig[pkm]
+          if (!actions.includes(config.attack)) {
+            actions.push(config.attack)
           }
-          if (!actions.includes(AnimationConfig[conf as Pkm].ability)) {
-            actions.push(AnimationConfig[conf as Pkm].ability)
+          if (!actions.includes(config.ability)) {
+            actions.push(config.ability)
           }
-          if (!actions.includes(AnimationConfig[conf as Pkm].emote)) {
-            actions.push(AnimationConfig[conf as Pkm].emote)
+          if (!actions.includes(config.emote)) {
+            actions.push(config.emote)
           }
         } else {
           actions.push(AnimationType.Attack)
@@ -60,8 +69,11 @@ export default class AnimationManager {
         //logger.debug(`Init animations: ${index} => ${actions.join(",")}`)
 
         actions.forEach((action) => {
-          const modes = Object.values(SpriteType) as SpriteType[]
-          modes.forEach((mode) => {
+          const config = AnimationConfig[pkm]
+          const spriteTypes = config.noShadow
+            ? [SpriteType.ANIM]
+            : [SpriteType.ANIM, SpriteType.SHADOW]
+          spriteTypes.forEach((mode) => {
             const directionArray =
               AnimationComplete[action] === false
                 ? [Orientation.DOWN]
@@ -319,11 +331,13 @@ export default class AnimationManager {
       repeat: config.repeat,
       timeScale: config.timeScale
     })
-    entity.shadow.anims.play({
-      key: shadowKey,
-      repeat: config.repeat,
-      timeScale: config.timeScale
-    })
+    if (entity.shadow) {
+      entity.shadow.anims.play({
+        key: shadowKey,
+        repeat: config.repeat,
+        timeScale: config.timeScale
+      })
+    }
     if (config.lock) {
       entity.animationLocked = true
     }

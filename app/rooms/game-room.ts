@@ -22,6 +22,7 @@ import {
 } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getAdditionalsTier1 } from "../models/shop"
+import { Passive } from "../types/enum/Passive"
 import { getAvatarString } from "../utils/avatar"
 import {
   Emotion,
@@ -1005,7 +1006,7 @@ export default class GameRoom extends Room<GameState> {
     let size = 0
 
     board.forEach((pokemon, key) => {
-      if (pokemon.positionY != 0) {
+      if (pokemon.positionY != 0 && pokemon.doesCountForTeamSize) {
         size++
       }
     })
@@ -1104,7 +1105,7 @@ export default class GameRoom extends Room<GameState> {
     let damage = Math.ceil(stageLevel / 2)
     if (opponentTeam.size > 0) {
       opponentTeam.forEach((pokemon) => {
-        if (!pokemon.isClone) {
+        if (!pokemon.isClone && pokemon.passive !== Passive.INANIMATE) {
           damage += 1
         }
       })

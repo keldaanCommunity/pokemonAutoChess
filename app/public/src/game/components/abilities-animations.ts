@@ -1,9 +1,16 @@
 import { Geom } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { AttackSprite } from "../../../../types"
+import { AnimationType } from "../../../../types/Animation"
 import { BOARD_HEIGHT } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
-import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
+import {
+  Orientation,
+  PokemonActionState,
+  PokemonTint,
+  SpriteType
+} from "../../../../types/enum/Game"
+import { Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
 import { distanceE, distanceM } from "../../../../utils/distance"
 import {
   OrientationArray,
@@ -3104,6 +3111,34 @@ export function displayAbility(
         y: coordinatesTarget[1],
         ease: "linear",
         duration: 600,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
+    case Ability.COLUMN_CRUSH: {
+      const distance = distanceE(
+        coordinates[0],
+        coordinates[1],
+        coordinatesTarget[0],
+        coordinatesTarget[1]
+      )
+      const pillarType =
+        [Pkm.PILLAR_WOOD, Pkm.PILLAR_IRON, Pkm.PILLAR_CONCRETE][orientation] ??
+        Pkm.PILLAR_WOOD
+      const animKey = `${PkmIndex[pillarType]}/${PokemonTint.NORMAL}/${AnimationType.Idle}/${SpriteType.ANIM}/${Orientation.DOWN}`
+      const specialProjectile = addAbilitySprite(animKey, coordinates).setScale(
+        2
+      )
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        angle: 270,
+        ease: "linear",
+        duration: distance * 2,
         onComplete: () => {
           specialProjectile.destroy()
         }

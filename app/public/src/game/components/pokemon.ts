@@ -27,7 +27,7 @@ import {
   type Team
 } from "../../../../types/enum/Game"
 import type { Passive } from "../../../../types/enum/Passive"
-import { Pkm } from "../../../../types/enum/Pokemon"
+import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
 import type { Synergy } from "../../../../types/enum/Synergy"
 import { clamp, min } from "../../../../utils/number"
 import { chance } from "../../../../utils/random"
@@ -85,7 +85,7 @@ export default class PokemonSprite extends DraggableObject {
   luck: number
   powerbar: PowerBar | undefined
   sprite: GameObjects.Sprite
-  shadow: GameObjects.Sprite
+  shadow?: GameObjects.Sprite
   wound: GameObjects.Sprite | undefined
   burn: GameObjects.Sprite | undefined
   sleep: GameObjects.Sprite | undefined
@@ -214,9 +214,12 @@ export default class PokemonSprite extends DraggableObject {
       this.id,
       playerId
     )
-    this.shadow = new GameObjects.Sprite(scene, 0, 5, textureIndex)
-    this.shadow.setScale(2, 2).setDepth(2)
-    this.add(this.shadow)
+    const hasShadow = AnimationConfig[pokemon.name]?.noShadow !== true
+    if (hasShadow) {
+      this.shadow = new GameObjects.Sprite(scene, 0, 5, textureIndex)
+      this.shadow.setScale(2, 2).setDepth(2)
+      this.add(this.shadow)
+    }
     this.add(this.sprite)
 
     if (instanceofPokemonEntity(pokemon)) {
@@ -240,7 +243,7 @@ export default class PokemonSprite extends DraggableObject {
 
     if (instanceofPokemonEntity(pokemon)) {
       this.setLifeBar(p, scene)
-      this.setPowerBar(p, scene)
+      if (pokemon.maxPP > 0) this.setPowerBar(p, scene)
       //this.setEffects(p, scene);
     }
 

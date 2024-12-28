@@ -431,7 +431,8 @@
     "FLY": "Fly",
     "SURF": "Surf",
     "STRENGTH": "Strength",
-    "HARDEN": "Harden"
+    "HARDEN": "Harden",
+    "COLUMN_CRUSH": "Column Crush"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1308,7 +1309,13 @@
     "VULLABY": "Vullaby",
     "MANDIBUZZ": "Mandibuzz",
     "INKAY": "Inkay",
-    "MALAMAR": "Malamar"
+    "MALAMAR": "Malamar",
+    "TIMBURR": "Timburr",
+    "GURDURR": "Gurdurr",
+    "CONKELDURR": "Conkeldurr",
+    "PILLAR_WOOD": "Pillar (Wood)",
+    "PILLAR_IRON": "Pillar (Iron)",
+    "PILLAR_CONCRETE": "Pillar (Concrete)"
   },
   "ability_description": {
     "SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1720,7 +1727,8 @@
     "SURF": "A wave pushes the user and enemies in the path into the enemy backline. All enemies hit take [20,40,80,SP] SPECIAL.",
     "STRENGTH": "Deal 2x(ATK + DEF + SPE_DEF) + AP as PHYSICAL",
     "HARDEN": "Gain [2,4,6,SP] DEF",
-    "TOPSY_TURVY": "Deal [40,80,100,SP] SPECIAL to the target. All its ATK, DEF and SPE_DEF buffs become debuffs and vice versa."
+    "TOPSY_TURVY": "Deal [40,80,100,SP] SPECIAL to the target. All its ATK, DEF and SPE_DEF buffs become debuffs and vice versa.",
+    "COLUMN_CRUSH": "Builds a pillar on the closest empty spot. If a pillar is already on the board, jumps to it and throw it at the closest target, dealing [50,100,150,SP] + the remaining HP of the pillar as SPECIAL."
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2358,7 +2366,9 @@
     "PRIMEAPE": "Primeape becomes angrier when KO, gaining 1 permanent ATK. After Primeape is knocked out 10 times, evolves into Annihilape.",
     "ZYGARDE10": "Zygarde will absorb its cells, transforming into another form. Once below 30% max HP, it absorbs all of its cells, taking its complete form.",
     "ZYGARDE50": "Zygarde will absorb its cells, transforming into another form. Once below 30% max HP, it absorbs all of its cells, taking its complete form.",
-    "GLIMMORA": "Once below 50% max HP, this unit throws toxic spikes in a 2x3 rectangle in front of itself, dealing 20 damage. Toxic spikes apply POISONNED to Pokémon, unless they are POISON."
+    "GLIMMORA": "Once below 50% max HP, this unit throws toxic spikes in a 2x3 rectangle in front of itself, dealing 20 damage. Toxic spikes apply POISONNED to Pokémon, unless they are POISON.",
+    "PILLAR": "Builds a movable pillar that blocks the path of enemies, with increased HP, DEF and SPE_DEF based on unit STAR.",
+    "INANIMATE": "Inanimate objects cannot be copied, benched or sold. They cannot move or attack, and are immune to status effects."
   },
   "stat": {
     "ATK": "Attack",
