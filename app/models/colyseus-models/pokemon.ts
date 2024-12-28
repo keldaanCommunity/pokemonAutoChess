@@ -7177,7 +7177,7 @@ export class Gorebyss extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.FOSSIL,
     Synergy.WATER,
-    Synergy.PSYCHIC
+    Synergy.AQUATIC
   ])
   rarity = Rarity.EPIC
   stars = 2
