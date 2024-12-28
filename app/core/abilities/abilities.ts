@@ -2729,6 +2729,7 @@ export class FlameThrowerStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
+        cell.value.status.triggerBurn(4000, cell.value, pokemon)
       }
     })
   }

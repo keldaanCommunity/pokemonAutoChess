@@ -105,6 +105,6 @@
 - Pokemon with passives that apply persistent effects now apply properly to spawns and resurrected pokemon.
 - Weather effects now apply properly to spawns and resurrected pokemon.
 - Light effects are no longer erroneously applied to spawns and resurrected pokemon.+
-- Fix Flamethrower damage, the values were 20/40/80 instead of 30/60/120
+- Fix Flamethrower damage & burn effect not working properly
 
 # Misc
