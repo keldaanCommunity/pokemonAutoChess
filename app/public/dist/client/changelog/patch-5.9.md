@@ -56,6 +56,8 @@
 - Adjusted Curse (Cursola): curse duration 8/4 → 8/5/3 seconds
 - Buff Turtonator: Def 7 → 12
 - Buff Minior: Attack 12 → 14
+- Buff Deerling: Attack 8 → 9
+- Buff Sawsbuck: Attack 14 → 24
 
 # Changes to Synergies
 

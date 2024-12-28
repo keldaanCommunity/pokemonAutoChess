@@ -13093,7 +13093,7 @@ export class Deerling extends Pokemon {
   stars = 1
   evolution = Pkm.SAWSBUCK
   hp = 80
-  atk = 8
+  atk = 9
   def = 2
   speDef = 2
   maxPP = 100
@@ -13108,7 +13108,7 @@ export class Sawsbuck extends Pokemon {
   additional = true
   stars = 2
   hp = 180
-  atk = 14
+  atk = 24
   def = 4
   speDef = 4
   maxPP = 100
