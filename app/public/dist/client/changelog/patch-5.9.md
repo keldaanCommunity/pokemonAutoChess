@@ -54,6 +54,8 @@
 - Nerf Galar Corsola: now has the same stats than regular Corsola
 - Nerf Cursola: HP 300 → 200
 - Adjusted Curse (Cursola): curse duration 8/4 → 8/5/3 seconds
+- Buff Turtonator: Def 7 → 12
+- Buff Minior: Attack 12 → 14
 
 # Changes to Synergies
 

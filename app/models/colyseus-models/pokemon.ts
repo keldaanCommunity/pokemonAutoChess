@@ -12307,7 +12307,7 @@ export class Minior extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 12
+  atk = 14
   def = 5
   speDef = 5
   maxPP = 50
@@ -12322,7 +12322,7 @@ export class MiniorKernelBlue extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 12
+  atk = 14
   def = 5
   speDef = 5
   maxPP = 50
@@ -12337,7 +12337,7 @@ export class MiniorKernelRed extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 12
+  atk = 14
   def = 5
   speDef = 5
   maxPP = 50
@@ -12352,7 +12352,7 @@ export class MiniorKernelOrange extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 12
+  atk = 14
   def = 5
   speDef = 5
   maxPP = 50
@@ -12367,7 +12367,7 @@ export class MiniorKernelGreen extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 12
+  atk = 14
   def = 5
   speDef = 5
   maxPP = 50
@@ -15091,7 +15091,7 @@ export class Turtonator extends Pokemon {
   stars = 3
   hp = 200
   atk = 13
-  def = 7
+  def = 12
   speDef = 5
   maxPP = 100
   range = 1
