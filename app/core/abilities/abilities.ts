@@ -2714,7 +2714,7 @@ export class FlameThrowerStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
 
     effectInLine(board, pokemon, target, (cell) => {
       if (
