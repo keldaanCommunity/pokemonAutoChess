@@ -58,6 +58,8 @@
 - Buff Minior: Attack 12 → 14
 - Buff Deerling: Attack 8 → 9
 - Buff Sawsbuck: Attack 14 → 24
+- Buff Type Null: Attack 14 → 16
+- Buff Silvally: Attack 18 → 20, Def/Spedef 5 → 6
 
 # Changes to Synergies
 

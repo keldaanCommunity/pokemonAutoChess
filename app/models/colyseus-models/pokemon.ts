@@ -9061,7 +9061,7 @@ export class TypeNull extends Pokemon {
   evolution = Pkm.SILVALLY
   evolutionRule = new ItemEvolutionRule([...SynergyItems])
   hp = 200
-  atk = 14
+  atk = 16
   def = 3
   speDef = 3
   maxPP = 100
@@ -9076,9 +9076,9 @@ export class Silvally extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 260
-  atk = 18
-  def = 5
-  speDef = 5
+  atk = 20
+  def = 6
+  speDef = 6
   maxPP = 100
   range = 1
   skill = Ability.MULTI_ATTACK
