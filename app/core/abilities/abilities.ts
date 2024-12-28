@@ -11439,6 +11439,66 @@ export class ColumnCrushStrategy extends AbilityStrategy {
   }
 }
 
+export class DarkLariatStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    //The user swings both arms and hits the target several times while moving behind them. Each hit deals [100,SP]% ATK as SPECIAL. Number of hits increase with ATK_SPEED. Target is FLINCH during the attack.
+    const hits = Math.round(pokemon.atkSpeed * 3)
+    target.status.triggerFlinch(1000, target, pokemon)
+    for (let i = 0; i < hits; i++) {
+      pokemon.commands.push(
+        new DelayedCommand(
+          () => {
+            if (target.life > 0) {
+              const damage = 1 * pokemon.atk
+              target.handleSpecialDamage(
+                damage,
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                crit
+              )
+              if (pokemon.effects.has(Effect.VICTORY_STAR)) {
+                pokemon.addAttack(1, pokemon, 0, false)
+              } else if (pokemon.effects.has(Effect.DROUGHT)) {
+                pokemon.addAttack(2, pokemon, 0, false)
+              } else if (pokemon.effects.has(Effect.DESOLATE_LAND)) {
+                pokemon.addAttack(3, pokemon, 0, false)
+              }
+            }
+          },
+          Math.round((i * 1000) / hits)
+        )
+      )
+    }
+    const dx = target.positionX - pokemon.positionX
+    const dy = target.positionY - pokemon.positionY
+    const freeCellBehind = board.getClosestAvailablePlace(
+      target.positionX + dx,
+      target.positionY + dy
+    )
+    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+      id: pokemon.simulation.id,
+      skill: Ability.DARK_LARIAT,
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY,
+      targetX: freeCellBehind?.x ?? pokemon.positionX,
+      targetY: freeCellBehind?.y ?? pokemon.positionY
+    })
+
+    if (freeCellBehind) {
+      pokemon.moveTo(freeCellBehind.x, freeCellBehind.y, board)
+      pokemon.cooldown = 600
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -11853,5 +11913,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SURF]: new SurfStrategy(),
   [Ability.STRENGTH]: new StrengthStrategy(),
   [Ability.HARDEN]: new HardenStrategy(),
-  [Ability.COLUMN_CRUSH]: new ColumnCrushStrategy()
+  [Ability.COLUMN_CRUSH]: new ColumnCrushStrategy(),
+  [Ability.DARK_LARIAT]: new DarkLariatStrategy()
 }
