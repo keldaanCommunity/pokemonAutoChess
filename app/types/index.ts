@@ -663,7 +663,6 @@ export interface ICount {
   manaBurnCount: number
   moneyCount: number
   magmarizerCount: number
-  echo: number
 }
 
 export interface IPreparationMetadata {

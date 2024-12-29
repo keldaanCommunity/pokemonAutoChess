@@ -24,5 +24,4 @@ export default class Count extends Schema implements ICount {
   @type("uint8") upgradeCount = 0
   @type("uint8") soulDewCount = 0
   @type("uint8") magmarizerCount = 0
-  @type("uint8") echo = 0
 }
