@@ -209,8 +209,6 @@ class GameContainer {
       "upgradeCount",
       "soulDewCount",
       "defensiveRibbonCount",
-      "attackOrderCount",
-      "healOrderCount",
       "magmarizerCount"
     ]
 

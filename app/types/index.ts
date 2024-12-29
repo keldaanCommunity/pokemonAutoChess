@@ -662,8 +662,6 @@ export interface ICount {
   spellBlockedCount: number
   manaBurnCount: number
   moneyCount: number
-  healOrderCount: number
-  attackOrderCount: number
   magmarizerCount: number
   echo: number
 }

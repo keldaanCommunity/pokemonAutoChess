@@ -481,34 +481,6 @@ export default class BattleManager {
         if (value != 0) {
           this.displayManaBurn(pkm.x, pkm.y)
         }
-      } else if (field === "healOrderCount") {
-        if (value != 0) {
-          displayAbility(
-            this.scene,
-            [],
-            "HEAL_ORDER",
-            pkm.orientation,
-            pkm.positionX,
-            pkm.positionY,
-            pkm.targetX ?? -1,
-            pkm.targetY ?? -1,
-            this.flip
-          )
-        }
-      } else if (field === "attackOrderCount") {
-        if (value != 0) {
-          displayAbility(
-            this.scene,
-            [],
-            "ATTACK_ORDER",
-            pkm.orientation,
-            pkm.positionX,
-            pkm.positionY,
-            pkm.targetX ?? -1,
-            pkm.targetY ?? -1,
-            this.flip
-          )
-        }
       } else if (field === "moneyCount") {
         if (value > 0) {
           this.moneyAnimation(pkm.x, pkm.y, value - previousValue)

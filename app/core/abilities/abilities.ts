@@ -5035,14 +5035,13 @@ export class HealOrderStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
     const damage = pokemon.stars === 3 ? 65 : pokemon.stars === 2 ? 45 : 25
 
     cells.forEach((cell) => {
       if (cell.value) {
         if (cell.value.team !== pokemon.team) {
-          cell.value.count.attackOrderCount++
           cell.value.handleSpecialDamage(
             damage,
             board,
@@ -5050,9 +5049,20 @@ export class HealOrderStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: "ATTACK_ORDER",
+            positionX: cell.value.positionX,
+            positionY: cell.value.positionY
+          })
         } else {
-          cell.value.count.healOrderCount++
           cell.value.handleHeal(damage, pokemon, 1, crit)
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: "HEAL_ORDER",
+            positionX: cell.value.positionX,
+            positionY: cell.value.positionY
+          })
         }
       }
     })
