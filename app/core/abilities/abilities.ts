@@ -352,7 +352,12 @@ export class EarthquakeStrategy extends AbilityStrategy {
         (tg && pokemon.team !== tg.team && pokemon.positionX === x)
       ) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-        tg.count.earthquakeCount++
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: pokemon.skill,
+          positionX: tg.positionX,
+          positionY: tg.positionY
+        })
       }
     })
   }

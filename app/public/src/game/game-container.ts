@@ -192,7 +192,6 @@ class GameContainer {
       "crit",
       "dodgeCount",
       "ult",
-      "earthquakeCount",
       "fieldCount",
       "soundCount",
       "growGroundCount",

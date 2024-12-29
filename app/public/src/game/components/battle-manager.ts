@@ -375,20 +375,6 @@ export default class BattleManager {
           )
           pkm.specialAttackAnimation(this.group, value)
         }
-      } else if (field === "earthquakeCount") {
-        if (value != 0) {
-          displayAbility(
-            this.scene,
-            [],
-            Ability.EARTHQUAKE,
-            pkm.orientation,
-            pkm.positionX,
-            pkm.positionY,
-            pkm.targetX ?? -1,
-            pkm.targetY ?? -1,
-            this.flip
-          )
-        }
       } else if (field === "fieldCount") {
         if (value != 0) {
           displayAbility(
