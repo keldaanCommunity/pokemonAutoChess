@@ -647,7 +647,6 @@ export interface IStatus {
 export interface ICount {
   crit: number
   ult: number
-  petalDanceCount: number
   fieldCount: number
   soundCount: number
   fairyCritCount: number

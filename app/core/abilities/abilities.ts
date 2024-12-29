@@ -1807,7 +1807,12 @@ export class PetalDanceStrategy extends AbilityStrategy {
         pokemon,
         crit
       )
-      enemy.count.petalDanceCount++
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: pokemon.skill,
+        positionX: enemy.positionX,
+        positionY: enemy.positionY
+      })
     })
   }
 }
