@@ -7,7 +7,6 @@ import {
   getTournamentStage,
   makeBrackets
 } from "../../core/tournament-logic"
-import PokemonConfig from "../../models/colyseus-models/pokemon-config"
 import {
   TournamentBracketSchema,
   TournamentPlayerSchema
@@ -982,20 +981,52 @@ export class JoinOrOpenRoomCommand extends Command<
       }
 
       case GameMode.RANKED: {
-        let userRank = getRank(user.elo)
-        if (userRank === EloRank.BEAST_BALL || userRank === EloRank.MASTER_BALL)
-          userRank = EloRank.ULTRA_BALL
+        const userRank = getRank(user.elo)
+        let minRank = EloRank.LEVEL_BALL
+        let maxRank = EloRank.BEAST_BALL
+        switch (userRank) {
+          case EloRank.LEVEL_BALL:
+          case EloRank.NET_BALL:
+            minRank = EloRank.LEVEL_BALL
+            maxRank = EloRank.NET_BALL
+            break
+          case EloRank.SAFARI_BALL:
+          case EloRank.LOVE_BALL:
+          case EloRank.PREMIER_BALL:
+            minRank = EloRank.SAFARI_BALL
+            maxRank = EloRank.PREMIER_BALL
+            break
+          case EloRank.QUICK_BALL:
+          case EloRank.POKE_BALL:
+          case EloRank.SUPER_BALL:
+            minRank = EloRank.QUICK_BALL
+            maxRank = EloRank.SUPER_BALL
+            break
+          case EloRank.ULTRA_BALL:
+          case EloRank.MASTER_BALL:
+          case EloRank.BEAST_BALL:
+            minRank = EloRank.ULTRA_BALL
+            maxRank = EloRank.BEAST_BALL
+            break
+        }
         const existingRanked = this.room.rooms?.find(
           (room) =>
             room.name === "preparation" &&
             room.metadata?.gameMode === GameMode.RANKED &&
-            room.metadata?.minRank === userRank &&
+            room.metadata?.minRank === minRank &&
             room.clients < MAX_PLAYERS_PER_GAME
         )
         if (existingRanked) {
           client.send(Transfer.REQUEST_ROOM, existingRanked.roomId)
         } else {
-          return [new OpenGameCommand().setPayload({ gameMode, client })]
+          return [
+            new OpenGameCommand().setPayload({
+              gameMode,
+              client,
+              minRank,
+              maxRank
+            })
+          ]
         }
         break
       }
@@ -1023,34 +1054,29 @@ export class OpenGameCommand extends Command<
   {
     gameMode: GameMode
     client: Client
+    minRank?: EloRank
+    maxRank?: EloRank
   }
 > {
   async execute({
     gameMode,
-    client
+    client,
+    minRank,
+    maxRank
   }: {
     gameMode: GameMode
     client: Client
+    minRank?: EloRank
+    maxRank?: EloRank
   }) {
     const user = this.room.users.get(client.auth.uid)
     if (!user) return
     let roomName = `${user.displayName}'${user.displayName.endsWith("s") ? "" : "s"} room`
-    let minRank: EloRank | null = null
-    let maxRank: EloRank | null = null
     let noElo: boolean = false
     let password: string | null = null
     let ownerId: string | null = null
 
     if (gameMode === GameMode.RANKED) {
-      let rank = getRank(user.elo)
-      if (rank === EloRank.BEAST_BALL || rank === EloRank.MASTER_BALL) {
-        rank = EloRank.ULTRA_BALL
-        minRank = EloRank.ULTRA_BALL
-        maxRank = EloRank.BEAST_BALL
-      } else {
-        minRank = rank
-        maxRank = rank
-      }
       roomName = "Ranked Match"
     } else if (gameMode === GameMode.SCRIBBLE) {
       roomName = "Smeargle's Scribble"
