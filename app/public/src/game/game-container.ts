@@ -193,7 +193,6 @@ class GameContainer {
       "dodgeCount",
       "ult",
       "petalDanceCount",
-      "futureSightCount",
       "earthquakeCount",
       "fieldCount",
       "soundCount",

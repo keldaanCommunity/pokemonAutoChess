@@ -1730,34 +1730,38 @@ export class FutureSightStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
+    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
+    const count = 5
+    const targets: PokemonEntity[] = board.cells
+      .filter<PokemonEntity>(
+        (p): p is PokemonEntity => p !== undefined && p.team !== pokemon.team
+      )
+      .slice(0, count)
 
-    let damage = 0
-    let count = 0
-
-    switch (pokemon.stars) {
-      case 1:
-        damage = 15
-        count = 5
-        break
-      case 2:
-        damage = 30
-        count = 5
-        break
-      case 3:
-        damage = 60
-        count = 5
-        break
-      default:
-        break
+    for (const tg of targets) {
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: pokemon.skill,
+        positionX: tg.positionX,
+        positionY: tg.positionY
+      })
     }
 
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team && count > 0) {
-        tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-        count--
-        tg.count.futureSightCount++
-      }
-    })
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        for (const tg of targets) {
+          if (tg.life > 0) {
+            tg.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+        }
+      }, 2000)
+    )
   }
 }
 

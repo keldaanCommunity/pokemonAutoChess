@@ -1381,7 +1381,7 @@
     "PSYBEAM": "Un étrange rayon frappe la cible et tous les ennemis derrière, infligeant [25,50,100,SP] SPECIAL avec [50,LK]% de chance de rendre CONFUSION",
     "DIVE": "Plonge sous l'eau et gagne [10,20,40,SP] SHIELD, puis réapparaît au milieu de l'équipe ennemie, infligeant [10,20,40,SP] SPECIAL et FREEZE toutes les unités adjacentes pendant 1 seconde",
     "SPIKE_ARMOR": "Pendant [3,5,10] secondes, les cibles qui attaquent ce Pokémon en mêlée reçoivent WOUND pendant 2 secondes et subissent des SPECIAL égaux à [100,SP]% de sa DEF. Si lancé à nouveau avant la fin de l'effet, projette des piques dans toutes les directions, infligeant 30 SPECIAL à tous les adversaires touchés.",
-    "FUTURE_SIGHT": "Inflige [15,30,60,SP] SPECIAL à 5 ennemis",
+    "FUTURE_SIGHT": "Inflige [15,30,60,SP] SPECIAL à 5 ennemis après 2 secondes d'attente.",
     "FAKE_TEARS": "Inflige [3,6,9,SP] SPECIAL à toute l'équipe ennemie et déclenche ARMOR_REDUCTION pendant 3 secondes",
     "SPARKLING_ARIA": "Inflige [15,30,60,SP] SPECIAL à la cible et aux ennemis adjacents. Si des alliés adjacents subissent BURN, la brûlure est soignée.",
     "DRAGON_DARTS": "Lance 3 fléchettes qui infligent [10,20,40,SP] SPECIAL chacune à la cible. Si la cible meurt, récupère 40 PP.",

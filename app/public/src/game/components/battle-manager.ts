@@ -389,20 +389,6 @@ export default class BattleManager {
             this.flip
           )
         }
-      } else if (field === "futureSightCount") {
-        if (value != 0) {
-          displayAbility(
-            this.scene,
-            [],
-            Ability.FUTURE_SIGHT,
-            pkm.orientation,
-            pkm.positionX,
-            pkm.positionY,
-            pkm.targetX ?? -1,
-            pkm.targetY ?? -1,
-            this.flip
-          )
-        }
       } else if (field === "earthquakeCount") {
         if (value != 0) {
           displayAbility(
