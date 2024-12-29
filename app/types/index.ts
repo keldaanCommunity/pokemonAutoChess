@@ -659,7 +659,6 @@ export interface ICount {
   tripleAttackCount: number
   staticHolderCount: number
   defensiveRibbonCount: number
-  mindBlownCount: number
   spellBlockedCount: number
   manaBurnCount: number
   moneyCount: number

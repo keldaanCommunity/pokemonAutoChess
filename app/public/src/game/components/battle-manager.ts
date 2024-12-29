@@ -473,20 +473,6 @@ export default class BattleManager {
             this.flip
           )
         }
-      } else if (field === "mindBlownCount") {
-        if (value != 0) {
-          displayAbility(
-            this.scene,
-            [],
-            "MIND_BLOWN/hit",
-            pkm.orientation,
-            pkm.positionX,
-            pkm.positionY,
-            pkm.targetX ?? -1,
-            pkm.targetY ?? -1,
-            this.flip
-          )
-        }
       } else if (field === "spellBlockedCount") {
         if (value != 0) {
           this.displayBlockedSpell(pkm.x, pkm.y)

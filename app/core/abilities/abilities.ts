@@ -270,7 +270,6 @@ export class MindBlownStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    target.count.mindBlownCount++
     target.handleSpecialDamage(
       pokemon.life / 2,
       board,

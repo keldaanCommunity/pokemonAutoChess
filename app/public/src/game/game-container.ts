@@ -199,7 +199,6 @@ class GameContainer {
       "fairyCritCount",
       "powerLensCount",
       "starDustCount",
-      "mindBlownCount",
       "spellBlockedCount",
       "manaBurnCount",
       "moneyCount",
