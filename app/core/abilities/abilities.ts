@@ -270,7 +270,6 @@ export class MindBlownStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    target.count.mindBlownCount++
     target.handleSpecialDamage(
       pokemon.life / 2,
       board,
@@ -352,7 +351,12 @@ export class EarthquakeStrategy extends AbilityStrategy {
         (tg && pokemon.team !== tg.team && pokemon.positionX === x)
       ) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-        tg.count.earthquakeCount++
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: pokemon.skill,
+          positionX: tg.positionX,
+          positionY: tg.positionY
+        })
       }
     })
   }
@@ -1684,31 +1688,11 @@ export class EchoStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-
-    let damage = 0
-    let additional = 0
-
-    switch (pokemon.stars) {
-      case 1:
-        damage = 3
-        additional = 3
-        break
-      case 2:
-        damage = 6
-        additional = 6
-        break
-      case 3:
-        damage = 9
-        additional = 9
-        break
-      default:
-        break
-    }
-
+    const damage = [3, 6, 9][pokemon.stars - 1] ?? 9
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
         tg.handleSpecialDamage(
-          damage + pokemon.count.echo * additional,
+          pokemon.count.ult * damage,
           board,
           AttackType.SPECIAL,
           pokemon,
@@ -1716,8 +1700,6 @@ export class EchoStrategy extends AbilityStrategy {
         )
       }
     })
-
-    pokemon.count.echo++
   }
 }
 
@@ -1730,34 +1712,38 @@ export class FutureSightStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
+    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
+    const count = 5
+    const targets: PokemonEntity[] = board.cells
+      .filter<PokemonEntity>(
+        (p): p is PokemonEntity => p !== undefined && p.team !== pokemon.team
+      )
+      .slice(0, count)
 
-    let damage = 0
-    let count = 0
-
-    switch (pokemon.stars) {
-      case 1:
-        damage = 15
-        count = 5
-        break
-      case 2:
-        damage = 30
-        count = 5
-        break
-      case 3:
-        damage = 60
-        count = 5
-        break
-      default:
-        break
+    for (const tg of targets) {
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: pokemon.skill,
+        positionX: tg.positionX,
+        positionY: tg.positionY
+      })
     }
 
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team && count > 0) {
-        tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-        count--
-        tg.count.futureSightCount++
-      }
-    })
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        for (const tg of targets) {
+          if (tg.life > 0) {
+            tg.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+        }
+      }, 2000)
+    )
   }
 }
 
@@ -1803,7 +1789,12 @@ export class PetalDanceStrategy extends AbilityStrategy {
         pokemon,
         crit
       )
-      enemy.count.petalDanceCount++
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: pokemon.skill,
+        positionX: enemy.positionX,
+        positionY: enemy.positionY
+      })
     })
   }
 }
@@ -2236,7 +2227,7 @@ export class NightmareStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const duration = [1500, 2500, 5000][pokemon.stars - 1] ?? 5000
+    const duration = [3000, 5000, 7000][pokemon.stars - 1] ?? 7000
     const damage = [40, 80, 150][pokemon.stars - 1] ?? 100
 
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
@@ -2256,7 +2247,7 @@ export class NightmareStrategy extends AbilityStrategy {
             true
           )
         }
-        enemy.status.triggerSilence(duration, enemy, pokemon)
+        enemy.status.triggerFatigue(duration, enemy)
       }
     })
   }
@@ -5022,14 +5013,13 @@ export class HealOrderStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
     const damage = pokemon.stars === 3 ? 65 : pokemon.stars === 2 ? 45 : 25
 
     cells.forEach((cell) => {
       if (cell.value) {
         if (cell.value.team !== pokemon.team) {
-          cell.value.count.attackOrderCount++
           cell.value.handleSpecialDamage(
             damage,
             board,
@@ -5037,9 +5027,20 @@ export class HealOrderStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: "ATTACK_ORDER",
+            positionX: cell.value.positionX,
+            positionY: cell.value.positionY
+          })
         } else {
-          cell.value.count.healOrderCount++
           cell.value.handleHeal(damage, pokemon, 1, crit)
+          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+            id: pokemon.simulation.id,
+            skill: "HEAL_ORDER",
+            positionX: cell.value.positionX,
+            positionY: cell.value.positionY
+          })
         }
       }
     })

@@ -1999,6 +1999,7 @@ export function displayAbility(
 
     case Ability.MIND_BLOWN:
       addAbilitySprite(skill, coordinates, true).setOrigin(0.5, 0.8).setScale(2)
+      addAbilitySprite("MIND_BLOWN/hit", coordinatesTarget, true).setScale(3)
       break
 
     case Ability.FIRE_LASH:
@@ -2007,10 +2008,6 @@ export function displayAbility(
 
     case Ability.DRAIN_PUNCH:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
-      break
-
-    case "MIND_BLOWN/hit":
-      addAbilitySprite("MIND_BLOWN/hit", coordinates, true).setScale(3)
       break
 
     case Ability.SOFT_BOILED:

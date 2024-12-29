@@ -647,7 +647,6 @@ export interface IStatus {
 export interface ICount {
   crit: number
   ult: number
-  petalDanceCount: number
   fieldCount: number
   soundCount: number
   fairyCritCount: number
@@ -660,16 +659,10 @@ export interface ICount {
   tripleAttackCount: number
   staticHolderCount: number
   defensiveRibbonCount: number
-  earthquakeCount: number
-  mindBlownCount: number
   spellBlockedCount: number
   manaBurnCount: number
   moneyCount: number
-  futureSightCount: number
-  healOrderCount: number
-  attackOrderCount: number
   magmarizerCount: number
-  echo: number
 }
 
 export interface IPreparationMetadata {

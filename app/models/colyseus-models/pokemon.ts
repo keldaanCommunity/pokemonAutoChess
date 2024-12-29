@@ -1095,7 +1095,7 @@ export class Ralts extends Pokemon {
   atk = 5
   def = 2
   speDef = 4
-  maxPP = 110
+  maxPP = 100
   range = 3
   skill = Ability.FUTURE_SIGHT
   attackSprite = AttackSprite.PSYCHIC_RANGE
@@ -1114,7 +1114,7 @@ export class Kirlia extends Pokemon {
   atk = 13
   def = 3
   speDef = 5
-  maxPP = 110
+  maxPP = 100
   range = 3
   skill = Ability.FUTURE_SIGHT
   attackSprite = AttackSprite.PSYCHIC_RANGE
@@ -1132,7 +1132,7 @@ export class Gardevoir extends Pokemon {
   atk = 28
   def = 4
   speDef = 8
-  maxPP = 110
+  maxPP = 100
   range = 3
   skill = Ability.FUTURE_SIGHT
   attackSprite = AttackSprite.PSYCHIC_RANGE
