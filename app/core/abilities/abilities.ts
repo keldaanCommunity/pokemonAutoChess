@@ -2236,7 +2236,7 @@ export class NightmareStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const duration = [1500, 2500, 5000][pokemon.stars - 1] ?? 5000
+    const duration = [3000, 5000, 7000][pokemon.stars - 1] ?? 7000
     const damage = [40, 80, 150][pokemon.stars - 1] ?? 100
 
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
@@ -2256,7 +2256,7 @@ export class NightmareStrategy extends AbilityStrategy {
             true
           )
         }
-        enemy.status.triggerSilence(duration, enemy, pokemon)
+        enemy.status.triggerFatigue(duration, enemy)
       }
     })
   }
