@@ -1565,13 +1565,6 @@ export class FairyWindStrategy extends AbilityStrategy {
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team === tg.team && tg.id !== pokemon.id) {
         tg.addPP(ppGain, pokemon, 0.5, crit)
-        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-          id: pokemon.simulation.id,
-          skill: pokemon.skill,
-          positionX: tg.positionX,
-          positionY: tg.positionY,
-          orientation: tg.orientation
-        })
       }
     })
   }
