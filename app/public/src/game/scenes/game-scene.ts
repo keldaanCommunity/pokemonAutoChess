@@ -5,6 +5,7 @@ import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"
 import { DesignTiled } from "../../../../core/design"
 import { canSell } from "../../../../core/pokemon-entity"
 import Player from "../../../../models/colyseus-models/player"
+import { PokemonClasses } from "../../../../models/colyseus-models/pokemon"
 import GameState from "../../../../rooms/states/game-state"
 import {
   IDragDropCombineMessage,
@@ -448,13 +449,17 @@ export default class GameScene extends Scene {
         g.x = dragX
         g.y = dragY
         if (g && this.pokemonDragged != null) {
+          const pokemon = new PokemonClasses[this.pokemonDragged!.name as Pkm]()
+
           this.dropSpots.forEach((spot) => {
-            if (
-              this.room?.state.phase === GamePhaseState.PICK ||
-              spot.getData("y") === 0
-            ) {
-              spot.setVisible(true)
+            const inBench = spot.getData("y") === 0
+            let visible = false
+            if (inBench) {
+              visible = pokemon.canBeBenched
+            } else if (this.room?.state.phase === GamePhaseState.PICK) {
+              visible = true
             }
+            spot.setVisible(visible)
           })
           if (
             this.sellZone?.visible === false &&

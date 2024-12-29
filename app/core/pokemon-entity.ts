@@ -3,7 +3,7 @@ import { logger } from "../utils/logger"
 import { nanoid } from "nanoid"
 import Count from "../models/colyseus-models/count"
 import Player from "../models/colyseus-models/player"
-import { Pokemon } from "../models/colyseus-models/pokemon"
+import { Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
 import Status from "../models/colyseus-models/status"
 import PokemonFactory from "../models/pokemon-factory"
 import { getSellPrice } from "../models/shop"
@@ -211,6 +211,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     )
   }
 
+  get canBeCopied(): boolean {
+    return this.passive !== Passive.INANIMATE
+  }
+
   get isGhostOpponent(): boolean {
     return this.simulation.isGhostBattle && this.player?.team === Team.RED_TEAM
   }
@@ -373,10 +377,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   toMovingState() {
+    if (this.passive === Passive.INANIMATE) return
     this.changeState(new MovingState())
   }
 
   toAttackingState() {
+    if (this.passive === Passive.INANIMATE) return
     this.changeState(new AttackingState())
   }
 
@@ -1972,7 +1978,7 @@ export function canSell(
     return false
   }
 
-  return true
+  return new PokemonClasses[pkm]().canBeSold
 }
 
 export function getMoveSpeed(

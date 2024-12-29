@@ -57,7 +57,7 @@ import PokemonState from "../pokemon-state"
 
 import { Passive } from "../../types/enum/Passive"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
-import { distanceC, distanceM } from "../../utils/distance"
+import { distanceC, distanceE, distanceM } from "../../utils/distance"
 import { repeat } from "../../utils/function"
 import { logger } from "../../utils/logger"
 import { calcAngleDegrees, clamp, max, min } from "../../utils/number"
@@ -525,7 +525,7 @@ export class IllusionStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const heal = [30, 50, 70][pokemon.stars - 1] ?? 70
     pokemon.handleHeal(heal, pokemon, 0.5, crit)
-    if (target) {
+    if (target && target.canBeCopied) {
       pokemon.index = target.index
       pokemon.atk = Math.max(pokemon.atk, target.atk)
       pokemon.range = target.range + (pokemon.items.has(Item.WIDE_LENS) ? 2 : 0)
@@ -2107,7 +2107,7 @@ export class RoarOfTimeStrategy extends AbilityStrategy {
     ) as PokemonEntity[]
     const strongest = getStrongestUnit(candidates)
     if (strongest) {
-      strongest.status.resurection = true
+      strongest.status.addResurrection(strongest)
       strongest.addAttackSpeed(atkSpeedBuff, pokemon, 1, true)
     }
   }
@@ -7812,7 +7812,7 @@ export class TransformStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    if (target) {
+    if (target && target.canBeCopied) {
       pokemon.index = target.index
       pokemon.rarity = target.rarity
       pokemon.stars = target.stars
@@ -11309,6 +11309,131 @@ export class HardenStrategy extends AbilityStrategy {
   }
 }
 
+export class ColumnCrushStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+
+    const pillar = board.cells.find(
+      (entity) =>
+        entity &&
+        entity.team === pokemon.team &&
+        [Pkm.PILLAR_WOOD, Pkm.PILLAR_IRON, Pkm.PILLAR_CONCRETE].includes(
+          entity.name
+        )
+    )
+    if (pillar) {
+      // If a pillar is already on the board, jumps to it and throw the pillar at the closest target, dealing [50,100,150,SP] + the remaining HP of the pillar as SPECIAL
+      const pillarX = pillar.positionX
+      const pillarY = pillar.positionY
+      const remainingHp = pillar.hp
+      const pillarType = pillar.name
+      board.setValue(pillarX, pillarY, undefined)
+      const team =
+        pillar.team === Team.BLUE_TEAM
+          ? pillar.simulation.blueTeam
+          : pillar.simulation.redTeam
+      team.delete(pillar.id)
+      pokemon.moveTo(pillarX, pillarY, board)
+      pokemon.cooldown = 1000
+
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          const damage =
+            ([50, 100, 150][pokemon.stars - 1] ?? 150) + remainingHp
+
+          let enemyHit
+          const targetCoordinate =
+            pokemon.state.getNearestTargetAtSightCoordinates(pokemon, board)
+          if (targetCoordinate) {
+            enemyHit = board.getValue(targetCoordinate.x, targetCoordinate.y)
+          }
+          if (!enemyHit) {
+            enemyHit = board.cells.find(
+              (entity) => entity && entity.team !== pokemon.team
+            )
+          }
+          if (enemyHit) {
+            pokemon.targetX = enemyHit.positionX
+            pokemon.targetY = enemyHit.positionY
+            const landingX = enemyHit.positionX
+            const landingY = enemyHit.positionY
+            const travelTime =
+              distanceE(
+                pillarX,
+                pillarY,
+                enemyHit.positionX,
+                enemyHit.positionY
+              ) * 160
+
+            pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+              id: pokemon.simulation.id,
+              skill: Ability.COLUMN_CRUSH,
+              positionX: pillar.positionX,
+              positionY: pillar.positionY,
+              targetX: enemyHit.positionX,
+              targetY: enemyHit.positionY,
+              orientation: [
+                Pkm.PILLAR_WOOD,
+                Pkm.PILLAR_IRON,
+                Pkm.PILLAR_CONCRETE
+              ].indexOf(pillarType)
+            })
+
+            pokemon.commands.push(
+              new DelayedCommand(() => {
+                pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+                  id: pokemon.simulation.id,
+                  skill: Ability.ROCK_SMASH,
+                  positionX: landingX,
+                  positionY: landingY,
+                  targetX: landingX,
+                  targetY: landingY
+                })
+                if (enemyHit && enemyHit.life > 0) {
+                  enemyHit.handleSpecialDamage(
+                    damage,
+                    board,
+                    AttackType.SPECIAL,
+                    pokemon,
+                    crit
+                  )
+                }
+              }, travelTime)
+            )
+          }
+        }, 500)
+      )
+    } else {
+      //Builds a pillar of 100/200/300 HP and 1/3/5 DEF and SPE_DEF on the closest empty spot.
+      const pillarType =
+        [Pkm.PILLAR_WOOD, Pkm.PILLAR_IRON, Pkm.PILLAR_CONCRETE][
+          pokemon.stars - 1
+        ] ?? Pkm.PILLAR_CONCRETE
+      const pillar = PokemonFactory.createPokemonFromName(
+        pillarType,
+        pokemon.player
+      )
+      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
+        pokemon,
+        pokemon.team
+      )
+      pokemon.simulation.addPokemon(
+        pillar,
+        coord.x,
+        coord.y,
+        pokemon.team,
+        true
+      )
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -11722,5 +11847,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FLY]: new FlyStrategy(),
   [Ability.SURF]: new SurfStrategy(),
   [Ability.STRENGTH]: new StrengthStrategy(),
-  [Ability.HARDEN]: new HardenStrategy()
+  [Ability.HARDEN]: new HardenStrategy(),
+  [Ability.COLUMN_CRUSH]: new ColumnCrushStrategy()
 }

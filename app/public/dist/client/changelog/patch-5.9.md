@@ -10,6 +10,9 @@
 - Malamar
 - Hisui Voltorb
 - Hisui Electrode
+- Timburr
+- Gurdurr
+- Conkeldurr
 
 # Changes to Pokemon & Abilities
 

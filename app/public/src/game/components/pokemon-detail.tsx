@@ -152,7 +152,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     })
     wrap.appendChild(typesList)
 
-    const stats = [
+    let stats = [
       { stat: Stat.HP, elm: this.hp },
       { stat: Stat.DEF, elm: this.def },
       { stat: Stat.ATK, elm: this.atk },
@@ -164,6 +164,14 @@ export default class PokemonDetail extends GameObjects.DOMElement {
       { stat: Stat.RANGE, elm: this.range },
       { stat: Stat.CRIT_CHANCE, elm: this.critChance }
     ]
+
+    if (passive === Passive.INANIMATE) {
+      stats = [
+        { stat: Stat.HP, elm: this.hp },
+        { stat: Stat.DEF, elm: this.def },
+        { stat: Stat.SPE_DEF, elm: this.speDef }
+      ]
+    }
 
     const statsElm = document.createElement("div")
     statsElm.className = "game-pokemon-detail-stats"

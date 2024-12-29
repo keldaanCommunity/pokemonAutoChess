@@ -409,5 +409,6 @@ export enum Ability {
   SURF = "SURF",
   STRENGTH = "STRENGTH",
   FLASH = "FLASH",
-  HARDEN = "HARDEN"
+  HARDEN = "HARDEN",
+  COLUMN_CRUSH = "COLUMN_CRUSH"
 }
