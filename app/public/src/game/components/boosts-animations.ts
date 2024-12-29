@@ -18,7 +18,7 @@ export function displayBoost(
       [Stat.SHIELD]: 0xffcc99
     }[stat] ?? 0xffffff
   const boost = scene.add
-    .sprite(x, y, "abilities", `BOOST/000.png`)
+    .sprite(x, y - 10, "abilities", `BOOST/000.png`)
     .setDepth(1)
     .setScale(2)
     .setTint(tint)
