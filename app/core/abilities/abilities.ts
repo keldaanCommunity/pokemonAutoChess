@@ -1608,11 +1608,27 @@ export class HighJumpKickStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [50, 100, 200][pokemon.stars - 1] ?? 200
-    const ppStolen = max(70)(target.pp)
+    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
+    const ppStolen = max(50)(target.pp)
     pokemon.addPP(ppStolen, pokemon, 0, false)
     target.addPP(-ppStolen, pokemon, 0, false)
     target.count.manaBurnCount++
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
+export class TropKickStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [50, 100, 200][pokemon.stars - 1] ?? 200
+    const atkDebuff = [3, 5, 7][pokemon.stars - 1] ?? 7
+    target.addAttack(-atkDebuff, pokemon, 1, crit)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -1818,13 +1834,15 @@ export class HyperVoiceStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
 
-    const damage = [30, 60, 150][pokemon.stars - 1] ?? 200
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 200
     const confusionDuration = [1000, 2000, 3000][pokemon.stars - 1] ?? 3
 
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team && target.positionY == y) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-        tg.status.triggerConfusion(confusionDuration, tg, pokemon)
+        if (chance(0.3, pokemon)) {
+          tg.status.triggerConfusion(confusionDuration, tg, pokemon)
+        }
       }
     })
   }
@@ -8591,7 +8609,8 @@ export class SheerColdStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     let executeChance = clamp(
-      0.3 + min(0)((pokemon.life - target.life) / target.life),
+      ([0.1, 0.2, 0.3][pokemon.stars - 1] ?? 0.3) +
+        min(0)((pokemon.life - target.life) / target.life),
       0,
       1
     )
@@ -10077,7 +10096,9 @@ export class GlaiveRushStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const damage = pokemon.stars === 3 ? 150 : pokemon.stars === 2 ? 80 : 40
+    const executeChance = [0.2, 0.4, 0.66][pokemon.stars - 1] ?? 0.66
+    let damage = [50, 100, 200][pokemon.stars - 1] ?? 200
+    if (chance(executeChance, pokemon)) damage = 9999
     pokemon.status.triggerArmorReduction(6000, pokemon)
 
     target.handleSpecialDamage(
@@ -11460,6 +11481,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FAIRY_WIND]: new FairyWindStrategy(),
   [Ability.DISARMING_VOICE]: new DisarmingVoiceStrategy(),
   [Ability.HIGH_JUMP_KICK]: new HighJumpKickStrategy(),
+  [Ability.TROP_KICK]: new TropKickStrategy(),
   [Ability.GRASS_WHISTLE]: new GrassWhistleStrategy(),
   [Ability.TRI_ATTACK]: new TriAttackStrategy(),
   [Ability.ECHO]: new EchoStrategy(),

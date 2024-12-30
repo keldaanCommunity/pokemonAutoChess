@@ -16,6 +16,11 @@
 
 # Changes to Pokemon & Abilities
 
+- Baxcalibur line is now in regular Ultra category ; adjusted stats accordingly ; change Glaive rush: damage 40/80/150 → 50/100/200, now has a chance to execute
+- Snover line is now epic regional ; temporarely removed Mega Abomasnow ; adjusted stats accordingly ;  Sheer cold execute chance: 30 → 10/20/30%
+- Swablu line is now epic additional ; temporarely removed Mega Altaria ; adjusted stats accordingly ; Nerf Hypervoice: 30/60/150 → 25/50/100 special damage, confusion chance 100 → 30% ; 
+- Buneary line is now uncommon regional ; temporarely removed Mega Lopunny ; adjusted stats accordingly
+- Happiny line is now Normal/Fairy instead of Normal/Human
 - Nerf Kecleon: PP 80 → 100
 - Changed Shadow Clone (Shuppet): instead of taking an item from original Shuppet, steal a random item from the current target ; the clone spawns on the ~~farthest~~ closest available tile from the target
 - Changed Nightmare (Gastly): Silence duration 1.5/3/6 → 1.5/2.5/5 seconds; All Pokémon suffering from ~~Flinch/Silence/Sleep~~ a Ghost curse take 40/80/150 special damage
@@ -57,6 +62,8 @@
 - Nerf Galar Corsola: now has the same stats than regular Corsola
 - Nerf Cursola: HP 300 → 200
 - Adjusted Curse (Cursola): curse duration 8/4 → 8/5/3 seconds
+- Clefairy line no longer appears in Normal regions
+- New ability for Bounsweet line: Trop Kick
 
 # Changes to Synergies
 
