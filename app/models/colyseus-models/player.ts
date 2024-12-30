@@ -99,6 +99,7 @@ export default class Player extends Schema implements IPlayer {
   @type("uint16") totalMoneyEarned: number = 0
   @type("uint16") totalPlayerDamageDealt: number = 0
   @type("float32") eggChance: number = 0
+  @type("float32") goldenEggChance: number = 0
   @type("float32") wildChance: number = 0
   commonRegionalPool: Pkm[] = new Array<Pkm>()
   uncommonRegionalPool: Pkm[] = new Array<Pkm>()

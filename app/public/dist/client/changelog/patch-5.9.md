@@ -65,6 +65,7 @@
 - Buff Electric 9: Triple attacks deal ~~10~~ 20 special damage to adjacent enemies
 - Nerf Ghost 2: def/spedef debuff 5 → 2
 - Nerf Ghost 4: atk debuff 30 → 25%
+- Baby egg chance and golden egg chance are now split into 2 separate values
 
 # Changes to Items
 
