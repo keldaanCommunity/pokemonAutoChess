@@ -66,7 +66,7 @@
 - Nerf Ghost 2: def/spedef debuff 5 → 2
 - Nerf Ghost 4: atk debuff 30 → 25%
 - Baby egg chance and golden egg chance are now split into 2 separate values
-- Nerf Baby 2: baby egg chance 10% → 8% ; egg hatch time 3 → 5 rounds
+- Nerf Baby 3: baby egg chance 10% → 8% ; egg hatch time 3 → 5 rounds
 
 # Changes to Items
 
