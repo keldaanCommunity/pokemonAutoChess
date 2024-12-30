@@ -20,9 +20,10 @@
 - Snover line is now epic regional ; temporarely removed Mega Abomasnow ; adjusted stats accordingly ;  Sheer cold execute chance: 30 → 10/20/30%
 - Swablu line is now epic additional ; temporarely removed Mega Altaria ; adjusted stats accordingly ; Nerf Hypervoice: 30/60/150 → 25/50/100 special damage, confusion chance 100 → 30% ; 
 - Buneary line is now uncommon regional ; temporarely removed Mega Lopunny ; adjusted stats accordingly
+- Shuppet line is now epic additional ; temporarely removed Mega Banette ; adjusted stats accordingly
+- Changed Shadow Clone (Shuppet): instead of taking an item from original Shuppet, steal a random item from the current target ; the clone spawns on the ~~farthest~~ closest available tile from the target
 - Happiny line is now Normal/Fairy instead of Normal/Human
 - Nerf Kecleon: PP 80 → 100
-- Changed Shadow Clone (Shuppet): instead of taking an item from original Shuppet, steal a random item from the current target ; the clone spawns on the ~~farthest~~ closest available tile from the target
 - Changed Nightmare (Gastly): Silence duration 1.5/3/6 → 1.5/2.5/5 seconds; All Pokémon suffering from ~~Flinch/Silence/Sleep~~ a Ghost curse take 40/80/150 special damage
 - Alolan Marowak is now tier 2 ; adjusted stats to match Marowak's stats ; new ability: Shadow Bone
 - Change Bonemerang (Marowak): ~~deal 30/60/90 special damage~~ deal 2 times 15/30/60 special damage

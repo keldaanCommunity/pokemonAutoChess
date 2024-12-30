@@ -309,45 +309,48 @@ export class MegaManectric extends Pokemon {
 
 export class Shuppet extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
-  rarity = Rarity.ULTRA
+  rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.BANETTE
-  hp = 120
+  hp = 100
   atk = 10
+  def = 2
+  speDef = 3
+  maxPP = 120
+  range = 1
+  skill = Ability.SHADOW_CLONE
+  attackSprite = AttackSprite.DRAGON_MELEE
+  additional = true
+}
+
+export class Banette extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
+  rarity = Rarity.EPIC
+  stars = 2
+  //evolution = Pkm.MEGA_BANETTE
+  hp = 180
+  atk = 20
   def = 3
   speDef = 4
   maxPP = 120
   range = 1
   skill = Ability.SHADOW_CLONE
   attackSprite = AttackSprite.DRAGON_MELEE
-}
-
-export class Banette extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
-  rarity = Rarity.ULTRA
-  stars = 2
-  evolution = Pkm.MEGA_BANETTE
-  hp = 200
-  atk = 20
-  def = 4
-  speDef = 5
-  maxPP = 120
-  range = 1
-  skill = Ability.SHADOW_CLONE
-  attackSprite = AttackSprite.DRAGON_MELEE
+  additional = true
 }
 
 export class MegaBanette extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
-  rarity = Rarity.ULTRA
+  rarity = Rarity.EPIC
   stars = 3
   hp = 300
   atk = 30
-  def = 5
-  speDef = 6
+  def = 4
+  speDef = 5
   maxPP = 100
   range = 1
-  skill = Ability.SHADOW_CLONE
+  //skill = Ability.SHADOW_CLONE
+  skill = Ability.DEFAULT
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -509,7 +512,7 @@ export class Altaria extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FAIRY, Synergy.SOUND])
   rarity = Rarity.EPIC
   stars = 2
-  evolution = Pkm.MEGA_ALTARIA
+  //evolution = Pkm.MEGA_ALTARIA
   hp = 170
   atk = 16
   def = 4
@@ -654,7 +657,7 @@ export class Lopunny extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIGHTING])
   rarity = Rarity.UNCOMMON
   stars = 2
-  evolution = Pkm.MEGA_LOPUNNY
+  //evolution = Pkm.MEGA_LOPUNNY
   hp = 120
   atk = 15
   def = 4
@@ -746,7 +749,7 @@ export class Camerupt extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.GROUND])
   rarity = Rarity.EPIC
   stars = 2
-  evolution = Pkm.MEGA_CAMERUPT
+  //evolution = Pkm.MEGA_CAMERUPT
   hp = 210
   atk = 14
   def = 7
@@ -2674,7 +2677,7 @@ export class Abomasnow extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.ICE, Synergy.MONSTER])
   rarity = Rarity.EPIC
   stars = 2
-  evolution = Pkm.MEGA_ABOMASNOW
+  //evolution = Pkm.MEGA_ABOMASNOW
   hp = 180
   atk = 20
   def = 5
@@ -7679,7 +7682,7 @@ export class Houndoom extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.DARK])
   rarity = Rarity.EPIC
   stars = 2
-  evolution = Pkm.MEGA_HOUNDOOM
+  //evolution = Pkm.MEGA_HOUNDOOM
   hp = 160
   atk = 20
   def = 6
@@ -7701,6 +7704,7 @@ export class MegaHoundoom extends Pokemon {
   speDef = 8
   maxPP = 125
   range = 1
+  //skill = Ability.BEAT_UP
   skill = Ability.DEFAULT
   attackSprite = AttackSprite.FIRE_MELEE
   additional = true
