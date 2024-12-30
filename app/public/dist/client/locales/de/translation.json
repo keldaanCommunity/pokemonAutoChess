@@ -1805,7 +1805,7 @@
     "DUBIOUS_DISC": "Erhalte ein weiteres Artificial-Item. Es wird entfernt, wenn du die Synergie verlierst.",
     "LINK_CABLE": "Erhalte +8% Basis-ATK, AP und maximale HP als SHIELD pro gehaltenem Item. Erhalte ein weiteres Artificial-Item.",
     "GOOGLE_SPECS": "Erhalte +15% Basis-ATK, AP und maximale HP als SHIELD pro gehaltenem Item. Erhalte ein weiteres Artificial-Item.",
-    "HATCHER": "Jedes BABY hat eine Chance von [10,LK] %, ein Ei zu finden.",
+    "HATCHER": "Jedes BABY hat eine Chance von [8,LK] %, ein Ei zu finden.",
     "BREEDER": "Erhalte ein Ei nach jeder Niederlage gegen einen Spieler, kein Limit für die Anzahl der Eier auf der Bank",
     "GOLDEN_EGGS": "Jedes BABY hat eine Chance von [4,LK] %, ein goldenes Ei zu finden (max. 1 auf der Bank). Goldene Eier können für 10 GOLD verkauft werden oder ergeben beim Ausbrüten einen glänzenden Gegenstand.",
     "GRASSY_TERRAIN": "Erhöht den verursachten Schaden um 20 % (nur Gras)",
