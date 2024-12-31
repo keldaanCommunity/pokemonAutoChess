@@ -621,13 +621,14 @@ export class OnToggleReadyCommand extends Command<
 
 export class CheckAutoStartRoom extends Command<PreparationRoom, void> {
   async execute() {
-    const abortOnPlayerLeave = new AbortController()
+    await setTimeout(3000)
 
-    this.room.state.users.onRemove(() => abortOnPlayerLeave.abort("User left"))
+    const nbExpectedPlayers =
+      this.room.metadata?.whitelist && this.room.metadata?.whitelist.length > 0
+        ? max(MAX_PLAYERS_PER_GAME)(this.room.metadata?.whitelist.length)
+        : MAX_PLAYERS_PER_GAME
 
-    try {
-      await setTimeout(3000, null, { signal: abortOnPlayerLeave.signal })
-
+    if (this.state.users.size === nbExpectedPlayers) {
       this.room.state.addMessage({
         authorId: "server",
         payload: "Starting match..."
@@ -643,16 +644,12 @@ export class CheckAutoStartRoom extends Command<PreparationRoom, void> {
       }
 
       return new OnGameStartRequestCommand()
-    } catch (error) {
-      if (error instanceof AbortError) {
-        this.room.state.addMessage({
-          authorId: "server",
-          avatar: "0070/Sigh",
-          payload: "Waiting for the room to fill up."
-        })
-      } else {
-        logger.error(error)
-      }
+    } else {
+      this.room.state.addMessage({
+        authorId: "server",
+        avatar: "0070/Sigh",
+        payload: "Waiting for the room to fill up."
+      })
     }
   }
 }
