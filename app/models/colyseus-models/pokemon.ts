@@ -299,11 +299,11 @@ export class MegaManectric extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
   rarity = Rarity.RARE
   stars = 3
-  hp = 300
-  atk = 48
-  def = 7
-  speDef = 7
-  maxPP = 65
+  hp = 250
+  atk = 32
+  def = 6
+  speDef = 6
+  maxPP = 100
   range = 1
   skill = Ability.DEFAULT
   //skill = Ability.THUNDER_FANG
@@ -2063,13 +2063,13 @@ export class Shinx extends Pokemon {
 
 export class Luxio extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
-  rarity = Rarity.RARE
+  rarity = Rarity.ULTRA
   stars = 2
   evolution = Pkm.LUXRAY
-  hp = 300
-  atk = 48
-  def = 7
-  speDef = 7
+  hp = 210
+  atk = 30
+  def = 6
+  speDef = 6
   maxPP = 65
   range = 1
   skill = Ability.VOLT_SWITCH
@@ -2078,13 +2078,13 @@ export class Luxio extends Pokemon {
 
 export class Luxray extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
-  rarity = Rarity.RARE
+  rarity = Rarity.ULTRA
   stars = 3
-  hp = 220
-  atk = 32
-  def = 6
-  speDef = 6
-  maxPP = 100
+  hp = 300
+  atk = 48
+  def = 7
+  speDef = 7
+  maxPP = 65
   range = 1
   skill = Ability.THUNDER_FANG
   attackSprite = AttackSprite.ELECTRIC_MELEE

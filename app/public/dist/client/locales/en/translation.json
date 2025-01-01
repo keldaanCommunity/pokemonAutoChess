@@ -1625,7 +1625,7 @@
     "SPRINGTIDE_STORM": "Fierce winds brimming with love and hate strike all enemy Pokémon in a straight line, dealing [80,SP] SPECIAL and inflicting CHARM for 2 seconds.",
     "AURA_WHEEL": "Deal [60,SP] SPECIAL to the target, gain [10,SP]% ATK_SPEED and switch between Normal and Hangry form.",
     "LICK": "Deal [30,60,120,SP] SPECIAL to the target and inflict them with CONFUSION and PARALYSIS for 3 seconds.",
-    "FURY_SWIPES": "Deal a random number of basic attacks between 2 to 5 times. This number increases with LUCK.",
+    "FURY_SWIPES": "Deal a random number of basic attacks between [2,SP] to [5,SP] times. This number increases with LUCK.",
     "TICKLE": "Reduce ATK and DEF of the [1,2] closest enemy Pokémon by [3,SP].",
     "AROMATHERAPY": "Cure negative status conditions and heal adjacent allied Pokémon for [20,40,80,SP] HP.",
     "DETECT": "PROTECT adjacent allied Pokémon for [0.5,SP] seconds, multiplied by the number of enemy Pokémon detected in a 2 tile radius.",
