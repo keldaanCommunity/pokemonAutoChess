@@ -265,37 +265,39 @@ export class Egg extends Pokemon {
 
 export class Electrike extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
-  rarity = Rarity.ULTRA
+  rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.MANECTRIC
-  hp = 120
-  atk = 15
-  def = 5
-  speDef = 5
-  maxPP = 65
+  hp = 80
+  atk = 6
+  def = 4
+  speDef = 4
+  maxPP = 100
   range = 1
-  skill = Ability.VOLT_SWITCH
+  skill = Ability.THUNDER_FANG
   attackSprite = AttackSprite.ELECTRIC_MELEE
+  additional = true
 }
 
 export class Manectric extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
-  rarity = Rarity.ULTRA
+  rarity = Rarity.RARE
   stars = 2
-  evolution = Pkm.MEGA_MANECTRIC
-  hp = 210
-  atk = 30
-  def = 6
-  speDef = 6
-  maxPP = 65
+  //evolution = Pkm.MEGA_MANECTRIC
+  hp = 130
+  atk = 14
+  def = 5
+  speDef = 5
+  maxPP = 100
   range = 1
-  skill = Ability.VOLT_SWITCH
+  skill = Ability.THUNDER_FANG
   attackSprite = AttackSprite.ELECTRIC_MELEE
+  additional = true
 }
 
 export class MegaManectric extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
-  rarity = Rarity.ULTRA
+  rarity = Rarity.RARE
   stars = 3
   hp = 300
   atk = 48
@@ -303,7 +305,8 @@ export class MegaManectric extends Pokemon {
   speDef = 7
   maxPP = 65
   range = 1
-  skill = Ability.VOLT_SWITCH
+  skill = Ability.DEFAULT
+  //skill = Ability.THUNDER_FANG
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -2041,16 +2044,16 @@ export class Reuniclus extends Pokemon {
 
 export class Shinx extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
-  rarity = Rarity.RARE
+  rarity = Rarity.ULTRA
   stars = 1
   evolution = Pkm.LUXIO
-  hp = 80
-  atk = 6
-  def = 4
-  speDef = 4
-  maxPP = 100
+  hp = 120
+  atk = 15
+  def = 5
+  speDef = 5
+  maxPP = 65
   range = 1
-  skill = Ability.THUNDER_FANG
+  skill = Ability.VOLT_SWITCH
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -2059,13 +2062,13 @@ export class Luxio extends Pokemon {
   rarity = Rarity.RARE
   stars = 2
   evolution = Pkm.LUXRAY
-  hp = 130
-  atk = 14
-  def = 5
-  speDef = 5
-  maxPP = 100
+  hp = 300
+  atk = 48
+  def = 7
+  speDef = 7
+  maxPP = 65
   range = 1
-  skill = Ability.THUNDER_FANG
+  skill = Ability.VOLT_SWITCH
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
