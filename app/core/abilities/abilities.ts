@@ -3847,6 +3847,26 @@ export class StompStrategy extends AbilityStrategy {
   }
 }
 
+export class HornDrillStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damageFactor = [3, 4, 5][pokemon.stars - 1] ?? 5
+    let damage = pokemon.atk * damageFactor
+    const executeChance =
+      0.3 * (1 + min(0)((pokemon.atk - target.atk) / target.atk))
+    if (chance(executeChance, pokemon)) {
+      damage = 9999
+    }
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
 export class PaybackStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -8614,12 +8634,9 @@ export class SheerColdStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let executeChance = clamp(
-      ([0.1, 0.2, 0.3][pokemon.stars - 1] ?? 0.3) +
-        min(0)((pokemon.life - target.life) / target.life),
-      0,
-      1
-    )
+    let executeChance =
+      ([0.1, 0.2, 0.3][pokemon.stars - 1] ?? 0.3) *
+      (1 + min(0)((pokemon.life - target.life) / target.life))
     if (target.types.has(Synergy.ICE)) executeChance = 0
     else if (target.status.freeze) executeChance = 1
 

@@ -24,6 +24,8 @@
   - Shuppet line is now epic additional ; temporarely removed Mega Banette ; adjusted stats accordingly
   - Numel line is now epic regional ; adjusted stats accordingly ; temporarely removed Mega Camerupt
   - Shinx and Electrike families are swiched ; Shinx is now ultra with Volt switch ; Electrike line is now rare additional with Thunder Fangs ; temporarely removed Mega Manectric
+  - Onix line is now epic additional ; adjusted stats accordingly ; temporarely removed Mega Steelix
+  - Rhyhorn is now ultra ; adjusted stats accordingly ; new ability: Horn Drill
 - Changed Shadow Clone (Shuppet): instead of taking an item from original Shuppet, steal a random item from the current target ; the clone spawns on the ~~farthest~~ closest available tile from the target
 - Happiny line is now Normal/Fairy instead of Normal/Human
 - Nerf Kecleon: PP 80 → 100

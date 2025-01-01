@@ -690,37 +690,39 @@ export class MegaLopunny extends Pokemon {
 
 export class Onix extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.GROUND])
-  rarity = Rarity.ULTRA
+  rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.STEELIX
-  hp = 200
-  atk = 9
+  hp = 100
+  atk = 6
   def = 10
-  speDef = 5
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.SPIKE_ARMOR
   attackSprite = AttackSprite.ROCK_MELEE
+  additional = true
 }
 
 export class Steelix extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.GROUND, Synergy.STEEL])
-  rarity = Rarity.ULTRA
+  rarity = Rarity.EPIC
   stars = 2
-  evolution = Pkm.MEGA_STEELIX
-  hp = 250
-  atk = 14
+  //evolution = Pkm.MEGA_STEELIX
+  hp = 200
+  atk = 12
   def = 20
   speDef = 5
   maxPP = 100
   range = 1
   skill = Ability.SPIKE_ARMOR
   attackSprite = AttackSprite.ROCK_MELEE
+  additional = true
 }
 
 export class MegaSteelix extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.GROUND, Synergy.STEEL])
-  rarity = Rarity.ULTRA
+  rarity = Rarity.EPIC
   stars = 3
   hp = 350
   atk = 20
@@ -728,8 +730,10 @@ export class MegaSteelix extends Pokemon {
   speDef = 15
   maxPP = 100
   range = 1
-  skill = Ability.SPIKE_ARMOR
+  skill = Ability.DEFAULT
+  //skill = Ability.SPIKE_ARMOR
   attackSprite = AttackSprite.ROCK_MELEE
+  additional = true
 }
 
 export class Numel extends Pokemon {
@@ -2479,16 +2483,16 @@ export class Rhyhorn extends Pokemon {
     Synergy.MONSTER,
     Synergy.ROCK
   ])
-  rarity = Rarity.RARE
+  rarity = Rarity.ULTRA
   stars = 1
   evolution = Pkm.RHYDON
-  hp = 80
-  atk = 5
-  def = 4
-  speDef = 4
+  hp = 120
+  atk = 13
+  def = 6
+  speDef = 2
   maxPP = 100
   range = 1
-  skill = Ability.STOMP
+  skill = Ability.HORN_DRILL
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -2498,16 +2502,16 @@ export class Rhydon extends Pokemon {
     Synergy.MONSTER,
     Synergy.ROCK
   ])
-  rarity = Rarity.RARE
+  rarity = Rarity.ULTRA
   stars = 2
   evolution = Pkm.RHYPERIOR
-  hp = 130
-  atk = 9
-  def = 6
-  speDef = 6
+  hp = 240
+  atk = 21
+  def = 10
+  speDef = 3
   maxPP = 100
   range = 1
-  skill = Ability.STOMP
+  skill = Ability.HORN_DRILL
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -2517,15 +2521,15 @@ export class Rhyperior extends Pokemon {
     Synergy.MONSTER,
     Synergy.ROCK
   ])
-  rarity = Rarity.RARE
+  rarity = Rarity.ULTRA
   stars = 3
-  hp = 220
-  atk = 20
-  def = 8
-  speDef = 8
+  hp = 380
+  atk = 33
+  def = 15
+  speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.STOMP
+  skill = Ability.HORN_DRILL
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
