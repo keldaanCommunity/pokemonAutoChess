@@ -63,6 +63,7 @@
 - Buff Sawsbuck: Attack 14 → 24
 - Buff Type Null: Attack 14 → 16
 - Buff Silvally: Attack 18 → 20, Def/Spedef 5 → 6
+- Nerf Sobble line: PP 80 → 90
 - Reduce cooldown of Defense Curl (Bronzor, Registeel) to 250ms
 - Buff Fire Spin (Vulpix) : damage 20/40/80 → 25/50/100
 - Gorebyss is now Fossil/Water/Aquatic instead of Fossil/Water/Psychic
