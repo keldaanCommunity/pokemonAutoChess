@@ -14434,7 +14434,6 @@ export class Pawmi extends Pokemon {
   range = 1
   skill = Ability.DOUBLE_SHOCK
   attackSprite = AttackSprite.ELECTRIC_MELEE
-  regional = true
 }
 
 export class Pawmo extends Pokemon {
@@ -14450,7 +14449,6 @@ export class Pawmo extends Pokemon {
   range = 1
   skill = Ability.DOUBLE_SHOCK
   attackSprite = AttackSprite.ELECTRIC_MELEE
-  regional = true
 }
 
 export class Pawmot extends Pokemon {
@@ -14465,7 +14463,6 @@ export class Pawmot extends Pokemon {
   range = 1
   skill = Ability.DOUBLE_SHOCK
   attackSprite = AttackSprite.ELECTRIC_MELEE
-  regional = true
 }
 
 export class Pyukumuku extends Pokemon {

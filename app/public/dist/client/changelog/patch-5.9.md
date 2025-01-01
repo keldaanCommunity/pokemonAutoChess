@@ -67,6 +67,7 @@
 - Adjusted Curse (Cursola): curse duration 8/4 → 8/5/3 seconds
 - Clefairy line no longer appears in Normal regions
 - New ability for Bounsweet line: Trop Kick
+- Pawmi is no longer regional
 
 # Changes to Synergies
 
