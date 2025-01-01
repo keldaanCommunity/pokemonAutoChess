@@ -11559,6 +11559,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ROOT]: new RootStrategy(),
   [Ability.TORMENT]: new TormentStrategy(),
   [Ability.STOMP]: new StompStrategy(),
+  [Ability.HORN_DRILL]: new HornDrillStrategy(),
   [Ability.PAYBACK]: new PaybackStrategy(),
   [Ability.NIGHT_SLASH]: new NightSlashStrategy(),
   [Ability.KOWTOW_CLEAVE]: new KowtowCleaveStrategy(),
