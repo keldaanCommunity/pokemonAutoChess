@@ -60,7 +60,13 @@ import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { distanceC, distanceE, distanceM } from "../../utils/distance"
 import { repeat } from "../../utils/function"
 import { logger } from "../../utils/logger"
-import { calcAngleDegrees, clamp, max, min } from "../../utils/number"
+import {
+  calcAngleDegrees,
+  clamp,
+  isBetween,
+  max,
+  min
+} from "../../utils/number"
 import { OrientationArray, effectInLine } from "../../utils/orientation"
 import {
   chance,
@@ -10096,9 +10102,7 @@ export class GlaiveRushStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const executeChance = [0.2, 0.4, 0.66][pokemon.stars - 1] ?? 0.66
-    let damage = [50, 100, 200][pokemon.stars - 1] ?? 200
-    if (chance(executeChance, pokemon)) damage = 9999
+    const damage = [50, 100, 200][pokemon.stars - 1] ?? 200
     pokemon.status.triggerArmorReduction(6000, pokemon)
 
     target.handleSpecialDamage(
@@ -10109,19 +10113,38 @@ export class GlaiveRushStrategy extends AbilityStrategy {
       crit
     )
 
-    const availablePlacesAroundTarget = board
-      .getAdjacentCells(target.positionX, target.positionY, false)
-      .filter((cell) => cell.value === undefined)
-      .sort(
-        (a, b) =>
-          distanceM(b.x, b.y, pokemon.positionX, pokemon.positionY) -
-          distanceM(a.x, a.y, pokemon.positionX, pokemon.positionY)
+    const destinationRow =
+      pokemon.team === Team.RED_TEAM
+        ? pokemon.positionY === 0
+          ? BOARD_HEIGHT - 1
+          : 0
+        : pokemon.positionY === BOARD_HEIGHT - 1
+          ? 0
+          : BOARD_HEIGHT - 1
+
+    const enemiesHit = board.cells.filter(
+      (enemy) =>
+        enemy &&
+        enemy.team !== pokemon.team &&
+        enemy.positionX === pokemon.positionX &&
+        isBetween(pokemon.positionY, destinationRow)(enemy.positionY)
+    ) as PokemonEntity[]
+    enemiesHit.forEach((enemy) => {
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.PHYSICAL,
+        pokemon,
+        crit
       )
-    if (availablePlacesAroundTarget.length > 0) {
-      const behindTargetPlace = availablePlacesAroundTarget[0]
-      if (behindTargetPlace) {
-        pokemon.moveTo(behindTargetPlace.x, behindTargetPlace.y, board)
-      }
+    })
+
+    const destination = board.getClosestAvailablePlace(
+      pokemon.positionX,
+      destinationRow
+    )
+    if (destination) {
+      pokemon.moveTo(destination.x, destination.y, board)
     }
   }
 }

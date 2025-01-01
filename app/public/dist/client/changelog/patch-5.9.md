@@ -17,7 +17,7 @@
 # Changes to Pokemon & Abilities
 
 - Remove Mega pokemons in Ultra category to make room for new 3-stage families:
-  - Baxcalibur line is now in regular Ultra category ; adjusted stats accordingly ; change Glaive rush: damage 40/80/150 → 50/100/200, now has a chance to execute
+  - Baxcalibur line is now in regular Ultra category ; adjusted stats accordingly ; change Glaive rush: damage 40/80/150 → 50/100/200, now target all enemies in a column
   - Snover line is now epic regional ; temporarely removed Mega Abomasnow ; adjusted stats accordingly ;  Sheer cold execute chance: 30 → 10/20/30%
   - Swablu line is now epic additional ; temporarely removed Mega Altaria ; adjusted stats accordingly ; Nerf Hypervoice: 30/60/150 → 25/50/100 special damage, confusion chance 100 → 30% ; 
   - Buneary line is now uncommon regional ; temporarely removed Mega Lopunny ; adjusted stats accordingly

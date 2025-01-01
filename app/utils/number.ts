@@ -10,6 +10,9 @@ export const max =
 export const clamp = (num: number, min: number, max: number): number =>
   Math.min(Math.max(num, min), max)
 
+export const isBetween = (a: number, b: number) => (value: number) =>
+  a < b ? value >= a && value <= b : value >= b && value <= a
+
 export const roundToNDigits = (value: number, nbDigits = 2) =>
   parseFloat(value.toFixed(nbDigits))
 

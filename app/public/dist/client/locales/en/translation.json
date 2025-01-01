@@ -1688,7 +1688,7 @@
     "ENTRAINMENT": "Dance to a strange rhythm, restoring [10,SP] PP and forcing the target to imitate them, which replaces their ability with Entrainment. If target is already entrained, pick another enemy Pokémon nearby.",
     "OKTZOOKA": "Shoot a projectile that deals [150,SP]% of the user's ATK as SPECIAL and leave an ink cloud that makes the target BLINDED for 4 seconds.",
     "PSYCHO_SHIFT": "Shift the position of the target and the farthest enemy, dealing [60,SP] SPECIAL to each.",
-    "GLAIVE_RUSH": "Throw the user's entire body into a reckless charge. Dash behind the target, dealing [50,100,200,SP] PHYSICAL with [20,40,66,LK]% chance to execute. Then the user gets ARMOR_REDUCTION for 6 seconds.",
+    "GLAIVE_RUSH": "Throw the user's entire body into a reckless charge to the enemy backline, dealing [50,100,200,SP] PHYSICAL to all enemies in its column. Then the user gets ARMOR_REDUCTION for 6 seconds.",
     "FOUL_PLAY": "Deal [2,4,6,SP,ND=1] x the target's ATK as SPECIAL to the target.",
     "DOUBLE_IRON_BASH": "The user rotates, centering the hex nut in its chest, and then strikes with its arms twice in a row for [150,SP] % of its ATK. This causes the target to FLINCH for 3 seconds.",
     "STONE_EDGE": "For [5,8] seconds, inflict the user with SILENCE, gain 2 RANGE, [20,SP] CRIT_CHANCE and apply [100,SP]% of its DEF as PHYSICAL on attacks.",
