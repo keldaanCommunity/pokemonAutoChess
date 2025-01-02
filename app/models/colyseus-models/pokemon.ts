@@ -843,18 +843,14 @@ export class Elekid extends Pokemon {
 }
 
 export class Electabuzz extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.ELECTRIC,
-    Synergy.ARTIFICIAL,
-    Synergy.LIGHT
-  ])
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ARTIFICIAL])
   rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.ELECTIVIRE
-  hp = 180
+  hp = 190
   atk = 16
-  def = 5
-  speDef = 5
+  def = 7
+  speDef = 7
   maxPP = 90
   range = 1
   skill = Ability.DISCHARGE
@@ -862,17 +858,13 @@ export class Electabuzz extends Pokemon {
 }
 
 export class Electivire extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.ELECTRIC,
-    Synergy.ARTIFICIAL,
-    Synergy.LIGHT
-  ])
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ARTIFICIAL])
   rarity = Rarity.EPIC
   stars = 3
-  hp = 380
-  atk = 28
-  def = 6
-  speDef = 6
+  hp = 350
+  atk = 32
+  def = 10
+  speDef = 10
   maxPP = 90
   range = 1
   skill = Ability.DISCHARGE
@@ -2047,46 +2039,58 @@ export class Reuniclus extends Pokemon {
 }
 
 export class Shinx extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.FIELD,
+    Synergy.LIGHT
+  ])
   rarity = Rarity.ULTRA
   stars = 1
   evolution = Pkm.LUXIO
   hp = 120
-  atk = 15
+  atk = 13
   def = 5
   speDef = 5
-  maxPP = 65
+  maxPP = 70
   range = 1
   skill = Ability.VOLT_SWITCH
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class Luxio extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.FIELD,
+    Synergy.LIGHT
+  ])
   rarity = Rarity.ULTRA
   stars = 2
   evolution = Pkm.LUXRAY
   hp = 210
-  atk = 30
+  atk = 26
   def = 6
   speDef = 6
-  maxPP = 65
+  maxPP = 70
   range = 1
   skill = Ability.VOLT_SWITCH
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
 export class Luxray extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.FIELD,
+    Synergy.LIGHT
+  ])
   rarity = Rarity.ULTRA
   stars = 3
   hp = 300
-  atk = 48
+  atk = 42
   def = 7
   speDef = 7
-  maxPP = 65
+  maxPP = 70
   range = 1
-  skill = Ability.THUNDER_FANG
+  skill = Ability.VOLT_SWITCH
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 

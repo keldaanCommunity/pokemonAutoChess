@@ -17,15 +17,16 @@
 # Changes to Pokemon & Abilities
 
 - Remove Mega pokemons in Ultra category to make room for new 3-stage families:
-  - Baxcalibur line is now in regular Ultra category ; adjusted stats accordingly ; change Glaive rush: damage 40/80/150 → 50/100/200, now target all enemies in a column
-  - Snover line is now epic regional ; temporarely removed Mega Abomasnow ; adjusted stats accordingly ;  Sheer cold execute chance: 30 → 10/20/30%
-  - Swablu line is now epic additional ; temporarely removed Mega Altaria ; adjusted stats accordingly ; Nerf Hypervoice: 30/60/150 → 25/50/100 special damage, confusion chance 100 → 30% ; 
-  - Buneary line is now uncommon regional ; temporarely removed Mega Lopunny ; adjusted stats accordingly
-  - Shuppet line is now epic additional ; temporarely removed Mega Banette ; adjusted stats accordingly
-  - Numel line is now epic regional ; adjusted stats accordingly ; temporarely removed Mega Camerupt
-  - Shinx and Electrike families are swiched ; Shinx is now ultra with Volt switch ; Electrike line is now rare additional with Thunder Fangs ; temporarely removed Mega Manectric
-  - Onix line is now epic additional ; adjusted stats accordingly ; temporarely removed Mega Steelix
-  - Rhyhorn is now ultra ; adjusted stats accordingly ; new ability: Horn Drill
+  - Baxcalibur line is now in regular Ultra category ; change Glaive rush: damage 40/80/150 → 50/100/200, now target all enemies in a column
+  - Snover line is now epic regional ; temporarely removed Mega Abomasnow ; Sheer cold execute chance: 30 → 10/20/30%
+  - Swablu line is now epic additional ; temporarely removed Mega Altaria ; Nerf Hypervoice: 30/60/150 → 25/50/100 special damage, confusion chance 100 → 30% ; 
+  - Buneary line is now uncommon regional ; temporarely removed Mega Lopunny
+  - Shuppet line is now epic additional ; temporarely removed Mega Banette
+  - Numel line is now epic regional ; temporarely removed Mega Camerupt
+  - Electrike line is now rare additional ; new ability: Thunder Fangs ; temporarely removed Mega Manectric
+  - Shinx line is now ultra ; new ability: Volt switch ; new synergy: Light ; PP 65 → 70 ; Nerf Volt Switch damage: 30/60/120 → 25/50/100
+  - Onix line is now epic additional ; temporarely removed Mega Steelix
+  - Rhyhorn is now ultra ; new ability: Horn Drill
 - Changed Shadow Clone (Shuppet): instead of taking an item from original Shuppet, steal a random item from the current target ; the clone spawns on the ~~farthest~~ closest available tile from the target
 - Happiny line is now Normal/Fairy instead of Normal/Human
 - Nerf Kecleon: PP 80 → 100
@@ -70,6 +71,8 @@
 - Clefairy line no longer appears in Normal regions
 - New ability for Bounsweet line: Trop Kick
 - Pawmi is no longer regional
+- Electabuzz  is no longer Light ; HP 180 → 190; Def/SpeDef 5 → 7
+- Electivire is no longer Light ; HP 380 → 350, Attack 28 → 32, Def/SpeDef 6 → 10
 
 # Changes to Synergies
 

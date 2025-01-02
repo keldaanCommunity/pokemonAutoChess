@@ -913,7 +913,7 @@
     "PETAL_DANCE": "Deel [20,30,50,SP] SPECIAL uit aan de [3,4,5] dichtstbijzijnde vijanden",
     "HYPER_VOICE": "Breng [25,50,100,SP] SPECIAL uit aan alle vijandelijke Pokémon in de rij van het doelwit en zorg ervoor dat ze [1,2,3] seconden CONFUSION [30,LK@]%",
     "SHADOW_CLONE": "Spawnt een kloon met [50,SP]% van de maximale HP. De kloon steelt een willekeurig item van je huidige doelwit.",
-    "VOLT_SWITCH": "Ren naar de achterkant van het vijandelijke team en breng [30,60,120,SP] SPECIAL toe aan alle geraakte vijandelijke Pokémon",
+    "VOLT_SWITCH": "Ren naar de achterkant van het vijandelijke team en breng [25,50,100,SP] SPECIAL toe aan alle geraakte vijandelijke Pokémon",
     "LIQUIDATION": "Breng [20,40,80,SP] SPECIAL toe en verlaag de DEF van het doelwit met [2,4,8,SP]",
     "BURN": "Pas de BURN status toe op alle vijandelijke Pokémon voor [5,10,20] seconden",
     "POISON": "Pas de POISONNED status toe op de [1,2,3] dichtstbijzijnde vijandelijke Pokémon voor [3,6,9,SP=0.5] seconden",

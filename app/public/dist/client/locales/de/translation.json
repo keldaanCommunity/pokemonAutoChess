@@ -1258,7 +1258,7 @@
     "PETAL_DANCE": "Verursacht [20,30,50,SP] SPECIAL bei den [3,4,5] nächstgelegenen Feinden",
     "HYPER_VOICE": "Verursacht [25,50,100,SP] SPECIAL und [1,2,3] Sekunden lang [30,LK@]% CONFUSION in der Reihe des Ziels",
     "SHADOW_CLONE": "Bringt einen Klon mit [50,SP]% der maximalen HP hervor. Der Klon stiehlt einen zufälligen Gegenstand von deinem aktuellen Ziel.",
-    "VOLT_SWITCH": "Stürme in die gegnerische Hinterlinie und verursache [30,60,120,SP] SPECIAL",
+    "VOLT_SWITCH": "Stürme in die gegnerische Hinterlinie und verursache [25,50,100,SP] SPECIAL",
     "NUZZLE": "springt zum entferntesten Gegner, verursacht [30,60,120,SP] SPECIAL und PARALYSIS ihn für [3,4,5] Sekunden",
     "LIQUIDATION": "Verursacht [20,40,80,SP] SPECIAL und entfernt [2,4,8,SP] DEF vom Ziel",
     "BURN": "BURN Sie das gesamte gegnerische Team für [5,10,20] Sekunden",

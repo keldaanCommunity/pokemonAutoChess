@@ -1239,7 +1239,7 @@
     "PETAL_DANCE": "Inflige [20,30,50,SP] de SPECIAL a los [3,4,5] enemigos más cercanos",
     "HYPER_VOICE": "Inflige [25,50,100,SP] SPECIAL a todos los Pokémon enemigos en la fila del objetivo y causa [30,LK@]% CONFUSION durante [1,2,3] segundos",
     "SHADOW_CLONE": "Crea un clon con el [50,SP]% de tus HP máximos. El clon roba un objeto aleatorio de tu objetivo actual.",
-    "VOLT_SWITCH": "Se cuela en la retaguardia enemiga e inflige [30,60,120,SP] de SPECIAL",
+    "VOLT_SWITCH": "Se cuela en la retaguardia enemiga e inflige [25,50,100,SP] de SPECIAL",
     "NUZZLE": "Avanza hacia el enemigo mas lejano, infligiendo [30,60,120,SP] de SPECIAL y causándole PARALYSIS durante [3,4,5] segundos",
     "LIQUIDATION": "Inflige [20,40,80,SP] de SPECIAL y reduce en [2,4,8,SP] la DEF del objetivo",
     "BURN": "Causa BURN a todo el equipo enemigo durante [5,10,20] segundos",
