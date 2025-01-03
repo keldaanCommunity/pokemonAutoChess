@@ -15691,6 +15691,45 @@ export class PillarConcrete extends Pokemon {
   }
 }
 
+export class Elgyem extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.MONSTER,
+    Synergy.LIGHT
+  ])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.BEHEEYEM
+  hp = 70
+  atk = 7
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 2
+  skill = Ability.WONDER_ROOM
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+  additional = true
+}
+
+export class Beheeyem extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.MONSTER,
+    Synergy.LIGHT
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 150
+  atk = 17
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 2
+  skill = Ability.WONDER_ROOM
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -16578,5 +16617,7 @@ export const PokemonClasses: Record<
   [Pkm.CONKELDURR]: Conkeldurr,
   [Pkm.PILLAR_WOOD]: PillarWood,
   [Pkm.PILLAR_IRON]: PillarIron,
-  [Pkm.PILLAR_CONCRETE]: PillarConcrete
+  [Pkm.PILLAR_CONCRETE]: PillarConcrete,
+  [Pkm.ELGYEM]: Elgyem,
+  [Pkm.BEHEEYEM]: Beheeyem
 }

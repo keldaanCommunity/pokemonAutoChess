@@ -137,7 +137,9 @@ export default abstract class PokemonState {
         totalTakenDamage += takenDamage
       }
 
-      if (pokemon.attackType === AttackType.SPECIAL) {
+      if (target.effects.has(Effect.WONDER_ROOM)) {
+        specialDamage = Math.ceil(damage * (1 + pokemon.ap / 100))
+      } else if (pokemon.attackType === AttackType.SPECIAL) {
         specialDamage = damage
       } else {
         physicalDamage = damage
@@ -380,12 +382,18 @@ export default abstract class PokemonState {
         damage = Math.ceil(damage * 1.3)
       }
 
-      const def = pokemon.status.armorReduction
+      let def = pokemon.status.armorReduction
         ? Math.round(pokemon.def / 2)
         : pokemon.def
-      const speDef = pokemon.status.armorReduction
+      let speDef = pokemon.status.armorReduction
         ? Math.round(pokemon.speDef / 2)
         : pokemon.speDef
+
+      if (pokemon.effects.has(Effect.WONDER_ROOM)) {
+        const swap = def
+        def = speDef
+        speDef = swap
+      }
 
       let reducedDamage = damage
       if (attackType == AttackType.PHYSICAL) {

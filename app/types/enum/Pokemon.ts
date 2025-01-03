@@ -62,6 +62,7 @@ export enum Pkm {
   BAYLEEF = "BAYLEEF",
   BEAUTIFLY = "BEAUTIFLY",
   BEEDRILL = "BEEDRILL",
+  BEHEEYEM = "BEHEEYEM",
   BELDUM = "BELDUM",
   BELLOSSOM = "BELLOSSOM",
   BELLSPROUT = "BELLSPROUT",
@@ -212,6 +213,7 @@ export enum Pkm {
   ELECTRIKE = "ELECTRIKE",
   ELECTRODE = "ELECTRODE",
   ELEKID = "ELEKID",
+  ELGYEM = "ELGYEM",
   EMBOAR = "EMBOAR",
   EMPOLEON = "EMPOLEON",
   ENAMORUS = "ENAMORUS",
@@ -1597,8 +1599,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.TYNAMO]: "0602",
   //[Pkm.EELEKTRIK]: "0603",
   //[Pkm.EELEKTROSS]: "0604",
-  //[Pkm.ELGYEM]: "0605",
-  //[Pkm.BEHEEYEM]: "0606",
+  [Pkm.ELGYEM]: "0605",
+  [Pkm.BEHEEYEM]: "0606",
   [Pkm.LITWICK]: "0607",
   [Pkm.LAMPENT]: "0608",
   [Pkm.CHANDELURE]: "0609",
@@ -2923,7 +2925,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.CONKELDURR]: Pkm.TIMBURR,
   [Pkm.PILLAR_WOOD]: Pkm.PILLAR_WOOD,
   [Pkm.PILLAR_IRON]: Pkm.PILLAR_IRON,
-  [Pkm.PILLAR_CONCRETE]: Pkm.PILLAR_CONCRETE
+  [Pkm.PILLAR_CONCRETE]: Pkm.PILLAR_CONCRETE,
+  [Pkm.ELGYEM]: Pkm.ELGYEM,
+  [Pkm.BEHEEYEM]: Pkm.ELGYEM
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7520,5 +7524,15 @@ export const AnimationConfig: {
     emote: AnimationType.Idle,
     shinyUnavailable: true,
     noShadow: true
+  },
+  [Pkm.ELGYEM]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Charge,
+    emote: AnimationType.DeepBreath
+  },
+  [Pkm.BEHEEYEM]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack
   }
 }

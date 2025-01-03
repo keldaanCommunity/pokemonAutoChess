@@ -13,6 +13,8 @@
 - Timburr
 - Gurdurr
 - Conkeldurr
+- Elgyem
+- Beheeyem
 
 # Changes to Pokemon & Abilities
 
