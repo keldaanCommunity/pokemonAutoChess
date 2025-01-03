@@ -1085,12 +1085,14 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     })
   }
 
-  computeIncome(isPVE: boolean) {
+  computeIncome(isPVE: boolean, specialGameRule: SpecialGameRule) {
     this.state.players.forEach((player) => {
       let income = 0
       if (player.alive && !player.isBot) {
-        player.interest = Math.min(Math.floor(player.money / 10), 5)
-        income += player.interest
+        if (specialGameRule !== SpecialGameRule.BLOOD_MONEY) {
+          player.interest = Math.min(Math.floor(player.money / 10), 5)
+          income += player.interest
+        }
         if (!isPVE) {
           income += max(5)(player.streak)
         }
@@ -1301,7 +1303,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
     if (!isGameFinished) {
       this.state.stageLevel += 1
-      this.computeIncome(isPVE)
+      this.computeIncome(isPVE, this.state.specialGameRule)
       this.state.players.forEach((player: Player) => {
         if (player.alive) {
           // Fake bots XP bar
