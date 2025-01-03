@@ -1935,7 +1935,7 @@
     "DUBIOUS_DISC": "Get an artificial item. It is removed when losing the synergy.",
     "LINK_CABLE": "Gain +8% base ATK, AP and max HP as SHIELD per held item. Get another artificial item.",
     "GOOGLE_SPECS": "Gain +15% base ATK, AP and max HP as SHIELD per held item. Get another artificial item.",
-    "HATCHER": "Each BABY has [10,LK]% chance to find an Egg.",
+    "HATCHER": "Each BABY has [8,LK]% chance to find an Egg.",
     "BREEDER": "Get at least one Egg after each defeat against a player",
     "GOLDEN_EGGS": "Each BABY has [4,LK]% chance to find a Golden Egg (max 1 on bench). Golden eggs can be sold for 10 GOLD or give a shiny item when hatched.",
     "GRASSY_TERRAIN": "Increase damage dealt by 20% (Grass only)",

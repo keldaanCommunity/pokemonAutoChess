@@ -90,7 +90,7 @@ export default function SynergyDetailComponent(props: {
   }
 
   if (props.type === Synergy.BABY && currentPlayer) {
-    additionalInfo = t('synergy_description.BABY_CHANCE_STACKED', { eggChance: roundToNDigits(currentPlayer.eggChance * 100, 1) })
+    additionalInfo = t('synergy_description.BABY_CHANCE_STACKED', { eggChance: roundToNDigits((levelReached === 7 ? currentPlayer.goldenEggChance : currentPlayer.eggChance) * 100, 1) })
   }
 
   return (

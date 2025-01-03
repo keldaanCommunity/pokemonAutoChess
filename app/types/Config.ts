@@ -162,7 +162,7 @@ export const RarityProbabilityPerLevel: { [key: number]: number[] } = {
 }
 
 export const EvolutionTime = {
-  EGG_HATCH: 3,
+  EGG_HATCH: 5,
   EVOLVE_HATCH: 5
 }
 
