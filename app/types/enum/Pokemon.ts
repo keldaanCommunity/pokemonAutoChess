@@ -349,6 +349,7 @@ export enum Pkm {
   IGGLYBUFF = "IGGLYBUFF",
   ILLUMISE = "ILLUMISE",
   IMPIDIMP = "IMPIDIMP",
+  INCINEROAR = "INCINEROAR",
   INFERNAPE = "INFERNAPE",
   INTELEON = "INTELEON",
   IRON_BUNDLE = "IRON_BUNDLE",
@@ -403,6 +404,7 @@ export enum Pkm {
   LILIGANT = "LILIGANT",
   LILLIPUP = "LILLIPUP",
   LINOONE = "LINOONE",
+  LITTEN = "LITTEN",
   LITWICK = "LITWICK",
   LOMBRE = "LOMBRE",
   LOPUNNY = "LOPUNNY",
@@ -759,6 +761,7 @@ export enum Pkm {
   TORCHIC = "TORCHIC",
   TORKOAL = "TORKOAL",
   TORNADUS = "TORNADUS",
+  TORRACAT = "TORRACAT",
   TORTERRA = "TORTERRA",
   TOTODILE = "TOTODILE",
   //TOUCANNON = "TOUCANNON",
@@ -1726,9 +1729,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ROWLET]: "0722",
   [Pkm.DARTIX]: "0723",
   [Pkm.DECIDUEYE]: "0724",
-  //[Pkm.LITTEN]: "0725",
-  //[Pkm.TORRACAT]: "0726",
-  //[Pkm.INCINEROAR]: "0727",
+  [Pkm.LITTEN]: "0725",
+  [Pkm.TORRACAT]: "0726",
+  [Pkm.INCINEROAR]: "0727",
   [Pkm.POPPLIO]: "0728",
   [Pkm.BRIONNE]: "0729",
   [Pkm.PRIMARINA]: "0730",
@@ -2923,7 +2926,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.CONKELDURR]: Pkm.TIMBURR,
   [Pkm.PILLAR_WOOD]: Pkm.PILLAR_WOOD,
   [Pkm.PILLAR_IRON]: Pkm.PILLAR_IRON,
-  [Pkm.PILLAR_CONCRETE]: Pkm.PILLAR_CONCRETE
+  [Pkm.PILLAR_CONCRETE]: Pkm.PILLAR_CONCRETE,
+  [Pkm.LITTEN]: Pkm.LITTEN,
+  [Pkm.TORRACAT]: Pkm.LITTEN,
+  [Pkm.INCINEROAR]: Pkm.LITTEN
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7520,5 +7526,21 @@ export const AnimationConfig: {
     emote: AnimationType.Idle,
     shinyUnavailable: true,
     noShadow: true
+  },
+  [Pkm.LITTEN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.MultiScratch,
+    emote: AnimationType.Pose
+  },
+  [Pkm.TORRACAT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.MultiScratch,
+    emote: AnimationType.Emit
+  },
+  [Pkm.INCINEROAR]: {
+    attack: AnimationType.Punch,
+    ability: AnimationType.Ricochet,
+    emote: AnimationType.Pose,
+    shinyUnavailable: true
   }
 }

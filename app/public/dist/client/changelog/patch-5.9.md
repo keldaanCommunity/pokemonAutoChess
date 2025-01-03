@@ -13,6 +13,9 @@
 - Timburr
 - Gurdurr
 - Conkeldurr
+- Litten
+- Torracat
+- Incineroar
 
 # Changes to Pokemon & Abilities
 
