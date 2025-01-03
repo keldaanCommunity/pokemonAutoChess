@@ -4,13 +4,10 @@ import { useAppSelector } from "../../../hooks"
 import { getGameScene } from "../../game"
 import { cc } from "../../utils/jsx"
 import { Money } from "../icons/money"
-import { Life } from "../icons/life"
-import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 
 export default function GameRefresh() {
   const { t } = useTranslation()
   const shopFreeRolls = useAppSelector((state) => state.game.shopFreeRolls)
-  const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
   const cost = shopFreeRolls > 0 ? 0 : 1
   return (
     <button
@@ -23,9 +20,7 @@ export default function GameRefresh() {
       <img src={`/assets/ui/refresh.svg`} />
       {cost === 0 ?
         `${t("refresh")} (${shopFreeRolls})`
-        : specialGameRule === SpecialGameRule.DESPERATE_MOVES ?
-          <Life value={`${t("refresh")} ${cost}`} />
-          : <Money value={`${t("refresh")} ${cost}`} />
+        : <Money value={`${t("refresh")} ${cost}`} />
       }
     </button>
   )

@@ -1,7 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { getMaxTeamSize } from "../../../../../utils/board"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 
@@ -26,9 +25,7 @@ export function GameTeamInfo() {
             {t("place_up_to")} <output>{maxTeamSize}</output>{" "}
             {t("pokemons_on_your_board")}
           </p>
-          {specialGameRule !== SpecialGameRule.SIX_PACK && (
-            <p className="help">{t("team_size_hint")}</p>
-          )}
+          <p className="help">{t("team_size_hint")}</p>
         </Tooltip>
         <span>
           {currentPlayer.boardSize}/{maxTeamSize}

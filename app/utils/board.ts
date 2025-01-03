@@ -55,7 +55,6 @@ export function getMaxTeamSize(
   playerLevel: number,
   specialGameRule?: SpecialGameRule | null
 ) {
-  if (specialGameRule === SpecialGameRule.SIX_PACK) return 6
   if (specialGameRule === SpecialGameRule.CROWDED) return playerLevel + 3
   return playerLevel
 }
