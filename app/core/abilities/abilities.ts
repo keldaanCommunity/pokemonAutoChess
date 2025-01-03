@@ -11449,7 +11449,7 @@ export class WonderRoomStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     board
-      .getCellsInRadius(target.positionX, target.positionY, 2)
+      .getAdjacentCells(target.positionX, target.positionY, true)
       .forEach((cell) => {
         const enemy = cell.value
         if (enemy && enemy.team !== pokemon.team) {
