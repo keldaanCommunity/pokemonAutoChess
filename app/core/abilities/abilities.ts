@@ -11439,6 +11439,31 @@ export class ColumnCrushStrategy extends AbilityStrategy {
   }
 }
 
+export class WonderRoomStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    board
+      .getCellsInRadius(target.positionX, target.positionY, 2)
+      .forEach((cell) => {
+        const enemy = cell.value
+        if (enemy && enemy.team !== pokemon.team) {
+          enemy.effects.add(Effect.WONDER_ROOM)
+          enemy.commands.push(
+            new DelayedCommand(() => {
+              enemy.effects.delete(Effect.WONDER_ROOM)
+            }, 5000)
+          )
+        }
+      })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -11853,5 +11878,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SURF]: new SurfStrategy(),
   [Ability.STRENGTH]: new StrengthStrategy(),
   [Ability.HARDEN]: new HardenStrategy(),
-  [Ability.COLUMN_CRUSH]: new ColumnCrushStrategy()
+  [Ability.COLUMN_CRUSH]: new ColumnCrushStrategy(),
+  [Ability.WONDER_ROOM]: new WonderRoomStrategy()
 }
