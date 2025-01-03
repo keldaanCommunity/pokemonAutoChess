@@ -3,7 +3,7 @@ import GameState from "../rooms/states/game-state"
 import { IPlayer } from "../types"
 import { sum } from "../utils/array"
 import { logger } from "../utils/logger"
-import { pickRandomIn } from "../utils/random"
+import { pickRandomIn, shuffleArray } from "../utils/random"
 import { values } from "../utils/schemas"
 
 export type Matchup = {
@@ -84,7 +84,7 @@ function completeMatchupCombination(
 export function selectMatchups(state: GameState): Matchup[] {
   /* step 1) establish all the matchups possible with players alive and their associated count
   count = number of times A fought B or his ghost) + (number of times B fought A or his ghost) */
-  const players = values(state.players).filter((p) => p.alive)
+  const players = shuffleArray(values(state.players).filter((p) => p.alive))
   if (players.length <= 1) return []
   const matchups = getAllPossibleMatchups(players)
 
