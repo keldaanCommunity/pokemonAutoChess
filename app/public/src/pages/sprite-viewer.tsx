@@ -92,6 +92,12 @@ export function SpriteDebug() {
                 {k}
               </option>
             ))}
+            <option value="BOOST/ATK">BOOST ATTACK</option>
+            <option value="BOOST/DEF">BOOST DEFENSE</option>
+            <option value="BOOST/SPE_DEF">BOOST SPE_DEF</option>
+            <option value="BOOST/SHIELD">BOOST SHIELD</option>
+            <option value="BOOST/ATK_SPEED">BOOST ATK_SPEED</option>
+            <option value="BOOST/AP">BOOST AP</option>
           </select>
         </div>
         <div className="sprite-viewer-sprite">

@@ -102,6 +102,7 @@
 # UI
 
 - Added item components recipe on craftable items tooltip
+- New stat boosts animations
 
 # Bugfix
 

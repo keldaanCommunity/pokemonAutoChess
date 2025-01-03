@@ -2,7 +2,7 @@ import { DesignTiled } from "../../../../core/design"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { AnimationType } from "../../../../types/Animation"
 import { DungeonDetails, DungeonPMDO } from "../../../../types/enum/Dungeon"
-import { Orientation } from "../../../../types/enum/Game"
+import { Orientation, Stat } from "../../../../types/enum/Game"
 import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
 import { Status } from "../../../../types/enum/Status"
 import { logger } from "../../../../utils/logger"
@@ -12,8 +12,17 @@ import { playMusic, preloadMusic } from "../../pages/utils/audio"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
 import { displayAbility } from "../components/abilities-animations"
+import { displayBoost } from "../components/boosts-animations"
 import LoadingManager from "../components/loading-manager"
 import PokemonSprite from "../components/pokemon"
+
+type Boost =
+  | "BOOST/ATK"
+  | "BOOST/AP"
+  | "BOOST/DEF"
+  | "BOOST/SPE_DEF"
+  | "BOOST/SHIELD"
+  | "BOOST/ATK_SPEED"
 
 export class DebugScene extends Phaser.Scene {
   height: number
@@ -147,7 +156,7 @@ export class DebugScene extends Phaser.Scene {
       })
   }
 
-  applyStatusAnimation(status: Status | "") {
+  applyStatusAnimation(status: Status | Boost | "") {
     if (this.pokemon) {
       this.pokemon.sprite.setTint(0xffffff)
       this.pokemon.removePoison()
@@ -257,6 +266,25 @@ export class DebugScene extends Phaser.Scene {
       if (status == Status.FAIRY_FIELD) {
         this.pokemon.addFairyField()
       }
+
+      if (status === "BOOST/ATK") {
+        this.displayBoost(Stat.ATK)
+      }
+      if (status === "BOOST/AP") {
+        this.displayBoost(Stat.AP)
+      }
+      if (status === "BOOST/DEF") {
+        this.displayBoost(Stat.DEF)
+      }
+      if (status === "BOOST/SPE_DEF") {
+        this.displayBoost(Stat.SPE_DEF)
+      }
+      if (status === "BOOST/SHIELD") {
+        this.displayBoost(Stat.SHIELD)
+      }
+      if (status === "BOOST/ATK_SPEED") {
+        this.displayBoost(Stat.ATK_SPEED)
+      }
     }
   }
 
@@ -309,5 +337,14 @@ export class DebugScene extends Phaser.Scene {
     }
     showAbilityAnim()
     this.attackAnimInterval = setInterval(showAbilityAnim, 2000)
+  }
+
+  displayBoost(stat: Stat) {
+    const coords = transformAttackCoordinate(
+      this.pokemon!.positionX,
+      this.pokemon!.positionY,
+      false
+    )
+    displayBoost(this, coords[0], coords[1], stat)
   }
 }
