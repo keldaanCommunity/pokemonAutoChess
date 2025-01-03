@@ -1724,6 +1724,10 @@ export function displayAbility(
       ).setScale(2)
       break
 
+    case Ability.TROP_KICK:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
     case Ability.SHELL_TRAP:
       addAbilitySprite(Ability.COUNTER, coordinates, true).setScale(2)
       break

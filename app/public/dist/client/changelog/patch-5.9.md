@@ -16,15 +16,26 @@
 
 # Changes to Pokemon & Abilities
 
-- Nerf Kecleon: PP 80 → 100
+- Remove Mega pokemons in Ultra category to make room for new 3-stage families:
+  - Baxcalibur line is now in regular Ultra category ; change Glaive rush: damage 40/80/150 → 50/100/200, now target all enemies in a column
+  - Snover line is now epic regional ; temporarely removed Mega Abomasnow ; Sheer cold execute chance: 30 → 10/20/30%
+  - Swablu line is now epic additional ; temporarely removed Mega Altaria ; Nerf Hypervoice: 30/60/150 → 25/50/100 special damage, confusion chance 100 → 30% ; 
+  - Buneary line is now uncommon regional ; temporarely removed Mega Lopunny
+  - Shuppet line is now epic additional ; temporarely removed Mega Banette
+  - Numel line is now epic regional ; temporarely removed Mega Camerupt
+  - Electrike line is now rare additional ; new ability: Thunder Fangs ; temporarely removed Mega Manectric
+  - Shinx line is now ultra ; new ability: Volt switch ; new synergy: Light ; PP 65 → 70 ; Nerf Volt Switch damage: 30/60/120 → 25/50/100
+  - Onix line is now epic additional ; temporarely removed Mega Steelix
+  - Rhyhorn is now ultra ; new ability: Horn Drill
 - Changed Shadow Clone (Shuppet): instead of taking an item from original Shuppet, steal a random item from the current target ; the clone spawns on the ~~farthest~~ closest available tile from the target
+- Happiny line is now Normal/Fairy instead of Normal/Human
+- Nerf Kecleon: PP 80 → 100
 - Changed Nightmare (Gastly): Silence duration 1.5/3/6 → 1.5/2.5/5 seconds; All Pokémon suffering from ~~Flinch/Silence/Sleep~~ a Ghost curse take 40/80/150 special damage
 - Alolan Marowak is now tier 2 ; adjusted stats to match Marowak's stats ; new ability: Shadow Bone
 - Change Bonemerang (Marowak): ~~deal 30/60/90 special damage~~ deal 2 times 15/30/60 special damage
 - Rework Maractus: now Grass/Sound/Flora, removed passive, PP 85 → 90
 - Change Spike Armor (Onix, Maractus): when casting again before the end of the effect, throw spikes in all directions, dealing 30 special damage to all enemies hit
 - Hisuian Typlosion is now tier 3 ; adjusted stats to match Typhlosion's stats
-- Numel is now epic regional ; adjusted stats accordingly ; temporarely removed Mega Camerupt
 - Houndour is now epic additional ; HP 85/150 → 90/160 ; temporely removed Mega Houndoom
 - Skorupi is now epic additional ; adjusted stats accordingly
 - Change Fennekin ability: Mystical Fire: deal 20/40/80 special damage to the target and reduce its special attack by 10
@@ -57,6 +68,11 @@
 - Nerf Galar Corsola: now has the same stats than regular Corsola
 - Nerf Cursola: HP 300 → 200
 - Adjusted Curse (Cursola): curse duration 8/4 → 8/5/3 seconds
+- Clefairy line no longer appears in Normal regions
+- New ability for Bounsweet line: Trop Kick
+- Pawmi is no longer regional
+- Electabuzz  is no longer Light ; HP 180 → 190; Def/SpeDef 5 → 7
+- Electivire is no longer Light ; HP 380 → 350, Attack 28 → 32, Def/SpeDef 6 → 10
 
 # Changes to Synergies
 
