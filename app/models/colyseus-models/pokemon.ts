@@ -3136,14 +3136,14 @@ export class Kingdra extends Pokemon {
 }
 
 export class Flabebe extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.SOUND, Synergy.FAIRY, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FLORA])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.FLOETTE
   hp = 60
-  atk = 5
+  atk = 6
   def = 1
-  speDef = 1
+  speDef = 3
   maxPP = 90
   range = 3
   skill = Ability.FAIRY_WIND
@@ -3151,27 +3151,27 @@ export class Flabebe extends Pokemon {
 }
 
 export class Floette extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.SOUND, Synergy.FAIRY, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FLORA])
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.FLORGES
   hp = 120
-  atk = 9
+  atk = 10
   def = 1
-  speDef = 1
+  speDef = 5
   maxPP = 90
   range = 3
   skill = Ability.FAIRY_WIND
   attackSprite = AttackSprite.FAIRY_RANGE
 }
 export class Florges extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.SOUND, Synergy.FAIRY, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FLORA])
   rarity = Rarity.UNCOMMON
   stars = 3
   hp = 210
   atk = 20
   def = 2
-  speDef = 2
+  speDef = 7
   maxPP = 90
   range = 3
   skill = Ability.FAIRY_WIND
@@ -6236,7 +6236,11 @@ export class Victini extends Pokemon {
 }
 
 export class Jirachi extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.PSYCHIC])
+  types = new SetSchema<Synergy>([
+    Synergy.STEEL,
+    Synergy.PSYCHIC,
+    Synergy.SOUND
+  ])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 220

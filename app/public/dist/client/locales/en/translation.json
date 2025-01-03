@@ -1598,7 +1598,7 @@
     "FISHIOUS_REND": "Deal [80,SP] SPECIAL to the target. The damage is doubled if the user has more ATK_SPEED than the target.",
     "RECOVER": "Heal for [25,SP]% of max HP.",
     "CURSE": "Inflict the highest HP enemy Pokémon with CURSE that will KO after [8,5,3,SP=-0.2] seconds.",
-    "DOOM_DESIRE": "After 2 seconds, deal [150,SP] SPECIAL to the target. Restore 100 PP if the target is KO'd in the duration.",
+    "DOOM_DESIRE": "After 2 seconds, deal [150,SP] SPECIAL to the target. Restore 60 PP if the target is KO'd in the duration.",
     "TIME_TRAVEL": "Go back in time to retrieve lost health. Cure the negative status conditions of all allied Pokémon and heal them for [25,SP] HP.",
     "POLTERGEIST": "Deal [30,60,120,SP] SPECIAL to the target, +[20,SP] SPECIAL for each item held by the target ([40,SP] for ARTIFICIAL items).",
     "GOLD_RUSH": "Deal  [20,SP] + the allied player's GOLD value as SPECIAL, then the allied player earns 2 GOLD.",
