@@ -23,6 +23,8 @@ import { CloseCodes } from "../../types/enum/CloseCodes"
 import { getRank } from "../../utils/elo"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { UserRecord } from "firebase-admin/lib/auth/user-record"
+import { setTimeout } from "node:timers/promises"
+import { AbortError } from "node-fetch"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -625,24 +627,44 @@ export class OnToggleReadyCommand extends Command<
         // auto start when ranked lobby is full and all ready
         this.room.state.addMessage({
           authorId: "server",
-          payload: `Lobby is full, starting match...`
+          payload: "Lobby is full, starting match in 3..."
         })
 
-        if (
-          [GameMode.RANKED, GameMode.SCRIBBLE].includes(this.state.gameMode)
-        ) {
-          // open another one
-          this.room.presence.publish("lobby-full", {
-            gameMode: this.state.gameMode,
-            minRank: this.state.minRank,
-            noElo: this.state.noElo
-          })
-        }
-
-        return [new OnGameStartRequestCommand()]
+        return new CheckAutoStartRoom()
       }
     } catch (error) {
       logger.error(error)
+    }
+  }
+}
+
+export class CheckAutoStartRoom extends Command<PreparationRoom, void> {
+  async execute() {
+    try {
+      this.state.abortOnPlayerLeave = new AbortController()
+      const signal = this.state.abortOnPlayerLeave.signal
+      await setTimeout(3000, null, { signal })
+
+      this.room.state.addMessage({
+        authorId: "server",
+        payload: "Starting match..."
+      })
+
+      if ([GameMode.RANKED, GameMode.SCRIBBLE].includes(this.state.gameMode)) {
+        // open another one
+        this.room.presence.publish("lobby-full", {
+          gameMode: this.state.gameMode,
+          minRank: this.state.minRank,
+          noElo: this.state.noElo
+        })
+      }
+
+      return new OnGameStartRequestCommand()
+    } catch (e) {
+      this.room.state.addMessage({
+        authorId: "server",
+        payload: "Waiting for the room to fill up."
+      })
     }
   }
 }
