@@ -393,6 +393,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       )*/
     }
     try {
+      this.state.abortOnPlayerLeave?.abort()
       if (consented) {
         throw new Error("consented leave")
       }
