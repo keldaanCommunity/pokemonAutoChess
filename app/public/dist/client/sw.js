@@ -1,7 +1,7 @@
 /* Change this cache name every time you want to force players 
   to invalidate their cache and download all assets again */
 
-const CACHE_NAME = "CACHE v5.8.0.437"
+const CACHE_NAME = "CACHE v5.8.0.435"
 
 // Cache-first strategy
 const cacheFirst = (event) => {
@@ -42,8 +42,7 @@ self.addEventListener("fetch", async (event) => {
   const url = event.request.url
   if (
     event.request.method === "GET" &&
-    (url.includes("/assets/") ||
-      url.includes("/SpriteCollab/"))
+    (url.includes("/assets/") || url.includes("/SpriteCollab/"))
   )
     cacheFirst(event)
 })
@@ -56,16 +55,16 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(clearObsoleteCaches().then(() => self.clients.claim()))
 })
 
-self.addEventListener('message', async (event) => {
-  if (event.data && event.data.type === 'CACHE_STATUS') {
+self.addEventListener("message", async (event) => {
+  if (event.data && event.data.type === "CACHE_STATUS") {
     const keys = await caches.keys()
     const clients = await self.clients.matchAll()
     clients.forEach((client) => {
       client.postMessage({
-        type: 'CACHE_STATUS',
-        version: CACHE_NAME.replace('CACHE v', ''),
+        type: "CACHE_STATUS",
+        version: CACHE_NAME.replace("CACHE v", ""),
         cached: keys.includes(CACHE_NAME)
       })
     })
   }
-});
+})

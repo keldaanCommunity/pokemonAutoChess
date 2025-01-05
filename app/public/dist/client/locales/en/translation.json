@@ -433,7 +433,8 @@
     "STRENGTH": "Strength",
     "HARDEN": "Harden",
     "COLUMN_CRUSH": "Column Crush",
-    "WONDER_ROOM": "Wonder Room"
+    "WONDER_ROOM": "Wonder Room",
+    "DARK_LARIAT": "Darkest Lariat"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1318,7 +1319,10 @@
     "PILLAR_IRON": "Pillar (Iron)",
     "PILLAR_CONCRETE": "Pillar (Concrete)",
     "ELGYEM": "Elgyem",
-    "BEHEEYEM": "Beheeyem"
+    "BEHEEYEM": "Beheeyem",
+    "LITTEN": "Litten",
+    "TORRACAT": "Torracat",
+    "INCINEROAR": "Incineroar"
   },
   "ability_description": {
     "SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1732,7 +1736,8 @@
     "HARDEN": "Gain [2,4,6,SP] DEF",
     "TOPSY_TURVY": "Deal [40,80,100,SP] SPECIAL to the target. All its ATK, DEF and SPE_DEF buffs become debuffs and vice versa.",
     "COLUMN_CRUSH": "Builds a pillar on the closest empty spot. If a pillar is already on the board, jumps to it and throw it at the closest target, dealing [50,100,150,SP] + the remaining HP of the pillar as SPECIAL.",
-    "WONDER_ROOM": "Creates a bizarre area around the target in which enemies DEF and SPE_DEF are swapped for 5 seconds and attacks received are SPECIAL that scale with attacker AP."
+    "WONDER_ROOM": "Creates a bizarre area around the target in which enemies DEF and SPE_DEF are swapped for 5 seconds and attacks received are SPECIAL that scale with attacker AP.",
+    "DARK_LARIAT": "Swings arms and hits the target several times while moving behind them. Each hit deals [100,SP]% ATK as SPECIAL. Number of hits increase with ATK_SPEED. Target is FLINCH during the attack."
   },
   "effect": {
     "INGRAIN": "Ingrain",

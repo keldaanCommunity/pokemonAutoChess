@@ -14007,7 +14007,7 @@ export class Trubbish extends Pokemon {
     }
 
     trubbishes.forEach((trubbishObj) => {
-      const trubbish = trubbishObj as Trubbish
+      const trubbish = trubbishObj as unknown as Trubbish
       for (const key in garbodor.statIncreases) {
         garbodor.statIncreases[key] += trubbish.statIncreases[key]
       }
@@ -14561,10 +14561,10 @@ export class Mantyke extends Pokemon {
         if (
           p.name === Pkm.REMORAID &&
           !isOnBench(p) &&
-          !isOnBench(this) &&
+          !isOnBench(pokemon) &&
           distanceC(
-            this.positionX,
-            this.positionY,
+            pokemon.positionX,
+            pokemon.positionY,
             p.positionX,
             p.positionY
           ) === 1
@@ -15718,6 +15718,50 @@ export class Beheeyem extends Pokemon {
   additional = true
 }
 
+export class Litten extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.DARK, Synergy.FIELD])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.TORRACAT
+  hp = 90
+  atk = 8
+  def = 4
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.DARK_LARIAT
+  attackSprite = AttackSprite.FIRE_MELEE
+}
+
+export class Torracat extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.DARK, Synergy.FIELD])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.INCINEROAR
+  hp = 170
+  atk = 14
+  def = 6
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.DARK_LARIAT
+  attackSprite = AttackSprite.FIRE_MELEE
+}
+
+export class Incineroar extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.DARK, Synergy.FIELD])
+  rarity = Rarity.EPIC
+  stars = 3
+  hp = 280
+  atk = 24
+  def = 8
+  speDef = 7
+  maxPP = 100
+  range = 1
+  skill = Ability.DARK_LARIAT
+  attackSprite = AttackSprite.FIRE_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -16607,5 +16651,8 @@ export const PokemonClasses: Record<
   [Pkm.PILLAR_IRON]: PillarIron,
   [Pkm.PILLAR_CONCRETE]: PillarConcrete,
   [Pkm.ELGYEM]: Elgyem,
-  [Pkm.BEHEEYEM]: Beheeyem
+  [Pkm.BEHEEYEM]: Beheeyem,
+  [Pkm.LITTEN]: Litten,
+  [Pkm.TORRACAT]: Torracat,
+  [Pkm.INCINEROAR]: Incineroar
 }

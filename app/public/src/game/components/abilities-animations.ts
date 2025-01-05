@@ -3021,11 +3021,10 @@ export function displayAbility(
     }
 
     case Ability.FIRESTARTER: {
-      const abilitySprite = addAbilitySprite(
-        skill,
-        [coordinatesTarget[0], coordinatesTarget[1] - 25],
-        true
-      ).setScale(2)
+      const abilitySprite = addAbilitySprite(skill, [
+        coordinatesTarget[0],
+        coordinatesTarget[1] - 25
+      ]).setScale(2)
       scene.tweens.add({
         targets: abilitySprite,
         x: coordinatesTarget[0],
@@ -3035,6 +3034,20 @@ export function displayAbility(
         onComplete: () => {
           abilitySprite.destroy()
         }
+      })
+      break
+    }
+
+    case Ability.DARK_LARIAT: {
+      const abilitySprite = addAbilitySprite(skill, coordinates, true)
+        .setScale(2)
+        .setDepth(1)
+      scene.tweens.add({
+        targets: abilitySprite,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 500
       })
       break
     }

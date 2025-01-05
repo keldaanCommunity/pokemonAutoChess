@@ -15,6 +15,9 @@
 - Conkeldurr
 - Elgyem
 - Beheeyem
+- Litten
+- Torracat
+- Incineroar
 
 # Changes to Pokemon & Abilities
 
