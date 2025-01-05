@@ -3343,7 +3343,11 @@
     "SUPER_BALL": "超级球",
     "ULTRA_BALL": "高级球",
     "MASTER_BALL": "大师球",
-    "BEAST_BALL": "究极球"
+    "BEAST_BALL": "究极球",
+    "POKEBALL": "精灵球",
+    "GREATBALL": "超级球",
+    "ULTRABALL": "高级球",
+    "MASTERBALL": "大师球"
   },
   "game_full": "本房间已满员",
   "game_already_started": "游戏已经开始",
