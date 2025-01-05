@@ -62,6 +62,7 @@ export enum Pkm {
   BAYLEEF = "BAYLEEF",
   BEAUTIFLY = "BEAUTIFLY",
   BEEDRILL = "BEEDRILL",
+  BEHEEYEM = "BEHEEYEM",
   BELDUM = "BELDUM",
   BELLOSSOM = "BELLOSSOM",
   BELLSPROUT = "BELLSPROUT",
@@ -134,6 +135,7 @@ export enum Pkm {
   COMBEE = "COMBEE",
   COMBUSKEN = "COMBUSKEN",
   COMFEY = "COMFEY",
+  CONKELDURR = "CONKELDURR",
   CORPHISH = "CORPHISH",
   CORSOLA = "CORSOLA",
   CORVIKNIGHT = "CORVIKNIGHT",
@@ -211,6 +213,7 @@ export enum Pkm {
   ELECTRIKE = "ELECTRIKE",
   ELECTRODE = "ELECTRODE",
   ELEKID = "ELEKID",
+  ELGYEM = "ELGYEM",
   EMBOAR = "EMBOAR",
   EMPOLEON = "EMPOLEON",
   ENAMORUS = "ENAMORUS",
@@ -298,6 +301,7 @@ export enum Pkm {
   GROWLITHE = "GROWLITHE",
   GRUBBIN = "GRUBBIN",
   GRUMPIG = "GRUMPIG",
+  GURDURR = "GURDURR",
   GUZZLORD = "GUZZLORD",
   GYARADOS = "GYARADOS",
   HAKAMO_O = "HAKAMO_O",
@@ -558,6 +562,9 @@ export enum Pkm {
   PIGNITE = "PIGNITE",
   PIKACHU = "PIKACHU",
   //PIKIPEK = "PIKIPEK",
+  PILLAR_WOOD = "PILLAR_WOOD",
+  PILLAR_IRON = "PILLAR_IRON",
+  PILLAR_CONCRETE = "PILLAR_CONCRETE",
   PILOSWINE = "PILOSWINE",
   PINECO = "PINECO",
   PINSIR = "PINSIR",
@@ -743,6 +750,7 @@ export enum Pkm {
   TERRAKION = "TERRAKION",
   THIEVUL = "THIEVUL",
   THUNDURUS = "THUNDURUS",
+  TIMBURR = "TIMBURR",
   TINKATINK = "TINKATINK",
   TINKATON = "TINKATON",
   TINKATUFF = "TINKATUFF",
@@ -1512,9 +1520,12 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.DRILBUR]: "0529",
   //[Pkm.EXCADRILL]: "0530",
   [Pkm.AUDINO]: "0531",
-  //[Pkm.TIMBURR]: "0532",
-  //[Pkm.GURDURR]: "0533",
-  //[Pkm.CONKELDURR]: "0534",
+  [Pkm.TIMBURR]: "0532",
+  [Pkm.PILLAR_WOOD]: "0532-0002",
+  [Pkm.GURDURR]: "0533",
+  [Pkm.PILLAR_IRON]: "0533-0002",
+  [Pkm.CONKELDURR]: "0534",
+  [Pkm.PILLAR_CONCRETE]: "0534-0002",
   [Pkm.TYMPOLE]: "0535",
   [Pkm.PALPITOAD]: "0536",
   [Pkm.SEISMITOAD]: "0537",
@@ -1588,8 +1599,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.TYNAMO]: "0602",
   //[Pkm.EELEKTRIK]: "0603",
   //[Pkm.EELEKTROSS]: "0604",
-  //[Pkm.ELGYEM]: "0605",
-  //[Pkm.BEHEEYEM]: "0606",
+  [Pkm.ELGYEM]: "0605",
+  [Pkm.BEHEEYEM]: "0606",
   [Pkm.LITWICK]: "0607",
   [Pkm.LAMPENT]: "0608",
   [Pkm.CHANDELURE]: "0609",
@@ -2908,7 +2919,15 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.VULLABY]: Pkm.VULLABY,
   [Pkm.MANDIBUZZ]: Pkm.VULLABY,
   [Pkm.INKAY]: Pkm.INKAY,
-  [Pkm.MALAMAR]: Pkm.INKAY
+  [Pkm.MALAMAR]: Pkm.INKAY,
+  [Pkm.TIMBURR]: Pkm.TIMBURR,
+  [Pkm.GURDURR]: Pkm.TIMBURR,
+  [Pkm.CONKELDURR]: Pkm.TIMBURR,
+  [Pkm.PILLAR_WOOD]: Pkm.PILLAR_WOOD,
+  [Pkm.PILLAR_IRON]: Pkm.PILLAR_IRON,
+  [Pkm.PILLAR_CONCRETE]: Pkm.PILLAR_CONCRETE,
+  [Pkm.ELGYEM]: Pkm.ELGYEM,
+  [Pkm.BEHEEYEM]: Pkm.ELGYEM
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -3050,6 +3069,7 @@ export const AnimationConfig: {
     ability: AnimationType
     emote: AnimationType
     shinyUnavailable?: boolean
+    noShadow?: boolean
   }
 } = {
   [Pkm.DEFAULT]: {
@@ -7466,5 +7486,53 @@ export const AnimationConfig: {
     attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
+  },
+  [Pkm.TIMBURR]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Pose
+  },
+  [Pkm.GURDURR]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Punch,
+    emote: AnimationType.RearUp,
+    shinyUnavailable: true
+  },
+  [Pkm.CONKELDURR]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Strike,
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
+  },
+  [Pkm.PILLAR_WOOD]: {
+    attack: AnimationType.Idle,
+    ability: AnimationType.Idle,
+    emote: AnimationType.Idle,
+    shinyUnavailable: true,
+    noShadow: true
+  },
+  [Pkm.PILLAR_IRON]: {
+    attack: AnimationType.Idle,
+    ability: AnimationType.Idle,
+    emote: AnimationType.Idle,
+    shinyUnavailable: true,
+    noShadow: true
+  },
+  [Pkm.PILLAR_CONCRETE]: {
+    attack: AnimationType.Idle,
+    ability: AnimationType.Idle,
+    emote: AnimationType.Idle,
+    shinyUnavailable: true,
+    noShadow: true
+  },
+  [Pkm.ELGYEM]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Charge,
+    emote: AnimationType.DeepBreath
+  },
+  [Pkm.BEHEEYEM]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack
   }
 }

@@ -17,15 +17,6 @@ export default function WikiTutorials() {
         </li>
         <li className="my-box">
           <iframe
-            src="https://www.youtube.com/embed/wU8tzabmvJo"
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>
-          <h3>Learn the basics</h3>
-        </li>
-        <li className="my-box">
-          <iframe
             src="https://www.youtube.com/embed/wEOipl5L7A8"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; gyroscope; picture-in-picture; web-share"
@@ -54,10 +45,6 @@ export default function WikiTutorials() {
       </ul>
       <p>
         {t("thanks_to")}&nbsp;
-        <a href="https://www.youtube.com/ProperGoodGames" target="_blank">
-          ProperGoodGames
-        </a>
-        {", "}
         <a href="https://www.youtube.com/@PokePlagued" target="_blank">
           Plagued
         </a>

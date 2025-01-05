@@ -131,12 +131,25 @@ export const BoosterRarityProbability: { [key in Rarity]: number } = {
   [Rarity.COMMON]: 0.12,
   [Rarity.UNCOMMON]: 0.2,
   [Rarity.RARE]: 0.2,
-  [Rarity.EPIC]: 0.15,
+  [Rarity.EPIC]: 0.18,
   [Rarity.ULTRA]: 0.06,
-  [Rarity.UNIQUE]: 0.08,
+  [Rarity.UNIQUE]: 0.1,
   [Rarity.LEGENDARY]: 0.05,
-  [Rarity.HATCH]: 0.1,
+  [Rarity.HATCH]: 0.06,
   [Rarity.SPECIAL]: 0.03
+}
+
+// should be proportional to rarity, see above
+export const BoosterPriceByRarity: { [key in Rarity]: number } = {
+  [Rarity.COMMON]: 600,
+  [Rarity.UNCOMMON]: 1000,
+  [Rarity.RARE]: 1000,
+  [Rarity.EPIC]: 900,
+  [Rarity.ULTRA]: 300,
+  [Rarity.UNIQUE]: 500,
+  [Rarity.LEGENDARY]: 250,
+  [Rarity.HATCH]: 300,
+  [Rarity.SPECIAL]: 500 // special is a bit more expensive due to unowns farming
 }
 
 export const DITTO_RATE = 0.005
@@ -162,7 +175,7 @@ export const RarityProbabilityPerLevel: { [key: number]: number[] } = {
 }
 
 export const EvolutionTime = {
-  EGG_HATCH: 3,
+  EGG_HATCH: 5,
   EVOLVE_HATCH: 5
 }
 
