@@ -1326,7 +1326,7 @@
     "U_TURN": "获得[15,30,50,SP]点SHIELD，并和目标交换位置。目标同时陷入CHARM 1秒。",
     "EXPLOSION": "对所有相邻敌方宝可梦造成[50,100,200,SP]点 SPECIAL。也对使用者自身造成伤害。",
     "CHLOROBLAST": "对所有相邻敌方宝可梦造成[50,100,200,SP]点 SPECIAL。使用者自身失去最大HP的50%的HP。",
-    "NIGHTMARE": "所有敌方宝可梦陷入SILENCE [1.5,3,6,ND=1]秒。受到来自GHOST共鸣的诅咒影响的敌人也会受到[40,80,150,SP]点SPECIAL。",
+    "NIGHTMARE": "所有敌方宝可梦陷入FATIGUE [3,5,7,ND=1]秒。受到来自GHOST共鸣的诅咒影响的敌人也会受到[40,80,150,SP]点SPECIAL。",
     "CLANGOROUS_SOUL": "使自身和相邻的我方宝可梦提升[1,2,4,SP]点ATK，DEF和SPE_DEF。",
     "BONEMERANG": "投掷一块像回旋镖一样穿过敌方全队的骨头，对所有其击中的敌方宝可梦造成[30,60,90,SP]点SPECIAL。",
     "SHADOW_BONE": "投掷一枚含有灵魂的骨头，对路径上的所有敌方宝可梦造成[30,60,120,SP]点SPECIAL，并有[50,LK]%的概率降低他们[3,SP]点DEF。",

@@ -375,48 +375,6 @@ export default class BattleManager {
           )
           pkm.specialAttackAnimation(this.group, value)
         }
-      } else if (field === "petalDanceCount") {
-        if (value != 0) {
-          displayAbility(
-            this.scene,
-            [],
-            Ability.PETAL_DANCE,
-            pkm.orientation,
-            pkm.positionX,
-            pkm.positionY,
-            pkm.targetX ?? -1,
-            pkm.targetY ?? -1,
-            this.flip
-          )
-        }
-      } else if (field === "futureSightCount") {
-        if (value != 0) {
-          displayAbility(
-            this.scene,
-            [],
-            Ability.FUTURE_SIGHT,
-            pkm.orientation,
-            pkm.positionX,
-            pkm.positionY,
-            pkm.targetX ?? -1,
-            pkm.targetY ?? -1,
-            this.flip
-          )
-        }
-      } else if (field === "earthquakeCount") {
-        if (value != 0) {
-          displayAbility(
-            this.scene,
-            [],
-            Ability.EARTHQUAKE,
-            pkm.orientation,
-            pkm.positionX,
-            pkm.positionY,
-            pkm.targetX ?? -1,
-            pkm.targetY ?? -1,
-            this.flip
-          )
-        }
       } else if (field === "fieldCount") {
         if (value != 0) {
           displayAbility(
@@ -515,20 +473,6 @@ export default class BattleManager {
             this.flip
           )
         }
-      } else if (field === "mindBlownCount") {
-        if (value != 0) {
-          displayAbility(
-            this.scene,
-            [],
-            "MIND_BLOWN/hit",
-            pkm.orientation,
-            pkm.positionX,
-            pkm.positionY,
-            pkm.targetX ?? -1,
-            pkm.targetY ?? -1,
-            this.flip
-          )
-        }
       } else if (field === "spellBlockedCount") {
         if (value != 0) {
           this.displayBlockedSpell(pkm.x, pkm.y)
@@ -536,34 +480,6 @@ export default class BattleManager {
       } else if (field === "manaBurnCount") {
         if (value != 0) {
           this.displayManaBurn(pkm.x, pkm.y)
-        }
-      } else if (field === "healOrderCount") {
-        if (value != 0) {
-          displayAbility(
-            this.scene,
-            [],
-            "HEAL_ORDER",
-            pkm.orientation,
-            pkm.positionX,
-            pkm.positionY,
-            pkm.targetX ?? -1,
-            pkm.targetY ?? -1,
-            this.flip
-          )
-        }
-      } else if (field === "attackOrderCount") {
-        if (value != 0) {
-          displayAbility(
-            this.scene,
-            [],
-            "ATTACK_ORDER",
-            pkm.orientation,
-            pkm.positionX,
-            pkm.positionY,
-            pkm.targetX ?? -1,
-            pkm.targetY ?? -1,
-            this.flip
-          )
         }
       } else if (field === "moneyCount") {
         if (value > 0) {
