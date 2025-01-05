@@ -8295,18 +8295,6 @@ export class Poipole extends Pokemon {
   evolutionRule = new ConditionBasedEvolutionRule(
     (pokemon) => pokemon.hp >= 200
   )
-
-  afterEvolve({
-    pokemonEvolved: naganadel,
-    pokemonsBeforeEvolution: poipoles
-  }: {
-    pokemonEvolved: Pokemon
-    pokemonsBeforeEvolution: Pokemon[]
-  }) {
-    // carry over the AP gained with passive
-    const apStacked = sum(poipoles.map((m) => m.ap))
-    naganadel.ap += apStacked
-  }
 }
 
 export class Naganadel extends Pokemon {

@@ -1632,7 +1632,7 @@
     "DRAIN_PUNCH": "Il prossimo attacco infligge [100,SP]% SPECIAL aggiuntivo e recupera HP pari al 200% dei danni inflitti.",
     "GRAVITY": "La squadra nemica subisce lo status LOCKED per [2,SP] secondi.",
     "FAKE_OUT": "Infliggi [50,100,150,SP] SPECIAL, l'utilizzatore perde 30 AP. Il bersaglio subisce FLINCH per 3 secondi a meno che i AP dell'utilizzatore erano negativi.",
-    "FELL_STINGER": "Infliggi [20,40,70,SP] SPECIAL. Se il bersaglio viene ucciso, l'utilizzatore ottiene permanentemente in più 1 ATK, 5 AP e 10 HP.",
+    "FELL_STINGER": "Infliggi [25,50,100,SP] SPECIAL. Se il bersaglio viene ucciso, l'utilizzatore ottiene permanentemente in più 1 ATK e 10 HP.",
     "GULP_MISSILE": "Scaglia un $t(pkm.ARROKUDA) con PP al massimo verso il bersaglio, infliggendo [55,SP] SPECIAL al bersaglio e ai nemici adiacenti. C'è [33,LK]% possibilità che venga scaglia invece un $t(pkm.PIKACHU).",
     "SCHOOLING": "Infliggi il [10,SP]% dei HP massimo come SPECIAL al bersaglio ed ai nemici adiacenti. Se un Wishiwashi è nella panchina, esso si aggiunge al banco e l'utilizzatore ottiene permanentemente 50 HP.",
     "DOUBLE_SHOCK": "L'utilizzatore emette un forte scossa elettrica, infliggendo [50,100,200,SP] SPECIAL. L'utilizzatore subisce PARALYSIS per 3 secondi.",

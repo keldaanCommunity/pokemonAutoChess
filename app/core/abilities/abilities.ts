@@ -5557,7 +5557,7 @@ export class FellStingerStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [20, 40, 70][pokemon.stars - 1] ?? 30
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 70
     const victim = target.handleSpecialDamage(
       damage,
       board,
@@ -5566,7 +5566,6 @@ export class FellStingerStrategy extends AbilityStrategy {
       crit
     )
     if (victim.death && !pokemon.isClone) {
-      pokemon.addAbilityPower(5, pokemon, 0, false, true)
       pokemon.addAttack(1, pokemon, 0, false, true)
       pokemon.addMaxHP(10, pokemon, 0, false, true)
     }
