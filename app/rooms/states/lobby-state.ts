@@ -47,7 +47,7 @@ export default class LobbyState extends Schema {
   removeMessages(authorId: string) {
     let i = this.messages.length
     while (i--) {
-      if (this.messages[i].authorId === authorId) {
+      if (this.messages[i]?.authorId === authorId) {
         this.messages.splice(i, 1)
       }
     }

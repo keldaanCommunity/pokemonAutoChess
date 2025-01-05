@@ -1,7 +1,7 @@
 import classNames from "classnames"
+import PropTypes from "prop-types"
 import * as React from "react"
 import { cloneElement } from "react"
-import PropTypes from "prop-types"
 import "./progress-bar.css"
 
 export interface ProgressBarProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -50,7 +50,7 @@ function onlyProgressBar(props, propName, componentName): Error | null {
       : child
     error = new Error(
       `Children of ${componentName} can contain only ProgressBar ` +
-      `components. Found ${childIdentifier}.`
+        `components. Found ${childIdentifier}.`
     )
   })
 
@@ -180,29 +180,33 @@ const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
     } = props
 
     return (
-      <div ref={ref} {...wrapperProps} className={classNames("progress", className)}>
+      <div
+        ref={ref}
+        {...wrapperProps}
+        className={classNames("progress", className)}
+      >
         {children
           ? map(children, (child) => cloneElement(child, { isChild: true }))
           : renderProgressBar(
-            {
-              min,
-              now,
-              max,
-              label,
-              visuallyHidden,
-              striped,
-              animated,
-              variant
-            },
-            ref
-          )}
+              {
+                min,
+                now,
+                max,
+                label,
+                visuallyHidden,
+                striped,
+                animated,
+                variant
+              },
+              ref
+            )}
       </div>
     )
   }
 )
 
 ProgressBar.displayName = "ProgressBar"
-ProgressBar.propTypes = propTypes
+ProgressBar.propTypes = propTypes as any
 
 export default ProgressBar
 
