@@ -85,6 +85,8 @@
   align-self: start;
   background-color: var(--color-bg-primary);
   padding: 5px;
+  overflow-y: auto;
+  max-height: 100%;
 }
 
 #selected-entity fieldset {
