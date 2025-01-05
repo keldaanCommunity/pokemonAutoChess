@@ -101,7 +101,7 @@ export default class Status extends Schema implements IStatus {
 
   constructor(simulation: ISimulation) {
     super()
-    const elapsedTime = (StageDuration[1] * 1000) - simulation.room.state.time
+    const elapsedTime = StageDuration[1] * 1000 - simulation.room.state.time
     this.enrageDelay = this.enrageDelay - elapsedTime
   }
 
@@ -1114,7 +1114,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerPokerus(pokemon: PokemonEntity) {
-    if ((pokemon.passive = Passive.INANIMATE)) return // Inanimate objects cannot get Pokerus
+    if (pokemon.passive === Passive.INANIMATE) return // Inanimate objects cannot get Pokerus
     if (!this.pokerus) {
       this.pokerus = true
     }
