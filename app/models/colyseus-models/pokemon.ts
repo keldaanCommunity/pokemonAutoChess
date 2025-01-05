@@ -2145,6 +2145,7 @@ export class AlolanMarowak extends Pokemon {
   range = 1
   skill = Ability.SHADOW_BONE
   regional = true
+  additional = true
   attackSprite = AttackSprite.FIRE_MELEE
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
@@ -7958,6 +7959,7 @@ export class GalarianPonyta extends Pokemon {
   range = 1
   skill = Ability.PASTEL_VEIL
   regional = true
+  additional = true
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 export class GalarianRapidash extends Pokemon {
@@ -7976,6 +7978,7 @@ export class GalarianRapidash extends Pokemon {
   range = 1
   skill = Ability.PASTEL_VEIL
   regional = true
+  additional = true
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
@@ -8182,6 +8185,7 @@ export class AlolanMeowth extends Pokemon {
   range = 1
   skill = Ability.PICKUP
   regional = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -8197,6 +8201,7 @@ export class AlolanPersian extends Pokemon {
   range = 1
   skill = Ability.PICKUP
   regional = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -8356,6 +8361,7 @@ export class HisuiGrowlithe extends Pokemon {
   skill = Ability.DOUBLE_EDGE
   attackSprite = AttackSprite.FIRE_MELEE
   regional = true
+  additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -8378,6 +8384,7 @@ export class HisuiArcanine extends Pokemon {
   skill = Ability.DOUBLE_EDGE
   attackSprite = AttackSprite.FIRE_MELEE
   regional = true
+  additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -8563,6 +8570,7 @@ export class HisuiVoltorb extends Pokemon {
   range = 1
   skill = Ability.CHLOROBLAST
   regional = true
+  additional = true
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -8582,6 +8590,7 @@ export class HisuiElectrode extends Pokemon {
   range = 1
   skill = Ability.CHLOROBLAST
   regional = true
+  additional = true
   attackSprite = AttackSprite.ELECTRIC_MELEE
 }
 
@@ -8672,6 +8681,7 @@ export class HisuiSneasel extends Pokemon {
   range = 1
   skill = Ability.DIRE_CLAW
   regional = true
+  additional = true
   attackSprite = AttackSprite.POISON_MELEE
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
@@ -8699,6 +8709,7 @@ export class Sneasler extends Pokemon {
   range = 1
   skill = Ability.DIRE_CLAW
   regional = true
+  additional = true
   attackSprite = AttackSprite.POISON_MELEE
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
@@ -9192,6 +9203,7 @@ export class AlolanVulpix extends Pokemon {
   range = 2
   skill = Ability.AURORA_VEIL
   regional = true
+  additional = true
   attackSprite = AttackSprite.ICE_RANGE
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
@@ -9215,6 +9227,7 @@ export class AlolanNinetales extends Pokemon {
   range = 2
   skill = Ability.AURORA_VEIL
   regional = true
+  additional = true
   attackSprite = AttackSprite.ICE_RANGE
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
@@ -10259,6 +10272,7 @@ export class AlolanDiglett extends Pokemon {
   skill = Ability.DIG
   attackSprite = AttackSprite.ROCK_MELEE
   regional = true
+  additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -10281,6 +10295,7 @@ export class AlolanDugtrio extends Pokemon {
   skill = Ability.DIG
   attackSprite = AttackSprite.ROCK_MELEE
   regional = true
+  additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -10383,6 +10398,7 @@ export class HisuiZorua extends Pokemon {
   skill = Ability.ILLUSION
   attackSprite = AttackSprite.NORMAL_MELEE
   regional = true
+  additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -10406,6 +10422,7 @@ export class HisuiZoroark extends Pokemon {
   skill = Ability.ILLUSION
   attackSprite = AttackSprite.NORMAL_MELEE
   regional = true
+  additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -10473,6 +10490,7 @@ export class AlolanGrimer extends Pokemon {
   skill = Ability.SLUDGE
   attackSprite = AttackSprite.POISON_MELEE
   regional = true
+  additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -10499,6 +10517,7 @@ export class AlolanMuk extends Pokemon {
   skill = Ability.SLUDGE
   attackSprite = AttackSprite.POISON_MELEE
   regional = true
+  additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -11438,6 +11457,7 @@ export class AlolanExeggutor extends Pokemon {
   range = 1
   skill = Ability.EGGSPLOSION
   regional = true
+  additional = true
   attackSprite = AttackSprite.GRASS_MELEE
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
