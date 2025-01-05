@@ -2980,15 +2980,10 @@ export class DefenseCurlStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let buff = 3
-    if (pokemon.stars === 2) {
-      buff = 6
-    }
-    if (pokemon.stars === 3) {
-      buff = 12
-    }
+    const buff = [3, 6, 12][pokemon.stars - 1] ?? 12
     pokemon.addDefense(buff, pokemon, 1, crit)
     pokemon.addSpecialDefense(buff, pokemon, 1, crit)
+    pokemon.cooldown = 250
   }
 }
 
@@ -5086,7 +5081,7 @@ export class FireSpinStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     const cells = board.getAdjacentCells(
       target.positionX,
       target.positionY,

@@ -59,6 +59,16 @@
 - Nerf Galar Corsola: now has the same stats than regular Corsola
 - Nerf Cursola: HP 300 → 200
 - Adjusted Curse (Cursola): curse duration 8/4 → 8/5/3 seconds
+- Buff Turtonator: Def 7 → 12
+- Buff Minior: Attack 12 → 14
+- Buff Deerling: Attack 8 → 9
+- Buff Sawsbuck: Attack 14 → 24
+- Buff Type Null: Attack 14 → 16
+- Buff Silvally: Attack 18 → 20, Def/Spedef 5 → 6
+- Nerf Sobble line: PP 80 → 90
+- Reduce cooldown of Defense Curl (Bronzor, Registeel) to 250ms
+- Buff Fire Spin (Vulpix) : damage 20/40/80 → 25/50/100
+- Gorebyss is now Fossil/Water/Aquatic instead of Fossil/Water/Psychic
 - Change Future Sight (Gardevoir): damage is dealt after 2 seconds. PP 110 → 100
 - Chimchar is now available in Fire and Fighting regions
 
