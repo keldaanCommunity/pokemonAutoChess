@@ -1677,7 +1677,7 @@
     "DRAIN_PUNCH": " 다음 공격은 [100,SP]% 만큼의 추가 SPECIAL을 입히고, 부여한 피해의 200%만큼 HP를 회복한다.",
     "GRAVITY": "적팀을 [2,SP]초간 LOCKED상태로 만든다.",
     "FAKE_OUT": "대상에게 [50,100,150,SP] SPECIAL을 입히고, 자신은 AP를 30 잃는다. 시전자의 AP가 음수가 아니라면 대상은 3초 동안 FLINCH 에 빠진다.",
-    "FELL_STINGER": "대상에게 [20,40,70,SP]의 SPECIAL 를 입힌다. 대상을 기절시키면 영구적으로 ATK+1, AP +5%, HP+10 을 얻는다.",
+    "FELL_STINGER": "대상에게 [25,50,100,SP]의 SPECIAL 를 입힌다. 대상을 기절시키면 영구적으로 ATK+1, HP+10 을 얻는다.",
     "GULP_MISSILE": "PP가 가득찬 $t(pkm.ARROKUDA)를 대상에게 발사하며, 대상 및 인접한 모든 적에게 [55,SP] SPECIAL 를 가한다. $t(pkm.PIKACHU)가 대신 발사될 확률 [33,LK]%이 존재한다.",
     "SCHOOLING": "시전자 HP 의 [10,SP]% 를 SPECIAL 로 대상과 주변 적들에게 가한다. 대기석에 약어리가 있다면, 어군에 합류해 시전자에게 영구적으로 50의 추가 HP 를 부여한다.",
     "DOUBLE_SHOCK": "[50,100,200,SP] SPECIAL 를 가한다. 시전자는 3초 동안 PARALYSIS 된다.",
