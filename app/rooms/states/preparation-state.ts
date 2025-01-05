@@ -35,6 +35,7 @@ export default class PreparationState
   @type("boolean") noElo: boolean
   @type(["string"]) whitelist: string[]
   @type(["string"]) blacklist: string[]
+  abortOnPlayerLeave?: AbortController
 
   constructor(params: {
     ownerId?: string
