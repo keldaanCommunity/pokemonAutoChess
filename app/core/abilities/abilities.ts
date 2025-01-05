@@ -894,11 +894,7 @@ export class TimeTravelStrategy extends AbilityStrategy {
       }
     })
 
-    if (
-      pokemon.player &&
-      pokemon.player.canRegainLife &&
-      !pokemon.isGhostOpponent
-    ) {
+    if (pokemon.player && !pokemon.isGhostOpponent) {
       pokemon.player.life = max(100)(pokemon.player.life + 1)
     }
   }

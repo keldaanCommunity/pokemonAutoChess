@@ -2542,7 +2542,6 @@
     "GOTTA_CATCH_EM_ALL": "Temos que pegar !",
     "BUYER_FEVER": "Febre de compras",
     "TECHNOLOGIC": "Tecnológico",
-    "NINE_LIVES": "Nove Vidas",
     "CROWDED": "Tabuleiro Cheio",
     "KECLEONS_SHOP": "Loja do Kecleon"
   },
@@ -2552,8 +2551,6 @@
     "OMELETTE_COOK": "Consegue um Ovo Pokémon tras as rondas 1, 2 e 3",
     "GOTTA_CATCH_EM_ALL": "Alguns pokémon podem ser capturados antes de cada ronda PvE",
     "BUYER_FEVER": "A loja de evoluções é grátis",
-    "SIX_PACK": "Poderás usar um máximo de 6 espaços no seu tabuleiro, com indiferença do teu nível",
-    "NINE_LIVES": "Serás eliminado tras perder 9 rondas",
     "CROWDED": "+3 unidades máximas no tabuleiro"
   },
   "loading_hints": {

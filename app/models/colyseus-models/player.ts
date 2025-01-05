@@ -116,7 +116,6 @@ export default class Player extends Schema implements IPlayer {
   randomEggsGiven: Pkm[] = []
   lightX: number
   lightY: number
-  canRegainLife: boolean = true
   ghost: boolean = false
   firstPartner: Pkm | undefined
   hasLeftGame: boolean = false
@@ -153,13 +152,6 @@ export default class Player extends Schema implements IPlayer {
       this.loadingProgress = 100
       this.lightX = 3
       this.lightY = 2
-    }
-
-    if (state.specialGameRule === SpecialGameRule.NINE_LIVES) {
-      this.life = 9
-      this.canRegainLife = false
-    } else if (state.specialGameRule === SpecialGameRule.DESPERATE_MOVES) {
-      this.life = 150
     }
 
     if (state.specialGameRule === SpecialGameRule.DITTO_PARTY) {

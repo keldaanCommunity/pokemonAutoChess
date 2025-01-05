@@ -1100,8 +1100,6 @@ export default class GameRoom extends Room<GameState> {
     opponentTeam: MapSchema<IPokemonEntity>,
     stageLevel: number
   ) {
-    if (this.state.specialGameRule === SpecialGameRule.NINE_LIVES) return 1
-
     let damage = Math.ceil(stageLevel / 2)
     if (opponentTeam.size > 0) {
       opponentTeam.forEach((pokemon) => {
