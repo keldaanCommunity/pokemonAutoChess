@@ -1,6 +1,7 @@
 import { Dispatcher } from "@colyseus/command"
 import {
   Client,
+  IRoomListingData,
   Room,
   RoomListingData,
   matchMaker,
@@ -66,7 +67,7 @@ import LobbyState from "./states/lobby-state"
 export default class CustomLobbyRoom extends Room<LobbyState> {
   bots: Map<string, IBot> = new Map<string, IBot>()
   unsubscribeLobby: (() => void) | undefined
-  rooms: RoomListingData<any>[] | undefined
+  rooms: IRoomListingData[] | undefined
   dispatcher: Dispatcher<this>
   tournamentCronJobs: Map<string, CronJob> = new Map<string, CronJob>()
   cleanUpCronJobs: CronJob[] = []
@@ -88,7 +89,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     }
   }
 
-  addRoom(roomId: string, data: RoomListingData<any>) {
+  addRoom(roomId: string, data: IRoomListingData) {
     // append room listing data
     this.rooms?.push(data)
 
@@ -97,7 +98,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     })
   }
 
-  changeRoom(index: number, roomId: string, data: RoomListingData<any>) {
+  changeRoom(index: number, roomId: string, data: IRoomListingData) {
     if (this.rooms) {
       const previousData = this.rooms[index]
 
