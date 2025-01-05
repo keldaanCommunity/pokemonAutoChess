@@ -2963,6 +2963,10 @@ export function displayAbility(
       addAbilitySprite(Ability.NIGHT_SLASH, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.WONDER_ROOM:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(4)
+      break
+
     case Ability.DOUBLE_IRON_BASH:
       addAbilitySprite(Ability.DRAIN_PUNCH, coordinatesTarget, true).setScale(2)
       break

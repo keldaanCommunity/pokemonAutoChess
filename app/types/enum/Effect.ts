@@ -140,7 +140,8 @@ export enum Effect {
   LIGHTNING_STRIKE = "LIGHTNING_STRIKE",
   VICTINI_PASSIVE = "VICTINI_PASSIVE",
   GOOD_LUCK = "GOOD_LUCK",
-  BAD_LUCK = "BAD_LUCK"
+  BAD_LUCK = "BAD_LUCK",
+  WONDER_ROOM = "WONDER_ROOM"
 }
 
 export const BoardEffects = [

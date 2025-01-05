@@ -377,6 +377,7 @@ export interface IPlayer {
   totalPlayerDamageDealt: number
   wildChance: number
   eggChance: number
+  goldenEggChance: number
   lightX: number
   lightY: number
 }

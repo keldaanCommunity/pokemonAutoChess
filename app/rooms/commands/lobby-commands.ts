@@ -20,6 +20,7 @@ import UserMetadata, {
   IUserMetadata
 } from "../../models/mongo-models/user-metadata"
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../models/precomputed/precomputed-emotions"
+import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
 import {
   addBotToDatabase,
@@ -44,13 +45,14 @@ import {
   DUST_PER_BOOSTER,
   DUST_PER_SHINY,
   MAX_PLAYERS_PER_GAME,
-  getEmotionCost
+  getEmotionCost,
+  BoosterPriceByRarity
 } from "../../types/Config"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import { EloRank } from "../../types/enum/EloRank"
 import { GameMode, Rarity } from "../../types/enum/Game"
 import { Language } from "../../types/enum/Language"
-import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
+import { Pkm, PkmByIndex, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { StarterAvatars } from "../../types/enum/Starters"
 import { ITournamentPlayer } from "../../types/interfaces/Tournament"
 import { sum } from "../../utils/array"
@@ -662,18 +664,23 @@ export class BuyBoosterCommand extends Command<
   async execute({ client, index }: { client: Client; index: string }) {
     try {
       const user = this.room.users.get(client.auth.uid)
-      const BOOSTER_COST = 500
       if (!user) return
 
+      const pkm = PkmByIndex[index]
+      if(!pkm) return
+      
+      const rarity = getPokemonData(pkm).rarity      
+      const boosterCost = BoosterPriceByRarity[rarity]
+      
       const mongoUser = await UserMetadata.findOneAndUpdate(
         {
           uid: client.auth.uid,
-          [`pokemonCollection.${index}.dust`]: { $gte: BOOSTER_COST }
+          [`pokemonCollection.${index}.dust`]: { $gte: boosterCost }
         },
         {
           $inc: {
             booster: 1,
-            [`pokemonCollection.${index}.dust`]: -BOOSTER_COST
+            [`pokemonCollection.${index}.dust`]: -boosterCost
           }
         },
         { new: true }
