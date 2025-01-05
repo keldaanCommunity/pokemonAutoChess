@@ -1,4 +1,4 @@
-> Dec 1, 2024
+> Jan 5, 2025
 
 # Patch 5.9: New talents
 
