@@ -2703,7 +2703,7 @@
   "sort_by_shards": "Nach Scherben sortieren",
   "normal_emotions": "Normale Emotionen",
   "shiny_emotions": "Schillernde Emotionen",
-  "buy_booster_500": "Kaufe einen neuen Booster für 500",
+  "buy_booster": "Kaufe einen neuen Booster für {{cost}}",
   "choose_as_avatar": "Wähle einen Spieler Avatar aus",
   "close": "Schließen",
   "additional_pokemon_hint": "Jeder Spieler wählte zusätzliche Pokémon aus, die im All-Player-Shop für dieses Spiel verfügbar sein sollten.",

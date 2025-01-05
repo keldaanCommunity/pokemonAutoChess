@@ -2282,7 +2282,7 @@
   "sort_by_shards": "Filtrar por fragmentos",
   "normal_emotions": "Emoções normais",
   "shiny_emotions": "Emoções Brilhantes",
-  "buy_booster_500": "Compre um novo booster por 500",
+  "buy_booster": "Compre um novo booster por {{cost}}",
   "close": "Fechar",
   "additional_pokemon_hint": "Cada jogador escolheu Pokémon adicionais para estarem disponíveis na loja de todos os jogadores para este jogo.",
   "damage_dealt": "Dano Causado",

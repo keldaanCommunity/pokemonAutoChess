@@ -2911,7 +2911,7 @@
   "sort_by_shards": "按碎片排序",
   "normal_emotions": "普通表情",
   "shiny_emotions": "闪光表情",
-  "buy_booster_500": "花费500碎片购买新的补充包",
+  "buy_booster": "花费{{cost}}碎片购买新的补充包",
   "choose_as_avatar": "选定为玩家形象",
   "close": "关闭",
   "additional_pokemon_hint": "每个玩家所选的附加宝可梦在本局中能被所有玩家在商店中刷出。",

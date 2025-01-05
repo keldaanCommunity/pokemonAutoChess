@@ -2772,7 +2772,7 @@
   "sort_by_shards": "Tri par éclats",
   "normal_emotions": "Emotes normales",
   "shiny_emotions": "Emotes shiny",
-  "buy_booster_500": "Achetez un nouveau booster pour 500",
+  "buy_booster": "Achetez un nouveau booster pour {{cost}}",
   "choose_as_avatar": "Choisir comme avatar de joueur",
   "close": "Fermer",
   "additional_pokemon_hint": "Chaque joueur choisit des Pokémon supplémentaires qui seront disponibles dans le magasin de tous les joueurs pour ce jeu.",

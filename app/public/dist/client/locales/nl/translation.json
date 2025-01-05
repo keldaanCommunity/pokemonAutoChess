@@ -1858,7 +1858,7 @@
   "show_unlocked": "Toon ontgrendeld",
   "normal_emotions": "Normale emoties",
   "shiny_emotions": "Glanzende emoties",
-  "buy_booster_500": "Koop een nieuwe booster voor 500",
+  "buy_booster": "Koop een nieuwe booster voor {{cost}}",
   "close": "Dichtbij",
   "additional_pokemon_hint": "Elke speler koos extra Pokemon om beschikbaar te zijn in de winkel van alle spelers voor dit spel.",
   "damage_dealt": "Schade aangericht",
