@@ -1,7 +1,7 @@
 import { Schema, type } from "@colyseus/schema"
 import Board from "../../core/board"
 import { PokemonEntity } from "../../core/pokemon-entity"
-import { IPokemonEntity, IStatus, Transfer } from "../../types"
+import { IPokemonEntity, ISimulation, IStatus, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { Effect } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
@@ -11,6 +11,7 @@ import { Weather } from "../../types/enum/Weather"
 import { count } from "../../utils/array"
 import { max, min } from "../../utils/number"
 import { chance } from "../../utils/random"
+import { StageDuration } from "../../types/Config"
 
 export default class Status extends Schema implements IStatus {
   @type("boolean") burn = false
@@ -97,6 +98,12 @@ export default class Status extends Schema implements IStatus {
   stoneEdge = false
   stoneEdgeCooldown = 0
   bideCooldown = 0
+
+  constructor(simulation: ISimulation) {
+    super()
+    const elapsedTime = (StageDuration[1] * 1000) - simulation.room.state.time
+    this.enrageDelay = this.enrageDelay - elapsedTime
+  }
 
   clearNegativeStatus() {
     this.burnCooldown = 0

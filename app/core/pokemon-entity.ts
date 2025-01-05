@@ -139,7 +139,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     pokemon.items.forEach((it) => {
       this.items.add(it)
     })
-    this.status = new Status()
+    this.status = new Status(simulation)
     this.count = new Count()
     this.simulation = simulation
 
