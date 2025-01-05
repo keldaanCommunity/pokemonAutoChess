@@ -59,6 +59,7 @@
 - Nerf Galar Corsola: now has the same stats than regular Corsola
 - Nerf Cursola: HP 300 → 200
 - Adjusted Curse (Cursola): curse duration 8/4 → 8/5/3 seconds
+- Chimchar is now available in Fire and Fighting regions
 
 # Changes to Synergies
 
