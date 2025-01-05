@@ -724,19 +724,11 @@ export class OnRefreshCommand extends Command<GameRoom, string> {
     const player = this.state.players.get(id)
     if (!player) return
     const rollCost = player.shopFreeRolls > 0 ? 0 : 1
-
-    const rollCostType =
-      this.state.specialGameRule === SpecialGameRule.DESPERATE_MOVES
-        ? "life"
-        : "money"
-    const canRoll =
-      rollCostType === "life"
-        ? (player?.life ?? 0) >= rollCost + 1
-        : (player?.money ?? 0) >= rollCost
+    const canRoll = (player?.money ?? 0) >= rollCost
 
     if (canRoll && player.alive) {
       player.rerollCount++
-      player[rollCostType] -= rollCost
+      player.money -= rollCost
       this.state.shop.assignShop(player, true, this.state)
       if (player.shopFreeRolls > 0) player.shopFreeRolls--
     }
@@ -1085,12 +1077,14 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     })
   }
 
-  computeIncome(isPVE: boolean) {
+  computeIncome(isPVE: boolean, specialGameRule: SpecialGameRule) {
     this.state.players.forEach((player) => {
       let income = 0
       if (player.alive && !player.isBot) {
-        player.interest = Math.min(Math.floor(player.money / 10), 5)
-        income += player.interest
+        if (specialGameRule !== SpecialGameRule.BLOOD_MONEY) {
+          player.interest = Math.min(Math.floor(player.money / 10), 5)
+          income += player.interest
+        }
         if (!isPVE) {
           income += max(5)(player.streak)
         }
@@ -1301,7 +1295,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
     if (!isGameFinished) {
       this.state.stageLevel += 1
-      this.computeIncome(isPVE)
+      this.computeIncome(isPVE, this.state.specialGameRule)
       this.state.players.forEach((player: Player) => {
         if (player.alive) {
           // Fake bots XP bar
@@ -1553,9 +1547,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     let goldenEggFound = false
 
     if (hasLostLastBattle && hasBabyActive) {
-      const EGG_CHANCE = 0.1
+      const EGG_CHANCE = 0.08
       const GOLDEN_EGG_CHANCE = 0.04
       const playerEggChanceStacked = player.eggChance
+      const playerGoldenEggChanceStacked = player.goldenEggChance
       const babies = values(player.board).filter(
         (p) => !isOnBench(p) && p.types.has(Synergy.BABY)
       )
@@ -1572,7 +1567,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           nbEggsFound++
         }
         if (player.effects.has(Effect.GOLDEN_EGGS) && !goldenEggFound) {
-          player.eggChance += GOLDEN_EGG_CHANCE * (1 + baby.luck / 100)
+          player.goldenEggChance += GOLDEN_EGG_CHANCE * (1 + baby.luck / 100)
         } else if (player.effects.has(Effect.HATCHER) && nbEggsFound === 0) {
           player.eggChance += EGG_CHANCE * (1 + baby.luck / 100)
         }
@@ -1591,12 +1586,14 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         goldenEggFound === false &&
         player.effects.has(Effect.GOLDEN_EGGS) &&
         nbOfGoldenEggsOnBench === 0 &&
-        chance(playerEggChanceStacked)
+        chance(playerGoldenEggChanceStacked)
       ) {
         goldenEggFound = true
       }
     } else if (!isPVE) {
-      player.eggChance = 0 // winning a PvP fight resets the stacked egg chance
+      // winning a PvP fight resets the stacked egg chance
+      player.eggChance = 0
+      player.goldenEggChance = 0
     }
 
     if (
@@ -1615,11 +1612,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       egg.positionX = x !== undefined ? x : -1
       egg.positionY = 0
       player.board.set(egg.id, egg)
-      if (
-        player.effects.has(Effect.HATCHER) ||
-        (player.effects.has(Effect.GOLDEN_EGGS) && isGoldenEgg)
-      ) {
+      if (player.effects.has(Effect.HATCHER)) {
         player.eggChance = 0 // getting an egg resets the stacked egg chance
+      }
+      if (player.effects.has(Effect.GOLDEN_EGGS) && isGoldenEgg) {
+        player.goldenEggChance = 0 // getting a golden egg resets the stacked egg chance
       }
     }
   }
