@@ -2906,7 +2906,7 @@
   "sort_by_shards": "파편의 갯수로 정렬",
   "normal_emotions": "기본 감정표현",
   "shiny_emotions": "이로치 감정표현",
-  "buy_booster_500": "파편 500개로 새로운 부스터팩 구매",
+  "buy_booster": "파편 {{cost}}개로 새로운 부스터팩 구매",
   "choose_as_avatar": "플레이어 아바타로 선택",
   "close": "닫기",
   "additional_pokemon_hint": "라운드중 사람들이 고른 선택풀 포켓몬들은 남은 게임동안 상점에서도 판매됩니다.",

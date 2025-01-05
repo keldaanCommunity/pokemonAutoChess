@@ -110,3 +110,5 @@
 - Light effects are no longer erroneously applied to spawns and resurrected pokemon.
 
 # Misc
+
+- The price of boosters bought with shards now depends on the rarity of the shards: Common 600 shards, Uncommon 1000 shards, Rare 1000 shards, Epic 900 shards, Ultra 300 shards, Unique 500 shards, Legendary 250 shards, Hatch 300 shards, Special 500 shards

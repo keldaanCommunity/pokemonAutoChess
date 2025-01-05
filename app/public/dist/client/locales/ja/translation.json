@@ -2212,7 +2212,7 @@
   "show_unlocked": "ロック解除された状態を表示",
   "normal_emotions": "通常の感情",
   "shiny_emotions": "輝く感情",
-  "buy_booster_500": "新しいブースターを500で購入する",
+  "buy_booster": "新しいブースターを{{cost}}で購入する",
   "close": "近い",
   "additional_pokemon_hint": "各プレイヤーは、このゲームのすべてのプレイヤーのショップで入手できる追加のポケモンを 3 匹選びました。",
   "damage_dealt": "与えたダメージ",

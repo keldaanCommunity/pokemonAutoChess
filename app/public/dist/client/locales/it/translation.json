@@ -2810,7 +2810,7 @@
   "sort_by_shards": "Ordina per frammenti",
   "normal_emotions": "Emote normali",
   "shiny_emotions": "Emote Shiny",
-  "buy_booster_500": "Acquista un nuovo booster per 500",
+  "buy_booster": "Acquista un nuovo booster per {{cost}}",
   "choose_as_avatar": "Sceglilo come avatar",
   "close": "Chiudi",
   "additional_pokemon_hint": "Ogni giocatore ha scelto Pokèmon aggiuntivi da rendere disponibili nel negozio di tutti i giocatori per questa partita.",
