@@ -1077,7 +1077,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     })
   }
 
-  computeIncome(isPVE: boolean, specialGameRule: SpecialGameRule) {
+  computeIncome(isPVE: boolean, specialGameRule: SpecialGameRule | null) {
     this.state.players.forEach((player) => {
       let income = 0
       if (player.alive && !player.isBot) {
