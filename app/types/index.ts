@@ -377,6 +377,7 @@ export interface IPlayer {
   totalPlayerDamageDealt: number
   wildChance: number
   eggChance: number
+  goldenEggChance: number
   lightX: number
   lightY: number
 }
@@ -647,12 +648,10 @@ export interface IStatus {
 export interface ICount {
   crit: number
   ult: number
-  petalDanceCount: number
   fieldCount: number
   soundCount: number
   fairyCritCount: number
   attackCount: number
-  growGroundCount: number
   fightingBlockCount: number
   dodgeCount: number
   powerLensCount: number
@@ -660,16 +659,10 @@ export interface ICount {
   tripleAttackCount: number
   staticHolderCount: number
   defensiveRibbonCount: number
-  earthquakeCount: number
-  mindBlownCount: number
   spellBlockedCount: number
   manaBurnCount: number
   moneyCount: number
-  futureSightCount: number
-  healOrderCount: number
-  attackOrderCount: number
   magmarizerCount: number
-  echo: number
 }
 
 export interface IPreparationMetadata {

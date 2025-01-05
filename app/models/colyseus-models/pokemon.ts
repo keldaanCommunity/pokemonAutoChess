@@ -1095,7 +1095,7 @@ export class Ralts extends Pokemon {
   atk = 5
   def = 2
   speDef = 4
-  maxPP = 110
+  maxPP = 100
   range = 3
   skill = Ability.FUTURE_SIGHT
   attackSprite = AttackSprite.PSYCHIC_RANGE
@@ -1114,7 +1114,7 @@ export class Kirlia extends Pokemon {
   atk = 13
   def = 3
   speDef = 5
-  maxPP = 110
+  maxPP = 100
   range = 3
   skill = Ability.FUTURE_SIGHT
   attackSprite = AttackSprite.PSYCHIC_RANGE
@@ -1132,7 +1132,7 @@ export class Gardevoir extends Pokemon {
   atk = 28
   def = 4
   speDef = 8
-  maxPP = 110
+  maxPP = 100
   range = 3
   skill = Ability.FUTURE_SIGHT
   attackSprite = AttackSprite.PSYCHIC_RANGE
@@ -3531,10 +3531,6 @@ export class Chimchar extends Pokemon {
   skill = Ability.TORMENT
   attackSprite = AttackSprite.FIRE_MELEE
   regional = true
-  isInRegion(map: DungeonPMDO, state: GameState) {
-    const regionSynergies = DungeonDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.HUMAN)
-  }
 }
 
 export class Monferno extends Pokemon {
@@ -3555,10 +3551,6 @@ export class Monferno extends Pokemon {
   skill = Ability.TORMENT
   attackSprite = AttackSprite.FIRE_MELEE
   regional = true
-  isInRegion(map: DungeonPMDO, state: GameState) {
-    const regionSynergies = DungeonDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.HUMAN)
-  }
 }
 
 export class Infernape extends Pokemon {
@@ -3578,10 +3570,6 @@ export class Infernape extends Pokemon {
   skill = Ability.TORMENT
   attackSprite = AttackSprite.FIRE_MELEE
   regional = true
-  isInRegion(map: DungeonPMDO, state: GameState) {
-    const regionSynergies = DungeonDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.HUMAN)
-  }
 }
 
 export class Mudkip extends Pokemon {
@@ -15691,6 +15679,45 @@ export class PillarConcrete extends Pokemon {
   }
 }
 
+export class Elgyem extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.MONSTER,
+    Synergy.LIGHT
+  ])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.BEHEEYEM
+  hp = 70
+  atk = 7
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 2
+  skill = Ability.WONDER_ROOM
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+  additional = true
+}
+
+export class Beheeyem extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.MONSTER,
+    Synergy.LIGHT
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 150
+  atk = 17
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 2
+  skill = Ability.WONDER_ROOM
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -16578,5 +16605,7 @@ export const PokemonClasses: Record<
   [Pkm.CONKELDURR]: Conkeldurr,
   [Pkm.PILLAR_WOOD]: PillarWood,
   [Pkm.PILLAR_IRON]: PillarIron,
-  [Pkm.PILLAR_CONCRETE]: PillarConcrete
+  [Pkm.PILLAR_CONCRETE]: PillarConcrete,
+  [Pkm.ELGYEM]: Elgyem,
+  [Pkm.BEHEEYEM]: Beheeyem
 }

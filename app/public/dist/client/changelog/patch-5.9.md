@@ -13,12 +13,14 @@
 - Timburr
 - Gurdurr
 - Conkeldurr
+- Elgyem
+- Beheeyem
 
 # Changes to Pokemon & Abilities
 
 - Nerf Kecleon: PP 80 → 100
 - Changed Shadow Clone (Shuppet): instead of taking an item from original Shuppet, steal a random item from the current target ; the clone spawns on the ~~farthest~~ closest available tile from the target
-- Changed Nightmare (Gastly): Silence duration 1.5/3/6 → 1.5/2.5/5 seconds; All Pokémon suffering from ~~Flinch/Silence/Sleep~~ a Ghost curse take 40/80/150 special damage
+- Changed Nightmare (Gastly): ~~Silence 1.5/3/6 seconds~~ Fatigue 3/5/7 seconds; All Pokémon suffering from ~~Flinch/Silence/Sleep~~ a Ghost curse take 40/80/150 special damage
 - Alolan Marowak is now tier 2 ; adjusted stats to match Marowak's stats ; new ability: Shadow Bone
 - Change Bonemerang (Marowak): ~~deal 30/60/90 special damage~~ deal 2 times 15/30/60 special damage
 - Rework Maractus: now Grass/Sound/Flora, removed passive, PP 85 → 90
@@ -67,6 +69,8 @@
 - Reduce cooldown of Defense Curl (Bronzor, Registeel) to 250ms
 - Buff Fire Spin (Vulpix) : damage 20/40/80 → 25/50/100
 - Gorebyss is now Fossil/Water/Aquatic instead of Fossil/Water/Psychic
+- Change Future Sight (Gardevoir): damage is dealt after 2 seconds. PP 110 → 100
+- Chimchar is now available in Fire and Fighting regions
 
 # Changes to Synergies
 
@@ -75,6 +79,8 @@
 - Buff Electric 9: Triple attacks deal ~~10~~ 20 special damage to adjacent enemies
 - Nerf Ghost 2: def/spedef debuff 5 → 2
 - Nerf Ghost 4: atk debuff 30 → 25%
+- Baby egg chance and golden egg chance are now split into 2 separate values
+- Nerf Baby 3: baby egg chance 10% → 8% ; egg hatch time 3 → 5 rounds
 
 # Changes to Items
 
@@ -92,7 +98,7 @@
 # Gameplay
 
 - New status: Blinded: reduce accuracy of basic attacks by 50%. Replace the existing Smoke effect that was not considered a status.
-- New rank system: 12 different ranks, each with a different icon (by @joinity). Beast ball and Master ball players will create ranked games with Ultra ball.
+- New rank system: 12 different ranks, each with a different icon (by @joinity).
   - Level ball: 0 ELO
   - Net ball: 1050 ELO
   - Safari ball: 1100 ELO
@@ -104,6 +110,11 @@
   - Ultra ball: 1400 ELO
   - Master ball: 1500 ELO
   - Beast ball: 1700 ELO
+- Ranked matches are created for these groups:
+  - Level ball - Net ball: < 1100 ELO
+  - Safari ball - Premier ball: 1100 - 1249 ELO
+  - Quick ball - Superball: 1250 - 1399 ELO
+  - Ultraball - Beast ball:  >1400 ELO
 - ELO, XP and titles after game are now distributed immediately after the player is eliminated and leaves the game, instead of waiting for the game to end
 - PvE rounds no longer give additional income based on victory/defeat streaks
 - Due to an increase of cases of intentional leaves at the start of a game, we have to increase the penalties for early disconnections. Intentional disconnections before stage 6 are no longer protected against Elo loss. Unintentional disconnections without reconnection within the next 3 minutes before stage 6 remain protected against Elo loss, but players won't be able to join a new game within the next 5 minutes.
@@ -112,11 +123,17 @@
 # UI
 
 - Added item components recipe on craftable items tooltip
+- New stat boosts animations
 
 # Bugfix
 
 - Pokemon with passives that apply persistent effects now apply properly to spawns and resurrected pokemon.
 - Weather effects now apply properly to spawns and resurrected pokemon.
-- Light effects are no longer erroneously applied to spawns and resurrected pokemon.
+- Light effects are no longer erroneously applied to spawns and resurrected pokemon.+
+- Fix Flamethrower damage & burn effect not working properly
 
 # Misc
+
+- Removed scribbles "Nine Lives", "Six Pack" and "Desperate Moves"
+- 1 new scribble
+- The price of boosters bought with shards now depends on the rarity of the shards: Common 600 shards, Uncommon 1000 shards, Rare 1000 shards, Epic 900 shards, Ultra 300 shards, Unique 500 shards, Legendary 250 shards, Hatch 300 shards, Special 500 shards

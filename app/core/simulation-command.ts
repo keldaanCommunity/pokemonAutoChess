@@ -1,6 +1,7 @@
 import { ISimulationCommand, Transfer } from "../types"
 import { Effect } from "../types/enum/Effect"
 import { AttackType } from "../types/enum/Game"
+import { Pkm } from "../types/enum/Pokemon"
 import Board from "./board"
 import { PokemonEntity } from "./pokemon-entity"
 
@@ -97,6 +98,14 @@ export class AttackCommand extends SimulationCommand {
                 }
               }
             })
+        }
+
+        if (this.pokemon.name === Pkm.MORPEKO) {
+          this.target.status.triggerParalysis(2000, this.target, this.pokemon)
+        }
+        
+        if (this.pokemon.name === Pkm.MORPEKO_HANGRY) {
+          this.target.status.triggerWound(4000, this.target, this.pokemon)
         }
       }
     }
