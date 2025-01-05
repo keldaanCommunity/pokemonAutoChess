@@ -88,6 +88,16 @@
 .game-pokemon-portrait-planned-icon {
   width: 1.4vw;
   height: 1.4vw;
+  animation: rotateY 1s linear infinite;
+}
+
+@keyframes rotateY {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
 }
 
 .game-pokemon-portrait-duo-part {

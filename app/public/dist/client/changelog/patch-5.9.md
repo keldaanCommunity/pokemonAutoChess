@@ -155,6 +155,7 @@
 
 - Added item components recipe on craftable items tooltip
 - New stat boosts animations
+- Team planner indicator in shop is now animated to be more visible
 
 # Bugfix
 
