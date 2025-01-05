@@ -1629,6 +1629,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.passive === Passive.GRIM_NEIGH) {
       this.addAbilityPower(30, this, 0, false)
     }
+
+    if (
+      this.player &&
+      this.simulation.room.state.specialGameRule === SpecialGameRule.BLOOD_MONEY
+    ) {
+      this.player.addMoney(1, true, this)
+      this.count.moneyCount += 1
+    }
   }
 
   // called after death (does not proc if resurection)
