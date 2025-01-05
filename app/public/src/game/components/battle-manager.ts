@@ -404,21 +404,7 @@ export default class BattleManager {
             this.flip
           )
         }
-      } else if (field === "growGroundCount") {
-        if (value != 0) {
-          displayAbility(
-            this.scene,
-            [],
-            "GROUND_GROW",
-            pkm.orientation,
-            pkm.positionX,
-            pkm.positionY,
-            pkm.targetX ?? -1,
-            pkm.targetY ?? -1,
-            this.flip
-          )
-        }
-      } else if (field === "fightingBlockCount") {
+      } else if (field == "fightingBlockCount") {
         if (value > 0 && value % 10 === 0) {
           displayAbility(
             this.scene,
