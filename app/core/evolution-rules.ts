@@ -149,10 +149,6 @@ export class CountEvolutionRule extends EvolutionRule {
 
     carryOverPermanentStats(pokemonEvolved, pokemonsBeforeEvolution)
 
-    if (pokemon.onEvolve) {
-      pokemon.onEvolve({ pokemonEvolved, pokemonsBeforeEvolution, player })
-    }
-
     shuffleArray(itemsToAdd)
     for (const item of itemsToAdd) {
       if (pokemonEvolved.items.has(item) || pokemonEvolved.items.size >= 3) {
@@ -184,6 +180,10 @@ export class CountEvolutionRule extends EvolutionRule {
       player.board.set(pokemonEvolved.id, pokemonEvolved)
     } else {
       logger.error("no coordinate found for new evolution")
+    }
+
+    if (pokemon.afterEvolve) {
+      pokemon.afterEvolve({ pokemonEvolved, pokemonsBeforeEvolution, player })
     }
 
     return pokemonEvolved

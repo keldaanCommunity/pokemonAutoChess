@@ -1,9 +1,16 @@
 import { Geom } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { AttackSprite } from "../../../../types"
+import { AnimationType } from "../../../../types/Animation"
 import { BOARD_HEIGHT } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
-import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
+import {
+  Orientation,
+  PokemonActionState,
+  PokemonTint,
+  SpriteType
+} from "../../../../types/enum/Game"
+import { Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
 import { distanceE, distanceM } from "../../../../utils/distance"
 import {
   OrientationArray,
@@ -1992,6 +1999,7 @@ export function displayAbility(
 
     case Ability.MIND_BLOWN:
       addAbilitySprite(skill, coordinates, true).setOrigin(0.5, 0.8).setScale(2)
+      addAbilitySprite("MIND_BLOWN/hit", coordinatesTarget, true).setScale(3)
       break
 
     case Ability.FIRE_LASH:
@@ -2000,10 +2008,6 @@ export function displayAbility(
 
     case Ability.DRAIN_PUNCH:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
-      break
-
-    case "MIND_BLOWN/hit":
-      addAbilitySprite("MIND_BLOWN/hit", coordinates, true).setScale(3)
       break
 
     case Ability.SOFT_BOILED:
@@ -2413,22 +2417,6 @@ export function displayAbility(
       addAbilitySprite("FLAME_HIT", coordinates, true).setDepth(1).setScale(2)
       break
 
-    case "TORCH_SONG_CAST": {
-      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(2)
-      scene.tweens.add({
-        targets: specialProjectile,
-        x: coordinatesTarget[0],
-        y: coordinatesTarget[1],
-        ease: "Linear",
-        yoyo: true,
-        duration: 300,
-        onComplete: () => {
-          specialProjectile.destroy()
-        }
-      })
-      break
-    }
-
     case Ability.TORCH_SONG:
       addAbilitySprite(Ability.TORCH_SONG, coordinates, true).setScale(2)
       break
@@ -2765,7 +2753,7 @@ export function displayAbility(
 
     case Ability.INFESTATION:
       {
-        if (positionX !== undefined && positionY !== undefined) {
+        if (positionY === 8 || positionY === 0) {
           const duration =
             distanceM(positionX, positionY, targetX, targetY) * 150
           const projectile = addAbilitySprite(
@@ -2975,6 +2963,10 @@ export function displayAbility(
       addAbilitySprite(Ability.NIGHT_SLASH, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.WONDER_ROOM:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(4)
+      break
+
     case Ability.DOUBLE_IRON_BASH:
       addAbilitySprite(Ability.DRAIN_PUNCH, coordinatesTarget, true).setScale(2)
       break
@@ -3104,6 +3096,34 @@ export function displayAbility(
         y: coordinatesTarget[1],
         ease: "linear",
         duration: 600,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
+    case Ability.COLUMN_CRUSH: {
+      const distance = distanceE(
+        coordinates[0],
+        coordinates[1],
+        coordinatesTarget[0],
+        coordinatesTarget[1]
+      )
+      const pillarType =
+        [Pkm.PILLAR_WOOD, Pkm.PILLAR_IRON, Pkm.PILLAR_CONCRETE][orientation] ??
+        Pkm.PILLAR_WOOD
+      const animKey = `${PkmIndex[pillarType]}/${PokemonTint.NORMAL}/${AnimationType.Idle}/${SpriteType.ANIM}/${Orientation.DOWN}`
+      const specialProjectile = addAbilitySprite(animKey, coordinates).setScale(
+        2
+      )
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        angle: 270,
+        ease: "linear",
+        duration: distance * 2,
         onComplete: () => {
           specialProjectile.destroy()
         }

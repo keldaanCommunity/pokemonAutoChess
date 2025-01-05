@@ -50,7 +50,7 @@ import { PokemonEntity, getStrongestUnit, getUnitScore } from "./pokemon-entity"
 import { DelayedCommand } from "./simulation-command"
 import { getAvatarString } from "../utils/avatar"
 import { max } from "../utils/number"
-import { OnItemGainedEffect } from "./effect"
+import { OnItemGainedEffect, GrowGroundEffect } from "./effect"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -1142,6 +1142,7 @@ export default class Simulation extends Schema implements ISimulation {
       case Effect.DEEP_MINER:
         if (types.has(Synergy.GROUND)) {
           pokemon.effects.add(effect)
+          pokemon.effectsSet.add(new GrowGroundEffect(effect))
         }
         break
 
@@ -1242,7 +1243,7 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.addDefense(0.5 * pokemon.baseDef, pokemon, 0, false)
           pokemon.addSpecialDefense(0.5 * pokemon.baseSpeDef, pokemon, 0, false)
           pokemon.addShield(100, pokemon, 0, false)
-          pokemon.status.resurection = true
+          pokemon.status.addResurrection(pokemon)
         }
         break
 
@@ -1327,9 +1328,8 @@ export default class Simulation extends Schema implements ISimulation {
       }
 
       case Effect.SMOG: {
-        const opponentPlayer = pokemon.team === Team.BLUE_TEAM
-          ? this.redPlayer
-          : this.bluePlayer
+        const opponentPlayer =
+          pokemon.team === Team.BLUE_TEAM ? this.redPlayer : this.bluePlayer
         const nbSmellyClays = opponentPlayer
           ? count(opponentPlayer.items, Item.SMELLY_CLAY)
           : 0
@@ -1502,7 +1502,9 @@ export default class Simulation extends Schema implements ISimulation {
     if (winningTeam) {
       winningTeam.forEach((p) => {
         p.status.clearNegativeStatus()
-        p.action = PokemonActionState.HOP
+        if (!p.status.tree) {
+          p.action = PokemonActionState.HOP
+        }
       })
     }
 

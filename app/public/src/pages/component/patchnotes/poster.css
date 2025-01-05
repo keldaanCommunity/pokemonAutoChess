@@ -12,6 +12,14 @@
   height: 100%;
 }
 
+.poster:hover {
+  transform: scale(1.05);
+}
+
+.poster:hover .front {
+  box-shadow: 0 0 2vw white;
+}
+
 .poster.flipped {
   animation: 500ms ease-in-out flipCard;
   animation-fill-mode: forwards;

@@ -1050,6 +1050,11 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
+  addResurrection(pokemon: PokemonEntity) {
+    if (pokemon.passive === Passive.INANIMATE) return // Inanimate objects cannot be resurrected
+    this.resurection = true
+  }
+
   triggerResurection(pokemon: PokemonEntity) {
     this.resurection = false
     this.resurecting = true
@@ -1101,7 +1106,8 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerPokerus() {
+  triggerPokerus(pokemon: PokemonEntity) {
+    if ((pokemon.passive = Passive.INANIMATE)) return // Inanimate objects cannot get Pokerus
     if (!this.pokerus) {
       this.pokerus = true
     }
@@ -1123,7 +1129,7 @@ export default class Status extends Schema implements IStatus {
             cell.value.team === pokemon.team &&
             cell.value.status.pokerus === false
           ) {
-            cell.value.status.triggerPokerus()
+            cell.value.status.triggerPokerus(cell.value)
             infectCount++
           }
         }
