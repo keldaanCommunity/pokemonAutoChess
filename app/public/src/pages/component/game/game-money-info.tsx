@@ -2,6 +2,7 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { BattleResult } from "../../../../../types/enum/Game"
+import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { max } from "../../../../../utils/number"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { addIconsToDescription } from "../../utils/descriptions"
@@ -25,6 +26,7 @@ export function GameMoneyInfo() {
 export function GameMoneyDetail() {
   const { t } = useTranslation()
   const streak = useAppSelector((state) => state.game.streak)
+  const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
   const currentPlayer = useAppSelector(selectCurrentPlayer)
   const lastPlayerBattle =
     currentPlayer && currentPlayer.history && currentPlayer.history.length > 0
@@ -49,12 +51,14 @@ export function GameMoneyDetail() {
         {lastBattleResult !== null && `(${streakLabel})`}
       </p>
       <p className="help">{addIconsToDescription(t("victory_income_hint"))}</p>
-      <p style={{ marginTop: "0.5em" }}>
-        <Money value={`${t("interest")}: +${interest}`} />
-      </p>
-      <p className="help">
-        {addIconsToDescription(t("additional_income_hint"))}
-      </p>
+      {specialGameRule !== SpecialGameRule.BLOOD_MONEY && <>
+        <p style={{ marginTop: "0.5em" }}>
+          <Money value={`${t("interest")}: +${interest}`} />
+        </p>
+        <p className="help">
+          {addIconsToDescription(t("additional_income_hint"))}
+        </p>
+      </>}
     </div>
   )
 }

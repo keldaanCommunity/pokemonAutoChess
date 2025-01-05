@@ -192,17 +192,12 @@ class GameContainer {
       "crit",
       "dodgeCount",
       "ult",
-      "petalDanceCount",
-      "futureSightCount",
-      "earthquakeCount",
       "fieldCount",
       "soundCount",
-      "growGroundCount",
       "fightingBlockCount",
       "fairyCritCount",
       "powerLensCount",
       "starDustCount",
-      "mindBlownCount",
       "spellBlockedCount",
       "manaBurnCount",
       "moneyCount",
@@ -213,8 +208,6 @@ class GameContainer {
       "upgradeCount",
       "soulDewCount",
       "defensiveRibbonCount",
-      "attackOrderCount",
-      "healOrderCount",
       "magmarizerCount"
     ]
 
