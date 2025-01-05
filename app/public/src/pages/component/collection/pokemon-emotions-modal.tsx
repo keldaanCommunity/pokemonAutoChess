@@ -20,6 +20,8 @@ import { cc } from "../../utils/jsx"
 import { Modal } from "../modal/modal"
 import PokemonEmotion from "./pokemon-emotion"
 import "./pokemon-emotions-modal.css"
+import { BoosterPriceByRarity } from "../../../../../types/Config"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 
 export default function PokemonEmotionsModal(props: {
   pokemon: Pkm
@@ -33,6 +35,8 @@ export default function PokemonEmotionsModal(props: {
   const user = useAppSelector((state) => state.network.profile)
 
   const index = PkmIndex[props.pokemon]
+  const rarity = getPokemonData(props.pokemon).rarity
+  const boosterCost = BoosterPriceByRarity[rarity]
 
   const availableEmotions: Emotion[] = Object.values(Emotion).filter(
     (e, i) => PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[index]?.[i] === 1
@@ -184,10 +188,10 @@ export default function PokemonEmotionsModal(props: {
 
         <button
           className="bubbly orange"
-          disabled={pConfig.dust < 500}
+          disabled={pConfig.dust < boosterCost}
           onClick={() => dispatch(buyBooster({ index }))}
         >
-          {t("buy_booster_500")}
+          {t("buy_booster", { cost: boosterCost })}
           <img src={getPortraitSrc(index)} className="dust" alt="dust" />
         </button>
         <div className="spacer"></div>

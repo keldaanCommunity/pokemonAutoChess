@@ -50,7 +50,7 @@ import { PokemonEntity, getStrongestUnit, getUnitScore } from "./pokemon-entity"
 import { DelayedCommand } from "./simulation-command"
 import { getAvatarString } from "../utils/avatar"
 import { max } from "../utils/number"
-import { OnItemGainedEffect } from "./effect"
+import { OnItemGainedEffect, GrowGroundEffect } from "./effect"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -1142,6 +1142,7 @@ export default class Simulation extends Schema implements ISimulation {
       case Effect.DEEP_MINER:
         if (types.has(Synergy.GROUND)) {
           pokemon.effects.add(effect)
+          pokemon.effectsSet.add(new GrowGroundEffect(effect))
         }
         break
 

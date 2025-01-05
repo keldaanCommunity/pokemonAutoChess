@@ -371,8 +371,8 @@ export default class Board {
   }
 
   getClosestAvailablePlace(
-    x: number,
-    y: number
+    targetX: number,
+    targetY: number
   ): { x: number; y: number; distance: number } | null {
     const candidateCells = new Array<{
       distance: number
@@ -385,7 +385,7 @@ export default class Board {
         candidateCells.push({
           x,
           y,
-          distance: distanceM(x, y, x, y)
+          distance: distanceM(x, y, targetX, targetY)
         })
       }
     })

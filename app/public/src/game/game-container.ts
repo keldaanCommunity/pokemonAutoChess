@@ -194,7 +194,6 @@ class GameContainer {
       "ult",
       "fieldCount",
       "soundCount",
-      "growGroundCount",
       "fightingBlockCount",
       "fairyCritCount",
       "powerLensCount",

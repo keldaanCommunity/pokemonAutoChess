@@ -432,7 +432,9 @@
     "SURF": "Surf",
     "STRENGTH": "Strength",
     "HARDEN": "Harden",
-    "COLUMN_CRUSH": "Column Crush"
+    "COLUMN_CRUSH": "Column Crush",
+    "WONDER_ROOM": "Wonder Room",
+    "DARK_LARIAT": "Darkest Lariat"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1315,7 +1317,12 @@
     "CONKELDURR": "Conkeldurr",
     "PILLAR_WOOD": "Pillar (Wood)",
     "PILLAR_IRON": "Pillar (Iron)",
-    "PILLAR_CONCRETE": "Pillar (Concrete)"
+    "PILLAR_CONCRETE": "Pillar (Concrete)",
+    "ELGYEM": "Elgyem",
+    "BEHEEYEM": "Beheeyem",
+    "LITTEN": "Litten",
+    "TORRACAT": "Torracat",
+    "INCINEROAR": "Incineroar"
   },
   "ability_description": {
     "SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1484,7 +1491,7 @@
     "HEAL_ORDER": "Deal [25,45,65,SP] SPECIAL to adjacent enemy Pokémon and heal adjacent allied Pokémon for [25,45,65,SP] HP.",
     "SHELL_TRAP": "The user's SHIELD explodes, dealing [50,SP] SPECIAL + current SHIELD around it. If the user has no SHIELD, gain [75,SP] SHIELD instead.",
     "DIG": "Dig underground and reappear next to the farthest enemy Pokémon, dealing [10,20,40,SP] SPECIAL to all enemy Pokémon in the path.",
-    "FIRE_SPIN": "Deal [20,40,80,SP] SPECIAL and BURN for 3 seconds target and adjacent enemies.",
+    "FIRE_SPIN": "Deal [25,50,100,SP] SPECIAL and BURN for 3 seconds target and adjacent enemies.",
     "SEARING_SHOT": "An inferno of scarlet flames torches everything around Victini. Deal [50,SP] SPECIAL to all enemy Pokémon within 2 tiles of the user and BURN them for 3 seconds.",
     "SPLASH": "The user just flops and splashes around to no effect at all...",
     "PECK": "Deal [10,30,50,SP] SPECIAL to the target.",
@@ -1728,7 +1735,9 @@
     "STRENGTH": "Deal 2x(ATK + DEF + SPE_DEF) + AP as PHYSICAL",
     "HARDEN": "Gain [2,4,6,SP] DEF",
     "TOPSY_TURVY": "Deal [40,80,100,SP] SPECIAL to the target. All its ATK, DEF and SPE_DEF buffs become debuffs and vice versa.",
-    "COLUMN_CRUSH": "Builds a pillar on the closest empty spot. If a pillar is already on the board, jumps to it and throw it at the closest target, dealing [50,100,150,SP] + the remaining HP of the pillar as SPECIAL."
+    "COLUMN_CRUSH": "Builds a pillar on the closest empty spot. If a pillar is already on the board, jumps to it and throw it at the closest target, dealing [50,100,150,SP] + the remaining HP of the pillar as SPECIAL.",
+    "WONDER_ROOM": "Creates a bizarre area around the target in which enemies DEF and SPE_DEF are swapped for 5 seconds and attacks received are SPECIAL that scale with attacker AP.",
+    "DARK_LARIAT": "Swings arms and hits the target several times while moving behind them. Each hit deals [100,SP]% ATK as SPECIAL. Number of hits increase with ATK_SPEED. Target is FLINCH during the attack."
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1935,7 +1944,7 @@
     "DUBIOUS_DISC": "Get an artificial item. It is removed when losing the synergy.",
     "LINK_CABLE": "Gain +8% base ATK, AP and max HP as SHIELD per held item. Get another artificial item.",
     "GOOGLE_SPECS": "Gain +15% base ATK, AP and max HP as SHIELD per held item. Get another artificial item.",
-    "HATCHER": "Each BABY has [10,LK]% chance to find an Egg.",
+    "HATCHER": "Each BABY has [8,LK]% chance to find an Egg.",
     "BREEDER": "Get at least one Egg after each defeat against a player",
     "GOLDEN_EGGS": "Each BABY has [4,LK]% chance to find a Golden Egg (max 1 on bench). Golden eggs can be sold for 10 GOLD or give a shiny item when hatched.",
     "GRASSY_TERRAIN": "Increase damage dealt by 20% (Grass only)",
@@ -2906,7 +2915,7 @@
   "sort_by_shards": "Sort by shards",
   "normal_emotions": "Normal Emotions",
   "shiny_emotions": "Shiny Emotions",
-  "buy_booster_500": "Buy a new booster for 500 shards ",
+  "buy_booster": "Buy a new booster for {{cost}} shards ",
   "choose_as_avatar": "Choose as player avatar",
   "close": "Close",
   "additional_pokemon_hint": "Each player picked additional Pokemon to be available in all players shop for this game.",
@@ -3360,16 +3369,14 @@
     "GOTTA_CATCH_EM_ALL": "Gotta catch'em all !",
     "BUYER_FEVER": "Buyer fever",
     "TECHNOLOGIC": "Technologic",
-    "SIX_PACK": "Six Pack",
-    "NINE_LIVES": "Nine Lives",
     "CROWDED": "Crowded Board",
     "KECLEONS_SHOP": "Kecleon's Shop",
     "FREE_MARKET": "Free Market",
     "SHINY_HUNTER": "Shiny Hunter",
-    "DESPERATE_MOVES": "Desperate Moves",
     "DO_IT_ALL_YOURSELF": "Do it all yourself !",
     "FIRST_PARTNER": "First Partner",
-    "SLAMINGO": "Slamingo"
+    "SLAMINGO": "Slamingo",
+    "BLOOD_MONEY": "Blood Money"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "All the additional picks are available immediately",
@@ -3380,16 +3387,14 @@
     "GOTTA_CATCH_EM_ALL": "Some Pokémons can be caught before each PvE round",
     "BUYER_FEVER": "Evolutions in shop are free",
     "TECHNOLOGIC": "Choose between 3 artifacts at stage 3 and 15",
-    "SIX_PACK": "You can put 6 units max on your board, no matter your level",
-    "NINE_LIVES": "You are eliminated after losing 9 rounds",
     "CROWDED": "+3 units max on board",
     "KECLEONS_SHOP": "Item carousels are replaced by Kecleon's shop, that propose 6 items for 10 GOLD each",
     "FREE_MARKET": "Pokemons are bought and sold for 0 GOLD",
     "SHINY_HUNTER": "All the Wild PvE encounters are shiny",
-    "DESPERATE_MOVES": "Players start with 150 HP. Rerolling shop costs HP instead of GOLD.",
     "DO_IT_ALL_YOURSELF": "Start with a copy of your avatar. Lower rarity avatars get additional max HP and starting gold.",
     "FIRST_PARTNER": "Choose your starter Pokémon. You get a copy of this unit every stage up to stage 10.",
-    "SLAMINGO": "All items are dropped when a Pokémon is put on the bench. Starts with 4 random components"
+    "SLAMINGO": "All items are dropped when a Pokémon is put on the bench. Starts with 4 random components",
+    "BLOOD_MONEY": "Every KO gives 1 GOLD. No extra income from interests."
   },
   "loading_hints": {
     "tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",

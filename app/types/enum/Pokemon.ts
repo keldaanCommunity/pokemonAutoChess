@@ -62,6 +62,7 @@ export enum Pkm {
   BAYLEEF = "BAYLEEF",
   BEAUTIFLY = "BEAUTIFLY",
   BEEDRILL = "BEEDRILL",
+  BEHEEYEM = "BEHEEYEM",
   BELDUM = "BELDUM",
   BELLOSSOM = "BELLOSSOM",
   BELLSPROUT = "BELLSPROUT",
@@ -212,6 +213,7 @@ export enum Pkm {
   ELECTRIKE = "ELECTRIKE",
   ELECTRODE = "ELECTRODE",
   ELEKID = "ELEKID",
+  ELGYEM = "ELGYEM",
   EMBOAR = "EMBOAR",
   EMPOLEON = "EMPOLEON",
   ENAMORUS = "ENAMORUS",
@@ -349,6 +351,7 @@ export enum Pkm {
   IGGLYBUFF = "IGGLYBUFF",
   ILLUMISE = "ILLUMISE",
   IMPIDIMP = "IMPIDIMP",
+  INCINEROAR = "INCINEROAR",
   INFERNAPE = "INFERNAPE",
   INTELEON = "INTELEON",
   IRON_BUNDLE = "IRON_BUNDLE",
@@ -403,6 +406,7 @@ export enum Pkm {
   LILIGANT = "LILIGANT",
   LILLIPUP = "LILLIPUP",
   LINOONE = "LINOONE",
+  LITTEN = "LITTEN",
   LITWICK = "LITWICK",
   LOMBRE = "LOMBRE",
   LOPUNNY = "LOPUNNY",
@@ -759,6 +763,7 @@ export enum Pkm {
   TORCHIC = "TORCHIC",
   TORKOAL = "TORKOAL",
   TORNADUS = "TORNADUS",
+  TORRACAT = "TORRACAT",
   TORTERRA = "TORTERRA",
   TOTODILE = "TOTODILE",
   //TOUCANNON = "TOUCANNON",
@@ -1597,8 +1602,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.TYNAMO]: "0602",
   //[Pkm.EELEKTRIK]: "0603",
   //[Pkm.EELEKTROSS]: "0604",
-  //[Pkm.ELGYEM]: "0605",
-  //[Pkm.BEHEEYEM]: "0606",
+  [Pkm.ELGYEM]: "0605",
+  [Pkm.BEHEEYEM]: "0606",
   [Pkm.LITWICK]: "0607",
   [Pkm.LAMPENT]: "0608",
   [Pkm.CHANDELURE]: "0609",
@@ -1726,9 +1731,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ROWLET]: "0722",
   [Pkm.DARTIX]: "0723",
   [Pkm.DECIDUEYE]: "0724",
-  //[Pkm.LITTEN]: "0725",
-  //[Pkm.TORRACAT]: "0726",
-  //[Pkm.INCINEROAR]: "0727",
+  [Pkm.LITTEN]: "0725",
+  [Pkm.TORRACAT]: "0726",
+  [Pkm.INCINEROAR]: "0727",
   [Pkm.POPPLIO]: "0728",
   [Pkm.BRIONNE]: "0729",
   [Pkm.PRIMARINA]: "0730",
@@ -2923,7 +2928,12 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.CONKELDURR]: Pkm.TIMBURR,
   [Pkm.PILLAR_WOOD]: Pkm.PILLAR_WOOD,
   [Pkm.PILLAR_IRON]: Pkm.PILLAR_IRON,
-  [Pkm.PILLAR_CONCRETE]: Pkm.PILLAR_CONCRETE
+  [Pkm.PILLAR_CONCRETE]: Pkm.PILLAR_CONCRETE,
+  [Pkm.ELGYEM]: Pkm.ELGYEM,
+  [Pkm.BEHEEYEM]: Pkm.ELGYEM,
+  [Pkm.LITTEN]: Pkm.LITTEN,
+  [Pkm.TORRACAT]: Pkm.LITTEN,
+  [Pkm.INCINEROAR]: Pkm.LITTEN
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7520,5 +7530,31 @@ export const AnimationConfig: {
     emote: AnimationType.Idle,
     shinyUnavailable: true,
     noShadow: true
+  },
+  [Pkm.ELGYEM]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Charge,
+    emote: AnimationType.DeepBreath
+  },
+  [Pkm.BEHEEYEM]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack
+  },
+  [Pkm.LITTEN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.MultiScratch,
+    emote: AnimationType.Pose
+  },
+  [Pkm.TORRACAT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.MultiScratch,
+    emote: AnimationType.Emit
+  },
+  [Pkm.INCINEROAR]: {
+    attack: AnimationType.Punch,
+    ability: AnimationType.Ricochet,
+    emote: AnimationType.Pose,
+    shinyUnavailable: true
   }
 }

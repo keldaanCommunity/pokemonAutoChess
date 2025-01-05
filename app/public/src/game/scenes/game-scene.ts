@@ -220,14 +220,7 @@ export default class GameScene extends Scene {
   refreshShop() {
     const player = this.room?.state.players.get(this.uid!)
     const rollCost = (player?.shopFreeRolls ?? 0) > 0 ? 0 : 1
-    const rollCostType =
-      this.room?.state.specialGameRule === SpecialGameRule.DESPERATE_MOVES
-        ? "life"
-        : "money"
-    const canRoll =
-      rollCostType === "life"
-        ? (player?.life ?? 0) >= rollCost + 1
-        : (player?.money ?? 0) >= rollCost
+    const canRoll = (player?.money ?? 0) >= rollCost
     if (player && player.alive && canRoll && player === this.board?.player) {
       this.room?.send(Transfer.REFRESH)
       playSound(SOUNDS.REFRESH, 0.5)
