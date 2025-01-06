@@ -1477,7 +1477,7 @@
     "STRUGGLE_BUG": "Fügt benachbarten Feinden [30,SP] SPECIAL zu und reduziert ihre AP um 50%.",
     "PRISMATIC_LASER": "Der Anwender schießt einen prismatischen Laser in einer großen geraden Linie, der [80,SP] SPECIAL verursacht und alle getroffenen Feinde vertreibt.",
     "NATURAL_GIFT": "Heilt [30,60,120,SP] HP bei dem am meisten verletzten Verbündeten und RUNE_PROTECT für [1,2,3] sekunden",
-    "NIGHT_SHADE": "Verursacht [25,33,50SP=0.5]% der max. HP des Ziels als TRUE.",
+    "NIGHT_SHADE": "Verursacht [25,33,50,SP=0.5]% der max. HP des Ziels als TRUE.",
     "CHARGE_BEAM": "Feuert ein konzentriertes Elektrizitätsbündel ab, das sich auf maximal 3 benachbarte Ziele ausbreitet und ihnen jeweils [15,30,60,SP] SPECIAL zufügt.",
     "POPULATION_BOMB": "Verursacht 10 SPECIAL [4,8,12,16,SP] mal auf das Ziel",
     "SCREECH": "Reduziert die DEF aller angrenzenden Gegner um [1,2,4,SP]",
