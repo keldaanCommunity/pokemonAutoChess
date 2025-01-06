@@ -8554,7 +8554,7 @@ export class HisuiVoltorb extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 1
-  evolution = Pkm.ELECTRODE
+  evolution = Pkm.HISUI_ELECTRODE
   hp = 60
   atk = 9
   def = 1
