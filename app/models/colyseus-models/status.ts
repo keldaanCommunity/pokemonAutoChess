@@ -1114,7 +1114,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerPokerus(pokemon: PokemonEntity) {
-    if ((pokemon.passive = Passive.INANIMATE)) return // Inanimate objects cannot get Pokerus
+    if (pokemon.passive === Passive.INANIMATE) return // Inanimate objects cannot get Pokerus
     if (!this.pokerus) {
       this.pokerus = true
     }
