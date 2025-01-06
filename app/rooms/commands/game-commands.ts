@@ -278,7 +278,8 @@ export class OnDragDropCommand extends Command<
               player.experienceManager.level,
               this.room.state.specialGameRule
             )
-          const dropToEmptyPlace = isPositionEmpty(x, y, player.board)
+          const pokemonToBench = this.room.getPokemonByPosition(player, x, y)
+          const dropToEmptyPlace = pokemonToBench === undefined
 
           if (dropOnBench) {
             if (pokemon.canBeBenched) {
@@ -297,6 +298,7 @@ export class OnDragDropCommand extends Command<
             }
           } else if (
             pokemon.canBePlaced &&
+            (dropToEmptyPlace || pokemonToBench.canBeBenched) &&
             !(dropFromBench && dropToEmptyPlace && isBoardFull)
           ) {
             // Prevents a pokemon to go on the board only if it's adding a pokemon from the bench on a full board
