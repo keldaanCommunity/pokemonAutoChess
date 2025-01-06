@@ -101,7 +101,7 @@ export default class Status extends Schema implements IStatus {
 
   constructor(simulation: ISimulation) {
     super()
-    const elapsedTime = (StageDuration[1] * 1000) - simulation.room.state.time
+    const elapsedTime = FIGHTING_PHASE_DURATION - simulation.room.state.time
     this.enrageDelay = this.enrageDelay - elapsedTime
   }
 
