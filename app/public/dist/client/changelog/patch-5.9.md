@@ -36,8 +36,6 @@
 - Changed Shadow Clone (Shuppet): instead of taking an item from original Shuppet, steal a random item from the current target ; the clone spawns on the ~~farthest~~ closest available tile from the target
 - Happiny line is now Normal/Fairy instead of Normal/Human
 - Nerf Kecleon: PP 80 → 100
-- Changed Nightmare (Gastly): Silence duration 1.5/3/6 → 1.5/2.5/5 seconds; All Pokémon suffering from ~~Flinch/Silence/Sleep~~ a Ghost curse take 40/80/150 special damage
-=======
 - Numel is now epic regional ; adjusted stats accordingly ; temporarely removed Mega Camerupt
 - Houndour is now epic additional ; HP 85/150 → 90/160 ; temporely removed Mega Houndoom
 - Skorupi is now epic additional ; adjusted stats accordingly
@@ -50,7 +48,6 @@
 - Jirachi now has Sound type ; revert Doom desire PP from 5.6 ~~100~~ 60 PP if target is KO in the mean time
 - Changed Shadow Clone (Shuppet): instead of taking an item from original Shuppet, steal a random item from the current target ; the clone spawns on the ~~farthest~~ closest available tile from the target
 - Changed Nightmare (Gastly): ~~Silence 1.5/3/6 seconds~~ Fatigue 3/5/7 seconds; All Pokémon suffering from ~~Flinch/Silence/Sleep~~ a Ghost curse take 40/80/150 special damage
-
 - Alolan Marowak is now tier 2 ; adjusted stats to match Marowak's stats ; new ability: Shadow Bone
 - Change Bonemerang (Marowak): ~~deal 30/60/90 special damage~~ deal 2 times 15/30/60 special damage
 - Change Spike Armor (Onix, Maractus): when casting again before the end of the effect, throw spikes in all directions, dealing 30 special damage to all enemies hit
@@ -102,6 +99,7 @@
 - Gorebyss is now Fossil/Water/Aquatic instead of Fossil/Water/Psychic
 - Change Future Sight (Gardevoir): damage is dealt after 2 seconds. PP 110 → 100
 - Chimchar is now available in Fire and Fighting regions
+- Change Fell Stinger (Poipole): no longer gives permanent AP buff, special damage: 20/40/70 → 25/50/100
 
 # Changes to Synergies
 
