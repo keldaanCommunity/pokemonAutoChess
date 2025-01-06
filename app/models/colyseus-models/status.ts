@@ -101,7 +101,7 @@ export default class Status extends Schema implements IStatus {
 
   constructor(simulation: ISimulation) {
     super()
-    const elapsedTime = (StageDuration[1] * 1000) - simulation.room.state.time
+    const elapsedTime = FIGHTING_PHASE_DURATION - simulation.room.state.time
     this.enrageDelay = this.enrageDelay - elapsedTime
   }
 
@@ -266,9 +266,7 @@ export default class Status extends Schema implements IStatus {
       this.updateCurse(dt, board, pokemon)
     }
 
-    if (!this.enraged) {
-      this.updateRage(dt, pokemon)
-    }
+    this.updateRage(dt, pokemon)
 
     if (pokemon.status.curseVulnerability && !pokemon.status.flinch) {
       this.triggerFlinch(30000, pokemon)
@@ -1114,7 +1112,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerPokerus(pokemon: PokemonEntity) {
-    if ((pokemon.passive = Passive.INANIMATE)) return // Inanimate objects cannot get Pokerus
+    if (pokemon.passive === Passive.INANIMATE) return // Inanimate objects cannot get Pokerus
     if (!this.pokerus) {
       this.pokerus = true
     }

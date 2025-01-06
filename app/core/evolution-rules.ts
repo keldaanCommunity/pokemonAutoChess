@@ -332,5 +332,6 @@ export function carryOverPermanentStats(
   if (existingTms.length > 0) {
     pokemonEvolved.tm = pickRandomIn(existingTms)
     pokemonEvolved.skill = pokemonEvolved.tm
+    pokemonEvolved.maxPP = 100
   }
 }
