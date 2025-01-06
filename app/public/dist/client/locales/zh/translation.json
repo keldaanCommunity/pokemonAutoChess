@@ -1688,7 +1688,7 @@
     "DRAIN_PUNCH": "对目标造成SPECIAL，数值相当于ATK的[200,SP]%，且为使用者恢复造成伤害量200%的HP。",
     "GRAVITY": "使所有敌方宝可梦陷入LOCKED [2,SP]秒。",
     "FAKE_OUT": "对目标造成[50,100,150,SP]点SPECIAL，随后使用者失去30点AP。除非使用者的AP为负，否则使目标陷入FLINCH 3秒。",
-    "FELL_STINGER": "对目标造成[25,50,100,SP]点SPECIAL。若目标因此倒下，使用者永久提升1点ATK，和10点HP。",
+    "FELL_STINGER": "对目标造成[25,50,100,SP]点SPECIAL。若目标因此倒下，使用者永久提升1点ATK和10点HP。",
     "GULP_MISSILE": "朝目标发射一只PP已满的$t(pkm.ARROKUDA)，对其和相邻敌方宝可梦造成[55,SP]点SPECIAL。有[33,LK]%的概率改为发射$t(pkm.PIKACHU)。",
     "SCHOOLING": "对目标和相邻敌方宝可梦造成SPECIAL，数值相当于使用者[10,SP]%的最大HP。若备战区有弱丁鱼，其将加入鱼群并永久提升使用者50点HP。",
     "DOUBLE_SHOCK": "使用者放出强力的电击，对目标造成[50,100,200,SP]点SPECIAL，并使自身陷入PARALYSIS 3秒。",
