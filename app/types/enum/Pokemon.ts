@@ -889,6 +889,12 @@ export enum Pkm {
   MALAMAR = "MALAMAR"
 }
 
+export const nonPokemon: ReadonlySet<Pkm> = new Set([
+  Pkm.PILLAR_WOOD,
+  Pkm.PILLAR_IRON,
+  Pkm.PILLAR_CONCRETE
+])
+
 export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.DEFAULT]: "0000",
   [Pkm.EGG]: "0000-0004",

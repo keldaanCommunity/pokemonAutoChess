@@ -30,7 +30,7 @@ import {
   WeatherRocksByWeather
 } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
-import { Pkm } from "../types/enum/Pokemon"
+import { nonPokemon, Pkm } from "../types/enum/Pokemon"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
 import { IPokemonData } from "../types/interfaces/PokemonData"
@@ -237,11 +237,15 @@ export default class Simulation extends Schema implements ISimulation {
     )
     if (team == Team.BLUE_TEAM) {
       this.blueTeam.set(pokemonEntity.id, pokemonEntity)
-      this.blueDpsMeter.set(pokemonEntity.id, dps)
+      if (!nonPokemon.has(pokemon.name)){
+        this.blueDpsMeter.set(pokemonEntity.id, dps)
+      }
     }
     if (team == Team.RED_TEAM) {
       this.redTeam.set(pokemonEntity.id, pokemonEntity)
-      this.redDpsMeter.set(pokemonEntity.id, dps)
+      if (!nonPokemon.has(pokemon.name)){
+        this.redDpsMeter.set(pokemonEntity.id, dps)
+      }
     }
 
     pokemon.onSpawn({ entity: pokemonEntity, simulation: this })
