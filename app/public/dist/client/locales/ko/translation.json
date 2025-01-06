@@ -40,6 +40,7 @@
     "DISARMING_VOICE": "차밍보이스",
     "FAIRY_WIND": "요정의바람",
     "HIGH_JUMP_KICK": "무릎차기",
+    "TROP_KICK": "트로피컬킥",
     "GRASS_WHISTLE": "풀피리",
     "TRI_ATTACK": "트라이어택",
     "ECHO": "에코보이스",
@@ -87,6 +88,7 @@
     "ROOT": "뿌리박기",
     "TORMENT": "트집",
     "STOMP": "짓밟기",
+    "HORN_DRILL": "뿔드릴",
     "PAYBACK": "보복",
     "NIGHT_SLASH": "깜짝베기",
     "BUG_BUZZ": "벌레의야단법석",
@@ -432,7 +434,9 @@
     "SURF": "파도타기",
     "STRENGTH": "괴력",
     "HARDEN": "단단해지기",
-    "COLUMN_CRUSH": "기둥파괴"
+    "COLUMN_CRUSH": "기둥분쇄",
+    "WONDER_ROOM": "원더룸",
+    "DARK_LARIAT": "DD래리어트"
   },
   "pkm": {
     "DEFAULT": "미싱노",
@@ -1315,7 +1319,12 @@
     "CONKELDURR": "노보청",
     "PILLAR_WOOD": "기둥 (나무)",
     "PILLAR_IRON": "기둥 (철)",
-    "PILLAR_CONCRETE": "기둥 (콘크리트)"
+    "PILLAR_CONCRETE": "기둥 (콘크리트)",
+    "ELGYEM": "리그레",
+    "BEHEEYEM": "벰크",
+    "LITTEN": "냐오불",
+    "TORRACAT": "냐오히트",
+    "INCINEROAR": "어흥염"
   },
   "ability_description": {
     "SOFT_BOILED": "모든 아군 포켓몬의 상태이상효과를 회복하며 [20,40,80,SP] 만큼의 SHIELD를 부여한다.",
@@ -1336,6 +1345,7 @@
     "FAIRY_WIND": "시전자를 제외한 모든 아군 포켓몬에게 [5,10,20,SP=0.5]의 PP를 부여한다.",
     "DISARMING_VOICE": "[1,SP]초동안 반경 2칸범위안의 적들을 CHARM 상태로 만든다.",
     "HIGH_JUMP_KICK": "대상에게 [15,30,60,SP] SPECIAL를 가하며 최대 50 PP까지 훔칩니다.",
+    "TROP_KICK": "[50,100,200,SP] SPECIAL 를 가하고 대상의 ATK 을 [3,5,7,SP] 감소시킨다.",
     "GRASS_WHISTLE": "2초간 적 포켓몬 [1,2,4]마리를 SLEEP 상태로 만든다.",
     "TRI_ATTACK": "[30,60,SP] SPECIAL를 가한다. 대상을 BURN, FREEZE, PARALYSIS 상태로 만들 확률도 존재한다.",
     "ECHO": "모든 적에게 [3,6,9,SP] SPECIAL를 가한다. 이 능력의 피해량은 사용될때마다 [3,6,9,SP]만큼 올라간다.",
@@ -1383,6 +1393,7 @@
     "ROOT": "주변의 모든 적이 4초 동안 LOCKED 되고 [10,20,40,SP] SPECIAL 를 입는다. 시전자와 주변 아군은 [10,20,40,SP] HP 를 회복한다.",
     "TORMENT": "ATK_SPEED 가 [20,40,60,SP]% 만큼 증가한다.",
     "STOMP": "대상에 [3,4,5,SP] x ATK SPECIAL 을 가한다.",
+    "HORN_DRILL": "[3,4,5,SP] x ATK SPECIAL 를 대상에게 가한다. [30,LK]% 확률로 처형한다. 시전자의 ATK 이 대상의 ATK 보다 클 수록 확률이 증가한다.",
     "PAYBACK": "대상에 [15,30,60,SP] SPECIAL 을 가한다. 시전자의 체력이 50% 미만일 경우 두배의 피해를 가한다.",
     "SHADOW_BALL": "대상에 [40,60,100,SP] SPECIAL 을 가하며, 모든 적포켓몬의 SPE_DEF 를 1만큼 감소시킨다.",
     "BUG_BUZZ": "대상에 [20,40,80,SP] SPECIAL 을 가한다. 대상이 PARALYSIS 상태일 경우 두배의 피해를 가한다.",
@@ -1728,7 +1739,9 @@
     "STRENGTH": "2 x (ATK + DEF + SPE_DEF) + AP 만큼 PHYSICAL를 가한다.",
     "HARDEN": "[2,4,6,SP] DEF을 얻는다.",
     "TOPSY_TURVY": "대상에게 [40,80,100,SP] SPECIAL를 가한다. 모든 ATK, DEF, SPE_DEF 버프와 디버프가 반전된다.",
-    "COLUMN_CRUSH": "가장 가까운 빈 공간에 기둥을 건설한다. 전장에 이미 기둥이 있다면 그것에 도약하여 가장 가까운 적에게 기둥을 던져 기둥의 HP + [50,100,150,SP] SPECIAL를 가한다."
+    "COLUMN_CRUSH": "가장 가까운 빈 공간에 기둥을 건설한다. 전장에 이미 기둥이 있다면 그것에 도약하여 가장 가까운 적에게 기둥을 던져 기둥의 HP + [50,100,150,SP] SPECIAL를 가한다.",
+    "WONDER_ROOM": "대상 주변에 기묘한 영역을 만들어 5초 동안 그 안에 있는 적들의 DEF 과 SPE_DEF 를 뒤바꾸고 기본 공격 피격 시 공격자의 AP 에 비례하여 SPECIAL 를 입는다.",
+    "DARK_LARIAT": "팔을 휘둘러 여러 번 공격하며 대상의 후방으로 이동한다. 각 공격은 [100,SP]% ATK 만큼 SPECIAL 를 입힌다. 공격 횟수는 ATK_SPEED 에 비례한다. 대상은 피격 중에 FLINCH 상태이다."
   },
   "effect": {
     "INGRAIN": "뿌리박기",
@@ -3366,7 +3379,8 @@
     "SHINY_HUNTER": "이로치 헌터",
     "DO_IT_ALL_YOURSELF": "전부 직접 하세요!",
     "FIRST_PARTNER": "첫 파트너",
-    "SLAMINGO": "슬래밍고"
+    "SLAMINGO": "슬래밍고",
+    "BLOOD_MONEY": "피 묻은 돈"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "모든 선택 포켓몬이 시작과 동시에 구매가 가능해집니다.",
@@ -3383,7 +3397,8 @@
     "SHINY_HUNTER": "PVE에서 만나는 모든 야생 포켓몬들이 모두 이로치가 됩니다.",
     "DO_IT_ALL_YOURSELF": "최대 HP +100 의 아바타를 가지고 시작합니다. 아바타가 낮은 레어도라면 추가 골드를 획득합니다.",
     "FIRST_PARTNER": "스타터 포켓몬을 고릅니다. 10 스테이지까지 매 스테이지에 이 유닛을 획득합니다.",
-    "SLAMINGO": "포켓몬을 대기석에 놓으면 모든 아이템을 장착 해제합니다. 4개의 무작위 조합 아이템을 획득합니다."
+    "SLAMINGO": "포켓몬을 대기석에 놓으면 모든 아이템을 장착 해제합니다. 4개의 무작위 조합 아이템을 획득합니다.",
+    "BLOOD_MONEY": "이자를 얻지 않습니다. 포켓몬을 기절시킬 때마다 1 GOLD 획득합니다."
   },
   "loading_hints": {
     "tab_out": "로딩 화면 밖으로 나가지 마세요! 브라우저가 비활성화 되면 로딩이 멈춥니다. ",
