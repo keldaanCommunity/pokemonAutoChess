@@ -14,7 +14,7 @@ module.exports = {
     env_production: {
       NODE_ENV: "production"
     },
-    interpreter: "node@20.17.0",
+    interpreter: "node@22.12.0",
   }],
   deploy: {
     production: {
