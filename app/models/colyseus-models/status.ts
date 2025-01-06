@@ -2,6 +2,7 @@ import { Schema, type } from "@colyseus/schema"
 import Board from "../../core/board"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import { IPokemonEntity, ISimulation, IStatus, Transfer } from "../../types"
+import { FIGHTING_PHASE_DURATION, StageDuration } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { Effect } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
@@ -11,7 +12,6 @@ import { Weather } from "../../types/enum/Weather"
 import { count } from "../../utils/array"
 import { max, min } from "../../utils/number"
 import { chance } from "../../utils/random"
-import { StageDuration } from "../../types/Config"
 
 export default class Status extends Schema implements IStatus {
   @type("boolean") burn = false
