@@ -3448,9 +3448,10 @@
     "USER_BANNED": "你的账号已被封禁。",
     "USER_RANK_TOO_LOW": "你的段位过低，无法加入此大厅。",
     "USER_NOT_AUTHENTICATED": "请重新验证。",
-    "ROOM_FULL": "这个房间已经满员",
-    "ROOM_EMPTY": "这个房间缺少玩家，已被自动移除",
-    "ROOM_DELETED": "这个房间已被删除",
+    "USER_TIMEOUT": "你最近离开过一场尚未结束的游戏，因此需要等待5分钟才能加入另一游戏。",
+    "ROOM_FULL": "这个房间已经满员。",
+    "ROOM_EMPTY": "这个房间缺少玩家，已被自动移除。",
+    "ROOM_DELETED": "这个房间已被删除。",
     "UNKNOWN_ERROR": "发生错误。异常代码：{{error}}"
   }
 }
