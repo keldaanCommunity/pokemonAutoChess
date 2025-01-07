@@ -625,7 +625,13 @@ export class OnDragDropItemCommand extends Command<
         client.send(Transfer.DRAG_DROP_FAILED, message)
         return
       }
-      pokemon = player.transformPokemon(pokemon, evolution)
+      const pokemonEvolved = player.transformPokemon(pokemon, evolution)
+      pokemon.afterEvolve({
+        pokemonEvolved,
+        pokemonsBeforeEvolution: [pokemon],
+        player
+      })
+      pokemon = pokemonEvolved
     }
 
     if (isBasicItem && existingBasicItemToCombine) {
