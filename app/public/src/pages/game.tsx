@@ -78,6 +78,7 @@ import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { playMusic, preloadMusic } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import { FIREBASE_CONFIG } from "./utils/utils"
+import { Passive } from "../../../types/enum/Passive"
 
 let gameContainer: GameContainer
 
@@ -233,7 +234,7 @@ export default function Game() {
 
         if (p.board && p.board.size > 0) {
           p.board.forEach((pokemon) => {
-            if (pokemon.positionY != 0) {
+            if (pokemon.positionY != 0 && pokemon.passive !== Passive.INANIMATE) {
               afterPlayer.pokemons.push({
                 avatar: getAvatarString(pokemon.index, pokemon.shiny, pokemon.emotion),
                 items: pokemon.items.toArray(),
