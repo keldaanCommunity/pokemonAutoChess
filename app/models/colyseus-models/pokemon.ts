@@ -10659,7 +10659,11 @@ export class Chimecho extends Pokemon {
 }
 
 export class Tyrogue extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.BABY])
+  types = new SetSchema<Synergy>([
+    Synergy.FIGHTING,
+    Synergy.HUMAN,
+    Synergy.BABY
+  ])
   rarity = Rarity.UNIQUE
   stars = 2
   evolution = Pkm.HITMONTOP
