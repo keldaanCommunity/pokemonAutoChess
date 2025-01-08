@@ -2527,7 +2527,7 @@
     "SOUND": "SOUND Pokémon emit a cry when they use their abilities, waking up sleeping allies and giving them bonus stats.",
     "ARTIFICIAL": "ARTIFICIAL Pokémon give unique items and gain ATK, AP and SHIELD when holding items.",
     "BABY": "BABY Pokémon have a chance to bring you Pokemon Eggs to comfort you after a defeat. Chance stacks with losing streaks.{{additionalInfo}}",
-    "BABY_CHANCE_STACKED": "\nChance stacked: {{eggChance}}%",
+    "BABY_CHANCE_STACKED": "\n\nChance stacked: {{eggChance}}%",
     "LIGHT": "LIGHT Pokémon reveal a spotlight on the battlefield. The Pokémon standing in the spotlight at the start of combat gains unique bonuses.",
     "WILD": "WILD Pokémon get increased ATK, move faster, and have a 25% chance to WOUND their target. For each WILD Pokémon STAR on board, gain +1% chance to find WILD in your shops + 5% chance during PvE rounds{{additionalInfo}}",
     "WILD_ADDITIONAL": "\nCurrent chance to find a WILD pokemon: {{wildChance}}%",
