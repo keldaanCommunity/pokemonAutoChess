@@ -2084,7 +2084,9 @@
     "ELECTRIC_QUARTZ": "Cuarzos electricos",
     "FLOAT_STONE": "Piedra Pómez",
     "MIST_STONE": "Piedra Bruma",
-    "BLOOD_STONE": "Piedra Sangre"
+    "BLOOD_STONE": "Piedra Sangre",
+    "SMELLY_CLAY": "Arcilla maloliente",
+    "FIRE_SHARD": "Teralito de Fuego"
   },
   "item_description": {
     "FOSSIL_STONE": "Un fósil de un Pokémon que vivió en la prehistoria",
