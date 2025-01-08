@@ -36,7 +36,7 @@ import {
   Stat,
   Team
 } from "../types/enum/Game"
-import { Berries, Item, SynergyGivenByItem } from "../types/enum/Item"
+import { Berries, Item, SynergyGivenByItem, SynergyStones } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
@@ -600,7 +600,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   addItem(item: Item, permanent = false) {
-    if (this.items.size >= 3) {
+    const type = SynergyGivenByItem[item]
+    if (
+      this.items.size >= 3 ||
+      (SynergyStones.includes(item) && this.types.has(type))
+    ) {
       return
     }
     this.items.add(item)
@@ -609,7 +613,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.refToBoardPokemon.items.add(item)
     }
 
-    const type = SynergyGivenByItem[item]
     if (type && !this.types.has(type)) {
       this.types.add(type)
       this.simulation.applySynergyEffects(this, type)
@@ -1613,7 +1616,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           )
       )
       const randomItem = pickRandomIn(
-        values(target.items).filter((item) => item !== Item.COMFEY)
+        values(target.items).filter((item) =>
+          item !== Item.COMFEY && item !== Item.LEAF_STONE
+        )
       )
       if (floraSpawn && randomItem && floraSpawn.items.size < 3) {
         floraSpawn.addItem(randomItem)
