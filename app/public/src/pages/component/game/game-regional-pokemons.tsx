@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
-import { RarityColor } from "../../../../../types/Config"
+import { RarityColor, RarityCost } from "../../../../../types/Config"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../../../utils/avatar"
@@ -32,7 +32,9 @@ export function GameRegionalPokemonsIcon() {
 export function GameRegionalPokemons() {
   const { t } = useTranslation()
   const currentPlayer = useAppSelector(selectCurrentPlayer)
-  const regionalPokemons: Pkm[] = currentPlayer?.regionalPokemons.map(p => p) ?? new Array<Pkm>()
+  const regionalPokemons: Pkm[] = (currentPlayer?.regionalPokemons ?? new Array<Pkm>()).slice().sort((a, b) => {
+    return RarityCost[getPokemonData(a).rarity] - RarityCost[getPokemonData(b).rarity]
+  })
   const pokemonCollection = useAppSelector(
     (state) => state.game.pokemonCollection
   )
