@@ -2080,7 +2080,11 @@
     "ICY_ROCK": "Roca Helada",
     "HEAT_ROCK": "Roca Calor",
     "SMOOTH_ROCK": "Roca Suave",
-    "BLACK_AUGURITE": "Mineral Negro"
+    "BLACK_AUGURITE": "Mineral Negro",
+    "ELECTRIC_QUARTZ": "Cuarzos electricos",
+    "FLOAT_STONE": "Piedra Pómez",
+    "MIST_STONE": "Piedra Bruma",
+    "BLOOD_STONE": "Piedra Sangre"
   },
   "item_description": {
     "FOSSIL_STONE": "Un fósil de un Pokémon que vivió en la prehistoria",
