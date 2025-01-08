@@ -5,6 +5,8 @@ import { json } from "@assetpack/plugin-json"
 import fs from "fs-extra"
 import { texturePacker } from "./plugin-texturepacker-fork/dist/es/index.js"
 
+const pkg = fs.readJSONSync("../../package.json")
+
 export default {
   entry: "../../app/public/src/assets",
   output: "../../app/public/dist/client/assets",
@@ -42,7 +44,7 @@ export default {
       },
       resolutionOptions: {
         resolutions: { default: 1 },
-        template: "" // prevent adding @1x suffix when not generating multiple resolutions
+        template: `-${pkg.version}`
       }
     }),
     texturePackIndexer: texturePackAtlas(),
@@ -65,7 +67,6 @@ function texturePackAtlas() {
         ? fs.readJSONSync(atlasPath)
         : null
 
-      const pkg = fs.readJSONSync("../../package.json")
       const previousVersion = existingAtlas?.version
         ? Number(existingAtlas.version.split(".").pop())
         : 0
@@ -88,8 +89,7 @@ function texturePackAtlas() {
 
           if (packPath in atlas.packs === false) {
             atlas.packs[packPath] = {
-              name: packName,
-              path: `${packPath}-${pkg.version.replaceAll(".", "_")}.json`
+              name: packName
             }
           }
 
