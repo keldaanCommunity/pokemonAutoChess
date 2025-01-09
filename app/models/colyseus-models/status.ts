@@ -11,7 +11,7 @@ import { Weather } from "../../types/enum/Weather"
 import { count } from "../../utils/array"
 import { max, min } from "../../utils/number"
 import { chance } from "../../utils/random"
-import { StageDuration } from "../../types/Config"
+import { FIGHTING_PHASE_DURATION } from "../../types/Config"
 
 export default class Status extends Schema implements IStatus {
   @type("boolean") burn = false
