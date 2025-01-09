@@ -13,6 +13,8 @@
 
 # UI
 
+- Regional pokemons are now ordered by rarity in tooltip
+
 # Bugfix
 
 # Misc

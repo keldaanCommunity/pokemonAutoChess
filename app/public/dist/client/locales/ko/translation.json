@@ -1728,7 +1728,7 @@
     "MORTAL_SPIN": "근접 거리에서 시전자를 공격하는 모든 적을 밀어내 [20,30,40,SP] SPECIAL 를 입히고, 4초간 POISONNED 을 가한다.",
     "METAL_CLAW": "대상에게 [10,20,40,SP] TRUE 를 입히고 시전자의 ATK 을 [2,4,6] 증가시킨다.",
     "FIRESTARTER": "[10,20,40,SP]% ATK_SPEED 를 획득하고 가장 먼 적에게 날아 경로에 화염을 뿌린다. 화염은 [20,40,80,SP] SPECIAL를 가하고 필드에 남아 FLYING 이나 FIRE 타입이 아닌 포켓몬에게 매초 BURN 과 10 SPECIAL 를 가한다.",
-    "BONE_ARMOR": "가장 약한 적에게 날아 [20,40,80] SPECIAL를 가하고, 입힌 피해량만큼 회복한다. 마무리 일격 시 [2,4,6] DEF 과 SPE_DEF 을 획득한다.",
+    "BONE_ARMOR": "가장 약한 적에게 날아 [20,40,80,SP]] SPECIAL를 가하고, 입힌 피해량만큼 회복한다. 마무리 일격 시 [2,4,6] DEF 과 SPE_DEF 을 획득한다.",
     "RAGE": "3초간 RAGE 상태가 되어 잃은 HP 10% 마다 공격력이 [10,SP]% 증가한다.",
     "BRICK_BREAK": "[150,SP]% ATK 을 TRUE 로 가한다. 대상의 PROTECT와 매직미러를 무효화시킨다.",
     "TAUNT": "최대 HP의 [25,SP=0.5]% SHIELD를 얻고, 2칸 내의 적이 시전자를 공격하도록 한다.",
