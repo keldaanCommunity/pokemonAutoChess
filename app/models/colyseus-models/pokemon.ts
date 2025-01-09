@@ -843,14 +843,18 @@ export class Elekid extends Pokemon {
 }
 
 export class Electabuzz extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ARTIFICIAL])
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.ARTIFICIAL,
+    Synergy.HUMAN
+  ])
   rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.ELECTIVIRE
   hp = 190
   atk = 16
-  def = 7
-  speDef = 7
+  def = 6
+  speDef = 6
   maxPP = 90
   range = 1
   skill = Ability.DISCHARGE
@@ -858,13 +862,17 @@ export class Electabuzz extends Pokemon {
 }
 
 export class Electivire extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ARTIFICIAL])
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.ARTIFICIAL,
+    Synergy.HUMAN
+  ])
   rarity = Rarity.EPIC
   stars = 3
   hp = 350
-  atk = 32
-  def = 10
-  speDef = 10
+  atk = 28
+  def = 8
+  speDef = 8
   maxPP = 90
   range = 1
   skill = Ability.DISCHARGE
@@ -10651,7 +10659,11 @@ export class Chimecho extends Pokemon {
 }
 
 export class Tyrogue extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.BABY])
+  types = new SetSchema<Synergy>([
+    Synergy.FIGHTING,
+    Synergy.HUMAN,
+    Synergy.BABY
+  ])
   rarity = Rarity.UNIQUE
   stars = 2
   evolution = Pkm.HITMONTOP
