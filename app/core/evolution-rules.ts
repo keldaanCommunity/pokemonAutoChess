@@ -26,9 +26,11 @@ export abstract class EvolutionRule {
   ): boolean
   abstract evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon
   divergentEvolution?: DivergentEvolution
+  stacks: number
 
   constructor(divergentEvolution?: DivergentEvolution) {
     if (divergentEvolution) this.divergentEvolution = divergentEvolution
+    this.stacks = 0
   }
 
   getEvolution(
@@ -65,6 +67,7 @@ export abstract class EvolutionRule {
         pokemonEvolved.passive !== Passive.COSMOEM
       ) {
         pokemon.hp += 10
+        pokemon.evolutionRule.stacks++
       }
       // check evolutions again if it can evolve twice in a row
       pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)

@@ -13318,7 +13318,7 @@ export class Cosmog extends Pokemon {
   rarity = Rarity.UNIQUE
   evolution = Pkm.COSMOEM
   evolutionRule = new ConditionBasedEvolutionRule(
-    (pokemon) => pokemon.hp >= 200
+    (pokemon) => pokemon.evolutionRule.stacks >= 10
   )
   stars = 1
   hp = 100
@@ -13338,7 +13338,7 @@ export class Cosmoem extends Pokemon {
   evolution = Pkm.LUNALA
   stars = 2
   evolutionRule = new ConditionBasedEvolutionRule(
-    (pokemon) => pokemon.hp >= 300,
+    (pokemon) => pokemon.evolutionRule.stacks >= 10,
     (pokemon, player) => {
       if (
         pokemon.positionX === player.lightX &&
