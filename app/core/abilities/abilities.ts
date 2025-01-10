@@ -11090,6 +11090,7 @@ export class ColumnCrushStrategy extends AbilityStrategy {
         pillar.team === Team.BLUE_TEAM
           ? pillar.simulation.blueTeam
           : pillar.simulation.redTeam
+      pillar.shield = 0
       pillar.handleSpecialDamage(
         9999,
         board,
