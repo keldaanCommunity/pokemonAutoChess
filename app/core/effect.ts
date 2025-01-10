@@ -51,6 +51,9 @@ export class GrowGroundEffect extends PeriodicEffect {
     const synergyLevel = SynergyEffects[Synergy.GROUND].indexOf(effect) + 1
     super(
       (pokemon) => {
+        if (this.count > 5) {
+          return
+        }
         pokemon.addDefense(synergyLevel, pokemon, 0, false)
         pokemon.addSpecialDefense(synergyLevel, pokemon, 0, false)
         pokemon.addAttack(synergyLevel, pokemon, 0, false)
