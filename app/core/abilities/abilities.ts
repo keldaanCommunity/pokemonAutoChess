@@ -11122,12 +11122,17 @@ export class ColumnCrushStrategy extends AbilityStrategy {
       const pillarY = pillar.positionY
       const remainingHp = pillar.hp
       const pillarType = pillar.name
-      board.setValue(pillarX, pillarY, undefined)
       const team =
         pillar.team === Team.BLUE_TEAM
           ? pillar.simulation.blueTeam
           : pillar.simulation.redTeam
-      team.delete(pillar.id)
+      pillar.handleSpecialDamage(
+        9999,
+        board,
+        AttackType.TRUE,
+        null,
+        false
+      )
       pokemon.moveTo(pillarX, pillarY, board)
       pokemon.cooldown = 1000
 
