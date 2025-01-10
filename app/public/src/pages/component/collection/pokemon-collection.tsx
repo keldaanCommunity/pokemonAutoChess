@@ -25,21 +25,24 @@ export default function PokemonCollection() {
     return {
       filter: prevState?.filter ?? "unlockable",
       sort: prevState?.sort ?? "index",
-      shinyOnly: prevState?.shinyOnly ?? false
+      shinyOnly: prevState?.shinyOnly ?? false,
+      refundableOnly: prevState?.refundableOnly ?? false
     }
   }, [])
 
   const [filter, setFilter] = useState<string>(prevFilterState.filter)
   const [sort, setSort] = useState<string>(prevFilterState.sort)
   const [shinyOnly, setShinyOnly] = useState<boolean>(prevFilterState.shinyOnly)
+  const [refundableOnly, setRefundableOnly] = useState<boolean>(prevFilterState.refundableOnly)
 
   useEffect(() => {
     localStore.set(LocalStoreKeys.COLLECTION_FILTER, {
       filter,
       sort,
-      shinyOnly
+      shinyOnly,
+      refundableOnly
     })
-  }, [filter, sort, shinyOnly])
+  }, [filter, sort, shinyOnly, refundableOnly])
 
   return (
     <div id="pokemon-collection">
@@ -65,6 +68,12 @@ export default function PokemonCollection() {
           checked={shinyOnly}
           onToggle={setShinyOnly}
           label={t("shiny_hunter")}
+          isDark
+        />
+        <Checkbox
+          checked={refundableOnly}
+          onToggle={setRefundableOnly}
+          label={t("refundable")}
           isDark
         />
       </header>
@@ -98,6 +107,7 @@ export default function PokemonCollection() {
                     filter={filter}
                     sort={sort}
                     shinyOnly={shinyOnly}
+                    refundableOnly={refundableOnly}
                   />
                 </TabPanel>
               )
@@ -109,6 +119,7 @@ export default function PokemonCollection() {
               filter={filter}
               sort={sort}
               shinyOnly={shinyOnly}
+              refundableOnly={refundableOnly}
             />
           </TabPanel>
         </Tabs>
@@ -129,6 +140,7 @@ export function PokemonCollectionList(props: {
   filter: string
   sort: string
   shinyOnly: boolean
+  refundableOnly: boolean
 }) {
   const pokemonCollection = useAppSelector(
     (state) => state.network.profile?.pokemonCollection
@@ -176,6 +188,7 @@ export function PokemonCollectionList(props: {
               config={getConfig(pokemonData.index)}
               filter={props.filter}
               shinyOnly={props.shinyOnly}
+              refundableOnly={props.refundableOnly}
               setPokemon={props.setPokemon}
             />
           )
@@ -189,6 +202,7 @@ export function PokemonCollectionList(props: {
       props.filter,
       props.setPokemon,
       props.shinyOnly,
+      props.refundableOnly,
       props.type
     ]
   )

@@ -1,7 +1,8 @@
 import React, { Dispatch, SetStateAction } from "react"
 import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed/precomputed-emotions"
-import { getEmotionCost } from "../../../../../types/Config"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
+import { BoosterPriceByRarity, getEmotionCost } from "../../../../../types/Config"
 import { Emotion } from "../../../../../types/enum/Emotion"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
@@ -14,6 +15,7 @@ export default function PokemonCollectionItem(props: {
   config: IPokemonConfig | undefined
   filter: string
   shinyOnly: boolean
+  refundableOnly: boolean
   setPokemon: Dispatch<SetStateAction<Pkm | "">>
 }) {
   if (
@@ -33,6 +35,10 @@ export default function PokemonCollectionItem(props: {
   const availableEmotions = Object.values(Emotion).filter(
     (e, i) => PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[props.index]?.[i] === 1
   )
+
+  const rarity = getPokemonData(props.name).rarity
+  const boosterCost = BoosterPriceByRarity[rarity]
+  if (props.refundableOnly && dust < boosterCost) return null
 
   const canUnlock = availableEmotions.some(
     (e) =>
