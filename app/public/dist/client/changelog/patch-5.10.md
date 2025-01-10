@@ -4,6 +4,7 @@
 
 - Electabuzz and Electivire are now Electric/Artificial/Human. Adjusted stat buffs from 5.9.
 - Tyrogue is now Fighting/Human/Baby
+- Hisui Voltorb no longer appears in Electric regions
 
 # Changes to Synergies
 

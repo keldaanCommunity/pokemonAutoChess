@@ -8572,6 +8572,14 @@ export class HisuiVoltorb extends Pokemon {
   skill = Ability.CHLOROBLAST
   regional = true
   attackSprite = AttackSprite.ELECTRIC_MELEE
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      (!state || state.additionalPokemons.includes(Pkm.VOLTORB)) &&
+      (regionSynergies.includes(Synergy.GRASS) ||
+        regionSynergies.includes(Synergy.FOSSIL))
+    )
+  }
 }
 
 export class HisuiElectrode extends Pokemon {
@@ -8591,6 +8599,14 @@ export class HisuiElectrode extends Pokemon {
   skill = Ability.CHLOROBLAST
   regional = true
   attackSprite = AttackSprite.ELECTRIC_MELEE
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      (!state || state.additionalPokemons.includes(Pkm.VOLTORB)) &&
+      (regionSynergies.includes(Synergy.GRASS) ||
+        regionSynergies.includes(Synergy.FOSSIL))
+    )
+  }
 }
 
 export class Slugma extends Pokemon {
