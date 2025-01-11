@@ -1276,7 +1276,7 @@
     "ELECTRIC_SURGE": "Tăng [10,SP]% ATK_SPEED cho toàn bộ Pokémon hệ ELECTRIC",
     "PSYCHIC_SURGE": "Tăng [10,SP] AP cho toàn bộ Pokémon hệ PSYCHIC trừ Pokémon thi triển",
     "MIND_BLOWN": "Gây SPECIAL tương đương với [50,SP] % HP hiện tại của mục tiêu",
-    "PAYDAY": "Gây [30,60,120,SP] SPECIAL. Nếu mục tiêu bị hạ gục, người chơi nhận được [1,2,3] GOLD",
+    "PAYDAY": "Gây [30,60,90,SP] SPECIAL. Nếu mục tiêu bị hạ gục, người chơi nhận được [1,2,3] GOLD",
     "BEAT_UP": "Triệu hồi [1,2,3] Houndour ([100,SP]% HP, không có trang bị)",
     "BLUE_FLARE": "Gây [50,SP] SPECIAL + 10 cho từng cấp bậc hiệu ứng hệ FIRE lên mục tiêu và đối thủ gần nó",
     "FUSION_BOLT": "Gây [50,SP] SPECIAL + 10 cho từng cấp bậc hiệu ứng hệ ELECTRIC lên mục tiêu và đối thủ gần nó",

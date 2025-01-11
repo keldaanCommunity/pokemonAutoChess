@@ -1433,7 +1433,7 @@
     "ELECTRIC_SURGE": "Increase the ATK_SPEED of all ELECTRIC Pokémon by [10,SP]%.",
     "PSYCHIC_SURGE": "Increase the AP of all PSYCHIC Pokémon other than the user by [10,SP]%.",
     "MIND_BLOWN": "Deal [50,SP]% of the target's current HP as SPECIAL.",
-    "PAYDAY": "Deals [30,60,120,SP] SPECIAL. If the target is KO'd, the allied player receives [1,2,3] GOLD.",
+    "PAYDAY": "Deals [30,60,90,SP] SPECIAL. If the target is KO'd, the allied player receives [1,2,3] GOLD.",
     "PICKUP": "Deals [30,60,120,SP] SPECIAL and steal one item from the target if possible, otherwise steal [1,2,3] GOLD from its owner.",
     "BEAT_UP": "Summon [1,2,3] Houndour ([100,SP]% HP, no items).",
     "BLUE_FLARE": "Deal [50,SP] SPECIAL + 10 per level of FIRE synergy to the target and adjacent enemy Pokémon.",

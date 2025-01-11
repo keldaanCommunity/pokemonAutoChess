@@ -1272,7 +1272,7 @@
     "ELECTRIC_SURGE": "すべてのでんきポケモンのATK_SPEEDを[10,SP]%アップ",
     "PSYCHIC_SURGE": "術者を除く全てのサイキックポケモンのAPを[10,SP]%増加させる",
     "MIND_BLOWN": "対象の現在HPの[50,SP]%をSPECIALとして与える",
-    "PAYDAY": "お得 [30,60,120,SP] SPECIAL。ターゲットがKOされた場合、プレイヤーは[1,2,3]ゴールドを受け取ります",
+    "PAYDAY": "お得 [30,60,90,SP] SPECIAL。ターゲットがKOされた場合、プレイヤーは[1,2,3]ゴールドを受け取ります",
     "BEAT_UP": "[1,2,3]ハウンドールを召喚([100,SP]% HP, アイテムなし)",
     "BLUE_FLARE": "火炎シナジー1段につき[50,SP]SPECIAL+10を与える",
     "FUSION_BOLT": "[50,SP]SPECIAL＋エレキシナジー1段につき10付与",

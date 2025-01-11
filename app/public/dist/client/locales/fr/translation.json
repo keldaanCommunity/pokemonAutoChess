@@ -1365,7 +1365,7 @@
     "ELECTRIC_SURGE": "Augmente la ATK_SPEED de tous les pokémons ELECTRIC de [10,SP] %",
     "PSYCHIC_SURGE": "Augmente la AP de tous les pokémons PSYCHIC de [10,SP]%, excepté le lanceur",
     "MIND_BLOWN": "Inflige [50,SP] % des HP actuels de la cible en tant que SPECIAL",
-    "PAYDAY": "Inflige [30,60,120,SP] SPECIAL. Si la cible est KO, le joueur reçoit [1,2,3] pièces",
+    "PAYDAY": "Inflige [30,60,90,SP] SPECIAL. Si la cible est KO, le joueur reçoit [1,2,3] pièces",
     "PICKUP": "Inflige [30,60,120,SP] SPECIAL et vole un objet de la cible. Si pas d'objet, vole [1,2,3] GOLD à son propriétaire.",
     "BEAT_UP": "Invoquer [1,2,3] Houndour ([100,SP]% HP, aucun objet)",
     "BLUE_FLARE": "Inflige [50,SP] SPECIAL + 10 par niveau de synergie FIRE à la cible et aux ennemis adjacents",

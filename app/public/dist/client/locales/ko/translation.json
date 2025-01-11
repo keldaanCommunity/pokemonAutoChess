@@ -1433,7 +1433,7 @@
     "ELECTRIC_SURGE": "모든 ELECTRIC 포켓몬의 ATK_SPEED 를 [10,SP]% 증가시킨다.",
     "PSYCHIC_SURGE": "시전자를 제외한 모든 PSYCHIC 포켓몬의 AP 를 [10,SP]% 증가시킨다.",
     "MIND_BLOWN": "대상의 현재체력의 [50,SP] %만큼 SPECIAL 로 가한다.",
-    "PAYDAY": "대상에 [30,60,120,SP] SPECIAL 를 가한다. 대상이 기절할 경우, 플레이어는 [1,2,3] GOLD 를 획득한다.",
+    "PAYDAY": "대상에 [30,60,90,SP] SPECIAL 를 가한다. 대상이 기절할 경우, 플레이어는 [1,2,3] GOLD 를 획득한다.",
     "PICKUP": "[30,60,120,SP] SPECIAL 를 가하고 대상으로부터 도구 하나를 훔친다. 도구가 없다면, 플레이어로부터 [1,2,3] GOLD 를 훔친다.",
     "BEAT_UP": "[100,SP]% 의 HP, 도구를 지니지 않은 델빌 [1,2,3] 마리를 소환한다.",
     "BLUE_FLARE": "대상 및 인접한 적들에게 [50,SP] + FIRE 시너지의 단계x10 만큼의 SPECIAL 를 가한다.",

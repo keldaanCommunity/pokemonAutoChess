@@ -266,14 +266,17 @@ export class PaydayStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [30, 60, 120][pokemon.stars - 1] ?? 30
+    const damage = Math.floor(
+      ([30, 60, 90][pokemon.stars - 1] ?? 90) * (1 + (0.5 * pokemon.ap) / 100)
+    )
 
     const { death } = target.handleSpecialDamage(
       damage,
       board,
       AttackType.SPECIAL,
       pokemon,
-      crit
+      crit,
+      false
     )
     if (death && pokemon.player) {
       pokemon.player.addMoney(pokemon.stars, true, pokemon)

@@ -8155,7 +8155,7 @@ export class Meowth extends Pokemon {
   atk = 8
   def = 3
   speDef = 3
-  maxPP = 90
+  maxPP = 80
   range = 1
   skill = Ability.PAYDAY
   additional = true
@@ -8170,7 +8170,7 @@ export class Persian extends Pokemon {
   atk = 20
   def = 3
   speDef = 3
-  maxPP = 90
+  maxPP = 80
   range = 1
   skill = Ability.PAYDAY
   additional = true
