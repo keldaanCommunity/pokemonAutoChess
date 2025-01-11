@@ -9,6 +9,7 @@
 - Meowth and Persian PP 90 → 80
 - Fix Rage cooldown and buff base attack instead of attack post-buffs
 - Buff Bide: no longer cannot move during the effect. 50/100/200% of damage taken → 200% at all tiers
+- Changed Retaliate: deal 100% of ATK as SPECIAL to the target + 1 additional attack for each fallen allied Pokémon.
 
 
 # Changes to Synergies

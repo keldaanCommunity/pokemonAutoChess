@@ -1601,7 +1601,7 @@
     "BARB_BARRAGE": "潜水至敌方阵型中间，随后对所有相邻宝可梦造成[15,30,60,SP]点SPECIAL，并使他们陷入POISONNED 3秒。",
     "MAGIC_POWDER": "获得[10,20,40,SP]点SHIELD，并使相邻敌方宝可梦陷入SILENCE [2,3,4]秒。",
     "INFERNAL_PARADE": "发射一个会飞回的火焰轮，对所有击中的敌方宝可梦造成[30, SP]点SPECIAL两次，并有[50,LK]%的概率使他们陷入BURN 3秒。",
-    "RETALIATE": "对目标造成[15,30,60,SP]点SPECIAL。每有一个倒下的我方宝可梦，该伤害提升[10,15,25,SP]。",
+    "RETALIATE": "对目标造成 [100,SP]% 的 ATK 作为 SPECIAL + 每只倒下的友方宝可梦造成 1 次额外攻击。",
     "SLASH": "对目标造成[10,20,40,SP]点SPECIAL。该招式可以暴击，且CRIT_CHANCE额外提升基础值的[30,60,90]%。",
     "OUTRAGE": "使用者陷入CONFUSION 2秒，并对目标和相邻敌方宝可梦造成SPECIAL，数值相当于自身ATK的[100,150,200,SP]%。",
     "LUNGE": "跳向ATK最高的敌方宝可梦，对其造成[50,SP]点SPECIAL并降低其[5,SP]点ATK。",
