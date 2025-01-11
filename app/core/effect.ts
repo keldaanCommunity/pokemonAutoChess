@@ -4,6 +4,7 @@ import { Item } from "../types/enum/Item"
 import { Effect as EffectEnum } from "../types/enum/Effect"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { max } from "../utils/number"
+import { chance } from "../utils/random"
 
 type EffectOrigin = EffectEnum | Item
 
@@ -127,6 +128,43 @@ export class MonsterKillEffect extends OnKillEffect {
         pokemon.addAbilityPower(-this.count * apBoost, pokemon, 0, false)
         pokemon.addMaxHP(-this.hpBoosted, pokemon, 0, false)
         this.hpBoosted = 0
+        this.count = 0
+      }
+    )
+  }
+}
+
+export abstract class OnHitEffect extends Effect {
+  apply: (entity: PokemonEntity, target: PokemonEntity, board: Board) => void
+  constructor(
+    effect: (entity: PokemonEntity, target: PokemonEntity, board: Board) => void,
+    origin?: EffectOrigin,
+    resetStacks?: (entity: PokemonEntity) => void
+  ) {
+    super(effect, origin, resetStacks)
+    this.apply = effect
+  }
+}
+
+export class FireHitEffect extends OnHitEffect {
+  count: number = 0
+  constructor(
+    effect: EffectEnum
+  ) {
+    const synergyLevel = SynergyEffects[Synergy.FIRE].indexOf(effect)
+    const burnChance = 0.3
+    super(
+      (pokemon, target, board) => {
+        pokemon.addAttack(synergyLevel, pokemon, 0, false)
+        if (chance(burnChance, pokemon)) {
+          target.status.triggerBurn(2000, target, pokemon)
+        }
+        this.count += 1
+      },
+      effect,
+      (pokemon) => {
+        const removalAmount = -this.count * synergyLevel
+        pokemon.addAttack(removalAmount, pokemon, 0, false)
         this.count = 0
       }
     )

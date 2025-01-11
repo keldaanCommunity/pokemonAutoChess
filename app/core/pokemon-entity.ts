@@ -56,7 +56,7 @@ import PokemonState from "./pokemon-state"
 import Simulation from "./simulation"
 import { DelayedCommand, SimulationCommand } from "./simulation-command"
 import { ItemEffects } from "./items"
-import { OnItemRemovedEffect, OnKillEffect, Effect as EffectClass } from "./effect"
+import { OnItemRemovedEffect, OnKillEffect, Effect as EffectClass, OnHitEffect } from "./effect"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 
 export class PokemonEntity extends Schema implements IPokemonEntity {
@@ -989,6 +989,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     // Synergy effects on hit
 
+    this.effectsSet.forEach((effect) => {
+      if (effect instanceof OnHitEffect) {
+        effect.apply(this, target, board)
+      }
+    })
+
     const nbIcyRocks =
       this.player && this.simulation.weather === Weather.SNOW
         ? count(this.player.items, Item.ICY_ROCK)
@@ -1007,20 +1013,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       freezeChance += nbIcyRocks * 0.05
       if (chance(freezeChance, this)) {
         target.status.triggerFreeze(2000, target)
-      }
-    }
-
-    if (this.hasSynergyEffect(Synergy.FIRE)) {
-      const burnChance = 0.3
-      if (this.effects.has(Effect.VICTORY_STAR)) {
-        this.addAttack(1, this, 0, false)
-      } else if (this.effects.has(Effect.DROUGHT)) {
-        this.addAttack(2, this, 0, false)
-      } else if (this.effects.has(Effect.DESOLATE_LAND)) {
-        this.addAttack(3, this, 0, false)
-      }
-      if (chance(burnChance, this)) {
-        target.status.triggerBurn(2000, target, this)
       }
     }
 
