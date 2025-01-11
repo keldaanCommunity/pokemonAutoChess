@@ -23,8 +23,6 @@ export class IdleState extends PokemonState {
         pokemon.status.tree = false
         pokemon.toMovingState()
       }
-    } else if (pokemon.status.bideCooldown > 0) {
-      pokemon.status.bideCooldown -= dt
     } else if (pokemon.canMove) {
       pokemon.toMovingState()
     }

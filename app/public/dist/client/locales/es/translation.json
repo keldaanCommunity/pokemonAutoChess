@@ -1710,7 +1710,7 @@
     "STEEL_WING": "Corre hacia la retaguardia enemiga, infligiendo [10,20,40,SP] SPECIAL + 3x DEF como SPECIAL y robando 1 DEF a todos los Pokémon enemigos en su camino.",
     "YAWN": "Obtiene [10,20,40,SP] SHIELD. Los Pokémon enemigos que tengan como objetivo al usuario sufren de FATIGUE por 3 segundos y pierden un 20% de AP",
     "FIERY_DANCE": "Sumergido en llamas, el usuario baila y agita sus alas infligiendo [25,50,100,SP] SPECIAL al objetivo y subiendo su propio AP en 30.",
-    "BIDE": "El usuario es incapaz de moverse por 3 segundos. Inflige daño SPECIAL a Pokémon enemigos adyacentes igual al [200,SP]% del daño recibido durante el periodo inmóvil. ",
+    "BIDE": "Inflige daño SPECIAL a Pokémon enemigos adyacentes igual al [200,SP]% del daño recibido durante 3 segundos.",
     "SHORE_UP": "Se cura un [20,25,SP]% de sus HP, +10% si el clima es SANDSTORM.",
     "POISON_STING": "Deja al objetivo con [2,3,4] cargas de POISONNED. Cada carga sobre el máximo inmediatamente inflige [25,50,100,SP] SPECIAL.",
     "TRANSE": "Comienza a atacar y moverse de nuevo, pero deja de curarse pasivamente.",

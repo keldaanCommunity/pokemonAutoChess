@@ -1710,7 +1710,7 @@
     "STEEL_WING": "Dash into the enemy team's back line, dealing [10,20,40,SP] SPECIAL + 3x DEF as SPECIAL and stealing 1 DEF to all enemy Pokémon in the path.",
     "YAWN": "Gain [10,20,40,SP] SHIELD. Enemy Pokémon targeting the user are inflicted with FATIGUE for 3 seconds and lose 20% AP.",
     "FIERY_DANCE": "Cloaked in flames, the user dances and flaps its wings dealing [25,50,100,SP] SPECIAL to the target and raises their own AP by 30.",
-    "BIDE": "The user is unable to move for 3 seconds. Deal SPECIAL damage to adjacent enemy Pokémon equal to [200,SP]% of the damage received during the idle period.",
+    "BIDE": "After 3 seconds, deal SPECIAL damage to adjacent enemy Pokémon equal to [200,SP]% of the damage received during this period.",
     "SHORE_UP": "Heal for [20,25,SP]% HP, +10% if the weather is SANDSTORM.",
     "POISON_STING": "Inflict the target with [2,3,4] stacks of POISONNED. Every stack over the max immediately deals [25,50,100,SP] SPECIAL.",
     "TRANSE": "Start attacking and moving again, but stops passively healing.",

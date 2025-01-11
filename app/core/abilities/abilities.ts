@@ -10108,9 +10108,7 @@ export class BideStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    pokemon.status.bideCooldown = 3000
     const startingHealth = pokemon.life + pokemon.shield
-    pokemon.toIdleState()
 
     pokemon.commands.push(
       new DelayedCommand(() => {
