@@ -10118,7 +10118,7 @@ export class BideStrategy extends AbilityStrategy {
           targetX: target.positionX,
           targetY: target.positionY
         })
-        const multiplier = [0.5, 1, 2][pokemon.stars - 1] ?? 2
+        const multiplier = 2
         const currentHealth = pokemon.life + pokemon.shield
         const damage = (startingHealth - currentHealth) * multiplier
         board
