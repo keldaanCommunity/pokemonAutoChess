@@ -372,6 +372,7 @@ export default class Status extends Schema implements IStatus {
     }
 
     this.enrageDelay -= dt
+    this.enrageCooldown -= dt
   }
 
   triggerClearWing(timer: number) {

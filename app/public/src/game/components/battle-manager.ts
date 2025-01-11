@@ -340,6 +340,8 @@ export default class BattleManager {
       } else if (field === "enraged") {
         if (pokemon.status.enraged) {
           pkm.addRageEffect()
+        } else {
+          pkm.removeRageEffect()
         }
       }
     }
