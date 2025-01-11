@@ -3,15 +3,22 @@ import { PokemonEntity } from "./pokemon-entity"
 import { Item } from "../types/enum/Item"
 import { Effect as EffectEnum } from "../types/enum/Effect"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
+import { max } from "../utils/number"
 
 type EffectOrigin = EffectEnum | Item
 
 export abstract class Effect {
   origin?: EffectOrigin
   apply: (entity: PokemonEntity, ...others: any[]) => void
-  constructor(effect: (entity: PokemonEntity, ...others: any[]) => void, origin?: EffectOrigin) {
+  resetStacks?: (entity: PokemonEntity) => void
+  constructor(
+    effect: (entity: PokemonEntity, ...others: any[]) => void,
+    origin?: EffectOrigin,
+    resetStacks?: (entity: PokemonEntity) => void
+  ) {
     this.apply = effect
     this.origin = origin
+    this.resetStacks = resetStacks
   }
 }
 
@@ -28,9 +35,10 @@ export class PeriodicEffect extends Effect {
   constructor(
     effect: (entity: PokemonEntity) => void,
     intervalMs: number,
-    origin?: EffectOrigin
+    origin?: EffectOrigin,
+    resetStacks?: (entity: PokemonEntity) => void
   ) {
-    super(effect, origin)
+    super(effect, origin, resetStacks)
     this.intervalMs = intervalMs
     this.timer = intervalMs
     this.count = 0
@@ -51,6 +59,9 @@ export class GrowGroundEffect extends PeriodicEffect {
     const synergyLevel = SynergyEffects[Synergy.GROUND].indexOf(effect) + 1
     super(
       (pokemon) => {
+        if (this.count > 5) {
+          return
+        }
         pokemon.addDefense(synergyLevel, pokemon, 0, false)
         pokemon.addSpecialDefense(synergyLevel, pokemon, 0, false)
         pokemon.addAttack(synergyLevel, pokemon, 0, false)
@@ -65,7 +76,14 @@ export class GrowGroundEffect extends PeriodicEffect {
         }
       },
       3000,
-      effect
+      effect,
+      (pokemon) => {
+        const removalAmount = -synergyLevel * max(5)(this.count)
+        pokemon.addDefense(removalAmount, pokemon, 0, false)
+        pokemon.addSpecialDefense(removalAmount, pokemon, 0, false)
+        pokemon.addAttack(removalAmount, pokemon, 0, false)
+        this.count = 0
+      }
     )
   }
 }
