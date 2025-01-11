@@ -7,6 +7,7 @@
 - Hisui Voltorb no longer appears in Electric regions
 - Nerf Payday: AP scaling 1 -> 0.5, damage: 30/60/120 → 30/60/90
 - Meowth and Persian PP 90 → 80
+- Fix Rage cooldown and buff base attack instead of attack post-buffs
 
 
 # Changes to Synergies
