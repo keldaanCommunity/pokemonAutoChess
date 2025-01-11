@@ -11,6 +11,7 @@ export default function UnownPanel(props: {
   filter: string
   sort: string
   shinyOnly: boolean
+  refundableOnly: boolean
 }) {
   const pokemonCollection = useAppSelector(
     (state) => state.network.profile?.pokemonCollection ?? new Map<string, IPokemonConfig>()
@@ -66,6 +67,7 @@ export default function UnownPanel(props: {
               setPokemon={props.setPokemon}
               filter={props.filter}
               shinyOnly={props.shinyOnly}
+              refundableOnly={props.refundableOnly}
             />
           )
         })}
