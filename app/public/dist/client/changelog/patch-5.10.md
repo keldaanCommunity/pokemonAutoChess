@@ -12,6 +12,7 @@
 - Changed Retaliate: deal 100% of ATK as SPECIAL to the target + 1 additional attack for each fallen allied Pokémon.
 - Nerf Waterfall: 50/100/150 shield → 40/80/120 shield
 - Buff Flash: radius 2 → 3 cells, duration 1.5/3/5 → 2/4/6 seconds
+- Buff Cut: 30 → 40% of target HP as special damage
 
 
 # Changes to Synergies

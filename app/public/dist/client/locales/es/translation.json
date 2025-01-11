@@ -1733,7 +1733,7 @@
     "BRICK_BREAK": "Inflige [150,SP]% de ATK como TRUE. Rompe la PROTECT y el Magic Bounce del objetivo. ",
     "TAUNT": "Gana [25,SP=0.5]% de sus HP máximos como SHIELD, forzando a los enemigos en un radio de 2 casillas a elegirle como objetivo.",
     "BULK_UP": "Incrementa el ATK base y la DEF base en un [40,SP]%",
-    "CUT": "Inflige [30,SP]% de los HP máximos del objetivo como daño especial. Causa WOUND por 5 segundos.",
+    "CUT": "Inflige [40,SP]% de los HP máximos del objetivo como SPECIAL. Causa WOUND por 5 segundos.",
     "FLY": "Sube en el aire y cae en el objetivo más lejano tras 1 segundo, infligiendo [400,SP]% de su ATK como SPECIAL.",
     "SURF": "Una ola empuja al usuario y a enemigos en el camino a la retaguardia enemiga. Todos los enemigos golpeados reciben [20,40,80,SP] SPECIAL.",
     "STRENGTH": "Inflige 2x(ATK + DEF + SPE_DEF) + AP como PHYSICAL",
