@@ -666,11 +666,11 @@ export class BuyBoosterCommand extends Command<
       if (!user) return
 
       const pkm = PkmByIndex[index]
-      if(!pkm) return
-      
-      const rarity = getPokemonData(pkm).rarity      
+      if (!pkm) return
+
+      const rarity = getPokemonData(pkm).rarity
       const boosterCost = BoosterPriceByRarity[rarity]
-      
+
       const mongoUser = await UserMetadata.findOneAndUpdate(
         {
           uid: client.auth.uid,
@@ -723,7 +723,12 @@ export class OnSearchCommand extends Command<
 > {
   async execute({ client, name }: { client: Client; name: string }) {
     try {
-      const regExp = new RegExp("^" + name)
+      const searchTerm = name.trim()
+      const escapedSearchTerm = searchTerm.replace(
+        /[-\/\\^$*+?.()|[\]{}]/g,
+        "\\$&"
+      )
+      const regExp = new RegExp("^" + escapedSearchTerm, "i")
       const users = await UserMetadata.find(
         { displayName: { $regex: regExp, $options: "i" } },
         ["uid", "elo", "displayName", "level", "avatar"],
