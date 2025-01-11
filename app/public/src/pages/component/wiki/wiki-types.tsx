@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import SynergyIcon from "../icons/synergy-icon"
@@ -17,7 +18,7 @@ import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import { EffectDescriptionComponent } from "../synergy/effect-description"
-import ReactDOM from "react-dom"
+import { Checkbox } from "../checkbox/checkbox"
 
 export default function WikiTypes() {
   const { t } = useTranslation()
@@ -50,6 +51,7 @@ export default function WikiTypes() {
 
 export function WikiType(props: { type: Synergy }) {
   const { t } = useTranslation()
+  const [showEvolutions, setShowEvolutions] = useState(false)
 
   const pokemons = PRECOMPUTED_POKEMONS_PER_TYPE[props.type]
     .filter((p) => p !== Pkm.DEFAULT)
@@ -58,6 +60,7 @@ export function WikiType(props: { type: Synergy }) {
     .filter((a, index, list) => {
       if (a.skill === Ability.DEFAULT) return false // pokemons with no ability are not ready for the show
       if (a.rarity === Rarity.SPECIAL) return true // show all summons & specials, even in the same family
+      if (showEvolutions) return true
 
       // remove if already one member of family in the list
       return (
@@ -95,6 +98,13 @@ export function WikiType(props: { type: Synergy }) {
         )
       })}
 
+      <hr />
+      <Checkbox
+        checked={showEvolutions}
+        onToggle={setShowEvolutions}
+        label={t("show_evolutions")}
+        isDark
+      />
       <table>
         <tbody>
           {(Object.values(Rarity) as Rarity[]).map((rarity) => {
@@ -137,27 +147,25 @@ export function WikiType(props: { type: Synergy }) {
 }
 
 export function WikiAllTypes() {
+  const rarityOrder = [Rarity.COMMON, Rarity.UNCOMMON, Rarity.RARE, Rarity.EPIC, Rarity.ULTRA, Rarity.HATCH, Rarity.UNIQUE, Rarity.LEGENDARY, Rarity.SPECIAL]
   const pokemons = Object.values(Pkm)
     .filter((p) => p !== Pkm.DEFAULT)
     .map((p) => getPokemonData(p))
-    .sort((a, b) => a.stars - b.stars) // put first stage first
     .filter((a, index, list) => {
       if (a.skill === Ability.DEFAULT) return false // pokemons with no ability are not ready for the show
-      if (a.rarity === Rarity.SPECIAL) return true // show all summons & specials, even in the same family
-
-      // remove if already one member of family in the list
-      return (
-        list.findIndex((b) => PkmFamily[a.name] === PkmFamily[b.name]) === index
-      )
+      return true
     })
 
-  const pokemonsPerType = pokemons.reduce((perType, p) => {
-    p.types.forEach((type) => {
-      if (Object.prototype.hasOwnProperty.call(perType, type) === false) perType[type] = []
-      perType[type].push(p)
-    })
-    return perType
-  }, {})
+  const pokemonsPerType = Object.fromEntries(Object.values(Synergy).map(type => [type as Synergy, [] as IPokemonData[]]))
+  for (const p of pokemons) {
+    for (const type of p.types) {
+      pokemonsPerType[type].push(p)
+    }
+  }
+
+  for (const type in pokemonsPerType) {
+    pokemonsPerType[type].sort((a, b) => a.rarity !== b.rarity ? rarityOrder.indexOf(a.rarity) - rarityOrder.indexOf(b.rarity) : a.stars - b.stars) // put first stage first
+  }
 
   const [hoveredPokemon, setHoveredPokemon] = useState<Pkm>()
   const { t } = useTranslation()

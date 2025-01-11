@@ -139,6 +139,10 @@
   display: inline-block;
 }
 
+#wiki-page .wiki-types .checkbox-container {
+  float: right;
+}
+
 #wiki-pokemons-all section {
   border-top: 4px solid currentColor;
 }
