@@ -266,14 +266,17 @@ export class PaydayStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [30, 60, 120][pokemon.stars - 1] ?? 30
+    const damage = Math.floor(
+      ([30, 60, 90][pokemon.stars - 1] ?? 90) * (1 + (0.5 * pokemon.ap) / 100)
+    )
 
     const { death } = target.handleSpecialDamage(
       damage,
       board,
       AttackType.SPECIAL,
       pokemon,
-      crit
+      crit,
+      false
     )
     if (death && pokemon.player) {
       pokemon.player.addMoney(pokemon.stars, true, pokemon)
@@ -3591,7 +3594,7 @@ export class WaterfallStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const shield = [50, 100, 150][pokemon.stars - 1] ?? 150
+    const shield = [40, 80, 120][pokemon.stars - 1] ?? 120
     pokemon.addShield(shield, pokemon, 1, crit)
     pokemon.status.clearNegativeStatus()
     board.clearBoardEffect(
@@ -7334,17 +7337,17 @@ export class RetaliateStrategy extends AbilityStrategy {
     const meter =
       pokemon.team === Team.BLUE_TEAM ? "blueDpsMeter" : "redDpsMeter"
     const nbFallenAllies = pokemon.simulation[meter].size - nbAlliesAlive
-    const damage =
-      ([15, 30, 60][pokemon.stars - 1] ?? 60) +
-      ([10, 15, 25][pokemon.stars - 1] ?? 15) * nbFallenAllies
-    target.handleSpecialDamage(
-      damage,
-      board,
-      AttackType.SPECIAL,
-      pokemon,
-      crit,
-      true
-    )
+    const damage = pokemon.atk
+
+    for (let i = 0; i <= nbFallenAllies; i++) {
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    }
   }
 }
 
@@ -9372,9 +9375,9 @@ export class FlashStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
 
-    const duration = [1500, 3000, 5000][pokemon.stars - 1] ?? 5000
+    const duration = [2000, 4000, 6000][pokemon.stars - 1] ?? 6000
     board
-      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 2)
+      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 3)
       .forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
           cell.value.status.triggerBlinded(duration, cell.value)
@@ -10105,9 +10108,7 @@ export class BideStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    pokemon.status.bideCooldown = 3000
     const startingHealth = pokemon.life + pokemon.shield
-    pokemon.toIdleState()
 
     pokemon.commands.push(
       new DelayedCommand(() => {
@@ -10115,7 +10116,7 @@ export class BideStrategy extends AbilityStrategy {
           targetX: target.positionX,
           targetY: target.positionY
         })
-        const multiplier = [0.5, 1, 2][pokemon.stars - 1] ?? 2
+        const multiplier = 2
         const currentHealth = pokemon.life + pokemon.shield
         const damage = (startingHealth - currentHealth) * multiplier
         board
@@ -10828,7 +10829,7 @@ export class RageStrategy extends AbilityStrategy {
     //gain 1 attack for each 10% of max HP missing
     const missingHp = pokemon.hp - pokemon.life
     const atkBoost =
-      pokemon.atk * 0.1 * Math.floor(missingHp / (pokemon.hp / 10))
+      pokemon.baseAtk * 0.1 * Math.floor(missingHp / (pokemon.hp / 10))
     pokemon.addAttack(atkBoost, pokemon, 1, true)
   }
 }
