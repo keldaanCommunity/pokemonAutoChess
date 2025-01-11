@@ -50,7 +50,7 @@ import { PokemonEntity, getStrongestUnit, getUnitScore } from "./pokemon-entity"
 import { DelayedCommand } from "./simulation-command"
 import { getAvatarString } from "../utils/avatar"
 import { max } from "../utils/number"
-import { OnItemGainedEffect, GrowGroundEffect, MonsterKillEffect } from "./effect"
+import { OnItemGainedEffect, GrowGroundEffect, MonsterKillEffect, FireHitEffect } from "./effect"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -829,26 +829,12 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case Effect.BLAZE:
-        if (types.has(Synergy.FIRE)) {
-          pokemon.effects.add(Effect.BLAZE)
-        }
-        break
-
       case Effect.VICTORY_STAR:
-        if (types.has(Synergy.FIRE)) {
-          pokemon.effects.add(Effect.VICTORY_STAR)
-        }
-        break
-
       case Effect.DROUGHT:
-        if (types.has(Synergy.FIRE)) {
-          pokemon.effects.add(Effect.DROUGHT)
-        }
-        break
-
       case Effect.DESOLATE_LAND:
         if (types.has(Synergy.FIRE)) {
-          pokemon.effects.add(Effect.DESOLATE_LAND)
+          pokemon.effects.add(effect)
+          pokemon.effectsSet.add(new FireHitEffect(effect))
         }
         break
 
