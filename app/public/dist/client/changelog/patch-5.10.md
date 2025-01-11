@@ -10,6 +10,8 @@
 - Fix Rage cooldown and buff base attack instead of attack post-buffs
 - Buff Bide: no longer cannot move during the effect. 50/100/200% of damage taken → 200% at all tiers
 - Changed Retaliate: deal 100% of ATK as SPECIAL to the target + 1 additional attack for each fallen allied Pokémon.
+- Nerf Waterfall: 50/100/150 shield → 40/80/120 shield
+- Buff Flash: radius 2 → 3 cells, duration 1.5/3/5 → 2/4/6 seconds
 
 
 # Changes to Synergies

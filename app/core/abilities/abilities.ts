@@ -3594,7 +3594,7 @@ export class WaterfallStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const shield = [50, 100, 150][pokemon.stars - 1] ?? 150
+    const shield = [40, 80, 120][pokemon.stars - 1] ?? 120
     pokemon.addShield(shield, pokemon, 1, crit)
     pokemon.status.clearNegativeStatus()
     board.clearBoardEffect(
@@ -9375,9 +9375,9 @@ export class FlashStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
 
-    const duration = [1500, 3000, 5000][pokemon.stars - 1] ?? 5000
+    const duration = [2000, 4000, 6000][pokemon.stars - 1] ?? 6000
     board
-      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 2)
+      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 3)
       .forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
           cell.value.status.triggerBlinded(duration, cell.value)
