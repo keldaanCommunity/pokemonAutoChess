@@ -5480,7 +5480,7 @@ export class Espeon extends Pokemon {
   atk = 12
   def = 3
   speDef = 2
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
   attackSprite = AttackSprite.PSYCHIC_MELEE
@@ -5494,7 +5494,7 @@ export class Umbreon extends Pokemon {
   atk = 12
   def = 3
   speDef = 2
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
   attackSprite = AttackSprite.DARK_MELEE
@@ -5508,7 +5508,7 @@ export class Leafeon extends Pokemon {
   atk = 12
   def = 3
   speDef = 2
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
   attackSprite = AttackSprite.GRASS_MELEE
@@ -5522,7 +5522,7 @@ export class Sylveon extends Pokemon {
   atk = 12
   def = 3
   speDef = 2
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
   attackSprite = AttackSprite.FAIRY_MELEE
@@ -5536,7 +5536,7 @@ export class Glaceon extends Pokemon {
   atk = 12
   def = 3
   speDef = 2
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
   attackSprite = AttackSprite.ICE_MELEE
