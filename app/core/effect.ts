@@ -92,9 +92,43 @@ export class GrowGroundEffect extends PeriodicEffect {
 export class OnKillEffect extends Effect {
   apply: (entity: PokemonEntity, target: PokemonEntity, board: Board) => void
   constructor(
-    effect: (entity: PokemonEntity, target: PokemonEntity, board: Board) => void
+    effect: (entity: PokemonEntity, target: PokemonEntity, board: Board) => void,
+    origin?: EffectOrigin,
+    resetStacks?: (entity: PokemonEntity) => void
   ) {
-    super(effect)
+    super(effect, origin, resetStacks)
     this.apply = effect
+  }
+}
+
+export class MonsterKillEffect extends OnKillEffect {
+  hpBoosted: number = 0
+  count: number = 0
+  constructor(effect: EffectEnum){
+    const synergyLevel = SynergyEffects[Synergy.MONSTER].indexOf(effect)
+    const attackBoost = [3, 6, 10, 10][synergyLevel] ?? 10
+    const apBoost = [10, 20, 30, 30][synergyLevel] ?? 30
+    const hpGain = [0.2, 0.4, 0.6, 0.6][synergyLevel] ?? 0.6
+    super(
+      (pokemon, target, board) => {
+        if (pokemon.life < 0) {
+          return
+        }
+        const lifeBoost = hpGain * target.hp
+        pokemon.addAttack(attackBoost, pokemon, 0, false)
+        pokemon.addAbilityPower(apBoost, pokemon, 0, false)
+        pokemon.addMaxHP(lifeBoost, pokemon, 0, false)
+        this.hpBoosted += lifeBoost
+        this.count += 1
+      },
+      effect,
+      (pokemon) => {
+        pokemon.addAttack(-this.count * attackBoost, pokemon, 0, false)
+        pokemon.addAbilityPower(-this.count * apBoost, pokemon, 0, false)
+        pokemon.addMaxHP(-this.hpBoosted, pokemon, 0, false)
+        this.hpBoosted = 0
+        this.count = 0
+      }
+    )
   }
 }
