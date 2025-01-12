@@ -32,9 +32,9 @@ export class OnKillEffect extends Effect {
 }
 
 export abstract class DynamicEffect {
-  origin?: EffectEnum
+  origin?: EffectOrigin
   apply(pokemon: PokemonEntity) {}
-    constructor(origin?: EffectEnum) {
+    constructor(origin?: EffectOrigin) {
       this.origin = origin
     }
 }
@@ -46,7 +46,7 @@ export abstract class PeriodicEffect extends DynamicEffect {
 
   constructor(
     intervalMs: number,
-    origin?: EffectEnum
+    origin?: EffectOrigin
   ) {
     super(origin)
     this.intervalMs = intervalMs
