@@ -4384,9 +4384,9 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.ARCEUS]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Pose,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack
   },
   [Pkm.SHAYMIN]: {
     attack: AnimationType.Shoot,
