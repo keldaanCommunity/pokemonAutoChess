@@ -1179,7 +1179,7 @@ export function displayAbility(
         y: coordinatesTarget[1],
         ease: "linear",
         duration: 300,
-        delay: (delay || 0) * 300,
+        delay: (delay || 0) * 400,
         onComplete: () => {
           specialProjectile.destroy()
         }
