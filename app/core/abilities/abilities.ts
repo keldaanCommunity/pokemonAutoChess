@@ -8764,22 +8764,28 @@ export class SparkStrategy extends AbilityStrategy {
     )
 
     let previousTarget = target
+    let currentTarget = target
     let n = 0
     while (n <= 4) {
-      const bounceTarget = board
-        .getAdjacentCells(target.positionX, target.positionY)
-        .filter((cell) => cell.value && cell.value.team === target.team)
-        .map((c) => c.value)[0]
-      if (bounceTarget) {
+      const newTarget = board
+        .getAdjacentCells(currentTarget.positionX, currentTarget.positionY)
+        .find(
+          (cell) =>
+            cell.value &&
+            cell.value.team === target.team &&
+            cell.value !== previousTarget
+        )?.value
+
+      if (newTarget) {
         broadcastAbility(pokemon, {
-          targetX: bounceTarget.positionX,
-          targetY: bounceTarget.positionY,
-          positionX: previousTarget.positionX,
-          positionY: previousTarget.positionY,
+          targetX: newTarget.positionX,
+          targetY: newTarget.positionY,
+          positionX: currentTarget.positionX,
+          positionY: currentTarget.positionY,
           delay: n
         })
-        damage /= 2
-        bounceTarget.handleSpecialDamage(
+        damage = Math.ceil(damage / 2)
+        newTarget.handleSpecialDamage(
           damage,
           board,
           AttackType.SPECIAL,
@@ -8787,10 +8793,11 @@ export class SparkStrategy extends AbilityStrategy {
           crit,
           true
         )
-        previousTarget = bounceTarget
+        previousTarget = currentTarget
+        currentTarget = newTarget
         n++
       } else {
-        n = 999
+        break
       }
     }
   }

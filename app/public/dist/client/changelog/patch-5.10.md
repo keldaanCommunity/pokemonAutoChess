@@ -14,6 +14,7 @@
 - Buff Flash: radius 2 → 3 cells, duration 1.5/3/5 → 2/4/6 seconds
 - Buff Cut: 30 → 40% of target HP as special damage
 - All eeveelutions now have 100 max PP
+- Fix Spark ability targeting
 
 # Changes to Synergies
 
