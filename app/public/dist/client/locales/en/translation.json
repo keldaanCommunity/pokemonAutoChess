@@ -3152,6 +3152,8 @@
   "titles_unlocked": "titles unlocked",
   "game-reconnect-modal-title": "Reconnect to game",
   "game-reconnect-modal-body": "You left a game in progress. Do you want to reconnect to your previous game ?",
+  "game-surrender-modal-title": "Surrender",
+  "game-surrender-modal-body": "Game is not finished. Do you want to surrender ?",
   "toggle_locked": "Show locked",
   "creator": "Creator",
   "switch_server": "Switch to this server",
