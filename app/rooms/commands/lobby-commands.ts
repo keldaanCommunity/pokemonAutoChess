@@ -47,6 +47,7 @@ import {
   getEmotionCost,
   BoosterPriceByRarity
 } from "../../types/Config"
+import { Ability } from "../../types/enum/Ability"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import { EloRank } from "../../types/enum/EloRank"
 import { GameMode, Rarity } from "../../types/enum/Game"
@@ -385,7 +386,11 @@ function pickRandomPokemonBooster(guarantedUnique: boolean): PkmWithConfig {
       if (seed < threshold) {
         const candidates: Pkm[] = (
           PRECOMPUTED_POKEMONS_PER_RARITY[rarity] ?? []
-        ).filter((p) => Unowns.includes(p) === false)
+        ).filter(
+          (p) =>
+            Unowns.includes(p) === false &&
+            getPokemonData(p).skill !== Ability.DEFAULT
+        )
         if (candidates.length > 0) {
           pkm = pickRandomIn(candidates) as Pkm
           break
