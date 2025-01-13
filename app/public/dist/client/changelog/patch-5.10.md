@@ -24,6 +24,7 @@
 
 - Buff Silk scarf: increase shield received by ~~30~~ 50%
 - Buff Metal Coat: also gives +5 special defense
+- Change Smoke Ball: trigger below ~~33%~~ 40% HP
 
 # Gameplay
 

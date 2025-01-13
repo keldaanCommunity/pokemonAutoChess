@@ -2054,7 +2054,7 @@
     "STAR_DUST": "Dopo aver lanciato l'abilità, ottieni il 50% del PP massimi come SHIELD",
     "GREEN_ORB": "Il possessore e gli alleati adiacenti recuperano il 4% dei loro HP massimi ogni secondo",
     "MANA_SCARF": "Gli attacchi del possessore ripristinano 8 PP aggiuntivi",
-    "SMOKE_BALL": "Una volta sotto il 33% degli HP massimi, lascia cadere la palla di fumo e salta ad una cella affianco. Ogni nemico adiacente gli viene inflitto PARALYSIS per 3 secondi e il fumo riduce la precisione di tutti i Pokèmon all'interno del 50%.",
+    "SMOKE_BALL": "Una volta sotto il 40% degli HP massimi, lascia cadere la palla di fumo e salta ad una cella affianco. Ogni nemico adiacente gli viene inflitto PARALYSIS per 3 secondi e il fumo riduce la precisione di tutti i Pokèmon all'interno del 50%.",
     "XRAY_VISION": "+50% ATK_SPEED. Gli attacchi del possessore non possono più fallire.",
     "RAZOR_FANG": "+100% CRIT_POWER. I colpi critici applicano ARMOR_REDUCTION per 4 secondi.",
     "PROTECTIVE_PADS": "Gli attacchi infliggono il doppio dei danni sullo SHIELD. L'utilizzatore è protetto dai danni da contraccolpo e dagli effetti che rimandano i danni al attaccante.",
