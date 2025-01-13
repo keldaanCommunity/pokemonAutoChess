@@ -16,6 +16,8 @@
 - All eeveelutions now have 100 max PP
 - Fix Spark ability targeting
 - Nerf High Jump Kick (Lopunny): steal up to ~~50~~ 30 PP
+- Nerf Rotom Drone: Def/Spedef 4 → 3
+
 
 # Changes to Synergies
 
