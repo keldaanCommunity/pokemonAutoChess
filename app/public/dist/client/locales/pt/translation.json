@@ -1158,7 +1158,7 @@
     "RELIC_SONG": "Emite uma nota. As duas primeiras notas dão [10,SP] SHIELD a todos os aliados. A terceira nota causa SLEEP a todo o time inimigo por [2,SP=0.5] segundos.",
     "FAIRY_WIND": "Concede [5,10,20,SP=0.5] PP a todos os aliados, exceto ao lançador",
     "DISARMING_VOICE": "Deixa inimigos no raio de 2 espaços ENCANTADOS por [1,SP] segundos",
-    "HIGH_JUMP_KICK": "Inflige [15,30,60,SP] SPECIAL e roube até 50 PP do alvo",
+    "HIGH_JUMP_KICK": "Inflige [15,30,60,SP] SPECIAL e roube até 30 PP do alvo",
     "GRASS_WHISTLE": "Coloque os inimigos SLEEP [1,2,4] por 2 segundos",
     "TRI_ATTACK": "Inflige [30,60,SP] SPECIAL. Pode BURN, FREEZE ou PARALYSIS o alvo",
     "ECHO": "Inflige [3,6,9,SP] SPECIAL para o time inimigo, aumentando em [3,6,9,SP] toda vez que o pokémon usa sua habilidade",

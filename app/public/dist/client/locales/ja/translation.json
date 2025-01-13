@@ -1196,7 +1196,7 @@
     "GROWL": "隣接する敵を3秒間FLINCHし、ATKを[3,5,7,SP]減少させる。",
     "RELIC_SONG": "音符を発します。最初の 2 つの音符は味方全員に [10,SP] SHIELD を与えます。3 番目の音符は敵チーム全体に [2,SP=0.5] 秒間 SLEEP を与えます。",
     "FAIRY_WIND": "術者を除く味方全員に[5,10,20,SP=0.5]のPPを与える",
-    "HIGH_JUMP_KICK": "[15,30,60,SP]のSPECIALを与え、対象から最大50 PPを奪う",
+    "HIGH_JUMP_KICK": "[15,30,60,SP]のSPECIALを与え、対象から最大30 PPを奪う",
     "GRASS_WHISTLE": "[1,2,4]の敵を2秒間睡眠状態にする",
     "TRI_ATTACK": "[30,60,SP]の特殊ダメージを与える。ターゲットを BURN、FREEZE、PARALYSIS のいずれかにすることができます",
     "ECHO": "敵チームに[3,6,9,SP]のSPECIALを与え、ポケモンが能力を使うたびに[3,6,9,SP]ずつ増加します",

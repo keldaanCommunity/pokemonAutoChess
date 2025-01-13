@@ -1251,7 +1251,7 @@
     "RELIC_SONG": "Gibt eine Note aus. Die ersten beiden Noten verleihen allen Verbündeten [10,SP] SHIELD. Die dritte Note versetzt das gesamte gegnerische Team für [2,SP=0,5] Sekunden in SLEEP.",
     "FAIRY_WIND": "Gibt allen Verbündeten außer dem Zaubernden [5,10,20,SP=0.5] PP",
     "DISARMING_VOICE": "Gegner im Umkreis von 2 Feldern sind CHARM für [1,SP] Sekunden",
-    "HIGH_JUMP_KICK": "Verursacht [15,30,60,SP] SPECIAL und stehle bis zu 50 PP vom Ziel",
+    "HIGH_JUMP_KICK": "Verursacht [15,30,60,SP] SPECIAL und stehle bis zu 30 PP vom Ziel",
     "GRASS_WHISTLE": "Versetzen Sie Feinde 2 Sekunden lang in SLEEP [1,2,4].",
     "TRI_ATTACK": "Verursacht [30,60,SP] Spezialschaden. Kann das Ziel entweder BURN, FREEZE oder PARALYSIS",
     "ECHO": "Fügt dem gegnerischen Team [3,6,9,SP] SPECIAL zu und erhöht sich jedes Mal um [3,6,9,SP], wenn das Pokémon seine Fähigkeit nutzt",
