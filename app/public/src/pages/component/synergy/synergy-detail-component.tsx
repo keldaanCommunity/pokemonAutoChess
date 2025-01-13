@@ -50,13 +50,8 @@ export default function SynergyDetailComponent(props: {
     .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
   
   const baseVariant = (pkm: Pkm): Pkm =>  (Object.keys(PkmRegionalVariants) as Pkm[]).find((p) =>
-      PkmRegionalVariants[p]!.includes(pkm)
-    ) ?? pkm
-    const variant = (Object.keys(PkmRegionalVariants) as Pkm[]).find((p) =>
-      PkmRegionalVariants[p]!.includes(basePkm)
-    )
-    return variant ? variant : basePkm
-  }
+    PkmRegionalVariants[p]!.includes(pkm)
+  ) ?? pkm
 
   const additionals = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
     props.type
