@@ -577,7 +577,7 @@ export default class GameRoom extends Room<GameState> {
       }
 
       // allow disconnected client to reconnect into this room until 3 minutes
-      await this.allowReconnection(client, 180)
+      await this.allowReconnection(client, 300)
       const userProfile = await UserMetadata.findOne({ uid: client.auth.uid })
       client.send(Transfer.USER_PROFILE, userProfile)
       this.dispatcher.dispatch(new OnJoinCommand(), { client })
