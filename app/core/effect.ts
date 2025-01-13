@@ -8,9 +8,11 @@ type EffectOrigin = EffectEnum | Item
 
 export abstract class Effect {
   origin?: EffectOrigin
-  apply: (entity: PokemonEntity, ...others: any[]) => void
-  constructor(effect: (entity: PokemonEntity, ...others: any[]) => void, origin?: EffectOrigin) {
-    this.apply = effect
+  apply(entity: PokemonEntity, ...others: any[]) {}
+  constructor(effect?: (entity: PokemonEntity, ...others: any[]) => void, origin?: EffectOrigin) {
+    if (effect) {
+      this.apply = effect
+    }
     this.origin = origin
   }
 }
@@ -31,15 +33,7 @@ export class OnKillEffect extends Effect {
   }
 }
 
-export abstract class DynamicEffect {
-  origin?: EffectOrigin
-  apply(pokemon: PokemonEntity) {}
-    constructor(origin?: EffectOrigin) {
-      this.origin = origin
-    }
-}
-
-export abstract class PeriodicEffect extends DynamicEffect {
+export abstract class PeriodicEffect extends Effect {
   intervalMs: number
   timer: number
   count: number
@@ -48,7 +42,7 @@ export abstract class PeriodicEffect extends DynamicEffect {
     intervalMs: number,
     origin?: EffectOrigin
   ) {
-    super(origin)
+    super(undefined, origin)
     this.intervalMs = intervalMs
     this.timer = intervalMs
     this.count = 0

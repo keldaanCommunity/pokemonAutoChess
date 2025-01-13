@@ -56,7 +56,7 @@ import PokemonState from "./pokemon-state"
 import Simulation from "./simulation"
 import { DelayedCommand, SimulationCommand } from "./simulation-command"
 import { ItemEffects } from "./items"
-import { OnItemRemovedEffect, OnKillEffect, DynamicEffect } from "./effect"
+import { OnItemRemovedEffect, OnKillEffect, Effect as EffectClass } from "./effect"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 
 export class PokemonEntity extends Schema implements IPokemonEntity {
@@ -122,7 +122,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   isClone = false
   refToBoardPokemon: IPokemon
   commands = new Array<SimulationCommand>()
-  effectsSet = new Set<DynamicEffect>()
+  effectsSet = new Set<EffectClass>()
 
   constructor(
     pokemon: IPokemon,
