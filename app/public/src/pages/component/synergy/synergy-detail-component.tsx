@@ -49,7 +49,9 @@ export default function SynergyDetailComponent(props: {
     .map((p) => getPokemonData(p as Pkm))
     .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
   
-  const baseVariant = (basePkm: Pkm): Pkm => {
+  const baseVariant = (pkm: Pkm): Pkm =>  (Object.keys(PkmRegionalVariants) as Pkm[]).find((p) =>
+      PkmRegionalVariants[p]!.includes(pkm)
+    ) ?? pkm
     const variant = (Object.keys(PkmRegionalVariants) as Pkm[]).find((p) =>
       PkmRegionalVariants[p]!.includes(basePkm)
     )
