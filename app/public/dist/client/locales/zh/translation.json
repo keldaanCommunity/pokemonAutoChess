@@ -2205,7 +2205,7 @@
     "EXP_SHARE": "获得同一横排上所有我方宝可梦中最高的ATK，AP，DEF与SPE_DEF。",
     "POKERUS_VIAL": "携带者受到POKERUS，每2秒提升1点ATK和10点AP，且会将病毒传播给其他我方宝可梦。",
     "ROTOM_PHONE": "携带者也被视作GHOST宝可梦。在携带者附近召唤空拍洛托姆。",
-    "SILK_SCARF": "携带者也被视作NORMAL宝可梦。携带者获得的任何SHIELD提升30%。",
+    "SILK_SCARF": "携带者也被视作NORMAL宝可梦。携带者获得的任何SHIELD提升50%。",
     "TINY_MUSHROOM": "携带者也被视作BUG宝可梦。若携带者被复制，携带者降低50%的最大HP。",
     "METEORITE": "能和代欧奇希斯产生反应的陨石。摸上去隐约有点暖暖的。",
     "BERRY_JUICE": "HP低于50%时消耗此道具，恢复HP至满。",

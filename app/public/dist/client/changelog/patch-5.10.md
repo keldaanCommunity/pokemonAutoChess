@@ -18,10 +18,11 @@
 - Nerf High Jump Kick (Lopunny): steal up to ~~50~~ 30 PP
 - Nerf Rotom Drone: Def/Spedef 4 → 3
 
-
 # Changes to Synergies
 
 # Changes to Items
+
+- Buff Silk scarf: increase shield received by ~~30~~ 50%
 
 # Gameplay
 
