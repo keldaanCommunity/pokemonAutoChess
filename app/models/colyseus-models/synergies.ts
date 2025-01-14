@@ -36,6 +36,19 @@ export default class Synergies
   isActiveSynergy(syn: Synergy, lvl: number) {
     return lvl >= SynergyTriggers[syn][0]
   }
+
+  getTopSynergies(): Synergy[] {
+    const synergiesSortedByLevel: [Synergy, number][] = []
+    this.forEach((value, key) => {
+      synergiesSortedByLevel.push([key, value])
+    })
+    synergiesSortedByLevel.sort(([s1, v1], [s2, v2]) => v2 - v1)
+    const topSynergyCount = synergiesSortedByLevel[0][1]
+    const topSynergies = synergiesSortedByLevel
+      .filter(([s, v]) => v >= topSynergyCount)
+      .map(([s, v]) => s)
+    return topSynergies
+  }
 }
 
 export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
