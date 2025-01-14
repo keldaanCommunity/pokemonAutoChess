@@ -60,20 +60,33 @@ export default class PokemonAvatar extends PokemonSprite {
   }
 
   registerKeys() {
-    this.scene.input.keyboard!.on("keydown-A", () => {
-      if (this.isCurrentPlayerAvatar && this.scene && this.scene.game) {
-        this.playAnimation()
-      }
-    })
-    this.scene.input.keyboard!.on("keydown-CTRL", () => {
-      if (this.isCurrentPlayerAvatar && this.scene?.game) {
-        this.showEmoteMenu()
-      }
-    })
+    let onKeyA,
+      onKeyCtrl,
+      onKeyCtrlUp,
+      onNumKey = {}
+    this.scene.input.keyboard!.on(
+      "keydown-A",
+      (onKeyA = () => {
+        if (this.isCurrentPlayerAvatar && this.scene && this.scene.game) {
+          this.playAnimation()
+        }
+      })
+    )
+    this.scene.input.keyboard!.on(
+      "keydown-CTRL",
+      (onKeyCtrl = () => {
+        if (this.isCurrentPlayerAvatar && this.scene?.game) {
+          this.showEmoteMenu()
+        }
+      })
+    )
 
-    this.scene.input.keyboard!.on("keyup-CTRL", () => {
-      this.hideEmoteMenu()
-    })
+    this.scene.input.keyboard!.on(
+      "keyup-CTRL",
+      (onKeyCtrlUp = () => {
+        this.hideEmoteMenu()
+      })
+    )
 
     const NUM_KEYS = [
       "ONE",
@@ -87,24 +100,24 @@ export default class PokemonAvatar extends PokemonSprite {
       "NINE"
     ]
     NUM_KEYS.forEach((keycode, i) => {
-      const onKeydown = (event) => {
+      onNumKey[i] = (event) => {
         if (this.isCurrentPlayerAvatar && this.scene?.game && event.ctrlKey) {
           event.preventDefault()
           this.sendEmote(AvatarEmotions[i])
         }
       }
-      this.scene.input.keyboard!.on("keydown-" + keycode, onKeydown)
-      this.scene.input.keyboard!.on("keydown-NUMPAD_" + keycode, onKeydown)
+      this.scene.input.keyboard!.on("keydown-" + keycode, onNumKey[i])
+      this.scene.input.keyboard!.on("keydown-NUMPAD_" + keycode, onNumKey[i])
     })
 
     // do not forget to clean up parent listeners after destroy
     this.sprite.once("destroy", () => {
-      this.scene.input.keyboard!.off("keydown-A")
-      this.scene.input.keyboard!.off("keydown-CTRL")
-      this.scene.input.keyboard!.off("keyup-CTRL")
-      NUM_KEYS.forEach((keycode) => {
-        this.scene.input.keyboard!.off("keydown-" + keycode)
-        this.scene.input.keyboard!.off("keydown-NUMPAD_" + keycode)
+      this.scene.input.keyboard!.off("keydown-A", onKeyA)
+      this.scene.input.keyboard!.off("keydown-CTRL", onKeyCtrl)
+      this.scene.input.keyboard!.off("keyup-CTRL", onKeyCtrlUp)
+      NUM_KEYS.forEach((keycode, i) => {
+        this.scene.input.keyboard!.off("keydown-" + keycode, onNumKey[i])
+        this.scene.input.keyboard!.off("keydown-NUMPAD_" + keycode, onNumKey[i])
       })
     })
   }
