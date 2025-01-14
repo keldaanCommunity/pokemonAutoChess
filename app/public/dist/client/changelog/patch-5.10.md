@@ -15,10 +15,17 @@
 - Buff Cut: 30 → 40% of target HP as special damage
 - All eeveelutions now have 100 max PP
 - Fix Spark ability targeting
+- Nerf High Jump Kick (Lopunny): steal up to ~~50~~ 30 PP
+- Nerf Rotom Drone: Def/Spedef 4 → 3
+- Change Vise Grip (Krabby): during the 4 seconds when both user and target are locked, user gains 100% of target's defense and special defense
 
 # Changes to Synergies
 
 # Changes to Items
+
+- Buff Silk scarf: increase shield received by ~~30~~ 50%
+- Buff Metal Coat: also gives +5 special defense
+- Change Smoke Ball: trigger below ~~33%~~ 40% HP
 
 # Gameplay
 

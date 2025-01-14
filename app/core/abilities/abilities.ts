@@ -1627,7 +1627,7 @@ export class HighJumpKickStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
-    const ppStolen = max(50)(target.pp)
+    const ppStolen = max(30)(target.pp)
     pokemon.addPP(ppStolen, pokemon, 0, false)
     target.addPP(-ppStolen, pokemon, 0, false)
     target.count.manaBurnCount++
@@ -10451,6 +10451,16 @@ export class ViseGripStrategy extends AbilityStrategy {
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     target.status.triggerLocked(4000, pokemon)
     pokemon.status.triggerLocked(4000, pokemon)
+    const defGain = target.def * 1
+    const spedefGain = target.speDef * 1
+    pokemon.addDefense(defGain, pokemon, 1, crit)
+    pokemon.addSpecialDefense(spedefGain, pokemon, 1, crit)
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        pokemon.addDefense(-defGain, pokemon, 1, crit)
+        pokemon.addSpecialDefense(-spedefGain, pokemon, 1, crit)
+      }, 4000)
+    )
   }
 }
 

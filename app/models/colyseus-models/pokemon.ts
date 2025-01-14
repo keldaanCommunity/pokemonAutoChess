@@ -5969,8 +5969,8 @@ export class RotomDrone extends Pokemon {
   stars = 1
   hp = 80
   atk = 6
-  def = 4
-  speDef = 4
+  def = 3
+  speDef = 3
   maxPP = 50
   range = 3
   skill = Ability.FLASH
