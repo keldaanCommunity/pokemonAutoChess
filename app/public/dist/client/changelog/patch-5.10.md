@@ -26,7 +26,10 @@
 
 - Regional pokemons are now ordered by rarity in tooltip
 - Added a "refundable" checkbox filter in collection menu
+- Added a surrender confirm modal when leaving the game before the end
 
 # Bugfix
 
 # Misc
+
+- Increased allowed game reconnection time from 3 minutes to 5 minutes
