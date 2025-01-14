@@ -886,7 +886,7 @@ export default class GameRoom extends Room<GameState> {
     })
 
     player.board.forEach((pokemon: IPokemon) => {
-      if (pokemon.positionY != 0) {
+      if (pokemon.positionY != 0 && pokemon.passive !== Passive.INANIMATE) {
         const avatar = getAvatarString(
           pokemon.index,
           pokemon.shiny,
