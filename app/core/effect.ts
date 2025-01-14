@@ -8,9 +8,11 @@ type EffectOrigin = EffectEnum | Item
 
 export abstract class Effect {
   origin?: EffectOrigin
-  apply: (entity: PokemonEntity, ...others: any[]) => void
-  constructor(effect: (entity: PokemonEntity, ...others: any[]) => void, origin?: EffectOrigin) {
-    this.apply = effect
+  apply(entity: PokemonEntity, ...others: any[]) {}
+  constructor(effect?: (entity: PokemonEntity, ...others: any[]) => void, origin?: EffectOrigin) {
+    if (effect) {
+      this.apply = effect
+    }
     this.origin = origin
   }
 }
@@ -20,17 +22,27 @@ export class OnItemGainedEffect extends Effect {}
 
 export class OnItemRemovedEffect extends Effect {}
 
-export class PeriodicEffect extends Effect {
+// applied after knocking out an enemy
+export class OnKillEffect extends Effect {
+  apply: (entity: PokemonEntity, target: PokemonEntity, board: Board) => void
+  constructor(
+    effect: (entity: PokemonEntity, target: PokemonEntity, board: Board) => void
+  ) {
+    super(effect)
+    this.apply = effect
+  }
+}
+
+export abstract class PeriodicEffect extends Effect {
   intervalMs: number
   timer: number
   count: number
 
   constructor(
-    effect: (entity: PokemonEntity) => void,
     intervalMs: number,
     origin?: EffectOrigin
   ) {
-    super(effect, origin)
+    super(undefined, origin)
     this.intervalMs = intervalMs
     this.timer = intervalMs
     this.count = 0
@@ -47,36 +59,27 @@ export class PeriodicEffect extends Effect {
 }
 
 export class GrowGroundEffect extends PeriodicEffect {
+  synergyLevel: number
   constructor(effect: EffectEnum) {
-    const synergyLevel = SynergyEffects[Synergy.GROUND].indexOf(effect) + 1
-    super(
-      (pokemon) => {
-        pokemon.addDefense(synergyLevel, pokemon, 0, false)
-        pokemon.addSpecialDefense(synergyLevel, pokemon, 0, false)
-        pokemon.addAttack(synergyLevel, pokemon, 0, false)
-        pokemon.transferAbility("GROUND_GROW")
-        if (
-          pokemon.items.has(Item.BIG_NUGGET) &&
-          this.count === 5 &&
-          pokemon.player
-        ) {
-          pokemon.player.addMoney(3, true, pokemon)
-          pokemon.count.moneyCount += 3
-        }
-      },
-      3000,
-      effect
-    )
+    super(3000, effect)
+    this.synergyLevel = SynergyEffects[Synergy.GROUND].indexOf(effect) + 1
   }
-}
 
-// applied after knocking out an enemy
-export class OnKillEffect extends Effect {
-  apply: (entity: PokemonEntity, target: PokemonEntity, board: Board) => void
-  constructor(
-    effect: (entity: PokemonEntity, target: PokemonEntity, board: Board) => void
-  ) {
-    super(effect)
-    this.apply = effect
+  apply(pokemon) {
+    if (this.count > 5) {
+      return
+    }
+    pokemon.addDefense(this.synergyLevel, pokemon, 0, false)
+    pokemon.addSpecialDefense(this.synergyLevel, pokemon, 0, false)
+    pokemon.addAttack(this.synergyLevel, pokemon, 0, false)
+    pokemon.transferAbility("GROUND_GROW")
+    if (
+      pokemon.items.has(Item.BIG_NUGGET) &&
+      this.count === 5 &&
+      pokemon.player
+    ) {
+      pokemon.player.addMoney(3, true, pokemon)
+      pokemon.count.moneyCount += 3
+    }
   }
 }
