@@ -528,14 +528,7 @@ export class HiddenPowerWStrategy extends HiddenPowerStrategy {
     if (player && !unown.isGhostOpponent) {
       const x = getFirstAvailablePositionInBench(player.board)
       if (x !== undefined) {
-        const synergiesSortedByLevel = Array.from(player.synergies).sort(
-          ([s1, v1], [s2, v2]) => v2 - v1
-        )
-        const topSynergyCount = synergiesSortedByLevel[0][1]
-        const topSynergies = synergiesSortedByLevel.filter(
-          ([s, v]) => v >= topSynergyCount
-        )
-        const topSynergy = pickRandomIn(topSynergies)[0]
+        const topSynergy = pickRandomIn(player.synergies.getTopSynergies())
         const candidates = (
           [
             ...PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[topSynergy].pokemons,
