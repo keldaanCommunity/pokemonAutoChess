@@ -32,13 +32,6 @@
   content: ":";
 }
 
-.sprite-viewer-toolbar
-  .checkbox-container
-  input[type="checkbox"]
-  + span::before {
-  top: 3px;
-}
-
 .sprite-viewer-sprite {
   display: flex;
   justify-content: center;
