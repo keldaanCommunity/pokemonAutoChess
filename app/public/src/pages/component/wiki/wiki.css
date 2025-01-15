@@ -34,6 +34,33 @@
   text-align: center;
 }
 
+.synergy-overlaps {
+  display: grid;
+  max-width: 300px;
+  grid-template-columns: repeat(auto-fit, 80px);
+  gap: 0.5em;
+  margin: 1em;
+}
+
+.synergy-overlaps li {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-bg-secondary);
+  border-radius: 8px;
+  background-color: var(--color-bg-secondary);
+  border: var(--border-extra-thin);
+  cursor: var(--cursor-hover);
+}
+
+.synergy-overlaps li.active {
+  background-color: var(--color-bg-accent);
+}
+
+.synergy-overlaps li > img:nth-child(2) {
+  margin-left: -25px;
+  z-index: 2;
+}
+
 #wiki-page > .react-tabs > .react-tabs__tab-panel {
   height: 75vh;
   padding: 0.5em 0 40px 0;
@@ -137,10 +164,6 @@
 
 #wiki-page .wiki-types .pokemon-portrait {
   display: inline-block;
-}
-
-#wiki-page .wiki-types .checkbox-container {
-  float: right;
 }
 
 #wiki-pokemons-all section {
