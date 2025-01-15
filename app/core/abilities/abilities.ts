@@ -8990,7 +8990,7 @@ export class TorchSongStrategy extends AbilityStrategy {
     const count = pokemon.stars
     const apBoost = 10
 
-    const scorchedEnnemiesId = new Set<string>()
+    const scorchedEnemiesId = new Set<string>()
 
     const enemies = board.cells.filter(
       (p) => p && p.team !== pokemon.team
@@ -9020,14 +9020,14 @@ export class TorchSongStrategy extends AbilityStrategy {
             cell.value.status.curse ||
             cell.value.status.silence
           ) {
-            scorchedEnnemiesId.add(cell.value.id)
+            scorchedEnemiesId.add(cell.value.id)
           }
         }
       })
     })
 
     pokemon.addAbilityPower(
-      scorchedEnnemiesId.size * apBoost,
+      scorchedEnemiesId.size * apBoost,
       pokemon,
       0,
       false
@@ -9817,20 +9817,20 @@ export class PsychoShiftStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const farthestEnnemy = state.getFarthestTarget(pokemon, board)
+    const farthestEnemy = state.getFarthestTarget(pokemon, board)
     broadcastAbility(pokemon, {
       positionX: target.positionX,
       positionY: target.positionY,
-      targetX: farthestEnnemy?.positionX,
-      targetY: farthestEnnemy?.positionY
+      targetX: farthestEnemy?.positionX,
+      targetY: farthestEnemy?.positionY
     })
 
-    if (farthestEnnemy && farthestEnnemy.id !== target.id) {
-      const x = farthestEnnemy.positionX
-      const y = farthestEnnemy.positionY
-      farthestEnnemy.moveTo(target.positionX, target.positionY, board)
+    if (farthestEnemy && farthestEnemy.id !== target.id) {
+      const x = farthestEnemy.positionX
+      const y = farthestEnemy.positionY
+      farthestEnemy.moveTo(target.positionX, target.positionY, board)
       target.moveTo(x, y, board)
-      farthestEnnemy.handleSpecialDamage(
+      farthestEnemy.handleSpecialDamage(
         60,
         board,
         AttackType.SPECIAL,
