@@ -622,6 +622,10 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
               this.removeRoom(roomIndex, room.roomId)
             }
           })
+
+          this.presence.hlen("roomcaches").then((n) => {
+            logger.debug(`roomcaches size: ${n}`)
+          })
         },
         start: true
       })
