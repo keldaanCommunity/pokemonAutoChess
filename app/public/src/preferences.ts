@@ -35,7 +35,7 @@ const defaultPreferences: IPreferencesState = {
     buy_xp: "F",
     refresh: "D",
     lock: "R",
-    switch: "Space",
+    switch: "SPACE",
     emote: "A"
   }
 }
