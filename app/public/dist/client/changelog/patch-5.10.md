@@ -2,6 +2,9 @@
 
 - Alolan Sandshrew
 - Alolan Sandslash
+- Galarian Zigzagoon
+- Galarian Linoone
+- Obstagoon
 
 # Changes to Pokemon & Abilities
 

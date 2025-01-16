@@ -12163,6 +12163,53 @@ export class Linoone extends Pokemon {
   passive = Passive.PICKUP
 }
 
+export class GalarianZigzagoon extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.LINOONE
+  hp = 80
+  atk = 7
+  def = 5
+  speDef = 2
+  maxPP = 50
+  range = 1
+  skill = Ability.SLASH
+  attackSprite = AttackSprite.DARK_MELEE
+  regional = true
+}
+
+export class GalarianLinoone extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.OBSTAGOON
+  hp = 180
+  atk = 18
+  def = 7
+  speDef = 4
+  maxPP = 50
+  range = 1
+  skill = Ability.SLASH
+  attackSprite = AttackSprite.DARK_MELEE
+  regional = true
+}
+
+export class Obstagoon extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK, Synergy.SOUND])
+  rarity = Rarity.RARE
+  stars = 3
+  hp = 340
+  atk = 28
+  def = 10
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.OBSTRUCT
+  attackSprite = AttackSprite.DARK_MELEE
+  regional = true
+}
+
 export class Phantump extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.GHOST,
@@ -16522,6 +16569,9 @@ export const PokemonClasses: Record<
   [Pkm.STOUTLAND]: Stoutland,
   [Pkm.ZIGZAGOON]: Zigzagoon,
   [Pkm.LINOONE]: Linoone,
+  [Pkm.GALARIAN_ZIGZAGOON]: GalarianZigzagoon,
+  [Pkm.GALARIAN_LINOONE]: GalarianLinoone,
+  [Pkm.OBSTAGOON]: Obstagoon,
   [Pkm.PHEROMOSA]: Pheromosa,
   [Pkm.SABLEYE]: Sableye,
   [Pkm.MEGA_SABLEYE]: MegaSableye,

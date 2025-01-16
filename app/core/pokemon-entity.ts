@@ -906,6 +906,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.effects.delete(Effect.SHADOW_PUNCH_NEXT_ATTACK)
     }
 
+    if (target.effects.has(Effect.OBSTRUCT)) {
+      this.addDefense(-2, target, 0, false)
+    }
+
     if (this.passive === Passive.SHARED_VISION) {
       board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
         if (
