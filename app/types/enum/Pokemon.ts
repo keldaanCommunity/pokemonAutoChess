@@ -25,6 +25,8 @@ export enum Pkm {
   ALOLAN_RAICHU = "ALOLAN_RAICHU",
   ALOLAN_RATICATE = "ALOLAN_RATICATE",
   ALOLAN_RATTATA = "ALOLAN_RATTATA",
+  ALOLAN_SANDSHREW = "ALOLAN_SANDSHREW",
+  ALOLAN_SANDSLASH = "ALOLAN_SANDSLASH",
   ALOLAN_VULPIX = "ALOLAN_VULPIX",
   ALTARIA = "ALTARIA",
   AMAURA = "AMAURA",
@@ -926,7 +928,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.RAICHU]: "0026",
   [Pkm.ALOLAN_RAICHU]: "0026-0001",
   [Pkm.SANDSHREW]: "0027",
+  [Pkm.ALOLAN_SANDSHREW]: "0027-0001",
   [Pkm.SANDSLASH]: "0028",
+  [Pkm.ALOLAN_SANDSLASH]: "0028-0001",
   [Pkm.NIDORANF]: "0029",
   [Pkm.NIDORINA]: "0030",
   [Pkm.NIDOQUEEN]: "0031",
@@ -2532,6 +2536,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GOTHITELLE]: Pkm.GOTHITA,
   [Pkm.SANDSHREW]: Pkm.SANDSHREW,
   [Pkm.SANDSLASH]: Pkm.SANDSHREW,
+  [Pkm.ALOLAN_SANDSHREW]: Pkm.ALOLAN_SANDSHREW,
+  [Pkm.ALOLAN_SANDSLASH]: Pkm.ALOLAN_SANDSHREW,
   [Pkm.FARFETCH_D]: Pkm.FARFETCH_D,
   [Pkm.UNOWN_A]: Pkm.UNOWN_A,
   [Pkm.UNOWN_B]: Pkm.UNOWN_A,
@@ -2948,7 +2954,8 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.SNEASEL]: [Pkm.HISUI_SNEASEL],
   [Pkm.MEOWTH]: [Pkm.ALOLAN_MEOWTH],
   [Pkm.PONYTA]: [Pkm.GALARIAN_PONYTA],
-  [Pkm.VOLTORB]: [Pkm.HISUI_VOLTORB]
+  [Pkm.VOLTORB]: [Pkm.HISUI_VOLTORB],
+  [Pkm.SANDSHREW]: [Pkm.ALOLAN_SANDSHREW]
 } as const
 
 export enum PkmDuo {
@@ -5507,6 +5514,17 @@ export const AnimationConfig: {
     attack: AnimationType.Strike,
     ability: AnimationType.Attack,
     emote: AnimationType.DeepBreath
+  },
+  [Pkm.ALOLAN_SANDSHREW]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.ALOLAN_SANDSLASH]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.FARFETCH_D]: {
     attack: AnimationType.Strike,

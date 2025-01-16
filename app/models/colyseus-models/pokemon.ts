@@ -9690,6 +9690,39 @@ export class Sandslash extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class AlolanSandshrew extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.STEEL])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.ALOLAN_SANDSLASH
+  hp = 90
+  atk = 5
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 1
+  skill = Ability.ICE_BALL
+  additional = true
+  regional = true
+  attackSprite = AttackSprite.ICE_MELEE
+}
+
+export class AlolanSandslash extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.STEEL])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 180
+  atk = 13
+  def = 5
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.ICE_BALL
+  additional = true
+  regional = true
+  attackSprite = AttackSprite.ICE_MELEE
+}
+
 export class Nosepass extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.ARTIFICIAL])
   rarity = Rarity.UNCOMMON
@@ -16290,6 +16323,8 @@ export const PokemonClasses: Record<
   [Pkm.CINDERACE]: Cinderace,
   [Pkm.SANDSHREW]: Sandshrew,
   [Pkm.SANDSLASH]: Sandslash,
+  [Pkm.ALOLAN_SANDSHREW]: AlolanSandshrew,
+  [Pkm.ALOLAN_SANDSLASH]: AlolanSandslash,
   [Pkm.FARFETCH_D]: Farfetchd,
   [Pkm.UNOWN_A]: UnownA,
   [Pkm.UNOWN_B]: UnownB,

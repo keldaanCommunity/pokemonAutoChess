@@ -1,5 +1,8 @@
 # New Pokemons:
 
+- Alolan Sandshrew
+- Alolan Sandslash
+
 # Changes to Pokemon & Abilities
 
 - Electabuzz and Electivire are now Electric/Artificial/Human. Adjusted stat buffs from 5.9.

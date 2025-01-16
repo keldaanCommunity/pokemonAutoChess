@@ -47,6 +47,7 @@ export const POWER_SCORE_BY_CATEGORY = {
   "UNCOMMON 3S T4": 7,
   "RARE T1": 1.5,
   "RARE 2S T2": 4,
+  "RARE 2S T3": 7,
   "RARE 3S T2": 3,
   "RARE 3S T3": 6,
   "HATCH T1": 1.5,
