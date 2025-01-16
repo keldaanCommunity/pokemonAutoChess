@@ -1833,6 +1833,10 @@ export class Deino extends Pokemon {
   skill = Ability.DARK_HARVEST
   attackSprite = AttackSprite.DARK_RANGE
   regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.DRAGON)
+  }
 }
 
 export class Zweilous extends Pokemon {
@@ -1849,6 +1853,10 @@ export class Zweilous extends Pokemon {
   skill = Ability.DARK_HARVEST
   attackSprite = AttackSprite.DARK_RANGE
   regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.DRAGON)
+  }
 }
 
 export class Hydreigon extends Pokemon {
@@ -1864,6 +1872,10 @@ export class Hydreigon extends Pokemon {
   skill = Ability.DARK_HARVEST
   attackSprite = AttackSprite.DARK_RANGE
   regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.DRAGON)
+  }
 }
 
 export class Poliwag extends Pokemon {

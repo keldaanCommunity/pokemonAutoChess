@@ -24,6 +24,7 @@
 - Nerf High Jump Kick (Lopunny): steal up to ~~50~~ 30 PP
 - Nerf Rotom Drone: Def/Spedef 4 → 3
 - Change Vise Grip (Krabby): during the 4 seconds when both user and target are locked, user gains 100% of target's defense and special defense
+- Deino line now only appears in Dragon regions
 
 # Changes to Synergies
 
