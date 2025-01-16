@@ -2606,7 +2606,8 @@
     "GLUTTON": "Glutton",
     "STARGAZER": "Stargazer",
     "BLOODY": "Bloody",
-    "ETERNAL": "Eternal"
+    "ETERNAL": "Eternal",
+    "ANNIHILATOR": "Annihilator"
   },
   "title_description": {
     "NOVICE": "Play your first game",
@@ -2674,6 +2675,7 @@
     "SIREN": "Get a Milotic",
     "FEARSOME": "Get a Wishiwashi in School form",
     "GOLDEN": "Get a Gholdengo",
+    "ANNIHILATOR": "Get an Annihilape",
     "CHOSEN_ONE": "Max Synergy With Light type in a game",
     "VANQUISHER": "Win a Ranked match",
     "OUTSIDER": "Win a Ranked match with 8 players while having the lowest Elo of all",
