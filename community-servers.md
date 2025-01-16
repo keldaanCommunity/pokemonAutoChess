@@ -74,12 +74,3 @@ UW POC es un servidor apuntado para la comunidad latina de PokemonAutoChess, el 
 - location: Australia
 
 Australian Community Server for Pokemon Auto Chess
-
-# PACKR
-
-- url: https://packr.site
-- logo: https://i.imgur.com/wiTEHk5.png
-- creator: Camerupt
-- location: South Korea
-
-Korean Community Server for Pokemon Auto Chess
