@@ -36,7 +36,12 @@ import {
   Stat,
   Team
 } from "../types/enum/Game"
-import { Berries, Item, SynergyGivenByItem, SynergyStones } from "../types/enum/Item"
+import {
+  Berries,
+  Item,
+  SynergyGivenByItem,
+  SynergyStones
+} from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
@@ -1469,13 +1474,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (target.fairySplashCooldown === 0 && target.types.has(Synergy.FAIRY)) {
       let shockDamageFactor = 0.3
       if (target.effects.has(Effect.AROMATIC_MIST)) {
-        shockDamageFactor += 0.15
+        shockDamageFactor += 0.2
       } else if (target.effects.has(Effect.FAIRY_WIND)) {
-        shockDamageFactor += 0.3
+        shockDamageFactor += 0.4
       } else if (target.effects.has(Effect.STRANGE_STEAM)) {
-        shockDamageFactor += 0.5
+        shockDamageFactor += 0.6
       } else if (target.effects.has(Effect.MOON_FORCE)) {
-        shockDamageFactor += 0.7
+        shockDamageFactor += 0.8
       }
 
       const shockDamage = shockDamageFactor * damage
@@ -1616,8 +1621,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           )
       )
       const randomItem = pickRandomIn(
-        values(target.items).filter((item) =>
-          item !== Item.COMFEY && item !== Item.LEAF_STONE
+        values(target.items).filter(
+          (item) => item !== Item.COMFEY && item !== Item.LEAF_STONE
         )
       )
       if (floraSpawn && randomItem && floraSpawn.items.size < 3) {
