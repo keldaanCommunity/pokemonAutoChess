@@ -188,6 +188,7 @@ export enum Pkm {
   DONPHAN = "DONPHAN",
   DOUBLADE = "DOUBLADE",
   DRACOVISH = "DRACOVISH",
+  DRACOZOLT = "DRACOZOLT",
   DRAGAPULT = "DRAGAPULT",
   DRAGONAIR = "DRAGONAIR",
   DRAGONITE = "DRAGONITE",
@@ -1908,7 +1909,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MORPEKO_HANGRY]: "0877-0001",
   //[Pkm.CUFANT]: "0878",
   //[Pkm.COPPERAJAH]: "0879",
-  //[Pkm.DRACOZOLT]: "0880",
+  [Pkm.DRACOZOLT]: "0880",
   //[Pkm.ARCTOZOLT]: "0881",
   [Pkm.DRACOVISH]: "0882",
   //[Pkm.ARCTOVISH]: "0883",
@@ -2947,7 +2948,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.BEHEEYEM]: Pkm.ELGYEM,
   [Pkm.LITTEN]: Pkm.LITTEN,
   [Pkm.TORRACAT]: Pkm.LITTEN,
-  [Pkm.INCINEROAR]: Pkm.LITTEN
+  [Pkm.INCINEROAR]: Pkm.LITTEN,
+  [Pkm.DRACOZOLT]: Pkm.DRACOZOLT
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7596,6 +7598,12 @@ export const AnimationConfig: {
     attack: AnimationType.Punch,
     ability: AnimationType.Ricochet,
     emote: AnimationType.Pose,
+    shinyUnavailable: true
+  },
+  [Pkm.DRACOZOLT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
     shinyUnavailable: true
   }
 }

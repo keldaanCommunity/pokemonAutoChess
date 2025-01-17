@@ -279,7 +279,8 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.OGERPON_HEARTHFLAME,
   Pkm.OGERPON_CORNERSTONE,
   Pkm.IRON_HANDS,
-  Pkm.TURTONATOR
+  Pkm.TURTONATOR,
+  Pkm.DRACOZOLT
 )
 
 export const LegendaryShop = new Array<PkmProposition>(

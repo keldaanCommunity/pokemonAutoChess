@@ -6482,6 +6482,24 @@ export class Torkoal extends Pokemon {
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
+export class Dracozolt extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.ELECTRIC,
+    Synergy.FOSSIL
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 180
+  atk = 21
+  def = 3
+  speDef = 3
+  maxPP = 110
+  range = 1
+  skill = Ability.BOLT_BEAK
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
+
 export class Heatmor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
   rarity = Rarity.UNIQUE
@@ -16783,5 +16801,6 @@ export const PokemonClasses: Record<
   [Pkm.BEHEEYEM]: Beheeyem,
   [Pkm.LITTEN]: Litten,
   [Pkm.TORRACAT]: Torracat,
-  [Pkm.INCINEROAR]: Incineroar
+  [Pkm.INCINEROAR]: Incineroar,
+  [Pkm.DRACOZOLT]: Dracozolt
 }
