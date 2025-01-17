@@ -6766,6 +6766,9 @@ export class Annihilape extends Pokemon {
   range = 1
   skill = Ability.THRASH
   attackSprite = AttackSprite.FIGHTING_MELEE
+  onAcquired(player: Player) {
+    player.titles.add(Title.ANNIHILATOR)
+  }
 }
 
 export class Anorith extends Pokemon {

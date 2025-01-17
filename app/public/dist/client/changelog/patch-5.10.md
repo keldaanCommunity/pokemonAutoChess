@@ -49,3 +49,4 @@
 # Misc
 
 - Increased allowed game reconnection time from 3 minutes to 5 minutes
+- New title: Annihilator: get an Annihilape
