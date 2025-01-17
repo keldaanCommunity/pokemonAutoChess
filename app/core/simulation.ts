@@ -50,7 +50,7 @@ import { PokemonEntity, getStrongestUnit, getUnitScore } from "./pokemon-entity"
 import { DelayedCommand } from "./simulation-command"
 import { getAvatarString } from "../utils/avatar"
 import { max } from "../utils/number"
-import { OnItemGainedEffect, GrowGroundEffect, FireHitEffect, MonsterKillEffect } from "./effect"
+import { OnItemGainedEffect, GrowGroundEffect, FireHitEffect, MonsterKillEffect, SoundCryEffect, ResetSoundCry } from "./effect"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -412,6 +412,15 @@ export default class Simulation extends Schema implements ISimulation {
       (!singleType && pokemon.types.has(Synergy.GHOST))
     ) {
       pokemon.addDodgeChance(0.2, pokemon, 0, false)
+    }
+
+    if (
+      (singleType === Synergy.SOUND ||
+      (!singleType && pokemon.types.has(Synergy.SOUND))) &&
+      !SynergyEffects[Synergy.SOUND].some((e) => allyEffects.has(e))
+    ) {
+      // allow sound pokemon to always wake up allies without searching through the board twice
+      pokemon.effectsSet.add(new SoundCryEffect())
     }
   }
 
@@ -1111,7 +1120,9 @@ export default class Simulation extends Schema implements ISimulation {
       case Effect.PRESTO:
         if (types.has(Synergy.SOUND)) {
           pokemon.effects.add(effect)
+          pokemon.effectsSet.add(new SoundCryEffect(effect))
         }
+        pokemon.effectsSet.add(new ResetSoundCry(effect))
         break
 
       case Effect.COCOON:

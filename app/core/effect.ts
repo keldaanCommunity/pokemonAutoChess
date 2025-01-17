@@ -4,6 +4,8 @@ import { Item } from "../types/enum/Item"
 import { Effect as EffectEnum } from "../types/enum/Effect"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { chance } from "../utils/random"
+import PokemonState from "./pokemon-state"
+import { Passive } from "../types/enum/Passive"
 
 type EffectOrigin = EffectEnum | Item
 
@@ -150,5 +152,85 @@ export class FireHitEffect extends OnHitEffect {
     const removalAmount = -this.count * this.synergyLevel
     pokemon.addAttack(removalAmount, pokemon, 0, false)
     this.count = 0
+  }
+}
+
+export class OnAbilityEffect extends Effect {
+  apply(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+    ) {}
+  constructor(
+    effect?: (
+      pokemon: PokemonEntity,
+      state: PokemonState,
+      board: Board,
+      target: PokemonEntity,
+      crit: boolean
+    ) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
+
+export class SoundCryEffect extends OnAbilityEffect {
+  count: number = 0
+  synergyLevel: number = -1
+  constructor(effect?: EffectEnum) {
+    super(undefined, effect)
+    if (effect) {
+      this.synergyLevel = SynergyEffects[Synergy.SOUND].indexOf(effect)
+    }
+  }
+
+  apply(pokemon, state, board, target, crit) {
+    const attackBoost = [2, 1, 1][this.synergyLevel] ?? 0
+    const attackSpeedBoost = [0, 5, 5][this.synergyLevel] ?? 0
+    const manaBoost = [0, 0, 3][this.synergyLevel] ?? 0
+
+    const chimecho =
+      pokemon.effects.has(EffectEnum.CHIMECHO_PASSIVE) &&
+      board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+        .some((cell) => cell.value?.passive === Passive.CHIMECHO)
+    
+    const scale =
+      (chimecho ? 2 : 1) * 
+      (pokemon.passive === Passive.MEGA_LAUNCHER ? 3 : 1)
+    
+    board.cells.forEach((ally) => {
+      if (ally?.team === pokemon.team) {
+        ally.status.sleep = false
+        ally.addAttack(attackBoost * scale, pokemon, 0, false)
+        ally.addAttackSpeed(attackSpeedBoost * scale, pokemon, 0, false)
+        ally.addPP(manaBoost * scale, pokemon, 0, false)
+        ally.count.soundCryCount += scale
+      }
+    })
+  }
+}
+
+export class ResetSoundCry extends Effect {
+  synergyLevel: number
+  constructor(effect) {
+    super(undefined, effect)
+    this.synergyLevel = SynergyEffects[Synergy.SOUND].indexOf(effect)
+  }
+
+  resetStacks(pokemon) {
+    const attackBoost = ([2, 1, 1][this.synergyLevel] ?? 0) *
+      -pokemon.count.soundCryCount
+    const attackSpeedBoost = ([0, 5, 5][this.synergyLevel] ?? 0) *
+      -pokemon.count.soundCryCount
+    const manaBoost = ([0, 0, 3][this.synergyLevel] ?? 0) *
+      -pokemon.count.soundCryCount
+
+      pokemon.addAttack(attackBoost, pokemon, 0, false)
+      pokemon.addAttackSpeed(attackSpeedBoost, pokemon, 0, false)
+      pokemon.addPP(manaBoost, pokemon, 0, false)
+      pokemon.count.soundCryCount = 0
   }
 }
