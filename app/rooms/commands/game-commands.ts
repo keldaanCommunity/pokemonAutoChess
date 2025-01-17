@@ -297,7 +297,8 @@ export class OnDragDropCommand extends Command<
               success = true
             }
           } else if (
-            pokemon.canBePlaced && (!target || target.canBeBenched) &&
+            pokemon.canBePlaced &&
+            (!target || target.canBeBenched) &&
             !(dropFromBench && dropToEmptyPlace && isBoardFull)
           ) {
             // Prevents a pokemon to go on the board only if it's adding a pokemon from the bench on a full board
@@ -1084,7 +1085,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     })
   }
 
-  computeIncome(isPVE: boolean, specialGameRule: SpecialGameRule) {
+  computeIncome(isPVE: boolean, specialGameRule: SpecialGameRule | null) {
     this.state.players.forEach((player) => {
       let income = 0
       if (player.alive && !player.isBot) {
