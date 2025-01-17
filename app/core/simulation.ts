@@ -1343,6 +1343,11 @@ export default class Simulation extends Schema implements ISimulation {
         break
       }
 
+      case Effect.CHIMECHO_PASSIVE: {
+        pokemon.effects.add(effect)
+        break
+      }
+
       default:
         break
     }

@@ -10672,6 +10672,10 @@ export class Chimecho extends Pokemon {
   skill = Ability.ECHO
   passive = Passive.CHIMECHO
   attackSprite = AttackSprite.PSYCHIC_RANGE
+
+  beforeSimulationStart( { teamEffects }: {teamEffects: Set<Effect>}) {
+    teamEffects.add(Effect.CHIMECHO_PASSIVE)
+  }
 }
 
 export class Tyrogue extends Pokemon {
