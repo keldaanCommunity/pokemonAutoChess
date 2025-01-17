@@ -2409,6 +2409,29 @@ export class ProtectStrategy extends AbilityStrategy {
   }
 }
 
+export class ObstructStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const duration = Math.round(
+      ([1000, 2000, 4000][pokemon.stars - 1] ?? 4000) * (1 + pokemon.ap / 200)
+    )
+    pokemon.status.triggerProtect(duration)
+    pokemon.effects.add(Effect.OBSTRUCT)
+    pokemon.commands.push(
+      new DelayedCommand(
+        () => pokemon.effects.delete(Effect.OBSTRUCT),
+        duration
+      )
+    )
+  }
+}
+
 export class SleepStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -9026,12 +9049,7 @@ export class TorchSongStrategy extends AbilityStrategy {
       })
     })
 
-    pokemon.addAbilityPower(
-      scorchedEnemiesId.size * apBoost,
-      pokemon,
-      0,
-      false
-    )
+    pokemon.addAbilityPower(scorchedEnemiesId.size * apBoost, pokemon, 0, false)
   }
 }
 
@@ -11368,6 +11386,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.CONFUSION]: new ConfusionStrategy(),
   [Ability.BLIZZARD]: new BlizzardStrategy(),
   [Ability.PROTECT]: new ProtectStrategy(),
+  [Ability.OBSTRUCT]: new ObstructStrategy(),
   [Ability.POISON]: new PoisonStrategy(),
   [Ability.ORIGIN_PULSE]: new OriginPulseStrategy(),
   [Ability.SEED_FLARE]: new SeedFlareStrategy(),

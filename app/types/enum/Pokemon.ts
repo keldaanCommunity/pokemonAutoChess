@@ -25,6 +25,8 @@ export enum Pkm {
   ALOLAN_RAICHU = "ALOLAN_RAICHU",
   ALOLAN_RATICATE = "ALOLAN_RATICATE",
   ALOLAN_RATTATA = "ALOLAN_RATTATA",
+  ALOLAN_SANDSHREW = "ALOLAN_SANDSHREW",
+  ALOLAN_SANDSLASH = "ALOLAN_SANDSLASH",
   ALOLAN_VULPIX = "ALOLAN_VULPIX",
   ALTARIA = "ALTARIA",
   AMAURA = "AMAURA",
@@ -252,10 +254,12 @@ export enum Pkm {
   GABITE = "GABITE",
   GALAR_CORSOLA = "GALAR_CORSOLA",
   GALARIAN_ARTICUNO = "GALARIAN_ARTICUNO",
-  GALARIAN_ZAPDOS = "GALARIAN_ZAPDOS",
+  GALARIAN_LINOONE = "GALARIAN_LINOONE",
   GALARIAN_MOLTRES = "GALARIAN_MOLTRES",
   GALARIAN_PONYTA = "GALARIAN_PONYTA",
   GALARIAN_RAPIDASH = "GALARIAN_RAPIDASH",
+  GALARIAN_ZAPDOS = "GALARIAN_ZAPDOS",
+  GALARIAN_ZIGZAGOON = "GALARIAN_ZIGZAGOON",
   GALVANTULA = "GALVANTULA",
   GARBODOR = "GARBODOR",
   GARCHOMP = "GARCHOMP",
@@ -523,6 +527,7 @@ export enum Pkm {
   NOSEPASS = "NOSEPASS",
   NUMEL = "NUMEL",
   NUZLEAF = "NUZLEAF",
+  OBSTAGOON = "OBSTAGOON",
   OCTILLERY = "OCTILLERY",
   ODDISH = "ODDISH",
   OGERPON_CORNERSTONE = "OGERPON_CORNERSTONE",
@@ -926,7 +931,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.RAICHU]: "0026",
   [Pkm.ALOLAN_RAICHU]: "0026-0001",
   [Pkm.SANDSHREW]: "0027",
+  [Pkm.ALOLAN_SANDSHREW]: "0027-0001",
   [Pkm.SANDSLASH]: "0028",
+  [Pkm.ALOLAN_SANDSLASH]: "0028-0001",
   [Pkm.NIDORANF]: "0029",
   [Pkm.NIDORINA]: "0030",
   [Pkm.NIDOQUEEN]: "0031",
@@ -1223,7 +1230,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.POOCHYENA]: "0261",
   [Pkm.MIGHTYENA]: "0262",
   [Pkm.ZIGZAGOON]: "0263",
+  [Pkm.GALARIAN_ZIGZAGOON]: "0263-0001",
   [Pkm.LINOONE]: "0264",
+  [Pkm.GALARIAN_LINOONE]: "0264-0001",
   [Pkm.WURMPLE]: "0265",
   [Pkm.SILCOON]: "0266",
   [Pkm.BEAUTIFLY]: "0267",
@@ -1880,7 +1889,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.IMPIDIMP]: "0859",
   [Pkm.MORGREM]: "0860",
   [Pkm.GRIMMSNARL]: "0861",
-  //[Pkm.OBSTAGOON]: "0862",
+  [Pkm.OBSTAGOON]: "0862",
   //[Pkm.PERRSERKER]: "0863",
   [Pkm.CURSOLA]: "0864",
   //[Pkm.SIRFETCHD]: "0865",
@@ -2532,6 +2541,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GOTHITELLE]: Pkm.GOTHITA,
   [Pkm.SANDSHREW]: Pkm.SANDSHREW,
   [Pkm.SANDSLASH]: Pkm.SANDSHREW,
+  [Pkm.ALOLAN_SANDSHREW]: Pkm.ALOLAN_SANDSHREW,
+  [Pkm.ALOLAN_SANDSLASH]: Pkm.ALOLAN_SANDSHREW,
   [Pkm.FARFETCH_D]: Pkm.FARFETCH_D,
   [Pkm.UNOWN_A]: Pkm.UNOWN_A,
   [Pkm.UNOWN_B]: Pkm.UNOWN_A,
@@ -2733,6 +2744,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.STOUTLAND]: Pkm.LILLIPUP,
   [Pkm.ZIGZAGOON]: Pkm.ZIGZAGOON,
   [Pkm.LINOONE]: Pkm.ZIGZAGOON,
+  [Pkm.GALARIAN_ZIGZAGOON]: Pkm.GALARIAN_ZIGZAGOON,
+  [Pkm.GALARIAN_LINOONE]: Pkm.GALARIAN_ZIGZAGOON,
+  [Pkm.OBSTAGOON]: Pkm.GALARIAN_ZIGZAGOON,
   [Pkm.PHEROMOSA]: Pkm.PHEROMOSA,
   [Pkm.SABLEYE]: Pkm.SABLEYE,
   [Pkm.MEGA_SABLEYE]: Pkm.SABLEYE,
@@ -2948,7 +2962,8 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.SNEASEL]: [Pkm.HISUI_SNEASEL],
   [Pkm.MEOWTH]: [Pkm.ALOLAN_MEOWTH],
   [Pkm.PONYTA]: [Pkm.GALARIAN_PONYTA],
-  [Pkm.VOLTORB]: [Pkm.HISUI_VOLTORB]
+  [Pkm.VOLTORB]: [Pkm.HISUI_VOLTORB],
+  [Pkm.SANDSHREW]: [Pkm.ALOLAN_SANDSHREW]
 } as const
 
 export enum PkmDuo {
@@ -5508,6 +5523,17 @@ export const AnimationConfig: {
     ability: AnimationType.Attack,
     emote: AnimationType.DeepBreath
   },
+  [Pkm.ALOLAN_SANDSHREW]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.ALOLAN_SANDSLASH]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
+  },
   [Pkm.FARFETCH_D]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Attack,
@@ -6514,6 +6540,21 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.RearUp
+  },
+  [Pkm.GALARIAN_ZIGZAGOON]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp
+  },
+  [Pkm.GALARIAN_LINOONE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp
+  },
+  [Pkm.OBSTAGOON]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Double,
+    emote: AnimationType.Shoot
   },
   [Pkm.PHEROMOSA]: {
     attack: AnimationType.Kick,

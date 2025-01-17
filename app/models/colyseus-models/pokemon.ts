@@ -1833,6 +1833,10 @@ export class Deino extends Pokemon {
   skill = Ability.DARK_HARVEST
   attackSprite = AttackSprite.DARK_RANGE
   regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.DRAGON)
+  }
 }
 
 export class Zweilous extends Pokemon {
@@ -1849,6 +1853,10 @@ export class Zweilous extends Pokemon {
   skill = Ability.DARK_HARVEST
   attackSprite = AttackSprite.DARK_RANGE
   regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.DRAGON)
+  }
 }
 
 export class Hydreigon extends Pokemon {
@@ -1864,6 +1872,10 @@ export class Hydreigon extends Pokemon {
   skill = Ability.DARK_HARVEST
   attackSprite = AttackSprite.DARK_RANGE
   regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.DRAGON)
+  }
 }
 
 export class Poliwag extends Pokemon {
@@ -9690,6 +9702,39 @@ export class Sandslash extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class AlolanSandshrew extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.STEEL])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.ALOLAN_SANDSLASH
+  hp = 90
+  atk = 5
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 1
+  skill = Ability.ICE_BALL
+  additional = true
+  regional = true
+  attackSprite = AttackSprite.ICE_MELEE
+}
+
+export class AlolanSandslash extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.STEEL])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 180
+  atk = 13
+  def = 5
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.ICE_BALL
+  additional = true
+  regional = true
+  attackSprite = AttackSprite.ICE_MELEE
+}
+
 export class Nosepass extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.ARTIFICIAL])
   rarity = Rarity.UNCOMMON
@@ -12128,6 +12173,53 @@ export class Linoone extends Pokemon {
   skill = Ability.SLASH
   attackSprite = AttackSprite.NORMAL_MELEE
   passive = Passive.PICKUP
+}
+
+export class GalarianZigzagoon extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.LINOONE
+  hp = 80
+  atk = 7
+  def = 5
+  speDef = 2
+  maxPP = 50
+  range = 1
+  skill = Ability.SLASH
+  attackSprite = AttackSprite.DARK_MELEE
+  regional = true
+}
+
+export class GalarianLinoone extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.OBSTAGOON
+  hp = 180
+  atk = 18
+  def = 7
+  speDef = 4
+  maxPP = 50
+  range = 1
+  skill = Ability.SLASH
+  attackSprite = AttackSprite.DARK_MELEE
+  regional = true
+}
+
+export class Obstagoon extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK, Synergy.SOUND])
+  rarity = Rarity.RARE
+  stars = 3
+  hp = 340
+  atk = 28
+  def = 10
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.OBSTRUCT
+  attackSprite = AttackSprite.DARK_MELEE
+  regional = true
 }
 
 export class Phantump extends Pokemon {
@@ -16290,6 +16382,8 @@ export const PokemonClasses: Record<
   [Pkm.CINDERACE]: Cinderace,
   [Pkm.SANDSHREW]: Sandshrew,
   [Pkm.SANDSLASH]: Sandslash,
+  [Pkm.ALOLAN_SANDSHREW]: AlolanSandshrew,
+  [Pkm.ALOLAN_SANDSLASH]: AlolanSandslash,
   [Pkm.FARFETCH_D]: Farfetchd,
   [Pkm.UNOWN_A]: UnownA,
   [Pkm.UNOWN_B]: UnownB,
@@ -16487,6 +16581,9 @@ export const PokemonClasses: Record<
   [Pkm.STOUTLAND]: Stoutland,
   [Pkm.ZIGZAGOON]: Zigzagoon,
   [Pkm.LINOONE]: Linoone,
+  [Pkm.GALARIAN_ZIGZAGOON]: GalarianZigzagoon,
+  [Pkm.GALARIAN_LINOONE]: GalarianLinoone,
+  [Pkm.OBSTAGOON]: Obstagoon,
   [Pkm.PHEROMOSA]: Pheromosa,
   [Pkm.SABLEYE]: Sableye,
   [Pkm.MEGA_SABLEYE]: MegaSableye,

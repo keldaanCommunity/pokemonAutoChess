@@ -256,20 +256,14 @@ async function splitIndex(index: string) {
 
         for (let l = 0; l < actions.length; l++) {
           const action = actions[l]
+          let metadata = xmlData.AnimData.Anims.Anim.find(
+            (m) => m.Name == action
+          )
+          const imgPath = expandHomeDir(
+            `${path}/sprite/${pad}/${metadata?.CopyOf || action}-${anim}.png`
+          )
           try {
-            let metadata = xmlData.AnimData.Anims.Anim.find(
-              (m) => m.Name == action
-            )
-            const img =
-              metadata && metadata.CopyOf
-                ? await Jimp.read(
-                    expandHomeDir(
-                      `${path}/sprite/${pad}/${metadata.CopyOf}-${anim}.png`
-                    )
-                  )
-                : await Jimp.read(
-                    expandHomeDir(`${path}/sprite/${pad}/${action}-${anim}.png`)
-                  )
+            const img = await Jimp.read(imgPath)
 
             if (metadata?.CopyOf) {
               metadata = xmlData.AnimData.Anims.Anim.find(
@@ -339,7 +333,7 @@ async function splitIndex(index: string) {
               }
             }
           } catch (error) {
-            logger.error(error)
+            logger.error(`Error parsing animation ${imgPath}`, error)
             logger.warn(
               "action",
               action,
