@@ -59,7 +59,8 @@ import { ItemEffects } from "./items"
 import {
   OnItemRemovedEffect,
   OnKillEffect,
-  Effect as EffectClass
+  Effect as EffectClass,
+  OnHitEffect
 } from "./effect"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 
@@ -993,6 +994,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     // Synergy effects on hit
 
+    this.effectsSet.forEach((effect) => {
+      if (effect instanceof OnHitEffect) {
+        effect.apply(this, target, board)
+      }
+    })
+
     const nbIcyRocks =
       this.player && this.simulation.weather === Weather.SNOW
         ? count(this.player.items, Item.ICY_ROCK)
@@ -1011,20 +1018,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       freezeChance += nbIcyRocks * 0.05
       if (chance(freezeChance, this)) {
         target.status.triggerFreeze(2000, target)
-      }
-    }
-
-    if (this.hasSynergyEffect(Synergy.FIRE)) {
-      const burnChance = 0.3
-      if (this.effects.has(Effect.VICTORY_STAR)) {
-        this.addAttack(1, this, 0, false)
-      } else if (this.effects.has(Effect.DROUGHT)) {
-        this.addAttack(2, this, 0, false)
-      } else if (this.effects.has(Effect.DESOLATE_LAND)) {
-        this.addAttack(3, this, 0, false)
-      }
-      if (chance(burnChance, this)) {
-        target.status.triggerBurn(2000, target, this)
       }
     }
 
@@ -1518,38 +1511,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       effect.apply(this, target, board)
     })
 
+    this.effectsSet.forEach((effect) => {
+      if (effect instanceof OnKillEffect) {
+        effect.apply(this, target, board)
+      }
+    })
+
     if (this.passive === Passive.SOUL_HEART) {
       this.addPP(10, this, 0, false)
       this.addAbilityPower(10, this, 0, false)
-    }
-
-    if (this.hasSynergyEffect(Synergy.MONSTER)) {
-      const isPursuit = this.effects.has(Effect.PURSUIT)
-      const isBrutalSwing = this.effects.has(Effect.BRUTAL_SWING)
-      const isPowerTrip = this.effects.has(Effect.POWER_TRIP)
-      const isMerciless = this.effects.has(Effect.MERCILESS)
-
-      let lifeBoost = 0,
-        attackBoost = 0,
-        apBoost = 0
-      if (isPursuit) {
-        lifeBoost = Math.round(0.2 * target.hp)
-        attackBoost = 3
-        apBoost = 10
-      } else if (isBrutalSwing) {
-        lifeBoost = Math.round(0.4 * target.hp)
-        attackBoost = 6
-        apBoost = 20
-      } else if (isPowerTrip || isMerciless) {
-        lifeBoost = Math.round(0.6 * target.hp)
-        attackBoost = 10
-        apBoost = 30
-      }
-      if (this.life > 0) {
-        this.addMaxHP(lifeBoost, this, 0, false)
-        this.addAttack(attackBoost, this, 0, false)
-        this.addAbilityPower(apBoost, this, 0, false)
-      }
     }
 
     if (this.passive === Passive.BEAST_BOOST_ATK) {

@@ -3,6 +3,7 @@ import { PokemonEntity } from "./pokemon-entity"
 import { Item } from "../types/enum/Item"
 import { Effect as EffectEnum } from "../types/enum/Effect"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
+import { chance } from "../utils/random"
 
 type EffectOrigin = EffectEnum | Item
 
@@ -24,12 +25,44 @@ export class OnItemRemovedEffect extends Effect {}
 
 // applied after knocking out an enemy
 export class OnKillEffect extends Effect {
-  apply: (entity: PokemonEntity, target: PokemonEntity, board: Board) => void
+  apply(entity: PokemonEntity, target: PokemonEntity, board: Board) {}
   constructor(
-    effect: (entity: PokemonEntity, target: PokemonEntity, board: Board) => void
+    effect?: (entity: PokemonEntity, target: PokemonEntity, board: Board) => void,
+    origin?: EffectOrigin
   ) {
-    super(effect)
-    this.apply = effect
+    super(effect, origin)
+  }
+}
+
+export class MonsterKillEffect extends OnKillEffect {
+  hpBoosted: number = 0
+  count: number = 0
+  synergyLevel: number
+  constructor(effect: EffectEnum) {
+    super(undefined, effect)
+    this.synergyLevel = SynergyEffects[Synergy.MONSTER].indexOf(effect)
+  }
+
+  apply(pokemon, target, board) {
+    const attackBoost = [3, 6, 10, 10][this.synergyLevel] ?? 10
+    const apBoost = [10, 20, 30, 30][this.synergyLevel] ?? 30
+    const hpGain = [0.2, 0.4, 0.6, 0.6][this.synergyLevel] ?? 0.6
+    const lifeBoost = hpGain * target.hp
+    pokemon.addAttack(attackBoost, pokemon, 0, false)
+    pokemon.addAbilityPower(apBoost, pokemon, 0, false)
+    pokemon.addMaxHP(lifeBoost, pokemon, 0, false)
+    this.hpBoosted += lifeBoost
+    this.count += 1
+  }
+
+  resetStacks(pokemon) {
+    const attackBoost = [3, 6, 10, 10][this.synergyLevel] ?? 10
+    const apBoost = [10, 20, 30, 30][this.synergyLevel] ?? 30
+    pokemon.addAttack(-this.count * attackBoost, pokemon, 0, false)
+    pokemon.addAbilityPower(-this.count * apBoost, pokemon, 0, false)
+    pokemon.addMaxHP(-this.hpBoosted, pokemon, 0, false)
+    this.hpBoosted = 0
+    this.count = 0
   }
 }
 
@@ -81,5 +114,41 @@ export class GrowGroundEffect extends PeriodicEffect {
       pokemon.player.addMoney(3, true, pokemon)
       pokemon.count.moneyCount += 3
     }
+  }
+}
+
+export class OnHitEffect extends Effect {
+  apply(entity: PokemonEntity, target: PokemonEntity, board: Board) {}
+  constructor(
+    effect?: (entity: PokemonEntity, target: PokemonEntity, board: Board) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
+
+export class FireHitEffect extends OnHitEffect {
+  count: number = 0
+  synergyLevel: number
+  constructor(
+    effect: EffectEnum
+  ) {
+    super(undefined, effect)
+    this.synergyLevel = SynergyEffects[Synergy.FIRE].indexOf(effect)
+  }
+
+  apply(pokemon, target, board) {
+    const burnChance = 0.3
+    pokemon.addAttack(this.synergyLevel, pokemon, 0, false)
+    if (chance(burnChance, pokemon)) {
+      target.status.triggerBurn(2000, target, pokemon)
+    }
+    this.count += 1
+  }
+
+  resetStacks(pokemon) {
+    const removalAmount = -this.count * this.synergyLevel
+    pokemon.addAttack(removalAmount, pokemon, 0, false)
+    this.count = 0
   }
 }
