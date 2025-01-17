@@ -11127,13 +11127,7 @@ export class ColumnCrushStrategy extends AbilityStrategy {
           ? pillar.simulation.blueTeam
           : pillar.simulation.redTeam
       pillar.shield = 0
-      pillar.handleSpecialDamage(
-        9999,
-        board,
-        AttackType.TRUE,
-        null,
-        false
-      )
+      pillar.handleSpecialDamage(9999, board, AttackType.TRUE, null, false)
       pokemon.moveTo(pillarX, pillarY, board)
       pokemon.cooldown = 1000
 
@@ -11309,6 +11303,31 @@ export class DarkLariatStrategy extends AbilityStrategy {
       pokemon.moveTo(freeCellBehind.x, freeCellBehind.y, board)
       pokemon.cooldown = 600
     }
+  }
+}
+
+export class BoltBeakStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        if (target && target.life > 0) {
+          target.handleSpecialDamage(
+            target.pp > 40 ? 160 : 80,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      }, 250)
+    )
   }
 }
 
@@ -11731,5 +11750,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.HARDEN]: new HardenStrategy(),
   [Ability.COLUMN_CRUSH]: new ColumnCrushStrategy(),
   [Ability.WONDER_ROOM]: new WonderRoomStrategy(),
-  [Ability.DARK_LARIAT]: new DarkLariatStrategy()
+  [Ability.DARK_LARIAT]: new DarkLariatStrategy(),
+  [Ability.BOLT_BEAK]: new BoltBeakStrategy()
 }

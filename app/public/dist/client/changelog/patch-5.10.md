@@ -5,6 +5,7 @@
 - Galarian Zigzagoon
 - Galarian Linoone
 - Obstagoon
+- Dracozolt
 
 # Changes to Pokemon & Abilities
 
