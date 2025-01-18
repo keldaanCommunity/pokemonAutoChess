@@ -3,6 +3,7 @@ button {
 }
 
 .bubbly {
+  position: relative;
   padding: 0.25em 0.5em;
   background: #e7e7e7;
   display: inline-block;
@@ -142,4 +143,30 @@ button {
   display: inline-block;
   vertical-align: text-top;
   margin-right: 0.25em;
+}
+
+.bubbly.loading::after {
+  content: "";
+  position: absolute;
+  width: 1.5em;
+  height: 1.5em;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: 4px solid transparent;
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: button-loading-spinner 1s ease infinite;
+}
+
+@keyframes button-loading-spinner {
+  from {
+    transform: rotate(0turn);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
 }
