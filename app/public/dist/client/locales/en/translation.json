@@ -2784,6 +2784,8 @@
   "nintendo_warning": "Non profit, open source. All rights to The Pokemon Company®",
   "collection": "Collection",
   "wiki_label": "Wiki",
+  "synergy_sidebar_label": "Sinergy Search",
+  "no_type_selected_label": "Please select a type to start",
   "bot_builder": "Bot Builder",
   "meta": "Meta",
   "key_bindings": "Key bindings",

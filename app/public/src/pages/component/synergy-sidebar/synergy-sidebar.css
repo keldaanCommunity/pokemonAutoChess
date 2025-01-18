@@ -1,0 +1,47 @@
+.modal.my-container.synergy-sidebar {
+  margin: 0;
+  height: 100%;
+  width: 33%;
+  max-height: 100%;
+}
+.modal.my-container.synergy-sidebar .modal-body {
+  padding: 0;
+  overflow: hidden;
+  justify-content: space-between;
+  display: flex;
+  height: 100%;
+}
+
+.modal.my-container.synergy-sidebar #synergy-sidebar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.modal.my-container.synergy-sidebar #synergy-sidebar .synergy-cta {
+  background: none;
+  border: none;
+  padding: 0;
+}
+.modal.my-container.synergy-sidebar #synergy-sidebar .synergy-cta.selected {
+  border-bottom: 2px solid white;
+}
+
+.modal.my-container.synergy-sidebar .modal-body .pokemon-list {
+  padding: 10px;
+  overflow: scroll;
+}
+
+.modal.my-container.synergy-sidebar
+  .modal-body
+  .pokemon-list
+  .pokemon-portrait-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.modal.my-container.synergy-sidebar .modal-body .no-type-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+}

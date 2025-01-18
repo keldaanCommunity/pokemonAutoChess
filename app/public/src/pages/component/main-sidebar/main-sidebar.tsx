@@ -1,87 +1,90 @@
-import React, { useCallback, useEffect, useRef, useState } from "react"
-import { useTranslation } from "react-i18next"
-import { Menu, MenuItem, MenuItemProps, Sidebar } from "react-pro-sidebar"
-import { useNavigate } from "react-router"
-import pkg from "../../../../../../package.json"
-import { GADGETS } from "../../../../../core/gadgets"
-import { Role } from "../../../../../types"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { setSearchedUser } from "../../../stores/LobbyStore"
-import { toggleFullScreen } from "../../utils/fullscreen"
-import { cc } from "../../utils/jsx"
-import Booster from "../booster/booster"
-import TeamBuilderModal from "../bot-builder/team-builder-modal"
-import PokemonCollection from "../collection/pokemon-collection"
-import Jukebox from "../jukebox/jukebox"
-import MetaReport from "../meta-report/meta-report"
-import { Modal } from "../modal/modal"
-import GameOptionsModal from "../options/game-options-modal"
-import Patchnotes from "../patchnotes/patchnotes"
-import { usePatchVersion } from "../patchnotes/usePatchVersion"
-import Profile from "../profile/profile"
-import { TournamentsAdmin } from "../tournaments-admin/tournaments-admin"
-import Wiki from "../wiki/wiki"
-import ServersList from "../servers/servers-list"
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Menu, MenuItem, MenuItemProps, Sidebar } from "react-pro-sidebar";
+import { useNavigate } from "react-router";
+import pkg from "../../../../../../package.json";
+import { GADGETS } from "../../../../../core/gadgets";
+import { Role } from "../../../../../types";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { setSearchedUser } from "../../../stores/LobbyStore";
+import { toggleFullScreen } from "../../utils/fullscreen";
+import { cc } from "../../utils/jsx";
+import Booster from "../booster/booster";
+import TeamBuilderModal from "../bot-builder/team-builder-modal";
+import PokemonCollection from "../collection/pokemon-collection";
+import Jukebox from "../jukebox/jukebox";
+import MetaReport from "../meta-report/meta-report";
+import { Modal } from "../modal/modal";
+import GameOptionsModal from "../options/game-options-modal";
+import Patchnotes from "../patchnotes/patchnotes";
+import { usePatchVersion } from "../patchnotes/usePatchVersion";
+import Profile from "../profile/profile";
+import { TournamentsAdmin } from "../tournaments-admin/tournaments-admin";
+import Wiki from "../wiki/wiki";
+import SynergySidebar from "../synergy-sidebar/synergy-sidebar";
+import ServersList from "../servers/servers-list";
 
-import "./main-sidebar.css"
+import "./main-sidebar.css";
 
-export type Page = "main_lobby" | "preparation" | "game"
+export type Page = "main_lobby" | "preparation" | "game";
 
 interface MainSidebarProps {
-  page: Page
-  leave: () => void
-  leaveLabel: string
+  page: Page;
+  leave: () => void;
+  leaveLabel: string;
 }
 
 export function MainSidebar(props: MainSidebarProps) {
-  const { page, leave, leaveLabel } = props
-  const [collapsed, setCollapsed] = useState(true)
-  const navigate = useNavigate()
-  const [modal, setModal] = useState<Modals>()
-  const [showSurrenderConfirm, setShowSurrenderConfirm] = useState(false)
+  const { page, leave, leaveLabel } = props;
+  const [collapsed, setCollapsed] = useState(true);
+  const navigate = useNavigate();
+  const [modal, setModal] = useState<Modals>();
+  const [showSurrenderConfirm, setShowSurrenderConfirm] = useState(false);
   const changeModal = useCallback(
     (nextModal: Modals) => setModal(nextModal),
     []
-  )
-  const sidebarRef = useRef<HTMLHtmlElement>(null)
+  );
+  const sidebarRef = useRef<HTMLHtmlElement>(null);
 
-  const { t } = useTranslation()
-  const profile = useAppSelector((state) => state.network.profile)
-  const profileLevel = profile?.level ?? 0
+  const { t } = useTranslation();
+  const profile = useAppSelector((state) => state.network.profile);
+  const profileLevel = profile?.level ?? 0;
 
-  const { isNewPatch, updateVersionChecked } = usePatchVersion()
+  const { isNewPatch, updateVersionChecked } = usePatchVersion();
 
-  const version = pkg.version
+  const version = pkg.version;
 
-  const numberOfBooster = profile?.booster ?? 0
+  const numberOfBooster = profile?.booster ?? 0;
 
   useEffect(() => {
     if (!sidebarRef.current) {
-      return
+      return;
     }
 
-    const ref = sidebarRef.current
+    const ref = sidebarRef.current;
 
-    const extendSidebar = () => setCollapsed(false)
-    const collapseSidebar = () => setCollapsed(true)
+    const extendSidebar = () => setCollapsed(false);
+    const collapseSidebar = () => setCollapsed(true);
 
-    ref.addEventListener("mouseenter", extendSidebar)
-    ref.addEventListener("mouseleave", collapseSidebar)
+    ref.addEventListener("mouseenter", extendSidebar);
+    ref.addEventListener("mouseleave", collapseSidebar);
 
     return () => {
       if (ref) {
-        ref.removeEventListener("mouseenter", extendSidebar)
-        ref.removeEventListener("mouseleave", collapseSidebar)
+        ref.removeEventListener("mouseenter", extendSidebar);
+        ref.removeEventListener("mouseleave", collapseSidebar);
       }
-    }
-  }, [])
+    };
+  }, []);
 
-  const player = useAppSelector(state => state.game.players.find((p) => p.id === state.network.uid))
+  const player = useAppSelector((state) =>
+    state.game.players.find((p) => p.id === state.network.uid)
+  );
   function onClickLeave() {
     if (player && player.life > 0) {
-      setShowSurrenderConfirm(true)
+      setShowSurrenderConfirm(true);
     } else {
-      leave()
+      leave();
     }
   }
 
@@ -112,9 +115,9 @@ export function MainSidebar(props: MainSidebarProps) {
           location="news"
           svg="newspaper"
           handleClick={(newModal) => {
-            changeModal(newModal)
+            changeModal(newModal);
             if (isNewPatch) {
-              updateVersionChecked()
+              updateVersionChecked();
             }
           }}
           shimmer={isNewPatch}
@@ -158,6 +161,14 @@ export function MainSidebar(props: MainSidebarProps) {
           {t("wiki_label")}
         </NavLink>
         <NavLink
+          location="synergy-sidebar"
+          svg="wiki"
+          className="green"
+          handleClick={changeModal}
+        >
+          {t("synergy_sidebar_label")}
+        </NavLink>
+        <NavLink
           svg="meta"
           className="green"
           location="meta"
@@ -176,17 +187,23 @@ export function MainSidebar(props: MainSidebarProps) {
           </NavLink>
         )}
 
-        {page !== "game" && ((!GADGETS.BOT_BUILDER.disabled && profileLevel >= GADGETS.BOT_BUILDER.levelRequired) || profile?.role === Role.ADMIN) && (
-          <NavLink svg="bot" onClick={() => navigate("/bot-builder")}>
-            {t("bot_builder")}
-          </NavLink>
-        )}
+        {page !== "game" &&
+          ((!GADGETS.BOT_BUILDER.disabled &&
+            profileLevel >= GADGETS.BOT_BUILDER.levelRequired) ||
+            profile?.role === Role.ADMIN) && (
+            <NavLink svg="bot" onClick={() => navigate("/bot-builder")}>
+              {t("bot_builder")}
+            </NavLink>
+          )}
 
-        {page !== "game" && ((!GADGETS.GAMEBOY.disabled && profileLevel >= GADGETS.GAMEBOY.levelRequired) || profile?.role === Role.ADMIN) && (
-          <NavLink svg="gameboy" onClick={() => navigate("/gameboy")}>
-            {t("gadget.gameboy")}
-          </NavLink>
-        )}
+        {page !== "game" &&
+          ((!GADGETS.GAMEBOY.disabled &&
+            profileLevel >= GADGETS.GAMEBOY.levelRequired) ||
+            profile?.role === Role.ADMIN) && (
+            <NavLink svg="gameboy" onClick={() => navigate("/gameboy")}>
+              {t("gadget.gameboy")}
+            </NavLink>
+          )}
 
         {page !== "game" && profile?.role === Role.ADMIN && (
           <>
@@ -223,12 +240,11 @@ export function MainSidebar(props: MainSidebarProps) {
           {t("options")}
         </NavLink>
 
-        {page === "game" && document.fullscreenEnabled && <NavLink
-          svg="fullscreen"
-          onClick={toggleFullScreen}
-        >
-          {t("toggle_fullscreen")}
-        </NavLink>}
+        {page === "game" && document.fullscreenEnabled && (
+          <NavLink svg="fullscreen" onClick={toggleFullScreen}>
+            {t("toggle_fullscreen")}
+          </NavLink>
+        )}
 
         <div className="spacer"></div>
 
@@ -236,7 +252,8 @@ export function MainSidebar(props: MainSidebarProps) {
           <NavLink
             svg="players"
             className="community-servers"
-            location="servers" handleClick={changeModal}
+            location="servers"
+            handleClick={changeModal}
           >
             {t("community_servers")}
           </NavLink>
@@ -271,7 +288,7 @@ export function MainSidebar(props: MainSidebarProps) {
             <button
               className="bubbly red"
               onClick={() => {
-                setShowSurrenderConfirm(false)
+                setShowSurrenderConfirm(false);
               }}
             >
               {t("no")}
@@ -280,21 +297,21 @@ export function MainSidebar(props: MainSidebarProps) {
         }
       ></Modal>
     </Sidebar>
-  )
+  );
 }
 
 type NavLinkProps = MenuItemProps &
   NavPageLink & {
-    svg?: string
-    png?: string
-    shimmer?: boolean
-    className?: string
-  }
+    svg?: string;
+    png?: string;
+    shimmer?: boolean;
+    className?: string;
+  };
 
 type NavPageLink = {
-  location?: Modals
-  handleClick?: (update: Modals) => void
-}
+  location?: Modals;
+  handleClick?: (update: Modals) => void;
+};
 
 function NavLink(props: NavLinkProps) {
   const {
@@ -306,16 +323,16 @@ function NavLink(props: NavLinkProps) {
     png,
     icon,
     className = "default",
-    onClick
-  } = props
+    onClick,
+  } = props;
 
   return (
     <MenuItem
       className={cc("menu-item", className, shimmer ? "shimmer" : "")}
       onClick={(e) => {
-        onClick?.(e)
+        onClick?.(e);
         if (location) {
-          handleClick?.(location)
+          handleClick?.(location);
         }
       }}
       icon={
@@ -337,7 +354,7 @@ function NavLink(props: NavLinkProps) {
     >
       {children}
     </MenuItem>
-  )
+  );
 }
 
 export type Modals =
@@ -354,28 +371,29 @@ export type Modals =
   | "announcement"
   | "tournaments"
   | "servers"
+  | "synergy-sidebar";
 
 function Modals({
   modal,
   setModal,
-  page
+  page,
 }: {
-  modal?: Modals
-  setModal: (nextModal?: Modals) => void
-  page: Page
+  modal?: Modals;
+  setModal: (nextModal?: Modals) => void;
+  page: Page;
 }) {
-  const { t } = useTranslation()
-  const searchedUser = useAppSelector((state) => state.lobby.searchedUser)
+  const { t } = useTranslation();
+  const searchedUser = useAppSelector((state) => state.lobby.searchedUser);
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
-  const closeModal = useCallback(() => setModal(undefined), [setModal])
+  const closeModal = useCallback(() => setModal(undefined), [setModal]);
 
   useEffect(() => {
     if (searchedUser && modal !== "profile") {
-      setModal("profile")
+      setModal("profile");
     }
-  }, [modal, searchedUser, setModal])
+  }, [modal, searchedUser, setModal]);
 
   return (
     <>
@@ -389,8 +407,8 @@ function Modals({
       </Modal>
       <Modal
         onClose={() => {
-          closeModal()
-          dispatch(setSearchedUser(undefined))
+          closeModal();
+          dispatch(setSearchedUser(undefined));
         }}
         show={modal === "profile"}
         header={t("profile")}
@@ -420,6 +438,11 @@ function Modals({
       >
         <Wiki inGame={page === "game"} />
       </Modal>
+      <SynergySidebar
+        onClose={closeModal}
+        show={modal === "synergy-sidebar"}
+        header={t("synergy_sidebar_label")}
+      />
       <Modal show={modal === "meta"} header={t("meta")} onClose={closeModal}>
         <MetaReport />
       </Modal>
@@ -427,7 +450,8 @@ function Modals({
         onClose={closeModal}
         show={modal === "servers"}
         className="servers-modal"
-        header={t("community_servers")}>
+        header={t("community_servers")}
+      >
         <ServersList />
       </Modal>
       <TeamBuilderModal
@@ -448,5 +472,5 @@ function Modals({
       </Modal>
       <Jukebox show={modal === "jukebox"} handleClose={closeModal} />
     </>
-  )
+  );
 }
