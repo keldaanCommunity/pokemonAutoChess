@@ -9,7 +9,7 @@ import {
   RarityCost,
   SynergyTriggers
 } from "../../../../../types/Config"
-import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmFamily, PkmRegionalVariants } from "../../../../../types/enum/Pokemon"
 import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
 import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { roundToNDigits } from "../../../../../utils/number"
@@ -48,11 +48,18 @@ export default function SynergyDetailComponent(props: {
     )
     .map((p) => getPokemonData(p as Pkm))
     .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
+  
+  const baseVariant = (pkm: Pkm): Pkm =>  (Object.keys(PkmRegionalVariants) as Pkm[]).find((p) =>
+    PkmRegionalVariants[p]!.includes(pkm)
+  ) ?? pkm
 
   const additionals = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
     props.type
   ].additionalPokemons
-    .filter((p) => additionalPokemons.includes(PkmFamily[p]) || specialGameRule === SpecialGameRule.EVERYONE_IS_HERE)
+    .filter((p) =>
+      additionalPokemons.includes(baseVariant(PkmFamily[p])) ||
+      specialGameRule === SpecialGameRule.EVERYONE_IS_HERE
+    )
     .filter(
       (p, i, arr) => arr.findIndex((x) => PkmFamily[x] === PkmFamily[p]) === i // remove duplicates of same family
     )
