@@ -24,7 +24,6 @@ import { getRank } from "../../utils/elo"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { UserRecord } from "firebase-admin/lib/auth/user-record"
 import { setTimeout } from "node:timers/promises"
-import { AbortError } from "node-fetch"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -48,10 +47,10 @@ export class OnJoinCommand extends Command<
         }
       }
 
-      const numberOfHumanPlayers = values(this.state.users).filter(
+      let nbHumanPlayers = values(this.state.users).filter(
         (u) => !u.isBot
       ).length
-      if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME) {
+      if (nbHumanPlayers >= MAX_PLAYERS_PER_GAME) {
         client.leave(CloseCodes.ROOM_FULL)
         return
       }
@@ -61,6 +60,7 @@ export class OnJoinCommand extends Command<
       ) {
         this.state.ownerId = auth.uid
       }
+
       if (this.state.users.has(auth.uid)) {
         const user = this.state.users.get(auth.uid)!
         this.state.addMessage({
@@ -70,10 +70,8 @@ export class OnJoinCommand extends Command<
         })
       } else {
         const u = await UserMetadata.findOne({ uid: auth.uid })
-        const numberOfHumanPlayers = values(this.state.users).filter(
-          (u) => !u.isBot
-        ).length
-        if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME) {
+        nbHumanPlayers = values(this.state.users).filter((u) => !u.isBot).length // update again the value after the database request
+        if (nbHumanPlayers >= MAX_PLAYERS_PER_GAME) {
           // lobby has been filled with someone else while waiting for the database
           client.leave(CloseCodes.ROOM_FULL)
           return

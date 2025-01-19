@@ -1413,10 +1413,10 @@ export class EndTournamentCommand extends Command<
       }
 
       for (const player of finalists) {
-        const mongoUser = await UserMetadata.findOne({ uid: player.id })
-        const user = this.room.users.get(player.id)
         const rank = player.ranks.at(-1) ?? 1
+        const user = this.room.users.get(player.id)
 
+        const mongoUser = await UserMetadata.findOne({ uid: player.id })
         if (mongoUser == null || user == null) continue
 
         mongoUser.booster += 3 // 3 boosters for top 8

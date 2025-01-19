@@ -279,9 +279,10 @@ export class OnDragDropCommand extends Command<
               this.room.state.specialGameRule
             )
           const dropToEmptyPlace = isPositionEmpty(x, y, player.board)
+          const target = this.room.getPokemonByPosition(player, x, y)
 
           if (dropOnBench) {
-            if (pokemon.canBeBenched) {
+            if (pokemon.canBeBenched && (!target || target.canBePlaced)) {
               // From board to bench (bench to bench is already handled)
               this.room.swap(player, pokemon, x, y)
               if (this.state.specialGameRule === SpecialGameRule.SLAMINGO) {
@@ -297,6 +298,7 @@ export class OnDragDropCommand extends Command<
             }
           } else if (
             pokemon.canBePlaced &&
+            (!target || target.canBeBenched) &&
             !(dropFromBench && dropToEmptyPlace && isBoardFull)
           ) {
             // Prevents a pokemon to go on the board only if it's adding a pokemon from the bench on a full board
@@ -624,7 +626,13 @@ export class OnDragDropItemCommand extends Command<
         client.send(Transfer.DRAG_DROP_FAILED, message)
         return
       }
-      pokemon = player.transformPokemon(pokemon, evolution)
+      const pokemonEvolved = player.transformPokemon(pokemon, evolution)
+      pokemon.afterEvolve({
+        pokemonEvolved,
+        pokemonsBeforeEvolution: [pokemon],
+        player
+      })
+      pokemon = pokemonEvolved
     }
 
     if (isBasicItem && existingBasicItemToCombine) {
@@ -1077,7 +1085,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     })
   }
 
-  computeIncome(isPVE: boolean, specialGameRule: SpecialGameRule) {
+  computeIncome(isPVE: boolean, specialGameRule: SpecialGameRule | null) {
     this.state.players.forEach((player) => {
       let income = 0
       if (player.alive && !player.isBot) {

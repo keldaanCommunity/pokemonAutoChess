@@ -282,7 +282,7 @@ p:last-child {
   position: relative;
 }
 
-.pokemon-portrait.additional::after {
+.pokemon-portrait.additional:not(.regional)::after {
   content: "";
   position: absolute;
   top: 2px;

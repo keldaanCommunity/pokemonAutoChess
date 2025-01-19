@@ -464,8 +464,8 @@ export default abstract class PokemonState {
       if (pokemon.shield > 0) {
         let damageOnShield
         if (pokemon.status.flinch) {
-          damageOnShield = reducedDamage * 0.5
-          residualDamage = reducedDamage * 0.5
+          damageOnShield = Math.ceil(reducedDamage * 0.5)
+          residualDamage = Math.ceil(reducedDamage * 0.5)
         } else {
           damageOnShield = reducedDamage
           residualDamage = 0

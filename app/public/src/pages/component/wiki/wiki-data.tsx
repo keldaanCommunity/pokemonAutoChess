@@ -4,6 +4,7 @@ import { ARCEUS_RATE, BoosterRarityProbability, DITTO_RATE, ExpPlace, FishRarity
 import { Rarity } from "../../../../../types/enum/Game"
 import { getRankLabel } from "../../../../../types/strings/Strings"
 import { FishingRods } from "../../../../../types/enum/Item"
+import { addIconsToDescription } from "../../utils/descriptions"
 
 export default function WikiData() {
   const { t } = useTranslation()
@@ -110,6 +111,9 @@ export default function WikiData() {
           </tr>)}
         </tbody>
       </table>
+
+      <h2>{t("wiki.defense_calculation")}</h2>
+      <p>{addIconsToDescription(t("wiki.defense_calculation_description"))}</p>
 
       <h2>{t("wiki.round_damage_calculation")}</h2>
       <p>{t("wiki.round_damage_calculation_description")}</p>

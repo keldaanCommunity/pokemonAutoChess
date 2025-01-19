@@ -1116,6 +1116,10 @@ export default class PokemonSprite extends DraggableObject {
   addRageEffect() {
     this.sprite.setTint(0xff0000)
   }
+  
+  removeRageEffect() {
+    this.sprite.clearTint()
+  }
 }
 
 export function addWanderingPokemon(

@@ -67,7 +67,8 @@ export function getAdditionalsTier1(pokemons: Pkm[]) {
     return (
       pokemonData.stars === 1 &&
       pokemonData.skill !== Ability.DEFAULT &&
-      pokemonData.additional
+      pokemonData.additional &&
+      !pokemonData.regional
     )
   })
 }

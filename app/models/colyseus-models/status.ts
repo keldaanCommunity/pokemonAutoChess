@@ -265,9 +265,7 @@ export default class Status extends Schema implements IStatus {
       this.updateCurse(dt, board, pokemon)
     }
 
-    if (!this.enraged) {
-      this.updateRage(dt, pokemon)
-    }
+    this.updateRage(dt, pokemon)
 
     if (pokemon.status.curseVulnerability && !pokemon.status.flinch) {
       this.triggerFlinch(30000, pokemon)
@@ -374,6 +372,7 @@ export default class Status extends Schema implements IStatus {
     }
 
     this.enrageDelay -= dt
+    this.enrageCooldown -= dt
   }
 
   triggerClearWing(timer: number) {
@@ -1113,7 +1112,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerPokerus(pokemon: PokemonEntity) {
-    if ((pokemon.passive = Passive.INANIMATE)) return // Inanimate objects cannot get Pokerus
+    if (pokemon.passive === Passive.INANIMATE) return // Inanimate objects cannot get Pokerus
     if (!this.pokerus) {
       this.pokerus = true
     }

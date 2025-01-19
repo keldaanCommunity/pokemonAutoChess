@@ -279,7 +279,8 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.OGERPON_HEARTHFLAME,
   Pkm.OGERPON_CORNERSTONE,
   Pkm.IRON_HANDS,
-  Pkm.TURTONATOR
+  Pkm.TURTONATOR,
+  Pkm.DRACOZOLT
 )
 
 export const LegendaryShop = new Array<PkmProposition>(
@@ -637,7 +638,7 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.RAZOR_FANG]: {
     [Stat.ATK_SPEED]: 10,
     [Stat.CRIT_CHANCE]: 10,
-    [Stat.CRIT_POWER]: 1
+    [Stat.CRIT_POWER]: 100
   },
   [Item.GRACIDEA_FLOWER]: { [Stat.ATK_SPEED]: 10, [Stat.SHIELD]: 15 },
   [Item.CHOICE_SCARF]: { [Stat.ATK_SPEED]: 10, [Stat.SPE_DEF]: 2 },

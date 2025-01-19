@@ -1833,6 +1833,10 @@ export class Deino extends Pokemon {
   skill = Ability.DARK_HARVEST
   attackSprite = AttackSprite.DARK_RANGE
   regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.DRAGON)
+  }
 }
 
 export class Zweilous extends Pokemon {
@@ -1849,6 +1853,10 @@ export class Zweilous extends Pokemon {
   skill = Ability.DARK_HARVEST
   attackSprite = AttackSprite.DARK_RANGE
   regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.DRAGON)
+  }
 }
 
 export class Hydreigon extends Pokemon {
@@ -1864,6 +1872,10 @@ export class Hydreigon extends Pokemon {
   skill = Ability.DARK_HARVEST
   attackSprite = AttackSprite.DARK_RANGE
   regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.DRAGON)
+  }
 }
 
 export class Poliwag extends Pokemon {
@@ -2153,6 +2165,7 @@ export class AlolanMarowak extends Pokemon {
   range = 1
   skill = Ability.SHADOW_BONE
   regional = true
+  additional = true
   attackSprite = AttackSprite.FIRE_MELEE
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
@@ -5661,15 +5674,7 @@ function updateCastform(pokemon: Pokemon, weather: Weather, player: Player) {
   if (pokemon.name === weatherForm) return
   if (!player) return
 
-  const newPokemon = PokemonFactory.createPokemonFromName(weatherForm, player)
-  pokemon.items.forEach((item) => {
-    newPokemon.items.add(item)
-  })
-  newPokemon.positionX = pokemon.positionX
-  newPokemon.positionY = pokemon.positionY
-  player.board.delete(pokemon.id)
-  player.board.set(newPokemon.id, newPokemon)
-  player.updateSynergies()
+  player.transformPokemon(pokemon, weatherForm)
 }
 
 export class Castform extends Pokemon {
@@ -6478,6 +6483,24 @@ export class Torkoal extends Pokemon {
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
+export class Dracozolt extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.ELECTRIC,
+    Synergy.FOSSIL
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 180
+  atk = 21
+  def = 3
+  speDef = 3
+  maxPP = 110
+  range = 1
+  skill = Ability.BOLT_BEAK
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
+
 export class Heatmor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
   rarity = Rarity.UNIQUE
@@ -6754,6 +6777,9 @@ export class Annihilape extends Pokemon {
   range = 1
   skill = Ability.THRASH
   attackSprite = AttackSprite.FIGHTING_MELEE
+  onAcquired(player: Player) {
+    player.titles.add(Title.ANNIHILATOR)
+  }
 }
 
 export class Anorith extends Pokemon {
@@ -7966,6 +7992,7 @@ export class GalarianPonyta extends Pokemon {
   range = 1
   skill = Ability.PASTEL_VEIL
   regional = true
+  additional = true
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 export class GalarianRapidash extends Pokemon {
@@ -7984,6 +8011,7 @@ export class GalarianRapidash extends Pokemon {
   range = 1
   skill = Ability.PASTEL_VEIL
   regional = true
+  additional = true
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
@@ -8190,6 +8218,7 @@ export class AlolanMeowth extends Pokemon {
   range = 1
   skill = Ability.PICKUP
   regional = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -8205,6 +8234,7 @@ export class AlolanPersian extends Pokemon {
   range = 1
   skill = Ability.PICKUP
   regional = true
+  additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -8364,6 +8394,7 @@ export class HisuiGrowlithe extends Pokemon {
   skill = Ability.DOUBLE_EDGE
   attackSprite = AttackSprite.FIRE_MELEE
   regional = true
+  additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -8386,6 +8417,7 @@ export class HisuiArcanine extends Pokemon {
   skill = Ability.DOUBLE_EDGE
   attackSprite = AttackSprite.FIRE_MELEE
   regional = true
+  additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -8562,7 +8594,7 @@ export class HisuiVoltorb extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 1
-  evolution = Pkm.ELECTRODE
+  evolution = Pkm.HISUI_ELECTRODE
   hp = 60
   atk = 9
   def = 1
@@ -8571,6 +8603,7 @@ export class HisuiVoltorb extends Pokemon {
   range = 1
   skill = Ability.CHLOROBLAST
   regional = true
+  additional = true
   attackSprite = AttackSprite.ELECTRIC_MELEE
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
@@ -8598,6 +8631,7 @@ export class HisuiElectrode extends Pokemon {
   range = 1
   skill = Ability.CHLOROBLAST
   regional = true
+  additional = true
   attackSprite = AttackSprite.ELECTRIC_MELEE
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
@@ -8696,6 +8730,7 @@ export class HisuiSneasel extends Pokemon {
   range = 1
   skill = Ability.DIRE_CLAW
   regional = true
+  additional = true
   attackSprite = AttackSprite.POISON_MELEE
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
@@ -8723,6 +8758,7 @@ export class Sneasler extends Pokemon {
   range = 1
   skill = Ability.DIRE_CLAW
   regional = true
+  additional = true
   attackSprite = AttackSprite.POISON_MELEE
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
@@ -9216,6 +9252,7 @@ export class AlolanVulpix extends Pokemon {
   range = 2
   skill = Ability.AURORA_VEIL
   regional = true
+  additional = true
   attackSprite = AttackSprite.ICE_RANGE
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
@@ -9239,6 +9276,7 @@ export class AlolanNinetales extends Pokemon {
   range = 2
   skill = Ability.AURORA_VEIL
   regional = true
+  additional = true
   attackSprite = AttackSprite.ICE_RANGE
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
@@ -9688,6 +9726,39 @@ export class Sandslash extends Pokemon {
   skill = Ability.ROLLOUT
   additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class AlolanSandshrew extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.STEEL])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.ALOLAN_SANDSLASH
+  hp = 90
+  atk = 5
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 1
+  skill = Ability.ICE_BALL
+  additional = true
+  regional = true
+  attackSprite = AttackSprite.ICE_MELEE
+}
+
+export class AlolanSandslash extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.STEEL])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 180
+  atk = 13
+  def = 5
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.ICE_BALL
+  additional = true
+  regional = true
+  attackSprite = AttackSprite.ICE_MELEE
 }
 
 export class Nosepass extends Pokemon {
@@ -10283,6 +10354,7 @@ export class AlolanDiglett extends Pokemon {
   skill = Ability.DIG
   attackSprite = AttackSprite.ROCK_MELEE
   regional = true
+  additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -10305,6 +10377,7 @@ export class AlolanDugtrio extends Pokemon {
   skill = Ability.DIG
   attackSprite = AttackSprite.ROCK_MELEE
   regional = true
+  additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -10407,6 +10480,7 @@ export class HisuiZorua extends Pokemon {
   skill = Ability.ILLUSION
   attackSprite = AttackSprite.NORMAL_MELEE
   regional = true
+  additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -10430,6 +10504,7 @@ export class HisuiZoroark extends Pokemon {
   skill = Ability.ILLUSION
   attackSprite = AttackSprite.NORMAL_MELEE
   regional = true
+  additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -10497,6 +10572,7 @@ export class AlolanGrimer extends Pokemon {
   skill = Ability.SLUDGE
   attackSprite = AttackSprite.POISON_MELEE
   regional = true
+  additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -10523,6 +10599,7 @@ export class AlolanMuk extends Pokemon {
   skill = Ability.SLUDGE
   attackSprite = AttackSprite.POISON_MELEE
   regional = true
+  additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -11470,6 +11547,7 @@ export class AlolanExeggutor extends Pokemon {
   range = 1
   skill = Ability.EGGSPLOSION
   regional = true
+  additional = true
   attackSprite = AttackSprite.GRASS_MELEE
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
@@ -12134,6 +12212,53 @@ export class Linoone extends Pokemon {
   passive = Passive.PICKUP
 }
 
+export class GalarianZigzagoon extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.LINOONE
+  hp = 80
+  atk = 7
+  def = 5
+  speDef = 2
+  maxPP = 50
+  range = 1
+  skill = Ability.SLASH
+  attackSprite = AttackSprite.DARK_MELEE
+  regional = true
+}
+
+export class GalarianLinoone extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
+  rarity = Rarity.RARE
+  stars = 2
+  evolution = Pkm.OBSTAGOON
+  hp = 180
+  atk = 18
+  def = 7
+  speDef = 4
+  maxPP = 50
+  range = 1
+  skill = Ability.SLASH
+  attackSprite = AttackSprite.DARK_MELEE
+  regional = true
+}
+
+export class Obstagoon extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK, Synergy.SOUND])
+  rarity = Rarity.RARE
+  stars = 3
+  hp = 340
+  atk = 28
+  def = 10
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.OBSTRUCT
+  attackSprite = AttackSprite.DARK_MELEE
+  regional = true
+}
+
 export class Phantump extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.GHOST,
@@ -12782,7 +12907,7 @@ export class Smeargle extends Pokemon {
         this.positionX - 1,
         this.positionY
       )
-      if (allyOnTheLeft) {
+      if (allyOnTheLeft && entity.skill === Ability.SKETCH) {
         entity.maxPP = allyOnTheLeft.maxPP
         entity.skill = allyOnTheLeft.skill
         entity.stars = allyOnTheLeft.stars
@@ -16294,6 +16419,8 @@ export const PokemonClasses: Record<
   [Pkm.CINDERACE]: Cinderace,
   [Pkm.SANDSHREW]: Sandshrew,
   [Pkm.SANDSLASH]: Sandslash,
+  [Pkm.ALOLAN_SANDSHREW]: AlolanSandshrew,
+  [Pkm.ALOLAN_SANDSLASH]: AlolanSandslash,
   [Pkm.FARFETCH_D]: Farfetchd,
   [Pkm.UNOWN_A]: UnownA,
   [Pkm.UNOWN_B]: UnownB,
@@ -16491,6 +16618,9 @@ export const PokemonClasses: Record<
   [Pkm.STOUTLAND]: Stoutland,
   [Pkm.ZIGZAGOON]: Zigzagoon,
   [Pkm.LINOONE]: Linoone,
+  [Pkm.GALARIAN_ZIGZAGOON]: GalarianZigzagoon,
+  [Pkm.GALARIAN_LINOONE]: GalarianLinoone,
+  [Pkm.OBSTAGOON]: Obstagoon,
   [Pkm.PHEROMOSA]: Pheromosa,
   [Pkm.SABLEYE]: Sableye,
   [Pkm.MEGA_SABLEYE]: MegaSableye,
@@ -16695,5 +16825,6 @@ export const PokemonClasses: Record<
   [Pkm.BEHEEYEM]: Beheeyem,
   [Pkm.LITTEN]: Litten,
   [Pkm.TORRACAT]: Torracat,
-  [Pkm.INCINEROAR]: Incineroar
+  [Pkm.INCINEROAR]: Incineroar,
+  [Pkm.DRACOZOLT]: Dracozolt
 }

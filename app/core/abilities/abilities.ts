@@ -2409,6 +2409,29 @@ export class ProtectStrategy extends AbilityStrategy {
   }
 }
 
+export class ObstructStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const duration = Math.round(
+      ([1000, 2000, 4000][pokemon.stars - 1] ?? 4000) * (1 + pokemon.ap / 200)
+    )
+    pokemon.status.triggerProtect(duration)
+    pokemon.effects.add(Effect.OBSTRUCT)
+    pokemon.commands.push(
+      new DelayedCommand(
+        () => pokemon.effects.delete(Effect.OBSTRUCT),
+        duration
+      )
+    )
+  }
+}
+
 export class SleepStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -9026,12 +9049,7 @@ export class TorchSongStrategy extends AbilityStrategy {
       })
     })
 
-    pokemon.addAbilityPower(
-      scorchedEnemiesId.size * apBoost,
-      pokemon,
-      0,
-      false
-    )
+    pokemon.addAbilityPower(scorchedEnemiesId.size * apBoost, pokemon, 0, false)
   }
 }
 
@@ -11104,12 +11122,12 @@ export class ColumnCrushStrategy extends AbilityStrategy {
       const pillarY = pillar.positionY
       const remainingHp = pillar.hp
       const pillarType = pillar.name
-      board.setValue(pillarX, pillarY, undefined)
       const team =
         pillar.team === Team.BLUE_TEAM
           ? pillar.simulation.blueTeam
           : pillar.simulation.redTeam
-      team.delete(pillar.id)
+      pillar.shield = 0
+      pillar.handleSpecialDamage(9999, board, AttackType.TRUE, null, false)
       pokemon.moveTo(pillarX, pillarY, board)
       pokemon.cooldown = 1000
 
@@ -11288,6 +11306,31 @@ export class DarkLariatStrategy extends AbilityStrategy {
   }
 }
 
+export class BoltBeakStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        if (target && target.life > 0) {
+          target.handleSpecialDamage(
+            target.pp > 40 ? 160 : 80,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      }, 250)
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -11368,6 +11411,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.CONFUSION]: new ConfusionStrategy(),
   [Ability.BLIZZARD]: new BlizzardStrategy(),
   [Ability.PROTECT]: new ProtectStrategy(),
+  [Ability.OBSTRUCT]: new ObstructStrategy(),
   [Ability.POISON]: new PoisonStrategy(),
   [Ability.ORIGIN_PULSE]: new OriginPulseStrategy(),
   [Ability.SEED_FLARE]: new SeedFlareStrategy(),
@@ -11706,5 +11750,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.HARDEN]: new HardenStrategy(),
   [Ability.COLUMN_CRUSH]: new ColumnCrushStrategy(),
   [Ability.WONDER_ROOM]: new WonderRoomStrategy(),
-  [Ability.DARK_LARIAT]: new DarkLariatStrategy()
+  [Ability.DARK_LARIAT]: new DarkLariatStrategy(),
+  [Ability.BOLT_BEAK]: new BoltBeakStrategy()
 }
