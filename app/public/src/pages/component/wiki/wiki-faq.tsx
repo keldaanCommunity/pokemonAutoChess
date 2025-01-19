@@ -73,7 +73,7 @@ export default function WikiFaq() {
         <summary>{t("faq.support")}</summary>
         <p>
           {t("faq.support_answer")}
-          &nbsp;<a href="https://en.tipeee.com/pokemon-auto-chess">Tipeee</a>.
+          &nbsp;<a href="https://en.tipeee.com/keldaan">Tipee</a>.
         </p>
       </details>
       <details className="my-box">
@@ -93,6 +93,6 @@ export default function WikiFaq() {
           !
         </p>
       </details>
-    </div >
+    </div>
   )
 }
