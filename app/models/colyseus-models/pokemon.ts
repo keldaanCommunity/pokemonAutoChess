@@ -11185,7 +11185,7 @@ export class Kartana extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.GRASS])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 230
+  hp = 200
   atk = 40
   def = 10
   speDef = 2
@@ -14531,8 +14531,8 @@ export class WishiwashiSchool extends Pokemon {
   evolution = Pkm.WISHIWASHI_SCHOOL
   hp = 300
   atk = 20
-  def = 5
-  speDef = 5
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.SCHOOLING

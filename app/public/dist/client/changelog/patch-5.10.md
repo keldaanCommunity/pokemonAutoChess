@@ -32,6 +32,7 @@
 - Nerf Sobble line: PP 90 → 100, Snipe Shot damage: 50/100/200 → 40/80/160
 - Gastly line: PP 100 → 60, Nightmare fatigue duration 3/5/7→2/4/6 seconds, special damage: 40/80/150 → 25/50/100
 - Change Dive (Lapras, Wailmer): Shield 10/20/40 → 20/40/80, AP scaling 1 → 0
+- Nerf Kartana: HP 230 → 200
 
 # Changes to Synergies
 
