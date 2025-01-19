@@ -54,6 +54,7 @@
     "POISON": "施毒",
     "SLEEP": "入睡",
     "PROTECT": "守住",
+    "OBSTRUCT": "拦堵",
     "BLIZZARD": "暴风雪",
     "CONFUSION": "念力",
     "FIRE_BLAST": "大字爆炎",
@@ -436,7 +437,8 @@
     "HARDEN": "变硬",
     "COLUMN_CRUSH": "立柱重压",
     "WONDER_ROOM": "奇妙空间",
-    "DARK_LARIAT": "ＤＤ金钩臂"
+    "DARK_LARIAT": "ＤＤ金钩臂",
+    "BOLT_BEAK": "电喙"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -929,6 +931,8 @@
     "GOTHITELLE": "哥德小姐",
     "SANDSHREW": "穿山鼠",
     "SANDSLASH": "穿山王",
+    "ALOLAN_SANDSHREW": "阿罗拉穿山鼠",
+    "ALOLAN_SANDSLASH": "阿罗拉穿山王",
     "FARFETCH_D": "大葱鸭",
     "UNOWN_A": "未知图腾—A",
     "UNOWN_B": "未知图腾—B",
@@ -1130,6 +1134,9 @@
     "STOUTLAND": "长毛狗",
     "ZIGZAGOON": "蛇纹熊",
     "LINOONE": "直冲熊",
+    "GALARIAN_ZIGZAGOON": "伽勒尔蛇纹熊",
+    "GALARIAN_LINOONE": "伽勒尔直冲熊",
+    "OBSTAGOON": "堵拦熊",
     "PHEROMOSA": "费洛美螂",
     "SABLEYE": "勾魂眼",
     "MEGA_SABLEYE": "超级勾魂眼",
@@ -1324,7 +1331,8 @@
     "BEHEEYEM": "大宇怪",
     "LITTEN": "火斑喵",
     "TORRACAT": "炎热喵",
-    "INCINEROAR": "炽焰咆哮虎"
+    "INCINEROAR": "炽焰咆哮虎",
+    "DRACOZOLT": "雷鸟龙"
   },
   "ability_description": {
     "SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1359,6 +1367,7 @@
     "POISON": "使最近的[1,2,3]只敌方宝可梦陷入POISONNED [3,6,9,SP=0.5]秒。",
     "SLEEP": "使敌方后排的[1,2,3]只宝可梦陷入SLEEP [2,SP]秒。",
     "PROTECT": "使用者进入PROTECT，在[1,3,5,SP=0.5] 秒内无敌。",
+    "OBSTRUCT": "使用者进入PROTECT，在[1,2,4,SP=0.5] 秒内无敌。在此期间受到攻击时，会降低攻击者2点DEF。",
     "BLIZZARD": "使所有敌方宝可梦陷入FREEZE 2秒，并对其造成[5,10,15,SP]点SPECIAL。 已经处于FREEZE的敌人受到伤害翻倍。",
     "CONFUSION": "使目标陷入CONFUSION及SILENCE [3,5,7]秒。若已经处于CONFUSION，改为造成[75,150,300,SP]点SPECIAL。",
     "FIRE_BLAST": "发射一道对星形区域造成伤害的火焰，对击中的所有敌方宝可梦造成[30,60,110,SP]点SPECIAL。",
@@ -1741,7 +1750,8 @@
     "TOPSY_TURVY": "对目标造成[40,80,100,SP]点SPECIAL，并反转其ATK，DEF和SPE_DEF的变化。任何增幅变为等额的减幅，反之亦然。",
     "COLUMN_CRUSH": "在最近的空格子上建造一根立柱。若场上已经存在立柱，改为跳至立柱的位置，并将其丢向最近的目标，对其造成SPECIAL，数值相当于[50,100,150,SP]加上立柱剩余的HP。",
     "WONDER_ROOM": "在目标周围制造离奇的空间。空间内的敌方宝可梦的DEF和SPE_DEF被交换，持续5秒，且受到的普攻伤害为受攻击方AP加成的SPECIAL。",
-    "DARK_LARIAT": "旋转双臂多次打向对手，同时移动至其背后。每次造成SPECIAL，数值相当于[100,SP]%的ATK。攻击次数随ATK_SPEED提升而增加。目标在此期间陷入FLINCH。"
+    "DARK_LARIAT": "旋转双臂多次打向对手，同时移动至其背后。每次造成SPECIAL，数值相当于[100,SP]%的ATK。攻击次数随ATK_SPEED提升而增加。目标在此期间陷入FLINCH。",
+    "BOLT_BEAK": "对目标造成[80,SP]点SPECIAL。若目标当前的PP高于40，改为造成[160,SP]点SPECIAL。"
   },
   "effect": {
     "INGRAIN": "扎根",
@@ -2612,7 +2622,8 @@
     "GLUTTON": "暴食饕餮",
     "STARGAZER": "观星者",
     "BLOODY": "赫然之人",
-    "ETERNAL": "永恒者"
+    "ETERNAL": "永恒者",
+    "ANNIHILATOR": "弃世者"
   },
   "title_description": {
     "NOVICE": "玩一局游戏。",
@@ -2680,6 +2691,7 @@
     "SIREN": "获得美纳斯。",
     "FEARSOME": "获得弱丁鱼鱼群。",
     "GOLDEN": "获得赛富豪。",
+    "ANNIHILATOR": "获得弃世猴。",
     "CHOSEN_ONE": "在一局游戏中，将聚光共鸣提升到最大等级。",
     "VANQUISHER": "取得一场排位赛的胜利。",
     "OUTSIDER": "在自身的Elo分数全场最低的情况下，取得一场8人排位赛的胜利。",
@@ -2764,7 +2776,7 @@
     "elo": "Elo机制是怎么运行的？",
     "elo_answer": "宝可梦自走棋的Elo系统和其他游戏（如英雄联盟，星际争霸，国际象棋等）的Elo机制相同，战胜其他玩家即可获得Elo分数。对手的Elo分数越高，你战胜他时能获得的Elo分数就越多，反之亦然。如果你连续10天没有游戏，你将会开始每天损失10点Elo分数。",
     "missing_points": "为什么某一局游戏并没有改变我的Elo分数？",
-    "missing_points_answer": "机器人无法提供Elo分数，计算时只会考虑人类玩家。另外，这局游戏本身也可能关闭了Elo。",
+    "missing_points_answer": "机器人无法提供Elo分数，计算时只会考虑人类玩家。另外，这局游戏本身也可能关闭了Elo，或是处于一个禁用Elo的模式（如图图犬涂鸦）。",
     "damage": "物理伤害和特殊伤害是什么？",
     "damage_answer": "普通攻击通常造成物理伤害，招式大多造成特殊伤害。部分招式可能造成物理或真实伤害。",
     "shiny": "如何获得闪光宝可梦？",
@@ -3434,7 +3446,7 @@
     "arceus_rate": "第20轮的传送门中出现阿尔宙斯的概率",
     "fishing_rarity_rate": "鱼竿对应的钓鱼出率",
     "fishing_rarity_rate_description": "所用鱼竿的品质决定了你能钓起的宝可梦的稀有度",
-    "defense_calculation": "防御是怎么参与伤害计算的？是直接减少伤害吗？",
+    "defense_calculation": "防御的减伤计算",
     "defense_calculation_description": "和英雄联盟一致，伤害等于攻击除以（1+0.1×防御力）。防御对物理伤害生效，特防对特殊伤害生效。",
     "round_damage_calculation": "对玩家伤害计算",
     "round_damage_calculation_description": "每轮结束时，战败玩家受到的伤害等于当前轮次序数除以2加上存活的敌方宝可梦数量，向上取整。复制体和召唤物不计数。",
