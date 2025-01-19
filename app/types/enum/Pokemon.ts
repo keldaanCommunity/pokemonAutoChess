@@ -155,6 +155,7 @@ export enum Pkm {
   CROBAT = "CROBAT",
   CROCALOR = "CROCALOR",
   CROCONAW = "CROCONAW",
+  CRYOGONAL = "CRYOGONAL",
   CUBONE = "CUBONE",
   CURSOLA = "CURSOLA",
   CUTIEFLY = "CUTIEFLY",
@@ -1622,7 +1623,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.HAXORUS]: "0612",
   //[Pkm.CUBCHOO]: "0613",
   //[Pkm.BEARTIC]: "0614",
-  //[Pkm.CRYOGONAL]: "0615",
+  [Pkm.CRYOGONAL]: "0615",
   //[Pkm.SHELMET]: "0616",
   //[Pkm.ACCELGOR]: "0617",
   //[Pkm.STUNFISK]: "0618",
@@ -2949,7 +2950,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.LITTEN]: Pkm.LITTEN,
   [Pkm.TORRACAT]: Pkm.LITTEN,
   [Pkm.INCINEROAR]: Pkm.LITTEN,
-  [Pkm.DRACOZOLT]: Pkm.DRACOZOLT
+  [Pkm.DRACOZOLT]: Pkm.DRACOZOLT,
+  [Pkm.CRYOGONAL]: Pkm.CRYOGONAL
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7605,5 +7607,10 @@ export const AnimationConfig: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
     shinyUnavailable: true
+  },
+  [Pkm.CRYOGONAL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge
   }
 }

@@ -3070,6 +3070,20 @@ export function displayAbility(
       break
     }
 
+    case Ability.FREEZE_DRY: {
+      const abilitySprite = addAbilitySprite(skill, coordinates, true)
+        .setScale(2)
+        .setDepth(1)
+      scene.tweens.add({
+        targets: abilitySprite,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 250
+      })
+      break
+    }
+
     case Ability.BRICK_BREAK:
 
     case Ability.BULK_UP:

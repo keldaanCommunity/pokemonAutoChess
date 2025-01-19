@@ -438,7 +438,8 @@
     "COLUMN_CRUSH": "Column Crush",
     "WONDER_ROOM": "Wonder Room",
     "DARK_LARIAT": "Darkest Lariat",
-    "BOLT_BEAK": "Bolt Beak"
+    "BOLT_BEAK": "Bolt Beak",
+    "FREEZE_DRY": "Freeze Dry"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1332,7 +1333,8 @@
     "LITTEN": "Litten",
     "TORRACAT": "Torracat",
     "INCINEROAR": "Incineroar",
-    "DRACOZOLT": "Dracozolt"
+    "DRACOZOLT": "Dracozolt",
+    "CRYOGONAL": "Cryogonal"
   },
   "ability_description": {
     "SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1751,7 +1753,8 @@
     "COLUMN_CRUSH": "Builds a pillar on the closest empty spot. If a pillar is already on the board, jumps to it and throw it at the closest target, dealing [50,100,150,SP] + the remaining HP of the pillar as SPECIAL.",
     "WONDER_ROOM": "Creates a bizarre area around the target in which enemies DEF and SPE_DEF are swapped for 5 seconds and attacks received are SPECIAL that scale with attacker AP.",
     "DARK_LARIAT": "Swings arms and hits the target several times while moving behind them. Each hit deals [100,SP]% ATK as SPECIAL. Number of hits increase with ATK_SPEED. Target is FLINCH during the attack.",
-    "BOLT_BEAK": "Deal [80,SP] SPECIAL, [160,SP] SPECIAL if the target has more than 40 PP."
+    "BOLT_BEAK": "Deal [80,SP] SPECIAL, [160,SP] SPECIAL if the target has more than 40 PP.",
+    "FREEZE_DRY": "Deals [70,SP] + [200,SP] % of the user's SPE_DEF as SPECIAL to the target. If it kills the target, it explodes, and throws sharp ice at adjacent targets dealing [40,SP] + [150,SP] % of the user's SPE_DEF as SPECIAL."
   },
   "effect": {
     "INGRAIN": "Ingrain",
