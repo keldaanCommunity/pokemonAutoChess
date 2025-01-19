@@ -7277,7 +7277,7 @@ export class Relicanth extends Pokemon {
   atk = 13
   def = 7
   speDef = 3
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.ROCK_TOMB
   attackSprite = AttackSprite.WATER_MELEE
