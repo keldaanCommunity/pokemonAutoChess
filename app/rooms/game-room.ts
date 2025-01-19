@@ -576,7 +576,7 @@ export default class GameRoom extends Room<GameState> {
         throw new Error("consented leave")
       }
 
-      // allow disconnected client to reconnect into this room until 3 minutes
+      // allow disconnected client to reconnect into this room until 5 minutes
       await this.allowReconnection(client, 300)
       const userProfile = await UserMetadata.findOne({ uid: client.auth.uid })
       client.send(Transfer.USER_PROFILE, userProfile)

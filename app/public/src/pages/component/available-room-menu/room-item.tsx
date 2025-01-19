@@ -1,5 +1,5 @@
 import { RoomAvailable } from "colyseus.js"
-import React from "react"
+import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { IPreparationMetadata } from "../../../../../types"
 import {
@@ -64,6 +64,7 @@ export default function RoomItem(props: {
   }
 
   const title = `${props.room.metadata?.ownerName ? "Owner: " + props.room.metadata?.ownerName : ""}\n${props.room.metadata?.playersInfo?.join("\n")}`
+  const [joining, setJoining] = useState<boolean>(false)
 
   return (
     <div className="room-item my-box">
@@ -121,17 +122,21 @@ export default function RoomItem(props: {
       </span>
       <button
         title={disabledReason ?? t("join")}
-        disabled={!canJoin}
+        disabled={!canJoin || joining}
         className={cc(
           "bubbly",
+          joining ? "loading" : "",
           props.room.metadata?.password ? "orange" : "green"
         )}
         onClick={() => {
           if (
             props.room.clients < nbPlayersExpected &&
-            props.room.metadata?.gameStartedAt === null
+            props.room.metadata?.gameStartedAt === null &&
+            !joining
           ) {
             props.click(props.room)
+            setJoining(true)
+            setTimeout(() => setJoining(false), 5000)
           }
         }}
       >
