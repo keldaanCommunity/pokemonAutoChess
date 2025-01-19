@@ -1537,7 +1537,7 @@
     "EMPTY_LIGHT": "Sputa veleno al nemico, infliggendogli [33,SP] SPECIAL e riducendogli la sua SPE_DEF di 3. Poi l'abilità rimbalza ad un altro Pokèmon nemico, per un massimo di 5 volte.",
     "UNBOUND": "Hoopa si svincola per diventare la sua vera forma, ed ottiene un'enorme quantità di potere.",
     "HYPERSPACE_FURY": "Usando la sua miriade di braccia, scatena una serie di [4,SP] attacchi. Ogni attacco riduce la DEF del bersaglio di 1.",
-    "SNIPE_SHOT": "Spara un colpo d'acqua dal suo indice al nemico più lontano, infliggendo [50,100,200,SP] SPECIAL a tutti i Pokèmon nemici nel tragitto.",
+    "SNIPE_SHOT": "Spara un colpo d'acqua dal suo indice al nemico più lontano, infliggendo [40,80,160,SP] SPECIAL a tutti i Pokèmon nemici nel tragitto.",
     "AIR_SLASH": "Infliggi [25,50,100,SP] SPECIAL e causa FLINCH per 7 secondi.",
     "EGGSPLOSION": "Lancia un uovo esplosivo, infliggendo [30,60,120,SP] SPECIAL e causa ARMOR_REDUCTION per 4 secondi a tutti i nemici adiacenti al bersaglio. Se il bersaglio va KO, hai il [25,LK]% di possibilità di ottenere un uovo nella tua panchina.",
     "FLORAL_HEALING": "Cura un valore di HP uguale ai PP massimi di chi ha Comfey equipaggiato o di Comfey stesso se non è equipaggiato ad un Pokèmon.",

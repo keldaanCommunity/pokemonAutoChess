@@ -29,6 +29,7 @@
 - Nerf Relicanth: PP 80 → 100
 - Nerf HydroPump (Squirtle) ability damage: 25/50/100 → 20/40/80
 - Blastoise HP 210 → 190, def/spedef: 1 → 2
+- Nerf Sobble line: PP 90 → 100, Snipe Shot damage: 50/100/200 → 40/80/160
 
 # Changes to Synergies
 

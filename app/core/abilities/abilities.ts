@@ -7136,7 +7136,7 @@ export class SnipeShotStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    const damage = [50, 100, 200][pokemon.stars - 1] ?? 200
+    const damage = [40, 80, 160][pokemon.stars - 1] ?? 160
     const farthestTarget = state.getFarthestTarget(pokemon, board) ?? target
     super.process(pokemon, state, board, farthestTarget, crit)
 

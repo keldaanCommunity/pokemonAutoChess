@@ -1486,7 +1486,7 @@
     "EMPTY_LIGHT": "Spuckt Gift direkt auf einen Gegner, fügt ihm [33,SP] SPECIAL zu und reduziert seinen SPE_DEF um 3. Die Fähigkeit prallt dann auf ein anderes Pokémon zurück (maximal 5 Abpraller).",
     "UNBOUND": "Entfesselt sich, um Hoopas wahre Form anzunehmen und eine gewaltige Menge an Kraft zu erhalten",
     "HYPERSPACE_FURY": "Entfesselt mit seinen vielen Armen ein Sperrfeuer von [4,SP] Angriffen. Jeder Angriff senkt die DEF des Ziels um 1",
-    "SNIPE_SHOT": "Feuert einen Wasserstrahl aus seinen Zeigefingerspitzen auf den am weitesten entfernten Gegner, der allen Gegnern im Weg [50,100,200,SP] SPECIAL zufügt",
+    "SNIPE_SHOT": "Feuert einen Wasserstrahl aus seinen Zeigefingerspitzen auf den am weitesten entfernten Gegner, der allen Gegnern im Weg [40,80,160,SP] SPECIAL zufügt",
     "AIR_SLASH": "Verursacht [25,50,100,SP] SPECIAL und fügt 7 Sekunden lang FLINCH zu",
     "EGGSPLOSION": "Schleudert ein explosives Ei auf sein Ziel, das [30,60,120,SP] SPECIAL verursacht und 4 Sekunden lang ARMOR_REDUCTION auf alle benachbarten Gegner anwendet. Wenn das Ziel KO ist, hast du eine [25,LK]%ige Chance, ein Ei auf deiner Bank zu bekommen.",
     "FLORAL_HEALING": "Heilt so viele HP wie die maximalen PP des Comfey-Trägers oder Comfey selbst, wenn es nicht gehalten wird",
