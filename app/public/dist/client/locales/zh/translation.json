@@ -1452,7 +1452,7 @@
     "METAL_BURST": "对目标造成[30, SP]点TRUE。使用者每因FIGHTING共鸣格挡一次伤害，本招式造成的伤害提升10%。",
     "PSYCHIC": "对目标和相邻敌方宝可梦造成[40,80,160,SP]点SPECIAL，并移除他们15点PP。",
     "PSYBEAM": "对目标身后的所有敌方宝可梦造成[25,50,100,SP]点SPECIAL，并有[50,LK]%的概率使他们陷入CONFUSION 4秒。",
-    "DIVE": "潜入水下，获得[10,20,40,SP]点SHIELD，然后在敌方阵型中间现身，对所有相邻宝可梦造成[10,20,40,SP]点SPECIAL并使他们陷入FREEZE 1秒。",
+    "DIVE": "潜入水下，获得[20,40,80]点SHIELD，然后在敌方阵型中间现身，对所有相邻宝可梦造成[10,20,40,SP]点SPECIAL并使他们陷入FREEZE 1秒。",
     "SPIKE_ARMOR": "在接下来的[3,5,10]秒内，近战攻击使用者的宝可梦会陷入WOUND 2秒，并受到SPECIAL，数值相当于使用者当前[100,SP]%的DEF。",
     "FUTURE_SIGHT": "2秒后，对5个敌方宝可梦造成[15,30,60,SP]点SPECIAL。",
     "FAKE_TEARS": "对所有敌方宝可梦造成[3,6,9,SP]点SPECIAL，并使他们陷入ARMOR_REDUCTION 3秒。",

@@ -3265,12 +3265,12 @@ export class DiveStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
-    const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
+    const shield = [20, 40, 80][pokemon.stars - 1] ?? 40
     const freezeDuration = 1000
     const mostSurroundedCoordinate =
       state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
 
-    pokemon.addShield(shield, pokemon, 1, crit)
+    pokemon.addShield(shield, pokemon, 0, false)
 
     if (mostSurroundedCoordinate) {
       pokemon.moveTo(

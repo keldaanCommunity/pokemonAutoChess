@@ -1452,7 +1452,7 @@
     "METAL_BURST": "Inflige [30, SP] de TRUE al objetivo. Aumenta el daño en 10% de cada ataque bloqueado por la sinergia FIGHTING del usuario",
     "PSYCHIC": "Inflige [40,80,160,SP] de SPECIAL y consume 15 PP al objetivo y enemigos adyacentes",
     "PSYBEAM": "Inflige [25,50,100,SP] de SPECIAL a todos los enemigos detrás del objetivo con un [50,LK]% de probabilidad de dejarlos CONFUSION por 4 segundos",
-    "DIVE": "Se sumerge bajo el agua y gana [10,20,40,SP] de SHIELD, luego reaparece en medio del equipo enemigo, infligiendo [10,20,40,SP] de SPECIAL y dejando FREEZE a todas las unidades adyacentes por 1 segundos.",
+    "DIVE": "Se sumerge bajo el agua y gana [20,40,80] de SHIELD, luego reaparece en medio del equipo enemigo, infligiendo [10,20,40,SP] de SPECIAL y dejando FREEZE a todas las unidades adyacentes por 1 segundos.",
     "SPIKE_ARMOR": "Durante [3,5,10] segundos, los objetivos que atacan cuerpo a cuerpo a este Pokémon quedan WOUND y reciben SPECIAL equivalente al [100,SP]% de la DEF actual",
     "FUTURE_SIGHT": "Inflige [15,30,60,SP] de SPECIAL a 5 enemigos",
     "FAKE_TEARS": "Inflige [3,6,9,SP] de SPECIAL a todo el equipo enemigo y activa ARMOR_REDUCTION por 3 segundos",
