@@ -453,6 +453,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean,
     permanent = false
   ) {
+    if (this.life <= 0) return
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     const update = (target: { hp: number }) => {
