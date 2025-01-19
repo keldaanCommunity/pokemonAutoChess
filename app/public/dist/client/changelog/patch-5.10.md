@@ -6,6 +6,7 @@
 - Galarian Linoone
 - Obstagoon
 - Dracozolt
+- Cryogonal
 
 # Changes to Pokemon & Abilities
 

@@ -6515,6 +6515,20 @@ export class Heatmor extends Pokemon {
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
+export class Cryogonal extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.AMORPHOUS])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 2
+  speDef = 8
+  maxPP = 95
+  range = 3
+  skill = Ability.FREEZE_DRY
+  attackSprite = AttackSprite.ICE_RANGE
+}
+
 export class PrimalGroudon extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.GROUND,
@@ -16822,5 +16836,6 @@ export const PokemonClasses: Record<
   [Pkm.LITTEN]: Litten,
   [Pkm.TORRACAT]: Torracat,
   [Pkm.INCINEROAR]: Incineroar,
-  [Pkm.DRACOZOLT]: Dracozolt
+  [Pkm.DRACOZOLT]: Dracozolt,
+  [Pkm.CRYOGONAL]: Cryogonal
 }

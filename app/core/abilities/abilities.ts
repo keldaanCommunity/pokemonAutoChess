@@ -11331,6 +11331,55 @@ export class BoltBeakStrategy extends AbilityStrategy {
   }
 }
 
+export class FreezeDryStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        if (target && target.life > 0) {
+          const damage = 70 + pokemon.speDef * 2
+          const killDamage = 40 + pokemon.speDef * 1.5
+          const x = target.positionX
+          const y = target.positionY
+          const attackResult = target.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          if (attackResult.death) {
+            const cells = board.getAdjacentCells(x, y, false)
+            cells.forEach((cell) => {
+              if (cell.value && cell.value.team !== pokemon.team) {
+                broadcastAbility(pokemon, {
+                  positionX: x,
+                  positionY: y,
+                  targetX: cell.x,
+                  targetY: cell.y
+                })
+                cell.value.handleSpecialDamage(
+                  killDamage,
+                  board,
+                  AttackType.SPECIAL,
+                  pokemon,
+                  crit
+                )
+              }
+            })
+          }
+        }
+      }, 250)
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -11751,5 +11800,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.COLUMN_CRUSH]: new ColumnCrushStrategy(),
   [Ability.WONDER_ROOM]: new WonderRoomStrategy(),
   [Ability.DARK_LARIAT]: new DarkLariatStrategy(),
-  [Ability.BOLT_BEAK]: new BoltBeakStrategy()
+  [Ability.BOLT_BEAK]: new BoltBeakStrategy(),
+  [Ability.FREEZE_DRY]: new FreezeDryStrategy()
 }
