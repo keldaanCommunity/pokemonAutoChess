@@ -1321,7 +1321,7 @@
     "HEAT_WAVE": "Infliggi [10,20,30,SP] SPECIAL a tutti i nemici, con il [20,LK]% di possibilità di causare BURN per 3 secondi. Scongela tutti i Pokèmon con la condizione FREEZE.",
     "FLAMETHROWER": "Infliggi [30,60,120,SP] SPECIAL e causa BURN per 4 secondi a tutti i Pokèmon nemici in linea retta dentro un raggio di 3 caselle.",
     "THUNDER": "Infligge [30,60,120,SP] SPECIAL.",
-    "HYDRO_PUMP": "Infligge [25,50,100,SP] SPECIAL a tutti i Pokèmon nemici dietro al bersaglio.",
+    "HYDRO_PUMP": "Infligge [20,40,80,SP] SPECIAL a tutti i Pokèmon nemici dietro al bersaglio.",
     "DRACO_METEOR": "Infligge [50,SP] SPECIAL a tutti i Pokèmon nemici.",
     "BLAZE_KICK": "Infligge [30,60,120,SP] SPECIAL e BURN al bersaglio per 2 secondi. Se ha già subito una BURN, infligge un +30% in più di danni.",
     "WISH": "Ripristina [50,SP] HP e dà [20,SP] LUCK a [1,2,3] Pokèmon alleati.",

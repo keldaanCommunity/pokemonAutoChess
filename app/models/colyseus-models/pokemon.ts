@@ -3950,10 +3950,10 @@ export class Blastoise extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD])
   rarity = Rarity.COMMON
   stars = 3
-  hp = 210
+  hp = 190
   atk = 20
-  def = 1
-  speDef = 1
+  def = 2
+  speDef = 2
   maxPP = 100
   range = 3
   skill = Ability.HYDRO_PUMP

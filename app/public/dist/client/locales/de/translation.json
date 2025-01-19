@@ -1272,7 +1272,7 @@
     "GUILLOTINE": "Attacke, die [1,2,3,SP] x ATK SPECIAL am Ziel verursacht. Stellt die Hälfte von PP wieder her, wenn das Ziel KO ist",
     "ROCK_SLIDE": "Attacke, die [30,60,120,SP] SPECIAL am Ziel verursacht. Verdoppelt den Schaden, wenn das Ziel FLYING ist.",
     "THUNDER": "Attacke, die [30,60,120,SP] SPECIAL am Ziel verursacht.",
-    "HYDRO_PUMP": "Flächenangriff, der allen Feinden in einer Linie hinter dem Ziel [25,50,100,SP] SPECIAL zufügt.",
+    "HYDRO_PUMP": "Flächenangriff, der allen Feinden in einer Linie hinter dem Ziel [20,40,80,SP] SPECIAL zufügt.",
     "DRACO_METEOR": "Flächenangriff, der allen Feinden [50,SP] SPECIAL zufügt",
     "BLAZE_KICK": "Verursacht [30,60,120,SP] SPECIAL und BURN am Ziel für 2 Sekunden. Wenn es bereits BURN hat, verursache +30% Schaden.",
     "WISH": "Stellt [50,SP] HP und gibt [20,SP] LUCK bei [1,2,3] verbündeten Pokémon wieder her",

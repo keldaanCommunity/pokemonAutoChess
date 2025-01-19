@@ -27,6 +27,8 @@
 - Change Vise Grip (Krabby): during the 4 seconds when both user and target are locked, user gains 100% of target's defense and special defense
 - Deino line now only appears in Dragon regions
 - Nerf Relicanth: PP 80 → 100
+- Nerf HydroPump (Squirtle) ability damage: 25/50/100 → 20/40/80
+- Blastoise HP 210 → 190, def/spedef: 1 → 2
 
 # Changes to Synergies
 

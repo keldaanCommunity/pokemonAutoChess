@@ -1179,7 +1179,7 @@
     "GUILLOTINE": "Ataque de alvo mono que causa [1,2,3,SP] x ATK SPECIAL. Restaura metade do PP se o alvo for nocauteado",
     "ROCK_SLIDE": "Ataque de alvo mono que causa [30,60,120,SP] SPECIAL. Dobra o dano se o alvo for do tipo FLYING.",
     "THUNDER": "Dano de alvo mono que causa [30,60,120,SP] SPECIAL.",
-    "HYDRO_PUMP": "Ataque em área de efeito que causa [25,50,100,SP] SPECIAL a todos os inimigos em uma linha atrás do alvo.",
+    "HYDRO_PUMP": "Ataque em área de efeito que causa [20,40,80,SP] SPECIAL a todos os inimigos em uma linha atrás do alvo.",
     "DRACO_METEOR": "Área de ataque de efeito que causa [50,SP] SPECIAL a todos os inimigos",
     "BLAZE_KICK": "Inflige [30,60,120,SP] SPECIAL e BURN ao alvo durante 2 segundos. Se ele já tiver BURN, causa +30% de dano.",
     "WISH": "Restaura [50,SP] HP e dá [20,SP] LUCK para [1,2,3] pokémon aliado",
