@@ -30,6 +30,7 @@
 - Nerf HydroPump (Squirtle) ability damage: 25/50/100 → 20/40/80
 - Blastoise HP 210 → 190, def/spedef: 1 → 2
 - Nerf Sobble line: PP 90 → 100, Snipe Shot damage: 50/100/200 → 40/80/160
+- Gastly line: PP 100 → 60, Nightmare fatigue duration 3/5/7→2/4/6 seconds, special damage: 40/80/150 → 25/50/100
 
 # Changes to Synergies
 

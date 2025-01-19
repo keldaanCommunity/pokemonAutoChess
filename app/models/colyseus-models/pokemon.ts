@@ -1538,7 +1538,7 @@ export class Gastly extends Pokemon {
   atk = 14
   def = 3
   speDef = 3
-  maxPP = 100
+  maxPP = 60
   range = 2
   skill = Ability.NIGHTMARE
   attackSprite = AttackSprite.GHOST_RANGE
@@ -1557,7 +1557,7 @@ export class Haunter extends Pokemon {
   atk = 25
   def = 4
   speDef = 3
-  maxPP = 100
+  maxPP = 60
   range = 2
   skill = Ability.NIGHTMARE
   attackSprite = AttackSprite.GHOST_RANGE
@@ -1575,7 +1575,7 @@ export class Gengar extends Pokemon {
   atk = 40
   def = 5
   speDef = 3
-  maxPP = 100
+  maxPP = 60
   range = 2
   skill = Ability.NIGHTMARE
   attackSprite = AttackSprite.GHOST_RANGE
