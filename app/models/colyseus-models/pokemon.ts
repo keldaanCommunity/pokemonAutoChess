@@ -1538,7 +1538,7 @@ export class Gastly extends Pokemon {
   atk = 14
   def = 3
   speDef = 3
-  maxPP = 100
+  maxPP = 60
   range = 2
   skill = Ability.NIGHTMARE
   attackSprite = AttackSprite.GHOST_RANGE
@@ -1557,7 +1557,7 @@ export class Haunter extends Pokemon {
   atk = 25
   def = 4
   speDef = 3
-  maxPP = 100
+  maxPP = 60
   range = 2
   skill = Ability.NIGHTMARE
   attackSprite = AttackSprite.GHOST_RANGE
@@ -1575,7 +1575,7 @@ export class Gengar extends Pokemon {
   atk = 40
   def = 5
   speDef = 3
-  maxPP = 100
+  maxPP = 60
   range = 2
   skill = Ability.NIGHTMARE
   attackSprite = AttackSprite.GHOST_RANGE
@@ -3951,10 +3951,10 @@ export class Blastoise extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD])
   rarity = Rarity.COMMON
   stars = 3
-  hp = 210
+  hp = 190
   atk = 20
-  def = 1
-  speDef = 1
+  def = 2
+  speDef = 2
   maxPP = 100
   range = 3
   skill = Ability.HYDRO_PUMP
@@ -7292,7 +7292,7 @@ export class Relicanth extends Pokemon {
   atk = 13
   def = 7
   speDef = 3
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.ROCK_TOMB
   attackSprite = AttackSprite.WATER_MELEE
@@ -11218,7 +11218,7 @@ export class Kartana extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.GRASS])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 230
+  hp = 200
   atk = 40
   def = 10
   speDef = 2
@@ -12622,7 +12622,7 @@ export class Sobble extends Pokemon {
   atk = 14
   def = 2
   speDef = 2
-  maxPP = 90
+  maxPP = 100
   range = 3
   skill = Ability.SNIPE_SHOT
   attackSprite = AttackSprite.WATER_RANGE
@@ -12637,7 +12637,7 @@ export class Drizzile extends Pokemon {
   atk = 26
   def = 4
   speDef = 4
-  maxPP = 90
+  maxPP = 100
   range = 3
   skill = Ability.SNIPE_SHOT
   attackSprite = AttackSprite.WATER_RANGE
@@ -12651,7 +12651,7 @@ export class Inteleon extends Pokemon {
   atk = 40
   def = 6
   speDef = 6
-  maxPP = 90
+  maxPP = 100
   range = 3
   skill = Ability.SNIPE_SHOT
   attackSprite = AttackSprite.WATER_RANGE
@@ -14565,8 +14565,8 @@ export class WishiwashiSchool extends Pokemon {
   evolution = Pkm.WISHIWASHI_SCHOOL
   hp = 300
   atk = 20
-  def = 5
-  speDef = 5
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.SCHOOLING
@@ -15731,7 +15731,7 @@ export class Timburr extends Pokemon {
   atk = 14
   def = 4
   speDef = 2
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.COLUMN_CRUSH
   passive = Passive.PILLAR
@@ -15754,7 +15754,7 @@ export class Gurdurr extends Pokemon {
   atk = 24
   def = 6
   speDef = 3
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.COLUMN_CRUSH
   passive = Passive.PILLAR
@@ -15776,7 +15776,7 @@ export class Conkeldurr extends Pokemon {
   atk = 34
   def = 8
   speDef = 4
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.COLUMN_CRUSH
   passive = Passive.PILLAR

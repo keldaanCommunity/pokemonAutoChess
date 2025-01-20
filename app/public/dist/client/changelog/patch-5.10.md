@@ -21,12 +21,22 @@
 - Nerf Waterfall: 50/100/150 shield → 40/80/120 shield
 - Buff Flash: radius 2 → 3 cells, duration 1.5/3/5 → 2/4/6 seconds
 - Buff Cut: 30 → 40% of target HP as special damage
+- Buff Bulk Up: stat buff 40% → 50%
 - All eeveelutions now have 100 max PP
 - Fix Spark ability targeting
 - Nerf High Jump Kick (Lopunny): steal up to ~~50~~ 30 PP
 - Nerf Rotom Drone: Def/Spedef 4 → 3
 - Change Vise Grip (Krabby): during the 4 seconds when both user and target are locked, user gains 100% of target's defense and special defense
 - Deino line now only appears in Dragon regions
+- Nerf Relicanth: PP 80 → 100
+- Nerf HydroPump (Squirtle) ability damage: 25/50/100 → 20/40/80
+- Blastoise HP 210 → 190, def/spedef: 1 → 2
+- Nerf Sobble line: PP 90 → 100, Snipe Shot damage: 50/100/200 → 40/80/160
+- Gastly line: PP 100 → 60, Nightmare fatigue duration 3/5/7→2/4/6 seconds, special damage: 40/80/150 → 25/50/100
+- Change Dive (Lapras, Wailmer): Shield 10/20/40 → 15/30/60, AP scaling 1 → 0
+- Nerf Kartana: HP 230 → 200
+- Buff Timburr line: PP 120 → 100
+- Buff Castorm: Sun form: +3 → +4 attack, Rain form: +5 → +8 PP
 
 # Changes to Synergies
 

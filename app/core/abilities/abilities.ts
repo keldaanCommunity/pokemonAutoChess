@@ -2255,8 +2255,8 @@ export class NightmareStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const duration = [3000, 5000, 7000][pokemon.stars - 1] ?? 7000
-    const damage = [40, 80, 150][pokemon.stars - 1] ?? 100
+    const duration = [2000, 4000, 6000][pokemon.stars - 1] ?? 6000
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
 
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && pokemon.team != enemy.team) {
@@ -2784,7 +2784,7 @@ export class HydroPumpStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 100
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
@@ -3265,12 +3265,12 @@ export class DiveStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
-    const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
+    const shield = [15, 30, 60][pokemon.stars - 1] ?? 60
     const freezeDuration = 1000
     const mostSurroundedCoordinate =
       state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
 
-    pokemon.addShield(shield, pokemon, 1, crit)
+    pokemon.addShield(shield, pokemon, 0, false)
 
     if (mostSurroundedCoordinate) {
       pokemon.moveTo(
@@ -7136,7 +7136,7 @@ export class SnipeShotStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    const damage = [50, 100, 200][pokemon.stars - 1] ?? 200
+    const damage = [40, 80, 160][pokemon.stars - 1] ?? 160
     const farthestTarget = state.getFarthestTarget(pokemon, board) ?? target
     super.process(pokemon, state, board, farthestTarget, crit)
 
@@ -10930,8 +10930,8 @@ export class BulkUpStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     // Increase base Attack and base Defense by 40%
-    const atkBoost = Math.ceil(0.4 * pokemon.baseAtk)
-    const defBoost = Math.ceil(0.4 * pokemon.baseDef)
+    const atkBoost = Math.ceil(0.5 * pokemon.baseAtk)
+    const defBoost = Math.ceil(0.5 * pokemon.baseDef)
     pokemon.addAttack(atkBoost, pokemon, 1, crit)
     pokemon.addDefense(defBoost, pokemon, 1, crit)
   }
