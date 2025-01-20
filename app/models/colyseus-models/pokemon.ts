@@ -15697,7 +15697,7 @@ export class Timburr extends Pokemon {
   atk = 14
   def = 4
   speDef = 2
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.COLUMN_CRUSH
   passive = Passive.PILLAR
@@ -15720,7 +15720,7 @@ export class Gurdurr extends Pokemon {
   atk = 24
   def = 6
   speDef = 3
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.COLUMN_CRUSH
   passive = Passive.PILLAR
@@ -15742,7 +15742,7 @@ export class Conkeldurr extends Pokemon {
   atk = 34
   def = 8
   speDef = 4
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.COLUMN_CRUSH
   passive = Passive.PILLAR

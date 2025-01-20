@@ -1487,7 +1487,7 @@
     "UPPERCUT": "Deal [60,SP] SPECIAL to the target. The damage is doubled if the user has a higher DEF than the target.",
     "TRIPLE_KICK": "Deal [60,SP] SPECIAL to up to 3 adjacent enemy Pokémon.",
     "MAWASHI_GERI": "Deal [60,SP] SPECIAL to the target and push it away. The damage is doubled if the user has a higher ATK than the target.",
-    "FORECAST": "Grant [10,SP] SHIELD to all allied Pokémon, plus an additional bonus depending on the weather: \n Sun: +[3,SP] ATK \n Rain: +[5,SP] PP \n Snow: +[2,SP] DEF / SPE_DEF",
+    "FORECAST": "Grant [10,SP] SHIELD to all allied Pokémon, plus an additional bonus depending on the weather:\n SNOW: +[2,SP] DEF / SPE_DEF\n SUN: +[4,SP] ATK \n RAIN: +[8,SP] PP",
     "X_SCISSOR": "Deal [10,20,40,60,SP] TRUE twice.",
     "MANTIS_BLADES": "Unleash a trio of blades upon the target, each dealing [30,60,120,SP] with a distinct damage type: PHYSICAL, SPECIAL and TRUE.",
     "PLASMA_FIST": "Deal [120,SP] SPECIAL to the target and heal 25% of damage dealt.",

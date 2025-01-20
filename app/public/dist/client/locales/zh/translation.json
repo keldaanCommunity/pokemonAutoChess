@@ -1478,7 +1478,7 @@
     "UPPERCUT": "对目标造成[60,SP]点SPECIAL。若使用者的DEF高于目标，造成的伤害翻倍。",
     "TRIPLE_KICK": "对至多3个相邻的敌方宝可梦造成[60,SP]点SPECIAL。",
     "MAWASHI_GERI": "对目标造成[60,SP]点SPECIAL，并将其击退。若使用者的ATK高于目标，造成的伤害翻倍。",
-    "FORECAST": "全体我方宝可梦获得[10,SP]点SHIELD，并根据当前天气，再提升：\nSUN——[3,SP]点ATK\nRAIN——[5,SP]点PP\nSNOW——[2,SP]点DEF与SPE_DEF",
+    "FORECAST": "全体我方宝可梦获得[10,SP]点SHIELD，并根据当前天气，再提升：\nSUN——[4,SP]点ATK\nRAIN——[8,SP]点PP\nSNOW——[2,SP]点DEF与SPE_DEF",
     "X_SCISSOR": "对目标造成两次[10,20,40,60,SP]点TRUE。",
     "MANTIS_BLADES": "对目标连斩三刀，每刀均造成[30,60,120,SP]点伤害。三刀的伤害类型分别为PHYSICAL，SPECIAL和TRUE。",
     "PLASMA_FIST": "对目标造成[120,SP]点SPECIAL。使用者恢复造成伤害的25%。",

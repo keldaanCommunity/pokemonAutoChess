@@ -1478,7 +1478,7 @@
     "UPPERCUT": "Inflige [60,SP] de SPECIAL. Causa daño doble si el atacante tiene más DEF que el objetivo",
     "TRIPLE_KICK": "Inflige [60,SP] de SPECIAL a hasta 3 enemigos adyacentes",
     "MAWASHI_GERI": "Inflige [60,SP] de SPECIAL al objetivo y lo empuja. Causa el doble de daño si el atacante tiene más ATK que el objetivo",
-    "FORECAST": "Otorga [10,SP] SHIELD a tu equipo, además de una bonificación adicional según el clima:\n Sol: también da [3,SP] de ATK\n Lluvia: también da [5,SP] de PP\n Nieve: también da [2,SP] de DEF / SPE_DEF",
+    "FORECAST": "Otorga [10,SP] SHIELD a tu equipo, además de una bonificación adicional según el clima:\n SNOW: también da [2,SP] de DEF / SPE_DEF\n SUN: también da [4,SP] de ATK\n RAIN: también da [8,SP] de PP",
     "X_SCISSOR": "Inflige [10,20,40,60,SP] de TRUE dos veces",
     "MANTIS_BLADES": "Desata un trío de espadas sobre el objetivo, cada espada inflige [30,60,120,SP] con un tipo de daño distinto: PHYSICAL, SPECIAL y TRUE.",
     "PLASMA_FIST": "Inflige [120,SP] de SPECIAL, recupera el 25% del daño infligido",
