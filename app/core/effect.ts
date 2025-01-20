@@ -155,7 +155,7 @@ export class FireHitEffect extends OnHitEffect {
   }
 }
 
-export class OnAbilityEffect extends Effect {
+export class OnAbilityCastEffect extends Effect {
   apply(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -177,7 +177,7 @@ export class OnAbilityEffect extends Effect {
   }
 }
 
-export class SoundCryEffect extends OnAbilityEffect {
+export class SoundCryEffect extends OnAbilityCastEffect {
   count: number = 0
   synergyLevel: number = -1
   constructor(effect?: EffectEnum) {

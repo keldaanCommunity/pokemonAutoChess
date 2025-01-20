@@ -10,7 +10,7 @@ import { PokemonEntity } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 import { AbilityStrategies } from "./abilities"
 import { min } from "../../utils/number"
-import { OnAbilityEffect } from "../effect"
+import { OnAbilityCastEffect } from "../effect"
 
 export class AbilityStrategy {
   copyable = true // if true, can be copied by mimic, metronome...
@@ -38,7 +38,7 @@ export class AbilityStrategy {
     }
 
     pokemon.effectsSet.forEach((effect) => {
-      if (effect instanceof OnAbilityEffect) {
+      if (effect instanceof OnAbilityCastEffect) {
         effect.apply(pokemon, state, board, target, crit)
       }
     })
