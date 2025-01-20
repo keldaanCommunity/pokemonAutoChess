@@ -1,11 +1,11 @@
 import { Schema, SetSchema, type } from "@colyseus/schema"
-import { logger } from "../utils/logger"
 import { nanoid } from "nanoid"
 import Count from "../models/colyseus-models/count"
 import Player from "../models/colyseus-models/player"
 import { Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
 import Status from "../models/colyseus-models/status"
 import PokemonFactory from "../models/pokemon-factory"
+import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { getSellPrice } from "../models/shop"
 import {
   AttackSprite,
@@ -36,7 +36,12 @@ import {
   Stat,
   Team
 } from "../types/enum/Game"
-import { Berries, Item, SynergyGivenByItem, SynergyStones } from "../types/enum/Item"
+import {
+  Berries,
+  Item,
+  SynergyGivenByItem,
+  SynergyStones
+} from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
@@ -45,24 +50,24 @@ import { Weather } from "../types/enum/Weather"
 import { count } from "../utils/array"
 import { isOnBench } from "../utils/board"
 import { distanceC, distanceM } from "../utils/distance"
+import { logger } from "../utils/logger"
 import { clamp, min, roundToNDigits } from "../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import AttackingState from "./attacking-state"
 import Board, { Cell } from "./board"
+import {
+  Effect as EffectClass,
+  OnHitEffect,
+  OnItemRemovedEffect,
+  OnKillEffect
+} from "./effect"
 import { IdleState } from "./idle-state"
+import { ItemEffects } from "./items"
 import MovingState from "./moving-state"
 import PokemonState from "./pokemon-state"
 import Simulation from "./simulation"
 import { DelayedCommand, SimulationCommand } from "./simulation-command"
-import { ItemEffects } from "./items"
-import {
-  OnItemRemovedEffect,
-  OnKillEffect,
-  Effect as EffectClass,
-  OnHitEffect
-} from "./effect"
-import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 
 export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -328,6 +333,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attackType === AttackType.SPECIAL
       ) {
         this.status.triggerBurn(3000, this, attacker)
+      }
+      if (attacker?.passive === Passive.BERSERK) {
+        attacker.addAbilityPower(3, attacker, 0, false, false)
       }
       if (
         this.items.has(Item.POWER_LENS) &&
@@ -1587,8 +1595,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           )
       )
       const randomItem = pickRandomIn(
-        values(target.items).filter((item) =>
-          item !== Item.COMFEY && item !== Item.LEAF_STONE
+        values(target.items).filter(
+          (item) => item !== Item.COMFEY && item !== Item.LEAF_STONE
         )
       )
       if (floraSpawn && randomItem && floraSpawn.items.size < 3) {

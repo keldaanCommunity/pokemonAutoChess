@@ -6529,6 +6529,21 @@ export class Cryogonal extends Pokemon {
   attackSprite = AttackSprite.ICE_RANGE
 }
 
+export class Drampa extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.NORMAL])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 250
+  atk = 10
+  def = 3
+  speDef = 3
+  maxPP = 110
+  range = 3
+  skill = Ability.DRAGON_PULSE
+  passive = Passive.BERSERK
+  attackSprite = AttackSprite.DRAGON_RANGE
+}
+
 export class PrimalGroudon extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.GROUND,
@@ -16837,5 +16852,6 @@ export const PokemonClasses: Record<
   [Pkm.TORRACAT]: Torracat,
   [Pkm.INCINEROAR]: Incineroar,
   [Pkm.DRACOZOLT]: Dracozolt,
-  [Pkm.CRYOGONAL]: Cryogonal
+  [Pkm.CRYOGONAL]: Cryogonal,
+  [Pkm.DRAMPA]: Drampa
 }

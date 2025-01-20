@@ -3084,6 +3084,22 @@ export function displayAbility(
       break
     }
 
+    case Ability.DRAGON_PULSE: {
+      const abilitySprite = addAbilitySprite(skill, coordinates, true)
+        .setScale(2)
+        .setDepth(1)
+      scene.tweens.add({
+        targets: abilitySprite,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 500,
+        scaleX: 4,
+        scaleY: 4
+      })
+      break
+    }
+
     case Ability.BRICK_BREAK:
 
     case Ability.BULK_UP:

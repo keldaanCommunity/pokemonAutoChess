@@ -7,6 +7,7 @@
 - Obstagoon
 - Dracozolt
 - Cryogonal
+- Drampa
 
 # Changes to Pokemon & Abilities
 
