@@ -438,7 +438,8 @@
     "COLUMN_CRUSH": "立柱重压",
     "WONDER_ROOM": "奇妙空间",
     "DARK_LARIAT": "ＤＤ金钩臂",
-    "BOLT_BEAK": "电喙"
+    "BOLT_BEAK": "电喙",
+    "FREEZE_DRY": "冷冻干燥"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1332,7 +1333,8 @@
     "LITTEN": "火斑喵",
     "TORRACAT": "炎热喵",
     "INCINEROAR": "炽焰咆哮虎",
-    "DRACOZOLT": "雷鸟龙"
+    "DRACOZOLT": "雷鸟龙",
+    "CRYOGONAL": "几何雪花"
   },
   "ability_description": {
     "SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1519,7 +1521,7 @@
     "ACROBATICS": "对目标造成[20,40,80,SP]点SPECIAL。若使用者没有携带任何道具，造成的伤害翻倍。",
     "ABSORB": "对目标造成[30,60,120,SP]点SPECIAL，并为相邻我方宝可梦恢复[3,6,12,SP]点HP。",
     "ROLLOUT": "提升[1,3,5,SP]点DEF并造成SPECIAL，数值相当于DEF乘以5。",
-    "ICE_BALL": "提升使用者5点SPE_DEF，随后对目标造成SPECIAL，数值相当于[100,200,300,SP]%的SPE_DEF加[10,20,30,SP]。",
+    "ICE_BALL": "提升使用者5点SPE_DEF，随后对目标造成SPECIAL，数值相当于[100,200,300,SP]%的SPE_DEF加上[10,20,30,SP]。",
     "THRASH": "提升[100,SP]%的ATK，但陷入CONFUSION 3秒。",
     "SOLAR_BEAM": "对目标背后的一条直线造成[30,60,120,SP]点SPECIAL。若天气为SUN，还会造成双倍伤害，恢复40 PP并使击中的宝可梦陷入BURN 3秒。",
     "MAGMA_STORM": "用火焰漩涡困住目标，对其造成[80,SP]点SPECIAL。这个漩涡随后会转移到相邻的目标身上。",
@@ -1745,13 +1747,14 @@
     "CUT": "对目标造成SPECIAL，数值相当于其最大HP的[40,SP]%，并使其陷入WOUND 5秒。",
     "FLY": "飞上天空，在1秒后落至最远敌人的位置，对其造成SPECIAL，数值相当于[400,SP]%的ATK。",
     "SURF": "一道海浪将使用者与路径上的所有敌方宝可梦推至敌方后排的位置。所有被击中的敌方宝可梦受到[20,40,80,SP]点SPECIAL。",
-    "STRENGTH": "对目标造成PHYSICAL，数值相当于ATK、DEF与SPE_DEF之和的两倍再加AP。",
+    "STRENGTH": "对目标造成PHYSICAL，数值相当于ATK、DEF与SPE_DEF之和的2倍加上AP。",
     "HARDEN": "提升[2,4,6,SP]点DEF。",
     "TOPSY_TURVY": "对目标造成[40,80,100,SP]点SPECIAL，并反转其ATK，DEF和SPE_DEF的变化。任何增幅变为等额的减幅，反之亦然。",
     "COLUMN_CRUSH": "在最近的空格子上建造一根立柱。若场上已经存在立柱，改为跳至立柱的位置，并将其丢向最近的目标，对其造成SPECIAL，数值相当于[50,100,150,SP]加上立柱剩余的HP。",
     "WONDER_ROOM": "在目标周围制造离奇的空间。空间内的敌方宝可梦的DEF和SPE_DEF被交换，持续5秒，且受到的普攻伤害为受攻击方AP加成的SPECIAL。",
     "DARK_LARIAT": "旋转双臂多次打向对手，同时移动至其背后。每次造成SPECIAL，数值相当于[100,SP]%的ATK。攻击次数随ATK_SPEED提升而增加。目标在此期间陷入FLINCH。",
-    "BOLT_BEAK": "对目标造成[80,SP]点SPECIAL。若目标当前的PP高于40，改为造成[160,SP]点SPECIAL。"
+    "BOLT_BEAK": "对目标造成[80,SP]点SPECIAL。若目标当前的PP高于40，改为造成[160,SP]点SPECIAL。",
+    "FREEZE_DRY": "对目标造成SPECIAL，数值相当于[200,SP]%的SPE_DEF加上[70,SP]。若目标因此倒下，其会爆炸并射出冰刺，对相邻的敌方宝可梦造成SPECIAL，数值相当于[150,SP]%的SPE_DEF加上[40,SP]。"
   },
   "effect": {
     "INGRAIN": "扎根",
