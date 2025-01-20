@@ -10930,8 +10930,8 @@ export class BulkUpStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     // Increase base Attack and base Defense by 40%
-    const atkBoost = Math.ceil(0.4 * pokemon.baseAtk)
-    const defBoost = Math.ceil(0.4 * pokemon.baseDef)
+    const atkBoost = Math.ceil(0.5 * pokemon.baseAtk)
+    const defBoost = Math.ceil(0.5 * pokemon.baseDef)
     pokemon.addAttack(atkBoost, pokemon, 1, crit)
     pokemon.addDefense(defBoost, pokemon, 1, crit)
   }

@@ -1741,7 +1741,7 @@
     "RAGE": "Get RAGE status for 3 seconds and gain [10,SP]% base ATK for each 10% of max HP missing",
     "BRICK_BREAK": "Deal [150,SP]% of ATK as TRUE. Breaks target's PROTECT and Magic Bounce.",
     "TAUNT": "Gain [25,SP=0.5]% of max HP as SHIELD, and force enemies within a 2-tile radius to choose you as target",
-    "BULK_UP": "Increase base ATK and base DEF by [40,SP]%",
+    "BULK_UP": "Increase base ATK and base DEF by [50,SP]%",
     "CUT": "Deal [40,SP]% of target max HP as SPECIAL. Inflicts WOUND for 5 seconds.",
     "FLY": "Rise in the air and fall on the farthest target after 1 second, dealing [400,SP]% of ATK as SPECIAL.",
     "SURF": "A wave pushes the user and enemies in the path into the enemy backline. All enemies hit take [20,40,80,SP] SPECIAL.",

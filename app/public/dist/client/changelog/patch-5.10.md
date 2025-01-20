@@ -20,6 +20,7 @@
 - Nerf Waterfall: 50/100/150 shield → 40/80/120 shield
 - Buff Flash: radius 2 → 3 cells, duration 1.5/3/5 → 2/4/6 seconds
 - Buff Cut: 30 → 40% of target HP as special damage
+- Buff Bulk Up: stat buff 40% → 50%
 - All eeveelutions now have 100 max PP
 - Fix Spark ability targeting
 - Nerf High Jump Kick (Lopunny): steal up to ~~50~~ 30 PP
