@@ -1461,7 +1461,7 @@
     "METAL_BURST": "Deal [30, SP] TRUE to the target. Damage is increased by 10% for each attack blocked by the user's FIGHTING synergy.",
     "PSYCHIC": "Deal [40,80,160,SP] SPECIAL to the target and adjacent enemy Pokémon and burn 15 PP.",
     "PSYBEAM": "Deal [25,50,100,SP] SPECIAL to all enemy Pokémon behind the target with a [50,LK]% chance to inflict them with CONFUSION for 4 seconds.",
-    "DIVE": "Dive underwater and gain [20,40,80] SHIELD, then reappear in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL and FREEZE all adjacent enemy Pokémon for 1 second.",
+    "DIVE": "Dive underwater and gain [15,30,60] SHIELD, then reappear in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL and FREEZE all adjacent enemy Pokémon for 1 second.",
     "SPIKE_ARMOR": "For [3,5,10] seconds, targets that melee attack the user receive WOUND for 2 seconds and take SPECIAL equal to [100,SP]% of the user's DEF. When casting again before the end of the effect, throw spikes in all directions, dealing 30 SPECIAL to all enemies hit.",
     "FUTURE_SIGHT": "Deal [15,30,60,SP] SPECIAL to 5 enemy Pokémon after 2 seconds.",
     "FAKE_TEARS": "Deal [3,6,9,SP] SPECIAL to all enemy Pokémon and inflict them with ARMOR_REDUCTION for 3 seconds.",
