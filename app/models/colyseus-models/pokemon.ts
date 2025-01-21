@@ -5222,7 +5222,7 @@ export class Lunatone extends Pokemon {
   atk = 20
   def = 2
   speDef = 2
-  maxPP = 90
+  maxPP = 80
   range = 2
   skill = Ability.COSMIC_POWER_MOON
   passive = Passive.NIGHT
@@ -5237,7 +5237,7 @@ export class Solrock extends Pokemon {
   atk = 20
   def = 2
   speDef = 2
-  maxPP = 90
+  maxPP = 80
   range = 2
   skill = Ability.COSMIC_POWER_SUN
   passive = Passive.SUN

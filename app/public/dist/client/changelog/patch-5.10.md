@@ -39,6 +39,7 @@
 - Buff Timburr line: PP 120 → 100
 - Buff Castorm: Sun form: +3 → +4 attack, Rain form: +5 → +8 PP
 - Nerf Tapu-Bulu: Def/Spedef: 5 → 3
+- Buff Lunatone/Solrock: PP 90 → 80
 
 # Changes to Synergies
 
