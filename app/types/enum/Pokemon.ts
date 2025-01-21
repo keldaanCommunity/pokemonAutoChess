@@ -194,6 +194,7 @@ export enum Pkm {
   DRAGONAIR = "DRAGONAIR",
   DRAGONITE = "DRAGONITE",
   DRAKLOAK = "DRAKLOAK",
+  DRAMPA = "DRAMPA",
   DRAPION = "DRAPION",
   DRATINI = "DRATINI",
   DREEPY = "DREEPY",
@@ -1805,7 +1806,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MIMIKYU]: "0778",
   [Pkm.MIMIKYU_BUSTED]: "0778-0001",
   [Pkm.BRUXISH]: "0779",
-  //[Pkm.DRAMPA]: "0780",
+  [Pkm.DRAMPA]: "0780",
   [Pkm.DHELMISE]: "0781",
   [Pkm.JANGMO_O]: "0782",
   [Pkm.HAKAMO_O]: "0783",
@@ -2951,7 +2952,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TORRACAT]: Pkm.LITTEN,
   [Pkm.INCINEROAR]: Pkm.LITTEN,
   [Pkm.DRACOZOLT]: Pkm.DRACOZOLT,
-  [Pkm.CRYOGONAL]: Pkm.CRYOGONAL
+  [Pkm.CRYOGONAL]: Pkm.CRYOGONAL,
+  [Pkm.DRAMPA]: Pkm.DRAMPA
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7611,6 +7613,11 @@ export const AnimationConfig: {
   [Pkm.CRYOGONAL]: {
     attack: AnimationType.Attack,
     ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge
+  },
+  [Pkm.DRAMPA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.RearUp,
     emote: AnimationType.Charge
   }
 }

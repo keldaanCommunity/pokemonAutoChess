@@ -11380,6 +11380,81 @@ export class FreezeDryStrategy extends AbilityStrategy {
   }
 }
 
+export class DragonPulseStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 20
+
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        if (target && target.life > 0) {
+          target.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          board
+            .getAdjacentCells(target.positionX, target.positionY, false)
+            .filter((cell) => cell.value && cell.value.team !== pokemon.team)
+            .forEach((cell) => {
+              if (cell.value) {
+                broadcastAbility(pokemon, {
+                  positionX: target.positionX,
+                  positionY: target.positionY,
+                  targetX: cell.x,
+                  targetY: cell.y
+                })
+                cell.value.handleSpecialDamage(
+                  damage,
+                  board,
+                  AttackType.SPECIAL,
+                  pokemon,
+                  crit
+                )
+                pokemon.commands.push(
+                  new DelayedCommand(() => {
+                    if (pokemon && cell.value) {
+                      board
+                        .getAdjacentCells(
+                          cell.value.positionX,
+                          cell.value.positionY,
+                          false
+                        )
+                        .filter((c) => c.value && c.value.team !== pokemon.team)
+                        .forEach((c) => {
+                          broadcastAbility(pokemon, {
+                            positionX: cell.x,
+                            positionY: cell.y,
+                            targetX: c.x,
+                            targetY: c.y
+                          })
+                          c.value?.handleSpecialDamage(
+                            damage,
+                            board,
+                            AttackType.SPECIAL,
+                            pokemon,
+                            crit
+                          )
+                        })
+                    }
+                  }, 400)
+                )
+              }
+            })
+        }
+      }, 400)
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -11801,5 +11876,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.WONDER_ROOM]: new WonderRoomStrategy(),
   [Ability.DARK_LARIAT]: new DarkLariatStrategy(),
   [Ability.BOLT_BEAK]: new BoltBeakStrategy(),
-  [Ability.FREEZE_DRY]: new FreezeDryStrategy()
+  [Ability.FREEZE_DRY]: new FreezeDryStrategy(),
+  [Ability.DRAGON_PULSE]: new DragonPulseStrategy()
 }
