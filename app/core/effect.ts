@@ -211,25 +211,3 @@ export class SoundCryEffect extends OnAbilityCastEffect {
     })
   }
 }
-
-export class ResetSoundCry extends Effect {
-  synergyLevel: number
-  constructor(effect) {
-    super(undefined, effect)
-    this.synergyLevel = SynergyEffects[Synergy.SOUND].indexOf(effect)
-  }
-
-  resetStacks(pokemon) {
-    const attackBoost = ([2, 1, 1][this.synergyLevel] ?? 0) *
-      -pokemon.count.soundCryCount
-    const attackSpeedBoost = ([0, 5, 5][this.synergyLevel] ?? 0) *
-      -pokemon.count.soundCryCount
-    const manaBoost = ([0, 0, 3][this.synergyLevel] ?? 0) *
-      -pokemon.count.soundCryCount
-
-      pokemon.addAttack(attackBoost, pokemon, 0, false)
-      pokemon.addAttackSpeed(attackSpeedBoost, pokemon, 0, false)
-      pokemon.addPP(manaBoost, pokemon, 0, false)
-      pokemon.count.soundCryCount = 0
-  }
-}
