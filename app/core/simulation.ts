@@ -1354,13 +1354,6 @@ export default class Simulation extends Schema implements ISimulation {
         break
       }
 
-      case Effect.CHIMECHO_PASSIVE: {
-        if (pokemon.types.has(Synergy.SOUND)) {
-          pokemon.effects.add(effect)
-        }
-        break
-      }
-
       default:
         break
     }

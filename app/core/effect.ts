@@ -193,7 +193,6 @@ export class SoundCryEffect extends OnAbilityCastEffect {
     const manaBoost = [0, 0, 3][this.synergyLevel] ?? 0
 
     const chimecho =
-      pokemon.effects.has(EffectEnum.CHIMECHO_PASSIVE) &&
       board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
         .some((cell) => cell.value?.passive === Passive.CHIMECHO)
     
