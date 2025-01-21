@@ -7691,8 +7691,8 @@ export class TapuBulu extends Pokemon {
   stars = 3
   hp = 200
   atk = 17
-  def = 5
-  speDef = 5
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.GRASSY_SURGE

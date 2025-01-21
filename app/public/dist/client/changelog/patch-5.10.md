@@ -38,6 +38,7 @@
 - Nerf Kartana: HP 230 → 200
 - Buff Timburr line: PP 120 → 100
 - Buff Castorm: Sun form: +3 → +4 attack, Rain form: +5 → +8 PP
+- Nerf Tapu-Bulu: Def/Spedef: 5 → 3
 
 # Changes to Synergies
 
