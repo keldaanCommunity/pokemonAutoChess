@@ -1776,7 +1776,7 @@ export class Leavanny extends Pokemon {
 }
 
 export class Turtwig extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.GROUND, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.GROUND])
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.GROTLE
@@ -1791,13 +1791,13 @@ export class Turtwig extends Pokemon {
 }
 
 export class Grotle extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.GROUND, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.GROUND])
   rarity = Rarity.RARE
   stars = 2
   evolution = Pkm.TORTERRA
   hp = 150
   atk = 9
-  def = 4
+  def = 5
   speDef = 4
   maxPP = 100
   range = 1
@@ -1806,12 +1806,12 @@ export class Grotle extends Pokemon {
 }
 
 export class Torterra extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.GROUND, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.GROUND])
   rarity = Rarity.RARE
   stars = 3
   hp = 280
   atk = 20
-  def = 5
+  def = 7
   speDef = 5
   maxPP = 100
   range = 1
