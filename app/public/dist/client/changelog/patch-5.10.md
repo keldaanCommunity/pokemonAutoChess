@@ -62,6 +62,8 @@
 
 # Bugfix
 
+- Pokemons of the same family cannot be proposed at the same time at stage 10 and stage 20 proposals
+
 # Misc
 
 - Increased allowed game reconnection time from 3 minutes to 5 minutes
