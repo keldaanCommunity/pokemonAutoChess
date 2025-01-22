@@ -2392,7 +2392,13 @@
 		"DARMANITAN_ZEN": "En transe, ne peut plus attaquer ou se déplacer, mais regagne [15,SP] HP par seconde. Retourne en forme Standard une fois totalement soigné.",
 		"BAD_LUCK": "Réduit la LUCK de toute l'équipe adverse de 20%",
 		"GOOD_LUCK": "Augmente la LUCK de toute l'équipe de 20%",
-		"PRIMEAPE": "A chaque KO subi, Colossinge se met encore plus en colère et gagne 1 ATK de façon permanente. Après 10 KO, évolue en Courroussinge."
+		"PRIMEAPE": "A chaque KO subi, Colossinge se met encore plus en colère et gagne 1 ATK de façon permanente. Après 10 KO, évolue en Courroussinge.",
+		"ZYGARDE10": "Une fois à moins de 30% de ses HP max, Zygarde absorbe toutes ses cellules et prend sa forme complète.",
+		"ZYGARDE50": "Une fois à moins de 30% de ses HP max, Zygarde absorbe toutes ses cellules et prend sa forme complète.",
+		"GLIMMORA": "Une fois sous les 50% de HP max, lance des piques toxiques dans une zone de 2x3 devant elle, infligeant 20 SPECIAL. Les piques toxiques appliquent le statut POISONNED aux Pokémon, sauf s'ils sont de type POISON.",
+		"PILLAR": "Construit un pilier pouvant être placé sur le plateau et qui bloque le chemin des ennemis, avec des HP, DEF et SPE_DEF augmentés en fonction des STAR de l'unité.",
+		"INANIMATE": "Les objets inanimés ne peuvent pas être copiés, mis sur le banc ou vendus. Ils ne peuvent pas se déplacer ni attaquer, et sont immunisés contre les effets de statut.",
+		"BERSERK": "Gagne 3 AP à chaque fois qu'un Pokémon est affecté par sa capacité."
 	},
 	"stat": {
 		"ATK": "Attaque",
@@ -2441,6 +2447,7 @@
 		"PARALYSIS": "Paralysie",
 		"POKERUS": "Pokérus",
 		"LOCKED": "Verrouillé",
+		"BLINDED": "Aveuglé",
 		"ARMOR_REDUCTION": "Réduction d'armure",
 		"CHARM": "Charmé",
 		"FLINCH": "Peur",
@@ -2471,6 +2478,7 @@
 		"CURSE": "Met KO le pokémon maudit à la fin du compte à rebours",
 		"RUNE_PROTECT": "Protège des altérations d'état",
 		"LOCKED": "Empêche de bouger et réduit la RANGE à 1",
+		"BLINDED": "Réduit la précision des attaques de 50%",
 		"ELECTRIC_FIELD": "Augmente les dégâts infligés de 20 % (ELECTRIC uniquement)",
 		"PSYCHIC_FIELD": "Augmente les dégâts infligés de 20 % (PSYCHIC uniquement)",
 		"GRASS_FIELD": "Augmente les dégâts infligés de 20 % (GRASS uniquement)",
@@ -2615,7 +2623,8 @@
 		"GLUTTON": "Goinfre",
 		"STARGAZER": "Astronome",
 		"BLOODY": "Sanguinaire",
-		"ETERNAL": "Eternel"
+		"ETERNAL": "Eternel",
+		"ANNIHILATOR": "Annihilateur"
 	},
 	"title_description": {
 		"NOVICE": "Jouez votre première partie",
@@ -2683,6 +2692,7 @@
 		"SIREN": "Obtenez un Milobellus",
 		"FEARSOME": "Formez un Banc de Froussardines",
 		"GOLDEN": "Obtenez un Gromago",
+		"ANNIHILATOR": "Obtenez un Courrousinge",
 		"CHOSEN_ONE": "Niveau max de synergie Lumière atteint lors d'une partie",
 		"VANQUISHER": "Remporter un match classé",
 		"OUTSIDER": "Remporter un match classé à 8 joueurs en étant le joueur au plus bas ELO",
@@ -2701,7 +2711,8 @@
 		"MISTY": "Brumeux",
 		"SNOW": "Neige",
 		"SANDSTORM": "Tempête de sable",
-		"BLOODMOON": "Lune Rouge"
+		"BLOODMOON": "Lune Rouge",
+		"SMOG": "Smog"
 	},
 	"weather_description": {
 		"NEUTRAL": "Temps normal. Aucun effet.",
@@ -2842,6 +2853,9 @@
 	"smeargle_scribble": "Gribouilles de Queulorior",
 	"smeargle_scribble_description": "Jouez pour le fun, pas de gain/perte d'Elo !\nUne nouvelle règle spéciale est ajoutée à la partie.",
 	"smeargle_scribble_hint": "Queulorior gribouille une nouvelle règle aléatoire appliquée pendant toute la partie",
+	"no_rule": "Aucune règle spéciale",
+	"enable_scribble": "Activer la Gribouille de Queulorior",
+	"disable_scribble": "Désactiver la Gribouille de Queulorior",
 	"quick_play": "Partie rapide",
 	"quick_play_description": "L'expérience PAC classique !\n8 joueurs, Elo activé, ouvert à tous",
 	"quick_play_hint": "La partie démarrera automatiquement quand 8 joueurs auront rejoint",
@@ -2911,10 +2925,12 @@
 	"type_here": "Écrivez ici ...",
 	"send_message": "Envoyer le message",
 	"shiny_hunter": "Chasseur de shiny",
+	"refundable": "Remboursable",
 	"show_all": "Afficher tout",
 	"show_locked": "Bloqués",
 	"show_unlockable": "Débloquables",
 	"show_unlocked": "Débloqués",
+	"show_evolutions": "Montrer évolutions",
 	"sort_by_index": "Tri par numéro",
 	"sort_by_shards": "Tri par éclats",
 	"normal_emotions": "Emotes normales",
@@ -2966,6 +2982,7 @@
 	"renderer_info": "WebGL est plus rapide mais peut causer des bugs visuels chez certains. Canvas est plus lent mais plus largement compatible.",
 	"music_volume": "Volume de la musique",
 	"sfx_volume": "Volume SFX",
+	"play_music_in_background": "Jouer de la musique en arrière-plan",
 	"toggle_fullscreen": "Plein écran",
 	"show_details_on_hover": "Afficher les détails au survol au lieu du clic droit",
 	"show_damage_numbers": "Afficher les nombres de dégâts des coups",
@@ -2975,6 +2992,7 @@
 	"snapshot": "Copier l'équipe actuelle",
 	"passive": "Passif",
 	"pick_additional_pokemon_hint": "Choisissez un Pokémon supplémentaire. Il sera accessible à tous.",
+	"pick_first_partner_hint": "Choisissez votre starter. Vous en recevrez une copie à chaque tour jusqu'au tour 10",
 	"free_slot_hint": "Vous devez avoir un emplacement libre sur le banc, ou deux pour les Duos",
 	"hide": "Cacher",
 	"show": "Montrer",
@@ -3041,12 +3059,14 @@
 	"berries": "Baies",
 	"artificial_items": "Objets artificiels",
 	"weather_rocks": "Roches Météo",
+	"tm_hm": "Capacités Techniques (CT) / Capacités Spéciales (CS)",
 	"special_items": "Objets spéciaux",
 	"shiny_items": "Objets chromatiques",
 	"craftable_items_description": "Combinez deux composants pour créer des objets puissants !",
 	"berries_description": "Lorsque la synergie GRASS est active, vous pouvez collecter des baies en cliquant sur les arbres à baies près de votre avatar.",
 	"artificial_items_description": "La synergie ARTIFICIAL vous donne des objets exclusifs une fois activée. Trois d'entre eux sont sélectionnés au hasard pour chaque joueur en début de partie.",
 	"weather_rocks_description": "Les pierres météo sont trouvées après avoir combattu sous une certaine météo avec la synergie ROCK active. Elles procurent des bonus à votre équipe lorsque la météo correspondante est active. Ces effets peuvent être cumulés.",
+	"tm_hm_description": "La synergie HUMAN vous confère des CT/CS lorsqu'elle est activée. Elles peuvent être utilisées pour modifier la capacité d'un Pokémon HUMAN.",
 	"special_items_description": "Ces objets sont exclusifs à certains Pokémon, et ne peuvent pas être obtenus autrement.",
 	"shiny_items_description": "Si vous êtes assez chanceux pour combattre un Pokémon shiny pendant un tour PvE ou pour trouver un Œuf d'Or, vous recevrez un objet shiny en récompense.",
 	"item_recipes": "Combos d'objets",
@@ -3111,6 +3131,7 @@
 	"sprite_credit": "Crédit Sprite",
 	"bot_admin": "Bot Admin",
 	"change_name": "Changer de nom",
+	"invalid_username": "Nom d'utilisateur invalide. Le nom d'utilisateur doit comporter entre 3 et 24 caractères, commencer par une lettre, contenir uniquement des lettres ou des chiffres ou \".-_\", pas d'espaces.",
 	"change": "Changer",
 	"change_avatar": "Changer d'avatar",
 	"play_more_games_hint": "Jouez au jeu pour gagner des boosters et débloquer de nouveaux avatars !",
@@ -3145,6 +3166,8 @@
 	"titles_unlocked": "titres débloqués",
 	"game-reconnect-modal-title": "Reconnexion au jeu",
 	"game-reconnect-modal-body": "Vous avez quitté une partie en cours. Voulez-vous vous reconnecter à votre partie précédente ?",
+	"game-surrender-modal-title": "Se rendre",
+	"game-surrender-modal-body": "Le jeu n'est pas terminé. Voulez-vous vous abandonner la partie ?",
 	"toggle_locked": "Afficher verrouillé",
 	"creator": "Créateur",
 	"switch_server": "Aller sur ce serveur",
@@ -3174,7 +3197,9 @@
 		"bot_builder": "Constructeur de Bot",
 		"bot_builder_desc": "Créez vos propres bots et publiez-les pour avoir une chance d'être inclus dans le jeu",
 		"jukebox": "Jukebox",
-		"jukebox_desc": "Choisissez votre musique en jeu"
+		"jukebox_desc": "Choisissez votre musique en jeu",
+		"gameboy": "Gameboy",
+		"gameboy_desc": "Jouez au prototype Gameboy du jeu"
 	},
 	"level_required": "Niveau requis",
 	"map": {
@@ -3370,7 +3395,11 @@
 		"CROWDED": "Plateau encombré",
 		"KECLEONS_SHOP": "Magasin de Kecleon",
 		"FREE_MARKET": "Marché libre",
-		"SHINY_HUNTER": "Chasseur de Shiny"
+		"SHINY_HUNTER": "Chasseur de Shiny",
+		"DO_IT_ALL_YOURSELF": "Tout faire soi-même !",
+		"FIRST_PARTNER": "Premier Partenaire",
+		"SLAMINGO": "Slamingo",
+		"BLOOD_MONEY": "Le prix du sang"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "Tous les Pokémons additionnels sont disponibles immédiatement",
@@ -3384,7 +3413,11 @@
 		"CROWDED": "+3 unités maximum sur le plateau",
 		"KECLEONS_SHOP": "Les carousels d'objets sont remplacés par le magasin de Kecleon qui vous propose 6 objets pour 10 GOLD pièce",
 		"FREE_MARKET": "Les Pokémons s'achètent et se vendent pour 0 GOLD",
-		"SHINY_HUNTER": "Toutes les rencontres PvE sont des shiny"
+		"SHINY_HUNTER": "Toutes les rencontres PvE sont des shiny",
+		"DO_IT_ALL_YOURSELF": "Commencez avec une copie de votre avatar. Les avatars de faible rareté obtiennent plus de HP max et d'or au départ.",
+		"FIRST_PARTNER": "Choisissez votre Pokémon de départ. Vous obtenez un exemplaire de cette unité à chaque tour jusqu'au tour 10.",
+		"SLAMINGO": "Tous les objets sont lâchés lorsqu'un Pokémon est placé sur le banc. Commence avec 4 composants aléatoires.",
+		"BLOOD_MONEY": "Chaque KO donne 1 GOLD. Aucun revenu supplémentaire provenant des intérêts."
 	},
 	"loading_hints": {
 		"tab_out": "Ne changez pas d'onglet ! Le chargement est mis en pause si cette fenêtre est inactive.",
@@ -3426,6 +3459,7 @@
 		"USER_BANNED": "Votre compte a été banni",
 		"USER_RANK_TOO_LOW": "Votre rang de joueur est trop bas pour entrer dans ce salon",
 		"USER_NOT_AUTHENTICATED": "Veuillez vous réauthentifier",
+		"USER_TIMEOUT": "Vous avez récemment quitté une partie avant sa fin, vous devez donc attendre 5 minutes avant d'en rejoindre une autre.",
 		"ROOM_FULL": "Ce salon est plein",
 		"ROOM_EMPTY": "Ce salon a été supprimé faute de manque de joueurs",
 		"ROOM_DELETED": "Ce salon a été supprimé",

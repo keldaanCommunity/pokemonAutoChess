@@ -2395,7 +2395,7 @@
 		"PRIMEAPE": "Primeape becomes angrier when KO, gaining 1 permanent ATK. After Primeape is knocked out 10 times, evolves into Annihilape.",
 		"ZYGARDE10": "Zygarde will absorb its cells, transforming into another form. Once below 30% max HP, it absorbs all of its cells, taking its complete form.",
 		"ZYGARDE50": "Zygarde will absorb its cells, transforming into another form. Once below 30% max HP, it absorbs all of its cells, taking its complete form.",
-		"GLIMMORA": "Once below 50% max HP, this unit throws toxic spikes in a 2x3 rectangle in front of itself, dealing 20 damage. Toxic spikes apply POISONNED to Pokémon, unless they are POISON.",
+		"GLIMMORA": "Once below 50% max HP, throws toxic spikes in a 2x3 rectangle in front of itself, dealing 20 SPECIAL. Toxic spikes apply POISONNED to Pokémon, unless they are POISON.",
 		"PILLAR": "Builds a movable pillar that blocks the path of enemies, with increased HP, DEF and SPE_DEF based on unit STAR.",
 		"INANIMATE": "Inanimate objects cannot be copied, benched or sold. They cannot move or attack, and are immune to status effects.",
 		"BERSERK": "Gains 3 AP each time a Pokemon is affected by its ability."
@@ -3416,7 +3416,7 @@
 		"SHINY_HUNTER": "All the Wild PvE encounters are shiny",
 		"DO_IT_ALL_YOURSELF": "Start with a copy of your avatar. Lower rarity avatars get additional max HP and starting gold.",
 		"FIRST_PARTNER": "Choose your starter Pokémon. You get a copy of this unit every stage up to stage 10.",
-		"SLAMINGO": "All items are dropped when a Pokémon is put on the bench. Starts with 4 random components",
+		"SLAMINGO": "All items are dropped when a Pokémon is put on the bench. Starts with 4 random components.",
 		"BLOOD_MONEY": "Every KO gives 1 GOLD. No extra income from interests."
 	},
 	"loading_hints": {
@@ -3459,7 +3459,7 @@
 		"USER_BANNED": "You account has been banned",
 		"USER_RANK_TOO_LOW": "Your player rank is not high enough to participate in this lobby",
 		"USER_NOT_AUTHENTICATED": "Please authenticate again",
-		"USER_TIMEOUT": "You recently left a game before its end, so you have to wait 5 minutes before joining another one",
+		"USER_TIMEOUT": "You recently left a game before its end, so you have to wait 5 minutes before joining another one.",
 		"ROOM_FULL": "This room is full",
 		"ROOM_EMPTY": "This room has been removed due to lack of players",
 		"ROOM_DELETED": "This room has been deleted",
