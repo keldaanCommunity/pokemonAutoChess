@@ -1763,9 +1763,7 @@
 		"code": "Welke taal/bibliotheek wordt gebruikt om het spel te coderen?",
 		"code_answer": "TypeScript, Phaser, Colyseus. Als je wilt bijdragen",
 		"pull_requests": "pull-aanvragen zijn open",
-		"faq": "FAQ.",
-		"defense": "Kunt u mij vertellen hoe defensie werkt? Is het vlakke schadebeperking?",
-		"defense_answer": "Zelfde systeem als League of Legends: schade: atk / (1+(0.1*def)). Verdediging werkt voor fysieke schade, speciale verdediging voor speciale schade"
+		"faq": "FAQ."
 	},
 	"yes": "Ja",
 	"no": "Nee",
