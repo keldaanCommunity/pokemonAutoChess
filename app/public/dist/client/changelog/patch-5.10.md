@@ -39,6 +39,8 @@
 - Buff Timburr line: PP 120 → 100
 - Buff Castorm: Sun form: +3 → +4 attack, Rain form: +5 → +8 PP
 - Torterra is no longer Flora ; Def 3/4/5 → 3/5/7 ; Growth ability cooldown 500→250ms
+- Nerf Tapu-Bulu: Def/Spedef: 5 → 3
+- Buff Lunatone/Solrock: PP 90 → 80
 
 # Changes to Synergies
 
