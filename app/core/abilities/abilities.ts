@@ -5029,6 +5029,7 @@ export class GrowthStrategy extends AbilityStrategy {
     }
     pokemon.addAttack(attackBuff, pokemon, 1, crit)
     pokemon.addMaxHP(hpBuff, pokemon, 1, crit)
+    pokemon.cooldown = 250
   }
 }
 

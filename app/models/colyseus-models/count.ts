@@ -5,7 +5,6 @@ export default class Count extends Schema implements ICount {
   @type("uint8") crit = 0
   @type("uint8") ult = 0
   @type("uint8") fieldCount = 0
-  @type("uint8") soundCount = 0
   @type("uint8") fairyCritCount = 0
   @type("uint8") attackCount = 0
   @type("uint8") fightingBlockCount = 0
@@ -23,4 +22,5 @@ export default class Count extends Schema implements ICount {
   @type("uint8") upgradeCount = 0
   @type("uint8") soulDewCount = 0
   @type("uint8") magmarizerCount = 0
+  @type("uint8") soundCryCount = 0
 }

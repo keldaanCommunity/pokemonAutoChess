@@ -38,6 +38,9 @@
 - Nerf Kartana: HP 230 → 200
 - Buff Timburr line: PP 120 → 100
 - Buff Castorm: Sun form: +3 → +4 attack, Rain form: +5 → +8 PP
+- Torterra is no longer Flora ; Def 3/4/5 → 3/5/7 ; Growth ability cooldown 500→250ms
+- Nerf Tapu-Bulu: Def/Spedef: 5 → 3
+- Buff Lunatone/Solrock: PP 90 → 80
 
 # Changes to Synergies
 
@@ -58,6 +61,8 @@
 - Added "Show evolutions" filter in Wiki > Synergies
 
 # Bugfix
+
+- Pokemons of the same family cannot be proposed at the same time at stage 10 and stage 20 proposals
 
 # Misc
 

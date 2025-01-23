@@ -1867,13 +1867,7 @@
     "BERSERK": "怒火冲天",
     "FLUID": "圆润",
     "SHAPELESS": "无形",
-    "ETHEREAL": "飘渺",
-    "SANDSTORM": "沙暴",
-    "SNOW": "下雪",
-    "SUN": "大晴天",
-    "RAIN": "下雨",
-    "MISTY": "薄雾",
-    "WINDY": "强风"
+    "ETHEREAL": "飘渺"
   },
   "effect_description": {
     "STAMINA": "获得15点SHIELD。",
@@ -3369,11 +3363,7 @@
     "SUPER_BALL": "超级球",
     "ULTRA_BALL": "高级球",
     "MASTER_BALL": "大师球",
-    "BEAST_BALL": "究极球",
-    "POKEBALL": "精灵球",
-    "GREATBALL": "超级球",
-    "ULTRABALL": "高级球",
-    "MASTERBALL": "大师球"
+    "BEAST_BALL": "究极球"
   },
   "game_full": "本房间已满员",
   "game_already_started": "游戏已经开始",

@@ -2167,8 +2167,6 @@
     "missing_points_answer": "Bots não dão elo, apenas jogadores humanos são contabilizados para classificação elo. Também é possível que o jogo tenha elo desativado (modo \"Só por diversão\")",
     "damage": "Quais são os danos especiais e danos físicos?",
     "damage_answer": "Os ataques automáticos causam principalmente dano físico, enquanto as habilidades causam principalmente dano especial. Algumas habilidades, entretanto, podem causar dano verdadeiro ou dano físico.",
-    "defense": "Você pode me dizer como funciona a defesa? É redução de dano plana?",
-    "defense_answer": "Mesmo sistema de League of Legends: dano: atk / (1+(0.1*def)). Defesa funciona para dano físico, defesa especial para dano especial",
     "shiny": "Como você consegue pokémons brilhantes?",
     "shiny_answer": "Você ganha pontos de experiência jogando jogos. Com bastante experiência, você sobe de nível e ganha um booster. Cada booster dá fragmentos para pokémons aleatórios. Use esses fragmentos para comprar os emotes brilhantes de um pokémon na página Coleção, então você obterá aquele pokémon como um jogo brilhante.",
     "support": "Como posso apoiar o jogo?",

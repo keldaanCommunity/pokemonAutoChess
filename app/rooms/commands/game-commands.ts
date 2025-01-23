@@ -878,8 +878,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     } else if (this.state.phase == GamePhaseState.FIGHT) {
       this.stopFightingPhase()
       if (
-        ItemCarouselStages.includes(this.state.stageLevel) ||
-        PortalCarouselStages.includes(this.state.stageLevel)
+        (ItemCarouselStages.includes(this.state.stageLevel) ||
+          PortalCarouselStages.includes(this.state.stageLevel)) &&
+        !this.state.gameFinished
       ) {
         this.initializeMinigamePhase()
       } else {

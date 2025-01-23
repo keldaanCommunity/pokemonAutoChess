@@ -10,6 +10,7 @@ import { PokemonEntity } from "../pokemon-entity"
 import PokemonState from "../pokemon-state"
 import { AbilityStrategies } from "./abilities"
 import { min } from "../../utils/number"
+import { OnAbilityCastEffect } from "../effect"
 
 export class AbilityStrategy {
   copyable = true // if true, can be copied by mimic, metronome...
@@ -36,13 +37,11 @@ export class AbilityStrategy {
       })
     }
 
-    if (pokemon.types.has(Synergy.SOUND)) {
-      soundBoost(pokemon, board)
-      if (pokemon.passive === Passive.MEGA_LAUNCHER) {
-        soundBoost(pokemon, board)
-        soundBoost(pokemon, board)
+    pokemon.effectsSet.forEach((effect) => {
+      if (effect instanceof OnAbilityCastEffect) {
+        effect.apply(pokemon, state, board, target, crit)
       }
-    }
+    })
 
     board.forEach((x, y, pkm) => {
       if (
@@ -90,38 +89,4 @@ export class AbilityStrategy {
       pokemon.addAttack(10, pokemon, 0, false)
     }
   }
-}
-
-export function soundBoost(pokemon: PokemonEntity, board: Board) {
-  pokemon.count.soundCount++
-  const chimecho = board.find(
-    (x, y, e) => e.passive === Passive.CHIMECHO && e.team === pokemon.team
-  )
-  const chimechoBoost =
-    chimecho &&
-    distanceC(
-      pokemon.positionX,
-      pokemon.positionY,
-      chimecho.positionX,
-      chimecho.positionY
-    ) <= 1
-  board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
-    if (ally && pokemon.team === ally.team) {
-      ally.status.sleep = false
-      if (pokemon.effects.has(Effect.LARGO)) {
-        ally.addAttack(chimechoBoost ? 4 : 2, pokemon, 0, false)
-      }
-      if (
-        pokemon.effects.has(Effect.ALLEGRO) ||
-        pokemon.effects.has(Effect.PRESTO)
-      ) {
-        ally.addAttack(chimechoBoost ? 2 : 1, pokemon, 0, false)
-        ally.addAttackSpeed(chimechoBoost ? 10 : 5, pokemon, 0, false)
-      }
-      if (pokemon.effects.has(Effect.PRESTO)) {
-        const manaBoost = chimechoBoost ? 6 : 3
-        ally.addPP(manaBoost, pokemon, 0, false)
-      }
-    }
-  })
 }

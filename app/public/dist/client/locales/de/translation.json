@@ -2549,8 +2549,6 @@
     "missing_points_answer": "Bots geben keinen Elo an, nur menschliche Spieler werden für die Elo-Bewertung berücksichtigt. Es ist auch möglich, dass im Spiel Elo deaktiviert war (Modus „Nur zum Spaß“).",
     "damage": "Was sind Spezial-Schaden und Physischer-Schaden?",
     "damage_answer": "Automatische Angriffe verursachen hauptsächlich körperlichen Schaden, während Fähigkeiten hauptsächlich Spezialschaden verursachen. Einige Fähigkeiten können jedoch echten Schaden oder physischen Schaden verursachen.",
-    "defense": "Können Sie mir sagen, wie Verteidigung funktioniert? Handelt es sich um eine pauschale Schadensreduzierung?",
-    "defense_answer": "Gleiches System wie League of Legends: Schaden: Angriff / (1+(0,1*def)). Die Verteidigung funktioniert bei physischem Schaden, die Spezialverteidigung bei besonderem Schaden",
     "shiny": "Wie bekommt man Schillerndes Pokémon?",
     "shiny_answer": "Durch das Spielen von Spielen erhält man Erfahrungspunkte. Mit genügend Erfahrung steigst du im Level auf und erhältst ein Booster-Pack. Jedes Booster-Pack enthält Splitter für zufällige Pokémon. Verwenden Sie diese Splitter, um die glänzenden Emotes eines Pokémon auf der Sammlungsseite zu kaufen. Anschließend erhalten Sie dieses eine Pokémon als glänzendes Ingame.",
     "support": "Wie kann ich das Spiel unterstützen?",
@@ -3189,12 +3187,5 @@
     "ROOM_EMPTY": "Dieser Raum wurde aufgrund von Spielermangel entfernt",
     "ROOM_DELETED": "Dieser Raum wurde gelöscht",
     "UNKNOWN_ERROR": "Ein unerwarteter Fehler ist aufgetreten: {{error}}"
-  },
-  "elorank": {
-    "BEGINNER": "Anfänger",
-    "POKEBALL": "Pokéball",
-    "GREATBALL": "Superball",
-    "ULTRABALL": "Hyperball",
-    "MASTERBALL": "Meisterball"
   }
 }

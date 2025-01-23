@@ -3175,7 +3175,7 @@
     "jukebox": "주크박스",
     "jukebox_desc": "인게임에서의 음악을 선택할 수 있습니다.",
     "gameboy": "게임보이",
-    "gamebody_desc": "게임보이 프로토타입을 플레이합니다."
+    "gameboy_desc": "게임보이 프로토타입을 플레이합니다."
   },
   "level_required": "레벨 요구됨",
   "map": {
