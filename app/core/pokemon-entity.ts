@@ -1754,6 +1754,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   resurrect() {
+    this.life = this.hp
+    this.pp = 0
+    this.status.clearNegativeStatus()
+
     if (this.items.has(Item.SACRED_ASH) && this.player) {
       const team = this.simulation.getTeam(this.player.id)
       if (team) {
@@ -1866,9 +1870,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       resetSoundStacks(soundEffect)
     }
 
-    this.life = this.hp
-    this.pp = 0
-    this.status.clearNegativeStatus()
     this.status.resurection = false // prevent resurrecting again
     this.shield = 0 // remove existing shield
     this.flyingProtection = 0 // prevent flying effects twice
