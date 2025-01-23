@@ -309,7 +309,7 @@ export default class Shop {
     stageLevel: number,
     synergies: Synergy[]
   ) {
-    const propositions =
+    const allCandidates =
       stageLevel === PortalCarouselStages[0]
         ? [...UniqueShop]
         : [...LegendaryShop]
@@ -325,7 +325,7 @@ export default class Shop {
 
     for (let i = 0; i < NB_UNIQUE_PROPOSITIONS; i++) {
       const synergy = synergies[i]
-      let candidates = propositions.filter((m) => {
+      let candidates = allCandidates.filter((m) => {
         const pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
         if (pkm === Pkm.TAPU_BULU) return synergy === Synergy.GRASS
         if (pkm === Pkm.TAPU_FINI) return synergy === Synergy.FAIRY
@@ -335,34 +335,32 @@ export default class Shop {
         if (pkm === Pkm.OGERPON_HEARTHFLAME) return synergy === Synergy.FIRE
         if (pkm === Pkm.OGERPON_WELLSPRING) return synergy === Synergy.AQUATIC
 
-        return getPokemonData(pkm).types.includes(synergy)
+        return (
+          getPokemonData(pkm).types.includes(synergy) &&
+          !player.pokemonsProposition.some(
+            (p) => PkmFamily[p] === PkmFamily[pkm]
+          )
+        )
       })
-      shuffleArray(candidates)
-      candidates = candidates.filter(
-        (p, index) =>
-          candidates.findIndex((p2) => PkmFamily[p2] === PkmFamily[p]) === index
-      )
 
-      let selectedProposition = pickRandomIn(
-        candidates.length > 0 ? candidates : propositions
-      )
+      if (candidates.length === 0) candidates = allCandidates
+      let selected = pickRandomIn(candidates)
       if (
         stageLevel === PortalCarouselStages[0] &&
         player.pokemonsProposition.includes(Pkm.KECLEON) === false &&
         chance(KECLEON_RATE)
       ) {
-        selectedProposition = Pkm.KECLEON
-      }
-      if (
+        selected = Pkm.KECLEON
+      } else if (
         stageLevel === PortalCarouselStages[1] &&
         player.pokemonsProposition.includes(Pkm.ARCEUS) === false &&
         chance(ARCEUS_RATE)
       ) {
-        selectedProposition = Pkm.ARCEUS
+        selected = Pkm.ARCEUS
       }
 
-      removeInArray(propositions, selectedProposition)
-      player.pokemonsProposition.push(selectedProposition)
+      removeInArray(allCandidates, selected)
+      player.pokemonsProposition.push(selected)
     }
   }
 
