@@ -117,7 +117,7 @@ export function getSellPrice(
   } else if (pokemon.rarity === Rarity.HATCH) {
     price = [3, 4, 5][stars - 1] ?? 5
   } else if (pokemon.rarity === Rarity.UNIQUE) {
-    price = duo ? 8 : 15
+    price = duo ? 6 : 10
   } else if (pokemon.rarity === Rarity.LEGENDARY) {
     price = duo ? 10 : 20
   } else if (PokemonFactory.getPokemonBaseEvolution(name) == Pkm.EEVEE) {
