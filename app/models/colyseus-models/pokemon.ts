@@ -546,6 +546,7 @@ export class Scyther extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING])
   rarity = Rarity.UNIQUE
   stars = 3
+  evolution = Pkm.SCIZOR
   hp = 170
   atk = 19
   def = 5
