@@ -649,7 +649,6 @@ export interface ICount {
   crit: number
   ult: number
   fieldCount: number
-  soundCount: number
   fairyCritCount: number
   attackCount: number
   fightingBlockCount: number

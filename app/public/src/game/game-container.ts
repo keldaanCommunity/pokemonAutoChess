@@ -193,7 +193,6 @@ class GameContainer {
       "dodgeCount",
       "ult",
       "fieldCount",
-      "soundCount",
       "fightingBlockCount",
       "fairyCritCount",
       "powerLensCount",
