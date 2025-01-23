@@ -6,6 +6,7 @@ import { Synergy, SynergyEffects } from "../types/enum/Synergy"
 import { chance } from "../utils/random"
 import PokemonState from "./pokemon-state"
 import { Passive } from "../types/enum/Passive"
+import { Ability } from "../types/enum/Ability"
 
 type EffectOrigin = EffectEnum | Item
 
@@ -188,6 +189,7 @@ export class SoundCryEffect extends OnAbilityCastEffect {
   }
 
   apply(pokemon, state, board, target, crit) {
+    pokemon.transferAbility(Ability.ECHO)
     const attackBoost = [2, 1, 1][this.synergyLevel] ?? 0
     const attackSpeedBoost = [0, 5, 5][this.synergyLevel] ?? 0
     const manaBoost = [0, 0, 3][this.synergyLevel] ?? 0
