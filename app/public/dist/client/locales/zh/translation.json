@@ -439,7 +439,8 @@
     "WONDER_ROOM": "奇妙空间",
     "DARK_LARIAT": "ＤＤ金钩臂",
     "BOLT_BEAK": "电喙",
-    "FREEZE_DRY": "冷冻干燥"
+    "FREEZE_DRY": "冷冻干燥",
+    "DRAGON_PULSE": "龙之波动"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1334,7 +1335,8 @@
     "TORRACAT": "炎热喵",
     "INCINEROAR": "炽焰咆哮虎",
     "DRACOZOLT": "雷鸟龙",
-    "CRYOGONAL": "几何雪花"
+    "CRYOGONAL": "几何雪花",
+    "DRAMPA": "老翁龙"
   },
   "ability_description": {
     "SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1754,7 +1756,8 @@
     "WONDER_ROOM": "在目标周围制造离奇的空间。空间内的敌方宝可梦的DEF和SPE_DEF被交换，持续5秒，且受到的普攻伤害为受攻击方AP加成的SPECIAL。",
     "DARK_LARIAT": "旋转双臂多次打向对手，同时移动至其背后。每次造成SPECIAL，数值相当于[100,SP]%的ATK。攻击次数随ATK_SPEED提升而增加。目标在此期间陷入FLINCH。",
     "BOLT_BEAK": "对目标造成[80,SP]点SPECIAL。若目标当前的PP高于40，改为造成[160,SP]点SPECIAL。",
-    "FREEZE_DRY": "对目标造成SPECIAL，数值相当于[200,SP]%的SPE_DEF加上[70,SP]。若目标因此倒下，其会爆炸并射出冰刺，对相邻的敌方宝可梦造成SPECIAL，数值相当于[150,SP]%的SPE_DEF加上[40,SP]。"
+    "FREEZE_DRY": "对目标造成SPECIAL，数值相当于[200,SP]%的SPE_DEF加上[70,SP]。若目标因此倒下，其会爆炸并射出冰刺，对相邻的敌方宝可梦造成SPECIAL，数值相当于[150,SP]%的SPE_DEF加上[40,SP]。",
+    "DRAGON_PULSE": "从大大的口中掀起冲击波，对目标和相邻敌方宝可梦造成[20,SP]点SPECIAL。冲击波会在敌方宝可梦之间回荡。"
   },
   "effect": {
     "INGRAIN": "扎根",
@@ -2394,7 +2397,8 @@
     "ZYGARDE50": "基格尔德能够吸收细胞进行变形。在HP低于最大值的30%时，他会吸收全部细胞，变形为完全体形态。",
     "GLIMMORA": "HP首次低于最大值的50%时，此宝可梦会向前方2x3的矩形投放毒菱，造成20点伤害。毒菱使走到其上的非POISON宝可梦陷入POISONNED。",
     "PILLAR": "建造能够阻挡敌方宝可梦的立柱。立柱可以被移动，并会根据此宝可梦的STAR数量而具有对应的HP，DEF和SPE_DEF。",
-    "INANIMATE": "非生物单位无法被复制，下阵或出售。此类单位也无法主动移动或发起攻击，并免疫异常状态。"
+    "INANIMATE": "非生物单位无法被复制，下阵或出售。此类单位也无法主动移动或发起攻击，并免疫异常状态。",
+    "BERSERK": "每当有宝可梦被此宝可梦的招式命中时，获得3点AP。"
   },
   "stat": {
     "ATK": "攻击",
