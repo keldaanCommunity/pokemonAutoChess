@@ -15,10 +15,13 @@ import app from "./app.config"
 import { initializeMetrics } from "./metrics"
 import { initCronJobs } from "./services/cronjobs"
 import { fetchLeaderboards } from "./services/leaderboard"
+import { fetchMetaReports } from "./services/meta"
 
 async function main() {
   fetchLeaderboards()
   setInterval(() => fetchLeaderboards(), 1000 * 60 * 10) // refresh every 10 minutes
+  fetchMetaReports()
+  setInterval(() => fetchMetaReports(), 1000 * 60 * 60 * 24) // refresh every 24 hours
 
   if (process.env.NODE_APP_INSTANCE) {
     const processNumber = Number(process.env.NODE_APP_INSTANCE || "0")
@@ -44,7 +47,7 @@ function checkLobby() {
     onTick: async () => {
       logger.debug(`Refresh lobby room`)
       const lobbies = await matchMaker.query({ name: "lobby" })
-      if(lobbies.length === 0) {
+      if (lobbies.length === 0) {
         matchMaker.createRoom("lobby", {})
       }
     },

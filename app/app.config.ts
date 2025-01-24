@@ -11,9 +11,7 @@ import pkg from "../package.json"
 import { initTilemap } from "./core/design"
 import { GameRecord } from "./models/colyseus-models/game-record"
 import DetailledStatistic from "./models/mongo-models/detailled-statistic-v2"
-import ItemsStatistics from "./models/mongo-models/items-statistic"
 import Meta from "./models/mongo-models/meta"
-import PokemonsStatistics from "./models/mongo-models/pokemons-statistic-v2"
 import TitleStatistic from "./models/mongo-models/title-statistic"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "./models/precomputed/precomputed-types"
 import AfterGameRoom from "./rooms/after-game-room"
@@ -23,8 +21,8 @@ import PreparationRoom from "./rooms/preparation-room"
 import { getBotData, getBotsList } from "./services/bots"
 import { discordService } from "./services/discord"
 import { getLeaderboard } from "./services/leaderboard"
+import { getMetaItems, getMetaPokemons } from "./services/meta"
 import { pastebinService } from "./services/pastebin"
-import { Title } from "./types"
 import {
   MAX_CONCURRENT_PLAYERS_ON_SERVER,
   MAX_POOL_CONNECTIONS_SIZE,
@@ -186,13 +184,15 @@ export default config({
     })
 
     app.get("/meta/items", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
-      res.send(await ItemsStatistics.find())
+      // Set Cache-Control header for 24 hours (86400 seconds)
+      res.set("Cache-Control", "max-age=86400")
+      res.send(getMetaItems())
     })
 
     app.get("/meta/pokemons", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
-      res.send(await PokemonsStatistics.find())
+      // Set Cache-Control header for 24 hours (86400 seconds)
+      res.set("Cache-Control", "max-age=86400")
+      res.send(getMetaPokemons())
     })
 
     app.get("/tilemap/:map", async (req, res) => {
