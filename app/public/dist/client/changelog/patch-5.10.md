@@ -52,6 +52,8 @@
 
 # Gameplay
 
+- Reduce Unique sell price: 15 → 10 gold (duo: 8 → 6 gold)
+
 # UI
 
 - Regional pokemons are now ordered by rarity in tooltip

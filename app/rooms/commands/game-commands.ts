@@ -97,10 +97,9 @@ export class OnShopCommand extends Command<
     )
       return
     const player = this.state.players.get(playerId)
-    if (!player || !player.shop[index] || player.shop[index] === Pkm.DEFAULT)
-      return
+    const name = player?.shop[index]
+    if (!player || !name || name === Pkm.DEFAULT) return
 
-    const name = player.shop[index]
     const pokemon = PokemonFactory.createPokemonFromName(name, player)
     const isEvolution =
       pokemon.evolutionRule &&
@@ -160,10 +159,9 @@ export class OnRemoveFromShopCommand extends Command<
     )
       return
     const player = this.state.players.get(playerId)
-    if (!player || !player.shop[index] || player.shop[index] === Pkm.DEFAULT)
-      return
+    const name = player?.shop[index]
+    if (!player || !name || name === Pkm.DEFAULT) return
 
-    const name = player.shop[index]
     const cost = getBuyPrice(name, this.state.specialGameRule)
     if (player.money >= cost) {
       player.shop = player.shop.with(index, Pkm.DEFAULT)
@@ -1268,20 +1266,22 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
   stopPickingPhase() {
     this.state.players.forEach((player) => {
-      if (player.pokemonsProposition.length > 0) {
+      const pokemonsProposition = values(player.pokemonsProposition)
+
+      if (pokemonsProposition.length > 0) {
         // auto pick if not chosen
         this.room.pickPokemonProposition(
           player.id,
-          pickRandomIn([...player.pokemonsProposition]),
+          pickRandomIn(pokemonsProposition),
           true
         )
         player.pokemonsProposition.clear()
-      } else if (player.itemsProposition.length > 0) {
+      }
+
+      const itemsProposition = values(player.itemsProposition)
+      if (player.itemsProposition.length > 0) {
         // auto pick if not chosen
-        this.room.pickItemProposition(
-          player.id,
-          pickRandomIn([...player.itemsProposition])
-        )
+        this.room.pickItemProposition(player.id, pickRandomIn(itemsProposition))
         player.itemsProposition.clear()
       }
     })
