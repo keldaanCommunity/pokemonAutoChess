@@ -139,10 +139,10 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.DYNAMAX_BAND]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.addMaxHP(2.5 * pokemon.baseHP, pokemon, 0, false)
+      pokemon.addMaxHP(2 * pokemon.baseHP, pokemon, 0, false)
     }),
     new OnItemRemovedEffect((pokemon) => {
-      pokemon.addMaxHP(-2.5 * pokemon.baseHP, pokemon, 0, false)
+      pokemon.addMaxHP(-2 * pokemon.baseHP, pokemon, 0, false)
     })
   ],
 
