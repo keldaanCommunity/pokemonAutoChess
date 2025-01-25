@@ -50,6 +50,7 @@
 - Buff Metal Coat: also gives +5 special defense
 - Change Smoke Ball: trigger below ~~33%~~ 40% HP, blinded effect now only affects enemies and is no longer a permanent board effect, status duration 3 → 4 seconds
 - Nerf Dynamax Band: ~~+250% HP~~ → +200% HP
+- Repeat ball no longer gives guaranteed synergy in shop. Instead, it gives a free shop reroll every 2 rerolls. Changed stats: 1% AP per 2 rolls → 1% Attack speed and 2 shield per 2 rolls
 
 # Gameplay
 

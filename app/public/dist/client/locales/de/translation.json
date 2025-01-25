@@ -2047,7 +2047,7 @@
     "ABSORB_BULB": "Die gesamte Schadensreduzierung wird von der Glühbirne absorbiert. Sobald die Glühbirne unter 50 % HP fällt, explodiert sie und fügt benachbarten gegnerischen Einheiten den gesamten absorbierten Schaden als SPECIAL zu.",
     "SACRED_ASH": "Ermöglicht RESURECTION. Nach der Wiederbelebung werden bis zu 3 Verbündete KO wiederbelebt, jedoch ohne Gegenstände.",
     "COMET_SHARD": "Beginnt die Runde, indem es wie ein Komet auf einen Feind auf der gegenüberliegenden Seite des Spielfelds herabstößt und dem Ziel und benachbarten Feinden 300 % ATK als SPECIAL zufügt, während es 3 Sekunden lang PROTECT erhält.",
-    "REPEAT_BALL": "Alle 2 Shop-Neuwürfe erhältst du +1 % AP und findest ein Pokemon im Shop, das eine Synergie mit dem Besitzer teilt. Die Seltenheit steigt mit der Gesamtzahl der Shop-Neuwürfe, die während des Spiels durchgeführt werden.",
+    "REPEAT_BALL": "Für alle 2 Shop Rerolls erhältst du 1% ATK_SPEED und 2 SHIELD. Jeder bezahlte Shop Reroll gewährt einen kostenlosen. Nach vielen Rerolls hast du die Chance, mächtige Pokémon in deinem Shop anzutreffen maybe.",
     "DAMP_ROCK": "Verleiht WATER Synergie und zählt für 3 gegen RAIN. Kann nur bei ROCK Pokémon eingesetzt werden.",
     "ICY_ROCK": "Verleiht ICE Synergie und zählt 3 Punkte für SNOW. Kann nur bei ROCK Pokémon eingesetzt werden.",
     "HEAT_ROCK": "Verleiht FIRE Synergie und zählt 3 Punkte für SUN. Kann nur bei ROCK Pokémon eingesetzt werden.",

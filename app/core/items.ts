@@ -174,7 +174,16 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.REPEAT_BALL]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.addAbilityPower(
+      pokemon.addShield(
+        Math.floor(
+          ((pokemon.player?.rerollCount ?? 0) + pokemon.simulation.stageLevel) /
+            2
+        ) * 2,
+        pokemon,
+        0,
+        false
+      )
+      pokemon.addAttackSpeed(
         Math.floor(
           ((pokemon.player?.rerollCount ?? 0) + pokemon.simulation.stageLevel) /
             2
