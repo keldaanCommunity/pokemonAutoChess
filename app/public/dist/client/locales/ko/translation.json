@@ -2142,7 +2142,7 @@
     "STAR_DUST": "장착 후 기술 시전 시 최대 PP 의 50%만큼의 SHIELD 획득",
     "GREEN_ORB": "장착자 및 인접한 아군은 매 초마다 최대 HP 의 4% 회복",
     "MANA_SCARF": "장착 시 매 공격 당 PP +8 회복",
-    "SMOKE_BALL": "최대 HP의 40% 미만으로 하락 시, 연막탄 투척 및 해당 장소 이탈. 인접한 적 포켓몬들은 3초간 PARALYSIS BLINDED 상태가 되며.",
+    "SMOKE_BALL": "최대 HP의 40% 미만으로 하락 시, 연막탄 투척 및 해당 장소 이탈. 인접한 적 포켓몬들은 4초간 PARALYSIS BLINDED 상태가 되며.",
     "XRAY_VISION": "장착 시 ATK_SPEED +50%, 공격 무조건 명중 ",
     "RAZOR_FANG": "장착 시 CRIT_POWER +100%, 치명타 명중시 4초 동안 ARMOR_REDUCTION 부여",
     "PROTECTIVE_PADS": "기본공격이 SHIELD 에 두 배의 피해를 입힌다. 착용자는 반동대미지 및 반사효과에 면역이 된다.",

@@ -1704,7 +1704,7 @@
     "STAR_DUST": "Após lançar a habilidade, ganhe 50% da PP máxima como SHIELD",
     "GREEN_ORB": "O titular e aliados adjacentes recuperam 4% do seu HP máximo a cada segundo",
     "MANA_SCARF": "Os ataques do detentor restauram 8 PP adicionais",
-    "SMOKE_BALL": "Quando estiver abaixo de 40% do HP máximo, solte a bola de fumaça e pule para uma cela de distância. Cada inimigo adjacente fica PARALYSIS e BLINDED por 3 segundos.",
+    "SMOKE_BALL": "Quando estiver abaixo de 40% do HP máximo, solte a bola de fumaça e pule para uma cela de distância. Cada inimigo adjacente fica PARALYSIS e BLINDED por 4 segundos.",
     "XRAY_VISION": "+50% ATK_SPEED. Os ataques titulares não podem mais errar.",
     "RAZOR_FANG": "+100% CRIT_POWER. Acertos críticos aplicam ARMOR_REDUCTION por 4 segundos.",
     "CHOICE_SCARF": "Ao acertar, cause 50% de dano de ataque básico a um inimigo adjacente",
