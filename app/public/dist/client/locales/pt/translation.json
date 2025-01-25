@@ -1707,7 +1707,7 @@
     "SMOKE_BALL": "Quando estiver abaixo de 40% do HP máximo, solte a bola de fumaça e pule para uma cela de distância. Cada inimigo adjacente fica PARALYSIS e BLINDED por 4 segundos.",
     "XRAY_VISION": "+50% ATK_SPEED. Os ataques titulares não podem mais errar.",
     "RAZOR_FANG": "+100% CRIT_POWER. Acertos críticos aplicam ARMOR_REDUCTION por 4 segundos.",
-    "CHOICE_SCARF": "Ao acertar, cause 50% de dano de ataque básico a um inimigo adjacente",
+    "CHOICE_SCARF": "Ao acertar, cause 50% de dano de ataque a um inimigo adjacente",
     "DEFENSIVE_RIBBON": "Quando o titular sofre dano, ganhe 1 pilha. A cada 2 acúmulos, o titular ganha +1 DEF, +1 ATK e +5% ATK_SPEED (máximo de 20 acúmulos)",
     "WONDER_BOX": "No início de cada batalha, a caixa maravilha é substituída por 2 itens temporários (no máximo 3 itens retidos)",
     "CLEANSE_TAG": "Quando o combate começa, o detentor e todos os aliados adjacentes na mesma linha recebem 20% de HP como SHIELD e RUNE_PROTECT por 5 segundos",

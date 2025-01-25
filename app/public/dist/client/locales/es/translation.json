@@ -2146,7 +2146,7 @@
     "XRAY_VISION": "+50% ATK_SPEED. Los ataques del poseedor ya no pueden fallar.",
     "RAZOR_FANG": "+100% CRIT_POWER. Los golpes críticos aplican ARMOR_REDUCTION durante 4 segundos.",
     "PROTECTIVE_PADS": "Los ataques causan el doble de daño contra SHIELD. El usuario es protegido del daño de retroceso y de efectos de represalia.",
-    "CHOICE_SCARF": "Al golpear, inflige un 50% de daño de ataque básico a un enemigo adyacente",
+    "CHOICE_SCARF": "Al golpear, inflige un 50% de daño de ataque a un enemigo adyacente",
     "PUNCHING_GLOVE": "Los ataques infligen un 8 % del HP máximo del objetivo como daño adicional.",
     "DEFENSIVE_RIBBON": "Cuando el portador recibe daño, gana 1 acumulación. Cada 2 acumulaciones, el titular gana +1 DEF, +1 ATK y +5% ATK_SPEED (máx. 20 acumulaciones)",
     "WONDER_BOX": "Al comienzo de cada batalla, la caja de maravillas se reemplaza por 2 objetos temporales (máximo 3 objetos retenidos)",
