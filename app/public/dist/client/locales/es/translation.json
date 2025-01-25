@@ -2142,7 +2142,7 @@
     "STAR_DUST": "Después de lanzar la habilidad, gana el 50 % del PP máximo como SHIELD",
     "GREEN_ORB": "El poseedor y los aliados adyacentes recuperan un 4% de sus HP máximos cada segundo",
     "MANA_SCARF": "Los ataques del titular restauran 8 PP adicionales",
-    "SMOKE_BALL": "Una vez que esté por debajo del 40% de HP máximo, suelta la bola de humo y salta a una celda de distancia. Cada enemigo adyacente está PARALYSIS durante 3 segundos, y el humo reduce la precisión de todos los Pokémon dentro en un 50%.",
+    "SMOKE_BALL": "Una vez que esté por debajo del 40% de HP máximo, suelta la bola de humo y salta a una celda de distancia. Cada enemigo adyacente está PARALYSIS y BLINDED durante 3 segundos.",
     "XRAY_VISION": "+50% ATK_SPEED. Los ataques del poseedor ya no pueden fallar.",
     "RAZOR_FANG": "+100% CRIT_POWER. Los golpes críticos aplican ARMOR_REDUCTION durante 4 segundos.",
     "PROTECTIVE_PADS": "Los ataques causan el doble de daño contra SHIELD. El usuario es protegido del daño de retroceso y de efectos de represalia.",

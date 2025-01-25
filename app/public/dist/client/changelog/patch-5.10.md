@@ -48,7 +48,7 @@
 
 - Buff Silk scarf: increase shield received by ~~30~~ 50%
 - Buff Metal Coat: also gives +5 special defense
-- Change Smoke Ball: trigger below ~~33%~~ 40% HP
+- Change Smoke Ball: trigger below ~~33%~~ 40% HP, blinded effect now only affects enemies and is no longer a permanent board effect
 - Nerf Dynamax Band: ~~+250% HP~~ → +200% HP
 
 # Gameplay

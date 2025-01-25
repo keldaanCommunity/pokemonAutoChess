@@ -772,7 +772,7 @@ export default class PokemonSprite extends DraggableObject {
     if (!this.blinded) {
       this.blinded = this.scene.add
         .sprite(0, -30, "status", "BLINDED/000.png")
-        .setScale(2)
+        .setScale(3)
       this.blinded.anims.play("BLINDED")
       this.add(this.blinded)
     }
@@ -1116,7 +1116,7 @@ export default class PokemonSprite extends DraggableObject {
   addRageEffect() {
     this.sprite.setTint(0xff0000)
   }
-  
+
   removeRageEffect() {
     this.sprite.clearTint()
   }

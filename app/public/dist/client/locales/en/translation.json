@@ -2158,7 +2158,7 @@
     "STAR_DUST": "After casting ability, gain 50% of max PP as SHIELD",
     "GREEN_ORB": "Holder and adjacent allies regain 4% of their max HP every second",
     "MANA_SCARF": "The holder attacks restore 8 additional PP",
-    "SMOKE_BALL": "Once below 40% max HP, drop the smoke ball and jump to a cell away. Every adjacent enemy is PARALYSIS for 3 seconds, and the smoke make them BLINDED.",
+    "SMOKE_BALL": "Once below 40% max HP, drop the smoke ball and jump to a cell away. Every adjacent enemy is PARALYSIS and BLINDED for 3 seconds.",
     "XRAY_VISION": "+50% ATK_SPEED. The holder attacks can no longer miss.",
     "RAZOR_FANG": "+100% CRIT_POWER. Critical hits apply ARMOR_REDUCTION for 4 seconds.",
     "PROTECTIVE_PADS": "Attacks deal double damage against SHIELD. User is protected from recoil damage and retaliation effects.",

@@ -1189,10 +1189,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       const cells = board.getAdjacentCells(this.positionX, this.positionY)
       cells.forEach((cell) => {
-        board.addBoardEffect(cell.x, cell.y, Effect.SMOKE, this.simulation)
         if (cell.value && cell.value.team !== this.team) {
           cell.value.status.triggerParalysis(3000, cell.value, this)
+          cell.value.status.triggerBlinded(3000, cell.value)
         }
+      })
+      this.simulation.room.broadcast(Transfer.ABILITY, {
+        id: this.simulation.id,
+        skill: "SMOKE_BALL",
+        positionX: this.positionX,
+        positionY: this.positionY
       })
       this.removeItem(Item.SMOKE_BALL)
       this.flyAway(board)

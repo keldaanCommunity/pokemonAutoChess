@@ -1975,7 +1975,7 @@
     "STAR_DUST": "Nach Einsatz der Fähigkeit, erhält das Pokémon 50% der max. PP als SHIELD",
     "GREEN_ORB": "Halter und benachbarte Verbündete erhalten jede Sekunde 4% ihrer maximalen HP zurück",
     "MANA_SCARF": "Das Pokémon erhält +8 PP pro Angriff",
-    "SMOKE_BALL": "Sobald die maximale HP unter 40 % liegt, lassen Sie die Rauchkugel fallen und springen Sie in eine Zelle weiter entfernt. Jeder benachbarte Feind ist 3 Sekunden lang PARALYSIS und der Rauch verringert die Präzision aller darin befindlichen Pokémon um 50 %.",
+    "SMOKE_BALL": "Sobald die maximale HP unter 40 % liegt, lassen Sie die Rauchkugel fallen und springen Sie in eine Zelle weiter entfernt. Jeder benachbarte Feind ist 3 Sekunden lang PARALYSIS und BLINDED.",
     "XRAY_VISION": "+50% ATK_SPEED. Die Angriffe des Pokémons können nicht mehr verfehlen.",
     "RAZOR_FANG": "+100% CRIT_POWER. Kritische Treffer verursachen 4 Sekunden lang ARMOR_REDUCTION.",
     "PROTECTIVE_PADS": "Angriffe verursachen doppelten Schaden gegen SHIELD. Der Benutzer ist vor Rückstoßschäden und Vergeltungseffekten geschützt.",
