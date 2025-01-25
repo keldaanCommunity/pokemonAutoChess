@@ -226,8 +226,9 @@ class GameContainer {
   initializeGame() {
     if (this.game != null) return // prevent initializing twice
     // Create Phaser game
+    const renderer = Number(loadPreferences().renderer ?? Phaser.AUTO)
     const config = {
-      type: +(loadPreferences().renderer ?? Phaser.AUTO),
+      type: renderer,
       width: 1950,
       height: 1000,
       parent: this.div,
@@ -244,11 +245,6 @@ class GameContainer {
             key: "rexMoveTo",
             plugin: MoveToPlugin,
             start: true
-          },
-          {
-            key: "rexOutline",
-            plugin: OutlinePlugin,
-            start: true
           }
         ]
       }
@@ -259,6 +255,9 @@ class GameContainer {
       spectate: this.spectate
     })
     this.game.scale.on("resize", this.resize, this)
+    if (this.game.renderer.type === Phaser.WEBGL) {
+      this.game.plugins.install("rexOutline", OutlinePlugin, true)
+    }
   }
 
   resize() {
