@@ -8,6 +8,8 @@
 - Dracozolt
 - Cryogonal
 - Drampa
+- Skrelp
+- Dragalge
 
 # Changes to Pokemon & Abilities
 

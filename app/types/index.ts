@@ -200,7 +200,7 @@ export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
     "ICE/range": [2, 2],
     "NORMAL/melee": [2, 2],
     "POISON/melee": [2, 2],
-    "POISON/range": [1.5, 1.5],
+    "POISON/range": [1, 1],
     "PSYCHIC/melee": [1.5, 1.5],
     "PSYCHIC/range": [2, 2],
     "ROCK/melee": [1.5, 1.5],

@@ -15954,6 +15954,45 @@ export class Incineroar extends Pokemon {
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
+export class Skrelp extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.POISON,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.DRAGALGE
+  hp = 60
+  atk = 7
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 3
+  skill = Ability.SLUDGE_WAVE
+  attackSprite = AttackSprite.POISON_RANGE
+  additional = true
+}
+
+export class Dragalge extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.POISON,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 130
+  atk = 14
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 3
+  skill = Ability.SLUDGE_WAVE
+  attackSprite = AttackSprite.POISON_RANGE
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -16854,5 +16893,7 @@ export const PokemonClasses: Record<
   [Pkm.INCINEROAR]: Incineroar,
   [Pkm.DRACOZOLT]: Dracozolt,
   [Pkm.CRYOGONAL]: Cryogonal,
-  [Pkm.DRAMPA]: Drampa
+  [Pkm.DRAMPA]: Drampa,
+  [Pkm.SKRELP]: Skrelp,
+  [Pkm.DRAGALGE]: Dragalge
 }
