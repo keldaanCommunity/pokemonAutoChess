@@ -79,4 +79,5 @@
 # Misc
 
 - Increased allowed game reconnection time from 3 minutes to 5 minutes
+- Refresh key shortcut is now throttled to minimum 300ms before the next refresh, to prevent accidental double refresh
 - New title: Annihilator: get an Annihilape
