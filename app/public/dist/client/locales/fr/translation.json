@@ -1336,7 +1336,9 @@
     "INCINEROAR": "Félinferno",
     "DRACOZOLT": "Galvagon",
     "CRYOGONAL": "Hexagel",
-    "DRAMPA": "Draïeul"
+    "DRAMPA": "Draïeul",
+    "SKRELP": "Venalgue",
+    "DRAGALGE": "Kravarech"
   },
   "ability_description": {
     "SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",

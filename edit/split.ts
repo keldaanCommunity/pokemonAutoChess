@@ -191,7 +191,9 @@ async function splitIndex(index: string) {
   const pathIndex = index.replace("-", "/")
   const shinyPad =
     pathIndex.length == 4 ? `${pathIndex}/0000/0001` : `${pathIndex}/0001`
-  const allPads = [pathIndex, shinyPad]
+  const conf = AnimationConfig[mapName.get(index) as Pkm]
+  const allPads = [pathIndex]
+  if (!conf.shinyUnavailable) allPads.push(shinyPad)
 
   for (let j = 0; j < allPads.length; j++) {
     const pad = allPads[j]
@@ -203,7 +205,7 @@ async function splitIndex(index: string) {
       const parser = new XMLParser()
       const xmlData = <IPMDCollab>parser.parse(xmlFile)
       let attackMetadata = xmlData.AnimData.Anims.Anim.find(
-        (m) => m.Name === AnimationConfig[mapName.get(index) as Pkm].attack
+        (m) => m.Name === conf.attack
       )
       if (attackMetadata) {
         if (attackMetadata && attackMetadata.CopyOf) {
@@ -230,7 +232,6 @@ async function splitIndex(index: string) {
       }
       for (let k = 0; k < Object.values(SpriteType).length; k++) {
         const anim = Object.values(SpriteType)[k]
-        const conf = mapName.get(index)
 
         const actions: AnimationType[] = [
           AnimationType.Idle,
@@ -240,15 +241,15 @@ async function splitIndex(index: string) {
           AnimationType.Hurt
         ]
 
-        if (conf && AnimationConfig[conf]) {
-          if (!actions.includes(AnimationConfig[conf as Pkm].attack)) {
-            actions.push(AnimationConfig[conf as Pkm].attack)
+        if (conf) {
+          if (!actions.includes(conf.attack)) {
+            actions.push(conf.attack)
           }
-          if (!actions.includes(AnimationConfig[conf as Pkm].ability)) {
-            actions.push(AnimationConfig[conf as Pkm].ability)
+          if (!actions.includes(conf.ability)) {
+            actions.push(conf.ability)
           }
-          if (!actions.includes(AnimationConfig[conf as Pkm].emote)) {
-            actions.push(AnimationConfig[conf as Pkm].emote)
+          if (!actions.includes(conf.emote)) {
+            actions.push(conf.emote)
           }
         } else {
           actions.push(AnimationType.Attack)
