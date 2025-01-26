@@ -7,7 +7,6 @@ import { chance } from "../utils/random"
 import PokemonState from "./pokemon-state"
 import { Passive } from "../types/enum/Passive"
 import { Ability } from "../types/enum/Ability"
-import { DEFAULT_ATK_SPEED, DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_POWER } from "../types/Config"
 
 type EffectOrigin = EffectEnum | Item
 
