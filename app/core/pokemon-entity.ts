@@ -58,7 +58,11 @@ import AttackingState from "./attacking-state"
 import Board, { Cell } from "./board"
 import {
   Effect as EffectClass,
+  FireHitEffect,
+  GrowGroundEffect,
+  MonsterKillEffect,
   OnHitEffect,
+  OnItemGainedEffect,
   OnItemRemovedEffect,
   OnKillEffect
 } from "./effect"
@@ -1750,19 +1754,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   resurrect() {
-    this.life = this.refToBoardPokemon.hp
-    this.shield = 0
+    this.life = this.hp
     this.pp = 0
-    this.ap = 0
-    this.atk = this.refToBoardPokemon.atk
-    this.def = this.refToBoardPokemon.def
-    this.speDef = this.refToBoardPokemon.speDef
-    this.atkSpeed = this.refToBoardPokemon.atkSpeed
-    this.critChance = DEFAULT_CRIT_CHANCE
-    this.critPower = DEFAULT_CRIT_POWER
-    this.count = new Count()
     this.status.clearNegativeStatus()
-    this.effects.clear()
 
     if (this.items.has(Item.SACRED_ASH) && this.player) {
       const team = this.simulation.getTeam(this.player.id)
@@ -1793,20 +1787,92 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    this.items.delete(Item.DYNAMAX_BAND)
-    this.items.delete(Item.SACRED_ASH)
-    this.items.delete(Item.MAX_REVIVE)
+    const stackingItems = [
+      Item.DEFENSIVE_RIBBON,
+      Item.SOUL_DEW,
+      Item.UPGRADE
+    ]
 
-    this.simulation.applySynergyEffects(this)
-    this.simulation.applyItemsEffects(this)
-    this.status.resurection = false // prevent reapplying max revive again
-    this.shield = 0 // prevent reapplying shield again
+    const removedItems = [
+      Item.DYNAMAX_BAND,
+      Item.SACRED_ASH,
+      Item.MAX_REVIVE
+    ]
+
+    stackingItems.forEach((item) => {
+      if (this.items.has(item)) {
+        ItemEffects[item]
+          ?.filter((effect) => effect instanceof OnItemRemovedEffect)
+          ?.forEach((effect) => effect.apply(this))
+        ItemEffects[item]
+          ?.filter((effect) => effect instanceof OnItemGainedEffect)
+          ?.forEach((effect) => effect.apply(this))
+      }
+    })
+
+    removedItems.forEach((item) => {
+      if (this.items.has(item)) {
+        this.removeItem(item)
+      }
+    })
+
+    const resetGroundStacks = (effect: GrowGroundEffect) => {
+      const removalAmount = effect.synergyLevel * effect.count
+      this.addDefense(removalAmount, this, 0, false)
+      this.addSpecialDefense(removalAmount, this, 0, false)
+      this.addAttack(removalAmount, this, 0, false)
+      effect.count = 0
+    }
+
+    const resetMonsterStacks = (effect: MonsterKillEffect) => {
+      const attackBoost = [3, 6, 10, 10][effect.synergyLevel] ?? 10
+      const apBoost = [10, 20, 30, 30][effect.synergyLevel] ?? 30
+      this.addAttack(-effect.count * attackBoost, this, 0, false)
+      this.addAbilityPower(-effect.count * apBoost, this, 0, false)
+      this.addMaxHP(-effect.hpBoosted, this, 0, false)
+      effect.hpBoosted = 0
+      effect.count = 0
+    }
+
+    const resetFireStacks = (effect: FireHitEffect) => {
+      const removalAmount = -effect.count * effect.synergyLevel
+      this.addAttack(removalAmount, this, 0, false)
+      effect.count = 0
+    }
+
+    const resetSoundStacks = (effect: Effect) => {
+      const synergyLevel = SynergyEffects[Synergy.SOUND].indexOf(effect)
+      const attackBoost = ([2, 1, 1][synergyLevel] ?? 0) *
+        -this.count.soundCryCount
+      const attackSpeedBoost = ([0, 5, 5][synergyLevel] ?? 0) *
+        -this.count.soundCryCount
+      const manaBoost = ([0, 0, 3][synergyLevel] ?? 0) *
+        -this.count.soundCryCount
+      this.addAttack(attackBoost, this, 0, false)
+      this.addAttackSpeed(attackSpeedBoost, this, 0, false)
+      this.addPP(manaBoost, this, 0, false)
+      this.count.soundCryCount = 0
+    }
+
+    this.effectsSet.forEach((effect) => {
+      if (effect instanceof GrowGroundEffect) {
+        resetGroundStacks(effect)
+      } else if (effect instanceof MonsterKillEffect) {
+        resetMonsterStacks(effect)
+      } else if (effect instanceof FireHitEffect) {
+        resetFireStacks(effect)
+      }
+    })
+    const soundEffect = SynergyEffects[Synergy.SOUND].find((effect) => {
+      this.player?.effects.has(effect)
+    })
+    if (soundEffect) {
+      resetSoundStacks(soundEffect)
+    }
+
+    this.status.resurection = false // prevent resurrecting again
+    this.shield = 0 // remove existing shield
     this.flyingProtection = 0 // prevent flying effects twice
-    SynergyEffects[Synergy.FOSSIL].forEach((fossilResurectEffect) =>
-      this.effects.delete(fossilResurectEffect)
-    ) // prevent resurecting fossils twice
-
-    // does not trigger postEffects (iron defense, normal shield, rune protect, focus band, delta orb, flame orb...)
   }
 
   eatBerry(berry: Item, stealedFrom?: PokemonEntity) {

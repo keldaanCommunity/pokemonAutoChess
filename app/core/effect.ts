@@ -58,15 +58,6 @@ export class MonsterKillEffect extends OnKillEffect {
     this.count += 1
   }
 
-  resetStacks(pokemon) {
-    const attackBoost = [3, 6, 10, 10][this.synergyLevel] ?? 10
-    const apBoost = [10, 20, 30, 30][this.synergyLevel] ?? 30
-    pokemon.addAttack(-this.count * attackBoost, pokemon, 0, false)
-    pokemon.addAbilityPower(-this.count * apBoost, pokemon, 0, false)
-    pokemon.addMaxHP(-this.hpBoosted, pokemon, 0, false)
-    this.hpBoosted = 0
-    this.count = 0
-  }
 }
 
 export abstract class PeriodicEffect extends Effect {
@@ -149,11 +140,6 @@ export class FireHitEffect extends OnHitEffect {
     this.count += 1
   }
 
-  resetStacks(pokemon) {
-    const removalAmount = -this.count * this.synergyLevel
-    pokemon.addAttack(removalAmount, pokemon, 0, false)
-    this.count = 0
-  }
 }
 
 export class OnAbilityCastEffect extends Effect {
