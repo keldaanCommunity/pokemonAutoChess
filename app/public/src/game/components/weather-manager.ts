@@ -11,7 +11,9 @@ export default class WeatherManager {
     this.scene = scene
     this.screen = new Phaser.Geom.Rectangle(0, 0, 3000, 2000)
     this.particlesEmitters = []
-    this.scene.cameras.main.initPostPipeline()
+    if (scene.renderer.type === Phaser.WEBGL) {
+      this.scene.cameras.main.initPostPipeline()
+    }
   }
 
   addRain() {

@@ -21,7 +21,6 @@ import {
 import { GamePhaseState } from "../../../../types/enum/Game"
 import { Item, ItemRecipe } from "../../../../types/enum/Item"
 import { Pkm } from "../../../../types/enum/Pokemon"
-import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { logger } from "../../../../utils/logger"
 import { values } from "../../../../utils/schemas"
 import { clearTitleNotificationIcon } from "../../../../utils/window"
@@ -631,6 +630,7 @@ export default class GameScene extends Scene {
 
   setHovered(gameObject: PokemonSprite) {
     const outline = <OutlinePlugin>this.plugins.get("rexOutline")
+    if (!outline) return // outline plugin doesnt work with canvas renderer
     if (this.pokemonHovered != null) this.clearHovered(this.pokemonHovered)
     this.pokemonHovered = gameObject
 
@@ -646,6 +646,7 @@ export default class GameScene extends Scene {
 
   clearHovered(gameObject: PokemonSprite) {
     const outline = <OutlinePlugin>this.plugins.get("rexOutline")
+    if (!outline) return // outline plugin doesnt work with canvas renderer
     outline.remove(gameObject.sprite)
   }
 }
