@@ -735,8 +735,16 @@ export class OnRefreshCommand extends Command<GameRoom, string> {
     if (canRoll && player.alive) {
       player.rerollCount++
       player.money -= rollCost
+      if (player.shopFreeRolls > 0) {
+        player.shopFreeRolls--
+      } else {
+        const repeatBallHolders = values(player.board).filter((p) =>
+          p.items.has(Item.REPEAT_BALL)
+        )
+        if (repeatBallHolders.length > 0)
+          player.shopFreeRolls += repeatBallHolders.length
+      }
       this.state.shop.assignShop(player, true, this.state)
-      if (player.shopFreeRolls > 0) player.shopFreeRolls--
     }
   }
 }

@@ -860,33 +860,45 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       let targetCount = 1
       candidateTargets.forEach((target) => {
         if (targetCount > 0) {
+          let totalTakenDamage = 0
           if (physicalDamage > 0) {
-            target.handleDamage({
+            const { takenDamage } = target.handleDamage({
               damage: Math.ceil(0.5 * physicalDamage),
               board,
               attackType: AttackType.PHYSICAL,
               attacker: this,
               shouldTargetGainMana: true
             })
+            totalTakenDamage += takenDamage
           }
           if (specialDamage > 0) {
-            target.handleDamage({
+            const { takenDamage } = target.handleDamage({
               damage: Math.ceil(0.5 * specialDamage),
               board,
               attackType: AttackType.SPECIAL,
               attacker: this,
               shouldTargetGainMana: true
             })
+            totalTakenDamage += takenDamage
           }
           if (trueDamage > 0) {
-            target.handleDamage({
+            const { takenDamage } = target.handleDamage({
               damage: Math.ceil(0.5 * trueDamage),
               board,
               attackType: AttackType.TRUE,
               attacker: this,
               shouldTargetGainMana: true
             })
+            totalTakenDamage += takenDamage
           }
+          this.onHit({
+            target,
+            board,
+            totalTakenDamage,
+            physicalDamage,
+            specialDamage,
+            trueDamage
+          })
 
           targetCount--
         }
@@ -895,6 +907,21 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.items.has(Item.MANA_SCARF)) {
       this.addPP(MANA_SCARF_MANA, this, 0, false)
+    }
+
+    if (this.items.has(Item.UPGRADE)) {
+      this.addAttackSpeed(5, this, 0, false)
+      this.count.upgradeCount++
+    }
+
+    if (this.items.has(Item.MAGMARIZER)) {
+      this.addAttack(1, this, 0, false)
+      this.count.magmarizerCount++
+    }
+
+    if (this.items.has(Item.ELECTIRIZER) && this.count.attackCount % 3 === 0) {
+      target.addPP(-15, this, 0, false)
+      target.count.manaBurnCount++
     }
 
     if (this.effects.has(Effect.TELEPORT_NEXT_ATTACK)) {
@@ -995,20 +1022,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       })
     }
 
-    if (this.items.has(Item.UPGRADE)) {
-      this.addAttackSpeed(5, this, 0, false)
-      this.count.upgradeCount++
-    }
-
     if (this.items.has(Item.MAGMARIZER)) {
-      this.addAttack(1, this, 0, false)
       target.status.triggerBurn(2000, target, this)
-      this.count.magmarizerCount++
     }
 
     if (this.items.has(Item.ELECTIRIZER) && this.count.attackCount % 3 === 0) {
-      target.addPP(-15, this, 0, false)
-      target.count.manaBurnCount++
       target.status.triggerParalysis(2000, target, this)
     }
 
@@ -1193,10 +1211,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       const cells = board.getAdjacentCells(this.positionX, this.positionY)
       cells.forEach((cell) => {
-        board.addBoardEffect(cell.x, cell.y, Effect.SMOKE, this.simulation)
         if (cell.value && cell.value.team !== this.team) {
-          cell.value.status.triggerParalysis(3000, cell.value, this)
+          cell.value.status.triggerParalysis(4000, cell.value, this)
+          cell.value.status.triggerBlinded(4000, cell.value)
         }
+      })
+      this.simulation.room.broadcast(Transfer.ABILITY, {
+        id: this.simulation.id,
+        skill: "SMOKE_BALL",
+        positionX: this.positionX,
+        positionY: this.positionY
       })
       this.removeItem(Item.SMOKE_BALL)
       this.flyAway(board)
