@@ -6,6 +6,7 @@ import {
   SynergyStones
 } from "../types/enum/Item"
 import {
+  ComfeyStats,
   Effect,
   OnItemGainedEffect,
   OnItemRemovedEffect,
@@ -15,6 +16,7 @@ import { pickRandomIn } from "../utils/random"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { PokemonEntity } from "./pokemon-entity"
 import { min } from "../utils/number"
+import { DEFAULT_ATK_SPEED, DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_POWER } from "../types/Config"
 
 export function getWonderboxItems(existingItems: SetSchema<Item>): Item[] {
   const wonderboxItems: Item[] = []
@@ -229,6 +231,82 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
         pokemon.player.addMoney(1, true, pokemon)
         pokemon.count.moneyCount += 1
         pokemon.count.amuletCoinCount += 1
+      }
+    })
+  ],
+
+  [Item.COMFEY]: [
+    new OnItemGainedEffect((pokemon) => {
+      for (const effect of pokemon.effectsSet) {
+        if (effect instanceof ComfeyStats) {
+          pokemon.addAbilityPower(effect.ap, pokemon, 0, false)
+          pokemon.addAttack(effect.atk, pokemon, 0, false)
+          pokemon.addAttackSpeed(
+            effect.atkSpeed - DEFAULT_ATK_SPEED,
+            pokemon,
+            0,
+            false
+          )
+          pokemon.addShield(effect.shield, pokemon, 0, false)
+          pokemon.addMaxHP(effect.hp, pokemon, 0, false)
+          pokemon.addDefense(effect.def, pokemon, 0, false)
+          pokemon.addSpecialDefense(
+            effect.speDef,
+            pokemon,
+            0,
+            false
+          )
+          pokemon.addCritChance(
+            effect.critChance - DEFAULT_CRIT_CHANCE,
+            pokemon,
+            0,
+            false
+          )
+          pokemon.addCritPower(
+            (effect.critPower - DEFAULT_CRIT_POWER) * 100,
+            pokemon,
+            0,
+            false
+          )
+          break
+        }
+      }
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      for (const effect of pokemon.effectsSet) {
+        if(effect instanceof ComfeyStats) {
+          pokemon.addAbilityPower(-effect.ap, pokemon, 0, false)
+          pokemon.addAttack(-effect.atk, pokemon, 0, false)
+          pokemon.addAttackSpeed(
+            -effect.atkSpeed - DEFAULT_ATK_SPEED,
+            pokemon,
+            0,
+            false
+          )
+          pokemon.addShield(-effect.shield, pokemon, 0, false)
+          pokemon.addMaxHP(-effect.hp, pokemon, 0, false)
+          pokemon.addDefense(-effect.def, pokemon, 0, false)
+          pokemon.addSpecialDefense(
+            -effect.speDef,
+            pokemon,
+            0,
+            false
+          )
+          pokemon.addCritChance(
+            -(effect.critChance - DEFAULT_CRIT_CHANCE),
+            pokemon,
+            0,
+            false
+          )
+          pokemon.addCritPower(
+            -(effect.critPower - DEFAULT_CRIT_POWER) * 100,
+            pokemon,
+            0,
+            false
+          )
+          pokemon.effectsSet.delete(effect)
+          break
+        }
       }
     })
   ]

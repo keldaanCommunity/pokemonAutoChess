@@ -7,6 +7,7 @@ import { chance } from "../utils/random"
 import PokemonState from "./pokemon-state"
 import { Passive } from "../types/enum/Passive"
 import { Ability } from "../types/enum/Ability"
+import { DEFAULT_ATK_SPEED, DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_POWER } from "../types/Config"
 
 type EffectOrigin = EffectEnum | Item
 
@@ -25,6 +26,23 @@ export abstract class Effect {
 export class OnItemGainedEffect extends Effect {}
 
 export class OnItemRemovedEffect extends Effect {}
+
+export class ComfeyStats extends Effect {
+  static origin = Item.COMFEY
+  constructor(
+    public ap: number,
+    public atk: number,
+    public atkSpeed: number,
+    public shield: number,
+    public hp: number,
+    public def: number,
+    public speDef: number,
+    public critChance: number,
+    public critPower: number
+  ) {
+    super()
+  }
+}
 
 // applied after knocking out an enemy
 export class OnKillEffect extends Effect {

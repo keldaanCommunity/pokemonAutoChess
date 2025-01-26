@@ -67,6 +67,7 @@ import { pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
+import { ComfeyStats } from "../../core/effect"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -12731,38 +12732,21 @@ export class Comfey extends Pokemon {
         simulation.redDpsMeter.delete(entity.id)
       }
 
-      nearestAllyWithFreeItemSlot.items.add(Item.COMFEY)
+      nearestAllyWithFreeItemSlot.effectsSet.add(
+        new ComfeyStats(
+          entity.ap,
+          entity.atk,
+          entity.atkSpeed,
+          entity.shield,
+          entity.hp,
+          entity.def,
+          entity.speDef,
+          entity.critChance,
+          entity.critPower
+        )
+      )
 
-      // apply comfey stats
-      nearestAllyWithFreeItemSlot.addAbilityPower(entity.ap, entity, 0, false)
-      nearestAllyWithFreeItemSlot.addAttack(entity.atk, entity, 0, false)
-      nearestAllyWithFreeItemSlot.addAttackSpeed(
-        entity.atkSpeed - DEFAULT_ATK_SPEED,
-        entity,
-        0,
-        false
-      )
-      nearestAllyWithFreeItemSlot.addShield(entity.shield, entity, 0, false)
-      nearestAllyWithFreeItemSlot.addMaxHP(entity.hp, entity, 0, false)
-      nearestAllyWithFreeItemSlot.addDefense(entity.def, entity, 0, false)
-      nearestAllyWithFreeItemSlot.addSpecialDefense(
-        entity.speDef,
-        entity,
-        0,
-        false
-      )
-      nearestAllyWithFreeItemSlot.addCritChance(
-        entity.critChance - DEFAULT_CRIT_CHANCE,
-        entity,
-        0,
-        false
-      )
-      nearestAllyWithFreeItemSlot.addCritPower(
-        (entity.critPower - DEFAULT_CRIT_POWER) * 100,
-        entity,
-        0,
-        false
-      )
+      nearestAllyWithFreeItemSlot.addItem(Item.COMFEY)
     }
   }
 }

@@ -298,8 +298,7 @@ export class PickupStrategy extends AbilityStrategy {
 
     if (target.items.size > 0 && pokemon.items.size < 3) {
       const item = target.items.values().next().value
-      target.removeItem(item)
-      pokemon.addItem(item)
+      pokemon.stealItem(item, target)
     } else {
       if (target.player) {
         const moneyStolen = max(target.player.money)(pokemon.stars)
@@ -1867,7 +1866,6 @@ export class ShadowCloneStrategy extends AbilityStrategy {
       let itemStolen: Item | null = null
       if (target.items.size > 0) {
         itemStolen = pickRandomIn(values(target.items))
-        target.removeItem(itemStolen)
       }
 
       const clone = pokemon.simulation.addPokemon(
@@ -1879,7 +1877,7 @@ export class ShadowCloneStrategy extends AbilityStrategy {
       clone.hp = min(1)(Math.ceil(0.5 * pokemon.hp * (1 + pokemon.ap / 100)))
       clone.life = clone.hp
       clone.isClone = true
-      if (itemStolen) clone.addItem(itemStolen)
+      if (itemStolen) clone.stealItem(itemStolen, target)
     }
   }
 }
@@ -4209,8 +4207,7 @@ export class ThiefStrategy extends AbilityStrategy {
     }
 
     target.items.forEach((item) => {
-      pokemon.addItem(item)
-      target.removeItem(item)
+      pokemon.stealItem(item, target)
     })
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
@@ -10295,8 +10292,7 @@ export class TrickOrTreatStrategy extends AbilityStrategy {
 
     if (target.items.size > 0) {
       const item = values(target.items)[0]!
-      target.removeItem(item)
-      pokemon.addItem(item)
+      pokemon.stealItem(item, target)
     } else if (pokemon.ap <= 50) {
       // 0-50 AP: shrink unit size and HP
       const lifeReduction = 0.4 / (1 + pokemon.ap / 100)
