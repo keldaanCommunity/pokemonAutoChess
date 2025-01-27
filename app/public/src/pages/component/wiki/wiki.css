@@ -34,7 +34,7 @@
   text-align: center;
 }
 
-.synergy-overlaps {
+#wiki-page .synergy-overlaps {
   display: grid;
   max-width: 300px;
   grid-template-columns: repeat(auto-fit, 80px);

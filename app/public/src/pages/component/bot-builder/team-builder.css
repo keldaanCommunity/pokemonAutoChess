@@ -156,6 +156,23 @@
   display: block;
 }
 
+#pokemon-picker .synergy-overlaps {
+  display: flex;
+  gap: 0.5em;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+#pokemon-picker summary {
+  margin: .5em 0;
+  font-size: 1rem;
+}
+
+#pokemon-picker .filters label {
+  float: right;
+  margin-left: 1em;
+}
+
 #rarity-grid {
   display: grid;
   grid-template: auto / 8ch 1fr 8ch 1fr;

@@ -68,6 +68,11 @@
 - Added a surrender confirm modal when leaving the game before the end
 - Added synergy overlap filter in Wiki > Synergies
 - Added "Show evolutions" filter in Wiki > Synergies
+- Improvements to team planner:
+    - Double cliking or right clicking a pokemon adds it to the first empty slot found
+    - Added synergy overlaps filter
+    - Added a "Show evolutions" filter
+    - Added a "Show only available add picks / regional pokemons" filter
 
 # Bugfix
 
