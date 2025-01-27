@@ -21,6 +21,7 @@ import {
 import { GamePhaseState } from "../../../../types/enum/Game"
 import { Item, ItemRecipe } from "../../../../types/enum/Item"
 import { Pkm } from "../../../../types/enum/Pokemon"
+import { throttle } from "../../../../utils/function"
 import { logger } from "../../../../utils/logger"
 import { values } from "../../../../utils/schemas"
 import { clearTitleNotificationIcon } from "../../../../utils/window"
@@ -176,10 +177,10 @@ export default class GameScene extends Scene {
     this.input.keyboard!.removeAllListeners()
     this.input.keyboard!.on(
       "keydown-" + preferences.keybindings.refresh,
-      () => {
+      throttle(() => {
         playSound(SOUNDS.REFRESH, 0.5)
         this.refreshShop()
-      }
+      }, 300)
     )
 
     this.input.keyboard!.on("keydown-" + preferences.keybindings.lock, () => {
