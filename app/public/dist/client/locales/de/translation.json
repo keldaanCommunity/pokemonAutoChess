@@ -1293,7 +1293,7 @@
     "DRAGON_TAIL": "Attacke, die [30,60,100,SP] SPECIAL am Ziel verursacht und DEF und SPE_DEF um [1,2,3,SP] stärkt.",
     "DRAGON_BREATH": "Fügt dem Ziel und allen Gegnern dahinter [25,50,100,SP] SPECIAL zu.",
     "ICICLE_CRASH": "Flächenangriff, der [20,40,80,SP] SPECIAL um das Ziel herum verursacht",
-    "ROOT": "Alle benachbarten Feinde werden für 4 Sekunden LOCKED und erhalten [10,20,40,SP] SPECIAL, während der Benutzer und benachbarte Verbündete um [10,20,40,SP] HP geheilt werden.",
+    "ROOT": "Alle benachbarten Feinde werden für 4 Sekunden LOCKED und erhalten [15,30,60,SP] SPECIAL, während der Benutzer und benachbarte Verbündete um [15,30,60,SP] HP geheilt werden.",
     "TORMENT": "Erhöhe ATK_SPEED um [20,40,60,SP] %",
     "STOMP": "Attacke, die [3,4,5,SP] x ATK SPECIAL am Ziel verursacht",
     "PAYBACK": "Verursacht [15,30,60,SP] SPECIAL. Doppelter Schaden, wenn der Benutzer weniger als die Hälfte seines Lebens hat.",

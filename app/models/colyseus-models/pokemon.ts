@@ -3964,70 +3964,47 @@ export class Blastoise extends Pokemon {
 
 export class Bellsprout extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.WEEPINBELL
   hp = 70
-  atk = 5
+  atk = 6
   def = 2
   speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.ROOT
   attackSprite = AttackSprite.GRASS_MELEE
-  regional = true
-  isInRegion(map: DungeonPMDO, state: GameState) {
-    const regionSynergies = DungeonDetails[map]?.synergies
-    return (
-      regionSynergies.includes(Synergy.GRASS) ||
-      regionSynergies.includes(Synergy.FLORA)
-    )
-  }
 }
 
 export class Weepinbell extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.VICTREEBEL
   hp = 160
   atk = 12
-  def = 2
-  speDef = 2
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.ROOT
   attackSprite = AttackSprite.GRASS_MELEE
-  regional = true
-  isInRegion(map: DungeonPMDO, state: GameState) {
-    const regionSynergies = DungeonDetails[map]?.synergies
-    return (
-      regionSynergies.includes(Synergy.GRASS) ||
-      regionSynergies.includes(Synergy.FLORA)
-    )
-  }
 }
 
 export class Victreebel extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.HATCH
   stars = 3
   hp = 240
   atk = 20
   def = 4
-  speDef = 2
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.ROOT
   attackSprite = AttackSprite.GRASS_MELEE
   regional = true
-  isInRegion(map: DungeonPMDO, state: GameState) {
-    const regionSynergies = DungeonDetails[map]?.synergies
-    return (
-      regionSynergies.includes(Synergy.GRASS) ||
-      regionSynergies.includes(Synergy.FLORA)
-    )
-  }
 }
 
 /*export class Pikipek extends Pokemon {
