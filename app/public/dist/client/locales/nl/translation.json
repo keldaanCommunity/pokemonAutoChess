@@ -906,7 +906,7 @@
     "GROWL": "FLINCH aangrenzende vijanden gedurende 3 seconden en vermindert hun ATK met [3,5,7,SP]",
     "RELIC_SONG": "Geeft een notitie af. De eerste twee notities geven [10,SP] SHIELD aan alle bondgenoten. De derde notitie veroorzaakt SLEEP aan het hele vijandelijke team voor [2,SP=0.5] seconden.",
     "FAIRY_WIND": "Geef [5,10,20,SP=0.5] PP aan alle vriendelijke Pokémon, behalve de gebruiker",
-    "HIGH_JUMP_KICK": "Breng [15,30,60,SP] SPECIAL toe en steel tot 30 PP van het doelwit",
+    "HIGH_JUMP_KICK": "Breng [15,30,60,SP] SPECIAL toe en steel tot 40 PP van het doelwit",
     "GRASS_WHISTLE": "Pas de SLEEP status toe op [1,2,4] vijandelijke Pokémon voor 2 seconden",
     "TRI_ATTACK": "Richt [30,60,SP] SPECIAL aan. Kan het doelwit BURN, FREEZE of PARALYSIS",
     "ECHO": "Breng [3,6,9,SP] SPECIAL toe aan alle vijandelijke Pokémon. Elke keer als de gebruiker deze vaardigheid gebruikt gaat de schade omhoog met [3,6,9,SP]",

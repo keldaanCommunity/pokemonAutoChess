@@ -1344,7 +1344,7 @@
     "RELIC_SONG": "음표를 내보냅니다. 처음 두 음표는 모든 아군에게 [10,SP] SHIELD를 부여합니다. 세 번째 음표는 적 팀 전체에게 [2,SP=0.5]초 동안 SLEEP을 부여합니다.",
     "FAIRY_WIND": "시전자를 제외한 모든 아군 포켓몬에게 [5,10,20,SP=0.5]의 PP를 부여한다.",
     "DISARMING_VOICE": "[1,SP]초동안 반경 2칸범위안의 적들을 CHARM 상태로 만든다.",
-    "HIGH_JUMP_KICK": "대상에게 [15,30,60,SP] SPECIAL를 가하며 최대 30 PP까지 훔칩니다.",
+    "HIGH_JUMP_KICK": "대상에게 [15,30,60,SP] SPECIAL를 가하며 최대 40 PP까지 훔칩니다.",
     "TROP_KICK": "[50,100,200,SP] SPECIAL 를 가하고 대상의 ATK 을 [3,5,7,SP] 감소시킨다.",
     "GRASS_WHISTLE": "2초간 적 포켓몬 [1,2,4]마리를 SLEEP 상태로 만든다.",
     "TRI_ATTACK": "[30,60,SP] SPECIAL를 가한다. 대상을 BURN, FREEZE, PARALYSIS 상태로 만들 확률도 존재한다.",
