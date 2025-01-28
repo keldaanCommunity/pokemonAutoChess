@@ -1,7 +1,6 @@
 import { Dispatcher } from "@colyseus/command"
 import { Client, ClientArray, Room, updateLobby } from "colyseus"
 import admin from "firebase-admin"
-import BannedUser from "../models/mongo-models/banned-user"
 import { IBot } from "../models/mongo-models/bot-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { IPreparationMetadata, Transfer } from "../types"
@@ -349,7 +348,6 @@ export default class PreparationRoom extends Room<PreparationState> {
     try {
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
-      const isBanned = await BannedUser.findOne({ uid: user.uid })
       const userProfile = await UserMetadata.findOne({ uid: user.uid })
       client.send(Transfer.USER_PROFILE, userProfile)
 
@@ -366,7 +364,7 @@ export default class PreparationRoom extends Room<PreparationState> {
         throw "Game already started"
       } else if (!user.displayName) {
         throw "No display name"
-      } else if (isBanned) {
+      } else if (userProfile?.banned) {
         throw "User banned"
       } else if (this.metadata.blacklist.includes(user.uid)) {
         throw "User previously kicked"

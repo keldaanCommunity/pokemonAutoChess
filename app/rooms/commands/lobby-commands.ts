@@ -11,7 +11,6 @@ import {
   TournamentBracketSchema,
   TournamentPlayerSchema
 } from "../../models/colyseus-models/tournament"
-import BannedUser from "../../models/mongo-models/banned-user"
 import { BotV2 } from "../../models/mongo-models/bot-v2"
 import { Tournament } from "../../models/mongo-models/tournament"
 import UserMetadata, {
@@ -780,14 +779,8 @@ export class BanUserCommand extends Command<
         bannedUser.role !== Role.ADMIN
       ) {
         this.state.removeMessages(uid)
-        const banned = await BannedUser.findOne({ uid })
-        if (!banned) {
-          BannedUser.create({
-            uid,
-            author: user.displayName,
-            time: Date.now(),
-            name: bannedUser.displayName
-          })
+        if (!bannedUser.banned) {
+          await UserMetadata.updateOne({ uid }, { banned: true })
           client.send(
             Transfer.BANNED,
             `${user.displayName} banned the user ${bannedUser.displayName}`
@@ -828,8 +821,8 @@ export class UnbanUserCommand extends Command<
     try {
       const user = this.room.users.get(client.auth.uid)
       if (user && (user.role === Role.ADMIN || user.role === Role.MODERATOR)) {
-        const res = await BannedUser.deleteOne({ uid })
-        if (res.deletedCount > 0) {
+        const res = await UserMetadata.updateOne({ uid }, { banned: false })
+        if (res.modifiedCount > 0) {
           client.send(
             Transfer.BANNED,
             `${user.displayName} unbanned the user ${name}`

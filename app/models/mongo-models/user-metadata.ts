@@ -17,6 +17,7 @@ export interface IUserMetadata {
   titles: Title[]
   title: "" | Title
   role: Role
+  banned?: boolean
 }
 
 export interface IPokemonConfig {
@@ -70,6 +71,10 @@ const userMetadataSchema = new Schema({
     type: String,
     enum: Role,
     default: Role.BASIC
+  },
+  banned: {
+    type: Boolean,
+    default: false
   },
   titles: [
     {
