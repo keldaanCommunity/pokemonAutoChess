@@ -699,6 +699,7 @@ export interface ISuggestionUser {
   level: number
   id: string
   avatar: string
+  banned?: boolean
 }
 
 export enum Title {

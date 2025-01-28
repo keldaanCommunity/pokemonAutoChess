@@ -733,9 +733,22 @@ export class OnSearchCommand extends Command<
         "\\$&"
       )
       const regExp = new RegExp("^" + escapedSearchTerm, "i")
+      const user = this.room.users.get(client.auth.uid)
+      const showBanned =
+        user?.role === Role.ADMIN || user?.role === Role.MODERATOR
       const users = await UserMetadata.find(
-        { displayName: { $regex: regExp, $options: "i" } },
-        ["uid", "elo", "displayName", "level", "avatar"],
+        {
+          displayName: { $regex: regExp },
+          ...(showBanned ? {} : { banned: false })
+        },
+        [
+          "uid",
+          "elo",
+          "displayName",
+          "level",
+          "avatar",
+          ...(showBanned ? ["banned"] : [])
+        ],
         { limit: 100, sort: { level: -1 } }
       )
       if (users) {
@@ -745,7 +758,8 @@ export class OnSearchCommand extends Command<
             elo: u.elo,
             name: u.displayName,
             level: u.level,
-            avatar: u.avatar
+            avatar: u.avatar,
+            banned: u.banned
           }
         })
         client.send(Transfer.SUGGESTIONS, suggestions)
@@ -787,6 +801,8 @@ export class BanUserCommand extends Command<
           )
 
           discordService.announceBan(user, bannedUser, reason)
+          bannedUser.banned = true
+          client.send(Transfer.USER, bannedUser)
         } else {
           client.send(
             Transfer.BANNED,
@@ -828,6 +844,8 @@ export class UnbanUserCommand extends Command<
             `${user.displayName} unbanned the user ${name}`
           )
           discordService.announceUnban(user, name)
+          const unbannedUser = await UserMetadata.findOne({ uid })
+          if (unbannedUser) client.send(Transfer.USER, unbannedUser)
         }
       }
     } catch (error) {

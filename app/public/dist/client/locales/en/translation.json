@@ -3030,6 +3030,7 @@
   "anonymous_users_name_hint": "Anonymous users cannot change their name.",
   "give_boosters": "Give boosters",
   "heap_snapshot": "Write heap snapshot",
+  "banned": "Banned",
   "ban_user": "Ban User",
   "unban_user": "Unban User",
   "set_moderator": "Set Moderator",
