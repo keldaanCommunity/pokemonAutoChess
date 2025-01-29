@@ -47,6 +47,7 @@
 - Nerf Beedrill HP 180 → 170
 - Buff Politoed: PP 100 → 90
 - Buff Wigglytuff: HP 210 → 250
+- Buff Grimmsnarl: Attack 24 → 26
 
 # Changes to Synergies
 

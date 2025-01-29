@@ -13595,7 +13595,7 @@ export class Grimmsnarl extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 3
   hp = 200
-  atk = 24
+  atk = 26
   def = 3
   speDef = 4
   maxPP = 70
