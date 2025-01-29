@@ -4465,7 +4465,7 @@ export class Beedrill extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.POISON, Synergy.BUG, Synergy.FLYING])
   rarity = Rarity.COMMON
   stars = 3
-  hp = 180
+  hp = 170
   atk = 18
   def = 2
   speDef = 2
