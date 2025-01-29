@@ -279,5 +279,17 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addDefense(-comfey.def, pokemon, 0, false)
       pokemon.addSpecialDefense(-comfey.speDef, pokemon, 0, false)
     })
+  ],
+
+  [Item.MAGMARIZER]: [
+    new OnItemRemovedEffect((pokemon) => {
+      pokemon.addAttack(
+        -pokemon.count.magmarizerCount,
+        pokemon,
+        0,
+        false
+      )
+      pokemon.count.magmarizerCount = 0
+    })
   ]
 }
