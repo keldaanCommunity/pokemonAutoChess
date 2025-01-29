@@ -560,7 +560,6 @@ export class OnDragDropItemCommand extends Command<
     if (item === Item.BLACK_AUGURITE && pokemon.passive === Passive.SCYTHER) {
       pokemon.items.add(item) // add the item just in time for the evolution
       pokemon.evolutionRule.tryEvolve(pokemon, player, this.state.stageLevel)
-      pokemon.items.delete(item) // retrieve the item, black augurite is not a held item
     }
 
     if (TMs.includes(item) || HMs.includes(item)) {
