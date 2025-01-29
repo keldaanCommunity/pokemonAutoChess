@@ -1947,7 +1947,7 @@ export class Politoed extends Pokemon {
   atk = 18
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 90
   range = 2
   skill = Ability.SOAK
   attackSprite = AttackSprite.WATER_RANGE
@@ -3040,7 +3040,7 @@ export class Wigglytuff extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.SOUND, Synergy.NORMAL])
   rarity = Rarity.UNCOMMON
   stars = 3
-  hp = 210
+  hp = 250
   atk = 18
   def = 3
   speDef = 3
@@ -4465,7 +4465,7 @@ export class Beedrill extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.POISON, Synergy.BUG, Synergy.FLYING])
   rarity = Rarity.COMMON
   stars = 3
-  hp = 180
+  hp = 170
   atk = 18
   def = 2
   speDef = 2
@@ -13595,7 +13595,7 @@ export class Grimmsnarl extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 3
   hp = 200
-  atk = 24
+  atk = 26
   def = 3
   speDef = 4
   maxPP = 70

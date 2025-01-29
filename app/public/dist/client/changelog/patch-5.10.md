@@ -27,7 +27,7 @@
 - Buff Bulk Up: stat buff 40% → 50%
 - All eeveelutions now have 100 max PP
 - Fix Spark ability targeting
-- Nerf High Jump Kick (Lopunny): steal up to ~~50~~ 30 PP
+- Nerf High Jump Kick (Lopunny): steal up to ~~50~~ 40 PP
 - Nerf Rotom Drone: Def/Spedef 4 → 3
 - Change Vise Grip (Krabby): during the 4 seconds when both user and target are locked, user gains 100% of target's defense and special defense
 - Deino line now only appears in Dragon regions
@@ -44,13 +44,20 @@
 - Nerf Tapu-Bulu: Def/Spedef: 5 → 3
 - Buff Lunatone/Solrock: PP 90 → 80
 - Bellsprout line is now Hatch ; stats adjusted, buff Root: Damage 10/20/40 → 15/30/60, heal 10/20/40 → 15/30/60
+- Nerf Beedrill HP 180 → 170
+- Buff Politoed: PP 100 → 90
+- Buff Wigglytuff: HP 210 → 250
+- Buff Grimmsnarl: Attack 24 → 26
 
 # Changes to Synergies
 
+- Nerf Field speed boost: ~~20/25/30%~~ → 15/20/25%
+- Nerf Grass 3 healing: ~~7~~ → 5 HP every 2 seconds
+
 # Changes to Items
 
-- Change Choice scarf: additional target hit can now suffer from on-hit effects (like burn, poison, etc)
-- Upgrade, Magmarizer, Electirizer effects are now done on attack and no longer on hit. That means they will trigger even if the attack is dodged or blocked.
+- Change Choice scarf: additional target hit can now suffer from on-hit effects (like burn, poison, ghost silence...)
+- Upgrade, Magmarizer, Electirizer effects are now on-attack and no longer on-hit. That means they will trigger even if the attack is dodged or blocked.
 - Change Smoke Ball: trigger below ~~33%~~ 40% HP, blinded effect now only affects enemies and is no longer a permanent board effect, status duration 3 → 4 seconds
 - Buff Silk scarf: increase shield received by ~~30~~ 50%
 - Buff Metal Coat: also gives +5 special defense
