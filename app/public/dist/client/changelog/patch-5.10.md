@@ -45,6 +45,7 @@
 - Buff Lunatone/Solrock: PP 90 → 80
 - Bellsprout line is now Hatch ; stats adjusted, buff Root: Damage 10/20/40 → 15/30/60, heal 10/20/40 → 15/30/60
 - Nerf Beedrill HP 180 → 170
+- Buff Politoed: PP 100 → 90
 
 # Changes to Synergies
 

@@ -1947,7 +1947,7 @@ export class Politoed extends Pokemon {
   atk = 18
   def = 1
   speDef = 1
-  maxPP = 100
+  maxPP = 90
   range = 2
   skill = Ability.SOAK
   attackSprite = AttackSprite.WATER_RANGE
