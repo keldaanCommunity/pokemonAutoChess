@@ -629,15 +629,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  removeItem(item: Item, permanent = false, stolen = false) {
+  removeItem(item: Item, permanent = false) {
     this.items.delete(item)
-    this.removeItemEffect(item, stolen)
+    this.removeItemEffect(item)
     if (permanent && !this.isGhostOpponent) {
       this.refToBoardPokemon.items.delete(item)
     }
   }
 
-  removeItemEffect(item: Item, stolen = false) {
+  removeItemEffect(item: Item) {
     if (ItemStats[item]) {
       Object.entries(ItemStats[item]).forEach(([stat, value]) =>
         this.applyStat(stat as Stat, -value)
@@ -659,33 +659,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ItemEffects[item]
       ?.filter((effect) => effect instanceof OnItemRemovedEffect)
       ?.forEach((effect) => effect.apply(this))
-    
-    if (!stolen && item === Item.COMFEY) {
-      const nearestAvailableCoordinate =
-        this.state.getNearestAvailablePlaceCoordinates(this, this.simulation.board, 2)
-      if (nearestAvailableCoordinate) {
-        this.simulation.addPokemon(
-          PokemonFactory.createPokemonFromName(Pkm.COMFEY, this.player),
-          nearestAvailableCoordinate.x,
-          nearestAvailableCoordinate.y,
-          this.team
-        )
-      }
-    }
-  }
-
-  stealItem(item: Item, pokemon: PokemonEntity, permanent = false) {
-    if (item === Item.COMFEY && this.items.size < 3) {
-      for (const effect of pokemon.effectsSet) {
-        if (effect.origin === Item.COMFEY) {
-          this.effectsSet.add(effect)
-          break
-        }
-      }
-    }
-
-    pokemon.removeItem(item, permanent, true)
-    this.addItem(item, permanent)
   }
 
   addPsychicField() {

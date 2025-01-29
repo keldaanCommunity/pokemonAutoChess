@@ -67,7 +67,6 @@ import { pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
-import { ComfeyStats } from "../../core/effect"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -12731,20 +12730,6 @@ export class Comfey extends Pokemon {
       if (simulation.redDpsMeter.has(entity.id)) {
         simulation.redDpsMeter.delete(entity.id)
       }
-
-      nearestAllyWithFreeItemSlot.effectsSet.add(
-        new ComfeyStats(
-          entity.ap,
-          entity.atk,
-          entity.atkSpeed,
-          entity.shield,
-          entity.hp,
-          entity.def,
-          entity.speDef,
-          entity.critChance,
-          entity.critPower
-        )
-      )
 
       nearestAllyWithFreeItemSlot.addItem(Item.COMFEY)
     }

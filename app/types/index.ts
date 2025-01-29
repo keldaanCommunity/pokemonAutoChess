@@ -34,7 +34,6 @@ import { Passive } from "./enum/Passive"
 import { Pkm, PkmProposition } from "./enum/Pokemon"
 import { Synergy } from "./enum/Synergy"
 import { Weather } from "./enum/Weather"
-import { Effect as EffectClass } from "../core/effect"
 
 export * from "./enum/Emotion"
 
@@ -620,7 +619,6 @@ export interface IPokemonEntity {
   baseAtk: number
   isClone: boolean
   commands: ISimulationCommand[]
-  effectsSet: Set<EffectClass>
 }
 
 export interface IStatus {

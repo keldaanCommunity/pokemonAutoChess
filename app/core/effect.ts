@@ -26,23 +26,6 @@ export class OnItemGainedEffect extends Effect {}
 
 export class OnItemRemovedEffect extends Effect {}
 
-export class ComfeyStats extends Effect {
-  static origin = Item.COMFEY
-  constructor(
-    public ap: number,
-    public atk: number,
-    public atkSpeed: number,
-    public shield: number,
-    public hp: number,
-    public def: number,
-    public speDef: number,
-    public critChance: number,
-    public critPower: number
-  ) {
-    super()
-  }
-}
-
 // applied after knocking out an enemy
 export class OnKillEffect extends Effect {
   apply(entity: PokemonEntity, target: PokemonEntity, board: Board) {}

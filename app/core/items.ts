@@ -6,17 +6,19 @@ import {
   SynergyStones
 } from "../types/enum/Item"
 import {
-  ComfeyStats,
   Effect,
   OnItemGainedEffect,
   OnItemRemovedEffect,
   OnKillEffect
 } from "./effect"
 import { pickRandomIn } from "../utils/random"
-import { Pokemon } from "../models/colyseus-models/pokemon"
+import { Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
 import { PokemonEntity } from "./pokemon-entity"
 import { min } from "../utils/number"
 import { DEFAULT_ATK_SPEED, DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_POWER } from "../types/Config"
+import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
+import { Pkm } from "../types/enum/Pokemon"
+import PokemonFactory from "../models/pokemon-factory"
 
 export function getWonderboxItems(existingItems: SetSchema<Item>): Item[] {
   const wonderboxItems: Item[] = []
@@ -237,77 +239,37 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.COMFEY]: [
     new OnItemGainedEffect((pokemon) => {
-      for (const effect of pokemon.effectsSet) {
-        if (effect instanceof ComfeyStats) {
-          pokemon.addAbilityPower(effect.ap, pokemon, 0, false)
-          pokemon.addAttack(effect.atk, pokemon, 0, false)
-          pokemon.addAttackSpeed(
-            effect.atkSpeed - DEFAULT_ATK_SPEED,
-            pokemon,
-            0,
-            false
-          )
-          pokemon.addShield(effect.shield, pokemon, 0, false)
-          pokemon.addMaxHP(effect.hp, pokemon, 0, false)
-          pokemon.addDefense(effect.def, pokemon, 0, false)
-          pokemon.addSpecialDefense(
-            effect.speDef,
-            pokemon,
-            0,
-            false
-          )
-          pokemon.addCritChance(
-            effect.critChance - DEFAULT_CRIT_CHANCE,
-            pokemon,
-            0,
-            false
-          )
-          pokemon.addCritPower(
-            (effect.critPower - DEFAULT_CRIT_POWER) * 100,
-            pokemon,
-            0,
-            false
-          )
-          break
-        }
-      }
+      const comfey = PokemonFactory.createPokemonFromName(Pkm.COMFEY)
+      pokemon.addAbilityPower(comfey.ap, pokemon, 0, false)
+      pokemon.addAttack(comfey.atk, pokemon, 0, false)
+      pokemon.addAttackSpeed(
+        comfey.atkSpeed - DEFAULT_ATK_SPEED,
+        pokemon,
+        0,
+        false
+      )
+      pokemon.addMaxHP(comfey.hp, pokemon, 0, false)
+      pokemon.addDefense(comfey.def, pokemon, 0, false)
+      pokemon.addSpecialDefense(
+        comfey.speDef,
+        pokemon,
+        0,
+        false
+      )
     }),
     new OnItemRemovedEffect((pokemon) => {
-      for (const effect of pokemon.effectsSet) {
-        if(effect instanceof ComfeyStats) {
-          pokemon.addAbilityPower(-effect.ap, pokemon, 0, false)
-          pokemon.addAttack(-effect.atk, pokemon, 0, false)
-          pokemon.addAttackSpeed(
-            -effect.atkSpeed - DEFAULT_ATK_SPEED,
-            pokemon,
-            0,
-            false
-          )
-          pokemon.addShield(-effect.shield, pokemon, 0, false)
-          pokemon.addMaxHP(-effect.hp, pokemon, 0, false)
-          pokemon.addDefense(-effect.def, pokemon, 0, false)
-          pokemon.addSpecialDefense(
-            -effect.speDef,
-            pokemon,
-            0,
-            false
-          )
-          pokemon.addCritChance(
-            -(effect.critChance - DEFAULT_CRIT_CHANCE),
-            pokemon,
-            0,
-            false
-          )
-          pokemon.addCritPower(
-            -(effect.critPower - DEFAULT_CRIT_POWER) * 100,
-            pokemon,
-            0,
-            false
-          )
-          pokemon.effectsSet.delete(effect)
-          break
-        }
-      }
+      const comfey = PokemonFactory.createPokemonFromName(Pkm.COMFEY)
+      pokemon.addAbilityPower(-comfey.ap, pokemon, 0, false)
+      pokemon.addAttack(-comfey.atk, pokemon, 0, false)
+      pokemon.addAttackSpeed(
+        -(comfey.atkSpeed - DEFAULT_ATK_SPEED),
+        pokemon,
+        0,
+        false
+      )
+      pokemon.addMaxHP(-comfey.hp, pokemon, 0, false)
+      pokemon.addDefense(-comfey.def, pokemon, 0, false)
+      pokemon.addSpecialDefense(-comfey.speDef, pokemon, 0, false)
     })
   ]
 }
