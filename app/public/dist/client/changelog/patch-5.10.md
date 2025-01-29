@@ -49,6 +49,7 @@
 - Buff Wigglytuff: HP 210 → 250
 - Buff Grimmsnarl: Attack 24 → 26
 - Nerf Comfey: Now only grants base stats
+- Buff Cosmic Power Sun (Solrock): now also buff Solrock attack
 
 # Changes to Synergies
 

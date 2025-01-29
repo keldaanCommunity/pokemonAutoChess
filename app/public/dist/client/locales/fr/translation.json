@@ -1516,7 +1516,7 @@
     "PECK": "Inflige [10,30,50,SP] SPECIAL à la cible",
     "COUNTER": "Inflige aux ennemies adjacents [50,SP]% de ses HP manquants en SPECIAL",
     "COSMIC_POWER_MOON": "Augmente la AP de tous les coéquipiers de [20,SP]",
-    "COSMIC_POWER_SUN": "Augmente l'ATK de base de tous les coéquipiers de [25,SP]%",
+    "COSMIC_POWER_SUN": "Augmente l'ATK de base de toute l'équipe de [25,SP]%",
     "ENTANGLING_THREAD": "Inflige [10,20,40,SP] SPECIAL et PARALYSIS à la cible et les ennemis autour pendant 4 secondes",
     "SILVER_WIND": "Fonce dans la ligne de fond ennemie, infligeant [20,40,80,SP] SPECIAL à chaque ennemi sur le chemin. Puis gagne 1 ATK, 1 DEF, 1 SPE_DEF, 10 AP et 10% ATK_SPEED",
     "POISON_POWDER": "Fonce dans la ligne de fond ennemie, infligeant [20,40,80,SP] et appliquant POISONNED pendant 5 secondes à chaque ennemi sur le chemin",

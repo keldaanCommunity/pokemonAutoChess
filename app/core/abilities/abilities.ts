@@ -3014,7 +3014,7 @@ export class CosmicPowerSunStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const atkBuffMultiplier = 0.25
     board.forEach((x, y, ally) => {
-      if (ally && ally.id !== pokemon.id && ally.team === pokemon.team) {
+      if (ally && ally.team === pokemon.team) {
         ally.addAttack(atkBuffMultiplier * ally.baseAtk, pokemon, 1, crit)
       }
     })
