@@ -595,6 +595,10 @@ export class Kleavor extends Pokemon {
   range = 1
   skill = Ability.STONE_AXE
   attackSprite = AttackSprite.ROCK_MELEE
+  
+  onAcquired(player: Player): void {
+    this.items.delete(Item.BLACK_AUGURITE) // black augurite is not a held item, but is needed for evolution
+  }
 }
 
 export class Bounsweet extends Pokemon {
