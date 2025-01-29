@@ -1336,7 +1336,9 @@
     "INCINEROAR": "炽焰咆哮虎",
     "DRACOZOLT": "雷鸟龙",
     "CRYOGONAL": "几何雪花",
-    "DRAMPA": "老翁龙"
+    "DRAMPA": "老翁龙",
+    "SKRELP": "垃垃藻",
+    "DRAGALGE": "毒藻龙"
   },
   "ability_description": {
     "SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -2930,6 +2932,7 @@
   "show_unlockable": "显示可解锁",
   "show_unlocked": "显示已解锁",
   "show_evolutions": "显示进化型",
+  "show_only_available_picks": "隐藏不可用的附加或地区限定宝可梦",
   "sort_by_index": "按序号排序",
   "sort_by_shards": "按碎片排序",
   "normal_emotions": "普通表情",
@@ -3027,6 +3030,7 @@
   "anonymous_users_name_hint": "匿名用户无权改名。",
   "give_boosters": "赠送补充包",
   "heap_snapshot": "写入快照堆",
+  "banned": "已封禁",
   "ban_user": "封禁用户",
   "unban_user": "解禁用户",
   "set_moderator": "设置为管理员",
@@ -3163,6 +3167,7 @@
   "search_player": "搜索玩家名……",
   "team_builder": "队伍设计器",
   "titles_unlocked": "个头衔已解锁",
+  "overlaps": "个共鸣重叠",
   "game-reconnect-modal-title": "重新连接",
   "game-reconnect-modal-body": "你离开了一个仍在进行中的游戏。是否要重新连接至那场游戏？",
   "toggle_locked": "显示已锁定",
