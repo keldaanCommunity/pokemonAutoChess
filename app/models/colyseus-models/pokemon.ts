@@ -3040,7 +3040,7 @@ export class Wigglytuff extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.SOUND, Synergy.NORMAL])
   rarity = Rarity.UNCOMMON
   stars = 3
-  hp = 210
+  hp = 250
   atk = 18
   def = 3
   speDef = 3
