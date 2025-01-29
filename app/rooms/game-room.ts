@@ -8,7 +8,6 @@ import { MiniGame } from "../core/matter/mini-game"
 import { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
-import BannedUser from "../models/mongo-models/banned-user"
 import { BotV2 } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
 import History from "../models/mongo-models/history"
@@ -556,13 +555,10 @@ export default class GameRoom extends Room<GameState> {
   }
 
   async onJoin(client: Client) {
-    const isBanned = await BannedUser.findOne({ uid: client.auth.uid })
-
-    if (isBanned) {
+    const userProfile = await UserMetadata.findOne({ uid: client.auth.uid })
+    if (userProfile?.banned) {
       throw "Account banned"
     }
-
-    const userProfile = await UserMetadata.findOne({ uid: client.auth.uid })
     client.send(Transfer.USER_PROFILE, userProfile)
     this.dispatcher.dispatch(new OnJoinCommand(), { client })
   }

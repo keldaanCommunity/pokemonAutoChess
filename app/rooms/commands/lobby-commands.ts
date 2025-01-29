@@ -11,7 +11,6 @@ import {
   TournamentBracketSchema,
   TournamentPlayerSchema
 } from "../../models/colyseus-models/tournament"
-import BannedUser from "../../models/mongo-models/banned-user"
 import { BotV2 } from "../../models/mongo-models/bot-v2"
 import { Tournament } from "../../models/mongo-models/tournament"
 import UserMetadata, {
@@ -734,9 +733,22 @@ export class OnSearchCommand extends Command<
         "\\$&"
       )
       const regExp = new RegExp("^" + escapedSearchTerm, "i")
+      const user = this.room.users.get(client.auth.uid)
+      const showBanned =
+        user?.role === Role.ADMIN || user?.role === Role.MODERATOR
       const users = await UserMetadata.find(
-        { displayName: { $regex: regExp, $options: "i" } },
-        ["uid", "elo", "displayName", "level", "avatar"],
+        {
+          displayName: { $regex: regExp },
+          ...(showBanned ? {} : { banned: false })
+        },
+        [
+          "uid",
+          "elo",
+          "displayName",
+          "level",
+          "avatar",
+          ...(showBanned ? ["banned"] : [])
+        ],
         { limit: 100, sort: { level: -1 } }
       )
       if (users) {
@@ -746,7 +758,8 @@ export class OnSearchCommand extends Command<
             elo: u.elo,
             name: u.displayName,
             level: u.level,
-            avatar: u.avatar
+            avatar: u.avatar,
+            banned: u.banned
           }
         })
         client.send(Transfer.SUGGESTIONS, suggestions)
@@ -780,20 +793,16 @@ export class BanUserCommand extends Command<
         bannedUser.role !== Role.ADMIN
       ) {
         this.state.removeMessages(uid)
-        const banned = await BannedUser.findOne({ uid })
-        if (!banned) {
-          BannedUser.create({
-            uid,
-            author: user.displayName,
-            time: Date.now(),
-            name: bannedUser.displayName
-          })
+        if (!bannedUser.banned) {
+          await UserMetadata.updateOne({ uid }, { banned: true })
           client.send(
             Transfer.BANNED,
             `${user.displayName} banned the user ${bannedUser.displayName}`
           )
 
           discordService.announceBan(user, bannedUser, reason)
+          bannedUser.banned = true
+          client.send(Transfer.USER, bannedUser)
         } else {
           client.send(
             Transfer.BANNED,
@@ -828,13 +837,15 @@ export class UnbanUserCommand extends Command<
     try {
       const user = this.room.users.get(client.auth.uid)
       if (user && (user.role === Role.ADMIN || user.role === Role.MODERATOR)) {
-        const res = await BannedUser.deleteOne({ uid })
-        if (res.deletedCount > 0) {
+        const res = await UserMetadata.updateOne({ uid }, { banned: false })
+        if (res.modifiedCount > 0) {
           client.send(
             Transfer.BANNED,
             `${user.displayName} unbanned the user ${name}`
           )
           discordService.announceUnban(user, name)
+          const unbannedUser = await UserMetadata.findOne({ uid })
+          if (unbannedUser) client.send(Transfer.USER, unbannedUser)
         }
       }
     } catch (error) {

@@ -1,27 +1,30 @@
 .badge {
-    display: inline-block;
-    padding: .25em .4em;
-    font-size: 75%;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: .25rem;
+  display: inline-block;
+  padding: .25em .4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25rem;
 }
 
 .badge.admin {
-    background-color: #28a745;
+  background-color: #28a745;
 }
 .badge.moderator {
-    background-color: #007bff;
+  background-color: #007bff;
 }
 .badge.basic {
-    background-color: #6c757d;
+  background-color: #6c757d;
 }
 .badge.bot {
-    background-color: #6c757d;
+  background-color: #6c757d;
 }
 .badge.bot-manager {
-    background-color: #dc3545;
+  background-color: #dc3545;
+}
+.badge.banned {
+  background-color: red;
 }
