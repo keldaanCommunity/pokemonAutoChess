@@ -43,23 +43,6 @@ export class AbilityStrategy {
       }
     })
 
-    board.forEach((x, y, pkm) => {
-      if (
-        pkm?.passive === Passive.WATER_SPRING &&
-        pkm &&
-        pkm.team !== pokemon.team &&
-        pkm.id !== pokemon.id
-      ) {
-        pkm.addPP(5, pkm, 0, false)
-        pkm.simulation.room.broadcast(Transfer.ABILITY, {
-          id: pokemon.simulation.id,
-          skill: pkm.skill,
-          positionX: pkm.positionX,
-          positionY: pkm.positionY
-        })
-      }
-    })
-
     if (pokemon.items.has(Item.AQUA_EGG)) {
       pokemon.addPP(20, pokemon, 0, false)
     }

@@ -50,7 +50,7 @@ import { PokemonEntity, getStrongestUnit, getUnitScore } from "./pokemon-entity"
 import { DelayedCommand } from "./simulation-command"
 import { getAvatarString } from "../utils/avatar"
 import { max } from "../utils/number"
-import { OnItemGainedEffect, GrowGroundEffect, FireHitEffect, MonsterKillEffect, SoundCryEffect} from "./effect"
+import { OnItemGainedEffect, GrowGroundEffect, FireHitEffect, MonsterKillEffect, SoundCryEffect, WaterSpringEffect} from "./effect"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -1309,6 +1309,11 @@ export default class Simulation extends Schema implements ISimulation {
       case Effect.BAD_LUCK: {
         pokemon.effects.add(effect)
         pokemon.addLuck(-20, pokemon, 0, false)
+        break
+      }
+
+      case Effect.WATER_SPRING: {
+        pokemon.effectsSet.add(new WaterSpringEffect())
         break
       }
 

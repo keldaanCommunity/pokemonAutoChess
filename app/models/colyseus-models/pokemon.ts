@@ -3637,6 +3637,10 @@ export class Mudkip extends Pokemon {
   skill = Ability.MUD_BUBBLE
   passive = Passive.WATER_SPRING
   attackSprite = AttackSprite.WATER_MELEE
+
+  beforeSimulationStart({opponentEffects}: {opponentEffects: Set<Effect> }): void {
+    opponentEffects.add(Effect.WATER_SPRING)
+  }
 }
 
 export class Marshtomp extends Pokemon {
@@ -3653,6 +3657,10 @@ export class Marshtomp extends Pokemon {
   skill = Ability.MUD_BUBBLE
   passive = Passive.WATER_SPRING
   attackSprite = AttackSprite.WATER_MELEE
+
+  beforeSimulationStart({opponentEffects}: {opponentEffects: Set<Effect> }): void {
+    opponentEffects.add(Effect.WATER_SPRING)
+  }
 }
 
 export class Swampert extends Pokemon {
@@ -3668,6 +3676,10 @@ export class Swampert extends Pokemon {
   skill = Ability.MUD_BUBBLE
   passive = Passive.WATER_SPRING
   attackSprite = AttackSprite.WATER_MELEE
+
+  beforeSimulationStart({opponentEffects}: {opponentEffects: Set<Effect> }): void {
+    opponentEffects.add(Effect.WATER_SPRING)
+  }
 }
 
 export class Torchic extends Pokemon {
