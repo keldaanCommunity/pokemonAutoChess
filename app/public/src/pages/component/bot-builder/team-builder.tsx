@@ -162,6 +162,24 @@ export default function TeamBuilder(props: {
     }
   }
 
+  function getFirstEmptyCell(): { x: number; y: number } | null {
+    for (let y = 0; y < 3; y++) {
+      for (let x = 0; x < 8; x++) {
+        if (board.find(p => p.x === x && p.y === y) === undefined) {
+          return { x, y }
+        }
+      }
+    }
+    return null
+  }
+
+  function addPokemonOnFirstEmptyCell(entity: PkmWithConfig) {
+    const firstEmptyCell = getFirstEmptyCell()
+    if (firstEmptyCell) {
+      addPokemon(firstEmptyCell.x, firstEmptyCell.y, entity)
+    }
+  }
+
   function updateSelectedPokemon(pkm: PkmWithConfig) {
     setSelection(pkm)
     if (selectedPokemon != null) {
@@ -253,7 +271,7 @@ export default function TeamBuilder(props: {
       />
       <SelectedEntity entity={selection} onChange={updateSelectedPokemon} />
       <ItemPicker selectEntity={setSelection} selected={selection} />
-      <PokemonPicker selectEntity={setSelection} selected={selection} />
+      <PokemonPicker selectEntity={e => setSelection(e as PkmWithConfig | Item)} addEntity={addPokemonOnFirstEmptyCell} selected={selection} />
       {props.bot && props.onChangeAvatar && (
         <BotAvatar
           bot={props.bot}

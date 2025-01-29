@@ -2,7 +2,6 @@ import { Dispatcher } from "@colyseus/command"
 import { Client, Room } from "colyseus"
 import admin from "firebase-admin"
 import AfterGamePlayer from "../models/colyseus-models/after-game-player"
-import BannedUser from "../models/mongo-models/banned-user"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { IAfterGamePlayer, Transfer } from "../types"
 import { logger } from "../utils/logger"
@@ -55,13 +54,12 @@ export default class AfterGameRoom extends Room<AfterGameState> {
       super.onAuth(client, options, request)
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
-      const isBanned = await BannedUser.findOne({ uid: user.uid })
       const userProfile = await UserMetadata.findOne({ uid: user.uid })
       client.send(Transfer.USER_PROFILE, userProfile)
 
       if (!user.displayName) {
         throw "No display name"
-      } else if (isBanned) {
+      } else if (userProfile?.banned) {
         throw "User banned"
       } else {
         return user

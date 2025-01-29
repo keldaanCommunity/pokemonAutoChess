@@ -221,8 +221,7 @@ function OtherProfileActions({ resetSearch }) {
       {heapSnapshotButton}
       {roleButton}
       {titleButton}
-      {banButton}
-      {unbanButton}
+      {user?.banned ? unbanButton : banButton}
       <button className="bubbly blue" onClick={resetSearch}>
         {t("back_to_my_profile")}
       </button>

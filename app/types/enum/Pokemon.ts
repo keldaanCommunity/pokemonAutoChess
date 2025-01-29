@@ -190,6 +190,7 @@ export enum Pkm {
   DOUBLADE = "DOUBLADE",
   DRACOVISH = "DRACOVISH",
   DRACOZOLT = "DRACOZOLT",
+  DRAGALGE = "DRAGALGE",
   DRAGAPULT = "DRAGAPULT",
   DRAGONAIR = "DRAGONAIR",
   DRAGONITE = "DRAGONITE",
@@ -691,6 +692,7 @@ export enum Pkm {
   SKELEDIRGE = "SKELEDIRGE",
   SKIPLOOM = "SKIPLOOM",
   SKORUPI = "SKORUPI",
+  SKRELP = "SKRELP",
   SKUNTANK = "SKUNTANK",
   SLAKING = "SLAKING",
   SLAKOTH = "SLAKOTH",
@@ -1703,8 +1705,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MALAMAR]: "0687",
   [Pkm.BINACLE]: "0688",
   [Pkm.BARBARACLE]: "0689",
-  //[Pkm.SKRELP]: "0690",
-  //[Pkm.DRAGALGE]: "0691",
+  [Pkm.SKRELP]: "0690",
+  [Pkm.DRAGALGE]: "0691",
   [Pkm.CLAUNCHER]: "0692",
   [Pkm.CLAWITZER]: "0693",
   [Pkm.HELIOPTILE]: "0694",
@@ -2953,7 +2955,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.INCINEROAR]: Pkm.LITTEN,
   [Pkm.DRACOZOLT]: Pkm.DRACOZOLT,
   [Pkm.CRYOGONAL]: Pkm.CRYOGONAL,
-  [Pkm.DRAMPA]: Pkm.DRAMPA
+  [Pkm.DRAMPA]: Pkm.DRAMPA,
+  [Pkm.SKRELP]: Pkm.SKRELP,
+  [Pkm.DRAGALGE]: Pkm.SKRELP
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7619,5 +7623,16 @@ export const AnimationConfig: {
     attack: AnimationType.Shoot,
     ability: AnimationType.RearUp,
     emote: AnimationType.Charge
+  },
+  [Pkm.SKRELP]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
+  },
+  [Pkm.DRAGALGE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   }
 }

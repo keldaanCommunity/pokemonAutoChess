@@ -464,7 +464,7 @@ export default class Shop {
       threshold += probas[i]
       i++
     }
-    let rarity = [
+    const rarity = [
       Rarity.COMMON,
       Rarity.UNCOMMON,
       Rarity.RARE,
@@ -483,27 +483,10 @@ export default class Shop {
       p.items.has(Item.REPEAT_BALL)
     )
     const totalRerolls = player.rerollCount + state.stageLevel
-    if (
-      shopIndex >= 0 &&
-      shopIndex < repeatBallHolders.length &&
-      totalRerolls % 2 === 0
-    ) {
-      specificTypesWanted = values(repeatBallHolders[shopIndex].types)
-      rarity =
-        [
-          Rarity.COMMON,
-          Rarity.UNCOMMON,
-          Rarity.RARE,
-          Rarity.EPIC,
-          Rarity.ULTRA
-        ][Math.floor(totalRerolls / 30)] ?? Rarity.ULTRA
+    if (shopIndex >= 0 && shopIndex < repeatBallHolders.length) {
       if (totalRerolls >= 140 && totalRerolls % 10 === 0) {
         let legendaryCandidates: Pkm[] = LegendaryShop.filter<Pkm>(
-          (p): p is Pkm =>
-            !(p in PkmDuos) &&
-            getPokemonData(p as Pkm).types.some((type) =>
-              specificTypesWanted?.includes(type)
-            )
+          (p): p is Pkm => !(p in PkmDuos)
         )
         shuffleArray(legendaryCandidates)
         legendaryCandidates = legendaryCandidates.filter(
@@ -516,11 +499,7 @@ export default class Shop {
           return pickRandomIn(legendaryCandidates)
       } else if (totalRerolls >= 100 && totalRerolls % 10 === 0) {
         let uniqueCandidates: Pkm[] = UniqueShop.filter<Pkm>(
-          (p): p is Pkm =>
-            !(p in PkmDuos) &&
-            getPokemonData(p as Pkm).types.some((type) =>
-              specificTypesWanted?.includes(type)
-            )
+          (p): p is Pkm => !(p in PkmDuos)
         )
         shuffleArray(uniqueCandidates)
         uniqueCandidates = uniqueCandidates.filter(

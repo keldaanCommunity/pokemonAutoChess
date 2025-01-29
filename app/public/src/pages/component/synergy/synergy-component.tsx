@@ -26,6 +26,7 @@ export default function SynergyComponent(props: {
     const scene = getGameScene()
     if (!scene) return
     const outline = scene.plugins.get("rexOutline") as OutlinePlugin
+    if (!outline) return; // outline plugin doesnt work with canvas renderer
     currentPlayer?.board.forEach((p) => {
       if (p.types.has(type)) {
         const sprite = scene.board?.pokemons.get(p.id)?.sprite
@@ -43,6 +44,7 @@ export default function SynergyComponent(props: {
     const scene = getGameScene()
     if (!scene) return
     const outline = scene.plugins.get("rexOutline") as OutlinePlugin
+    if (!outline) return; // outline plugin doesnt work with canvas renderer
     currentPlayer?.board.forEach((p) => {
       if (p.types.has(type)) {
         const sprite = scene.board?.pokemons.get(p.id)?.sprite

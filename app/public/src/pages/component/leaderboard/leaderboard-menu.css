@@ -79,6 +79,10 @@ ul.titles > li.selected p {
   padding: 5px;
 }
 
+.search-suggestions .player.my-box.banned {
+  color: red;
+}
+
 .search-suggestions .player.my-box img {
   width: 40px;
   height: 40px;

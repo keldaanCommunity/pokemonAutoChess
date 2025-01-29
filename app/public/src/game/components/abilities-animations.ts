@@ -3123,6 +3123,10 @@ export function displayAbility(
       ).setScale(2)
       break
 
+    case "SMOKE_BALL":
+      addAbilitySprite(skill, coordinates, true).setScale(3)
+      break
+
     case Ability.RETALIATE:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break

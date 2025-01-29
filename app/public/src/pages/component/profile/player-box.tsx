@@ -64,6 +64,7 @@ export default function PlayerBox(props: { user: IUserMetadata, history?: IGameR
             <p className="player-title">{t(`title.${props.user.title}`)}</p>
           )}
           <RoleBadge role={props.user.role} />
+          {props.user.banned && <div className="badge banned">{t("banned")}</div>}
           <p
             style={{
               overflow: "hidden",

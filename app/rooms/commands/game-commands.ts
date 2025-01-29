@@ -560,7 +560,6 @@ export class OnDragDropItemCommand extends Command<
     if (item === Item.BLACK_AUGURITE && pokemon.passive === Passive.SCYTHER) {
       pokemon.items.add(item) // add the item just in time for the evolution
       pokemon.evolutionRule.tryEvolve(pokemon, player, this.state.stageLevel)
-      pokemon.items.delete(item) // retrieve the item, black augurite is not a held item
     }
 
     if (TMs.includes(item) || HMs.includes(item)) {
@@ -735,8 +734,16 @@ export class OnRefreshCommand extends Command<GameRoom, string> {
     if (canRoll && player.alive) {
       player.rerollCount++
       player.money -= rollCost
+      if (player.shopFreeRolls > 0) {
+        player.shopFreeRolls--
+      } else {
+        const repeatBallHolders = values(player.board).filter((p) =>
+          p.items.has(Item.REPEAT_BALL)
+        )
+        if (repeatBallHolders.length > 0)
+          player.shopFreeRolls += repeatBallHolders.length
+      }
       this.state.shop.assignShop(player, true, this.state)
-      if (player.shopFreeRolls > 0) player.shopFreeRolls--
     }
   }
 }

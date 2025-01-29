@@ -8,6 +8,8 @@
 - Dracozolt
 - Cryogonal
 - Drampa
+- Skrelp
+- Dragalge
 
 # Changes to Pokemon & Abilities
 
@@ -25,7 +27,7 @@
 - Buff Bulk Up: stat buff 40% → 50%
 - All eeveelutions now have 100 max PP
 - Fix Spark ability targeting
-- Nerf High Jump Kick (Lopunny): steal up to ~~50~~ 30 PP
+- Nerf High Jump Kick (Lopunny): steal up to ~~50~~ 40 PP
 - Nerf Rotom Drone: Def/Spedef 4 → 3
 - Change Vise Grip (Krabby): during the 4 seconds when both user and target are locked, user gains 100% of target's defense and special defense
 - Deino line now only appears in Dragon regions
@@ -41,15 +43,28 @@
 - Torterra is no longer Flora ; Def 3/4/5 → 3/5/7 ; Growth ability cooldown 500→250ms
 - Nerf Tapu-Bulu: Def/Spedef: 5 → 3
 - Buff Lunatone/Solrock: PP 90 → 80
+- Bellsprout line is now Hatch ; stats adjusted, buff Root: Damage 10/20/40 → 15/30/60, heal 10/20/40 → 15/30/60
+- Nerf Beedrill HP 180 → 170
+- Buff Politoed: PP 100 → 90
+- Buff Wigglytuff: HP 210 → 250
+- Buff Grimmsnarl: Attack 24 → 26
 - Nerf Comfey: Now only grants base stats
 
 # Changes to Synergies
 
+- Nerf Field speed boost: ~~20/25/30%~~ → 15/20/25%
+- Nerf Grass 3 healing: ~~7~~ → 5 HP every 2 seconds
+
 # Changes to Items
 
+- Change Choice scarf: additional target hit can now suffer from on-hit effects (like burn, poison, ghost silence...)
+- Upgrade, Magmarizer, Electirizer effects are now on-attack and no longer on-hit. That means they will trigger even if the attack is dodged or blocked.
+- Change Smoke Ball: trigger below ~~33%~~ 40% HP, blinded effect now only affects enemies and is no longer a permanent board effect, status duration 3 → 4 seconds
 - Buff Silk scarf: increase shield received by ~~30~~ 50%
 - Buff Metal Coat: also gives +5 special defense
-- Change Smoke Ball: trigger below ~~33%~~ 40% HP
+- Nerf Dynamax Band: ~~+250% HP~~ → +200% HP
+- Repeat ball no longer gives guaranteed synergy in shop. Instead, it gives a free shop reroll every 2 rerolls. Changed stats: 1% AP per 2 rolls → 1% Attack speed and 2 shield per 2 rolls
+
 
 # Gameplay
 
@@ -62,12 +77,21 @@
 - Added a surrender confirm modal when leaving the game before the end
 - Added synergy overlap filter in Wiki > Synergies
 - Added "Show evolutions" filter in Wiki > Synergies
+- Improvements to team planner:
+    - Double cliking or right clicking a pokemon adds it to the first empty slot found
+    - Added synergy overlaps filter
+    - Added a "Show evolutions" filter
+    - Added a "Show only available add picks / regional pokemons" filter
 
 # Bugfix
 
 - Pokemons of the same family cannot be proposed at the same time at stage 10 and stage 20 proposals
+- Fixed Resurrection duplicating and removing some effects
+- Fixed the chance for Ghost Pokemon to silence requiring Ghost 2
+- Fixed ability effects sometimes applying to ghost players
 
 # Misc
 
 - Increased allowed game reconnection time from 3 minutes to 5 minutes
+- Refresh key shortcut is now throttled to minimum 300ms before the next refresh, to prevent accidental double refresh
 - New title: Annihilator: get an Annihilape
