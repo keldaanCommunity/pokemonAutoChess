@@ -47,6 +47,7 @@
 
 # Changes to Synergies
 
+- Nerf Field speed boost: ~~20/25/30%~~ → 15/20/25%
 - Nerf Grass 3 healing: ~~7~~ → 5 HP every 2 seconds
 
 # Changes to Items

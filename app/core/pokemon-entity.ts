@@ -1673,13 +1673,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       let speedBoost = 0
       if (isWorkUp) {
         heal = 30
-        speedBoost = 20
+        speedBoost = 15
       } else if (isRage) {
         heal = 35
-        speedBoost = 25
+        speedBoost = 20
       } else if (isAngerPoint) {
         heal = 40
-        speedBoost = 30
+        speedBoost = 25
       }
       const _pokemon = this // beware of closure vars
       this.simulation.room.clock.setTimeout(() => {
@@ -1811,17 +1811,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    const stackingItems = [
-      Item.DEFENSIVE_RIBBON,
-      Item.SOUL_DEW,
-      Item.UPGRADE
-    ]
+    const stackingItems = [Item.DEFENSIVE_RIBBON, Item.SOUL_DEW, Item.UPGRADE]
 
-    const removedItems = [
-      Item.DYNAMAX_BAND,
-      Item.SACRED_ASH,
-      Item.MAX_REVIVE
-    ]
+    const removedItems = [Item.DYNAMAX_BAND, Item.SACRED_ASH, Item.MAX_REVIVE]
 
     stackingItems.forEach((item) => {
       if (this.items.has(item)) {
@@ -1866,12 +1858,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     const resetSoundStacks = (effect: Effect) => {
       const synergyLevel = SynergyEffects[Synergy.SOUND].indexOf(effect)
-      const attackBoost = ([2, 1, 1][synergyLevel] ?? 0) *
-        -this.count.soundCryCount
-      const attackSpeedBoost = ([0, 5, 5][synergyLevel] ?? 0) *
-        -this.count.soundCryCount
-      const manaBoost = ([0, 0, 3][synergyLevel] ?? 0) *
-        -this.count.soundCryCount
+      const attackBoost =
+        ([2, 1, 1][synergyLevel] ?? 0) * -this.count.soundCryCount
+      const attackSpeedBoost =
+        ([0, 5, 5][synergyLevel] ?? 0) * -this.count.soundCryCount
+      const manaBoost =
+        ([0, 0, 3][synergyLevel] ?? 0) * -this.count.soundCryCount
       this.addAttack(attackBoost, this, 0, false)
       this.addAttackSpeed(attackSpeedBoost, this, 0, false)
       this.addPP(manaBoost, this, 0, false)
