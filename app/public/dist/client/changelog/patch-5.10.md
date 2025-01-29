@@ -48,6 +48,7 @@
 - Buff Politoed: PP 100 → 90
 - Buff Wigglytuff: HP 210 → 250
 - Buff Grimmsnarl: Attack 24 → 26
+- Nerf Comfey: Now only grants base stats
 
 # Changes to Synergies
 

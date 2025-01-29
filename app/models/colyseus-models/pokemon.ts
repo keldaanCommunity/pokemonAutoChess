@@ -12712,38 +12712,7 @@ export class Comfey extends Pokemon {
         simulation.redDpsMeter.delete(entity.id)
       }
 
-      nearestAllyWithFreeItemSlot.items.add(Item.COMFEY)
-
-      // apply comfey stats
-      nearestAllyWithFreeItemSlot.addAbilityPower(entity.ap, entity, 0, false)
-      nearestAllyWithFreeItemSlot.addAttack(entity.atk, entity, 0, false)
-      nearestAllyWithFreeItemSlot.addAttackSpeed(
-        entity.atkSpeed - DEFAULT_ATK_SPEED,
-        entity,
-        0,
-        false
-      )
-      nearestAllyWithFreeItemSlot.addShield(entity.shield, entity, 0, false)
-      nearestAllyWithFreeItemSlot.addMaxHP(entity.hp, entity, 0, false)
-      nearestAllyWithFreeItemSlot.addDefense(entity.def, entity, 0, false)
-      nearestAllyWithFreeItemSlot.addSpecialDefense(
-        entity.speDef,
-        entity,
-        0,
-        false
-      )
-      nearestAllyWithFreeItemSlot.addCritChance(
-        entity.critChance - DEFAULT_CRIT_CHANCE,
-        entity,
-        0,
-        false
-      )
-      nearestAllyWithFreeItemSlot.addCritPower(
-        (entity.critPower - DEFAULT_CRIT_POWER) * 100,
-        entity,
-        0,
-        false
-      )
+      nearestAllyWithFreeItemSlot.addItem(Item.COMFEY)
     }
   }
 }
