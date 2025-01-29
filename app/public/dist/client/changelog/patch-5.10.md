@@ -47,6 +47,8 @@
 
 # Changes to Synergies
 
+- Nerf Grass 3 healing: ~~7~~ → 5 HP every 2 seconds
+
 # Changes to Items
 
 - Change Choice scarf: additional target hit can now suffer from on-hit effects (like burn, poison, etc)

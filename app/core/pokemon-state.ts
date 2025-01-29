@@ -673,7 +673,7 @@ export default abstract class PokemonState {
           ? 30
           : pokemon.effects.has(Effect.GROWTH)
             ? 15
-            : 7
+            : 5
         pokemon.handleHeal(heal, pokemon, 0, false)
         pokemon.grassHealCooldown = 2000
         pokemon.simulation.room.broadcast(Transfer.ABILITY, {

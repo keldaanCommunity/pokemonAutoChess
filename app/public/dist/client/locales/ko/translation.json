@@ -1861,7 +1861,7 @@
     "STRENGTH": "25 SHIELD 획득",
     "ENDURE": "35 SHIELD 획득",
     "PURE_POWER": "50 SHIELD 획득",
-    "INGRAIN": "2초당 7 HP 회복. 열매나무 1개 획득.",
+    "INGRAIN": "2초당 5 HP 회복. 열매나무 1개 획득.",
     "GROWTH": "2초당 15 HP 회복. 열매나무 2개 획득.",
     "SPORE": "2초당 30 HP 회복. 열매나무 3개 획득",
     "BLAZE": "[30,LK]% 확률로 BURN",
