@@ -56,8 +56,8 @@
 
 # Changes to Items
 
-- Change Choice scarf: additional target hit can now suffer from on-hit effects (like burn, poison, etc)
-- Upgrade, Magmarizer, Electirizer effects are now done on attack and no longer on hit. That means they will trigger even if the attack is dodged or blocked.
+- Change Choice scarf: additional target hit can now suffer from on-hit effects (like burn, poison, ghost silence...)
+- Upgrade, Magmarizer, Electirizer effects are now on-attack and no longer on-hit. That means they will trigger even if the attack is dodged or blocked.
 - Change Smoke Ball: trigger below ~~33%~~ 40% HP, blinded effect now only affects enemies and is no longer a permanent board effect, status duration 3 → 4 seconds
 - Buff Silk scarf: increase shield received by ~~30~~ 50%
 - Buff Metal Coat: also gives +5 special defense
