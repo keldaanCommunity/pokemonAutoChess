@@ -12,11 +12,10 @@ import {
   OnKillEffect
 } from "./effect"
 import { pickRandomIn } from "../utils/random"
-import { Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
+import { Pokemon } from "../models/colyseus-models/pokemon"
 import { PokemonEntity } from "./pokemon-entity"
 import { min } from "../utils/number"
-import { DEFAULT_ATK_SPEED, DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_POWER } from "../types/Config"
-import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
+import { DEFAULT_ATK_SPEED } from "../types/Config"
 import { Pkm } from "../types/enum/Pokemon"
 import PokemonFactory from "../models/pokemon-factory"
 

@@ -41,6 +41,7 @@
 - Torterra is no longer Flora ; Def 3/4/5 → 3/5/7 ; Growth ability cooldown 500→250ms
 - Nerf Tapu-Bulu: Def/Spedef: 5 → 3
 - Buff Lunatone/Solrock: PP 90 → 80
+- Nerf Comfey: Now only grants base stats
 
 # Changes to Synergies
 
