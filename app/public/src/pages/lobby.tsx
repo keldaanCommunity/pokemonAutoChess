@@ -76,7 +76,6 @@ export default function Lobby() {
               className="bubbly red"
               onClick={() => {
                 setGameToReconnect(null)
-                localStore.delete(LocalStoreKeys.RECONNECTION_GAME)
               }}
             >
               {t("no")}
