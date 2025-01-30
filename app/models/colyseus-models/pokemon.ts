@@ -473,7 +473,7 @@ export class Nickit extends Pokemon {
   atk = 8
   def = 1
   speDef = 1
-  maxPP = 50
+  maxPP = 100
   range = 2
   skill = Ability.THIEF
   attackSprite = AttackSprite.NORMAL_MELEE
@@ -488,7 +488,7 @@ export class Thievul extends Pokemon {
   atk = 19
   def = 2
   speDef = 2
-  maxPP = 50
+  maxPP = 100
   range = 2
   skill = Ability.THIEF
   attackSprite = AttackSprite.NORMAL_MELEE
