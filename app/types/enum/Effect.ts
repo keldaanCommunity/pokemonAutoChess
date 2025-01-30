@@ -142,7 +142,8 @@ export enum Effect {
   GOOD_LUCK = "GOOD_LUCK",
   BAD_LUCK = "BAD_LUCK",
   WONDER_ROOM = "WONDER_ROOM",
-  OBSTRUCT = "OBSTRUCT"
+  OBSTRUCT = "OBSTRUCT",
+  WATER_SPRING = "WATER_SPRING"
 }
 
 export const BoardEffects = [
