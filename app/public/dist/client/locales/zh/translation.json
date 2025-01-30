@@ -1514,7 +1514,7 @@
     "PECK": "对目标造成[10,30,50,SP]点SPECIAL。",
     "COUNTER": "对相邻的敌方宝可梦造成SPECIAL，数值相当于使用者[50,SP]%的已损失HP。",
     "COSMIC_POWER_MOON": "除使用者自身外的我方宝可梦提升[20,SP]点AP。",
-    "COSMIC_POWER_SUN": "除使用者自身外的我方宝可梦提升[25,SP]%的基础ATK。",
+    "COSMIC_POWER_SUN": "增加所有盟友神奇宝贝的基础 ATK [25,SP]%。",
     "ENTANGLING_THREAD": "对目标及相邻宝可梦造成[10,20,40,SP]点SPECIAL，并使他们陷入PARALYSIS 4秒。",
     "SILVER_WIND": "突进至敌方队伍的后排，对击中的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL，然后提升1点ATK、1点DEF、1点SPE_DEF、10点AP以及10%的ATK_SPEED。",
     "POISON_POWDER": "突进至敌方队伍的后排，对击中的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL，并使他们陷入POISONNED 5秒。",
