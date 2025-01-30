@@ -1382,15 +1382,7 @@ export default class Simulation extends Schema implements ISimulation {
           pkm.shieldDone
         )
 
-      if (
-        (!pkm.life || pkm.life <= 0) &&
-        !pkm.status.resurecting &&
-        !pkm.status.resurection
-      ) {
-        this.blueTeam.delete(key)
-      } else {
-        pkm.update(dt, this.board, this.weather, this.bluePlayer)
-      }
+      pkm.update(dt, this.board, this.weather, this.bluePlayer)
     })
 
     this.redTeam.forEach((pkm, key) => {
@@ -1407,15 +1399,7 @@ export default class Simulation extends Schema implements ISimulation {
           pkm.shieldDone
         )
 
-      if (
-        (!pkm.life || pkm.life <= 0) &&
-        !pkm.status.resurecting &&
-        !pkm.status.resurection
-      ) {
-        this.redTeam.delete(key)
-      } else {
-        pkm.update(dt, this.board, this.weather, this.redPlayer)
-      }
+      pkm.update(dt, this.board, this.weather, this.redPlayer)
     })
 
     if (this.weather === Weather.STORM) {
