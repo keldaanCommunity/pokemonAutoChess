@@ -107,6 +107,15 @@ export class DebugScene extends Phaser.Scene {
     if (animationType === "Emote") {
       animationName = AnimationConfig[pkm].emote
     }
+    if (animationType === "Hop") {
+      animationName = AnimationConfig[pkm].hop ?? AnimationType.Hop
+    }
+    if (animationType === "Hurt") {
+      animationName = AnimationConfig[pkm].hurt ?? AnimationType.Hurt
+    }
+    if (animationType === "Sleep") {
+      animationName = AnimationConfig[pkm].sleep ?? AnimationType.Sleep
+    }
 
     try {
       this.animationManager?.play(this.pokemon, animationName, { repeat: -1 })
