@@ -43,6 +43,8 @@ export enum Pkm {
   ARCHEN = "ARCHEN",
   ARCHEOPS = "ARCHEOPS",
   ARCTIBAX = "ARCTIBAX",
+  ARCTOVISH = "ARCTOVISH",
+  ARCTOZOLT = "ARCTOZOLT",
   ARIADOS = "ARIADOS",
   ARMALDO = "ARMALDO",
   ARON = "ARON",
@@ -1914,9 +1916,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.CUFANT]: "0878",
   //[Pkm.COPPERAJAH]: "0879",
   [Pkm.DRACOZOLT]: "0880",
-  //[Pkm.ARCTOZOLT]: "0881",
+  [Pkm.ARCTOZOLT]: "0881",
   [Pkm.DRACOVISH]: "0882",
-  //[Pkm.ARCTOVISH]: "0883",
+  [Pkm.ARCTOVISH]: "0883",
   //[Pkm.DURALUDON]: "0884",
   [Pkm.DREEPY]: "0885",
   [Pkm.DRAKLOAK]: "0886",
@@ -2954,6 +2956,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TORRACAT]: Pkm.LITTEN,
   [Pkm.INCINEROAR]: Pkm.LITTEN,
   [Pkm.DRACOZOLT]: Pkm.DRACOZOLT,
+  [Pkm.ARCTOZOLT]: Pkm.ARCTOZOLT,
+  [Pkm.ARCTOVISH]: Pkm.ARCTOVISH,
   [Pkm.CRYOGONAL]: Pkm.CRYOGONAL,
   [Pkm.DRAMPA]: Pkm.DRAMPA,
   [Pkm.SKRELP]: Pkm.SKRELP,
@@ -3099,6 +3103,9 @@ export const AnimationConfig: {
     attack: AnimationType
     ability: AnimationType
     emote: AnimationType
+    hop?: AnimationType
+    hurt?: AnimationType
+    sleep?: AnimationType
     shinyUnavailable?: boolean
     noShadow?: boolean
   }
@@ -7537,7 +7544,9 @@ export const AnimationConfig: {
   [Pkm.INKAY]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
-    emote: AnimationType.Twirl
+    emote: AnimationType.Twirl,
+    hurt: AnimationType.Idle,
+    hop: AnimationType.Twirl
   },
   [Pkm.MALAMAR]: {
     attack: AnimationType.Strike,
@@ -7612,6 +7621,20 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
+    shinyUnavailable: true
+  },
+  [Pkm.ARCTOZOLT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Stomp,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.ARCTOVISH]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Twirl,
+    hop: AnimationType.Twirl,
+    hurt: AnimationType.Idle,
+    sleep: AnimationType.Idle,
     shinyUnavailable: true
   },
   [Pkm.CRYOGONAL]: {

@@ -248,6 +248,9 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.COMFEY,
   Pkm.SABLEYE,
   Pkm.DRACOVISH,
+  Pkm.DRACOZOLT,
+  Pkm.ARCTOVISH,
+  Pkm.ARCTOZOLT,
   Pkm.GIMMIGHOUL,
   Pkm.BRUXISH,
   Pkm.CYCLIZAR,
@@ -280,7 +283,6 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.OGERPON_CORNERSTONE,
   Pkm.IRON_HANDS,
   Pkm.TURTONATOR,
-  Pkm.DRACOZOLT,
   Pkm.CRYOGONAL,
   Pkm.DRAMPA
 )

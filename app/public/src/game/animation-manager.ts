@@ -29,47 +29,32 @@ export default class AnimationManager {
 
     indexList.forEach((index) => {
       const tints = Object.values(PokemonTint) as PokemonTint[]
+      const pkm = PkmByIndex[index]
+      const pokemonData = getPokemonData(pkm)
       tints.forEach((shiny) => {
-        const actions: AnimationType[] = [
-          AnimationType.Idle,
-          AnimationType.Hurt
-        ]
+        if (!pkm && !AnimationConfig[pkm]) {
+          logger.warn(`No animation config for ${pkm}`)
+          return
+        }
+        const config = AnimationConfig[pkm]
 
-        const pkm = PkmByIndex[index]
-        const pokemonData = getPokemonData(pkm)
+        if (config.shinyUnavailable && shiny === PokemonTint.SHINY) return
+
+        const actions: Set<AnimationType> = new Set([AnimationType.Idle])
+        actions.add(config.hurt ?? AnimationType.Hurt)
 
         if (pokemonData.passive !== Passive.INANIMATE) {
-          actions.push(
-            AnimationType.Walk,
-            AnimationType.Sleep,
-            AnimationType.Hop
-          )
-        }
-
-        if (pkm && AnimationConfig[pkm]) {
-          if (
-            AnimationConfig[pkm].shinyUnavailable &&
-            shiny === PokemonTint.SHINY
-          )
-            return
-          const config = AnimationConfig[pkm]
-          if (!actions.includes(config.attack)) {
-            actions.push(config.attack)
-          }
-          if (!actions.includes(config.ability)) {
-            actions.push(config.ability)
-          }
-          if (!actions.includes(config.emote)) {
-            actions.push(config.emote)
-          }
-        } else {
-          actions.push(AnimationType.Attack)
+          actions.add(AnimationType.Walk)
+          actions.add(config.sleep ?? AnimationType.Sleep)
+          actions.add(config.hop ?? AnimationType.Hop)
+          actions.add(config.attack ?? AnimationType.Attack)
+          actions.add(config.ability ?? AnimationType.SpAttack)
+          actions.add(config.emote ?? AnimationType.Pose)
         }
 
         //logger.debug(`Init animations: ${index} => ${actions.join(",")}`)
 
         actions.forEach((action) => {
-          const config = AnimationConfig[pkm]
           const spriteTypes = config.noShadow
             ? [SpriteType.ANIM]
             : [SpriteType.ANIM, SpriteType.SHADOW]
@@ -236,20 +221,21 @@ export default class AnimationManager {
     state: PokemonActionState,
     entity: PokemonSprite
   ): AnimationType {
+    const config = AnimationConfig[PkmByIndex[entity.index]]
     switch (state) {
       case PokemonActionState.HOP:
       case PokemonActionState.FISH:
-        return AnimationType.Hop
+        return config?.hop ?? AnimationType.Hop
       case PokemonActionState.HURT:
-        return AnimationType.Hurt
+        return config?.hurt ?? AnimationType.Hurt
       case PokemonActionState.SLEEP:
-        return AnimationType.Sleep
+        return config?.sleep ?? AnimationType.Sleep
       case PokemonActionState.WALK:
         return AnimationType.Walk
       case PokemonActionState.ATTACK:
-        return AnimationConfig[PkmByIndex[entity.index]].attack
+        return config?.attack ?? AnimationType.Attack
       case PokemonActionState.EMOTE:
-        return AnimationConfig[PkmByIndex[entity.index]].emote
+        return config?.emote ?? AnimationType.Pose
       case PokemonActionState.IDLE:
       default:
         return AnimationType.Idle
