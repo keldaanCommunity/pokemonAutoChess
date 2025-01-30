@@ -6465,24 +6465,6 @@ export class Torkoal extends Pokemon {
   attackSprite = AttackSprite.FIRE_MELEE
 }
 
-export class Dracozolt extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.DRAGON,
-    Synergy.ELECTRIC,
-    Synergy.FOSSIL
-  ])
-  rarity = Rarity.UNIQUE
-  stars = 3
-  hp = 180
-  atk = 21
-  def = 3
-  speDef = 3
-  maxPP = 110
-  range = 1
-  skill = Ability.BOLT_BEAK
-  attackSprite = AttackSprite.ELECTRIC_MELEE
-}
-
 export class Heatmor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
   rarity = Rarity.UNIQUE
@@ -12778,8 +12760,8 @@ export class Pheromosa extends Pokemon {
 export class Dracovish extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
-    Synergy.FOSSIL,
-    Synergy.AQUATIC
+    Synergy.AQUATIC,
+    Synergy.FOSSIL
   ])
   rarity = Rarity.UNIQUE
   stars = 3
@@ -12787,10 +12769,60 @@ export class Dracovish extends Pokemon {
   atk = 21
   def = 3
   speDef = 3
-  maxPP = 110
+  maxPP = 100
   range = 1
   skill = Ability.FISHIOUS_REND
   attackSprite = AttackSprite.DRAGON_MELEE
+}
+
+export class Dracozolt extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.ELECTRIC,
+    Synergy.FOSSIL
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 180
+  atk = 21
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.BOLT_BEAK
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
+
+export class Arctozolt extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.ICE,
+    Synergy.FOSSIL
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 180
+  atk = 21
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.THUNDER_FANG
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
+
+export class Arctovish extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.WATER, Synergy.FOSSIL])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 180
+  atk = 21
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.ICE_FANG
+  attackSprite = AttackSprite.ICE_MELEE
 }
 
 export class Bruxish extends Pokemon {
@@ -16640,6 +16672,9 @@ export const PokemonClasses: Record<
   [Pkm.SABLEYE]: Sableye,
   [Pkm.MEGA_SABLEYE]: MegaSableye,
   [Pkm.DRACOVISH]: Dracovish,
+  [Pkm.DRACOZOLT]: Dracozolt,
+  [Pkm.ARCTOVISH]: Arctovish,
+  [Pkm.ARCTOZOLT]: Arctozolt,
   [Pkm.CORSOLA]: Corsola,
   [Pkm.GALAR_CORSOLA]: GalarCorsola,
   [Pkm.CURSOLA]: Cursola,
@@ -16841,7 +16876,6 @@ export const PokemonClasses: Record<
   [Pkm.LITTEN]: Litten,
   [Pkm.TORRACAT]: Torracat,
   [Pkm.INCINEROAR]: Incineroar,
-  [Pkm.DRACOZOLT]: Dracozolt,
   [Pkm.CRYOGONAL]: Cryogonal,
   [Pkm.DRAMPA]: Drampa,
   [Pkm.SKRELP]: Skrelp,

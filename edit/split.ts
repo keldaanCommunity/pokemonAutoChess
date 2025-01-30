@@ -233,30 +233,28 @@ async function splitIndex(index: string) {
       for (let k = 0; k < Object.values(SpriteType).length; k++) {
         const anim = Object.values(SpriteType)[k]
 
-        const actions: AnimationType[] = [
+        const actions: Set<AnimationType> = new Set([
           AnimationType.Idle,
-          AnimationType.Walk,
-          AnimationType.Sleep,
-          AnimationType.Hop,
-          AnimationType.Hurt
-        ]
+          AnimationType.Walk
+        ])
 
-        if (conf) {
-          if (!actions.includes(conf.attack)) {
-            actions.push(conf.attack)
-          }
-          if (!actions.includes(conf.ability)) {
-            actions.push(conf.ability)
-          }
-          if (!actions.includes(conf.emote)) {
-            actions.push(conf.emote)
-          }
-        } else {
-          actions.push(AnimationType.Attack)
+        if (!conf) {
+          logger.warn(
+            "Animation config not found for index",
+            index,
+            mapName.get(index)
+          )
+          continue
         }
 
-        for (let l = 0; l < actions.length; l++) {
-          const action = actions[l]
+        actions.add(conf.sleep ?? AnimationType.Sleep)
+        actions.add(conf.hop ?? AnimationType.Hop)
+        actions.add(conf.hurt ?? AnimationType.Hurt)
+        actions.add(conf.attack ?? AnimationType.Attack)
+        actions.add(conf.ability ?? AnimationType.SpAttack)
+        actions.add(conf.emote ?? AnimationType.Pose)
+
+        for (const action of actions) {
           let metadata = xmlData.AnimData.Anims.Anim.find(
             (m) => m.Name == action
           )
