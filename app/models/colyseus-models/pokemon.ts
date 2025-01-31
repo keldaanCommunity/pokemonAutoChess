@@ -3638,7 +3638,9 @@ export class Mudkip extends Pokemon {
   passive = Passive.WATER_SPRING
   attackSprite = AttackSprite.WATER_MELEE
 
-  beforeSimulationStart({opponentEffects}: {opponentEffects: Set<Effect> }): void {
+  beforeSimulationStart({
+    opponentEffects
+  }: { opponentEffects: Set<Effect> }): void {
     opponentEffects.add(Effect.WATER_SPRING)
   }
 }
@@ -3658,7 +3660,9 @@ export class Marshtomp extends Pokemon {
   passive = Passive.WATER_SPRING
   attackSprite = AttackSprite.WATER_MELEE
 
-  beforeSimulationStart({opponentEffects}: {opponentEffects: Set<Effect> }): void {
+  beforeSimulationStart({
+    opponentEffects
+  }: { opponentEffects: Set<Effect> }): void {
     opponentEffects.add(Effect.WATER_SPRING)
   }
 }
@@ -3677,7 +3681,9 @@ export class Swampert extends Pokemon {
   passive = Passive.WATER_SPRING
   attackSprite = AttackSprite.WATER_MELEE
 
-  beforeSimulationStart({opponentEffects}: {opponentEffects: Set<Effect> }): void {
+  beforeSimulationStart({
+    opponentEffects
+  }: { opponentEffects: Set<Effect> }): void {
     opponentEffects.add(Effect.WATER_SPRING)
   }
 }
@@ -12953,7 +12959,7 @@ export class Toxel extends Pokemon {
   range = 1
   skill = Ability.OVERDRIVE
   attackSprite = AttackSprite.ELECTRIC_MELEE
-  additional = true
+  regional = true
 }
 
 export class Toxtricity extends Pokemon {
@@ -12972,7 +12978,7 @@ export class Toxtricity extends Pokemon {
   range = 1
   skill = Ability.OVERDRIVE
   attackSprite = AttackSprite.ELECTRIC_MELEE
-  additional = true
+  regional = true
 }
 
 export class Cyclizar extends Pokemon {
