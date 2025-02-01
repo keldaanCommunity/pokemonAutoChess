@@ -1759,7 +1759,7 @@
     "COLUMN_CRUSH": "가장 가까운 빈 공간에 기둥을 건설한다. 전장에 이미 기둥이 있다면 그것에 도약하여 가장 가까운 적에게 기둥을 던져 기둥의 HP + [50,100,150,SP] SPECIAL를 가한다.",
     "WONDER_ROOM": "대상 주변에 기묘한 영역을 만들어 5초 동안 그 안에 있는 적들의 DEF 과 SPE_DEF 를 뒤바꾸고 기본 공격 피격 시 공격자의 AP 에 비례하여 SPECIAL 를 입는다.",
     "DARK_LARIAT": "팔을 휘둘러 여러 번 공격하며 대상의 후방으로 이동한다. 각 공격은 [100,SP]% ATK 만큼 SPECIAL 를 입힌다. 공격 횟수는 ATK_SPEED 에 비례한다. 대상은 피격 중에 FLINCH 상태이다.",
-    "BOLT_BEAK": "[80,SP] SPECIAL 를 가한다. 대상이 40 PP 이상이면 [160,SP] SPECIAL 를 가한다."
+    "BOLT_BEAK": "[80,SP] SPECIAL 를 가한다. 대상이 40 PP 이상이면 [160,SP] SPECIAL 를 가한다.",
     "FREEZE_DRY": "[70,SP] + 시전자의 SPE_DEF 의 [200,SP] % 만큼 SPECIAL 를 가한다. 대상 KO 시 폭발하여 주변에 [40,SP] + 시전자의 SPE_DEF 의 [150,SP] % 만큼 SPECIAL 를 가한다.",
     "DRAGON_PULSE": "대상과 주변 적들에게 [20,SP] SPECIAL 를 가하는 충격파를 발사한다. 충격파는 적들간에 울려퍼진다."
   },
