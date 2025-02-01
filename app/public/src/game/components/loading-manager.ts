@@ -131,6 +131,10 @@ export default class LoadingManager {
       await scene.preloadMaps(players.map((p) => p.map))
       preloadMusic(scene, DungeonDetails[player.map].music)
     }
+
+    scene.load.image("town_tileset", "/assets/tilesets/Town/tileset.png")
+    scene.load.tilemapTiledJSON("town", "/assets/tilesets/Town/town.json")
+
     scene.load.image("rain", "/assets/ui/rain.png")
     scene.load.image("sand", "/assets/ui/sand.png")
     scene.load.image("wind", "/assets/ui/wind.png")

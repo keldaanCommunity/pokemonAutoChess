@@ -112,7 +112,8 @@ export default class GameScene extends Scene {
         this.spectate ? playerUids[0] : this.uid
       ) as Player
 
-      this.setMap(player.map)
+      this.setMap("town")
+      //this.setMap(player.map)
       this.setupMouseEvents()
       this.battleGroup = this.add.group()
       this.animationManager = new AnimationManager(this)
@@ -154,7 +155,7 @@ export default class GameScene extends Scene {
         this,
         DungeonDetails[player.map].music ?? DungeonMusic.RANDOM_DUNGEON_1
       )
-      ;(this.sys as any).animatedTiles.init(this.map)
+      //;(this.sys as any).animatedTiles.init(this.map)
       clearTitleNotificationIcon()
     }
   }
@@ -283,7 +284,19 @@ export default class GameScene extends Scene {
     )
   }
 
-  async setMap(mapName: DungeonPMDO) {
+  async setMap(mapName: DungeonPMDO | "town") {
+    if (mapName === "town") {
+      this.map = this.add.tilemap("town")
+      const tileset = this.map.addTilesetImage("town_tileset", "town_tileset")!
+      this.map.createLayer("layer0", tileset, 0, 0)?.setScale(2, 2)
+      this.map.createLayer("layer1", tileset, 0, 0)?.setScale(2, 2)
+      const sys = this.sys as any
+      if (sys.animatedTiles) {
+        sys.animatedTiles.pause()
+      }
+      return
+    }
+
     const tilemap = this.tilemaps.get(mapName)
     if (!tilemap)
       return logger.error(`Tilemap not yet loaded for map ${mapName}`)
