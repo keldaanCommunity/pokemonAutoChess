@@ -55,6 +55,7 @@
 - Nerf Comfey: Now only grants base stats of Comfey when held, before any buff is applied
 - Nerf Thievul: PP 50 → 100
 - Dracovish is now Dragon/Aquatic/Fossil instead of Dragon/Fossil/Aquatic ; PP 110 → 100
+- Nerf Mesprit: remove AP scaling of charm duration for Song of Desire
 
 # Changes to Synergies
 

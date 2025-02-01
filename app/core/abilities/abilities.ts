@@ -432,7 +432,7 @@ export class SongOfDesireStrategy extends AbilityStrategy {
           duration,
           targetCharmed,
           pokemon,
-          true
+          false
         )
         targetCharmed.addAttack(-3, pokemon, 1, crit)
       }
