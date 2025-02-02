@@ -300,7 +300,9 @@ export interface DungeonPMDODetail {
   synergies: Synergy[]
   music: DungeonMusic
 }
-export const DungeonDetails: { [key in DungeonPMDO]: DungeonPMDODetail } = {
+export const DungeonDetails: {
+  [key in DungeonPMDO | "town"]: DungeonPMDODetail
+} = {
   [DungeonPMDO.AmpPlains]: {
     synergies: [Synergy.ELECTRIC, Synergy.FIELD, Synergy.AQUATIC],
     music: DungeonMusic.AMP_PLAINS
@@ -872,5 +874,9 @@ export const DungeonDetails: { [key in DungeonPMDO]: DungeonPMDODetail } = {
   [DungeonPMDO.ZeroIsleSouth2]: {
     synergies: [Synergy.ROCK, Synergy.GROUND, Synergy.FIGHTING],
     music: DungeonMusic.WIGGLYTUFFS_GUILD
+  },
+  town: {
+    synergies: [],
+    music: DungeonMusic.TREASURE_TOWN
   }
 }

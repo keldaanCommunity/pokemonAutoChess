@@ -533,6 +533,7 @@ export default class GameRoom extends Room<GameState> {
         }
       }
     })
+    this.miniGame.initialize(this.state, this)
   }
 
   async onAuth(client: Client, options, request) {
@@ -1057,11 +1058,9 @@ export default class GameRoom extends Room<GameState> {
       // update regional pokemons in case some regional variants of add picks are now available
       this.state.players.forEach((p) => p.updateRegionalPool(this.state, false))
 
-      if (
-        player.itemsProposition.length > 0 &&
-        player.itemsProposition[selectedIndex] != null
-      ) {
-        player.items.push(player.itemsProposition[selectedIndex])
+      const selectedItem = player.itemsProposition[selectedIndex]
+      if (player.itemsProposition.length > 0 && selectedItem != null) {
+        player.items.push(selectedItem)
         player.itemsProposition.clear()
       }
     }

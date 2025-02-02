@@ -363,7 +363,7 @@ export interface IPlayer {
   loadingProgress: number
   effects: Effects
   isBot: boolean
-  map: DungeonPMDO
+  map: DungeonPMDO | "town"
   regionalPokemons: ArraySchema<Pkm>
   commonRegionalPool: Pkm[]
   uncommonRegionalPool: Pkm[]

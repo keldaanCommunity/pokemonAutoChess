@@ -394,6 +394,7 @@ export const DEFAULT_CRIT_POWER = 2
 export const PROJECTILE_SPEED = 4
 
 export const StageDuration: Record<number | "DEFAULT", number> = {
+  0: 30,
   1: 30,
   3: 40,
   5: 40,
@@ -413,7 +414,7 @@ export const PORTAL_CAROUSEL_BASE_DURATION = 20000
 export const ItemCarouselStages = [4, 12, 17, 22, 27, 34]
 export const ItemProposalStages = [3, 15]
 export const AdditionalPicksStages = [5, 8, 11]
-export const PortalCarouselStages = [10, 20]
+export const PortalCarouselStages = [0, 10, 20]
 
 export const EloRankThreshold: { [key in EloRank]: number } = {
   [EloRank.LEVEL_BALL]: 0,
