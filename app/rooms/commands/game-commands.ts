@@ -860,7 +860,7 @@ export class OnUpdateCommand extends Command<
           this.state.time = 3000
           this.state.updatePhaseNeeded = true
         }
-      } else if (this.state.phase === GamePhaseState.MINIGAME) {
+      } else if (this.state.phase === GamePhaseState.TOWN) {
         this.room.miniGame.update(deltaTime)
       }
       if (this.state.updatePhaseNeeded && this.state.time < 0) {
@@ -873,7 +873,7 @@ export class OnUpdateCommand extends Command<
 export class OnUpdatePhaseCommand extends Command<GameRoom> {
   execute() {
     this.state.updatePhaseNeeded = false
-    if (this.state.phase == GamePhaseState.MINIGAME) {
+    if (this.state.phase == GamePhaseState.TOWN) {
       this.room.miniGame.stop(this.room)
       this.initializePickingPhase()
     } else if (this.state.phase == GamePhaseState.PICK) {
@@ -887,7 +887,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           PortalCarouselStages.includes(this.state.stageLevel)) &&
         !this.state.gameFinished
       ) {
-        this.initializeMinigamePhase()
+        this.initializeTownPhase()
       } else {
         this.initializePickingPhase()
       }
@@ -1388,8 +1388,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     }
   }
 
-  initializeMinigamePhase() {
-    this.state.phase = GamePhaseState.MINIGAME
+  initializeTownPhase() {
+    this.state.phase = GamePhaseState.TOWN
     const nbPlayersAlive = values(this.state.players).filter(
       (p) => p.alive
     ).length

@@ -45,7 +45,7 @@ export default class PokemonAvatar extends PokemonSprite {
     this.emoteBubble = null
     this.emoteMenu = null
     this.isCurrentPlayerAvatar = this.playerId === scene.uid
-    if (scene.room?.state.phase === GamePhaseState.MINIGAME) {
+    if (scene.room?.state.phase === GamePhaseState.TOWN) {
       this.drawCircles()
     } else if (!scouting) {
       this.drawLifebar()
@@ -128,7 +128,7 @@ export default class PokemonAvatar extends PokemonSprite {
     this.add(this.circleHitbox)
     this.circleHitbox.setDepth(-1)
     this.circleHitbox.setVisible(
-      scene.room?.state.phase === GamePhaseState.MINIGAME
+      scene.room?.state.phase === GamePhaseState.TOWN
     )
     this.circleTimer = new GameObjects.Graphics(scene)
     this.add(this.circleTimer)
@@ -253,7 +253,7 @@ export default class PokemonAvatar extends PokemonSprite {
 
     if (
       !this.isCurrentPlayerAvatar ||
-      scene.room?.state.phase === GamePhaseState.MINIGAME
+      scene.room?.state.phase === GamePhaseState.TOWN
     ) {
       return
     }

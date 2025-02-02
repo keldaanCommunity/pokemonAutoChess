@@ -21,7 +21,7 @@ export enum GameMode {
 export enum GamePhaseState {
   PICK,
   FIGHT,
-  MINIGAME
+  TOWN
 }
 
 export enum PokemonActionState {

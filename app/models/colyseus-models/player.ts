@@ -40,7 +40,7 @@ import {
   getPokemonData
 } from "../precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../precomputed/precomputed-rarity"
-import { getRegularsTier1, getSellPrice } from "../shop"
+import { getRegularsTier1 } from "../shop"
 import ExperienceManager from "./experience-manager"
 import HistoryItem from "./history-item"
 import { Pokemon, PokemonClasses } from "./pokemon"
@@ -92,7 +92,7 @@ export default class Player extends Schema implements IPlayer {
     pickRandomIn(Berries)
   ]
   @type(["uint8"]) berryTreesStage: number[] = [1, 1, 1]
-  @type("string") map: DungeonPMDO
+  @type("string") map: DungeonPMDO | "town"
   @type({ set: "string" }) effects: Effects = new Effects()
   @type(["string"]) regionalPokemons = new ArraySchema<Pkm>()
   @type("uint16") rerollCount: number = 0
@@ -145,7 +145,7 @@ export default class Player extends Schema implements IPlayer {
     this.pokemonCollection = new PokemonCollection(pokemonCollection)
     this.lightX = state.lightX
     this.lightY = state.lightY
-    this.map = pickRandomIn(DungeonPMDO)
+    this.map = "town"
     this.updateRegionalPool(state, true)
 
     if (isBot) {

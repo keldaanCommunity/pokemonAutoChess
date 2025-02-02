@@ -31,7 +31,7 @@ import { displayBoost } from "./boosts-animations"
 export enum BoardMode {
   PICK = "pick",
   BATTLE = "battle",
-  MINIGAME = "minigame"
+  TOWN = "town"
 }
 
 export default class BoardManager {
@@ -82,7 +82,7 @@ export default class BoardManager {
 
     if (state.phase == GamePhaseState.FIGHT) {
       this.battleMode()
-    } else if (state.phase === GamePhaseState.MINIGAME) {
+    } else if (state.phase === GamePhaseState.TOWN) {
       this.minigameMode()
     } else {
       this.pickMode()
@@ -416,7 +416,7 @@ export default class BoardManager {
       if (
         !spectatedPlayer ||
         spectatedPlayer.id === p.id || // can't scout yourself
-        this.mode === BoardMode.MINIGAME || // no scouting during minigame
+        this.mode === BoardMode.TOWN || // no scouting in town
         p.id === this.opponentAvatar?.playerId // avatar already in opponent box
       )
         return false
@@ -532,7 +532,8 @@ export default class BoardManager {
   }
 
   minigameMode() {
-    this.mode = BoardMode.MINIGAME
+    this.mode = BoardMode.TOWN
+    this.scene.setMap("town")
     this.hideLightCell()
     this.pokemons.forEach((pokemon) => {
       if (pokemon.positionY != 0) {
