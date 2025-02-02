@@ -67,7 +67,11 @@ import {
   max,
   min
 } from "../../utils/number"
-import { OrientationArray, effectInLine } from "../../utils/orientation"
+import {
+  OrientationArray,
+  effectInLine,
+  OrientationVector
+} from "../../utils/orientation"
 import {
   chance,
   pickNRandomIn,
@@ -11456,6 +11460,60 @@ export class DragonPulseStrategy extends AbilityStrategy {
   }
 }
 
+export class FrostBreathStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    crit = chance(pokemon.critChance / 100, pokemon) // can crit by default
+    super.process(pokemon, state, board, target, crit)
+    const damage = [35, 70, 120][pokemon.stars - 1] ?? 120
+
+    pokemon.orientation = board.orientation(
+      pokemon.positionX,
+      pokemon.positionY,
+      target.positionX,
+      target.positionY,
+      pokemon,
+      target
+    )
+    const [dx, dy] = OrientationVector[pokemon.orientation]
+
+    const orientations = [
+      pokemon.orientation,
+      OrientationArray[(OrientationArray.indexOf(pokemon.orientation) + 1) % 8],
+      OrientationArray[(OrientationArray.indexOf(pokemon.orientation) + 7) % 8]
+    ]
+
+    const cellsHit = [[pokemon.positionX + dx, pokemon.positionY + dy]]
+    for (const o of orientations) {
+      cellsHit.push([
+        pokemon.positionX + dx + OrientationVector[o][0],
+        pokemon.positionY + dy + +OrientationVector[o][1]
+      ])
+    }
+
+    cellsHit.forEach((cell) => {
+      const value = board.getValue(cell[0], cell[1])
+      if (value && value.team !== pokemon.team) {
+        value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        if (chance(0.5, pokemon)) {
+          value.status.triggerFreeze(2000, value)
+        }
+      }
+    })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -11878,5 +11936,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DARK_LARIAT]: new DarkLariatStrategy(),
   [Ability.BOLT_BEAK]: new BoltBeakStrategy(),
   [Ability.FREEZE_DRY]: new FreezeDryStrategy(),
-  [Ability.DRAGON_PULSE]: new DragonPulseStrategy()
+  [Ability.DRAGON_PULSE]: new DragonPulseStrategy(),
+  [Ability.FROST_BREATH]: new FrostBreathStrategy()
 }

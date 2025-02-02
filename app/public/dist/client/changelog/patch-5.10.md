@@ -12,6 +12,8 @@
 - Drampa
 - Skrelp
 - Dragalge
+- Cubchoo
+- Beartic
 
 # Changes to Pokemon & Abilities
 

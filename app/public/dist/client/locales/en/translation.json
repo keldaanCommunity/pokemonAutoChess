@@ -440,7 +440,8 @@
     "DARK_LARIAT": "Darkest Lariat",
     "BOLT_BEAK": "Bolt Beak",
     "FREEZE_DRY": "Freeze Dry",
-    "DRAGON_PULSE": "Dragon Pulse"
+    "DRAGON_PULSE": "Dragon Pulse",
+    "FROST_BREATH": "Frost Breath"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1340,7 +1341,9 @@
     "CRYOGONAL": "Cryogonal",
     "DRAMPA": "Drampa",
     "SKRELP": "Skrelp",
-    "DRAGALGE": "Dragalge"
+    "DRAGALGE": "Dragalge",
+    "CUBCHOO": "Cubchoo",
+    "BEARTIC": "Beartic"
   },
   "ability_description": {
     "SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1761,7 +1764,8 @@
     "DARK_LARIAT": "Swings arms and hits the target several times while moving behind them. Each hit deals [100,SP]% ATK as SPECIAL. Number of hits increase with ATK_SPEED. Target is FLINCH during the attack.",
     "BOLT_BEAK": "Deal [80,SP] SPECIAL, [160,SP] SPECIAL if the target has more than 40 PP.",
     "FREEZE_DRY": "Deals [70,SP] + [200,SP] % of the user's SPE_DEF as SPECIAL to the target. If target is KO, it explodes, and throws sharp ice at adjacent targets dealing [40,SP] + [150,SP] % of the user's SPE_DEF as SPECIAL.",
-    "DRAGON_PULSE": "A shockwave from the user's gaping mouth deals [20,SP] SPECIAL to the target and adjacent enemies. The shockwave then reverberates through the enemies."
+    "DRAGON_PULSE": "A shockwave from the user's gaping mouth deals [20,SP] SPECIAL to the target and adjacent enemies. The shockwave then reverberates through the enemies.",
+    "FROST_BREATH": "Blows a cold breath, dealing [30,60,120,SP] SPECIAL to enemies in a 2-cells range in a cone in front of the user, with [50,LK]% chance to FREEZE for 2 seconds. Can crit by default."
   },
   "effect": {
     "INGRAIN": "Ingrain",
