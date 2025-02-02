@@ -55,6 +55,7 @@
 - Nerf Comfey: Now only grants base stats of Comfey when held, before any buff is applied
 - Nerf Thievul: PP 50 → 100
 - Dracovish is now Dragon/Aquatic/Fossil instead of Dragon/Fossil/Aquatic ; PP 110 → 100
+- Eeveelutions now are properly considered as evolutions of Eevee. That means Eevee can hold eviolite, and Eeveelutions do not count several times for the same synergy when played together.
 
 # Changes to Synergies
 
