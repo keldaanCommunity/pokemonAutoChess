@@ -954,7 +954,7 @@ export default class GameRoom extends Room<GameState> {
 
     player.board.forEach((pokemon) => {
       if (
-        pokemon.evolution !== Pkm.DEFAULT &&
+        pokemon.hasEvolution &&
         pokemon.evolutionRule instanceof CountEvolutionRule
       ) {
         const pokemonEvolved = pokemon.evolutionRule.tryEvolve(

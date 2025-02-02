@@ -552,7 +552,7 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
-    if (item === Item.EVIOLITE && pokemon.evolution === Pkm.DEFAULT) {
+    if (item === Item.EVIOLITE && !pokemon.hasEvolution) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
     }
