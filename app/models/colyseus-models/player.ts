@@ -179,6 +179,32 @@ export default class Player extends Schema implements IPlayer {
     } else if (state.specialGameRule === SpecialGameRule.DO_IT_ALL_YOURSELF) {
       const { index, emotion, shiny } = getPokemonConfigFromAvatar(this.avatar)
       this.firstPartner = PkmByIndex[index]
+
+      switch (this.firstPartner) {
+        case Pkm.AEGISLASH_BLADE:
+          this.firstPartner = Pkm.AEGISLASH
+          break
+
+        case Pkm.HOOPA_UNBOUND:
+          this.firstPartner = Pkm.HOOPA
+          break
+
+        case Pkm.MINIOR_KERNEL_BLUE:
+        case Pkm.MINIOR_KERNEL_GREEN:
+        case Pkm.MINIOR_KERNEL_ORANGE:
+        case Pkm.MINIOR_KERNEL_RED:
+          this.firstPartner = Pkm.MINIOR
+          break
+
+        case Pkm.MORPEKO_HANGRY:
+          this.firstPartner = Pkm.MORPEKO
+          break
+          
+        case Pkm.DARMANITAN_ZEN:
+          this.firstPartner = Pkm.DARMANITAN
+          break
+      }
+
       let avatar: Pokemon
       if (this.firstPartner === Pkm.EGG) {
         avatar = createRandomEgg(shiny, this)
