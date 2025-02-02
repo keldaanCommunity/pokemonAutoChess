@@ -16006,6 +16006,37 @@ export class Dragalge extends Pokemon {
   additional = true
 }
 
+export class Cubchoo extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FIELD, Synergy.AQUATIC])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.BEARTIC
+  hp = 90
+  atk = 10
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.FROST_BREATH
+  attackSprite = AttackSprite.ICE_MELEE
+  additional = true
+}
+
+export class Beartic extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FIELD, Synergy.AQUATIC])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 200
+  atk = 25
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.FROST_BREATH
+  attackSprite = AttackSprite.ICE_MELEE
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -16910,5 +16941,7 @@ export const PokemonClasses: Record<
   [Pkm.CRYOGONAL]: Cryogonal,
   [Pkm.DRAMPA]: Drampa,
   [Pkm.SKRELP]: Skrelp,
-  [Pkm.DRAGALGE]: Dragalge
+  [Pkm.DRAGALGE]: Dragalge,
+  [Pkm.CUBCHOO]: Cubchoo,
+  [Pkm.BEARTIC]: Beartic
 }

@@ -64,6 +64,7 @@ export enum Pkm {
   BASTIODON = "BASTIODON",
   BAXCALIBUR = "BAXCALIBUR",
   BAYLEEF = "BAYLEEF",
+  BEARTIC = "BEARTIC",
   BEAUTIFLY = "BEAUTIFLY",
   BEEDRILL = "BEEDRILL",
   BEHEEYEM = "BEHEEYEM",
@@ -158,6 +159,7 @@ export enum Pkm {
   CROCALOR = "CROCALOR",
   CROCONAW = "CROCONAW",
   CRYOGONAL = "CRYOGONAL",
+  CUBCHOO = "CUBCHOO",
   CUBONE = "CUBONE",
   CURSOLA = "CURSOLA",
   CUTIEFLY = "CUTIEFLY",
@@ -1626,8 +1628,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.AXEW]: "0610",
   [Pkm.FRAXURE]: "0611",
   [Pkm.HAXORUS]: "0612",
-  //[Pkm.CUBCHOO]: "0613",
-  //[Pkm.BEARTIC]: "0614",
+  [Pkm.CUBCHOO]: "0613",
+  [Pkm.BEARTIC]: "0614",
   [Pkm.CRYOGONAL]: "0615",
   //[Pkm.SHELMET]: "0616",
   //[Pkm.ACCELGOR]: "0617",
@@ -2961,7 +2963,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.CRYOGONAL]: Pkm.CRYOGONAL,
   [Pkm.DRAMPA]: Pkm.DRAMPA,
   [Pkm.SKRELP]: Pkm.SKRELP,
-  [Pkm.DRAGALGE]: Pkm.SKRELP
+  [Pkm.DRAGALGE]: Pkm.SKRELP,
+  [Pkm.CUBCHOO]: Pkm.CUBCHOO,
+  [Pkm.BEARTIC]: Pkm.CUBCHOO
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7655,6 +7659,16 @@ export const AnimationConfig: {
   },
   [Pkm.DRAGALGE]: {
     attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.CUBCHOO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.BEARTIC]: {
+    attack: AnimationType.MultiStrike,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   }
