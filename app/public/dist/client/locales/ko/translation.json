@@ -54,6 +54,7 @@
     "POISON": "맹독",
     "SLEEP": "잠듦",
     "PROTECT": "방어",
+    "OBSTRUCT": "블로킹",
     "BLIZZARD": "눈보라",
     "CONFUSION": "염동력",
     "FIRE_BLAST": "불대문자",
@@ -436,7 +437,10 @@
     "HARDEN": "단단해지기",
     "COLUMN_CRUSH": "기둥분쇄",
     "WONDER_ROOM": "원더룸",
-    "DARK_LARIAT": "DD래리어트"
+    "DARK_LARIAT": "DD래리어트",
+    "BOLT_BEAK": "전격부리",
+    "FREEZE_DRY": "프리즈드라이",
+    "DRAGON_PULSE": "용의파동"
   },
   "pkm": {
     "DEFAULT": "미싱노",
@@ -929,6 +933,8 @@
     "GOTHITELLE": "고디모아젤",
     "SANDSHREW": "모래두지",
     "SANDSLASH": "고지",
+    "ALOLAN_SANDSHREW": "알로라 모래두지",
+    "ALOLAN_SANDSLASH": "알로라 고지",
     "FARFETCH_D": "파오리",
     "UNOWN_A": "안농-A",
     "UNOWN_B": "안농-B",
@@ -1130,10 +1136,16 @@
     "STOUTLAND": "바랜드",
     "ZIGZAGOON": "지그재구리",
     "LINOONE": "직구리",
+    "GALARIAN_ZIGZAGOON": "가라르 지그재구리",
+    "GALARIAN_LINOONE": "가라르 직구리",
+    "OBSTAGOON": "가로막구리",
     "PHEROMOSA": "페로코체",
     "SABLEYE": "깜까미",
     "MEGA_SABLEYE": "메가깜까미",
     "DRACOVISH": "어래곤",
+    "DRACOZOLT": "파치래곤",
+    "ARCTOVISH": "어치르돈",
+    "ARCTOZOLT": "파치르돈",
     "CORSOLA": "코산호",
     "GALAR_CORSOLA": "가라르코산호",
     "CURSOLA": "산호르곤",
@@ -1324,7 +1336,11 @@
     "BEHEEYEM": "벰크",
     "LITTEN": "냐오불",
     "TORRACAT": "냐오히트",
-    "INCINEROAR": "어흥염"
+    "INCINEROAR": "어흥염",
+    "CRYOGONAL": "프리지오",
+    "DRAMPA": "할비롱",
+    "SKRELP": "수레기",
+    "DRAGALGE": "드래캄"
   },
   "ability_description": {
     "SOFT_BOILED": "모든 아군 포켓몬의 상태이상효과를 회복하며 [20,40,80,SP] 만큼의 SHIELD를 부여한다.",
@@ -1359,6 +1375,7 @@
     "POISON": "가장 가까이있는 적 포켓몬 [1,2,3]마리에게 [3,6,9,SP=0.5]초간 POISONNED 상태로 만든다.",
     "SLEEP": "후방의 적포켓몬 [1,2,3]마리를 [2,SP]초만큼 SLEEP 상태로 만든다.",
     "PROTECT": "시전자가 PROTECT 상태가 되며, [1,3,5,SP=0.5]초간 무적상태가 된다.",
+    "OBSTRUCT": "시전자가 PROTECT 상태가 되며, [1,2,4,SP=0.5]초간 무적상태가 된다. 이 동안 피격 시마다 공격자의 DEF 을 2 감소시킨다.",
     "BLIZZARD": "모든 적포켓몬들에 [5,10,15,SP] SPECIAL 및 2초간의 FREEZE를 가한다. FREEZE 상태의 포켓몬에게는 두배의 대미지를 가한다.",
     "CONFUSION": "대상을 [3,5,7]초간 CONFUSION 및 SILENCE 상태로 만든다. 이미 대상이 CONFUSION 상태일 경우, 대신 [75,150,300,SP] SPECIAL 을 가한다.",
     "FIRE_BLAST": "大 모양의 화염을 발사하여 적중한 모든 적에게 [30,60,110,SP] SPECIAL 를 가한다.",
@@ -1741,7 +1758,10 @@
     "TOPSY_TURVY": "대상에게 [40,80,100,SP] SPECIAL를 가한다. 모든 ATK, DEF, SPE_DEF 버프와 디버프가 반전된다.",
     "COLUMN_CRUSH": "가장 가까운 빈 공간에 기둥을 건설한다. 전장에 이미 기둥이 있다면 그것에 도약하여 가장 가까운 적에게 기둥을 던져 기둥의 HP + [50,100,150,SP] SPECIAL를 가한다.",
     "WONDER_ROOM": "대상 주변에 기묘한 영역을 만들어 5초 동안 그 안에 있는 적들의 DEF 과 SPE_DEF 를 뒤바꾸고 기본 공격 피격 시 공격자의 AP 에 비례하여 SPECIAL 를 입는다.",
-    "DARK_LARIAT": "팔을 휘둘러 여러 번 공격하며 대상의 후방으로 이동한다. 각 공격은 [100,SP]% ATK 만큼 SPECIAL 를 입힌다. 공격 횟수는 ATK_SPEED 에 비례한다. 대상은 피격 중에 FLINCH 상태이다."
+    "DARK_LARIAT": "팔을 휘둘러 여러 번 공격하며 대상의 후방으로 이동한다. 각 공격은 [100,SP]% ATK 만큼 SPECIAL 를 입힌다. 공격 횟수는 ATK_SPEED 에 비례한다. 대상은 피격 중에 FLINCH 상태이다.",
+    "BOLT_BEAK": "[80,SP] SPECIAL 를 가한다. 대상이 40 PP 이상이면 [160,SP] SPECIAL 를 가한다.",
+    "FREEZE_DRY": "[70,SP] + 시전자의 SPE_DEF 의 [200,SP] % 만큼 SPECIAL 를 가한다. 대상 KO 시 폭발하여 주변에 [40,SP] + 시전자의 SPE_DEF 의 [150,SP] % 만큼 SPECIAL 를 가한다.",
+    "DRAGON_PULSE": "대상과 주변 적들에게 [20,SP] SPECIAL 를 가하는 충격파를 발사한다. 충격파는 적들간에 울려퍼진다."
   },
   "effect": {
     "INGRAIN": "뿌리박기",
@@ -2381,7 +2401,8 @@
     "ZYGARDE50": "최대 HP 의 30% 이하일 때, 모든 세포를 흡수하여 완전체 폼이 된다.",
     "GLIMMORA": "최대 HP의 50% 이하일 때, 전방의 2x3 칸에 독압정을 뿌려 20 피해를 입힌다. 독압정은 POISON 타입이 아닌 포켓몬에게 POISONNED 을 가한다.",
     "PILLAR": "기둥을 세워 적들의 경로를 방해한다. 시전자의 STAR 에 따라 HP, DEF, SPE_DEF 이 증가한다.",
-    "INANIMATE": "무생물 물체는 복사되거나 판매될 수 없다. 이동하거나 공격할 수 없으며 상태이상에 면역이다."
+    "INANIMATE": "무생물 물체는 복사되거나 판매될 수 없다. 이동하거나 공격할 수 없으며 상태이상에 면역이다.",
+    "BERSERK": "특성 발동 시마다 3 AP 을 획득한다."
   },
   "stat": {
     "ATK": "공격력",
@@ -2606,7 +2627,8 @@
     "GLUTTON": "폭식가",
     "STARGAZER": "천문학자",
     "BLOODY": "핏빛",
-    "ETERNAL": "영원한"
+    "ETERNAL": "영원한",
+    "ANNIHILATOR": "섬멸자"
   },
   "title_description": {
     "NOVICE": "첫 게임을 무사히 마치기",
@@ -2674,6 +2696,7 @@
     "SIREN": "밀로틱 만들기",
     "FEARSOME": "약어리(군집 형태) 만들기",
     "GOLDEN": "타부자고 만들기",
+    "ANNIHILATOR": "저승갓숭 만들기",
     "CHOSEN_ONE": "빛 시너지가 최대치까지 도달",
     "VANQUISHER": "랭크매치에서 승리하기",
     "OUTSIDER": "참가자 8명 중 가장 낮은 Elo를 가진 상태에서 랭크매치에서 승리하기",
@@ -2906,10 +2929,13 @@
   "type_here": "이곳에 입력하세요 ...",
   "send_message": "메세지 전송",
   "shiny_hunter": "이로치만 보기",
+  "refundable": "환불 가능",
   "show_all": "모두 보기",
   "show_locked": "잠겨진 감정표현만 보기",
   "show_unlockable": "해금가능한 감정표현만 보기",
   "show_unlocked": "해금된 감정표현만 보기",
+  "show_evolutions": "진화형태만 보기",
+  "show_only_available_picks": "유효한 추가/지역 기물만 보기",
   "sort_by_index": "도감 넘버로 정렬",
   "sort_by_shards": "파편의 갯수로 정렬",
   "normal_emotions": "기본 감정표현",
@@ -3007,6 +3033,7 @@
   "anonymous_users_name_hint": "익명 플레이어는 이름을 바꿀 수 없습니다.",
   "give_boosters": "부스터 제공",
   "heap_snapshot": "힙 스냅샷 작성",
+  "banned": "입장금지됨",
   "ban_user": "입장금지",
   "unban_user": "입장금지 해제",
   "set_moderator": "매니저 설정",
@@ -3110,6 +3137,7 @@
   "sprite_credit": "스프라이트 제작자",
   "bot_admin": "봇 관리자",
   "change_name": "이름 변경",
+  "invalid_username": "사용불가능한 이름입니다. 이름은 3자 이상 24자 이하여야 하며, 문자로 시작해야 하고, 문자 또는 숫자 또는 \".-_\" 만 포함할 수 있고, 공백은 불가합니다.",
   "change": "바꾸기",
   "change_avatar": "아바타 변경",
   "play_more_games_hint": "게임을 더 플레이하여 부스터를 얻고 새로운 아바타를 해금하세요!",
@@ -3142,8 +3170,11 @@
   "search_player": "플레이어 이름으로 찾기",
   "team_builder": "팀 계획하기",
   "titles_unlocked": "해금된 칭호",
+  "overlaps": "중복",
   "game-reconnect-modal-title": "게임에 재접속하기",
   "game-reconnect-modal-body": "진행중인 게임에서 나왔습니다. 이전 게임에 재접속하시겠습니까?",
+  "game_surrender-modal-title": "항복",
+  "game-surrender-modal-body": "게임이 진행중입니다. 항복하시겠습니까?",
   "toggle_locked": "잠금상태 보기",
   "creator": "제작자",
   "switch_server": "이 서버로 이동",
