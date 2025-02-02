@@ -440,7 +440,8 @@
     "DARK_LARIAT": "ＤＤ金钩臂",
     "BOLT_BEAK": "电喙",
     "FREEZE_DRY": "冷冻干燥",
-    "DRAGON_PULSE": "龙之波动"
+    "DRAGON_PULSE": "龙之波动",
+    "FROST_BREATH": "冰息"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1340,7 +1341,9 @@
     "CRYOGONAL": "几何雪花",
     "DRAMPA": "老翁龙",
     "SKRELP": "垃垃藻",
-    "DRAGALGE": "毒藻龙"
+    "DRAGALGE": "毒藻龙",
+    "CUBCHOO": "喷嚏熊",
+    "BEARTIC": "冻原熊"
   },
   "ability_description": {
     "SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1761,7 +1764,8 @@
     "DARK_LARIAT": "旋转双臂多次打向对手，同时移动至其背后。每次造成SPECIAL，数值相当于[100,SP]%的ATK。攻击次数随ATK_SPEED提升而增加。目标在此期间陷入FLINCH。",
     "BOLT_BEAK": "对目标造成[80,SP]点SPECIAL。若目标当前的PP高于40，改为造成[160,SP]点SPECIAL。",
     "FREEZE_DRY": "对目标造成SPECIAL，数值相当于[200,SP]%的SPE_DEF加上[70,SP]。若目标因此倒下，其会爆炸并射出冰刺，对相邻的敌方宝可梦造成SPECIAL，数值相当于[150,SP]%的SPE_DEF加上[40,SP]。",
-    "DRAGON_PULSE": "从大大的口中掀起冲击波，对目标和相邻敌方宝可梦造成[20,SP]点SPECIAL。冲击波会在敌方宝可梦之间回荡。"
+    "DRAGON_PULSE": "从大大的口中掀起冲击波，对目标和相邻敌方宝可梦造成[20,SP]点SPECIAL。冲击波会在敌方宝可梦之间回荡。",
+    "FROST_BREATH": "将冰冷的气息吹向敌方宝可梦，对前方2格半径的锥形区域内的敌方宝可梦造成[30,60,120,SP]点SPECIAL，并有[50,LK]%的概率使他们陷入FREEZE 2秒。该招式可以暴击。"
   },
   "effect": {
     "INGRAIN": "扎根",
