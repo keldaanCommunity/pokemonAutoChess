@@ -1,6 +1,6 @@
 .wiki-pokemon-detail {
   display: grid;
-  grid-template-columns: calc(320px + 1em) 16em 14em 1fr;
+  grid-template-columns: calc(320px + 1em) 18em 14em 1fr;
   gap: 1em;
   padding: 0.5em 0;
 }
@@ -14,16 +14,22 @@
   max-width: 330px;
 }
 
+.wiki-pokemon-detail dl {
+  display: grid;
+  grid-template-columns: 12ch auto;
+  height: fit-content;
+}
+
 .wiki-pokemon-detail dt {
   display: inline-block;
-  width: 12ch;
   text-align: right;
   color: #ccc;
 }
 
 .wiki-pokemon-detail dd {
-  display: inline;
+  text-align: left;
   white-space: pre-line;
+  margin: 0;
 }
 
 .wiki-pokemon-detail dt::after {
@@ -36,8 +42,11 @@
   display: block;
 }
 
+.wiki-pokemon-detail dl:nth-child(3) {
+  grid-template-columns: 16ch auto;
+}
+
 .wiki-pokemon-detail dl:nth-child(3) dt {
-  width: 16ch;
   text-align: left;
 }
 

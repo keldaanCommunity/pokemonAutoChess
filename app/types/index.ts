@@ -389,6 +389,7 @@ export interface IPokemon {
   rarity: Rarity
   index: string
   evolution: Pkm
+  evolutions: Pkm[]
   evolutionRule: EvolutionRule
   positionX: number
   positionY: number

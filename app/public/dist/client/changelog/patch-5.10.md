@@ -28,7 +28,7 @@
 - Buff Flash: radius 2 → 3 cells, duration 1.5/3/5 → 2/4/6 seconds
 - Buff Cut: 30 → 40% of target HP as special damage
 - Buff Bulk Up: stat buff 40% → 50%
-- All eeveelutions now have 100 max PP
+- All eeveelutions now have 100 max PP. Eeveelutions now are properly considered as evolutions of Eevee. That means Eevee can hold eviolite, and Eeveelutions do not count several times for the same synergy when played together.
 - Fix Spark ability targeting
 - Nerf High Jump Kick (Lopunny): steal up to ~~50~~ 40 PP
 - Nerf Rotom Drone: Def/Spedef 4 → 3
@@ -79,6 +79,7 @@
 # UI
 
 - Regional pokemons are now ordered by rarity in tooltip
+- Divergent evolutions are now shown in Wiki > Pokemons
 - Added a "refundable" checkbox filter in collection menu
 - Added a surrender confirm modal when leaving the game before the end
 - Added synergy overlap filter in Wiki > Synergies
