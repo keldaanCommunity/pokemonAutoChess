@@ -12,12 +12,15 @@
 - Drampa
 - Skrelp
 - Dragalge
+- Cubchoo
+- Beartic
 
 # Changes to Pokemon & Abilities
 
 - Electabuzz and Electivire are now Electric/Artificial/Human. Adjusted stat buffs from 5.9.
 - Tyrogue is now Fighting/Human/Baby
 - Hisui Voltorb no longer appears in Electric regions
+- Toxel line is now regional
 - Nerf Payday: AP scaling 1 -> 0.5, damage: 30/60/120 → 30/60/90
 - Meowth and Persian PP 90 → 80
 - Fix Rage cooldown and buff base attack instead of attack post-buffs
@@ -27,7 +30,7 @@
 - Buff Flash: radius 2 → 3 cells, duration 1.5/3/5 → 2/4/6 seconds
 - Buff Cut: 30 → 40% of target HP as special damage
 - Buff Bulk Up: stat buff 40% → 50%
-- All eeveelutions now have 100 max PP
+- All eeveelutions now have 100 max PP. Eeveelutions now are properly considered as evolutions of Eevee. That means Eevee can hold eviolite, and Eeveelutions do not count several times for the same synergy when played together.
 - Fix Spark ability targeting
 - Nerf High Jump Kick (Lopunny): steal up to ~~50~~ 40 PP
 - Nerf Rotom Drone: Def/Spedef 4 → 3
@@ -54,6 +57,7 @@
 - Nerf Comfey: Now only grants base stats of Comfey when held, before any buff is applied
 - Nerf Thievul: PP 50 → 100
 - Dracovish is now Dragon/Aquatic/Fossil instead of Dragon/Fossil/Aquatic ; PP 110 → 100
+- Nerf Mesprit: remove AP scaling of charm duration for Song of Desire
 
 # Changes to Synergies
 
@@ -78,6 +82,7 @@
 # UI
 
 - Regional pokemons are now ordered by rarity in tooltip
+- Divergent evolutions are now shown in Wiki > Pokemons
 - Added a "refundable" checkbox filter in collection menu
 - Added a surrender confirm modal when leaving the game before the end
 - Added synergy overlap filter in Wiki > Synergies

@@ -24,6 +24,7 @@ precomputedPokemons.forEach((pokemon) => {
     range: pokemon.range,
     types: values(pokemon.types) as Synergy[],
     evolution: pokemon.evolution === Pkm.DEFAULT ? null : pokemon.evolution,
+    evolutions: pokemon.evolutions,
     stages:
       pokemon.stages ??
       Math.max(
@@ -65,6 +66,7 @@ export function getPokemonData(name: Pkm): IPokemonData {
     skill: Ability.DEFAULT,
     passive: Passive.NONE,
     types: [],
-    evolution: null
+    evolution: null,
+    evolutions: []
   }
 }
