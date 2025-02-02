@@ -95,6 +95,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("string") emotion: Emotion
   @type("string") action: PokemonActionState = PokemonActionState.IDLE
   deathCount: number = 0
+  evolutions: Pkm[] = []
   evolutionRule: EvolutionRule = new CountEvolutionRule(3)
   additional = false
   regional = false
@@ -119,7 +120,7 @@ export class Pokemon extends Schema implements IPokemon {
   get final(): boolean {
     /* true if should be excluded from shops when obtained */
     return (
-      this.evolution === Pkm.DEFAULT ||
+      !this.hasEvolution ||
       (this.evolutionRule instanceof CountEvolutionRule === false &&
         this.passive !== Passive.CORSOLA)
     )
@@ -137,6 +138,10 @@ export class Pokemon extends Schema implements IPokemon {
       this.passive !== Passive.INANIMATE &&
       ![Pkm.DITTO, Pkm.EGG].includes(this.name)
     )
+  }
+
+  get hasEvolution(): boolean {
+    return this.evolution !== Pkm.DEFAULT || this.evolutions.length > 0
   }
 
   get doesCountForTeamSize(): boolean {
@@ -1910,7 +1915,7 @@ export class Poliwhirl extends Pokemon {
   ])
   rarity = Rarity.COMMON
   stars = 2
-  evolution = Pkm.POLITOED
+  evolutions = [Pkm.POLITOED, Pkm.POLIWRATH]
   hp = 120
   atk = 9
   def = 1
@@ -2123,7 +2128,7 @@ export class Cubone extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.GHOST])
   rarity = Rarity.EPIC
   stars = 1
-  evolution = Pkm.MAROWAK
+  evolutions = [Pkm.MAROWAK, Pkm.ALOLAN_MAROWAK]
   evolutionRule = new CountEvolutionRule(
     3,
     (pokemon: Pokemon, player: Player) => {
@@ -2293,7 +2298,7 @@ export class Goomy extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 1
-  evolution = Pkm.SLIGOO
+  evolutions = [Pkm.SLIGOO, Pkm.HISUI_SLIGGOO]
   evolutionRule = new CountEvolutionRule(
     3,
     (pokemon: Pokemon, player: Player) => {
@@ -2909,7 +2914,7 @@ export class Pikachu extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FAIRY])
   rarity = Rarity.COMMON
   stars = 2
-  evolution = Pkm.RAICHU
+  evolutions = [Pkm.RAICHU, Pkm.ALOLAN_RAICHU]
   evolutionRule = new CountEvolutionRule(
     3,
     (pokemon: Pokemon, player: Player) => {
@@ -3807,7 +3812,7 @@ export class Quilava extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
   rarity = Rarity.UNCOMMON
   stars = 2
-  evolution = Pkm.TYPHLOSION
+  evolutions = [Pkm.TYPHLOSION, Pkm.HISUIAN_TYPHLOSION]
   evolutionRule = new CountEvolutionRule(
     3,
     (pokemon: Pokemon, player: Player) => {
@@ -5403,7 +5408,16 @@ export class Eevee extends Pokemon {
   skill = Ability.HAPPY_HOUR
   passive = Passive.EEVEE
   attackSprite = AttackSprite.NORMAL_MELEE
-  evolution = Pkm.VAPOREON
+  evolutions = [
+    Pkm.VAPOREON,
+    Pkm.JOLTEON,
+    Pkm.FLAREON,
+    Pkm.ESPEON,
+    Pkm.UMBREON,
+    Pkm.LEAFEON,
+    Pkm.SYLVEON,
+    Pkm.GLACEON
+  ]
   evolutionRule = new ItemEvolutionRule(
     [
       Item.WATER_STONE,
@@ -7214,7 +7228,6 @@ export class Clamperl extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 1
-  evolution = Pkm.HUNTAIL
   hp = 100
   atk = 7
   def = 4
@@ -7225,6 +7238,7 @@ export class Clamperl extends Pokemon {
   passive = Passive.BIVALVE
   additional = true
   attackSprite = AttackSprite.WATER_MELEE
+  evolutions = [Pkm.HUNTAIL, Pkm.GOREBYSS]
   evolutionRule = new CountEvolutionRule(
     3,
     (pokemon: Pokemon, player: Player) => {
@@ -10770,7 +10784,6 @@ export class Tyrogue extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 2
-  evolution = Pkm.HITMONTOP
   hp = 150
   atk = 10
   def = 3
@@ -10780,7 +10793,7 @@ export class Tyrogue extends Pokemon {
   skill = Ability.MACH_PUNCH
   passive = Passive.TYROGUE
   attackSprite = AttackSprite.FIGHTING_MELEE
-
+  evolutions = [Pkm.HITMONTOP, Pkm.HITMONLEE, Pkm.HITMONCHAN]
   evolutionRule = new ItemEvolutionRule(AllItems, (pokemon, player, item_) => {
     const item = item_ as Item
     if (
@@ -11024,7 +11037,6 @@ export class Wurmple extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG])
   rarity = Rarity.EPIC
   stars = 1
-  evolution = Pkm.SILCOON
   hp = 110
   atk = 10
   def = 3
@@ -11033,6 +11045,7 @@ export class Wurmple extends Pokemon {
   range = 1
   skill = Ability.ENTANGLING_THREAD
   attackSprite = AttackSprite.BUG_MELEE
+  evolutions = [Pkm.SILCOON, Pkm.CASCOON]
   evolutionRule = new CountEvolutionRule(
     3,
     (pokemon: Pokemon, player: Player) => {
@@ -11503,7 +11516,7 @@ export class Exeggcute extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.PSYCHIC])
   rarity = Rarity.EPIC
   stars = 1
-  evolution = Pkm.EXEGGUTOR
+  evolutions = [Pkm.EXEGGUTOR, Pkm.ALOLAN_EXEGGUTOR]
   evolutionRule = new CountEvolutionRule(
     3,
     (pokemon: Pokemon, player: Player) => {
@@ -13490,8 +13503,8 @@ export class Cosmog extends Pokemon {
 export class Cosmoem extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.LIGHT])
   rarity = Rarity.UNIQUE
-  evolution = Pkm.LUNALA
   stars = 2
+  evolutions = [Pkm.SOLGALEO, Pkm.LUNALA]
   evolutionRule = new ConditionBasedEvolutionRule(
     (pokemon) => pokemon.evolutionRule.stacks >= 10,
     (pokemon, player) => {
@@ -15993,6 +16006,37 @@ export class Dragalge extends Pokemon {
   additional = true
 }
 
+export class Cubchoo extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FIELD, Synergy.AQUATIC])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.BEARTIC
+  hp = 90
+  atk = 10
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.FROST_BREATH
+  attackSprite = AttackSprite.ICE_MELEE
+  additional = true
+}
+
+export class Beartic extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FIELD, Synergy.AQUATIC])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 200
+  atk = 25
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.FROST_BREATH
+  attackSprite = AttackSprite.ICE_MELEE
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -16897,5 +16941,7 @@ export const PokemonClasses: Record<
   [Pkm.CRYOGONAL]: Cryogonal,
   [Pkm.DRAMPA]: Drampa,
   [Pkm.SKRELP]: Skrelp,
-  [Pkm.DRAGALGE]: Dragalge
+  [Pkm.DRAGALGE]: Dragalge,
+  [Pkm.CUBCHOO]: Cubchoo,
+  [Pkm.BEARTIC]: Beartic
 }

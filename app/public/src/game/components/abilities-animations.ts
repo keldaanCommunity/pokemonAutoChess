@@ -627,6 +627,18 @@ export function displayAbility(
       break
     }
 
+    case Ability.FROST_BREATH:
+      addAbilitySprite(skill, [coordinates[0], coordinates[1] - 30], true)
+        .setOrigin(-0.1, 0.5)
+        .setScale(4)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          )
+        )
+      break
+
     case Ability.ICICLE_CRASH:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(3)
       break

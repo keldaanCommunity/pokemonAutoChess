@@ -584,7 +584,10 @@ export default class GameRoom extends Room<GameState> {
         const player = this.state.players.get(client.auth.uid)
         const hasLeftGameBeforeTheEnd =
           player && player.life > 0 && !this.state.gameFinished
-        if (hasLeftGameBeforeTheEnd) {
+        const otherHumans = values(this.state.players).filter(
+          (p) => !p.isBot && p.id !== client.auth.uid
+        )
+        if (hasLeftGameBeforeTheEnd && otherHumans.length >= 1) {
           /* if a user leaves a game before the end, 
           they cannot join another in the next 5 minutes */
           this.presence.hset(
@@ -955,7 +958,7 @@ export default class GameRoom extends Room<GameState> {
 
     player.board.forEach((pokemon) => {
       if (
-        pokemon.evolution !== Pkm.DEFAULT &&
+        pokemon.hasEvolution &&
         pokemon.evolutionRule instanceof CountEvolutionRule
       ) {
         const pokemonEvolved = pokemon.evolutionRule.tryEvolve(
