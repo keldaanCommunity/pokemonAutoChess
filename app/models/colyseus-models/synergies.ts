@@ -126,12 +126,13 @@ export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
 }
 
 export function addSynergiesGivenByItems(pkm: IPokemon) {
-  for (const item of SynergyItems) {
+  pkm.items.forEach((item) => {
+    const synergy = SynergyGivenByItem[item]
     if (
-      pkm.items.has(item) &&
+      synergy &&
       !(pkm.passive === Passive.RECYCLE && ArtificialItems.includes(item))
     ) {
-      pkm.types.add(SynergyGivenByItem[item])
+      pkm.types.add(synergy)
     }
-  }
+  })
 }
