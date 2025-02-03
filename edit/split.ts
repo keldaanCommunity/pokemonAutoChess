@@ -191,7 +191,8 @@ async function splitIndex(index: string) {
   const pathIndex = index.replace("-", "/")
   const shinyPad =
     pathIndex.length == 4 ? `${pathIndex}/0000/0001` : `${pathIndex}/0001`
-  const conf = AnimationConfig[mapName.get(index) as Pkm]
+  const conf =
+    AnimationConfig[mapName.get(index) as Pkm] ?? AnimationConfig[Pkm.DEFAULT]
   const allPads = [pathIndex]
   if (!conf.shinyUnavailable) allPads.push(shinyPad)
 

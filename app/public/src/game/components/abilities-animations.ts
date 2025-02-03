@@ -648,11 +648,12 @@ export function displayAbility(
       break
 
     case Ability.TORMENT:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
-      break
-
     case Ability.RAGE:
-      addAbilitySprite(Ability.TORMENT, coordinates, true).setScale(2)
+      addAbilitySprite(
+        Ability.TORMENT,
+        [coordinates[0], coordinates[1] - 50],
+        true
+      ).setScale(2)
       break
 
     case Ability.STOMP:
@@ -693,7 +694,11 @@ export function displayAbility(
       break
 
     case Ability.NASTY_PLOT:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+      addAbilitySprite(
+        skill,
+        [coordinates[0], coordinates[1] - 50],
+        true
+      ).setScale(2)
       break
 
     case Ability.THIEF:
