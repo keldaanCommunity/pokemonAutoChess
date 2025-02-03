@@ -7366,7 +7366,8 @@ export const AnimationConfig: {
   [Pkm.OGERPON_CORNERSTONE_MASK]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Charge
+    emote: AnimationType.Charge,
+    shinyUnavailable: true
   },
   [Pkm.IRON_HANDS]: {
     attack: AnimationType.Attack,
