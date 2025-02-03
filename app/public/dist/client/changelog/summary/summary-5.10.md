@@ -19,6 +19,10 @@
 ![Cubchoo](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0613/Normal.png)
 ![Beartic](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0614/Normal.png)
 
-## On hit items
+## Items reworks
 
-Choice scarf, Upgrade, Magmarizer, Electirizer effects are now on-attack and no longer on-hit. That means they will trigger even if the attack is dodged or blocked.
+Choice scarf spread on-hit effects, Smoke Ball no longer blind your own team, Repeat ball provides free rolls instead of lucky shops, among other smaller changes to items
+
+## Common less common
+
+Uncommon rate has been increased at levels 4 and 5 at the expense of common rate.

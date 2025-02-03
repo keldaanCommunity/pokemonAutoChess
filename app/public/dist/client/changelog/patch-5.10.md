@@ -98,7 +98,7 @@
 
 # Bugfix
 
-- Pokemons of the same family cannot be proposed at the same time at stage 10 and stage 20 proposals
+- Several forms of Ogerpon cannot be proposed at the same time at stage 10
 - Fixed Resurrection duplicating and removing some effects
 - Fixed the chance for Ghost Pokemon to silence requiring Ghost 2
 - Fixed ability effects sometimes applying to ghost players
