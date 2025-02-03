@@ -116,15 +116,18 @@ export function WikiType(props: { type: Synergy }) {
           label={t("show_evolutions")}
           isDark
         />
-        <ul className="synergy-overlaps">
-          {overlaps.map(([type, nb]) => {
-            return <li onClick={() => setOverlap(overlap === type ? null : type)} key={type} className={cc({ active: overlap === type })}>
-              <SynergyIcon type={props.type} />
-              <SynergyIcon type={type} />
-              <span>{nb}</span>
-            </li>
-          })}
-        </ul>
+        <details>
+          <summary style={{ textAlign: "end" }}>{t("overlaps")}</summary>
+          <ul className="synergy-overlaps">
+            {overlaps.map(([type, nb]) => {
+              return <li onClick={() => setOverlap(overlap === type ? null : type)} key={type} className={cc({ active: overlap === type })}>
+                <SynergyIcon type={props.type} />
+                <SynergyIcon type={type} />
+                <span>{nb}</span>
+              </li>
+            })}
+          </ul>
+        </details>
       </div>
       <table>
         <tbody>
