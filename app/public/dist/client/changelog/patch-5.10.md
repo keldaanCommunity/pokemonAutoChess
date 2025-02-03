@@ -77,6 +77,9 @@
 
 # Gameplay
 
+- Uncommon & Common percentages in shop have been ajdusted for level 4 and 5:
+    - Level 4: Common 55% → 50%, Uncommon 35% → 40%
+    - Level 5: Common 40% → 36%, Uncommon 38% → 42%
 - Reduce Unique sell price: 15 → 10 gold (duo: 8 → 6 gold)
 
 # UI
