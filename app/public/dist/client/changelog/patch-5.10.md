@@ -63,6 +63,7 @@
 
 - Nerf Field speed boost: ~~20/25/30%~~ → 15/20/25%
 - Nerf Grass 3 healing: ~~7~~ → 5 HP every 2 seconds
+- Fire attack bonus is now on-attack and no longer on-hit. That means it will trigger even if the attack is dodged or blocked.
 
 # Changes to Items
 
