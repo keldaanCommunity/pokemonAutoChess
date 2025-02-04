@@ -4031,7 +4031,6 @@ export class Victreebel extends Pokemon {
   range = 1
   skill = Ability.ROOT
   attackSprite = AttackSprite.GRASS_MELEE
-  regional = true
 }
 
 /*export class Pikipek extends Pokemon {
