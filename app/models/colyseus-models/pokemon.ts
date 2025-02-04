@@ -12268,9 +12268,9 @@ export class Obstagoon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK, Synergy.SOUND])
   rarity = Rarity.RARE
   stars = 3
-  hp = 340
-  atk = 28
-  def = 10
+  hp = 280
+  atk = 24
+  def = 9
   speDef = 6
   maxPP = 100
   range = 1
