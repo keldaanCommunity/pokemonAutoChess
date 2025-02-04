@@ -4002,6 +4002,7 @@ export class Bellsprout extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROOT
+  passive = Passive.HATCH
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -4018,6 +4019,7 @@ export class Weepinbell extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROOT
+  passive = Passive.HATCH
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -4032,6 +4034,7 @@ export class Victreebel extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROOT
+  passive = Passive.HATCH
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
