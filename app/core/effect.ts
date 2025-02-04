@@ -121,7 +121,17 @@ export class OnHitEffect extends Effect {
   }
 }
 
-export class FireHitEffect extends OnHitEffect {
+export class OnAttackEffect extends Effect {
+  apply(entity: PokemonEntity, target: PokemonEntity, board: Board) {}
+  constructor(
+    effect?: (entity: PokemonEntity, target: PokemonEntity, board: Board) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
+
+export class FireHitEffect extends OnAttackEffect {
   count: number = 0
   synergyLevel: number
   constructor(
@@ -132,11 +142,7 @@ export class FireHitEffect extends OnHitEffect {
   }
 
   apply(pokemon, target, board) {
-    const burnChance = 0.3
     pokemon.addAttack(this.synergyLevel, pokemon, 0, false)
-    if (chance(burnChance, pokemon)) {
-      target.status.triggerBurn(2000, target, pokemon)
-    }
     this.count += 1
   }
 

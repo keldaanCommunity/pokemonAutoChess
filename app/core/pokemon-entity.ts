@@ -61,6 +61,7 @@ import {
   FireHitEffect,
   GrowGroundEffect,
   MonsterKillEffect,
+  OnAttackEffect,
   OnHitEffect,
   OnItemGainedEffect,
   OnItemRemovedEffect,
@@ -724,6 +725,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }) {
     this.addPP(ON_ATTACK_MANA, this, 0, false)
 
+    this.effectsSet.forEach((effect) => {
+      if (effect instanceof OnAttackEffect) {
+        effect.apply(this, target, board)
+      }
+    })
+
     if (this.items.has(Item.BLUE_ORB)) {
       this.count.staticHolderCount++
       if (this.count.staticHolderCount > 2) {
@@ -1056,6 +1063,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       freezeChance += nbIcyRocks * 0.05
       if (chance(freezeChance, this)) {
         target.status.triggerFreeze(2000, target)
+      }
+    }
+
+    if (this.hasSynergyEffect(Synergy.FIRE)) {
+      const burnChance = 0.3
+      if (chance(burnChance, this)) {
+        target.status.triggerBurn(2000, target, this)
       }
     }
 
