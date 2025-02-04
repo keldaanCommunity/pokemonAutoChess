@@ -3994,6 +3994,7 @@ export class Bellsprout extends Pokemon {
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.WEEPINBELL
+  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 70
   atk = 6
   def = 2
@@ -4009,6 +4010,7 @@ export class Weepinbell extends Pokemon {
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.VICTREEBEL
+  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 160
   atk = 12
   def = 3
