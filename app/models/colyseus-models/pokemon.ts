@@ -4031,7 +4031,6 @@ export class Victreebel extends Pokemon {
   range = 1
   skill = Ability.ROOT
   attackSprite = AttackSprite.GRASS_MELEE
-  regional = true
 }
 
 /*export class Pikipek extends Pokemon {
@@ -12236,7 +12235,7 @@ export class GalarianZigzagoon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
   rarity = Rarity.RARE
   stars = 1
-  evolution = Pkm.LINOONE
+  evolution = Pkm.GALARIAN_LINOONE
   hp = 80
   atk = 7
   def = 5
