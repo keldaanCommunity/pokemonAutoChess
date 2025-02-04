@@ -42,6 +42,15 @@ export default function WikiTutorials() {
           ></iframe>
           <h3>How to manage your economy</h3>
         </li>
+        <li className="my-box">
+          <iframe
+            src="https://www.youtube.com/embed/4IPNEnEbvdE"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          ></iframe>
+          <h3>101 Tips and Tricks for Becoming a Pro</h3>
+        </li>
       </ul>
       <p>
         {t("thanks_to")}&nbsp;
@@ -59,6 +68,10 @@ export default function WikiTutorials() {
         {", "}
         <a href="https://www.youtube.com/@ggillou1778" target="_blank">
           JMT
+        </a>{" "}
+        {", "}
+        <a href="https://www.youtube.com/@biggerweff" target="_blank">
+          Bigweff
         </a>{" "}
         {t("tutorial_work")}
       </p>
