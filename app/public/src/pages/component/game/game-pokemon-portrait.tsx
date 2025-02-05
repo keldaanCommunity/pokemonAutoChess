@@ -63,14 +63,14 @@ export default function GamePokemonPortrait(props: {
       board.forEach &&
       !isOnAnotherBoard &&
       props.pokemon &&
-      pokemon
+      pokemon &&
+      pokemon.hasEvolution
     ) {
       board.forEach((p) => {
-        if (p.name === pokemon.name && p.hasEvolution) {
+        if (p.name === pokemon.name) {
           _count++
         } else if (
-          PkmFamily[p.name] === pokemon.name &&
-          p.hasEvolution
+          PkmFamily[p.name] === pokemon.name
         ) {
           _countEvol++
         }
