@@ -112,7 +112,7 @@ export default function GamePokemonPortrait(props: {
     pokemonEvolution.hasEvolution
   ) {
     const evolutionName2 = currentPlayer
-      ? pokemonEvolution.evolutionRule.getEvolution(pokemon, currentPlayer)
+      ? pokemonEvolution.evolutionRule.getEvolution(pokemonEvolution, currentPlayer)
       : pokemonEvolution.evolutions[0] ?? pokemonEvolution.evolution
     pokemonEvolution = PokemonFactory.createPokemonFromName(evolutionName2)
   }
