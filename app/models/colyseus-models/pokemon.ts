@@ -1928,7 +1928,7 @@ export class Poliwhirl extends Pokemon {
 
   evolutionRule = new CountEvolutionRule(
     3,
-    (pokemon: Pokemon, player: Player) => {
+    (pokemon: Pokemon, player: IPlayer) => {
       if (
         Math.max(
           ...values(player.board)
@@ -2131,7 +2131,7 @@ export class Cubone extends Pokemon {
   evolutions = [Pkm.MAROWAK, Pkm.ALOLAN_MAROWAK]
   evolutionRule = new CountEvolutionRule(
     3,
-    (pokemon: Pokemon, player: Player) => {
+    (pokemon: Pokemon, player: IPlayer) => {
       if (player.regionalPokemons.includes(Pkm.ALOLAN_MAROWAK))
         return Pkm.ALOLAN_MAROWAK
       else return Pkm.MAROWAK
@@ -2301,7 +2301,7 @@ export class Goomy extends Pokemon {
   evolutions = [Pkm.SLIGOO, Pkm.HISUI_SLIGGOO]
   evolutionRule = new CountEvolutionRule(
     3,
-    (pokemon: Pokemon, player: Player) => {
+    (pokemon: Pokemon, player: IPlayer) => {
       if (player.regionalPokemons.includes(Pkm.HISUI_SLIGGOO))
         return Pkm.HISUI_SLIGGOO
       else return Pkm.SLIGOO
@@ -2917,7 +2917,7 @@ export class Pikachu extends Pokemon {
   evolutions = [Pkm.RAICHU, Pkm.ALOLAN_RAICHU]
   evolutionRule = new CountEvolutionRule(
     3,
-    (pokemon: Pokemon, player: Player) => {
+    (pokemon: Pokemon, player: IPlayer) => {
       if (player.regionalPokemons.includes(Pkm.ALOLAN_RAICHU))
         return Pkm.ALOLAN_RAICHU
       else return Pkm.RAICHU
@@ -3815,7 +3815,7 @@ export class Quilava extends Pokemon {
   evolutions = [Pkm.TYPHLOSION, Pkm.HISUIAN_TYPHLOSION]
   evolutionRule = new CountEvolutionRule(
     3,
-    (pokemon: Pokemon, player: Player) => {
+    (pokemon: Pokemon, player: IPlayer) => {
       if (player.regionalPokemons.includes(Pkm.HISUIAN_TYPHLOSION))
         return Pkm.HISUIAN_TYPHLOSION
       else return Pkm.TYPHLOSION
@@ -7244,7 +7244,7 @@ export class Clamperl extends Pokemon {
   evolutions = [Pkm.HUNTAIL, Pkm.GOREBYSS]
   evolutionRule = new CountEvolutionRule(
     3,
-    (pokemon: Pokemon, player: Player) => {
+    (pokemon: Pokemon, player: IPlayer) => {
       if (
         Math.max(
           ...values(player.board)
@@ -11051,7 +11051,7 @@ export class Wurmple extends Pokemon {
   evolutions = [Pkm.SILCOON, Pkm.CASCOON]
   evolutionRule = new CountEvolutionRule(
     3,
-    (pokemon: Pokemon, player: Player) => {
+    (pokemon: Pokemon, player: IPlayer) => {
       if (player.regionalPokemons.includes(Pkm.CASCOON)) return Pkm.CASCOON
       else return Pkm.SILCOON
     }
@@ -11522,7 +11522,7 @@ export class Exeggcute extends Pokemon {
   evolutions = [Pkm.EXEGGUTOR, Pkm.ALOLAN_EXEGGUTOR]
   evolutionRule = new CountEvolutionRule(
     3,
-    (pokemon: Pokemon, player: Player) => {
+    (pokemon: Pokemon, player: IPlayer) => {
       if (player.regionalPokemons.includes(Pkm.ALOLAN_EXEGGUTOR))
         return Pkm.ALOLAN_EXEGGUTOR
       else return Pkm.EXEGGUTOR
