@@ -91,7 +91,10 @@ export default function GamePokemonPortrait(props: {
 
   const rarityColor = RarityColor[pokemon.rarity]
 
-  let pokemonEvolution = PokemonFactory.createPokemonFromName(pokemon.evolution)
+  const evolutionName = currentPlayer
+    ? pokemon.evolutionRule.getEvolution(pokemon, currentPlayer)
+    : pokemon.evolutions[0] ?? pokemon.evolution
+  let pokemonEvolution = PokemonFactory.createPokemonFromName(evolutionName)
 
   const willEvolve =
     pokemon.evolutionRule instanceof CountEvolutionRule &&
@@ -107,8 +110,12 @@ export default function GamePokemonPortrait(props: {
     count === pokemon.evolutionRule.numberRequired - 1 &&
     countEvol === pokemon.evolutionRule.numberRequired - 1 &&
     pokemonEvolution.hasEvolution
-  )
-    pokemonEvolution = PokemonFactory.createPokemonFromName(pokemonEvolution.evolution)
+  ) {
+    const evolutionName2 = currentPlayer
+      ? pokemonEvolution.evolutionRule.getEvolution(pokemon, currentPlayer)
+      : pokemonEvolution.evolutions[0] ?? pokemonEvolution.evolution
+    pokemonEvolution = PokemonFactory.createPokemonFromName(evolutionName2)
+  }
 
   const pokemonInPortrait =
     willEvolve && pokemonEvolution
