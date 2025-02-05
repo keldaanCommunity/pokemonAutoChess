@@ -66,11 +66,11 @@ export default function GamePokemonPortrait(props: {
       pokemon
     ) {
       board.forEach((p) => {
-        if (p.name === pokemon.name && p.evolution !== Pkm.DEFAULT) {
+        if (p.name === pokemon.name && p.hasEvolution) {
           _count++
         } else if (
           PkmFamily[p.name] === pokemon.name &&
-          p.evolution !== Pkm.DEFAULT
+          p.hasEvolution
         ) {
           _countEvol++
         }
@@ -91,8 +91,7 @@ export default function GamePokemonPortrait(props: {
 
   const rarityColor = RarityColor[pokemon.rarity]
 
-  let pokemonEvolution = pokemon.evolution
-  const pokemonEvolution2 = getPokemonData(pokemonEvolution).evolution
+  let pokemonEvolution = PokemonFactory.createPokemonFromName(pokemon.evolution)
 
   const willEvolve =
     pokemon.evolutionRule instanceof CountEvolutionRule &&
@@ -100,20 +99,20 @@ export default function GamePokemonPortrait(props: {
 
   const shouldShimmer =
     pokemon.evolutionRule instanceof CountEvolutionRule &&
-    ((count > 0 && pokemonEvolution !== Pkm.DEFAULT) ||
-      (countEvol > 0 && pokemonEvolution2 !== Pkm.DEFAULT))
+    ((count > 0 && pokemon.hasEvolution) ||
+      (countEvol > 0 && pokemonEvolution.hasEvolution))
 
   if (
     pokemon.evolutionRule instanceof CountEvolutionRule &&
     count === pokemon.evolutionRule.numberRequired - 1 &&
     countEvol === pokemon.evolutionRule.numberRequired - 1 &&
-    pokemonEvolution2 != null
+    pokemonEvolution.hasEvolution
   )
-    pokemonEvolution = pokemonEvolution2
+    pokemonEvolution = PokemonFactory.createPokemonFromName(pokemonEvolution.evolution)
 
   const pokemonInPortrait =
     willEvolve && pokemonEvolution
-      ? PokemonFactory.createPokemonFromName(pokemonEvolution)
+      ? pokemonEvolution
       : pokemon
   const pokemonInPortraitConfig = pokemonCollection.get(pokemonInPortrait.index)
 
