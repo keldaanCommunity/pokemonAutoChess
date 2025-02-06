@@ -517,8 +517,11 @@ export default class Player extends Schema implements IPlayer {
     resetArraySchema(
       this.regionalPokemons,
       newRegionalPokemons.filter(
-        (p, index, array) =>
-          array.findIndex((p2) => PkmFamily[p] === PkmFamily[p2]) === index // dedup same family
+        (p, index, array) => {
+          const evolution = getPokemonData(PkmFamily[p]).evolution
+          return array.findIndex((p2) => PkmFamily[p] === PkmFamily[p2]) === index && // dedup same family
+            !(evolution === p || (evolution && getPokemonData(evolution).evolution === p)) // exclude non divergent evos
+        }
       )
     )
   }
