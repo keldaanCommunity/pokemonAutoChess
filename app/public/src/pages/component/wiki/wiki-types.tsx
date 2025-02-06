@@ -58,11 +58,15 @@ export function WikiType(props: { type: Synergy }) {
     .filter((p) => p !== Pkm.DEFAULT)
     .map((p) => getPokemonData(p))
     .sort((a, b) => a.stars - b.stars) // put first stage first
-    .filter((p) => {
+    .filter((p, index, list) => {
       if (p.skill === Ability.DEFAULT) return false // pokemons with no ability are not ready for the show
       if (p.rarity === Rarity.SPECIAL) return true // show all summons & specials, even in the same family
       if (showEvolutions) return true
-      else return p.name === PkmFamily[p.name]
+
+      // remove if already one member of family in the list
+      else return (
+        list.findIndex((p2) => PkmFamily[p.name] === PkmFamily[p2.name]) === index
+      )
     })
 
   const filteredPokemons = pokemons
