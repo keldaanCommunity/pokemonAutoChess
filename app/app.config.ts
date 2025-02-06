@@ -237,7 +237,10 @@ export default config({
     })
 
     app.get("/bots", async (req, res) => {
-      res.send(getBotsList({ withSteps: req.query.withSteps === "true" }))
+      const botsData = await getBotsList({
+        withSteps: req.query.withSteps === "true"
+      })
+      res.send(botsData)
     })
 
     app.post("/bots", async (req, res) => {
