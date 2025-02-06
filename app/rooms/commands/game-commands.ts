@@ -176,9 +176,10 @@ export class OnPokemonCatchCommand extends Command<
   {
     playerId: string
     pkm: Pkm
+    id: string
   }
 > {
-  execute({ playerId, pkm }) {
+  execute({ playerId, pkm, id }) {
     if (
       playerId === undefined ||
       pkm === undefined ||
@@ -187,6 +188,9 @@ export class OnPokemonCatchCommand extends Command<
       return
     const player = this.state.players.get(playerId)
     if (!player) return
+
+    if (this.state.wanderers.has(id) === false) return
+    this.state.wanderers.delete(id)
 
     const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
     const freeSpaceOnBench = getFreeSpaceOnBench(player.board)
@@ -1521,9 +1525,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
         const UNOWN_ENCOUNTER_CHANCE = 0.037
         if (chance(UNOWN_ENCOUNTER_CHANCE)) {
+          const pkm = pickRandomIn(Unowns)
+          const id = nanoid()
+          this.state.wanderers.add(id)
           setTimeout(
             () => {
-              client.send(Transfer.UNOWN_WANDERING)
+              client.send(Transfer.UNOWN_WANDERING, { id, pkm })
             },
             Math.round((5 + 15 * Math.random()) * 1000)
           )
@@ -1535,12 +1542,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         ) {
           const nbPokemonsToSpawn = Math.ceil(this.state.stageLevel / 2)
           for (let i = 0; i < nbPokemonsToSpawn; i++) {
+            const id = nanoid()
+            const pkm = this.state.shop.pickPokemon(player, this.state)
+            this.state.wanderers.add(id)
             setTimeout(
               () => {
-                client.send(
-                  Transfer.POKEMON_WANDERING,
-                  this.state.shop.pickPokemon(player, this.state)
-                )
+                client.send(Transfer.POKEMON_WANDERING, { id, pkm })
               },
               4000 + i * 400
             )

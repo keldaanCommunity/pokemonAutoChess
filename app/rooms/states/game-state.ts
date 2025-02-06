@@ -61,6 +61,7 @@ export default class GameState extends Schema {
   pveRewardsPropositions: Item[] = []
   minRank: EloRank | null = null
   maxRank: EloRank | null = null
+  wanderers: Set<string> = new Set()
 
   constructor(
     preparationId: string,

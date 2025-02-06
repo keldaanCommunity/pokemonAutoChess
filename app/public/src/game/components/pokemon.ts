@@ -1124,9 +1124,11 @@ export default class PokemonSprite extends DraggableObject {
 
 export function addWanderingPokemon(
   scene: GameScene,
+  id: string,
   pkm: Pkm,
   onClick: (
     pokemon: PokemonSprite,
+    id: string,
     pointer: Phaser.Input.Pointer,
     tween: Phaser.Tweens.Tween
   ) => void
@@ -1174,6 +1176,6 @@ export function addWanderingPokemon(
   pokemon.draggable = false
   pokemon.sprite.setInteractive()
   pokemon.sprite.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
-    onClick(pokemon, pointer, tween)
+    onClick(pokemon, id, pointer, tween)
   })
 }
