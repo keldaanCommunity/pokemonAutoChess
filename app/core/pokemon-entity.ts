@@ -1847,7 +1847,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     })
 
     const resetGroundStacks = (effect: GrowGroundEffect) => {
-      const removalAmount = effect.synergyLevel * effect.count
+      const removalAmount = -effect.synergyLevel * effect.count
       this.addDefense(removalAmount, this, 0, false)
       this.addSpecialDefense(removalAmount, this, 0, false)
       this.addAttack(removalAmount, this, 0, false)
