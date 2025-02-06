@@ -74,10 +74,15 @@ export function WikiType(props: { type: Synergy }) {
 
   const pokemonsPerRarity = groupBy(filteredPokemons, (p) => p.rarity)
   for (const rarity in pokemonsPerRarity) {
-    pokemonsPerRarity[rarity].sort((a: IPokemonData, b: IPokemonData) => {
+    const families = groupBy(pokemonsPerRarity[rarity as Rarity], (p) => PkmFamily[p.name])
+    pokemonsPerRarity[rarity] = Object.values(families).sort((fa, fb) => {
+      const a = fa[0], b = fb[0]
       if (a.regional !== b.regional) return +a.regional - +b.regional
       if (a.additional !== b.additional) return +a.additional - +b.additional
-      return a.index < b.index ? -1 : 1
+      return a.index.localeCompare(b.index)
+    }).flat().sort((a, b) => {
+      if (PkmFamily[a.name] === PkmFamily[b.name]) return a.stars - b.stars
+      return 0
     })
   }
 
@@ -85,7 +90,7 @@ export function WikiType(props: { type: Synergy }) {
     Object.values(Synergy)
       .filter(type => type !== props.type)
       .map(type => [type, pokemons.filter((p, i, list) => p.types.includes(type) &&
-        list.findIndex((q) => PkmFamily[p.name] === PkmFamily[q.name]) === i
+        list.findIndex((q) => q.types.includes(type) && PkmFamily[p.name] === PkmFamily[q.name]) === i
       ).length])
   )
 
