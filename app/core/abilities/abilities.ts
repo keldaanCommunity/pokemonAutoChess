@@ -10811,8 +10811,8 @@ export class BoneArmorStrategy extends AbilityStrategy {
         pokemon.handleHeal(attack.takenDamage, pokemon, 1, crit)
       }
       if (attack.death) {
-        pokemon.addDefense(boost, pokemon, 1, crit)
-        pokemon.addSpecialDefense(boost, pokemon, 1, crit)
+        pokemon.addDefense(boost, pokemon, 0, false)
+        pokemon.addSpecialDefense(boost, pokemon, 0, false)
       }
     }
   }
