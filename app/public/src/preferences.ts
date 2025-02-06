@@ -16,6 +16,8 @@ export interface IPreferencesState {
   showDpsMeter: boolean
   showDetailsOnHover: boolean
   showDamageNumbers: boolean
+  showEvolutions: boolean
+  filterAvailableAddsAndRegionals: boolean
   disableAnimatedTilemap: boolean
   keybindings: Keybindings
   renderer: number
@@ -28,6 +30,8 @@ const defaultPreferences: IPreferencesState = {
   showDpsMeter: false,
   showDetailsOnHover: false,
   showDamageNumbers: true,
+  showEvolutions: true,
+  filterAvailableAddsAndRegionals: false,
   disableAnimatedTilemap: false,
   renderer: Phaser.AUTO,
   keybindings: {
