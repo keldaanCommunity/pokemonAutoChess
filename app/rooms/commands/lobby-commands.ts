@@ -435,6 +435,9 @@ export class ChangeTitleCommand extends Command<
   async execute({ client, title }: { client: Client; title: Title | "" }) {
     try {
       const user = this.room.users.get(client.auth.uid)
+      if (title !== "" && user?.titles.includes(title) === false) {
+        throw new Error("User does not have this title unlocked")
+      }
       if (user) {
         if (user.title === title) {
           title = "" // remove title if user already has it
