@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { PokemonClasses } from "../../../../../models/colyseus-models/pokemon"
-import { PRECOMPUTED_REGIONAL_MONS } from "../../../../../models/precomputed/precomputed-pokemon-data"
+import { getPokemonData, PRECOMPUTED_REGIONAL_MONS } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { DungeonDetails, DungeonPMDO } from "../../../../../types/enum/Dungeon"
 import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
@@ -16,13 +16,13 @@ export default function WikiRegions() {
       setPokemonsPerRegion(Object.keys(DungeonPMDO).reduce((o, region) => {
         const regionalMons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
           new PokemonClasses[p]().isInRegion(region as DungeonPMDO)
+        ).filter(
+          (p, index, array) => {
+            const evolution = getPokemonData(PkmFamily[p]).evolution
+            return array.findIndex((p2) => PkmFamily[p] === PkmFamily[p2]) === index && // dedup same family
+              !(evolution === p || (evolution && getPokemonData(evolution).evolution === p)) // exclude non divergent evos
+          }
         )
-          .filter(
-            (pkm, index, array) =>
-              array.findIndex(
-                (p) => PkmFamily[p] === PkmFamily[pkm]
-              ) === index // dedup same family
-          )
         o[region as DungeonPMDO] = regionalMons
         return o
       }, {}))
