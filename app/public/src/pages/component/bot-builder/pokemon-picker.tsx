@@ -22,6 +22,7 @@ import SynergyIcon from "../icons/synergy-icon"
 import { Ability } from "../../../../../types/enum/Ability"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
+import { preferences, savePreferences } from "../../../preferences"
 
 export default function PokemonPicker(props: {
   selected: PkmWithConfig | Item
@@ -81,8 +82,8 @@ function PokemonPickerTab(props: {
   }
 
   const ingame = useLocation().pathname === "/game"
-  const [showEvolutions, setShowEvolutions] = useState(!ingame)
-  const [filterIngame, setFilterIngame] = useState(ingame)
+  const [showEvolutions, setShowEvolutions] = useState(preferences.showEvolutions)
+  const [filterIngame, setFilterIngame] = useState(preferences.filterAvailableAddsAndRegionals)
   const [overlap, setOverlap] = useState<Synergy | null>(null)
   const additionalPokemons = useAppSelector(
     (state) => state.game.additionalPokemons
@@ -199,13 +200,19 @@ function PokemonPickerTab(props: {
       <div className="filters">
         <Checkbox
           checked={showEvolutions}
-          onToggle={setShowEvolutions}
+          onToggle={checked => {
+            setShowEvolutions(checked);
+            savePreferences({ showEvolutions: checked });
+          }}
           label={t("show_evolutions")}
           isDark
         />
         {ingame && <Checkbox
           checked={filterIngame}
-          onToggle={setFilterIngame}
+          onToggle={checked => {
+            setFilterIngame(checked);
+            savePreferences({ filterAvailableAddsAndRegionals: checked });
+          }}
           label={t("show_only_available_picks")}
           isDark
         />}
