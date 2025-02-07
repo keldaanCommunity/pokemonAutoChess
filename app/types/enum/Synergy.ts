@@ -30,7 +30,8 @@ export enum Synergy {
   LIGHT = "LIGHT",
   WILD = "WILD",
   BABY = "BABY",
-  AMORPHOUS = "AMORPHOUS"
+  AMORPHOUS = "AMORPHOUS",
+  GOURMET = "GOURMET"
 }
 
 export const SynergyEffects: { [key in Synergy]: readonly Effect[] } = {
@@ -153,5 +154,6 @@ export const SynergyEffects: { [key in Synergy]: readonly Effect[] } = {
     Effect.HUSTLE,
     Effect.BERSERK
   ],
-  [Synergy.AMORPHOUS]: [Effect.FLUID, Effect.SHAPELESS, Effect.ETHEREAL]
+  [Synergy.AMORPHOUS]: [Effect.FLUID, Effect.SHAPELESS, Effect.ETHEREAL],
+  [Synergy.GOURMET]: [Effect.APPETIZER, Effect.LUNCH_BREAK, Effect.BANQUET]
 } as const

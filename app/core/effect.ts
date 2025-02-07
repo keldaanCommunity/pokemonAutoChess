@@ -3,7 +3,6 @@ import { PokemonEntity } from "./pokemon-entity"
 import { Item } from "../types/enum/Item"
 import { Effect as EffectEnum } from "../types/enum/Effect"
 import { Synergy, SynergyEffects } from "../types/enum/Synergy"
-import { chance } from "../utils/random"
 import PokemonState from "./pokemon-state"
 import { Passive } from "../types/enum/Passive"
 import { Ability } from "../types/enum/Ability"
@@ -13,7 +12,10 @@ type EffectOrigin = EffectEnum | Item
 export abstract class Effect {
   origin?: EffectOrigin
   apply(entity: PokemonEntity, ...others: any[]) {}
-  constructor(effect?: (entity: PokemonEntity, ...others: any[]) => void, origin?: EffectOrigin) {
+  constructor(
+    effect?: (entity: PokemonEntity, ...others: any[]) => void,
+    origin?: EffectOrigin
+  ) {
     if (effect) {
       this.apply = effect
     }
@@ -30,7 +32,11 @@ export class OnItemRemovedEffect extends Effect {}
 export class OnKillEffect extends Effect {
   apply(entity: PokemonEntity, target: PokemonEntity, board: Board) {}
   constructor(
-    effect?: (entity: PokemonEntity, target: PokemonEntity, board: Board) => void,
+    effect?: (
+      entity: PokemonEntity,
+      target: PokemonEntity,
+      board: Board
+    ) => void,
     origin?: EffectOrigin
   ) {
     super(effect, origin)
@@ -57,7 +63,6 @@ export class MonsterKillEffect extends OnKillEffect {
     this.hpBoosted += lifeBoost
     this.count += 1
   }
-
 }
 
 export abstract class PeriodicEffect extends Effect {
@@ -65,10 +70,7 @@ export abstract class PeriodicEffect extends Effect {
   timer: number
   count: number
 
-  constructor(
-    intervalMs: number,
-    origin?: EffectOrigin
-  ) {
+  constructor(intervalMs: number, origin?: EffectOrigin) {
     super(undefined, origin)
     this.intervalMs = intervalMs
     this.timer = intervalMs
@@ -114,7 +116,11 @@ export class GrowGroundEffect extends PeriodicEffect {
 export class OnHitEffect extends Effect {
   apply(entity: PokemonEntity, target: PokemonEntity, board: Board) {}
   constructor(
-    effect?: (entity: PokemonEntity, target: PokemonEntity, board: Board) => void,
+    effect?: (
+      entity: PokemonEntity,
+      target: PokemonEntity,
+      board: Board
+    ) => void,
     origin?: EffectOrigin
   ) {
     super(effect, origin)
@@ -124,7 +130,11 @@ export class OnHitEffect extends Effect {
 export class OnAttackEffect extends Effect {
   apply(entity: PokemonEntity, target: PokemonEntity, board: Board) {}
   constructor(
-    effect?: (entity: PokemonEntity, target: PokemonEntity, board: Board) => void,
+    effect?: (
+      entity: PokemonEntity,
+      target: PokemonEntity,
+      board: Board
+    ) => void,
     origin?: EffectOrigin
   ) {
     super(effect, origin)
@@ -134,9 +144,7 @@ export class OnAttackEffect extends Effect {
 export class FireHitEffect extends OnAttackEffect {
   count: number = 0
   synergyLevel: number
-  constructor(
-    effect: EffectEnum
-  ) {
+  constructor(effect: EffectEnum) {
     super(undefined, effect)
     this.synergyLevel = SynergyEffects[Synergy.FIRE].indexOf(effect)
   }
@@ -145,7 +153,6 @@ export class FireHitEffect extends OnAttackEffect {
     pokemon.addAttack(this.synergyLevel, pokemon, 0, false)
     this.count += 1
   }
-
 }
 
 export class OnAbilityCastEffect extends Effect {
@@ -155,7 +162,7 @@ export class OnAbilityCastEffect extends Effect {
     board: Board,
     target: PokemonEntity,
     crit: boolean
-    ) {}
+  ) {}
   constructor(
     effect?: (
       pokemon: PokemonEntity,
@@ -186,14 +193,13 @@ export class SoundCryEffect extends OnAbilityCastEffect {
     const attackSpeedBoost = [0, 5, 5][this.synergyLevel] ?? 0
     const manaBoost = [0, 0, 3][this.synergyLevel] ?? 0
 
-    const chimecho =
-      board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-        .some((cell) => cell.value?.passive === Passive.CHIMECHO)
-    
+    const chimecho = board
+      .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+      .some((cell) => cell.value?.passive === Passive.CHIMECHO)
+
     const scale =
-      (chimecho ? 2 : 1) * 
-      (pokemon.passive === Passive.MEGA_LAUNCHER ? 3 : 1)
-    
+      (chimecho ? 2 : 1) * (pokemon.passive === Passive.MEGA_LAUNCHER ? 3 : 1)
+
     board.cells.forEach((ally) => {
       if (ally?.team === pokemon.team) {
         ally.status.sleep = false
@@ -209,10 +215,7 @@ export class SoundCryEffect extends OnAbilityCastEffect {
 export class WaterSpringEffect extends OnAbilityCastEffect {
   apply(pokemon) {
     pokemon.simulation.board.forEach((x, y, pkm) => {
-      if (
-        pkm?.passive === Passive.WATER_SPRING &&
-        pkm.team !== pokemon.team
-      ) {
+      if (pkm?.passive === Passive.WATER_SPRING && pkm.team !== pokemon.team) {
         pkm.addPP(5, pkm, 0, false)
         pkm.transferAbility(pkm.skill)
       }

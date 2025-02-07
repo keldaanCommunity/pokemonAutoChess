@@ -142,7 +142,8 @@ export enum Item {
   HM_FLASH = "HM_FLASH",
   HM_ROCK_SMASH = "HM_ROCK_SMASH",
   HM_WHIRLPOOL = "HM_WHIRLPOOL",
-  HM_WATERFALL = "HM_WATERFALL"
+  HM_WATERFALL = "HM_WATERFALL",
+  CHEF_HAT = "CHEF_HAT"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -161,6 +162,7 @@ export const SpecialItems: Item[] = [
   Item.OLD_ROD,
   Item.GOOD_ROD,
   Item.SUPER_ROD,
+  Item.CHEF_HAT,
   Item.TRASH
 ]
 

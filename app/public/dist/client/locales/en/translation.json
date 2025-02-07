@@ -1878,7 +1878,10 @@
     "BERSERK": "Berserk",
     "FLUID": "Fluid",
     "SHAPELESS": "Shapeless",
-    "ETHEREAL": "Ethereal"
+    "ETHEREAL": "Ethereal",
+    "APPETIZER": "Appetizer",
+    "LUNCH_BREAK": "Lunch Break",
+    "BANQUET": "Banquet"
   },
   "effect_description": {
     "STAMINA": "Gain 15 SHIELD",
@@ -1990,7 +1993,10 @@
     "BERSERK": "+100% ATK and move speed, RAGE 5 seconds sooner",
     "FLUID": "Ally team gains 1% ATK_SPEED and 4 HP per unique active synergy",
     "SHAPELESS": "Ally team gains 3% ATK_SPEED and 8 HP per unique active synergy",
-    "ETHEREAL": "Ally team gains 6% ATK_SPEED and 12 HP per unique active synergy"
+    "ETHEREAL": "Ally team gains 6% ATK_SPEED and 12 HP per unique active synergy",
+    "APPETIZER": "Gain a Chef's Hat. Cook a Signature Dish after every 2 rounds",
+    "LUNCH_BREAK": "Cook a Signature Dish after every round",
+    "BANQUET": "Gain a second Chef's Hat"
   },
   "item": {
     "FOSSIL_STONE": "Fossil Stone",
@@ -2131,7 +2137,8 @@
     "HM_FLASH": "HM05 - Flash",
     "HM_ROCK_SMASH": "HM06 - Rock Smash",
     "HM_WATERFALL": "HM07 - Waterfall",
-    "HM_WHIRLPOOL": "HM08 - Whirlpool"
+    "HM_WHIRLPOOL": "HM08 - Whirlpool",
+    "CHEF_HAT": "Chef's Hat"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -2273,7 +2280,8 @@
     "HM_FLASH": "$t(item_description.TM)\n$t(ability.FLASH): $t(ability_description.FLASH)",
     "HM_WHIRLPOOL": "$t(item_description.TM)\n$t(ability.WHIRLPOOL): $t(ability_description.WHIRLPOOL)",
     "HM_WATERFALL": "$t(item_description.TM)\n$t(ability.WATERFALL): $t(ability_description.WATERFALL)",
-    "HM_ROCK_SMASH": "$t(item_description.TM)\n$t(ability.ROCK_SMASH): $t(ability_description.ROCK_SMASH)"
+    "HM_ROCK_SMASH": "$t(item_description.TM)\n$t(ability.ROCK_SMASH): $t(ability_description.ROCK_SMASH)",
+    "CHEF_HAT": "The holder will cook their Signature Dish between rounds"
   },
   "passive_description": {
     "NONE": "No passive",
@@ -2522,7 +2530,8 @@
     "BABY": "Baby",
     "LIGHT": "Light",
     "WILD": "Wild",
-    "AMORPHOUS": "Amorphous"
+    "AMORPHOUS": "Amorphous",
+    "GOURMET": "Gourmet"
   },
   "synergy_description": {
     "NORMAL": "NORMAL Pokémon and their adjacent allies gain SHIELD when combat starts.",
@@ -2556,7 +2565,8 @@
     "LIGHT": "LIGHT Pokémon reveal a spotlight on the battlefield. The Pokémon standing in the spotlight at the start of combat gains unique bonuses.",
     "WILD": "WILD Pokémon get increased ATK, move faster, and have a 25% chance to WOUND their target. For each WILD Pokémon STAR on board, gain +1% chance to find WILD in your shops + 5% chance during PvE rounds{{additionalInfo}}",
     "WILD_ADDITIONAL": "\nCurrent chance to find a WILD pokemon: {{wildChance}}%",
-    "AMORPHOUS": "AMORPHOUS Pokémon are extremely flexible and lack their own shape. Your team gains HP and ATK_SPEED by activating a wide variety of synergies."
+    "AMORPHOUS": "AMORPHOUS Pokémon are extremely flexible and lack their own shape. Your team gains HP and ATK_SPEED by activating a wide variety of synergies.",
+    "GOURMET": "GOURMET Pokémon can be equipped with a Chef's Hat. As a Chef, each Pokémon will cook up their Signature Dish between fights."
   },
   "title": {
     "NOVICE": "Novice",
