@@ -31,7 +31,7 @@ import {
 } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
-import { Synergy, SynergyEffects } from "../types/enum/Synergy"
+import { Synergy } from "../types/enum/Synergy"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
 import { IPokemonData } from "../types/interfaces/PokemonData"
 import { count } from "../utils/array"
@@ -50,7 +50,15 @@ import { PokemonEntity, getStrongestUnit, getUnitScore } from "./pokemon-entity"
 import { DelayedCommand } from "./simulation-command"
 import { getAvatarString } from "../utils/avatar"
 import { max } from "../utils/number"
-import { OnItemGainedEffect, GrowGroundEffect, FireHitEffect, MonsterKillEffect, SoundCryEffect, WaterSpringEffect} from "./effect"
+import {
+  OnItemGainedEffect,
+  GrowGroundEffect,
+  FireHitEffect,
+  MonsterKillEffect,
+  SoundCryEffect,
+  WaterSpringEffect
+} from "./effect"
+import { SynergyEffects } from "../models/effects"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -416,7 +424,7 @@ export default class Simulation extends Schema implements ISimulation {
 
     if (
       (singleType === Synergy.SOUND ||
-      (!singleType && pokemon.types.has(Synergy.SOUND))) &&
+        (!singleType && pokemon.types.has(Synergy.SOUND))) &&
       !SynergyEffects[Synergy.SOUND].some((e) => allyEffects.has(e))
     ) {
       // allow sound pokemon to always wake up allies without searching through the board twice

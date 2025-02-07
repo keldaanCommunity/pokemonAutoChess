@@ -4,6 +4,7 @@ import Count from "../models/colyseus-models/count"
 import Player from "../models/colyseus-models/player"
 import { Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
 import Status from "../models/colyseus-models/status"
+import { SynergyEffects } from "../models/effects"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { getSellPrice } from "../models/shop"
@@ -45,12 +46,11 @@ import {
 import { Passive } from "../types/enum/Passive"
 import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
-import { Synergy, SynergyEffects } from "../types/enum/Synergy"
+import { Synergy } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
 import { count } from "../utils/array"
 import { isOnBench } from "../utils/board"
 import { distanceC, distanceM } from "../utils/distance"
-import { logger } from "../utils/logger"
 import { clamp, min, roundToNDigits } from "../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
@@ -1825,7 +1825,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    const stackingItems = [Item.DEFENSIVE_RIBBON, Item.SOUL_DEW, Item.UPGRADE, Item.MAGMARIZER]
+    const stackingItems = [
+      Item.DEFENSIVE_RIBBON,
+      Item.SOUL_DEW,
+      Item.UPGRADE,
+      Item.MAGMARIZER
+    ]
 
     const removedItems = [Item.DYNAMAX_BAND, Item.SACRED_ASH, Item.MAX_REVIVE]
 

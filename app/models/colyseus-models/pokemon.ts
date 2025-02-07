@@ -54,7 +54,7 @@ import {
   PkmIndex,
   PkmRegionalVariants
 } from "../../types/enum/Pokemon"
-import { Synergy, SynergyEffects } from "../../types/enum/Synergy"
+import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { removeInArray, sum } from "../../utils/array"
 import {
@@ -67,6 +67,7 @@ import { pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
+import { SynergyEffects } from "../effects"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string

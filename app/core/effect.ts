@@ -2,10 +2,11 @@ import Board from "./board"
 import { PokemonEntity } from "./pokemon-entity"
 import { Item } from "../types/enum/Item"
 import { Effect as EffectEnum } from "../types/enum/Effect"
-import { Synergy, SynergyEffects } from "../types/enum/Synergy"
+import { Synergy } from "../types/enum/Synergy"
 import PokemonState from "./pokemon-state"
 import { Passive } from "../types/enum/Passive"
 import { Ability } from "../types/enum/Ability"
+import { SynergyEffects } from "../models/effects"
 
 type EffectOrigin = EffectEnum | Item
 
