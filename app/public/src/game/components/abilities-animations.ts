@@ -239,6 +239,24 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
+    case Ability.SALT_CURE:
+      addAbilitySprite(Ability.MAGIC_POWDER, coordinates, true)
+        .setScale(2)
+        .setTint(0xb0ff80)
+      break
+
+    case Ability.SPICY_EXTRACT:
+      addAbilitySprite(Ability.MAGIC_POWDER, coordinates, true)
+        .setScale(3)
+        .setTint(0xff9000)
+      break
+
+    case Ability.SWEET_SCENT:
+      addAbilitySprite(Ability.MAGIC_POWDER, coordinates, true)
+        .setScale(3)
+        .setTint(0xffc0c0)
+      break
+
     case Ability.RAZOR_WIND:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break

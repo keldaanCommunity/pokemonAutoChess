@@ -759,7 +759,8 @@ export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
   [Item.HM_STRENGTH]: {},
   [Item.HM_SURF]: {},
   [Item.HM_WATERFALL]: {},
-  [Item.HM_WHIRLPOOL]: {}
+  [Item.HM_WHIRLPOOL]: {},
+  [Item.CHEF_HAT]: {}
 }
 
 export type TilesetExchangeFile = {

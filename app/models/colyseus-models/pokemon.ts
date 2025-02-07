@@ -607,7 +607,11 @@ export class Kleavor extends Pokemon {
 }
 
 export class Bounsweet extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING])
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.FIGHTING,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.STEENEE
@@ -622,7 +626,11 @@ export class Bounsweet extends Pokemon {
 }
 
 export class Steenee extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING])
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.FIGHTING,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.TSAREENA
@@ -637,7 +645,11 @@ export class Steenee extends Pokemon {
 }
 
 export class Tsareena extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING])
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.FIGHTING,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.EPIC
   stars = 3
   hp = 360
@@ -2793,9 +2805,9 @@ export class Froslass extends Pokemon {
 
 export class Vanillite extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.FAIRY,
     Synergy.ICE,
-    Synergy.AMORPHOUS
+    Synergy.AMORPHOUS,
+    Synergy.GOURMET
   ])
   rarity = Rarity.RARE
   stars = 1
@@ -2812,9 +2824,9 @@ export class Vanillite extends Pokemon {
 
 export class Vanillish extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.FAIRY,
     Synergy.ICE,
-    Synergy.AMORPHOUS
+    Synergy.AMORPHOUS,
+    Synergy.GOURMET
   ])
   rarity = Rarity.RARE
   stars = 2
@@ -2831,9 +2843,9 @@ export class Vanillish extends Pokemon {
 
 export class Vanilluxe extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.FAIRY,
     Synergy.ICE,
-    Synergy.AMORPHOUS
+    Synergy.AMORPHOUS,
+    Synergy.GOURMET
   ])
   rarity = Rarity.RARE
   stars = 3
@@ -3990,7 +4002,11 @@ export class Blastoise extends Pokemon {
 }
 
 export class Bellsprout extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.FLORA,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.WEEPINBELL
@@ -4005,7 +4021,11 @@ export class Bellsprout extends Pokemon {
 }
 
 export class Weepinbell extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.FLORA,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.VICTREEBEL
@@ -4020,7 +4040,11 @@ export class Weepinbell extends Pokemon {
 }
 
 export class Victreebel extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.FLORA,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.HATCH
   stars = 3
   hp = 240
@@ -5004,7 +5028,11 @@ export class Stantler extends Pokemon {
 }
 
 export class Miltank extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.GOURMET,
+    Synergy.FIELD
+  ])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 250
@@ -5647,7 +5675,11 @@ export class Chatot extends Pokemon {
 }
 
 export class Farfetchd extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.NORMAL])
+  types = new SetSchema<Synergy>([
+    Synergy.FLYING,
+    Synergy.GOURMET,
+    Synergy.NORMAL
+  ])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
@@ -7485,7 +7517,7 @@ export class Regidrago extends Pokemon {
 }
 export class Guzzlord extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.DRAGON,
+    Synergy.GOURMET,
     Synergy.DARK,
     Synergy.MONSTER
   ])
@@ -9172,7 +9204,11 @@ export class Silvally extends Pokemon {
 }
 
 export class Applin extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GRASS])
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.GRASS,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.APPLETUN
@@ -9188,7 +9224,11 @@ export class Applin extends Pokemon {
 }
 
 export class Appletun extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GRASS])
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.GRASS,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.EPIC
   stars = 2
   hp = 250
@@ -10940,7 +10980,7 @@ export class Sudowoodo extends Pokemon {
 }
 
 export class Combee extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLORA, Synergy.GOURMET])
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.VESPIQUEEN
@@ -10956,7 +10996,7 @@ export class Combee extends Pokemon {
 }
 
 export class Vespiqueen extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLORA, Synergy.GOURMET])
   rarity = Rarity.EPIC
   stars = 2
   hp = 280
@@ -10971,7 +11011,7 @@ export class Vespiqueen extends Pokemon {
 }
 
 export class Shuckle extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ROCK])
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ROCK, Synergy.GOURMET])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 150
@@ -11254,7 +11294,11 @@ export class Dhelmise extends Pokemon {
 }
 
 export class Tropius extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA, Synergy.FLYING])
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.GOURMET,
+    Synergy.FLYING
+  ])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
@@ -11932,7 +11976,11 @@ export class UltraNecrozma extends Pokemon {
 }
 
 export class Cherrubi extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.LIGHT, Synergy.GRASS])
+  types = new SetSchema<Synergy>([
+    Synergy.FLORA,
+    Synergy.LIGHT,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.CHERRIM
@@ -11948,7 +11996,11 @@ export class Cherrubi extends Pokemon {
 }
 
 export class Cherrim extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.LIGHT, Synergy.GRASS])
+  types = new SetSchema<Synergy>([
+    Synergy.FLORA,
+    Synergy.LIGHT,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.EPIC
   stars = 2
   hp = 180
@@ -13128,7 +13180,11 @@ export class Araquanid extends Pokemon {
 }
 
 export class Lickitung extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.NORMAL,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.LICKILICKY
@@ -13143,7 +13199,11 @@ export class Lickitung extends Pokemon {
 }
 
 export class Lickilicky extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.NORMAL,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 150
@@ -14023,7 +14083,11 @@ export class Grumpig extends Pokemon {
 }
 
 export class Sinistea extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
+  types = new SetSchema<Synergy>([
+    Synergy.GHOST,
+    Synergy.ARTIFICIAL,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.POLTEAGEIST
@@ -14039,7 +14103,11 @@ export class Sinistea extends Pokemon {
 }
 
 export class Polteageist extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
+  types = new SetSchema<Synergy>([
+    Synergy.GHOST,
+    Synergy.ARTIFICIAL,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 180
@@ -16037,6 +16105,151 @@ export class Beartic extends Pokemon {
   additional = true
 }
 
+export class Nacli extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.GOURMET])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.NACLSTACK
+  hp = 80
+  atk = 6
+  def = 3
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.SALT_CURE
+  attackSprite = AttackSprite.ROCK_MELEE
+}
+
+export class Naclstack extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.GOURMET])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.GARGANACL
+  hp = 180
+  atk = 12
+  def = 4
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.SALT_CURE
+  attackSprite = AttackSprite.ROCK_MELEE
+}
+
+export class Garganacl extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.GOURMET])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 280
+  atk = 22
+  def = 6
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.SALT_CURE
+  attackSprite = AttackSprite.ROCK_MELEE
+}
+
+export class Capsakid extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIRE, Synergy.GOURMET])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.SCOVILLAIN
+  hp = 80
+  atk = 6
+  def = 3
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.SPICY_EXTRACT
+  attackSprite = AttackSprite.FIRE_MELEE
+  additional = true
+}
+
+export class Scovillain extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIRE, Synergy.GOURMET])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 180
+  atk = 12
+  def = 4
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.SPICY_EXTRACT
+  attackSprite = AttackSprite.FIRE_MELEE
+  additional = true
+}
+
+export class Swirlix extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.GOURMET])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.SLURPUFF
+  hp = 80
+  atk = 6
+  def = 3
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.SWEET_SCENT
+  attackSprite = AttackSprite.FAIRY_MELEE
+  additional = true
+}
+
+export class Slurpuff extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.GOURMET])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 180
+  atk = 12
+  def = 4
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.SWEET_SCENT
+  attackSprite = AttackSprite.FAIRY_MELEE
+  additional = true
+}
+
+export class Gulpin extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.GOURMET,
+    Synergy.AMORPHOUS
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.SWALOT
+  hp = 90
+  atk = 8
+  def = 3
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.SWALLOW
+  attackSprite = AttackSprite.POISON_MELEE
+  additional = true
+}
+
+export class Swalot extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.GOURMET,
+    Synergy.AMORPHOUS
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 190
+  atk = 16
+  def = 6
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.SWALLOW
+  attackSprite = AttackSprite.POISON_MELEE
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -16943,5 +17156,14 @@ export const PokemonClasses: Record<
   [Pkm.SKRELP]: Skrelp,
   [Pkm.DRAGALGE]: Dragalge,
   [Pkm.CUBCHOO]: Cubchoo,
-  [Pkm.BEARTIC]: Beartic
+  [Pkm.BEARTIC]: Beartic,
+  [Pkm.NACLI]: Nacli,
+  [Pkm.NACLSTACK]: Naclstack,
+  [Pkm.GARGANACL]: Garganacl,
+  [Pkm.CAPSAKID]: Capsakid,
+  [Pkm.SCOVILLAIN]: Scovillain,
+  [Pkm.SWIRLIX]: Swirlix,
+  [Pkm.SLURPUFF]: Slurpuff,
+  [Pkm.GULPIN]: Gulpin,
+  [Pkm.SWALOT]: Swalot
 }

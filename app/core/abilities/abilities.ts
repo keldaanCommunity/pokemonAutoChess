@@ -11514,6 +11514,130 @@ export class FrostBreathStrategy extends AbilityStrategy {
   }
 }
 
+export class SaltCureStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    // Adjacent allies gain [10,20,40,SP] SHIELD and their status afflictions cured. Adjacent WATER, STEEL or GHOST enemies suffer from BURN for 5 seconds.
+    const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
+    const cells = board.getAdjacentCells(
+      pokemon.positionX,
+      pokemon.positionY,
+      true
+    )
+    cells.forEach((cell) => {
+      if (cell.value) {
+        if (cell.value.team === pokemon.team) {
+          cell.value.addShield(shield, pokemon, 0, crit)
+          cell.value.status.clearNegativeStatus()
+        } else {
+          if (
+            cell.value.types.has(Synergy.WATER) ||
+            cell.value.types.has(Synergy.STEEL) ||
+            cell.value.types.has(Synergy.GHOST)
+          ) {
+            cell.value.status.triggerBurn(5000, cell.value, pokemon)
+          }
+        }
+      }
+    })
+  }
+}
+
+export class SpicyExtractStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    //Make 1/2/3 closest allies RAGE for [2,SP] seconds
+    const nbAllies = [1, 2, 3][pokemon.stars - 1] ?? 3
+    const rageDuration = 2000
+    const allies = board.cells
+      .filter<PokemonEntity>(
+        (cell): cell is PokemonEntity =>
+          cell !== undefined &&
+          cell !== pokemon &&
+          cell.team === pokemon.team &&
+          cell.life > 0
+      )
+      .sort(
+        (a, b) =>
+          distanceE(
+            a.positionX,
+            a.positionY,
+            pokemon.positionX,
+            pokemon.positionY
+          ) -
+          distanceE(
+            b.positionX,
+            b.positionY,
+            pokemon.positionX,
+            pokemon.positionY
+          )
+      )
+      .slice(0, nbAllies)
+    allies.forEach((ally) => {
+      ally.status.triggerRage(rageDuration, ally)
+    })
+  }
+}
+
+export class SweetScentStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    // Enemies in a 3-range radius can no longer dodge attacks, lose [3,SP] SPE_DEF and have [30,LK]% chance to be CHARM for 1 second
+    const cells = board.getCellsInRadius(
+      pokemon.positionX,
+      pokemon.positionY,
+      3
+    )
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        if (chance(0.3, pokemon)) {
+          cell.value.status.triggerCharm(1000, cell.value, pokemon, false)
+        }
+        cell.value.addSpecialDefense(-3, pokemon, 1, crit)
+        cell.value.addDodgeChance(-cell.value.dodge, pokemon, 0, false)
+      }
+    })
+  }
+}
+
+export class SwallowStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    // Swallow the target. If the user has less max HP than it, it immediately spits it out while inflicting POISON for 5 seconds.
+    // Otherwise, it digests it and cannot move or attack until the next cast, after which the user gains [20,SP]% of its max HP.
+    if (pokemon.hp < target.hp) {
+      target.status.triggerPoison(5000, target, pokemon)
+    } else {
+      //TODO
+      //pokemon.swallowedTarget = structuredClone(target)
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -11937,5 +12061,9 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BOLT_BEAK]: new BoltBeakStrategy(),
   [Ability.FREEZE_DRY]: new FreezeDryStrategy(),
   [Ability.DRAGON_PULSE]: new DragonPulseStrategy(),
-  [Ability.FROST_BREATH]: new FrostBreathStrategy()
+  [Ability.FROST_BREATH]: new FrostBreathStrategy(),
+  [Ability.SALT_CURE]: new SaltCureStrategy(),
+  [Ability.SPICY_EXTRACT]: new SpicyExtractStrategy(),
+  [Ability.SWEET_SCENT]: new SweetScentStrategy(),
+  [Ability.SWALLOW]: new SwallowStrategy()
 }
