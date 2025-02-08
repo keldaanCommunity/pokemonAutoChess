@@ -35,7 +35,9 @@ import {
   PORTAL_CAROUSEL_BASE_DURATION,
   PortalCarouselStages,
   StageDuration,
-  SynergyTriggers
+  SynergyTriggers,
+  BOARD_WIDTH,
+  BOARD_SIDE_HEIGHT
 } from "../../types/Config"
 import { Effect } from "../../types/enum/Effect"
 import { BattleResult, GamePhaseState, Team } from "../../types/enum/Game"
@@ -232,8 +234,17 @@ export class OnDragDropCommand extends Command<
     if (player) {
       message.updateItems = false
       const pokemon = player.board.get(detail.id)
-      if (pokemon) {
-        const { x, y } = detail
+      const { x, y } = detail
+
+      if (
+        pokemon &&
+        x != null &&
+        x >= 0 &&
+        x < BOARD_WIDTH &&
+        y != null &&
+        y >= 0 &&
+        y < BOARD_SIDE_HEIGHT
+      ) {
         const dropOnBench = y == 0
         const dropFromBench = isOnBench(pokemon)
 
