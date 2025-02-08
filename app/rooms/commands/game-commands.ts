@@ -1,4 +1,4 @@
- import { Command } from "@colyseus/command"
+import { Command } from "@colyseus/command"
 import { Client, updateLobby } from "colyseus"
 import { nanoid } from "nanoid"
 
@@ -35,7 +35,9 @@ import {
   PORTAL_CAROUSEL_BASE_DURATION,
   PortalCarouselStages,
   StageDuration,
-  SynergyTriggers
+  SynergyTriggers,
+  BOARD_WIDTH,
+  BOARD_SIDE_HEIGHT
 } from "../../types/Config"
 import { Effect } from "../../types/enum/Effect"
 import { BattleResult, GamePhaseState, Team } from "../../types/enum/Game"
@@ -233,11 +235,15 @@ export class OnDragDropCommand extends Command<
       message.updateItems = false
       const pokemon = player.board.get(detail.id)
       const { x, y } = detail
-      
+
       if (
         pokemon &&
-        x != null && x >= 0 && x <= 7 &&
-        y != null && y >= 0 && y <= 4
+        x != null &&
+        x >= 0 &&
+        x < BOARD_WIDTH &&
+        y != null &&
+        y >= 0 &&
+        y < BOARD_SIDE_HEIGHT
       ) {
         const dropOnBench = y == 0
         const dropFromBench = isOnBench(pokemon)
