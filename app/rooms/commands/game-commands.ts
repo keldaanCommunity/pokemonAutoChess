@@ -232,8 +232,13 @@ export class OnDragDropCommand extends Command<
     if (player) {
       message.updateItems = false
       const pokemon = player.board.get(detail.id)
-      if (pokemon) {
-        const { x, y } = detail
+      const { x, y } = detail
+      
+      if (
+        pokemon &&
+        x != null && x >= 0 && x <= 7
+        y != null && y >= 0 && y <= 4
+      ) {
         const dropOnBench = y == 0
         const dropFromBench = isOnBench(pokemon)
 
