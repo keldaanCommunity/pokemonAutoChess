@@ -1,8 +1,8 @@
-import React, { useState } from "react"
+import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
-import { preferences, savePreferences } from "../../../preferences"
+import { usePreference, usePreferences } from "../../../preferences"
 import { getAvatarSrc } from "../../../../../utils/avatar"
 import GamePlayerDpsMeter from "./game-player-dps-meter"
 import GamePlayerDpsTakenMeter from "./game-player-dps-taken-meter"
@@ -10,8 +10,11 @@ import GamePlayerHpsMeter from "./game-player-hps-meter"
 import { GamePhaseState, Team } from "../../../../../types/enum/Game"
 import { PVEStages } from "../../../../../models/pve-stages"
 import "./game-dps-meter.css"
+import { cc } from "../../utils/jsx"
+import PokemonPortrait from "../pokemon-portrait"
 
 export default function GameDpsMeter() {
+  const [{ antialiasing }] = usePreferences()
   const { t } = useTranslation()
   const currentPlayer = useAppSelector(selectCurrentPlayer)
   const team = useAppSelector(
@@ -25,7 +28,7 @@ export default function GameDpsMeter() {
   const myDpsMeter = team === Team.BLUE_TEAM ? blueDpsMeter : redDpsMeter
   const opponentDpsMeter = team === Team.BLUE_TEAM ? redDpsMeter : blueDpsMeter
 
-  const [isOpen, setOpen] = useState(preferences.showDpsMeter)
+  const [isOpen, setOpen] = usePreference("showDpsMeter")
 
   if (!currentPlayer) return null
 
@@ -37,8 +40,7 @@ export default function GameDpsMeter() {
   const opponentAvatar = currentPlayer.opponentAvatar
 
   function toggleOpen() {
-    setOpen(!isOpen)
-    savePreferences({ showDpsMeter: !isOpen })
+    setOpen((old) => !old)
   }
 
   if (opponentAvatar == "") {
@@ -60,15 +62,12 @@ export default function GameDpsMeter() {
       >
         <header>
           <div>
-            <img src={getAvatarSrc(avatar)} className="pokemon-portrait"></img>
+            <PokemonPortrait avatar={avatar} />
             <p>{name}</p>
           </div>
           <h2>vs</h2>
           <div>
-            <img
-              src={getAvatarSrc(opponentAvatar)}
-              className="pokemon-portrait"
-            ></img>
+            <PokemonPortrait avatar={opponentAvatar} />
             <p>{isPVE ? t(opponentName) : opponentName}</p>
           </div>
         </header>

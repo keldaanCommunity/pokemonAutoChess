@@ -8,7 +8,6 @@
   width: 8vh;
   background-size: cover;
   border-radius: 50%;
-  image-rendering: pixelated;
   box-shadow: inset 0 0 0 0.8vh black;
   margin: auto;
 }

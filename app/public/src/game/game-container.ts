@@ -39,12 +39,13 @@ import { logger } from "../../../utils/logger"
 import { clamp, max } from "../../../utils/number"
 import { SOUNDS, playSound } from "../pages/utils/audio"
 import { transformCoordinate } from "../pages/utils/utils"
-import { loadPreferences, preferences } from "../preferences"
+import { preference, subscribeToPreferences } from "../preferences"
 import store from "../stores"
 import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
 import { getPortraitSrc } from "../../../utils/avatar"
 import { BoardMode } from "./components/board-manager"
 import GameScene from "./scenes/game-scene"
+import { cc } from "../pages/utils/jsx"
 
 class GameContainer {
   room: Room<GameState>
@@ -226,7 +227,7 @@ class GameContainer {
   initializeGame() {
     if (this.game != null) return // prevent initializing twice
     // Create Phaser game
-    const renderer = Number(loadPreferences().renderer ?? Phaser.AUTO)
+    const renderer = Number(preference("renderer") ?? Phaser.AUTO)
     const config = {
       type: renderer,
       width: 1950,
@@ -258,6 +259,14 @@ class GameContainer {
     if (this.game.renderer.type === Phaser.WEBGL) {
       this.game.plugins.install("rexOutline", OutlinePlugin, true)
     }
+    const unsubscribeToPreferences = subscribeToPreferences(
+      ({ antialiasing }) => {
+        if (!this.game?.canvas) return
+        this.game.canvas.style.imageRendering = antialiasing ? "" : "pixelated"
+      },
+      true
+    )
+    this.game.events.on("destroy", unsubscribeToPreferences)
   }
 
   resize() {
@@ -406,7 +415,8 @@ class GameContainer {
               pokemon.index,
               config?.selectedShiny,
               config?.selectedEmotion
-            )
+            ),
+            className: cc({ pixelated: !preference("antialiasing") })
           },
           null
         )
@@ -533,7 +543,7 @@ class GameContainer {
     index: string
     amount: number
   }) {
-    if (preferences.showDamageNumbers) {
+    if (preference("showDamageNumbers")) {
       this.gameScene?.battle?.displayDamage(
         message.x,
         message.y,

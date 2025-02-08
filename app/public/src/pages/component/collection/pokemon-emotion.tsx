@@ -5,6 +5,7 @@ import { getEmotionCost } from "../../../../../types/Config"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
 import "./pokemon-emotion.css"
+import { usePreferences } from "../../../preferences"
 
 export default function PokemonEmotion(props: {
   index: string
@@ -16,6 +17,7 @@ export default function PokemonEmotion(props: {
   dust: number
   onClick: () => void
 }) {
+  const [{ antialiasing }] = usePreferences()
   const { t } = useTranslation()
   const cost = getEmotionCost(props.emotion, props.shiny)
   const canUnlock = !props.unlocked && cost <= props.dust
@@ -30,14 +32,24 @@ export default function PokemonEmotion(props: {
       })}
       onClick={props.onClick}
     >
-      <img src={getPortraitSrc(props.index, props.shiny, props.emotion)} />
-      {AvatarEmotions.includes(props.emotion) && (<span className="shortcut">Ctrl+{AvatarEmotions.indexOf(props.emotion) + 1}</span>)}
+      <img
+        src={getPortraitSrc(props.index, props.shiny, props.emotion)}
+        className={cc({ pixelated: !antialiasing })}
+      />
+      {AvatarEmotions.includes(props.emotion) && (
+        <span className="shortcut">
+          Ctrl+{AvatarEmotions.indexOf(props.emotion) + 1}
+        </span>
+      )}
       {props.unlocked ? (
         <p>{t(`emotion.${props.emotion}`)}</p>
       ) : (
         <p>
           <span>{cost}</span>
-          <img src={getPortraitSrc(props.index)} />
+          <img
+            src={getPortraitSrc(props.index)}
+            className={cc({ pixelated: !antialiasing })}
+          />
         </p>
       )}
     </div>

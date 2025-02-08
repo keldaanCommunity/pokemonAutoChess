@@ -17,8 +17,11 @@ import { Synergy } from "../../../../../types/enum/Synergy"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { addIconsToDescription } from "../../utils/descriptions"
 import SynergyIcon from "../icons/synergy-icon"
+import { cc } from "../../utils/jsx"
+import { usePreference } from "../../../preferences"
 
 export default function WikiItems() {
+  const [antialiasing] = usePreference("antialiasing")
   const [itemHovered, setItemHovered] = useState<Item>()
   const { t } = useTranslation()
   return (
@@ -142,7 +145,9 @@ export default function WikiItems() {
               <br />
               <img
                 src={"assets/environment/berry_trees/" + i + "_6.png"}
-                className="tree"
+                className={cc("tree", {
+                  pixelated: !antialiasing
+                })}
               ></img>
             </li>
           ))}

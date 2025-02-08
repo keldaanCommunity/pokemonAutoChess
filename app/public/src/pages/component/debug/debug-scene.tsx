@@ -5,8 +5,8 @@ import { Orientation } from "../../../../../types/enum/Game"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Status } from "../../../../../types/enum/Status"
 import { DebugScene } from "../../../game/scenes/debug-scene"
-import { loadPreferences } from "../../../preferences"
 import "./debug-scene.css"
+import { preference } from "../../../preferences"
 
 export default function DebugSceneContainer({
   pkm = Pkm.RATTATA,
@@ -53,7 +53,7 @@ export default function DebugSceneContainer({
       debugScene.current = new DebugScene(height, width, onProgress, onComplete)
 
       gameRef.current = new Phaser.Game({
-        type: +(loadPreferences().renderer ?? Phaser.AUTO),
+        type: +(preference("renderer") ?? Phaser.AUTO),
         parent: "debug-scene",
         pixelArt: true,
         width,

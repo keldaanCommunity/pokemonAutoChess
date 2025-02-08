@@ -19,6 +19,7 @@ import { cc } from "../../utils/jsx"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import { EffectDescriptionComponent } from "../synergy/effect-description"
 import { Checkbox } from "../checkbox/checkbox"
+import { usePreference } from "../../../preferences"
 
 export default function WikiTypes() {
   const { t } = useTranslation()
@@ -50,6 +51,7 @@ export default function WikiTypes() {
 }
 
 export function WikiType(props: { type: Synergy }) {
+  const [antialiasing] = usePreference('antialiasing')
   const { t } = useTranslation()
   const [showEvolutions, setShowEvolutions] = useState(false)
   const [overlap, setOverlap] = useState<Synergy | null>(null)
@@ -159,6 +161,7 @@ export function WikiType(props: { type: Synergy }) {
                         <img
                           src={getPortraitSrc(p.index)}
                           data-tooltip-id={`pokemon-detail-${p.index}`}
+                          className={cc({ pixelated: !antialiasing })}
                         />
                         <Tooltip
                           id={`pokemon-detail-${p.index}`}
@@ -201,6 +204,7 @@ export function WikiAllTypes() {
   }
 
   const [hoveredPokemon, setHoveredPokemon] = useState<Pkm>()
+  const [antialiasing] = usePreference('antialiasing')
   const { t } = useTranslation()
 
   return (
@@ -229,6 +233,7 @@ export function WikiAllTypes() {
                       <img
                         src={getPortraitSrc(p.index)}
                         data-tooltip-id={`pokemon-detail-${p.index}`}
+                        className={cc({ pixelated: !antialiasing })}
                       />
                     </li>
                   )

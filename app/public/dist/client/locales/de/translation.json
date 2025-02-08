@@ -2919,6 +2919,7 @@
   "show_details_on_hover": "Die Details werden angezeigt, wenn du mit der Maus darüber fährst, anstatt mit der rechten Maustaste zu klicken",
   "show_damage_numbers": "Zeige Schadens Nummern an",
   "disable_animated_tilemap": "Deaktiviere Hintergrund Animationen",
+  "antialiasing": "Aktiviere anti-aliasing",
   "save": "Speichern",
   "passive": "Passiv",
   "pick_additional_pokemon_hint": "Wähle ein zusätzliches Pokémon. Es wird für alle verfügbar sein.",

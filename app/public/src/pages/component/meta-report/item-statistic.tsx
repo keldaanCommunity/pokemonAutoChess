@@ -3,11 +3,15 @@ import { useTranslation } from "react-i18next"
 import { IItemsStatistic } from "../../../../../models/mongo-models/items-statistic"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
+import { cc } from "../../utils/jsx"
+import { usePreference } from "../../../preferences"
+import PokemonPortrait from "../pokemon-portrait"
 
 export default function ItemStatistic(props: {
   item: IItemsStatistic
   rank: number
 }) {
+  const [antialiasing] = usePreference("antialiasing")
   const { t } = useTranslation()
   return (
     <div className="item-stat my-box">
@@ -16,9 +20,9 @@ export default function ItemStatistic(props: {
         src={"assets/item/" + props.item.name + ".png"}
         style={{
           width: "48px",
-          height: "48px",
-          imageRendering: "pixelated"
+          height: "48px"
         }}
+        className={cc({ pixelated: !antialiasing })}
       ></img>
       <span>{t(`item.${props.item.name}`)}</span>
       <span>
@@ -30,11 +34,7 @@ export default function ItemStatistic(props: {
       <div style={{ display: "flex", gap: "0.5em", alignItems: "center" }}>
         <label>{t("popular_holders")}:</label>
         {props.item.pokemons.map((pokemon) => (
-          <img
-            key={pokemon}
-            className="pokemon-portrait"
-            src={getPortraitSrc(PkmIndex[pokemon])}
-          />
+          <PokemonPortrait portrait={PkmIndex[pokemon]} key={pokemon} />
         ))}
       </div>
     </div>

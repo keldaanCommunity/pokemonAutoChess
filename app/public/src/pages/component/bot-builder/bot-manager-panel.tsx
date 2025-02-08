@@ -8,6 +8,8 @@ import { addBotDatabase, deleteBotDatabase } from "../../../stores/NetworkStore"
 import { getAvatarSrc } from "../../../../../utils/avatar"
 import { rewriteBotRoundsRequiredto1, validateBot } from "./bot-logic"
 import "./bot-manager-panel.css"
+import { usePreference } from "../../../preferences"
+import PokemonPortrait from "../pokemon-portrait"
 
 export function BotManagerPanel() {
   const dispatch = useAppDispatch()
@@ -30,6 +32,7 @@ export function BotManagerPanel() {
 }
 
 function BotsList() {
+  const [antialiasing] = usePreference('antialiasing')
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -62,10 +65,7 @@ function BotsList() {
             {bots.map((b) => (
               <tr key={b.id}>
                 <td>
-                  <img
-                    src={getAvatarSrc(b.avatar)}
-                    className="pokemon-portrait"
-                  />
+                  <PokemonPortrait avatar={b.avatar} />
                 </td>
                 <td>{t(`pkm.${b.name}`)}</td>
                 <td>{b.author}</td>

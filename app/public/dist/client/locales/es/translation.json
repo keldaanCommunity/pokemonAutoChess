@@ -2950,6 +2950,7 @@
   "show_details_on_hover": "Mostrar detalles al pasar el mouse en lugar de hacer clic con el botón derecho",
   "show_damage_numbers": "Mostrar números de daños",
   "disable_animated_tilemap": "Deshabilitar la animación para el mapa de mosaicos (fondo)",
+  "antialiasing": "Activar anti-aliasing",
   "save": "Ahorrar",
   "reset": "Reiniciar",
   "snapshot": "Snapshot",
