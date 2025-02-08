@@ -22,7 +22,6 @@ import {
   BOARD_WIDTH,
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER,
-  ItemStats,
   MANA_SCARF_MANA,
   ON_ATTACK_MANA,
   SCOPE_LENS_MANA
@@ -68,7 +67,7 @@ import {
   OnKillEffect
 } from "./effect"
 import { IdleState } from "./idle-state"
-import { ItemEffects } from "./items"
+import { ItemEffects, ItemStats } from "./items"
 import MovingState from "./moving-state"
 import PokemonState from "./pokemon-state"
 import Simulation from "./simulation"
@@ -643,11 +642,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   removeItemEffect(item: Item) {
-    if (ItemStats[item]) {
-      Object.entries(ItemStats[item]).forEach(([stat, value]) =>
-        this.applyStat(stat as Stat, -value)
-      )
-    }
+    Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) =>
+      this.applyStat(stat as Stat, -value)
+    )
 
     const type = SynergyGivenByItem[item]
     const default_types = getPokemonData(this.name).types

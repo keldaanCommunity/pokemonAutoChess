@@ -25,7 +25,6 @@ import {
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER,
   EvolutionTime,
-  ItemStats,
   SynergyTriggers
 } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
@@ -8336,7 +8335,11 @@ export class Noctowl extends Pokemon {
 }
 
 export class Munchlax extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.HUMAN, Synergy.BABY])
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.GOURMET,
+    Synergy.BABY
+  ])
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.SNORLAX
@@ -8355,7 +8358,7 @@ export class Munchlax extends Pokemon {
 export class Snorlax extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.NORMAL,
-    Synergy.HUMAN,
+    Synergy.GOURMET,
     Synergy.MONSTER
   ])
   rarity = Rarity.EPIC
@@ -14227,24 +14230,21 @@ export class Trubbish extends Pokemon {
       }
       if (ItemComponents.includes(item)) {
         this.hp += 25
-        if (ItemStats[item]) {
-          Object.entries(ItemStats[item]).forEach(([stat, value]) => {
-            if (stat in this.statIncreases) {
-              this.statIncreases[stat as Stat] += value
-            }
-          })
-        }
+        Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) => {
+          if (stat in this.statIncreases) {
+            this.statIncreases[stat as Stat] += value
+          }
+        })
         this.items.delete(item)
       }
       if (ArtificialItems.includes(item)) {
         this.hp += 50
-        if (ItemStats[item]) {
-          Object.entries(ItemStats[item]).forEach(([stat, value]) => {
-            if (stat in this.statIncreases) {
-              this.statIncreases[stat as Stat] += value
-            }
-          })
-        }
+        Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) => {
+          if (stat in this.statIncreases) {
+            this.statIncreases[stat as Stat] += value
+          }
+        })
+
         this.items.delete(item)
 
         const itemIndex = player.artificialItems.indexOf(item)

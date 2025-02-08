@@ -1,18 +1,13 @@
 import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
-import { getWonderboxItems, ItemEffects } from "./items"
+import { getWonderboxItems, ItemEffects, ItemStats } from "./items"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../models/precomputed/precomputed-types"
 import GameRoom from "../rooms/game-room"
 import { IPokemon, IPokemonEntity, ISimulation, Transfer } from "../types"
-import {
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
-  ItemStats,
-  SynergyTriggers
-} from "../types/Config"
+import { BOARD_HEIGHT, BOARD_WIDTH, SynergyTriggers } from "../types/Config"
 import { Effect } from "../types/enum/Effect"
 import {
   AttackType,
@@ -379,11 +374,9 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   applyItemEffect(pokemon: PokemonEntity, item: Item) {
-    if (ItemStats[item]) {
-      Object.entries(ItemStats[item]).forEach(([stat, value]) =>
-        pokemon.applyStat(stat as Stat, value)
-      )
-    }
+    Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) =>
+      pokemon.applyStat(stat as Stat, value)
+    )
 
     ItemEffects[item]
       ?.filter((effect) => effect instanceof OnItemGainedEffect)

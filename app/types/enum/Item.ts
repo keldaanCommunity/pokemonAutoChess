@@ -2,6 +2,7 @@ import { reverseMap } from "../../utils/map"
 import { Ability } from "./Ability"
 import { Synergy } from "./Synergy"
 import { Weather } from "./Weather"
+import { Stat } from "./Game"
 
 export enum Item {
   FOSSIL_STONE = "FOSSIL_STONE",
@@ -96,7 +97,6 @@ export enum Item {
   SILK_SCARF = "SILK_SCARF",
   TINY_MUSHROOM = "TINY_MUSHROOM",
   METEORITE = "METEORITE",
-  BERRY_JUICE = "BERRY_JUICE",
   TRASH = "TRASH",
   DYNAMAX_BAND = "DYNAMAX_BAND",
   SHINY_STONE = "SHINY_STONE",
@@ -143,7 +143,23 @@ export enum Item {
   HM_ROCK_SMASH = "HM_ROCK_SMASH",
   HM_WHIRLPOOL = "HM_WHIRLPOOL",
   HM_WATERFALL = "HM_WATERFALL",
-  CHEF_HAT = "CHEF_HAT"
+  CHEF_HAT = "CHEF_HAT",
+  RAGE_CANDY_BAR = "RAGE_CANDY_BAR",
+  TEA = "TEA",
+  CURRY = "CURRY",
+  CASTELIACONE = "CASTELIACONE",
+  WHIPPED_DREAM = "WHIPPED_DREAM",
+  BERRY_JUICE = "BERRY_JUICE",
+  TART_APPLE = "TART_APPLE",
+  SWEET_APPLE = "SWEET_APPLE",
+  SIRUPY_APPLE = "SIRUPY_APPLE",
+  SWEET_HERB = "SWEET_HERB",
+  MOOMOO_MILK = "MOOMOO_MILK",
+  BERRIES = "BERRIES",
+  HONEY = "HONEY",
+  ROCK_SALT = "ROCK_SALT",
+  NUTRITIOUS_EGG = "NUTRITIOUS_EGG",
+  LEFTOVERS = "LEFTOVERS"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -452,3 +468,22 @@ export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.HM_WATERFALL]: Ability.WATERFALL,
   [Item.HM_WHIRLPOOL]: Ability.WHIRLPOOL
 }
+
+export const Dishes: Item[] = [
+  Item.RAGE_CANDY_BAR,
+  Item.TEA,
+  Item.CURRY,
+  Item.CASTELIACONE,
+  Item.WHIPPED_DREAM,
+  Item.TART_APPLE,
+  Item.SWEET_APPLE,
+  Item.SIRUPY_APPLE,
+  Item.SWEET_HERB,
+  Item.MOOMOO_MILK,
+  Item.BERRY_JUICE,
+  Item.BERRIES,
+  Item.HONEY,
+  Item.ROCK_SALT,
+  Item.NUTRITIOUS_EGG,
+  Item.LEFTOVERS
+]
