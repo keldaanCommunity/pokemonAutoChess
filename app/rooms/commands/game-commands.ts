@@ -1,4 +1,4 @@
-import { Command } from "@colyseus/command"
+ import { Command } from "@colyseus/command"
 import { Client, updateLobby } from "colyseus"
 import { nanoid } from "nanoid"
 
@@ -236,7 +236,7 @@ export class OnDragDropCommand extends Command<
       
       if (
         pokemon &&
-        x != null && x >= 0 && x <= 7
+        x != null && x >= 0 && x <= 7 &&
         y != null && y >= 0 && y <= 4
       ) {
         const dropOnBench = y == 0
