@@ -35,3 +35,7 @@ export function count<T>(arr: T[] | ArraySchema<T>, el: T): number {
   for (let i = 0; i < arr.length; i++) if (arr[i] === el) count++
   return count
 }
+
+export function wrapInArray<T>(value: T | T[]): T[] {
+  return Array.isArray(value) ? value : [value]
+}
