@@ -21,6 +21,7 @@ import { cc } from "../../utils/jsx"
 import SynergyIcon from "../icons/synergy-icon"
 import { EffectDescriptionComponent } from "./effect-description"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
+import { usePreference } from "../../../preferences"
 
 export default function SynergyDetailComponent(props: {
   type: Synergy
@@ -166,6 +167,7 @@ export default function SynergyDetailComponent(props: {
 }
 
 function PokemonPortrait(props: { p: IPokemonData, player?: IPlayer }) {
+  const [antialiasing] = usePreference("antialiasing")
   const isOnTeam = (p: Pkm) => props.player != null && values(props.player.board).some((x) => PkmFamily[x.name] === p)
   return (
     <div
@@ -177,7 +179,7 @@ function PokemonPortrait(props: { p: IPokemonData, player?: IPlayer }) {
       key={props.p.name}
       style={{ color: RarityColor[props.p.rarity], border: "3px solid " + RarityColor[props.p.rarity] }}
     >
-      <img src={getPortraitSrc(props.p.index)} />
+      <img src={getPortraitSrc(props.p.index)} className={cc({ pixelated: !antialiasing })} />
     </div>
   )
 }

@@ -16,6 +16,7 @@ import { Money } from "../icons/money"
 import SynergyIcon from "../icons/synergy-icon"
 import { GamePokemonDetail } from "./game-pokemon-detail"
 import "./game-pokemon-portrait.css"
+import { usePreference } from "../../../preferences"
 
 export default function GamePokemonPortrait(props: {
   index: number
@@ -26,6 +27,7 @@ export default function GamePokemonPortrait(props: {
   onMouseLeave?: React.MouseEventHandler<HTMLDivElement>,
   inPlanner?: boolean
 }) {
+  const [antialiasing] = usePreference("antialiasing")
   const pokemon = useMemo(
     () =>
       typeof props.pokemon === "string"
@@ -140,7 +142,8 @@ export default function GamePokemonPortrait(props: {
       className={cc("my-box", "clickable", "game-pokemon-portrait", {
         shimmer: shouldShimmer,
         disabled: !canBuy && props.origin === "shop",
-        planned: props.inPlanner ?? false
+        planned: props.inPlanner ?? false,
+        pixelated: !antialiasing
       })}
       style={{
         backgroundColor: rarityColor,
@@ -178,12 +181,16 @@ export default function GamePokemonPortrait(props: {
               pokemonConfig?.selectedShiny,
               pokemonConfig?.selectedEmotion
             )}
-            className="game-pokemon-portrait-evolution-portrait"
+            className={cc("game-pokemon-portrait-evolution-portrait", {
+              pixelated: !antialiasing
+            })}
           />
           <img
             src="/assets/ui/evolution.png"
             alt=""
-            className="game-pokemon-portrait-evolution-icon"
+            className={cc("game-pokemon-portrait-evolution-icon", {
+              pixelated: !antialiasing
+            })}
           />
         </div>
       )}

@@ -7,8 +7,10 @@ import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
 import "./booster-card.css"
+import { usePreferences } from "../../../preferences"
 
 export function BoosterCard(props: { pkm: PkmWithConfig; shards: number }) {
+  const [{ antialiasing }] = usePreferences()
   const { t } = useTranslation()
   const pkm = props.pkm.name
   const pokemonData = getPokemonData(pkm)
@@ -35,6 +37,7 @@ export function BoosterCard(props: { pkm: PkmWithConfig; shards: number }) {
             props.pkm.shiny,
             props.pkm.emotion
           )}
+          className={cc({ pixelated: !antialiasing })}
         ></img>
         <div className="front-text">
           <p className="name">{t(`pkm.${pkm}`)}</p>

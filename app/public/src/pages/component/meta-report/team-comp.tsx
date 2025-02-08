@@ -5,6 +5,7 @@ import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import SynergyIcon from "../icons/synergy-icon"
+import PokemonPortrait from "../pokemon-portrait"
 
 export function rankType(
   a: Synergy,
@@ -84,10 +85,7 @@ export default function TeamComp(props: { team: IMeta; rank: number }) {
               }}
               key={pokemon}
             >
-              <img
-                className="pokemon-portrait"
-                src={getPortraitSrc(PkmIndex[pokemon])}
-              />
+              <PokemonPortrait portrait={PkmIndex[pokemon]} />
               <span>
                 {((props.team.pokemons[pokemon] ?? 0) * 100).toFixed(0) + "%"}
               </span>

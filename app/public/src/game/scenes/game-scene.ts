@@ -28,7 +28,7 @@ import { clearTitleNotificationIcon } from "../../../../utils/window"
 import { getGameContainer } from "../../pages/game"
 import { SOUNDS, playMusic, playSound } from "../../pages/utils/audio"
 import { transformCoordinate } from "../../pages/utils/utils"
-import { loadPreferences, preferences } from "../../preferences"
+import { preference } from "../../preferences"
 import AnimationManager from "../animation-manager"
 import BattleManager from "../components/battle-manager"
 import BoardManager from "../components/board-manager"
@@ -173,25 +173,25 @@ export default class GameScene extends Scene {
   }
 
   registerKeys() {
-    const preferences = loadPreferences()
+    const keybindings = preference("keybindings")
     this.input.keyboard!.removeAllListeners()
     this.input.keyboard!.on(
-      "keydown-" + preferences.keybindings.refresh,
+      "keydown-" + keybindings.refresh,
       throttle(() => {
         playSound(SOUNDS.REFRESH, 0.5)
         this.refreshShop()
       }, 300)
     )
 
-    this.input.keyboard!.on("keydown-" + preferences.keybindings.lock, () => {
+    this.input.keyboard!.on("keydown-" + keybindings.lock, () => {
       this.room?.send(Transfer.LOCK)
     })
 
-    this.input.keyboard!.on("keydown-" + preferences.keybindings.buy_xp, () => {
+    this.input.keyboard!.on("keydown-" + keybindings.buy_xp, () => {
       this.buyExperience()
     })
 
-    this.input.keyboard!.on("keydown-" + preferences.keybindings.sell, (e) => {
+    this.input.keyboard!.on("keydown-" + keybindings.sell, (e) => {
       if (this.pokemonDragged != null) return
       if (this.shopIndexHovered !== null) {
         this.removeFromShop(this.shopIndexHovered)
@@ -210,7 +210,7 @@ export default class GameScene extends Scene {
       }
     })
 
-    this.input.keyboard!.on("keydown-" + preferences.keybindings.switch, () => {
+    this.input.keyboard!.on("keydown-" + keybindings.switch, () => {
       if (this.pokemonHovered) {
         this.switchBetweenBenchAndBoard(this.pokemonHovered)
       }
@@ -301,7 +301,7 @@ export default class GameScene extends Scene {
     const sys = this.sys as any
     if (sys.animatedTiles) {
       sys.animatedTiles.init(map)
-      if (preferences.disableAnimatedTilemap) {
+      if (preference("disableAnimatedTilemap")) {
         sys.animatedTiles.pause()
       }
     }

@@ -10,12 +10,14 @@ import GamePlayerDetail from "./game-player-detail"
 
 import "react-circular-progressbar/dist/styles.css"
 import "./game-player.css"
+import { usePreference } from "../../../preferences"
 
 export default function GamePlayer(props: {
   player: IPlayer
   click: (id: string) => void
   index: number
 }) {
+  const [antialiasing] = usePreference("antialiasing")
   const spectatedPlayerId = useAppSelector(
     (state) => state.game.currentPlayerId
   )
@@ -34,7 +36,8 @@ export default function GamePlayer(props: {
       className={cc("game-player", {
         spectated: spectatedPlayerId === props.player.id,
         self: selfPlayerId === props.player.id,
-        dead: props.player.life <= 0
+        dead: props.player.life <= 0,
+        pixelated: !antialiasing
       })}
       onClick={playerClick}
       data-tooltip-id={"detail-" + props.player.id}

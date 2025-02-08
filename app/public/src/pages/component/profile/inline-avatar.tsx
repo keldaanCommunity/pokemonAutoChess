@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next"
 import { Role } from "../../../../../types"
 import { getAvatarSrc } from "../../../../../utils/avatar"
 import { RoleBadge } from "./role-badge"
+import PokemonPortrait from "../pokemon-portrait"
 
 export function InlineAvatar(props: {
   avatar: string
@@ -21,10 +22,9 @@ export function InlineAvatar(props: {
         gap: "0.25em"
       }}
     >
-      <img
+      <PokemonPortrait
+        avatar={props.avatar}
         style={{ width: "40px", height: "40px" }}
-        src={getAvatarSrc(props.avatar)}
-        className="pokemon-portrait"
       />
       {props.title && (
         <span className="player-title">{t(`title.${props.title}`)}</span>

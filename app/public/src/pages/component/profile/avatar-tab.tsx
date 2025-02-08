@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { changeAvatar } from "../../../stores/NetworkStore"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
+import PokemonPortrait from "../pokemon-portrait"
 
 export function AvatarTab() {
   const { t } = useTranslation()
@@ -37,9 +38,9 @@ export function AvatarTab() {
                   : pokemonConfig.emotions
               ).map((emotion) => {
                 return (
-                  <img
+                  <PokemonPortrait
                     key={`${type}-${pokemonConfig.id}${emotion}`}
-                    className="clickable pokemon-portrait"
+                    className="clickable"
                     onClick={() => {
                       dispatch(
                         changeAvatar({
@@ -49,12 +50,12 @@ export function AvatarTab() {
                         })
                       )
                     }}
-                    src={getPortraitSrc(
-                      pokemonConfig.id,
-                      type === "shiny",
+                    portrait={{
+                      index: pokemonConfig.id,
+                      shiny: type === "shiny",
                       emotion
-                    )}
-                  ></img>
+                    }}
+                  />
                 )
               })
             })

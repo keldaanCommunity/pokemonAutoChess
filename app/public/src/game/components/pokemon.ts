@@ -33,7 +33,7 @@ import { clamp, min } from "../../../../utils/number"
 import { chance } from "../../../../utils/random"
 import { values } from "../../../../utils/schemas"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
-import { preferences } from "../../preferences"
+import { preference } from "../../preferences"
 import type { DebugScene } from "../scenes/debug-scene"
 import type GameScene from "../scenes/game-scene"
 import { displayAbility } from "./abilities-animations"
@@ -274,7 +274,7 @@ export default class PokemonSprite extends DraggableObject {
 
   updateTooltipPosition() {
     if (this.detail) {
-      if (this.input && preferences.showDetailsOnHover) {
+      if (this.input && preference("showDetailsOnHover")) {
         this.detail.setPosition(
           this.input.localX + 200,
           min(0)(this.input.localY - 175)
@@ -356,7 +356,7 @@ export default class PokemonSprite extends DraggableObject {
     super.onPointerDown(pointer)
     if (
       this.shouldShowTooltip &&
-      !preferences.showDetailsOnHover &&
+      !preference("showDetailsOnHover") &&
       pointer.rightButtonDown() &&
       this.scene &&
       !this.detail
@@ -371,7 +371,7 @@ export default class PokemonSprite extends DraggableObject {
     super.onPointerUp()
     if (
       this.shouldShowTooltip &&
-      preferences.showDetailsOnHover &&
+      preference("showDetailsOnHover") &&
       !this.detail
     ) {
       this.openDetail()
@@ -380,7 +380,7 @@ export default class PokemonSprite extends DraggableObject {
 
   onPointerOut(): void {
     super.onPointerOut()
-    if (this.shouldShowTooltip && preferences.showDetailsOnHover) {
+    if (this.shouldShowTooltip && preference("showDetailsOnHover")) {
       this.closeDetail()
     }
   }
@@ -389,7 +389,7 @@ export default class PokemonSprite extends DraggableObject {
     super.onPointerOver(pointer)
 
     if (
-      preferences.showDetailsOnHover &&
+      preference("showDetailsOnHover") &&
       this.shouldShowTooltip &&
       this.detail == null &&
       !pointer.leftButtonDown() // we're dragging another pokemon

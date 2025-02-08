@@ -16,6 +16,7 @@ import { average } from "../../../../../utils/number"
 import { cc } from "../../utils/jsx"
 import { TOURNAMENT_REGISTRATION_TIME } from "../../../../../types/Config"
 import "./tournament-item.css"
+import PokemonPortrait from "../pokemon-portrait"
 
 export default function TournamentItem(props: {
   tournament: TournamentSchema
@@ -196,10 +197,7 @@ export function TournamentPlayer(props: {
       })}
     >
       {props.showScore && <span className="player-rank">{props.rank}</span>}
-      <img
-        src={getAvatarSrc(props.player.avatar)}
-        className="pokemon-portrait"
-      />
+      <PokemonPortrait avatar={props.player.avatar} />
       <p>
         <span className="player-name">{props.player.name}</span>
       </p>
