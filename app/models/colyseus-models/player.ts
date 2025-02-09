@@ -519,7 +519,7 @@ export default class Player extends Schema implements IPlayer {
 
   updateChefsHats() {
     const gourmetLevel = this.synergies.getSynergyStep(Synergy.GOURMET)
-    const newNbHats = [0, 1, 1, 2][gourmetLevel] ?? 0
+    const newNbHats = [0, 1, 2, 2][gourmetLevel] ?? 0
     const hatHolders = values(this.board).filter((p) =>
       p.items.has(Item.CHEF_HAT)
     )

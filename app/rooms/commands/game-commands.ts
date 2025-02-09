@@ -1,6 +1,7 @@
 import { Command } from "@colyseus/command"
 import { Client, updateLobby } from "colyseus"
 import { nanoid } from "nanoid"
+import { DishByPkm } from "../../core/dishes"
 
 import {
   ConditionBasedEvolutionRule,
@@ -1230,6 +1231,34 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       const nbTrees = player.synergies.getSynergyStep(Synergy.GRASS)
       for (let i = 0; i < nbTrees; i++) {
         player.berryTreesStage[i] = max(3)(player.berryTreesStage[i] + 1)
+      }
+
+      const chefs = values(player.board).filter((p) =>
+        p.items.has(Item.CHEF_HAT)
+      )
+      if (chefs.length > 0) {
+        const gourmetLevel = player.synergies.getSynergyStep(Synergy.GOURMET)
+        const nbDishes = [0, 1, 1, 2][gourmetLevel] ?? 1
+        for (const chef of chefs) {
+          const dish = DishByPkm[chef.name]
+          if (dish) {
+            const client = this.room.clients.find(
+              (cli) => cli.auth.uid === player.id
+            )
+            if (client) {
+              setTimeout(() => {
+                client.send(Transfer.COOK, {
+                  pokemonId: chef.id,
+                  dish,
+                  nbDishes
+                })
+                for (let i = 0; i < nbDishes; i++) {
+                  player.items.push(dish)
+                }
+              }, 1500)
+            }
+          }
+        }
       }
 
       if (

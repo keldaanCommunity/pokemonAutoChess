@@ -18,7 +18,7 @@
 
 # Changes to Items
 
-- New item category: Dishes ; produced by Gourmet Chefs, can be consumed between rounds to give a temporary or permanent buff to the Pokémon.
+- New item category: Dishes ; Dishes are cooked by Gourmet chefs to give strong buffs to a Pokémon in the next fight. If not used by the end of the timer, the cook or another random ally will eat it.
 
 # Gameplay
 

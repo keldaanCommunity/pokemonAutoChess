@@ -80,6 +80,7 @@ export enum Transfer {
   LEVEL_UP = "LEVEL_UP",
   SHOP = "SHOP",
   ITEM = "ITEM",
+  COOK = "COOK",
   GAME_START = "GAME_START",
   GAME_START_REQUEST = "GAME_START_REQUEST",
   GAME_END = "GAME_END",

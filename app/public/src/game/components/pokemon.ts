@@ -26,6 +26,7 @@ import {
   SpriteType,
   type Team
 } from "../../../../types/enum/Game"
+import { Item } from "../../../../types/enum/Item"
 import type { Passive } from "../../../../types/enum/Passive"
 import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
 import type { Synergy } from "../../../../types/enum/Synergy"
@@ -558,6 +559,36 @@ export default class PokemonSprite extends DraggableObject {
       this.flip,
       false
     )
+  }
+
+  cookAnimation(dish: Item, nbDishes: number) {
+    this.emoteAnimation()
+    const dishes = Array.from({ length: nbDishes }, (_, i) => dish)
+    dishes.forEach((item, i) => {
+      const itemSprite = this.scene.add.sprite(
+        this.x,
+        this.y,
+        "item",
+        item + ".png"
+      )
+      itemSprite.setScale(0.5)
+      const shinyEffect = this.scene.add.sprite(this.x, this.y, "shine")
+      shinyEffect.setScale(2)
+      shinyEffect.play("shine")
+      this.scene.tweens.add({
+        targets: [itemSprite, shinyEffect],
+        ease: Phaser.Math.Easing.Quadratic.Out,
+        duration: 1000,
+        y: this.y - 70,
+        x: this.x + (i - (dishes.length - 1) / 2) * 70,
+        onComplete: () => {
+          setTimeout(() => {
+            itemSprite.destroy()
+            shinyEffect.destroy()
+          }, 1000)
+        }
+      })
+    })
   }
 
   specialAttackAnimation(group: Phaser.GameObjects.Group, ultCount: number) {

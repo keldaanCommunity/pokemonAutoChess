@@ -2011,9 +2011,9 @@
     "FLUID": "Ally team gains 1% ATK_SPEED and 4 HP per unique active synergy",
     "SHAPELESS": "Ally team gains 3% ATK_SPEED and 8 HP per unique active synergy",
     "ETHEREAL": "Ally team gains 6% ATK_SPEED and 12 HP per unique active synergy",
-    "APPETIZER": "Gain a Chef's Hat. Cook a Signature Dish after every 2 rounds",
-    "LUNCH_BREAK": "Cook a Signature Dish after every round",
-    "BANQUET": "Gain a second Chef's Hat"
+    "APPETIZER": "Gain a Chef's Hat. Cook a Signature Dish after every round.",
+    "LUNCH_BREAK": "Gain a second Chef's Hat",
+    "BANQUET": "Your chefs cook a second dish after every round."
   },
   "item": {
     "FOSSIL_STONE": "Fossil Stone",
@@ -3124,7 +3124,7 @@
   "components": "Components",
   "craftable_items": "Craftable",
   "berries": "Berries",
-  "dishes": "Signature Dishes",
+  "dishes": "Dishes",
   "signature_dish": "Signature Dish",
   "artificial_items": "Artificial",
   "weather_rocks": "Weather Rocks",
@@ -3133,7 +3133,7 @@
   "shiny_items": "Shiny Items",
   "craftable_items_description": "Combine two components to create powerful items !",
   "berries_description": "When GRASS synergy is active, you can collect berries by clicking on the berry trees next to your avatar.",
-  "dishes_description": "Signature dishes are cooked by GOURMET chefs to give strong buffs to Pokémon in the next fight.",
+  "dishes_description": "Dishes are cooked by GOURMET chefs to give strong buffs to a Pokémon in the next fight. If not used by the end of the timer, the cook or another random ally will eat it.",
   "artificial_items_description": "ARTIFICIAL synergy gives you exclusive items when activated. Three of them are randomly picked for each player at the start of the game. ",
   "weather_rocks_description": "Weather rocks are found after fighting under a certain weather with ROCK synergy active, and provide bonuses to your team when this weather is active. Their effects can be cumulated.",
   "tm_hm_description": "HUMAN synergy gives you TM/HM when activated. They can be used to change the ability of a HUMAN Pokémon.",
