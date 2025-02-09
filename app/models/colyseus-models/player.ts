@@ -199,7 +199,7 @@ export default class Player extends Schema implements IPlayer {
         case Pkm.MORPEKO_HANGRY:
           this.firstPartner = Pkm.MORPEKO
           break
-          
+
         case Pkm.DARMANITAN_ZEN:
           this.firstPartner = Pkm.DARMANITAN
           break
@@ -320,9 +320,13 @@ export default class Player extends Schema implements IPlayer {
 
   updateSynergies() {
     const pokemons: Pokemon[] = values(this.board)
+    const previousSynergies = this.synergies.toMap()
     let updatedSynergies = computeSynergies(pokemons)
 
-    const artifNeedsRecomputing = this.updateArtificialItems(updatedSynergies)
+    const artifNeedsRecomputing = this.updateArtificialItems(
+      previousSynergies,
+      updatedSynergies
+    )
     if (artifNeedsRecomputing) {
       /* NOTE: computing twice is costly in performance but the safest way to get the synergies
       right after losing an artificial item, since many edgecases may need to be adressed when 
@@ -332,7 +336,7 @@ export default class Player extends Schema implements IPlayer {
       updatedSynergies = computeSynergies(pokemons)
     }
 
-    const previousLight = this.synergies.get(Synergy.LIGHT) ?? 0
+    const previousLight = previousSynergies.get(Synergy.LIGHT) ?? 0
     const newLight = updatedSynergies.get(Synergy.LIGHT) ?? 0
     const minimumToGetLight = SynergyTriggers[Synergy.LIGHT][0]
     const lightChanged =
@@ -345,18 +349,44 @@ export default class Player extends Schema implements IPlayer {
 
     if (lightChanged) this.onLightChange()
 
-    /* NOTE: should be optimized to update only when the corresponding synergy has changed */
-    this.updateFishingRods()
-    this.updateWeatherRocks()
-    this.updateTms()
+    if (
+      previousSynergies.get(Synergy.WATER) !==
+      updatedSynergies.get(Synergy.WATER)
+    ) {
+      this.updateFishingRods()
+    }
+
+    if (
+      previousSynergies.get(Synergy.ROCK) !== updatedSynergies.get(Synergy.ROCK)
+    ) {
+      this.updateWeatherRocks()
+    }
+
+    if (
+      previousSynergies.get(Synergy.HUMAN) !==
+      updatedSynergies.get(Synergy.HUMAN)
+    ) {
+      this.updateTms()
+    }
+
+    if (
+      previousSynergies.get(Synergy.GOURMET) !==
+      updatedSynergies.get(Synergy.GOURMET)
+    ) {
+      this.updateChefsHats()
+    }
+
     this.updateWildChance()
     this.effects.update(this.synergies, this.board)
   }
 
-  updateArtificialItems(updatedSynergies: Map<Synergy, number>): boolean {
+  updateArtificialItems(
+    previousSynergies: Map<Synergy, number>,
+    updatedSynergies: Map<Synergy, number>
+  ): boolean {
     let needsRecomputingSynergiesAgain = false
     const previousNbArtifItems = SynergyTriggers[Synergy.ARTIFICIAL].filter(
-      (n) => (this.synergies.get(Synergy.ARTIFICIAL) ?? 0) >= n
+      (n) => (previousSynergies.get(Synergy.ARTIFICIAL) ?? 0) >= n
     ).length
 
     const newNbArtifItems = SynergyTriggers[Synergy.ARTIFICIAL].filter(
@@ -423,9 +453,7 @@ export default class Player extends Schema implements IPlayer {
   }
 
   updateWeatherRocks() {
-    const nbWeatherRocks = SynergyTriggers[Synergy.ROCK].filter(
-      (n) => (this.synergies.get(Synergy.ROCK) ?? 0) >= n
-    ).length
+    const nbWeatherRocks = this.synergies.getSynergyStep(Synergy.ROCK)
 
     let weatherRockInInventory
     do {
@@ -444,9 +472,7 @@ export default class Player extends Schema implements IPlayer {
   }
 
   updateTms() {
-    const nbTMs = SynergyTriggers[Synergy.HUMAN].filter(
-      (n) => (this.synergies.get(Synergy.HUMAN) ?? 0) >= n
-    ).length
+    const nbTMs = this.synergies.getSynergyStep(Synergy.HUMAN)
 
     let tmInInventory
     do {
@@ -467,9 +493,7 @@ export default class Player extends Schema implements IPlayer {
   }
 
   updateFishingRods() {
-    const fishingLevel = SynergyTriggers[Synergy.WATER].filter(
-      (n) => (this.synergies.get(Synergy.WATER) ?? 0) >= n
-    ).length
+    const fishingLevel = this.synergies.getSynergyStep(Synergy.WATER)
 
     if (this.items.includes(Item.OLD_ROD) && fishingLevel !== 1)
       removeInArray<Item>(this.items, Item.OLD_ROD)
@@ -491,6 +515,33 @@ export default class Player extends Schema implements IPlayer {
       values(this.board)
         .filter((p) => p.types.has(Synergy.WILD))
         .reduce((total, p) => total + p.stars * (1 + p.luck / 100), 0) / 100
+  }
+
+  updateChefsHats() {
+    const gourmetLevel = this.synergies.getSynergyStep(Synergy.GOURMET)
+    const newNbHats = [0, 1, 1, 2][gourmetLevel] ?? 0
+    const hatHolders = values(this.board).filter((p) =>
+      p.items.has(Item.CHEF_HAT)
+    )
+    let currentNbHats =
+      this.items.filter((item) => item === Item.CHEF_HAT).length +
+      hatHolders.length
+
+    do {
+      if (newNbHats > currentNbHats) {
+        this.items.push(Item.CHEF_HAT)
+        currentNbHats++
+      } else if (newNbHats < currentNbHats) {
+        if (this.items.includes(Item.CHEF_HAT)) {
+          removeInArray<Item>(this.items, Item.CHEF_HAT)
+          currentNbHats--
+        } else {
+          hatHolders.at(-1)?.items.delete(Item.CHEF_HAT)
+          hatHolders.pop()
+          currentNbHats--
+        }
+      }
+    } while (newNbHats !== currentNbHats)
   }
 
   updateRegionalPool(state: GameState, mapChanged: boolean) {

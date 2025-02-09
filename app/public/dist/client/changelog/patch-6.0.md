@@ -24,6 +24,8 @@
 
 # UI
 
+- Artificial items are now automatically dropped when benching the unit that was holding them.
+
 # Bugfix
 
 # Misc

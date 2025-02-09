@@ -1535,8 +1535,7 @@ export default class Simulation extends Schema implements ISimulation {
 
       if (
         this.weather !== Weather.NEUTRAL &&
-        (this.redPlayer.synergies.get(Synergy.ROCK) ?? 0) >=
-          SynergyTriggers[Synergy.ROCK][0]
+        this.redPlayer.synergies.getSynergyStep(Synergy.ROCK) > 0
       ) {
         const rockCollected = WeatherRocksByWeather.get(this.weather)
         if (rockCollected) {
@@ -1587,8 +1586,7 @@ export default class Simulation extends Schema implements ISimulation {
 
       if (
         this.weather !== Weather.NEUTRAL &&
-        (this.bluePlayer.synergies.get(Synergy.ROCK) ?? 0) >=
-          SynergyTriggers[Synergy.ROCK][0]
+        this.bluePlayer.synergies.getSynergyStep(Synergy.ROCK) > 0
       ) {
         const rockCollected = WeatherRocksByWeather.get(this.weather)
         if (rockCollected) {
