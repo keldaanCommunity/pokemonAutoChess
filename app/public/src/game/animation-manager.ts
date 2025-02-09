@@ -230,6 +230,8 @@ export default class AnimationManager {
         return config?.hurt ?? AnimationType.Hurt
       case PokemonActionState.SLEEP:
         return config?.sleep ?? AnimationType.Sleep
+      case PokemonActionState.EAT:
+        return config?.eat ?? AnimationType.Eat
       case PokemonActionState.WALK:
         return AnimationType.Walk
       case PokemonActionState.ATTACK:

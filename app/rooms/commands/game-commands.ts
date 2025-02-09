@@ -38,11 +38,17 @@ import {
   StageDuration
 } from "../../types/Config"
 import { Effect } from "../../types/enum/Effect"
-import { BattleResult, GamePhaseState, Team } from "../../types/enum/Game"
+import {
+  BattleResult,
+  GamePhaseState,
+  PokemonActionState,
+  Team
+} from "../../types/enum/Game"
 import {
   AbilityPerTM,
   ArtificialItems,
   Berries,
+  Dishes,
   FishingRods,
   HMs,
   Item,
@@ -558,6 +564,17 @@ export class OnDragDropItemCommand extends Command<
         player.life = min(1)(player.life - 3)
         removeInArray(player.items, item)
       }
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
+
+    if (Dishes.includes(item)) {
+      if (pokemon.meal === "") {
+        pokemon.meal = item
+        pokemon.action = PokemonActionState.EAT
+        removeInArray(player.items, item)
+      }
+
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
     }

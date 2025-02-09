@@ -3128,6 +3128,7 @@ export const AnimationConfig: {
     hop?: AnimationType
     hurt?: AnimationType
     sleep?: AnimationType
+    eat?: AnimationType
     shinyUnavailable?: boolean
     noShadow?: boolean
   }
