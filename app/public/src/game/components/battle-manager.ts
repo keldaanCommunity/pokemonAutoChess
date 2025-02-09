@@ -597,6 +597,7 @@ export default class BattleManager {
         const baseHP = getPokemonData(pokemon.name).hp
         const sizeBuff = (pokemon.hp - baseHP) / baseHP
         pkm.sprite.setScale(2 + sizeBuff)
+        pkm.lifebar?.setMaxAmount(pokemon.hp)
       } else if (field == "life") {
         pkm.life = pokemon.life
         pkm.lifebar?.setAmount(pkm.life)
