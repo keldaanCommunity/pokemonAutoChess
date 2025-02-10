@@ -157,19 +157,20 @@ export default class Simulation extends Schema implements ISimulation {
     this.applyPostEffects(blueBoard, redBoard)
 
     // afterSimulationStart hooks
-    for (const player of [this.bluePlayer, this.redPlayer]) {
+    for (const [player, team] of [
+      [this.bluePlayer, this.blueTeam] as const,
+      [this.redPlayer, this.redTeam] as const
+    ]) {
       if (player) {
-        const entityTeam =
-          player.team === Team.BLUE_TEAM ? this.blueTeam : this.redTeam
         player.board.forEach((pokemon) => {
-          const entity = values(entityTeam).find(
+          const entity = values(team).find(
             (p) => p.refToBoardPokemon === pokemon
           )
           if (entity) {
             pokemon.afterSimulationStart({
               simulation: this,
               player,
-              team: entityTeam,
+              team,
               entity
             })
           }
