@@ -2024,12 +2024,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    if (
-      this.passive === Passive.SHUCKLE &&
-      Berries.includes(berry) &&
-      this.player
-    ) {
-      this.player.items.push(Item.BERRY_JUICE)
+    if (this.effects.has(Effect.BERRY_JUICE)) {
+      this.addShield(50, this, 0, false)
     }
   }
 

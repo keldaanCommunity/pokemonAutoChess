@@ -44,7 +44,11 @@ export const DishByPkm: { [pkm in Pkm]?: Item } = {
 
 export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   BERRIES: [],
-  BERRY_JUICE: [],
+  BERRY_JUICE: [
+    new OnSpawnEffect((entity) => {
+      entity.effects.add(EffectEnum.BERRY_JUICE)
+    })
+  ],
   CASTELIACONE: [
     new OnSpawnEffect((entity) => {
       entity.effects.add(EffectEnum.CASTELIACONE)
