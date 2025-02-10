@@ -7,7 +7,7 @@ import {
   SpriteType
 } from "../../../types/enum/Game"
 import { Berries } from "../../../types/enum/Item"
-import { AnimationConfig, Pkm, PkmByIndex } from "../../../types/enum/Pokemon"
+import { AnimationConfig, PkmByIndex } from "../../../types/enum/Pokemon"
 import { logger } from "../../../utils/logger"
 import { fpsToDuration } from "../../../utils/number"
 import atlas from "../assets/atlas.json"
@@ -46,6 +46,7 @@ export default class AnimationManager {
         if (pokemonData.passive !== Passive.INANIMATE) {
           actions.add(AnimationType.Walk)
           actions.add(config.sleep ?? AnimationType.Sleep)
+          actions.add(config.eat ?? AnimationType.Eat)
           actions.add(config.hop ?? AnimationType.Hop)
           actions.add(config.attack ?? AnimationType.Attack)
           actions.add(config.ability ?? AnimationType.SpAttack)
@@ -66,6 +67,11 @@ export default class AnimationManager {
             directionArray.forEach((direction) => {
               const durationArray: number[] =
                 durations[`${index}/${shiny}/${action}/${mode}`]
+              if (!durationArray && action === AnimationType.Eat) {
+                // Very few pokemons have eat animations, so we use sleep animations instead as a fallback
+                config.eat = AnimationType.Sleep
+                return
+              }
               if (durationArray) {
                 const frameArray = this.game.anims.generateFrameNames(index, {
                   start: 0,
@@ -82,6 +88,7 @@ export default class AnimationManager {
                 const shouldLoop = [
                   AnimationType.Idle,
                   AnimationType.Sleep,
+                  AnimationType.Eat,
                   AnimationType.Hop
                 ].includes(action)
 

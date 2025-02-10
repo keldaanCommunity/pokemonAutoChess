@@ -7052,7 +7052,7 @@ export const AnimationConfig: {
   [Pkm.PHANPY]: {
     attack: AnimationType.Attack,
     ability: AnimationType.TumbleBack,
-    emote: AnimationType.Eat
+    emote: AnimationType.DeepBreath
   },
   [Pkm.DONPHAN]: {
     attack: AnimationType.Attack,

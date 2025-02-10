@@ -7,7 +7,7 @@ import {
   HatchEvolutionRule,
   ItemEvolutionRule
 } from "../../core/evolution-rules"
-import { onItemRemoved } from "../../core/items"
+import { ItemStats, onItemRemoved } from "../../core/items"
 import Simulation from "../../core/simulation"
 import { DelayedCommand } from "../../core/simulation-command"
 import GameState from "../../rooms/states/game-state"
