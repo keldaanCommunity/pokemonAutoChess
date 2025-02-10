@@ -2318,7 +2318,7 @@
     "CURRY": "Consumed on use. Start the next fight RAGE for 5 seconds.",
     "CASTELIACONE": "Consumed on use. The first attack in the next fight will inflict FREEZE for 5 seconds on hit.",
     "WHIPPED_DREAM": "Consumed on use. The first attack in the next fight will inflict CHARM for 5 seconds on hit.",
-    "BERRY_JUICE": "Consumed on use. Gain 50 SHIELD every time a berry is consumed.",
+    "BERRY_JUICE": "Consumed on use. Gain 50 SHIELD at the start of the next fight, and every time a berry is consumed.",
     "TART_APPLE": "Consumed on use. Gain 50 SHIELD. If not used, turn into a SWEET_APPLE.",
     "SWEET_APPLE": "Consumed on use. Gain 80 SHIELD. If not used, turn into a SIRUPY_APPLE.",
     "SIRUPY_APPLE": "Consumed on use. Gain 100 SHIELD.",
