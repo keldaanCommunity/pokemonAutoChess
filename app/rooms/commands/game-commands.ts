@@ -1,7 +1,7 @@
 import { Command } from "@colyseus/command"
 import { Client, updateLobby } from "colyseus"
 import { nanoid } from "nanoid"
-import { DishByPkm } from "../../core/dishes"
+import { DishByPkm, onMealTaken } from "../../core/dishes"
 
 import {
   ConditionBasedEvolutionRule,
@@ -574,6 +574,7 @@ export class OnDragDropItemCommand extends Command<
         pokemon.action = PokemonActionState.EAT
         removeInArray(player.items, item)
         client.send(Transfer.DRAG_DROP_FAILED, message)
+        onMealTaken(pokemon, item, player, this.state)
         return
       } else {
         client.send(Transfer.DRAG_DROP_FAILED, {
@@ -1276,12 +1277,31 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                   nbDishes
                 })
                 for (let i = 0; i < nbDishes; i++) {
-                  player.items.push(dish)
+                  if (dish === Item.BERRIES) {
+                    player.items.push(pickRandomIn(Berries))
+                  } else {
+                    player.items.push(dish)
+                  }
                 }
               }, 1500)
             }
           }
         }
+      }
+
+      while (player.items.includes(Item.SWEET_APPLE)) {
+        player.items.splice(
+          player.items.findIndex((i) => i === Item.SWEET_APPLE),
+          1,
+          Item.SIRUPY_APPLE
+        )
+      }
+      while (player.items.includes(Item.TART_APPLE)) {
+        player.items.splice(
+          player.items.findIndex((i) => i === Item.TART_APPLE),
+          1,
+          Item.SWEET_APPLE
+        )
       }
 
       if (

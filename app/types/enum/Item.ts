@@ -2,7 +2,6 @@ import { reverseMap } from "../../utils/map"
 import { Ability } from "./Ability"
 import { Synergy } from "./Synergy"
 import { Weather } from "./Weather"
-import { Stat } from "./Game"
 
 export enum Item {
   FOSSIL_STONE = "FOSSIL_STONE",
@@ -469,7 +468,7 @@ export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.HM_WHIRLPOOL]: Ability.WHIRLPOOL
 }
 
-export const Dishes: Item[] = [
+export const Dishes = [
   Item.RAGE_CANDY_BAR,
   Item.TEA,
   Item.CURRY,
@@ -486,4 +485,4 @@ export const Dishes: Item[] = [
   Item.ROCK_SALT,
   Item.NUTRITIOUS_EGG,
   Item.LEFTOVERS
-]
+] as const

@@ -1,5 +1,16 @@
-import { Item } from "../types/enum/Item"
+import { Dishes, Item } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
+import { Effect, OnSpawnEffect, OnHitEffect, PeriodicEffect } from "./effect"
+import { Effect as EffectEnum } from "../types/enum/Effect"
+import GameState from "../rooms/states/game-state"
+import PokemonFactory from "../models/pokemon-factory"
+import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../models/precomputed/precomputed-types-and-categories"
+import { IPokemon, IPlayer } from "../types"
+import { Rarity } from "../types/enum/Game"
+import { getFirstAvailablePositionInBench } from "../utils/board"
+import { pickRandomIn } from "../utils/random"
+import { values } from "../utils/schemas"
+import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 
 export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.LICKITUNG]: Item.RAGE_CANDY_BAR,
@@ -29,4 +40,133 @@ export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.GARGANACL]: Item.ROCK_SALT,
   [Pkm.MUNCHLAX]: Item.LEFTOVERS,
   [Pkm.SNORLAX]: Item.LEFTOVERS
+}
+
+export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
+  BERRIES: [],
+  BERRY_JUICE: [],
+  CASTELIACONE: [
+    new OnSpawnEffect((entity) => {
+      entity.effects.add(EffectEnum.CASTELIACONE)
+    }),
+    new OnHitEffect((entity, target, board) => {
+      if (entity.effects.has(EffectEnum.CASTELIACONE)) {
+        target.status.triggerFreeze(5000, target)
+        entity.effects.delete(EffectEnum.CASTELIACONE)
+      }
+    })
+  ],
+  CURRY: [
+    new OnSpawnEffect((entity) => {
+      entity.status.triggerRage(5000, entity)
+    })
+  ],
+  HONEY: [],
+  LEFTOVERS: [],
+  MOOMOO_MILK: [],
+  NUTRITIOUS_EGG: [
+    new OnSpawnEffect((entity) => {
+      // Start the next fight with +30% base ATK, DEF, SPE_DEF and AP
+      entity.addAttack(0.3 * entity.baseAtk, entity, 0, false)
+      entity.addDefense(0.3 * entity.baseDef, entity, 0, false)
+      entity.addSpecialDefense(0.3 * entity.baseSpeDef, entity, 0, false)
+      entity.addAbilityPower(30, entity, 0, false)
+    })
+  ],
+  RAGE_CANDY_BAR: [
+    new OnSpawnEffect((entity) => {
+      entity.addAttack(5, entity, 0, false)
+    })
+  ],
+  ROCK_SALT: [
+    new OnSpawnEffect((entity) => {
+      entity.status.triggerRuneProtect(8000)
+    })
+  ],
+  SIRUPY_APPLE: [
+    new OnSpawnEffect((entity) => {
+      entity.addShield(100, entity, 0, false)
+    })
+  ],
+  SWEET_APPLE: [
+    new OnSpawnEffect((entity) => {
+      entity.addShield(80, entity, 0, false)
+    })
+  ],
+  SWEET_HERB: [
+    new OnSpawnEffect((entity) => {
+      entity.effectsSet.add(
+        new PeriodicEffect(
+          (entity) => {
+            entity.handleHeal(0.05 * entity.hp, entity, 0, false)
+          },
+          Item.SWEET_HERB,
+          2000
+        )
+      )
+    })
+  ],
+  TEA: [
+    new OnSpawnEffect((entity) => {
+      entity.addPP(50, entity, 0, false)
+    })
+  ],
+  TART_APPLE: [
+    new OnSpawnEffect((entity) => {
+      entity.addShield(50, entity, 0, false)
+    })
+  ],
+  WHIPPED_DREAM: [
+    new OnSpawnEffect((entity) => {
+      entity.effects.add(EffectEnum.WHIPPED_DREAM)
+    }),
+    new OnHitEffect((entity, target, board) => {
+      if (entity.effects.has(EffectEnum.WHIPPED_DREAM)) {
+        target.status.triggerCharm(5000, target, entity)
+        entity.effects.delete(EffectEnum.WHIPPED_DREAM)
+      }
+    })
+  ]
+}
+
+export function onMealTaken(
+  pokemon: IPokemon,
+  item: Item,
+  player: IPlayer,
+  state: GameState
+) {
+  if (item === Item.MOOMOO_MILK) {
+    pokemon.hp += 10
+  }
+  if (item === Item.HONEY) {
+    const x = getFirstAvailablePositionInBench(player.board)
+    if (x !== undefined) {
+      const pickedSynergy = pickRandomIn(values(pokemon.types))
+      const rarity =
+        [
+          Rarity.COMMON,
+          Rarity.UNCOMMON,
+          Rarity.RARE,
+          Rarity.EPIC,
+          Rarity.ULTRA,
+          Rarity.UNIQUE
+        ][Math.floor(state.stageLevel / 5)] ?? Rarity.UNIQUE
+      const candidates = (
+        [
+          ...PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[pickedSynergy].pokemons,
+          ...PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[pickedSynergy]
+            .additionalPokemons
+        ] as Pkm[]
+      )
+        .map((p) => getPokemonData(p))
+        .filter((p) => p.stars === 1 && p.rarity === rarity)
+
+      let pkm: Pkm = pickRandomIn(candidates)?.name
+      if (!pkm) pkm = Pkm.DITTO
+      const pokemonGained = PokemonFactory.createPokemonFromName(pkm, player)
+      pokemonGained.positionX = x
+      pokemonGained.positionY = 0
+      player.board.set(pokemonGained.id, pokemonGained)
+    }
+  }
 }

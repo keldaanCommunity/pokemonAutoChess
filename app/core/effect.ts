@@ -24,6 +24,9 @@ export abstract class Effect {
   }
 }
 
+// applied on fight start or when spawning
+export class OnSpawnEffect extends Effect {}
+
 // item effect applied on fight start of after stealing/obtaining an item
 export class OnItemGainedEffect extends Effect {}
 
@@ -44,35 +47,17 @@ export class OnKillEffect extends Effect {
   }
 }
 
-export class MonsterKillEffect extends OnKillEffect {
-  hpBoosted: number = 0
-  count: number = 0
-  synergyLevel: number
-  constructor(effect: EffectEnum) {
-    super(undefined, effect)
-    this.synergyLevel = SynergyEffects[Synergy.MONSTER].indexOf(effect)
-  }
-
-  apply(pokemon, target, board) {
-    const attackBoost = [3, 6, 10, 10][this.synergyLevel] ?? 10
-    const apBoost = [10, 20, 30, 30][this.synergyLevel] ?? 30
-    const hpGain = [0.2, 0.4, 0.6, 0.6][this.synergyLevel] ?? 0.6
-    const lifeBoost = hpGain * target.hp
-    pokemon.addAttack(attackBoost, pokemon, 0, false)
-    pokemon.addAbilityPower(apBoost, pokemon, 0, false)
-    pokemon.addMaxHP(lifeBoost, pokemon, 0, false)
-    this.hpBoosted += lifeBoost
-    this.count += 1
-  }
-}
-
-export abstract class PeriodicEffect extends Effect {
+export class PeriodicEffect extends Effect {
   intervalMs: number
   timer: number
   count: number
 
-  constructor(intervalMs: number, origin?: EffectOrigin) {
-    super(undefined, origin)
+  constructor(
+    effect: (entity: PokemonEntity, ...others: any[]) => void,
+    origin: EffectOrigin,
+    intervalMs: number
+  ) {
+    super(effect, origin)
     this.intervalMs = intervalMs
     this.timer = intervalMs
     this.count = 0
@@ -84,32 +69,6 @@ export abstract class PeriodicEffect extends Effect {
       this.count++
       this.apply(entity)
       this.timer = this.intervalMs
-    }
-  }
-}
-
-export class GrowGroundEffect extends PeriodicEffect {
-  synergyLevel: number
-  constructor(effect: EffectEnum) {
-    super(3000, effect)
-    this.synergyLevel = SynergyEffects[Synergy.GROUND].indexOf(effect) + 1
-  }
-
-  apply(pokemon) {
-    if (this.count > 5) {
-      return
-    }
-    pokemon.addDefense(this.synergyLevel, pokemon, 0, false)
-    pokemon.addSpecialDefense(this.synergyLevel, pokemon, 0, false)
-    pokemon.addAttack(this.synergyLevel, pokemon, 0, false)
-    pokemon.transferAbility("GROUND_GROW")
-    if (
-      pokemon.items.has(Item.BIG_NUGGET) &&
-      this.count === 5 &&
-      pokemon.player
-    ) {
-      pokemon.player.addMoney(3, true, pokemon)
-      pokemon.count.moneyCount += 3
     }
   }
 }
@@ -142,20 +101,6 @@ export class OnAttackEffect extends Effect {
   }
 }
 
-export class FireHitEffect extends OnAttackEffect {
-  count: number = 0
-  synergyLevel: number
-  constructor(effect: EffectEnum) {
-    super(undefined, effect)
-    this.synergyLevel = SynergyEffects[Synergy.FIRE].indexOf(effect)
-  }
-
-  apply(pokemon, target, board) {
-    pokemon.addAttack(this.synergyLevel, pokemon, 0, false)
-    this.count += 1
-  }
-}
-
 export class OnAbilityCastEffect extends Effect {
   apply(
     pokemon: PokemonEntity,
@@ -178,6 +123,69 @@ export class OnAbilityCastEffect extends Effect {
   }
 }
 
+export class MonsterKillEffect extends OnKillEffect {
+  hpBoosted: number = 0
+  count: number = 0
+  synergyLevel: number
+  constructor(effect: EffectEnum) {
+    super(undefined, effect)
+    this.synergyLevel = SynergyEffects[Synergy.MONSTER].indexOf(effect)
+  }
+
+  apply(pokemon, target, board) {
+    const attackBoost = [3, 6, 10, 10][this.synergyLevel] ?? 10
+    const apBoost = [10, 20, 30, 30][this.synergyLevel] ?? 30
+    const hpGain = [0.2, 0.4, 0.6, 0.6][this.synergyLevel] ?? 0.6
+    const lifeBoost = hpGain * target.hp
+    pokemon.addAttack(attackBoost, pokemon, 0, false)
+    pokemon.addAbilityPower(apBoost, pokemon, 0, false)
+    pokemon.addMaxHP(lifeBoost, pokemon, 0, false)
+    this.hpBoosted += lifeBoost
+    this.count += 1
+  }
+}
+
+export class GrowGroundEffect extends PeriodicEffect {
+  synergyLevel: number
+  constructor(effect: EffectEnum) {
+    super(
+      (pokemon) => {
+        if (this.count > 5) {
+          return
+        }
+        pokemon.addDefense(this.synergyLevel, pokemon, 0, false)
+        pokemon.addSpecialDefense(this.synergyLevel, pokemon, 0, false)
+        pokemon.addAttack(this.synergyLevel, pokemon, 0, false)
+        pokemon.transferAbility("GROUND_GROW")
+        if (
+          pokemon.items.has(Item.BIG_NUGGET) &&
+          this.count === 5 &&
+          pokemon.player
+        ) {
+          pokemon.player.addMoney(3, true, pokemon)
+          pokemon.count.moneyCount += 3
+        }
+      },
+      effect,
+      3000
+    )
+    this.synergyLevel = SynergyEffects[Synergy.GROUND].indexOf(effect) + 1
+  }
+}
+
+export class FireHitEffect extends OnAttackEffect {
+  count: number = 0
+  synergyLevel: number
+  constructor(effect: EffectEnum) {
+    super(undefined, effect)
+    this.synergyLevel = SynergyEffects[Synergy.FIRE].indexOf(effect)
+  }
+
+  apply(pokemon, target, board) {
+    pokemon.addAttack(this.synergyLevel, pokemon, 0, false)
+    this.count += 1
+  }
+}
 export class SoundCryEffect extends OnAbilityCastEffect {
   count: number = 0
   synergyLevel: number = -1

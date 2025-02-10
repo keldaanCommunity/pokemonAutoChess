@@ -51,9 +51,11 @@ import {
   FireHitEffect,
   MonsterKillEffect,
   SoundCryEffect,
-  WaterSpringEffect
+  WaterSpringEffect,
+  OnSpawnEffect
 } from "./effect"
 import { SynergyEffects } from "../models/effects"
+import { DishEffects } from "./dishes"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -224,6 +226,10 @@ export default class Simulation extends Schema implements ISimulation {
     pokemonEntity.isClone = isClone
     this.applySynergyEffects(pokemonEntity)
     this.applyItemsEffects(pokemonEntity)
+    if (pokemon.meal) {
+      this.applyDishEffects(pokemonEntity, pokemon.meal)
+    }
+
     this.board.setValue(
       pokemonEntity.positionX,
       pokemonEntity.positionY,
@@ -248,6 +254,10 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     pokemon.onSpawn({ entity: pokemonEntity, simulation: this })
+    pokemonEntity.effectsSet.forEach((effect) => {
+      if (effect instanceof OnSpawnEffect) effect.apply(pokemonEntity)
+    })
+
     return pokemonEntity
   }
 
@@ -423,6 +433,12 @@ export default class Simulation extends Schema implements ISimulation {
       // allow sound pokemon to always wake up allies without searching through the board twice
       pokemon.effectsSet.add(new SoundCryEffect())
     }
+  }
+
+  applyDishEffects(pokemon: PokemonEntity, dish: Item) {
+    const dishEffects = DishEffects[dish]
+    if (!dishEffects) return
+    dishEffects.forEach((effect) => pokemon.effectsSet.add(effect))
   }
 
   applyPostEffects(
