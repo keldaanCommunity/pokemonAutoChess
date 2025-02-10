@@ -573,10 +573,16 @@ export class OnDragDropItemCommand extends Command<
         pokemon.meal = item
         pokemon.action = PokemonActionState.EAT
         removeInArray(player.items, item)
+        client.send(Transfer.DRAG_DROP_FAILED, message)
+        return
+      } else {
+        client.send(Transfer.DRAG_DROP_FAILED, {
+          ...message,
+          text: "belly_full",
+          pokemonId: pokemon.id
+        })
+        return
       }
-
-      client.send(Transfer.DRAG_DROP_FAILED, message)
-      return
     }
 
     if (item === Item.EVIOLITE && !pokemon.hasEvolution) {

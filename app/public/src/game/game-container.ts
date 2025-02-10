@@ -45,6 +45,7 @@ import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
 import { getPortraitSrc } from "../../../utils/avatar"
 import { BoardMode } from "./components/board-manager"
 import GameScene from "./scenes/game-scene"
+import { t } from "i18next"
 
 class GameContainer {
   room: Room<GameState>
@@ -595,6 +596,8 @@ class GameContainer {
   handleDragDropFailed(message: {
     updateBoard: boolean
     updateItems: boolean
+    text?: string
+    pokemonId?: string
   }) {
     const gameScene = this.gameScene
     if (gameScene?.lastDragDropPokemon && message.updateBoard) {
@@ -606,6 +609,14 @@ class GameContainer {
 
     if (message.updateItems && gameScene && this.player) {
       gameScene.itemsContainer?.render(this.player.items)
+    }
+
+    if (message.text && message.pokemonId) {
+      const pokemon = this.player?.board.get(message.pokemonId)
+      if (pokemon) {
+        const [x, y] = transformCoordinate(pokemon.positionX, pokemon.positionY)
+        gameScene?.board?.displayText(x, y, t(message.text))
+      }
     }
   }
 

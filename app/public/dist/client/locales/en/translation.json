@@ -3208,6 +3208,7 @@
   "berry_gained": "+1 BERRY !",
   "berry_unripe": "NOT YET !",
   "full": "FULL",
+  "belly_full": "BELLY FULL!",
   "drop_here_to_sell": "Drop here to sell",
   "for_price_gold": "for {{price}} gold",
   "buy_xp": "Buy XP {{cost}}",

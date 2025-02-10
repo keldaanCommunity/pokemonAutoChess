@@ -3226,7 +3226,8 @@ export const AnimationConfig: {
   [Pkm.ZUBAT]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Attack,
-    emote: AnimationType.Charge
+    emote: AnimationType.Charge,
+    eat: AnimationType.Sleep
   },
   [Pkm.GOLBAT]: {
     attack: AnimationType.Shoot,
