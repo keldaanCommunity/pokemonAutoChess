@@ -46,6 +46,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   BERRIES: [],
   BERRY_JUICE: [
     new OnSpawnEffect((entity) => {
+      entity.addShield(50, entity, 0, false)
       entity.effects.add(EffectEnum.BERRY_JUICE)
     })
   ],
