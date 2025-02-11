@@ -39,7 +39,8 @@ export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.NACLSTACK]: Item.ROCK_SALT,
   [Pkm.GARGANACL]: Item.ROCK_SALT,
   [Pkm.MUNCHLAX]: Item.LEFTOVERS,
-  [Pkm.SNORLAX]: Item.LEFTOVERS
+  [Pkm.SNORLAX]: Item.LEFTOVERS,
+  [Pkm.MILTANK]: Item.MOOMOO_MILK
 }
 
 export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {

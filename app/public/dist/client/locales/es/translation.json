@@ -2309,7 +2309,6 @@
     "SAND_STREAM": "Este pokémon cuenta como 3 para activar SANDSTORM",
     "DRIZZLE": "Este pokémon cuenta como 3 para activar RAIN",
     "WIND_POWER": "Este pokémon cuenta como 3 para activar STORM",
-    "HARVEST": "Al comienzo de cada pelea, agrega una baya aleatoria a los objetos del Pokémon. Si está lleno, se agregara a los objetos del jugador.",
     "GLUTTON": "Gana permanentemente 20 HP máximo cada vez que come una baya.",
     "COMFEY": "Comfey no puede contener artículos. Al comienzo de la pelea, el aliado más cercano con un espacio para objetos disponible usa Comfey y gana todas sus estadísticas. Comfey lanza su habilidad al mismo tiempo que su poseedor. Cuando su poseedor queda KO, Comfey pelea solo.",
     "HISUIAN_TYPHLOSION": "El pokémon inflige un 20% de daño extra a un objetivo BURN o SILENCE",

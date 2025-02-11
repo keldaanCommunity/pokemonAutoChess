@@ -12,6 +12,9 @@
 
 # Changes to Pokemon & Abilities
 
+- Tropius passive removed and replaced by Signature Dish
+- Shuckle passive removed and replaced by Signature Dish
+
 # Changes to Synergies
 
 - New synergy Gourmet: Gourmet Pokémon can be equipped with a Chef's Hat. As a Chef, each Pokémon will cook up their Signature Dish between fights.

@@ -11313,22 +11313,6 @@ export class Tropius extends Pokemon {
   range = 1
   skill = Ability.AIR_SLASH
   attackSprite = AttackSprite.GRASS_MELEE
-  passive = Passive.HARVEST
-
-  afterSimulationStart({
-    player,
-    entity
-  }: {
-    player: IPlayer
-    entity: IPokemonEntity
-  }) {
-    const berry = pickRandomIn(Berries)
-    if (entity.items.size < 3) {
-      entity.addItem(berry, true)
-    } else {
-      player.items.push(berry)
-    }
-  }
 }
 
 export class Carnivine extends Pokemon {
