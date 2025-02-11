@@ -506,6 +506,20 @@ export function displayAbility(
         )
       break
 
+    case Ability.SWALLOW:
+      addAbilitySprite(Ability.HYDRO_PUMP, coordinates, true)
+        .setScale(2)
+        .setTint(0x60ff60)
+        .setOrigin(0.5, 1)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) +
+            Math.PI / 2
+        )
+      break
+
     case Ability.DRACO_METEOR:
       addAbilitySprite(skill, coordinatesTarget, true)
         .setOrigin(0.5, 0.9)
@@ -558,6 +572,10 @@ export function displayAbility(
       break
 
     case Ability.DEFENSE_CURL:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
+    case Ability.RECOVER:
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 

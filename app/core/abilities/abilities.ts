@@ -7509,7 +7509,7 @@ export class RecoverStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit, true)
+    super.process(pokemon, state, board, target, crit)
     pokemon.handleHeal(0.25 * pokemon.hp, pokemon, 1, crit)
   }
 }
@@ -11295,11 +11295,7 @@ export class DarkLariatStrategy extends AbilityStrategy {
       target.positionX + dx,
       target.positionY + dy
     )
-    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-      id: pokemon.simulation.id,
-      skill: Ability.DARK_LARIAT,
-      positionX: pokemon.positionX,
-      positionY: pokemon.positionY,
+    broadcastAbility(pokemon, {
       targetX: freeCellBehind?.x ?? pokemon.positionX,
       targetY: freeCellBehind?.y ?? pokemon.positionY
     })
@@ -11626,14 +11622,35 @@ export class SwallowStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
-    // Swallow the target. If the user has less max HP than it, it immediately spits it out while inflicting POISON for 5 seconds.
-    // Otherwise, it digests it and cannot move or attack until the next cast, after which the user gains [20,SP]% of its max HP.
-    if (pokemon.hp < target.hp) {
-      target.status.triggerPoison(5000, target, pokemon)
+    super.process(pokemon, state, board, target, crit, true)
+    // Store power and boosts its DEF and SPE_DEF by 1 up to 3 times.
+    // If below 25% HP, swallow instead, restoring [20,SP]% of max HP per stack.
+    // If over 3 stacks, spit up, dealing [40,80,150,SP] SPECIAL to the 3 cells in front
+    if (pokemon.hp < pokemon.hp * 0.25) {
+      const heal =
+        (([0, 20, 40, 60][pokemon.count.ult] ?? 60) * pokemon.hp) / 100
+      pokemon.handleHeal(heal, pokemon, 1, crit)
+      pokemon.count.ult = 0
+      broadcastAbility(pokemon, { skill: Ability.RECOVER })
+    } else if (pokemon.count.ult >= 3) {
+      const damage = [40, 80, 150][pokemon.stars - 1] ?? 150
+      const cells = board.getCellsInFront(pokemon, target, 1)
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+      broadcastAbility(pokemon, { skill: Ability.SWALLOW })
+      pokemon.count.ult = 0
     } else {
-      //TODO
-      //pokemon.swallowedTarget = structuredClone(target)
+      pokemon.addDefense(1, pokemon, 0, false)
+      pokemon.addSpecialDefense(1, pokemon, 0, false)
     }
   }
 }

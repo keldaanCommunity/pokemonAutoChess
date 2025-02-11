@@ -16212,7 +16212,7 @@ export class Gulpin extends Pokemon {
   atk = 8
   def = 3
   speDef = 2
-  maxPP = 100
+  maxPP = 60
   range = 1
   skill = Ability.SWALLOW
   attackSprite = AttackSprite.POISON_MELEE
@@ -16231,7 +16231,7 @@ export class Swalot extends Pokemon {
   atk = 16
   def = 6
   speDef = 4
-  maxPP = 100
+  maxPP = 60
   range = 1
   skill = Ability.SWALLOW
   attackSprite = AttackSprite.POISON_MELEE

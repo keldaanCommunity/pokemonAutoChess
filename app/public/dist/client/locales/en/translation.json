@@ -1783,7 +1783,7 @@
     "SALT_CURE": "Adjacent allies gain [10,20,40,SP] SHIELD and their status afflictions cured. Adjacent WATER, STEEL or GHOST enemies suffer from BURN for 5 seconds.",
     "SPICY_EXTRACT": "Make 1/2/3 closest allies RAGE for [2,SP] seconds",
     "SWEET_SCENT": "Enemies in a 3-range radius can no longer dodge attacks, lose [3,SP] SPE_DEF and have [30,LK]% chance to be CHARM for 1 second",
-    "SWALLOW": "Swallow the target. If the user has less max HP than it, it immediately spits it out while inflicting POISON for 5 seconds. Otherwise, it digests it and cannot move or attack until the next cast, after which the user gains [20,SP]% of its max HP."
+    "SWALLOW": "Store power and boosts its DEF and SPE_DEF by 1 up to 3 times. If below 25% HP, swallow instead, restoring [20,SP]% of max HP per stack. If over 3 stacks, spit up, dealing [40,80,150,SP] SPECIAL to all enemies in front."
   },
   "effect": {
     "INGRAIN": "Ingrain",
