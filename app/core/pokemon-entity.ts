@@ -1666,6 +1666,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.addAbilityPower(30, this, 0, false)
     }
 
+    if (this.passive === Passive.GUZZLORD && this.items.has(Item.CHEF_HAT)) {
+      this.addAbilityPower(4, this, 0, false, true)
+    }
+
     if (
       this.player &&
       this.simulation.room.state.specialGameRule === SpecialGameRule.BLOOD_MONEY

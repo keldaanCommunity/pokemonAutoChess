@@ -60,7 +60,6 @@ import {
   isOnBench
 } from "../../utils/board"
 import { distanceC, distanceE } from "../../utils/distance"
-import { pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
