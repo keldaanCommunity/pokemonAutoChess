@@ -159,7 +159,10 @@ export enum Item {
   ROCK_SALT = "ROCK_SALT",
   NUTRITIOUS_EGG = "NUTRITIOUS_EGG",
   LEFTOVERS = "LEFTOVERS",
-  BLACK_SLUDGE = "BLACK_SLUDGE"
+  BLACK_SLUDGE = "BLACK_SLUDGE",
+  FRUIT_JUICE = "FRUIT_JUICE",
+  LEEK = "LEEK",
+  LARGE_LEEK = "LARGE_LEEK"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -471,6 +474,7 @@ export const AbilityPerTM: { [item in Item]?: Ability } = {
 
 export const Dishes = [
   Item.RAGE_CANDY_BAR,
+  Item.ROCK_SALT,
   Item.TEA,
   Item.CURRY,
   Item.CASTELIACONE,
@@ -479,12 +483,14 @@ export const Dishes = [
   Item.SWEET_APPLE,
   Item.SIRUPY_APPLE,
   Item.SWEET_HERB,
+  Item.HONEY,
+  Item.LEFTOVERS,
+  Item.BLACK_SLUDGE,
+  Item.FRUIT_JUICE,
+  Item.NUTRITIOUS_EGG,
+  Item.LEEK,
+  Item.LARGE_LEEK,
   Item.MOOMOO_MILK,
   Item.BERRY_JUICE,
-  Item.BERRIES,
-  Item.HONEY,
-  Item.ROCK_SALT,
-  Item.NUTRITIOUS_EGG,
-  Item.LEFTOVERS,
-  Item.BLACK_SLUDGE
+  Item.BERRIES
 ] as const

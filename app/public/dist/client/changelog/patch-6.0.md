@@ -9,6 +9,7 @@
 - Slurpuff
 - Gulpin
 - Swalot
+- Galarian Farfetch'd
 
 # Changes to Pokemon & Abilities
 

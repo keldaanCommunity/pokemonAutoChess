@@ -5679,6 +5679,24 @@ export class Farfetchd extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class GalarianFarfetchd extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FLYING,
+    Synergy.GOURMET,
+    Synergy.FIGHTING
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  def = 4
+  speDef = 4
+  maxPP = 60
+  range = 1
+  skill = Ability.LEAF_BLADE
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
 export class Kecleon extends Pokemon {
   types = new SetSchema<Synergy>([])
   rarity = Rarity.UNIQUE
@@ -16715,6 +16733,7 @@ export const PokemonClasses: Record<
   [Pkm.ALOLAN_SANDSHREW]: AlolanSandshrew,
   [Pkm.ALOLAN_SANDSLASH]: AlolanSandslash,
   [Pkm.FARFETCH_D]: Farfetchd,
+  [Pkm.GALARIAN_FARFETCH_D]: GalarianFarfetchd,
   [Pkm.UNOWN_A]: UnownA,
   [Pkm.UNOWN_B]: UnownB,
   [Pkm.UNOWN_C]: UnownC,

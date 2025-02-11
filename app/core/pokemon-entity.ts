@@ -304,7 +304,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       ) {
         const bounceCrit =
           crit ||
-          (this.items.has(Item.REAPER_CLOTH) && chance(this.critChance, this))
+          (this.effects.has(Effect.ABILITY_CRIT) &&
+            chance(this.critChance, this))
         const bounceDamage = Math.round(
           ([0.5, 1][this.stars - 1] ?? 1) *
             damage *
@@ -930,7 +931,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.effects.has(Effect.TELEPORT_NEXT_ATTACK)) {
       const crit =
-        this.items.has(Item.REAPER_CLOTH) && chance(this.critChance / 100, this)
+        this.effects.has(Effect.ABILITY_CRIT) &&
+        chance(this.critChance / 100, this)
       target.handleSpecialDamage(
         [15, 30, 60][this.stars - 1],
         board,
@@ -943,7 +945,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.effects.has(Effect.SHADOW_PUNCH_NEXT_ATTACK)) {
       const crit =
-        this.items.has(Item.REAPER_CLOTH) && chance(this.critChance / 100, this)
+        this.effects.has(Effect.ABILITY_CRIT) &&
+        chance(this.critChance / 100, this)
       target.handleSpecialDamage(
         [30, 60, 120][this.stars - 1],
         board,
@@ -1122,7 +1125,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       const damage = Math.round(target.def * (1 + target.ap / 100))
       const crit =
-        target.items.has(Item.REAPER_CLOTH) && chance(target.critChance, this)
+        target.effects.has(Effect.ABILITY_CRIT) &&
+        chance(target.critChance, this)
       this.status.triggerWound(2000, this, target)
       this.handleSpecialDamage(
         damage,
@@ -1137,7 +1141,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (target.effects.has(Effect.SHELL_TRAP) && physicalDamage > 0) {
       const cells = board.getAdjacentCells(target.positionX, target.positionY)
       const crit =
-        target.items.has(Item.REAPER_CLOTH) && chance(target.critChance, this)
+        target.effects.has(Effect.ABILITY_CRIT) &&
+        chance(target.critChance, this)
       target.effects.delete(Effect.SHELL_TRAP)
       this.simulation.room.broadcast(Transfer.ABILITY, {
         id: this.simulation.id,

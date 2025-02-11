@@ -34,7 +34,12 @@ export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.SNORLAX]: Item.LEFTOVERS,
   [Pkm.MILTANK]: Item.MOOMOO_MILK,
   [Pkm.GULPIN]: Item.BLACK_SLUDGE,
-  [Pkm.SWALOT]: Item.BLACK_SLUDGE
+  [Pkm.SWALOT]: Item.BLACK_SLUDGE,
+  [Pkm.BOUNSWEET]: Item.FRUIT_JUICE,
+  [Pkm.STEENEE]: Item.FRUIT_JUICE,
+  [Pkm.TSAREENA]: Item.FRUIT_JUICE,
+  [Pkm.FARFETCH_D]: Item.LEEK,
+  [Pkm.GALARIAN_FARFETCH_D]: Item.LARGE_LEEK
 }
 
 export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
@@ -78,7 +83,24 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
       entity.status.triggerRage(5000, entity)
     })
   ],
+  FRUIT_JUICE: [
+    new OnSpawnEffect((entity) => {
+      entity.addAttackSpeed(30, entity, 0, false)
+    })
+  ],
   HONEY: [],
+  LARGE_LEEK: [
+    new OnSpawnEffect((entity) => {
+      entity.effects.add(EffectEnum.ABILITY_CRIT)
+      entity.addCritPower(30, entity, 0, false)
+    })
+  ],
+  LEEK: [
+    new OnSpawnEffect((entity) => {
+      entity.effects.add(EffectEnum.ABILITY_CRIT)
+      entity.addCritChance(30, entity, 0, false)
+    })
+  ],
   LEFTOVERS: [],
   MOOMOO_MILK: [
     new OnSpawnEffect((entity) => {

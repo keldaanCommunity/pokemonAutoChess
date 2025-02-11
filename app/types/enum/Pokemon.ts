@@ -263,6 +263,7 @@ export enum Pkm {
   GABITE = "GABITE",
   GALAR_CORSOLA = "GALAR_CORSOLA",
   GALARIAN_ARTICUNO = "GALARIAN_ARTICUNO",
+  GALARIAN_FARFETCH_D = "GALARIAN_FARFETCH_D",
   GALARIAN_LINOONE = "GALARIAN_LINOONE",
   GALARIAN_MOLTRES = "GALARIAN_MOLTRES",
   GALARIAN_PONYTA = "GALARIAN_PONYTA",
@@ -1020,6 +1021,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MAGNEMITE]: "0081",
   [Pkm.MAGNETON]: "0082",
   [Pkm.FARFETCH_D]: "0083",
+  [Pkm.GALARIAN_FARFETCH_D]: "0083-0001",
   [Pkm.DODUO]: "0084",
   [Pkm.DODRIO]: "0085",
   [Pkm.SEEL]: "0086",
@@ -2562,6 +2564,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ALOLAN_SANDSHREW]: Pkm.ALOLAN_SANDSHREW,
   [Pkm.ALOLAN_SANDSLASH]: Pkm.ALOLAN_SANDSHREW,
   [Pkm.FARFETCH_D]: Pkm.FARFETCH_D,
+  [Pkm.GALARIAN_FARFETCH_D]: Pkm.GALARIAN_FARFETCH_D,
   [Pkm.UNOWN_A]: Pkm.UNOWN_A,
   [Pkm.UNOWN_B]: Pkm.UNOWN_A,
   [Pkm.UNOWN_C]: Pkm.UNOWN_A,
@@ -2999,7 +3002,8 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.MEOWTH]: [Pkm.ALOLAN_MEOWTH],
   [Pkm.PONYTA]: [Pkm.GALARIAN_PONYTA],
   [Pkm.VOLTORB]: [Pkm.HISUI_VOLTORB],
-  [Pkm.SANDSHREW]: [Pkm.ALOLAN_SANDSHREW]
+  [Pkm.SANDSHREW]: [Pkm.ALOLAN_SANDSHREW],
+  [Pkm.FARFETCH_D]: [Pkm.GALARIAN_FARFETCH_D]
 } as const
 
 export enum PkmDuo {
@@ -5572,7 +5576,12 @@ export const AnimationConfig: {
   [Pkm.FARFETCH_D]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Attack,
-    emote: AnimationType.Charge
+    emote: AnimationType.Attack
+  },
+  [Pkm.GALARIAN_FARFETCH_D]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Pose
   },
   [Pkm.UNOWN_A]: {
     attack: AnimationType.Rotate,
