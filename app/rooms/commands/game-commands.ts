@@ -587,6 +587,14 @@ export class OnDragDropItemCommand extends Command<
       }
     }
 
+    if (
+      item === Item.CHEF_HAT &&
+      pokemon.types.has(Synergy.GOURMET) === false
+    ) {
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
+
     if (item === Item.EVIOLITE && !pokemon.hasEvolution) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
@@ -1265,7 +1273,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         const gourmetLevel = player.synergies.getSynergyStep(Synergy.GOURMET)
         const nbDishes = [0, 1, 2, 2][gourmetLevel] ?? 2
         for (const chef of chefs) {
-          const dish = DishByPkm[chef.name]
+          let dish = DishByPkm[chef.name]
+          if (chef.name === Pkm.ARCEUS || chef.name === Pkm.KECLEON) {
+            dish = Item.BERRIES
+          }
           if (dish && nbDishes > 0) {
             let dishes = Array.from({ length: nbDishes }, () => dish)
             if (dish === Item.BERRIES) {
