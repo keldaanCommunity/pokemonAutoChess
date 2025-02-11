@@ -123,6 +123,8 @@ export default class PokemonSprite extends DraggableObject {
   flip: boolean
   animationLocked: boolean /* will prevent another anim to play before current one is completed */ = false
   skydiving: boolean = false
+  meal: Item | "" = ""
+  mealSprite: GameObjects.Sprite | undefined
 
   constructor(
     scene: GameScene | DebugScene,
@@ -246,6 +248,10 @@ export default class PokemonSprite extends DraggableObject {
       this.setLifeBar(p, scene)
       if (pokemon.maxPP > 0) this.setPowerBar(p, scene)
       //this.setEffects(p, scene);
+    } else {
+      if (pokemon.meal !== "") {
+        this.updateMeal(pokemon.meal)
+      }
     }
 
     this.draggable = playerId === scene.uid && !inBattle
@@ -589,6 +595,17 @@ export default class PokemonSprite extends DraggableObject {
         }
       })
     })
+  }
+
+  updateMeal(meal: Item | "") {
+    this.meal = meal
+    this.mealSprite?.destroy()
+    if (meal) {
+      this.mealSprite = this.scene.add
+        .sprite(0, 20, "item", meal + ".png")
+        .setScale(0.25)
+      this.add(this.mealSprite)
+    }
   }
 
   specialAttackAnimation(group: Phaser.GameObjects.Group, ultCount: number) {

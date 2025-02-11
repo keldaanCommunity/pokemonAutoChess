@@ -229,6 +229,7 @@ export default class Simulation extends Schema implements ISimulation {
     if (pokemon.meal) {
       this.applyDishEffects(pokemonEntity, pokemon.meal)
       pokemon.meal = ""
+      pokemon.action = PokemonActionState.IDLE
     }
 
     this.board.setValue(

@@ -475,7 +475,7 @@ export interface IDps {
 
 export function instanceofPokemonEntity(
   obj: IPokemon | IPokemonEntity | IPokemonAvatar
-) {
+): obj is IPokemonEntity {
   return "pp" in obj
 }
 

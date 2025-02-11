@@ -651,6 +651,12 @@ export default class BoardManager {
             pokemonUI.evolutionAnimation()
           }
           break
+
+        case "meal":
+          if (pokemonUI.meal !== value) {
+            pokemonUI.updateMeal(value as IPokemon["meal"])
+          }
+          break
       }
     }
   }

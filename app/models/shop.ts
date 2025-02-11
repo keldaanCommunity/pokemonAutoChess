@@ -447,11 +447,13 @@ export default class Shop {
 
     let specificTypesWanted: Synergy[] | undefined = undefined
 
-    const incenseHolder = values(player.board).find((p) =>
-      p.items.has(Item.INCENSE)
+    const attractors = values(player.board).filter(
+      (p) => p.items.has(Item.INCENSE) || p.meal === Item.HONEY
     )
-    if (incenseHolder && chance(5 / 100, incenseHolder)) {
-      specificTypesWanted = values(incenseHolder.types)
+    const attractor = attractors.find((p) => chance(5 / 100, p))
+
+    if (attractor) {
+      specificTypesWanted = values(attractor.types)
     } else if (wildChance > 0 && chance(wildChance)) {
       specificTypesWanted = [Synergy.WILD]
     }

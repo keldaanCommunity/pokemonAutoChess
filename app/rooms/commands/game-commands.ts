@@ -1,7 +1,7 @@
 import { Command } from "@colyseus/command"
 import { Client, updateLobby } from "colyseus"
 import { nanoid } from "nanoid"
-import { DishByPkm, onMealTaken } from "../../core/dishes"
+import { DishByPkm } from "../../core/dishes"
 
 import {
   ConditionBasedEvolutionRule,
@@ -80,9 +80,11 @@ import {
   isOnBench,
   isPositionEmpty
 } from "../../utils/board"
+import { distanceC } from "../../utils/distance"
 import { repeat } from "../../utils/function"
 import { logger } from "../../utils/logger"
 import { max, min } from "../../utils/number"
+import { wait } from "../../utils/promise"
 import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { getWeather } from "../../utils/weather"
@@ -574,7 +576,6 @@ export class OnDragDropItemCommand extends Command<
         pokemon.action = PokemonActionState.EAT
         removeInArray(player.items, item)
         client.send(Transfer.DRAG_DROP_FAILED, message)
-        onMealTaken(pokemon, item, player, this.state)
         return
       } else {
         client.send(Transfer.DRAG_DROP_FAILED, {
@@ -1262,7 +1263,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       )
       if (chefs.length > 0) {
         const gourmetLevel = player.synergies.getSynergyStep(Synergy.GOURMET)
-        const nbDishes = [0, 1, 1, 2][gourmetLevel] ?? 1
+        const nbDishes = [0, 1, 2, 2][gourmetLevel] ?? 2
         for (const chef of chefs) {
           const dish = DishByPkm[chef.name]
           if (dish) {
@@ -1270,20 +1271,33 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               (cli) => cli.auth.uid === player.id
             )
             if (client) {
-              setTimeout(() => {
+              setTimeout(async () => {
                 client.send(Transfer.COOK, {
                   pokemonId: chef.id,
                   dish,
                   nbDishes
                 })
+                await wait(2000) // animation time, also allow to quickly switch position if needed
+                const candidates = values(player.board).filter(
+                  (p) =>
+                    p.meal === "" &&
+                    distanceC(
+                      chef.positionX,
+                      chef.positionY,
+                      p.positionX,
+                      p.positionY
+                    ) === 1
+                )
                 for (let i = 0; i < nbDishes; i++) {
                   if (dish === Item.BERRIES) {
                     player.items.push(pickRandomIn(Berries))
                   } else {
-                    player.items.push(dish)
+                    const pokemon = pickRandomIn(candidates) ?? chef
+                    pokemon.meal = dish
+                    pokemon.action = PokemonActionState.EAT
                   }
                 }
-              }, 1500)
+              }, 1000)
             }
           }
         }

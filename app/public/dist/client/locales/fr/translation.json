@@ -2343,7 +2343,7 @@
     "SAND_STREAM": "Ce pokémon compte pour 3 pour déclencher SANDSTORM",
     "DRIZZLE": "Ce pokémon compte pour 3 pour déclencher la RAIN",
     "WIND_POWER": "Ce Pokémon compte pour 3 pour STORM",
-    "GLUTTON": "Gagne de façon permanente 20 HP max chaque fois qu'il mange une baie",
+    "GLUTTON": "Gagne des HP max permanents chaque fois qu'il mange: 10 HP pour chaque baie, 20 HP pour chaque plat, 30 HP lorsqu'il cuisine comme Chef",
     "COMFEY": "$t(pkm.COMFEY) ne peut pas porter d'objets. Au début du combat, l'allié le plus proche avec un slot d'objet disponible porte $t(pkm.COMFEY) et gagne toutes ses stats. $t(pkm.COMFEY) lance sa capacité en même temps que son porteur. Quand le porteur est KO, $t(pkm.COMFEY) combat seul.",
     "HISUIAN_TYPHLOSION": "Inflige 20% de dégâts en plus si la cible est BURN ou SILENCE",
     "PICKUP": "Le pokémon commence le combat avec un objet aléatoire s'il ne tient aucun objet",

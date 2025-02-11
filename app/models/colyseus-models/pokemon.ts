@@ -22,8 +22,6 @@ import {
 } from "../../types"
 import {
   DEFAULT_ATK_SPEED,
-  DEFAULT_CRIT_CHANCE,
-  DEFAULT_CRIT_POWER,
   EvolutionTime,
   SynergyTriggers
 } from "../../types/Config"
@@ -4003,11 +4001,7 @@ export class Blastoise extends Pokemon {
 }
 
 export class Bellsprout extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.GRASS,
-    Synergy.FLORA,
-    Synergy.GOURMET
-  ])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.WEEPINBELL
@@ -4022,11 +4016,7 @@ export class Bellsprout extends Pokemon {
 }
 
 export class Weepinbell extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.GRASS,
-    Synergy.FLORA,
-    Synergy.GOURMET
-  ])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.VICTREEBEL
@@ -4041,11 +4031,7 @@ export class Weepinbell extends Pokemon {
 }
 
 export class Victreebel extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.GRASS,
-    Synergy.FLORA,
-    Synergy.GOURMET
-  ])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
   rarity = Rarity.HATCH
   stars = 3
   hp = 240

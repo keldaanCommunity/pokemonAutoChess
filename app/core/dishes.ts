@@ -69,7 +69,11 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   HONEY: [],
   LEFTOVERS: [],
-  MOOMOO_MILK: [],
+  MOOMOO_MILK: [
+    new OnSpawnEffect((entity) => {
+      entity.addMaxHP(10, entity, 0, false, true)
+    })
+  ],
   NUTRITIOUS_EGG: [
     new OnSpawnEffect((entity) => {
       // Start the next fight with +30% base ATK, DEF, SPE_DEF and AP
@@ -133,46 +137,4 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
       }
     })
   ]
-}
-
-export function onMealTaken(
-  pokemon: IPokemon,
-  item: Item,
-  player: IPlayer,
-  state: GameState
-) {
-  if (item === Item.MOOMOO_MILK) {
-    pokemon.hp += 10
-  }
-  if (item === Item.HONEY) {
-    const x = getFirstAvailablePositionInBench(player.board)
-    if (x !== undefined) {
-      const pickedSynergy = pickRandomIn(values(pokemon.types))
-      const rarity =
-        [
-          Rarity.COMMON,
-          Rarity.UNCOMMON,
-          Rarity.RARE,
-          Rarity.EPIC,
-          Rarity.ULTRA,
-          Rarity.UNIQUE
-        ][Math.floor(state.stageLevel / 5)] ?? Rarity.UNIQUE
-      const candidates = (
-        [
-          ...PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[pickedSynergy].pokemons,
-          ...PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[pickedSynergy]
-            .additionalPokemons
-        ] as Pkm[]
-      )
-        .map((p) => getPokemonData(p))
-        .filter((p) => p.stars === 1 && p.rarity === rarity)
-
-      let pkm: Pkm = pickRandomIn(candidates)?.name
-      if (!pkm) pkm = Pkm.DITTO
-      const pokemonGained = PokemonFactory.createPokemonFromName(pkm, player)
-      pokemonGained.positionX = x
-      pokemonGained.positionY = 0
-      player.board.set(pokemonGained.id, pokemonGained)
-    }
-  }
 }
