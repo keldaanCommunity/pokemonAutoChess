@@ -158,7 +158,8 @@ export enum Item {
   HONEY = "HONEY",
   ROCK_SALT = "ROCK_SALT",
   NUTRITIOUS_EGG = "NUTRITIOUS_EGG",
-  LEFTOVERS = "LEFTOVERS"
+  LEFTOVERS = "LEFTOVERS",
+  BLACK_SLUDGE = "BLACK_SLUDGE"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -484,5 +485,6 @@ export const Dishes = [
   Item.HONEY,
   Item.ROCK_SALT,
   Item.NUTRITIOUS_EGG,
-  Item.LEFTOVERS
+  Item.LEFTOVERS,
+  Item.BLACK_SLUDGE
 ] as const

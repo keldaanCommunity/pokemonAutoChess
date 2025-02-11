@@ -2,15 +2,7 @@ import { Dishes, Item } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
 import { Effect, OnSpawnEffect, OnHitEffect, PeriodicEffect } from "./effect"
 import { Effect as EffectEnum } from "../types/enum/Effect"
-import GameState from "../rooms/states/game-state"
-import PokemonFactory from "../models/pokemon-factory"
-import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../models/precomputed/precomputed-types-and-categories"
-import { IPokemon, IPlayer } from "../types"
-import { Rarity } from "../types/enum/Game"
-import { getFirstAvailablePositionInBench } from "../utils/board"
-import { pickRandomIn } from "../utils/random"
-import { values } from "../utils/schemas"
-import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
+import { Synergy } from "../types/enum/Synergy"
 
 export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.LICKITUNG]: Item.RAGE_CANDY_BAR,
@@ -40,7 +32,9 @@ export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.GARGANACL]: Item.ROCK_SALT,
   [Pkm.MUNCHLAX]: Item.LEFTOVERS,
   [Pkm.SNORLAX]: Item.LEFTOVERS,
-  [Pkm.MILTANK]: Item.MOOMOO_MILK
+  [Pkm.MILTANK]: Item.MOOMOO_MILK,
+  [Pkm.GULPIN]: Item.BLACK_SLUDGE,
+  [Pkm.SWALOT]: Item.BLACK_SLUDGE
 }
 
 export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
@@ -49,6 +43,23 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
     new OnSpawnEffect((entity) => {
       entity.addShield(50, entity, 0, false)
       entity.effects.add(EffectEnum.BERRY_JUICE)
+    })
+  ],
+  BLACK_SLUDGE: [
+    new OnSpawnEffect((entity) => {
+      if (entity.types.has(Synergy.POISON)) {
+        entity.effectsSet.add(
+          new PeriodicEffect(
+            (entity) => {
+              entity.handleHeal(0.05 * entity.hp, entity, 0, false)
+            },
+            Item.SWEET_HERB,
+            2000
+          )
+        )
+      } else {
+        entity.status.triggerPoison(30000, entity, entity)
+      }
     })
   ],
   CASTELIACONE: [
@@ -80,7 +91,6 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
       entity.addAttack(0.3 * entity.baseAtk, entity, 0, false)
       entity.addDefense(0.3 * entity.baseDef, entity, 0, false)
       entity.addSpecialDefense(0.3 * entity.baseSpeDef, entity, 0, false)
-      entity.addAbilityPower(30, entity, 0, false)
     })
   ],
   RAGE_CANDY_BAR: [
@@ -105,15 +115,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   SWEET_HERB: [
     new OnSpawnEffect((entity) => {
-      entity.effectsSet.add(
-        new PeriodicEffect(
-          (entity) => {
-            entity.handleHeal(0.05 * entity.hp, entity, 0, false)
-          },
-          Item.SWEET_HERB,
-          2000
-        )
-      )
+      entity.addAbilityPower(50, entity, 0, false)
     })
   ],
   TEA: [

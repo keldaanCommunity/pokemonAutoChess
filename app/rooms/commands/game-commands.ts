@@ -1291,6 +1291,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                 for (let i = 0; i < nbDishes; i++) {
                   if (dish === Item.BERRIES) {
                     player.items.push(pickRandomIn(Berries))
+                  } else if (dish === Item.TART_APPLE) {
+                    player.items.push(dish)
                   } else {
                     const pokemon = pickRandomIn(candidates) ?? chef
                     pokemon.meal = dish
