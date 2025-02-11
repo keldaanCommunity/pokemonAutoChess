@@ -2175,7 +2175,8 @@
     "BLACK_SLUDGE": "Black Sludge",
     "FRUIT_JUICE": "Fruit Juice",
     "LEEK": "Leek",
-    "LARGE_LEEK": "Large Leek"
+    "LARGE_LEEK": "Large Leek",
+    "SPINDA_COCKTAIL": "Spinda's Cocktail"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -2336,8 +2337,9 @@
     "LEFTOVERS": "No effect. There is not much left, the cook having already devoured most of it.",
     "BLACK_SLUDGE": "POISONNED the Pokémon that eats it. If it has POISON type, restore 5% of max HP every 2 seconds instead.",
     "FRUIT_JUICE": "Gain 30% ATK_SPEED in the next fight.",
-    "LEEK": "Gain 30% CRIT_CHANCE and allow the ability to critically strike in the next fight.",
-    "LARGE_LEEK": "Gain 30% CRIT_POWER and allow the ability to critically strike in the next fight."
+    "LEEK": "Gain 30% CRIT_CHANCE and allow ability to critically strike in the next fight.",
+    "LARGE_LEEK": "Gain 30% CRIT_POWER and allow ability to critically strike in the next fight.",
+    "SPINDA_COCKTAIL": "A cocktail with [LK] random effects that can make you dizzy or buff stats."
   },
   "passive_description": {
     "NONE": "No passive",

@@ -1266,7 +1266,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         const nbDishes = [0, 1, 2, 2][gourmetLevel] ?? 2
         for (const chef of chefs) {
           const dish = DishByPkm[chef.name]
-          if (dish) {
+          if (dish && nbDishes > 0) {
+            let dishes = Array.from({ length: nbDishes }, () => dish)
+            if (dish === Item.BERRIES) {
+              dishes = pickNRandomIn(Berries, nbDishes)
+            }
             const client = this.room.clients.find(
               (cli) => cli.auth.uid === player.id
             )
@@ -1274,8 +1278,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               setTimeout(async () => {
                 client.send(Transfer.COOK, {
                   pokemonId: chef.id,
-                  dish,
-                  nbDishes
+                  dishes
                 })
                 await wait(2000) // animation time, also allow to quickly switch position if needed
                 const candidates = values(player.board).filter(
@@ -1288,15 +1291,14 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                       p.positionY
                     ) === 1
                 )
-                for (let i = 0; i < nbDishes; i++) {
-                  if (dish === Item.BERRIES) {
-                    player.items.push(pickRandomIn(Berries))
-                  } else if (dish === Item.TART_APPLE) {
-                    player.items.push(dish)
+                for (const meal of dishes) {
+                  if ([Item.TART_APPLE, ...Berries].includes(meal)) {
+                    player.items.push(meal)
                   } else {
                     const pokemon = pickRandomIn(candidates) ?? chef
-                    pokemon.meal = dish
+                    pokemon.meal = meal
                     pokemon.action = PokemonActionState.EAT
+                    removeInArray(candidates, pokemon)
                   }
                 }
               }, 1000)

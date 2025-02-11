@@ -375,12 +375,12 @@ export default function Game() {
           g.board.showEmote(message.id, message?.emote)
         }
       })
-      room.onMessage(Transfer.COOK, async (message: { pokemonId: string, dish: Item, nbDishes: number }) => {
+      room.onMessage(Transfer.COOK, async (message: { pokemonId: string, dishes: Item[] }) => {
         const g = getGameScene()
         if (g && g.board) {
           const pokemon = g.board.pokemons.get(message.pokemonId)
           if (pokemon) {
-            pokemon.cookAnimation(message.dish, message.nbDishes)
+            pokemon.cookAnimation(message.dishes)
           }
         }
       })

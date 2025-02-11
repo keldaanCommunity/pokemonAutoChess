@@ -3,6 +3,7 @@ import { Pkm } from "../types/enum/Pokemon"
 import { Effect, OnSpawnEffect, OnHitEffect, PeriodicEffect } from "./effect"
 import { Effect as EffectEnum } from "../types/enum/Effect"
 import { Synergy } from "../types/enum/Synergy"
+import { chance } from "../utils/random"
 
 export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.LICKITUNG]: Item.RAGE_CANDY_BAR,
@@ -39,7 +40,8 @@ export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.STEENEE]: Item.FRUIT_JUICE,
   [Pkm.TSAREENA]: Item.FRUIT_JUICE,
   [Pkm.FARFETCH_D]: Item.LEEK,
-  [Pkm.GALARIAN_FARFETCH_D]: Item.LARGE_LEEK
+  [Pkm.GALARIAN_FARFETCH_D]: Item.LARGE_LEEK,
+  [Pkm.SPINDA]: Item.SPINDA_COCKTAIL
 }
 
 export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
@@ -128,6 +130,30 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   SIRUPY_APPLE: [
     new OnSpawnEffect((entity) => {
       entity.addShield(100, entity, 0, false)
+    })
+  ],
+  SPINDA_COCKTAIL: [
+    new OnSpawnEffect((entity) => {
+      if (chance(0.8, entity)) {
+        entity.addAttack(5, entity, 0, false)
+      }
+      if (chance(0.8, entity)) {
+        entity.addAttackSpeed(25, entity, 0, false)
+      }
+      if (chance(0.8, entity)) {
+        entity.addAbilityPower(25, entity, 0, false)
+      }
+      if (chance(0.8, entity)) {
+        entity.addShield(50, entity, 0, false)
+      }
+
+      if (!chance(0.8, entity)) {
+        entity.status.triggerConfusion(5000, entity, entity)
+      } else if (!chance(0.8, entity)) {
+        entity.status.triggerBlinded(5000, entity)
+      } else if (!chance(0.8, entity)) {
+        entity.status.triggerSleep(5000, entity)
+      }
     })
   ],
   SWEET_APPLE: [
