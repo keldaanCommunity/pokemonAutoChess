@@ -45,4 +45,10 @@ export default class Bar extends GameObjects.DOMElement {
     this.progress.ariaValueNow = value.toString()
     this.progress.style.width = `${(value * 100) / this.max}%`
   }
+
+  setMaxAmount(newMax: number) {
+    this.max = newMax
+    this.progress.ariaValueMax = newMax.toString()
+    this.setAmount(parseFloat(this.progress.ariaValueNow ?? "0"))
+  }
 }
