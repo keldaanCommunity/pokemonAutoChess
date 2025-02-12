@@ -64,8 +64,6 @@ import { values } from "../../utils/schemas"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
 import { SynergyEffects } from "../effects"
-import { getPokemonData } from "../precomputed/precomputed-pokemon-data"
-import { IPokemonData } from "../../types/interfaces/PokemonData"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -206,9 +204,9 @@ export class Pokemon extends Schema implements IPokemon {
       (p) => PkmRegionalVariants[p]!.includes(basePkm)
     )
 
-    let originalVariant: IPokemonData | null = null
+    let originalVariant: Pokemon | null = null
     if (originalVariantPkm) {
-      originalVariant = getPokemonData(originalVariantPkm)
+      originalVariant = new PokemonClasses[originalVariantPkm]()
       if (
         originalVariant?.additional === true &&
         state &&
@@ -219,7 +217,9 @@ export class Pokemon extends Schema implements IPokemon {
     }
 
     if (originalVariant) {
-      const commonTypes = originalVariant.types.filter((t) => this.types.has(t))
+      const commonTypes = values(originalVariant.types).filter((t) =>
+        this.types.has(t)
+      )
       if (commonTypes.some((t) => regionSynergies.includes(t))) {
         return false // ignore variant if map has the synergy of the original variant
       }
