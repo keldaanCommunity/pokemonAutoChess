@@ -16113,7 +16113,7 @@ export class Naclstack extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.GARGANACL
-  hp = 180
+  hp = 160
   atk = 12
   def = 4
   speDef = 2
@@ -16126,7 +16126,7 @@ export class Naclstack extends Pokemon {
 export class Garganacl extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.GOURMET])
   rarity = Rarity.UNCOMMON
-  stars = 2
+  stars = 3
   hp = 280
   atk = 22
   def = 6
@@ -16142,9 +16142,9 @@ export class Capsakid extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.SCOVILLAIN
-  hp = 80
+  hp = 60
   atk = 6
-  def = 3
+  def = 1
   speDef = 1
   maxPP = 100
   range = 1
@@ -16157,10 +16157,10 @@ export class Scovillain extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIRE, Synergy.GOURMET])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 180
-  atk = 12
-  def = 4
-  speDef = 2
+  hp = 150
+  atk = 14
+  def = 1
+  speDef = 1
   maxPP = 100
   range = 1
   skill = Ability.SPICY_EXTRACT
@@ -16174,9 +16174,9 @@ export class Swirlix extends Pokemon {
   stars = 1
   evolution = Pkm.SLURPUFF
   hp = 80
-  atk = 6
-  def = 3
-  speDef = 1
+  atk = 9
+  def = 2
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.SWEET_SCENT
@@ -16188,10 +16188,10 @@ export class Slurpuff extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.GOURMET])
   rarity = Rarity.RARE
   stars = 2
-  hp = 180
-  atk = 12
+  hp = 190
+  atk = 22
   def = 4
-  speDef = 2
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.SWEET_SCENT
@@ -16208,9 +16208,9 @@ export class Gulpin extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.SWALOT
-  hp = 90
-  atk = 8
-  def = 3
+  hp = 120
+  atk = 7
+  def = 2
   speDef = 2
   maxPP = 60
   range = 1
@@ -16227,9 +16227,9 @@ export class Swalot extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 190
-  atk = 16
-  def = 6
+  hp = 280
+  atk = 15
+  def = 4
   speDef = 4
   maxPP = 60
   range = 1
