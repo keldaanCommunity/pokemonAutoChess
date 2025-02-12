@@ -5516,7 +5516,7 @@ export class MagmaStormStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    target.effectsSet.add(new MagmaStormEffect(pokemon, 100))
+    target.effectsSet.add(new MagmaStormEffect(pokemon, 100, target))
   }
 }
 

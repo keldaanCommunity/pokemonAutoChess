@@ -114,16 +114,26 @@ export class GrowGroundEffect extends PeriodicEffect {
 }
 
 export class MagmaStormEffect extends PeriodicEffect {
-  constructor(public caster: PokemonEntity, intervalMS: number) {
-    super(intervalMS)
+  constructor(
+    public caster: PokemonEntity,
+    intervalMS: number,
+    pokemon: PokemonEntity
+  ) {
+    super(intervalMS, EffectEnum.MAGMA_STORM)
+    if (pokemon.effects.has(EffectEnum.MAGMA_STORM)) {
+      pokemon.effectsSet.delete(this)
+    } else {
+      pokemon.effects.add(EffectEnum.MAGMA_STORM)
+    }
   }
 
   apply(pokemon) {
     const board = pokemon.simulation.board
+    pokemon.effects.delete(EffectEnum.MAGMA_STORM)
     const adjacentCells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
     for (const cell of adjacentCells) {
       if (cell?.value?.team === pokemon.team) {
-        cell.value.effectsSet.add(new MagmaStormEffect(this.caster, 500))
+        cell.value.effectsSet.add(new MagmaStormEffect(this.caster, 500, cell.value))
         break
       }
     }
@@ -146,7 +156,7 @@ export class SoulDewEffect extends PeriodicEffect {
 
   apply(pokemon) {
     pokemon.addAbilityPower(10, pokemon, 0, false)
-    this.count++
+    pokemon.count.soulDewCount++
   }
 }
 
@@ -157,7 +167,6 @@ export class ClearWingEffect extends PeriodicEffect {
 
   apply(pokemon) {
     pokemon.addAttackSpeed(2, pokemon, 0, false)
-    this.count++
   }
 }
 
