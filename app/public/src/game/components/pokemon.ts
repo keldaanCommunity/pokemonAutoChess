@@ -567,9 +567,8 @@ export default class PokemonSprite extends DraggableObject {
     )
   }
 
-  cookAnimation(dish: Item, nbDishes: number) {
+  cookAnimation(dishes: Item[]) {
     this.emoteAnimation()
-    const dishes = Array.from({ length: nbDishes }, (_, i) => dish)
     dishes.forEach((item, i) => {
       const itemSprite = this.scene.add.sprite(
         this.x,
