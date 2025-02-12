@@ -2,7 +2,7 @@ import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import type GameState from "../../rooms/states/game-state"
 import type { IPlayer, Role, Title } from "../../types"
-import { SynergyTriggers, UniqueShop } from "../../types/Config"
+import { SynergyTriggers, UniquePool } from "../../types/Config"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { BattleResult, Rarity, Team } from "../../types/enum/Game"
 import {
@@ -165,7 +165,7 @@ export default class Player extends Schema implements IPlayer {
     }
 
     if (state.specialGameRule === SpecialGameRule.UNIQUE_STARTER) {
-      const randomUnique = pickRandomIn(UniqueShop)
+      const randomUnique = pickRandomIn(UniquePool)
       const pokemonsObtained: Pokemon[] = (
         randomUnique in PkmDuos ? PkmDuos[randomUnique] : [randomUnique]
       ).map((p) => PokemonFactory.createPokemonFromName(p, this))

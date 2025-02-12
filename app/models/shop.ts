@@ -5,14 +5,14 @@ import {
   DITTO_RATE,
   FishRarityProbability,
   KECLEON_RATE,
-  LegendaryShop,
+  LegendaryPool,
   NB_UNIQUE_PROPOSITIONS,
   PoolSize,
   PortalCarouselStages,
   RarityCost,
   RarityProbabilityPerLevel,
   SHOP_SIZE,
-  UniqueShop
+  UniquePool
 } from "../types/Config"
 import { Ability } from "../types/enum/Ability"
 import { Effect } from "../types/enum/Effect"
@@ -40,6 +40,7 @@ import {
 } from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
+import { PokemonClasses } from "./colyseus-models/pokemon"
 import PokemonFactory from "./pokemon-factory"
 import { getPokemonData } from "./precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed/precomputed-rarity"
@@ -311,8 +312,8 @@ export default class Shop {
   ) {
     const allCandidates =
       stageLevel === PortalCarouselStages[0]
-        ? [...UniqueShop]
-        : [...LegendaryShop]
+        ? [...UniquePool]
+        : [...LegendaryPool]
 
     // ensure we have at least one synergy per proposition
     if (synergies.length > NB_UNIQUE_PROPOSITIONS) {
@@ -345,6 +346,13 @@ export default class Shop {
 
       if (candidates.length === 0) candidates = allCandidates
       let selected = pickRandomIn(candidates)
+      if (selected in PkmRegionalVariants) {
+        const regionalVariants = PkmRegionalVariants[selected]!.filter((p) =>
+          new PokemonClasses[p]().isInRegion(player.map)
+        )
+        if (regionalVariants.length > 0)
+          selected = pickRandomIn(regionalVariants)
+      }
       if (
         stageLevel === PortalCarouselStages[0] &&
         player.pokemonsProposition.includes(Pkm.KECLEON) === false &&
@@ -487,7 +495,7 @@ export default class Shop {
     const totalRerolls = player.rerollCount + state.stageLevel
     if (shopIndex >= 0 && shopIndex < repeatBallHolders.length) {
       if (totalRerolls >= 140 && totalRerolls % 10 === 0) {
-        let legendaryCandidates: Pkm[] = LegendaryShop.filter<Pkm>(
+        let legendaryCandidates: Pkm[] = LegendaryPool.filter<Pkm>(
           (p): p is Pkm => !(p in PkmDuos)
         )
         shuffleArray(legendaryCandidates)
@@ -500,7 +508,7 @@ export default class Shop {
         if (legendaryCandidates.length > 0)
           return pickRandomIn(legendaryCandidates)
       } else if (totalRerolls >= 100 && totalRerolls % 10 === 0) {
-        let uniqueCandidates: Pkm[] = UniqueShop.filter<Pkm>(
+        let uniqueCandidates: Pkm[] = UniquePool.filter<Pkm>(
           (p): p is Pkm => !(p in PkmDuos)
         )
         shuffleArray(uniqueCandidates)

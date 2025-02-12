@@ -42,11 +42,11 @@ import {
   AdditionalPicksStages,
   EloRank,
   ExpPlace,
-  LegendaryShop,
+  LegendaryPool,
   MAX_SIMULATION_DELTA_TIME,
   PortalCarouselStages,
   MinStageLevelForGameToCount,
-  UniqueShop
+  UniquePool
 } from "../types/Config"
 import { GameMode, PokemonActionState } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
@@ -1022,12 +1022,12 @@ export default class GameRoom extends Room<GameState> {
     if (!player || player.pokemonsProposition.length === 0) return
     if (this.state.additionalPokemons.includes(pkm as Pkm)) return // already picked, probably a double click
     if (
-      UniqueShop.includes(pkm) &&
+      UniquePool.includes(pkm) &&
       this.state.stageLevel !== PortalCarouselStages[0]
     )
       return // should not be pickable at this stage
     if (
-      LegendaryShop.includes(pkm) &&
+      LegendaryPool.includes(pkm) &&
       this.state.stageLevel !== PortalCarouselStages[1]
     )
       return // should not be pickable at this stage
