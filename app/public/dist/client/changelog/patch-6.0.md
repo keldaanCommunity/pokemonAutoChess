@@ -18,7 +18,7 @@
 
 # Changes to Synergies
 
-- New synergy Gourmet: Gourmet Pokémon can be equipped with a Chef's Hat. As a Chef, each Pokémon will cook up their Signature Dish between fights.
+- New synergy Gourmet: Gourmet Pokémon can be equipped with a Chef's Hat. Chefs will cook up their Signature Dish between fights and feed adjacent allies, providing them with various buffs and effects.
 
 # Changes to Items
 

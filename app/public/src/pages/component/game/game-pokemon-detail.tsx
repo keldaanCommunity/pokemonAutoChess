@@ -105,9 +105,8 @@ export function GamePokemonDetail(props: {
 
       {DishByPkm[pokemon.name] && (
         <div className="game-pokemon-detail-dish">
-          <div className="dish-name">
-            <span><i>{t("signature_dish")}:</i> {t(`item.${DishByPkm[pokemon.name]}`)}</span>
-            <SynergyIcon type={Synergy.GOURMET} />
+          <div className="game-pokemon-detail-dish-name">
+            <img src="assets/ui/dish.svg" /><i>{t("signature_dish")}:</i> {t(`item.${DishByPkm[pokemon.name]}`)}
           </div>
           <img
             src={`assets/item/${DishByPkm[pokemon.name]}.png`}
