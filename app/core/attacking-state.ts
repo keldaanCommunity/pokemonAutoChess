@@ -13,6 +13,7 @@ import delays from "../types/delays.json"
 import { IPokemonEntity } from "../types"
 import { PROJECTILE_SPEED } from "../types/Config"
 import { max } from "../utils/number"
+import { Effect } from "../types/enum/Effect"
 
 export default class AttackingState extends PokemonState {
   name = "attacking"
@@ -76,7 +77,7 @@ export default class AttackingState extends PokemonState {
       ) {
         // CAST ABILITY
         let crit = false
-        if (pokemon.items.has(Item.REAPER_CLOTH)) {
+        if (pokemon.effects.has(Effect.ABILITY_CRIT)) {
           crit = chance(pokemon.critChance / 100, pokemon)
         }
         AbilityStrategies[pokemon.skill].process(

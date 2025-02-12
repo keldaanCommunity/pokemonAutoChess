@@ -7509,7 +7509,7 @@ export class RecoverStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit, true)
+    super.process(pokemon, state, board, target, crit)
     pokemon.handleHeal(0.25 * pokemon.hp, pokemon, 1, crit)
   }
 }
@@ -11295,11 +11295,7 @@ export class DarkLariatStrategy extends AbilityStrategy {
       target.positionX + dx,
       target.positionY + dy
     )
-    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-      id: pokemon.simulation.id,
-      skill: Ability.DARK_LARIAT,
-      positionX: pokemon.positionX,
-      positionY: pokemon.positionY,
+    broadcastAbility(pokemon, {
       targetX: freeCellBehind?.x ?? pokemon.positionX,
       targetY: freeCellBehind?.y ?? pokemon.positionY
     })
@@ -11511,6 +11507,151 @@ export class FrostBreathStrategy extends AbilityStrategy {
         }
       }
     })
+  }
+}
+
+export class SaltCureStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    // Adjacent allies gain [10,20,40,SP] SHIELD and their status afflictions cured. Adjacent WATER, STEEL or GHOST enemies suffer from BURN for 5 seconds.
+    const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
+    const cells = board.getAdjacentCells(
+      pokemon.positionX,
+      pokemon.positionY,
+      false
+    )
+    cells.forEach((cell) => {
+      if (cell.value) {
+        if (cell.value.team === pokemon.team) {
+          cell.value.addShield(shield, pokemon, 0, crit)
+          cell.value.status.clearNegativeStatus()
+        } else {
+          if (
+            cell.value.types.has(Synergy.WATER) ||
+            cell.value.types.has(Synergy.STEEL) ||
+            cell.value.types.has(Synergy.GHOST)
+          ) {
+            cell.value.status.triggerBurn(5000, cell.value, pokemon)
+          }
+        }
+      }
+    })
+  }
+}
+
+export class SpicyExtractStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    //Make 1/2/3 closest allies RAGE for [2,SP] seconds
+    const nbAllies = [1, 2, 3][pokemon.stars - 1] ?? 3
+    const rageDuration = 2000
+    const allies = board.cells
+      .filter<PokemonEntity>(
+        (cell): cell is PokemonEntity =>
+          cell !== undefined &&
+          cell !== pokemon &&
+          cell.team === pokemon.team &&
+          cell.life > 0
+      )
+      .sort(
+        (a, b) =>
+          distanceE(
+            a.positionX,
+            a.positionY,
+            pokemon.positionX,
+            pokemon.positionY
+          ) -
+          distanceE(
+            b.positionX,
+            b.positionY,
+            pokemon.positionX,
+            pokemon.positionY
+          )
+      )
+      .slice(0, nbAllies)
+    allies.forEach((ally) => {
+      ally.status.triggerRage(rageDuration, ally)
+    })
+  }
+}
+
+export class SweetScentStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    // Enemies in a 3-range radius can no longer dodge attacks, lose [3,SP] SPE_DEF and have [30,LK]% chance to be CHARM for 1 second
+    const cells = board.getCellsInRadius(
+      pokemon.positionX,
+      pokemon.positionY,
+      3
+    )
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        if (chance(0.3, pokemon)) {
+          cell.value.status.triggerCharm(1000, cell.value, pokemon, false)
+        }
+        cell.value.addSpecialDefense(-3, pokemon, 1, crit)
+        cell.value.addDodgeChance(-cell.value.dodge, pokemon, 0, false)
+      }
+    })
+  }
+}
+
+export class SwallowStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    // Store power and boosts its DEF and SPE_DEF by 1 up to 3 times.
+    // If below 25% HP, swallow instead, restoring [20,SP]% of max HP per stack.
+    // If over 3 stacks, spit up, dealing [40,80,150,SP] SPECIAL to the 3 cells in front
+    if (pokemon.hp < pokemon.hp * 0.25) {
+      const heal =
+        (([0, 20, 40, 60][pokemon.count.ult] ?? 60) * pokemon.hp) / 100
+      pokemon.handleHeal(heal, pokemon, 1, crit)
+      pokemon.count.ult = 0
+      broadcastAbility(pokemon, { skill: Ability.RECOVER })
+    } else if (pokemon.count.ult >= 3) {
+      const damage = [40, 80, 150][pokemon.stars - 1] ?? 150
+      const cells = board.getCellsInFront(pokemon, target, 1)
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+      broadcastAbility(pokemon, { skill: Ability.SWALLOW })
+      pokemon.count.ult = 0
+    } else {
+      pokemon.addDefense(1, pokemon, 0, false)
+      pokemon.addSpecialDefense(1, pokemon, 0, false)
+    }
   }
 }
 
@@ -11937,5 +12078,9 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BOLT_BEAK]: new BoltBeakStrategy(),
   [Ability.FREEZE_DRY]: new FreezeDryStrategy(),
   [Ability.DRAGON_PULSE]: new DragonPulseStrategy(),
-  [Ability.FROST_BREATH]: new FrostBreathStrategy()
+  [Ability.FROST_BREATH]: new FrostBreathStrategy(),
+  [Ability.SALT_CURE]: new SaltCureStrategy(),
+  [Ability.SPICY_EXTRACT]: new SpicyExtractStrategy(),
+  [Ability.SWEET_SCENT]: new SweetScentStrategy(),
+  [Ability.SWALLOW]: new SwallowStrategy()
 }

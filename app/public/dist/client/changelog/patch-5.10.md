@@ -63,6 +63,7 @@
 
 - Nerf Field speed boost: ~~20/25/30%~~ → 15/20/25%
 - Nerf Grass 3 healing: ~~7~~ → 5 HP every 2 seconds
+- Fire attack bonus is now on-attack and no longer on-hit. That means it will trigger even if the attack is dodged or blocked.
 
 # Changes to Items
 
@@ -77,6 +78,9 @@
 
 # Gameplay
 
+- Uncommon & Common percentages in shop have been ajdusted for level 4 and 5:
+    - Level 4: Common 55% → 50%, Uncommon 35% → 40%
+    - Level 5: Common 40% → 36%, Uncommon 38% → 42%
 - Reduce Unique sell price: 15 → 10 gold (duo: 8 → 6 gold)
 
 # UI
@@ -95,7 +99,7 @@
 
 # Bugfix
 
-- Pokemons of the same family cannot be proposed at the same time at stage 10 and stage 20 proposals
+- Several forms of Ogerpon cannot be proposed at the same time at stage 10
 - Fixed Resurrection duplicating and removing some effects
 - Fixed the chance for Ghost Pokemon to silence requiring Ghost 2
 - Fixed ability effects sometimes applying to ghost players

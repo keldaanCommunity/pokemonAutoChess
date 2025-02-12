@@ -440,7 +440,8 @@
     "DARK_LARIAT": "DD래리어트",
     "BOLT_BEAK": "전격부리",
     "FREEZE_DRY": "프리즈드라이",
-    "DRAGON_PULSE": "용의파동"
+    "DRAGON_PULSE": "용의파동",
+    "FROST_BREATH": "얼음숨결"
   },
   "pkm": {
     "DEFAULT": "미싱노",
@@ -1340,7 +1341,9 @@
     "CRYOGONAL": "프리지오",
     "DRAMPA": "할비롱",
     "SKRELP": "수레기",
-    "DRAGALGE": "드래캄"
+    "DRAGALGE": "드래캄",
+    "CUBCHOO": "코고미",
+    "BEARTIC": "툰베어"
   },
   "ability_description": {
     "SOFT_BOILED": "모든 아군 포켓몬의 상태이상효과를 회복하며 [20,40,80,SP] 만큼의 SHIELD를 부여한다.",
@@ -1527,7 +1530,7 @@
     "ACROBATICS": "대상에 [20,40,80,SP] SPECIAL 을 가한다. 시전자가 도구를 지니지 않았을 경우 두배의 피해를 준다.",
     "ABSORB": "대상에 [30,60,120,SP] SPECIAL를 가하고 인접한 아군을 [3,6,12,SP] 만큼 회복시킨다.",
     "ROLLOUT": " DEF 를 [1,3,5,SP] 만큼 올리고 DEF 의 5배 만큼의 SPECIAL을 가한다.",
-    "ICE_BALL": "시전자의 SPE_DEF 을 5 증가시키고 [10,20,30,SP} + SPE_DEF의 [100,200,300,SP]% 만큼 SPECIAL를 가한다.",
+    "ICE_BALL": "시전자의 SPE_DEF 을 5 증가시키고 [10,20,30,SP] + SPE_DEF의 [100,200,300,SP]% 만큼 SPECIAL를 가한다.",
     "THRASH": "ATK을 [100,SP]% 만큼 올리고 3 초 동안 CONFUSION 이 된다.",
     "SOLAR_BEAM": "타겟 뒤의 일직선 방향에 [30,60,120,SP] SPECIAL를 가한다.만약 날씨가 SUN이라면 , 타겟은 3초 동안 BURN 이 되고 40 PP를 회복한다.",
     "MAGMA_STORM": "타겟을 불의 폭풍에 가두어 [80,SP] SPECIAL을 가한다. 불의 폭풍은 주변 적에게로 이동한다.",
@@ -1761,7 +1764,8 @@
     "DARK_LARIAT": "팔을 휘둘러 여러 번 공격하며 대상의 후방으로 이동한다. 각 공격은 [100,SP]% ATK 만큼 SPECIAL 를 입힌다. 공격 횟수는 ATK_SPEED 에 비례한다. 대상은 피격 중에 FLINCH 상태이다.",
     "BOLT_BEAK": "[80,SP] SPECIAL 를 가한다. 대상이 40 PP 이상이면 [160,SP] SPECIAL 를 가한다.",
     "FREEZE_DRY": "[70,SP] + 시전자의 SPE_DEF 의 [200,SP] % 만큼 SPECIAL 를 가한다. 대상 KO 시 폭발하여 주변에 [40,SP] + 시전자의 SPE_DEF 의 [150,SP] % 만큼 SPECIAL 를 가한다.",
-    "DRAGON_PULSE": "대상과 주변 적들에게 [20,SP] SPECIAL 를 가하는 충격파를 발사한다. 충격파는 적들간에 울려퍼진다."
+    "DRAGON_PULSE": "대상과 주변 적들에게 [20,SP] SPECIAL 를 가하는 충격파를 발사한다. 충격파는 적들간에 울려퍼진다.",
+    "FROST_BREATH": "전방 2칸의 원뿔 범위 적들에게 [30,60,120,SP] SPECIAL 를 가한다. [50,LK]% 확률로 2초간 FREEZE 을 가한다. 치명타가 터질 수 있다."
   },
   "effect": {
     "INGRAIN": "뿌리박기",
@@ -2345,8 +2349,6 @@
     "SAND_STREAM": "이 포켓몬은 SANDSTORM 날씨 카운트시 3마리로 계산합니다.",
     "DRIZZLE": "이 포켓몬은 RAIN 날씨 카운트시 3마리로 계산합니다.",
     "WIND_POWER": "이 포켓몬은 STORM 날씨 카운트시 3마리로 계산합니다.",
-    "HARVEST": "전투가 시작될시 이 포켓몬은 나무열매를 얻습니다. 도구칸이 꽉 찼다면 플레이어가 나무열매를 얻습니다.",
-    "GLUTTON": "나무열매를 먹을시 영구적으로 20 최대HP를 얻습니다.",
     "COMFEY": "큐아링은 아이템을 가질 수 없습니다. 전투시작시 큐아링은 비어있는 도구칸이 있는 아군들 중 가장 가까이 있는 한마리에게 달라붙으면서 지닌 모든 능력치를 줍니다. 큐아링의 보유자가 기술을 사용할때마다 큐아링도 따라서 기술을 사용하며, 보유자가 기절할시 큐아링 혼자서 싸웁니다.",
     "HISUIAN_TYPHLOSION": "이 포켓몬은 BURN이나 SILENCE 상태의 적에게 20% 추가대미지를 가합니다.",
     "PICKUP": "이 포켓몬이 아무런 도구를 지니지 않을 경우 무작위 도구 한개를 들고 시작합니다.",
@@ -2366,7 +2368,6 @@
     "ALIEN_DNA": "$t(pkm.DEOXYS)는 METEORITE와 반응하여 모습을 바꿉니다.",
     "BERRY_EATER": "나무열매를 지닌 대상 공격시 빼앗아 먹습니다.",
     "TOXIC_BOOST": "독 대미지를 50% 적게 받으며 POISONNED 동안 10ATK 증가합니다.",
-    "SHUCKLE": "소모된 나무열매를 BERRY_JUICE로 바꿉니다.",
     "GUZZLORD": "악식킹은 너무 무거워서 도약할 수 없습니다.",
     "ENVIRONMENTAL_ADAPTATION": "이 포켓몬은 지역에 따라 각기 다른 시너지로 적응했습니다.",
     "MOTHIM": "나메일은 도롱충이의 지역별 시너지를 따릅니다.",

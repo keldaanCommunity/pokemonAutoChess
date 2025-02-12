@@ -239,6 +239,24 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
+    case Ability.SALT_CURE:
+      addAbilitySprite(Ability.MAGIC_POWDER, coordinates, true)
+        .setScale(2)
+        .setTint(0xb0ff80)
+      break
+
+    case Ability.SPICY_EXTRACT:
+      addAbilitySprite(Ability.MAGIC_POWDER, coordinates, true)
+        .setScale(3)
+        .setTint(0xff9000)
+      break
+
+    case Ability.SWEET_SCENT:
+      addAbilitySprite(Ability.MAGIC_POWDER, coordinates, true)
+        .setScale(3)
+        .setTint(0xffc0c0)
+      break
+
     case Ability.RAZOR_WIND:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
@@ -488,6 +506,20 @@ export function displayAbility(
         )
       break
 
+    case Ability.SWALLOW:
+      addAbilitySprite(Ability.HYDRO_PUMP, coordinates, true)
+        .setScale(2)
+        .setTint(0x60ff60)
+        .setOrigin(0.5, 1)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) +
+            Math.PI / 2
+        )
+      break
+
     case Ability.DRACO_METEOR:
       addAbilitySprite(skill, coordinatesTarget, true)
         .setOrigin(0.5, 0.9)
@@ -540,6 +572,10 @@ export function displayAbility(
       break
 
     case Ability.DEFENSE_CURL:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
+    case Ability.RECOVER:
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
@@ -648,11 +684,12 @@ export function displayAbility(
       break
 
     case Ability.TORMENT:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
-      break
-
     case Ability.RAGE:
-      addAbilitySprite(Ability.TORMENT, coordinates, true).setScale(2)
+      addAbilitySprite(
+        Ability.TORMENT,
+        [coordinates[0], coordinates[1] - 50],
+        true
+      ).setScale(2)
       break
 
     case Ability.STOMP:
@@ -693,7 +730,11 @@ export function displayAbility(
       break
 
     case Ability.NASTY_PLOT:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+      addAbilitySprite(
+        skill,
+        [coordinates[0], coordinates[1] - 50],
+        true
+      ).setScale(2)
       break
 
     case Ability.THIEF:

@@ -3,7 +3,7 @@ import React, { useMemo } from "react"
 import ReactDOM from "react-dom/client"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { ItemStats } from "../../../../types/Config"
+import { ItemStats } from "../../../../core/items"
 import { Stat } from "../../../../types/enum/Game"
 import { HMs, Item, ItemRecipe, TMs } from "../../../../types/enum/Item"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
@@ -45,7 +45,7 @@ export function ItemDetailTooltip({
       <img className="game-item-detail-icon" src={`assets/item/${getImageFilename()}.png`} />
       <div className="game-item-detail-name">
         {ItemRecipe[item] && (<div className="game-item-recipe">
-          {ItemRecipe[item]?.map((item, i) => <><img className="game-item-detail-icon" src={`assets/item/${item}.png`} key={item} />{i === 0 && ' + '}</>)}
+          {ItemRecipe[item]?.map((item, i) => <React.Fragment key={`component_${i}_${item}`}><img className="game-item-detail-icon" src={`assets/item/${item}.png`} key={item} />{i === 0 && ' + '}</React.Fragment>)}
         </div>)}
         {t(`item.${item}`)}
       </div>

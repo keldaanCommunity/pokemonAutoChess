@@ -80,6 +80,7 @@ export enum Transfer {
   LEVEL_UP = "LEVEL_UP",
   SHOP = "SHOP",
   ITEM = "ITEM",
+  COOK = "COOK",
   GAME_START = "GAME_START",
   GAME_START_REQUEST = "GAME_START_REQUEST",
   GAME_END = "GAME_END",
@@ -408,6 +409,7 @@ export interface IPokemon {
   skill: Ability
   passive: Passive
   items: SetSchema<Item>
+  meal: Item | ""
   tm: Ability | null
   shiny: boolean
   emotion: Emotion
@@ -473,7 +475,7 @@ export interface IDps {
 
 export function instanceofPokemonEntity(
   obj: IPokemon | IPokemonEntity | IPokemonAvatar
-) {
+): obj is IPokemonEntity {
   return "pp" in obj
 }
 

@@ -4,6 +4,7 @@ import Count from "../models/colyseus-models/count"
 import Player from "../models/colyseus-models/player"
 import { Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
 import Status from "../models/colyseus-models/status"
+import { SynergyEffects } from "../models/effects"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { getSellPrice } from "../models/shop"
@@ -21,7 +22,6 @@ import {
   BOARD_WIDTH,
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER,
-  ItemStats,
   MANA_SCARF_MANA,
   ON_ATTACK_MANA,
   SCOPE_LENS_MANA
@@ -45,12 +45,11 @@ import {
 import { Passive } from "../types/enum/Passive"
 import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
-import { Synergy, SynergyEffects } from "../types/enum/Synergy"
+import { Synergy } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
 import { count } from "../utils/array"
 import { isOnBench } from "../utils/board"
 import { distanceC, distanceM } from "../utils/distance"
-import { logger } from "../utils/logger"
 import { clamp, min, roundToNDigits } from "../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
@@ -61,13 +60,14 @@ import {
   FireHitEffect,
   GrowGroundEffect,
   MonsterKillEffect,
+  OnAttackEffect,
   OnHitEffect,
   OnItemGainedEffect,
   OnItemRemovedEffect,
   OnKillEffect
 } from "./effect"
 import { IdleState } from "./idle-state"
-import { ItemEffects } from "./items"
+import { ItemEffects, ItemStats } from "./items"
 import MovingState from "./moving-state"
 import PokemonState from "./pokemon-state"
 import Simulation from "./simulation"
@@ -304,7 +304,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       ) {
         const bounceCrit =
           crit ||
-          (this.items.has(Item.REAPER_CLOTH) && chance(this.critChance, this))
+          (this.effects.has(Effect.ABILITY_CRIT) &&
+            chance(this.critChance, this))
         const bounceDamage = Math.round(
           ([0.5, 1][this.stars - 1] ?? 1) *
             damage *
@@ -642,11 +643,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   removeItemEffect(item: Item) {
-    if (ItemStats[item]) {
-      Object.entries(ItemStats[item]).forEach(([stat, value]) =>
-        this.applyStat(stat as Stat, -value)
-      )
-    }
+    Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) =>
+      this.applyStat(stat as Stat, -value)
+    )
 
     const type = SynergyGivenByItem[item]
     const default_types = getPokemonData(this.name).types
@@ -723,6 +722,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     totalDamage: number
   }) {
     this.addPP(ON_ATTACK_MANA, this, 0, false)
+
+    this.effectsSet.forEach((effect) => {
+      if (effect instanceof OnAttackEffect) {
+        effect.apply(this, target, board)
+      }
+    })
 
     if (this.items.has(Item.BLUE_ORB)) {
       this.count.staticHolderCount++
@@ -926,7 +931,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.effects.has(Effect.TELEPORT_NEXT_ATTACK)) {
       const crit =
-        this.items.has(Item.REAPER_CLOTH) && chance(this.critChance / 100, this)
+        this.effects.has(Effect.ABILITY_CRIT) &&
+        chance(this.critChance / 100, this)
       target.handleSpecialDamage(
         [15, 30, 60][this.stars - 1],
         board,
@@ -939,7 +945,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.effects.has(Effect.SHADOW_PUNCH_NEXT_ATTACK)) {
       const crit =
-        this.items.has(Item.REAPER_CLOTH) && chance(this.critChance / 100, this)
+        this.effects.has(Effect.ABILITY_CRIT) &&
+        chance(this.critChance / 100, this)
       target.handleSpecialDamage(
         [30, 60, 120][this.stars - 1],
         board,
@@ -1059,6 +1066,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
+    if (this.hasSynergyEffect(Synergy.FIRE)) {
+      const burnChance = 0.3
+      if (chance(burnChance, this)) {
+        target.status.triggerBurn(2000, target, this)
+      }
+    }
+
     if (this.hasSynergyEffect(Synergy.MONSTER)) {
       const flinchChance = 0.3
       if (chance(flinchChance, this)) {
@@ -1111,7 +1125,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       const damage = Math.round(target.def * (1 + target.ap / 100))
       const crit =
-        target.items.has(Item.REAPER_CLOTH) && chance(target.critChance, this)
+        target.effects.has(Effect.ABILITY_CRIT) &&
+        chance(target.critChance, this)
       this.status.triggerWound(2000, this, target)
       this.handleSpecialDamage(
         damage,
@@ -1126,7 +1141,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (target.effects.has(Effect.SHELL_TRAP) && physicalDamage > 0) {
       const cells = board.getAdjacentCells(target.positionX, target.positionY)
       const crit =
-        target.items.has(Item.REAPER_CLOTH) && chance(target.critChance, this)
+        target.effects.has(Effect.ABILITY_CRIT) &&
+        chance(target.critChance, this)
       target.effects.delete(Effect.SHELL_TRAP)
       this.simulation.room.broadcast(Transfer.ABILITY, {
         id: this.simulation.id,
@@ -1650,6 +1666,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.addAbilityPower(30, this, 0, false)
     }
 
+    if (this.passive === Passive.GUZZLORD && this.items.has(Item.CHEF_HAT)) {
+      this.addAbilityPower(4, this, 0, false, true)
+    }
+
     if (
       this.player &&
       this.simulation.room.state.specialGameRule === SpecialGameRule.BLOOD_MONEY
@@ -1811,7 +1831,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    const stackingItems = [Item.DEFENSIVE_RIBBON, Item.SOUL_DEW, Item.UPGRADE, Item.MAGMARIZER]
+    const stackingItems = [
+      Item.DEFENSIVE_RIBBON,
+      Item.SOUL_DEW,
+      Item.UPGRADE,
+      Item.MAGMARIZER
+    ]
 
     const removedItems = [Item.DYNAMAX_BAND, Item.SACRED_ASH, Item.MAX_REVIVE]
 
@@ -2002,18 +2027,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.passive === Passive.GLUTTON) {
-      this.applyStat(Stat.HP, 20, true)
+      this.applyStat(Stat.HP, 5, true)
       if (this.refToBoardPokemon.hp > 750) {
         this.player?.titles.add(Title.GLUTTON)
       }
     }
 
-    if (
-      this.passive === Passive.SHUCKLE &&
-      Berries.includes(berry) &&
-      this.player
-    ) {
-      this.player.items.push(Item.BERRY_JUICE)
+    if (this.effects.has(Effect.BERRY_JUICE)) {
+      this.addShield(50, this, 0, false)
     }
   }
 

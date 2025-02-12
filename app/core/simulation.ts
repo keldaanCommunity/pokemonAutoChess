@@ -1,18 +1,19 @@
 import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
-import { getWonderboxItems, ItemEffects } from "./items"
+import { getWonderboxItems, ItemEffects, ItemStats } from "./items"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../models/precomputed/precomputed-types"
 import GameRoom from "../rooms/game-room"
-import { IPokemon, IPokemonEntity, ISimulation, Transfer } from "../types"
 import {
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
-  ItemStats,
-  SynergyTriggers
-} from "../types/Config"
+  IPokemon,
+  IPokemonEntity,
+  ISimulation,
+  Title,
+  Transfer
+} from "../types"
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../types/Config"
 import { Effect } from "../types/enum/Effect"
 import {
   AttackType,
@@ -31,7 +32,7 @@ import {
 } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
-import { Synergy, SynergyEffects } from "../types/enum/Synergy"
+import { Synergy } from "../types/enum/Synergy"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
 import { IPokemonData } from "../types/interfaces/PokemonData"
 import { count } from "../utils/array"
@@ -50,7 +51,17 @@ import { PokemonEntity, getStrongestUnit, getUnitScore } from "./pokemon-entity"
 import { DelayedCommand } from "./simulation-command"
 import { getAvatarString } from "../utils/avatar"
 import { max } from "../utils/number"
-import { OnItemGainedEffect, GrowGroundEffect, FireHitEffect, MonsterKillEffect, SoundCryEffect, WaterSpringEffect} from "./effect"
+import {
+  OnItemGainedEffect,
+  GrowGroundEffect,
+  FireHitEffect,
+  MonsterKillEffect,
+  SoundCryEffect,
+  WaterSpringEffect,
+  OnSpawnEffect
+} from "./effect"
+import { SynergyEffects } from "../models/effects"
+import { DishEffects } from "./dishes"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -221,6 +232,12 @@ export default class Simulation extends Schema implements ISimulation {
     pokemonEntity.isClone = isClone
     this.applySynergyEffects(pokemonEntity)
     this.applyItemsEffects(pokemonEntity)
+    if (pokemon.meal) {
+      this.applyDishEffects(pokemonEntity, pokemon.meal)
+      pokemon.meal = ""
+      pokemon.action = PokemonActionState.IDLE
+    }
+
     this.board.setValue(
       pokemonEntity.positionX,
       pokemonEntity.positionY,
@@ -245,6 +262,10 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     pokemon.onSpawn({ entity: pokemonEntity, simulation: this })
+    pokemonEntity.effectsSet.forEach((effect) => {
+      if (effect instanceof OnSpawnEffect) effect.apply(pokemonEntity)
+    })
+
     return pokemonEntity
   }
 
@@ -371,11 +392,9 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   applyItemEffect(pokemon: PokemonEntity, item: Item) {
-    if (ItemStats[item]) {
-      Object.entries(ItemStats[item]).forEach(([stat, value]) =>
-        pokemon.applyStat(stat as Stat, value)
-      )
-    }
+    Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) =>
+      pokemon.applyStat(stat as Stat, value)
+    )
 
     ItemEffects[item]
       ?.filter((effect) => effect instanceof OnItemGainedEffect)
@@ -416,11 +435,24 @@ export default class Simulation extends Schema implements ISimulation {
 
     if (
       (singleType === Synergy.SOUND ||
-      (!singleType && pokemon.types.has(Synergy.SOUND))) &&
+        (!singleType && pokemon.types.has(Synergy.SOUND))) &&
       !SynergyEffects[Synergy.SOUND].some((e) => allyEffects.has(e))
     ) {
       // allow sound pokemon to always wake up allies without searching through the board twice
       pokemon.effectsSet.add(new SoundCryEffect())
+    }
+  }
+
+  applyDishEffects(pokemon: PokemonEntity, dish: Item) {
+    const dishEffects = DishEffects[dish]
+    if (!dishEffects) return
+    dishEffects.forEach((effect) => pokemon.effectsSet.add(effect))
+
+    if (pokemon.passive === Passive.GLUTTON) {
+      pokemon.addMaxHP(10, pokemon, 0, false, true)
+      if (pokemon.player && pokemon.hp > 750) {
+        pokemon.player.titles.add(Title.GLUTTON)
+      }
     }
   }
 
@@ -1534,8 +1566,7 @@ export default class Simulation extends Schema implements ISimulation {
 
       if (
         this.weather !== Weather.NEUTRAL &&
-        (this.redPlayer.synergies.get(Synergy.ROCK) ?? 0) >=
-          SynergyTriggers[Synergy.ROCK][0]
+        this.redPlayer.synergies.getSynergyStep(Synergy.ROCK) > 0
       ) {
         const rockCollected = WeatherRocksByWeather.get(this.weather)
         if (rockCollected) {
@@ -1586,8 +1617,7 @@ export default class Simulation extends Schema implements ISimulation {
 
       if (
         this.weather !== Weather.NEUTRAL &&
-        (this.bluePlayer.synergies.get(Synergy.ROCK) ?? 0) >=
-          SynergyTriggers[Synergy.ROCK][0]
+        this.bluePlayer.synergies.getSynergyStep(Synergy.ROCK) > 0
       ) {
         const rockCollected = WeatherRocksByWeather.get(this.weather)
         if (rockCollected) {

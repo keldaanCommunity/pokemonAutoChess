@@ -10,11 +10,10 @@ module.exports = {
     watch: false,
     time: true,
     wait_ready: true,
-    max_memory_restart: "1500M",
     env_production: {
       NODE_ENV: "production"
     },
-    interpreter: "node@20.17.0",
+    interpreter: "node@22.13.1",
   }],
   deploy: {
     production: {
@@ -23,7 +22,7 @@ module.exports = {
       "ref": "origin/prod",
       "repo": "https://github.com/keldaanCommunity/pokemonAutoChess.git",
       "path": "/home/deploy",
-      "post-deploy": "npm install && npm run build"
+      "post-deploy": "npm install && npm run assetpack && npm run build"
     }
   }
 }

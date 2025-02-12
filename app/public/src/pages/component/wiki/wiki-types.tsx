@@ -1,16 +1,16 @@
 import React, { useState } from "react"
-import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import SynergyIcon from "../icons/synergy-icon"
 import { Tooltip } from "react-tooltip"
+import { SynergyEffects } from "../../../../../models/effects"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
 import { RarityColor, SynergyTriggers } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Rarity } from "../../../../../types/enum/Game"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
-import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
+import { Synergy } from "../../../../../types/enum/Synergy"
 import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { groupBy } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
@@ -116,15 +116,18 @@ export function WikiType(props: { type: Synergy }) {
           label={t("show_evolutions")}
           isDark
         />
-        <ul className="synergy-overlaps">
-          {overlaps.map(([type, nb]) => {
-            return <li onClick={() => setOverlap(overlap === type ? null : type)} key={type} className={cc({ active: overlap === type })}>
-              <SynergyIcon type={props.type} />
-              <SynergyIcon type={type} />
-              <span>{nb}</span>
-            </li>
-          })}
-        </ul>
+        <details>
+          <summary style={{ textAlign: "end" }}>{t("overlaps")}</summary>
+          <ul className="synergy-overlaps">
+            {overlaps.map(([type, nb]) => {
+              return <li onClick={() => setOverlap(overlap === type ? null : type)} key={type} className={cc({ active: overlap === type })}>
+                <SynergyIcon type={props.type} />
+                <SynergyIcon type={type} />
+                <span>{nb}</span>
+              </li>
+            })}
+          </ul>
+        </details>
       </div>
       <table>
         <tbody>

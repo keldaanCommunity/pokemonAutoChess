@@ -79,6 +79,7 @@ import { playMusic, preloadMusic } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import { FIREBASE_CONFIG } from "./utils/utils"
 import { Passive } from "../../../types/enum/Passive"
+import { Item } from "../../../types/enum/Item"
 
 let gameContainer: GameContainer
 
@@ -372,6 +373,15 @@ export default function Game() {
 
         if (g && g.board) {
           g.board.showEmote(message.id, message?.emote)
+        }
+      })
+      room.onMessage(Transfer.COOK, async (message: { pokemonId: string, dishes: Item[] }) => {
+        const g = getGameScene()
+        if (g && g.board) {
+          const pokemon = g.board.pokemons.get(message.pokemonId)
+          if (pokemon) {
+            pokemon.cookAnimation(message.dishes)
+          }
         }
       })
 

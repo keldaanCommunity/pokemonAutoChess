@@ -26,7 +26,10 @@ root.render(
   <Provider store={store}>
     <React.StrictMode>
       <Suspense fallback="loading">
-        <BrowserRouter>
+        <BrowserRouter future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}>
           <Routes>
             <Route path="/" element={<Auth />} />
             <Route path="/lobby" element={<Lobby />} />
