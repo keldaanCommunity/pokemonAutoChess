@@ -11524,7 +11524,7 @@ export class SaltCureStrategy extends AbilityStrategy {
     const cells = board.getAdjacentCells(
       pokemon.positionX,
       pokemon.positionY,
-      true
+      false
     )
     cells.forEach((cell) => {
       if (cell.value) {

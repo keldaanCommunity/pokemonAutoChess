@@ -2027,7 +2027,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.passive === Passive.GLUTTON) {
-      this.applyStat(Stat.HP, 10, true)
+      this.applyStat(Stat.HP, 5, true)
       if (this.refToBoardPokemon.hp > 750) {
         this.player?.titles.add(Title.GLUTTON)
       }
