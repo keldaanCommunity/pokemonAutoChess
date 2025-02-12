@@ -26,6 +26,9 @@
 
 # Gameplay
 
+- Added regional variants for Unique and Legendary Pokémon. The first regional variant is Galarian Farfetch'd, which can be found in Fighting regions
+- Regional variants are no longer found in maps with common synergies between the variant and the original Pokémon
+
 # UI
 
 - Artificial items are now automatically dropped when benching the unit that was holding them.

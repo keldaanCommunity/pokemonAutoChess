@@ -64,6 +64,8 @@ import { values } from "../../utils/schemas"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
 import { SynergyEffects } from "../effects"
+import { getPokemonData } from "../precomputed/precomputed-pokemon-data"
+import { IPokemonData } from "../../types/interfaces/PokemonData"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -200,18 +202,30 @@ export class Pokemon extends Schema implements IPokemon {
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     const basePkm = PkmFamily[this.name]
-    const variantOf = (Object.keys(PkmRegionalVariants) as Pkm[]).find((p) =>
-      PkmRegionalVariants[p]!.includes(basePkm)
+    const originalVariantPkm = (Object.keys(PkmRegionalVariants) as Pkm[]).find(
+      (p) => PkmRegionalVariants[p]!.includes(basePkm)
     )
-    const isVariantOfAdditional =
-      variantOf && new PokemonClasses[variantOf]().additional
 
-    return (
-      regionSynergies.some((s) => this.types.has(s)) &&
-      (!isVariantOfAdditional ||
-        !state ||
-        state.additionalPokemons.includes(variantOf))
-    )
+    let originalVariant: IPokemonData | null = null
+    if (originalVariantPkm) {
+      originalVariant = getPokemonData(originalVariantPkm)
+      if (
+        originalVariant?.additional === true &&
+        state &&
+        state.additionalPokemons.includes(originalVariantPkm) === false
+      ) {
+        return false
+      }
+    }
+
+    if (originalVariant) {
+      const commonTypes = originalVariant.types.filter((t) => this.types.has(t))
+      if (commonTypes.some((t) => regionSynergies.includes(t))) {
+        return false // ignore variant if map has the synergy of the original variant
+      }
+    }
+
+    return regionSynergies.some((s) => this.types.has(s))
   }
 
   removeItem(item: Item) {
