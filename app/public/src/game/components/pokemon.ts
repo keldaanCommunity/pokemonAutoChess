@@ -262,11 +262,9 @@ export default class PokemonSprite extends DraggableObject {
       this.shield = p.shield
       this.life = p.life
       this.critPower = p.critPower
-      this.ap = p.ap
       this.critChance = p.critChance
     } else {
       this.critPower = DEFAULT_CRIT_POWER
-      this.ap = 0
       this.critChance = DEFAULT_CRIT_CHANCE
     }
     this.setDepth(5)
