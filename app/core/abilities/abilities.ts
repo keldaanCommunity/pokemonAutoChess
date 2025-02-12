@@ -81,6 +81,7 @@ import {
 } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { DelayedCommand } from "../simulation-command"
+import { DarkHarvestEffect, MagmaStormEffect, StoneEdgeEffect } from "../effect"
 
 const broadcastAbility = (
   pokemon: PokemonEntity,
@@ -5515,7 +5516,7 @@ export class MagmaStormStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    target.status.triggerMagmaStorm(100, pokemon)
+    target.effectsSet.add(new MagmaStormEffect(pokemon, 100))
   }
 }
 
@@ -5968,7 +5969,7 @@ export class HelpingHandStrategy extends AbilityStrategy {
     for (let i = 0; i < nbAlliesBuffed; i++) {
       const ally = allies[i]?.pkm
       if (ally) {
-        ally.status.doubleDamage = true
+        ally.effects.add(Effect.DOUBLE_DAMAGE)
         ally.addShield(shield, pokemon, 1, crit)
         broadcastAbility(pokemon, {
           positionX: ally.positionX,
@@ -9116,7 +9117,7 @@ export class DarkHarvestStrategy extends AbilityStrategy {
         mostSurroundedCoordinate.y,
         board
       )
-      pokemon.status.triggerDarkHarvest(3200)
+      pokemon.effectsSet.add(new DarkHarvestEffect(3200, pokemon))
       pokemon.status.triggerSilence(3200, pokemon, pokemon)
     }
   }
@@ -9133,7 +9134,7 @@ export class StoneEdgeStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const duration = pokemon.stars === 1 ? 5000 : 8000
     pokemon.status.triggerSilence(duration, pokemon, pokemon)
-    pokemon.status.triggerStoneEdge(duration, pokemon)
+    pokemon.effectsSet.add(new StoneEdgeEffect(duration, pokemon))
   }
 }
 

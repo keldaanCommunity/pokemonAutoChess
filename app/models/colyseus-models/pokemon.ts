@@ -67,6 +67,7 @@ import { pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
+import { ClearWingEffect, DrySkinEffect, SynchroEffect } from "../../core/effect"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -6166,6 +6167,10 @@ export class Mew extends Pokemon {
   skill = Ability.TELEPORT
   passive = Passive.SYNCHRO
   attackSprite = AttackSprite.PSYCHIC_RANGE
+
+  onSpawn({ entity }: { entity: IPokemonEntity }): void {
+    entity.effectsSet.add(new SynchroEffect())
+  }
 }
 
 export class Mewtwo extends Pokemon {
@@ -11435,7 +11440,7 @@ export class Yanma extends Pokemon {
   additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
   onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.status.triggerClearWing(1000)
+    entity.effectsSet.add(new ClearWingEffect(1000))
   }
 }
 
@@ -11454,7 +11459,7 @@ export class Yanmega extends Pokemon {
   additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
   onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.status.triggerClearWing(1000)
+    entity.effectsSet.add(new ClearWingEffect(1000))
   }
 }
 
@@ -11482,7 +11487,7 @@ export class Helioptile extends Pokemon {
     simulation
   }: { entity: IPokemonEntity; simulation: Simulation }) {
     if (simulation.weather === Weather.RAIN) {
-      entity.status.triggerDrySkin(1000)
+      entity.effectsSet.add(new DrySkinEffect(1000))
     } else if (simulation.weather === Weather.SANDSTORM) {
       entity.addDodgeChance(0.25, entity, 0, false)
     } else if (simulation.weather === Weather.SUN) {
@@ -11514,7 +11519,7 @@ export class Heliolisk extends Pokemon {
     simulation
   }: { entity: IPokemonEntity; simulation: Simulation }) {
     if (simulation.weather === Weather.RAIN) {
-      entity.status.triggerDrySkin(1000)
+      entity.effectsSet.add(new DrySkinEffect(1000))
     } else if (simulation.weather === Weather.SANDSTORM) {
       entity.addDodgeChance(0.25, entity, 0, false)
     } else if (simulation.weather === Weather.SUN) {

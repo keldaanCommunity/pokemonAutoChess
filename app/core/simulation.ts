@@ -364,10 +364,6 @@ export default class Simulation extends Schema implements ISimulation {
     pokemon.items.forEach((item) => {
       this.applyItemEffect(pokemon, item)
     })
-
-    if (pokemon.passive === Passive.SYNCHRO) {
-      pokemon.status.triggerSynchro()
-    }
   }
 
   applyItemEffect(pokemon: PokemonEntity, item: Item) {

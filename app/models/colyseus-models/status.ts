@@ -48,18 +48,11 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") enraged = false
   @type("boolean") skydiving = false
   @type("boolean") tree = false
-  magmaStorm = false
-  soulDew = false
-  clearWing = false
-  guts = false
-  toxicBoost = false
   burnOrigin: PokemonEntity | undefined = undefined
   poisonOrigin: PokemonEntity | undefined = undefined
   silenceOrigin: PokemonEntity | undefined = undefined
   woundOrigin: PokemonEntity | undefined = undefined
   charmOrigin: PokemonEntity | undefined = undefined
-  magmaStormOrigin: PokemonEntity | null = null
-  clearWingCooldown = 1000
   burnCooldown = 0
   burnDamageCooldown = 1000
   silenceCooldown = 0
@@ -71,7 +64,6 @@ export default class Status extends Schema implements IStatus {
   sleepCooldown = 0
   confusionCooldown = 0
   woundCooldown = 0
-  soulDewCooldown = 0
   paralysisCooldown = 0
   armorReductionCooldown = 0
   runeProtectCooldown = 0
@@ -80,23 +72,12 @@ export default class Status extends Schema implements IStatus {
   enrageCooldown = 0
   spikeArmorCooldown = 0
   magicBounceCooldown = 0
-  synchroCooldown = 3000
-  magmaStormCooldown = 0
-  synchro = false
   resurectingCooldown = 0
-  doubleDamage = false
-  drySkin = false
-  drySkinCooldown = 1000
   curseCooldown = 0
   pokerusCooldown = 2000
   lockedCooldown = 0
   blindCooldown = 0
   enrageDelay = 35000
-  darkHarvest = false
-  darkHarvestCooldown = 0
-  darkHarvestDamageCooldown = 0
-  stoneEdge = false
-  stoneEdgeCooldown = 0
 
   constructor(simulation: ISimulation) {
     super()
@@ -197,14 +178,6 @@ export default class Status extends Schema implements IStatus {
       this.updateWound(dt)
     }
 
-    if (this.soulDew) {
-      this.updateSoulDew(dt, pokemon)
-    }
-
-    if (this.darkHarvest) {
-      this.updateDarkHarvest(dt, pokemon, board)
-    }
-
     if (this.paralysis) {
       this.updateParalysis(dt, pokemon)
     }
@@ -241,24 +214,8 @@ export default class Status extends Schema implements IStatus {
       this.updateMagicBounce(dt)
     }
 
-    if (this.synchro) {
-      this.updateSynchro(dt, board, pokemon)
-    }
-
     if (this.resurecting) {
       this.updateResurecting(dt, pokemon)
-    }
-
-    if (this.magmaStorm) {
-      this.updateMagmaStorm(dt, board, pokemon)
-    }
-
-    if (this.clearWing) {
-      this.updateClearWing(dt, pokemon)
-    }
-
-    if (this.drySkin) {
-      this.updateDrySkin(dt, pokemon)
     }
 
     if (this.curse) {
@@ -281,47 +238,6 @@ export default class Status extends Schema implements IStatus {
 
     if (pokemon.status.curseFate && !pokemon.status.curse) {
       this.triggerCurse(6500) //Intentionally a bit less than 7 seconds to account for status update delay
-    }
-  }
-
-  triggerMagmaStorm(delay: number, origin: PokemonEntity | null) {
-    if (!this.magmaStorm && origin) {
-      this.magmaStorm = true
-      this.magmaStormCooldown = delay
-      this.magmaStormOrigin = origin
-    }
-  }
-
-  updateMagmaStorm(dt: number, board: Board, pkm: PokemonEntity) {
-    if (this.magmaStormCooldown - dt <= 0) {
-      this.magmaStorm = false
-      const adjacentCells = board.getAdjacentCells(pkm.positionX, pkm.positionY)
-      for (let i = 0; i < adjacentCells.length; i++) {
-        const cell = adjacentCells[i]
-        if (cell && cell.value && cell.value.team === pkm.team) {
-          cell.value.status.triggerMagmaStorm(500, this.magmaStormOrigin)
-          break
-        }
-      }
-      pkm.simulation.room.broadcast(Transfer.ABILITY, {
-        id: pkm.simulation.id,
-        skill: Ability.MAGMA_STORM,
-        positionX: pkm.positionX,
-        positionY: pkm.positionY,
-        targetX: pkm.positionX,
-        targetY: pkm.positionY
-      })
-      pkm.handleSpecialDamage(
-        80,
-        board,
-        AttackType.SPECIAL,
-        this.magmaStormOrigin,
-        false
-      )
-      this.magmaStormOrigin = null
-      this.magmaStormCooldown = 0
-    } else {
-      this.magmaStormCooldown -= dt
     }
   }
 
@@ -375,155 +291,6 @@ export default class Status extends Schema implements IStatus {
     this.enrageCooldown -= dt
   }
 
-  triggerClearWing(timer: number) {
-    if (!this.clearWing) {
-      this.clearWing = true
-      this.clearWingCooldown = timer
-    }
-  }
-
-  updateClearWing(dt: number, pkm: PokemonEntity) {
-    if (this.clearWingCooldown - dt <= 0) {
-      this.clearWing = false
-      this.triggerClearWing(1000)
-      pkm.addAttackSpeed(2, pkm, 0, false)
-    } else {
-      this.clearWingCooldown -= dt
-    }
-  }
-
-  triggerStoneEdge(timer: number, pkm: PokemonEntity) {
-    if (!this.stoneEdge) {
-      this.stoneEdge = true
-      this.stoneEdgeCooldown = timer
-      pkm.addCritChance(20, pkm, 1, false)
-      pkm.range += 2
-    }
-  }
-
-  updateStoneEdge(dt: number, pkm: PokemonEntity) {
-    if (this.stoneEdgeCooldown - dt <= 0) {
-      this.stoneEdge = false
-      pkm.addCritChance(-20, pkm, 1, false)
-      pkm.range = min(pkm.baseRange)(pkm.range - 2)
-    } else {
-      this.stoneEdgeCooldown -= dt
-    }
-  }
-
-  triggerDrySkin(timer: number) {
-    if (!this.drySkin) {
-      this.drySkin = true
-      this.drySkinCooldown = timer
-    }
-  }
-
-  updateDrySkin(dt: number, pkm: PokemonEntity) {
-    if (this.drySkinCooldown - dt <= 0) {
-      this.drySkin = false
-      this.triggerDrySkin(1000)
-      pkm.handleHeal(8, pkm, 0, false)
-    } else {
-      this.drySkinCooldown -= dt
-    }
-  }
-
-  triggerSynchro() {
-    this.synchro = true
-    this.synchroCooldown = 3000
-  }
-
-  updateSynchro(dt: number, board: Board, pkm: PokemonEntity) {
-    if (this.synchroCooldown - dt <= 0) {
-      this.synchro = false
-      this.triggerSynchro()
-      if (this.burn && this.burnOrigin) {
-        this.burnOrigin.status.triggerBurn(3000, this.burnOrigin, pkm)
-      }
-      if (this.poisonStacks && this.poisonOrigin) {
-        this.poisonOrigin.status.triggerPoison(3000, this.poisonOrigin, pkm)
-      }
-      if (this.wound && this.woundOrigin) {
-        this.woundOrigin.status.triggerWound(3000, this.woundOrigin, pkm)
-      }
-      if (this.silence && this.silenceOrigin) {
-        this.silenceOrigin.status.triggerSilence(3000, this.silenceOrigin, pkm)
-      }
-    } else {
-      this.synchroCooldown -= dt
-    }
-  }
-
-  triggerSoulDew(timer: number) {
-    this.soulDew = true
-    this.soulDewCooldown = timer
-  }
-
-  updateSoulDew(dt: number, pkm: PokemonEntity) {
-    if (this.soulDewCooldown - dt <= 0) {
-      this.soulDew = false
-      pkm.addAbilityPower(10, pkm, 0, false)
-      pkm.count.soulDewCount++
-      if (pkm.items.has(Item.SOUL_DEW)) {
-        this.triggerSoulDew(1000)
-      }
-    } else {
-      this.soulDewCooldown -= dt
-    }
-  }
-
-  triggerDarkHarvest(duration: number) {
-    this.darkHarvest = true
-    if (duration > this.darkHarvestCooldown) {
-      this.darkHarvestCooldown = duration
-      this.darkHarvestDamageCooldown = 0
-    }
-  }
-
-  updateDarkHarvest(dt: number, pkm: PokemonEntity, board: Board) {
-    if (this.darkHarvestDamageCooldown - dt <= 0) {
-      pkm.simulation.room.broadcast(Transfer.ABILITY, {
-        id: pkm.simulation.id,
-        skill: Ability.DARK_HARVEST,
-        positionX: pkm.positionX,
-        positionY: pkm.positionY
-      })
-      const crit = pkm.items.has(Item.REAPER_CLOTH)
-        ? chance(pkm.critChance, pkm)
-        : false
-      board.getAdjacentCells(pkm.positionX, pkm.positionY).forEach((cell) => {
-        if (cell?.value && cell.value.team !== pkm.team) {
-          const darkHarvestDamage = [5, 10, 20][pkm.stars - 1] ?? 20
-          cell.value.handleSpecialDamage(
-            darkHarvestDamage,
-            board,
-            AttackType.SPECIAL,
-            pkm,
-            crit,
-            true
-          )
-
-          const healFactor = 0.3
-          pkm.handleHeal(
-            Math.round(darkHarvestDamage * healFactor),
-            pkm,
-            0,
-            false
-          )
-          this.darkHarvestDamageCooldown = 1000
-        }
-      })
-    } else {
-      this.darkHarvestDamageCooldown -= dt
-    }
-
-    if (this.darkHarvestCooldown - dt <= 0) {
-      this.darkHarvest = false
-    } else {
-      this.darkHarvestCooldown -= dt
-    }
-  }
-
   triggerBurn(
     duration: number,
     pkm: PokemonEntity,
@@ -545,8 +312,8 @@ export default class Status extends Schema implements IStatus {
         }
       }
 
-      if (pkm.passive === Passive.GUTS && !this.guts) {
-        this.guts = true
+      if (pkm.passive === Passive.GUTS && !pkm.effects.has(Effect.GUTS_PASSIVE)) {
+        pkm.effects.add(Effect.GUTS_PASSIVE)
         pkm.addAttack(5, pkm, 0, false)
       }
 
@@ -601,7 +368,7 @@ export default class Status extends Schema implements IStatus {
     this.burnOrigin = undefined
     this.burnDamageCooldown = 1000
     if (pkm.passive === Passive.GUTS && this.poisonStacks === 0) {
-      this.guts = false
+      pkm.effects.delete(Effect.GUTS_PASSIVE)
       pkm.addAttack(-5, pkm, 0, false)
     }
   }
@@ -671,13 +438,13 @@ export default class Status extends Schema implements IStatus {
       if (duration > this.poisonCooldown) {
         this.poisonCooldown = duration
       }
-      if (pkm.passive === Passive.GUTS && !this.guts) {
-        this.guts = true
+      if (pkm.passive === Passive.GUTS && !pkm.effects.has(Effect.GUTS_PASSIVE)) {
+        pkm.effects.add(Effect.GUTS_PASSIVE)
         pkm.addAttack(5, pkm, 0, false)
       }
 
-      if (pkm.passive === Passive.TOXIC_BOOST && !this.toxicBoost) {
-        this.toxicBoost = true
+      if (pkm.passive === Passive.TOXIC_BOOST && !pkm.effects.has(Effect.TOXIC_BOOST)) {
+        pkm.effects.add(Effect.TOXIC_BOOST)
         pkm.addAttack(10, pkm, 0, false)
       }
 
@@ -731,11 +498,11 @@ export default class Status extends Schema implements IStatus {
       this.poisonOrigin = undefined
       this.poisonDamageCooldown = 1000
       if (pkm.passive === Passive.GUTS && !this.burn) {
-        this.guts = false
+        pkm.effects.delete(Effect.GUTS_PASSIVE)
         pkm.addAttack(-5, pkm, 0, false)
       }
       if (pkm.passive === Passive.TOXIC_BOOST) {
-        this.toxicBoost = false
+        pkm.effects.delete(Effect.TOXIC_BOOST)
         pkm.addAttack(-10, pkm, 0, false)
       }
     } else {
