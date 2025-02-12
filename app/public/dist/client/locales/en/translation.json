@@ -2339,7 +2339,7 @@
     "FRUIT_JUICE": "Gain 30% ATK_SPEED in the next fight.",
     "LEEK": "Gain 30% CRIT_CHANCE and allow ability to critically strike in the next fight.",
     "LARGE_LEEK": "Gain 30% CRIT_POWER and allow ability to critically strike in the next fight.",
-    "SPINDA_COCKTAIL": "A cocktail with [LK] random effects that can make you dizzy or buff stats."
+    "SPINDA_COCKTAIL": "A cocktail with [LK] random effects that can buff stats or make you dizzy."
   },
   "passive_description": {
     "NONE": "No passive",

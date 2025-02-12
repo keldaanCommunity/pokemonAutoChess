@@ -1277,6 +1277,14 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           if (chef.name === Pkm.ARCEUS || chef.name === Pkm.KECLEON) {
             dish = Item.BERRIES
           }
+
+          if (chef.passive === Passive.GLUTTON) {
+            chef.hp += 30
+            if (chef.hp > 750) {
+              player.titles.add(Title.GLUTTON)
+            }
+          }
+
           if (dish && nbDishes > 0) {
             let dishes = Array.from({ length: nbDishes }, () => dish)
             if (dish === Item.BERRIES) {

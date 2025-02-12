@@ -6,8 +6,14 @@ import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../models/precomputed/precomputed-types"
 import GameRoom from "../rooms/game-room"
-import { IPokemon, IPokemonEntity, ISimulation, Transfer } from "../types"
-import { BOARD_HEIGHT, BOARD_WIDTH, SynergyTriggers } from "../types/Config"
+import {
+  IPokemon,
+  IPokemonEntity,
+  ISimulation,
+  Title,
+  Transfer
+} from "../types"
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../types/Config"
 import { Effect } from "../types/enum/Effect"
 import {
   AttackType,
@@ -441,6 +447,13 @@ export default class Simulation extends Schema implements ISimulation {
     const dishEffects = DishEffects[dish]
     if (!dishEffects) return
     dishEffects.forEach((effect) => pokemon.effectsSet.add(effect))
+
+    if (pokemon.passive === Passive.GLUTTON) {
+      pokemon.addMaxHP(20, pokemon, 0, false, true)
+      if (pokemon.player && pokemon.hp > 750) {
+        pokemon.player.titles.add(Title.GLUTTON)
+      }
+    }
   }
 
   applyPostEffects(
