@@ -325,9 +325,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     } else {
       let specialDamage =
         damage + (damage * (attacker && apBoost ? attacker.ap : 0)) / 100
-      if (attacker && attacker.status.doubleDamage) {
+      if (attacker && attacker.effects.has(Effect.DOUBLE_DAMAGE)) {
         specialDamage *= 2
-        attacker.status.doubleDamage = false
+        attacker.effects.delete(Effect.DOUBLE_DAMAGE)
       }
       if (crit && attacker && this.items.has(Item.ROCKY_HELMET) === false) {
         specialDamage = Math.round(specialDamage * attacker.critPower)

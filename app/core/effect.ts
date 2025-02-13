@@ -7,6 +7,8 @@ import { chance } from "../utils/random"
 import PokemonState from "./pokemon-state"
 import { Passive } from "../types/enum/Passive"
 import { Ability } from "../types/enum/Ability"
+import { AttackType } from "../types/enum/Game"
+import { min } from "../utils/number"
 
 type EffectOrigin = EffectEnum | Item
 
@@ -108,6 +110,170 @@ export class GrowGroundEffect extends PeriodicEffect {
       pokemon.player.addMoney(3, true, pokemon)
       pokemon.count.moneyCount += 3
     }
+  }
+}
+
+export class MagmaStormEffect extends PeriodicEffect {
+  constructor(
+    public caster: PokemonEntity,
+    intervalMS: number,
+    pokemon: PokemonEntity
+  ) {
+    super(intervalMS, EffectEnum.MAGMA_STORM)
+    if (pokemon.effects.has(EffectEnum.MAGMA_STORM)) {
+      pokemon.effectsSet.delete(this)
+    } else {
+      pokemon.effects.add(EffectEnum.MAGMA_STORM)
+    }
+  }
+
+  apply(pokemon) {
+    const board = pokemon.simulation.board
+    pokemon.effects.delete(EffectEnum.MAGMA_STORM)
+    const adjacentCells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    for (const cell of adjacentCells) {
+      if (cell?.value?.team === pokemon.team) {
+        cell.value.effectsSet.add(new MagmaStormEffect(this.caster, 500, cell.value))
+        break
+      }
+    }
+    pokemon.transferAbility(Ability.MAGMA_STORM)
+    pokemon.handleSpecialDamage(
+      80,
+      board,
+      AttackType.SPECIAL,
+      this.caster,
+      false
+    )
+    pokemon.effectsSet.delete(this)
+  }
+}
+
+export class SoulDewEffect extends PeriodicEffect {
+  constructor(intervalMS) {
+    super(intervalMS, Item.SOUL_DEW)
+  }
+
+  apply(pokemon) {
+    pokemon.addAbilityPower(10, pokemon, 0, false)
+    pokemon.count.soulDewCount++
+  }
+}
+
+export class ClearWingEffect extends PeriodicEffect {
+  constructor(intervalMS) {
+    super(intervalMS)
+  }
+
+  apply(pokemon) {
+    pokemon.addAttackSpeed(2, pokemon, 0, false)
+  }
+}
+
+export class SynchroEffect extends PeriodicEffect {
+  constructor() {
+    super(3000)
+  }
+
+  apply(pokemon) {
+    const status = pokemon.status
+    if (status.burn && status.burnOrigin) {
+      status.burnOrigin.status.triggerBurn(3000, status.burnOrigin, pokemon)
+    }
+    if (status.poisonStacks && status.poisonOrigin) {
+      status.poisonOrigin.status.triggerPoison(3000, status.poisonOrigin, pokemon)
+    }
+    if (status.wound && status.woundOrigin) {
+      status.woundOrigin.status.triggerWound(3000, status.woundOrigin, pokemon)
+    }
+    if (status.silence && status.silenceOrigin) {
+      status.silenceOrigin.status.triggerSilence(3000, status.silenceOrigin, pokemon)
+    }
+  }
+}
+
+export class DrySkinEffect extends PeriodicEffect {
+  constructor(intervalMS) {
+    super(intervalMS)
+  }
+
+  apply(pokemon) {
+    pokemon.handleHeal(8, pokemon, 0, false)
+  }
+}
+
+export class DarkHarvestEffect extends PeriodicEffect {
+  constructor(public duration, pokemon: PokemonEntity) {
+    super(1000, EffectEnum.DARK_HARVEST)
+    this.timer = 0
+    this.duration += this.intervalMs
+
+    if (pokemon.effects.has(EffectEnum.DARK_HARVEST)) {
+      pokemon.effectsSet.delete(this)
+      for (const effect of pokemon.effectsSet) {
+        if (effect instanceof DarkHarvestEffect) {
+          effect.duration = Math.max(this.duration, effect.duration)
+          effect.timer = this.timer
+          break
+        }
+      }
+    } else {
+      pokemon.effects.add(EffectEnum.DARK_HARVEST)
+    }
+  }
+
+  apply(pokemon) {
+    pokemon.transferAbility(Ability.DARK_HARVEST)
+    const board = pokemon.simulation.board
+    const crit = pokemon.items.has(Item.REAPER_CLOTH)
+      ? chance(pokemon.critChance, pokemon)
+      : false
+    const darkHarvestDamage = [5, 10, 20][pokemon.stars - 1] ?? 20
+    const healFactor = 0.3
+    board.getAdjacentCells(pokemon.positionX, pokemon.positionY).forEach((cell) => {
+      if (cell?.value?.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          darkHarvestDamage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit,
+          true
+        )
+        pokemon.handleHeal(
+          Math.round(darkHarvestDamage * healFactor),
+          pokemon,
+          0,
+          false
+        )
+      }
+    })
+    if (this.duration <= 0) {
+      pokemon.effectsSet.delete(this)
+      pokemon.effects.delete(EffectEnum.DARK_HARVEST)
+    } else {
+      this.duration -= this.intervalMs
+    }
+  }
+}
+
+export class StoneEdgeEffect extends PeriodicEffect {
+  constructor(intervalMS, pokemon: PokemonEntity) {
+    super(intervalMS, EffectEnum.STONE_EDGE)
+    if (pokemon.effects.has(EffectEnum.STONE_EDGE)) {
+      pokemon.effectsSet.delete(this)
+      return
+    }
+    pokemon.effects.add(EffectEnum.STONE_EDGE)
+    pokemon.addCritChance(20, pokemon, 1, false)
+    pokemon.range += 2
+  }
+
+  apply(pokemon) {
+    pokemon.addCritChance(-20, pokemon, 1, false)
+    pokemon.range = min(pokemon.baseRange)(pokemon.range - 2)
+    pokemon.effectsSet.delete(this)
+    pokemon.effects.delete(EffectEnum.STONE_EDGE)
   }
 }
 
