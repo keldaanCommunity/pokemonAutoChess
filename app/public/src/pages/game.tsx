@@ -255,12 +255,14 @@ export default function Game() {
       elligibleToXP &&
       !room?.state.noElo &&
       afterPlayers.filter((p) => p.role !== Role.BOT).length >= 2
+    const gameMode = room?.state.gameMode
 
     const r: Room<AfterGameState> = await client.create("after-game", {
       players: afterPlayers,
       idToken: token,
       elligibleToXP,
-      elligibleToELO
+      elligibleToELO,
+      gameMode
     })
     localStore.set(
       LocalStoreKeys.RECONNECTION_AFTER_GAME,
