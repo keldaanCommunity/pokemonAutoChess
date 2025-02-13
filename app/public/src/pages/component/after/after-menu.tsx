@@ -10,6 +10,7 @@ import SynergyIcon from "../icons/synergy-icon"
 import { Avatar } from "../profile/avatar"
 import Team from "./team"
 import "./after-menu.css"
+import { GameMode } from "../../../../../types/enum/Game"
 
 export default function AfterMenu() {
   const { t } = useTranslation()
@@ -19,12 +20,13 @@ export default function AfterMenu() {
 
   const elligibleToXP = useAppSelector((state) => state.after.elligibleToXP)
   const elligibleToELO = useAppSelector((state) => state.after.elligibleToELO)
+  const gameMode = useAppSelector((state) => state.after.gameMode)
   const currentPlayerId: string = useAppSelector((state) => state.network.uid)
   const currentPlayer = players.find((p) => p.id === currentPlayerId)
   const playerRank = currentPlayer ? currentPlayer.rank : null
   const humans = players.filter((p) => p.role !== Role.BOT)
   const newElo = currentPlayer
-    ? computeElo(currentPlayer, currentPlayer.rank, currentPlayer.elo, humans)
+    ? computeElo(currentPlayer, currentPlayer.rank, currentPlayer.elo, humans, gameMode)
     : null
   const shouldShowElo = elligibleToELO && currentPlayer && newElo
 
@@ -39,6 +41,31 @@ export default function AfterMenu() {
               )}
               <span>{getRankLabel(playerRank)}</span>
             </div>
+            <p className="gamemode">
+              {gameMode === GameMode.SCRIBBLE && <>
+                <img
+                  alt={t("smeargle_scribble")}
+                  className="scribble icon"
+                  src="/assets/ui/scribble.png"
+                  draggable="false"
+                />
+                {t("smeargle_scribble")}
+              </>}
+              {gameMode === GameMode.CUSTOM_LOBBY && t("custom_room")}
+              {gameMode === GameMode.QUICKPLAY && <>
+                <img
+                  alt={t("quick_play")}
+                  className="quickplay icon"
+                  src="/assets/ui/quickplay.png"
+                  draggable="false"
+                />
+                {t("quick_play")}
+              </>}
+              {gameMode === GameMode.RANKED && <>
+                <img src="assets/ui/game_modes/ranked.png" alt={t("ranked_match")} className="ranked icon" draggable="false" />
+                {t("ranked_match")}
+              </>}
+            </p>
             <div className="player-gains">
               {shouldShowElo && (
                 <p className="player-elo">

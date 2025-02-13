@@ -1,4 +1,5 @@
 import { ISimplePlayer } from "../types"
+import { GameMode } from "../types/enum/Game"
 import { logger } from "../utils/logger"
 import { average, min } from "../utils/number"
 import { EloEngine } from "./elo-engine"
@@ -7,7 +8,8 @@ export function computeElo(
   player: ISimplePlayer,
   rank: number,
   previousElo: number,
-  players: ISimplePlayer[]
+  players: ISimplePlayer[],
+  gameMode: GameMode
 ) {
   const eloEngine = new EloEngine()
   const eloGains = new Array<number>()
@@ -30,7 +32,7 @@ export function computeElo(
   if (rank <= Math.floor(players.length / 2) && meanGain < previousElo) {
     meanGain = previousElo // ensure to not lose ELO if you're on the upper part of the ranking
   }
-  if (rank === 1) {
+  if (rank === 1 && gameMode === GameMode.RANKED) {
     meanGain = min(previousElo + 1)(meanGain) // ensure you get minimum +1 if finishing first
   }
 
