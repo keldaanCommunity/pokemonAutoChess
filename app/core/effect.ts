@@ -8,7 +8,6 @@ import { Passive } from "../types/enum/Passive"
 import { Ability } from "../types/enum/Ability"
 import { SynergyEffects } from "../models/effects"
 import { AttackType } from "../types/enum/Game"
-import { min } from "../utils/number"
 import { chance } from "../utils/random"
 
 type EffectOrigin = EffectEnum | Item | Passive | Ability
@@ -173,15 +172,6 @@ export class GrowGroundEffect extends PeriodicEffect {
       3000
     )
     this.synergyLevel = SynergyEffects[Synergy.GROUND].indexOf(effect) + 1
-  }
-}
-
-export class SoulDewEffect extends PeriodicEffect {
-  constructor() {
-    super((pokemon) => {
-      pokemon.addAbilityPower(10, pokemon, 0, false)
-      pokemon.count.soulDewCount++
-    }, Item.SOUL_DEW, 1000)
   }
 }
 

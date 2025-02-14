@@ -81,7 +81,7 @@ import {
 } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { DelayedCommand } from "../simulation-command"
-import { DarkHarvestEffect, MagmaStormEffect, StoneEdgeEffect } from "../effect"
+import { DarkHarvestEffect } from "../effect"
 
 const broadcastAbility = (
   pokemon: PokemonEntity,
@@ -5516,7 +5516,30 @@ export class MagmaStormStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    target.effectsSet.add(new MagmaStormEffect(pokemon, 100, target))
+
+    const targetsHit = new Set<string>()
+    const propagate= (currentTarget) => {
+      targetsHit.add(currentTarget.id)
+      currentTarget.transferAbility(Ability.MAGMA_STORM)
+      currentTarget.handleSpecialDamage(
+        80,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        false
+      )
+
+      setTimeout(() => {
+        const board = pokemon.simulation.board
+        const nextEnemy = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+          .find(cell => cell.value && cell.value.team === pokemon.team && !targetsHit.has(cell.value.id))
+          if(nextEnemy && !pokemon.simulation.finished) {
+            propagate(nextEnemy)
+          }
+        }, 500)
+    }
+
+    propagate(target)
   }
 }
 
@@ -9133,8 +9156,17 @@ export class StoneEdgeStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const duration = pokemon.stars === 1 ? 5000 : 8000
+    if (pokemon.effects.has(Effect.STONE_EDGE)) return; // ignore if already active
+
     pokemon.status.triggerSilence(duration, pokemon, pokemon)
-    pokemon.effectsSet.add(new StoneEdgeEffect(duration, pokemon))
+    pokemon.effects.add(Effect.STONE_EDGE)
+    pokemon.addCritChance(20, pokemon, 1, false)
+    pokemon.range += 2
+    pokemon.commands.push(new DelayedCommand(() => {
+      pokemon.addCritChance(-20, pokemon, 1, false)
+      pokemon.range = min(pokemon.baseRange)(pokemon.range - 2)
+      pokemon.effects.delete(Effect.STONE_EDGE)
+    }, duration))
   }
 }
 

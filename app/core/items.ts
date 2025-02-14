@@ -10,7 +10,7 @@ import {
   OnItemGainedEffect,
   OnItemRemovedEffect,
   OnKillEffect,
-  SoulDewEffect
+  PeriodicEffect
 } from "./effect"
 import { pickRandomIn } from "../utils/random"
 import { Pokemon } from "../models/colyseus-models/pokemon"
@@ -135,7 +135,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
 export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.SOUL_DEW]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.effectsSet.add(new SoulDewEffect(1000))
+      pokemon.effectsSet.add(new SoulDewEffect())
     }),
     new OnItemRemovedEffect((pokemon) => {
       for (const effect of pokemon.effectsSet) {
@@ -372,4 +372,13 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.count.magmarizerCount = 0
     })
   ]
+}
+
+export class SoulDewEffect extends PeriodicEffect {
+  constructor() {
+    super((pokemon) => {
+      pokemon.addAbilityPower(10, pokemon, 0, false)
+      pokemon.count.soulDewCount++
+    }, Item.SOUL_DEW, 1000)
+  }
 }
