@@ -73,6 +73,7 @@ export function SpriteDebug() {
             <option value="Idle">Idle</option>
             <option value="Walk">Walk</option>
             <option value="Sleep">Sleep</option>
+            <option value="Eat">Eat</option>
             <option value="Hurt">Hurt</option>
             <option value="Hop">Hop</option>
             <option value="Attack">Attack</option>

@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../../../../models/precomputed/precomputed-types-and-categories"
 import { PVEStages } from "../../../../../models/pve-stages"
+import { SynergyEffects } from "../../../../../models/effects"
 import { IPlayer } from "../../../../../types"
 import {
   RarityColor,
@@ -10,7 +11,8 @@ import {
   SynergyTriggers
 } from "../../../../../types/Config"
 import { Pkm, PkmFamily, PkmRegionalVariants } from "../../../../../types/enum/Pokemon"
-import { Synergy, SynergyEffects } from "../../../../../types/enum/Synergy"
+import { Synergy } from "../../../../../types/enum/Synergy"
+import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { roundToNDigits } from "../../../../../utils/number"
 import { values } from "../../../../../utils/schemas"
@@ -20,7 +22,6 @@ import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import SynergyIcon from "../icons/synergy-icon"
 import { EffectDescriptionComponent } from "./effect-description"
-import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { usePreference } from "../../../preferences"
 
 export default function SynergyDetailComponent(props: {
@@ -49,8 +50,8 @@ export default function SynergyDetailComponent(props: {
     )
     .map((p) => getPokemonData(p as Pkm))
     .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
-  
-  const baseVariant = (pkm: Pkm): Pkm =>  (Object.keys(PkmRegionalVariants) as Pkm[]).find((p) =>
+
+  const baseVariant = (pkm: Pkm): Pkm => (Object.keys(PkmRegionalVariants) as Pkm[]).find((p) =>
     PkmRegionalVariants[p]!.includes(pkm)
   ) ?? pkm
 

@@ -5,6 +5,7 @@ import {
   ArtificialItems,
   ItemComponents,
   Berries,
+  Dishes,
   Item,
   ItemRecipe,
   SpecialItems,
@@ -129,6 +130,7 @@ export default function WikiItems() {
           ))}
         </ul>
       </article>
+
       <article className="berries">
         <h2>
           <SynergyIcon type={Synergy.GRASS} /> {t("berries")}
@@ -153,6 +155,25 @@ export default function WikiItems() {
           ))}
         </ul>
       </article>
+
+      <article className="dishes">
+        <h2>
+          <SynergyIcon type={Synergy.GOURMET} /> {t("dishes")}
+        </h2>
+        <p>{addIconsToDescription(t("dishes_description"))}</p>
+        <ul>
+          {Dishes.map((i) => (
+            <li
+              key={i}
+              data-tooltip-id="detail-item"
+              onMouseOver={() => setItemHovered(i)}
+            >
+              <img src={"assets/item/" + i + ".png"} className="item"></img>
+            </li>
+          ))}
+        </ul>
+      </article>
+
       <article className="artificial">
         <h2>
           <SynergyIcon type={Synergy.ARTIFICIAL} /> {t("artificial_items")}
