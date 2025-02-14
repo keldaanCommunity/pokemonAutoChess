@@ -1,9 +1,9 @@
+import { Effect as EffectEnum } from "../types/enum/Effect"
 import { Dishes, Item } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
-import { Effect, OnSpawnEffect, OnHitEffect, PeriodicEffect } from "./effect"
-import { Effect as EffectEnum } from "../types/enum/Effect"
 import { Synergy } from "../types/enum/Synergy"
 import { chance } from "../utils/random"
+import { Effect, OnHitEffect, OnSpawnEffect, PeriodicEffect } from "./effect"
 
 export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.LICKITUNG]: Item.RAGE_CANDY_BAR,
@@ -18,6 +18,10 @@ export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.SWIRLIX]: Item.WHIPPED_DREAM,
   [Pkm.SLURPUFF]: Item.WHIPPED_DREAM,
   [Pkm.APPLIN]: Item.TART_APPLE,
+  [Pkm.FLAPPLE]: Item.TART_APPLE,
+  [Pkm.APPLETUN]: Item.SWEET_APPLE,
+  [Pkm.DIPPLIN]: Item.SIRUPY_APPLE,
+  [Pkm.HYDRAPPLE]: Item.SIRUPY_APPLE,
   [Pkm.CHERRUBI]: Item.SWEET_HERB,
   [Pkm.CHERRIM]: Item.SWEET_HERB,
   [Pkm.CHERRIM_SUNLIGHT]: Item.SWEET_HERB,
@@ -127,11 +131,6 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
       entity.status.triggerRuneProtect(8000)
     })
   ],
-  SIRUPY_APPLE: [
-    new OnSpawnEffect((entity) => {
-      entity.addShield(100, entity, 0, false)
-    })
-  ],
   SPINDA_COCKTAIL: [
     new OnSpawnEffect((entity) => {
       if (chance(0.8, entity)) {
@@ -156,9 +155,21 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
       }
     })
   ],
+  SIRUPY_APPLE: [
+    new OnHitEffect((entity, target, board) => {
+      if (chance(0.3, entity)) {
+        target.status.triggerParalysis(3000, target, entity)
+      }
+    })
+  ],
   SWEET_APPLE: [
-    new OnSpawnEffect((entity) => {
-      entity.addShield(80, entity, 0, false)
+    new OnHitEffect((entity, target, board) => {
+      target.addSpecialDefense(-1, entity, 0, false)
+    })
+  ],
+  TART_APPLE: [
+    new OnHitEffect((entity, target, board) => {
+      target.addDefense(-1, entity, 0, false)
     })
   ],
   SWEET_HERB: [
@@ -169,11 +180,6 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   TEA: [
     new OnSpawnEffect((entity) => {
       entity.addPP(50, entity, 0, false)
-    })
-  ],
-  TART_APPLE: [
-    new OnSpawnEffect((entity) => {
-      entity.addShield(50, entity, 0, false)
     })
   ],
   WHIPPED_DREAM: [

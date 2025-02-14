@@ -69,8 +69,8 @@ import {
 } from "../../utils/number"
 import {
   OrientationArray,
-  effectInLine,
-  OrientationVector
+  OrientationVector,
+  effectInLine
 } from "../../utils/orientation"
 import {
   chance,
@@ -3399,22 +3399,163 @@ export class AppleAcidStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
     const cells = board.getCellsInFront(pokemon, target)
-    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
+    const damage = 50
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.addDefense(-5, pokemon, 1, crit)
-        cell.value.addSpecialDefense(-5, pokemon, 1, crit)
         cell.value.handleSpecialDamage(
+          cell.value.speDef === 0 ? damage * 2 : damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        broadcastAbility(pokemon, {
+          positionX: pokemon.positionX,
+          positionY: pokemon.positionY,
+          targetX: cell.value.positionX,
+          targetY: cell.value.positionY
+        })
+      }
+    })
+  }
+}
+
+export class GravAppleStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 80
+    target.handleSpecialDamage(
+      target.def === 0 ? damage * 2 : damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+  }
+}
+
+export class NutrientsStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const heal = 40
+
+    const lowestHealthAlly = (
+      board.cells.filter(
+        (cell) => cell && cell.team === pokemon.team
+      ) as PokemonEntity[]
+    ).sort((a, b) => a.life / a.hp - b.life / b.hp)[0]
+
+    if (lowestHealthAlly) {
+      lowestHealthAlly.handleHeal(heal, pokemon, 1, crit)
+      lowestHealthAlly.addDefense(1, pokemon, 1, crit)
+      lowestHealthAlly.addSpecialDefense(1, pokemon, 1, crit)
+      broadcastAbility(pokemon, {
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: lowestHealthAlly.positionX,
+        targetY: lowestHealthAlly.positionY
+      })
+    }
+  }
+}
+
+export class SyrupBombStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const damage = 50
+
+    const highestATKSpeedEnemy = (
+      board.cells.filter(
+        (cell) => cell && cell.team !== pokemon.team
+      ) as PokemonEntity[]
+    ).sort((a, b) => b.atkSpeed - a.atkSpeed)[0]
+
+    if (highestATKSpeedEnemy) {
+      highestATKSpeedEnemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+      highestATKSpeedEnemy.status.triggerParalysis(
+        2000,
+        highestATKSpeedEnemy,
+        pokemon,
+        false
+      )
+
+      broadcastAbility(pokemon, {
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: highestATKSpeedEnemy.positionX,
+        targetY: highestATKSpeedEnemy.positionY
+      })
+    }
+  }
+}
+
+export class FickleBeamStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const damage = 60
+
+    const highestATKSpeedEnemies = (
+      board.cells.filter(
+        (cell) => cell && cell.team !== pokemon.team
+      ) as PokemonEntity[]
+    ).sort((a, b) => b.atkSpeed - a.atkSpeed)
+
+    let numberOfBeam = 0
+    for (let i = 0; i < highestATKSpeedEnemies.length; i++) {
+      chance(0.6, pokemon) && numberOfBeam++
+    }
+
+    for (let i = 0; i < numberOfBeam; i++) {
+      const enemy = highestATKSpeedEnemies[i]
+      if (enemy) {
+        enemy.handleSpecialDamage(
           damage,
           board,
           AttackType.SPECIAL,
           pokemon,
           crit
         )
+        enemy.status.triggerParalysis(2000, enemy, pokemon, false)
+        broadcastAbility(pokemon, {
+          positionX: pokemon.positionX,
+          positionY: pokemon.positionY,
+          targetX: enemy.positionX,
+          targetY: enemy.positionY
+        })
       }
-    })
+    }
   }
 }
 
@@ -4009,7 +4150,7 @@ export class EntanglingThreadStrategy extends AbilityStrategy {
     )
     cells.forEach((cell) => {
       if (cell.value && pokemon.team !== cell.value.team) {
-        cell.value.status.triggerParalysis(4000, target, pokemon)
+        cell.value.status.triggerParalysis(4000, cell.value, pokemon)
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -12082,5 +12223,9 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SALT_CURE]: new SaltCureStrategy(),
   [Ability.SPICY_EXTRACT]: new SpicyExtractStrategy(),
   [Ability.SWEET_SCENT]: new SweetScentStrategy(),
-  [Ability.SWALLOW]: new SwallowStrategy()
+  [Ability.SWALLOW]: new SwallowStrategy(),
+  [Ability.NUTRIENTS]: new NutrientsStrategy(),
+  [Ability.SYRUP_BOMB]: new SyrupBombStrategy(),
+  [Ability.GRAV_APPLE]: new GravAppleStrategy(),
+  [Ability.FICKLE_BEAM]: new FickleBeamStrategy()
 }

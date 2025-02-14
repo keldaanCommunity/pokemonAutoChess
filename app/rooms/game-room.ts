@@ -21,8 +21,6 @@ import {
 } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getAdditionalsTier1 } from "../models/shop"
-import { Passive } from "../types/enum/Passive"
-import { getAvatarString } from "../utils/avatar"
 import {
   Emotion,
   IDragDropCombineMessage,
@@ -44,12 +42,13 @@ import {
   ExpPlace,
   LegendaryPool,
   MAX_SIMULATION_DELTA_TIME,
-  PortalCarouselStages,
   MinStageLevelForGameToCount,
+  PortalCarouselStages,
   UniquePool
 } from "../types/Config"
 import { GameMode, PokemonActionState } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
+import { Passive } from "../types/enum/Passive"
 import {
   Pkm,
   PkmDuos,
@@ -59,6 +58,7 @@ import {
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { removeInArray } from "../utils/array"
+import { getAvatarString } from "../utils/avatar"
 import {
   getFirstAvailablePositionInBench,
   getFreeSpaceOnBench
@@ -1024,12 +1024,12 @@ export default class GameRoom extends Room<GameState> {
     if (this.state.additionalPokemons.includes(pkm as Pkm)) return // already picked, probably a double click
     if (
       UniquePool.includes(pkm) &&
-      this.state.stageLevel !== PortalCarouselStages[0]
+      this.state.stageLevel !== PortalCarouselStages[1]
     )
       return // should not be pickable at this stage
     if (
       LegendaryPool.includes(pkm) &&
-      this.state.stageLevel !== PortalCarouselStages[1]
+      this.state.stageLevel !== PortalCarouselStages[2]
     )
       return // should not be pickable at this stage
 
