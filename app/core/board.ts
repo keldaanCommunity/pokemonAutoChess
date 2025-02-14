@@ -415,7 +415,7 @@ export default class Board {
             .map((cell) => ({
               x: cell.x,
               y: cell.y,
-              distance: distanceC(
+              distance: distanceM(
                 pokemon.positionX,
                 pokemon.positionY,
                 cell.x,
@@ -428,13 +428,13 @@ export default class Board {
     })
 
     candidateCells.sort((a, b) => {
-      const targetDistanceA = distanceC(
+      const targetDistanceA = distanceM(
         pokemon.positionX,
         pokemon.positionY,
         a.target.positionX,
         a.target.positionY
       )
-      const targetDistanceB = distanceC(
+      const targetDistanceB = distanceM(
         pokemon.positionX,
         pokemon.positionY,
         b.target.positionX,
