@@ -61,6 +61,7 @@ import {
 } from "../../utils/board"
 import { distanceC, distanceE } from "../../utils/distance"
 import { values } from "../../utils/schemas"
+import { SynergyEffects } from "../effects"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
 import { SynergyEffects } from "../effects"
@@ -9248,18 +9249,55 @@ export class Applin extends Pokemon {
     Synergy.GRASS,
     Synergy.GOURMET
   ])
-  rarity = Rarity.EPIC
-  stars = 1
-  evolution = Pkm.APPLETUN
-  hp = 130
-  atk = 8
-  def = 5
-  speDef = 2
-  maxPP = 85
+  rarity = Rarity.UNIQUE
+  stars = 3
+  evolutions = [Pkm.APPLETUN, Pkm.FLAPPLE, Pkm.DIPPLIN]
+  evolutionRule = new ItemEvolutionRule(
+    [Item.SWEET_APPLE, Item.TART_APPLE, Item.SIRUPY_APPLE],
+    (pokemon, player, item_) => {
+      const item = item_ as
+        | Item.SWEET_APPLE
+        | Item.TART_APPLE
+        | Item.SIRUPY_APPLE
+      if (item === Item.SWEET_APPLE) {
+        return Pkm.APPLETUN
+      }
+      if (item === Item.TART_APPLE) {
+        return Pkm.FLAPPLE
+      }
+      return Pkm.DIPPLIN
+    }
+  )
+  hp = 160
+  atk = 10
+  def = 3
+  speDef = 3
+  maxPP = 60
   range = 1
-  skill = Ability.APPLE_ACID
-  additional = true
+  skill = Ability.NUTRIENTS
   attackSprite = AttackSprite.GRASS_MELEE
+  passive = Passive.APPLIN
+}
+
+export class Dipplin extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.GRASS,
+    Synergy.GOURMET
+  ])
+  rarity = Rarity.UNIQUE
+  evolution = Pkm.HYDRAPPLE
+  evolutionRule = new ItemEvolutionRule([Item.SIRUPY_APPLE])
+  stars = 3
+  hp = 180
+  atk = 12
+  def = 4
+  speDef = 4
+  maxPP = 60
+  range = 1
+  skill = Ability.SYRUP_BOMB
+  attackSprite = AttackSprite.GRASS_MELEE
+  passive = Passive.DIPPLIN
 }
 
 export class Appletun extends Pokemon {
@@ -9268,17 +9306,52 @@ export class Appletun extends Pokemon {
     Synergy.GRASS,
     Synergy.GOURMET
   ])
-  rarity = Rarity.EPIC
-  stars = 2
+  rarity = Rarity.UNIQUE
+  stars = 3
   hp = 250
-  atk = 22
-  def = 8
+  atk = 13
+  def = 6
   speDef = 6
-  maxPP = 85
+  maxPP = 80
   range = 1
   skill = Ability.APPLE_ACID
-  additional = true
   attackSprite = AttackSprite.GRASS_MELEE
+}
+
+export class Flapple extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.GRASS,
+    Synergy.GOURMET
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 180
+  atk = 16
+  def = 2
+  speDef = 2
+  maxPP = 80
+  range = 2
+  skill = Ability.GRAV_APPLE
+  attackSprite = AttackSprite.GRASS_RANGE
+}
+
+export class Hydrapple extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.GRASS,
+    Synergy.GOURMET
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 4
+  hp = 170
+  atk = 18
+  def = 2
+  speDef = 2
+  maxPP = 80
+  range = 3
+  skill = Ability.FICKLE_BEAM
+  attackSprite = AttackSprite.GRASS_RANGE
 }
 
 export class Staryu extends Pokemon {
@@ -16736,6 +16809,9 @@ export const PokemonClasses: Record<
   [Pkm.VOLCANION]: Volcanion,
   [Pkm.APPLIN]: Applin,
   [Pkm.APPLETUN]: Appletun,
+  [Pkm.FLAPPLE]: Flapple,
+  [Pkm.DIPPLIN]: Dipplin,
+  [Pkm.HYDRAPPLE]: Hydrapple,
   [Pkm.OSHAWOTT]: Oshawott,
   [Pkm.DEWOTT]: Dewott,
   [Pkm.SAMUROTT]: Samurott,

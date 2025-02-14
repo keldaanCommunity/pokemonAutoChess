@@ -36,6 +36,9 @@ export enum Pkm {
   ANORITH = "ANORITH",
   APPLETUN = "APPLETUN",
   APPLIN = "APPLIN",
+  FLAPPLE = "FLAPPLE",
+  DIPPLIN = "DIPPLIN",
+  HYDRAPPLE = "HYDRAPPLE",
   ARAQUANID = "ARAQUANID",
   ARBOK = "ARBOK",
   ARCANINE = "ARCANINE",
@@ -1888,7 +1891,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.CARKOL]: "0838",
   //[Pkm.COALOSSAL]: "0839",
   [Pkm.APPLIN]: "0840",
-  //[Pkm.FLAPPLE]: "0841",
+  [Pkm.FLAPPLE]: "0841",
   [Pkm.APPLETUN]: "0842",
   //[Pkm.SILICOBRA]: "0843",
   //[Pkm.SANDACONDA]: "0844",
@@ -2061,7 +2064,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.BAXCALIBUR]: "0998",
   [Pkm.GIMMIGHOUL]: "0999-0001",
   [Pkm.GHOLDENGO]: "1000",
-
+  [Pkm.DIPPLIN]: "1011",
   [Pkm.OGERPON_TEAL]: "1017",
   [Pkm.OGERPON_WELLSPRING]: "1017-0001",
   [Pkm.OGERPON_HEARTHFLAME]: "1017-0002",
@@ -2069,7 +2072,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.OGERPON_TEAL_MASK]: "1017-0004",
   [Pkm.OGERPON_WELLSPRING_MASK]: "1017-0005",
   [Pkm.OGERPON_HEARTHFLAME_MASK]: "1017-0006",
-  [Pkm.OGERPON_CORNERSTONE_MASK]: "1017-0007"
+  [Pkm.OGERPON_CORNERSTONE_MASK]: "1017-0007",
+  [Pkm.HYDRAPPLE]: "1019"
 }
 
 export const PkmByIndex: { [index: string]: Pkm } = Object.fromEntries(
@@ -2537,6 +2541,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.VOLCANION]: Pkm.VOLCANION,
   [Pkm.APPLIN]: Pkm.APPLIN,
   [Pkm.APPLETUN]: Pkm.APPLIN,
+  [Pkm.FLAPPLE]: Pkm.APPLIN,
+  [Pkm.DIPPLIN]: Pkm.APPLIN,
+  [Pkm.HYDRAPPLE]: Pkm.APPLIN,
   [Pkm.OSHAWOTT]: Pkm.OSHAWOTT,
   [Pkm.DEWOTT]: Pkm.OSHAWOTT,
   [Pkm.SAMUROTT]: Pkm.OSHAWOTT,
@@ -5435,13 +5442,28 @@ export const AnimationConfig: {
   },
   [Pkm.APPLIN]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hurt,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
   },
   [Pkm.APPLETUN]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Hurt,
-    emote: AnimationType.Shoot
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.FLAPPLE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.DIPPLIN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shake
+  },
+  [Pkm.HYDRAPPLE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge
   },
   [Pkm.OSHAWOTT]: {
     attack: AnimationType.Attack,

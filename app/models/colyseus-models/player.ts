@@ -1,5 +1,7 @@
 import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
+import { carryOverPermanentStats } from "../../core/evolution-rules"
 import { PokemonEntity } from "../../core/pokemon-entity"
+import { getUnitPowerScore } from "../../public/src/pages/component/bot-builder/bot-logic"
 import type GameState from "../../rooms/states/game-state"
 import type { IPlayer, Role, Title } from "../../types"
 import { SynergyTriggers, UniquePool } from "../../types/Config"
@@ -29,6 +31,7 @@ import { Weather } from "../../types/enum/Weather"
 import { removeInArray } from "../../utils/array"
 import { getPokemonConfigFromAvatar } from "../../utils/avatar"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
+import { min } from "../../utils/number"
 import { pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { Effects } from "../effects"
@@ -47,9 +50,6 @@ import { Pokemon, PokemonClasses } from "./pokemon"
 import PokemonCollection from "./pokemon-collection"
 import PokemonConfig from "./pokemon-config"
 import Synergies, { computeSynergies } from "./synergies"
-import { carryOverPermanentStats } from "../../core/evolution-rules"
-import { getUnitPowerScore } from "../../public/src/pages/component/bot-builder/bot-logic"
-import { min } from "../../utils/number"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
@@ -546,7 +546,10 @@ export default class Player extends Schema implements IPlayer {
 
   updateRegionalPool(state: GameState, mapChanged: boolean) {
     const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
-      new PokemonClasses[p]().isInRegion(this.map, state)
+      new PokemonClasses[p]().isInRegion(
+        this.map === "town" ? DungeonPMDO.AmpPlains : this.map,
+        state
+      )
     )
 
     if (mapChanged) {
