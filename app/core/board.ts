@@ -408,34 +408,36 @@ export default class Board {
 
     this.forEach((x: number, y: number, entity: PokemonEntity | undefined) => {
       if (entity && entity.isTargettableBy(pokemon, !targetAlly, targetAlly)) {
-        const freeCells = this.getAdjacentCells(x, y).filter(
-          (cell) => this.getValue(cell.x, cell.y) === undefined
+        const targetDistance = distanceM(
+          pokemon.positionX,
+          pokemon.positionY,
+          entity.positionX,
+          entity.positionY
         )
-        for (const cell of freeCells) {
-          const cellDistance = distanceM(
-            pokemon.positionX,
-            pokemon.positionY,
-            cell.x,
-            cell.y
+        if (targetDistance > maxTargetDistance) {
+          maxCellDistance = 0
+          const freeCells = this.getAdjacentCells(x, y).filter(
+            (cell) => this.getValue(cell.x, cell.y) === undefined
           )
-          const targetDistance = distanceM(
-            pokemon.positionX,
-            pokemon.positionY,
-            entity.positionX,
-            entity.positionY
-          )
-          if (targetDistance > maxTargetDistance) {
-            maxTargetDistance = targetDistance
-            maxCellDistance = 0
-          }
-          if (cellDistance > maxCellDistance) {
-            maxCellDistance = cellDistance
-            selectedCell = {
-              x: cell.x,
-              y: cell.y,
-              distance: cellDistance,
-              target: entity
+          for (const cell of freeCells) {
+            const cellDistance = distanceM(
+              pokemon.positionX,
+              pokemon.positionY,
+              cell.x,
+              cell.y
+            )
+            if (cellDistance > maxCellDistance) {
+              maxCellDistance = cellDistance
+              selectedCell = {
+                x: cell.x,
+                y: cell.y,
+                distance: cellDistance,
+                target: entity
+              }
             }
+          }
+          if (selectedCell?.target === entity){
+            maxTargetDistance = targetDistance
           }
         }
       }
