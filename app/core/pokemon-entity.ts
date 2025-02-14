@@ -325,9 +325,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     } else {
       let specialDamage =
         damage + (damage * (attacker && apBoost ? attacker.ap : 0)) / 100
-      if (attacker && attacker.status.doubleDamage) {
+      if (attacker && attacker.effects.has(Effect.DOUBLE_DAMAGE)) {
         specialDamage *= 2
-        attacker.status.doubleDamage = false
+        attacker.effects.delete(Effect.DOUBLE_DAMAGE)
       }
       if (crit && attacker && this.items.has(Item.ROCKY_HELMET) === false) {
         specialDamage = Math.round(specialDamage * attacker.critPower)
@@ -1858,7 +1858,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     })
 
     const resetGroundStacks = (effect: GrowGroundEffect) => {
-      const removalAmount = effect.synergyLevel * effect.count
+      const removalAmount = -effect.synergyLevel * effect.count
       this.addDefense(removalAmount, this, 0, false)
       this.addSpecialDefense(removalAmount, this, 0, false)
       this.addAttack(removalAmount, this, 0, false)

@@ -3,7 +3,7 @@ import PokemonFactory from "../../../../models/pokemon-factory"
 import { PokemonActionState } from "../../../../types/enum/Game"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { clamp, min } from "../../../../utils/number"
-import { preferences } from "../../preferences"
+import { preference } from "../../preferences"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
@@ -72,7 +72,7 @@ export default class PokemonSpecial extends PokemonSprite {
 
   updateTooltipPosition() {
     if (this.detail) {
-      if (this.input && preferences.showDetailsOnHover) {
+      if (this.input && preference("showDetailsOnHover")) {
         this.detail.setPosition(this.input.localX, this.input.localY)
         return
       }

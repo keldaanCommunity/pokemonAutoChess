@@ -7,8 +7,10 @@ import { getAvatarSrc } from "../../../../../utils/avatar"
 import { getGameScene } from "../../game"
 import { cc } from "../../utils/jsx"
 import "./game-player-loading.css"
+import { usePreference } from "../../../preferences"
 
 export default function GamePlayerLoadingBar(props: { player: IPlayer }) {
+  const [antialiasing] = usePreference("antialiasing")
   const { t } = useTranslation()
   const selfPlayerId = getGameScene()?.uid
   const loadingPercent = props.player.loadingProgress
@@ -20,7 +22,9 @@ export default function GamePlayerLoadingBar(props: { player: IPlayer }) {
       })}
     >
       <div
-        className="game-player-loading-icon"
+        className={cc("game-player-loading-icon", {
+          pixelated: !antialiasing
+        })}
         style={{
           backgroundImage: `url('${getAvatarSrc(props.player.avatar)}')`
         }}

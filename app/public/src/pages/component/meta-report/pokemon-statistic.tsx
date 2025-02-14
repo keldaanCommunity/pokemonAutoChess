@@ -13,6 +13,7 @@ import {
 } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { getPortraitSrc } from "../../../../../utils/avatar"
+import PokemonPortrait from "../pokemon-portrait"
 
 export default function PokemonStatistic(props: {
   pokemons: IPokemonsStatistic[]
@@ -96,10 +97,7 @@ export default function PokemonStatistic(props: {
           >
             {family.pokemons.map((pokemon, i) => (
               <li key={pokemon.name}>
-                <img
-                  className="pokemon-portrait"
-                  src={getPortraitSrc(PkmIndex[pokemon.name])}
-                />
+                <PokemonPortrait portrait={PkmIndex[pokemon.name]} />
                 <span>{t(`pkm.${pokemon.name}`)}</span>
               </li>
             ))}
@@ -135,10 +133,7 @@ export default function PokemonStatistic(props: {
                   gridTemplateColumns: "40px 6ch 1fr 1.5fr 2fr"
                 }}
               >
-                <img
-                  className="pokemon-portrait"
-                  src={getPortraitSrc(PkmIndex[pokemon.name])}
-                />
+                <PokemonPortrait portrait={PkmIndex[pokemon.name]} />
                 <span>
                   {pokemon.count === 0 ? "???" : pokemon.rank.toFixed(1)}
                 </span>

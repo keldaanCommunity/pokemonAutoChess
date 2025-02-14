@@ -22,11 +22,13 @@ import PokemonEmotion from "./pokemon-emotion"
 import "./pokemon-emotions-modal.css"
 import { BoosterPriceByRarity } from "../../../../../types/Config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
+import { usePreferences } from "../../../preferences"
 
 export default function PokemonEmotionsModal(props: {
   pokemon: Pkm
   onClose: () => void
 }) {
+  const [{ antialiasing }] = usePreferences()
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const pokemonCollection = useAppSelector(
@@ -84,13 +86,17 @@ export default function PokemonEmotionsModal(props: {
             pConfig.selectedShiny,
             pConfig.selectedEmotion
           )}
-          className={cc({ unlocked: pConfig != null })}
+          className={cc({ unlocked: pConfig != null, pixelated: !antialiasing })}
         />
         <h2>{t(`pkm.${props.pokemon}`)}</h2>
         <div className="spacer" />
         <p className="dust">
           {pConfig.dust} {t("shards")}{" "}
-          <img src={getPortraitSrc(index)} className="dust" alt="dust" />
+          <img
+            src={getPortraitSrc(index)}
+            className={cc("dust", { pixelated: !antialiasing })}
+            alt="dust"
+          />
         </p>
       </>}
       body={<>

@@ -7,7 +7,6 @@
 .pokemon-collection-item > img {
   width: 80px;
   height: 80px;
-  image-rendering: pixelated;
   border-radius: 8px 8px 0 0;
 }
 
@@ -42,6 +41,5 @@
 .pokemon-collection-item p > img {
   width: 20px;
   height: 20px;
-  image-rendering: pixelated;
   margin-left: 0.5em;
 }

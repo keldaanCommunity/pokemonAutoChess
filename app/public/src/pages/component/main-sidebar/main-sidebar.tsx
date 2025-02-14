@@ -77,8 +77,9 @@ export function MainSidebar(props: MainSidebarProps) {
   }, [])
 
   const player = useAppSelector(state => state.game.players.find((p) => p.id === state.network.uid))
+  const playersAlive = useAppSelector(state => state.game.players.filter(p => p.life > 0))
   function onClickLeave() {
-    if (player && player.life > 0) {
+    if (player && player.life > 0 && playersAlive.length > 1) {
       setShowSurrenderConfirm(true)
     } else {
       leave()

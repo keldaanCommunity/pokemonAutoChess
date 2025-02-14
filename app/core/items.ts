@@ -9,7 +9,8 @@ import {
   Effect,
   OnItemGainedEffect,
   OnItemRemovedEffect,
-  OnKillEffect
+  OnKillEffect,
+  SoulDewEffect
 } from "./effect"
 import { pickRandomIn } from "../utils/random"
 import { Pokemon } from "../models/colyseus-models/pokemon"
@@ -134,18 +135,16 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
 export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.SOUL_DEW]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.status.triggerSoulDew(1000)
+      pokemon.effectsSet.add(new SoulDewEffect(1000))
     }),
     new OnItemRemovedEffect((pokemon) => {
-      pokemon.status.soulDew = false
-      pokemon.status.soulDewCooldown = 0
-      pokemon.addAbilityPower(
-        -10 * pokemon.count.soulDewCount,
-        pokemon,
-        0,
-        false
-      )
-      pokemon.count.soulDewCount = 0
+      for (const effect of pokemon.effectsSet) {
+        if (effect instanceof SoulDewEffect) {
+          pokemon.addAbilityPower(-10 * effect.count, pokemon, 0, false)
+          pokemon.effectsSet.delete(effect)
+          break
+        }
+      }
     })
   ],
 

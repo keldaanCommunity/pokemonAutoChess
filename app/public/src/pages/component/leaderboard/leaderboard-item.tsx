@@ -6,8 +6,8 @@ import {
 } from "../../../../../types/interfaces/LeaderboardInfo"
 import { useAppDispatch } from "../../../hooks"
 import { searchById } from "../../../stores/NetworkStore"
-import { getAvatarSrc } from "../../../../../utils/avatar"
 import { EloBadge } from "../profile/elo-badge"
+import PokemonPortrait from "../pokemon-portrait"
 
 export default function LeaderboardItem(props: {
   item: ILeaderboardInfo | ILeaderboardBotInfo
@@ -32,10 +32,7 @@ export default function LeaderboardItem(props: {
     >
       <div style={{ display: "flex", gap: "5px" }}>
         <span className="player-rank">{props.item.rank}</span>
-        <img
-          src={getAvatarSrc(props.item.avatar)}
-          className="pokemon-portrait"
-        />
+        <PokemonPortrait avatar={props.item.avatar} />
       </div>
       <span
         style={{

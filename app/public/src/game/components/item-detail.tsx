@@ -8,6 +8,8 @@ import { Stat } from "../../../../types/enum/Game"
 import { HMs, Item, ItemRecipe, TMs } from "../../../../types/enum/Item"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
 import "./item-detail.css"
+import { cc } from "../../pages/utils/jsx"
+import { usePreferences } from "../../preferences"
 
 export function ItemDetailTooltip({
   item,
@@ -16,6 +18,7 @@ export function ItemDetailTooltip({
   item: Item
   depth?: number
 }) {
+  const [preferences] = usePreferences()
   const { t } = useTranslation()
   const recipes = useMemo(
     () =>
@@ -42,11 +45,29 @@ export function ItemDetailTooltip({
 
   return (
     <div className="game-item-detail">
-      <img className="game-item-detail-icon" src={`assets/item/${getImageFilename()}.png`} />
+      <img
+        className={cc("game-item-detail-icon", {
+          pixelated: !preferences.antialiasing
+        })}
+        src={`assets/item/${getImageFilename()}.png`}
+      />
       <div className="game-item-detail-name">
-        {ItemRecipe[item] && (<div className="game-item-recipe">
-          {ItemRecipe[item]?.map((item, i) => <React.Fragment key={`component_${i}_${item}`}><img className="game-item-detail-icon" src={`assets/item/${item}.png`} key={item} />{i === 0 && ' + '}</React.Fragment>)}
-        </div>)}
+        {ItemRecipe[item] && (
+          <div className="game-item-recipe">
+            {ItemRecipe[item]?.map((item, i) => (
+              <React.Fragment key={`component_${i}_${item}`}>
+                <img
+                  className={cc("game-item-detail-icon", {
+                    pixelated: !preferences.antialiasing
+                  })}
+                  src={`assets/item/${item}.png`}
+                  key={item}
+                />
+                {i === 0 && " + "}
+              </React.Fragment>
+            ))}
+          </div>
+        )}
         {t(`item.${item}`)}
       </div>
       <div className="game-item-detail-stats">

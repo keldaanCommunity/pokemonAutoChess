@@ -21,8 +21,11 @@ import SynergyIcon from "../icons/synergy-icon"
 import TimerBar from "./game-timer-bar"
 import { DungeonDetails } from "../../../../../types/enum/Dungeon"
 import "./game-stage-info.css"
+import PokemonPortrait from "../pokemon-portrait"
+import { usePreferences } from "../../../preferences"
 
 export default function GameStageInfo() {
+  const [{ antialiasing }] = usePreferences()
   const { t } = useTranslation()
   const phase = useAppSelector((state) => state.game.phase)
   const weather = useAppSelector((state) => state.game.weather)
@@ -85,7 +88,7 @@ export default function GameStageInfo() {
           })}
         >
           <div className="player-information">
-            <img src={getAvatarSrc(avatar)} className="pokemon-portrait" />
+            <PokemonPortrait avatar={avatar} />
             {title && <p className="player-title">{t(`title.${title}`)}</p>}
             <p className="player-name">{name}</p>
           </div>
@@ -93,10 +96,7 @@ export default function GameStageInfo() {
             <>
               <span>vs</span>
               <div className="player-information">
-                <img
-                  src={getAvatarSrc(opponentAvatar)}
-                  className="pokemon-portrait"
-                />
+                <PokemonPortrait avatar={opponentAvatar} />
                 {opponentTitle && (
                   <p className="player-title">{t(`title.${opponentTitle}`)}</p>
                 )}

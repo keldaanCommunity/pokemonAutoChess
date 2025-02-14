@@ -15,11 +15,13 @@ import {
 } from "../../../../../types/enum/Item"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { cc } from "../../utils/jsx"
+import { usePreferences } from "../../../preferences"
 
 export default function ItemPicker(props: {
   selected: PkmWithConfig | Item
   selectEntity: React.Dispatch<React.SetStateAction<PkmWithConfig | Item>>
 }) {
+  const [{ antialiasing }] = usePreferences()
   const [itemHovered, setItemHovered] = useState<Item>()
 
   function handleOnDragStart(e: React.DragEvent, item: Item) {
@@ -52,7 +54,10 @@ export default function ItemPicker(props: {
             <img
               key={item}
               src={"assets/item/" + Item[item] + ".png"}
-              className={cc("item", { selected: item === props.selected })}
+              className={cc("item", {
+                selected: item === props.selected,
+                pixelated: !antialiasing
+              })}
               data-tooltip-id="detail-item"
               onMouseOver={() => setItemHovered(item)}
               onClick={() => props.selectEntity(item)}

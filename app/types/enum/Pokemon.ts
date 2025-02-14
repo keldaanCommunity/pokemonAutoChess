@@ -3003,7 +3003,8 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.PONYTA]: [Pkm.GALARIAN_PONYTA],
   [Pkm.VOLTORB]: [Pkm.HISUI_VOLTORB],
   [Pkm.SANDSHREW]: [Pkm.ALOLAN_SANDSHREW],
-  [Pkm.FARFETCH_D]: [Pkm.GALARIAN_FARFETCH_D]
+  [Pkm.FARFETCH_D]: [Pkm.GALARIAN_FARFETCH_D],
+  [Pkm.ZIGZAGOON]: [Pkm.GALARIAN_ZIGZAGOON]
 } as const
 
 export enum PkmDuo {

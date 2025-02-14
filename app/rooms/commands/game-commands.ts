@@ -35,7 +35,10 @@ import {
   MAX_PLAYERS_PER_GAME,
   PORTAL_CAROUSEL_BASE_DURATION,
   PortalCarouselStages,
-  StageDuration
+  StageDuration,
+  SynergyTriggers,
+  BOARD_WIDTH,
+  BOARD_SIDE_HEIGHT
 } from "../../types/Config"
 import { Effect } from "../../types/enum/Effect"
 import {
@@ -184,9 +187,10 @@ export class OnPokemonCatchCommand extends Command<
   {
     playerId: string
     pkm: Pkm
+    id: string
   }
 > {
-  execute({ playerId, pkm }) {
+  execute({ playerId, pkm, id }) {
     if (
       playerId === undefined ||
       pkm === undefined ||
@@ -195,6 +199,9 @@ export class OnPokemonCatchCommand extends Command<
       return
     const player = this.state.players.get(playerId)
     if (!player) return
+
+    if (this.state.wanderers.has(id) === false) return
+    this.state.wanderers.delete(id)
 
     const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
     const freeSpaceOnBench = getFreeSpaceOnBench(player.board)
@@ -236,8 +243,17 @@ export class OnDragDropCommand extends Command<
     if (player) {
       message.updateItems = false
       const pokemon = player.board.get(detail.id)
-      if (pokemon) {
-        const { x, y } = detail
+      const { x, y } = detail
+
+      if (
+        pokemon &&
+        x != null &&
+        x >= 0 &&
+        x < BOARD_WIDTH &&
+        y != null &&
+        y >= 0 &&
+        y < BOARD_SIDE_HEIGHT
+      ) {
         const dropOnBench = y == 0
         const dropFromBench = isOnBench(pokemon)
 
@@ -1286,7 +1302,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           }
 
           if (dish && nbDishes > 0) {
-            let dishes = Array.from({ length: nbDishes }, () => dish)
+            let dishes = Array.from({ length: nbDishes }, () => dish!)
             if (dish === Item.BERRIES) {
               dishes = pickNRandomIn(Berries, nbDishes)
             }
@@ -1632,9 +1648,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
         const UNOWN_ENCOUNTER_CHANCE = 0.037
         if (chance(UNOWN_ENCOUNTER_CHANCE)) {
+          const pkm = pickRandomIn(Unowns)
+          const id = nanoid()
+          this.state.wanderers.add(id)
           setTimeout(
             () => {
-              client.send(Transfer.UNOWN_WANDERING)
+              client.send(Transfer.UNOWN_WANDERING, { id, pkm })
             },
             Math.round((5 + 15 * Math.random()) * 1000)
           )
@@ -1646,12 +1665,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         ) {
           const nbPokemonsToSpawn = Math.ceil(this.state.stageLevel / 2)
           for (let i = 0; i < nbPokemonsToSpawn; i++) {
+            const id = nanoid()
+            const pkm = this.state.shop.pickPokemon(player, this.state)
+            this.state.wanderers.add(id)
             setTimeout(
               () => {
-                client.send(
-                  Transfer.POKEMON_WANDERING,
-                  this.state.shop.pickPokemon(player, this.state)
-                )
+                client.send(Transfer.POKEMON_WANDERING, { id, pkm })
               },
               4000 + i * 400
             )

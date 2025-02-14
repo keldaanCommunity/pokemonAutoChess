@@ -13,9 +13,11 @@ import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
+import { usePreference } from "../../../preferences"
 
 
 export default function WikiWeather() {
+  const [antialiasing] = usePreference('antialiasing')
   const { t } = useTranslation()
   return (
     <div id="wiki-weather">
@@ -53,7 +55,7 @@ export default function WikiWeather() {
                       })}
                       data-tooltip-id={`pokemon-detail-${p.index}`}
                     >
-                      <img src={getPortraitSrc(p.index)} />
+                      <img src={getPortraitSrc(p.index)} className={cc({ pixelated: !antialiasing })} />
                       <Tooltip
                         id={`pokemon-detail-${p.index}`}
                         className="custom-theme-tooltip game-pokemon-detail-tooltip"

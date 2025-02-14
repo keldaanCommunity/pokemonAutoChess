@@ -16,6 +16,7 @@ import { Money } from "../icons/money"
 import SynergyIcon from "../icons/synergy-icon"
 import { GamePokemonDetail } from "./game-pokemon-detail"
 import "./game-pokemon-portrait.css"
+import { usePreference } from "../../../preferences"
 
 export default function GamePokemonPortrait(props: {
   index: number
@@ -26,6 +27,7 @@ export default function GamePokemonPortrait(props: {
   onMouseLeave?: React.MouseEventHandler<HTMLDivElement>,
   inPlanner?: boolean
 }) {
+  const [antialiasing] = usePreference("antialiasing")
   const pokemon = useMemo(
     () =>
       typeof props.pokemon === "string"
@@ -63,14 +65,14 @@ export default function GamePokemonPortrait(props: {
       board.forEach &&
       !isOnAnotherBoard &&
       props.pokemon &&
-      pokemon
+      pokemon &&
+      pokemon.hasEvolution
     ) {
       board.forEach((p) => {
-        if (p.name === pokemon.name && p.evolution !== Pkm.DEFAULT) {
+        if (p.name === pokemon.name) {
           _count++
         } else if (
-          PkmFamily[p.name] === pokemon.name &&
-          p.evolution !== Pkm.DEFAULT
+          PkmFamily[p.name] === pokemon.name
         ) {
           _countEvol++
         }
@@ -91,8 +93,10 @@ export default function GamePokemonPortrait(props: {
 
   const rarityColor = RarityColor[pokemon.rarity]
 
-  let pokemonEvolution = pokemon.evolution
-  const pokemonEvolution2 = getPokemonData(pokemonEvolution).evolution
+  const evolutionName = currentPlayer
+    ? pokemon.evolutionRule.getEvolution(pokemon, currentPlayer)
+    : pokemon.evolutions[0] ?? pokemon.evolution
+  let pokemonEvolution = PokemonFactory.createPokemonFromName(evolutionName)
 
   const willEvolve =
     pokemon.evolutionRule instanceof CountEvolutionRule &&
@@ -100,20 +104,24 @@ export default function GamePokemonPortrait(props: {
 
   const shouldShimmer =
     pokemon.evolutionRule instanceof CountEvolutionRule &&
-    ((count > 0 && pokemonEvolution !== Pkm.DEFAULT) ||
-      (countEvol > 0 && pokemonEvolution2 !== Pkm.DEFAULT))
+    ((count > 0 && pokemon.hasEvolution) ||
+      (countEvol > 0 && pokemonEvolution.hasEvolution))
 
   if (
     pokemon.evolutionRule instanceof CountEvolutionRule &&
     count === pokemon.evolutionRule.numberRequired - 1 &&
     countEvol === pokemon.evolutionRule.numberRequired - 1 &&
-    pokemonEvolution2 != null
-  )
-    pokemonEvolution = pokemonEvolution2
+    pokemonEvolution.hasEvolution
+  ) {
+    const evolutionName2 = currentPlayer
+      ? pokemonEvolution.evolutionRule.getEvolution(pokemonEvolution, currentPlayer)
+      : pokemonEvolution.evolutions[0] ?? pokemonEvolution.evolution
+    pokemonEvolution = PokemonFactory.createPokemonFromName(evolutionName2)
+  }
 
   const pokemonInPortrait =
     willEvolve && pokemonEvolution
-      ? PokemonFactory.createPokemonFromName(pokemonEvolution)
+      ? pokemonEvolution
       : pokemon
   const pokemonInPortraitConfig = pokemonCollection.get(pokemonInPortrait.index)
 
@@ -134,7 +142,8 @@ export default function GamePokemonPortrait(props: {
       className={cc("my-box", "clickable", "game-pokemon-portrait", {
         shimmer: shouldShimmer,
         disabled: !canBuy && props.origin === "shop",
-        planned: props.inPlanner ?? false
+        planned: props.inPlanner ?? false,
+        pixelated: !antialiasing
       })}
       style={{
         backgroundColor: rarityColor,
@@ -172,12 +181,16 @@ export default function GamePokemonPortrait(props: {
               pokemonConfig?.selectedShiny,
               pokemonConfig?.selectedEmotion
             )}
-            className="game-pokemon-portrait-evolution-portrait"
+            className={cc("game-pokemon-portrait-evolution-portrait", {
+              pixelated: !antialiasing
+            })}
           />
           <img
             src="/assets/ui/evolution.png"
             alt=""
-            className="game-pokemon-portrait-evolution-icon"
+            className={cc("game-pokemon-portrait-evolution-icon", {
+              pixelated: !antialiasing
+            })}
           />
         </div>
       )}

@@ -8,6 +8,8 @@ import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import SynergyIcon from "../icons/synergy-icon"
+import { cc } from "../../utils/jsx"
+import { usePreferences } from "../../../preferences"
 
 export function GameAdditionalPokemonsIcon() {
   return (
@@ -30,6 +32,7 @@ export function GameAdditionalPokemonsIcon() {
 }
 
 export function GameAdditionalPokemons() {
+  const [{ antialiasing }] = usePreferences()
   const { t } = useTranslation()
 
   const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
@@ -66,7 +69,7 @@ export function GameAdditionalPokemons() {
 
             return (
               <div
-                className={`my-box clickable game-pokemon-portrait`}
+                className={cc(`my-box clickable game-pokemon-portrait`, { pixelated: !antialiasing })}
                 key={"game-additional-pokemons-" + index}
                 style={{
                   backgroundColor: rarityColor,

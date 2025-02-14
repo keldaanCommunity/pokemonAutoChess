@@ -1,8 +1,8 @@
 import React from "react"
 import { IDps } from "../../../../../types"
-import { getAvatarSrc } from "../../../../../utils/avatar"
 import { useTranslation } from "react-i18next"
 import ProgressBar from "../progress-bar/progress-bar"
+import PokemonPortrait from "../pokemon-portrait"
 
 export default function GameDpsTaken(props: {
   maxDamageTaken: number
@@ -11,7 +11,7 @@ export default function GameDpsTaken(props: {
   const { t } = useTranslation()
   return (
     <div className="game-dps-bar">
-      <img className="pokemon-portrait" src={getAvatarSrc(props.dps.name)} />
+      <PokemonPortrait avatar={props.dps.name} />
       <div className="game-dps-progress-wrapper">
         <p>
           {props.dps.physicalDamageReduced +

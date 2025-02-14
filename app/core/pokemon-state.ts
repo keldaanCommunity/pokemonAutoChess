@@ -1024,7 +1024,7 @@ export default abstract class PokemonState {
       const distance = distanceM(pokemon.positionX, pokemon.positionY, x, y)
       if (
         value === undefined &&
-        (maxRange === undefined || distance >= maxRange)
+        (maxRange === undefined || distance <= maxRange)
       ) {
         if (distance < minDistance) {
           candidateCells = [{ x, y, value }]

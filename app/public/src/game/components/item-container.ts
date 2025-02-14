@@ -11,7 +11,7 @@ import {
   WeatherRocks
 } from "../../../../types/enum/Item"
 import { getGameScene } from "../../pages/game"
-import { preferences } from "../../preferences"
+import { preference } from "../../preferences"
 import DraggableObject from "./draggable-object"
 import ItemDetail from "./item-detail"
 import ItemsContainer from "./items-container"
@@ -91,7 +91,7 @@ export default class ItemContainer extends DraggableObject {
 
   onPointerOver(pointer) {
     super.onPointerOver(pointer)
-    if (preferences.showDetailsOnHover && !this.detail?.visible) {
+    if (preference("showDetailsOnHover") && !this.detail?.visible) {
       this.mouseoutTimeout && clearTimeout(this.mouseoutTimeout)
       this.openDetail()
     }
@@ -109,7 +109,7 @@ export default class ItemContainer extends DraggableObject {
     if (this.draggable) {
       this.circle?.setFrame(this.cellIndex * 3)
     }
-    if (preferences.showDetailsOnHover) {
+    if (preference("showDetailsOnHover")) {
       this.mouseoutTimeout = setTimeout(
         () => {
           if (this.detail?.visible) {
@@ -124,7 +124,7 @@ export default class ItemContainer extends DraggableObject {
   onPointerDown(pointer: Phaser.Input.Pointer) {
     super.onPointerDown(pointer)
     this.parentContainer.bringToTop(this)
-    if (pointer.rightButtonDown() && !preferences.showDetailsOnHover) {
+    if (pointer.rightButtonDown() && !preference("showDetailsOnHover")) {
       if (!this.detail?.visible) {
         this.openDetail()
         this.updateDropZone(false)
@@ -156,7 +156,7 @@ export default class ItemContainer extends DraggableObject {
           this.mouseoutTimeout && clearTimeout(this.mouseoutTimeout)
         })
         this.detail.dom.addEventListener("mouseleave", () => {
-          if (preferences.showDetailsOnHover) {
+          if (preference("showDetailsOnHover")) {
             this.mouseoutTimeout = setTimeout(
               () => {
                 if (this.detail?.visible) {

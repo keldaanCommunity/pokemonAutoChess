@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { DungeonMusic } from "../../../../../types/enum/Dungeon"
-import { preferences, savePreferences } from "../../../preferences"
+import { usePreference } from "../../../preferences"
 import { getGameScene } from "../../game"
 import { playMusic, preloadMusic } from "../../utils/audio"
 import { cc } from "../../utils/jsx"
@@ -23,7 +23,7 @@ export default function Jukebox(props: {
   ) as DungeonMusic
   const [music, setMusic] = useState<DungeonMusic>(musicPlaying)
   const [loading, setLoading] = useState<boolean>(false)
-  const [volume, setVolume] = useState<number>(preferences.musicVolume)
+  const [volume, setVolume] = usePreference("musicVolume")
 
   useEffect(() => {
     if (musicPlaying !== music && !loading) {
@@ -55,11 +55,6 @@ export default function Jukebox(props: {
   function handleVolumeChange(e: React.ChangeEvent<HTMLInputElement>) {
     const newVolume = Number(e.target.value)
     setVolume(newVolume)
-    savePreferences({ musicVolume: newVolume })
-    const gameScene = getGameScene()
-    if (gameScene && gameScene.music) {
-      gameScene.music.setVolume(newVolume / 100)
-    }
   }
 
   function nextMusic(delta: number) {
