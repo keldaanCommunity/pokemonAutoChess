@@ -151,7 +151,9 @@ export function getBuyPrice(
   return price
 }
 
-const CommonShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.COMMON)
+const CommonShop = getRegularsTier1(
+  PRECOMPUTED_POKEMONS_PER_RARITY.COMMON
+).concat(Pkm.APPLIN)
 const UncommonShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.UNCOMMON)
 const RareShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.RARE)
 const EpicShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.EPIC)
@@ -311,7 +313,7 @@ export default class Shop {
     synergies: Synergy[]
   ) {
     const allCandidates =
-      stageLevel === PortalCarouselStages[0]
+      stageLevel === PortalCarouselStages[1]
         ? [...UniquePool]
         : [...LegendaryPool]
 
@@ -354,13 +356,13 @@ export default class Shop {
           selected = pickRandomIn(regionalVariants)
       }
       if (
-        stageLevel === PortalCarouselStages[0] &&
+        stageLevel === PortalCarouselStages[1] &&
         player.pokemonsProposition.includes(Pkm.KECLEON) === false &&
         chance(KECLEON_RATE)
       ) {
         selected = Pkm.KECLEON
       } else if (
-        stageLevel === PortalCarouselStages[1] &&
+        stageLevel === PortalCarouselStages[2] &&
         player.pokemonsProposition.includes(Pkm.ARCEUS) === false &&
         chance(ARCEUS_RATE)
       ) {

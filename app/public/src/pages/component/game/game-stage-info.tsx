@@ -9,17 +9,17 @@ import {
   ItemCarouselStages,
   PortalCarouselStages
 } from "../../../../../types/Config"
+import { DungeonDetails } from "../../../../../types/enum/Dungeon"
 import { BattleResult, GamePhaseState } from "../../../../../types/enum/Game"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { SynergyAssociatedToWeather } from "../../../../../types/enum/Weather"
+import { getAvatarSrc, getPortraitSrc } from "../../../../../utils/avatar"
 import { min } from "../../../../../utils/number"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
-import { getAvatarSrc, getPortraitSrc } from "../../../../../utils/avatar"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import SynergyIcon from "../icons/synergy-icon"
 import TimerBar from "./game-timer-bar"
-import { DungeonDetails } from "../../../../../types/enum/Dungeon"
 import "./game-stage-info.css"
 
 export default function GameStageInfo() {
@@ -117,9 +117,11 @@ export default function GameStageInfo() {
                 place="bottom"
               >
                 <div style={{ display: "flex", alignContent: "center" }}>
-                  {DungeonDetails[currentPlayer.map].synergies.map((synergy) => (
-                    <SynergyIcon type={synergy} key={"map_type_" + synergy} />
-                  ))}
+                  {DungeonDetails[currentPlayer.map].synergies.map(
+                    (synergy) => (
+                      <SynergyIcon type={synergy} key={"map_type_" + synergy} />
+                    )
+                  )}
                   <p>{t(`map.${currentPlayer.map}`)}</p>
                 </div>
               </Tooltip>,
@@ -192,7 +194,7 @@ export function StagePath() {
         icon: "/assets/ui/carousel.svg",
         title: t("carousel")
       })
-      if (level === stageLevel && phase === GamePhaseState.MINIGAME) {
+      if (level === stageLevel && phase === GamePhaseState.TOWN) {
         currentLevelPathIndex = path.length - 1
       }
     }

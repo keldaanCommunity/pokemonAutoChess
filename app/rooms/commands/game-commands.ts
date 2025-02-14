@@ -37,6 +37,7 @@ import {
   PortalCarouselStages,
   StageDuration
 } from "../../types/Config"
+import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { Effect } from "../../types/enum/Effect"
 import {
   BattleResult,
@@ -576,6 +577,7 @@ export class OnDragDropItemCommand extends Command<
         pokemon.action = PokemonActionState.EAT
         removeInArray(player.items, item)
         client.send(Transfer.DRAG_DROP_FAILED, message)
+        this.room.checkEvolutionsAfterItemAcquired(playerId, pokemon)
         return
       } else {
         client.send(Transfer.DRAG_DROP_FAILED, {
@@ -918,6 +920,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.state.updatePhaseNeeded = false
     if (this.state.phase == GamePhaseState.TOWN) {
       this.room.miniGame.stop(this.room)
+      /* Normally Stage level is bumped after a fighting phase, but since magikarp is round 1, we need to increase stage level from 0 -> 1 to avoid a PVP round 1. There is probably a better solution*/
+      if (this.state.stageLevel === 0) {
+        this.state.stageLevel = 1
+      }
       this.initializePickingPhase()
     } else if (this.state.phase == GamePhaseState.PICK) {
       this.stopPickingPhase()
@@ -1216,7 +1222,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               // If the Pokemon has a regional variant in the player's region, show that instead of the base form.
               // Base form will still be added to the pool for all players
               const regionalVariants = (PkmRegionalVariants[p] ?? []).filter(
-                (pkm) => new PokemonClasses[pkm]().isInRegion(player.map)
+                (pkm) =>
+                  new PokemonClasses[pkm]().isInRegion(
+                    player.map === "town" ? DungeonPMDO.AmpPlains : player.map
+                  )
               )
               if (regionalVariants.length > 0) {
                 player.pokemonsProposition.push(pickRandomIn(regionalVariants))
@@ -1311,7 +1320,14 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                     ) === 1
                 )
                 for (const meal of dishes) {
-                  if ([Item.TART_APPLE, ...Berries].includes(meal)) {
+                  if (
+                    [
+                      Item.TART_APPLE,
+                      Item.SWEET_APPLE,
+                      Item.SIRUPY_APPLE,
+                      ...Berries
+                    ].includes(meal)
+                  ) {
                     player.items.push(meal)
                   } else {
                     const pokemon = pickRandomIn(candidates) ?? chef

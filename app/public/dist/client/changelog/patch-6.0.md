@@ -10,6 +10,9 @@
 - Gulpin
 - Swalot
 - Galarian Farfetch'd
+- Dipplin
+- Flapple
+- Hydrapple
 
 # Changes to Pokemon & Abilities
 
@@ -21,10 +24,10 @@
 - Munchlax is now Normal/Baby/Gourmet
 - Snorlax is now Normal/Gourmet/Monster
 - Munchlax line passive changed: now also gain permanent HP by eating dishes and cooking
-- Applin line is now Dragon/Grass/Gourmet
+- Applin line is now Dragon/Grass/Gourmet, with a new ability
 - Cherubi line is now Flora/Light/Gourmet
 - Tropius is now Grass/Gourmet/Flying; passive changed to Signature Dish
-- Shuckle is now Bug/Rock/Gourmet; passive changed to Signature Dish 
+- Shuckle is now Bug/Rock/Gourmet; passive changed to Signature Dish
 - Farfetch'd is now Flying/Gourmet/Normal
 - Miltank is now Normal/Gourmet/Field
 - Spinda is now Normal/Gourmet
