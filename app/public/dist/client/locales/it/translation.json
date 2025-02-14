@@ -2854,6 +2854,7 @@
   "show_details_on_hover": "Mostra i dettagli al passaggio del mouse invece che con il clic destro",
   "show_damage_numbers": "Mostra valore dei danni",
   "disable_animated_tilemap": "Disabilita animazioni in background",
+  "antialiasing": "Attiva l'antialiasing",
   "save": "Salva",
   "reset": "Reset",
   "snapshot": "Snapshot",

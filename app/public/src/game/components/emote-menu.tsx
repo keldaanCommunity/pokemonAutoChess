@@ -11,6 +11,7 @@ import store from "../../stores"
 import { getPortraitSrc } from "../../../../utils/avatar"
 import GameScene from "../scenes/game-scene"
 import "./emote-menu.css"
+import { usePreference } from "../../preferences"
 
 export function EmoteMenuComponent(props: {
   player: IPlayer
@@ -18,6 +19,7 @@ export function EmoteMenuComponent(props: {
   shiny: boolean
   sendEmote: (emotion: Emotion) => void
 }) {
+  const [antialiasing] = usePreference('antialiasing')
   const { t } = useTranslation()
   const emotions: Emotion[] = AvatarEmotions.filter((emotion) => {
     const indexEmotion = Object.values(Emotion).indexOf(emotion)
@@ -44,7 +46,10 @@ export function EmoteMenuComponent(props: {
             <img
               src={getPortraitSrc(props.index, props.shiny, emotion)}
               title={emotion + (!unlocked ? " (locked)" : "")}
-              className={cc({ locked: !unlocked })}
+              className={cc({
+                locked: !unlocked,
+                pixelated: !antialiasing
+              })}
               onClick={() => unlocked && props.sendEmote(emotion)}
             />
             <span className="counter">{i + 1}</span>

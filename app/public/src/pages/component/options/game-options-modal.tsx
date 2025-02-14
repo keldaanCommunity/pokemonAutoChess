@@ -4,11 +4,7 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { Language } from "../../../../../types/enum/Language"
 import { LanguageNames } from "../../../../dist/client/locales"
 import { useAppDispatch } from "../../../hooks"
-import {
-  IPreferencesState,
-  preferences as initialPreferences,
-  savePreferences
-} from "../../../preferences"
+import { IPreferencesState, usePreferences } from "../../../preferences"
 import { selectLanguage } from "../../../stores/NetworkStore"
 import { getGameScene } from "../../game"
 import { Checkbox } from "../checkbox/checkbox"
@@ -24,7 +20,7 @@ export default function GameOptionsModal(props: {
   hideModal: Dispatch<SetStateAction<void>>
   page: Page
 }) {
-  const [preferences, setPreferences] = useState(initialPreferences)
+  const [preferences, setPreferences] = usePreferences()
   const { t, i18n } = useTranslation()
   const dispatch = useAppDispatch()
   const language = i18n.language
@@ -33,21 +29,6 @@ export default function GameOptionsModal(props: {
     [Phaser.AUTO]: "Auto",
     [Phaser.WEBGL]: "WebGL",
     [Phaser.CANVAS]: "Canvas"
-  }
-
-  function changePreference(
-    key: keyof IPreferencesState,
-    value: string | number | boolean
-  ) {
-    setPreferences({ ...preferences, [key]: value })
-    savePreferences({ [key]: value })
-
-    if (key === "musicVolume" && typeof value === "number") {
-      const gameScene = getGameScene()
-      if (gameScene && gameScene.music) {
-        gameScene.music.setVolume(value / 100)
-      }
-    }
   }
 
   return (
@@ -73,10 +54,11 @@ export default function GameOptionsModal(props: {
               max="100"
               value={preferences.musicVolume}
               onInput={(e) =>
-                changePreference(
-                  "musicVolume",
-                  Number.parseFloat((e.target as HTMLInputElement).value)
-                )
+                setPreferences({
+                  musicVolume: Number.parseFloat(
+                    (e.target as HTMLInputElement).value
+                  )
+                })
               }
             ></input>
           </label>
@@ -88,10 +70,11 @@ export default function GameOptionsModal(props: {
               max="100"
               value={preferences.sfxVolume}
               onInput={(e) =>
-                changePreference(
-                  "sfxVolume",
-                  Number.parseFloat((e.target as HTMLInputElement).value)
-                )
+                setPreferences({
+                  sfxVolume: Number.parseFloat(
+                    (e.target as HTMLInputElement).value
+                  )
+                })
               }
             ></input>
           </label>
@@ -100,7 +83,7 @@ export default function GameOptionsModal(props: {
               isDark
               checked={preferences.playInBackground}
               onToggle={(checked) =>
-                changePreference("playInBackground", checked)
+                setPreferences({ playInBackground: checked })
               }
               label={t("play_music_in_background")}
             />
@@ -144,7 +127,7 @@ export default function GameOptionsModal(props: {
               isDark
               checked={preferences.showDetailsOnHover}
               onToggle={(checked) =>
-                changePreference("showDetailsOnHover", checked)
+                setPreferences({ showDetailsOnHover: checked })
               }
               label={t("show_details_on_hover")}
             />
@@ -154,7 +137,7 @@ export default function GameOptionsModal(props: {
               isDark
               checked={preferences.showDamageNumbers}
               onToggle={(checked) =>
-                changePreference("showDamageNumbers", checked)
+                setPreferences({ showDamageNumbers: checked })
               }
               label={t("show_damage_numbers")}
             />
@@ -164,7 +147,7 @@ export default function GameOptionsModal(props: {
               isDark
               checked={preferences.disableAnimatedTilemap}
               onToggle={(checked) => {
-                changePreference("disableAnimatedTilemap", checked)
+                setPreferences({ disableAnimatedTilemap: checked })
                 const gameScene = getGameScene()
                 if (gameScene) {
                   const animatedTiles = (gameScene?.sys as any).animatedTiles
@@ -175,6 +158,14 @@ export default function GameOptionsModal(props: {
               label={t("disable_animated_tilemap")}
             />
           </p>
+          <p>
+            <Checkbox
+              isDark
+              checked={preferences.antialiasing}
+              onToggle={(checked) => setPreferences({ antialiasing: checked })}
+              label={t("antialiasing")}
+            />
+          </p>
           {props.page === "main_lobby" && (
             <>
               <label>
@@ -183,7 +174,10 @@ export default function GameOptionsModal(props: {
                   className="is-light"
                   value={preferences.renderer}
                   onChange={(e) => {
-                    changePreference("renderer", e.target.value)
+                    const parsed = parseInt(e.target.value)
+                    if (!isNaN(parsed)) {
+                      setPreferences({ renderer: parsed })
+                    }
                   }}
                 >
                   {Object.keys(renderers).map((r) => (

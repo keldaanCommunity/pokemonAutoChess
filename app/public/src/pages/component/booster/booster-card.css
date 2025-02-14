@@ -128,7 +128,6 @@
 .booster-card .front img {
   width: 100%;
   height: 65%;
-  image-rendering: pixelated;
 }
 
 .booster-card .front-text {

@@ -64,6 +64,8 @@ import { values } from "../../utils/schemas"
 import { SynergyEffects } from "../effects"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
+import { SynergyEffects } from "../effects"
+import { DrySkinEffect, ClearWingEffect, SynchroEffect } from "../../core/effect"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -197,7 +199,8 @@ export class Pokemon extends Schema implements IPokemon {
     // called after entity is added, either at simulation start or when cloned/spawned
   }
 
-  isInRegion(map: DungeonPMDO, state?: GameState) {
+  isInRegion(map: DungeonPMDO | "town", state?: GameState) {
+    if(map === "town") return false
     const regionSynergies = DungeonDetails[map]?.synergies
     const basePkm = PkmFamily[this.name]
     const originalVariantPkm = (Object.keys(PkmRegionalVariants) as Pkm[]).find(
@@ -563,7 +566,7 @@ export class Scyther extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING])
   rarity = Rarity.UNIQUE
   stars = 3
-  evolution = Pkm.SCIZOR
+  evolutions = [Pkm.SCIZOR, Pkm.KLEAVOR]
   hp = 170
   atk = 19
   def = 5
@@ -1952,7 +1955,7 @@ export class Poliwhirl extends Pokemon {
 
   evolutionRule = new CountEvolutionRule(
     3,
-    (pokemon: Pokemon, player: Player) => {
+    (pokemon: Pokemon, player: IPlayer) => {
       if (
         Math.max(
           ...values(player.board)
@@ -1966,6 +1969,10 @@ export class Poliwhirl extends Pokemon {
       }
     }
   )
+
+  onChangePosition(x: number, y: number, player: Player): void {
+    player.refreshShopUI()
+  }
 }
 
 export class Politoed extends Pokemon {
@@ -2155,7 +2162,7 @@ export class Cubone extends Pokemon {
   evolutions = [Pkm.MAROWAK, Pkm.ALOLAN_MAROWAK]
   evolutionRule = new CountEvolutionRule(
     3,
-    (pokemon: Pokemon, player: Player) => {
+    (pokemon: Pokemon, player: IPlayer) => {
       if (player.regionalPokemons.includes(Pkm.ALOLAN_MAROWAK))
         return Pkm.ALOLAN_MAROWAK
       else return Pkm.MAROWAK
@@ -2325,7 +2332,7 @@ export class Goomy extends Pokemon {
   evolutions = [Pkm.SLIGOO, Pkm.HISUI_SLIGGOO]
   evolutionRule = new CountEvolutionRule(
     3,
-    (pokemon: Pokemon, player: Player) => {
+    (pokemon: Pokemon, player: IPlayer) => {
       if (player.regionalPokemons.includes(Pkm.HISUI_SLIGGOO))
         return Pkm.HISUI_SLIGGOO
       else return Pkm.SLIGOO
@@ -2941,7 +2948,7 @@ export class Pikachu extends Pokemon {
   evolutions = [Pkm.RAICHU, Pkm.ALOLAN_RAICHU]
   evolutionRule = new CountEvolutionRule(
     3,
-    (pokemon: Pokemon, player: Player) => {
+    (pokemon: Pokemon, player: IPlayer) => {
       if (player.regionalPokemons.includes(Pkm.ALOLAN_RAICHU))
         return Pkm.ALOLAN_RAICHU
       else return Pkm.RAICHU
@@ -3839,7 +3846,7 @@ export class Quilava extends Pokemon {
   evolutions = [Pkm.TYPHLOSION, Pkm.HISUIAN_TYPHLOSION]
   evolutionRule = new CountEvolutionRule(
     3,
-    (pokemon: Pokemon, player: Player) => {
+    (pokemon: Pokemon, player: IPlayer) => {
       if (player.regionalPokemons.includes(Pkm.HISUIAN_TYPHLOSION))
         return Pkm.HISUIAN_TYPHLOSION
       else return Pkm.TYPHLOSION
@@ -4018,6 +4025,7 @@ export class Bellsprout extends Pokemon {
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.WEEPINBELL
+  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 70
   atk = 6
   def = 2
@@ -4025,6 +4033,7 @@ export class Bellsprout extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROOT
+  passive = Passive.HATCH
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -4033,6 +4042,7 @@ export class Weepinbell extends Pokemon {
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.VICTREEBEL
+  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 160
   atk = 12
   def = 3
@@ -4040,6 +4050,7 @@ export class Weepinbell extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROOT
+  passive = Passive.HATCH
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -4055,7 +4066,6 @@ export class Victreebel extends Pokemon {
   range = 1
   skill = Ability.ROOT
   attackSprite = AttackSprite.GRASS_MELEE
-  regional = true
 }
 
 /*export class Pikipek extends Pokemon {
@@ -6209,6 +6219,10 @@ export class Mew extends Pokemon {
   skill = Ability.TELEPORT
   passive = Passive.SYNCHRO
   attackSprite = AttackSprite.PSYCHIC_RANGE
+
+  onSpawn({ entity }: { entity: IPokemonEntity }): void {
+    entity.effectsSet.add(new SynchroEffect())
+  }
 }
 
 export class Mewtwo extends Pokemon {
@@ -7291,7 +7305,7 @@ export class Clamperl extends Pokemon {
   evolutions = [Pkm.HUNTAIL, Pkm.GOREBYSS]
   evolutionRule = new CountEvolutionRule(
     3,
-    (pokemon: Pokemon, player: Player) => {
+    (pokemon: Pokemon, player: IPlayer) => {
       if (
         Math.max(
           ...values(player.board)
@@ -7305,6 +7319,10 @@ export class Clamperl extends Pokemon {
       }
     }
   )
+
+  onChangePosition(x: number, y: number, player: Player): void {
+    player.refreshShopUI()
+  }
 }
 
 export class Gorebyss extends Pokemon {
@@ -11181,7 +11199,7 @@ export class Wurmple extends Pokemon {
   evolutions = [Pkm.SILCOON, Pkm.CASCOON]
   evolutionRule = new CountEvolutionRule(
     3,
-    (pokemon: Pokemon, player: Player) => {
+    (pokemon: Pokemon, player: IPlayer) => {
       if (player.regionalPokemons.includes(Pkm.CASCOON)) return Pkm.CASCOON
       else return Pkm.SILCOON
     }
@@ -11545,7 +11563,7 @@ export class Yanma extends Pokemon {
   additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
   onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.status.triggerClearWing(1000)
+    entity.effectsSet.add(new ClearWingEffect())
   }
 }
 
@@ -11564,7 +11582,7 @@ export class Yanmega extends Pokemon {
   additional = true
   attackSprite = AttackSprite.PSYCHIC_RANGE
   onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.status.triggerClearWing(1000)
+    entity.effectsSet.add(new ClearWingEffect())
   }
 }
 
@@ -11592,7 +11610,7 @@ export class Helioptile extends Pokemon {
     simulation
   }: { entity: IPokemonEntity; simulation: Simulation }) {
     if (simulation.weather === Weather.RAIN) {
-      entity.status.triggerDrySkin(1000)
+      entity.effectsSet.add(new DrySkinEffect())
     } else if (simulation.weather === Weather.SANDSTORM) {
       entity.addDodgeChance(0.25, entity, 0, false)
     } else if (simulation.weather === Weather.SUN) {
@@ -11624,7 +11642,7 @@ export class Heliolisk extends Pokemon {
     simulation
   }: { entity: IPokemonEntity; simulation: Simulation }) {
     if (simulation.weather === Weather.RAIN) {
-      entity.status.triggerDrySkin(1000)
+      entity.effectsSet.add(new DrySkinEffect())
     } else if (simulation.weather === Weather.SANDSTORM) {
       entity.addDodgeChance(0.25, entity, 0, false)
     } else if (simulation.weather === Weather.SUN) {
@@ -11640,7 +11658,7 @@ export class Exeggcute extends Pokemon {
   evolutions = [Pkm.EXEGGUTOR, Pkm.ALOLAN_EXEGGUTOR]
   evolutionRule = new CountEvolutionRule(
     3,
-    (pokemon: Pokemon, player: Player) => {
+    (pokemon: Pokemon, player: IPlayer) => {
       if (player.regionalPokemons.includes(Pkm.ALOLAN_EXEGGUTOR))
         return Pkm.ALOLAN_EXEGGUTOR
       else return Pkm.EXEGGUTOR
@@ -12365,7 +12383,7 @@ export class GalarianZigzagoon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
   rarity = Rarity.RARE
   stars = 1
-  evolution = Pkm.LINOONE
+  evolution = Pkm.GALARIAN_LINOONE
   hp = 80
   atk = 7
   def = 5

@@ -16,12 +16,15 @@ import { AbilityTooltip } from "../ability/ability-tooltip"
 import SynergyIcon from "../icons/synergy-icon"
 import "./game-pokemon-detail.css"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import { cc } from "../../utils/jsx"
+import { usePreference } from "../../../preferences"
 
 export function GamePokemonDetail(props: {
   pokemon: Pkm | Pokemon
   shiny?: boolean
   emotion?: Emotion
 }) {
+  const [antialiasing] = usePreference("antialiasing")
   const { t } = useTranslation()
   const pokemon: Pokemon = useMemo(
     () =>
@@ -53,7 +56,9 @@ export function GamePokemonDetail(props: {
   return (
     <div className="game-pokemon-detail in-shop">
       <img
-        className="game-pokemon-detail-portrait"
+        className={cc("game-pokemon-detail-portrait", {
+          pixelated: !antialiasing
+        })}
         style={{ borderColor: RarityColor[pokemon.rarity] }}
         src={getPortraitSrc(
           pokemon.index,

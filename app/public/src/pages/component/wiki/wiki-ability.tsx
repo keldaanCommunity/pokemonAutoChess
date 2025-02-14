@@ -11,8 +11,10 @@ import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
+import { usePreference } from "../../../preferences"
 
 export default function WikiAbility() {
+  const [antialiasing] = usePreference("antialiasing")
   const { t } = useTranslation()
   const [hoveredPokemon, setHoveredPokemon] = useState<Pkm>()
 
@@ -57,7 +59,7 @@ export default function WikiAbility() {
                             setHoveredPokemon(p.name)
                           }}
                         >
-                          <img src={getPortraitSrc(p.index)} />
+                          <img src={getPortraitSrc(p.index)} className={cc({ pixelated: !antialiasing })} />
                         </div>
                       </li>
                     ))}

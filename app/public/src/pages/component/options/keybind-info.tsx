@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { loadPreferences, savePreferences } from "../../../preferences"
+import { usePreferences } from "../../../preferences"
 import { getGameScene } from "../../game"
 import { cc } from "../../utils/jsx"
 
@@ -8,34 +8,37 @@ import "./keybind-info.css"
 
 export default function KeybindInfo() {
   const { t } = useTranslation()
-  const preferences = loadPreferences()
-  const [keyRemapped, setKeyRemapped] = useState<string | null>(null)
-
-  function onKeydown(e: KeyboardEvent) {
-    if (keyRemapped === null) return
-    let key = e.key.toUpperCase()
-    if (key === "ESCAPE") {
-      setKeyRemapped(null)
-      return
-    }
-    if (key === " ") {
-      key = "SPACE"
-    }
-    preferences.keybindings[keyRemapped] = key
-    savePreferences({ keybindings: preferences.keybindings })
-    setKeyRemapped(null)
-
-    const gameScene = getGameScene()
-    if (gameScene) gameScene.registerKeys() // update key listeners
-  }
+  const [preferences, setPreferences] = usePreferences()
+  const [currentlyRemapping, setCurrentlyRemapping] = useState<string | null>(
+    null
+  )
 
   useEffect(() => {
+    function onKeydown(e: KeyboardEvent) {
+      if (currentlyRemapping === null) return
+      let key = e.key.toUpperCase()
+      if (key === "ESCAPE") {
+        setCurrentlyRemapping(null)
+        return
+      }
+      if (key === " ") {
+        key = "SPACE"
+      }
+      setPreferences((old) => ({
+        keybindings: { ...old.keybindings, [currentlyRemapping]: key }
+      }))
+      setCurrentlyRemapping(null)
+
+      const gameScene = getGameScene()
+      if (gameScene) gameScene.registerKeys() // update key listeners
+    }
+
     window.addEventListener("keydown", onKeydown)
     //clean up event listener when destroyed
     return () => {
       window.removeEventListener("keydown", onKeydown)
     }
-  }, [onKeydown])
+  }, [currentlyRemapping])
 
   const keys = Object.keys(preferences.keybindings)
   const conflictingKeys = keys.filter((key, i) => keys.some((otherKey, otherIndex) => i !== otherIndex && preferences.keybindings[key] === preferences.keybindings[otherKey]))
@@ -44,12 +47,12 @@ export default function KeybindInfo() {
     return (
       <kbd
         className={cc("remappable", {
-          remapping: keyRemapped === keyId,
+          remapping: currentlyRemapping === keyId,
           conflict: conflictingKeys.includes(keyId)
         })}
-        onClick={() => setKeyRemapped(keyId)}
+        onClick={() => setCurrentlyRemapping(keyId)}
       >
-        {keyRemapped === keyId ? "?" : preferences.keybindings[keyId]}
+        {currentlyRemapping === keyId ? "?" : preferences.keybindings[keyId]}
       </kbd>
     )
   }

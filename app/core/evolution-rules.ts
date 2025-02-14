@@ -1,6 +1,7 @@
 import Player from "../models/colyseus-models/player"
 import { Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
+import { IPlayer } from "../types"
 import { EvolutionTime } from "../types/Config"
 import { Ability } from "../types/enum/Ability"
 import { PokemonActionState } from "../types/enum/Game"
@@ -14,7 +15,7 @@ import { values } from "../utils/schemas"
 
 type DivergentEvolution = (
   pokemon: Pokemon,
-  player: Player,
+  player: IPlayer,
   ...additionalArgs: unknown[]
 ) => Pkm
 
@@ -35,7 +36,7 @@ export abstract class EvolutionRule {
 
   getEvolution(
     pokemon: Pokemon,
-    player: Player,
+    player: IPlayer,
     ...additionalArgs: unknown[]
   ): Pkm {
     if (this.divergentEvolution) {
@@ -80,7 +81,7 @@ export class CountEvolutionRule extends EvolutionRule {
 
   constructor(
     numberRequired: number,
-    divergentEvolution?: (pokemon: Pokemon, player: Player) => Pkm
+    divergentEvolution?: (pokemon: Pokemon, player: IPlayer) => Pkm
   ) {
     super(divergentEvolution)
     this.numberRequired = numberRequired

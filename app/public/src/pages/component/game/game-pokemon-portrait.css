@@ -4,7 +4,6 @@
   --portrait-size: calc(var(--container-height) - 5px);
   width: 7.5vw;
   height: var(--container-height);
-  image-rendering: pixelated;
   padding: 0;
   background-repeat: no-repeat;
   background-size: contain;
@@ -72,7 +71,6 @@
   display: inline-block;
   width: 22px;
   height: 22px;
-  image-rendering: pixelated;
   margin-left: 4px;
   vertical-align: middle;
 }
@@ -82,7 +80,6 @@
   height: 40px;
   border: 1px solid white;
   border-radius: 4px;
-  image-rendering: pixelated;
 }
 
 .game-pokemon-portrait-planned-icon {
@@ -110,7 +107,6 @@
   background-size: contain;
   background-repeat: no-repeat;
   border-radius: 8px;
-  image-rendering: pixelated;
 }
 
 .game-pokemon-portrait-duo-part-down {

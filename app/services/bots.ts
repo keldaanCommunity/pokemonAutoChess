@@ -21,9 +21,12 @@ export async function fetchBots() {
   return bots
 }
 
-export function getBotsList(
+export async function getBotsList(
   options: { withSteps: boolean } = { withSteps: true }
-): Partial<IBot>[] {
+): Promise<Partial<IBot>[]> {
+  if (bots.size === 0) {
+    await fetchBots()
+  }
   return [...bots.values()].map((bot) => ({
     name: bot.name,
     avatar: bot.avatar,
