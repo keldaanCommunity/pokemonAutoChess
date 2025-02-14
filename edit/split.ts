@@ -249,6 +249,7 @@ async function splitIndex(index: string) {
         }
 
         actions.add(conf.sleep ?? AnimationType.Sleep)
+        actions.add(conf.eat ?? AnimationType.Eat)
         actions.add(conf.hop ?? AnimationType.Hop)
         actions.add(conf.hurt ?? AnimationType.Hurt)
         actions.add(conf.attack ?? AnimationType.Attack)

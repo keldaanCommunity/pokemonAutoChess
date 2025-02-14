@@ -9,6 +9,7 @@
   grid-template-areas:
     "portrait entry types"
     "stats stats stats"
+    "dish dish dish"
     "passive passive passive"
     "ult ult ult";
 }
@@ -95,6 +96,32 @@
 
 .game-pokemon-detail-stats .negative {
   color: red;
+}
+
+.game-pokemon-detail-dish {
+  grid-area: dish;
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  align-items: center;
+  background-color: #4f5160;
+  margin: 0 -5px -7px -5px;
+  padding: 0 2px 5px 2px;
+}
+
+.game-pokemon-detail-dish-name {
+  grid-column: span 2;
+  padding: 5px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 1em;
+  font-style: italic;
+}
+
+.game-pokemon-detail-dish-icon {
+  width: 45px;
+  height: 45px;
 }
 
 .game-pokemon-detail-ult {
