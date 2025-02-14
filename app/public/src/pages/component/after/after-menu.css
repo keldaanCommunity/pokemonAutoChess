@@ -12,6 +12,10 @@
   overflow: auto;
 }
 
+.after-menu .gamemode {
+  margin-bottom: 0.5em;
+}
+
 .after-menu .player-rank {
   font-size: 4rem;
   color: white;

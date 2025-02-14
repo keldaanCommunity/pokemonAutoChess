@@ -1,4 +1,4 @@
-# New Pokemons:
+# New Pokemons
 
 - Nacli
 - Naclstack
@@ -55,4 +55,5 @@
 
 # Misc
 
+- Quick play and custom lobbies no longer guarantee +1 minimum elo gain when top 1. Ranked games still do.
 - Added experience required per level in Wiki > Data
