@@ -357,8 +357,11 @@ export default class PokemonSprite extends DraggableObject {
     s.lastPokemonDetail = this
   }
 
-  onPointerDown(pointer: Phaser.Input.Pointer) {
-    super.onPointerDown(pointer)
+  onPointerDown(
+    pointer: Phaser.Input.Pointer,
+    event: Phaser.Types.Input.EventData
+  ) {
+    super.onPointerDown(pointer, event)
     if (
       this.shouldShowTooltip &&
       !preference("showDetailsOnHover") &&

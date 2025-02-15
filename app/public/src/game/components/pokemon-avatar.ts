@@ -249,8 +249,8 @@ export default class PokemonAvatar extends PokemonSprite {
     }
   }
 
-  onPointerDown(pointer: Phaser.Input.Pointer): void {
-    super.onPointerDown(pointer)
+  onPointerDown(pointer: Phaser.Input.Pointer, event): void {
+    super.onPointerDown(pointer, event)
     const scene = this.scene as GameScene
 
     if (
@@ -280,7 +280,7 @@ export class EmoteBubble extends GameObjects.DOMElement {
 
     const emoteImg = document.createElement("img")
     emoteImg.src = getAvatarSrc(emoteAvatar)
-    emoteImg.className = cc({ pixelated: !preference('antialiasing') })
+    emoteImg.className = cc({ pixelated: !preference("antialiasing") })
 
     this.dom.appendChild(emoteImg)
     this.setElement(this.dom)
