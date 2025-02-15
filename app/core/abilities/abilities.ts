@@ -9215,6 +9215,9 @@ export class TorchSongStrategy extends AbilityStrategy {
               crit,
               false
             )
+            if (chance(0.3, pokemon)) {
+              randomTarget.status.triggerBurn(2000, randomTarget, pokemon)
+            }
           }
         }, 100 * i)
       )

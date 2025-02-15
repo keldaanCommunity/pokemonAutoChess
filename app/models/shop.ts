@@ -153,7 +153,7 @@ export function getBuyPrice(
 
 const CommonShop = getRegularsTier1(
   PRECOMPUTED_POKEMONS_PER_RARITY.COMMON
-).concat(Pkm.APPLIN)
+).concat(Pkm.FUECOCO)
 const UncommonShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.UNCOMMON)
 const RareShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.RARE)
 const EpicShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.EPIC)
@@ -337,10 +337,10 @@ export default class Shop {
           [Pkm.TAPU_LELE, Synergy.PSYCHIC],
           [Pkm.OGERPON_CORNERSTONE, Synergy.ROCK],
           [Pkm.OGERPON_HEARTHFLAME, Synergy.FIRE],
-          [Pkm.OGERPON_WELLSPRING, Synergy.AQUATIC],
+          [Pkm.OGERPON_WELLSPRING, Synergy.AQUATIC]
         ])
-        const hasSynergy = specialSynergies.has(pkm) 
-          ? specialSynergies.get(pkm) === synergy 
+        const hasSynergy = specialSynergies.has(pkm)
+          ? specialSynergies.get(pkm) === synergy
           : getPokemonData(pkm).types.includes(synergy)
 
         return (

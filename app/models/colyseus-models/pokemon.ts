@@ -1204,7 +1204,7 @@ export class Fuecoco extends Pokemon {
   atk = 5
   def = 2
   speDef = 1
-  maxPP = 100
+  maxPP = 60
   range = 3
   skill = Ability.TORCH_SONG
   attackSprite = AttackSprite.FIRE_RANGE
@@ -1219,7 +1219,7 @@ export class Crocalor extends Pokemon {
   atk = 13
   def = 3
   speDef = 2
-  maxPP = 100
+  maxPP = 60
   range = 3
   skill = Ability.TORCH_SONG
   attackSprite = AttackSprite.FIRE_RANGE
@@ -1233,7 +1233,7 @@ export class Skeledirge extends Pokemon {
   atk = 24
   def = 4
   speDef = 3
-  maxPP = 100
+  maxPP = 60
   range = 3
   skill = Ability.TORCH_SONG
   attackSprite = AttackSprite.FIRE_RANGE
