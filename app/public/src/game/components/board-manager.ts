@@ -525,6 +525,7 @@ export default class BoardManager {
   pickMode() {
     // logger.debug('pickMode');
     this.mode = BoardMode.PICK
+    this.scene.setMap(this.player.map)
     this.renderBoard()
     this.updatePlayerAvatar()
     this.updateOpponentAvatar(null, null)
