@@ -4,7 +4,7 @@ button {
 
 .bubbly {
   position: relative;
-  padding: 0.15em 0.6em 0.35em 0.4em;
+  padding: 0.15em calc(0.5em + 3px) calc(0.15em + 3px) 0.5em;
   background: #e7e7e7;
   display: inline-block;
   text-align: center;

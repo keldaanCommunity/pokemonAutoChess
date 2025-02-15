@@ -194,7 +194,7 @@ export default class BoardManager {
   }
 
   renderBoard() {
-    this.showBerryTree()
+    this.showBerryTrees()
     this.pokemons.forEach((p) => p.destroy())
     this.pokemons.clear()
     if (this.mode === BoardMode.PICK) {
@@ -238,7 +238,7 @@ export default class BoardManager {
     this.lightCell = null
   }
 
-  showBerryTree() {
+  showBerryTrees() {
     this.berryTrees.forEach((tree) => tree.destroy())
     this.berryTrees = []
     const grassLevel = this.player.synergies.get(Synergy.GRASS) ?? 0
@@ -283,6 +283,10 @@ export default class BoardManager {
 
       this.berryTrees.push(tree)
     }
+  }
+
+  hideBerryTrees() {
+    this.berryTrees.forEach((tree) => tree.destroy())
   }
 
   displayText(x: number, y: number, label: string) {
@@ -536,6 +540,7 @@ export default class BoardManager {
     this.mode = BoardMode.TOWN
     this.scene.setMap("town")
     this.hideLightCell()
+    this.hideBerryTrees()
     this.pokemons.forEach((pokemon) => {
       if (pokemon.positionY != 0) {
         pokemon.setVisible(false)
