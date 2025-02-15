@@ -330,16 +330,21 @@ export default class Shop {
       const synergy = synergies[i]
       let candidates = allCandidates.filter((m) => {
         const pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
-        if (pkm === Pkm.TAPU_BULU) return synergy === Synergy.GRASS
-        if (pkm === Pkm.TAPU_FINI) return synergy === Synergy.FAIRY
-        if (pkm === Pkm.TAPU_KOKO) return synergy === Synergy.ELECTRIC
-        if (pkm === Pkm.TAPU_LELE) return synergy === Synergy.PSYCHIC
-        if (pkm === Pkm.OGERPON_CORNERSTONE) return synergy === Synergy.ROCK
-        if (pkm === Pkm.OGERPON_HEARTHFLAME) return synergy === Synergy.FIRE
-        if (pkm === Pkm.OGERPON_WELLSPRING) return synergy === Synergy.AQUATIC
+        const specialSynergies: ReadonlyMap<Pkm, Synergy> = new Map([
+          [Pkm.TAPU_BULU, Synergy.GRASS],
+          [Pkm.TAPU_FINI, Synergy.FAIRY],
+          [Pkm.TAPU_KOKO, Synergy.ELECTRIC],
+          [Pkm.TAPU_LELE, Synergy.PSYCHIC],
+          [Pkm.OGERPON_CORNERSTONE, Synergy.ROCK],
+          [Pkm.OGERPON_HEARTHFLAME, Synergy.FIRE],
+          [Pkm.OGERPON_WELLSPRING, Synergy.AQUATIC],
+        ])
+        const hasSynergy = specialSynergies.has(pkm) 
+          ? specialSynergies.get(pkm) === synergy 
+          : getPokemonData(pkm).types.includes(synergy)
 
         return (
-          getPokemonData(pkm).types.includes(synergy) &&
+          hasSynergy &&
           !player.pokemonsProposition.some(
             (p) => PkmFamily[p] === PkmFamily[pkm]
           )
