@@ -2060,16 +2060,9 @@ export function getStrongestUnit<T extends Pokemon | PokemonEntity>(
     2) stars level
     3) rarity cost
     */
-  let strongest,
-    bestScore = 0
-  pokemons.forEach((pokemon) => {
-    const score = getUnitScore(pokemon)
-    if (score > bestScore) {
-      bestScore = score
-      strongest = pokemon
-    }
-  })
-  return strongest
+  const pokemonScores = pokemons.map((pokemon) => getUnitScore(pokemon))
+  const bestScore = Math.max(...pokemonScores)
+  return pickRandomIn(pokemons.filter((p, i) => pokemonScores[i] === bestScore))
 }
 
 export function getUnitScore(pokemon: IPokemonEntity | IPokemon) {
