@@ -2,6 +2,7 @@ import path from "path"
 import { monitor } from "@colyseus/monitor"
 import config from "@colyseus/tools"
 import { RedisDriver, RedisPresence, ServerOptions, matchMaker } from "colyseus"
+import helmet from "helmet"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
@@ -89,6 +90,8 @@ export default config({
      * Bind your custom express routes here:
      * Read more: https://expressjs.com/en/starter/basic-routing.html
      */
+
+    app.use(helmet())
 
     app.use(((err, req, res, next) => {
       res.status(err.status).json(err)
