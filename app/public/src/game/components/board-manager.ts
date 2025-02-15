@@ -651,6 +651,10 @@ export default class BoardManager {
             pokemonUI.evolutionAnimation()
           }
           break
+
+        case "types":
+          pokemonUI.types = new Set(values(value as IPokemon["types"]))
+          break
       }
     }
   }
