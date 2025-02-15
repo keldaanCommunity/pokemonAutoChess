@@ -653,6 +653,10 @@ export default class BoardManager {
           }
           break
 
+        case "types":
+          pokemonUI.types = new Set(values(value as IPokemon["types"]))
+          break
+
         case "meal":
           if (pokemonUI.meal !== value) {
             pokemonUI.updateMeal(value as IPokemon["meal"])

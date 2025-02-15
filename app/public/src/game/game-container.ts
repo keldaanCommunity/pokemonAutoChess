@@ -47,6 +47,7 @@ import { BoardMode } from "./components/board-manager"
 import GameScene from "./scenes/game-scene"
 import { t } from "i18next"
 import { cc } from "../pages/utils/jsx"
+import { values } from "../../../utils/schemas"
 
 class GameContainer {
   room: Room<GameState>
@@ -399,6 +400,15 @@ class GameContainer {
               )
             }
           })
+        })
+
+        pokemon.types.onChange((value, key) => {
+          if (player.id === this.spectatedPlayerId) {
+            const pokemonUI = this.gameScene?.board?.pokemons.get(pokemon.id)
+            if (pokemonUI) {
+              pokemonUI.types = new Set(values(pokemon.types))
+            }
+          }
         })
       })
     }
