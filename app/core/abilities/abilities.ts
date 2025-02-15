@@ -5659,7 +5659,7 @@ export class MagmaStormStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
 
     const targetsHit = new Set<string>()
-    const propagate= (currentTarget) => {
+    const propagate = (currentTarget) => {
       targetsHit.add(currentTarget.id)
       currentTarget.transferAbility(Ability.MAGMA_STORM)
       currentTarget.handleSpecialDamage(
@@ -5672,12 +5672,18 @@ export class MagmaStormStrategy extends AbilityStrategy {
 
       setTimeout(() => {
         const board = pokemon.simulation.board
-        const nextEnemy = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-          .find(cell => cell.value && cell.value.team === pokemon.team && !targetsHit.has(cell.value.id))
-          if(nextEnemy && !pokemon.simulation.finished) {
-            propagate(nextEnemy)
-          }
-        }, 500)
+        const nextEnemy = board
+          .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+          .find(
+            (cell) =>
+              cell.value &&
+              cell.value.team === pokemon.team &&
+              !targetsHit.has(cell.value.id)
+          )
+        if (nextEnemy && !pokemon.simulation.finished) {
+          propagate(nextEnemy)
+        }
+      }, 500)
     }
 
     propagate(target)
@@ -7705,12 +7711,15 @@ export class CurseStrategy extends AbilityStrategy {
     const enemies = board.cells.filter(
       (p) => p && p.team !== pokemon.team
     ) as PokemonEntity[]
-    enemies.sort((a, b) => (a.status.curse ? +1 : b.hp - a.hp))
-    const enemyWithHighestHP = enemies[0]
-    const curseDelay =
-      ([8000, 5000, 3000][pokemon.stars - 1] ?? 3000) *
-      (1 - (0.2 * pokemon.ap) / 100)
-    enemyWithHighestHP.status.triggerCurse(curseDelay)
+    const highestHp = Math.max(...enemies.map((p) => p.hp))
+    const enemiesWithHighestHP = enemies.filter((p) => p.hp === highestHp)
+    const cursedEnemy = pickRandomIn(enemiesWithHighestHP)
+    if (cursedEnemy) {
+      const curseDelay =
+        ([8000, 5000, 3000][pokemon.stars - 1] ?? 3000) *
+        (1 - (0.2 * pokemon.ap) / 100)
+      cursedEnemy.status.triggerCurse(curseDelay)
+    }
   }
 }
 
@@ -9297,17 +9306,19 @@ export class StoneEdgeStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const duration = pokemon.stars === 1 ? 5000 : 8000
-    if (pokemon.effects.has(Effect.STONE_EDGE)) return; // ignore if already active
+    if (pokemon.effects.has(Effect.STONE_EDGE)) return // ignore if already active
 
     pokemon.status.triggerSilence(duration, pokemon, pokemon)
     pokemon.effects.add(Effect.STONE_EDGE)
     pokemon.addCritChance(20, pokemon, 1, false)
     pokemon.range += 2
-    pokemon.commands.push(new DelayedCommand(() => {
-      pokemon.addCritChance(-20, pokemon, 1, false)
-      pokemon.range = min(pokemon.baseRange)(pokemon.range - 2)
-      pokemon.effects.delete(Effect.STONE_EDGE)
-    }, duration))
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        pokemon.addCritChance(-20, pokemon, 1, false)
+        pokemon.range = min(pokemon.baseRange)(pokemon.range - 2)
+        pokemon.effects.delete(Effect.STONE_EDGE)
+      }, duration)
+    )
   }
 }
 
