@@ -17,11 +17,6 @@ import { initCronJobs } from "./services/cronjobs"
 import { fetchLeaderboards } from "./services/leaderboard"
 import { fetchMetaReports } from "./services/meta"
 
-// Redirect top window if running in an iframe
-if (window.top && window !== window.top) {
-  window.top.location = window.location;
-}
-
 async function main() {
   fetchLeaderboards()
   setInterval(() => fetchLeaderboards(), 1000 * 60 * 10) // refresh every 10 minutes
