@@ -41,8 +41,9 @@ export default class PokemonSpecial extends PokemonSprite {
     this.dialogTitle = dialogTitle
   }
 
-  onPointerDown(pointer) {
-    super.onPointerDown(pointer)
+  onPointerDown(pointer, event) {
+    super.onPointerDown(pointer, event)
+    event.stopPropagation()
     this.animationManager.animatePokemon(this, PokemonActionState.EMOTE, false)
   }
 
