@@ -1942,15 +1942,15 @@ export class AccelerockStrategy extends AbilityStrategy {
       pokemon.moveTo(destination.x, destination.y, board)
       pokemon.targetX = destination.target.positionX
       pokemon.targetY = destination.target.positionY
-      target.handleSpecialDamage(
-        pokemon.atk,
-        board,
-        AttackType.SPECIAL,
-        pokemon,
-        crit,
-        true
-      )
     }
+    target.handleSpecialDamage(
+      pokemon.atk,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
 
     const defLost = max(pokemon.def)(Math.round(5 * (1 + pokemon.ap / 100)))
     pokemon.addDefense(-defLost, pokemon, 0, false)
@@ -1971,24 +1971,24 @@ export class NuzzleStrategy extends AbilityStrategy {
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     target = destination?.target ?? target
     super.process(pokemon, state, board, target, crit)
-    
+
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+    const duration = [3000, 4000, 5000][pokemon.stars - 1] ?? 5000
+
     if (destination) {
       pokemon.targetX = destination.target.positionX
       pokemon.targetY = destination.target.positionY
-      const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
-      const duration = [3000, 4000, 5000][pokemon.stars - 1] ?? 5000
-
-      target.handleSpecialDamage(
-        damage,
-        board,
-        AttackType.SPECIAL,
-        pokemon,
-        crit,
-        true
-      )
-      target.status.triggerParalysis(duration, target, pokemon)
       pokemon.moveTo(destination.x, destination.y, board)
     }
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
+    target.status.triggerParalysis(duration, target, pokemon)
   }
 }
 
