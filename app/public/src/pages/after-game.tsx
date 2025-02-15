@@ -9,7 +9,8 @@ import {
   addPlayer,
   leaveAfter,
   setElligibilityToELO,
-  setElligibilityToXP
+  setElligibilityToXP,
+  setGameMode
 } from "../stores/AfterGameStore"
 import { joinAfter, logIn } from "../stores/NetworkStore"
 import AfterMenu from "./component/after/after-menu"
@@ -86,6 +87,9 @@ export default function AfterGame() {
       })
       r.state.listen("elligibleToXP", (value, previousValue) => {
         dispatch(setElligibilityToXP(value))
+      })
+      r.state.listen("gameMode", (value, previousValue) => {
+        dispatch(setGameMode(value))
       })
     }
 

@@ -26,6 +26,7 @@ import {
   SpriteType,
   type Team
 } from "../../../../types/enum/Game"
+import { Item } from "../../../../types/enum/Item"
 import type { Passive } from "../../../../types/enum/Passive"
 import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
 import type { Synergy } from "../../../../types/enum/Synergy"
@@ -122,6 +123,8 @@ export default class PokemonSprite extends DraggableObject {
   flip: boolean
   animationLocked: boolean /* will prevent another anim to play before current one is completed */ = false
   skydiving: boolean = false
+  meal: Item | "" = ""
+  mealSprite: GameObjects.Sprite | undefined
 
   constructor(
     scene: GameScene | DebugScene,
@@ -245,6 +248,10 @@ export default class PokemonSprite extends DraggableObject {
       this.setLifeBar(p, scene)
       if (pokemon.maxPP > 0) this.setPowerBar(p, scene)
       //this.setEffects(p, scene);
+    } else {
+      if (pokemon.meal !== "") {
+        this.updateMeal(pokemon.meal)
+      }
     }
 
     this.draggable = playerId === scene.uid && !inBattle
@@ -255,11 +262,9 @@ export default class PokemonSprite extends DraggableObject {
       this.shield = p.shield
       this.life = p.life
       this.critPower = p.critPower
-      this.ap = p.ap
       this.critChance = p.critChance
     } else {
       this.critPower = DEFAULT_CRIT_POWER
-      this.ap = 0
       this.critChance = DEFAULT_CRIT_CHANCE
     }
     this.setDepth(5)
@@ -558,6 +563,46 @@ export default class PokemonSprite extends DraggableObject {
       this.flip,
       false
     )
+  }
+
+  cookAnimation(dishes: Item[]) {
+    this.emoteAnimation()
+    dishes.forEach((item, i) => {
+      const itemSprite = this.scene.add.sprite(
+        this.x,
+        this.y,
+        "item",
+        item + ".png"
+      )
+      itemSprite.setScale(0.5)
+      const shinyEffect = this.scene.add.sprite(this.x, this.y, "shine")
+      shinyEffect.setScale(2)
+      shinyEffect.play("shine")
+      this.scene.tweens.add({
+        targets: [itemSprite, shinyEffect],
+        ease: Phaser.Math.Easing.Quadratic.Out,
+        duration: 1000,
+        y: this.y - 70,
+        x: this.x + (i - (dishes.length - 1) / 2) * 70,
+        onComplete: () => {
+          setTimeout(() => {
+            itemSprite.destroy()
+            shinyEffect.destroy()
+          }, 1000)
+        }
+      })
+    })
+  }
+
+  updateMeal(meal: Item | "") {
+    this.meal = meal
+    this.mealSprite?.destroy()
+    if (meal) {
+      this.mealSprite = this.scene.add
+        .sprite(0, 20, "item", meal + ".png")
+        .setScale(0.25)
+      this.add(this.mealSprite)
+    }
   }
 
   specialAttackAnimation(group: Phaser.GameObjects.Group, ultCount: number) {

@@ -2,6 +2,7 @@ import { GameObjects } from "phaser"
 import {
   ArtificialItems,
   Berries,
+  Dishes,
   HMs,
   Item,
   ShinyItems,
@@ -78,7 +79,7 @@ export default class ItemContainer extends DraggableObject {
     if (WeatherRocks.includes(this.name)) return 4
     if (SpecialItems.includes(this.name)) return 5
     if (TMs.includes(this.name) || HMs.includes(this.name)) return 6
-    //if (Dishes.includes(this.name)) return 7
+    if (Dishes.includes(this.name)) return 7
     return 0
   }
 

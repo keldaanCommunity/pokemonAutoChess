@@ -430,6 +430,7 @@ export class MiniGame {
         // removing low triggers synergies
         if (type === Synergy.FLORA || type === Synergy.LIGHT)
           levelReached = min(0)(levelReached - 1)
+        if (type === Synergy.GOURMET && levelReached > 1) levelReached = 1 // to compensate for the current lack of diversity in the legendary pool
         return [type, levelReached]
       })
       const candidatesSymbols: Synergy[] = []
@@ -601,11 +602,13 @@ export class MiniGame {
 
         const symbols = this.symbolsByPortal.get(avatar.portalId) ?? []
         const portalSynergies = symbols.map((s) => s.synergy)
-        state.shop.assignUniquePropositions(
-          player,
-          state.stageLevel,
-          portalSynergies
-        )
+        if (state.stageLevel > 1) {
+          state.shop.assignUniquePropositions(
+            player,
+            state.stageLevel,
+            portalSynergies
+          )
+        }
       }
 
       this.avatars!.delete(avatar.id)

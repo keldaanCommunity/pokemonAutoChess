@@ -108,7 +108,8 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.BABY]: [3, 5, 7],
   [Synergy.LIGHT]: [2, 3, 4, 5],
   [Synergy.WILD]: [2, 4, 6, 9],
-  [Synergy.AMORPHOUS]: [3, 5, 7]
+  [Synergy.AMORPHOUS]: [3, 5, 7],
+  [Synergy.GOURMET]: [3, 4, 5]
 }
 
 // games that finish before level 10 are not counted for XP and ELO to avoid potential abuse
@@ -194,7 +195,7 @@ export const PoolSize: { [key in Rarity]: [number, number, number] } = {
   [Rarity.HATCH]: [0, 0, 0]
 }
 
-export const UniqueShop = new Array<PkmProposition>(
+export const UniquePool = new Array<PkmProposition>(
   Pkm.AERODACTYL,
   Pkm.BLACEPHALON,
   Pkm.REGIDRAGO,
@@ -285,10 +286,11 @@ export const UniqueShop = new Array<PkmProposition>(
   Pkm.IRON_HANDS,
   Pkm.TURTONATOR,
   Pkm.CRYOGONAL,
-  Pkm.DRAMPA
+  Pkm.DRAMPA,
+  Pkm.APPLIN
 )
 
-export const LegendaryShop = new Array<PkmProposition>(
+export const LegendaryPool = new Array<PkmProposition>(
   Pkm.KYUREM,
   Pkm.RESHIRAM,
   Pkm.ZEKROM,
@@ -395,6 +397,7 @@ export const DEFAULT_CRIT_POWER = 2
 export const PROJECTILE_SPEED = 4
 
 export const StageDuration: Record<number | "DEFAULT", number> = {
+  0: 30,
   1: 30,
   3: 40,
   5: 40,
@@ -414,7 +417,7 @@ export const PORTAL_CAROUSEL_BASE_DURATION = 20000
 export const ItemCarouselStages = [4, 12, 17, 22, 27, 34]
 export const ItemProposalStages = [3, 15]
 export const AdditionalPicksStages = [5, 8, 11]
-export const PortalCarouselStages = [10, 20]
+export const PortalCarouselStages = [0, 10, 20]
 
 export const EloRankThreshold: { [key in EloRank]: number } = {
   [EloRank.LEVEL_BALL]: 0,
@@ -603,163 +606,6 @@ export const IdTable: { [key: number]: Mask } = {
   95: Mask.A1BC3D,
   175: Mask.AB2CD4,
   255: Mask.A1B2C3D4
-}
-
-export const ItemStats: Record<Item, { [stat in Stat]?: number }> = {
-  [Item.FOSSIL_STONE]: {},
-  [Item.TWISTED_SPOON]: { [Stat.AP]: 10 },
-  [Item.MAGNET]: { [Stat.ATK_SPEED]: 10 },
-  [Item.BLACK_GLASSES]: { [Stat.CRIT_CHANCE]: 10 },
-  [Item.MIRACLE_SEED]: { [Stat.SHIELD]: 15 },
-  [Item.CHARCOAL]: { [Stat.ATK]: 3 },
-  [Item.NEVER_MELT_ICE]: { [Stat.SPE_DEF]: 2 },
-  [Item.HEART_SCALE]: { [Stat.DEF]: 2 },
-  [Item.MYSTIC_WATER]: { [Stat.PP]: 15 },
-  [Item.OLD_AMBER]: {},
-  [Item.DAWN_STONE]: { [Stat.AP]: 10 },
-  [Item.WATER_STONE]: { [Stat.PP]: 15 },
-  [Item.THUNDER_STONE]: { [Stat.ATK_SPEED]: 10 },
-  [Item.FIRE_STONE]: { [Stat.ATK]: 3 },
-  [Item.MOON_STONE]: { [Stat.DEF]: 2 },
-  [Item.DUSK_STONE]: { [Stat.CRIT_CHANCE]: 10 },
-  [Item.LEAF_STONE]: { [Stat.SHIELD]: 15 },
-  [Item.ICE_STONE]: { [Stat.SPE_DEF]: 2 },
-  [Item.CHOICE_SPECS]: { [Stat.AP]: 100 },
-  [Item.SOUL_DEW]: { [Stat.AP]: 10, [Stat.PP]: 15 },
-  [Item.UPGRADE]: { [Stat.AP]: 10, [Stat.ATK_SPEED]: 10 },
-  [Item.REAPER_CLOTH]: { [Stat.AP]: 10, [Stat.CRIT_CHANCE]: 20 },
-  [Item.POKEMONOMICON]: { [Stat.AP]: 10, [Stat.SHIELD]: 15 },
-  [Item.POWER_LENS]: { [Stat.AP]: 10, [Stat.SPE_DEF]: 5 },
-  [Item.SHELL_BELL]: { [Stat.AP]: 10, [Stat.ATK]: 3 },
-  [Item.LUCKY_EGG]: { [Stat.AP]: 60, [Stat.DEF]: 6, [Stat.LUCK]: 50 },
-  [Item.AQUA_EGG]: { [Stat.PP]: 50 },
-  [Item.BLUE_ORB]: { [Stat.PP]: 15, [Stat.ATK_SPEED]: 10 },
-  [Item.SCOPE_LENS]: { [Stat.PP]: 15, [Stat.CRIT_CHANCE]: 25 },
-  [Item.STAR_DUST]: { [Stat.PP]: 15, [Stat.SHIELD]: 15 },
-  [Item.GREEN_ORB]: { [Stat.PP]: 15, [Stat.SPE_DEF]: 2 },
-  [Item.MANA_SCARF]: { [Stat.PP]: 15, [Stat.ATK]: 3 },
-  [Item.SMOKE_BALL]: { [Stat.PP]: 15, [Stat.DEF]: 2 },
-  [Item.XRAY_VISION]: { [Stat.ATK_SPEED]: 50 },
-  [Item.RAZOR_FANG]: {
-    [Stat.ATK_SPEED]: 10,
-    [Stat.CRIT_CHANCE]: 10,
-    [Stat.CRIT_POWER]: 100
-  },
-  [Item.GRACIDEA_FLOWER]: { [Stat.ATK_SPEED]: 10, [Stat.SHIELD]: 15 },
-  [Item.CHOICE_SCARF]: { [Stat.ATK_SPEED]: 10, [Stat.SPE_DEF]: 2 },
-  [Item.PUNCHING_GLOVE]: { [Stat.ATK_SPEED]: 10, [Stat.ATK]: 3 },
-  [Item.DEFENSIVE_RIBBON]: { [Stat.ATK_SPEED]: 10, [Stat.DEF]: 2 },
-  [Item.WONDER_BOX]: { [Stat.CRIT_CHANCE]: 10 },
-  [Item.CLEANSE_TAG]: { [Stat.CRIT_CHANCE]: 10, [Stat.SHIELD]: 15 },
-  [Item.WIDE_LENS]: { [Stat.CRIT_CHANCE]: 10, [Stat.SPE_DEF]: 2 },
-  [Item.RAZOR_CLAW]: { [Stat.CRIT_CHANCE]: 50, [Stat.ATK]: 3 },
-  [Item.FLUFFY_TAIL]: { [Stat.CRIT_CHANCE]: 10, [Stat.DEF]: 2 },
-  [Item.KINGS_ROCK]: { [Stat.SHIELD]: 100 },
-  [Item.SHINY_CHARM]: { [Stat.SHIELD]: 15, [Stat.SPE_DEF]: 2 },
-  [Item.PROTECTIVE_PADS]: { [Stat.SHIELD]: 60, [Stat.ATK]: 6 },
-  [Item.MAX_REVIVE]: { [Stat.SHIELD]: 15, [Stat.DEF]: 2 },
-  [Item.ASSAULT_VEST]: { [Stat.SPE_DEF]: 20 },
-  [Item.AMULET_COIN]: {},
-  [Item.POKE_DOLL]: { [Stat.SPE_DEF]: 2, [Stat.DEF]: 2 },
-  [Item.RED_ORB]: { [Stat.ATK]: 10 },
-  [Item.FLAME_ORB]: { [Stat.ATK]: 5, [Stat.DEF]: 2 },
-  [Item.ROCKY_HELMET]: { [Stat.DEF]: 12 },
-  [Item.AGUAV_BERRY]: {},
-  [Item.APICOT_BERRY]: {},
-  [Item.ASPEAR_BERRY]: {},
-  [Item.BABIRI_BERRY]: {},
-  [Item.CHERI_BERRY]: {},
-  [Item.CHESTO_BERRY]: {},
-  [Item.GANLON_BERRY]: {},
-  [Item.JABOCA_BERRY]: {},
-  [Item.LANSAT_BERRY]: {},
-  [Item.LEPPA_BERRY]: {},
-  [Item.LIECHI_BERRY]: {},
-  [Item.LUM_BERRY]: {},
-  [Item.ORAN_BERRY]: {},
-  [Item.PECHA_BERRY]: {},
-  [Item.PERSIM_BERRY]: {},
-  [Item.PETAYA_BERRY]: {},
-  [Item.RAWST_BERRY]: {},
-  [Item.ROWAP_BERRY]: {},
-  [Item.SALAC_BERRY]: {},
-  [Item.SITRUS_BERRY]: {},
-  [Item.COMFEY]: {},
-  [Item.ELECTIRIZER]: { [Stat.ATK_SPEED]: 30 },
-  [Item.MAGMARIZER]: { [Stat.ATK]: 5 },
-  [Item.MACHO_BRACE]: { [Stat.ATK]: 15, [Stat.ATK_SPEED]: -15 },
-  [Item.LIGHT_BALL]: { [Stat.AP]: 75 },
-  [Item.TOXIC_ORB]: { [Stat.SHIELD]: 15, [Stat.SPE_DEF]: 2 },
-  [Item.METRONOME]: { [Stat.PP]: 5 },
-  [Item.METAL_COAT]: { [Stat.DEF]: 5, [Stat.SPE_DEF]: 5 },
-  [Item.SWIFT_WING]: { [Stat.ATK_SPEED]: 25 },
-  [Item.HARD_STONE]: { [Stat.SHIELD]: 100 },
-  [Item.BIG_NUGGET]: {
-    [Stat.DEF]: 5,
-    [Stat.SPE_DEF]: 5
-  },
-  [Item.INCENSE]: { [Stat.SPE_DEF]: 5, [Stat.AP]: 30 },
-  [Item.EXP_SHARE]: {},
-  [Item.METEORITE]: {},
-  [Item.ZYGARDE_CUBE]: {},
-  [Item.BERRY_JUICE]: {},
-  [Item.TRASH]: {},
-  [Item.DYNAMAX_BAND]: {},
-  [Item.SHINY_STONE]: {},
-  [Item.OLD_ROD]: {},
-  [Item.GOOD_ROD]: {},
-  [Item.SUPER_ROD]: {},
-  [Item.RARE_CANDY]: {},
-  [Item.EVIOLITE]: {
-    [Stat.HP]: 100,
-    [Stat.ATK]: 10,
-    [Stat.AP]: 50,
-    [Stat.DEF]: 5,
-    [Stat.SPE_DEF]: 5
-  },
-  [Item.GOLD_BOTTLE_CAP]: {
-    [Stat.LUCK]: 50
-  },
-  [Item.SACRED_ASH]: {},
-  [Item.COMET_SHARD]: { [Stat.ATK]: 12 },
-  [Item.ABSORB_BULB]: { [Stat.DEF]: 8, [Stat.SPE_DEF]: 8 },
-  [Item.WHITE_FLUTE]: {},
-  [Item.REPEAT_BALL]: {},
-  [Item.DAMP_ROCK]: {},
-  [Item.ICY_ROCK]: {},
-  [Item.HEAT_ROCK]: {},
-  [Item.SMOOTH_ROCK]: {},
-  [Item.BLACK_AUGURITE]: {},
-  [Item.MIST_STONE]: {},
-  [Item.ELECTRIC_QUARTZ]: {},
-  [Item.BLOOD_STONE]: {},
-  [Item.FLOAT_STONE]: {},
-  [Item.SMELLY_CLAY]: {},
-  [Item.POKERUS_VIAL]: {},
-  [Item.ROTOM_PHONE]: {},
-  [Item.SILK_SCARF]: {},
-  [Item.TINY_MUSHROOM]: {},
-  [Item.FIRE_SHARD]: {},
-  [Item.TEAL_MASK]: { [Stat.SHIELD]: 50 },
-  [Item.WELLSPRING_MASK]: { [Stat.SHIELD]: 50 },
-  [Item.CORNERSTONE_MASK]: { [Stat.SHIELD]: 50 },
-  [Item.HEARTHFLAME_MASK]: { [Stat.SHIELD]: 50 },
-  [Item.TM_BIDE]: {},
-  [Item.TM_BRICK_BREAK]: {},
-  [Item.TM_BULK_UP]: {},
-  [Item.TM_PAYDAY]: {},
-  [Item.TM_PSYCH_UP]: {},
-  [Item.TM_RAGE]: {},
-  [Item.TM_RETALIATE]: {},
-  [Item.TM_TAUNT]: {},
-  [Item.HM_CUT]: {},
-  [Item.HM_FLY]: {},
-  [Item.HM_FLASH]: {},
-  [Item.HM_ROCK_SMASH]: {},
-  [Item.HM_STRENGTH]: {},
-  [Item.HM_SURF]: {},
-  [Item.HM_WATERFALL]: {},
-  [Item.HM_WHIRLPOOL]: {}
 }
 
 export type TilesetExchangeFile = {

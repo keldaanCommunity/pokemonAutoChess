@@ -400,35 +400,49 @@ export default class Board {
   ):
     | { x: number; y: number; distance: number; target: PokemonEntity }
     | undefined {
-    const candidateCells = new Array<{
-      distance: number
-      target: PokemonEntity
-      x: number
-      y: number
-    }>()
+    let maxTargetDistance = 0
+    let maxCellDistance = 0
+    let selectedCell:
+      | { x: number; y: number; distance: number; target: PokemonEntity }
+      | undefined
 
-    this.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value && value.isTargettableBy(pokemon, !targetAlly, targetAlly)) {
-        candidateCells.push(
-          ...this.getAdjacentCells(x, y)
-            .filter((cell) => this.getValue(cell.x, cell.y) === undefined)
-            .map((cell) => ({
-              x: cell.x,
-              y: cell.y,
-              distance: distanceM(
-                pokemon.positionX,
-                pokemon.positionY,
-                cell.x,
-                cell.y
-              ),
-              target: value
-            }))
+    this.forEach((x: number, y: number, entity: PokemonEntity | undefined) => {
+      if (entity && entity.isTargettableBy(pokemon, !targetAlly, targetAlly)) {
+        const targetDistance = distanceM(
+          pokemon.positionX,
+          pokemon.positionY,
+          entity.positionX,
+          entity.positionY
         )
+        if (targetDistance > maxTargetDistance) {
+          maxCellDistance = 0
+          const freeCells = this.getAdjacentCells(x, y).filter(
+            (cell) => this.getValue(cell.x, cell.y) === undefined
+          )
+          for (const cell of freeCells) {
+            const cellDistance = distanceM(
+              pokemon.positionX,
+              pokemon.positionY,
+              cell.x,
+              cell.y
+            )
+            if (cellDistance > maxCellDistance) {
+              maxCellDistance = cellDistance
+              selectedCell = {
+                x: cell.x,
+                y: cell.y,
+                distance: cellDistance,
+                target: entity
+              }
+            }
+          }
+          if (selectedCell?.target === entity){
+            maxTargetDistance = targetDistance
+          }
+        }
       }
     })
-
-    candidateCells.sort((a, b) => b.distance - a.distance)
-    return candidateCells[0]
+    return selectedCell
   }
 
   addBoardEffect(

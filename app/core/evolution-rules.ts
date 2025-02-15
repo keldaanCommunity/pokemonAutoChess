@@ -5,7 +5,7 @@ import { IPlayer } from "../types"
 import { EvolutionTime } from "../types/Config"
 import { Ability } from "../types/enum/Ability"
 import { PokemonActionState } from "../types/enum/Game"
-import { ItemComponents, Item, ShinyItems } from "../types/enum/Item"
+import { Item, ItemComponents, ShinyItems } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
 import { sum } from "../utils/array"
@@ -201,7 +201,9 @@ export class ItemEvolutionRule extends EvolutionRule {
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
     if (pokemon.items.has(Item.EVIOLITE)) return false
-    const itemEvolution = values(pokemon.items).find((item) =>
+    const items = values(pokemon.items)
+    pokemon.meal !== "" && items.push(pokemon.meal)
+    const itemEvolution = items.find((item) =>
       this.itemsTriggeringEvolution.includes(item)
     )
 

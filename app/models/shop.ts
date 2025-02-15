@@ -5,14 +5,14 @@ import {
   DITTO_RATE,
   FishRarityProbability,
   KECLEON_RATE,
-  LegendaryShop,
+  LegendaryPool,
   NB_UNIQUE_PROPOSITIONS,
   PoolSize,
   PortalCarouselStages,
   RarityCost,
   RarityProbabilityPerLevel,
   SHOP_SIZE,
-  UniqueShop
+  UniquePool
 } from "../types/Config"
 import { Ability } from "../types/enum/Ability"
 import { Effect } from "../types/enum/Effect"
@@ -40,6 +40,7 @@ import {
 } from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
+import { PokemonClasses } from "./colyseus-models/pokemon"
 import PokemonFactory from "./pokemon-factory"
 import { getPokemonData } from "./precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed/precomputed-rarity"
@@ -150,7 +151,9 @@ export function getBuyPrice(
   return price
 }
 
-const CommonShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.COMMON)
+const CommonShop = getRegularsTier1(
+  PRECOMPUTED_POKEMONS_PER_RARITY.COMMON
+).concat(Pkm.APPLIN)
 const UncommonShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.UNCOMMON)
 const RareShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.RARE)
 const EpicShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.EPIC)
@@ -310,9 +313,9 @@ export default class Shop {
     synergies: Synergy[]
   ) {
     const allCandidates =
-      stageLevel === PortalCarouselStages[0]
-        ? [...UniqueShop]
-        : [...LegendaryShop]
+      stageLevel === PortalCarouselStages[1]
+        ? [...UniquePool]
+        : [...LegendaryPool]
 
     // ensure we have at least one synergy per proposition
     if (synergies.length > NB_UNIQUE_PROPOSITIONS) {
@@ -345,14 +348,21 @@ export default class Shop {
 
       if (candidates.length === 0) candidates = allCandidates
       let selected = pickRandomIn(candidates)
+      if (selected in PkmRegionalVariants) {
+        const regionalVariants = PkmRegionalVariants[selected]!.filter((p) =>
+          new PokemonClasses[p]().isInRegion(player.map)
+        )
+        if (regionalVariants.length > 0)
+          selected = pickRandomIn(regionalVariants)
+      }
       if (
-        stageLevel === PortalCarouselStages[0] &&
+        stageLevel === PortalCarouselStages[1] &&
         player.pokemonsProposition.includes(Pkm.KECLEON) === false &&
         chance(KECLEON_RATE)
       ) {
         selected = Pkm.KECLEON
       } else if (
-        stageLevel === PortalCarouselStages[1] &&
+        stageLevel === PortalCarouselStages[2] &&
         player.pokemonsProposition.includes(Pkm.ARCEUS) === false &&
         chance(ARCEUS_RATE)
       ) {
@@ -447,11 +457,13 @@ export default class Shop {
 
     let specificTypesWanted: Synergy[] | undefined = undefined
 
-    const incenseHolder = values(player.board).find((p) =>
-      p.items.has(Item.INCENSE)
+    const attractors = values(player.board).filter(
+      (p) => p.items.has(Item.INCENSE) || p.meal === Item.HONEY
     )
-    if (incenseHolder && chance(5 / 100, incenseHolder)) {
-      specificTypesWanted = values(incenseHolder.types)
+    const attractor = attractors.find((p) => chance(5 / 100, p))
+
+    if (attractor) {
+      specificTypesWanted = values(attractor.types)
     } else if (wildChance > 0 && chance(wildChance)) {
       specificTypesWanted = [Synergy.WILD]
     }
@@ -485,7 +497,7 @@ export default class Shop {
     const totalRerolls = player.rerollCount + state.stageLevel
     if (shopIndex >= 0 && shopIndex < repeatBallHolders.length) {
       if (totalRerolls >= 140 && totalRerolls % 10 === 0) {
-        let legendaryCandidates: Pkm[] = LegendaryShop.filter<Pkm>(
+        let legendaryCandidates: Pkm[] = LegendaryPool.filter<Pkm>(
           (p): p is Pkm => !(p in PkmDuos)
         )
         shuffleArray(legendaryCandidates)
@@ -498,7 +510,7 @@ export default class Shop {
         if (legendaryCandidates.length > 0)
           return pickRandomIn(legendaryCandidates)
       } else if (totalRerolls >= 100 && totalRerolls % 10 === 0) {
-        let uniqueCandidates: Pkm[] = UniqueShop.filter<Pkm>(
+        let uniqueCandidates: Pkm[] = UniquePool.filter<Pkm>(
           (p): p is Pkm => !(p in PkmDuos)
         )
         shuffleArray(uniqueCandidates)

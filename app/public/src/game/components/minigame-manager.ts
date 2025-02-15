@@ -106,12 +106,6 @@ export default class MinigameManager {
     })
   }
 
-  buildPortals(portals: Map<string, IPortal>) {
-    portals.forEach((portal) => {
-      this.addPortal(portal)
-    })
-  }
-
   getVector(x: number, y: number) {
     const avatar = this.pokemons.get(this.uid)
     if (avatar) {

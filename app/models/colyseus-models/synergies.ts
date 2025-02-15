@@ -23,6 +23,11 @@ export default class Synergies
     })
   }
 
+  getSynergyStep(type: Synergy): number {
+    return SynergyTriggers[type].filter((n) => (this.get(type) ?? 0) >= n)
+      .length
+  }
+
   countActiveSynergies() {
     let count = 0
     this.forEach((value, key) => {
@@ -31,10 +36,6 @@ export default class Synergies
       }
     })
     return count
-  }
-
-  isActiveSynergy(syn: Synergy, lvl: number) {
-    return lvl >= SynergyTriggers[syn][0]
   }
 
   getTopSynergies(): Synergy[] {
@@ -48,6 +49,14 @@ export default class Synergies
       .filter(([s, v]) => v >= topSynergyCount)
       .map(([s, v]) => s)
     return topSynergies
+  }
+
+  toMap() {
+    const map = new Map<Synergy, number>()
+    this.forEach((value, key) => {
+      map.set(key, value)
+    })
+    return map
   }
 }
 

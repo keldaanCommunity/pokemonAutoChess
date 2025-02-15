@@ -239,6 +239,24 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
+    case Ability.SALT_CURE:
+      addAbilitySprite(Ability.MAGIC_POWDER, coordinates, true)
+        .setScale(2)
+        .setTint(0xb0ff80)
+      break
+
+    case Ability.SPICY_EXTRACT:
+      addAbilitySprite(Ability.MAGIC_POWDER, coordinates, true)
+        .setScale(3)
+        .setTint(0xff9000)
+      break
+
+    case Ability.SWEET_SCENT:
+      addAbilitySprite(Ability.MAGIC_POWDER, coordinates, true)
+        .setScale(3)
+        .setTint(0xffc0c0)
+      break
+
     case Ability.RAZOR_WIND:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
@@ -488,6 +506,20 @@ export function displayAbility(
         )
       break
 
+    case Ability.SWALLOW:
+      addAbilitySprite(Ability.HYDRO_PUMP, coordinates, true)
+        .setScale(2)
+        .setTint(0x60ff60)
+        .setOrigin(0.5, 1)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) +
+            Math.PI / 2
+        )
+      break
+
     case Ability.DRACO_METEOR:
       addAbilitySprite(skill, coordinatesTarget, true)
         .setOrigin(0.5, 0.9)
@@ -540,6 +572,10 @@ export function displayAbility(
       break
 
     case Ability.DEFENSE_CURL:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
+    case Ability.RECOVER:
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
@@ -1137,6 +1173,103 @@ export function displayAbility(
       break
     }
 
+    case Ability.GRAV_APPLE: {
+      const aboveTargetCoordinates = transformAttackCoordinate(
+        targetX,
+        targetY,
+        flip
+      )
+      aboveTargetCoordinates[1] -= 400
+      const apple = addAbilitySprite(
+        "NUTRIENTS",
+        aboveTargetCoordinates
+      ).setScale(3)
+      scene.tweens.add({
+        targets: apple,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 400,
+        onComplete: () => {
+          apple.destroy()
+          addAbilitySprite("PUFF_RED", coordinatesTarget, true).setScale(2)
+        }
+      })
+      break
+    }
+
+    case Ability.NUTRIENTS: {
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(3)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 400,
+        onComplete: () => {
+          specialProjectile.destroy()
+          addAbilitySprite("PUFF_GREEN", coordinatesTarget, true).setScale(2)
+        }
+      })
+      break
+    }
+
+    case Ability.SYRUP_BOMB: {
+      const specialProjectile = addAbilitySprite(
+        "NUTRIENTS",
+        coordinates
+      ).setScale(3)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 400,
+        onComplete: () => {
+          specialProjectile.destroy()
+          addAbilitySprite("PUFF_RED", coordinatesTarget, true).setScale(2)
+        }
+      })
+      break
+    }
+
+    case Ability.APPLE_ACID: {
+      const specialProjectile = addAbilitySprite(
+        "NUTRIENTS",
+        coordinates
+      ).setScale(3)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 400,
+        onComplete: () => {
+          specialProjectile.destroy()
+          addAbilitySprite("PUFF_RED", coordinatesTarget, true).setScale(2)
+        }
+      })
+      break
+    }
+
+    case Ability.FICKLE_BEAM: {
+      const specialProjectile = addAbilitySprite(
+        Ability.FICKLE_BEAM,
+        coordinates
+      ).setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 400,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.POLLEN_PUFF: {
       const specialProjectile = addAbilitySprite(
         Ability.HEAL_ORDER,
@@ -1289,10 +1422,6 @@ export function displayAbility(
       addAbilitySprite(Ability.STEAM_ERUPTION, coordinates, true)
         .setDepth(0)
         .setScale(3, 3)
-      break
-
-    case Ability.APPLE_ACID:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
     case Ability.POWER_HUG:
