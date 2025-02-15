@@ -1709,7 +1709,7 @@
     "TAIL_WHIP": "Reduce the target's DEF by [30,SP]%.",
     "PSYSHIELD_BASH": "Dash into the enemy back line, dealing [60,SP] SPECIAL to all enemy Pokémon in the path and PROTECT the user for 1 second.",
     "QUIVER_DANCE": "Gain [5,SP] ATK, [5,SP] SPE_DEF, [10,SP]% ATK_SPEED and 20 AP.",
-    "TORCH_SONG": "Blow out raging flames to the [1,2,3] strongest opponents. Each flame scorches its target and adjacent enemy Pokémon for [10,20,30,SP] SPECIAL. Gain 10 AP for each enemy Pokémon hit suffering from BURN, CURSE or SILENCE.",
+    "TORCH_SONG": "Blow out [4,SP] raging flames to random opponents. Each flame deals 50% of ATK as SPECIAL, with [30,LK]% chance to BURN for 2 seconds, and buff the user AP by [1,2,3].",
     "POWER_WHIP": "Unleash a giant vine toward the farthest enemy Pokémon, dealing [30,60,SP] SPECIAL to any enemy Pokémon in the path.",
     "DARK_HARVEST": "Teleport into the largest group of enemy Pokémon. Inflict the user with SILENCE for 3 seconds and drain the HP of adjacent enemy Pokémon, dealing [5,10,20,SP] SPECIAL per second and heal for 30% of the damage dealt.",
     "PSYSHOCK": "Burn [20,40,80,SP] PP from the target and gain SHIELD for the same amount. Excess damage is dealt as SPECIAL.",

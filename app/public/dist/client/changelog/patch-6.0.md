@@ -32,6 +32,7 @@
 - Miltank is now Normal/Gourmet/Field
 - Spinda is now Normal/Gourmet
 - Guzzlord is now Gourmet/Dark/Monster and has a new passive
+- Rework Fuecoco line: now 3-range with nerfed defense/special defense, ability Torch Song reworked
 
 # Changes to Synergies
 
