@@ -21,7 +21,7 @@ import {
   Role,
   Transfer
 } from "../../../types"
-import { MinStageLevelForGameToCount } from "../../../types/Config"
+import { MinStageLevelForGameToCount, PortalCarouselStages } from "../../../types/Config"
 import { DungeonDetails } from "../../../types/enum/Dungeon"
 import { Team } from "../../../types/enum/Game"
 import { Pkm } from "../../../types/enum/Pokemon"
@@ -79,6 +79,7 @@ import { playMusic, preloadMusic } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import { FIREBASE_CONFIG } from "./utils/utils"
 import { Passive } from "../../../types/enum/Passive"
+import { Item } from "../../../types/enum/Item"
 
 let gameContainer: GameContainer
 
@@ -255,12 +256,14 @@ export default function Game() {
       elligibleToXP &&
       !room?.state.noElo &&
       afterPlayers.filter((p) => p.role !== Role.BOT).length >= 2
+    const gameMode = room?.state.gameMode
 
     const r: Room<AfterGameState> = await client.create("after-game", {
       players: afterPlayers,
       idToken: token,
       elligibleToXP,
-      elligibleToELO
+      elligibleToELO,
+      gameMode
     })
     localStore.set(
       LocalStoreKeys.RECONNECTION_AFTER_GAME,
@@ -354,8 +357,11 @@ export default function Game() {
           gameScene.load.reset()
           await gameScene.preloadMaps(maps)
           gameScene.load.once("complete", () => {
-            const gc = getGameContainer()
-            gc && gc.player && gameScene.setMap(gc.player.map)
+            if (!PortalCarouselStages.includes(room.state.stageLevel)) {
+              // map loaded after the end of the portal carousel stage, we swap it now. better later than never
+              const gc = getGameContainer()
+              gc && gc.player && gameScene.setMap(gc.player.map)
+            }
           })
           gameScene.load.start()
         }
@@ -372,6 +378,15 @@ export default function Game() {
 
         if (g && g.board) {
           g.board.showEmote(message.id, message?.emote)
+        }
+      })
+      room.onMessage(Transfer.COOK, async (message: { pokemonId: string, dishes: Item[] }) => {
+        const g = getGameScene()
+        if (g && g.board) {
+          const pokemon = g.board.pokemons.get(message.pokemonId)
+          if (pokemon) {
+            pokemon.cookAnimation(message.dishes)
+          }
         }
       })
 
@@ -498,7 +513,7 @@ export default function Game() {
       })
 
       room.state.additionalPokemons.onAdd(() => {
-        dispatch(setAdditionalPokemons([...room.state.additionalPokemons]))
+        dispatch(setAdditionalPokemons(room.state.additionalPokemons.slice()))
       })
 
       room.state.simulations.onRemove(() => {

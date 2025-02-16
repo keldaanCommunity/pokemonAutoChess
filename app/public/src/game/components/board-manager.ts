@@ -31,7 +31,7 @@ import { displayBoost } from "./boosts-animations"
 export enum BoardMode {
   PICK = "pick",
   BATTLE = "battle",
-  MINIGAME = "minigame"
+  TOWN = "town"
 }
 
 export default class BoardManager {
@@ -82,7 +82,7 @@ export default class BoardManager {
 
     if (state.phase == GamePhaseState.FIGHT) {
       this.battleMode()
-    } else if (state.phase === GamePhaseState.MINIGAME) {
+    } else if (state.phase === GamePhaseState.TOWN) {
       this.minigameMode()
     } else {
       this.pickMode()
@@ -194,7 +194,7 @@ export default class BoardManager {
   }
 
   renderBoard() {
-    this.showBerryTree()
+    this.showBerryTrees()
     this.pokemons.forEach((p) => p.destroy())
     this.pokemons.clear()
     if (this.mode === BoardMode.PICK) {
@@ -238,7 +238,7 @@ export default class BoardManager {
     this.lightCell = null
   }
 
-  showBerryTree() {
+  showBerryTrees() {
     this.berryTrees.forEach((tree) => tree.destroy())
     this.berryTrees = []
     const grassLevel = this.player.synergies.get(Synergy.GRASS) ?? 0
@@ -283,6 +283,10 @@ export default class BoardManager {
 
       this.berryTrees.push(tree)
     }
+  }
+
+  hideBerryTrees() {
+    this.berryTrees.forEach((tree) => tree.destroy())
   }
 
   displayText(x: number, y: number, label: string) {
@@ -416,7 +420,7 @@ export default class BoardManager {
       if (
         !spectatedPlayer ||
         spectatedPlayer.id === p.id || // can't scout yourself
-        this.mode === BoardMode.MINIGAME || // no scouting during minigame
+        this.mode === BoardMode.TOWN || // no scouting in town
         p.id === this.opponentAvatar?.playerId // avatar already in opponent box
       )
         return false
@@ -525,6 +529,7 @@ export default class BoardManager {
   pickMode() {
     // logger.debug('pickMode');
     this.mode = BoardMode.PICK
+    this.scene.setMap(this.player.map)
     this.renderBoard()
     this.updatePlayerAvatar()
     this.updateOpponentAvatar(null, null)
@@ -532,8 +537,10 @@ export default class BoardManager {
   }
 
   minigameMode() {
-    this.mode = BoardMode.MINIGAME
+    this.mode = BoardMode.TOWN
+    this.scene.setMap("town")
     this.hideLightCell()
+    this.hideBerryTrees()
     this.pokemons.forEach((pokemon) => {
       if (pokemon.positionY != 0) {
         pokemon.setVisible(false)
@@ -649,6 +656,16 @@ export default class BoardManager {
           if (pokemonUI.skill !== value) {
             pokemonUI.skill = value as IPokemon["skill"]
             pokemonUI.evolutionAnimation()
+          }
+          break
+
+        case "types":
+          pokemonUI.types = new Set(values(value as IPokemon["types"]))
+          break
+
+        case "meal":
+          if (pokemonUI.meal !== value) {
+            pokemonUI.updateMeal(value as IPokemon["meal"])
           }
           break
       }

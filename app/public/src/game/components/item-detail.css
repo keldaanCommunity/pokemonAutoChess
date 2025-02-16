@@ -20,7 +20,6 @@
   width: 45px;
   height: 45px;
   align-self: center;
-  image-rendering: pixelated;
   object-fit: contain;
   grid-area: icon;
 }
@@ -39,7 +38,6 @@
 .game-item-recipe img {
   width: 22.5px;
   height: 22.5px;
-  image-rendering: pixelated;
   object-fit: contain;
 }
 

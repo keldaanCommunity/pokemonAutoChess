@@ -28,7 +28,7 @@ import { clearTitleNotificationIcon } from "../../../../utils/window"
 import { getGameContainer } from "../../pages/game"
 import { SOUNDS, playMusic, playSound } from "../../pages/utils/audio"
 import { transformCoordinate } from "../../pages/utils/utils"
-import { loadPreferences, preferences } from "../../preferences"
+import { preference } from "../../preferences"
 import AnimationManager from "../animation-manager"
 import BattleManager from "../components/battle-manager"
 import BoardManager from "../components/board-manager"
@@ -112,7 +112,7 @@ export default class GameScene extends Scene {
         this.spectate ? playerUids[0] : this.uid
       ) as Player
 
-      this.setMap(player.map)
+      this.setMap("town")
       this.setupMouseEvents()
       this.battleGroup = this.add.group()
       this.animationManager = new AnimationManager(this)
@@ -149,12 +149,11 @@ export default class GameScene extends Scene {
 
       this.weatherManager = new WeatherManager(this)
       this.unownManager = new UnownManager(this)
-      playSound(SOUNDS.CAROUSEL_UNLOCK) // playing a preloaded sound for players who tabbed out during loading
       playMusic(
         this,
-        DungeonDetails[player.map].music ?? DungeonMusic.RANDOM_DUNGEON_1
+        DungeonDetails[player.map].music ?? DungeonMusic.TREASURE_TOWN
       )
-      ;(this.sys as any).animatedTiles.init(this.map)
+      //;(this.sys as any).animatedTiles.init(this.map)
       clearTitleNotificationIcon()
     }
   }
@@ -165,7 +164,7 @@ export default class GameScene extends Scene {
       this.lastPokemonDetail.updateTooltipPosition()
     }
     if (
-      this.room?.state?.phase === GamePhaseState.MINIGAME &&
+      this.room?.state?.phase === GamePhaseState.TOWN &&
       this.minigameManager
     ) {
       this.minigameManager.update()
@@ -173,25 +172,25 @@ export default class GameScene extends Scene {
   }
 
   registerKeys() {
-    const preferences = loadPreferences()
+    const keybindings = preference("keybindings")
     this.input.keyboard!.removeAllListeners()
     this.input.keyboard!.on(
-      "keydown-" + preferences.keybindings.refresh,
+      "keydown-" + keybindings.refresh,
       throttle(() => {
         playSound(SOUNDS.REFRESH, 0.5)
         this.refreshShop()
       }, 300)
     )
 
-    this.input.keyboard!.on("keydown-" + preferences.keybindings.lock, () => {
+    this.input.keyboard!.on("keydown-" + keybindings.lock, () => {
       this.room?.send(Transfer.LOCK)
     })
 
-    this.input.keyboard!.on("keydown-" + preferences.keybindings.buy_xp, () => {
+    this.input.keyboard!.on("keydown-" + keybindings.buy_xp, () => {
       this.buyExperience()
     })
 
-    this.input.keyboard!.on("keydown-" + preferences.keybindings.sell, (e) => {
+    this.input.keyboard!.on("keydown-" + keybindings.sell, (e) => {
       if (this.pokemonDragged != null) return
       if (this.shopIndexHovered !== null) {
         this.removeFromShop(this.shopIndexHovered)
@@ -210,7 +209,7 @@ export default class GameScene extends Scene {
       }
     })
 
-    this.input.keyboard!.on("keydown-" + preferences.keybindings.switch, () => {
+    this.input.keyboard!.on("keydown-" + keybindings.switch, () => {
       if (this.pokemonHovered) {
         this.switchBetweenBenchAndBoard(this.pokemonHovered)
       }
@@ -249,13 +248,13 @@ export default class GameScene extends Scene {
     this.weatherManager?.clearWeather()
     this.resetDragState()
 
-    if (previousPhase === GamePhaseState.MINIGAME) {
+    if (previousPhase === GamePhaseState.TOWN) {
       this.minigameManager?.dispose()
     }
 
     if (newPhase === GamePhaseState.FIGHT) {
       this.board?.battleMode()
-    } else if (newPhase === GamePhaseState.MINIGAME) {
+    } else if (newPhase === GamePhaseState.TOWN) {
       this.board?.minigameMode()
       this.minigameManager?.initialize()
     } else {
@@ -283,7 +282,19 @@ export default class GameScene extends Scene {
     )
   }
 
-  async setMap(mapName: DungeonPMDO) {
+  async setMap(mapName: DungeonPMDO | "town") {
+    if (mapName === "town") {
+      this.map = this.add.tilemap("town")
+      const tileset = this.map.addTilesetImage("town_tileset", "town_tileset")!
+      this.map.createLayer("layer0", tileset, 0, 0)?.setScale(2, 2)
+      this.map.createLayer("layer1", tileset, 0, 0)?.setScale(2, 2)
+      const sys = this.sys as any
+      if (sys.animatedTiles) {
+        sys.animatedTiles.pause()
+      }
+      return
+    }
+
     const tilemap = this.tilemaps.get(mapName)
     if (!tilemap)
       return logger.error(`Tilemap not yet loaded for map ${mapName}`)
@@ -301,7 +312,7 @@ export default class GameScene extends Scene {
     const sys = this.sys as any
     if (sys.animatedTiles) {
       sys.animatedTiles.init(map)
-      if (preferences.disableAnimatedTilemap) {
+      if (preference("disableAnimatedTilemap")) {
         sys.animatedTiles.pause()
       }
     }
@@ -351,7 +362,7 @@ export default class GameScene extends Scene {
     this.input.on("pointerdown", (pointer) => {
       if (
         this.minigameManager &&
-        this.room?.state.phase === GamePhaseState.MINIGAME &&
+        this.room?.state.phase === GamePhaseState.TOWN &&
         !this.spectate
       ) {
         const vector = this.minigameManager.getVector(pointer.x, pointer.y)

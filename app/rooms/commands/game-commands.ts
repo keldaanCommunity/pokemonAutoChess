@@ -1,6 +1,7 @@
 import { Command } from "@colyseus/command"
 import { Client, updateLobby } from "colyseus"
 import { nanoid } from "nanoid"
+import { DishByPkm } from "../../core/dishes"
 
 import {
   ConditionBasedEvolutionRule,
@@ -35,14 +36,23 @@ import {
   PORTAL_CAROUSEL_BASE_DURATION,
   PortalCarouselStages,
   StageDuration,
-  SynergyTriggers
+  SynergyTriggers,
+  BOARD_WIDTH,
+  BOARD_SIDE_HEIGHT
 } from "../../types/Config"
+import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { Effect } from "../../types/enum/Effect"
-import { BattleResult, GamePhaseState, Team } from "../../types/enum/Game"
+import {
+  BattleResult,
+  GamePhaseState,
+  PokemonActionState,
+  Team
+} from "../../types/enum/Game"
 import {
   AbilityPerTM,
   ArtificialItems,
   Berries,
+  Dishes,
   FishingRods,
   HMs,
   Item,
@@ -74,9 +84,11 @@ import {
   isOnBench,
   isPositionEmpty
 } from "../../utils/board"
+import { distanceC } from "../../utils/distance"
 import { repeat } from "../../utils/function"
 import { logger } from "../../utils/logger"
 import { max, min } from "../../utils/number"
+import { wait } from "../../utils/promise"
 import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { getWeather } from "../../utils/weather"
@@ -232,8 +244,17 @@ export class OnDragDropCommand extends Command<
     if (player) {
       message.updateItems = false
       const pokemon = player.board.get(detail.id)
-      if (pokemon) {
-        const { x, y } = detail
+      const { x, y } = detail
+
+      if (
+        pokemon &&
+        x != null &&
+        x >= 0 &&
+        x < BOARD_WIDTH &&
+        y != null &&
+        y >= 0 &&
+        y < BOARD_SIDE_HEIGHT
+      ) {
         const dropOnBench = y == 0
         const dropFromBench = isOnBench(pokemon)
 
@@ -287,6 +308,16 @@ export class OnDragDropCommand extends Command<
             if (pokemon.canBeBenched && (!target || target.canBePlaced)) {
               // From board to bench (bench to bench is already handled)
               this.room.swap(player, pokemon, x, y)
+              pokemon.items.forEach((item) => {
+                if (
+                  item === Item.CHEF_HAT ||
+                  item === Item.TRASH ||
+                  ArtificialItems.includes(item)
+                ) {
+                  player.items.push(item)
+                  pokemon.removeItem(item)
+                }
+              })
               if (this.state.specialGameRule === SpecialGameRule.SLAMINGO) {
                 pokemon.items.forEach((item) => {
                   if (item !== Item.RARE_CANDY) {
@@ -552,6 +583,32 @@ export class OnDragDropItemCommand extends Command<
         player.life = min(1)(player.life - 3)
         removeInArray(player.items, item)
       }
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
+
+    if (Dishes.includes(item)) {
+      if (pokemon.meal === "") {
+        pokemon.meal = item
+        pokemon.action = PokemonActionState.EAT
+        removeInArray(player.items, item)
+        client.send(Transfer.DRAG_DROP_FAILED, message)
+        this.room.checkEvolutionsAfterItemAcquired(playerId, pokemon)
+        return
+      } else {
+        client.send(Transfer.DRAG_DROP_FAILED, {
+          ...message,
+          text: "belly_full",
+          pokemonId: pokemon.id
+        })
+        return
+      }
+    }
+
+    if (
+      item === Item.CHEF_HAT &&
+      pokemon.types.has(Synergy.GOURMET) === false
+    ) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
     }
@@ -864,7 +921,7 @@ export class OnUpdateCommand extends Command<
           this.state.time = 3000
           this.state.updatePhaseNeeded = true
         }
-      } else if (this.state.phase === GamePhaseState.MINIGAME) {
+      } else if (this.state.phase === GamePhaseState.TOWN) {
         this.room.miniGame.update(deltaTime)
       }
       if (this.state.updatePhaseNeeded && this.state.time < 0) {
@@ -877,8 +934,12 @@ export class OnUpdateCommand extends Command<
 export class OnUpdatePhaseCommand extends Command<GameRoom> {
   execute() {
     this.state.updatePhaseNeeded = false
-    if (this.state.phase == GamePhaseState.MINIGAME) {
+    if (this.state.phase == GamePhaseState.TOWN) {
       this.room.miniGame.stop(this.room)
+      /* Normally Stage level is bumped after a fighting phase, but since magikarp is round 1, we need to increase stage level from 0 -> 1 to avoid a PVP round 1. There is probably a better solution*/
+      if (this.state.stageLevel === 0) {
+        this.state.stageLevel = 1
+      }
       this.initializePickingPhase()
     } else if (this.state.phase == GamePhaseState.PICK) {
       this.stopPickingPhase()
@@ -891,7 +952,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           PortalCarouselStages.includes(this.state.stageLevel)) &&
         !this.state.gameFinished
       ) {
-        this.initializeMinigamePhase()
+        this.initializeTownPhase()
       } else {
         this.initializePickingPhase()
       }
@@ -1177,7 +1238,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               // If the Pokemon has a regional variant in the player's region, show that instead of the base form.
               // Base form will still be added to the pool for all players
               const regionalVariants = (PkmRegionalVariants[p] ?? []).filter(
-                (pkm) => new PokemonClasses[pkm]().isInRegion(player.map)
+                (pkm) =>
+                  new PokemonClasses[pkm]().isInRegion(
+                    player.map === "town" ? DungeonPMDO.AmpPlains : player.map
+                  )
               )
               if (regionalVariants.length > 0) {
                 player.pokemonsProposition.push(pickRandomIn(regionalVariants))
@@ -1207,12 +1271,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     const commands = new Array<Command>()
 
     this.state.players.forEach((player: Player) => {
-      const fireLevel = player.synergies.get(Synergy.FIRE) ?? 0
-      const fireSynergLevel = SynergyTriggers[Synergy.FIRE].filter(
-        (n) => n <= fireLevel
-      ).length
       if (
-        fireSynergLevel === 4 &&
+        player.synergies.getSynergyStep(Synergy.FIRE) === 4 &&
         player.items.includes(Item.FIRE_SHARD) === false &&
         player.life > 2
       ) {
@@ -1226,12 +1286,91 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         this.room.spawnOnBench(player, fish, "fishing")
       }
 
-      const grassLevel = player.synergies.get(Synergy.GRASS) ?? 0
-      const nbTrees = SynergyTriggers[Synergy.GRASS].filter(
-        (n) => n <= grassLevel
-      ).length
+      const nbTrees = player.synergies.getSynergyStep(Synergy.GRASS)
       for (let i = 0; i < nbTrees; i++) {
         player.berryTreesStage[i] = max(3)(player.berryTreesStage[i] + 1)
+      }
+
+      const chefs = values(player.board).filter((p) =>
+        p.items.has(Item.CHEF_HAT)
+      )
+      if (chefs.length > 0) {
+        const gourmetLevel = player.synergies.getSynergyStep(Synergy.GOURMET)
+        const nbDishes = [0, 1, 2, 2][gourmetLevel] ?? 2
+        for (const chef of chefs) {
+          let dish = DishByPkm[chef.name]
+          if (chef.name === Pkm.ARCEUS || chef.name === Pkm.KECLEON) {
+            dish = Item.BERRIES
+          }
+
+          if (chef.passive === Passive.GLUTTON) {
+            chef.hp += 20
+            if (chef.hp > 750) {
+              player.titles.add(Title.GLUTTON)
+            }
+          }
+
+          if (dish && nbDishes > 0) {
+            let dishes = Array.from({ length: nbDishes }, () => dish!)
+            if (dish === Item.BERRIES) {
+              dishes = pickNRandomIn(Berries, nbDishes)
+            }
+            const client = this.room.clients.find(
+              (cli) => cli.auth.uid === player.id
+            )
+            if (client) {
+              setTimeout(async () => {
+                client.send(Transfer.COOK, {
+                  pokemonId: chef.id,
+                  dishes
+                })
+                await wait(2000) // animation time, also allow to quickly switch position if needed
+                const candidates = values(player.board).filter(
+                  (p) =>
+                    p.meal === "" &&
+                    distanceC(
+                      chef.positionX,
+                      chef.positionY,
+                      p.positionX,
+                      p.positionY
+                    ) === 1
+                )
+                for (const meal of dishes) {
+                  if (
+                    [
+                      Item.TART_APPLE,
+                      Item.SWEET_APPLE,
+                      Item.SIRUPY_APPLE,
+                      ...Berries
+                    ].includes(meal)
+                  ) {
+                    player.items.push(meal)
+                  } else {
+                    const pokemon = pickRandomIn(candidates) ?? chef
+                    pokemon.meal = meal
+                    pokemon.action = PokemonActionState.EAT
+                    removeInArray(candidates, pokemon)
+                  }
+                }
+              }, 1000)
+            }
+          }
+        }
+      }
+
+      while (player.items.includes(Item.SWEET_APPLE)) {
+        player.items.splice(
+          player.items.findIndex((i) => i === Item.SWEET_APPLE),
+          1,
+          Item.SIRUPY_APPLE
+        )
+      }
+      while (player.items.includes(Item.TART_APPLE)) {
+        player.items.splice(
+          player.items.findIndex((i) => i === Item.TART_APPLE),
+          1,
+          Item.SWEET_APPLE
+        )
       }
 
       if (
@@ -1392,8 +1531,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     }
   }
 
-  initializeMinigamePhase() {
-    this.state.phase = GamePhaseState.MINIGAME
+  initializeTownPhase() {
+    this.state.phase = GamePhaseState.TOWN
     const nbPlayersAlive = values(this.state.players).filter(
       (p) => p.alive
     ).length

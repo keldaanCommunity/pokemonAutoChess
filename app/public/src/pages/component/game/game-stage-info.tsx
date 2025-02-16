@@ -9,20 +9,23 @@ import {
   ItemCarouselStages,
   PortalCarouselStages
 } from "../../../../../types/Config"
+import { DungeonDetails } from "../../../../../types/enum/Dungeon"
 import { BattleResult, GamePhaseState } from "../../../../../types/enum/Game"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { SynergyAssociatedToWeather } from "../../../../../types/enum/Weather"
+import { getAvatarSrc, getPortraitSrc } from "../../../../../utils/avatar"
 import { min } from "../../../../../utils/number"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
-import { getAvatarSrc, getPortraitSrc } from "../../../../../utils/avatar"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import SynergyIcon from "../icons/synergy-icon"
 import TimerBar from "./game-timer-bar"
-import { DungeonDetails } from "../../../../../types/enum/Dungeon"
 import "./game-stage-info.css"
+import PokemonPortrait from "../pokemon-portrait"
+import { usePreferences } from "../../../preferences"
 
 export default function GameStageInfo() {
+  const [{ antialiasing }] = usePreferences()
   const { t } = useTranslation()
   const phase = useAppSelector((state) => state.game.phase)
   const weather = useAppSelector((state) => state.game.weather)
@@ -85,7 +88,7 @@ export default function GameStageInfo() {
           })}
         >
           <div className="player-information">
-            <img src={getAvatarSrc(avatar)} className="pokemon-portrait" />
+            <PokemonPortrait avatar={avatar} />
             {title && <p className="player-title">{t(`title.${title}`)}</p>}
             <p className="player-name">{name}</p>
           </div>
@@ -93,10 +96,7 @@ export default function GameStageInfo() {
             <>
               <span>vs</span>
               <div className="player-information">
-                <img
-                  src={getAvatarSrc(opponentAvatar)}
-                  className="pokemon-portrait"
-                />
+                <PokemonPortrait avatar={opponentAvatar} />
                 {opponentTitle && (
                   <p className="player-title">{t(`title.${opponentTitle}`)}</p>
                 )}
@@ -117,9 +117,11 @@ export default function GameStageInfo() {
                 place="bottom"
               >
                 <div style={{ display: "flex", alignContent: "center" }}>
-                  {DungeonDetails[currentPlayer.map].synergies.map((synergy) => (
-                    <SynergyIcon type={synergy} key={"map_type_" + synergy} />
-                  ))}
+                  {DungeonDetails[currentPlayer.map].synergies.map(
+                    (synergy) => (
+                      <SynergyIcon type={synergy} key={"map_type_" + synergy} />
+                    )
+                  )}
                   <p>{t(`map.${currentPlayer.map}`)}</p>
                 </div>
               </Tooltip>,
@@ -192,7 +194,7 @@ export function StagePath() {
         icon: "/assets/ui/carousel.svg",
         title: t("carousel")
       })
-      if (level === stageLevel && phase === GamePhaseState.MINIGAME) {
+      if (level === stageLevel && phase === GamePhaseState.TOWN) {
         currentLevelPathIndex = path.length - 1
       }
     }

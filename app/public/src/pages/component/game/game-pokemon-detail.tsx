@@ -2,6 +2,7 @@ import React, { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../../../../models/pokemon-factory"
+import { DishByPkm } from "../../../../../core/dishes"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Emotion } from "../../../../../types"
 import { RarityColor } from "../../../../../types/Config"
@@ -14,12 +15,16 @@ import { addIconsToDescription } from "../../utils/descriptions"
 import { AbilityTooltip } from "../ability/ability-tooltip"
 import SynergyIcon from "../icons/synergy-icon"
 import "./game-pokemon-detail.css"
+import { Synergy } from "../../../../../types/enum/Synergy"
+import { cc } from "../../utils/jsx"
+import { usePreference } from "../../../preferences"
 
 export function GamePokemonDetail(props: {
   pokemon: Pkm | Pokemon
   shiny?: boolean
   emotion?: Emotion
 }) {
+  const [antialiasing] = usePreference("antialiasing")
   const { t } = useTranslation()
   const pokemon: Pokemon = useMemo(
     () =>
@@ -51,7 +56,9 @@ export function GamePokemonDetail(props: {
   return (
     <div className="game-pokemon-detail in-shop">
       <img
-        className="game-pokemon-detail-portrait"
+        className={cc("game-pokemon-detail-portrait", {
+          pixelated: !antialiasing
+        })}
         style={{ borderColor: RarityColor[pokemon.rarity] }}
         src={getPortraitSrc(
           pokemon.index,
@@ -100,6 +107,23 @@ export function GamePokemonDetail(props: {
           </div>
         ))}
       </div>
+
+      {DishByPkm[pokemon.name] && (
+        <div className="game-pokemon-detail-dish">
+          <div className="game-pokemon-detail-dish-name">
+            <img src="assets/ui/dish.svg" /><i>{t("signature_dish")}:</i> {t(`item.${DishByPkm[pokemon.name]}`)}
+          </div>
+          <img
+            src={`assets/item/${DishByPkm[pokemon.name]}.png`}
+            className="game-pokemon-detail-dish-icon"
+            alt={DishByPkm[pokemon.name]}
+            title={t(`item.${DishByPkm[pokemon.name]}`)}
+          />
+          <p>
+            {addIconsToDescription(t(`item_description.${DishByPkm[pokemon.name]}`))}
+          </p>
+        </div>
+      )}
 
       {pokemon.passive !== Passive.NONE && (
         <div className="game-pokemon-detail-passive">

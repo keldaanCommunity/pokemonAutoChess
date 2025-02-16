@@ -26,6 +26,7 @@ import {
   SpriteType,
   type Team
 } from "../../../../types/enum/Game"
+import { Item } from "../../../../types/enum/Item"
 import type { Passive } from "../../../../types/enum/Passive"
 import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
 import type { Synergy } from "../../../../types/enum/Synergy"
@@ -33,7 +34,7 @@ import { clamp, min } from "../../../../utils/number"
 import { chance } from "../../../../utils/random"
 import { values } from "../../../../utils/schemas"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
-import { preferences } from "../../preferences"
+import { preference } from "../../preferences"
 import type { DebugScene } from "../scenes/debug-scene"
 import type GameScene from "../scenes/game-scene"
 import { displayAbility } from "./abilities-animations"
@@ -122,6 +123,8 @@ export default class PokemonSprite extends DraggableObject {
   flip: boolean
   animationLocked: boolean /* will prevent another anim to play before current one is completed */ = false
   skydiving: boolean = false
+  meal: Item | "" = ""
+  mealSprite: GameObjects.Sprite | undefined
 
   constructor(
     scene: GameScene | DebugScene,
@@ -245,6 +248,10 @@ export default class PokemonSprite extends DraggableObject {
       this.setLifeBar(p, scene)
       if (pokemon.maxPP > 0) this.setPowerBar(p, scene)
       //this.setEffects(p, scene);
+    } else {
+      if (pokemon.meal !== "") {
+        this.updateMeal(pokemon.meal)
+      }
     }
 
     this.draggable = playerId === scene.uid && !inBattle
@@ -255,11 +262,9 @@ export default class PokemonSprite extends DraggableObject {
       this.shield = p.shield
       this.life = p.life
       this.critPower = p.critPower
-      this.ap = p.ap
       this.critChance = p.critChance
     } else {
       this.critPower = DEFAULT_CRIT_POWER
-      this.ap = 0
       this.critChance = DEFAULT_CRIT_CHANCE
     }
     this.setDepth(5)
@@ -274,7 +279,7 @@ export default class PokemonSprite extends DraggableObject {
 
   updateTooltipPosition() {
     if (this.detail) {
-      if (this.input && preferences.showDetailsOnHover) {
+      if (this.input && preference("showDetailsOnHover")) {
         this.detail.setPosition(
           this.input.localX + 200,
           min(0)(this.input.localY - 175)
@@ -352,11 +357,14 @@ export default class PokemonSprite extends DraggableObject {
     s.lastPokemonDetail = this
   }
 
-  onPointerDown(pointer: Phaser.Input.Pointer) {
-    super.onPointerDown(pointer)
+  onPointerDown(
+    pointer: Phaser.Input.Pointer,
+    event: Phaser.Types.Input.EventData
+  ) {
+    super.onPointerDown(pointer, event)
     if (
       this.shouldShowTooltip &&
-      !preferences.showDetailsOnHover &&
+      !preference("showDetailsOnHover") &&
       pointer.rightButtonDown() &&
       this.scene &&
       !this.detail
@@ -371,7 +379,7 @@ export default class PokemonSprite extends DraggableObject {
     super.onPointerUp()
     if (
       this.shouldShowTooltip &&
-      preferences.showDetailsOnHover &&
+      preference("showDetailsOnHover") &&
       !this.detail
     ) {
       this.openDetail()
@@ -380,7 +388,7 @@ export default class PokemonSprite extends DraggableObject {
 
   onPointerOut(): void {
     super.onPointerOut()
-    if (this.shouldShowTooltip && preferences.showDetailsOnHover) {
+    if (this.shouldShowTooltip && preference("showDetailsOnHover")) {
       this.closeDetail()
     }
   }
@@ -389,7 +397,7 @@ export default class PokemonSprite extends DraggableObject {
     super.onPointerOver(pointer)
 
     if (
-      preferences.showDetailsOnHover &&
+      preference("showDetailsOnHover") &&
       this.shouldShowTooltip &&
       this.detail == null &&
       !pointer.leftButtonDown() // we're dragging another pokemon
@@ -558,6 +566,46 @@ export default class PokemonSprite extends DraggableObject {
       this.flip,
       false
     )
+  }
+
+  cookAnimation(dishes: Item[]) {
+    this.emoteAnimation()
+    dishes.forEach((item, i) => {
+      const itemSprite = this.scene.add.sprite(
+        this.x,
+        this.y,
+        "item",
+        item + ".png"
+      )
+      itemSprite.setScale(0.5)
+      const shinyEffect = this.scene.add.sprite(this.x, this.y, "shine")
+      shinyEffect.setScale(2)
+      shinyEffect.play("shine")
+      this.scene.tweens.add({
+        targets: [itemSprite, shinyEffect],
+        ease: Phaser.Math.Easing.Quadratic.Out,
+        duration: 1000,
+        y: this.y - 70,
+        x: this.x + (i - (dishes.length - 1) / 2) * 70,
+        onComplete: () => {
+          setTimeout(() => {
+            itemSprite.destroy()
+            shinyEffect.destroy()
+          }, 1000)
+        }
+      })
+    })
+  }
+
+  updateMeal(meal: Item | "") {
+    this.meal = meal
+    this.mealSprite?.destroy()
+    if (meal) {
+      this.mealSprite = this.scene.add
+        .sprite(0, 20, "item", meal + ".png")
+        .setScale(0.25)
+      this.add(this.mealSprite)
+    }
   }
 
   specialAttackAnimation(group: Phaser.GameObjects.Group, ultCount: number) {

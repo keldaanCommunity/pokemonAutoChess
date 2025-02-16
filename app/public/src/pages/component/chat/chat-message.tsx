@@ -2,8 +2,8 @@ import React from "react"
 import { IChatV2, Role } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { removeMessage, searchById } from "../../../stores/NetworkStore"
-import { getAvatarSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
+import PokemonPortrait from "../pokemon-portrait"
 
 export default function ChatMessage(props: { message: IChatV2 }) {
   const dispatch = useAppDispatch()
@@ -23,10 +23,7 @@ export default function ChatMessage(props: { message: IChatV2 }) {
             "server-message": isServerMessage
           })}
         >
-          <img
-            src={getAvatarSrc(props.message.avatar)}
-            className="pokemon-portrait"
-          />
+          <PokemonPortrait avatar={props.message.avatar} />
           <div
             className="author-and-time"
             title="open profile"

@@ -4,6 +4,7 @@ import admin from "firebase-admin"
 import AfterGamePlayer from "../models/colyseus-models/after-game-player"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { IAfterGamePlayer, Transfer } from "../types"
+import { GameMode } from "../types/enum/Game"
 import { logger } from "../utils/logger"
 import AfterGameState from "./states/after-game-state"
 
@@ -19,6 +20,7 @@ export default class AfterGameRoom extends Room<AfterGameState> {
     idToken: string
     elligibleToXP: boolean
     elligibleToELO: boolean
+    gameMode: GameMode
   }) {
     logger.info("Create AfterGame ", this.roomId)
 

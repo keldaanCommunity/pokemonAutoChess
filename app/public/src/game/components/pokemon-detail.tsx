@@ -12,6 +12,9 @@ import { Synergy } from "../../../../types/enum/Synergy"
 import { AbilityTooltip } from "../../pages/component/ability/ability-tooltip"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
 import { getPortraitSrc } from "../../../../utils/avatar"
+import { DishByPkm } from "../../../../core/dishes"
+import { cc } from "../../pages/utils/jsx"
+import { preference } from "../../preferences"
 
 export default class PokemonDetail extends GameObjects.DOMElement {
   dom: HTMLDivElement
@@ -102,7 +105,9 @@ export default class PokemonDetail extends GameObjects.DOMElement {
 
     if (index === PkmIndex[Pkm.EGG]) {
       const eggHint = document.createElement("img")
-      eggHint.className = "game-pokemon-detail-portrait-hint"
+      eggHint.className = cc("game-pokemon-detail-portrait-hint", {
+        pixelated: !preference("antialiasing")
+      })
       eggHint.src = getPortraitSrc(PkmIndex[evolution])
       wrap.appendChild(eggHint)
     }
@@ -186,6 +191,26 @@ export default class PokemonDetail extends GameObjects.DOMElement {
       statsElm.appendChild(statElm)
     }
     wrap.appendChild(statsElm)
+
+    if (name in DishByPkm) {
+      const pokemonDish = document.createElement("div")
+      pokemonDish.className = "game-pokemon-detail-dish"
+      ReactDOM.createRoot(pokemonDish).render(<>
+        <div className="game-pokemon-detail-dish-name">
+          <img src="assets/ui/dish.svg" /><i>{t("signature_dish")}:</i> {t(`item.${DishByPkm[name]}`)}
+        </div>
+        <img
+          src={`assets/item/${DishByPkm[name]}.png`}
+          className="game-pokemon-detail-dish-icon"
+          alt={DishByPkm[name]}
+          title={t(`item.${DishByPkm[name]}`)}
+        />
+        <p>
+          {addIconsToDescription(t(`item_description.${DishByPkm[name]}`))}
+        </p>
+      </>)
+      wrap.appendChild(pokemonDish)
+    }
 
     if (passive != Passive.NONE) {
       this.passiveDescription = document.createElement("div")

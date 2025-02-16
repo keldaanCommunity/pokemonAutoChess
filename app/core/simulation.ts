@@ -1,18 +1,19 @@
 import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
-import { getWonderboxItems, ItemEffects } from "./items"
+import { getWonderboxItems, ItemEffects, ItemStats } from "./items"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../models/precomputed/precomputed-types"
 import GameRoom from "../rooms/game-room"
-import { IPokemon, IPokemonEntity, ISimulation, Transfer } from "../types"
 import {
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
-  ItemStats,
-  SynergyTriggers
-} from "../types/Config"
+  IPokemon,
+  IPokemonEntity,
+  ISimulation,
+  Title,
+  Transfer
+} from "../types"
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../types/Config"
 import { Effect } from "../types/enum/Effect"
 import {
   AttackType,
@@ -31,7 +32,7 @@ import {
 } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
-import { Synergy, SynergyEffects } from "../types/enum/Synergy"
+import { Synergy } from "../types/enum/Synergy"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
 import { IPokemonData } from "../types/interfaces/PokemonData"
 import { count } from "../utils/array"
@@ -50,7 +51,17 @@ import { PokemonEntity, getStrongestUnit, getUnitScore } from "./pokemon-entity"
 import { DelayedCommand } from "./simulation-command"
 import { getAvatarString } from "../utils/avatar"
 import { max } from "../utils/number"
-import { OnItemGainedEffect, GrowGroundEffect, FireHitEffect, MonsterKillEffect, SoundCryEffect, WaterSpringEffect} from "./effect"
+import {
+  OnItemGainedEffect,
+  GrowGroundEffect,
+  FireHitEffect,
+  MonsterKillEffect,
+  SoundCryEffect,
+  WaterSpringEffect,
+  OnSpawnEffect
+} from "./effect"
+import { SynergyEffects } from "../models/effects"
+import { DishEffects } from "./dishes"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -157,19 +168,20 @@ export default class Simulation extends Schema implements ISimulation {
     this.applyPostEffects(blueBoard, redBoard)
 
     // afterSimulationStart hooks
-    for (const player of [this.bluePlayer, this.redPlayer]) {
+    for (const [player, team] of [
+      [this.bluePlayer, this.blueTeam] as const,
+      [this.redPlayer, this.redTeam] as const
+    ]) {
       if (player) {
-        const entityTeam =
-          player.team === Team.BLUE_TEAM ? this.blueTeam : this.redTeam
         player.board.forEach((pokemon) => {
-          const entity = values(entityTeam).find(
+          const entity = values(team).find(
             (p) => p.refToBoardPokemon === pokemon
           )
           if (entity) {
             pokemon.afterSimulationStart({
               simulation: this,
               player,
-              team: entityTeam,
+              team,
               entity
             })
           }
@@ -221,6 +233,12 @@ export default class Simulation extends Schema implements ISimulation {
     pokemonEntity.isClone = isClone
     this.applySynergyEffects(pokemonEntity)
     this.applyItemsEffects(pokemonEntity)
+    if (pokemon.meal) {
+      this.applyDishEffects(pokemonEntity, pokemon.meal)
+      pokemon.meal = ""
+      pokemon.action = PokemonActionState.IDLE
+    }
+
     this.board.setValue(
       pokemonEntity.positionX,
       pokemonEntity.positionY,
@@ -245,6 +263,10 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     pokemon.onSpawn({ entity: pokemonEntity, simulation: this })
+    pokemonEntity.effectsSet.forEach((effect) => {
+      if (effect instanceof OnSpawnEffect) effect.apply(pokemonEntity)
+    })
+
     return pokemonEntity
   }
 
@@ -364,18 +386,12 @@ export default class Simulation extends Schema implements ISimulation {
     pokemon.items.forEach((item) => {
       this.applyItemEffect(pokemon, item)
     })
-
-    if (pokemon.passive === Passive.SYNCHRO) {
-      pokemon.status.triggerSynchro()
-    }
   }
 
   applyItemEffect(pokemon: PokemonEntity, item: Item) {
-    if (ItemStats[item]) {
-      Object.entries(ItemStats[item]).forEach(([stat, value]) =>
-        pokemon.applyStat(stat as Stat, value)
-      )
-    }
+    Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) =>
+      pokemon.applyStat(stat as Stat, value)
+    )
 
     ItemEffects[item]
       ?.filter((effect) => effect instanceof OnItemGainedEffect)
@@ -416,11 +432,24 @@ export default class Simulation extends Schema implements ISimulation {
 
     if (
       (singleType === Synergy.SOUND ||
-      (!singleType && pokemon.types.has(Synergy.SOUND))) &&
+        (!singleType && pokemon.types.has(Synergy.SOUND))) &&
       !SynergyEffects[Synergy.SOUND].some((e) => allyEffects.has(e))
     ) {
       // allow sound pokemon to always wake up allies without searching through the board twice
       pokemon.effectsSet.add(new SoundCryEffect())
+    }
+  }
+
+  applyDishEffects(pokemon: PokemonEntity, dish: Item) {
+    const dishEffects = DishEffects[dish]
+    if (!dishEffects) return
+    dishEffects.forEach((effect) => pokemon.effectsSet.add(effect))
+
+    if (pokemon.passive === Passive.GLUTTON) {
+      pokemon.addMaxHP(10, pokemon, 0, false, true)
+      if (pokemon.player && pokemon.hp > 750) {
+        pokemon.player.titles.add(Title.GLUTTON)
+      }
     }
   }
 
@@ -1534,8 +1563,7 @@ export default class Simulation extends Schema implements ISimulation {
 
       if (
         this.weather !== Weather.NEUTRAL &&
-        (this.redPlayer.synergies.get(Synergy.ROCK) ?? 0) >=
-          SynergyTriggers[Synergy.ROCK][0]
+        this.redPlayer.synergies.getSynergyStep(Synergy.ROCK) > 0
       ) {
         const rockCollected = WeatherRocksByWeather.get(this.weather)
         if (rockCollected) {
@@ -1586,8 +1614,7 @@ export default class Simulation extends Schema implements ISimulation {
 
       if (
         this.weather !== Weather.NEUTRAL &&
-        (this.bluePlayer.synergies.get(Synergy.ROCK) ?? 0) >=
-          SynergyTriggers[Synergy.ROCK][0]
+        this.bluePlayer.synergies.getSynergyStep(Synergy.ROCK) > 0
       ) {
         const rockCollected = WeatherRocksByWeather.get(this.weather)
         if (rockCollected) {
@@ -1611,16 +1638,13 @@ export default class Simulation extends Schema implements ISimulation {
     ) as PokemonEntity[]
 
     if (effect === Effect.CURSE_OF_VULNERABILITY) {
-      let enemyWithHighestDef: PokemonEntity | undefined = undefined
-      let highestDef = 0
-      opponentsCursable.forEach((enemy) => {
-        if (enemy.def + enemy.speDef > highestDef) {
-          highestDef = enemy.def + enemy.speDef
-          enemyWithHighestDef = enemy as PokemonEntity
-        }
-      })
+      const highestDef = Math.max(
+        ...opponentsCursable.map((p) => p.def + p.speDef)
+      )
+      const enemyWithHighestDef = pickRandomIn(
+        opponentsCursable.filter((p) => p.def + p.speDef === highestDef)
+      )
       if (enemyWithHighestDef) {
-        enemyWithHighestDef = enemyWithHighestDef as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
         enemyWithHighestDef.addDefense(-2, enemyWithHighestDef, 0, false)
         enemyWithHighestDef.addSpecialDefense(-2, enemyWithHighestDef, 0, false)
         enemyWithHighestDef.status.curseVulnerability = true
@@ -1633,16 +1657,11 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     if (effect === Effect.CURSE_OF_WEAKNESS) {
-      let enemyWithHighestAtk: PokemonEntity | undefined = undefined
-      let highestATK = 0
-      opponentsCursable.forEach((enemy) => {
-        if (enemy.atk > highestATK) {
-          highestATK = enemy.atk
-          enemyWithHighestAtk = enemy as PokemonEntity
-        }
-      })
+      const highestAtk = Math.max(...opponentsCursable.map((p) => p.atk))
+      const enemyWithHighestAtk = pickRandomIn(
+        opponentsCursable.filter((p) => p.atk === highestAtk)
+      )
       if (enemyWithHighestAtk) {
-        enemyWithHighestAtk = enemyWithHighestAtk as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
         enemyWithHighestAtk.addAttack(
           Math.round(-0.3 * enemyWithHighestAtk.atk),
           enemyWithHighestAtk,
@@ -1659,16 +1678,11 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     if (effect === Effect.CURSE_OF_TORMENT) {
-      let enemyWithHighestAP: PokemonEntity | undefined = undefined
-      let highestAP = 0
-      opponentsCursable.forEach((enemy) => {
-        if (enemy.ap >= highestAP) {
-          highestAP = enemy.ap
-          enemyWithHighestAP = enemy as PokemonEntity
-        }
-      })
+      const highestAP = Math.max(...opponentsCursable.map((p) => p.ap))
+      const enemyWithHighestAP = pickRandomIn(
+        opponentsCursable.filter((p) => p.ap === highestAP)
+      )
       if (enemyWithHighestAP) {
-        enemyWithHighestAP = enemyWithHighestAP as PokemonEntity // see https://github.com/microsoft/TypeScript/issues/11498
         enemyWithHighestAP.addAbilityPower(-50, enemyWithHighestAP, 0, false)
         enemyWithHighestAP.status.curseTorment = true
         enemyWithHighestAP.status.triggerFatigue(30000, enemyWithHighestAP)

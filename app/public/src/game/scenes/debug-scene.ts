@@ -116,6 +116,9 @@ export class DebugScene extends Phaser.Scene {
     if (animationType === "Sleep") {
       animationName = AnimationConfig[pkm].sleep ?? AnimationType.Sleep
     }
+    if (animationType === "Eat") {
+      animationName = AnimationConfig[pkm].eat ?? AnimationType.Eat
+    }
 
     try {
       this.animationManager?.play(this.pokemon, animationName, { repeat: -1 })

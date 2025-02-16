@@ -11,6 +11,8 @@ import GameScene from "../scenes/game-scene"
 import EmoteMenu from "./emote-menu"
 import LifeBar from "./life-bar"
 import PokemonSprite from "./pokemon"
+import { preference } from "../../preferences"
+import { cc } from "../../pages/utils/jsx"
 
 export default class PokemonAvatar extends PokemonSprite {
   scene: GameScene
@@ -45,7 +47,7 @@ export default class PokemonAvatar extends PokemonSprite {
     this.emoteBubble = null
     this.emoteMenu = null
     this.isCurrentPlayerAvatar = this.playerId === scene.uid
-    if (scene.room?.state.phase === GamePhaseState.MINIGAME) {
+    if (scene.room?.state.phase === GamePhaseState.TOWN) {
       this.drawCircles()
     } else if (!scouting) {
       this.drawLifebar()
@@ -128,7 +130,7 @@ export default class PokemonAvatar extends PokemonSprite {
     this.add(this.circleHitbox)
     this.circleHitbox.setDepth(-1)
     this.circleHitbox.setVisible(
-      scene.room?.state.phase === GamePhaseState.MINIGAME
+      scene.room?.state.phase === GamePhaseState.TOWN
     )
     this.circleTimer = new GameObjects.Graphics(scene)
     this.add(this.circleTimer)
@@ -150,7 +152,7 @@ export default class PokemonAvatar extends PokemonSprite {
       this.circleTimer?.clear()
       this.circleTimer?.lineStyle(
         8,
-        0xf7d51d,
+        0x32ffea,
         this.isCurrentPlayerAvatar ? 0.8 : 0.5
       )
       this.circleTimer?.beginPath()
@@ -247,13 +249,13 @@ export default class PokemonAvatar extends PokemonSprite {
     }
   }
 
-  onPointerDown(pointer: Phaser.Input.Pointer): void {
-    super.onPointerDown(pointer)
+  onPointerDown(pointer: Phaser.Input.Pointer, event): void {
+    super.onPointerDown(pointer, event)
     const scene = this.scene as GameScene
 
     if (
       !this.isCurrentPlayerAvatar ||
-      scene.room?.state.phase === GamePhaseState.MINIGAME
+      scene.room?.state.phase === GamePhaseState.TOWN
     ) {
       return
     }
@@ -278,6 +280,7 @@ export class EmoteBubble extends GameObjects.DOMElement {
 
     const emoteImg = document.createElement("img")
     emoteImg.src = getAvatarSrc(emoteAvatar)
+    emoteImg.className = cc({ pixelated: !preference("antialiasing") })
 
     this.dom.appendChild(emoteImg)
     this.setElement(this.dom)

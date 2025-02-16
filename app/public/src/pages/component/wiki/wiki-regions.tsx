@@ -6,8 +6,12 @@ import { DungeonDetails, DungeonPMDO } from "../../../../../types/enum/Dungeon"
 import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import SynergyIcon from "../icons/synergy-icon"
+import { cc } from "../../utils/jsx"
+import { usePreference } from "../../../preferences"
+import PokemonPortrait from "../pokemon-portrait"
 
 export default function WikiRegions() {
+  const [antialiasing] = usePreference("antialiasing")
   const { t } = useTranslation()
 
   const [pokemonsPerRegion, setPokemonsPerRegion] = useState<{ [key in DungeonPMDO]?: Pkm[] }>({})
@@ -60,15 +64,11 @@ export default function WikiRegions() {
                   src={`/assets/maps/${dungeon}-preview.png`}
                   loading="lazy"
                   alt={dungeon}
+                  className={cc({ pixelated: !antialiasing })}
                 />
                 <div className="wiki-regional-mons">
                   {(pokemonsPerRegion[dungeon] ?? []).map((pkm) => (
-                    <img
-                      key={pkm}
-                      className="pokemon-portrait"
-                      loading="lazy"
-                      src={getPortraitSrc(PkmIndex[pkm])}
-                    ></img>
+                    <PokemonPortrait key={pkm} loading="lazy" portrait={PkmIndex[pkm]} />
                   ))}
                 </div>
               </li>

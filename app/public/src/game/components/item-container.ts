@@ -2,6 +2,7 @@ import { GameObjects } from "phaser"
 import {
   ArtificialItems,
   Berries,
+  Dishes,
   HMs,
   Item,
   ShinyItems,
@@ -10,7 +11,7 @@ import {
   WeatherRocks
 } from "../../../../types/enum/Item"
 import { getGameScene } from "../../pages/game"
-import { preferences } from "../../preferences"
+import { preference } from "../../preferences"
 import DraggableObject from "./draggable-object"
 import ItemDetail from "./item-detail"
 import ItemsContainer from "./items-container"
@@ -78,7 +79,7 @@ export default class ItemContainer extends DraggableObject {
     if (WeatherRocks.includes(this.name)) return 4
     if (SpecialItems.includes(this.name)) return 5
     if (TMs.includes(this.name) || HMs.includes(this.name)) return 6
-    //if (Dishes.includes(this.name)) return 7
+    if (Dishes.includes(this.name)) return 7
     return 0
   }
 
@@ -90,7 +91,7 @@ export default class ItemContainer extends DraggableObject {
 
   onPointerOver(pointer) {
     super.onPointerOver(pointer)
-    if (preferences.showDetailsOnHover && !this.detail?.visible) {
+    if (preference("showDetailsOnHover") && !this.detail?.visible) {
       this.mouseoutTimeout && clearTimeout(this.mouseoutTimeout)
       this.openDetail()
     }
@@ -108,7 +109,7 @@ export default class ItemContainer extends DraggableObject {
     if (this.draggable) {
       this.circle?.setFrame(this.cellIndex * 3)
     }
-    if (preferences.showDetailsOnHover) {
+    if (preference("showDetailsOnHover")) {
       this.mouseoutTimeout = setTimeout(
         () => {
           if (this.detail?.visible) {
@@ -120,10 +121,14 @@ export default class ItemContainer extends DraggableObject {
     }
   }
 
-  onPointerDown(pointer: Phaser.Input.Pointer) {
-    super.onPointerDown(pointer)
+  onPointerDown(
+    pointer: Phaser.Input.Pointer,
+    event: Phaser.Types.Input.EventData
+  ) {
+    super.onPointerDown(pointer, event)
     this.parentContainer.bringToTop(this)
-    if (pointer.rightButtonDown() && !preferences.showDetailsOnHover) {
+    event.stopPropagation()
+    if (pointer.rightButtonDown() && !preference("showDetailsOnHover")) {
       if (!this.detail?.visible) {
         this.openDetail()
         this.updateDropZone(false)
@@ -155,7 +160,7 @@ export default class ItemContainer extends DraggableObject {
           this.mouseoutTimeout && clearTimeout(this.mouseoutTimeout)
         })
         this.detail.dom.addEventListener("mouseleave", () => {
-          if (preferences.showDetailsOnHover) {
+          if (preference("showDetailsOnHover")) {
             this.mouseoutTimeout = setTimeout(
               () => {
                 if (this.detail?.visible) {

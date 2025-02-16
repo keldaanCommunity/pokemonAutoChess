@@ -21,8 +21,6 @@ import {
 } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getAdditionalsTier1 } from "../models/shop"
-import { Passive } from "../types/enum/Passive"
-import { getAvatarString } from "../utils/avatar"
 import {
   Emotion,
   IDragDropCombineMessage,
@@ -42,14 +40,15 @@ import {
   AdditionalPicksStages,
   EloRank,
   ExpPlace,
-  LegendaryShop,
+  LegendaryPool,
   MAX_SIMULATION_DELTA_TIME,
-  PortalCarouselStages,
   MinStageLevelForGameToCount,
-  UniqueShop
+  PortalCarouselStages,
+  UniquePool
 } from "../types/Config"
 import { GameMode, PokemonActionState } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
+import { Passive } from "../types/enum/Passive"
 import {
   Pkm,
   PkmDuos,
@@ -59,6 +58,7 @@ import {
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { removeInArray } from "../utils/array"
+import { getAvatarString } from "../utils/avatar"
 import {
   getFirstAvailablePositionInBench,
   getFreeSpaceOnBench
@@ -539,6 +539,7 @@ export default class GameRoom extends Room<GameState> {
         }
       }
     })
+    this.miniGame.initialize(this.state, this)
   }
 
   async onAuth(client: Client, options, request) {
@@ -691,7 +692,8 @@ export default class GameRoom extends Room<GameState> {
                 this.transformToSimplePlayer(botPlayer),
                 botPlayer.rank,
                 bot.elo,
-                players
+                players,
+                this.state.gameMode
               )
               bot.save()
             }
@@ -806,7 +808,8 @@ export default class GameRoom extends Room<GameState> {
           this.transformToSimplePlayer(player),
           rank,
           usr.elo,
-          humans.map((p) => this.transformToSimplePlayer(p))
+          humans.map((p) => this.transformToSimplePlayer(p)),
+          this.state.gameMode
         )
         if (elo) {
           if (elo >= 1100) {
@@ -1028,13 +1031,13 @@ export default class GameRoom extends Room<GameState> {
     if (!player || player.pokemonsProposition.length === 0) return
     if (this.state.additionalPokemons.includes(pkm as Pkm)) return // already picked, probably a double click
     if (
-      UniqueShop.includes(pkm) &&
-      this.state.stageLevel !== PortalCarouselStages[0]
+      UniquePool.includes(pkm) &&
+      this.state.stageLevel !== PortalCarouselStages[1]
     )
       return // should not be pickable at this stage
     if (
-      LegendaryShop.includes(pkm) &&
-      this.state.stageLevel !== PortalCarouselStages[1]
+      LegendaryPool.includes(pkm) &&
+      this.state.stageLevel !== PortalCarouselStages[2]
     )
       return // should not be pickable at this stage
 
@@ -1066,11 +1069,9 @@ export default class GameRoom extends Room<GameState> {
       // update regional pokemons in case some regional variants of add picks are now available
       this.state.players.forEach((p) => p.updateRegionalPool(this.state, false))
 
-      if (
-        player.itemsProposition.length > 0 &&
-        player.itemsProposition[selectedIndex] != null
-      ) {
-        player.items.push(player.itemsProposition[selectedIndex])
+      const selectedItem = player.itemsProposition[selectedIndex]
+      if (player.itemsProposition.length > 0 && selectedItem != null) {
+        player.items.push(selectedItem)
         player.itemsProposition.clear()
       }
     }

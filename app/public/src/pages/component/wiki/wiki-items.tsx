@@ -5,6 +5,7 @@ import {
   ArtificialItems,
   ItemComponents,
   Berries,
+  Dishes,
   Item,
   ItemRecipe,
   SpecialItems,
@@ -17,8 +18,11 @@ import { Synergy } from "../../../../../types/enum/Synergy"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { addIconsToDescription } from "../../utils/descriptions"
 import SynergyIcon from "../icons/synergy-icon"
+import { cc } from "../../utils/jsx"
+import { usePreference } from "../../../preferences"
 
 export default function WikiItems() {
+  const [antialiasing] = usePreference("antialiasing")
   const [itemHovered, setItemHovered] = useState<Item>()
   const { t } = useTranslation()
   return (
@@ -126,6 +130,7 @@ export default function WikiItems() {
           ))}
         </ul>
       </article>
+
       <article className="berries">
         <h2>
           <SynergyIcon type={Synergy.GRASS} /> {t("berries")}
@@ -142,12 +147,33 @@ export default function WikiItems() {
               <br />
               <img
                 src={"assets/environment/berry_trees/" + i + "_6.png"}
-                className="tree"
+                className={cc("tree", {
+                  pixelated: !antialiasing
+                })}
               ></img>
             </li>
           ))}
         </ul>
       </article>
+
+      <article className="dishes">
+        <h2>
+          <SynergyIcon type={Synergy.GOURMET} /> {t("dishes")}
+        </h2>
+        <p>{addIconsToDescription(t("dishes_description"))}</p>
+        <ul>
+          {Dishes.map((i) => (
+            <li
+              key={i}
+              data-tooltip-id="detail-item"
+              onMouseOver={() => setItemHovered(i)}
+            >
+              <img src={"assets/item/" + i + ".png"} className="item"></img>
+            </li>
+          ))}
+        </ul>
+      </article>
+
       <article className="artificial">
         <h2>
           <SynergyIcon type={Synergy.ARTIFICIAL} /> {t("artificial_items")}

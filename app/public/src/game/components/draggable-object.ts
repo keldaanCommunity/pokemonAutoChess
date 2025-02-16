@@ -27,7 +27,7 @@ export default class DraggableObject extends GameObjects.Container {
           _y: number,
           event: Phaser.Types.Input.EventData
         ) => {
-          this.onPointerDown(pointer)
+          this.onPointerDown(pointer, event)
         }
       )
       .on("pointerup", () => this.onPointerUp())
@@ -55,7 +55,7 @@ export default class DraggableObject extends GameObjects.Container {
     }
   }
 
-  onPointerDown(pointer) {
+  onPointerDown(pointer, event) {
     if (!this.dragDisabled) {
       document.body.classList.add("grabbing")
     }

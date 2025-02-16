@@ -22,7 +22,7 @@ import SynergyIcon from "../icons/synergy-icon"
 import { Ability } from "../../../../../types/enum/Ability"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
-import { preferences, savePreferences } from "../../../preferences"
+import { usePreferences } from "../../../preferences"
 
 export default function PokemonPicker(props: {
   selected: PkmWithConfig | Item
@@ -73,6 +73,7 @@ function PokemonPickerTab(props: {
   addEntity: (e: PkmWithConfig) => void
   type: Synergy | "none"
 }) {
+  const [preferences, setPreferences] = usePreferences()
   const { t } = useTranslation()
   const [hoveredPokemon, setHoveredPokemon] = useState<Pkm>()
 
@@ -82,8 +83,6 @@ function PokemonPickerTab(props: {
   }
 
   const ingame = useLocation().pathname === "/game"
-  const [showEvolutions, setShowEvolutions] = useState(preferences.showEvolutions)
-  const [filterIngame, setFilterIngame] = useState(preferences.filterAvailableAddsAndRegionals)
   const [overlap, setOverlap] = useState<Synergy | null>(null)
   const additionalPokemons = useAppSelector(
     (state) => state.game.additionalPokemons
@@ -101,13 +100,17 @@ function PokemonPickerTab(props: {
     .filter((p) => {
       if (p.skill === Ability.DEFAULT) return false // pokemons with no ability are not ready for the show
       if (p.rarity === Rarity.SPECIAL) return true // show all summons & specials, even in the same family
-      if (showEvolutions) return true
+      if (preferences.showEvolutions) return true
       else return p.name === PkmFamily[p.name]
     })
-    .filter(p => !filterIngame || (
-      (!p.additional || additionalPokemons.includes(baseVariant(PkmFamily[p.name])) || specialGameRule === SpecialGameRule.EVERYONE_IS_HERE)
-      && (!p.regional || regionalPokemons?.includes(p.name))
-    ))
+    .filter(
+      (p) =>
+        !preferences.filterAvailableAddsAndRegionals ||
+        ((!p.additional ||
+          additionalPokemons.includes(baseVariant(PkmFamily[p.name])) ||
+          specialGameRule === SpecialGameRule.EVERYONE_IS_HERE) &&
+          (!p.regional || regionalPokemons?.includes(p.name)))
+    )
 
   const pokemonsPerRarity = groupBy(filteredPokemons, (p) => p.rarity)
   for (const rarity in pokemonsPerRarity) {
@@ -141,10 +144,10 @@ function PokemonPickerTab(props: {
             Rarity.UNCOMMON,
             Rarity.LEGENDARY,
             Rarity.RARE,
-            Rarity.EPIC,
             Rarity.HATCH,
-            Rarity.ULTRA,
-            Rarity.SPECIAL
+            Rarity.EPIC,
+            Rarity.SPECIAL,
+            Rarity.ULTRA
           ] as Rarity[]
         ).map((rarity) => (
           <React.Fragment key={rarity}>
@@ -157,7 +160,8 @@ function PokemonPickerTab(props: {
                   className={cc("pokemon-portrait", {
                     additional: p.additional,
                     regional: p.regional,
-                    selected: p.name === props.selected["name"]
+                    selected: p.name === props.selected["name"],
+                    pixelated: !preferences.antialiasing
                   })}
                   onClick={() => {
                     props.selectEntity({
@@ -190,7 +194,10 @@ function PokemonPickerTab(props: {
                   draggable
                   onDragStart={(e) => handleOnDragStart(e, p.name)}
                 >
-                  <img src={getPortraitSrc(p.index)} />
+                  <img
+                    className={cc({ pixelated: !preferences.antialiasing })}
+                    src={getPortraitSrc(p.index)}
+                  />
                 </div>
               ))}
             </dd>
@@ -199,23 +206,23 @@ function PokemonPickerTab(props: {
       </dl>
       <div className="filters">
         <Checkbox
-          checked={showEvolutions}
-          onToggle={checked => {
-            setShowEvolutions(checked);
-            savePreferences({ showEvolutions: checked });
+          checked={preferences.showEvolutions}
+          onToggle={(checked) => {
+            setPreferences({ showEvolutions: checked })
           }}
           label={t("show_evolutions")}
           isDark
         />
-        {ingame && <Checkbox
-          checked={filterIngame}
-          onToggle={checked => {
-            setFilterIngame(checked);
-            savePreferences({ filterAvailableAddsAndRegionals: checked });
-          }}
-          label={t("show_only_available_picks")}
-          isDark
-        />}
+        {ingame && (
+          <Checkbox
+            checked={preferences.filterAvailableAddsAndRegionals}
+            onToggle={(checked) => {
+              setPreferences({ filterAvailableAddsAndRegionals: checked })
+            }}
+            label={t("show_only_available_picks")}
+            isDark
+          />
+        )}
         <details>
           <summary>{t("overlaps")}</summary>
           <ul className="synergy-overlaps">

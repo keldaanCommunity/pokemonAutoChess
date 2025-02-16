@@ -10,7 +10,6 @@ module.exports = {
     watch: false,
     time: true,
     wait_ready: true,
-    max_memory_restart: "1500M",
     env_production: {
       NODE_ENV: "production"
     },

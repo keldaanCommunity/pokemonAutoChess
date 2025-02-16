@@ -232,12 +232,15 @@ export class MiniGame {
         Math.sin((2 * Math.PI * i) / this.alivePlayers.length) * 250
       let retentionDelay =
         4000 + (this.alivePlayers.length - player.rank) * 2000
-      if (stageLevel < 5) {
+
+      if (stageLevel === 0) {
+        retentionDelay = 12000
+      } else if (PortalCarouselStages.includes(stageLevel)) {
+        retentionDelay = 8000
+      } else if (stageLevel < 5) {
         retentionDelay = 5000
       }
-      if (PortalCarouselStages.includes(stageLevel)) {
-        retentionDelay = 8000
-      }
+
       if (player.isBot) {
         retentionDelay += randomBetween(1000, 6000)
       }
@@ -279,7 +282,7 @@ export class MiniGame {
     })
 
     if (PortalCarouselStages.includes(stageLevel)) {
-      this.initializePortalCarousel()
+      this.initializePortalCarousel(stageLevel)
       room.broadcast(
         Transfer.PRELOAD_MAPS,
         values(this.portals!).map((p) => p.map)
@@ -309,7 +312,7 @@ export class MiniGame {
     }
   }
 
-  initializePortalCarousel() {
+  initializePortalCarousel(stageLevel: number) {
     const nbPortals = clamp(this.alivePlayers.length + 1, 3, 9)
     for (let i = 0; i < nbPortals; i++) {
       const x = this.centerX + Math.cos((Math.PI * 2 * i) / nbPortals) * 115
@@ -323,7 +326,7 @@ export class MiniGame {
       Composite.add(this.engine.world, body)
     }
 
-    this.pickRandomSynergySymbols()
+    this.pickRandomSynergySymbols(stageLevel)
   }
 
   update(dt: number) {
@@ -415,60 +418,73 @@ export class MiniGame {
     return items
   }
 
-  pickRandomSynergySymbols() {
-    this.avatars?.forEach((avatar) => {
-      const player = this.alivePlayers.find((p) => p.id === avatar.id)!
-      const synergiesTriggerLevels: [Synergy, number][] = Array.from(
-        player.synergies
-      ).map(([type, value]) => {
-        const lastTrigger = SynergyTriggers[type]
-          .filter((n) => n <= value)
-          .at(-1)
-        let levelReached = lastTrigger
-          ? SynergyTriggers[type].indexOf(lastTrigger) + 1
-          : 0
-        // removing low triggers synergies
-        if (type === Synergy.FLORA || type === Synergy.LIGHT)
-          levelReached = min(0)(levelReached - 1)
-        return [type, levelReached]
-      })
-      const candidatesSymbols: Synergy[] = []
-      synergiesTriggerLevels.forEach(([type, level]) => {
-        // add as many symbols as synergy levels reached
-        candidatesSymbols.push(...new Array(level).fill(type))
-      })
-      //logger.debug("symbols from synergies", candidatesSymbols)
-      if (candidatesSymbols.length < 4) {
-        // if player has reached less than 4 synergy level triggers, we complete with random other incomplete synergies
-        const incompleteSynergies = synergiesTriggerLevels
-          .filter(
-            ([type, level]) => level === 0 && player.synergies.get(type)! > 0
-          )
-          .map(([type, _level]) => type)
-        candidatesSymbols.push(
-          ...pickNRandomIn(incompleteSynergies, 4 - candidatesSymbols.length)
-        )
-        /*logger.debug(
-          "completing symbols with incomplete synergies",
-          incompleteSynergies
-        )*/
-      }
-      while (candidatesSymbols.length < 4) {
-        // if still incomplete, complete with random
-        candidatesSymbols.push(pickRandomIn(Synergy))
-        /*logger.debug(
-          "completing symbols with random synergies",
-          candidatesSymbols
-        )*/
-      }
-
-      const symbols = pickNRandomIn(candidatesSymbols, NB_SYMBOLS_PER_PLAYER)
+  pickRandomSynergySymbols(stageLevel: number) {
+    if (stageLevel === 0) {
+      const symbols = pickNRandomIn(
+        Object.values(Synergy),
+        3 * ((this.avatars?.size ?? 8) + 1)
+      )
       //logger.debug(`symbols chosen for player ${player.name}`, symbols)
       symbols.forEach((type, i) => {
-        const symbol = new SynergySymbol(avatar.x, avatar.y, type, i)
+        const symbol = new SynergySymbol(4, 4, type, i)
         this.symbols?.set(symbol.id, symbol)
       })
-    })
+    } else {
+      this.avatars?.forEach((avatar) => {
+        const player = this.alivePlayers.find((p) => p.id === avatar.id)!
+        const synergiesTriggerLevels: [Synergy, number][] = Array.from(
+          player.synergies
+        ).map(([type, value]) => {
+          const lastTrigger = SynergyTriggers[type]
+            .filter((n) => n <= value)
+            .at(-1)
+          let levelReached = lastTrigger
+            ? SynergyTriggers[type].indexOf(lastTrigger) + 1
+            : 0
+          // removing low triggers synergies
+          if (type === Synergy.FLORA || type === Synergy.LIGHT)
+            levelReached = min(0)(levelReached - 1)
+          if (type === Synergy.GOURMET && levelReached > 1) levelReached = 1 // to compensate for the current lack of diversity in the legendary pool
+          return [type, levelReached]
+        })
+        const candidatesSymbols: Synergy[] = []
+        synergiesTriggerLevels.forEach(([type, level]) => {
+          // add as many symbols as synergy levels reached
+          candidatesSymbols.push(...new Array(level).fill(type))
+        })
+        //logger.debug("symbols from synergies", candidatesSymbols)
+        if (candidatesSymbols.length < 4) {
+          // if player has reached less than 4 synergy level triggers, we complete with random other incomplete synergies
+          const incompleteSynergies = synergiesTriggerLevels
+            .filter(
+              ([type, level]) => level === 0 && player.synergies.get(type)! > 0
+            )
+            .map(([type, _level]) => type)
+          candidatesSymbols.push(
+            ...pickNRandomIn(incompleteSynergies, 4 - candidatesSymbols.length)
+          )
+          /*logger.debug(
+            "completing symbols with incomplete synergies",
+            incompleteSynergies
+          )*/
+        }
+        while (candidatesSymbols.length < 4) {
+          // if still incomplete, complete with random
+          candidatesSymbols.push(pickRandomIn(Synergy))
+          /*logger.debug(
+            "completing symbols with random synergies",
+            candidatesSymbols
+          )*/
+        }
+
+        const symbols = pickNRandomIn(candidatesSymbols, NB_SYMBOLS_PER_PLAYER)
+        //logger.debug(`symbols chosen for player ${player.name}`, symbols)
+        symbols.forEach((type, i) => {
+          const symbol = new SynergySymbol(avatar.x, avatar.y, type, i)
+          this.symbols?.set(symbol.id, symbol)
+        })
+      })
+    }
 
     // randomly distribute symbols across portals
     const portalIds = shuffleArray(keys(this.portals!))
@@ -583,6 +599,12 @@ export class MiniGame {
       if (avatar.portalId == "" && player && !player.isBot) {
         // random propositions if no portal was taken
         avatar.portalId = "random"
+        if (state.stageLevel == 0 && this.portals) {
+          // for initial portal, force to pick one of the portals not taken
+          avatar.portalId = pickRandomIn(
+            values(this.portals).filter((p) => p.avatarId == "")
+          ).id
+        }
       }
 
       if (avatar.itemId) {
@@ -601,11 +623,13 @@ export class MiniGame {
 
         const symbols = this.symbolsByPortal.get(avatar.portalId) ?? []
         const portalSynergies = symbols.map((s) => s.synergy)
-        state.shop.assignUniquePropositions(
-          player,
-          state.stageLevel,
-          portalSynergies
-        )
+        if (state.stageLevel > 1) {
+          state.shop.assignUniquePropositions(
+            player,
+            state.stageLevel,
+            portalSynergies
+          )
+        }
       }
 
       this.avatars!.delete(avatar.id)
