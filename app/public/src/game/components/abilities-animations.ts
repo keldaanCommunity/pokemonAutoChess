@@ -2575,9 +2575,26 @@ export function displayAbility(
       addAbilitySprite("FLAME_HIT", coordinates, true).setDepth(1).setScale(2)
       break
 
-    case Ability.TORCH_SONG:
-      addAbilitySprite(Ability.TORCH_SONG, coordinates, true).setScale(2)
+    case Ability.TORCH_SONG: {
+      const specialProjectile = addAbilitySprite(skill, coordinates, true)
+        .setScale(2)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) -
+            Math.PI / 2
+        )
+
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 500
+      })
       break
+    }
 
     case Ability.HIDDEN_POWER_A:
     case Ability.HIDDEN_POWER_B:

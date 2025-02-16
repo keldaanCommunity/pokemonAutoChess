@@ -592,7 +592,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     permanent = false
   ) {
     if (this.passive === Passive.MELMETAL) {
-      this.addAttack(value * 0.3, caster, apBoost, crit, permanent)
+      this.addAttack(value * 0.5, caster, apBoost, crit, permanent)
     } else {
       value =
         value *

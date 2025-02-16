@@ -17,6 +17,11 @@ import store from "./stores/index"
 import "./i18n"
 import "./style/index.css"
 
+// Redirect top window if running in an iframe
+if (window.top && window !== window.top) {
+  window.top.location = window.location;
+}
+
 const container = document.getElementById("root")
 const root = createRoot(container!)
 

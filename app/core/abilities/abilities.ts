@@ -368,7 +368,7 @@ export class TeaTimeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const heal = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const heal = [15, 30, 60][pokemon.stars - 1] ?? 60
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team == tg.team) {
         broadcastAbility(pokemon, { positionX: x, positionY: y })
@@ -880,7 +880,7 @@ export class AuroraVeilStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const runeProtectDuration = 500
+    const runeProtectDuration = 1000
     const shield = [5, 10, 15][pokemon.stars - 1] ?? 15
 
     board.forEach((x, y, tg) => {
@@ -1868,7 +1868,10 @@ export class ShadowCloneStrategy extends AbilityStrategy {
     )
 
     if (spawnPosition) {
-      const p = PokemonFactory.createPokemonFromName(pokemon.name)
+      const p = PokemonFactory.createPokemonFromName(pokemon.name, {
+        selectedEmotion: pokemon.emotion,
+        selectedShiny: pokemon.shiny
+      })
       let itemStolen: Item | null = null
       if (target.items.size > 0) {
         itemStolen = pickRandomIn(values(target.items))
@@ -6158,7 +6161,7 @@ export class AstralBarrageStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
     const damagePerGhost = 20
 
     const enemies: PokemonEntity[] = []
@@ -7312,7 +7315,7 @@ export class SnipeShotStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    const damage = [40, 80, 160][pokemon.stars - 1] ?? 160
+    const damage = [40, 80, 120][pokemon.stars - 1] ?? 120
     const farthestTarget = state.getFarthestTarget(pokemon, board) ?? target
     super.process(pokemon, state, board, farthestTarget, crit)
 
@@ -9188,47 +9191,43 @@ export class TorchSongStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const damage = pokemon.stars === 3 ? 30 : pokemon.stars === 2 ? 20 : 10
-    const count = pokemon.stars
-    const apBoost = 10
+    // Blow out [4,SP] raging flames to random opponents. Each flame deals 50% of ATK as SPECIAL, with [30,LK]% chance to BURN for 2 seconds, and buff the user AP by [1,2,3].
+    const damagePerFlame = 0.5 * pokemon.atk
+    const apGainPerFlame = [1, 2, 3][pokemon.stars - 1] ?? 3
 
-    const scorchedEnemiesId = new Set<string>()
-
-    const enemies = board.cells.filter(
-      (p) => p && p.team !== pokemon.team
-    ) as PokemonEntity[]
-    const enemiesHit = enemies
-      .sort((a, b) => getUnitScore(b) - getUnitScore(a))
-      .slice(0, count) as PokemonEntity[]
-
-    enemiesHit.forEach((enemy) => {
-      const cells = board.getAdjacentCells(
-        enemy.positionX,
-        enemy.positionY,
-        true
-      )
-      cells.forEach((cell) => {
-        if (cell.value && cell.value.team !== pokemon.team) {
-          broadcastAbility(pokemon, { positionX: cell.x, positionY: cell.y })
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
-          if (
-            cell.value.status.burn ||
-            cell.value.status.curse ||
-            cell.value.status.silence
-          ) {
-            scorchedEnemiesId.add(cell.value.id)
-          }
-        }
-      })
+    const enemies: PokemonEntity[] = []
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+      if (tg && pokemon.team != tg.team) {
+        enemies.push(tg)
+      }
     })
 
-    pokemon.addAbilityPower(scorchedEnemiesId.size * apBoost, pokemon, 0, false)
+    const nbFlames = Math.round(4 * (1 + pokemon.ap / 100))
+    for (let i = 0; i < nbFlames; i++) {
+      const randomTarget = pickRandomIn(enemies)
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          broadcastAbility(pokemon, {
+            targetX: randomTarget.positionX,
+            targetY: randomTarget.positionY
+          })
+          pokemon.addAbilityPower(apGainPerFlame, pokemon, 0, false)
+          if (randomTarget?.life > 0) {
+            randomTarget.handleSpecialDamage(
+              damagePerFlame,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit,
+              false
+            )
+            if (chance(0.3, pokemon)) {
+              randomTarget.status.triggerBurn(2000, randomTarget, pokemon)
+            }
+          }
+        }, 100 * i)
+      )
+    }
   }
 }
 
@@ -11025,6 +11024,9 @@ export class TopsyTurvyStrategy extends AbilityStrategy {
         if (target.atk > target.baseAtk) {
           const d = target.atk - target.baseAtk
           target.addAttack(-2 * d, pokemon, 0, false)
+        }
+        if (target.ap > 0) {
+          target.addAbilityPower(-2 * target.ap, pokemon, 0, false)
         }
         if (target.def > target.baseDef) {
           const d = target.def - target.baseDef
