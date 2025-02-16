@@ -43,6 +43,9 @@
 - Buff Topsy Turvy (Inkay): also reverse AP buffs
 - Buff Pawniard Attack 14 → 17 and Bisharp Attack 26 → 30
 - Nerf Inteleon: Snipe shot damage 40/80/160 → 40/80/120
+- Nerf Stantler: HP 200 → 180, Def/Spedef: 5 → 3
+- Nerf Miltank: HP 250 → 200
+- Nerf Spinda: HP 250 → 200
 
 # Changes to Synergies
 

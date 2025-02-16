@@ -5030,10 +5030,10 @@ export class Stantler extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.PSYCHIC, Synergy.FIELD])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 200
+  hp = 180
   atk = 20
-  def = 5
-  speDef = 5
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.PSYSHIELD_BASH
@@ -5048,7 +5048,7 @@ export class Miltank extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 250
+  hp = 200
   atk = 15
   def = 5
   speDef = 5
@@ -11757,7 +11757,7 @@ export class Spinda extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GOURMET])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 250
+  hp = 200
   atk = 20
   def = 5
   speDef = 5
