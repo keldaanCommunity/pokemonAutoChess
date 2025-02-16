@@ -43,6 +43,7 @@
 - New item category: Dishes ; Dishes are cooked by Gourmet chefs to give strong buffs to a Pokémon in the next fight. If not used by the end of the timer, the cook or another random ally will eat it.
 - More than 20 dishes have been added to the game
 - Nerf Pokerus: effect applies every ~~2~~ 2.5 seconds
+- Buff Swift Wing: 25 → 30% attack speed
 
 # Gameplay
 
