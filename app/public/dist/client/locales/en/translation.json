@@ -1364,7 +1364,9 @@
     "SWIRLIX": "Swirlix",
     "SLURPUFF": "Slurpuff",
     "GULPIN": "Gulpin",
-    "SWALOT": "Swalot"
+    "SWALOT": "Swalot",
+    "FIDOUGH": "Fidough",
+    "DACHSBUN": "Dachsbun"
   },
   "ability_description": {
     "SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2023,9 +2025,9 @@
     "FLUID": "Ally team gains 1% ATK_SPEED and 4 HP per unique active synergy",
     "SHAPELESS": "Ally team gains 3% ATK_SPEED and 8 HP per unique active synergy",
     "ETHEREAL": "Ally team gains 6% ATK_SPEED and 12 HP per unique active synergy",
-    "APPETIZER": "Gain a Chef's Hat. Cook a Signature Dish after every round and feed one adjacent ally.",
+    "APPETIZER": "Gain a CHEF_HAT. Cook a Signature Dish after every round and feed one adjacent ally.",
     "LUNCH_BREAK": "The Chef cook two dishes and feed two adjacent allies after every round.",
-    "BANQUET": "Gain a second Chef's Hat."
+    "BANQUET": "Gain a second CHEF_HAT."
   },
   "item": {
     "FOSSIL_STONE": "Fossil Stone",
@@ -2483,7 +2485,8 @@
     "INANIMATE": "Inanimate objects cannot be copied, benched or sold. They cannot move or attack, and are immune to status effects.",
     "BERSERK": "Gains 3 AP each time a Pokemon is affected by its ability.",
     "APPLIN": "Applin is looking for a SWEET_APPLE or a TART_APPLE or a SIRUPY_APPLE to eat.",
-    "DIPPLIN": "Dipplin is looking for a SIRUPY_APPLE to eat."
+    "DIPPLIN": "Dipplin is looking for a SIRUPY_APPLE to eat.",
+    "WELL_BAKED": "The Pokémon doesn't suffer from BURN. Instead, it gains 10 DEF when it is affected by BURN."
   },
   "stat": {
     "ATK": "Attack",

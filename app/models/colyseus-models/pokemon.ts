@@ -65,7 +65,11 @@ import { SynergyEffects } from "../effects"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
 import { SynergyEffects } from "../effects"
-import { DrySkinEffect, ClearWingEffect, SynchroEffect } from "../../core/effect"
+import {
+  DrySkinEffect,
+  ClearWingEffect,
+  SynchroEffect
+} from "../../core/effect"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -200,7 +204,7 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   isInRegion(map: DungeonPMDO | "town", state?: GameState) {
-    if(map === "town") return false
+    if (map === "town") return false
     const regionSynergies = DungeonDetails[map]?.synergies
     const basePkm = PkmFamily[this.name]
     const originalVariantPkm = (Object.keys(PkmRegionalVariants) as Pkm[]).find(
@@ -16342,6 +16346,47 @@ export class Swalot extends Pokemon {
   additional = true
 }
 
+export class Fidough extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GOURMET,
+    Synergy.FAIRY,
+    Synergy.FIELD
+  ])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.DACHSBUN
+  hp = 80
+  atk = 8
+  def = 4
+  speDef = 3
+  maxPP = 80
+  range = 1
+  skill = Ability.GROWL
+  passive = Passive.WELL_BAKED
+  attackSprite = AttackSprite.FAIRY_MELEE
+  additional = true
+}
+
+export class Dachsbun extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GOURMET,
+    Synergy.FAIRY,
+    Synergy.FIELD
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 170
+  atk = 16
+  def = 6
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.GROWL
+  passive = Passive.WELL_BAKED
+  attackSprite = AttackSprite.FAIRY_MELEE
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -17261,5 +17306,7 @@ export const PokemonClasses: Record<
   [Pkm.SWIRLIX]: Swirlix,
   [Pkm.SLURPUFF]: Slurpuff,
   [Pkm.GULPIN]: Gulpin,
-  [Pkm.SWALOT]: Swalot
+  [Pkm.SWALOT]: Swalot,
+  [Pkm.FIDOUGH]: Fidough,
+  [Pkm.DACHSBUN]: Dachsbun
 }

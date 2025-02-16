@@ -312,9 +312,16 @@ export default class Status extends Schema implements IStatus {
         }
       }
 
-      if (pkm.passive === Passive.GUTS && !pkm.effects.has(Effect.GUTS_PASSIVE)) {
+      if (
+        pkm.passive === Passive.GUTS &&
+        !pkm.effects.has(Effect.GUTS_PASSIVE)
+      ) {
         pkm.effects.add(Effect.GUTS_PASSIVE)
         pkm.addAttack(5, pkm, 0, false)
+      }
+
+      if (pkm.passive === Passive.WELL_BAKED) {
+        pkm.addDefense(10, pkm, 0, false)
       }
 
       if (pkm.items.has(Item.RAWST_BERRY)) {
@@ -343,13 +350,19 @@ export default class Status extends Schema implements IStatus {
           burnDamage *= 0.5
         }
 
-        pkm.handleDamage({
-          damage: Math.round(burnDamage),
-          board,
-          attackType: AttackType.TRUE,
-          attacker: this.burnOrigin,
-          shouldTargetGainMana: true
-        })
+        if (pkm.passive === Passive.WELL_BAKED) {
+          burnDamage = 0
+        }
+
+        if (burnDamage > 0) {
+          pkm.handleDamage({
+            damage: Math.round(burnDamage),
+            board,
+            attackType: AttackType.TRUE,
+            attacker: this.burnOrigin,
+            shouldTargetGainMana: true
+          })
+        }
         this.burnDamageCooldown = 1000
       }
     } else {
@@ -370,6 +383,9 @@ export default class Status extends Schema implements IStatus {
     if (pkm.passive === Passive.GUTS && this.poisonStacks === 0) {
       pkm.effects.delete(Effect.GUTS_PASSIVE)
       pkm.addAttack(-5, pkm, 0, false)
+    }
+    if (pkm.passive === Passive.WELL_BAKED) {
+      pkm.addDefense(-10, pkm, 0, false)
     }
   }
 
@@ -438,12 +454,18 @@ export default class Status extends Schema implements IStatus {
       if (duration > this.poisonCooldown) {
         this.poisonCooldown = duration
       }
-      if (pkm.passive === Passive.GUTS && !pkm.effects.has(Effect.GUTS_PASSIVE)) {
+      if (
+        pkm.passive === Passive.GUTS &&
+        !pkm.effects.has(Effect.GUTS_PASSIVE)
+      ) {
         pkm.effects.add(Effect.GUTS_PASSIVE)
         pkm.addAttack(5, pkm, 0, false)
       }
 
-      if (pkm.passive === Passive.TOXIC_BOOST && !pkm.effects.has(Effect.TOXIC_BOOST)) {
+      if (
+        pkm.passive === Passive.TOXIC_BOOST &&
+        !pkm.effects.has(Effect.TOXIC_BOOST)
+      ) {
         pkm.effects.add(Effect.TOXIC_BOOST)
         pkm.addAttack(10, pkm, 0, false)
       }
