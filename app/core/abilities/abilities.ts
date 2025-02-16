@@ -1937,32 +1937,23 @@ export class AccelerockStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
-    const farthestCoordinate =
+    const destination =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
-
-    if (farthestCoordinate) {
-      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
-      const targetCoordinates = state.getNearestTargetAtRangeCoordinates(
-        pokemon,
-        board
-      )
-      if (targetCoordinates) {
-        pokemon.targetX = targetCoordinates.x
-        pokemon.targetY = targetCoordinates.y
-        const target = board.getValue(targetCoordinates.x, targetCoordinates.y)
-        if (target) {
-          target.handleSpecialDamage(
-            pokemon.atk,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit,
-            true
-          )
-        }
-      }
+    target = destination?.target ?? target
+    super.process(pokemon, state, board, target, crit)
+    if (destination) {
+      pokemon.moveTo(destination.x, destination.y, board)
+      pokemon.targetX = destination.target.positionX
+      pokemon.targetY = destination.target.positionY
     }
+    target.handleSpecialDamage(
+      pokemon.atk,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
 
     const defLost = max(pokemon.def)(Math.round(5 * (1 + pokemon.ap / 100)))
     pokemon.addDefense(-defLost, pokemon, 0, false)
@@ -1979,26 +1970,28 @@ export class NuzzleStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    const farthestTarget = state.getFarthestTarget(pokemon, board) ?? target
-    super.process(pokemon, state, board, farthestTarget, crit)
-    const farthestCoordinate =
+    const destination =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+    target = destination?.target ?? target
+    super.process(pokemon, state, board, target, crit)
 
-    if (farthestTarget && farthestCoordinate) {
-      const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
-      const duration = [3000, 4000, 5000][pokemon.stars - 1] ?? 5000
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+    const duration = [3000, 4000, 5000][pokemon.stars - 1] ?? 5000
 
-      farthestTarget.handleSpecialDamage(
-        damage,
-        board,
-        AttackType.SPECIAL,
-        pokemon,
-        crit,
-        true
-      )
-      farthestTarget.status.triggerParalysis(duration, farthestTarget, pokemon)
-      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
+    if (destination) {
+      pokemon.targetX = destination.target.positionX
+      pokemon.targetY = destination.target.positionY
+      pokemon.moveTo(destination.x, destination.y, board)
     }
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit,
+      true
+    )
+    target.status.triggerParalysis(duration, target, pokemon)
   }
 }
 
