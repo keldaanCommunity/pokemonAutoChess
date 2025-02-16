@@ -13164,7 +13164,7 @@ export class Pawniard extends Pokemon {
   stars = 1
   evolution = Pkm.BISHARP
   hp = 130
-  atk = 14
+  atk = 17
   def = 5
   speDef = 3
   maxPP = 60
@@ -13179,7 +13179,7 @@ export class Bisharp extends Pokemon {
   stars = 2
   evolution = Pkm.KINGAMBIT
   hp = 250
-  atk = 26
+  atk = 30
   def = 8
   speDef = 4
   maxPP = 60

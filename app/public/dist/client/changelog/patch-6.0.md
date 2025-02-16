@@ -37,6 +37,7 @@
 - Buff Houndour line: PP 125 → 110
 - Buff Sneasel Attack 9 → 10 and Weavile: Attack 22 → 26
 - Buff Topsy Turvy (Inkay): also reverse AP buffs
+- Buff Pawniard Attack 14 → 17 and Bisharp Attack 26 → 30
 
 # Changes to Synergies
 
