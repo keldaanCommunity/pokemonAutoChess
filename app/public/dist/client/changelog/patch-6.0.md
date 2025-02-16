@@ -13,6 +13,8 @@
 - Dipplin
 - Flapple
 - Hydrapple
+- Fidough
+- Dachsbun
 
 # Changes to Pokemon & Abilities
 

@@ -2220,7 +2220,7 @@
     "SILK_SCARF": "Donne la synergie NORMAL et augmente le SHIELD reçu de 50% toutes sources confondues.",
     "TINY_MUSHROOM": "Donne la synergie BUG mais réduit les HP max du porteur de 50% lorsqu'il est clôné",
     "METEORITE": "Une météorite qui semble interagir avec Deoxys. Elle émet une faible lueur et est légèrement chaude au toucher.",
-    "BERRY_JUICE": "Consommé une fois sous les 50% HP, restaure au max des HP",
+    "BERRY_JUICE": "Gagne 50 SHIELD au début du prochain combat, et à chaque fois qu'une baie est consommée.",
     "TRASH": "Les restes d'un objet artificiel devenu inutilisable",
     "OLD_ROD": "Après chaque tour PvP, pêche un Pokémon qui est ajouté à un emplacement libre de votre banc. Peut attraper des Pokémons WATER communs et peu communs ainsi que des Magikarp.",
     "GOOD_ROD": "Après chaque tour PvP, pêche un Pokémon qui est ajouté à un emplacement libre de votre banc. Peut attraper des Pokémons WATER rares ainsi que des Barpau.",

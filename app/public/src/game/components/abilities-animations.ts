@@ -1850,7 +1850,15 @@ export function displayAbility(
       break
 
     case Ability.GROWL:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+      addAbilitySprite(skill, coordinates, true)
+        .setScale(2)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) -
+            Math.PI / 2
+        )
       break
 
     case Ability.FAIRY_WIND:
