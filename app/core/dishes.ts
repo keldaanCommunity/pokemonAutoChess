@@ -1,8 +1,9 @@
 import { Effect as EffectEnum } from "../types/enum/Effect"
-import { Dishes, Item } from "../types/enum/Item"
+import { Berries, Dishes, Item } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { chance } from "../utils/random"
+import { values } from "../utils/schemas"
 import { Effect, OnHitEffect, OnSpawnEffect, PeriodicEffect } from "./effect"
 
 export const DishByPkm: { [pkm in Pkm]?: Item } = {
@@ -35,6 +36,8 @@ export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.NACLI]: Item.ROCK_SALT,
   [Pkm.NACLSTACK]: Item.ROCK_SALT,
   [Pkm.GARGANACL]: Item.ROCK_SALT,
+  [Pkm.FIDOUGH]: Item.POFFIN,
+  [Pkm.DACHSBUN]: Item.POFFIN,
   [Pkm.MUNCHLAX]: Item.LEFTOVERS,
   [Pkm.SNORLAX]: Item.LEFTOVERS,
   [Pkm.MILTANK]: Item.MOOMOO_MILK,
@@ -119,6 +122,16 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
       entity.addAttack(0.3 * entity.baseAtk, entity, 0, false)
       entity.addDefense(0.3 * entity.baseDef, entity, 0, false)
       entity.addSpecialDefense(0.3 * entity.baseSpeDef, entity, 0, false)
+    })
+  ],
+  POFFIN: [
+    new OnSpawnEffect((entity) => {
+      entity.addShield(50, entity, 0, false)
+      values(entity.items)
+        .filter((item) => Berries.includes(item))
+        .forEach((item) => {
+          entity.eatBerry(item, undefined, true)
+        })
     })
   ],
   RAGE_CANDY_BAR: [
