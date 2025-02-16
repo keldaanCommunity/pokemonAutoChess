@@ -44,6 +44,7 @@
 - More than 20 dishes have been added to the game
 - Nerf Pokerus: effect applies every ~~2~~ 2.5 seconds
 - Buff Swift Wing: 25 → 30% attack speed
+- Minor nerf to Repeat Ball: legendaries are found afer ~~140~~ 150 rolls
 
 # Gameplay
 
