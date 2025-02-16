@@ -1738,7 +1738,7 @@
     "SURF": "Una ola empuja al usuario y a enemigos en el camino a la retaguardia enemiga. Todos los enemigos golpeados reciben [20,40,80,SP] SPECIAL.",
     "STRENGTH": "Inflige 2x(ATK + DEF + SPE_DEF) + AP como PHYSICAL",
     "HARDEN": "Gana [2,4,6,SP] de DEF",
-    "TOPSY_TURVY": "Inflige [40,80,100,SP] SPECIAL al objetivo. Toda mejora a su ATK, DEF y SPE_DEF se vuelve una desmejora y viceversa.",
+    "TOPSY_TURVY": "Inflige [40,80,100,SP] SPECIAL al objetivo. Toda mejora a su ATK, AP, DEF y SPE_DEF se vuelve una desmejora y viceversa.",
     "COLUMN_CRUSH": "Construye un pilar en el lugar vacío más cercano. Si ya hay un pilar en el tablero, salta a este y lo lanza al objetivo más cercano, infligiendo [50,100,150,SP] + los HP restantes del pilar como SPECIAL.",
     "WONDER_ROOM": "Crea un área bizarra alrededor del objetivo en la cual la DEF y SPE_DEF enemiga son intercambiadas por 5 segundos y los ataques recibidos son SPECIAL que escalan con el AP del atacante.",
     "DARK_LARIAT": "Gira sus brazos y golpea al objetivo varias veces mientras se mueve atrás de este. Cada golpe inflige [100,SP]% de ATK como SPECIAL. El número de golpes aumenta con ATK_SPEED. El objetivo es FLINCH durante el ataque."

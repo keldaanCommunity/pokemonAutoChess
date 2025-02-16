@@ -1753,7 +1753,7 @@
     "SURF": "Une vague pousse le lanceur et les ennemis sur son chemin vers la ligne arrière ennemie. Tous les ennemis touchés subissent [20,40,80,SP] SPECIAL.",
     "STRENGTH": "Inflige 2x(ATK + DEF + SPE_DEF) + AP en PHYSICAL",
     "HARDEN": "Gagne [2,4,6,SP] DEF",
-    "TOPSY_TURVY": "Inflige [40,80,100,SP] SPECIAL à la cible. Tous ses bonus d'ATK, DEF et SPE_DEF deviennent des malus et vice versa.",
+    "TOPSY_TURVY": "Inflige [40,80,100,SP] SPECIAL à la cible. Tous ses bonus d'ATK, AP, DEF et SPE_DEF deviennent des malus et vice versa.",
     "COLUMN_CRUSH": "Construit un pilier sur l'emplacement vide le plus proche. Si un pilier est déjà sur le plateau, saute vers lui et le lance sur la cible la plus proche, infligeant [50,100,150,SP] + les HP restants du pilier en tant que SPECIAL.",
     "WONDER_ROOM": "Crée une zone bizarre autour de la cible dans laquelle la DEF et la SPE_DEF des ennemis sont échangées pendant 5 secondes et les attaques reçues causent des SPECIAL qui augmentent avec la AP de l'attaquant.",
     "DARK_LARIAT": "Balance les bras et frappe la cible plusieurs fois tout en se déplaçant derrière elle. Chaque coup inflige [100,SP]% d'ATK en SPECIAL. Le nombre de coups augmente avec la ATK_SPEED. La cible est FLINCH pendant l'attaque.",

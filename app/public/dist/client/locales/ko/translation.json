@@ -1758,7 +1758,7 @@
     "SURF": "파도가 시전자와 경로 상의 적들을 적의 후방으로 밀어낸다. 피격당한 적들은 [20,40,80,SP] SPECIAL를 입는다.",
     "STRENGTH": "2 x (ATK + DEF + SPE_DEF) + AP 만큼 PHYSICAL를 가한다.",
     "HARDEN": "[2,4,6,SP] DEF을 얻는다.",
-    "TOPSY_TURVY": "대상에게 [40,80,100,SP] SPECIAL를 가한다. 모든 ATK, DEF, SPE_DEF 버프와 디버프가 반전된다.",
+    "TOPSY_TURVY": "대상에게 [40,80,100,SP] SPECIAL를 가한다. 모든 ATK, AP, DEF, SPE_DEF 버프와 디버프가 반전된다.",
     "COLUMN_CRUSH": "가장 가까운 빈 공간에 기둥을 건설한다. 전장에 이미 기둥이 있다면 그것에 도약하여 가장 가까운 적에게 기둥을 던져 기둥의 HP + [50,100,150,SP] SPECIAL를 가한다.",
     "WONDER_ROOM": "대상 주변에 기묘한 영역을 만들어 5초 동안 그 안에 있는 적들의 DEF 과 SPE_DEF 를 뒤바꾸고 기본 공격 피격 시 공격자의 AP 에 비례하여 SPECIAL 를 입는다.",
     "DARK_LARIAT": "팔을 휘둘러 여러 번 공격하며 대상의 후방으로 이동한다. 각 공격은 [100,SP]% ATK 만큼 SPECIAL 를 입힌다. 공격 횟수는 ATK_SPEED 에 비례한다. 대상은 피격 중에 FLINCH 상태이다.",

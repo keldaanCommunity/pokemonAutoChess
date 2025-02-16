@@ -1758,7 +1758,7 @@
     "SURF": "Eine riesige Welle bricht über den Anwender hinein. Schwemmt ihn und alle Gegner auf dem Weg in die gegnerische Rücklinie. Getroffene Gegner erleiden [20,40,80,SP] SPECIAL.",
     "STRENGTH": "Fügt dem Ziel 2x(ATK + DEF + SPE_DEF) + AP als PHYSICAL zu.",
     "HARDEN": "Erhalte [2,4,6,SP] DEF.",
-    "TOPSY_TURVY": "Verursacht [40,80,100,SP] SPECIAL am Ziel. Alle seine Statuswertveränderungen (ATK, DEF, SPE_DEF) werden umgekehrt.",
+    "TOPSY_TURVY": "Verursacht [40,80,100,SP] SPECIAL am Ziel. Alle seine Statuswertveränderungen (ATK, AP, DEF, SPE_DEF) werden umgekehrt.",
     "COLUMN_CRUSH": "Errichtet eine Säule auf ein nahegelegenes leeres Feld und blockiert es. Befindet sich bereits eine Säule auf dem Spielfeld, springt der Anwender zu ihr und wirft sie auf den nächsten Gegner. Fügt [50,100,150,SP] + verbleibenden HP der Säule als SPECIAL zu.",
     "WONDER_ROOM": "Anwender erzeugt einen bizarren Raum um sich. Die DEF und SPE_DEF darin befindlicher Gegner werden für 5 Sekunden getauscht. Erhaltene Angriffe sind SPECIAL und skalieren mit der AP des Anwenders.",
     "DARK_LARIAT": "Schlägt mit seinen Armen um sich und trifft das Ziel mehrmals von hinten und lässt es FLINCH. Jeder Treffer fügt [100,SP]% der ATK als SPECIAL zu. Trefferanzahl erhöht sich mit dem ATK_SPEED des Anwenders.",

@@ -11026,6 +11026,9 @@ export class TopsyTurvyStrategy extends AbilityStrategy {
           const d = target.atk - target.baseAtk
           target.addAttack(-2 * d, pokemon, 0, false)
         }
+        if (target.ap > 0) {
+          target.addAbilityPower(-2 * target.ap, pokemon, 0, false)
+        }
         if (target.def > target.baseDef) {
           const d = target.def - target.baseDef
           target.addDefense(-2 * d, pokemon, 0, false)

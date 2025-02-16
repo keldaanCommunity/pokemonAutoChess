@@ -35,7 +35,8 @@
 - Buff Vulpix line andd Alolan Vulpix line: PP 85 → 80 : Aurora Veil Rune protect duration 0.5 → 1 second
 - Nerf Teatime (Polteageist): healing 20/40/80 → 15/30/60
 - Buff Houndour line: PP 125 → 110
-- Buff Sneasel Attack 9 → 10 andd Weavile: Attack 22 → 26
+- Buff Sneasel Attack 9 → 10 and Weavile: Attack 22 → 26
+- Buff Topsy Turvy (Inkay): also reverse AP buffs
 
 # Changes to Synergies
 
