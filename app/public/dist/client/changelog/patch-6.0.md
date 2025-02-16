@@ -47,6 +47,7 @@
 - Nerf Miltank: HP 250 → 200
 - Nerf Spinda: HP 250 → 200
 - Nerf Burmy line: Burmy now has various defense stats based on its cloak: Plant Cloak: def 3/3/3 → 1/1/1, spedef 3/5/3 → 1/2/3, Sand Cloak def 3/3/3 → 2/2/2, spedef 3/5/3 → 2/3/3
+- Buff Melmetal: increase Attack speed/Attack ratio: 10% attack speed = ~~3~~ 5 attack
 
 # Changes to Synergies
 
