@@ -5495,11 +5495,7 @@ export class Eevee extends Pokemon {
 }
 
 export class Vaporeon extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WATER,
-    Synergy.AMORPHOUS,
-    Synergy.FIELD
-  ])
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 180
@@ -5527,7 +5523,7 @@ export class Jolteon extends Pokemon {
 }
 
 export class Flareon extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.LIGHT])
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 180
@@ -5569,7 +5565,7 @@ export class Umbreon extends Pokemon {
 }
 
 export class Leafeon extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIELD])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 180
@@ -5583,7 +5579,7 @@ export class Leafeon extends Pokemon {
 }
 
 export class Sylveon extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FIELD, Synergy.SOUND])
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FIELD])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 180

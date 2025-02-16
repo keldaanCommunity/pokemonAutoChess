@@ -32,6 +32,10 @@
 - Miltank is now Normal/Gourmet/Field
 - Spinda is now Normal/Gourmet
 - Guzzlord is now Gourmet/Dark/Monster and has a new passive
+- Leafeon is no longer Flora
+- Vaporeon is no longer Amorphous
+- Flareon is no longer Light
+- Sylveon is no longer Sound
 - Buff Vulpix line andd Alolan Vulpix line: PP 85 → 80 : Aurora Veil Rune protect duration 0.5 → 1 second
 - Nerf Teatime (Polteageist): healing 20/40/80 → 15/30/60
 - Buff Houndour line: PP 125 → 110
