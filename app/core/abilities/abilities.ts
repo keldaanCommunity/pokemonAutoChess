@@ -368,7 +368,7 @@ export class TeaTimeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const heal = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const heal = [15, 30, 60][pokemon.stars - 1] ?? 60
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team == tg.team) {
         broadcastAbility(pokemon, { positionX: x, positionY: y })

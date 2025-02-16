@@ -33,6 +33,7 @@
 - Spinda is now Normal/Gourmet
 - Guzzlord is now Gourmet/Dark/Monster and has a new passive
 - Buff Vulpix line andd Alolan Vulpix line: PP 85 → 80 : Aurora Veil Rune protect duration 0.5 → 1 second
+- Nerf Teatime (Polteageist): healing 20/40/80 → 15/30/60
 
 # Changes to Synergies
 
@@ -51,6 +52,7 @@
 - Added regional variants for Unique and Legendary Pokémon. The first regional variant is Galarian Farfetch'd, which can be found in Fighting regions
 - Regional variants are no longer found in maps with common synergies between the variant and the original Pokémon
 - When an effect is considering the strongest Pokémon, or the pokémon with the highest stat, if several Pokémon are equal, it now selects a random Pokémon among those. Before, it was based on board position. This is especially relevant for Ghost curses.
+- Farthest reachable target algorithm has been improved to favor the farthest target when there are multiple equidistant free cells. This impacts several abilities and effects, such as Comet Shard and all dashers abilities
 
 # UI
 
