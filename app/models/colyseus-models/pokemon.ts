@@ -53,7 +53,7 @@ import {
 } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
-import { removeInArray, sum } from "../../utils/array"
+import { removeInArray } from "../../utils/array"
 import {
   getFirstAvailablePositionInBench,
   getFirstAvailablePositionOnBoard,
@@ -61,11 +61,14 @@ import {
 } from "../../utils/board"
 import { distanceC, distanceE } from "../../utils/distance"
 import { values } from "../../utils/schemas"
-import { SynergyEffects } from "../effects"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
 import { SynergyEffects } from "../effects"
-import { DrySkinEffect, ClearWingEffect, SynchroEffect } from "../../core/effect"
+import {
+  DrySkinEffect,
+  ClearWingEffect,
+  SynchroEffect
+} from "../../core/effect"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -200,7 +203,7 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   isInRegion(map: DungeonPMDO | "town", state?: GameState) {
-    if(map === "town") return false
+    if (map === "town") return false
     const regionSynergies = DungeonDetails[map]?.synergies
     const basePkm = PkmFamily[this.name]
     const originalVariantPkm = (Object.keys(PkmRegionalVariants) as Pkm[]).find(
@@ -1199,10 +1202,10 @@ export class Fuecoco extends Pokemon {
   evolution = Pkm.CROCALOR
   hp = 110
   atk = 5
-  def = 3
-  speDef = 3
-  maxPP = 100
-  range = 2
+  def = 2
+  speDef = 1
+  maxPP = 60
+  range = 3
   skill = Ability.TORCH_SONG
   attackSprite = AttackSprite.FIRE_RANGE
 }
@@ -1214,10 +1217,10 @@ export class Crocalor extends Pokemon {
   evolution = Pkm.SKELEDIRGE
   hp = 170
   atk = 13
-  def = 4
-  speDef = 4
-  maxPP = 100
-  range = 2
+  def = 3
+  speDef = 2
+  maxPP = 60
+  range = 3
   skill = Ability.TORCH_SONG
   attackSprite = AttackSprite.FIRE_RANGE
 }
@@ -1228,10 +1231,10 @@ export class Skeledirge extends Pokemon {
   stars = 3
   hp = 350
   atk = 24
-  def = 5
-  speDef = 5
-  maxPP = 100
-  range = 2
+  def = 4
+  speDef = 3
+  maxPP = 60
+  range = 3
   skill = Ability.TORCH_SONG
   attackSprite = AttackSprite.FIRE_RANGE
 }
