@@ -63,10 +63,6 @@ export default abstract class PokemonState {
         damage = Math.ceil(damage * (1 + pokemon.ap / 100))
       }
 
-      if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {
-        damage = Math.ceil(damage * (1 + pokemon.ap / 100))
-      }
-
       if (pokemon.effects.has(Effect.STONE_EDGE)) {
         damage += Math.round(pokemon.def * (1 + pokemon.ap / 100))
       }
