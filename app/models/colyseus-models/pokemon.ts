@@ -8788,7 +8788,7 @@ export class Sneasel extends Pokemon {
   stars = 1
   evolution = Pkm.WEAVILE
   hp = 85
-  atk = 9
+  atk = 10
   def = 1
   speDef = 3
   maxPP = 40
@@ -8803,7 +8803,7 @@ export class Weavile extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 200
-  atk = 22
+  atk = 26
   def = 2
   speDef = 3
   maxPP = 40
