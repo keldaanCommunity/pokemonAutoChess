@@ -25,6 +25,7 @@ import {
 import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
 import { PokemonActionState } from "../../types/enum/Game"
 import {
+  Berries,
   CraftableItems,
   Item,
   ItemComponents,
@@ -617,8 +618,14 @@ export class MiniGame {
       if (player && PortalCarouselStages.includes(state.stageLevel)) {
         if (avatar.portalId && this.portals?.has(avatar.portalId)) {
           const portal = this.portals.get(avatar.portalId)!
-          player.map = portal.map
-          player.updateRegionalPool(state, true)
+          if (portal.map !== player.map) {
+            player.map = portal.map
+            player.updateRegionalPool(state, true)
+            for (let i = 0; i < player.berryTreesType.length; i++) {
+              player.berryTreesType[i] = pickRandomIn(Berries)
+              player.berryTreesStage[i] = 0
+            }
+          }
         }
 
         const symbols = this.symbolsByPortal.get(avatar.portalId) ?? []
