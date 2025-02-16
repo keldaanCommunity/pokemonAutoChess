@@ -513,7 +513,7 @@ export default function Game() {
       })
 
       room.state.additionalPokemons.onAdd(() => {
-        dispatch(setAdditionalPokemons([...room.state.additionalPokemons]))
+        dispatch(setAdditionalPokemons(room.state.additionalPokemons.slice()))
       })
 
       room.state.simulations.onRemove(() => {
