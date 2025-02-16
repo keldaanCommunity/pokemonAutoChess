@@ -2323,7 +2323,6 @@
     "CURRY": "在下一轮战斗开始时，陷入RAGE 5秒。",
     "CASTELIACONE": "仅在下一轮战斗中，第一次攻击会使命中的敌方宝可梦陷入FREEZE 5秒。",
     "WHIPPED_DREAM": "仅在下一轮战斗中，第一次攻击会使命中的敌方宝可梦陷入CHARM 5秒。",
-    "BERRY_JUICE": "仅在下一轮战斗中，战斗开始时以及每次食用树果时获得50点SHIELD。",
     "TART_APPLE": "这个苹果尚未成熟，暂且放着应该更好。一轮结束后，会变为SWEET_APPLE。",
     "SWEET_APPLE": "在下一轮战斗开始时，获得80点SHIELD。一轮结束后，会变为SIRUPY_APPLE。",
     "SIRUPY_APPLE": "在下一轮战斗开始时，获得100点SHIELD。",

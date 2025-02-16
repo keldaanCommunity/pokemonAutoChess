@@ -169,6 +169,7 @@ export enum Pkm {
   CUTIEFLY = "CUTIEFLY",
   CYCLIZAR = "CYCLIZAR",
   CYNDAQUIL = "CYNDAQUIL",
+  DACHSBUN = "DACHSBUN",
   DARKRAI = "DARKRAI",
   DARMANITAN = "DARMANITAN",
   DARMANITAN_ZEN = "DARMANITAN_ZEN",
@@ -244,6 +245,7 @@ export enum Pkm {
   FERALIGATR = "FERALIGATR",
   FERROSEED = "FERROSEED",
   FERROTHORN = "FERROTHORN",
+  FIDOUGH = "FIDOUGH",
   FINNEON = "FINNEON",
   FLABEBE = "FLABEBE",
   FLAFFY = "FLAFFY",
@@ -1988,8 +1990,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.TANDEMAUS]: "0924",
   [Pkm.MAUSHOLD_THREE]: "0925-0001",
   [Pkm.MAUSHOLD_FOUR]: "0925",
-  //[Pkm.FIDOUGH]: "0926",
-  //[Pkm.DACHSBUN]: "0927",
+  [Pkm.FIDOUGH]: "0926",
+  [Pkm.DACHSBUN]: "0927",
   //[Pkm.SMOLIVE]: "0928",
   //[Pkm.DOLLIV]: "0929",
   //[Pkm.ARBOLIVA]: "0930",
@@ -2993,7 +2995,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SWIRLIX]: Pkm.SWIRLIX,
   [Pkm.SLURPUFF]: Pkm.SWIRLIX,
   [Pkm.GULPIN]: Pkm.GULPIN,
-  [Pkm.SWALOT]: Pkm.GULPIN
+  [Pkm.SWALOT]: Pkm.GULPIN,
+  [Pkm.FIDOUGH]: Pkm.FIDOUGH,
+  [Pkm.DACHSBUN]: Pkm.FIDOUGH
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7740,5 +7744,15 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.RearUp
+  },
+  [Pkm.FIDOUGH]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Twirl
+  },
+  [Pkm.DACHSBUN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.TailWhip
   }
 }
