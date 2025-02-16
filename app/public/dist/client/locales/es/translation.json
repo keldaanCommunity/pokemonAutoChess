@@ -2435,7 +2435,7 @@
     "RAGE": "Doble daño y velocidad. El escudo, la curación, y la duración de FREEZE y SLEEP se reducen a la mitad. pierde PROTECT. Todas las unidades se vuelven RAGE después de 35 segundos de pelea.",
     "RESURECTION": "Previene KO una vez, restaurando al máximo HP",
     "PARALYSIS": "Reduce el ATK_SPEED y la velocidad de movimiento un 40%, impide esquivar ataques",
-    "POKERUS": "Cada 2 segundos, obtiene 1 ATK y 10 AP antes de infectar a 2 aliados adyacentes con POKERUS",
+    "POKERUS": "Cada 2.5 segundos, obtiene 1 ATK y 10 AP antes de infectar a 2 aliados adyacentes con POKERUS",
     "ARMOR_REDUCTION": "Reduce la DEF y la SPE_DEF en un 50%",
     "CHARM": "Impide atacar al objetivo y obliga a acercarse a él.",
     "FLINCH": "El 50% del daño entrante atraviesa SHIELD",

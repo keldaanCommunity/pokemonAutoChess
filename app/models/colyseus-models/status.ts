@@ -74,7 +74,7 @@ export default class Status extends Schema implements IStatus {
   magicBounceCooldown = 0
   resurectingCooldown = 0
   curseCooldown = 0
-  pokerusCooldown = 2000
+  pokerusCooldown = 2500
   lockedCooldown = 0
   blindCooldown = 0
   enrageDelay = 35000
@@ -312,7 +312,10 @@ export default class Status extends Schema implements IStatus {
         }
       }
 
-      if (pkm.passive === Passive.GUTS && !pkm.effects.has(Effect.GUTS_PASSIVE)) {
+      if (
+        pkm.passive === Passive.GUTS &&
+        !pkm.effects.has(Effect.GUTS_PASSIVE)
+      ) {
         pkm.effects.add(Effect.GUTS_PASSIVE)
         pkm.addAttack(5, pkm, 0, false)
       }
@@ -438,12 +441,18 @@ export default class Status extends Schema implements IStatus {
       if (duration > this.poisonCooldown) {
         this.poisonCooldown = duration
       }
-      if (pkm.passive === Passive.GUTS && !pkm.effects.has(Effect.GUTS_PASSIVE)) {
+      if (
+        pkm.passive === Passive.GUTS &&
+        !pkm.effects.has(Effect.GUTS_PASSIVE)
+      ) {
         pkm.effects.add(Effect.GUTS_PASSIVE)
         pkm.addAttack(5, pkm, 0, false)
       }
 
-      if (pkm.passive === Passive.TOXIC_BOOST && !pkm.effects.has(Effect.TOXIC_BOOST)) {
+      if (
+        pkm.passive === Passive.TOXIC_BOOST &&
+        !pkm.effects.has(Effect.TOXIC_BOOST)
+      ) {
         pkm.effects.add(Effect.TOXIC_BOOST)
         pkm.addAttack(10, pkm, 0, false)
       }
@@ -906,7 +915,7 @@ export default class Status extends Schema implements IStatus {
           }
         }
       })
-      this.pokerusCooldown = 2000
+      this.pokerusCooldown = 2500
     } else {
       this.pokerusCooldown -= dt
     }

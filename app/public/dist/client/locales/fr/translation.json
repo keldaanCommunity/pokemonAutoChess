@@ -2471,7 +2471,7 @@
     "RAGE": "Double les dégâts et la vitesse, réduit de moitié les boucliers, soins, durées de gel et sommeil, retire PROTECT. Toutes les unités deviennent RAGE après 35 secondes de combat.",
     "RESURECTION": "Empêche de tomber KO une fois, restaurant au maximum des HP",
     "PARALYSIS": "Réduit la ATK_SPEED et vitesse de déplacement de 40 %. Ne peut plus esquiver les attaques.",
-    "POKERUS": "Toutes les 2 secondes, gagnez 1 ATK et 10 AP avant d'infecter 2 alliés adjacents avec le POKERUS",
+    "POKERUS": "Toutes les 2,5 secondes, gagnez 1 ATK et 10 AP avant d'infecter 2 alliés adjacents avec le POKERUS",
     "ARMOR_REDUCTION": "Réduit la DEF et SPE_DEF de 50 %",
     "CHARM": "Empêche d'attaquer la cible et force à s'en rapprocher",
     "FLINCH": "50% des dégâts reçus passent à travers le SHIELD",
