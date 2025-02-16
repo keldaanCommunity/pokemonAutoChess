@@ -17,7 +17,10 @@
     "url": "https://github.com/keldaanCommunity/pokemonAutoChess/issues"
   },
   "author": "keldaan-ag",
-  "contributors": ["ogus", "sylvainpolletvillard"],
+  "contributors": [
+    "ogus",
+    "sylvainpolletvillard"
+  ],
   "main": "public/dist/server/app/index.js",
   "scripts": {
     "reset": "rimraf -rf node_modules/",
@@ -69,6 +72,7 @@
     "firebaseui": "^6.1.0",
     "fs-extra": "^11.2.0",
     "graceful-fs": "^4.2.10",
+    "helmet": "^8.0.0",
     "i18next": "^23.12.2",
     "i18next-browser-languagedetector": "^8.0.0",
     "i18next-http-backend": "^2.4.2",
