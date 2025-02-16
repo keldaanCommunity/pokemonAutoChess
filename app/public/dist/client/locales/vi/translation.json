@@ -1280,7 +1280,7 @@
 		"BEAT_UP": "Triệu hồi [1,2,3] Houndour ([100,SP]% HP, không có trang bị)",
 		"BLUE_FLARE": "Gây [50,SP] SPECIAL + 10 cho từng cấp bậc hiệu ứng hệ FIRE lên mục tiêu và đối thủ gần nó",
 		"FUSION_BOLT": "Gây [50,SP] SPECIAL + 10 cho từng cấp bậc hiệu ứng hệ ELECTRIC lên mục tiêu và đối thủ gần nó",
-		"AURORA_VEIL": "Toàn bộ đồng minh nhận [5,10,15,SP] SHIELD và RUNE_PROTECT trong 0.5 giây",
+		"AURORA_VEIL": "Toàn bộ đồng minh nhận [5,10,15,SP] SHIELD và RUNE_PROTECT trong 1 giây",
 		"AQUA_JET": "Tốc biến đến hậu tuyến đối thủ, gây [20,40,80,SP] SPECIAL lên toàn bộ đối thủ trúng phải",
 		"CHATTER": "Gây [20,SP] SPECIAL lên toàn bộ đối thủ. Đối thủ có [50,LK]% khả năng trúng hiệu ứng CONFUSION trong 1 giây",
 		"STEAM_ERUPTION": "Gây [100,SP] TRUE lên mục tiêu",

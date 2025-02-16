@@ -986,7 +986,7 @@
     "BEAT_UP": "Roep [1,2,3] Houndour op ([100,SP]% HP, geen items)",
     "BLUE_FLARE": "Veroorzaakt [50,SP] SPECIAL + 10 per fase van FIRE synergie",
     "FUSION_BOLT": "Zorgt voor [50,SP] SPECIAL + 10 per fase van ELECTRIC synergie",
-    "AURORA_VEIL": "Alle bondgenoten ontvangen [5,10,15,SP] SHIELD en RUNE_PROTECT gedurende 0.5 seconden",
+    "AURORA_VEIL": "Alle bondgenoten ontvangen [5,10,15,SP] SHIELD en RUNE_PROTECT gedurende 1 seconden",
     "AQUA_JET": "Stort je in de achterlijn van de vijand en deel [20,40,80,SP] SPECIAL",
     "JUDGEMENT": "Brengt [10,SP] speciale schade toe aan het doelwit, vermenigvuldigd met de som van Arceus-synergieniveaus",
     "CHATTER": "Geef [20,SP] SPECIAL aan alle vijanden. Elke vijand heeft [50,LK]% kans om 1 seconde CONFUSION te zijn",

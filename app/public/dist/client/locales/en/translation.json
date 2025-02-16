@@ -1480,7 +1480,7 @@
     "BLUE_FLARE": "Deal [50,SP] SPECIAL + 10 per level of FIRE synergy to the target and adjacent enemy Pokémon.",
     "FUSION_BOLT": "Deal [50,SP] SPECIAL + 10 per level of ELECTRIC synergy to the target and adjacent enemy Pokémon.",
     "GLACIATE": "Deal [50,SP] SPECIAL + 10 per level of ICE synergy to the target and adjacent enemy Pokémon.",
-    "AURORA_VEIL": "All allied Pokémon receive [5,10,15,SP] SHIELD and RUNE_PROTECT for 0.5 seconds.",
+    "AURORA_VEIL": "All allied Pokémon receive [5,10,15,SP] SHIELD and RUNE_PROTECT for 1 second.",
     "AQUA_JET": "Dash into the enemy back line and deal [20,40,80,SP] SPECIAL to all enemy Pokémon in the path.",
     "JUDGEMENT": "Deal [10,SP] special damage to the target, multiplied by the sum of Arceus' synergy levels.",
     "CHATTER": "Deal [20,SP] SPECIAL to all enemy Pokémon. Every enemy has [50,LK]% chance to be inflicted with CONFUSION for 1 second.",

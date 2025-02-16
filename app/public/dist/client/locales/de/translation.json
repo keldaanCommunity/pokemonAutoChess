@@ -1459,7 +1459,7 @@
     "BLUE_FLARE": "Verursacht [50,SP] SPECIAL + 10 pro FIRE synergie",
     "FUSION_BOLT": "Verursacht [50,SP] SPECIAL + 10 pro ELECTRIC synergie",
     "GLACIATE": "Fügt dem Ziel und benachbarten Gegnern [50,SP] SPECIAL + 10 pro ICE-Synergie zu.",
-    "AURORA_VEIL": "Alle Verbündeten erhalten [5,10,15,SP] SHIELD und RUNE_PROTECT für 0.5 Sekunden",
+    "AURORA_VEIL": "Alle Verbündeten erhalten [5,10,15,SP] SHIELD und RUNE_PROTECT für 1 Sekunden",
     "AQUA_JET": "Stürme in die gegnerische Hinterlinie und verursache [20,40,80,SP] SPECIAL",
     "JUDGEMENT": "Fügt dem Ziel [10,SP] Spezialschaden zu, multipliziert mit der Summe der Arceus-Synergiestufen",
     "CHATTER": "Füge allen Feinden [20,SP] SPECIAL zu. Jeder Feind hat eine Chance von [50,LK] %, 1 Sekunde lang CONFUSION zu erleiden",

@@ -1439,7 +1439,7 @@
     "BLUE_FLARE": "Inflige [50,SP] de SPECIAL + 10 por nivel de sinergia de FIRE al objetivo y enemigos adyacentes",
     "FUSION_BOLT": "Inflige [50,SP] de SPECIAL + 10 por nivel de sinergia ELECTRIC al objetivo y enemigos adyacentes",
     "GLACIATE": "Inflige [50,SP] SPECIAL + 10 por nivel de sinergia ICE al objetivo y a Pokémon enemigos adyacentes",
-    "AURORA_VEIL": "Todos los aliados reciben [5,10,15,SP] de SHIELD y RUNE_PROTECT por 0.5 segundos",
+    "AURORA_VEIL": "Todos los aliados reciben [5,10,15,SP] de SHIELD y RUNE_PROTECT por 1 segundos",
     "AQUA_JET": "Se cuela en la retaguardia enemiga e inflige [20,40,80,SP] de SPECIAL a todos los enemigos que golpee",
     "JUDGEMENT": "Inflige [10,SP] de SPECIAL al objetivo, multiplicado por la suma de los niveles de sinergia de Arceus",
     "CHATTER": "Inflige [20,SP] de SPECIAL a todos los enemigos. Cada enemigo tiene un [50,LK]% de probabilidad de quedar CONFUSION por 1 segundo",

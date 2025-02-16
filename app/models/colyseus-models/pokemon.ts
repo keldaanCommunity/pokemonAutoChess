@@ -65,7 +65,11 @@ import { SynergyEffects } from "../effects"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
 import { SynergyEffects } from "../effects"
-import { DrySkinEffect, ClearWingEffect, SynchroEffect } from "../../core/effect"
+import {
+  DrySkinEffect,
+  ClearWingEffect,
+  SynchroEffect
+} from "../../core/effect"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -200,7 +204,7 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   isInRegion(map: DungeonPMDO | "town", state?: GameState) {
-    if(map === "town") return false
+    if (map === "town") return false
     const regionSynergies = DungeonDetails[map]?.synergies
     const basePkm = PkmFamily[this.name]
     const originalVariantPkm = (Object.keys(PkmRegionalVariants) as Pkm[]).find(
@@ -9394,7 +9398,7 @@ export class Vulpix extends Pokemon {
   atk = 7
   def = 2
   speDef = 2
-  maxPP = 85
+  maxPP = 80
   range = 2
   skill = Ability.FIRE_SPIN
   attackSprite = AttackSprite.FIRE_RANGE
@@ -9409,7 +9413,7 @@ export class Ninetales extends Pokemon {
   atk = 20
   def = 3
   speDef = 5
-  maxPP = 85
+  maxPP = 80
   range = 2
   skill = Ability.FIRE_SPIN
   attackSprite = AttackSprite.FIRE_RANGE
@@ -9425,7 +9429,7 @@ export class AlolanVulpix extends Pokemon {
   atk = 7
   def = 2
   speDef = 2
-  maxPP = 85
+  maxPP = 80
   range = 2
   skill = Ability.AURORA_VEIL
   regional = true
@@ -9449,7 +9453,7 @@ export class AlolanNinetales extends Pokemon {
   atk = 20
   def = 5
   speDef = 5
-  maxPP = 85
+  maxPP = 80
   range = 2
   skill = Ability.AURORA_VEIL
   regional = true

@@ -32,6 +32,7 @@
 - Miltank is now Normal/Gourmet/Field
 - Spinda is now Normal/Gourmet
 - Guzzlord is now Gourmet/Dark/Monster and has a new passive
+- Buff Vulpix line andd Alolan Vulpix line: PP 85 → 80 : Aurora Veil Rune protect duration 0.5 → 1 second
 
 # Changes to Synergies
 

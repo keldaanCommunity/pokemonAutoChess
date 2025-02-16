@@ -1473,7 +1473,7 @@
     "BLUE_FLARE": "对目标和相邻敌方宝可梦造成[50,SP]点SPECIAL。每有一级FIRE共鸣，该伤害提升10。",
     "FUSION_BOLT": "对目标和相邻敌方宝可梦造成[50,SP]点SPECIAL。每有一级ELECTRIC共鸣，该伤害提升10。",
     "GLACIATE": "对目标和相邻敌方宝可梦造成[50,SP]点SPECIAL。每有一级ICE共鸣，该伤害提升10。",
-    "AURORA_VEIL": "所有我方宝可梦获得[5,10,15,SP]点SHIELD并进入RUNE_PROTECT 0.5秒。",
+    "AURORA_VEIL": "所有我方宝可梦获得[5,10,15,SP]点SHIELD并进入RUNE_PROTECT 1秒。",
     "AQUA_JET": "突进至敌方队伍的后排，对击中的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL。",
     "JUDGEMENT": "对目标造成SPECIAL，数值相当于[10,SP]乘以阿尔宙斯所处的共鸣等级之和。",
     "CHATTER": "对所有敌方宝可梦造成[20,SP]点SPECIAL。每个敌方宝可梦各有[50,LK]%的概率陷入CONFUSION 1秒。",

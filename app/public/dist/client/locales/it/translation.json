@@ -1390,7 +1390,7 @@
     "BLUE_FLARE": "Infliggi [50,SP] SPECIAL + 10 per ogni livello di sinergia FIRE al bersaglio ed a Pokèmon nemici adiacenti.",
     "FUSION_BOLT": "Infligge [50,SP] SPECIAL + 10 per ogni livello di sinergia ELECTRIC al bersaglio ed a Pokèmon nemici adiacenti.",
     "GLACIATE": "Infliggi [50,SP] SPECIAL + 10 per ogni livello della sinergia ICE al bersaglio ed ai nemici adiacenti.",
-    "AURORA_VEIL": "Tutti i Pokèmon alleati ricevono [5,10,15,SP] SHIELD e RUNE_PROTECT per 0.5 secondi.",
+    "AURORA_VEIL": "Tutti i Pokèmon alleati ricevono [5,10,15,SP] SHIELD e RUNE_PROTECT per 1 secondi.",
     "AQUA_JET": "Scatta nelle retrovie nemiche, infliggendo [20,40,80,SP] SPECIAL a tutti i Pokèmon nemici colpiti nel tragitto.",
     "JUDGEMENT": "Infliggi [10,SP] danni speciali al bersaglio, moltiplicati per la somma dei livelli di sinergia di Arceus.",
     "CHATTER": "Infliggi [20,SP] SPECIAL a tutti i nemici. Ogni nemico ha il [50,LK]% di possibilità di essere CONFUSION per 1 secondo",
