@@ -1,12 +1,7 @@
 import { type Scene } from "phaser"
 import { DungeonMusic } from "../../../../types/enum/Dungeon"
 import { logger } from "../../../../utils/logger"
-import {
-  IPreferencesState,
-  preference,
-  subscribeToPreferences
-} from "../../preferences"
-import { getGameScene } from "../game"
+import { preference, subscribeToPreferences } from "../../preferences"
 
 export const SOUNDS = {
   BUTTON_CLICK: "buttonclick.ogg",
@@ -68,7 +63,7 @@ export function playSound(key: Soundkey, volume = 1) {
   const sound = AUDIO_ELEMENTS[key]
   if (sound) {
     sound.currentTime = 0
-    sound.volume = (volume * preference('sfxVolume')) / 100
+    sound.volume = (volume * preference("sfxVolume")) / 100
     sound.play()
   }
 }
