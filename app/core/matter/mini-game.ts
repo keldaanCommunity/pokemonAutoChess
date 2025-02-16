@@ -232,12 +232,15 @@ export class MiniGame {
         Math.sin((2 * Math.PI * i) / this.alivePlayers.length) * 250
       let retentionDelay =
         4000 + (this.alivePlayers.length - player.rank) * 2000
-      if (stageLevel < 5) {
+
+      if (stageLevel === 0) {
+        retentionDelay = 12000
+      } else if (PortalCarouselStages.includes(stageLevel)) {
+        retentionDelay = 8000
+      } else if (stageLevel < 5) {
         retentionDelay = 5000
       }
-      if (PortalCarouselStages.includes(stageLevel)) {
-        retentionDelay = 8000
-      }
+
       if (player.isBot) {
         retentionDelay += randomBetween(1000, 6000)
       }
