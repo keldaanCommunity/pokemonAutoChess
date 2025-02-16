@@ -98,6 +98,8 @@ export default config({
           directives: {
             defaultSrc: [
               "'self'",
+              "https://*.pokemon-auto-chess.com",
+              "wss://*.pokemon-auto-chess.com",
               "https://*.firebaseapp.com",
               "https://apis.google.com",
               "https://*.googleapis.com",
@@ -114,6 +116,7 @@ export default config({
             imgSrc: [
               "'self'",
               "data:",
+              "blob:",
               "https://www.gstatic.com",
               "http://raw.githubusercontent.com"
             ]
