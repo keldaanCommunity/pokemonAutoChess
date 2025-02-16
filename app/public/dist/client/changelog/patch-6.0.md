@@ -34,6 +34,7 @@
 - Guzzlord is now Gourmet/Dark/Monster and has a new passive
 - Buff Vulpix line andd Alolan Vulpix line: PP 85 → 80 : Aurora Veil Rune protect duration 0.5 → 1 second
 - Nerf Teatime (Polteageist): healing 20/40/80 → 15/30/60
+- Buff Houndour line: PP 125 → 110
 
 # Changes to Synergies
 

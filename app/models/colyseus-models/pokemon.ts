@@ -7804,7 +7804,7 @@ export class Houndour extends Pokemon {
   atk = 8
   def = 4
   speDef = 4
-  maxPP = 125
+  maxPP = 110
   range = 1
   skill = Ability.BEAT_UP
   attackSprite = AttackSprite.FIRE_MELEE
@@ -7820,7 +7820,7 @@ export class Houndoom extends Pokemon {
   atk = 20
   def = 6
   speDef = 6
-  maxPP = 125
+  maxPP = 110
   range = 1
   skill = Ability.BEAT_UP
   attackSprite = AttackSprite.FIRE_MELEE
