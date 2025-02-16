@@ -499,7 +499,7 @@ export default class Shop {
     )
     const totalRerolls = player.rerollCount + state.stageLevel
     if (shopIndex >= 0 && shopIndex < repeatBallHolders.length) {
-      if (totalRerolls >= 140 && totalRerolls % 10 === 0) {
+      if (totalRerolls >= 150 && totalRerolls % 10 === 0) {
         let legendaryCandidates: Pkm[] = LegendaryPool.filter<Pkm>(
           (p): p is Pkm => !(p in PkmDuos)
         )

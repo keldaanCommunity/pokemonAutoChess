@@ -368,7 +368,7 @@ export class TeaTimeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const heal = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const heal = [15, 30, 60][pokemon.stars - 1] ?? 60
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team == tg.team) {
         broadcastAbility(pokemon, { positionX: x, positionY: y })
@@ -880,7 +880,7 @@ export class AuroraVeilStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const runeProtectDuration = 500
+    const runeProtectDuration = 1000
     const shield = [5, 10, 15][pokemon.stars - 1] ?? 15
 
     board.forEach((x, y, tg) => {
@@ -7315,7 +7315,7 @@ export class SnipeShotStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    const damage = [40, 80, 160][pokemon.stars - 1] ?? 160
+    const damage = [40, 80, 120][pokemon.stars - 1] ?? 120
     const farthestTarget = state.getFarthestTarget(pokemon, board) ?? target
     super.process(pokemon, state, board, farthestTarget, crit)
 
@@ -11024,6 +11024,9 @@ export class TopsyTurvyStrategy extends AbilityStrategy {
         if (target.atk > target.baseAtk) {
           const d = target.atk - target.baseAtk
           target.addAttack(-2 * d, pokemon, 0, false)
+        }
+        if (target.ap > 0) {
+          target.addAbilityPower(-2 * target.ap, pokemon, 0, false)
         }
         if (target.def > target.baseDef) {
           const d = target.def - target.baseDef

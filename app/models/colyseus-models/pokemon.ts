@@ -5030,10 +5030,10 @@ export class Stantler extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.PSYCHIC, Synergy.FIELD])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 200
+  hp = 180
   atk = 20
-  def = 5
-  speDef = 5
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.PSYSHIELD_BASH
@@ -5048,7 +5048,7 @@ export class Miltank extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 250
+  hp = 200
   atk = 15
   def = 5
   speDef = 5
@@ -5495,11 +5495,7 @@ export class Eevee extends Pokemon {
 }
 
 export class Vaporeon extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.WATER,
-    Synergy.AMORPHOUS,
-    Synergy.FIELD
-  ])
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 180
@@ -5527,7 +5523,7 @@ export class Jolteon extends Pokemon {
 }
 
 export class Flareon extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.LIGHT])
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 180
@@ -5569,7 +5565,7 @@ export class Umbreon extends Pokemon {
 }
 
 export class Leafeon extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIELD])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 180
@@ -5583,7 +5579,7 @@ export class Leafeon extends Pokemon {
 }
 
 export class Sylveon extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FIELD, Synergy.SOUND])
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FIELD])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 180
@@ -7804,7 +7800,7 @@ export class Houndour extends Pokemon {
   atk = 8
   def = 4
   speDef = 4
-  maxPP = 125
+  maxPP = 110
   range = 1
   skill = Ability.BEAT_UP
   attackSprite = AttackSprite.FIRE_MELEE
@@ -7820,7 +7816,7 @@ export class Houndoom extends Pokemon {
   atk = 20
   def = 6
   speDef = 6
-  maxPP = 125
+  maxPP = 110
   range = 1
   skill = Ability.BEAT_UP
   attackSprite = AttackSprite.FIRE_MELEE
@@ -8788,7 +8784,7 @@ export class Sneasel extends Pokemon {
   stars = 1
   evolution = Pkm.WEAVILE
   hp = 85
-  atk = 9
+  atk = 10
   def = 1
   speDef = 3
   maxPP = 40
@@ -8803,7 +8799,7 @@ export class Weavile extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 200
-  atk = 22
+  atk = 26
   def = 2
   speDef = 3
   maxPP = 40
@@ -9397,7 +9393,7 @@ export class Vulpix extends Pokemon {
   atk = 7
   def = 2
   speDef = 2
-  maxPP = 85
+  maxPP = 80
   range = 2
   skill = Ability.FIRE_SPIN
   attackSprite = AttackSprite.FIRE_RANGE
@@ -9412,7 +9408,7 @@ export class Ninetales extends Pokemon {
   atk = 20
   def = 3
   speDef = 5
-  maxPP = 85
+  maxPP = 80
   range = 2
   skill = Ability.FIRE_SPIN
   attackSprite = AttackSprite.FIRE_RANGE
@@ -9428,7 +9424,7 @@ export class AlolanVulpix extends Pokemon {
   atk = 7
   def = 2
   speDef = 2
-  maxPP = 85
+  maxPP = 80
   range = 2
   skill = Ability.AURORA_VEIL
   regional = true
@@ -9452,7 +9448,7 @@ export class AlolanNinetales extends Pokemon {
   atk = 20
   def = 5
   speDef = 5
-  maxPP = 85
+  maxPP = 80
   range = 2
   skill = Ability.AURORA_VEIL
   regional = true
@@ -11761,7 +11757,7 @@ export class Spinda extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GOURMET])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 250
+  hp = 200
   atk = 20
   def = 5
   speDef = 5
@@ -13164,7 +13160,7 @@ export class Pawniard extends Pokemon {
   stars = 1
   evolution = Pkm.BISHARP
   hp = 130
-  atk = 14
+  atk = 17
   def = 5
   speDef = 3
   maxPP = 60
@@ -13179,7 +13175,7 @@ export class Bisharp extends Pokemon {
   stars = 2
   evolution = Pkm.KINGAMBIT
   hp = 250
-  atk = 26
+  atk = 30
   def = 8
   speDef = 4
   maxPP = 60
@@ -13878,8 +13874,8 @@ export class BurmyPlant extends Pokemon {
   evolution = Pkm.WORMADAM_PLANT
   hp = 70
   atk = 7
-  def = 3
-  speDef = 3
+  def = 1
+  speDef = 1
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
@@ -13900,8 +13896,8 @@ export class BurmySandy extends Pokemon {
   evolution = Pkm.WORMADAM_SANDY
   hp = 70
   atk = 7
-  def = 3
-  speDef = 3
+  def = 2
+  speDef = 2
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
@@ -13951,8 +13947,8 @@ export class WormadamPlant extends Pokemon {
   evolution = Pkm.MOTHIM
   hp = 150
   atk = 13
-  def = 3
-  speDef = 5
+  def = 1
+  speDef = 2
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
@@ -13974,8 +13970,8 @@ export class WormadamSandy extends Pokemon {
   evolution = Pkm.MOTHIM
   hp = 150
   atk = 13
-  def = 3
-  speDef = 5
+  def = 2
+  speDef = 3
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
@@ -14001,7 +13997,7 @@ export class WormadamTrash extends Pokemon {
   hp = 150
   atk = 13
   def = 3
-  speDef = 5
+  speDef = 3
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
