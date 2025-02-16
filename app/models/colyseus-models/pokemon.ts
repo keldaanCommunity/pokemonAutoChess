@@ -64,7 +64,6 @@ import { values } from "../../utils/schemas"
 import { SynergyEffects } from "../effects"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
-import { SynergyEffects } from "../effects"
 import {
   DrySkinEffect,
   ClearWingEffect,
@@ -16355,10 +16354,10 @@ export class Fidough extends Pokemon {
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.DACHSBUN
-  hp = 80
+  hp = 75
   atk = 8
-  def = 4
-  speDef = 3
+  def = 3
+  speDef = 2
   maxPP = 80
   range = 1
   skill = Ability.GROWL
