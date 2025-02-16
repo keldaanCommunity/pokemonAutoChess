@@ -13874,8 +13874,8 @@ export class BurmyPlant extends Pokemon {
   evolution = Pkm.WORMADAM_PLANT
   hp = 70
   atk = 7
-  def = 3
-  speDef = 3
+  def = 1
+  speDef = 1
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
@@ -13896,8 +13896,8 @@ export class BurmySandy extends Pokemon {
   evolution = Pkm.WORMADAM_SANDY
   hp = 70
   atk = 7
-  def = 3
-  speDef = 3
+  def = 2
+  speDef = 2
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
@@ -13947,8 +13947,8 @@ export class WormadamPlant extends Pokemon {
   evolution = Pkm.MOTHIM
   hp = 150
   atk = 13
-  def = 3
-  speDef = 5
+  def = 1
+  speDef = 2
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
@@ -13970,8 +13970,8 @@ export class WormadamSandy extends Pokemon {
   evolution = Pkm.MOTHIM
   hp = 150
   atk = 13
-  def = 3
-  speDef = 5
+  def = 2
+  speDef = 3
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
@@ -13997,7 +13997,7 @@ export class WormadamTrash extends Pokemon {
   hp = 150
   atk = 13
   def = 3
-  speDef = 5
+  speDef = 3
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE

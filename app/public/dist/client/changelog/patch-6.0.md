@@ -46,6 +46,7 @@
 - Nerf Stantler: HP 200 → 180, Def/Spedef: 5 → 3
 - Nerf Miltank: HP 250 → 200
 - Nerf Spinda: HP 250 → 200
+- Nerf Burmy line: Burmy now has various defense stats based on its cloak: Plant Cloak: def 3/3/3 → 1/1/1, spedef 3/5/3 → 1/2/3, Sand Cloak def 3/3/3 → 2/2/2, spedef 3/5/3 → 2/3/3
 
 # Changes to Synergies
 
