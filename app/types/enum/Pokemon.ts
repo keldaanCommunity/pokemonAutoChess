@@ -4389,7 +4389,7 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.LAPRAS]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Attack,
     ability: AnimationType.RearUp,
     emote: AnimationType.Shoot
   },
