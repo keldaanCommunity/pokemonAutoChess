@@ -863,7 +863,6 @@ export class OnPickBerryCommand extends Command<
     if (player && player.berryTreesStage[berryIndex] >= 3) {
       player.berryTreesStage[berryIndex] = 0
       player.items.push(player.berryTreesType[berryIndex])
-      player.berryTreesType[berryIndex] = pickRandomIn(Berries)
     }
   }
 }
