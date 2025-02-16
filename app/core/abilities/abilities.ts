@@ -7711,12 +7711,15 @@ export class CurseStrategy extends AbilityStrategy {
     const enemies = board.cells.filter(
       (p) => p && p.team !== pokemon.team
     ) as PokemonEntity[]
-    enemies.sort((a, b) => (a.status.curse ? +1 : b.hp - a.hp))
-    const enemyWithHighestHP = enemies[0]
-    const curseDelay =
-      ([8000, 5000, 3000][pokemon.stars - 1] ?? 3000) *
-      (1 - (0.2 * pokemon.ap) / 100)
-    enemyWithHighestHP.status.triggerCurse(curseDelay)
+    const highestHp = Math.max(...enemies.map((p) => p.hp))
+    const enemiesWithHighestHP = enemies.filter((p) => p.hp === highestHp)
+    const cursedEnemy = pickRandomIn(enemiesWithHighestHP)
+    if (cursedEnemy) {
+      const curseDelay =
+        ([8000, 5000, 3000][pokemon.stars - 1] ?? 3000) *
+        (1 - (0.2 * pokemon.ap) / 100)
+      cursedEnemy.status.triggerCurse(curseDelay)
+    }
   }
 }
 

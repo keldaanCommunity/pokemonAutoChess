@@ -2635,7 +2635,7 @@
     "WILD": "WILD Pokémon get increased ATK, move faster, and have a 25% chance to WOUND their target. For each WILD Pokémon STAR on board, gain +1% chance to find WILD in your shops + 5% chance during PvE rounds{{additionalInfo}}",
     "WILD_ADDITIONAL": "\nCurrent chance to find a WILD pokemon: {{wildChance}}%",
     "AMORPHOUS": "AMORPHOUS Pokémon are extremely flexible and lack their own shape. Your team gains HP and ATK_SPEED by activating a wide variety of synergies.",
-    "GOURMET": "GOURMET Pokémon can be equipped with a CHEF_HAT. Chefs will cook up their Signature Dish between fights and feed adjacent allies, providing them with various buffs and effects."
+    "GOURMET": "GOURMET Pokémon can be equipped with a CHEF_HAT. Chefs will cook up their Signature Dish between fights and feed adjacent allies, giving them various buffs and effects."
   },
   "title": {
     "NOVICE": "Novice",
@@ -3298,6 +3298,7 @@
   },
   "level_required": "Level required",
   "map": {
+    "town": "Treasure Town",
     "random": "Random Map",
     "AmpPlains": "Amp Plains",
     "AppleWoods": "Apple Woods",

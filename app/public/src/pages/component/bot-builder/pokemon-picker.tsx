@@ -144,10 +144,10 @@ function PokemonPickerTab(props: {
             Rarity.UNCOMMON,
             Rarity.LEGENDARY,
             Rarity.RARE,
-            Rarity.EPIC,
             Rarity.HATCH,
-            Rarity.ULTRA,
-            Rarity.SPECIAL
+            Rarity.EPIC,
+            Rarity.SPECIAL,
+            Rarity.ULTRA
           ] as Rarity[]
         ).map((rarity) => (
           <React.Fragment key={rarity}>

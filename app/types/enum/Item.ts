@@ -473,7 +473,7 @@ export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.HM_WHIRLPOOL]: Ability.WHIRLPOOL
 }
 
-export const Dishes: Item[] = [
+export const Dishes = [
   Item.RAGE_CANDY_BAR,
   Item.ROCK_SALT,
   Item.TEA,

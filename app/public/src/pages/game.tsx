@@ -21,7 +21,7 @@ import {
   Role,
   Transfer
 } from "../../../types"
-import { MinStageLevelForGameToCount } from "../../../types/Config"
+import { MinStageLevelForGameToCount, PortalCarouselStages } from "../../../types/Config"
 import { DungeonDetails } from "../../../types/enum/Dungeon"
 import { Team } from "../../../types/enum/Game"
 import { Pkm } from "../../../types/enum/Pokemon"
@@ -357,8 +357,11 @@ export default function Game() {
           gameScene.load.reset()
           await gameScene.preloadMaps(maps)
           gameScene.load.once("complete", () => {
-            const gc = getGameContainer()
-            gc && gc.player && gameScene.setMap(gc.player.map)
+            if (!PortalCarouselStages.includes(room.state.stageLevel)) {
+              // map loaded after the end of the portal carousel stage, we swap it now. better later than never
+              const gc = getGameContainer()
+              gc && gc.player && gameScene.setMap(gc.player.map)
+            }
           })
           gameScene.load.start()
         }
@@ -510,7 +513,7 @@ export default function Game() {
       })
 
       room.state.additionalPokemons.onAdd(() => {
-        dispatch(setAdditionalPokemons([...room.state.additionalPokemons]))
+        dispatch(setAdditionalPokemons(room.state.additionalPokemons.slice()))
       })
 
       room.state.simulations.onRemove(() => {

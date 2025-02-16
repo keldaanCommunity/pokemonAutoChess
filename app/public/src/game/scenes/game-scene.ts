@@ -149,10 +149,9 @@ export default class GameScene extends Scene {
 
       this.weatherManager = new WeatherManager(this)
       this.unownManager = new UnownManager(this)
-      playSound(SOUNDS.CAROUSEL_UNLOCK) // playing a preloaded sound for players who tabbed out during loading
       playMusic(
         this,
-        DungeonDetails[player.map].music ?? DungeonMusic.RANDOM_DUNGEON_1
+        DungeonDetails[player.map].music ?? DungeonMusic.TREASURE_TOWN
       )
       //;(this.sys as any).animatedTiles.init(this.map)
       clearTitleNotificationIcon()

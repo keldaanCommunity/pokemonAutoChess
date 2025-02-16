@@ -24,6 +24,7 @@ import Wiki from "../wiki/wiki"
 import ServersList from "../servers/servers-list"
 
 import "./main-sidebar.css"
+import { createSelector } from "@reduxjs/toolkit"
 
 export type Page = "main_lobby" | "preparation" | "game"
 
@@ -77,7 +78,12 @@ export function MainSidebar(props: MainSidebarProps) {
   }, [])
 
   const player = useAppSelector(state => state.game.players.find((p) => p.id === state.network.uid))
-  const playersAlive = useAppSelector(state => state.game.players.filter(p => p.life > 0))
+  const playersAlive = useAppSelector(
+    createSelector(
+      [(state) => state.game.players],
+      (players) => players.filter((p) => p.life > 0)
+    )
+  )
   function onClickLeave() {
     if (player && player.life > 0 && playersAlive.length > 1) {
       setShowSurrenderConfirm(true)

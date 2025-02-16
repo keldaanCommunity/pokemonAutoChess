@@ -152,7 +152,7 @@ export default class PokemonAvatar extends PokemonSprite {
       this.circleTimer?.clear()
       this.circleTimer?.lineStyle(
         8,
-        0xf7d51d,
+        0x32ffea,
         this.isCurrentPlayerAvatar ? 0.8 : 0.5
       )
       this.circleTimer?.beginPath()

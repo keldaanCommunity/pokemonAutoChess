@@ -4,7 +4,7 @@ button {
 
 .bubbly {
   position: relative;
-  padding: 0.25em 0.5em;
+  padding: 0.15em calc(0.5em + 3px) calc(0.15em + 3px) 0.5em;
   background: #e7e7e7;
   display: inline-block;
   text-align: center;
@@ -58,7 +58,7 @@ button {
 
 .bubbly.red {
   background: #e76e55;
-  box-shadow: inset -6px -6px 0px 0px #a43436, var(--shadow-clickable);
+  box-shadow: inset -6px -6px 0px 0px #bf3d41, var(--shadow-clickable);
   color: white;
 }
 
@@ -68,7 +68,7 @@ button {
 
 .bubbly.red:not([disabled]):active {
   background: #761c1e;
-  box-shadow: inset 6px 6px 0px 0px #a43436, var(--shadow-clickable);
+  box-shadow: inset 6px 6px 0px 0px #bf3d41, var(--shadow-clickable);
 }
 
 .bubbly.blue {

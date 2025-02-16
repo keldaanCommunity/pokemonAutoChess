@@ -36,7 +36,7 @@
 
 # Changes to Synergies
 
-- New synergy Gourmet: Gourmet Pokémon can be equipped with a Chef's Hat. Chefs will cook up their Signature Dish between fights and feed adjacent allies, providing them with various buffs and effects.
+- New synergy Gourmet: Gourmet Pokémon can be equipped with a Chef's Hat. Chefs will cook up their Signature Dish between fights and feed adjacent allies, giving them various buffs and effects.
 
 # Changes to Items
 
@@ -47,6 +47,7 @@
 
 - Added regional variants for Unique and Legendary Pokémon. The first regional variant is Galarian Farfetch'd, which can be found in Fighting regions
 - Regional variants are no longer found in maps with common synergies between the variant and the original Pokémon
+- When an effect is considering the strongest Pokémon, or the pokémon with the highest stat, if several Pokémon are equal, it now selects a random Pokémon among those. Before, it was based on board position. This is especially relevant for Ghost curses.
 
 # UI
 
