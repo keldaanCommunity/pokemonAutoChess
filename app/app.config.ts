@@ -2,6 +2,7 @@ import path from "path"
 import { monitor } from "@colyseus/monitor"
 import config from "@colyseus/tools"
 import { RedisDriver, RedisPresence, ServerOptions, matchMaker } from "colyseus"
+import helmet from "helmet"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
@@ -89,6 +90,37 @@ export default config({
      * Bind your custom express routes here:
      * Read more: https://expressjs.com/en/starter/basic-routing.html
      */
+
+    app.use(
+      helmet({
+        crossOriginOpenerPolicy: false, // required for firebase auth
+        contentSecurityPolicy: {
+          directives: {
+            defaultSrc: [
+              "'self'",
+              "https://*.firebaseapp.com",
+              "https://apis.google.com",
+              "https://*.googleapis.com",
+              "https://*.githubusercontent.com",
+              "http://raw.githubusercontent.com"
+            ],
+            scriptSrc: [
+              "'self'",
+              "'unsafe-inline'",
+              "'unsafe-eval'",
+              "https://apis.google.com",
+              "https://*.googleapis.com"
+            ],
+            imgSrc: [
+              "'self'",
+              "data:",
+              "https://www.gstatic.com",
+              "http://raw.githubusercontent.com"
+            ]
+          }
+        }
+      })
+    )
 
     app.use(((err, req, res, next) => {
       res.status(err.status).json(err)
