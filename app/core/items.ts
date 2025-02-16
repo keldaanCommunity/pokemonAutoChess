@@ -107,7 +107,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.TOXIC_ORB]: { [Stat.SHIELD]: 15, [Stat.SPE_DEF]: 2 },
   [Item.METRONOME]: { [Stat.PP]: 5 },
   [Item.METAL_COAT]: { [Stat.DEF]: 5, [Stat.SPE_DEF]: 5 },
-  [Item.SWIFT_WING]: { [Stat.ATK_SPEED]: 25 },
+  [Item.SWIFT_WING]: { [Stat.ATK_SPEED]: 30 },
   [Item.HARD_STONE]: { [Stat.SHIELD]: 100 },
   [Item.BIG_NUGGET]: {
     [Stat.DEF]: 5,
@@ -376,9 +376,13 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
 export class SoulDewEffect extends PeriodicEffect {
   constructor() {
-    super((pokemon) => {
-      pokemon.addAbilityPower(10, pokemon, 0, false)
-      pokemon.count.soulDewCount++
-    }, Item.SOUL_DEW, 1000)
+    super(
+      (pokemon) => {
+        pokemon.addAbilityPower(10, pokemon, 0, false)
+        pokemon.count.soulDewCount++
+      },
+      Item.SOUL_DEW,
+      1000
+    )
   }
 }
