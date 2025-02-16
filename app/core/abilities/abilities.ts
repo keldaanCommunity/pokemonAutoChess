@@ -1868,7 +1868,10 @@ export class ShadowCloneStrategy extends AbilityStrategy {
     )
 
     if (spawnPosition) {
-      const p = PokemonFactory.createPokemonFromName(pokemon.name)
+      const p = PokemonFactory.createPokemonFromName(pokemon.name, {
+        selectedEmotion: pokemon.emotion,
+        selectedShiny: pokemon.shiny
+      })
       let itemStolen: Item | null = null
       if (target.items.size > 0) {
         itemStolen = pickRandomIn(values(target.items))
