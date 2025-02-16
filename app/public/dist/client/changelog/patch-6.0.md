@@ -38,6 +38,7 @@
 - Buff Sneasel Attack 9 → 10 and Weavile: Attack 22 → 26
 - Buff Topsy Turvy (Inkay): also reverse AP buffs
 - Buff Pawniard Attack 14 → 17 and Bisharp Attack 26 → 30
+- Nerf Inteleon: Snipe shot damage 40/80/160 → 40/80/120
 
 # Changes to Synergies
 
