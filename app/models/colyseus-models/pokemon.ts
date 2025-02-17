@@ -12067,8 +12067,8 @@ export class UltraNecrozma extends Pokemon {
       (player.synergies.get(Synergy.LIGHT) ?? 0) >=
       SynergyTriggers[Synergy.LIGHT][0]
     if (
-      x !== player.lightX || y !== player.lightY || !hasLight ||
-      !this.items.has(Item.SHINY_STONE)
+      (x !== player.lightX || y !== player.lightY || !hasLight) &&
+      (!this.items.has(Item.SHINY_STONE))
     ) {
       player.transformPokemon(this, Pkm.NECROZMA)
     }
@@ -12145,8 +12145,8 @@ export class CherrimSunlight extends Pokemon {
       (player.synergies.get(Synergy.LIGHT) ?? 0) >=
       SynergyTriggers[Synergy.LIGHT][0]
     if (
-      x !== player.lightX || y !== player.lightY || !hasLight ||
-      !this.items.has(Item.SHINY_STONE)
+      (x !== player.lightX || y !== player.lightY || !hasLight) &&
+      (!this.items.has(Item.SHINY_STONE))
     ) {
       player.transformPokemon(this, Pkm.CHERRIM)
     }
