@@ -596,6 +596,9 @@ export interface IPokemonEntity {
   def: number
   speDef: number
   luck: number
+  baseAtk: number
+  baseDef: number
+  baseSpeDef: number
   attackType: AttackType
   life: number
   shield: number
@@ -620,10 +623,11 @@ export interface IPokemonEntity {
   healDone: number
   shiny: boolean
   emotion: Emotion
-  baseAtk: number
   isClone: boolean
   commands: ISimulationCommand[]
   effectsSet: Set<EffectClass>
+  flyingProtection: number
+  inSpotlight: boolean
 }
 
 export interface IStatus {

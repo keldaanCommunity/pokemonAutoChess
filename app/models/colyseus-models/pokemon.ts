@@ -69,6 +69,7 @@ import {
   ClearWingEffect,
   SynchroEffect
 } from "../../core/effect"
+import { pickRandomIn } from "../../utils/random"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -1709,66 +1710,113 @@ export class Chandelure extends Pokemon {
   attackSprite = AttackSprite.GHOST_RANGE
 }
 
+const conversionEffect = ({
+  simulation,
+  player,
+  entity
+}: {
+  simulation: Simulation
+  player: IPlayer
+  entity: IPokemonEntity
+}) => {
+  const opponent =
+    simulation.bluePlayerId === player.id
+      ? simulation.redPlayer
+      : simulation.bluePlayer
+  if (!opponent) return
+  const synergyCopied = pickRandomIn(opponent.synergies.getTopSynergies())
+  if (entity.types.has(synergyCopied)) return // does not copy if already has the synergy
+  entity.types.add(synergyCopied)
+  const effect =
+    SynergyEffects[synergyCopied].find((effect) =>
+      opponent.effects.has(effect)
+    ) ?? SynergyEffects[synergyCopied][0]!
+
+  simulation.applyEffect(
+    entity,
+    entity.types,
+    effect,
+    player?.synergies.countActiveSynergies() || 0
+  )
+
+  // when converting to bug, get a clone
+  if (synergyCopied === Synergy.BUG) {
+    const bug = PokemonFactory.createPokemonFromName(entity.name, player)
+    const coord = simulation.getClosestAvailablePlaceOnBoardToPokemon(
+      entity,
+      player.team
+    )
+    simulation.addPokemon(bug, coord.x, coord.y, player.team, true)
+  }
+  // when converting to dragon, no double synergy but gains the AP/AS/SHIELD based on opponent team
+  if (synergyCopied === Synergy.DRAGON) {
+    const opponentTeam = simulation.getOpponentTeam(player.id)!
+    const dragonLevel = values(opponentTeam).reduce(
+      (acc, p) => acc + (p.types.has(Synergy.DRAGON) ? p.stars : 0),
+      0
+    )
+    if (effect === Effect.DRAGON_SCALES || effect === Effect.DRAGON_DANCE) {
+      entity.addShield(dragonLevel * 5, entity, 0, false)
+    }
+    if (effect === Effect.DRAGON_DANCE) {
+      entity.addAbilityPower(dragonLevel, entity, 0, false)
+      entity.addAttackSpeed(dragonLevel, entity, 0, false)
+    }
+  }
+  // when converting to gourmet, get a Chef hat. Useless but funny
+  if (synergyCopied === Synergy.GOURMET && entity.items.size < 3) {
+    entity.items.add(Item.CHEF_HAT)
+  }
+}
+
 export class Porygon extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.NORMAL,
-    Synergy.PSYCHIC,
-    Synergy.ARTIFICIAL
-  ])
-  rarity = Rarity.EPIC
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.ARTIFICIAL])
+  rarity = Rarity.ULTRA
   stars = 1
   evolution = Pkm.PORYGON_2
   hp = 100
-  atk = 7
-  def = 2
-  speDef = 2
-  maxPP = 90
+  atk = 10
+  def = 6
+  speDef = 6
+  maxPP = 100
   range = 2
   skill = Ability.TRI_ATTACK
-  passive = Passive.PORYGON
-  additional = true
+  passive = Passive.CONVERSION
   attackSprite = AttackSprite.FIGHTING_RANGE
+  afterSimulationStart = conversionEffect
 }
 
 export class Porygon2 extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.NORMAL,
-    Synergy.PSYCHIC,
-    Synergy.ARTIFICIAL
-  ])
-  rarity = Rarity.EPIC
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.ARTIFICIAL])
+  rarity = Rarity.ULTRA
   stars = 2
   evolution = Pkm.PORYGON_Z
-  hp = 185
-  atk = 14
-  evolutionRule = new ItemEvolutionRule([Item.UPGRADE])
-  def = 5
-  speDef = 5
-  maxPP = 90
+  hp = 200
+  atk = 19
+  def = 8
+  speDef = 8
+  maxPP = 80
   range = 2
   skill = Ability.TRI_ATTACK
-  passive = Passive.PORYGON
-  additional = true
+  passive = Passive.CONVERSION
   attackSprite = AttackSprite.FIGHTING_RANGE
+  afterSimulationStart = conversionEffect
 }
 
 export class PorygonZ extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.NORMAL,
-    Synergy.PSYCHIC,
-    Synergy.ARTIFICIAL
-  ])
-  rarity = Rarity.EPIC
-  stars = 2
-  hp = 185
-  atk = 24
-  def = 2
-  speDef = 2
-  maxPP = 90
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.ARTIFICIAL])
+  rarity = Rarity.ULTRA
+  stars = 3
+  hp = 300
+  atk = 35
+  def = 8
+  speDef = 8
+  maxPP = 60
   range = 2
   skill = Ability.TRI_ATTACK
-  additional = true
+  passive = Passive.CONVERSION
   attackSprite = AttackSprite.FIGHTING_RANGE
+  afterSimulationStart = conversionEffect
 }
 
 export class Sewaddle extends Pokemon {
@@ -12037,7 +12085,7 @@ export class Necrozma extends Pokemon {
       SynergyTriggers[Synergy.LIGHT][0]
     if (
       (x === player.lightX && y === player.lightY && hasLight) ||
-      (this.items.has(Item.SHINY_STONE))
+      this.items.has(Item.SHINY_STONE)
     ) {
       player.transformPokemon(this, Pkm.ULTRA_NECROZMA)
     }
@@ -12068,7 +12116,7 @@ export class UltraNecrozma extends Pokemon {
       SynergyTriggers[Synergy.LIGHT][0]
     if (
       (x !== player.lightX || y !== player.lightY || !hasLight) &&
-      (!this.items.has(Item.SHINY_STONE))
+      !this.items.has(Item.SHINY_STONE)
     ) {
       player.transformPokemon(this, Pkm.NECROZMA)
     }
@@ -12117,10 +12165,10 @@ export class Cherrim extends Pokemon {
     const hasLight =
       (player.synergies.get(Synergy.LIGHT) ?? 0) >=
       SynergyTriggers[Synergy.LIGHT][0]
-      if (
-        (x === player.lightX && y === player.lightY && hasLight) ||
-        (this.items.has(Item.SHINY_STONE))
-      ) {
+    if (
+      (x === player.lightX && y === player.lightY && hasLight) ||
+      this.items.has(Item.SHINY_STONE)
+    ) {
       player.transformPokemon(this, Pkm.CHERRIM_SUNLIGHT)
     }
   }
@@ -12146,7 +12194,7 @@ export class CherrimSunlight extends Pokemon {
       SynergyTriggers[Synergy.LIGHT][0]
     if (
       (x !== player.lightX || y !== player.lightY || !hasLight) &&
-      (!this.items.has(Item.SHINY_STONE))
+      !this.items.has(Item.SHINY_STONE)
     ) {
       player.transformPokemon(this, Pkm.CHERRIM)
     }
