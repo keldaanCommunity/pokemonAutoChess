@@ -440,7 +440,7 @@ class GameContainer {
 
       pokemon.items.onChange((value, key) => {
         if (player.id === this.spectatedPlayerId) {
-          this.gameScene?.board?.updatePokemonItems(player.id, pokemon)
+          this.gameScene?.board?.updatePokemonItems(player.id, pokemon, value)
         }
       })
 
