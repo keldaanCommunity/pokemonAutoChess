@@ -1364,7 +1364,9 @@
     "SWIRLIX": "绵绵泡芙",
     "SLURPUFF": "胖甜妮",
     "GULPIN": "溶食兽",
-    "SWALOT": "吞食兽"
+    "SWALOT": "吞食兽",
+    "FIDOUGH": "狗仔包",
+    "DACHSBUN": "麻花犬"
   },
   "ability_description": {
     "SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1709,6 +1711,7 @@
     "TAIL_WHIP": "降低目标[30,SP]%的DEF。",
     "PSYSHIELD_BASH": "突进至敌方队伍的后排，对击中的所有敌方宝可梦造成[60,SP]点SPECIAL，并使使用者获得PROTECT 1秒。",
     "QUIVER_DANCE": "提升使用者[5,SP]点ATK，[5,SP]点SPE_DEF，[10,SP]%的ATK_SPEED和20点AP。",
+    "TORCH_SONG": "喷出[4,SP]朵熊熊燃烧的火焰攻击随机敌方宝可梦。每朵火焰对目标造成SPECIAL，数值相当于50%的ATK，并提升使用者[1,2,3]点AP，且有[30,LK]%的概率使其陷入BURN 2秒。",
     "POWER_WHIP": "锁定最远的敌方宝可梦，向其挥出一道巨大藤鞭，对所有击中的敌方宝可梦造成[30,60,SP]点SPECIAL。",
     "DARK_HARVEST": "传送至敌方宝可梦最密集的位置，并使自身陷入SILENCE 3秒。在此期间，吸取相邻敌方宝可梦的HP，对他们造成[5,10,20,SP]点SPECIAL，使用者自身恢复所造成伤害的30%。",
     "PSYSHOCK": "移除目标[20,40,80,SP]点PP，使用者自身获得等量SHIELD。若目标的PP不足，差额改为造成SPECIAL。",
@@ -2022,9 +2025,9 @@
     "FLUID": "每有一种不同的激活共鸣，所有我方宝可梦提升1%的ATK_SPEED和4点HP。",
     "SHAPELESS": "每有一种不同的激活共鸣，所有我方宝可梦提升3%的ATK_SPEED和8点HP。",
     "ETHEREAL": "每有一种不同的激活共鸣，所有我方宝可梦提升6%的ATK_SPEED和12点HP。",
-    "APPETIZER": "获得一顶厨师帽。厨师会在每轮结束后制作一份专属料理，并将另一份喂给一个相邻我方宝可梦。",
+    "APPETIZER": "获得一顶CHEF_HAT。厨师会在每轮结束后制作一份专属料理，并将另一份喂给一个相邻我方宝可梦。",
     "LUNCH_BREAK": "厨师能制作两份料理，并会投喂两个相邻我方宝可梦。",
-    "BANQUET": "获得第二顶厨师帽。"
+    "BANQUET": "获得第二顶CHEF_HAT。"
   },
   "item": {
     "FOSSIL_STONE": "化石岩块",
@@ -2179,6 +2182,7 @@
     "MOOMOO_MILK": "哞哞鲜奶",
     "BERRIES": "热带龙的果实",
     "HONEY": "甜甜蜜",
+    "POFFIN": "宝芬",
     "ROCK_SALT": "岩盐",
     "NUTRITIOUS_EGG": "营养丰富的蛋",
     "LEFTOVERS": "吃剩的东西",
@@ -2334,6 +2338,7 @@
     "CURRY": "在下一轮战斗开始时，陷入RAGE 5秒。",
     "CASTELIACONE": "仅在下一轮战斗中，第一次攻击会使命中的敌方宝可梦陷入FREEZE 5秒。",
     "WHIPPED_DREAM": "仅在下一轮战斗中，第一次攻击会使命中的敌方宝可梦陷入CHARM 5秒。",
+    "BERRY_JUICE": "仅在下一轮战斗中，战斗开始时以及每次食用树果时获得50点SHIELD。",
     "TART_APPLE": "仅在下一轮战斗中，食用者的每次攻击会减少目标1点DEF。一轮结束后，会变为SWEET_APPLE。",
     "SWEET_APPLE": "仅在下一轮战斗中，食用者的每次攻击会减少目标1点SPE_DEF。一轮结束后，会变为SIRUPY_APPLE。",
     "SIRUPY_APPLE": "仅在下一轮战斗中，食用者的每次攻击有[30,LK]%的概率使目标陷入PARALYSIS 1秒。",
@@ -2341,6 +2346,7 @@
     "MOOMOO_MILK": "永久提升10点最大HP。",
     "BERRIES": "随机获得一枚树果。",
     "HONEY": "本轮之内接下来的商店刷新中，与食用HONEY的宝可梦至少一项共鸣相同的宝可梦出现概率提升5%。",
+    "POFFIN": "在下一轮战斗开始时，获得50点SHIELD。所有持有的树果作为宝芬的材料被立即食用并生效，其治疗效果改为获得等量SHIELD。",
     "ROCK_SALT": "在下一轮战斗开始时，获得RUNE_PROTECT 8秒。",
     "NUTRITIOUS_EGG": "仅在下一轮战斗中，提升30%的基础ATK，DEF和SPE_DEF。",
     "LEFTOVERS": "没有效果。大厨亲自把菜吃完了，没给食客留下多少。",
@@ -2481,7 +2487,8 @@
     "INANIMATE": "非生物单位无法被复制，下阵或出售。此类单位也无法主动移动或发起攻击，并免疫异常状态。",
     "BERSERK": "每当有宝可梦被此宝可梦的招式命中时，获得3点AP。",
     "APPLIN": "啃果虫想要吃下一颗SWEET_APPLE、TART_APPLE或是SIRUPY_APPLE……",
-    "DIPPLIN": "裹蜜虫想要吃下一颗SIRUPY_APPLE……"
+    "DIPPLIN": "裹蜜虫想要吃下一颗SIRUPY_APPLE……",
+    "WELL_BAKED": "此宝可梦不会受到BURN的负面效果影响。当其陷入BURN时，改为提升10点DEF。"
   },
   "stat": {
     "ATK": "攻击",
