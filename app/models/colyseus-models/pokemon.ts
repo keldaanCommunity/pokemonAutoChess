@@ -12035,7 +12035,10 @@ export class Necrozma extends Pokemon {
     const hasLight =
       (player.synergies.get(Synergy.LIGHT) ?? 0) >=
       SynergyTriggers[Synergy.LIGHT][0]
-    if (x === player.lightX && y === player.lightY && hasLight) {
+    if (
+      (x === player.lightX && y === player.lightY && hasLight) ||
+      (this.items.has(Item.SHINY_STONE))
+    ) {
       player.transformPokemon(this, Pkm.ULTRA_NECROZMA)
     }
   }
@@ -12063,7 +12066,10 @@ export class UltraNecrozma extends Pokemon {
     const hasLight =
       (player.synergies.get(Synergy.LIGHT) ?? 0) >=
       SynergyTriggers[Synergy.LIGHT][0]
-    if (x !== player.lightX || y !== player.lightY || !hasLight) {
+    if (
+      x !== player.lightX || y !== player.lightY || !hasLight ||
+      !this.items.has(Item.SHINY_STONE)
+    ) {
       player.transformPokemon(this, Pkm.NECROZMA)
     }
   }
@@ -12111,7 +12117,10 @@ export class Cherrim extends Pokemon {
     const hasLight =
       (player.synergies.get(Synergy.LIGHT) ?? 0) >=
       SynergyTriggers[Synergy.LIGHT][0]
-    if (x === player.lightX && y === player.lightY && hasLight) {
+      if (
+        (x === player.lightX && y === player.lightY && hasLight) ||
+        (this.items.has(Item.SHINY_STONE))
+      ) {
       player.transformPokemon(this, Pkm.CHERRIM_SUNLIGHT)
     }
   }
@@ -12135,7 +12144,10 @@ export class CherrimSunlight extends Pokemon {
     const hasLight =
       (player.synergies.get(Synergy.LIGHT) ?? 0) >=
       SynergyTriggers[Synergy.LIGHT][0]
-    if (x !== player.lightX || y !== player.lightY || !hasLight) {
+    if (
+      x !== player.lightX || y !== player.lightY || !hasLight ||
+      !this.items.has(Item.SHINY_STONE)
+    ) {
       player.transformPokemon(this, Pkm.CHERRIM)
     }
   }

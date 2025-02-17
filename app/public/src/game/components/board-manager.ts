@@ -27,6 +27,7 @@ import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
 import { displayBoost } from "./boosts-animations"
+import { Item } from "../../../../types/enum/Item"
 
 export enum BoardMode {
   PICK = "pick",
@@ -569,12 +570,15 @@ export default class BoardManager {
     }
   }
 
-  updatePokemonItems(playerId: string, pokemon: IPokemon) {
+  updatePokemonItems(playerId: string, pokemon: IPokemon, item: Item) {
     // logger.debug(change);
     if (this.player.id === playerId) {
       const pkm = this.pokemons.get(pokemon.id)
       if (pkm) {
         pkm.itemsContainer.render(pokemon.items)
+      }
+      if (item === Item.SHINY_STONE) {
+        pkm?.addLight()
       }
     }
   }
