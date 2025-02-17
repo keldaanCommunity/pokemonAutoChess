@@ -64,6 +64,10 @@
 - Nerf Pokerus: effect applies every ~~2~~ 2.5 seconds
 - Buff Swift Wing: 25 → 30% attack speed
 - Minor nerf to Repeat Ball: legendaries are found afer ~~140~~ 150 rolls
+- Adjusted berries:
+    - Aguav: restore ~~to max HP~~ 50% HP
+    - Chesto: give ~~+15~~ +50 AP
+    - Sitrus: buff healing by ~~50%~~ 30%
 
 # Gameplay
 

@@ -1924,7 +1924,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     switch (berry) {
       case Item.AGUAV_BERRY:
-        heal(min(20)(this.hp - this.life))
+        heal(min(20)(0.5 * this.hp))
         this.status.triggerConfusion(3000, this, this)
         break
       case Item.APICOT_BERRY:
@@ -1949,7 +1949,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.status.sleepCooldown = 0
         this.effects.add(Effect.IMMUNITY_SLEEP)
         heal(20)
-        this.addAbilityPower(15, this, 0, false)
+        this.addAbilityPower(50, this, 0, false)
         break
       case Item.GANLON_BERRY:
         heal(20)

@@ -234,7 +234,7 @@ export default abstract class PokemonState {
         heal *= caster.critPower
       }
       if (pokemon.effects.has(Effect.BUFF_HEAL_RECEIVED)) {
-        heal *= 1.5
+        heal *= 1.3
       }
       if (pokemon.status.burn) {
         heal *= 0.5
