@@ -241,6 +241,10 @@ export default class PokemonSprite extends DraggableObject {
       if (p.status.fairyField) {
         this.addFairyField()
       }
+    } else {
+      if (pokemon.items.has(Item.SHINY_STONE)) {
+        this.addLight()
+      }
     }
     this.add(this.itemsContainer)
 
@@ -1076,6 +1080,7 @@ export default class PokemonSprite extends DraggableObject {
   }
 
   addLight() {
+    if (this.light) return
     this.light = this.scene.add
       .sprite(0, 0, "abilities", "LIGHT_CELL/000.png")
       .setScale(1.5, 1.5)
