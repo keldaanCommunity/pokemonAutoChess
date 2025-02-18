@@ -1724,7 +1724,7 @@
     "RED_ORB": "+10 ATK. 25% do dano de ataque é tratado como TRUE",
     "MAX_REVIVE": "Dê RESURECTION, impedindo o primeiro KO do titular e restaurando o HP máximo",
     "ROCKY_HELMET": "+12 DEF. Nega dano bônus crítico de acertos críticos recebidos.",
-    "AGUAV_BERRY": "Consumido quando abaixo de 50% do HP, restaura o HP máximo e obtenha CONFUSÃO por 3 segundos",
+    "AGUAV_BERRY": "Consumido quando abaixo de 50% do HP, restaura 50% HP e obtenha CONFUSÃO por 3 segundos",
     "APICOT_BERRY": "Consumido quando abaixo de 50% de HP, cura 20 HP e ganha 20 SPE_DEF",
     "ASPEAR_BERRY": "Consumido quando abaixo de 50% de HP ou após ser CONGELADO, cura 20 HP e dá +15% de ATK_SPEED e imunidade a CONGELADO pelo resto da luta",
     "BABIRI_BERRY": "Consumido quando abaixo de 50% do HP ou após receber um acerto crítico, cura 20 HP e ganha PROTECT por 2 segundos",
