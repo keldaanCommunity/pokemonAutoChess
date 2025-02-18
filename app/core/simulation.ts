@@ -828,7 +828,7 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   applyEffect(
-    pokemon: PokemonEntity,
+    pokemon: IPokemonEntity,
     types: SetSchema<Synergy>,
     effect: Effect,
     activeSynergies: number
@@ -1210,14 +1210,14 @@ export default class Simulation extends Schema implements ISimulation {
 
       case Effect.PSYCHIC_TERRAIN:
         if (types.has(Synergy.PSYCHIC)) {
-          pokemon.addPsychicField()
+          pokemon.status.addPsychicField(pokemon)
           pokemon.effects.add(Effect.PSYCHIC_TERRAIN)
         }
         break
 
       case Effect.ELECTRIC_TERRAIN:
         if (types.has(Synergy.ELECTRIC)) {
-          pokemon.addElectricField()
+          pokemon.status.addElectricField(pokemon)
           pokemon.effects.add(Effect.ELECTRIC_TERRAIN)
         }
         break
@@ -1230,7 +1230,7 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case Effect.SHINING_RAY:
-        if (pokemon.inLightCell || pokemon.items.has(Item.SHINY_STONE)) {
+        if (pokemon.inSpotlight) {
           pokemon.status.light = true
           pokemon.effects.add(Effect.SHINING_RAY)
           pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
@@ -1239,7 +1239,7 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case Effect.LIGHT_PULSE:
-        if (pokemon.inLightCell || pokemon.items.has(Item.SHINY_STONE)) {
+        if (pokemon.inSpotlight) {
           pokemon.status.light = true
           pokemon.effects.add(Effect.LIGHT_PULSE)
           pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
@@ -1248,7 +1248,7 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case Effect.ETERNAL_LIGHT:
-        if (pokemon.inLightCell || pokemon.items.has(Item.SHINY_STONE)) {
+        if (pokemon.inSpotlight) {
           pokemon.status.light = true
           pokemon.effects.add(Effect.ETERNAL_LIGHT)
           pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
@@ -1260,7 +1260,7 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case Effect.MAX_ILLUMINATION:
-        if (pokemon.inLightCell || pokemon.items.has(Item.SHINY_STONE)) {
+        if (pokemon.inSpotlight) {
           pokemon.status.light = true
           pokemon.effects.add(Effect.MAX_ILLUMINATION)
           pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)

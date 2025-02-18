@@ -51,6 +51,7 @@
 - Nerf Burmy line: Burmy now has various defense stats based on its cloak: Plant Cloak: def 3/3/3 → 1/1/1, spedef 3/5/3 → 1/2/3, Sand Cloak def 3/3/3 → 2/2/2, spedef 3/5/3 → 2/3/3
 - Buff Melmetal: increase Attack speed/Attack ratio: 10% attack speed = ~~3~~ 5 attack
 - Rework Fuecoco line: now 3-range with nerfed defense/special defense, ability Torch Song reworked, PP 100 → 60
+- Porygon is now in Ultra category ; adjusted stats ; new passive Conversion: get the highest synergy of your opponent and its effects at the start of the fight.
 
 # Changes to Synergies
 

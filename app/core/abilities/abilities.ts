@@ -1697,18 +1697,18 @@ export class TriAttackStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [30, 60][pokemon.stars - 1] ?? 60
+    const damage = [75, 130, 200][pokemon.stars - 1] ?? 200
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     const effect = randomBetween(1, 3)
     switch (effect) {
       case 1:
-        target.status.triggerFreeze(2000, target)
+        target.status.triggerFreeze(2500, target)
         break
       case 2:
         target.status.triggerBurn(5000, target, pokemon)
         break
       case 3:
-        target.status.triggerParalysis(5000, target, pokemon)
+        target.status.triggerParalysis(7500, target, pokemon)
         break
     }
   }
@@ -1937,8 +1937,7 @@ export class AccelerockStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    const destination =
-      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+    const destination = board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     target = destination?.target ?? target
     super.process(pokemon, state, board, target, crit)
     if (destination) {
@@ -1970,8 +1969,7 @@ export class NuzzleStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    const destination =
-      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+    const destination = board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     target = destination?.target ?? target
     super.process(pokemon, state, board, target, crit)
 

@@ -844,7 +844,7 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  addResurrection(pokemon: PokemonEntity) {
+  addResurrection(pokemon: IPokemonEntity) {
     if (pokemon.passive === Passive.INANIMATE) return // Inanimate objects cannot be resurrected
     this.resurection = true
   }
@@ -993,5 +993,33 @@ export default class Status extends Schema implements IStatus {
       duration = Math.round(duration * 0.1)
     }
     return duration
+  }
+
+  addPsychicField(entity: IPokemonEntity) {
+    this.psychicField = true
+    if (entity.passive === Passive.SURGE_SURFER) {
+      entity.addAttackSpeed(30, entity, 0, false)
+    }
+  }
+
+  removePsychicField(entity: IPokemonEntity) {
+    this.psychicField = false
+    if (entity.passive === Passive.SURGE_SURFER) {
+      entity.addAttackSpeed(-30, entity, 0, false)
+    }
+  }
+
+  addElectricField(entity: IPokemonEntity) {
+    this.electricField = true
+    if (entity.passive === Passive.SURGE_SURFER) {
+      entity.addAttackSpeed(30, entity, 0, false)
+    }
+  }
+
+  removeElectricField(entity: IPokemonEntity) {
+    this.electricField = false
+    if (entity.passive === Passive.SURGE_SURFER) {
+      entity.addAttackSpeed(-30, entity, 0, false)
+    }
   }
 }

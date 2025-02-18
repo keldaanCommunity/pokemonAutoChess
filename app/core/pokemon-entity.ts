@@ -260,11 +260,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  get inLightCell(): boolean {
+  get inSpotlight(): boolean {
     if (!this.player) return false
     const { lightX, lightY } = this.player
     const { positionX, positionY } = this.refToBoardPokemon
-    return positionX === lightX && positionY === lightY
+    return (
+      (positionX === lightX && positionY === lightY) ||
+      this.items.has(Item.SHINY_STONE) ||
+      (this.passive === Passive.CONVERSION && this.types.has(Synergy.LIGHT))
+    )
   }
 
   hasSynergyEffect(synergy: Synergy): boolean {
@@ -662,34 +666,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ItemEffects[item]
       ?.filter((effect) => effect instanceof OnItemRemovedEffect)
       ?.forEach((effect) => effect.apply(this))
-  }
-
-  addPsychicField() {
-    this.status.psychicField = true
-    if (this.passive === Passive.SURGE_SURFER) {
-      this.addAttackSpeed(30, this, 0, false)
-    }
-  }
-
-  removePsychicField() {
-    this.status.psychicField = false
-    if (this.passive === Passive.SURGE_SURFER) {
-      this.addAttackSpeed(-30, this, 0, false)
-    }
-  }
-
-  addElectricField() {
-    this.status.electricField = true
-    if (this.passive === Passive.SURGE_SURFER) {
-      this.addAttackSpeed(30, this, 0, false)
-    }
-  }
-
-  removeElectricField() {
-    this.status.electricField = false
-    if (this.passive === Passive.SURGE_SURFER) {
-      this.addAttackSpeed(-30, this, 0, false)
-    }
   }
 
   moveTo(x: number, y: number, board: Board) {
@@ -1904,9 +1880,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         resetFireStacks(effect)
       }
     })
-    const soundEffect = SynergyEffects[Synergy.SOUND].find((effect) => {
+    const soundEffect = SynergyEffects[Synergy.SOUND].find((effect) =>
       this.player?.effects.has(effect)
-    })
+    )
     if (soundEffect) {
       resetSoundStacks(soundEffect)
     }
