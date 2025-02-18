@@ -112,7 +112,7 @@ export default class GameScene extends Scene {
         this.spectate ? playerUids[0] : this.uid
       ) as Player
 
-      this.setMap("town")
+      this.setMap(player.map)
       this.setupMouseEvents()
       this.battleGroup = this.add.group()
       this.animationManager = new AnimationManager(this)
