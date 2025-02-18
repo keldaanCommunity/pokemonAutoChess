@@ -587,14 +587,14 @@ export default abstract class PokemonState {
         if (pokemon.passive === Passive.ELECTRIC_TERRAIN) {
           board.forEach((x, y, pkm) => {
             if (pkm && pkm.team == pokemon.team && pkm.status.electricField) {
-              pkm.removeElectricField()
+              pkm.status.removeElectricField(pkm)
             }
           })
           effectsRemovedList.push(Effect.ELECTRIC_TERRAIN)
         } else if (pokemon.passive === Passive.PSYCHIC_TERRAIN) {
           board.forEach((x, y, pkm) => {
             if (pkm && pkm.team == pokemon.team && pkm.status.psychicField) {
-              pkm.removePsychicField()
+              pkm.status.removePsychicField(pkm)
             }
           })
           effectsRemovedList.push(Effect.PSYCHIC_TERRAIN)
