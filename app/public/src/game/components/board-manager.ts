@@ -6,7 +6,7 @@ import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-a
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import GameState from "../../../../rooms/states/game-state"
 import { IPokemon, Transfer } from "../../../../types"
-import { SynergyTriggers } from "../../../../types/Config"
+import { PortalCarouselStages, SynergyTriggers } from "../../../../types/Config"
 import {
   GameMode,
   GamePhaseState,
@@ -28,6 +28,11 @@ import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
 import { displayBoost } from "./boosts-animations"
 import { Item } from "../../../../types/enum/Item"
+import { playMusic } from "../../pages/utils/audio"
+import {
+  DungeonMusic,
+  TownMusicMarkerByStage
+} from "../../../../types/enum/Dungeon"
 
 export enum BoardMode {
   PICK = "pick",
@@ -540,6 +545,13 @@ export default class BoardManager {
   minigameMode() {
     this.mode = BoardMode.TOWN
     this.scene.setMap("town")
+    if (PortalCarouselStages.includes(this.state.stageLevel)) {
+      playMusic(
+        this.scene,
+        DungeonMusic.TREASURE_TOWN,
+        TownMusicMarkerByStage[this.state.stageLevel] ?? 0
+      )
+    }
     this.hideLightCell()
     this.hideBerryTrees()
     this.pokemons.forEach((pokemon) => {

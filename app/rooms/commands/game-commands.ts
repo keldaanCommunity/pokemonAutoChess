@@ -36,7 +36,6 @@ import {
   PORTAL_CAROUSEL_BASE_DURATION,
   PortalCarouselStages,
   StageDuration,
-  SynergyTriggers,
   BOARD_WIDTH,
   BOARD_SIDE_HEIGHT
 } from "../../types/Config"

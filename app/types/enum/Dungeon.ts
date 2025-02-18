@@ -880,3 +880,9 @@ export const DungeonDetails: {
     music: DungeonMusic.TREASURE_TOWN
   }
 }
+
+export const TownMusicMarkerByStage: { [stage: number]: number } = {
+  [0]: 0,
+  [10]: 22,
+  [20]: 83
+}

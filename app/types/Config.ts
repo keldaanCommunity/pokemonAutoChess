@@ -412,7 +412,7 @@ export const StageDuration: Record<number | "DEFAULT", number> = {
 }
 export const FIGHTING_PHASE_DURATION = 40000
 export const ITEM_CAROUSEL_BASE_DURATION = 15000
-export const PORTAL_CAROUSEL_BASE_DURATION = 20000
+export const PORTAL_CAROUSEL_BASE_DURATION = 22500
 
 export const ItemCarouselStages = [4, 12, 17, 22, 27, 34]
 export const ItemProposalStages = [3, 15]
