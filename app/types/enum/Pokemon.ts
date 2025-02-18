@@ -915,7 +915,17 @@ export enum Pkm {
   VULLABY = "VULLABY",
   MANDIBUZZ = "MANDIBUZZ",
   INKAY = "INKAY",
-  MALAMAR = "MALAMAR"
+  MALAMAR = "MALAMAR",
+  MILCERY = "MILCERY",
+  ALCREMIE_VANILLA = "ALCREMIE_VANILLA",
+  ALCREMIE_RUBY = "ALCREMIE_RUBY",
+  ALCREMIE_MATCHA = "ALCREMIE_MATCHA",
+  ALCREMIE_MINT = "ALCREMIE_MINT",
+  ALCREMIE_LEMON = "ALCREMIE_LEMON",
+  ALCREMIE_SALTED = "ALCREMIE_SALTED",
+  ALCREMIE_RUBY_SWIRL = "ALCREMIE_RUBY_SWIRL",
+  ALCREMIE_CARAMEL_SWIRL = "ALCREMIE_CARAMEL_SWIRL",
+  ALCREMIE_RAINBOW_SWIRL = "ALCREMIE_RAINBOW_SWIRL"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1920,8 +1930,16 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.SIRFETCHD]: "0865",
   //[Pkm.MR_RIME]: "0866",
   //[Pkm.RUNERIGUS]: "0867",
-  //[Pkm.MILCERY]: "0868",
-  //[Pkm.ALPREMIE]: "0869",
+  [Pkm.MILCERY]: "0868",
+  [Pkm.ALCREMIE_VANILLA]: "0869",
+  [Pkm.ALCREMIE_RUBY]: "0869-0007",
+  [Pkm.ALCREMIE_MATCHA]: "0869-0014",
+  [Pkm.ALCREMIE_MINT]: "0869-0021",
+  [Pkm.ALCREMIE_LEMON]: "0869-0028",
+  [Pkm.ALCREMIE_SALTED]: "0869-0035",
+  [Pkm.ALCREMIE_RUBY_SWIRL]: "0869-0042",
+  [Pkm.ALCREMIE_CARAMEL_SWIRL]: "0869-0049",
+  [Pkm.ALCREMIE_RAINBOW_SWIRL]: "0869-0056",
   //[Pkm.FALINKS]: "0870",
   //[Pkm.PINCURCHIN]: "0871",
   [Pkm.SNOM]: "0872",
@@ -2997,7 +3015,17 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GULPIN]: Pkm.GULPIN,
   [Pkm.SWALOT]: Pkm.GULPIN,
   [Pkm.FIDOUGH]: Pkm.FIDOUGH,
-  [Pkm.DACHSBUN]: Pkm.FIDOUGH
+  [Pkm.DACHSBUN]: Pkm.FIDOUGH,
+  [Pkm.MILCERY]: Pkm.MILCERY,
+  [Pkm.ALCREMIE_VANILLA]: Pkm.MILCERY,
+  [Pkm.ALCREMIE_RUBY]: Pkm.MILCERY,
+  [Pkm.ALCREMIE_MATCHA]: Pkm.MILCERY,
+  [Pkm.ALCREMIE_MINT]: Pkm.MILCERY,
+  [Pkm.ALCREMIE_LEMON]: Pkm.MILCERY,
+  [Pkm.ALCREMIE_SALTED]: Pkm.MILCERY,
+  [Pkm.ALCREMIE_RUBY_SWIRL]: Pkm.MILCERY,
+  [Pkm.ALCREMIE_CARAMEL_SWIRL]: Pkm.MILCERY,
+  [Pkm.ALCREMIE_RAINBOW_SWIRL]: Pkm.MILCERY
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7754,5 +7782,64 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.TailWhip
+  },
+  [Pkm.MILCERY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
+  },
+  [Pkm.ALCREMIE_VANILLA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Rotate
+  },
+  [Pkm.ALCREMIE_RUBY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Rotate,
+    shinyUnavailable: true
+  },
+  [Pkm.ALCREMIE_MATCHA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Rotate,
+    shinyUnavailable: true
+  },
+  [Pkm.ALCREMIE_MINT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Rotate,
+    shinyUnavailable: true
+  },
+  [Pkm.ALCREMIE_LEMON]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Rotate,
+    shinyUnavailable: true
+  },
+  [Pkm.ALCREMIE_SALTED]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Rotate,
+    shinyUnavailable: true
+  },
+  [Pkm.ALCREMIE_RUBY_SWIRL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Rotate,
+    shinyUnavailable: true
+  },
+  [Pkm.ALCREMIE_CARAMEL_SWIRL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Rotate,
+    shinyUnavailable: true
+  },
+  [Pkm.ALCREMIE_RAINBOW_SWIRL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Rotate,
+    shinyUnavailable: true
   }
 }

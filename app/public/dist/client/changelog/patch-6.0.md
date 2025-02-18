@@ -15,6 +15,8 @@
 - Hydrapple
 - Fidough
 - Dachsbun
+- Milcery
+- Alcremie (Vanilla, Ruby, Matcha, Mint, Lemon, Salted, Ruby Swirl, Caramel Swirl, Rainbow Swirl)
 
 # Changes to Pokemon & Abilities
 

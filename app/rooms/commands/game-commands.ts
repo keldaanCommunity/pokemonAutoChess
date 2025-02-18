@@ -28,6 +28,8 @@ import {
 } from "../../types"
 import {
   AdditionalPicksStages,
+  BOARD_SIDE_HEIGHT,
+  BOARD_WIDTH,
   FIGHTING_PHASE_DURATION,
   ITEM_CAROUSEL_BASE_DURATION,
   ItemCarouselStages,
@@ -36,9 +38,9 @@ import {
   PORTAL_CAROUSEL_BASE_DURATION,
   PortalCarouselStages,
   StageDuration,
-  BOARD_WIDTH,
-  BOARD_SIDE_HEIGHT
+  SynergyTriggers
 } from "../../types/Config"
+import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { Effect } from "../../types/enum/Effect"
 import {
@@ -53,6 +55,7 @@ import {
   Berries,
   Dishes,
   FishingRods,
+  Flavors,
   HMs,
   Item,
   ItemComponents,
@@ -60,6 +63,7 @@ import {
   NonHoldableItems,
   OgerponMasks,
   ShinyItems,
+  Sweets,
   SynergyGivenByItem,
   SynergyStones,
   TMs
@@ -535,6 +539,11 @@ export class OnDragDropItemCommand extends Command<
           player.transformPokemon(pokemon, Pkm.ZYGARDE_10)
         }
       }
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
+
+    if (Flavors.includes(item) && pokemon.skill !== Ability.DECORATE) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
     }
@@ -1321,6 +1330,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             let dishes = Array.from({ length: nbDishes }, () => dish!)
             if (dish === Item.BERRIES) {
               dishes = pickNRandomIn(Berries, nbDishes)
+            }
+            if (dish === Item.SWEETS) {
+              dishes = pickNRandomIn(Sweets, nbDishes)
             }
             const client = this.room.clients.find(
               (cli) => cli.auth.uid === player.id

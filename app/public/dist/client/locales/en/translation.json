@@ -449,7 +449,8 @@
     "SALT_CURE": "Salt Cure",
     "SPICY_EXTRACT": "Spicy Extract",
     "SWEET_SCENT": "Sweet Scent",
-    "SWALLOW": "Swallow"
+    "SWALLOW": "Swallow",
+    "DECORATE": "Decorate"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1366,7 +1367,17 @@
     "GULPIN": "Gulpin",
     "SWALOT": "Swalot",
     "FIDOUGH": "Fidough",
-    "DACHSBUN": "Dachsbun"
+    "DACHSBUN": "Dachsbun",
+    "MILCERY": "Milcery",
+    "ALCREMIE_VANILLA": "Alcremie (Vanilla)",
+    "ALCREMIE_RUBY": "Alcremie (Ruby)",
+    "ALCREMIE_MATCHA": "Alcremie (Matcha)",
+    "ALCREMIE_MINT": "Alcremie (Mint)",
+    "ALCREMIE_LEMON": "Alcremie (Lemon)",
+    "ALCREMIE_SALTED": "Alcremie (Salted)",
+    "ALCREMIE_RUBY_SWIRL": "Alcremie (Ruby Swirl)",
+    "ALCREMIE_CARAMEL_SWIRL": "Alcremie (Caramel Swirl)",
+    "ALCREMIE_RAINBOW_SWIRL": "Alcremie (Rainbow Swirl)"
   },
   "ability_description": {
     "SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1796,7 +1807,8 @@
     "SALT_CURE": "Adjacent allies gain [10,20,40,SP] SHIELD and their status afflictions cured. Adjacent WATER, STEEL or GHOST enemies suffer from BURN for 5 seconds.",
     "SPICY_EXTRACT": "Make 1/2/3 closest allies RAGE for [2,SP] seconds",
     "SWEET_SCENT": "Enemies in a 3-range radius can no longer dodge attacks, lose [3,SP] SPE_DEF and have [30,LK]% chance to be CHARM for 1 second",
-    "SWALLOW": "Store power and boosts its DEF and SPE_DEF by 1 up to 3 times. If below 25% HP, swallow instead, restoring [20,SP]% of max HP per stack. If over 3 stacks, spit up, dealing [40,80,150,SP] SPECIAL to all enemies in front."
+    "SWALLOW": "Store power and boosts its DEF and SPE_DEF by 1 up to 3 times. If below 25% HP, swallow instead, restoring [20,SP]% of max HP per stack. If over 3 stacks, spit up, dealing [40,80,150,SP] SPECIAL to all enemies in front.",
+    "DECORATE": "Decorates the nearest ally, increasing its ATK by [4,6,8] and AP by [10,25,50]\n VANILLA_FLAVOR heals 20 HP\n RUBY_FLAVOR adds +1 DEF\n MATCHA_FLAVOR adds +1 SPE_DEF\n MINT_FLAVOR adds +3 LUCK\n LEMON_FLAVOR adds +5 CRIT_CHANCE\n SALTED_FLAVOR adds 10 SHIELD\n RUBY_SWIRL_FLAVOR adds +1 ATK\n CARAMEL_SWIRL_FLAVOR adds +10 CRIT_POWER\n RAINBOW_SWIRL_FLAVOR adds +5 AP"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2190,7 +2202,24 @@
     "FRUIT_JUICE": "Fruit Juice",
     "LEEK": "Leek",
     "LARGE_LEEK": "Large Leek",
-    "SPINDA_COCKTAIL": "Spinda's Cocktail"
+    "SPINDA_COCKTAIL": "Spinda's Cocktail",
+    "SWEETS": "Sweets",
+    "RIBBON_SWEET": "Ribbon Sweet",
+    "STAR_SWEET": "Star Sweet",
+    "FLOWER_SWEET": "Flower Sweet",
+    "CLOVER_SWEET": "Clover Sweet",
+    "BERRY_SWEET": "Berry Sweet",
+    "LOVE_SWEET": "Love Sweet",
+    "STRAWBERRY_SWEET": "Strawberry Sweet",
+    "RUBY_FLAVOR": "Ruby Flavor",
+    "MATCHA_FLAVOR": "Matcha Flavor",
+    "MINT_FLAVOR": "Mint Flavor",
+    "SALTED_FLAVOR": "Salted Flavor",
+    "CARAMEL_SWIRL_FLAVOR": "Caramel Swirl Flavor",
+    "RUBY_SWIRL_FLAVOR": "Ruby Swirl Flavor",
+    "LEMON_FLAVOR": "Lemon Flavor",
+    "RAINBOW_SWIRL_FLAVOR": "Rainbow Swirl Flavor",
+    "VANILLA_FLAVOR": "Vanilla Flavor"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -2341,7 +2370,7 @@
     "BERRY_JUICE": "Gain 50 SHIELD at the start of the next fight, and every time a berry is consumed.",
     "TART_APPLE": "In the next fight, each attack by this pokémon will remove 1 DEF from the target. Will turn into a SWEET_APPLE after one round.",
     "SWEET_APPLE": "In the next fight, each attack by this pokémon will remove 1 SPE_DEF from the target. Will turn into a SIRUPY_APPLE after one round.",
-    "SIRUPY_APPLE": "In the next fight, each attack by this pokemon has 30% LUCK to inflict PARALYSIS for 1 second.",
+    "SIRUPY_APPLE": "In the next fight, each attack by this pokemon has [30,LK]% chance to inflict PARALYSIS for 1 second.",
     "SWEET_HERB": "Gain 50 AP in the next fight.",
     "MOOMOO_MILK": "Gain 10 permanent max HP.",
     "BERRIES": "Get a random berry",
@@ -2354,7 +2383,24 @@
     "FRUIT_JUICE": "Gain 30% ATK_SPEED in the next fight.",
     "LEEK": "Gain 30% CRIT_CHANCE and allow ability to critically strike in the next fight.",
     "LARGE_LEEK": "Gain 30% CRIT_POWER and allow ability to critically strike in the next fight.",
-    "SPINDA_COCKTAIL": "A cocktail with [LK] random effects that can buff stats or make you dizzy."
+    "SPINDA_COCKTAIL": "A cocktail with [LK] random effects that can buff stats or make you dizzy.",
+    "SWEETS": "A random candy granting a permanent stats bonus: RIBBON_SWEET, STAR_SWEET, FLOWER_SWEET, CLOVER_SWEET, BERRY_SWEET, LOVE_SWEET, STRAWBERRY_SWEET",
+    "RIBBON_SWEET": "Gain 2 permanent SPE_DEF",
+    "STAR_SWEET": "Gain 5 permanent AP",
+    "FLOWER_SWEET": "Gain 5% permanent ATK_SPEED",
+    "CLOVER_SWEET": "Gain 5% permanent LUCK",
+    "BERRY_SWEET": "Gain 10 permanent HP",
+    "LOVE_SWEET": "Gain 2 permanent DEF",
+    "STRAWBERRY_SWEET": "Gain 3 permanent ATK",
+    "VANILLA_FLAVOR": "A delicious VANILLA_FLAVOR. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_VANILLA)",
+    "RUBY_FLAVOR": "A delicious RUBY_FLAVOR. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_RUBY)",
+    "MATCHA_FLAVOR": "A delicious MATCHA_FLAVOR. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_MATCHA)",
+    "MINT_FLAVOR": "A delicious MINT_FLAVOR. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_MINT)",
+    "SALTED_FLAVOR": "A delicious SALTED_FLAVOR. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_SALTED)",
+    "CARAMEL_SWIRL_FLAVOR": "A delicious CARAMEL_SWIRL_FLAVOR. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_CARAMEL_SWIRL)",
+    "RUBY_SWIRL_FLAVOR": "A delicious RUBY_SWIRL_FLAVOR. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_RUBY_SWIRL)",
+    "LEMON_FLAVOR": "A delicious LEMON_FLAVOR. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_LEMON)",
+    "RAINBOW_SWIRL_FLAVOR": "A delicious RAINBOW_SWIRL_FLAVOR. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_RAINBOW_SWIRL)"
   },
   "passive_description": {
     "NONE": "No passive",
@@ -2488,7 +2534,8 @@
     "APPLIN": "Applin is looking for a SWEET_APPLE or a TART_APPLE or a SIRUPY_APPLE to eat.",
     "DIPPLIN": "Dipplin is looking for a SIRUPY_APPLE to eat.",
     "WELL_BAKED": "The Pokémon doesn't suffer from BURN. Instead, it gains 10 DEF when it is affected by BURN.",
-    "CONVERSION": "Conversion: get the highest synergy of your opponent and its effects at the start of the fight."
+    "CONVERSION": "Conversion: get the highest synergy of your opponent and its effects at the start of the fight.",
+    "CREAM": "$t(pkm.MILCERY) is looking for a delicious flavor such as VANILLA_FLAVOR, RUBY_FLAVOR, LEMON_FLAVOR, MINT_FLAVOR, MATCHA_FLAVOR, SALTED_FLAVOR, RUBY_SWIRL_FLAVOR, CARAMEL_SWIRL_FLAVOR, or RAINBOW_SWIRL_FLAVOR."
   },
   "stat": {
     "ATK": "Attack",

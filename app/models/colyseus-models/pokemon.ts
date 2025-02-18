@@ -1,6 +1,11 @@
 import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
 import { nanoid } from "nanoid"
 import {
+  ClearWingEffect,
+  DrySkinEffect,
+  SynchroEffect
+} from "../../core/effect"
+import {
   ConditionBasedEvolutionRule,
   CountEvolutionRule,
   EvolutionRule,
@@ -38,6 +43,7 @@ import {
   AllItems,
   ArtificialItems,
   Berries,
+  Flavors,
   Item,
   ItemComponents,
   ItemRecipe,
@@ -61,14 +67,9 @@ import {
 } from "../../utils/board"
 import { distanceC, distanceE } from "../../utils/distance"
 import { values } from "../../utils/schemas"
+import { SynergyEffects } from "../effects"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
-import { SynergyEffects } from "../effects"
-import {
-  DrySkinEffect,
-  ClearWingEffect,
-  SynchroEffect
-} from "../../core/effect"
 import { pickRandomIn } from "../../utils/random"
 
 export class Pokemon extends Schema implements IPokemon {
@@ -98,6 +99,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("boolean") shiny: boolean
   @type("string") emotion: Emotion
   @type("string") action: PokemonActionState = PokemonActionState.IDLE
+  permanentLuck: number = 0
   deathCount: number = 0
   evolutions: Pkm[] = []
   evolutionRule: EvolutionRule = new CountEvolutionRule(3)
@@ -153,9 +155,13 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   get luck(): number {
-    let luck = 0
+    let luck = this.permanentLuck
     if (this.items.has(Item.LUCKY_EGG)) luck += 50
     return luck
+  }
+
+  set luck(value: number) {
+    this.permanentLuck = value
   }
 
   onChangePosition(x: number, y: number, player: Player) {
@@ -16442,6 +16448,259 @@ export class Dachsbun extends Pokemon {
   additional = true
 }
 
+export class Milcery extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FAIRY,
+    Synergy.AMORPHOUS,
+    Synergy.GOURMET
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 2
+  evolutions = [
+    Pkm.ALCREMIE_VANILLA,
+    Pkm.ALCREMIE_RUBY,
+    Pkm.ALCREMIE_MATCHA,
+    Pkm.ALCREMIE_MINT,
+    Pkm.ALCREMIE_LEMON,
+    Pkm.ALCREMIE_SALTED,
+    Pkm.ALCREMIE_RUBY_SWIRL,
+    Pkm.ALCREMIE_CARAMEL_SWIRL,
+    Pkm.ALCREMIE_RAINBOW_SWIRL
+  ]
+  evolutionRule = new ItemEvolutionRule(
+    [
+      Item.VANILLA_FLAVOR,
+      Item.RUBY_FLAVOR,
+      Item.MATCHA_FLAVOR,
+      Item.MINT_FLAVOR,
+      Item.LEMON_FLAVOR,
+      Item.SALTED_FLAVOR,
+      Item.RUBY_SWIRL_FLAVOR,
+      Item.CARAMEL_SWIRL_FLAVOR,
+      Item.RAINBOW_SWIRL_FLAVOR
+    ],
+    (pokemon, player, item) => {
+      if (item === Item.VANILLA_FLAVOR) {
+        return Pkm.ALCREMIE_VANILLA
+      }
+      if (item === Item.RUBY_FLAVOR) {
+        return Pkm.ALCREMIE_RUBY
+      }
+      if (item === Item.MATCHA_FLAVOR) {
+        return Pkm.ALCREMIE_MATCHA
+      }
+      if (item === Item.MINT_FLAVOR) {
+        return Pkm.ALCREMIE_MINT
+      }
+      if (item === Item.LEMON_FLAVOR) {
+        return Pkm.ALCREMIE_LEMON
+      }
+      if (item === Item.SALTED_FLAVOR) {
+        return Pkm.ALCREMIE_SALTED
+      }
+      if (item === Item.RUBY_SWIRL_FLAVOR) {
+        return Pkm.ALCREMIE_RUBY_SWIRL
+      }
+      if (item === Item.CARAMEL_SWIRL_FLAVOR) {
+        return Pkm.ALCREMIE_CARAMEL_SWIRL
+      }
+      if (item === Item.RAINBOW_SWIRL_FLAVOR) {
+        return Pkm.ALCREMIE_RAINBOW_SWIRL
+      }
+      return Pkm.ALCREMIE_VANILLA
+    }
+  )
+  hp = 130
+  atk = 9
+  def = 1
+  speDef = 3
+  maxPP = 80
+  range = 2
+  skill = Ability.DECORATE
+  passive = Passive.CREAM
+  attackSprite = AttackSprite.FAIRY_RANGE
+  onAcquired = (player: Player) => {
+    Flavors.forEach((item) => player.items.push(item))
+  }
+}
+
+function alcremieOnAcquired(player: Player) {
+  Flavors.forEach((flavor) => {
+    removeInArray(player.items, flavor)
+  })
+}
+
+export class AlcremieVanilla extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FAIRY,
+    Synergy.AMORPHOUS,
+    Synergy.GOURMET
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 160
+  atk = 14
+  def = 3
+  speDef = 6
+  maxPP = 80
+  range = 2
+  skill = Ability.DECORATE
+  attackSprite = AttackSprite.FAIRY_RANGE
+  onAcquired = alcremieOnAcquired
+}
+
+export class AlcremieRuby extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FAIRY,
+    Synergy.AMORPHOUS,
+    Synergy.GOURMET
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 160
+  atk = 14
+  def = 3
+  speDef = 6
+  maxPP = 80
+  range = 2
+  skill = Ability.DECORATE
+  attackSprite = AttackSprite.FAIRY_RANGE
+  onAcquired = alcremieOnAcquired
+}
+
+export class AlcremieMatcha extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FAIRY,
+    Synergy.AMORPHOUS,
+    Synergy.GOURMET
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 160
+  atk = 14
+  def = 3
+  speDef = 6
+  maxPP = 80
+  range = 2
+  skill = Ability.DECORATE
+  attackSprite = AttackSprite.FAIRY_RANGE
+  onAcquired = alcremieOnAcquired
+}
+
+export class AlcremieMint extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FAIRY,
+    Synergy.AMORPHOUS,
+    Synergy.GOURMET
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 160
+  atk = 14
+  def = 3
+  speDef = 6
+  maxPP = 80
+  range = 2
+  skill = Ability.DECORATE
+  attackSprite = AttackSprite.FAIRY_RANGE
+  onAcquired = alcremieOnAcquired
+}
+
+export class AlcremieLemon extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FAIRY,
+    Synergy.AMORPHOUS,
+    Synergy.GOURMET
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 160
+  atk = 14
+  def = 3
+  speDef = 6
+  maxPP = 80
+  range = 2
+  skill = Ability.DECORATE
+  attackSprite = AttackSprite.FAIRY_RANGE
+  onAcquired = alcremieOnAcquired
+}
+
+export class AlcremieSalted extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FAIRY,
+    Synergy.AMORPHOUS,
+    Synergy.GOURMET
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 160
+  atk = 14
+  def = 3
+  speDef = 6
+  maxPP = 80
+  range = 2
+  skill = Ability.DECORATE
+  attackSprite = AttackSprite.FAIRY_RANGE
+  onAcquired = alcremieOnAcquired
+}
+
+export class AlcremieRubySwirl extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FAIRY,
+    Synergy.AMORPHOUS,
+    Synergy.GOURMET
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 160
+  atk = 14
+  def = 3
+  speDef = 6
+  maxPP = 80
+  range = 2
+  skill = Ability.DECORATE
+  attackSprite = AttackSprite.FAIRY_RANGE
+  onAcquired = alcremieOnAcquired
+}
+
+export class AlcremieCaramelSwirl extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FAIRY,
+    Synergy.AMORPHOUS,
+    Synergy.GOURMET
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 160
+  atk = 14
+  def = 3
+  speDef = 6
+  maxPP = 80
+  range = 2
+  skill = Ability.DECORATE
+  attackSprite = AttackSprite.FAIRY_RANGE
+  onAcquired = alcremieOnAcquired
+}
+
+export class AlcremieRainbowSwirl extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FAIRY,
+    Synergy.AMORPHOUS,
+    Synergy.GOURMET
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 160
+  atk = 14
+  def = 3
+  speDef = 6
+  maxPP = 80
+  range = 2
+  skill = Ability.DECORATE
+  attackSprite = AttackSprite.FAIRY_RANGE
+  onAcquired = alcremieOnAcquired
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -17363,5 +17622,15 @@ export const PokemonClasses: Record<
   [Pkm.GULPIN]: Gulpin,
   [Pkm.SWALOT]: Swalot,
   [Pkm.FIDOUGH]: Fidough,
-  [Pkm.DACHSBUN]: Dachsbun
+  [Pkm.DACHSBUN]: Dachsbun,
+  [Pkm.MILCERY]: Milcery,
+  [Pkm.ALCREMIE_VANILLA]: AlcremieVanilla,
+  [Pkm.ALCREMIE_RUBY]: AlcremieRuby,
+  [Pkm.ALCREMIE_MATCHA]: AlcremieMatcha,
+  [Pkm.ALCREMIE_MINT]: AlcremieMint,
+  [Pkm.ALCREMIE_LEMON]: AlcremieLemon,
+  [Pkm.ALCREMIE_SALTED]: AlcremieSalted,
+  [Pkm.ALCREMIE_RUBY_SWIRL]: AlcremieRubySwirl,
+  [Pkm.ALCREMIE_CARAMEL_SWIRL]: AlcremieCaramelSwirl,
+  [Pkm.ALCREMIE_RAINBOW_SWIRL]: AlcremieRainbowSwirl
 }
