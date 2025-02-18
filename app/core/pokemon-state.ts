@@ -587,14 +587,14 @@ export default abstract class PokemonState {
         if (pokemon.passive === Passive.ELECTRIC_TERRAIN) {
           board.forEach((x, y, pkm) => {
             if (pkm && pkm.team == pokemon.team && pkm.status.electricField) {
-              pkm.removeElectricField()
+              pkm.status.removeElectricField(pkm)
             }
           })
           effectsRemovedList.push(Effect.ELECTRIC_TERRAIN)
         } else if (pokemon.passive === Passive.PSYCHIC_TERRAIN) {
           board.forEach((x, y, pkm) => {
             if (pkm && pkm.team == pokemon.team && pkm.status.psychicField) {
-              pkm.removePsychicField()
+              pkm.status.removePsychicField(pkm)
             }
           })
           effectsRemovedList.push(Effect.PSYCHIC_TERRAIN)
@@ -968,8 +968,30 @@ export default abstract class PokemonState {
         }
       }
     })
-
     return farthestTarget
+  }
+
+  getNearestAlly(
+    pokemon: PokemonEntity,
+    board: Board
+  ): PokemonEntity | undefined {
+    let nearestAlly: PokemonEntity | undefined = undefined
+    let minDistance = 999
+    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
+      if (value && value.team === pokemon.team && pokemon.id !== value.id) {
+        const distance = distanceM(
+          pokemon.positionX,
+          pokemon.positionY,
+          value.positionX,
+          value.positionY
+        )
+        if (distance < minDistance) {
+          nearestAlly = value
+          minDistance = distance
+        }
+      }
+    })
+    return nearestAlly
   }
 
   getMostSurroundedCoordinateAvailablePlace(

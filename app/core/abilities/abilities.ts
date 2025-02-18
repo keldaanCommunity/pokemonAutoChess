@@ -80,8 +80,8 @@ import {
   shuffleArray
 } from "../../utils/random"
 import { values } from "../../utils/schemas"
-import { DelayedCommand } from "../simulation-command"
 import { DarkHarvestEffect } from "../effect"
+import { DelayedCommand } from "../simulation-command"
 
 const broadcastAbility = (
   pokemon: PokemonEntity,
@@ -11840,6 +11840,48 @@ export class SwallowStrategy extends AbilityStrategy {
   }
 }
 
+export class DecorateStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const atkBoost = [4, 6, 8][pokemon.stars - 1] ?? 8
+    const apBoost = [10, 25, 50][pokemon.stars - 1] ?? 50
+    const nearestAlly = state.getNearestAlly(pokemon, board)
+    if (nearestAlly) {
+      broadcastAbility(pokemon, {
+        targetX: nearestAlly.positionX,
+        targetY: nearestAlly.positionY
+      })
+      nearestAlly.addAttack(atkBoost, pokemon, 0, false)
+      nearestAlly.addAbilityPower(apBoost, pokemon, 0, false)
+      if (pokemon.name === Pkm.ALCREMIE_VANILLA) {
+        nearestAlly.handleHeal(20, pokemon, 0, false)
+      } else if (pokemon.name === Pkm.ALCREMIE_RUBY) {
+        nearestAlly.addDefense(1, pokemon, 0, false)
+      } else if (pokemon.name === Pkm.ALCREMIE_MATCHA) {
+        nearestAlly.addSpecialDefense(1, pokemon, 0, false)
+      } else if (pokemon.name === Pkm.ALCREMIE_MINT) {
+        nearestAlly.addLuck(3, pokemon, 0, false)
+      } else if (pokemon.name === Pkm.ALCREMIE_LEMON) {
+        nearestAlly.addCritChance(5, pokemon, 0, false)
+      } else if (pokemon.name === Pkm.ALCREMIE_SALTED) {
+        nearestAlly.addShield(10, pokemon, 0, false)
+      } else if (pokemon.name === Pkm.ALCREMIE_RUBY_SWIRL) {
+        nearestAlly.addAttack(1, pokemon, 0, false)
+      } else if (pokemon.name === Pkm.ALCREMIE_CARAMEL_SWIRL) {
+        nearestAlly.addCritPower(10, pokemon, 0, false)
+      } else if (pokemon.name === Pkm.ALCREMIE_RAINBOW_SWIRL) {
+        nearestAlly.addAbilityPower(5, pokemon, 0, false)
+      }
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -12271,5 +12313,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.NUTRIENTS]: new NutrientsStrategy(),
   [Ability.SYRUP_BOMB]: new SyrupBombStrategy(),
   [Ability.GRAV_APPLE]: new GravAppleStrategy(),
-  [Ability.FICKLE_BEAM]: new FickleBeamStrategy()
+  [Ability.FICKLE_BEAM]: new FickleBeamStrategy(),
+  [Ability.DECORATE]: new DecorateStrategy()
 }

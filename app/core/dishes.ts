@@ -48,7 +48,17 @@ export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.TSAREENA]: Item.FRUIT_JUICE,
   [Pkm.FARFETCH_D]: Item.LEEK,
   [Pkm.GALARIAN_FARFETCH_D]: Item.LARGE_LEEK,
-  [Pkm.SPINDA]: Item.SPINDA_COCKTAIL
+  [Pkm.SPINDA]: Item.SPINDA_COCKTAIL,
+  [Pkm.MILCERY]: Item.SWEETS,
+  [Pkm.ALCREMIE_VANILLA]: Item.SWEETS,
+  [Pkm.ALCREMIE_RUBY]: Item.SWEETS,
+  [Pkm.ALCREMIE_MATCHA]: Item.SWEETS,
+  [Pkm.ALCREMIE_MINT]: Item.SWEETS,
+  [Pkm.ALCREMIE_LEMON]: Item.SWEETS,
+  [Pkm.ALCREMIE_SALTED]: Item.SWEETS,
+  [Pkm.ALCREMIE_RUBY_SWIRL]: Item.SWEETS,
+  [Pkm.ALCREMIE_CARAMEL_SWIRL]: Item.SWEETS,
+  [Pkm.ALCREMIE_RAINBOW_SWIRL]: Item.SWEETS
 }
 
 export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
@@ -204,6 +214,42 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
         target.status.triggerCharm(5000, target, entity)
         entity.effects.delete(EffectEnum.WHIPPED_DREAM)
       }
+    })
+  ],
+  SWEETS: [],
+  STRAWBERRY_SWEET: [
+    new OnSpawnEffect((entity) => {
+      entity.addAttack(3, entity, 0, false, true)
+    })
+  ],
+  LOVE_SWEET: [
+    new OnSpawnEffect((entity) => {
+      entity.addDefense(3, entity, 0, false, true)
+    })
+  ],
+  BERRY_SWEET: [
+    new OnSpawnEffect((entity) => {
+      entity.addMaxHP(10, entity, 0, false, true)
+    })
+  ],
+  CLOVER_SWEET: [
+    new OnSpawnEffect((entity) => {
+      entity.addLuck(5, entity, 0, false, true)
+    })
+  ],
+  FLOWER_SWEET: [
+    new OnSpawnEffect((entity) => {
+      entity.addAttackSpeed(5, entity, 0, false, true)
+    })
+  ],
+  STAR_SWEET: [
+    new OnSpawnEffect((entity) => {
+      entity.addAbilityPower(5, entity, 0, false, true)
+    })
+  ],
+  RIBBON_SWEET: [
+    new OnSpawnEffect((entity) => {
+      entity.addSpecialDefense(2, entity, 0, false, true)
     })
   ]
 }

@@ -10,6 +10,7 @@ import {
   PokemonTint,
   SpriteType
 } from "../../../../types/enum/Game"
+import { Sweets } from "../../../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
 import { distanceE, distanceM } from "../../../../utils/distance"
 import {
@@ -2823,6 +2824,41 @@ export function displayAbility(
           },
           onComplete: function () {
             darkHarvestGroup.destroy(true, true)
+          }
+        })
+      }
+      break
+
+    case Ability.DECORATE:
+      {
+        const decorateGroup = scene.add.group()
+        const [x, y] = transformAttackCoordinate(targetX, targetY, flip)
+
+        Sweets.forEach((sweet) => {
+          const sweetSprite = scene.add
+            .sprite(0, 0, "item", `${sweet}.png`)
+            .setScale(0.3)
+          decorateGroup.add(sweetSprite)
+        })
+
+        const circle = new Geom.Circle(x, y, 30)
+        Phaser.Actions.PlaceOnCircle(decorateGroup.getChildren(), circle)
+
+        scene.tweens.add({
+          targets: circle,
+          radius: 60,
+          ease: Phaser.Math.Easing.Quartic.Out,
+          duration: 1000,
+          onUpdate: function (tween) {
+            Phaser.Actions.RotateAroundDistance(
+              decorateGroup.getChildren(),
+              { x, y },
+              0.08,
+              circle.radius
+            )
+          },
+          onComplete: function () {
+            decorateGroup.destroy(true, true)
           }
         })
       }
