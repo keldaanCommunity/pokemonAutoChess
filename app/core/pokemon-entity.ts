@@ -1509,8 +1509,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     board,
     damage
   }: { target: PokemonEntity; board: Board; damage: number }) {
-    target.count.crit++
-
     // proc fairy splash damage for both the attacker and the target
     if (target.fairySplashCooldown === 0 && target.types.has(Synergy.FAIRY)) {
       let shockDamageFactor = 0.3
