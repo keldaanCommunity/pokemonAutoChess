@@ -54,6 +54,7 @@
 - Buff Melmetal: increase Attack speed/Attack ratio: 10% attack speed = ~~3~~ 5 attack
 - Rework Fuecoco line: now 3-range with nerfed defense/special defense, ability Torch Song reworked, PP 100 → 60
 - Porygon is now in Ultra category ; adjusted stats ; new passive Conversion: get the highest synergy of your opponent and its effects at the start of the fight.
+- Change Unown-O: OVEN - Cook a random dish for all your pokemons next fight
 
 # Changes to Synergies
 
@@ -81,6 +82,7 @@
 
 # UI
 
+- Added anti-aliasing in Interface options
 - Artificial items are now automatically dropped when benching the unit that was holding them.
 
 # Bugfix
