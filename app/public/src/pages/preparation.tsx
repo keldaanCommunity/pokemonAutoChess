@@ -1,4 +1,5 @@
 import { Client, getStateCallbacks, Room } from "colyseus.js"
+import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
@@ -119,10 +120,6 @@ export default function Preparation() {
     const initialize = async (room: Room<PreparationState>, uid: string) => {
       const $ = getStateCallbacks(room)
       const $state = $(room.state)
-
-      room.state.users.forEach((u) => {
-        dispatch(addUser(u))
-      })
 
       $state.listen("gameStartedAt", (value, previousValue) => {
         dispatch(setGameStarted(value))
