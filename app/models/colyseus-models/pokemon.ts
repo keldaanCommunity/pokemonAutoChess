@@ -13614,16 +13614,7 @@ function updateLycanroc(pokemon: Pokemon, weather: Weather, player: Player) {
   }
 
   if (!weatherForm || pokemon.name === weatherForm) return
-
-  const newPokemon = PokemonFactory.createPokemonFromName(weatherForm, player)
-  pokemon.items.forEach((item) => {
-    newPokemon.items.add(item)
-  })
-  newPokemon.positionX = pokemon.positionX
-  newPokemon.positionY = pokemon.positionY
-  player.board.delete(pokemon.id)
-  player.board.set(newPokemon.id, newPokemon)
-  player.updateSynergies()
+  player.transformPokemon(pokemon, weatherForm)
 }
 
 export class LycanrocDusk extends Pokemon {
