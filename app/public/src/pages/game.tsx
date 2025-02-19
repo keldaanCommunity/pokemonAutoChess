@@ -574,8 +574,8 @@ export default function Game() {
       })
 
       $state.players.onAdd((player) => {
-        gameContainer.initializePlayer(player)
         dispatch(addPlayer(player))
+        gameContainer.initializePlayer(player)
         const $player = $(player)
 
         if (player.id == uid) {
