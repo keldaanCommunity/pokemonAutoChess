@@ -545,6 +545,51 @@ export const Flavors = [
   Item.RAINBOW_SWIRL_FLAVOR
 ]
 
+export const SynergyFlavors: {
+  [key in Synergy]:
+    | Item.VANILLA_FLAVOR
+    | Item.RUBY_FLAVOR
+    | Item.MATCHA_FLAVOR
+    | Item.MINT_FLAVOR
+    | Item.LEMON_FLAVOR
+    | Item.SALTED_FLAVOR
+    | Item.RUBY_SWIRL_FLAVOR
+    | Item.CARAMEL_SWIRL_FLAVOR
+    | Item.RAINBOW_SWIRL_FLAVOR
+} = {
+  [Synergy.NORMAL]: Item.VANILLA_FLAVOR,
+  [Synergy.GRASS]: Item.MATCHA_FLAVOR,
+  [Synergy.FIRE]: Item.RUBY_SWIRL_FLAVOR,
+  [Synergy.WATER]: Item.MINT_FLAVOR,
+  [Synergy.ELECTRIC]: Item.LEMON_FLAVOR,
+  [Synergy.FIGHTING]: Item.RUBY_FLAVOR,
+  [Synergy.PSYCHIC]: Item.RAINBOW_SWIRL_FLAVOR,
+  [Synergy.DARK]: Item.CARAMEL_SWIRL_FLAVOR,
+  [Synergy.STEEL]: Item.RUBY_FLAVOR,
+  [Synergy.GROUND]: Item.SALTED_FLAVOR,
+  [Synergy.POISON]: Item.MATCHA_FLAVOR,
+  [Synergy.DRAGON]: Item.CARAMEL_SWIRL_FLAVOR,
+  [Synergy.FIELD]: Item.RUBY_SWIRL_FLAVOR,
+  [Synergy.MONSTER]: Item.CARAMEL_SWIRL_FLAVOR,
+  [Synergy.HUMAN]: Item.RUBY_FLAVOR,
+  [Synergy.AQUATIC]: Item.MINT_FLAVOR,
+  [Synergy.BUG]: Item.LEMON_FLAVOR,
+  [Synergy.FLYING]: Item.VANILLA_FLAVOR,
+  [Synergy.FLORA]: Item.MATCHA_FLAVOR,
+  [Synergy.ROCK]: Item.SALTED_FLAVOR,
+  [Synergy.GHOST]: Item.MATCHA_FLAVOR,
+  [Synergy.FAIRY]: Item.LEMON_FLAVOR,
+  [Synergy.ICE]: Item.MINT_FLAVOR,
+  [Synergy.FOSSIL]: Item.SALTED_FLAVOR,
+  [Synergy.SOUND]: Item.LEMON_FLAVOR,
+  [Synergy.ARTIFICIAL]: Item.VANILLA_FLAVOR,
+  [Synergy.LIGHT]: Item.RAINBOW_SWIRL_FLAVOR,
+  [Synergy.WILD]: Item.RUBY_SWIRL_FLAVOR,
+  [Synergy.BABY]: Item.RAINBOW_SWIRL_FLAVOR,
+  [Synergy.AMORPHOUS]: Item.RAINBOW_SWIRL_FLAVOR,
+  [Synergy.GOURMET]: Item.VANILLA_FLAVOR
+}
+
 export const Sweets = [
   Item.STRAWBERRY_SWEET,
   Item.LOVE_SWEET,
