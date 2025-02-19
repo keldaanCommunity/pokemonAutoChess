@@ -2364,7 +2364,7 @@
     "MANTINE": "Wenn Matirps an Bord ist, besteht eine 30 %ige Chance, mit deiner Angelrute ein Remoraid zu fangen.",
     "SABLEYE": "Zobiris sucht nach einem RED_ORB",
     "MEGA_SABLEYE": "Mega Zobiris erhält RUNE_PROTECT für den gesamten Kampf",
-    "MELMETAL": "Melmetal kann keine ATK_SPEED gewinnen. Bonus ATK_SPEED wird in ATK umgewandelt (10 % ATK_SPEED: 3 ATK)",
+    "MELMETAL": "Melmetal kann keine ATK_SPEED gewinnen. Bonus ATK_SPEED wird in ATK umgewandelt (10 % ATK_SPEED: 5 ATK)",
     "SKARMORY": "Zu Beginn des Kampfes verteilt Panzaeron Stacheln auf dem Feld. Die Stacheln verursachen 10 TRUE pro Sekunde und ARMOR_REDUCTION bei Pokémon, die darauf laufen, sofern sie nicht FLYING.",
     "DURANT": "Durant-Basisangriffe verursachen 1 zusätzlichen TRUE für jeden BUG Verbündeten auf deinem Brett.",
     "OGERPON_TEAL": "Ogerpon kann TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK und CORNERSTONE_MASK tragen, um sein Aussehen zu ändern\nBeim Anwenden werden [20,SP] HP bei benachbarten Verbündeten wiederhergestellt.",

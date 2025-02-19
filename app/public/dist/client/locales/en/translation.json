@@ -2511,7 +2511,7 @@
     "MANTINE": "When Mantine is on board, gain 30% chance to fish a Remoraid with your fishing rod.",
     "SABLEYE": "Sableye is looking for a RED_ORB",
     "MEGA_SABLEYE": "Mega Sableye gains RUNE_PROTECT for the entire fight",
-    "MELMETAL": "Melmetal can't gain ATK_SPEED. Bonus ATK_SPEED is converted into ATK (10% ATK_SPEED: 3 ATK)",
+    "MELMETAL": "Melmetal can't gain ATK_SPEED. Bonus ATK_SPEED is converted into ATK (10% ATK_SPEED: 5 ATK)",
     "SKARMORY": "At the start of the fight, Skarmory scatters spikes around the field. The spikes deal 10 TRUE per second and ARMOR_REDUCTION to Pokémon that walk on it, if not FLYING.",
     "DURANT": "Durant basic attacks deals 1 extra TRUE for each BUG ally on your board",
     "OGERPON_TEAL": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, restores [20,SP] HP to adjacent allies",

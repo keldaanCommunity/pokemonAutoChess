@@ -707,7 +707,7 @@
     "MANTINE": "เมื่อ Mantine อยู่บนสนามจะมีโอกาส 30% ที่จะตก Remoraid ขึ้นมาด้วยเบ็ดตกปลาของคุณ",
     "SABLEYE": "Sableye กำลังมองหา RED_ORB",
     "MEGA_SABLEYE": "Mega Sableye จะได้รับ RUNE_PROTECT ตลอดการต่อสู้",
-    "MELMETAL": "Melmetal ไม่สามารถเพิ่ม ATK_SPEED. ค่า ATK_SPEED ที่เพิ่มขึ้นมาจะถูกเปลี่ยนเป็น ATK (10% ATK_SPEED: 3 ATK)",
+    "MELMETAL": "Melmetal ไม่สามารถเพิ่ม ATK_SPEED. ค่า ATK_SPEED ที่เพิ่มขึ้นมาจะถูกเปลี่ยนเป็น ATK (10% ATK_SPEED: 5 ATK)",
     "SKARMORY": "เมื่อเริ่มการต่อสู้, Skarmory สลัดหนามเหล็กออกมายังบนสนาม. หนามจะสร้างความเสียหาย 10 เป็น TRUE ต่อวินาที และมอบสถานะ ARMOR_REDUCTION แก่โปเกมอนที่อยู่บนพื้นที่นั้นหากไม่ใช่ประเภท FLYING.",
     "DURANT": "การโจมตีปกติของ Durant จะสร้างความเสียหายเพิ่มเติม 1 เป็น TRUE ต่อจำนวนโปเกมอนที่มีประเภท BUG ของเราบนกระดาน",
     "OGERPON_TEAL": "Ogerpon สามารถสวมใส่ TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK และ CORNERSTONE_MASK เพื่อเปลี่ยนรูปลักษณ์ \\n เมื่อใช้, ฟื้นฟู [20,SP] HP แก่เพื่อนร่วมทีมที่อยู่ติดกัน",
