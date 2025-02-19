@@ -30,7 +30,7 @@ export const iconRegExp = new RegExp(
   "g"
 )
 
-export function addIconsToDescription(description: string, stats?: { ap: number, luck: number, stars: number }) {
+export function addIconsToDescription(description: string, stats?: { ap: number, luck: number, stars: number, stages?: number }) {
   const matchIcon = description.match(iconRegExp)
   if (matchIcon === null) return description
   const descriptionParts = description.split(iconRegExp)
@@ -147,8 +147,8 @@ export function addIconsToDescription(description: string, stats?: { ap: number,
                 title="Scales with Luck"
               ></img>
             )}
-            {array.map((v, j) => {
-              const separator = j < array.length - 1 ? "/" : ""
+            {array.slice(0, stats?.stages).map((v, j) => {
+              const separator = j < (stats?.stages ?? array.length) - 1 ? "/" : ""
               let scaleValue = 0
               if (scaleType === "AP") scaleValue = stats?.ap ?? 0
               if (scaleType === "LUCK") scaleValue = stats?.luck ?? 0

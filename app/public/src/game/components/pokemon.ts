@@ -349,6 +349,7 @@ export default class PokemonSprite extends DraggableObject {
       this.shiny,
       this.index,
       this.stars,
+      getPokemonData(this.name as Pkm).stages,
       this.evolution
     )
     this.detail.setPosition(
