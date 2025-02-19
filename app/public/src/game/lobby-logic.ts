@@ -1,8 +1,8 @@
 import { RoomAvailable, Room, Client, getStateCallbacks } from "colyseus.js"
-import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import firebase from "firebase/compat/app"
 import { t } from "i18next"
 import { NavigateFunction } from "react-router-dom"
+import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import {
   TournamentSchema,
   TournamentPlayerSchema,

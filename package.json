@@ -48,7 +48,7 @@
     "@colyseus/monitor": "^0.16.0",
     "@colyseus/redis-driver": "^0.16.0",
     "@colyseus/redis-presence": "^0.16.0",
-    "@colyseus/schema": "^3.0.0",
+    "@colyseus/schema": "^3.0.2",
     "@colyseus/tools": "^0.16.0",
     "@colyseus/ws-transport": "^0.16.0",
     "@joaomoreno/unique-names-generator": "^5.1.0",

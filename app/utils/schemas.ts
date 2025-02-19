@@ -20,9 +20,11 @@ export function values<T>(
   return values
 }
 
-export function entries<V, K extends string>(schema: MapSchema<V>): [K, V][] {
+export function entries<V, K extends string>(
+  schema: MapSchema<V, K>
+): [K, V][] {
   const entries: [K, V][] = []
-  schema.forEach((value, key) => entries.push([key as K, value]))
+  schema.forEach((value, key) => entries.push([key, value]))
   return entries
 }
 

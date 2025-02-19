@@ -12,8 +12,8 @@ import { Synergy } from "../../types/enum/Synergy"
 import { values } from "../../utils/schemas"
 
 export default class Synergies
-  extends MapSchema<number>
-  implements Map<string, number>
+  extends MapSchema<number, Synergy>
+  implements Map<Synergy, number>
 {
   constructor() {
     super()
