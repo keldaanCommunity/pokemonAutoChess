@@ -11849,34 +11849,37 @@ export class DecorateStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const atkBoost = [4, 6, 8][pokemon.stars - 1] ?? 8
-    const apBoost = [10, 25, 50][pokemon.stars - 1] ?? 50
+    const atkBoost = [1, 2, 3][pokemon.stars - 1] ?? 8
+    const apBoost = [10, 20, 30][pokemon.stars - 1] ?? 50
     const nearestAlly = state.getNearestAlly(pokemon, board)
     if (nearestAlly) {
       broadcastAbility(pokemon, {
         targetX: nearestAlly.positionX,
         targetY: nearestAlly.positionY
       })
-      nearestAlly.addAttack(atkBoost, pokemon, 0, false)
-      nearestAlly.addAbilityPower(apBoost, pokemon, 0, false)
-      if (pokemon.name === Pkm.ALCREMIE_VANILLA) {
-        nearestAlly.handleHeal(20, pokemon, 0, false)
-      } else if (pokemon.name === Pkm.ALCREMIE_RUBY) {
-        nearestAlly.addDefense(1, pokemon, 0, false)
-      } else if (pokemon.name === Pkm.ALCREMIE_MATCHA) {
-        nearestAlly.addSpecialDefense(1, pokemon, 0, false)
-      } else if (pokemon.name === Pkm.ALCREMIE_MINT) {
-        nearestAlly.addLuck(3, pokemon, 0, false)
-      } else if (pokemon.name === Pkm.ALCREMIE_LEMON) {
-        nearestAlly.addCritChance(5, pokemon, 0, false)
-      } else if (pokemon.name === Pkm.ALCREMIE_SALTED) {
-        nearestAlly.addShield(10, pokemon, 0, false)
-      } else if (pokemon.name === Pkm.ALCREMIE_RUBY_SWIRL) {
-        nearestAlly.addAttack(1, pokemon, 0, false)
-      } else if (pokemon.name === Pkm.ALCREMIE_CARAMEL_SWIRL) {
-        nearestAlly.addCritPower(10, pokemon, 0, false)
-      } else if (pokemon.name === Pkm.ALCREMIE_RAINBOW_SWIRL) {
-        nearestAlly.addAbilityPower(5, pokemon, 0, false)
+      nearestAlly.addAttack(atkBoost, pokemon, 1, crit)
+      nearestAlly.addAbilityPower(apBoost, pokemon, 1, crit)
+
+      if (pokemon.items.has(Item.VANILLA_FLAVOR)) {
+        nearestAlly.addShield(60, pokemon, 1, crit)
+      } else if (pokemon.items.has(Item.RUBY_FLAVOR)) {
+        nearestAlly.addAttackSpeed(30, pokemon, 1, crit)
+      } else if (pokemon.items.has(Item.MATCHA_FLAVOR)) {
+        nearestAlly.addMaxHP(40, pokemon, 1, crit)
+      } else if (pokemon.items.has(Item.MINT_FLAVOR)) {
+        nearestAlly.handleHeal(40, pokemon, 0, crit)
+        nearestAlly.addSpecialDefense(8, pokemon, 0, crit)
+      } else if (pokemon.items.has(Item.LEMON_FLAVOR)) {
+        nearestAlly.addCritChance(40, pokemon, 0, crit)
+      } else if (pokemon.items.has(Item.SALTED_FLAVOR)) {
+        nearestAlly.handleHeal(40, pokemon, 1, crit)
+        nearestAlly.addDefense(8, pokemon, 0, crit)
+      } else if (pokemon.items.has(Item.RUBY_SWIRL_FLAVOR)) {
+        nearestAlly.addAttack(80, pokemon, 1, crit)
+      } else if (pokemon.items.has(Item.CARAMEL_SWIRL_FLAVOR)) {
+        nearestAlly.addCritPower(80, pokemon, 1, crit)
+      } else if (pokemon.items.has(Item.RAINBOW_SWIRL_FLAVOR)) {
+        nearestAlly.addAbilityPower(60, pokemon, 1, crit)
       }
     }
   }

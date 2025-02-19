@@ -66,11 +66,11 @@ import {
   isOnBench
 } from "../../utils/board"
 import { distanceC, distanceE } from "../../utils/distance"
+import { pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { SynergyEffects } from "../effects"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
-import { pickRandomIn } from "../../utils/random"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -16519,9 +16519,6 @@ export class Milcery extends Pokemon {
   skill = Ability.DECORATE
   passive = Passive.CREAM
   attackSprite = AttackSprite.FAIRY_RANGE
-  onAcquired = (player: Player) => {
-    Flavors.forEach((item) => player.items.push(item))
-  }
 }
 
 function alcremieOnAcquired(player: Player) {
@@ -16546,6 +16543,7 @@ export class AlcremieVanilla extends Pokemon {
   range = 2
   skill = Ability.DECORATE
   attackSprite = AttackSprite.FAIRY_RANGE
+  passive = Passive.VANILLA_CREAM
   onAcquired = alcremieOnAcquired
 }
 
@@ -16565,6 +16563,7 @@ export class AlcremieRuby extends Pokemon {
   range = 2
   skill = Ability.DECORATE
   attackSprite = AttackSprite.FAIRY_RANGE
+  passive = Passive.RUBY_CREAM
   onAcquired = alcremieOnAcquired
 }
 
@@ -16584,6 +16583,7 @@ export class AlcremieMatcha extends Pokemon {
   range = 2
   skill = Ability.DECORATE
   attackSprite = AttackSprite.FAIRY_RANGE
+  passive = Passive.MATCHA_CREAM
   onAcquired = alcremieOnAcquired
 }
 
@@ -16603,6 +16603,7 @@ export class AlcremieMint extends Pokemon {
   range = 2
   skill = Ability.DECORATE
   attackSprite = AttackSprite.FAIRY_RANGE
+  passive = Passive.MINT_CREAM
   onAcquired = alcremieOnAcquired
 }
 
@@ -16622,6 +16623,7 @@ export class AlcremieLemon extends Pokemon {
   range = 2
   skill = Ability.DECORATE
   attackSprite = AttackSprite.FAIRY_RANGE
+  passive = Passive.LEMON_CREAM
   onAcquired = alcremieOnAcquired
 }
 
@@ -16641,6 +16643,7 @@ export class AlcremieSalted extends Pokemon {
   range = 2
   skill = Ability.DECORATE
   attackSprite = AttackSprite.FAIRY_RANGE
+  passive = Passive.SALTED_CREAM
   onAcquired = alcremieOnAcquired
 }
 
@@ -16660,6 +16663,7 @@ export class AlcremieRubySwirl extends Pokemon {
   range = 2
   skill = Ability.DECORATE
   attackSprite = AttackSprite.FAIRY_RANGE
+  passive = Passive.RUBY_SWIRL_CREAM
   onAcquired = alcremieOnAcquired
 }
 
@@ -16679,6 +16683,7 @@ export class AlcremieCaramelSwirl extends Pokemon {
   range = 2
   skill = Ability.DECORATE
   attackSprite = AttackSprite.FAIRY_RANGE
+  passive = Passive.CARAMEL_SWIRL_CREAM
   onAcquired = alcremieOnAcquired
 }
 
@@ -16698,6 +16703,7 @@ export class AlcremieRainbowSwirl extends Pokemon {
   range = 2
   skill = Ability.DECORATE
   attackSprite = AttackSprite.FAIRY_RANGE
+  passive = Passive.RAINBOW_SWIRL_CREAM
   onAcquired = alcremieOnAcquired
 }
 
