@@ -13,22 +13,16 @@ export function keys(schema: MapSchema): string[] {
 }
 
 export function values<T>(
-  schema:
-    | MapSchema<T, any>
-    | SetSchema<T>
-    | CollectionSchema<T>
-    | ArraySchema<T>
+  schema: MapSchema<T> | SetSchema<T> | CollectionSchema<T> | ArraySchema<T>
 ): T[] {
   const values: T[] = []
   schema.forEach((value: T) => values.push(value))
   return values
 }
 
-export function entries<V, K extends string>(
-  schema: MapSchema<V, K>
-): [K, V][] {
+export function entries<V, K extends string>(schema: MapSchema<V>): [K, V][] {
   const entries: [K, V][] = []
-  schema.forEach((value, key) => entries.push([key, value]))
+  schema.forEach((value, key) => entries.push([key as K, value]))
   return entries
 }
 

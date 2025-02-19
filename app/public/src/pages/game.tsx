@@ -624,8 +624,9 @@ export default function Game() {
               "expNeeded",
               "level"
             ]
+            const $experienceManager = $(experienceManager)
             fields.forEach((field) => {
-              experienceManager.listen(field, (value) => {
+              $experienceManager.listen(field, (value) => {
                 dispatch(
                   updateExperienceManager({
                     ...experienceManager,

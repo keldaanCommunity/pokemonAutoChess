@@ -327,8 +327,9 @@ class GameContainer {
         "y",
         "avatarId"
       ]
+      const $floatingItem = this.$<FloatingItem>(floatingItem)
       fields.forEach((field) => {
-        floatingItem.listen(field, (value, previousValue) => {
+        $floatingItem.listen(field, (value, previousValue) => {
           this.gameScene?.minigameManager?.changeItem(
             floatingItem,
             field,

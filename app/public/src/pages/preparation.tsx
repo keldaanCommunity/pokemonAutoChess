@@ -1,5 +1,4 @@
 import { Client, getStateCallbacks, Room } from "colyseus.js"
-import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
@@ -121,7 +120,7 @@ export default function Preparation() {
       const $ = getStateCallbacks(room)
       const $state = $(room.state)
 
-      $state.users.forEach((u) => {
+      room.state.users.forEach((u) => {
         dispatch(addUser(u))
       })
 
@@ -186,6 +185,7 @@ export default function Preparation() {
         }
 
         const $user = $(user)
+
         const fields: NonFunctionPropNames<GameUser>[] = [
           "anonymous",
           "avatar",
