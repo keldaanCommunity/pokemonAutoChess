@@ -138,7 +138,13 @@ export const gameSlice = createSlice({
       action: PayloadAction<{ id: string; field: string; value: any }>
     ) => {
       const index = state.players.findIndex((e) => action.payload.id == e.id)
-      state.players[index][action.payload.field] = action.payload.value
+      if (index >= 0) {
+        state.players[index][action.payload.field] = action.payload.value
+      } else {
+        console.error(
+          `changePlayer: Player not found ${action.payload.id} in ${state.players.map((p) => p.id)}`
+        )
+      }
     },
     setShop: (state, action: PayloadAction<ArraySchema<Pkm>>) => {
       state.shop = action.payload as unknown as Pkm[]
