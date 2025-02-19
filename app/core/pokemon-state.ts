@@ -51,6 +51,7 @@ export default abstract class PokemonState {
             : 0
           opponentCritPower -= 0.1 * nbBlackAugurite
           damage = min(0)(Math.round(damage * opponentCritPower))
+          target.count.crit++
         }
         pokemon.onCriticalAttack({ target, board, damage })
       }
