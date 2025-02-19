@@ -201,7 +201,7 @@ export async function joinLobbyRoom(
                 })
               })
 
-              $bracket.playersId.onChange(() => {
+              const updateBracket = () => {
                 dispatch(
                   changeTournamentBracket({
                     tournamentId: tournament.id,
@@ -210,7 +210,10 @@ export async function joinLobbyRoom(
                     value: bracket.playersId
                   })
                 )
-              })
+              }
+
+              $bracket.playersId.onAdd(updateBracket)
+              $bracket.playersId.onRemove(updateBracket)
             })
 
             $tournament.brackets.onRemove((bracket, bracketId) => {
