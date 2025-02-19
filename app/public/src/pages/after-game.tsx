@@ -1,4 +1,4 @@
-import { Client, Room } from "colyseus.js"
+import { Client, getStateCallbacks, Room } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import React, { useEffect, useRef, useState } from "react"
 import { Navigate } from "react-router-dom"
@@ -73,22 +73,24 @@ export default function AfterGame() {
       })
     }
 
-    const initialize = async (r: Room<AfterGameState>) => {
+    const initialize = async (room: Room<AfterGameState>) => {
       localStore.delete(LocalStoreKeys.RECONNECTION_GAME)
-      localStore.set(LocalStoreKeys.RECONNECTION_AFTER_GAME, { reconnectionToken: r.reconnectionToken, roomId: r.roomId }, 30)
-      r.state.players.onAdd((player) => {
+      localStore.set(LocalStoreKeys.RECONNECTION_AFTER_GAME, { reconnectionToken: room.reconnectionToken, roomId: room.roomId }, 30)
+      const $ = getStateCallbacks(room)
+      const $state = $(room.state)
+      $state.players.onAdd((player) => {
         dispatch(addPlayer(player))
         if (player.id === currentPlayerId) {
           playSound(SOUNDS["FINISH" + player.rank], preference("musicVolume") / 100)
         }
       })
-      r.state.listen("elligibleToELO", (value, previousValue) => {
+      $state.listen("elligibleToELO", (value, previousValue) => {
         dispatch(setElligibilityToELO(value))
       })
-      r.state.listen("elligibleToXP", (value, previousValue) => {
+      $state.listen("elligibleToXP", (value, previousValue) => {
         dispatch(setElligibilityToXP(value))
       })
-      r.state.listen("gameMode", (value, previousValue) => {
+      $state.listen("gameMode", (value, previousValue) => {
         dispatch(setGameMode(value))
       })
     }
