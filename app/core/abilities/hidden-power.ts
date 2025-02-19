@@ -1,10 +1,10 @@
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../models/precomputed/precomputed-types-and-categories"
-import { Transfer } from "../../types"
+import { IPokemon, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, Rarity } from "../../types/enum/Game"
-import { ItemComponents, Berries, Item } from "../../types/enum/Item"
+import { ItemComponents, Berries, Item, Dishes } from "../../types/enum/Item"
 import { Pkm, getUnownsPoolPerStage } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { pickNRandomIn, pickRandomIn } from "../../utils/random"
@@ -354,11 +354,11 @@ export class HiddenPowerOStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value && pokemon.team === value.team) {
-        value.addItem(Item.ORAN_BERRY)
-      }
-    })
+    if (pokemon.player) {
+      pokemon.player.board.forEach((p: IPokemon) => {
+        p.meal = pickRandomIn(Dishes as unknown as Item[])
+      })
+    }
   }
 }
 
