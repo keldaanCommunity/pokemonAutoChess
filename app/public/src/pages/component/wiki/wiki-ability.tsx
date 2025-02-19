@@ -18,7 +18,16 @@ export default function WikiAbility() {
   const { t } = useTranslation()
   const [hoveredPokemon, setHoveredPokemon] = useState<Pkm>()
 
+  const [searchQuery, setSearchQuery] = useState<string>("")
   const [pokemonsPerAbility, setPokemonsPerAbility] = useState<{ [key in Ability]?: IPokemonData[] }>({})
+  const filteredAbilities = (Object.keys(Ability) as Ability[])
+    .filter((a) => a !== Ability.DEFAULT && (
+      !searchQuery.trim() ||
+      `${t(`ability.${a}`)} ${t(`ability_description.${a}`)}`.toLowerCase().includes(searchQuery.trim().toLowerCase())
+    ))
+    .sort((a, b) => t(`ability.${a}`).localeCompare(t(`ability.${b}`)))
+
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setPokemonsPerAbility(Object.keys(Ability).reduce((o, ability) => {
@@ -32,42 +41,42 @@ export default function WikiAbility() {
 
   return (
     <div id="wiki-ability">
+      <div className="actions">
+        <input type="search" placeholder={t("search")} onInput={event => setSearchQuery((event.target as HTMLInputElement).value)} />
+      </div>
       <ul>
-        {(Object.keys(Ability) as Ability[])
-          .filter((a) => a !== Ability.DEFAULT)
-          .sort((a, b) => t(`ability.${a}`).localeCompare(t(`ability.${b}`)))
-          .map((ability) => {
-            return (
-              <li key={ability} className="my-box">
-                <div>
-                  <h2>{t(`ability.${ability}`)}</h2>
-                  <p>
-                    {addIconsToDescription(t(`ability_description.${ability}`))}
-                  </p>
-                </div>
-                <div>
-                  <ul>
-                    {(pokemonsPerAbility[ability] ?? []).map((p) => (
-                      <li key={p.name}>
-                        <div
-                          className={cc("pokemon-portrait", {
-                            additional: p.additional,
-                            regional: p.regional
-                          })}
-                          data-tooltip-id="pokemon-detail"
-                          onMouseOver={() => {
-                            setHoveredPokemon(p.name)
-                          }}
-                        >
-                          <img src={getPortraitSrc(p.index)} className={cc({ pixelated: !antialiasing })} />
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </li>
-            )
-          })}
+        {filteredAbilities.map((ability) => {
+          return (
+            <li key={ability} className="my-box">
+              <div>
+                <h2>{t(`ability.${ability}`)}</h2>
+                <p>
+                  {addIconsToDescription(t(`ability_description.${ability}`))}
+                </p>
+              </div>
+              <div>
+                <ul>
+                  {(pokemonsPerAbility[ability] ?? []).map((p) => (
+                    <li key={p.name}>
+                      <div
+                        className={cc("pokemon-portrait", {
+                          additional: p.additional,
+                          regional: p.regional
+                        })}
+                        data-tooltip-id="pokemon-detail"
+                        onMouseOver={() => {
+                          setHoveredPokemon(p.name)
+                        }}
+                      >
+                        <img src={getPortraitSrc(p.index)} className={cc({ pixelated: !antialiasing })} />
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          )
+        })}
       </ul>
       {hoveredPokemon && <Tooltip
         id="pokemon-detail"
