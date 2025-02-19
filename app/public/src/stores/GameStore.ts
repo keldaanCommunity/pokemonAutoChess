@@ -14,6 +14,7 @@ import { SpecialGameRule } from "../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
 import { getGameScene } from "../pages/game"
+import { entries } from "../../../utils/schemas"
 
 export interface GameStateStore {
   afterGameId: string
@@ -138,7 +139,13 @@ export const gameSlice = createSlice({
       action: PayloadAction<{ id: string; field: string; value: any }>
     ) => {
       const index = state.players.findIndex((e) => action.payload.id == e.id)
-      state.players[index][action.payload.field] = action.payload.value
+      if (index >= 0) {
+        state.players[index][action.payload.field] = action.payload.value
+      } else {
+        console.error(
+          `changePlayer: Player not found ${action.payload.id} in ${state.players.map((p) => p.id)}`
+        )
+      }
     },
     setShop: (state, action: PayloadAction<ArraySchema<Pkm>>) => {
       state.shop = action.payload as unknown as Pkm[]
@@ -165,8 +172,9 @@ export const gameSlice = createSlice({
       )
 
       if (playerToUpdate !== -1) {
-        state.players.at(playerToUpdate)!.synergies =
-          action.payload.value.toJSON()
+        state.players.at(playerToUpdate)!.synergies = new Map(
+          entries(action.payload.value)
+        )
       }
     },
     setLife: (state, action: PayloadAction<{ value: number; id: string }>) => {
