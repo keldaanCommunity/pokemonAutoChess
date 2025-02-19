@@ -14,6 +14,7 @@ import { SpecialGameRule } from "../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
 import { getGameScene } from "../pages/game"
+import { entries } from "../../../utils/schemas"
 
 export interface GameStateStore {
   afterGameId: string
@@ -171,8 +172,9 @@ export const gameSlice = createSlice({
       )
 
       if (playerToUpdate !== -1) {
-        state.players.at(playerToUpdate)!.synergies =
-          action.payload.value.toJSON()
+        state.players.at(playerToUpdate)!.synergies = new Map(
+          entries(action.payload.value)
+        )
       }
     },
     setLife: (state, action: PayloadAction<{ value: number; id: string }>) => {
