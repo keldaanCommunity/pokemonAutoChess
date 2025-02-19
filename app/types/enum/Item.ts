@@ -370,6 +370,10 @@ export const WeatherByWeatherRocks = reverseMap(WeatherRocksByWeather)
 
 export const CraftableItems: Item[] = Object.keys(ItemRecipe) as Item[]
 
+export const CraftableNonSynergyItems: Item[] = CraftableItems.filter(
+  (item) => SynergyGivenByItem.hasOwnProperty(item) === false
+)
+
 export const SynergyStones = [
   Item.OLD_AMBER,
   Item.DAWN_STONE,

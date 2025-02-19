@@ -79,6 +79,8 @@
 - Regional variants are no longer found in maps with common synergies between the variant and the original Pokémon
 - When an effect is considering the strongest Pokémon, or the pokémon with the highest stat, if several Pokémon are equal, it now selects a random Pokémon among those. Before, it was based on board position. This is especially relevant for Ghost curses.
 - Farthest reachable target algorithm has been improved to favor the farthest target when there are multiple equidistant free cells. This impacts several abilities and effects, such as Comet Shard and all dashers abilities
+- PVE rewards from stage 24 onwards now propose 1 synergy stone maximum
+- Item carousels now propose 4 synergy stones maximum
 
 # UI
 
