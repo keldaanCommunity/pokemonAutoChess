@@ -1808,7 +1808,7 @@
     "SPICY_EXTRACT": "最近的1/2/3只我方宝可梦陷入RAGE [2,SP]秒。",
     "SWEET_SCENT": "3格半径范围内的敌方宝可梦失去闪避能力，且降低[3,SP]点SPE_DEF，还有[30,LK]%的概率陷入CHARM 1秒。",
     "SWALLOW": "积蓄力量，使自身提升1点DEF和SPE_DEF，至多叠加3次。若HP低于25%，则将积蓄的力量吞下，每层蓄力恢复[20,SP]%的最大HP。若叠加层数已满，则将积蓄的力量撞向前方所有敌方宝可梦，造成[40,80,150,SP]点SPECIAL。",
-    "DECORATE": "通过装饰，为最近的我方宝可梦提升[4,6,8]点ATK和[10,25,50]点AP，并根据进化时使用的调味料，再提升——\n VANILLA_FLAVOR：20点HP\n RUBY_FLAVOR：1点DEF\n MATCHA_FLAVOR：1点SPE_DEF\n MINT_FLAVOR：3点LUCK\n LEMON_FLAVOR：5点CRIT_CHANCE\n SALTED_FLAVOR：10点SHIELD\n RUBY_SWIRL_FLAVOR：1点ATK\n CARAMEL_SWIRL_FLAVOR：10点CRIT_POWER\n RAINBOW_SWIRL_FLAVOR：5点AP"
+    "DECORATE": "通过装饰，为最近的我方宝可梦提升[1,2,3,SP]点ATK和[10,20,30,SP]点AP，并根据进化时使用的调味料追加额外效果。"
   },
   "effect": {
     "INGRAIN": "扎根",
@@ -2384,7 +2384,7 @@
     "LEEK": "仅在下一轮战斗中，提升30%的CRIT_CHANCE，且招式能够暴击。",
     "LARGE_LEEK": "仅在下一轮战斗中，提升30%的CRIT_POWER，且招式能够暴击。",
     "SPINDA_COCKTAIL": "一瓶神秘的混调，富含多种[LK]随机效果，例如提升属性或是令饮用者晕眩。",
-    "SWEETS": "一枚随机糖饰（可能是RIBBON_SWEET、STAR_SWEET、FLOWER_SWEET、CLOVER_SWEET、BERRY_SWEET、LOVE_SWEET或STRAWBERRY_SWEET），能永久提升某一项能力。",
+    "SWEETS": "一枚随机糖饰，能永久提升某一项能力。",
     "RIBBON_SWEET": "永久提升2点SPE_DEF",
     "STAR_SWEET": "永久提升5点AP",
     "FLOWER_SWEET": "永久提升5%的ATK_SPEED",
@@ -2392,15 +2392,15 @@
     "BERRY_SWEET": "永久提升10点HP",
     "LOVE_SWEET": "永久提升2点DEF",
     "STRAWBERRY_SWEET": "永久提升3点ATK",
-    "VANILLA_FLAVOR": "美味的VANILLA_FLAVOR。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_VANILLA)。",
-    "RUBY_FLAVOR": "酸甜的RUBY_FLAVOR。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_RUBY)。",
-    "MATCHA_FLAVOR": "芳香的MATCHA_FLAVOR。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_MATCHA)。",
-    "MINT_FLAVOR": "清爽的MINT_FLAVOR。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_MINT)。",
-    "SALTED_FLAVOR": "咸咸的SALTED_FLAVOR。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_SALTED)。",
-    "CARAMEL_SWIRL_FLAVOR": "偏苦的CARAMEL_SWIRL_FLAVOR。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_CARAMEL_SWIRL)。",
-    "RUBY_SWIRL_FLAVOR": "缤纷的RUBY_SWIRL_FLAVOR。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_RUBY_SWIRL)。",
-    "LEMON_FLAVOR": "酸酸的LEMON_FLAVOR。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_LEMON)。",
-    "RAINBOW_SWIRL_FLAVOR": "复杂的RAINBOW_SWIRL_FLAVOR。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_RAINBOW_SWIRL)。"
+    "VANILLA_FLAVOR": "与NORMAL、FLYING、ARTIFICIAL宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_VANILLA)。$t(passive_description.VANILLA_CREAM)",
+    "RUBY_FLAVOR": "与FIGHTING、HUMAN、STEEL宝可梦一同制作的的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_RUBY)。$t(passive_description.RUBY_CREAM)",
+    "MATCHA_FLAVOR": "与GRASS、FLORA、POISON、GHOST宝可梦一同制作的的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_MATCHA)。$t(passive_description.MATCHA_CREAM)",
+    "MINT_FLAVOR": "与WATER、AQUATIC、ICE宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_MINT)。$t(passive_description.MINT_CREAM)",
+    "LEMON_FLAVOR": "与ELECTRIC、BUG、FAIRY、SOUND宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_LEMON)。$t(passive_description.LEMON_CREAM)",
+    "SALTED_FLAVOR": "与ROCK、GROUND、FOSSIL宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_SALTED)。$t(passive_description.SALTED_CREAM)",
+    "RUBY_SWIRL_FLAVOR": "与FIRE、WILD、FIELD宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_RUBY_SWIRL)。$t(passive_description.RUBY_SWIRL_CREAM)",
+    "CARAMEL_SWIRL_FLAVOR": "与DARK、MONSTER、DRAGON宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_CARAMEL_SWIRL)。$t(passive_description.CARAMEL_SWIRL_CREAM)",
+    "RAINBOW_SWIRL_FLAVOR": "与PSYCHIC、AMORPHOUS、BABY、LIGHT宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_RAINBOW_SWIRL)。$t(passive_description.RAINBOW_SWIRL_CREAM)"
   },
   "passive_description": {
     "NONE": "无被动能力",
@@ -2535,7 +2535,16 @@
     "DIPPLIN": "裹蜜虫想要吃下一颗SIRUPY_APPLE……",
     "WELL_BAKED": "此宝可梦不会受到BURN的负面效果影响。当其陷入BURN时，改为提升10点DEF。",
     "CONVERSION": "纹理：对战开始时，复制对方的最高等级共鸣并获得其效果。",
-    "CREAM": "$t(pkm.MILCERY) 似乎需要一款调味料……（VANILLA_FLAVOR、RUBY_FLAVOR、LEMON_FLAVOR、MINT_FLAVOR、MATCHA_FLAVOR、SALTED_FLAVOR、RUBY_SWIRL_FLAVOR、CARAMEL_SWIRL_FLAVOR或是RAINBOW_SWIRL_FLAVOR）"
+    "CREAM": "$t(pkm.MILCERY) 似乎需要一款调味料……",
+    "VANILLA_CREAM": "释放招式时，VANILLA_FLAVOR使最近的我方宝可梦获得[60,SP]点SHIELD。",
+    "RUBY_CREAM": "释放招式时，RUBY_FLAVOR为最近的我方宝可梦提升[30,SP]%的ATK_SPEED。",
+    "MATCHA_CREAM": "释放招式时，MATCHA_FLAVOR为最近的我方宝可梦提升[40,SP]点最大HP。",
+    "MINT_CREAM": "释放招式时，MINT_FLAVOR为最近的我方宝可梦恢复[40,SP]点HP，并提升[8,SP]点SPE_DEF。",
+    "LEMON_CREAM": "释放招式时，LEMON_FLAVOR为最近的我方宝可梦提升[40,SP]%的CRIT_CHANCE。",
+    "SALTED_CREAM": "释放招式时，SALTED_FLAVOR为最近的我方宝可梦恢复[40,SP]点HP，并提升[8,SP]点DEF。",
+    "RUBY_SWIRL_CREAM": "释放招式时，RUBY_SWIRL_FLAVOR为最近的我方宝可梦提升[8,SP]点ATK。",
+    "CARAMEL_SWIRL_CREAM": "释放招式时，CARAMEL_SWIRL_FLAVOR为最近的我方宝可梦提升[80,SP]%的CRIT_POWER。",
+    "RAINBOW_SWIRL_CREAM": "释放招式时，RAINBOW_SWIRL_FLAVOR为最近的我方宝可梦提升[60,SP]点AP。"
   },
   "stat": {
     "ATK": "攻击",
