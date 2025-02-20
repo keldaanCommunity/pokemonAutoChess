@@ -622,7 +622,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     const type = SynergyGivenByItem[item]
     if (
       this.items.size >= 3 ||
-      (SynergyStones.includes(item) && this.types.has(type))
+      (SynergyStones.includes(item) && this.types.has(type)) ||
+      ((item === Item.EVIOLITE || item === Item.RARE_CANDY) && 
+        !this.refToBoardPokemon.hasEvolution) ||
+      (item === Item.RARE_CANDY && this.items.has(Item.EVIOLITE))
     ) {
       return
     }
