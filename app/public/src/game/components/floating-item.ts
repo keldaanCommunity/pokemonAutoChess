@@ -1,6 +1,7 @@
 import { GameObjects } from "phaser"
 import { Item } from "../../../../types/enum/Item"
 import GameScene from "../scenes/game-scene"
+import { DEPTH } from "../depths"
 
 export class FloatingItem extends GameObjects.Container {
   circle: GameObjects.Ellipse
@@ -19,10 +20,10 @@ export class FloatingItem extends GameObjects.Container {
     this.circle = new GameObjects.Ellipse(scene, 0, 0, 40, 40, 0x61738a, 1)
     this.circle.setStrokeStyle(1, 0xffffff, 0.7)
     this.add(this.circle)
-    this.sprite = new GameObjects.Image(scene, 0, 0, "item", this.name+".png")
+    this.sprite = new GameObjects.Image(scene, 0, 0, "item", this.name + ".png")
     this.sprite.setScale(0.32)
     this.add(this.sprite)
-    this.setDepth(2)
+    this.setDepth(DEPTH.INANIMATE_OBJECTS)
     this.scene.add.existing(this)
   }
 

@@ -1,4 +1,5 @@
 import Phaser from "phaser"
+import { DEPTH } from "../depths"
 
 export default class WeatherManager {
   scene: Phaser.Scene
@@ -31,7 +32,7 @@ export default class WeatherManager {
         2000,
         0x296383,
         0.3
-      ).setDepth(8)
+      ).setDepth(DEPTH.WEATHER_FX)
     )
 
     this.particlesEmitters.push(
@@ -82,7 +83,7 @@ export default class WeatherManager {
         2000,
         0xa7cade,
         0.3
-      ).setDepth(8)
+      ).setDepth(DEPTH.WEATHER_FX)
     )
 
     this.particlesEmitters.push(
@@ -122,7 +123,7 @@ export default class WeatherManager {
     this.image = this.scene.add.existing(
       new Phaser.GameObjects.Image(this.scene, 550, 250, "sun")
         .setScale(4, 4)
-        .setDepth(8)
+        .setDepth(DEPTH.WEATHER_FX)
     )
     this.colorFilter = this.scene.add.existing(
       new Phaser.GameObjects.Rectangle(
@@ -133,7 +134,7 @@ export default class WeatherManager {
         2000,
         0xffe800,
         0.15
-      ).setDepth(8)
+      ).setDepth(DEPTH.WEATHER_FX)
     )
   }
 
@@ -184,7 +185,7 @@ export default class WeatherManager {
         2000,
         0x9a791a,
         0.2
-      ).setDepth(8)
+      ).setDepth(DEPTH.WEATHER_FX)
     )
   }
 
@@ -198,7 +199,7 @@ export default class WeatherManager {
         2000,
         0x141346,
         0.6
-      ).setDepth(8)
+      ).setDepth(DEPTH.WEATHER_FX)
     )
   }
 
@@ -212,7 +213,7 @@ export default class WeatherManager {
         2000,
         0x460818,
         0.6
-      ).setDepth(8)
+      ).setDepth(DEPTH.WEATHER_FX)
     )
 
     const offscreenSource = {
@@ -292,7 +293,7 @@ export default class WeatherManager {
         .setTint(0x508050)
         .setScale(3, 2)
         .setOrigin(0.5)
-        .setDepth(8)
+        .setDepth(DEPTH.WEATHER_FX)
         .setAlpha(0.5)
     )
     this.colorFilter = this.scene.add.existing(
@@ -304,7 +305,7 @@ export default class WeatherManager {
         2000,
         0x6e994c,
         0.15
-      ).setDepth(8)
+      ).setDepth(DEPTH.WEATHER_FX)
     )
 
     const leftScreenSource = {
@@ -375,7 +376,7 @@ export default class WeatherManager {
       new Phaser.GameObjects.Image(this.scene, 1000, 500, "clouds")
         .setScale(3, 2)
         .setOrigin(0.5)
-        .setDepth(8)
+        .setDepth(DEPTH.WEATHER_FX)
         .setAlpha(0.4)
     )
     this.colorFilter = this.scene.add.existing(
@@ -387,7 +388,7 @@ export default class WeatherManager {
         2000,
         0x994c6e,
         0.15
-      ).setDepth(8)
+      ).setDepth(DEPTH.WEATHER_FX)
     )
     this.particlesEmitters.push(
       this.scene.add.particles(0, 0, "snowflakes", {
@@ -427,7 +428,7 @@ export default class WeatherManager {
         2000,
         0x2b3838,
         0.4
-      ).setDepth(8)
+      ).setDepth(DEPTH.WEATHER_FX)
     )
 
     this.particlesEmitters.push(

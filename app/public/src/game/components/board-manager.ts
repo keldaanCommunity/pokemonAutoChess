@@ -33,6 +33,7 @@ import {
   DungeonMusic,
   TownMusicMarkerByStage
 } from "../../../../types/enum/Dungeon"
+import { DEPTH } from "../depths"
 
 export enum BoardMode {
   PICK = "pick",
@@ -233,7 +234,7 @@ export default class BoardManager {
         "abilities",
         "LIGHT_CELL/000.png"
       )
-      this.lightCell.setDepth(2)
+      this.lightCell.setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
       this.lightCell.setScale(2, 2)
       this.lightCell.anims.play("LIGHT_CELL")
     }
@@ -266,7 +267,7 @@ export default class BoardManager {
         this.player.berryTreesType[i] + "_1"
       )
 
-      tree.setDepth(1).setScale(2, 2).setOrigin(0.5, 1)
+      tree.setDepth(DEPTH.INANIMATE_OBJECTS).setScale(2, 2).setOrigin(0.5, 1)
       if (this.player.berryTreesStage[i] === 0) {
         tree.anims.play("CROP")
       } else {
@@ -308,7 +309,7 @@ export default class BoardManager {
     const text = this.scene.add.existing(
       new GameObjects.Text(this.scene, x, y, label, textStyle)
     )
-    text.setDepth(10)
+    text.setDepth(DEPTH.TEXT)
 
     this.scene.add.tween({
       targets: [text],
