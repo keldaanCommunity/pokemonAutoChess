@@ -40,6 +40,7 @@ import PokemonSprite from "../components/pokemon"
 import { SellZone } from "../components/sell-zone"
 import UnownManager from "../components/unown-manager"
 import WeatherManager from "../components/weather-manager"
+import { DEPTH } from "../depths"
 
 export default class GameScene extends Scene {
   tilemaps: Map<DungeonPMDO, DesignTiled> = new Map<DungeonPMDO, DesignTiled>()
@@ -353,7 +354,7 @@ export default class GameScene extends Scene {
           .image(zone.x, zone.y, "cell", 0)
           .setVisible(false)
           .setData({ x, y })
-          .setDepth(2)
+          .setDepth(DEPTH.DROP_ZONE)
         zone.setData({ x, y, sprite: spotSprite })
         this.dropSpots.push(spotSprite)
       }
@@ -374,7 +375,7 @@ export default class GameScene extends Scene {
           "attacks",
           `WATER/cell/000.png`
         )
-        clickAnimation.setDepth(7)
+        clickAnimation.setDepth(DEPTH.INDICATOR)
         clickAnimation.anims.play("WATER/cell")
         this.tweens.add({
           targets: clickAnimation,
@@ -417,6 +418,7 @@ export default class GameScene extends Scene {
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
         if (gameObject instanceof PokemonSprite) {
           this.pokemonDragged = gameObject
+          this.pokemonDragged.setDepth(DEPTH.POKEMON_GRABBED)
           this.dropSpots.forEach((spot) => {
             if (
               this.room?.state.phase === GamePhaseState.PICK ||
@@ -518,6 +520,7 @@ export default class GameScene extends Scene {
             )
             gameObject.setPosition(x, y)
           }
+          gameObject.setDepth(DEPTH.POKEMON)
           this.pokemonDragged = null
         } else if (
           gameObject instanceof ItemContainer &&

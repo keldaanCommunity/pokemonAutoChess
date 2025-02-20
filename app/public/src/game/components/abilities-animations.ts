@@ -23,6 +23,7 @@ import { DebugScene } from "../scenes/debug-scene"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
 import { UNOWNS_PER_ABILITY } from "./unown-manager"
+import { DEPTH } from "../depths"
 
 export function displayAbility(
   scene: GameScene | DebugScene,
@@ -50,7 +51,7 @@ export function displayAbility(
       "abilities",
       skill + `/000.png`
     )
-    abilityFx.setOrigin(0.5, 0.5).setDepth(7).play(skill)
+    abilityFx.setOrigin(0.5, 0.5).setDepth(DEPTH.ABILITY).play(skill)
     if (destroyOnComplete) {
       abilityFx.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
         abilityFx.destroy()
@@ -154,7 +155,7 @@ export function displayAbility(
     case Ability.FLAME_CHARGE:
       addAbilitySprite(skill, coordinates, true)
         .setScale(2)
-        .setDepth(1)
+        .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
         .setOrigin(1, 1)
         .setRotation(
           Math.atan2(
@@ -168,7 +169,7 @@ export function displayAbility(
     case Ability.PASTEL_VEIL:
       addAbilitySprite(skill, coordinates, true)
         .setScale(2)
-        .setDepth(1)
+        .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
         .setOrigin(1, 1)
         .setRotation(
           Math.atan2(
@@ -547,7 +548,7 @@ export function displayAbility(
       addAbilitySprite(Ability.CALM_MIND, coordinates, true)
         .setScale(3)
         .setTint(0xccff33)
-        .setDepth(0)
+        .setDepth(DEPTH.ABILITY_GROUND_LEVEL)
       break
 
     case Ability.COSMIC_POWER_MOON:
@@ -565,7 +566,9 @@ export function displayAbility(
       break
 
     case Ability.FORECAST:
-      addAbilitySprite(skill, coordinates, true).setDepth(0).setScale(2)
+      addAbilitySprite(skill, coordinates, true)
+        .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
+        .setScale(2)
       break
 
     case Ability.CHATTER:
@@ -598,7 +601,7 @@ export function displayAbility(
 
     case Ability.CHARGE:
       addAbilitySprite(skill, coordinates, true)
-        .setDepth(0)
+        .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
         .setOrigin(0.5, 0.8)
         .setScale(4)
       break
@@ -612,7 +615,9 @@ export function displayAbility(
       break
 
     case Ability.SMOG:
-      addAbilitySprite(skill, coordinates, true).setDepth(1).setScale(4)
+      addAbilitySprite(skill, coordinates, true)
+        .setDepth(DEPTH.ABILITY_MINOR)
+        .setScale(4)
       break
 
     case Ability.SLUDGE:
@@ -1421,7 +1426,7 @@ export function displayAbility(
 
     case Ability.SEARING_SHOT:
       addAbilitySprite(Ability.STEAM_ERUPTION, coordinates, true)
-        .setDepth(0)
+        .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
         .setScale(3, 3)
       break
 
@@ -1648,7 +1653,9 @@ export function displayAbility(
       break
 
     case Ability.WATERFALL:
-      addAbilitySprite(skill, coordinates, true).setScale(2).setDepth(1)
+      addAbilitySprite(skill, coordinates, true)
+        .setScale(2)
+        .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
       break
 
     case Ability.HELPING_HAND:
@@ -1710,7 +1717,9 @@ export function displayAbility(
       break
 
     case Ability.ABSORB:
-      addAbilitySprite(skill, coordinates, true).setDepth(0).setScale(2)
+      addAbilitySprite(skill, coordinates, true)
+        .setDepth(DEPTH.ABILITY_GROUND_LEVEL)
+        .setScale(2)
       break
 
     case Ability.GIGATON_HAMMER:
@@ -1947,7 +1956,7 @@ export function displayAbility(
           addAbilitySprite(Ability.DIVE, coordinatesTarget, true)
             .setTint(0xf060a0)
             .setScale(3)
-            .setDepth(1)
+            .setDepth(DEPTH.ABILITY_GROUND_LEVEL)
         }
       })
       break
@@ -2407,7 +2416,9 @@ export function displayAbility(
     }
 
     case Ability.WONDER_GUARD:
-      addAbilitySprite(skill, coordinates, true).setDepth(2).setScale(2)
+      addAbilitySprite(skill, coordinates, true)
+        .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
+        .setScale(2)
       break
 
     case Ability.X_SCISSOR:
@@ -2420,19 +2431,19 @@ export function displayAbility(
 
     case Ability.GEOMANCY:
       addAbilitySprite(skill, [coordinates[0], coordinates[1] - 50], true)
-        .setDepth(1)
+        .setDepth(DEPTH.ABILITY_GROUND_LEVEL)
         .setScale(2)
       break
 
     case Ability.BLIZZARD:
       addAbilitySprite(Ability.BLIZZARD, coordinates, true)
-        .setDepth(0)
+        .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
         .setScale(2)
       break
 
     case Ability.OVERHEAT:
       addAbilitySprite(Ability.FIRE_BLAST, coordinates, true)
-        .setDepth(0)
+        .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
         .setScale(3)
       break
 
@@ -2496,7 +2507,9 @@ export function displayAbility(
     }
 
     case Ability.STEALTH_ROCKS:
-      addAbilitySprite(skill, coordinates, true).setDepth(1).setScale(2)
+      addAbilitySprite(skill, coordinates, true)
+        .setDepth(DEPTH.ABILITY_GROUND_LEVEL)
+        .setScale(2)
       break
 
     case Ability.SPIKES: {
@@ -2569,11 +2582,15 @@ export function displayAbility(
       break
 
     case "GRASS_HEAL":
-      addAbilitySprite("GRASS_HEAL", coordinates, true).setDepth(1).setScale(2)
+      addAbilitySprite("GRASS_HEAL", coordinates, true)
+        .setDepth(DEPTH.BOOST_BACK)
+        .setScale(2)
       break
 
     case "FLAME_HIT":
-      addAbilitySprite("FLAME_HIT", coordinates, true).setDepth(1).setScale(2)
+      addAbilitySprite("FLAME_HIT", coordinates, true)
+        .setDepth(DEPTH.HIT_FX_BELOW_POKEMON)
+        .setScale(2)
       break
 
     case Ability.TORCH_SONG: {
@@ -2643,7 +2660,9 @@ export function displayAbility(
           pkmUI.positionY,
           flip
         )
-        addAbilitySprite(skill, coordinates, true).setDepth(1).setScale(2)
+        addAbilitySprite(skill, coordinates, true)
+          .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
+          .setScale(2)
       })
       break
 
@@ -2929,7 +2948,9 @@ export function displayAbility(
     }
 
     case Ability.SCHOOLING:
-      addAbilitySprite(skill, coordinates, true).setDepth(0).setScale(4)
+      addAbilitySprite(skill, coordinates, true)
+        .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
+        .setScale(4)
       break
 
     case Ability.STONE_AXE:
@@ -3028,34 +3049,34 @@ export function displayAbility(
     case "FISHING":
       addAbilitySprite(Ability.DIVE, coordinates, true)
         .setOrigin(0.5, -2)
-        .setDepth(0)
+        .setDepth(DEPTH.ABILITY_GROUND_LEVEL)
         .setScale(1)
       break
 
     case "SPAWN":
       addAbilitySprite("SPAWN", coordinates, true)
         .setOrigin(0.5, -1.5)
-        .setDepth(0)
+        .setDepth(DEPTH.BOOST_BACK)
         .setScale(2)
       break
 
     case "EVOLUTION":
       addAbilitySprite("EVOLUTION", coordinates, true)
         .setOrigin(0.5, -0.4)
-        .setDepth(0)
+        .setDepth(DEPTH.BOOST_BACK)
         .setScale(2)
       break
 
     case "HATCH":
       addAbilitySprite("SOFT_BOILED", coordinates, true)
         .setOrigin(0.5, -0.4)
-        .setDepth(0)
+        .setDepth(DEPTH.BOOST_BACK)
         .setScale(2)
       break
 
     case "FLYING_TAKEOFF":
       addAbilitySprite("FLYING_TAKEOFF", coordinates, true)
-        .setDepth(0)
+        .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
         .setScale(2)
       break
 
@@ -3091,7 +3112,7 @@ export function displayAbility(
             `TIDAL_WAVE/00${targetY}.png`
           )
           .setOrigin(0.5, 0.5)
-          .setDepth(7)
+          .setDepth(DEPTH.ABILITY_MINOR)
           .setScale(3)
           .setAlpha(0)
           .setRotation(down ? Math.PI : 0)
@@ -3252,7 +3273,7 @@ export function displayAbility(
     case Ability.DARK_LARIAT: {
       const abilitySprite = addAbilitySprite(skill, coordinates, true)
         .setScale(2)
-        .setDepth(1)
+        .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
       scene.tweens.add({
         targets: abilitySprite,
         x: coordinatesTarget[0],
@@ -3266,7 +3287,7 @@ export function displayAbility(
     case Ability.BOLT_BEAK: {
       const abilitySprite = addAbilitySprite(skill, coordinates, true)
         .setScale(2)
-        .setDepth(1)
+        .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
       scene.tweens.add({
         targets: abilitySprite,
         x: coordinatesTarget[0],
@@ -3280,7 +3301,7 @@ export function displayAbility(
     case Ability.FREEZE_DRY: {
       const abilitySprite = addAbilitySprite(skill, coordinates, true)
         .setScale(2)
-        .setDepth(1)
+        .setDepth(DEPTH.ABILITY_GROUND_LEVEL)
       scene.tweens.add({
         targets: abilitySprite,
         x: coordinatesTarget[0],
@@ -3294,7 +3315,7 @@ export function displayAbility(
     case Ability.DRAGON_PULSE: {
       const abilitySprite = addAbilitySprite(skill, coordinates, true)
         .setScale(2)
-        .setDepth(1)
+        .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
       scene.tweens.add({
         targets: abilitySprite,
         x: coordinatesTarget[0],

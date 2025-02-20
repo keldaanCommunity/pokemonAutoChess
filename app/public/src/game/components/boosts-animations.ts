@@ -1,4 +1,5 @@
 import { Stat } from "../../../../types/enum/Game"
+import { DEPTH } from "../depths"
 import { DebugScene } from "../scenes/debug-scene"
 import GameScene from "../scenes/game-scene"
 
@@ -19,7 +20,7 @@ export function displayBoost(
     }[stat] ?? 0xffffff
   const boost = scene.add
     .sprite(x, y - 10, "abilities", `BOOST/000.png`)
-    .setDepth(1)
+    .setDepth(DEPTH.BOOST_BACK)
     .setScale(2)
     .setTint(tint)
   boost.anims.play({

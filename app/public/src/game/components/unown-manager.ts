@@ -6,6 +6,7 @@ import { pickRandomIn } from "../../../../utils/random"
 import { getGameContainer } from "../../pages/game"
 import GameScene from "../scenes/game-scene"
 import { addWanderingPokemon } from "./pokemon"
+import { DEPTH } from "../depths"
 
 const SHARDS_PER_ENCOUNTER = 50
 
@@ -52,8 +53,8 @@ export default class UnownManager {
         textStyle
       )
     )
-    image.setDepth(9)
-    text.setDepth(10)
+    image.setDepth(DEPTH.TEXT_MINOR)
+    text.setDepth(DEPTH.TEXT)
 
     const container = this.scene.add.existing(
       new GameObjects.Container(
