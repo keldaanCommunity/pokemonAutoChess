@@ -2,7 +2,6 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { searchById } from "../../../stores/NetworkStore"
-import { getAvatarSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
 
@@ -10,7 +9,6 @@ export default function SearchResults() {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const suggestions = useAppSelector((state) => state.lobby.suggestions)
-  console.log({ suggestions })
 
   return (
     <div>

@@ -148,7 +148,7 @@ export const gameSlice = createSlice({
       }
     },
     setShop: (state, action: PayloadAction<ArraySchema<Pkm>>) => {
-      state.shop = action.payload as unknown as Pkm[]
+      state.shop = Array.from(action.payload)
     },
     setItemsProposition: (state, action: PayloadAction<ArraySchema<Item>>) => {
       state.itemsProposition = action.payload.map((i) => i)

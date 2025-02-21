@@ -191,10 +191,9 @@ class GameContainer {
       })
     })
 
-    const updateItems = () =>
+    $pokemon.items.onChange((value, key) => {
       this.gameScene?.battle?.updatePokemonItems(simulation.id, pokemon)
-    $pokemon.items.onAdd(updateItems)
-    $pokemon.items.onRemove(updateItems)
+    })
 
     const fieldsCount: NonFunctionPropNames<Count>[] = [
       "crit",
