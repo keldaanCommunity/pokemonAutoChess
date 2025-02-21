@@ -515,8 +515,8 @@ export default function Game() {
         dispatch(setSpecialGameRule(value))
       })
 
-      $state.additionalPokemons.onAdd(() => {
-        dispatch(setAdditionalPokemons(room.state.additionalPokemons.slice()))
+      $state.additionalPokemons.onChange(() => {
+        dispatch(setAdditionalPokemons(Array.from(room.state.additionalPokemons)))
       })
 
       $state.simulations.onRemove(() => {
@@ -716,28 +716,16 @@ export default function Game() {
           dispatch(setSynergies({ id: player.id, value: player.synergies }))
         })
 
-        $player.itemsProposition.onAdd(() => {
+        $player.itemsProposition.onChange((value, index) => {
           if (player.id == uid) {
-            dispatch(setItemsProposition(player.itemsProposition))
-          }
-        })
-        $player.itemsProposition.onRemove(() => {
-          if (player.id == uid) {
-            dispatch(setItemsProposition(player.itemsProposition))
+            dispatch(setItemsProposition(Array.from(player.itemsProposition)))
           }
         })
 
-        $player.pokemonsProposition.onAdd(() => {
+        $player.pokemonsProposition.onChange((value, index) => {
           if (player.id == uid) {
             dispatch(
-              setPokemonProposition(player.pokemonsProposition.map((p) => p))
-            )
-          }
-        })
-        $player.pokemonsProposition.onRemove(() => {
-          if (player.id == uid) {
-            dispatch(
-              setPokemonProposition(player.pokemonsProposition.map((p) => p))
+              setPokemonProposition(Array.from(player.pokemonsProposition))
             )
           }
         })

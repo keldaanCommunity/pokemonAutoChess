@@ -156,14 +156,14 @@ export const gameSlice = createSlice({
     refreshShopUI: (state) => {
       state.shop = state.shop.slice()
     },
-    setItemsProposition: (state, action: PayloadAction<ArraySchema<Item>>) => {
-      state.itemsProposition = action.payload.map((i) => i)
+    setItemsProposition: (state, action: PayloadAction<Item[]>) => {
+      state.itemsProposition = action.payload
     },
     setPokemonProposition: (state, action: PayloadAction<PkmProposition[]>) => {
-      state.pokemonsProposition = action.payload.map((p) => p)
+      state.pokemonsProposition = action.payload
     },
     setAdditionalPokemons: (state, action: PayloadAction<Pkm[]>) => {
-      state.additionalPokemons = action.payload.map((p) => p)
+      state.additionalPokemons = action.payload
     },
     setSynergies: (
       state,
