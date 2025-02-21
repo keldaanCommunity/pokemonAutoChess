@@ -48,7 +48,6 @@ import { t } from "i18next"
 import { cc } from "../pages/utils/jsx"
 import { values } from "../../../utils/schemas"
 import { GetCallbackProxy } from "@colyseus/schema"
-import { Item } from "../../../types/enum/Item"
 
 class GameContainer {
   room: Room<GameState>
@@ -418,26 +417,20 @@ class GameContainer {
           })
         })
 
-        const updateTypes = () => {
+        $pokemon.types.onChange((value, key) => {
           if (player.id === this.spectatedPlayerId) {
             const pokemonUI = this.gameScene?.board?.pokemons.get(pokemon.id)
             if (pokemonUI) {
               pokemonUI.types = new Set(values(pokemon.types))
             }
           }
-        }
+        })
 
-        $pokemon.types.onAdd(updateTypes)
-        $pokemon.types.onRemove(updateTypes)
-
-        const updateItems = (item: Item) => {
+        $pokemon.items.onChange((value, key) => {
           if (player.id === this.spectatedPlayerId) {
-            this.gameScene?.board?.updatePokemonItems(player.id, pokemon, item)
+            this.gameScene?.board?.updatePokemonItems(player.id, pokemon, value)
           }
-        }
-
-        $pokemon.items.onAdd(updateItems)
-        $pokemon.items.onRemove(updateItems)
+        })
       })
     }
 
@@ -477,36 +470,28 @@ class GameContainer {
       }
     })
 
-    const onBoardChange = (pokemon, key) => {
+    $player.board.onChange((pokemon, key) => {
       store.dispatch(
         changePlayer({ id: player.id, field: "board", value: player.board })
       )
       if (pokemon) {
         listenForPokemonChanges(pokemon)
       }
-    }
+    })
 
-    $player.board.onAdd(onBoardChange)
-    $player.board.onRemove(onBoardChange)
-
-    const updateItems = () => {
+    $player.items.onChange((value, key) => {
       if (player.id === this.spectatedPlayerId) {
         //logger.debug("changed", value, key, player.items)
         this.gameScene?.itemsContainer?.render(player.items)
       }
-    }
+    })
 
-    $player.items.onAdd(updateItems)
-    $player.items.onRemove(updateItems)
-
-    const onSynergiesChange = (x) => {
+    $player.synergies.onChange(() => {
       if (player.id === this.spectatedPlayerId) {
         this.gameScene?.board?.showLightCell()
         this.gameScene?.board?.showBerryTrees()
       }
-    }
-    $player.synergies.onAdd(onSynergiesChange)
-    $player.synergies.onRemove(onSynergiesChange)
+    })
   }
 
   initializeSpectactor(uid: string) {

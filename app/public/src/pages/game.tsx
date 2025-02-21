@@ -712,9 +712,9 @@ export default function Game() {
           })
         })
 
-        const updateSynergies = () => dispatch(setSynergies({ id: player.id, value: player.synergies }))
-        $player.synergies.onAdd(updateSynergies)
-        $player.synergies.onRemove(updateSynergies)
+        $player.synergies.onChange(() => {
+          dispatch(setSynergies({ id: player.id, value: player.synergies }))
+        })
 
         $player.itemsProposition.onAdd(() => {
           if (player.id == uid) {
