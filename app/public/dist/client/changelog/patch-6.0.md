@@ -94,3 +94,4 @@
 
 - Quick play and custom lobbies no longer guarantee +1 minimum elo gain when top 1. Ranked games still do.
 - Added experience required per level in Wiki > Data
+- ELO decay now starts after 15 days of inactivity instead of 10
