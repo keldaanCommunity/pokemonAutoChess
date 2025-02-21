@@ -501,7 +501,6 @@ class GameContainer {
 
     const onSynergiesChange = (x) => {
       if (player.id === this.spectatedPlayerId) {
-        console.log("synergies changed", x)
         this.gameScene?.board?.showLightCell()
         this.gameScene?.board?.showBerryTrees()
       }
