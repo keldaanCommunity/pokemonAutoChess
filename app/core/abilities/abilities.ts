@@ -5653,7 +5653,7 @@ export class MagmaStormStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
 
     const targetsHit = new Set<string>()
-    const propagate = (currentTarget) => {
+    const propagate = (currentTarget: PokemonEntity) => {
       targetsHit.add(currentTarget.id)
       currentTarget.transferAbility(Ability.MAGMA_STORM)
       currentTarget.handleSpecialDamage(
@@ -5674,8 +5674,8 @@ export class MagmaStormStrategy extends AbilityStrategy {
               cell.value.team === pokemon.team &&
               !targetsHit.has(cell.value.id)
           )
-        if (nextEnemy && !pokemon.simulation.finished) {
-          propagate(nextEnemy)
+        if (nextEnemy && nextEnemy.value && !pokemon.simulation.finished) {
+          propagate(nextEnemy.value)
         }
       }, 500)
     }
