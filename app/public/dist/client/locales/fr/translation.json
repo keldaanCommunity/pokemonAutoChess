@@ -1758,7 +1758,7 @@
     "WONDER_ROOM": "Crée une zone bizarre autour de la cible dans laquelle la DEF et la SPE_DEF des ennemis sont échangées pendant 5 secondes et les attaques reçues causent des SPECIAL qui augmentent avec la AP de l'attaquant.",
     "DARK_LARIAT": "Balance les bras et frappe la cible plusieurs fois tout en se déplaçant derrière elle. Chaque coup inflige [100,SP]% d'ATK en SPECIAL. Le nombre de coups augmente avec la ATK_SPEED. La cible est FLINCH pendant l'attaque.",
     "BOLT_BEAK": "Inflige [80,SP] SPECIAL, ou [160,SP] SPECIAL si la cible a plus de 40 PP.",
-    "FREEZE_DRY": "Inflige [70,SP] + [200,SP]% de la SPE_DEF du lanceur en SPECIAL à la cible. Si la cible est KO, elle explose et lance des éclats de glace tranchants sur les cibles adjacentes, infligeant [40,SP] + [150,SP] % de la SPE_DEF du lanceur en tant que SPECIAL.",
+    "FREEZE_DRY": "Inflige [70,SP] + 200% de la SPE_DEF du lanceur en SPECIAL à la cible. Si la cible est KO, elle explose et lance des éclats de glace tranchants sur les cibles adjacentes, infligeant [30,SP] + 100% de la SPE_DEF du lanceur en tant que SPECIAL.",
     "DRAGON_PULSE": "Une onde de choc venant de la bouche béante du lanceur inflige [20,SP] SPECIAL à la cible et aux ennemis adjacents. L'onde de choc se réverbère ensuite sur les ennemis."
   },
   "effect": {
@@ -2215,7 +2215,7 @@
     "BIG_NUGGET": "Le porteur gagne le type GROUND. Après 15 secondes et 5 effets de GROUND, vous gagnez 3 GOLD.",
     "INCENSE": "Chaque Pokémon du magasin a 5% de chances en plus de partager une synergie commune avec le porteur.",
     "EXP_SHARE": "Copie la plus haute valeur d'ATK, de AP, de DEF et de SPE_DEF des alliés adjacents sur la même ligne",
-    "POKERUS_VIAL": "Infecte le porteur avec le POKERUS, qui fait gagner 1 ATK et 10 AP toutes les 2 secondes et infecte les alliés",
+    "POKERUS_VIAL": "Infecte le porteur avec le POKERUS, qui fait gagner 1 ATK et 10 AP toutes les 2,5 secondes et infecte les alliés",
     "ROTOM_PHONE": "Donne la synergie GHOST. Invoque Motismart près du porteur",
     "SILK_SCARF": "Donne la synergie NORMAL et augmente le SHIELD reçu de 50% toutes sources confondues.",
     "TINY_MUSHROOM": "Donne la synergie BUG mais réduit les HP max du porteur de 50% lorsqu'il est clôné",
