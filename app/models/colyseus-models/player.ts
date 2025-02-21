@@ -199,7 +199,7 @@ export default class Player extends Schema implements IPlayer {
         case Pkm.MORPEKO_HANGRY:
           this.firstPartner = Pkm.MORPEKO
           break
-          
+
         case Pkm.DARMANITAN_ZEN:
           this.firstPartner = Pkm.DARMANITAN
           break
@@ -570,13 +570,18 @@ export default class Player extends Schema implements IPlayer {
 
     resetArraySchema(
       this.regionalPokemons,
-      newRegionalPokemons.filter(
-        (p, index, array) => {
-          const evolution = getPokemonData(PkmFamily[p]).evolution
-          return array.findIndex((p2) => PkmFamily[p] === PkmFamily[p2]) === index && // dedup same family
-            !(evolution === p || (evolution && getPokemonData(evolution).evolution === p)) // exclude non divergent evos
-        }
-      )
+      newRegionalPokemons.filter((p, index, array) => {
+        const evolution = getPokemonData(PkmFamily[p]).evolution
+        return (
+          array.findIndex((p2) => PkmFamily[p] === PkmFamily[p2]) === index && // dedup same family
+          !(
+            (
+              evolution === p ||
+              (evolution && getPokemonData(evolution).evolution === p)
+            ) // exclude non divergent evos
+          )
+        )
+      })
     )
   }
 
@@ -592,10 +597,6 @@ export default class Player extends Schema implements IPlayer {
         pokemon.onChangePosition(pokemon.positionX, pokemon.positionY, this)
       }
     })
-  }
-
-  refreshShopUI() {
-    this.shop = new ArraySchema<Pkm>(...this.shop)
   }
 }
 

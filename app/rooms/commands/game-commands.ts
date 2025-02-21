@@ -152,7 +152,7 @@ export class OnShopCommand extends Command<
       this.state.shop.assignShop(player, true, this.state)
       player.shopFreeRolls -= 1
     } else {
-      player.shop = player.shop.with(index, Pkm.DEFAULT)
+      player.shop[index] = Pkm.DEFAULT
     }
 
     this.room.checkEvolutionsAfterPokemonAcquired(playerId)
@@ -179,7 +179,7 @@ export class OnRemoveFromShopCommand extends Command<
 
     const cost = getBuyPrice(name, this.state.specialGameRule)
     if (player.money >= cost) {
-      player.shop = player.shop.with(index, Pkm.DEFAULT)
+      player[index] = Pkm.DEFAULT
       player.shopLocked = true
       this.state.shop.releasePokemon(name, player)
     }

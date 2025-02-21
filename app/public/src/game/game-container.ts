@@ -675,6 +675,7 @@ class GameContainer {
 
   onDragDrop(event: CustomEvent<IDragDropMessage>) {
     this.room.send(Transfer.DRAG_DROP, event.detail)
+    store.dispatch(refreshShopUI()) //
   }
 
   onDragDropCombine(event: CustomEvent<IDragDropCombineMessage>) {

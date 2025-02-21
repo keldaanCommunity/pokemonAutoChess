@@ -2026,10 +2026,6 @@ export class Poliwhirl extends Pokemon {
       }
     }
   )
-
-  onChangePosition(x: number, y: number, player: Player): void {
-    player.refreshShopUI()
-  }
 }
 
 export class Politoed extends Pokemon {
@@ -7372,10 +7368,6 @@ export class Clamperl extends Pokemon {
       }
     }
   )
-
-  onChangePosition(x: number, y: number, player: Player): void {
-    player.refreshShopUI()
-  }
 }
 
 export class Gorebyss extends Pokemon {

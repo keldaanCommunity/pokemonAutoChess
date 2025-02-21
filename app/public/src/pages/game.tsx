@@ -38,6 +38,7 @@ import {
   addPlayer,
   changeDpsMeter,
   changePlayer,
+  changeShop,
   leaveGame,
   removeDpsMeter,
   removePlayer,
@@ -53,14 +54,13 @@ import {
   setPokemonCollection,
   setPokemonProposition,
   setRoundTime,
-  setShop,
   setShopFreeRolls,
   setShopLocked,
   setStageLevel,
   setStreak,
   setSynergies,
   setWeather,
-  setSpecialGameRule
+  setSpecialGameRule,
 } from "../stores/GameStore"
 import { joinGame, logIn, setProfile } from "../stores/NetworkStore"
 import { getAvatarString } from "../../../utils/avatar"
@@ -588,8 +588,8 @@ export default function Game() {
           $player.listen("interest", (value) => {
             dispatch(setInterest(value))
           })
-          $player.listen("shop", (value) => {
-            dispatch(setShop(value))
+          $player.shop.onChange((pkm: Pkm, index: number) => {
+            dispatch(changeShop({ value: pkm, index }))
           })
           $player.listen("shopLocked", (value) => {
             dispatch(setShopLocked(value))

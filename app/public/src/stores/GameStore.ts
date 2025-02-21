@@ -147,8 +147,14 @@ export const gameSlice = createSlice({
         )
       }
     },
-    setShop: (state, action: PayloadAction<ArraySchema<Pkm>>) => {
-      state.shop = Array.from(action.payload)
+    changeShop: (
+      state,
+      action: PayloadAction<{ index: number; value: Pkm }>
+    ) => {
+      state.shop[action.payload.index] = action.payload.value
+    },
+    refreshShopUI: (state) => {
+      state.shop = state.shop.slice()
     },
     setItemsProposition: (state, action: PayloadAction<ArraySchema<Item>>) => {
       state.itemsProposition = action.payload.map((i) => i)
@@ -310,7 +316,8 @@ export const {
   setShopFreeRolls,
   setShopLocked,
   changePlayer,
-  setShop,
+  changeShop,
+  refreshShopUI,
   setItemsProposition
 } = gameSlice.actions
 
