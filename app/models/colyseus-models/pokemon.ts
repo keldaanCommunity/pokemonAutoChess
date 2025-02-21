@@ -3042,11 +3042,11 @@ export class AlolanRaichu extends Pokemon {
     Synergy.PSYCHIC
   ])
   rarity = Rarity.COMMON
-  stars = 4
-  hp = 230
-  atk = 20
-  def = 6
-  speDef = 6
+  stars = 3
+  hp = 220
+  atk = 18
+  def = 5
+  speDef = 5
   maxPP = 100
   range = 1
   skill = Ability.NUZZLE
@@ -6636,7 +6636,7 @@ export class Cryogonal extends Pokemon {
   atk = 20
   def = 2
   speDef = 8
-  maxPP = 95
+  maxPP = 100
   range = 3
   skill = Ability.FREEZE_DRY
   attackSprite = AttackSprite.ICE_RANGE

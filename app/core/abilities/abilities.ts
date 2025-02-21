@@ -11529,8 +11529,8 @@ export class FreezeDryStrategy extends AbilityStrategy {
     pokemon.commands.push(
       new DelayedCommand(() => {
         if (target && target.life > 0) {
-          const damage = 70 + pokemon.speDef * 2
-          const killDamage = 40 + pokemon.speDef * 1.5
+          const damage = 70 * (1 + pokemon.ap / 100) + pokemon.speDef * 2
+          const killDamage = 30 * (1 + pokemon.ap / 100) + pokemon.speDef
           const x = target.positionX
           const y = target.positionY
           const attackResult = target.handleSpecialDamage(
@@ -11538,7 +11538,8 @@ export class FreezeDryStrategy extends AbilityStrategy {
             board,
             AttackType.SPECIAL,
             pokemon,
-            crit
+            crit,
+            false // ap boost already computed
           )
           if (attackResult.death) {
             const cells = board.getAdjacentCells(x, y, false)
@@ -11555,7 +11556,8 @@ export class FreezeDryStrategy extends AbilityStrategy {
                   board,
                   AttackType.SPECIAL,
                   pokemon,
-                  crit
+                  crit,
+                  false // ap boost already computed
                 )
               }
             })
