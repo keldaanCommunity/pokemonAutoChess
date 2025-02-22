@@ -1762,7 +1762,7 @@
     "WONDER_ROOM": "대상 주변에 기묘한 영역을 만들어 5초 동안 그 안에 있는 적들의 DEF 과 SPE_DEF 를 뒤바꾸고 기본 공격 피격 시 공격자의 AP 에 비례하여 SPECIAL 를 입는다.",
     "DARK_LARIAT": "팔을 휘둘러 여러 번 공격하며 대상의 후방으로 이동한다. 각 공격은 [100,SP]% ATK 만큼 SPECIAL 를 입힌다. 공격 횟수는 ATK_SPEED 에 비례한다. 대상은 피격 중에 FLINCH 상태이다.",
     "BOLT_BEAK": "[80,SP] SPECIAL 를 가한다. 대상이 40 PP 이상이면 [160,SP] SPECIAL 를 가한다.",
-    "FREEZE_DRY": "[70,SP] + 시전자의 SPE_DEF 의 [200,SP] % 만큼 SPECIAL 를 가한다. 대상 KO 시 폭발하여 주변에 [40,SP] + 시전자의 SPE_DEF 의 [150,SP] % 만큼 SPECIAL 를 가한다.",
+    "FREEZE_DRY": "[70,SP] + 시전자의 SPE_DEF 의 200% 만큼 SPECIAL 를 가한다. 대상 KO 시 폭발하여 주변에 [30,SP] + 시전자의 SPE_DEF 의 100% 만큼 SPECIAL 를 가한다.",
     "DRAGON_PULSE": "대상과 주변 적들에게 [20,SP] SPECIAL 를 가하는 충격파를 발사한다. 충격파는 적들간에 울려퍼진다.",
     "FROST_BREATH": "전방 2칸의 원뿔 범위 적들에게 [30,60,120,SP] SPECIAL 를 가한다. [50,LK]% 확률로 2초간 FREEZE 을 가한다. 치명타가 터질 수 있다."
   },
@@ -2220,7 +2220,7 @@
     "BIG_NUGGET": "GROUND 시너지 부여. 소지자 15초간 생존 및 GROUND 효과 5번 중첩 시 3 GOLD 획득",
     "INCENSE": "상점에 있는 포켓몬은 각각 주인과 공통된 시너지를 공유할 확률이 5% 증가합니다",
     "EXP_SHARE": "같은 열 근접한 포켓몬의 가장 높은 ATK, AP, DEF, 그리고 SPE_DEF를 획득 ",
-    "POKERUS_VIAL": "POKERUS 소지자를 감염, ATK 1 과 매 2초 마다 AP 10% 획득, 그리고 동료에게 전송 ",
+    "POKERUS_VIAL": "POKERUS 소지자를 감염, ATK 1 과 매 2.5초 마다 AP 10% 획득, 그리고 동료에게 전송 ",
     "ROTOM_PHONE": "GHOST 시너지 부여, 소지자 주변에 로토무 드론 소환 ",
     "SILK_SCARF": "NORMAL 시너지 부여, 받는 모든 SHIELD 50% 증가",
     "TINY_MUSHROOM": "BUG 시너지 부여, 최대 HP 50% 감소합니다",

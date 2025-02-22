@@ -2108,7 +2108,7 @@
     "BIG_NUGGET": "Il possessore riceve la sinergia GROUND. Se il possessore è ancora vivo dopo 15 secondi ed ha ottenuto 5 stack della sinergia GROUND, ottieni 3 GOLD",
     "INCENSE": "Ogni Pokèmon nel negozio ha un probabilità del 5% di avere in comune una sinergia del possessore.",
     "EXP_SHARE": "Ottieni i migliori valori di ATK, AP, DEF e SPE_DEF dagli alleati adiacenti nella stessa riga",
-    "POKERUS_VIAL": "Infetta il possessore con il POKERUS, guadagnando ogni 2 secondi 1 ATK e 10 AP e può trasmetterlo agli alleati",
+    "POKERUS_VIAL": "Infetta il possessore con il POKERUS, guadagnando ogni 2.5 secondi 1 ATK e 10 AP e può trasmetterlo agli alleati",
     "ROTOM_PHONE": "Il possessore riceve la sinergia GHOST. Evoca un Rotom Drone affianco al possessore",
     "SILK_SCARF": "Dai la sinergia NORMAL e aumenta lo SHIELD da tutte le fonti del 50%.",
     "TINY_MUSHROOM": "Dai la sinergia BUG ma riduci i HP massimi del 50% quando clonato.",

@@ -2196,7 +2196,7 @@
     "BIG_NUGGET": "El usuario obtiene el tipo GROUND. Si el portador esta vivo después de 15 segundos y obtiene 5 acumulaciones de GROUND, gana 3 GOLD",
     "INCENSE": "Cada Pokémon en la tienda tiene un 5% adicional de posibilidades de compartir una sinergia común con su poseedor.",
     "EXP_SHARE": "Obtén los mejores valores de ATK, AP, DEF y SPE_DEF de los aliados adyacentes en la misma fila",
-    "POKERUS_VIAL": "Inflige al poseedor con POKERUS, obteniendo 1 ATK y 10 AP cada 2 segundos y transmitiéndoselo a los aliados",
+    "POKERUS_VIAL": "Inflige al poseedor con POKERUS, obteniendo 1 ATK y 10 AP cada 2.5 segundos y transmitiéndoselo a los aliados",
     "ROTOM_PHONE": "Da sinergia GHOST. Invoca a un Rotom Dron cerca del poseedor",
     "SILK_SCARF": "Otorga sinergia NORMAL e incrementa el SHIELD de todas las fuentes en 50%",
     "TINY_MUSHROOM": "Otorga sinergia BUG pero reduce los HP máximos del portador en un 50% cuando sea clonado",
