@@ -1,4 +1,11 @@
-import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
+import {
+  MapSchema,
+  Schema,
+  SetSchema,
+  type,
+  entity,
+  Encoder
+} from "@colyseus/schema"
 import { nanoid } from "nanoid"
 import {
   ClearWingEffect,
@@ -71,6 +78,9 @@ import { SynergyEffects } from "../effects"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
 import { pickRandomIn } from "../../utils/random"
+import {} from "@colyseus/schema"
+
+Encoder.BUFFER_SIZE = 24 * 1024 // 24 KB
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -17633,3 +17643,8 @@ export const PokemonClasses: Record<
   [Pkm.ALCREMIE_CARAMEL_SWIRL]: AlcremieCaramelSwirl,
   [Pkm.ALCREMIE_RAINBOW_SWIRL]: AlcremieRainbowSwirl
 }
+
+// declare all the classes in colyseus schema TypeRegistry
+// required if schema class doesnt have a @type decorator
+// see https://discord.com/channels/525739117951320081/1341559052299407412/1342631038152868072
+Object.values(PokemonClasses).forEach((pokemonClass) => entity(pokemonClass))
