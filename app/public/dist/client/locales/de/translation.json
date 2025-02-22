@@ -2738,7 +2738,7 @@
     "create_bot": "Kann ich meinen eigenen Bot erstellen?",
     "create_bot_answer": "Sicher. Sie müssen mindestens Level 20 erreicht haben, um das Bot Builder-Gadget freizuschalten. Sie können damit Ihren Bot erstellen und einreichen. Er wird im #bot-creation-Kanal auf Discord zur Überprüfung durch das Bot-Reviewer-Team gesendet.",
     "elo": "Wie funktioniert das Elo-System?",
-    "elo_answer": "Das Elo-System in Pokemon Auto Chess funktioniert genauso wie in anderen Elo-basierten Spielen wie Schach, Lol, Starcraft usw. Um Elo-Punkte zu erhalten, müssen Sie andere Spieler schlagen. Je höher das Elo Ihres Gegners ist, desto mehr Elo erhalten Sie, wenn Sie ihn besiegen, und umgekehrt. Wenn Sie 10 Tage lang nicht spielen, beginnt Ihr Elo zu sinken (-10 Elo/Tag).",
+    "elo_answer": "Das Elo-System in Pokemon Auto Chess funktioniert genauso wie in anderen Elo-basierten Spielen wie Schach, Lol, Starcraft usw. Um Elo-Punkte zu erhalten, müssen Sie andere Spieler schlagen. Je höher das Elo Ihres Gegners ist, desto mehr Elo erhalten Sie, wenn Sie ihn besiegen, und umgekehrt. Wenn Sie 15 Tage lang nicht spielen, beginnt Ihr Elo zu sinken (-10 Elo/Tag).",
     "missing_points": "Ich habe in meinem letzten Spiel keine Elo-Punkte erhalten, warum?",
     "missing_points_answer": "Bots geben keinen Elo an, nur menschliche Spieler werden für die Elo-Bewertung berücksichtigt. Es ist auch möglich, dass im Spiel Elo deaktiviert war (Modus „Nur zum Spaß“).",
     "damage": "Was sind Spezial-Schaden und Physischer-Schaden?",
