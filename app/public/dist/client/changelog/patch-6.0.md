@@ -57,6 +57,7 @@
 - Change Unown-O: OVEN - Cook a random dish for all your pokemons next fight
 - Nerf Cryogonal: PP 95 → 100, Freeze dry: remove AP scaling on the special defense part of the damage, explosive damage 40 + 150% spedef → 30 + 100% spe def
 - Nerf Alolan Raichu: back to tier 3, gets the same stats as Raichu but keeps the additional psychic synergy
+- Change HyperSpace Fury: now also reduces special defense evert hit
 
 # Changes to Synergies
 
@@ -83,6 +84,7 @@
 - Farthest reachable target algorithm has been improved to favor the farthest target when there are multiple equidistant free cells. This impacts several abilities and effects, such as Comet Shard and all dashers abilities
 - PVE rewards from stage 24 onwards now propose 1 synergy stone maximum
 - Item carousels now propose 4 synergy stones maximum
+- Defense and special defense stats have all been doubled, and damage reduction formula changed to `1/(1+def/20)` instead of `1/(1+def/10)`
 
 # UI
 
