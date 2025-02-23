@@ -26,7 +26,7 @@ export default function WikiTutorials() {
         </li>
         <li className="my-box">
           <iframe
-            src="https://www.youtube.com/embed/1Zpvc6IlzKA"
+            src="https://www.youtube.com/embed/Zep0Tk7xMVs"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; gyroscope; picture-in-picture; web-share"
             allowFullScreen
@@ -66,8 +66,8 @@ export default function WikiTutorials() {
           DemonhornsTV
         </a>
         {", "}
-        <a href="https://www.youtube.com/@ggillou1778" target="_blank">
-          JMT
+        <a href="https://www.youtube.com/@Azmo_PAC" target="_blank">
+          Azmo
         </a>{" "}
         {", "}
         <a href="https://www.youtube.com/@biggerweff" target="_blank">
