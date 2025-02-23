@@ -96,7 +96,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("uint16") shield = 0
   @type("uint8") team: Team
   @type("uint8") range: number
-  @type("float32") speed: number
+  @type("uint16") speed: number
   @type("int8") targetX = -1
   @type("int8") targetY = -1
   @type("string") attackSprite: AttackSprite
