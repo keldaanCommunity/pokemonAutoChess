@@ -758,7 +758,7 @@ export default function Game() {
   ])
 
   return (
-    <main id="game-wrapper">
+    <main id="game-wrapper" onContextMenu={(e) => e.preventDefault()}>
       {loaded ? (
         <>
           <MainSidebar page="game" leave={leave} leaveLabel={t("leave_game")} />

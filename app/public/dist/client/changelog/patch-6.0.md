@@ -89,6 +89,7 @@
 - Added anti-aliasing in Interface options
 - Artificial items are now automatically dropped when benching the unit that was holding them.
 - Added search bar in Wiki > Abilities
+- Disabled right click browser menu when in game
 
 # Bugfix
 
