@@ -87,6 +87,7 @@
 - Farthest reachable target algorithm has been improved to favor the farthest target when there are multiple equidistant free cells. This impacts several abilities and effects, such as Comet Shard and all dashers abilities
 - PVE rewards from stage 24 onwards now propose 1 synergy stone maximum
 - Regular item carousels now propose 4 synergy stones maximum
+- Weather Windy and Snow now impacts speed instead of movement speed
 
 # UI
 
