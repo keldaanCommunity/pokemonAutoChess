@@ -1277,28 +1277,30 @@ export default class Simulation extends Schema implements ISimulation {
       case Effect.QUICK_FEET:
         if (types.has(Synergy.WILD)) {
           pokemon.effects.add(Effect.QUICK_FEET)
-          pokemon.addAttack(Math.ceil(0.3 * pokemon.baseAtk), pokemon, 0, false)
+          pokemon.addSpeed(30, pokemon, 0, false)
         }
         break
 
       case Effect.RUN_AWAY:
         if (types.has(Synergy.WILD)) {
           pokemon.effects.add(Effect.RUN_AWAY)
-          pokemon.addAttack(Math.ceil(0.5 * pokemon.baseAtk), pokemon, 0, false)
+          pokemon.addSpeed(50, pokemon, 0, false)
         }
         break
 
       case Effect.HUSTLE:
         if (types.has(Synergy.WILD)) {
           pokemon.effects.add(Effect.HUSTLE)
-          pokemon.addAttack(Math.ceil(0.8 * pokemon.baseAtk), pokemon, 0, false)
+          pokemon.addAttack(Math.ceil(0.2 * pokemon.baseAtk), pokemon, 0, false)
+          pokemon.addSpeed(50, pokemon, 0, false)
         }
         break
 
       case Effect.BERSERK:
         if (types.has(Synergy.WILD)) {
           pokemon.effects.add(Effect.BERSERK)
-          pokemon.addAttack(Math.ceil(1.0 * pokemon.baseAtk), pokemon, 0, false)
+          pokemon.addAttack(Math.ceil(0.4 * pokemon.baseAtk), pokemon, 0, false)
+          pokemon.addSpeed(50, pokemon, 0, false)
           pokemon.status.enrageDelay -= 5000
         }
         break
