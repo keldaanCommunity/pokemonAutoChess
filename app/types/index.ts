@@ -567,12 +567,7 @@ export interface IPokemonEntity {
   ): void
   addItem(item: Item, permanent?: boolean): void
   removeItem(item: Item, permanent?: boolean): void
-  update(
-    dt: number,
-    board: Board,
-    weather: string,
-    player: Player | undefined
-  ): void
+  update(dt: number, board: Board, player: Player | undefined): void
   skydiveTo(x: number, y: number, board: Board): void
   toIdleState(): void
   toMovingState(): void

@@ -532,7 +532,7 @@ export default class BattleManager {
         } else if (!pokemon.status.skydiving) {
           pkm.moveManager.setSpeed(
             3 *
-              getMoveSpeed(pokemon, this.simulation.weather) *
+              getMoveSpeed(pokemon) *
               Math.max(
                 Math.abs(pkm.x - coordinates[0]),
                 Math.abs(pkm.y - coordinates[1])

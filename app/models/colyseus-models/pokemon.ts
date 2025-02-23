@@ -260,7 +260,8 @@ export class Ditto extends Pokemon {
   range = 1
   skill = Ability.TRANSFORM
   passive = Passive.DITTO
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Substitute extends Pokemon {
   types = new SetSchema<Synergy>([])
@@ -274,7 +275,8 @@ export class Substitute extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.DEFAULT
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Egg extends Pokemon {
   types = new SetSchema<Synergy>([])
@@ -291,7 +293,8 @@ export class Egg extends Pokemon {
   passive = Passive.EGG
   attackSprite = AttackSprite.NORMAL_MELEE
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EGG_HATCH)
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class Electrike extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
@@ -307,7 +310,8 @@ export class Electrike extends Pokemon {
   range = 1
   skill = Ability.THUNDER_FANG
   attackSprite = AttackSprite.ELECTRIC_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Manectric extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
@@ -323,7 +327,8 @@ export class Manectric extends Pokemon {
   range = 1
   skill = Ability.THUNDER_FANG
   attackSprite = AttackSprite.ELECTRIC_MELEE
-  additional = true}
+  additional = true
+}
 
 export class MegaManectric extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
@@ -338,7 +343,8 @@ export class MegaManectric extends Pokemon {
   range = 1
   skill = Ability.DEFAULT
   //skill = Ability.THUNDER_FANG
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class Shuppet extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
@@ -354,7 +360,8 @@ export class Shuppet extends Pokemon {
   range = 1
   skill = Ability.SHADOW_CLONE
   attackSprite = AttackSprite.DRAGON_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Banette extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
@@ -370,7 +377,8 @@ export class Banette extends Pokemon {
   range = 1
   skill = Ability.SHADOW_CLONE
   attackSprite = AttackSprite.DRAGON_MELEE
-  additional = true}
+  additional = true
+}
 
 export class MegaBanette extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
@@ -385,7 +393,8 @@ export class MegaBanette extends Pokemon {
   range = 1
   //skill = Ability.SHADOW_CLONE
   skill = Ability.DEFAULT
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Riolu extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -405,7 +414,8 @@ export class Riolu extends Pokemon {
   range = 2
   skill = Ability.AURASPHERE
   attackSprite = AttackSprite.FIGHTING_RANGE
-  additional = true}
+  additional = true
+}
 
 export class Lucario extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.STEEL])
@@ -420,7 +430,8 @@ export class Lucario extends Pokemon {
   range = 2
   skill = Ability.AURASPHERE
   attackSprite = AttackSprite.FIGHTING_RANGE
-  additional = true}
+  additional = true
+}
 
 export class Crabrawler extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -441,7 +452,8 @@ export class Crabrawler extends Pokemon {
   skill = Ability.ICE_HAMMER
   attackSprite = AttackSprite.FIGHTING_MELEE
   additional = true
-  passive = Passive.BERRY_EATER}
+  passive = Passive.BERRY_EATER
+}
 
 export class Crabominable extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -461,7 +473,8 @@ export class Crabominable extends Pokemon {
   skill = Ability.ICE_HAMMER
   attackSprite = AttackSprite.FIGHTING_MELEE
   additional = true
-  passive = Passive.BERRY_EATER}
+  passive = Passive.BERRY_EATER
+}
 
 export class Cutiefly extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FAIRY, Synergy.FLORA])
@@ -477,7 +490,8 @@ export class Cutiefly extends Pokemon {
   range = 2
   skill = Ability.POLLEN_PUFF
   attackSprite = AttackSprite.BUG_RANGE
-  regional = true}
+  regional = true
+}
 
 export class Ribombee extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FAIRY, Synergy.FLORA])
@@ -492,7 +506,8 @@ export class Ribombee extends Pokemon {
   range = 2
   skill = Ability.POLLEN_PUFF
   attackSprite = AttackSprite.BUG_RANGE
-  regional = true}
+  regional = true
+}
 
 export class Nickit extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIELD, Synergy.DARK])
@@ -508,7 +523,8 @@ export class Nickit extends Pokemon {
   range = 2
   skill = Ability.THIEF
   attackSprite = AttackSprite.NORMAL_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Thievul extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIELD, Synergy.DARK])
@@ -523,7 +539,8 @@ export class Thievul extends Pokemon {
   range = 2
   skill = Ability.THIEF
   attackSprite = AttackSprite.NORMAL_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Swablu extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.SOUND])
@@ -539,7 +556,8 @@ export class Swablu extends Pokemon {
   range = 2
   skill = Ability.HYPER_VOICE
   attackSprite = AttackSprite.DRAGON_RANGE
-  additional = true}
+  additional = true
+}
 
 export class Altaria extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FAIRY, Synergy.SOUND])
@@ -555,7 +573,8 @@ export class Altaria extends Pokemon {
   range = 2
   skill = Ability.HYPER_VOICE
   attackSprite = AttackSprite.DRAGON_RANGE
-  additional = true}
+  additional = true
+}
 
 export class MegaAltaria extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FAIRY, Synergy.SOUND])
@@ -570,7 +589,8 @@ export class MegaAltaria extends Pokemon {
   range = 2
   //skill = Ability.HYPER_VOICE
   skill = Ability.DEFAULT
-  attackSprite = AttackSprite.DRAGON_RANGE}
+  attackSprite = AttackSprite.DRAGON_RANGE
+}
 
 export class Scyther extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING])
@@ -597,7 +617,8 @@ export class Scyther extends Pokemon {
         return Pkm.KLEAVOR
       }
     }
-  )}
+  )
+}
 
 export class Scizor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING, Synergy.STEEL])
@@ -611,7 +632,8 @@ export class Scizor extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.X_SCISSOR
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Kleavor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ROCK, Synergy.DARK])
@@ -629,7 +651,8 @@ export class Kleavor extends Pokemon {
 
   onAcquired(player: Player): void {
     this.items.delete(Item.BLACK_AUGURITE) // black augurite is not a held item, but is needed for evolution
-  }}
+  }
+}
 
 export class Bounsweet extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -648,7 +671,8 @@ export class Bounsweet extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.TROP_KICK
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 
 export class Steenee extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -667,7 +691,8 @@ export class Steenee extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.TROP_KICK
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 
 export class Tsareena extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -685,7 +710,8 @@ export class Tsareena extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.TROP_KICK
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 
 export class Buneary extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIGHTING])
@@ -701,7 +727,8 @@ export class Buneary extends Pokemon {
   range = 1
   skill = Ability.HIGH_JUMP_KICK
   attackSprite = AttackSprite.FIGHTING_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Lopunny extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIGHTING])
@@ -717,7 +744,8 @@ export class Lopunny extends Pokemon {
   range = 1
   skill = Ability.HIGH_JUMP_KICK
   attackSprite = AttackSprite.FIGHTING_MELEE
-  regional = true}
+  regional = true
+}
 
 export class MegaLopunny extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIGHTING])
@@ -733,7 +761,8 @@ export class MegaLopunny extends Pokemon {
   //skill = Ability.HIGH_JUMP_KICK
   skill = Ability.DEFAULT
   attackSprite = AttackSprite.FIGHTING_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Onix extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.GROUND])
@@ -749,7 +778,8 @@ export class Onix extends Pokemon {
   range = 1
   skill = Ability.SPIKE_ARMOR
   attackSprite = AttackSprite.ROCK_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Steelix extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.GROUND, Synergy.STEEL])
@@ -765,7 +795,8 @@ export class Steelix extends Pokemon {
   range = 1
   skill = Ability.SPIKE_ARMOR
   attackSprite = AttackSprite.ROCK_MELEE
-  additional = true}
+  additional = true
+}
 
 export class MegaSteelix extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.GROUND, Synergy.STEEL])
@@ -781,7 +812,8 @@ export class MegaSteelix extends Pokemon {
   skill = Ability.DEFAULT
   //skill = Ability.SPIKE_ARMOR
   attackSprite = AttackSprite.ROCK_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Numel extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.GROUND])
@@ -797,7 +829,8 @@ export class Numel extends Pokemon {
   range = 1
   skill = Ability.ERUPTION
   attackSprite = AttackSprite.FIRE_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Camerupt extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.GROUND])
@@ -813,7 +846,8 @@ export class Camerupt extends Pokemon {
   range = 1
   skill = Ability.ERUPTION
   attackSprite = AttackSprite.FIRE_MELEE
-  regional = true}
+  regional = true
+}
 
 export class MegaCamerupt extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.GROUND])
@@ -829,7 +863,8 @@ export class MegaCamerupt extends Pokemon {
   skill = Ability.DEFAULT
   //skill = Ability.ERUPTION
   attackSprite = AttackSprite.FIRE_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Meditite extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -849,7 +884,8 @@ export class Meditite extends Pokemon {
   range = 2
   skill = Ability.CONFUSION
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  additional = true}
+  additional = true
+}
 
 export class Medicham extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -868,7 +904,8 @@ export class Medicham extends Pokemon {
   range = 2
   skill = Ability.CONFUSION
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  additional = true}
+  additional = true
+}
 
 export class Elekid extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -887,7 +924,8 @@ export class Elekid extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.DISCHARGE
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class Electabuzz extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -906,7 +944,8 @@ export class Electabuzz extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.DISCHARGE
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class Electivire extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -924,7 +963,8 @@ export class Electivire extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.DISCHARGE
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class Gible extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -943,7 +983,8 @@ export class Gible extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DRAGON_BREATH
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Gabite extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -962,7 +1003,8 @@ export class Gabite extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DRAGON_BREATH
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Garchomp extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -980,7 +1022,8 @@ export class Garchomp extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DRAGON_BREATH
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Beldum extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -999,7 +1042,8 @@ export class Beldum extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.METEOR_MASH
-  attackSprite = AttackSprite.PSYCHIC_MELEE}
+  attackSprite = AttackSprite.PSYCHIC_MELEE
+}
 
 export class Metang extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1018,7 +1062,8 @@ export class Metang extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.METEOR_MASH
-  attackSprite = AttackSprite.PSYCHIC_MELEE}
+  attackSprite = AttackSprite.PSYCHIC_MELEE
+}
 
 export class Metagross extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1036,7 +1081,8 @@ export class Metagross extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.METEOR_MASH
-  attackSprite = AttackSprite.PSYCHIC_MELEE}
+  attackSprite = AttackSprite.PSYCHIC_MELEE
+}
 
 export class Tympole extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1057,7 +1103,8 @@ export class Tympole extends Pokemon {
   range = 1
   skill = Ability.SLUDGE_WAVE
   passive = Passive.HATCH
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Palpitoad extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1078,7 +1125,8 @@ export class Palpitoad extends Pokemon {
   range = 1
   skill = Ability.SLUDGE_WAVE
   passive = Passive.HATCH
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Seismitoad extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1096,7 +1144,8 @@ export class Seismitoad extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.SLUDGE_WAVE
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Bagon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.MONSTER])
@@ -1111,7 +1160,8 @@ export class Bagon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HEAD_SMASH
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Shelgon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.MONSTER])
@@ -1126,7 +1176,8 @@ export class Shelgon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HEAD_SMASH
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Salamence extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1144,7 +1195,8 @@ export class Salamence extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DRAGON_DARTS
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Ralts extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1163,7 +1215,8 @@ export class Ralts extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.FUTURE_SIGHT
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Kirlia extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1182,7 +1235,8 @@ export class Kirlia extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.FUTURE_SIGHT
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Gardevoir extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1200,7 +1254,8 @@ export class Gardevoir extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.FUTURE_SIGHT
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Fuecoco extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.SOUND, Synergy.GHOST])
@@ -1215,7 +1270,8 @@ export class Fuecoco extends Pokemon {
   maxPP = 60
   range = 3
   skill = Ability.TORCH_SONG
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Crocalor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.SOUND, Synergy.GHOST])
@@ -1230,7 +1286,8 @@ export class Crocalor extends Pokemon {
   maxPP = 60
   range = 3
   skill = Ability.TORCH_SONG
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Skeledirge extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.SOUND, Synergy.GHOST])
@@ -1244,7 +1301,8 @@ export class Skeledirge extends Pokemon {
   maxPP = 60
   range = 3
   skill = Ability.TORCH_SONG
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Budew extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.BABY])
@@ -1259,7 +1317,8 @@ export class Budew extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.PETAL_DANCE
-  attackSprite = AttackSprite.GRASS_RANGE}
+  attackSprite = AttackSprite.GRASS_RANGE
+}
 
 export class Roselia extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
@@ -1274,7 +1333,8 @@ export class Roselia extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.PETAL_DANCE
-  attackSprite = AttackSprite.GRASS_RANGE}
+  attackSprite = AttackSprite.GRASS_RANGE
+}
 
 export class Roserade extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
@@ -1288,7 +1348,8 @@ export class Roserade extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.PETAL_DANCE
-  attackSprite = AttackSprite.GRASS_RANGE}
+  attackSprite = AttackSprite.GRASS_RANGE
+}
 
 export class Slakoth extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
@@ -1304,7 +1365,8 @@ export class Slakoth extends Pokemon {
   range = 1
   skill = Ability.SLACK_OFF
   attackSprite = AttackSprite.NORMAL_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Vigoroth extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
@@ -1320,7 +1382,8 @@ export class Vigoroth extends Pokemon {
   range = 1
   skill = Ability.SLACK_OFF
   attackSprite = AttackSprite.NORMAL_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Slaking extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
@@ -1335,7 +1398,8 @@ export class Slaking extends Pokemon {
   range = 1
   skill = Ability.SLACK_OFF
   attackSprite = AttackSprite.NORMAL_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Honedge extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1354,7 +1418,8 @@ export class Honedge extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.KING_SHIELD
-  attackSprite = AttackSprite.STEEL_MELEE}
+  attackSprite = AttackSprite.STEEL_MELEE
+}
 
 export class Doublade extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1373,7 +1438,8 @@ export class Doublade extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.KING_SHIELD
-  attackSprite = AttackSprite.STEEL_MELEE}
+  attackSprite = AttackSprite.STEEL_MELEE
+}
 
 export class Aegislash extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1392,7 +1458,8 @@ export class Aegislash extends Pokemon {
   range = 1
   skill = Ability.KING_SHIELD
   passive = Passive.AEGISLASH
-  attackSprite = AttackSprite.STEEL_MELEE}
+  attackSprite = AttackSprite.STEEL_MELEE
+}
 
 export class AegislashBlade extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1411,7 +1478,8 @@ export class AegislashBlade extends Pokemon {
   range = 1
   skill = Ability.KING_SHIELD
   passive = Passive.AEGISLASH
-  attackSprite = AttackSprite.STEEL_MELEE}
+  attackSprite = AttackSprite.STEEL_MELEE
+}
 
 export class Oshawott extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1430,7 +1498,8 @@ export class Oshawott extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.AQUA_TAIL
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Dewott extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1449,7 +1518,8 @@ export class Dewott extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.AQUA_TAIL
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Samurott extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1467,7 +1537,8 @@ export class Samurott extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.AQUA_TAIL
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Larvitar extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.MONSTER, Synergy.ROCK])
@@ -1482,7 +1553,8 @@ export class Larvitar extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.BITE
-  attackSprite = AttackSprite.DARK_MELEE}
+  attackSprite = AttackSprite.DARK_MELEE
+}
 
 export class Pupitar extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.MONSTER, Synergy.ROCK])
@@ -1497,7 +1569,8 @@ export class Pupitar extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.BITE
-  attackSprite = AttackSprite.DARK_MELEE}
+  attackSprite = AttackSprite.DARK_MELEE
+}
 
 export class Tyranitar extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.MONSTER, Synergy.ROCK])
@@ -1511,7 +1584,8 @@ export class Tyranitar extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.BITE
-  attackSprite = AttackSprite.DARK_MELEE}
+  attackSprite = AttackSprite.DARK_MELEE
+}
 
 export class JangmoO extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1531,7 +1605,8 @@ export class JangmoO extends Pokemon {
   range = 1
   skill = Ability.CLANGOROUS_SOUL
   attackSprite = AttackSprite.DRAGON_MELEE
-  regional = true}
+  regional = true
+}
 
 export class HakamoO extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1551,7 +1626,8 @@ export class HakamoO extends Pokemon {
   range = 1
   skill = Ability.CLANGOROUS_SOUL
   attackSprite = AttackSprite.DRAGON_MELEE
-  regional = true}
+  regional = true
+}
 
 export class KommoO extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1570,7 +1646,8 @@ export class KommoO extends Pokemon {
   range = 1
   skill = Ability.CLANGOROUS_SOUL
   attackSprite = AttackSprite.DRAGON_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Gastly extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1589,7 +1666,8 @@ export class Gastly extends Pokemon {
   maxPP = 60
   range = 2
   skill = Ability.NIGHTMARE
-  attackSprite = AttackSprite.GHOST_RANGE}
+  attackSprite = AttackSprite.GHOST_RANGE
+}
 
 export class Haunter extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1608,7 +1686,8 @@ export class Haunter extends Pokemon {
   maxPP = 60
   range = 2
   skill = Ability.NIGHTMARE
-  attackSprite = AttackSprite.GHOST_RANGE}
+  attackSprite = AttackSprite.GHOST_RANGE
+}
 
 export class Gengar extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1626,7 +1705,8 @@ export class Gengar extends Pokemon {
   maxPP = 60
   range = 2
   skill = Ability.NIGHTMARE
-  attackSprite = AttackSprite.GHOST_RANGE}
+  attackSprite = AttackSprite.GHOST_RANGE
+}
 
 export class Abra extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.HUMAN])
@@ -1641,7 +1721,8 @@ export class Abra extends Pokemon {
   maxPP = 50
   range = 4
   skill = Ability.TELEPORT
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Kadabra extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.HUMAN])
@@ -1656,7 +1737,8 @@ export class Kadabra extends Pokemon {
   maxPP = 50
   range = 4
   skill = Ability.TELEPORT
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Alakazam extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.HUMAN])
@@ -1670,7 +1752,8 @@ export class Alakazam extends Pokemon {
   maxPP = 50
   range = 4
   skill = Ability.TELEPORT
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Litwick extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FIRE, Synergy.LIGHT])
@@ -1685,7 +1768,8 @@ export class Litwick extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.HEX
-  attackSprite = AttackSprite.GHOST_RANGE}
+  attackSprite = AttackSprite.GHOST_RANGE
+}
 
 export class Lampent extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FIRE, Synergy.LIGHT])
@@ -1700,7 +1784,8 @@ export class Lampent extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.HEX
-  attackSprite = AttackSprite.GHOST_RANGE}
+  attackSprite = AttackSprite.GHOST_RANGE
+}
 
 export class Chandelure extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FIRE, Synergy.LIGHT])
@@ -1714,7 +1799,8 @@ export class Chandelure extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.HEX
-  attackSprite = AttackSprite.GHOST_RANGE}
+  attackSprite = AttackSprite.GHOST_RANGE
+}
 
 const conversionEffect = ({
   simulation,
@@ -1766,7 +1852,7 @@ const conversionEffect = ({
     }
     if (effect === Effect.DRAGON_DANCE) {
       entity.addAbilityPower(dragonLevel, entity, 0, false)
-      entity.addAttackSpeed(dragonLevel, entity, 0, false)
+      entity.addSpeed(dragonLevel, entity, 0, false)
     }
   }
   // when converting to gourmet, get a Chef hat. Useless but funny
@@ -1790,7 +1876,8 @@ export class Porygon extends Pokemon {
   skill = Ability.TRI_ATTACK
   passive = Passive.CONVERSION
   attackSprite = AttackSprite.FIGHTING_RANGE
-  afterSimulationStart = conversionEffect}
+  afterSimulationStart = conversionEffect
+}
 
 export class Porygon2 extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.ARTIFICIAL])
@@ -1807,7 +1894,8 @@ export class Porygon2 extends Pokemon {
   skill = Ability.TRI_ATTACK
   passive = Passive.CONVERSION
   attackSprite = AttackSprite.FIGHTING_RANGE
-  afterSimulationStart = conversionEffect}
+  afterSimulationStart = conversionEffect
+}
 
 export class PorygonZ extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.ARTIFICIAL])
@@ -1823,7 +1911,8 @@ export class PorygonZ extends Pokemon {
   skill = Ability.TRI_ATTACK
   passive = Passive.CONVERSION
   attackSprite = AttackSprite.FIGHTING_RANGE
-  afterSimulationStart = conversionEffect}
+  afterSimulationStart = conversionEffect
+}
 
 export class Sewaddle extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG])
@@ -1838,7 +1927,8 @@ export class Sewaddle extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.MANTIS_BLADES
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class Swadloon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG])
@@ -1853,7 +1943,8 @@ export class Swadloon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.MANTIS_BLADES
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class Leavanny extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG])
@@ -1867,7 +1958,8 @@ export class Leavanny extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.MANTIS_BLADES
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class Turtwig extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.GROUND])
@@ -1882,7 +1974,8 @@ export class Turtwig extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.GROWTH
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Grotle extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.GROUND])
@@ -1897,7 +1990,8 @@ export class Grotle extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.GROWTH
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Torterra extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.GROUND])
@@ -1911,7 +2005,8 @@ export class Torterra extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.GROWTH
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Deino extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.DARK])
@@ -1931,7 +2026,8 @@ export class Deino extends Pokemon {
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.DRAGON)
-  }}
+  }
+}
 
 export class Zweilous extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.DARK])
@@ -1951,7 +2047,8 @@ export class Zweilous extends Pokemon {
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.DRAGON)
-  }}
+  }
+}
 
 export class Hydreigon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.DARK])
@@ -1970,7 +2067,8 @@ export class Hydreigon extends Pokemon {
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.DRAGON)
-  }}
+  }
+}
 
 export class Poliwag extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -1989,7 +2087,8 @@ export class Poliwag extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.SOAK
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class Poliwhirl extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2030,7 +2129,8 @@ export class Poliwhirl extends Pokemon {
 
   onChangePosition(x: number, y: number, player: Player): void {
     player.refreshShopUI()
-  }}
+  }
+}
 
 export class Politoed extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2048,7 +2148,8 @@ export class Politoed extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.SOAK
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class Poliwrath extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2066,7 +2167,8 @@ export class Poliwrath extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.CRABHAMMER
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Magby extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.HUMAN, Synergy.BABY])
@@ -2081,7 +2183,8 @@ export class Magby extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.FLAMETHROWER
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Magmar extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.HUMAN])
@@ -2096,7 +2199,8 @@ export class Magmar extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.FLAMETHROWER
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Magmortar extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.HUMAN])
@@ -2110,7 +2214,8 @@ export class Magmortar extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.FLAMETHROWER
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Solosis extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.AMORPHOUS])
@@ -2125,7 +2230,8 @@ export class Solosis extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.PSYCHIC
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Duosion extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.AMORPHOUS])
@@ -2140,7 +2246,8 @@ export class Duosion extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.PSYCHIC
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Reuniclus extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.AMORPHOUS])
@@ -2154,7 +2261,8 @@ export class Reuniclus extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.PSYCHIC
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Shinx extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2173,7 +2281,8 @@ export class Shinx extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.VOLT_SWITCH
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class Luxio extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2192,7 +2301,8 @@ export class Luxio extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.VOLT_SWITCH
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class Luxray extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2210,7 +2320,8 @@ export class Luxray extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.VOLT_SWITCH
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class Cubone extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.GHOST])
@@ -2234,7 +2345,8 @@ export class Cubone extends Pokemon {
   range = 1
   skill = Ability.BONEMERANG
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Marowak extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.GHOST])
@@ -2249,7 +2361,8 @@ export class Marowak extends Pokemon {
   range = 1
   skill = Ability.BONEMERANG
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class AlolanMarowak extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.FIRE, Synergy.GHOST])
@@ -2272,7 +2385,8 @@ export class AlolanMarowak extends Pokemon {
       (!state || state.additionalPokemons.includes(Pkm.CUBONE)) &&
       regionSynergies.includes(Synergy.FIRE)
     )
-  }}
+  }
+}
 
 export class Axew extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON])
@@ -2289,7 +2403,8 @@ export class Axew extends Pokemon {
   range = 1
   skill = Ability.OUTRAGE
   passive = Passive.HATCH
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Fraxure extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON])
@@ -2306,7 +2421,8 @@ export class Fraxure extends Pokemon {
   range = 1
   skill = Ability.OUTRAGE
   passive = Passive.HATCH
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Haxorus extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON])
@@ -2320,7 +2436,8 @@ export class Haxorus extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.OUTRAGE
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Dratini extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2339,7 +2456,8 @@ export class Dratini extends Pokemon {
   maxPP = 110
   range = 1
   skill = Ability.DRAGON_BREATH
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Dragonair extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2358,7 +2476,8 @@ export class Dragonair extends Pokemon {
   maxPP = 110
   range = 1
   skill = Ability.DRAGON_BREATH
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Dragonite extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2376,7 +2495,8 @@ export class Dragonite extends Pokemon {
   maxPP = 110
   range = 1
   skill = Ability.DRAGON_BREATH
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Goomy extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2403,7 +2523,8 @@ export class Goomy extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.LIQUIDATION
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Sligoo extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2422,7 +2543,8 @@ export class Sligoo extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.LIQUIDATION
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Goodra extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2440,7 +2562,8 @@ export class Goodra extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.LIQUIDATION
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class HisuiSliggoo extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2464,7 +2587,8 @@ export class HisuiSliggoo extends Pokemon {
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.STEEL)
-  }}
+  }
+}
 
 export class HisuiGoodra extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2487,7 +2611,8 @@ export class HisuiGoodra extends Pokemon {
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.STEEL)
-  }}
+  }
+}
 
 export class Lotad extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2507,7 +2632,8 @@ export class Lotad extends Pokemon {
   range = 3
   skill = Ability.TORMENT
   attackSprite = AttackSprite.GRASS_RANGE
-  regional = true}
+  regional = true
+}
 
 export class Lombre extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2527,7 +2653,8 @@ export class Lombre extends Pokemon {
   range = 3
   skill = Ability.TORMENT
   attackSprite = AttackSprite.GRASS_RANGE
-  regional = true}
+  regional = true
+}
 
 export class Ludicolo extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2546,7 +2673,8 @@ export class Ludicolo extends Pokemon {
   range = 3
   skill = Ability.TORMENT
   attackSprite = AttackSprite.GRASS_RANGE
-  regional = true}
+  regional = true
+}
 
 export class Togepi extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.NORMAL, Synergy.BABY])
@@ -2561,7 +2689,8 @@ export class Togepi extends Pokemon {
   maxPP = 70
   range = 2
   skill = Ability.WISH
-  attackSprite = AttackSprite.FLYING_RANGE}
+  attackSprite = AttackSprite.FLYING_RANGE
+}
 
 export class Togetic extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2580,7 +2709,8 @@ export class Togetic extends Pokemon {
   maxPP = 70
   range = 2
   skill = Ability.WISH
-  attackSprite = AttackSprite.FLYING_RANGE}
+  attackSprite = AttackSprite.FLYING_RANGE
+}
 
 export class Togekiss extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2598,7 +2728,8 @@ export class Togekiss extends Pokemon {
   maxPP = 70
   range = 2
   skill = Ability.WISH
-  attackSprite = AttackSprite.FLYING_RANGE}
+  attackSprite = AttackSprite.FLYING_RANGE
+}
 
 export class Rhyhorn extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2617,7 +2748,8 @@ export class Rhyhorn extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HORN_DRILL
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Rhydon extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2636,7 +2768,8 @@ export class Rhydon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HORN_DRILL
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Rhyperior extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2654,7 +2787,8 @@ export class Rhyperior extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HORN_DRILL
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Aron extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.MONSTER, Synergy.ROCK])
@@ -2669,7 +2803,8 @@ export class Aron extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HEAVY_SLAM
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Lairon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.MONSTER, Synergy.ROCK])
@@ -2684,7 +2819,8 @@ export class Lairon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HEAVY_SLAM
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Aggron extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.MONSTER, Synergy.ROCK])
@@ -2698,7 +2834,8 @@ export class Aggron extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HEAVY_SLAM
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Whismur extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.SOUND])
@@ -2713,7 +2850,8 @@ export class Whismur extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.ECHO
-  attackSprite = AttackSprite.SOUND_RANGE}
+  attackSprite = AttackSprite.SOUND_RANGE
+}
 export class Loudred extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.SOUND])
   rarity = Rarity.RARE
@@ -2727,7 +2865,8 @@ export class Loudred extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.ECHO
-  attackSprite = AttackSprite.SOUND_RANGE}
+  attackSprite = AttackSprite.SOUND_RANGE
+}
 
 export class Exploud extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.SOUND])
@@ -2741,7 +2880,8 @@ export class Exploud extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.ECHO
-  attackSprite = AttackSprite.SOUND_RANGE}
+  attackSprite = AttackSprite.SOUND_RANGE
+}
 
 export class Swinub extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ICE])
@@ -2756,7 +2896,8 @@ export class Swinub extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ICICLE_CRASH
-  attackSprite = AttackSprite.ICE_MELEE}
+  attackSprite = AttackSprite.ICE_MELEE
+}
 
 export class Piloswine extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ICE])
@@ -2771,7 +2912,8 @@ export class Piloswine extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ICICLE_CRASH
-  attackSprite = AttackSprite.ICE_MELEE}
+  attackSprite = AttackSprite.ICE_MELEE
+}
 
 export class Mamoswine extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ICE])
@@ -2785,7 +2927,8 @@ export class Mamoswine extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ICICLE_CRASH
-  attackSprite = AttackSprite.ICE_MELEE}
+  attackSprite = AttackSprite.ICE_MELEE
+}
 
 export class Snover extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.ICE, Synergy.MONSTER])
@@ -2801,7 +2944,8 @@ export class Snover extends Pokemon {
   range = 1
   skill = Ability.SHEER_COLD
   attackSprite = AttackSprite.ICE_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Abomasnow extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.ICE, Synergy.MONSTER])
@@ -2817,7 +2961,8 @@ export class Abomasnow extends Pokemon {
   range = 1
   skill = Ability.SHEER_COLD
   attackSprite = AttackSprite.ICE_MELEE
-  regional = true}
+  regional = true
+}
 
 export class MegaAbomasnow extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.ICE, Synergy.MONSTER])
@@ -2833,7 +2978,8 @@ export class MegaAbomasnow extends Pokemon {
   skill = Ability.DEFAULT
   //skill = Ability.SHEER_COLD
   attackSprite = AttackSprite.ICE_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Snorunt extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ICE])
@@ -2848,7 +2994,8 @@ export class Snorunt extends Pokemon {
   maxPP = 110
   range = 3
   skill = Ability.ICY_WIND
-  attackSprite = AttackSprite.GHOST_RANGE}
+  attackSprite = AttackSprite.GHOST_RANGE
+}
 
 export class Glalie extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ICE])
@@ -2863,7 +3010,8 @@ export class Glalie extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.ICY_WIND
-  attackSprite = AttackSprite.GHOST_RANGE}
+  attackSprite = AttackSprite.GHOST_RANGE
+}
 
 export class Froslass extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ICE])
@@ -2877,7 +3025,8 @@ export class Froslass extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.ICY_WIND
-  attackSprite = AttackSprite.GHOST_RANGE}
+  attackSprite = AttackSprite.GHOST_RANGE
+}
 
 export class Vanillite extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2896,7 +3045,8 @@ export class Vanillite extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.SLEEP
-  attackSprite = AttackSprite.ICE_RANGE}
+  attackSprite = AttackSprite.ICE_RANGE
+}
 
 export class Vanillish extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2915,7 +3065,8 @@ export class Vanillish extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.SLEEP
-  attackSprite = AttackSprite.ICE_RANGE}
+  attackSprite = AttackSprite.ICE_RANGE
+}
 
 export class Vanilluxe extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2933,7 +3084,8 @@ export class Vanilluxe extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.SLEEP
-  attackSprite = AttackSprite.ICE_RANGE}
+  attackSprite = AttackSprite.ICE_RANGE
+}
 
 export class Trapinch extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.GROUND])
@@ -2948,7 +3100,8 @@ export class Trapinch extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DRAGON_TAIL
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Vibrava extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.BUG, Synergy.GROUND])
@@ -2963,7 +3116,8 @@ export class Vibrava extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DRAGON_TAIL
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Flygon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.BUG, Synergy.GROUND])
@@ -2977,7 +3131,8 @@ export class Flygon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DRAGON_TAIL
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Pichu extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -2996,7 +3151,8 @@ export class Pichu extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.NUZZLE
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class Pikachu extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FAIRY])
@@ -3019,7 +3175,8 @@ export class Pikachu extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.NUZZLE
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class Raichu extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FAIRY])
@@ -3033,7 +3190,8 @@ export class Raichu extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.NUZZLE
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class AlolanRaichu extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -3057,7 +3215,8 @@ export class AlolanRaichu extends Pokemon {
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.PSYCHIC)
-  }}
+  }
+}
 
 export class Bulbasaur extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
@@ -3072,7 +3231,8 @@ export class Bulbasaur extends Pokemon {
   maxPP = 70
   range = 2
   skill = Ability.MAGICAL_LEAF
-  attackSprite = AttackSprite.GRASS_RANGE}
+  attackSprite = AttackSprite.GRASS_RANGE
+}
 
 export class Ivysaur extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
@@ -3087,7 +3247,8 @@ export class Ivysaur extends Pokemon {
   maxPP = 70
   range = 2
   skill = Ability.MAGICAL_LEAF
-  attackSprite = AttackSprite.GRASS_RANGE}
+  attackSprite = AttackSprite.GRASS_RANGE
+}
 
 export class Venusaur extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
@@ -3101,7 +3262,8 @@ export class Venusaur extends Pokemon {
   maxPP = 70
   range = 2
   skill = Ability.MAGICAL_LEAF
-  attackSprite = AttackSprite.GRASS_RANGE}
+  attackSprite = AttackSprite.GRASS_RANGE
+}
 
 export class Igglybuff extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BABY, Synergy.SOUND, Synergy.NORMAL])
@@ -3116,7 +3278,8 @@ export class Igglybuff extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.SLEEP
-  attackSprite = AttackSprite.SOUND_RANGE}
+  attackSprite = AttackSprite.SOUND_RANGE
+}
 
 export class Jigglypuff extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.SOUND, Synergy.NORMAL])
@@ -3131,7 +3294,8 @@ export class Jigglypuff extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.SLEEP
-  attackSprite = AttackSprite.SOUND_RANGE}
+  attackSprite = AttackSprite.SOUND_RANGE
+}
 
 export class Wigglytuff extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.SOUND, Synergy.NORMAL])
@@ -3145,7 +3309,8 @@ export class Wigglytuff extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.SLEEP
-  attackSprite = AttackSprite.SOUND_RANGE}
+  attackSprite = AttackSprite.SOUND_RANGE
+}
 
 export class Duskull extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
@@ -3160,7 +3325,8 @@ export class Duskull extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.SHADOW_BALL
-  attackSprite = AttackSprite.GHOST_RANGE}
+  attackSprite = AttackSprite.GHOST_RANGE
+}
 
 export class Dusclops extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
@@ -3175,7 +3341,8 @@ export class Dusclops extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.SHADOW_BALL
-  attackSprite = AttackSprite.GHOST_RANGE}
+  attackSprite = AttackSprite.GHOST_RANGE
+}
 
 export class Dusknoir extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
@@ -3189,7 +3356,8 @@ export class Dusknoir extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.SHADOW_BALL
-  attackSprite = AttackSprite.GHOST_RANGE}
+  attackSprite = AttackSprite.GHOST_RANGE
+}
 
 export class Magnemite extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.STEEL])
@@ -3204,7 +3372,8 @@ export class Magnemite extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.MAGNET_BOMB
-  attackSprite = AttackSprite.ELECTRIC_RANGE}
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+}
 
 export class Magneton extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.STEEL])
@@ -3219,7 +3388,8 @@ export class Magneton extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.MAGNET_BOMB
-  attackSprite = AttackSprite.ELECTRIC_RANGE}
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+}
 
 export class Magnezone extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.STEEL])
@@ -3233,7 +3403,8 @@ export class Magnezone extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.MAGNET_BOMB
-  attackSprite = AttackSprite.ELECTRIC_RANGE}
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+}
 
 export class Horsea extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.WATER])
@@ -3248,7 +3419,8 @@ export class Horsea extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.WHIRLPOOL
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class Seadra extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.WATER])
@@ -3263,7 +3435,8 @@ export class Seadra extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.WHIRLPOOL
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class Kingdra extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.WATER])
@@ -3277,7 +3450,8 @@ export class Kingdra extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.WHIRLPOOL
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class Flabebe extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FLORA])
@@ -3292,7 +3466,8 @@ export class Flabebe extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.FAIRY_WIND
-  attackSprite = AttackSprite.FAIRY_RANGE}
+  attackSprite = AttackSprite.FAIRY_RANGE
+}
 
 export class Floette extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FLORA])
@@ -3307,7 +3482,8 @@ export class Floette extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.FAIRY_WIND
-  attackSprite = AttackSprite.FAIRY_RANGE}
+  attackSprite = AttackSprite.FAIRY_RANGE
+}
 export class Florges extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FLORA])
   rarity = Rarity.UNCOMMON
@@ -3320,7 +3496,8 @@ export class Florges extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.FAIRY_WIND
-  attackSprite = AttackSprite.FAIRY_RANGE}
+  attackSprite = AttackSprite.FAIRY_RANGE
+}
 
 export class Chikorita extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
@@ -3335,7 +3512,8 @@ export class Chikorita extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.STUN_SPORE
-  attackSprite = AttackSprite.GRASS_RANGE}
+  attackSprite = AttackSprite.GRASS_RANGE
+}
 
 export class Bayleef extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
@@ -3350,7 +3528,8 @@ export class Bayleef extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.STUN_SPORE
-  attackSprite = AttackSprite.GRASS_RANGE}
+  attackSprite = AttackSprite.GRASS_RANGE
+}
 
 export class Meganium extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
@@ -3364,7 +3543,8 @@ export class Meganium extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.STUN_SPORE
-  attackSprite = AttackSprite.GRASS_RANGE}
+  attackSprite = AttackSprite.GRASS_RANGE
+}
 
 export class Venipede extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON])
@@ -3379,7 +3559,8 @@ export class Venipede extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Whirlipede extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON])
@@ -3394,7 +3575,8 @@ export class Whirlipede extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Scolipede extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON])
@@ -3408,7 +3590,8 @@ export class Scolipede extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Spheal extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.ICE])
@@ -3423,7 +3606,8 @@ export class Spheal extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.ICE_BALL
-  attackSprite = AttackSprite.ICE_MELEE}
+  attackSprite = AttackSprite.ICE_MELEE
+}
 
 export class Sealeo extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.ICE])
@@ -3438,7 +3622,8 @@ export class Sealeo extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.ICE_BALL
-  attackSprite = AttackSprite.ICE_MELEE}
+  attackSprite = AttackSprite.ICE_MELEE
+}
 
 export class Walrein extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.ICE])
@@ -3452,7 +3637,8 @@ export class Walrein extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.ICE_BALL
-  attackSprite = AttackSprite.ICE_MELEE}
+  attackSprite = AttackSprite.ICE_MELEE
+}
 
 export class NidoranF extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -3471,7 +3657,8 @@ export class NidoranF extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.VENOSHOCK
-  attackSprite = AttackSprite.POISON_MELEE}
+  attackSprite = AttackSprite.POISON_MELEE
+}
 
 export class Nidorina extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -3490,7 +3677,8 @@ export class Nidorina extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.VENOSHOCK
-  attackSprite = AttackSprite.POISON_MELEE}
+  attackSprite = AttackSprite.POISON_MELEE
+}
 
 export class Nidoqueen extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -3508,7 +3696,8 @@ export class Nidoqueen extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.VENOSHOCK
-  attackSprite = AttackSprite.POISON_MELEE}
+  attackSprite = AttackSprite.POISON_MELEE
+}
 
 export class NidoranM extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -3528,7 +3717,8 @@ export class NidoranM extends Pokemon {
   range = 1
   skill = Ability.POISON
   attackSprite = AttackSprite.POISON_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Nidorino extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -3548,7 +3738,8 @@ export class Nidorino extends Pokemon {
   range = 1
   skill = Ability.POISON
   attackSprite = AttackSprite.POISON_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Nidoking extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -3567,7 +3758,8 @@ export class Nidoking extends Pokemon {
   range = 1
   skill = Ability.POISON
   attackSprite = AttackSprite.POISON_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Machop extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
@@ -3582,7 +3774,8 @@ export class Machop extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.GUILLOTINE
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 
 export class Machoke extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
@@ -3597,7 +3790,8 @@ export class Machoke extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.GUILLOTINE
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 
 export class Machamp extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
@@ -3611,7 +3805,8 @@ export class Machamp extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.GUILLOTINE
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 
 export class Piplup extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ICE, Synergy.STEEL])
@@ -3626,7 +3821,8 @@ export class Piplup extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.METAL_CLAW
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Prinplup extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ICE, Synergy.STEEL])
@@ -3641,7 +3837,8 @@ export class Prinplup extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.METAL_CLAW
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Empoleon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ICE, Synergy.STEEL])
@@ -3655,7 +3852,8 @@ export class Empoleon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.METAL_CLAW
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Chimchar extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -3675,7 +3873,8 @@ export class Chimchar extends Pokemon {
   range = 1
   skill = Ability.TORMENT
   attackSprite = AttackSprite.FIRE_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Monferno extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -3695,7 +3894,8 @@ export class Monferno extends Pokemon {
   range = 1
   skill = Ability.TORMENT
   attackSprite = AttackSprite.FIRE_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Infernape extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -3714,7 +3914,8 @@ export class Infernape extends Pokemon {
   range = 1
   skill = Ability.TORMENT
   attackSprite = AttackSprite.FIRE_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Mudkip extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GROUND])
@@ -3736,7 +3937,8 @@ export class Mudkip extends Pokemon {
     opponentEffects
   }: { opponentEffects: Set<Effect> }): void {
     opponentEffects.add(Effect.WATER_SPRING)
-  }}
+  }
+}
 
 export class Marshtomp extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GROUND])
@@ -3758,7 +3960,8 @@ export class Marshtomp extends Pokemon {
     opponentEffects
   }: { opponentEffects: Set<Effect> }): void {
     opponentEffects.add(Effect.WATER_SPRING)
-  }}
+  }
+}
 
 export class Swampert extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GROUND])
@@ -3779,7 +3982,8 @@ export class Swampert extends Pokemon {
     opponentEffects
   }: { opponentEffects: Set<Effect> }): void {
     opponentEffects.add(Effect.WATER_SPRING)
-  }}
+  }
+}
 
 export class Torchic extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -3798,7 +4002,8 @@ export class Torchic extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLAZE_KICK
-  attackSprite = AttackSprite.FLYING_MELEE}
+  attackSprite = AttackSprite.FLYING_MELEE
+}
 
 export class Combusken extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -3817,7 +4022,8 @@ export class Combusken extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLAZE_KICK
-  attackSprite = AttackSprite.FLYING_MELEE}
+  attackSprite = AttackSprite.FLYING_MELEE
+}
 
 export class Blaziken extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -3835,7 +4041,8 @@ export class Blaziken extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLAZE_KICK
-  attackSprite = AttackSprite.FLYING_MELEE}
+  attackSprite = AttackSprite.FLYING_MELEE
+}
 
 export class Treecko extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.MONSTER])
@@ -3850,7 +4057,8 @@ export class Treecko extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.LEAF_BLADE
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Grovyle extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.MONSTER])
@@ -3865,7 +4073,8 @@ export class Grovyle extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.LEAF_BLADE
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Sceptile extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.MONSTER])
@@ -3879,7 +4088,8 @@ export class Sceptile extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.LEAF_BLADE
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Cyndaquil extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
@@ -3894,7 +4104,8 @@ export class Cyndaquil extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.WHEEL_OF_FIRE
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Quilava extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
@@ -3917,7 +4128,8 @@ export class Quilava extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.WHEEL_OF_FIRE
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Typhlosion extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
@@ -3931,7 +4143,8 @@ export class Typhlosion extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.WHEEL_OF_FIRE
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class HisuianTyphlosion extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.GHOST])
@@ -3951,7 +4164,8 @@ export class HisuianTyphlosion extends Pokemon {
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.GHOST)
-  }}
+  }
+}
 
 export class Slowpoke extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.AQUATIC])
@@ -3967,7 +4181,8 @@ export class Slowpoke extends Pokemon {
   range = 1
   skill = Ability.YAWN
   attackSprite = AttackSprite.WATER_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Slowbro extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.AQUATIC])
@@ -3983,7 +4198,8 @@ export class Slowbro extends Pokemon {
   range = 1
   skill = Ability.YAWN
   attackSprite = AttackSprite.WATER_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Slowking extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.AQUATIC])
@@ -3998,7 +4214,8 @@ export class Slowking extends Pokemon {
   range = 1
   skill = Ability.YAWN
   attackSprite = AttackSprite.WATER_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Psyduck extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.PSYCHIC])
@@ -4015,7 +4232,8 @@ export class Psyduck extends Pokemon {
   skill = Ability.PSYSHOCK
   passive = Passive.PSYDUCK
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Golduck extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.PSYCHIC])
@@ -4031,7 +4249,8 @@ export class Golduck extends Pokemon {
   skill = Ability.PSYSHOCK
   passive = Passive.PSYDUCK
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Squirtle extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD])
@@ -4046,7 +4265,8 @@ export class Squirtle extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.HYDRO_PUMP
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class Wartortle extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD])
@@ -4061,7 +4281,8 @@ export class Wartortle extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.HYDRO_PUMP
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class Blastoise extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD])
@@ -4075,7 +4296,8 @@ export class Blastoise extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.HYDRO_PUMP
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class Bellsprout extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
@@ -4092,7 +4314,8 @@ export class Bellsprout extends Pokemon {
   range = 1
   skill = Ability.ROOT
   passive = Passive.HATCH
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Weepinbell extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
@@ -4109,7 +4332,8 @@ export class Weepinbell extends Pokemon {
   range = 1
   skill = Ability.ROOT
   passive = Passive.HATCH
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Victreebel extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
@@ -4123,7 +4347,8 @@ export class Victreebel extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROOT
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 /*export class Pikipek extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -4142,7 +4367,8 @@ export class Victreebel extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.DEFAULT
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Trumbeak extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -4161,7 +4387,8 @@ export class Trumbeak extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.DEFAULT
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Toucannon extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -4179,7 +4406,8 @@ export class Toucannon extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.DEFAULT
-  attackSprite = AttackSprite.NORMAL_MELEE}*/
+  attackSprite = AttackSprite.NORMAL_MELEE
+}*/
 
 export class Geodude extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ROCK])
@@ -4194,7 +4422,8 @@ export class Geodude extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROCK_SLIDE
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Graveler extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ROCK])
@@ -4209,7 +4438,8 @@ export class Graveler extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROCK_SLIDE
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Golem extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.ROCK])
@@ -4223,7 +4453,8 @@ export class Golem extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROCK_SLIDE
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Totodile extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -4242,7 +4473,8 @@ export class Totodile extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.CRUNCH
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Croconaw extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -4261,7 +4493,8 @@ export class Croconaw extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.CRUNCH
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Feraligatr extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -4279,7 +4512,8 @@ export class Feraligatr extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.CRUNCH
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Azurill extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FAIRY, Synergy.BABY])
@@ -4294,7 +4528,8 @@ export class Azurill extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.PLAY_ROUGH
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class Marill extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FAIRY])
@@ -4309,7 +4544,8 @@ export class Marill extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.PLAY_ROUGH
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class Azumarill extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FAIRY])
@@ -4323,7 +4559,8 @@ export class Azumarill extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.PLAY_ROUGH
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class Zubat extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -4342,7 +4579,8 @@ export class Zubat extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.LEECH_LIFE
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Golbat extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -4361,7 +4599,8 @@ export class Golbat extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.LEECH_LIFE
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Crobat extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -4379,7 +4618,8 @@ export class Crobat extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.LEECH_LIFE
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Mareep extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -4398,7 +4638,8 @@ export class Mareep extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.THUNDER
-  attackSprite = AttackSprite.ELECTRIC_RANGE}
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+}
 
 export class Flaffy extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -4417,7 +4658,8 @@ export class Flaffy extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.THUNDER
-  attackSprite = AttackSprite.ELECTRIC_RANGE}
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+}
 
 export class Ampharos extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -4435,7 +4677,8 @@ export class Ampharos extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.THUNDER
-  attackSprite = AttackSprite.ELECTRIC_RANGE}
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+}
 
 export class Cleffa extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.NORMAL, Synergy.BABY])
@@ -4458,7 +4701,8 @@ export class Cleffa extends Pokemon {
       regionSynergies.includes(Synergy.BABY) ||
       regionSynergies.includes(Synergy.LIGHT)
     )
-  }}
+  }
+}
 
 export class Clefairy extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.NORMAL, Synergy.LIGHT])
@@ -4481,7 +4725,8 @@ export class Clefairy extends Pokemon {
       regionSynergies.includes(Synergy.BABY) ||
       regionSynergies.includes(Synergy.LIGHT)
     )
-  }}
+  }
+}
 
 export class Clefable extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.NORMAL, Synergy.LIGHT])
@@ -4503,7 +4748,8 @@ export class Clefable extends Pokemon {
       regionSynergies.includes(Synergy.BABY) ||
       regionSynergies.includes(Synergy.LIGHT)
     )
-  }}
+  }
+}
 
 export class Caterpie extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG])
@@ -4518,7 +4764,8 @@ export class Caterpie extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.STRING_SHOT
-  attackSprite = AttackSprite.BUG_RANGE}
+  attackSprite = AttackSprite.BUG_RANGE
+}
 
 export class Metapod extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG])
@@ -4533,7 +4780,8 @@ export class Metapod extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.STRING_SHOT
-  attackSprite = AttackSprite.BUG_RANGE}
+  attackSprite = AttackSprite.BUG_RANGE
+}
 
 export class Butterfree extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG, Synergy.FLYING])
@@ -4547,7 +4795,8 @@ export class Butterfree extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.STRING_SHOT
-  attackSprite = AttackSprite.BUG_RANGE}
+  attackSprite = AttackSprite.BUG_RANGE
+}
 
 export class Weedle extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.POISON, Synergy.BUG])
@@ -4562,7 +4811,8 @@ export class Weedle extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BUG_BUZZ
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class Kakuna extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.POISON, Synergy.BUG])
@@ -4577,7 +4827,8 @@ export class Kakuna extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BUG_BUZZ
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class Beedrill extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.POISON, Synergy.BUG, Synergy.FLYING])
@@ -4591,7 +4842,8 @@ export class Beedrill extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BUG_BUZZ
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class Pidgey extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLYING])
@@ -4606,7 +4858,8 @@ export class Pidgey extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.HURRICANE
-  attackSprite = AttackSprite.FLYING_RANGE}
+  attackSprite = AttackSprite.FLYING_RANGE
+}
 
 export class Pidgeotto extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLYING])
@@ -4621,7 +4874,8 @@ export class Pidgeotto extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.HURRICANE
-  attackSprite = AttackSprite.FLYING_RANGE}
+  attackSprite = AttackSprite.FLYING_RANGE
+}
 
 export class Pidgeot extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLYING])
@@ -4635,7 +4889,8 @@ export class Pidgeot extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.HURRICANE
-  attackSprite = AttackSprite.FLYING_RANGE}
+  attackSprite = AttackSprite.FLYING_RANGE
+}
 
 export class Hoppip extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.FLORA, Synergy.GRASS])
@@ -4650,7 +4905,8 @@ export class Hoppip extends Pokemon {
   maxPP = 110
   range = 2
   skill = Ability.ACROBATICS
-  attackSprite = AttackSprite.FLYING_RANGE}
+  attackSprite = AttackSprite.FLYING_RANGE
+}
 
 export class Skiploom extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.FLORA, Synergy.GRASS])
@@ -4665,7 +4921,8 @@ export class Skiploom extends Pokemon {
   maxPP = 110
   range = 2
   skill = Ability.ACROBATICS
-  attackSprite = AttackSprite.FLYING_RANGE}
+  attackSprite = AttackSprite.FLYING_RANGE
+}
 
 export class Jumpluff extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.FLORA, Synergy.GRASS])
@@ -4679,7 +4936,8 @@ export class Jumpluff extends Pokemon {
   maxPP = 110
   range = 2
   skill = Ability.ACROBATICS
-  attackSprite = AttackSprite.FLYING_RANGE}
+  attackSprite = AttackSprite.FLYING_RANGE
+}
 
 export class Seedot extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.DARK])
@@ -4694,7 +4952,8 @@ export class Seedot extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PAYBACK
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Nuzleaf extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.DARK])
@@ -4709,7 +4968,8 @@ export class Nuzleaf extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PAYBACK
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Shiftry extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.DARK])
@@ -4723,7 +4983,8 @@ export class Shiftry extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PAYBACK
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Charmander extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FIRE])
@@ -4738,7 +4999,8 @@ export class Charmander extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLAST_BURN
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class Charmeleon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FIRE])
@@ -4753,7 +5015,8 @@ export class Charmeleon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLAST_BURN
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class Charizard extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FIRE, Synergy.FLYING])
@@ -4767,7 +5030,8 @@ export class Charizard extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLAST_BURN
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class Magikarp extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER])
@@ -4784,7 +5048,8 @@ export class Magikarp extends Pokemon {
   skill = Ability.SPLASH
   passive = Passive.MAGIKARP
   attackSprite = AttackSprite.WATER_MELEE
-  evolutionRule = new CountEvolutionRule(8)}
+  evolutionRule = new CountEvolutionRule(8)
+}
 
 export class Gyarados extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -4805,7 +5070,8 @@ export class Gyarados extends Pokemon {
   attackSprite = AttackSprite.WATER_MELEE
   onAcquired(player: Player) {
     player.titles.add(Title.FISHERMAN)
-  }}
+  }
+}
 
 export class Rattata extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
@@ -4820,7 +5086,8 @@ export class Rattata extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.AGILITY
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Raticate extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
@@ -4834,7 +5101,8 @@ export class Raticate extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.AGILITY
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class AlolanRattata extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
@@ -4854,7 +5122,8 @@ export class AlolanRattata extends Pokemon {
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.DARK)
-  }}
+  }
+}
 
 export class AlolanRaticate extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
@@ -4873,7 +5142,8 @@ export class AlolanRaticate extends Pokemon {
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.DARK)
-  }}
+  }
+}
 
 export class Spearow extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FLYING])
@@ -4888,7 +5158,8 @@ export class Spearow extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PECK
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Fearow extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FLYING])
@@ -4902,7 +5173,8 @@ export class Fearow extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PECK
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Meloetta extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.SOUND])
@@ -4923,7 +5195,8 @@ export class Meloetta extends Pokemon {
     if (y === 3) {
       player.transformPokemon(this, Pkm.PIROUETTE_MELOETTA)
     }
-  }}
+  }
+}
 
 export class PirouetteMeloetta extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -4948,7 +5221,8 @@ export class PirouetteMeloetta extends Pokemon {
     if (y !== 3) {
       player.transformPokemon(this, Pkm.MELOETTA)
     }
-  }}
+  }
+}
 
 export class Lugia extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -4969,7 +5243,8 @@ export class Lugia extends Pokemon {
   range = 1
   skill = Ability.SKY_ATTACK
   passive = Passive.LUGIA
-  attackSprite = AttackSprite.FLYING_MELEE}
+  attackSprite = AttackSprite.FLYING_MELEE
+}
 
 export class ShadowLugia extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -4989,7 +5264,8 @@ export class ShadowLugia extends Pokemon {
   range = 1
   skill = Ability.SKY_ATTACK_SHADOW
   passive = Passive.NIGHT
-  attackSprite = AttackSprite.FLYING_MELEE}
+  attackSprite = AttackSprite.FLYING_MELEE
+}
 
 export class Giratina extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
@@ -5010,7 +5286,8 @@ export class Giratina extends Pokemon {
     if (y !== 3) {
       player.transformPokemon(this, Pkm.ORIGIN_GIRATINA)
     }
-  }}
+  }
+}
 
 export class OriginGiratina extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -5035,7 +5312,8 @@ export class OriginGiratina extends Pokemon {
     if (y === 3) {
       player.transformPokemon(this, Pkm.GIRATINA)
     }
-  }}
+  }
+}
 
 export class Zapdos extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FLYING])
@@ -5050,7 +5328,8 @@ export class Zapdos extends Pokemon {
   range = 2
   skill = Ability.CHARGE
   passive = Passive.STORM
-  attackSprite = AttackSprite.ELECTRIC_RANGE}
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+}
 
 export class GalarianZapdos extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.FLYING])
@@ -5064,7 +5343,8 @@ export class GalarianZapdos extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.THUNDEROUS_KICK
-  attackSprite = AttackSprite.FLYING_MELEE}
+  attackSprite = AttackSprite.FLYING_MELEE
+}
 
 export class Zeraora extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ELECTRIC])
@@ -5078,7 +5358,8 @@ export class Zeraora extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PLASMA_FIST
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class Stantler extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.PSYCHIC, Synergy.FIELD])
@@ -5092,7 +5373,8 @@ export class Stantler extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PSYSHIELD_BASH
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Miltank extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -5110,7 +5392,8 @@ export class Miltank extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROLLOUT
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Yveltal extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FLYING])
@@ -5124,7 +5407,8 @@ export class Yveltal extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEATH_WING
-  attackSprite = AttackSprite.DARK_MELEE}
+  attackSprite = AttackSprite.DARK_MELEE
+}
 
 export class Moltres extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FLYING])
@@ -5138,7 +5422,8 @@ export class Moltres extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.OVERHEAT
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class GalarianMoltres extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FLYING])
@@ -5152,7 +5437,8 @@ export class GalarianMoltres extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.FIERY_WRATH
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Pinsir extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.BUG])
@@ -5166,7 +5452,8 @@ export class Pinsir extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.GUILLOTINE
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Articuno extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FLYING])
@@ -5181,7 +5468,8 @@ export class Articuno extends Pokemon {
   range = 2
   skill = Ability.BLIZZARD
   passive = Passive.SNOW
-  attackSprite = AttackSprite.FLYING_RANGE}
+  attackSprite = AttackSprite.FLYING_RANGE
+}
 
 export class GalarianArticuno extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FLYING])
@@ -5195,7 +5483,8 @@ export class GalarianArticuno extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.FREEZING_GLARE
-  attackSprite = AttackSprite.FLYING_RANGE}
+  attackSprite = AttackSprite.FLYING_RANGE
+}
 
 export class Dialga extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.STEEL])
@@ -5209,7 +5498,8 @@ export class Dialga extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.ROAR_OF_TIME
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Palkia extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.WATER])
@@ -5223,7 +5513,8 @@ export class Palkia extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.SPACIAL_REND
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Melmetal extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.AMORPHOUS])
@@ -5238,7 +5529,8 @@ export class Melmetal extends Pokemon {
   range = 1
   skill = Ability.DOUBLE_IRON_BASH
   attackSprite = AttackSprite.DRAGON_MELEE
-  passive = Passive.MELMETAL}
+  passive = Passive.MELMETAL
+}
 
 export class Suicune extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.WATER, Synergy.FIELD])
@@ -5252,7 +5544,8 @@ export class Suicune extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.AQUA_JET
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Raikou extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -5270,7 +5563,8 @@ export class Raikou extends Pokemon {
   maxPP = 130
   range = 1
   skill = Ability.VOLT_SWITCH
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class Entei extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIRE, Synergy.FIELD])
@@ -5284,7 +5578,8 @@ export class Entei extends Pokemon {
   maxPP = 130
   range = 1
   skill = Ability.FLAME_CHARGE
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class Regice extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.HUMAN])
@@ -5298,7 +5593,8 @@ export class Regice extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ICICLE_CRASH
-  attackSprite = AttackSprite.ICE_MELEE}
+  attackSprite = AttackSprite.ICE_MELEE
+}
 
 export class Seviper extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.POISON, Synergy.MONSTER])
@@ -5312,7 +5608,8 @@ export class Seviper extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.VENOSHOCK
-  attackSprite = AttackSprite.POISON_MELEE}
+  attackSprite = AttackSprite.POISON_MELEE
+}
 
 export class Lunatone extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.PSYCHIC, Synergy.DARK])
@@ -5327,7 +5624,8 @@ export class Lunatone extends Pokemon {
   range = 2
   skill = Ability.COSMIC_POWER_MOON
   passive = Passive.NIGHT
-  attackSprite = AttackSprite.DARK_RANGE}
+  attackSprite = AttackSprite.DARK_RANGE
+}
 
 export class Solrock extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.FIRE, Synergy.LIGHT])
@@ -5342,7 +5640,8 @@ export class Solrock extends Pokemon {
   range = 2
   skill = Ability.COSMIC_POWER_SUN
   passive = Passive.SUN
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Regirock extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.HUMAN])
@@ -5356,7 +5655,8 @@ export class Regirock extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.STEALTH_ROCKS
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Tauros extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
@@ -5370,7 +5670,8 @@ export class Tauros extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HEAD_SMASH
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Heracross extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FIGHTING])
@@ -5385,7 +5686,8 @@ export class Heracross extends Pokemon {
   range = 1
   skill = Ability.CLOSE_COMBAT
   passive = Passive.GUTS
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Zangoose extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
@@ -5400,7 +5702,8 @@ export class Zangoose extends Pokemon {
   range = 1
   skill = Ability.FACADE
   passive = Passive.TOXIC_BOOST
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Registeel extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.HUMAN])
@@ -5414,7 +5717,8 @@ export class Registeel extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFENSE_CURL
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Regigigas extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -5436,8 +5740,9 @@ export class Regigigas extends Pokemon {
   attackSprite = AttackSprite.DRAGON_MELEE
 
   onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.addAttackSpeed(-25, entity, 0, false)
-  }}
+    entity.addSpeed(-30, entity, 0, false)
+  }
+}
 
 export class Kyogre extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.MONSTER])
@@ -5454,7 +5759,8 @@ export class Kyogre extends Pokemon {
   range = 3
   skill = Ability.ORIGIN_PULSE
   passive = Passive.PRIMAL
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class Groudon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.MONSTER])
@@ -5471,7 +5777,8 @@ export class Groudon extends Pokemon {
   range = 1
   skill = Ability.EARTHQUAKE
   passive = Passive.PRIMAL
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class Rayquaza extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FLYING])
@@ -5488,7 +5795,8 @@ export class Rayquaza extends Pokemon {
   range = 1
   skill = Ability.DRACO_METEOR
   passive = Passive.PRIMAL
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Eevee extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
@@ -5546,7 +5854,8 @@ export class Eevee extends Pokemon {
           return Pkm.GLACEON
       }
     }
-  )}
+  )
+}
 
 export class Vaporeon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD])
@@ -5560,7 +5869,8 @@ export class Vaporeon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Jolteon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
@@ -5574,7 +5884,8 @@ export class Jolteon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class Flareon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
@@ -5588,7 +5899,8 @@ export class Flareon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class Espeon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FIELD])
@@ -5602,7 +5914,8 @@ export class Espeon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
-  attackSprite = AttackSprite.PSYCHIC_MELEE}
+  attackSprite = AttackSprite.PSYCHIC_MELEE
+}
 
 export class Umbreon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIELD])
@@ -5616,7 +5929,8 @@ export class Umbreon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
-  attackSprite = AttackSprite.DARK_MELEE}
+  attackSprite = AttackSprite.DARK_MELEE
+}
 
 export class Leafeon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIELD])
@@ -5630,7 +5944,8 @@ export class Leafeon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Sylveon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FIELD])
@@ -5644,7 +5959,8 @@ export class Sylveon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
-  attackSprite = AttackSprite.FAIRY_MELEE}
+  attackSprite = AttackSprite.FAIRY_MELEE
+}
 
 export class Glaceon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FIELD])
@@ -5658,7 +5974,8 @@ export class Glaceon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
-  attackSprite = AttackSprite.ICE_MELEE}
+  attackSprite = AttackSprite.ICE_MELEE
+}
 
 export class Volcanion extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.WATER, Synergy.AQUATIC])
@@ -5672,7 +5989,8 @@ export class Volcanion extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.STEAM_ERUPTION
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Darkrai extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -5690,7 +6008,8 @@ export class Darkrai extends Pokemon {
   maxPP = 130
   range = 2
   skill = Ability.DARK_VOID
-  attackSprite = AttackSprite.DARK_RANGE}
+  attackSprite = AttackSprite.DARK_RANGE
+}
 
 export class Larvesta extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.BUG])
@@ -5706,7 +6025,8 @@ export class Larvesta extends Pokemon {
   range = 3
   skill = Ability.FIERY_DANCE
   additional = true
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Volcarona extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.BUG])
@@ -5721,7 +6041,8 @@ export class Volcarona extends Pokemon {
   range = 3
   skill = Ability.FIERY_DANCE
   additional = true
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Chatot extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.SOUND])
@@ -5735,7 +6056,8 @@ export class Chatot extends Pokemon {
   maxPP = 80
   range = 3
   skill = Ability.CHATTER
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Farfetchd extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -5786,7 +6108,8 @@ export class Kecleon extends Pokemon {
   range = 1
   skill = Ability.ILLUSION
   passive = Passive.PROTEAN2
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 function updateCastform(pokemon: Pokemon, weather: Weather, player: Player) {
   let weatherForm: Pkm = Pkm.CASTFORM
@@ -5824,7 +6147,8 @@ export class Castform extends Pokemon {
     player
   }: { weather: Weather; player: Player }) {
     updateCastform(this, weather, player)
-  }}
+  }
+}
 
 export class CastformSun extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -5850,7 +6174,8 @@ export class CastformSun extends Pokemon {
     player
   }: { weather: Weather; player: Player }) {
     updateCastform(this, weather, player)
-  }}
+  }
+}
 
 export class CastformRain extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -5876,7 +6201,8 @@ export class CastformRain extends Pokemon {
     player
   }: { weather: Weather; player: Player }) {
     updateCastform(this, weather, player)
-  }}
+  }
+}
 
 export class CastformHail extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -5902,7 +6228,8 @@ export class CastformHail extends Pokemon {
     player
   }: { weather: Weather; player: Player }) {
     updateCastform(this, weather, player)
-  }}
+  }
+}
 
 export class Landorus extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.GROUND])
@@ -5917,7 +6244,8 @@ export class Landorus extends Pokemon {
   range = 3
   skill = Ability.SANDSEAR_STORM
   passive = Passive.LANDORUS
-  attackSprite = AttackSprite.FLYING_RANGE}
+  attackSprite = AttackSprite.FLYING_RANGE
+}
 
 export class Thundurus extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ELECTRIC])
@@ -5932,7 +6260,8 @@ export class Thundurus extends Pokemon {
   range = 3
   skill = Ability.WILDBOLT_STORM
   passive = Passive.THUNDURUS
-  attackSprite = AttackSprite.FLYING_RANGE}
+  attackSprite = AttackSprite.FLYING_RANGE
+}
 
 export class Tornadus extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ICE])
@@ -5947,7 +6276,8 @@ export class Tornadus extends Pokemon {
   range = 3
   skill = Ability.BLEAKWIND_STORM
   passive = Passive.TORNADUS
-  attackSprite = AttackSprite.FLYING_RANGE}
+  attackSprite = AttackSprite.FLYING_RANGE
+}
 
 export class Enamorus extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.FAIRY])
@@ -5962,7 +6292,8 @@ export class Enamorus extends Pokemon {
   range = 3
   skill = Ability.SPRINGTIDE_STORM
   passive = Passive.ENAMORUS
-  attackSprite = AttackSprite.FLYING_RANGE}
+  attackSprite = AttackSprite.FLYING_RANGE
+}
 
 export class Keldeo extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIGHTING])
@@ -5976,7 +6307,8 @@ export class Keldeo extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SECRET_SWORD
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class Terrakion extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.FIGHTING])
@@ -5990,7 +6322,8 @@ export class Terrakion extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.SACRED_SWORD_CAVERN
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Virizion extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING])
@@ -6004,7 +6337,8 @@ export class Virizion extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.SACRED_SWORD_GRASS
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Cobalion extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FIGHTING])
@@ -6018,7 +6352,8 @@ export class Cobalion extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.SACRED_SWORD_IRON
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 
 export class Mawile extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -6036,7 +6371,8 @@ export class Mawile extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.PLAY_ROUGH
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 
 export class Phione extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -6057,7 +6393,8 @@ export class Phione extends Pokemon {
   range = 3
   skill = Ability.TAKE_HEART
   passive = Passive.PHIONE
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Manaphy extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -6075,7 +6412,8 @@ export class Manaphy extends Pokemon {
   maxPP = 80
   range = 3
   skill = Ability.TAKE_HEART
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Rotom extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -6093,7 +6431,8 @@ export class Rotom extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.CALM_MIND
-  attackSprite = AttackSprite.ELECTRIC_RANGE}
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+}
 
 export class RotomDrone extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
@@ -6107,7 +6446,8 @@ export class RotomDrone extends Pokemon {
   maxPP = 50
   range = 3
   skill = Ability.FLASH
-  attackSprite = AttackSprite.GHOST_RANGE}
+  attackSprite = AttackSprite.GHOST_RANGE
+}
 
 export class Spiritomb extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -6125,7 +6465,8 @@ export class Spiritomb extends Pokemon {
   maxPP = 70
   range = 2
   skill = Ability.SHADOW_BALL
-  attackSprite = AttackSprite.DARK_RANGE}
+  attackSprite = AttackSprite.DARK_RANGE
+}
 
 export class Absol extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
@@ -6139,7 +6480,8 @@ export class Absol extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.NIGHT_SLASH
-  attackSprite = AttackSprite.DARK_MELEE}
+  attackSprite = AttackSprite.DARK_MELEE
+}
 
 export class Delibird extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FLYING, Synergy.FIELD])
@@ -6153,7 +6495,8 @@ export class Delibird extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PRESENT
-  attackSprite = AttackSprite.ICE_MELEE}
+  attackSprite = AttackSprite.ICE_MELEE
+}
 
 export class IronBundle extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -6171,7 +6514,8 @@ export class IronBundle extends Pokemon {
   maxPP = 110
   range = 1
   skill = Ability.AURORA_BEAM
-  attackSprite = AttackSprite.ICE_MELEE}
+  attackSprite = AttackSprite.ICE_MELEE
+}
 
 export class Lapras extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ICE])
@@ -6185,7 +6529,8 @@ export class Lapras extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.DIVE
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Latias extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.PSYCHIC])
@@ -6200,7 +6545,8 @@ export class Latias extends Pokemon {
   range = 3
   skill = Ability.MIST_BALL
   passive = Passive.SHARED_VISION
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Latios extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.PSYCHIC])
@@ -6215,7 +6561,8 @@ export class Latios extends Pokemon {
   range = 3
   skill = Ability.LUSTER_PURGE
   passive = Passive.SHARED_VISION
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Uxie extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FAIRY])
@@ -6229,7 +6576,8 @@ export class Uxie extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.KNOWLEDGE_THIEF
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Mesprit extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FAIRY])
@@ -6243,7 +6591,8 @@ export class Mesprit extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.SONG_OF_DESIRE
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Azelf extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FAIRY])
@@ -6257,7 +6606,8 @@ export class Azelf extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.NASTY_PLOT
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Mew extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.AMORPHOUS])
@@ -6276,7 +6626,8 @@ export class Mew extends Pokemon {
 
   onSpawn({ entity }: { entity: IPokemonEntity }): void {
     entity.effectsSet.add(new SynchroEffect())
-  }}
+  }
+}
 
 export class Mewtwo extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -6294,7 +6645,8 @@ export class Mewtwo extends Pokemon {
   maxPP = 120
   range = 3
   skill = Ability.PSYSTRIKE
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Marshadow extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FIGHTING])
@@ -6308,7 +6660,8 @@ export class Marshadow extends Pokemon {
   maxPP = 130
   range = 1
   skill = Ability.SPECTRAL_THIEF
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 
 export class Kyurem extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.ICE])
@@ -6322,7 +6675,8 @@ export class Kyurem extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.GLACIATE
-  attackSprite = AttackSprite.ICE_RANGE}
+  attackSprite = AttackSprite.ICE_RANGE
+}
 
 export class Reshiram extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FIRE])
@@ -6336,7 +6690,8 @@ export class Reshiram extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.BLUE_FLARE
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Zekrom extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.ELECTRIC])
@@ -6350,7 +6705,8 @@ export class Zekrom extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.FUSION_BOLT
-  attackSprite = AttackSprite.ELECTRIC_RANGE}
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+}
 
 export class Celebi extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -6369,7 +6725,8 @@ export class Celebi extends Pokemon {
   range = 3
   skill = Ability.TIME_TRAVEL
   passive = Passive.CELEBI
-  attackSprite = AttackSprite.GRASS_RANGE}
+  attackSprite = AttackSprite.GRASS_RANGE
+}
 
 export class Victini extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.PSYCHIC])
@@ -6387,7 +6744,8 @@ export class Victini extends Pokemon {
   attackSprite = AttackSprite.FIRE_MELEE
   beforeSimulationStart({ opponentEffects }: { opponentEffects: Set<Effect> }) {
     opponentEffects.add(Effect.VICTINI_PASSIVE)
-  }}
+  }
+}
 
 export class Jirachi extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -6409,7 +6767,8 @@ export class Jirachi extends Pokemon {
   attackSprite = AttackSprite.PSYCHIC_RANGE
   beforeSimulationStart({ teamEffects }: { teamEffects: Set<Effect> }) {
     teamEffects.add(Effect.GOOD_LUCK)
-  }}
+  }
+}
 
 export class Arceus extends Pokemon {
   types = new SetSchema<Synergy>([])
@@ -6424,7 +6783,8 @@ export class Arceus extends Pokemon {
   range = 1
   skill = Ability.JUDGEMENT
   passive = Passive.PROTEAN3
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Deoxys extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -6448,7 +6808,8 @@ export class Deoxys extends Pokemon {
     if (player.items.includes(Item.METEORITE) === false) {
       player.items.push(Item.METEORITE)
     }
-  }}
+  }
+}
 
 export class DeoxysDefense extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -6472,7 +6833,8 @@ export class DeoxysDefense extends Pokemon {
     if (player.items.includes(Item.METEORITE) === false) {
       player.items.push(Item.METEORITE)
     }
-  }}
+  }
+}
 
 export class DeoxysAttack extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -6496,7 +6858,8 @@ export class DeoxysAttack extends Pokemon {
     if (player.items.includes(Item.METEORITE) === false) {
       player.items.push(Item.METEORITE)
     }
-  }}
+  }
+}
 
 export class DeoxysSpeed extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -6520,7 +6883,8 @@ export class DeoxysSpeed extends Pokemon {
     if (player.items.includes(Item.METEORITE) === false) {
       player.items.push(Item.METEORITE)
     }
-  }}
+  }
+}
 
 export class Shaymin extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
@@ -6537,7 +6901,8 @@ export class Shaymin extends Pokemon {
   range = 3
   skill = Ability.SEED_FLARE
   passive = Passive.SHAYMIN
-  attackSprite = AttackSprite.GRASS_RANGE}
+  attackSprite = AttackSprite.GRASS_RANGE
+}
 
 export class ShayminSky extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA, Synergy.FLYING])
@@ -6551,7 +6916,8 @@ export class ShayminSky extends Pokemon {
   maxPP = 110
   range = 3
   skill = Ability.SEED_FLARE
-  attackSprite = AttackSprite.GRASS_RANGE}
+  attackSprite = AttackSprite.GRASS_RANGE
+}
 
 export class Cresselia extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -6569,7 +6935,8 @@ export class Cresselia extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.LUNAR_BLESSING
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Heatran extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.STEEL])
@@ -6583,7 +6950,8 @@ export class Heatran extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.MAGMA_STORM
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class HooH extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FLYING, Synergy.LIGHT])
@@ -6612,7 +6980,8 @@ export class Torkoal extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SMOKE_SCREEN
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class Heatmor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
@@ -6626,7 +6995,8 @@ export class Heatmor extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.FIRE_LASH
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class Cryogonal extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.AMORPHOUS])
@@ -6640,7 +7010,8 @@ export class Cryogonal extends Pokemon {
   maxPP = 110
   range = 3
   skill = Ability.FREEZE_DRY
-  attackSprite = AttackSprite.ICE_RANGE}
+  attackSprite = AttackSprite.ICE_RANGE
+}
 
 export class Drampa extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.NORMAL])
@@ -6655,7 +7026,8 @@ export class Drampa extends Pokemon {
   range = 3
   skill = Ability.DRAGON_PULSE
   passive = Passive.BERSERK
-  attackSprite = AttackSprite.DRAGON_RANGE}
+  attackSprite = AttackSprite.DRAGON_RANGE
+}
 
 export class PrimalGroudon extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -6677,7 +7049,8 @@ export class PrimalGroudon extends Pokemon {
   attackSprite = AttackSprite.FIRE_MELEE
   onAcquired(player: Player) {
     player.titles.add(Title.PRIMAL)
-  }}
+  }
+}
 
 export class PrimalKyogre extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -6699,7 +7072,8 @@ export class PrimalKyogre extends Pokemon {
   attackSprite = AttackSprite.WATER_RANGE
   onAcquired(player: Player) {
     player.titles.add(Title.PRIMAL)
-  }}
+  }
+}
 
 export class MegaRayquaza extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FLYING])
@@ -6717,7 +7091,8 @@ export class MegaRayquaza extends Pokemon {
   attackSprite = AttackSprite.FIRE_RANGE
   onAcquired(player: Player) {
     player.titles.add(Title.PRIMAL)
-  }}
+  }
+}
 
 export class Oddish extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.POISON, Synergy.GRASS])
@@ -6732,7 +7107,8 @@ export class Oddish extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.STUN_SPORE
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Gloom extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.POISON, Synergy.GRASS])
@@ -6747,7 +7123,8 @@ export class Gloom extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.STUN_SPORE
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Vileplume extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.POISON, Synergy.GRASS])
@@ -6762,7 +7139,8 @@ export class Vileplume extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.STUN_SPORE
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Bellossom extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.POISON, Synergy.GRASS])
@@ -6776,7 +7154,8 @@ export class Bellossom extends Pokemon {
   maxPP = 10
   range = 1
   skill = Ability.PETAL_BLIZZARD
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Amaura extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.ICE])
@@ -6792,7 +7171,8 @@ export class Amaura extends Pokemon {
   range = 1
   skill = Ability.HAIL
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Aurorus extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.ICE])
@@ -6807,7 +7187,8 @@ export class Aurorus extends Pokemon {
   range = 1
   skill = Ability.HAIL
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Carbink extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.ROCK, Synergy.FAIRY])
@@ -6823,7 +7204,8 @@ export class Carbink extends Pokemon {
   range = 1
   skill = Ability.DIAMOND_STORM
   additional = true
-  attackSprite = AttackSprite.FAIRY_MELEE}
+  attackSprite = AttackSprite.FAIRY_MELEE
+}
 
 export class Diancie extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.ROCK, Synergy.FAIRY])
@@ -6838,7 +7220,8 @@ export class Diancie extends Pokemon {
   range = 1
   skill = Ability.DIAMOND_STORM
   additional = true
-  attackSprite = AttackSprite.FAIRY_MELEE}
+  attackSprite = AttackSprite.FAIRY_MELEE
+}
 
 export class Sunkern extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIRE, Synergy.FLORA])
@@ -6854,7 +7237,8 @@ export class Sunkern extends Pokemon {
   range = 2
   skill = Ability.SOLAR_BEAM
   additional = true
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Sunflora extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIRE, Synergy.FLORA])
@@ -6869,7 +7253,8 @@ export class Sunflora extends Pokemon {
   range = 2
   skill = Ability.SOLAR_BEAM
   additional = true
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Mankey extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIGHTING])
@@ -6884,7 +7269,8 @@ export class Mankey extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.THRASH
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 
 export class Primeape extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIGHTING])
@@ -6901,7 +7287,8 @@ export class Primeape extends Pokemon {
   range = 1
   skill = Ability.THRASH
   passive = Passive.PRIMEAPE
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 
 export class Annihilape extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -6922,7 +7309,8 @@ export class Annihilape extends Pokemon {
   attackSprite = AttackSprite.FIGHTING_MELEE
   onAcquired(player: Player) {
     player.titles.add(Title.ANNIHILATOR)
-  }}
+  }
+}
 
 export class Anorith extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.BUG, Synergy.AQUATIC])
@@ -6938,7 +7326,8 @@ export class Anorith extends Pokemon {
   range = 1
   skill = Ability.HARDEN
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Armaldo extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.BUG, Synergy.AQUATIC])
@@ -6953,7 +7342,8 @@ export class Armaldo extends Pokemon {
   range = 1
   skill = Ability.HARDEN
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Wynaut extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -6978,7 +7368,8 @@ export class Wynaut extends Pokemon {
   onSpawn({ entity }: { entity: IPokemonEntity }) {
     entity.status.tree = true
     entity.toIdleState()
-  }}
+  }
+}
 
 export class Wobbuffet extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.AMORPHOUS])
@@ -6998,7 +7389,8 @@ export class Wobbuffet extends Pokemon {
   onSpawn({ entity }: { entity: IPokemonEntity }) {
     entity.status.tree = true
     entity.toIdleState()
-  }}
+  }
+}
 
 export class Munna extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -7019,7 +7411,8 @@ export class Munna extends Pokemon {
   skill = Ability.MOON_DREAM
   passive = Passive.DREAM_CATCHER
   additional = true
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Musharna extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -7039,7 +7432,8 @@ export class Musharna extends Pokemon {
   skill = Ability.MOON_DREAM
   passive = Passive.DREAM_CATCHER
   additional = true
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Archen extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.FLYING, Synergy.FOSSIL])
@@ -7055,7 +7449,8 @@ export class Archen extends Pokemon {
   range = 1
   skill = Ability.ROCK_SMASH
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Archeops extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.FLYING, Synergy.FOSSIL])
@@ -7070,7 +7465,8 @@ export class Archeops extends Pokemon {
   range = 2
   skill = Ability.ROCK_SMASH
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Gligar extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -7091,7 +7487,8 @@ export class Gligar extends Pokemon {
   range = 1
   skill = Ability.POISON_JAB
   passive = Passive.GLIGAR
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Gliscor extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -7111,7 +7508,8 @@ export class Gliscor extends Pokemon {
   skill = Ability.POISON_JAB
   passive = Passive.POISON_HEAL
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Shieldon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.STEEL])
@@ -7127,7 +7525,8 @@ export class Shieldon extends Pokemon {
   range = 1
   skill = Ability.IRON_DEFENSE
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Bastiodon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.STEEL])
@@ -7142,7 +7541,8 @@ export class Bastiodon extends Pokemon {
   range = 1
   skill = Ability.IRON_DEFENSE
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Mienfoo extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.FIELD])
@@ -7158,7 +7558,8 @@ export class Mienfoo extends Pokemon {
   range = 1
   skill = Ability.DRAIN_PUNCH
   additional = true
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 
 export class Mienshao extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.FIELD])
@@ -7173,7 +7574,8 @@ export class Mienshao extends Pokemon {
   range = 1
   skill = Ability.DRAIN_PUNCH
   additional = true
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 /*
 export class Tirtouga extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.WATER])
@@ -7189,7 +7591,8 @@ export class Tirtouga extends Pokemon {
   range = 1
   skill = Ability.DEFAULT
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Carracosta extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.WATER])
@@ -7204,7 +7607,8 @@ export class Carracosta extends Pokemon {
   range = 1
   skill = Ability.DEFAULT
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}*/
+  attackSprite = AttackSprite.ROCK_MELEE
+}*/
 
 export class Lileep extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.GRASS, Synergy.FLORA])
@@ -7220,7 +7624,8 @@ export class Lileep extends Pokemon {
   range = 2
   skill = Ability.LEECH_SEED
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Cradily extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.GRASS, Synergy.FLORA])
@@ -7235,7 +7640,8 @@ export class Cradily extends Pokemon {
   range = 2
   skill = Ability.LEECH_SEED
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Cranidos extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.MONSTER])
@@ -7251,7 +7657,8 @@ export class Cranidos extends Pokemon {
   range = 1
   skill = Ability.HEAD_SMASH
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Rampardos extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.MONSTER])
@@ -7266,7 +7673,8 @@ export class Rampardos extends Pokemon {
   range = 1
   skill = Ability.HEAD_SMASH
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Kabuto extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.WATER])
@@ -7282,7 +7690,8 @@ export class Kabuto extends Pokemon {
   range = 1
   skill = Ability.PROTECT
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Kabutops extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.WATER])
@@ -7297,7 +7706,8 @@ export class Kabutops extends Pokemon {
   range = 1
   skill = Ability.SLASHING_CLAW
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Omanyte extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -7317,7 +7727,8 @@ export class Omanyte extends Pokemon {
   range = 2
   skill = Ability.ROCK_TOMB
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Omastar extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -7336,7 +7747,8 @@ export class Omastar extends Pokemon {
   range = 2
   skill = Ability.ROCK_TOMB
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 export class Clamperl extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.FOSSIL,
@@ -7376,7 +7788,8 @@ export class Clamperl extends Pokemon {
 
   onChangePosition(x: number, y: number, player: Player): void {
     player.refreshShopUI()
-  }}
+  }
+}
 
 export class Gorebyss extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -7396,7 +7809,8 @@ export class Gorebyss extends Pokemon {
   skill = Ability.HYDRO_PUMP
   passive = Passive.BIVALVE
   additional = true
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 export class Huntail extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.FOSSIL,
@@ -7415,7 +7829,8 @@ export class Huntail extends Pokemon {
   skill = Ability.ROCK_TOMB
   passive = Passive.BIVALVE
   additional = true
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 export class Relicanth extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.WATER, Synergy.FOSSIL])
   rarity = Rarity.UNIQUE
@@ -7428,7 +7843,8 @@ export class Relicanth extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ROCK_TOMB
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Tyrunt extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.ROCK, Synergy.FOSSIL])
@@ -7444,7 +7860,8 @@ export class Tyrunt extends Pokemon {
   range = 1
   skill = Ability.ROCK_HEAD
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Tyrantrum extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.ROCK, Synergy.FOSSIL])
@@ -7459,7 +7876,8 @@ export class Tyrantrum extends Pokemon {
   range = 1
   skill = Ability.ROCK_HEAD
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Aerodactyl extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.FLYING, Synergy.FOSSIL])
@@ -7473,7 +7891,8 @@ export class Aerodactyl extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.ROCK_SLIDE
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Genesect extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -7491,7 +7910,8 @@ export class Genesect extends Pokemon {
   maxPP = 80
   range = 4
   skill = Ability.LOCK_ON
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Hatenna extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.PSYCHIC])
@@ -7506,7 +7926,8 @@ export class Hatenna extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.MAGIC_POWDER
-  attackSprite = AttackSprite.PSYCHIC_MELEE}
+  attackSprite = AttackSprite.PSYCHIC_MELEE
+}
 
 export class Hattrem extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.PSYCHIC])
@@ -7521,7 +7942,8 @@ export class Hattrem extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.MAGIC_POWDER
-  attackSprite = AttackSprite.PSYCHIC_MELEE}
+  attackSprite = AttackSprite.PSYCHIC_MELEE
+}
 
 export class Hatterene extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.PSYCHIC])
@@ -7535,7 +7957,8 @@ export class Hatterene extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.MAGIC_POWDER
-  attackSprite = AttackSprite.PSYCHIC_MELEE}
+  attackSprite = AttackSprite.PSYCHIC_MELEE
+}
 export class Fennekin extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.PSYCHIC, Synergy.HUMAN])
   rarity = Rarity.COMMON
@@ -7549,7 +7972,8 @@ export class Fennekin extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.MYSTICAL_FIRE
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 export class Braixen extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.PSYCHIC, Synergy.HUMAN])
   rarity = Rarity.COMMON
@@ -7563,7 +7987,8 @@ export class Braixen extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.MYSTICAL_FIRE
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 export class Delphox extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.PSYCHIC, Synergy.HUMAN])
   rarity = Rarity.COMMON
@@ -7576,7 +8001,8 @@ export class Delphox extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.MYSTICAL_FIRE
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Regieleki extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.HUMAN])
@@ -7590,7 +8016,8 @@ export class Regieleki extends Pokemon {
   maxPP = 120
   range = 2
   skill = Ability.THUNDER_CAGE
-  attackSprite = AttackSprite.ELECTRIC_RANGE}
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+}
 export class Regidrago extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.HUMAN])
   rarity = Rarity.UNIQUE
@@ -7603,7 +8030,8 @@ export class Regidrago extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.DRACO_ENERGY
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 export class Guzzlord extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.GOURMET,
@@ -7621,7 +8049,8 @@ export class Guzzlord extends Pokemon {
   range = 1
   skill = Ability.CRUNCH
   passive = Passive.GUZZLORD
-  attackSprite = AttackSprite.DARK_MELEE}
+  attackSprite = AttackSprite.DARK_MELEE
+}
 export class Eternatus extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
@@ -7638,7 +8067,8 @@ export class Eternatus extends Pokemon {
   maxPP = 130
   range = 1
   skill = Ability.DYNAMAX_CANNON
-  attackSprite = AttackSprite.POISON_MELEE}
+  attackSprite = AttackSprite.POISON_MELEE
+}
 
 export class Nincada extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG])
@@ -7655,7 +8085,8 @@ export class Nincada extends Pokemon {
   skill = Ability.WONDER_GUARD
   passive = Passive.NINCADA
   attackSprite = AttackSprite.BUG_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Ninjask extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING])
@@ -7680,7 +8111,8 @@ export class Ninjask extends Pokemon {
       pokemon.positionY = 0
       player.board.set(pokemon.id, pokemon)
     }
-  }}
+  }
+}
 
 export class Shedinja extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.GHOST])
@@ -7696,7 +8128,8 @@ export class Shedinja extends Pokemon {
   skill = Ability.WONDER_GUARD
   passive = Passive.WONDER_GUARD
   attackSprite = AttackSprite.BUG_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Happiny extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY, Synergy.BABY])
@@ -7711,7 +8144,8 @@ export class Happiny extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.SOFT_BOILED
-  attackSprite = AttackSprite.FAIRY_MELEE}
+  attackSprite = AttackSprite.FAIRY_MELEE
+}
 
 export class Chansey extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY])
@@ -7726,7 +8160,8 @@ export class Chansey extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.SOFT_BOILED
-  attackSprite = AttackSprite.FAIRY_MELEE}
+  attackSprite = AttackSprite.FAIRY_MELEE
+}
 
 export class Blissey extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY])
@@ -7740,7 +8175,8 @@ export class Blissey extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.SOFT_BOILED
-  attackSprite = AttackSprite.FAIRY_MELEE}
+  attackSprite = AttackSprite.FAIRY_MELEE
+}
 
 export class TapuKoko extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FAIRY])
@@ -7755,7 +8191,8 @@ export class TapuKoko extends Pokemon {
   range = 3
   skill = Ability.ELECTRIC_SURGE
   passive = Passive.ELECTRIC_TERRAIN
-  attackSprite = AttackSprite.ELECTRIC_RANGE}
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+}
 
 export class TapuLele extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FAIRY])
@@ -7770,7 +8207,8 @@ export class TapuLele extends Pokemon {
   range = 3
   skill = Ability.PSYCHIC_SURGE
   passive = Passive.PSYCHIC_TERRAIN
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Xerneas extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.LIGHT, Synergy.FLORA])
@@ -7785,7 +8223,8 @@ export class Xerneas extends Pokemon {
   range = 3
   skill = Ability.GEOMANCY
   passive = Passive.MISTY
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class TapuFini extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FAIRY])
@@ -7800,7 +8239,8 @@ export class TapuFini extends Pokemon {
   range = 3
   skill = Ability.MISTY_SURGE
   passive = Passive.MISTY_TERRAIN
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class TapuBulu extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FAIRY])
@@ -7815,7 +8255,8 @@ export class TapuBulu extends Pokemon {
   range = 1
   skill = Ability.GRASSY_SURGE
   passive = Passive.GRASSY_TERRAIN
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Stakataka extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.STEEL])
@@ -7829,7 +8270,8 @@ export class Stakataka extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.IRON_DEFENSE
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Blacephalon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.GHOST])
@@ -7843,7 +8285,8 @@ export class Blacephalon extends Pokemon {
   maxPP = 80
   range = 3
   skill = Ability.MIND_BLOWN
-  attackSprite = AttackSprite.GHOST_RANGE}
+  attackSprite = AttackSprite.GHOST_RANGE
+}
 
 export class Houndour extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.DARK])
@@ -7859,7 +8302,8 @@ export class Houndour extends Pokemon {
   range = 1
   skill = Ability.BEAT_UP
   attackSprite = AttackSprite.FIRE_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Houndoom extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.DARK])
@@ -7875,7 +8319,8 @@ export class Houndoom extends Pokemon {
   range = 1
   skill = Ability.BEAT_UP
   attackSprite = AttackSprite.FIRE_MELEE
-  additional = true}
+  additional = true
+}
 
 export class MegaHoundoom extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.DARK])
@@ -7891,7 +8336,8 @@ export class MegaHoundoom extends Pokemon {
   //skill = Ability.BEAT_UP
   skill = Ability.DEFAULT
   attackSprite = AttackSprite.FIRE_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Cacnea extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.DARK, Synergy.HUMAN])
@@ -7907,7 +8353,8 @@ export class Cacnea extends Pokemon {
   range = 1
   skill = Ability.HEAL_BLOCK
   additional = true
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Cacturne extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.DARK, Synergy.HUMAN])
@@ -7922,7 +8369,8 @@ export class Cacturne extends Pokemon {
   range = 1
   skill = Ability.HEAL_BLOCK
   additional = true
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Pumpkaboo extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.GRASS])
@@ -7938,7 +8386,8 @@ export class Pumpkaboo extends Pokemon {
   range = 1
   skill = Ability.TRICK_OR_TREAT
   additional = true
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 export class Gourgeist extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.GRASS])
   rarity = Rarity.EPIC
@@ -7952,7 +8401,8 @@ export class Gourgeist extends Pokemon {
   range = 1
   skill = Ability.TRICK_OR_TREAT
   additional = true
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Natu extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FLYING])
@@ -7968,7 +8418,8 @@ export class Natu extends Pokemon {
   range = 2
   skill = Ability.MAGIC_BOUNCE
   additional = true
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 export class Xatu extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FLYING])
   rarity = Rarity.UNCOMMON
@@ -7982,7 +8433,8 @@ export class Xatu extends Pokemon {
   range = 2
   skill = Ability.MAGIC_BOUNCE
   additional = true
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Noibat extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -8002,7 +8454,8 @@ export class Noibat extends Pokemon {
   range = 2
   skill = Ability.RAZOR_WIND
   additional = true
-  attackSprite = AttackSprite.FLYING_RANGE}
+  attackSprite = AttackSprite.FLYING_RANGE
+}
 export class Noivern extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
@@ -8020,7 +8473,8 @@ export class Noivern extends Pokemon {
   range = 2
   skill = Ability.RAZOR_WIND
   additional = true
-  attackSprite = AttackSprite.FLYING_RANGE}
+  attackSprite = AttackSprite.FLYING_RANGE
+}
 
 export class Shellder extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ICE, Synergy.ROCK])
@@ -8036,7 +8490,8 @@ export class Shellder extends Pokemon {
   range = 1
   skill = Ability.SHELL_SMASH
   additional = true
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Cloyster extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ICE, Synergy.ROCK])
@@ -8051,7 +8506,8 @@ export class Cloyster extends Pokemon {
   range = 1
   skill = Ability.SHELL_SMASH
   additional = true
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Buizel extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -8071,7 +8527,8 @@ export class Buizel extends Pokemon {
   range = 1
   skill = Ability.AQUA_JET
   additional = true
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 export class Floatzel extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.WATER,
@@ -8089,7 +8546,8 @@ export class Floatzel extends Pokemon {
   range = 1
   skill = Ability.AQUA_JET
   additional = true
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Ponyta extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
@@ -8105,7 +8563,8 @@ export class Ponyta extends Pokemon {
   range = 1
   skill = Ability.FLAME_CHARGE
   additional = true
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 export class Rapidash extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
   rarity = Rarity.EPIC
@@ -8119,7 +8578,8 @@ export class Rapidash extends Pokemon {
   range = 1
   skill = Ability.FLAME_CHARGE
   additional = true
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class GalarianPonyta extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -8140,7 +8600,8 @@ export class GalarianPonyta extends Pokemon {
   skill = Ability.PASTEL_VEIL
   regional = true
   additional = true
-  attackSprite = AttackSprite.FAIRY_MELEE}
+  attackSprite = AttackSprite.FAIRY_MELEE
+}
 export class GalarianRapidash extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.FAIRY,
@@ -8159,7 +8620,8 @@ export class GalarianRapidash extends Pokemon {
   skill = Ability.PASTEL_VEIL
   regional = true
   additional = true
-  attackSprite = AttackSprite.FAIRY_MELEE}
+  attackSprite = AttackSprite.FAIRY_MELEE
+}
 
 export class Makuhita extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.MONSTER])
@@ -8175,7 +8637,8 @@ export class Makuhita extends Pokemon {
   range = 1
   skill = Ability.DYNAMIC_PUNCH
   additional = true
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 export class Hariyama extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.MONSTER])
   rarity = Rarity.RARE
@@ -8189,7 +8652,8 @@ export class Hariyama extends Pokemon {
   range = 1
   skill = Ability.DYNAMIC_PUNCH
   additional = true
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 
 export class Sentret extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -8209,7 +8673,8 @@ export class Sentret extends Pokemon {
   range = 1
   skill = Ability.HELPING_HAND
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 export class Furret extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.GROUND,
@@ -8227,7 +8692,8 @@ export class Furret extends Pokemon {
   range = 1
   skill = Ability.HELPING_HAND
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Joltik extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ELECTRIC])
@@ -8243,7 +8709,8 @@ export class Joltik extends Pokemon {
   range = 1
   skill = Ability.ELECTRO_WEB
   additional = true
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 export class Galvantula extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ELECTRIC])
   rarity = Rarity.RARE
@@ -8257,7 +8724,8 @@ export class Galvantula extends Pokemon {
   range = 1
   skill = Ability.ELECTRO_WEB
   additional = true
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class Paras extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON, Synergy.GRASS])
@@ -8273,7 +8741,8 @@ export class Paras extends Pokemon {
   range = 1
   skill = Ability.ABSORB
   additional = true
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class Parasect extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON, Synergy.GRASS])
@@ -8288,7 +8757,8 @@ export class Parasect extends Pokemon {
   range = 1
   skill = Ability.ABSORB
   additional = true
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class Corphish extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.DARK])
@@ -8304,7 +8774,8 @@ export class Corphish extends Pokemon {
   range = 1
   skill = Ability.CRABHAMMER
   additional = true
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Crawdaunt extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.DARK])
@@ -8319,7 +8790,8 @@ export class Crawdaunt extends Pokemon {
   range = 1
   skill = Ability.CRABHAMMER
   additional = true
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 export class Meowth extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
   rarity = Rarity.RARE
@@ -8334,7 +8806,8 @@ export class Meowth extends Pokemon {
   range = 1
   skill = Ability.PAYDAY
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Persian extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
@@ -8349,7 +8822,8 @@ export class Persian extends Pokemon {
   range = 1
   skill = Ability.PAYDAY
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class AlolanMeowth extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.DARK])
@@ -8366,7 +8840,8 @@ export class AlolanMeowth extends Pokemon {
   skill = Ability.PICKUP
   regional = true
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class AlolanPersian extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.DARK])
@@ -8382,7 +8857,8 @@ export class AlolanPersian extends Pokemon {
   skill = Ability.PICKUP
   regional = true
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Hoothoot extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -8402,7 +8878,8 @@ export class Hoothoot extends Pokemon {
   range = 1
   skill = Ability.HYPNOSIS
   additional = true
-  attackSprite = AttackSprite.FLYING_MELEE}
+  attackSprite = AttackSprite.FLYING_MELEE
+}
 
 export class Noctowl extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -8421,7 +8898,8 @@ export class Noctowl extends Pokemon {
   range = 1
   skill = Ability.HYPNOSIS
   additional = true
-  attackSprite = AttackSprite.FLYING_MELEE}
+  attackSprite = AttackSprite.FLYING_MELEE
+}
 
 export class Munchlax extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -8442,7 +8920,8 @@ export class Munchlax extends Pokemon {
   skill = Ability.BODY_SLAM
   passive = Passive.GLUTTON
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Snorlax extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -8462,7 +8941,8 @@ export class Snorlax extends Pokemon {
   skill = Ability.BODY_SLAM
   passive = Passive.GLUTTON
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Poipole extends Pokemon {
   baseHp = 120
@@ -8483,7 +8963,8 @@ export class Poipole extends Pokemon {
 
   evolutionRule = new ConditionBasedEvolutionRule(
     (pokemon) => pokemon.hp >= 200
-  )}
+  )
+}
 
 export class Naganadel extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.POISON, Synergy.BUG])
@@ -8497,7 +8978,8 @@ export class Naganadel extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.FELL_STINGER
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Growlithe extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
@@ -8513,7 +8995,8 @@ export class Growlithe extends Pokemon {
   range = 1
   skill = Ability.FIRE_FANG
   attackSprite = AttackSprite.FIRE_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Arcanine extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
@@ -8528,7 +9011,8 @@ export class Arcanine extends Pokemon {
   range = 1
   skill = Ability.FIRE_FANG
   attackSprite = AttackSprite.FIRE_MELEE
-  additional = true}
+  additional = true
+}
 
 export class HisuiGrowlithe extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.ROCK, Synergy.FIELD])
@@ -8552,7 +9036,8 @@ export class HisuiGrowlithe extends Pokemon {
       (!state || state.additionalPokemons.includes(Pkm.GROWLITHE)) &&
       regionSynergies.includes(Synergy.ROCK)
     )
-  }}
+  }
+}
 
 export class HisuiArcanine extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.ROCK, Synergy.FIELD])
@@ -8575,7 +9060,8 @@ export class HisuiArcanine extends Pokemon {
       (!state || state.additionalPokemons.includes(Pkm.GROWLITHE)) &&
       regionSynergies.includes(Synergy.ROCK)
     )
-  }}
+  }
+}
 
 export class Smoochum extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.PSYCHIC, Synergy.BABY])
@@ -8591,7 +9077,8 @@ export class Smoochum extends Pokemon {
   range = 2
   skill = Ability.LOVELY_KISS
   additional = true
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Jynx extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.PSYCHIC, Synergy.HUMAN])
@@ -8606,7 +9093,8 @@ export class Jynx extends Pokemon {
   range = 2
   skill = Ability.LOVELY_KISS
   additional = true
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class MimeJr extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.PSYCHIC, Synergy.BABY])
@@ -8622,7 +9110,8 @@ export class MimeJr extends Pokemon {
   range = 2
   skill = Ability.MIMIC
   additional = true
-  attackSprite = AttackSprite.FAIRY_RANGE}
+  attackSprite = AttackSprite.FAIRY_RANGE
+}
 
 export class MrMime extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -8641,7 +9130,8 @@ export class MrMime extends Pokemon {
   range = 2
   skill = Ability.MIMIC
   additional = true
-  attackSprite = AttackSprite.FAIRY_RANGE}
+  attackSprite = AttackSprite.FAIRY_RANGE
+}
 
 export class Salandit extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.POISON])
@@ -8657,7 +9147,8 @@ export class Salandit extends Pokemon {
   range = 2
   skill = Ability.POISON
   additional = true
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Salazzle extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.POISON])
@@ -8672,7 +9163,8 @@ export class Salazzle extends Pokemon {
   range = 2
   skill = Ability.POISON
   additional = true
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Venonat extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING, Synergy.POISON])
@@ -8688,7 +9180,8 @@ export class Venonat extends Pokemon {
   range = 1
   skill = Ability.BUG_BUZZ
   additional = true
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class Venomoth extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING, Synergy.POISON])
@@ -8703,7 +9196,8 @@ export class Venomoth extends Pokemon {
   range = 2
   skill = Ability.BUG_BUZZ
   additional = true
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Voltorb extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ARTIFICIAL])
@@ -8719,7 +9213,8 @@ export class Voltorb extends Pokemon {
   range = 1
   skill = Ability.EXPLOSION
   additional = true
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class Electrode extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ARTIFICIAL])
@@ -8734,7 +9229,8 @@ export class Electrode extends Pokemon {
   range = 1
   skill = Ability.EXPLOSION
   additional = true
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class HisuiVoltorb extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -8763,7 +9259,8 @@ export class HisuiVoltorb extends Pokemon {
       (regionSynergies.includes(Synergy.GRASS) ||
         regionSynergies.includes(Synergy.FOSSIL))
     )
-  }}
+  }
+}
 
 export class HisuiElectrode extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -8791,7 +9288,8 @@ export class HisuiElectrode extends Pokemon {
       (regionSynergies.includes(Synergy.GRASS) ||
         regionSynergies.includes(Synergy.FOSSIL))
     )
-  }}
+  }
+}
 
 export class Slugma extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -8811,7 +9309,8 @@ export class Slugma extends Pokemon {
   range = 1
   skill = Ability.LAVA_PLUME
   additional = true
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class Magcargo extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -8830,7 +9329,8 @@ export class Magcargo extends Pokemon {
   range = 1
   skill = Ability.LAVA_PLUME
   additional = true
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class Sneasel extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.DARK, Synergy.MONSTER])
@@ -8846,7 +9346,8 @@ export class Sneasel extends Pokemon {
   range = 1
   skill = Ability.SLASHING_CLAW
   additional = true
-  attackSprite = AttackSprite.ICE_MELEE}
+  attackSprite = AttackSprite.ICE_MELEE
+}
 
 export class Weavile extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.DARK, Synergy.MONSTER])
@@ -8861,7 +9362,8 @@ export class Weavile extends Pokemon {
   range = 1
   skill = Ability.SLASHING_CLAW
   additional = true
-  attackSprite = AttackSprite.ICE_MELEE}
+  attackSprite = AttackSprite.ICE_MELEE
+}
 
 export class HisuiSneasel extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -8890,7 +9392,8 @@ export class HisuiSneasel extends Pokemon {
       (regionSynergies.includes(Synergy.FIGHTING) ||
         regionSynergies.includes(Synergy.POISON))
     )
-  }}
+  }
+}
 
 export class Sneasler extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -8918,7 +9421,8 @@ export class Sneasler extends Pokemon {
       (regionSynergies.includes(Synergy.FIGHTING) ||
         regionSynergies.includes(Synergy.POISON))
     )
-  }}
+  }
+}
 
 export class Seel extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.AQUATIC])
@@ -8934,7 +9438,8 @@ export class Seel extends Pokemon {
   range = 1
   skill = Ability.AURORA_BEAM
   additional = true
-  attackSprite = AttackSprite.ICE_MELEE}
+  attackSprite = AttackSprite.ICE_MELEE
+}
 
 export class Dewgong extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.AQUATIC])
@@ -8949,7 +9454,8 @@ export class Dewgong extends Pokemon {
   range = 1
   skill = Ability.AURORA_BEAM
   additional = true
-  attackSprite = AttackSprite.ICE_MELEE}
+  attackSprite = AttackSprite.ICE_MELEE
+}
 
 export class Croagunk extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -8969,7 +9475,8 @@ export class Croagunk extends Pokemon {
   range = 1
   skill = Ability.CROSS_POISON
   additional = true
-  attackSprite = AttackSprite.POISON_MELEE}
+  attackSprite = AttackSprite.POISON_MELEE
+}
 
 export class Toxicroak extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -8988,7 +9495,8 @@ export class Toxicroak extends Pokemon {
   range = 1
   skill = Ability.CROSS_POISON
   additional = true
-  attackSprite = AttackSprite.POISON_MELEE}
+  attackSprite = AttackSprite.POISON_MELEE
+}
 export class Chinchou extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.WATER,
@@ -9007,7 +9515,8 @@ export class Chinchou extends Pokemon {
   range = 2
   skill = Ability.THUNDER
   additional = true
-  attackSprite = AttackSprite.ELECTRIC_RANGE}
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+}
 
 export class Lanturn extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -9026,7 +9535,8 @@ export class Lanturn extends Pokemon {
   range = 2
   skill = Ability.THUNDER
   additional = true
-  attackSprite = AttackSprite.ELECTRIC_RANGE}
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+}
 export class Poochyena extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
   rarity = Rarity.RARE
@@ -9040,7 +9550,8 @@ export class Poochyena extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.GROWL
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Mightyena extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
@@ -9054,7 +9565,8 @@ export class Mightyena extends Pokemon {
   maxPP = 70
   range = 1
   skill = Ability.GROWL
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Bronzor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.PSYCHIC])
@@ -9070,7 +9582,8 @@ export class Bronzor extends Pokemon {
   range = 1
   skill = Ability.DEFENSE_CURL
   additional = true
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Bronzong extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -9089,7 +9602,8 @@ export class Bronzong extends Pokemon {
   range = 1
   skill = Ability.DEFENSE_CURL
   additional = true
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Drifloon extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -9109,7 +9623,8 @@ export class Drifloon extends Pokemon {
   range = 2
   skill = Ability.CALM_MIND
   additional = true
-  attackSprite = AttackSprite.GHOST_RANGE}
+  attackSprite = AttackSprite.GHOST_RANGE
+}
 
 export class Drifblim extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -9128,7 +9643,8 @@ export class Drifblim extends Pokemon {
   range = 2
   skill = Ability.CALM_MIND
   additional = true
-  attackSprite = AttackSprite.GHOST_RANGE}
+  attackSprite = AttackSprite.GHOST_RANGE
+}
 
 export class Shroomish extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING])
@@ -9144,7 +9660,8 @@ export class Shroomish extends Pokemon {
   range = 1
   skill = Ability.LEECH_SEED
   additional = true
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 
 export class Breloom extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING])
@@ -9159,7 +9676,8 @@ export class Breloom extends Pokemon {
   range = 1
   skill = Ability.LEECH_SEED
   additional = true
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 export class Tentacool extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.WATER,
@@ -9178,7 +9696,8 @@ export class Tentacool extends Pokemon {
   range = 1
   skill = Ability.POISON
   additional = true
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Tentacruel extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -9197,7 +9716,8 @@ export class Tentacruel extends Pokemon {
   range = 1
   skill = Ability.POISON
   additional = true
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Snubull extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FIELD])
@@ -9213,7 +9733,8 @@ export class Snubull extends Pokemon {
   range = 1
   skill = Ability.ROAR
   additional = true
-  attackSprite = AttackSprite.FAIRY_MELEE}
+  attackSprite = AttackSprite.FAIRY_MELEE
+}
 
 export class Granbull extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FIELD])
@@ -9228,7 +9749,8 @@ export class Granbull extends Pokemon {
   range = 1
   skill = Ability.ROAR
   additional = true
-  attackSprite = AttackSprite.FAIRY_MELEE}
+  attackSprite = AttackSprite.FAIRY_MELEE
+}
 
 const rksSystemOnChangePosition = function (
   this: Pokemon,
@@ -9278,7 +9800,8 @@ export class TypeNull extends Pokemon {
   range = 1
   skill = Ability.HEAD_SMASH
   passive = Passive.TYPE_NULL
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Silvally extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ARTIFICIAL])
@@ -9294,7 +9817,8 @@ export class Silvally extends Pokemon {
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
   attackSprite = AttackSprite.NORMAL_MELEE
-  onChangePosition = rksSystemOnChangePosition}
+  onChangePosition = rksSystemOnChangePosition
+}
 
 export class Applin extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -9330,7 +9854,8 @@ export class Applin extends Pokemon {
   range = 1
   skill = Ability.NUTRIENTS
   attackSprite = AttackSprite.GRASS_MELEE
-  passive = Passive.APPLIN}
+  passive = Passive.APPLIN
+}
 
 export class Dipplin extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -9351,7 +9876,8 @@ export class Dipplin extends Pokemon {
   range = 1
   skill = Ability.SYRUP_BOMB
   attackSprite = AttackSprite.GRASS_MELEE
-  passive = Passive.DIPPLIN}
+  passive = Passive.DIPPLIN
+}
 
 export class Appletun extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -9369,7 +9895,8 @@ export class Appletun extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.APPLE_ACID
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Flapple extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -9387,7 +9914,8 @@ export class Flapple extends Pokemon {
   maxPP = 70
   range = 2
   skill = Ability.GRAV_APPLE
-  attackSprite = AttackSprite.GRASS_RANGE}
+  attackSprite = AttackSprite.GRASS_RANGE
+}
 
 export class Hydrapple extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -9405,7 +9933,8 @@ export class Hydrapple extends Pokemon {
   maxPP = 70
   range = 3
   skill = Ability.FICKLE_BEAM
-  attackSprite = AttackSprite.GRASS_RANGE}
+  attackSprite = AttackSprite.GRASS_RANGE
+}
 
 export class Staryu extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.PSYCHIC])
@@ -9421,7 +9950,8 @@ export class Staryu extends Pokemon {
   range = 2
   skill = Ability.PSYBEAM
   additional = true
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Starmie extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.PSYCHIC])
@@ -9436,7 +9966,8 @@ export class Starmie extends Pokemon {
   range = 2
   skill = Ability.PSYBEAM
   additional = true
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Vulpix extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.PSYCHIC])
@@ -9452,7 +9983,8 @@ export class Vulpix extends Pokemon {
   range = 2
   skill = Ability.FIRE_SPIN
   attackSprite = AttackSprite.FIRE_RANGE
-  additional = true}
+  additional = true
+}
 
 export class Ninetales extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.PSYCHIC])
@@ -9467,7 +9999,8 @@ export class Ninetales extends Pokemon {
   range = 2
   skill = Ability.FIRE_SPIN
   attackSprite = AttackSprite.FIRE_RANGE
-  additional = true}
+  additional = true
+}
 
 export class AlolanVulpix extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FAIRY])
@@ -9492,7 +10025,8 @@ export class AlolanVulpix extends Pokemon {
       (regionSynergies.includes(Synergy.ICE) ||
         regionSynergies.includes(Synergy.FAIRY))
     )
-  }}
+  }
+}
 
 export class AlolanNinetales extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FAIRY])
@@ -9516,7 +10050,8 @@ export class AlolanNinetales extends Pokemon {
       (regionSynergies.includes(Synergy.ICE) ||
         regionSynergies.includes(Synergy.FAIRY))
     )
-  }}
+  }
+}
 
 export class Snom extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ICE])
@@ -9532,7 +10067,8 @@ export class Snom extends Pokemon {
   range = 2
   skill = Ability.BUG_BUZZ
   additional = true
-  attackSprite = AttackSprite.ICE_RANGE}
+  attackSprite = AttackSprite.ICE_RANGE
+}
 
 export class Frosmoth extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ICE])
@@ -9547,7 +10083,8 @@ export class Frosmoth extends Pokemon {
   range = 2
   skill = Ability.BUG_BUZZ
   additional = true
-  attackSprite = AttackSprite.ICE_RANGE}
+  attackSprite = AttackSprite.ICE_RANGE
+}
 
 export class Wailmer extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.SOUND])
@@ -9563,7 +10100,8 @@ export class Wailmer extends Pokemon {
   range = 1
   skill = Ability.DIVE
   additional = true
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Wailord extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.SOUND])
@@ -9578,7 +10116,8 @@ export class Wailord extends Pokemon {
   range = 1
   skill = Ability.DIVE
   additional = true
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Dreepy extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
@@ -9595,7 +10134,8 @@ export class Dreepy extends Pokemon {
   range = 2
   skill = Ability.DRAGON_DARTS
   passive = Passive.HATCH
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Drakloak extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
@@ -9612,7 +10152,8 @@ export class Drakloak extends Pokemon {
   range = 2
   skill = Ability.DRAGON_DARTS
   passive = Passive.HATCH
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Dragapult extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
@@ -9626,7 +10167,8 @@ export class Dragapult extends Pokemon {
   maxPP = 110
   range = 2
   skill = Ability.DRAGON_DARTS
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Snivy extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIELD])
@@ -9643,7 +10185,8 @@ export class Snivy extends Pokemon {
   range = 3
   skill = Ability.MAGICAL_LEAF
   passive = Passive.HATCH
-  attackSprite = AttackSprite.GRASS_RANGE}
+  attackSprite = AttackSprite.GRASS_RANGE
+}
 
 export class Servine extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIELD])
@@ -9660,7 +10203,8 @@ export class Servine extends Pokemon {
   range = 3
   skill = Ability.MAGICAL_LEAF
   passive = Passive.HATCH
-  attackSprite = AttackSprite.GRASS_RANGE}
+  attackSprite = AttackSprite.GRASS_RANGE
+}
 
 export class Serperior extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIELD])
@@ -9674,7 +10218,8 @@ export class Serperior extends Pokemon {
   maxPP = 70
   range = 3
   skill = Ability.MAGICAL_LEAF
-  attackSprite = AttackSprite.GRASS_RANGE}
+  attackSprite = AttackSprite.GRASS_RANGE
+}
 
 export class Starly extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLYING])
@@ -9691,7 +10236,8 @@ export class Starly extends Pokemon {
   range = 1
   skill = Ability.BRAVE_BIRD
   passive = Passive.HATCH
-  attackSprite = AttackSprite.FLYING_MELEE}
+  attackSprite = AttackSprite.FLYING_MELEE
+}
 
 export class Staravia extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLYING])
@@ -9708,7 +10254,8 @@ export class Staravia extends Pokemon {
   range = 1
   skill = Ability.BRAVE_BIRD
   passive = Passive.HATCH
-  attackSprite = AttackSprite.FLYING_MELEE}
+  attackSprite = AttackSprite.FLYING_MELEE
+}
 
 export class Staraptor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLYING])
@@ -9722,7 +10269,8 @@ export class Staraptor extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.BRAVE_BIRD
-  attackSprite = AttackSprite.FLYING_MELEE}
+  attackSprite = AttackSprite.FLYING_MELEE
+}
 
 export class Scorbunny extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.HUMAN])
@@ -9739,7 +10287,8 @@ export class Scorbunny extends Pokemon {
   range = 1
   skill = Ability.PYRO_BALL
   passive = Passive.HATCH
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class Raboot extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.HUMAN])
@@ -9756,7 +10305,8 @@ export class Raboot extends Pokemon {
   range = 1
   skill = Ability.PYRO_BALL
   passive = Passive.HATCH
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class Cinderace extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD, Synergy.HUMAN])
@@ -9770,7 +10320,8 @@ export class Cinderace extends Pokemon {
   maxPP = 50
   range = 1
   skill = Ability.PYRO_BALL
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class AlolanGeodude extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ROCK])
@@ -9790,7 +10341,8 @@ export class AlolanGeodude extends Pokemon {
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.ELECTRIC)
-  }}
+  }
+}
 
 export class AlolanGraveler extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ROCK])
@@ -9810,7 +10362,8 @@ export class AlolanGraveler extends Pokemon {
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.ELECTRIC)
-  }}
+  }
+}
 
 export class AlolanGolem extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.ROCK])
@@ -9829,7 +10382,8 @@ export class AlolanGolem extends Pokemon {
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.ELECTRIC)
-  }}
+  }
+}
 
 export class Popplio extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FAIRY, Synergy.SOUND])
@@ -9846,7 +10400,8 @@ export class Popplio extends Pokemon {
   range = 3
   skill = Ability.SPARKLING_ARIA
   passive = Passive.HATCH
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Brionne extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FAIRY, Synergy.SOUND])
@@ -9863,7 +10418,8 @@ export class Brionne extends Pokemon {
   range = 3
   skill = Ability.SPARKLING_ARIA
   passive = Passive.HATCH
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Primarina extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FAIRY, Synergy.SOUND])
@@ -9877,7 +10433,8 @@ export class Primarina extends Pokemon {
   maxPP = 70
   range = 3
   skill = Ability.SPARKLING_ARIA
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Gothita extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.HUMAN])
@@ -9894,7 +10451,8 @@ export class Gothita extends Pokemon {
   range = 3
   skill = Ability.FAKE_TEARS
   passive = Passive.HATCH
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Gothorita extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.HUMAN])
@@ -9911,7 +10469,8 @@ export class Gothorita extends Pokemon {
   range = 3
   skill = Ability.FAKE_TEARS
   passive = Passive.HATCH
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Gothitelle extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.HUMAN])
@@ -9925,7 +10484,8 @@ export class Gothitelle extends Pokemon {
   maxPP = 80
   range = 3
   skill = Ability.FAKE_TEARS
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Sandshrew extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.NORMAL])
@@ -9941,7 +10501,8 @@ export class Sandshrew extends Pokemon {
   range = 1
   skill = Ability.ROLLOUT
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Sandslash extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.NORMAL])
@@ -9956,7 +10517,8 @@ export class Sandslash extends Pokemon {
   range = 1
   skill = Ability.ROLLOUT
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class AlolanSandshrew extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.STEEL])
@@ -9973,7 +10535,8 @@ export class AlolanSandshrew extends Pokemon {
   skill = Ability.ICE_BALL
   additional = true
   regional = true
-  attackSprite = AttackSprite.ICE_MELEE}
+  attackSprite = AttackSprite.ICE_MELEE
+}
 
 export class AlolanSandslash extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.STEEL])
@@ -9989,7 +10552,8 @@ export class AlolanSandslash extends Pokemon {
   skill = Ability.ICE_BALL
   additional = true
   regional = true
-  attackSprite = AttackSprite.ICE_MELEE}
+  attackSprite = AttackSprite.ICE_MELEE
+}
 
 export class Nosepass extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.ARTIFICIAL])
@@ -10005,7 +10569,8 @@ export class Nosepass extends Pokemon {
   range = 2
   skill = Ability.MAGNET_RISE
   additional = true
-  attackSprite = AttackSprite.ROCK_RANGE}
+  attackSprite = AttackSprite.ROCK_RANGE
+}
 
 export class Probopass extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.ARTIFICIAL])
@@ -10020,7 +10585,8 @@ export class Probopass extends Pokemon {
   range = 2
   skill = Ability.MAGNET_RISE
   additional = true
-  attackSprite = AttackSprite.ROCK_RANGE}
+  attackSprite = AttackSprite.ROCK_RANGE
+}
 
 export class Woobat extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -10040,7 +10606,8 @@ export class Woobat extends Pokemon {
   range = 3
   skill = Ability.ATTRACT
   additional = true
-  attackSprite = AttackSprite.SOUND_RANGE}
+  attackSprite = AttackSprite.SOUND_RANGE
+}
 
 export class Swoobat extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -10059,7 +10626,8 @@ export class Swoobat extends Pokemon {
   range = 3
   skill = Ability.ATTRACT
   additional = true
-  attackSprite = AttackSprite.SOUND_RANGE}
+  attackSprite = AttackSprite.SOUND_RANGE
+}
 
 export class Pineco extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.STEEL])
@@ -10075,7 +10643,8 @@ export class Pineco extends Pokemon {
   range = 1
   skill = Ability.EXPLOSION
   additional = true
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class Forretress extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.STEEL])
@@ -10090,7 +10659,8 @@ export class Forretress extends Pokemon {
   range = 1
   skill = Ability.EXPLOSION
   additional = true
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class UnownA extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10106,7 +10676,8 @@ export class UnownA extends Pokemon {
   skill = Ability.HIDDEN_POWER_A
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 export class UnownB extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
   rarity = Rarity.SPECIAL
@@ -10121,7 +10692,8 @@ export class UnownB extends Pokemon {
   skill = Ability.HIDDEN_POWER_B
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownC extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10137,7 +10709,8 @@ export class UnownC extends Pokemon {
   skill = Ability.HIDDEN_POWER_C
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownD extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10153,7 +10726,8 @@ export class UnownD extends Pokemon {
   skill = Ability.HIDDEN_POWER_D
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownE extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10169,7 +10743,8 @@ export class UnownE extends Pokemon {
   skill = Ability.HIDDEN_POWER_E
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownF extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10185,7 +10760,8 @@ export class UnownF extends Pokemon {
   skill = Ability.HIDDEN_POWER_F
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownG extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10201,7 +10777,8 @@ export class UnownG extends Pokemon {
   skill = Ability.HIDDEN_POWER_G
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownH extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10217,7 +10794,8 @@ export class UnownH extends Pokemon {
   skill = Ability.HIDDEN_POWER_H
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownI extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10233,7 +10811,8 @@ export class UnownI extends Pokemon {
   skill = Ability.HIDDEN_POWER_I
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownJ extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10249,7 +10828,8 @@ export class UnownJ extends Pokemon {
   skill = Ability.HIDDEN_POWER_J
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownK extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10265,7 +10845,8 @@ export class UnownK extends Pokemon {
   skill = Ability.HIDDEN_POWER_K
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownL extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10281,7 +10862,8 @@ export class UnownL extends Pokemon {
   skill = Ability.HIDDEN_POWER_L
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownM extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10297,7 +10879,8 @@ export class UnownM extends Pokemon {
   skill = Ability.HIDDEN_POWER_M
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownN extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10313,7 +10896,8 @@ export class UnownN extends Pokemon {
   skill = Ability.HIDDEN_POWER_N
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownO extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10329,7 +10913,8 @@ export class UnownO extends Pokemon {
   skill = Ability.HIDDEN_POWER_O
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownP extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10345,7 +10930,8 @@ export class UnownP extends Pokemon {
   skill = Ability.HIDDEN_POWER_P
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownQ extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10361,7 +10947,8 @@ export class UnownQ extends Pokemon {
   skill = Ability.HIDDEN_POWER_Q
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownR extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10377,7 +10964,8 @@ export class UnownR extends Pokemon {
   skill = Ability.HIDDEN_POWER_R
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownS extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10393,7 +10981,8 @@ export class UnownS extends Pokemon {
   skill = Ability.HIDDEN_POWER_S
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownT extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10409,7 +10998,8 @@ export class UnownT extends Pokemon {
   skill = Ability.HIDDEN_POWER_T
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownU extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10425,7 +11015,8 @@ export class UnownU extends Pokemon {
   skill = Ability.HIDDEN_POWER_U
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownV extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10441,7 +11032,8 @@ export class UnownV extends Pokemon {
   skill = Ability.HIDDEN_POWER_V
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownW extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10457,7 +11049,8 @@ export class UnownW extends Pokemon {
   skill = Ability.HIDDEN_POWER_W
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownX extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10473,7 +11066,8 @@ export class UnownX extends Pokemon {
   skill = Ability.HIDDEN_POWER_X
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownY extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10489,7 +11083,8 @@ export class UnownY extends Pokemon {
   skill = Ability.HIDDEN_POWER_Y
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownZ extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10505,7 +11100,8 @@ export class UnownZ extends Pokemon {
   skill = Ability.HIDDEN_POWER_Z
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownQuestion extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10521,7 +11117,8 @@ export class UnownQuestion extends Pokemon {
   skill = Ability.HIDDEN_POWER_QM
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class UnownExclamation extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC])
@@ -10537,7 +11134,8 @@ export class UnownExclamation extends Pokemon {
   skill = Ability.HIDDEN_POWER_EM
   passive = Passive.UNOWN
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  canHoldItems = false}
+  canHoldItems = false
+}
 
 export class Diglett extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.NORMAL])
@@ -10553,7 +11151,8 @@ export class Diglett extends Pokemon {
   range = 1
   skill = Ability.DIG
   attackSprite = AttackSprite.ROCK_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Dugtrio extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.NORMAL])
@@ -10568,7 +11167,8 @@ export class Dugtrio extends Pokemon {
   range = 1
   skill = Ability.DIG
   attackSprite = AttackSprite.ROCK_MELEE
-  additional = true}
+  additional = true
+}
 
 export class AlolanDiglett extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.STEEL])
@@ -10592,7 +11192,8 @@ export class AlolanDiglett extends Pokemon {
       (!state || state.additionalPokemons.includes(Pkm.DIGLETT)) &&
       regionSynergies.includes(Synergy.STEEL)
     )
-  }}
+  }
+}
 
 export class AlolanDugtrio extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.STEEL])
@@ -10615,7 +11216,8 @@ export class AlolanDugtrio extends Pokemon {
       (!state || state.additionalPokemons.includes(Pkm.DIGLETT)) &&
       regionSynergies.includes(Synergy.STEEL)
     )
-  }}
+  }
+}
 
 export class Rowlet extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLYING, Synergy.GHOST])
@@ -10632,7 +11234,8 @@ export class Rowlet extends Pokemon {
   range = 3
   skill = Ability.SPIRIT_SHACKLE
   passive = Passive.HATCH
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Dartix extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLYING, Synergy.GHOST])
@@ -10649,7 +11252,8 @@ export class Dartix extends Pokemon {
   range = 3
   skill = Ability.SPIRIT_SHACKLE
   passive = Passive.HATCH
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Decidueye extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLYING, Synergy.GHOST])
@@ -10663,7 +11267,8 @@ export class Decidueye extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.SPIRIT_SHACKLE
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Zorua extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIELD])
@@ -10679,7 +11284,8 @@ export class Zorua extends Pokemon {
   range = 1
   skill = Ability.ILLUSION
   additional = true
-  attackSprite = AttackSprite.DARK_MELEE}
+  attackSprite = AttackSprite.DARK_MELEE
+}
 
 export class Zoroark extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIELD])
@@ -10694,7 +11300,8 @@ export class Zoroark extends Pokemon {
   range = 1
   skill = Ability.ILLUSION
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class HisuiZorua extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GHOST])
@@ -10719,7 +11326,8 @@ export class HisuiZorua extends Pokemon {
       (regionSynergies.includes(Synergy.NORMAL) ||
         regionSynergies.includes(Synergy.GHOST))
     )
-  }}
+  }
+}
 
 export class HisuiZoroark extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GHOST])
@@ -10743,7 +11351,8 @@ export class HisuiZoroark extends Pokemon {
       (regionSynergies.includes(Synergy.NORMAL) ||
         regionSynergies.includes(Synergy.GHOST))
     )
-  }}
+  }
+}
 
 export class Grimer extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -10763,7 +11372,8 @@ export class Grimer extends Pokemon {
   range = 1
   skill = Ability.SLUDGE
   attackSprite = AttackSprite.POISON_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Muk extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -10782,7 +11392,8 @@ export class Muk extends Pokemon {
   range = 1
   skill = Ability.SLUDGE
   attackSprite = AttackSprite.POISON_MELEE
-  additional = true}
+  additional = true
+}
 
 export class AlolanGrimer extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -10810,7 +11421,8 @@ export class AlolanGrimer extends Pokemon {
       (!state || state.additionalPokemons.includes(Pkm.GRIMER)) &&
       regionSynergies.includes(Synergy.DARK)
     )
-  }}
+  }
+}
 
 export class AlolanMuk extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -10837,7 +11449,8 @@ export class AlolanMuk extends Pokemon {
       (!state || state.additionalPokemons.includes(Pkm.GRIMER)) &&
       regionSynergies.includes(Synergy.DARK)
     )
-  }}
+  }
+}
 
 export class Ekans extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.POISON, Synergy.DARK])
@@ -10853,7 +11466,8 @@ export class Ekans extends Pokemon {
   range = 1
   skill = Ability.VENOSHOCK
   additional = true
-  attackSprite = AttackSprite.POISON_MELEE}
+  attackSprite = AttackSprite.POISON_MELEE
+}
 
 export class Arbok extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.POISON, Synergy.DARK])
@@ -10868,7 +11482,8 @@ export class Arbok extends Pokemon {
   range = 1
   skill = Ability.VENOSHOCK
   additional = true
-  attackSprite = AttackSprite.POISON_MELEE}
+  attackSprite = AttackSprite.POISON_MELEE
+}
 
 export class Carvanha extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.DARK])
@@ -10884,7 +11499,8 @@ export class Carvanha extends Pokemon {
   range = 1
   skill = Ability.BITE
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Sharpedo extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.DARK])
@@ -10899,7 +11515,8 @@ export class Sharpedo extends Pokemon {
   range = 1
   skill = Ability.BITE
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Froakie extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.AQUATIC, Synergy.DARK])
@@ -10916,7 +11533,8 @@ export class Froakie extends Pokemon {
   range = 1
   skill = Ability.WATER_SHURIKEN
   passive = Passive.HATCH
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Frogadier extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.AQUATIC, Synergy.DARK])
@@ -10933,7 +11551,8 @@ export class Frogadier extends Pokemon {
   range = 1
   skill = Ability.WATER_SHURIKEN
   passive = Passive.HATCH
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class Greninja extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.AQUATIC, Synergy.DARK])
@@ -10947,7 +11566,8 @@ export class Greninja extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.WATER_SHURIKEN
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class Chingling extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.SOUND, Synergy.PSYCHIC, Synergy.BABY])
@@ -10964,7 +11584,8 @@ export class Chingling extends Pokemon {
   range = 3
   skill = Ability.ECHO
   passive = Passive.CHINGLING
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Chimecho extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.SOUND, Synergy.PSYCHIC])
@@ -10979,7 +11600,8 @@ export class Chimecho extends Pokemon {
   range = 3
   skill = Ability.ECHO
   passive = Passive.CHIMECHO
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Tyrogue extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -11021,7 +11643,8 @@ export class Tyrogue extends Pokemon {
     }
 
     return Pkm.HITMONTOP
-  })}
+  })
+}
 
 export class Hitmontop extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
@@ -11035,7 +11658,8 @@ export class Hitmontop extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.TRIPLE_KICK
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 
 export class Hitmonlee extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
@@ -11049,7 +11673,8 @@ export class Hitmonlee extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.MAWASHI_GERI
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 
 export class Hitmonchan extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
@@ -11063,7 +11688,8 @@ export class Hitmonchan extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.UPPERCUT
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 
 export class Mimikyu extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -11082,7 +11708,8 @@ export class Mimikyu extends Pokemon {
   range = 1
   skill = Ability.SHADOW_SNEAK
   passive = Passive.MIMIKYU
-  attackSprite = AttackSprite.FAIRY_MELEE}
+  attackSprite = AttackSprite.FAIRY_MELEE
+}
 
 export class MimikyuBusted extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -11101,7 +11728,8 @@ export class MimikyuBusted extends Pokemon {
   range = 1
   skill = Ability.SHADOW_SNEAK
   passive = Passive.MIMIKYU_BUSTED
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Bonsley extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.FLORA, Synergy.BABY])
@@ -11122,7 +11750,8 @@ export class Bonsley extends Pokemon {
   onSpawn({ entity }: { entity: IPokemonEntity }) {
     entity.status.tree = true
     entity.toIdleState()
-  }}
+  }
+}
 
 export class Sudowoodo extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.FLORA, Synergy.MONSTER])
@@ -11142,7 +11771,8 @@ export class Sudowoodo extends Pokemon {
   onSpawn({ entity }: { entity: IPokemonEntity }) {
     entity.status.tree = true
     entity.toIdleState()
-  }}
+  }
+}
 
 export class Combee extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLORA, Synergy.GOURMET])
@@ -11158,7 +11788,8 @@ export class Combee extends Pokemon {
   range = 1
   skill = Ability.HEAL_ORDER
   additional = true
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class Vespiqueen extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLORA, Synergy.GOURMET])
@@ -11173,7 +11804,8 @@ export class Vespiqueen extends Pokemon {
   range = 1
   skill = Ability.HEAL_ORDER
   additional = true
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class Shuckle extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ROCK, Synergy.GOURMET])
@@ -11187,7 +11819,8 @@ export class Shuckle extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.BIDE
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Tepig extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIRE, Synergy.FIGHTING])
@@ -11204,7 +11837,8 @@ export class Tepig extends Pokemon {
   range = 1
   skill = Ability.IRON_TAIL
   passive = Passive.HATCH
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Pignite extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIRE, Synergy.FIGHTING])
@@ -11221,7 +11855,8 @@ export class Pignite extends Pokemon {
   range = 1
   skill = Ability.IRON_TAIL
   passive = Passive.HATCH
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Emboar extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIRE, Synergy.FIGHTING])
@@ -11235,7 +11870,8 @@ export class Emboar extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.IRON_TAIL
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Wurmple extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG])
@@ -11257,7 +11893,8 @@ export class Wurmple extends Pokemon {
       if (player.regionalPokemons.includes(Pkm.CASCOON)) return Pkm.CASCOON
       else return Pkm.SILCOON
     }
-  )}
+  )
+}
 
 export class Silcoon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.NORMAL])
@@ -11272,7 +11909,8 @@ export class Silcoon extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.SPIKE_ARMOR
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class Beautifly extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.NORMAL, Synergy.FLYING])
@@ -11286,7 +11924,8 @@ export class Beautifly extends Pokemon {
   maxPP = 60
   range = 1
   skill = Ability.SILVER_WIND
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class Cascoon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON])
@@ -11306,7 +11945,8 @@ export class Cascoon extends Pokemon {
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.POISON)
-  }}
+  }
+}
 
 export class Dustox extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON, Synergy.FLYING])
@@ -11325,7 +11965,8 @@ export class Dustox extends Pokemon {
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.POISON)
-  }}
+  }
+}
 
 export class Tinkatink extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FAIRY])
@@ -11340,7 +11981,8 @@ export class Tinkatink extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.GIGATON_HAMMER
-  attackSprite = AttackSprite.FAIRY_MELEE}
+  attackSprite = AttackSprite.FAIRY_MELEE
+}
 
 export class Tinkatuff extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FAIRY])
@@ -11355,7 +11997,8 @@ export class Tinkatuff extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.GIGATON_HAMMER
-  attackSprite = AttackSprite.FAIRY_MELEE}
+  attackSprite = AttackSprite.FAIRY_MELEE
+}
 
 export class Tinkaton extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FAIRY])
@@ -11369,7 +12012,8 @@ export class Tinkaton extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.GIGATON_HAMMER
-  attackSprite = AttackSprite.FAIRY_MELEE}
+  attackSprite = AttackSprite.FAIRY_MELEE
+}
 
 export class Maractus extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.SOUND, Synergy.FLORA])
@@ -11383,7 +12027,8 @@ export class Maractus extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.SPIKE_ARMOR
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Plusle extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FAIRY])
@@ -11397,7 +12042,8 @@ export class Plusle extends Pokemon {
   maxPP = 60
   range = 1
   skill = Ability.LINK_CABLE
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class Minun extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FAIRY])
@@ -11411,7 +12057,8 @@ export class Minun extends Pokemon {
   maxPP = 60
   range = 1
   skill = Ability.LINK_CABLE
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class Spectrier extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FIELD])
@@ -11426,7 +12073,8 @@ export class Spectrier extends Pokemon {
   range = 1
   skill = Ability.ASTRAL_BARRAGE
   passive = Passive.GRIM_NEIGH
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Kartana extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.GRASS])
@@ -11441,7 +12089,8 @@ export class Kartana extends Pokemon {
   range = 1
   skill = Ability.LEAF_BLADE
   passive = Passive.BEAST_BOOST_ATK
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Dhelmise extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.GHOST, Synergy.STEEL])
@@ -11455,7 +12104,8 @@ export class Dhelmise extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.ANCHOR_SHOT
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Tropius extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -11473,7 +12123,8 @@ export class Tropius extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.AIR_SLASH
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Carnivine extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -11491,7 +12142,8 @@ export class Carnivine extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.VINE_WHIP
-  attackSprite = AttackSprite.GRASS_RANGE}
+  attackSprite = AttackSprite.GRASS_RANGE
+}
 
 export class Sableye extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
@@ -11508,7 +12160,8 @@ export class Sableye extends Pokemon {
   range = 1
   skill = Ability.KNOCK_OFF
   attackSprite = AttackSprite.DARK_MELEE
-  passive = Passive.SABLEYE}
+  passive = Passive.SABLEYE
+}
 
 export class MegaSableye extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
@@ -11526,7 +12179,8 @@ export class MegaSableye extends Pokemon {
   passive = Passive.MEGA_SABLEYE
   onSpawn({ entity }: { entity: IPokemonEntity }) {
     entity.status.triggerRuneProtect(60000)
-  }}
+  }
+}
 
 export class Koffing extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -11546,7 +12200,8 @@ export class Koffing extends Pokemon {
   range = 1
   skill = Ability.SMOG
   additional = true
-  attackSprite = AttackSprite.POISON_MELEE}
+  attackSprite = AttackSprite.POISON_MELEE
+}
 
 export class Weezing extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -11565,7 +12220,8 @@ export class Weezing extends Pokemon {
   range = 1
   skill = Ability.SMOG
   additional = true
-  attackSprite = AttackSprite.POISON_MELEE}
+  attackSprite = AttackSprite.POISON_MELEE
+}
 
 export class Clauncher extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.SOUND])
@@ -11582,7 +12238,8 @@ export class Clauncher extends Pokemon {
   skill = Ability.WATER_PULSE
   passive = Passive.MEGA_LAUNCHER
   additional = true
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Clawitzer extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.SOUND])
@@ -11598,7 +12255,8 @@ export class Clawitzer extends Pokemon {
   skill = Ability.WATER_PULSE
   passive = Passive.MEGA_LAUNCHER
   additional = true
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Yanma extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FOSSIL, Synergy.FLYING])
@@ -11618,7 +12276,8 @@ export class Yanma extends Pokemon {
   attackSprite = AttackSprite.PSYCHIC_RANGE
   onSpawn({ entity }: { entity: IPokemonEntity }) {
     entity.effectsSet.add(new ClearWingEffect())
-  }}
+  }
+}
 
 export class Yanmega extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FOSSIL, Synergy.FLYING])
@@ -11637,7 +12296,8 @@ export class Yanmega extends Pokemon {
   attackSprite = AttackSprite.PSYCHIC_RANGE
   onSpawn({ entity }: { entity: IPokemonEntity }) {
     entity.effectsSet.add(new ClearWingEffect())
-  }}
+  }
+}
 
 export class Helioptile extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -11670,7 +12330,8 @@ export class Helioptile extends Pokemon {
     } else if (simulation.weather === Weather.SUN) {
       entity.addAbilityPower(50, entity, 0, false)
     }
-  }}
+  }
+}
 
 export class Heliolisk extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -11702,7 +12363,8 @@ export class Heliolisk extends Pokemon {
     } else if (simulation.weather === Weather.SUN) {
       entity.addAbilityPower(50, entity, 0, false)
     }
-  }}
+  }
+}
 
 export class Exeggcute extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.PSYCHIC])
@@ -11726,7 +12388,8 @@ export class Exeggcute extends Pokemon {
   range = 3
   skill = Ability.EGGSPLOSION
   additional = true
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Exeggutor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.PSYCHIC])
@@ -11741,7 +12404,8 @@ export class Exeggutor extends Pokemon {
   range = 1
   skill = Ability.EGGSPLOSION
   additional = true
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class AlolanExeggutor extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -11768,7 +12432,8 @@ export class AlolanExeggutor extends Pokemon {
       (!state || state.additionalPokemons.includes(Pkm.EXEGGCUTE)) &&
       regionSynergies.includes(Synergy.DRAGON)
     )
-  }}
+  }
+}
 
 export class Bidoof extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -11787,7 +12452,8 @@ export class Bidoof extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.SUPER_FANG
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Bibarel extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -11805,7 +12471,8 @@ export class Bibarel extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.SUPER_FANG
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Spinda extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GOURMET])
@@ -11823,7 +12490,8 @@ export class Spinda extends Pokemon {
   attackSprite = AttackSprite.NORMAL_MELEE
   onSpawn({ entity }: { entity: IPokemonEntity }) {
     entity.effects.add(Effect.IMMUNITY_CONFUSION)
-  }}
+  }
+}
 
 export class Baltoy extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -11843,7 +12511,8 @@ export class Baltoy extends Pokemon {
   range = 2
   skill = Ability.CONFUSION
   additional = true
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Claydol extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -11862,7 +12531,8 @@ export class Claydol extends Pokemon {
   range = 2
   skill = Ability.CONFUSION
   additional = true
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Purrloin extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIELD])
@@ -11878,7 +12548,8 @@ export class Purrloin extends Pokemon {
   range = 1
   skill = Ability.FAKE_OUT
   additional = true
-  attackSprite = AttackSprite.DARK_MELEE}
+  attackSprite = AttackSprite.DARK_MELEE
+}
 
 export class Liepard extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIELD])
@@ -11893,7 +12564,8 @@ export class Liepard extends Pokemon {
   range = 1
   skill = Ability.FAKE_OUT
   additional = true
-  attackSprite = AttackSprite.DARK_MELEE}
+  attackSprite = AttackSprite.DARK_MELEE
+}
 
 export class Barboach extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GROUND])
@@ -11918,7 +12590,8 @@ export class Barboach extends Pokemon {
     if (simulation.weather === Weather.RAIN) {
       entity.status.triggerRuneProtect(60000)
     }
-  }}
+  }
+}
 
 export class Whiscash extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GROUND])
@@ -11942,7 +12615,8 @@ export class Whiscash extends Pokemon {
     if (simulation.weather === Weather.RAIN) {
       entity.status.triggerRuneProtect(60000)
     }
-  }}
+  }
+}
 
 export class Scraggy extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIGHTING])
@@ -11959,7 +12633,8 @@ export class Scraggy extends Pokemon {
   skill = Ability.ASSURANCE
   passive = Passive.MOXIE
   additional = true
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 
 export class Scrafty extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIGHTING])
@@ -11975,7 +12650,8 @@ export class Scrafty extends Pokemon {
   skill = Ability.ASSURANCE
   passive = Passive.MOXIE
   additional = true
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 
 export class Finneon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.LIGHT])
@@ -11991,7 +12667,8 @@ export class Finneon extends Pokemon {
   range = 2
   skill = Ability.AQUA_RING
   additional = true
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class Lumineon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.LIGHT])
@@ -12006,7 +12683,8 @@ export class Lumineon extends Pokemon {
   range = 2
   skill = Ability.AQUA_RING
   additional = true
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class Stunky extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.POISON])
@@ -12023,7 +12701,8 @@ export class Stunky extends Pokemon {
   skill = Ability.POISON_GAS
   passive = Passive.STENCH
   additional = true
-  attackSprite = AttackSprite.POISON_MELEE}
+  attackSprite = AttackSprite.POISON_MELEE
+}
 
 export class Skuntank extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.POISON])
@@ -12039,7 +12718,8 @@ export class Skuntank extends Pokemon {
   skill = Ability.POISON_GAS
   passive = Passive.STENCH
   additional = true
-  attackSprite = AttackSprite.POISON_MELEE}
+  attackSprite = AttackSprite.POISON_MELEE
+}
 
 export class Illumise extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.BUG, Synergy.LIGHT])
@@ -12054,7 +12734,8 @@ export class Illumise extends Pokemon {
   range = 1
   skill = Ability.STRUGGLE_BUG
   passive = Passive.ILLUMISE_VOLBEAT
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class Volbeat extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.BUG, Synergy.LIGHT])
@@ -12069,7 +12750,8 @@ export class Volbeat extends Pokemon {
   range = 1
   skill = Ability.TAIL_GLOW
   passive = Passive.ILLUMISE_VOLBEAT
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class Necrozma extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.LIGHT, Synergy.PSYCHIC])
@@ -12096,7 +12778,8 @@ export class Necrozma extends Pokemon {
     ) {
       player.transformPokemon(this, Pkm.ULTRA_NECROZMA)
     }
-  }}
+  }
+}
 
 export class UltraNecrozma extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -12127,7 +12810,8 @@ export class UltraNecrozma extends Pokemon {
     ) {
       player.transformPokemon(this, Pkm.NECROZMA)
     }
-  }}
+  }
+}
 
 export class Cherrubi extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -12147,7 +12831,8 @@ export class Cherrubi extends Pokemon {
   range = 3
   skill = Ability.NATURAL_GIFT
   regional = true
-  attackSprite = AttackSprite.GRASS_RANGE}
+  attackSprite = AttackSprite.GRASS_RANGE
+}
 
 export class Cherrim extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -12178,7 +12863,8 @@ export class Cherrim extends Pokemon {
     ) {
       player.transformPokemon(this, Pkm.CHERRIM_SUNLIGHT)
     }
-  }}
+  }
+}
 
 export class CherrimSunlight extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.LIGHT, Synergy.GRASS])
@@ -12205,7 +12891,8 @@ export class CherrimSunlight extends Pokemon {
     ) {
       player.transformPokemon(this, Pkm.CHERRIM)
     }
-  }}
+  }
+}
 
 export class Misdreavus extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -12225,7 +12912,8 @@ export class Misdreavus extends Pokemon {
   range = 3
   skill = Ability.NIGHT_SHADE
   additional = true
-  attackSprite = AttackSprite.GHOST_RANGE}
+  attackSprite = AttackSprite.GHOST_RANGE
+}
 
 export class Mismagius extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -12244,7 +12932,8 @@ export class Mismagius extends Pokemon {
   range = 3
   skill = Ability.NIGHT_SHADE
   additional = true
-  attackSprite = AttackSprite.GHOST_RANGE}
+  attackSprite = AttackSprite.GHOST_RANGE
+}
 
 export class Doduo extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FLYING, Synergy.NORMAL])
@@ -12260,7 +12949,8 @@ export class Doduo extends Pokemon {
   range = 1
   skill = Ability.AGILITY
   attackSprite = AttackSprite.FLYING_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Dodrio extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FLYING, Synergy.NORMAL])
@@ -12275,7 +12965,8 @@ export class Dodrio extends Pokemon {
   range = 1
   skill = Ability.AGILITY
   attackSprite = AttackSprite.FLYING_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Kricketot extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.SOUND])
@@ -12291,7 +12982,8 @@ export class Kricketot extends Pokemon {
   range = 1
   skill = Ability.SCREECH
   additional = true
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class Kricketune extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.SOUND])
@@ -12306,7 +12998,8 @@ export class Kricketune extends Pokemon {
   range = 1
   skill = Ability.SCREECH
   additional = true
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class Hippopotas extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.NORMAL])
@@ -12323,7 +13016,8 @@ export class Hippopotas extends Pokemon {
   skill = Ability.SAND_TOMB
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
-  passive = Passive.SAND_STREAM}
+  passive = Passive.SAND_STREAM
+}
 
 export class Hippodown extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.NORMAL])
@@ -12339,7 +13033,8 @@ export class Hippodown extends Pokemon {
   skill = Ability.SAND_TOMB
   additional = true
   attackSprite = AttackSprite.ROCK_MELEE
-  passive = Passive.SAND_STREAM}
+  passive = Passive.SAND_STREAM
+}
 
 export class Wingull extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FLYING])
@@ -12356,7 +13051,8 @@ export class Wingull extends Pokemon {
   skill = Ability.WHIRLWIND
   additional = true
   attackSprite = AttackSprite.FLYING_RANGE
-  passive = Passive.DRIZZLE}
+  passive = Passive.DRIZZLE
+}
 
 export class Pelipper extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FLYING])
@@ -12372,7 +13068,8 @@ export class Pelipper extends Pokemon {
   skill = Ability.WHIRLWIND
   additional = true
   attackSprite = AttackSprite.FLYING_RANGE
-  passive = Passive.DRIZZLE}
+  passive = Passive.DRIZZLE
+}
 
 export class Murkrow extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FLYING])
@@ -12392,7 +13089,8 @@ export class Murkrow extends Pokemon {
   attackSprite = AttackSprite.DARK_MELEE
   beforeSimulationStart({ opponentEffects }: { opponentEffects: Set<Effect> }) {
     opponentEffects.add(Effect.BAD_LUCK)
-  }}
+  }
+}
 
 export class Honchkrow extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FLYING])
@@ -12411,7 +13109,8 @@ export class Honchkrow extends Pokemon {
   attackSprite = AttackSprite.DARK_MELEE
   beforeSimulationStart({ opponentEffects }: { opponentEffects: Set<Effect> }) {
     opponentEffects.add(Effect.BAD_LUCK)
-  }}
+  }
+}
 
 export class Zigzagoon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIELD])
@@ -12427,7 +13126,8 @@ export class Zigzagoon extends Pokemon {
   range = 1
   skill = Ability.SLASH
   attackSprite = AttackSprite.NORMAL_MELEE
-  passive = Passive.PICKUP}
+  passive = Passive.PICKUP
+}
 
 export class Linoone extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIELD])
@@ -12442,7 +13142,8 @@ export class Linoone extends Pokemon {
   range = 1
   skill = Ability.SLASH
   attackSprite = AttackSprite.NORMAL_MELEE
-  passive = Passive.PICKUP}
+  passive = Passive.PICKUP
+}
 
 export class GalarianZigzagoon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
@@ -12458,7 +13159,8 @@ export class GalarianZigzagoon extends Pokemon {
   range = 1
   skill = Ability.SLASH
   attackSprite = AttackSprite.DARK_MELEE
-  regional = true}
+  regional = true
+}
 
 export class GalarianLinoone extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK])
@@ -12474,7 +13176,8 @@ export class GalarianLinoone extends Pokemon {
   range = 1
   skill = Ability.SLASH
   attackSprite = AttackSprite.DARK_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Obstagoon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK, Synergy.SOUND])
@@ -12489,7 +13192,8 @@ export class Obstagoon extends Pokemon {
   range = 1
   skill = Ability.OBSTRUCT
   attackSprite = AttackSprite.DARK_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Phantump extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -12509,7 +13213,8 @@ export class Phantump extends Pokemon {
   range = 1
   skill = Ability.POLTERGEIST
   additional = true
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class Trevenant extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -12528,7 +13233,8 @@ export class Trevenant extends Pokemon {
   range = 1
   skill = Ability.POLTERGEIST
   additional = true
-  attackSprite = AttackSprite.GRASS_MELEE}
+  attackSprite = AttackSprite.GRASS_MELEE
+}
 
 export class HisuianQwilfish extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -12548,7 +13254,8 @@ export class HisuianQwilfish extends Pokemon {
   range = 1
   skill = Ability.BARB_BARRAGE
   regional = true
-  attackSprite = AttackSprite.POISON_MELEE}
+  attackSprite = AttackSprite.POISON_MELEE
+}
 
 export class Overqwil extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -12567,7 +13274,8 @@ export class Overqwil extends Pokemon {
   range = 1
   skill = Ability.BARB_BARRAGE
   regional = true
-  attackSprite = AttackSprite.POISON_MELEE}
+  attackSprite = AttackSprite.POISON_MELEE
+}
 
 export class Xurkitree extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -12587,7 +13295,8 @@ export class Xurkitree extends Pokemon {
   skill = Ability.CHARGE_BEAM
   passive = Passive.SPECIAL_ATTACK
   attackSprite = AttackSprite.ELECTRIC_RANGE
-  attackType = AttackType.SPECIAL}
+  attackType = AttackType.SPECIAL
+}
 
 export class Nihilego extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -12606,7 +13315,8 @@ export class Nihilego extends Pokemon {
   range = 3
   skill = Ability.EMPTY_LIGHT
   passive = Passive.BEAST_BOOST_AP
-  attackSprite = AttackSprite.POISON_RANGE}
+  attackSprite = AttackSprite.POISON_RANGE
+}
 
 export class Tandemaus extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY])
@@ -12625,7 +13335,8 @@ export class Tandemaus extends Pokemon {
   evolutionRule = new ConditionBasedEvolutionRule(
     (pokemon, player, stageLevel) => stageLevel >= 14
   )
-  passive = Passive.FAMILY}
+  passive = Passive.FAMILY
+}
 
 export class MausholdThree extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY])
@@ -12644,7 +13355,8 @@ export class MausholdThree extends Pokemon {
   evolutionRule = new ConditionBasedEvolutionRule(
     (pokemon, player, stageLevel) => stageLevel >= 20
   )
-  passive = Passive.FAMILY}
+  passive = Passive.FAMILY
+}
 
 export class MausholdFour extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY])
@@ -12658,7 +13370,8 @@ export class MausholdFour extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.POPULATION_BOMB
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Morpeko extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.ELECTRIC])
@@ -12673,7 +13386,8 @@ export class Morpeko extends Pokemon {
   range = 1
   skill = Ability.AURA_WHEEL
   attackSprite = AttackSprite.ELECTRIC_MELEE
-  passive = Passive.HUNGER_SWITCH}
+  passive = Passive.HUNGER_SWITCH
+}
 
 export class MorpekoHangry extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.ELECTRIC])
@@ -12688,7 +13402,8 @@ export class MorpekoHangry extends Pokemon {
   range = 1
   skill = Ability.AURA_WHEEL
   attackSprite = AttackSprite.ELECTRIC_MELEE
-  passive = Passive.HUNGER_SWITCH}
+  passive = Passive.HUNGER_SWITCH
+}
 
 export class Minior extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ROCK])
@@ -12703,7 +13418,8 @@ export class Minior extends Pokemon {
   range = 3
   skill = Ability.SHIELDS_DOWN
   attackSprite = AttackSprite.ROCK_RANGE
-  passive = Passive.METEOR}
+  passive = Passive.METEOR
+}
 
 export class MiniorKernelBlue extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ROCK])
@@ -12718,7 +13434,8 @@ export class MiniorKernelBlue extends Pokemon {
   range = 3
   skill = Ability.SHIELDS_UP
   attackSprite = AttackSprite.ROCK_RANGE
-  passive = Passive.METEOR}
+  passive = Passive.METEOR
+}
 
 export class MiniorKernelRed extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ROCK])
@@ -12733,7 +13450,8 @@ export class MiniorKernelRed extends Pokemon {
   range = 3
   skill = Ability.SHIELDS_UP
   attackSprite = AttackSprite.ROCK_RANGE
-  passive = Passive.METEOR}
+  passive = Passive.METEOR
+}
 
 export class MiniorKernelOrange extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ROCK])
@@ -12748,7 +13466,8 @@ export class MiniorKernelOrange extends Pokemon {
   range = 3
   skill = Ability.SHIELDS_UP
   attackSprite = AttackSprite.ROCK_RANGE
-  passive = Passive.METEOR}
+  passive = Passive.METEOR
+}
 
 export class MiniorKernelGreen extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ROCK])
@@ -12763,7 +13482,8 @@ export class MiniorKernelGreen extends Pokemon {
   range = 3
   skill = Ability.SHIELDS_UP
   attackSprite = AttackSprite.ROCK_RANGE
-  passive = Passive.METEOR}
+  passive = Passive.METEOR
+}
 
 export class Hoopa extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.DARK, Synergy.GHOST])
@@ -12777,7 +13497,8 @@ export class Hoopa extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.UNBOUND
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class HoopaUnbound extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.DARK, Synergy.GHOST])
@@ -12791,7 +13512,8 @@ export class HoopaUnbound extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HYPERSPACE_FURY
-  attackSprite = AttackSprite.DARK_MELEE}
+  attackSprite = AttackSprite.DARK_MELEE
+}
 
 export class Gimmighoul extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.STEEL])
@@ -12810,7 +13532,8 @@ export class Gimmighoul extends Pokemon {
   evolutionRule = new ConditionBasedEvolutionRule(
     (pokemon, player) => player.money >= 99
   )
-  passive = Passive.GIMMIGHOUL}
+  passive = Passive.GIMMIGHOUL
+}
 
 export class Gholdengo extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.STEEL])
@@ -12833,7 +13556,8 @@ export class Gholdengo extends Pokemon {
   }
   onAcquired(player: Player) {
     player.titles.add(Title.GOLDEN)
-  }}
+  }
+}
 
 export class Sobble extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.AQUATIC])
@@ -12848,7 +13572,8 @@ export class Sobble extends Pokemon {
   maxPP = 110
   range = 3
   skill = Ability.SNIPE_SHOT
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class Drizzile extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.AQUATIC])
@@ -12863,7 +13588,8 @@ export class Drizzile extends Pokemon {
   maxPP = 110
   range = 3
   skill = Ability.SNIPE_SHOT
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class Inteleon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.AQUATIC])
@@ -12877,7 +13603,8 @@ export class Inteleon extends Pokemon {
   maxPP = 110
   range = 3
   skill = Ability.SNIPE_SHOT
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class Comfey extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.FAIRY])
@@ -12940,7 +13667,8 @@ export class Comfey extends Pokemon {
 
       nearestAllyWithFreeItemSlot.addItem(Item.COMFEY)
     }
-  }}
+  }
+}
 
 export class Lillipup extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
@@ -12955,7 +13683,8 @@ export class Lillipup extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.RETALIATE
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Herdier extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
@@ -12970,7 +13699,8 @@ export class Herdier extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.RETALIATE
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Stoutland extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
@@ -12984,7 +13714,8 @@ export class Stoutland extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.RETALIATE
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Pheromosa extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FIGHTING])
@@ -12998,7 +13729,8 @@ export class Pheromosa extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.LUNGE
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class Dracovish extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -13016,7 +13748,8 @@ export class Dracovish extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.FISHIOUS_REND
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Dracozolt extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -13034,7 +13767,8 @@ export class Dracozolt extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BOLT_BEAK
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class Arctozolt extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -13052,7 +13786,8 @@ export class Arctozolt extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.THUNDER_FANG
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class Arctovish extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.WATER, Synergy.FOSSIL])
@@ -13066,7 +13801,8 @@ export class Arctovish extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ICE_FANG
-  attackSprite = AttackSprite.ICE_MELEE}
+  attackSprite = AttackSprite.ICE_MELEE
+}
 
 export class Bruxish extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.PSYCHIC])
@@ -13080,7 +13816,8 @@ export class Bruxish extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PSYCHIC_FANGS
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Corsola extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.AQUATIC])
@@ -13100,7 +13837,8 @@ export class Corsola extends Pokemon {
   evolutionRule = new ConditionBasedEvolutionRule(
     (pokemon) => pokemon.deathCount > 0
   )
-  regional = true}
+  regional = true
+}
 
 export class GalarCorsola extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.AQUATIC, Synergy.GHOST])
@@ -13119,7 +13857,8 @@ export class GalarCorsola extends Pokemon {
   regional = true
   isInRegion(map: DungeonPMDO, state?: GameState) {
     return false // only base form is in region
-  }}
+  }
+}
 
 export class Cursola extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.AQUATIC, Synergy.GHOST])
@@ -13137,7 +13876,8 @@ export class Cursola extends Pokemon {
   regional = true
   isInRegion(map: DungeonPMDO, state?: GameState) {
     return false // only base form is in region
-  }}
+  }
+}
 
 export class Smeargle extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.HUMAN])
@@ -13165,7 +13905,8 @@ export class Smeargle extends Pokemon {
         entity.stars = allyOnTheLeft.stars
       }
     }
-  }}
+  }
+}
 
 export class Toxel extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -13185,7 +13926,8 @@ export class Toxel extends Pokemon {
   range = 1
   skill = Ability.OVERDRIVE
   attackSprite = AttackSprite.ELECTRIC_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Toxtricity extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -13204,7 +13946,8 @@ export class Toxtricity extends Pokemon {
   range = 1
   skill = Ability.OVERDRIVE
   attackSprite = AttackSprite.ELECTRIC_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Cyclizar extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.NORMAL])
@@ -13218,7 +13961,8 @@ export class Cyclizar extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SHED_TAIL
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Pawniard extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.STEEL])
@@ -13233,7 +13977,8 @@ export class Pawniard extends Pokemon {
   maxPP = 60
   range = 1
   skill = Ability.KOWTOW_CLEAVE
-  attackSprite = AttackSprite.STEEL_MELEE}
+  attackSprite = AttackSprite.STEEL_MELEE
+}
 
 export class Bisharp extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.STEEL])
@@ -13248,7 +13993,8 @@ export class Bisharp extends Pokemon {
   maxPP = 60
   range = 1
   skill = Ability.KOWTOW_CLEAVE
-  attackSprite = AttackSprite.STEEL_MELEE}
+  attackSprite = AttackSprite.STEEL_MELEE
+}
 
 export class Kingambit extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.STEEL])
@@ -13262,7 +14008,8 @@ export class Kingambit extends Pokemon {
   maxPP = 60
   range = 1
   skill = Ability.KOWTOW_CLEAVE
-  attackSprite = AttackSprite.STEEL_MELEE}
+  attackSprite = AttackSprite.STEEL_MELEE
+}
 
 export class Feebas extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER])
@@ -13279,7 +14026,8 @@ export class Feebas extends Pokemon {
   skill = Ability.SPLASH
   passive = Passive.FEEBAS
   attackSprite = AttackSprite.WATER_MELEE
-  evolutionRule = new CountEvolutionRule(6)}
+  evolutionRule = new CountEvolutionRule(6)
+}
 
 export class Milotic extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FAIRY, Synergy.WATER])
@@ -13296,7 +14044,8 @@ export class Milotic extends Pokemon {
   attackSprite = AttackSprite.FAIRY_RANGE
   onAcquired(player: Player) {
     player.titles.add(Title.SIREN)
-  }}
+  }
+}
 
 export class Dewpider extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -13317,7 +14066,8 @@ export class Dewpider extends Pokemon {
   range = 1
   skill = Ability.STICKY_WEB
   attackSprite = AttackSprite.BUG_MELEE
-  passive = Passive.WATER_BUBBLE}
+  passive = Passive.WATER_BUBBLE
+}
 
 export class Araquanid extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -13337,7 +14087,8 @@ export class Araquanid extends Pokemon {
   range = 1
   skill = Ability.STICKY_WEB
   attackSprite = AttackSprite.BUG_MELEE
-  passive = Passive.WATER_BUBBLE}
+  passive = Passive.WATER_BUBBLE
+}
 
 export class Lickitung extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -13356,7 +14107,8 @@ export class Lickitung extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.LICK
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Lickilicky extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -13374,7 +14126,8 @@ export class Lickilicky extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.LICK
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Kangaskhan extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -13392,7 +14145,8 @@ export class Kangaskhan extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HEADBUTT
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Teddiursa extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND])
@@ -13407,7 +14161,8 @@ export class Teddiursa extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.FURY_SWIPES
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Ursaring extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND])
@@ -13422,7 +14177,8 @@ export class Ursaring extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.FURY_SWIPES
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Ursaluna extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND])
@@ -13445,7 +14201,8 @@ export class Ursaluna extends Pokemon {
     if (weather === Weather.BLOODMOON) {
       player.transformPokemon(this, Pkm.URSALUNA_BLOODMOON)
     }
-  }}
+  }
+}
 
 export class UrsalunaBloodmoon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND])
@@ -13470,7 +14227,8 @@ export class UrsalunaBloodmoon extends Pokemon {
   }
   onAcquired(player: Player) {
     player.titles.add(Title.BLOODY)
-  }}
+  }
+}
 
 export class Aipom extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
@@ -13485,7 +14243,8 @@ export class Aipom extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.TICKLE
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Ambipom extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
@@ -13499,7 +14258,8 @@ export class Ambipom extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.TICKLE
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Deerling extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS])
@@ -13515,7 +14275,8 @@ export class Deerling extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.AROMATHERAPY
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Sawsbuck extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS])
@@ -13530,7 +14291,8 @@ export class Sawsbuck extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.AROMATHERAPY
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Patrat extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.LIGHT])
@@ -13545,7 +14307,8 @@ export class Patrat extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.DETECT
-  attackSprite = AttackSprite.ROCK_RANGE}
+  attackSprite = AttackSprite.ROCK_RANGE
+}
 
 export class Watchog extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.LIGHT])
@@ -13559,7 +14322,8 @@ export class Watchog extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.DETECT
-  attackSprite = AttackSprite.ROCK_RANGE}
+  attackSprite = AttackSprite.ROCK_RANGE
+}
 
 export class Spinarak extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.BUG, Synergy.POISON])
@@ -13574,7 +14338,8 @@ export class Spinarak extends Pokemon {
   maxPP = 70
   range = 2
   skill = Ability.STRING_SHOT
-  attackSprite = AttackSprite.POISON_RANGE}
+  attackSprite = AttackSprite.POISON_RANGE
+}
 
 export class Ariados extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.BUG, Synergy.POISON])
@@ -13588,7 +14353,8 @@ export class Ariados extends Pokemon {
   maxPP = 70
   range = 2
   skill = Ability.STRING_SHOT
-  attackSprite = AttackSprite.POISON_RANGE}
+  attackSprite = AttackSprite.POISON_RANGE
+}
 
 export class Rockruff extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ROCK])
@@ -13603,7 +14369,8 @@ export class Rockruff extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ACCELEROCK
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 function updateLycanroc(pokemon: Pokemon, weather: Weather, player: Player) {
   let weatherForm
@@ -13634,7 +14401,8 @@ export class LycanrocDusk extends Pokemon {
 
   beforeSimulationStart({ weather, player }) {
     updateLycanroc(this, weather, player)
-  }}
+  }
+}
 
 export class LycanrocNight extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ROCK, Synergy.DARK])
@@ -13653,7 +14421,8 @@ export class LycanrocNight extends Pokemon {
 
   beforeSimulationStart({ weather, player }) {
     updateLycanroc(this, weather, player)
-  }}
+  }
+}
 
 export class LycanrocDay extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ROCK, Synergy.LIGHT])
@@ -13672,7 +14441,8 @@ export class LycanrocDay extends Pokemon {
 
   beforeSimulationStart({ weather, player }) {
     updateLycanroc(this, weather, player)
-  }}
+  }
+}
 
 export class Druddigon extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -13690,7 +14460,8 @@ export class Druddigon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.OUTRAGE
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Cosmog extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.LIGHT])
@@ -13709,7 +14480,8 @@ export class Cosmog extends Pokemon {
   range = 4
   skill = Ability.TELEPORT
   passive = Passive.COSMOG
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Cosmoem extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.LIGHT])
@@ -13740,7 +14512,8 @@ export class Cosmoem extends Pokemon {
   range = 4
   skill = Ability.TELEPORT
   passive = Passive.COSMOEM
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Solgaleo extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -13762,7 +14535,8 @@ export class Solgaleo extends Pokemon {
   onAcquired(player: Player) {
     this.hp = 300 // cancel hp buffs of cosmoem
     player.titles.add(Title.STARGAZER)
-  }}
+  }
+}
 
 export class Lunala extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -13784,7 +14558,8 @@ export class Lunala extends Pokemon {
   onAcquired(player: Player) {
     this.hp = 300 // cancel hp buffs of cosmoem
     player.titles.add(Title.STARGAZER)
-  }}
+  }
+}
 
 export class Magearna extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -13803,7 +14578,8 @@ export class Magearna extends Pokemon {
   range = 1
   skill = Ability.FLEUR_CANNON
   attackSprite = AttackSprite.FAIRY_MELEE
-  passive = Passive.SOUL_HEART}
+  passive = Passive.SOUL_HEART
+}
 
 export class Impidimp extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FAIRY, Synergy.HUMAN])
@@ -13819,7 +14595,8 @@ export class Impidimp extends Pokemon {
   range = 1
   skill = Ability.SPIRIT_BREAK
   attackSprite = AttackSprite.DARK_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Morgrem extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FAIRY, Synergy.HUMAN])
@@ -13835,7 +14612,8 @@ export class Morgrem extends Pokemon {
   range = 1
   skill = Ability.SPIRIT_BREAK
   attackSprite = AttackSprite.DARK_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Grimmsnarl extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FAIRY, Synergy.HUMAN])
@@ -13850,7 +14628,8 @@ export class Grimmsnarl extends Pokemon {
   range = 1
   skill = Ability.SPIRIT_BREAK
   attackSprite = AttackSprite.DARK_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Drowzee extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -13870,7 +14649,8 @@ export class Drowzee extends Pokemon {
   range = 2
   skill = Ability.DREAM_EATER
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  regional = true}
+  regional = true
+}
 
 export class Hypno extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -13889,7 +14669,8 @@ export class Hypno extends Pokemon {
   range = 2
   skill = Ability.DREAM_EATER
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  regional = true}
+  regional = true
+}
 
 export class Wattrel extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ELECTRIC])
@@ -13906,7 +14687,8 @@ export class Wattrel extends Pokemon {
   skill = Ability.SPARK
   attackSprite = AttackSprite.ELECTRIC_RANGE
   additional = true
-  passive = Passive.WIND_POWER}
+  passive = Passive.WIND_POWER
+}
 
 export class Kilowattrel extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.ELECTRIC])
@@ -13922,7 +14704,8 @@ export class Kilowattrel extends Pokemon {
   skill = Ability.SPARK
   attackSprite = AttackSprite.ELECTRIC_RANGE
   additional = true
-  passive = Passive.WIND_POWER}
+  passive = Passive.WIND_POWER
+}
 
 export class BurmyPlant extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.GRASS])
@@ -13944,7 +14727,8 @@ export class BurmyPlant extends Pokemon {
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.GRASS)
-  }}
+  }
+}
 
 export class BurmySandy extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.GROUND])
@@ -13969,7 +14753,8 @@ export class BurmySandy extends Pokemon {
       regionSynergies.includes(Synergy.GROUND) &&
       !regionSynergies.includes(Synergy.GRASS)
     )
-  }}
+  }
+}
 
 export class BurmyTrash extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ARTIFICIAL])
@@ -13995,7 +14780,8 @@ export class BurmyTrash extends Pokemon {
       !regionSynergies.includes(Synergy.GROUND) &&
       !regionSynergies.includes(Synergy.GRASS)
     )
-  }}
+  }
+}
 
 export class WormadamPlant extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.GRASS])
@@ -14018,7 +14804,8 @@ export class WormadamPlant extends Pokemon {
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.GRASS)
-  }}
+  }
+}
 
 export class WormadamSandy extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.GROUND])
@@ -14044,7 +14831,8 @@ export class WormadamSandy extends Pokemon {
       regionSynergies.includes(Synergy.GROUND) &&
       !regionSynergies.includes(Synergy.GRASS)
     )
-  }}
+  }
+}
 
 export class WormadamTrash extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ARTIFICIAL])
@@ -14071,7 +14859,8 @@ export class WormadamTrash extends Pokemon {
       !regionSynergies.includes(Synergy.GROUND) &&
       !regionSynergies.includes(Synergy.GRASS)
     )
-  }}
+  }
+}
 
 export class Mothim extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING])
@@ -14093,7 +14882,8 @@ export class Mothim extends Pokemon {
     // always hide mothim to avoid showing duplicated with other burmy forms
     // this does not impact the evolution of wormadam
     return false
-  }}
+  }
+}
 
 export class PaldeaWooper extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -14113,7 +14903,8 @@ export class PaldeaWooper extends Pokemon {
   range = 1
   skill = Ability.RECOVER
   attackSprite = AttackSprite.POISON_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Clodsire extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -14132,7 +14923,8 @@ export class Clodsire extends Pokemon {
   range = 1
   skill = Ability.RECOVER
   attackSprite = AttackSprite.POISON_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Tangela extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -14152,7 +14944,8 @@ export class Tangela extends Pokemon {
   range = 1
   skill = Ability.POWER_WHIP
   attackSprite = AttackSprite.GRASS_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Tangrowth extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -14171,7 +14964,8 @@ export class Tangrowth extends Pokemon {
   range = 1
   skill = Ability.POWER_WHIP
   attackSprite = AttackSprite.GRASS_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Phanpy extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND, Synergy.BABY])
@@ -14186,7 +14980,8 @@ export class Phanpy extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.RAPID_SPIN
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Donphan extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND])
@@ -14200,7 +14995,8 @@ export class Donphan extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.RAPID_SPIN
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Spoink extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FIELD])
@@ -14216,7 +15012,8 @@ export class Spoink extends Pokemon {
   range = 1
   skill = Ability.BOUNCE
   attackSprite = AttackSprite.PSYCHIC_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Grumpig extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FIELD])
@@ -14231,7 +15028,8 @@ export class Grumpig extends Pokemon {
   range = 1
   skill = Ability.BOUNCE
   attackSprite = AttackSprite.PSYCHIC_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Sinistea extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -14251,7 +15049,8 @@ export class Sinistea extends Pokemon {
   range = 2
   skill = Ability.TEA_TIME
   attackSprite = AttackSprite.GHOST_RANGE
-  additional = true}
+  additional = true
+}
 
 export class Polteageist extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -14270,7 +15069,8 @@ export class Polteageist extends Pokemon {
   range = 2
   skill = Ability.TEA_TIME
   attackSprite = AttackSprite.GHOST_RANGE
-  additional = true}
+  additional = true
+}
 
 export class Ferroseed extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.STEEL])
@@ -14286,7 +15086,8 @@ export class Ferroseed extends Pokemon {
   range = 1
   skill = Ability.SPIKES
   attackSprite = AttackSprite.GRASS_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Ferrothorn extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.STEEL])
@@ -14301,7 +15102,8 @@ export class Ferrothorn extends Pokemon {
   range = 1
   skill = Ability.SPIKES
   attackSprite = AttackSprite.GRASS_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Golett extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -14321,7 +15123,8 @@ export class Golett extends Pokemon {
   range = 1
   skill = Ability.SHADOW_PUNCH
   attackSprite = AttackSprite.NORMAL_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Golurk extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -14340,7 +15143,8 @@ export class Golurk extends Pokemon {
   range = 1
   skill = Ability.SHADOW_PUNCH
   attackSprite = AttackSprite.NORMAL_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Trubbish extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.POISON, Synergy.ARTIFICIAL])
@@ -14360,7 +15164,7 @@ export class Trubbish extends Pokemon {
   additional = true
 
   statIncreases = {
-    [Stat.ATK_SPEED]: 0,
+    [Stat.SPEED]: 0,
     [Stat.AP]: 0,
     [Stat.CRIT_CHANCE]: 0,
     [Stat.PP]: 0,
@@ -14408,7 +15212,7 @@ export class Trubbish extends Pokemon {
     entity.addShield(this.statIncreases[Stat.SHIELD], entity, 0, false)
     entity.addCritChance(this.statIncreases[Stat.CRIT_CHANCE], entity, 0, false)
     entity.addPP(this.statIncreases[Stat.PP], entity, 0, false)
-    entity.addAttackSpeed(this.statIncreases[Stat.ATK_SPEED], entity, 0, false)
+    entity.addSpeed(this.statIncreases[Stat.SPEED], entity, 0, false)
     entity.addAttack(this.statIncreases[Stat.ATK], entity, 0, false)
     entity.addSpecialDefense(this.statIncreases[Stat.SPE_DEF], entity, 0, false)
     entity.addDefense(this.statIncreases[Stat.DEF], entity, 0, false)
@@ -14424,7 +15228,7 @@ export class Trubbish extends Pokemon {
     // Carry over the stats gained with passive
     const garbodor = garbodorObj as Garbodor
     garbodor.statIncreases = {
-      [Stat.ATK_SPEED]: 0,
+      [Stat.SPEED]: 0,
       [Stat.AP]: 0,
       [Stat.CRIT_CHANCE]: 0,
       [Stat.PP]: 0,
@@ -14440,7 +15244,8 @@ export class Trubbish extends Pokemon {
         garbodor.statIncreases[key] += trubbish.statIncreases[key]
       }
     })
-  }}
+  }
+}
 
 export class Garbodor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.POISON, Synergy.ARTIFICIAL])
@@ -14459,7 +15264,7 @@ export class Garbodor extends Pokemon {
   additional = true
 
   statIncreases = {
-    [Stat.ATK_SPEED]: 0,
+    [Stat.SPEED]: 0,
     [Stat.AP]: 0,
     [Stat.CRIT_CHANCE]: 0,
     [Stat.PP]: 0,
@@ -14477,7 +15282,8 @@ export class Garbodor extends Pokemon {
   }
 
   beforeSimulationStart = Trubbish.prototype.beforeSimulationStart
-  onSpawn = Trubbish.prototype.onSpawn}
+  onSpawn = Trubbish.prototype.onSpawn
+}
 
 export class Grubbin extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ELECTRIC])
@@ -14494,7 +15300,8 @@ export class Grubbin extends Pokemon {
   range = 3
   skill = Ability.ZAP_CANNON
   passive = Passive.HATCH
-  attackSprite = AttackSprite.ELECTRIC_RANGE}
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+}
 
 export class Charjabug extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ELECTRIC])
@@ -14511,7 +15318,8 @@ export class Charjabug extends Pokemon {
   range = 3
   skill = Ability.ZAP_CANNON
   passive = Passive.HATCH
-  attackSprite = AttackSprite.ELECTRIC_RANGE}
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+}
 
 export class Vikavolt extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ELECTRIC])
@@ -14525,7 +15333,8 @@ export class Vikavolt extends Pokemon {
   maxPP = 70
   range = 3
   skill = Ability.ZAP_CANNON
-  attackSprite = AttackSprite.ELECTRIC_RANGE}
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+}
 
 export class ShellosWestSea extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -14552,7 +15361,8 @@ export class ShellosWestSea extends Pokemon {
       regionSynergies.includes(Synergy.WATER) ||
       regionSynergies.includes(Synergy.GROUND)
     )
-  }}
+  }
+}
 
 export class GastrodonWestSea extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -14578,7 +15388,8 @@ export class GastrodonWestSea extends Pokemon {
       regionSynergies.includes(Synergy.WATER) ||
       regionSynergies.includes(Synergy.GROUND)
     )
-  }}
+  }
+}
 
 export class ShellosEastSea extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -14609,7 +15420,8 @@ export class ShellosEastSea extends Pokemon {
         regionSynergies.includes(Synergy.WATER)
       )
     )
-  }}
+  }
+}
 
 export class GastrodonEastSea extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -14639,7 +15451,8 @@ export class GastrodonEastSea extends Pokemon {
         regionSynergies.includes(Synergy.WATER)
       )
     )
-  }}
+  }
+}
 
 export class Rufflet extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FLYING])
@@ -14655,7 +15468,8 @@ export class Rufflet extends Pokemon {
   range = 1
   skill = Ability.CRUSH_CLAW
   regional = true
-  attackSprite = AttackSprite.FLYING_MELEE}
+  attackSprite = AttackSprite.FLYING_MELEE
+}
 
 export class Braviary extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FLYING])
@@ -14670,7 +15484,8 @@ export class Braviary extends Pokemon {
   range = 1
   skill = Ability.CRUSH_CLAW
   regional = true
-  attackSprite = AttackSprite.FLYING_MELEE}
+  attackSprite = AttackSprite.FLYING_MELEE
+}
 
 export class Klefki extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -14688,7 +15503,8 @@ export class Klefki extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.FAIRY_LOCK
-  attackSprite = AttackSprite.FAIRY_RANGE}
+  attackSprite = AttackSprite.FAIRY_RANGE
+}
 
 export class Hawlucha extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -14706,7 +15522,8 @@ export class Hawlucha extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.FLYING_PRESS
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 
 export class Stonjourner extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.GROUND, Synergy.LIGHT])
@@ -14737,7 +15554,8 @@ export class Stonjourner extends Pokemon {
           cell.value.addAbilityPower(50, cell.value, 0, false)
         }
       })
-  }}
+  }
+}
 
 export class Cramorant extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.AQUATIC])
@@ -14751,7 +15569,8 @@ export class Cramorant extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.GULP_MISSILE
-  attackSprite = AttackSprite.FLYING_RANGE}
+  attackSprite = AttackSprite.FLYING_RANGE
+}
 
 export class Arrokuda extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER])
@@ -14765,7 +15584,8 @@ export class Arrokuda extends Pokemon {
   maxPP = 140
   range = 1
   skill = Ability.AQUA_JET
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Durant extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.BUG])
@@ -14780,7 +15600,8 @@ export class Durant extends Pokemon {
   range = 1
   skill = Ability.INFESTATION
   attackSprite = AttackSprite.BUG_MELEE
-  passive = Passive.DURANT}
+  passive = Passive.DURANT
+}
 
 export class Wishiwashi extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER])
@@ -14797,7 +15618,8 @@ export class Wishiwashi extends Pokemon {
   skill = Ability.AQUA_JET
   attackSprite = AttackSprite.WATER_MELEE
   passive = Passive.WISHIWASHI
-  evolutionRule = new CountEvolutionRule(3)}
+  evolutionRule = new CountEvolutionRule(3)
+}
 
 export class WishiwashiSchool extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -14819,7 +15641,8 @@ export class WishiwashiSchool extends Pokemon {
   attackSprite = AttackSprite.WATER_MELEE
   onAcquired(player: Player) {
     player.titles.add(Title.FEARSOME)
-  }}
+  }
+}
 
 export class Pawmi extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIGHTING])
@@ -14834,7 +15657,8 @@ export class Pawmi extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DOUBLE_SHOCK
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class Pawmo extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIGHTING])
@@ -14849,7 +15673,8 @@ export class Pawmo extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DOUBLE_SHOCK
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class Pawmot extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIGHTING])
@@ -14863,7 +15688,8 @@ export class Pawmot extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DOUBLE_SHOCK
-  attackSprite = AttackSprite.ELECTRIC_MELEE}
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+}
 
 export class Pyukumuku extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -14882,7 +15708,8 @@ export class Pyukumuku extends Pokemon {
   range = 1
   skill = Ability.PURIFY
   passive = Passive.PYUKUMUKU
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Goldeen extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.NORMAL])
@@ -14898,7 +15725,8 @@ export class Goldeen extends Pokemon {
   range = 1
   skill = Ability.WATERFALL
   additional = true
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Seaking extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.NORMAL])
@@ -14913,7 +15741,8 @@ export class Seaking extends Pokemon {
   range = 1
   skill = Ability.WATERFALL
   additional = true
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Luvdisc extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.AQUATIC])
@@ -14928,7 +15757,8 @@ export class Luvdisc extends Pokemon {
   range = 3
   skill = Ability.CHARM
   attackSprite = AttackSprite.WATER_RANGE
-  passive = Passive.LUVDISC}
+  passive = Passive.LUVDISC
+}
 
 export class Audino extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.SOUND])
@@ -14942,7 +15772,8 @@ export class Audino extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.ENTRAINMENT
-  attackSprite = AttackSprite.SOUND_RANGE}
+  attackSprite = AttackSprite.SOUND_RANGE
+}
 
 export class Petilil extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA, Synergy.HUMAN])
@@ -14958,7 +15789,8 @@ export class Petilil extends Pokemon {
   range = 1
   skill = Ability.AROMATHERAPY
   attackSprite = AttackSprite.GRASS_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Lilligant extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA, Synergy.HUMAN])
@@ -15013,7 +15845,8 @@ export class Mantyke extends Pokemon {
 
   onChangePosition(x: number, y: number, player: Player) {
     this.evolutionRule.tryEvolve(this, player, 0)
-  }}
+  }
+}
 
 export class Mantine extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FLYING])
@@ -15028,7 +15861,8 @@ export class Mantine extends Pokemon {
   range = 2
   skill = Ability.BOUNCE
   attackSprite = AttackSprite.WATER_RANGE
-  passive = Passive.MANTINE}
+  passive = Passive.MANTINE
+}
 
 export class Remoraid extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.WATER])
@@ -15051,7 +15885,8 @@ export class Remoraid extends Pokemon {
         pokemon.evolutionRule.tryEvolve(pokemon, player, 0)
       }
     }
-  }}
+  }
+}
 
 export class Octillery extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.WATER])
@@ -15065,7 +15900,8 @@ export class Octillery extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.OKTZOOKA
-  attackSprite = AttackSprite.WATER_RANGE}
+  attackSprite = AttackSprite.WATER_RANGE
+}
 
 export class Sigilyph extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -15083,7 +15919,8 @@ export class Sigilyph extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.PSYCHO_SHIFT
-  attackSprite = AttackSprite.PSYCHIC_RANGE}
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
 
 export class Frigibax extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.ICE])
@@ -15098,7 +15935,8 @@ export class Frigibax extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.GLAIVE_RUSH
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Arctibax extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.ICE])
@@ -15113,7 +15951,8 @@ export class Arctibax extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.GLAIVE_RUSH
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Baxcalibur extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.ICE])
@@ -15127,7 +15966,8 @@ export class Baxcalibur extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.GLAIVE_RUSH
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Sandile extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -15148,7 +15988,8 @@ export class Sandile extends Pokemon {
   range = 1
   skill = Ability.FOUL_PLAY
   passive = Passive.HATCH
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Krokorok extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -15169,7 +16010,8 @@ export class Krokorok extends Pokemon {
   range = 1
   skill = Ability.FOUL_PLAY
   passive = Passive.HATCH
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Krookodile extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -15187,7 +16029,8 @@ export class Krookodile extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.FOUL_PLAY
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Binacle extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.WATER])
@@ -15203,7 +16046,8 @@ export class Binacle extends Pokemon {
   range = 1
   skill = Ability.STONE_EDGE
   additional = true
-  attackSprite = AttackSprite.ROCK_RANGE}
+  attackSprite = AttackSprite.ROCK_RANGE
+}
 
 export class Barbaracle extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.WATER])
@@ -15218,7 +16062,8 @@ export class Barbaracle extends Pokemon {
   range = 1
   skill = Ability.STONE_EDGE
   additional = true
-  attackSprite = AttackSprite.ROCK_RANGE}
+  attackSprite = AttackSprite.ROCK_RANGE
+}
 
 export class Skarmory extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FLYING])
@@ -15270,7 +16115,8 @@ export class Skarmory extends Pokemon {
         }
       }, 300)
     )
-  }}
+  }
+}
 
 function ogerponOnAcquired(
   player: Player,
@@ -15305,7 +16151,8 @@ export class OgerponTeal extends Pokemon {
   skill = Ability.IVY_CUDGEL
   attackSprite = AttackSprite.GRASS_MELEE
   onAcquired = (player: Player) => ogerponOnAcquired(player, null)
-  passive = Passive.OGERPON_TEAL}
+  passive = Passive.OGERPON_TEAL
+}
 
 export class OgerponTealMask extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
@@ -15322,7 +16169,8 @@ export class OgerponTealMask extends Pokemon {
   attackSprite = AttackSprite.GRASS_MELEE
   shiny = false
   onAcquired = (player: Player) => ogerponOnAcquired(player, Item.TEAL_MASK)
-  passive = Passive.OGERPON_TEAL}
+  passive = Passive.OGERPON_TEAL
+}
 
 export class OgerponWellspring extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.AQUATIC])
@@ -15338,7 +16186,8 @@ export class OgerponWellspring extends Pokemon {
   skill = Ability.IVY_CUDGEL
   attackSprite = AttackSprite.GRASS_MELEE
   onAcquired = (player: Player) => ogerponOnAcquired(player, null)
-  passive = Passive.OGERPON_WELLSPRING}
+  passive = Passive.OGERPON_WELLSPRING
+}
 
 export class OgerponWellspringMask extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.AQUATIC])
@@ -15356,7 +16205,8 @@ export class OgerponWellspringMask extends Pokemon {
   shiny = false
   onAcquired = (player: Player) =>
     ogerponOnAcquired(player, Item.WELLSPRING_MASK)
-  passive = Passive.OGERPON_WELLSPRING}
+  passive = Passive.OGERPON_WELLSPRING
+}
 
 export class OgerponHearthflame extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIRE])
@@ -15372,7 +16222,8 @@ export class OgerponHearthflame extends Pokemon {
   skill = Ability.IVY_CUDGEL
   attackSprite = AttackSprite.GRASS_MELEE
   onAcquired = (player: Player) => ogerponOnAcquired(player, null)
-  passive = Passive.OGERPON_HEARTHFLAME}
+  passive = Passive.OGERPON_HEARTHFLAME
+}
 
 export class OgerponHearthflameMask extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIRE])
@@ -15390,7 +16241,8 @@ export class OgerponHearthflameMask extends Pokemon {
   shiny = false
   onAcquired = (player: Player) =>
     ogerponOnAcquired(player, Item.HEARTHFLAME_MASK)
-  passive = Passive.OGERPON_HEARTHFLAME}
+  passive = Passive.OGERPON_HEARTHFLAME
+}
 
 export class OgerponCornerstone extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.ROCK])
@@ -15406,7 +16258,8 @@ export class OgerponCornerstone extends Pokemon {
   skill = Ability.IVY_CUDGEL
   attackSprite = AttackSprite.GRASS_MELEE
   onAcquired = (player: Player) => ogerponOnAcquired(player, null)
-  passive = Passive.OGERPON_CORNERSTONE}
+  passive = Passive.OGERPON_CORNERSTONE
+}
 
 export class OgerponCornerstoneMask extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.ROCK])
@@ -15424,7 +16277,8 @@ export class OgerponCornerstoneMask extends Pokemon {
   shiny = false
   onAcquired = (player: Player) =>
     ogerponOnAcquired(player, Item.CORNERSTONE_MASK)
-  passive = Passive.OGERPON_CORNERSTONE}
+  passive = Passive.OGERPON_CORNERSTONE
+}
 
 export class IronHands extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -15442,7 +16296,8 @@ export class IronHands extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.FORCE_PALM
-  attackSprite = AttackSprite.FIGHTING_MELEE}
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
 
 export class Rookidee extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FLYING])
@@ -15458,7 +16313,8 @@ export class Rookidee extends Pokemon {
   range = 1
   skill = Ability.STEEL_WING
   attackSprite = AttackSprite.FLYING_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Corvisquire extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FLYING])
@@ -15474,7 +16330,8 @@ export class Corvisquire extends Pokemon {
   range = 1
   skill = Ability.STEEL_WING
   attackSprite = AttackSprite.FLYING_MELEE
-  regional = true}
+  regional = true
+}
 
 export class Corviknight extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FLYING])
@@ -15489,7 +16346,8 @@ export class Corviknight extends Pokemon {
   range = 1
   skill = Ability.STEEL_WING
   attackSprite = AttackSprite.FLYING_MELEE
-  regional = true}
+  regional = true
+}
 export class Turtonator extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FIRE])
   rarity = Rarity.UNIQUE
@@ -15502,7 +16360,8 @@ export class Turtonator extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SHELL_TRAP
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Sandygast extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -15522,7 +16381,8 @@ export class Sandygast extends Pokemon {
   range = 1
   skill = Ability.SHORE_UP
   additional = true
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Palossand extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -15541,7 +16401,8 @@ export class Palossand extends Pokemon {
   range = 1
   skill = Ability.SHORE_UP
   additional = true
-  attackSprite = AttackSprite.WATER_MELEE}
+  attackSprite = AttackSprite.WATER_MELEE
+}
 
 export class Skorupi extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON])
@@ -15557,7 +16418,8 @@ export class Skorupi extends Pokemon {
   range = 1
   skill = Ability.POISON_STING
   additional = true
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class Drapion extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON, Synergy.DARK])
@@ -15572,7 +16434,8 @@ export class Drapion extends Pokemon {
   range = 1
   skill = Ability.POISON_STING
   additional = true
-  attackSprite = AttackSprite.BUG_MELEE}
+  attackSprite = AttackSprite.BUG_MELEE
+}
 
 export class Darumaka extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIRE, Synergy.PSYCHIC])
@@ -15587,7 +16450,8 @@ export class Darumaka extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HEADBUTT
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class Darmanitan extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIRE, Synergy.PSYCHIC])
@@ -15602,7 +16466,8 @@ export class Darmanitan extends Pokemon {
   range = 1
   skill = Ability.HEADBUTT
   passive = Passive.DARMANITAN
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class DarmanitanZen extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIRE, Synergy.PSYCHIC])
@@ -15617,7 +16482,8 @@ export class DarmanitanZen extends Pokemon {
   range = 1
   skill = Ability.TRANSE
   passive = Passive.DARMANITAN_ZEN
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class Krabby extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.NORMAL])
@@ -15633,7 +16499,8 @@ export class Krabby extends Pokemon {
   range = 1
   skill = Ability.VISE_GRIP
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Kingler extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.NORMAL])
@@ -15648,7 +16515,8 @@ export class Kingler extends Pokemon {
   range = 1
   skill = Ability.VISE_GRIP
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Zygarde10 extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GROUND])
@@ -15668,7 +16536,8 @@ export class Zygarde10 extends Pokemon {
     if (player.items.includes(Item.ZYGARDE_CUBE) === false) {
       player.items.push(Item.ZYGARDE_CUBE)
     }
-  }}
+  }
+}
 
 export class Zygarde50 extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GROUND])
@@ -15688,7 +16557,8 @@ export class Zygarde50 extends Pokemon {
     if (player.items.includes(Item.ZYGARDE_CUBE) === false) {
       player.items.push(Item.ZYGARDE_CUBE)
     }
-  }}
+  }
+}
 
 export class Zygarde100 extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GROUND])
@@ -15702,7 +16572,8 @@ export class Zygarde100 extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.CORE_ENFORCER
-  attackSprite = AttackSprite.DRAGON_MELEE}
+  attackSprite = AttackSprite.DRAGON_MELEE
+}
 
 export class Sizzlipede extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.BUG])
@@ -15718,7 +16589,8 @@ export class Sizzlipede extends Pokemon {
   range = 1
   skill = Ability.BURN_UP
   regional = true
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class Centiskorch extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.BUG])
@@ -15733,7 +16605,8 @@ export class Centiskorch extends Pokemon {
   range = 1
   skill = Ability.BURN_UP
   regional = true
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class Stufful extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIGHTING])
@@ -15749,7 +16622,8 @@ export class Stufful extends Pokemon {
   range = 1
   skill = Ability.POWER_HUG
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Bewear extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIGHTING])
@@ -15764,7 +16638,8 @@ export class Bewear extends Pokemon {
   range = 1
   skill = Ability.POWER_HUG
   additional = true
-  attackSprite = AttackSprite.NORMAL_MELEE}
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
 
 export class Glimmet extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.POISON, Synergy.ROCK, Synergy.FLORA])
@@ -15781,7 +16656,8 @@ export class Glimmet extends Pokemon {
   skill = Ability.MORTAL_SPIN
   additional = true
   attackSprite = AttackSprite.POISON_MELEE
-  passive = Passive.GLIMMORA}
+  passive = Passive.GLIMMORA
+}
 
 export class Glimmora extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.POISON, Synergy.ROCK, Synergy.FLORA])
@@ -15797,7 +16673,8 @@ export class Glimmora extends Pokemon {
   skill = Ability.MORTAL_SPIN
   additional = true
   attackSprite = AttackSprite.POISON_MELEE
-  passive = Passive.GLIMMORA}
+  passive = Passive.GLIMMORA
+}
 
 export class Fletchling extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.FIRE])
@@ -15812,7 +16689,8 @@ export class Fletchling extends Pokemon {
   maxPP = 110
   range = 2
   skill = Ability.FIRESTARTER
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Fletchinder extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.FIRE])
@@ -15827,7 +16705,8 @@ export class Fletchinder extends Pokemon {
   maxPP = 110
   range = 2
   skill = Ability.FIRESTARTER
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Talonflame extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.FIRE])
@@ -15841,7 +16720,8 @@ export class Talonflame extends Pokemon {
   maxPP = 110
   range = 2
   skill = Ability.FIRESTARTER
-  attackSprite = AttackSprite.FIRE_RANGE}
+  attackSprite = AttackSprite.FIRE_RANGE
+}
 
 export class Vullaby extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FLYING])
@@ -15857,7 +16737,8 @@ export class Vullaby extends Pokemon {
   range = 1
   skill = Ability.BONE_ARMOR
   additional = true
-  attackSprite = AttackSprite.DARK_MELEE}
+  attackSprite = AttackSprite.DARK_MELEE
+}
 
 export class Mandibuzz extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FLYING])
@@ -15872,7 +16753,8 @@ export class Mandibuzz extends Pokemon {
   range = 1
   skill = Ability.BONE_ARMOR
   additional = true
-  attackSprite = AttackSprite.DARK_MELEE}
+  attackSprite = AttackSprite.DARK_MELEE
+}
 
 export class Inkay extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -15892,7 +16774,8 @@ export class Inkay extends Pokemon {
   range = 1
   skill = Ability.TOPSY_TURVY
   additional = true
-  attackSprite = AttackSprite.DARK_MELEE}
+  attackSprite = AttackSprite.DARK_MELEE
+}
 
 export class Malamar extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -15911,7 +16794,8 @@ export class Malamar extends Pokemon {
   range = 1
   skill = Ability.TOPSY_TURVY
   additional = true
-  attackSprite = AttackSprite.DARK_MELEE}
+  attackSprite = AttackSprite.DARK_MELEE
+}
 
 const updatePillars = (player: Player, pkm: Pkm, pillarPkm: Pkm) => {
   const pkmOnBoard = values(player.board).filter(
@@ -15988,7 +16872,8 @@ export class Timburr extends Pokemon {
   afterSell(player) {
     updatePillars(player, Pkm.TIMBURR, Pkm.PILLAR_WOOD)
   }
-  afterEvolve = pillarEvolve(Pkm.PILLAR_WOOD, Pkm.PILLAR_IRON)}
+  afterEvolve = pillarEvolve(Pkm.PILLAR_WOOD, Pkm.PILLAR_IRON)
+}
 
 export class Gurdurr extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
@@ -16011,7 +16896,8 @@ export class Gurdurr extends Pokemon {
   afterSell(player) {
     updatePillars(player, Pkm.GURDURR, Pkm.PILLAR_IRON)
   }
-  afterEvolve = pillarEvolve(Pkm.PILLAR_IRON, Pkm.PILLAR_CONCRETE)}
+  afterEvolve = pillarEvolve(Pkm.PILLAR_IRON, Pkm.PILLAR_CONCRETE)
+}
 
 export class Conkeldurr extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
@@ -16032,7 +16918,8 @@ export class Conkeldurr extends Pokemon {
   }
   afterSell(player) {
     updatePillars(player, Pkm.CONKELDURR, Pkm.PILLAR_CONCRETE)
-  }}
+  }
+}
 
 export class PillarWood extends Pokemon {
   types = new SetSchema<Synergy>([])
@@ -16054,7 +16941,8 @@ export class PillarWood extends Pokemon {
     entity.status.tree = true
     entity.status.triggerRuneProtect(30000)
     entity.toIdleState()
-  }}
+  }
+}
 
 export class PillarIron extends Pokemon {
   types = new SetSchema<Synergy>([])
@@ -16076,7 +16964,8 @@ export class PillarIron extends Pokemon {
     entity.status.tree = true
     entity.status.triggerRuneProtect(30000)
     entity.toIdleState()
-  }}
+  }
+}
 
 export class PillarConcrete extends Pokemon {
   types = new SetSchema<Synergy>([])
@@ -16098,7 +16987,8 @@ export class PillarConcrete extends Pokemon {
     entity.status.tree = true
     entity.status.triggerRuneProtect(30000)
     entity.toIdleState()
-  }}
+  }
+}
 
 export class Elgyem extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -16118,7 +17008,8 @@ export class Elgyem extends Pokemon {
   range = 2
   skill = Ability.WONDER_ROOM
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  additional = true}
+  additional = true
+}
 
 export class Beheeyem extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -16137,7 +17028,8 @@ export class Beheeyem extends Pokemon {
   range = 2
   skill = Ability.WONDER_ROOM
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  additional = true}
+  additional = true
+}
 
 export class Litten extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.DARK, Synergy.FIELD])
@@ -16152,7 +17044,8 @@ export class Litten extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DARK_LARIAT
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class Torracat extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.DARK, Synergy.FIELD])
@@ -16167,7 +17060,8 @@ export class Torracat extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DARK_LARIAT
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class Incineroar extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.DARK, Synergy.FIELD])
@@ -16181,7 +17075,8 @@ export class Incineroar extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DARK_LARIAT
-  attackSprite = AttackSprite.FIRE_MELEE}
+  attackSprite = AttackSprite.FIRE_MELEE
+}
 
 export class Skrelp extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -16201,7 +17096,8 @@ export class Skrelp extends Pokemon {
   range = 3
   skill = Ability.SLUDGE_WAVE
   attackSprite = AttackSprite.POISON_RANGE
-  additional = true}
+  additional = true
+}
 
 export class Dragalge extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -16220,7 +17116,8 @@ export class Dragalge extends Pokemon {
   range = 3
   skill = Ability.SLUDGE_WAVE
   attackSprite = AttackSprite.POISON_RANGE
-  additional = true}
+  additional = true
+}
 
 export class Cubchoo extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FIELD, Synergy.AQUATIC])
@@ -16236,7 +17133,8 @@ export class Cubchoo extends Pokemon {
   range = 1
   skill = Ability.FROST_BREATH
   attackSprite = AttackSprite.ICE_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Beartic extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FIELD, Synergy.AQUATIC])
@@ -16251,7 +17149,8 @@ export class Beartic extends Pokemon {
   range = 1
   skill = Ability.FROST_BREATH
   attackSprite = AttackSprite.ICE_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Nacli extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.GOURMET])
@@ -16266,7 +17165,8 @@ export class Nacli extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SALT_CURE
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Naclstack extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.GOURMET])
@@ -16281,7 +17181,8 @@ export class Naclstack extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SALT_CURE
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Garganacl extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.GOURMET])
@@ -16295,7 +17196,8 @@ export class Garganacl extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SALT_CURE
-  attackSprite = AttackSprite.ROCK_MELEE}
+  attackSprite = AttackSprite.ROCK_MELEE
+}
 
 export class Capsakid extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIRE, Synergy.GOURMET])
@@ -16311,7 +17213,8 @@ export class Capsakid extends Pokemon {
   range = 1
   skill = Ability.SPICY_EXTRACT
   attackSprite = AttackSprite.FIRE_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Scovillain extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIRE, Synergy.GOURMET])
@@ -16326,7 +17229,8 @@ export class Scovillain extends Pokemon {
   range = 1
   skill = Ability.SPICY_EXTRACT
   attackSprite = AttackSprite.FIRE_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Swirlix extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.GOURMET])
@@ -16342,7 +17246,8 @@ export class Swirlix extends Pokemon {
   range = 1
   skill = Ability.SWEET_SCENT
   attackSprite = AttackSprite.FAIRY_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Slurpuff extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.GOURMET])
@@ -16357,7 +17262,8 @@ export class Slurpuff extends Pokemon {
   range = 1
   skill = Ability.SWEET_SCENT
   attackSprite = AttackSprite.FAIRY_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Gulpin extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -16377,7 +17283,8 @@ export class Gulpin extends Pokemon {
   range = 1
   skill = Ability.SWALLOW
   attackSprite = AttackSprite.POISON_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Swalot extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -16396,7 +17303,8 @@ export class Swalot extends Pokemon {
   range = 1
   skill = Ability.SWALLOW
   attackSprite = AttackSprite.POISON_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Fidough extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -16417,7 +17325,8 @@ export class Fidough extends Pokemon {
   skill = Ability.GROWL
   passive = Passive.WELL_BAKED
   attackSprite = AttackSprite.FAIRY_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Dachsbun extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -16437,7 +17346,8 @@ export class Dachsbun extends Pokemon {
   skill = Ability.GROWL
   passive = Passive.WELL_BAKED
   attackSprite = AttackSprite.FAIRY_MELEE
-  additional = true}
+  additional = true
+}
 
 export class Milcery extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -16510,7 +17420,8 @@ export class Milcery extends Pokemon {
   range = 2
   skill = Ability.DECORATE
   passive = Passive.CREAM
-  attackSprite = AttackSprite.FAIRY_RANGE}
+  attackSprite = AttackSprite.FAIRY_RANGE
+}
 
 function alcremieOnAcquired(player: Player) {
   Flavors.forEach((flavor) => {
@@ -16536,7 +17447,8 @@ export class AlcremieVanilla extends Pokemon {
   skill = Ability.DECORATE
   attackSprite = AttackSprite.FAIRY_RANGE
   passive = Passive.VANILLA_CREAM
-  onAcquired = alcremieOnAcquired}
+  onAcquired = alcremieOnAcquired
+}
 
 export class AlcremieRuby extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -16556,7 +17468,8 @@ export class AlcremieRuby extends Pokemon {
   skill = Ability.DECORATE
   attackSprite = AttackSprite.FAIRY_RANGE
   passive = Passive.RUBY_CREAM
-  onAcquired = alcremieOnAcquired}
+  onAcquired = alcremieOnAcquired
+}
 
 export class AlcremieMatcha extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -16576,7 +17489,8 @@ export class AlcremieMatcha extends Pokemon {
   skill = Ability.DECORATE
   attackSprite = AttackSprite.FAIRY_RANGE
   passive = Passive.MATCHA_CREAM
-  onAcquired = alcremieOnAcquired}
+  onAcquired = alcremieOnAcquired
+}
 
 export class AlcremieMint extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -16596,7 +17510,8 @@ export class AlcremieMint extends Pokemon {
   skill = Ability.DECORATE
   attackSprite = AttackSprite.FAIRY_RANGE
   passive = Passive.MINT_CREAM
-  onAcquired = alcremieOnAcquired}
+  onAcquired = alcremieOnAcquired
+}
 
 export class AlcremieLemon extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -16616,7 +17531,8 @@ export class AlcremieLemon extends Pokemon {
   skill = Ability.DECORATE
   attackSprite = AttackSprite.FAIRY_RANGE
   passive = Passive.LEMON_CREAM
-  onAcquired = alcremieOnAcquired}
+  onAcquired = alcremieOnAcquired
+}
 
 export class AlcremieSalted extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -16636,7 +17552,8 @@ export class AlcremieSalted extends Pokemon {
   skill = Ability.DECORATE
   attackSprite = AttackSprite.FAIRY_RANGE
   passive = Passive.SALTED_CREAM
-  onAcquired = alcremieOnAcquired}
+  onAcquired = alcremieOnAcquired
+}
 
 export class AlcremieRubySwirl extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -16656,7 +17573,8 @@ export class AlcremieRubySwirl extends Pokemon {
   skill = Ability.DECORATE
   attackSprite = AttackSprite.FAIRY_RANGE
   passive = Passive.RUBY_SWIRL_CREAM
-  onAcquired = alcremieOnAcquired}
+  onAcquired = alcremieOnAcquired
+}
 
 export class AlcremieCaramelSwirl extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -16676,7 +17594,8 @@ export class AlcremieCaramelSwirl extends Pokemon {
   skill = Ability.DECORATE
   attackSprite = AttackSprite.FAIRY_RANGE
   passive = Passive.CARAMEL_SWIRL_CREAM
-  onAcquired = alcremieOnAcquired}
+  onAcquired = alcremieOnAcquired
+}
 
 export class AlcremieRainbowSwirl extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -16696,7 +17615,8 @@ export class AlcremieRainbowSwirl extends Pokemon {
   skill = Ability.DECORATE
   attackSprite = AttackSprite.FAIRY_RANGE
   passive = Passive.RAINBOW_SWIRL_CREAM
-  onAcquired = alcremieOnAcquired}
+  onAcquired = alcremieOnAcquired
+}
 
 export const PokemonClasses: Record<
   Pkm,

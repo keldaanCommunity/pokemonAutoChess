@@ -1353,13 +1353,17 @@ export default class Simulation extends Schema implements ISimulation {
         const player = pokemon.player
         const nbFloatStones = player ? count(player.items, Item.FLOAT_STONE) : 0
         pokemon.addSpeed(
-          (pokemon.types.has(Synergy.FLYING) ? 10 : 0) + nbFloatStones * 5,
+          (pokemon.types.has(Synergy.FLYING) ? 20 : 10) + nbFloatStones * 5,
           pokemon,
           0,
           false
         )
         break
       }
+
+      case Effect.SNOW:
+        pokemon.addSpeed(-20, pokemon, 0, false)
+        break
 
       case Effect.SMOG: {
         const opponentPlayer =
@@ -1414,7 +1418,7 @@ export default class Simulation extends Schema implements ISimulation {
           pkm.shieldDone
         )
 
-      pkm.update(dt, this.board, this.weather, this.bluePlayer)
+      pkm.update(dt, this.board, this.bluePlayer)
     })
 
     this.redTeam.forEach((pkm, key) => {
@@ -1431,7 +1435,7 @@ export default class Simulation extends Schema implements ISimulation {
           pkm.shieldDone
         )
 
-      pkm.update(dt, this.board, this.weather, this.redPlayer)
+      pkm.update(dt, this.board, this.redPlayer)
     })
 
     if (this.weather === Weather.STORM) {

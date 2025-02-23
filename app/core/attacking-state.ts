@@ -1,6 +1,5 @@
 import Player from "../models/colyseus-models/player"
 import { PokemonActionState } from "../types/enum/Game"
-import { Item } from "../types/enum/Item"
 import { Weather } from "../types/enum/Weather"
 import { distanceC } from "../utils/distance"
 import { chance } from "../utils/random"
@@ -18,14 +17,8 @@ import { Effect } from "../types/enum/Effect"
 export default class AttackingState extends PokemonState {
   name = "attacking"
 
-  update(
-    pokemon: PokemonEntity,
-    dt: number,
-    board: Board,
-    weather: Weather,
-    player: Player
-  ) {
-    super.update(pokemon, dt, board, weather, player)
+  update(pokemon: PokemonEntity, dt: number, board: Board, player: Player) {
+    super.update(pokemon, dt, board, player)
 
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = Math.round(1000 / (0.4 + pokemon.speed * 0.007))

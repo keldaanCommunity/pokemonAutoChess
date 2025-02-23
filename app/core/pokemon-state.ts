@@ -642,7 +642,6 @@ export default abstract class PokemonState {
     pokemon: PokemonEntity,
     dt: number,
     board: Board,
-    weather: Weather,
     player: Player | undefined
   ) {
     this.updateCommands(pokemon, dt)

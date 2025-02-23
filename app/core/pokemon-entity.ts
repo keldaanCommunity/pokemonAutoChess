@@ -204,13 +204,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     })
   }
 
-  update(
-    dt: number,
-    board: Board,
-    weather: Weather,
-    player: Player | undefined
-  ) {
-    this.state.update(this, dt, board, weather, player)
+  update(dt: number, board: Board, player: Player | undefined) {
+    this.state.update(this, dt, board, player)
   }
 
   get canMove(): boolean {
@@ -2057,23 +2052,9 @@ export function canSell(
   return new PokemonClasses[pkm]().canBeSold
 }
 
-export function getMoveSpeed(
-  pokemon: IPokemonEntity,
-  weather: Weather
-): number {
-  // = factor to multiply to base time to move one cell (500ms)
-  let moveSpeedFactor = 1
-  if (weather === Weather.SNOW) {
-    moveSpeedFactor -= 0.25
-  } else if (weather === Weather.WINDY) {
-    moveSpeedFactor += 0.2
-  }
-  if (pokemon.status.paralysis) {
-    moveSpeedFactor -= 0.4
-  }
-
+export function getMoveSpeed(pokemon: IPokemonEntity): number {
   // at 0 speed in normal conditions, the factor should be 0.5
   // at 100 speed, the factor should be 1.5
   // at max 300 speed, it's 3.5 = 143ms per cell
-  return moveSpeedFactor * (0.5 + pokemon.speed / 100)
+  return 0.5 + pokemon.speed / 100
 }
