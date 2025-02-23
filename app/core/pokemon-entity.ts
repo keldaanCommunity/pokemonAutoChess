@@ -96,7 +96,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("uint16") shield = 0
   @type("uint8") team: Team
   @type("uint8") range: number
-  @type("float32") atkSpeed: number
+  @type("float32") speed: number
   @type("int8") targetX = -1
   @type("int8") targetY = -1
   @type("string") attackSprite: AttackSprite
@@ -177,7 +177,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.hp = pokemon.hp
     this.maxPP = pokemon.maxPP
     this.life = pokemon.hp
-    this.atkSpeed = pokemon.atkSpeed
+    this.speed = pokemon.speed
     this.range = pokemon.range
     this.team = team
     this.attackSprite = pokemon.attackSprite
@@ -187,7 +187,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.shiny = pokemon.shiny
     this.emotion = pokemon.emotion
     this.ap = pokemon.ap
-    this.luck = 0
+    this.luck = pokemon.luck
     this.dodge = 0
     this.physicalDamage = 0
     this.specialDamage = 0
@@ -197,6 +197,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.shieldDamageTaken = 0
     this.healDone = 0
     this.shieldDone = 0
+    this.cooldown = Math.round(500 * (50 / this.speed))
 
     pokemon.types.forEach((type) => {
       this.types.add(type)
@@ -210,10 +211,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     player: Player | undefined
   ) {
     this.state.update(this, dt, board, weather, player)
-  }
-
-  getAttackDelay() {
-    return 1000 / this.atkSpeed
   }
 
   get canMove(): boolean {
@@ -588,7 +585,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  addAttackSpeed(
+  addSpeed(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
@@ -602,14 +599,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         value *
         (1 + (apBoost * caster.ap) / 100) *
         (crit ? caster.critPower : 1)
-      const update = (target: { atkSpeed: number }) => {
-        const currentAtkSpeedBonus = 100 * (target.atkSpeed / 0.75 - 1)
-        const atkSpeedBonus = currentAtkSpeedBonus + value
-        target.atkSpeed = clamp(
-          roundToNDigits(0.75 * (1 + atkSpeedBonus / 100), 2),
-          0.4,
-          2.5
-        )
+      const update = (target: { speed: number }) => {
+        target.speed = clamp(target.speed + value, 40, 250)
       }
       update(this)
       if (permanent && !this.isGhostOpponent) {
@@ -894,7 +885,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.UPGRADE)) {
-      this.addAttackSpeed(5, this, 0, false)
+      this.addSpeed(5, this, 0, false)
       this.count.upgradeCount++
     }
 
@@ -982,7 +973,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.name === Pkm.MINIOR) {
-      this.addAttackSpeed(5, this, 1, false)
+      this.addSpeed(5, this, 1, false)
     }
 
     if (this.passive === Passive.DREAM_CATCHER && target.status.sleep) {
@@ -1195,7 +1186,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (this.count.defensiveRibbonCount % 2 === 0) {
         this.addAttack(1, this, 0, false)
         this.addDefense(2, this, 0, false)
-        this.addAttackSpeed(5, this, 0, false)
+        this.addSpeed(5, this, 0, false)
       }
     }
 
@@ -1398,7 +1389,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.life < 0.3 * this.hp
     ) {
       this.handleHeal(0.2 * this.hp, this, 0, false)
-      this.addAttackSpeed(-25, this, 0, false)
+      this.addSpeed(-25, this, 0, false)
       if (this.passive === Passive.ZYGARDE10) {
         this.addDefense(1, this, 0, false)
         this.addSpecialDefense(1, this, 0, false)
@@ -1688,7 +1679,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           ) {
             value.count.fieldCount++
             value.handleHeal(heal, _pokemon, 0, false)
-            value.addAttackSpeed(speedBoost, value, 0, false)
+            value.addSpeed(speedBoost, value, 0, false)
           }
         })
       }, 16) // delay to next tick, targeting 60 ticks per second
@@ -1753,8 +1744,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       case Stat.PP:
         this.addPP(value, this, 0, false)
         break
-      case Stat.ATK_SPEED:
-        this.addAttackSpeed(value, this, 0, false, permanent)
+      case Stat.SPEED:
+        this.addSpeed(value, this, 0, false, permanent)
         break
       case Stat.CRIT_CHANCE:
         this.addCritChance(value, this, 0, false)
@@ -1862,12 +1853,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       const synergyLevel = SynergyEffects[Synergy.SOUND].indexOf(effect)
       const attackBoost =
         ([2, 1, 1][synergyLevel] ?? 0) * -this.count.soundCryCount
-      const attackSpeedBoost =
+      const speedBoost =
         ([0, 5, 5][synergyLevel] ?? 0) * -this.count.soundCryCount
       const manaBoost =
         ([0, 0, 3][synergyLevel] ?? 0) * -this.count.soundCryCount
       this.addAttack(attackBoost, this, 0, false)
-      this.addAttackSpeed(attackSpeedBoost, this, 0, false)
+      this.addSpeed(speedBoost, this, 0, false)
       this.addPP(manaBoost, this, 0, false)
       this.count.soundCryCount = 0
     }
@@ -1913,7 +1904,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.status.freezeCooldown = 0
         this.effects.add(Effect.IMMUNITY_FREEZE)
         heal(20)
-        this.addAttackSpeed(15, this, 0, false)
+        this.addSpeed(15, this, 0, false)
         break
       case Item.CHERI_BERRY:
         this.status.healParalysis(this)
@@ -1987,7 +1978,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         break
       case Item.SALAC_BERRY:
         heal(20)
-        this.addAttackSpeed(50, this, 0, false)
+        this.addSpeed(50, this, 0, false)
         break
       case Item.SITRUS_BERRY:
         this.effects.add(Effect.BUFF_HEAL_RECEIVED)
@@ -2070,25 +2061,19 @@ export function getMoveSpeed(
   pokemon: IPokemonEntity,
   weather: Weather
 ): number {
-  let moveSpeed = 1
+  // = factor to multiply to base time to move one cell (500ms)
+  let moveSpeedFactor = 1
   if (weather === Weather.SNOW) {
-    moveSpeed -= 0.25
+    moveSpeedFactor -= 0.25
   } else if (weather === Weather.WINDY) {
-    moveSpeed += 0.2
+    moveSpeedFactor += 0.2
   }
   if (pokemon.status.paralysis) {
-    moveSpeed -= 0.4
+    moveSpeedFactor -= 0.4
   }
 
-  if (pokemon.effects.has(Effect.QUICK_FEET)) {
-    moveSpeed += 0.3
-  } else if (pokemon.effects.has(Effect.RUN_AWAY)) {
-    moveSpeed += 0.5
-  } else if (pokemon.effects.has(Effect.HUSTLE)) {
-    moveSpeed += 0.8
-  } else if (pokemon.effects.has(Effect.BERSERK)) {
-    moveSpeed += 1.0
-  }
-
-  return moveSpeed
+  // at 0 speed in normal conditions, the factor should be 0.5
+  // at 100 speed, the factor should be 1.5
+  // at max 300 speed, it's 3.5 = 143ms per cell
+  return moveSpeedFactor * (0.5 + pokemon.speed / 100)
 }

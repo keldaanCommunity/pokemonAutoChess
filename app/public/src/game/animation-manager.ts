@@ -269,7 +269,7 @@ export default class AnimationManager {
 
     const timeScale =
       action === PokemonActionState.ATTACK
-        ? getAttackAnimTimeScale(entity.index, entity.atkSpeed)
+        ? getAttackAnimTimeScale(entity.index, entity.speed)
         : 1
 
     try {
@@ -339,9 +339,9 @@ export default class AnimationManager {
   }
 }
 
-export function getAttackAnimTimeScale(pokemonIndex: string, atkSpeed: number) {
+export function getAttackAnimTimeScale(pokemonIndex: string, speed: number) {
   const t = delays[pokemonIndex]?.t || 36 // total number of frames in the animation
 
-  const timeScale = (t * atkSpeed) / FPS_POKEMON_ANIMS
+  const timeScale = (t * (0.4 + speed * 0.007)) / FPS_POKEMON_ANIMS
   return timeScale
 }

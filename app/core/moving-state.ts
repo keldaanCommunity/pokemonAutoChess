@@ -22,7 +22,7 @@ export default class MovingState extends PokemonState {
   ) {
     super.update(pokemon, dt, board, weather, player)
     if (pokemon.cooldown <= 0) {
-      pokemon.cooldown = 500 / getMoveSpeed(pokemon, weather)
+      pokemon.cooldown = Math.round(500 / getMoveSpeed(pokemon, weather)) // 500ms to move one cell at 75 speed in normal conditions
       const targetAtRange = this.getNearestTargetAtRangeCoordinates(
         pokemon,
         board

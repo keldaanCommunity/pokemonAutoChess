@@ -78,13 +78,14 @@
 
 # Gameplay
 
+- Attack speed, move speed and ability cooldowns have all been merged into one statistic: Speed. 1 Speed = 1% attack speed in previous patch. Pokemons now have a different base speed as part of their stats, taken from their base game stats. Many attack and max PP stats have been adjusted to compensate for the difference of base speed.
 - Defense and special defense stats have all been doubled, and damage reduction formula changed to `1/(1+def/20)` instead of `1/(1+def/10)`. This will allow more precise number tweaking in the future.
 - Added regional variants for Unique and Legendary Pokémon. The first regional variant is Galarian Farfetch'd, which can be found in Fighting regions
 - Regional variants are no longer found in maps with common synergies between the variant and the original Pokémon
 - When an effect is considering the strongest Pokémon, or the pokémon with the highest stat, if several Pokémon are equal, it now selects a random Pokémon among those. Before, it was based on board position. This is especially relevant for Ghost curses.
 - Farthest reachable target algorithm has been improved to favor the farthest target when there are multiple equidistant free cells. This impacts several abilities and effects, such as Comet Shard and all dashers abilities
 - PVE rewards from stage 24 onwards now propose 1 synergy stone maximum
-- Item carousels now propose 4 synergy stones maximum
+- Regular item carousels now propose 4 synergy stones maximum
 
 # UI
 

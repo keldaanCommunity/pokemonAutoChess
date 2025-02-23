@@ -396,7 +396,7 @@ export interface IPokemon {
   positionX: number
   positionY: number
   attackSprite: AttackSprite
-  atkSpeed: number
+  speed: number
   def: number
   speDef: number
   attackType: AttackType
@@ -513,7 +513,7 @@ export interface IPokemonEntity {
     crit: boolean,
     permanent?: boolean
   ): void
-  addAttackSpeed(
+  addSpeed(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
@@ -605,7 +605,7 @@ export interface IPokemonEntity {
   shield: number
   team: number
   range: number
-  atkSpeed: number
+  speed: number
   targetX: number
   targetY: number
   attackSprite: AttackSprite

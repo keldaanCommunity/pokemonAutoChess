@@ -392,7 +392,7 @@ export const MIN_HUMAN_PLAYERS = process.env.MIN_HUMAN_PLAYERS
   : 1
 export const INACTIVITY_TIMEOUT = 60 * 1000 * 10
 
-export const DEFAULT_ATK_SPEED = 0.75
+export const DEFAULT_SPEED = 50
 export const DEFAULT_CRIT_CHANCE = 10
 export const DEFAULT_CRIT_POWER = 2
 export const PROJECTILE_SPEED = 4
