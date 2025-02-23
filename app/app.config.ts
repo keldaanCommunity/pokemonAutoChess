@@ -104,7 +104,8 @@ export default config({
               "https://apis.google.com",
               "https://*.googleapis.com",
               "https://*.githubusercontent.com",
-              "http://raw.githubusercontent.com"
+              "http://raw.githubusercontent.com",
+              "https://*.youtube.com"
             ],
             scriptSrc: [
               "'self'",
