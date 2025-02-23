@@ -43,14 +43,12 @@
 - Buff Vulpix line andd Alolan Vulpix line: PP 85 → 80 : Aurora Veil Rune protect duration 0.5 → 1 second
 - Nerf Teatime (Polteageist): healing 20/40/80 → 15/30/60
 - Buff Houndour line: PP 125 → 110
-- Buff Sneasel Attack 9 → 10 and Weavile: Attack 22 → 26
 - Buff Topsy Turvy (Inkay): also reverse AP buffs
-- Buff Pawniard Attack 14 → 17 and Bisharp Attack 26 → 30
 - Nerf Inteleon: Snipe shot damage 40/80/160 → 40/80/120
-- Nerf Stantler: HP 200 → 180, Def/Spedef: 5 → 3
+- Nerf Stantler: HP 200 → 180, Def/Spedef: 5 → 3 (6 post def/spedef stat change)
 - Nerf Miltank: HP 250 → 200
 - Nerf Spinda: HP 250 → 200
-- Nerf Burmy line: Burmy now has various defense stats based on its cloak: Plant Cloak: def 3/3/3 → 1/1/1, spedef 3/5/3 → 1/2/3, Sand Cloak def 3/3/3 → 2/2/2, spedef 3/5/3 → 2/3/3
+- Nerf Burmy line: Burmy now has various defense stats based on its cloak: Plant Cloak < Sand Cloak < Trash Cloak
 - Buff Melmetal: increase Attack speed/Attack ratio: 10% attack speed = ~~3~~ 5 attack
 - Rework Fuecoco line: now 3-range with nerfed defense/special defense, ability Torch Song reworked, PP 100 → 60
 - Porygon is now in Ultra category ; adjusted stats ; new passive Conversion: get the highest synergy of your opponent and its effects at the start of the fight.
