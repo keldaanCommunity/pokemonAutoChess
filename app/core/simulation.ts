@@ -390,7 +390,6 @@ export default class Simulation extends Schema implements ISimulation {
 
   applyItemEffect(pokemon: PokemonEntity, item: Item) {
     Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) => {
-      if (stat === Stat.LUCK) return // already applied on base pokemon
       pokemon.applyStat(stat as Stat, value)
     })
 
