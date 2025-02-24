@@ -58,6 +58,7 @@
 - Change HyperSpace Fury: now also reduces special defense evert hit
 - Changed Heavy Slam (Aggron): Shield 10/20/40 → 15/30/60, remove AP scaling
 - Buff Concrete Pillar (Conkeldurr) HP 300 → 400
+- Rework Acrobatics: now move to a cell at good distance from its target. Move further away if not holding any item.
 
 # Changes to Synergies
 

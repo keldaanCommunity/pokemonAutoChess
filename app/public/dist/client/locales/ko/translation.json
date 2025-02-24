@@ -1527,7 +1527,7 @@
     "POISON_POWDER": "적 후방에 돌진하며, 경로상의 모든 적들에 [20,40,80,SP] SPECIAL 및 5초간 POISONNED 상태를 가한다.",
     "ICY_WIND": "줄에 있는 모든 적에게 [30,60,120,SP] SPECIAL 를 가하고 SPEED 를 [10,20,40] 만큼 줄인다.",
     "GIGATON_HAMMER": "시전자가 6초간 FATIGUE상태가 되는 대신 대상에 [100,200,400,SP] SPECIAL을 가한다.",
-    "ACROBATICS": "대상에 [20,40,80,SP] SPECIAL 을 가한다. 시전자가 도구를 지니지 않았을 경우 두배의 피해를 준다.",
+    "ACROBATICS": "[20,40,80,SP] SPECIAL을 처리하고 대상과 적당한 거리에 있는 셀로 이동합니다. 아무 아이템도 들고 있지 않으면 더 멀리 이동합니다.",
     "ABSORB": "대상에 [30,60,120,SP] SPECIAL를 가하고 인접한 아군을 [3,6,12,SP] 만큼 회복시킨다.",
     "ROLLOUT": " DEF 를 [2,5,10,SP] 만큼 올리고 DEF 의 2배 만큼의 SPECIAL을 가한다.",
     "ICE_BALL": "시전자의 SPE_DEF 을 10 증가시키고 [10,20,30,SP] + SPE_DEF의 [50,100,150,SP]% 만큼 SPECIAL를 가한다.",
