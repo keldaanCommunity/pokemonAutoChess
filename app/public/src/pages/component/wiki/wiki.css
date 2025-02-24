@@ -370,6 +370,12 @@
   width: 10ch;
 }
 
+#wiki-page input[type="search"] {
+  display: block;
+  margin: 0.5em 0 0.5em auto;
+  width: auto;
+}
+
 @media (width <= 960px) {
   #wiki-items {
     display: block;

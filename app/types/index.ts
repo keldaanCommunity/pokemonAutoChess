@@ -421,6 +421,7 @@ export interface IPokemon {
   canBeCloned: boolean
   canHoldItems: boolean
   deathCount: number
+  readonly hasEvolution: boolean
 }
 
 export interface IExperienceManager {

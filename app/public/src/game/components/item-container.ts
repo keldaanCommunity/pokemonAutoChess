@@ -15,6 +15,7 @@ import { preference } from "../../preferences"
 import DraggableObject from "./draggable-object"
 import ItemDetail from "./item-detail"
 import ItemsContainer from "./items-container"
+import { DEPTH } from "../depths"
 
 export default class ItemContainer extends DraggableObject {
   detail: ItemDetail | undefined
@@ -150,7 +151,7 @@ export default class ItemContainer extends DraggableObject {
 
       if (this.detail === undefined) {
         this.detail = new ItemDetail(this.scene, 0, 0, this.name)
-        this.detail.setDepth(100)
+        this.detail.setDepth(DEPTH.TOOLTIP)
         this.detail.setPosition(
           this.detail.width * 0.5 + 40,
           this.detail.height * 0.5
@@ -203,7 +204,7 @@ export default class ItemContainer extends DraggableObject {
       item + ".png"
     ).setScale(this.pokemonId === null ? 0.5 : 0.25)
     this.tempDetail = new ItemDetail(this.scene, 0, 0, item)
-    this.tempDetail.setDepth(100)
+    this.tempDetail.setDepth(DEPTH.TOOLTIP)
     this.tempDetail.setPosition(
       this.tempDetail.width * 0.5 + 40,
       this.tempDetail.height * 0.5 + 40

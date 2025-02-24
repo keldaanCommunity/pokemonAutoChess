@@ -2,7 +2,7 @@ import { Schema, MapSchema, ArraySchema, type } from "@colyseus/schema"
 import {
   ITournament,
   ITournamentBracket,
-  ITournamentPlayer,
+  ITournamentPlayer
 } from "../../types/interfaces/Tournament"
 import { resetArraySchema } from "../../utils/schemas"
 
@@ -21,7 +21,7 @@ export class TournamentPlayerSchema
     avatar: string,
     elo: number,
     ranks: number[] | ArraySchema<number> = [],
-    eliminated: boolean = false,
+    eliminated: boolean = false
   ) {
     super()
     this.name = name
@@ -43,7 +43,7 @@ export class TournamentBracketSchema
   constructor(
     name: string,
     playersId: string[] | ArraySchema<string>,
-    finished: boolean = false,
+    finished: boolean = false
   ) {
     super()
     this.name = name
@@ -61,6 +61,7 @@ export class TournamentSchema extends Schema implements ITournament {
   @type({ map: TournamentBracketSchema }) brackets =
     new MapSchema<TournamentBracketSchema>()
   @type("boolean") finished: boolean
+  pendingLobbiesCreation: boolean = false
 
   constructor(
     id: string,
@@ -68,7 +69,7 @@ export class TournamentSchema extends Schema implements ITournament {
     startDate: string,
     players: Map<string, ITournamentPlayer>,
     brackets: Map<string, ITournamentBracket>,
-    finished: boolean = false,
+    finished: boolean = false
   ) {
     super()
     this.id = id
@@ -85,8 +86,8 @@ export class TournamentSchema extends Schema implements ITournament {
             p.avatar,
             p.elo,
             p.ranks,
-            p.eliminated,
-          ),
+            p.eliminated
+          )
         )
       })
     }
@@ -95,7 +96,7 @@ export class TournamentSchema extends Schema implements ITournament {
       brackets.forEach((b, bracketId) => {
         this.brackets.set(
           bracketId,
-          new TournamentBracketSchema(b.name, b.playersId, b.finished),
+          new TournamentBracketSchema(b.name, b.playersId, b.finished)
         )
       })
     }

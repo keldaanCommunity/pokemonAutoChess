@@ -4,6 +4,7 @@ import Player from "../../../../models/colyseus-models/player"
 import { Item } from "../../../../types/enum/Item"
 import { values } from "../../../../utils/schemas"
 import ItemContainer from "./item-container"
+import { DEPTH } from "../depths"
 
 export default class ItemsContainer extends GameObjects.Container {
   pokemonId: string | null
@@ -21,7 +22,7 @@ export default class ItemsContainer extends GameObjects.Container {
 
     this.pokemonId = pokemonId
     this.playerId = playerId
-    this.setDepth(2)
+    this.setDepth(DEPTH.POKEMON_ITEM)
     scene.add.existing(this)
     this.render(inventory)
   }

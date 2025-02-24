@@ -622,7 +622,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     const type = SynergyGivenByItem[item]
     if (
       this.items.size >= 3 ||
-      (SynergyStones.includes(item) && this.types.has(type))
+      (SynergyStones.includes(item) && this.types.has(type)) ||
+      ((item === Item.EVIOLITE || item === Item.RARE_CANDY) &&
+        !this.refToBoardPokemon.hasEvolution) ||
+      (item === Item.RARE_CANDY && this.items.has(Item.EVIOLITE))
     ) {
       return
     }
@@ -1099,7 +1102,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       ) === 1 &&
       !this.items.has(Item.PROTECTIVE_PADS)
     ) {
-      const damage = Math.round(target.def * (1 + target.ap / 100))
+      const damage = Math.round(target.def * 0.5 * (1 + target.ap / 100))
       const crit =
         target.effects.has(Effect.ABILITY_CRIT) &&
         chance(target.critChance, this)
@@ -1191,7 +1194,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.count.defensiveRibbonCount++
       if (this.count.defensiveRibbonCount % 2 === 0) {
         this.addAttack(1, this, 0, false)
-        this.addDefense(1, this, 0, false)
+        this.addDefense(2, this, 0, false)
         this.addAttackSpeed(5, this, 0, false)
       }
     }
@@ -1485,8 +1488,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     board,
     damage
   }: { target: PokemonEntity; board: Board; damage: number }) {
-    target.count.crit++
-
     // proc fairy splash damage for both the attacker and the target
     if (target.fairySplashCooldown === 0 && target.types.has(Synergy.FAIRY)) {
       let shockDamageFactor = 0.3

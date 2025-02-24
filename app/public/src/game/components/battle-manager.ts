@@ -30,6 +30,7 @@ import PokemonSprite from "./pokemon"
 import PokemonDetail from "./pokemon-detail"
 import { pickRandomIn } from "../../../../utils/random"
 import { displayBoost } from "./boosts-animations"
+import { DEPTH } from "../depths"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -736,7 +737,7 @@ export default class BattleManager {
         textStyle
       )
     )
-    crit.setDepth(9)
+    crit.setDepth(DEPTH.TEXT_MAJOR)
     this.scene.add.tween({
       targets: [crit],
       ease: "Linear",
@@ -773,7 +774,7 @@ export default class BattleManager {
     const crit = this.scene.add.existing(
       new GameObjects.Text(this.scene, x - 40, y - 50, "DODGE !", textStyle)
     )
-    crit.setDepth(9)
+    crit.setDepth(DEPTH.TEXT)
     this.scene.add.tween({
       targets: [crit],
       ease: "Linear",
@@ -805,7 +806,7 @@ export default class BattleManager {
     const crit = this.scene.add.existing(
       new GameObjects.Text(this.scene, x - 25, y - 50, "CRIT !", textStyle)
     )
-    crit.setDepth(9)
+    crit.setDepth(DEPTH.TEXT)
     this.scene.add.tween({
       targets: [crit],
       ease: "Linear",
@@ -837,7 +838,7 @@ export default class BattleManager {
     const blockedSpell = this.scene.add.existing(
       new GameObjects.Text(this.scene, x - 30, y - 50, "Block!", textStyle)
     )
-    blockedSpell.setDepth(9)
+    blockedSpell.setDepth(DEPTH.TEXT)
     this.scene.add.tween({
       targets: [blockedSpell],
       ease: "Linear",
@@ -869,7 +870,7 @@ export default class BattleManager {
     const manaBurn = this.scene.add.existing(
       new GameObjects.Text(this.scene, x - 30, y - 50, "Burn!", textStyle)
     )
-    manaBurn.setDepth(9)
+    manaBurn.setDepth(DEPTH.TEXT)
     this.scene.add.tween({
       targets: [manaBurn],
       ease: "Linear",
@@ -901,7 +902,7 @@ export default class BattleManager {
     const tripleAttack = this.scene.add.existing(
       new GameObjects.Text(this.scene, x - 30, y - 50, "ZAP!", textStyle)
     )
-    tripleAttack.setDepth(9)
+    tripleAttack.setDepth(DEPTH.TEXT_MINOR)
     this.scene.add.tween({
       targets: [tripleAttack],
       ease: "Linear",
@@ -964,7 +965,7 @@ export default class BattleManager {
         "abilities",
         `${Ability.THUNDER}/000.png`
       )
-      thunderSprite.setDepth(7)
+      thunderSprite.setDepth(DEPTH.WEATHER_FX)
       thunderSprite.setScale(2, 2)
       thunderSprite.anims.play(Ability.THUNDER)
       thunderSprite.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
@@ -979,7 +980,7 @@ export default class BattleManager {
         "abilities",
         "SMOKE/000.png"
       )
-      sprite.setDepth(7)
+      sprite.setDepth(DEPTH.BOARD_EFFECT_AIR_LEVEL)
       sprite.anims.play(Effect.SMOKE)
       sprite.setScale(3, 3)
       sprite.setAlpha(0)
@@ -1000,7 +1001,7 @@ export default class BattleManager {
         "abilities",
         `${Effect.SMOKE}/000.png`
       )
-      sprite.setDepth(7)
+      sprite.setDepth(DEPTH.BOARD_EFFECT_AIR_LEVEL)
       sprite.setScale(3, 3)
       sprite.anims.play(Effect.SMOKE)
       sprite.setTint(0xa0ff20)
@@ -1024,7 +1025,7 @@ export default class BattleManager {
         "abilities",
         "STEALTH_ROCKS/013.png"
       )
-      sprite.setDepth(1)
+      sprite.setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
       sprite.setScale(1, 1)
       this.boardEventSprites[index] = sprite
       this.group.add(sprite)
@@ -1044,7 +1045,10 @@ export default class BattleManager {
         "abilities",
         "SPIKES/001.png"
       )
-      sprite.setDepth(1).setOrigin(0.5, 0.5).setScale(0, 0)
+      sprite
+        .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
+        .setOrigin(0.5, 0.5)
+        .setScale(0, 0)
       this.boardEventSprites[index] = sprite
       this.group.add(sprite)
 
@@ -1066,7 +1070,10 @@ export default class BattleManager {
         "abilities",
         "TOXIC_SPIKES/00" + spriteNumber + ".png"
       )
-      sprite.setDepth(1).setOrigin(0.5, 0.5).setScale(0, 0)
+      sprite
+        .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
+        .setOrigin(0.5, 0.5)
+        .setScale(0, 0)
       this.boardEventSprites[index] = sprite
       this.group.add(sprite)
 
@@ -1087,7 +1094,7 @@ export default class BattleManager {
         "abilities",
         `${Effect.STICKY_WEB}/000.png`
       )
-      sprite.setDepth(7)
+      sprite.setDepth(DEPTH.BOARD_EFFECT_POKEMON_LEVEL)
       sprite.setScale(3, 3)
       sprite.anims.play(Effect.STICKY_WEB)
       sprite.setAlpha(0)
@@ -1109,7 +1116,7 @@ export default class BattleManager {
         "abilities",
         `${Effect.HAIL}/000.png`
       )
-      sprite.setDepth(1).setScale(1).setAlpha(0)
+      sprite.setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL).setScale(1).setAlpha(0)
       sprite.anims.play(Effect.HAIL)
       this.boardEventSprites[index] = sprite
       this.group.add(sprite)
@@ -1129,7 +1136,7 @@ export default class BattleManager {
         "abilities",
         `${Effect.EMBER}/000.png`
       )
-      sprite.setDepth(1).setScale(2).setAlpha(0)
+      sprite.setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL).setScale(2).setAlpha(0)
       sprite.anims.play(Effect.EMBER)
       this.boardEventSprites[index] = sprite
       this.group.add(sprite)
@@ -1159,7 +1166,7 @@ export default class BattleManager {
       "attacks",
       "NORMAL/hit/000.png"
     )
-    hitSprite.setDepth(7)
+    hitSprite.setDepth(DEPTH.HIT_FX_ABOVE_POKEMON)
     hitSprite.setScale(2, 2)
     hitSprite.anims.play("NORMAL/hit")
     hitSprite.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
@@ -1246,8 +1253,8 @@ export default class BattleManager {
     const text = this.scene.add.existing(
       new GameObjects.Text(this.scene, 25, 0, amount.toFixed(0), textStyle)
     )
-    image.setDepth(9)
-    text.setDepth(10)
+    image.setDepth(DEPTH.DAMAGE_PORTRAIT)
+    text.setDepth(DEPTH.DAMAGE_TEXT)
 
     const container = this.scene.add.existing(
       new GameObjects.Container(

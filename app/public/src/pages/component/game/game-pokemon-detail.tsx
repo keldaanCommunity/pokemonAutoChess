@@ -14,11 +14,10 @@ import { getPortraitSrc } from "../../../../../utils/avatar"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { AbilityTooltip } from "../ability/ability-tooltip"
 import SynergyIcon from "../icons/synergy-icon"
-import "./game-pokemon-detail.css"
-import { Synergy } from "../../../../../types/enum/Synergy"
 import { cc } from "../../utils/jsx"
 import { usePreference } from "../../../preferences"
 import GamePopularItems from "./game-popular-items"
+import "./game-pokemon-detail.css"
 
 export function GamePokemonDetail(
   props: {
@@ -144,7 +143,7 @@ export function GamePokemonDetail(
           <div>
             <AbilityTooltip
               ability={pokemon.skill}
-              stats={pokemon}
+              stats={{ ap: pokemon.ap, luck: pokemon.luck, stars: pokemon.stars, stages: getPokemonData(pokemon.name).stages }}
               key={pokemon.id}
             />
           </div>

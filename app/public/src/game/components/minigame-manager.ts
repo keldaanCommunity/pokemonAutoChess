@@ -22,6 +22,7 @@ import { FloatingItem } from "./floating-item"
 import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
 import { Portal, SynergySymbol } from "./portal"
+import { DEPTH } from "../depths"
 
 export default class MinigameManager {
   pokemons: Map<string, PokemonAvatar>
@@ -274,7 +275,7 @@ export default class MinigameManager {
           pokemonUI.y - 70,
           "arrowDown"
         )
-        .setDepth(10)
+        .setDepth(DEPTH.INDICATOR)
         .setScale(2)
       this.scene.tweens.add({
         targets: arrowIndicator,

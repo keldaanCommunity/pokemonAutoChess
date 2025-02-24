@@ -27,6 +27,7 @@ import { PokemonActionState } from "../../types/enum/Game"
 import {
   Berries,
   CraftableItems,
+  CraftableNonSynergyItems,
   Item,
   ItemComponents,
   SynergyStones
@@ -416,6 +417,15 @@ export class MiniGame {
       } while (count >= maxCopiesPerItem && tries < 10)
       items.push(item)
     }
+
+    if (itemsSet === CraftableItems) {
+      while (items.filter((i) => SynergyStones.includes(i)).length > 4) {
+        // ensure that there are at most 4 synergy stones in the carousel
+        const index = items.findIndex((i) => SynergyStones.includes(i))
+        items[index] = pickRandomIn(CraftableNonSynergyItems)
+      }
+    }
+
     return items
   }
 

@@ -1,0 +1,51 @@
+// manage depths levels for rendering
+
+export const DEPTH = {
+  // 1-10: ground level
+  GROUND: 1,
+  GROUND_DECORATION: 2,
+  BOARD_EFFECT_GROUND_LEVEL: 3,
+  ABILITY_GROUND_LEVEL: 4,
+  POKEMON_SHADOW: 5,
+
+  // 11-20: below pokemon
+  DROP_ZONE: 11,
+  HIT_FX_BELOW_POKEMON: 15,
+  ABILITY_BELOW_POKEMON: 16,
+  BOOST_BACK: 17,
+  INDICATOR_BELOW_POKEMON: 18,
+  INANIMATE_OBJECTS: 19,
+
+  // 21-30: pokemon level
+  POKEMON: 20,
+  POKEMON_ITEM: 21,
+  BOARD_EFFECT_POKEMON_LEVEL: 23,
+  PROJECTILE: 24,
+  HIT_FX_ABOVE_POKEMON: 25,
+  BOOST_FRONT: 26,
+  POKEMON_HP_BAR: 29,
+  POKEMON_GRABBED: 30,
+
+  // 31-40: ability sfx over pokemon
+  ABILITY_MINOR: 34,
+  ABILITY: 35,
+  ABILITY_MAJOR: 36,
+  BOARD_EFFECT_AIR_LEVEL: 38,
+
+  // 41-50: weather / environment
+  WEATHER_FX: 40,
+
+  // 51-60: Ingame texts/indicators
+  DAMAGE_PORTRAIT: 51,
+  DAMAGE_TEXT: 52,
+
+  TEXT_MINOR: 54,
+  TEXT: 55,
+  TEXT_MAJOR: 56,
+  INDICATOR: 57,
+
+  // 61-70: Popup/Tooltips/HUD
+  TOOLTIP_BACK: 61,
+  TOOLTIP: 62,
+  TOOLTIP_FRONT: 63
+}

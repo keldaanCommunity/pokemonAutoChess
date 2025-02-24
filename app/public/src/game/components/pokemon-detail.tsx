@@ -58,6 +58,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     shiny: boolean,
     index: string,
     stars: number,
+    stages: number,
     evolution: Pkm
   ) {
     super(scene, x, y)
@@ -232,7 +233,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
       const abilityDiv = document.createElement("div")
       abilityDiv.className = "game-pokemon-detail-ult"
       this.abilityRoot = ReactDOM.createRoot(abilityDiv)
-      this.updateAbilityDescription({ skill, stars, ap, luck })
+      this.updateAbilityDescription({ skill, stars, stages, ap, luck })
       wrap.appendChild(abilityDiv)
     }
 
@@ -245,11 +246,11 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     el.classList.toggle("negative", value < 0)
   }
 
-  updateAbilityDescription({ skill, stars, ap, luck }: { skill: Ability, stars: number, ap: number, luck: number }) {
+  updateAbilityDescription({ skill, stars, stages, ap, luck }: { skill: Ability, stars: number, stages: number, ap: number, luck: number }) {
     this.abilityRoot?.render(
       <>
         <div className="ability-name">{t(`ability.${skill}`)}</div>
-        <AbilityTooltip ability={skill} stats={{ stars, ap, luck }} />
+        <AbilityTooltip ability={skill} stats={{ stars, stages, ap, luck }} />
       </>
     )
   }

@@ -1317,6 +1317,8 @@ export class CreateTournamentLobbiesCommand extends Command<
         mongoTournament.brackets = convertSchemaToRawObject(tournament.brackets)
         await mongoTournament.save()
       }
+
+      tournament.pendingLobbiesCreation = false
     } catch (error) {
       logger.error(error)
     }
@@ -1373,7 +1375,11 @@ export class EndTournamentMatchCommand extends Command<
         }
       })
 
-      if (values(tournament.brackets).every((b) => b.finished)) {
+      if (
+        !tournament.pendingLobbiesCreation &&
+        values(tournament.brackets).every((b) => b.finished)
+      ) {
+        tournament.pendingLobbiesCreation = true // prevent executing command multiple times
         //save brackets and player ranks to db before moving to next stage
         const mongoTournament = await Tournament.findById(tournamentId)
         if (mongoTournament) {
