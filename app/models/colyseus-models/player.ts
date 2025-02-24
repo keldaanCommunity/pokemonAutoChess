@@ -199,7 +199,7 @@ export default class Player extends Schema implements IPlayer {
         case Pkm.MORPEKO_HANGRY:
           this.firstPartner = Pkm.MORPEKO
           break
-          
+
         case Pkm.DARMANITAN_ZEN:
           this.firstPartner = Pkm.DARMANITAN
           break
@@ -545,11 +545,13 @@ export default class Player extends Schema implements IPlayer {
   }
 
   updateRegionalPool(state: GameState, mapChanged: boolean) {
+    if (this.map === "town") {
+      resetArraySchema(this.regionalPokemons, [])
+      return
+    }
+
     const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
-      new PokemonClasses[p]().isInRegion(
-        this.map === "town" ? DungeonPMDO.AmpPlains : this.map,
-        state
-      )
+      new PokemonClasses[p]().isInRegion(this.map, state)
     )
 
     if (mapChanged) {
@@ -570,13 +572,16 @@ export default class Player extends Schema implements IPlayer {
 
     resetArraySchema(
       this.regionalPokemons,
-      newRegionalPokemons.filter(
-        (p, index, array) => {
-          const evolution = getPokemonData(PkmFamily[p]).evolution
-          return array.findIndex((p2) => PkmFamily[p] === PkmFamily[p2]) === index && // dedup same family
-            !(evolution === p || (evolution && getPokemonData(evolution).evolution === p)) // exclude non divergent evos
-        }
-      )
+      newRegionalPokemons.filter((p, index, array) => {
+        const evolution = getPokemonData(PkmFamily[p]).evolution
+        return (
+          array.findIndex((p2) => PkmFamily[p] === PkmFamily[p2]) === index && // dedup same family
+          !(
+            evolution === p ||
+            (evolution && getPokemonData(evolution).evolution === p)
+          )
+        ) // exclude non divergent evos
+      })
     )
   }
 

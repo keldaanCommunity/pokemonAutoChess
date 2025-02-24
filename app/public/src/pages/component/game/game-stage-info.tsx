@@ -22,10 +22,8 @@ import SynergyIcon from "../icons/synergy-icon"
 import TimerBar from "./game-timer-bar"
 import "./game-stage-info.css"
 import PokemonPortrait from "../pokemon-portrait"
-import { usePreferences } from "../../../preferences"
 
 export default function GameStageInfo() {
-  const [{ antialiasing }] = usePreferences()
   const { t } = useTranslation()
   const phase = useAppSelector((state) => state.game.phase)
   const weather = useAppSelector((state) => state.game.weather)
