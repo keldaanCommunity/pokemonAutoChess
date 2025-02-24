@@ -5538,17 +5538,28 @@ export class AcrobaticsStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 20
-    if (pokemon.stars === 2) {
-      damage = 40
-    }
-    if (pokemon.stars === 3) {
-      damage = 80
-    }
-    if (pokemon.items.size === 0) {
-      damage *= 2
-    }
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+
+    const travelDistance = 4 - pokemon.items.size
+    const candidateDestinationCells = board
+      .getCellsInRadius(pokemon.targetX, pokemon.targetY, pokemon.range)
+      .filter((cell) => cell.value === undefined)
+      .sort(
+        (a, b) =>
+          Math.abs(
+            travelDistance -
+              distanceM(a.x, a.y, pokemon.positionX, pokemon.positionY)
+          ) -
+          Math.abs(
+            travelDistance -
+              distanceM(b.x, b.y, pokemon.positionX, pokemon.positionY)
+          )
+      )
+    if (candidateDestinationCells.length > 0) {
+      const destination = candidateDestinationCells[0]
+      pokemon.moveTo(destination.x, destination.y, board)
+    }
   }
 }
 
@@ -9354,12 +9365,13 @@ export class HeavySlamStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     let damage = [15, 30, 60][pokemon.stars - 1] ?? 60
+    const shield = [15, 30, 60][pokemon.stars - 1] ?? 60
     if (pokemon.hp > target.hp) {
       damage = Math.round(
         damage * (1 + (0.5 * (pokemon.hp - target.hp)) / target.hp)
       )
     }
-    pokemon.addShield(damage, pokemon, 1, crit)
+    pokemon.addShield(shield, pokemon, 0, crit)
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
       .forEach((cell) => {

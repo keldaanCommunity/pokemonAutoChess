@@ -56,6 +56,9 @@
 - Nerf Cryogonal: PP 95 → 100, Freeze dry: remove AP scaling on the special defense part of the damage, explosive damage 40 + 150% spedef → 30 + 100% spe def
 - Nerf Alolan Raichu: back to tier 3, gets the same stats as Raichu but keeps the additional psychic synergy
 - Change HyperSpace Fury: now also reduces special defense evert hit
+- Changed Heavy Slam (Aggron): Shield 10/20/40 → 15/30/60, remove AP scaling
+- Buff Concrete Pillar (Conkeldurr) HP 300 → 400
+- Rework Acrobatics: now move to a cell at good distance from its target. Move further away if not holding any item.
 
 # Changes to Synergies
 
