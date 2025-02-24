@@ -963,20 +963,10 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case Effect.BULK_UP:
-        if (types.has(Synergy.FIELD)) {
-          pokemon.effects.add(Effect.BULK_UP)
-        }
-        break
-
       case Effect.RAGE:
-        if (types.has(Synergy.FIELD)) {
-          pokemon.effects.add(Effect.RAGE)
-        }
-        break
-
       case Effect.ANGER_POINT:
         if (types.has(Synergy.FIELD)) {
-          pokemon.effects.add(Effect.ANGER_POINT)
+          pokemon.effects.add(effect)
         }
         break
 
@@ -1055,26 +1045,11 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case Effect.ODD_FLOWER:
-        if (types.has(Synergy.FLORA)) {
-          pokemon.effects.add(Effect.ODD_FLOWER)
-        }
-        break
-
       case Effect.GLOOM_FLOWER:
-        if (types.has(Synergy.FLORA)) {
-          pokemon.effects.add(Effect.GLOOM_FLOWER)
-        }
-        break
-
       case Effect.VILE_FLOWER:
-        if (types.has(Synergy.FLORA)) {
-          pokemon.effects.add(Effect.VILE_FLOWER)
-        }
-        break
-
       case Effect.SUN_FLOWER:
         if (types.has(Synergy.FLORA)) {
-          pokemon.effects.add(Effect.SUN_FLOWER)
+          pokemon.effects.add(effect)
         }
         break
 

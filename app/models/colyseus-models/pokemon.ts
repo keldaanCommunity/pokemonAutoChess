@@ -1840,6 +1840,7 @@ const conversionEffect = ({
     )
     simulation.addPokemon(bug, coord.x, coord.y, player.team, true)
   }
+
   // when converting to dragon, no double synergy but gains the AP/AS/SHIELD based on opponent team
   if (synergyCopied === Synergy.DRAGON) {
     const opponentTeam = simulation.getOpponentTeam(player.id)!
@@ -1855,6 +1856,12 @@ const conversionEffect = ({
       entity.addSpeed(dragonLevel, entity, 0, false)
     }
   }
+
+  // when converting to ghost, get Dodge chance
+  if (synergyCopied === Synergy.GHOST) {
+    entity.addDodgeChance(0.2, entity, 0, false)
+  }
+
   // when converting to gourmet, get a Chef hat. Useless but funny
   if (synergyCopied === Synergy.GOURMET && entity.items.size < 3) {
     entity.items.add(Item.CHEF_HAT)
