@@ -68,7 +68,7 @@ export class AbilityStrategy {
     }
 
     if (pokemon.passive === Passive.SLOW_START && pokemon.count.ult === 1) {
-      pokemon.addAttackSpeed(30, pokemon, 0, false)
+      pokemon.addSpeed(30, pokemon, 0, false)
       pokemon.addAttack(10, pokemon, 0, false)
     }
   }

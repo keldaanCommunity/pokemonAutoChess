@@ -642,7 +642,6 @@ export default abstract class PokemonState {
     pokemon: PokemonEntity,
     dt: number,
     board: Board,
-    weather: Weather,
     player: Player | undefined
   ) {
     this.updateCommands(pokemon, dt)
@@ -695,7 +694,7 @@ export default abstract class PokemonState {
         const nbSmoothRocks = player ? count(player.items, Item.SMOOTH_ROCK) : 0
         if (nbSmoothRocks > 0) {
           sandstormDamage -= nbSmoothRocks
-          pokemon.addAttackSpeed(nbSmoothRocks, pokemon, 0, false)
+          pokemon.addSpeed(nbSmoothRocks, pokemon, 0, false)
         }
         if (pokemon.types.has(Synergy.GROUND) === false) {
           pokemon.handleDamage({

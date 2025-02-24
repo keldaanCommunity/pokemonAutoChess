@@ -12,7 +12,7 @@ export function displayBoost(
   const tint =
     {
       [Stat.AP]: 0xff00aa,
-      [Stat.ATK_SPEED]: 0xffaa44,
+      [Stat.SPEED]: 0xffaa44,
       [Stat.ATK]: 0xff6633,
       [Stat.DEF]: 0xffaa66,
       [Stat.SPE_DEF]: 0xff99cc,

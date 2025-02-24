@@ -532,7 +532,7 @@ export default class BattleManager {
         } else if (!pokemon.status.skydiving) {
           pkm.moveManager.setSpeed(
             3 *
-              getMoveSpeed(pokemon, this.simulation.weather) *
+              getMoveSpeed(pokemon) *
               Math.max(
                 Math.abs(pkm.x - coordinates[0]),
                 Math.abs(pkm.y - coordinates[1])
@@ -581,18 +581,23 @@ export default class BattleManager {
       } else if (field === "luck") {
         pkm.luck = pokemon.luck
         if (pkm.detail && pkm.detail instanceof PokemonDetail) {
+          pkm.detail.updateValue(
+            pkm.detail.luck,
+            previousValue as IPokemonEntity["luck"],
+            value as IPokemonEntity["luck"]
+          )
           pkm.detail.updateAbilityDescription(pkm)
           if (pokemon.passive != Passive.NONE) {
             pkm.detail.updatePassiveDescription(pokemon)
           }
         }
-      } else if (field === "atkSpeed") {
+      } else if (field === "speed") {
         if (value && value > (previousValue || 0)) {
-          this.displayBoost(Stat.ATK_SPEED, pkm.positionX, pkm.positionY)
+          this.displayBoost(Stat.SPEED, pkm.positionX, pkm.positionY)
         }
-        pkm.atkSpeed = pokemon.atkSpeed
+        pkm.speed = pokemon.speed
         if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-          pkm.detail.atkSpeed.textContent = pokemon.atkSpeed.toFixed(2)
+          pkm.detail.speed.textContent = pokemon.speed.toString()
         }
       } else if (field === "hp") {
         const baseHP = getPokemonData(pokemon.name).hp
