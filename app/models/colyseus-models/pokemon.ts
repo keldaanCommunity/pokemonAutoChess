@@ -16082,7 +16082,7 @@ export class PillarConcrete extends Pokemon {
   types = new SetSchema<Synergy>([])
   rarity = Rarity.SPECIAL
   stars = 3
-  hp = 300
+  hp = 400
   atk = 0
   def = 10
   speDef = 10

@@ -59,6 +59,7 @@
 - Nerf Alolan Raichu: back to tier 3, gets the same stats as Raichu but keeps the additional psychic synergy
 - Change HyperSpace Fury: now also reduces special defense evert hit
 - Changed Heavy Slam (Aggron): Shield 10/20/40 → 15/30/60, remove AP scaling
+- Buff Concrete Pillar (Conkeldurr) HP 300 → 400
 
 # Changes to Synergies
 
