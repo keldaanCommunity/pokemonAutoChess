@@ -79,7 +79,7 @@
 # Gameplay
 
 - Defense and special defense stats have all been doubled, and damage reduction formula changed to `1/(1+def/20)` instead of `1/(1+def/10)`. This will allow more precise number tweaking in the future.
-- Added regional variants for Unique and Legendary Pokémon. The first regional variant is Galarian Farfetch'd, which can be found in Fighting regions
+- Added regional variants for Unique and Legendary Pokémon. The first regional variant unique is Galarian Farfetch'd, which can be found in Fighting regions. Galarian Moltres, Zapdos and Articuno are now regional variants as well
 - Regional variants are no longer found in maps with common synergies between the variant and the original Pokémon
 - When an effect is considering the strongest Pokémon, or the pokémon with the highest stat, if several Pokémon are equal, it now selects a random Pokémon among those. Before, it was based on board position. This is especially relevant for Ghost curses.
 - Farthest reachable target algorithm has been improved to favor the farthest target when there are multiple equidistant free cells. This impacts several abilities and effects, such as Comet Shard and all dashers abilities
