@@ -104,7 +104,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   FRUIT_JUICE: [
     new OnSpawnEffect((entity) => {
-      entity.addAttackSpeed(30, entity, 0, false)
+      entity.addSpeed(30, entity, 0, false)
     })
   ],
   HONEY: [],
@@ -160,7 +160,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
         entity.addAttack(5, entity, 0, false)
       }
       if (chance(0.8, entity)) {
-        entity.addAttackSpeed(25, entity, 0, false)
+        entity.addSpeed(25, entity, 0, false)
       }
       if (chance(0.8, entity)) {
         entity.addAbilityPower(25, entity, 0, false)
@@ -239,7 +239,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   FLOWER_SWEET: [
     new OnSpawnEffect((entity) => {
-      entity.addAttackSpeed(5, entity, 0, false, true)
+      entity.addSpeed(5, entity, 0, false, true)
     })
   ],
   STAR_SWEET: [

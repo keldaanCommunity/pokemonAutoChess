@@ -91,7 +91,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     emotion: Emotion.DETERMINED,
     shinyChance: 0, // can't propose shiny items because item proposition on stage 15
     board: [
-      [Pkm.MEWTWO, 4, 2],
+      [Pkm.MEWTWO, 0, 1],
       [Pkm.MEW, 7, 1]
     ],
     getRewards(player: Player) {
