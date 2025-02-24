@@ -60,7 +60,7 @@ export default class PokemonSprite extends DraggableObject {
   def: number
   speDef: number
   attackType: AttackType
-  atkSpeed: number
+  speed: number
   targetX: number | null
   targetY: number | null
   skill: Ability
@@ -119,6 +119,7 @@ export default class PokemonSprite extends DraggableObject {
   curseFate: GameObjects.Sprite | undefined
   light: GameObjects.Sprite | undefined
   stars: number
+  stages: number
   playerId: string
   shouldShowTooltip: boolean
   flip: boolean
@@ -126,6 +127,7 @@ export default class PokemonSprite extends DraggableObject {
   skydiving: boolean = false
   meal: Item | "" = ""
   mealSprite: GameObjects.Sprite | undefined
+  inBattle: boolean = false
 
   constructor(
     scene: GameScene | DebugScene,
@@ -141,6 +143,7 @@ export default class PokemonSprite extends DraggableObject {
     this.playerId = playerId
     this.shouldShowTooltip = true
     this.stars = pokemon.stars
+    this.stages = getPokemonData(pokemon.name).stages
     this.evolution = instanceofPokemonEntity(pokemon)
       ? Pkm.DEFAULT
       : (pokemon as IPokemon).evolution
@@ -161,7 +164,7 @@ export default class PokemonSprite extends DraggableObject {
     this.attackType = pokemon.attackType
     this.types = new Set(values(pokemon.types))
     this.maxPP = pokemon.maxPP
-    this.atkSpeed = pokemon.atkSpeed
+    this.speed = pokemon.speed
     this.targetX = null
     this.targetY = null
     this.skill = pokemon.skill
@@ -171,6 +174,7 @@ export default class PokemonSprite extends DraggableObject {
     this.attackSprite = pokemon.attackSprite
     this.ap = pokemon.ap
     this.luck = pokemon.luck
+    this.inBattle = inBattle
     if (this.range > 1) {
       this.rangeType = "range"
     } else {
@@ -337,7 +341,7 @@ export default class PokemonSprite extends DraggableObject {
       this.def,
       this.speDef,
       this.range,
-      this.atkSpeed,
+      this.speed,
       this.critChance,
       this.critPower,
       this.ap,
@@ -351,12 +355,15 @@ export default class PokemonSprite extends DraggableObject {
       this.index,
       this.stars,
       getPokemonData(this.name as Pkm).stages,
-      this.evolution
+      this.evolution,
+      this.inBattle
     )
-    this.detail.setPosition(
-      this.detail.width / 2 + 40,
-      min(0)(-this.detail.height / 2 - 40)
-    )
+    this.detail
+      .setPosition(
+        this.detail.width / 2 + 40,
+        min(0)(-this.detail.height / 2 - 40)
+      )
+      .setDepth(DEPTH.TOOLTIP)
 
     this.detail.removeInteractive()
     this.add(this.detail)

@@ -153,7 +153,7 @@ class GameContainer {
         "critPower",
         "ap",
         "luck",
-        "atkSpeed",
+        "speed",
         "life",
         "hp",
         "shield",
