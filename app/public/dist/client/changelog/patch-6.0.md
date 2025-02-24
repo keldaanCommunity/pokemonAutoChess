@@ -43,14 +43,12 @@
 - Buff Vulpix line andd Alolan Vulpix line: PP 85 → 80 : Aurora Veil Rune protect duration 0.5 → 1 second
 - Nerf Teatime (Polteageist): healing 20/40/80 → 15/30/60
 - Buff Houndour line: PP 125 → 110
-- Buff Sneasel Attack 9 → 10 and Weavile: Attack 22 → 26
 - Buff Topsy Turvy (Inkay): also reverse AP buffs
-- Buff Pawniard Attack 14 → 17 and Bisharp Attack 26 → 30
 - Nerf Inteleon: Snipe shot damage 40/80/160 → 40/80/120
-- Nerf Stantler: HP 200 → 180, Def/Spedef: 5 → 3
+- Nerf Stantler: HP 200 → 180, Def/Spedef: 5 → 3 (6 post def/spedef stat change)
 - Nerf Miltank: HP 250 → 200
 - Nerf Spinda: HP 250 → 200
-- Nerf Burmy line: Burmy now has various defense stats based on its cloak: Plant Cloak: def 3/3/3 → 1/1/1, spedef 3/5/3 → 1/2/3, Sand Cloak def 3/3/3 → 2/2/2, spedef 3/5/3 → 2/3/3
+- Nerf Burmy line: Burmy now has various defense stats based on its cloak: Plant Cloak < Sand Cloak < Trash Cloak
 - Buff Melmetal: increase Attack speed/Attack ratio: 10% attack speed = ~~3~~ 5 attack
 - Rework Fuecoco line: now 3-range with nerfed defense/special defense, ability Torch Song reworked, PP 100 → 60
 - Porygon is now in Ultra category ; adjusted stats ; new passive Conversion: get the highest synergy of your opponent and its effects at the start of the fight.
@@ -65,6 +63,7 @@
 
 - New synergy Gourmet: Gourmet Pokémon can be equipped with a Chef's Hat. Chefs will cook up their Signature Dish between fights and feed adjacent allies, giving them various buffs and effects.
 - Berry trees no longer change every time a berry is collected. Instead, they change when you change region.
+- Wild now gives Speed at levels 2-4 and Attack at levels 6-8 instead of attack and movement speed at all levels
 
 # Changes to Items
 
@@ -80,13 +79,15 @@
 
 # Gameplay
 
+- Attack speed, move speed and ability cooldowns have all been merged into one statistic: Speed. 1 Speed = 1% attack speed in previous patch. Pokemons now have a different base speed as part of their stats, taken from their base game stats. Many attack and max PP stats have been adjusted to compensate for the difference of base speed.
 - Defense and special defense stats have all been doubled, and damage reduction formula changed to `1/(1+def/20)` instead of `1/(1+def/10)`. This will allow more precise number tweaking in the future.
 - Added regional variants for Unique and Legendary Pokémon. The first regional variant unique is Galarian Farfetch'd, which can be found in Fighting regions. Galarian Moltres, Zapdos and Articuno are now regional variants as well
 - Regional variants are no longer found in maps with common synergies between the variant and the original Pokémon
 - When an effect is considering the strongest Pokémon, or the pokémon with the highest stat, if several Pokémon are equal, it now selects a random Pokémon among those. Before, it was based on board position. This is especially relevant for Ghost curses.
 - Farthest reachable target algorithm has been improved to favor the farthest target when there are multiple equidistant free cells. This impacts several abilities and effects, such as Comet Shard and all dashers abilities
 - PVE rewards from stage 24 onwards now propose 1 synergy stone maximum
-- Item carousels now propose 4 synergy stones maximum
+- Regular item carousels now propose 4 synergy stones maximum
+- Weather Windy and Snow now impacts speed instead of movement speed
 
 # UI
 

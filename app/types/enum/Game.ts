@@ -95,7 +95,7 @@ export enum SpriteType {
 
 export enum Stat {
   ATK = "ATK",
-  ATK_SPEED = "ATK_SPEED",
+  SPEED = "SPEED",
   DEF = "DEF",
   SPE_DEF = "SPE_DEF",
   HP = "HP",

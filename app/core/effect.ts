@@ -179,7 +179,7 @@ export class ClearWingEffect extends PeriodicEffect {
   constructor() {
     super(
       (pokemon) => {
-        pokemon.addAttackSpeed(2, pokemon, 0, false)
+        pokemon.addSpeed(2, pokemon, 0, false)
       },
       Passive.CLEAR_WING,
       1000
@@ -323,7 +323,7 @@ export class SoundCryEffect extends OnAbilityCastEffect {
   apply(pokemon, state, board, target, crit) {
     pokemon.transferAbility(Ability.ECHO)
     const attackBoost = [2, 1, 1][this.synergyLevel] ?? 0
-    const attackSpeedBoost = [0, 5, 5][this.synergyLevel] ?? 0
+    const speedBoost = [0, 5, 5][this.synergyLevel] ?? 0
     const manaBoost = [0, 0, 3][this.synergyLevel] ?? 0
 
     const chimecho = board
@@ -337,7 +337,7 @@ export class SoundCryEffect extends OnAbilityCastEffect {
       if (ally?.team === pokemon.team) {
         ally.status.sleep = false
         ally.addAttack(attackBoost * scale, pokemon, 0, false)
-        ally.addAttackSpeed(attackSpeedBoost * scale, pokemon, 0, false)
+        ally.addSpeed(speedBoost * scale, pokemon, 0, false)
         ally.addPP(manaBoost * scale, pokemon, 0, false)
         ally.count.soundCryCount += scale
       }

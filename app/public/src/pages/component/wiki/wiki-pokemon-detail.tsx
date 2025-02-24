@@ -35,7 +35,7 @@ export default function WikiPokemonDetail(props: { pokemon: Pkm }) {
     [Stat.SPE_DEF]: "speDef",
     [Stat.CRIT_CHANCE]: "critChance",
     [Stat.CRIT_POWER]: "critPower",
-    [Stat.ATK_SPEED]: "atkSpeed",
+    [Stat.SPEED]: "speed",
     [Stat.PP]: "maxPP",
     [Stat.AP]: "ap",
     [Stat.SHIELD]: "shield",

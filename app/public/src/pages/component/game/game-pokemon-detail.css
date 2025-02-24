@@ -73,8 +73,9 @@
   grid-template: 32px 32px / repeat(5, 1fr);
 }
 
-.in-shop .game-pokemon-detail-stats {
-  grid-template: 32px 32px / repeat(3, 1fr);
+.in-shop .game-pokemon-detail-stats,
+.in-board .game-pokemon-detail-stats {
+  grid-template: 32px 32px / repeat(4, 1fr);
 }
 
 .game-pokemon-detail-stats > div {
@@ -87,11 +88,23 @@
   height: 32px;
 }
 
-.game-pokemon-detail-stats img + p {
+.game-pokemon-detail-stats img + span {
   display: inline-block;
   vertical-align: middle;
   font-weight: 500;
   font-size: 90%;
+}
+
+.game-pokemon-detail-stat-range {
+  grid-row: span 2;
+  display: flex;
+  align-items: center;
+}
+
+.game-pokemon-detail-stats .game-pokemon-detail-stat-range img + span {
+  display: inline-block;
+  margin: 0.5em;
+  font-size: 120%;
 }
 
 .game-pokemon-detail-stats .negative {

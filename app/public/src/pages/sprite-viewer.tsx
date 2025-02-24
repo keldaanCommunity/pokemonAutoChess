@@ -97,7 +97,7 @@ export function SpriteDebug() {
             <option value="BOOST/DEF">BOOST DEFENSE</option>
             <option value="BOOST/SPE_DEF">BOOST SPE_DEF</option>
             <option value="BOOST/SHIELD">BOOST SHIELD</option>
-            <option value="BOOST/ATK_SPEED">BOOST ATK_SPEED</option>
+            <option value="BOOST/SPEED">BOOST SPEED</option>
             <option value="BOOST/AP">BOOST AP</option>
           </select>
         </div>

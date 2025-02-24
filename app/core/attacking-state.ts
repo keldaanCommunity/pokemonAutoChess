@@ -1,6 +1,5 @@
 import Player from "../models/colyseus-models/player"
 import { PokemonActionState } from "../types/enum/Game"
-import { Item } from "../types/enum/Item"
 import { Weather } from "../types/enum/Weather"
 import { distanceC } from "../utils/distance"
 import { chance } from "../utils/random"
@@ -18,17 +17,11 @@ import { Effect } from "../types/enum/Effect"
 export default class AttackingState extends PokemonState {
   name = "attacking"
 
-  update(
-    pokemon: PokemonEntity,
-    dt: number,
-    board: Board,
-    weather: Weather,
-    player: Player
-  ) {
-    super.update(pokemon, dt, board, weather, player)
+  update(pokemon: PokemonEntity, dt: number, board: Board, player: Player) {
+    super.update(pokemon, dt, board, player)
 
     if (pokemon.cooldown <= 0) {
-      pokemon.cooldown = pokemon.getAttackDelay()
+      pokemon.cooldown = Math.round(1000 / (0.4 + pokemon.speed * 0.007))
 
       // first, try to hit the same target than previous attack
       let target = board.getValue(pokemon.targetX, pokemon.targetY)
@@ -134,7 +127,7 @@ export function getAttackTimings(pokemon: IPokemonEntity): {
   travelTime: number
   attackDuration: number
 } {
-  const attackDuration = 1000 / pokemon.atkSpeed
+  const attackDuration = 1000 / pokemon.speed
   const d = delays[pokemon.index]?.d || 18 // number of frames before hit
   const t = delays[pokemon.index]?.t || 36 // total number of frames in the animation
 

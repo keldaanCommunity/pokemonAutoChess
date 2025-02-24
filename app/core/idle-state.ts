@@ -1,7 +1,6 @@
 import Player from "../models/colyseus-models/player"
 import { PokemonActionState } from "../types/enum/Game"
 import { Passive } from "../types/enum/Passive"
-import { Weather } from "../types/enum/Weather"
 import Board from "./board"
 import { PokemonEntity } from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
@@ -9,14 +8,8 @@ import PokemonState from "./pokemon-state"
 export class IdleState extends PokemonState {
   name = "idle"
 
-  update(
-    pokemon: PokemonEntity,
-    dt: number,
-    board: Board,
-    weather: Weather,
-    player: Player
-  ) {
-    super.update(pokemon, dt, board, weather, player)
+  update(pokemon: PokemonEntity, dt: number, board: Board, player: Player) {
+    super.update(pokemon, dt, board, player)
 
     if (pokemon.status.tree) {
       if (pokemon.maxPP > 0 && pokemon.pp >= pokemon.maxPP && pokemon.canMove) {

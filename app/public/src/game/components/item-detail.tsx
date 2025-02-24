@@ -7,9 +7,9 @@ import { ItemStats } from "../../../../core/items"
 import { Stat } from "../../../../types/enum/Game"
 import { HMs, Item, ItemRecipe, TMs } from "../../../../types/enum/Item"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
-import "./item-detail.css"
 import { cc } from "../../pages/utils/jsx"
 import { usePreferences } from "../../preferences"
+import "./item-detail.css"
 
 export function ItemDetailTooltip({
   item,
@@ -28,7 +28,7 @@ export function ItemDetailTooltip({
 
   const formatStat = (stat: Stat, value: number) => {
     let output = value.toString()
-    if ([Stat.ATK_SPEED, Stat.CRIT_CHANCE, Stat.CRIT_POWER].includes(stat)) {
+    if ([Stat.CRIT_CHANCE, Stat.CRIT_POWER].includes(stat)) {
       output += "%"
     }
     if (value >= 0) {
