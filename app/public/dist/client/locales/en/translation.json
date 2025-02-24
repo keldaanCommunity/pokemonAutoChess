@@ -1726,7 +1726,7 @@
     "POWER_WHIP": "Unleash a giant vine toward the farthest enemy Pokémon, dealing [30,60,SP] SPECIAL to any enemy Pokémon in the path.",
     "DARK_HARVEST": "Teleport into the largest group of enemy Pokémon. Inflict the user with SILENCE for 3 seconds and drain the HP of adjacent enemy Pokémon, dealing [5,10,20,SP] SPECIAL per second and heal for 30% of the damage dealt.",
     "PSYSHOCK": "Burn [20,40,80,SP] PP from the target and gain SHIELD for the same amount. Excess damage is dealt as SPECIAL.",
-    "HEAVY_SLAM": "Slam the ground, dealing [15,30,60,SP] SPECIAL to adjacent opponents and gain [10,20,40,SP] SHIELD. The more max HP the user has than the target, the greater the ability's power.",
+    "HEAVY_SLAM": "Slam the ground, dealing [15,30,60,SP] SPECIAL to adjacent opponents and gain [15,30,60] SHIELD. The more max HP the user has than the target, the greater the ability's power.",
     "RAPID_SPIN": "Deal [20,50,SP] SPECIAL and gain [50,SP]% of ATK as DEF and SPE_DEF",
     "BOUNCE": "Bounce [1,2,3,SP] times to the farthest enemy Pokémon, dealing [10,SP] SPECIAL to all adjacent enemy Pokémon each time.",
     "BLOOD_MOON": "Ursaluna concentrates all their energy in the blood-red moon on their forehead and projects it in a line, dealing [200,SP]% of ATK as SPECIAL to all enemy Pokémon in the path and applying WOUND for 3 seconds.",
