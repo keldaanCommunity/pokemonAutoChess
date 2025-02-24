@@ -1332,7 +1332,7 @@
     "POISON_POWDER": "Tốc biến xuống hậu tuyến kẻ thù, gây [20,40,80,SP] và hiệu ứng POISONED trong 5 giây lên kẻ thù trên đường đi",
     "ICY_WIND": "Gây [30,60,120,SP] SPECIAL lên mục tiêu cùng một hàng và giảm [10,20,40] SPEED của chúng",
     "GIGATON_HAMMER": "Gây [100,200,400,SP] SPECIAL nhưng bản thân bị FATIGUE trong 6 giây",
-    "ACROBATICS": "Gây [20,40,80,SP] SPECIAL. Gấp đôi sát thương nếu Pokémon thi triển không có trang bị nào",
+    "ACROBATICS": "Gây [20,40,80,SP] SPECIAL và di chuyển đến một ô cách xa mục tiêu. Di chuyển xa hơn nếu không cầm bất kỳ vật phẩm nào",
     "ABSORB": "Gây [30,60,120,SP] SPECIAL và hồi [3,6,12,SP] cho đồng minh ở gần",
     "ROLLOUT": "Tăng [2,5,10,SP] DEF và gây SPECIAL bằng 2 lần chỉ số DEF",
     "THRASH": "Tăng [100,SP]% ATK nhưng bị CONFUSION trong 3 giây",

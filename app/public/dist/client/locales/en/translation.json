@@ -1565,7 +1565,7 @@
     "POISON_POWDER": "Dash into the enemy back line, dealing [20,40,80,SP] SPECIAL to all enemy Pokémon in the path and inflicting them with POISONNED for 5 seconds.",
     "ICY_WIND": "Deal [30,60,120,SP] SPECIAL to all enemy Pokémon in a line behind the target and decrease their SPEED by [10,20,40].",
     "GIGATON_HAMMER": "Deal [100,200,400,SP] SPECIAL to the target and inflict the user with FATIGUE for 6 seconds.",
-    "ACROBATICS": "Deal [20,40,80,SP] SPECIAL to the target. The damage is doubled if the user has no held items.",
+    "ACROBATICS": "Deal [20,40,80,SP] SPECIAL and move to a cell at good distance from its target. Move further away if not holding any item.",
     "ABSORB": "Deal [30,60,120,SP] SPECIAL to the target and heal adjacent allied Pokémon for [3,6,12,SP] HP.",
     "ROLLOUT": "Increase the user's DEF by [2,5,10,SP] then deal SPECIAL equal to 2x the user's DEF.",
     "ICE_BALL": "Increase the user's SPE_DEF by 10 then deal SPECIAL equal to [10,20,30,SP] + [50,100,150,SP]% of the user's SPE_DEF.",

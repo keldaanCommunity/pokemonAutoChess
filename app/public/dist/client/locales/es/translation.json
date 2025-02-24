@@ -1507,7 +1507,7 @@
     "POISON_POWDER": "Se cuela en la retaguardia enemiga, inflige [20,40,80,SP] y aplica POISONNED por 5 segundos a todos los enemigos en el camino",
     "ICY_WIND": "Inflige [30,60,120,SP] de SPECIAL a todos los objetivos de una línea y reduce su SPEED un [10,20,40]",
     "GIGATON_HAMMER": "Inflige [100,200,400,SP] de SPECIAL pero deja FATIGUE al usuario por 6 segundos",
-    "ACROBATICS": "Inflige [20,40,80,SP] de SPECIAL. Causa el doble de daño si el atacante no tiene objetos equipados.",
+    "ACROBATICS": "Inflige [20,40,80,SP] SPECIAL y muévete a una celda a una buena distancia de su objetivo. Aléjate aún más si no tienes ningún objeto",
     "ABSORB": "Inflige [30,60,120,SP] de SPECIAL y cura [3,6,12,SP] a los aliados adyacentes",
     "ROLLOUT": "Mejora la DEF en [2,5,10,SP] e inflige 2 veces la DEF como SPECIAL",
     "ICE_BALL": "Incrementa la SPE_DEF del usuario en 10 e inflige SPECIAL igual a [10,20,30,SP] + [50,100,150,SP]% de la SPE_DEF del usuario.",

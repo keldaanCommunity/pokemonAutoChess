@@ -1304,7 +1304,7 @@
     "POISON_POWDER": "Corra para a retaguarda inimiga, causando [20,40,80,SP] e aplicando POISONNED por 5 segundos em todos os inimigos no caminho",
     "ICY_WIND": "Causa [30,60,120,SP] de SPECIAL a todos os alvos numa linha e diminui a sua SPEED em [10,20,40]",
     "GIGATON_HAMMER": "Oferece [100,200,400,SP] SPECIAL, mas FATIGUE por 6 segundos",
-    "ACROBATICS": "Inflige [20,40,80,SP] SPECIAL. Dano dobrado se o lançador não tiver itens retidos.",
+    "ACROBATICS": "Deal [20,40,80,SP] SPECIAL e mova-se para uma célula a uma boa distância do seu alvo. Mova-se para mais longe se não estiver segurando nenhum item",
     "ABSORB": "Oferece [30,60,120,SP] SPECIAL e cura [3,6,12,SP] para aliados adjacentes",
     "ROLLOUT": "Aumenta a DEF em [2,5,10,SP] e trata 2x a DEF como SPECIAL",
     "THRASH": "Aumente o ATK em [100,SP]% e torne-se CONFUSION por 3s",

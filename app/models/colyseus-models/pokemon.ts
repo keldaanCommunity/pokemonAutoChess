@@ -4902,8 +4902,8 @@ export class Hoppip extends Pokemon {
   speed = 60
   def = 2
   speDef = 2
-  maxPP = 110
-  range = 2
+  maxPP = 100
+  range = 3
   skill = Ability.ACROBATICS
   attackSprite = AttackSprite.FLYING_RANGE
 }
@@ -4918,8 +4918,8 @@ export class Skiploom extends Pokemon {
   speed = 60
   def = 2
   speDef = 2
-  maxPP = 110
-  range = 2
+  maxPP = 100
+  range = 3
   skill = Ability.ACROBATICS
   attackSprite = AttackSprite.FLYING_RANGE
 }
@@ -4933,8 +4933,8 @@ export class Jumpluff extends Pokemon {
   speed = 60
   def = 2
   speDef = 2
-  maxPP = 110
-  range = 2
+  maxPP = 100
+  range = 3
   skill = Ability.ACROBATICS
   attackSprite = AttackSprite.FLYING_RANGE
 }

@@ -1039,7 +1039,7 @@
     "POISON_POWDER": "Stort je in de achterlijn van de vijand, deel [20,40,80,SP] en breng gedurende 5 seconden POISONNED aan op elke vijand op het pad",
     "ICY_WIND": "Verdeelt [30,60,120,SP] SPECIAL naar alle doelwitten in een lijn en verlaagt hun SPEED met [10,20,40].",
     "GIGATON_HAMMER": "Biedt [100,200,400,SP] SPECIAL aan, maar FATIGUE zelf gedurende 6 seconden",
-    "ACROBATICS": "Aanbiedingen [20,40,80,SP] SPECIAL. Dubbele schade als caster geen vastgehouden items heeft.",
+    "ACROBATICS": "Deal [20,40,80,SP] SPECIAL en ga naar een cel op een goede afstand van het doelwit. Ga verder weg als je geen item vasthoudt",
     "ABSORB": "Biedt [30,60,120,SP] SPECIAL en geneest [3,6,12,SP] aan aangrenzende bondgenoten",
     "ROLLOUT": "Buff de DEF met [2,5,10,SP] en deelt 2x de DEF uit als SPECIAL",
     "THRASH": "Verbeter ATK met [100,SP]% en word CONFUSION voor 3s",
