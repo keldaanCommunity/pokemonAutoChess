@@ -35,6 +35,7 @@
     "start": "node ./app/public/dist/server/app/index.js",
     "add-bot": "ts-node -T --preferTsExts ./db-commands/populate-bot-from-pastebin.ts",
     "seed-bots": "ts-node -T --preferTsExts ./db-commands/populate-bots-from-local.ts",
+    "seed-stats": "ts-node -T --preferTsExts ./db-commands/seed-detailled-statistics.ts",
     "monitor-bot": "node ./app/public/dist/server/scheduled/monitor-bot.js",
     "translate": "npx @inlang/cli machine translate -f",
     "postinstall": "npm run download-music && cd edit/assetpack && npm install",

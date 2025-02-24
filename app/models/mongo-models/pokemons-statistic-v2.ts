@@ -2,18 +2,22 @@ import { Schema, model } from "mongoose"
 import { Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
 
+export interface IPokemonsStatisticV2Pokemon {
+  rank: number
+  count: number
+  name: Pkm
+  items: Item[]
+  item_count: number
+}
+
 export interface IPokemonsStatisticV2 {
   tier: string
-  pokemons: Map<
-    string,
-    {
-      rank: number
-      count: number
-      name: Pkm
-      items: Item[]
-      item_count: number
-    }
-  >
+  pokemons: Map<string, IPokemonsStatisticV2Pokemon>
+}
+
+export interface ISerializedPokemonsStatisticV2 {
+  tier: string
+  pokemons: Record<string, IPokemonsStatisticV2Pokemon>
 }
 
 const pokemonsStatistic = new Schema({

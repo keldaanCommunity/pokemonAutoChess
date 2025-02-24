@@ -16,7 +16,7 @@ import { Money } from "../icons/money"
 import SynergyIcon from "../icons/synergy-icon"
 import { GamePokemonDetail } from "./game-pokemon-detail"
 import "./game-pokemon-portrait.css"
-import { usePreference } from "../../../preferences"
+import { usePreference, usePreferences } from "../../../preferences"
 
 export default function GamePokemonPortrait(props: {
   index: number
@@ -27,7 +27,7 @@ export default function GamePokemonPortrait(props: {
   onMouseLeave?: React.MouseEventHandler<HTMLDivElement>,
   inPlanner?: boolean
 }) {
-  const [antialiasing] = usePreference("antialiasing")
+  const [{ antialiasing, stickyShopTooltips }] = usePreferences()
   const pokemon = useMemo(
     () =>
       typeof props.pokemon === "string"
@@ -165,6 +165,7 @@ export default function GamePokemonPortrait(props: {
         id={`tooltip-${props.origin}-${props.index}`}
         className="custom-theme-tooltip game-pokemon-detail-tooltip"
         place="top"
+        clickable={stickyShopTooltips}
       >
         <GamePokemonDetail
           key={pokemonInPortrait.id}

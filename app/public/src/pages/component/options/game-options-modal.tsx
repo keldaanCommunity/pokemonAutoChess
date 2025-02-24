@@ -135,6 +135,16 @@ export default function GameOptionsModal(props: {
           <p>
             <Checkbox
               isDark
+              checked={preferences.stickyShopTooltips}
+              onToggle={(checked) =>
+                setPreferences({ stickyShopTooltips: checked })
+              }
+              label={t("sticky_shop_tooltips")}
+            />
+          </p>
+          <p>
+            <Checkbox
+              isDark
               checked={preferences.showDamageNumbers}
               onToggle={(checked) =>
                 setPreferences({ showDamageNumbers: checked })

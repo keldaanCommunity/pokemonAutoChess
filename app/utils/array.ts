@@ -39,3 +39,7 @@ export function count<T>(arr: T[] | ArraySchema<T>, el: T): number {
 export function wrapInArray<T>(value: T | T[]): T[] {
   return Array.isArray(value) ? value : [value]
 }
+
+export function compactArray<T>(value: (T | undefined | null)[]): T[] {
+  return value.filter(n => n) as T[];
+}

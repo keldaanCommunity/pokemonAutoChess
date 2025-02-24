@@ -9,6 +9,12 @@ import atlas from "../../assets/atlas.json"
 import { preloadMusic } from "../../pages/utils/audio"
 import { getPortraitSrc } from "../../../../utils/avatar"
 import GameScene from "../scenes/game-scene"
+import { ISerializedPokemonsStatisticV2 } from "../../../../models/mongo-models/pokemons-statistic-v2"
+import { Pkm } from "../../../../types/enum/Pokemon"
+import { Item } from "../../../../types/enum/Item"
+import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
+import { compactArray } from "../../../../utils/array"
+import { EloRank } from "../../../../types/Config"
 
 export default class LoadingManager {
   scene: Phaser.Scene
@@ -175,6 +181,85 @@ export default class LoadingManager {
     }
 
     loadEnvironmentMultiAtlas(this.scene)
+
+    // load meta info and process it into a pokemon->popular item map
+    scene.load.json("meta-pokemon", "/meta/pokemons")
+    scene.load.once(
+      "filecomplete-json-meta-pokemon",
+      (key, type, stats: ISerializedPokemonsStatisticV2[]) => {
+        if (!stats?.length) {
+          scene.cache.json.add(key, null)
+          return
+        }
+
+        // map to count item occurances per-pokemon
+        const pokemonMap = new Map<Pkm, Map<Item, number>>()
+
+        // dont limit elo
+        const stat =
+          stats.find((s) => s.tier === EloRank.LEVEL_BALL) || stats[0]
+
+        // get all evolutions of a pokemon so we can count their items too
+        const allEvos = (pokemon: Pkm): Pkm[] => {
+          let toFind: Pkm[] = [pokemon]
+          const evos = new Set<Pkm>()
+
+          while (toFind.length) {
+            // set `toFind` to all of the evolutions of what's currently in `toFind`
+            // as long as we don't have them in `evos` already (prevents infinite loop for e.g. WishiwashiSchool)
+            // so we should eventually just have the entire evolutionary tree in `evos`
+            toFind = toFind
+              .map((pkm) => {
+                const pokemonData = getPokemonData(pkm)
+                return compactArray([
+                  pokemonData.evolution,
+                  ...pokemonData.evolutions
+                ])
+              })
+              .flat()
+              .filter((pkm) => !evos.has(pkm))
+
+            toFind.forEach((pkm) => evos.add(pkm))
+          }
+
+          return Array.from(evos)
+        }
+
+        Object.values(stat.pokemons).forEach((pokemonStat) => {
+          const itemMap = new Map<Item, number>()
+          pokemonMap.set(pokemonStat.name, itemMap)
+
+          // we want to count items for the pokemon and its evolutionary tree
+          const candidates: Pkm[] = [
+            pokemonStat.name,
+            ...allEvos(pokemonStat.name)
+          ]
+
+          // iterate through the pokemon and count their items
+          candidates.forEach((pkm) => {
+            const items = stat.pokemons[pkm]?.items
+            if (!items) return
+
+            items.forEach((item) => {
+              itemMap.set(item, (itemMap.get(item) || 0) + 1)
+            })
+          })
+        })
+
+        // sort items by frequency
+        const sortedPokemonMap = new Map<Pkm, Item[]>()
+        pokemonMap.forEach((itemMap, pkm) => {
+          sortedPokemonMap.set(
+            pkm,
+            Array.from(itemMap.entries())
+              .sort((a, b) => b[1] - a[1])
+              .map(([item]) => item)
+          )
+        })
+
+        scene.cache.json.add(key, sortedPokemonMap)
+      }
+    )
   }
 }
 

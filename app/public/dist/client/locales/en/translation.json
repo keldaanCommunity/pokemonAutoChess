@@ -3125,6 +3125,7 @@
   "play_music_in_background": "Play music in background",
   "toggle_fullscreen": "Toggle fullscreen",
   "show_details_on_hover": "Show details on hover instead of right click",
+  "sticky_shop_tooltips": "Sticky shop tooltips (stay open on hover)",
   "show_damage_numbers": "Show damage numbers",
   "disable_animated_tilemap": "Disable background animations",
   "antialiasing": "Enable anti-aliasing",

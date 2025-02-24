@@ -24,6 +24,7 @@ export interface IPreferencesState {
   keybindings: Keybindings
   renderer: number
   antialiasing: boolean
+  stickyShopTooltips: boolean
 }
 
 const defaultPreferences: IPreferencesState = {
@@ -45,13 +46,20 @@ const defaultPreferences: IPreferencesState = {
     switch: "SPACE",
     emote: "A"
   },
-  antialiasing: false
+  antialiasing: false,
+  stickyShopTooltips: true
+}
+
+// for when we add a preference or change a default that may interfere with a practiced player's muscle memory, etc
+const defaultPreferencesForExistingPlayers: Partial<IPreferencesState> = {
+  stickyShopTooltips: false
 }
 
 function loadPreferences(): IPreferencesState {
   if (localStore.has(LocalStoreKeys.PREFERENCES)) {
     return {
       ...defaultPreferences,
+      ...defaultPreferencesForExistingPlayers,
       ...localStore.get(LocalStoreKeys.PREFERENCES),
       keybindings: {
         ...defaultPreferences.keybindings,

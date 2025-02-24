@@ -18,20 +18,23 @@ import "./game-pokemon-detail.css"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { cc } from "../../utils/jsx"
 import { usePreference } from "../../../preferences"
+import GamePopularItems from "./game-popular-items"
 
-export function GamePokemonDetail(props: {
-  pokemon: Pkm | Pokemon
-  shiny?: boolean
-  emotion?: Emotion
-}) {
+export function GamePokemonDetail(
+  props: {
+    pokemon: Pkm | Pokemon
+    shiny?: boolean
+    emotion?: Emotion
+  } & JSX.IntrinsicElements["div"]
+) {
+  const { pokemon: pkm, shiny, emotion, ...restProps } = props
+
   const [antialiasing] = usePreference("antialiasing")
   const { t } = useTranslation()
   const pokemon: Pokemon = useMemo(
     () =>
-      typeof props.pokemon === "string"
-        ? PokemonFactory.createPokemonFromName(props.pokemon)
-        : props.pokemon,
-    [props.pokemon]
+      typeof pkm === "string" ? PokemonFactory.createPokemonFromName(pkm) : pkm,
+    [pkm]
   )
 
   const pokemonStats = useMemo(
@@ -54,7 +57,7 @@ export function GamePokemonDetail(props: {
   )
 
   return (
-    <div className="game-pokemon-detail in-shop">
+    <div className="game-pokemon-detail in-shop" {...restProps}>
       <img
         className={cc("game-pokemon-detail-portrait", {
           pixelated: !antialiasing
@@ -62,8 +65,8 @@ export function GamePokemonDetail(props: {
         style={{ borderColor: RarityColor[pokemon.rarity] }}
         src={getPortraitSrc(
           pokemon.index,
-          props.shiny ?? pokemon.shiny,
-          props.emotion ?? pokemon.emotion
+          shiny ?? pokemon.shiny,
+          emotion ?? pokemon.emotion
         )}
       />
       <div className="game-pokemon-detail-entry">
@@ -94,6 +97,8 @@ export function GamePokemonDetail(props: {
           <SynergyIcon type={type} key={type} />
         ))}
       </div>
+
+      <GamePopularItems pokemon={pokemon.name} />
 
       <div className="game-pokemon-detail-stats">
         {pokemonStats.map(({ stat, value }) => (

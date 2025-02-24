@@ -8,6 +8,7 @@
   grid-template-columns: 88px 1fr auto;
   grid-template-areas:
     "portrait entry types"
+    "portrait entry items"
     "stats stats stats"
     "dish dish dish"
     "passive passive passive"
@@ -19,8 +20,26 @@
   padding: 5px;
 }
 
-.game-pokemon-detail p {
-  margin: 0;
+.game-pokemon-detail-popular-items {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  grid-area: items;
+  gap: 0.1rem;
+}
+
+.game-pokemon-detail-popular-items-items {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: start;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.game-pokemon-detail-popular-items-item {
+  height: 1.5rem;
 }
 
 .game-pokemon-detail-entry {

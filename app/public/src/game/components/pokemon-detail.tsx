@@ -15,6 +15,7 @@ import { getPortraitSrc } from "../../../../utils/avatar"
 import { DishByPkm } from "../../../../core/dishes"
 import { cc } from "../../pages/utils/jsx"
 import { preference } from "../../preferences"
+import GamePopularItems from "../../pages/component/game/game-popular-items"
 
 export default class PokemonDetail extends GameObjects.DOMElement {
   dom: HTMLDivElement
@@ -63,6 +64,9 @@ export default class PokemonDetail extends GameObjects.DOMElement {
 
     this.dom = document.createElement("div")
     this.dom.className = "my-container game-pokemon-detail-tooltip"
+    this.dom.addEventListener("contextmenu", (e) => {
+      e.preventDefault()
+    })
     const wrap = document.createElement("div")
     wrap.className = "game-pokemon-detail"
 
@@ -156,6 +160,10 @@ export default class PokemonDetail extends GameObjects.DOMElement {
       typesList.appendChild(ty)
     })
     wrap.appendChild(typesList)
+
+    const popularItems = document.createElement("div")
+    ReactDOM.createRoot(popularItems).render(<GamePopularItems pokemon={name} />)
+    wrap.appendChild(popularItems)
 
     let stats = [
       { stat: Stat.HP, elm: this.hp },
