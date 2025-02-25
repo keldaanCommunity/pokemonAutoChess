@@ -169,7 +169,9 @@ export default function SynergyDetailComponent(props: {
 
 function PokemonPortrait(props: { p: IPokemonData, player?: IPlayer }) {
   const [antialiasing] = usePreference("antialiasing")
-  const isOnTeam = (p: Pkm) => props.player != null && values(props.player.board).some((x) => PkmFamily[x.name] === p)
+  const isOnTeam = (p: Pkm) => props.player != null && values(props.player.board).some(
+    (x) => PkmFamily[x.name] === p || x.name === p
+  )
   return (
     <div
       className={cc("pokemon-portrait", {
