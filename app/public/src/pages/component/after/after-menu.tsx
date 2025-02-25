@@ -107,7 +107,7 @@ export default function AfterMenu() {
                     />
                   </td>
                   <td>
-                    <p title={t("total_money_earned")}><img src="assets/icons/money.svg" alt="$" style={{ width: "24px", height: "24px" }} /> {v.moneyEarned}</p>
+                    <p title={t("total_money_earned")}><img src="assets/icons/money_total.svg" alt="$" style={{ width: "24px", height: "24px" }} /> {v.moneyEarned}</p>
                     <p title={t("total_player_damage_dealt")}><img src="assets/icons/ATK.png" alt="✊" style={{ width: "24px", height: "24px" }} />{v.playerDamageDealt}</p>
                     <p title={t("total_reroll_count")}><img src="assets/ui/refresh.svg" alt="↻" style={{ width: "24px", height: "24px" }} /> {v.rerollCount}</p>
                   </td>

@@ -9,7 +9,7 @@ import { Weather } from "./enum/Weather"
 export const ON_ATTACK_MANA = 5
 export const MANA_SCARF_MANA = 8
 export const SCOPE_LENS_MANA = 15
-export const ARMOR_FACTOR = 0.1
+export const ARMOR_FACTOR = 0.05
 export const BOARD_WIDTH = 8
 export const BOARD_HEIGHT = 6
 export const BOARD_SIDE_HEIGHT = 4 // 0 = bench
@@ -121,11 +121,11 @@ export const RarityColor: { [key in Rarity]: string } = {
   [Rarity.COMMON]: "#a0a0a0",
   [Rarity.UNCOMMON]: "#3bc95e",
   [Rarity.RARE]: "#41bfcc",
-  [Rarity.EPIC]: "#ca6cee",
+  [Rarity.EPIC]: "#927FFF",
   [Rarity.ULTRA]: "#E53B3B",
   [Rarity.UNIQUE]: "#ffffff",
   [Rarity.LEGENDARY]: "#e6cb49",
-  [Rarity.SPECIAL]: "#967FFF",
+  [Rarity.SPECIAL]: "#E58EE5",
   [Rarity.HATCH]: "#b9915a"
 }
 
@@ -330,9 +330,6 @@ export const LegendaryPool = new Array<PkmProposition>(
   Pkm.ZAPDOS,
   Pkm.MOLTRES,
   Pkm.ARTICUNO,
-  Pkm.GALARIAN_ARTICUNO,
-  Pkm.GALARIAN_ZAPDOS,
-  Pkm.GALARIAN_MOLTRES,
   Pkm.SPECTRIER,
   Pkm.KARTANA,
   Pkm.NECROZMA,
@@ -392,7 +389,7 @@ export const MIN_HUMAN_PLAYERS = process.env.MIN_HUMAN_PLAYERS
   : 1
 export const INACTIVITY_TIMEOUT = 60 * 1000 * 10
 
-export const DEFAULT_ATK_SPEED = 0.75
+export const DEFAULT_SPEED = 50
 export const DEFAULT_CRIT_CHANCE = 10
 export const DEFAULT_CRIT_POWER = 2
 export const PROJECTILE_SPEED = 4
@@ -658,7 +655,7 @@ export const TOURNAMENT_CLEANUP_DELAY = 24 * 60 * 60 * 1000 // 1 day
 
 export const MAX_SIMULATION_DELTA_TIME = 50 // milliseconds
 
-export const CRON_ELO_DECAY_DELAY = 86400 * 1000 * 10 // 10 days
+export const CRON_ELO_DECAY_DELAY = 86400 * 1000 * 15 // 15 days
 export const CRON_ELO_DECAY_MINIMUM_ELO = 1100
 export const CRON_HISTORY_CLEANUP_DELAY = 86400 * 1000 * 30 // 30 days
 

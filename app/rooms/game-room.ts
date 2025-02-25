@@ -194,7 +194,6 @@ export default class GameRoom extends Room<GameState> {
           )
           this.state.players.set(user.uid, player)
           this.state.botManager.addBot(player)
-          //this.state.shop.assignShop(player)
         } else {
           const user = await UserMetadata.findOne({ uid: id })
           if (user) {

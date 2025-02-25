@@ -4,7 +4,8 @@ import {
   CraftableItems,
   Item,
   NonSpecialItemComponents,
-  ShinyItems
+  ShinyItems,
+  CraftableNonSynergyItems
 } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
 import { pickNRandomIn, pickRandomIn } from "../utils/random"
@@ -90,7 +91,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     emotion: Emotion.DETERMINED,
     shinyChance: 0, // can't propose shiny items because item proposition on stage 15
     board: [
-      [Pkm.MEWTWO, 4, 2],
+      [Pkm.MEWTWO, 0, 1],
       [Pkm.MEW, 7, 1]
     ],
     getRewards(player: Player) {
@@ -121,7 +122,10 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.ARTICUNO, 6, 2]
     ],
     getRewardsPropositions(player: Player) {
-      return pickNRandomIn(CraftableItems, 3)
+      return [
+        ...pickNRandomIn(CraftableNonSynergyItems, 2),
+        ...pickNRandomIn(CraftableItems, 1)
+      ]
     }
   },
 
@@ -135,7 +139,10 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.SUICUNE, 6, 2]
     ],
     getRewardsPropositions(player: Player) {
-      return pickNRandomIn(CraftableItems, 3)
+      return [
+        ...pickNRandomIn(CraftableNonSynergyItems, 2),
+        ...pickNRandomIn(CraftableItems, 1)
+      ]
     }
   },
 
@@ -149,7 +156,10 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.PRIMAL_GROUDON, 6, 2]
     ],
     getRewardsPropositions(player: Player) {
-      return pickNRandomIn(CraftableItems, 3)
+      return [
+        ...pickNRandomIn(CraftableNonSynergyItems, 2),
+        ...pickNRandomIn(CraftableItems, 1)
+      ]
     }
   },
 
@@ -166,7 +176,10 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.REGIDRAGO, 5, 2]
     ],
     getRewardsPropositions(player: Player) {
-      return pickNRandomIn(CraftableItems, 3)
+      return [
+        ...pickNRandomIn(CraftableNonSynergyItems, 2),
+        ...pickNRandomIn(CraftableItems, 1)
+      ]
     }
   },
 

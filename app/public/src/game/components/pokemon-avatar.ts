@@ -13,6 +13,7 @@ import LifeBar from "./life-bar"
 import PokemonSprite from "./pokemon"
 import { preference } from "../../preferences"
 import { cc } from "../../pages/utils/jsx"
+import { DEPTH } from "../depths"
 
 export default class PokemonAvatar extends PokemonSprite {
   scene: GameScene
@@ -57,7 +58,7 @@ export default class PokemonAvatar extends PokemonSprite {
     } else {
       this.disableInteractive()
     }
-    this.setDepth(2)
+    this.setDepth(DEPTH.POKEMON)
     this.sendEmote = throttle(this.sendEmote, 1000).bind(this)
   }
 
@@ -128,13 +129,13 @@ export default class PokemonAvatar extends PokemonSprite {
     const scene = this.scene as GameScene
     this.circleHitbox = new GameObjects.Ellipse(scene, 0, 0, 50, 50)
     this.add(this.circleHitbox)
-    this.circleHitbox.setDepth(-1)
+    this.circleHitbox.setDepth(DEPTH.INDICATOR_BELOW_POKEMON)
     this.circleHitbox.setVisible(
       scene.room?.state.phase === GamePhaseState.TOWN
     )
     this.circleTimer = new GameObjects.Graphics(scene)
     this.add(this.circleTimer)
-    this.circleTimer.setDepth(-1)
+    this.circleTimer.setDepth(DEPTH.INDICATOR_BELOW_POKEMON)
     if (this.isCurrentPlayerAvatar) {
       this.circleHitbox.setStrokeStyle(2, 0xffffff, 0.8)
     } else {

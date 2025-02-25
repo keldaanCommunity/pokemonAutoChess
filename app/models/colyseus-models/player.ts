@@ -545,11 +545,13 @@ export default class Player extends Schema implements IPlayer {
   }
 
   updateRegionalPool(state: GameState, mapChanged: boolean) {
+    if (this.map === "town") {
+      resetArraySchema(this.regionalPokemons, [])
+      return
+    }
+
     const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
-      new PokemonClasses[p]().isInRegion(
-        this.map === "town" ? DungeonPMDO.AmpPlains : this.map,
-        state
-      )
+      new PokemonClasses[p]().isInRegion(this.map, state)
     )
 
     if (mapChanged) {
@@ -575,12 +577,10 @@ export default class Player extends Schema implements IPlayer {
         return (
           array.findIndex((p2) => PkmFamily[p] === PkmFamily[p2]) === index && // dedup same family
           !(
-            (
-              evolution === p ||
-              (evolution && getPokemonData(evolution).evolution === p)
-            ) // exclude non divergent evos
+            evolution === p ||
+            (evolution && getPokemonData(evolution).evolution === p)
           )
-        )
+        ) // exclude non divergent evos
       })
     )
   }

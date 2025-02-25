@@ -1,6 +1,7 @@
 import { GameObjects } from "phaser"
 import { ISynergySymbol } from "../../../../types"
 import { Synergy } from "../../../../types/enum/Synergy"
+import { DEPTH } from "../depths"
 
 export class Portal extends GameObjects.Container {
   sprite: GameObjects.Sprite
@@ -13,7 +14,7 @@ export class Portal extends GameObjects.Container {
     this.sprite.anims.play("portal")
     this.sprite.setScale(2)
     this.add(this.sprite)
-    this.setDepth(2)
+    this.setDepth(DEPTH.INANIMATE_OBJECTS)
     this.scene.add.existing(this)
   }
 }
@@ -35,7 +36,7 @@ export class SynergySymbol
     super(scene, x, y, "types", synergy + ".png")
     this.id = id
     this.synergy = synergy
-    this.setDepth(2)
+    this.setDepth(DEPTH.INANIMATE_OBJECTS)
     this.scene.add.existing(this)
   }
 }

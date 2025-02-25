@@ -19,6 +19,7 @@ export enum Weather {
 
 export const WeatherEffects: ReadonlyMap<Weather, Effect> = new Map([
   [Weather.WINDY, Effect.WINDY],
+  [Weather.SNOW, Effect.SNOW],
   [Weather.SMOG, Effect.SMOG],
   [Weather.NIGHT, Effect.NIGHT],
   [Weather.MISTY, Effect.MISTY]

@@ -14,10 +14,9 @@ import { getPortraitSrc } from "../../../../../utils/avatar"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { AbilityTooltip } from "../ability/ability-tooltip"
 import SynergyIcon from "../icons/synergy-icon"
-import "./game-pokemon-detail.css"
-import { Synergy } from "../../../../../types/enum/Synergy"
 import { cc } from "../../utils/jsx"
 import { usePreference } from "../../../preferences"
+import "./game-pokemon-detail.css"
 
 export function GamePokemonDetail(props: {
   pokemon: Pkm | Pokemon
@@ -39,9 +38,10 @@ export function GamePokemonDetail(props: {
       { stat: Stat.HP, value: pokemon.hp },
       { stat: Stat.DEF, value: pokemon.def },
       { stat: Stat.ATK, value: pokemon.atk },
+      { stat: Stat.RANGE, value: pokemon.range },
       { stat: Stat.PP, value: pokemon.maxPP },
       { stat: Stat.SPE_DEF, value: pokemon.speDef },
-      { stat: Stat.RANGE, value: pokemon.range }
+      { stat: Stat.SPEED, value: pokemon.speed }
     ],
     [
       pokemon.atk,
@@ -49,6 +49,7 @@ export function GamePokemonDetail(props: {
       pokemon.hp,
       pokemon.maxPP,
       pokemon.range,
+      pokemon.speed,
       pokemon.speDef
     ]
   )
@@ -97,13 +98,13 @@ export function GamePokemonDetail(props: {
 
       <div className="game-pokemon-detail-stats">
         {pokemonStats.map(({ stat, value }) => (
-          <div key={stat}>
+          <div key={stat} className={"game-pokemon-detail-stat-" + stat.toLowerCase()}>
             <img
               src={`assets/icons/${stat}.png`}
               alt={stat}
               title={t(`stat.${stat}`)}
             />
-            <p>{value}</p>
+            <span>{value}</span>
           </div>
         ))}
       </div>
@@ -139,7 +140,7 @@ export function GamePokemonDetail(props: {
           <div>
             <AbilityTooltip
               ability={pokemon.skill}
-              stats={pokemon}
+              stats={{ ap: pokemon.ap, luck: pokemon.luck, stars: pokemon.stars, stages: getPokemonData(pokemon.name).stages }}
               key={pokemon.id}
             />
           </div>

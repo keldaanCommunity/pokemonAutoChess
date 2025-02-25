@@ -104,7 +104,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   FRUIT_JUICE: [
     new OnSpawnEffect((entity) => {
-      entity.addAttackSpeed(30, entity, 0, false)
+      entity.addSpeed(30, entity, 0, false)
     })
   ],
   HONEY: [],
@@ -160,7 +160,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
         entity.addAttack(5, entity, 0, false)
       }
       if (chance(0.8, entity)) {
-        entity.addAttackSpeed(25, entity, 0, false)
+        entity.addSpeed(25, entity, 0, false)
       }
       if (chance(0.8, entity)) {
         entity.addAbilityPower(25, entity, 0, false)
@@ -187,12 +187,12 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   SWEET_APPLE: [
     new OnHitEffect((entity, target, board) => {
-      target.addSpecialDefense(-1, entity, 0, false)
+      target.addSpecialDefense(-2, entity, 0, false)
     })
   ],
   TART_APPLE: [
     new OnHitEffect((entity, target, board) => {
-      target.addDefense(-1, entity, 0, false)
+      target.addDefense(-2, entity, 0, false)
     })
   ],
   SWEET_HERB: [
@@ -239,7 +239,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   FLOWER_SWEET: [
     new OnSpawnEffect((entity) => {
-      entity.addAttackSpeed(5, entity, 0, false, true)
+      entity.addSpeed(5, entity, 0, false, true)
     })
   ],
   STAR_SWEET: [
@@ -249,7 +249,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   RIBBON_SWEET: [
     new OnSpawnEffect((entity) => {
-      entity.addSpecialDefense(2, entity, 0, false, true)
+      entity.addSpecialDefense(3, entity, 0, false, true)
     })
   ]
 }

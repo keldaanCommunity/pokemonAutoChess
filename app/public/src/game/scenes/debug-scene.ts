@@ -22,7 +22,7 @@ type Boost =
   | "BOOST/DEF"
   | "BOOST/SPE_DEF"
   | "BOOST/SHIELD"
-  | "BOOST/ATK_SPEED"
+  | "BOOST/SPEED"
 
 export class DebugScene extends Phaser.Scene {
   height: number
@@ -294,8 +294,8 @@ export class DebugScene extends Phaser.Scene {
       if (status === "BOOST/SHIELD") {
         this.displayBoost(Stat.SHIELD)
       }
-      if (status === "BOOST/ATK_SPEED") {
-        this.displayBoost(Stat.ATK_SPEED)
+      if (status === "BOOST/SPEED") {
+        this.displayBoost(Stat.SPEED)
       }
     }
   }

@@ -389,9 +389,9 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   applyItemEffect(pokemon: PokemonEntity, item: Item) {
-    Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) =>
+    Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) => {
       pokemon.applyStat(stat as Stat, value)
-    )
+    })
 
     ItemEffects[item]
       ?.filter((effect) => effect instanceof OnItemGainedEffect)
@@ -632,7 +632,7 @@ export default class Simulation extends Schema implements ISimulation {
         }
         if (pokemon.effects.has(Effect.DRAGON_DANCE)) {
           pokemon.addAbilityPower(dragonLevel, pokemon, 0, false)
-          pokemon.addAttackSpeed(dragonLevel, pokemon, 0, false)
+          pokemon.addSpeed(dragonLevel, pokemon, 0, false)
         }
         let shieldBonus = 0
         if (pokemon.effects.has(Effect.STAMINA)) {
@@ -686,7 +686,7 @@ export default class Simulation extends Schema implements ISimulation {
               pokemon.positionY
             )
             if (value) {
-              value.addAttackSpeed(20, pokemon, 0, false)
+              value.addSpeed(20, pokemon, 0, false)
             }
           })
         }
@@ -963,20 +963,10 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case Effect.BULK_UP:
-        if (types.has(Synergy.FIELD)) {
-          pokemon.effects.add(Effect.BULK_UP)
-        }
-        break
-
       case Effect.RAGE:
-        if (types.has(Synergy.FIELD)) {
-          pokemon.effects.add(Effect.RAGE)
-        }
-        break
-
       case Effect.ANGER_POINT:
         if (types.has(Synergy.FIELD)) {
-          pokemon.effects.add(Effect.ANGER_POINT)
+          pokemon.effects.add(effect)
         }
         break
 
@@ -1055,46 +1045,31 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case Effect.ODD_FLOWER:
-        if (types.has(Synergy.FLORA)) {
-          pokemon.effects.add(Effect.ODD_FLOWER)
-        }
-        break
-
       case Effect.GLOOM_FLOWER:
-        if (types.has(Synergy.FLORA)) {
-          pokemon.effects.add(Effect.GLOOM_FLOWER)
-        }
-        break
-
       case Effect.VILE_FLOWER:
-        if (types.has(Synergy.FLORA)) {
-          pokemon.effects.add(Effect.VILE_FLOWER)
-        }
-        break
-
       case Effect.SUN_FLOWER:
         if (types.has(Synergy.FLORA)) {
-          pokemon.effects.add(Effect.SUN_FLOWER)
+          pokemon.effects.add(effect)
         }
         break
 
       case Effect.BATTLE_ARMOR:
         if (types.has(Synergy.ROCK)) {
-          pokemon.addDefense(5, pokemon, 0, false)
+          pokemon.addDefense(10, pokemon, 0, false)
           pokemon.effects.add(Effect.BATTLE_ARMOR)
         }
         break
 
       case Effect.MOUTAIN_RESISTANCE:
         if (types.has(Synergy.ROCK)) {
-          pokemon.addDefense(15, pokemon, 0, false)
+          pokemon.addDefense(30, pokemon, 0, false)
           pokemon.effects.add(Effect.MOUTAIN_RESISTANCE)
         }
         break
 
       case Effect.DIAMOND_STORM:
         if (types.has(Synergy.ROCK)) {
-          pokemon.addDefense(30, pokemon, 0, false)
+          pokemon.addDefense(60, pokemon, 0, false)
           pokemon.effects.add(Effect.DIAMOND_STORM)
         }
         break
@@ -1118,22 +1093,22 @@ export default class Simulation extends Schema implements ISimulation {
 
       case Effect.CHILLY:
         pokemon.effects.add(Effect.CHILLY)
-        pokemon.addSpecialDefense(2, pokemon, 0, false)
+        pokemon.addSpecialDefense(4, pokemon, 0, false)
         break
 
       case Effect.FROSTY:
         pokemon.effects.add(Effect.FROSTY)
-        pokemon.addSpecialDefense(6, pokemon, 0, false)
+        pokemon.addSpecialDefense(12, pokemon, 0, false)
         break
 
       case Effect.FREEZING:
         pokemon.effects.add(Effect.FREEZING)
-        pokemon.addSpecialDefense(20, pokemon, 0, false)
+        pokemon.addSpecialDefense(40, pokemon, 0, false)
         break
 
       case Effect.SHEER_COLD:
         pokemon.effects.add(Effect.SHEER_COLD)
-        pokemon.addSpecialDefense(30, pokemon, 0, false)
+        pokemon.addSpecialDefense(60, pokemon, 0, false)
         break
 
       case Effect.POISONOUS:
@@ -1276,49 +1251,51 @@ export default class Simulation extends Schema implements ISimulation {
       case Effect.QUICK_FEET:
         if (types.has(Synergy.WILD)) {
           pokemon.effects.add(Effect.QUICK_FEET)
-          pokemon.addAttack(Math.ceil(0.3 * pokemon.baseAtk), pokemon, 0, false)
+          pokemon.addSpeed(30, pokemon, 0, false)
         }
         break
 
       case Effect.RUN_AWAY:
         if (types.has(Synergy.WILD)) {
           pokemon.effects.add(Effect.RUN_AWAY)
-          pokemon.addAttack(Math.ceil(0.5 * pokemon.baseAtk), pokemon, 0, false)
+          pokemon.addSpeed(50, pokemon, 0, false)
         }
         break
 
       case Effect.HUSTLE:
         if (types.has(Synergy.WILD)) {
           pokemon.effects.add(Effect.HUSTLE)
-          pokemon.addAttack(Math.ceil(0.8 * pokemon.baseAtk), pokemon, 0, false)
+          pokemon.addAttack(Math.ceil(0.2 * pokemon.baseAtk), pokemon, 0, false)
+          pokemon.addSpeed(50, pokemon, 0, false)
         }
         break
 
       case Effect.BERSERK:
         if (types.has(Synergy.WILD)) {
           pokemon.effects.add(Effect.BERSERK)
-          pokemon.addAttack(Math.ceil(1.0 * pokemon.baseAtk), pokemon, 0, false)
+          pokemon.addAttack(Math.ceil(0.4 * pokemon.baseAtk), pokemon, 0, false)
+          pokemon.addSpeed(50, pokemon, 0, false)
           pokemon.status.enrageDelay -= 5000
         }
         break
 
       case Effect.FLUID: {
         pokemon.effects.add(Effect.FLUID)
-        pokemon.addAttackSpeed(1 * activeSynergies, pokemon, 0, false)
+        pokemon.addSpeed(1 * activeSynergies, pokemon, 0, false)
         pokemon.addMaxHP(4 * activeSynergies, pokemon, 0, false)
         break
       }
 
       case Effect.SHAPELESS: {
         pokemon.effects.add(Effect.SHAPELESS)
-        pokemon.addAttackSpeed(3 * activeSynergies, pokemon, 0, false)
+        pokemon.addSpeed(3 * activeSynergies, pokemon, 0, false)
         pokemon.addMaxHP(8 * activeSynergies, pokemon, 0, false)
         break
       }
 
       case Effect.ETHEREAL: {
         pokemon.effects.add(Effect.ETHEREAL)
-        pokemon.addAttackSpeed(6 * activeSynergies, pokemon, 0, false)
+        pokemon.addSpeed(6 * activeSynergies, pokemon, 0, false)
         pokemon.addMaxHP(12 * activeSynergies, pokemon, 0, false)
         break
       }
@@ -1349,14 +1326,18 @@ export default class Simulation extends Schema implements ISimulation {
       case Effect.WINDY: {
         const player = pokemon.player
         const nbFloatStones = player ? count(player.items, Item.FLOAT_STONE) : 0
-        pokemon.addAttackSpeed(
-          (pokemon.types.has(Synergy.FLYING) ? 10 : 0) + nbFloatStones * 5,
+        pokemon.addSpeed(
+          (pokemon.types.has(Synergy.FLYING) ? 20 : 10) + nbFloatStones * 5,
           pokemon,
           0,
           false
         )
         break
       }
+
+      case Effect.SNOW:
+        pokemon.addSpeed(-20, pokemon, 0, false)
+        break
 
       case Effect.SMOG: {
         const opponentPlayer =
@@ -1382,7 +1363,7 @@ export default class Simulation extends Schema implements ISimulation {
         const player = pokemon.player
         const nbMistStones = player ? count(player.items, Item.MIST_STONE) : 0
         if (nbMistStones > 0) {
-          pokemon.addSpecialDefense(2 * nbMistStones, pokemon, 0, false)
+          pokemon.addSpecialDefense(3 * nbMistStones, pokemon, 0, false)
         }
         break
       }
@@ -1411,7 +1392,7 @@ export default class Simulation extends Schema implements ISimulation {
           pkm.shieldDone
         )
 
-      pkm.update(dt, this.board, this.weather, this.bluePlayer)
+      pkm.update(dt, this.board, this.bluePlayer)
     })
 
     this.redTeam.forEach((pkm, key) => {
@@ -1428,7 +1409,7 @@ export default class Simulation extends Schema implements ISimulation {
           pkm.shieldDone
         )
 
-      pkm.update(dt, this.board, this.weather, this.redPlayer)
+      pkm.update(dt, this.board, this.redPlayer)
     })
 
     if (this.weather === Weather.STORM) {
@@ -1645,8 +1626,8 @@ export default class Simulation extends Schema implements ISimulation {
         opponentsCursable.filter((p) => p.def + p.speDef === highestDef)
       )
       if (enemyWithHighestDef) {
-        enemyWithHighestDef.addDefense(-2, enemyWithHighestDef, 0, false)
-        enemyWithHighestDef.addSpecialDefense(-2, enemyWithHighestDef, 0, false)
+        enemyWithHighestDef.addDefense(-5, enemyWithHighestDef, 0, false)
+        enemyWithHighestDef.addSpecialDefense(-5, enemyWithHighestDef, 0, false)
         enemyWithHighestDef.status.curseVulnerability = true
         enemyWithHighestDef.status.triggerFlinch(
           30000,
@@ -1726,17 +1707,22 @@ export default class Simulation extends Schema implements ISimulation {
 
       for (let y = 0; y < this.board.rows; y++) {
         for (let x = 0; x < this.board.columns; x++) {
-          const cell = this.board.getValue(x, y)
+          const pokemonHit = this.board.getValue(x, y)
           this.board.effects[y * this.board.columns + x] = undefined // clear all board effects
-          if (cell) {
-            if (cell.team === Team.RED_TEAM) {
-              cell.status.clearNegativeStatus()
-              if (cell.types.has(Synergy.AQUATIC)) {
-                cell.handleHeal(redWaterLevel * 0.1 * cell.hp, cell, 0, false)
+          if (pokemonHit) {
+            if (pokemonHit.team === Team.RED_TEAM) {
+              pokemonHit.status.clearNegativeStatus()
+              if (pokemonHit.types.has(Synergy.AQUATIC)) {
+                pokemonHit.handleHeal(
+                  redWaterLevel * 0.1 * pokemonHit.hp,
+                  pokemonHit,
+                  0,
+                  false
+                )
               }
             } else {
-              cell.handleDamage({
-                damage: redWaterLevel * 0.05 * cell.hp,
+              pokemonHit.handleDamage({
+                damage: redWaterLevel * 0.05 * pokemonHit.hp,
                 board: this.board,
                 attackType: AttackType.TRUE,
                 attacker: null,
@@ -1750,8 +1736,8 @@ export default class Simulation extends Schema implements ISimulation {
                 newY--
               }
               if (newY !== y) {
-                cell.moveTo(x, newY, this.board) // push enemies away
-                cell.cooldown = 500
+                pokemonHit.moveTo(x, newY, this.board) // push enemies away
+                pokemonHit.cooldown = 500
               }
             }
           }
@@ -1785,17 +1771,22 @@ export default class Simulation extends Schema implements ISimulation {
 
       for (let y = this.board.rows - 1; y > 0; y--) {
         for (let x = 0; x < this.board.columns; x++) {
-          const cell = this.board.getValue(x, y)
+          const pokemonHit = this.board.getValue(x, y)
           this.board.effects[y * this.board.columns + x] = undefined // clear all board effects
-          if (cell) {
-            if (cell.team === Team.BLUE_TEAM) {
-              cell.status.clearNegativeStatus()
-              if (cell.types.has(Synergy.AQUATIC)) {
-                cell.handleHeal(blueWaterLevel * 0.1 * cell.hp, cell, 0, false)
+          if (pokemonHit) {
+            if (pokemonHit.team === Team.BLUE_TEAM) {
+              pokemonHit.status.clearNegativeStatus()
+              if (pokemonHit.types.has(Synergy.AQUATIC)) {
+                pokemonHit.handleHeal(
+                  blueWaterLevel * 0.1 * pokemonHit.hp,
+                  pokemonHit,
+                  0,
+                  false
+                )
               }
             } else {
-              cell.handleDamage({
-                damage: blueWaterLevel * 0.05 * cell.hp,
+              pokemonHit.handleDamage({
+                damage: blueWaterLevel * 0.05 * pokemonHit.hp,
                 board: this.board,
                 attackType: AttackType.TRUE,
                 attacker: null,
@@ -1809,8 +1800,8 @@ export default class Simulation extends Schema implements ISimulation {
                 newY++
               }
               if (newY !== y) {
-                cell.moveTo(x, newY, this.board) // push enemies away
-                cell.cooldown = 500
+                pokemonHit.moveTo(x, newY, this.board) // push enemies away
+                pokemonHit.cooldown = 500
               }
             }
           }

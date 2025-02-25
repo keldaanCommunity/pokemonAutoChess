@@ -4,6 +4,7 @@ import { getSellPrice } from "../../../../models/shop"
 import { transformCoordinate } from "../../pages/utils/utils"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
+import { DEPTH } from "../depths"
 
 export class SellZone extends GameObjects.Container {
   scene: GameScene
@@ -43,7 +44,7 @@ export class SellZone extends GameObjects.Container {
     this.add(this.text)
 
     this.setVisible(false)
-    this.setDepth(2)
+    this.setDepth(DEPTH.DROP_ZONE)
     this.scene.add.existing(this)
   }
 

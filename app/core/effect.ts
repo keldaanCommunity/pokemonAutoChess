@@ -155,8 +155,8 @@ export class GrowGroundEffect extends PeriodicEffect {
         if (this.count > 5) {
           return
         }
-        pokemon.addDefense(this.synergyLevel, pokemon, 0, false)
-        pokemon.addSpecialDefense(this.synergyLevel, pokemon, 0, false)
+        pokemon.addDefense(this.synergyLevel * 2, pokemon, 0, false)
+        pokemon.addSpecialDefense(this.synergyLevel * 2, pokemon, 0, false)
         pokemon.addAttack(this.synergyLevel, pokemon, 0, false)
         pokemon.transferAbility("GROUND_GROW")
         if (
@@ -177,76 +177,106 @@ export class GrowGroundEffect extends PeriodicEffect {
 
 export class ClearWingEffect extends PeriodicEffect {
   constructor() {
-    super((pokemon) => {
-      pokemon.addAttackSpeed(2, pokemon, 0, false)
-    }, Passive.CLEAR_WING, 1000)
+    super(
+      (pokemon) => {
+        pokemon.addSpeed(2, pokemon, 0, false)
+      },
+      Passive.CLEAR_WING,
+      1000
+    )
   }
 }
 
 export class SynchroEffect extends PeriodicEffect {
   constructor() {
-    super((pokemon) => {
-      const status = pokemon.status
-      if (status.burn && status.burnOrigin) {
-        status.burnOrigin.status.triggerBurn(3000, status.burnOrigin, pokemon)
-      }
-      if (status.poisonStacks && status.poisonOrigin) {
-        status.poisonOrigin.status.triggerPoison(3000, status.poisonOrigin, pokemon)
-      }
-      if (status.wound && status.woundOrigin) {
-        status.woundOrigin.status.triggerWound(3000, status.woundOrigin, pokemon)
-      }
-      if (status.silence && status.silenceOrigin) {
-        status.silenceOrigin.status.triggerSilence(3000, status.silenceOrigin, pokemon)
-      }
-    }, Passive.SYNCHRO, 3000)
+    super(
+      (pokemon) => {
+        const status = pokemon.status
+        if (status.burn && status.burnOrigin) {
+          status.burnOrigin.status.triggerBurn(3000, status.burnOrigin, pokemon)
+        }
+        if (status.poisonStacks && status.poisonOrigin) {
+          status.poisonOrigin.status.triggerPoison(
+            3000,
+            status.poisonOrigin,
+            pokemon
+          )
+        }
+        if (status.wound && status.woundOrigin) {
+          status.woundOrigin.status.triggerWound(
+            3000,
+            status.woundOrigin,
+            pokemon
+          )
+        }
+        if (status.silence && status.silenceOrigin) {
+          status.silenceOrigin.status.triggerSilence(
+            3000,
+            status.silenceOrigin,
+            pokemon
+          )
+        }
+      },
+      Passive.SYNCHRO,
+      3000
+    )
   }
 }
 
 export class DrySkinEffect extends PeriodicEffect {
   constructor() {
-    super((pokemon) => {
-      pokemon.handleHeal(8, pokemon, 0, false)
-    }, Passive.DRY_SKIN, 1000)
+    super(
+      (pokemon) => {
+        pokemon.handleHeal(8, pokemon, 0, false)
+      },
+      Passive.DRY_SKIN,
+      1000
+    )
   }
 }
 
 export class DarkHarvestEffect extends PeriodicEffect {
   duration: number
   constructor(duration: number, pokemon: PokemonEntity) {
-    super((pokemon) => {
-      pokemon.transferAbility(Ability.DARK_HARVEST)
-      const board = pokemon.simulation.board
-      const crit = pokemon.items.has(Item.REAPER_CLOTH)
-        ? chance(pokemon.critChance, pokemon)
-        : false
-      const darkHarvestDamage = [5, 10, 20][pokemon.stars - 1] ?? 20
-      const healFactor = 0.3
-      board.getAdjacentCells(pokemon.positionX, pokemon.positionY).forEach((cell) => {
-        if (cell.value && cell.value.team !== pokemon.team) {
-          cell.value.handleSpecialDamage(
-            darkHarvestDamage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit,
-            true
-          )
-          pokemon.handleHeal(
-            Math.round(darkHarvestDamage * healFactor),
-            pokemon,
-            0,
-            false
-          )
+    super(
+      (pokemon) => {
+        pokemon.transferAbility(Ability.DARK_HARVEST)
+        const board = pokemon.simulation.board
+        const crit = pokemon.items.has(Item.REAPER_CLOTH)
+          ? chance(pokemon.critChance, pokemon)
+          : false
+        const darkHarvestDamage = [5, 10, 20][pokemon.stars - 1] ?? 20
+        const healFactor = 0.3
+        board
+          .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+          .forEach((cell) => {
+            if (cell.value && cell.value.team !== pokemon.team) {
+              cell.value.handleSpecialDamage(
+                darkHarvestDamage,
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                crit,
+                true
+              )
+              pokemon.handleHeal(
+                Math.round(darkHarvestDamage * healFactor),
+                pokemon,
+                0,
+                false
+              )
+            }
+          })
+        if (this.duration <= 0) {
+          pokemon.effectsSet.delete(this)
+          pokemon.effects.delete(EffectEnum.DARK_HARVEST)
+        } else {
+          this.duration -= this.intervalMs
         }
-      })
-      if (this.duration <= 0) {
-        pokemon.effectsSet.delete(this)
-        pokemon.effects.delete(EffectEnum.DARK_HARVEST)
-      } else {
-        this.duration -= this.intervalMs
-      }
-    }, EffectEnum.DARK_HARVEST, 1000)
+      },
+      EffectEnum.DARK_HARVEST,
+      1000
+    )
 
     this.timer = 0 // delay the first tick
     this.duration = duration + this.intervalMs
@@ -293,7 +323,7 @@ export class SoundCryEffect extends OnAbilityCastEffect {
   apply(pokemon, state, board, target, crit) {
     pokemon.transferAbility(Ability.ECHO)
     const attackBoost = [2, 1, 1][this.synergyLevel] ?? 0
-    const attackSpeedBoost = [0, 5, 5][this.synergyLevel] ?? 0
+    const speedBoost = [0, 5, 5][this.synergyLevel] ?? 0
     const manaBoost = [0, 0, 3][this.synergyLevel] ?? 0
 
     const chimecho = board
@@ -307,7 +337,7 @@ export class SoundCryEffect extends OnAbilityCastEffect {
       if (ally?.team === pokemon.team) {
         ally.status.sleep = false
         ally.addAttack(attackBoost * scale, pokemon, 0, false)
-        ally.addAttackSpeed(attackSpeedBoost * scale, pokemon, 0, false)
+        ally.addSpeed(speedBoost * scale, pokemon, 0, false)
         ally.addPP(manaBoost * scale, pokemon, 0, false)
         ally.count.soundCryCount += scale
       }

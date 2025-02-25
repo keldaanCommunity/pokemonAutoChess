@@ -91,10 +91,10 @@ export default function WikiStatistic() {
       <li className="my-box">
         <img
           className={cc({ pixelated: !antialiasing })}
-          src="assets/icons/ATK_SPEED.png"
+          src="assets/icons/SPEED.png"
         ></img>
-        <h2>{t("stat.ATK_SPEED")}</h2>
-        <p className="description">{t("stat_description.ATK_SPEED")}</p>
+        <h2>{t("stat.SPEED")}</h2>
+        <p className="description">{t("stat_description.SPEED")}</p>
       </li>
       <li className="my-box">
         <img

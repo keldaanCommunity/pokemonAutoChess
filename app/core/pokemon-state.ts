@@ -51,6 +51,7 @@ export default abstract class PokemonState {
             : 0
           opponentCritPower -= 0.1 * nbBlackAugurite
           damage = min(0)(Math.round(damage * opponentCritPower))
+          target.count.crit++
         }
         pokemon.onCriticalAttack({ target, board, damage })
       }
@@ -64,7 +65,7 @@ export default abstract class PokemonState {
       }
 
       if (pokemon.effects.has(Effect.STONE_EDGE)) {
-        damage += Math.round(pokemon.def * (1 + pokemon.ap / 100))
+        damage += Math.round(pokemon.def * 0.5 * (1 + pokemon.ap / 100))
       }
 
       let additionalSpecialDamagePart = 0
@@ -641,7 +642,6 @@ export default abstract class PokemonState {
     pokemon: PokemonEntity,
     dt: number,
     board: Board,
-    weather: Weather,
     player: Player | undefined
   ) {
     this.updateCommands(pokemon, dt)
@@ -694,7 +694,7 @@ export default abstract class PokemonState {
         const nbSmoothRocks = player ? count(player.items, Item.SMOOTH_ROCK) : 0
         if (nbSmoothRocks > 0) {
           sandstormDamage -= nbSmoothRocks
-          pokemon.addAttackSpeed(nbSmoothRocks, pokemon, 0, false)
+          pokemon.addSpeed(nbSmoothRocks, pokemon, 0, false)
         }
         if (pokemon.types.has(Synergy.GROUND) === false) {
           pokemon.handleDamage({

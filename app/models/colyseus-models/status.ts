@@ -266,7 +266,7 @@ export default class Status extends Schema implements IStatus {
     this.protect = false
     duration = this.applyAquaticReduction(duration, pokemon)
     this.enrageCooldown = Math.round(duration)
-    pokemon.addAttackSpeed(100, pokemon, 0, false)
+    pokemon.addSpeed(100, pokemon, 0, false)
   }
 
   updateRage(dt: number, pokemon: PokemonEntity) {
@@ -277,14 +277,14 @@ export default class Status extends Schema implements IStatus {
     ) {
       this.enraged = true
       this.protect = false
-      pokemon.addAttackSpeed(100, pokemon, 0, false)
+      pokemon.addSpeed(100, pokemon, 0, false)
     } else if (
       this.enraged &&
       this.enrageCooldown - dt <= 0 &&
       this.enrageDelay - dt > 0
     ) {
       this.enraged = false
-      pokemon.addAttackSpeed(-100, pokemon, 0, false)
+      pokemon.addSpeed(-100, pokemon, 0, false)
     }
 
     this.enrageDelay -= dt
@@ -321,7 +321,7 @@ export default class Status extends Schema implements IStatus {
       }
 
       if (pkm.passive === Passive.WELL_BAKED) {
-        pkm.addDefense(10, pkm, 0, false)
+        pkm.addDefense(20, pkm, 0, false)
       }
 
       if (pkm.items.has(Item.RAWST_BERRY)) {
@@ -385,7 +385,7 @@ export default class Status extends Schema implements IStatus {
       pkm.addAttack(-5, pkm, 0, false)
     }
     if (pkm.passive === Passive.WELL_BAKED) {
-      pkm.addDefense(-10, pkm, 0, false)
+      pkm.addDefense(-20, pkm, 0, false)
     }
   }
 
@@ -736,7 +736,7 @@ export default class Status extends Schema implements IStatus {
     if (!this.runeProtect && !pkm.effects.has(Effect.IMMUNITY_PARALYSIS)) {
       if (!this.paralysis) {
         this.paralysis = true
-        pkm.addAttackSpeed(-40, pkm, 0, false)
+        pkm.addSpeed(-40, pkm, 0, false)
       }
       const boost = apBoost && origin ? (duration * origin.ap) / 100 : 0
       duration = duration + boost
@@ -774,7 +774,7 @@ export default class Status extends Schema implements IStatus {
     if (this.paralysis) {
       this.paralysis = false
       this.paralysisCooldown = 0
-      pkm.addAttackSpeed(40, pkm, 0, false)
+      pkm.addSpeed(40, pkm, 0, false)
     }
   }
 
@@ -998,28 +998,28 @@ export default class Status extends Schema implements IStatus {
   addPsychicField(entity: IPokemonEntity) {
     this.psychicField = true
     if (entity.passive === Passive.SURGE_SURFER) {
-      entity.addAttackSpeed(30, entity, 0, false)
+      entity.addSpeed(30, entity, 0, false)
     }
   }
 
   removePsychicField(entity: IPokemonEntity) {
     this.psychicField = false
     if (entity.passive === Passive.SURGE_SURFER) {
-      entity.addAttackSpeed(-30, entity, 0, false)
+      entity.addSpeed(-30, entity, 0, false)
     }
   }
 
   addElectricField(entity: IPokemonEntity) {
     this.electricField = true
     if (entity.passive === Passive.SURGE_SURFER) {
-      entity.addAttackSpeed(30, entity, 0, false)
+      entity.addSpeed(30, entity, 0, false)
     }
   }
 
   removeElectricField(entity: IPokemonEntity) {
     this.electricField = false
     if (entity.passive === Passive.SURGE_SURFER) {
-      entity.addAttackSpeed(-30, entity, 0, false)
+      entity.addSpeed(-30, entity, 0, false)
     }
   }
 }

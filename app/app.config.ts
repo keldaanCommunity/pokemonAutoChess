@@ -104,7 +104,14 @@ export default config({
               "https://apis.google.com",
               "https://*.googleapis.com",
               "https://*.githubusercontent.com",
-              "http://raw.githubusercontent.com"
+              "http://raw.githubusercontent.com",
+              "https://*.youtube.com",
+              "https://pokemon.darkatek7.com",
+              "https://eternara.site",
+              "https://www.penumbra-autochess.com",
+              "https://pokechess.com.br",
+              "https://uruwhy.online",
+              "https://koala-pac.com"
             ],
             scriptSrc: [
               "'self'",
