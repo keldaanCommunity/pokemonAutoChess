@@ -1755,7 +1755,7 @@
     "ENTRAINMENT": "用神奇的节奏跳舞，恢复[10,SP]点PP，并强迫目标模仿使用者，使其招式被替换为找伙伴。若目标的招式已经被替换，则选取附近的其他敌方宝可梦。",
     "OKTZOOKA": "发射一枚炮弹造成SPECIAL，数值相当于使用者[150,SP]%的ATK。炮弹会在落点留下一团墨水云，使其中的宝可梦陷入BLINDED 4秒。",
     "PSYCHO_SHIFT": "交换目标和最远的敌方宝可梦的位置，对两者均造成[60,SP]点SPECIAL。",
-    "GLAIVE_RUSH": "有勇无谋的舍身突击，突进至敌方后排，对与使用者处于同一纵列上的所有敌方宝可梦造成[50,100,200,SP]点PHYSICAL，然后自身陷入ARMOR_REDUCTION 6秒。",
+    "GLAIVE_RUSH": "有勇无谋的舍身突击，突进至敌方后排，对与使用者处于同一纵列上的所有敌方宝可梦造成[50,100,200,SP]点SPECIAL，然后自身陷入ARMOR_REDUCTION 6秒。",
     "FOUL_PLAY": "对目标造成SPECIAL，数值相当于[2,4,6,SP,ND=1]乘以目标的ATK。",
     "DOUBLE_IRON_BASH": "以胸口的螺帽为中心旋转，并连续两次挥动手臂打击目标，每次造成[150,SP]%的ATK的伤害。目标陷入FLINCH 3秒。",
     "STONE_EDGE": "使用者陷入SILENCE [5,8]秒，并提升2点RANGE和[20,SP]点CRIT_CHANCE，且每次攻击额外造成PHYSICAL，数值相当于使用者[50,SP]%的DEF。",
