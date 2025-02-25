@@ -96,6 +96,7 @@
 - Artificial items are now automatically dropped when benching the unit that was holding them.
 - Added search bar in Wiki > Abilities
 - Disabled right click browser menu when in game
+- Added player add picks and regional picks info when spectating
 
 # Bugfix
 

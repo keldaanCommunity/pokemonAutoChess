@@ -71,6 +71,7 @@ import GameLoadingScreen from "./component/game/game-loading-screen"
 import GamePlayers from "./component/game/game-players"
 import GamePokemonsProposition from "./component/game/game-pokemons-proposition"
 import GameShop from "./component/game/game-shop"
+import GameSpectatePlayerInfo from "./component/game/game-spectate-player-info"
 import GameStageInfo from "./component/game/game-stage-info"
 import GameSynergies from "./component/game/game-synergies"
 import GameToasts from "./component/game/game-toasts"
@@ -759,6 +760,7 @@ export default function Game() {
 
   return (
     <main id="game-wrapper" onContextMenu={(e) => e.preventDefault()}>
+      <div id="game" ref={container}></div>
       {loaded ? (
         <>
           <MainSidebar page="game" leave={leave} leaveLabel={t("leave_game")} />
@@ -768,7 +770,7 @@ export default function Game() {
             leave={leave}
             visible={finalRankVisibility === FinalRankVisibility.VISIBLE}
           />
-          {!spectate && <GameShop />}
+          {spectate ? <GameSpectatePlayerInfo /> : <GameShop />}
           <GameStageInfo />
           <GamePlayers click={(id: string) => playerClick(id)} />
           <GameSynergies />
@@ -780,7 +782,6 @@ export default function Game() {
       ) : (
         <GameLoadingScreen connectError={connectError} />
       )}
-      <div id="game" ref={container}></div>
     </main>
   )
 }
