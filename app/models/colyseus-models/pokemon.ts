@@ -1,11 +1,4 @@
-import {
-  MapSchema,
-  Schema,
-  SetSchema,
-  type,
-  entity,
-  Encoder
-} from "@colyseus/schema"
+import { MapSchema, Schema, SetSchema, type, entity } from "@colyseus/schema"
 import { nanoid } from "nanoid"
 import {
   ClearWingEffect,
@@ -79,8 +72,6 @@ import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
 import { pickRandomIn } from "../../utils/random"
 import {} from "@colyseus/schema"
-
-Encoder.BUFFER_SIZE = 24 * 1024 // 24 KB
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
