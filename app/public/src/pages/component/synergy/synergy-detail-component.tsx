@@ -24,10 +24,13 @@ import SynergyIcon from "../icons/synergy-icon"
 import { EffectDescriptionComponent } from "./effect-description"
 import { usePreference } from "../../../preferences"
 
+let type: Synergy
+
 export default function SynergyDetailComponent(props: {
   type: Synergy
   value: number
 }) {
+  type = props.type
   const { t } = useTranslation()
   const additionalPokemons = useAppSelector(
     (state) => state.game.additionalPokemons
@@ -170,7 +173,7 @@ export default function SynergyDetailComponent(props: {
 function PokemonPortrait(props: { p: IPokemonData, player?: IPlayer }) {
   const [antialiasing] = usePreference("antialiasing")
   const isOnTeam = (p: Pkm) => props.player != null && values(props.player.board).some(
-    (x) => PkmFamily[x.name] === p || x.name === p
+    (x) => PkmFamily[x.name] === PkmFamily[p] && x.types.has(type)
   )
   return (
     <div
