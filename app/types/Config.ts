@@ -121,11 +121,11 @@ export const RarityColor: { [key in Rarity]: string } = {
   [Rarity.COMMON]: "#a0a0a0",
   [Rarity.UNCOMMON]: "#3bc95e",
   [Rarity.RARE]: "#41bfcc",
-  [Rarity.EPIC]: "#ca6cee",
+  [Rarity.EPIC]: "#927FFF",
   [Rarity.ULTRA]: "#E53B3B",
   [Rarity.UNIQUE]: "#ffffff",
   [Rarity.LEGENDARY]: "#e6cb49",
-  [Rarity.SPECIAL]: "#967FFF",
+  [Rarity.SPECIAL]: "#E58EE5",
   [Rarity.HATCH]: "#b9915a"
 }
 
