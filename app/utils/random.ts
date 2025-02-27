@@ -7,12 +7,14 @@ export function chance(
   return Math.random() < probability * (1 + (pokemon?.luck ?? 0) / 100)
 }
 
-export function randomWeighted<T extends string>(weights: { [item in T]?: number }): T {
+export function randomWeighted<T extends string>(
+  weights: { [item in T]?: number }
+): T | null {
   let random = Math.random()
   for (const [item, weight] of Object.entries(weights) as [T, number][]) {
     if ((random -= weight) < 0) return item
   }
-  throw new Error("Invalid weighted list")
+  return null
 }
 
 export function randomBetween(min: number, max: number): number {

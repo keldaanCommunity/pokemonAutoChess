@@ -37,8 +37,7 @@ import {
   MAX_PLAYERS_PER_GAME,
   PORTAL_CAROUSEL_BASE_DURATION,
   PortalCarouselStages,
-  StageDuration,
-  SynergyTriggers
+  StageDuration
 } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
@@ -402,6 +401,16 @@ export class OnSwitchBenchAndBoardCommand extends Command<
       const dx = getFirstAvailablePositionInBench(player.board)
       if (dx !== undefined) {
         this.room.swap(player, pokemon, dx, 0)
+        pokemon.items.forEach((item) => {
+          if (
+            item === Item.CHEF_HAT ||
+            item === Item.TRASH ||
+            ArtificialItems.includes(item)
+          ) {
+            player.items.push(item)
+            pokemon.removeItem(item)
+          }
+        })
         pokemon.onChangePosition(dx, 0, player)
       }
     }

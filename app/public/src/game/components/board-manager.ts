@@ -87,7 +87,6 @@ export default class BoardManager {
       this.battleMode()
     } else if (state.phase === GamePhaseState.TOWN) {
       this.minigameMode()
-      scene.minigameManager?.initialize()
     } else {
       this.pickMode()
     }
@@ -304,7 +303,10 @@ export default class BoardManager {
     }
 
     const text = this.scene.add.existing(
-      new GameObjects.Text(this.scene, x, y, label, textStyle)
+      new GameObjects.Text(this.scene, x, y, label, textStyle).setOrigin(
+        0.5,
+        0.5
+      )
     )
     text.setDepth(DEPTH.TEXT)
 
@@ -564,6 +566,9 @@ export default class BoardManager {
     }
     this.updateOpponentAvatar(null, null)
     this.updateScoutingAvatars(true)
+    this.scene.minigameManager?.addVillagers(
+      this.scene.room?.state.townEncounter ?? null
+    )
   }
 
   setPlayer(player: Player) {

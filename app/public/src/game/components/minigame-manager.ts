@@ -58,10 +58,6 @@ export default class MinigameManager {
     )
   }
 
-  initialize() {
-    this.addVillagers(this.scene.room?.state.townEncounter ?? null)
-  }
-
   dispose() {
     this.villagers.forEach((villager) => {
       if (villager) {
@@ -442,11 +438,7 @@ export default class MinigameManager {
   onNpcDialog({ npc, dialog }: { npc: Pkm; dialog: string }) {
     const villager = this.villagers.find((pkm) => pkm.name === npc)
     if (villager) {
-      this.scene.board?.displayText(
-        villager.sprite.x,
-        villager.sprite.y - 10,
-        t(dialog)
-      )
+      this.scene.board?.displayText(villager.x, villager.y - 10, t(dialog))
     }
   }
 }

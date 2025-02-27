@@ -259,7 +259,6 @@ export default class GameScene extends Scene {
       this.board?.battleMode()
     } else if (newPhase === GamePhaseState.TOWN) {
       this.board?.minigameMode()
-      this.minigameManager?.initialize()
     } else {
       this.board?.pickMode()
     }

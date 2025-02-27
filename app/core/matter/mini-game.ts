@@ -424,6 +424,12 @@ export class MiniGame {
       maxCopiesPerItem = 99
     }
 
+    if (encounter === TownEncounters.XATU) {
+      itemsSet = [Item.WONDER_BOX]
+      nbItemsToPick = this.alivePlayers.length
+      maxCopiesPerItem = 99
+    }
+
     for (let j = 0; j < nbItemsToPick; j++) {
       let item,
         count,

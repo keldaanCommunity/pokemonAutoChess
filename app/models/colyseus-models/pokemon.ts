@@ -6966,6 +6966,7 @@ export class HooH extends Pokemon {
   stars = 3
   hp = 300
   atk = 30
+  speed = 50
   def = 6
   speDef = 6
   maxPP = 100
