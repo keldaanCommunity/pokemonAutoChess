@@ -18,13 +18,13 @@ import GameState from "../../rooms/states/game-state"
 import { Transfer } from "../../types"
 import {
   ItemCarouselStages,
-  KECLEON_SHOP_COST,
   PortalCarouselStages,
   SynergyTriggers
 } from "../../types/Config"
 import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
 import { PokemonActionState } from "../../types/enum/Game"
 import {
+  ArtificialItems,
   Berries,
   CraftableItems,
   CraftableNonSynergyItems,
@@ -39,10 +39,17 @@ import {
   pickNRandomIn,
   pickRandomIn,
   randomBetween,
+  randomWeighted,
   shuffleArray
 } from "../../utils/random"
 import { keys, values } from "../../utils/schemas"
-import { Pkm } from "../../types/enum/Pokemon"
+import {
+  TownEncounter,
+  TownEncounters,
+  TownEncountersByStage,
+  TownEncounterSellPrice
+} from "../town-encounters"
+import { giveRandomEgg } from "../eggs"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -132,27 +139,29 @@ export class MiniGame {
           const itemBody = this.items?.has(bodyA.label) ? bodyA : bodyB
           const avatar = this.avatars.get(avatarBody.label)
           const item = this.items.get(itemBody.label)
+          const encounter = room.state.townEncounter
 
           if (avatar?.itemId === "" && item?.avatarId === "") {
-            if (room.state.specialGameRule === SpecialGameRule.KECLEONS_SHOP) {
+            if (encounter && encounter in TownEncounterSellPrice) {
               const player = room.state.players.get(avatar.id)
               const client = room.clients.find(
                 (cli) => cli.auth.uid === avatar.id
               )
-              if ((player?.money ?? 0) < KECLEON_SHOP_COST) {
+              const price = TownEncounterSellPrice[encounter]!
+              if ((player?.money ?? 0) < price) {
                 // too poor to buy one item from kecleon's shop
                 client?.send(Transfer.NPC_DIALOG, {
-                  npc: Pkm.KECLEON,
-                  dialog: "tell_price"
+                  npc: encounter,
+                  dialog: "npc_dialog.tell_price"
                 })
                 return
               } else {
                 client?.send(Transfer.NPC_DIALOG, {
-                  npc: Pkm.KECLEON,
-                  dialog: "thank_you"
+                  npc: encounter,
+                  dialog: "npc_dialog.thank_you"
                 })
                 if (player) {
-                  player.money -= KECLEON_SHOP_COST
+                  player.money -= price
                 }
               }
             }
@@ -248,15 +257,6 @@ export class MiniGame {
         retentionDelay += randomBetween(1000, 6000)
       }
 
-      if (
-        ItemCarouselStages.includes(stageLevel) &&
-        state.specialGameRule === SpecialGameRule.KECLEONS_SHOP
-      ) {
-        if (player.money < KECLEON_SHOP_COST) {
-          retentionDelay = Infinity
-        }
-      }
-
       const avatar = new PokemonAvatarModel(
         player.id,
         player.avatar,
@@ -284,6 +284,11 @@ export class MiniGame {
       Composite.add(this.engine.world, body)
     })
 
+    if (stageLevel in TownEncountersByStage) {
+      const encounter = randomWeighted(TownEncountersByStage[stageLevel])
+      state.townEncounter = encounter ?? null
+    }
+
     if (PortalCarouselStages.includes(stageLevel)) {
       this.initializePortalCarousel(stageLevel)
       room.broadcast(
@@ -291,15 +296,20 @@ export class MiniGame {
         values(this.portals!).map((p) => p.map)
       )
     } else if (ItemCarouselStages.includes(stageLevel)) {
-      this.initializeItemsCarousel(stageLevel, specialGameRule)
+      this.initializeItemsCarousel(
+        stageLevel,
+        state.townEncounter,
+        specialGameRule
+      )
     }
   }
 
   initializeItemsCarousel(
     stageLevel: number,
+    townEncounter: TownEncounter | null,
     specialGameRule: SpecialGameRule | null
   ) {
-    const items = this.pickRandomItems(stageLevel, specialGameRule)
+    const items = this.pickRandomItems(stageLevel, townEncounter)
 
     for (let j = 0; j < items.length; j++) {
       const x = this.centerX + Math.cos((Math.PI * 2 * j) / items.length) * 100
@@ -379,10 +389,7 @@ export class MiniGame {
     })
   }
 
-  pickRandomItems(
-    stageLevel: number,
-    specialGameRule: SpecialGameRule | null
-  ): Item[] {
+  pickRandomItems(stageLevel: number, encounter: TownEncounter | null): Item[] {
     const items: Item[] = []
 
     let nbItemsToPick = clamp(this.alivePlayers.length + 3, 5, 9)
@@ -396,15 +403,25 @@ export class MiniGame {
       itemsSet = CraftableItems
     }
 
-    if (specialGameRule === SpecialGameRule.SYNERGY_WHEEL) {
+    if (encounter === TownEncounters.KECLEON) {
       itemsSet = SynergyStones
       maxCopiesPerItem = 4
     }
 
-    if (specialGameRule === SpecialGameRule.KECLEONS_SHOP) {
-      itemsSet = CraftableItems
+    if (encounter === TownEncounters.KANGASKHAN) {
+      itemsSet = CraftableNonSynergyItems
       maxCopiesPerItem = 1
-      nbItemsToPick = 6
+    }
+
+    if (encounter === TownEncounters.ELECTIVIRE) {
+      itemsSet = ArtificialItems
+      maxCopiesPerItem = 2
+    }
+
+    if (encounter === TownEncounters.CHANSEY) {
+      itemsSet = [Item.EGG_FOR_SELL]
+      nbItemsToPick = this.alivePlayers.length
+      maxCopiesPerItem = 99
     }
 
     for (let j = 0; j < nbItemsToPick; j++) {
@@ -586,6 +603,7 @@ export class MiniGame {
   stop(room: GameRoom) {
     const state: GameState = room.state
     const players: MapSchema<Player> = state.players
+    const encounter = state.townEncounter
     this.bodies.forEach((body, key) => {
       Composite.remove(this.engine.world, body)
       this.bodies.delete(key)
@@ -597,7 +615,7 @@ export class MiniGame {
         player &&
         !player.isBot &&
         this.items &&
-        state.specialGameRule !== SpecialGameRule.KECLEONS_SHOP
+        !(encounter && encounter in TownEncounterSellPrice)
       ) {
         // give a random item if none was taken
         const remainingItems = [...this.items.entries()].filter(
@@ -622,7 +640,11 @@ export class MiniGame {
       if (avatar.itemId) {
         const item = this.items?.get(avatar.itemId)
         if (item && player && !player.isBot) {
-          player.items.push(item.name)
+          if (item.name === Item.EGG_FOR_SELL) {
+            giveRandomEgg(player, false)
+          } else {
+            player.items.push(item.name)
+          }
         }
       }
 

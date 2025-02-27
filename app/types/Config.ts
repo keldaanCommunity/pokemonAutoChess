@@ -181,8 +181,6 @@ export const EvolutionTime = {
   EVOLVE_HATCH: 5
 }
 
-export const KECLEON_SHOP_COST = 10
-
 export const PoolSize: { [key in Rarity]: [number, number, number] } = {
   [Rarity.COMMON]: [1, 18, 29],
   [Rarity.UNCOMMON]: [1, 13, 22],

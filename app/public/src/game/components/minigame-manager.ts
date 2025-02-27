@@ -9,7 +9,6 @@ import {
 } from "../../../../types"
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
 import { Pkm } from "../../../../types/enum/Pokemon"
-import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { logger } from "../../../../utils/logger"
 import { clamp } from "../../../../utils/number"
 import {
@@ -23,6 +22,7 @@ import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
 import { Portal, SynergySymbol } from "./portal"
 import { DEPTH } from "../depths"
+import { TownEncounter, TownEncounters } from "../../../../core/town-encounters"
 
 export default class MinigameManager {
   pokemons: Map<string, PokemonAvatar>
@@ -59,12 +59,7 @@ export default class MinigameManager {
   }
 
   initialize() {
-    this.addVillagers()
-    if (
-      this.scene.room?.state?.specialGameRule === SpecialGameRule.KECLEONS_SHOP //TODO: change to special encounter
-    ) {
-      this.addKecleon()
-    }
+    this.addVillagers(this.scene.room?.state.townEncounter ?? null)
   }
 
   dispose() {
@@ -352,39 +347,54 @@ export default class MinigameManager {
         name: Pkm.KECLEON,
         orientation: Orientation.DOWN,
         animation: PokemonActionState.IDLE,
-        dialog: t("kecleon_dialog.tell_price"),
-        dialogTitle: t("kecleon_dialog.welcome")
+        dialog: t("npc_dialog.tell_price"),
+        dialogTitle: t("npc_dialog.welcome")
       })
     )
   }
 
-  addVillagers() {
-    console.log("add villagers")
+  addVillagers(encounter: TownEncounter | null) {
+    const kecleon = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.KECLEON ? 20 * 48 : 34.5 * 48,
+      y: encounter === TownEncounters.KECLEON ? 8.5 * 48 : 5 * 48,
+      name: Pkm.KECLEON
+    })
+
+    const electivire = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.ELECTIVIRE ? 20 * 48 : 6.5 * 48,
+      y: encounter === TownEncounters.ELECTIVIRE ? 8.5 * 48 : 7.5 * 48,
+      name: Pkm.ELECTIVIRE
+    })
+
+    const chansey = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.CHANSEY ? 20 * 48 : 2.5 * 48,
+      y: encounter === TownEncounters.CHANSEY ? 8.5 * 48 : 12 * 48,
+      name: Pkm.CHANSEY
+    })
+
+    const kangaskhan = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.KANGASKHAN ? 20 * 48 : 41 * 48,
+      y: encounter === TownEncounters.KANGASKHAN ? 8.5 * 48 : 6 * 48,
+      name: Pkm.KANGASKHAN
+    })
+
+    const xatu = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.XATU ? 20 * 48 : 6 * 48,
+      y: encounter === TownEncounters.XATU ? 8.5 * 48 : 21 * 48,
+      name: Pkm.XATU
+    })
+
     this.villagers.push(
-      new PokemonSpecial({
-        scene: this.scene,
-        x: 34.5 * 48,
-        y: 5 * 48,
-        name: Pkm.KECLEON
-      }),
-      new PokemonSpecial({
-        scene: this.scene,
-        x: 6.5 * 48,
-        y: 7.5 * 48,
-        name: Pkm.ELECTIVIRE
-      }),
-      new PokemonSpecial({
-        scene: this.scene,
-        x: 2.5 * 48,
-        y: 12 * 48,
-        name: Pkm.CHANSEY
-      }),
-      new PokemonSpecial({
-        scene: this.scene,
-        x: 6 * 48,
-        y: 21 * 48,
-        name: Pkm.XATU
-      }),
+      kecleon,
+      electivire,
+      chansey,
+      kangaskhan,
+      xatu,
       new PokemonSpecial({
         scene: this.scene,
         x: 18 * 48,
@@ -397,12 +407,7 @@ export default class MinigameManager {
         y: 22 * 48,
         name: Pkm.REGIROCK
       }),
-      new PokemonSpecial({
-        scene: this.scene,
-        x: 41 * 48,
-        y: 6 * 48,
-        name: Pkm.KANGASKHAN
-      }),
+
       new PokemonSpecial({
         scene: this.scene,
         x: 41 * 48,
@@ -440,7 +445,7 @@ export default class MinigameManager {
       this.scene.board?.displayText(
         villager.sprite.x,
         villager.sprite.y - 10,
-        t(`kecleon_dialog.${dialog}`)
+        t(dialog)
       )
     }
   }

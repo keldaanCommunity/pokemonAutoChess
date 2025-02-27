@@ -725,15 +725,15 @@ export default class BoardManager {
   }
 
   addSmeargle() {
-    this.smeargle = new PokemonSpecial(
-      this.scene,
-      1512,
-      396,
-      Pkm.SMEARGLE,
-      Orientation.DOWNLEFT,
-      t(`scribble_description.${this.specialGameRule}`),
-      t(`scribble.${this.specialGameRule}`)
-    )
+    this.smeargle = new PokemonSpecial({
+      scene: this.scene,
+      x: 1512,
+      y: 396,
+      name: Pkm.SMEARGLE,
+      orientation: Orientation.DOWNLEFT,
+      dialog: t(`scribble_description.${this.specialGameRule}`),
+      dialogTitle: t(`scribble.${this.specialGameRule}`)
+    })
   }
 
   displayBoost(stat: Stat, pokemon: PokemonSprite) {

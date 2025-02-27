@@ -14,7 +14,7 @@ import Simulation from "../../core/simulation"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import Player from "../../models/colyseus-models/player"
 import { PokemonClasses } from "../../models/colyseus-models/pokemon"
-import { createRandomEgg } from "../../models/egg-factory"
+import { giveRandomEgg } from "../../core/eggs"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"
@@ -1831,11 +1831,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (getFreeSpaceOnBench(player.board) === 0) continue
       const isGoldenEgg =
         goldenEggFound && i === 0 && nbOfGoldenEggsOnBench === 0
-      const egg = createRandomEgg(isGoldenEgg, player)
-      const x = getFirstAvailablePositionInBench(player.board)
-      egg.positionX = x !== undefined ? x : -1
-      egg.positionY = 0
-      player.board.set(egg.id, egg)
+      giveRandomEgg(player, isGoldenEgg)
       if (player.effects.has(Effect.HATCHER)) {
         player.eggChance = 0 // getting an egg resets the stacked egg chance
       }

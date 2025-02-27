@@ -3303,8 +3303,8 @@
   "max_rank_not_reached": "Dein Rang ist zu hoch, um an diesem Ranglistenspiel teilzunehmen",
   "not_whitelisted": "Dieses Spiel ist auf eine Whitelist von Spielern beschränkt",
   "blacklisted": "Du wurdest von diesem match gekickt",
-  "kecleon_dialog": {
-    "welcome": "Willkommen bei Kecleons Shop!",
+  "npc_dialog": {
+    "welcome": "Willkommen!",
     "tell_price": "10 GOLD pro!",
     "thank_you": "DANKESCHÖN!"
   },
@@ -3312,13 +3312,11 @@
     "EVERYONE_IS_HERE": "Alle sind hier!",
     "UNIQUE_STARTER": "Einzigartiger Starter",
     "OMELETTE_COOK": "Omelett-Koch",
-    "SYNERGY_WHEEL": "Synergie-Rad",
     "DITTO_PARTY": "Ditto Party",
     "GOTTA_CATCH_EM_ALL": "Schnapp´sie dir alle !",
     "BUYER_FEVER": "Kaufrausch",
     "TECHNOLOGIC": "Technologie",
     "CROWDED": "Überfüllter Vorstand",
-    "KECLEONS_SHOP": "Kecleon's Shop",
     "FREE_MARKET": "Kostenloser Laden",
     "SHINY_HUNTER": "Schillernder Jäger"
   },
@@ -3326,15 +3324,19 @@
     "EVERYONE_IS_HERE": "Alle zusätzlichen Picks sind sofort verfügbar",
     "UNIQUE_STARTER": "Erhalte ein Zufälliges Unique-Pokemon auf Ebene 1",
     "OMELETTE_COOK": "Erhalte ein Pokemon Ei nach Ebene 1, 2, und 3",
-    "SYNERGY_WHEEL": "Karussells bestehen jetzt nur noch aus Synergiesteinen",
     "DITTO_PARTY": "Beginne mit 5 Dittos auf deiner Bank. Dittos tauchen nicht im Shop auf und können nicht verkauft werden.",
     "GOTTA_CATCH_EM_ALL": "Vor jeder PVE-Runde, können ein paar Pokemon gefangen werden",
     "BUYER_FEVER": "Entwicklungen im Shop sind Kostenlos",
     "TECHNOLOGIC": "Du kannst zwischen 3 artificial Items nach Ebene 3 und 15 wählen",
     "CROWDED": "+3 max. Pokémon auf dem Feld",
-    "KECLEONS_SHOP": "Item Karusselle werden, durch Kecleon´s Shop, ersetzt, die 6 Items für je 10 GOLD anbieten",
     "FREE_MARKET": "Pokemon werden für 0 GOLD gekauft und verkauft",
     "SHINY_HUNTER": "Alle wilden PvE Begegnungen sind Schillernd"
+  },
+  "town_encounter": {
+    "KECLEON": "Kecleon's Shop"
+  },
+  "town_encounter_description": {
+    "KECLEON": "Item Karusselle werden, durch Kecleon´s Shop, ersetzt, die Synergiesteinen für je 10 GOLD anbieten"
   },
   "loading_hints": {
     "tab_out": "Nicht ausblenden! Der Ladevorgang wird angehalten, wenn dieses Browserfenster inaktiv ist.",

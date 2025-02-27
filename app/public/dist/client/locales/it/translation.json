@@ -3234,8 +3234,8 @@
   "max_rank_not_reached": "Il tuo rango è troppo alto per giocare a questa partita classificata",
   "not_whitelisted": "Questa partita è ristretta ad un certo gruppo di giocatori",
   "blacklisted": "Sei stato cacciato da questa partita",
-  "kecleon_dialog": {
-    "welcome": "Benvenuto al negozio di Kecleon!",
+  "npc_dialog": {
+    "welcome": "Benvenuto!",
     "tell_price": "10 GOLD ad ognuno!",
     "thank_you": "GRAZIE MILLE!"
   },
@@ -3243,13 +3243,11 @@
     "EVERYONE_IS_HERE": "Tutti sono qui!",
     "UNIQUE_STARTER": "Starter Unico",
     "OMELETTE_COOK": "Cuoco d'Omelette",
-    "SYNERGY_WHEEL": "Ruota delle Sinergie",
     "DITTO_PARTY": "Party di Ditto",
     "GOTTA_CATCH_EM_ALL": "Catturali tutti!",
     "BUYER_FEVER": "Febbre dello spendaccione",
     "TECHNOLOGIC": "Tecnologica",
     "CROWDED": "Terreno Affollato",
-    "KECLEONS_SHOP": "Negozio di Kecleon",
     "FREE_MARKET": "Mercato Gratis",
     "SHINY_HUNTER": "Cacciatore di Shiny",
     "DO_IT_ALL_YOURSELF": "Arrangiati!",
@@ -3260,18 +3258,22 @@
     "EVERYONE_IS_HERE": "Tutte i Pokèmon Addizionali sono disponibili immediatamente",
     "UNIQUE_STARTER": "Ottieni un Pokèmon Unico casuale al livello 1.",
     "OMELETTE_COOK": "Ottieni un Uovo Pokèmon dopo il livello 1,2 e 3.",
-    "SYNERGY_WHEEL": "I caroselli ora prongono solo pietre evolutive",
     "DITTO_PARTY": "Inizia la partita con 5 Ditto nella tua panchina. I Ditto non possono essere trovati nel negozio e non possono essere venduti.",
     "GOTTA_CATCH_EM_ALL": "Alcuni Pokèmon possono essere catturati prima di ogni round PvE",
     "BUYER_FEVER": "Le evoluzioni nel negozio sono gratis",
     "TECHNOLOGIC": "Scegli tra 3 artefatti al livello 3 e al livello 15",
     "CROWDED": "Il massimo di unità sul terreno viene aumentato di 3.",
-    "KECLEONS_SHOP": "I caroselli vengono sostituiti dal negozio di Kecleon, che propone 6 oggetti per 10 GOLD ognuno",
     "FREE_MARKET": "Pokèmon sono comprati e venduti per 0 GOLD",
     "SHINY_HUNTER": "Tutti i Pokèmon dei round  PvE saranno Shiny.",
     "DO_IT_ALL_YOURSELF": "Inizia con una copia del tuo avatar con +100 di HP massimi e più oro se il tuo avatar è di una rarità bassa.",
     "FIRST_PARTNER": "Scegli il tuo Pokèmon starter. Ne otterrai una copia ogni livello fino al livello 10.",
     "SLAMINGO": "Tutti gli oggetti vengono rimossi dal Pokèmon se viene messo in panchina. Inizia con 4 componenti casuali."
+  },
+  "town_encounter": {
+    "KECLEON": "Negozio di Kecleon"
+  },
+  "town_encounter_description": {
+    "KECLEON": "I caroselli vengono sostituiti dal negozio di Kecleon, che propone 6 oggetti per 10 GOLD ognuno"
   },
   "loading_hints": {
     "tab_out": "Non cambiare finestra! Il caricamento è in pausa quando la finestra del browser è inattiva.",
