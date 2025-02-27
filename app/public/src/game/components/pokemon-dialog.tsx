@@ -3,7 +3,7 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
 
-export class PokemonSpecialDetail extends GameObjects.DOMElement {
+export class PokemonDialog extends GameObjects.DOMElement {
   dom: HTMLDivElement
 
   constructor(scene: Phaser.Scene, dialog: string, dialogTitle?: string) {

@@ -42,6 +42,7 @@ import {
   shuffleArray
 } from "../../utils/random"
 import { keys, values } from "../../utils/schemas"
+import { Pkm } from "../../types/enum/Pokemon"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -141,13 +142,13 @@ export class MiniGame {
               if ((player?.money ?? 0) < KECLEON_SHOP_COST) {
                 // too poor to buy one item from kecleon's shop
                 client?.send(Transfer.NPC_DIALOG, {
-                  npc: "kecleon",
+                  npc: Pkm.KECLEON,
                   dialog: "tell_price"
                 })
                 return
               } else {
                 client?.send(Transfer.NPC_DIALOG, {
-                  npc: "kecleon",
+                  npc: Pkm.KECLEON,
                   dialog: "thank_you"
                 })
                 if (player) {

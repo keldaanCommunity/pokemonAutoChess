@@ -42,7 +42,7 @@ import DraggableObject from "./draggable-object"
 import ItemsContainer from "./items-container"
 import Lifebar from "./life-bar"
 import PokemonDetail from "./pokemon-detail"
-import type { PokemonSpecialDetail } from "./pokemon-special-detail"
+import type { PokemonDialog } from "./pokemon-dialog"
 import PowerBar from "./power-bar"
 import { DEPTH } from "../depths"
 
@@ -81,7 +81,7 @@ export default class PokemonSprite extends DraggableObject {
   rangeType: string
   types = new Set<Synergy>()
   lifebar: Lifebar | undefined
-  detail: PokemonDetail | PokemonSpecialDetail | null = null
+  detail: PokemonDetail | PokemonDialog | null = null
   pp: number | undefined
   maxPP: number
   luck: number

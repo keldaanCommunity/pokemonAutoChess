@@ -7,7 +7,7 @@ import {
   ISynergySymbol,
   Transfer
 } from "../../../../types"
-import { PokemonActionState } from "../../../../types/enum/Game"
+import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { logger } from "../../../../utils/logger"
@@ -33,7 +33,7 @@ export default class MinigameManager {
   scene: GameScene
   display: boolean
   animationManager: AnimationManager
-  kecleon: PokemonSpecial | null = null
+  villagers: PokemonSpecial[] = []
 
   constructor(
     scene: GameScene,
@@ -52,24 +52,28 @@ export default class MinigameManager {
     this.animationManager = animationManager
     this.buildPokemons(avatars)
     this.buildItems(items)
-    this.scene.room?.onMessage(Transfer.NPC_DIALOG, (message) =>
-      this.onNpcDialog(message)
+    this.scene.room?.onMessage(
+      Transfer.NPC_DIALOG,
+      (message: { npc: Pkm; dialog: string }) => this.onNpcDialog(message)
     )
   }
 
   initialize() {
+    this.addVillagers()
     if (
-      this.scene.room?.state?.specialGameRule === SpecialGameRule.KECLEONS_SHOP
+      this.scene.room?.state?.specialGameRule === SpecialGameRule.KECLEONS_SHOP //TODO: change to special encounter
     ) {
       this.addKecleon()
     }
   }
 
   dispose() {
-    if (this.kecleon) {
-      this.kecleon.destroy()
-      this.kecleon = null
-    }
+    this.villagers.forEach((villager) => {
+      if (villager) {
+        villager.destroy()
+      }
+    })
+    this.villagers = []
   }
 
   update() {
@@ -340,14 +344,79 @@ export default class MinigameManager {
   }
 
   addKecleon() {
-    this.kecleon = new PokemonSpecial(
-      this.scene,
-      1000,
-      408,
-      Pkm.KECLEON,
-      this.animationManager,
-      t("kecleon_dialog.tell_price"),
-      t("kecleon_dialog.welcome")
+    this.villagers.push(
+      new PokemonSpecial({
+        scene: this.scene,
+        x: 1000,
+        y: 408,
+        name: Pkm.KECLEON,
+        orientation: Orientation.DOWN,
+        animation: PokemonActionState.IDLE,
+        dialog: t("kecleon_dialog.tell_price"),
+        dialogTitle: t("kecleon_dialog.welcome")
+      })
+    )
+  }
+
+  addVillagers() {
+    console.log("add villagers")
+    this.villagers.push(
+      new PokemonSpecial({
+        scene: this.scene,
+        x: 34.5 * 48,
+        y: 5 * 48,
+        name: Pkm.KECLEON
+      }),
+      new PokemonSpecial({
+        scene: this.scene,
+        x: 6.5 * 48,
+        y: 7.5 * 48,
+        name: Pkm.ELECTIVIRE
+      }),
+      new PokemonSpecial({
+        scene: this.scene,
+        x: 2.5 * 48,
+        y: 12 * 48,
+        name: Pkm.CHANSEY
+      }),
+      new PokemonSpecial({
+        scene: this.scene,
+        x: 6 * 48,
+        y: 21 * 48,
+        name: Pkm.XATU
+      }),
+      new PokemonSpecial({
+        scene: this.scene,
+        x: 18 * 48,
+        y: 21.5 * 48,
+        name: Pkm.DUSKULL
+      }),
+      new PokemonSpecial({
+        scene: this.scene,
+        x: 24 * 48,
+        y: 22 * 48,
+        name: Pkm.REGIROCK
+      }),
+      new PokemonSpecial({
+        scene: this.scene,
+        x: 41 * 48,
+        y: 6 * 48,
+        name: Pkm.KANGASKHAN
+      }),
+      new PokemonSpecial({
+        scene: this.scene,
+        x: 41 * 48,
+        y: 12 * 48,
+        name: Pkm.MAROWAK
+      }),
+      new PokemonSpecial({
+        scene: this.scene,
+        x: 43 * 48,
+        y: 19.5 * 48,
+        name: Pkm.MAREEP,
+        orientation: Orientation.DOWNLEFT,
+        animation: PokemonActionState.EAT
+      })
     )
   }
 
@@ -365,9 +434,14 @@ export default class MinigameManager {
     }
   }
 
-  onNpcDialog({ npc, dialog }: { npc: string; dialog: string }) {
-    if (npc === "kecleon" && this.kecleon) {
-      this.scene.board?.displayText(960, 370, t(`kecleon_dialog.${dialog}`))
+  onNpcDialog({ npc, dialog }: { npc: Pkm; dialog: string }) {
+    const villager = this.villagers.find((pkm) => pkm.name === npc)
+    if (villager) {
+      this.scene.board?.displayText(
+        villager.sprite.x,
+        villager.sprite.y - 10,
+        t(`kecleon_dialog.${dialog}`)
+      )
     }
   }
 }
