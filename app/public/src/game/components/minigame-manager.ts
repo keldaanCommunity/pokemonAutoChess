@@ -23,6 +23,7 @@ import PokemonSpecial from "./pokemon-special"
 import { Portal, SynergySymbol } from "./portal"
 import { DEPTH } from "../depths"
 import { TownEncounter, TownEncounters } from "../../../../core/town-encounters"
+import { PokemonDialog } from "./pokemon-dialog"
 
 export default class MinigameManager {
   pokemons: Map<string, PokemonAvatar>
@@ -34,6 +35,7 @@ export default class MinigameManager {
   display: boolean
   animationManager: AnimationManager
   villagers: PokemonSpecial[] = []
+  encounterDescription: PokemonDialog | null = null
 
   constructor(
     scene: GameScene,
@@ -65,6 +67,7 @@ export default class MinigameManager {
       }
     })
     this.villagers = []
+    this.encounterDescription?.destroy()
   }
 
   update() {
@@ -392,6 +395,29 @@ export default class MinigameManager {
       name: Pkm.DUSKULL
     })
 
+    const regirock = new PokemonSpecial({
+      scene: this.scene,
+      x: 24 * 48,
+      y: 22 * 48,
+      name: Pkm.REGIROCK
+    })
+
+    const marowak = new PokemonSpecial({
+      scene: this.scene,
+      x: 41 * 48,
+      y: 12 * 48,
+      name: Pkm.MAROWAK
+    })
+
+    const mareep = new PokemonSpecial({
+      scene: this.scene,
+      x: 43 * 48,
+      y: 19.5 * 48,
+      name: Pkm.MAREEP,
+      orientation: Orientation.DOWNLEFT,
+      animation: PokemonActionState.EAT
+    })
+
     this.villagers.push(
       kecleon,
       electivire,
@@ -399,28 +425,12 @@ export default class MinigameManager {
       kangaskhan,
       xatu,
       duskull,
-      new PokemonSpecial({
-        scene: this.scene,
-        x: 24 * 48,
-        y: 22 * 48,
-        name: Pkm.REGIROCK
-      }),
-
-      new PokemonSpecial({
-        scene: this.scene,
-        x: 41 * 48,
-        y: 12 * 48,
-        name: Pkm.MAROWAK
-      }),
-      new PokemonSpecial({
-        scene: this.scene,
-        x: 43 * 48,
-        y: 19.5 * 48,
-        name: Pkm.MAREEP,
-        orientation: Orientation.DOWNLEFT,
-        animation: PokemonActionState.EAT
-      })
+      regirock,
+      marowak,
+      mareep
     )
+
+    if (encounter) this.showEncounterDescription(encounter)
   }
 
   showEmote(id: string, emote: Emotion) {
@@ -442,5 +452,20 @@ export default class MinigameManager {
     if (villager) {
       this.scene.board?.displayText(villager.x, villager.y - 10, t(dialog))
     }
+  }
+
+  showEncounterDescription(encounter: TownEncounter) {
+    this.encounterDescription = new PokemonDialog(
+      this.scene,
+      t(`town_encounter_description.${encounter}`)
+    )
+    this.encounterDescription.setPosition(
+      18 * 48 - this.encounterDescription.width / 2,
+      15 * 48 - this.encounterDescription.height / 2
+    )
+
+    this.encounterDescription.removeInteractive()
+    // add to scene
+    this.scene.add.existing(this.encounterDescription)
   }
 }

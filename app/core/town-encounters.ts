@@ -25,7 +25,7 @@ export const TownEncountersByStage: {
 } = {
   4: {
     [Pkm.CHANSEY]: 1 / 10,
-    [Pkm.KANGASKHAN]: 1 / 10,
+    [Pkm.KANGASKHAN]: 10 / 10,
     [Pkm.ELECTIVIRE]: 1 / 20,
     [Pkm.KECLEON]: 1 / 20,
     [Pkm.XATU]: 1 / 20
