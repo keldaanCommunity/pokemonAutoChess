@@ -7391,7 +7391,7 @@ export class EggsplosionStrategy extends AbilityStrategy {
             pokemon.player &&
             chance(0.25, pokemon)
           ) {
-            giveRandomEgg(player, false)
+            giveRandomEgg(pokemon.player, false)
           }
           v.status.triggerArmorReduction(4000, v)
         }

@@ -25,51 +25,45 @@ export const TownEncountersByStage: {
   [stageLevel: number]: { [encounter in TownEncounter]?: number }
 } = {
   4: {
-    [Pkm.MAROWAK]: 1,
     [Pkm.CHANSEY]: 1 / 10,
     [Pkm.KANGASKHAN]: 1 / 10,
     [Pkm.ELECTIVIRE]: 1 / 20,
     [Pkm.KECLEON]: 1 / 20,
-    [Pkm.XATU]: 1 / 20
-    //[Pkm.MAROWAK]: 1 / 20
+    [Pkm.XATU]: 1 / 20,
+    [Pkm.MAROWAK]: 1 / 20
   },
   12: {
-    [Pkm.MAROWAK]: 1,
     [Pkm.DUSKULL]: 1 / 10,
     [Pkm.KANGASKHAN]: 1 / 10,
     [Pkm.KECLEON]: 1 / 20,
     [Pkm.ELECTIVIRE]: 1 / 20,
-    [Pkm.XATU]: 1 / 20
-    //[Pkm.MAROWAK]: 1 / 20
+    [Pkm.XATU]: 1 / 20,
+    [Pkm.MAROWAK]: 1 / 20
   },
   17: {
-    [Pkm.MAROWAK]: 1,
     [Pkm.DUSKULL]: 1 / 20,
     [Pkm.KANGASKHAN]: 1 / 20,
     [Pkm.KECLEON]: 1 / 20,
     [Pkm.ELECTIVIRE]: 1 / 20,
-    [Pkm.XATU]: 1 / 20
-    //[Pkm.MAROWAK]: 1 / 20
+    [Pkm.XATU]: 1 / 20,
+    [Pkm.MAROWAK]: 1 / 20
   },
   22: {
-    [Pkm.MAROWAK]: 1,
     [Pkm.KECLEON]: 1 / 20,
     [Pkm.ELECTIVIRE]: 1 / 20,
-    [Pkm.XATU]: 1 / 20
-    //[Pkm.MAROWAK]: 1 / 20
+    [Pkm.XATU]: 1 / 20,
+    [Pkm.MAROWAK]: 1 / 20
   },
   27: {
-    [Pkm.MAROWAK]: 1,
     [Pkm.KECLEON]: 1 / 20,
     [Pkm.ELECTIVIRE]: 1 / 20,
-    [Pkm.XATU]: 1 / 20
-    //[Pkm.MAROWAK]: 1 / 20
+    [Pkm.XATU]: 1 / 20,
+    [Pkm.MAROWAK]: 1 / 20
   },
   34: {
-    [Pkm.MAROWAK]: 1,
     [Pkm.KECLEON]: 1 / 20,
     [Pkm.ELECTIVIRE]: 1 / 20,
-    [Pkm.XATU]: 1 / 20
-    //[Pkm.MAROWAK]: 1 / 20
+    [Pkm.XATU]: 1 / 20,
+    [Pkm.MAROWAK]: 1 / 20
   }
 }

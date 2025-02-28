@@ -357,9 +357,16 @@ export default class MinigameManager {
       cy = 404
     const kecleon = new PokemonSpecial({
       scene: this.scene,
-      x: encounter === TownEncounters.KECLEON ? cx : 34.5 * 48,
-      y: encounter === TownEncounters.KECLEON ? cy : 5 * 48,
+      x: encounter === TownEncounters.KECLEON ? cx - 0.5 : 34 * 48,
+      y: encounter === TownEncounters.KECLEON ? cy : 5 * 48 + 4,
       name: Pkm.KECLEON
+    })
+    const kecleonShiny = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.KECLEON ? cx + 0.5 : 35 * 48,
+      y: encounter === TownEncounters.KECLEON ? cy : 5 * 48 + 4,
+      name: Pkm.KECLEON,
+      shiny: true
     })
 
     const electivire = new PokemonSpecial({
@@ -422,6 +429,7 @@ export default class MinigameManager {
 
     this.villagers.push(
       kecleon,
+      kecleonShiny,
       electivire,
       chansey,
       kangaskhan,

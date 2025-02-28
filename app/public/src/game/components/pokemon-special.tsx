@@ -14,7 +14,7 @@ export default class PokemonSpecial extends PokemonSprite {
   dialog?: string
   dialogTitle?: string
 
-  constructor({ scene, x, y, name, orientation = Orientation.DOWN, animation = PokemonActionState.IDLE, dialog, dialogTitle }: {
+  constructor({ scene, x, y, name, orientation = Orientation.DOWN, animation = PokemonActionState.IDLE, dialog, dialogTitle, shiny }: {
     scene: GameScene,
     x: number,
     y: number,
@@ -23,12 +23,13 @@ export default class PokemonSpecial extends PokemonSprite {
     animation?: PokemonActionState,
     dialog?: string,
     dialogTitle?: string
+    shiny?: boolean
   }) {
     super(
       scene,
       x + 24,
       y + 24,
-      PokemonFactory.createPokemonFromName(name),
+      PokemonFactory.createPokemonFromName(name, { selectedShiny: shiny }),
       "environment",
       false,
       false

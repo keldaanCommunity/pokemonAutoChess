@@ -78,7 +78,7 @@ export default class Player extends Schema implements IPlayer {
   @type("uint16") elo: number
   @type("boolean") alive = true
   @type([HistoryItem]) history = new ArraySchema<HistoryItem>()
-  @type({ map: PokemonConfig }) pokemonCollection
+  @type({ map: PokemonConfig }) pokemonCollection: PokemonCollection
   @type("string") title: Title | ""
   @type("string") role: Role
   @type(["string"]) itemsProposition = new ArraySchema<Item>()
