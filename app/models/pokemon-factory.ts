@@ -4,20 +4,29 @@ import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
 import { logger } from "../utils/logger"
 import { Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
 import { PVEStage } from "./pve-stages"
+import { TownEncounter, TownEncounters } from "../core/town-encounters"
 
 export default class PokemonFactory {
   static makePveBoard(
     pveStage: PVEStage,
-    shinyEncounter: boolean
+    shinyEncounter: boolean,
+    townEncounter: TownEncounter | null
   ): MapSchema<Pokemon> {
     const pokemons = new MapSchema<Pokemon>()
-    pveStage.board.forEach(([pkm, x, y]) => {
+    pveStage.board.forEach(([pkm, x, y], index) => {
       const pokemon = PokemonFactory.createPokemonFromName(pkm, {
         selectedEmotion: pveStage.emotion ?? Emotion.NORMAL,
         selectedShiny: shinyEncounter
       })
       pokemon.positionX = x
       pokemon.positionY = y
+      if (
+        townEncounter === TownEncounters.MAROWAK &&
+        pveStage.marowakItems &&
+        index in pveStage.marowakItems
+      ) {
+        pveStage.marowakItems[index]!.forEach((item) => pokemon.items.add(item))
+      }
       pokemons.set(pokemon.id, pokemon)
     })
     return pokemons

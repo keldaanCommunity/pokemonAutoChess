@@ -1660,7 +1660,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
           const pveBoard = PokemonFactory.makePveBoard(
             pveStage,
-            this.state.shinyEncounter
+            this.state.shinyEncounter,
+            this.state.townEncounter
           )
           const weather = getWeather(player, null, pveBoard)
           const simulation = new Simulation(

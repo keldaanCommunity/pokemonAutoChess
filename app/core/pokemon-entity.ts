@@ -1766,7 +1766,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.status.clearNegativeStatus()
 
     if (this.items.has(Item.SACRED_ASH) && this.player) {
-      const team = this.simulation.getTeam(this.player.id)
+      const team =
+        this.team === Team.BLUE_TEAM
+          ? this.simulation.blueTeam
+          : this.simulation.redTeam
       if (team) {
         const alliesAlive = values(team)
           .filter((e) => e.life > 0)

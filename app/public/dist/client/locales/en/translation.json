@@ -3580,7 +3580,8 @@
     "ELECTIVIRE": "Electivire Link Shop",
     "XATU": "Xatu Appraisal",
     "KANGASKHAN": "Kangaskhan Storage",
-    "DUSKULL": "Duskull Bank"
+    "DUSKULL": "Duskull Bank",
+    "MAROWAK": "Marowak Dojo"
   },
   "town_encounter_description": {
     "KECLEON": "Kecleon sells Synergy stones for 10 GOLD",
@@ -3588,7 +3589,8 @@
     "ELECTIVIRE": "Electivire sells Artificial items for 10 GOLD",
     "XATU": "Xatu sells WONDERBOX for 10 GOLD",
     "KANGASKHAN": "Kangashkhan sells complete craftable items for 10 GOLD",
-    "DUSKULL": "Duskull increases your long term money income for 10 GOLD"
+    "DUSKULL": "Duskull increases your long term money income for 10 GOLD",
+    "MAROWAK": "Marowak makes the next PVE fight more difficult"
   },
   "loading_hints": {
     "tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",

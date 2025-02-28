@@ -353,45 +353,47 @@ export default class MinigameManager {
   }
 
   addVillagers(encounter: TownEncounter | null) {
+    const cx = 964,
+      cy = 404
     const kecleon = new PokemonSpecial({
       scene: this.scene,
-      x: encounter === TownEncounters.KECLEON ? 20 * 48 : 34.5 * 48,
-      y: encounter === TownEncounters.KECLEON ? 8.5 * 48 : 5 * 48,
+      x: encounter === TownEncounters.KECLEON ? cx : 34.5 * 48,
+      y: encounter === TownEncounters.KECLEON ? cy : 5 * 48,
       name: Pkm.KECLEON
     })
 
     const electivire = new PokemonSpecial({
       scene: this.scene,
-      x: encounter === TownEncounters.ELECTIVIRE ? 20 * 48 : 6.5 * 48,
-      y: encounter === TownEncounters.ELECTIVIRE ? 8.5 * 48 : 7.5 * 48,
+      x: encounter === TownEncounters.ELECTIVIRE ? cx : 6.5 * 48,
+      y: encounter === TownEncounters.ELECTIVIRE ? cy : 7.5 * 48,
       name: Pkm.ELECTIVIRE
     })
 
     const chansey = new PokemonSpecial({
       scene: this.scene,
-      x: encounter === TownEncounters.CHANSEY ? 20 * 48 : 2.5 * 48,
-      y: encounter === TownEncounters.CHANSEY ? 8.5 * 48 : 12 * 48,
+      x: encounter === TownEncounters.CHANSEY ? cx : 2.5 * 48,
+      y: encounter === TownEncounters.CHANSEY ? cy : 12 * 48,
       name: Pkm.CHANSEY
     })
 
     const kangaskhan = new PokemonSpecial({
       scene: this.scene,
-      x: encounter === TownEncounters.KANGASKHAN ? 20 * 48 : 41 * 48,
-      y: encounter === TownEncounters.KANGASKHAN ? 8.5 * 48 : 6 * 48,
+      x: encounter === TownEncounters.KANGASKHAN ? cx : 41 * 48,
+      y: encounter === TownEncounters.KANGASKHAN ? cy : 6 * 48,
       name: Pkm.KANGASKHAN
     })
 
     const xatu = new PokemonSpecial({
       scene: this.scene,
-      x: encounter === TownEncounters.XATU ? 20 * 48 : 6 * 48,
-      y: encounter === TownEncounters.XATU ? 8.5 * 48 : 21 * 48,
+      x: encounter === TownEncounters.XATU ? cx : 6 * 48,
+      y: encounter === TownEncounters.XATU ? cy : 21 * 48,
       name: Pkm.XATU
     })
 
     const duskull = new PokemonSpecial({
       scene: this.scene,
-      x: encounter === TownEncounters.DUSKULL ? 20 * 48 : 18 * 48,
-      y: encounter === TownEncounters.DUSKULL ? 8.5 * 48 : 21.5 * 48,
+      x: encounter === TownEncounters.DUSKULL ? cx : 18 * 48,
+      y: encounter === TownEncounters.DUSKULL ? cy : 21.5 * 48,
       name: Pkm.DUSKULL
     })
 
@@ -404,8 +406,8 @@ export default class MinigameManager {
 
     const marowak = new PokemonSpecial({
       scene: this.scene,
-      x: 41 * 48,
-      y: 12 * 48,
+      x: encounter === TownEncounters.MAROWAK ? cx : 41 * 48,
+      y: encounter === TownEncounters.MAROWAK ? cy : 12 * 48,
       name: Pkm.MAROWAK
     })
 
