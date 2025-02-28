@@ -63,6 +63,7 @@ export default class GameState extends Schema {
   minRank: EloRank | null = null
   maxRank: EloRank | null = null
   wanderers: Set<string> = new Set()
+  nbComponentsFromCarousel = 0
 
   constructor(
     preparationId: string,

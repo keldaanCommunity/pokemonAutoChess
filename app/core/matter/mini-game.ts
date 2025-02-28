@@ -228,7 +228,7 @@ export class MiniGame {
   }
 
   initialize(state: GameState, room: GameRoom) {
-    const { players, stageLevel, specialGameRule } = state
+    const { players, stageLevel } = state
     this.alivePlayers = new Array<Player>()
     players.forEach((p) => {
       if (p.alive) {
@@ -285,11 +285,19 @@ export class MiniGame {
     })
 
     if (stageLevel in TownEncountersByStage) {
-      const encounter = randomWeighted(TownEncountersByStage[stageLevel])
+      let encounter = randomWeighted(TownEncountersByStage[stageLevel])
       if (state.townEncounter !== encounter) {
-        // prevent getting the same encounter twice in a row
-        state.townEncounter = encounter ?? null
+        encounter = null // prevent getting the same encounter twice in a row
       }
+      if (
+        state.stageLevel === ItemCarouselStages[2] &&
+        state.nbComponentsFromCarousel % 2 === 0
+      ) {
+        encounter = null // ensure we have an even number of components at stage 20 to not stay with 1 component
+      }
+      state.townEncounter = encounter ?? null
+    } else {
+      state.townEncounter = null
     }
 
     if (PortalCarouselStages.includes(stageLevel)) {
@@ -299,20 +307,16 @@ export class MiniGame {
         values(this.portals!).map((p) => p.map)
       )
     } else if (ItemCarouselStages.includes(stageLevel)) {
-      this.initializeItemsCarousel(
-        stageLevel,
-        state.townEncounter,
-        specialGameRule
-      )
+      this.initializeItemsCarousel(state)
     }
   }
 
-  initializeItemsCarousel(
-    stageLevel: number,
-    townEncounter: TownEncounter | null,
-    specialGameRule: SpecialGameRule | null
-  ) {
-    const items = this.pickRandomItems(stageLevel, townEncounter)
+  initializeItemsCarousel(state: GameState) {
+    if (!state.townEncounter && state.stageLevel < ItemCarouselStages[2]) {
+      state.nbComponentsFromCarousel++
+    }
+
+    const items = this.pickRandomItems(state)
 
     for (let j = 0; j < items.length; j++) {
       const x = this.centerX + Math.cos((Math.PI * 2 * j) / items.length) * 100
@@ -392,7 +396,9 @@ export class MiniGame {
     })
   }
 
-  pickRandomItems(stageLevel: number, encounter: TownEncounter | null): Item[] {
+  pickRandomItems(state: GameState): Item[] {
+    const stageLevel = state.stageLevel
+    const encounter = state.townEncounter
     const items: Item[] = []
 
     let nbItemsToPick = clamp(this.alivePlayers.length + 3, 5, 9)
