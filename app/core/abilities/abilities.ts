@@ -511,7 +511,6 @@ export class KnowledgeThiefStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
     if (AbilityStrategies[target.skill].copyable) {
       AbilityStrategies[target.skill].process(
         pokemon,
@@ -520,7 +519,7 @@ export class KnowledgeThiefStrategy extends AbilityStrategy {
         target,
         crit
       )
-    }
+    } else super.process(pokemon, state, board, target, crit)
     if (pokemon.player && !pokemon.isGhostOpponent) {
       pokemon.player.experienceManager.addExperience(1)
     }
@@ -4679,8 +4678,6 @@ export class MetronomeStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
-
     const skill = pickRandomIn(
       (Object.keys(Ability) as Ability[]).filter(
         (a) => AbilityStrategies[a].copyable
@@ -5123,7 +5120,6 @@ export class MimicStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
     if (AbilityStrategies[target.skill].copyable) {
       AbilityStrategies[target.skill].process(
         pokemon,
@@ -5132,7 +5128,7 @@ export class MimicStrategy extends AbilityStrategy {
         target,
         crit
       )
-    }
+    } else super.process(pokemon, state, board, target, crit)
   }
 }
 
@@ -6585,7 +6581,6 @@ export class AssistStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit, true)
     const skill = pickRandomIn(
       board.cells
         .filter(
@@ -6600,7 +6595,7 @@ export class AssistStrategy extends AbilityStrategy {
     if (skill) {
       broadcastAbility(pokemon, { skill })
       AbilityStrategies[skill].process(pokemon, state, board, target, crit)
-    }
+    } else super.process(pokemon, state, board, target, crit)
   }
 }
 
