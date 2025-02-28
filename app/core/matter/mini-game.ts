@@ -286,7 +286,10 @@ export class MiniGame {
 
     if (stageLevel in TownEncountersByStage) {
       const encounter = randomWeighted(TownEncountersByStage[stageLevel])
-      state.townEncounter = encounter ?? null
+      if (state.townEncounter !== encounter) {
+        // prevent getting the same encounter twice in a row
+        state.townEncounter = encounter ?? null
+      }
     }
 
     if (PortalCarouselStages.includes(stageLevel)) {
@@ -426,6 +429,12 @@ export class MiniGame {
 
     if (encounter === TownEncounters.XATU) {
       itemsSet = [Item.WONDER_BOX]
+      nbItemsToPick = this.alivePlayers.length
+      maxCopiesPerItem = 99
+    }
+
+    if (encounter === TownEncounters.DUSKULL) {
+      itemsSet = [Item.GIMMIGHOUL_COIN]
       nbItemsToPick = this.alivePlayers.length
       maxCopiesPerItem = 99
     }

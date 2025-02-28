@@ -5,7 +5,8 @@ export const TownEncounters = {
   [Pkm.CHANSEY]: Pkm.CHANSEY,
   [Pkm.ELECTIVIRE]: Pkm.ELECTIVIRE,
   [Pkm.XATU]: Pkm.XATU,
-  [Pkm.KANGASKHAN]: Pkm.KANGASKHAN
+  [Pkm.KANGASKHAN]: Pkm.KANGASKHAN,
+  [Pkm.DUSKULL]: Pkm.DUSKULL
 } as const
 
 export type TownEncounter = (typeof TownEncounters)[keyof typeof TownEncounters]
@@ -24,9 +25,41 @@ export const TownEncountersByStage: {
 } = {
   4: {
     [Pkm.CHANSEY]: 1 / 10,
-    [Pkm.KECLEON]: 1 / 10,
-    [Pkm.ELECTIVIRE]: 1 / 10,
     [Pkm.KANGASKHAN]: 1 / 10,
-    [Pkm.XATU]: 1 / 10
+    [Pkm.ELECTIVIRE]: 1 / 20,
+    [Pkm.KECLEON]: 1 / 20,
+    [Pkm.XATU]: 1 / 20
+  },
+  12: {
+    [Pkm.DUSKULL]: 1 / 10,
+    [Pkm.KANGASKHAN]: 1 / 10,
+    [Pkm.KECLEON]: 1 / 20,
+    [Pkm.ELECTIVIRE]: 1 / 20,
+    [Pkm.XATU]: 1 / 20
+  },
+  17: {
+    [Pkm.DUSKULL]: 1 / 20,
+    [Pkm.KANGASKHAN]: 1 / 10,
+    [Pkm.KECLEON]: 1 / 20,
+    [Pkm.ELECTIVIRE]: 1 / 20,
+    [Pkm.XATU]: 1 / 20
+  },
+  22: {
+    [Pkm.KANGASKHAN]: 1 / 10,
+    [Pkm.KECLEON]: 1 / 20,
+    [Pkm.ELECTIVIRE]: 1 / 20,
+    [Pkm.XATU]: 1 / 20
+  },
+  27: {
+    [Pkm.KANGASKHAN]: 1 / 10,
+    [Pkm.KECLEON]: 1 / 20,
+    [Pkm.ELECTIVIRE]: 1 / 20,
+    [Pkm.XATU]: 1 / 20
+  },
+  34: {
+    [Pkm.KANGASKHAN]: 1 / 10,
+    [Pkm.KECLEON]: 1 / 20,
+    [Pkm.ELECTIVIRE]: 1 / 20,
+    [Pkm.XATU]: 1 / 20
   }
 }

@@ -2217,7 +2217,9 @@
     "RUBY_SWIRL_FLAVOR": "Ruby Swirl Flavor",
     "LEMON_FLAVOR": "Lemon Flavor",
     "RAINBOW_SWIRL_FLAVOR": "Rainbow Swirl Flavor",
-    "VANILLA_FLAVOR": "Vanilla Flavor"
+    "VANILLA_FLAVOR": "Vanilla Flavor",
+    "EGG_FOR_SELL": "Pokémon Egg",
+    "GIMMIGHOUL_COIN": "Gimmighoul Coin"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -2398,7 +2400,9 @@
     "SALTED_FLAVOR": "Baked with ROCK GROUND FOSSIL allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_SALTED). $t(passive_description.SALTED_CREAM)",
     "RUBY_SWIRL_FLAVOR": "Baked with FIRE WILD FIELD allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_RUBY_SWIRL). $t(passive_description.RUBY_SWIRL_CREAM)",
     "CARAMEL_SWIRL_FLAVOR": "Baked with DARK MONSTER DRAGON allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_CARAMEL_SWIRL). $t(passive_description.CARAMEL_SWIRL_CREAM)",
-    "RAINBOW_SWIRL_FLAVOR": "Baked with PSYCHIC AMORPHOUS BABY LIGHT allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_RAINBOW_SWIRL). $t(passive_description.RAINBOW_SWIRL_CREAM)"
+    "RAINBOW_SWIRL_FLAVOR": "Baked with PSYCHIC AMORPHOUS BABY LIGHT allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_RAINBOW_SWIRL). $t(passive_description.RAINBOW_SWIRL_CREAM)",
+    "EGG_FOR_SELL": "An Egg sold at Chansey's Daycare",
+    "GIMMIGHOUL_COIN": "Get 1 additional GOLD income each round, and increase max interests by 1."
   },
   "passive_description": {
     "NONE": "No passive",
@@ -3571,10 +3575,20 @@
     "BLOOD_MONEY": "Every KO gives 1 GOLD. No extra income from interests."
   },
   "town_encounter": {
-    "KECLEON": "Kecleon's Shop"
+    "KECLEON": "Kecleon's Shop",
+    "CHANSEY": "Chansey Day Care",
+    "ELECTIVIRE": "Electivire Link Shop",
+    "XATU": "Xatu Appraisal",
+    "KANGASKHAN": "Kangaskhan Storage",
+    "DUSKULL": "Duskull Bank"
   },
   "town_encounter_description": {
-    "KECLEON": "Item carousels are replaced by Kecleon's shop, that propose synergy stones for 10 GOLD each"
+    "KECLEON": "Synergy stones for 10 GOLD",
+    "CHANSEY": "Pokémon Egg for 10 GOLD",
+    "ELECTIVIRE": "Artificial items for 10 GOLD",
+    "XATU": "Wonderboxes for 10 GOLD",
+    "KANGASKHAN": "Completed items for 10 GOLD",
+    "DUSKULL": "Gholdengoul coin for 10 GOLD"
   },
   "loading_hints": {
     "tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",

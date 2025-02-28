@@ -1186,14 +1186,19 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.state.players.forEach((player) => {
       let income = 0
       if (player.alive && !player.isBot) {
+        const nbGimmighoulCoins = player.items.filter(
+          (item) => item === Item.GIMMIGHOUL_COIN
+        ).length
         if (specialGameRule !== SpecialGameRule.BLOOD_MONEY) {
-          player.interest = Math.min(Math.floor(player.money / 10), 5)
+          player.interest = max(5 + nbGimmighoulCoins)(
+            Math.floor(player.money / 10)
+          )
           income += player.interest
         }
         if (!isPVE) {
           income += max(5)(player.streak)
         }
-        income += 5
+        income += 5 + nbGimmighoulCoins
         player.addMoney(income, true, null)
         if (income > 0) {
           const client = this.room.clients.find(

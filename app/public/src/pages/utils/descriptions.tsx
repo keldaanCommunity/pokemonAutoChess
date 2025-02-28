@@ -148,7 +148,7 @@ export function addIconsToDescription(description: string, stats?: { ap: number,
               ></img>
             )}
             {array.slice(0, stats?.stages).map((v, j) => {
-              const separator = j < (stats?.stages ?? array.length) - 1 ? "/" : ""
+              const separator = j < Math.min(stats?.stages ?? 3, array.length) - 1 ? "/" : ""
               let scaleValue = 0
               if (scaleType === "AP") scaleValue = stats?.ap ?? 0
               if (scaleType === "LUCK") scaleValue = stats?.luck ?? 0

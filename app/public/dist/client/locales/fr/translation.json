@@ -3417,7 +3417,7 @@
     "KECLEON": "Magasin de Kecleon"
   },
   "town_encounter_description": {
-    "KECLEON": "Les carousels d'objets sont remplacés par le magasin de Kecleon qui vous propose 6 objets pour 10 GOLD pièce"
+    "KECLEON": "Pierres synergie pour 10 GOLD"
   },
   "loading_hints": {
     "tab_out": "Ne changez pas d'onglet ! Le chargement est mis en pause si cette fenêtre est inactive.",

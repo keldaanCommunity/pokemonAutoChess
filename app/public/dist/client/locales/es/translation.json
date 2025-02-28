@@ -3369,9 +3369,7 @@
   "town_encounter": {
     "KECLEON": "Tienda de Kecleon"
   },
-  "town_encounter_description": {
-    "KECLEON": "Los carruseles de objetos son reemplazados por la tienda de Kecleon, que propone 6 objetos por 10 GOLD cada uno"
-  },
+  "town_encounter_description": {},
   "loading_hints": {
     "tab_out": "¡No te desconectes! La carga se detiene cuando esta ventana del navegador está inactiva.",
     "max_loading_time": "El juego comenzará después de 5 minutos de carga pase lo que pase..",

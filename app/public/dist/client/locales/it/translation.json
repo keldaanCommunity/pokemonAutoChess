@@ -3272,9 +3272,7 @@
   "town_encounter": {
     "KECLEON": "Negozio di Kecleon"
   },
-  "town_encounter_description": {
-    "KECLEON": "I caroselli vengono sostituiti dal negozio di Kecleon, che propone 6 oggetti per 10 GOLD ognuno"
-  },
+  "town_encounter_description": {},
   "loading_hints": {
     "tab_out": "Non cambiare finestra! Il caricamento è in pausa quando la finestra del browser è inattiva.",
     "max_loading_time": "La partita inizierà dopo 5 minuti di caricamento, qualunque cosa accada...",

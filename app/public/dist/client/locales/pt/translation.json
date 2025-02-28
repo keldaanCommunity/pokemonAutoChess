@@ -2544,9 +2544,7 @@
   "town_encounter": {
     "KECLEON": "Loja do Kecleon"
   },
-  "town_encounter_description": {
-    "KECLEON": "Os carrosséis de itens são substituídos pela loja de Kecleon, que propõe 6 itens por 10 GOLD cada"
-  },
+  "town_encounter_description": {},
   "loading_hints": {
     "bug_report": "Achou algum bug? Vá no Discord e reporta no canal #bug-report",
     "moderation": "Se você presenciar um comportamento antiesportivo no jogo, tire um print e reporte a algum moderador no Discord.",

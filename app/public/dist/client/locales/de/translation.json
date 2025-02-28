@@ -3335,9 +3335,7 @@
   "town_encounter": {
     "KECLEON": "Kecleon's Shop"
   },
-  "town_encounter_description": {
-    "KECLEON": "Item Karusselle werden, durch Kecleon´s Shop, ersetzt, die Synergiesteinen für je 10 GOLD anbieten"
-  },
+  "town_encounter_description": {},
   "loading_hints": {
     "tab_out": "Nicht ausblenden! Der Ladevorgang wird angehalten, wenn dieses Browserfenster inaktiv ist.",
     "max_loading_time": "Das Spiel startet nach maximal 5 Minuten Ladezeit, egal was...",

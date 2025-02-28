@@ -1502,9 +1502,7 @@
   "town_encounter": {
     "KECLEON": "ร้านค้า Kecleon"
   },
-  "town_encounter_description": {
-    "KECLEON": "ม้าหมุนไอเทมจะถูกเปลี่ยนเป็น ร้านค้า Kecleon, ซึ่งจะเสนอ 6 items ในราคา 10 GOLD ต่อชิน"
-  },
+  "town_encounter_description": {},
   "loading_hints": {
     "tab_out": "หยุด! การสลับแท็บของคุณ หรือ การปิดเบราว์เซอร์จะทำให้เกมไม่โหลดและอาจทำให้ผู้เล่นคนอื่นด่าบิดา มารดาคุณได้.",
     "max_loading_time": "เกมจะเริ่มในอีกไม่ช้ารอไม่นานเกิดหนึ่งอึดใจ",

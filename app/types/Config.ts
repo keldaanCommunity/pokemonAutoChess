@@ -394,8 +394,8 @@ export const PROJECTILE_SPEED = 4
 
 export const StageDuration: Record<number | "DEFAULT", number> = {
   0: 22, // adjusted for treasure town theme
-  1: 30,
-  3: 40,
+  1: 1,
+  3: 1,
   5: 40,
   8: 40,
   9: 40,
@@ -404,9 +404,9 @@ export const StageDuration: Record<number | "DEFAULT", number> = {
   15: 40,
   19: 40,
   20: 50,
-  DEFAULT: 30
+  DEFAULT: 1
 }
-export const FIGHTING_PHASE_DURATION = 40000
+export const FIGHTING_PHASE_DURATION = 1000
 export const ITEM_CAROUSEL_BASE_DURATION = 15000
 export const PORTAL_CAROUSEL_BASE_DURATION = 22500
 

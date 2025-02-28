@@ -385,18 +385,20 @@ export default class MinigameManager {
       name: Pkm.XATU
     })
 
+    const duskull = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.DUSKULL ? 20 * 48 : 18 * 48,
+      y: encounter === TownEncounters.DUSKULL ? 8.5 * 48 : 21.5 * 48,
+      name: Pkm.DUSKULL
+    })
+
     this.villagers.push(
       kecleon,
       electivire,
       chansey,
       kangaskhan,
       xatu,
-      new PokemonSpecial({
-        scene: this.scene,
-        x: 18 * 48,
-        y: 21.5 * 48,
-        name: Pkm.DUSKULL
-      }),
+      duskull,
       new PokemonSpecial({
         scene: this.scene,
         x: 24 * 48,

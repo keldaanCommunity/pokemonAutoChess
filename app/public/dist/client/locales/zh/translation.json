@@ -3571,9 +3571,6 @@
   "town_encounter": {
     "KECLEON": "变 隐 商 店"
   },
-  "town_encounter_description": {
-    "KECLEON": "道具轮盘改为变隐龙商店，随机刷出6件售价为10 GOLD的道具。"
-  },
   "loading_hints": {
     "tab_out": "不要切屏离开！如果这个浏览器窗口不活跃，加载会自动暂停。",
     "max_loading_time": "无论如何，加载5分钟之后会强制开始游戏。",

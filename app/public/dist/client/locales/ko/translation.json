@@ -3421,9 +3421,7 @@
   "town_encounter": {
     "KECLEON": "켈리몬의 가게"
   },
-  "town_encounter_description": {
-    "KECLEON": "아이템초밥집이 켈리몬의 상점으로 대체됩니다. 켈리몬은 6개의 아이템을 각각 10골드씩에 판매합니다."
-  },
+  "town_encounter_description": {},
   "loading_hints": {
     "tab_out": "로딩 화면 밖으로 나가지 마세요! 브라우저가 비활성화 되면 로딩이 멈춥니다. ",
     "max_loading_time": "게임 시작시 로딩시간은 최대 5분입니다. 어찌되든 간에...",
