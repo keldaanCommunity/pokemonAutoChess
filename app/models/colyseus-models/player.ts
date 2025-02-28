@@ -538,11 +538,13 @@ export default class Player extends Schema implements IPlayer {
   }
 
   updateRegionalPool(state: GameState, mapChanged: boolean) {
+    if (this.map === "town") {
+      resetArraySchema(this.regionalPokemons, [])
+      return
+    }
+
     const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
-      new PokemonClasses[p]().isInRegion(
-        this.map === "town" ? DungeonPMDO.AmpPlains : this.map,
-        state
-      )
+      new PokemonClasses[p]().isInRegion(this.map, state)
     )
 
     if (mapChanged) {

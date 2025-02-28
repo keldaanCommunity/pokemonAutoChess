@@ -264,7 +264,8 @@ export class OnDragDropCommand extends Command<
         if (
           pokemon.name === Pkm.DITTO &&
           dropFromBench &&
-          !isPositionEmpty(x, y, player.board)
+          !isPositionEmpty(x, y, player.board) &&
+          !(this.state.phase === GamePhaseState.FIGHT && y > 0)
         ) {
           const pokemonToClone = this.room.getPokemonByPosition(player, x, y)
           if (pokemonToClone && pokemonToClone.canBeCloned) {

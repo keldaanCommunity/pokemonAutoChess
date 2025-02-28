@@ -3183,9 +3183,29 @@ export function displayAbility(
       }
       break
 
-    case Ability.GLAIVE_RUSH:
-      addAbilitySprite(Ability.ICE_HAMMER, coordinatesTarget, true).setScale(2)
+    case Ability.GLAIVE_RUSH: {
+      const specialProjectile = addAbilitySprite(skill, coordinates)
+        .setScale(3)
+        .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) -
+            Math.PI / 2
+        )
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 500,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
       break
+    }
 
     case Ability.STEEL_WING:
       addAbilitySprite(Ability.STEEL_WING, coordinates, true).setScale(2)

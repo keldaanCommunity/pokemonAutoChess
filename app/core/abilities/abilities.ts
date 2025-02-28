@@ -10062,47 +10062,58 @@ export class GlaiveRushStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit, true)
     const damage = [50, 100, 200][pokemon.stars - 1] ?? 200
     pokemon.status.triggerArmorReduction(6000, pokemon)
-
-    target.handleSpecialDamage(
-      damage,
-      board,
-      AttackType.PHYSICAL,
-      pokemon,
-      crit
-    )
-
     const destinationRow =
       pokemon.team === Team.RED_TEAM
-        ? pokemon.positionY === 0
+        ? pokemon.positionY <= 1
           ? BOARD_HEIGHT - 1
           : 0
-        : pokemon.positionY === BOARD_HEIGHT - 1
+        : pokemon.positionY >= BOARD_HEIGHT - 2
           ? 0
           : BOARD_HEIGHT - 1
-
-    const enemiesHit = board.cells.filter(
-      (enemy) =>
-        enemy &&
-        enemy.team !== pokemon.team &&
-        enemy.positionX === pokemon.positionX &&
-        isBetween(pokemon.positionY, destinationRow)(enemy.positionY)
-    ) as PokemonEntity[]
-    enemiesHit.forEach((enemy) => {
-      enemy.handleSpecialDamage(
-        damage,
-        board,
-        AttackType.PHYSICAL,
-        pokemon,
-        crit
-      )
-    })
 
     const destination = board.getClosestAvailablePlace(
       pokemon.positionX,
       destinationRow
     )
+    const enemiesHit = new Set()
     if (destination) {
+      broadcastAbility(pokemon, {
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: destination.x,
+        targetY: destination.y
+      })
+
       pokemon.moveTo(destination.x, destination.y, board)
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        destination.x,
+        destination.y
+      )
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team != pokemon.team) {
+          enemiesHit.add(cell.value)
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+    }
+
+    if (enemiesHit.size === 0) {
+      // ensure to at least hit the target
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
     }
   }
 }

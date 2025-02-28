@@ -66,6 +66,7 @@
 - Changed Heavy Slam (Aggron): Shield 10/20/40 → 15/30/60, remove AP scaling
 - Buff Concrete Pillar (Conkeldurr) HP 300 → 400
 - Rework Acrobatics: now move to a cell at good distance from its target. Move further away if not holding any item.
+- Rework Glaive Rush (Frigibax): improves targeting when destination cell is occupied, deal special damage instead of physical, added animation
 
 # Changes to Synergies
 
@@ -101,6 +102,7 @@
 - Artificial items are now automatically dropped when benching the unit that was holding them.
 - Added search bar in Wiki > Abilities
 - Disabled right click browser menu when in game
+- Added player add picks and regional picks info when spectating
 
 # Bugfix
 

@@ -1716,7 +1716,7 @@
     "ENTRAINMENT": "Tanzt zu einem seltsamen Rhythmus, gewinnt [10,SP] PP zurück und zwingt das Ziel, zu imitieren, wodurch die Fähigkeit durch Zwango ersetzt wird. Wenn das Ziel bereits verzwangt ist, wird ein anderer Feind in der Nähe getroffen.",
     "OKTZOOKA": "Feuert ein Projektil ab, das [150,SP]% des ATK des Benutzers als SPEZIALschaden verursacht und eine Tintenwolke hinterlässt, die die Genauigkeit des Ziels verringert.",
     "PSYCHO_SHIFT": "Vertauscht die Position des Ziels und des am weitesten entfernten Gegners und fügt beiden [60,SP] SPECIAL zu.",
-    "GLAIVE_RUSH": "Der Angreifer stürmt mit seinem gesamten Körper rücksichtslos los. Springt hinter das Ziel und fügt ihm 6 Sekunden lang [50,100,200,SP] PHYSICAL und ARMOR_REDUCTION zu.",
+    "GLAIVE_RUSH": "Der Angreifer stürmt mit seinem gesamten Körper rücksichtslos los. Springt hinter das Ziel und fügt ihm 6 Sekunden lang [50,100,200,SP] SPECIAL und ARMOR_REDUCTION zu.",
     "FOUL_PLAY": "Fügt [2,4,6,SP,ND=1] x ATK des Ziels als SPECIAL zu",
     "DOUBLE_IRON_BASH": "Der Benutzer dreht sich, zentriert die Sechskantmutter in seiner Brust und schlägt dann zweimal hintereinander mit den Armen zu, wobei er [150,SP] % seines ATK einsetzt. Dadurch FLINCH das Ziel 3 Sekunden lang zusammen.",
     "STONE_EDGE": "Für [5,8] Sekunden SILENCE selbst, erhält 2 RANGE, [20,SP] CRIT_CHANCE und wendet [50,SP]% seiner DEF als PHYSICAL auf Angriffe an",
