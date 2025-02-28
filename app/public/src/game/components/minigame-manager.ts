@@ -280,7 +280,7 @@ export default class MinigameManager {
         y: pokemonUI.y - 50,
         duration: 500,
         ease: Phaser.Math.Easing.Sine.InOut,
-        loop: 3,
+        loop: 5,
         yoyo: true,
         onComplete() {
           arrowIndicator.destroy()

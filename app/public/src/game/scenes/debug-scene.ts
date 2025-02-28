@@ -15,6 +15,7 @@ import { displayAbility } from "../components/abilities-animations"
 import { displayBoost } from "../components/boosts-animations"
 import LoadingManager from "../components/loading-manager"
 import PokemonSprite from "../components/pokemon"
+import { DEPTH } from "../depths"
 
 type Boost =
   | "BOOST/ATK"
@@ -36,6 +37,7 @@ export class DebugScene extends Phaser.Scene {
   uid = "debug"
   tilemap: DesignTiled | undefined
   map: Phaser.Tilemaps.Tilemap | undefined
+  colorFilter: Phaser.GameObjects.Rectangle | null = null
   music: Phaser.Sound.WebAudioSound | null = null
   attackAnimInterval: ReturnType<typeof setInterval> | undefined
 
@@ -131,8 +133,34 @@ export class DebugScene extends Phaser.Scene {
     this.applyStatusAnimation(status)
   }
 
-  updateMap(mapName: DungeonPMDO): Promise<void> {
+  updateMap(mapName: DungeonPMDO | "town"): Promise<void> {
     if (this.map) this.map.destroy()
+
+    if (mapName === "town") {
+      return new Promise((resolve) => {
+        /*this.load.image("town_tileset", "/assets/tilesets/Town/tileset.png")
+        this.load.tilemapTiledJSON("town", "/assets/tilesets/Town/town.json")
+        preloadMusic(scene, DungeonDetails.town.music)
+        this.load.audio("music_town1", [`assets/musics/ogg/town1.ogg`])
+        this.load.audio("music_town2", [`assets/musics/ogg/town2.ogg`])
+        this.load.audio("music_town3", [`assets/musics/ogg/town3.ogg`])
+*/
+        this.map = this.add.tilemap("town")
+        const tileset = this.map.addTilesetImage(
+          "town_tileset",
+          "town_tileset"
+        )!
+        this.map.createLayer("layer0", tileset, 0, 0)?.setScale(2, 2)
+        this.map.createLayer("layer1", tileset, 0, 0)?.setScale(2, 2)
+        this.map.createLayer("layer2", tileset, 0, 0)?.setScale(2, 2)
+        const sys = this.sys as any
+        if (sys.animatedTiles) {
+          sys.animatedTiles.pause()
+        }
+        playMusic(this as any, DungeonDetails[mapName].music)
+        resolve()
+      })
+    }
 
     return fetch(`/tilemap/${mapName}`)
       .then((res) => res.json())
@@ -166,6 +194,31 @@ export class DebugScene extends Phaser.Scene {
         ;(this.sys as any).animatedTiles.init(map)
         playMusic(this as any, DungeonDetails[mapName].music)
       })
+  }
+
+  updateColorFilter({
+    red,
+    green,
+    blue,
+    alpha
+  }: {
+    red: number
+    green: number
+    blue: number
+    alpha: number
+  }) {
+    this.colorFilter?.destroy()
+    this.colorFilter = this.add.existing(
+      new Phaser.GameObjects.Rectangle(
+        this,
+        1500,
+        1000,
+        3000,
+        2000,
+        new Phaser.Display.Color(red, green, blue).color,
+        alpha / 100
+      ).setDepth(DEPTH.WEATHER_FX)
+    )
   }
 
   applyStatusAnimation(status: Status | Boost | "") {

@@ -17,7 +17,9 @@ export default function MapViewerContainer() {
 
   const [statusMessage, setStatusMessage] = useState<string>("")
   const maps = Object.values(DungeonPMDO)
-  const [map, setMap] = useState<DungeonPMDO>(maps[0])
+  const [map, setMap] = useState<DungeonPMDO | "town">("town")
+
+  const [colorFilter, setColorFilter] = useState({ red: 255, green: 255, blue: 255, alpha: 0 })
 
   const onProgress = () =>
     setStatusMessage(debugScene?.current?.loadingManager?.statusMessage ?? "")
@@ -64,19 +66,36 @@ export default function MapViewerContainer() {
     }
   }, [map])
 
+  useEffect(() => {
+    if (initialized.current === true && loaded === true) {
+      debugScene.current?.updateColorFilter(colorFilter)
+    }
+  }, [colorFilter])
+
   return (
     <div id="debug-scene" className="map-viewer">
       {!loaded && <p id="status-message">{statusMessage}</p>}
       <div id="debug-scene-controls">
         <select
-          onChange={(event) => setMap(event?.target.value as DungeonPMDO)}
+          onChange={(event) => setMap(event?.target.value as DungeonPMDO | "town")}
         >
+          <option key="town" value="town">
+            Treasure Town
+          </option>
           {maps.map((m) => (
             <option key={m} value={m}>
               {m}
             </option>
           ))}
         </select>
+
+        <details>
+          <summary>Color filter</summary>
+          <label>Red {colorFilter.red} <input type="range" min="0" max="255" value={colorFilter.red} onChange={e => setColorFilter({ ...colorFilter, red: +e.target.value })} /></label>
+          <label>Green {colorFilter.green} <input type="range" min="0" max="255" value={colorFilter.green} onChange={e => setColorFilter({ ...colorFilter, green: +e.target.value })} /></label>
+          <label>Blue {colorFilter.blue} <input type="range" min="0" max="255" value={colorFilter.blue} onChange={e => setColorFilter({ ...colorFilter, blue: +e.target.value })} /></label>
+          <label>Alpha {colorFilter.alpha} <input type="range" min="0" max="100" value={colorFilter.alpha} onChange={e => setColorFilter({ ...colorFilter, alpha: +e.target.value })} /></label>
+        </details>
       </div>
     </div>
   )

@@ -149,6 +149,8 @@ export default class GameScene extends Scene {
       )
 
       this.weatherManager = new WeatherManager(this)
+      this.weatherManager?.setTownDaytime(0)
+
       this.unownManager = new UnownManager(this)
       if (!this.music) {
         playMusic(
@@ -259,6 +261,7 @@ export default class GameScene extends Scene {
       this.board?.battleMode()
     } else if (newPhase === GamePhaseState.TOWN) {
       this.board?.minigameMode()
+      this.weatherManager?.setTownDaytime(this.room?.state.stageLevel ?? 0)
     } else {
       this.board?.pickMode()
     }
