@@ -13897,9 +13897,9 @@ export class Smeargle extends Pokemon {
   def = 6
   speDef = 6
   maxPP = 100
-  range = 1
+  range = 3
   skill = Ability.SKETCH
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.FIGHTING_RANGE
 
   afterSimulationStart({ entity }) {
     if (entity.player) {
