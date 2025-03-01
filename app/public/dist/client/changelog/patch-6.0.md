@@ -45,6 +45,7 @@
 - Buff Houndour line: PP 125 → 110
 - Buff Topsy Turvy (Inkay): also reverse AP buffs
 - Nerf Inteleon: Snipe shot damage 40/80/160 → 40/80/120
+- Nerf Gastly line: PP 60 → 80
 - Nerf Stantler: HP 200 → 180, Def/Spedef: 5 → 3 (6 post def/spedef stat change)
 - Nerf Miltank: HP 250 → 200
 - Nerf Spinda: HP 250 → 200
