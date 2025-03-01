@@ -149,11 +149,15 @@ export default class GameScene extends Scene {
       )
 
       this.weatherManager = new WeatherManager(this)
+      this.weatherManager?.setTownDaytime(0)
+
       this.unownManager = new UnownManager(this)
-      playMusic(
-        this,
-        DungeonDetails[player.map].music ?? DungeonMusic.TREASURE_TOWN
-      )
+      if (!this.music) {
+        playMusic(
+          this,
+          DungeonDetails[player.map].music ?? DungeonMusic.TREASURE_TOWN
+        )
+      }
       //;(this.sys as any).animatedTiles.init(this.map)
       clearTitleNotificationIcon()
     }
@@ -257,7 +261,7 @@ export default class GameScene extends Scene {
       this.board?.battleMode()
     } else if (newPhase === GamePhaseState.TOWN) {
       this.board?.minigameMode()
-      this.minigameManager?.initialize()
+      this.weatherManager?.setTownDaytime(this.room?.state.stageLevel ?? 0)
     } else {
       this.board?.pickMode()
     }
@@ -289,6 +293,7 @@ export default class GameScene extends Scene {
       const tileset = this.map.addTilesetImage("town_tileset", "town_tileset")!
       this.map.createLayer("layer0", tileset, 0, 0)?.setScale(2, 2)
       this.map.createLayer("layer1", tileset, 0, 0)?.setScale(2, 2)
+      this.map.createLayer("layer2", tileset, 0, 0)?.setScale(2, 2)
       const sys = this.sys as any
       if (sys.animatedTiles) {
         sys.animatedTiles.pause()

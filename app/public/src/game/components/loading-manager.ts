@@ -139,6 +139,9 @@ export default class LoadingManager {
     scene.load.image("town_tileset", "/assets/tilesets/Town/tileset.png")
     scene.load.tilemapTiledJSON("town", "/assets/tilesets/Town/town.json")
     preloadMusic(scene, DungeonDetails.town.music)
+    scene.load.audio("music_town1", [`assets/musics/ogg/town1.ogg`])
+    scene.load.audio("music_town2", [`assets/musics/ogg/town2.ogg`])
+    scene.load.audio("music_town3", [`assets/musics/ogg/town3.ogg`])
 
     scene.load.image("rain", "/assets/ui/rain.png")
     scene.load.image("sand", "/assets/ui/sand.png")
@@ -194,7 +197,6 @@ export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {
     "/assets/environment/shine.json",
     "/assets/environment/"
   )
-
   scene.load.multiatlas(
     "berry_trees",
     "/assets/environment/berry_trees.json",

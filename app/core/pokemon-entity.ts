@@ -1765,18 +1765,34 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.pp = 0
     this.status.clearNegativeStatus()
 
-    if (this.items.has(Item.SACRED_ASH) && this.player) {
-      const team = this.simulation.getTeam(this.player.id)
+    if (this.items.has(Item.SACRED_ASH)) {
+      const team =
+        this.team === Team.BLUE_TEAM
+          ? this.simulation.blueTeam
+          : this.simulation.redTeam
       if (team) {
-        const alliesAlive = values(team)
-          .filter((e) => e.life > 0)
-          .map((e) => e.refToBoardPokemon.id)
-        const koAllies = values(this.player.board).filter(
-          (p) =>
-            p.id !== this.refToBoardPokemon.id &&
-            !isOnBench(p) &&
-            alliesAlive.includes(p.id) === false
+        const alliesAlive: IPokemonEntity[] = values(team).filter(
+          (e) => e.life > 0
         )
+        let koAllies: Pokemon[] = []
+        if (this.player) {
+          koAllies = values(this.player.board).filter(
+            (p) =>
+              p.id !== this.refToBoardPokemon.id &&
+              !isOnBench(p) &&
+              !alliesAlive.some((ally) => ally.id === p.id)
+          )
+        } else if (this.name === Pkm.HO_OH) {
+          // HoOh marowak pve round
+          koAllies = alliesAlive.some((p) => p.name === Pkm.LUGIA)
+            ? []
+            : [
+                PokemonFactory.createPokemonFromName(Pkm.LUGIA, {
+                  selectedShiny: this.shiny,
+                  selectedEmotion: Emotion.ANGRY
+                })
+              ]
+        }
 
         const spawns = pickNRandomIn(koAllies, 3)
         spawns.forEach((spawn) => {

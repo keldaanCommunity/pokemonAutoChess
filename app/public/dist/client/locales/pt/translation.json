@@ -2519,21 +2519,19 @@
   "game_already_started": "O jogo já foi iniciado",
   "min_rank_not_reached": "Seu rank não é alto o suficiente para participar neste jogo rankeado",
   "not_whitelisted": "Este jogo está limitado a uma lista determinada de jogadores",
-  "kecleon_dialog": {
-    "welcome": "Bem-vindo à loja de Kecleon !",
+  "npc_dialog": {
+    "welcome": "Bem-vindo !",
     "tell_price": "10 GOLD para cada !",
     "thank_you": "OBRIGADO !"
   },
   "scribble": {
     "EVERYONE_IS_HERE": "Todos estão presentes !",
     "OMELETTE_COOK": "Cozinheiro de Omeletes",
-    "SYNERGY_WHEEL": "Roda de Sinergías",
     "DITTO_PARTY": "Festa dos Dittos",
     "GOTTA_CATCH_EM_ALL": "Temos que pegar !",
     "BUYER_FEVER": "Febre de compras",
     "TECHNOLOGIC": "Tecnológico",
-    "CROWDED": "Tabuleiro Cheio",
-    "KECLEONS_SHOP": "Loja do Kecleon"
+    "CROWDED": "Tabuleiro Cheio"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "Todas as opções adicionais estão disponíveis imediatamente",
@@ -2543,6 +2541,10 @@
     "BUYER_FEVER": "A loja de evoluções é grátis",
     "CROWDED": "+3 unidades máximas no tabuleiro"
   },
+  "town_encounter": {
+    "KECLEON": "Loja do Kecleon"
+  },
+  "town_encounter_description": {},
   "loading_hints": {
     "bug_report": "Achou algum bug? Vá no Discord e reporta no canal #bug-report",
     "moderation": "Se você presenciar um comportamento antiesportivo no jogo, tire um print e reporte a algum moderador no Discord.",

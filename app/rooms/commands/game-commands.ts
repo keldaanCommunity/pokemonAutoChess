@@ -14,7 +14,7 @@ import Simulation from "../../core/simulation"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import Player from "../../models/colyseus-models/player"
 import { PokemonClasses } from "../../models/colyseus-models/pokemon"
-import { createRandomEgg } from "../../models/egg-factory"
+import { giveRandomEgg } from "../../core/eggs"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"
@@ -37,8 +37,7 @@ import {
   MAX_PLAYERS_PER_GAME,
   PORTAL_CAROUSEL_BASE_DURATION,
   PortalCarouselStages,
-  StageDuration,
-  SynergyTriggers
+  StageDuration
 } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
@@ -403,6 +402,16 @@ export class OnSwitchBenchAndBoardCommand extends Command<
       const dx = getFirstAvailablePositionInBench(player.board)
       if (dx !== undefined) {
         this.room.swap(player, pokemon, dx, 0)
+        pokemon.items.forEach((item) => {
+          if (
+            item === Item.CHEF_HAT ||
+            item === Item.TRASH ||
+            ArtificialItems.includes(item)
+          ) {
+            player.items.push(item)
+            pokemon.removeItem(item)
+          }
+        })
         pokemon.onChangePosition(dx, 0, player)
       }
     }
@@ -1178,14 +1187,19 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.state.players.forEach((player) => {
       let income = 0
       if (player.alive && !player.isBot) {
+        const nbGimmighoulCoins = player.items.filter(
+          (item) => item === Item.GIMMIGHOUL_COIN
+        ).length
         if (specialGameRule !== SpecialGameRule.BLOOD_MONEY) {
-          player.interest = Math.min(Math.floor(player.money / 10), 5)
+          player.interest = max(5 + nbGimmighoulCoins)(
+            Math.floor(player.money / 10)
+          )
           income += player.interest
         }
         if (!isPVE) {
           income += max(5)(player.streak)
         }
-        income += 5
+        income += 5 + nbGimmighoulCoins
         player.addMoney(income, true, null)
         if (income > 0) {
           const client = this.room.clients.find(
@@ -1647,7 +1661,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
           const pveBoard = PokemonFactory.makePveBoard(
             pveStage,
-            this.state.shinyEncounter
+            this.state.shinyEncounter,
+            this.state.townEncounter
           )
           const weather = getWeather(player, null, pveBoard)
           const simulation = new Simulation(
@@ -1832,11 +1847,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (getFreeSpaceOnBench(player.board) === 0) continue
       const isGoldenEgg =
         goldenEggFound && i === 0 && nbOfGoldenEggsOnBench === 0
-      const egg = createRandomEgg(isGoldenEgg, player)
-      const x = getFirstAvailablePositionInBench(player.board)
-      egg.positionX = x !== undefined ? x : -1
-      egg.positionY = 0
-      player.board.set(egg.id, egg)
+      giveRandomEgg(player, isGoldenEgg)
       if (player.effects.has(Effect.HATCHER)) {
         player.eggChance = 0 // getting an egg resets the stacked egg chance
       }

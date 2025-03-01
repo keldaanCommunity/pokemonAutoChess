@@ -214,13 +214,13 @@ p:last-child {
   margin-top: -19px;
 }
 
-.game-pokemon-dialog {
+.game-dialog {
   color: white;
   font-size: 1rem;
   max-width: 300px;
 }
 
-.game-pokemon-dialog .game-pokemon-dialog-title {
+.game-dialog .game-dialog-title {
   background-color: #4f5160;
   text-transform: capitalize;
   padding: 0.25em 0.5em;
