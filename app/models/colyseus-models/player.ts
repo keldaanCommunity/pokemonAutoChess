@@ -426,6 +426,12 @@ export default class Player extends Schema implements IPlayer {
               const nativeTypes = getPokemonData(pokemon.name).types
               if (nativeTypes.includes(type) === false) {
                 pokemon.types.delete(type)
+                if (
+                  pokemon.name === Pkm.SILVALLY &&
+                  nativeTypes.length === pokemon.types.size
+                ) {
+                  this.transformPokemon(pokemon, Pkm.TYPE_NULL)
+                }
                 if (!isOnBench(pokemon)) {
                   needsRecomputingSynergiesAgain = true
                 }
