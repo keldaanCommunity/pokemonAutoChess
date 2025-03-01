@@ -23,7 +23,7 @@ import PokemonSpecial from "./pokemon-special"
 import { Portal, SynergySymbol } from "./portal"
 import { DEPTH } from "../depths"
 import { TownEncounter, TownEncounters } from "../../../../core/town-encounters"
-import { PokemonDialog } from "./pokemon-dialog"
+import { GameDialog } from "./game-dialog"
 
 export default class MinigameManager {
   pokemons: Map<string, PokemonAvatar>
@@ -35,7 +35,7 @@ export default class MinigameManager {
   display: boolean
   animationManager: AnimationManager
   villagers: PokemonSpecial[] = []
-  encounterDescription: PokemonDialog | null = null
+  encounterDescription: GameDialog | null = null
 
   constructor(
     scene: GameScene,
@@ -465,7 +465,7 @@ export default class MinigameManager {
   }
 
   showEncounterDescription(encounter: TownEncounter) {
-    this.encounterDescription = new PokemonDialog(
+    this.encounterDescription = new GameDialog(
       this.scene,
       t(`town_encounter_description.${encounter}`)
     )

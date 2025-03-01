@@ -6,10 +6,10 @@ import { clamp, min } from "../../../../utils/number"
 import { preference } from "../../preferences"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
-import { PokemonDialog } from "./pokemon-dialog"
+import { GameDialog } from "./game-dialog"
 
 export default class PokemonSpecial extends PokemonSprite {
-  detail: PokemonDialog | null = null
+  detail: GameDialog | null = null
   scene: GameScene
   dialog?: string
   dialogTitle?: string
@@ -57,7 +57,7 @@ export default class PokemonSpecial extends PokemonSprite {
         s.lastPokemonDetail = null
       }
 
-      this.detail = new PokemonDialog(
+      this.detail = new GameDialog(
         this.scene,
         this.dialog,
         this.dialogTitle

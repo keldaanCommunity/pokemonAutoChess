@@ -293,6 +293,7 @@ export class MiniGame {
         state.stageLevel === ItemCarouselStages[2] &&
         state.nbComponentsFromCarousel % 2 === 0
       ) {
+        state.nbComponentsFromCarousel++
         encounter = null // ensure we have an even number of components at stage 20 to not stay with 1 component
       }
       state.townEncounter = encounter ?? null
