@@ -31,4 +31,9 @@
   right: 1em;
   background-color: black;
   color: white;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: start;
+  gap: 0.5em;
+  padding: 0.5em;
 }

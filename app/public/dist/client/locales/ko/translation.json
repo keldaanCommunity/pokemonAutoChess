@@ -3381,8 +3381,8 @@
   "max_rank_not_reached": "이 랭크매치 방은 보다 더 낮은 레이팅의 사람들을 위한 방입니다.",
   "not_whitelisted": "이 게임은 허용된 플레이어만 참가가능합니다.",
   "blacklisted": "이 경기에서 추방당했습니다.",
-  "kecleon_dialog": {
-    "welcome": "켈리몬의 상점에 어서와요!",
+  "npc_dialog": {
+    "welcome": "어서와요!",
     "tell_price": "각각 10골드입니다!",
     "thank_you": "감사합니다!"
   },
@@ -3390,13 +3390,11 @@
     "EVERYONE_IS_HERE": "모두 다 모여!",
     "UNIQUE_STARTER": "시작부터 유니크",
     "OMELETTE_COOK": "오믈렛 요리",
-    "SYNERGY_WHEEL": "시너지의 수레바퀴",
     "DITTO_PARTY": "메타몽 파티",
     "GOTTA_CATCH_EM_ALL": "넌 내꺼야!",
     "BUYER_FEVER": "구매 열풍",
     "TECHNOLOGIC": "과학이 미래를 개척하는 시대",
     "CROWDED": "북적이는 보드",
-    "KECLEONS_SHOP": "켈리몬의 가게",
     "FREE_MARKET": "모든 것이 거저",
     "SHINY_HUNTER": "이로치 헌터",
     "DO_IT_ALL_YOURSELF": "전부 직접 하세요!",
@@ -3408,13 +3406,11 @@
     "EVERYONE_IS_HERE": "모든 선택 포켓몬이 시작과 동시에 구매가 가능해집니다.",
     "UNIQUE_STARTER": "스테이지 1에서 무작위 유니크 포켓몬을 얻습니다.",
     "OMELETTE_COOK": "1,2,3 스테이지 후에 포켓몬 알을 얻습니다.",
-    "SYNERGY_WHEEL": "이제 초밥에서 시너지 돌만 등장합니다.",
     "DITTO_PARTY": "벤치에 메타몽 5마리를 가지고 시작합니다. 상점에 메타몽이 등장하지 않으며, 메타몽을 상점에 팔 수도 없습니다.",
     "GOTTA_CATCH_EM_ALL": "일부 포켓몬들은 PvE 라운드 이전에 잡을 수 있습니다.",
     "BUYER_FEVER": "상점에서의 진화가 이제 공짜입니다.",
     "TECHNOLOGIC": "3스테이지와 15스테이지때 3개의 유물아이템 중 하나를 고를 수 있습니다.",
     "CROWDED": "보드에 놓을 수 있는 최대 포켓몬 마릿수 +3",
-    "KECLEONS_SHOP": "아이템초밥집이 켈리몬의 상점으로 대체됩니다. 켈리몬은 6개의 아이템을 각각 10골드씩에 판매합니다.",
     "FREE_MARKET": "0골드에 포켓몬을 사고 팔 수 있습니다.",
     "SHINY_HUNTER": "PVE에서 만나는 모든 야생 포켓몬들이 모두 이로치가 됩니다.",
     "DO_IT_ALL_YOURSELF": "최대 HP +100 의 아바타를 가지고 시작합니다. 아바타가 낮은 레어도라면 추가 골드를 획득합니다.",
@@ -3422,6 +3418,10 @@
     "SLAMINGO": "포켓몬을 대기석에 놓으면 모든 아이템을 장착 해제합니다. 4개의 무작위 조합 아이템을 획득합니다.",
     "BLOOD_MONEY": "이자를 얻지 않습니다. 포켓몬을 기절시킬 때마다 1 GOLD 획득합니다."
   },
+  "town_encounter": {
+    "KECLEON": "켈리몬의 가게"
+  },
+  "town_encounter_description": {},
   "loading_hints": {
     "tab_out": "로딩 화면 밖으로 나가지 마세요! 브라우저가 비활성화 되면 로딩이 멈춥니다. ",
     "max_loading_time": "게임 시작시 로딩시간은 최대 5분입니다. 어찌되든 간에...",

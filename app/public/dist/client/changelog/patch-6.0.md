@@ -1,3 +1,10 @@
+# Major changes
+
+- Introducing Treasure Town, the new starting map for each game. This is where players join for carousel rounds, or to take a portal leading them to a new region. Game now starts at stage zero at Treasure Town, and players can influence their starting region by choosing a portal.
+- During carousel rounds, you may encounter famous residents of Treasure Town. Some of them are traders that will sell you precious items for gold, while others may influence the game in other ways.
+- Attack speed, move speed and ability cooldowns have all been merged into one statistic: Speed. 1 Speed = 1% attack speed in previous patch. Pokemons have a different base speed depending on the species, taken from their Speed stat in the original games of the license. Many attack and max PP stats have been adjusted to compensate for the difference of base speed. Maximum speed is 300 = 2.5 attacks per second, and minimum is 0 = 0.4 attacks per second. Just like attack speed in previous patch, the speed stat is linear, which means going from 0 to 10 speed has the same value as going from 50 to 60 speed.
+- Defense and special defense stats have all been doubled, and damage reduction formula changed to `1/(1+def/20)` instead of `1/(1+def/10)`. All the effects impacting these stats have been adjusted as well, so this has no impact on balance in practice. This was done so that attack and defense values ​​are more easily comparable, and to allow more precise number tweaking in the future for effects impacting these stats.
+
 # New Pokemons
 
 - Nacli
@@ -81,8 +88,6 @@
 
 # Gameplay
 
-- Attack speed, move speed and ability cooldowns have all been merged into one statistic: Speed. 1 Speed = 1% attack speed in previous patch. Pokemons now have a different base speed as part of their stats, taken from their base game stats. Many attack and max PP stats have been adjusted to compensate for the difference of base speed.
-- Defense and special defense stats have all been doubled, and damage reduction formula changed to `1/(1+def/20)` instead of `1/(1+def/10)`. This will allow more precise number tweaking in the future.
 - Added regional variants for Unique and Legendary Pokémon. The first regional variant unique is Galarian Farfetch'd, which can be found in Fighting regions. Galarian Moltres, Zapdos and Articuno are now regional variants as well
 - Regional variants are no longer found in maps with common synergies between the variant and the original Pokémon
 - When an effect is considering the strongest Pokémon, or the pokémon with the highest stat, if several Pokémon are equal, it now selects a random Pokémon among those. Before, it was based on board position. This is especially relevant for Ghost curses.
@@ -106,3 +111,4 @@
 - Quick play and custom lobbies no longer guarantee +1 minimum elo gain when top 1. Ranked games still do.
 - Added experience required per level in Wiki > Data
 - ELO decay now starts after 15 days of inactivity instead of 10
+- Removed Scribbles Kecleon's Shop and Synergy wheel, replaced by town encounters
