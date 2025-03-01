@@ -138,13 +138,6 @@ export class DebugScene extends Phaser.Scene {
 
     if (mapName === "town") {
       return new Promise((resolve) => {
-        /*this.load.image("town_tileset", "/assets/tilesets/Town/tileset.png")
-        this.load.tilemapTiledJSON("town", "/assets/tilesets/Town/town.json")
-        preloadMusic(scene, DungeonDetails.town.music)
-        this.load.audio("music_town1", [`assets/musics/ogg/town1.ogg`])
-        this.load.audio("music_town2", [`assets/musics/ogg/town2.ogg`])
-        this.load.audio("music_town3", [`assets/musics/ogg/town3.ogg`])
-*/
         this.map = this.add.tilemap("town")
         const tileset = this.map.addTilesetImage(
           "town_tileset",
