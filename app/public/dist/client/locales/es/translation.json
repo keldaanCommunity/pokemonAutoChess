@@ -1536,7 +1536,7 @@
     "HIDDEN_POWER_K": "Invoca Hitmonlee con un RED_ORB y el máximo de PP",
     "HIDDEN_POWER_L": "El equipo enemigo queda LOCKED por 5 segundos",
     "HIDDEN_POWER_M": "Todo tu equipo obtiene el máximo de PP",
-    "HIDDEN_POWER_N": "Todo tu equipo obtiene 50 SHIELD y usa $t(ability.EXPLOSION)",
+    "HIDDEN_POWER_N": "Todo tu equipo obtiene [50,SP] SHIELD y usa $t(ability.EXPLOSION)",
     "HIDDEN_POWER_O": "Cocina un plato al azar para todos tus Pokémon para la próxima pelea.",
     "HIDDEN_POWER_P": "Invoca 5 Pokémon BUG STAR aleatorios",
     "HIDDEN_POWER_Q": "Inmediatamente termina la pelea con un empate",

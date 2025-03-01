@@ -1594,7 +1594,7 @@
     "HIDDEN_POWER_K": "Summon Hitmonlee with a RED_ORB and max PP.",
     "HIDDEN_POWER_L": "All enemy Pokémon are LOCKED for 5 seconds.",
     "HIDDEN_POWER_M": "All allied Pokémon are restored to max PP.",
-    "HIDDEN_POWER_N": "All allied Pokémon gain 50 SHIELD and cast $t(ability.EXPLOSION).",
+    "HIDDEN_POWER_N": "All allied Pokémon gain [50,SP] SHIELD and cast $t(ability.EXPLOSION).",
     "HIDDEN_POWER_O": "Cook a random dish for all your Pokémon next fight.",
     "HIDDEN_POWER_P": "Summon 5 random STAR BUG Pokémon.",
     "HIDDEN_POWER_Q": "Immediately end the fight with a draw.",

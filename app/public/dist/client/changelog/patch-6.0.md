@@ -54,6 +54,7 @@
 - Rework Fuecoco line: now 3-range with nerfed defense/special defense, ability Torch Song reworked, PP 100 → 60
 - Porygon is now in Ultra category ; adjusted stats ; new passive Conversion: get the highest synergy of your opponent and its effects at the start of the fight.
 - Change Unown-O: OVEN - Cook a random dish for all your pokemons next fight
+- Buff Unown-N: Shield provided to your team now scales with Unown AP
 - Nerf Cryogonal: PP 95 → 100, Freeze dry: remove AP scaling on the special defense part of the damage, explosive damage 40 + 150% spedef → 30 + 100% spe def
 - Nerf Alolan Raichu: back to tier 3, gets the same stats as Raichu but keeps the additional psychic synergy
 - Change HyperSpace Fury: now also reduces special defense evert hit

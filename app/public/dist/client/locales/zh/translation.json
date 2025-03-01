@@ -1594,7 +1594,7 @@
     "HIDDEN_POWER_K": "召唤一只携带RED_ORB且PP已满的飞腿郎。",
     "HIDDEN_POWER_L": "使所有敌方宝可梦陷入LOCKED 5秒。",
     "HIDDEN_POWER_M": "为所有我方宝可梦恢复PP至满。",
-    "HIDDEN_POWER_N": "所有我方宝可梦获得50点SHIELD，并释放$t(ability.EXPLOSION)。",
+    "HIDDEN_POWER_N": "所有我方宝可梦获得[50,SP]点SHIELD，并释放$t(ability.EXPLOSION)。",
     "HIDDEN_POWER_O": "为所有我方宝可梦制作一道随机料理，这些料理会在下一场战斗生效。",
     "HIDDEN_POWER_P": "随机召唤5只星级为STAR的BUG宝可梦。",
     "HIDDEN_POWER_Q": "立刻结束当前战斗，本场视为平局。",
