@@ -2389,7 +2389,7 @@
     "CLOVER_SWEET": "영구적으로 LUCK 5% 증가",
     "BERRY_SWEET": "영구적으로 HP 10 증가",
     "LOVE_SWEET": "영구적으로 DEF 3 증가",
-    "STRAWBERRY_SWEET": '영구적으로 ATK 3 증가",
+    "STRAWBERRY_SWEET": "영구적으로 ATK 3 증가",
     "VANILLA_FLAVOR": "NORMAL FLYING ARTIFICIAL 아군들이 제작. $t(pkm.MILCERY) 에게 사용하여 $t(pkm.ALCREMIE_VANILLA) 로 진화. $t(passive_description.VANILLA_CREAM)",
     "RUBY_FLAVOR": "FIGHTING HUMAN STEEL 아군들이 제작. $t(pkm.MILCERY) 에게 사용하여 $t(pkm.ALCREMIE_RUBY) 로 진화. $t(passive_description.RUBY_CREAM)",
     "MATCHA_FLAVOR": "GRASS FLORA POISON GHOST 아군들이 제작. $t(pkm.MILCERY) 에게 사용하여 $t(pkm.ALCREMIE_MATCHA) 로 진화. $t(passive_description.MATCHA_CREAM)",

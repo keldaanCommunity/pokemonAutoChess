@@ -1874,7 +1874,7 @@ export class Porygon extends Pokemon {
   stars = 1
   evolution = Pkm.PORYGON_2
   hp = 100
-  atk = 9
+  atk = 13
   speed = 54
   def = 12
   speDef = 12
@@ -1892,7 +1892,7 @@ export class Porygon2 extends Pokemon {
   stars = 2
   evolution = Pkm.PORYGON_Z
   hp = 200
-  atk = 17
+  atk = 23
   speed = 54
   def = 16
   speDef = 16
@@ -1909,7 +1909,7 @@ export class PorygonZ extends Pokemon {
   rarity = Rarity.ULTRA
   stars = 3
   hp = 300
-  atk = 32
+  atk = 33
   speed = 54
   def = 16
   speDef = 16
