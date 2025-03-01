@@ -460,7 +460,6 @@ export default class WeatherManager {
   }
 
   setTownDaytime(stageLevel: number) {
-    stageLevel = 20
     // ambient light based on day time
     let red = 255,
       green = 255,
