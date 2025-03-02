@@ -49,6 +49,7 @@ import {
   JoinOrOpenRoomCommand,
   NextTournamentStageCommand,
   OnCreateTournamentCommand,
+  OnDeleteRoomCommand,
   OnJoinCommand,
   OnLeaveCommand,
   OnNewMessageCommand,
@@ -160,6 +161,15 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         })
       }
     )
+
+    this.onMessage(Transfer.DELETE_ROOM, (client, roomId) => {
+      logger.info(Transfer.DELETE_ROOM, this.roomName)
+      try {
+        this.dispatcher.dispatch(new OnDeleteRoomCommand(), { client, roomId })
+      } catch (error) {
+        logger.error(error)
+      }
+    })
 
     this.onMessage(
       Transfer.SELECT_LANGUAGE,

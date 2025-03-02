@@ -1479,3 +1479,32 @@ export class EndTournamentCommand extends Command<
     }
   }
 }
+
+export class OnDeleteRoomCommand extends Command<
+  CustomLobbyRoom,
+  {
+    client: Client
+    roomId: string
+  }
+> {
+  execute({ client, roomId }) {
+    try {
+      if (client) {
+        const user = this.room.users.get(client.auth.uid)
+        if (!user || !user.role || user.role !== Role.ADMIN) {
+          return
+        }
+      }
+
+      const roomToDelete = matchMaker.getRoomById(roomId)
+      if (!roomToDelete) return
+
+      roomToDelete.clients.forEach((cli) => {
+        cli.leave(CloseCodes.ROOM_DELETED)
+      })
+      roomToDelete.disconnect()
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
