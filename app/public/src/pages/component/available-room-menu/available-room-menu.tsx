@@ -8,7 +8,6 @@ import {
   Role,
   Transfer
 } from "../../../../../types"
-import { MAX_PLAYERS_PER_GAME } from "../../../../../types/Config"
 import { GameMode } from "../../../../../types/enum/Game"
 import { block, throttle } from "../../../../../utils/function"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
@@ -30,7 +29,6 @@ export default function AvailableRoomMenu() {
   const lobby: Room<ICustomLobbyState> | undefined = useAppSelector(
     (state) => state.network.lobby
   )
-  const uid: string = useAppSelector((state) => state.network.uid)
   const user = useAppSelector((state) => state.network.profile)
   const [showRoomSelectionMenu, setShowRoomSelectionMenu] = useState<boolean>(false)
 
@@ -41,24 +39,21 @@ export default function AvailableRoomMenu() {
     }
   }, 1000)
 
+  const onRoomAction = (room: RoomAvailable<IPreparationMetadata>, action: string) => {
+    if (action === "join") {
+      requestJoiningExistingRoom(room)
+    } else if (action === "delete" && user?.role === Role.ADMIN) {
+      confirm('Delete room ?') && lobby?.send(Transfer.DELETE_ROOM, room.roomId)
+    }
+  }
+
   const requestJoiningExistingRoom = block(async function join(
     selectedRoom: RoomAvailable<IPreparationMetadata>
   ) {
-    const { whitelist, blacklist, gameStartedAt, password } =
-      selectedRoom.metadata ?? {}
-    if (
-      selectedRoom.clients >= MAX_PLAYERS_PER_GAME ||
-      gameStartedAt ||
-      (whitelist &&
-        whitelist.length > 0 &&
-        whitelist.includes(uid) === false) ||
-      (blacklist && blacklist.length > 0 && blacklist.includes(uid) === true)
-    ) {
-      return
-    }
+    const password = selectedRoom.metadata?.password
 
     if (lobby) {
-      if (password && user && user.role === Role.BASIC) {
+      if (password && user?.role === Role.BASIC) {
         const password = prompt(`This room is private. Enter password`)
         if (selectedRoom.metadata?.password != password)
           return alert(`Wrong password !`)
@@ -80,7 +75,7 @@ export default function AvailableRoomMenu() {
           <ul>
             {preparationRooms.map((r) => (
               <li key={r.roomId}>
-                <RoomItem room={r} click={(room) => requestJoiningExistingRoom(room)} />
+                <RoomItem room={r} click={onRoomAction} />
               </li>
             ))}
           </ul>

@@ -592,7 +592,11 @@ export default class GameRoom extends Room<GameState> {
         const otherHumans = values(this.state.players).filter(
           (p) => !p.isBot && p.id !== client.auth.uid
         )
-        if (hasLeftGameBeforeTheEnd && otherHumans.length >= 1) {
+        if (
+          hasLeftGameBeforeTheEnd &&
+          otherHumans.length >= 1 &&
+          player.role !== Role.ADMIN
+        ) {
           /* if a user leaves a game before the end, 
           they cannot join another in the next 5 minutes */
           this.presence.hset(
