@@ -9,6 +9,7 @@ import {
 } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
 import { pickNRandomIn, pickRandomIn } from "../utils/random"
+import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
 
 export type PVEStage = {
@@ -115,8 +116,33 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.HO_OH, 5, 1]
     ],
     marowakItems: [[Item.COMET_SHARD], [Item.SACRED_ASH]],
+    getRewardsPropositions(player: Player) {
+      const items = values(player.board)
+        .flatMap((p) => values(p.items))
+        .concat(player.items)
+      const nbComponents = items.filter((i) =>
+        ItemComponents.includes(i)
+      ).length
+      if (nbComponents % 2 === 0) {
+        return [
+          ...pickNRandomIn(CraftableNonSynergyItems, 2),
+          ...pickNRandomIn(CraftableItems, 1)
+        ]
+      }
+      return []
+    },
     getRewards(player: Player) {
-      return [pickRandomIn(NonSpecialItemComponents)]
+      const items = values(player.board)
+        .flatMap((p) => values(p.items))
+        .concat(player.items)
+      const nbComponents = items.filter((i) =>
+        ItemComponents.includes(i)
+      ).length
+      if (nbComponents % 2 === 1) {
+        // ensure we dont stay with a single useless component
+        return [pickRandomIn(NonSpecialItemComponents)]
+      }
+      return []
     }
   },
 
