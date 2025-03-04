@@ -110,6 +110,8 @@
 
 # Bugfix
 
+- Fix wild chance not being updated immediately when buying a wild Pokémon
+
 # Misc
 
 - Quick play and custom lobbies no longer guarantee +1 minimum elo gain when top 1. Ranked games still do.
