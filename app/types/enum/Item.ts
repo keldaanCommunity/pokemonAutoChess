@@ -183,7 +183,8 @@ export enum Item {
   CARAMEL_SWIRL_FLAVOR = "CARAMEL_SWIRL_FLAVOR",
   RAINBOW_SWIRL_FLAVOR = "RAINBOW_SWIRL_FLAVOR",
   EGG_FOR_SELL = "EGG_FOR_SELL",
-  GIMMIGHOUL_COIN = "GIMMIGHOUL_COIN"
+  GIMMIGHOUL_COIN = "GIMMIGHOUL_COIN",
+  EXCHANGE_TICKET = "EXCHANGE_TICKET"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -214,7 +215,8 @@ export const SpecialItems: Item[] = [
   Item.CARAMEL_SWIRL_FLAVOR,
   Item.RAINBOW_SWIRL_FLAVOR,
   Item.EGG_FOR_SELL,
-  Item.GIMMIGHOUL_COIN
+  Item.GIMMIGHOUL_COIN,
+  Item.EXCHANGE_TICKET
 ]
 
 export const FishingRods = [

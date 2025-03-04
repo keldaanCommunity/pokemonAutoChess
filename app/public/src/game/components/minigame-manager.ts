@@ -357,13 +357,13 @@ export default class MinigameManager {
       cy = 404
     const kecleon = new PokemonSpecial({
       scene: this.scene,
-      x: encounter === TownEncounters.KECLEON ? cx - 0.5 : 34 * 48,
+      x: encounter === TownEncounters.KECLEON ? cx - 24 : 34 * 48,
       y: encounter === TownEncounters.KECLEON ? cy : 5 * 48 + 4,
       name: Pkm.KECLEON
     })
     const kecleonShiny = new PokemonSpecial({
       scene: this.scene,
-      x: encounter === TownEncounters.KECLEON ? cx + 0.5 : 35 * 48,
+      x: encounter === TownEncounters.KECLEON ? cx + 24 : 35 * 48,
       y: encounter === TownEncounters.KECLEON ? cy : 5 * 48 + 4,
       name: Pkm.KECLEON,
       shiny: true
@@ -418,10 +418,31 @@ export default class MinigameManager {
       name: Pkm.MAROWAK
     })
 
+    const wobbuffet = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.WOBBUFFET ? cx + 24 : 44.5 * 48,
+      y: encounter === TownEncounters.WOBBUFFET ? cy : 18 * 48,
+      name: Pkm.WOBBUFFET
+    })
+
+    const wynaut = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.WOBBUFFET ? cx - 24 : 43.5 * 48,
+      y: encounter === TownEncounters.WOBBUFFET ? cy : 18 * 48,
+      name: Pkm.WYNAUT
+    })
+
+    const spinda = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.SPINDA ? cx : 38 * 48,
+      y: encounter === TownEncounters.SPINDA ? cy : 18 * 48,
+      name: Pkm.SPINDA
+    })
+
     const mareep = new PokemonSpecial({
       scene: this.scene,
-      x: 43 * 48,
-      y: 19.5 * 48,
+      x: 46 * 48,
+      y: 2.5 * 48,
       name: Pkm.MAREEP,
       orientation: Orientation.DOWNLEFT,
       animation: PokemonActionState.EAT
@@ -437,7 +458,10 @@ export default class MinigameManager {
       duskull,
       regirock,
       marowak,
-      mareep
+      mareep,
+      wobbuffet,
+      wynaut,
+      spinda
     )
 
     if (encounter) this.showEncounterDescription(encounter)
@@ -460,21 +484,25 @@ export default class MinigameManager {
   onNpcDialog({ npc, dialog }: { npc: Pkm; dialog: string }) {
     const villager = this.villagers.find((pkm) => pkm.name === npc)
     if (villager) {
-      this.scene.board?.displayText(villager.x, villager.y - 10, t(dialog))
+      if (dialog) {
+        this.scene.board?.displayText(villager.x, villager.y - 10, t(dialog))
+      } else {
+        villager.emoteAnimation()
+      }
     }
   }
 
   showEncounterDescription(encounter: TownEncounter) {
     this.encounterDescription = new GameDialog(
       this.scene,
-      t(`town_encounter_description.${encounter}`)
+      t(`town_encounter_description.${encounter}`),
+      undefined,
+      "town-encounter-description"
     )
-    this.encounterDescription.setPosition(
-      18 * 48 - this.encounterDescription.width / 2,
-      15 * 48 - this.encounterDescription.height / 2
-    )
-
-    this.encounterDescription.removeInteractive()
+    this.encounterDescription
+      .setOrigin(0, 0)
+      .setPosition(15 * 48, 15 * 48)
+      .removeInteractive()
     // add to scene
     this.scene.add.existing(this.encounterDescription)
   }
