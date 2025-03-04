@@ -2217,7 +2217,9 @@
     "RUBY_SWIRL_FLAVOR": "红钻综合调味料",
     "LEMON_FLAVOR": "柠檬调味料",
     "RAINBOW_SWIRL_FLAVOR": "三色综合调味料",
-    "VANILLA_FLAVOR": "香草调味料"
+    "VANILLA_FLAVOR": "香草调味料",
+    "EGG_FOR_SELL": "宝可梦的蛋",
+    "GIMMIGHOUL_COIN": "索财灵的硬币"
   },
   "item_description": {
     "FOSSIL_STONE": "某只远古时代生活着的宝可梦的化石。",
@@ -2398,7 +2400,9 @@
     "SALTED_FLAVOR": "与ROCK、GROUND、FOSSIL宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_SALTED)。$t(passive_description.SALTED_CREAM)",
     "RUBY_SWIRL_FLAVOR": "与FIRE、WILD、FIELD宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_RUBY_SWIRL)。$t(passive_description.RUBY_SWIRL_CREAM)",
     "CARAMEL_SWIRL_FLAVOR": "与DARK、MONSTER、DRAGON宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_CARAMEL_SWIRL)。$t(passive_description.CARAMEL_SWIRL_CREAM)",
-    "RAINBOW_SWIRL_FLAVOR": "与PSYCHIC、AMORPHOUS、BABY、LIGHT宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_RAINBOW_SWIRL)。$t(passive_description.RAINBOW_SWIRL_CREAM)"
+    "RAINBOW_SWIRL_FLAVOR": "与PSYCHIC、AMORPHOUS、BABY、LIGHT宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_RAINBOW_SWIRL)。$t(passive_description.RAINBOW_SWIRL_CREAM)",
+    "EGG_FOR_SELL": "一枚吉利蛋育蛋铺出售的宝可梦的蛋",
+    "GIMMIGHOUL_COIN": "每轮额外获得1 GOLD的收入，且利息上限+1。"
   },
   "passive_description": {
     "NONE": "无被动能力",
@@ -2974,6 +2978,7 @@
   "copyright": "所有权利归The Pokemon Company®所有",
   "stage": "轮次",
   "spectate": "观战",
+  "spectating": "正在观战：{{ name }}",
   "join": "加入",
   "reconnect": "重新连接",
   "participate": "参与",
@@ -2981,10 +2986,10 @@
   "participants": "参与者",
   "brackets": "分组",
   "ranking": "名次",
-  "players_remaining": "名存活玩家",
+  "players_remaining": "存活玩家数",
   "cancel_tournament_participation": "退出本次锦标赛，不再参加",
   "register_tournament_participation": "注册为本场锦标赛的参赛者",
-  "registrations_open_info": "锦标赛正式开赛前一小时将开放注册",
+  "registrations_open_info": "锦标赛正式开赛前一小时将关闭注册",
   "starts_at": "开始时间：",
   "no_elo": "无Elo",
   "enable_elo": "开启Elo",
@@ -3569,7 +3574,22 @@
     "BLOOD_MONEY": "击倒宝可梦时获得1 GOLD，但积攒GOLD不提供利息收入。"
   },
   "town_encounter": {
-    "KECLEON": "变 隐 商 店"
+    "KECLEON": "变隐龙商店",
+    "CHANSEY": "吉利蛋育蛋铺",
+    "ELECTIVIRE": "电击魔兽连接店",
+    "XATU": "天然鸟鉴定所",
+    "KANGASKHAN": "袋兽阿姨仓库",
+    "DUSKULL": "夜巡灵银行",
+    "MAROWAK": "嘎啦嘎啦道场"
+  },
+  "town_encounter_description": {
+    "KECLEON": "变隐龙会以每块10 GOLD的价格出售共鸣赋予石头。",
+    "CHANSEY": "吉利蛋会以每枚10 GOLD的价格出售EGG_FOR_SELL。",
+    "ELECTIVIRE": "电击魔兽会以每件10 GOLD的价格出售人造道具。",
+    "XATU": "天然鸟会以每个10 GOLD的价格出售WONDERBOX。",
+    "KANGASKHAN": "袋兽会以每件10 GOLD的价格出售由两件组件合成的道具。",
+    "DUSKULL": "向夜巡灵支付10 GOLD可以提升你在后续轮次中的收入。",
+    "MAROWAK": "嘎啦嘎啦会提升下一野生轮次的敌方宝可梦强度。"
   },
   "loading_hints": {
     "tab_out": "不要切屏离开！如果这个浏览器窗口不活跃，加载会自动暂停。",
