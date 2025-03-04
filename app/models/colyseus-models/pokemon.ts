@@ -13194,9 +13194,9 @@ export class Obstagoon extends Pokemon {
   hp = 280
   atk = 22
   speed = 55
-  def = 18
-  speDef = 12
-  maxPP = 100
+  def = 16
+  speDef = 10
+  maxPP = 120
   range = 1
   skill = Ability.OBSTRUCT
   attackSprite = AttackSprite.DARK_MELEE

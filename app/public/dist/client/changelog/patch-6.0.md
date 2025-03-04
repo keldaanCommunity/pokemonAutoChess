@@ -84,6 +84,7 @@
 - Nerf Blue Orb: applies the effect every ~~3~~ 4 attacks
 - Nerf Pokerus: effect applies every ~~2~~ 2.5 seconds
 - Buff Swift Wing: 25 → 30% attack speed
+- Buff Comet Shard: 12 → 15 attack
 - Minor nerf to Repeat Ball: legendaries are found afer ~~140~~ 150 rolls
 - Adjusted berries:
     - Aguav: restore ~~to max HP~~ 50% HP
