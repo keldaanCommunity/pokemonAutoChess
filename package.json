@@ -17,10 +17,7 @@
     "url": "https://github.com/keldaanCommunity/pokemonAutoChess/issues"
   },
   "author": "keldaan-ag",
-  "contributors": [
-    "ogus",
-    "sylvainpolletvillard"
-  ],
+  "contributors": ["ogus", "sylvainpolletvillard"],
   "main": "public/dist/server/app/index.js",
   "scripts": {
     "reset": "rimraf -rf node_modules/",
@@ -45,10 +42,10 @@
   },
   "dependencies": {
     "@colyseus/command": "^0.3.1",
-    "@colyseus/monitor": "^0.16.2",
+    "@colyseus/monitor": "^0.16.6",
     "@colyseus/redis-driver": "^0.16.1",
     "@colyseus/redis-presence": "^0.16.1",
-    "@colyseus/schema": "^3.0.15",
+    "@colyseus/schema": "^3.0.17",
     "@colyseus/testing": "^0.16.3",
     "@colyseus/tools": "^0.16.2",
     "@colyseus/ws-transport": "^0.16.3",

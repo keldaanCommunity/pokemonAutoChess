@@ -47,11 +47,11 @@ import GameScene from "./scenes/game-scene"
 import { t } from "i18next"
 import { cc } from "../pages/utils/jsx"
 import { values } from "../../../utils/schemas"
-import { GetCallbackProxy } from "@colyseus/schema"
+import { SchemaCallbackProxy } from "@colyseus/schema"
 
 class GameContainer {
   room: Room<GameState>
-  $: GetCallbackProxy
+  $: SchemaCallbackProxy<GameState>
   div: HTMLDivElement
   game: Phaser.Game | undefined
   player: Player | undefined

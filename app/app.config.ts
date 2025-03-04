@@ -1,7 +1,13 @@
 import path from "path"
 import { monitor } from "@colyseus/monitor"
 import config from "@colyseus/tools"
-import { RedisDriver, RedisPresence, ServerOptions, matchMaker } from "colyseus"
+import {
+  Presence,
+  RedisDriver,
+  RedisPresence,
+  ServerOptions,
+  matchMaker
+} from "colyseus"
 import helmet from "helmet"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
@@ -49,7 +55,9 @@ if (process.env.NODE_APP_INSTANCE) {
   const processNumber = Number(process.env.NODE_APP_INSTANCE || "0")
   const port = (Number(process.env.PORT) || 2567) + processNumber
   gameOptions = {
-    presence: new RedisPresence(process.env.REDIS_URI),
+    presence: new RedisPresence(
+      process.env.REDIS_URI
+    ) as Presence /* TODO: type assertion shouldnt be required, need to report that bug to colyseus */,
     driver: new RedisDriver(process.env.REDIS_URI),
     publicAddress: `${port}.${process.env.SERVER_NAME}`,
     selectProcessIdToCreateRoom: async function (
