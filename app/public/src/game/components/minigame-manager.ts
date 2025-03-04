@@ -8,7 +8,7 @@ import {
   Transfer
 } from "../../../../types"
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
-import { Pkm } from "../../../../types/enum/Pokemon"
+import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import { logger } from "../../../../utils/logger"
 import { clamp } from "../../../../utils/number"
 import {
@@ -24,6 +24,9 @@ import { Portal, SynergySymbol } from "./portal"
 import { DEPTH } from "../depths"
 import { TownEncounter, TownEncounters } from "../../../../core/town-encounters"
 import { GameDialog } from "./game-dialog"
+import { ILeaderboardInfo } from "../../../../types/interfaces/LeaderboardInfo"
+import { getPokemonConfigFromAvatar } from "../../../../utils/avatar"
+import { getRankLabel } from "../../../../types/strings/Strings"
 
 export default class MinigameManager {
   pokemons: Map<string, PokemonAvatar>
@@ -352,7 +355,7 @@ export default class MinigameManager {
     )
   }
 
-  addVillagers(encounter: TownEncounter | null) {
+  addVillagers(encounter: TownEncounter | null, podium: ILeaderboardInfo[]) {
     const cx = 964,
       cy = 404
     const kecleon = new PokemonSpecial({
@@ -448,6 +451,23 @@ export default class MinigameManager {
       animation: PokemonActionState.EAT
     })
 
+    const podiumPokemons = podium.map((p, rank) => {
+      const config = getPokemonConfigFromAvatar(p.avatar)
+      const champion = new PokemonSpecial({
+        scene: this.scene,
+        x: 6.5 * 48 + [0, -64, +64][rank],
+        y: 12.5 * 48,
+        name: PkmByIndex[config.index],
+        shiny: config.shiny,
+        orientation: Orientation.DOWN,
+        animation: PokemonActionState.IDLE,
+        dialog: p.name,
+        dialogTitle: getRankLabel(rank + 1)
+      })
+      champion.sprite.setDepth(DEPTH.POKEMON + (2 - rank)) //ensure top 1 is on top
+      return champion
+    })
+
     this.villagers.push(
       kecleon,
       kecleonShiny,
@@ -461,7 +481,8 @@ export default class MinigameManager {
       mareep,
       wobbuffet,
       wynaut,
-      spinda
+      spinda,
+      ...podiumPokemons
     )
 
     if (encounter) this.showEncounterDescription(encounter)

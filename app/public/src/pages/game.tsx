@@ -60,7 +60,8 @@ import {
   setStreak,
   setSynergies,
   setWeather,
-  setSpecialGameRule
+  setSpecialGameRule,
+  setPodium
 } from "../stores/GameStore"
 import { joinGame, logIn, setProfile } from "../stores/NetworkStore"
 import { getAvatarString } from "../../../utils/avatar"
@@ -296,6 +297,18 @@ export default function Game() {
     window.addEventListener("popstate", confirmLeave)
     return () => {
       window.removeEventListener("popstate", confirmLeave)
+    }
+  }, [])
+
+  useEffect(() => {
+    try {
+      fetch("/leaderboards")
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch(setPodium(data.leaderboard.slice(0, 3)))
+        })
+    } catch (e) {
+      console.error("error fetching leaderboard", e)
     }
   }, [])
 
