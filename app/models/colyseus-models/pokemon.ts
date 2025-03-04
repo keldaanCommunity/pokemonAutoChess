@@ -10504,7 +10504,7 @@ export class Sandshrew extends Pokemon {
   atk = 5
   speed = 46
   def = 6
-  speDef = 6
+  speDef = 3
   maxPP = 80
   range = 1
   skill = Ability.ROLLOUT
@@ -10520,7 +10520,7 @@ export class Sandslash extends Pokemon {
   atk = 13
   speed = 46
   def = 10
-  speDef = 10
+  speDef = 5
   maxPP = 80
   range = 1
   skill = Ability.ROLLOUT
@@ -10537,7 +10537,7 @@ export class AlolanSandshrew extends Pokemon {
   atk = 5
   speed = 46
   def = 6
-  speDef = 6
+  speDef = 3
   maxPP = 80
   range = 1
   skill = Ability.ICE_BALL
@@ -10554,7 +10554,7 @@ export class AlolanSandslash extends Pokemon {
   atk = 13
   speed = 46
   def = 10
-  speDef = 10
+  speDef = 5
   maxPP = 80
   range = 1
   skill = Ability.ICE_BALL
