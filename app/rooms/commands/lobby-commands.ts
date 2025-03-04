@@ -415,6 +415,7 @@ export class ChangeNameCommand extends Command<
       const user = this.room.users.get(client.auth.uid)
       if (!user) return
       if (USERNAME_REGEXP.test(name)) {
+        logger.info(`${client.auth.displayName} changed name to ${name}`)
         user.displayName = name
         const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
         if (mongoUser) {
