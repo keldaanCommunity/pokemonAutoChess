@@ -2219,7 +2219,8 @@
     "RAINBOW_SWIRL_FLAVOR": "Rainbow Swirl Flavor",
     "VANILLA_FLAVOR": "Vanilla Flavor",
     "EGG_FOR_SELL": "Pokémon Egg",
-    "GIMMIGHOUL_COIN": "Gimmighoul Coin"
+    "GIMMIGHOUL_COIN": "Gimmighoul Coin",
+    "EXCHANGE_TICKET": "Exchange Ticket"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -2402,7 +2403,8 @@
     "CARAMEL_SWIRL_FLAVOR": "Baked with DARK MONSTER DRAGON allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_CARAMEL_SWIRL). $t(passive_description.CARAMEL_SWIRL_CREAM)",
     "RAINBOW_SWIRL_FLAVOR": "Baked with PSYCHIC AMORPHOUS BABY LIGHT allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_RAINBOW_SWIRL). $t(passive_description.RAINBOW_SWIRL_CREAM)",
     "EGG_FOR_SELL": "An Egg sold at Chansey's Daycare",
-    "GIMMIGHOUL_COIN": "Get 1 additional GOLD income each round, and increase max interests by 1."
+    "GIMMIGHOUL_COIN": "Get 1 additional GOLD income each round, and increase max interests by 1.",
+    "EXCHANGE_TICKET": "Exchange an item component or a crafted item for another random one. Single use."
   },
   "passive_description": {
     "NONE": "No passive",
@@ -3582,7 +3584,8 @@
     "XATU": "Xatu Appraisal",
     "KANGASKHAN": "Kangaskhan Storage",
     "DUSKULL": "Duskull Bank",
-    "MAROWAK": "Marowak Dojo"
+    "MAROWAK": "Marowak Dojo",
+    "WOBBUFFET": "Wobbuffet's Recycle Shop"
   },
   "town_encounter_description": {
     "KECLEON": "Kecleon sells Synergy stones for 10 GOLD",
@@ -3591,7 +3594,9 @@
     "XATU": "Xatu sells WONDERBOX for 10 GOLD",
     "KANGASKHAN": "Kangashkhan sells complete craftable items for 10 GOLD",
     "DUSKULL": "Duskull increases your long term money income for 10 GOLD",
-    "MAROWAK": "Marowak makes the next PVE fight more difficult"
+    "MAROWAK": "Marowak makes the next PVE fight more difficult",
+    "WOBBUFFET": "Wobbuffet let you recycle an unused item component or crafted item",
+    "SPINDA": "Spinda changes the direction of rotation of the carousel randomly"
   },
   "loading_hints": {
     "tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",

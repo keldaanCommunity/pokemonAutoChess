@@ -32,10 +32,10 @@ import {
   ItemComponents,
   SynergyStones
 } from "../../types/enum/Item"
-import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { clamp, min } from "../../utils/number"
 import {
+  chance,
   pickNRandomIn,
   pickRandomIn,
   randomBetween,
@@ -44,7 +44,6 @@ import {
 } from "../../utils/random"
 import { keys, values } from "../../utils/schemas"
 import {
-  TownEncounter,
   TownEncounters,
   TownEncountersByStage,
   TownEncounterSellPrice
@@ -69,6 +68,8 @@ export class MiniGame {
   engine: Engine
   centerX: number = 325
   centerY: number = 250
+  timeElapsed: number = 0
+  rotationDirection: number = 1
 
   constructor(room: GameRoom) {
     this.engine = Engine.create({ gravity: { x: 0, y: 0 } })
@@ -95,7 +96,7 @@ export class MiniGame {
         if (item.avatarId === "") {
           const itemBody = this.bodies.get(item.id)
           if (itemBody) {
-            const t = this.engine.timing.timestamp * ITEM_ROTATION_SPEED
+            const t = this.timeElapsed * ITEM_ROTATION_SPEED
             const x =
               this.centerX +
               Math.cos(t + (Math.PI * 2 * item.index) / this.items!.size) *
@@ -113,7 +114,7 @@ export class MiniGame {
         if (portal.avatarId === "") {
           const portalBody = this.bodies.get(portal.id)
           if (portalBody) {
-            const t = this.engine.timing.timestamp * PORTAL_ROTATION_SPEED
+            const t = this.timeElapsed * PORTAL_ROTATION_SPEED
             const x =
               this.centerX +
               Math.cos(t + (Math.PI * 2 * portal.index) / this.portals!.size) *
@@ -229,6 +230,7 @@ export class MiniGame {
 
   initialize(state: GameState, room: GameRoom) {
     const { players, stageLevel } = state
+    this.timeElapsed = 0
     this.alivePlayers = new Array<Player>()
     players.forEach((p) => {
       if (p.alive) {
@@ -286,14 +288,13 @@ export class MiniGame {
 
     if (stageLevel in TownEncountersByStage) {
       let encounter = randomWeighted(TownEncountersByStage[stageLevel])
-      if (state.townEncounter !== encounter) {
+      if (state.townEncounter === encounter) {
         encounter = null // prevent getting the same encounter twice in a row
       }
       if (
         state.stageLevel === ItemCarouselStages[2] &&
         state.nbComponentsFromCarousel % 2 === 0
       ) {
-        state.nbComponentsFromCarousel++
         encounter = null // ensure we have an even number of components at stage 20 to not stay with 1 component
       }
       state.townEncounter = encounter ?? null
@@ -310,13 +311,24 @@ export class MiniGame {
     } else if (ItemCarouselStages.includes(stageLevel)) {
       this.initializeItemsCarousel(state)
     }
+
+    if (state.townEncounter === TownEncounters.SPINDA) {
+      this.rotationDirection = chance(1 / 2) ? 1.5 : -1.5
+      for (let i = 0; i < randomBetween(1, 3); i++) {
+        setTimeout(
+          () => {
+            room.broadcast(Transfer.NPC_DIALOG, {
+              npc: TownEncounters.SPINDA
+            })
+            this.rotationDirection *= -1
+          },
+          randomBetween(5000, 14000)
+        )
+      }
+    }
   }
 
   initializeItemsCarousel(state: GameState) {
-    if (!state.townEncounter && state.stageLevel < ItemCarouselStages[2]) {
-      state.nbComponentsFromCarousel++
-    }
-
     const items = this.pickRandomItems(state)
 
     for (let j = 0; j < items.length; j++) {
@@ -351,6 +363,7 @@ export class MiniGame {
   }
 
   update(dt: number) {
+    this.timeElapsed += dt * this.rotationDirection
     Engine.update(this.engine, dt)
     this.avatars?.forEach((a) => {
       if (a.timer > 0) {
@@ -383,15 +396,22 @@ export class MiniGame {
         const portal = this.portals.get(id)!
         portal.x = body.position.x
         portal.y = body.position.y
-        const t = this.engine.timing.timestamp * SYMBOL_ROTATION_SPEED
         const symbols = this.symbolsByPortal.get(portal.id) ?? []
         symbols.forEach((symbol) => {
           symbol.x =
             portal.x +
-            Math.cos(t + (Math.PI * 2 * symbol.index) / symbols.length) * 25
+            Math.cos(
+              this.timeElapsed * SYMBOL_ROTATION_SPEED +
+                (Math.PI * 2 * symbol.index) / symbols.length
+            ) *
+              25
           symbol.y =
             portal.y +
-            Math.sin(t + (Math.PI * 2 * symbol.index) / symbols.length) * 25
+            Math.sin(
+              this.timeElapsed * SYMBOL_ROTATION_SPEED +
+                (Math.PI * 2 * symbol.index) / symbols.length
+            ) *
+              25
         })
       }
     })
@@ -446,6 +466,12 @@ export class MiniGame {
       maxCopiesPerItem = 99
     }
 
+    if (encounter === TownEncounters.WOBBUFFET) {
+      itemsSet = [Item.EXCHANGE_TICKET]
+      nbItemsToPick = this.alivePlayers.length
+      maxCopiesPerItem = 99
+    }
+
     for (let j = 0; j < nbItemsToPick; j++) {
       let item,
         count,
@@ -464,6 +490,10 @@ export class MiniGame {
         const index = items.findIndex((i) => SynergyStones.includes(i))
         items[index] = pickRandomIn(CraftableNonSynergyItems)
       }
+    }
+
+    if (itemsSet === ItemComponents) {
+      state.nbComponentsFromCarousel++
     }
 
     return items

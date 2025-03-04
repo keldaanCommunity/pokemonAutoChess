@@ -14,6 +14,7 @@ import { SpecialGameRule } from "../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
 import { getGameScene } from "../pages/game"
+import { ILeaderboardInfo } from "../../../types/interfaces/LeaderboardInfo"
 
 export interface GameStateStore {
   afterGameId: string
@@ -43,6 +44,7 @@ export interface GameStateStore {
   redDpsMeter: IDps[]
   pokemonCollection: MapSchema<IPokemonConfig>
   additionalPokemons: Pkm[]
+  podium: ILeaderboardInfo[]
 }
 
 const initialState: GameStateStore = {
@@ -72,7 +74,8 @@ const initialState: GameStateStore = {
   redDpsMeter: new Array<IDps>(),
   pokemonCollection: new MapSchema<IPokemonConfig>(),
   additionalPokemons: new Array<Pkm>(),
-  specialGameRule: null
+  specialGameRule: null,
+  podium: new Array<ILeaderboardInfo>()
 }
 
 export const gameSlice = createSlice({
@@ -269,6 +272,11 @@ export const gameSlice = createSlice({
     setPokemonCollection: (state, action: PayloadAction<PokemonCollection>) => {
       state.pokemonCollection = action.payload
     },
+
+    setPodium(state, action: PayloadAction<ILeaderboardInfo[]>) {
+      state.podium = action.payload
+    },
+
     leaveGame: () => initialState
   }
 })
@@ -303,7 +311,8 @@ export const {
   setShopLocked,
   changePlayer,
   setShop,
-  setItemsProposition
+  setItemsProposition,
+  setPodium
 } = gameSlice.actions
 
 export default gameSlice.reducer

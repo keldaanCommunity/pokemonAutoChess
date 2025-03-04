@@ -80,6 +80,8 @@
 # Changes to Items
 
 - New item category: Dishes ; Dishes are cooked by Gourmet chefs to give strong buffs to a Pokémon in the next fight. If not used by the end of the timer, the cook or another random ally will eat it.
+- New item: Gimmighoul Coin: gain 1 more gold per round as passive income, and increase max interests by 1
+- New item: Exchange ticket: Exchange an item component or a crafted item for another random one.
 - More than 20 dishes have been added to the game
 - Nerf Blue Orb: applies the effect every ~~3~~ 4 attacks
 - Nerf Pokerus: effect applies every ~~2~~ 2.5 seconds

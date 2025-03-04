@@ -6379,7 +6379,7 @@ export const AnimationConfig: {
   [Pkm.SPINDA]: {
     attack: AnimationType.Slam,
     ability: AnimationType.Twirl,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Twirl
   },
   [Pkm.BALTOY]: {
     attack: AnimationType.Shoot,
