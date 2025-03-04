@@ -20,18 +20,15 @@ export default class LobbyState extends Schema {
     const id = nanoid()
     const time = Date.now()
     const message = new Message(id, payload, authorId, author, avatar, time)
-    chatV2
-      .create({
-        id: id,
-        payload: payload,
-        authorId: authorId,
-        author: author,
-        avatar: avatar,
-        time: time
-      })
-      .then(() => {
-        this.messages.push(message)
-      })
+    this.messages.push(message)
+    chatV2.create({
+      id: id,
+      payload: payload,
+      authorId: authorId,
+      author: author,
+      avatar: avatar,
+      time: time
+    })
   }
 
   removeMessage(id: string) {
