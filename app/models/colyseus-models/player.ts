@@ -36,7 +36,7 @@ import { pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { Effects } from "../effects"
 import { createRandomEgg } from "../../core/eggs"
-import type { IPokemonConfig } from "../mongo-models/user-metadata"
+import type { IPokemonCollectionItem } from "../mongo-models/user-metadata"
 import PokemonFactory from "../pokemon-factory"
 import {
   PRECOMPUTED_REGIONAL_MONS,
@@ -47,8 +47,8 @@ import { getRegularsTier1 } from "../shop"
 import ExperienceManager from "./experience-manager"
 import HistoryItem from "./history-item"
 import { Pokemon, PokemonClasses } from "./pokemon"
-import PokemonCollection from "./pokemon-collection"
-import PokemonConfig from "./pokemon-config"
+import { PokemonCollection } from "./pokemon-collection"
+import { PokemonCustoms } from "./pokemon-customs"
 import Synergies, { computeSynergies } from "./synergies"
 
 export default class Player extends Schema implements IPlayer {
@@ -78,7 +78,8 @@ export default class Player extends Schema implements IPlayer {
   @type("uint16") elo: number
   @type("boolean") alive = true
   @type([HistoryItem]) history = new ArraySchema<HistoryItem>()
-  @type({ map: PokemonConfig }) pokemonCollection: PokemonCollection
+  @type({ map: "uint8" }) pokemonCustoms: PokemonCustoms =
+    new MapSchema<number>()
   @type("string") title: Title | ""
   @type("string") role: Role
   @type(["string"]) itemsProposition = new ArraySchema<Item>()
@@ -127,7 +128,7 @@ export default class Player extends Schema implements IPlayer {
     avatar: string,
     isBot: boolean,
     rank: number,
-    pokemonCollection: Map<string, IPokemonConfig>,
+    pokemonCollection: Map<string, IPokemonCollectionItem>,
     title: Title | "",
     role: Role,
     state: GameState
@@ -142,7 +143,7 @@ export default class Player extends Schema implements IPlayer {
     this.rank = rank
     this.title = title
     this.role = role
-    this.pokemonCollection = new PokemonCollection(pokemonCollection)
+    this.pokemonCustoms = new PokemonCustoms(pokemonCollection)
     this.lightX = state.lightX
     this.lightY = state.lightY
     this.map = "town"
@@ -210,8 +211,8 @@ export default class Player extends Schema implements IPlayer {
         avatar = createRandomEgg(this, shiny)
       } else {
         avatar = PokemonFactory.createPokemonFromName(this.firstPartner, {
-          selectedEmotion: emotion,
-          selectedShiny: shiny
+          emotion,
+          shiny
         })
       }
 

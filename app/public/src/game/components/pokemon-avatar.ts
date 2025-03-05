@@ -36,7 +36,7 @@ export default class PokemonAvatar extends PokemonSprite {
       x,
       y,
       PokemonFactory.createPokemonFromName(pokemon.name, {
-        selectedShiny: pokemon.shiny
+        shiny: pokemon.shiny
       }),
       playerId,
       false,

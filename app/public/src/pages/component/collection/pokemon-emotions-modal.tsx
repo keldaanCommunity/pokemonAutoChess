@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from "react"
 import { useTranslation } from "react-i18next"
-import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
+import { IPokemonCollectionItem } from "../../../../../models/mongo-models/user-metadata"
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed/precomputed-emotions"
 import { Emotion } from "../../../../../types"
 import {
@@ -32,7 +32,7 @@ export default function PokemonEmotionsModal(props: {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const pokemonCollection = useAppSelector(
-    (state) => state.network.profile?.pokemonCollection ?? new Map<string, IPokemonConfig>()
+    (state) => state.network.profile?.pokemonCollection ?? new Map<string, IPokemonCollectionItem>()
   )
   const user = useAppSelector((state) => state.network.profile)
 

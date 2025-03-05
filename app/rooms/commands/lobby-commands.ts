@@ -14,7 +14,7 @@ import {
 import { BotV2 } from "../../models/mongo-models/bot-v2"
 import { Tournament } from "../../models/mongo-models/tournament"
 import UserMetadata, {
-  IPokemonConfig,
+  IPokemonCollectionItem,
   IUserMetadata
 } from "../../models/mongo-models/user-metadata"
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../models/precomputed/precomputed-emotions"
@@ -32,7 +32,7 @@ import {
   Emotion,
   IPlayer,
   ISuggestionUser,
-  PkmWithConfig,
+  PkmWithCustom,
   Role,
   Title,
   Transfer,
@@ -96,7 +96,7 @@ export class OnJoinCommand extends Command<
           displayName: client.auth.displayName,
           avatar: starterAvatar,
           booster: starterBoosters,
-          pokemonCollection: new Map<string, IPokemonConfig>()
+          pokemonCollection: new Map<string, IPokemonCollectionItem>()
         })
         const newUser: IUserMetadata = {
           uid: client.auth.uid,
@@ -107,7 +107,7 @@ export class OnJoinCommand extends Command<
           exp: 0,
           level: 0,
           elo: 1000,
-          pokemonCollection: new Map<string, IPokemonConfig>(),
+          pokemonCollection: new Map<string, IPokemonCollectionItem>(),
           booster: starterBoosters,
           titles: [],
           title: "",
@@ -306,7 +306,7 @@ export class OpenBoosterCommand extends Command<
       if (!mongoUser) return
 
       const NB_PER_BOOSTER = 10
-      const boosterContent: PkmWithConfig[] = []
+      const boosterContent: PkmWithCustom[] = []
 
       for (let i = 0; i < NB_PER_BOOSTER; i++) {
         const guaranteedUnique = i === NB_PER_BOOSTER - 1
@@ -344,7 +344,7 @@ export class OpenBoosterCommand extends Command<
         if (pokemonConfig) {
           pokemonConfig.dust = mongoPokemonConfig.dust
         } else {
-          const newConfig: IPokemonConfig = {
+          const newConfig: IPokemonCollectionItem = {
             dust: mongoPokemonConfig.dust,
             id: mongoPokemonConfig.id,
             emotions: mongoPokemonConfig.emotions.map((e) => e),
@@ -364,7 +364,7 @@ export class OpenBoosterCommand extends Command<
   }
 }
 
-function pickRandomPokemonBooster(guarantedUnique: boolean): PkmWithConfig {
+function pickRandomPokemonBooster(guarantedUnique: boolean): PkmWithCustom {
   let pkm = Pkm.MAGIKARP,
     emotion = Emotion.NORMAL
   const shiny = chance(0.03)

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react"
 import { Tooltip } from "react-tooltip"
 import { CountEvolutionRule } from "../../../../../core/evolution-rules"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
-import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
+import { IPokemonCollectionItem } from "../../../../../models/mongo-models/user-metadata"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getBuyPrice } from "../../../../../models/shop"
 import { RarityColor } from "../../../../../types/Config"
@@ -86,7 +86,7 @@ export default function GamePokemonPortrait(props: {
     return <div className="game-pokemon-portrait my-box empty" />
   }
 
-  const pokemonConfig: IPokemonConfig | undefined = pokemonCollection.get(
+  const pokemonConfig: IPokemonCollectionItem | undefined = pokemonCollection.get(
     pokemon.index
   )
 

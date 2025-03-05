@@ -1,7 +1,7 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
+import { IPokemonCollectionItem } from "../../../../../models/mongo-models/user-metadata"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { RarityColor } from "../../../../../types/Config"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
@@ -64,7 +64,7 @@ export function GameAdditionalPokemons() {
           {additionalPokemons.map((p, index) => {
             const pokemon = getPokemonData(p)
             const rarityColor = RarityColor[pokemon.rarity]
-            const pokemonConfig: IPokemonConfig | undefined =
+            const pokemonConfig: IPokemonCollectionItem | undefined =
               pokemonCollection.get(pokemon.index)
 
             return (

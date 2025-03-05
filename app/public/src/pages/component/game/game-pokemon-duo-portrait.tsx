@@ -1,6 +1,6 @@
 import React from "react"
 import { Tooltip } from "react-tooltip"
-import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
+import { IPokemonCollectionItem } from "../../../../../models/mongo-models/user-metadata"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { RarityColor } from "../../../../../types/Config"
 import { PkmDuo, PkmDuos } from "../../../../../types/enum/Pokemon"
@@ -24,7 +24,7 @@ export default function GamePokemonDuoPortrait(props: {
   const pokemonCollection = useAppSelector(
     (state) => state.game.pokemonCollection
   )
-  const duoConfig: (IPokemonConfig | undefined)[] = duo.map((p) =>
+  const duoConfig: (IPokemonCollectionItem | undefined)[] = duo.map((p) =>
     pokemonCollection?.get(p.index)
   )
 

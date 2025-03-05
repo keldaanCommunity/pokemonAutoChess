@@ -9,7 +9,7 @@ import HistoryItem from "../models/colyseus-models/history-item"
 import Message from "../models/colyseus-models/message"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
-import PokemonCollection from "../models/colyseus-models/pokemon-collection"
+import { PokemonCustoms } from "../models/colyseus-models/pokemon-customs"
 import Status from "../models/colyseus-models/status"
 import Synergies from "../models/colyseus-models/synergies"
 import { TournamentSchema } from "../models/colyseus-models/tournament"
@@ -46,7 +46,8 @@ export const CDN_URL =
 
 export const USERNAME_REGEXP = /^(\p{Letter}|[0-9]|\.|-|_){3,24}$/u
 
-export type PkmWithConfig = { name: Pkm; shiny?: boolean; emotion?: Emotion }
+export type PkmCustom = { shiny?: boolean; emotion?: Emotion }
+export type PkmWithCustom = { name: Pkm } & PkmCustom
 
 export enum Role {
   ADMIN = "ADMIN",
@@ -357,7 +358,7 @@ export interface IPlayer {
   elo: number
   alive: boolean
   history: ArraySchema<HistoryItem>
-  pokemonCollection: PokemonCollection
+  pokemonCustoms: PokemonCustoms
   title: Title | ""
   role: Role
   itemsProposition: ArraySchema<Item>

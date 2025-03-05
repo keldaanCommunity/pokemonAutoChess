@@ -13,9 +13,7 @@ export function createRandomEgg(player: Player, shiny: boolean): Egg {
   const hatchList = PRECOMPUTED_POKEMONS_PER_RARITY.HATCH.filter(
     (p) => getPokemonData(p).stars === 1
   )
-  const egg = PokemonFactory.createPokemonFromName(Pkm.EGG, {
-    selectedShiny: shiny
-  })
+  const egg = PokemonFactory.createPokemonFromName(Pkm.EGG, { shiny })
   egg.action = PokemonActionState.SLEEP
 
   if (player) {

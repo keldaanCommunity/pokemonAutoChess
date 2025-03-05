@@ -2,9 +2,9 @@ import { ArraySchema, MapSchema } from "@colyseus/schema"
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import Simulation from "../../../core/simulation"
 import ExperienceManager from "../../../models/colyseus-models/experience-manager"
-import PokemonCollection from "../../../models/colyseus-models/pokemon-collection"
+import { PokemonCollection } from "../../../models/colyseus-models/pokemon-collection"
 import Synergies from "../../../models/colyseus-models/synergies"
-import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
+import { IPokemonCollectionItem } from "../../../models/mongo-models/user-metadata"
 import { IDps, IExperienceManager, IPlayer, ISimulation } from "../../../types"
 import { StageDuration } from "../../../types/Config"
 import { GamePhaseState, Team } from "../../../types/enum/Game"
@@ -43,7 +43,7 @@ export interface GameStateStore {
   weather: Weather
   blueDpsMeter: IDps[]
   redDpsMeter: IDps[]
-  pokemonCollection: MapSchema<IPokemonConfig>
+  pokemonCollection: MapSchema<IPokemonCollectionItem>
   additionalPokemons: Pkm[]
   podium: ILeaderboardInfo[]
 }
@@ -73,7 +73,7 @@ const initialState: GameStateStore = {
   currentPlayerSynergies: new Array<[Synergy, number]>(),
   blueDpsMeter: new Array<IDps>(),
   redDpsMeter: new Array<IDps>(),
-  pokemonCollection: new MapSchema<IPokemonConfig>(),
+  pokemonCollection: new MapSchema<IPokemonCollectionItem>(),
   additionalPokemons: new Array<Pkm>(),
   specialGameRule: null,
   podium: new Array<ILeaderboardInfo>()

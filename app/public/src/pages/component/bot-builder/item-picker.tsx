@@ -2,7 +2,7 @@ import { t } from "i18next"
 import React, { useState } from "react"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { Tooltip } from "react-tooltip"
-import { PkmWithConfig } from "../../../../../types"
+import { PkmWithCustom } from "../../../../../types"
 import {
   ArtificialItems,
   ItemComponents,
@@ -18,8 +18,8 @@ import { cc } from "../../utils/jsx"
 import { usePreferences } from "../../../preferences"
 
 export default function ItemPicker(props: {
-  selected: PkmWithConfig | Item
-  selectEntity: React.Dispatch<React.SetStateAction<PkmWithConfig | Item>>
+  selected: PkmWithCustom | Item
+  selectEntity: React.Dispatch<React.SetStateAction<PkmWithCustom | Item>>
 }) {
   const [{ antialiasing }] = usePreferences()
   const [itemHovered, setItemHovered] = useState<Item>()

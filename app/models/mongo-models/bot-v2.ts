@@ -1,10 +1,10 @@
 import { Schema, model } from "mongoose"
 import { nanoid } from "nanoid"
-import { Emotion, PkmWithConfig } from "../../types"
+import { Emotion, PkmWithCustom } from "../../types"
 import { Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
 
-export interface IDetailledPokemon extends PkmWithConfig {
+export interface IDetailledPokemon extends PkmWithCustom {
   name: Pkm
   x: number
   y: number

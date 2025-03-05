@@ -1,7 +1,7 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
-import { PkmWithConfig } from "../../../../../types"
+import { PkmWithCustom } from "../../../../../types"
 import { RarityColor } from "../../../../../types/Config"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
@@ -9,7 +9,7 @@ import { cc } from "../../utils/jsx"
 import "./booster-card.css"
 import { usePreferences } from "../../../preferences"
 
-export function BoosterCard(props: { pkm: PkmWithConfig; shards: number }) {
+export function BoosterCard(props: { pkm: PkmWithCustom; shards: number }) {
   const [{ antialiasing }] = usePreferences()
   const { t } = useTranslation()
   const pkm = props.pkm.name
