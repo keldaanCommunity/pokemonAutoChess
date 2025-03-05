@@ -71,6 +71,7 @@
 - Rework Glaive Rush (Frigibax): improves targeting when destination cell is occupied, deal special damage instead of physical, added animation
 - Smeargle is now 3-range ; no change to stats, it can still be played on every line
 - Nerfed Obstruct (Obstagoon): Protect duration 1/2/4 → 1/2/3 seconds
+- Nerfed Celebi HP 300 → 250
 
 # Changes to Synergies
 

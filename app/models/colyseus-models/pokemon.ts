@@ -6723,8 +6723,8 @@ export class Celebi extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 300
-  atk = 27
+  hp = 250
+  atk = 25
   speed = 57
   def = 10
   speDef = 10
