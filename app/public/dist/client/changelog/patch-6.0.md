@@ -31,7 +31,7 @@
 - Sinistea line is now Ghost/Artificial/Gourmet ; nerfed HP & defense
 - Vanillite line is now Ice/Amorphous/Gourmet
 - Bounsweet line is now Grass/Fighting/Gourmet ; nerfed HP
-- Combee line is now Bug/Flora/Gourmet
+- Combee line is now Bug/Flora/Gourmet ; nerfed HP
 - Munchlax is now Normal/Baby/Gourmet
 - Snorlax is now Normal/Gourmet/Monster
 - Munchlax line passive changed: now also gain permanent HP by eating dishes and cooking

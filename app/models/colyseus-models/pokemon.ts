@@ -11787,11 +11787,11 @@ export class Combee extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.VESPIQUEEN
-  hp = 120
+  hp = 80
   atk = 10
   speed = 38
-  def = 6
-  speDef = 6
+  def = 5
+  speDef = 5
   maxPP = 90
   range = 1
   skill = Ability.HEAL_ORDER
@@ -11803,8 +11803,8 @@ export class Vespiqueen extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLORA, Synergy.GOURMET])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 280
-  atk = 22
+  hp = 190
+  atk = 20
   speed = 38
   def = 8
   speDef = 8
