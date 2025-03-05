@@ -145,7 +145,8 @@ export default class Player extends Schema implements IPlayer {
     this.title = title
     this.role = role
     this.pokemonCustoms = new PokemonCustoms(pokemonCollection)
-    const avatarInCollection = pokemonCollection.get(PkmIndex[avatar])
+    const avatarConfig = getPokemonConfigFromAvatar(avatar)
+    const avatarInCollection = pokemonCollection.get(avatarConfig.index)
     this.emotesUnlocked = (
       (avatarInCollection?.selectedShiny
         ? avatarInCollection?.shinyEmotions
