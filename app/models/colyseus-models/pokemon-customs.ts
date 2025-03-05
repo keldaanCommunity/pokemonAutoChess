@@ -50,10 +50,10 @@ export class PokemonCustoms extends MapSchema<number> {
 
 export function getPkmWithCustom(
   index: string,
-  customs: PokemonCustoms
+  customs?: PokemonCustoms
 ): PkmWithCustom {
-  const shiny = (customs.get(index.toString()) ?? 0) >= 0b10000000
-  const emotionIndex = (customs.get(index.toString()) ?? 0) & 0b01111111
+  const shiny = (customs?.get(index.toString()) ?? 0) >= 0b10000000
+  const emotionIndex = (customs?.get(index.toString()) ?? 0) & 0b01111111
   return {
     name: PkmIndex[index],
     shiny,

@@ -22,6 +22,7 @@ import {
   PkmByIndex,
   PkmDuos,
   PkmFamily,
+  PkmIndex,
   type PkmProposition,
   PkmRegionalVariants
 } from "../../types/enum/Pokemon"
@@ -47,7 +48,6 @@ import { getRegularsTier1 } from "../shop"
 import ExperienceManager from "./experience-manager"
 import HistoryItem from "./history-item"
 import { Pokemon, PokemonClasses } from "./pokemon"
-import { PokemonCollection } from "./pokemon-collection"
 import { PokemonCustoms } from "./pokemon-customs"
 import Synergies, { computeSynergies } from "./synergies"
 
@@ -80,6 +80,7 @@ export default class Player extends Schema implements IPlayer {
   @type([HistoryItem]) history = new ArraySchema<HistoryItem>()
   @type({ map: "uint8" }) pokemonCustoms: PokemonCustoms =
     new MapSchema<number>()
+  @type("string") emotesUnlocked = ""
   @type("string") title: Title | ""
   @type("string") role: Role
   @type(["string"]) itemsProposition = new ArraySchema<Item>()
@@ -144,6 +145,13 @@ export default class Player extends Schema implements IPlayer {
     this.title = title
     this.role = role
     this.pokemonCustoms = new PokemonCustoms(pokemonCollection)
+    const avatarInCollection = pokemonCollection.get(PkmIndex[avatar])
+    this.emotesUnlocked = (
+      (avatarInCollection?.selectedShiny
+        ? avatarInCollection?.shinyEmotions
+        : avatarInCollection?.emotions) ?? []
+    ).join(",")
+
     this.lightX = state.lightX
     this.lightY = state.lightY
     this.map = "town"
