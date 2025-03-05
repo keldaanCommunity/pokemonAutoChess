@@ -10,12 +10,19 @@
  */
 import { listen } from "@colyseus/tools"
 import { logger, matchMaker } from "colyseus"
+import { Encoder } from "@colyseus/schema"
 import { CronJob } from "cron"
 import app from "./app.config"
 import { initializeMetrics } from "./metrics"
 import { initCronJobs } from "./services/cronjobs"
 import { fetchLeaderboards } from "./services/leaderboard"
 import { fetchMetaReports } from "./services/meta"
+
+/*
+Changed buffer size to 512kb to avoid warnings from colyseus. We need to scale down the amount of data we're sending so it gets sent in multiple packets or increase the buffer size even more.
+I think the buffer size is a bit of a sanity check, the only time I've really seen it needed is if you have infra requirements for buffer sizes, for instance working with steamworks the max packet size is 512kb
+ */
+Encoder.BUFFER_SIZE = 512 * 1024
 
 async function main() {
   fetchLeaderboards()
