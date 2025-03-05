@@ -1561,10 +1561,9 @@ export class DeleteRoomCommand extends Command<
         }
       }
 
-      const roomsToDelete: Room<any>[] = []
+      const roomsIdToDelete: string[] = []
       if (roomId) {
-        const roomToDelete = matchMaker.getRoomById(roomId)
-        if (roomToDelete) roomsToDelete.push(roomToDelete)
+        roomsIdToDelete.push(roomId)
       } else if (tournamentId) {
         const tournament = this.state.tournaments.find(
           (t) => t.id === tournamentId
@@ -1575,7 +1574,7 @@ export class DeleteRoomCommand extends Command<
           )
 
         const allRooms = await matchMaker.query({})
-        roomsToDelete.push(
+        roomsIdToDelete.push(
           ...allRooms
             .filter(
               (result) =>
@@ -1583,22 +1582,18 @@ export class DeleteRoomCommand extends Command<
                 (bracketId === "all" ||
                   result.metadata?.bracketId === bracketId)
             )
-            .map((result) => matchMaker.getRoomById(result.roomId))
-            .filter((room) => room != null)
+            .map((result) => result.roomId)
         )
       }
 
-      if (roomsToDelete.length === 0) {
+      if (roomsIdToDelete.length === 0) {
         return logger.error(
           `DeleteRoomCommand ; room not found with query: roomId: ${roomId} tournamentId: ${tournamentId} bracketId: ${bracketId}`
         )
       }
 
-      roomsToDelete.forEach((roomToDelete) => {
-        roomToDelete.clients.forEach((cli) => {
-          cli.leave(CloseCodes.ROOM_DELETED)
-        })
-        roomToDelete.disconnect()
+      roomsIdToDelete.forEach((roomToDelete) => {
+        this.room.presence.publish("room-deleted", roomId)
       })
     } catch (error) {
       logger.error(`DeleteRoomCommand error:`, error)

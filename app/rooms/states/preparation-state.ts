@@ -82,14 +82,16 @@ export default class PreparationState
       params.avatar ?? "",
       time
     )
-    chatV2.create({
-      id: id,
-      payload: message.payload,
-      authorId: message.authorId,
-      author: message.author,
-      avatar: message.avatar,
-      time: time
-    })
+    if (params.author) {
+      chatV2.create({
+        id: id,
+        payload: message.payload,
+        authorId: message.authorId,
+        author: message.author,
+        avatar: message.avatar,
+        time: time
+      })
+    }
     this.messages.push(message)
   }
 
