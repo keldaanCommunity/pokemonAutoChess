@@ -15616,7 +15616,7 @@ export class Wishiwashi extends Pokemon {
   rarity = Rarity.SPECIAL
   stars = 1
   evolution = Pkm.WISHIWASHI_SCHOOL
-  hp = 100
+  hp = 50
   atk = 11
   speed = 38
   def = 4

@@ -72,6 +72,7 @@
 - Smeargle is now 3-range ; no change to stats, it can still be played on every line
 - Nerfed Obstruct (Obstagoon): Protect duration 1/2/4 → 1/2/3 seconds
 - Nerfed Celebi HP 300 → 250
+- Nerfed Wishiwashi: HP 100 → 50
 
 # Changes to Synergies
 
