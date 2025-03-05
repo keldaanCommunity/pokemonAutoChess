@@ -28,7 +28,7 @@
 # Changes to Pokemon & Abilities
 
 - Lickitung line is now Wild/Normal/Gourmet
-- Sinistea line is now Ghost/Artificial/Gourmet
+- Sinistea line is now Ghost/Artificial/Gourmet ; nerfed HP & defense
 - Vanillite line is now Ice/Amorphous/Gourmet
 - Bounsweet line is now Grass/Fighting/Gourmet
 - Combee line is now Bug/Flora/Gourmet

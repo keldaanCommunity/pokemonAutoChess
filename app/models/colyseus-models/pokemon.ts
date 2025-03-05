@@ -15048,10 +15048,10 @@ export class Sinistea extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.POLTEAGEIST
-  hp = 80
+  hp = 60
   atk = 4
   speed = 47
-  def = 6
+  def = 3
   speDef = 6
   maxPP = 100
   range = 2
@@ -15068,10 +15068,10 @@ export class Polteageist extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 180
+  hp = 150
   atk = 9
   speed = 47
-  def = 10
+  def = 5
   speDef = 10
   maxPP = 100
   range = 2
