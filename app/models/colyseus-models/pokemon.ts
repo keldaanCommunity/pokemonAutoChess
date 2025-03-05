@@ -663,7 +663,7 @@ export class Bounsweet extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.STEENEE
-  hp = 100
+  hp = 85
   atk = 10
   speed = 48
   def = 8
@@ -683,7 +683,7 @@ export class Steenee extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.TSAREENA
-  hp = 180
+  hp = 160
   atk = 19
   speed = 48
   def = 10
@@ -702,7 +702,7 @@ export class Tsareena extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 3
-  hp = 360
+  hp = 320
   atk = 33
   speed = 48
   def = 12
@@ -14108,10 +14108,10 @@ export class Lickitung extends Pokemon {
   stars = 1
   evolution = Pkm.LICKILICKY
   hp = 70
-  atk = 6
+  atk = 5
   speed = 41
   def = 4
-  speDef = 6
+  speDef = 4
   maxPP = 90
   range = 1
   skill = Ability.LICK
@@ -14127,10 +14127,10 @@ export class Lickilicky extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 150
-  atk = 12
+  atk = 10
   speed = 41
-  def = 8
-  speDef = 10
+  def = 7
+  speDef = 7
   maxPP = 90
   range = 1
   skill = Ability.LICK

@@ -27,10 +27,10 @@
 
 # Changes to Pokemon & Abilities
 
-- Lickitung line is now Wild/Normal/Gourmet
+- Lickitung line is now Wild/Normal/Gourmet ; nerfed attack & special defense
 - Sinistea line is now Ghost/Artificial/Gourmet ; nerfed HP & defense
 - Vanillite line is now Ice/Amorphous/Gourmet
-- Bounsweet line is now Grass/Fighting/Gourmet
+- Bounsweet line is now Grass/Fighting/Gourmet ; nerfed HP
 - Combee line is now Bug/Flora/Gourmet
 - Munchlax is now Normal/Baby/Gourmet
 - Snorlax is now Normal/Gourmet/Monster
