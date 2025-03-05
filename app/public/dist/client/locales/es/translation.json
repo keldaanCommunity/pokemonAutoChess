@@ -1536,7 +1536,7 @@
     "HIDDEN_POWER_K": "Invoca Hitmonlee con un RED_ORB y el máximo de PP",
     "HIDDEN_POWER_L": "El equipo enemigo queda LOCKED por 5 segundos",
     "HIDDEN_POWER_M": "Todo tu equipo obtiene el máximo de PP",
-    "HIDDEN_POWER_N": "Todo tu equipo obtiene 50 SHIELD y usa $t(ability.EXPLOSION)",
+    "HIDDEN_POWER_N": "Todo tu equipo obtiene [50,SP] SHIELD y usa $t(ability.EXPLOSION)",
     "HIDDEN_POWER_O": "Cocina un plato al azar para todos tus Pokémon para la próxima pelea.",
     "HIDDEN_POWER_P": "Invoca 5 Pokémon BUG STAR aleatorios",
     "HIDDEN_POWER_Q": "Inmediatamente termina la pelea con un empate",
@@ -2134,7 +2134,7 @@
     "SHELL_BELL": "El usuario cura el 33% de todos los daños infligidos.",
     "LUCKY_EGG": "Aumenta la LUCK del titular en un 50%",
     "AQUA_EGG": "El poseedor gana +50 PP inicial y recupera 20 PP después de lanzar su habilidad",
-    "BLUE_ORB": "Cada tercer ataque del poseedor desata una cadena de rayos que rebota los 2 enemigos que se acercan, causando 10 SPECIAL y quemando 20 PP.",
+    "BLUE_ORB": "Cada 4 ataques del poseedor, desata una cadena de rayos que rebota los 2 enemigos que se acercan, causando 15 SPECIAL y quemando 20 PP.",
     "SCOPE_LENS": "Los golpes críticos roban 15 PP del objetivo.",
     "STAR_DUST": "Después de lanzar la habilidad, gana el 50 % del PP máximo como SHIELD",
     "GREEN_ORB": "El poseedor y los aliados adyacentes recuperan un 4% de sus HP máximos cada segundo",
@@ -3330,8 +3330,8 @@
   "max_rank_not_reached": "Tu rango es muy alto para jugar esta partida clasificatoria",
   "not_whitelisted": "Este partido está restringido a una lista blanca de jugadores.",
   "blacklisted": "Has sido expulsado de esta Partida.",
-  "kecleon_dialog": {
-    "welcome": "¡Bienvenido a la tienda de Kecleon!",
+  "npc_dialog": {
+    "welcome": "¡Bienvenido!",
     "tell_price": "10 GOLD cada uno!",
     "thank_you": "GRACIAS !"
   },
@@ -3339,13 +3339,11 @@
     "EVERYONE_IS_HERE": "Todos estan aqui !",
     "UNIQUE_STARTER": "Único Inicial",
     "OMELETTE_COOK": "Cocinero de Tortilla",
-    "SYNERGY_WHEEL": "Carrusel de Sinergia",
     "DITTO_PARTY": "Fiesta de Ditto",
     "GOTTA_CATCH_EM_ALL": "Hazte con todos!",
     "BUYER_FEVER": "Fiebre Compradora",
     "TECHNOLOGIC": "Tecnológico",
     "CROWDED": "Tablero Lleno",
-    "KECLEONS_SHOP": "Tienda de Kecleon",
     "FREE_MARKET": "Mercado Gratis",
     "SHINY_HUNTER": "Cazador Variocolor",
     "DO_IT_ALL_YOURSELF": "Hazlo todo tú mismo!",
@@ -3356,13 +3354,11 @@
     "EVERYONE_IS_HERE": "Todas los pokémon adicionales están disponibles de inmediato.",
     "UNIQUE_STARTER": "Obtén un Único aleatorio en la etapa 1",
     "OMELETTE_COOK": "Obtén un Huevo Pokémon después de los escenarios 1, 2 y 3",
-    "SYNERGY_WHEEL": "Los carruseles ahora solo llevan piedras de sinergia",
     "DITTO_PARTY": "Comienza con 5 Dittos en la banca. Ditto no puede ser encontrado en la tienda ni puede ser vendido.",
     "GOTTA_CATCH_EM_ALL": "Algunos pokémon pueden ser capturados antes de cada ronda JcE",
     "BUYER_FEVER": "Las evoluciones en la tienda son gratis",
     "TECHNOLOGIC": "Elige entre 3 artefactos en los escenarios 3 y 15",
     "CROWDED": "+3 unidades máximas en el tablero",
-    "KECLEONS_SHOP": "Los carruseles de objetos son reemplazados por la tienda de Kecleon, que propone 6 objetos por 10 GOLD cada uno",
     "FREE_MARKET": "Los pokémon se compran y venden por 0 GOLD",
     "SHINY_HUNTER": "Todos los encuentros JcE salvajes son variocolor.",
     "DO_IT_ALL_YOURSELF": "Comienza con una copia de tu avatar. Los avatares de baja rareza obtienen HP y oro inicial adicionales.",
@@ -3370,6 +3366,10 @@
     "SLAMINGO": "Todos los objetos caen cuando un Pokémon es colocado en la banca. Comienzas con 4 componentes aleatorios",
     "BLOOD_MONEY": "Cada KO otorga 1 GOLD. No se obtiene dinero adicional del interés. "
   },
+  "town_encounter": {
+    "KECLEON": "Tienda de Kecleon"
+  },
+  "town_encounter_description": {},
   "loading_hints": {
     "tab_out": "¡No te desconectes! La carga se detiene cuando esta ventana del navegador está inactiva.",
     "max_loading_time": "El juego comenzará después de 5 minutos de carga pase lo que pase..",

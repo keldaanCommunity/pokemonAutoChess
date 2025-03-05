@@ -35,7 +35,7 @@ import { min } from "../../utils/number"
 import { pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { Effects } from "../effects"
-import { createRandomEgg } from "../egg-factory"
+import { createRandomEgg } from "../../core/eggs"
 import type { IPokemonConfig } from "../mongo-models/user-metadata"
 import PokemonFactory from "../pokemon-factory"
 import {
@@ -78,7 +78,7 @@ export default class Player extends Schema implements IPlayer {
   @type("uint16") elo: number
   @type("boolean") alive = true
   @type([HistoryItem]) history = new ArraySchema<HistoryItem>()
-  @type({ map: PokemonConfig }) pokemonCollection
+  @type({ map: PokemonConfig }) pokemonCollection: PokemonCollection
   @type("string") title: Title | ""
   @type("string") role: Role
   @type(["string"]) itemsProposition = new ArraySchema<Item>()
@@ -207,7 +207,7 @@ export default class Player extends Schema implements IPlayer {
 
       let avatar: Pokemon
       if (this.firstPartner === Pkm.EGG) {
-        avatar = createRandomEgg(shiny, this)
+        avatar = createRandomEgg(this, shiny)
       } else {
         avatar = PokemonFactory.createPokemonFromName(this.firstPartner, {
           selectedEmotion: emotion,
@@ -413,40 +413,39 @@ export default class Player extends Schema implements IPlayer {
       const lostTrash = lostArtificialItems.filter(
         (item) => item === Item.TRASH
       ).length
-      let cleanedTrash = 0
 
-      this.board.forEach((pokemon) => {
-        lostArtificialItems.forEach((item) => {
+      const removeArtificialItem = (item: Item) => {
+        // first check held items
+        const pokemons = values(this.board)
+        for (const pokemon of pokemons) {
           if (pokemon.items.has(item)) {
-            if (item === Item.TRASH && lostTrash - cleanedTrash > 0) {
-              pokemon.items.delete(item)
-              cleanedTrash++
-            } else if (item !== Item.TRASH) {
-              pokemon.items.delete(item)
+            pokemon.items.delete(item)
 
-              if (item in SynergyGivenByItem) {
-                const type = SynergyGivenByItem[item]
-                const nativeTypes = getPokemonData(pokemon.name).types
-                if (nativeTypes.includes(type) === false) {
-                  pokemon.types.delete(type)
-                  if (!isOnBench(pokemon)) {
-                    needsRecomputingSynergiesAgain = true
-                  }
+            if (item in SynergyGivenByItem) {
+              const type = SynergyGivenByItem[item]
+              const nativeTypes = getPokemonData(pokemon.name).types
+              if (nativeTypes.includes(type) === false) {
+                pokemon.types.delete(type)
+                if (
+                  pokemon.name === Pkm.SILVALLY &&
+                  nativeTypes.length === pokemon.types.size
+                ) {
+                  this.transformPokemon(pokemon, Pkm.TYPE_NULL)
+                }
+                if (!isOnBench(pokemon)) {
+                  needsRecomputingSynergiesAgain = true
                 }
               }
             }
+            return // break for loop to remove only one
           }
-        })
-      })
-
-      lostArtificialItems.forEach((item) => {
-        if (item !== Item.TRASH) {
-          removeInArray<Item>(this.items, item)
-        } else if (item === Item.TRASH && lostTrash - cleanedTrash > 0) {
-          removeInArray<Item>(this.items, item)
-          cleanedTrash++
         }
-      })
+
+        // if not found check player item bench
+        removeInArray<Item>(this.items, item)
+      }
+
+      lostArtificialItems.forEach(removeArtificialItem)
     }
 
     return needsRecomputingSynergiesAgain

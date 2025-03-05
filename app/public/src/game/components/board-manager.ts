@@ -29,10 +29,6 @@ import PokemonSpecial from "./pokemon-special"
 import { displayBoost } from "./boosts-animations"
 import { Item } from "../../../../types/enum/Item"
 import { playMusic } from "../../pages/utils/audio"
-import {
-  DungeonMusic,
-  TownMusicMarkerByStage
-} from "../../../../types/enum/Dungeon"
 import { DEPTH } from "../depths"
 
 export enum BoardMode {
@@ -307,7 +303,10 @@ export default class BoardManager {
     }
 
     const text = this.scene.add.existing(
-      new GameObjects.Text(this.scene, x, y, label, textStyle)
+      new GameObjects.Text(this.scene, x, y, label, textStyle).setOrigin(
+        0.5,
+        0.5
+      )
     )
     text.setDepth(DEPTH.TEXT)
 
@@ -546,13 +545,12 @@ export default class BoardManager {
   minigameMode() {
     this.mode = BoardMode.TOWN
     this.scene.setMap("town")
-    if (PortalCarouselStages.includes(this.state.stageLevel)) {
-      playMusic(
-        this.scene,
-        DungeonMusic.TREASURE_TOWN,
-        TownMusicMarkerByStage[this.state.stageLevel] ?? 0
-      )
-    }
+    if (this.state.stageLevel === PortalCarouselStages[0])
+      playMusic(this.scene, "town1")
+    if (this.state.stageLevel === PortalCarouselStages[1])
+      playMusic(this.scene, "town2")
+    if (this.state.stageLevel === PortalCarouselStages[2])
+      playMusic(this.scene, "town3")
     this.hideLightCell()
     this.hideBerryTrees()
     this.pokemons.forEach((pokemon) => {
@@ -568,6 +566,10 @@ export default class BoardManager {
     }
     this.updateOpponentAvatar(null, null)
     this.updateScoutingAvatars(true)
+    this.scene.minigameManager?.addVillagers(
+      this.scene.room?.state.townEncounter ?? null,
+      store.getState().game.podium
+    )
   }
 
   setPlayer(player: Player) {
@@ -729,15 +731,15 @@ export default class BoardManager {
   }
 
   addSmeargle() {
-    this.smeargle = new PokemonSpecial(
-      this.scene,
-      1512,
-      396,
-      Pkm.SMEARGLE,
-      this.animationManager,
-      t(`scribble_description.${this.specialGameRule}`),
-      t(`scribble.${this.specialGameRule}`)
-    )
+    this.smeargle = new PokemonSpecial({
+      scene: this.scene,
+      x: 1512,
+      y: 396,
+      name: Pkm.SMEARGLE,
+      orientation: Orientation.DOWNLEFT,
+      dialog: t(`scribble_description.${this.specialGameRule}`),
+      dialogTitle: t(`scribble.${this.specialGameRule}`)
+    })
   }
 
   displayBoost(stat: Stat, pokemon: PokemonSprite) {

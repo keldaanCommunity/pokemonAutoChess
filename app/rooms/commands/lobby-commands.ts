@@ -1,5 +1,5 @@
 import { Command } from "@colyseus/command"
-import { Client, matchMaker } from "colyseus"
+import { Client, matchMaker, Room } from "colyseus"
 import { nanoid } from "nanoid"
 import { writeHeapSnapshot } from "v8"
 import {
@@ -415,6 +415,7 @@ export class ChangeNameCommand extends Command<
       const user = this.room.users.get(client.auth.uid)
       if (!user) return
       if (USERNAME_REGEXP.test(name)) {
+        logger.info(`${client.auth.displayName} changed name to ${name}`)
         user.displayName = name
         const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
         if (mongoUser) {
@@ -556,7 +557,7 @@ export class BuyEmotionCommand extends Command<
     try {
       const user = this.room.users.get(client.auth.uid)
       const cost = getEmotionCost(emotion, shiny)
-      if (!user) return
+      if (!user || !PkmByIndex.hasOwnProperty(index)) return
       const pokemonConfig = user.pokemonCollection.get(index)
       if (!pokemonConfig) return
 
@@ -1157,7 +1158,7 @@ export class OnCreateTournamentCommand extends Command<
   }
 }
 
-export class RemoveTournamentCommand extends Command<
+export class DeleteTournamentCommand extends Command<
   CustomLobbyRoom,
   { client: Client; tournamentId: string }
 > {
@@ -1325,6 +1326,68 @@ export class CreateTournamentLobbiesCommand extends Command<
   }
 }
 
+export class RemakeTournamentLobbyCommand extends Command<
+  CustomLobbyRoom,
+  { client?: Client; tournamentId: string; bracketId: string }
+> {
+  async execute({
+    tournamentId,
+    bracketId,
+    client
+  }: {
+    tournamentId: string
+    bracketId: string
+    client?: Client
+  }) {
+    try {
+      if (client) {
+        const user = this.room.users.get(client.auth.uid)
+        if (!user || !user.role || user.role !== Role.ADMIN) {
+          return
+        }
+      }
+
+      const tournament = this.state.tournaments.find(
+        (t) => t.id === tournamentId
+      )
+      if (!tournament)
+        return logger.error(`Tournament not found: ${tournamentId}`)
+
+      const bracket = tournament.brackets.get(bracketId)
+      if (!bracket)
+        return logger.error(`Tournament bracket not found: ${bracketId}`)
+
+      logger.info(`Remaking tournament game ${bracket.name} id: ${bracketId}`)
+      tournament.brackets.set(
+        bracketId,
+        new TournamentBracketSchema(bracket.name, bracket.playersId)
+      )
+
+      await matchMaker.createRoom("preparation", {
+        gameMode: GameMode.TOURNAMENT,
+        noElo: true,
+        ownerId: null,
+        roomName: bracket.name,
+        autoStartDelayInSeconds: 10 * 60,
+        whitelist: bracket.playersId,
+        tournamentId,
+        bracketId
+      })
+
+      //save brackets to db
+      const mongoTournament = await Tournament.findById(tournamentId)
+      if (mongoTournament) {
+        mongoTournament.brackets = convertSchemaToRawObject(tournament.brackets)
+        await mongoTournament.save()
+      }
+
+      tournament.pendingLobbiesCreation = false
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
+
 export class EndTournamentMatchCommand extends Command<
   CustomLobbyRoom,
   {
@@ -1476,6 +1539,69 @@ export class EndTournamentCommand extends Command<
       }
     } catch (error) {
       logger.error(error)
+    }
+  }
+}
+
+export class DeleteRoomCommand extends Command<
+  CustomLobbyRoom,
+  {
+    client: Client
+    roomId?: string
+    tournamentId?: string
+    bracketId?: string
+  }
+> {
+  async execute({ client, roomId, tournamentId, bracketId }) {
+    try {
+      if (client) {
+        const user = this.room.users.get(client.auth.uid)
+        if (!user || !user.role || user.role !== Role.ADMIN) {
+          return
+        }
+      }
+
+      const roomsToDelete: Room<any>[] = []
+      if (roomId) {
+        const roomToDelete = matchMaker.getRoomById(roomId)
+        if (roomToDelete) roomsToDelete.push(roomToDelete)
+      } else if (tournamentId) {
+        const tournament = this.state.tournaments.find(
+          (t) => t.id === tournamentId
+        )
+        if (!tournament)
+          return logger.error(
+            `DeleteRoomCommand ; Tournament not found: ${tournamentId}`
+          )
+
+        const allRooms = await matchMaker.query({})
+        roomsToDelete.push(
+          ...allRooms
+            .filter(
+              (result) =>
+                result.metadata?.tournamentId === tournamentId &&
+                (bracketId === "all" ||
+                  result.metadata?.bracketId === bracketId)
+            )
+            .map((result) => matchMaker.getRoomById(result.roomId))
+            .filter((room) => room != null)
+        )
+      }
+
+      if (roomsToDelete.length === 0) {
+        return logger.error(
+          `DeleteRoomCommand ; room not found with query: roomId: ${roomId} tournamentId: ${tournamentId} bracketId: ${bracketId}`
+        )
+      }
+
+      roomsToDelete.forEach((roomToDelete) => {
+        roomToDelete.clients.forEach((cli) => {
+          cli.leave(CloseCodes.ROOM_DELETED)
+        })
+        roomToDelete.disconnect()
+      })
+    } catch (error) {
+      logger.error(`DeleteRoomCommand error:`, error)
     }
   }
 }

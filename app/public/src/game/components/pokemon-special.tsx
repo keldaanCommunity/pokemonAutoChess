@@ -1,42 +1,44 @@
 /* Pokemon sprites not controlled by any player, with custom onPointer */
 import PokemonFactory from "../../../../models/pokemon-factory"
-import { PokemonActionState } from "../../../../types/enum/Game"
+import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { clamp, min } from "../../../../utils/number"
 import { preference } from "../../preferences"
-import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
-import { PokemonSpecialDetail } from "./pokemon-special-detail"
+import { GameDialog } from "./game-dialog"
 
 export default class PokemonSpecial extends PokemonSprite {
-  detail: PokemonSpecialDetail | null = null
-  animationManager: AnimationManager
+  detail: GameDialog | null = null
+  scene: GameScene
   dialog?: string
   dialogTitle?: string
 
-  constructor(
+  constructor({ scene, x, y, name, orientation = Orientation.DOWN, animation = PokemonActionState.IDLE, dialog, dialogTitle, shiny }: {
     scene: GameScene,
     x: number,
     y: number,
     name: Pkm,
-    animationManager: AnimationManager,
+    orientation?: Orientation,
+    animation?: PokemonActionState,
     dialog?: string,
     dialogTitle?: string
-  ) {
+    shiny?: boolean
+  }) {
     super(
       scene,
-      x,
-      y,
-      PokemonFactory.createPokemonFromName(name),
+      x + 24,
+      y + 24,
+      PokemonFactory.createPokemonFromName(name, { selectedShiny: shiny }),
       "environment",
       false,
       false
     )
 
+    this.scene = scene
     this.draggable = false
-    this.animationManager = animationManager
-    this.animationManager.animatePokemon(this, PokemonActionState.IDLE, false)
+    this.orientation = orientation
+    scene.animationManager?.animatePokemon(this, animation, false)
     this.dialog = dialog
     this.dialogTitle = dialogTitle
   }
@@ -44,7 +46,7 @@ export default class PokemonSpecial extends PokemonSprite {
   onPointerDown(pointer, event) {
     super.onPointerDown(pointer, event)
     event.stopPropagation()
-    this.animationManager.animatePokemon(this, PokemonActionState.EMOTE, false)
+    this.scene.animationManager?.animatePokemon(this, PokemonActionState.EMOTE, false, false)
   }
 
   openDetail() {
@@ -55,7 +57,7 @@ export default class PokemonSpecial extends PokemonSprite {
         s.lastPokemonDetail = null
       }
 
-      this.detail = new PokemonSpecialDetail(
+      this.detail = new GameDialog(
         this.scene,
         this.dialog,
         this.dialogTitle

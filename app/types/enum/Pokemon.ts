@@ -2658,7 +2658,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ARBOK]: Pkm.EKANS,
   [Pkm.MIME_JR]: Pkm.MIME_JR,
   [Pkm.MR_MIME]: Pkm.MIME_JR,
-  [Pkm.ORIGIN_GIRATINA]: Pkm.ORIGIN_GIRATINA,
+  [Pkm.ORIGIN_GIRATINA]: Pkm.GIRATINA,
   [Pkm.PIROUETTE_MELOETTA]: Pkm.MELOETTA,
   [Pkm.MELMETAL]: Pkm.MELMETAL,
   [Pkm.HOOPA]: Pkm.HOOPA,
@@ -6379,7 +6379,7 @@ export const AnimationConfig: {
   [Pkm.SPINDA]: {
     attack: AnimationType.Slam,
     ability: AnimationType.Twirl,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Twirl
   },
   [Pkm.BALTOY]: {
     attack: AnimationType.Shoot,

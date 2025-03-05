@@ -42,7 +42,7 @@ import {
 import {
   logIn,
   removeMessage,
-  removeTournament,
+  deleteTournament,
   setProfile,
   joinLobby,
   setErrorAlertMessage
@@ -224,7 +224,7 @@ export async function joinLobbyRoom(
           })
 
           $state.tournaments.onRemove((tournament) => {
-            dispatch(removeTournament(tournament))
+            dispatch(deleteTournament(tournament))
           })
 
           room.onMessage(Transfer.BANNED, (message) => {

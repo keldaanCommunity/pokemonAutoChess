@@ -1,5 +1,6 @@
 import Phaser from "phaser"
 import { DEPTH } from "../depths"
+import { max } from "../../../../utils/number"
 
 export default class WeatherManager {
   scene: Phaser.Scene
@@ -455,6 +456,46 @@ export default class WeatherManager {
         scale: 1,
         tint: 0xa0a0a0
       })
+    )
+  }
+
+  setTownDaytime(stageLevel: number) {
+    // ambient light based on day time
+    let red = 255,
+      green = 255,
+      blue = 255,
+      alpha = 0
+
+    if (stageLevel === 0) {
+      // dawn light
+      red = 255
+      green = 210
+      blue = 150
+      alpha = 0.15
+    } else if (stageLevel === 20) {
+      // sunset light
+      red = 150
+      green = 0
+      blue = 50
+      alpha = 0.35
+    } else if (stageLevel > 20) {
+      // progressive night light
+      red = 0
+      green = 20
+      blue = 120
+      alpha = max(0.7)(0.15 + ((stageLevel - 20) * 0.55) / 20)
+    }
+
+    this.colorFilter = this.scene.add.existing(
+      new Phaser.GameObjects.Rectangle(
+        this.scene,
+        1500,
+        1000,
+        3000,
+        2000,
+        new Phaser.Display.Color(red, green, blue).color,
+        alpha
+      ).setDepth(DEPTH.WEATHER_FX)
     )
   }
 

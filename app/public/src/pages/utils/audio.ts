@@ -74,19 +74,21 @@ export function playMusic(scene: SceneWithMusic, name: string, seek?: number) {
   if (scene == null || scene.music?.key === "music_" + name) return
   if (scene.music) scene.music.destroy()
 
-  const music = scene.sound.add("music_" + name, {
-    loop: true
-  }) as Phaser.Sound.WebAudioSound
-
-  const unsubscribeToPreferences = subscribeToPreferences(({ musicVolume }) => {
-    music.setVolume(musicVolume / 100)
-  })
-  music.on("stop", unsubscribeToPreferences)
-
-  scene.music = music
-  scene.sound.pauseOnBlur = !preference("playInBackground")
-
   try {
+    const music = scene.sound.add("music_" + name, {
+      loop: true
+    }) as Phaser.Sound.WebAudioSound
+
+    const unsubscribeToPreferences = subscribeToPreferences(
+      ({ musicVolume }) => {
+        music.setVolume(musicVolume / 100)
+      }
+    )
+    music.on("stop", unsubscribeToPreferences)
+
+    scene.music = music
+    scene.sound.pauseOnBlur = !preference("playInBackground")
+
     scene.music.play({
       volume: preference("musicVolume") / 100,
       loop: true,

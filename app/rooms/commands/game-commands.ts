@@ -14,7 +14,7 @@ import Simulation from "../../core/simulation"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import Player from "../../models/colyseus-models/player"
 import { PokemonClasses } from "../../models/colyseus-models/pokemon"
-import { createRandomEgg } from "../../models/egg-factory"
+import { giveRandomEgg } from "../../core/eggs"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"
@@ -37,8 +37,7 @@ import {
   MAX_PLAYERS_PER_GAME,
   PORTAL_CAROUSEL_BASE_DURATION,
   PortalCarouselStages,
-  StageDuration,
-  SynergyTriggers
+  StageDuration
 } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
@@ -53,6 +52,7 @@ import {
   AbilityPerTM,
   ArtificialItems,
   Berries,
+  CraftableItems,
   Dishes,
   FishingRods,
   Flavors,
@@ -142,6 +142,7 @@ export class OnShopCommand extends Command<
     pokemon.positionX = x !== undefined ? x : -1
     pokemon.positionY = 0
     player.board.set(pokemon.id, pokemon)
+    if (pokemon.types.has(Synergy.WILD)) player.updateWildChance()
     pokemon.onAcquired(player)
 
     if (
@@ -191,21 +192,14 @@ export class OnPokemonCatchCommand extends Command<
   GameRoom,
   {
     playerId: string
-    pkm: Pkm
     id: string
   }
 > {
-  execute({ playerId, pkm, id }) {
-    if (
-      playerId === undefined ||
-      pkm === undefined ||
-      !this.state.players.has(playerId)
-    )
-      return
+  execute({ playerId, id }) {
+    if (playerId === undefined || !this.state.players.has(playerId)) return
     const player = this.state.players.get(playerId)
-    if (!player) return
-
-    if (this.state.wanderers.has(id) === false) return
+    const pkm = this.state.wanderers.get(id)
+    if (!player || !pkm) return
     this.state.wanderers.delete(id)
 
     const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
@@ -265,7 +259,8 @@ export class OnDragDropCommand extends Command<
         if (
           pokemon.name === Pkm.DITTO &&
           dropFromBench &&
-          !isPositionEmpty(x, y, player.board)
+          !isPositionEmpty(x, y, player.board) &&
+          !(this.state.phase === GamePhaseState.FIGHT && y > 0)
         ) {
           const pokemonToClone = this.room.getPokemonByPosition(player, x, y)
           if (pokemonToClone && pokemonToClone.canBeCloned) {
@@ -402,6 +397,16 @@ export class OnSwitchBenchAndBoardCommand extends Command<
       const dx = getFirstAvailablePositionInBench(player.board)
       if (dx !== undefined) {
         this.room.swap(player, pokemon, dx, 0)
+        pokemon.items.forEach((item) => {
+          if (
+            item === Item.CHEF_HAT ||
+            item === Item.TRASH ||
+            ArtificialItems.includes(item)
+          ) {
+            player.items.push(item)
+            pokemon.removeItem(item)
+          }
+        })
         pokemon.onChangePosition(dx, 0, player)
       }
     }
@@ -453,18 +458,33 @@ export class OnDragDropCombineCommand extends Command<
         }
       }
 
-      // find recipe result
       let result: Item | undefined = undefined
-      for (const [key, value] of Object.entries(ItemRecipe) as [
-        Item,
-        Item[]
-      ][]) {
-        if (
-          (value[0] == itemA && value[1] == itemB) ||
-          (value[0] == itemB && value[1] == itemA)
-        ) {
-          result = key
-          break
+
+      if (itemA === Item.EXCHANGE_TICKET || itemB === Item.EXCHANGE_TICKET) {
+        const exchangedItem = itemA === Item.EXCHANGE_TICKET ? itemB : itemA
+        if (ItemComponents.includes(exchangedItem)) {
+          result = pickRandomIn(
+            ItemComponents.filter((i) => i !== exchangedItem)
+          )
+        } else if (CraftableItems.includes(exchangedItem)) {
+          result = pickRandomIn(
+            CraftableItems.filter((i) => i !== exchangedItem)
+          )
+        } else {
+          client.send(Transfer.DRAG_DROP_FAILED, message)
+          return
+        }
+      } else {
+        // find recipe result
+        const recipes = Object.entries(ItemRecipe) as [Item, Item[]][]
+        for (const [key, value] of recipes) {
+          if (
+            (value[0] == itemA && value[1] == itemB) ||
+            (value[0] == itemB && value[1] == itemA)
+          ) {
+            result = key
+            break
+          }
         }
       }
 
@@ -1177,14 +1197,19 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.state.players.forEach((player) => {
       let income = 0
       if (player.alive && !player.isBot) {
+        const nbGimmighoulCoins = player.items.filter(
+          (item) => item === Item.GIMMIGHOUL_COIN
+        ).length
         if (specialGameRule !== SpecialGameRule.BLOOD_MONEY) {
-          player.interest = Math.min(Math.floor(player.money / 10), 5)
+          player.interest = max(5 + nbGimmighoulCoins)(
+            Math.floor(player.money / 10)
+          )
           income += player.interest
         }
         if (!isPVE) {
           income += max(5)(player.streak)
         }
-        income += 5
+        income += 5 + nbGimmighoulCoins
         player.addMoney(income, true, null)
         if (income > 0) {
           const client = this.room.clients.find(
@@ -1646,7 +1671,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
           const pveBoard = PokemonFactory.makePveBoard(
             pveStage,
-            this.state.shinyEncounter
+            this.state.shinyEncounter,
+            this.state.townEncounter
           )
           const weather = getWeather(player, null, pveBoard)
           const simulation = new Simulation(
@@ -1728,7 +1754,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         if (chance(UNOWN_ENCOUNTER_CHANCE)) {
           const pkm = pickRandomIn(Unowns)
           const id = nanoid()
-          this.state.wanderers.add(id)
+          this.state.wanderers.set(id, pkm)
           setTimeout(
             () => {
               client.send(Transfer.UNOWN_WANDERING, { id, pkm })
@@ -1745,7 +1771,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           for (let i = 0; i < nbPokemonsToSpawn; i++) {
             const id = nanoid()
             const pkm = this.state.shop.pickPokemon(player, this.state)
-            this.state.wanderers.add(id)
+            this.state.wanderers.set(id, pkm)
             setTimeout(
               () => {
                 client.send(Transfer.POKEMON_WANDERING, { id, pkm })
@@ -1831,11 +1857,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (getFreeSpaceOnBench(player.board) === 0) continue
       const isGoldenEgg =
         goldenEggFound && i === 0 && nbOfGoldenEggsOnBench === 0
-      const egg = createRandomEgg(isGoldenEgg, player)
-      const x = getFirstAvailablePositionInBench(player.board)
-      egg.positionX = x !== undefined ? x : -1
-      egg.positionY = 0
-      player.board.set(egg.id, egg)
+      giveRandomEgg(player, isGoldenEgg)
       if (player.effects.has(Effect.HATCHER)) {
         player.eggChance = 0 // getting an egg resets the stacked egg chance
       }

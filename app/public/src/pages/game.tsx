@@ -61,6 +61,7 @@ import {
   setSynergies,
   setWeather,
   setSpecialGameRule,
+  setPodium
 } from "../stores/GameStore"
 import { joinGame, logIn, setProfile } from "../stores/NetworkStore"
 import { getAvatarString } from "../../../utils/avatar"
@@ -300,6 +301,18 @@ export default function Game() {
   }, [])
 
   useEffect(() => {
+    try {
+      fetch("/leaderboards")
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch(setPodium(data.leaderboard.slice(0, 3)))
+        })
+    } catch (e) {
+      console.error("error fetching leaderboard", e)
+    }
+  }, [])
+
+  useEffect(() => {
     const connect = () => {
       logger.debug("connecting to game")
       if (!firebase.apps.length) {
@@ -441,7 +454,7 @@ export default function Game() {
               scene.board &&
               getFreeSpaceOnBench(scene.board.player.board) > 0
             ) {
-              room.send(Transfer.POKEMON_WANDERING, { id, pkm })
+              room.send(Transfer.POKEMON_WANDERING, { id })
               sprite.destroy()
               tween.destroy()
             } else if (scene.board) {

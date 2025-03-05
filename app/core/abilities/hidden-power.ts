@@ -14,7 +14,7 @@ import PokemonState from "../pokemon-state"
 import { AbilityStrategies } from "./abilities"
 import { AbilityStrategy } from "./ability-strategy"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
-import { createRandomEgg } from "../../models/egg-factory"
+import { giveRandomEgg } from "../eggs"
 
 export class HiddenPowerStrategy extends AbilityStrategy {
   copyable = false
@@ -130,16 +130,8 @@ export class HiddenPowerEStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, state, board, target, crit)
-    const egg = createRandomEgg(false)
-    const player = unown.player
-    if (player && !unown.isGhostOpponent) {
-      const x = getFirstAvailablePositionInBench(player.board)
-      if (x !== undefined) {
-        egg.positionX = x
-        egg.positionY = 0
-        egg.evolutionRule.evolutionTimer = 1
-        player.board.set(egg.id, egg)
-      }
+    if (!unown.isGhostOpponent && unown.player) {
+      giveRandomEgg(unown.player, false, 1)
     }
   }
 }
@@ -321,7 +313,7 @@ export class HiddenPowerNStrategy extends HiddenPowerStrategy {
         if (pokemon && unown.team === pokemon.team) {
           const target = board.getValue(pokemon.targetX, pokemon.targetY)
           if (target) {
-            pokemon.addShield(50, unown, 0, false)
+            pokemon.addShield(50, unown, 1, false)
             AbilityStrategies[Ability.EXPLOSION].process(
               pokemon,
               pokemon.state,

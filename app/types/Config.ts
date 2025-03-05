@@ -181,8 +181,6 @@ export const EvolutionTime = {
   EVOLVE_HATCH: 5
 }
 
-export const KECLEON_SHOP_COST = 10
-
 export const PoolSize: { [key in Rarity]: [number, number, number] } = {
   [Rarity.COMMON]: [1, 18, 29],
   [Rarity.UNCOMMON]: [1, 13, 22],
@@ -395,7 +393,7 @@ export const DEFAULT_CRIT_POWER = 2
 export const PROJECTILE_SPEED = 4
 
 export const StageDuration: Record<number | "DEFAULT", number> = {
-  0: 22, // adjusted for treasure town theme
+  0: 24, // adjusted for treasure town theme
   1: 30,
   3: 40,
   5: 40,
@@ -410,7 +408,7 @@ export const StageDuration: Record<number | "DEFAULT", number> = {
 }
 export const FIGHTING_PHASE_DURATION = 40000
 export const ITEM_CAROUSEL_BASE_DURATION = 15000
-export const PORTAL_CAROUSEL_BASE_DURATION = 22500
+export const PORTAL_CAROUSEL_BASE_DURATION = 23000
 
 export const ItemCarouselStages = [4, 12, 17, 22, 27, 34]
 export const ItemProposalStages = [3, 15]

@@ -214,19 +214,25 @@ p:last-child {
   margin-top: -19px;
 }
 
-.game-pokemon-dialog {
+.game-dialog {
   color: white;
   font-size: 1rem;
   max-width: 300px;
 }
 
-.game-pokemon-dialog .game-pokemon-dialog-title {
+.game-dialog .game-dialog-title {
   background-color: #4f5160;
   text-transform: capitalize;
   padding: 0.25em 0.5em;
   margin: -0.25em -0.5em 4px -0.5em;
   border-radius: 8px 8px 0 0;
   box-shadow: 0 -1px 2px rgb(0 0 0 / 50%);
+}
+
+.game-dialog.town-encounter-description {
+  max-width: 600px;
+  width: 600px;
+  text-align: center;
 }
 
 .clickable {

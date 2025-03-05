@@ -1594,7 +1594,7 @@
     "HIDDEN_POWER_K": "召唤一只携带RED_ORB且PP已满的飞腿郎。",
     "HIDDEN_POWER_L": "使所有敌方宝可梦陷入LOCKED 5秒。",
     "HIDDEN_POWER_M": "为所有我方宝可梦恢复PP至满。",
-    "HIDDEN_POWER_N": "所有我方宝可梦获得50点SHIELD，并释放$t(ability.EXPLOSION)。",
+    "HIDDEN_POWER_N": "所有我方宝可梦获得[50,SP]点SHIELD，并释放$t(ability.EXPLOSION)。",
     "HIDDEN_POWER_O": "为所有我方宝可梦制作一道随机料理，这些料理会在下一场战斗生效。",
     "HIDDEN_POWER_P": "随机召唤5只星级为STAR的BUG宝可梦。",
     "HIDDEN_POWER_Q": "立刻结束当前战斗，本场视为平局。",
@@ -2217,7 +2217,9 @@
     "RUBY_SWIRL_FLAVOR": "红钻综合调味料",
     "LEMON_FLAVOR": "柠檬调味料",
     "RAINBOW_SWIRL_FLAVOR": "三色综合调味料",
-    "VANILLA_FLAVOR": "香草调味料"
+    "VANILLA_FLAVOR": "香草调味料",
+    "EGG_FOR_SELL": "宝可梦的蛋",
+    "GIMMIGHOUL_COIN": "索财灵的硬币"
   },
   "item_description": {
     "FOSSIL_STONE": "某只远古时代生活着的宝可梦的化石。",
@@ -2247,7 +2249,7 @@
     "SHELL_BELL": "携带者造成任意伤害时，恢复伤害额的33%。",
     "LUCKY_EGG": "携带者提升50%的LUCK。",
     "AQUA_EGG": "携带者开场时恢复50点PP，且每次使用招式后恢复20点PP。",
-    "BLUE_ORB": "每3次攻击会额外释放一道链状闪电，弹射至2个最近的敌方宝可梦，对他们造成10点SPECIAL并移除他们20点PP。",
+    "BLUE_ORB": "每4次攻击会额外释放一道链状闪电，弹射至2个最近的敌方宝可梦，对他们造成10点SPECIAL并移除他们20点PP。",
     "SCOPE_LENS": "造成暴击时会偷取目标15点PP。",
     "STAR_DUST": "释放招式后获得SHIELD，数值相当于最大PP的50%。",
     "GREEN_ORB": "携带者和相邻我方宝可梦每秒恢复4%的最大HP。",
@@ -2398,7 +2400,9 @@
     "SALTED_FLAVOR": "与ROCK、GROUND、FOSSIL宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_SALTED)。$t(passive_description.SALTED_CREAM)",
     "RUBY_SWIRL_FLAVOR": "与FIRE、WILD、FIELD宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_RUBY_SWIRL)。$t(passive_description.RUBY_SWIRL_CREAM)",
     "CARAMEL_SWIRL_FLAVOR": "与DARK、MONSTER、DRAGON宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_CARAMEL_SWIRL)。$t(passive_description.CARAMEL_SWIRL_CREAM)",
-    "RAINBOW_SWIRL_FLAVOR": "与PSYCHIC、AMORPHOUS、BABY、LIGHT宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_RAINBOW_SWIRL)。$t(passive_description.RAINBOW_SWIRL_CREAM)"
+    "RAINBOW_SWIRL_FLAVOR": "与PSYCHIC、AMORPHOUS、BABY、LIGHT宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_RAINBOW_SWIRL)。$t(passive_description.RAINBOW_SWIRL_CREAM)",
+    "EGG_FOR_SELL": "一枚吉利蛋育蛋铺出售的宝可梦的蛋",
+    "GIMMIGHOUL_COIN": "每轮额外获得1 GOLD的收入，且利息上限+1。"
   },
   "passive_description": {
     "NONE": "无被动能力",
@@ -2974,6 +2978,7 @@
   "copyright": "所有权利归The Pokemon Company®所有",
   "stage": "轮次",
   "spectate": "观战",
+  "spectating": "正在观战：{{ name }}",
   "join": "加入",
   "reconnect": "重新连接",
   "participate": "参与",
@@ -2981,10 +2986,10 @@
   "participants": "参与者",
   "brackets": "分组",
   "ranking": "名次",
-  "players_remaining": "名存活玩家",
+  "players_remaining": "存活玩家数",
   "cancel_tournament_participation": "退出本次锦标赛，不再参加",
   "register_tournament_participation": "注册为本场锦标赛的参赛者",
-  "registrations_open_info": "锦标赛正式开赛前一小时将开放注册",
+  "registrations_open_info": "锦标赛正式开赛前一小时将关闭注册",
   "starts_at": "开始时间：",
   "no_elo": "无Elo",
   "enable_elo": "开启Elo",
@@ -3531,8 +3536,8 @@
   "max_rank_not_reached": "你的段位过高，无法参与这场排位赛",
   "not_whitelisted": "只有房主允许的玩家才能参与这场比赛",
   "blacklisted": "你已被房主踢出房间",
-  "kecleon_dialog": {
-    "welcome": "欢迎来到变隐龙商店！",
+  "npc_dialog": {
+    "welcome": "欢迎！",
     "tell_price": "每件10 GOLD！",
     "thank_you": "谢谢惠顾！"
   },
@@ -3540,13 +3545,11 @@
     "EVERYONE_IS_HERE": "还 有 大 家",
     "UNIQUE_STARTER": "独 特 起 手",
     "OMELETTE_COOK": "炒 蛋 大 厨",
-    "SYNERGY_WHEEL": "共 鸣 轮 盘",
     "DITTO_PARTY": "百 变 派 对",
     "GOTTA_CATCH_EM_ALL": "收 服 盛 会",
     "BUYER_FEVER": "骨 折 促 销",
     "TECHNOLOGIC": "科 学 进 步",
     "CROWDED": "盘 面 拥 挤",
-    "KECLEONS_SHOP": "变 隐 商 店",
     "FREE_MARKET": "零 元 购 买",
     "SHINY_HUNTER": "闪 光 猎 手",
     "DO_IT_ALL_YOURSELF": "自 己 动 手",
@@ -3558,19 +3561,35 @@
     "EVERYONE_IS_HERE": "所有附加宝可梦在游戏开始时立即可选。",
     "UNIQUE_STARTER": "在第1轮，获得一只随机独特宝可梦。",
     "OMELETTE_COOK": "在第1、2、3轮结束后，获得一枚宝可梦的蛋。",
-    "SYNERGY_WHEEL": "道具轮盘中只会出现共鸣赋予石头。",
     "DITTO_PARTY": "游戏开始时向备战区添加5只不可出售的百变怪。本场游戏中商店不会刷出百变怪。",
     "GOTTA_CATCH_EM_ALL": "每轮野生对战前，可以捕捉一些宝可梦。",
     "BUYER_FEVER": "通过购买达成进化条件时，本次购入免费。",
     "TECHNOLOGIC": "在第3和第15轮，选择3件人造道具之一。",
     "CROWDED": "出战区宝可梦数量上限+3。",
-    "KECLEONS_SHOP": "道具轮盘改为变隐龙商店，随机刷出6件售价为10 GOLD的道具。",
     "FREE_MARKET": "免费购买和出售宝可梦。",
     "SHINY_HUNTER": "所有野生对战轮次中出现的对手均为闪光队伍。",
     "DO_IT_ALL_YOURSELF": "游戏开始时，以你的玩家形象作为起始宝可梦。稀有度较低的形象可以额外获得最大HP提升和额外初始GOLD作为补偿。",
     "FIRST_PARTNER": "游戏开始时，选择一只起始宝可梦。每轮（直到第10轮）开始时，你获得一只此宝可梦。",
     "SLAMINGO": "当宝可梦回到备战区时，卸下所有道具。游戏开始时获得4个随机道具组件。",
     "BLOOD_MONEY": "击倒宝可梦时获得1 GOLD，但积攒GOLD不提供利息收入。"
+  },
+  "town_encounter": {
+    "KECLEON": "变隐龙商店",
+    "CHANSEY": "吉利蛋育蛋铺",
+    "ELECTIVIRE": "电击魔兽连接店",
+    "XATU": "天然鸟鉴定所",
+    "KANGASKHAN": "袋兽阿姨仓库",
+    "DUSKULL": "夜巡灵银行",
+    "MAROWAK": "嘎啦嘎啦道场"
+  },
+  "town_encounter_description": {
+    "KECLEON": "变隐龙会以每块10 GOLD的价格出售共鸣赋予石头。",
+    "CHANSEY": "吉利蛋会以每枚10 GOLD的价格出售EGG_FOR_SELL。",
+    "ELECTIVIRE": "电击魔兽会以每件10 GOLD的价格出售人造道具。",
+    "XATU": "天然鸟会以每个10 GOLD的价格出售WONDERBOX。",
+    "KANGASKHAN": "袋兽会以每件10 GOLD的价格出售由两件组件合成的道具。",
+    "DUSKULL": "向夜巡灵支付10 GOLD可以提升你在后续轮次中的收入。",
+    "MAROWAK": "嘎啦嘎啦会提升下一野生轮次的敌方宝可梦强度。"
   },
   "loading_hints": {
     "tab_out": "不要切屏离开！如果这个浏览器窗口不活跃，加载会自动暂停。",

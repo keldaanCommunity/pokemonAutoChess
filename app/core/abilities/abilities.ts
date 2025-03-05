@@ -45,7 +45,7 @@ import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 
-import { createRandomEgg } from "../../models/egg-factory"
+import { createRandomEgg } from "../eggs"
 import PokemonFactory from "../../models/pokemon-factory"
 import Board, { Cell } from "../board"
 import {
@@ -82,6 +82,7 @@ import {
 import { values } from "../../utils/schemas"
 import { DarkHarvestEffect } from "../effect"
 import { DelayedCommand } from "../simulation-command"
+import { giveRandomEgg } from "../../core/eggs"
 
 const broadcastAbility = (
   pokemon: PokemonEntity,
@@ -513,7 +514,6 @@ export class KnowledgeThiefStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
     if (AbilityStrategies[target.skill].copyable) {
       AbilityStrategies[target.skill].process(
         pokemon,
@@ -522,7 +522,7 @@ export class KnowledgeThiefStrategy extends AbilityStrategy {
         target,
         crit
       )
-    }
+    } else super.process(pokemon, state, board, target, crit)
     if (pokemon.player && !pokemon.isGhostOpponent) {
       pokemon.player.experienceManager.addExperience(1)
     }
@@ -4681,8 +4681,6 @@ export class MetronomeStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
-
     const skill = pickRandomIn(
       (Object.keys(Ability) as Ability[]).filter(
         (a) => AbilityStrategies[a].copyable
@@ -5125,7 +5123,6 @@ export class MimicStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
     if (AbilityStrategies[target.skill].copyable) {
       AbilityStrategies[target.skill].process(
         pokemon,
@@ -5134,7 +5131,7 @@ export class MimicStrategy extends AbilityStrategy {
         target,
         crit
       )
-    }
+    } else super.process(pokemon, state, board, target, crit)
   }
 }
 
@@ -6587,7 +6584,6 @@ export class AssistStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit, true)
     const skill = pickRandomIn(
       board.cells
         .filter(
@@ -6602,7 +6598,7 @@ export class AssistStrategy extends AbilityStrategy {
     if (skill) {
       broadcastAbility(pokemon, { skill })
       AbilityStrategies[skill].process(pokemon, state, board, target, crit)
-    }
+    } else super.process(pokemon, state, board, target, crit)
   }
 }
 
@@ -7386,18 +7382,13 @@ export class EggsplosionStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
-          if (kill.death && !pokemon.isGhostOpponent && chance(0.25, pokemon)) {
-            const egg = createRandomEgg(false)
-            const player = pokemon.player
-            if (player) {
-              const x = getFirstAvailablePositionInBench(player.board)
-              if (x !== undefined) {
-                egg.positionX = x
-                egg.positionY = 0
-                egg.evolutionRule.evolutionTimer = EvolutionTime.EGG_HATCH
-                player.board.set(egg.id, egg)
-              }
-            }
+          if (
+            kill.death &&
+            !pokemon.isGhostOpponent &&
+            pokemon.player &&
+            chance(0.25, pokemon)
+          ) {
+            giveRandomEgg(pokemon.player, false)
           }
           v.status.triggerArmorReduction(4000, v)
         }

@@ -181,7 +181,10 @@ export enum Item {
   SALTED_FLAVOR = "SALTED_FLAVOR",
   RUBY_SWIRL_FLAVOR = "RUBY_SWIRL_FLAVOR",
   CARAMEL_SWIRL_FLAVOR = "CARAMEL_SWIRL_FLAVOR",
-  RAINBOW_SWIRL_FLAVOR = "RAINBOW_SWIRL_FLAVOR"
+  RAINBOW_SWIRL_FLAVOR = "RAINBOW_SWIRL_FLAVOR",
+  EGG_FOR_SELL = "EGG_FOR_SELL",
+  GIMMIGHOUL_COIN = "GIMMIGHOUL_COIN",
+  EXCHANGE_TICKET = "EXCHANGE_TICKET"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -200,8 +203,8 @@ export const SpecialItems: Item[] = [
   Item.OLD_ROD,
   Item.GOOD_ROD,
   Item.SUPER_ROD,
-  Item.CHEF_HAT,
   Item.TRASH,
+  Item.CHEF_HAT,
   Item.VANILLA_FLAVOR,
   Item.RUBY_FLAVOR,
   Item.MATCHA_FLAVOR,
@@ -210,7 +213,10 @@ export const SpecialItems: Item[] = [
   Item.SALTED_FLAVOR,
   Item.RUBY_SWIRL_FLAVOR,
   Item.CARAMEL_SWIRL_FLAVOR,
-  Item.RAINBOW_SWIRL_FLAVOR
+  Item.RAINBOW_SWIRL_FLAVOR,
+  Item.EGG_FOR_SELL,
+  Item.GIMMIGHOUL_COIN,
+  Item.EXCHANGE_TICKET
 ]
 
 export const FishingRods = [
@@ -453,7 +459,9 @@ export const NonHoldableItems: Item[] = [
   ...FishingRods,
   Item.METEORITE,
   Item.ZYGARDE_CUBE,
-  Item.FIRE_SHARD
+  Item.FIRE_SHARD,
+  Item.GIMMIGHOUL_COIN,
+  Item.EGG_FOR_SELL
 ]
 
 export const OgerponMasks: Item[] = [

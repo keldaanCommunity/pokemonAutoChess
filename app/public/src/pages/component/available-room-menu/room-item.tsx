@@ -1,7 +1,7 @@
 import { RoomAvailable } from "colyseus.js"
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
-import { IPreparationMetadata } from "../../../../../types"
+import { IPreparationMetadata, Role } from "../../../../../types"
 import {
   EloRank,
   EloRankThreshold,
@@ -15,10 +15,11 @@ import "./room-item.css"
 
 export default function RoomItem(props: {
   room: RoomAvailable<IPreparationMetadata>
-  click: (room: RoomAvailable<IPreparationMetadata>) => Promise<any>
+  click: (room: RoomAvailable<IPreparationMetadata>, action: string) => void
 }) {
   const { t } = useTranslation()
   const user = useAppSelector((state) => state.network.profile)
+  const isAdmin = user?.role === Role.ADMIN
 
   const nbPlayersExpected =
     props.room.metadata?.whitelist && props.room.metadata.whitelist.length > 0
@@ -61,6 +62,9 @@ export default function RoomItem(props: {
   ) {
     canJoin = false
     disabledReason = t("max_rank_not_reached")
+  }
+  if (user?.role === Role.ADMIN) {
+    canJoin = true
   }
 
   const title = `${props.room.metadata?.ownerName ? "Owner: " + props.room.metadata?.ownerName : ""}\n${props.room.metadata?.playersInfo?.join("\n")}`
@@ -120,6 +124,7 @@ export default function RoomItem(props: {
       <span>
         {props.room.clients}/{nbPlayersExpected}
       </span>
+      {isAdmin && <button title="Delete room" onClick={() => { props.click(props.room, "delete") }}>X</button>}
       <button
         title={disabledReason ?? t("join")}
         disabled={!canJoin || joining}
@@ -129,12 +134,8 @@ export default function RoomItem(props: {
           props.room.metadata?.password ? "orange" : "green"
         )}
         onClick={() => {
-          if (
-            props.room.clients < nbPlayersExpected &&
-            props.room.metadata?.gameStartedAt === null &&
-            !joining
-          ) {
-            props.click(props.room)
+          if (canJoin && !joining) {
+            props.click(props.room, "join")
             setJoining(true)
             setTimeout(() => setJoining(false), 5000)
           }
@@ -142,6 +143,6 @@ export default function RoomItem(props: {
       >
         {t("join")}
       </button>
-    </div>
+    </div >
   )
 }

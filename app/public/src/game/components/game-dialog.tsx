@@ -1,26 +1,26 @@
-import { GameObjects } from "phaser"
 import React from "react"
 import ReactDOM from "react-dom/client"
+import { GameObjects } from "phaser"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
 
-export class PokemonSpecialDetail extends GameObjects.DOMElement {
+export class GameDialog extends GameObjects.DOMElement {
   dom: HTMLDivElement
 
-  constructor(scene: Phaser.Scene, dialog: string, dialogTitle?: string) {
+  constructor(scene: Phaser.Scene, dialog: string, dialogTitle?: string, extraClass?: string) {
     super(scene, 0, 0)
 
     this.dom = document.createElement("div")
-    this.dom.className = "my-container game-pokemon-dialog"
+    this.dom.className = `my-container game-dialog ${extraClass ?? ""}`
     this.setElement(this.dom)
     const root = ReactDOM.createRoot(this.dom)
     root.render(
       <>
         {dialogTitle && (
-          <div className="game-pokemon-dialog-title">
+          <div className="game-dialog-title">
             <p>{dialogTitle}</p>
           </div>
         )}
-        <div className="game-pokemon-dialog-text">
+        <div className="game-dialog-text">
           {addIconsToDescription(dialog)}
         </div>
       </>
