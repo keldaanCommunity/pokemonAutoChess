@@ -302,7 +302,7 @@ export class Electrike extends Pokemon {
   stars = 1
   evolution = Pkm.MANECTRIC
   hp = 80
-  atk = 5
+  atk = 6
   speed = 70
   def = 6
   speDef = 6
@@ -7108,7 +7108,7 @@ export class Oddish extends Pokemon {
   stars = 1
   evolution = Pkm.GLOOM
   hp = 90
-  atk = 9
+  atk = 8
   speed = 41
   def = 4
   speDef = 4
@@ -7124,7 +7124,7 @@ export class Gloom extends Pokemon {
   stars = 2
   evolution = Pkm.VILEPLUME
   hp = 160
-  atk = 19
+  atk = 18
   speed = 41
   def = 6
   speDef = 6
@@ -12044,7 +12044,7 @@ export class Plusle extends Pokemon {
   stars = 3
   hp = 140
   atk = 12
-  speed = 55
+  speed = 65
   def = 6
   speDef = 6
   maxPP = 60
@@ -12059,7 +12059,7 @@ export class Minun extends Pokemon {
   stars = 3
   hp = 140
   atk = 12
-  speed = 55
+  speed = 65
   def = 6
   speDef = 6
   maxPP = 60
