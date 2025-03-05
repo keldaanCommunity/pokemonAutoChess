@@ -24,9 +24,10 @@ const chatSchema = new Schema({
     required: true
   },
   time: {
-    type: Number,
-    required: true,
-    default: Date.now()
+    type: Date,
+    expires: 7 * 24 * 60 * 60, // stored for 7 days
+    default: Date.now,
+    required: true
   }
 })
 
