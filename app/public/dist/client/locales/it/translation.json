@@ -1889,8 +1889,8 @@
     "RUN_AWAY": "+50 alla SPEED",
     "HUSTLE": "+20% all'ATK e +50 alla SPEED",
     "BERSERK": "+40% all'ATK e +50 alla SPEED, lo status RAGE avviene 5 secondi prima",
-    "FLUID": "La propria squadra ottiene in più 1 SPEED e 4 HP per ogni sinergia attiva",
-    "SHAPELESS": "La propria squadra ottiene in più 3 SPEED e 8 HP per ogni sinergia attiva",
+    "FLUID": "La propria squadra ottiene in più 1 SPEED e 3 HP per ogni sinergia attiva",
+    "SHAPELESS": "La propria squadra ottiene in più 3 SPEED e 6 HP per ogni sinergia attiva",
     "ETHEREAL": "La propria squadra ottiene in più 6 SPEED e 12 HP per ogni sinergia attiva"
   },
   "item": {

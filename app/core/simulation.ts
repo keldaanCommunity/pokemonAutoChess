@@ -1282,14 +1282,14 @@ export default class Simulation extends Schema implements ISimulation {
       case Effect.FLUID: {
         pokemon.effects.add(Effect.FLUID)
         pokemon.addSpeed(1 * activeSynergies, pokemon, 0, false)
-        pokemon.addMaxHP(4 * activeSynergies, pokemon, 0, false)
+        pokemon.addMaxHP(3 * activeSynergies, pokemon, 0, false)
         break
       }
 
       case Effect.SHAPELESS: {
         pokemon.effects.add(Effect.SHAPELESS)
         pokemon.addSpeed(3 * activeSynergies, pokemon, 0, false)
-        pokemon.addMaxHP(8 * activeSynergies, pokemon, 0, false)
+        pokemon.addMaxHP(6 * activeSynergies, pokemon, 0, false)
         break
       }
 
