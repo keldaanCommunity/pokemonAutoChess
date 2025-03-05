@@ -11,7 +11,6 @@ import store from "../../stores"
 import { getPortraitSrc } from "../../../../utils/avatar"
 import GameScene from "../scenes/game-scene"
 import { usePreference } from "../../preferences"
-import { useAppSelector } from "../../hooks"
 import "./emote-menu.css"
 
 export function EmoteMenuComponent(props: {
@@ -22,7 +21,6 @@ export function EmoteMenuComponent(props: {
 }) {
   const [antialiasing] = usePreference('antialiasing')
   const { t } = useTranslation()
-  const emotesUnlocked = useAppSelector(state => state.game.emotesUnlocked)
   const emotions: Emotion[] = AvatarEmotions.filter((emotion) => {
     const indexEmotion = Object.values(Emotion).indexOf(emotion)
     return (
@@ -30,13 +28,12 @@ export function EmoteMenuComponent(props: {
     )
   })
 
-
   return emotions.length === 0 ? (
     <div>{t("no_emotions_available")}</div>
   ) : (
     <ul>
       {emotions.map((emotion, i) => {
-        const unlocked = emotesUnlocked.includes(emotion)
+        const unlocked = store.getState().game.emotesUnlocked.includes(emotion)
         return (
           <li key={emotion}>
             <img

@@ -52,8 +52,14 @@ export function getPkmWithCustom(
   index: string,
   customs?: PokemonCustoms
 ): PkmWithCustom {
-  const shiny = (customs?.get(index.toString()) ?? 0) >= 0b10000000
-  const emotionIndex = (customs?.get(index.toString()) ?? 0) & 0b01111111
+  const custom =
+    customs && index in customs
+      ? customs[index.toString()]
+      : customs && "get" in customs
+        ? customs.get(index.toString())
+        : 0
+  const shiny = custom >= 0b10000000
+  const emotionIndex = custom & 0b01111111
   return {
     name: PkmIndex[index],
     shiny,

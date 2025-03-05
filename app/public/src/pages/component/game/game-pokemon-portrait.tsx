@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from "react"
 import { Tooltip } from "react-tooltip"
 import { CountEvolutionRule } from "../../../../../core/evolution-rules"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
-import { IPokemonCollectionItem } from "../../../../../models/mongo-models/user-metadata"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getBuyPrice } from "../../../../../models/shop"
 import { RarityColor } from "../../../../../types/Config"
@@ -14,8 +13,9 @@ import { cc } from "../../utils/jsx"
 import { Money } from "../icons/money"
 import SynergyIcon from "../icons/synergy-icon"
 import { GamePokemonDetail } from "./game-pokemon-detail"
-import "./game-pokemon-portrait.css"
 import { usePreference } from "../../../preferences"
+import { getPkmWithCustom } from "../../../../../models/colyseus-models/pokemon-customs"
+import "./game-pokemon-portrait.css"
 
 export default function GamePokemonPortrait(props: {
   index: number
@@ -33,10 +33,6 @@ export default function GamePokemonPortrait(props: {
         ? PokemonFactory.createPokemonFromName(props.pokemon)
         : props.pokemon,
     [props.pokemon]
-  )
-
-  const pokemonCollection = useAppSelector(
-    (state) => state.game.pokemonCollection
   )
 
   const uid: string = useAppSelector((state) => state.network.uid)
@@ -86,10 +82,7 @@ export default function GamePokemonPortrait(props: {
     return <div className="game-pokemon-portrait my-box empty" />
   }
 
-  const pokemonConfig: IPokemonCollectionItem | undefined = pokemonCollection.get(
-    pokemon.index
-  )
-
+  const pokemonCustom = getPkmWithCustom(pokemon.index, currentPlayer?.pokemonCustoms)
   const rarityColor = RarityColor[pokemon.rarity]
 
   const evolutionName = currentPlayer
@@ -122,7 +115,6 @@ export default function GamePokemonPortrait(props: {
     willEvolve && pokemonEvolution
       ? pokemonEvolution
       : pokemon
-  const pokemonInPortraitConfig = pokemonCollection.get(pokemonInPortrait.index)
 
   let cost = getBuyPrice(pokemon.name, specialGameRule)
 
@@ -149,8 +141,8 @@ export default function GamePokemonPortrait(props: {
         borderColor: rarityColor,
         backgroundImage: `url("${getPortraitSrc(
           pokemonInPortrait.index,
-          pokemonInPortraitConfig?.selectedShiny,
-          pokemonInPortraitConfig?.selectedEmotion
+          pokemonCustom.shiny,
+          pokemonCustom.emotion
         )}")`
       }}
       onClick={(e) => {
@@ -168,8 +160,8 @@ export default function GamePokemonPortrait(props: {
         <GamePokemonDetail
           key={pokemonInPortrait.id}
           pokemon={pokemonInPortrait}
-          emotion={pokemonInPortraitConfig?.selectedEmotion}
-          shiny={pokemonInPortraitConfig?.selectedShiny}
+          emotion={pokemonCustom.emotion}
+          shiny={pokemonCustom.shiny}
         />
       </Tooltip>
       {willEvolve && pokemonEvolution && (
@@ -177,8 +169,8 @@ export default function GamePokemonPortrait(props: {
           <img
             src={getPortraitSrc(
               pokemon.index,
-              pokemonConfig?.selectedShiny,
-              pokemonConfig?.selectedEmotion
+              pokemonCustom.shiny,
+              pokemonCustom.emotion
             )}
             className={cc("game-pokemon-portrait-evolution-portrait", {
               pixelated: !antialiasing

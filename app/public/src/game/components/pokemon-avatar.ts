@@ -229,12 +229,7 @@ export default class PokemonAvatar extends PokemonSprite {
 
   sendEmote(emotion: Emotion) {
     const state = store.getState()
-    const player = state.game.players.find((p) => p.id === this.scene.uid)
-    const pokemonCollection = player?.pokemonCollection
-    const pConfig = pokemonCollection?.[this.index]
-    const emotions = this.shiny ? pConfig.shinyEmotions : pConfig.emotions
-    const unlocked = pConfig && emotions.includes(emotion)
-    if (unlocked) {
+    if (state.game.emotesUnlocked.includes(emotion)) {
       store.dispatch(
         showEmote(getAvatarString(this.index, this.shiny, emotion))
       )
