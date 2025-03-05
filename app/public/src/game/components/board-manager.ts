@@ -567,7 +567,8 @@ export default class BoardManager {
     this.updateOpponentAvatar(null, null)
     this.updateScoutingAvatars(true)
     this.scene.minigameManager?.addVillagers(
-      this.scene.room?.state.townEncounter ?? null
+      this.scene.room?.state.townEncounter ?? null,
+      store.getState().game.podium
     )
   }
 
