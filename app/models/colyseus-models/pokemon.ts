@@ -12178,8 +12178,8 @@ export class MegaSableye extends Pokemon {
   hp = 200
   atk = 14
   speed = 31
-  def = 12
-  speDef = 12
+  def = 15
+  speDef = 15
   maxPP = 100
   range = 1
   skill = Ability.KNOCK_OFF
@@ -16574,7 +16574,7 @@ export class Zygarde100 extends Pokemon {
   stars = 4
   hp = 300
   atk = 28
-  speed = 52
+  speed = 50
   def = 10
   speDef = 10
   maxPP = 120
