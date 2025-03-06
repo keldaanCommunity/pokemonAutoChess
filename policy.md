@@ -2,11 +2,11 @@
 
 Your privacy is important to us. It is Keldaan's policy to respect your privacy and comply with any applicable law and regulation regarding any personal information we may collect about you, including across our website, https://pokemon-auto-chess.com, and other sites we own and operate.
 
-This policy is effective as of 5 October 2021 and was last updated on 5 October 2021.
+This policy is effective as of 6 March 2025 and was last updated on 6 March 2025.
 
 # How to request the deletion of your data?
 
-You can request at any time that all your data be deleted. To do so, please notify a moderator on the discord server or send a mail to keldaan.ag@gmail.com
+You can request at any time that all your data be deleted. To do so, please notify a moderator on the discord server or send an email to keldaan.ag@gmail.com with the subject line 'Data Deletion Request.' We will process your request within a reasonable timeframe.
 
 # Information We Collect
 
@@ -26,7 +26,7 @@ Email
 
 # Legitimate Reasons for Processing Your Personal Information
 
-We only collect and use your personal information when we have a legitimate reason for doing so. In which instance, we only collect personal information that is reasonably necessary to provide our services to you.
+We collect and use your personal information to provide our services, improve user experience, and comply with legal obligations.
 
 # Collection and Use of Information
 
@@ -35,8 +35,6 @@ We may collect personal information from you when you do any of the following on
     Use a mobile device or web browser to access our content
     Contact us via email, social media, or on any similar technologies
     When you mention us on social media
-
-We may collect, hold, use, and disclose information for the following purposes, and personal information will not be further processed in a manner that is incompatible with these purposes:
 
 We may collect, hold, use, and disclose information for the following purposes, and personal information will not be further processed in a manner that is incompatible with these purposes:
 
@@ -58,7 +56,7 @@ You are responsible for selecting any password and its overall security strength
 
 We keep your personal information only for as long as we need to. This time period may depend on what we are using your information for, in accordance with this privacy policy. If your personal information is no longer required, we will delete it or make it anonymous by removing all details that identify you.
 
-However, if necessary, we may retain your personal information for our compliance with a legal, accounting, or reporting obligation or for archiving purposes in the public interest, scientific, or historical research purposes or statistical purposes.
+However, if required, we may retain and provide your personal information for our compliance with a legal, accounting, or reporting obligation or for archiving purposes in the public interest, scientific, or historical research purposes or statistical purposes.
 
 # Children’s Privacy
 
@@ -87,12 +85,14 @@ We use “cookies” to collect information about you and your activity across o
 # Limits of Our Policy
 
 Our website may link to external sites that are not operated by us. Please be aware that we have no control over the content and policies of those sites, and cannot accept responsibility or liability for their respective privacy practices.
-Changes to This Policy
 
-At our discretion, we may change our privacy policy to reflect updates to our business processes, current acceptable practices, or legislative or regulatory changes. If we decide to change this privacy policy, we will post the changes here at the same link by which you are accessing this privacy policy.
+# Changes to This Policy
+
+At our discretion, we may change our privacy policy to reflect updates to our business processes, current acceptable practices, or legislative or regulatory changes. If we make significant changes, we will update the date at the top of this policy and, if necessary, notify users through our website or Discord. We encourage you to review this policy periodically to stay informed about how we protect your information.
 
 If required by law, we will get your permission or give you the opportunity to opt in to or opt out of, as applicable, any new uses of your personal information.
-Contact Us
+
+# Contact Us
 
 For any questions or concerns regarding your privacy, you may contact us using the following details:
 
