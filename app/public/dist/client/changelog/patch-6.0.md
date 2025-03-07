@@ -27,11 +27,11 @@
 
 # Changes to Pokemon & Abilities
 
-- Lickitung line is now Wild/Normal/Gourmet
-- Sinistea line is now Ghost/Artificial/Gourmet
+- Lickitung line is now Wild/Normal/Gourmet ; nerfed attack & special defense
+- Sinistea line is now Ghost/Artificial/Gourmet ; nerfed HP & defense
 - Vanillite line is now Ice/Amorphous/Gourmet
-- Bounsweet line is now Grass/Fighting/Gourmet
-- Combee line is now Bug/Flora/Gourmet
+- Bounsweet line is now Grass/Fighting/Gourmet ; nerfed HP
+- Combee line is now Bug/Flora/Gourmet ; nerfed HP
 - Munchlax is now Normal/Baby/Gourmet
 - Snorlax is now Normal/Gourmet/Monster
 - Munchlax line passive changed: now also gain permanent HP by eating dishes and cooking
@@ -70,12 +70,17 @@
 - Rework Acrobatics: now move to a cell at good distance from its target. Move further away if not holding any item.
 - Rework Glaive Rush (Frigibax): improves targeting when destination cell is occupied, deal special damage instead of physical, added animation
 - Smeargle is now 3-range ; no change to stats, it can still be played on every line
+- Nerfed Obstruct (Obstagoon): Protect duration 1/2/4 → 1/2/3 seconds
+- Nerfed Celebi HP 300 → 250
+- Nerfed Wishiwashi: HP 100 → 50
 
 # Changes to Synergies
 
 - New synergy Gourmet: Gourmet Pokémon can be equipped with a Chef's Hat. Chefs will cook up their Signature Dish between fights and feed adjacent allies, giving them various buffs and effects.
 - Berry trees no longer change every time a berry is collected. Instead, they change when you change region.
 - Wild now gives Speed at levels 2-4 and Attack at levels 6-8 instead of attack and movement speed at all levels
+- Nerf Amorphous 3 & 5 : 4/8 → 3/6 HP per active synergy
+- Nerf Artficial 4 & 6: 8/15 → 6/12 attack, AP and shieldd per held item
 
 # Changes to Items
 

@@ -1156,18 +1156,18 @@ export default class Simulation extends Schema implements ISimulation {
           )
           const attackBoost = {
             [Effect.DUBIOUS_DISC]: 0,
-            [Effect.LINK_CABLE]: (8 / 100) * pokemon.baseAtk,
-            [Effect.GOOGLE_SPECS]: (15 / 100) * pokemon.baseAtk
+            [Effect.LINK_CABLE]: (6 / 100) * pokemon.baseAtk,
+            [Effect.GOOGLE_SPECS]: (12 / 100) * pokemon.baseAtk
           }[effect]
           const apBoost = {
             [Effect.DUBIOUS_DISC]: 0,
-            [Effect.LINK_CABLE]: 8,
-            [Effect.GOOGLE_SPECS]: 15
+            [Effect.LINK_CABLE]: 6,
+            [Effect.GOOGLE_SPECS]: 12
           }[effect]
           const shieldBoost = {
             [Effect.DUBIOUS_DISC]: 0,
-            [Effect.LINK_CABLE]: (8 / 100) * pokemon.hp,
-            [Effect.GOOGLE_SPECS]: (15 / 100) * pokemon.hp
+            [Effect.LINK_CABLE]: (6 / 100) * pokemon.hp,
+            [Effect.GOOGLE_SPECS]: (12 / 100) * pokemon.hp
           }[effect]
           pokemon.addAttack(attackBoost * nbItems, pokemon, 0, false)
           pokemon.addAbilityPower(apBoost * nbItems, pokemon, 0, false)
@@ -1282,14 +1282,14 @@ export default class Simulation extends Schema implements ISimulation {
       case Effect.FLUID: {
         pokemon.effects.add(Effect.FLUID)
         pokemon.addSpeed(1 * activeSynergies, pokemon, 0, false)
-        pokemon.addMaxHP(4 * activeSynergies, pokemon, 0, false)
+        pokemon.addMaxHP(3 * activeSynergies, pokemon, 0, false)
         break
       }
 
       case Effect.SHAPELESS: {
         pokemon.effects.add(Effect.SHAPELESS)
         pokemon.addSpeed(3 * activeSynergies, pokemon, 0, false)
-        pokemon.addMaxHP(8 * activeSynergies, pokemon, 0, false)
+        pokemon.addMaxHP(6 * activeSynergies, pokemon, 0, false)
         break
       }
 
