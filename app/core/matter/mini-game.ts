@@ -49,6 +49,7 @@ import {
   TownEncounterSellPrice
 } from "../town-encounters"
 import { giveRandomEgg } from "../eggs"
+import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -148,7 +149,10 @@ export class MiniGame {
               const client = room.clients.find(
                 (cli) => cli.auth.uid === avatar.id
               )
-              const price = TownEncounterSellPrice[encounter]!
+              const price =
+                room.state.specialGameRule === SpecialGameRule.TOWN_FESTIVAL
+                  ? 0
+                  : TownEncounterSellPrice[encounter]!
               if ((player?.money ?? 0) < price) {
                 // too poor to buy one item from kecleon's shop
                 client?.send(Transfer.NPC_DIALOG, {
@@ -287,7 +291,10 @@ export class MiniGame {
     })
 
     if (stageLevel in TownEncountersByStage) {
-      let encounter = randomWeighted(TownEncountersByStage[stageLevel])
+      let encounter = randomWeighted(
+        TownEncountersByStage[stageLevel],
+        state.specialGameRule === SpecialGameRule.TOWN_FESTIVAL ? undefined : 1
+      )
       if (state.townEncounter === encounter) {
         encounter = null // prevent getting the same encounter twice in a row
       }
@@ -657,7 +664,11 @@ export class MiniGame {
         player &&
         !player.isBot &&
         this.items &&
-        !(encounter && encounter in TownEncounterSellPrice)
+        !(
+          encounter &&
+          encounter in TownEncounterSellPrice &&
+          state.specialGameRule !== SpecialGameRule.TOWN_FESTIVAL
+        )
       ) {
         // give a random item if none was taken
         const remainingItems = [...this.items.entries()].filter(

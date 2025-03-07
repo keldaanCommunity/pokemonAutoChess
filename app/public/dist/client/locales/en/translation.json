@@ -3559,7 +3559,8 @@
     "DO_IT_ALL_YOURSELF": "Do it all yourself !",
     "FIRST_PARTNER": "First Partner",
     "SLAMINGO": "Slamingo",
-    "BLOOD_MONEY": "Blood Money"
+    "BLOOD_MONEY": "Blood Money",
+    "TOWN_FESTIVAL": "Town Festival"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "All the additional picks are available immediately",
@@ -3575,7 +3576,8 @@
     "DO_IT_ALL_YOURSELF": "Start with a copy of your avatar. Lower rarity avatars get additional max HP and starting gold.",
     "FIRST_PARTNER": "Choose your starter Pokémon. You get a copy of this unit every stage up to stage 10.",
     "SLAMINGO": "All items are dropped when a Pokémon is put on the bench. Starts with 4 random components.",
-    "BLOOD_MONEY": "Every KO gives 1 GOLD. No extra income from interests."
+    "BLOOD_MONEY": "Every KO gives 1 GOLD. No extra income from interests.",
+    "TOWN_FESTIVAL": "You always get an encounter in town and all the carousel items are free."
   },
   "town_encounter": {
     "KECLEON": "Kecleon's Shop",
