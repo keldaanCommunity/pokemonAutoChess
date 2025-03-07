@@ -13,7 +13,6 @@ import { fpsToDuration } from "../../../utils/number"
 import atlas from "../assets/atlas.json"
 import delays from "../../../types/delays.json"
 import durations from "../assets/pokemons/durations.json"
-import indexList from "../assets/pokemons/indexList.json"
 import PokemonSprite from "./components/pokemon"
 import { getPokemonData } from "../../../models/precomputed/precomputed-pokemon-data"
 import { Passive } from "../../../types/enum/Passive"
@@ -26,88 +25,6 @@ export default class AnimationManager {
 
   constructor(game: Phaser.Scene) {
     this.game = game
-
-    indexList.forEach((index) => {
-      const tints = Object.values(PokemonTint) as PokemonTint[]
-      const pkm = PkmByIndex[index]
-      const pokemonData = getPokemonData(pkm)
-      tints.forEach((shiny) => {
-        if (!pkm && !AnimationConfig[pkm]) {
-          logger.warn(`No animation config for ${pkm}`)
-          return
-        }
-        const config = AnimationConfig[pkm]
-
-        if (config.shinyUnavailable && shiny === PokemonTint.SHINY) return
-
-        const actions: Set<AnimationType> = new Set([AnimationType.Idle])
-        actions.add(config.hurt ?? AnimationType.Hurt)
-
-        if (pokemonData.passive !== Passive.INANIMATE) {
-          actions.add(AnimationType.Walk)
-          actions.add(config.sleep ?? AnimationType.Sleep)
-          actions.add(config.eat ?? AnimationType.Eat)
-          actions.add(config.hop ?? AnimationType.Hop)
-          actions.add(config.attack ?? AnimationType.Attack)
-          actions.add(config.ability ?? AnimationType.SpAttack)
-          actions.add(config.emote ?? AnimationType.Pose)
-        }
-
-        //logger.debug(`Init animations: ${index} => ${actions.join(",")}`)
-
-        actions.forEach((action) => {
-          const spriteTypes = config.noShadow
-            ? [SpriteType.ANIM]
-            : [SpriteType.ANIM, SpriteType.SHADOW]
-          spriteTypes.forEach((mode) => {
-            const directionArray =
-              AnimationComplete[action] === false
-                ? [Orientation.DOWN]
-                : Object.values(Orientation)
-            directionArray.forEach((direction) => {
-              const durationArray: number[] =
-                durations[`${index}/${shiny}/${action}/${mode}`]
-              if (!durationArray && action === AnimationType.Eat) {
-                // Very few pokemons have eat animations, so we use sleep animations instead as a fallback
-                config.eat = AnimationType.Sleep
-                return
-              }
-              if (durationArray) {
-                const frameArray = this.game.anims.generateFrameNames(index, {
-                  start: 0,
-                  end: durationArray.length - 1,
-                  zeroPad: 4,
-                  prefix: `${shiny}/${action}/${mode}/${direction}/`
-                })
-                for (let i = 0; i < durationArray.length; i++) {
-                  if (frameArray[i]) {
-                    frameArray[i]["duration"] =
-                      durationArray[i] * (1000 / FPS_POKEMON_ANIMS)
-                  }
-                }
-                const shouldLoop = [
-                  AnimationType.Idle,
-                  AnimationType.Sleep,
-                  AnimationType.Eat,
-                  AnimationType.Hop
-                ].includes(action)
-
-                this.game.anims.create({
-                  key: `${index}/${shiny}/${action}/${mode}/${direction}`,
-                  frames: frameArray,
-                  repeat: shouldLoop ? -1 : 0
-                })
-              } else {
-                logger.warn(
-                  "duration array missing for",
-                  `${index}/${shiny}/${action}/${mode}`
-                )
-              }
-            })
-          })
-        })
-      })
-    })
 
     for (const pack in atlas.packs) {
       if (atlas.packs[pack].anims) {
@@ -127,6 +44,134 @@ export default class AnimationManager {
 
     this.createMinigameAnimations()
     this.createEnvironmentAnimations()
+  }
+
+  createPokemonAnimations(index: string, shiny: PokemonTint) {
+    const pkm = PkmByIndex[index]
+
+    if (!pkm && !AnimationConfig[pkm]) {
+      logger.warn(`No animation config for ${pkm}`)
+      return
+    }
+    const pokemonData = getPokemonData(pkm)
+    const config = AnimationConfig[pkm]
+
+    if (config.shinyUnavailable && shiny === PokemonTint.SHINY) return
+
+    const actions: Set<AnimationType> = new Set([AnimationType.Idle])
+    actions.add(config.hurt ?? AnimationType.Hurt)
+
+    if (pokemonData.passive !== Passive.INANIMATE) {
+      actions.add(AnimationType.Walk)
+      actions.add(config.sleep ?? AnimationType.Sleep)
+      actions.add(config.eat ?? AnimationType.Eat)
+      actions.add(config.hop ?? AnimationType.Hop)
+      actions.add(config.attack ?? AnimationType.Attack)
+      actions.add(config.ability ?? AnimationType.SpAttack)
+      actions.add(config.emote ?? AnimationType.Pose)
+    }
+
+    //logger.debug(`Init animations: ${index} => ${actions.join(",")}`)
+
+    actions.forEach((action) => {
+      const spriteTypes = config.noShadow
+        ? [SpriteType.ANIM]
+        : [SpriteType.ANIM, SpriteType.SHADOW]
+      spriteTypes.forEach((mode) => {
+        const directionArray =
+          AnimationComplete[action] === false
+            ? [Orientation.DOWN]
+            : Object.values(Orientation)
+        directionArray.forEach((direction) => {
+          const durationArray: number[] =
+            durations[`${index}/${shiny}/${action}/${mode}`]
+          if (!durationArray && action === AnimationType.Eat) {
+            // Very few pokemons have eat animations, so we use sleep animations instead as a fallback
+            config.eat = AnimationType.Sleep
+            return
+          }
+          if (durationArray) {
+            const frameArray = this.game.anims.generateFrameNames(index, {
+              start: 0,
+              end: durationArray.length - 1,
+              zeroPad: 4,
+              prefix: `${shiny}/${action}/${mode}/${direction}/`
+            })
+            for (let i = 0; i < durationArray.length; i++) {
+              if (frameArray[i]) {
+                frameArray[i]["duration"] =
+                  durationArray[i] * (1000 / FPS_POKEMON_ANIMS)
+              }
+            }
+            const shouldLoop = [
+              AnimationType.Idle,
+              AnimationType.Sleep,
+              AnimationType.Eat,
+              AnimationType.Hop
+            ].includes(action)
+
+            const key = `${index}/${shiny}/${action}/${mode}/${direction}`
+            if (!this.game.anims.exists(key)) {
+              this.game.anims.create({
+                key: `${index}/${shiny}/${action}/${mode}/${direction}`,
+                frames: frameArray,
+                repeat: shouldLoop ? -1 : 0
+              })
+            }
+          } else {
+            logger.warn(
+              "duration array missing for",
+              `${index}/${shiny}/${action}/${mode}`
+            )
+          }
+        })
+      })
+    })
+  }
+
+  unloadPokemonAnimations(index: string, shiny: PokemonTint) {
+    const pkm = PkmByIndex[index]
+
+    if (!pkm && !AnimationConfig[pkm]) {
+      logger.warn(`No animation config for ${pkm}`)
+      return
+    }
+    const pokemonData = getPokemonData(pkm)
+    const config = AnimationConfig[pkm]
+
+    if (config.shinyUnavailable && shiny === PokemonTint.SHINY) return
+
+    const actions: Set<AnimationType> = new Set([AnimationType.Idle])
+    actions.add(config.hurt ?? AnimationType.Hurt)
+
+    if (pokemonData.passive !== Passive.INANIMATE) {
+      actions.add(AnimationType.Walk)
+      actions.add(config.sleep ?? AnimationType.Sleep)
+      actions.add(config.eat ?? AnimationType.Eat)
+      actions.add(config.hop ?? AnimationType.Hop)
+      actions.add(config.attack ?? AnimationType.Attack)
+      actions.add(config.ability ?? AnimationType.SpAttack)
+      actions.add(config.emote ?? AnimationType.Pose)
+    }
+
+    //logger.debug(`Remove animations: ${index} => ${actions.join(",")}`)
+
+    actions.forEach((action) => {
+      const spriteTypes = config.noShadow
+        ? [SpriteType.ANIM]
+        : [SpriteType.ANIM, SpriteType.SHADOW]
+      spriteTypes.forEach((mode) => {
+        const directionArray =
+          AnimationComplete[action] === false
+            ? [Orientation.DOWN]
+            : Object.values(Orientation)
+        directionArray.forEach((direction) => {
+          this.game.anims.remove(
+            `${index}/${shiny}/${action}/${mode}/${direction}`
+          )
+        })
+      })
+    })
   }
 
   createAnimation({
