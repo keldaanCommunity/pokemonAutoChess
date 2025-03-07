@@ -486,10 +486,6 @@ export class MiniGame {
       }
     }
 
-    if (itemsSet === ItemComponents) {
-      state.nbComponentsFromCarousel++
-    }
-
     return items
   }
 
@@ -501,7 +497,7 @@ export class MiniGame {
       )
       //logger.debug(`symbols chosen for player ${player.name}`, symbols)
       symbols.forEach((type, i) => {
-        const symbol = new SynergySymbol(4, 4, type, i)
+        const symbol = new SynergySymbol(this.centerX, this.centerY, type, i)
         this.symbols?.set(symbol.id, symbol)
       })
     } else {
@@ -567,17 +563,17 @@ export class MiniGame {
     this.symbolsByPortal = new Map()
 
     symbols.forEach((symbol, i) => {
-      const portalId = portalIds[i % portalIds.length]
-      this.symbolsByPortal.set(portalId, [
-        ...(this.symbolsByPortal.get(portalId) ?? []),
-        symbol
-      ])
       setTimeout(
         () => {
+          const portalId = portalIds[i % portalIds.length]
+          this.symbolsByPortal.set(portalId, [
+            ...(this.symbolsByPortal.get(portalId) ?? []),
+            symbol
+          ])
           symbol.index = Math.floor(i / portalIds.length)
           symbol.portalId = portalId
         },
-        1500 + 1500 * (i / symbols.length)
+        1500 * (i / symbols.length)
       )
     })
 
