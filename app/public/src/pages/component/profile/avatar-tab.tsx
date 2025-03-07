@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { changeAvatar } from "../../../stores/NetworkStore"
-import { getPortraitSrc } from "../../../../../utils/avatar"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import PokemonPortrait from "../pokemon-portrait"
 
@@ -27,31 +26,28 @@ export function AvatarTab() {
         {pokemonCollection.length === 0 && <p>{t("play_more_games_hint")}</p>}
         {["normal", "shiny"].flatMap((type) =>
           pokemonCollection
-            .filter(
-              (pokemonConfig) =>
-                !selectedPkm || pokemonConfig.id === PkmIndex[selectedPkm]
-            )
-            .map((pokemonConfig) => {
+            .filter((p) => !selectedPkm || p.id === PkmIndex[selectedPkm])
+            .map((p) => {
               return (
                 type === "shiny"
-                  ? pokemonConfig.shinyEmotions
-                  : pokemonConfig.emotions
+                  ? p.shinyEmotions
+                  : p.emotions
               ).map((emotion) => {
                 return (
                   <PokemonPortrait
-                    key={`${type}-${pokemonConfig.id}${emotion}`}
+                    key={`${type}-${p.id}${emotion}`}
                     className="clickable"
                     onClick={() => {
                       dispatch(
                         changeAvatar({
-                          index: pokemonConfig.id,
+                          index: p.id,
                           emotion: emotion,
                           shiny: type === "shiny"
                         })
                       )
                     }}
                     portrait={{
-                      index: pokemonConfig.id,
+                      index: p.id,
                       shiny: type === "shiny",
                       emotion
                     }}

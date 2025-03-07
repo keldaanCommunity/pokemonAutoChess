@@ -30,7 +30,7 @@ import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { removeInArray } from "../../utils/array"
-import { getPokemonConfigFromAvatar } from "../../utils/avatar"
+import { getPokemonCustomFromAvatar } from "../../utils/avatar"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { min } from "../../utils/number"
 import { pickNRandomIn, pickRandomIn } from "../../utils/random"
@@ -145,8 +145,10 @@ export default class Player extends Schema implements IPlayer {
     this.title = title
     this.role = role
     this.pokemonCustoms = new PokemonCustoms(pokemonCollection)
-    const avatarConfig = getPokemonConfigFromAvatar(avatar)
-    const avatarInCollection = pokemonCollection.get(avatarConfig.index)
+    const avatarCustom = getPokemonCustomFromAvatar(avatar)
+    const avatarInCollection = pokemonCollection.get(
+      PkmIndex[avatarCustom.name]
+    )
     this.emotesUnlocked = (
       (avatarInCollection?.selectedShiny
         ? avatarInCollection?.shinyEmotions
@@ -187,8 +189,12 @@ export default class Player extends Schema implements IPlayer {
         pokemon.onAcquired(this)
       })
     } else if (state.specialGameRule === SpecialGameRule.DO_IT_ALL_YOURSELF) {
-      const { index, emotion, shiny } = getPokemonConfigFromAvatar(this.avatar)
-      this.firstPartner = PkmByIndex[index]
+      const {
+        name,
+        emotion,
+        shiny = false
+      } = getPokemonCustomFromAvatar(this.avatar)
+      this.firstPartner = name
 
       switch (this.firstPartner) {
         case Pkm.AEGISLASH_BLADE:

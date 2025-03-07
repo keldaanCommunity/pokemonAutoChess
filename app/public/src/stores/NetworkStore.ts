@@ -205,12 +205,12 @@ export const networkSlice = createSlice({
       action: PayloadAction<{ index: string; emotion: Emotion; shiny: boolean }>
     ) => {
       if (state.profile) {
-        const pokemonConfig = state.profile.pokemonCollection.get(
+        const pokemonCollectionItem = state.profile.pokemonCollection.get(
           action.payload.index
         )
-        if (pokemonConfig) {
-          pokemonConfig.selectedEmotion = action.payload.emotion
-          pokemonConfig.selectedShiny = action.payload.shiny
+        if (pokemonCollectionItem) {
+          pokemonCollectionItem.selectedEmotion = action.payload.emotion
+          pokemonCollectionItem.selectedShiny = action.payload.shiny
         }
       }
       state.lobby?.send(Transfer.CHANGE_SELECTED_EMOTION, action.payload)

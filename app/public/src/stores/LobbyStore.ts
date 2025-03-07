@@ -87,7 +87,7 @@ export const lobbySlice = createSlice({
     setLevelLeaderboard: (state, action: PayloadAction<ILeaderboardInfo[]>) => {
       state.levelLeaderboard = action.payload
     },
-    changePokemonConfig: (
+    changePokemonCollectionItem: (
       state,
       action: PayloadAction<{ id: string; field: string; value: any }>
     ) => {
@@ -245,7 +245,7 @@ export const lobbySlice = createSlice({
 export const {
   removeMessage,
   setBoosterContent,
-  changePokemonConfig,
+  changePokemonCollectionItem,
   pushMessage,
   setLeaderboard,
   setBotLeaderboard,

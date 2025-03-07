@@ -315,11 +315,12 @@ export class OpenBoosterCommand extends Command<
 
       boosterContent.forEach((pkmWithConfig) => {
         const index = PkmIndex[pkmWithConfig.name]
-        const mongoPokemonConfig = mongoUser.pokemonCollection.get(index)
+        const mongoPokemonCollectionItem =
+          mongoUser.pokemonCollection.get(index)
         const dustGain = pkmWithConfig.shiny ? DUST_PER_SHINY : DUST_PER_BOOSTER
 
-        if (mongoPokemonConfig) {
-          mongoPokemonConfig.dust += dustGain
+        if (mongoPokemonCollectionItem) {
+          mongoPokemonCollectionItem.dust += dustGain
         } else {
           mongoUser.pokemonCollection.set(index, {
             id: index,
@@ -338,19 +339,22 @@ export class OpenBoosterCommand extends Command<
       user.booster = mongoUser.booster - 1
       boosterContent.forEach((pkmWithConfig) => {
         const index = PkmIndex[pkmWithConfig.name]
-        const pokemonConfig = user.pokemonCollection.get(index)
-        const mongoPokemonConfig = mongoUser.pokemonCollection.get(index)
-        if (!mongoPokemonConfig) return
-        if (pokemonConfig) {
-          pokemonConfig.dust = mongoPokemonConfig.dust
+        const pokemonCollectionItem = user.pokemonCollection.get(index)
+        const mongoPokemonCollectionItem =
+          mongoUser.pokemonCollection.get(index)
+        if (!mongoPokemonCollectionItem) return
+        if (pokemonCollectionItem) {
+          pokemonCollectionItem.dust = mongoPokemonCollectionItem.dust
         } else {
           const newConfig: IPokemonCollectionItem = {
-            dust: mongoPokemonConfig.dust,
-            id: mongoPokemonConfig.id,
-            emotions: mongoPokemonConfig.emotions.map((e) => e),
-            shinyEmotions: mongoPokemonConfig.shinyEmotions.map((e) => e),
-            selectedEmotion: mongoPokemonConfig.selectedEmotion,
-            selectedShiny: mongoPokemonConfig.selectedShiny
+            dust: mongoPokemonCollectionItem.dust,
+            id: mongoPokemonCollectionItem.id,
+            emotions: mongoPokemonCollectionItem.emotions.map((e) => e),
+            shinyEmotions: mongoPokemonCollectionItem.shinyEmotions.map(
+              (e) => e
+            ),
+            selectedEmotion: mongoPokemonCollectionItem.selectedEmotion,
+            selectedShiny: mongoPokemonCollectionItem.selectedShiny
           }
           user.pokemonCollection.set(index, newConfig)
         }
@@ -474,18 +478,18 @@ export class ChangeSelectedEmotionCommand extends Command<
     try {
       const user = this.room.users.get(client.auth.uid)
       if (!user) return
-      const pokemonConfig = user.pokemonCollection.get(index)
-      if (pokemonConfig) {
+      const pokemonCollectionItem = user.pokemonCollection.get(index)
+      if (pokemonCollectionItem) {
         const emotionsToCheck = shiny
-          ? pokemonConfig.shinyEmotions
-          : pokemonConfig.emotions
+          ? pokemonCollectionItem.shinyEmotions
+          : pokemonCollectionItem.emotions
         if (
           emotionsToCheck.includes(emotion) &&
-          (emotion != pokemonConfig.selectedEmotion ||
-            shiny != pokemonConfig.selectedShiny)
+          (emotion != pokemonCollectionItem.selectedEmotion ||
+            shiny != pokemonCollectionItem.selectedShiny)
         ) {
-          pokemonConfig.selectedEmotion = emotion
-          pokemonConfig.selectedShiny = shiny
+          pokemonCollectionItem.selectedEmotion = emotion
+          pokemonCollectionItem.selectedShiny = shiny
           const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
           const pkmConfig = mongoUser?.pokemonCollection.get(index)
           if (mongoUser && pkmConfig) {
@@ -558,8 +562,8 @@ export class BuyEmotionCommand extends Command<
       const user = this.room.users.get(client.auth.uid)
       const cost = getEmotionCost(emotion, shiny)
       if (!user || !PkmByIndex.hasOwnProperty(index)) return
-      const pokemonConfig = user.pokemonCollection.get(index)
-      if (!pokemonConfig) return
+      const pokemonCollectionItem = user.pokemonCollection.get(index)
+      if (!pokemonCollectionItem) return
 
       const mongoUser = await UserMetadata.findOneAndUpdate(
         {
@@ -587,19 +591,21 @@ export class BuyEmotionCommand extends Command<
       // const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
       if (!mongoUser) return
 
-      const mongoPokemonConfig = mongoUser.pokemonCollection.get(index)
-      if (!mongoPokemonConfig) return
+      const mongoPokemonCollectionItem = mongoUser.pokemonCollection.get(index)
+      if (!mongoPokemonCollectionItem) return
 
-      pokemonConfig.dust = mongoPokemonConfig.dust // resync shards to database value, db authoritative
-      pokemonConfig.selectedShiny = mongoPokemonConfig.selectedShiny
-      pokemonConfig.selectedEmotion = mongoPokemonConfig.selectedEmotion
+      pokemonCollectionItem.dust = mongoPokemonCollectionItem.dust // resync shards to database value, db authoritative
+      pokemonCollectionItem.selectedShiny =
+        mongoPokemonCollectionItem.selectedShiny
+      pokemonCollectionItem.selectedEmotion =
+        mongoPokemonCollectionItem.selectedEmotion
 
-      if (shiny && mongoPokemonConfig.shinyEmotions.includes(emotion)) {
-        pokemonConfig.shinyEmotions.push(emotion)
+      if (shiny && mongoPokemonCollectionItem.shinyEmotions.includes(emotion)) {
+        pokemonCollectionItem.shinyEmotions.push(emotion)
       }
 
-      if (!shiny && mongoPokemonConfig.emotions.includes(emotion)) {
-        pokemonConfig.emotions.push(emotion)
+      if (!shiny && mongoPokemonCollectionItem.emotions.includes(emotion)) {
+        pokemonCollectionItem.emotions.push(emotion)
       }
 
       if (!mongoUser.titles.includes(Title.SHINY_SEEKER)) {
@@ -649,9 +655,10 @@ export class BuyEmotionCommand extends Command<
 
       if (
         !mongoUser.titles.includes(Title.DUCHESS) &&
-        mongoPokemonConfig.shinyEmotions.length >=
+        mongoPokemonCollectionItem.shinyEmotions.length >=
           Object.keys(Emotion).length &&
-        mongoPokemonConfig.emotions.length >= Object.keys(Emotion).length
+        mongoPokemonCollectionItem.emotions.length >=
+          Object.keys(Emotion).length
       ) {
         mongoUser.titles.push(Title.DUCHESS)
       }
@@ -694,14 +701,14 @@ export class BuyBoosterCommand extends Command<
       )
       if (!mongoUser) return
 
-      const pokemonConfig = user.pokemonCollection.get(index)
-      if (!pokemonConfig) return
+      const pokemonCollectionItem = user.pokemonCollection.get(index)
+      if (!pokemonCollectionItem) return
 
-      const mongoPokemonConfig = mongoUser.pokemonCollection.get(index)
-      if (!mongoPokemonConfig) return
+      const mongoPokemonCollectionItem = mongoUser.pokemonCollection.get(index)
+      if (!mongoPokemonCollectionItem) return
 
       user.booster = mongoUser.booster
-      pokemonConfig.dust = mongoPokemonConfig.dust // resync shards to database value, db authoritative
+      pokemonCollectionItem.dust = mongoPokemonCollectionItem.dust // resync shards to database value, db authoritative
       client.send(Transfer.USER_PROFILE, mongoUser)
     } catch (error) {
       logger.error(error)
