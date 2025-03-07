@@ -45,6 +45,9 @@ import PokemonDetail from "./pokemon-detail"
 import type { GameDialog } from "./game-dialog"
 import PowerBar from "./power-bar"
 import { DEPTH } from "../depths"
+import { logger } from "../../../../utils/logger"
+
+const spriteCountPerPokemon = new Map<string, number>()
 
 export default class PokemonSprite extends DraggableObject {
   evolution: Pkm
@@ -186,6 +189,8 @@ export default class PokemonSprite extends DraggableObject {
       rotateToTarget: false
     })
 
+    this.lazyloadAnimations(scene)
+
     const p = <IPokemonEntity>pokemon
     if (p.orientation) {
       this.orientation = p.orientation
@@ -208,9 +213,8 @@ export default class PokemonSprite extends DraggableObject {
     this.sprite.setScale(2 + sizeBuff).setDepth(DEPTH.POKEMON)
     this.sprite.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       this.animationLocked = false
-      const g = <GameScene>scene
       // go back to idle anim if no more animation in queue
-      g.animationManager?.animatePokemon(this, pokemon.action, this.flip)
+      scene.animationManager?.animatePokemon(this, pokemon.action, this.flip)
     })
     this.height = this.sprite.height
     this.width = this.sprite.width
@@ -286,6 +290,31 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
+  lazyloadAnimations(
+    scene: GameScene | DebugScene | undefined,
+    unload: boolean = false
+  ) {
+    const tint = this.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
+    const pokemonSpriteKey = `${this.index}/${tint}`
+    let spriteCount = spriteCountPerPokemon.get(pokemonSpriteKey) ?? 0
+    if (unload) {
+      spriteCount = min(0)(spriteCount - 1)
+      if (spriteCount === 0 && scene?.animationManager) {
+        //logger.debug("unloading anims for", this.index)
+        scene.animationManager?.unloadPokemonAnimations(this.index, tint)
+      }
+    } else {
+      scene?.animationManager
+      if (spriteCount === 0 && scene?.animationManager) {
+        //logger.debug("loading anims for", this.index)
+        scene.animationManager?.createPokemonAnimations(this.index, tint)
+      }
+      spriteCount++
+    }
+    //logger.debug("sprite count for", this.index, spriteCount)
+    spriteCountPerPokemon.set(pokemonSpriteKey, spriteCount)
+  }
+
   updateTooltipPosition() {
     if (this.detail) {
       if (this.input && preference("showDetailsOnHover")) {
@@ -311,8 +340,10 @@ export default class PokemonSprite extends DraggableObject {
   }
 
   destroy(fromScene?: boolean | undefined): void {
+    const g = <GameScene>this.scene
     super.destroy(fromScene)
     this.closeDetail()
+    this.lazyloadAnimations(g, true)
   }
 
   closeDetail() {

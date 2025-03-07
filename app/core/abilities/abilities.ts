@@ -2422,7 +2422,7 @@ export class ObstructStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const duration = Math.round(
-      ([1000, 2000, 4000][pokemon.stars - 1] ?? 4000) * (1 + pokemon.ap / 200)
+      ([1000, 2000, 3000][pokemon.stars - 1] ?? 3000) * (1 + pokemon.ap / 200)
     )
     pokemon.status.triggerProtect(duration)
     pokemon.effects.add(Effect.OBSTRUCT)

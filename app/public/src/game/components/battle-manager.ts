@@ -19,7 +19,7 @@ import {
 } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
 import { Passive } from "../../../../types/enum/Passive"
-import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
+import { AnimationConfig, PkmByIndex } from "../../../../types/enum/Pokemon"
 import { max } from "../../../../utils/number"
 import { transformAttackCoordinate } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
@@ -374,7 +374,7 @@ export default class BattleManager {
         if (value != 0) {
           this.animationManager.play(
             pkm,
-            AnimationConfig[pkm.name as Pkm].ability,
+            AnimationConfig[PkmByIndex[pkm.index]].ability,
             { flip: this.flip, lock: true, repeat: 0 }
           )
           pkm.specialAttackAnimation(this.group, value)
@@ -691,7 +691,9 @@ export default class BattleManager {
         }
       } else if (field === "index") {
         if (pkm.index !== value) {
+          pkm.lazyloadAnimations(this.scene, true) // unload previous index animations
           pkm.index = value as IPokemonEntity["index"]
+          pkm.lazyloadAnimations(this.scene) // load the new ones
           pkm.displayAnimation("EVOLUTION")
           this.animationManager.animatePokemon(
             pkm,
