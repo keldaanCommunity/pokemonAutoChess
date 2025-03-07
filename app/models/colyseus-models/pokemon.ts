@@ -17217,7 +17217,7 @@ export class Capsakid extends Pokemon {
   def = 2
   speDef = 2
   maxPP = 100
-  range = 1
+  range = 2
   skill = Ability.SPICY_EXTRACT
   attackSprite = AttackSprite.FIRE_MELEE
   additional = true
@@ -17233,7 +17233,7 @@ export class Scovillain extends Pokemon {
   def = 2
   speDef = 2
   maxPP = 100
-  range = 1
+  range = 2
   skill = Ability.SPICY_EXTRACT
   attackSprite = AttackSprite.FIRE_MELEE
   additional = true
