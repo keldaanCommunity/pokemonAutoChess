@@ -461,7 +461,8 @@ export const NonHoldableItems: Item[] = [
   Item.ZYGARDE_CUBE,
   Item.FIRE_SHARD,
   Item.GIMMIGHOUL_COIN,
-  Item.EGG_FOR_SELL
+  Item.EGG_FOR_SELL,
+  Item.EXCHANGE_TICKET
 ]
 
 export const OgerponMasks: Item[] = [
