@@ -291,12 +291,6 @@ export class MiniGame {
       if (state.townEncounter === encounter) {
         encounter = null // prevent getting the same encounter twice in a row
       }
-      if (
-        state.stageLevel === ItemCarouselStages[2] &&
-        state.nbComponentsFromCarousel % 2 === 0
-      ) {
-        encounter = null // ensure we have an even number of components at stage 20 to not stay with 1 component
-      }
       state.townEncounter = encounter ?? null
     } else {
       state.townEncounter = null

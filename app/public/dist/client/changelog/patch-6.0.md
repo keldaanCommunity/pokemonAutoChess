@@ -126,3 +126,4 @@
 - Added experience required per level in Wiki > Data
 - ELO decay now starts after 15 days of inactivity instead of 10
 - Removed Scribbles Kecleon's Shop and Synergy wheel, replaced by town encounters
+- Stage 19 rewards will now be complete items instead of components if player has an even number of components at that stage
