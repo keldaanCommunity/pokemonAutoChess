@@ -22,11 +22,16 @@ import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
 import { Portal, SynergySymbol } from "./portal"
 import { DEPTH } from "../depths"
-import { TownEncounter, TownEncounters } from "../../../../core/town-encounters"
+import {
+  TownEncounter,
+  TownEncounters,
+  TownEncounterSellPrice
+} from "../../../../core/town-encounters"
 import { GameDialog } from "./game-dialog"
 import { ILeaderboardInfo } from "../../../../types/interfaces/LeaderboardInfo"
 import { getPokemonConfigFromAvatar } from "../../../../utils/avatar"
 import { getRankLabel } from "../../../../types/strings/Strings"
+import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 
 export default class MinigameManager {
   pokemons: Map<string, PokemonAvatar>
@@ -514,9 +519,14 @@ export default class MinigameManager {
   }
 
   showEncounterDescription(encounter: TownEncounter) {
+    const specialGameRule = this.scene.room?.state.specialGameRule
+    const cost =
+      specialGameRule === SpecialGameRule.TOWN_FESTIVAL
+        ? 0
+        : TownEncounterSellPrice[encounter]
     this.encounterDescription = new GameDialog(
       this.scene,
-      t(`town_encounter_description.${encounter}`),
+      t(`town_encounter_description.${encounter}`, { cost }),
       undefined,
       "town-encounter-description"
     )

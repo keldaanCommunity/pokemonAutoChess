@@ -3586,12 +3586,12 @@
     "WOBBUFFET": "探险回收利用店"
   },
   "town_encounter_description": {
-    "KECLEON": "变隐龙会以每块10 GOLD的价格出售共鸣赋予石头。",
-    "CHANSEY": "吉利蛋会以每枚10 GOLD的价格出售EGG_FOR_SELL。",
-    "ELECTIVIRE": "电击魔兽会以每件10 GOLD的价格出售人造道具。",
-    "XATU": "天然鸟会以每个10 GOLD的价格出售WONDERBOX。",
-    "KANGASKHAN": "袋兽会以每件10 GOLD的价格出售由两件组件合成的道具。",
-    "DUSKULL": "向夜巡灵支付10 GOLD可以提升你在后续轮次中的收入。",
+    "KECLEON": "变隐龙会以每块{{cost}} GOLD的价格出售共鸣赋予石头。",
+    "CHANSEY": "吉利蛋会以每枚{{cost}} GOLD的价格出售EGG_FOR_SELL。",
+    "ELECTIVIRE": "电击魔兽会以每件{{cost}} GOLD的价格出售人造道具。",
+    "XATU": "天然鸟会以每个{{cost}} GOLD的价格出售WONDERBOX。",
+    "KANGASKHAN": "袋兽会以每件{{cost}} GOLD的价格出售由两件组件合成的道具。",
+    "DUSKULL": "向夜巡灵支付{{cost}} GOLD可以提升你在后续轮次中的收入。",
     "MAROWAK": "嘎啦嘎啦会提升下一野生轮次的敌方宝可梦强度。",
     "WOBBUFFET": "果然翁会回收未使用的道具组件或合成道具。",
     "SPINDA": "晃晃斑会随机改变道具轮盘的旋转方向。"
