@@ -342,6 +342,12 @@ export default class PreparationRoom extends Room<PreparationState> {
 
     this.onGameStart = this.onGameStart.bind(this)
     this.presence.subscribe("game-started", this.onGameStart)
+
+    this.presence.subscribe("room-deleted", (roomId) => {
+      if (this.roomId === roomId) {
+        this.disconnect(CloseCodes.ROOM_DELETED)
+      }
+    })
   }
 
   async onAuth(client: Client, options: any, request: any) {

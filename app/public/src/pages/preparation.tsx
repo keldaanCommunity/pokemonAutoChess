@@ -1,9 +1,9 @@
-import { Client, Room } from "colyseus.js"
-import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
+import { Client, getStateCallbacks, Room } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
+import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { GameUser } from "../../../models/colyseus-models/game-user"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import GameState from "../../../rooms/states/game-state"
@@ -117,70 +117,71 @@ export default function Preparation() {
       })
     }
 
-    const initialize = async (r: Room<PreparationState>, uid: string) => {
-      r.state.users.forEach((u) => {
-        dispatch(addUser(u))
-      })
+    const initialize = async (room: Room<PreparationState>, uid: string) => {
+      const $ = getStateCallbacks(room)
+      const $state = $(room.state)
 
-      r.state.listen("gameStartedAt", (value, previousValue) => {
+      $state.listen("gameStartedAt", (value, previousValue) => {
         dispatch(setGameStarted(value))
       })
 
-      r.state.listen("ownerId", (value, previousValue) => {
+      $state.listen("ownerId", (value, previousValue) => {
         dispatch(setOwnerId(value))
       })
 
-      r.state.listen("ownerName", (value, previousValue) => {
+      $state.listen("ownerName", (value, previousValue) => {
         dispatch(setOwnerName(value))
       })
 
-      r.state.listen("name", (value, previousValue) => {
+      $state.listen("name", (value, previousValue) => {
         dispatch(setName(value))
       })
 
-      r.state.listen("password", (value, previousValue) => {
+      $state.listen("password", (value, previousValue) => {
         dispatch(setPassword(value))
       })
 
-      r.state.listen("noElo", (value, previousValue) => {
+      $state.listen("noElo", (value, previousValue) => {
         dispatch(setNoELO(value))
       })
 
-      r.state.listen("minRank", (value, previousValue) => {
+      $state.listen("minRank", (value, previousValue) => {
         dispatch(setMinRank(value))
       })
 
-      r.state.listen("maxRank", (value, previousValue) => {
+      $state.listen("maxRank", (value, previousValue) => {
         dispatch(setMaxRank(value))
       })
 
-      r.state.listen("whitelist", (value, previousValue) => {
+      $state.listen("whitelist", (value, previousValue) => {
         dispatch(setWhiteList(value))
       })
 
-      r.state.listen("blacklist", (value, previousValue) => {
+      $state.listen("blacklist", (value, previousValue) => {
         dispatch(setBlackList(value))
       })
 
-      r.state.listen("gameMode", (value, previousValue) => {
+      $state.listen("gameMode", (value, previousValue) => {
         dispatch(setGameMode(value))
       })
 
-      r.state.listen("specialGameRule", (value, previousValue) => {
+      $state.listen("specialGameRule", (value, previousValue) => {
         dispatch(setSpecialGameRule(value))
       })
 
-      r.state.users.onAdd((u) => {
-        dispatch(addUser(u))
+      $state.users.onAdd((user) => {
+        dispatch(addUser(user))
 
-        if (u.uid === uid) {
-          dispatch(setUser(u))
-          if (r.state.gameMode !== GameMode.CUSTOM_LOBBY) {
+        if (user.uid === uid) {
+          dispatch(setUser(user))
+          if (room.state.gameMode !== GameMode.CUSTOM_LOBBY) {
             dispatch(toggleReady(true)) // automatically set users ready in non-classic game mode
           }
-        } else if (!u.isBot) {
+        } else if (!user.isBot) {
           playSound(SOUNDS.JOIN_ROOM)
         }
+
+        const $user = $(user)
 
         const fields: NonFunctionPropNames<GameUser>[] = [
           "anonymous",
@@ -195,29 +196,29 @@ export default function Preparation() {
         ]
 
         fields.forEach((field) => {
-          u.listen(field, (value, previousValue) => {
+          $user.listen(field, (value, previousValue) => {
             if (field === "ready" && value) {
               playSound(SOUNDS.SET_READY)
             }
-            dispatch(changeUser({ id: u.uid, field: field, value: value }))
+            dispatch(changeUser({ id: user.uid, field: field, value: value }))
           })
         })
       })
-      r.state.users.onRemove((u) => {
+      $state.users.onRemove((u) => {
         dispatch(removeUser(u.uid))
         if (!u.isBot && u.uid !== uid && !connectingToGame.current) {
           playSound(SOUNDS.LEAVE_ROOM)
         }
       })
 
-      r.state.messages.onAdd((m) => {
+      $state.messages.onAdd((m) => {
         dispatch(pushMessage(m))
       })
-      r.state.messages.onRemove((m) => {
+      $state.messages.onRemove((m) => {
         dispatch(removeMessage(m))
       })
 
-      r.onLeave((code) => {
+      room.onLeave((code) => {
         const shouldGoToLobby = [
           CloseCodes.USER_KICKED,
           CloseCodes.ROOM_DELETED,
@@ -236,7 +237,7 @@ export default function Preparation() {
           // Restart the expiry timer of the reconnection token for reconnect
           localStore.set(
             LocalStoreKeys.RECONNECTION_PREPARATION,
-            { reconnectionToken: r.reconnectionToken, roomId: r.roomId },
+            { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
             30
           )
           // clearing state variables to re-initialize
@@ -257,7 +258,7 @@ export default function Preparation() {
         }
       })
 
-      r.onMessage(Transfer.GAME_START, async (roomId) => {
+      room.onMessage(Transfer.GAME_START, async (roomId) => {
         const token = await firebase.auth().currentUser?.getIdToken()
         if (token && !connectingToGame.current) {
           playSound(SOUNDS.START_GAME)
@@ -271,7 +272,7 @@ export default function Preparation() {
             5 * 60
           ) // 5 minutes allowed to start game
           await Promise.allSettled([
-            r.connection.isOpen && r.leave(),
+            room.connection.isOpen && room.leave(),
             game.connection.isOpen && game.leave(false)
           ])
           dispatch(resetPreparation())
@@ -279,7 +280,7 @@ export default function Preparation() {
         }
       })
 
-      r.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
+      room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
         dispatch(setProfile(user))
       })
     }

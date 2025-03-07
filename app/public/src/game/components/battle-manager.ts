@@ -1,4 +1,3 @@
-import { type NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
 import { GameObjects } from "phaser"
 import { getAttackTimings } from "../../../../core/attacking-state"
 import { getMoveSpeed } from "../../../../core/pokemon-entity"
@@ -30,6 +29,7 @@ import PokemonSprite from "./pokemon"
 import PokemonDetail from "./pokemon-detail"
 import { pickRandomIn } from "../../../../utils/random"
 import { displayBoost } from "./boosts-animations"
+import type { NonFunctionPropNames } from "../../../../types/HelperTypes"
 import { DEPTH } from "../depths"
 
 export default class BattleManager {

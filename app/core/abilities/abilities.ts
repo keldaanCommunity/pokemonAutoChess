@@ -304,8 +304,10 @@ export class PickupStrategy extends AbilityStrategy {
 
     if (target.items.size > 0 && pokemon.items.size < 3) {
       const item = target.items.values().next().value
-      target.removeItem(item)
-      pokemon.addItem(item)
+      if (item) {
+        target.removeItem(item)
+        pokemon.addItem(item)
+      }
     } else {
       if (target.player) {
         const moneyStolen = max(target.player.money)(pokemon.stars)

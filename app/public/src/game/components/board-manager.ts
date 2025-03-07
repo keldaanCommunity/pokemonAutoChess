@@ -1,6 +1,6 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
-import { NonFunctionPropNames } from "@colyseus/schema/lib/types/HelperTypes"
+import type { NonFunctionPropNames } from "../../../../types/HelperTypes"
 import Player from "../../../../models/colyseus-models/player"
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
