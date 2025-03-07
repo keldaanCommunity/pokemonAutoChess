@@ -52,6 +52,7 @@ import {
   AbilityPerTM,
   ArtificialItems,
   Berries,
+  CraftableItems,
   Dishes,
   FishingRods,
   Flavors,
@@ -153,7 +154,7 @@ export class OnShopCommand extends Command<
       this.state.shop.assignShop(player, true, this.state)
       player.shopFreeRolls -= 1
     } else {
-      player.shop = player.shop.with(index, Pkm.DEFAULT)
+      player.shop[index] = Pkm.DEFAULT
     }
 
     this.room.checkEvolutionsAfterPokemonAcquired(playerId)
@@ -180,7 +181,7 @@ export class OnRemoveFromShopCommand extends Command<
 
     const cost = getBuyPrice(name, this.state.specialGameRule)
     if (player.money >= cost) {
-      player.shop = player.shop.with(index, Pkm.DEFAULT)
+      player[index] = Pkm.DEFAULT
       player.shopLocked = true
       this.state.shop.releasePokemon(name, player)
     }
@@ -457,18 +458,33 @@ export class OnDragDropCombineCommand extends Command<
         }
       }
 
-      // find recipe result
       let result: Item | undefined = undefined
-      for (const [key, value] of Object.entries(ItemRecipe) as [
-        Item,
-        Item[]
-      ][]) {
-        if (
-          (value[0] == itemA && value[1] == itemB) ||
-          (value[0] == itemB && value[1] == itemA)
-        ) {
-          result = key
-          break
+
+      if (itemA === Item.EXCHANGE_TICKET || itemB === Item.EXCHANGE_TICKET) {
+        const exchangedItem = itemA === Item.EXCHANGE_TICKET ? itemB : itemA
+        if (ItemComponents.includes(exchangedItem)) {
+          result = pickRandomIn(
+            ItemComponents.filter((i) => i !== exchangedItem)
+          )
+        } else if (CraftableItems.includes(exchangedItem)) {
+          result = pickRandomIn(
+            CraftableItems.filter((i) => i !== exchangedItem)
+          )
+        } else {
+          client.send(Transfer.DRAG_DROP_FAILED, message)
+          return
+        }
+      } else {
+        // find recipe result
+        const recipes = Object.entries(ItemRecipe) as [Item, Item[]][]
+        for (const [key, value] of recipes) {
+          if (
+            (value[0] == itemA && value[1] == itemB) ||
+            (value[0] == itemB && value[1] == itemA)
+          ) {
+            result = key
+            break
+          }
         }
       }
 

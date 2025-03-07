@@ -5,6 +5,7 @@ import Message from "../../models/colyseus-models/message"
 import { EloRank } from "../../types/Config"
 import { GameMode } from "../../types/enum/Game"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
+import chatV2 from "../../models/mongo-models/chat-v2"
 
 export interface IPreparationState {
   users: MapSchema<GameUser>
@@ -81,6 +82,16 @@ export default class PreparationState
       params.avatar ?? "",
       time
     )
+    if (params.author) {
+      chatV2.create({
+        id: id,
+        payload: message.payload,
+        authorId: message.authorId,
+        author: message.author,
+        avatar: message.avatar,
+        time: time
+      })
+    }
     this.messages.push(message)
   }
 

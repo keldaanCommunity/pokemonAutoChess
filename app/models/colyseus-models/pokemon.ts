@@ -1,4 +1,4 @@
-import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
+import { MapSchema, Schema, SetSchema, type, entity } from "@colyseus/schema"
 import { nanoid } from "nanoid"
 import {
   ClearWingEffect,
@@ -302,7 +302,7 @@ export class Electrike extends Pokemon {
   stars = 1
   evolution = Pkm.MANECTRIC
   hp = 80
-  atk = 5
+  atk = 6
   speed = 70
   def = 6
   speDef = 6
@@ -663,7 +663,7 @@ export class Bounsweet extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.STEENEE
-  hp = 100
+  hp = 85
   atk = 10
   speed = 48
   def = 8
@@ -683,7 +683,7 @@ export class Steenee extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.TSAREENA
-  hp = 180
+  hp = 160
   atk = 19
   speed = 48
   def = 10
@@ -702,7 +702,7 @@ export class Tsareena extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 3
-  hp = 360
+  hp = 320
   atk = 33
   speed = 48
   def = 12
@@ -6723,8 +6723,8 @@ export class Celebi extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 300
-  atk = 27
+  hp = 250
+  atk = 25
   speed = 57
   def = 10
   speDef = 10
@@ -7108,7 +7108,7 @@ export class Oddish extends Pokemon {
   stars = 1
   evolution = Pkm.GLOOM
   hp = 90
-  atk = 9
+  atk = 8
   speed = 41
   def = 4
   speDef = 4
@@ -7124,7 +7124,7 @@ export class Gloom extends Pokemon {
   stars = 2
   evolution = Pkm.VILEPLUME
   hp = 160
-  atk = 19
+  atk = 18
   speed = 41
   def = 6
   speDef = 6
@@ -7793,7 +7793,6 @@ export class Clamperl extends Pokemon {
       }
     }
   )
-
   onChangePosition(x: number, y: number, player: Player): void {
     player.refreshShopUI()
   }
@@ -10504,7 +10503,7 @@ export class Sandshrew extends Pokemon {
   atk = 5
   speed = 46
   def = 6
-  speDef = 6
+  speDef = 3
   maxPP = 80
   range = 1
   skill = Ability.ROLLOUT
@@ -10520,7 +10519,7 @@ export class Sandslash extends Pokemon {
   atk = 13
   speed = 46
   def = 10
-  speDef = 10
+  speDef = 5
   maxPP = 80
   range = 1
   skill = Ability.ROLLOUT
@@ -10537,7 +10536,7 @@ export class AlolanSandshrew extends Pokemon {
   atk = 5
   speed = 46
   def = 6
-  speDef = 6
+  speDef = 3
   maxPP = 80
   range = 1
   skill = Ability.ICE_BALL
@@ -10554,7 +10553,7 @@ export class AlolanSandslash extends Pokemon {
   atk = 13
   speed = 46
   def = 10
-  speDef = 10
+  speDef = 5
   maxPP = 80
   range = 1
   skill = Ability.ICE_BALL
@@ -11787,11 +11786,11 @@ export class Combee extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.VESPIQUEEN
-  hp = 120
+  hp = 80
   atk = 10
   speed = 38
-  def = 6
-  speDef = 6
+  def = 5
+  speDef = 5
   maxPP = 90
   range = 1
   skill = Ability.HEAL_ORDER
@@ -11803,8 +11802,8 @@ export class Vespiqueen extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLORA, Synergy.GOURMET])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 280
-  atk = 22
+  hp = 190
+  atk = 20
   speed = 38
   def = 8
   speDef = 8
@@ -12044,7 +12043,7 @@ export class Plusle extends Pokemon {
   stars = 3
   hp = 140
   atk = 12
-  speed = 55
+  speed = 65
   def = 6
   speDef = 6
   maxPP = 60
@@ -12059,7 +12058,7 @@ export class Minun extends Pokemon {
   stars = 3
   hp = 140
   atk = 12
-  speed = 55
+  speed = 65
   def = 6
   speDef = 6
   maxPP = 60
@@ -12178,8 +12177,8 @@ export class MegaSableye extends Pokemon {
   hp = 200
   atk = 14
   speed = 31
-  def = 12
-  speDef = 12
+  def = 15
+  speDef = 15
   maxPP = 100
   range = 1
   skill = Ability.KNOCK_OFF
@@ -13194,9 +13193,9 @@ export class Obstagoon extends Pokemon {
   hp = 280
   atk = 22
   speed = 55
-  def = 18
-  speDef = 12
-  maxPP = 100
+  def = 16
+  speDef = 10
+  maxPP = 120
   range = 1
   skill = Ability.OBSTRUCT
   attackSprite = AttackSprite.DARK_MELEE
@@ -14108,10 +14107,10 @@ export class Lickitung extends Pokemon {
   stars = 1
   evolution = Pkm.LICKILICKY
   hp = 70
-  atk = 6
+  atk = 5
   speed = 41
   def = 4
-  speDef = 6
+  speDef = 4
   maxPP = 90
   range = 1
   skill = Ability.LICK
@@ -14127,10 +14126,10 @@ export class Lickilicky extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 150
-  atk = 12
+  atk = 10
   speed = 41
-  def = 8
-  speDef = 10
+  def = 7
+  speDef = 7
   maxPP = 90
   range = 1
   skill = Ability.LICK
@@ -15048,10 +15047,10 @@ export class Sinistea extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.POLTEAGEIST
-  hp = 80
+  hp = 60
   atk = 4
   speed = 47
-  def = 6
+  def = 3
   speDef = 6
   maxPP = 100
   range = 2
@@ -15068,10 +15067,10 @@ export class Polteageist extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 180
+  hp = 150
   atk = 9
   speed = 47
-  def = 10
+  def = 5
   speDef = 10
   maxPP = 100
   range = 2
@@ -15616,7 +15615,7 @@ export class Wishiwashi extends Pokemon {
   rarity = Rarity.SPECIAL
   stars = 1
   evolution = Pkm.WISHIWASHI_SCHOOL
-  hp = 100
+  hp = 50
   atk = 11
   speed = 38
   def = 4
@@ -16574,7 +16573,7 @@ export class Zygarde100 extends Pokemon {
   stars = 4
   hp = 300
   atk = 28
-  speed = 52
+  speed = 50
   def = 10
   speDef = 10
   maxPP = 120
@@ -18559,3 +18558,8 @@ export const PokemonClasses: Record<
   [Pkm.ALCREMIE_CARAMEL_SWIRL]: AlcremieCaramelSwirl,
   [Pkm.ALCREMIE_RAINBOW_SWIRL]: AlcremieRainbowSwirl
 }
+
+// declare all the classes in colyseus schema TypeRegistry
+// required if schema class doesnt have a @type decorator
+// see https://discord.com/channels/525739117951320081/1341559052299407412/1342631038152868072
+Object.values(PokemonClasses).forEach((pokemonClass) => entity(pokemonClass))

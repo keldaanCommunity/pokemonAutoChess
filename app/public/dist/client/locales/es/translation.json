@@ -1943,8 +1943,8 @@
     "ALLEGRO": "El equipo aliado gana +1 ATK y +5 SPEED",
     "PRESTO": "El equipo aliado gana +1 ATK, +5 SPEED y 3 PP",
     "DUBIOUS_DISC": "Consigue un objeto artificial. Se elimina al perder la sinergia.",
-    "LINK_CABLE": "Obtén +8 % de ATK base, AP y HP máximo como SHIELD por objeto retenido. Consigue otro objeto artificial.",
-    "GOOGLE_SPECS": "Obtén +15 % de ATK base, AP y HP máximo como SHIELD por objeto retenido. Consigue otro objeto artificial.",
+    "LINK_CABLE": "Obtén +6 % de ATK base, AP y HP máximo como SHIELD por objeto retenido. Consigue otro objeto artificial.",
+    "GOOGLE_SPECS": "Obtén +12 % de ATK base, AP y HP máximo como SHIELD por objeto retenido. Consigue otro objeto artificial.",
     "HATCHER": "Cada BABY tiene una probabilidad del [8,LK]% de encontrar un huevo.",
     "BREEDER": "Consigue un huevo tras cada derrota contra un jugador",
     "GOLDEN_EGGS": "Cada BABY tiene una probabilidad del [4,LK]% de encontrar un huevo dorado, máximo 1 huevo de oro en el banquillo. Los huevos de oro se pueden vender por 10 GOLD o dar un objeto variocolor al nacer.",
@@ -1961,8 +1961,8 @@
     "RUN_AWAY": "+50 SPEED",
     "HUSTLE": "+20% ATK y +50 SPEED",
     "BERSERK": "+40% ATK y +50 SPEED. RAGE 5 segundos antes",
-    "FLUID": "El equipo gana 1 SPEED and 4 HP por cada sinergia activa.",
-    "SHAPELESS": "El equipo gana 3 SPEED y 8 HP por cada sinergia activa.",
+    "FLUID": "El equipo gana 1 SPEED and 3 HP por cada sinergia activa.",
+    "SHAPELESS": "El equipo gana 3 SPEED y 6 HP por cada sinergia activa.",
     "ETHEREAL": "El equipo gana 6 SPEED y 12 HP por cada sinergia activa."
   },
   "item": {

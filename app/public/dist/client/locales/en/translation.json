@@ -1412,7 +1412,7 @@
     "POISON": "POISONNED the [1,2,3] closest enemy Pokémon for [3,6,9,SP=0.5] seconds.",
     "SLEEP": "Put [1,2,3] enemy Pokémon in the back line to SLEEP for [2,SP] seconds.",
     "PROTECT": "PROTECT the user, becoming invulnerable for [1,3,5,SP=0.5] seconds.",
-    "OBSTRUCT": "PROTECT the user, becoming invulnerable for [1,2,4,SP=0.5] seconds. Any attack received during this time will reduce the attacker's DEF by 2.",
+    "OBSTRUCT": "PROTECT the user, becoming invulnerable for [1,2,3,SP=0.5] seconds. Any attack received during this time will reduce the attacker's DEF by 2.",
     "BLIZZARD": "FREEZE all enemy Pokémon for 2 seconds and deal [5,10,15,SP] SPECIAL. The damage is doubled if the target already suffers from FREEZE.",
     "CONFUSION": "Inflict CONFUSION and SILENCE onto the target for [3,5,7] seconds. If the target is already suffering from CONFUSION, deal [75,150,300,SP] SPECIAL instead.",
     "FIRE_BLAST": "Shoot a Fire Blast in a star-shaped area of effect, dealing [30,60,110,SP] SPECIAL to all enemy Pokémon hit.",
@@ -2014,8 +2014,8 @@
     "ALLEGRO": "Ally team gains +1 ATK and +5 SPEED",
     "PRESTO": "Ally team gains +1 ATK, +5 SPEED and 3 PP",
     "DUBIOUS_DISC": "Get an artificial item. It is removed when losing the synergy.",
-    "LINK_CABLE": "Gain +8% base ATK, AP and max HP as SHIELD per held item. Get another artificial item.",
-    "GOOGLE_SPECS": "Gain +15% base ATK, AP and max HP as SHIELD per held item. Get another artificial item.",
+    "LINK_CABLE": "Gain +6% base ATK, AP and max HP as SHIELD per held item. Get another artificial item.",
+    "GOOGLE_SPECS": "Gain +12% base ATK, AP and max HP as SHIELD per held item. Get another artificial item.",
     "HATCHER": "Each BABY has [8,LK]% chance to find an Egg.",
     "BREEDER": "Get at least one Egg after each defeat against a player",
     "GOLDEN_EGGS": "Each BABY has [4,LK]% chance to find a Golden Egg (max 1 on bench). Golden eggs can be sold for 10 GOLD or give a shiny item when hatched.",
@@ -2032,8 +2032,8 @@
     "RUN_AWAY": "+50 SPEED",
     "HUSTLE": "+20% ATK and +50 SPEED",
     "BERSERK": "+40% ATK and +50 SPEED. RAGE 5 seconds sooner",
-    "FLUID": "Ally team gains 1 SPEED and 4 HP per unique active synergy",
-    "SHAPELESS": "Ally team gains 3 SPEED and 8 HP per unique active synergy",
+    "FLUID": "Ally team gains 1 SPEED and 3 HP per unique active synergy",
+    "SHAPELESS": "Ally team gains 3 SPEED and 6 HP per unique active synergy",
     "ETHEREAL": "Ally team gains 6 SPEED and 12 HP per unique active synergy",
     "APPETIZER": "Gain a CHEF_HAT. Cook a Signature Dish after every round and feed one adjacent ally.",
     "LUNCH_BREAK": "The Chef cook two dishes and feed two adjacent allies after every round.",
@@ -2219,7 +2219,8 @@
     "RAINBOW_SWIRL_FLAVOR": "Rainbow Swirl Flavor",
     "VANILLA_FLAVOR": "Vanilla Flavor",
     "EGG_FOR_SELL": "Pokémon Egg",
-    "GIMMIGHOUL_COIN": "Gimmighoul Coin"
+    "GIMMIGHOUL_COIN": "Gimmighoul Coin",
+    "EXCHANGE_TICKET": "Exchange Ticket"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -2402,7 +2403,8 @@
     "CARAMEL_SWIRL_FLAVOR": "Baked with DARK MONSTER DRAGON allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_CARAMEL_SWIRL). $t(passive_description.CARAMEL_SWIRL_CREAM)",
     "RAINBOW_SWIRL_FLAVOR": "Baked with PSYCHIC AMORPHOUS BABY LIGHT allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_RAINBOW_SWIRL). $t(passive_description.RAINBOW_SWIRL_CREAM)",
     "EGG_FOR_SELL": "An Egg sold at Chansey's Daycare",
-    "GIMMIGHOUL_COIN": "Get 1 additional GOLD income each round, and increase max interests by 1."
+    "GIMMIGHOUL_COIN": "Get 1 additional GOLD income each round, and increase max interests by 1.",
+    "EXCHANGE_TICKET": "Exchange an item component or a crafted item for another random one. Single use."
   },
   "passive_description": {
     "NONE": "No passive",
@@ -3582,7 +3584,8 @@
     "XATU": "Xatu Appraisal",
     "KANGASKHAN": "Kangaskhan Storage",
     "DUSKULL": "Duskull Bank",
-    "MAROWAK": "Marowak Dojo"
+    "MAROWAK": "Marowak Dojo",
+    "WOBBUFFET": "Wobbuffet's Recycle Shop"
   },
   "town_encounter_description": {
     "KECLEON": "Kecleon sells Synergy stones for 10 GOLD",
@@ -3591,7 +3594,9 @@
     "XATU": "Xatu sells WONDERBOX for 10 GOLD",
     "KANGASKHAN": "Kangashkhan sells complete craftable items for 10 GOLD",
     "DUSKULL": "Duskull increases your long term money income for 10 GOLD",
-    "MAROWAK": "Marowak makes the next PVE fight more difficult"
+    "MAROWAK": "Marowak makes the next PVE fight more difficult",
+    "WOBBUFFET": "Wobbuffet let you recycle an unused item component or crafted item",
+    "SPINDA": "Spinda changes the direction of rotation of the carousel randomly"
   },
   "loading_hints": {
     "tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",

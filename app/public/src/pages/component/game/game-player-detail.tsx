@@ -12,7 +12,7 @@ export default function GamePlayerDetail(props: { player: IPlayer }) {
   const synergyList = useMemo(
     () =>
       Object.entries(props.player.synergies)
-        .filter(([syn, val]) => val >= SynergyTriggers[syn][0])
+        .filter(([syn, val]) => val >= SynergyTriggers[syn]?.[0])
         .map(([syn]) => syn),
     [props.player.synergies]
   )

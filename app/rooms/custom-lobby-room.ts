@@ -1,12 +1,5 @@
 import { Dispatcher } from "@colyseus/command"
-import {
-  Client,
-  IRoomListingData,
-  Room,
-  RoomListingData,
-  matchMaker,
-  subscribeLobby
-} from "colyseus"
+import { Client, IRoomCache, Room, matchMaker, subscribeLobby } from "colyseus"
 import { CronJob } from "cron"
 import admin from "firebase-admin"
 import Message from "../models/colyseus-models/message"
@@ -68,7 +61,7 @@ import LobbyState from "./states/lobby-state"
 export default class CustomLobbyRoom extends Room<LobbyState> {
   bots: Map<string, IBot> = new Map<string, IBot>()
   unsubscribeLobby: (() => void) | undefined
-  rooms: IRoomListingData[] | undefined
+  rooms: IRoomCache[] | undefined
   dispatcher: Dispatcher<this>
   tournamentCronJobs: Map<string, CronJob> = new Map<string, CronJob>()
   cleanUpCronJobs: CronJob[] = []
@@ -90,7 +83,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     }
   }
 
-  addRoom(roomId: string, data: IRoomListingData) {
+  addRoom(roomId: string, data: IRoomCache) {
     // append room listing data
     this.rooms?.push(data)
 
@@ -99,7 +92,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     })
   }
 
-  changeRoom(index: number, roomId: string, data: IRoomListingData) {
+  changeRoom(index: number, roomId: string, data: IRoomCache) {
     if (this.rooms) {
       const previousData = this.rooms[index]
 

@@ -261,7 +261,7 @@ export class OnGameStartRequestCommand extends Command<
         this.state.gameStartedAt = new Date().toISOString()
         this.room.lock()
         const gameRoom = await matchMaker.createRoom("game", {
-          users: this.state.users.toJSON(),
+          users: Object.fromEntries(entries(this.state.users)),
           name: this.state.name,
           ownerName: this.state.ownerName,
           preparationId: this.room.roomId,

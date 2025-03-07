@@ -85,6 +85,7 @@ import {
   OnUpdateCommand
 } from "./commands/game-commands"
 import GameState from "./states/game-state"
+import { CloseCodes } from "../types/enum/CloseCodes"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
@@ -116,6 +117,13 @@ export default class GameRoom extends Room<GameState> {
     bracketId: string | null
   }) {
     logger.info("Create Game ", this.roomId)
+
+    this.presence.subscribe("room-deleted", (roomId) => {
+      if (this.roomId === roomId) {
+        this.disconnect(CloseCodes.ROOM_DELETED)
+      }
+    })
+
     this.setMetadata(<IGameMetadata>{
       name: options.name,
       ownerName: options.ownerName,

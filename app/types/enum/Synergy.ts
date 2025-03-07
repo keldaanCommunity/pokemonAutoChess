@@ -1,5 +1,3 @@
-import { Effect } from "./Effect"
-
 export enum Synergy {
   NORMAL = "NORMAL",
   GRASS = "GRASS",

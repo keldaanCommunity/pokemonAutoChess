@@ -304,8 +304,10 @@ export class PickupStrategy extends AbilityStrategy {
 
     if (target.items.size > 0 && pokemon.items.size < 3) {
       const item = target.items.values().next().value
-      target.removeItem(item)
-      pokemon.addItem(item)
+      if (item) {
+        target.removeItem(item)
+        pokemon.addItem(item)
+      }
     } else {
       if (target.player) {
         const moneyStolen = max(target.player.money)(pokemon.stars)
@@ -2420,7 +2422,7 @@ export class ObstructStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const duration = Math.round(
-      ([1000, 2000, 4000][pokemon.stars - 1] ?? 4000) * (1 + pokemon.ap / 200)
+      ([1000, 2000, 3000][pokemon.stars - 1] ?? 3000) * (1 + pokemon.ap / 200)
     )
     pokemon.status.triggerProtect(duration)
     pokemon.effects.add(Effect.OBSTRUCT)
