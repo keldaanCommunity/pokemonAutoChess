@@ -3161,6 +3161,24 @@ export class ChargeStrategy extends AbilityStrategy {
   }
 }
 
+export class TailwindStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const buff = [5, 10, 15][pokemon.stars - 1] ?? 15
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+      if (ally && pokemon.team == ally.team) {
+        ally.addSpeed(buff, pokemon, 1, crit)
+      }
+    })
+  }
+}
+
 export class SludgeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -12380,5 +12398,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.GRAV_APPLE]: new GravAppleStrategy(),
   [Ability.FICKLE_BEAM]: new FickleBeamStrategy(),
   [Ability.DECORATE]: new DecorateStrategy(),
-  [Ability.DRAGON_CLAW]: new DragonClawStrategy()
+  [Ability.DRAGON_CLAW]: new DragonClawStrategy(),
+  [Ability.TAILWIND]: new TailwindStrategy()
 }

@@ -74,6 +74,8 @@
 - Nerfed Celebi HP 300 → 250
 - Nerfed Wishiwashi: HP 100 → 50
 - New ability for Bagon line: Dragon Claw: deal 30/60/120 special damage to the lowest health adjacent enemy and Wound them for 4 seconds.
+- New ability for Meditite line: Calm mind
+- New ability for Drifloon line: Tailwind: increase speed of all allies by 5/10/15
 
 # Changes to Synergies
 

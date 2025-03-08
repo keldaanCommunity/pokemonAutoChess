@@ -882,7 +882,7 @@ export class Meditite extends Pokemon {
   speDef = 8
   maxPP = 60
   range = 2
-  skill = Ability.CONFUSION
+  skill = Ability.CALM_MIND
   attackSprite = AttackSprite.PSYCHIC_RANGE
   additional = true
 }
@@ -902,7 +902,7 @@ export class Medicham extends Pokemon {
   speDef = 12
   maxPP = 60
   range = 2
-  skill = Ability.CONFUSION
+  skill = Ability.CALM_MIND
   attackSprite = AttackSprite.PSYCHIC_RANGE
   additional = true
 }
@@ -9628,7 +9628,7 @@ export class Drifloon extends Pokemon {
   speDef = 4
   maxPP = 85
   range = 2
-  skill = Ability.CALM_MIND
+  skill = Ability.TAILWIND
   additional = true
   attackSprite = AttackSprite.GHOST_RANGE
 }
@@ -9648,7 +9648,7 @@ export class Drifblim extends Pokemon {
   speDef = 6
   maxPP = 85
   range = 2
-  skill = Ability.CALM_MIND
+  skill = Ability.TAILWIND
   additional = true
   attackSprite = AttackSprite.GHOST_RANGE
 }

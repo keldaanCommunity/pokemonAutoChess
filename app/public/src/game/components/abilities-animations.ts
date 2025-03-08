@@ -3380,6 +3380,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.TAILWIND:
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
     case Ability.STRENGTH: {
       const specialProjectile = addAbilitySprite(
         skill,
