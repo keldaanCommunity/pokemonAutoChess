@@ -8,9 +8,16 @@ export function chance(
 }
 
 export function randomWeighted<T extends string>(
-  weights: { [item in T]?: number }
+  weights: { [item in T]?: number },
+  totalWeight?: number
 ): T | null {
-  let random = Math.random()
+  if (totalWeight === undefined) {
+    totalWeight = (Object.values(weights) as number[]).reduce(
+      (sum: number, weight: number) => sum + weight,
+      0
+    )
+  }
+  let random = Math.random() * totalWeight
   for (const [item, weight] of Object.entries(weights) as [T, number][]) {
     if ((random -= weight) < 0) return item
   }

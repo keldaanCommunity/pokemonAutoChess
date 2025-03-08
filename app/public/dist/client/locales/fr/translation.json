@@ -3417,7 +3417,15 @@
     "KECLEON": "Magasin de Kecleon"
   },
   "town_encounter_description": {
-    "KECLEON": "Pierres synergie pour 10 GOLD"
+    "KECLEON": "Kecleon vend des pierres synergie pour {{cost}} GOLD",
+    "CHANSEY": "Leveinard vend des EGG_FOR_SELL pour {{cost}} GOLD",
+    "ELECTIVIRE": "Élekable vend des objets artificiels pour {{cost}} GOLD",
+    "XATU": "Xatu vend des WONDERBOX pour {{cost}} GOLD",
+    "KANGASKHAN": "Kangourex vend des items fabriqués pour {{cost}} GOLD",
+    "DUSKULL": "Skelénox augmente votre revenu à long terme pour {{cost}} GOLD",
+    "MAROWAK": "Ossatueur rend le prochain combat PvE plus difficile",
+    "WOBBUFFET": "Qulbutoke vous propose de recycler un composant ou objet fabriqué",
+    "SPINDA": "Spinda change le sens de rotation du carousel de façon aléatoire"
   },
   "loading_hints": {
     "tab_out": "Ne changez pas d'onglet ! Le chargement est mis en pause si cette fenêtre est inactive.",
