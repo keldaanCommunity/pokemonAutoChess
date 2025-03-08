@@ -75,7 +75,7 @@
 - Nerfed Wishiwashi: HP 100 → 50
 - New ability for Bagon line: Dragon Claw: deal 30/60/120 special damage to the lowest health adjacent enemy and Wound them for 4 seconds.
 - New ability for Meditite line: Calm mind ; PP 60 → 100
-- New ability for Drifloon line: Tailwind: increase speed of all allies by 5/10/15
+- New ability for Drifloon line: Tailwind: increase speed of all allies by 5/10/15 ; PP 85 → 100
 - Ability Thunder renamed to Thunder Shock
 - New ability for Zapdos: Thunder: Lightning strikes up to 3 random enemies, inflicting 30/60/120 SPECIAL with 30% chance to inflict PARALYSIS for 3 seconds
 - New ability for Rotom: Charge: until the end of the fight, attacks deal 100% additional special damage (stackable)

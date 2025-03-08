@@ -9626,7 +9626,7 @@ export class Drifloon extends Pokemon {
   speed = 51
   def = 4
   speDef = 4
-  maxPP = 85
+  maxPP = 100
   range = 2
   skill = Ability.TAILWIND
   additional = true
@@ -9646,7 +9646,7 @@ export class Drifblim extends Pokemon {
   speed = 51
   def = 6
   speDef = 6
-  maxPP = 85
+  maxPP = 100
   range = 2
   skill = Ability.TAILWIND
   additional = true
