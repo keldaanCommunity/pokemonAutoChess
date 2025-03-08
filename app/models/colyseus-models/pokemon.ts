@@ -880,9 +880,9 @@ export class Meditite extends Pokemon {
   speed = 51
   def = 8
   speDef = 8
-  maxPP = 60
+  maxPP = 100
   range = 2
-  skill = Ability.CONFUSION
+  skill = Ability.CALM_MIND
   attackSprite = AttackSprite.PSYCHIC_RANGE
   additional = true
 }
@@ -900,9 +900,9 @@ export class Medicham extends Pokemon {
   speed = 51
   def = 12
   speDef = 12
-  maxPP = 60
+  maxPP = 100
   range = 2
-  skill = Ability.CONFUSION
+  skill = Ability.CALM_MIND
   attackSprite = AttackSprite.PSYCHIC_RANGE
   additional = true
 }
@@ -1159,7 +1159,7 @@ export class Bagon extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.HEAD_SMASH
+  skill = Ability.DRAGON_CLAW
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -1175,7 +1175,7 @@ export class Shelgon extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.HEAD_SMASH
+  skill = Ability.DRAGON_CLAW
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -1194,7 +1194,7 @@ export class Salamence extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.DRAGON_DARTS
+  skill = Ability.DRAGON_CLAW
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -4647,7 +4647,7 @@ export class Mareep extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 2
-  skill = Ability.THUNDER
+  skill = Ability.THUNDER_SHOCK
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -4667,7 +4667,7 @@ export class Flaffy extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 2
-  skill = Ability.THUNDER
+  skill = Ability.THUNDER_SHOCK
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -4686,7 +4686,7 @@ export class Ampharos extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 2
-  skill = Ability.THUNDER
+  skill = Ability.THUNDER_SHOCK
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -5336,7 +5336,7 @@ export class Zapdos extends Pokemon {
   speDef = 6
   maxPP = 80
   range = 2
-  skill = Ability.CHARGE
+  skill = Ability.THUNDER
   passive = Passive.STORM
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
@@ -6434,13 +6434,13 @@ export class Rotom extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 11
+  atk = 10
   speed = 54
   def = 6
   speDef = 6
   maxPP = 100
   range = 3
-  skill = Ability.CALM_MIND
+  skill = Ability.CHARGE
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -9523,7 +9523,7 @@ export class Chinchou extends Pokemon {
   speDef = 6
   maxPP = 90
   range = 2
-  skill = Ability.THUNDER
+  skill = Ability.THUNDER_SHOCK
   additional = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
@@ -9543,7 +9543,7 @@ export class Lanturn extends Pokemon {
   speDef = 10
   maxPP = 90
   range = 2
-  skill = Ability.THUNDER
+  skill = Ability.THUNDER_SHOCK
   additional = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
@@ -9629,9 +9629,9 @@ export class Drifloon extends Pokemon {
   speed = 51
   def = 4
   speDef = 4
-  maxPP = 85
+  maxPP = 100
   range = 2
-  skill = Ability.CALM_MIND
+  skill = Ability.TAILWIND
   additional = true
   attackSprite = AttackSprite.GHOST_RANGE
 }
@@ -9649,9 +9649,9 @@ export class Drifblim extends Pokemon {
   speed = 51
   def = 6
   speDef = 6
-  maxPP = 85
+  maxPP = 100
   range = 2
-  skill = Ability.CALM_MIND
+  skill = Ability.TAILWIND
   additional = true
   attackSprite = AttackSprite.GHOST_RANGE
 }
@@ -17220,7 +17220,7 @@ export class Capsakid extends Pokemon {
   def = 2
   speDef = 2
   maxPP = 100
-  range = 1
+  range = 2
   skill = Ability.SPICY_EXTRACT
   attackSprite = AttackSprite.FIRE_MELEE
   additional = true
@@ -17236,7 +17236,7 @@ export class Scovillain extends Pokemon {
   def = 2
   speDef = 2
   maxPP = 100
-  range = 1
+  range = 2
   skill = Ability.SPICY_EXTRACT
   attackSprite = AttackSprite.FIRE_MELEE
   additional = true

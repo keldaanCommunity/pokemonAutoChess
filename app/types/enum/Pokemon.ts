@@ -7748,13 +7748,13 @@ export const AnimationConfig: {
   },
   [Pkm.CAPSAKID]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge,
+    ability: AnimationType.Double,
     emote: AnimationType.Dance
   },
   [Pkm.SCOVILLAIN]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Charge,
-    emote: AnimationType.Attack
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Double,
+    emote: AnimationType.Shoot
   },
   [Pkm.SWIRLIX]: {
     attack: AnimationType.Attack,

@@ -490,8 +490,8 @@ export function displayAbility(
         )
       break
 
-    case Ability.THUNDER:
-      addAbilitySprite(skill, coordinatesTarget, true)
+    case Ability.THUNDER_SHOCK:
+      addAbilitySprite(Ability.THUNDER, coordinatesTarget, true)
         .setScale(2)
         .setOrigin(0.5, 1)
       break
@@ -2958,7 +2958,12 @@ export function displayAbility(
       break
 
     case Ability.CRUSH_CLAW:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+    case Ability.METAL_CLAW:
+      addAbilitySprite(Ability.CRUSH_CLAW, coordinatesTarget, true).setScale(2)
+      break
+
+    case Ability.DRAGON_CLAW:
+      addAbilitySprite(Ability.DRAGON_CLAW, coordinatesTarget, true).setScale(1)
       break
 
     case Ability.EARTHQUAKE:
@@ -3241,10 +3246,6 @@ export function displayAbility(
       addAbilitySprite(Ability.EARTHQUAKE, coordinates, true).setScale(2)
       break
 
-    case Ability.METAL_CLAW:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
-      break
-
     case Ability.BONE_ARMOR: {
       const startCoords = transformAttackCoordinate(targetX, targetY, flip)
       Object.values(Orientation).forEach((o) => {
@@ -3378,6 +3379,17 @@ export function displayAbility(
     case Ability.RETALIATE:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
+
+    case Ability.TAILWIND: {
+      const angle = Math.atan2(
+        coordinatesTarget[1] - coordinates[1],
+        coordinatesTarget[0] - coordinates[0]
+      )
+      addAbilitySprite(skill, coordinates, true)
+        .setScale(2)
+        .setRotation(angle - Math.PI / 2)
+      break
+    }
 
     case Ability.STRENGTH: {
       const specialProjectile = addAbilitySprite(

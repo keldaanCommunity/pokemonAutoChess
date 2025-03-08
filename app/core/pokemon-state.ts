@@ -79,6 +79,10 @@ export default abstract class PokemonState {
         additionalSpecialDamagePart += 0.8
       }
 
+      if (pokemon.effects.has(Effect.CHARGE)) {
+        additionalSpecialDamagePart += 1 * pokemon.count.ult
+      }
+
       let isAttackSuccessful = true
       let dodgeChance = target.dodge
       if (pokemon.status.blinded) {
