@@ -97,7 +97,7 @@ export function WikiPokemon(props: {
       <TabList>
         {pokemons.map((pkm) => {
           return (
-            <Tab key={"title-" + pkm}>
+            <Tab key={"title-" + pkm} className="react-tabs__tab icon-tab">
               <PokemonPortrait portrait={PkmIndex[pkm]} />
             </Tab>
           )
@@ -107,7 +107,7 @@ export function WikiPokemon(props: {
       {pokemons.map((pkm) => {
         return (
           <TabPanel key={pkm}>
-            <WikiPokemonDetail pokemon={pkm} />
+            <WikiPokemonDetail pokemon={pkm} selectPkm={props.onSelect} />
           </TabPanel>
         )
       })}
