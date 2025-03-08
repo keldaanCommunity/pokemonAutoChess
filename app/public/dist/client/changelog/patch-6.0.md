@@ -87,6 +87,9 @@
 - Wild now gives Speed at levels 2-4 and Attack at levels 6-8 instead of attack and movement speed at all levels
 - Nerf Amorphous 3 & 5 : 4/8 → 3/6 HP per active synergy
 - Nerf Artficial 4 & 6: 8/15 → 6/12 attack, AP and shieldd per held item
+- Fire burn chance on attacks now inflicts Burn for ~~2~~ 3 seconds
+- Wild now have ~~25~~ 30% chance to inflict Wound **only when synergy active**
+- Ghost now gets dodge chance and chance to inflict Silence on hit **only when synergy active**
 
 # Changes to Items
 
