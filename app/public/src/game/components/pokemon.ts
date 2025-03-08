@@ -882,9 +882,9 @@ export default class PokemonSprite extends DraggableObject {
   addArmorReduction() {
     if (!this.armorReduction) {
       this.armorReduction = this.scene.add
-        .sprite(0, -40, "status", "ARMOR_REDUCTION/000.png")
+        .sprite(0, -40, "status", "ARMOR_BREAK/000.png")
         .setScale(2)
-      this.armorReduction.anims.play("ARMOR_REDUCTION")
+      this.armorReduction.anims.play("ARMOR_BREAK")
       this.add(this.armorReduction)
     }
   }

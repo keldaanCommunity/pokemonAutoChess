@@ -135,3 +135,4 @@
 - Stage 19 rewards will now be complete items instead of components if player has an even number of components at that stage
 - Removed Scribbles Kecleon's Shop and Synergy wheel, replaced by town encounters
 - New scribble: Town Festival
+- Armor Reduction status is renamed to Armor Break

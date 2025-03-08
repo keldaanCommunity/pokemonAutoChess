@@ -6,7 +6,7 @@ import { addIconsToDescription } from "../../utils/descriptions"
 export default function WikiStatus() {
   const { t } = useTranslation()
   const statusList: Status[] = [
-    Status.ARMOR_REDUCTION,
+    Status.ARMOR_BREAK,
     Status.BURN,
     Status.CHARM,
     Status.CONFUSION,
