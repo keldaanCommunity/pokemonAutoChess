@@ -8,7 +8,7 @@ import {
   Transfer
 } from "../../../../types"
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
-import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
+import { Pkm } from "../../../../types/enum/Pokemon"
 import { logger } from "../../../../utils/logger"
 import { clamp } from "../../../../utils/number"
 import {
@@ -25,7 +25,7 @@ import { DEPTH } from "../depths"
 import { TownEncounter, TownEncounters } from "../../../../core/town-encounters"
 import { GameDialog } from "./game-dialog"
 import { ILeaderboardInfo } from "../../../../types/interfaces/LeaderboardInfo"
-import { getPokemonConfigFromAvatar } from "../../../../utils/avatar"
+import { getPokemonCustomFromAvatar } from "../../../../utils/avatar"
 import { getRankLabel } from "../../../../types/strings/Strings"
 
 export default class MinigameManager {
@@ -452,13 +452,13 @@ export default class MinigameManager {
     })
 
     const podiumPokemons = podium.map((p, rank) => {
-      const config = getPokemonConfigFromAvatar(p.avatar)
+      const { name, shiny } = getPokemonCustomFromAvatar(p.avatar)
       const champion = new PokemonSpecial({
         scene: this.scene,
         x: 6.5 * 48 + [0, -64, +64][rank],
         y: 12.5 * 48,
-        name: PkmByIndex[config.index],
-        shiny: config.shiny,
+        name,
+        shiny,
         orientation: Orientation.DOWN,
         animation: PokemonActionState.IDLE,
         dialog: p.name,

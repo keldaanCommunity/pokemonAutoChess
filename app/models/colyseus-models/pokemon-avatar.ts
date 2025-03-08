@@ -1,9 +1,9 @@
 import { Schema, type } from "@colyseus/schema"
 import { Constraint } from "matter-js"
-import { getPokemonConfigFromAvatar } from "../../utils/avatar"
+import { getPokemonCustomFromAvatar } from "../../utils/avatar"
 import { IPokemonAvatar } from "../../types"
 import { Orientation, PokemonActionState } from "../../types/enum/Game"
-import { Pkm, PkmByIndex } from "../../types/enum/Pokemon"
+import { Pkm } from "../../types/enum/Pokemon"
 
 export class PokemonAvatarModel extends Schema implements IPokemonAvatar {
   @type("string") id: string
@@ -28,8 +28,8 @@ export class PokemonAvatarModel extends Schema implements IPokemonAvatar {
     this.targetX = x
     this.targetY = y
     this.timer = timer
-    const { index, shiny } = getPokemonConfigFromAvatar(avatar)
-    this.name = PkmByIndex[index]
-    this.shiny = shiny
+    const { name, shiny } = getPokemonCustomFromAvatar(avatar)
+    this.name = name
+    this.shiny = shiny ?? false
   }
 }

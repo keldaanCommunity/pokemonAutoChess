@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react"
-import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
+import { IPokemonCollectionItem } from "../../../../../models/mongo-models/user-metadata"
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed/precomputed-emotions"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { BoosterPriceByRarity, getEmotionCost } from "../../../../../types/Config"
@@ -13,7 +13,7 @@ import { usePreferences } from "../../../preferences"
 export default function PokemonCollectionItem(props: {
   name: Pkm
   index: string
-  config: IPokemonConfig | undefined
+  config: IPokemonCollectionItem | undefined
   filter: string
   shinyOnly: boolean
   refundableOnly: boolean

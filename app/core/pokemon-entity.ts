@@ -1788,8 +1788,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             ? []
             : [
                 PokemonFactory.createPokemonFromName(Pkm.LUGIA, {
-                  selectedShiny: this.shiny,
-                  selectedEmotion: Emotion.ANGRY
+                  shiny: this.shiny,
+                  emotion: Emotion.ANGRY
                 })
               ]
         }
@@ -1797,8 +1797,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         const spawns = pickNRandomIn(koAllies, 3)
         spawns.forEach((spawn) => {
           const mon = PokemonFactory.createPokemonFromName(spawn.name, {
-            selectedEmotion: spawn.emotion,
-            selectedShiny: spawn.shiny
+            emotion: spawn.emotion,
+            shiny: spawn.shiny
           })
           const coord =
             this.simulation.getClosestAvailablePlaceOnBoardToPokemon(

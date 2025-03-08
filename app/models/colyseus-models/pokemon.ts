@@ -1833,7 +1833,10 @@ const conversionEffect = ({
 
   // when converting to bug, get a clone
   if (synergyCopied === Synergy.BUG) {
-    const bug = PokemonFactory.createPokemonFromName(entity.name, player)
+    const bug = PokemonFactory.createPokemonFromName(
+      entity.name,
+      player as Player
+    )
     const coord = simulation.getClosestAvailablePlaceOnBoardToPokemon(
       entity,
       player.team

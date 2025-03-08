@@ -51,7 +51,7 @@ import {
   setMoney,
   setNoELO,
   setPhase,
-  setPokemonCollection,
+  setEmotesUnlocked,
   setPokemonProposition,
   setRoundTime,
   setShopFreeRolls,
@@ -597,7 +597,7 @@ export default function Game() {
           dispatch(setStreak(player.streak))
           dispatch(setShopLocked(player.shopLocked))
           dispatch(setShopFreeRolls(player.shopFreeRolls))
-          dispatch(setPokemonCollection(player.pokemonCollection))
+          dispatch(setEmotesUnlocked(player.emotesUnlocked))
 
           $player.listen("interest", (value) => {
             dispatch(setInterest(value))

@@ -6,7 +6,7 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { Tooltip } from "react-tooltip"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
-import { Emotion, PkmWithConfig } from "../../../../../types"
+import { Emotion, PkmWithCustom } from "../../../../../types"
 import { RarityColor } from "../../../../../types/Config"
 import { Rarity } from "../../../../../types/enum/Game"
 import { Item } from "../../../../../types/enum/Item"
@@ -25,9 +25,9 @@ import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { usePreferences } from "../../../preferences"
 
 export default function PokemonPicker(props: {
-  selected: PkmWithConfig | Item
-  selectEntity: React.Dispatch<React.SetStateAction<PkmWithConfig>>
-  addEntity: (e: PkmWithConfig) => void
+  selected: PkmWithCustom | Item
+  selectEntity: React.Dispatch<React.SetStateAction<PkmWithCustom>>
+  addEntity: (e: PkmWithCustom) => void
 }) {
   const tabs = [...Object.keys(PRECOMPUTED_POKEMONS_PER_TYPE), "none"]
   const pokemonsPerTab: IPokemonData[][] = tabs.map((t) =>
@@ -68,9 +68,9 @@ export default function PokemonPicker(props: {
 
 function PokemonPickerTab(props: {
   pokemons: IPokemonData[]
-  selected: PkmWithConfig | Item
-  selectEntity: React.Dispatch<React.SetStateAction<PkmWithConfig>>
-  addEntity: (e: PkmWithConfig) => void
+  selected: PkmWithCustom | Item
+  selectEntity: React.Dispatch<React.SetStateAction<PkmWithCustom>>
+  addEntity: (e: PkmWithCustom) => void
   type: Synergy | "none"
 }) {
   const [preferences, setPreferences] = usePreferences()

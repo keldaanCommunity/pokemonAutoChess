@@ -5,7 +5,7 @@ import {
   IDetailledPokemon
 } from "../../../../../models/mongo-models/bot-v2"
 import PokemonFactory from "../../../../../models/pokemon-factory"
-import { Emotion, PkmWithConfig } from "../../../../../types"
+import { Emotion, PkmWithCustom } from "../../../../../types"
 import { Item } from "../../../../../types/enum/Item"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
@@ -24,13 +24,13 @@ import "./team-builder.css"
 
 export default function TeamBuilder(props: {
   bot?: IBot
-  onChangeAvatar?: (pkm: PkmWithConfig) => void
+  onChangeAvatar?: (pkm: PkmWithCustom) => void
   board: IDetailledPokemon[]
   updateBoard: (board: IDetailledPokemon[]) => void
   error?: string
 }) {
   const { t } = useTranslation()
-  const [selection, setSelection] = useState<Item | PkmWithConfig>({
+  const [selection, setSelection] = useState<Item | PkmWithCustom>({
     name: Pkm.MAGIKARP,
     shiny: false,
     emotion: Emotion.NORMAL
@@ -56,8 +56,8 @@ export default function TeamBuilder(props: {
     const map = computeSynergies(
       board.map((p) => {
         const pkm = PokemonFactory.createPokemonFromName(p.name, {
-          selectedEmotion: p.emotion,
-          selectedShiny: p.shiny
+          emotion: p.emotion,
+          shiny: p.shiny
         })
         pkm.positionX = p.x
         pkm.positionY = p.y
@@ -70,7 +70,7 @@ export default function TeamBuilder(props: {
     return [...map.entries()]
   }, [board])
 
-  function addPokemon(x: number, y: number, pkm: PkmWithConfig) {
+  function addPokemon(x: number, y: number, pkm: PkmWithCustom) {
     let existingItems
     const i = board.findIndex((p) => p.x === x && p.y === y)
     if (i >= 0) {
@@ -123,8 +123,8 @@ export default function TeamBuilder(props: {
     } else if (pokemonOnCell) {
       setSelection(pokemonOnCell)
       setSelectedPokemon(pokemonOnCell)
-    } else if (Object.values(Pkm).includes((selection as PkmWithConfig).name)) {
-      addPokemon(x, y, selection as PkmWithConfig)
+    } else if (Object.values(Pkm).includes((selection as PkmWithCustom).name)) {
+      addPokemon(x, y, selection as PkmWithCustom)
     } else if (Object.keys(Item).includes(selection as Item)) {
       addItem(x, y, selection as Item)
     }
@@ -148,7 +148,7 @@ export default function TeamBuilder(props: {
         updateBoard([...board])
       }
     } else if (e.dataTransfer.getData("pokemon") != "") {
-      const pkm: PkmWithConfig = {
+      const pkm: PkmWithCustom = {
         name: e.dataTransfer.getData("pokemon") as Pkm,
         emotion: Emotion.NORMAL,
         shiny: false
@@ -173,14 +173,14 @@ export default function TeamBuilder(props: {
     return null
   }
 
-  function addPokemonOnFirstEmptyCell(entity: PkmWithConfig) {
+  function addPokemonOnFirstEmptyCell(entity: PkmWithCustom) {
     const firstEmptyCell = getFirstEmptyCell()
     if (firstEmptyCell) {
       addPokemon(firstEmptyCell.x, firstEmptyCell.y, entity)
     }
   }
 
-  function updateSelectedPokemon(pkm: PkmWithConfig) {
+  function updateSelectedPokemon(pkm: PkmWithCustom) {
     setSelection(pkm)
     if (selectedPokemon != null) {
       selectedPokemon.emotion = pkm.emotion
@@ -193,9 +193,9 @@ export default function TeamBuilder(props: {
     if (
       selection &&
       props.onChangeAvatar &&
-      Object.values(Pkm).includes((selection as PkmWithConfig).name)
+      Object.values(Pkm).includes((selection as PkmWithCustom).name)
     ) {
-      props.onChangeAvatar(selection as PkmWithConfig)
+      props.onChangeAvatar(selection as PkmWithCustom)
     }
   }
 
@@ -271,7 +271,7 @@ export default function TeamBuilder(props: {
       />
       <SelectedEntity entity={selection} onChange={updateSelectedPokemon} />
       <ItemPicker selectEntity={setSelection} selected={selection} />
-      <PokemonPicker selectEntity={e => setSelection(e as PkmWithConfig | Item)} addEntity={addPokemonOnFirstEmptyCell} selected={selection} />
+      <PokemonPicker selectEntity={e => setSelection(e as PkmWithCustom | Item)} addEntity={addPokemonOnFirstEmptyCell} selected={selection} />
       {props.bot && props.onChangeAvatar && (
         <BotAvatar
           bot={props.bot}

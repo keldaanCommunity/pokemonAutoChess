@@ -87,7 +87,7 @@ export class DebugScene extends Phaser.Scene {
       this,
       px,
       py,
-      PokemonFactory.createPokemonFromName(pkm, { selectedShiny: shiny }),
+      PokemonFactory.createPokemonFromName(pkm, { shiny }),
       "debug",
       false,
       false

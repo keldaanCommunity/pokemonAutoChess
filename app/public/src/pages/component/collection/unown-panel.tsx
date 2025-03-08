@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useMemo } from "react"
-import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
+import { IPokemonCollectionItem } from "../../../../../models/mongo-models/user-metadata"
 import { Emotion } from "../../../../../types/enum/Emotion"
 import { Pkm, PkmIndex, Unowns } from "../../../../../types/enum/Pokemon"
 import { useAppSelector } from "../../../hooks"
@@ -14,7 +14,7 @@ export default function UnownPanel(props: {
   refundableOnly: boolean
 }) {
   const pokemonCollection = useAppSelector(
-    (state) => state.network.profile?.pokemonCollection ?? new Map<string, IPokemonConfig>()
+    (state) => state.network.profile?.pokemonCollection ?? new Map<string, IPokemonCollectionItem>()
   )
   const secretMessage = `    
     To unleash ancient powers?

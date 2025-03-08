@@ -1,11 +1,14 @@
-import { ArraySchema, MapSchema } from "@colyseus/schema"
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import Simulation from "../../../core/simulation"
 import ExperienceManager from "../../../models/colyseus-models/experience-manager"
-import PokemonCollection from "../../../models/colyseus-models/pokemon-collection"
 import Synergies from "../../../models/colyseus-models/synergies"
-import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
-import { IDps, IExperienceManager, IPlayer, ISimulation } from "../../../types"
+import {
+  Emotion,
+  IDps,
+  IExperienceManager,
+  IPlayer,
+  ISimulation
+} from "../../../types"
 import { StageDuration } from "../../../types/Config"
 import { GamePhaseState, Team } from "../../../types/enum/Game"
 import { Item } from "../../../types/enum/Item"
@@ -43,7 +46,7 @@ export interface GameStateStore {
   weather: Weather
   blueDpsMeter: IDps[]
   redDpsMeter: IDps[]
-  pokemonCollection: MapSchema<IPokemonConfig>
+  emotesUnlocked: Emotion[]
   additionalPokemons: Pkm[]
   podium: ILeaderboardInfo[]
 }
@@ -73,7 +76,7 @@ const initialState: GameStateStore = {
   currentPlayerSynergies: new Array<[Synergy, number]>(),
   blueDpsMeter: new Array<IDps>(),
   redDpsMeter: new Array<IDps>(),
-  pokemonCollection: new MapSchema<IPokemonConfig>(),
+  emotesUnlocked: [],
   additionalPokemons: new Array<Pkm>(),
   specialGameRule: null,
   podium: new Array<ILeaderboardInfo>()
@@ -283,8 +286,8 @@ export const gameSlice = createSlice({
       }
     },
 
-    setPokemonCollection: (state, action: PayloadAction<PokemonCollection>) => {
-      state.pokemonCollection = action.payload
+    setEmotesUnlocked: (state, action: PayloadAction<string>) => {
+      state.emotesUnlocked = action.payload.split(",") as Emotion[]
     },
 
     setPodium(state, action: PayloadAction<ILeaderboardInfo[]>) {
@@ -299,7 +302,7 @@ export const {
   setSimulation,
   setAdditionalPokemons,
   setPokemonProposition,
-  setPokemonCollection,
+  setEmotesUnlocked,
   leaveGame,
   removeDpsMeter,
   changeDpsMeter,
