@@ -87,6 +87,9 @@
 - Wild now gives Speed at levels 2-4 and Attack at levels 6-8 instead of attack and movement speed at all levels
 - Nerf Amorphous 3 & 5 : 4/8 → 3/6 HP per active synergy
 - Nerf Artficial 4 & 6: 8/15 → 6/12 attack, AP and shieldd per held item
+- Fire burn chance on attacks now inflicts Burn for ~~2~~ 3 seconds
+- Wild now have ~~25~~ 30% chance to inflict Wound **only when synergy active**
+- Ghost now gets dodge chance and chance to inflict Silence on hit **only when synergy active**
 
 # Changes to Items
 
@@ -113,6 +116,7 @@
 - PVE rewards from stage 24 onwards now propose 1 synergy stone maximum
 - Regular item carousels now propose 4 synergy stones maximum
 - Weather Windy and Snow now impacts speed instead of movement speed
+- Paralysis status now reduces speed by 50 instead of 40
 
 # UI
 

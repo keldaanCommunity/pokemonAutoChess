@@ -2336,7 +2336,7 @@
     "WOUND": "Previene le cure da qualsiasi tipo di fonte",
     "RAGE": "Raddoppia il danno e la velocità, ma dimezza lo scudo, le cure, la durata di congelamento e sonno, e perde lo status PROTECT. Tutte le unità ottengono lo status RAGE dopo 35 secondi di battaglia.",
     "RESURECTION": "Previene il KO una volta, ripristinando gli HP massimi",
-    "PARALYSIS": "Riduce la SPEED e la velocità di movimento del 40% ed impedisce di schivare gli attacchi.",
+    "PARALYSIS": "Riduce la SPEED del 50% ed impedisce di schivare gli attacchi.",
     "POKERUS": "Ogni 2.5 secondi, guadagna 1 di ATK e 10% di AP prima di infettare 2 alleati adiacenti con POKERUS",
     "ARMOR_REDUCTION": "Riduci DEF e SPE_DEF del 50%",
     "CHARM": "Impedisce di attaccare il bersaglio e costringe ad avvicinarsi ad esso",

@@ -2435,7 +2435,7 @@
     "WOUND": "Verhindert jegliche Regeneration der HP.",
     "RAGE": "Doppelter Schaden und Geschwindigkeit, halber Schild, Heilung, Einfrieren und Schlafdauer, Verlust von PROTECT. Alle Einheiten werden nach 35 Sekunden Kampf RAGE.",
     "RESURECTION": "Das Pokémon wird bei KO einmal mit vollen HP wiederbelebt.",
-    "PARALYSIS": "SPEED und Bewegungsgeschwindigkeit um 40 % reduzieren",
+    "PARALYSIS": "SPEED und Bewegungsgeschwindigkeit um 50 reduzieren",
     "POKERUS": "Alle 2.5 Sekunden erhältst du 1 ATK und 10 AP, bevor du 2 benachbarte Verbündete mit POKERUS infizierst.",
     "ARMOR_REDUCTION": "Reduzieren Sie DEF und SPE_DEF um 50 %",
     "CHARM": "Verhindert den Angriff auf das Ziel und zwingt dazu, sich ihm zu nähern",

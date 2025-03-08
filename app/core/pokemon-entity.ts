@@ -1010,31 +1010,33 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     })
 
-    const nbIcyRocks =
-      this.player && this.simulation.weather === Weather.SNOW
-        ? count(this.player.items, Item.ICY_ROCK)
-        : 0
-    if (this.types.has(Synergy.ICE) || nbIcyRocks > 0) {
-      let freezeChance = 0
-      if (this.effects.has(Effect.CHILLY)) {
-        freezeChance = 0.2
-      } else if (this.effects.has(Effect.FROSTY)) {
-        freezeChance = 0.3
-      } else if (this.effects.has(Effect.FREEZING)) {
-        freezeChance = 0.4
-      } else if (this.effects.has(Effect.SHEER_COLD)) {
-        freezeChance = 0.4
-      }
-      freezeChance += nbIcyRocks * 0.05
-      if (chance(freezeChance, this)) {
-        target.status.triggerFreeze(2000, target)
+    if (this.hasSynergyEffect(Synergy.ICE)) {
+      const nbIcyRocks =
+        this.player && this.simulation.weather === Weather.SNOW
+          ? count(this.player.items, Item.ICY_ROCK)
+          : 0
+      if (this.types.has(Synergy.ICE) || nbIcyRocks > 0) {
+        let freezeChance = 0
+        if (this.effects.has(Effect.CHILLY)) {
+          freezeChance = 0.2
+        } else if (this.effects.has(Effect.FROSTY)) {
+          freezeChance = 0.3
+        } else if (this.effects.has(Effect.FREEZING)) {
+          freezeChance = 0.4
+        } else if (this.effects.has(Effect.SHEER_COLD)) {
+          freezeChance = 0.4
+        }
+        freezeChance += nbIcyRocks * 0.05
+        if (chance(freezeChance, this)) {
+          target.status.triggerFreeze(2000, target)
+        }
       }
     }
 
     if (this.hasSynergyEffect(Synergy.FIRE)) {
       const burnChance = 0.3
       if (chance(burnChance, this)) {
-        target.status.triggerBurn(2000, target, this)
+        target.status.triggerBurn(3000, target, this)
       }
     }
 
@@ -1045,33 +1047,35 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    if (this.types.has(Synergy.GHOST)) {
+    if (this.hasSynergyEffect(Synergy.GHOST)) {
       const silenceChance = 0.2
       if (chance(silenceChance, this)) {
         target.status.triggerSilence(2000, target, this)
       }
     }
 
-    let poisonChance = 0
-    if (this.effects.has(Effect.POISONOUS)) {
-      poisonChance = 0.3
-    }
-    if (this.effects.has(Effect.VENOMOUS)) {
-      poisonChance = 0.6
-    }
-    if (this.effects.has(Effect.TOXIC)) {
-      poisonChance = 1.0
-    }
-    if (target.player) {
-      const nbSmellyClays = count(target.player.items, Item.SMELLY_CLAY)
-      poisonChance -= nbSmellyClays * 0.1
-    }
-    if (poisonChance > 0 && chance(poisonChance, this)) {
-      target.status.triggerPoison(4000, target, this)
+    if (this.hasSynergyEffect(Synergy.POISON)) {
+      let poisonChance = 0
+      if (this.effects.has(Effect.POISONOUS)) {
+        poisonChance = 0.3
+      }
+      if (this.effects.has(Effect.VENOMOUS)) {
+        poisonChance = 0.6
+      }
+      if (this.effects.has(Effect.TOXIC)) {
+        poisonChance = 1.0
+      }
+      if (target.player) {
+        const nbSmellyClays = count(target.player.items, Item.SMELLY_CLAY)
+        poisonChance -= nbSmellyClays * 0.1
+      }
+      if (poisonChance > 0 && chance(poisonChance, this)) {
+        target.status.triggerPoison(4000, target, this)
+      }
     }
 
-    if (this.types.has(Synergy.WILD)) {
-      const woundChance = 0.25
+    if (this.hasSynergyEffect(Synergy.WILD)) {
+      const woundChance = 0.3
       if (chance(woundChance, this)) {
         target.status.triggerWound(3000, target, this)
       }
