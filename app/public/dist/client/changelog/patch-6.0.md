@@ -73,6 +73,7 @@
 - Nerfed Obstruct (Obstagoon): Protect duration 1/2/4 → 1/2/3 seconds
 - Nerfed Celebi HP 300 → 250
 - Nerfed Wishiwashi: HP 100 → 50
+- Buff Jirachi: revert again Doom desire PP from 5.9 ~~60~~ 100 PP if target is KO in the mean time (my bad)
 
 # Changes to Synergies
 
@@ -80,7 +81,7 @@
 - Berry trees no longer change every time a berry is collected. Instead, they change when you change region.
 - Wild now gives Speed at levels 2-4 and Attack at levels 6-8 instead of attack and movement speed at all levels
 - Nerf Amorphous 3 & 5 : 4/8 → 3/6 HP per active synergy
-- Nerf Artficial 4 & 6: 8/15 → 6/12 attack, AP and shieldd per held item
+- Nerf Artficial 4 & 6: 8/15 → 6/12 attack, AP and shield per held item
 
 # Changes to Items
 
