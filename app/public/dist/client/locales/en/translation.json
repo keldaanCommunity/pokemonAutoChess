@@ -450,7 +450,8 @@
     "SPICY_EXTRACT": "Spicy Extract",
     "SWEET_SCENT": "Sweet Scent",
     "SWALLOW": "Swallow",
-    "DECORATE": "Decorate"
+    "DECORATE": "Decorate",
+    "DRAGON_CLAW": "Dragon Claw"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1449,7 +1450,7 @@
     "STOMP": "Deal SPECIAL equal to [3,4,5,SP] x ATK to the target.",
     "HORN_DRILL": "Deal [3,4,5,SP] x ATK as SPECIAL to the target, with [30,LK]% chance to execute it. The more ATK the user has relative to the target, the higher the chance.",
     "PAYBACK": "Deal [15,30,60,SP] SPECIAL to the target. The damage is doubled if the user has less than 50% HP.",
-    "SHADOW_BALL": "Deal [40,60,100,SP] SPECIAL to the target and decrease the SPE_DEF of all enemy Pokémon by 2.",
+    "SHADOW_BALL": "Deal [30,60,100,SP] SPECIAL to the target and decrease the SPE_DEF of all enemy Pokémon by 2.",
     "BUG_BUZZ": "Deal [20,40,80,SP] SPECIAL to the target. The damage is doubled if the target suffers from PARALYSIS.",
     "STRING_SHOT": "Deal [10,20,50,SP] SPECIAL to the target and inflict PARALYSIS for 5 seconds.",
     "VENOSHOCK": "Deal [30,60,120,SP] SPECIAL to the target. The damage is doubled if the target suffers from POISONNED.",
@@ -1808,7 +1809,8 @@
     "SPICY_EXTRACT": "Make 1/2/3 closest allies RAGE for [2,SP] seconds",
     "SWEET_SCENT": "Enemies in a 3-range radius can no longer dodge attacks, lose [6,SP] SPE_DEF and have [30,LK]% chance to be CHARM for 1 second",
     "SWALLOW": "Store power and boosts its DEF and SPE_DEF by 3 up to 3 times. If below 25% HP, swallow instead, restoring [20,SP]% of max HP per stack. If over 3 stacks, spit up, dealing [40,80,150,SP] SPECIAL to all enemies in front.",
-    "DECORATE": "Decorates the nearest ally, increasing its ATK by [1,2,3,SP] and AP by [10,20,30,SP]"
+    "DECORATE": "Decorates the nearest ally, increasing its ATK by [1,2,3,SP] and AP by [10,20,30,SP]",
+    "DRAGON_CLAW": "Deal [30,60,120,SP] SPECIAL to the lowest health adjacent enemy and WOUND them for 4 seconds."
   },
   "effect": {
     "INGRAIN": "Ingrain",

@@ -1346,7 +1346,7 @@
     "TORMENT": "Potenzia l' SPEED del [20,40,60,SP].",
     "STOMP": "Infligge SPECIAL uguale a [3,4,5,SP] moltiplicato per l' ATK  dell'utilizzatore.",
     "PAYBACK": "Infligge [15,30,60,SP] SPECIAL. Il danno raddoppia se l'utilizzatore ha meno della metà dei suoi punti salute.",
-    "SHADOW_BALL": "Infligge [40,60,100,SP] SPECIAL. Diminuisce la SPE_DEF di tutti i Pokèmon nemici di 2.",
+    "SHADOW_BALL": "Infligge [30,60,100,SP] SPECIAL. Diminuisce la SPE_DEF di tutti i Pokèmon nemici di 2.",
     "BUG_BUZZ": "Infliggi [20,40,80,SP] SPECIAL. Il danno raddoppia se il bersaglio ha lo status PARALYSIS.",
     "STRING_SHOT": "Infliggi [10,20,50,SP] SPECIAL e infliggi PARALYSIS al bersaglio per 5 secondi.",
     "VENOSHOCK": "Infliggi [30,60,120,SP] SPECIAL. Il danno raddoppia se il bersaglio ha lo status POISONNED.",

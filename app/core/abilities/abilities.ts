@@ -4043,7 +4043,7 @@ export class ShadowBallStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [40, 60, 100][pokemon.stars - 1] ?? 100
+    const damage = [30, 60, 100][pokemon.stars - 1] ?? 100
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
 
     board.forEach((x: number, y: number, v: PokemonEntity | undefined) => {
@@ -11905,6 +11905,48 @@ export class DecorateStrategy extends AbilityStrategy {
   }
 }
 
+export class DragonClawStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    //Deal 30/60/120 special damage to the lowest health adjacent enemy and Wound them for 4 seconds.
+    super.process(pokemon, state, board, target, crit)
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+    const cells = board.getAdjacentCells(
+      pokemon.positionX,
+      pokemon.positionY,
+      false
+    )
+    let lowestHp = 9999
+    let lowestHpTarget: PokemonEntity | undefined
+    for (const cell of cells) {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        if (cell.value.hp < lowestHp) {
+          lowestHp = cell.value.hp
+          lowestHpTarget = cell.value
+        }
+      }
+    }
+    if (!lowestHpTarget) {
+      lowestHpTarget = target
+    }
+    lowestHpTarget.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+    lowestHpTarget.status.triggerWound(4000, lowestHpTarget, pokemon)
+    pokemon.targetX = lowestHpTarget.positionX
+    pokemon.targetY = lowestHpTarget.positionY
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -12337,5 +12379,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SYRUP_BOMB]: new SyrupBombStrategy(),
   [Ability.GRAV_APPLE]: new GravAppleStrategy(),
   [Ability.FICKLE_BEAM]: new FickleBeamStrategy(),
-  [Ability.DECORATE]: new DecorateStrategy()
+  [Ability.DECORATE]: new DecorateStrategy(),
+  [Ability.DRAGON_CLAW]: new DragonClawStrategy()
 }

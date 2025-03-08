@@ -1449,7 +1449,7 @@
     "STOMP": "对目标造成SPECIAL，数值相当于[3,4,5,SP]乘以ATK。",
     "HORN_DRILL": "对目标造成SPECIAL，数值相当于[3,4,5,SP]乘以ATK，并有[30,LK]%的概率直接将其击倒。使用者相对于目标的ATK越高，直接击倒概率越高。",
     "PAYBACK": "对目标造成[15,30,60,SP]点SPECIAL。若使用者生命不足一半，造成的伤害翻倍。",
-    "SHADOW_BALL": "对目标造成[40,60,100,SP]点SPECIAL，并降低全部敌方宝可梦2点SPE_DEF。",
+    "SHADOW_BALL": "对目标造成[30,60,100,SP]点SPECIAL，并降低全部敌方宝可梦2点SPE_DEF。",
     "BUG_BUZZ": "对目标造成[20,40,80,SP]点SPECIAL。若目标处于PARALYSIS，造成的伤害翻倍。",
     "STRING_SHOT": "对目标造成[10,20,50,SP]点SPECIAL，并使其陷入PARALYSIS 5秒。",
     "VENOSHOCK": "对目标造成[30,60,120,SP]点SPECIAL。若目标处于POISONNED，造成的伤害翻倍。",

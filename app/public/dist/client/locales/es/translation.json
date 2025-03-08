@@ -1395,7 +1395,7 @@
     "STOMP": "Inflige SPECIAL a un objetivo igual a [3,4,5,SP] x ATK",
     "HORN_DRILL": "Inflige [3,4,5,SP] x ATK como SPECIAL al objetivo, con un [30,LK]% de ejecutarlo. Mientras más ATK tenga el usuario en relación al objetivo, mayor es la probabilidad.",
     "PAYBACK": "Inflige [15,30,60,SP] de SPECIAL al objetivo. Daña el doble si el usuario tiene menos de la mitad de su vida.",
-    "SHADOW_BALL": "Inflige [40,60,100,SP] de SPECIAL al objetivo y disminuye la SPE_DEF de todos los enemigos en 2",
+    "SHADOW_BALL": "Inflige [30,60,100,SP] de SPECIAL al objetivo y disminuye la SPE_DEF de todos los enemigos en 2",
     "BUG_BUZZ": "Inflige [20,40,80,SP] de SPECIAL al objetivo. Si este está PARALYSIS, recibe el doble de daño",
     "STRING_SHOT": "Inflige [10,20,50,SP] de SPECIAL al objetivo y lo deja PARALYSIS por 5 segundos",
     "VENOSHOCK": "Inflige [30,60,120,SP] de SPECIAL al objetivo. Si este está POISONNED, recibe el doble de daño",

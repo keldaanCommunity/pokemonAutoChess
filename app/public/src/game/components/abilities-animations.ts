@@ -2958,7 +2958,12 @@ export function displayAbility(
       break
 
     case Ability.CRUSH_CLAW:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+    case Ability.METAL_CLAW:
+      addAbilitySprite(Ability.CRUSH_CLAW, coordinatesTarget, true).setScale(2)
+      break
+
+    case Ability.DRAGON_CLAW:
+      addAbilitySprite(Ability.DRAGON_CLAW, coordinatesTarget, true).setScale(1)
       break
 
     case Ability.EARTHQUAKE:
@@ -3239,10 +3244,6 @@ export function displayAbility(
 
     case Ability.SHORE_UP:
       addAbilitySprite(Ability.EARTHQUAKE, coordinates, true).setScale(2)
-      break
-
-    case Ability.METAL_CLAW:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
     case Ability.BONE_ARMOR: {

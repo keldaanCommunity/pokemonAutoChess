@@ -1239,7 +1239,7 @@
     "TORMENT": "Tăng [20,40,60,SP] SPEED",
     "STOMP": "Gây SPECIAL tương đương với [3,4,5,SP] x ATK chỉ số của mục tiêu",
     "PAYBACK": "Gây [15,30,60,SP] SPECIAL lên mục tiêu. Gấp đôi sát thương nếu thanh máu bản thân thấp hơn một nửa",
-    "SHADOW_BALL": "Gây [40,60,100,SP] SPECIAL lên mục tiêu và giảm 2 chỉ số SPE_DEF của toàn bộ Pokémon đối thủ",
+    "SHADOW_BALL": "Gây [30,60,100,SP] SPECIAL lên mục tiêu và giảm 2 chỉ số SPE_DEF của toàn bộ Pokémon đối thủ",
     "BUG_BUZZ": "Gây [20,40,80,SP] SPECIAL lên mục tiêu. Nếu mục tiêu đang PARALYSIS, gấp đôi sát thương",
     "STRING_SHOT": "Gây [10,20,50,SP] SPECIAL lên mục tiêu và khiến chúng PARALYSIS trong 5 giây",
     "VENOSHOCK": "Gây [30,60,120,SP] SPECIAL lên mục tiêu. Nếu mục tiêu đang POISONED, gấp đôi sát thương",

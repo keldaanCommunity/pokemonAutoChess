@@ -1415,7 +1415,7 @@
     "STOMP": "Attacke, die [3,4,5,SP] x ATK SPECIAL am Ziel verursacht",
     "HORN_DRILL": "Verursacht [3,4,5,SP] x ATK als SPECIAL, mit einer Trefferchance von [30,LK]%. Je mehr ATK der Anwender als das Ziel hat, desto höher die Chance.",
     "PAYBACK": "Verursacht [15,30,60,SP] SPECIAL. Doppelter Schaden, wenn der Benutzer weniger als die Hälfte seines Lebens hat.",
-    "SHADOW_BALL": "Attacke, die [40,60,100,SP] SPECIAL am Ziel verursacht. Verringert die SPE_DEF aller Feinde um 2 Punkt",
+    "SHADOW_BALL": "Attacke, die [30,60,100,SP] SPECIAL am Ziel verursacht. Verringert die SPE_DEF aller Feinde um 2 Punkt",
     "BUG_BUZZ": "Attacke, die [20,40,80,SP] SPECIAL am Ziel verursacht. Doppelter Schaden, wenn das Ziel PARALYSIS ist",
     "STRING_SHOT": "Attacke, die [10,20,50,SP] SPECIAL am Ziel verursacht und 5 Sekunden lang PARALYSIS beim getroffnen Pokemon bewirkt",
     "VENOSHOCK": "Attacke, die [30,60,120,SP] SPECIAL am Ziel verursacht. Verdoppelt den Schaden, wenn das Ziel POISONNED ist",

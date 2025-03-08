@@ -1159,7 +1159,7 @@ export class Bagon extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.HEAD_SMASH
+  skill = Ability.DRAGON_CLAW
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -1175,7 +1175,7 @@ export class Shelgon extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.HEAD_SMASH
+  skill = Ability.DRAGON_CLAW
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
@@ -1194,7 +1194,7 @@ export class Salamence extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.DRAGON_DARTS
+  skill = Ability.DRAGON_CLAW
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 

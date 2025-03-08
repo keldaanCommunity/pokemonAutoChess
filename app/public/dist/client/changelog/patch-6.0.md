@@ -73,6 +73,7 @@
 - Nerfed Obstruct (Obstagoon): Protect duration 1/2/4 → 1/2/3 seconds
 - Nerfed Celebi HP 300 → 250
 - Nerfed Wishiwashi: HP 100 → 50
+- New ability for Bagon line: Dragon Claw: deal 30/60/120 special damage to the lowest health adjacent enemy and Wound them for 4 seconds.
 
 # Changes to Synergies
 
