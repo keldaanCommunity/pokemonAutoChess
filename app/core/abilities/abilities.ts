@@ -2862,13 +2862,27 @@ export class ThunderStrategy extends AbilityStrategy {
       (cell) => cell && cell.team !== pokemon.team
     ) as PokemonEntity[]
     const targets = pickNRandomIn(enemies, 3)
-    for (const tg of targets) {
-      tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-      if (chance(0.3, pokemon)) {
-        tg.status.triggerParalysis(3000, tg, pokemon)
-      }
-      broadcastAbility(tg, { skill: Ability.THUNDER })
-    }
+    targets.forEach((tg, index) => {
+      tg.commands.push(
+        new DelayedCommand(() => {
+          tg.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          if (chance(0.3, pokemon)) {
+            tg.status.triggerParalysis(3000, tg, pokemon)
+          }
+          broadcastAbility(tg, {
+            skill: Ability.THUNDER_SHOCK,
+            targetX: tg.positionX,
+            targetY: tg.positionY
+          })
+        }, index * 500)
+      )
+    })
   }
 }
 
