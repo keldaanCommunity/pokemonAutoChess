@@ -2834,7 +2834,7 @@ export class SolarBeamStrategy extends AbilityStrategy {
   }
 }
 
-export class ThunderStrategy extends AbilityStrategy {
+export class ThunderShockStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2843,21 +2843,32 @@ export class ThunderStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 0
-    switch (pokemon.stars) {
-      case 1:
-        damage = 30
-        break
-      case 2:
-        damage = 60
-        break
-      case 3:
-        damage = 120
-        break
-      default:
-        break
-    }
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
+export class ThunderStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+    const enemies = board.cells.filter(
+      (cell) => cell && cell.team !== pokemon.team
+    ) as PokemonEntity[]
+    const targets = pickNRandomIn(enemies, 3)
+    for (const tg of targets) {
+      tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+      if (chance(0.3, pokemon)) {
+        tg.status.triggerParalysis(3000, tg, pokemon)
+      }
+      broadcastAbility(tg, { skill: Ability.THUNDER })
+    }
   }
 }
 
@@ -12002,6 +12013,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ROCK_SLIDE]: new RockSlideStrategy(),
   [Ability.HEAT_WAVE]: new HeatWaveStrategy(),
   [Ability.FLAMETHROWER]: new FlameThrowerStrategy(),
+  [Ability.THUNDER_SHOCK]: new ThunderShockStrategy(),
   [Ability.THUNDER]: new ThunderStrategy(),
   [Ability.HYDRO_PUMP]: new HydroPumpStrategy(),
   [Ability.DRACO_METEOR]: new DracoMeteorStrategy(),

@@ -490,8 +490,8 @@ export function displayAbility(
         )
       break
 
-    case Ability.THUNDER:
-      addAbilitySprite(skill, coordinatesTarget, true)
+    case Ability.THUNDER_SHOCK:
+      addAbilitySprite(Ability.THUNDER, coordinatesTarget, true)
         .setScale(2)
         .setOrigin(0.5, 1)
       break
@@ -3380,9 +3380,16 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
-    case Ability.TAILWIND:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+    case Ability.TAILWIND: {
+      const angle = Math.atan2(
+        coordinatesTarget[1] - coordinates[1],
+        coordinatesTarget[0] - coordinates[0]
+      )
+      addAbilitySprite(skill, coordinates, true)
+        .setScale(2)
+        .setRotation(angle - Math.PI / 2)
       break
+    }
 
     case Ability.STRENGTH: {
       const specialProjectile = addAbilitySprite(

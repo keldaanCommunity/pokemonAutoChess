@@ -880,7 +880,7 @@ export class Meditite extends Pokemon {
   speed = 51
   def = 8
   speDef = 8
-  maxPP = 60
+  maxPP = 100
   range = 2
   skill = Ability.CALM_MIND
   attackSprite = AttackSprite.PSYCHIC_RANGE
@@ -900,7 +900,7 @@ export class Medicham extends Pokemon {
   speed = 51
   def = 12
   speDef = 12
-  maxPP = 60
+  maxPP = 100
   range = 2
   skill = Ability.CALM_MIND
   attackSprite = AttackSprite.PSYCHIC_RANGE
@@ -4644,7 +4644,7 @@ export class Mareep extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 2
-  skill = Ability.THUNDER
+  skill = Ability.THUNDER_SHOCK
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -4664,7 +4664,7 @@ export class Flaffy extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 2
-  skill = Ability.THUNDER
+  skill = Ability.THUNDER_SHOCK
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -4683,7 +4683,7 @@ export class Ampharos extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 2
-  skill = Ability.THUNDER
+  skill = Ability.THUNDER_SHOCK
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 
@@ -9520,7 +9520,7 @@ export class Chinchou extends Pokemon {
   speDef = 6
   maxPP = 90
   range = 2
-  skill = Ability.THUNDER
+  skill = Ability.THUNDER_SHOCK
   additional = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
@@ -9540,7 +9540,7 @@ export class Lanturn extends Pokemon {
   speDef = 10
   maxPP = 90
   range = 2
-  skill = Ability.THUNDER
+  skill = Ability.THUNDER_SHOCK
   additional = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
