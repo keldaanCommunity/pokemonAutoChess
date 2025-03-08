@@ -75,6 +75,7 @@
   border: 6px solid transparent;
   margin: -6px -4px;
   z-index: 2;
+  border-radius: 12px;
 }
 
 .react-tabs__tab--selected.icon-tab::after {

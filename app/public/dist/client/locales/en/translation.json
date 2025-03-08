@@ -453,7 +453,8 @@
     "SWALLOW": "Swallow",
     "DECORATE": "Decorate",
     "DRAGON_CLAW": "Dragon Claw",
-    "TAILWIND": "Tailwind"
+    "TAILWIND": "Tailwind",
+    "HORN_ATTACK": "Horn Attack"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1814,7 +1815,8 @@
     "SWALLOW": "Store power and boosts its DEF and SPE_DEF by 3 up to 3 times. If below 25% HP, swallow instead, restoring [20,SP]% of max HP per stack. If over 3 stacks, spit up, dealing [40,80,150,SP] SPECIAL to all enemies in front.",
     "DECORATE": "Decorates the nearest ally, increasing its ATK by [1,2,3,SP] and AP by [10,20,30,SP]",
     "DRAGON_CLAW": "Deal [30,60,120,SP] SPECIAL to the lowest health adjacent enemy and WOUND them for 4 seconds.",
-    "TAILWIND": "Increase the SPEED of all allies by [5,10,15,SP]"
+    "TAILWIND": "Increase the SPEED of all allies by [5,10,15,SP]",
+    "HORN_ATTACK": "Deal [3,4,5,SP] x ATK as SPECIAL to the target and cause ARMOR_REDUCTION for 8 seconds."
   },
   "effect": {
     "INGRAIN": "Ingrain",

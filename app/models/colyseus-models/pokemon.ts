@@ -3725,7 +3725,7 @@ export class NidoranM extends Pokemon {
   speDef = 4
   maxPP = 90
   range = 1
-  skill = Ability.POISON
+  skill = Ability.HORN_ATTACK
   attackSprite = AttackSprite.POISON_MELEE
   regional = true
 }
@@ -3746,7 +3746,7 @@ export class Nidorino extends Pokemon {
   speDef = 4
   maxPP = 90
   range = 1
-  skill = Ability.POISON
+  skill = Ability.HORN_ATTACK
   attackSprite = AttackSprite.POISON_MELEE
   regional = true
 }
@@ -3766,7 +3766,7 @@ export class Nidoking extends Pokemon {
   speDef = 6
   maxPP = 90
   range = 1
-  skill = Ability.POISON
+  skill = Ability.HORN_ATTACK
   attackSprite = AttackSprite.POISON_MELEE
   regional = true
 }
