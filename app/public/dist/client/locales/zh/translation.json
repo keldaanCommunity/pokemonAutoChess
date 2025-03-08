@@ -2619,7 +2619,7 @@
     "WOUND": "无法受到任何来源的治疗。",
     "RAGE": "造成伤害和移动速度翻倍，受到治疗、获得护盾，陷入FREEZE和SLEEP的时间减半，并失去PROTECT。所有宝可梦战斗35秒后自动陷入RAGE。",
     "RESURECTION": "第一次受到致命伤害时防止此伤害，并恢复HP至满。",
-    "PARALYSIS": "降低40点SPEED，且无法闪避攻击。",
+    "PARALYSIS": "降低50点SPEED，且无法闪避攻击。",
     "POKERUS": "每2.5秒，提升1点ATK和10点AP，然后使2个相邻我方宝可梦受到POKERUS。",
     "ARMOR_REDUCTION": "降低50%的DEF和SPE_DEF。",
     "CHARM": "无法攻击目标，且会强制朝其移动。",

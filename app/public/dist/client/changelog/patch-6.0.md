@@ -116,6 +116,7 @@
 - PVE rewards from stage 24 onwards now propose 1 synergy stone maximum
 - Regular item carousels now propose 4 synergy stones maximum
 - Weather Windy and Snow now impacts speed instead of movement speed
+- Paralysis status now reduces speed by 50 instead of 40
 
 # UI
 
