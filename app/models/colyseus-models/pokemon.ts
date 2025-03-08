@@ -6311,7 +6311,7 @@ export class Keldeo extends Pokemon {
   speed = 60
   def = 8
   speDef = 8
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.SECRET_SWORD
   attackSprite = AttackSprite.WATER_RANGE
