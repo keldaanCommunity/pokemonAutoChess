@@ -6431,13 +6431,13 @@ export class Rotom extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 11
+  atk = 10
   speed = 54
   def = 6
   speDef = 6
   maxPP = 100
   range = 3
-  skill = Ability.CALM_MIND
+  skill = Ability.CHARGE
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 

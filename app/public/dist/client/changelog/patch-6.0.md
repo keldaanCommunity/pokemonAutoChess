@@ -78,6 +78,7 @@
 - New ability for Drifloon line: Tailwind: increase speed of all allies by 5/10/15
 - Ability Thunder renamed to Thunder Shock
 - New ability for Zapdos: Thunder: Lightning strikes up to 3 random enemies, inflicting 30/60/120 SPECIAL with 30% chance to inflict PARALYSIS for 3 seconds
+- New ability for Rotom: Charge: until the end of the fight, attacks deal 100% additional special damage (stackable)
 
 # Changes to Synergies
 

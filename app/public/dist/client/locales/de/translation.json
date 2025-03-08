@@ -1403,7 +1403,6 @@
     "SEED_FLARE": "Shaymins Körper sendet eine Schockwelle aus, die allen Feinden [30,SP] SPECIAL zufügt und ihre SPE_DEF um 3 verringert",
     "IRON_TAIL": "Mono-Zielschadensangriff, der [20,40,80,SP] SPECIAL verursacht. Stärkung der DEF um [2,4,8] Punkte",
     "BLAST_BURN": "Flächenangriff, der [30,60,120,SP] SPECIAL verursacht",
-    "CHARGE": "Verbessere den ATK aller Verbündeten-Pokémons um [20,SP] %",
     "DISCHARGE": "Schocken Sie Gegner in der Nähe mit [25,50,75,SP] SPECIAL und paralysieren Sie sie für 5 Sekunden",
     "BITE": "Fügt dem Ziel [40,80,120,SP] SPECIAL Schaden zu und heilt ihn um 30 % des Schadens. FLINCH das Ziel 5 Sekunden lang",
     "AQUA_TAIL": "Füge dem Gegner [30.60,100,SP] SPECIAL zu und erhalte [30,60,100,SP] SHIELD",

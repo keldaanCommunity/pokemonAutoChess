@@ -3176,13 +3176,7 @@ export class ChargeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const buff = 0.2
-    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
-      if (ally && pokemon.team == ally.team) {
-        ally.addAttack(ally.baseAtk * buff, pokemon, 1, crit)
-        ally.addSpeed(buff * 100, pokemon, 1, crit)
-      }
-    })
+    pokemon.effects.add(Effect.CHARGE)
   }
 }
 

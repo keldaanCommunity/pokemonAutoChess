@@ -1437,7 +1437,6 @@
     "SEED_FLARE": "以谢米的身体为圆心释放冲击波，对5格半径内所有敌方宝可梦造成[30,SP]点SPECIAL，并降低其3点SPE_DEF。",
     "IRON_TAIL": "对目标造成[20,40,80,SP]点SPECIAL，并提升使用者[2,4,8]点DEF。",
     "BLAST_BURN": "对使用者周围的一片区域造成[30,60,120,SP]点SPECIAL。",
-    "CHARGE": "提升所有我方宝可梦[20,SP]%的ATK和[20,SP]点SPEED。",
     "DISCHARGE": "对附近的敌方宝可梦造成[25,50,75,SP]点SPECIAL，并使其陷入PARALYSIS 5秒。",
     "BITE": "对目标造成[40,80,120,SP]点SPECIAL，使用者自身恢复所造成伤害的30%，并使目标陷入FLINCH 5秒。",
     "AQUA_TAIL": "对目标造成[30,60,100,SP]点SPECIAL，并获得[30,60,100,SP]点SHIELD。",

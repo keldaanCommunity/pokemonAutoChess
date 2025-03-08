@@ -1441,7 +1441,7 @@
     "SEED_FLARE": "Emit a shockwave, deal [30,SP] SPECIAL to all enemy Pokémon in a 5 tile radius and decrease their SPE_DEF by 3",
     "IRON_TAIL": "Deal [20,40,80,SP] SPECIAL to the target and increase the user's DEF by [2,4,8].",
     "BLAST_BURN": "Deal [30,60,120,SP] SPECIAL in an area around the user.",
-    "CHARGE": "Increase the ATK of all allied Pokémon by [20,SP]% and their SPEED by [20,SP].",
+    "CHARGE": "Until the end of the fight, attacks deal [100,SP]% additional SPECIAL (stackable).",
     "DISCHARGE": "Deal [25,50,75,SP] SPECIAL to nearby enemy Pokémon and inflict them with PARALYSIS for 5 seconds.",
     "BITE": "Deal [40,80,120,SP] SPECIAL to the target and heal the user for 30% of the damage dealt. Cause the target to FLINCH for 5 seconds.",
     "AQUA_TAIL": "Deal [30,60,100,SP] SPECIAL to the target and gain [30,60,100,SP] SHIELD.",
