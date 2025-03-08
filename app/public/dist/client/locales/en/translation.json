@@ -2410,7 +2410,7 @@
     "RAINBOW_SWIRL_FLAVOR": "Baked with PSYCHIC AMORPHOUS BABY LIGHT allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_RAINBOW_SWIRL). $t(passive_description.RAINBOW_SWIRL_CREAM)",
     "EGG_FOR_SELL": "An Egg sold at Chansey's Daycare",
     "GIMMIGHOUL_COIN": "Get 1 additional GOLD income each round, and increase max interests by 1.",
-    "EXCHANGE_TICKET": "Exchange an item component or a crafted item for another random one. Single use."
+    "EXCHANGE_TICKET": "Exchange an item component or a crafted item on bench for another random one. Single use."
   },
   "passive_description": {
     "NONE": "No passive",

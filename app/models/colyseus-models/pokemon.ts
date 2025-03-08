@@ -6453,7 +6453,7 @@ export class RotomDrone extends Pokemon {
   speed = 53
   def = 6
   speDef = 6
-  maxPP = 50
+  maxPP = 80
   range = 3
   skill = Ability.FLASH
   attackSprite = AttackSprite.GHOST_RANGE
