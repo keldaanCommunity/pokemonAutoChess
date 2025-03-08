@@ -1454,7 +1454,7 @@ export class Aegislash extends Pokemon {
   speed = 44
   def = 14
   speDef = 14
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.KING_SHIELD
   passive = Passive.AEGISLASH
@@ -1474,7 +1474,7 @@ export class AegislashBlade extends Pokemon {
   speed = 44
   def = 4
   speDef = 4
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.KING_SHIELD
   passive = Passive.AEGISLASH

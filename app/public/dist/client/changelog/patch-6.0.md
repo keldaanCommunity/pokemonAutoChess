@@ -76,6 +76,7 @@
 - Buff Jirachi: revert again Doom desire PP from 5.9 ~~60~~ 100 PP if target is KO in the mean time (my bad)
 - Buff Keldeo: PP 100 → 80
 - Buff Octillery; PP 100 → 80, Oktzooka: 150 → 300% of attack as special damage
+- Nerf Aegislash: PP 80 → 100
 
 # Changes to Synergies
 
