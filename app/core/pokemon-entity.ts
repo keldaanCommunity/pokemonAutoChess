@@ -338,6 +338,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (attacker?.passive === Passive.BERSERK) {
         attacker.addAbilityPower(3, attacker, 0, false, false)
       }
+
+      const damageResult = this.state.handleDamage({
+        target: this,
+        damage: specialDamage,
+        board,
+        attackType,
+        attacker,
+        shouldTargetGainMana: true
+      })
+
       if (
         this.items.has(Item.POWER_LENS) &&
         specialDamage >= 1 &&
@@ -355,14 +365,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           shouldTargetGainMana: true
         })
       }
-      return this.state.handleDamage({
-        target: this,
-        damage: specialDamage,
-        board,
-        attackType,
-        attacker,
-        shouldTargetGainMana: true
-      })
+      return damageResult
     }
   }
 
