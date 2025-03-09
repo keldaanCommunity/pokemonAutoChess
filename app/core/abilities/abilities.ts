@@ -11984,6 +11984,21 @@ export class DragonClawStrategy extends AbilityStrategy {
   }
 }
 
+export class HornAttackStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = ([3, 4, 5][pokemon.stars - 1] ?? 5) * pokemon.atk
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.status.triggerArmorReduction(8000, target)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -12419,5 +12434,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FICKLE_BEAM]: new FickleBeamStrategy(),
   [Ability.DECORATE]: new DecorateStrategy(),
   [Ability.DRAGON_CLAW]: new DragonClawStrategy(),
-  [Ability.TAILWIND]: new TailwindStrategy()
+  [Ability.TAILWIND]: new TailwindStrategy(),
+  [Ability.HORN_ATTACK]: new HornAttackStrategy()
 }

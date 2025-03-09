@@ -6,12 +6,6 @@
   max-width: 320px;
   gap: 5px;
   grid-template-columns: 88px 1fr auto;
-  grid-template-areas:
-    "portrait entry types"
-    "stats stats stats"
-    "dish dish dish"
-    "passive passive passive"
-    "ult ult ult";
 }
 
 .react-tooltip.game-pokemon-detail-tooltip,
@@ -28,7 +22,6 @@
   flex-direction: column;
   align-items: start;
   justify-content: start;
-  grid-area: entry;
 }
 
 .game-pokemon-detail-entry-name {
@@ -45,7 +38,6 @@
 .game-pokemon-detail-portrait {
   width: 80px;
   height: 80px;
-  grid-area: portrait;
   border-style: solid;
   border-width: 4px;
   border-radius: 8px;
@@ -68,7 +60,7 @@
 }
 
 .game-pokemon-detail-stats {
-  grid-area: stats;
+  grid-column: span 3;
   display: grid;
   grid-template: 32px 32px / repeat(5, 1fr);
 }
@@ -112,7 +104,7 @@
 }
 
 .game-pokemon-detail-dish {
-  grid-area: dish;
+  grid-column: span 3;
   display: grid;
   grid-template-columns: 50px 1fr;
   align-items: center;
@@ -138,7 +130,7 @@
 }
 
 .game-pokemon-detail-ult {
-  grid-area: ult;
+  grid-column: span 3;
 }
 
 .game-pokemon-detail-ult .ability-name {
@@ -158,7 +150,7 @@
 }
 
 .game-pokemon-detail-passive {
-  grid-area: passive;
+  grid-column: span 3;
   font-style: italic;
   background-color: #4f5160;
   padding: 0.25em 5px;
