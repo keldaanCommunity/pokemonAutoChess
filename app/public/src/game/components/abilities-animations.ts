@@ -702,10 +702,6 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(3)
       break
 
-    case Ability.PAYBACK:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
-      break
-
     case Ability.NIGHT_SLASH:
     case Ability.KOWTOW_CLEAVE:
       addAbilitySprite(Ability.NIGHT_SLASH, coordinatesTarget, true).setScale(2)
