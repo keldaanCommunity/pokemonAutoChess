@@ -73,6 +73,10 @@
 - Nerfed Obstruct (Obstagoon): Protect duration 1/2/4 → 1/2/3 seconds
 - Nerfed Celebi HP 300 → 250
 - Nerfed Wishiwashi: HP 100 → 50
+- Buff Jirachi: revert again Doom desire PP from 5.9 ~~60~~ 100 PP if target is KO in the mean time (my bad)
+- Buff Keldeo: PP 100 → 80
+- Buff Octillery; PP 100 → 80, Oktzooka: 150 → 300% of attack as special damage
+- Nerf Aegislash: PP 80 → 100
 - New ability for Bagon line: Dragon Claw: deal 30/60/120 special damage to the lowest health adjacent enemy and Wound them for 4 seconds.
 - New ability for Meditite line: Calm mind ; PP 60 → 100
 - New ability for Drifloon line: Tailwind: increase speed of all allies by 5/10/15 ; PP 85 → 100
@@ -87,7 +91,7 @@
 - Berry trees no longer change every time a berry is collected. Instead, they change when you change region.
 - Wild now gives Speed at levels 2-4 and Attack at levels 6-8 instead of attack and movement speed at all levels
 - Nerf Amorphous 3 & 5 : 4/8 → 3/6 HP per active synergy
-- Nerf Artficial 4 & 6: 8/15 → 6/12 attack, AP and shieldd per held item
+- Nerf Artficial 4 & 6: 8/15 → 6/12 attack, AP and shield per held item
 
 # Changes to Items
 
