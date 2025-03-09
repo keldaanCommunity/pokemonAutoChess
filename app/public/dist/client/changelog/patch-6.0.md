@@ -83,6 +83,7 @@
 - Ability Thunder renamed to Thunder Shock
 - New ability for Zapdos: Thunder: Lightning strikes up to 3 random enemies, inflicting 30/60/120 SPECIAL with 30% chance to inflict PARALYSIS for 3 seconds
 - New ability for Rotom: Charge: until the end of the fight, attacks deal 100% additional special damage (stackable)
+- Nerf Rotom Drone: PP 50 → 80
 - New ability for Nidoran male line: Horn attack: deal 3/4/5x Attack as special damage and Armor break for 8 seconds
 
 # Changes to Synergies
