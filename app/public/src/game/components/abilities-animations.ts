@@ -2300,6 +2300,28 @@ export function displayAbility(
       break
     }
 
+    case Ability.RAZOR_LEAF: {
+      const [dx, dy] = OrientationVector[orientation]
+      const finalCoordinates = transformAttackCoordinate(
+        positionX + dx * 8,
+        positionY + dy * 8,
+        flip
+      )
+      const projectile = addAbilitySprite(skill, coordinates).setScale(2)
+      scene.tweens.add({
+        targets: projectile,
+        x: finalCoordinates[0],
+        y: finalCoordinates[1],
+        ease: "linear",
+        yoyo: false,
+        duration: 2000,
+        onComplete: () => {
+          projectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.SPIKE_ARMOR:
       OrientationArray.forEach((orientation) => {
         const [dx, dy] = OrientationVector[orientation]
