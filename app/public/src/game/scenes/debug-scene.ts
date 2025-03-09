@@ -282,7 +282,7 @@ export class DebugScene extends Phaser.Scene {
       if (status == Status.POKERUS) {
         this.pokemon.addPokerus()
       }
-      if (status == Status.ARMOR_REDUCTION) {
+      if (status == Status.ARMOR_BREAK) {
         this.pokemon.addArmorReduction()
       }
       if (status == Status.CHARM) {

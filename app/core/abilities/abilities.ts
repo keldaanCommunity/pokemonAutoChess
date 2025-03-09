@@ -7786,7 +7786,7 @@ export class DoomDesireStrategy extends AbilityStrategy {
             true
           )
         } else {
-          pokemon.addPP(60, pokemon, 0, false)
+          pokemon.addPP(100, pokemon, 0, false)
         }
       }, 2000)
     )
@@ -10026,7 +10026,7 @@ export class EntrainmentStrategy extends AbilityStrategy {
   }
 }
 
-export class OktzookaStrategy extends AbilityStrategy {
+export class OctazookaStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -10035,7 +10035,7 @@ export class OktzookaStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = Math.ceil(pokemon.atk * 1.5)
+    const damage = Math.ceil(pokemon.atk * 3)
 
     pokemon.count.attackCount++ // trigger attack animation
     target.handleSpecialDamage(
@@ -11984,6 +11984,21 @@ export class DragonClawStrategy extends AbilityStrategy {
   }
 }
 
+export class HornAttackStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = ([3, 4, 5][pokemon.stars - 1] ?? 5) * pokemon.atk
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.status.triggerArmorReduction(8000, target)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -12355,7 +12370,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PASTEL_VEIL]: new PastelVeilStrategy(),
   [Ability.CHARM]: new CharmStrategy(),
   [Ability.ENTRAINMENT]: new EntrainmentStrategy(),
-  [Ability.OKTZOOKA]: new OktzookaStrategy(),
+  [Ability.OCTAZOOKA]: new OctazookaStrategy(),
   [Ability.PSYCHO_SHIFT]: new PsychoShiftStrategy(),
   [Ability.GLAIVE_RUSH]: new GlaiveRushStrategy(),
   [Ability.FOUL_PLAY]: new FoulPlayStrategy(),
@@ -12419,5 +12434,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FICKLE_BEAM]: new FickleBeamStrategy(),
   [Ability.DECORATE]: new DecorateStrategy(),
   [Ability.DRAGON_CLAW]: new DragonClawStrategy(),
-  [Ability.TAILWIND]: new TailwindStrategy()
+  [Ability.TAILWIND]: new TailwindStrategy(),
+  [Ability.HORN_ATTACK]: new HornAttackStrategy()
 }

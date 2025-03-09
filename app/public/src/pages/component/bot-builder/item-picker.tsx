@@ -58,7 +58,7 @@ export default function ItemPicker(props: {
                 selected: item === props.selected,
                 pixelated: !antialiasing
               })}
-              data-tooltip-id="detail-item"
+              data-tooltip-id="item-detail"
               onMouseOver={() => setItemHovered(item)}
               onClick={() => props.selectEntity(item)}
               draggable
@@ -68,7 +68,7 @@ export default function ItemPicker(props: {
         </TabPanel>
       ))}
       {itemHovered && <Tooltip
-        id="detail-item"
+        id="item-detail"
         className="custom-theme-tooltip item-detail-tooltip"
       >
         <ItemDetailTooltip item={itemHovered} />

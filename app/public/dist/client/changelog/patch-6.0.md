@@ -73,12 +73,18 @@
 - Nerfed Obstruct (Obstagoon): Protect duration 1/2/4 → 1/2/3 seconds
 - Nerfed Celebi HP 300 → 250
 - Nerfed Wishiwashi: HP 100 → 50
+- Buff Jirachi: revert again Doom desire PP from 5.9 ~~60~~ 100 PP if target is KO in the mean time (my bad)
+- Buff Keldeo: PP 100 → 80
+- Buff Octillery; PP 100 → 80, Oktzooka: 150 → 300% of attack as special damage
+- Nerf Aegislash: PP 80 → 100
 - New ability for Bagon line: Dragon Claw: deal 30/60/120 special damage to the lowest health adjacent enemy and Wound them for 4 seconds.
 - New ability for Meditite line: Calm mind ; PP 60 → 100
 - New ability for Drifloon line: Tailwind: increase speed of all allies by 5/10/15 ; PP 85 → 100
 - Ability Thunder renamed to Thunder Shock
 - New ability for Zapdos: Thunder: Lightning strikes up to 3 random enemies, inflicting 30/60/120 SPECIAL with 30% chance to inflict PARALYSIS for 3 seconds
 - New ability for Rotom: Charge: until the end of the fight, attacks deal 100% additional special damage (stackable)
+- Nerf Rotom Drone: PP 50 → 80
+- New ability for Nidoran male line: Horn attack: deal 3/4/5x Attack as special damage and Armor break for 8 seconds
 
 # Changes to Synergies
 
@@ -86,7 +92,7 @@
 - Berry trees no longer change every time a berry is collected. Instead, they change when you change region.
 - Wild now gives Speed at levels 2-4 and Attack at levels 6-8 instead of attack and movement speed at all levels
 - Nerf Amorphous 3 & 5 : 4/8 → 3/6 HP per active synergy
-- Nerf Artficial 4 & 6: 8/15 → 6/12 attack, AP and shieldd per held item
+- Nerf Artificial 4 & 6: 8/15 → 6/12 attack, AP and shield per held item
 - Fire burn chance on attacks now inflicts Burn for ~~2~~ 3 seconds
 - Wild now have ~~25~~ 30% chance to inflict Wound **only when synergy active**
 - Ghost now gets dodge chance and chance to inflict Silence on hit **only when synergy active**
@@ -137,3 +143,4 @@
 - Stage 19 rewards will now be complete items instead of components if player has an even number of components at that stage
 - Removed Scribbles Kecleon's Shop and Synergy wheel, replaced by town encounters
 - New scribble: Town Festival
+- Armor Reduction status is renamed to Armor Break
