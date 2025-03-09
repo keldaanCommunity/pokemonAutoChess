@@ -1704,13 +1704,13 @@ export class TriAttackStrategy extends AbilityStrategy {
     const effect = randomBetween(1, 3)
     switch (effect) {
       case 1:
-        target.status.triggerFreeze(2500, target)
+        target.status.triggerFreeze(3000, target)
         break
       case 2:
         target.status.triggerBurn(5000, target, pokemon)
         break
       case 3:
-        target.status.triggerParalysis(7500, target, pokemon)
+        target.status.triggerParalysis(7000, target, pokemon)
         break
     }
   }
