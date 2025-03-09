@@ -1486,7 +1486,7 @@
     "LEECH_SEED": "POISONNED the target for [3,6,12] seconds and heal the user for [20,40,80,SP] HP.",
     "LOCK_ON": "Lock on the target. The next attack cannot miss and deals [200,SP]% additional TRUE.",
     "PSYCH_UP": "Deal [15,30,60,SP] SPECIAL to the target and SILENCE them and all adjacent enemy Pokémon for [2,3,4] seconds.",
-    "RAZOR_WIND": "Deal [20,40,80,SP] SPECIAL to the target and inflict them and all adjacent enemy Pokémon with PARALYSIS for 7 seconds.",
+    "RAZOR_WIND": "Deal [20,40,80,SP] SPECIAL to the target. Can crit by default.",
     "TWISTING_NETHER": "Deals [80,SP] SPECIAL to all enemy Pokémon in a 2 tile radius from the target and teleport them randomly across the battlefield.",
     "WONDER_GUARD": "Deal [30,60,120,SP] SPECIAL to all adjacent enemy Pokémon and inflict them with PARALYSIS for 3 seconds.",
     "ELECTRIC_SURGE": "Increase the SPEED of all allied ELECTRIC Pokémon by [10,SP].",

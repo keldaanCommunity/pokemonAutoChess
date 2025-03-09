@@ -1443,7 +1443,7 @@
     "LEECH_SEED": "Inflige POISONNED à la cible pendant [3,6,12] secondes et se soigne de [20,40,80,SP] HP",
     "LOCK_ON": "Verrouille la cible. La prochaine attaque ne peut pas manquer et inflige [200,SP]% de TRUE.",
     "PSYCH_UP": "Inflige [15,30,60,SP] SPECIAL et SILENCE la cible et ses ennemis adjacents pendant [2,3,4] secondes",
-    "RAZOR_WIND": "Inflige [20,40,80,SP] SPECIAL à la cible et rend les ennemis environnants PARALYSIS",
+    "RAZOR_WIND": "Inflige [20,40,80,SP] SPECIAL à la cible. Peut infliger un coup critique par défaut.",
     "TWISTING_NETHER": "Inflige [80,SP] SPECIAL aux ennemis adjacents à la cible dans un rayon de 2 cases, et les téléporte à un endroit aléatoire sur le plateau",
     "WONDER_GUARD": "Inflige [30,60,120,SP] SPECIAL et rend tous les ennemis adjacents PARALYSIS pendant 3 secondes",
     "ELECTRIC_SURGE": "Augmente la SPEED de tous les pokémons ELECTRIC de [10,SP]",

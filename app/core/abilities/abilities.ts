@@ -1135,18 +1135,9 @@ export class RazorWindStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 3 ? 80 : pokemon.stars === 2 ? 40 : 20
+    crit = chance(pokemon.critChance / 100, pokemon) // can crit by default
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    const cells = board.getAdjacentCells(
-      target.positionX,
-      target.positionY,
-      true
-    )
-    cells.forEach((cell) => {
-      if (cell && cell.value && cell.value.team !== pokemon.team) {
-        cell.value.status.triggerParalysis(7000, cell.value, pokemon)
-      }
-    })
   }
 }
 
