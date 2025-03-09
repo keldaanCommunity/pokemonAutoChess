@@ -1454,7 +1454,7 @@ export class Aegislash extends Pokemon {
   speed = 44
   def = 14
   speDef = 14
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.KING_SHIELD
   passive = Passive.AEGISLASH
@@ -1474,7 +1474,7 @@ export class AegislashBlade extends Pokemon {
   speed = 44
   def = 4
   speDef = 4
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.KING_SHIELD
   passive = Passive.AEGISLASH
@@ -3725,7 +3725,7 @@ export class NidoranM extends Pokemon {
   speDef = 4
   maxPP = 90
   range = 1
-  skill = Ability.POISON
+  skill = Ability.HORN_ATTACK
   attackSprite = AttackSprite.POISON_MELEE
   regional = true
 }
@@ -3746,7 +3746,7 @@ export class Nidorino extends Pokemon {
   speDef = 4
   maxPP = 90
   range = 1
-  skill = Ability.POISON
+  skill = Ability.HORN_ATTACK
   attackSprite = AttackSprite.POISON_MELEE
   regional = true
 }
@@ -3766,7 +3766,7 @@ export class Nidoking extends Pokemon {
   speDef = 6
   maxPP = 90
   range = 1
-  skill = Ability.POISON
+  skill = Ability.HORN_ATTACK
   attackSprite = AttackSprite.POISON_MELEE
   regional = true
 }
@@ -6314,7 +6314,7 @@ export class Keldeo extends Pokemon {
   speed = 60
   def = 8
   speDef = 8
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.SECRET_SWORD
   attackSprite = AttackSprite.WATER_RANGE
@@ -15907,9 +15907,9 @@ export class Octillery extends Pokemon {
   speed = 39
   def = 6
   speDef = 6
-  maxPP = 100
+  maxPP = 80
   range = 3
-  skill = Ability.OKTZOOKA
+  skill = Ability.OCTAZOOKA
   attackSprite = AttackSprite.WATER_RANGE
 }
 
