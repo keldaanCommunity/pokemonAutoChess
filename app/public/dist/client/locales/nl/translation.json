@@ -975,7 +975,7 @@
     "LEECH_SEED": "Pas de POISONNED status toe op het doelwit voor [3,6,12] seconden, en herstel de gebruiker's HP met [20,40,80,SP]",
     "LOCK_ON": "Vergrendel het doel. De volgende aanval mag niet missen en deel [200,SP]% TRUE",
     "PSYCH_UP": "Breng [15,30,60,SP] SPECIAL toe aan het doelwit en past de SILENCE status toe aan hen en aangrenzende vijandelijke Pokémon",
-    "RAZOR_WIND": "Breng [20,40,80,SP] SPECIAL toe aan het doelwit en pas de PARALYSIS status toe hen en aangrenzende vijandelijke Pokémon",
+    "RAZOR_WIND": "Breng [20,40,80,SP] SPECIAL toe aan het doelwit",
     "TWISTING_NETHER": "Breng [80,SP] SPECIAL aan alle vijanden naast het doelwit in een straal van 2 cellen en teleporteert ze vervolgens willekeurig over het slagveld.",
     "WONDER_GUARD": "Breng [30,60,120,SP] SPECIAL toe aan alle aangrenzende vijandelijke Pokémon en pas de PARALYSIS status toe aan hen voor 3 seconden",
     "ELECTRIC_SURGE": "Verhoog SPEED van alle ELECTRIC pokemons met [10,SP]",

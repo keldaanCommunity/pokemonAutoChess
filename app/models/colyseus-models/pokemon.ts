@@ -8460,7 +8460,7 @@ export class Noibat extends Pokemon {
   speed = 64
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 70
   range = 2
   skill = Ability.RAZOR_WIND
   additional = true
@@ -8479,7 +8479,7 @@ export class Noivern extends Pokemon {
   speed = 64
   def = 6
   speDef = 6
-  maxPP = 100
+  maxPP = 70
   range = 2
   skill = Ability.RAZOR_WIND
   additional = true

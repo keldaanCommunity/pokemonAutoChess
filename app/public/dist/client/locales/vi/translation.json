@@ -1269,7 +1269,7 @@
     "LEECH_SEED": "POISONNED mục tiêu trong [3,6,12] giây và hồi [20,40,80,SP] HP cho bản thân",
     "LOCK_ON": "Khóa mục tiêu. Đòn tấn công tiếp theo không thể trượt và gây thêm [200,SP]% TRUE",
     "PSYCH_UP": "Gây [15,30,60,SP] SPECIAL lên mục tiêu, sau đó khiến chúng SILENCE và và tất cả Pokémon đối thủ ở gần trong [2,3,4] giây",
-    "RAZOR_WIND": "Gây [20,40,80,SP] SPECIAL lên mục tiêu, sau đó PARALYSIS chúng và Pokémon đối thủ ở gần trong 7 giây",
+    "RAZOR_WIND": "Gây [20,40,80,SP] SPECIAL lên mục tiêu",
     "TWISTING_NETHER": "Gây [80,SP] SPECIAL lên toàn bộ đối thủ ở gần trong bán kính 2 ô, sau đó dịch chuyển chúng đến một nơi ngẫu nhiên trên chiến trường",
     "WONDER_GUARD": "Gây [30,60,120,SP] SPECIAL lên toàn bộ đối thủ ở gần, sau đó PARALYSIS chúng trong 3 giây",
     "ELECTRIC_SURGE": "Tăng [10,SP] SPEED cho toàn bộ Pokémon hệ ELECTRIC",
