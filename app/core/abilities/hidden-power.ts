@@ -486,7 +486,7 @@ export class HiddenPowerVStrategy extends HiddenPowerStrategy {
     super.process(unown, state, board, target, crit)
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && unown.team !== enemy.team) {
-        AbilityStrategies[Ability.THUNDER].process(
+        AbilityStrategies[Ability.THUNDER_SHOCK].process(
           unown,
           unown.state,
           board,
@@ -495,7 +495,7 @@ export class HiddenPowerVStrategy extends HiddenPowerStrategy {
         )
         unown.simulation.room.broadcast(Transfer.ABILITY, {
           id: unown.simulation.id,
-          skill: Ability.THUNDER,
+          skill: Ability.THUNDER_SHOCK,
           positionX: unown.positionX,
           positionY: unown.positionY,
           targetX: enemy.positionX,

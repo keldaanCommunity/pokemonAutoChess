@@ -1871,8 +1871,8 @@ export class ShadowCloneStrategy extends AbilityStrategy {
 
     if (spawnPosition) {
       const p = PokemonFactory.createPokemonFromName(pokemon.name, {
-        selectedEmotion: pokemon.emotion,
-        selectedShiny: pokemon.shiny
+        emotion: pokemon.emotion,
+        shiny: pokemon.shiny
       })
       let itemStolen: Item | null = null
       if (target.items.size > 0) {
@@ -2834,7 +2834,7 @@ export class SolarBeamStrategy extends AbilityStrategy {
   }
 }
 
-export class ThunderStrategy extends AbilityStrategy {
+export class ThunderShockStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2843,21 +2843,46 @@ export class ThunderStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 0
-    switch (pokemon.stars) {
-      case 1:
-        damage = 30
-        break
-      case 2:
-        damage = 60
-        break
-      case 3:
-        damage = 120
-        break
-      default:
-        break
-    }
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
+export class ThunderStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+    const enemies = board.cells.filter(
+      (cell) => cell && cell.team !== pokemon.team
+    ) as PokemonEntity[]
+    const targets = pickNRandomIn(enemies, 3)
+    targets.forEach((tg, index) => {
+      tg.commands.push(
+        new DelayedCommand(() => {
+          tg.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          if (chance(0.3, pokemon)) {
+            tg.status.triggerParalysis(3000, tg, pokemon)
+          }
+          broadcastAbility(tg, {
+            skill: Ability.THUNDER_SHOCK,
+            targetX: tg.positionX,
+            targetY: tg.positionY
+          })
+        }, index * 500)
+      )
+    })
   }
 }
 
@@ -3151,11 +3176,23 @@ export class ChargeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const buff = 0.2
+    pokemon.effects.add(Effect.CHARGE)
+  }
+}
+
+export class TailwindStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const buff = [5, 10, 15][pokemon.stars - 1] ?? 15
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team) {
-        ally.addAttack(ally.baseAtk * buff, pokemon, 1, crit)
-        ally.addSpeed(buff * 100, pokemon, 1, crit)
+        ally.addSpeed(buff, pokemon, 1, crit)
       }
     })
   }
@@ -4043,7 +4080,7 @@ export class ShadowBallStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [40, 60, 100][pokemon.stars - 1] ?? 100
+    const damage = [30, 60, 100][pokemon.stars - 1] ?? 100
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
 
     board.forEach((x: number, y: number, v: PokemonEntity | undefined) => {
@@ -11905,6 +11942,63 @@ export class DecorateStrategy extends AbilityStrategy {
   }
 }
 
+export class DragonClawStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    //Deal 30/60/120 special damage to the lowest health adjacent enemy and Wound them for 4 seconds.
+    super.process(pokemon, state, board, target, crit)
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+    const cells = board.getAdjacentCells(
+      pokemon.positionX,
+      pokemon.positionY,
+      false
+    )
+    let lowestHp = 9999
+    let lowestHpTarget: PokemonEntity | undefined
+    for (const cell of cells) {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        if (cell.value.hp < lowestHp) {
+          lowestHp = cell.value.hp
+          lowestHpTarget = cell.value
+        }
+      }
+    }
+    if (!lowestHpTarget) {
+      lowestHpTarget = target
+    }
+    lowestHpTarget.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+    lowestHpTarget.status.triggerWound(4000, lowestHpTarget, pokemon)
+    pokemon.targetX = lowestHpTarget.positionX
+    pokemon.targetY = lowestHpTarget.positionY
+  }
+}
+
+export class HornAttackStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = ([3, 4, 5][pokemon.stars - 1] ?? 5) * pokemon.atk
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.status.triggerArmorReduction(8000, target)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -11942,6 +12036,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ROCK_SLIDE]: new RockSlideStrategy(),
   [Ability.HEAT_WAVE]: new HeatWaveStrategy(),
   [Ability.FLAMETHROWER]: new FlameThrowerStrategy(),
+  [Ability.THUNDER_SHOCK]: new ThunderShockStrategy(),
   [Ability.THUNDER]: new ThunderStrategy(),
   [Ability.HYDRO_PUMP]: new HydroPumpStrategy(),
   [Ability.DRACO_METEOR]: new DracoMeteorStrategy(),
@@ -12337,5 +12432,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SYRUP_BOMB]: new SyrupBombStrategy(),
   [Ability.GRAV_APPLE]: new GravAppleStrategy(),
   [Ability.FICKLE_BEAM]: new FickleBeamStrategy(),
-  [Ability.DECORATE]: new DecorateStrategy()
+  [Ability.DECORATE]: new DecorateStrategy(),
+  [Ability.DRAGON_CLAW]: new DragonClawStrategy(),
+  [Ability.TAILWIND]: new TailwindStrategy(),
+  [Ability.HORN_ATTACK]: new HornAttackStrategy()
 }

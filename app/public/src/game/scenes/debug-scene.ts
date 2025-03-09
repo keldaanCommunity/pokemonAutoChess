@@ -87,7 +87,7 @@ export class DebugScene extends Phaser.Scene {
       this,
       px,
       py,
-      PokemonFactory.createPokemonFromName(pkm, { selectedShiny: shiny }),
+      PokemonFactory.createPokemonFromName(pkm, { shiny }),
       "debug",
       false,
       false
@@ -282,7 +282,7 @@ export class DebugScene extends Phaser.Scene {
       if (status == Status.POKERUS) {
         this.pokemon.addPokerus()
       }
-      if (status == Status.ARMOR_REDUCTION) {
+      if (status == Status.ARMOR_BREAK) {
         this.pokemon.addArmorReduction()
       }
       if (status == Status.CHARM) {

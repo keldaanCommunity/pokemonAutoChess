@@ -14,7 +14,7 @@ import { Pokemon } from "../../../models/colyseus-models/pokemon"
 import { PokemonAvatarModel } from "../../../models/colyseus-models/pokemon-avatar"
 import { Portal, SynergySymbol } from "../../../models/colyseus-models/portal"
 import Status from "../../../models/colyseus-models/status"
-import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
+import { IPokemonCollectionItem } from "../../../models/mongo-models/user-metadata"
 import GameState from "../../../rooms/states/game-state"
 import {
   IDragDropCombineMessage,
@@ -48,6 +48,7 @@ import { t } from "i18next"
 import { cc } from "../pages/utils/jsx"
 import { values } from "../../../utils/schemas"
 import { SchemaCallbackProxy } from "@colyseus/schema"
+import { getPkmWithCustom } from "../../../models/colyseus-models/pokemon-customs"
 
 class GameContainer {
   room: Room<GameState>
@@ -437,17 +438,11 @@ class GameContainer {
 
     $player.board.onAdd((pokemon, key) => {
       if (pokemon.stars > 1) {
-        const config: IPokemonConfig | undefined = player.pokemonCollection.get(
-          pokemon.index
-        )
+        const custom = getPkmWithCustom(pokemon.index, player.pokemonCustoms)
         const i = React.createElement(
           "img",
           {
-            src: getPortraitSrc(
-              pokemon.index,
-              config?.selectedShiny,
-              config?.selectedEmotion
-            ),
+            src: getPortraitSrc(pokemon.index, custom.shiny, custom.emotion),
             className: cc({ pixelated: !preference("antialiasing") })
           },
           null

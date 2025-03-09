@@ -29,7 +29,7 @@ export default class PokemonSpecial extends PokemonSprite {
       scene,
       x + 24,
       y + 24,
-      PokemonFactory.createPokemonFromName(name, { selectedShiny: shiny }),
+      PokemonFactory.createPokemonFromName(name, { shiny }),
       "environment",
       false,
       false

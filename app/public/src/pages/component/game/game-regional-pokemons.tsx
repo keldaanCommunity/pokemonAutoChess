@@ -1,13 +1,13 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { RarityColor, RarityCost } from "../../../../../types/Config"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import SynergyIcon from "../icons/synergy-icon"
+import { getPkmWithCustom } from "../../../../../models/colyseus-models/pokemon-customs"
 
 export function GameRegionalPokemonsIcon() {
   return (
@@ -35,9 +35,6 @@ export function GameRegionalPokemons() {
   const regionalPokemons: Pkm[] = (currentPlayer?.regionalPokemons ?? new Array<Pkm>()).slice().sort((a, b) => {
     return RarityCost[getPokemonData(a).rarity] - RarityCost[getPokemonData(b).rarity]
   })
-  const pokemonCollection = useAppSelector(
-    (state) => state.game.pokemonCollection
-  )
 
   if (!regionalPokemons || regionalPokemons.length === 0) {
     return (
@@ -53,9 +50,8 @@ export function GameRegionalPokemons() {
         <div className="grid">
           {regionalPokemons.map((p, index) => {
             const pokemon = getPokemonData(p)
+            const pokemonCustom = getPkmWithCustom(pokemon.index, currentPlayer?.pokemonCustoms)
             const rarityColor = RarityColor[pokemon.rarity]
-            const pokemonConfig: IPokemonConfig | undefined =
-              pokemonCollection.get(pokemon.index)
 
             return (
               <div
@@ -66,8 +62,8 @@ export function GameRegionalPokemons() {
                   borderColor: rarityColor,
                   backgroundImage: `url("${getPortraitSrc(
                     pokemon.index,
-                    pokemonConfig?.selectedShiny,
-                    pokemonConfig?.selectedEmotion
+                    pokemonCustom.shiny,
+                    pokemonCustom.emotion
                   )}")`
                 }}
               >

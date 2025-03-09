@@ -12,7 +12,7 @@ export interface IUserMetadata {
   exp: number
   level: number
   elo: number
-  pokemonCollection: Map<string, IPokemonConfig>
+  pokemonCollection: Map<string, IPokemonCollectionItem>
   booster: number
   titles: Title[]
   title: "" | Title
@@ -20,7 +20,7 @@ export interface IUserMetadata {
   banned?: boolean
 }
 
-export interface IPokemonConfig {
+export interface IPokemonCollectionItem {
   dust: number
   emotions: Emotion[] | ArraySchema<Emotion>
   shinyEmotions: Emotion[] | ArraySchema<Emotion>

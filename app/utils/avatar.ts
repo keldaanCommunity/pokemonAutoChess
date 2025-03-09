@@ -1,5 +1,5 @@
-import { CDN_PORTRAIT_URL, Emotion } from "../types"
-import { Pkm, PkmIndex } from "../types/enum/Pokemon"
+import { CDN_PORTRAIT_URL, Emotion, PkmWithCustom } from "../types"
+import { Pkm, PkmByIndex, PkmIndex } from "../types/enum/Pokemon"
 
 export function getPortraitSrc(
   index?: string,
@@ -29,15 +29,7 @@ export function getAvatarString(
   }`
 }
 
-export interface IPokemonAvatarConfig {
-  index: string
-  emotion: Emotion
-  shiny: boolean
-}
-
-export function getPokemonConfigFromAvatar(
-  avatar: string
-): IPokemonAvatarConfig {
+export function getPokemonCustomFromAvatar(avatar: string): PkmWithCustom {
   let emotion = Emotion.NORMAL
   let shiny = false
   let index = "0019"
@@ -77,6 +69,6 @@ export function getPokemonConfigFromAvatar(
   return {
     emotion: emotion,
     shiny: shiny,
-    index: index
+    name: PkmByIndex[index]
   }
 }

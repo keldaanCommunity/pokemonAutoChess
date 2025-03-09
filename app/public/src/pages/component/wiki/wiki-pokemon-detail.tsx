@@ -15,7 +15,7 @@ import SynergyIcon from "../icons/synergy-icon"
 import Credits from "./Credits"
 import "./wiki-pokemon-detail.css"
 
-export default function WikiPokemonDetail(props: { pokemon: Pkm }) {
+export default function WikiPokemonDetail(props: { pokemon: Pkm, selectPkm: (pkm: Pkm) => void }) {
   const { t } = useTranslation()
   const pokemon = useMemo(
     () => PokemonFactory.createPokemonFromName(props.pokemon),
@@ -75,7 +75,7 @@ export default function WikiPokemonDetail(props: { pokemon: Pkm }) {
           {evolutions.length === 0 ? (
             "No evolution"
           ) : (evolutions.map((evolution) => (
-            <div key={evolution}>
+            <div key={evolution} onClick={() => props.selectPkm(evolution)} style={{ cursor: "pointer" }}>
               <img
                 src={getPortraitSrc(PkmIndex[evolution])}
                 style={{ marginRight: "0.5em" }}

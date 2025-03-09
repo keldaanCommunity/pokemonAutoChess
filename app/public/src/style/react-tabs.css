@@ -39,3 +39,45 @@
 .react-tabs__tab-panel--selected {
   padding: 0.5em;
 }
+
+/**
+ * `@property` is required for the animation to work.
+ * Without it, the angle values won’t interpolate properly.
+ *
+ * @see https://dev.to/afif/we-can-finally-animate-css-gradient-kdk
+ */
+@property --bg-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: "<angle>";
+}
+
+/**
+ * To animate the gradient, we set the custom property to 1 full
+ * rotation. The animation starts at the default value of `0deg`.
+ */
+@keyframes spin {
+  to {
+    --bg-angle: 360deg;
+  }
+}
+
+.react-tabs__tab--selected.icon-tab {
+  animation: spin 2.5s infinite linear;
+  /* Background colors don’t work with `background-origin`, so use a gradient. */
+  background: conic-gradient(
+      from var(--bg-angle) in oklch longer hue,
+      oklch(0.85 0.37 0) 0 0
+    )
+    border-box; /* extends to outer border edges */
+
+  /* a clear border lets the background gradient shine through */
+  border: 6px solid transparent;
+  margin: -6px -4px;
+  z-index: 2;
+  border-radius: 12px;
+}
+
+.react-tabs__tab--selected.icon-tab::after {
+  content: none;
+}

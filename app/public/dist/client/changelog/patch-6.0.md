@@ -77,6 +77,13 @@
 - Buff Keldeo: PP 100 → 80
 - Buff Octillery; PP 100 → 80, Oktzooka: 150 → 300% of attack as special damage
 - Nerf Aegislash: PP 80 → 100
+- New ability for Bagon line: Dragon Claw: deal 30/60/120 special damage to the lowest health adjacent enemy and Wound them for 4 seconds.
+- New ability for Meditite line: Calm mind ; PP 60 → 100
+- New ability for Drifloon line: Tailwind: increase speed of all allies by 5/10/15 ; PP 85 → 100
+- Ability Thunder renamed to Thunder Shock
+- New ability for Zapdos: Thunder: Lightning strikes up to 3 random enemies, inflicting 30/60/120 SPECIAL with 30% chance to inflict PARALYSIS for 3 seconds
+- New ability for Rotom: Charge: until the end of the fight, attacks deal 100% additional special damage (stackable)
+- New ability for Nidoran male line: Horn attack: deal 3/4/5x Attack as special damage and Armor break for 8 seconds
 
 # Changes to Synergies
 
@@ -129,5 +136,7 @@
 - Quick play and custom lobbies no longer guarantee +1 minimum elo gain when top 1. Ranked games still do.
 - Added experience required per level in Wiki > Data
 - ELO decay now starts after 15 days of inactivity instead of 10
-- Removed Scribbles Kecleon's Shop and Synergy wheel, replaced by town encounters
 - Stage 19 rewards will now be complete items instead of components if player has an even number of components at that stage
+- Removed Scribbles Kecleon's Shop and Synergy wheel, replaced by town encounters
+- New scribble: Town Festival
+- Armor Reduction status is renamed to Armor Break

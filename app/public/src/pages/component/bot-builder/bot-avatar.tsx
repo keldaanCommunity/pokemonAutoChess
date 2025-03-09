@@ -1,14 +1,14 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
-import { Emotion, PkmWithConfig } from "../../../../../types"
+import { Emotion, PkmWithCustom } from "../../../../../types"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getAvatarSrc } from "../../../../../utils/avatar"
 import { validateBot } from "./bot-logic"
 
 export default function BotAvatar(props: {
   bot: IBot
-  onChangeAvatar: (pkm: PkmWithConfig) => void
+  onChangeAvatar: (pkm: PkmWithCustom) => void
   onClick: () => void
 }) {
   const { t } = useTranslation()

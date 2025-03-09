@@ -12,7 +12,7 @@ import { BotV2 } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
 import History from "../models/mongo-models/history"
 import UserMetadata, {
-  IPokemonConfig
+  IPokemonCollectionItem
 } from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
 import {
@@ -196,7 +196,7 @@ export default class GameRoom extends Room<GameState> {
             user.avatar,
             true,
             this.state.players.size + 1,
-            new Map<string, IPokemonConfig>(),
+            new Map<string, IPokemonCollectionItem>(),
             "",
             Role.BOT,
             this.state
