@@ -64,6 +64,8 @@
 - Buff Unown-N: Shield provided to your team now scales with Unown AP
 - Nerf Cryogonal: PP 95 → 100, Freeze dry: remove AP scaling on the special defense part of the damage, explosive damage 40 + 150% spedef → 30 + 100% spe def
 - Nerf Alolan Raichu: back to tier 3, gets the same stats as Raichu but keeps the additional psychic synergy
+- Nerf Nuzzle (Pichu line): paralysis duration 3/4/5 → 3 seconds at all tiers
+- Nerf Hurricane paralysis duration 4 → 3 seconds
 - Change HyperSpace Fury: now also reduces special defense evert hit
 - Changed Heavy Slam (Aggron): Shield 10/20/40 → 15/30/60, remove AP scaling
 - Buff Concrete Pillar (Conkeldurr) HP 300 → 400
