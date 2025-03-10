@@ -1486,7 +1486,6 @@
     "LEECH_SEED": "대상에 [3,6,12]초간 POISONNED 상태로 만들고 시전자의 HP을 [20,40,80,SP]만큼 회복한다.",
     "LOCK_ON": "대상에 록온한다. 다음 공격은 빗나가지 않으며 [200,SP]%만큼의 TRUE 를 추가로 가한다.",
     "PSYCH_UP": "대상에 [15,30,60,SP] 의 SPECIAL을 가한 후 대상 및 인접한 적들에게 [2,3,4]초간 SILENCE 상태로 만든다.",
-    "RAZOR_WIND": "대상에 [20,40,80,SP] 의 SPECIAL 을 가한 후 대상 및 인접한 적들에게 7초간 PARALYSIS 상태로 만든다.",
     "TWISTING_NETHER": "대상으로부터 반경 2칸 범위에 있는 모든 적들에게 [80,SP] SPECIAL 을 가한 후, 그들을 전장 내의 아무 장소로 보내버린다.",
     "WONDER_GUARD": "인접한 적 포켓몬들에게 [30,60,120,SP] SPECIAL 와 3초간의 PARALYSIS 상태를 가한다.",
     "ELECTRIC_SURGE": "모든 ELECTRIC 포켓몬의 SPEED 를 [10,SP] 증가시킨다.",
