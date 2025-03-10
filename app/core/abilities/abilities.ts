@@ -11999,6 +11999,23 @@ export class HornAttackStrategy extends AbilityStrategy {
   }
 }
 
+export class MudShotStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    // The user hurls mud at the target, dealing 25/50/75 damage and reducing their attack speed by 10/20/30%.
+    const damage = [25, 50, 75][pokemon.stars - 1] ?? 75
+    const speedDebuff = [10, 20, 30][pokemon.stars - 1] ?? 30
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.addSpeed(-speedDebuff, pokemon, 1, crit)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -12435,5 +12452,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DECORATE]: new DecorateStrategy(),
   [Ability.DRAGON_CLAW]: new DragonClawStrategy(),
   [Ability.TAILWIND]: new TailwindStrategy(),
-  [Ability.HORN_ATTACK]: new HornAttackStrategy()
+  [Ability.HORN_ATTACK]: new HornAttackStrategy(),
+  [Ability.MUD_SHOT]: new MudShotStrategy()
 }
