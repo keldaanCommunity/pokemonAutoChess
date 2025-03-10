@@ -64,7 +64,8 @@
     "ROCK_SLIDE": "스톤샤워",
     "HEAT_WAVE": "열풍",
     "FLAMETHROWER": "화염방사",
-    "THUNDER_SHOCK": "번개",
+    "THUNDER_SHOCK": "전기쇼크",
+    "THUNDER": "번개",
     "HYDRO_PUMP": "하이드로펌프",
     "DRACO_METEOR": "용성군",
     "BLAZE_KICK": "블레이즈킥",
@@ -450,7 +451,10 @@
     "SPICY_EXTRACT": "하바네로엑기스",
     "SWEET_SCENT": "달콤한향기",
     "SWALLOW": "꿀꺽",
-    "DECORATE": "데코레이션"
+    "DECORATE": "데코레이션",
+    "DRAGON_CLAW": "드래곤클로",
+    "TAILWIND": "순풍",
+    "HORN_ATTACK": "뿔찌르기"
   },
   "pkm": {
     "DEFAULT": "미싱노",
@@ -1423,6 +1427,7 @@
     "HEAT_WAVE": "모든 적에게 [10,20,30,SP] SPECIAL 를 가한다. [20,LK]% 확률로 BURN 을 3초간 가한다. 모든 FREEZE 포켓몬을 해동한다.",
     "FLAMETHROWER": "3칸 이내의 한 방향으로 모든 적에게 [30,60,120,SP] SPECIAL 를 입히고 4초간 BURN 을 가한다.",
     "THUNDER_SHOCK": "[30,60,120,SP] SPECIAL 을 가한다.",
+    "THUNDER": "무작위 적 3 포켓몬을 공격하여 [30,60,120,SP] SPECIAL 를 입히고, [30,LK]% 확률로 3초간 PARALYSIS 를 가한다.",
     "HYDRO_PUMP": "대상의 뒤에 있는 모든 적포켓몬들에게 [20,40,80,SP] SPECIAL 을 가한다.",
     "DRACO_METEOR": "모든 적포켓몬들에게 [50,SP] SPECIAL 을 가한다.",
     "BLAZE_KICK": "대상에게 [30,60,120,SP] SPECIAL 을 가하며 2초간 BURN 상태로 만든다. BURN 상태의 포켓몬에게는 30%의 추가피해를 가한다.",
@@ -1437,6 +1442,7 @@
     "SEED_FLARE": "쉐이미의 몸에서 충격파를 발산하며, 반경 5칸 내에 있는 모든 적포켓몬들에게 [30,SP] SPECIAL 을 가하며 SPE_DEF 을 3만큼 낮춘다.",
     "IRON_TAIL": "대상에 [20,40,80,SP] SPECIAL 을 가하며, 시전자의 DEF 을 [2,4,8] 만큼 올린다.",
     "BLAST_BURN": "사용자의 주변에 있는 영역에 [30,60,120,SP] SPECIAL 을 가한다.",
+    "CHARGE": "전투 종료 시까지 기본공격이 [100,SP]% 추가 SPECIAL 를 입힌다. (중첩가능)",
     "DISCHARGE": "근처의 적포켓몬들에 [25,50,75,SP] SPECIAL 을 가하며 5초간 PARALYSIS 상태로 만든다.",
     "BITE": "대상에 [40,80,120,SP] SPECIAL 을 가하며, 시전자는 해당 피해량의 30%를 회복한다. 그리고 대상을 5초간 FLINCH 상태로 만든다.",
     "AQUA_TAIL": "대상에 [30,60,100,SP] SPECIAL 을 가하며 [30,60,100,SP] 의 SHIELD 을 얻는다.",
@@ -1807,7 +1813,10 @@
     "SPICY_EXTRACT": "가장 가까운 1/2/3 아군들을 [2,SP] 초간 RAGE 상태로 만든다.",
     "SWEET_SCENT": "3칸 내 적들은 더 이상 회피를 할 수 없고, [6,SP] SPE_DEF 이 감소하며, [30,LK]% 확률로 1초간 CHARM 상태가 된다.",
     "SWALLOW": "최대 3중첩까지 DEF 과 SPE_DEF 을 3씩 증가시킨다. HP 이 25% 미만이면 중첩당 최대 HP 의 [20,SP]% 회복한다. 3중첩 초과 시, 전방 모든 적들에게 [40,80,150,SP] SPECIAL 를 가한다.",
-    "DECORATE": "가장 가까운 아군을 치장하여 ATK 을 [1,2,3,SP] , AP 을 [10,20,30,SP] 증가시킨다."
+    "DECORATE": "가장 가까운 아군을 치장하여 ATK 을 [1,2,3,SP] , AP 을 [10,20,30,SP] 증가시킨다.",
+    "DRAGON_CLAW": "가장 체력이 적은 인접한 적에게 [30,60,120,SP] SPECIAL 를 입히고 4초간 WOUND 를 가한다.",
+    "TAILWIND": "모든 아군의 SPEED 를 [5,10,15,SP] 증가시킨다.",
+    "HORN_ATTACK": "대상에게 [3,4,5,SP] x ATK 만큼 SPECIAL 를 입히고 8초간 ARMOR_BREAK 를 가한다."
   },
   "effect": {
     "INGRAIN": "뿌리박기",
@@ -2216,7 +2225,10 @@
     "RUBY_SWIRL_FLAVOR": "루비믹스 맛",
     "LEMON_FLAVOR": "밀키레몬 맛",
     "RAINBOW_SWIRL_FLAVOR": "트리플믹스 맛",
-    "VANILLA_FLAVOR": "밀키바닐라 맛"
+    "VANILLA_FLAVOR": "밀키바닐라 맛",
+    "EGG_FOR_SELL": "포켓몬 알",
+    "GIMMIGHOUL_COIN": "모으령의코인",
+    "EXCHANGE_TICKET": "교환 티켓"
   },
   "item_description": {
     "FOSSIL_STONE": "선사시대에 살았던 포켓몬의 화석",
@@ -2397,7 +2409,10 @@
     "SALTED_FLAVOR": "ROCK GROUND FOSSIL 아군들이 제작. $t(pkm.MILCERY) 에게 사용하여 $t(pkm.ALCREMIE_SALTED) 로 진화. $t(passive_description.SALTED_CREAM)",
     "RUBY_SWIRL_FLAVOR": "FIRE WILD FIELD 아군들이 제작. $t(pkm.MILCERY) 에게 사용하여 $t(pkm.ALCREMIE_RUBY_SWIRL) 로 진화. $t(passive_description.RUBY_SWIRL_CREAM)",
     "CARAMEL_SWIRL_FLAVOR": "DARK MONSTER DRAGON 아군들이 제작. $t(pkm.MILCERY) 에게 사용하여 $t(pkm.ALCREMIE_CARAMEL_SWIRL) 로 진화. $t(passive_description.CARAMEL_SWIRL_CREAM)",
-    "RAINBOW_SWIRL_FLAVOR": "PSYCHIC AMORPHOUS BABY LIGHT 아군들이 제작. $t(pkm.MILCERY) 에게 사용하여 $t(pkm.ALCREMIE_RAINBOW_SWIRL) 로 진화. $t(passive_description.RAINBOW_SWIRL_CREAM)"
+    "RAINBOW_SWIRL_FLAVOR": "PSYCHIC AMORPHOUS BABY LIGHT 아군들이 제작. $t(pkm.MILCERY) 에게 사용하여 $t(pkm.ALCREMIE_RAINBOW_SWIRL) 로 진화. $t(passive_description.RAINBOW_SWIRL_CREAM)",
+    "EGG_FOR_SELL": "럭키의 키우미집에서 판매하는 알",
+    "GIMMIGHOUL_COIN": "매 스테이지 추가로 1 GOLD 획득하며 최대 이자를 1 증가시킨다.",
+    "EXCHANGE_TICKET": "대기석에 있는 도구 재료 또는 완성 도구를 다른 무작위 도구로 바꾼다. 1회용"
   },
   "passive_description": {
     "NONE": "아무런 효과가 없습니다.",
@@ -3552,7 +3567,8 @@
     "DO_IT_ALL_YOURSELF": "전부 직접 하세요!",
     "FIRST_PARTNER": "첫 파트너",
     "SLAMINGO": "슬래밍고",
-    "BLOOD_MONEY": "피 묻은 돈"
+    "BLOOD_MONEY": "피 묻은 돈",
+    "TOWN_FESTIVAL": "마을 축제"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "모든 선택 포켓몬이 시작과 동시에 구매가 가능해집니다.",
@@ -3568,12 +3584,30 @@
     "DO_IT_ALL_YOURSELF": "최대 HP +100 의 아바타를 가지고 시작합니다. 아바타가 낮은 레어도라면 추가 골드를 획득합니다.",
     "FIRST_PARTNER": "스타터 포켓몬을 고릅니다. 10 스테이지까지 매 스테이지에 이 유닛을 획득합니다.",
     "SLAMINGO": "포켓몬을 대기석에 놓으면 모든 아이템을 장착 해제합니다. 4개의 무작위 조합 아이템을 획득합니다.",
-    "BLOOD_MONEY": "이자를 얻지 않습니다. 포켓몬을 기절시킬 때마다 1 GOLD 획득합니다."
+    "BLOOD_MONEY": "이자를 얻지 않습니다. 포켓몬을 기절시킬 때마다 1 GOLD 획득합니다.",
+    "TOWN_FESTIVAL": "마을에서 항상 조우자를 만날 수 있고 모든 공동선택 도구가 무료입니다."
   },
   "town_encounter": {
-    "KECLEON": "켈리몬의 가게"
+    "KECLEON": "켈리몬의 가게",
+    "CHANSEY": "럭키 키우미집",
+    "ELECTIVIRE": "에레키블 링크샵",
+    "XATU": "네이티오 감정평가",
+    "KANGASKHAN": "캥카 창고",
+    "DUSKULL": "해골몽 은행",
+    "MAROWAK": "텅구리 도장",
+    "WOBBUFFET": "마자용의 재활용 가게"
   },
-  "town_encounter_description": {},
+  "town_encounter_description": {
+    "KECLEON": "켈리몬이 시너지 돌들을 {{cost}} GOLD 에 판매합니다.",
+    "CHANSEY": "럭키가 EGG_FOR_SELL 을 {{cost}} GOLD 에 판매합니다.",
+    "ELECTIVIRE": "에레키블이 인공 도구들을 {{cost}} GOLD 에 판매합니다.",
+    "XATU": "네이티오가 WONDERBOX 를 {{cost}} GOLD 에 판매합니다.",
+    "KANGASKHAN": "캥카가 완성 도구들을 {{cost}} GOLD 에 판매합니다.",
+    "DUSKULL": "해골몽이 당신의 장기 골드 수입을 {{cost}} GOLD 증가시킵니다.",
+    "MAROWAK": "텅구리가 다음 PVE 전투를 어렵게 만듭니다.",
+    "WOBBUFFET": "마자용이 미사용 재료 도구 혹은 완성 도구를 재활용하게 해줍니다.",
+    "SPINDA": "얼루기가 공동선택에서의 회전 방향을 무작위로 바꿉니다."
+  },
   "loading_hints": {
     "tab_out": "로딩 화면 밖으로 나가지 마세요! 브라우저가 비활성화 되면 로딩이 멈춥니다. ",
     "max_loading_time": "게임 시작시 로딩시간은 최대 5분입니다. 어찌되든 간에...",
