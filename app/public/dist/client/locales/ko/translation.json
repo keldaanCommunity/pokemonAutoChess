@@ -3570,9 +3570,6 @@
     "SLAMINGO": "포켓몬을 대기석에 놓으면 모든 아이템을 장착 해제합니다. 4개의 무작위 조합 아이템을 획득합니다.",
     "BLOOD_MONEY": "이자를 얻지 않습니다. 포켓몬을 기절시킬 때마다 1 GOLD 획득합니다."
   },
-  "town_encounter": {
-    "KECLEON": "켈리몬의 가게"
-  },
   "town_encounter_description": {},
   "loading_hints": {
     "tab_out": "로딩 화면 밖으로 나가지 마세요! 브라우저가 비활성화 되면 로딩이 멈춥니다. ",

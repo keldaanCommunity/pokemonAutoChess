@@ -414,8 +414,8 @@ export default class MinigameManager {
 
     const regirock = new PokemonSpecial({
       scene: this.scene,
-      x: 24 * 48,
-      y: 22 * 48,
+      x: encounter === TownEncounters.REGIROCK ? cx : 24 * 48,
+      y: encounter === TownEncounters.REGIROCK ? cy : 22 * 48,
       name: Pkm.REGIROCK
     })
 

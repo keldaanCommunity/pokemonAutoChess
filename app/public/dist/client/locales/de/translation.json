@@ -3331,9 +3331,6 @@
     "FREE_MARKET": "Pokemon werden für 0 GOLD gekauft und verkauft",
     "SHINY_HUNTER": "Alle wilden PvE Begegnungen sind Schillernd"
   },
-  "town_encounter": {
-    "KECLEON": "Kecleon's Shop"
-  },
   "town_encounter_description": {},
   "loading_hints": {
     "tab_out": "Nicht ausblenden! Der Ladevorgang wird angehalten, wenn dieses Browserfenster inaktiv ist.",

@@ -3587,16 +3587,6 @@
     "BLOOD_MONEY": "Every KO gives 1 GOLD. No extra income from interests.",
     "TOWN_FESTIVAL": "You always get an encounter in town and all the carousel items are free."
   },
-  "town_encounter": {
-    "KECLEON": "Kecleon's Shop",
-    "CHANSEY": "Chansey Day Care",
-    "ELECTIVIRE": "Electivire Link Shop",
-    "XATU": "Xatu Appraisal",
-    "KANGASKHAN": "Kangaskhan Storage",
-    "DUSKULL": "Duskull Bank",
-    "MAROWAK": "Marowak Dojo",
-    "WOBBUFFET": "Wobbuffet's Recycle Shop"
-  },
   "town_encounter_description": {
     "KECLEON": "Kecleon sells Synergy stones for {{cost}} GOLD",
     "CHANSEY": "Chansey sells EGG_FOR_SELL for {{cost}} GOLD",
@@ -3606,7 +3596,8 @@
     "DUSKULL": "Duskull increases your long term money income for {{cost}} GOLD",
     "MAROWAK": "Marowak makes the next PVE fight more difficult",
     "WOBBUFFET": "Wobbuffet let you recycle an unused item component or crafted item",
-    "SPINDA": "Spinda changes the direction of rotation of the carousel randomly"
+    "SPINDA": "Spinda changes the direction of rotation of the carousel randomly",
+    "REGIROCK": "Regirock grants all players 15 additional HP"
   },
   "loading_hints": {
     "tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",

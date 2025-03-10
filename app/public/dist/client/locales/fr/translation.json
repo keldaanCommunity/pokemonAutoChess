@@ -3414,9 +3414,6 @@
     "SLAMINGO": "Tous les objets sont lâchés lorsqu'un Pokémon est placé sur le banc. Commence avec 4 composants aléatoires.",
     "BLOOD_MONEY": "Chaque KO donne 1 GOLD. Aucun revenu supplémentaire provenant des intérêts."
   },
-  "town_encounter": {
-    "KECLEON": "Magasin de Kecleon"
-  },
   "town_encounter_description": {
     "KECLEON": "Kecleon vend des pierres synergie pour {{cost}} GOLD",
     "CHANSEY": "Leveinard vend des EGG_FOR_SELL pour {{cost}} GOLD",
@@ -3426,7 +3423,8 @@
     "DUSKULL": "Skelénox augmente votre revenu à long terme pour {{cost}} GOLD",
     "MAROWAK": "Ossatueur rend le prochain combat PvE plus difficile",
     "WOBBUFFET": "Qulbutoke vous propose de recycler un composant ou objet fabriqué",
-    "SPINDA": "Spinda change le sens de rotation du carousel de façon aléatoire"
+    "SPINDA": "Spinda change le sens de rotation du carousel de façon aléatoire",
+    "REGIROCK": "Regirock offre 15 HP supplémentaires à tous les joueurs"
   },
   "loading_hints": {
     "tab_out": "Ne changez pas d'onglet ! Le chargement est mis en pause si cette fenêtre est inactive.",

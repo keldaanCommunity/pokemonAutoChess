@@ -9,7 +9,8 @@ export const TownEncounters = {
   [Pkm.DUSKULL]: Pkm.DUSKULL,
   [Pkm.MAROWAK]: Pkm.MAROWAK,
   [Pkm.WOBBUFFET]: Pkm.WOBBUFFET,
-  [Pkm.SPINDA]: Pkm.SPINDA
+  [Pkm.SPINDA]: Pkm.SPINDA,
+  [Pkm.REGIROCK]: Pkm.REGIROCK
 } as const
 
 export type TownEncounter = (typeof TownEncounters)[keyof typeof TownEncounters]
@@ -58,20 +59,23 @@ export const TownEncountersByStage: {
     [Pkm.ELECTIVIRE]: 1 / 20,
     [Pkm.XATU]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
-    [Pkm.SPINDA]: 1 / 20
+    [Pkm.SPINDA]: 1 / 20,
+    [Pkm.REGIROCK]: 1 / 20
   },
   27: {
     [Pkm.KECLEON]: 1 / 20,
     [Pkm.ELECTIVIRE]: 1 / 20,
     [Pkm.XATU]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
-    [Pkm.SPINDA]: 1 / 20
+    [Pkm.SPINDA]: 1 / 20,
+    [Pkm.REGIROCK]: 1 / 20
   },
   34: {
     [Pkm.KECLEON]: 1 / 20,
     [Pkm.ELECTIVIRE]: 1 / 20,
     [Pkm.XATU]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
-    [Pkm.SPINDA]: 1 / 20
+    [Pkm.SPINDA]: 1 / 20,
+    [Pkm.REGIROCK]: 1 / 20
   }
 }
