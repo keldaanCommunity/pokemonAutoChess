@@ -4961,7 +4961,7 @@ export class Seedot extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.PAYBACK
+  skill = Ability.RAZOR_LEAF
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -4977,7 +4977,7 @@ export class Nuzleaf extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.PAYBACK
+  skill = Ability.RAZOR_LEAF
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -4992,7 +4992,7 @@ export class Shiftry extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 1
-  skill = Ability.PAYBACK
+  skill = Ability.RAZOR_LEAF
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
