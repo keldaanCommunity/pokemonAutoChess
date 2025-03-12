@@ -1377,7 +1377,7 @@
     "LEECH_SEED": "Infliggi POISONNED al bersaglio per [3,6,12] secondi, curando l'utilizzatore di [20,40,80,SP] HP.",
     "LOCK_ON": "Localizza il bersaglio. Il prossimo attacco non può mancare e infligge [200,SP]% TRUE in più.",
     "PSYCH_UP": "Infliggi [15,30,60,SP] SPECIAL e infliggi SILENCE al bersaglio e ai Pokèmon nemici adiacenti per [2,3,4] secondi.",
-    "RAZOR_WIND": "Infliggi [20,40,80,SP] SPECIAL e infliggi PARALYSIS per 7 secondi al bersaglio e ai Pokèmon nemici adiacenti.",
+    "RAZOR_WIND": "Infliggi [20,40,80,SP] SPECIAL.",
     "TWISTING_NETHER": "Infliggi [80,SP] SPECIAL a tutti i nemici adiacenti al bersaglio in un raggio di 2 celle, poi li teletrasporta a caso sul campo.",
     "WONDER_GUARD": "Infliggi [30,60,120,SP] SPECIAL e causa a tutti i Pokèmon nemici adiacenti PARALYSIS per 3 secondi.",
     "ELECTRIC_SURGE": "Potenzia la SPEED di tutti i Pokémon ELECTRIC del [10,SP].",

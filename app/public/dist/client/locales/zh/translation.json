@@ -1480,7 +1480,6 @@
     "LEECH_SEED": "使目标陷入POISONNED [3,6,12]秒，并恢复使用者[20,40,80,SP]点HP。",
     "LOCK_ON": "锁定目标。下一次攻击必定命中，且额外造成[200,SP]%的TRUE。",
     "PSYCH_UP": "对目标造成[15,30,60,SP]点SPECIAL，并使其和所有相邻敌方宝可梦陷入SILENCE [2,3,4]秒。",
-    "RAZOR_WIND": "对目标造成[20,40,80,SP]点SPECIAL，并使其和所有相邻敌方宝可梦陷入PARALYSIS 7秒。",
     "TWISTING_NETHER": "对目标周围半径2格内的所有敌方宝可梦造成[80,SP]点SPECIAL，并将他们随机传送至战场的任意地点。",
     "WONDER_GUARD": "对所有相邻敌方宝可梦造成[30,60,120,SP]点SPECIAL，并使他们陷入PARALYSIS 3秒。",
     "ELECTRIC_SURGE": "提升所有ELECTRIC宝可梦[10,SP]点SPEED。",
