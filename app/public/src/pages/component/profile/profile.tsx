@@ -11,6 +11,7 @@ import {
   giveRole,
   giveTitle,
   heapSnapshot,
+  searchById,
   searchName,
   unban
 } from "../../../stores/NetworkStore"
@@ -42,8 +43,8 @@ export default function Profile() {
     }
   }
 
-  const resetSearch = useCallback(() => {
-    dispatch(setSearchedUser(undefined))
+  const resetSearch = useCallback((user = searchedUser) => {
+    dispatch(setSearchedUser(user))
     dispatch(setSuggestions([]))
   }, [dispatch])
 
@@ -59,10 +60,10 @@ export default function Profile() {
       <SearchBar onChange={onSearchQueryChange} />
 
       <div className="profile-actions">
-        {searchedUser ? (
-          <OtherProfileActions resetSearch={resetSearch} />
-        ) : suggestions.length > 0 ? (
+        {suggestions.length > 0 ? (
           <SearchResults />
+        ) : searchedUser ? (
+          <OtherProfileActions resetSearch={resetSearch} />
         ) : (
           <MyProfileMenu />
         )}
@@ -100,9 +101,10 @@ function MyProfileMenu() {
   )
 }
 
-function OtherProfileActions({ resetSearch }) {
+function OtherProfileActions() {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
+  const currentUid = useAppSelector((state) => state.network.profile?.uid)
   const role = useAppSelector((state) => state.network.profile?.role)
   const user = useAppSelector((state) => state.lobby.searchedUser)
   const [title, setTitle] = useState<Title>(user?.title || Title.ACE_TRAINER)
@@ -222,9 +224,9 @@ function OtherProfileActions({ resetSearch }) {
       {roleButton}
       {titleButton}
       {user?.banned ? unbanButton : banButton}
-      <button className="bubbly blue" onClick={resetSearch}>
+      {currentUid && user && user.uid !== currentUid && <button className="bubbly blue" onClick={() => dispatch(searchById(currentUid))}>
         {t("back_to_my_profile")}
-      </button>
+      </button>}
     </>
   ) : null
 }
