@@ -454,7 +454,8 @@
     "DECORATE": "Decorate",
     "DRAGON_CLAW": "Dragon Claw",
     "TAILWIND": "Tailwind",
-    "HORN_ATTACK": "Horn Attack"
+    "HORN_ATTACK": "Horn Attack",
+    "MUD_SHOT": "Mud Shot"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1238,6 +1239,8 @@
     "WORMADAM_SANDY": "Wormadam (Sandy)",
     "WORMADAM_TRASH": "Wormadam (Trash)",
     "MOTHIM": "Mothim",
+    "WOOPER": "Wooper",
+    "QUAGSIRE": "Quagsire",
     "PALDEA_WOOPER": "Paldean Wooper",
     "CLODSIRE": "Clodsire",
     "FUECOCO": "Fuecoco",
@@ -1816,7 +1819,8 @@
     "DECORATE": "Decorates the nearest ally, increasing its ATK by [1,2,3,SP] and AP by [10,20,30,SP]",
     "DRAGON_CLAW": "Deal [30,60,120,SP] SPECIAL to the lowest health adjacent enemy and WOUND them for 4 seconds.",
     "TAILWIND": "Increase the SPEED of all allies by [5,10,15,SP]",
-    "HORN_ATTACK": "Deal [3,4,5,SP] x ATK as SPECIAL to the target and cause ARMOR_BREAK for 8 seconds."
+    "HORN_ATTACK": "Deal [3,4,5,SP] x ATK as SPECIAL to the target and cause ARMOR_BREAK for 8 seconds.",
+    "MUD_SHOT": "Hurls mud at the target, dealing [25,50,75,SP] SPECIAL and reducing their SPEED by [10,20,30,SP]."
   },
   "effect": {
     "INGRAIN": "Ingrain",

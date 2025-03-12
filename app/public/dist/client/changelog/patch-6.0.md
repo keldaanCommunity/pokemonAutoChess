@@ -24,6 +24,8 @@
 - Dachsbun
 - Milcery
 - Alcremie (Vanilla, Ruby, Matcha, Mint, Lemon, Salted, Ruby Swirl, Caramel Swirl, Rainbow Swirl)
+- Wooper
+- Quagsire
 
 # Changes to Pokemon & Abilities
 

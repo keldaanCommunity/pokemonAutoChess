@@ -19,7 +19,6 @@ import {
 } from "../../types/enum/Item"
 import {
   Pkm,
-  PkmByIndex,
   PkmDuos,
   PkmFamily,
   PkmIndex,
