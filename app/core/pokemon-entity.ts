@@ -1078,7 +1078,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.hasSynergyEffect(Synergy.WILD)) {
-      const woundChance = 0.3
+      const woundChance = 0.25
       if (chance(woundChance, this)) {
         target.status.triggerWound(3000, target, this)
       }

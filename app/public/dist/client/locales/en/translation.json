@@ -2036,7 +2036,7 @@
     "LIGHT_PULSE": "Also give +8 PP per second",
     "ETERNAL_LIGHT": "Also increase DEF and SPE_DEF by 50% and give RUNE_PROTECT for 8 seconds",
     "MAX_ILLUMINATION": "Also give 100 SHIELD and RESURECTION",
-    "QUICK_FEET": "+30 SPEED. [30,LK]% chance to inflict WOUND for 3 seconds.",
+    "QUICK_FEET": "+30 SPEED. [25,LK]% chance to inflict WOUND for 3 seconds.",
     "RUN_AWAY": "+50 SPEED",
     "HUSTLE": "+20% ATK and +50 SPEED",
     "BERSERK": "+40% ATK and +50 SPEED. RAGE 5 seconds sooner",
