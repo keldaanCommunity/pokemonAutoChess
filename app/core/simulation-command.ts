@@ -74,27 +74,33 @@ export class AttackCommand extends SimulationCommand {
         this.pokemon.state.attack(this.pokemon, this.board, this.target)
         if (isPowerSurge) {
           this.board
-            .getAdjacentCells(this.target.positionX, this.target.positionY)
+            .getAdjacentCells(
+              this.target.positionX,
+              this.target.positionY,
+              true
+            )
             .forEach((cell) => {
               if (cell) {
                 const enemy = this.board.getValue(cell.x, cell.y)
                 if (enemy && this.pokemon.team !== enemy.team) {
                   enemy.handleSpecialDamage(
-                    20,
+                    10,
                     this.board,
                     AttackType.SPECIAL,
                     this.pokemon,
                     false,
                     false
                   )
-                  this.pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-                    id: this.pokemon.simulation.id,
-                    skill: "LINK_CABLE_link",
-                    positionX: this.target.positionX,
-                    positionY: this.target.positionY,
-                    targetX: enemy.positionX,
-                    targetY: enemy.positionY
-                  })
+                  if (enemy !== this.target) {
+                    this.pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+                      id: this.pokemon.simulation.id,
+                      skill: "LINK_CABLE_link",
+                      positionX: this.target.positionX,
+                      positionY: this.target.positionY,
+                      targetX: enemy.positionX,
+                      targetY: enemy.positionY
+                    })
+                  }
                 }
               }
             })
@@ -103,7 +109,7 @@ export class AttackCommand extends SimulationCommand {
         if (this.pokemon.name === Pkm.MORPEKO) {
           this.target.status.triggerParalysis(2000, this.target, this.pokemon)
         }
-        
+
         if (this.pokemon.name === Pkm.MORPEKO_HANGRY) {
           this.target.status.triggerWound(4000, this.target, this.pokemon)
         }

@@ -1941,7 +1941,7 @@
     "PRIMORDIAL_SEA": "每秒额外恢复12点PP。获得厉害钓竿。",
     "RISING_VOLTAGE": "每第4次攻击发动一次三连击。",
     "OVERDRIVE": "每第3次攻击发动一次三连击。",
-    "POWER_SURGE": "发动三连击时还会对与目标相邻的敌方宝可梦造成20点SPECIAL。",
+    "POWER_SURGE": "三重攻击还会对目标及其相邻的敌人造成 10 SPECIAL",
     "GUTS": "格挡减免4点伤害。",
     "STURDY": "格挡减免7点伤害。",
     "DEFIANT": "格挡减免10点伤害。",

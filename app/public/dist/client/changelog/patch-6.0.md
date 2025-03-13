@@ -90,6 +90,7 @@
 - New synergy Gourmet: Gourmet Pokémon can be equipped with a Chef's Hat. Chefs will cook up their Signature Dish between fights and feed adjacent allies, giving them various buffs and effects.
 - Berry trees no longer change every time a berry is collected. Instead, they change when you change region.
 - Wild now gives Speed at levels 2-4 and Attack at levels 6-8 instead of attack and movement speed at all levels
+- Electric synergy levels are now 3/5/7 ; change Electric 7: Triple attacks also deal ~~20 special damage to enemies adjacent to the target~~ 10 special damage to **target and enemies adjacent to it**
 - Nerf Amorphous 3 & 5 : 4/8 → 3/6 HP per active synergy
 - Nerf Artificial 4 & 6: 8/15 → 6/12 attack, AP and shield per held item
 - Fire burn chance on attacks now inflicts Burn for ~~2~~ 3 seconds
