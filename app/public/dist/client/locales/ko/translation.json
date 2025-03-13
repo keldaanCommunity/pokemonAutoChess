@@ -64,7 +64,8 @@
     "ROCK_SLIDE": "스톤샤워",
     "HEAT_WAVE": "열풍",
     "FLAMETHROWER": "화염방사",
-    "THUNDER_SHOCK": "번개",
+    "THUNDER_SHOCK": "전기쇼크",
+    "THUNDER": "번개",
     "HYDRO_PUMP": "하이드로펌프",
     "DRACO_METEOR": "용성군",
     "BLAZE_KICK": "블레이즈킥",
@@ -394,7 +395,7 @@
     "DOUBLE_SHOCK": "전광쌍격",
     "CHARM": "애교부리기",
     "ENTRAINMENT": "동료만들기",
-    "OKTZOOKA": "대포무노포",
+    "OCTAZOOKA": "대포무노포",
     "PSYCHO_SHIFT": "사이코시프트",
     "GLAIVE_RUSH": "대검돌격",
     "FOUL_PLAY": "속임수",
@@ -450,7 +451,10 @@
     "SPICY_EXTRACT": "하바네로엑기스",
     "SWEET_SCENT": "달콤한향기",
     "SWALLOW": "꿀꺽",
-    "DECORATE": "데코레이션"
+    "DECORATE": "데코레이션",
+    "DRAGON_CLAW": "드래곤클로",
+    "TAILWIND": "순풍",
+    "HORN_ATTACK": "뿔찌르기"
   },
   "pkm": {
     "DEFAULT": "미싱노",
@@ -1423,6 +1427,7 @@
     "HEAT_WAVE": "모든 적에게 [10,20,30,SP] SPECIAL 를 가한다. [20,LK]% 확률로 BURN 을 3초간 가한다. 모든 FREEZE 포켓몬을 해동한다.",
     "FLAMETHROWER": "3칸 이내의 한 방향으로 모든 적에게 [30,60,120,SP] SPECIAL 를 입히고 4초간 BURN 을 가한다.",
     "THUNDER_SHOCK": "[30,60,120,SP] SPECIAL 을 가한다.",
+    "THUNDER": "무작위 적 3 포켓몬을 공격하여 [30,60,120,SP] SPECIAL 를 입히고, [30,LK]% 확률로 3초간 PARALYSIS 를 가한다.",
     "HYDRO_PUMP": "대상의 뒤에 있는 모든 적포켓몬들에게 [20,40,80,SP] SPECIAL 을 가한다.",
     "DRACO_METEOR": "모든 적포켓몬들에게 [50,SP] SPECIAL 을 가한다.",
     "BLAZE_KICK": "대상에게 [30,60,120,SP] SPECIAL 을 가하며 2초간 BURN 상태로 만든다. BURN 상태의 포켓몬에게는 30%의 추가피해를 가한다.",
@@ -1437,6 +1442,7 @@
     "SEED_FLARE": "쉐이미의 몸에서 충격파를 발산하며, 반경 5칸 내에 있는 모든 적포켓몬들에게 [30,SP] SPECIAL 을 가하며 SPE_DEF 을 3만큼 낮춘다.",
     "IRON_TAIL": "대상에 [20,40,80,SP] SPECIAL 을 가하며, 시전자의 DEF 을 [2,4,8] 만큼 올린다.",
     "BLAST_BURN": "사용자의 주변에 있는 영역에 [30,60,120,SP] SPECIAL 을 가한다.",
+    "CHARGE": "전투 종료 시까지 기본공격이 [100,SP]% 추가 SPECIAL 를 입힌다. (중첩가능)",
     "DISCHARGE": "근처의 적포켓몬들에 [25,50,75,SP] SPECIAL 을 가하며 5초간 PARALYSIS 상태로 만든다.",
     "BITE": "대상에 [40,80,120,SP] SPECIAL 을 가하며, 시전자는 해당 피해량의 30%를 회복한다. 그리고 대상을 5초간 FLINCH 상태로 만든다.",
     "AQUA_TAIL": "대상에 [30,60,100,SP] SPECIAL 을 가하며 [30,60,100,SP] 의 SHIELD 을 얻는다.",
@@ -1464,7 +1470,7 @@
     "HEAL_BLOCK": "인접한 적 포켓몬들에게 [20,40,80,SP] SPECIAL 및 5초간 WOUND 상태를 가한다.",
     "ROAR_OF_TIME": "가장 강한 아군에게 RESURECTION 상태와 [20,SP] 의 SPEED 를 부여한다. (아이템 수 > 별 수 > 희귀도 순)",
     "ROCK_TOMB": "대상에 [30,60,120,SP] SPECIAL 를 가하며 SPEED 를 [10,20,40] 만큼 감소시킨다.",
-    "ROCK_SMASH": "대상에 [25,50,100,SP] SPECIAL 및 [3,6,9] 초간의 ARMOR_REDUCTION 상태를 가한다.",
+    "ROCK_SMASH": "대상에 [25,50,100,SP] SPECIAL 및 [3,6,9] 초간의 ARMOR_BREAK 상태를 가한다.",
     "HEAD_SMASH": "시전자 본인이 [10,20,40,SP] PHYSICAL 를 받고 대상에 [40,80,150,SP] SPECIAL 를 가한다. 대상이 SLEEP 혹은 FREEZE 상태일 경우 처형한다.",
     "ROCK_HEAD": "대상에 ATK + DEF 의 [120,SP]% 만큼의 SPECIAL 를 가한다.",
     "CRABHAMMER": "대상에 [40,80,120,SP] SPECIAL 를 가한다. 30% 이하의 HP 를 지닌 적은 처형한다. 기본적으로 치명타를 가할 수 있고 [30,LK]% 향상된 CRIT_CHANCE 를 적용한다.",
@@ -1480,7 +1486,6 @@
     "LEECH_SEED": "대상에 [3,6,12]초간 POISONNED 상태로 만들고 시전자의 HP을 [20,40,80,SP]만큼 회복한다.",
     "LOCK_ON": "대상에 록온한다. 다음 공격은 빗나가지 않으며 [200,SP]%만큼의 TRUE 를 추가로 가한다.",
     "PSYCH_UP": "대상에 [15,30,60,SP] 의 SPECIAL을 가한 후 대상 및 인접한 적들에게 [2,3,4]초간 SILENCE 상태로 만든다.",
-    "RAZOR_WIND": "대상에 [20,40,80,SP] 의 SPECIAL 을 가한 후 대상 및 인접한 적들에게 7초간 PARALYSIS 상태로 만든다.",
     "TWISTING_NETHER": "대상으로부터 반경 2칸 범위에 있는 모든 적들에게 [80,SP] SPECIAL 을 가한 후, 그들을 전장 내의 아무 장소로 보내버린다.",
     "WONDER_GUARD": "인접한 적 포켓몬들에게 [30,60,120,SP] SPECIAL 와 3초간의 PARALYSIS 상태를 가한다.",
     "ELECTRIC_SURGE": "모든 ELECTRIC 포켓몬의 SPEED 를 [10,SP] 증가시킨다.",
@@ -1512,7 +1517,7 @@
     "DIVE": "물속으로 다이빙해서 [15,30,60]의 SHIELD 를 얻는다. 그후 적팀의 한복판에 재등장하며 인접한 적들에게 [10,20,40,SP] 의 SPECIAL 를 가하며 1초간 FREEZE 상태로 만든다.",
     "SPIKE_ARMOR": "[3,5,10]초간 시전자에게 근접공격을 하는 대상은 WOUND 상태가 되며 현재 DEF 의 [50,SP]% 의 SPECIAL 을 입는다.",
     "FUTURE_SIGHT": "적 5마리에게 [15,30,60,SP] 의 SPECIAL 을 가한다.",
-    "FAKE_TEARS": "모든 적 포켓몬들에 [3,6,9,SP] 의 SPECIAL 을 가하며 3초간 ARMOR_REDUCTION 을 발동시킨다.",
+    "FAKE_TEARS": "모든 적 포켓몬들에 [3,6,9,SP] 의 SPECIAL 을 가하며 3초간 ARMOR_BREAK 을 발동시킨다.",
     "SPARKLING_ARIA": "대상 및 인접한 적들에 [15,30,60,SP] 의 SPECIAL 을 가한다. BURN 상태가 된 아군이 있을 경우, 해당 아군의 화상 상태가 치유된다.",
     "DRAGON_DARTS": "대상에 대당 [10,20,40,SP] 의 SPECIAL 을 가하는 화살 3개를 날립니다. 대상이 기절할 경우, 40 PP 를 회복한다.",
     "GRASSY_SURGE": "모든 GRASS 포켓몬의 ATK 를 [4,SP] 만큼 증가시킨다.",
@@ -1730,11 +1735,11 @@
     "BOUNCE": "가장 먼 대상에게 [1,2,3,SP]번 튕기며 튕길때마다 적에게 [10,SP]의 SPECIAL 를 입힌다.",
     "BLOOD_MOON": "이마에 있는 붉은 달에 자신의 모든 에너지를 집중시키고 일직선 방향으로 투사하여 적중한 모든 적에게 ATK의 [200,SP]%만큼 SPECIAL 을 입히고 3초 동안  WOUND 를 부여한다.",
     "TEA_TIME": "아군의 HP를 [15,30,60,SP] 회복시킨다. 열매를 들고 있는 모든 포켓몬은 즉시 열매를 먹는다.",
-    "SPIKES": "3칸 반경 내에 최대 [6, SP]개의 철압정을 앞으로 던지며 [25,50,100,SP]의 SPECIAL를 가한다. 철압정은 필드에 남아서 그 위를 걷는 모든 포켓몬(FLYING 은 제외)에게 초당 10 TRUE 와 ARMOR_REDUCTION 을 가한다.",
+    "SPIKES": "3칸 반경 내에 최대 [6, SP]개의 철압정을 앞으로 던지며 [25,50,100,SP]의 SPECIAL를 가한다. 철압정은 필드에 남아서 그 위를 걷는 모든 포켓몬(FLYING 은 제외)에게 초당 10 TRUE 와 ARMOR_BREAK 을 가한다.",
     "SHADOW_PUNCH": "HP가 가장 낮은 타겟을 향해 날아간다. 다음 공격은 추가적으로 [30,60,120,SP] SPECIAL을 입힌다.",
     "GUNK_SHOT": "타겟에게 [50,100,SP] SPECIAL을 입히며 [2,4,SP]초 동안 POISONNED 상태를 부여한다.",
     "MAGNET_BOMB": "마그넷봄은 타겟에게 [20,40,80,SP] SPECIAL을 입히며, 인접한 적에게 [10,20,40,SP] SPECIAL을 입히며 먼 적을 끌어들인다.",
-    "MUDDY_WATER": "앞에 있는 최대 3마리에게 진흙탕 물을 뿜어내어[40,80,SP]SPECIAL 을 입히고 4초 동안 WOUND 및 ARMOR_REDUCTION 을 부여한다.",
+    "MUDDY_WATER": "앞에 있는 최대 3마리에게 진흙탕 물을 뿜어내어[40,80,SP]SPECIAL 을 입히고 4초 동안 WOUND 및 ARMOR_BREAK 을 부여한다.",
     "ANCIENT_POWER": "타겟에게 바위를 발사하여 [40,80,120,SP]의 SPECIAL를 입힌다. 사용자의 AP를 25%만큼 증가시킨다.",
     "MOON_DREAM": "대상을 [3,6,9]초 동안 SLEEP 상태로 만들며 대상과 가장 가까운 아군 3명에게 [10,20,30,SP]의 SHIELD 를 부여한다.",
     "STONE_AXE": "[50,SP] TRUE를 입힌다. 대상 주변에 날카로운 돌들을 놓으며 이 돌들은 필드에 남아 초당 10의 PHYSICAL 을 입힌다.다만 ROCK 또는 FLYING은 데미지를 입지 않는다.",
@@ -1752,7 +1757,7 @@
     "PURIFY": "해로운 효과를 제거하고 시전자의 HP 을 [15,30,60,SP] 회복한다.",
     "CHARM": "대상에게 3초 동안 CHARM 을 부여하고 ATK 을 [2,3,4,SP] 낮춥니다. (최소 1)",
     "ENTRAINMENT": "이상한 리듬에 춤을 춰 [10,SP]PP를 회복하고 대상의 기술을 동료만들기로 교체한다. 대상의 기술이 이미 교체되었다면 근처의 다른 적에게 시전한다.",
-    "OKTZOOKA": "시전자의 ATK 의 [150,SP]% 를 SPECIAL 로 가하는 투사체를 발사하고 대상의 명중률을 낮추는 먹물 구름을 남긴다.",
+    "OCTAZOOKA": "시전자의 ATK 의 [300,SP]% 를 SPECIAL 로 가하는 투사체를 발사하고 대상의 명중률을 낮추는 먹물 구름을 남긴다.",
     "PSYCHO_SHIFT": "가장 먼 적과 대상의 위치를 바꾸고 둘 다에게 [60,SP] SPECIAL 를 입힌다.",
     "GLAIVE_RUSH": "시전자가 무모하게 돌진한다. 대상의 후방으로 이동하여 [50,100,200,SP]의 SPECIAL 를 입히고 6초 동안 자신에게 ARMOR_REDUCTION을 부여한다.",
     "FOUL_PLAY": "대상 ATK 의 [2,4,6,SP] 배만큼 SPECIAL 를 가한다.",
@@ -1807,7 +1812,10 @@
     "SPICY_EXTRACT": "가장 가까운 1/2/3 아군들을 [2,SP] 초간 RAGE 상태로 만든다.",
     "SWEET_SCENT": "3칸 내 적들은 더 이상 회피를 할 수 없고, [6,SP] SPE_DEF 이 감소하며, [30,LK]% 확률로 1초간 CHARM 상태가 된다.",
     "SWALLOW": "최대 3중첩까지 DEF 과 SPE_DEF 을 3씩 증가시킨다. HP 이 25% 미만이면 중첩당 최대 HP 의 [20,SP]% 회복한다. 3중첩 초과 시, 전방 모든 적들에게 [40,80,150,SP] SPECIAL 를 가한다.",
-    "DECORATE": "가장 가까운 아군을 치장하여 ATK 을 [1,2,3,SP] , AP 을 [10,20,30,SP] 증가시킨다."
+    "DECORATE": "가장 가까운 아군을 치장하여 ATK 을 [1,2,3,SP] , AP 을 [10,20,30,SP] 증가시킨다.",
+    "DRAGON_CLAW": "가장 체력이 적은 인접한 적에게 [30,60,120,SP] SPECIAL 를 입히고 4초간 WOUND 를 가한다.",
+    "TAILWIND": "모든 아군의 SPEED 를 [5,10,15,SP] 증가시킨다.",
+    "HORN_ATTACK": "대상에게 [3,4,5,SP] x ATK 만큼 SPECIAL 를 입히고 8초간 ARMOR_BREAK 를 가한다."
   },
   "effect": {
     "INGRAIN": "뿌리박기",
@@ -2216,7 +2224,10 @@
     "RUBY_SWIRL_FLAVOR": "루비믹스 맛",
     "LEMON_FLAVOR": "밀키레몬 맛",
     "RAINBOW_SWIRL_FLAVOR": "트리플믹스 맛",
-    "VANILLA_FLAVOR": "밀키바닐라 맛"
+    "VANILLA_FLAVOR": "밀키바닐라 맛",
+    "EGG_FOR_SELL": "포켓몬 알",
+    "GIMMIGHOUL_COIN": "모으령의코인",
+    "EXCHANGE_TICKET": "교환 티켓"
   },
   "item_description": {
     "FOSSIL_STONE": "선사시대에 살았던 포켓몬의 화석",
@@ -2253,7 +2264,7 @@
     "MANA_SCARF": "장착 시 매 공격 당 PP +8 회복",
     "SMOKE_BALL": "최대 HP의 40% 미만으로 하락 시, 연막탄 투척 및 해당 장소 이탈. 인접한 적 포켓몬들은 4초간 PARALYSIS BLINDED 상태가 되며.",
     "XRAY_VISION": "장착 시 SPEED +50, 공격 무조건 명중 ",
-    "RAZOR_FANG": "장착 시 CRIT_POWER +100%, 치명타 명중시 4초 동안 ARMOR_REDUCTION 부여",
+    "RAZOR_FANG": "장착 시 CRIT_POWER +100%, 치명타 명중시 4초 동안 ARMOR_BREAK 부여",
     "PROTECTIVE_PADS": "기본공격이 SHIELD 에 두 배의 피해를 입힌다. 착용자는 반동대미지 및 반사효과에 면역이 된다.",
     "CHOICE_SCARF": "장착 시 공격할때마다 인접한 적 한 마리에게 기본 공격력의 50% 만큼 추가피해 ",
     "PUNCHING_GLOVE": "기본공격이 대상의 최대 HP 의 8%만큼 추가로 PHYSICAL 를 가한다.",
@@ -2397,7 +2408,10 @@
     "SALTED_FLAVOR": "ROCK GROUND FOSSIL 아군들이 제작. $t(pkm.MILCERY) 에게 사용하여 $t(pkm.ALCREMIE_SALTED) 로 진화. $t(passive_description.SALTED_CREAM)",
     "RUBY_SWIRL_FLAVOR": "FIRE WILD FIELD 아군들이 제작. $t(pkm.MILCERY) 에게 사용하여 $t(pkm.ALCREMIE_RUBY_SWIRL) 로 진화. $t(passive_description.RUBY_SWIRL_CREAM)",
     "CARAMEL_SWIRL_FLAVOR": "DARK MONSTER DRAGON 아군들이 제작. $t(pkm.MILCERY) 에게 사용하여 $t(pkm.ALCREMIE_CARAMEL_SWIRL) 로 진화. $t(passive_description.CARAMEL_SWIRL_CREAM)",
-    "RAINBOW_SWIRL_FLAVOR": "PSYCHIC AMORPHOUS BABY LIGHT 아군들이 제작. $t(pkm.MILCERY) 에게 사용하여 $t(pkm.ALCREMIE_RAINBOW_SWIRL) 로 진화. $t(passive_description.RAINBOW_SWIRL_CREAM)"
+    "RAINBOW_SWIRL_FLAVOR": "PSYCHIC AMORPHOUS BABY LIGHT 아군들이 제작. $t(pkm.MILCERY) 에게 사용하여 $t(pkm.ALCREMIE_RAINBOW_SWIRL) 로 진화. $t(passive_description.RAINBOW_SWIRL_CREAM)",
+    "EGG_FOR_SELL": "럭키의 키우미집에서 판매하는 알",
+    "GIMMIGHOUL_COIN": "매 스테이지 추가로 1 GOLD 획득하며 최대 이자를 1 증가시킨다.",
+    "EXCHANGE_TICKET": "대기석에 있는 도구 재료 또는 완성 도구를 다른 무작위 도구로 바꾼다. 1회용"
   },
   "passive_description": {
     "NONE": "아무런 효과가 없습니다.",
@@ -2509,7 +2523,7 @@
     "SABLEYE": "깜까미는 RED_ORB 를 찾아 헤매고 있습니다.",
     "MEGA_SABLEYE": "메가 깜까미는 전투 동안 RUNE_PROTECT 를 획득합니다.",
     "MELMETAL": "멜메탈은 SPEED 를 얻지 못합니다. 추가 SPEED 는 ATK 으로 변환됩니다. (10 SPEED: 5 ATK)",
-    "SKARMORY": "전투 시작 시 무장조는 필드에 압정을 뿌립니다. 압정은 그 위를 걷는 FLYING 이 아닌 포켓몬에게 초당 10 TRUE 를 가하고 ARMOR_REDUCTION 를 적용합니다.",
+    "SKARMORY": "전투 시작 시 무장조는 필드에 압정을 뿌립니다. 압정은 그 위를 걷는 FLYING 이 아닌 포켓몬에게 초당 10 TRUE 를 가하고 ARMOR_BREAK 를 적용합니다.",
     "DURANT": "아이앤트의 기본 공격은 필드 위의 BUG 아군 하나당 1 추가 TRUE 를 입힙니다.",
     "OGERPON_TEAL": "오거폰은 TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK 그리고 CORNERSTONE_MASK 을 착용하여 외형을 변환할 수 있습니다.\n 시전 시, 주변 아군에게  [20,SP] HP 회복",
     "OGERPON_WELLSPRING": "오거폰은 TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK 그리고 CORNERSTONE_MASK 을 착용하여 외형을 변환할 수 있습니다.\n 시전 시, 주변 아군에게 [20,SP] PP 회복",
@@ -2591,7 +2605,7 @@
     "POKERUS": "포켓러스",
     "LOCKED": "봉쇄",
     "BLINDED": "실명",
-    "ARMOR_REDUCTION": "방어파괴",
+    "ARMOR_BREAK": "방어파괴",
     "CHARM": "헤롱헤롱",
     "FLINCH": "풀죽음",
     "CURSE": "저주",
@@ -2615,7 +2629,7 @@
     "RESURECTION": "기절을 한 번 막고 체력을 전부 회복합니다.",
     "PARALYSIS": " SPEED와 이동속도가 50 감소합니다. 공격을 회피할 수 없습니다.",
     "POKERUS": "2.5초마다, 1의 추가 ATK와 10%의 추가 AP를 획득하고 인접한 아군 두 마리를 POKERUS 상태로 만듭니다.",
-    "ARMOR_REDUCTION": "DEF와 SPE_DEF가 50% 감소합니다.",
+    "ARMOR_BREAK": "DEF와 SPE_DEF가 50% 감소합니다.",
     "CHARM": "적을 공격할 수 없으며 매혹된 적에게 가까이 다가갑니다.",
     "FLINCH": "받는 데미지의 50%가 SHIELD를 무시합니다.",
     "CURSE": "저주를 받은 포켓몬은 일정 시간이 경과한 후 기절합니다.",
@@ -3552,7 +3566,8 @@
     "DO_IT_ALL_YOURSELF": "전부 직접 하세요!",
     "FIRST_PARTNER": "첫 파트너",
     "SLAMINGO": "슬래밍고",
-    "BLOOD_MONEY": "피 묻은 돈"
+    "BLOOD_MONEY": "피 묻은 돈",
+    "TOWN_FESTIVAL": "마을 축제"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "모든 선택 포켓몬이 시작과 동시에 구매가 가능해집니다.",
@@ -3568,12 +3583,30 @@
     "DO_IT_ALL_YOURSELF": "최대 HP +100 의 아바타를 가지고 시작합니다. 아바타가 낮은 레어도라면 추가 골드를 획득합니다.",
     "FIRST_PARTNER": "스타터 포켓몬을 고릅니다. 10 스테이지까지 매 스테이지에 이 유닛을 획득합니다.",
     "SLAMINGO": "포켓몬을 대기석에 놓으면 모든 아이템을 장착 해제합니다. 4개의 무작위 조합 아이템을 획득합니다.",
-    "BLOOD_MONEY": "이자를 얻지 않습니다. 포켓몬을 기절시킬 때마다 1 GOLD 획득합니다."
+    "BLOOD_MONEY": "이자를 얻지 않습니다. 포켓몬을 기절시킬 때마다 1 GOLD 획득합니다.",
+    "TOWN_FESTIVAL": "마을에서 항상 조우자를 만날 수 있고 모든 공동선택 도구가 무료입니다."
   },
   "town_encounter": {
-    "KECLEON": "켈리몬의 가게"
+    "KECLEON": "켈리몬의 가게",
+    "CHANSEY": "럭키 키우미집",
+    "ELECTIVIRE": "에레키블 링크샵",
+    "XATU": "네이티오 감정평가",
+    "KANGASKHAN": "캥카 창고",
+    "DUSKULL": "해골몽 은행",
+    "MAROWAK": "텅구리 도장",
+    "WOBBUFFET": "마자용의 재활용 가게"
   },
-  "town_encounter_description": {},
+  "town_encounter_description": {
+    "KECLEON": "켈리몬이 시너지 돌들을 {{cost}} GOLD 에 판매합니다.",
+    "CHANSEY": "럭키가 EGG_FOR_SELL 을 {{cost}} GOLD 에 판매합니다.",
+    "ELECTIVIRE": "에레키블이 인공 도구들을 {{cost}} GOLD 에 판매합니다.",
+    "XATU": "네이티오가 WONDERBOX 를 {{cost}} GOLD 에 판매합니다.",
+    "KANGASKHAN": "캥카가 완성 도구들을 {{cost}} GOLD 에 판매합니다.",
+    "DUSKULL": "해골몽이 당신의 장기 골드 수입을 {{cost}} GOLD 증가시킵니다.",
+    "MAROWAK": "텅구리가 다음 PVE 전투를 어렵게 만듭니다.",
+    "WOBBUFFET": "마자용이 미사용 재료 도구 혹은 완성 도구를 재활용하게 해줍니다.",
+    "SPINDA": "얼루기가 공동선택에서의 회전 방향을 무작위로 바꿉니다."
+  },
   "loading_hints": {
     "tab_out": "로딩 화면 밖으로 나가지 마세요! 브라우저가 비활성화 되면 로딩이 멈춥니다. ",
     "max_loading_time": "게임 시작시 로딩시간은 최대 5분입니다. 어찌되든 간에...",

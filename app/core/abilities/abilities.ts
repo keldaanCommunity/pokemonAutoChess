@@ -1135,18 +1135,9 @@ export class RazorWindStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 3 ? 80 : pokemon.stars === 2 ? 40 : 20
+    crit = chance(pokemon.critChance / 100, pokemon) // can crit by default
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    const cells = board.getAdjacentCells(
-      target.positionX,
-      target.positionY,
-      true
-    )
-    cells.forEach((cell) => {
-      if (cell && cell.value && cell.value.team !== pokemon.team) {
-        cell.value.status.triggerParalysis(7000, cell.value, pokemon)
-      }
-    })
   }
 }
 
@@ -1704,13 +1695,13 @@ export class TriAttackStrategy extends AbilityStrategy {
     const effect = randomBetween(1, 3)
     switch (effect) {
       case 1:
-        target.status.triggerFreeze(2500, target)
+        target.status.triggerFreeze(3000, target)
         break
       case 2:
         target.status.triggerBurn(5000, target, pokemon)
         break
       case 3:
-        target.status.triggerParalysis(7500, target, pokemon)
+        target.status.triggerParalysis(7000, target, pokemon)
         break
     }
   }
@@ -7786,7 +7777,7 @@ export class DoomDesireStrategy extends AbilityStrategy {
             true
           )
         } else {
-          pokemon.addPP(60, pokemon, 0, false)
+          pokemon.addPP(100, pokemon, 0, false)
         }
       }, 2000)
     )
@@ -10026,7 +10017,7 @@ export class EntrainmentStrategy extends AbilityStrategy {
   }
 }
 
-export class OktzookaStrategy extends AbilityStrategy {
+export class OctazookaStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -10035,7 +10026,7 @@ export class OktzookaStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = Math.ceil(pokemon.atk * 1.5)
+    const damage = Math.ceil(pokemon.atk * 3)
 
     pokemon.count.attackCount++ // trigger attack animation
     target.handleSpecialDamage(
@@ -11984,6 +11975,38 @@ export class DragonClawStrategy extends AbilityStrategy {
   }
 }
 
+export class HornAttackStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = ([3, 4, 5][pokemon.stars - 1] ?? 5) * pokemon.atk
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.status.triggerArmorReduction(8000, target)
+  }
+}
+
+export class MudShotStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    // The user hurls mud at the target, dealing 25/50/75 damage and reducing their attack speed by 10/20/30%.
+    const damage = [25, 50, 75][pokemon.stars - 1] ?? 75
+    const speedDebuff = [10, 20, 30][pokemon.stars - 1] ?? 30
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.addSpeed(-speedDebuff, pokemon, 1, crit)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -12355,7 +12378,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PASTEL_VEIL]: new PastelVeilStrategy(),
   [Ability.CHARM]: new CharmStrategy(),
   [Ability.ENTRAINMENT]: new EntrainmentStrategy(),
-  [Ability.OKTZOOKA]: new OktzookaStrategy(),
+  [Ability.OCTAZOOKA]: new OctazookaStrategy(),
   [Ability.PSYCHO_SHIFT]: new PsychoShiftStrategy(),
   [Ability.GLAIVE_RUSH]: new GlaiveRushStrategy(),
   [Ability.FOUL_PLAY]: new FoulPlayStrategy(),
@@ -12419,5 +12442,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FICKLE_BEAM]: new FickleBeamStrategy(),
   [Ability.DECORATE]: new DecorateStrategy(),
   [Ability.DRAGON_CLAW]: new DragonClawStrategy(),
-  [Ability.TAILWIND]: new TailwindStrategy()
+  [Ability.TAILWIND]: new TailwindStrategy(),
+  [Ability.HORN_ATTACK]: new HornAttackStrategy(),
+  [Ability.MUD_SHOT]: new MudShotStrategy()
 }

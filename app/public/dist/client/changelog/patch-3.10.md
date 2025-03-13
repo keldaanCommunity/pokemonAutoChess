@@ -98,7 +98,7 @@ Many items, pokemons and rarity percentages have been tweaked to improve the bal
 - Power lens buff: +1 Spe Def → + 5 Spe Def
 - Fluffy tail buff: 1 Def → 5 Def
 - Assault Vest buff: 18 Spe Def → 20 Spe Def. Reduce Burn and Poison damage by 50%
-- Razor Fang: Critical hits apply Armor reduction for 4 seconds
+- Razor Fang: Critical hits apply Armor break for 4 seconds
 
 # Bugfix
 

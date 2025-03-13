@@ -47,7 +47,7 @@ export default function WikiItems() {
                 return (
                   <th
                     key={i}
-                    data-tooltip-id="detail-item"
+                    data-tooltip-id="item-detail"
                     onMouseOver={() => setItemHovered(i)}
                   >
                     <img
@@ -62,7 +62,7 @@ export default function WikiItems() {
               return (
                 <tr key={"tr-" + i}>
                   <td
-                    data-tooltip-id="detail-item"
+                    data-tooltip-id="item-detail"
                     onMouseOver={() => setItemHovered(i)}
                   >
                     <img
@@ -85,7 +85,7 @@ export default function WikiItems() {
                     return (
                       <td
                         key={"td-" + i + "-" + j}
-                        data-tooltip-id="detail-item"
+                        data-tooltip-id="item-detail"
                         onMouseOver={() => setItemHovered(tier2Item)}
                       >
                         <img
@@ -108,7 +108,7 @@ export default function WikiItems() {
           {ShinyItems.map((i) => (
             <li
               key={i}
-              data-tooltip-id="detail-item"
+              data-tooltip-id="item-detail"
               onMouseOver={() => setItemHovered(i)}
             >
               <img src={"assets/item/" + i + ".png"} className="item"></img>
@@ -122,7 +122,7 @@ export default function WikiItems() {
           {SpecialItems.map((i) => (
             <li
               key={i}
-              data-tooltip-id="detail-item"
+              data-tooltip-id="item-detail"
               onMouseOver={() => setItemHovered(i)}
             >
               <img src={"assets/item/" + i + ".png"} className="item"></img>
@@ -140,7 +140,7 @@ export default function WikiItems() {
           {Berries.map((i) => (
             <li
               key={i}
-              data-tooltip-id="detail-item"
+              data-tooltip-id="item-detail"
               onMouseOver={() => setItemHovered(i)}
             >
               <img src={"assets/item/" + i + ".png"} className="item"></img>
@@ -165,7 +165,7 @@ export default function WikiItems() {
           {Dishes.map((i) => (
             <li
               key={i}
-              data-tooltip-id="detail-item"
+              data-tooltip-id="item-detail"
               onMouseOver={() => setItemHovered(i)}
             >
               <img src={"assets/item/" + i + ".png"} className="item"></img>
@@ -183,7 +183,7 @@ export default function WikiItems() {
           {ArtificialItems.map((i) => (
             <li
               key={i}
-              data-tooltip-id="detail-item"
+              data-tooltip-id="item-detail"
               onMouseOver={() => setItemHovered(i)}
             >
               <img src={"assets/item/" + i + ".png"} className="item"></img>
@@ -201,7 +201,7 @@ export default function WikiItems() {
           {WeatherRocks.map((i) => (
             <li
               key={i}
-              data-tooltip-id="detail-item"
+              data-tooltip-id="item-detail"
               onMouseOver={() => setItemHovered(i)}
             >
               <img src={"assets/item/" + i + ".png"} className="item"></img>
@@ -219,7 +219,7 @@ export default function WikiItems() {
           {TMs.map((i) => (
             <li
               key={i}
-              data-tooltip-id="detail-item"
+              data-tooltip-id="item-detail"
               onMouseOver={() => setItemHovered(i)}
             >
               <img src={"assets/item/TM.png"} className="item"></img>
@@ -228,7 +228,7 @@ export default function WikiItems() {
           {HMs.map((i) => (
             <li
               key={i}
-              data-tooltip-id="detail-item"
+              data-tooltip-id="item-detail"
               onMouseOver={() => setItemHovered(i)}
             >
               <img src={"assets/item/HM.png"} className="item"></img>
@@ -239,7 +239,7 @@ export default function WikiItems() {
 
       {
         itemHovered && <Tooltip
-          id="detail-item"
+          id="item-detail"
           className="custom-theme-tooltip item-detail-tooltip"
         >
           <ItemDetailTooltip item={itemHovered} />

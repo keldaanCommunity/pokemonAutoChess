@@ -916,6 +916,22 @@ export function displayAbility(
       break
     }
 
+    case Ability.MUD_SHOT: {
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(4)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        yoyo: false,
+        duration: 350,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.POLTERGEIST: {
       const specialProjectile = addAbilitySprite(skill, coordinates).setScale(3)
       scene.tweens.add({
@@ -2970,7 +2986,7 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(3)
       break
 
-    case Ability.OKTZOOKA:
+    case Ability.OCTAZOOKA:
       addAbilitySprite(Ability.SMOKE_SCREEN, coordinatesTarget, true).setScale(
         3
       )
