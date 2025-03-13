@@ -1969,7 +1969,7 @@ export class NuzzleStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
 
     const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
-    const duration = [3000, 4000, 5000][pokemon.stars - 1] ?? 5000
+    const duration = 3000
 
     if (destination) {
       pokemon.targetX = destination.target.positionX
@@ -3526,7 +3526,7 @@ export class SyrupBombStrategy extends AbilityStrategy {
         crit
       )
       highestSpeedEnemy.status.triggerParalysis(
-        2000,
+        3000,
         highestSpeedEnemy,
         pokemon,
         false
@@ -4479,7 +4479,7 @@ export class HurricaneStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        cell.value.status.triggerParalysis(4000, cell.value, pokemon)
+        cell.value.status.triggerParalysis(3000, cell.value, pokemon)
       }
     })
   }

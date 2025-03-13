@@ -65,6 +65,7 @@ export default class Status extends Schema implements IStatus {
   confusionCooldown = 0
   woundCooldown = 0
   paralysisCooldown = 0
+  paralysisSpeedLost = 0
   armorReductionCooldown = 0
   runeProtectCooldown = 0
   charmCooldown = 0
@@ -736,7 +737,8 @@ export default class Status extends Schema implements IStatus {
     if (!this.runeProtect && !pkm.effects.has(Effect.IMMUNITY_PARALYSIS)) {
       if (!this.paralysis) {
         this.paralysis = true
-        pkm.addSpeed(-40, pkm, 0, false)
+        this.paralysisSpeedLost = max(50)(pkm.speed)
+        pkm.addSpeed(-this.paralysisSpeedLost, pkm, 0, false)
       }
       const boost = apBoost && origin ? (duration * origin.ap) / 100 : 0
       duration = duration + boost
@@ -774,7 +776,7 @@ export default class Status extends Schema implements IStatus {
     if (this.paralysis) {
       this.paralysis = false
       this.paralysisCooldown = 0
-      pkm.addSpeed(40, pkm, 0, false)
+      pkm.addSpeed(this.paralysisSpeedLost, pkm, 0, false)
     }
   }
 
