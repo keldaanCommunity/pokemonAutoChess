@@ -91,7 +91,6 @@
     "TORMENT": "Torment",
     "STOMP": "Stomp",
     "HORN_DRILL": "Horn Drill",
-    "PAYBACK": "Payback",
     "NIGHT_SLASH": "Night Slash",
     "BUG_BUZZ": "Bug Buzz",
     "STRING_SHOT": "String Shot",
@@ -455,6 +454,7 @@
     "DRAGON_CLAW": "Dragon Claw",
     "TAILWIND": "Tailwind",
     "HORN_ATTACK": "Horn Attack",
+    "RAZOR_LEAF": "Razor Leaf",
     "MUD_SHOT": "Mud Shot"
   },
   "pkm": {
@@ -1456,7 +1456,6 @@
     "TORMENT": "Increase the user's SPEED by [20,40,60,SP].",
     "STOMP": "Deal SPECIAL equal to [3,4,5,SP] x ATK to the target.",
     "HORN_DRILL": "Deal [3,4,5,SP] x ATK as SPECIAL to the target, with [30,LK]% chance to execute it. The more ATK the user has relative to the target, the higher the chance.",
-    "PAYBACK": "Deal [15,30,60,SP] SPECIAL to the target. The damage is doubled if the user has less than 50% HP.",
     "SHADOW_BALL": "Deal [30,60,100,SP] SPECIAL to the target and decrease the SPE_DEF of all enemy Pokémon by 2.",
     "BUG_BUZZ": "Deal [20,40,80,SP] SPECIAL to the target. The damage is doubled if the target suffers from PARALYSIS.",
     "STRING_SHOT": "Deal [10,20,50,SP] SPECIAL to the target and inflict PARALYSIS for 5 seconds.",
@@ -1820,6 +1819,7 @@
     "DRAGON_CLAW": "Deal [30,60,120,SP] SPECIAL to the lowest health adjacent enemy and WOUND them for 4 seconds.",
     "TAILWIND": "Increase the SPEED of all allies by [5,10,15,SP]",
     "HORN_ATTACK": "Deal [3,4,5,SP] x ATK as SPECIAL to the target and cause ARMOR_BREAK for 8 seconds.",
+    "RAZOR_LEAF": "Throw sharp leafs in a line behind the target. All enemies hit take [20,40,80,SP] SPECIAL. Can crit by default.",
     "MUD_SHOT": "Hurls mud at the target, dealing [25,50,75,SP] SPECIAL and reducing their SPEED by [10,20,30,SP]."
   },
   "effect": {
@@ -2256,7 +2256,7 @@
     "CHOICE_SPECS": "The holder gains 100 bonus AP",
     "SOUL_DEW": "During combat, the holder gains 10 AP every second",
     "UPGRADE": "Attacks grant +5 SPEED (stackable)",
-    "REAPER_CLOTH": "The holder spells can critically strike",
+    "REAPER_CLOTH": "The holder's ability can now critically strike based on CRIT_CHANCE",
     "POKEMONOMICON": "When the holder deals SPECIAL, they BURN the target for 3 seconds",
     "POWER_LENS": "The amount of SPECIAL blocked by SPE_DEF is inflicted back to the attacker",
     "SHELL_BELL": "Holder heals for 33% of all damages inflicted",

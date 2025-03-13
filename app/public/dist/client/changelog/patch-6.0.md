@@ -89,6 +89,7 @@
 - New ability for Rotom: Charge: until the end of the fight, attacks deal 100% additional special damage (stackable)
 - Nerf Rotom Drone: PP 50 → 80
 - New ability for Nidoran male line: Horn attack: deal 3/4/5x Attack as special damage and Armor break for 8 seconds
+- New ability for Seedot line: Razor leaf: Throw sharp leafs in a line behind the target. All enemies hit take 20/40/80 special damage. Can crit by default.
 - Change Razor Wind (Noibat, Farfetch'd): no longer inflict paralysis not hit adjacent units. Now can crit by default. Noivern line PP 100 → 70
 
 # Changes to Synergies

@@ -702,10 +702,6 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(3)
       break
 
-    case Ability.PAYBACK:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
-      break
-
     case Ability.NIGHT_SLASH:
     case Ability.KOWTOW_CLEAVE:
       addAbilitySprite(Ability.NIGHT_SLASH, coordinatesTarget, true).setScale(2)
@@ -2312,6 +2308,28 @@ export function displayAbility(
             projectile.destroy()
           }
         })
+      })
+      break
+    }
+
+    case Ability.RAZOR_LEAF: {
+      const [dx, dy] = OrientationVector[orientation]
+      const finalCoordinates = transformAttackCoordinate(
+        positionX + dx * 8,
+        positionY + dy * 8,
+        flip
+      )
+      const projectile = addAbilitySprite(skill, coordinates).setScale(2)
+      scene.tweens.add({
+        targets: projectile,
+        x: finalCoordinates[0],
+        y: finalCoordinates[1],
+        ease: "linear",
+        yoyo: false,
+        duration: 2000,
+        onComplete: () => {
+          projectile.destroy()
+        }
       })
       break
     }
