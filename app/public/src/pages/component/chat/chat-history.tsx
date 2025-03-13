@@ -4,42 +4,38 @@ import {
   clearTitleNotificationIcon,
   setTitleNotificationIcon
 } from "../../../../../utils/window"
-import { useAppSelector } from "../../../hooks"
 import ChatMessage from "./chat-message"
 
-export default function ChatHistory(props: { source: string }) {
-  const messages: IChatV2[] = useAppSelector(
-    (state) => state[props.source].messages
-  )
+export default function ChatHistory(props: { messages: IChatV2[] }) {
   const [readMessages, setReadMessages] = useState<IChatV2[]>([])
   const domRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (
-      messages.length > 0 &&
+      props.messages.length > 0 &&
       domRef &&
       domRef.current &&
       (domRef.current.scrollTop === 0 ||
         domRef.current.scrollTop + domRef.current.clientHeight >=
-          domRef.current.scrollHeight - 200) // autoscroll only if not already scrolled up by a 200px margin
+        domRef.current.scrollHeight - 200) // autoscroll only if not already scrolled up by a 200px margin
     ) {
       domRef.current.scrollTop = domRef.current.scrollHeight
     }
-  }, [messages.length])
+  }, [props.messages.length])
 
   useEffect(() => {
-    if (messages.length !== readMessages.length) {
-      setReadMessages(messages)
+    if (props.messages.length !== readMessages.length) {
+      setReadMessages(props.messages)
 
       if (!document.hasFocus()) {
         setTitleNotificationIcon("💬")
       }
     }
-  }, [messages, readMessages.length])
+  }, [props.messages, readMessages.length])
 
   useEffect(() => {
     const clearTitle = () => {
-      if (messages.length === readMessages.length) {
+      if (props.messages.length === readMessages.length) {
         clearTitleNotificationIcon()
       }
     }
@@ -49,10 +45,10 @@ export default function ChatHistory(props: { source: string }) {
     return () => {
       window.removeEventListener("focus", clearTitle)
     }
-  }, [messages, messages.length, readMessages.length])
+  }, [props.messages, props.messages.length, readMessages.length])
 
   const dateSeparatedChat: Record<string, IChatV2[]> = useMemo(() => {
-    return messages.reduce((allMessages, message) => {
+    return props.messages.reduce((allMessages, message) => {
       const date = new Date(message.time)
       const key = date.toDateString()
 
@@ -61,7 +57,7 @@ export default function ChatHistory(props: { source: string }) {
         [key]: [...(allMessages[key] ?? []), message]
       }
     }, {})
-  }, [messages])
+  }, [props.messages])
 
   return (
     <div className="chat-history" ref={domRef}>

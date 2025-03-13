@@ -53,6 +53,7 @@
 - Nerf Teatime (Polteageist): healing 20/40/80 → 15/30/60
 - Buff Houndour line: PP 125 → 110
 - Buff Topsy Turvy (Inkay): also reverse AP buffs
+- Buff Drampa: PP 110 → 90
 - Nerf Inteleon: Snipe shot damage 40/80/160 → 40/80/120
 - Nerf Gastly line: PP 60 → 80
 - Nerf Stantler: HP 200 → 180, Def/Spedef: 5 → 3 (6 post def/spedef stat change)

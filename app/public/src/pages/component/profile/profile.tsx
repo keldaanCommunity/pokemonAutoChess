@@ -11,18 +11,20 @@ import {
   giveRole,
   giveTitle,
   heapSnapshot,
+  searchById,
   searchName,
   unban
 } from "../../../stores/NetworkStore"
 import { AvatarTab } from "./avatar-tab"
 import { GadgetsTab } from "./gadgets-tab"
-import History from "./history"
+import GameHistory from "./game-history"
+import { ProfileChatHistory } from "./profile-chat-history"
 import { NameTab } from "./name-tab"
 import PlayerBox from "./player-box"
-import "./profile.css"
 import { SearchBar } from "./search-bar"
 import SearchResults from "./search-results"
 import { TitleTab } from "./title-tab"
+import "./profile.css"
 
 export default function Profile() {
   const { t } = useTranslation()
@@ -33,6 +35,7 @@ export default function Profile() {
 
   const profile = searchedUser ?? user
   const [gameHistory, setGameHistory] = useState<IGameRecord[]>([])
+  const [rightPanel, setRightPanel] = useState<"chat" | "game">("game")
 
   function onSearchQueryChange(query: string) {
     if (query) {
@@ -42,8 +45,8 @@ export default function Profile() {
     }
   }
 
-  const resetSearch = useCallback(() => {
-    dispatch(setSearchedUser(undefined))
+  const resetSearch = useCallback((user = searchedUser) => {
+    dispatch(setSearchedUser(user))
     dispatch(setSuggestions([]))
   }, [dispatch])
 
@@ -59,16 +62,17 @@ export default function Profile() {
       <SearchBar onChange={onSearchQueryChange} />
 
       <div className="profile-actions">
-        {searchedUser ? (
-          <OtherProfileActions resetSearch={resetSearch} />
-        ) : suggestions.length > 0 ? (
+        {suggestions.length > 0 ? (
           <SearchResults />
+        ) : searchedUser ? (
+          <OtherProfileActions rightPanel={rightPanel} setRightPanel={setRightPanel} />
         ) : (
           <MyProfileMenu />
         )}
       </div>
 
-      {profile && <History uid={profile.uid} onUpdate={setGameHistory} />}
+      {rightPanel === "game" && profile && <GameHistory uid={profile.uid} onUpdate={setGameHistory} />}
+      {rightPanel === "chat" && profile && <ProfileChatHistory uid={profile.uid} />}
     </div>
   )
 }
@@ -100,9 +104,13 @@ function MyProfileMenu() {
   )
 }
 
-function OtherProfileActions({ resetSearch }) {
+function OtherProfileActions(props: {
+  rightPanel: "game" | "chat",
+  setRightPanel: React.Dispatch<React.SetStateAction<"game" | "chat">>
+}) {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
+  const currentUid = useAppSelector((state) => state.network.profile?.uid)
   const role = useAppSelector((state) => state.network.profile?.role)
   const user = useAppSelector((state) => state.lobby.searchedUser)
   const [title, setTitle] = useState<Title>(user?.title || Title.ACE_TRAINER)
@@ -158,6 +166,30 @@ function OtherProfileActions({ resetSearch }) {
         }}
       >
         {t("unban_user")}
+      </button>
+    ) : null
+
+  const chatHistoryButton =
+    user && role && (role === Role.ADMIN || role === Role.MODERATOR) ? (
+      <button
+        className="bubbly blue"
+        onClick={() => {
+          props.setRightPanel("chat")
+        }}
+      >
+        {t("see_chat_history")}
+      </button>
+    ) : null
+
+  const gameHistoryButton =
+    user && role && (role === Role.ADMIN || role === Role.MODERATOR) ? (
+      <button
+        className="bubbly blue"
+        onClick={() => {
+          props.setRightPanel("game")
+        }}
+      >
+        {t("see_game_history")}
       </button>
     ) : null
 
@@ -222,9 +254,10 @@ function OtherProfileActions({ resetSearch }) {
       {roleButton}
       {titleButton}
       {user?.banned ? unbanButton : banButton}
-      <button className="bubbly blue" onClick={resetSearch}>
+      {props.rightPanel === "game" ? chatHistoryButton : gameHistoryButton}
+      {currentUid && user && user.uid !== currentUid && <button className="bubbly blue" onClick={() => dispatch(searchById(currentUid))}>
         {t("back_to_my_profile")}
-      </button>
+      </button>}
     </>
   ) : null
 }
