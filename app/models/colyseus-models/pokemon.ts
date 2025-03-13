@@ -12877,7 +12877,11 @@ export class Cherrim extends Pokemon {
 }
 
 export class CherrimSunlight extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.LIGHT, Synergy.GRASS])
+  types = new SetSchema<Synergy>([
+    Synergy.FLORA,
+    Synergy.LIGHT,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.EPIC
   stars = 2
   hp = 210
