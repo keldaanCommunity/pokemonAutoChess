@@ -58,6 +58,7 @@ export default class GameState extends Schema {
   endTime: number | undefined = undefined
   preparationId: string
   shinyEncounter = false
+  townEncounters: Set<TownEncounter> = new Set<TownEncounter>()
   pveRewards: Item[] = []
   pveRewardsPropositions: Item[] = []
   minRank: EloRank | null = null

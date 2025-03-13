@@ -3266,9 +3266,6 @@
     "FIRST_PARTNER": "Scegli il tuo Pokèmon starter. Ne otterrai una copia ogni livello fino al livello 10.",
     "SLAMINGO": "Tutti gli oggetti vengono rimossi dal Pokèmon se viene messo in panchina. Inizia con 4 componenti casuali."
   },
-  "town_encounter": {
-    "KECLEON": "Negozio di Kecleon"
-  },
   "town_encounter_description": {},
   "loading_hints": {
     "tab_out": "Non cambiare finestra! Il caricamento è in pausa quando la finestra del browser è inattiva.",

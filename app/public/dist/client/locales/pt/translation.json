@@ -2538,9 +2538,6 @@
     "BUYER_FEVER": "A loja de evoluções é grátis",
     "CROWDED": "+3 unidades máximas no tabuleiro"
   },
-  "town_encounter": {
-    "KECLEON": "Loja do Kecleon"
-  },
   "town_encounter_description": {},
   "loading_hints": {
     "bug_report": "Achou algum bug? Vá no Discord e reporta no canal #bug-report",

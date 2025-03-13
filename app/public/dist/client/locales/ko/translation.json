@@ -3584,16 +3584,6 @@
     "BLOOD_MONEY": "이자를 얻지 않습니다. 포켓몬을 기절시킬 때마다 1 GOLD 획득합니다.",
     "TOWN_FESTIVAL": "마을에서 항상 조우자를 만날 수 있고 모든 공동선택 도구가 무료입니다."
   },
-  "town_encounter": {
-    "KECLEON": "켈리몬의 가게",
-    "CHANSEY": "럭키 키우미집",
-    "ELECTIVIRE": "에레키블 링크샵",
-    "XATU": "네이티오 감정평가",
-    "KANGASKHAN": "캥카 창고",
-    "DUSKULL": "해골몽 은행",
-    "MAROWAK": "텅구리 도장",
-    "WOBBUFFET": "마자용의 재활용 가게"
-  },
   "town_encounter_description": {
     "KECLEON": "켈리몬이 시너지 돌들을 {{cost}} GOLD 에 판매합니다.",
     "CHANSEY": "럭키가 EGG_FOR_SELL 을 {{cost}} GOLD 에 판매합니다.",
