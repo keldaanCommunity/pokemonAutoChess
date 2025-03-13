@@ -8460,7 +8460,7 @@ export class Noibat extends Pokemon {
   speed = 64
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 70
   range = 2
   skill = Ability.RAZOR_WIND
   additional = true
@@ -8479,7 +8479,7 @@ export class Noivern extends Pokemon {
   speed = 64
   def = 6
   speDef = 6
-  maxPP = 100
+  maxPP = 70
   range = 2
   skill = Ability.RAZOR_WIND
   additional = true
@@ -14895,6 +14895,39 @@ export class Mothim extends Pokemon {
   }
 }
 
+export class Wooper extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.GROUND])
+  rarity = Rarity.RARE
+  evolution = Pkm.QUAGSIRE
+  stars = 1
+  hp = 80
+  atk = 8
+  speed = 31
+  def = 10
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.MUD_SHOT
+  attackSprite = AttackSprite.WATER_MELEE
+  additional = true
+}
+
+export class Quagsire extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.GROUND])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 190
+  atk = 15
+  speed = 31
+  def = 15
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.MUD_SHOT
+  attackSprite = AttackSprite.WATER_MELEE
+  additional = true
+}
+
 export class PaldeaWooper extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.POISON,
@@ -14913,6 +14946,7 @@ export class PaldeaWooper extends Pokemon {
   range = 1
   skill = Ability.RECOVER
   attackSprite = AttackSprite.POISON_MELEE
+  additional = true
   regional = true
 }
 
@@ -14933,6 +14967,7 @@ export class Clodsire extends Pokemon {
   range = 1
   skill = Ability.RECOVER
   attackSprite = AttackSprite.POISON_MELEE
+  additional = true
   regional = true
 }
 
@@ -18412,6 +18447,8 @@ export const PokemonClasses: Record<
   [Pkm.WORMADAM_SANDY]: WormadamSandy,
   [Pkm.WORMADAM_TRASH]: WormadamTrash,
   [Pkm.MOTHIM]: Mothim,
+  [Pkm.WOOPER]: Wooper,
+  [Pkm.QUAGSIRE]: Quagsire,
   [Pkm.PALDEA_WOOPER]: PaldeaWooper,
   [Pkm.CLODSIRE]: Clodsire,
   [Pkm.FUECOCO]: Fuecoco,
