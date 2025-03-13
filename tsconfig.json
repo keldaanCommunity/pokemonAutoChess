@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "./app/public/dist/server",
     "module": "commonjs",
-    "lib": ["es2022", "DOM"],
+    "lib": ["es2023", "DOM"],
     "target": "es2016",
     "declaration": true,
     "removeComments": true,
