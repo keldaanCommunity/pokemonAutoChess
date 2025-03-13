@@ -6770,7 +6770,7 @@ export class Jirachi extends Pokemon {
   speed = 57
   def = 10
   speDef = 10
-  maxPP = 100
+  maxPP = 80
   range = 3
   skill = Ability.DOOM_DESIRE
   passive = Passive.GOOD_LUCK

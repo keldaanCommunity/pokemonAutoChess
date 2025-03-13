@@ -72,7 +72,7 @@
 - Nerfed Obstruct (Obstagoon): Protect duration 1/2/4 → 1/2/3 seconds
 - Nerfed Celebi HP 300 → 250
 - Nerfed Wishiwashi: HP 100 → 50
-- Buff Jirachi: revert again Doom desire PP from 5.9 ~~60~~ 100 PP if target is KO in the mean time (my bad)
+- Buff Jirachi: PP 100 → 80. Reduce ability cooldowwn to 200ms at 50 speed.
 - Buff Keldeo: PP 100 → 80
 - Buff Octillery; PP 100 → 80, Oktzooka: 150 → 300% of attack as special damage
 - Nerf Aegislash: PP 80 → 100
