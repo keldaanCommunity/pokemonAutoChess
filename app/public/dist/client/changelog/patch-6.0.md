@@ -51,7 +51,6 @@
 - Nerf Teatime (Polteageist): healing 20/40/80 → 15/30/60
 - Buff Houndour line: PP 125 → 110
 - Buff Topsy Turvy (Inkay): also reverse AP buffs
-- Nerf Inteleon: Snipe shot damage 40/80/160 → 40/80/120
 - Nerf Gastly line: PP 60 → 80
 - Nerf Stantler: HP 200 → 180, Def/Spedef: 5 → 3 (6 post def/spedef stat change)
 - Nerf Miltank: HP 250 → 200
@@ -94,7 +93,7 @@
 - Nerf Amorphous 3 & 5 : 4/8 → 3/6 HP per active synergy
 - Nerf Artificial 4 & 6: 8/15 → 6/12 attack, AP and shield per held item
 - Fire burn chance on attacks now inflicts Burn for ~~2~~ 3 seconds
-- Wild now have ~~25~~ 30% chance to inflict Wound **only when synergy active**
+- Wild now have a chance to inflict Wound **only when synergy active**
 - Ghost now gets dodge chance and chance to inflict Silence on hit **only when synergy active**
 
 # Changes to Items
