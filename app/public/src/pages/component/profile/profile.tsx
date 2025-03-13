@@ -17,13 +17,14 @@ import {
 } from "../../../stores/NetworkStore"
 import { AvatarTab } from "./avatar-tab"
 import { GadgetsTab } from "./gadgets-tab"
-import History from "./history"
+import GameHistory from "./game-history"
+import { ProfileChatHistory } from "./profile-chat-history"
 import { NameTab } from "./name-tab"
 import PlayerBox from "./player-box"
-import "./profile.css"
 import { SearchBar } from "./search-bar"
 import SearchResults from "./search-results"
 import { TitleTab } from "./title-tab"
+import "./profile.css"
 
 export default function Profile() {
   const { t } = useTranslation()
@@ -34,6 +35,7 @@ export default function Profile() {
 
   const profile = searchedUser ?? user
   const [gameHistory, setGameHistory] = useState<IGameRecord[]>([])
+  const [rightPanel, setRightPanel] = useState<"chat" | "game">("game")
 
   function onSearchQueryChange(query: string) {
     if (query) {
@@ -63,13 +65,14 @@ export default function Profile() {
         {suggestions.length > 0 ? (
           <SearchResults />
         ) : searchedUser ? (
-          <OtherProfileActions resetSearch={resetSearch} />
+          <OtherProfileActions rightPanel={rightPanel} setRightPanel={setRightPanel} />
         ) : (
           <MyProfileMenu />
         )}
       </div>
 
-      {profile && <History uid={profile.uid} onUpdate={setGameHistory} />}
+      {rightPanel === "game" && profile && <GameHistory uid={profile.uid} onUpdate={setGameHistory} />}
+      {rightPanel === "chat" && profile && <ProfileChatHistory uid={profile.uid} />}
     </div>
   )
 }
@@ -101,7 +104,10 @@ function MyProfileMenu() {
   )
 }
 
-function OtherProfileActions() {
+function OtherProfileActions(props: {
+  rightPanel: "game" | "chat",
+  setRightPanel: React.Dispatch<React.SetStateAction<"game" | "chat">>
+}) {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const currentUid = useAppSelector((state) => state.network.profile?.uid)
@@ -160,6 +166,30 @@ function OtherProfileActions() {
         }}
       >
         {t("unban_user")}
+      </button>
+    ) : null
+
+  const chatHistoryButton =
+    user && role && (role === Role.ADMIN || role === Role.MODERATOR) ? (
+      <button
+        className="bubbly blue"
+        onClick={() => {
+          props.setRightPanel("chat")
+        }}
+      >
+        {t("see_chat_history")}
+      </button>
+    ) : null
+
+  const gameHistoryButton =
+    user && role && (role === Role.ADMIN || role === Role.MODERATOR) ? (
+      <button
+        className="bubbly blue"
+        onClick={() => {
+          props.setRightPanel("game")
+        }}
+      >
+        {t("see_game_history")}
       </button>
     ) : null
 
@@ -224,6 +254,7 @@ function OtherProfileActions() {
       {roleButton}
       {titleButton}
       {user?.banned ? unbanButton : banButton}
+      {props.rightPanel === "game" ? chatHistoryButton : gameHistoryButton}
       {currentUid && user && user.uid !== currentUid && <button className="bubbly blue" onClick={() => dispatch(searchById(currentUid))}>
         {t("back_to_my_profile")}
       </button>}

@@ -39,6 +39,7 @@ import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Item } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
 import { logger } from "./utils/logger"
+import chatV2 from "./models/mongo-models/chat-v2"
 
 const clientSrc = __dirname.includes("server")
   ? path.join(__dirname, "..", "..", "client")
@@ -284,6 +285,20 @@ export default config({
 
       // If no records found, return an empty array
       return res.status(200).json([])
+    })
+
+    app.get("/chat-history/:playerUid", async (req, res) => {
+      res.set("Cache-Control", "no-cache")
+      const { playerUid } = req.params
+      const { page = 1 } = req.query
+      const limit = 30
+      const skip = (Number(page) - 1) * limit
+      const messages = await chatV2.find({ authorId: playerUid }, undefined, {
+        limit: limit,
+        skip: skip,
+        sort: { time: -1 }
+      })
+      return res.status(200).json(messages ?? [])
     })
 
     app.get("/bots", async (req, res) => {

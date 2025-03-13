@@ -13,9 +13,9 @@ import { formatDate } from "../../utils/date"
 import Team from "../after/team"
 import SynergyIcon from "../icons/synergy-icon"
 import { EloBadge } from "./elo-badge"
-import "./history.css"
+import "./game-history.css"
 
-export default function History(props: { uid: string, onUpdate?: (history: IGameRecord[]) => void }) {
+export default function GameHistory(props: { uid: string, onUpdate?: (history: IGameRecord[]) => void }) {
   const { t } = useTranslation();
   const [gameHistory, setGameHistory] = useState<IGameRecord[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
