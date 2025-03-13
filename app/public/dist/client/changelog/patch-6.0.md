@@ -66,6 +66,8 @@
 - Buff Unown-N: Shield provided to your team now scales with Unown AP
 - Nerf Cryogonal: PP 95 → 100, Freeze dry: remove AP scaling on the special defense part of the damage, explosive damage 40 + 150% spedef → 30 + 100% spe def
 - Nerf Alolan Raichu: back to tier 3, gets the same stats as Raichu but keeps the additional psychic synergy
+- Nerf Nuzzle (Pichu line): paralysis duration 3/4/5 → 3 seconds at all tiers
+- Nerf Hurricane paralysis duration 4 → 3 seconds
 - Change HyperSpace Fury: now also reduces special defense evert hit
 - Changed Heavy Slam (Aggron): Shield 10/20/40 → 15/30/60, remove AP scaling
 - Buff Concrete Pillar (Conkeldurr) HP 300 → 400
@@ -87,6 +89,7 @@
 - New ability for Rotom: Charge: until the end of the fight, attacks deal 100% additional special damage (stackable)
 - Nerf Rotom Drone: PP 50 → 80
 - New ability for Nidoran male line: Horn attack: deal 3/4/5x Attack as special damage and Armor break for 8 seconds
+- New ability for Seedot line: Razor leaf: Throw sharp leafs in a line behind the target. All enemies hit take 20/40/80 special damage. Can crit by default.
 - Change Razor Wind (Noibat, Farfetch'd): no longer inflict paralysis not hit adjacent units. Now can crit by default. Noivern line PP 100 → 70
 
 # Changes to Synergies
@@ -125,6 +128,7 @@
 - PVE rewards from stage 24 onwards now propose 1 synergy stone maximum
 - Regular item carousels now propose 4 synergy stones maximum
 - Weather Windy and Snow now impacts speed instead of movement speed
+- Paralysis status now reduces speed by 50 instead of 40
 
 # UI
 

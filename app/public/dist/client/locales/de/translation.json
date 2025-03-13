@@ -90,7 +90,6 @@
     "TORMENT": "Folterknecht",
     "STOMP": "Stampfer",
     "HORN_DRILL": "Hornbohrer",
-    "PAYBACK": "Gegenstoß",
     "NIGHT_SLASH": "Nachthieb",
     "BUG_BUZZ": "Käfergebrumm",
     "STRING_SHOT": "Fadenschuss",
@@ -1372,7 +1371,7 @@
     "HYPER_VOICE": "Fügt allen gegnerischen Pokémon in derselben Reihe [25,50,100,SP] SPECIAL zu und hat eine Chance von [30,LK@]%, für [1,2,3] Sekunden CONFUSION zu verursachen.",
     "SHADOW_CLONE": "Beschwört einen Klon mit [50,SP]% der maximalen HP des Anwenders. Der Klon stiehlt einen zufälligen Gegenstand vom Ziel.",
     "VOLT_SWITCH": "Stürmt in die gegnerische Rücklinie und fügt allen gegnerischen Pokémon auf dem Weg [25,50,100,SP] SPECIAL zu.",
-    "NUZZLE": "Springt zum entferntesten Gegner, verursacht [30,60,120,SP] SPECIAL und fügt ihm für [3,4,5] Sekunden PARALYSIS zu.",
+    "NUZZLE": "Springt zum entferntesten Gegner, verursacht [30,60,120,SP] SPECIAL und fügt ihm für 3 Sekunden PARALYSIS zu.",
     "LIQUIDATION": "Verursacht [20,40,80,SP] SPECIAL und reduziert die DEF vom Ziel um [4,8,16,SP].",
     "BURN": "Fügt dem gesamten gegnerischen Team für [5,10,20] Sekunden BURN zu.",
     "POISON": "Fügt [1,2,3,] nahegelegenen gegnerischen Pokémon für [3,6,9,SP=0.5] Sekunden POISONNED zu.",
@@ -1413,7 +1412,6 @@
     "TORMENT": "Erhöhe SPEED um [20,40,60,SP]",
     "STOMP": "Attacke, die [3,4,5,SP] x ATK SPECIAL am Ziel verursacht",
     "HORN_DRILL": "Verursacht [3,4,5,SP] x ATK als SPECIAL, mit einer Trefferchance von [30,LK]%. Je mehr ATK der Anwender als das Ziel hat, desto höher die Chance.",
-    "PAYBACK": "Verursacht [15,30,60,SP] SPECIAL. Doppelter Schaden, wenn der Benutzer weniger als die Hälfte seines Lebens hat.",
     "SHADOW_BALL": "Attacke, die [30,60,100,SP] SPECIAL am Ziel verursacht. Verringert die SPE_DEF aller Feinde um 2 Punkt",
     "BUG_BUZZ": "Attacke, die [20,40,80,SP] SPECIAL am Ziel verursacht. Doppelter Schaden, wenn das Ziel PARALYSIS ist",
     "STRING_SHOT": "Attacke, die [10,20,50,SP] SPECIAL am Ziel verursacht und 5 Sekunden lang PARALYSIS beim getroffnen Pokemon bewirkt",
@@ -1426,7 +1424,7 @@
     "THIEF": "Stiehlt alle Gegenstände des Ziels, die der Träger tragen kann, und verteilt [15,30,60,SP] SPECIAL",
     "STUN_SPORE": "Verursacht [15,30,60,SP] SPECIAL und fügt benachbarten Feinden 5 Sekunden lang PARALYSIS zu",
     "METEOR_MASH": "Verursacht dem Ziel dreimal [15,30,60,SP] SPECIAL und verbessere die ATK des Benutzers um [2,SP]",
-    "HURRICANE": "Flächenangriff, der [25,50,100,SP] SPECIAL in einer Linie hinter dem Ziel verursacht und 4 Sekunden lang PARALYSIS bewirkt",
+    "HURRICANE": "Flächenangriff, der [25,50,100,SP] SPECIAL in einer Linie hinter dem Ziel verursacht und 3 Sekunden lang PARALYSIS bewirkt",
     "HEAL_BLOCK": "Füge allen umstehenden Feinden [10,20,40,SP] SPECIAL und 5 Sekunden lang WOUND zu",
     "ROAR_OF_TIME": "Gib deinem stärksten Verbündeten RESURECTION und [20,SP] SPEED (die meisten Gegenstände > die meisten Sterne > die seltensten)",
     "ROCK_TOMB": "Attacke, die [30,60,120,SP] SPECIAL am Ziel verursacht und die SPEED des Ziels um [10,20,40] verringert",
@@ -2435,7 +2433,7 @@
     "WOUND": "Verhindert jegliche Regeneration der HP.",
     "RAGE": "Doppelter Schaden und Geschwindigkeit, halber Schild, Heilung, Einfrieren und Schlafdauer, Verlust von PROTECT. Alle Einheiten werden nach 35 Sekunden Kampf RAGE.",
     "RESURECTION": "Das Pokémon wird bei KO einmal mit vollen HP wiederbelebt.",
-    "PARALYSIS": "SPEED und Bewegungsgeschwindigkeit um 40 % reduzieren",
+    "PARALYSIS": "SPEED und Bewegungsgeschwindigkeit um 50 reduzieren",
     "POKERUS": "Alle 2.5 Sekunden erhältst du 1 ATK und 10 AP, bevor du 2 benachbarte Verbündete mit POKERUS infizierst.",
     "ARMOR_BREAK": "Reduzieren Sie DEF und SPE_DEF um 50 %",
     "CHARM": "Verhindert den Angriff auf das Ziel und zwingt dazu, sich ihm zu nähern",
@@ -3330,9 +3328,6 @@
     "CROWDED": "+3 max. Pokémon auf dem Feld",
     "FREE_MARKET": "Pokemon werden für 0 GOLD gekauft und verkauft",
     "SHINY_HUNTER": "Alle wilden PvE Begegnungen sind Schillernd"
-  },
-  "town_encounter": {
-    "KECLEON": "Kecleon's Shop"
   },
   "town_encounter_description": {},
   "loading_hints": {

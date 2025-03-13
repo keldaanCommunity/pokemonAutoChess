@@ -89,7 +89,6 @@
     "TORMENT": "Tormento",
     "STOMP": "Pisotón",
     "HORN_DRILL": "Perforador",
-    "PAYBACK": "Vendetta",
     "NIGHT_SLASH": "Tajo Umbrío",
     "BUG_BUZZ": "Zumbido",
     "STRING_SHOT": "Disparo Demora",
@@ -1353,7 +1352,7 @@
     "HYPER_VOICE": "Inflige [25,50,100,SP] SPECIAL a todos los Pokémon enemigos en la fila del objetivo y causa [30,LK@]% CONFUSION durante [1,2,3] segundos",
     "SHADOW_CLONE": "Crea un clon con el [50,SP]% de tus HP máximos. El clon roba un objeto aleatorio de tu objetivo actual.",
     "VOLT_SWITCH": "Se cuela en la retaguardia enemiga e inflige [25,50,100,SP] de SPECIAL",
-    "NUZZLE": "Avanza hacia el enemigo mas lejano, infligiendo [30,60,120,SP] de SPECIAL y causándole PARALYSIS durante [3,4,5] segundos",
+    "NUZZLE": "Avanza hacia el enemigo mas lejano, infligiendo [30,60,120,SP] de SPECIAL y causándole PARALYSIS durante 3 segundos",
     "LIQUIDATION": "Inflige [20,40,80,SP] de SPECIAL y reduce en [4,8,16,SP] la DEF del objetivo",
     "BURN": "Causa BURN a todo el equipo enemigo durante [5,10,20] segundos",
     "POISON": "Aplica POISONNED a [1,2,3] oponentes más cercanos por [3,6,9,SP=0.5] segundos",
@@ -1393,7 +1392,6 @@
     "TORMENT": "Aumenta la SPEED en [20,40,60,SP]",
     "STOMP": "Inflige SPECIAL a un objetivo igual a [3,4,5,SP] x ATK",
     "HORN_DRILL": "Inflige [3,4,5,SP] x ATK como SPECIAL al objetivo, con un [30,LK]% de ejecutarlo. Mientras más ATK tenga el usuario en relación al objetivo, mayor es la probabilidad.",
-    "PAYBACK": "Inflige [15,30,60,SP] de SPECIAL al objetivo. Daña el doble si el usuario tiene menos de la mitad de su vida.",
     "SHADOW_BALL": "Inflige [30,60,100,SP] de SPECIAL al objetivo y disminuye la SPE_DEF de todos los enemigos en 2",
     "BUG_BUZZ": "Inflige [20,40,80,SP] de SPECIAL al objetivo. Si este está PARALYSIS, recibe el doble de daño",
     "STRING_SHOT": "Inflige [10,20,50,SP] de SPECIAL al objetivo y lo deja PARALYSIS por 5 segundos",
@@ -1406,7 +1404,7 @@
     "THIEF": "Roba tantos objetos del oponente como pueda equipar e inflige [15,30,60,SP] de SPECIAL",
     "STUN_SPORE": "Inflige [15,30,60,SP] de SPECIAL y deja PARALYSIS por 5 segundos al objetivo y a los enemigos adyacentes",
     "METEOR_MASH": "Inflige [15,30,60,SP] de SPECIAL al objetivo 3 veces y mejora el ATK del usuario en [2,SP]",
-    "HURRICANE": "Inflige [25,50,100,SP] de SPECIAL a todos los enemigos alrededor del objetivo y los deja PARALYSIS por 4 segundos",
+    "HURRICANE": "Inflige [25,50,100,SP] de SPECIAL a todos los enemigos alrededor del objetivo y los deja PARALYSIS por 3 segundos",
     "HEAL_BLOCK": "Inflige [20,40,80,SP] de SPECIAL y deja WOUND a todos los enemigos adyacentes por 5 segundos",
     "ROAR_OF_TIME": "Otorga RESURECTION y [20,SP] SPEED a tu aliado más fuerte (mayoría de objetos > mayoría de estrellas > más raro)",
     "ROCK_TOMB": "Inflige [30,60,120,SP] de SPECIAL al objetivo y reduce su SPEED en un [10,20,40]",
@@ -2428,7 +2426,7 @@
     "WOUND": "Previene la curación de cualquier fuente",
     "RAGE": "Doble daño y velocidad. El escudo, la curación, y la duración de FREEZE y SLEEP se reducen a la mitad. pierde PROTECT. Todas las unidades se vuelven RAGE después de 35 segundos de pelea.",
     "RESURECTION": "Previene KO una vez, restaurando al máximo HP",
-    "PARALYSIS": "Reduce el SPEED y la velocidad de movimiento un 40, impide esquivar ataques",
+    "PARALYSIS": "Reduce el SPEED un 50, impide esquivar ataques",
     "POKERUS": "Cada 2.5 segundos, obtiene 1 ATK y 10 AP antes de infectar a 2 aliados adyacentes con POKERUS",
     "ARMOR_BREAK": "Reduce la DEF y la SPE_DEF en un 50%",
     "CHARM": "Impide atacar al objetivo y obliga a acercarse a él.",
@@ -3364,9 +3362,6 @@
     "FIRST_PARTNER": "Elige a tu Pokémon inicial. Obtendrás una copia de esta unidad en cada escenario hasta el escenario 10.",
     "SLAMINGO": "Todos los objetos caen cuando un Pokémon es colocado en la banca. Comienzas con 4 componentes aleatorios",
     "BLOOD_MONEY": "Cada KO otorga 1 GOLD. No se obtiene dinero adicional del interés. "
-  },
-  "town_encounter": {
-    "KECLEON": "Tienda de Kecleon"
   },
   "town_encounter_description": {},
   "loading_hints": {

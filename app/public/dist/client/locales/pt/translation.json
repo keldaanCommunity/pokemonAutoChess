@@ -84,7 +84,6 @@
     "ROOT": "Enraizar",
     "TORMENT": "Atormentar",
     "STOMP": "Pisão",
-    "PAYBACK": "Retaliação",
     "NIGHT_SLASH": "Corte Noturno",
     "BUG_BUZZ": "Zumbido",
     "STRING_SHOT": "Tiro de Teia",
@@ -1166,7 +1165,7 @@
     "HYPER_VOICE": "Inflige [25,50,100,SP] SPECIAL a todos os Pokémon inimigos na linha do alvo e [30,LK@]% deixe-os CONFUSION por [1,2,3] segundos",
     "SHADOW_CLONE": "Cria um clone com [50,SP]% do HP máximo. O clone rouba um item aleatório do seu alvo atual.",
     "VOLT_SWITCH": "Corra para a retaguarda inimiga, causando [25,50,100,SP] SPECIAL",
-    "NUZZLE": "Corre ao inimigo mais longe, causando [30,60,120,SP] SPECIAL e causando PARALISIA por [3,4,5] segundos",
+    "NUZZLE": "Corre ao inimigo mais longe, causando [30,60,120,SP] SPECIAL e causando PARALISIA por 3 segundos",
     "LIQUIDATION": "Inflige [20,40,80,SP] SPECIAL e remove [4,8,16,SP] DEF do alvo",
     "BURN": "QUEIME todo o time inimigo por [5,10,20] segundos",
     "POISON": "Aplique POISONNED em [1,2,3] oponentes mais próximos por [3,6,9,SP=0.5] segundos",
@@ -1201,7 +1200,6 @@
     "ICICLE_CRASH": "Ataque de área de efeito que causa [20,40,80,SP] SPECIAL ao redor do alvo",
     "TORMENT": "Aumente SPEED em [20,40,60,SP]",
     "STOMP": "Alvo mono que lida [3,4,5,SP] x ATK SPECIAL",
-    "PAYBACK": "Inflige [15,30,60,SP] SPECIAL para o alvo. Dano duplo se o usuário tiver menos da metade de sua vida.",
     "SHADOW_BALL": "Ataque de alvo único que faz [30,60,100,SP] SPECIAL. Diminui a SPE_DEF de todos os inimigos em 2 ponto",
     "BUG_BUZZ": "Ataque de alvo mono que faz [20,40,80,SP] SPECIAL. Dano dobrado se o alvo estiver PARALYSIS",
     "STRING_SHOT": "Ataque de alvo mono que faz [10,20,50,SP] SPECIAL e causa PARALYSIS por 5 segundos",
@@ -1214,7 +1212,7 @@
     "THIEF": "Rouba todos os itens do alvo que o portador pode carregar e distribui [15,30,60,SP] SPECIAL",
     "STUN_SPORE": "Inflige [15,30,60,SP] SPECIAL e inflige PARALYSIS por 5 segundos a inimigos adjacentes",
     "METEOR_MASH": "Inflige 3 vezes [15,30,60,SP] SPECIAL ao alvo e aumente o ATK do usuário em [2,SP]",
-    "HURRICANE": "Ataque de área de efeito que causa [25,50,100,SP] SPECIAL em uma linha atrás do alvo e causa PARALYSIS por 4 segundos",
+    "HURRICANE": "Ataque de área de efeito que causa [25,50,100,SP] SPECIAL em uma linha atrás do alvo e causa PARALYSIS por 3 segundos",
     "HEAL_BLOCK": "Inflige [20,40,80,SP] SPECIAL e aplique WOUND a todos os inimigos adjacentes por 5 segundos",
     "ROAR_OF_TIME": "Dê RESURECTION e [20,SP] SPEED ao seu aliado mais forte (mais itens > mais estrelas > mais raros)",
     "ROCK_TOMB": "Ataque de alvo mono que causa [30,60,120,SP] SPECIAL e diminui o SPEED do alvo em [10,20,40]",
@@ -1885,7 +1883,7 @@
     "CONFUSION": "Força para mudar de alvo o tempo todo e às vezes causa dano a si mesmo",
     "WOUND": "Impede a cura de qualquer fonte",
     "RESURECTION": "Previne KO uma vez, restaurando o HP máximo",
-    "PARALYSIS": "Reduz SPEED e a velocidade de movimento em 40, impede a esquiva de ataques",
+    "PARALYSIS": "Reduz SPEED em 50, impede a esquiva de ataques",
     "ARMOR_BREAK": "Reduz DEF e SPE_DEF em 50%",
     "CHARM": "Impede atacar o alvo e força a aproximação dele",
     "RUNE_PROTECT": "Protege de alterações de status",
@@ -2539,9 +2537,6 @@
     "GOTTA_CATCH_EM_ALL": "Alguns pokémon podem ser capturados antes de cada ronda PvE",
     "BUYER_FEVER": "A loja de evoluções é grátis",
     "CROWDED": "+3 unidades máximas no tabuleiro"
-  },
-  "town_encounter": {
-    "KECLEON": "Loja do Kecleon"
   },
   "town_encounter_description": {},
   "loading_hints": {

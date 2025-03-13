@@ -85,7 +85,6 @@
     "ROOT": "Radice",
     "TORMENT": "Attaccalite",
     "STOMP": "Pestone",
-    "PAYBACK": "Rivincita",
     "NIGHT_SLASH": "Nottesferza",
     "BUG_BUZZ": "Ronzio",
     "STRING_SHOT": "Millebave",
@@ -1305,7 +1304,7 @@
     "HYPER_VOICE": "Infligge [25,50,100,SP] SPECIAL a tutti i Pokémon nemici nella fila del bersaglio e infliggili [30,LK@]% CONFUSION per [1,2,3] secondi",
     "SHADOW_CLONE": "Crea un clone con il [50,SP]% degli HP massimi. Il clone ruba un oggetto a caso al bersaglio attuale.",
     "VOLT_SWITCH": "Scatta nelle retrovie nemiche, infliggendo [25,50,100,SP] SPECIAL a tutti i Pokèmon nemici colpiti",
-    "NUZZLE": "Scatta verso il Pokèmon nemico più lontano, infliggendo [30,60,120,SP] SPECIAL e infliggili PARALYSIS per [3,4,5] secondi.",
+    "NUZZLE": "Scatta verso il Pokèmon nemico più lontano, infliggendo [30,60,120,SP] SPECIAL e infliggili PARALYSIS per 3 secondi.",
     "LIQUIDATION": "Infligge [20,40,80,SP] SPECIAL e riduce di [4,8,16,SP] la DEF dal bersaglio.",
     "BURN": "Infligge BURN l'intera squadra Pokèmon nemica per [5,10,20] secondi.",
     "POISON": "Infligge POISONNED a [1,2,3] Pokèmon nemici più vicini per [3,6,9,SP=0.5] secondi.",
@@ -1344,7 +1343,6 @@
     "ROOT": "Tutti i nemici adiacenti subiscono LOCKED per 4 secondi e gli vengono inflitti [15,30,60,SP] SPECIAL ogni volta che l'utilizzatore e gli alleati adiacenti vengono curati di [15,30,60,SP] HP",
     "TORMENT": "Potenzia l' SPEED del [20,40,60,SP].",
     "STOMP": "Infligge SPECIAL uguale a [3,4,5,SP] moltiplicato per l' ATK  dell'utilizzatore.",
-    "PAYBACK": "Infligge [15,30,60,SP] SPECIAL. Il danno raddoppia se l'utilizzatore ha meno della metà dei suoi punti salute.",
     "SHADOW_BALL": "Infligge [30,60,100,SP] SPECIAL. Diminuisce la SPE_DEF di tutti i Pokèmon nemici di 2.",
     "BUG_BUZZ": "Infliggi [20,40,80,SP] SPECIAL. Il danno raddoppia se il bersaglio ha lo status PARALYSIS.",
     "STRING_SHOT": "Infliggi [10,20,50,SP] SPECIAL e infliggi PARALYSIS al bersaglio per 5 secondi.",
@@ -1357,7 +1355,7 @@
     "THIEF": "Ruba tutti gli oggetti del bersaglio che l'utilizzatore può trasportare e infligge [15,30,60,SP] SPECIAL.",
     "STUN_SPORE": "Infliggi [15,30,60,SP] SPECIAL e causa PARALYSIS per 5 secondi al bersaglio ed ai Pokèmon nemici adiacenti.",
     "METEOR_MASH": "Infliggi [15,30,60,SP] SPECIAL al bersaglio 3 volte  e potenzia l'ATK dell'utilizzatore di [2,SP].",
-    "HURRICANE": "Infliggi [25,50,100,SP] SPECIAL a tutti i Pokèmon nemici dietro il bersaglio e infliggi loro PARALYSIS per 4 secondi.",
+    "HURRICANE": "Infliggi [25,50,100,SP] SPECIAL a tutti i Pokèmon nemici dietro il bersaglio e infliggi loro PARALYSIS per 3 secondi.",
     "HEAL_BLOCK": "Infliggi [20,40,80,SP] SPECIAL e applica WOUND a tutti i Pokèmon nemici adiacenti per 5 secondi.",
     "ROAR_OF_TIME": "Dai RESURECTION e [20,SP] SPEED al tuo Pokèmon alleato più forte (chi ha più oggetti > chi ha più stelle > chi è il più raro).",
     "ROCK_TOMB": "Infliggi [30,60,120,SP] SPECIAL e riduce la SPEED al bersaglio del [10,20,40].",
@@ -2336,7 +2334,7 @@
     "WOUND": "Previene le cure da qualsiasi tipo di fonte",
     "RAGE": "Raddoppia il danno e la velocità, ma dimezza lo scudo, le cure, la durata di congelamento e sonno, e perde lo status PROTECT. Tutte le unità ottengono lo status RAGE dopo 35 secondi di battaglia.",
     "RESURECTION": "Previene il KO una volta, ripristinando gli HP massimi",
-    "PARALYSIS": "Riduce la SPEED e la velocità di movimento del 40% ed impedisce di schivare gli attacchi.",
+    "PARALYSIS": "Riduce la SPEED del 50% ed impedisce di schivare gli attacchi.",
     "POKERUS": "Ogni 2.5 secondi, guadagna 1 di ATK e 10% di AP prima di infettare 2 alleati adiacenti con POKERUS",
     "ARMOR_BREAK": "Riduci DEF e SPE_DEF del 50%",
     "CHARM": "Impedisce di attaccare il bersaglio e costringe ad avvicinarsi ad esso",
@@ -3267,9 +3265,6 @@
     "DO_IT_ALL_YOURSELF": "Inizia con una copia del tuo avatar con +100 di HP massimi e più oro se il tuo avatar è di una rarità bassa.",
     "FIRST_PARTNER": "Scegli il tuo Pokèmon starter. Ne otterrai una copia ogni livello fino al livello 10.",
     "SLAMINGO": "Tutti gli oggetti vengono rimossi dal Pokèmon se viene messo in panchina. Inizia con 4 componenti casuali."
-  },
-  "town_encounter": {
-    "KECLEON": "Negozio di Kecleon"
   },
   "town_encounter_description": {},
   "loading_hints": {

@@ -91,7 +91,6 @@
     "TORMENT": "Tourmente",
     "STOMP": "Écrasement",
     "HORN_DRILL": "Empal'Korne",
-    "PAYBACK": "Représailles",
     "NIGHT_SLASH": "Tranche-Nuit",
     "BUG_BUZZ": "Bourdon",
     "STRING_SHOT": "Sécrétion",
@@ -1368,7 +1367,7 @@
     "HYPER_VOICE": "Inflige [25,50,100,SP] SPECIAL et a [30,LK@]% de chance de causer CONFUSION pendant [1,2,3] secondes aux ennemis sur la même rangée que la cible",
     "SHADOW_CLONE": "Crée un clone avec [50,SP]% de HP max. Ce clone vole un objet de votre cible actuelle.",
     "VOLT_SWITCH": "Traverse les défenses ennemis, infligeant [25,50,100,SP] SPECIAL",
-    "NUZZLE": "Fonce vers l'adversaire le plus loin et lui inflige [30,60,120,SP] SPECIAL ainsi que PARALYSIS pendant [3,4,5] secondes",
+    "NUZZLE": "Fonce vers l'adversaire le plus loin et lui inflige [30,60,120,SP] SPECIAL ainsi que PARALYSIS pendant 3 secondes",
     "LIQUIDATION": "Inflige [20,40,80,SP] SPECIAL et retire [4,8,16,SP] DEF de la cible",
     "BURN": "Inflige BURN à toute l'équipe adverse pendant [5,10,20] secondes",
     "POISON": "Inflige POISONNED aux [1,2,3] adversaires les plus proches pendant [3,6,9,SP=0.5] secondes",
@@ -1410,7 +1409,6 @@
     "TORMENT": "Augmente la SPEED de [20,40,60,SP]",
     "STOMP": "Inflige [3,4,5,SP] x ATK SPECIAL à la cible",
     "HORN_DRILL": "Inflige [3,4,5,SP] x ATK en SPECIAL à la cible, avec [30,LK]% de chance de l'exécuter. Plus le lanceur a une ATK élevée par rapport à sa cible, plus la chance est élevée.",
-    "PAYBACK": "Inflige [15,30,60,SP] SPECIAL. Double les dégâts si le lanceur a moins de la moitié de sa vie.",
     "SHADOW_BALL": "Inflige [30,60,100,SP] SPECIAL à la cible. Diminue la SPE_DEF de tous les ennemis de 2",
     "BUG_BUZZ": "Attaque à cible unique infligeant [20,40,80,SP] SPECIAL. Dégâts doublés si la cible a PARALYSIS",
     "STRING_SHOT": "Attaque à cible unique infligeant [10,20,50,SP] SPECIAL et PARALYSIS pendant 5 secondes",
@@ -1423,7 +1421,7 @@
     "THIEF": "Vole tous les objets de la cible que le porteur peut porter et inflige [15,30,60,SP] SPECIAL",
     "STUN_SPORE": "Inflige [15,30,60,SP] SPECIAL et PARALYSIS pendant 5 secondes aux ennemis adjacents",
     "METEOR_MASH": "Inflige 3 fois [15,30,60,SP] SPECIAL à la cible et augmente l'ATK du lanceur de [2,SP]",
-    "HURRICANE": "Attaque à effet de zone qui inflige [25,50,100,SP] SPECIAL dans une ligne derrière la cible et rend la PARALYSIS pendant 4 secondes",
+    "HURRICANE": "Attaque à effet de zone qui inflige [25,50,100,SP] SPECIAL dans une ligne derrière la cible et rend la PARALYSIS pendant 3 secondes",
     "HEAL_BLOCK": "Inflige [20,40,80,SP] SPECIAL et WOUND pendant 5 secondes à tous les ennemis adjacents",
     "ROAR_OF_TIME": "Donne RESURECTION et [20,SP] SPEED à votre allié le plus fort (le plus d'objets > le plus d'étoiles > le plus rare)",
     "ROCK_TOMB": "Inflige à la cible [30,60,120,SP] SPECIAL et réduit sa SPEED de [10,20,40]",
@@ -2468,7 +2466,7 @@
     "WOUND": "Empêche toute source de soin",
     "RAGE": "Double les dégâts et la vitesse, réduit de moitié les boucliers, soins, durées de gel et sommeil, retire PROTECT. Toutes les unités deviennent RAGE après 35 secondes de combat.",
     "RESURECTION": "Empêche de tomber KO une fois, restaurant au maximum des HP",
-    "PARALYSIS": "Réduit la SPEED de 40. Ne peut plus esquiver les attaques.",
+    "PARALYSIS": "Réduit la SPEED de 50. Ne peut plus esquiver les attaques.",
     "POKERUS": "Toutes les 2,5 secondes, gagnez 1 ATK et 10 AP avant d'infecter 2 alliés adjacents avec le POKERUS",
     "ARMOR_BREAK": "Réduit la DEF et SPE_DEF de 50 %",
     "CHARM": "Empêche d'attaquer la cible et force à s'en rapprocher",
@@ -3414,9 +3412,6 @@
     "SLAMINGO": "Tous les objets sont lâchés lorsqu'un Pokémon est placé sur le banc. Commence avec 4 composants aléatoires.",
     "BLOOD_MONEY": "Chaque KO donne 1 GOLD. Aucun revenu supplémentaire provenant des intérêts."
   },
-  "town_encounter": {
-    "KECLEON": "Magasin de Kecleon"
-  },
   "town_encounter_description": {
     "KECLEON": "Kecleon vend des pierres synergie pour {{cost}} GOLD",
     "CHANSEY": "Leveinard vend des EGG_FOR_SELL pour {{cost}} GOLD",
@@ -3426,7 +3421,8 @@
     "DUSKULL": "Skelénox augmente votre revenu à long terme pour {{cost}} GOLD",
     "MAROWAK": "Ossatueur rend le prochain combat PvE plus difficile",
     "WOBBUFFET": "Qulbutoke vous propose de recycler un composant ou objet fabriqué",
-    "SPINDA": "Spinda change le sens de rotation du carousel de façon aléatoire"
+    "SPINDA": "Spinda change le sens de rotation du carousel de façon aléatoire",
+    "REGIROCK": "Regirock offre 15 HP supplémentaires à tous les joueurs"
   },
   "loading_hints": {
     "tab_out": "Ne changez pas d'onglet ! Le chargement est mis en pause si cette fenêtre est inactive.",
