@@ -295,7 +295,11 @@ export class MiniGame {
         TownEncountersByStage[stageLevel],
         state.specialGameRule === SpecialGameRule.TOWN_FESTIVAL ? undefined : 1
       )
-      if (encounter != null && state.townEncounters.has(encounter)) {
+      if (
+        encounter != null &&
+        state.townEncounters.has(encounter) &&
+        state.specialGameRule !== SpecialGameRule.TOWN_FESTIVAL
+      ) {
         encounter = null // prevent getting the same encounter twice in a gamme
       }
       state.townEncounter = encounter ?? null
