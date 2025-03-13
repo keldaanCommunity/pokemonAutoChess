@@ -72,8 +72,8 @@ export const POWER_SCORE_BY_CATEGORY = {
   "LEGENDARY DUO": 4,
   "SPECIAL T1": 1.5,
   "SPECIAL T2": 3,
-  "SPECIAL T3": 4.5,
-  "SPECIAL T4": 6
+  "SPECIAL T3": 5,
+  "SPECIAL T4": 7
 }
 
 export const POWER_AVERAGES = [

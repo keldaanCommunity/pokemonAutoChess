@@ -1135,18 +1135,9 @@ export class RazorWindStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = pokemon.stars === 3 ? 80 : pokemon.stars === 2 ? 40 : 20
+    crit = chance(pokemon.critChance / 100, pokemon) // can crit by default
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    const cells = board.getAdjacentCells(
-      target.positionX,
-      target.positionY,
-      true
-    )
-    cells.forEach((cell) => {
-      if (cell && cell.value && cell.value.team !== pokemon.team) {
-        cell.value.status.triggerParalysis(7000, cell.value, pokemon)
-      }
-    })
   }
 }
 
@@ -1978,7 +1969,7 @@ export class NuzzleStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
 
     const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
-    const duration = [3000, 4000, 5000][pokemon.stars - 1] ?? 5000
+    const duration = 3000
 
     if (destination) {
       pokemon.targetX = destination.target.positionX
@@ -3535,7 +3526,7 @@ export class SyrupBombStrategy extends AbilityStrategy {
         crit
       )
       highestSpeedEnemy.status.triggerParalysis(
-        2000,
+        3000,
         highestSpeedEnemy,
         pokemon,
         false
@@ -4041,36 +4032,6 @@ export class HornDrillStrategy extends AbilityStrategy {
   }
 }
 
-export class PaybackStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    state: PokemonState,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
-    super.process(pokemon, state, board, target, crit)
-    let damage = 0
-    switch (pokemon.stars) {
-      case 1:
-        damage = 15
-        break
-      case 2:
-        damage = 30
-        break
-      case 3:
-        damage = 60
-        break
-      default:
-        break
-    }
-    if (pokemon.life < 0.5 * pokemon.hp) {
-      damage *= 2
-    }
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-  }
-}
-
 export class ShadowBallStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -4488,7 +4449,7 @@ export class HurricaneStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        cell.value.status.triggerParalysis(4000, cell.value, pokemon)
+        cell.value.status.triggerParalysis(3000, cell.value, pokemon)
       }
     })
   }
@@ -4946,6 +4907,31 @@ export class WaterShurikenStrategy extends AbilityStrategy {
           )
         }
       })
+    })
+  }
+}
+
+export class RazorLeafStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    crit = chance(pokemon.critChance / 100, pokemon) // can crit by default
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    super.process(pokemon, state, board, target, crit)
+    effectInLine(board, pokemon, target, (cell) => {
+      if (cell.value != null && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
     })
   }
 }
@@ -11999,6 +11985,23 @@ export class HornAttackStrategy extends AbilityStrategy {
   }
 }
 
+export class MudShotStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    // The user hurls mud at the target, dealing 25/50/75 damage and reducing their attack speed by 10/20/30%.
+    const damage = [25, 50, 75][pokemon.stars - 1] ?? 75
+    const speedDebuff = [10, 20, 30][pokemon.stars - 1] ?? 30
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.addSpeed(-speedDebuff, pokemon, 1, crit)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -12060,7 +12063,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.TORMENT]: new TormentStrategy(),
   [Ability.STOMP]: new StompStrategy(),
   [Ability.HORN_DRILL]: new HornDrillStrategy(),
-  [Ability.PAYBACK]: new PaybackStrategy(),
   [Ability.NIGHT_SLASH]: new NightSlashStrategy(),
   [Ability.KOWTOW_CLEAVE]: new KowtowCleaveStrategy(),
   [Ability.BUG_BUZZ]: new BugBuzzStrategy(),
@@ -12435,5 +12437,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DECORATE]: new DecorateStrategy(),
   [Ability.DRAGON_CLAW]: new DragonClawStrategy(),
   [Ability.TAILWIND]: new TailwindStrategy(),
-  [Ability.HORN_ATTACK]: new HornAttackStrategy()
+  [Ability.HORN_ATTACK]: new HornAttackStrategy(),
+  [Ability.RAZOR_LEAF]: new RazorLeafStrategy(),
+  [Ability.MUD_SHOT]: new MudShotStrategy()
 }

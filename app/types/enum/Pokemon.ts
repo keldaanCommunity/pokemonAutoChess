@@ -620,6 +620,7 @@ export enum Pkm {
   PUPITAR = "PUPITAR",
   PURRLOIN = "PURRLOIN",
   PYUKUMUKU = "PYUKUMUKU",
+  QUAGSIRE = "QUAGSIRE",
   QUILAVA = "QUILAVA",
   RABOOT = "RABOOT",
   RAICHU = "RAICHU",
@@ -889,6 +890,7 @@ export enum Pkm {
   WISHIWASHI_SCHOOL = "WISHIWASHI_SCHOOL",
   WOBBUFFET = "WOBBUFFET",
   WOOBAT = "WOOBAT",
+  WOOPER = "WOOPER",
   WORMADAM_PLANT = "WORMADAM_PLANT",
   WORMADAM_SANDY = "WORMADAM_SANDY",
   WORMADAM_TRASH = "WORMADAM_TRASH",
@@ -1159,9 +1161,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SUNKERN]: "0191",
   [Pkm.SUNFLORA]: "0192",
   [Pkm.YANMA]: "0193",
-  //[Pkm.WOOPER]: "0194",
+  [Pkm.WOOPER]: "0194",
   [Pkm.PALDEA_WOOPER]: "0194-0002",
-  //[Pkm.QUAGSIRE]: "0195",
+  [Pkm.QUAGSIRE]: "0195",
   [Pkm.ESPEON]: "0196",
   [Pkm.UMBREON]: "0197",
   [Pkm.MURKROW]: "0198",
@@ -2877,6 +2879,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.WORMADAM_SANDY]: Pkm.BURMY_SANDY,
   [Pkm.WORMADAM_TRASH]: Pkm.BURMY_TRASH,
   [Pkm.MOTHIM]: Pkm.BURMY_PLANT, // NOTE: converging evolution
+  [Pkm.WOOPER]: Pkm.WOOPER,
+  [Pkm.QUAGSIRE]: Pkm.WOOPER,
   [Pkm.PALDEA_WOOPER]: Pkm.PALDEA_WOOPER,
   [Pkm.CLODSIRE]: Pkm.PALDEA_WOOPER,
   [Pkm.FUECOCO]: Pkm.FUECOCO,
@@ -3042,6 +3046,7 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.PONYTA]: [Pkm.GALARIAN_PONYTA],
   [Pkm.VOLTORB]: [Pkm.HISUI_VOLTORB],
   [Pkm.SANDSHREW]: [Pkm.ALOLAN_SANDSHREW],
+  [Pkm.WOOPER]: [Pkm.PALDEA_WOOPER],
   [Pkm.FARFETCH_D]: [Pkm.GALARIAN_FARFETCH_D],
   [Pkm.ZIGZAGOON]: [Pkm.GALARIAN_ZIGZAGOON],
   [Pkm.ARTICUNO]: [Pkm.GALARIAN_ARTICUNO],
@@ -7071,6 +7076,16 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Swing,
     emote: AnimationType.Hover
+  },
+  [Pkm.WOOPER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Pose
+  },
+  [Pkm.QUAGSIRE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Twirl
   },
   [Pkm.PALDEA_WOOPER]: {
     attack: AnimationType.Attack,
