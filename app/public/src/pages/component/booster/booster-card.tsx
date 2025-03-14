@@ -6,43 +6,50 @@ import { RarityColor } from "../../../../../types/Config"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
-import "./booster-card.css"
 import { usePreferences } from "../../../preferences"
+import "./booster-card.css"
 
-export function BoosterCard(props: { pkm: PkmWithCustom; shards: number }) {
+interface BoosterCardProps {
+  pkm: PkmWithCustom
+  shards: number
+  flipped: boolean
+  onFlip: () => void
+}
+
+export function BoosterCard({ pkm, shards, flipped, onFlip }: BoosterCardProps) {
   const [{ antialiasing }] = usePreferences()
   const { t } = useTranslation()
-  const pkm = props.pkm.name
-  const pokemonData = getPokemonData(pkm)
+  const pokemonData = getPokemonData(pkm.name)
   const style = {
     "--rarity-color": RarityColor[pokemonData.rarity]
   } as React.CSSProperties
+
   return (
     <div
       className={cc(
         "booster-card",
         "rarity-" + pokemonData.rarity.toLowerCase(),
-        { shiny: props.pkm.shiny || false }
+        { shiny: pkm.shiny || false, flipped }
       )}
       style={style}
-      onClick={(e) => e.currentTarget.classList.add("flipped")}
+      onClick={onFlip}
     >
       <div className="back">
         <img src="/assets/ui/pokecard.png" />
       </div>
-      <div className={cc("front", { shimmer: !!props.pkm.shiny })}>
+      <div className={cc("front", { shimmer: !!pkm.shiny })}>
         <img
           src={getPortraitSrc(
-            PkmIndex[pkm],
-            props.pkm.shiny,
-            props.pkm.emotion
+            PkmIndex[pkm.name],
+            pkm.shiny,
+            pkm.emotion
           )}
           className={cc({ pixelated: !antialiasing })}
         ></img>
         <div className="front-text">
-          <p className="name">{t(`pkm.${pkm}`)}</p>
+          <p className="name">{t(`pkm.${pkm.name}`)}</p>
           <p>
-            {props.shards} {t("shards")}
+            {shards} {t("shards")}
           </p>
         </div>
       </div>
