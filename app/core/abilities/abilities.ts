@@ -7341,7 +7341,7 @@ export class SnipeShotStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    const damage = [40, 80, 120][pokemon.stars - 1] ?? 120
+    const damage = [40, 80, 160][pokemon.stars - 1] ?? 160
     const farthestTarget = state.getFarthestTarget(pokemon, board) ?? target
     super.process(pokemon, state, board, farthestTarget, crit)
 
@@ -7772,10 +7772,11 @@ export class DoomDesireStrategy extends AbilityStrategy {
             true
           )
         } else {
-          pokemon.addPP(100, pokemon, 0, false)
+          pokemon.addPP(60, pokemon, 0, false)
         }
       }, 2000)
     )
+    pokemon.cooldown = Math.round(200 * (50 / pokemon.speed))
   }
 }
 

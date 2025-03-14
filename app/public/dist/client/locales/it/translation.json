@@ -1796,7 +1796,7 @@
     "PRIMORDIAL_SEA": "+12 PP ogni secondo. Ottieni un Super Amo.",
     "RISING_VOLTAGE": "Ogni quattro attacchi è un attacco triplo",
     "OVERDRIVE": "Ogni tre attacchi è un attacco triplo",
-    "POWER_SURGE": "Gli attacchi tripli inoltre infliggono 20 SPECIAL ai nemici adiacenti al bersaglio",
+    "POWER_SURGE": "Gli attacchi tripli infliggono anche 10 SPECIAL al bersaglio e ai nemici adiacenti ad esso",
     "GUTS": "Blocca 4 danni",
     "STURDY": "Blocca 7 danni",
     "DEFIANT": "Blocca 10 danni",

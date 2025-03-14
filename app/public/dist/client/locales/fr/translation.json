@@ -1889,7 +1889,7 @@
     "PRIMORDIAL_SEA": "+12 PP par seconde. Obtenez une Mega Canne.",
     "RISING_VOLTAGE": "Chaque quatrième attaque est une triple attaque",
     "OVERDRIVE": "Chaque troisième attaque est une triple attaque",
-    "POWER_SURGE": "Les triple attaques infligent 20 SPECIAL aux ennemis adjacents à la cible",
+    "POWER_SURGE": "Les triple attaques infligent 10 SPECIAL bonus à la cible et aux ennemis adjacents",
     "GUTS": "Bloque 4 dégâts",
     "STURDY": "Bloque 7 dégâts",
     "DEFIANT": "Bloque 10 dégâts",

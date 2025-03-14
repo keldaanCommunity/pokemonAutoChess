@@ -1892,7 +1892,7 @@
     "PRIMORDIAL_SEA": "+12 PP pro Sekunde. Epische Pokémon können geangelt werden.",
     "RISING_VOLTAGE": "Jeder vierte Angriff ist ein Dreifachangriff",
     "OVERDRIVE": "Jeder dritte Angriff ist ein Dreifachangriff",
-    "POWER_SURGE": "Dreifachangriffe fügen Gegnern in der Nähe des Ziels zusätzlich 20 SPECIAL zu.",
+    "POWER_SURGE": "Dreifachangriffe verursachen außerdem 10 SPECIAL beim Ziel und den angrenzenden Gegnern.",
     "GUTS": "Blockiert 4 Schaden",
     "STURDY": "Blockiert 7 Schaden",
     "DEFIANT": "Blockiert 10 Schaden",

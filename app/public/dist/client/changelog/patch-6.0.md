@@ -54,7 +54,6 @@
 - Buff Houndour line: PP 125 → 110
 - Buff Topsy Turvy (Inkay): also reverse AP buffs
 - Buff Drampa: PP 110 → 90
-- Nerf Inteleon: Snipe shot damage 40/80/160 → 40/80/120
 - Nerf Gastly line: PP 60 → 80
 - Nerf Stantler: HP 200 → 180, Def/Spedef: 5 → 3 (6 post def/spedef stat change)
 - Nerf Miltank: HP 250 → 200
@@ -78,7 +77,7 @@
 - Nerfed Obstruct (Obstagoon): Protect duration 1/2/4 → 1/2/3 seconds
 - Nerfed Celebi HP 300 → 250
 - Nerfed Wishiwashi: HP 100 → 50
-- Buff Jirachi: revert again Doom desire PP from 5.9 ~~60~~ 100 PP if target is KO in the mean time (my bad)
+- Buff Jirachi: PP 100 → 80. Reduce ability cooldowwn to 200ms at 50 speed.
 - Buff Keldeo: PP 100 → 80
 - Buff Octillery; PP 100 → 80, Oktzooka: 150 → 300% of attack as special damage
 - Nerf Aegislash: PP 80 → 100
@@ -98,10 +97,11 @@
 - New synergy Gourmet: Gourmet Pokémon can be equipped with a Chef's Hat. Chefs will cook up their Signature Dish between fights and feed adjacent allies, giving them various buffs and effects.
 - Berry trees no longer change every time a berry is collected. Instead, they change when you change region.
 - Wild now gives Speed at levels 2-4 and Attack at levels 6-8 instead of attack and movement speed at all levels
+- Electric synergy levels are now 3/5/7 ; change Electric 7: Triple attacks also deal ~~20 special damage to enemies adjacent to the target~~ 10 special damage to **target and enemies adjacent to it**
 - Nerf Amorphous 3 & 5 : 4/8 → 3/6 HP per active synergy
 - Nerf Artificial 4 & 6: 8/15 → 6/12 attack, AP and shield per held item
 - Fire burn chance on attacks now inflicts Burn for ~~2~~ 3 seconds
-- Wild now have ~~25~~ 30% chance to inflict Wound **only when synergy active**
+- Wild now have a chance to inflict Wound **only when synergy active**
 - Ghost now gets dodge chance and chance to inflict Silence on hit **only when synergy active**
 
 # Changes to Items

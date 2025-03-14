@@ -6770,7 +6770,7 @@ export class Jirachi extends Pokemon {
   speed = 57
   def = 10
   speDef = 10
-  maxPP = 100
+  maxPP = 80
   range = 3
   skill = Ability.DOOM_DESIRE
   passive = Passive.GOOD_LUCK
@@ -12877,7 +12877,11 @@ export class Cherrim extends Pokemon {
 }
 
 export class CherrimSunlight extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.LIGHT, Synergy.GRASS])
+  types = new SetSchema<Synergy>([
+    Synergy.FLORA,
+    Synergy.LIGHT,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.EPIC
   stars = 2
   hp = 210

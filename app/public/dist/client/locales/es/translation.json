@@ -1868,7 +1868,7 @@
     "PRIMORDIAL_SEA": "+12 PP por segundo. Se pueden pescar Pokémon épicos.",
     "RISING_VOLTAGE": "Cada cuarto ataque es un ataque triple",
     "OVERDRIVE": "Cada tercer ataque es un ataque triple.",
-    "POWER_SURGE": "Los ataques triples también realizan 20 SPECIAL a los enemigos adyacentes al objetivo",
+    "POWER_SURGE": "Los ataques triples también infligen 10 de SPECIAL al objetivo y a los enemigos adyacentes.",
     "GUTS": "Bloquea 4 de daño",
     "STURDY": "Bloquea 7 de daño",
     "DEFIANT": "Bloquea 10 de daño",
