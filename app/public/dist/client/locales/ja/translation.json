@@ -1283,7 +1283,7 @@
     "DIVE": "水中に潜って[15,30,60] SHIELDを獲得し、敵チームの中央に再出現し、隣接するすべてのユニットに[10,20,40,SP] SPECIALとFREEZEを1秒間与える",
     "SPIKE_ARMOR": "[3,5,10]秒間、このポケモンを近接攻撃したターゲットは傷を受け、現在のDEFの[50,SP]%に等しいSPECIALを受ける。",
     "FUTURE_SIGHT": "敵5体に[15,30,60,SP]SPECIALを与える",
-    "FAKE_TEARS": "敵チーム全体に[3,6,9,SP] SPECIALを与え、3秒間ARMOR_REDUCTIONをトリガーします",
+    "FAKE_TEARS": "敵チーム全体に[3,6,9,SP] SPECIALを与え、3秒間ARMOR_BREAKをトリガーします",
     "SPARKLING_ARIA": "ターゲットと隣接する敵に[15,30,60,SP]SPECIALを与える。隣接する味方が火傷している場合、火傷は回復します。",
     "DRAGON_DARTS": "ターゲットにそれぞれ[10,20,40,SP]SPECIALを与えるダーツを3本投げます。ターゲットが死亡した場合、40 PP を回復します。",
     "GRASSY_SURGE": "すべての草ポケモンの攻撃力[4,SP]アップ",
