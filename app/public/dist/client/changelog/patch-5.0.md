@@ -38,7 +38,7 @@ Each player now starts on a different map. Portals now makes you travel to new l
 
 # Changes to Pokemon & Abilities
 
-- These pokemons lines have been moved to regional pool: Alolan Vulpix, Hisui Zorua, Alolan Grimer, Hisuian Qwilfish, Alolan Geodude, Impidimp, Doduo, Slakoth, Lotad, Jangmo-O, Cherrubi, Corsola, Nidoran Male & Female
+- These pokemons lines have been moved to regional pool: Alolan Vulpix, Hisui Zorua, Alolan Grimer, Hisuian Qwilfish, Alolan Geodude, Impidimp, Doduo, Slakoth, Lotad, Jangmo-O, Cherubi, Corsola, Nidoran Male & Female
 - Alolan Raichu: remove item based evolution, replace Raichu evolution in regions with Psychic synergy
 - Alolan Marowak: remove item based evolution, replace Marowak evolution in regions with Fire synergy
 - Alolan Exeggutor: remove item based evolution, replace Exeggutor evolution in regions with Dragon synergy

@@ -455,7 +455,8 @@
     "TAILWIND": "Tailwind",
     "HORN_ATTACK": "Horn Attack",
     "RAZOR_LEAF": "Razor Leaf",
-    "MUD_SHOT": "Mud Shot"
+    "MUD_SHOT": "Mud Shot",
+    "MALIGNANT_CHAIN": "Malignant Chain"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1120,7 +1121,7 @@
     "ILLUMISE": "Illumise",
     "NECROZMA": "Necrozma",
     "ULTRA_NECROZMA": "Ultra Necrozma",
-    "CHERRUBI": "Cherubi",
+    "CHERUBI": "Cherubi",
     "CHERRIM": "Cherrim",
     "CHERRIM_SUNLIGHT": "Cherrim Sunlight",
     "MISDREAVUS": "Misdreavus",
@@ -1384,7 +1385,8 @@
     "ALCREMIE_SALTED": "Alcremie (Salted)",
     "ALCREMIE_RUBY_SWIRL": "Alcremie (Ruby Swirl)",
     "ALCREMIE_CARAMEL_SWIRL": "Alcremie (Caramel Swirl)",
-    "ALCREMIE_RAINBOW_SWIRL": "Alcremie (Rainbow Swirl)"
+    "ALCREMIE_RAINBOW_SWIRL": "Alcremie (Rainbow Swirl)",
+    "PECHARUNT": "Pecharunt"
   },
   "ability_description": {
     "SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1820,7 +1822,8 @@
     "TAILWIND": "Increase the SPEED of all allies by [5,10,15,SP]",
     "HORN_ATTACK": "Deal [3,4,5,SP] x ATK as SPECIAL to the target and cause ARMOR_BREAK for 8 seconds.",
     "RAZOR_LEAF": "Throw sharp leafs in a line behind the target. All enemies hit take [20,40,80,SP] SPECIAL. Can crit by default.",
-    "MUD_SHOT": "Hurls mud at the target, dealing [25,50,75,SP] SPECIAL and reducing their SPEED by [10,20,30,SP]."
+    "MUD_SHOT": "Hurls mud at the target, dealing [25,50,75,SP] SPECIAL and reducing their SPEED by [10,20,30,SP].",
+    "MALIGNANT_CHAIN": "Extends a poisonous chain to ensnare a target, inflicting LOCKED and 3 stacks of POISONNED for [3,SP] seconds."
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2209,6 +2212,7 @@
     "NUTRITIOUS_EGG": "Nutritious Egg",
     "LEFTOVERS": "Leftovers",
     "BLACK_SLUDGE": "Black Sludge",
+    "BINDING_MOCHI": "Binding Mochi",
     "FRUIT_JUICE": "Fruit Juice",
     "LEEK": "Leek",
     "LARGE_LEEK": "Large Leek",
@@ -2393,6 +2397,7 @@
     "NUTRITIOUS_EGG": "Start the next fight with +30% base ATK, DEF and SPE_DEF.",
     "LEFTOVERS": "No effect. There is not much left, the cook having already devoured most of it.",
     "BLACK_SLUDGE": "POISONNED the Pokémon that eats it. If it has POISON type, restore 5% of max HP every 2 seconds instead.",
+    "BINDING_MOCHI": "The first attack in the next fight will inflict CHARM and POISONNED for 4 seconds on hit.",
     "FRUIT_JUICE": "Gain 30 SPEED in the next fight.",
     "LEEK": "Gain 30% CRIT_CHANCE and allow ability to critically strike in the next fight.",
     "LARGE_LEEK": "Gain 30% CRIT_POWER and allow ability to critically strike in the next fight.",

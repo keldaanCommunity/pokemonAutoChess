@@ -24,7 +24,7 @@
 - Volbeat
 - Necrozma
 - Necrozma Ultra
-- Cherrubi
+- Cherubi
 - Cherrim
 - Cherrim Sunlight
 - Misdreavus

@@ -3490,6 +3490,34 @@ export function displayAbility(
       break
     }
 
+    case Ability.MALIGNANT_CHAIN: {
+      const angle = Math.atan2(
+        coordinatesTarget[1] - coordinates[1],
+        coordinatesTarget[0] - coordinates[0]
+      )
+      const distance = distanceE(
+        coordinates[0],
+        coordinates[1],
+        coordinatesTarget[0],
+        coordinatesTarget[1]
+      )
+      const specialProjectile = addAbilitySprite(skill, coordinates)
+        .setOrigin(0.5, 0)
+        .setScale(1, 0)
+        .setRotation(angle - Math.PI / 2)
+
+      scene.tweens.add({
+        targets: specialProjectile,
+        scaleY: distance / 80,
+        ease: "linear",
+        duration: 600,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     default:
       break
   }
