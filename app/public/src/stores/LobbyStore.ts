@@ -137,6 +137,7 @@ export const lobbySlice = createSlice({
       action: PayloadAction<IUserMetadata | undefined>
     ) => {
       state.searchedUser = action.payload
+      state.suggestions = []
     },
     setBoosterContent: (state, action: PayloadAction<PkmWithCustom[]>) => {
       state.boosterContent = action.payload

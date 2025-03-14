@@ -295,10 +295,15 @@ export class MiniGame {
         TownEncountersByStage[stageLevel],
         state.specialGameRule === SpecialGameRule.TOWN_FESTIVAL ? undefined : 1
       )
-      if (state.townEncounter === encounter) {
-        encounter = null // prevent getting the same encounter twice in a row
+      if (
+        encounter != null &&
+        state.townEncounters.has(encounter) &&
+        state.specialGameRule !== SpecialGameRule.TOWN_FESTIVAL
+      ) {
+        encounter = null // prevent getting the same encounter twice in a gamme
       }
       state.townEncounter = encounter ?? null
+      if (encounter) state.townEncounters.add(encounter)
     } else {
       state.townEncounter = null
     }
@@ -326,6 +331,10 @@ export class MiniGame {
           randomBetween(5000, 14000)
         )
       }
+    } else if (state.townEncounter === TownEncounters.REGIROCK) {
+      this.alivePlayers.forEach((player) => {
+        player.life += 15
+      })
     }
   }
 

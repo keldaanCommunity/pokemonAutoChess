@@ -37,6 +37,7 @@ export default function ChatMessage(props: { message: IChatV2 }) {
             !isServerMessage && (
               <button
                 className="remove-chat bubbly red"
+                title="Remove message"
                 onClick={() =>
                   dispatch(
                     removeMessage({
