@@ -24,6 +24,7 @@
 - Dachsbun
 - Milcery
 - Alcremie (Vanilla, Ruby, Matcha, Mint, Lemon, Salted, Ruby Swirl, Caramel Swirl, Rainbow Swirl)
+- Pecharunt
 - Wooper
 - Quagsire
 
