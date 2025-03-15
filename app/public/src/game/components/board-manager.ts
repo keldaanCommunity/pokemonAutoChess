@@ -81,7 +81,6 @@ export default class BoardManager {
     this.lightCell = null
     this.pveChest = null
     this.pveChestGroup = null
-    this.renderBoard()
 
     if (state.phase == GamePhaseState.FIGHT) {
       this.battleMode()

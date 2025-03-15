@@ -490,7 +490,29 @@ export default class MinigameManager {
       ...podiumPokemons
     )
 
-    if (encounter) this.showEncounterDescription(encounter)
+    const specialGameRule = this.scene.room?.state?.specialGameRule
+    if (encounter) {
+      const cost =
+        specialGameRule === SpecialGameRule.TOWN_FESTIVAL
+          ? 0
+          : TownEncounterSellPrice[encounter]
+      this.showEncounterDescription(
+        t(`town_encounter_description.${encounter}`, { cost })
+      )
+    } else if (specialGameRule && this.scene.room?.state.stageLevel === 0) {
+      const smeargle = new PokemonSpecial({
+        scene: this.scene,
+        x: cx,
+        y: cy,
+        name: Pkm.SMEARGLE
+      })
+      this.villagers.push(smeargle)
+      this.showEncounterDescription(
+        t(`scribble.${specialGameRule}`) +
+          " - " +
+          t(`scribble_description.${specialGameRule}`)
+      )
+    }
   }
 
   showEmote(id: string, emote: Emotion) {
@@ -518,15 +540,10 @@ export default class MinigameManager {
     }
   }
 
-  showEncounterDescription(encounter: TownEncounter) {
-    const specialGameRule = this.scene.room?.state.specialGameRule
-    const cost =
-      specialGameRule === SpecialGameRule.TOWN_FESTIVAL
-        ? 0
-        : TownEncounterSellPrice[encounter]
+  showEncounterDescription(desc: string) {
     this.encounterDescription = new GameDialog(
       this.scene,
-      t(`town_encounter_description.${encounter}`, { cost }),
+      desc,
       undefined,
       "town-encounter-description"
     )
