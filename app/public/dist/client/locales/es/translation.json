@@ -1589,7 +1589,7 @@
     "EMPTY_LIGHT": "Arroja veneno al enemigo, infligiendo [33,SP] de SPECIAL y reduciendo su SPE_DEF en 5. La habilidad rebota en otro Pokémon (máximo 5 rebotes).",
     "UNBOUND": "Se desata para transformarse en la verdadera forma de Hoopa and recibir una enorme cantidad de poder",
     "HYPERSPACE_FURY": "Usando sus multiples brazos, desata una ráfaga de [4,SP] ataques. Cada uno reduce la DEF y SPE_DEF del objetivo en 1.",
-    "SNIPE_SHOT": "Lanza un disparo con la punta de sus dedos al enemigo mas lejano, causando [40,80,120,SP] de SPECIAL a todos los oponentes en el camino",
+    "SNIPE_SHOT": "Lanza un disparo con la punta de sus dedos al enemigo mas lejano, causando [40,80,160,SP] de SPECIAL a todos los oponentes en el camino",
     "AIR_SLASH": "Causa [25,50,100,SP] de SPECIAL y deja al enemigo FLINCH por 7 segundos",
     "EGGSPLOSION": "Lanza un huevo explosivo al objetivo, infligiendo [30,60,120,SP] de SPECIAL y aplicando ARMOR_BREAK por 4 segundos a todos los enemigos adyacentes. Si el objetivo queda KO, tienes un [25,LK]% de recibir un huevo en tu banco.",
     "FLORAL_HEALING": "Cura HP equivalente al PP máximo que posea el portador de Comfey o del propio Comfey si no es llevado por nadie",
