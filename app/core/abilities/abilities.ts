@@ -4985,10 +4985,10 @@ export class ForecastStrategy extends AbilityStrategy {
       if (p && pokemon.team === p.team) {
         p.addShield(10, pokemon, 1, crit)
         if (pokemon.name === Pkm.CASTFORM_SUN) {
-          p.addAttack(3, pokemon, 1, crit)
+          p.addAttack(4, pokemon, 1, crit)
         }
         if (pokemon.name === Pkm.CASTFORM_RAIN) {
-          p.addPP(5, pokemon, 1, crit)
+          p.addPP(8, pokemon, 1, crit)
         }
         if (pokemon.name === Pkm.CASTFORM_HAIL) {
           p.addDefense(2, pokemon, 1, crit)
