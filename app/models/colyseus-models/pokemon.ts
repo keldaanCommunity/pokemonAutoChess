@@ -8158,7 +8158,11 @@ export class Happiny extends Pokemon {
 }
 
 export class Chansey extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY])
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.FAIRY,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.ULTRA
   stars = 2
   evolution = Pkm.BLISSEY
@@ -8174,7 +8178,11 @@ export class Chansey extends Pokemon {
 }
 
 export class Blissey extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY])
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.FAIRY,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.ULTRA
   stars = 3
   hp = 480
