@@ -455,7 +455,8 @@
     "TAILWIND": "顺风",
     "HORN_ATTACK": "角撞",
     "RAZOR_LEAF": "飞叶快刀",
-    "MUD_SHOT": "泥巴射击"
+    "MUD_SHOT": "泥巴射击",
+    "MALIGNANT_CHAIN": "邪毒锁链"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1384,7 +1385,8 @@
     "ALCREMIE_SALTED": "霜奶仙（雪盐）",
     "ALCREMIE_RUBY_SWIRL": "霜奶仙（红钻综合）",
     "ALCREMIE_CARAMEL_SWIRL": "霜奶仙（焦糖综合）",
-    "ALCREMIE_RAINBOW_SWIRL": "霜奶仙（三色综合）"
+    "ALCREMIE_RAINBOW_SWIRL": "霜奶仙（三色综合）",
+    "PECHARUNT": "桃歹郎"
   },
   "ability_description": {
     "SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1451,7 +1453,7 @@
     "AQUA_TAIL": "对目标造成[30,60,100,SP]点SPECIAL，并获得[30,60,100,SP]点SHIELD。",
     "DRAGON_TAIL": "对目标造成[30,60,100,SP]点SPECIAL，并提升使用者[2,4,6,SP]点DEF和SPE_DEF。",
     "DRAGON_BREATH": "对目标及其正后方的一只敌方宝可梦造成[25,50,100,SP]点SPECIAL。",
-    "ICICLE_CRASH": "对目标及其相邻宝可梦造成[20,40,80,SP]点SPECIAL。",
+    "ICICLE_CRASH": "对目标及其相邻敌方宝可梦造成[20,40,80,SP]点SPECIAL。",
     "ROOT": "使所有相邻敌方宝可梦陷入LOCKED 4秒，并受到[15,30,60,SP]点SPECIAL。使用者及所有相邻我方宝可梦则恢复[15,30,60,SP]点HP。",
     "TORMENT": "提升[20,40,60,SP]点SPEED。",
     "STOMP": "对目标造成SPECIAL，数值相当于[3,4,5,SP]乘以ATK。",
@@ -1820,7 +1822,8 @@
     "TAILWIND": "提升所有我方宝可梦[5,10,15,SP]点SPEED。",
     "HORN_ATTACK": "对目标造成SPECIAL，数值相当于[3,4,5,SP]乘以ATK，并使其陷入ARMOR_BREAK 8秒。",
     "RAZOR_LEAF": "飞出叶片攻击目标身后的一条直线，对所有击中的敌方宝可梦造成[20,40,80,SP]点SPECIAL。该招式可以暴击。",
-    "MUD_SHOT": "向目标投掷泥块，造成[25,50,75,SP]点SPECIAL，并降低其[10,20,30,SP]点SPEED。"
+    "MUD_SHOT": "向目标投掷泥块，造成[25,50,75,SP]点SPECIAL，并降低其[10,20,30,SP]点SPEED。",
+    "MALIGNANT_CHAIN": "伸出用由毒形成的锁链缠住对手，使其陷入LOCKED和3层POISONNED [3,SP]秒。"
   },
   "effect": {
     "INGRAIN": "扎根",
@@ -1954,7 +1957,7 @@
     "PRIMORDIAL_SEA": "每秒额外恢复12点PP。获得厉害钓竿。",
     "RISING_VOLTAGE": "每第4次攻击发动一次三连击。",
     "OVERDRIVE": "每第3次攻击发动一次三连击。",
-    "POWER_SURGE": "三重攻击还会对目标及其相邻的敌人造成 10 SPECIAL",
+    "POWER_SURGE": "发动三连击时还会对目标及其相邻敌方宝可梦造成10点SPECIAL。",
     "GUTS": "格挡减免4点伤害。",
     "STURDY": "格挡减免7点伤害。",
     "DEFIANT": "格挡减免10点伤害。",
@@ -2209,6 +2212,7 @@
     "NUTRITIOUS_EGG": "营养丰富的蛋",
     "LEFTOVERS": "吃剩的东西",
     "BLACK_SLUDGE": "黑色污泥",
+    "BINDING_MOCHI": "锁链粘糕",
     "FRUIT_JUICE": "水果汁",
     "LEEK": "大葱",
     "LARGE_LEEK": "特大大葱",
@@ -2393,6 +2397,7 @@
     "NUTRITIOUS_EGG": "仅在下一轮战斗中，提升30%的基础ATK，DEF和SPE_DEF。",
     "LEFTOVERS": "没有效果。大厨亲自把菜吃完了，没给食客留下多少。",
     "BLACK_SLUDGE": "食用的宝可梦陷入POISONNED。若为POISON，改为每2秒恢复5%的最大HP。",
+    "BINDING_MOCHI": "仅在下一轮战斗中，第一次命中的攻击会使目标陷入CHARM和POISONNED 4秒。",
     "FRUIT_JUICE": "仅在下一轮战斗中，提升30点SPEED。",
     "LEEK": "仅在下一轮战斗中，提升30%的CRIT_CHANCE，且招式能够暴击。",
     "LARGE_LEEK": "仅在下一轮战斗中，提升30%的CRIT_POWER，且招式能够暴击。",
