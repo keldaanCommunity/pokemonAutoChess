@@ -12823,7 +12823,7 @@ export class UltraNecrozma extends Pokemon {
   }
 }
 
-export class Cherrubi extends Pokemon {
+export class Cherubi extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.FLORA,
     Synergy.LIGHT,
@@ -17667,6 +17667,25 @@ export class AlcremieRainbowSwirl extends Pokemon {
   onAcquired = alcremieOnAcquired
 }
 
+export class Pecharunt extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.GHOST,
+    Synergy.GOURMET
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 250
+  atk = 25
+  speed = 55
+  def = 12
+  speDef = 6
+  maxPP = 100
+  range = 3
+  skill = Ability.MALIGNANT_CHAIN
+  attackSprite = AttackSprite.POISON_RANGE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -18326,7 +18345,7 @@ export const PokemonClasses: Record<
   [Pkm.VOLBEAT]: Volbeat,
   [Pkm.NECROZMA]: Necrozma,
   [Pkm.ULTRA_NECROZMA]: UltraNecrozma,
-  [Pkm.CHERRUBI]: Cherrubi,
+  [Pkm.CHERUBI]: Cherubi,
   [Pkm.CHERRIM]: Cherrim,
   [Pkm.CHERRIM_SUNLIGHT]: CherrimSunlight,
   [Pkm.MISDREAVUS]: Misdreavus,
@@ -18600,7 +18619,8 @@ export const PokemonClasses: Record<
   [Pkm.ALCREMIE_SALTED]: AlcremieSalted,
   [Pkm.ALCREMIE_RUBY_SWIRL]: AlcremieRubySwirl,
   [Pkm.ALCREMIE_CARAMEL_SWIRL]: AlcremieCaramelSwirl,
-  [Pkm.ALCREMIE_RAINBOW_SWIRL]: AlcremieRainbowSwirl
+  [Pkm.ALCREMIE_RAINBOW_SWIRL]: AlcremieRainbowSwirl,
+  [Pkm.PECHARUNT]: Pecharunt
 }
 
 // declare all the classes in colyseus schema TypeRegistry

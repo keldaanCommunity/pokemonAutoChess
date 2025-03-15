@@ -124,7 +124,7 @@ export enum Pkm {
   CHATOT = "CHATOT",
   CHERRIM = "CHERRIM",
   CHERRIM_SUNLIGHT = "CHERRIM_SUNLIGHT",
-  CHERRUBI = "CHERRUBI",
+  CHERUBI = "CHERUBI",
   CHIKORITA = "CHIKORITA",
   CHIMCHAR = "CHIMCHAR",
   CHIMECHO = "CHIMECHO",
@@ -574,6 +574,7 @@ export enum Pkm {
   PAWMO = "PAWMO",
   PAWMOT = "PAWMOT",
   PAWNIARD = "PAWNIARD",
+  PECHARUNT = "PECHARUNT",
   PELIPPER = "PELIPPER",
   PERSIAN = "PERSIAN",
   PETILIL = "PETILIL",
@@ -1446,7 +1447,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.PACHIRISU]: "0417",
   [Pkm.BUIZEL]: "0418",
   [Pkm.FLOATZEL]: "0419",
-  [Pkm.CHERRUBI]: "0420",
+  [Pkm.CHERUBI]: "0420",
   [Pkm.CHERRIM]: "0421",
   [Pkm.CHERRIM_SUNLIGHT]: "0421-0001",
   [Pkm.SHELLOS_WEST_SEA]: "0422",
@@ -2095,7 +2096,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.OGERPON_WELLSPRING_MASK]: "1017-0005",
   [Pkm.OGERPON_HEARTHFLAME_MASK]: "1017-0006",
   [Pkm.OGERPON_CORNERSTONE_MASK]: "1017-0007",
-  [Pkm.HYDRAPPLE]: "1019"
+  [Pkm.HYDRAPPLE]: "1019",
+  [Pkm.PECHARUNT]: "1025"
 }
 
 export const PkmByIndex: { [index: string]: Pkm } = Object.fromEntries(
@@ -2759,9 +2761,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.VOLBEAT]: Pkm.VOLBEAT,
   [Pkm.NECROZMA]: Pkm.NECROZMA,
   [Pkm.ULTRA_NECROZMA]: Pkm.NECROZMA,
-  [Pkm.CHERRUBI]: Pkm.CHERRUBI,
-  [Pkm.CHERRIM]: Pkm.CHERRUBI,
-  [Pkm.CHERRIM_SUNLIGHT]: Pkm.CHERRUBI,
+  [Pkm.CHERUBI]: Pkm.CHERUBI,
+  [Pkm.CHERRIM]: Pkm.CHERUBI,
+  [Pkm.CHERRIM_SUNLIGHT]: Pkm.CHERUBI,
   [Pkm.MISDREAVUS]: Pkm.MISDREAVUS,
   [Pkm.MISMAGIUS]: Pkm.MISDREAVUS,
   [Pkm.DODUO]: Pkm.DODUO,
@@ -3029,7 +3031,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ALCREMIE_SALTED]: Pkm.MILCERY,
   [Pkm.ALCREMIE_RUBY_SWIRL]: Pkm.MILCERY,
   [Pkm.ALCREMIE_CARAMEL_SWIRL]: Pkm.MILCERY,
-  [Pkm.ALCREMIE_RAINBOW_SWIRL]: Pkm.MILCERY
+  [Pkm.ALCREMIE_RAINBOW_SWIRL]: Pkm.MILCERY,
+  [Pkm.PECHARUNT]: Pkm.PECHARUNT
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -6471,7 +6474,7 @@ export const AnimationConfig: {
     ability: AnimationType.RearUp,
     emote: AnimationType.Charge
   },
-  [Pkm.CHERRUBI]: {
+  [Pkm.CHERUBI]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shake
@@ -7859,5 +7862,11 @@ export const AnimationConfig: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Rotate,
     shinyUnavailable: true
+  },
+  [Pkm.PECHARUNT]: {
+    attack: AnimationType.Charge,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Twirl,
+    hop: AnimationType.Twirl
   }
 }

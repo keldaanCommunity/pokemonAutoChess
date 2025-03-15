@@ -30,7 +30,7 @@ New Synergy: ![Light](/assets/types/LIGHT.svg) Light gives various bonuses to on
 ![Skuntank](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0435/Normal.png)
 ![Illumise](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0314/Normal.png)
 ![Volbeat](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0313/Normal.png)
-![Cherrubi](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0420/Normal.png)
+![Cherubi](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0420/Normal.png)
 ![Cherrim](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0421/Normal.png)
 ![Cherrim Sunlight](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0421/0001/Happy.png)
 ![Misdreavus](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0200/Normal.png)

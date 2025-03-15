@@ -23,7 +23,7 @@ export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.APPLETUN]: Item.SWEET_APPLE,
   [Pkm.DIPPLIN]: Item.SIRUPY_APPLE,
   [Pkm.HYDRAPPLE]: Item.SIRUPY_APPLE,
-  [Pkm.CHERRUBI]: Item.SWEET_HERB,
+  [Pkm.CHERUBI]: Item.SWEET_HERB,
   [Pkm.CHERRIM]: Item.SWEET_HERB,
   [Pkm.CHERRIM_SUNLIGHT]: Item.SWEET_HERB,
   [Pkm.TROPIUS]: Item.BERRIES,
@@ -58,7 +58,8 @@ export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.ALCREMIE_SALTED]: Item.SWEETS,
   [Pkm.ALCREMIE_RUBY_SWIRL]: Item.SWEETS,
   [Pkm.ALCREMIE_CARAMEL_SWIRL]: Item.SWEETS,
-  [Pkm.ALCREMIE_RAINBOW_SWIRL]: Item.SWEETS
+  [Pkm.ALCREMIE_RAINBOW_SWIRL]: Item.SWEETS,
+  [Pkm.PECHARUNT]: Item.BINDING_MOCHI
 }
 
 export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
@@ -67,6 +68,18 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
     new OnSpawnEffect((entity) => {
       entity.addShield(50, entity, 0, false)
       entity.effects.add(EffectEnum.BERRY_JUICE)
+    })
+  ],
+  BINDING_MOCHI: [
+    new OnSpawnEffect((entity) => {
+      entity.effects.add(EffectEnum.BINDING_MOCHI)
+    }),
+    new OnHitEffect((entity, target, board) => {
+      if (entity.effects.has(EffectEnum.BINDING_MOCHI)) {
+        target.status.triggerCharm(4000, target, entity, false)
+        target.status.triggerPoison(4000, target, entity)
+        entity.effects.delete(EffectEnum.BINDING_MOCHI)
+      }
     })
   ],
   BLACK_SLUDGE: [
