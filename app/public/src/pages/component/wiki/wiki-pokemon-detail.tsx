@@ -94,7 +94,7 @@ export default function WikiPokemonDetail(props: { pokemon: Pkm, selectPkm: (pkm
         <Credits for="sprite" index={pokemonData.index} />
       </dl>
       <dl>
-        {[Stat.HP, Stat.PP, Stat.RANGE, Stat.ATK, Stat.DEF, Stat.SPE_DEF].map(
+        {[Stat.HP, Stat.PP, Stat.RANGE, Stat.ATK, Stat.SPEED, Stat.DEF, Stat.SPE_DEF].map(
           (stat) => (
             <React.Fragment key={stat}>
               <dt>
