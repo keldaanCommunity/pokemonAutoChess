@@ -393,7 +393,7 @@ export const DEFAULT_CRIT_POWER = 2
 export const PROJECTILE_SPEED = 4
 
 export const StageDuration: Record<number | "DEFAULT", number> = {
-  0: 24, // adjusted for treasure town theme
+  0: 23, // adjusted for treasure town theme
   1: 30,
   3: 40,
   5: 40,

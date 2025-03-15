@@ -70,7 +70,7 @@ export function playSound(key: Soundkey, volume = 1) {
 
 type SceneWithMusic = Phaser.Scene & { music?: Phaser.Sound.WebAudioSound }
 
-export function playMusic(scene: SceneWithMusic, name: string, seek?: number) {
+export function playMusic(scene: SceneWithMusic, name: string) {
   if (scene == null || scene.music?.key === "music_" + name) return
   if (scene.music) scene.music.destroy()
 
@@ -91,8 +91,7 @@ export function playMusic(scene: SceneWithMusic, name: string, seek?: number) {
 
     scene.music.play({
       volume: preference("musicVolume") / 100,
-      loop: true,
-      seek
+      loop: true
     })
   } catch (err) {
     logger.error("can't play music", err)

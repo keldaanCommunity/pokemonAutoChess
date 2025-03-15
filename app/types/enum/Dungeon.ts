@@ -137,6 +137,9 @@ export enum DungeonMusic {
   TINY_WOODS = "Tiny Woods",
   TOP_MENU_THEME = "Top Menu Theme",
   TREASURE_TOWN = "Treasure Town",
+  TREASURE_TOWN_STAGE_0 = "Treasure Town Stage 0",
+  TREASURE_TOWN_STAGE_10 = "Treasure Town Stage 10",
+  TREASURE_TOWN_STAGE_20 = "Treasure Town Stage 20",
   TREESHROUD_FOREST = "Treeshroud Forest",
   UPPER_STEAM_CAVE = "Upper Steam Cave",
   VAST_ICE_MOUNTAIN = "Vast Ice Mountain",
@@ -877,12 +880,6 @@ export const DungeonDetails: {
   },
   town: {
     synergies: [],
-    music: DungeonMusic.TREASURE_TOWN
+    music: DungeonMusic.TREASURE_TOWN_STAGE_0
   }
-}
-
-export const TownMusicMarkerByStage: { [stage: number]: number } = {
-  [0]: 0,
-  [10]: 22,
-  [20]: 83
 }
