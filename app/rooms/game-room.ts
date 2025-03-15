@@ -140,16 +140,14 @@ export default class GameRoom extends Room<GameState> {
       bracketId: options.bracketId
     })
     // logger.debug(options);
-    this.setState(
-      new GameState(
-        options.preparationId,
-        options.name,
-        options.noElo,
-        options.gameMode,
-        options.minRank,
-        options.maxRank,
-        options.specialGameRule
-      )
+    this.state = new GameState(
+      options.preparationId,
+      options.name,
+      options.noElo,
+      options.gameMode,
+      options.minRank,
+      options.maxRank,
+      options.specialGameRule
     )
     this.miniGame.create(
       this.state.avatars,
@@ -551,9 +549,9 @@ export default class GameRoom extends Room<GameState> {
     this.miniGame.initialize(this.state, this)
   }
 
-  async onAuth(client: Client, options, request) {
+  async onAuth(client: Client, options, context) {
     try {
-      super.onAuth(client, options, request)
+      super.onAuth(client, options, context)
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
 

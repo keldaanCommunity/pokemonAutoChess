@@ -94,7 +94,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     this.clock.start()
 
     // logger.debug(defaultRoomName);
-    this.setState(new PreparationState(options))
+    this.state = new PreparationState(options)
     this.setMetadata(<IPreparationMetadata>{
       name: options.roomName.slice(0, 30),
       ownerName:
@@ -350,7 +350,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     })
   }
 
-  async onAuth(client: Client, options: any, request: any) {
+  async onAuth(client: Client, options, context) {
     try {
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
