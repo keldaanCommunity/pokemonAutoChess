@@ -111,7 +111,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
   async onCreate(): Promise<void> {
     logger.info("create lobby", this.roomId)
-    this.setState(new LobbyState())
+    this.state = new LobbyState()
     this.autoDispose = false
     this.listing.unlisted = true
 
@@ -429,9 +429,9 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     this.fetchTournaments()
   }
 
-  async onAuth(client: Client, options: any, request: any) {
+  async onAuth(client: Client, options, context) {
     try {
-      super.onAuth(client, options, request)
+      super.onAuth(client, options, context)
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
 
