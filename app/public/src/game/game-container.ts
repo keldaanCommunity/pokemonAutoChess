@@ -14,7 +14,6 @@ import { Pokemon } from "../../../models/colyseus-models/pokemon"
 import { PokemonAvatarModel } from "../../../models/colyseus-models/pokemon-avatar"
 import { Portal, SynergySymbol } from "../../../models/colyseus-models/portal"
 import Status from "../../../models/colyseus-models/status"
-import { IPokemonCollectionItem } from "../../../models/mongo-models/user-metadata"
 import GameState from "../../../rooms/states/game-state"
 import {
   IDragDropCombineMessage,

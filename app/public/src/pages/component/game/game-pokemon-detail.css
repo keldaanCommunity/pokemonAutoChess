@@ -161,6 +161,5 @@
 }
 
 .game-pokemon-detail-passive:last-child {
-  margin-bottom: -10px;
   border-radius: 0 0 8px 8px;
 }

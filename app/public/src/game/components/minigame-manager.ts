@@ -17,7 +17,7 @@ import {
 } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
-import { FloatingItem } from "./floating-item"
+import { FloatingItemContainer } from "./floating-item-container"
 import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
 import { Portal, SynergySymbol } from "./portal"
@@ -35,7 +35,7 @@ import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 
 export default class MinigameManager {
   pokemons: Map<string, PokemonAvatar>
-  items: Map<string, FloatingItem>
+  items: Map<string, FloatingItemContainer>
   portals: Map<string, Portal>
   symbols: Map<string, SynergySymbol>
   uid: string
@@ -53,7 +53,7 @@ export default class MinigameManager {
     items: Map<string, IFloatingItem>
   ) {
     this.pokemons = new Map<string, PokemonAvatar>()
-    this.items = new Map<string, FloatingItem>()
+    this.items = new Map<string, FloatingItemContainer>()
     this.portals = new Map<string, Portal>()
     this.symbols = new Map<string, SynergySymbol>()
     this.uid = uid
@@ -128,8 +128,8 @@ export default class MinigameManager {
   /* Floating Items */
 
   addItem(item: IFloatingItem) {
-    const it = new FloatingItem(
-      this.scene,
+    const it = new FloatingItemContainer(
+      this,
       item.id,
       transformMiniGameXCoordinate(item.x),
       transformMiniGameYCoordinate(item.y),
@@ -553,5 +553,11 @@ export default class MinigameManager {
       .removeInteractive()
     // add to scene
     this.scene.add.existing(this.encounterDescription)
+  }
+
+  closeDetails() {
+    for (const it of this.items.values()) {
+      it.closeDetail()
+    }
   }
 }

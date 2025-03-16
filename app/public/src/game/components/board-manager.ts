@@ -86,6 +86,7 @@ export default class BoardManager {
     if (state.phase == GamePhaseState.FIGHT) {
       this.battleMode()
     } else if (state.phase === GamePhaseState.TOWN) {
+      this.renderBoard()
       this.minigameMode()
     } else {
       this.pickMode()

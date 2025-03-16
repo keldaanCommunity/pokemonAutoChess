@@ -141,6 +141,7 @@
 - Disabled right click browser menu when in game
 - Added player add picks and regional picks info when spectating
 - Booster cards can all be flipped at once by pressing the Open booster button a second time
+- Item tooltips are now available for carousel items as well
 
 # Bugfix
 
