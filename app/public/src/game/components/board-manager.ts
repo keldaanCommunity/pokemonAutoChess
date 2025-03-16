@@ -334,6 +334,7 @@ export default class BoardManager {
       this.playerAvatar.destroy()
     }
     if (this.player.life <= 0) return // do not display avatar when player is dead
+    if (this.state.phase === GamePhaseState.TOWN) return // do not display avatar in town since it is on board
     const playerAvatar = new PokemonAvatarModel(
       this.player.id,
       this.player.avatar,

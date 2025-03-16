@@ -28,6 +28,7 @@ import {
 import { Ability } from "../../../types/enum/Ability"
 import {
   AttackType,
+  GamePhaseState,
   HealType,
   Orientation,
   PokemonActionState,
@@ -652,7 +653,9 @@ class GameContainer {
 
   setPlayer(player: Player) {
     this.player = player
-    this.gameScene?.setMap(player.map)
+    if (this.room.state.phase !== GamePhaseState.TOWN) {
+      this.gameScene?.setMap(player.map)
+    }
     this.gameScene?.battle?.setPlayer(player)
     this.gameScene?.board?.setPlayer(player)
     this.gameScene?.itemsContainer?.setPlayer(player)
