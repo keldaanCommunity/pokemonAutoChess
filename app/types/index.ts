@@ -159,9 +159,11 @@ export enum AttackSprite {
   FIRE_RANGE = "FIRE/range",
   FLYING_MELEE = "FLYING/melee",
   FLYING_RANGE = "FLYING/range",
+  GHOST_MELEE = "GHOST/melee",
   GHOST_RANGE = "GHOST/range",
   GRASS_MELEE = "GRASS/melee",
   GRASS_RANGE = "GRASS/range",
+  GROUND_MELEE = "GROUND/melee",
   ICE_MELEE = "ICE/melee",
   ICE_RANGE = "ICE/range",
   NORMAL_MELEE = "NORMAL/melee",
@@ -174,7 +176,9 @@ export enum AttackSprite {
   ROCK_MELEE = "ROCK/melee",
   ROCK_RANGE = "ROCK/range",
   SOUND_RANGE = "SOUND/range",
-  STEEL_MELEE = "STEEL/melee"
+  STEEL_MELEE = "STEEL/melee",
+  STEEL_RANGE = "STEEL/range",
+  WILD_MELEE = "WILD/melee"
 }
 
 export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
@@ -196,9 +200,11 @@ export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
     "FIRE/range": [2, 2],
     "FLYING/melee": [1, 1],
     "FLYING/range": [1.5, 1.5],
+    "GHOST/melee": [1, 1],
     "GHOST/range": [2, 2],
     "GRASS/melee": [1, 1],
     "GRASS/range": [3, 3],
+    "GROUND/melee": [1, 1],
     "ICE/melee": [2, 2],
     "ICE/range": [2, 2],
     "NORMAL/melee": [2, 2],
@@ -209,9 +215,11 @@ export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
     "ROCK/melee": [1.5, 1.5],
     "ROCK/range": [2, 2],
     "STEEL/melee": [1.5, 1.5],
+    "STEEL/range": [2, 2],
     "SOUND/range": [2, 2],
     "WATER/melee": [2, 2],
-    "WATER/range": [3, 3]
+    "WATER/range": [3, 3],
+    "WILD/melee": [2, 2]
   }
 
 export enum ReadWriteMode {
