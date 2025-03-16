@@ -145,6 +145,8 @@
 # Bugfix
 
 - Fix wild chance not being updated immediately when buying a wild Pokémon
+- Fix a mask map tiling error where ACD and ABC were swapped (spoted by @yordleyodel)
+- Fix Moonlit Courtyard tilesets
 
 # Misc
 
