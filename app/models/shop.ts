@@ -487,6 +487,15 @@ export default class Shop {
       Rarity.ULTRA
     ][i - 1]
 
+    if (
+      state.specialGameRule === SpecialGameRule.HIGH_ROLLER &&
+      chance(2 / 100)
+    ) {
+      if (state.stageLevel < 10) return this.pickSpecialPokemon(Rarity.HATCH)
+      if (state.stageLevel < 20) return this.pickSpecialPokemon(Rarity.UNIQUE)
+      return this.pickSpecialPokemon(Rarity.LEGENDARY)
+    }
+
     if (!rarity) {
       logger.error(
         `error in shop while picking seed = ${rarity_seed}, threshold = ${threshold}`
@@ -498,32 +507,16 @@ export default class Shop {
       p.items.has(Item.REPEAT_BALL)
     )
     const totalRerolls = player.rerollCount + state.stageLevel
-    if (shopIndex >= 0 && shopIndex < repeatBallHolders.length) {
+
+    if (
+      repeatBallHolders.length > 0 &&
+      shopIndex >= 0 &&
+      shopIndex < repeatBallHolders.length
+    ) {
       if (totalRerolls >= 150 && totalRerolls % 10 === 0) {
-        let legendaryCandidates: Pkm[] = LegendaryPool.filter<Pkm>(
-          (p): p is Pkm => !(p in PkmDuos)
-        )
-        shuffleArray(legendaryCandidates)
-        legendaryCandidates = legendaryCandidates.filter(
-          (p, index) =>
-            legendaryCandidates.findIndex(
-              (p2) => PkmFamily[p2] === PkmFamily[p]
-            ) === index
-        )
-        if (legendaryCandidates.length > 0)
-          return pickRandomIn(legendaryCandidates)
+        return this.pickSpecialPokemon(Rarity.LEGENDARY)
       } else if (totalRerolls >= 100 && totalRerolls % 10 === 0) {
-        let uniqueCandidates: Pkm[] = UniquePool.filter<Pkm>(
-          (p): p is Pkm => !(p in PkmDuos)
-        )
-        shuffleArray(uniqueCandidates)
-        uniqueCandidates = uniqueCandidates.filter(
-          (p, index) =>
-            uniqueCandidates.findIndex(
-              (p2) => PkmFamily[p2] === PkmFamily[p]
-            ) === index
-        )
-        if (uniqueCandidates.length > 0) return pickRandomIn(uniqueCandidates)
+        return this.pickSpecialPokemon(Rarity.UNIQUE)
       }
     }
 
@@ -533,6 +526,33 @@ export default class Shop {
       finals,
       specificTypesWanted
     )
+  }
+
+  pickSpecialPokemon(rarity: Rarity) {
+    let pool: PkmProposition[]
+    switch (rarity) {
+      case Rarity.LEGENDARY:
+        pool = LegendaryPool
+        break
+      case Rarity.UNIQUE:
+        pool = UniquePool
+        break
+      case Rarity.HATCH:
+        pool = PRECOMPUTED_POKEMONS_PER_RARITY.HATCH.filter(
+          (p) => getPokemonData(p).stars === 1
+        )
+        break
+      default:
+        return Pkm.MAGIKARP
+    }
+    let candidates: Pkm[] = pool.filter<Pkm>((p): p is Pkm => !(p in PkmDuos))
+    shuffleArray(candidates)
+    candidates = candidates.filter(
+      (p, index) =>
+        candidates.findIndex((p2) => PkmFamily[p2] === PkmFamily[p]) === index
+    )
+    if (candidates.length > 0) return pickRandomIn(candidates)
+    return Pkm.MAGIKARP
   }
 
   pickFish(player: Player, rod: FishingRod): Pkm {
