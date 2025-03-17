@@ -5,7 +5,7 @@ import { getUnitPowerScore } from "../../public/src/pages/component/bot-builder/
 import type GameState from "../../rooms/states/game-state"
 import type { IPlayer, Role, Title } from "../../types"
 import { SynergyTriggers, UniquePool } from "../../types/Config"
-import { DungeonPMDO } from "../../types/enum/Dungeon"
+import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
 import { BattleResult, Rarity, Team } from "../../types/enum/Game"
 import {
   ArtificialItems,
@@ -120,6 +120,7 @@ export default class Player extends Schema implements IPlayer {
   ghost: boolean = false
   firstPartner: Pkm | undefined
   hasLeftGame: boolean = false
+  bonusSynergies: Map<Synergy, number> = new Map<Synergy, number>()
 
   constructor(
     id: string,
@@ -295,6 +296,13 @@ export default class Player extends Schema implements IPlayer {
       */
       updatedSynergies = computeSynergies(pokemons)
     }
+
+    this.bonusSynergies.forEach((value, synergy) => {
+      updatedSynergies.set(
+        synergy,
+        (updatedSynergies.get(synergy) ?? 0) + value
+      )
+    })
 
     const previousLight = previousSynergies.get(Synergy.LIGHT) ?? 0
     const newLight = updatedSynergies.get(Synergy.LIGHT) ?? 0
@@ -523,6 +531,19 @@ export default class Player extends Schema implements IPlayer {
           state.shop.addRegionalPokemon(p, this)
         }
       })
+
+      if (state.specialGameRule === SpecialGameRule.REGIONAL_SPECIALITIES) {
+        this.bonusSynergies.clear()
+        const { synergies, regionalSpeciality } = DungeonDetails[this.map]
+        synergies.forEach((synergy) => {
+          this.bonusSynergies.set(synergy, 1)
+        })
+        if (regionalSpeciality) {
+          this.board.forEach((pokemon) => {
+            pokemon.meal = regionalSpeciality
+          })
+        }
+      }
     }
 
     newRegionalPokemons.sort(

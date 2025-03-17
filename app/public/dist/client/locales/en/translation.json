@@ -3581,7 +3581,8 @@
     "SLAMINGO": "Slamingo",
     "BLOOD_MONEY": "Blood Money",
     "TOWN_FESTIVAL": "Town Festival",
-    "HIGH_ROLLER": "High Roller"
+    "HIGH_ROLLER": "High Roller",
+    "REGIONAL_SPECIALITIES": "Regional Specialities"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "All the additional picks are available immediately",
@@ -3599,7 +3600,8 @@
     "SLAMINGO": "All items are dropped when a Pokémon is put on the bench. Starts with 4 random components.",
     "BLOOD_MONEY": "Every KO gives 1 GOLD. No extra income from interests.",
     "TOWN_FESTIVAL": "You always get an encounter in town and all the carousel items are free.",
-    "HIGH_ROLLER": "Shops have a chance to contain Hatch at stages 0-10, Unique at stages 10-20 and Legendary after stage 20."
+    "HIGH_ROLLER": "Shops have a chance to contain Hatch at stages 0-10, Unique at stages 10-20 and Legendary after stage 20.",
+    "REGIONAL_SPECIALITIES": "Your current region types count towards your synergies. After changing region, your team tastes a local dish."
   },
   "town_encounter_description": {
     "KECLEON": "Kecleon sells Synergy stones for {{cost}} GOLD",

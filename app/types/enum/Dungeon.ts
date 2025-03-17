@@ -1,3 +1,4 @@
+import { Dish, Item } from "./Item"
 import { Synergy } from "./Synergy"
 
 export enum DungeonMusic {
@@ -302,584 +303,729 @@ export enum DungeonPMDO {
 export interface DungeonPMDODetail {
   synergies: Synergy[]
   music: DungeonMusic
+  regionalSpeciality: Dish
 }
 export const DungeonDetails: {
   [key in DungeonPMDO | "town"]: DungeonPMDODetail
 } = {
   [DungeonPMDO.AmpPlains]: {
     synergies: [Synergy.ELECTRIC, Synergy.FIELD, Synergy.AQUATIC],
-    music: DungeonMusic.AMP_PLAINS
+    music: DungeonMusic.AMP_PLAINS,
+    regionalSpeciality: Item.FRUIT_JUICE
   },
   [DungeonPMDO.AppleWoods]: {
     synergies: [Synergy.BUG, Synergy.FLORA, Synergy.BABY],
-    music: DungeonMusic.APPLE_WOODS
+    music: DungeonMusic.APPLE_WOODS,
+    regionalSpeciality: Item.SWEET_APPLE
   },
   [DungeonPMDO.BarrenValley]: {
     synergies: [Synergy.ROCK, Synergy.FIGHTING, Synergy.GHOST],
-    music: DungeonMusic.BARREN_VALLEY
+    music: DungeonMusic.BARREN_VALLEY,
+    regionalSpeciality: Item.ROCK_SALT
   },
   [DungeonPMDO.BeachCave]: {
     synergies: [Synergy.AQUATIC, Synergy.GROUND, Synergy.FOSSIL],
-    music: DungeonMusic.BEACH_CAVE
+    music: DungeonMusic.BEACH_CAVE,
+    regionalSpeciality: Item.LEEK
   },
   [DungeonPMDO.BrineCave]: {
     synergies: [Synergy.POISON, Synergy.FOSSIL, Synergy.GROUND],
-    music: DungeonMusic.BRINE_CAVE
+    music: DungeonMusic.BRINE_CAVE,
+    regionalSpeciality: Item.BLACK_SLUDGE
   },
   [DungeonPMDO.BuriedRelic1]: {
     synergies: [Synergy.LIGHT, Synergy.ARTIFICIAL, Synergy.HUMAN],
-    music: DungeonMusic.BURIED_RELIC
+    music: DungeonMusic.BURIED_RELIC,
+    regionalSpeciality: Item.SPINDA_COCKTAIL
   },
   [DungeonPMDO.BuriedRelic2]: {
     synergies: [Synergy.GROUND, Synergy.ARTIFICIAL, Synergy.LIGHT],
-    music: DungeonMusic.TIME_GEAR_REMIX
+    music: DungeonMusic.TIME_GEAR_REMIX,
+    regionalSpeciality: Item.SWEET_HERB
   },
   [DungeonPMDO.BuriedRelic3]: {
     synergies: [Synergy.GROUND, Synergy.ARTIFICIAL, Synergy.HUMAN],
-    music: DungeonMusic.TIME_GEAR
+    music: DungeonMusic.TIME_GEAR,
+    regionalSpeciality: Item.RIBBON_SWEET
   },
   [DungeonPMDO.ConcealedRuins]: {
     synergies: [Synergy.POISON, Synergy.WILD, Synergy.GHOST],
-    music: DungeonMusic.CONCEALED_RUINS
+    music: DungeonMusic.CONCEALED_RUINS,
+    regionalSpeciality: Item.BINDING_MOCHI
   },
   [DungeonPMDO.CraggyCoast]: {
     synergies: [Synergy.WATER, Synergy.FIGHTING, Synergy.MONSTER],
-    music: DungeonMusic.CRAGGY_COAST
+    music: DungeonMusic.CRAGGY_COAST,
+    regionalSpeciality: Item.TEA
   },
   [DungeonPMDO.CrystalCave1]: {
     synergies: [Synergy.PSYCHIC, Synergy.SOUND, Synergy.FAIRY],
-    music: DungeonMusic.CRYSTAL_CAVE
+    music: DungeonMusic.CRYSTAL_CAVE,
+    regionalSpeciality: Item.WHIPPED_DREAM
   },
   [DungeonPMDO.CrystalCave2]: {
     synergies: [Synergy.PSYCHIC, Synergy.SOUND, Synergy.LIGHT],
-    music: DungeonMusic.STAFF_ROLL
+    music: DungeonMusic.STAFF_ROLL,
+    regionalSpeciality: Item.STAR_SWEET
   },
   [DungeonPMDO.CrystalCrossing]: {
     synergies: [Synergy.PSYCHIC, Synergy.AQUATIC, Synergy.POISON],
-    music: DungeonMusic.CRYSTAL_CROSSING
+    music: DungeonMusic.CRYSTAL_CROSSING,
+    regionalSpeciality: Item.STRAWBERRY_SWEET
   },
   [DungeonPMDO.DarkCrater]: {
     synergies: [Synergy.DARK, Synergy.FIRE, Synergy.GROUND],
-    music: DungeonMusic.DARK_CRATER
+    music: DungeonMusic.DARK_CRATER,
+    regionalSpeciality: Item.CURRY
   },
   [DungeonPMDO.DarkHill1]: {
     synergies: [Synergy.GHOST, Synergy.DARK, Synergy.FLYING],
-    music: DungeonMusic.DARK_HILL
+    music: DungeonMusic.DARK_HILL,
+    regionalSpeciality: Item.TEA
   },
   [DungeonPMDO.DarkHill2]: {
     synergies: [Synergy.GHOST, Synergy.DARK, Synergy.AMORPHOUS],
-    music: DungeonMusic.I_SAW_SOMETHING_AGAIN
+    music: DungeonMusic.I_SAW_SOMETHING_AGAIN,
+    regionalSpeciality: Item.CLOVER_SWEET
   },
   [DungeonPMDO.DarkIceMountain]: {
     synergies: [Synergy.DARK, Synergy.ICE, Synergy.NORMAL],
-    music: DungeonMusic.DARK_ICE_MOUNTAIN
+    music: DungeonMusic.DARK_ICE_MOUNTAIN,
+    regionalSpeciality: Item.CASTELIACONE
   },
   [DungeonPMDO.DarkIceMountainPeak]: {
     synergies: [Synergy.DARK, Synergy.ICE, Synergy.FLYING],
-    music: DungeonMusic.AT_THE_SNOWY_MOUNTAIN
+    music: DungeonMusic.AT_THE_SNOWY_MOUNTAIN,
+    regionalSpeciality: Item.CASTELIACONE
   },
   [DungeonPMDO.DarknightRelic]: {
     synergies: [Synergy.FOSSIL, Synergy.ARTIFICIAL, Synergy.HUMAN],
-    music: DungeonMusic.DARK_WASTELAND
+    music: DungeonMusic.DARK_WASTELAND,
+    regionalSpeciality: Item.RIBBON_SWEET
   },
   [DungeonPMDO.DarkWasteland]: {
     synergies: [Synergy.DARK, Synergy.POISON, Synergy.MONSTER],
-    music: DungeonMusic.CHASM_CAVE
+    music: DungeonMusic.CHASM_CAVE,
+    regionalSpeciality: Item.BINDING_MOCHI
   },
   [DungeonPMDO.DeepBoulderQuarry]: {
     synergies: [Synergy.ROCK, Synergy.STEEL, Synergy.FOSSIL],
-    music: DungeonMusic.BOULDER_QUARRY
+    music: DungeonMusic.BOULDER_QUARRY,
+    regionalSpeciality: Item.ROCK_SALT
   },
   [DungeonPMDO.DeepDarkCrater]: {
     synergies: [Synergy.DARK, Synergy.FIRE, Synergy.MONSTER],
-    music: DungeonMusic.DEEP_DARK_CRATER
+    music: DungeonMusic.DEEP_DARK_CRATER,
+    regionalSpeciality: Item.CURRY
   },
   [DungeonPMDO.DeepDuskForest1]: {
     synergies: [Synergy.GHOST, Synergy.GRASS, Synergy.DARK],
-    music: DungeonMusic.DEEP_DUSK_FOREST
+    music: DungeonMusic.DEEP_DUSK_FOREST,
+    regionalSpeciality: Item.TEA
   },
   [DungeonPMDO.DeepDuskForest2]: {
     synergies: [Synergy.GHOST, Synergy.GRASS, Synergy.LIGHT],
-    music: DungeonMusic.GROWING_ANXIETY
+    music: DungeonMusic.GROWING_ANXIETY,
+    regionalSpeciality: Item.CLOVER_SWEET
   },
   [DungeonPMDO.DeepLimestoneCavern]: {
     synergies: [Synergy.WATER, Synergy.BUG, Synergy.ROCK],
-    music: DungeonMusic.PROTECTED_WORLD_PEACE
+    music: DungeonMusic.PROTECTED_WORLD_PEACE,
+    regionalSpeciality: Item.ROCK_SALT
   },
   [DungeonPMDO.DeepSealedRuin]: {
     synergies: [Synergy.AMORPHOUS, Synergy.GHOST, Synergy.MONSTER],
-    music: DungeonMusic.SEALED_RUIN_PIT
+    music: DungeonMusic.SEALED_RUIN_PIT,
+    regionalSpeciality: Item.LEFTOVERS
   },
   [DungeonPMDO.DesertRegion]: {
     synergies: [Synergy.FIRE, Synergy.FIELD, Synergy.LIGHT],
-    music: DungeonMusic.DUN_HONOO_2
+    music: DungeonMusic.DUN_HONOO_2,
+    regionalSpeciality: Item.CURRY
   },
   [DungeonPMDO.DrenchedBluff]: {
     synergies: [Synergy.AQUATIC, Synergy.FOSSIL, Synergy.BABY],
-    music: DungeonMusic.DRENCHED_BLUFF
+    music: DungeonMusic.DRENCHED_BLUFF,
+    regionalSpeciality: Item.LOVE_SWEET
   },
   [DungeonPMDO.DuskForest1]: {
     synergies: [Synergy.MONSTER, Synergy.GRASS, Synergy.DARK],
-    music: DungeonMusic.DUSK_FOREST
+    music: DungeonMusic.DUSK_FOREST,
+    regionalSpeciality: Item.LARGE_LEEK
   },
   [DungeonPMDO.DuskForest2]: {
     synergies: [Synergy.GHOST, Synergy.GRASS, Synergy.FLORA],
-    music: DungeonMusic.SINISTER_WOODS
+    music: DungeonMusic.SINISTER_WOODS,
+    regionalSpeciality: Item.LARGE_LEEK
   },
   [DungeonPMDO.ElectricMaze]: {
     synergies: [Synergy.ELECTRIC, Synergy.MONSTER, Synergy.LIGHT],
-    music: DungeonMusic.STOP_THIEF
+    music: DungeonMusic.STOP_THIEF,
+    regionalSpeciality: Item.FRUIT_JUICE
   },
   [DungeonPMDO.FarAmpPlains]: {
     synergies: [Synergy.ELECTRIC, Synergy.FIELD, Synergy.FOSSIL],
-    music: DungeonMusic.FAR_AMP_PLAINS
+    music: DungeonMusic.FAR_AMP_PLAINS,
+    regionalSpeciality: Item.FRUIT_JUICE
   },
   [DungeonPMDO.FinalMaze2]: {
     synergies: [Synergy.NORMAL, Synergy.FLORA, Synergy.BUG],
-    music: DungeonMusic.FRIEND_AREA_CAVES
+    music: DungeonMusic.FRIEND_AREA_CAVES,
+    regionalSpeciality: Item.HONEY
   },
   [DungeonPMDO.FoggyForest]: {
     synergies: [Synergy.FAIRY, Synergy.WILD, Synergy.FLORA],
-    music: DungeonMusic.FOGGY_FOREST
+    music: DungeonMusic.FOGGY_FOREST,
+    regionalSpeciality: Item.WHIPPED_DREAM
   },
   [DungeonPMDO.ForestPath]: {
     synergies: [Synergy.GRASS, Synergy.BUG, Synergy.BABY],
-    music: DungeonMusic.SKY_PEAK_FOREST
+    music: DungeonMusic.SKY_PEAK_FOREST,
+    regionalSpeciality: Item.HONEY
   },
   [DungeonPMDO.FrostyForest]: {
     synergies: [Synergy.LIGHT, Synergy.ICE, Synergy.FIGHTING],
-    music: DungeonMusic.FROSTY_FOREST
+    music: DungeonMusic.FROSTY_FOREST,
+    regionalSpeciality: Item.CASTELIACONE
   },
   [DungeonPMDO.FutureTemporalSpire]: {
     synergies: [Synergy.HUMAN, Synergy.ARTIFICIAL, Synergy.PSYCHIC],
-    music: DungeonMusic.BATTLE_WITH_RAYQUAZA
+    music: DungeonMusic.BATTLE_WITH_RAYQUAZA,
+    regionalSpeciality: Item.SPINDA_COCKTAIL
   },
   [DungeonPMDO.FutureTemporalTower]: {
     synergies: [Synergy.MONSTER, Synergy.ARTIFICIAL, Synergy.PSYCHIC],
-    music: DungeonMusic.TEMPORAL_TOWER
+    music: DungeonMusic.TEMPORAL_TOWER,
+    regionalSpeciality: Item.SPINDA_COCKTAIL
   },
   [DungeonPMDO.GoldenChamber]: {
     synergies: [Synergy.DRAGON, Synergy.STEEL, Synergy.AMORPHOUS],
-    music: DungeonMusic.OUTLAW
+    music: DungeonMusic.OUTLAW,
+    regionalSpeciality: Item.POFFIN
   },
   [DungeonPMDO.GrassMaze]: {
     synergies: [Synergy.GRASS, Synergy.FIELD, Synergy.NORMAL],
-    music: DungeonMusic.MAKUHITA_DOJO
+    music: DungeonMusic.MAKUHITA_DOJO,
+    regionalSpeciality: Item.MOOMOO_MILK
   },
   [DungeonPMDO.GreatCanyon]: {
     synergies: [Synergy.NORMAL, Synergy.WILD, Synergy.FIRE],
-    music: DungeonMusic.GREAT_CANYON
+    music: DungeonMusic.GREAT_CANYON,
+    regionalSpeciality: Item.RAGE_CANDY_BAR
   },
   [DungeonPMDO.HiddenHighland]: {
     synergies: [Synergy.FLORA, Synergy.GRASS, Synergy.BUG],
-    music: DungeonMusic.HIDDEN_HIGHLAND
+    music: DungeonMusic.HIDDEN_HIGHLAND,
+    regionalSpeciality: Item.HONEY
   },
   [DungeonPMDO.HiddenLand]: {
     synergies: [Synergy.FLORA, Synergy.WILD, Synergy.WATER],
-    music: DungeonMusic.HIDDEN_LAND
+    music: DungeonMusic.HIDDEN_LAND,
+    regionalSpeciality: Item.RAGE_CANDY_BAR
   },
   [DungeonPMDO.HowlingForest1]: {
     synergies: [Synergy.SOUND, Synergy.FIELD, Synergy.BUG],
-    music: DungeonMusic.RANDOM_DUNGEON_2
+    music: DungeonMusic.RANDOM_DUNGEON_2,
+    regionalSpeciality: Item.BERRY_JUICE
   },
   [DungeonPMDO.HowlingForest2]: {
     synergies: [Synergy.SOUND, Synergy.POISON, Synergy.FOSSIL],
-    music: DungeonMusic.FRIEND_AREA_FOREST
+    music: DungeonMusic.FRIEND_AREA_FOREST,
+    regionalSpeciality: Item.BLACK_SLUDGE
   },
   [DungeonPMDO.IceAegisCave]: {
     synergies: [Synergy.ICE, Synergy.FIGHTING, Synergy.DARK],
-    music: DungeonMusic.ILLUSION_STONE_CHAMBER
+    music: DungeonMusic.ILLUSION_STONE_CHAMBER,
+    regionalSpeciality: Item.CASTELIACONE
   },
   [DungeonPMDO.IceMaze]: {
     synergies: [Synergy.ICE, Synergy.STEEL, Synergy.FIGHTING],
-    music: DungeonMusic.TOP_MENU_THEME
+    music: DungeonMusic.TOP_MENU_THEME,
+    regionalSpeciality: Item.CASTELIACONE
   },
   [DungeonPMDO.IcicleForest]: {
     synergies: [Synergy.ICE, Synergy.FIELD, Synergy.FIGHTING],
-    music: DungeonMusic.ICICLE_FOREST
+    music: DungeonMusic.ICICLE_FOREST,
+    regionalSpeciality: Item.CASTELIACONE
   },
   [DungeonPMDO.JoyousTower]: {
     synergies: [Synergy.LIGHT, Synergy.FAIRY, Synergy.BABY],
-    music: DungeonMusic.A_NEW_WORLD
+    music: DungeonMusic.A_NEW_WORLD,
+    regionalSpeciality: Item.WHIPPED_DREAM
   },
   [DungeonPMDO.LapisCave]: {
     synergies: [Synergy.WATER, Synergy.AQUATIC, Synergy.FOSSIL],
-    music: DungeonMusic.LAPIS_CAVE
+    music: DungeonMusic.LAPIS_CAVE,
+    regionalSpeciality: Item.TEA
   },
   [DungeonPMDO.LightningField]: {
     synergies: [Synergy.ELECTRIC, Synergy.FIELD, Synergy.LIGHT],
-    music: DungeonMusic.OH_NO
+    music: DungeonMusic.OH_NO,
+    regionalSpeciality: Item.FRUIT_JUICE
   },
   [DungeonPMDO.LimestoneCavern]: {
     synergies: [Synergy.ROCK, Synergy.BUG, Synergy.AQUATIC],
-    music: DungeonMusic.LIMESTONE_CAVERN
+    music: DungeonMusic.LIMESTONE_CAVERN,
+    regionalSpeciality: Item.ROCK_SALT
   },
   [DungeonPMDO.LowerBrineCave]: {
     synergies: [Synergy.AQUATIC, Synergy.FOSSIL, Synergy.WILD],
-    music: DungeonMusic.LOWER_BRINE_CAVE
+    music: DungeonMusic.LOWER_BRINE_CAVE,
+    regionalSpeciality: Item.POFFIN
   },
   [DungeonPMDO.LushPrairie]: {
     synergies: [Synergy.BUG, Synergy.LIGHT, Synergy.FLORA],
-    music: DungeonMusic.WELCOME_TO_THE_WORLD_OF_POKEMON
+    music: DungeonMusic.WELCOME_TO_THE_WORLD_OF_POKEMON,
+    regionalSpeciality: Item.FLOWER_SWEET
   },
   [DungeonPMDO.MagmaCavern2]: {
     synergies: [Synergy.FIRE, Synergy.FIGHTING, Synergy.MONSTER],
-    music: DungeonMusic.MAGMA_CAVERN
+    music: DungeonMusic.MAGMA_CAVERN,
+    regionalSpeciality: Item.CURRY
   },
   [DungeonPMDO.MagmaCavern3]: {
     synergies: [Synergy.FIRE, Synergy.DRAGON, Synergy.MONSTER],
-    music: DungeonMusic.MAGMA_CAVERN_PIT
+    music: DungeonMusic.MAGMA_CAVERN_PIT,
+    regionalSpeciality: Item.CURRY
   },
   [DungeonPMDO.MeteorCave]: {
     synergies: [Synergy.PSYCHIC, Synergy.FAIRY, Synergy.HUMAN],
-    music: DungeonMusic.RANDOM_DUNGEON_1
+    music: DungeonMusic.RANDOM_DUNGEON_1,
+    regionalSpeciality: Item.SPINDA_COCKTAIL
   },
   [DungeonPMDO.MiracleSea]: {
     synergies: [Synergy.WATER, Synergy.AQUATIC, Synergy.FAIRY],
-    music: DungeonMusic.MIRACLE_SEA
+    music: DungeonMusic.MIRACLE_SEA,
+    regionalSpeciality: Item.TEA
   },
   [DungeonPMDO.MoonlitCourtyard]: {
     synergies: [Synergy.FAIRY, Synergy.FLORA, Synergy.DARK],
-    music: DungeonMusic.GOODNIGHT
+    music: DungeonMusic.GOODNIGHT,
+    regionalSpeciality: Item.LOVE_SWEET
   },
   [DungeonPMDO.MtBlaze]: {
     synergies: [Synergy.FIRE, Synergy.FLYING, Synergy.WILD],
-    music: DungeonMusic.MT_BLAZE
+    music: DungeonMusic.MT_BLAZE,
+    regionalSpeciality: Item.CURRY
   },
   [DungeonPMDO.MtBristle]: {
     synergies: [Synergy.ELECTRIC, Synergy.FLYING, Synergy.MONSTER],
-    music: DungeonMusic.MT_BRISTLE
+    music: DungeonMusic.MT_BRISTLE,
+    regionalSpeciality: Item.FRUIT_JUICE
   },
   [DungeonPMDO.MtFaraway2]: {
     synergies: [Synergy.ICE, Synergy.AMORPHOUS, Synergy.DRAGON],
-    music: DungeonMusic.FROSTY_GROTTO
+    music: DungeonMusic.FROSTY_GROTTO,
+    regionalSpeciality: Item.CASTELIACONE
   },
   [DungeonPMDO.MtFaraway4]: {
     synergies: [Synergy.ICE, Synergy.FLYING, Synergy.SOUND],
-    music: DungeonMusic.ESCAPE_THROUGH_THE_SNOW
+    music: DungeonMusic.ESCAPE_THROUGH_THE_SNOW,
+    regionalSpeciality: Item.CASTELIACONE
   },
   [DungeonPMDO.MtFreeze]: {
     synergies: [Synergy.ICE, Synergy.FLYING, Synergy.NORMAL],
-    music: DungeonMusic.MT_FREEZE
+    music: DungeonMusic.MT_FREEZE,
+    regionalSpeciality: Item.CASTELIACONE
   },
   [DungeonPMDO.MtHorn]: {
     synergies: [Synergy.ROCK, Synergy.FLYING, Synergy.SOUND],
-    music: DungeonMusic.MT_HORN
+    music: DungeonMusic.MT_HORN,
+    regionalSpeciality: Item.RAGE_CANDY_BAR
   },
   [DungeonPMDO.MtSteel1]: {
     synergies: [Synergy.STEEL, Synergy.FLYING, Synergy.FIGHTING],
-    music: DungeonMusic.MT_STEEL
+    music: DungeonMusic.MT_STEEL,
+    regionalSpeciality: Item.RAGE_CANDY_BAR
   },
   [DungeonPMDO.MtSteel2]: {
     synergies: [Synergy.STEEL, Synergy.FLYING, Synergy.AMORPHOUS],
-    music: DungeonMusic.BOSS_BATTLE
+    music: DungeonMusic.BOSS_BATTLE,
+    regionalSpeciality: Item.RAGE_CANDY_BAR
   },
   [DungeonPMDO.MtThunder]: {
     synergies: [Synergy.ELECTRIC, Synergy.ROCK, Synergy.STEEL],
-    music: DungeonMusic.MT_THUNDER
+    music: DungeonMusic.MT_THUNDER,
+    regionalSpeciality: Item.FRUIT_JUICE
   },
   [DungeonPMDO.MtThunderPeak]: {
     synergies: [Synergy.ELECTRIC, Synergy.FLYING, Synergy.WILD],
-    music: DungeonMusic.MT_THUNDER_PEAK
+    music: DungeonMusic.MT_THUNDER_PEAK,
+    regionalSpeciality: Item.FRUIT_JUICE
   },
   [DungeonPMDO.MtTravail]: {
     synergies: [Synergy.FIGHTING, Synergy.HUMAN, Synergy.FOSSIL],
-    music: DungeonMusic.MT_TRAVAIL
+    music: DungeonMusic.MT_TRAVAIL,
+    regionalSpeciality: Item.RAGE_CANDY_BAR
   },
   [DungeonPMDO.MurkyCave]: {
     synergies: [Synergy.POISON, Synergy.GROUND, Synergy.HUMAN],
-    music: DungeonMusic.MONSTER_HOUSE
+    music: DungeonMusic.MONSTER_HOUSE,
+    regionalSpeciality: Item.BLACK_SLUDGE
   },
   [DungeonPMDO.MurkyForest]: {
     synergies: [Synergy.POISON, Synergy.GRASS, Synergy.DARK],
-    music: DungeonMusic.MURKY_FOREST
+    music: DungeonMusic.MURKY_FOREST,
+    regionalSpeciality: Item.BERRY_JUICE
   },
   [DungeonPMDO.MysteryJungle1]: {
     synergies: [Synergy.WILD, Synergy.FLORA, Synergy.POISON],
-    music: DungeonMusic.FRIEND_AREA_STEPPE
+    music: DungeonMusic.FRIEND_AREA_STEPPE,
+    regionalSpeciality: Item.TART_APPLE
   },
   [DungeonPMDO.MysteryJungle2]: {
     synergies: [Synergy.WILD, Synergy.FAIRY, Synergy.POISON],
-    music: DungeonMusic.BLIZZARD_ISLAND
+    music: DungeonMusic.BLIZZARD_ISLAND,
+    regionalSpeciality: Item.SIRUPY_APPLE
   },
   [DungeonPMDO.MystifyingForest]: {
     synergies: [Synergy.BABY, Synergy.FAIRY, Synergy.FLORA],
-    music: DungeonMusic.MYSTIFYING_FOREST
+    music: DungeonMusic.MYSTIFYING_FOREST,
+    regionalSpeciality: Item.SWEET_HERB
   },
   [DungeonPMDO.NorthernDesert1]: {
     synergies: [Synergy.DRAGON, Synergy.FIRE, Synergy.LIGHT],
-    music: DungeonMusic.NORTHERN_DESERT
+    music: DungeonMusic.NORTHERN_DESERT,
+    regionalSpeciality: Item.CURRY
   },
   [DungeonPMDO.NorthernDesert2]: {
     synergies: [Synergy.DRAGON, Synergy.FIRE, Synergy.WILD],
-    music: DungeonMusic.NORTHERN_DESERT
+    music: DungeonMusic.NORTHERN_DESERT,
+    regionalSpeciality: Item.CURRY
   },
   [DungeonPMDO.NorthernRange1]: {
     synergies: [Synergy.POISON, Synergy.AQUATIC, Synergy.STEEL],
-    music: DungeonMusic.FORTUNE_RAVINE
+    music: DungeonMusic.FORTUNE_RAVINE,
+    regionalSpeciality: Item.POFFIN
   },
   [DungeonPMDO.NorthernRange2]: {
     synergies: [Synergy.MONSTER, Synergy.FIGHTING, Synergy.STEEL],
-    music: DungeonMusic.TEAM_SKULL
+    music: DungeonMusic.TEAM_SKULL,
+    regionalSpeciality: Item.MOOMOO_MILK
   },
   [DungeonPMDO.NorthwindField]: {
     synergies: [Synergy.WATER, Synergy.FIELD, Synergy.SOUND],
-    music: DungeonMusic.THROUGH_THE_SEA_OF_TIME
+    music: DungeonMusic.THROUGH_THE_SEA_OF_TIME,
+    regionalSpeciality: Item.NUTRITIOUS_EGG
   },
   [DungeonPMDO.PitfallValley1]: {
     synergies: [Synergy.FIELD, Synergy.HUMAN, Synergy.BABY],
-    music: DungeonMusic.PERSONALITY_TEST
+    music: DungeonMusic.PERSONALITY_TEST,
+    regionalSpeciality: Item.MOOMOO_MILK
   },
   [DungeonPMDO.PoisonMaze]: {
     synergies: [Synergy.POISON, Synergy.PSYCHIC, Synergy.BUG],
-    music: DungeonMusic.RANDOM_DUNGEON_3
+    music: DungeonMusic.RANDOM_DUNGEON_3,
+    regionalSpeciality: Item.BLACK_SLUDGE
   },
   [DungeonPMDO.PurityForest2]: {
     synergies: [Synergy.BABY, Synergy.LIGHT, Synergy.AMORPHOUS],
-    music: DungeonMusic.RUN_AWAY
+    music: DungeonMusic.RUN_AWAY,
+    regionalSpeciality: Item.SWEET_APPLE
   },
   [DungeonPMDO.PurityForest4]: {
     synergies: [Synergy.NORMAL, Synergy.WILD, Synergy.FAIRY],
-    music: DungeonMusic.POKEMON_SQUARE
+    music: DungeonMusic.POKEMON_SQUARE,
+    regionalSpeciality: Item.SWEET_HERB
   },
   [DungeonPMDO.PurityForest6]: {
     synergies: [Synergy.NORMAL, Synergy.GRASS, Synergy.BABY],
-    music: DungeonMusic.SHAYMIN_VILLAGE
+    music: DungeonMusic.SHAYMIN_VILLAGE,
+    regionalSpeciality: Item.SWEET_APPLE
   },
   [DungeonPMDO.PurityForest7]: {
     synergies: [Synergy.GRASS, Synergy.BABY, Synergy.SOUND],
-    music: DungeonMusic.ON_THE_BEACH_AT_DUSK
+    music: DungeonMusic.ON_THE_BEACH_AT_DUSK,
+    regionalSpeciality: Item.SWEET_APPLE
   },
   [DungeonPMDO.QuicksandCave]: {
     synergies: [Synergy.GROUND, Synergy.FOSSIL, Synergy.NORMAL],
-    music: DungeonMusic.QUICKSAND_CAVE
+    music: DungeonMusic.QUICKSAND_CAVE,
+    regionalSpeciality: Item.LEEK
   },
   [DungeonPMDO.QuicksandPit]: {
     synergies: [Synergy.GROUND, Synergy.FOSSIL, Synergy.MONSTER],
-    music: DungeonMusic.QUICKSAND_PIT
+    music: DungeonMusic.QUICKSAND_PIT,
+    Item: Item.LEEK
   },
   [DungeonPMDO.QuicksandUnused]: {
     synergies: [Synergy.GROUND, Synergy.NORMAL, Synergy.POISON],
-    music: DungeonMusic.THERES_TROUBLE
+    music: DungeonMusic.THERES_TROUBLE,
+    regionalSpeciality: Item.LARGE_LEEK
   },
   [DungeonPMDO.RescueTeamMaze]: {
     synergies: [Synergy.FIGHTING, Synergy.HUMAN, Synergy.ARTIFICIAL],
-    music: DungeonMusic.RESCUE_TEAM_BASE
+    music: DungeonMusic.RESCUE_TEAM_BASE,
+    regionalSpeciality: Item.NUTRITIOUS_EGG
   },
   [DungeonPMDO.RockAegisCave]: {
     synergies: [Synergy.ROCK, Synergy.GHOST, Synergy.AMORPHOUS],
-    music: DungeonMusic.FRIEND_AREA_SWAMP
+    music: DungeonMusic.FRIEND_AREA_SWAMP,
+    regionalSpeciality: Item.ROCK_SALT
   },
   [DungeonPMDO.RockMaze]: {
     synergies: [Synergy.ROCK, Synergy.STEEL, Synergy.FIGHTING],
-    music: DungeonMusic.DEFY_THE_LEGENDS
+    music: DungeonMusic.DEFY_THE_LEGENDS,
+    regionalSpeciality: Item.ROCK_SALT
   },
   [DungeonPMDO.RockPathRB]: {
     synergies: [Synergy.ROCK, Synergy.FIELD, Synergy.FOSSIL],
-    music: DungeonMusic.RISING_FEAR
+    music: DungeonMusic.RISING_FEAR,
+    regionalSpeciality: Item.RIBBON_SWEET
   },
   [DungeonPMDO.RockPathTDS]: {
     synergies: [Synergy.ROCK, Synergy.FIELD, Synergy.MONSTER],
-    music: DungeonMusic.FRIEND_AREA_POND
+    music: DungeonMusic.FRIEND_AREA_POND,
+    regionalSpeciality: Item.RIBBON_SWEET
   },
   [DungeonPMDO.SealedRuin]: {
     synergies: [Synergy.HUMAN, Synergy.DRAGON, Synergy.GHOST],
-    music: DungeonMusic.THE_LEGEND_OF_NINETALES
+    music: DungeonMusic.THE_LEGEND_OF_NINETALES,
+    regionalSpeciality: Item.LEFTOVERS
   },
   [DungeonPMDO.SidePath]: {
     synergies: [Synergy.NORMAL, Synergy.FIELD, Synergy.STEEL],
-    music: DungeonMusic.CAVE_AND_SIDE_PATH
+    music: DungeonMusic.CAVE_AND_SIDE_PATH,
+    regionalSpeciality: Item.MOOMOO_MILK
   },
   [DungeonPMDO.SilentChasm]: {
     synergies: [Synergy.FIRE, Synergy.LIGHT, Synergy.WILD],
-    music: DungeonMusic.SILENT_CHASM
+    music: DungeonMusic.SILENT_CHASM,
+    regionalSpeciality: Item.CURRY
   },
   [DungeonPMDO.SkyPeak4thPass]: {
     synergies: [Synergy.GRASS, Synergy.FLORA, Synergy.BABY],
-    music: DungeonMusic.SKY_PEAK_COAST
+    music: DungeonMusic.SKY_PEAK_COAST,
+    regionalSpeciality: Item.FLOWER_SWEET
   },
   [DungeonPMDO.SkyPeak7thPass]: {
     synergies: [Synergy.ICE, Synergy.DRAGON, Synergy.FAIRY],
-    music: DungeonMusic.SKY_PEAK_CAVE
+    music: DungeonMusic.SKY_PEAK_CAVE,
+    regionalSpeciality: Item.CASTELIACONE
   },
   [DungeonPMDO.SkyPeakSummitPass]: {
     synergies: [Synergy.DARK, Synergy.STEEL, Synergy.ROCK],
-    music: DungeonMusic.SKY_TOWER_SUMMIT
+    music: DungeonMusic.SKY_TOWER_SUMMIT,
+    regionalSpeciality: Item.STAR_SWEET
   },
   [DungeonPMDO.SkyTower]: {
     synergies: [Synergy.FLYING, Synergy.LIGHT, Synergy.FAIRY],
-    music: DungeonMusic.SKY_TOWER
+    music: DungeonMusic.SKY_TOWER,
+    regionalSpeciality: Item.STAR_SWEET
   },
   [DungeonPMDO.SnowPath]: {
     synergies: [Synergy.ICE, Synergy.FIELD, Synergy.NORMAL],
-    music: DungeonMusic.SKY_PEAK_SNOWFIELD
+    music: DungeonMusic.SKY_PEAK_SNOWFIELD,
+    regionalSpeciality: Item.CASTELIACONE
   },
   [DungeonPMDO.SolarCave1]: {
     synergies: [Synergy.PSYCHIC, Synergy.FIRE, Synergy.SOUND],
-    music: DungeonMusic.SKY_PEAK_PRAIRIE
+    music: DungeonMusic.SKY_PEAK_PRAIRIE,
+    regionalSpeciality: Item.STRAWBERRY_SWEET
   },
   [DungeonPMDO.SouthernCavern1]: {
     synergies: [Synergy.STEEL, Synergy.POISON, Synergy.ARTIFICIAL],
-    music: DungeonMusic.SPRING_CAVE
+    music: DungeonMusic.SPRING_CAVE,
+    regionalSpeciality: Item.CLOVER_SWEET
   },
   [DungeonPMDO.SouthernCavern2]: {
     synergies: [Synergy.FAIRY, Synergy.AQUATIC, Synergy.POISON],
-    music: DungeonMusic.SPRING_CAVE_DEPTHS
+    music: DungeonMusic.SPRING_CAVE_DEPTHS,
+    regionalSpeciality: Item.BERRY_SWEET
   },
   [DungeonPMDO.SouthernJungle]: {
     synergies: [Synergy.WILD, Synergy.FLORA, Synergy.GRASS],
-    music: DungeonMusic.SOUTHERN_JUNGLE
+    music: DungeonMusic.SOUTHERN_JUNGLE,
+    regionalSpeciality: Item.BERRY_JUICE
   },
   [DungeonPMDO.SpacialCliffs]: {
     synergies: [Synergy.GHOST, Synergy.AMORPHOUS, Synergy.ELECTRIC],
-    music: DungeonMusic.SPACIAL_CLIFFS
+    music: DungeonMusic.SPACIAL_CLIFFS,
+    regionalSpeciality: Item.SPINDA_COCKTAIL
   },
   [DungeonPMDO.SpacialRift1]: {
     synergies: [Synergy.GHOST, Synergy.ARTIFICIAL, Synergy.MONSTER],
-    music: DungeonMusic.IN_THE_FUTURE
+    music: DungeonMusic.IN_THE_FUTURE,
+    regionalSpeciality: Item.STAR_SWEET
   },
   [DungeonPMDO.SpacialRift2]: {
     synergies: [Synergy.GHOST, Synergy.ARTIFICIAL, Synergy.PSYCHIC],
-    music: DungeonMusic.PLANETS_PARALYSIS
+    music: DungeonMusic.PLANETS_PARALYSIS,
+    regionalSpeciality: Item.STAR_SWEET
   },
   [DungeonPMDO.SteamCave]: {
     synergies: [Synergy.FIRE, Synergy.GROUND, Synergy.ELECTRIC],
-    music: DungeonMusic.STEAM_CAVE
+    music: DungeonMusic.STEAM_CAVE,
+    regionalSpeciality: Item.CURRY
   },
   [DungeonPMDO.SteelAegisCave]: {
     synergies: [Synergy.STEEL, Synergy.NORMAL, Synergy.FIGHTING],
-    music: DungeonMusic.AEGIS_CAVE
+    music: DungeonMusic.AEGIS_CAVE,
+    regionalSpeciality: Item.POFFIN
   },
   [DungeonPMDO.StormySea1]: {
     synergies: [Synergy.WATER, Synergy.AQUATIC, Synergy.ELECTRIC],
-    music: DungeonMusic.STORMY_SEA
+    music: DungeonMusic.STORMY_SEA,
+    regionalSpeciality: Item.POFFIN
   },
   [DungeonPMDO.StormySea2]: {
     synergies: [Synergy.WATER, Synergy.AQUATIC, Synergy.SOUND],
-    music: DungeonMusic.FRIEND_AREA_OCEANIC
+    music: DungeonMusic.FRIEND_AREA_OCEANIC,
+    regionalSpeciality: Item.POFFIN
   },
   [DungeonPMDO.SurroundedSea]: {
     synergies: [Synergy.WATER, Synergy.DRAGON, Synergy.ICE],
-    music: DungeonMusic.SURROUNDED_SEA
+    music: DungeonMusic.SURROUNDED_SEA,
+    regionalSpeciality: Item.LEFTOVERS
   },
   [DungeonPMDO.TemporalSpire]: {
     synergies: [Synergy.HUMAN, Synergy.PSYCHIC, Synergy.AMORPHOUS],
-    music: DungeonMusic.TEMPORAL_SPIRE
+    music: DungeonMusic.TEMPORAL_SPIRE,
+    regionalSpeciality: Item.SPINDA_COCKTAIL
   },
   [DungeonPMDO.TemporalTower]: {
     synergies: [Synergy.HUMAN, Synergy.STEEL, Synergy.ARTIFICIAL],
-    music: DungeonMusic.GARDEVOIR_INSIDE_OF_A_DREAM
+    music: DungeonMusic.GARDEVOIR_INSIDE_OF_A_DREAM,
+    regionalSpeciality: Item.SPINDA_COCKTAIL
   },
   [DungeonPMDO.TemporalUnused]: {
     synergies: [Synergy.NORMAL, Synergy.FOSSIL, Synergy.ARTIFICIAL],
-    music: DungeonMusic.TEMPORAL_PINNACLE
+    music: DungeonMusic.TEMPORAL_PINNACLE,
+    regionalSpeciality: Item.SPINDA_COCKTAIL
   },
   [DungeonPMDO.TestDungeon]: {
     synergies: [Synergy.ARTIFICIAL, Synergy.ELECTRIC, Synergy.PSYCHIC],
-    music: DungeonMusic.FRIEND_AREA_LAB
+    music: DungeonMusic.FRIEND_AREA_LAB,
+    regionalSpeciality: Item.SPINDA_COCKTAIL
   },
   [DungeonPMDO.TheNightmare]: {
     synergies: [Synergy.GHOST, Synergy.DARK, Synergy.PSYCHIC],
-    music: DungeonMusic.THE_POWER_OF_DARKNESS
+    music: DungeonMusic.THE_POWER_OF_DARKNESS,
+    regionalSpeciality: Item.BLACK_SLUDGE
   },
   [DungeonPMDO.ThunderwaveCave]: {
     synergies: [Synergy.ELECTRIC, Synergy.GROUND, Synergy.LIGHT],
-    music: DungeonMusic.THUNDERWAVE_CAVE
+    music: DungeonMusic.THUNDERWAVE_CAVE,
+    regionalSpeciality: Item.FRUIT_JUICE
   },
   [DungeonPMDO.TinyMeadow]: {
     synergies: [Synergy.NORMAL, Synergy.BABY, Synergy.AMORPHOUS],
-    music: DungeonMusic.FRIEND_AREA_GRASSLANDS
+    music: DungeonMusic.FRIEND_AREA_GRASSLANDS,
+    regionalSpeciality: Item.MOOMOO_MILK
   },
   [DungeonPMDO.TinyWoods]: {
     synergies: [Synergy.BUG, Synergy.BABY, Synergy.NORMAL],
-    music: DungeonMusic.TINY_WOODS
+    music: DungeonMusic.TINY_WOODS,
+    regionalSpeciality: Item.SWEET_APPLE
   },
   [DungeonPMDO.TreeshroudForest1]: {
     synergies: [Synergy.AMORPHOUS, Synergy.WATER, Synergy.BUG],
-    music: DungeonMusic.TREESHROUD_FOREST
+    music: DungeonMusic.TREESHROUD_FOREST,
+    regionalSpeciality: Item.TART_APPLE
   },
   [DungeonPMDO.TreeshroudForest2]: {
     synergies: [Synergy.GRASS, Synergy.AQUATIC, Synergy.BABY],
-    music: DungeonMusic.FRIEND_AREA_WILDS
+    music: DungeonMusic.FRIEND_AREA_WILDS,
+    regionalSpeciality: Item.TART_APPLE
   },
   [DungeonPMDO.UnusedBrineCave]: {
     synergies: [Synergy.WATER, Synergy.GROUND, Synergy.DRAGON],
-    music: DungeonMusic.IN_THE_NIGHTMARE
+    music: DungeonMusic.IN_THE_NIGHTMARE,
+    regionalSpeciality: Item.STRAWBERRY_SWEET
   },
   [DungeonPMDO.UnusedSteamCave]: {
     synergies: [Synergy.FIRE, Synergy.WATER, Synergy.ELECTRIC],
-    music: DungeonMusic.UPPER_STEAM_CAVE
+    music: DungeonMusic.UPPER_STEAM_CAVE,
+    regionalSpeciality: Item.CURRY
   },
   [DungeonPMDO.UnusedWaterfallPond]: {
     synergies: [Synergy.AQUATIC, Synergy.BUG, Synergy.WILD],
-    music: DungeonMusic.DEEP_STAR_CAVE
+    music: DungeonMusic.DEEP_STAR_CAVE,
+    regionalSpeciality: Item.CLOVER_SWEET
   },
   [DungeonPMDO.UproarForest]: {
     synergies: [Synergy.WILD, Synergy.FIELD, Synergy.SOUND],
-    music: DungeonMusic.TREASURE_TOWN
+    music: DungeonMusic.TREASURE_TOWN,
+    regionalSpeciality: Item.RAGE_CANDY_BAR
   },
   [DungeonPMDO.VastIceMountain]: {
     synergies: [Synergy.DRAGON, Synergy.ICE, Synergy.ROCK],
-    music: DungeonMusic.VAST_ICE_MOUNTAIN
+    music: DungeonMusic.VAST_ICE_MOUNTAIN,
+    regionalSpeciality: Item.CASTELIACONE
   },
   [DungeonPMDO.VastIceMountainPeak]: {
     synergies: [Synergy.DRAGON, Synergy.ICE, Synergy.FLYING],
-    music: DungeonMusic.VAST_ICE_MOUNTAIN_PEAK
+    music: DungeonMusic.VAST_ICE_MOUNTAIN_PEAK,
+    regionalSpeciality: Item.CASTELIACONE
   },
   [DungeonPMDO.WaterfallCave]: {
     synergies: [Synergy.WATER, Synergy.GROUND, Synergy.SOUND],
-    music: DungeonMusic.MAROWAK_DOJO
+    music: DungeonMusic.MAROWAK_DOJO,
+    regionalSpeciality: Item.TEA
   },
   [DungeonPMDO.WaterfallPond]: {
     synergies: [Synergy.AQUATIC, Synergy.AMORPHOUS, Synergy.SOUND],
-    music: DungeonMusic.WATERFALL_CAVE
+    music: DungeonMusic.WATERFALL_CAVE,
+    regionalSpeciality: Item.TEA
   },
   [DungeonPMDO.WaterMaze]: {
     synergies: [Synergy.WATER, Synergy.AQUATIC, Synergy.GRASS],
-    music: DungeonMusic.STAR_CAVE
+    music: DungeonMusic.STAR_CAVE,
+    regionalSpeciality: Item.TEA
   },
   [DungeonPMDO.WesternCave1]: {
     synergies: [Synergy.HUMAN, Synergy.FLORA, Synergy.ARTIFICIAL],
-    music: DungeonMusic.SKY_PEAK_FINAL_PASS
+    music: DungeonMusic.SKY_PEAK_FINAL_PASS,
+    regionalSpeciality: Item.RIBBON_SWEET
   },
   [DungeonPMDO.WesternCave2]: {
     synergies: [Synergy.HUMAN, Synergy.FLORA, Synergy.ROCK],
-    music: DungeonMusic.JOB_CLEAR
+    music: DungeonMusic.JOB_CLEAR,
+    regionalSpeciality: Item.FLOWER_SWEET
   },
   [DungeonPMDO.WishCave1]: {
     synergies: [Synergy.FAIRY, Synergy.HUMAN, Synergy.DRAGON],
-    music: DungeonMusic.LIVING_SPIRIT
+    music: DungeonMusic.LIVING_SPIRIT,
+    regionalSpeciality: Item.LOVE_SWEET
   },
   [DungeonPMDO.WishCave2]: {
     synergies: [Synergy.FAIRY, Synergy.DRAGON, Synergy.BUG],
-    music: DungeonMusic.TEAM_CHARM_THEME
+    music: DungeonMusic.TEAM_CHARM_THEME,
+    regionalSpeciality: Item.LOVE_SWEET
   },
   [DungeonPMDO.WorldAbyss2]: {
     synergies: [Synergy.DARK, Synergy.GHOST, Synergy.ELECTRIC],
-    music: DungeonMusic.WORLD_CALAMITY
+    music: DungeonMusic.WORLD_CALAMITY,
+    regionalSpeciality: Item.LEFTOVERS
   },
   [DungeonPMDO.WyvernHill]: {
     synergies: [Synergy.DRAGON, Synergy.FLYING, Synergy.FIELD],
-    music: DungeonMusic.KECLEONS_SHOP
+    music: DungeonMusic.KECLEONS_SHOP,
+    regionalSpeciality: Item.POFFIN
   },
   [DungeonPMDO.ZeroIsleEast3]: {
     synergies: [Synergy.AMORPHOUS, Synergy.PSYCHIC, Synergy.STEEL],
-    music: DungeonMusic.VERSUS_BOSS
+    music: DungeonMusic.VERSUS_BOSS,
+    regionalSpeciality: Item.SPINDA_COCKTAIL
   },
   [DungeonPMDO.ZeroIsleEast4]: {
     synergies: [Synergy.POISON, Synergy.MONSTER, Synergy.ROCK],
-    music: DungeonMusic.VERSUS_LEGENDARY
+    music: DungeonMusic.VERSUS_LEGENDARY,
+    regionalSpeciality: Item.BLACK_SLUDGE
   },
   [DungeonPMDO.ZeroIsleSouth1]: {
     synergies: [Synergy.GROUND, Synergy.BUG, Synergy.NORMAL],
-    music: DungeonMusic.WIGGLYTUFFS_GUILD_REMIX
+    music: DungeonMusic.WIGGLYTUFFS_GUILD_REMIX,
+    regionalSpeciality: Item.LARGE_LEEK
   },
   [DungeonPMDO.ZeroIsleSouth2]: {
     synergies: [Synergy.ROCK, Synergy.GROUND, Synergy.FIGHTING],
-    music: DungeonMusic.WIGGLYTUFFS_GUILD
+    music: DungeonMusic.WIGGLYTUFFS_GUILD,
+    regionalSpeciality: Item.ROCK_SALT
   },
   town: {
     synergies: [],
-    music: DungeonMusic.TREASURE_TOWN_STAGE_0
+    music: DungeonMusic.TREASURE_TOWN_STAGE_0,
+    regionalSpeciality: Item.NUTRITIOUS_EGG
   }
 }
