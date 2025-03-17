@@ -359,7 +359,7 @@ export class Shuppet extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.SHADOW_CLONE
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.GHOST_MELEE
   additional = true
 }
 
@@ -376,7 +376,7 @@ export class Banette extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.SHADOW_CLONE
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.GHOST_MELEE
   additional = true
 }
 
@@ -393,7 +393,7 @@ export class MegaBanette extends Pokemon {
   range = 1
   //skill = Ability.SHADOW_CLONE
   skill = Ability.DEFAULT
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.GHOST_MELEE
 }
 
 export class Riolu extends Pokemon {
@@ -828,7 +828,7 @@ export class Numel extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.ERUPTION
-  attackSprite = AttackSprite.FIRE_MELEE
+  attackSprite = AttackSprite.GROUND_MELEE
   regional = true
 }
 
@@ -845,7 +845,7 @@ export class Camerupt extends Pokemon {
   maxPP = 120
   range = 1
   skill = Ability.ERUPTION
-  attackSprite = AttackSprite.FIRE_MELEE
+  attackSprite = AttackSprite.GROUND_MELEE
   regional = true
 }
 
@@ -862,7 +862,7 @@ export class MegaCamerupt extends Pokemon {
   range = 1
   skill = Ability.DEFAULT
   //skill = Ability.ERUPTION
-  attackSprite = AttackSprite.FIRE_MELEE
+  attackSprite = AttackSprite.GROUND_MELEE
   regional = true
 }
 
@@ -3110,7 +3110,7 @@ export class Trapinch extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DRAGON_TAIL
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.GROUND_MELEE
 }
 
 export class Vibrava extends Pokemon {
@@ -5096,7 +5096,7 @@ export class Rattata extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.AGILITY
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.WILD_MELEE
 }
 
 export class Raticate extends Pokemon {
@@ -5111,7 +5111,7 @@ export class Raticate extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.AGILITY
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.WILD_MELEE
 }
 
 export class AlolanRattata extends Pokemon {
@@ -5127,7 +5127,7 @@ export class AlolanRattata extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.TAIL_WHIP
-  attackSprite = AttackSprite.DARK_MELEE
+  attackSprite = AttackSprite.WILD_MELEE
   regional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
@@ -5147,7 +5147,7 @@ export class AlolanRaticate extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.TAIL_WHIP
-  attackSprite = AttackSprite.DARK_MELEE
+  attackSprite = AttackSprite.WILD_MELEE
   regional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
@@ -5290,7 +5290,7 @@ export class Giratina extends Pokemon {
   range = 1
   skill = Ability.SHADOW_SNEAK
   passive = Passive.GIRATINA
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.GHOST_MELEE
 
   onChangePosition(x: number, y: number, player: Player) {
     if (y !== 3) {
@@ -5368,7 +5368,7 @@ export class Zeraora extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PLASMA_FIST
-  attackSprite = AttackSprite.ELECTRIC_MELEE
+  attackSprite = AttackSprite.WILD_MELEE
 }
 
 export class Stantler extends Pokemon {
@@ -5787,7 +5787,7 @@ export class Groudon extends Pokemon {
   range = 1
   skill = Ability.EARTHQUAKE
   passive = Passive.PRIMAL
-  attackSprite = AttackSprite.FIRE_MELEE
+  attackSprite = AttackSprite.GROUND_MELEE
 }
 
 export class Rayquaza extends Pokemon {
@@ -6670,7 +6670,7 @@ export class Marshadow extends Pokemon {
   maxPP = 125
   range = 1
   skill = Ability.SPECTRAL_THIEF
-  attackSprite = AttackSprite.FIGHTING_MELEE
+  attackSprite = AttackSprite.GHOST_MELEE
 }
 
 export class Kyurem extends Pokemon {
@@ -6991,7 +6991,7 @@ export class Torkoal extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SMOKE_SCREEN
-  attackSprite = AttackSprite.FIRE_MELEE
+  attackSprite = AttackSprite.GROUND_MELEE
 }
 
 export class Heatmor extends Pokemon {
@@ -7057,7 +7057,7 @@ export class PrimalGroudon extends Pokemon {
   range = 1
   skill = Ability.EARTHQUAKE
   passive = Passive.SANDSTORM
-  attackSprite = AttackSprite.FIRE_MELEE
+  attackSprite = AttackSprite.GROUND_MELEE
   onAcquired(player: Player) {
     player.titles.add(Title.PRIMAL)
   }
@@ -7920,7 +7920,7 @@ export class Genesect extends Pokemon {
   maxPP = 80
   range = 4
   skill = Ability.LOCK_ON
-  attackSprite = AttackSprite.FIRE_RANGE
+  attackSprite = AttackSprite.STEEL_RANGE
 }
 
 export class Hatenna extends Pokemon {
@@ -8404,7 +8404,7 @@ export class Pumpkaboo extends Pokemon {
   range = 1
   skill = Ability.TRICK_OR_TREAT
   additional = true
-  attackSprite = AttackSprite.GRASS_MELEE
+  attackSprite = AttackSprite.GHOST_MELEE
 }
 export class Gourgeist extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.GRASS])
@@ -8419,7 +8419,7 @@ export class Gourgeist extends Pokemon {
   range = 1
   skill = Ability.TRICK_OR_TREAT
   additional = true
-  attackSprite = AttackSprite.GRASS_MELEE
+  attackSprite = AttackSprite.GHOST_MELEE
 }
 
 export class Natu extends Pokemon {
@@ -9568,7 +9568,7 @@ export class Poochyena extends Pokemon {
   maxPP = 75
   range = 1
   skill = Ability.GROWL
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.WILD_MELEE
 }
 
 export class Mightyena extends Pokemon {
@@ -9583,7 +9583,7 @@ export class Mightyena extends Pokemon {
   maxPP = 75
   range = 1
   skill = Ability.GROWL
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.WILD_MELEE
 }
 
 export class Bronzor extends Pokemon {
@@ -11168,7 +11168,7 @@ export class Diglett extends Pokemon {
   maxPP = 50
   range = 1
   skill = Ability.DIG
-  attackSprite = AttackSprite.ROCK_MELEE
+  attackSprite = AttackSprite.GROUND_MELEE
   additional = true
 }
 
@@ -11184,7 +11184,7 @@ export class Dugtrio extends Pokemon {
   maxPP = 50
   range = 1
   skill = Ability.DIG
-  attackSprite = AttackSprite.ROCK_MELEE
+  attackSprite = AttackSprite.GROUND_MELEE
   additional = true
 }
 
@@ -11201,7 +11201,7 @@ export class AlolanDiglett extends Pokemon {
   maxPP = 50
   range = 1
   skill = Ability.DIG
-  attackSprite = AttackSprite.ROCK_MELEE
+  attackSprite = AttackSprite.GROUND_MELEE
   regional = true
   additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
@@ -11225,7 +11225,7 @@ export class AlolanDugtrio extends Pokemon {
   maxPP = 50
   range = 1
   skill = Ability.DIG
-  attackSprite = AttackSprite.ROCK_MELEE
+  attackSprite = AttackSprite.GROUND_MELEE
   regional = true
   additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
@@ -11726,7 +11726,7 @@ export class Mimikyu extends Pokemon {
   range = 1
   skill = Ability.SHADOW_SNEAK
   passive = Passive.MIMIKYU
-  attackSprite = AttackSprite.FAIRY_MELEE
+  attackSprite = AttackSprite.GHOST_MELEE
 }
 
 export class MimikyuBusted extends Pokemon {
@@ -13037,7 +13037,7 @@ export class Hippopotas extends Pokemon {
   range = 1
   skill = Ability.SAND_TOMB
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE
+  attackSprite = AttackSprite.GROUND_MELEE
   passive = Passive.SAND_STREAM
 }
 
@@ -13054,7 +13054,7 @@ export class Hippodown extends Pokemon {
   range = 1
   skill = Ability.SAND_TOMB
   additional = true
-  attackSprite = AttackSprite.ROCK_MELEE
+  attackSprite = AttackSprite.GROUND_MELEE
   passive = Passive.SAND_STREAM
 }
 
@@ -13147,7 +13147,7 @@ export class Zigzagoon extends Pokemon {
   maxPP = 50
   range = 1
   skill = Ability.SLASH
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.WILD_MELEE
   passive = Passive.PICKUP
 }
 
@@ -13163,7 +13163,7 @@ export class Linoone extends Pokemon {
   maxPP = 50
   range = 1
   skill = Ability.SLASH
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.WILD_MELEE
   passive = Passive.PICKUP
 }
 
@@ -13235,7 +13235,7 @@ export class Phantump extends Pokemon {
   range = 1
   skill = Ability.POLTERGEIST
   additional = true
-  attackSprite = AttackSprite.GRASS_MELEE
+  attackSprite = AttackSprite.GHOST_MELEE
 }
 
 export class Trevenant extends Pokemon {
@@ -13255,7 +13255,7 @@ export class Trevenant extends Pokemon {
   range = 1
   skill = Ability.POLTERGEIST
   additional = true
-  attackSprite = AttackSprite.GRASS_MELEE
+  attackSprite = AttackSprite.GHOST_MELEE
 }
 
 export class HisuianQwilfish extends Pokemon {
@@ -14265,7 +14265,7 @@ export class Aipom extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.TICKLE
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.WILD_MELEE
 }
 
 export class Ambipom extends Pokemon {
@@ -14280,7 +14280,7 @@ export class Ambipom extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.TICKLE
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.WILD_MELEE
 }
 
 export class Deerling extends Pokemon {
@@ -14391,7 +14391,7 @@ export class Rockruff extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ACCELEROCK
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.WILD_MELEE
 }
 
 function updateLycanroc(pokemon: Pokemon, weather: Weather, player: Player) {
@@ -14419,7 +14419,7 @@ export class LycanrocDusk extends Pokemon {
   range = 1
   skill = Ability.ACCELEROCK
   passive = Passive.LYCANROC
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.WILD_MELEE
 
   beforeSimulationStart({ weather, player }) {
     updateLycanroc(this, weather, player)
@@ -14439,7 +14439,7 @@ export class LycanrocNight extends Pokemon {
   range = 1
   skill = Ability.ACCELEROCK
   passive = Passive.LYCANROC
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.WILD_MELEE
 
   beforeSimulationStart({ weather, player }) {
     updateLycanroc(this, weather, player)
@@ -14459,7 +14459,7 @@ export class LycanrocDay extends Pokemon {
   range = 1
   skill = Ability.ACCELEROCK
   passive = Passive.LYCANROC
-  attackSprite = AttackSprite.NORMAL_MELEE
+  attackSprite = AttackSprite.WILD_MELEE
 
   beforeSimulationStart({ weather, player }) {
     updateLycanroc(this, weather, player)
@@ -14482,7 +14482,7 @@ export class Druddigon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.OUTRAGE
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.WILD_MELEE
 }
 
 export class Cosmog extends Pokemon {
@@ -15560,7 +15560,7 @@ export class Klefki extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.FAIRY_LOCK
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.STEEL_RANGE
 }
 
 export class Hawlucha extends Pokemon {
@@ -16438,7 +16438,7 @@ export class Sandygast extends Pokemon {
   range = 1
   skill = Ability.SHORE_UP
   additional = true
-  attackSprite = AttackSprite.WATER_MELEE
+  attackSprite = AttackSprite.GHOST_MELEE
 }
 
 export class Palossand extends Pokemon {
@@ -16458,7 +16458,7 @@ export class Palossand extends Pokemon {
   range = 1
   skill = Ability.SHORE_UP
   additional = true
-  attackSprite = AttackSprite.WATER_MELEE
+  attackSprite = AttackSprite.GHOST_MELEE
 }
 
 export class Skorupi extends Pokemon {
