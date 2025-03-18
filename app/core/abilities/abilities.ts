@@ -4588,7 +4588,7 @@ export class FakeTearsStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [3, 6, 9][pokemon.stars - 1] ?? 3
+    const damage = [5, 10, 15][pokemon.stars - 1] ?? 15
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {
