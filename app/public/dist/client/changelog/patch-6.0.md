@@ -93,6 +93,7 @@
 - New ability for Nidoran male line: Horn attack: deal 3/4/5x Attack as special damage and Armor break for 8 seconds
 - New ability for Seedot line: Razor leaf: Throw sharp leafs in a line behind the target. All enemies hit take 20/40/80 special damage. Can crit by default.
 - Change Razor Wind (Noibat, Farfetch'd): no longer inflict paralysis not hit adjacent units. Now can crit by default. Noivern line PP 100 → 70
+- Buff Gothita line: def 2/2/2 → 2/4/6 ; Fake tears damage 3/6/9 → 5/10/15
 
 # Changes to Synergies
 

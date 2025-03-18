@@ -10481,7 +10481,7 @@ export class Gothorita extends Pokemon {
   hp = 120
   atk = 12
   speed = 46
-  def = 2
+  def = 4
   speDef = 6
   maxPP = 80
   range = 3
@@ -10497,7 +10497,7 @@ export class Gothitelle extends Pokemon {
   hp = 190
   atk = 20
   speed = 46
-  def = 2
+  def = 6
   speDef = 8
   maxPP = 80
   range = 3

@@ -1399,7 +1399,7 @@
     "DIVE": "Si tuffa sott'acqua e ottieni [15,30,60] SHIELD e riappare nel mezzo della squadra nemica, infliggendo [10,20,40,SP] SPECIAL e FREEZE a tutte le unità adiacenti per 1 secondo.",
     "SPIKE_ARMOR": "Per [3,5,10] secondi, i Pokèmon che attaccano in mischia l'utilizzatore ricevono WOUND e gli viene inflitto SPECIAL pari al [50,SP]% della DEF attuale dell'utilizzatore.",
     "FUTURE_SIGHT": "Infliggi [15,30,60,SP] SPECIAL a 5 Pokèmon nemici.",
-    "FAKE_TEARS": "Infligge [3,6,9,SP] SPECIAL all'intera squadra nemica e causa ARMOR_BREAK per 3 secondi.",
+    "FAKE_TEARS": "Infligge [5,10,15,SP] SPECIAL all'intera squadra nemica e causa ARMOR_BREAK per 3 secondi.",
     "SPARKLING_ARIA": "Infliggi [15,30,60,SP] SPECIAL al bersaglio e ai nemici adiacenti. Se gli alleati adiacenti sono sotto lo status BURN, lo status viene curato.",
     "DRAGON_DARTS": "Lancia 3 freccette che infliggono [10,20,40,SP] SPECIAL al bersaglio. Se il bersaglio muore, recupera 40 PP.",
     "GRASSY_SURGE": "Potenzia l'ATK di tutti i Pokémon GRASS di [4,SP].",
