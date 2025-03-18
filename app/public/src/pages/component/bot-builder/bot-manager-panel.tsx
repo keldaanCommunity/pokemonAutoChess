@@ -5,11 +5,9 @@ import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { joinLobbyRoom } from "../../../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { addBotDatabase, deleteBotDatabase } from "../../../stores/NetworkStore"
-import { getAvatarSrc } from "../../../../../utils/avatar"
 import { rewriteBotRoundsRequiredto1, validateBot } from "./bot-logic"
-import "./bot-manager-panel.css"
-import { usePreference } from "../../../preferences"
 import PokemonPortrait from "../pokemon-portrait"
+import "./bot-manager-panel.css"
 
 export function BotManagerPanel() {
   const dispatch = useAppDispatch()
@@ -32,7 +30,6 @@ export function BotManagerPanel() {
 }
 
 function BotsList() {
-  const [antialiasing] = usePreference('antialiasing')
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()

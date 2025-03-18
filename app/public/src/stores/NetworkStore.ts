@@ -261,6 +261,9 @@ export const networkSlice = createSlice({
     heapSnapshot: (state) => {
       state.lobby?.send(Transfer.HEAP_SNAPSHOT)
     },
+    deleteAccount: (state) => {
+      state.lobby?.send(Transfer.DELETE_ACCOUNT)
+    },
     giveRole: (state, action: PayloadAction<{ uid: string; role: Role }>) => {
       state.lobby?.send(Transfer.SET_ROLE, action.payload)
     },
@@ -352,7 +355,8 @@ export const {
   kick,
   deleteRoom,
   createTournament,
-  setErrorAlertMessage
+  setErrorAlertMessage,
+  deleteAccount
 } = networkSlice.actions
 
 export default networkSlice.reducer

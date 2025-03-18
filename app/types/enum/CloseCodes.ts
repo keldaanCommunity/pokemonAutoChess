@@ -11,6 +11,7 @@ export enum CloseCodes {
   USER_RANK_TOO_LOW = 4005,
   USER_RANK_TOO_HIGH = 4006,
   USER_TIMEOUT = 4007,
+  USER_DELETED = 4008,
   ROOM_FULL = 4010,
   ROOM_EMPTY = 4011,
   ROOM_DELETED = 4012
@@ -20,6 +21,7 @@ export const CloseCodesMessages: { [code in CloseCodes]?: string } = {
   [CloseCodes.USER_INACTIVE]: "USER_INACTIVE",
   [CloseCodes.USER_KICKED]: "USER_KICKED",
   [CloseCodes.USER_BANNED]: "USER_BANNED",
+  [CloseCodes.USER_DELETED]: "USER_DELETED",
   [CloseCodes.USER_RANK_TOO_LOW]: "USER_RANK_TOO_LOW",
   [CloseCodes.USER_NOT_AUTHENTICATED]: "USER_NOT_AUTHENTICATED",
   [CloseCodes.USER_TIMEOUT]: "USER_TIMEOUT",

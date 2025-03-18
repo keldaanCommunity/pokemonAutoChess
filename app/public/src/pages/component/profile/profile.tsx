@@ -15,6 +15,7 @@ import {
   searchName,
   unban
 } from "../../../stores/NetworkStore"
+import { AccountTab } from "./account-tab"
 import { AvatarTab } from "./avatar-tab"
 import { GadgetsTab } from "./gadgets-tab"
 import GameHistory from "./game-history"
@@ -86,6 +87,7 @@ function MyProfileMenu() {
         <Tab>{t("avatar")}</Tab>
         <Tab>{t("title_label")}</Tab>
         <Tab>{t("gadgets")}</Tab>
+        <Tab>{t("account")}</Tab>
       </TabList>
 
       <TabPanel>
@@ -99,6 +101,9 @@ function MyProfileMenu() {
       </TabPanel>
       <TabPanel>
         <GadgetsTab />
+      </TabPanel>
+      <TabPanel>
+        <AccountTab />
       </TabPanel>
     </Tabs>
   )

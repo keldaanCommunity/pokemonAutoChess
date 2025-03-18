@@ -6,7 +6,7 @@ import {
   IBot,
   IDetailledPokemon
 } from "../../../../../models/mongo-models/bot-v2"
-import { PkmWithConfig, Role } from "../../../../../types"
+import { PkmWithCustom, Role } from "../../../../../types"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { logger } from "../../../../../utils/logger"
 import { max, min } from "../../../../../utils/number"
@@ -104,7 +104,7 @@ export default function BotBuilder() {
     }
   }
 
-  function changeAvatar(pkm: PkmWithConfig) {
+  function changeAvatar(pkm: PkmWithCustom) {
     bot.name = pkm.name.toUpperCase()
     bot.avatar = getAvatarString(PkmIndex[pkm.name], pkm.shiny, pkm.emotion)
     completeBotInfo()

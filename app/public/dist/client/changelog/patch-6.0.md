@@ -161,3 +161,4 @@
 - Removed Scribbles Kecleon's Shop and Synergy wheel, replaced by town encounters
 - New scribbles: Town Festival, High Roller, Regional Specialities
 - Armor Reduction status is renamed to Armor Break
+- A new account tab is available in Profile menu, showing your user ID and allowing you to delete your account permanently without having to contact an admin
