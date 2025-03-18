@@ -430,7 +430,7 @@ export class OnRoomChangeSpecialRule extends Command<
         })
 
         this.state.users.forEach((user) => {
-          user.ready = false
+          if (!user.isBot) user.ready = false
         })
       }
     } catch (error) {
@@ -468,7 +468,7 @@ export class OnChangeNoEloCommand extends Command<
         })
 
         this.state.users.forEach((user) => {
-          user.ready = false
+          if (!user.isBot) user.ready = false
         })
       }
     } catch (error) {
@@ -624,7 +624,7 @@ export class OnToggleReadyCommand extends Command<
         // auto start when ranked lobby is full and all ready
         this.room.state.addMessage({
           authorId: "server",
-          payload: "Lobby is full, starting match in 3..."
+          payload: "Lobby is full, starting match in 5 seconds..."
         })
 
         return new CheckAutoStartRoom()
@@ -640,7 +640,7 @@ export class CheckAutoStartRoom extends Command<PreparationRoom, void> {
     try {
       this.state.abortOnPlayerLeave = new AbortController()
       const signal = this.state.abortOnPlayerLeave.signal
-      await setTimeout(3000, null, { signal })
+      await setTimeout(5000, null, { signal })
 
       this.room.state.addMessage({
         authorId: "server",

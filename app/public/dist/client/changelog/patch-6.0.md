@@ -156,5 +156,5 @@
 - ELO decay now starts after 15 days of inactivity instead of 10
 - Stage 19 rewards will now be complete items instead of components if player has an even number of components at that stage
 - Removed Scribbles Kecleon's Shop and Synergy wheel, replaced by town encounters
-- New scribble: Town Festival
+- New scribbles: Town Festival, High Roller, Regional Specialities
 - Armor Reduction status is renamed to Armor Break

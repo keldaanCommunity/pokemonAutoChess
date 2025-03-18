@@ -548,6 +548,8 @@ export const Dishes = [
   Item.SWEETS
 ] as const
 
+export type Dish = (typeof Dishes)[number]
+
 export const Flavors = [
   Item.VANILLA_FLAVOR,
   Item.RUBY_FLAVOR,

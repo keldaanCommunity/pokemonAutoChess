@@ -1810,7 +1810,9 @@ export function displayAbility(
       break
 
     case Ability.DIVE:
-      addAbilitySprite(skill, coordinates, true).setScale(3)
+      addAbilitySprite(skill, coordinates, true)
+        .setScale(3)
+        .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
       break
 
     case Ability.SMOKE_SCREEN:
