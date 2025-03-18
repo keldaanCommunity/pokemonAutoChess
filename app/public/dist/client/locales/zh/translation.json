@@ -456,7 +456,8 @@
     "HORN_ATTACK": "角撞",
     "RAZOR_LEAF": "飞叶快刀",
     "MUD_SHOT": "泥巴射击",
-    "MALIGNANT_CHAIN": "邪毒锁链"
+    "MALIGNANT_CHAIN": "邪毒锁链",
+    "FILET_AWAY": "甩肉"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1386,7 +1387,8 @@
     "ALCREMIE_RUBY_SWIRL": "霜奶仙（红钻综合）",
     "ALCREMIE_CARAMEL_SWIRL": "霜奶仙（焦糖综合）",
     "ALCREMIE_RAINBOW_SWIRL": "霜奶仙（三色综合）",
-    "PECHARUNT": "桃歹郎"
+    "PECHARUNT": "桃歹郎",
+    "VELUZA": "轻身鳕"
   },
   "ability_description": {
     "SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1823,7 +1825,8 @@
     "HORN_ATTACK": "对目标造成SPECIAL，数值相当于[3,4,5,SP]乘以ATK，并使其陷入ARMOR_BREAK 8秒。",
     "RAZOR_LEAF": "飞出叶片攻击目标身后的一条直线，对所有击中的敌方宝可梦造成[20,40,80,SP]点SPECIAL。该招式可以暴击。",
     "MUD_SHOT": "向目标投掷泥块，造成[25,50,75,SP]点SPECIAL，并降低其[10,20,30,SP]点SPEED。",
-    "MALIGNANT_CHAIN": "伸出用由毒形成的锁链缠住对手，使其陷入LOCKED和3层POISONNED [3,SP]秒。"
+    "MALIGNANT_CHAIN": "伸出用由毒形成的锁链缠住对手，使其陷入LOCKED和3层POISONNED [3,SP]秒。",
+    "FILET_AWAY": "损失当前HP的50%，提升[10,SP]点ATK和[20,SP]点SPEED。"
   },
   "effect": {
     "INGRAIN": "扎根",
@@ -2217,6 +2220,7 @@
     "LEEK": "大葱",
     "LARGE_LEEK": "特大大葱",
     "SPINDA_COCKTAIL": "晃晃斑特调",
+    "SMOKED_FILET": "烟熏鳕鱼肉",
     "SWEETS": "糖饰",
     "RIBBON_SWEET": "蝴蝶结糖饰",
     "STAR_SWEET": "星星糖饰",
@@ -2402,6 +2406,7 @@
     "LEEK": "仅在下一轮战斗中，提升30%的CRIT_CHANCE，且招式能够暴击。",
     "LARGE_LEEK": "仅在下一轮战斗中，提升30%的CRIT_POWER，且招式能够暴击。",
     "SPINDA_COCKTAIL": "一瓶神秘的混调，富含多种[LK]随机效果，例如提升属性或是令饮用者晕眩。",
+    "SMOKED_FILET": "永久降低10点最大HP，提升3点ATK和5点AP。",
     "SWEETS": "一枚随机糖饰，能永久提升某一项能力。",
     "RIBBON_SWEET": "永久提升3点SPE_DEF",
     "STAR_SWEET": "永久提升5点AP",
@@ -3575,7 +3580,9 @@
     "FIRST_PARTNER": "最 初 伙 伴",
     "SLAMINGO": "斯 拉 明 戈",
     "BLOOD_MONEY": "重 武 轻 商",
-    "TOWN_FESTIVAL": "欢 庆 节 日"
+    "TOWN_FESTIVAL": "欢 庆 节 日",
+    "HIGH_ROLLER": "幸 运 之 星",
+    "REGIONAL_SPECIALITIES": "本 地 特 产"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "所有附加宝可梦在游戏开始时立即可选。",
@@ -3592,7 +3599,9 @@
     "FIRST_PARTNER": "游戏开始时，选择一只起始宝可梦。每轮（直到第10轮）开始时，你获得一只此宝可梦。",
     "SLAMINGO": "当宝可梦回到备战区时，卸下所有道具。游戏开始时获得4个随机道具组件。",
     "BLOOD_MONEY": "击倒宝可梦时获得1 GOLD，但积攒GOLD不提供利息收入。",
-    "TOWN_FESTIVAL": "必定能在轮盘轮次遭遇宝藏镇NPC，且所有轮盘道具免费。"
+    "TOWN_FESTIVAL": "必定能在轮盘轮次遭遇宝藏镇NPC，且所有轮盘道具免费。",
+    "HIGH_ROLLER": "在第0-9轮，商店有概率刷出孵化宝可梦；第10-19轮，独特宝可梦；第20轮起，传说宝可梦。",
+    "REGIONAL_SPECIALITIES": "当前所在地区的共鸣类型也会计入你的共鸣等级。穿过传送门后，所有我方宝可梦食用一道本地特色料理。"
   },
   "town_encounter_description": {
     "KECLEON": "变隐龙会以每块{{cost}} GOLD的价格出售共鸣赋予石头。",
