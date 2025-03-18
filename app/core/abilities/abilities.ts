@@ -273,11 +273,8 @@ export class PaydayStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const factor = 0.5
     const damage = Math.floor(
-      ([30, 60, 90][pokemon.stars - 1] ?? 90) *
-      (1 + (factor * pokemon.ap) / 100) *
-      (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
+      ([30, 60, 90][pokemon.stars - 1] ?? 90) * (1 + (0.5 * pokemon.ap) / 100)
     )
 
     const { death } = target.handleSpecialDamage(
@@ -285,7 +282,7 @@ export class PaydayStrategy extends AbilityStrategy {
       board,
       AttackType.SPECIAL,
       pokemon,
-      false,
+      crit,
       false
     )
     if (death && pokemon.player) {
@@ -7091,19 +7088,17 @@ export class NightShadeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const factor = 0.5
     const damage = Math.ceil(
       ([0.25, 0.33, 0.5][pokemon.stars - 1] ?? 0.5) *
         target.hp *
-        (1 + (factor * pokemon.ap) / 100) *
-        (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
+        (1 + (0.5 * pokemon.ap) / 100)
     )
     target.handleSpecialDamage(
       damage,
       board,
       AttackType.TRUE,
       pokemon,
-      false,
+      crit,
       false
     )
   }
@@ -7328,7 +7323,7 @@ export class HyperspaceFuryStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const nbHits = 4 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+    const nbHits = 4 * (1 + pokemon.ap / 100)
     for (let i = 0; i < nbHits; i++) {
       target.addDefense(-1, pokemon, 0, false)
       target.addSpecialDefense(-1, pokemon, 0, false)
@@ -7337,7 +7332,7 @@ export class HyperspaceFuryStrategy extends AbilityStrategy {
         board,
         AttackType.SPECIAL,
         pokemon,
-        false,
+        crit,
         false
       )
     }
@@ -8202,16 +8197,14 @@ export class KowtowCleaveStrategy extends AbilityStrategy {
       pokemon.team === Team.BLUE_TEAM ? "blueDpsMeter" : "redDpsMeter"
     const nbFallenAllies = pokemon.simulation[meter].size - nbAlliesAlive
     const damage = Math.round(
-      pokemon.atk * 
-      (1.5 + nbFallenAllies * 0.2 * (1 + pokemon.ap / 100)) *
-      (crit ? pokemon.critPower : 1)
+      pokemon.atk * (1.5 + nbFallenAllies * 0.2 * (1 + pokemon.ap / 100))
     )
     target.handleSpecialDamage(
       damage,
       board,
       AttackType.TRUE,
       pokemon,
-      false,
+      crit,
       false
     )
   }
