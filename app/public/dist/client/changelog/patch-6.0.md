@@ -105,6 +105,7 @@
 - Fire burn chance on attacks now inflicts Burn for ~~2~~ 3 seconds
 - Wild now have a chance to inflict Wound **only when synergy active**
 - Ghost now gets dodge chance and chance to inflict Silence on hit **only when synergy active**
+- Buff Baby 3: 8% → 10% egg chance and Baby 7: 4% → 5% shiny egg chance
 
 # Changes to Items
 
