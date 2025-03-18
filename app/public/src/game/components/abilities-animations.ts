@@ -1530,6 +1530,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
+    case Ability.FILET_AWAY:
+      addAbilitySprite(Ability.SHIELDS_UP, coordinates, true).setScale(2)
+      break
+
     case Ability.BRAVE_BIRD:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break

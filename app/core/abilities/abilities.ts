@@ -3770,17 +3770,8 @@ export class LeafBladeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, true)
-    const damage = Math.round(
-      pokemon.atk * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
-    )
-    target.handleSpecialDamage(
-      damage,
-      board,
-      AttackType.TRUE,
-      pokemon,
-      true,
-      false
-    )
+    const damage = pokemon.atk
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, true)
   }
 }
 
@@ -6201,7 +6192,7 @@ export class AstralBarrageStrategy extends AbilityStrategy {
       }
     })
 
-    const nbGhosts = 7 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+    const nbGhosts = 7 * (1 + pokemon.ap / 100)
     for (let i = 0; i < nbGhosts; i++) {
       const randomTarget = pickRandomIn(enemies)
       pokemon.commands.push(
@@ -6912,9 +6903,7 @@ export class SpikesStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const nbSpikes = Math.round(
-      6 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
-    )
+    const nbSpikes = Math.round(6 * (1 + pokemon.ap / 100))
     const cells = pickNRandomIn(
       board.getCellsInFront(pokemon, target, 3),
       nbSpikes
@@ -7164,9 +7153,7 @@ export class PopulationBombStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = 10
     const numberOfAttacks = Math.round(
-      ([4, 8, 12, 16][pokemon.stars - 1] ?? 8) *
-        (1 + pokemon.ap / 100) *
-        (crit ? pokemon.critPower : 1)
+      ([4, 8, 12, 16][pokemon.stars - 1] ?? 8) * (1 + pokemon.ap / 100)
     )
     for (let i = 0; i < numberOfAttacks; i++) {
       target.handleSpecialDamage(
@@ -12046,6 +12033,30 @@ export class MalignantChainStrategy extends AbilityStrategy {
   }
 }
 
+export class FiletAwayStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    // sacrify 50% of current health and gain 10 attack and 20 speed
+    const sacrifice = Math.floor(pokemon.life * 0.5)
+    pokemon.handleSpecialDamage(
+      sacrifice,
+      board,
+      AttackType.TRUE,
+      pokemon,
+      false
+    )
+    pokemon.addAttack(10, pokemon, 1, crit)
+    pokemon.addSpeed(20, pokemon, 1, crit)
+    pokemon.cooldown = Math.round(250 * (50 / pokemon.speed))
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -12484,5 +12495,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.HORN_ATTACK]: new HornAttackStrategy(),
   [Ability.RAZOR_LEAF]: new RazorLeafStrategy(),
   [Ability.MUD_SHOT]: new MudShotStrategy(),
-  [Ability.MALIGNANT_CHAIN]: new MalignantChainStrategy()
+  [Ability.MALIGNANT_CHAIN]: new MalignantChainStrategy(),
+  [Ability.FILET_AWAY]: new FiletAwayStrategy()
 }

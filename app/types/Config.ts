@@ -286,7 +286,8 @@ export const UniquePool = new Array<PkmProposition>(
   Pkm.CRYOGONAL,
   Pkm.DRAMPA,
   Pkm.APPLIN,
-  Pkm.MILCERY
+  Pkm.MILCERY,
+  Pkm.VELUZA
 )
 
 export const LegendaryPool = new Array<PkmProposition>(
@@ -344,7 +345,8 @@ export const LegendaryPool = new Array<PkmProposition>(
   Pkm.TERRAKION,
   Pkm.VIRIZION,
   Pkm.COBALION,
-  Pkm.KELDEO
+  Pkm.KELDEO,
+  Pkm.PECHARUNT
 )
 
 export const NB_UNIQUE_PROPOSITIONS = 6

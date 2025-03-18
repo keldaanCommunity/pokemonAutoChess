@@ -456,7 +456,8 @@
     "HORN_ATTACK": "Horn Attack",
     "RAZOR_LEAF": "Razor Leaf",
     "MUD_SHOT": "Mud Shot",
-    "MALIGNANT_CHAIN": "Malignant Chain"
+    "MALIGNANT_CHAIN": "Malignant Chain",
+    "FILET_AWAY": "Filet Away"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1386,7 +1387,8 @@
     "ALCREMIE_RUBY_SWIRL": "Alcremie (Ruby Swirl)",
     "ALCREMIE_CARAMEL_SWIRL": "Alcremie (Caramel Swirl)",
     "ALCREMIE_RAINBOW_SWIRL": "Alcremie (Rainbow Swirl)",
-    "PECHARUNT": "Pecharunt"
+    "PECHARUNT": "Pecharunt",
+    "VELUZA": "Veluza"
   },
   "ability_description": {
     "SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1823,7 +1825,8 @@
     "HORN_ATTACK": "Deal [3,4,5,SP] x ATK as SPECIAL to the target and cause ARMOR_BREAK for 8 seconds.",
     "RAZOR_LEAF": "Throw sharp leafs in a line behind the target. All enemies hit take [20,40,80,SP] SPECIAL. Can crit by default.",
     "MUD_SHOT": "Hurls mud at the target, dealing [25,50,75,SP] SPECIAL and reducing their SPEED by [10,20,30,SP].",
-    "MALIGNANT_CHAIN": "Extends a poisonous chain to ensnare a target, inflicting LOCKED and 3 stacks of POISONNED for [3,SP] seconds."
+    "MALIGNANT_CHAIN": "Extends a poisonous chain to ensnare a target, inflicting LOCKED and 3 stacks of POISONNED for [3,SP] seconds.",
+    "FILET_AWAY": "Sacrify 50% of current HP and gain [10,SP] ATK and [20,SP] SPEED"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2217,6 +2220,7 @@
     "LEEK": "Leek",
     "LARGE_LEEK": "Large Leek",
     "SPINDA_COCKTAIL": "Spinda's Cocktail",
+    "SMOKED_FILET": "Smoked Filet",
     "SWEETS": "Sweets",
     "RIBBON_SWEET": "Ribbon Sweet",
     "STAR_SWEET": "Star Sweet",
@@ -2402,6 +2406,7 @@
     "LEEK": "Gain 30% CRIT_CHANCE and allow ability to critically strike in the next fight.",
     "LARGE_LEEK": "Gain 30% CRIT_POWER and allow ability to critically strike in the next fight.",
     "SPINDA_COCKTAIL": "A cocktail with [LK] random effects that can buff stats or make you dizzy.",
+    "SMOKED_FILET": "Permanently lose 10 max HP to gain 3 ATK and 5 AP.",
     "SWEETS": "A random candy granting a permanent stats bonus",
     "RIBBON_SWEET": "Gain 3 permanent SPE_DEF",
     "STAR_SWEET": "Gain 5 permanent AP",

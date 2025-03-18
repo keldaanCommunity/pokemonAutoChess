@@ -268,6 +268,7 @@ export default class Player extends Schema implements IPlayer {
         newPokemon.shiny = true
       }
     })
+    newPokemon.meal = pokemon.meal
     newPokemon.positionX = pokemon.positionX
     newPokemon.positionY = pokemon.positionY
     this.board.delete(pokemon.id)
