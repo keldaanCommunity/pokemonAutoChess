@@ -58,7 +58,8 @@ export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.ALCREMIE_RUBY_SWIRL]: Item.SWEETS,
   [Pkm.ALCREMIE_CARAMEL_SWIRL]: Item.SWEETS,
   [Pkm.ALCREMIE_RAINBOW_SWIRL]: Item.SWEETS,
-  [Pkm.PECHARUNT]: Item.BINDING_MOCHI
+  [Pkm.PECHARUNT]: Item.BINDING_MOCHI,
+  [Pkm.VELUZA]: Item.SMOKED_FILET
 }
 
 export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
@@ -164,6 +165,13 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ROCK_SALT: [
     new OnSpawnEffect((entity) => {
       entity.status.triggerRuneProtect(8000)
+    })
+  ],
+  SMOKED_FILET: [
+    new OnSpawnEffect((entity) => {
+      entity.addMaxHP(-10, entity, 0, false, true)
+      entity.addAttack(3, entity, 0, false, true)
+      entity.addAbilityPower(5, entity, 0, false, true)
     })
   ],
   SPINDA_COCKTAIL: [

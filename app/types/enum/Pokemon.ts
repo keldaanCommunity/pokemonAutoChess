@@ -855,6 +855,7 @@ export enum Pkm {
   VANILLITE = "VANILLITE",
   VANILLUXE = "VANILLUXE",
   VAPOREON = "VAPOREON",
+  VELUZA = "VELUZA",
   VENIPEDE = "VENIPEDE",
   VENOMOTH = "VENOMOTH",
   VENONAT = "VENONAT",
@@ -2062,7 +2063,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.FLAMIGO]: "0973",
   //[Pkm.CETODDLE]: "0974",
   //[Pkm.CETITAN]: "0975",
-  //[Pkm.VELUZA]: "0976",
+  [Pkm.VELUZA]: "0976",
   //[Pkm.DONDOZO]: "0977",
   //[Pkm.TATSUGIRI]: "0978",
   [Pkm.ANNIHILAPE]: "0979",
@@ -3032,7 +3033,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ALCREMIE_RUBY_SWIRL]: Pkm.MILCERY,
   [Pkm.ALCREMIE_CARAMEL_SWIRL]: Pkm.MILCERY,
   [Pkm.ALCREMIE_RAINBOW_SWIRL]: Pkm.MILCERY,
-  [Pkm.PECHARUNT]: Pkm.PECHARUNT
+  [Pkm.PECHARUNT]: Pkm.PECHARUNT,
+  [Pkm.VELUZA]: Pkm.VELUZA
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7868,5 +7870,10 @@ export const AnimationConfig: {
     ability: AnimationType.Charge,
     emote: AnimationType.Twirl,
     hop: AnimationType.Twirl
+  },
+  [Pkm.VELUZA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
   }
 }

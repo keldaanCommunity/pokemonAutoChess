@@ -139,6 +139,7 @@ export class CountEvolutionRule extends EvolutionRule {
             itemsToAdd.push(el)
           }
         })
+        pkm.meal = pokemonsBeforeEvolution.find((p) => p.meal)?.meal ?? ""
         player.board.delete(id)
         pokemonsBeforeEvolution.push(pkm)
       }

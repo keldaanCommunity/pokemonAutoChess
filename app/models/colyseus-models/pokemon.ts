@@ -17694,6 +17694,25 @@ export class Pecharunt extends Pokemon {
   attackSprite = AttackSprite.POISON_RANGE
 }
 
+export class Veluza extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WATER,
+    Synergy.PSYCHIC,
+    Synergy.GOURMET
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 180
+  atk = 20
+  speed = 45
+  def = 5
+  speDef = 4
+  maxPP = 80
+  range = 1
+  skill = Ability.FILET_AWAY
+  attackSprite = AttackSprite.WATER_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -18628,7 +18647,8 @@ export const PokemonClasses: Record<
   [Pkm.ALCREMIE_RUBY_SWIRL]: AlcremieRubySwirl,
   [Pkm.ALCREMIE_CARAMEL_SWIRL]: AlcremieCaramelSwirl,
   [Pkm.ALCREMIE_RAINBOW_SWIRL]: AlcremieRainbowSwirl,
-  [Pkm.PECHARUNT]: Pecharunt
+  [Pkm.PECHARUNT]: Pecharunt,
+  [Pkm.VELUZA]: Veluza
 }
 
 // declare all the classes in colyseus schema TypeRegistry
