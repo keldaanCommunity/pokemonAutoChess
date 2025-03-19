@@ -32,3 +32,4 @@ Monsters now get max HP based on the HP of their victims. Added Monster 9 Mercil
 
 Rock synergy now requires you to fight in a certain weather to collect the weather rocks. These rocks do not give synergies anymore but help take the best out of the weather. Added 5 new weather rocks and a new weather Smog for poison type.
 
+Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1301852497740038157) !

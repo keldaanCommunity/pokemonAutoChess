@@ -20,7 +20,7 @@ export function Poster(props: { version: string }) {
       onClick={(e) => e.currentTarget.classList.toggle("flipped")}
     >
       <div className="front">
-        <img src={`/assets/posters/${props.version}.png`} alt={props.version} />
+        <img src={`/assets/posters/${props.version}.png`} alt={props.version} loading="lazy" />
       </div>
       <div className="back">
         {patchContent ? (

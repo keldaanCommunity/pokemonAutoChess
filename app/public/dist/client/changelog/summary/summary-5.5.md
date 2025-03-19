@@ -32,4 +32,4 @@ With ![Fire](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess
 
 ![Ghost](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/3c11a620df1707e68b30743b29cf900c0dd0c87e/app/public/src/assets/types/GHOST.svg) Ghost pokemons now have 25% dodge chance (was previously for Water pokemons)
 
-Check out the full changelog on Discord !
+Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1283336256448893040) !

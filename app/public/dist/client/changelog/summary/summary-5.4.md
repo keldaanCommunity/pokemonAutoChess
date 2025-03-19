@@ -31,4 +31,4 @@
 ![Wishiwashi School](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0746/0001/Normal.png)
 ![Pyukumuku](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0771/Normal.png)
 
-Check out the full changelog on Discord !
+Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1274759450145849507) !

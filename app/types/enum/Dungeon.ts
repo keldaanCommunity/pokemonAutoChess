@@ -596,7 +596,7 @@ export const DungeonDetails: {
   [DungeonPMDO.MiracleSea]: {
     synergies: [Synergy.WATER, Synergy.AQUATIC, Synergy.FAIRY],
     music: DungeonMusic.MIRACLE_SEA,
-    regionalSpeciality: Item.TEA
+    regionalSpeciality: Item.SMOKED_FILET
   },
   [DungeonPMDO.MoonlitCourtyard]: {
     synergies: [Synergy.FAIRY, Synergy.FLORA, Synergy.DARK],
@@ -746,7 +746,7 @@ export const DungeonDetails: {
   [DungeonPMDO.QuicksandPit]: {
     synergies: [Synergy.GROUND, Synergy.FOSSIL, Synergy.MONSTER],
     music: DungeonMusic.QUICKSAND_PIT,
-    Item: Item.LEEK
+    regionalSpeciality: Item.LEEK
   },
   [DungeonPMDO.QuicksandUnused]: {
     synergies: [Synergy.GROUND, Synergy.NORMAL, Synergy.POISON],
@@ -866,12 +866,12 @@ export const DungeonDetails: {
   [DungeonPMDO.StormySea1]: {
     synergies: [Synergy.WATER, Synergy.AQUATIC, Synergy.ELECTRIC],
     music: DungeonMusic.STORMY_SEA,
-    regionalSpeciality: Item.POFFIN
+    regionalSpeciality: Item.SMOKED_FILET
   },
   [DungeonPMDO.StormySea2]: {
     synergies: [Synergy.WATER, Synergy.AQUATIC, Synergy.SOUND],
     music: DungeonMusic.FRIEND_AREA_OCEANIC,
-    regionalSpeciality: Item.POFFIN
+    regionalSpeciality: Item.SMOKED_FILET
   },
   [DungeonPMDO.SurroundedSea]: {
     synergies: [Synergy.WATER, Synergy.DRAGON, Synergy.ICE],
