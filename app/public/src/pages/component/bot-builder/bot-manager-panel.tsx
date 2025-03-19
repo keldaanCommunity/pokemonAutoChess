@@ -36,7 +36,7 @@ function BotsList() {
   const [bots, setBots] = useState<IBot[] | null>(null)
 
   useEffect(() => {
-    fetch("/bots?withSteps=true").then((res) => res.json()).then((data) => {
+    fetch(`/bots?withSteps=true&t=${Date.now()}`).then((res) => res.json()).then((data) => {
       setBots(data)
     })
   }, [])
