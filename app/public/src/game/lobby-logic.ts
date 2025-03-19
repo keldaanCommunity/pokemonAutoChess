@@ -13,7 +13,7 @@ import PreparationState from "../../../rooms/states/preparation-state"
 import {
   ICustomLobbyState,
   Transfer,
-  PkmWithConfig,
+  PkmWithCustom,
   ISuggestionUser
 } from "../../../types"
 import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
@@ -108,6 +108,7 @@ export async function joinLobbyRoom(
               window.location.pathname === "/lobby" &&
               (code === CloseCodes.USER_INACTIVE ||
                 code === CloseCodes.USER_BANNED ||
+                code === CloseCodes.USER_DELETED ||
                 code === CloseCodes.USER_NOT_AUTHENTICATED)
             if (shouldGoToLoginPage) {
               const errorMessage = CloseCodesMessages[code]
@@ -269,7 +270,7 @@ export async function joinLobbyRoom(
 
           room.onMessage(
             Transfer.BOOSTER_CONTENT,
-            (boosterContent: PkmWithConfig[]) => {
+            (boosterContent: PkmWithCustom[]) => {
               dispatch(setBoosterContent(boosterContent))
             }
           )

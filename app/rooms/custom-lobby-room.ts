@@ -54,7 +54,8 @@ import {
   DeleteTournamentCommand,
   SelectLanguageCommand,
   UnbanUserCommand,
-  RemakeTournamentLobbyCommand
+  RemakeTournamentLobbyCommand,
+  DeleteAccountCommand
 } from "./commands/lobby-commands"
 import LobbyState from "./states/lobby-state"
 
@@ -295,6 +296,10 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         this.dispatcher.dispatch(new GiveTitleCommand(), { client, uid, title })
       }
     )
+
+    this.onMessage(Transfer.DELETE_ACCOUNT, (client) => {
+      this.dispatcher.dispatch(new DeleteAccountCommand(), { client })
+    })
 
     this.onMessage(
       Transfer.SET_ROLE,
