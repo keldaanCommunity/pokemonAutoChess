@@ -187,7 +187,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.shiny = pokemon.shiny
     this.emotion = pokemon.emotion
     this.ap = pokemon.ap
-    this.luck = pokemon.luck
+    this.luck = pokemon.permanentLuck
     this.dodge = 0
     this.physicalDamage = 0
     this.specialDamage = 0

@@ -416,6 +416,7 @@ export interface IPokemon {
   stars: number
   maxPP: number
   luck: number
+  permanentLuck: number
   ap: number
   skill: Ability
   passive: Passive
