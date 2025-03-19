@@ -457,7 +457,7 @@
     "RAZOR_LEAF": "Razor Leaf",
     "MUD_SHOT": "Mud Shot",
     "MALIGNANT_CHAIN": "Malignant Chain",
-    "FILET_AWAY": "Filet Away"
+    "FILET_AWAY": "Fillet Away"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1823,10 +1823,10 @@
     "DRAGON_CLAW": "Deal [30,60,120,SP] SPECIAL to the lowest health adjacent enemy and WOUND them for 4 seconds.",
     "TAILWIND": "Increase the SPEED of all allies by [5,10,15,SP]",
     "HORN_ATTACK": "Deal [3,4,5,SP] x ATK as SPECIAL to the target and cause ARMOR_BREAK for 8 seconds.",
-    "RAZOR_LEAF": "Throw sharp leafs in a line behind the target. All enemies hit take [20,40,80,SP] SPECIAL. Can crit by default.",
+    "RAZOR_LEAF": "Throw sharp leaves in a line behind the target. All enemies hit take [20,40,80,SP] SPECIAL. Can crit by default.",
     "MUD_SHOT": "Hurls mud at the target, dealing [25,50,75,SP] SPECIAL and reducing their SPEED by [10,20,30,SP].",
     "MALIGNANT_CHAIN": "Extends a poisonous chain to ensnare a target, inflicting LOCKED and 3 stacks of POISONNED for [3,SP] seconds.",
-    "FILET_AWAY": "Sacrify 50% of current HP and gain [10,SP] ATK and [20,SP] SPEED"
+    "FILET_AWAY": "Sacrifice 50% of current HP and gain [10,SP] ATK and [20,SP] SPEED"
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -1896,7 +1896,7 @@
     "VILE_FLOWER": "Vile Flower",
     "SUN_FLOWER": "Sun Flower",
     "BATTLE_ARMOR": "Battle Armor",
-    "MOUTAIN_RESISTANCE": "Moutain Resistance",
+    "MOUTAIN_RESISTANCE": "Mountain Resistance",
     "DIAMOND_STORM": "Diamond Storm",
     "CURSE_OF_VULNERABILITY": "Curse of Vulnerability",
     "CURSE_OF_WEAKNESS": "Curse of Weakness",
@@ -2205,7 +2205,7 @@
     "BERRY_JUICE": "Berry Juice",
     "TART_APPLE": "Tart Apple",
     "SWEET_APPLE": "Sweet Apple",
-    "SIRUPY_APPLE": "Sirupy Apple",
+    "SIRUPY_APPLE": "Syrupy Apple",
     "SWEET_HERB": "Sweet Herb",
     "MOOMOO_MILK": "Moomoo Milk",
     "BERRIES": "Berries",
@@ -2220,7 +2220,7 @@
     "LEEK": "Leek",
     "LARGE_LEEK": "Large Leek",
     "SPINDA_COCKTAIL": "Spinda's Cocktail",
-    "SMOKED_FILET": "Smoked Filet",
+    "SMOKED_FILET": "Smoked Fillet",
     "SWEETS": "Sweets",
     "RIBBON_SWEET": "Ribbon Sweet",
     "STAR_SWEET": "Star Sweet",
@@ -2541,7 +2541,7 @@
     "SKARMORY": "At the start of the fight, Skarmory scatters spikes around the field. The spikes deal 10 TRUE per second and ARMOR_BREAK to Pokémon that walk on it, if not FLYING.",
     "DURANT": "Durant basic attacks deals 1 extra TRUE for each BUG ally on your board",
     "OGERPON_TEAL": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, restores [20,SP] HP to adjacent allies",
-    "OGERPON_WELLSPRING": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, gives 20 PP to adjacent allies",
+    "OGERPON_WELLSPRING": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, gives [20,SP] PP to adjacent allies",
     "OGERPON_HEARTHFLAME": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, BURN adjacent enemies for 5 seconds",
     "OGERPON_CORNERSTONE": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance \n Upon casting, FLINCH adajcent enemies for 5 seconds",
     "VICTINI": "Increases the accuracy of the team. Allies can no longer miss their attacks.",
@@ -3595,7 +3595,7 @@
     "BLOOD_MONEY": "Blood Money",
     "TOWN_FESTIVAL": "Town Festival",
     "HIGH_ROLLER": "High Roller",
-    "REGIONAL_SPECIALITIES": "Regional Specialities"
+    "REGIONAL_SPECIALITIES": "Regional Specialties"
   },
   "scribble_description": {
     "EVERYONE_IS_HERE": "All the additional picks are available immediately",
