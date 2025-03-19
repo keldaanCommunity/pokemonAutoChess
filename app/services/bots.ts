@@ -1,4 +1,4 @@
-import { BotV2, IBot } from "../models/mongo-models/bot-v2"
+import { BotV2, IBot, IStep } from "../models/mongo-models/bot-v2"
 import { nanoid } from "nanoid"
 import { mongo } from "mongoose"
 
@@ -46,7 +46,7 @@ export async function addBotToDatabase(json: {
   avatar: string
   elo: number
   author: string
-  steps: number
+  steps: IStep[]
 }): Promise<IBot> {
   const resultCreate = await BotV2.create({
     name: json.name,

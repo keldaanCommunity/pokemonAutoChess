@@ -41,6 +41,7 @@ export default function BotBuilder() {
   const [currentModal, setCurrentModal] = useState<"import" | "export" | null>(null)
   const [violation, setViolation] = useState<string>()
   const user = useAppSelector((state) => state.network.profile)
+  const isBotManager = user?.role === Role.BOT_MANAGER || user?.role === Role.ADMIN
 
   useEffect(() => {
     const onKey = (ev: KeyboardEvent) => {
@@ -71,7 +72,7 @@ export default function BotBuilder() {
         logger.debug(`bot ${botId} imported`)
       })
     }
-  }, [queryParams, bot])
+  }, [queryParams])
 
   const prevStep = useCallback(
     () => setStage(min(1)(currentStage - 1)),
@@ -111,7 +112,7 @@ export default function BotBuilder() {
   }
 
   function completeBotInfo() {
-    if (bot.id) {
+    if (bot.id && !isBotManager) {
       // fork existing bot
       setQueryParams({})
       bot.id = ""
@@ -164,13 +165,11 @@ export default function BotBuilder() {
           {t("back_to_lobby")}
         </button>
         <div className="spacer"></div>
-        {(user?.role === Role.ADMIN ||
-          user?.role === Role.MODERATOR ||
-          user?.role === Role.BOT_MANAGER) && (
-            <button onClick={() => navigate("/bot-admin")} className="bubbly red">
-              {t("bot_admin")}
-            </button>
-          )}
+        {isBotManager && (
+          <button onClick={() => navigate("/bot-admin")} className="bubbly red">
+            {t("bot_admin")}
+          </button>
+        )}
         <button
           onClick={() => { setCurrentModal("import") }}
           className="bubbly orange"
