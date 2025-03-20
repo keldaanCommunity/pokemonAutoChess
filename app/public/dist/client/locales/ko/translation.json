@@ -3639,6 +3639,5 @@
 		"ROOM_EMPTY": "플레이어 수가 부족으로 삭제된 방입니다",
 		"ROOM_DELETED": "삭제된 방입니다",
 		"UNKNOWN_ERROR": "예기치 못한 에러 발생: {{error}}"
-	},
-	"game_surrender-modal-title": "항복"
+	}
 }
