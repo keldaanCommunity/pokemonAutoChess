@@ -26,3 +26,5 @@ Choice scarf spread on-hit effects, Smoke Ball no longer blind your own team, Re
 ## Common less common
 
 Uncommon rate has been increased at levels 4 and 5 at the expense of common rate.
+
+Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1336380222475472946) !

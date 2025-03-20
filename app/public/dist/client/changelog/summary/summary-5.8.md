@@ -28,3 +28,5 @@ With player attendance having stabilized, we can reactivate the bots and start t
 ##  PAC on Gameboy ?
 
 Play the gameboy Pokemon autobattler prototype by unlocking the Gameboy gadget at level 30
+
+Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1312746495501406259) !

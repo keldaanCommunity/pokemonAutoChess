@@ -43,4 +43,4 @@ Every 2 shop rerolls, gain +1% AP and find a mon in shop that shares a synergy w
 
 Ranked matches and Smeargle's Scribble can now be created at anytime from the New game menu.
 
-Check out the full changelog on Discord !
+Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1292738202787905580) !
