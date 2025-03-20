@@ -2423,7 +2423,10 @@
 		"SALTED_FLAVOR": "Préparé avec des alliés ROCK GROUND FOSSIL. Appliquez-la sur $t(pkm.MILCERY) pour évoluer en $t(pkm.ALCREMIE_SALTED). $t(passive_description.SALTED_CREAM)",
 		"RUBY_SWIRL_FLAVOR": "Préparé avec des alliés FIRE WILD FIELD. Appliquez-la sur $t(pkm.MILCERY) pour évoluer en $t(pkm.ALCREMIE_RUBY_SWIRL). $t(passive_description.RUBY_SWIRL_CREAM)",
 		"CARAMEL_SWIRL_FLAVOR": "Préparé avec des alliés DARK MONSTER DRAGON. Appliquez-la sur $t(pkm.MILCERY) pour évoluer en $t(pkm.ALCREMIE_CARAMEL_SWIRL). $t(passive_description.CARAMEL_SWIRL_CREAM)",
-		"RAINBOW_SWIRL_FLAVOR": "Préparé avec des alliés PSYCHIC AMORPHOUS BABY LIGHT. Appliquez-la  sur $t(pkm.MILCERY) pour évoluer en $t(pkm.ALCREMIE_RAINBOW_SWIRL). $t(passive_description.RAINBOW_SWIRL_CREAM)"
+		"RAINBOW_SWIRL_FLAVOR": "Préparé avec des alliés PSYCHIC AMORPHOUS BABY LIGHT. Appliquez-la  sur $t(pkm.MILCERY) pour évoluer en $t(pkm.ALCREMIE_RAINBOW_SWIRL). $t(passive_description.RAINBOW_SWIRL_CREAM)",
+		"EGG_FOR_SELL": "Un œuf Pokémon vendu à la Garderie Leveinard",
+		"GIMMIGHOUL_COIN": "Obtenez 1 GOLD supplémentaire à chaque tour et augmente les intérêts maximum de 1.",
+		"EXCHANGE_TICKET": "Échange un composant d'objet ou un objet fabriqué de votre banc contre un autre aléatoire. Usage unique."
 	},
 	"passive_description": {
 		"NONE": "Pas de passif",
@@ -2553,7 +2556,21 @@
 		"GLIMMORA": "Une fois sous les 50% de HP max, lance des piques toxiques dans une zone de 2x3 devant elle, infligeant 20 SPECIAL. Les piques toxiques appliquent le statut POISONNED aux Pokémon, sauf s'ils sont de type POISON.",
 		"PILLAR": "Construit un pilier pouvant être placé sur le plateau et qui bloque le chemin des ennemis, avec des HP, DEF et SPE_DEF augmentés en fonction des STAR de l'unité.",
 		"INANIMATE": "Les objets inanimés ne peuvent pas être copiés, mis sur le banc ou vendus. Ils ne peuvent pas se déplacer ni attaquer, et sont immunisés contre les effets de statut.",
-		"BERSERK": "Gagne 3 AP à chaque fois qu'un Pokémon est affecté par sa capacité."
+		"BERSERK": "Gagne 3 AP à chaque fois qu'un Pokémon est affecté par sa capacité.",
+		"APPLIN": "Verpom recherche une SWEET_APPLE, une TART_APPLE ou une SIRUPY_APPLE.",
+		"DIPPLIN": "Pomdramour cherche une SIRUPY_APPLE.",
+		"WELL_BAKED": "Le Pokémon ne souffre pas de BURN. Au contraire, il gagne 20 DEF lorsqu'il est affecté par BURN.",
+		"CONVERSION": "Conversion : ce Pokémon récupère la plus haute synergie de votre adversaire et ses effets au début du combat.",
+		"CREAM": "$t(pkm.MILCERY) recherche une saveur délicieuse…",
+		"VANILLA_CREAM": "Au lancement de la capacité, la VANILLA_FLAVOR ajoute [60,SP] SHIELD à l'allié le plus proche",
+		"RUBY_CREAM": "Au lancement de la capacité, la RUBY_FLAVOR ajoute [30,SP] SPEED à l'allié le plus proche",
+		"MATCHA_CREAM": "Au lancement de la capacité, la MATCHA_FLAVOR ajoute [40,SP] HP maximum à l'allié le plus proche",
+		"MINT_CREAM": "Au lancement de la capacité, la MINT_FLAVOR soigne [40,SP] HP et ajoute [15,SP] SPE_DEF à l'allié le plus proche",
+		"LEMON_CREAM": "Au lancement de la capacité, la LEMON_FLAVOR ajoute [40,SP] % de CRIT_CHANCE à l'allié le plus proche",
+		"SALTED_CREAM": "Au lancement de la capacité, la SALTED_FLAVOR soigne [40,SP] HP et ajoute [15,SP] DEF à l'allié le plus proche",
+		"RUBY_SWIRL_CREAM": "Au lancement de la capacité, la RUBY_SWIRL_FLAVOR ajoute [8,SP] ATK à l'allié le plus proche",
+		"CARAMEL_SWIRL_CREAM": "Au lancement de la capacité, la CARAMEL_SWIRL_FLAVOR ajoute [80,SP] % de CRIT_POWER à l'allié le plus proche",
+		"RAINBOW_SWIRL_CREAM": "Au lancement de la capacité, la RAINBOW_SWIRL_FLAVOR ajoute [60,SP] AP à l'allié le plus proche"
 	},
 	"stat": {
 		"ATK": "Attaque",
@@ -2669,7 +2686,8 @@
 		"BABY": "Bébé",
 		"LIGHT": "Lumière",
 		"WILD": "Sauvage",
-		"AMORPHOUS": "Amorphe"
+		"AMORPHOUS": "Amorphe",
+		"GOURMET": "Gourmet"
 	},
 	"synergy_description": {
 		"NORMAL": "Les pokémons NORMAL et leurs alliés adjacents gagnent le SHIELD lorsque le combat commence",
@@ -2703,7 +2721,8 @@
 		"LIGHT": "La lumière révèle un projecteur sur le champ de bataille. L’unité sous les projecteurs au début du combat bénéficie de bonus uniques.",
 		"WILD": "Les pokémons WILD gagnent en ATK et SPEED et leurs attaques peuvent infliger WOUND. Pour chaque STAR de vos pokémons WILD sur le plateau, obtenez +1% de chance de trouver des pokémons WILD dans le magasin + 5% de chance durant les rounds PvE.{{additionalInfo}}",
 		"WILD_ADDITIONAL": "\nChances actuelles de pokémon WILD: {{wildChance}}%",
-		"AMORPHOUS": "Les Pokémons AMORPHOUS peuvent prendre de nombreuses formes. Votre équipe gagne des HP et de la SPEED en activant un grand nombre de synergies différentes."
+		"AMORPHOUS": "Les Pokémons AMORPHOUS peuvent prendre de nombreuses formes. Votre équipe gagne des HP et de la SPEED en activant un grand nombre de synergies différentes.",
+		"GOURMET": "Les Pokémon GOURMET peuvent être équipés d'une CHEF_HAT. Les Chefs concocteront leur Plat Signature entre les combats et nourriront les alliés adjacents, leur conférant divers bonus et effets."
 	},
 	"title": {
 		"NOVICE": "Novice",
@@ -2983,6 +3002,7 @@
 	"copyright": "Tous les droits à The Pokemon Company®",
 	"stage": "Tour",
 	"spectate": "Regarder",
+	"spectating": "Vous observez {{ name }}",
 	"join": "Rejoindre",
 	"reconnect": "Reconnexion",
 	"participate": "Participer",
@@ -3086,6 +3106,7 @@
 	"show_unlockable": "Débloquables",
 	"show_unlocked": "Débloqués",
 	"show_evolutions": "Montrer évolutions",
+	"show_only_available_picks": "Afficher uniquement les picks additionnels et régionaux disponibles",
 	"sort_by_index": "Tri par numéro",
 	"sort_by_shards": "Tri par éclats",
 	"normal_emotions": "Emotes normales",
@@ -3173,6 +3194,7 @@
 	"pokemons_on_your_board": "pokémons sur votre plateau.",
 	"team_size_hint": "Augmentez la taille de votre équipe en passant au niveau supérieur",
 	"game_history": "Parties jouées",
+	"chat_history": "Historique des discussions",
 	"load_more": "Charger plus",
 	"no_history_found": "Aucun historique trouvé",
 	"top": "Top",
@@ -3180,12 +3202,23 @@
 	"wins": "Victoires",
 	"favorites": "Favoris",
 	"user_id": "ID de l'utilisateur",
+	"user_id_hint1": "Votre identifiant utilisateur est :",
+	"user_id_hint2": "Utilisez-le pour communiquer avec les modérateurs ou les administrateurs. Contrairement aux noms de joueur, chaque identifiant utilisateur est unique et ne peut être modifié.",
 	"name": "Nom",
+	"account": "Compte",
+	"delete_account": "Supprimer le compte",
+	"delete_account_hint": "Si vous souhaitez que votre compte soit définitivement supprimé, cliquez ci-dessous et saisissez « $t(delete_account_passphrase) »",
+	"delete_account_confirmation": "Tapez $t(delete_account_passphrase) pour confirmer",
+	"delete_account_confirmation_failed": "La phrase de confirmation n'est pas valide. La suppression du compte n'a pas été confirmée.",
+	"delete_account_passphrase": "SUPPRIMER MON COMPTE",
 	"anonymous_users_name_hint": "Les utilisateurs anonymes ne peuvent pas changer leur nom.",
 	"give_boosters": "Donner des boosters",
 	"heap_snapshot": "Write heap snapshot",
+	"banned": "Banni",
 	"ban_user": "Bannir le joueur",
 	"unban_user": "Débannir le joueur",
+	"see_game_history": "Voir l'historique des parties jouées",
+	"see_chat_history": "Voir l'historique des discussions",
 	"set_moderator": "Nommer modérateur",
 	"set_bot_manager": "Nommer Bot Manager",
 	"give_title": "Donner un titre",
@@ -3213,6 +3246,8 @@
 	"components": "Composants",
 	"craftable_items": "Fabriquables",
 	"berries": "Baies",
+	"dishes": "Plats",
+	"signature_dish": "Plat Signature",
 	"artificial_items": "Objets artificiels",
 	"weather_rocks": "Roches Météo",
 	"tm_hm": "Capacités Techniques (CT) / Capacités Spéciales (CS)",
@@ -3220,6 +3255,7 @@
 	"shiny_items": "Objets chromatiques",
 	"craftable_items_description": "Combinez deux composants pour créer des objets puissants !",
 	"berries_description": "Lorsque la synergie GRASS est active, vous pouvez collecter des baies en cliquant sur les arbres à baies près de votre avatar.",
+	"dishes_description": "Les plats sont préparés par les chefs GOURMET pour conférer de puissants bonus à un Pokémon lors du prochain combat.",
 	"artificial_items_description": "La synergie ARTIFICIAL vous donne des objets exclusifs une fois activée. Trois d'entre eux sont sélectionnés au hasard pour chaque joueur en début de partie.",
 	"weather_rocks_description": "Les pierres météo sont trouvées après avoir combattu sous une certaine météo avec la synergie ROCK active. Elles procurent des bonus à votre équipe lorsque la météo correspondante est active. Ces effets peuvent être cumulés.",
 	"tm_hm_description": "La synergie HUMAN vous confère des CT/CS lorsqu'elle est activée. Elles peuvent être utilisées pour modifier la capacité d'un Pokémon HUMAN.",
@@ -3294,6 +3330,7 @@
 	"berry_gained": "+1 BAIE ",
 	"berry_unripe": "PAS MÛR !",
 	"full": "PLUS DE PLACE",
+	"belly_full": "REPU!",
 	"drop_here_to_sell": "Déposez ici pour vendre",
 	"for_price_gold": "pour {{price}} pièces d'or",
 	"buy_xp": "Acheter XP {{cost}}",
@@ -3320,6 +3357,7 @@
 	"search_player": "Chercher par nom de joueur...",
 	"team_builder": "Planificateur",
 	"titles_unlocked": "titres débloqués",
+	"overlaps": "Chevauchements",
 	"game-reconnect-modal-title": "Reconnexion au jeu",
 	"game-reconnect-modal-body": "Vous avez quitté une partie en cours. Voulez-vous vous reconnecter à votre partie précédente ?",
 	"game-surrender-modal-title": "Se rendre",
@@ -3359,6 +3397,7 @@
 	},
 	"level_required": "Niveau requis",
 	"map": {
+		"town": "Bourg-Trésor",
 		"random": "Zone aléatoire",
 		"AmpPlains": "Plaines Elek",
 		"AppleWoods": "Bois aux Pommes",
@@ -3553,7 +3592,10 @@
 		"DO_IT_ALL_YOURSELF": "Tout faire soi-même !",
 		"FIRST_PARTNER": "Premier Partenaire",
 		"SLAMINGO": "Slamingo",
-		"BLOOD_MONEY": "Le prix du sang"
+		"BLOOD_MONEY": "Le prix du sang",
+		"TOWN_FESTIVAL": "Festival en ville",
+		"HIGH_ROLLER": "High Roller",
+		"REGIONAL_SPECIALITIES": "Spécialités régionales"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "Tous les Pokémons additionnels sont disponibles immédiatement",
@@ -3569,7 +3611,10 @@
 		"DO_IT_ALL_YOURSELF": "Commencez avec une copie de votre avatar. Les avatars de faible rareté obtiennent plus de HP max et d'or au départ.",
 		"FIRST_PARTNER": "Choisissez votre Pokémon de départ. Vous obtenez un exemplaire de cette unité à chaque tour jusqu'au tour 10.",
 		"SLAMINGO": "Tous les objets sont lâchés lorsqu'un Pokémon est placé sur le banc. Commence avec 4 composants aléatoires.",
-		"BLOOD_MONEY": "Chaque KO donne 1 GOLD. Aucun revenu supplémentaire provenant des intérêts."
+		"BLOOD_MONEY": "Chaque KO donne 1 GOLD. Aucun revenu supplémentaire provenant des intérêts.",
+		"TOWN_FESTIVAL": "Vous faites toujours une rencontre en ville et tous les articles du carrousel sont gratuits.",
+		"HIGH_ROLLER": "Vos boutiques ont une chance de contenir des Pokémons éclos aux tours 0 à 10, des Uniques aux tours 10 à 20 et des Légendaires après le tour 20.",
+		"REGIONAL_SPECIALITIES": "Les types de votre région actuelle contribuent à vos synergies. Après avoir changé de région, votre équipe goûte un plat local."
 	},
 	"town_encounter_description": {
 		"KECLEON": "Kecleon vend des pierres synergie pour {{cost}} GOLD",
@@ -3621,6 +3666,7 @@
 		"USER_INACTIVE": "Vous avez été éjecté pour inactivité afin d'économiser des ressources serveur",
 		"USER_KICKED": "Vous avez été éjecté de ce salon",
 		"USER_BANNED": "Votre compte a été banni",
+		"USER_DELETED": "Votre compte a été définitivement supprimé",
 		"USER_RANK_TOO_LOW": "Votre rang de joueur est trop bas pour entrer dans ce salon",
 		"USER_NOT_AUTHENTICATED": "Veuillez vous réauthentifier",
 		"USER_TIMEOUT": "Vous avez récemment quitté une partie avant sa fin, vous devez donc attendre 5 minutes avant d'en rejoindre une autre.",
