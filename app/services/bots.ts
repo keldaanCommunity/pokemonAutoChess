@@ -1,10 +1,10 @@
-import { BotV2, IBot } from "../models/mongo-models/bot-v2"
+import { BotV2, IBot, IStep } from "../models/mongo-models/bot-v2"
 import { nanoid } from "nanoid"
 import { mongo } from "mongoose"
-
-const bots = new Map<string, IBot>()
+import { logger, matchMaker } from "colyseus"
 
 export async function fetchBots() {
+  const bots = new Map<string, IBot>()
   const botsData = await BotV2.find({}, {}, { sort: { elo: -1 } })
   if (botsData) {
     const ids = new Array<string>()
@@ -16,6 +16,7 @@ export async function fetchBots() {
       }
       ids.push(bot.id)
       bots.set(bot.id, bot)
+      matchMaker.presence.hset("bots", bot.id, JSON.stringify(bot))
     })
   }
   return bots
@@ -24,10 +25,12 @@ export async function fetchBots() {
 export async function getBotsList(
   options: { withSteps: boolean } = { withSteps: true }
 ): Promise<Partial<IBot>[]> {
-  if (bots.size === 0) {
+  const bots = await matchMaker.presence.hgetall("bots")
+  const botsList = Object.values(bots).map((bot) => JSON.parse(bot) as IBot)
+  if (botsList.length === 0) {
     await fetchBots()
   }
-  return [...bots.values()].map((bot) => ({
+  return botsList.map((bot) => ({
     name: bot.name,
     avatar: bot.avatar,
     id: bot.id,
@@ -37,8 +40,15 @@ export async function getBotsList(
   }))
 }
 
-export function getBotData(id: string): IBot | undefined {
-  return bots.get(id)
+export async function getBotData(id: string): Promise<IBot | undefined> {
+  try {
+    const json = await matchMaker.presence.hget("bots", id)
+    if (!json) return undefined
+    return JSON.parse(json) as IBot
+  } catch (e) {
+    logger.error(`Error parsing bot data id ${id}: ${e}`)
+    return undefined
+  }
 }
 
 export async function addBotToDatabase(json: {
@@ -46,7 +56,7 @@ export async function addBotToDatabase(json: {
   avatar: string
   elo: number
   author: string
-  steps: number
+  steps: IStep[]
 }): Promise<IBot> {
   const resultCreate = await BotV2.create({
     name: json.name,
@@ -57,7 +67,13 @@ export async function addBotToDatabase(json: {
     id: nanoid()
   })
 
-  bots.set(resultCreate.id, resultCreate)
+  logger.info(`Bot with id ${resultCreate.id} created`)
+
+  matchMaker.presence.hset(
+    "bots",
+    resultCreate.id,
+    JSON.stringify(resultCreate)
+  )
   return resultCreate
 }
 
@@ -65,6 +81,9 @@ export async function deleteBotFromDatabase(
   id: string
 ): Promise<mongo.DeleteResult> {
   const resultDelete = await BotV2.deleteOne({ id })
-  bots.delete(id)
+  matchMaker.presence.hdel("bots", id)
+  if (resultDelete.deletedCount > 0) {
+    logger.info(`Bot with id ${id} deleted`)
+  }
   return resultDelete
 }

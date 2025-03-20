@@ -62,7 +62,7 @@ export default function ExportBotModal(props: {
         <p>{t("export_hint")}</p>
         <textarea
           rows={10}
-          defaultValue={textArea}
+          value={textArea}
           onChange={(e) => handleTextAreaChange(e.target.value)}
         ></textarea>
         {jsonError && <p className="error">{jsonError}</p>}

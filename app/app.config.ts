@@ -330,7 +330,7 @@ export default config({
     })
 
     app.get("/bots/:id", async (req, res) => {
-      res.send(getBotData(req.params.id))
+      res.send(await getBotData(req.params.id))
     })
 
     app.get("/status", async (req, res) => {
