@@ -423,7 +423,7 @@ export default class BoardManager {
     if (!players) return
 
     const scoutingPlayers = values(players).filter((p) => {
-      const spectatedPlayer = players[p.spectatedPlayerId]
+      const spectatedPlayer = players.get(p.spectatedPlayerId)
 
       if (
         !spectatedPlayer ||
