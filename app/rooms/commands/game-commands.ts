@@ -1415,6 +1415,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                 const candidates = values(player.board).filter(
                   (p) =>
                     p.meal === "" &&
+                    !isOnBench(p) &&
                     distanceC(
                       chef.positionX,
                       chef.positionY,
