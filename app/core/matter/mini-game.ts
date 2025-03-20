@@ -579,13 +579,13 @@ export class MiniGame {
     this.symbolsByPortal = new Map()
 
     symbols.forEach((symbol, i) => {
+      const portalId = portalIds[i % portalIds.length]
+      this.symbolsByPortal.set(portalId, [
+        ...(this.symbolsByPortal.get(portalId) ?? []),
+        symbol
+      ])
       setTimeout(
         () => {
-          const portalId = portalIds[i % portalIds.length]
-          this.symbolsByPortal.set(portalId, [
-            ...(this.symbolsByPortal.get(portalId) ?? []),
-            symbol
-          ])
           symbol.index = Math.floor(i / portalIds.length)
           symbol.portalId = portalId
         },
