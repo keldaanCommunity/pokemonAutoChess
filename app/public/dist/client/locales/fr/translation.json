@@ -2414,7 +2414,16 @@
 		"CLOVER_SWEET": "Gagne 5 % de LUCK de façon permanente",
 		"BERRY_SWEET": "Gagne 10 HP max permanents",
 		"LOVE_SWEET": "Gagne 3 DEF de façon permanente",
-		"STRAWBERRY_SWEET": "Gagne 3 ATK de façon permanente"
+		"STRAWBERRY_SWEET": "Gagne 3 ATK de façon permanente",
+		"VANILLA_FLAVOR": "Préparé avec des alliés NORMAL FLYING ARTIFICIAL. Appliquez-la sur $t(pkm.MILCERY) pour évoluer en $t(pkm.ALCREMIE_VANILLA). $t(passive_description.VANILLA_CREAM)",
+		"RUBY_FLAVOR": "Préparé avec des alliés FIGHTING HUMAN STEEL. Appliquez-la sur $t(pkm.MILCERY) pour évoluer en $t(pkm.ALCREMIE_RUBY). $t(passive_description.RUBY_CREAM)",
+		"MATCHA_FLAVOR": "Préparé avec des alliés GRASS FLORA POISON GHOST. Appliquez-la sur $t(pkm.MILCERY) pour évoluer en $t(pkm.ALCREMIE_MATCHA). $t(passive_description.MATCHA_CREAM)",
+		"MINT_FLAVOR": "Préparé avec des alliés WATER AQUATIC ICE. Appliquez-la sur $t(pkm.MILCERY) pour évoluer en $t(pkm.ALCREMIE_MINT). $t(passive_description.MINT_CREAM)",
+		"LEMON_FLAVOR": "Préparé avec des alliés ELECTRIC BUG FAIRY SOUND. Appliquez-la sur $t(pkm.MILCERY) pour évoluer en $t(pkm.ALCREMIE_LEMON). $t(passive_description.LEMON_CREAM)",
+		"SALTED_FLAVOR": "Préparé avec des alliés ROCK GROUND FOSSIL. Appliquez-la sur $t(pkm.MILCERY) pour évoluer en $t(pkm.ALCREMIE_SALTED). $t(passive_description.SALTED_CREAM)",
+		"RUBY_SWIRL_FLAVOR": "Préparé avec des alliés FIRE WILD FIELD. Appliquez-la sur $t(pkm.MILCERY) pour évoluer en $t(pkm.ALCREMIE_RUBY_SWIRL). $t(passive_description.RUBY_SWIRL_CREAM)",
+		"CARAMEL_SWIRL_FLAVOR": "Préparé avec des alliés DARK MONSTER DRAGON. Appliquez-la sur $t(pkm.MILCERY) pour évoluer en $t(pkm.ALCREMIE_CARAMEL_SWIRL). $t(passive_description.CARAMEL_SWIRL_CREAM)",
+		"RAINBOW_SWIRL_FLAVOR": "Préparé avec des alliés PSYCHIC AMORPHOUS BABY LIGHT. Appliquez-la  sur $t(pkm.MILCERY) pour évoluer en $t(pkm.ALCREMIE_RAINBOW_SWIRL). $t(passive_description.RAINBOW_SWIRL_CREAM)"
 	},
 	"passive_description": {
 		"NONE": "Pas de passif",
