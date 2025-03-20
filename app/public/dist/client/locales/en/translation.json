@@ -1825,7 +1825,7 @@
 		"HORN_ATTACK": "Deal [3,4,5,SP] x ATK as SPECIAL to the target and cause ARMOR_BREAK for 8 seconds.",
 		"RAZOR_LEAF": "Throw sharp leaves in a line behind the target. All enemies hit take [20,40,80,SP] SPECIAL. Can crit by default.",
 		"MUD_SHOT": "Hurls mud at the target, dealing [25,50,75,SP] SPECIAL and reducing their SPEED by [10,20,30,SP].",
-		"MALIGNANT_CHAIN": "Extends a poisonous chain to ensnare a target, inflicting LOCKED and 3 stacks of POISONNED for [3,SP] seconds.",
+		"MALIGNANT_CHAIN": "Extends a poisonous chain to ensnare target, inflicting LOCKED and 3 stacks of POISONNED for [3,SP] seconds.",
 		"FILET_AWAY": "Sacrifice 50% of current HP and gain [10,SP] ATK and [20,SP] SPEED"
 	},
 	"effect": {
