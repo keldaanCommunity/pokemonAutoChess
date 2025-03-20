@@ -54,7 +54,8 @@ export default function GamePokemonsPropositions() {
                 <div
                   key={index}
                   className="my-box active clickable"
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation()
                     playSound(SOUNDS.BUTTON_CLICK)
                     dispatch(pokemonPropositionClick(proposition))
                   }}
