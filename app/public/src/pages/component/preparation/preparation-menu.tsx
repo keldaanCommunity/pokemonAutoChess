@@ -99,7 +99,8 @@ export default function PreparationMenu() {
   )
 
   function makePrivate() {
-    if (password === null) {
+    console.log("makePrivate", password)
+    if (password === null || password === undefined) {
       // generate a random password made of 4 characters
       const newPassword = Math.random()
         .toString(36)
