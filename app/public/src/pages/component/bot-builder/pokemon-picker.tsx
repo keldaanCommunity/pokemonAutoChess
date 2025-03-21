@@ -105,7 +105,7 @@ function PokemonPickerTab(props: {
     })
     .filter(
       (p) =>
-        !preferences.filterAvailableAddsAndRegionals ||
+        !ingame || !preferences.filterAvailableAddsAndRegionals ||
         ((!p.additional ||
           additionalPokemons.includes(baseVariant(PkmFamily[p.name])) ||
           specialGameRule === SpecialGameRule.EVERYONE_IS_HERE) &&
