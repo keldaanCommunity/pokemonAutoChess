@@ -139,7 +139,6 @@ export class CountEvolutionRule extends EvolutionRule {
             itemsToAdd.push(el)
           }
         })
-        pkm.meal = pokemonsBeforeEvolution.find((p) => p.meal)?.meal ?? ""
         player.board.delete(id)
         pokemonsBeforeEvolution.push(pkm)
       }
@@ -151,6 +150,11 @@ export class CountEvolutionRule extends EvolutionRule {
     )
 
     carryOverPermanentStats(pokemonEvolved, pokemonsBeforeEvolution)
+    if (pokemonsBeforeEvolution.some((p) => p.meal)) {
+      pokemonEvolved.meal = pickRandomIn(
+        pokemonsBeforeEvolution.filter((p) => p.meal).map((p) => p.meal)
+      )
+    }
 
     shuffleArray(itemsToAdd)
     for (const item of itemsToAdd) {
