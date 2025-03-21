@@ -7317,9 +7317,11 @@ export class Primeape extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.ANNIHILAPE
-  evolutionRule = new ConditionBasedEvolutionRule((pokemon) => pokemon.atk > 30)
+  evolutionRule = new ConditionBasedEvolutionRule(
+    (pokemon) => pokemon.atk >= 30
+  )
   hp = 240
-  atk = 19
+  atk = 20
   speed = 54
   def = 12
   speDef = 4
@@ -7339,7 +7341,7 @@ export class Annihilape extends Pokemon {
   rarity = Rarity.EPIC
   stars = 3
   hp = 320
-  atk = 28
+  atk = 30
   speed = 54
   def = 12
   speDef = 14
