@@ -3733,6 +3733,14 @@ export class NidoranM extends Pokemon {
   skill = Ability.HORN_ATTACK
   attackSprite = AttackSprite.POISON_MELEE
   regional = true
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      regionSynergies.includes(Synergy.POISON) ||
+      regionSynergies.includes(Synergy.GROUND) ||
+      regionSynergies.includes(Synergy.FIELD)
+    )
+  }
 }
 
 export class Nidorino extends Pokemon {
@@ -3754,6 +3762,14 @@ export class Nidorino extends Pokemon {
   skill = Ability.HORN_ATTACK
   attackSprite = AttackSprite.POISON_MELEE
   regional = true
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      regionSynergies.includes(Synergy.POISON) ||
+      regionSynergies.includes(Synergy.GROUND) ||
+      regionSynergies.includes(Synergy.FIELD)
+    )
+  }
 }
 
 export class Nidoking extends Pokemon {
@@ -3774,6 +3790,14 @@ export class Nidoking extends Pokemon {
   skill = Ability.HORN_ATTACK
   attackSprite = AttackSprite.POISON_MELEE
   regional = true
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      regionSynergies.includes(Synergy.POISON) ||
+      regionSynergies.includes(Synergy.GROUND) ||
+      regionSynergies.includes(Synergy.FIELD)
+    )
+  }
 }
 
 export class Machop extends Pokemon {
