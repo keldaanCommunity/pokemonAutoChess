@@ -30,7 +30,7 @@ The iconic place of the Mystery Dungeon series is now in Pokemon Auto Chess ! Pl
 
 ## Let me cook !
 
-The 31th synergy is here: ![Gourmet](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/types/GOURMET.svg) **Gourmet**
+The 31st synergy is here: ![Gourmet](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/types/GOURMET.svg) **Gourmet**
 These cooking enthusiasts will provide your team with some delicious meals that will boost their power for the next round. Choose your Chef and enjoy the feast !
 
 ## Statistics rework
