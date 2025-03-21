@@ -580,10 +580,6 @@ export default class Player extends Schema implements IPlayer {
       }
     })
   }
-
-  refreshShopUI() {
-    this.shop = new ArraySchema<Pkm>(...this.shop)
-  }
 }
 
 function pickRandomTMs() {

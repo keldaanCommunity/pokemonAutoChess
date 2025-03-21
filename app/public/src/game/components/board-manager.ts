@@ -31,6 +31,7 @@ import { Item } from "../../../../types/enum/Item"
 import { playMusic } from "../../pages/utils/audio"
 import { DEPTH } from "../depths"
 import { DungeonMusic } from "../../../../types/enum/Dungeon"
+import { refreshShopUI } from "../../stores/GameStore"
 
 export enum BoardMode {
   PICK = "pick",
@@ -619,6 +620,7 @@ export default class BoardManager {
           )
           pokemonUI.x = coordinates[0]
           pokemonUI.y = coordinates[1]
+          store.dispatch(refreshShopUI())
           break
 
         case "positionY":
@@ -634,6 +636,7 @@ export default class BoardManager {
             pokemonUI.destroy()
             this.pokemons.delete(pokemonUI.id)
           }
+          store.dispatch(refreshShopUI())
           break
 
         case "action":
