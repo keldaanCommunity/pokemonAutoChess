@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import SynergyIcon from "../icons/synergy-icon"
@@ -163,12 +164,12 @@ export function WikiType(props: { type: Synergy }) {
                           data-tooltip-id={`pokemon-detail-${p.index}`}
                           className={cc({ pixelated: !antialiasing })}
                         />
-                        <Tooltip
+                        {ReactDOM.createPortal(<Tooltip
                           id={`pokemon-detail-${p.index}`}
                           className="custom-theme-tooltip game-pokemon-detail-tooltip"
                         >
                           <GamePokemonDetail pokemon={p.name} />
-                        </Tooltip>
+                        </Tooltip>, document.querySelector(".wiki-modal")!)}
                       </div>
                     )
                   })}
@@ -243,13 +244,13 @@ export function WikiAllTypes() {
           )
         })}
       </div>
-      {hoveredPokemon && <Tooltip
+      {hoveredPokemon && ReactDOM.createPortal(<Tooltip
         id="pokemon-detail"
         className="custom-theme-tooltip game-pokemon-detail-tooltip"
         float
       >
         <GamePokemonDetail pokemon={hoveredPokemon} />
-      </Tooltip>}
+      </Tooltip>, document.querySelector(".wiki-modal")!)}
     </>
   )
 }
