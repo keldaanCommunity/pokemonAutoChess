@@ -12,7 +12,7 @@ import {
   HatchEvolutionRule,
   ItemEvolutionRule
 } from "../../core/evolution-rules"
-import { ItemStats, onItemRemoved } from "../../core/items"
+import { ItemStats } from "../../core/items"
 import Simulation from "../../core/simulation"
 import { DelayedCommand } from "../../core/simulation-command"
 import GameState from "../../rooms/states/game-state"
@@ -48,6 +48,7 @@ import {
   ItemComponents,
   ItemRecipe,
   OgerponMasks,
+  SynergyGivenByItem,
   SynergyItems
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
@@ -245,7 +246,13 @@ export class Pokemon extends Schema implements IPokemon {
 
   removeItem(item: Item) {
     this.items.delete(item)
-    onItemRemoved(item, this)
+    if (
+      item in SynergyGivenByItem &&
+      new PokemonClasses[this.name]().types.has(SynergyGivenByItem[item]) ===
+        false
+    ) {
+      this.types.delete(SynergyGivenByItem[item])
+    }
   }
 }
 
