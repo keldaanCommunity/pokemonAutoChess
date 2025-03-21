@@ -100,7 +100,7 @@ export default class LoadingManager {
           const multiatlas = {
             textures: [
               {
-                image: image,
+                image: `${image}?v=${pkg.version}`,
                 format: "RGBA8888",
                 size: {
                   w: data.s[0],
