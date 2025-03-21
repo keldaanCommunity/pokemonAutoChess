@@ -5,8 +5,7 @@ import {
   Item,
   NonSpecialItemComponents,
   ShinyItems,
-  CraftableNonSynergyItems,
-  SynergyItems
+  CraftableNonSynergyItems
 } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
 import { pickNRandomIn, pickRandomIn } from "../utils/random"

@@ -1,10 +1,5 @@
 import { SetSchema } from "@colyseus/schema"
-import {
-  CraftableItems,
-  Item,
-  SynergyGivenByItem,
-  SynergyStones
-} from "../types/enum/Item"
+import { CraftableItems, Item, SynergyStones } from "../types/enum/Item"
 import {
   Effect,
   OnItemGainedEffect,
@@ -13,7 +8,6 @@ import {
   PeriodicEffect
 } from "./effect"
 import { pickRandomIn } from "../utils/random"
-import { Pokemon } from "../models/colyseus-models/pokemon"
 import { PokemonEntity } from "./pokemon-entity"
 import { min } from "../utils/number"
 import { DEFAULT_SPEED } from "../types/Config"
@@ -34,12 +28,6 @@ export function getWonderboxItems(existingItems: SetSchema<Item>): Item[] {
     wonderboxItems.push(pickRandomIn(elligibleItems))
   }
   return wonderboxItems
-}
-
-export function onItemRemoved(item: Item, pokemon: Pokemon) {
-  if (item in SynergyGivenByItem) {
-    pokemon.types.delete(SynergyGivenByItem[item])
-  }
 }
 
 export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
