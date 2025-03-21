@@ -314,7 +314,7 @@ export const DungeonDetails: {
     regionalSpeciality: Item.FRUIT_JUICE
   },
   [DungeonPMDO.AppleWoods]: {
-    synergies: [Synergy.BUG, Synergy.FLORA, Synergy.BABY],
+    synergies: [Synergy.BUG, Synergy.GOURMET, Synergy.BABY],
     music: DungeonMusic.APPLE_WOODS,
     regionalSpeciality: Item.SWEET_APPLE
   },
@@ -419,7 +419,7 @@ export const DungeonDetails: {
     regionalSpeciality: Item.CURRY
   },
   [DungeonPMDO.DeepDuskForest1]: {
-    synergies: [Synergy.GHOST, Synergy.GRASS, Synergy.DARK],
+    synergies: [Synergy.DARK, Synergy.GRASS, Synergy.GOURMET],
     music: DungeonMusic.DEEP_DUSK_FOREST,
     regionalSpeciality: Item.TEA
   },
@@ -459,7 +459,7 @@ export const DungeonDetails: {
     regionalSpeciality: Item.LARGE_LEEK
   },
   [DungeonPMDO.ElectricMaze]: {
-    synergies: [Synergy.ELECTRIC, Synergy.MONSTER, Synergy.LIGHT],
+    synergies: [Synergy.ELECTRIC, Synergy.LIGHT, Synergy.GOURMET],
     music: DungeonMusic.STOP_THIEF,
     regionalSpeciality: Item.FRUIT_JUICE
   },
@@ -529,7 +529,7 @@ export const DungeonDetails: {
     regionalSpeciality: Item.BERRY_JUICE
   },
   [DungeonPMDO.HowlingForest2]: {
-    synergies: [Synergy.SOUND, Synergy.POISON, Synergy.FOSSIL],
+    synergies: [Synergy.SOUND, Synergy.POISON, Synergy.GOURMET],
     music: DungeonMusic.FRIEND_AREA_FOREST,
     regionalSpeciality: Item.BLACK_SLUDGE
   },
@@ -574,7 +574,7 @@ export const DungeonDetails: {
     regionalSpeciality: Item.POFFIN
   },
   [DungeonPMDO.LushPrairie]: {
-    synergies: [Synergy.BUG, Synergy.LIGHT, Synergy.FLORA],
+    synergies: [Synergy.GOURMET, Synergy.LIGHT, Synergy.FLORA],
     music: DungeonMusic.WELCOME_TO_THE_WORLD_OF_POKEMON,
     regionalSpeciality: Item.FLOWER_SWEET
   },
@@ -719,7 +719,7 @@ export const DungeonDetails: {
     regionalSpeciality: Item.BLACK_SLUDGE
   },
   [DungeonPMDO.PurityForest2]: {
-    synergies: [Synergy.BABY, Synergy.LIGHT, Synergy.AMORPHOUS],
+    synergies: [Synergy.BABY, Synergy.GOURMET, Synergy.AMORPHOUS],
     music: DungeonMusic.RUN_AWAY,
     regionalSpeciality: Item.SWEET_APPLE
   },
@@ -794,7 +794,7 @@ export const DungeonDetails: {
     regionalSpeciality: Item.CURRY
   },
   [DungeonPMDO.SkyPeak4thPass]: {
-    synergies: [Synergy.GRASS, Synergy.FLORA, Synergy.BABY],
+    synergies: [Synergy.GOURMET, Synergy.FLORA, Synergy.BABY],
     music: DungeonMusic.SKY_PEAK_COAST,
     regionalSpeciality: Item.FLOWER_SWEET
   },
@@ -854,7 +854,7 @@ export const DungeonDetails: {
     regionalSpeciality: Item.STAR_SWEET
   },
   [DungeonPMDO.SteamCave]: {
-    synergies: [Synergy.FIRE, Synergy.GROUND, Synergy.ELECTRIC],
+    synergies: [Synergy.FIRE, Synergy.GOURMET, Synergy.ELECTRIC],
     music: DungeonMusic.STEAM_CAVE,
     regionalSpeciality: Item.CURRY
   },
@@ -929,7 +929,7 @@ export const DungeonDetails: {
     regionalSpeciality: Item.TART_APPLE
   },
   [DungeonPMDO.UnusedBrineCave]: {
-    synergies: [Synergy.WATER, Synergy.GROUND, Synergy.DRAGON],
+    synergies: [Synergy.GOURMET, Synergy.GROUND, Synergy.DRAGON],
     music: DungeonMusic.IN_THE_NIGHTMARE,
     regionalSpeciality: Item.STRAWBERRY_SWEET
   },
@@ -984,7 +984,7 @@ export const DungeonDetails: {
     regionalSpeciality: Item.FLOWER_SWEET
   },
   [DungeonPMDO.WishCave1]: {
-    synergies: [Synergy.FAIRY, Synergy.HUMAN, Synergy.DRAGON],
+    synergies: [Synergy.FAIRY, Synergy.GOURMET, Synergy.DRAGON],
     music: DungeonMusic.LIVING_SPIRIT,
     regionalSpeciality: Item.LOVE_SWEET
   },
@@ -999,7 +999,7 @@ export const DungeonDetails: {
     regionalSpeciality: Item.LEFTOVERS
   },
   [DungeonPMDO.WyvernHill]: {
-    synergies: [Synergy.DRAGON, Synergy.FLYING, Synergy.FIELD],
+    synergies: [Synergy.DRAGON, Synergy.FLYING, Synergy.GOURMET],
     music: DungeonMusic.KECLEONS_SHOP,
     regionalSpeciality: Item.POFFIN
   },
@@ -1014,7 +1014,7 @@ export const DungeonDetails: {
     regionalSpeciality: Item.BLACK_SLUDGE
   },
   [DungeonPMDO.ZeroIsleSouth1]: {
-    synergies: [Synergy.GROUND, Synergy.BUG, Synergy.NORMAL],
+    synergies: [Synergy.GROUND, Synergy.BUG, Synergy.GOURMET],
     music: DungeonMusic.WIGGLYTUFFS_GUILD_REMIX,
     regionalSpeciality: Item.LARGE_LEEK
   },
