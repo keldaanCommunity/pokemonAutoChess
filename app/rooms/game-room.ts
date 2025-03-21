@@ -1089,7 +1089,7 @@ export default class GameRoom extends Room<GameState> {
 
     if (
       this.state.specialGameRule === SpecialGameRule.FIRST_PARTNER &&
-      this.state.stageLevel === 1
+      this.state.stageLevel <= 1
     ) {
       player.firstPartner = pokemonsObtained[0].name
     }

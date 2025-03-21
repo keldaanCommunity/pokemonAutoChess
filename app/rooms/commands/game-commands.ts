@@ -1465,6 +1465,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
       if (
         this.state.specialGameRule === SpecialGameRule.FIRST_PARTNER &&
+        this.state.stageLevel > 1 &&
         this.state.stageLevel < 10 &&
         player.firstPartner
       ) {
