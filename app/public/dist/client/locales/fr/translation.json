@@ -2391,7 +2391,7 @@
     "BERRY_JUICE": "Gagne 50 SHIELD au début du prochain combat, et à chaque fois qu'une baie est consommée.",
     "TART_APPLE": "Lors du prochain combat, chaque attaque de ce Pokémon réduira de 2 points la DEF de sa cible. Se change en SWEET_APPLE après un tour sur le banc.",
     "SWEET_APPLE": "Lors du prochain combat, chaque attaque de ce Pokémon réduira 2 points la SPE_DEF de sa cible. Se change en POMME_SIRUPY après un tour sur le banc.",
-    "SIRUPY_APPLE": "Lors du prochain combat, chaque attaque de ce Pokémon a [30,LK]% de chances d'infliger PARALYSIS pendant 1 seconde.",
+    "SIRUPY_APPLE": "Lors du prochain combat, chaque attaque de ce Pokémon a [30,LK]% de chances d'infliger PARALYSIS pendant 1 seconde. Se change en LEFTOVERS après un tour sur le banc.",
     "SWEET_HERB": "Gagne 50 AP au début du prochain combat.",
     "MOOMOO_MILK": "Gagne 10 HP max permanents.",
     "BERRIES": "Obtenez une baie. Le type de baie est aléatoire.",

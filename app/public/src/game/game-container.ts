@@ -49,6 +49,7 @@ import { cc } from "../pages/utils/jsx"
 import { values } from "../../../utils/schemas"
 import { SchemaCallbackProxy } from "@colyseus/schema"
 import { getPkmWithCustom } from "../../../models/colyseus-models/pokemon-customs"
+import { DEPTH } from "./depths"
 
 class GameContainer {
   room: Room<GameState>
@@ -258,6 +259,7 @@ class GameContainer {
       }
     }
     this.game = new Phaser.Game(config)
+    this.game.domContainer.style.zIndex = DEPTH.PHASER_DOM_CONTAINER.toString()
     this.game.scene.start("gameScene", {
       room: this.room,
       spectate: this.spectate

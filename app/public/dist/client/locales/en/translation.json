@@ -2391,7 +2391,7 @@
     "BERRY_JUICE": "Gain 50 SHIELD at the start of the next fight, and every time a berry is consumed.",
     "TART_APPLE": "In the next fight, each attack by this pokémon will remove 2 DEF from the target. Will turn into a SWEET_APPLE after one round.",
     "SWEET_APPLE": "In the next fight, each attack by this pokémon will remove 2 SPE_DEF from the target. Will turn into a SIRUPY_APPLE after one round.",
-    "SIRUPY_APPLE": "In the next fight, each attack by this pokemon has [30,LK]% chance to inflict PARALYSIS for 1 second.",
+    "SIRUPY_APPLE": "In the next fight, each attack by this pokemon has [30,LK]% chance to inflict PARALYSIS for 1 second.  Will turn into LEFTOVERS after one round.",
     "SWEET_HERB": "Gain 50 AP in the next fight.",
     "MOOMOO_MILK": "Gain 10 permanent max HP.",
     "BERRIES": "Get a random berry",
