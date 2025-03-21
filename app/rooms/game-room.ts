@@ -630,6 +630,7 @@ export default class GameRoom extends Room<GameState> {
           )*/
         } else if (player && !player.hasLeftGame) {
           player.hasLeftGame = true
+          player.spectatedPlayerId = player.id
 
           if (!this.state.gameFinished && player.life > 0) {
             // player left before being eliminated, in that case we consider this a surrender and give them the worst possible rank
