@@ -1,3 +1,4 @@
+import { Encoder } from "@colyseus/schema"
 /**
  * IMPORTANT:
  * ---------
@@ -10,7 +11,6 @@
  */
 import { listen } from "@colyseus/tools"
 import { logger, matchMaker } from "colyseus"
-import { Encoder } from "@colyseus/schema"
 import { CronJob } from "cron"
 import app from "./app.config"
 import { initializeMetrics } from "./metrics"
@@ -31,10 +31,9 @@ async function main() {
   setInterval(() => fetchMetaReports(), 1000 * 60 * 60 * 24) // refresh every 24 hours
 
   if (process.env.NODE_APP_INSTANCE) {
-    const processNumber = Number(process.env.NODE_APP_INSTANCE || "0")
     initializeMetrics()
     await listen(app)
-    if (processNumber === 0) {
+    if (process.env.PORT && parseInt(process.env.PORT) === 2567) {
       await matchMaker.createRoom("lobby", {})
       checkLobby()
       initCronJobs()
