@@ -457,7 +457,7 @@
     "RAZOR_LEAF": "Tranch'Herbe",
     "MUD_SHOT": "Tir de Boue",
     "MALIGNANT_CHAIN": "Chaîne Malsaine",
-    "FILET_AWAY": "Décharnement"
+    "FILLET_AWAY": "Décharnement"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1826,7 +1826,7 @@
     "RAZOR_LEAF": "Lance des feuilles acérées en ligne derrière la cible. Tous les ennemis touchés subissent [20,40,80,SP] SPECIAL. Coup critique possible par défaut.",
     "MUD_SHOT": "Lance de la boue sur la cible, lui infligeant [25,50,75,SP] SPECIAL et réduisant sa SPEED de [10,20,30,SP].",
     "MALIGNANT_CHAIN": "Lance une chaîne empoisonnée pour piéger sa cible, lui infligeant LOCKED et 3 cumuls de POISONNED pendant [3,SP] secondes.",
-    "FILET_AWAY": "Sacrifie 50 % de ses HP actuels et gagne [10,SP] ATK et [20,SP] SPEED"
+    "FILLET_AWAY": "Sacrifie 50 % de ses HP actuels et gagne [10,SP] ATK et [20,SP] SPEED"
   },
   "effect": {
     "INGRAIN": "Enraciné",

@@ -1231,8 +1231,8 @@ export class HypnosisStrategy extends AbilityStrategy {
       const factor = 0.5
       const duration = Math.round(
         ([2000, 4000, 6000][pokemon.stars - 1] ?? 2000) *
-        (1 + (pokemon.ap / 100) * factor) *
-        (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
+          (1 + (pokemon.ap / 100) * factor) *
+          (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
       )
       farthestTarget.status.triggerSleep(duration, farthestTarget)
     }
@@ -1565,8 +1565,9 @@ export class RelicSongStrategy extends AbilityStrategy {
     if (pokemon.count.ult % 3 === 0) {
       const factor = 0.5
       const duration = Math.round(
-        2000 * (1 + (pokemon.ap / 100) * factor) *
-        (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
+        2000 *
+          (1 + (pokemon.ap / 100) * factor) *
+          (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
       )
       board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
         if (tg && pokemon.team != tg.team) {
@@ -1885,9 +1886,14 @@ export class ShadowCloneStrategy extends AbilityStrategy {
         spawnPosition.y,
         pokemon.team
       )
-      clone.hp = min(1)(Math.ceil(
-        0.5 * pokemon.hp * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
-      ))
+      clone.hp = min(1)(
+        Math.ceil(
+          0.5 *
+            pokemon.hp *
+            (1 + pokemon.ap / 100) *
+            (crit ? pokemon.critPower : 1)
+        )
+      )
       clone.life = clone.hp
       clone.isClone = true
       if (itemStolen) clone.addItem(itemStolen)
@@ -2320,9 +2326,10 @@ export class PoisonStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const factor = 0.5
     const duration = Math.round(
-      [3000, 6000, 9000][pokemon.stars] ?? 9000 *
-      (1 + (pokemon.ap / 100) * factor) * 
-      (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
+      [3000, 6000, 9000][pokemon.stars] ??
+        9000 *
+          (1 + (pokemon.ap / 100) * factor) *
+          (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
     )
     const count = pokemon.stars
 
@@ -2395,8 +2402,8 @@ export class ProtectStrategy extends AbilityStrategy {
     const factor = 0.5
     const duration = Math.round(
       ([1000, 3000, 5000][pokemon.stars - 1] ?? 5000) *
-      (1 + (pokemon.ap / 100) * factor) *
-      (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
+        (1 + (pokemon.ap / 100) * factor) *
+        (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
     )
     pokemon.status.triggerProtect(duration)
   }
@@ -2414,8 +2421,8 @@ export class ObstructStrategy extends AbilityStrategy {
     const factor = 0.5
     const duration = Math.round(
       ([1000, 2000, 3000][pokemon.stars - 1] ?? 3000) *
-      (1 + (pokemon.ap / 100) * factor) *
-      (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
+        (1 + (pokemon.ap / 100) * factor) *
+        (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
     )
     pokemon.status.triggerProtect(duration)
     pokemon.effects.add(Effect.OBSTRUCT)
@@ -2437,8 +2444,9 @@ export class SleepStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const timer = 
-      Math.round(2000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1))
+    const timer = Math.round(
+      2000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+    )
     const count = pokemon.stars
     const rank = new Array<PokemonEntity>()
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
@@ -9444,8 +9452,8 @@ export class BounceStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit, true)
     const nbBounces = Math.round(
       [1, 2, 3][pokemon.stars - 1] *
-      (1 + pokemon.ap / 100) *
-      (crit ? pokemon.critPower : 1)
+        (1 + pokemon.ap / 100) *
+        (crit ? pokemon.critPower : 1)
     )
     for (let i = 0; i < nbBounces; i++) {
       pokemon.commands.push(
@@ -12045,7 +12053,7 @@ export class MalignantChainStrategy extends AbilityStrategy {
   }
 }
 
-export class FiletAwayStrategy extends AbilityStrategy {
+export class FilletAwayStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -12061,6 +12069,7 @@ export class FiletAwayStrategy extends AbilityStrategy {
       board,
       AttackType.TRUE,
       pokemon,
+      false,
       false
     )
     pokemon.addAttack(10, pokemon, 1, crit)
@@ -12508,5 +12517,5 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.RAZOR_LEAF]: new RazorLeafStrategy(),
   [Ability.MUD_SHOT]: new MudShotStrategy(),
   [Ability.MALIGNANT_CHAIN]: new MalignantChainStrategy(),
-  [Ability.FILET_AWAY]: new FiletAwayStrategy()
+  [Ability.FILLET_AWAY]: new FilletAwayStrategy()
 }

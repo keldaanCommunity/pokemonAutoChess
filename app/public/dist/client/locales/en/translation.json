@@ -457,7 +457,7 @@
     "RAZOR_LEAF": "Razor Leaf",
     "MUD_SHOT": "Mud Shot",
     "MALIGNANT_CHAIN": "Malignant Chain",
-    "FILET_AWAY": "Fillet Away"
+    "FILLET_AWAY": "Fillet Away"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1826,7 +1826,7 @@
     "RAZOR_LEAF": "Throw sharp leaves in a line behind the target. All enemies hit take [20,40,80,SP] SPECIAL. Can crit by default.",
     "MUD_SHOT": "Hurls mud at the target, dealing [25,50,75,SP] SPECIAL and reducing their SPEED by [10,20,30,SP].",
     "MALIGNANT_CHAIN": "Extends a poisonous chain to ensnare target, inflicting LOCKED and 3 stacks of POISONNED for [3,SP] seconds.",
-    "FILET_AWAY": "Sacrifice 50% of current HP and gain [10,SP] ATK and [20,SP] SPEED"
+    "FILLET_AWAY": "Sacrifice 50% of current HP and gain [10,SP] ATK and [20,SP] SPEED"
   },
   "effect": {
     "INGRAIN": "Ingrain",

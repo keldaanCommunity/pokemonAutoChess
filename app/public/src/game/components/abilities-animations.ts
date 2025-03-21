@@ -1530,7 +1530,7 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
-    case Ability.FILET_AWAY:
+    case Ability.FILLET_AWAY:
       addAbilitySprite(Ability.SHIELDS_UP, coordinates, true).setScale(2)
       break
 
