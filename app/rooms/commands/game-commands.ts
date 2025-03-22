@@ -622,7 +622,12 @@ export class OnDragDropItemCommand extends Command<
         pokemon.action = PokemonActionState.EAT
         removeInArray(player.items, item)
         client.send(Transfer.DRAG_DROP_FAILED, message)
-        this.room.checkEvolutionsAfterItemAcquired(playerId, pokemon)
+        pokemon.items.add(item) // add the item just in time for the evolution
+        const pokemonEvolved = this.room.checkEvolutionsAfterItemAcquired(
+          playerId,
+          pokemon
+        )
+        if (pokemonEvolved) pokemonEvolved.items.delete(item)
         return
       } else {
         client.send(Transfer.DRAG_DROP_FAILED, {
@@ -649,7 +654,12 @@ export class OnDragDropItemCommand extends Command<
 
     if (item === Item.BLACK_AUGURITE && pokemon.passive === Passive.SCYTHER) {
       pokemon.items.add(item) // add the item just in time for the evolution
-      pokemon.evolutionRule.tryEvolve(pokemon, player, this.state.stageLevel)
+      const pokemonEvolved = pokemon.evolutionRule.tryEvolve(
+        pokemon,
+        player,
+        this.state.stageLevel
+      )
+      if (pokemonEvolved) pokemonEvolved.items.delete(item)
     }
 
     if (TMs.includes(item) || HMs.includes(item)) {

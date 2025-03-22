@@ -996,9 +996,12 @@ export default class GameRoom extends Room<GameState> {
     return hasEvolved
   }
 
-  checkEvolutionsAfterItemAcquired(playerId: string, pokemon: Pokemon) {
+  checkEvolutionsAfterItemAcquired(
+    playerId: string,
+    pokemon: Pokemon
+  ): Pokemon | void {
     const player = this.state.players.get(playerId)
-    if (!player) return false
+    if (!player) return
 
     if (
       pokemon.evolutionRule &&
@@ -1009,6 +1012,7 @@ export default class GameRoom extends Room<GameState> {
         player,
         this.state.stageLevel
       )
+      return pokemonEvolved
     }
   }
 
