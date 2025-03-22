@@ -1086,6 +1086,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           case Effect.ETHEREAL:
             player.titles.add(Title.BLOB)
             break
+          case Effect.BANQUET:
+            player.titles.add(Title.CHEF)
+            break
           case Effect.DIAMOND_STORM:
             player.titles.add(Title.HIKER)
             break
