@@ -9,9 +9,7 @@ import {
   Berries,
   CraftableItems,
   Item,
-  WeatherRocks,
-  ShinyItems,
-  SpecialItems
+  ShinyItems
 } from "../../../../../types/enum/Item"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { cc } from "../../utils/jsx"
@@ -31,7 +29,7 @@ export default function ItemPicker(props: {
   const tabs = [
     { label: t("components"), key: "components", items: ItemComponents },
     { label: t("craftable_items"), key: "craftable", items: CraftableItems },
-    { label: t("berries"), key: "berries", items: Berries },
+    { label: t("food"), key: "food", items: [...Berries, Item.TART_APPLE, Item.SWEET_APPLE, Item.SIRUPY_APPLE, Item.CHEF_HAT] },
 
     { label: t("artificial_items"), key: "artificial", items: ArtificialItems },
     {
