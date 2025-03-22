@@ -2,7 +2,7 @@
 
 - Introducing Treasure Town, the new starting map for each game. This is where players join for carousel rounds, or to take a portal leading them to a new region. Game now starts at stage zero at Treasure Town, and players can influence their starting region by choosing a portal.
 - During carousel rounds, you may encounter famous residents of Treasure Town. Some of them are traders that will sell you precious items for gold, while others may influence the game in other ways.
-- Attack speed, move speed and ability cooldowns have all been merged into one statistic: Speed. 1 Speed = 1% attack speed in previous patch. Pokemons have a different base speed depending on the species, taken from their Speed stat in the original games of the license. Many attack and max PP stats have been adjusted to compensate for the difference of base speed. Maximum speed is 300 = 2.5 attacks per second, and minimum is 0 = 0.4 attacks per second. Just like attack speed in previous patch, the speed stat is linear, which means going from 0 to 10 speed has the same value as going from 50 to 60 speed.
+- Attack speed, move speed and ability cooldowns have all been merged into one statistic: Speed. 1 Speed = 1% attack speed in previous patch. Pokemons have a different base speed depending on the species, taken from their Speed stat in the original games of the license. Many attack and max PP stats have been adjusted to compensate for the difference of base speed. Maximum speed is 300 = 2.5 attacks per second, and minimum is 0 = 0.4 attacks per second.
 - Defense and special defense stats have all been doubled, and damage reduction formula changed to `1/(1+def/20)` instead of `1/(1+def/10)`. All the effects impacting these stats have been adjusted as well, so this has no impact on balance in practice. This was done so that attack and defense values ​​are more easily comparable, and to allow more precise number tweaking in the future for effects impacting these stats.
 
 # New Pokemons
@@ -62,7 +62,7 @@
 - Nerf Miltank: HP 250 → 200
 - Nerf Spinda: HP 250 → 200
 - Nerf Burmy line: Burmy now has various defense stats based on its cloak: Plant Cloak < Sand Cloak < Trash Cloak
-- Buff Melmetal: increase Attack speed/Attack ratio: 10% attack speed = ~~3~~ 5 attack
+- Buff Melmetal: increase Attack speed/Attack ratio: 10% speed = ~~3~~ 5 attack
 - Rework Fuecoco line: now 3-range with nerfed defense/special defense, ability Torch Song reworked, PP 100 → 60
 - Porygon is now in Ultra category ; adjusted stats ; new passive Conversion: get the highest synergy of your opponent and its effects at the start of the fight.
 - Change Unown-O: OVEN - Cook a random dish for all your pokemons next fight
@@ -71,7 +71,7 @@
 - Nerf Alolan Raichu: back to tier 3, gets the same stats as Raichu but keeps the additional psychic synergy
 - Nerf Nuzzle (Pichu line): paralysis duration 3/4/5 → 3 seconds at all tiers
 - Nerf Hurricane paralysis duration 4 → 3 seconds
-- Change HyperSpace Fury: now also reduces special defense evert hit
+- Change HyperSpace Fury: now also reduces special defense every hit
 - Changed Heavy Slam (Aggron): Shield 10/20/40 → 15/30/60, remove AP scaling
 - Buff Concrete Pillar (Conkeldurr) HP 300 → 400
 - Rework Acrobatics: now move to a cell at good distance from its target. Move further away if not holding any item.
@@ -80,7 +80,7 @@
 - Nerfed Obstruct (Obstagoon): Protect duration 1/2/4 → 1/2/3 seconds
 - Nerfed Celebi HP 300 → 250
 - Nerfed Wishiwashi: HP 100 → 50
-- Buff Jirachi: PP 100 → 80. Reduce ability cooldowwn to 200ms at 50 speed.
+- Buff Jirachi: PP 100 → 80. Reduce ability cooldown to 200ms at 50 speed.
 - Buff Keldeo: PP 100 → 80
 - Buff Octillery; PP 100 → 80, Oktzooka: 150 → 300% of attack as special damage
 - Nerf Aegislash: PP 80 → 100
@@ -111,7 +111,7 @@
 
 # Changes to Items
 
-- New item category: Dishes ; Dishes are cooked by Gourmet chefs to give strong buffs to a Pokémon in the next fight. If not used by the end of the timer, the cook or another random ally will eat it.
+- New item category: Dishes ; Dishes are cooked by Gourmet chefs to give strong buffs to a Pokémon for the next fight. If no adjacent allies, the cook will eat their own dish.
 - New item: Gimmighoul Coin: gain 1 more gold per round as passive income, and increase max interests by 1
 - New item: Exchange ticket: Exchange an item component or a crafted item for another random one.
 - More than 20 dishes have been added to the game
