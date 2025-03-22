@@ -658,13 +658,14 @@ export class BuyEmotionCommand extends Command<
         !mongoUser.titles.includes(Title.ARCHEOLOGIST) &&
         Unowns.some((unown) => index === PkmIndex[unown]) &&
         Unowns.every((name) => {
-          const index = PkmIndex[name]
-          const collection = mongoUser.pokemonCollection.get(index)
-          const isUnlocked =
-            collection &&
-            (collection.emotions.length > 0 ||
-              collection.shinyEmotions.length > 0)
-          return isUnlocked || index === index
+          const unownIndex = PkmIndex[name]
+          const collectionItem = mongoUser.pokemonCollection.get(unownIndex)
+          const isBeingUnlockedRightNow = unownIndex === index
+          const isAlreadyUnlocked =
+            collectionItem &&
+            (collectionItem.emotions.length > 0 ||
+              collectionItem.shinyEmotions.length > 0)
+          return isAlreadyUnlocked || isBeingUnlockedRightNow
         })
       ) {
         mongoUser.titles.push(Title.ARCHEOLOGIST)
