@@ -1787,7 +1787,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             (p) =>
               p.id !== this.refToBoardPokemon.id &&
               !isOnBench(p) &&
-              !alliesAlive.some((ally) => ally.id === p.id)
+              !alliesAlive.some((ally) => ally.refToBoardPokemon.id === p.id)
           )
         } else if (this.name === Pkm.HO_OH) {
           // HoOh marowak pve round
