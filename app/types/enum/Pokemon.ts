@@ -3059,6 +3059,13 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.MOLTRES]: [Pkm.GALARIAN_MOLTRES]
 } as const
 
+export function isRegionalVariant(a: Pkm, b: Pkm): boolean {
+  return (
+    (PkmRegionalVariants[a]?.includes(b) ?? false) ||
+    (PkmRegionalVariants[b]?.includes(a) ?? false)
+  )
+}
+
 export enum PkmDuo {
   LATIOS_LATIAS = "LATIOS_LATIAS",
   PLUSLE_MINUN = "PLUSLE_MINUN",

@@ -25,7 +25,8 @@ import {
   PkmProposition,
   PkmRegionalVariants,
   Unowns,
-  getUnownsPoolPerStage
+  getUnownsPoolPerStage,
+  isRegionalVariant
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
@@ -308,7 +309,7 @@ export default class Shop {
   assignUniquePropositions(
     player: Player,
     stageLevel: number,
-    synergies: Synergy[]
+    portalSynergies: Synergy[]
   ) {
     const allCandidates =
       stageLevel === PortalCarouselStages[1]
@@ -316,16 +317,12 @@ export default class Shop {
         : [...LegendaryPool]
 
     // ensure we have at least one synergy per proposition
-    if (synergies.length > NB_UNIQUE_PROPOSITIONS) {
-      synergies = pickNRandomIn(synergies, NB_UNIQUE_PROPOSITIONS)
-    } else if (synergies.length < NB_UNIQUE_PROPOSITIONS) {
-      while (synergies.length < NB_UNIQUE_PROPOSITIONS) {
-        synergies = synergies.concat(pickRandomIn(Synergy))
-      }
+    if (portalSynergies.length > NB_UNIQUE_PROPOSITIONS) {
+      portalSynergies = pickNRandomIn(portalSynergies, NB_UNIQUE_PROPOSITIONS)
     }
 
     for (let i = 0; i < NB_UNIQUE_PROPOSITIONS; i++) {
-      const synergy = synergies[i]
+      const synergyWanted: Synergy | undefined = portalSynergies[i]
       let candidates = allCandidates.filter((m) => {
         const pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
         const specialSynergies: ReadonlyMap<Pkm, Synergy> = new Map([
@@ -337,27 +334,24 @@ export default class Shop {
           [Pkm.OGERPON_HEARTHFLAME, Synergy.FIRE],
           [Pkm.OGERPON_WELLSPRING, Synergy.AQUATIC]
         ])
-        const hasSynergy = specialSynergies.has(pkm)
-          ? specialSynergies.get(pkm) === synergy
-          : getPokemonData(pkm).types.includes(synergy)
+        const hasSynergyWanted =
+          synergyWanted === undefined
+            ? true
+            : specialSynergies.has(pkm)
+              ? specialSynergies.get(pkm) === synergyWanted
+              : getPokemonData(pkm).types.includes(synergyWanted)
 
         return (
-          hasSynergy &&
-          !player.pokemonsProposition.some(
-            (p) => PkmFamily[p] === PkmFamily[pkm]
-          )
+          hasSynergyWanted &&
+          !player.pokemonsProposition.some((prop) => {
+            const p: Pkm = prop in PkmDuos ? PkmDuos[prop][0] : prop
+            return PkmFamily[p] === PkmFamily[pkm] || isRegionalVariant(p, pkm)
+          })
         )
       })
 
       if (candidates.length === 0) candidates = allCandidates
       let selected = pickRandomIn(candidates)
-      if (selected in PkmRegionalVariants) {
-        const regionalVariants = PkmRegionalVariants[selected]!.filter((p) =>
-          new PokemonClasses[p]().isInRegion(player.map)
-        )
-        if (regionalVariants.length > 0)
-          selected = pickRandomIn(regionalVariants)
-      }
       if (
         stageLevel === PortalCarouselStages[1] &&
         player.pokemonsProposition.includes(Pkm.KECLEON) === false &&
