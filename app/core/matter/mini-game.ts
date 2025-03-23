@@ -309,7 +309,7 @@ export class MiniGame {
     }
 
     if (PortalCarouselStages.includes(stageLevel)) {
-      this.initializePortalCarousel(stageLevel)
+      this.initializePortalCarousel(stageLevel, room)
       room.broadcast(
         Transfer.PRELOAD_MAPS,
         values(this.portals!).map((p) => p.map)
@@ -321,7 +321,7 @@ export class MiniGame {
     if (state.townEncounter === TownEncounters.SPINDA) {
       this.rotationDirection = chance(1 / 2) ? 1.5 : -1.5
       for (let i = 0; i < randomBetween(1, 3); i++) {
-        setTimeout(
+        room.clock.setTimeout(
           () => {
             room.broadcast(Transfer.NPC_DIALOG, {
               npc: TownEncounters.SPINDA
@@ -355,7 +355,7 @@ export class MiniGame {
     }
   }
 
-  initializePortalCarousel(stageLevel: number) {
+  initializePortalCarousel(stageLevel: number, room: GameRoom) {
     const nbPortals = clamp(this.alivePlayers.length + 1, 3, 9)
     for (let i = 0; i < nbPortals; i++) {
       const x = this.centerX + Math.cos((Math.PI * 2 * i) / nbPortals) * 115
@@ -369,7 +369,7 @@ export class MiniGame {
       Composite.add(this.engine.world, body)
     }
 
-    this.pickRandomSynergySymbols(stageLevel)
+    this.pickRandomSynergySymbols(stageLevel, room)
   }
 
   update(dt: number) {
@@ -505,7 +505,7 @@ export class MiniGame {
     return items
   }
 
-  pickRandomSynergySymbols(stageLevel: number) {
+  pickRandomSynergySymbols(stageLevel: number, room: GameRoom) {
     if (stageLevel === 0) {
       const symbols = pickNRandomIn(
         Object.values(Synergy),
@@ -584,7 +584,7 @@ export class MiniGame {
         ...(this.symbolsByPortal.get(portalId) ?? []),
         symbol
       ])
-      setTimeout(
+      room.clock.setTimeout(
         () => {
           symbol.index = Math.floor(i / portalIds.length)
           symbol.portalId = portalId

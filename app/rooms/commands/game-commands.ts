@@ -1417,7 +1417,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               (cli) => cli.auth.uid === player.id
             )
             if (client) {
-              setTimeout(async () => {
+              this.clock.setTimeout(async () => {
                 client.send(Transfer.COOK, {
                   pokemonId: chef.id,
                   dishes
@@ -1772,7 +1772,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           const pkm = pickRandomIn(Unowns)
           const id = nanoid()
           this.state.wanderers.set(id, pkm)
-          setTimeout(
+          this.clock.setTimeout(
             () => {
               client.send(Transfer.UNOWN_WANDERING, { id, pkm })
             },
@@ -1789,7 +1789,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             const id = nanoid()
             const pkm = this.state.shop.pickPokemon(player, this.state)
             this.state.wanderers.set(id, pkm)
-            setTimeout(
+            this.clock.setTimeout(
               () => {
                 client.send(Transfer.POKEMON_WANDERING, { id, pkm })
               },
