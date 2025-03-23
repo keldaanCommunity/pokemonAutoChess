@@ -557,7 +557,6 @@ export default class Shop {
 
     const rarityProbability = FishRarityProbability[rod]
     const rarity_seed = Math.random()
-    let fish: Pkm = Pkm.MAGIKARP
     let threshold = 0
     const finals = new Set(
       values(player.board)
@@ -574,16 +573,15 @@ export default class Shop {
       }
     }
 
-    if (rarity === Rarity.SPECIAL) {
-      if (rod === Item.OLD_ROD) fish = Pkm.MAGIKARP
-      if (rod === Item.GOOD_ROD) fish = Pkm.FEEBAS
-      if (rod === Item.SUPER_ROD) fish = Pkm.WISHIWASHI
-    } else {
-      fish = this.getRandomPokemonFromPool(rarity, player, finals, [
+    if (rarity !== Rarity.SPECIAL) {
+      const fish = this.getRandomPokemonFromPool(rarity, player, finals, [
         Synergy.WATER
       ])
+      if (fish !== Pkm.MAGIKARP) return fish
     }
 
-    return fish
+    if (rod === Item.SUPER_ROD) return Pkm.WISHIWASHI
+    if (rod === Item.GOOD_ROD) return Pkm.FEEBAS
+    return Pkm.MAGIKARP
   }
 }
