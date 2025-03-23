@@ -628,6 +628,7 @@ export class OnDragDropItemCommand extends Command<
           pokemon
         )
         if (pokemonEvolved) pokemonEvolved.items.delete(item)
+        else pokemon.items.delete(item)
         return
       } else {
         client.send(Transfer.DRAG_DROP_FAILED, {
@@ -1465,11 +1466,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
       for (const rottingItem of rottingItems.keys()) {
         while (player.items.includes(rottingItem as Item)) {
-          player.items.splice(
-            player.items.findIndex((i) => i === rottingItem),
-            1,
-            rottingItems.get(rottingItem)!
-          )
+          const index = player.items.indexOf(rottingItem)
+          const newItem = rottingItems.get(rottingItem)
+          if (index >= 0 && newItem) {
+            // SEE https://github.com/colyseus/schema/issues/192
+            player.items.splice(index, 1)
+            player.items.push(newItem)
+          }
         }
       }
 
