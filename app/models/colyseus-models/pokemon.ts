@@ -5363,7 +5363,7 @@ export class Zapdos extends Pokemon {
   speed = 57
   def = 6
   speDef = 6
-  maxPP = 80
+  maxPP = 100
   range = 2
   skill = Ability.THUNDER
   passive = Passive.STORM
