@@ -1,6 +1,6 @@
 import Phaser from "phaser"
 import { localStore, LocalStoreKeys } from "./pages/utils/store"
-import { SetStateAction, useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { removeInArray } from "../../utils/array"
 
 export type Keybindings = {
