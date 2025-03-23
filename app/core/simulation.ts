@@ -1467,17 +1467,23 @@ export default class Simulation extends Schema implements ISimulation {
   stop() {
     this.blueTeam.forEach((pokemon, key) => {
       // logger.debug('deleting ' + pokemon.name);
+      // @ts-ignore: entity shouldnt be used after simulation stop, so we can safely delete it
+      delete pokemon.simulation // remove circular reference to help garbage collection
       this.blueTeam.delete(key)
     })
 
     this.redTeam.forEach((pokemon, key) => {
       // logger.debug('deleting ' + pokemon.name);
+      // @ts-ignore: entity shouldnt be used after simulation stop, so we can safely delete it
+      delete pokemon.simulation // remove circular reference to help garbage collection
       this.redTeam.delete(key)
     })
 
     this.weather = Weather.NEUTRAL
     this.winnerId = ""
     this.room.broadcast(Transfer.SIMULATION_STOP)
+    // @ts-ignore: room shouldnt be used after simulation stop, so we can safely delete it
+    delete this.room // remove circular reference to help garbage collection
   }
 
   onFinish() {
