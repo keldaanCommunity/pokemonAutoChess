@@ -232,7 +232,7 @@ export default class BoardManager {
         "abilities",
         "LIGHT_CELL/000.png"
       )
-      this.lightCell.setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
+      this.lightCell.setDepth(DEPTH.LIGHT_CELL)
       this.lightCell.setScale(2, 2)
       this.lightCell.anims.play("LIGHT_CELL")
     }
