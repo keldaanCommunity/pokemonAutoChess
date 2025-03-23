@@ -5705,7 +5705,7 @@ export class MagmaStormStrategy extends AbilityStrategy {
         false
       )
 
-      setTimeout(() => {
+      pokemon.simulation.room.clock.setTimeout(() => {
         const board = pokemon.simulation.board
         const nextEnemy = board
           .getAdjacentCells(pokemon.positionX, pokemon.positionY)

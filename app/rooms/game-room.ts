@@ -235,7 +235,7 @@ export default class GameRoom extends Room<GameState> {
       })
     )
 
-    setTimeout(
+    this.clock.setTimeout(
       () => {
         this.broadcast(Transfer.LOADING_COMPLETE)
         this.startGame()
