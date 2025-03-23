@@ -63,12 +63,13 @@ export default class PokemonAvatar extends PokemonSprite {
   }
 
   registerKeys() {
+    const keybindings = preference("keybindings")
     let onKeyA,
       onKeyCtrl,
       onKeyCtrlUp,
       onNumKey = {}
     this.scene.input.keyboard!.on(
-      "keydown-A",
+      "keydown-" + keybindings.emote,
       (onKeyA = () => {
         if (this.isCurrentPlayerAvatar && this.scene && this.scene.game) {
           this.playAnimation()
@@ -115,7 +116,7 @@ export default class PokemonAvatar extends PokemonSprite {
 
     // do not forget to clean up parent listeners after destroy
     this.sprite.once("destroy", () => {
-      this.scene.input.keyboard!.off("keydown-A", onKeyA)
+      this.scene.input.keyboard!.off("keydown-" + keybindings.emote, onKeyA)
       this.scene.input.keyboard!.off("keydown-CTRL", onKeyCtrl)
       this.scene.input.keyboard!.off("keyup-CTRL", onKeyCtrlUp)
       NUM_KEYS.forEach((keycode, i) => {
