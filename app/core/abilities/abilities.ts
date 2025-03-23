@@ -11518,7 +11518,7 @@ export class DarkLariatStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit, true)
     //The user swings both arms and hits the target several times while moving behind them. Each hit deals [100,SP]% ATK as SPECIAL. Number of hits increase with SPEED. Target is FLINCH during the attack.
-    const hits = Math.round(pokemon.speed * 3)
+    const hits = Math.round((0.4 + 0.007 * pokemon.speed) * 3)
     target.status.triggerFlinch(1000, target, pokemon)
     for (let i = 0; i < hits; i++) {
       pokemon.commands.push(
