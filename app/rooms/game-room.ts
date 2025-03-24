@@ -118,6 +118,7 @@ export default class GameRoom extends Room<GameState> {
   }) {
     logger.info("Create Game ", this.roomId)
 
+    this.onRoomDeleted = this.onRoomDeleted.bind(this)
     this.presence.subscribe("room-deleted", this.onRoomDeleted)
 
     this.setMetadata(<IGameMetadata>{

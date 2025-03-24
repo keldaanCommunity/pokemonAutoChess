@@ -339,9 +339,9 @@ export default class PreparationRoom extends Room<PreparationState> {
 
     this.onServerAnnouncement = this.onServerAnnouncement.bind(this)
     this.presence.subscribe("server-announcement", this.onServerAnnouncement)
-
     this.onGameStart = this.onGameStart.bind(this)
     this.presence.subscribe("game-started", this.onGameStart)
+    this.onRoomDeleted = this.onRoomDeleted.bind(this)
     this.presence.subscribe("room-deleted", this.onRoomDeleted)
   }
 
