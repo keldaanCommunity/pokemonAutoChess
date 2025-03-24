@@ -256,12 +256,12 @@ export class HatchEvolutionRule extends EvolutionRule {
     const willHatch = this.canEvolve(pokemon, player, stageLevel)
     if (willHatch) {
       pokemon.action = PokemonActionState.HOP
-      setTimeout(() => {
-        pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
-        if (pokemon.name === Pkm.EGG && pokemon.shiny) {
-          player.items.push(pickRandomIn(ShinyItems))
-        }
-      }, 2000)
+      // setTimeout(() => {
+      pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
+      if (pokemon.name === Pkm.EGG && pokemon.shiny) {
+        player.items.push(pickRandomIn(ShinyItems))
+      }
+      // }, 2000)
     } else if (pokemon.name === Pkm.EGG) {
       pokemon.action =
         [

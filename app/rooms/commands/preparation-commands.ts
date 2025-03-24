@@ -1,6 +1,8 @@
 import { memoryUsage } from "node:process"
+import { setTimeout } from "node:timers/promises"
 import { Command } from "@colyseus/command"
 import { Client, matchMaker } from "colyseus"
+import { UserRecord } from "firebase-admin/lib/auth/user-record"
 import { FilterQuery } from "mongoose"
 import { GameUser, IGameUser } from "../../models/colyseus-models/game-user"
 import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
@@ -12,18 +14,16 @@ import {
   MAX_PLAYERS_PER_GAME,
   MIN_HUMAN_PLAYERS
 } from "../../types/Config"
+import { CloseCodes } from "../../types/enum/CloseCodes"
 import { BotDifficulty, GameMode } from "../../types/enum/Game"
+import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
+import { getRank } from "../../utils/elo"
 import { logger } from "../../utils/logger"
 import { max } from "../../utils/number"
 import { cleanProfanity } from "../../utils/profanity-filter"
 import { pickRandomIn } from "../../utils/random"
 import { entries, values } from "../../utils/schemas"
 import PreparationRoom from "../preparation-room"
-import { CloseCodes } from "../../types/enum/CloseCodes"
-import { getRank } from "../../utils/elo"
-import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
-import { UserRecord } from "firebase-admin/lib/auth/user-record"
-import { setTimeout } from "node:timers/promises"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -640,6 +640,7 @@ export class CheckAutoStartRoom extends Command<PreparationRoom, void> {
     try {
       this.state.abortOnPlayerLeave = new AbortController()
       const signal = this.state.abortOnPlayerLeave.signal
+
       await setTimeout(5000, null, { signal })
 
       this.room.state.addMessage({
