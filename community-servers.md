@@ -11,7 +11,7 @@ The official server maintained by the creators of Pokemon Auto Chess
 # Dark’s Auto Chess
 
 - url: https://pokemon.darkatek7.com
-- logo: https://i.imgur.com/77xRt6G.png
+- logo: /assets/community-servers/darkatek.png
 - creator: Darkatek7
 - discord: https://discord.gg/kGkUfRqMVJ
 - location: Austria/Europe
@@ -21,7 +21,7 @@ German Community for Pokemon Auto Chess
 # Eternara PAC
 
 - url: https://eternara.site
-- logo: https://i.ibb.co/FK0LzVB/pac-shiny-icon.png
+- logo: /assets/community-servers/eternara.png
 - creator: Nocifer shiroe
 - discord: https://discord.gg/GBaDes7kxX
 - location: Europe
@@ -30,7 +30,7 @@ Eternara is a twin of official pokemon autochess, hosted by a mod of the main se
 
 # Pokemon Auto Chess League
 
-- logo: https://i.ibb.co/zs7Q4TT/PACL-LOGO-TRAN.png
+- logo: /assets/community-servers/pacl.png
 - creator: WhatAUsernameIHave
 - discord: https://discord.gg/VvrWy7uR9H
 - location: North America - East
@@ -40,7 +40,7 @@ The Pokémon Auto Chess League (PACL) is a league that runs events and tournamen
 # Penumbra Auto Chess
 
 - url: https://www.penumbra-autochess.com
-- logo: https://i.imgur.com/wclOp6U.png
+- logo: /assets/community-servers/penumbra.png
 - creator: Kone
 - discord: https://discord.gg/jnwUBxKSqZ
 - location: Thailand
@@ -50,7 +50,7 @@ First Thai Public Server with many Thai Pokemon Auto Chess Member. We have daily
 # PokeChessBR
 
 - url: https://pokechess.com.br
-- logo: https://i.ibb.co/GM3Q55w/logo-pokechessbr.jpg
+- logo: /assets/community-servers/pokechessbr.png
 - creator: Dog e Bronzato
 - discord: https://discord.gg/55R8bHxCJg
 - location: Brazil - São Paulo (South America)
@@ -60,7 +60,7 @@ O servidor PokeChessBR é a casa da comunidade brasileira dos amantes de Auto Ch
 #  UW Online POC
 
 - url: https://uruwhy.online
-- logo: https://i.imgur.com/HA3p47P.png
+- logo: /assets/community-servers/UWOnline.png
 - creator: Gate
 - location: Brazil
 
@@ -69,7 +69,7 @@ UW POC es un servidor apuntado para la comunidad latina de PokemonAutoChess, el 
 # Koala PAC
 
 - url: https://koala-pac.com
-- logo: https://i.ibb.co/4NjRMp5/logo.png
+- logo: /assets/community-servers/koala.png
 - creator: RhysK
 - location: Australia
 
