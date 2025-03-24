@@ -238,6 +238,9 @@ export default class GameRoom extends Room<GameState> {
     setTimeout(
       () => {
         this.broadcast(Transfer.LOADING_COMPLETE)
+        this.state.players.forEach((player) => {
+          this.presence.hdel(player.id, "pending_game_id")
+        })
         this.startGame()
       },
       5 * 60 * 1000
@@ -517,6 +520,7 @@ export default class GameRoom extends Room<GameState> {
         const player = this.state.players.get(client.auth.uid)
         if (player) {
           player.loadingProgress = 100
+          this.presence.hdel(client.auth.uid, "pending_game_id")
         }
         if (this.state.gameLoaded) {
           // already started, presumably a user refreshed page and wants to reconnect to game
@@ -575,6 +579,17 @@ export default class GameRoom extends Room<GameState> {
     }
     client.send(Transfer.USER_PROFILE, userProfile)
     this.dispatcher.dispatch(new OnJoinCommand(), { client })
+    const pendingGameId = await this.presence.hget(
+      client.auth.uid,
+      "pending_game_id"
+    )
+    console.log("join game room", { pendingGameId, currentRoomId: this.roomId })
+    if (pendingGameId === this.roomId) {
+      // user reconnected without reconnection token (new browser/machine/session)
+      this.presence.hdel(client.auth.uid, "pending_game_id")
+    } else if (pendingGameId != null) {
+      client.leave(CloseCodes.USER_IN_ANOTHER_GAME)
+    }
   }
 
   async onLeave(client: Client, consented: boolean) {
@@ -586,13 +601,23 @@ export default class GameRoom extends Room<GameState> {
         throw new Error("consented leave")
       }
 
+      this.presence.hset(client.auth.uid, "pending_game_id", this.roomId)
+
       // allow disconnected client to reconnect into this room until 5 minutes
       await this.allowReconnection(client, 300)
       const userProfile = await UserMetadata.findOne({ uid: client.auth.uid })
-      client.send(Transfer.USER_PROFILE, userProfile)
+      client.send(Transfer.USER_PROFILE, userProfile) // send profile info again after a /game page refresh
       this.dispatcher.dispatch(new OnJoinCommand(), { client })
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
+        const pendingGameId = await this.presence.hget(
+          client.auth.uid,
+          "pending_game_id"
+        )
+        console.log("leave game for good", { pendingGameId })
+        if (pendingGameId == undefined) return // user has reconnected through other ways (new browser/machine/session)
+        this.presence.hdel(client.auth.uid, "pending_game_id")
+
         //logger.info(`${client.auth.displayName} left game`)
         const player = this.state.players.get(client.auth.uid)
         const hasLeftGameBeforeTheEnd =
@@ -641,7 +666,10 @@ export default class GameRoom extends Room<GameState> {
           this.updatePlayerAfterGame(player)
         }
       }
-      if (values(this.state.players).every((p) => p.loadingProgress === 100)) {
+      if (
+        !this.state.gameLoaded &&
+        values(this.state.players).every((p) => p.loadingProgress === 100)
+      ) {
         this.broadcast(Transfer.LOADING_COMPLETE)
         this.startGame()
       }

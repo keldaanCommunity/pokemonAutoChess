@@ -31,6 +31,7 @@ export interface INetwork {
   uid: string
   displayName: string
   profile: IUserMetadata | undefined
+  pendingGameId: string | null
   error: string | null
 }
 
@@ -48,6 +49,7 @@ const initalState: INetwork = {
   uid: "",
   displayName: "",
   profile: undefined,
+  pendingGameId: null,
   error: null
 }
 
@@ -302,6 +304,9 @@ export const networkSlice = createSlice({
     },
     setErrorAlertMessage: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload
+    },
+    setPendingGameId: (state, action: PayloadAction<string | null>) => {
+      state.pendingGameId = action.payload
     }
   }
 })
@@ -356,7 +361,8 @@ export const {
   deleteRoom,
   createTournament,
   setErrorAlertMessage,
-  deleteAccount
+  deleteAccount,
+  setPendingGameId
 } = networkSlice.actions
 
 export default networkSlice.reducer

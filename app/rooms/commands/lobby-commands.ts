@@ -87,6 +87,14 @@ export class OnJoinCommand extends Command<
         // load existing account
         this.room.users.set(client.auth.uid, user)
         client.send(Transfer.USER_PROFILE, user)
+        const pendingGameId = await this.room.presence.hget(
+          client.auth.uid,
+          "pending_game_id"
+        )
+        console.log("join lobby", { pendingGameId })
+        if (pendingGameId != null) {
+          client.send(Transfer.RECONNECT_PROMPT, pendingGameId)
+        }
       } else {
         // create new user account
         const starterBoosters = 3

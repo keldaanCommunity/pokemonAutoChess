@@ -45,7 +45,8 @@ import {
   deleteTournament,
   setProfile,
   joinLobby,
-  setErrorAlertMessage
+  setErrorAlertMessage,
+  setPendingGameId
 } from "../stores/NetworkStore"
 import { resetPreparation } from "../stores/PreparationStore"
 
@@ -262,6 +263,10 @@ export async function joinLobbyRoom(
 
           room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
             dispatch(setProfile(user))
+          })
+
+          room.onMessage(Transfer.RECONNECT_PROMPT, (pendingGameId: string) => {
+            dispatch(setPendingGameId(pendingGameId))
           })
 
           room.onMessage(Transfer.USER, (user: IUserMetadata) =>

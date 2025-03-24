@@ -46,6 +46,16 @@ export class OnJoinCommand extends Command<
           return
         }
       }
+
+      const pendingGameId = await this.room.presence.hget(
+        client.auth.uid,
+        "pending_game_id"
+      )
+      if (pendingGameId != null) {
+        client.leave(CloseCodes.USER_IN_ANOTHER_GAME)
+        return
+      }
+
       if (
         this.state.ownerId == "" &&
         this.state.gameMode === GameMode.CUSTOM_LOBBY
@@ -271,6 +281,10 @@ export class OnGameStartRequestCommand extends Command<
           tournamentId: this.room.metadata?.tournamentId,
           bracketId: this.room.metadata?.bracketId,
           minRank: this.state.minRank
+        })
+
+        this.state.users.forEach((user) => {
+          this.room.presence.hset(user.uid, "pending_game_id", gameRoom.roomId)
         })
 
         this.room.presence.publish("game-started", {
