@@ -10,6 +10,7 @@ export const DEPTH = {
 
   // 11-20: below pokemon
   DROP_ZONE: 11,
+  LIGHT_CELL: 12,
   HIT_FX_BELOW_POKEMON: 15,
   ABILITY_BELOW_POKEMON: 16,
   BOOST_BACK: 17,

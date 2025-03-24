@@ -1126,6 +1126,7 @@ export default class PokemonSprite extends DraggableObject {
     this.light = this.scene.add
       .sprite(0, 0, "abilities", "LIGHT_CELL/000.png")
       .setScale(1.5, 1.5)
+      .setDepth(DEPTH.LIGHT_CELL)
     this.light.anims.play("LIGHT_CELL")
     this.add(this.light)
     this.sendToBack(this.light)
