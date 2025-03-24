@@ -1300,6 +1300,15 @@ export default class Simulation extends Schema implements ISimulation {
         break
       }
 
+      case Effect.CURSE_OF_VULNERABILITY:
+      case Effect.CURSE_OF_WEAKNESS:
+      case Effect.CURSE_OF_TORMENT:
+      case Effect.CURSE_OF_FATE:
+        if (pokemon.types.has(Synergy.GHOST)) {
+          pokemon.effects.add(effect)
+        }
+        break
+
       case Effect.VICTINI_PASSIVE: {
         pokemon.effects.add(effect)
         pokemon.addDodgeChance(-1, pokemon, 0, false)
