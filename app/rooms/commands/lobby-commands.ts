@@ -91,7 +91,6 @@ export class OnJoinCommand extends Command<
           client.auth.uid,
           "pending_game_id"
         )
-        console.log("join lobby", { pendingGameId })
         if (pendingGameId != null) {
           client.send(Transfer.RECONNECT_PROMPT, pendingGameId)
         }

@@ -583,7 +583,6 @@ export default class GameRoom extends Room<GameState> {
       client.auth.uid,
       "pending_game_id"
     )
-    console.log("join game room", { pendingGameId, currentRoomId: this.roomId })
     if (pendingGameId === this.roomId) {
       // user reconnected without reconnection token (new browser/machine/session)
       this.presence.hdel(client.auth.uid, "pending_game_id")
@@ -614,7 +613,6 @@ export default class GameRoom extends Room<GameState> {
           client.auth.uid,
           "pending_game_id"
         )
-        console.log("leave game for good", { pendingGameId })
         if (pendingGameId == undefined) return // user has reconnected through other ways (new browser/machine/session)
         this.presence.hdel(client.auth.uid, "pending_game_id")
 
