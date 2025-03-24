@@ -3,6 +3,7 @@ import { Client, updateLobby } from "colyseus"
 import { nanoid } from "nanoid"
 import { DishByPkm } from "../../core/dishes"
 
+import { giveRandomEgg } from "../../core/eggs"
 import {
   ConditionBasedEvolutionRule,
   CountEvolutionRule,
@@ -14,7 +15,6 @@ import Simulation from "../../core/simulation"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import Player from "../../models/colyseus-models/player"
 import { PokemonClasses } from "../../models/colyseus-models/pokemon"
-import { giveRandomEgg } from "../../core/eggs"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"
@@ -92,7 +92,6 @@ import { distanceC } from "../../utils/distance"
 import { repeat } from "../../utils/function"
 import { logger } from "../../utils/logger"
 import { max, min } from "../../utils/number"
-import { wait } from "../../utils/promise"
 import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { getWeather } from "../../utils/weather"
@@ -1422,35 +1421,37 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                   pokemonId: chef.id,
                   dishes
                 })
-                await wait(2000) // animation time, also allow to quickly switch position if needed
-                const candidates = values(player.board).filter(
-                  (p) =>
-                    p.meal === "" &&
-                    !isOnBench(p) &&
-                    distanceC(
-                      chef.positionX,
-                      chef.positionY,
-                      p.positionX,
-                      p.positionY
-                    ) === 1
-                )
-                for (const meal of dishes) {
-                  if (
-                    [
-                      Item.TART_APPLE,
-                      Item.SWEET_APPLE,
-                      Item.SIRUPY_APPLE,
-                      ...Berries
-                    ].includes(meal)
-                  ) {
-                    player.items.push(meal)
-                  } else {
-                    const pokemon = pickRandomIn(candidates) ?? chef
-                    pokemon.meal = meal
-                    pokemon.action = PokemonActionState.EAT
-                    removeInArray(candidates, pokemon)
+
+                this.clock.setTimeout(() => {
+                  const candidates = values(player.board).filter(
+                    (p) =>
+                      p.meal === "" &&
+                      !isOnBench(p) &&
+                      distanceC(
+                        chef.positionX,
+                        chef.positionY,
+                        p.positionX,
+                        p.positionY
+                      ) === 1
+                  )
+                  for (const meal of dishes) {
+                    if (
+                      [
+                        Item.TART_APPLE,
+                        Item.SWEET_APPLE,
+                        Item.SIRUPY_APPLE,
+                        ...Berries
+                      ].includes(meal)
+                    ) {
+                      player.items.push(meal)
+                    } else {
+                      const pokemon = pickRandomIn(candidates) ?? chef
+                      pokemon.meal = meal
+                      pokemon.action = PokemonActionState.EAT
+                      removeInArray(candidates, pokemon)
+                    }
                   }
-                }
+                }, 2000)
               }, 1000)
             }
           }

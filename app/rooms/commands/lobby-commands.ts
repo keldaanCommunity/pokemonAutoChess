@@ -1,5 +1,5 @@
 import { Command } from "@colyseus/command"
-import { Client, matchMaker, Room } from "colyseus"
+import { Client, Room, matchMaker } from "colyseus"
 import { nanoid } from "nanoid"
 import { writeHeapSnapshot } from "v8"
 import {
@@ -39,12 +39,12 @@ import {
   USERNAME_REGEXP
 } from "../../types"
 import {
+  BoosterPriceByRarity,
   BoosterRarityProbability,
   DUST_PER_BOOSTER,
   DUST_PER_SHINY,
   MAX_PLAYERS_PER_GAME,
-  getEmotionCost,
-  BoosterPriceByRarity
+  getEmotionCost
 } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { CloseCodes } from "../../types/enum/CloseCodes"
@@ -59,7 +59,6 @@ import { getPortraitSrc } from "../../utils/avatar"
 import { getRank } from "../../utils/elo"
 import { logger } from "../../utils/logger"
 import { cleanProfanity } from "../../utils/profanity-filter"
-import { wait } from "../../utils/promise"
 import { chance, pickRandomIn } from "../../utils/random"
 import { convertSchemaToRawObject, values } from "../../utils/schemas"
 import CustomLobbyRoom from "../custom-lobby-room"
@@ -1331,7 +1330,7 @@ export class CreateTournamentLobbiesCommand extends Command<
           tournamentId,
           bracketId
         })
-        await wait(1000)
+        //await wait(1000)
       }
 
       //save brackets to db
