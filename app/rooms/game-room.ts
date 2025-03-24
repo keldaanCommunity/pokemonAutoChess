@@ -118,11 +118,8 @@ export default class GameRoom extends Room<GameState> {
   }) {
     logger.info("Create Game ", this.roomId)
 
-    this.presence.subscribe("room-deleted", (roomId) => {
-      if (this.roomId === roomId) {
-        this.disconnect(CloseCodes.ROOM_DELETED)
-      }
-    })
+    this.onRoomDeleted = this.onRoomDeleted.bind(this)
+    this.presence.subscribe("room-deleted", this.onRoomDeleted)
 
     this.setMetadata(<IGameMetadata>{
       name: options.name,
@@ -650,6 +647,7 @@ export default class GameRoom extends Room<GameState> {
 
   async onDispose() {
     logger.info("Dispose Game ", this.roomId)
+    this.presence.unsubscribe("room-deleted", this.onRoomDeleted)
     const playersAlive = values(this.state.players).filter((p) => p.alive)
     const humansAlive = playersAlive.filter((p) => !p.isBot)
 
@@ -1166,5 +1164,11 @@ export default class GameRoom extends Room<GameState> {
         player.rank = index + 1
       }
     })
+  }
+
+  onRoomDeleted(roomId) {
+    if (this.roomId === roomId) {
+      this.disconnect(CloseCodes.ROOM_DELETED)
+    }
   }
 }
