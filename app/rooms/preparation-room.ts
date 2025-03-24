@@ -342,12 +342,7 @@ export default class PreparationRoom extends Room<PreparationState> {
 
     this.onGameStart = this.onGameStart.bind(this)
     this.presence.subscribe("game-started", this.onGameStart)
-
-    this.presence.subscribe("room-deleted", (roomId) => {
-      if (this.roomId === roomId) {
-        this.disconnect(CloseCodes.ROOM_DELETED)
-      }
-    })
+    this.presence.subscribe("room-deleted", this.onRoomDeleted)
   }
 
   async onAuth(client: Client, options, context) {
@@ -428,6 +423,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     this.dispatcher.stop()
     this.presence.unsubscribe("server-announcement", this.onServerAnnouncement)
     this.presence.unsubscribe("game-started", this.onGameStart)
+    this.presence.unsubscribe("room-deleted", this.onRoomDeleted)
   }
 
   onServerAnnouncement(message: string) {
@@ -448,6 +444,12 @@ export default class PreparationRoom extends Room<PreparationState> {
       this.setGameStarted(new Date().toISOString())
       //logger.debug("game start", game.roomId)
       this.broadcast(Transfer.GAME_START, gameId)
+    }
+  }
+
+  onRoomDeleted(roomId) {
+    if (this.roomId === roomId) {
+      this.disconnect(CloseCodes.ROOM_DELETED)
     }
   }
 
