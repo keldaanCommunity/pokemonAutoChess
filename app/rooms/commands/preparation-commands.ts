@@ -537,27 +537,6 @@ export class OnKickPlayerCommand extends Command<
   }
 }
 
-export class OnDeleteRoomCommand extends Command<
-  PreparationRoom,
-  {
-    client: Client
-  }
-> {
-  execute({ client }) {
-    try {
-      const user = this.state.users.get(client.auth?.uid)
-      if (user && [Role.ADMIN, Role.MODERATOR].includes(user.role)) {
-        this.room.clients.forEach((cli) => {
-          cli.leave(CloseCodes.ROOM_DELETED)
-        })
-        this.room.disconnect()
-      }
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-}
-
 export class OnLeaveCommand extends Command<
   PreparationRoom,
   {

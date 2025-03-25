@@ -4,7 +4,7 @@ import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import GameState from "../../../../../rooms/states/game-state"
-import { ICustomLobbyState, IGameMetadata } from "../../../../../types"
+import { ICustomLobbyState, IGameMetadata, Role, Transfer } from "../../../../../types"
 import { throttle } from "../../../../../utils/function"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { resetLobby } from "../../../stores/LobbyStore"
@@ -23,6 +23,7 @@ export function GameRoomsMenu() {
   const lobby: Room<ICustomLobbyState> | undefined = useAppSelector(
     (state) => state.network.lobby
   )
+  const user = useAppSelector((state) => state.network.profile)
 
   const joinGame = throttle(async function joinGame(
     selectedRoom: RoomAvailable<IGameMetadata>
@@ -47,6 +48,14 @@ export function GameRoomsMenu() {
     }
   }, 1000)
 
+  const onRoomAction = (room: RoomAvailable<IGameMetadata>, action: string) => {
+    if (action === "join" || action === "spectate") {
+      joinGame(room)
+    } else if (action === "delete" && user?.role === Role.ADMIN) {
+      confirm('Delete room ?') && lobby?.send(Transfer.DELETE_ROOM, room.roomId)
+    }
+  }
+
   return (
     <div className="my-container room-menu custom-bg">
       <h2>{t("in_game")}</h2>
@@ -56,7 +65,7 @@ export function GameRoomsMenu() {
       <ul className="hidden-scrollable">
         {gameRooms.map((r) => (
           <li key={r.roomId}>
-            <GameRoomItem room={r} onJoin={(spectate) => joinGame(r)} />
+            <GameRoomItem room={r} click={(action) => onRoomAction(r, action)} />
           </li>
         ))}
       </ul>
