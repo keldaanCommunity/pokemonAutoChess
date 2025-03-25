@@ -137,7 +137,7 @@ export default function RoomItem(props: {
           if (canJoin && !joining) {
             props.click(props.room, "join")
             setJoining(true)
-            setTimeout(() => setJoining(false), 5000)
+            setTimeout(() => setJoining(false), 3000)
           }
         }}
       >

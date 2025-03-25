@@ -1,11 +1,11 @@
-import { RoomAvailable } from "colyseus.js"
+import { Room, RoomAvailable } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { resetLobby } from "../stores/LobbyStore"
-import { logOut, setErrorAlertMessage } from "../stores/NetworkStore"
+import { logOut, setPendingGameId, setErrorAlertMessage } from "../stores/NetworkStore"
 import { Announcements } from "./component/announcements/announcements"
 import AvailableRoomMenu from "./component/available-room-menu/available-room-menu"
 import { GameRoomsMenu } from "./component/available-room-menu/game-rooms-menu"
@@ -13,25 +13,23 @@ import LeaderboardMenu from "./component/leaderboard/leaderboard-menu"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { Modal } from "./component/modal/modal"
 import { cc } from "./utils/jsx"
-import { LocalStoreKeys, localStore } from "./utils/store"
 import { joinLobbyRoom } from "../game/lobby-logic"
+import { localStore, LocalStoreKeys } from "./utils/store"
+import GameState from "../../../rooms/states/game-state"
+import { throttle } from "../../../utils/function"
 import "./lobby.css"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const lobby = useAppSelector((state) => state.network.lobby)
-
-  const [gameToReconnect, setGameToReconnect] = useState<string | null>(
-    localStore.get(LocalStoreKeys.RECONNECTION_GAME)?.roomId
-  )
+  const client = useAppSelector((state) => state.network.client)
   const networkError = useAppSelector(state => state.network.error)
+  const pendingGameId = useAppSelector(state => state.network.pendingGameId)
   const gameRooms: RoomAvailable[] = useAppSelector(
     (state) => state.lobby.gameRooms
   )
-  const showGameReconnect =
-    gameToReconnect != null &&
-    gameRooms.some((r) => r.roomId === gameToReconnect)
+  const showGameReconnect = pendingGameId != null && gameRooms.some((r) => r.roomId === pendingGameId)
 
   const { t } = useTranslation()
 
@@ -53,6 +51,24 @@ export default function Lobby() {
     navigate("/")
   }, [dispatch, lobby])
 
+  const reconnectToGame = throttle(async function reconnectToGame() {
+    const idToken = await firebase.auth().currentUser?.getIdToken()
+    if (idToken && pendingGameId) {
+      const game: Room<GameState> = await client.joinById(pendingGameId, { idToken })
+      localStore.set(
+        LocalStoreKeys.RECONNECTION_GAME,
+        { reconnectionToken: game.reconnectionToken, roomId: game.roomId },
+        30
+      )
+      await Promise.allSettled([
+        lobby?.connection.isOpen && lobby.leave(false),
+        game.connection.isOpen && game.leave(false)
+      ])
+      dispatch(resetLobby())
+      navigate("/game")
+    }
+  }, 1000)
+
   return (
     <main className="lobby">
       <MainSidebar
@@ -69,13 +85,13 @@ export default function Lobby() {
         body={t("game-reconnect-modal-body")}
         footer={
           <>
-            <button className="bubbly green" onClick={() => navigate("/game")}>
+            <button className="bubbly green" onClick={reconnectToGame}>
               {t("yes")}
             </button>
             <button
               className="bubbly red"
               onClick={() => {
-                setGameToReconnect(null)
+                dispatch(setPendingGameId(null))
               }}
             >
               {t("no")}
