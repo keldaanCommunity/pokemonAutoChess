@@ -1613,8 +1613,8 @@ export class DeleteRoomCommand extends Command<
         )
       }
 
-      roomsIdToDelete.forEach((roomToDelete) => {
-        this.room.presence.publish("room-deleted", roomId)
+      roomsIdToDelete.forEach((roomIdToDelete) => {
+        this.room.presence.publish("room-deleted", roomIdToDelete)
       })
     } catch (error) {
       logger.error(`DeleteRoomCommand error:`, error)
