@@ -659,8 +659,11 @@ function spawnDIAYAvatar(player: Player): Pokemon {
       player.money = 1
     }
   }
-  if (avatar.rarity === Rarity.HATCH || avatar.rarity === Rarity.SPECIAL) {
-    powerScore += 5
+  if (avatar.rarity === Rarity.HATCH) {
+    powerScore = [5, 6, 7][avatar.stars] ?? 7
+  }
+  if (avatar.rarity === Rarity.SPECIAL) {
+    powerScore = [1, 3, 7, 7][avatar.stars] ?? 7
   }
   if (powerScore < 5) {
     player.money += 55 - Math.round(10 * powerScore)

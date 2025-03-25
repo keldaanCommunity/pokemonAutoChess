@@ -16,3 +16,4 @@
 
 - Regions types changed to add some for Gourmet
 - New title: Chef: Max synergy with Gourmet type in a game
+- Do it all yourself scribble pendalties balance adjusted for Hatch & Special avatars
