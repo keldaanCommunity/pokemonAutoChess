@@ -30,8 +30,9 @@ import { displayBoost } from "./boosts-animations"
 import { Item } from "../../../../types/enum/Item"
 import { playMusic } from "../../pages/utils/audio"
 import { DEPTH } from "../depths"
-import { DungeonMusic } from "../../../../types/enum/Dungeon"
+import { DungeonDetails, DungeonMusic } from "../../../../types/enum/Dungeon"
 import { refreshShopUI } from "../../stores/GameStore"
+import { Portal } from "./portal"
 
 export enum BoardMode {
   PICK = "pick",
@@ -539,6 +540,15 @@ export default class BoardManager {
     // logger.debug('pickMode');
     this.mode = BoardMode.PICK
     this.scene.setMap(this.player.map)
+    if (
+      this.scene.cache.audio.has(
+        "music_" + DungeonDetails[this.player.map].music
+      ) &&
+      PortalCarouselStages.includes(this.state.stageLevel)
+    ) {
+      // play back original region music when leaving town
+      playMusic(this.scene, DungeonDetails[this.player.map].music)
+    }
     this.renderBoard()
     this.updatePlayerAvatar()
     this.updateOpponentAvatar(null, null)
