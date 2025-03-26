@@ -2,8 +2,6 @@ import React from "react"
 import { IDetailledPokemon } from "../../../../../models/mongo-models/bot-v2"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
-import { usePreferences } from "../../../preferences"
-import { cc } from "../../utils/jsx"
 
 export default function TeamEditor(props: {
   board: IDetailledPokemon[]
@@ -15,8 +13,6 @@ export default function TeamEditor(props: {
   ) => void
   handleDrop: (x: number, y: number, e: React.DragEvent) => void
 }) {
-  const [{ antialiasing }] = usePreferences()
-
   function handleOnDragStart(e: React.DragEvent, p: IDetailledPokemon) {
     e.dataTransfer.setData("cell", [p.x, p.y].join(","))
   }
@@ -68,9 +64,6 @@ export default function TeamEditor(props: {
                           )}
                           draggable
                           onDragStart={(e) => handleOnDragStart(e, p)}
-                          className={cc({
-                            pixelated: !antialiasing
-                          })}
                         />
                       )}
                       {p && p.items && (
@@ -85,9 +78,6 @@ export default function TeamEditor(props: {
                                   e.stopPropagation()
                                   props.handleEditorClick(x, y, true, j)
                                 }}
-                                className={cc({
-                                  pixelated: !antialiasing
-                                })}
                               />
                             )
                           })}

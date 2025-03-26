@@ -19,4 +19,5 @@
 .toast-new-pokemon img {
   width: 40px;
   height: 40px;
+  image-rendering: pixelated;
 }

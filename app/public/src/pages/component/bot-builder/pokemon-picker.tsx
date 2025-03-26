@@ -160,8 +160,7 @@ function PokemonPickerTab(props: {
                   className={cc("pokemon-portrait", {
                     additional: p.additional,
                     regional: p.regional,
-                    selected: p.name === props.selected["name"],
-                    pixelated: !preferences.antialiasing
+                    selected: p.name === props.selected["name"]
                   })}
                   onClick={() => {
                     props.selectEntity({
@@ -194,10 +193,7 @@ function PokemonPickerTab(props: {
                   draggable
                   onDragStart={(e) => handleOnDragStart(e, p.name)}
                 >
-                  <img
-                    className={cc({ pixelated: !preferences.antialiasing })}
-                    src={getPortraitSrc(p.index)}
-                  />
+                  <img src={getPortraitSrc(p.index)} />
                 </div>
               ))}
             </dd>

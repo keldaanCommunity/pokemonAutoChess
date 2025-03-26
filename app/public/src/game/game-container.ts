@@ -45,7 +45,6 @@ import { getPortraitSrc } from "../../../utils/avatar"
 import { BoardMode } from "./components/board-manager"
 import GameScene from "./scenes/game-scene"
 import { t } from "i18next"
-import { cc } from "../pages/utils/jsx"
 import { values } from "../../../utils/schemas"
 import { SchemaCallbackProxy } from "@colyseus/schema"
 import { getPkmWithCustom } from "../../../models/colyseus-models/pokemon-customs"
@@ -444,8 +443,7 @@ class GameContainer {
         const i = React.createElement(
           "img",
           {
-            src: getPortraitSrc(pokemon.index, custom.shiny, custom.emotion),
-            className: cc({ pixelated: !preference("antialiasing") })
+            src: getPortraitSrc(pokemon.index, custom.shiny, custom.emotion)
           },
           null
         )

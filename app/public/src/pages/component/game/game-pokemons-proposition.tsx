@@ -12,11 +12,8 @@ import { addIconsToDescription } from "../../utils/descriptions"
 import GamePokemonDuoPortrait from "./game-pokemon-duo-portrait"
 import GamePokemonPortrait from "./game-pokemon-portrait"
 import "./game-pokemon-propositions.css"
-import { cc } from "../../utils/jsx"
-import { usePreference } from "../../../preferences"
 
 export default function GamePokemonsPropositions() {
-  const [antialiasing] = usePreference("antialiasing")
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const pokemonsProposition = useAppSelector(
@@ -92,9 +89,6 @@ export default function GamePokemonsPropositions() {
                           verticalAlign: "middle"
                         }}
                         src={"assets/item/" + item + ".png"}
-                        className={cc({
-                          pixelated: !antialiasing
-                        })}
                       />
                       <p>
                         {addIconsToDescription(t(`item_description.${item}`))}

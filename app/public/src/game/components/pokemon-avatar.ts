@@ -12,7 +12,6 @@ import EmoteMenu from "./emote-menu"
 import LifeBar from "./life-bar"
 import PokemonSprite from "./pokemon"
 import { preference } from "../../preferences"
-import { cc } from "../../pages/utils/jsx"
 import { DEPTH } from "../depths"
 
 export default class PokemonAvatar extends PokemonSprite {
@@ -277,7 +276,6 @@ export class EmoteBubble extends GameObjects.DOMElement {
 
     const emoteImg = document.createElement("img")
     emoteImg.src = getAvatarSrc(emoteAvatar)
-    emoteImg.className = cc({ pixelated: !preference("antialiasing") })
 
     this.dom.appendChild(emoteImg)
     this.setElement(this.dom)

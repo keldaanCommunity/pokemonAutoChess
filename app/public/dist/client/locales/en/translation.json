@@ -3625,7 +3625,7 @@
     "KECLEON": "Kecleon sells Synergy stones for {{cost}} GOLD",
     "CHANSEY": "Chansey sells EGG_FOR_SELL for {{cost}} GOLD",
     "ELECTIVIRE": "Electivire sells Artificial items for {{cost}} GOLD",
-    "XATU": "Xatu sells WONDERBOX for {{cost}} GOLD",
+    "XATU": "Xatu sells WONDER_BOX for {{cost}} GOLD",
     "KANGASKHAN": "Kangashkhan sells complete craftable items for {{cost}} GOLD",
     "DUSKULL": "Duskull increases your long term money income for {{cost}} GOLD",
     "MAROWAK": "Marowak makes the next PVE fight more difficult",

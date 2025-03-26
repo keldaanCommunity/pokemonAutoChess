@@ -8,7 +8,6 @@ import { getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
 import SynergyIcon from "../icons/synergy-icon"
 import { GamePokemonDetail } from "./game-pokemon-detail"
-import { usePreference } from "../../../preferences"
 import { getPkmWithCustom } from "../../../../../models/colyseus-models/pokemon-customs"
 import "./game-pokemon-portrait.css"
 
@@ -18,7 +17,6 @@ export default function GamePokemonDuoPortrait(props: {
   duo: PkmDuo
   click?: React.MouseEventHandler<HTMLDivElement>
 }) {
-  const [antialiasing] = usePreference("antialiasing")
   const duo = PkmDuos[props.duo].map((p) => getPokemonData(p))
   const rarityColor = RarityColor[duo[0].rarity]
   const currentPlayer = useAppSelector(selectCurrentPlayer)
@@ -38,8 +36,7 @@ export default function GamePokemonDuoPortrait(props: {
           <div
             className={cc(
               "game-pokemon-portrait-duo-part",
-              "game-pokemon-portrait-duo-part-" + (i === 0 ? "down" : "up"),
-              { pixelated: !antialiasing }
+              "game-pokemon-portrait-duo-part-" + (i === 0 ? "down" : "up")
             )}
             data-tooltip-id={`tooltip-${props.origin}-${props.index}-${p.index}`}
             style={{

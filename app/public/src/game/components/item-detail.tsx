@@ -7,8 +7,6 @@ import { ItemStats } from "../../../../core/items"
 import { Stat } from "../../../../types/enum/Game"
 import { HMs, Item, ItemRecipe, TMs } from "../../../../types/enum/Item"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
-import { cc } from "../../pages/utils/jsx"
-import { usePreferences } from "../../preferences"
 import "./item-detail.css"
 
 export function ItemDetailTooltip({
@@ -18,7 +16,6 @@ export function ItemDetailTooltip({
   item: Item
   depth?: number
 }) {
-  const [preferences] = usePreferences()
   const { t } = useTranslation()
   const recipes = useMemo(
     () =>
@@ -46,9 +43,7 @@ export function ItemDetailTooltip({
   return (
     <div className="game-item-detail">
       <img
-        className={cc("game-item-detail-icon", {
-          pixelated: !preferences.antialiasing
-        })}
+        className="game-item-detail-icon"
         src={`assets/item/${getImageFilename()}.png`}
       />
       <div className="game-item-detail-name">
@@ -57,9 +52,7 @@ export function ItemDetailTooltip({
             {ItemRecipe[item]?.map((item, i) => (
               <React.Fragment key={`component_${i}_${item}`}>
                 <img
-                  className={cc("game-item-detail-icon", {
-                    pixelated: !preferences.antialiasing
-                  })}
+                  className="game-item-detail-icon"
                   src={`assets/item/${item}.png`}
                   key={item}
                 />

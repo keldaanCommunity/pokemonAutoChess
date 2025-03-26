@@ -4,7 +4,7 @@
   transition: all 1s ease-out;
   transform: translateX(-50%);
   height: 40%;
-  aspect-ratio: 2/3;
+  aspect-ratio: 2 / 3;
   animation: 1s ease-in-out distribute;
   animation-fill-mode: forwards;
   transform-style: preserve-3d;
@@ -128,6 +128,7 @@
 .booster-card .front img {
   width: 100%;
   height: 65%;
+  image-rendering: pixelated;
 }
 
 .booster-card .front-text {

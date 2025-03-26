@@ -237,6 +237,7 @@
   border: 1px solid #000000;
   border-radius: 4px;
   box-shadow: 2px 2px 0 #00000060;
+  image-rendering: pixelated;
   height: 250px;
   object-fit: cover;
 }
@@ -341,6 +342,7 @@
 }
 
 #wiki-items img.tree {
+  image-rendering: pixelated;
   width: 50px;
   margin: -8px 8px 0 8px;
 }
