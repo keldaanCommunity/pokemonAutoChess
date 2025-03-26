@@ -3294,9 +3294,9 @@ export const AnimationConfig: {
     eat: AnimationType.Sleep
   },
   [Pkm.GOLBAT]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Attack,
-    emote: AnimationType.Charge
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Hover
   },
   [Pkm.CROBAT]: {
     attack: AnimationType.Shoot,
