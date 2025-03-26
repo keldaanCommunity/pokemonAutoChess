@@ -63,7 +63,7 @@ import {
   setSpecialGameRule,
   setPodium
 } from "../stores/GameStore"
-import { joinGame, logIn, setProfile } from "../stores/NetworkStore"
+import { joinGame, logIn, setErrorAlertMessage, setProfile } from "../stores/NetworkStore"
 import { getAvatarString } from "../../../utils/avatar"
 import GameDpsMeter from "./component/game/game-dps-meter"
 import GameFinalRank from "./component/game/game-final-rank"
@@ -82,6 +82,7 @@ import { LocalStoreKeys, localStore } from "./utils/store"
 import { FIREBASE_CONFIG } from "./utils/utils"
 import { Passive } from "../../../types/enum/Passive"
 import { Item } from "../../../types/enum/Item"
+import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
 
 let gameContainer: GameContainer
 
@@ -498,6 +499,23 @@ export default function Game() {
 
       room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
         dispatch(setProfile(user))
+      })
+
+      room.onLeave((code) => {
+        const shouldGoToLobby = [
+          CloseCodes.ROOM_DELETED,
+          CloseCodes.USER_BANNED,
+        ].includes(code)
+        if (shouldGoToLobby) {
+          const errorMessage = CloseCodesMessages[code]
+          if (errorMessage) {
+            dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
+          }
+
+          const scene = getGameScene()
+          if (scene?.music) scene.music.destroy()
+          navigate("/lobby")
+        }
       })
 
       const $ = getStateCallbacks(room)

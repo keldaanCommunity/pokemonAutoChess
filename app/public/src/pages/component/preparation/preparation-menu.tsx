@@ -24,7 +24,6 @@ import {
   changeRoomMinMaxRanks,
   changeRoomName,
   changeRoomPassword,
-  deleteRoom,
   gameStartRequest,
   setSpecialRule,
   setNoElo,
@@ -123,17 +122,6 @@ export default function PreparationMenu() {
       }
     }
   }, 1000)
-
-  const deleteRoomButton = (isModerator || isAdmin) && (
-    <button
-      className="bubbly red"
-      onClick={() => {
-        dispatch(deleteRoom())
-      }}
-    >
-      {t("delete_room")}
-    </button>
-  )
 
   const changeMinRank = (newMinRank: EloRank) => {
     dispatch(
@@ -409,8 +397,6 @@ export default function PreparationMenu() {
 
       <div className="actions">
         {roomNameInput}
-        <div className="spacer"></div>
-        {deleteRoomButton}
       </div>
 
       {(BOTS_ENABLED || isAdmin) && (

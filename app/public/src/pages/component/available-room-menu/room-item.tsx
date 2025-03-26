@@ -15,7 +15,7 @@ import "./room-item.css"
 
 export default function RoomItem(props: {
   room: RoomAvailable<IPreparationMetadata>
-  click: (room: RoomAvailable<IPreparationMetadata>, action: string) => void
+  click: (action: string) => void
 }) {
   const { t } = useTranslation()
   const user = useAppSelector((state) => state.network.profile)
@@ -124,7 +124,7 @@ export default function RoomItem(props: {
       <span>
         {props.room.clients}/{nbPlayersExpected}
       </span>
-      {isAdmin && <button title="Delete room" onClick={() => { props.click(props.room, "delete") }}>X</button>}
+      {isAdmin && <button title={t("delete_room")} onClick={() => { props.click("delete") }}>X</button>}
       <button
         title={disabledReason ?? t("join")}
         disabled={!canJoin || joining}
@@ -135,7 +135,7 @@ export default function RoomItem(props: {
         )}
         onClick={() => {
           if (canJoin && !joining) {
-            props.click(props.room, "join")
+            props.click("join")
             setJoining(true)
             setTimeout(() => setJoining(false), 3000)
           }

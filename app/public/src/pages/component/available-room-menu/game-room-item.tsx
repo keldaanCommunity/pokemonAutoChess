@@ -1,17 +1,19 @@
 import { RoomAvailable } from "colyseus.js"
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { IGameMetadata } from "../../../../../types"
+import { IGameMetadata, Role } from "../../../../../types"
 import { useAppSelector } from "../../../hooks"
 import { cc } from "../../utils/jsx"
 import "./room-item.css"
 
 export default function GameRoomItem(props: {
   room: RoomAvailable<IGameMetadata>
-  onJoin: (spectate: boolean) => void
+  click: (action: string) => void
 }) {
   const { t } = useTranslation()
   const myUid = useAppSelector((state) => state.network.uid)
+  const user = useAppSelector((state) => state.network.profile)
+  const isAdmin = user?.role === Role.ADMIN
   const playerIds = props.room.metadata?.playerIds ?? []
   const spectate = playerIds.includes(myUid) === false
 
@@ -27,9 +29,10 @@ export default function GameRoomItem(props: {
         {playerIds.length !== 1 ? "s" : ""}, {t("stage")}{" "}
         {props.room.metadata?.stageLevel}
       </span>
+      {isAdmin && <button title={t("delete_room")} onClick={() => { props.click("delete") }}>X</button>}
       <button
         className={cc("bubbly", spectate ? "blue" : "green")}
-        onClick={() => props.onJoin(spectate)}
+        onClick={() => props.click(spectate ? "spectate" : "join")}
       >
         {spectate ? t("spectate") : t("reconnect")}
       </button>

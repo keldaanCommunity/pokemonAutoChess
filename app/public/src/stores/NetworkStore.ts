@@ -278,9 +278,6 @@ export const networkSlice = createSlice({
     kick: (state, action: PayloadAction<string>) => {
       state.preparation?.send(Transfer.KICK, action.payload)
     },
-    deleteRoom: (state) => {
-      state.preparation?.send(Transfer.DELETE_ROOM)
-    },
     ban: (state, action: PayloadAction<{ uid: string; reason: string }>) => {
       state.lobby?.send(Transfer.BAN, action.payload)
     },
@@ -358,7 +355,6 @@ export const {
   searchById,
   setTitle,
   kick,
-  deleteRoom,
   createTournament,
   setErrorAlertMessage,
   deleteAccount,
