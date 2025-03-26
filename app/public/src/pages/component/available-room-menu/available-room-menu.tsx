@@ -76,7 +76,7 @@ export default function AvailableRoomMenu() {
           <ul>
             {preparationRooms.map((r) => (
               <li key={r.roomId}>
-                <RoomItem room={r} click={onRoomAction} />
+                <RoomItem room={r} click={action => onRoomAction(r, action)} />
               </li>
             ))}
           </ul>

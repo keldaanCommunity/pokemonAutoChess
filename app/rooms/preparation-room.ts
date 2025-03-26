@@ -11,7 +11,6 @@ import { logger } from "../utils/logger"
 import { values } from "../utils/schemas"
 import {
   OnAddBotCommand,
-  OnDeleteRoomCommand,
   OnGameStartRequestCommand,
   OnJoinCommand,
   OnKickPlayerCommand,
@@ -188,15 +187,6 @@ export default class PreparationRoom extends Room<PreparationState> {
       logger.info(Transfer.KICK, this.roomName)
       try {
         this.dispatcher.dispatch(new OnKickPlayerCommand(), { client, message })
-      } catch (error) {
-        logger.error(error)
-      }
-    })
-
-    this.onMessage(Transfer.DELETE_ROOM, (client) => {
-      logger.info(Transfer.DELETE_ROOM, this.roomName)
-      try {
-        this.dispatcher.dispatch(new OnDeleteRoomCommand(), { client })
       } catch (error) {
         logger.error(error)
       }

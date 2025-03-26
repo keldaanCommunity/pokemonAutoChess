@@ -610,7 +610,7 @@ export default class GameRoom extends Room<GameState> {
           client.auth.uid,
           "pending_game_id"
         )
-        if (pendingGameId == undefined) return // user has reconnected through other ways (new browser/machine/session)
+        if (pendingGameId == undefined && !consented) return // user has reconnected through other ways (new browser/machine/session)
         this.presence.hdel(client.auth.uid, "pending_game_id")
 
         //logger.info(`${client.auth.displayName} left game`)
