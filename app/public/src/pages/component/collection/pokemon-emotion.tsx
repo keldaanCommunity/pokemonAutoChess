@@ -25,8 +25,7 @@ export default function PokemonEmotion(props: {
       className={cc("my-box", "clickable", "pokemon-emotion", {
         unlocked: !!props.unlocked,
         unlockable: canUnlock,
-        selected: !!props.selected,
-        shimmer: canUnlock
+        selected: !!props.selected
       })}
       onClick={props.onClick}
     >
