@@ -62,7 +62,7 @@ export default function AfterMenu() {
                 {t("quick_play")}
               </>}
               {gameMode === GameMode.RANKED && <>
-                <img src="assets/ui/game_modes/ranked.png" alt={t("ranked_match")} className="ranked icon" draggable="false" />
+                <img src="assets/ui/ranked.png" alt={t("ranked_match")} className="ranked icon" draggable="false" />
                 {t("ranked_match")}
               </>}
             </p>
