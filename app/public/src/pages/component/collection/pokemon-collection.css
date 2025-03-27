@@ -26,14 +26,16 @@
 }
 
 #pokemon-collection .unown-icon {
-  margin: -28px;
+  width: 36px;
+  height: 36px;
+  margin: 2px;
 }
 
 .pokemon-collection-tabs {
   display: flex;
+  justify-content: center;
   align-items: center;
-  max-width: 90vw;
-  overflow-x: scroll;
+  overflow-x: auto;
   overflow-y: hidden;
   padding-left: 0;
   margin: 0;
@@ -42,7 +44,10 @@
 .pokemon-collection-tabs li {
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 55px;
+  min-width: 50px;
+  padding: 5px;
 }
 
 #pokemon-collection .bubbly {

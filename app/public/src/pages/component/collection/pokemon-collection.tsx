@@ -90,7 +90,7 @@ export default function PokemonCollection() {
             })}
             <Tab key="?">
               <img
-                src="assets/unown/unown-qm.png"
+                src="assets/ui/unown.svg"
                 alt="?"
                 className="unown-icon"
               />

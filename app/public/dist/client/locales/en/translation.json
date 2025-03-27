@@ -3360,6 +3360,7 @@
   "search_player": "Search by Player Name...",
   "team_builder": "Team Planner",
   "titles_unlocked": "titles unlocked",
+  "avatars_unlocked": "{{nbUnlocked}}/{{nbTotal}} avatars unlocked",
   "overlaps": "Overlaps",
   "game-reconnect-modal-title": "Reconnect to game",
   "game-reconnect-modal-body": "You left a game in progress. Do you want to reconnect to your previous game ?",

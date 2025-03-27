@@ -19,3 +19,7 @@
   background-position: center;
   background-size: 80px 80px;
 }
+
+#unown-panel .char.space {
+  background-color: rgba(255, 255, 255, 0.05);
+}
