@@ -325,7 +325,7 @@ export default class PokemonSprite extends DraggableObject {
         return
       }
 
-      const absX = this.x + this.detail.width / 2 + 40
+      const absX = this.x + this.detail.width / 2 + 60
       const minX = this.detail.width / 2
       const maxX = window.innerWidth - this.detail.width / 2
       const absY = this.y - this.detail.height / 2 - 40
@@ -391,7 +391,7 @@ export default class PokemonSprite extends DraggableObject {
     )
     this.detail
       .setPosition(
-        this.detail.width / 2 + 40,
+        this.detail.width / 2 + 60,
         min(0)(-this.detail.height / 2 - 40)
       )
       .setDepth(DEPTH.TOOLTIP)
