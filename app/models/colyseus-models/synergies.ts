@@ -66,6 +66,7 @@ export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
   })
 
   const typesPerFamily = new Map<Pkm, Set<Synergy>>()
+  const dynamicTypesPerFamily = new Map<Pkm, Set<Synergy>>()
   const dragonDoubleTypes = new Map<Pkm, Set<Synergy>>()
 
   board.forEach((pkm: IPokemon) => {
@@ -108,15 +109,24 @@ export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
       const synergiesSorted = [...synergies.keys()].sort(
         (a, b) => +synergies.get(b)! - synergies.get(a)!
       )
+      const family = PkmFamily[pkm.name]
+      if (!dynamicTypesPerFamily.has(family)) dynamicTypesPerFamily.set(family, new Set())
+      const types: Set<Synergy> = dynamicTypesPerFamily.get(family)!
 
       for (let i = 0; i < n; i++) {
         const type = synergiesSorted.shift()
         if (type && !pkm.types.has(type) && synergies.get(type)! > 0) {
           pkm.types.add(type)
-          synergies.set(type, (synergies.get(type) ?? 0) + 1)
+          types.add(type)
         }
       }
     }
+  })
+
+  dynamicTypesPerFamily.forEach((types) => {
+    types.forEach((type, i) => {
+      synergies.set(type, (synergies.get(type) ?? 0) + 1)
+    })
   })
 
   // apply dragon double synergies
