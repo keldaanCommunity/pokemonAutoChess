@@ -2425,7 +2425,7 @@
     "CARAMEL_SWIRL_FLAVOR": "Baked with DARK MONSTER DRAGON allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_CARAMEL_SWIRL). $t(passive_description.CARAMEL_SWIRL_CREAM)",
     "RAINBOW_SWIRL_FLAVOR": "Baked with PSYCHIC AMORPHOUS BABY LIGHT allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_RAINBOW_SWIRL). $t(passive_description.RAINBOW_SWIRL_CREAM)",
     "EGG_FOR_SELL": "An Egg sold at Chansey's Daycare",
-    "GIMMIGHOUL_COIN": "Get 1 additional GOLD income each round, and increase max interests by 1.",
+    "GIMMIGHOUL_COIN": "Get 1 additional GOLD income each round, and increase max interest cap by 10 GOLD.",
     "EXCHANGE_TICKET": "Exchange an item component or a crafted item on bench for another random one. Single use."
   },
   "passive_description": {
