@@ -1,12 +1,11 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { Role } from "../../../../../types"
-import { getAvatarSrc } from "../../../../../utils/avatar"
 import { EloBadge } from "./elo-badge"
 import { RoleBadge } from "./role-badge"
-
-import "./avatar.css"
 import PokemonPortrait from "../pokemon-portrait"
+import "./avatar.css"
+
 
 export function Avatar(props: {
   name: string

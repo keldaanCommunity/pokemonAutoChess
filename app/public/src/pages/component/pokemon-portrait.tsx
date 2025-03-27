@@ -1,7 +1,6 @@
 import React from "react"
 
 import { getAvatarSrc, getPortraitSrc } from "../../../../utils/avatar"
-import { usePreference } from "../../preferences"
 import { cc } from "../utils/jsx"
 import { Emotion } from "../../../../types"
 
@@ -18,7 +17,6 @@ type Props = (
   React.ImgHTMLAttributes<HTMLImageElement>
 
 export default function PokemonPortrait(props: Props) {
-  const [antialiasing] = usePreference("antialiasing")
   let src
   if ("avatar" in props) {
     src = getAvatarSrc(props.avatar)
@@ -40,7 +38,6 @@ export default function PokemonPortrait(props: Props) {
       loading="lazy"
       className={cc(
         "pokemon-portrait",
-        { pixelated: !antialiasing },
         className || ""
       )}
       {...rest}

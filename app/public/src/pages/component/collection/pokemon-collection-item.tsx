@@ -8,7 +8,6 @@ import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
 import "./pokemon-collection-item.css"
-import { usePreferences } from "../../../preferences"
 
 export default function PokemonCollectionItem(props: {
   name: Pkm
@@ -19,7 +18,6 @@ export default function PokemonCollectionItem(props: {
   refundableOnly: boolean
   setPokemon: Dispatch<SetStateAction<Pkm | "">>
 }) {
-  const [{ antialiasing }] = usePreferences()
   if (
     props.index in PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX === false ||
     PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[props.index].includes(1) === false
@@ -58,8 +56,7 @@ export default function PokemonCollectionItem(props: {
     <div
       className={cc("my-box", "clickable", "pokemon-collection-item", {
         unlocked: isUnlocked,
-        unlockable: canUnlock,
-        shimmer: canUnlock
+        unlockable: canUnlock
       })}
       onClick={() => {
         props.setPokemon(props.name)
@@ -72,13 +69,11 @@ export default function PokemonCollectionItem(props: {
           props.config?.selectedEmotion
         )}
         loading="lazy"
-        className={cc({ pixelated: !antialiasing })}
       />
       <p>
         <span>{props.config ? props.config.dust : 0}</span>
         <img
           src={getPortraitSrc(props.index)}
-          className={cc({ pixelated: !antialiasing })}
         />
       </p>
     </div>

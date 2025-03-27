@@ -37,6 +37,7 @@ const defaultPreferences: IPreferencesState = {
   filterAvailableAddsAndRegionals: false,
   disableAnimatedTilemap: false,
   renderer: Phaser.AUTO,
+  antialiasing: true,
   keybindings: {
     sell: "E",
     buy_xp: "F",
@@ -44,8 +45,7 @@ const defaultPreferences: IPreferencesState = {
     lock: "R",
     switch: "SPACE",
     emote: "A"
-  },
-  antialiasing: false
+  }
 }
 
 function loadPreferences(): IPreferencesState {

@@ -14,8 +14,6 @@ import { getPortraitSrc } from "../../../../../utils/avatar"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { AbilityTooltip } from "../ability/ability-tooltip"
 import SynergyIcon from "../icons/synergy-icon"
-import { cc } from "../../utils/jsx"
-import { usePreference } from "../../../preferences"
 import "./game-pokemon-detail.css"
 
 export function GamePokemonDetail(props: {
@@ -23,7 +21,6 @@ export function GamePokemonDetail(props: {
   shiny?: boolean
   emotion?: Emotion
 }) {
-  const [antialiasing] = usePreference("antialiasing")
   const { t } = useTranslation()
   const pokemon: Pokemon = useMemo(
     () =>
@@ -57,9 +54,7 @@ export function GamePokemonDetail(props: {
   return (
     <div className="game-pokemon-detail in-shop">
       <img
-        className={cc("game-pokemon-detail-portrait", {
-          pixelated: !antialiasing
-        })}
+        className="game-pokemon-detail-portrait"
         style={{ borderColor: RarityColor[pokemon.rarity] }}
         src={getPortraitSrc(
           pokemon.index,

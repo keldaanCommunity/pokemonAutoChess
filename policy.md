@@ -6,7 +6,7 @@ This policy is effective as of 5 October 2021 and was last updated on 5 October 
 
 # How to request the deletion of your data?
 
-You can request at any time that all your data be deleted. To do so, please notify a moderator on the discord server or send a mail to keldaan.ag@gmail.com
+You can delete all your data via the in game profile "Account" tab, accessible from the main lobby.
 
 # Information We Collect
 
@@ -35,8 +35,6 @@ We may collect personal information from you when you do any of the following on
     Use a mobile device or web browser to access our content
     Contact us via email, social media, or on any similar technologies
     When you mention us on social media
-
-We may collect, hold, use, and disclose information for the following purposes, and personal information will not be further processed in a manner that is incompatible with these purposes:
 
 We may collect, hold, use, and disclose information for the following purposes, and personal information will not be further processed in a manner that is incompatible with these purposes:
 

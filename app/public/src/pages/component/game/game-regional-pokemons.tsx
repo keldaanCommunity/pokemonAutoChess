@@ -8,8 +8,6 @@ import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import SynergyIcon from "../icons/synergy-icon"
 import { getPkmWithCustom } from "../../../../../models/colyseus-models/pokemon-customs"
-import { usePreferences } from "../../../preferences"
-import { cc } from "../../utils/jsx"
 
 export function GameRegionalPokemonsIcon() {
   return (
@@ -33,7 +31,6 @@ export function GameRegionalPokemonsIcon() {
 
 export function GameRegionalPokemons() {
   const { t } = useTranslation()
-  const [preferences] = usePreferences()
   const currentPlayer = useAppSelector(selectCurrentPlayer)
   const regionalPokemons: Pkm[] = (currentPlayer?.regionalPokemons ?? new Array<Pkm>()).slice().sort((a, b) => {
     return RarityCost[getPokemonData(a).rarity] - RarityCost[getPokemonData(b).rarity]
@@ -58,7 +55,7 @@ export function GameRegionalPokemons() {
 
             return (
               <div
-                className={cc(`my-box clickable game-pokemon-portrait`, { pixelated: !preferences.antialiasing })}
+                className="my-box clickable game-pokemon-portrait"
                 key={"game-regional-pokemons-" + index}
                 style={{
                   backgroundColor: rarityColor,

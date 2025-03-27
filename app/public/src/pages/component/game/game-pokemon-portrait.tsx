@@ -133,8 +133,7 @@ export default function GamePokemonPortrait(props: {
       className={cc("my-box", "clickable", "game-pokemon-portrait", {
         shimmer: shouldShimmer,
         disabled: !canBuy && props.origin === "shop",
-        planned: props.inPlanner ?? false,
-        pixelated: !antialiasing
+        planned: props.inPlanner ?? false
       })}
       style={{
         backgroundColor: rarityColor,
@@ -172,16 +171,12 @@ export default function GamePokemonPortrait(props: {
               pokemonCustom.shiny,
               pokemonCustom.emotion
             )}
-            className={cc("game-pokemon-portrait-evolution-portrait", {
-              pixelated: !antialiasing
-            })}
+            className="game-pokemon-portrait-evolution-portrait"
           />
           <img
             src="/assets/ui/evolution.png"
             alt=""
-            className={cc("game-pokemon-portrait-evolution-icon", {
-              pixelated: !antialiasing
-            })}
+            className="game-pokemon-portrait-evolution-icon"
           />
         </div>
       )}

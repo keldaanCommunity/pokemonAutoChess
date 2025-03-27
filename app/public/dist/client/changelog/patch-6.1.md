@@ -10,6 +10,8 @@
 
 # UI
 
+- Antialias setting now only applies on board and not on portraits, and is now enabled by default
+
 # Bugfix
 
 # Misc
