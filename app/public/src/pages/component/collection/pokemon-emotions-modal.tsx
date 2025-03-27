@@ -19,9 +19,9 @@ import { getAvatarSrc, getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
 import { Modal } from "../modal/modal"
 import PokemonEmotion from "./pokemon-emotion"
-import "./pokemon-emotions-modal.css"
 import { BoosterPriceByRarity } from "../../../../../types/Config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
+import "./pokemon-emotions-modal.css"
 
 export default function PokemonEmotionsModal(props: {
   pokemon: Pkm
