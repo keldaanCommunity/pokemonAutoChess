@@ -17454,6 +17454,18 @@ export class Dachsbun extends Pokemon {
   additional = true
 }
 
+const alcremieByFlavor: Record<(typeof Flavors)[number], Pkm> = {
+  VANILLA_FLAVOR: Pkm.ALCREMIE_VANILLA,
+  RUBY_FLAVOR: Pkm.ALCREMIE_RUBY,
+  MATCHA_FLAVOR: Pkm.ALCREMIE_MATCHA,
+  MINT_FLAVOR: Pkm.ALCREMIE_MINT,
+  LEMON_FLAVOR: Pkm.ALCREMIE_LEMON,
+  SALTED_FLAVOR: Pkm.ALCREMIE_SALTED,
+  RUBY_SWIRL_FLAVOR: Pkm.ALCREMIE_RUBY_SWIRL,
+  CARAMEL_SWIRL_FLAVOR: Pkm.ALCREMIE_CARAMEL_SWIRL,
+  RAINBOW_SWIRL_FLAVOR: Pkm.ALCREMIE_RAINBOW_SWIRL
+} as const
+
 export class Milcery extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.FAIRY,
@@ -17473,49 +17485,7 @@ export class Milcery extends Pokemon {
     Pkm.ALCREMIE_CARAMEL_SWIRL,
     Pkm.ALCREMIE_RAINBOW_SWIRL
   ]
-  evolutionRule = new ItemEvolutionRule(
-    [
-      Item.VANILLA_FLAVOR,
-      Item.RUBY_FLAVOR,
-      Item.MATCHA_FLAVOR,
-      Item.MINT_FLAVOR,
-      Item.LEMON_FLAVOR,
-      Item.SALTED_FLAVOR,
-      Item.RUBY_SWIRL_FLAVOR,
-      Item.CARAMEL_SWIRL_FLAVOR,
-      Item.RAINBOW_SWIRL_FLAVOR
-    ],
-    (pokemon, player, item) => {
-      if (item === Item.VANILLA_FLAVOR) {
-        return Pkm.ALCREMIE_VANILLA
-      }
-      if (item === Item.RUBY_FLAVOR) {
-        return Pkm.ALCREMIE_RUBY
-      }
-      if (item === Item.MATCHA_FLAVOR) {
-        return Pkm.ALCREMIE_MATCHA
-      }
-      if (item === Item.MINT_FLAVOR) {
-        return Pkm.ALCREMIE_MINT
-      }
-      if (item === Item.LEMON_FLAVOR) {
-        return Pkm.ALCREMIE_LEMON
-      }
-      if (item === Item.SALTED_FLAVOR) {
-        return Pkm.ALCREMIE_SALTED
-      }
-      if (item === Item.RUBY_SWIRL_FLAVOR) {
-        return Pkm.ALCREMIE_RUBY_SWIRL
-      }
-      if (item === Item.CARAMEL_SWIRL_FLAVOR) {
-        return Pkm.ALCREMIE_CARAMEL_SWIRL
-      }
-      if (item === Item.RAINBOW_SWIRL_FLAVOR) {
-        return Pkm.ALCREMIE_RAINBOW_SWIRL
-      }
-      return Pkm.ALCREMIE_VANILLA
-    }
-  )
+  evolutionRule = new ItemEvolutionRule([...Flavors], (pokemon, player, item: Item) => alcremieByFlavor[item])
   hp = 130
   atk = 10
   speed = 36
@@ -17528,10 +17498,10 @@ export class Milcery extends Pokemon {
   attackSprite = AttackSprite.FAIRY_RANGE
 }
 
-function alcremieOnAcquired(player: Player) {
-  Flavors.forEach((flavor) => {
-    removeInArray(player.items, flavor)
-  })
+function alcremieOnAcquired(this: IPokemonEntity, player: Player) {
+  const flavor = Object.keys(alcremieByFlavor).find((flavor) => alcremieByFlavor[flavor] === this.name) as Item
+  removeInArray(player.items, flavor)
+  this.items.delete(flavor)
 }
 
 export class AlcremieVanilla extends Pokemon {

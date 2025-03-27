@@ -562,7 +562,7 @@ export const Flavors = [
   Item.RUBY_SWIRL_FLAVOR,
   Item.CARAMEL_SWIRL_FLAVOR,
   Item.RAINBOW_SWIRL_FLAVOR
-]
+] as const
 
 export const SynergyFlavors: {
   [key in Synergy]:

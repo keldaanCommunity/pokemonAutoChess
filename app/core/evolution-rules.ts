@@ -13,10 +13,10 @@ import { logger } from "../utils/logger"
 import { pickRandomIn, shuffleArray } from "../utils/random"
 import { values } from "../utils/schemas"
 
-type DivergentEvolution = (
+type DivergentEvolution<Param = any> = (
   pokemon: Pokemon,
   player: IPlayer,
-  ...additionalArgs: unknown[]
+  ...additionalArgs: Param[]
 ) => Pkm
 
 export abstract class EvolutionRule {
@@ -202,7 +202,7 @@ export class ItemEvolutionRule extends EvolutionRule {
 
   constructor(
     itemsTriggeringEvolution: Item[],
-    divergentEvolution?: DivergentEvolution
+    divergentEvolution?: DivergentEvolution<Item>
   ) {
     super(divergentEvolution)
     this.itemsTriggeringEvolution = itemsTriggeringEvolution
