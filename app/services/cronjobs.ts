@@ -18,25 +18,25 @@ export function initCronJobs() {
   logger.debug("init cron jobs")
 
   CronJob.from({
-    cronTime: "0 22 * * *", // every day at 8am
+    cronTime: "0 8 * * *", // every day at 8am
     timeZone: "Europe/Paris",
     onTick: () => deleteOldAnonymousAccounts(),
     start: true
   })
   CronJob.from({
-    cronTime: "5 22 * * *", // every day at 8:05am
+    cronTime: "15 8 * * *", // every day at 8:15am
     timeZone: "Europe/Paris",
     onTick: () => deleteOldHistory(),
     start: true
   })
   CronJob.from({
-    cronTime: "10 22 * * *", // every day at 8:10am
+    cronTime: "30 8 * * *", // every day at 8:30am
     timeZone: "Europe/Paris",
     onTick: () => eloDecay(),
     start: true
   })
   CronJob.from({
-    cronTime: "15 22 * * *", // every day at 8:15am
+    cronTime: "45 8 * * *", // every day at 8:45am
     timeZone: "Europe/Paris",
     onTick: () => titleStats(),
     start: true
