@@ -6,7 +6,6 @@ import { RarityColor } from "../../../../../types/Config"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
-import { usePreferences } from "../../../preferences"
 import "./booster-card.css"
 
 interface BoosterCardProps {
@@ -17,7 +16,6 @@ interface BoosterCardProps {
 }
 
 export function BoosterCard({ pkm, shards, flipped, onFlip }: BoosterCardProps) {
-  const [{ antialiasing }] = usePreferences()
   const { t } = useTranslation()
   const pokemonData = getPokemonData(pkm.name)
   const style = {
@@ -44,7 +42,6 @@ export function BoosterCard({ pkm, shards, flipped, onFlip }: BoosterCardProps) 
             pkm.shiny,
             pkm.emotion
           )}
-          className={cc({ pixelated: !antialiasing })}
         ></img>
         <div className="front-text">
           <p className="name">{t(`pkm.${pkm.name}`)}</p>

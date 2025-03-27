@@ -13,8 +13,6 @@ import { AbilityTooltip } from "../../pages/component/ability/ability-tooltip"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
 import { getPortraitSrc } from "../../../../utils/avatar"
 import { DishByPkm } from "../../../../core/dishes"
-import { cc } from "../../pages/utils/jsx"
-import { preference } from "../../preferences"
 
 export default class PokemonDetail extends GameObjects.DOMElement {
   dom: HTMLDivElement
@@ -111,9 +109,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
 
     if (index === PkmIndex[Pkm.EGG]) {
       const eggHint = document.createElement("img")
-      eggHint.className = cc("game-pokemon-detail-portrait-hint", {
-        pixelated: !preference("antialiasing")
-      })
+      eggHint.className = "game-pokemon-detail-portrait-hint"
       eggHint.src = getPortraitSrc(PkmIndex[evolution])
       wrap.appendChild(eggHint)
     }

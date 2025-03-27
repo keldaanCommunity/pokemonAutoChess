@@ -168,37 +168,39 @@ export function PokemonCollectionList(props: {
     }
   }, [props.sort, getConfig])
 
-  const elligiblePokemons: (React.JSX.Element | null)[] = useMemo(
-    () =>
-      pokemonsSorted.map((pkm) => {
-        const pokemonData = getPokemonData(pkm)
-        if (
-          pkm !== Pkm.DEFAULT &&
-          (pokemonData.skill !== Ability.DEFAULT ||
-            pokemonData.passive !== Passive.NONE) &&
-          pokemonData.passive !== Passive.UNOWN &&
-          (props.type === "all" ||
-            pokemonData.types.includes(Synergy[props.type]))
-        ) {
-          return (
-            <PokemonCollectionItem
-              key={`${pokemonData.index}-${props.type}`}
-              name={pkm}
-              index={pokemonData.index}
-              config={getConfig(pokemonData.index)}
-              filter={props.filter}
-              shinyOnly={props.shinyOnly}
-              refundableOnly={props.refundableOnly}
-              setPokemon={props.setPokemon}
-            />
-          )
-        }
+  const pokemonsFiltered = useMemo(() => {
+    return pokemonsSorted.filter((pkm) => {
+      const pokemonData = getPokemonData(pkm)
+      return (
+        pkm !== Pkm.DEFAULT &&
+        (pokemonData.skill !== Ability.DEFAULT ||
+          pokemonData.passive !== Passive.NONE) &&
+        pokemonData.passive !== Passive.UNOWN &&
+        (props.type === "all" ||
+          pokemonData.types.includes(Synergy[props.type]))
+      )
+    })
+  }, [pokemonsSorted, props.type])
 
-        return null
-      }),
+  const elligiblePokemons: (React.JSX.Element | null)[] = useMemo(() =>
+    pokemonsFiltered.map((pkm) => {
+      const pokemonData = getPokemonData(pkm)
+      return (
+        <PokemonCollectionItem
+          key={`${pokemonData.index}-${props.type}`}
+          name={pkm}
+          index={pokemonData.index}
+          config={getConfig(pokemonData.index)}
+          filter={props.filter}
+          shinyOnly={props.shinyOnly}
+          refundableOnly={props.refundableOnly}
+          setPokemon={props.setPokemon}
+        />
+      )
+    }),
     [
       getConfig,
-      pokemonsSorted,
+      pokemonsFiltered,
       props.filter,
       props.setPokemon,
       props.shinyOnly,

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useMemo, useState } from "react"
 import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
@@ -10,12 +10,10 @@ import { getPortraitSrc } from "../../../../../utils/avatar"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
-import { usePreference } from "../../../preferences"
 import { AbilityPerTM, Item, TMs } from "../../../../../types/enum/Item"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 
 export default function WikiAbility() {
-  const [antialiasing] = usePreference("antialiasing")
   const { t } = useTranslation()
   const [hoveredPokemon, setHoveredPokemon] = useState<Pkm>()
   const [itemHovered, setItemHovered] = useState<Item>()
@@ -76,13 +74,13 @@ export default function WikiAbility() {
                           setHoveredPokemon(p.name)
                         }}
                       >
-                        <img src={getPortraitSrc(p.index)} className={cc({ pixelated: !antialiasing })} />
+                        <img src={getPortraitSrc(p.index)} />
                       </div>
                     </li>
                   ))}
                   {tmPerAbility[ability] && (
                     <li data-tooltip-id="item-detail" onMouseOver={() => setItemHovered(tmPerAbility[ability])} >
-                      <img src={`assets/item/${TMs.includes(tmPerAbility[ability]) ? "TM" : "HM"}.png`} className={cc("item", { pixelated: !antialiasing })} />
+                      <img src={`assets/item/${TMs.includes(tmPerAbility[ability]) ? "TM" : "HM"}.png`} className="item" />
                     </li>
                   )}
                 </ul>

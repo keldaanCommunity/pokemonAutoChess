@@ -185,6 +185,7 @@ p:last-child {
 .game-emote-bubble img {
   width: 80px;
   height: 80px;
+  image-rendering: pixelated;
 }
 
 .game-emote-bubble:after {
@@ -283,6 +284,7 @@ p:last-child {
   border: 1px solid #000000;
   border-radius: 4px;
   box-shadow: 2px 2px 0 #00000060;
+  image-rendering: pixelated;
   position: relative;
 }
 

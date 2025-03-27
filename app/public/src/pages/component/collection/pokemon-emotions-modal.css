@@ -15,6 +15,7 @@
   width: 80px;
   height: 80px;
   margin-right: 0.5em;
+  image-rendering: pixelated;
 }
 
 .pokemon-emotions-modal header img.unlocked {
@@ -36,6 +37,7 @@
   width: 40px;
   height: 40px;
   margin: 0 0.5em;
+  image-rendering: pixelated;
 }
 
 .pokemon-emotions-modal img.dust {
