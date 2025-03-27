@@ -795,8 +795,7 @@ export default abstract class PokemonState {
 
     if (
       pokemon.effects.has(Effect.STEALTH_ROCKS) &&
-      !pokemon.types.has(Synergy.ROCK) &&
-      !pokemon.types.has(Synergy.FLYING)
+      !pokemon.types.has(Synergy.ROCK)
     ) {
       pokemon.handleDamage({
         damage: 10,

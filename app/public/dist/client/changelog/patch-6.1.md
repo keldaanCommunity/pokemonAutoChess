@@ -6,6 +6,8 @@
 
 # Changes to Synergies
 
+- Stealth Rock and Stone axe board effect now also damage Flying Pokémon
+
 # Changes to Items
 
 # Gameplay
