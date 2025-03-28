@@ -929,7 +929,9 @@ export enum Pkm {
   ALCREMIE_SALTED = "ALCREMIE_SALTED",
   ALCREMIE_RUBY_SWIRL = "ALCREMIE_RUBY_SWIRL",
   ALCREMIE_CARAMEL_SWIRL = "ALCREMIE_CARAMEL_SWIRL",
-  ALCREMIE_RAINBOW_SWIRL = "ALCREMIE_RAINBOW_SWIRL"
+  ALCREMIE_RAINBOW_SWIRL = "ALCREMIE_RAINBOW_SWIRL",
+  DURALUDON = "DURALUDON",
+  ARCHALUDON = "ARCHALUDON"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1959,7 +1961,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ARCTOZOLT]: "0881",
   [Pkm.DRACOVISH]: "0882",
   [Pkm.ARCTOVISH]: "0883",
-  //[Pkm.DURALUDON]: "0884",
+  [Pkm.DURALUDON]: "0884",
   [Pkm.DREEPY]: "0885",
   [Pkm.DRAKLOAK]: "0886",
   [Pkm.DRAGAPULT]: "0887",
@@ -2097,6 +2099,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.OGERPON_WELLSPRING_MASK]: "1017-0005",
   [Pkm.OGERPON_HEARTHFLAME_MASK]: "1017-0006",
   [Pkm.OGERPON_CORNERSTONE_MASK]: "1017-0007",
+  [Pkm.ARCHALUDON]: "1018",
   [Pkm.HYDRAPPLE]: "1019",
   [Pkm.PECHARUNT]: "1025"
 }
@@ -3034,7 +3037,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ALCREMIE_CARAMEL_SWIRL]: Pkm.MILCERY,
   [Pkm.ALCREMIE_RAINBOW_SWIRL]: Pkm.MILCERY,
   [Pkm.PECHARUNT]: Pkm.PECHARUNT,
-  [Pkm.VELUZA]: Pkm.VELUZA
+  [Pkm.VELUZA]: Pkm.VELUZA,
+  [Pkm.DURALUDON]: Pkm.DURALUDON,
+  [Pkm.ARCHALUDON]: Pkm.DURALUDON
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7882,5 +7887,15 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot
+  },
+  [Pkm.DURALUDON]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.ARCHALUDON]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
   }
 }

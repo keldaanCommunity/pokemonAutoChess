@@ -288,7 +288,8 @@ export const UniquePool = new Array<PkmProposition>(
   Pkm.DRAMPA,
   Pkm.APPLIN,
   Pkm.MILCERY,
-  Pkm.VELUZA
+  Pkm.VELUZA,
+  Pkm.DURALUDON
 )
 
 export const LegendaryPool = new Array<PkmProposition>(
