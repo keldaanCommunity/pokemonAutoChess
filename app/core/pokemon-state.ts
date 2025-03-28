@@ -80,7 +80,8 @@ export default abstract class PokemonState {
       }
 
       if (pokemon.effects.has(Effect.CHARGE)) {
-        additionalSpecialDamagePart += 1 * pokemon.count.ult
+        additionalSpecialDamagePart += 1 * pokemon.count.ult *
+          (1 + pokemon.ap/100)
       }
 
       let isAttackSuccessful = true
