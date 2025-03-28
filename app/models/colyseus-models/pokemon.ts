@@ -7549,7 +7549,6 @@ export class Gliscor extends Pokemon {
   range = 1
   skill = Ability.POISON_JAB
   passive = Passive.POISON_HEAL
-  additional = true
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -17485,7 +17484,10 @@ export class Milcery extends Pokemon {
     Pkm.ALCREMIE_CARAMEL_SWIRL,
     Pkm.ALCREMIE_RAINBOW_SWIRL
   ]
-  evolutionRule = new ItemEvolutionRule([...Flavors], (pokemon, player, item: Item) => alcremieByFlavor[item])
+  evolutionRule = new ItemEvolutionRule(
+    [...Flavors],
+    (pokemon, player, item: Item) => alcremieByFlavor[item]
+  )
   hp = 130
   atk = 10
   speed = 36
@@ -17499,7 +17501,9 @@ export class Milcery extends Pokemon {
 }
 
 function alcremieOnAcquired(this: IPokemonEntity, player: Player) {
-  const flavor = Object.keys(alcremieByFlavor).find((flavor) => alcremieByFlavor[flavor] === this.name) as Item
+  const flavor = Object.keys(alcremieByFlavor).find(
+    (flavor) => alcremieByFlavor[flavor] === this.name
+  ) as Item
   removeInArray(player.items, flavor)
   this.items.delete(flavor)
 }
@@ -17729,6 +17733,43 @@ export class Veluza extends Pokemon {
   range = 1
   skill = Ability.FILLET_AWAY
   attackSprite = AttackSprite.WATER_MELEE
+}
+
+export class Duraludon extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.STEEL])
+  rarity = Rarity.UNIQUE
+  stars = 2
+  evolution = Pkm.ARCHALUDON
+  evolutionRule = new ItemEvolutionRule(ArtificialItems)
+  hp = 180
+  atk = 18
+  speed = 52
+  def = 3
+  speDef = 3
+  maxPP = 110
+  range = 2
+  skill = Ability.ELECTRO_SHOT
+  passive = Passive.DURALUDON
+  attackSprite = AttackSprite.STEEL_RANGE
+}
+
+export class Archaludon extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.STEEL,
+    Synergy.ELECTRIC
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 190
+  atk = 20
+  speed = 52
+  def = 5
+  speDef = 5
+  maxPP = 110
+  range = 2
+  skill = Ability.ELECTRO_SHOT
+  attackSprite = AttackSprite.STEEL_RANGE
 }
 
 export const PokemonClasses: Record<
@@ -18666,7 +18707,9 @@ export const PokemonClasses: Record<
   [Pkm.ALCREMIE_CARAMEL_SWIRL]: AlcremieCaramelSwirl,
   [Pkm.ALCREMIE_RAINBOW_SWIRL]: AlcremieRainbowSwirl,
   [Pkm.PECHARUNT]: Pecharunt,
-  [Pkm.VELUZA]: Veluza
+  [Pkm.VELUZA]: Veluza,
+  [Pkm.DURALUDON]: Duraludon,
+  [Pkm.ARCHALUDON]: Archaludon
 }
 
 // declare all the classes in colyseus schema TypeRegistry

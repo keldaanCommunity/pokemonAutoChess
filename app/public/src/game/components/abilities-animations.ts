@@ -2968,8 +2968,59 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
-    case Ability.MAGNET_BOMB:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+    case Ability.MAGNET_BOMB: {
+      const bomb = addAbilitySprite(skill, coordinates, true).setScale(2)
+      scene.tweens.add({
+        targets: bomb,
+        duration: 400,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        onComplete: () => {
+          bomb.destroy()
+        }
+      })
+      break
+    }
+
+    case "ELECTRO_SHOT_CHARGE": {
+      const charge = addAbilitySprite(
+        Ability.MAGNET_BOMB,
+        coordinates
+      ).setScale(2)
+      scene.tweens.add({
+        targets: charge,
+        duration: 2000,
+        x: coordinates[0],
+        y: coordinates[1],
+        onComplete: () => {
+          charge.destroy()
+        }
+      })
+      break
+    }
+
+    case Ability.ELECTRO_SHOT:
+      {
+        const shot = addAbilitySprite(skill, coordinates)
+          .setScale(4)
+          .setOrigin(0, 0.5)
+          .setRotation(
+            Math.atan2(
+              coordinatesTarget[1] - coordinates[1],
+              coordinatesTarget[0] - coordinates[0]
+            )
+          )
+
+        scene.tweens.add({
+          targets: shot,
+          duration: 1000,
+          x: coordinates[0],
+          y: coordinates[1],
+          onComplete: () => {
+            shot.destroy()
+          }
+        })
+      }
       break
 
     case Ability.GUNK_SHOT: {

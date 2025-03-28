@@ -12078,6 +12078,54 @@ export class FilletAwayStrategy extends AbilityStrategy {
   }
 }
 
+export class ElectroShotStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+
+    if (pokemon.simulation.weather !== Weather.STORM) {
+      pokemon.status.triggerLocked(2000, pokemon)
+      broadcastAbility(pokemon, {
+        skill: "ELECTRO_SHOT_CHARGE",
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY
+      })
+    }
+
+    pokemon.commands.push(
+      new DelayedCommand(
+        () => {
+          const damage = [90, 100][pokemon.stars - 1] ?? 90
+          const apBoost = 40
+          pokemon.addAbilityPower(apBoost, pokemon, 0, crit)
+          broadcastAbility(pokemon, {
+            skill: Ability.ELECTRO_SHOT,
+            targetX: target.positionX,
+            targetY: target.positionY
+          })
+          effectInLine(board, pokemon, target, (cell) => {
+            if (cell.value != null && cell.value.team !== pokemon.team) {
+              cell.value.handleSpecialDamage(
+                damage,
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                crit
+              )
+            }
+          })
+        },
+        pokemon.simulation.weather === Weather.STORM ? 0 : 2000
+      )
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -12517,5 +12565,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.RAZOR_LEAF]: new RazorLeafStrategy(),
   [Ability.MUD_SHOT]: new MudShotStrategy(),
   [Ability.MALIGNANT_CHAIN]: new MalignantChainStrategy(),
-  [Ability.FILLET_AWAY]: new FilletAwayStrategy()
+  [Ability.FILLET_AWAY]: new FilletAwayStrategy(),
+  [Ability.ELECTRO_SHOT]: new ElectroShotStrategy()
 }

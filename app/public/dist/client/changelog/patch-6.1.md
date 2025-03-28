@@ -1,5 +1,8 @@
 # New Pokemons:
 
+- Duraludon
+- Archaludon
+
 # Changes to Pokemon & Abilities
 
 - Alcremie now consumes its flavor when evolving
