@@ -12089,7 +12089,7 @@ export class ElectroShotStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit, true)
 
     if (pokemon.simulation.weather !== Weather.STORM) {
-      pokemon.status.triggerLocked(2000, pokemon)
+      pokemon.cooldown = 2000
       broadcastAbility(pokemon, {
         skill: "ELECTRO_SHOT_CHARGE",
         positionX: pokemon.positionX,
@@ -12100,7 +12100,7 @@ export class ElectroShotStrategy extends AbilityStrategy {
     pokemon.commands.push(
       new DelayedCommand(
         () => {
-          const damage = [90, 100][pokemon.stars - 1] ?? 90
+          const damage = [80, 90, 100][pokemon.stars - 1] ?? 80
           const apBoost = 40
           pokemon.addAbilityPower(apBoost, pokemon, 0, crit)
           broadcastAbility(pokemon, {
