@@ -17744,8 +17744,8 @@ export class Duraludon extends Pokemon {
   hp = 180
   atk = 18
   speed = 52
-  def = 3
-  speDef = 3
+  def = 6
+  speDef = 6
   maxPP = 110
   range = 2
   skill = Ability.ELECTRO_SHOT
@@ -17764,8 +17764,8 @@ export class Archaludon extends Pokemon {
   hp = 190
   atk = 20
   speed = 52
-  def = 5
-  speDef = 5
+  def = 10
+  speDef = 10
   maxPP = 110
   range = 2
   skill = Ability.ELECTRO_SHOT
