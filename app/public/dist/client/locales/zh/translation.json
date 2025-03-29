@@ -457,7 +457,8 @@
     "RAZOR_LEAF": "飞叶快刀",
     "MUD_SHOT": "泥巴射击",
     "MALIGNANT_CHAIN": "邪毒锁链",
-    "FILLET_AWAY": "甩肉"
+    "FILLET_AWAY": "甩肉",
+    "ELECTRO_SHOT": "电光束"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1388,7 +1389,9 @@
     "ALCREMIE_CARAMEL_SWIRL": "霜奶仙（焦糖综合）",
     "ALCREMIE_RAINBOW_SWIRL": "霜奶仙（三色综合）",
     "PECHARUNT": "桃歹郎",
-    "VELUZA": "轻身鳕"
+    "VELUZA": "轻身鳕",
+    "DURALUDON": "铝钢龙",
+    "ARCHALUDON": "铝钢桥龙"
   },
   "ability_description": {
     "SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1826,7 +1829,8 @@
     "RAZOR_LEAF": "飞出叶片攻击目标身后的一条直线，对所有击中的敌方宝可梦造成[20,40,80,SP]点SPECIAL。该招式可以暴击。",
     "MUD_SHOT": "向目标投掷泥块，造成[25,50,75,SP]点SPECIAL，并降低其[10,20,30,SP]点SPEED。",
     "MALIGNANT_CHAIN": "伸出用由毒形成的锁链缠住对手，使其陷入LOCKED和3层POISONNED [3,SP]秒。",
-    "FILLET_AWAY": "损失当前HP的50%，提升[10,SP]点ATK和[20,SP]点SPEED。"
+    "FILLET_AWAY": "损失当前HP的50%，提升[10,SP]点ATK和[20,SP]点SPEED。",
+    "ELECTRO_SHOT": "收集电力2秒，随后提升40点AP并将高压的电力发射出去，对一条直线上的目标造成[80,90,100,SP]点SPECIAL。在STORM中能立即发射。"
   },
   "effect": {
     "INGRAIN": "扎根",
@@ -2570,7 +2574,8 @@
     "SALTED_CREAM": "释放招式时，SALTED_FLAVOR为最近的我方宝可梦恢复[40,SP]点HP，并提升[15,SP]点DEF。",
     "RUBY_SWIRL_CREAM": "释放招式时，RUBY_SWIRL_FLAVOR为最近的我方宝可梦提升[8,SP]点ATK。",
     "CARAMEL_SWIRL_CREAM": "释放招式时，CARAMEL_SWIRL_FLAVOR为最近的我方宝可梦提升[80,SP]%的CRIT_POWER。",
-    "RAINBOW_SWIRL_CREAM": "释放招式时，RAINBOW_SWIRL_FLAVOR为最近的我方宝可梦提升[60,SP]点AP。"
+    "RAINBOW_SWIRL_CREAM": "释放招式时，RAINBOW_SWIRL_FLAVOR为最近的我方宝可梦提升[60,SP]点AP。",
+    "DURALUDON": "铝钢龙似乎需要一件ARTIFICIAL道具……"
   },
   "stat": {
     "ATK": "攻击",
@@ -2785,6 +2790,7 @@
     "ALCHEMIST": "炼金术士",
     "BERSERKER": "狂战士",
     "BLOB": "一团之物",
+    "CHEF": "大厨",
     "DENTIST": "牙医",
     "FISHERMAN": "渔夫",
     "SIREN": "塞壬",
@@ -2838,6 +2844,7 @@
     "ALCHEMIST": "在一局游戏中，将人造共鸣提升到最大等级。",
     "BERSERKER": "在一局游戏中，将野性共鸣提升到最大等级。",
     "BLOB": "在一局游戏中，将不定形共鸣提升到最大等级。",
+    "CHEF": "在一局游戏中，将美食家共鸣提升到最大等级。",
     "HARLEQUIN": "在同一时间激活5个不同的共鸣。",
     "TACTICIAN": "在同一时间激活10个不同的共鸣。",
     "STRATEGIST": "在同一时间激活15个不同的共鸣。",
@@ -3163,6 +3170,7 @@
   "show_details_on_hover": "鼠标悬停时即显示细节，不必右键",
   "show_damage_numbers": "显示伤害数字",
   "disable_animated_tilemap": "禁用背景动画",
+  "antialiasing": "启用抗锯齿",
   "save": "保存",
   "reset": "重置",
   "snapshot": "快照",
@@ -3193,6 +3201,7 @@
   "pokemons_on_your_board": "只宝可梦。",
   "team_size_hint": "升级以增加出战队伍容量",
   "game_history": "游戏记录",
+  "chat_history": "聊天记录",
   "load_more": "加载更多",
   "no_history_found": "未发现记录",
   "top": "名次：",
@@ -3215,6 +3224,8 @@
   "banned": "已封禁",
   "ban_user": "封禁用户",
   "unban_user": "解禁用户",
+  "see_game_history": "查看游戏记录",
+  "see_chat_history": "查看聊天记录",
   "set_moderator": "设置为管理员",
   "set_bot_manager": "设置为机器人管理员",
   "give_title": "授予头衔",
@@ -3241,8 +3252,9 @@
   "popular_items": "常见携带道具",
   "components": "组件",
   "craftable_items": "可合成",
+  "food": "食品",
   "berries": "树果",
-  "dishes": "食物",
+  "dishes": "料理",
   "signature_dish": "专属料理",
   "artificial_items": "人造道具",
   "weather_rocks": "天气岩石",
@@ -3353,9 +3365,11 @@
   "search_player": "搜索玩家名……",
   "team_builder": "队伍设计器",
   "titles_unlocked": "个头衔已解锁",
+  "avatars_unlocked": "{{nbUnlocked}}/{{nbTotal}} 头像已解锁",
   "overlaps": "共鸣重叠",
   "game-reconnect-modal-title": "重新连接",
   "game-reconnect-modal-body": "你离开了一个仍在进行中的游戏。是否要重新连接至那场游戏？",
+  "game-surrender-modal-title": "投降",
   "game-surrender-modal-body": "游戏尚未结束。确定要现在投降吗？",
   "toggle_locked": "显示已锁定",
   "creator": "创建者",
@@ -3392,6 +3406,7 @@
   },
   "level_required": "等级需求",
   "map": {
+    "town": "宝藏镇",
     "random": "随机战场",
     "AmpPlains": "电气平原",
     "AppleWoods": "苹果森林",
@@ -3561,6 +3576,8 @@
     "MASTER_BALL": "大师球",
     "BEAST_BALL": "究极球"
   },
+  "room_is_private": "此房间为私人房间，请输入密码：",
+  "wrong_password": "密码错误！",
   "game_full": "本房间已满员",
   "game_already_started": "游戏已经开始",
   "min_rank_not_reached": "你的段位过低，无法参与这场排位赛",
@@ -3664,6 +3681,7 @@
     "USER_RANK_TOO_LOW": "你的段位过低，无法加入此大厅。",
     "USER_NOT_AUTHENTICATED": "请重新验证。",
     "USER_TIMEOUT": "你最近离开过一场尚未结束的游戏，因此需要等待5分钟才能加入另一游戏。",
+    "USER_IN_ANOTHER_GAME": "你已经加入了另一场游戏。请返回大厅并重新连接。",
     "ROOM_FULL": "这个房间已经满员。",
     "ROOM_EMPTY": "这个房间缺少玩家，已被自动移除。",
     "ROOM_DELETED": "这个房间已被删除。",
