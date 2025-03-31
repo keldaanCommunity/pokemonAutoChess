@@ -12126,6 +12126,47 @@ export class ElectroShotStrategy extends AbilityStrategy {
   }
 }
 
+export class FlowerTrickStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [15, 45, 95][pokemon.stars - 1] ?? 15
+    const startingCritCount = target.count.crit
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        const currentCritCount = target.count.crit
+        const numberOfCrits = currentCritCount - startingCritCount
+        const cells = board.getAdjacentCells(
+          target.positionX,
+          target.positionY,
+          true
+        )
+        for (const cell of cells) {
+          if (cell.value && cell.value.team !== pokemon.team) {
+            broadcastAbility(cell.value, {
+              skill: "FLOWER_TRICK_EXPLOSION",
+              positionX: cell.value.positionX,
+              positionY: cell.value.positionY
+            })
+            cell.value.handleSpecialDamage(
+              damage + 5 * numberOfCrits,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+        }
+      }, 3000)
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -12566,5 +12607,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MUD_SHOT]: new MudShotStrategy(),
   [Ability.MALIGNANT_CHAIN]: new MalignantChainStrategy(),
   [Ability.FILLET_AWAY]: new FilletAwayStrategy(),
-  [Ability.ELECTRO_SHOT]: new ElectroShotStrategy()
+  [Ability.ELECTRO_SHOT]: new ElectroShotStrategy(),
+  [Ability.FLOWER_TRICK]: new FlowerTrickStrategy()
 }

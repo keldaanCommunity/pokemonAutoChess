@@ -931,7 +931,10 @@ export enum Pkm {
   ALCREMIE_CARAMEL_SWIRL = "ALCREMIE_CARAMEL_SWIRL",
   ALCREMIE_RAINBOW_SWIRL = "ALCREMIE_RAINBOW_SWIRL",
   DURALUDON = "DURALUDON",
-  ARCHALUDON = "ARCHALUDON"
+  ARCHALUDON = "ARCHALUDON",
+  SPRIGATITO = "SPRIGATITO",
+  FLORAGATO = "FLORAGATO",
+  MEOWSCARADA = "MEOWSCARADA"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1993,9 +1996,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
 
   // Gen 9
 
-  //[Pkm.SPRIGATITO]: "0906",
-  //[Pkm.FLORAGATO]: "0907",
-  //[Pkm.MEOWSCARADA]: "0908",
+  [Pkm.SPRIGATITO]: "0906",
+  [Pkm.FLORAGATO]: "0907",
+  [Pkm.MEOWSCARADA]: "0908",
   [Pkm.FUECOCO]: "0909",
   [Pkm.CROCALOR]: "0910",
   [Pkm.SKELEDIRGE]: "0911",
@@ -3039,7 +3042,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.PECHARUNT]: Pkm.PECHARUNT,
   [Pkm.VELUZA]: Pkm.VELUZA,
   [Pkm.DURALUDON]: Pkm.DURALUDON,
-  [Pkm.ARCHALUDON]: Pkm.DURALUDON
+  [Pkm.ARCHALUDON]: Pkm.DURALUDON,
+  [Pkm.SPRIGATITO]: Pkm.SPRIGATITO,
+  [Pkm.FLORAGATO]: Pkm.SPRIGATITO,
+  [Pkm.MEOWSCARADA]: Pkm.SPRIGATITO
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7895,6 +7901,21 @@ export const AnimationConfig: {
   },
   [Pkm.ARCHALUDON]: {
     attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.SPRIGATITO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Appeal
+  },
+  [Pkm.FLORAGATO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge
+  },
+  [Pkm.MEOWSCARADA]: {
+    attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
   }

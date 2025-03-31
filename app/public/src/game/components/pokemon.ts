@@ -1,5 +1,5 @@
 import { SetSchema } from "@colyseus/schema"
-import Phaser, { GameObjects } from "phaser"
+import Phaser, { GameObjects, Geom } from "phaser"
 import type MoveTo from "phaser3-rex-plugins/plugins/moveto"
 import type MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import PokemonFactory from "../../../../models/pokemon-factory"
@@ -1215,6 +1215,44 @@ export default class PokemonSprite extends DraggableObject {
 
   removeRageEffect() {
     this.sprite.clearTint()
+  }
+
+  addFlowerTrick() {
+    const flowerTrick = this.scene.add.container()
+
+    for (let i = 0; i < 5; i++) {
+      const flowerSprite = this.scene.add
+        .sprite(0, 0, "abilities", `${Ability.FLOWER_TRICK}/000.png`)
+        .setScale(2)
+      flowerSprite.anims.play({
+        key: Ability.FLOWER_TRICK,
+        frameRate: 7,
+        repeat: -1
+      })
+      flowerTrick.add(flowerSprite)
+    }
+    const circle = new Geom.Circle(0, 0, 48)
+    Phaser.Actions.PlaceOnCircle(flowerTrick.getAll(), circle)
+
+    this.add(flowerTrick)
+
+    this.scene.tweens.add({
+      targets: circle,
+      radius: 50,
+      ease: Phaser.Math.Easing.Quartic.Out,
+      duration: 3000,
+      onUpdate: function (tween) {
+        Phaser.Actions.RotateAroundDistance(
+          flowerTrick.getAll(),
+          { x: 0, y: 0 },
+          0.08,
+          circle.radius
+        )
+      },
+      onComplete: function () {
+        flowerTrick.destroy(true)
+      }
+    })
   }
 }
 
