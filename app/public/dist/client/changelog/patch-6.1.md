@@ -2,6 +2,9 @@
 
 - Duraludon
 - Archaludon
+- Sprigatito
+- Floragato
+- Mewoscarada
 
 # Changes to Pokemon & Abilities
 

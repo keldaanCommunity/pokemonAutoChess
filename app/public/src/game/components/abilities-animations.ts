@@ -24,6 +24,7 @@ import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
 import { UNOWNS_PER_ABILITY } from "./unown-manager"
 import { DEPTH } from "../depths"
+import { BrickBreakStrategy } from "../../../../core/abilities/abilities"
 
 export function displayAbility(
   scene: GameScene | DebugScene,
@@ -3020,6 +3021,19 @@ export function displayAbility(
             shot.destroy()
           }
         })
+      }
+      break
+
+    case "FLOWER_TRICK_EXPLOSION":
+      addAbilitySprite("PUFF_PINK", coordinates, true).setScale(3)
+      break
+
+    case Ability.FLOWER_TRICK:
+      {
+        const target = pokemonsOnBoard.find(
+          (pkmUI) => pkmUI.positionX === targetX && pkmUI.positionY === targetY
+        )
+        target?.addFlowerTrick()
       }
       break
 

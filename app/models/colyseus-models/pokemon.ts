@@ -5025,6 +5025,56 @@ export class Shiftry extends Pokemon {
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
+export class Sprigatito extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIELD, Synergy.DARK])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.FLORAGATO
+  hp = 55
+  atk = 5
+  speed = 63
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 2
+  skill = Ability.FLOWER_TRICK
+  attackSprite = AttackSprite.GRASS_RANGE
+  regional = true
+}
+
+export class Floragato extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIELD, Synergy.DARK])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.MEOWSCARADA
+  hp = 105
+  atk = 8
+  speed = 63
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.FLOWER_TRICK
+  attackSprite = AttackSprite.GRASS_RANGE
+  regional = true
+}
+
+export class Meowscarada extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIELD, Synergy.DARK])
+  rarity = Rarity.COMMON
+  stars = 3
+  hp = 180
+  atk = 19
+  speed = 63
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 2
+  skill = Ability.FLOWER_TRICK
+  attackSprite = AttackSprite.GRASS_RANGE
+  regional = true
+}
+
 export class Charmander extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FIRE])
   rarity = Rarity.COMMON
@@ -18709,7 +18759,10 @@ export const PokemonClasses: Record<
   [Pkm.PECHARUNT]: Pecharunt,
   [Pkm.VELUZA]: Veluza,
   [Pkm.DURALUDON]: Duraludon,
-  [Pkm.ARCHALUDON]: Archaludon
+  [Pkm.ARCHALUDON]: Archaludon,
+  [Pkm.SPRIGATITO]: Sprigatito,
+  [Pkm.FLORAGATO]: Floragato,
+  [Pkm.MEOWSCARADA]: Meowscarada
 }
 
 // declare all the classes in colyseus schema TypeRegistry
