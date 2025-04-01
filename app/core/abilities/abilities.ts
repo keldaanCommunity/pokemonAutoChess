@@ -11934,25 +11934,25 @@ export class DecorateStrategy extends AbilityStrategy {
       nearestAlly.addAttack(atkBoost, pokemon, 1, crit)
       nearestAlly.addAbilityPower(apBoost, pokemon, 1, crit)
 
-      if (pokemon.items.has(Item.VANILLA_FLAVOR)) {
+      if (pokemon.name === Pkm.ALCREMIE_VANILLA) {
         nearestAlly.addShield(60, pokemon, 1, crit)
-      } else if (pokemon.items.has(Item.RUBY_FLAVOR)) {
+      } else if (pokemon.name === Pkm.ALCREMIE_RUBY) {
         nearestAlly.addSpeed(30, pokemon, 1, crit)
-      } else if (pokemon.items.has(Item.MATCHA_FLAVOR)) {
+      } else if (pokemon.name === Pkm.ALCREMIE_MATCHA) {
         nearestAlly.addMaxHP(40, pokemon, 1, crit)
-      } else if (pokemon.items.has(Item.MINT_FLAVOR)) {
+      } else if (pokemon.name === Pkm.ALCREMIE_MINT) {
         nearestAlly.handleHeal(40, pokemon, 0, crit)
         nearestAlly.addSpecialDefense(15, pokemon, 0, crit)
-      } else if (pokemon.items.has(Item.LEMON_FLAVOR)) {
+      } else if (pokemon.name === Pkm.ALCREMIE_LEMON) {
         nearestAlly.addCritChance(40, pokemon, 0, crit)
-      } else if (pokemon.items.has(Item.SALTED_FLAVOR)) {
+      } else if (pokemon.name === Pkm.ALCREMIE_SALTED) {
         nearestAlly.handleHeal(40, pokemon, 1, crit)
         nearestAlly.addDefense(15, pokemon, 0, crit)
-      } else if (pokemon.items.has(Item.RUBY_SWIRL_FLAVOR)) {
+      } else if (pokemon.name === Pkm.ALCREMIE_RUBY_SWIRL) {
         nearestAlly.addAttack(80, pokemon, 1, crit)
-      } else if (pokemon.items.has(Item.CARAMEL_SWIRL_FLAVOR)) {
+      } else if (pokemon.name === Pkm.ALCREMIE_CARAMEL_SWIRL) {
         nearestAlly.addCritPower(80, pokemon, 1, crit)
-      } else if (pokemon.items.has(Item.RAINBOW_SWIRL_FLAVOR)) {
+      } else if (pokemon.name === Pkm.ALCREMIE_RAINBOW_SWIRL) {
         nearestAlly.addAbilityPower(60, pokemon, 1, crit)
       }
     }
@@ -12135,7 +12135,7 @@ export class FlowerTrickStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [15, 45, 95][pokemon.stars - 1] ?? 15
+    const damage = [15, 40, 85][pokemon.stars - 1] ?? 15
     const startingCritCount = target.count.crit
     pokemon.commands.push(
       new DelayedCommand(() => {

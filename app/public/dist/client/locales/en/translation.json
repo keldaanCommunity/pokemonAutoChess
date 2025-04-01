@@ -1835,7 +1835,7 @@
     "MALIGNANT_CHAIN": "Extends a poisonous chain to ensnare target, inflicting LOCKED and 3 stacks of POISONNED for [3,SP] seconds.",
     "FILLET_AWAY": "Sacrifice 50% of current HP and gain [10,SP] ATK and [20,SP] SPEED",
     "ELECTRO_SHOT": "The user gathers electricity for 2 seconds, then gains 40 AP and fires a high voltage shot in a straight line, dealing [80,90,100,SP]. The shot will be fired immediately under STORM",
-    "FLOWER_TRICK": "The user throws a rigged bouquet of flowers at the target that explodes after 3 seconds, dealing [15,45,95,SP] SPECIAL to the target and adjacent enemies. Every critical hit received by the target during the duration adds [5,SP] SPECIAL to the explosion."
+    "FLOWER_TRICK": "The user throws a rigged bouquet of flowers at the target that explodes after 3 seconds, dealing [15,40,85,SP] SPECIAL to the target and adjacent enemies. Every critical hit received by the target during the duration adds [5,SP] SPECIAL to the explosion."
   },
   "effect": {
     "INGRAIN": "Ingrain",
