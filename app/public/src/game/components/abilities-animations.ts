@@ -670,6 +670,64 @@ export function displayAbility(
       break
     }
 
+    case "SOLAR_BLADE_CHARGE": {
+      const charge = scene.add
+        .sprite(
+          coordinates[0],
+          coordinates[1],
+          "abilities",
+          `${Ability.RECOVER}/000.png`
+        )
+        .setScale(3)
+        .setDepth(DEPTH.ABILITY)
+      charge.anims.play({
+        key: Ability.RECOVER,
+        duration: 500,
+        repeat: -1
+      })
+      scene.tweens.add({
+        targets: charge,
+        duration: 2000,
+        x: coordinates[0],
+        y: coordinates[1],
+        onComplete: () => {
+          charge.destroy()
+        }
+      })
+      break
+    }
+
+    case Ability.SOLAR_BLADE: {
+      const specialProjectile = addAbilitySprite(skill, coordinates)
+        .setScale(3)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) +
+            Math.PI / 2
+        )
+      const [dx, dy] = OrientationVector[orientation]
+      const finalCoordinates = transformAttackCoordinate(
+        positionX + dx * 1.5,
+        positionY + dy * 1.5,
+        flip
+      )
+
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: finalCoordinates[0],
+        y: finalCoordinates[1],
+        ease: "linear",
+        yoyo: false,
+        duration: 500,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.FROST_BREATH:
       addAbilitySprite(skill, [coordinates[0], coordinates[1] - 30], true)
         .setOrigin(-0.1, 0.5)

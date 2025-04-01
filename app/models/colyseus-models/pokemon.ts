@@ -17822,6 +17822,47 @@ export class Archaludon extends Pokemon {
   attackSprite = AttackSprite.STEEL_RANGE
 }
 
+export class Fomantis extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.LIGHT,
+    Synergy.FIGHTING
+  ])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.LURANTIS
+  hp = 70
+  atk = 8
+  speed = 47
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.SOLAR_BLADE
+  additional = true
+  attackSprite = AttackSprite.GRASS_MELEE
+}
+
+export class Lurantis extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.LIGHT,
+    Synergy.FIGHTING
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 170
+  atk = 18
+  speed = 47
+  def = 9
+  speDef = 9
+  maxPP = 100
+  range = 1
+  skill = Ability.SOLAR_BLADE
+  additional = true
+  attackSprite = AttackSprite.GRASS_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -18762,7 +18803,9 @@ export const PokemonClasses: Record<
   [Pkm.ARCHALUDON]: Archaludon,
   [Pkm.SPRIGATITO]: Sprigatito,
   [Pkm.FLORAGATO]: Floragato,
-  [Pkm.MEOWSCARADA]: Meowscarada
+  [Pkm.MEOWSCARADA]: Meowscarada,
+  [Pkm.FOMANTIS]: Fomantis,
+  [Pkm.LURANTIS]: Lurantis
 }
 
 // declare all the classes in colyseus schema TypeRegistry

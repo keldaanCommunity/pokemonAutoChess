@@ -934,7 +934,9 @@ export enum Pkm {
   ARCHALUDON = "ARCHALUDON",
   SPRIGATITO = "SPRIGATITO",
   FLORAGATO = "FLORAGATO",
-  MEOWSCARADA = "MEOWSCARADA"
+  MEOWSCARADA = "MEOWSCARADA",
+  FOMANTIS = "FOMANTIS",
+  LURANTIS = "LURANTIS"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1815,8 +1817,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.MUDSDALE]: "0750",
   [Pkm.DEWPIDER]: "0751",
   [Pkm.ARAQUANID]: "0752",
-  //[Pkm.FOMANTIS]: "0753",
-  //[Pkm.LURANTIS]: "0754",
+  [Pkm.FOMANTIS]: "0753",
+  [Pkm.LURANTIS]: "0754",
   //[Pkm.MORELULL]: "0755",
   //[Pkm.SHIINOTIC]: "0756",
   [Pkm.SALANDIT]: "0757",
@@ -3045,7 +3047,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ARCHALUDON]: Pkm.DURALUDON,
   [Pkm.SPRIGATITO]: Pkm.SPRIGATITO,
   [Pkm.FLORAGATO]: Pkm.SPRIGATITO,
-  [Pkm.MEOWSCARADA]: Pkm.SPRIGATITO
+  [Pkm.MEOWSCARADA]: Pkm.SPRIGATITO,
+  [Pkm.FOMANTIS]: Pkm.FOMANTIS,
+  [Pkm.LURANTIS]: Pkm.FOMANTIS
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7917,6 +7921,16 @@ export const AnimationConfig: {
   [Pkm.MEOWSCARADA]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.FOMANTIS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.LURANTIS]: {
+    attack: AnimationType.MultiScratch,
+    ability: AnimationType.Attack,
     emote: AnimationType.Charge
   }
 }
