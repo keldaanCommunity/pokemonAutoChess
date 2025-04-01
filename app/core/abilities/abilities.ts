@@ -12100,7 +12100,7 @@ export class ElectroShotStrategy extends AbilityStrategy {
     pokemon.commands.push(
       new DelayedCommand(
         () => {
-          const damage = [80, 90, 100][pokemon.stars - 1] ?? 80
+          const damage = [80, 90, 100][pokemon.stars - 1] ?? 100
           const apBoost = 40
           pokemon.addAbilityPower(apBoost, pokemon, 0, crit)
           broadcastAbility(pokemon, {
@@ -12135,7 +12135,7 @@ export class FlowerTrickStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [15, 40, 85][pokemon.stars - 1] ?? 15
+    const damage = [15, 40, 85][pokemon.stars - 1] ?? 85
     const startingCritCount = target.count.crit
     pokemon.commands.push(
       new DelayedCommand(() => {
@@ -12163,6 +12163,54 @@ export class FlowerTrickStrategy extends AbilityStrategy {
           }
         }
       }, 3000)
+    )
+  }
+}
+
+export class SolarBladeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+
+    if (!pokemon.status.light) {
+      pokemon.cooldown = 2000
+      broadcastAbility(pokemon, {
+        skill: "SOLAR_BLADE_CHARGE",
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY
+      })
+    }
+
+    pokemon.commands.push(
+      new DelayedCommand(
+        () => {
+          const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+          broadcastAbility(pokemon, {
+            skill: Ability.SOLAR_BLADE,
+            positionX: pokemon.positionX,
+            positionY: pokemon.positionY,
+            orientation: pokemon.orientation
+          })
+          const cells = board.getCellsInFront(pokemon, target, 1)
+          cells.forEach((cell) => {
+            if (cell.value && cell.value.team !== pokemon.team) {
+              cell.value.handleSpecialDamage(
+                damage,
+                board,
+                AttackType.TRUE,
+                pokemon,
+                crit
+              )
+            }
+          })
+        },
+        pokemon.status.light ? 0 : 2000
+      )
     )
   }
 }
@@ -12608,5 +12656,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MALIGNANT_CHAIN]: new MalignantChainStrategy(),
   [Ability.FILLET_AWAY]: new FilletAwayStrategy(),
   [Ability.ELECTRO_SHOT]: new ElectroShotStrategy(),
-  [Ability.FLOWER_TRICK]: new FlowerTrickStrategy()
+  [Ability.FLOWER_TRICK]: new FlowerTrickStrategy(),
+  [Ability.SOLAR_BLADE]: new SolarBladeStrategy()
 }

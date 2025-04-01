@@ -5,6 +5,8 @@
 - Sprigatito
 - Floragato
 - Mewoscarada
+- Fomantis
+- Lurantis
 
 # Changes to Pokemon & Abilities
 
