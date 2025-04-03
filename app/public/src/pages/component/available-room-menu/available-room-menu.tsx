@@ -57,7 +57,7 @@ export default function AvailableRoomMenu() {
         const password = prompt(t("room_is_private"))
         if (password && selectedRoom.metadata?.password != password)
           return alert(t("wrong_password"))
-        else if (password === null) return
+        else if (!password) return
       }
 
       await joinExistingPreparationRoom(selectedRoom.roomId, client, lobby, dispatch, navigate)
