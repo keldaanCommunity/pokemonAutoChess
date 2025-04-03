@@ -11949,7 +11949,7 @@ export class DecorateStrategy extends AbilityStrategy {
         nearestAlly.handleHeal(40, pokemon, 1, crit)
         nearestAlly.addDefense(15, pokemon, 0, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RUBY_SWIRL) {
-        nearestAlly.addAttack(80, pokemon, 1, crit)
+        nearestAlly.addAttack(8, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_CARAMEL_SWIRL) {
         nearestAlly.addCritPower(80, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RAINBOW_SWIRL) {
