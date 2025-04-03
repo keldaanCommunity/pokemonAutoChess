@@ -11953,7 +11953,7 @@ export class DecorateStrategy extends AbilityStrategy {
         nearestAlly.handleHeal(40, pokemon, 1, crit)
         nearestAlly.addDefense(15, pokemon, 0, crit)
       } else if (pokemon.items.has(Item.RUBY_SWIRL_FLAVOR)) {
-        nearestAlly.addAttack(80, pokemon, 1, crit)
+        nearestAlly.addAttack(8, pokemon, 1, crit)
       } else if (pokemon.items.has(Item.CARAMEL_SWIRL_FLAVOR)) {
         nearestAlly.addCritPower(80, pokemon, 1, crit)
       } else if (pokemon.items.has(Item.RAINBOW_SWIRL_FLAVOR)) {
