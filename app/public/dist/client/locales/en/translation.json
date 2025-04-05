@@ -1842,7 +1842,7 @@
     "ELECTRO_SHOT": "The user gathers electricity for 2 seconds, then gains 40 AP and fires a high voltage shot in a straight line, dealing [80,90,100,SP]. The shot will be fired immediately under STORM",
     "FLOWER_TRICK": "The user throws a rigged bouquet of flowers at the target that explodes after 3 seconds, dealing [15,40,85,SP] SPECIAL to the target and adjacent enemies. Every critical hit received by the target during the duration adds [5,SP] SPECIAL to the explosion.",
     "SOLAR_BLADE": "The user gathers light and fills a blade with its energy for 2 seconds (or instantly if the user is in the LIGHT spot), then slices up to 3 Pokémon in a cone in front of the user, dealing [30,60,120,SP] TRUE.",
-    "SCALE_SHOT": "The user throws his scales around, inflicting [40,SP] PHYSICAL and applying ARMOR_BREAK to himself and adjacent enemies for 2s. After 2 seconds, the scales remaining on the ground are thrown towards the furthest target, each inflicting [30,SP] PHYSICAL on the enemies it passes through."
+    "SCALE_SHOT": "The user sheds scales, dealing [40,SP] PHYSICAL to adjacent enemies, applying ARMOR_BREAK to itself and enemies hit for 2 seconds. After 2 seconds the scales are shot towards the farthest enemy, dealing [30,SP] PHYSICAL to all enemies in their path."
   },
   "effect": {
     "INGRAIN": "Ingrain",
