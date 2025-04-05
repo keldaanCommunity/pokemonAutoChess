@@ -670,6 +670,51 @@ export function displayAbility(
       break
     }
 
+    case "SCALE_SHOT_CHARGE": {
+      const charge = scene.add
+        .sprite(
+          coordinates[0],
+          coordinates[1],
+          "abilities",
+          `${Ability.SCALE_SHOT}/000.png`
+        )
+        .setScale(2)
+        .setDepth(DEPTH.ABILITY)
+
+      charge.anims.play({
+        key: Ability.SCALE_SHOT,
+        duration: 300,
+        repeat: -1
+      })
+
+      scene.tweens.add({
+        targets: charge,
+        duration: delay,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        onComplete: () => {
+          charge.destroy()
+        }
+      })
+      break
+    }
+
+    case Ability.SCALE_SHOT: {
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        yoyo: false,
+        duration: 400,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case "SOLAR_BLADE_CHARGE": {
       const charge = scene.add
         .sprite(

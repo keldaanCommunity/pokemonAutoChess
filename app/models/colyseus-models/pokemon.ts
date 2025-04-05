@@ -7058,6 +7058,21 @@ export class HooH extends Pokemon {
   attackSprite = AttackSprite.FIRE_RANGE
 }
 
+export class RoaringMoon extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.DARK, Synergy.FOSSIL])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 280
+  atk = 25
+  speed = 61
+  def = 9
+  speDef = 9
+  maxPP = 140
+  range = 3
+  skill = Ability.SCALE_SHOT
+  attackSprite = AttackSprite.FIRE_RANGE
+}
+
 export class Torkoal extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.GROUND])
   rarity = Rarity.UNIQUE
@@ -18805,7 +18820,8 @@ export const PokemonClasses: Record<
   [Pkm.FLORAGATO]: Floragato,
   [Pkm.MEOWSCARADA]: Meowscarada,
   [Pkm.FOMANTIS]: Fomantis,
-  [Pkm.LURANTIS]: Lurantis
+  [Pkm.LURANTIS]: Lurantis,
+  [Pkm.ROARING_MOON]: RoaringMoon
 }
 
 // declare all the classes in colyseus schema TypeRegistry

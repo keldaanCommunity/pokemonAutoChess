@@ -936,7 +936,8 @@ export enum Pkm {
   FLORAGATO = "FLORAGATO",
   MEOWSCARADA = "MEOWSCARADA",
   FOMANTIS = "FOMANTIS",
-  LURANTIS = "LURANTIS"
+  LURANTIS = "LURANTIS",
+  ROARING_MOON = "ROARING_MOON"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -945,7 +946,6 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SUBSTITUTE]: "0000-0001",
 
   // Gen 1
-
   [Pkm.BULBASAUR]: "0001",
   [Pkm.IVYSAUR]: "0002",
   [Pkm.VENUSAUR]: "0003",
@@ -1417,7 +1417,6 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.DEOXYS_SPEED]: "0386-0003",
 
   // Gen 4
-
   [Pkm.TURTWIG]: "0387",
   [Pkm.GROTLE]: "0388",
   [Pkm.TORTERRA]: "0389",
@@ -1539,7 +1538,6 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ARCEUS]: "0493",
 
   // Gen 5
-
   [Pkm.VICTINI]: "0494",
   [Pkm.SNIVY]: "0495",
   [Pkm.SERVINE]: "0496",
@@ -1704,7 +1702,6 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GENESECT]: "0649",
 
   // Gen 6
-
   //[Pkm.CHESTPIN]: "0650",
   //[Pkm.QUILLADIN]: "0651",
   //[Pkm.CHESNAUGHT]: "0652",
@@ -1882,7 +1879,6 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MELMETAL]: "0809",
 
   // Gen 8
-
   //[Pkm.GROOKEY]: "0810",
   //[Pkm.THWACKEY]: "0811",
   //[Pkm.RILLABOOM]: "0812",
@@ -1997,7 +1993,6 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ENAMORUS]: "0905",
 
   // Gen 9
-
   [Pkm.SPRIGATITO]: "0906",
   [Pkm.FLORAGATO]: "0907",
   [Pkm.MEOWSCARADA]: "0908",
@@ -2095,6 +2090,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.BAXCALIBUR]: "0998",
   [Pkm.GIMMIGHOUL]: "0999-0001",
   [Pkm.GHOLDENGO]: "1000",
+  [Pkm.ROARING_MOON]: "1005",
   [Pkm.DIPPLIN]: "1011",
   [Pkm.OGERPON_TEAL]: "1017",
   [Pkm.OGERPON_WELLSPRING]: "1017-0001",
@@ -3049,7 +3045,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.FLORAGATO]: Pkm.SPRIGATITO,
   [Pkm.MEOWSCARADA]: Pkm.SPRIGATITO,
   [Pkm.FOMANTIS]: Pkm.FOMANTIS,
-  [Pkm.LURANTIS]: Pkm.FOMANTIS
+  [Pkm.LURANTIS]: Pkm.FOMANTIS,
+  [Pkm.ROARING_MOON]: Pkm.ROARING_MOON
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7932,5 +7929,11 @@ export const AnimationConfig: {
     attack: AnimationType.MultiScratch,
     ability: AnimationType.Attack,
     emote: AnimationType.Charge
+  },
+  [Pkm.ROARING_MOON]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.RearUp,
+    emote: AnimationType.RearUp,
+    shinyUnavailable: true
   }
 }

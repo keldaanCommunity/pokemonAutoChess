@@ -410,6 +410,7 @@ export default function Game() {
       })
 
       room.onMessage(Transfer.ABILITY, (message) => {
+        console.log(message)
         gameContainer.handleDisplayAbility(message)
       })
 

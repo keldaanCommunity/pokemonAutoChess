@@ -7,6 +7,7 @@
 - Mewoscarada
 - Fomantis
 - Lurantis
+- Roaring Moon
 
 # Changes to Pokemon & Abilities
 
