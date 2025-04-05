@@ -12215,6 +12215,90 @@ export class SolarBladeStrategy extends AbilityStrategy {
   }
 }
 
+export class ScaleShotStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    pokemon.status.triggerArmorReduction(2000, pokemon)
+    const scalePositions = new Array<{ x: number; y: number; delay: number }>()
+
+    const adjacentCells = board.getAdjacentCells(
+      pokemon.positionX,
+      pokemon.positionY,
+      false
+    )
+
+    let inc = 0
+    for (const cell of adjacentCells) {
+      const x = cell.x
+      const y = cell.y
+      const delay = 2000 + inc
+      scalePositions.push({
+        x,
+        y,
+        delay
+      })
+      inc += 100
+      broadcastAbility(pokemon, {
+        skill: "SCALE_SHOT_CHARGE",
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: x,
+        targetY: y,
+        delay: delay
+      })
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.status.triggerArmorReduction(2000, cell.value)
+        cell.value.handleSpecialDamage(
+          40,
+          board,
+          AttackType.PHYSICAL,
+          pokemon,
+          crit
+        )
+      }
+    }
+
+    for (const { x, y, delay } of scalePositions) {
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          const farthestTarget = state.getFarthestTarget(pokemon, board)
+          if (farthestTarget) {
+            broadcastAbility(pokemon, {
+              positionX: x,
+              positionY: y,
+              targetX: farthestTarget.positionX,
+              targetY: farthestTarget.positionY
+            })
+            const cellsBetween = board.getCellsBetween(
+              x,
+              y,
+              farthestTarget.positionX,
+              farthestTarget.positionY
+            )
+            for (const cell of cellsBetween) {
+              if (cell.value && cell.value.team !== pokemon.team) {
+                cell.value.handleSpecialDamage(
+                  30,
+                  board,
+                  AttackType.PHYSICAL,
+                  pokemon,
+                  crit
+                )
+              }
+            }
+          }
+        }, delay)
+      )
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -12657,5 +12741,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FILLET_AWAY]: new FilletAwayStrategy(),
   [Ability.ELECTRO_SHOT]: new ElectroShotStrategy(),
   [Ability.FLOWER_TRICK]: new FlowerTrickStrategy(),
-  [Ability.SOLAR_BLADE]: new SolarBladeStrategy()
+  [Ability.SOLAR_BLADE]: new SolarBladeStrategy(),
+  [Ability.SCALE_SHOT]: new ScaleShotStrategy()
 }
