@@ -10353,53 +10353,54 @@ export class Serperior extends Pokemon {
 
 export class Starly extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLYING])
-  rarity = Rarity.HATCH
+  rarity = Rarity.COMMON
   stars = 1
   evolution = Pkm.STARAVIA
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
-  hp = 75
-  atk = 8
+  hp = 65
+  atk = 5
   speed = 57
-  def = 6
-  speDef = 6
-  maxPP = 80
+  def = 3
+  speDef = 3
+  maxPP = 100
   range = 1
   skill = Ability.BRAVE_BIRD
-  passive = Passive.HATCH
   attackSprite = AttackSprite.FLYING_MELEE
+  regional = true
 }
 
 export class Staravia extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLYING])
-  rarity = Rarity.HATCH
+  rarity = Rarity.COMMON
   stars = 2
   evolution = Pkm.STARAPTOR
   evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
-  hp = 130
-  atk = 16
+  hp = 120
+  atk = 9
   speed = 57
-  def = 10
-  speDef = 10
-  maxPP = 80
+  def = 5
+  speDef = 5
+  maxPP = 100
   range = 1
   skill = Ability.BRAVE_BIRD
-  passive = Passive.HATCH
   attackSprite = AttackSprite.FLYING_MELEE
+  regional = true
 }
 
 export class Staraptor extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLYING])
-  rarity = Rarity.HATCH
+  rarity = Rarity.COMMON
   stars = 3
   hp = 200
-  atk = 25
+  atk = 19
   speed = 57
-  def = 14
-  speDef = 14
-  maxPP = 80
+  def = 7
+  speDef = 7
+  maxPP = 100
   range = 1
   skill = Ability.BRAVE_BIRD
   attackSprite = AttackSprite.FLYING_MELEE
+  regional = true
 }
 
 export class Scorbunny extends Pokemon {
