@@ -77,7 +77,11 @@ if (process.env.NODE_APP_INSTANCE) {
           ? p1.roomCount - p2.roomCount
           : p1.ccu - p2.ccu
       )
-      return stats[0].processId
+      if (stats.length === 0) {
+        return undefined // no process available, will trigger a ServerError
+      } else {
+        return stats[0]?.processId
+      }
     }
   }
 }
