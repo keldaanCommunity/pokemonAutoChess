@@ -255,7 +255,7 @@ export default class Shop {
     )
   }
 
-  releasePokemon(pkm: Pkm, player: Player) {
+  releasePokemon(pkm: Pkm, player: Player, state: GameState) {
     const { stars, rarity, regional } = getPokemonData(pkm)
     const baseEvolution = PokemonFactory.getPokemonBaseEvolution(pkm)
     let entityNumber = stars >= 3 ? 9 : stars === 2 ? 3 : 1
@@ -266,9 +266,17 @@ export default class Shop {
       entityNumber = Math.ceil(entityNumber / 2)
     }
 
+    if (
+      regional &&
+      new PokemonClasses[pkm]().isInRegion(player.map, state) === false
+    ) {
+      return // regional pokemons sold in a region other than their original region are not added back to the pool
+    }
+
     const pool = regional
       ? this.getRegionalPool(rarity, player)
       : this.getPool(rarity)
+
     if (pool) {
       for (let n = 0; n < entityNumber; n++) {
         pool.push(baseEvolution)
@@ -286,7 +294,7 @@ export default class Shop {
   }
 
   assignShop(player: Player, manualRefresh: boolean, state: GameState) {
-    player.shop.forEach((pkm) => this.releasePokemon(pkm, player))
+    player.shop.forEach((pkm) => this.releasePokemon(pkm, player, state))
 
     if (
       player.effects.has(Effect.EERIE_SPELL) &&
