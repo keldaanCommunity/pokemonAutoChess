@@ -4,7 +4,7 @@
 - Archaludon
 - Sprigatito
 - Floragato
-- Mewoscarada
+- Meowscarada
 - Fomantis
 - Lurantis
 - Roaring Moon
