@@ -17,6 +17,7 @@ import { initializeMetrics } from "./metrics"
 import { initCronJobs } from "./services/cronjobs"
 import { fetchLeaderboards } from "./services/leaderboard"
 import { fetchMetaReports } from "./services/meta"
+import { fetchBots } from "./services/bots"
 
 /*
 Changed buffer size to 512kb to avoid warnings from colyseus. We need to scale down the amount of data we're sending so it gets sent in multiple packets or increase the buffer size even more.
@@ -25,11 +26,6 @@ I think the buffer size is a bit of a sanity check, the only time I've really se
 Encoder.BUFFER_SIZE = 512 * 1024
 
 async function main() {
-  fetchLeaderboards()
-  setInterval(() => fetchLeaderboards(), 1000 * 60 * 10) // refresh every 10 minutes
-  fetchMetaReports()
-  setInterval(() => fetchMetaReports(), 1000 * 60 * 60 * 24) // refresh every 24 hours
-
   if (process.env.NODE_APP_INSTANCE) {
     initializeMetrics()
     await listen(app)
@@ -43,6 +39,13 @@ async function main() {
     await matchMaker.createRoom("lobby", {})
     initCronJobs()
   }
+
+  await fetchBots()
+  setInterval(() => fetchBots(), 1000 * 60 * 24) // refresh every 24 hours
+  fetchLeaderboards()
+  setInterval(() => fetchLeaderboards(), 1000 * 60 * 10) // refresh every 10 minutes
+  fetchMetaReports()
+  setInterval(() => fetchMetaReports(), 1000 * 60 * 60 * 24) // refresh every 24 hours
 }
 
 function checkLobby() {
