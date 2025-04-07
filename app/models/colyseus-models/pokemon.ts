@@ -10356,7 +10356,6 @@ export class Starly extends Pokemon {
   rarity = Rarity.COMMON
   stars = 1
   evolution = Pkm.STARAVIA
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 65
   atk = 5
   speed = 57
@@ -10374,7 +10373,6 @@ export class Staravia extends Pokemon {
   rarity = Rarity.COMMON
   stars = 2
   evolution = Pkm.STARAPTOR
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
   hp = 120
   atk = 9
   speed = 57
