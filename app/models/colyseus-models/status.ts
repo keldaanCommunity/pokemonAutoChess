@@ -263,11 +263,15 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerRage(duration: number, pokemon: PokemonEntity) {
-    this.enraged = true
-    this.protect = false
     duration = this.applyAquaticReduction(duration, pokemon)
-    this.enrageCooldown = Math.round(duration)
-    pokemon.addSpeed(100, pokemon, 0, false)
+    if (!this.enraged) {
+      this.enraged = true
+      this.protect = false
+      pokemon.addSpeed(100, pokemon, 0, false)
+      this.enrageCooldown = duration
+    } else if (duration > this.enrageCooldown) {
+      this.enrageCooldown = duration
+    }
   }
 
   updateRage(dt: number, pokemon: PokemonEntity) {
