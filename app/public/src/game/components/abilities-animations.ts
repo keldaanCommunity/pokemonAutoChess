@@ -24,7 +24,6 @@ import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
 import { UNOWNS_PER_ABILITY } from "./unown-manager"
 import { DEPTH } from "../depths"
-import { BrickBreakStrategy } from "../../../../core/abilities/abilities"
 
 export function displayAbility(
   scene: GameScene | DebugScene,
@@ -3268,14 +3267,14 @@ export function displayAbility(
 
     case "SPAWN":
       addAbilitySprite("SPAWN", coordinates, true)
-        .setOrigin(0.5, -1.5)
+        .setOrigin(0.5, -0.5)
         .setDepth(DEPTH.BOOST_BACK)
         .setScale(2)
       break
 
     case "EVOLUTION":
       addAbilitySprite("EVOLUTION", coordinates, true)
-        .setOrigin(0.5, -0.4)
+        .setOrigin(0.5, 0.4)
         .setDepth(DEPTH.BOOST_BACK)
         .setScale(2)
       break

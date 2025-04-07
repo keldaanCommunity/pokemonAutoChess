@@ -62,6 +62,12 @@
   }
 }
 
+.react-tabs__tab.icon-tab {
+  border: 6px solid transparent;
+  margin: -6px -4px;
+  background-color: #00000020;
+}
+
 .react-tabs__tab--selected.icon-tab {
   animation: spin 2.5s infinite linear;
   /* Background colors don’t work with `background-origin`, so use a gradient. */

@@ -487,12 +487,6 @@ export interface IDps {
   shield: number
 }
 
-export function instanceofPokemonEntity(
-  obj: IPokemon | IPokemonEntity | IPokemonAvatar
-): obj is IPokemonEntity {
-  return "pp" in obj
-}
-
 export interface IPokemonEntity {
   simulation: ISimulation
   refToBoardPokemon: IPokemon

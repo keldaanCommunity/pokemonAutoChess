@@ -113,7 +113,7 @@ export class OnShopCommand extends Command<
       return
     const player = this.state.players.get(playerId)
     const name = player?.shop[index]
-    if (!player || !name || name === Pkm.DEFAULT) return
+    if (!player || !player.alive || !name || name === Pkm.DEFAULT) return
 
     const pokemon = PokemonFactory.createPokemonFromName(name, player)
     const isEvolution =
@@ -176,7 +176,7 @@ export class OnRemoveFromShopCommand extends Command<
       return
     const player = this.state.players.get(playerId)
     const name = player?.shop[index]
-    if (!player || !name || name === Pkm.DEFAULT) return
+    if (!player || !player.alive || !name || name === Pkm.DEFAULT) return
 
     const cost = getBuyPrice(name, this.state.specialGameRule)
     if (player.money >= cost) {
@@ -198,7 +198,7 @@ export class OnPokemonCatchCommand extends Command<
     if (playerId === undefined || !this.state.players.has(playerId)) return
     const player = this.state.players.get(playerId)
     const pkm = this.state.wanderers.get(id)
-    if (!player || !pkm) return
+    if (!player || !player.alive || !pkm) return
     this.state.wanderers.delete(id)
 
     const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
@@ -238,7 +238,7 @@ export class OnDragDropCommand extends Command<
     const playerId = client.auth.uid
     const player = this.state.players.get(playerId)
 
-    if (player) {
+    if (player && player.alive) {
       message.updateItems = false
       const pokemon = player.board.get(detail.id)
       const { x, y } = detail
@@ -368,7 +368,7 @@ export class OnSwitchBenchAndBoardCommand extends Command<
   execute({ client, pokemonId }) {
     const playerId = client.auth.uid
     const player = this.room.state.players.get(playerId)
-    if (!player) return
+    if (!player || !player.alive) return
 
     const pokemon = player.board.get(pokemonId)
     if (!pokemon) return
@@ -430,74 +430,70 @@ export class OnDragDropCombineCommand extends Command<
     }
     const player = this.state.players.get(playerId)
 
-    if (player) {
-      message.updateBoard = false
-      message.updateItems = true
+    if (!player || !player.alive) return
 
-      const itemA = detail.itemA
-      const itemB = detail.itemB
+    message.updateBoard = false
+    message.updateItems = true
 
-      //verify player has both items
-      if (!player.items.includes(itemA) || !player.items.includes(itemB)) {
-        client.send(Transfer.DRAG_DROP_FAILED, message)
-        return
-      }
-      // check for two if both items are same
-      else if (itemA == itemB) {
-        let count = 0
-        player.items.forEach((item) => {
-          if (item == itemA) {
-            count++
-          }
-        })
+    const itemA = detail.itemA
+    const itemB = detail.itemB
 
-        if (count < 2) {
-          client.send(Transfer.DRAG_DROP_FAILED, message)
-          return
-        }
-      }
-
-      let result: Item | undefined = undefined
-
-      if (itemA === Item.EXCHANGE_TICKET || itemB === Item.EXCHANGE_TICKET) {
-        const exchangedItem = itemA === Item.EXCHANGE_TICKET ? itemB : itemA
-        if (ItemComponents.includes(exchangedItem)) {
-          result = pickRandomIn(
-            ItemComponents.filter((i) => i !== exchangedItem)
-          )
-        } else if (CraftableItems.includes(exchangedItem)) {
-          result = pickRandomIn(
-            CraftableItems.filter((i) => i !== exchangedItem)
-          )
-        } else {
-          client.send(Transfer.DRAG_DROP_FAILED, message)
-          return
-        }
-      } else {
-        // find recipe result
-        const recipes = Object.entries(ItemRecipe) as [Item, Item[]][]
-        for (const [key, value] of recipes) {
-          if (
-            (value[0] == itemA && value[1] == itemB) ||
-            (value[0] == itemB && value[1] == itemA)
-          ) {
-            result = key
-            break
-          }
-        }
-      }
-
-      if (!result) {
-        client.send(Transfer.DRAG_DROP_FAILED, message)
-        return
-      } else {
-        player.items.push(result)
-        removeInArray(player.items, itemA)
-        removeInArray(player.items, itemB)
-      }
-
-      player.updateSynergies()
+    //verify player has both items
+    if (!player.items.includes(itemA) || !player.items.includes(itemB)) {
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
     }
+    // check for two if both items are same
+    else if (itemA == itemB) {
+      let count = 0
+      player.items.forEach((item) => {
+        if (item == itemA) {
+          count++
+        }
+      })
+
+      if (count < 2) {
+        client.send(Transfer.DRAG_DROP_FAILED, message)
+        return
+      }
+    }
+
+    let result: Item | undefined = undefined
+
+    if (itemA === Item.EXCHANGE_TICKET || itemB === Item.EXCHANGE_TICKET) {
+      const exchangedItem = itemA === Item.EXCHANGE_TICKET ? itemB : itemA
+      if (ItemComponents.includes(exchangedItem)) {
+        result = pickRandomIn(ItemComponents.filter((i) => i !== exchangedItem))
+      } else if (CraftableItems.includes(exchangedItem)) {
+        result = pickRandomIn(CraftableItems.filter((i) => i !== exchangedItem))
+      } else {
+        client.send(Transfer.DRAG_DROP_FAILED, message)
+        return
+      }
+    } else {
+      // find recipe result
+      const recipes = Object.entries(ItemRecipe) as [Item, Item[]][]
+      for (const [key, value] of recipes) {
+        if (
+          (value[0] == itemA && value[1] == itemB) ||
+          (value[0] == itemB && value[1] == itemA)
+        ) {
+          result = key
+          break
+        }
+      }
+    }
+
+    if (!result) {
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    } else {
+      player.items.push(result)
+      removeInArray(player.items, itemA)
+      removeInArray(player.items, itemB)
+    }
+
+    player.updateSynergies()
   }
 }
 export class OnDragDropItemCommand extends Command<
@@ -514,7 +510,7 @@ export class OnDragDropItemCommand extends Command<
       updateItems: true
     }
     const player = this.state.players.get(playerId)
-    if (!player) return
+    if (!player || !player.alive) return
 
     message.updateBoard = false
     message.updateItems = true
@@ -798,37 +794,37 @@ export class OnSellDropCommand extends Command<
   execute({ client, pokemonId }) {
     const player = this.state.players.get(client.auth.uid)
 
-    if (player) {
-      const pokemon = player.board.get(pokemonId)
-      if (
-        pokemon &&
-        !isOnBench(pokemon) &&
-        this.state.phase === GamePhaseState.FIGHT
-      ) {
-        return // can't sell a pokemon currently fighting
-      }
+    if (!player || !player.alive) return
 
-      if (
-        pokemon &&
-        canSell(pokemon.name, this.state.specialGameRule) === false
-      ) {
-        return
-      }
+    const pokemon = player.board.get(pokemonId)
+    if (
+      pokemon &&
+      !isOnBench(pokemon) &&
+      this.state.phase === GamePhaseState.FIGHT
+    ) {
+      return // can't sell a pokemon currently fighting
+    }
 
-      if (pokemon) {
-        this.state.shop.releasePokemon(pokemon.name, player)
-        const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
-        player.addMoney(sellPrice, false, null)
-        pokemon.items.forEach((it) => {
-          player.items.push(it)
-        })
+    if (
+      pokemon &&
+      canSell(pokemon.name, this.state.specialGameRule) === false
+    ) {
+      return
+    }
 
-        player.board.delete(pokemonId)
+    if (pokemon) {
+      this.state.shop.releasePokemon(pokemon.name, player)
+      const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
+      player.addMoney(sellPrice, false, null)
+      pokemon.items.forEach((it) => {
+        player.items.push(it)
+      })
 
-        player.updateSynergies()
-        player.boardSize = this.room.getTeamSize(player.board)
-        pokemon.afterSell(player)
-      }
+      player.board.delete(pokemonId)
+
+      player.updateSynergies()
+      player.boardSize = this.room.getTeamSize(player.board)
+      pokemon.afterSell(player)
     }
   }
 }
@@ -836,11 +832,11 @@ export class OnSellDropCommand extends Command<
 export class OnRefreshCommand extends Command<GameRoom, string> {
   execute(id) {
     const player = this.state.players.get(id)
-    if (!player) return
+    if (!player || !player.alive) return
     const rollCost = player.shopFreeRolls > 0 ? 0 : 1
     const canRoll = (player?.money ?? 0) >= rollCost
 
-    if (canRoll && player.alive) {
+    if (canRoll) {
       player.rerollCount++
       player.money -= rollCost
       if (player.shopFreeRolls > 0) {
@@ -860,9 +856,8 @@ export class OnRefreshCommand extends Command<GameRoom, string> {
 export class OnLockCommand extends Command<GameRoom, string> {
   execute(id) {
     const player = this.state.players.get(id)
-    if (player) {
-      player.shopLocked = !player.shopLocked
-    }
+    if (!player || !player.alive) return
+    player.shopLocked = !player.shopLocked
   }
 }
 
@@ -875,9 +870,8 @@ export class OnSpectateCommand extends Command<
 > {
   execute({ id, spectatedPlayerId }) {
     const player = this.state.players.get(id)
-    if (player) {
-      player.spectatedPlayerId = spectatedPlayerId
-    }
+    if (!player || !player.alive) return
+    player.spectatedPlayerId = spectatedPlayerId
   }
 }
 
@@ -889,10 +883,10 @@ export class OnLevelUpCommand extends Command<
 > {
   execute(id) {
     const player = this.state.players.get(id)
-    if (!player) return
+    if (!player || !player.alive) return
 
     const cost = getLevelUpCost(this.state.specialGameRule)
-    if (player.money >= cost && player.experienceManager.canLevel()) {
+    if (player.money >= cost && player.experienceManager.canLevelUp()) {
       player.experienceManager.addExperience(4)
       player.money -= cost
     }
@@ -908,7 +902,8 @@ export class OnPickBerryCommand extends Command<
 > {
   execute({ playerId, berryIndex }) {
     const player = this.state.players.get(playerId)
-    if (player && player.berryTreesStage[berryIndex] >= 3) {
+    if (!player || !player.alive) return
+    if (player.berryTreesStage[berryIndex] >= 3) {
       player.berryTreesStage[berryIndex] = 0
       player.items.push(player.berryTreesType[berryIndex])
     }

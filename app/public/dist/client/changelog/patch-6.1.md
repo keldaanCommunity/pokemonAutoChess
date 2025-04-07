@@ -4,7 +4,7 @@
 - Archaludon
 - Sprigatito
 - Floragato
-- Mewoscarada
+- Meowscarada
 - Fomantis
 - Lurantis
 - Roaring Moon
@@ -33,3 +33,4 @@
 - New title: Chef: Max synergy with Gourmet type in a game
 - Do it all yourself scribble pendalties balance adjusted for Hatch & Special avatars
 - Inactivity timeout in lobby room increased to 30 minutes
+- All board actions are no longer possible after player is eliminated
