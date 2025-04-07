@@ -41,6 +41,7 @@ import { SellZone } from "../components/sell-zone"
 import UnownManager from "../components/unown-manager"
 import WeatherManager from "../components/weather-manager"
 import { DEPTH } from "../depths"
+import { clamp } from "../../../../utils/number"
 
 export default class GameScene extends Scene {
   tilemaps: Map<DungeonPMDO, DesignTiled> = new Map<DungeonPMDO, DesignTiled>()
@@ -106,6 +107,7 @@ export default class GameScene extends Scene {
   startGame() {
     if (this.uid && this.room) {
       this.registerKeys()
+      this.setupCamera()
       this.input.dragDistanceThreshold = 1
 
       const playerUids = values(this.room.state.players).map((p) => p.id)
@@ -174,6 +176,35 @@ export default class GameScene extends Scene {
     ) {
       this.minigameManager.update()
     }
+  }
+
+  setupCamera() {
+    this.cameras.main.setBounds(
+      0,
+      0,
+      (this.map?.widthInPixels ?? 1200) * 2,
+      (this.map?.heightInPixels ?? 768) * 2
+    )
+
+    this.input.on("wheel", (pointer, gameObjects, deltaX, deltaY, deltaZ) => {
+      this.cameras.main.zoom = clamp(
+        this.cameras.main.zoom - Math.sign(deltaY) * 0.1,
+        1,
+        2
+      )
+      //this.cameras.main.centerOn(pointer.worldX, pointer.worldY)
+      if (deltaY < 0) {
+        this.cameras.main.pan(pointer.worldX, pointer.worldY, 400, "Power2")
+      }
+    })
+
+    this.input.on("pointermove", (pointer) => {
+      if (!pointer.isDown || this.itemDragged || this.pokemonDragged) return
+      const cam = this.cameras.main
+      if (cam.zoom === 1) return
+      cam.scrollX -= (pointer.x - pointer.prevPosition.x) / cam.zoom
+      cam.scrollY -= (pointer.y - pointer.prevPosition.y) / cam.zoom
+    })
   }
 
   registerKeys() {
@@ -581,6 +612,8 @@ export default class GameScene extends Scene {
         gameObject.x = gameObject.input.dragStartX
         gameObject.y = gameObject.input.dragStartY
       }
+      this.pokemonDragged = null
+      this.itemDragged = null
     })
 
     this.input.on(

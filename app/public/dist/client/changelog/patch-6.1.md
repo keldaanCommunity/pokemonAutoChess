@@ -25,6 +25,7 @@
 # UI
 
 - Antialias setting now only applies on board and not on portraits, and is now enabled by default
+- Added Zoom in/out and Drag-to-Pan with mouse wheel ingame
 
 # Bugfix
 
