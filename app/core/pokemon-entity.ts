@@ -598,7 +598,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         (1 + (apBoost * caster.ap) / 100) *
         (crit ? caster.critPower : 1)
       const update = (target: { speed: number }) => {
-        target.speed = clamp(target.speed + value, 40, 250)
+        target.speed = clamp(target.speed + value, 0, 300)
       }
       update(this)
       if (permanent && !this.isGhostOpponent) {
