@@ -9,8 +9,7 @@ import {
   AttackSpriteScale,
   type Emotion,
   type IPokemon,
-  type IPokemonEntity,
-  instanceofPokemonEntity
+  type IPokemonEntity
 } from "../../../../types"
 import {
   DEFAULT_CRIT_CHANCE,
@@ -24,7 +23,7 @@ import {
   PokemonTint,
   type Rarity,
   SpriteType,
-  type Team
+  Team
 } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
 import type { Passive } from "../../../../types/enum/Passive"
@@ -147,9 +146,7 @@ export default class PokemonSprite extends DraggableObject {
     this.shouldShowTooltip = true
     this.stars = pokemon.stars
     this.stages = getPokemonData(pokemon.name).stages
-    this.evolution = instanceofPokemonEntity(pokemon)
-      ? Pkm.DEFAULT
-      : (pokemon as IPokemon).evolution
+    this.evolution = inBattle ? Pkm.DEFAULT : (pokemon as IPokemon).evolution
     this.emotion = pokemon.emotion
     this.shiny = pokemon.shiny
     this.height = 0
@@ -191,10 +188,15 @@ export default class PokemonSprite extends DraggableObject {
 
     this.lazyloadAnimations(scene)
 
-    const p = <IPokemonEntity>pokemon
-    if (p.orientation) {
-      this.orientation = p.orientation
-      this.action = p.action
+    const isEntity = (
+      pokemon: IPokemon | IPokemonEntity
+    ): pokemon is IPokemonEntity => {
+      return inBattle
+    }
+
+    if (isEntity(pokemon)) {
+      this.orientation = pokemon.orientation
+      this.action = pokemon.action
     } else {
       this.orientation = Orientation.DOWNLEFT
       this.action = PokemonActionState.IDLE
@@ -220,7 +222,7 @@ export default class PokemonSprite extends DraggableObject {
     this.width = this.sprite.width
     this.itemsContainer = new ItemsContainer(
       scene,
-      p.items ?? new SetSchema(),
+      pokemon.items ?? new SetSchema(),
       this.width / 2 + 25,
       -35,
       this.id,
@@ -234,20 +236,20 @@ export default class PokemonSprite extends DraggableObject {
     }
     this.add(this.sprite)
 
-    if (instanceofPokemonEntity(pokemon)) {
-      if (p.status.light) {
+    if (isEntity(pokemon)) {
+      if (pokemon.status.light) {
         this.addLight()
       }
-      if (p.status.electricField) {
+      if (pokemon.status.electricField) {
         this.addElectricField()
       }
-      if (p.status.psychicField) {
+      if (pokemon.status.psychicField) {
         this.addPsychicField()
       }
-      if (p.status.grassField) {
+      if (pokemon.status.grassField) {
         this.addGrassField()
       }
-      if (p.status.fairyField) {
+      if (pokemon.status.fairyField) {
         this.addFairyField()
       }
     } else {
@@ -257,9 +259,9 @@ export default class PokemonSprite extends DraggableObject {
     }
     this.add(this.itemsContainer)
 
-    if (instanceofPokemonEntity(pokemon)) {
-      this.setLifeBar(p, scene)
-      if (pokemon.maxPP > 0) this.setPowerBar(p, scene)
+    if (isEntity(pokemon)) {
+      this.setLifeBar(pokemon, scene)
+      if (pokemon.maxPP > 0) this.setPowerBar(pokemon, scene)
       //this.setEffects(p, scene);
     } else {
       if (pokemon.meal !== "") {
@@ -268,14 +270,13 @@ export default class PokemonSprite extends DraggableObject {
     }
 
     this.draggable = playerId === scene.uid && !inBattle
-    if (instanceofPokemonEntity(pokemon)) {
-      const p = <IPokemonEntity>pokemon
-      this.pp = p.pp
-      this.team = p.team
-      this.shield = p.shield
-      this.life = p.life
-      this.critPower = p.critPower
-      this.critChance = p.critChance
+    if (isEntity(pokemon)) {
+      this.pp = pokemon.pp
+      this.team = pokemon.team
+      this.shield = pokemon.shield
+      this.life = pokemon.life
+      this.critPower = pokemon.critPower
+      this.critChance = pokemon.critChance
     } else {
       this.critPower = DEFAULT_CRIT_POWER
       this.critChance = DEFAULT_CRIT_CHANCE
@@ -283,10 +284,11 @@ export default class PokemonSprite extends DraggableObject {
     this.setDepth(DEPTH.POKEMON)
 
     // prevents persisting details between game transitions
-    const s = <GameScene>this.scene
-    if (s.lastPokemonDetail) {
-      s.lastPokemonDetail.closeDetail()
-      s.lastPokemonDetail = null
+    const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
+      "lastPokemonDetail" in scene
+    if (isGameScene(this.scene) && this.scene.lastPokemonDetail) {
+      this.scene.lastPokemonDetail.closeDetail()
+      this.scene.lastPokemonDetail = null
     }
   }
 
@@ -562,7 +564,11 @@ export default class PokemonSprite extends DraggableObject {
       anim,
       this.orientation,
       this.positionX,
-      this.positionY,
+      !this.inBattle
+        ? this.positionY - 1
+        : this.team === Team.RED_TEAM
+          ? 4 - this.positionY
+          : this.positionY,
       this.targetX ?? -1,
       this.targetY ?? -1,
       this.flip
