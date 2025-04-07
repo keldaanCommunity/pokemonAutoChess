@@ -195,6 +195,8 @@ export default class GameScene extends Scene {
       //this.cameras.main.centerOn(pointer.worldX, pointer.worldY)
       if (deltaY < 0) {
         this.cameras.main.pan(pointer.worldX, pointer.worldY, 400, "Power2")
+      } else if (this.cameras.main.zoom === 1) {
+        this.cameras.main.pan(0, 0, 400, "Power2")
       }
     })
 
@@ -344,6 +346,7 @@ export default class GameScene extends Scene {
         layer.name,
         mapName + "/" + layer.name
       )!
+      tileset.image?.setFilter(Phaser.Textures.FilterMode.NEAREST)
       map.createLayer(layer.name, tileset, 0, 0)?.setScale(2, 2)
     })
     const sys = this.sys as any
