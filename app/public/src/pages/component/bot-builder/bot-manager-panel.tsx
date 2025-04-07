@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
-import { IBot } from "../../../../../models/mongo-models/bot-v2"
+import { IBotLight } from "../../../../../models/mongo-models/bot-v2"
 import { joinLobbyRoom } from "../../../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { addBotDatabase, deleteBotDatabase } from "../../../stores/NetworkStore"
-import { rewriteBotRoundsRequiredto1, validateBot } from "./bot-logic"
 import PokemonPortrait from "../pokemon-portrait"
 import { Transfer } from "../../../../../types"
 import "./bot-manager-panel.css"
@@ -23,7 +22,7 @@ function BotsList() {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const [bots, setBots] = useState<IBot[] | null>(null)
+  const [bots, setBots] = useState<IBotLight[] | null>(null)
 
   const lobbyJoined = useRef<boolean>(false)
   useEffect(() => {
@@ -38,7 +37,7 @@ function BotsList() {
   }, [lobbyJoined])
 
   useEffect(() => {
-    fetch(`/bots?withSteps=true&t=${Date.now()}`).then((res) => res.json()).then((data) => {
+    fetch(`/bots?t=${Date.now()}`).then((res) => res.json()).then((data) => {
       setBots(data)
     })
   }, [])
@@ -71,20 +70,15 @@ function BotsList() {
                 <td>{b.elo}</td>
                 <td style={{ color: "#999", fontSize: "80%" }}>{b.id}</td>
                 <td>
-                  {(() => {
-                    const errors = validateBot(rewriteBotRoundsRequiredto1(b))
-                    if (!errors || errors.length === 0)
-                      return <span style={{ color: "lime" }}>{t("valid")}</span>
-                    else
-                      return (
-                        <span
-                          style={{ color: "red" }}
-                          title={errors.join("\n")}
-                        >
-                          {t("invalid")}
-                        </span>
-                      )
-                  })()}
+                  {b.valid ?
+                    <span style={{ color: "lime" }}>{t("valid")}</span>
+                    :
+                    <span
+                      style={{ color: "red" }}
+                    >
+                      {t("invalid")}
+                    </span>
+                  }
                 </td>
                 <td style={{ display: "flex", gap: "0.5em" }}>
                   <button
