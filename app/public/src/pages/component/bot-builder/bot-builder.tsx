@@ -23,7 +23,7 @@ import {
   getPowerScore,
   rewriteBotRoundsRequiredto1,
   validateBoard
-} from "./bot-logic"
+} from "../../../../../core/bot-logic"
 import ImportBotModal from "./import-bot-modal"
 import ExportBotModal from "./export-bot-modal"
 import ScoreIndicator from "./score-indicator"

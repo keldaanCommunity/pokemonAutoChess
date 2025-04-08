@@ -1,22 +1,11 @@
-import {
-  IBot,
-  IDetailledPokemon,
-  IStep
-} from "../../../../../models/mongo-models/bot-v2"
-import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
-import {
-  AdditionalPicksStages,
-  PortalCarouselStages
-} from "../../../../../types/Config"
-import { Rarity } from "../../../../../types/enum/Game"
-import {
-  CraftableItems,
-  Item,
-  ItemComponents
-} from "../../../../../types/enum/Item"
-import { Pkm, PkmDuos, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { logger } from "../../../../../utils/logger"
-import { clamp, min } from "../../../../../utils/number"
+import { IBot, IDetailledPokemon, IStep } from "../models/mongo-models/bot-v2"
+import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
+import { AdditionalPicksStages, PortalCarouselStages } from "../types/Config"
+import { Rarity } from "../types/enum/Game"
+import { CraftableItems, Item, ItemComponents } from "../types/enum/Item"
+import { Pkm, PkmDuos, PkmIndex } from "../types/enum/Pokemon"
+import { logger } from "../utils/logger"
+import { clamp, min } from "../utils/number"
 
 export const MAX_BOTS_STAGE = 30
 
@@ -201,7 +190,7 @@ export function estimateElo(bot: IBot): number {
   return 1400
 }
 
-export function validateBot(bot: IBot) {
+export function validateBot(bot: IBot): string[] {
   const errors: string[] = []
   for (let stage = 0; stage < bot.steps.length; stage++) {
     try {

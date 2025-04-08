@@ -38,7 +38,8 @@
     "assetpack": "cd edit/assetpack && npm run assetpack",
     "precompute": "cd gen && ts-node precompute-all.ts",
     "colyseus-post-deploy": "npx colyseus-post-deploy",
-    "deploy-live": "pm2 deploy production update"
+    "deploy-live": "pm2 deploy production update",
+    "check-circular-refs": "npx madge ./app -- --circular --exclude '^public/dist'"
   },
   "dependencies": {
     "@colyseus/command": "^0.3.1",

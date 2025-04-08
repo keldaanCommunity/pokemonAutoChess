@@ -12,6 +12,7 @@
 # Changes to Pokemon & Abilities
 
 - Alcremie now consumes its flavor when evolving
+- Starly line is now Common regional in Flying/Normal regions
 
 # Changes to Synergies
 
@@ -24,6 +25,7 @@
 # UI
 
 - Antialias setting now only applies on board and not on portraits, and is now enabled by default
+- Added Zoom in/out and Drag-to-Pan with mouse wheel ingame
 
 # Bugfix
 
@@ -33,3 +35,6 @@
 - New title: Chef: Max synergy with Gourmet type in a game
 - Do it all yourself scribble pendalties balance adjusted for Hatch & Special avatars
 - Regional pokemons sold in a region other than their original region are not added back to the pool
+- Inactivity timeout in lobby room increased to 30 minutes
+- All board actions are no longer possible after player is eliminated
+

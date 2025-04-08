@@ -1,7 +1,7 @@
 import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
 import { carryOverPermanentStats } from "../../core/evolution-rules"
 import { PokemonEntity } from "../../core/pokemon-entity"
-import { getUnitPowerScore } from "../../public/src/pages/component/bot-builder/bot-logic"
+import { getUnitPowerScore } from "../../core/bot-logic"
 import type GameState from "../../rooms/states/game-state"
 import type { IPlayer, Role, Title } from "../../types"
 import { SynergyTriggers, UniquePool } from "../../types/Config"

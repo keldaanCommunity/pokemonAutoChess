@@ -1,5 +1,5 @@
 import React from "react"
-import { BOT_SCORES, getBotScore } from "./bot-logic"
+import { BOT_SCORES, getBotScore } from "../../../../../core/bot-logic"
 import "./score-indicator.css"
 
 export default function ScoreIndicator(props: { value: number }) {

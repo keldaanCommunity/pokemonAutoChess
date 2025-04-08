@@ -393,7 +393,7 @@ export const MAX_PLAYERS_PER_GAME = 8
 export const MIN_HUMAN_PLAYERS = process.env.MIN_HUMAN_PLAYERS
   ? parseInt(process.env.MIN_HUMAN_PLAYERS)
   : 1
-export const INACTIVITY_TIMEOUT = 60 * 1000 * 10
+export const INACTIVITY_TIMEOUT = 60 * 1000 * 30 // 30 minutes
 
 export const DEFAULT_SPEED = 50
 export const DEFAULT_CRIT_CHANCE = 10

@@ -27,6 +27,8 @@ export interface IBot {
   id: string
 }
 
+export type IBotLight = Omit<IBot, "steps"> & { valid: boolean }
+
 const pkm = new Schema({
   name: {
     type: String,

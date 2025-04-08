@@ -20,7 +20,7 @@ export default class ExperienceManager
     this.maxLevel = 9
   }
 
-  canLevel() {
+  canLevelUp() {
     return this.level < this.maxLevel
   }
 

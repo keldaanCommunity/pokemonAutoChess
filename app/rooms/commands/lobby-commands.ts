@@ -1528,19 +1528,23 @@ export class EndTournamentCommand extends Command<
         const user = this.room.users.get(player.id)
 
         const mongoUser = await UserMetadata.findOne({ uid: player.id })
-        if (mongoUser == null || user == null) continue
+        if (mongoUser === null) continue
+
+        logger.debug(
+          `Tournament ${tournamentId} finalist ${player.name} finished with rank ${rank}, distributing rewards`
+        )
 
         mongoUser.booster += 3 // 3 boosters for top 8
         if (mongoUser.titles.includes(Title.ACE_TRAINER) === false) {
           mongoUser.titles.push(Title.ACE_TRAINER)
-          user.titles.push(Title.ACE_TRAINER)
+          if (user) user.titles.push(Title.ACE_TRAINER)
         }
 
         if (rank <= 4) {
           mongoUser.booster += 3 // 6 boosters for top 4
           if (mongoUser.titles.includes(Title.ELITE_FOUR_MEMBER) === false) {
             mongoUser.titles.push(Title.ELITE_FOUR_MEMBER)
-            user.titles.push(Title.ELITE_FOUR_MEMBER)
+            if (user) user.titles.push(Title.ELITE_FOUR_MEMBER)
           }
         }
 
@@ -1548,11 +1552,11 @@ export class EndTournamentCommand extends Command<
           mongoUser.booster += 4 // 10 boosters for top 1
           if (mongoUser.titles.includes(Title.CHAMPION) === false) {
             mongoUser.titles.push(Title.CHAMPION)
-            user.titles.push(Title.CHAMPION)
+            if (user) user.titles.push(Title.CHAMPION)
           }
         }
 
-        user.booster = mongoUser.booster
+        if (user) user.booster = mongoUser.booster
         await mongoUser.save()
       }
 
