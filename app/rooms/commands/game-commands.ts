@@ -97,7 +97,7 @@ import { resetArraySchema, values } from "../../utils/schemas"
 import { getWeather } from "../../utils/weather"
 import GameRoom from "../game-room"
 
-export class OnShopCommand extends Command<
+export class OnBuyPokemonCommand extends Command<
   GameRoom,
   {
     playerId: string
@@ -182,7 +182,7 @@ export class OnRemoveFromShopCommand extends Command<
     if (player.money >= cost) {
       player.shop[index] = Pkm.DEFAULT
       player.shopLocked = true
-      this.state.shop.releasePokemon(name, player)
+      this.state.shop.releasePokemon(name, player, this.state)
     }
   }
 }
@@ -220,7 +220,7 @@ export class OnPokemonCatchCommand extends Command<
   }
 }
 
-export class OnDragDropCommand extends Command<
+export class OnDragDropPokemonCommand extends Command<
   GameRoom,
   {
     client: IClient
@@ -784,7 +784,7 @@ export class OnDragDropItemCommand extends Command<
   }
 }
 
-export class OnSellDropCommand extends Command<
+export class OnSellPokemonCommand extends Command<
   GameRoom,
   {
     client: Client
@@ -804,7 +804,7 @@ export class OnSellDropCommand extends Command<
     ) {
       return // can't sell a pokemon currently fighting
     }
-
+    
     if (
       pokemon &&
       canSell(pokemon.name, this.state.specialGameRule) === false
@@ -813,7 +813,7 @@ export class OnSellDropCommand extends Command<
     }
 
     if (pokemon) {
-      this.state.shop.releasePokemon(pokemon.name, player)
+      this.state.shop.releasePokemon(pokemon.name, player, this.state)
       const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
       player.addMoney(sellPrice, false, null)
       pokemon.items.forEach((it) => {
@@ -829,7 +829,7 @@ export class OnSellDropCommand extends Command<
   }
 }
 
-export class OnRefreshCommand extends Command<GameRoom, string> {
+export class OnShopRerollCommand extends Command<GameRoom, string> {
   execute(id) {
     const player = this.state.players.get(id)
     if (!player || !player.alive) return
@@ -1235,10 +1235,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (player.life <= 0 && player.alive) {
         if (!player.isBot) {
           player.shop.forEach((pkm) => {
-            this.state.shop.releasePokemon(pkm, player)
+            this.state.shop.releasePokemon(pkm, player, this.state)
           })
           player.board.forEach((pokemon) => {
-            this.state.shop.releasePokemon(pokemon.name, player)
+            this.state.shop.releasePokemon(pokemon.name, player, this.state)
           })
         }
         player.alive = false
