@@ -1981,49 +1981,61 @@ export class Leavanny extends Pokemon {
 }
 
 export class Turtwig extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.GROUND])
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.GROUND,
+    Synergy.MONSTER
+  ])
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.GROTLE
   hp = 80
   atk = 5
   speed = 43
-  def = 6
-  speDef = 6
+  def = 7
+  speDef = 5
   maxPP = 100
   range = 1
-  skill = Ability.GROWTH
+  skill = Ability.BULLDOZE
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Grotle extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.GROUND])
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.GROUND,
+    Synergy.MONSTER
+  ])
   rarity = Rarity.RARE
   stars = 2
   evolution = Pkm.TORTERRA
   hp = 150
   atk = 9
   speed = 43
-  def = 10
-  speDef = 8
+  def = 12
+  speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.GROWTH
+  skill = Ability.BULLDOZE
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
 export class Torterra extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.GROUND])
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.GROUND,
+    Synergy.MONSTER
+  ])
   rarity = Rarity.RARE
   stars = 3
   hp = 280
   atk = 21
   speed = 43
-  def = 14
-  speDef = 10
+  def = 16
+  speDef = 8
   maxPP = 100
   range = 1
-  skill = Ability.GROWTH
+  skill = Ability.BULLDOZE
   attackSprite = AttackSprite.GRASS_MELEE
 }
 

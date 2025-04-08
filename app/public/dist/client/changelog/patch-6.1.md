@@ -13,6 +13,7 @@
 
 - Alcremie now consumes its flavor when evolving
 - Starly line is now Common regional in Flying/Normal regions
+- New ability for Torterra line: Bulldoze
 
 # Changes to Synergies
 

@@ -58,6 +58,41 @@ export const OrientationFlip: { [key in Orientation]: Orientation } = {
   [Orientation.DOWNRIGHT]: Orientation.UPRIGHT
 }
 
+export const OrientationKnockback: { [key in Orientation]: Orientation[] } = {
+  [Orientation.DOWN]: [
+    Orientation.DOWN,
+    Orientation.DOWNRIGHT,
+    Orientation.DOWNLEFT
+  ],
+  [Orientation.DOWNLEFT]: [
+    Orientation.DOWNLEFT,
+    Orientation.DOWN,
+    Orientation.LEFT
+  ],
+  [Orientation.LEFT]: [
+    Orientation.LEFT,
+    Orientation.DOWNLEFT,
+    Orientation.UPLEFT
+  ],
+  [Orientation.UPLEFT]: [Orientation.UPLEFT, Orientation.LEFT, Orientation.UP],
+  [Orientation.UP]: [Orientation.UP, Orientation.UPLEFT, Orientation.UPRIGHT],
+  [Orientation.UPRIGHT]: [
+    Orientation.UPRIGHT,
+    Orientation.UP,
+    Orientation.RIGHT
+  ],
+  [Orientation.RIGHT]: [
+    Orientation.RIGHT,
+    Orientation.UPRIGHT,
+    Orientation.DOWNRIGHT
+  ],
+  [Orientation.DOWNRIGHT]: [
+    Orientation.DOWNRIGHT,
+    Orientation.RIGHT,
+    Orientation.DOWN
+  ]
+}
+
 export enum AttackType {
   PHYSICAL,
   SPECIAL,
