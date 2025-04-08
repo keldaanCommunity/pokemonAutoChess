@@ -9422,6 +9422,62 @@ export class HeavySlamStrategy extends AbilityStrategy {
   }
 }
 
+export class BulldozeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = [25, 45, 85][pokemon.stars - 1] ?? 85
+    const speedReduction = [10, 15, 20][pokemon.stars - 1] ?? 0.6
+    const adjacentsCells = board.getAdjacentCells(
+      pokemon.positionX,
+      pokemon.positionY,
+      false
+    )
+
+    for (const cell of adjacentsCells) {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        const orientation = board.orientation(
+          pokemon.positionX,
+          pokemon.positionY,
+          cell.value.positionX,
+          cell.value.positionY,
+          pokemon,
+          undefined
+        )
+        const destination = board.getKnockBackPlace(
+          cell.value.positionX,
+          cell.value.positionY,
+          orientation
+        )
+
+        // console.log(
+        //   `pokemon on ${pokemon.positionX} ${pokemon.positionY} will move the target ${cell.value.positionX}, ${cell.value.positionY} will be moved to ${destination?.x}, ${destination?.y} orientation ${orientation}`
+        // )
+
+        if (destination) {
+          cell.value.moveTo(destination.x, destination.y, board)
+          cell.value.cooldown = 500
+        }
+
+        cell.value.addSpeed(-speedReduction, pokemon, 0, crit)
+
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    }
+  }
+}
+
 export class RapidSpinStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -12742,5 +12798,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ELECTRO_SHOT]: new ElectroShotStrategy(),
   [Ability.FLOWER_TRICK]: new FlowerTrickStrategy(),
   [Ability.SOLAR_BLADE]: new SolarBladeStrategy(),
-  [Ability.SCALE_SHOT]: new ScaleShotStrategy()
+  [Ability.SCALE_SHOT]: new ScaleShotStrategy(),
+  [Ability.BULLDOZE]: new BulldozeStrategy()
 }

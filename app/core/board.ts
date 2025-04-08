@@ -1,6 +1,6 @@
 import { IPokemonEntity, Transfer } from "../types"
 import { BoardEffect, Effect } from "../types/enum/Effect"
-import { Orientation } from "../types/enum/Game"
+import { Orientation, OrientationKnockback } from "../types/enum/Game"
 import { Passive } from "../types/enum/Passive"
 import { distanceC, distanceM } from "../utils/distance"
 import { logger } from "../utils/logger"
@@ -436,7 +436,7 @@ export default class Board {
               }
             }
           }
-          if (selectedCell?.target === entity){
+          if (selectedCell?.target === entity) {
             maxTargetDistance = targetDistance
           }
         }
@@ -485,5 +485,26 @@ export default class Board {
       })
     }
     this.effects[y * this.columns + x] = undefined
+  }
+
+  getKnockBackPlace(
+    x: number,
+    y: number,
+    knockBackOrientation: Orientation
+  ): { x: number; y: number } | null {
+    const possibleOrientations = OrientationKnockback[knockBackOrientation]
+    for (const orientation of possibleOrientations) {
+      const dx = OrientationVector[orientation][0]
+      const dy = OrientationVector[orientation][1]
+      const newX = x + dx
+      const newY = y + dy
+      if (newX >= 0 && newX < this.columns && newY >= 0 && newY < this.rows) {
+        const cell = this.getValue(newX, newY)
+        if (cell === undefined) {
+          return { x: newX, y: newY }
+        }
+      }
+    }
+    return null
   }
 }

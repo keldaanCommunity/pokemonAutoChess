@@ -78,7 +78,7 @@ if (process.env.NODE_APP_INSTANCE) {
           : p1.ccu - p2.ccu
       )
       if (stats.length === 0) {
-        return undefined // no process available, will trigger a ServerError
+        throw "No process available"
       } else {
         return stats[0]?.processId
       }
@@ -306,9 +306,12 @@ export default config({
     })
 
     app.get("/bots", async (req, res) => {
-      const botsData = await getBotsList({
-        withSteps: req.query.withSteps === "true"
-      })
+      const botsData =
+        await getBotsList(
+          //breaks build {
+          //   withSteps: req.query.withSteps === "true"
+          // }
+        )
       res.send(botsData)
     })
 
