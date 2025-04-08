@@ -1844,7 +1844,7 @@
     "FLOWER_TRICK": "The user throws a rigged bouquet of flowers at the target that explodes after 3 seconds, dealing [15,40,85,SP] SPECIAL to the target and adjacent enemies. Every critical hit received by the target during the duration adds [5,SP] SPECIAL to the explosion.",
     "SOLAR_BLADE": "The user gathers light and fills a blade with its energy for 2 seconds (or instantly if the user is in the LIGHT spot), then slices up to 3 Pokémon in a cone in front of the user, dealing [30,60,120,SP] TRUE.",
     "SCALE_SHOT": "The user sheds scales, dealing [40,SP] PHYSICAL to adjacent enemies, applying ARMOR_BREAK to itself and enemies hit for 2 seconds. After 2 seconds the scales are shot towards the farthest enemy, dealing [30,SP] PHYSICAL to all enemies in their path.",
-    "BULLDOZE": "The user stomps down on the ground dealing [25,45,85,SP] SPECIAL to adjacent enemies. Pokemon hit are knocked back and lose [10,15,20] SPEED. "
+    "BULLDOZE": "The user stomps down on the ground dealing [25,45,85,SP] SPECIAL to adjacent enemies. Pokemon hit are knocked back and lose [10] SPEED. "
   },
   "effect": {
     "INGRAIN": "Ingrain",

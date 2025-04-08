@@ -3541,18 +3541,18 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.TURTWIG]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Hop,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Rumble,
     emote: AnimationType.Shoot
   },
   [Pkm.GROTLE]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Hop,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Rumble,
     emote: AnimationType.Shoot
   },
   [Pkm.TORTERRA]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Hop,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Rumble,
     emote: AnimationType.Shoot
   },
   [Pkm.CHIMCHAR]: {
