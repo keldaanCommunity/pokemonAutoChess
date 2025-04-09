@@ -1850,7 +1850,7 @@
     "SOLAR_BLADE": "The user gathers light and fills a blade with its energy for 2 seconds (or instantly if the user is in the LIGHT spot), then slices up to 3 Pokémon in a cone in front of the user, dealing [30,60,120,SP] TRUE.",
     "SCALE_SHOT": "The user sheds scales, dealing [40,SP] PHYSICAL to adjacent enemies, applying ARMOR_BREAK to itself and enemies hit for 2 seconds. After 2 seconds the scales are shot towards the farthest enemy, dealing [30,SP] PHYSICAL to all enemies in their path.",
     "BULLDOZE": "The user stomps down on the ground dealing [25,45,85,SP] SPECIAL to adjacent enemies. Pokemon hit are knocked back and lose [10] SPEED.",
-    "ARMOR_CANNON": "The user shoots out a blazing projectile, dealing [70,SP] SPECIAL to the target before bouncing to the [2,SP] furthest enemies, dealing [35,SP] SPECIAL to each. The projectiles then return to the original target, dealing an extra [10,SP] SPECIAL each.",
+    "ARMOR_CANNON": "The user shoots out a blazing projectile, dealing [70,SP] SPECIAL to the target before bouncing to the [2,SP] closest enemies, dealing [35,SP] SPECIAL to each. The projectiles then return to the original target, dealing an extra [10,SP] SPECIAL each.",
     "BITTER_BLADE": "The user focuses its bitter feelings into a slashing attack, dealing [70,SP] SPECIAL to every adjacent enemy. User heals [10,SP]% of it's HP for each enemy hit."
   },
   "effect": {

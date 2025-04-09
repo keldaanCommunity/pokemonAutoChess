@@ -12435,14 +12435,14 @@ export class ArmorCannonStrategy extends AbilityStrategy {
         possibleTargets.sort(
           (a, b) =>
             distanceM(
-              b.positionX,
-              b.positionY,
+              a.positionX,
+              a.positionY,
               pokemon.positionX,
               pokemon.positionY
             ) -
             distanceM(
-              a.positionX,
-              a.positionY,
+              b.positionX,
+              b.positionY,
               pokemon.positionX,
               pokemon.positionY
             )
