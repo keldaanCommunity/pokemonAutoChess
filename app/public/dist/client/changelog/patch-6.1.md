@@ -24,6 +24,7 @@
 - Nerf Tapu Koko: Range 3 → 2
 - Buff Tapu Lele: PP 100 → 80, Psychic Surge AP buff 10 → 20
 - Reduce Kecleon and Arceus chances of appearance: 1/100 → 1/150
+- Buff Drampa passive: Gains 3 → 5 AP each time a Pokemon is affected by its ability.
 
 # Changes to Synergies
 
