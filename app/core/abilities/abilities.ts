@@ -12118,10 +12118,12 @@ export class FilletAwayStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    // sacrify 50% of current health and gain 10 attack and 20 speed
-    const sacrifice = Math.floor(pokemon.life * 0.5)
+    // lose 50% of max HP and gain 10 attack and 20 speed
+    const newMaxHP = Math.ceil(pokemon.hp * 0.5)
+    const lostLife = min(0)(pokemon.life - newMaxHP)
+    pokemon.hp = newMaxHP
     pokemon.handleSpecialDamage(
-      sacrifice,
+      lostLife,
       board,
       AttackType.TRUE,
       pokemon,
@@ -12130,7 +12132,17 @@ export class FilletAwayStrategy extends AbilityStrategy {
     )
     pokemon.addAttack(10, pokemon, 1, crit)
     pokemon.addSpeed(20, pokemon, 1, crit)
-    pokemon.cooldown = Math.round(250 * (50 / pokemon.speed))
+    pokemon.status.triggerProtect(400)
+    // move to backline
+    const corner = board.getTeleportationCell(
+      pokemon.positionX,
+      pokemon.positionY,
+      pokemon.team
+    )
+    if (corner) {
+      pokemon.moveTo(corner.x, corner.y, board)
+      pokemon.cooldown = 400
+    }
   }
 }
 
