@@ -1677,6 +1677,24 @@ export function displayAbility(
       break
     }
 
+    case Ability.ARMOR_CANNON: {
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        duration: 400,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
+    case Ability.BITTER_BLADE:
+      addAbilitySprite(skill, coordinates, true).setScale(3)
+      break
+
     case Ability.ASSURANCE:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break

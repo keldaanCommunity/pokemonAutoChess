@@ -52,6 +52,7 @@ import {
   AbilityPerTM,
   ArtificialItems,
   Berries,
+  CharcadetArmors,
   CraftableItems,
   Dishes,
   FishingRods,
@@ -564,6 +565,14 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
+    if (
+      CharcadetArmors.includes(item) &&
+      pokemon.passive !== Passive.CHARCADET
+    ) {
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
+
     if (OgerponMasks.includes(item)) {
       if (
         pokemon.passive === Passive.OGERPON_TEAL ||
@@ -804,7 +813,7 @@ export class OnSellPokemonCommand extends Command<
     ) {
       return // can't sell a pokemon currently fighting
     }
-    
+
     if (
       pokemon &&
       canSell(pokemon.name, this.state.specialGameRule) === false

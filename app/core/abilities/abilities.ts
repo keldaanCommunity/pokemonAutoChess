@@ -12355,6 +12355,129 @@ export class ScaleShotStrategy extends AbilityStrategy {
   }
 }
 
+export class BitterBladeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 70
+    const adjacentCells = board.getAdjacentCells(
+      pokemon.positionX,
+      pokemon.positionY,
+      false
+    )
+    for (const cell of adjacentCells) {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        pokemon.handleHeal(pokemon.baseHP * 0.1, pokemon, 1, crit)
+      }
+    }
+  }
+}
+
+export class ArmorCannonStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const mainDamage = 50
+    const secondaryDamage = 30
+    const finalDamage = 10
+    let numberOfTargets = 2
+
+    broadcastAbility(pokemon, {
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY,
+      targetX: target.positionX,
+      targetY: target.positionY
+    })
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        target.handleSpecialDamage(
+          mainDamage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        const possibleTargets = new Array<PokemonEntity>()
+        board.forEach((x, y, entity) => {
+          if (entity && entity.team !== pokemon.team && entity !== target) {
+            possibleTargets.push(entity)
+          }
+        })
+        possibleTargets.sort(
+          (a, b) =>
+            distanceM(
+              b.positionX,
+              b.positionY,
+              pokemon.positionX,
+              pokemon.positionY
+            ) -
+            distanceM(
+              a.positionX,
+              a.positionY,
+              pokemon.positionX,
+              pokemon.positionY
+            )
+        )
+        numberOfTargets = Math.round(numberOfTargets * (1 + pokemon.ap / 100))
+        const targets = possibleTargets.slice(0, numberOfTargets)
+        targets.forEach((tg) => {
+          broadcastAbility(pokemon, {
+            positionX: target.positionX,
+            positionY: target.positionY,
+            targetX: tg.positionX,
+            targetY: tg.positionY
+          })
+          pokemon.commands.push(
+            new DelayedCommand(() => {
+              tg.handleSpecialDamage(
+                secondaryDamage,
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                crit
+              )
+              broadcastAbility(pokemon, {
+                positionX: tg.positionX,
+                positionY: tg.positionY,
+                targetX: target.positionX,
+                targetY: target.positionY
+              })
+              pokemon.commands.push(
+                new DelayedCommand(() => {
+                  target.handleSpecialDamage(
+                    finalDamage,
+                    board,
+                    AttackType.SPECIAL,
+                    pokemon,
+                    crit
+                  )
+                }, 300)
+              )
+            }, 300)
+          )
+        })
+      }, 300)
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -12799,5 +12922,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FLOWER_TRICK]: new FlowerTrickStrategy(),
   [Ability.SOLAR_BLADE]: new SolarBladeStrategy(),
   [Ability.SCALE_SHOT]: new ScaleShotStrategy(),
-  [Ability.BULLDOZE]: new BulldozeStrategy()
+  [Ability.BULLDOZE]: new BulldozeStrategy(),
+  [Ability.BITTER_BLADE]: new BitterBladeStrategy(),
+  [Ability.ARMOR_CANNON]: new ArmorCannonStrategy()
 }

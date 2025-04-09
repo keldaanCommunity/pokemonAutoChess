@@ -43,6 +43,7 @@ import {
   AllItems,
   ArtificialItems,
   Berries,
+  CharcadetArmors,
   Flavors,
   Item,
   ItemComponents,
@@ -17889,6 +17890,78 @@ export class Lurantis extends Pokemon {
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
+export class Charcadet extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.BABY])
+  rarity = Rarity.UNIQUE
+  stars = 2
+  evolutions = [Pkm.ARMAROUGE, Pkm.CERULEDGE]
+  evolutionRule = new ItemEvolutionRule(
+    CharcadetArmors,
+    (pokemon, player, item_) => {
+      const item = item_ as Item
+      if (item === Item.AUSPICIOUS_ARMOR) {
+        return Pkm.ARMAROUGE
+      }
+      if (item === Item.MALICIOUS_ARMOR) {
+        return Pkm.CERULEDGE
+      }
+      return Pkm.ARMAROUGE
+    }
+  )
+  hp = 150
+  atk = 15
+  speed = 33
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.FLAME_CHARGE
+  passive = Passive.CHARCADET
+  attackSprite = AttackSprite.FIRE_MELEE
+  onAcquired = (player) => {
+    player.items.push(Item.AUSPICIOUS_ARMOR)
+    player.items.push(Item.MALICIOUS_ARMOR)
+  }
+}
+
+export class Armarouge extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.PSYCHIC])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 16
+  speed = 51
+  def = 8
+  speDef = 8
+  maxPP = 100
+  range = 2
+  skill = Ability.ARMOR_CANNON
+  attackSprite = AttackSprite.FIRE_RANGE
+  onAcquired = (player) => {
+    this.items.delete(Item.AUSPICIOUS_ARMOR)
+    removeInArray(player.items, Item.MALICIOUS_ARMOR)
+  }
+}
+
+export class Ceruledge extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.GHOST])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 20
+  speed = 51
+  def = 10
+  speDef = 12
+  maxPP = 100
+  range = 1
+  skill = Ability.BITTER_BLADE
+  attackSprite = AttackSprite.FIRE_MELEE
+  onAcquired = (player) => {
+    this.items.delete(Item.MALICIOUS_ARMOR)
+    removeInArray(player.items, Item.AUSPICIOUS_ARMOR)
+  }
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -18832,7 +18905,10 @@ export const PokemonClasses: Record<
   [Pkm.MEOWSCARADA]: Meowscarada,
   [Pkm.FOMANTIS]: Fomantis,
   [Pkm.LURANTIS]: Lurantis,
-  [Pkm.ROARING_MOON]: RoaringMoon
+  [Pkm.ROARING_MOON]: RoaringMoon,
+  [Pkm.CHARCADET]: Charcadet,
+  [Pkm.ARMAROUGE]: Armarouge,
+  [Pkm.CERULEDGE]: Ceruledge
 }
 
 // declare all the classes in colyseus schema TypeRegistry
