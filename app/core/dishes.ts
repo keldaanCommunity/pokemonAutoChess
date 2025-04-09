@@ -120,6 +120,11 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
       entity.addSpeed(50, entity, 0, false)
     })
   ],
+  HEARTY_STEW: [
+    new OnSpawnEffect((entity) => {
+      entity.addMaxHP(0.3 * entity.baseHP, entity, 0, false)
+    })
+  ],
   HONEY: [],
   LARGE_LEEK: [
     new OnSpawnEffect((entity) => {
@@ -165,6 +170,65 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ROCK_SALT: [
     new OnSpawnEffect((entity) => {
       entity.status.triggerRuneProtect(8000)
+    })
+  ],
+  SANDWICH: [
+    new OnSpawnEffect((entity) => {
+      entity.types.forEach((type) => {
+        switch (type) {
+          case Synergy.GRASS:
+          case Synergy.MONSTER:
+          case Synergy.GOURMET:
+          case Synergy.BUG:
+          case Synergy.AMORPHOUS:
+            entity.addMaxHP(20, entity, 0, false)
+            break
+          case Synergy.NORMAL:
+          case Synergy.ARTIFICIAL:
+          case Synergy.DRAGON:
+          case Synergy.BABY:
+            entity.addShield(30, entity, 0, false)
+            break
+          case Synergy.FIRE:
+          case Synergy.STEEL:
+          case Synergy.FOSSIL:
+            entity.addAttack(5, entity, 0, false)
+            break
+          case Synergy.FLYING:
+          case Synergy.GHOST:
+            entity.addDodgeChance(5, entity, 0, false)
+            break
+          case Synergy.ELECTRIC:
+          case Synergy.FIELD:
+          case Synergy.WILD:
+            entity.addSpeed(10, entity, 0, false)
+            break
+          case Synergy.ICE:
+          case Synergy.AQUATIC:
+          case Synergy.FLORA:
+            entity.addSpecialDefense(5, entity, 0, false)
+            break
+          case Synergy.GROUND:
+          case Synergy.FIGHTING:
+          case Synergy.ROCK:    
+            entity.addDefense(5, entity, 0, false)
+            break
+          case Synergy.PSYCHIC:
+          case Synergy.HUMAN:
+          case Synergy.LIGHT:
+            entity.addAbilityPower(20, entity, 0, false)
+            break
+          case Synergy.FAIRY:
+          case Synergy.DARK:
+            entity.addCritChance(5, entity, 0, false)
+            entity.addCritPower(10, entity, 0, false)
+            break
+          case Synergy.WATER:
+          case Synergy.SOUND:
+            entity.addPP(20, entity, 0, false)
+            break
+        }
+      })
     })
   ],
   SMOKED_FILET: [

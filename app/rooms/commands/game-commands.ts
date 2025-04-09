@@ -1400,8 +1400,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         const nbDishes = [0, 1, 2, 2][gourmetLevel] ?? 2
         for (const chef of chefs) {
           let dish = DishByPkm[chef.name]
-          if (chef.name === Pkm.ARCEUS || chef.name === Pkm.KECLEON) {
-            dish = Item.BERRIES
+          if(chef.items.has(Item.DUTCH_OVEN)) {
+            dish = Item.HEARTY_STEW
+          } else if (chef.name === Pkm.ARCEUS || chef.name === Pkm.KECLEON) {
+            dish = Item.SANDWICH
           }
 
           if (chef.passive === Passive.GLUTTON) {
