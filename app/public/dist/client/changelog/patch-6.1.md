@@ -8,6 +8,9 @@
 - Fomantis
 - Lurantis
 - Roaring Moon
+- Charcadet
+- Armarouge
+- Ceruledge
 
 # Changes to Pokemon & Abilities
 

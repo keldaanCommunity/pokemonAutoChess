@@ -462,7 +462,9 @@
     "FLOWER_TRICK": "Flower Trick",
     "SOLAR_BLADE": "Solar Blade",
     "SCALE_SHOT": "Scale Shot",
-    "BULLDOZE": "Bulldoze"
+    "BULLDOZE": "Bulldoze",
+    "BITTER_BLADE": "Bitter Blade",
+    "ARMOR_CANNON": "Armor Cannon"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1401,7 +1403,10 @@
     "MEOWSCARADA": "Meowscarada",
     "FOMANTIS": "Fomantis",
     "LURANTIS": "Lurantis",
-    "ROARING_MOON": "Roaring Moon"
+    "ROARING_MOON": "Roaring Moon",
+    "CHARCADET": "Charcadet",
+    "ARMAROUGE": "Armarouge",
+    "CERULEDGE": "Ceruledge"
   },
   "ability_description": {
     "SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1844,7 +1849,9 @@
     "FLOWER_TRICK": "The user throws a rigged bouquet of flowers at the target that explodes after 3 seconds, dealing [15,40,85,SP] SPECIAL to the target and adjacent enemies. Every critical hit received by the target during the duration adds [5,SP] SPECIAL to the explosion.",
     "SOLAR_BLADE": "The user gathers light and fills a blade with its energy for 2 seconds (or instantly if the user is in the LIGHT spot), then slices up to 3 Pokémon in a cone in front of the user, dealing [30,60,120,SP] TRUE.",
     "SCALE_SHOT": "The user sheds scales, dealing [40,SP] PHYSICAL to adjacent enemies, applying ARMOR_BREAK to itself and enemies hit for 2 seconds. After 2 seconds the scales are shot towards the farthest enemy, dealing [30,SP] PHYSICAL to all enemies in their path.",
-    "BULLDOZE": "The user stomps down on the ground dealing [25,45,85,SP] SPECIAL to adjacent enemies. Pokemon hit are knocked back and lose [10] SPEED. "
+    "BULLDOZE": "The user stomps down on the ground dealing [25,45,85,SP] SPECIAL to adjacent enemies. Pokemon hit are knocked back and lose [10] SPEED.",
+    "ARMOR_CANNON": "The user shoots out a blazing projectile, dealing [70,SP] SPECIAL to the target before bouncing to the [2,SP] furthest enemies, dealing [35,SP] SPECIAL to each. The projectiles then return to the original target, dealing an extra [10,SP] SPECIAL each.",
+    "BITTER_BLADE": "The user focuses its bitter feelings into a slashing attack, dealing [70,SP] SPECIAL to every adjacent enemy. User heals [10,SP]% of it's HP for each enemy hit."
   },
   "effect": {
     "INGRAIN": "Ingrain",
@@ -2258,7 +2265,9 @@
     "VANILLA_FLAVOR": "Vanilla Flavor",
     "EGG_FOR_SELL": "Pokémon Egg",
     "GIMMIGHOUL_COIN": "Gimmighoul Coin",
-    "EXCHANGE_TICKET": "Exchange Ticket"
+    "EXCHANGE_TICKET": "Exchange Ticket",
+    "AUSPICIOUS_ARMOR": "Auspicious Armor",
+    "MALICIOUS_ARMOR": "Malicious Armor"
   },
   "item_description": {
     "FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -2444,7 +2453,9 @@
     "RAINBOW_SWIRL_FLAVOR": "Baked with PSYCHIC AMORPHOUS BABY LIGHT allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_RAINBOW_SWIRL). $t(passive_description.RAINBOW_SWIRL_CREAM)",
     "EGG_FOR_SELL": "An Egg sold at Chansey's Daycare",
     "GIMMIGHOUL_COIN": "Get 1 additional GOLD income each round, and increase max interest cap by 10 GOLD.",
-    "EXCHANGE_TICKET": "Exchange an item component or a crafted item on bench for another random one. Single use."
+    "EXCHANGE_TICKET": "Exchange an item component or a crafted item on bench for another random one. Single use.",
+    "AUSPICIOUS_ARMOR": "A peculiar set of armor that can make a certain species of Pokémon evolve. Auspicious wishes live within it.",
+    "MALICIOUS_ARMOR": "A peculiar set of armor that can make a certain species of Pokémon evolve. Malicious will lurks within it."
   },
   "passive_description": {
     "NONE": "No passive",
@@ -2589,7 +2600,8 @@
     "RUBY_SWIRL_CREAM": "Upon casting, the RUBY_SWIRL_FLAVOR adds [8,SP] ATK to the nearest ally",
     "CARAMEL_SWIRL_CREAM": "Upon casting, the CARAMEL_SWIRL_FLAVOR adds [80,SP] % CRIT_POWER to the nearest ally",
     "RAINBOW_SWIRL_CREAM": "Upon casting, the RAINBOW_SWIRL_FLAVOR adds [60,SP] AP to the nearest ally",
-    "DURALUDON": "Duraludon is looking for an ARTIFICIAL item"
+    "DURALUDON": "Duraludon is looking for an ARTIFICIAL item",
+    "CHARCADET": "Charcadet is looking for a AUSPICIOUS_ARMOR or a MALICIOUS_ARMOR"
   },
   "stat": {
     "ATK": "Attack",
